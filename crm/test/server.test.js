@@ -257,4 +257,74 @@ test('Zalo / call button clicks are logged without creating customers or emails'
   assert.strictEqual(rp.rows[2].lead_web, 0);
 });
 
+test('refund: amount − machine fee, paid back next day by C.Trâm, per transaction and per day', () => {
+  const { fake, call } = fresh('2026-10-02');
+  const a = call('saveTransaction', { ngay: '2026-10-02', dich_vu: 'Đáo hạn', ten_khach: 'C.Nhi', the: 'SC', so_tien: 17983000, may: 'VP Phượng', phi_khach: 1.7, phi_may_text: '1.36' });
+  const b = call('saveTransaction', { ngay: '2026-10-02', dich_vu: 'Rút tiền', ten_khach: 'A.Hùng', the: 'TP', so_tien: 10000000, may: 'MB Vân', phi_khach: 2, phi_may_text: '1.2+0.3' });
+  assert.strictEqual(a.chi_phi, 244569);
+  assert.strictEqual(a.tien_hoan, 17983000 - 244569);
+  assert.strictEqual(a.ngay_hoan, '2026-10-03');
+  assert.strictEqual(b.tien_hoan, 10000000 - 150000);
+  assert.strictEqual(call('bootstrap').settings.refundName, 'C.Trâm');
+
+  let d = call('dashboard');
+  assert.strictEqual(d.refunds.length, 1);
+  const day = d.refunds[0];
+  assert.strictEqual(day.ngay_hoan, '2026-10-03');
+  assert.strictEqual(day.so_tien, 27983000);
+  assert.strictEqual(day.chi_phi, 394569);
+  assert.strictEqual(day.tien_hoan, 27983000 - 394569);
+  assert.strictEqual(day.con_lai, day.tien_hoan);
+  assert.strictEqual(day.items.length, 2);
+
+  // nhận 1 giao dịch, sau đó nhận nốt
+  call('markRefund', { ids: [a.id], trang_thai: 'Đã nhận' });
+  fake.setToday('2026-10-04');
+  let r = call('refunds', { from: '2026-10-04', to: '2026-10-05' });
+  assert.strictEqual(r.days.length, 1, 'still pending from yesterday shows up');
+  assert.strictEqual(r.days[0].da_nhan, a.tien_hoan);
+  assert.strictEqual(r.days[0].con_lai, b.tien_hoan);
+  call('markRefund', { ids: [b.id], trang_thai: 'Đã nhận' });
+  r = call('refunds', { from: '2026-10-04', to: '2026-10-05' });
+  assert.strictEqual(r.days.length, 0);
+
+  // sửa giao dịch không làm mất trạng thái đã nhận; đổi ngày hoàn thủ công
+  const a2 = call('saveTransaction', Object.assign({}, a, { phi_may_text: '1.4', ngay_hoan: '2026-10-05' }));
+  const t = call('listTransactions', {}).find((x) => x.id === a.id);
+  assert.strictEqual(t.hoan_tt, 'Đã nhận');
+  assert.strictEqual(t.ngay_hoan, '2026-10-05');
+  assert.strictEqual(t.tien_hoan, a2.so_tien - a2.chi_phi);
+  assert.throws(() => call('saveTransaction', Object.assign({}, a, { ngay_hoan: '2026-10-01' })), /trước ngày giao dịch/);
+
+  const rp = call('report', { type: 'month', year: 2026 });
+  assert.strictEqual(rp.rows[9].tien_hoan, t.tien_hoan + b.tien_hoan);
+  call('saveSettings', { refundName: 'C.Trâm (máy MB)' });
+  assert.strictEqual(call('bootstrap').settings.refundName, 'C.Trâm (máy MB)');
+});
+
+test('refund columns are added to an existing sheet; old rows get computed values', () => {
+  const { gas, fake } = load();
+  fake.setToday('2026-10-02');
+  gas.setup();
+  // Sheet cũ: chỉ có 19 cột như bản trước
+  const sh = fake.spreadsheet ? fake.spreadsheet.getSheetByName('GiaoDich') : gas.SpreadsheetApp.getActive().getSheetByName('GiaoDich');
+  const oldHeaders = gas.SHEETS.GiaoDich.slice(0, 19);
+  sh._rows = [oldHeaders.slice()];
+  const row = (id, ngay) => oldHeaders.map((h) => ({ id, ngay, dich_vu: 'Đáo hạn', the: 'SC', khach_id: 'k1', ten_khach: 'C.Nhi', so_tien: 1000000, chi_phi: 13600, phi_may: 1.36 }[h] ?? ''));
+  sh._rows.push(row('kold1', '2026-09-20'), row('ktoday', '2026-10-02'));
+  gas.checkedSheets_ = {};
+  fake.props.PIN_HASH = gas.hashPin_('123456');
+  const tok = gas.login('123456');
+  const tx = gas.api(tok, 'listTransactions', {});
+  assert.strictEqual(sh._rows[0].length, gas.SHEETS.GiaoDich.length, 'headers extended');
+  assert.strictEqual(sh._rows[0][19], 'tien_hoan');
+  const old = tx.find((t) => t.id === 'kold1'), now = tx.find((t) => t.id === 'ktoday');
+  assert.strictEqual(old.tien_hoan, 986400);
+  assert.strictEqual(old.hoan_tt, 'Đã nhận', 'old ledger rows count as already paid back');
+  assert.strictEqual(now.ngay_hoan, '2026-10-03');
+  assert.strictEqual(now.hoan_tt, 'Chưa nhận');
+  gas.api(tok, 'markRefund', { ids: ['ktoday'], trang_thai: 'Đã nhận' });
+  assert.strictEqual(gas.api(tok, 'listTransactions', {}).find((t) => t.id === 'ktoday').hoan_tt, 'Đã nhận');
+});
+
 console.log(`\n${passed} test(s) passed`);

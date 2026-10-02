@@ -6,6 +6,9 @@
  *   LienHe    – nhật ký khách để lại thông tin trên website
  *   GiaoDich  – sổ giao dịch (đáo hạn / rút tiền / ví trả sau)
  *   NhacLich  – trạng thái nhắc: đáo hạn (7→5 ngày trước hạn) và rút tiền sau ngày sao kê
+ *
+ * Tiền hoàn: mỗi giao dịch, người giữ máy (mặc định C.Trâm) hoàn lại hôm sau
+ *   tiền hoàn = số tiền − phí máy (tien_hoan = so_tien − chi_phi), ngày hoàn = ngày GD + 1.
  */
 
 var TZ = 'Asia/Ho_Chi_Minh';
@@ -14,12 +17,17 @@ var SHEETS = {
   KhachHang: ['id', 'ten', 'sdt', 'nguon', 'trang_thai', 'ghi_chu', 'tao_luc', 'cap_nhat'],
   LienHe: ['id', 'thoi_gian', 'ten', 'sdt', 'dich_vu', 'ghi_chu', 'nguon', 'trang_thai', 'khach_id'],
   GiaoDich: ['id', 'ngay', 'dich_vu', 'the', 'ngay_dao', 'ngay_sao_ke', 'khach_id', 'ten_khach', 'sdt', 'so_tien',
-    'may', 'phi_khach', 'phi_may', 'phi_may_text', 'tien_phi', 'chi_phi', 'loi_nhuan', 'ghi_chu', 'tao_luc'],
+    'may', 'phi_khach', 'phi_may', 'phi_may_text', 'tien_phi', 'chi_phi', 'loi_nhuan', 'ghi_chu', 'tao_luc',
+    'tien_hoan', 'ngay_hoan', 'hoan_tt', 'hoan_luc'],
   NhacLich: ['key', 'han', 'trang_thai', 'ghi_chu', 'event_id', 'cap_nhat']
 };
 
 // Cột lưu dạng chữ để Sheets không tự đổi ngày/số (mất số 0 đầu SĐT).
-var TEXT_COLUMNS = ['id', 'sdt', 'ngay', 'thoi_gian', 'tao_luc', 'cap_nhat', 'key', 'han', 'khach_id', 'phi_may_text'];
+var TEXT_COLUMNS = ['id', 'sdt', 'ngay', 'thoi_gian', 'tao_luc', 'cap_nhat', 'key', 'han', 'khach_id', 'phi_may_text',
+  'ngay_hoan', 'hoan_luc'];
+// Cột ngày dạng yyyy-MM-dd (nếu Sheets lỡ đổi thành Date thì đọc lại đúng dạng).
+var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan'];
+var REFUND_STATUSES = ['Chưa nhận', 'Đã nhận'];
 
 var CUSTOMER_STATUSES = ['Mới', 'Đang tư vấn', 'Khách quen', 'Không tiềm năng'];
 var SERVICES = ['Đáo hạn', 'Rút tiền', 'Đáo + Rút', 'Ví trả sau'];
@@ -61,6 +69,7 @@ function setup() {
   if (props.getProperty('SHIFT_AFTER_CARDS') === null) props.setProperty('SHIFT_AFTER_CARDS', '');
   if (!props.getProperty('OWNER_EMAIL')) props.setProperty('OWNER_EMAIL', Session.getEffectiveUser().getEmail());
   if (!props.getProperty('CALENDAR')) props.setProperty('CALENDAR', 'on');
+  if (!props.getProperty('HOAN_NGUOI')) props.setProperty('HOAN_NGUOI', 'C.Trâm');
   installTriggers_();
   var msg = pin ? 'Mã PIN đăng nhập CRM: ' + pin + ' (đổi trong mục Cài đặt).' : 'Đã có mã PIN, giữ nguyên.';
   Logger.log(msg);
@@ -230,6 +239,8 @@ function api(token, action, payload) {
     report: apiReport_,
     saveSettings: apiSaveSettings_,
     importTransactions: apiImportTransactions_,
+    refunds: apiRefunds_,
+    markRefund: apiMarkRefund_,
     withdrawAdvice: function (p) { return withdrawAdvice_(p.ngay || todayStr_(), Number(p.ngay_sao_ke), Number(p.ngay_dao) || 0, p.the); }
   };
   if (!handlers[action]) throw new Error('Không rõ thao tác: ' + action);
@@ -259,6 +270,7 @@ function apiBootstrap_() {
       shiftAfterCards: props.getProperty('SHIFT_AFTER_CARDS') || '',
       ownerEmail: props.getProperty('OWNER_EMAIL') || '',
       calendar: props.getProperty('CALENDAR') !== 'off',
+      refundName: refundName_(),
       sheetUrl: SpreadsheetApp.getActive().getUrl(),
       webAppUrl: ScriptApp.getService().getUrl()
     }
@@ -272,8 +284,11 @@ function apiDashboard_() {
   var tx = readAll_('GiaoDich').filter(function (t) { return t.ngay >= monthFrom && t.ngay <= monthTo; });
   var leads = readAll_('LienHe');
   var rem = computeReminders_(addDays_(today, -30), addDays_(today, 7));
+  var refunds = apiRefunds_({ from: today, to: addDays_(today, 1) }).days;
   return {
     month: summarize_(tx),
+    refundName: refundName_(),
+    refunds: refunds,
     todayTx: summarize_(tx.filter(function (t) { return t.ngay === today; })),
     newLeads: leads.filter(function (l) { return l.trang_thai === 'Mới'; }).reverse().slice(0, 20),
     clicksToday: leads.filter(function (l) { return !l.sdt && String(l.thoi_gian).slice(0, 10) === today; }).reverse(),
@@ -335,6 +350,7 @@ function apiSaveTransaction_(t) {
     } else {
       obj.id = newId_();
       obj.tao_luc = nowStr_();
+      obj.hoan_tt = 'Chưa nhận';
       appendObj_('GiaoDich', obj);
     }
     return obj;
@@ -356,12 +372,16 @@ function buildTransaction_(t) {
   var customer = resolveCustomer_(t);
   var tienPhi = Math.round(soTien * phiKhach / 100);
   var chiPhi = Math.round(soTien * phiMay / 100);
+  var ngayHoan = String(t.ngay_hoan || '');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(ngayHoan)) ngayHoan = addDays_(ngay, 1);
+  if (ngayHoan < ngay) throw new Error('Ngày hoàn tiền không được trước ngày giao dịch.');
   return {
     ngay: ngay, dich_vu: dichVu, the: String(t.the || '').trim(), ngay_dao: ngayDao, ngay_sao_ke: ngaySaoKe,
     khach_id: customer.id, ten_khach: customer.ten, sdt: customer.sdt,
     so_tien: soTien, may: String(t.may || '').trim(), phi_khach: phiKhach, phi_may: round2_(phiMay),
     phi_may_text: String(t.phi_may_text || phiMay), tien_phi: tienPhi, chi_phi: chiPhi,
-    loi_nhuan: tienPhi - chiPhi, ghi_chu: String(t.ghi_chu || '')
+    loi_nhuan: tienPhi - chiPhi, ghi_chu: String(t.ghi_chu || ''),
+    tien_hoan: soTien - chiPhi, ngay_hoan: ngayHoan
   };
 }
 
@@ -431,6 +451,7 @@ function apiSaveSettings_(p) {
   if (p.shiftAfterCards !== undefined) props.setProperty('SHIFT_AFTER_CARDS', String(p.shiftAfterCards).trim());
   if (p.ownerEmail !== undefined) props.setProperty('OWNER_EMAIL', String(p.ownerEmail).trim());
   if (p.calendar !== undefined) props.setProperty('CALENDAR', p.calendar ? 'on' : 'off');
+  if (p.refundName !== undefined) props.setProperty('HOAN_NGUOI', String(p.refundName).trim() || 'C.Trâm');
   return apiBootstrap_().settings;
 }
 
@@ -456,6 +477,7 @@ function apiImportTransactions_(p) {
         });
         obj.id = newId_();
         obj.tao_luc = nowStr_();
+        obj.hoan_tt = obj.ngay_hoan < todayStr_() ? 'Đã nhận' : 'Chưa nhận'; // sổ cũ: coi như đã nhận
         appendObj_('GiaoDich', obj);
       });
       ok++;
@@ -465,6 +487,65 @@ function apiImportTransactions_(p) {
   });
   return { ok: ok, errors: errors };
 }
+
+/* ------------------------------------------------------------------ */
+/* Tiền hoàn: số tiền − phí máy, người giữ máy hoàn lại hôm sau        */
+/* ------------------------------------------------------------------ */
+
+function refundName_() { return PropertiesService.getScriptProperties().getProperty('HOAN_NGUOI') || 'C.Trâm'; }
+
+/**
+ * Giao dịch có ngày hoàn trong [from, to], cộng mọi giao dịch còn "Chưa nhận" (kể cả đã trễ),
+ * gom theo ngày hoàn. Mỗi ngày: tổng tiền, phí máy, tiền hoàn, đã nhận, còn thiếu và từng giao dịch.
+ */
+function apiRefunds_(p) {
+  var from = p.from || '', to = p.to || '9999-12-31';
+  var tx = readAll_('GiaoDich'), days = {};
+  tx.forEach(function (t) {
+    if ((t.ngay_hoan >= from && t.ngay_hoan <= to) || (p.pending !== false && t.hoan_tt === 'Chưa nhận')) days[t.ngay_hoan] = 1;
+  });
+  // Lấy đủ mọi giao dịch của ngày đó để thấy cả phần đã nhận lẫn còn thiếu.
+  return { refundName: refundName_(), days: refundDays_(tx.filter(function (t) { return days[t.ngay_hoan]; })) };
+}
+
+function refundDays_(tx) {
+  var g = {};
+  tx.forEach(function (t) {
+    var d = t.ngay_hoan;
+    if (!g[d]) g[d] = { ngay_hoan: d, so_gd: 0, so_tien: 0, chi_phi: 0, tien_hoan: 0, da_nhan: 0, con_lai: 0, items: [] };
+    var x = g[d], hoan = Number(t.tien_hoan) || 0;
+    x.so_gd++;
+    x.so_tien += Number(t.so_tien) || 0;
+    x.chi_phi += Number(t.chi_phi) || 0;
+    x.tien_hoan += hoan;
+    if (t.hoan_tt === 'Đã nhận') x.da_nhan += hoan; else x.con_lai += hoan;
+    x.items.push({ id: t.id, ngay: t.ngay, dich_vu: t.dich_vu, the: t.the, ten_khach: t.ten_khach, so_tien: t.so_tien,
+      may: t.may, phi_may: t.phi_may, chi_phi: t.chi_phi, tien_hoan: hoan, hoan_tt: t.hoan_tt, hoan_luc: t.hoan_luc });
+  });
+  return Object.keys(g).sort().map(function (k) {
+    g[k].items.sort(function (a, b) { return a.ngay < b.ngay ? -1 : a.ngay > b.ngay ? 1 : 0; });
+    return g[k];
+  });
+}
+
+/** Đánh dấu đã nhận / chưa nhận tiền hoàn cho một hoặc nhiều giao dịch (`ids`, VD cả một ngày). */
+function apiMarkRefund_(p) {
+  var st = REFUND_STATUSES.indexOf(p.trang_thai) >= 0 ? p.trang_thai : 'Đã nhận';
+  var ids = {};
+  (p.ids || []).forEach(function (id) { ids[id] = 1; });
+  return withLock_(function () {
+    return updateWhere_('GiaoDich', function (t) { return ids[String(t.id)] === 1; },
+      { hoan_tt: st, hoan_luc: st === 'Đã nhận' ? nowStr_() : '' });
+  });
+}
+
+/** Giao dịch cũ (trước khi có mục tiền hoàn) chưa có trạng thái: đã qua ngày hoàn thì coi như đã nhận. */
+function normRefundStatus_(t) {
+  if (t.hoan_tt) return t.hoan_tt;
+  return normDate_(t.ngay_hoan) < todayStr_() ? 'Đã nhận' : 'Chưa nhận';
+}
+
+function normDate_(v) { return v instanceof Date ? Utilities.formatDate(v, TZ, 'yyyy-MM-dd') : String(v || ''); }
 
 /* ------------------------------------------------------------------ */
 /* Nhắc lịch đáo hạn tháng sau                                         */
@@ -730,7 +811,7 @@ function apiReport_(p) {
 }
 
 function summarize_(tx) {
-  var s = { so_gd: tx.length, so_dao: 0, so_rut: 0, so_tien: 0, tien_phi: 0, chi_phi: 0, loi_nhuan: 0, so_khach: 0 };
+  var s = { so_gd: tx.length, so_dao: 0, so_rut: 0, so_tien: 0, tien_phi: 0, chi_phi: 0, loi_nhuan: 0, tien_hoan: 0, so_khach: 0 };
   var seen = {};
   tx.forEach(function (t) {
     if (t.dich_vu === 'Rút tiền' || t.dich_vu === 'Ví trả sau') s.so_rut++; else s.so_dao++;
@@ -738,6 +819,7 @@ function summarize_(tx) {
     s.tien_phi += Number(t.tien_phi) || 0;
     s.chi_phi += Number(t.chi_phi) || 0;
     s.loi_nhuan += Number(t.loi_nhuan) || 0;
+    s.tien_hoan += Number(t.tien_hoan) || 0;
     seen[t.khach_id || t.ten_khach] = 1;
   });
   s.so_khach = Object.keys(seen).length;
@@ -762,10 +844,28 @@ function groupBy_(tx, field) {
 /* Truy cập Sheet                                                      */
 /* ------------------------------------------------------------------ */
 
+var checkedSheets_ = {};
+
 function sheet_(name) {
   var sh = SpreadsheetApp.getActive().getSheetByName(name);
   if (!sh) throw new Error('Chưa có sheet "' + name + '". Hãy chạy hàm setup() một lần.');
+  if (!checkedSheets_[name]) {
+    checkedSheets_[name] = true;
+    ensureColumns_(sh, SHEETS[name]);
+  }
   return sh;
+}
+
+/** Bản cập nhật thêm cột mới vào cuối: tự ghi tiêu đề (và định dạng chữ) cho cột còn thiếu. */
+function ensureColumns_(sh, headers) {
+  var have = sh.getLastColumn();
+  if (have >= headers.length) return;
+  if (sh.getMaxColumns() < headers.length) sh.insertColumnsAfter(sh.getMaxColumns(), headers.length - sh.getMaxColumns());
+  var missing = headers.slice(have);
+  sh.getRange(1, have + 1, 1, missing.length).setValues([missing]);
+  missing.forEach(function (h, i) {
+    if (TEXT_COLUMNS.indexOf(h) >= 0) sh.getRange(2, have + i + 1, Math.max(sh.getMaxRows() - 1, 1), 1).setNumberFormat('@');
+  });
 }
 
 function readAll_(name) {
@@ -777,12 +877,20 @@ function readAll_(name) {
     var o = {};
     headers.forEach(function (h, i) {
       var v = row[i];
-      if (v instanceof Date) v = Utilities.formatDate(v, TZ, h === 'ngay' || h === 'han' ? 'yyyy-MM-dd' : 'yyyy-MM-dd HH:mm');
+      if (v instanceof Date) v = Utilities.formatDate(v, TZ, DATE_COLUMNS.indexOf(h) >= 0 ? 'yyyy-MM-dd' : 'yyyy-MM-dd HH:mm');
       o[h] = v === null || v === undefined ? '' : v;
     });
-    if (o.sdt !== '') o.sdt = normalizePhone_(o.sdt);
+    if (o.sdt !== undefined && o.sdt !== '') o.sdt = normalizePhone_(o.sdt);
+    if (name === 'GiaoDich' && o.id !== '') fillRefund_(o);
     return o;
   }).filter(function (o) { return o[headers[0]] !== ''; });
+}
+
+/** Giao dịch nhập trước khi có cột tiền hoàn: tính lại từ số tiền và phí máy. */
+function fillRefund_(t) {
+  if (t.tien_hoan === '' && t.so_tien !== '') t.tien_hoan = (Number(t.so_tien) || 0) - (Number(t.chi_phi) || 0);
+  if (!t.ngay_hoan && /^\d{4}-\d{2}-\d{2}$/.test(t.ngay)) t.ngay_hoan = addDays_(t.ngay, 1);
+  t.hoan_tt = normRefundStatus_(t);
 }
 
 function appendObj_(name, obj) {

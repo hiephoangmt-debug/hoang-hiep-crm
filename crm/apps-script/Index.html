@@ -131,6 +131,18 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
 .loading { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); z-index: 70; animation: load 1s infinite; transform-origin: left; }
 @keyframes load { 0% { transform: scaleX(0); } 100% { transform: scaleX(1); } }
 .copy { display: flex; gap: 6px; }
+.rf { border-left: 4px solid var(--accent); }
+.rf--late { border-left-color: var(--bad); }
+.rf--done { border-left-color: var(--ok); }
+.rf__head { display: flex; justify-content: space-between; gap: 8px; align-items: flex-start; flex-wrap: wrap; }
+.rf__sum { display: grid; grid-template-columns: repeat(auto-fit, minmax(105px, 1fr)); gap: 6px; margin: 10px 0; background: var(--bg); border-radius: 10px; padding: 8px 10px; font-size: .82rem; color: var(--muted); }
+.rf__sum b { display: block; font-size: .95rem; color: var(--text); overflow-wrap: anywhere; }
+.rf__sum .big { color: var(--ok); font-size: 1.1rem; }
+.rf__item { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); }
+.rf__item.is-done .rf__info { opacity: .6; }
+.rf__info { min-width: 0; font-size: .88rem; }
+.rf__calc { color: var(--muted); font-size: .84rem; }
+.rf__calc b { color: var(--text); }
 .copy input { font-size: .8rem; }
 </style>
 </head>
@@ -157,6 +169,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     <nav class="tabs" id="tabs">
       <button class="tab is-active" data-tab="home">Tổng quan</button>
       <button class="tab" data-tab="tx">Giao dịch</button>
+      <button class="tab" data-tab="refund"><span class="refund-name">C.Trâm</span> hoàn <span class="count hidden" id="refund-count"></span></button>
       <button class="tab" data-tab="remind">Nhắc lịch <span class="count hidden" id="remind-count"></span></button>
       <button class="tab" data-tab="customers">Khách hàng <span class="count hidden" id="lead-count"></span></button>
       <button class="tab" data-tab="report">Báo cáo</button>
@@ -168,6 +181,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     <!-- Tổng quan -->
     <section data-view="home">
       <div class="kpis" id="home-kpis"></div>
+      <div class="row row--between"><h2>💸 <span class="refund-name">C.Trâm</span> hoàn lại</h2><button class="btn btn--ghost btn--sm" data-goto="refund">Xem tất cả</button></div>
+      <div id="home-refund"></div>
       <div class="row row--between"><h2>📞 Cần báo khách hôm nay</h2><button class="btn btn--ghost btn--sm" data-goto="remind">Xem lịch</button></div>
       <div id="home-remind"></div>
       <h2>📲 Khách bấm Zalo / Gọi trên web hôm nay</h2>
@@ -196,6 +211,21 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       </div>
       <div class="kpis" id="tx-kpis"></div>
       <div class="scroll-x"><table class="tbl stack" id="tx-table"></table></div>
+    </section>
+
+    <!-- Tiền hoàn -->
+    <section data-view="refund" class="hidden">
+      <p class="muted">Mỗi giao dịch: <b>Tiền hoàn = Số tiền (rút/đáo) − Phí máy</b>, <span class="refund-name">C.Trâm</span> hoàn lại vào <b>ngày hôm sau</b>. Nhận đủ thì bấm <b>✔ Đã nhận</b>.</p>
+      <div class="row" style="margin-bottom:12px">
+        <div class="seg" id="refund-filter">
+          <button data-v="pending" class="is-active">Chưa nhận</button>
+          <button data-v="week">7 ngày</button>
+          <button data-v="month">Tháng này</button>
+          <button data-v="lastmonth">Tháng trước</button>
+        </div>
+      </div>
+      <div class="kpis" id="refund-kpis"></div>
+      <div id="refund-list"></div>
     </section>
 
     <!-- Nhắc lịch -->
@@ -271,6 +301,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
           <label class="f">Đáo hạn: bắt đầu nhắc trước hạn (ngày)<input type="number" id="set-from" min="1" max="30"></label>
           <label class="f">Phải báo xong trước hạn (ngày)<input type="number" id="set-to" min="0" max="30"></label>
           <label class="f">Từ sao kê đến hạn thanh toán (ngày)<span class="hint">Dùng khi thẻ chưa có ngày đáo</span><input type="number" id="set-grace" min="10" max="30"></label>
+          <label class="f">Người hoàn tiền (giữ máy) <span class="hint">hiện trên mục Tiền hoàn</span><input id="set-refund-name" placeholder="C.Trâm"></label>
           <label class="f">Email nhận thông báo <span class="hint">để trống = không gửi email</span><input type="email" id="set-email"></label>
           <label class="f full" style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="set-cal" style="width:auto"> Tạo sự kiện trên Google Calendar để điện thoại tự báo</label>
         </div>
@@ -330,7 +361,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       <label class="f">Máy POS<input name="may" list="dl-machines" placeholder="VD: MB Vân"></label>
       <label class="f">Phí khách (%)<input name="phi_khach" inputmode="decimal" placeholder="1.7"></label>
       <label class="f">Phí máy (%) <span class="hint">được cộng: 1.36+0.4</span><input name="phi_may_text" inputmode="decimal" placeholder="1.36"></label>
-      <label class="f full">Ghi chú<input name="ghi_chu"></label>
+      <label class="f">Ngày nhận tiền hoàn <span class="hint">mặc định: hôm sau</span><input type="date" name="ngay_hoan"></label>
+      <label class="f">Ghi chú<input name="ghi_chu"></label>
       <div class="full calc" id="tx-calc"></div>
       <div class="full advice hidden" id="tx-advice"></div>
     </div>
@@ -375,7 +407,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
 
   /* ---------- State & API ---------- */
   var S = { token: null, boot: null, tab: 'home', tx: [], customers: [], leads: [], reminders: [], remindFilter: 'all',
-    rpType: 'month', custView: 'customers' };
+    rpType: 'month', custView: 'customers', refundFilter: 'pending', refundDays: [] };
   try { S.token = sessionStorage.getItem('crm_token'); } catch (e) {}
 
   var loadingN = 0;
@@ -450,6 +482,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     var first = keepFirst ? sel.options[0].outerHTML : '';
     sel.innerHTML = first + items.map(function (v) { return '<option>' + esc(v) + '</option>'; }).join('');
   }
+  function rn() { return (S.boot && S.boot.settings.refundName) || 'C.Trâm'; }
+  function applyRefundName() { $$('.refund-name').forEach(function (el) { el.textContent = rn(); }); }
   function isRutService(s) { return s === 'Rút tiền' || s === 'Ví trả sau' || s === 'Đáo + Rút'; }
 
   /* ---------- Auth ---------- */
@@ -486,6 +520,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       $('#rp-month').innerHTML = Array.from({ length: 12 }, function (_, i) { return '<option value="' + (i + 1) + '"' + (i + 1 === m ? ' selected' : '') + '>Tháng ' + (i + 1) + '</option>'; }).join('');
       $('#imp-year').value = y;
       renderSettings();
+      applyRefundName();
       show(S.tab);
     }).catch(function (e) { if (S.token) fail(e); });
   }
@@ -508,7 +543,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     S.tab = tab;
     $$('.tab').forEach(function (t) { t.classList.toggle('is-active', t.dataset.tab === tab); });
     $$('[data-view]').forEach(function (v) { v.classList.toggle('hidden', v.dataset.view !== tab); });
-    ({ home: loadHome, tx: loadTx, remind: loadRemind, customers: loadCustomers, report: loadReport, settings: renderSettings })[tab]();
+    ({ home: loadHome, tx: loadTx, refund: loadRefund, remind: loadRemind, customers: loadCustomers, report: loadReport, settings: renderSettings })[tab]();
     window.scrollTo(0, 0);
   }
 
@@ -522,7 +557,13 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         kpi('Giao dịch tháng (Đáo / Rút)', m.so_gd + ' <small class="muted">(' + m.so_dao + ' / ' + m.so_rut + ')</small>') +
         kpi('Khách web để lại số (tháng)', d.leadsThisMonth) +
         kpi('Bấm Zalo / Gọi hôm nay', d.clicksToday.length) +
-        kpi('Hôm nay', d.todayTx.so_gd + ' GD · ' + short(d.todayTx.so_tien));
+        kpi('Hôm nay', d.todayTx.so_gd + ' GD · ' + short(d.todayTx.so_tien)) +
+        kpi(rn() + ' còn phải hoàn', money(d.refunds.reduce(function (a, x) { return a + x.con_lai; }, 0)));
+      var today = S.boot.today;
+      var homeDays = d.refunds.filter(function (x) { return x.con_lai > 0 || x.ngay_hoan >= today; });
+      $('#home-refund').innerHTML = homeDays.length ? homeDays.map(refundDay).join('') : '<div class="empty card">Không còn khoản nào chờ hoàn 🎉</div>';
+      S.refundDays = d.refunds;
+      setCount('#refund-count', d.refunds.filter(function (x) { return x.con_lai > 0 && x.ngay_hoan <= today; }).length);
       $('#home-remind').innerHTML = d.remindToday.length ? d.remindToday.map(remindItem).join('') : '<div class="empty card">Hôm nay không có khách cần báo 🎉</div>';
       $('#home-soon').innerHTML = d.remindSoon.length ? d.remindSoon.map(remindItem).join('') : '<div class="empty card">Không có lịch trong 7 ngày tới.</div>';
       $('#home-clicks').innerHTML = d.clicksToday.length ? d.clicksToday.slice(0, 15).map(leadItem).join('') : '<div class="empty card">Hôm nay chưa có lượt bấm Zalo / Gọi.</div>';
@@ -557,10 +598,11 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     var rows = S.tx.filter(function (t) {
       return (!svc || t.dich_vu === svc) && (!q || [t.ten_khach, t.the, t.may, t.sdt, t.ghi_chu].join(' ').toLowerCase().indexOf(q) >= 0);
     });
-    var s = rows.reduce(function (a, t) { a.n++; a.tien += +t.so_tien || 0; a.phi += +t.tien_phi || 0; a.cp += +t.chi_phi || 0; a.ln += +t.loi_nhuan || 0; return a; }, { n: 0, tien: 0, phi: 0, cp: 0, ln: 0 });
+    var s = rows.reduce(function (a, t) { a.n++; a.tien += +t.so_tien || 0; a.phi += +t.tien_phi || 0; a.cp += +t.chi_phi || 0; a.ln += +t.loi_nhuan || 0; a.hoan += +t.tien_hoan || 0; return a; }, { n: 0, tien: 0, phi: 0, cp: 0, ln: 0, hoan: 0 });
     $('#tx-kpis').innerHTML = kpi('Số giao dịch', s.n) + kpi('Tổng tiền', short(s.tien)) + kpi('Phí khách', money(s.phi)) +
-      kpi('Phí máy', money(s.cp)) + kpi('Phí của mình', money(s.ln), s.ln >= 0 ? 'pos' : 'neg');
-    $('#tx-table').innerHTML = '<thead><tr><th>Ngày</th><th>DV</th><th>Thẻ</th><th>Ngày đáo / SK</th><th>Khách</th><th class="num">Số tiền</th><th>Máy</th><th class="num">Phí khách/máy</th><th class="num">Phí của mình</th></tr></thead><tbody>' +
+      kpi('Phí máy', money(s.cp)) + kpi('Phí của mình', money(s.ln), s.ln >= 0 ? 'pos' : 'neg') +
+      kpi(rn() + ' hoàn (tiền − phí máy)', money(s.hoan));
+    $('#tx-table').innerHTML = '<thead><tr><th>Ngày</th><th>DV</th><th>Thẻ</th><th>Ngày đáo / SK</th><th>Khách</th><th class="num">Số tiền</th><th>Máy</th><th class="num">Phí khách/máy</th><th class="num">Phí của mình</th><th class="num">' + esc(rn()) + ' hoàn</th></tr></thead><tbody>' +
       (rows.length ? rows.map(function (t) {
         return '<tr class="click" data-tx="' + esc(t.id) + '">' +
           '<td data-l="Ngày">' + dm(t.ngay) + '</td>' +
@@ -571,8 +613,9 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
           '<td data-l="Số tiền" class="num">' + money(t.so_tien) + '</td>' +
           '<td data-l="Máy" class="opt">' + esc(t.may) + '</td>' +
           '<td data-l="Phí khách/máy" class="num opt">' + pct(t.phi_khach) + ' / ' + pct(t.phi_may) + '</td>' +
-          '<td data-l="Phí của mình" class="num ' + (t.loi_nhuan >= 0 ? 'pos' : 'neg') + '">' + money(t.loi_nhuan) + '</td></tr>';
-      }).join('') : '<tr><td colspan="9" class="empty">Không có giao dịch.</td></tr>') + '</tbody>';
+          '<td data-l="Phí của mình" class="num ' + (t.loi_nhuan >= 0 ? 'pos' : 'neg') + '">' + money(t.loi_nhuan) + '</td>' +
+          '<td data-l="' + esc(rn()) + ' hoàn" class="num">' + money(t.tien_hoan) + ' <small>' + (t.hoan_tt === 'Đã nhận' ? '✅' : '⏳ ' + dm(t.ngay_hoan)) + '</small></td></tr>';
+      }).join('') : '<tr><td colspan="10" class="empty">Không có giao dịch.</td></tr>') + '</tbody>';
   }
   $('#tx-table').addEventListener('click', function (e) {
     var tr = e.target.closest('[data-tx]');
@@ -599,6 +642,9 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     f.phi_khach.value = t.phi_khach || '';
     f.phi_may_text.value = t.phi_may_text || '';
     f.ghi_chu.value = t.ghi_chu || '';
+    f.ngay_hoan.value = t.ngay_hoan || '';
+    f.ngay_hoan.dataset.auto = t.ngay_hoan && t.ngay_hoan !== addDays(t.ngay, 1) ? '' : '1';
+    if (!f.ngay_hoan.value) f.ngay_hoan.value = addDays(f.ngay.value, 1);
     $('#tx-title').textContent = t.id ? 'Sửa giao dịch' : 'Thêm giao dịch';
     $('[data-act=delete-tx]').classList.toggle('hidden', !t.id);
     updateTxForm();
@@ -618,7 +664,9 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       '<div>Số tiền<b>' + money(amount) + '</b></div>' +
       '<div>Phí khách ' + pct(pk) + '<b>' + money(fee) + '</b></div>' +
       '<div>Phí máy ' + pct(pm) + '<b>' + money(cost) + '</b></div>' +
-      '<div style="grid-column:1/-1">Phí của mình = phí khách − phí máy = ' + pct(pk - pm) + ' → <b class="' + (fee - cost >= 0 ? 'pos' : 'neg') + '" style="display:inline">' + money(fee - cost) + '</b></div>';
+      '<div style="grid-column:1/-1">Phí của mình = phí khách − phí máy = ' + pct(pk - pm) + ' → <b class="' + (fee - cost >= 0 ? 'pos' : 'neg') + '" style="display:inline">' + money(fee - cost) + '</b></div>' +
+      '<div style="grid-column:1/-1">💸 ' + esc(rn()) + ' hoàn lại ' + (f.ngay_hoan.value ? 'ngày <b style="display:inline">' + dmy(f.ngay_hoan.value) + '</b>' : 'hôm sau') +
+      ' = số tiền − phí máy = ' + money(amount) + ' − ' + money(cost) + ' → <b class="pos" style="display:inline">' + money(amount - cost) + '</b></div>';
     clearTimeout(adviceTimer);
     var adv = $('#tx-advice');
     var sk = Number(f.ngay_sao_ke.value);
@@ -635,6 +683,9 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     }, 300);
   }
   txForm.addEventListener('input', function (e) {
+    var f = txForm.elements;
+    if (e.target.name === 'ngay' && f.ngay_hoan.dataset.auto && f.ngay.value) f.ngay_hoan.value = addDays(f.ngay.value, 1);
+    if (e.target.name === 'ngay_hoan') f.ngay_hoan.dataset.auto = '';
     if (e.target.name === 'ten_khach') {
       var c = S.boot.customers.filter(function (x) { return x.ten === e.target.value; })[0];
       txForm.elements.khach_id.value = c ? c.id : '';
@@ -654,7 +705,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       sdt: f.sdt.value.trim(), the: f.the.value.trim(), so_tien: amount,
       ngay_dao: svc === 'Rút tiền' || svc === 'Ví trả sau' ? '' : f.ngay_dao.value,
       ngay_sao_ke: isRutService(svc) ? f.ngay_sao_ke.value : '',
-      may: f.may.value.trim(), phi_khach: num(f.phi_khach.value), phi_may_text: f.phi_may_text.value.trim() || '0', ghi_chu: f.ghi_chu.value.trim()
+      may: f.may.value.trim(), phi_khach: num(f.phi_khach.value), phi_may_text: f.phi_may_text.value.trim() || '0', ghi_chu: f.ghi_chu.value.trim(),
+      ngay_hoan: f.ngay_hoan.value
     };
     var btn = txForm.querySelector('[type=submit]');
     btn.disabled = true;
@@ -664,6 +716,80 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       toast('Đã lưu giao dịch');
       reboot().then(function () { show(S.tab); });
     }).catch(function (err) { btn.disabled = false; fail(err); });
+  });
+
+  /* ---------- Tiền hoàn (số tiền − phí máy, hoàn hôm sau) ---------- */
+  function refundWhen(d) {
+    var t = S.boot.today;
+    if (d === t) return 'Hôm nay';
+    if (d === addDays(t, 1)) return 'Ngày mai';
+    if (d === addDays(t, -1)) return 'Hôm qua';
+    return '';
+  }
+  function refundDay(x) {
+    var t = S.boot.today;
+    var late = x.con_lai > 0 && x.ngay_hoan < t;
+    var done = x.con_lai === 0;
+    var pendingIds = x.items.filter(function (i) { return i.hoan_tt !== 'Đã nhận'; }).map(function (i) { return i.id; });
+    var gdDays = {};
+    x.items.forEach(function (i) { gdDays[dm(i.ngay)] = 1; });
+    var when = refundWhen(x.ngay_hoan);
+    var flag = done ? '<span class="badge badge--ok">Đã nhận đủ</span>'
+      : late ? '<span class="badge badge--bad">Trễ – chưa nhận ' + money(x.con_lai) + '</span>'
+      : x.ngay_hoan === t ? '<span class="badge badge--warn">Nhận hôm nay</span>' : '<span class="badge">Chờ hoàn</span>';
+    return '<div class="card rf' + (late ? ' rf--late' : done ? ' rf--done' : '') + '">' +
+      '<div class="rf__head"><div><b>' + (when ? when + ' · ' : '') + dmy(x.ngay_hoan) + '</b> – ' + esc(rn()) + ' hoàn' +
+      '<div class="muted" style="font-size:.85rem">Giao dịch ngày ' + Object.keys(gdDays).join(', ') + ' · ' + x.so_gd + ' GD</div></div>' + flag + '</div>' +
+      '<div class="rf__sum"><div>Tổng tiền<b>' + money(x.so_tien) + '</b></div><div>− Phí máy<b>' + money(x.chi_phi) + '</b></div>' +
+      '<div>= ' + esc(rn()) + ' hoàn<b class="big">' + money(x.tien_hoan) + '</b></div>' +
+      (x.da_nhan && x.con_lai ? '<div>Đã nhận<b>' + money(x.da_nhan) + '</b></div><div>Còn thiếu<b class="neg">' + money(x.con_lai) + '</b></div>' : '') + '</div>' +
+      x.items.map(function (i) {
+        var ok = i.hoan_tt === 'Đã nhận';
+        return '<div class="rf__item' + (ok ? ' is-done' : '') + '"><div class="rf__info">' +
+          '<div>' + dm(i.ngay) + ' · <b>' + esc(i.ten_khach) + '</b> · ' + esc(i.the) + ' <span class="muted">' + esc(i.dich_vu) + (i.may ? ' · ' + esc(i.may) : '') + '</span></div>' +
+          '<div class="rf__calc">' + money(i.so_tien) + ' − ' + money(i.chi_phi) + ' <small>(' + pct(i.phi_may) + ')</small> = <b>' + money(i.tien_hoan) + '</b></div></div>' +
+          (ok ? '<button class="btn btn--ghost btn--sm" data-refund="' + esc(i.id) + '" data-st="Chưa nhận" title="Bỏ đánh dấu">✅ Đã nhận</button>'
+            : '<button class="btn btn--sm" data-refund="' + esc(i.id) + '" data-st="Đã nhận">✔ Đã nhận</button>') + '</div>';
+      }).join('') +
+      (pendingIds.length > 1 ? '<div class="row" style="margin-top:8px"><button class="btn btn--sm" data-refund="' + esc(pendingIds.join(',')) + '" data-st="Đã nhận">✔ Đã nhận đủ cả ngày (' + money(x.con_lai) + ')</button></div>' : '') +
+      '</div>';
+  }
+  function refundRange() {
+    var t = S.boot.today, p = parts(t), v = S.refundFilter;
+    if (v === 'week') return { from: addDays(t, -6), to: addDays(t, 1), pending: false };
+    if (v === 'month') return { from: ymd(p.y, p.m, 1), to: ymd(p.y, p.m, dim(p.y, p.m)), pending: false };
+    if (v === 'lastmonth') { var lm = p.m === 1 ? { y: p.y - 1, m: 12 } : { y: p.y, m: p.m - 1 }; return { from: ymd(lm.y, lm.m, 1), to: ymd(lm.y, lm.m, dim(lm.y, lm.m)), pending: false }; }
+    return { from: t, to: addDays(t, 1) }; // Chưa nhận: mọi khoản còn thiếu + hôm nay, ngày mai
+  }
+  function loadRefund() {
+    call('refunds', refundRange()).then(function (r) {
+      var t = S.boot.today;
+      var days = r.days;
+      if (S.refundFilter === 'pending') days = days.filter(function (x) { return x.con_lai > 0; });
+      days = days.slice().reverse();
+      var sum = days.reduce(function (a, x) { a.tien += x.so_tien; a.cp += x.chi_phi; a.hoan += x.tien_hoan; a.con += x.con_lai; return a; }, { tien: 0, cp: 0, hoan: 0, con: 0 });
+      $('#refund-kpis').innerHTML = kpi('Tổng tiền', money(sum.tien)) + kpi('Phí máy', money(sum.cp)) +
+        kpi(rn() + ' hoàn', money(sum.hoan), 'pos') + kpi('Còn chưa nhận', money(sum.con), sum.con ? 'neg' : 'pos');
+      $('#refund-list').innerHTML = days.length ? days.map(refundDay).join('') : '<div class="empty card">Không có khoản nào.</div>';
+      setCount('#refund-count', r.days.filter(function (x) { return x.con_lai > 0 && x.ngay_hoan <= t; }).length);
+    }).catch(fail);
+  }
+  $('#refund-filter').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    S.refundFilter = b.dataset.v;
+    $$('#refund-filter button').forEach(function (x) { x.classList.toggle('is-active', x === b); });
+    loadRefund();
+  });
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-refund]');
+    if (!b) return;
+    var st = b.dataset.st;
+    if (st === 'Chưa nhận' && !confirm('Bỏ đánh dấu đã nhận cho giao dịch này?')) return;
+    b.disabled = true;
+    call('markRefund', { ids: b.dataset.refund.split(','), trang_thai: st }).then(function () {
+      toast(st === 'Đã nhận' ? 'Đã ghi nhận tiền hoàn' : 'Đã bỏ đánh dấu');
+      show(S.tab);
+    }).catch(function (err) { b.disabled = false; fail(err); });
   });
 
   /* ---------- Nhắc lịch ---------- */
@@ -862,7 +988,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   function renderReport(r) {
     var t = r.total;
     $('#rp-kpis').innerHTML = kpi('Tổng tiền', short(t.so_tien)) + kpi('Phí khách', money(t.tien_phi)) + kpi('Phí máy', money(t.chi_phi)) +
-      kpi('Phí của mình', money(t.loi_nhuan), t.loi_nhuan >= 0 ? 'pos' : 'neg') + kpi('Giao dịch (Đáo / Rút)', t.so_gd + ' (' + t.so_dao + ' / ' + t.so_rut + ')') +
+      kpi('Phí của mình', money(t.loi_nhuan), t.loi_nhuan >= 0 ? 'pos' : 'neg') + kpi(rn() + ' hoàn', money(t.tien_hoan)) + kpi('Giao dịch (Đáo / Rút)', t.so_gd + ' (' + t.so_dao + ' / ' + t.so_rut + ')') +
       kpi('Khách mới / từ web', t.khach_moi + ' / ' + t.lead_web) + kpi('Bấm Zalo / Gọi trên web', t.bam_web || 0);
     var max = Math.max.apply(null, r.rows.map(function (x) { return x.so_tien; }).concat([1]));
     $('#rp-table').innerHTML = '<thead><tr><th>Kỳ</th><th class="num">GD (Đáo/Rút)</th><th class="num">Số tiền</th><th class="num">Phí khách</th><th class="num">Phí máy</th><th class="num">Phí của mình</th><th class="num">Khách mới</th><th class="num">Khách web</th><th class="num">Bấm Zalo/Gọi</th></tr></thead><tbody>' +
@@ -896,6 +1022,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     $('#set-from').value = s.remindFrom; $('#set-to').value = s.remindTo; $('#set-grace').value = s.graceDays;
     $('#set-email').value = s.ownerEmail; $('#set-cal').checked = s.calendar;
     $('#set-after').value = s.shiftAfterCards || '';
+    $('#set-refund-name').value = s.refundName || 'C.Trâm';
     $('#set-holidays').value = (s.holidays || []).map(dmy).join('\n');
     $('#set-webhook').value = s.webAppUrl; $('#set-sheet').href = s.sheetUrl;
   }
@@ -918,8 +1045,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       if (act === 'save-settings') {
         call('saveSettings', { remindFrom: $('#set-from').value, remindTo: $('#set-to').value, graceDays: $('#set-grace').value,
           ownerEmail: $('#set-email').value, calendar: $('#set-cal').checked,
-          shiftAfterCards: $('#set-after').value, holidays: $('#set-holidays').value })
-          .then(function (s) { S.boot.settings = s; toast('Đã lưu cài đặt'); }).catch(fail);
+          shiftAfterCards: $('#set-after').value, holidays: $('#set-holidays').value, refundName: $('#set-refund-name').value })
+          .then(function (s) { S.boot.settings = s; applyRefundName(); toast('Đã lưu cài đặt'); }).catch(fail);
       }
       if (act === 'change-pin') {
         var p1 = $('#set-pin').value, p2 = $('#set-pin2').value;

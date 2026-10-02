@@ -31,6 +31,15 @@
     this.getName = function () { return name; };
     this.getLastRow = function () { return this._rows.length; };
     this.getMaxRows = function () { return 1000; };
+    this._maxCols = 26;
+    this.getLastColumn = function () {
+      return this._rows.reduce(function (m, row) {
+        for (var j = row.length; j > 0; j--) if (row[j - 1] !== '' && row[j - 1] !== undefined) return Math.max(m, j);
+        return m;
+      }, 0);
+    };
+    this.getMaxColumns = function () { return this._maxCols; };
+    this.insertColumnsAfter = function (after, n) { this._maxCols += n; };
     this.getRange = function (r, c, nr, nc) { return new FakeRange(this, r, c, nr || 1, nc || 1); };
     this.appendRow = function (row) { this._rows.push(row.slice()); };
     this.deleteRow = function (r) { this._rows.splice(r - 1, 1); };
