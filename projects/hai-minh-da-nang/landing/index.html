@@ -163,6 +163,15 @@ th{background:var(--bg);color:var(--navy);font-weight:600;width:34%}
 details{border:1px solid var(--line);border-radius:6px;padding:14px 18px;margin-bottom:10px;background:#fff}
 summary{cursor:pointer;font-weight:600;color:var(--navy)}
 details p{margin:10px 0 0}
+.scen td{text-align:center}
+.calc{background:var(--bg);border:1px solid var(--line);border-top:4px solid var(--gold);border-radius:8px;padding:22px;margin-top:22px}
+.calc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 14px}
+.calc-grid label{font-size:13.5px;color:var(--muted);font-weight:600}
+.calc-grid input{margin-top:4px}
+.calc-out{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:10px 0 6px}
+.calc-out div{background:var(--navy);color:#fff;border-radius:6px;padding:12px;text-align:center}
+.calc-out small{display:block;color:#C9D6E3;font-size:12.5px}
+.calc-out b{font-size:18px;color:var(--gold)}
 .cta-box{background:linear-gradient(120deg,var(--navy),var(--blue));color:#fff;border-radius:8px;padding:24px;margin:18px 0 6px}
 .cta-box h3{color:#fff;margin-bottom:4px}
 .cta-box p{color:#D7E3EF;margin-bottom:14px;font-size:15px}
@@ -233,6 +242,8 @@ footer li{padding:3px 0}
   .toc ol{columns:1}
   .units{grid-template-columns:1fr 1fr}
   .places,.why{grid-template-columns:1fr}
+  .calc-grid{grid-template-columns:1fr 1fr}
+  .calc-out{grid-template-columns:1fr 1fr}
   .cta-box form{grid-template-columns:1fr}
   .final .wrap,footer .wrap{grid-template-columns:1fr}
   .float{display:none}
@@ -321,7 +332,7 @@ footer li{padding:3px 0}
           <li><a href="#vi-tri">Vị trí trục biển Võ Nguyên Giáp</a></li>
           <li><a href="#mat-bang">Mặt bằng & loại căn hộ</a></li>
           <li><a href="#tien-ich">Tiện ích căn hộ dịch vụ</a></li>
-          <li><a href="#dau-tu">Tiềm năng đầu tư cho thuê</a></li>
+          <li><a href="#dau-tu">Tiềm năng & bài toán dòng tiền cho thuê</a></li>
           <li><a href="#bang-gia">Bảng giá & chính sách</a></li>
           <li><a href="#tien-do">Tiến độ xây dựng</a></li>
           <li><a href="#hoi-dap">Câu hỏi thường gặp</a></li>
@@ -398,14 +409,52 @@ footer li{padding:3px 0}
       </section>
 
       <section id="dau-tu">
-        <h2>Vì sao căn hộ du lịch Hải Minh đáng quan tâm?</h2>
-        <p>Căn hộ du lịch mặt biển Đà Nẵng phù hợp với hai nhóm khách: người mua để nghỉ dưỡng cho gia đình và nhà đầu tư muốn khai thác cho thuê theo mùa du lịch.</p>
+        <h2>Vì sao căn hộ du lịch mặt biển Đà Nẵng đang được quan tâm?</h2>
+        <p>Căn hộ du lịch (condotel) mặt biển phù hợp với hai nhóm khách: người mua để nghỉ dưỡng cho gia đình và nhà đầu tư muốn có <strong>dòng tiền cho thuê</strong>. Hải Minh hội tụ những yếu tố mà nhà đầu tư thường ưu tiên:</p>
         <div class="why">
-          <div><b>🌊 Quỹ đất mặt biển khan hiếm</b>Trục Võ Nguyên Giáp – Trường Sa là tuyến ven biển tập trung resort, khách sạn và dòng khách du lịch của thành phố.</div>
-          <div><b>🔑 Dòng căn linh hoạt</b>Từ 1PN gọn cho thuê ngắn hạn đến Dual Key 101 m² vừa ở vừa tách phòng cho thuê.</div>
-          <div><b>📈 Chọn căn sớm, chọn view đẹp</b>Căn tầng cao, view biển trực diện thường được khách đăng ký trước chọn đầu tiên.</div>
+          <div><b>🏖️ Đà Nẵng – điểm đến du lịch hàng đầu</b>Thành phố biển đón khách du lịch trong nước và quốc tế quanh năm, nhu cầu lưu trú ngắn ngày ven biển luôn cao, đặc biệt mùa hè và dịp lễ.</div>
+          <div><b>📍 Vị trí đắc địa trên trục biển</b>Mặt tiền Võ Nguyên Giáp – Trường Sa, đối diện Silver Shores (Hòn Ngọc Á Châu): khách thuê đi bộ ra biển, gần phố du lịch An Thượng, Ngũ Hành Sơn, thuận đường đi Hội An.</div>
+          <div><b>💰 Giá thuê theo đêm cao hơn thuê tháng</b>Căn hộ view biển cho thuê theo đêm qua Booking, Agoda, Airbnb thường đạt doanh thu cao hơn nhiều so với cho thuê dài hạn cùng diện tích.</div>
+          <div><b>🌊 Quỹ đất mặt biển khan hiếm</b>Đất mặt tiền biển trong nội đô ngày càng ít, sản phẩm mới trên trục này có giới hạn – yếu tố hỗ trợ giá trị tài sản về dài hạn.</div>
+          <div><b>🔑 Dòng căn linh hoạt</b>Từ 1PN gọn cho thuê ngắn ngày đến Dual Key 101 m² có thể tách 2 phần: vừa ở vừa cho thuê, hoặc cho thuê cả hai.</div>
+          <div><b>🧳 Không cần tự vận hành</b>Mô hình căn hộ du lịch thường có đơn vị quản lý vận hành cho thuê, chủ căn nhận dòng tiền mà không phải tự đón khách, dọn phòng.</div>
         </div>
-        <div class="cta-line"><p>📊 Muốn tính thử dòng tiền cho thuê theo từng loại căn?</p><a class="btn" href="#dang-ky" data-pop>Nhận bảng tính miễn phí</a></div>
+
+        <h3 style="margin-top:28px">Ví dụ bài toán dòng tiền cho thuê (minh họa)</h3>
+        <p>Giả sử mua một căn giá <strong>3 tỷ đồng</strong> và cho thuê theo đêm. Doanh thu = giá thuê/đêm × 365 ngày × công suất phòng; trừ chi phí vận hành, quản lý, phí nền tảng (giả định 40% doanh thu):</p>
+        <div class="tbl">
+          <table class="scen">
+            <tr><th>Kịch bản (giả định)</th><td><b>Thận trọng</b></td><td><b>Trung bình</b></td><td><b>Tích cực</b></td></tr>
+            <tr><th>Giá thuê / đêm</th><td>1.000.000đ</td><td>1.200.000đ</td><td>1.500.000đ</td></tr>
+            <tr><th>Công suất phòng</th><td>50%</td><td>60%</td><td>70%</td></tr>
+            <tr><th>Doanh thu / năm</th><td>182,5 triệu</td><td>262,8 triệu</td><td>383,3 triệu</td></tr>
+            <tr><th>Chi phí (40%)</th><td>73,0 triệu</td><td>105,1 triệu</td><td>153,3 triệu</td></tr>
+            <tr><th>Thu nhập ròng / năm</th><td><b>109,5 triệu</b></td><td><b>157,7 triệu</b></td><td><b>230,0 triệu</b></td></tr>
+            <tr><th>≈ mỗi tháng</th><td>9,1 triệu</td><td>13,1 triệu</td><td>19,2 triệu</td></tr>
+            <tr><th>Tỷ suất / năm trên 3 tỷ</th><td>3,7%</td><td>5,3%</td><td>7,7%</td></tr>
+          </table>
+        </div>
+
+        <div class="calc" id="tinh-dong-tien">
+          <h3>🧮 Tự tính dòng tiền căn hộ của bạn</h3>
+          <div class="calc-grid">
+            <label>Giá mua căn (tỷ đồng)<input type="number" id="c_price" value="3" min="0.5" step="0.1"></label>
+            <label>Giá thuê / đêm (nghìn đồng)<input type="number" id="c_rate" value="1200" min="0" step="50"></label>
+            <label>Công suất phòng (%)<input type="number" id="c_occ" value="60" min="0" max="100" step="5"></label>
+            <label>Chi phí vận hành (% doanh thu)<input type="number" id="c_cost" value="40" min="0" max="90" step="5"></label>
+            <label>Vay ngân hàng (% giá căn)<input type="number" id="c_loan" value="0" min="0" max="70" step="5"></label>
+            <label>Lãi suất vay (%/năm)<input type="number" id="c_int" value="9" min="0" max="20" step="0.5"></label>
+          </div>
+          <div class="calc-out">
+            <div><small>Doanh thu / năm</small><b id="o_rev">–</b></div>
+            <div><small>Thu nhập ròng / năm</small><b id="o_net">–</b></div>
+            <div><small>Trả lãi vay / năm</small><b id="o_intv">–</b></div>
+            <div><small>Dòng tiền ≈ / tháng</small><b id="o_month">–</b></div>
+            <div><small>Tỷ suất trên vốn tự có</small><b id="o_yield">–</b></div>
+          </div>
+          <p class="note" style="text-align:left">⚠️ Các con số trên chỉ là <b>ví dụ minh họa</b> dựa trên giả định do bạn nhập, <b>không phải cam kết lợi nhuận</b> của chủ đầu tư hay đơn vị phân phối. Giá bán, giá thuê, công suất và chi phí thực tế phụ thuộc thị trường và chính sách vận hành của dự án.</p>
+          <a class="btn btn-gold" href="#dang-ky" data-pop>Nhận bảng tính chi tiết theo từng căn</a>
+        </div>
       </section>
 
       <section id="bang-gia">
@@ -613,6 +662,21 @@ footer li{padding:3px 0}
     a.addEventListener('click',function(e){e.preventDefault();open(a.getAttribute('data-unit'));});
   });
   setTimeout(function(){if(!seen())open();},25000);
+})();
+(function(){
+  function v(id){var e=document.getElementById(id);return e?parseFloat(e.value)||0:0;}
+  function m(x){return (Math.round(x*10)/10).toLocaleString('vi-VN')+' triệu';}
+  function calc(){
+    var price=v('c_price')*1000, rate=v('c_rate')/1000, occ=v('c_occ')/100, cost=v('c_cost')/100, loan=v('c_loan')/100, ir=v('c_int')/100;
+    var rev=rate*365*occ, net=rev*(1-cost), interest=price*loan*ir, cash=net-interest, equity=price*(1-loan);
+    document.getElementById('o_rev').textContent=m(rev);
+    document.getElementById('o_net').textContent=m(net);
+    document.getElementById('o_intv').textContent=m(interest);
+    document.getElementById('o_month').textContent=m(cash/12);
+    document.getElementById('o_yield').textContent=equity>0?(Math.round(cash/equity*1000)/10).toLocaleString('vi-VN')+'%':'–';
+  }
+  ['c_price','c_rate','c_occ','c_cost','c_loan','c_int'].forEach(function(id){var e=document.getElementById(id);if(e)e.addEventListener('input',calc);});
+  calc();
 })();
 </script>
 </body>
