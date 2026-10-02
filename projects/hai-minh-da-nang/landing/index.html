@@ -21,11 +21,19 @@
 <link rel="preload" as="image" href="https://static.ladipage.net/5f03d62c83e96d333758e1a6/a89b72de-cf0c-4b25-ac98-e36dcdd3f04b-20260714100621-qjyn7.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://www.xn--cnhdchvhiminh-prb1884ifsamh6h.com.vn/"},
+        {"@type": "ListItem", "position": 2, "name": "Dự án Đà Nẵng", "item": "https://www.xn--cnhdchvhiminh-prb1884ifsamh6h.com.vn/#du-an-khac"},
+        {"@type": "ListItem", "position": 3, "name": "Căn hộ dịch vụ Hải Minh"}
+      ]
+    },
     {
       "@type": "ApartmentComplex",
       "@id": "https://www.xn--cnhdchvhiminh-prb1884ifsamh6h.com.vn/#du-an",
@@ -42,6 +50,7 @@
       "name": "Đơn vị phân phối căn hộ dịch vụ Hải Minh Đà Nẵng",
       "telephone": "+84904567009",
       "areaServed": "Đà Nẵng",
+      "address": {"@type": "PostalAddress", "streetAddress": "Nút giao đường Minh Mạng và đường Quảng Nam", "addressLocality": "Đà Nẵng", "addressCountry": "VN"},
       "url": "https://www.xn--cnhdchvhiminh-prb1884ifsamh6h.com.vn/"
     },
     {
@@ -59,354 +68,516 @@
 }
 </script>
 <style>
-:root{--ink:#0F2E3D;--sea:#1F6F82;--mist:#EEF4F6;--line:#D4E2E7;--gold:#D9962B;--white:#FFFFFF;--text:#22343D}
+:root{--navy:#0B2A4A;--blue:#14508C;--red:#C8102E;--gold:#D9962B;--bg:#F4F6F9;--line:#DDE3EA;--text:#25313C;--muted:#5E6B78;--white:#fff}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:"Be Vietnam Pro",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text);background:var(--white);line-height:1.65;font-size:17px}
+body{margin:0;font-family:"Be Vietnam Pro",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text);background:var(--white);line-height:1.7;font-size:16.5px}
 img{max-width:100%;height:auto;display:block}
-a{color:var(--sea)}
-.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
-h1,h2,h3{color:var(--ink);line-height:1.25;margin:0 0 .6em}
-h1{font-size:clamp(30px,5vw,46px);font-weight:700;letter-spacing:-.01em}
-h1 small{display:block;font-size:.5em;font-weight:500;color:#F3C77A;margin-top:10px;letter-spacing:0}
-h2{font-size:clamp(24px,3.4vw,34px);font-weight:700}
-h3{font-size:20px;font-weight:600}
-p{margin:0 0 1em;max-width:68ch}
-.top{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
-.brand{font-weight:700;color:var(--ink);text-decoration:none;font-size:18px}
-.nav{display:flex;gap:22px}
-.nav a{text-decoration:none;color:var(--text);font-size:15px}
-.nav a:hover{color:var(--sea)}
-.hot{background:var(--gold);color:var(--white);text-decoration:none;font-weight:600;padding:9px 16px;border-radius:6px;white-space:nowrap}
-.hero{background:var(--ink);color:var(--white)}
-.hero .wrap{display:grid;grid-template-columns:1.25fr 1fr;gap:40px;padding-top:48px;padding-bottom:56px;align-items:start}
-.hero .wrap>*,.two>*{min-width:0}
-.hero h1{color:var(--white)}
-.hero .lead{font-size:19px;color:#D8E6EB}
-.tag{display:inline-block;background:rgba(217,150,43,.18);border:1px solid var(--gold);color:#F3C77A;font-size:14px;font-weight:600;padding:5px 12px;border-radius:999px;margin-bottom:14px}
-.hero-img{margin-top:24px;border-radius:8px;overflow:hidden}
-.facts{display:flex;flex-wrap:wrap;gap:10px 28px;margin:20px 0 0;padding:0;list-style:none;color:#D8E6EB;font-size:15px}
-.facts strong{color:var(--white);display:block;font-size:22px}
-.form-card{background:var(--white);color:var(--text);border-radius:10px;padding:26px;box-shadow:0 14px 40px rgba(0,0,0,.25)}
-.form-card h2{font-size:22px}
-.form-card p{font-size:15px;color:#4A5D66}
-label{display:block;font-size:14px;font-weight:600;margin:12px 0 6px;color:var(--ink)}
-input,select{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1px solid var(--line);border-radius:6px;background:var(--white);color:var(--text)}
-input:focus,select:focus,a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-button{width:100%;margin-top:18px;font:inherit;font-weight:700;font-size:17px;background:var(--gold);color:var(--white);border:0;border-radius:6px;padding:15px;cursor:pointer;box-shadow:0 6px 18px rgba(217,150,43,.35)}
-button:hover{background:#C3841F}
-.perks{list-style:none;padding:0;margin:4px 0 6px;font-size:15px}
-.perks li{padding:5px 0 5px 26px;position:relative}
-.perks li:before{content:"";position:absolute;left:4px;top:12px;width:10px;height:6px;border-left:2px solid var(--sea);border-bottom:2px solid var(--sea);transform:rotate(-45deg)}
-.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
-.btn-gold{background:var(--gold);color:#fff;text-decoration:none;font-weight:600;padding:13px 22px;border-radius:6px;display:inline-block}
-.btn-line{border:2px solid #fff;color:#fff;text-decoration:none;font-weight:600;padding:11px 20px;border-radius:6px}
-.trust{background:var(--mist);border-bottom:1px solid var(--line)}
-.trust ul{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;list-style:none;margin:0;padding:18px 0;font-size:15px;color:var(--ink);font-weight:600}
-.trust li{display:flex;gap:10px;align-items:center}
-.trust span{font-size:22px}
-.cta-band{margin-top:28px;padding:22px 24px;border-left:4px solid var(--gold);background:var(--white);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px}
-.cta-band p{margin:0;font-weight:600;color:var(--ink)}
-.note{font-size:13px;color:#6A7C84;margin-top:10px}
-section{padding:64px 0}
-.alt{background:var(--mist)}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
-table{width:100%;border-collapse:collapse;font-size:16px;background:var(--white)}
-th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
-th{color:var(--ink);font-weight:600;width:38%}
+a{color:var(--blue)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 16px}
+h1,h2,h3{color:var(--navy);line-height:1.3;margin:0 0 .6em}
+h2{font-size:clamp(22px,3vw,28px);font-weight:700;padding-left:14px;border-left:5px solid var(--red)}
+h3{font-size:19px;font-weight:600}
+p{margin:0 0 1em}
+.topbar{background:var(--navy);color:#C9D6E3;font-size:13.5px}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;min-height:38px;gap:12px}
+.topbar a{color:#fff;text-decoration:none;font-weight:600}
+.header{position:sticky;top:0;z-index:50;background:var(--white);box-shadow:0 2px 12px rgba(11,42,74,.08)}
+.header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:20px}
+.logo{display:flex;flex-direction:column;text-decoration:none;line-height:1.1}
+.logo b{font-size:20px;color:var(--navy);font-weight:800;letter-spacing:.02em}
+.logo span{font-size:12px;color:var(--red);font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.menu{display:flex;gap:4px}
+.menu a{color:var(--text);text-decoration:none;font-weight:600;font-size:14.5px;padding:8px 12px;border-radius:4px}
+.menu a:hover{color:var(--red);background:var(--bg)}
+.btn{display:inline-block;background:var(--red);color:#fff;text-decoration:none;padding:11px 20px;border-radius:4px;border:0;cursor:pointer;font:inherit;font-weight:700;text-align:center}
+.btn:hover{background:#A50D26}
+.btn-outline{background:transparent;border:2px solid #fff;color:#fff}
+.btn-outline:hover{background:rgba(255,255,255,.12)}
+.btn-gold{background:var(--gold)} .btn-gold:hover{background:#C3841F}
+.hero{position:relative;color:#fff;background:var(--navy)}
+.hero img{width:100%;height:clamp(420px,62vh,600px);object-fit:cover;opacity:.55}
+.hero .cap{position:absolute;inset:0;display:flex;align-items:flex-end}
+.hero .cap .wrap{width:100%;padding-bottom:40px}
+.tag{display:inline-block;background:var(--red);color:#fff;font-size:13px;font-weight:700;padding:4px 12px;border-radius:3px;margin-bottom:14px;text-transform:uppercase;letter-spacing:.04em}
+.hero h1{color:#fff;font-size:clamp(28px,5vw,50px);font-weight:800;margin:0 0 10px;max-width:820px}
+.hero p{font-size:clamp(15px,2vw,19px);max-width:720px;color:#E3ECF4}
+.hero .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.facts{background:var(--white);border-bottom:1px solid var(--line)}
+.facts ul{display:grid;grid-template-columns:repeat(5,1fr);list-style:none;margin:0;padding:0}
+.facts li{padding:20px 14px;border-right:1px solid var(--line);text-align:center}
+.facts li:last-child{border-right:0}
+.facts b{display:block;font-size:22px;color:var(--red);font-weight:800}
+.facts small{color:var(--muted);font-size:13.5px}
+.crumb{font-size:13.5px;color:var(--muted);padding:14px 0}
+.crumb a{color:var(--muted);text-decoration:none}
+.crumb a:hover{color:var(--red)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:36px;align-items:start;padding-bottom:56px}
+.layout>*{min-width:0}
+.content section{padding:8px 0 28px;scroll-margin-top:90px}
+.toc{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:16px 20px;margin-bottom:28px}
+.toc b{color:var(--navy)}
+.toc ol{margin:8px 0 0;padding-left:20px;columns:2;column-gap:24px}
+.toc li{padding:3px 0}
+.toc a{text-decoration:none}
+.toc a:hover{color:var(--red)}
+table{width:100%;border-collapse:collapse;font-size:15.5px}
+th,td{text-align:left;padding:11px 14px;border:1px solid var(--line);vertical-align:top}
+th{background:var(--bg);color:var(--navy);font-weight:600;width:34%}
 .tbl{overflow-x:auto}
-.links{list-style:none;padding:0;margin:0;columns:2;column-gap:32px}
-.links li{padding:8px 0;border-bottom:1px solid var(--line);break-inside:avoid}
-.units{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--white);margin-top:24px}
-.unit{padding:22px 18px;border-right:1px solid var(--line);text-decoration:none;color:inherit;display:block;transition:background .15s}
-.unit:hover{background:#FFF7EA}
-.unit:last-child{border-right:0}
-.unit .sz{font-size:24px;font-weight:700;color:var(--sea)}
-.unit .nm{font-weight:600;color:var(--ink)}
-.unit .go{display:block;margin-top:10px;font-size:14px;font-weight:600;color:var(--gold)}
-.cta-inline{display:inline-block;margin-top:22px;background:var(--ink);color:var(--white);text-decoration:none;font-weight:600;padding:12px 20px;border-radius:6px}
-.why{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px}
-.why div{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:22px}
-.why b{display:block;color:var(--ink);font-size:18px;margin-bottom:6px}
-details{border-bottom:1px solid var(--line);padding:16px 0}
-summary{cursor:pointer;font-weight:600;color:var(--ink);font-size:18px}
-details p{margin-top:10px}
-.sun li{padding:6px 0}
-.final{background:var(--ink);color:var(--white)}
-.final h2{color:var(--white)}
-.final p{color:#D8E6EB}
-footer{background:#0A2230;color:#AFC3CB;font-size:14px;padding:36px 0 90px}
-footer a{color:#D8E6EB}
-footer p{max-width:none}
-.zalo-float{position:fixed;right:18px;bottom:24px;z-index:40;background:#0068FF;color:#fff;font-weight:700;text-decoration:none;padding:12px 18px;border-radius:999px;box-shadow:0 8px 24px rgba(0,104,255,.35)}
+.map{position:relative;padding-top:56%;border-radius:6px;overflow:hidden;border:1px solid var(--line);margin:16px 0}
+.map iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.places{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 20px;list-style:none;padding:0;margin:12px 0 0}
+.places li{padding:8px 0 8px 22px;border-bottom:1px dashed var(--line);position:relative;font-size:15.5px}
+.places li:before{content:"";position:absolute;left:2px;top:17px;width:9px;height:9px;border-radius:50%;background:var(--red)}
+.units{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:16px 0}
+.unit{border:1px solid var(--line);border-radius:6px;padding:18px 12px;text-decoration:none;color:inherit;text-align:center;transition:.15s;background:#fff}
+.unit:hover{border-color:var(--red);box-shadow:0 6px 18px rgba(200,16,46,.12);transform:translateY(-2px)}
+.unit .sz{font-size:19px;font-weight:800;color:var(--blue)}
+.unit .nm{font-weight:600;color:var(--navy);font-size:15px}
+.unit .go{display:inline-block;margin-top:10px;font-size:13px;font-weight:700;color:#fff;background:var(--red);padding:5px 10px;border-radius:3px}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+.why div{background:var(--bg);border-top:3px solid var(--red);border-radius:4px;padding:18px;font-size:15.5px}
+.why b{display:block;color:var(--navy);font-size:17px;margin-bottom:6px}
+details{border:1px solid var(--line);border-radius:6px;padding:14px 18px;margin-bottom:10px;background:#fff}
+summary{cursor:pointer;font-weight:600;color:var(--navy)}
+details p{margin:10px 0 0}
+.cta-box{background:linear-gradient(120deg,var(--navy),var(--blue));color:#fff;border-radius:8px;padding:24px;margin:18px 0 6px}
+.cta-box h3{color:#fff;margin-bottom:4px}
+.cta-box p{color:#D7E3EF;margin-bottom:14px;font-size:15px}
+.cta-box form{display:grid;grid-template-columns:1fr 1fr auto;gap:10px}
+.cta-box input{margin:0}
+.cta-line{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;border:1px dashed var(--red);background:#FFF5F6;border-radius:6px;padding:16px 20px;margin:14px 0}
+.cta-line p{margin:0;font-weight:600;color:var(--navy)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+input,select{width:100%;font:inherit;font-size:15.5px;padding:11px 13px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--text);margin-bottom:10px}
+input:focus,select:focus,a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:1px}
+.note{font-size:12.5px;color:var(--muted);margin:8px 0 0;text-align:center}
+.side{position:sticky;top:88px;display:flex;flex-direction:column;gap:18px}
+.side-card{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff;box-shadow:0 6px 20px rgba(11,42,74,.06);scroll-margin-top:90px}
+.side-card .hd{background:var(--red);color:#fff;padding:14px 18px;font-weight:700;font-size:17px;text-align:center}
+.side-card .bd{padding:18px}
+.side-card ul{list-style:none;margin:0 0 12px;padding:0;font-size:14.5px}
+.side-card li{padding:4px 0 4px 22px;position:relative}
+.side-card li:before{content:"✓";position:absolute;left:2px;color:var(--red);font-weight:800}
+.side-card button{width:100%}
+.side-info dl{margin:0;font-size:14.5px}
+.side-info dt{color:var(--muted);font-size:13px}
+.side-info dd{margin:0 0 10px;font-weight:600;color:var(--navy)}
+.side-call{display:block;text-align:center;background:var(--navy);color:#fff;text-decoration:none;padding:14px;border-radius:8px;font-weight:700}
+.side-call span{display:block;font-size:22px;color:var(--gold)}
+.related{background:var(--bg);padding:48px 0}
+.rel-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:18px}
+.rel-grid a{display:block;background:#fff;border:1px solid var(--line);border-radius:6px;padding:18px;text-decoration:none;color:var(--navy);font-weight:600;transition:.15s}
+.rel-grid a:hover{border-color:var(--red);color:var(--red)}
+.rel-grid small{display:block;color:var(--muted);font-weight:400;font-size:13px}
+.final{background:linear-gradient(120deg,var(--navy),var(--blue));color:#fff;padding:56px 0}
+.final .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.final .wrap>*{min-width:0}
+.final h2{color:#fff;border-color:var(--gold)}
+.final p{color:#D7E3EF}
+.final .card{background:#fff;border-radius:8px;padding:24px;color:var(--text)}
+footer{background:#071C33;color:#A9B8C8;font-size:14px;padding:40px 0 100px}
+footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px}
+footer h3{color:#fff;font-size:16px}
+footer a{color:#D7E3EF;text-decoration:none}
+footer ul{list-style:none;margin:0;padding:0}
+footer li{padding:3px 0}
+.disc{grid-column:1/-1;border-top:1px solid #1C3450;padding-top:16px;font-size:13px}
+.float{position:fixed;right:16px;bottom:24px;z-index:60;display:flex;flex-direction:column;gap:10px}
+.float a{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-weight:800;font-size:13px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.float .z{background:#0068FF} .float .c{background:var(--red);animation:ring 1.6s infinite}
+@keyframes ring{0%,100%{transform:rotate(0)}10%,30%{transform:rotate(-12deg)}20%,40%{transform:rotate(12deg)}50%{transform:rotate(0)}}
 .mbar{display:none}
-@media (max-width:900px){
-  .nav{display:none}
-  .hero .wrap,.two{grid-template-columns:1fr}
-  .units{grid-template-columns:1fr 1fr}
-  .unit{border-bottom:1px solid var(--line)}
-  .links{columns:1}
-  .trust ul{grid-template-columns:1fr 1fr}
-  .why{grid-template-columns:1fr}
-  .zalo-float{display:none}
-  .mbar{display:grid;grid-template-columns:1fr 1fr 1fr;position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--white);border-top:1px solid var(--line)}
-  .mbar a{text-align:center;padding:14px 4px;font-weight:600;text-decoration:none;color:var(--ink);font-size:15px}
-  .mbar a.p{background:var(--gold);color:var(--white)}
+.pop{position:fixed;inset:0;z-index:100;background:rgba(7,28,51,.65);display:none;align-items:center;justify-content:center;padding:16px}
+.pop.show{display:flex}
+.pop .card{background:#fff;border-radius:10px;max-width:420px;width:100%;overflow:hidden;position:relative}
+.pop .hd{background:var(--red);color:#fff;padding:18px 44px 18px 22px}
+.pop .hd b{display:block;font-size:20px}
+.pop .bd{padding:20px 22px}
+.pop .x{position:absolute;top:8px;right:10px;background:none;border:0;color:#fff;font-size:26px;cursor:pointer;line-height:1;padding:4px 8px}
+@media (max-width:1024px){
+  .menu{display:none}
+  .layout{grid-template-columns:1fr}
+  .side{position:static}
+  .units{grid-template-columns:repeat(3,1fr)}
+  .rel-grid{grid-template-columns:1fr 1fr}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (max-width:720px){
+  .topbar .wrap>span:first-child{display:none}
+  .topbar .wrap{justify-content:center}
+  .header .btn{display:none}
+  .facts ul{grid-template-columns:1fr 1fr}
+  .facts li{border-bottom:1px solid var(--line)}
+  .toc ol{columns:1}
+  .units{grid-template-columns:1fr 1fr}
+  .places,.why{grid-template-columns:1fr}
+  .cta-box form{grid-template-columns:1fr}
+  .final .wrap,footer .wrap{grid-template-columns:1fr}
+  .float{display:none}
+  .mbar{display:grid;grid-template-columns:1fr 1fr 1.2fr;position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;border-top:1px solid var(--line)}
+  .mbar a{text-align:center;padding:13px 4px;font-weight:700;text-decoration:none;color:var(--navy);font-size:14.5px}
+  .mbar a.p{background:var(--red);color:#fff}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.float .c{animation:none}}
 </style>
 </head>
 <body>
-<header class="top">
+
+<div class="topbar">
   <div class="wrap">
-    <a class="brand" href="#">Căn hộ Hải Minh Đà Nẵng</a>
-    <nav class="nav" aria-label="Mục lục">
+    <span>Đơn vị phân phối dự án căn hộ dịch vụ Hải Minh Đà Nẵng</span>
+    <span>Hotline: <a href="tel:0904567009">0904 567 009</a> · Zalo: <a href="https://zalo.me/0963380577">0963 380 577</a></span>
+  </div>
+</div>
+
+<header class="header">
+  <div class="wrap">
+    <a class="logo" href="#"><b>HẢI MINH</b><span>Đà Nẵng · Condotel</span></a>
+    <nav class="menu" aria-label="Menu chính">
       <a href="#tong-quan">Tổng quan</a>
       <a href="#vi-tri">Vị trí</a>
-      <a href="#loai-can">Loại căn</a>
-      <a href="#dau-tu">Đầu tư</a>
+      <a href="#mat-bang">Mặt bằng</a>
+      <a href="#tien-ich">Tiện ích</a>
+      <a href="#bang-gia">Bảng giá</a>
+      <a href="#tien-do">Tiến độ</a>
       <a href="#hoi-dap">Hỏi đáp</a>
     </nav>
-    <a class="hot" href="tel:0904567009">📞 0904 567 009</a>
+    <a class="btn" href="#dang-ky" data-pop>Nhận báo giá</a>
   </div>
 </header>
+
 <main>
-<section class="hero" style="padding:0">
-  <div class="wrap">
-    <div>
-      <span class="tag">🏗️ Đang thi công · Nhận đăng ký chọn căn sớm</span>
-      <h1>Căn hộ dịch vụ Hải Minh Đà Nẵng<small>Condotel 30 tầng mặt biển Võ Nguyên Giáp – Trường Sa</small></h1>
-      <p class="lead">Tòa tháp 30 tầng với khoảng 400 căn hộ du lịch, đối diện Silver Shores (Hòn Ngọc Á Châu). Dành cho nhu cầu nghỉ dưỡng và khai thác cho thuê.</p>
-      <ul class="facts">
-        <li><strong>30 tầng</strong>cao khoảng 117 m</li>
-        <li><strong>~400 căn</strong>căn hộ du lịch</li>
-        <li><strong>47–101 m²</strong>từ 1PN đến Dual Key</li>
-        <li><strong>Mặt biển</strong>Võ Nguyên Giáp – Trường Sa</li>
-      </ul>
-      <div class="hero-cta">
-        <a class="btn-gold" href="#dang-ky">Nhận bảng giá từng căn</a>
-        <a class="btn-line" href="https://zalo.me/0963380577">Chat Zalo với chuyên viên</a>
+<div class="hero">
+  <img src="https://static.ladipage.net/5f03d62c83e96d333758e1a6/a89b72de-cf0c-4b25-ac98-e36dcdd3f04b-20260714100621-qjyn7.png" alt="Phối cảnh căn hộ dịch vụ Hải Minh trên đường Võ Nguyên Giáp, Đà Nẵng" width="1200" height="630" fetchpriority="high">
+  <div class="cap">
+    <div class="wrap">
+      <span class="tag">Đang thi công · Nhận đăng ký chọn căn</span>
+      <h1>Căn hộ dịch vụ Hải Minh Đà Nẵng</h1>
+      <p>Tòa tháp condotel 30 tầng với khoảng 400 căn hộ du lịch mặt biển Võ Nguyên Giáp – Trường Sa, đối diện Silver Shores (Hòn Ngọc Á Châu). Dành cho nghỉ dưỡng và khai thác cho thuê.</p>
+      <div class="acts">
+        <a class="btn" href="#dang-ky">Nhận bảng giá & mặt bằng</a>
+        <a class="btn btn-outline" href="https://zalo.me/0963380577">Chat Zalo với chuyên viên</a>
       </div>
-      <div class="hero-img">
-        <img src="https://static.ladipage.net/5f03d62c83e96d333758e1a6/a89b72de-cf0c-4b25-ac98-e36dcdd3f04b-20260714100621-qjyn7.png" alt="Phối cảnh căn hộ dịch vụ Hải Minh trên đường Võ Nguyên Giáp, Đà Nẵng" width="1200" height="630" fetchpriority="high">
-      </div>
-    </div>
-    <div class="form-card" id="dang-ky">
-      <h2>Nhận trọn bộ tài liệu Hải Minh</h2>
-      <p>Miễn phí, gửi qua Zalo trong giờ làm việc:</p>
-      <ul class="perks">
-        <li>Bảng giá chi tiết từng căn</li>
-        <li>Mặt bằng tầng và mặt bằng căn hộ</li>
-        <li>Danh sách căn view biển</li>
-        <li>Chính sách thanh toán và ưu đãi đợt này</li>
-      </ul>
-      <form>
-        <label for="name1">Họ và tên</label>
-        <input id="name1" name="name" type="text" autocomplete="name" placeholder="Nguyễn Văn A" required>
-        <label for="phone1">Số điện thoại (Zalo)</label>
-        <input id="phone1" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xx xxx xxx" pattern="[0-9+ ]{9,13}" required>
-        <label for="type1">Loại căn quan tâm</label>
-        <select id="type1" name="loai_can">
-          <option value="">Chưa chọn</option>
-          <option>1 phòng ngủ (47,4 m²)</option>
-          <option>2 phòng ngủ (66,5–68,8 m²)</option>
-          <option>2 phòng ngủ +1 (76,2–76,9 m²)</option>
-          <option>3 phòng ngủ (78,6–80 m²)</option>
-          <option>Dual Key (101 m²)</option>
-        </select>
-        <label for="need1">Mục đích</label>
-        <select id="need1" name="nhu_cau">
-          <option value="">Chưa chọn</option>
-          <option>Đầu tư cho thuê</option>
-          <option>Nghỉ dưỡng gia đình</option>
-          <option>Vừa ở vừa cho thuê</option>
-        </select>
-        <button type="submit">GỬI BẢNG GIÁ & MẶT BẰNG CHO TÔI</button>
-        <p class="note">🔒 Không spam. Thông tin của bạn chỉ dùng để tư vấn dự án này.</p>
-      </form>
     </div>
   </div>
-</section>
+</div>
 
-<div class="trust">
+<div class="facts">
   <div class="wrap">
     <ul>
-      <li><span>🌊</span>Mặt biển Võ Nguyên Giáp</li>
-      <li><span>🏙️</span>Tháp 30 tầng, cao ~117 m</li>
-      <li><span>🔑</span>5 dòng căn, có Dual Key</li>
-      <li><span>🏗️</span>Đang thi công thực tế</li>
+      <li><b>30 tầng</b><small>cao khoảng 117 m</small></li>
+      <li><b>~400 căn</b><small>căn hộ du lịch</small></li>
+      <li><b>3.720 m²</b><small>diện tích khu đất</small></li>
+      <li><b>47–101 m²</b><small>1PN đến Dual Key</small></li>
+      <li><b>Mặt biển</b><small>Võ Nguyên Giáp – Trường Sa</small></li>
     </ul>
   </div>
 </div>
 
-<section id="tong-quan">
-  <div class="wrap two">
-    <div>
-      <h2>Tổng quan căn hộ dịch vụ Hải Minh</h2>
-      <p>Khu căn hộ du lịch, thương mại dịch vụ Hải Minh do Công ty TNHH Quản lý và Dịch vụ Hạ tầng kỹ thuật Miền Trung làm chủ đầu tư. Dự án hợp khối hai lô đất A2-1 và A2-2 với tổng diện tích khoảng 3.720 m², xây một tòa tháp 30 tầng, tổng sàn hơn 45.000 m².</p>
-      <p>Thiết kế ưu tiên không gian mở, đón gió biển và ánh sáng tự nhiên, hướng tầm nhìn ra biển Mỹ Khê, về phía Hội An và Cù Lao Chàm.</p>
-      <a class="cta-inline" href="#dang-ky">Nhận hồ sơ dự án</a>
-    </div>
-    <div class="tbl">
-      <table>
-        <tr><th scope="row">Tên dự án</th><td>Khu căn hộ du lịch, thương mại dịch vụ Hải Minh</td></tr>
-        <tr><th scope="row">Chủ đầu tư</th><td>Công ty TNHH Quản lý và Dịch vụ Hạ tầng kỹ thuật Miền Trung</td></tr>
-        <tr><th scope="row">Loại hình</th><td>Căn hộ du lịch (condotel), thương mại dịch vụ</td></tr>
-        <tr><th scope="row">Vị trí</th><td>Lô A2-1 và A2-2, trục Võ Nguyên Giáp – Trường Sa, phường Ngũ Hành Sơn, TP. Đà Nẵng</td></tr>
-        <tr><th scope="row">Diện tích đất</th><td>Khoảng 3.720 m²</td></tr>
-        <tr><th scope="row">Quy mô</th><td>01 tòa tháp 30 tầng, khoảng 400 căn hộ du lịch</td></tr>
-        <tr><th scope="row">Tổng sàn</th><td>Hơn 45.000 m²</td></tr>
-        <tr><th scope="row">Chiều cao</th><td>Khoảng 117 m</td></tr>
-        <tr><th scope="row">Loại căn</th><td>1PN, 2PN, 2PN+1, 3PN, Dual Key</td></tr>
-        <tr><th scope="row">Tầm nhìn</th><td>Biển Mỹ Khê, hướng Hội An và Cù Lao Chàm</td></tr>
-        <tr><th scope="row">Tiến độ</th><td>Đang thi công</td></tr>
-      </table>
-    </div>
-  </div>
-</section>
+<div class="wrap">
+  <nav class="crumb" aria-label="Breadcrumb"><a href="#">Trang chủ</a> › <a href="#du-an-khac">Dự án Đà Nẵng</a> › <span>Căn hộ dịch vụ Hải Minh</span></nav>
 
-<section class="alt" id="vi-tri">
-  <div class="wrap two">
-    <div>
-      <h2>Vị trí căn hộ Hải Minh trên trục biển Võ Nguyên Giáp</h2>
-      <p>Võ Nguyên Giáp là tuyến đường ven biển tập trung nhiều khách sạn, resort và dịch vụ du lịch của Đà Nẵng. Quỹ đất mặt tiền trên trục này ngày càng ít, vì vậy các căn hộ gần biển ở đây thường được quan tâm cả cho nghỉ dưỡng lẫn cho thuê.</p>
-      <p>Dự án nằm đối diện tổ hợp nghỉ dưỡng Silver Shores (Hòn Ngọc Á Châu). Từ căn hộ Hải Minh, khách đi bộ ra biển và dễ dàng di chuyển tới trung tâm thành phố, sân bay và các điểm du lịch lân cận.</p>
-    </div>
-    <ul class="links">
-      <li>Silver Shores (Hòn Ngọc Á Châu)</li>
-      <li>Bãi biển Non Nước – Mỹ Khê</li>
-      <li>Phố du lịch An Thượng</li>
-      <li>Cầu Rồng, sông Hàn</li>
-      <li>Trung tâm TP. Đà Nẵng</li>
-      <li>Sân bay Quốc tế Đà Nẵng</li>
-      <li>Ngũ Hành Sơn</li>
-      <li>Phố cổ Hội An</li>
-      <li>Cù Lao Chàm</li>
-    </ul>
-  </div>
-  <div class="wrap"><div class="cta-band"><p>📍 Muốn xem vị trí thực tế và tiến độ công trường?</p><a class="btn-gold" href="tel:0904567009">Đặt lịch xem dự án</a></div></div>
-</section>
+  <div class="layout">
+    <article class="content">
+      <div class="toc">
+        <b>Nội dung chính</b>
+        <ol>
+          <li><a href="#tong-quan">Tổng quan dự án Hải Minh</a></li>
+          <li><a href="#vi-tri">Vị trí trục biển Võ Nguyên Giáp</a></li>
+          <li><a href="#mat-bang">Mặt bằng & loại căn hộ</a></li>
+          <li><a href="#tien-ich">Tiện ích căn hộ dịch vụ</a></li>
+          <li><a href="#dau-tu">Tiềm năng đầu tư cho thuê</a></li>
+          <li><a href="#bang-gia">Bảng giá & chính sách</a></li>
+          <li><a href="#tien-do">Tiến độ xây dựng</a></li>
+          <li><a href="#hoi-dap">Câu hỏi thường gặp</a></li>
+        </ol>
+      </div>
 
-<section id="loai-can">
+      <section id="tong-quan">
+        <h2>Tổng quan căn hộ dịch vụ Hải Minh Đà Nẵng</h2>
+        <p><strong>Khu căn hộ du lịch, thương mại dịch vụ Hải Minh</strong> do Công ty TNHH Quản lý và Dịch vụ Hạ tầng kỹ thuật Miền Trung làm chủ đầu tư. Dự án hợp khối hai lô đất A2-1 và A2-2 với tổng diện tích khoảng 3.720 m², xây một tòa tháp 30 tầng, tổng sàn hơn 45.000 m².</p>
+        <p>Thiết kế ưu tiên không gian mở, đón gió biển và ánh sáng tự nhiên, hướng tầm nhìn ra biển Mỹ Khê, về phía Hội An và Cù Lao Chàm.</p>
+        <div class="tbl">
+          <table>
+            <tr><th scope="row">Tên dự án</th><td>Khu căn hộ du lịch, thương mại dịch vụ Hải Minh</td></tr>
+            <tr><th scope="row">Chủ đầu tư</th><td>Công ty TNHH Quản lý và Dịch vụ Hạ tầng kỹ thuật Miền Trung</td></tr>
+            <tr><th scope="row">Loại hình</th><td>Căn hộ du lịch (condotel), thương mại dịch vụ</td></tr>
+            <tr><th scope="row">Vị trí</th><td>Lô A2-1 và A2-2, trục Võ Nguyên Giáp – Trường Sa, phường Ngũ Hành Sơn, TP. Đà Nẵng</td></tr>
+            <tr><th scope="row">Diện tích đất</th><td>Khoảng 3.720 m²</td></tr>
+            <tr><th scope="row">Quy mô</th><td>01 tòa tháp 30 tầng, khoảng 400 căn hộ du lịch</td></tr>
+            <tr><th scope="row">Tổng sàn</th><td>Hơn 45.000 m²</td></tr>
+            <tr><th scope="row">Chiều cao</th><td>Khoảng 117 m</td></tr>
+            <tr><th scope="row">Loại căn</th><td>1PN, 2PN, 2PN+1, 3PN, Dual Key</td></tr>
+            <tr><th scope="row">Tầm nhìn</th><td>Biển Mỹ Khê, hướng Hội An và Cù Lao Chàm</td></tr>
+            <tr><th scope="row">Tiến độ</th><td>Đang thi công</td></tr>
+          </table>
+        </div>
+        <div class="cta-line"><p>📄 Nhận trọn bộ hồ sơ dự án Hải Minh qua Zalo</p><a class="btn" href="#dang-ky" data-pop>Nhận hồ sơ</a></div>
+      </section>
+
+      <section id="vi-tri">
+        <h2>Vị trí căn hộ Hải Minh trên trục biển Võ Nguyên Giáp</h2>
+        <p>Võ Nguyên Giáp là tuyến đường ven biển tập trung nhiều khách sạn, resort và dịch vụ du lịch của Đà Nẵng. Quỹ đất mặt tiền trên trục này ngày càng ít, vì vậy các căn hộ gần biển ở đây thường được quan tâm cả cho nghỉ dưỡng lẫn cho thuê.</p>
+        <p>Dự án nằm đối diện tổ hợp nghỉ dưỡng Silver Shores (Hòn Ngọc Á Châu). Từ căn hộ Hải Minh, khách đi bộ ra biển và dễ dàng di chuyển tới trung tâm thành phố, sân bay và các điểm du lịch lân cận.</p>
+        <div class="map"><iframe title="Bản đồ khu vực Võ Nguyên Giáp – Trường Sa, Ngũ Hành Sơn, Đà Nẵng" src="https://www.google.com/maps?q=V%C3%B5%20Nguy%C3%AAn%20Gi%C3%A1p%20Tr%C6%B0%E1%BB%9Dng%20Sa%20Ng%C5%A9%20H%C3%A0nh%20S%C6%A1n%20%C4%90%C3%A0%20N%E1%BA%B5ng&z=15&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+        <h3>Kết nối xung quanh dự án</h3>
+        <ul class="places">
+          <li>Silver Shores (Hòn Ngọc Á Châu)</li>
+          <li>Bãi biển Non Nước – Mỹ Khê</li>
+          <li>Phố du lịch An Thượng</li>
+          <li>Cầu Rồng, sông Hàn</li>
+          <li>Trung tâm TP. Đà Nẵng</li>
+          <li>Sân bay Quốc tế Đà Nẵng</li>
+          <li>Ngũ Hành Sơn</li>
+          <li>Phố cổ Hội An</li>
+          <li>Cù Lao Chàm</li>
+        </ul>
+        <div class="cta-line"><p>📍 Muốn xem vị trí thực tế và tiến độ công trường?</p><a class="btn" href="tel:0904567009">Đặt lịch xem dự án</a></div>
+      </section>
+
+      <section id="mat-bang">
+        <h2>Mặt bằng và loại căn hộ Hải Minh</h2>
+        <p>Năm dòng căn, từ căn 1 phòng ngủ cho nhu cầu cho thuê ngắn hạn đến căn Dual Key 101 m² có thể vừa dùng nghỉ dưỡng vừa khai thác cho thuê. <strong>Bấm vào loại căn</strong> để nhận giá và mặt bằng căn đó.</p>
+        <div class="units">
+          <a class="unit" href="#dang-ky" data-pop data-unit="1 phòng ngủ (47,4 m²)"><div class="sz">47,4 m²</div><div class="nm">1 phòng ngủ</div><span class="go">Nhận giá</span></a>
+          <a class="unit" href="#dang-ky" data-pop data-unit="2 phòng ngủ (66,5–68,8 m²)"><div class="sz">66,5–68,8 m²</div><div class="nm">2 phòng ngủ</div><span class="go">Nhận giá</span></a>
+          <a class="unit" href="#dang-ky" data-pop data-unit="2 phòng ngủ +1 (76,2–76,9 m²)"><div class="sz">76,2–76,9 m²</div><div class="nm">2 phòng ngủ +1</div><span class="go">Nhận giá</span></a>
+          <a class="unit" href="#dang-ky" data-pop data-unit="3 phòng ngủ (78,6–80 m²)"><div class="sz">78,6–80 m²</div><div class="nm">3 phòng ngủ</div><span class="go">Nhận giá</span></a>
+          <a class="unit" href="#dang-ky" data-pop data-unit="Dual Key (101 m²)"><div class="sz">101 m²</div><div class="nm">Dual Key</div><span class="go">Nhận giá</span></a>
+        </div>
+        <div class="cta-box">
+          <h3>Nhận mặt bằng tầng & danh sách căn view biển</h3>
+          <p>Gửi qua Zalo trong giờ làm việc – miễn phí.</p>
+          <form>
+            <label class="sr" for="name3">Họ và tên</label><input id="name3" name="name" type="text" autocomplete="name" placeholder="Họ và tên *" required>
+            <label class="sr" for="phone3">Số điện thoại</label><input id="phone3" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Số điện thoại (Zalo) *" pattern="[0-9+ ]{9,13}" required>
+            <button class="btn btn-gold" type="submit">Nhận mặt bằng</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="tien-ich">
+        <h2>Tiện ích căn hộ dịch vụ Hải Minh</h2>
+        <p>Hải Minh được định hướng theo mô hình căn hộ du lịch kết hợp khối thương mại dịch vụ, phục vụ khách nghỉ dưỡng, chuyên gia và du khách lưu trú.</p>
+        <p>Danh mục tiện ích chi tiết theo từng tầng có trong bộ tài liệu dự án gửi kèm bảng giá.</p>
+      </section>
+
+      <section id="dau-tu">
+        <h2>Vì sao căn hộ du lịch Hải Minh đáng quan tâm?</h2>
+        <p>Căn hộ du lịch mặt biển Đà Nẵng phù hợp với hai nhóm khách: người mua để nghỉ dưỡng cho gia đình và nhà đầu tư muốn khai thác cho thuê theo mùa du lịch.</p>
+        <div class="why">
+          <div><b>🌊 Quỹ đất mặt biển khan hiếm</b>Trục Võ Nguyên Giáp – Trường Sa là tuyến ven biển tập trung resort, khách sạn và dòng khách du lịch của thành phố.</div>
+          <div><b>🔑 Dòng căn linh hoạt</b>Từ 1PN gọn cho thuê ngắn hạn đến Dual Key 101 m² vừa ở vừa tách phòng cho thuê.</div>
+          <div><b>📈 Chọn căn sớm, chọn view đẹp</b>Căn tầng cao, view biển trực diện thường được khách đăng ký trước chọn đầu tiên.</div>
+        </div>
+        <div class="cta-line"><p>📊 Muốn tính thử dòng tiền cho thuê theo từng loại căn?</p><a class="btn" href="#dang-ky" data-pop>Nhận bảng tính miễn phí</a></div>
+      </section>
+
+      <section id="bang-gia">
+        <h2>Bảng giá và chính sách bán hàng căn hộ Hải Minh</h2>
+        <p>Bảng giá, chính sách thanh toán, hỗ trợ ngân hàng và danh sách căn view biển được cập nhật theo từng đợt. Đăng ký để nhận bản mới nhất thay vì dùng thông tin cũ trên mạng.</p>
+        <div class="cta-box">
+          <h3>Nhận bảng giá Hải Minh mới nhất</h3>
+          <p>Kèm chính sách thanh toán, ưu đãi đợt này và gợi ý căn theo ngân sách.</p>
+          <form>
+            <label class="sr" for="name4">Họ và tên</label><input id="name4" name="name" type="text" autocomplete="name" placeholder="Họ và tên *" required>
+            <label class="sr" for="phone4">Số điện thoại</label><input id="phone4" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Số điện thoại (Zalo) *" pattern="[0-9+ ]{9,13}" required>
+            <button class="btn btn-gold" type="submit">Nhận bảng giá</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="tien-do">
+        <h2>Tiến độ xây dựng dự án Hải Minh</h2>
+        <p>Dự án đang thi công trên trục Võ Nguyên Giáp – Trường Sa. Hình ảnh và cập nhật tiến độ công trường được gửi định kỳ cho khách đã đăng ký; khách cũng có thể đặt lịch tham quan công trường thực tế.</p>
+        <div class="cta-line"><p>🏗️ Nhận ảnh tiến độ công trường mới nhất qua Zalo</p><a class="btn" href="https://zalo.me/0963380577">Nhận qua Zalo</a></div>
+      </section>
+
+      <section id="hoi-dap">
+        <h2>Câu hỏi thường gặp về căn hộ Hải Minh</h2>
+        <details open><summary>Căn hộ dịch vụ Hải Minh nằm ở đâu?</summary><p>Dự án nằm trên hai lô đất A2-1 và A2-2, trục đường biển Võ Nguyên Giáp – Trường Sa, phường Ngũ Hành Sơn, TP. Đà Nẵng, đối diện khu nghỉ dưỡng Silver Shores (Hòn Ngọc Á Châu).</p></details>
+        <details><summary>Chủ đầu tư căn hộ Hải Minh là ai?</summary><p>Chủ đầu tư dự án Khu căn hộ du lịch, thương mại dịch vụ Hải Minh là Công ty TNHH Quản lý và Dịch vụ Hạ tầng kỹ thuật Miền Trung.</p></details>
+        <details><summary>Căn hộ Hải Minh có những loại căn nào?</summary><p>Dự án có căn 1 phòng ngủ 47,4 m², 2 phòng ngủ 66,5–68,8 m², 2 phòng ngủ +1 76,2–76,9 m², 3 phòng ngủ 78,6–80 m² và căn Dual Key 101 m².</p></details>
+        <details><summary>Căn hộ Hải Minh cao bao nhiêu tầng?</summary><p>Dự án gồm một tòa tháp 30 tầng, cao khoảng 117 m, tổng sàn xây dựng hơn 45.000 m² với khoảng 400 căn hộ du lịch.</p></details>
+        <details><summary>Dự án Hải Minh đang triển khai đến đâu?</summary><p>Dự án đang thi công trên trục Võ Nguyên Giáp – Trường Sa. Khách quan tâm có thể đặt lịch xem công trường thực tế và nhận hình ảnh cập nhật tiến độ qua Zalo.</p></details>
+        <details><summary>Làm sao để nhận bảng giá căn hộ Hải Minh?</summary><p>Để lại họ tên và số điện thoại trong form trên trang, hoặc gọi hotline 0904 567 009 để nhận bảng giá, mặt bằng và chính sách bán hàng mới nhất.</p></details>
+        <div class="cta-line"><p>Còn câu hỏi về pháp lý, thanh toán hay vận hành cho thuê?</p><a class="btn" href="https://zalo.me/0963380577">Hỏi chuyên viên qua Zalo</a></div>
+      </section>
+    </article>
+
+    <aside class="side">
+      <div class="side-card" id="dang-ky">
+        <div class="hd">ĐĂNG KÝ NHẬN THÔNG TIN</div>
+        <div class="bd">
+          <ul>
+            <li>Bảng giá chi tiết từng căn</li>
+            <li>Mặt bằng tầng & căn hộ</li>
+            <li>Danh sách căn view biển</li>
+            <li>Chính sách thanh toán đợt này</li>
+          </ul>
+          <form>
+            <label class="sr" for="name1">Họ và tên</label><input id="name1" name="name" type="text" autocomplete="name" placeholder="Họ và tên *" required>
+            <label class="sr" for="phone1">Số điện thoại</label><input id="phone1" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Số điện thoại (Zalo) *" pattern="[0-9+ ]{9,13}" required>
+            <label class="sr" for="type1">Loại căn quan tâm</label>
+            <select id="type1" name="loai_can">
+              <option value="">Loại căn quan tâm</option>
+              <option>1 phòng ngủ (47,4 m²)</option>
+              <option>2 phòng ngủ (66,5–68,8 m²)</option>
+              <option>2 phòng ngủ +1 (76,2–76,9 m²)</option>
+              <option>3 phòng ngủ (78,6–80 m²)</option>
+              <option>Dual Key (101 m²)</option>
+            </select>
+            <label class="sr" for="need1">Mục đích</label>
+            <select id="need1" name="nhu_cau">
+              <option value="">Mục đích mua</option>
+              <option>Đầu tư cho thuê</option>
+              <option>Nghỉ dưỡng gia đình</option>
+              <option>Vừa ở vừa cho thuê</option>
+            </select>
+            <button class="btn" type="submit">GỬI BẢNG GIÁ CHO TÔI</button>
+            <p class="note">🔒 Không spam. Chỉ dùng để tư vấn dự án này.</p>
+          </form>
+        </div>
+      </div>
+      <div class="side-card side-info">
+        <div class="bd">
+          <dl>
+            <dt>Chủ đầu tư</dt><dd>Công ty TNHH Quản lý và Dịch vụ Hạ tầng kỹ thuật Miền Trung</dd>
+            <dt>Vị trí</dt><dd>Võ Nguyên Giáp – Trường Sa, P. Ngũ Hành Sơn, Đà Nẵng</dd>
+            <dt>Quy mô</dt><dd>30 tầng · ~400 căn hộ du lịch</dd>
+            <dt>Loại căn</dt><dd>1PN · 2PN · 2PN+1 · 3PN · Dual Key</dd>
+          </dl>
+        </div>
+      </div>
+      <a class="side-call" href="tel:0904567009">Hotline tư vấn<span>0904 567 009</span></a>
+    </aside>
+  </div>
+</div>
+
+<section class="related" id="du-an-khac">
   <div class="wrap">
-    <h2>Mặt bằng và loại căn hộ Hải Minh</h2>
-    <p>Năm dòng căn, từ căn 1 phòng ngủ cho nhu cầu cho thuê ngắn hạn đến căn Dual Key 101 m² có thể vừa dùng nghỉ dưỡng vừa khai thác cho thuê. <b>Bấm vào loại căn</b> để nhận giá và mặt bằng căn đó.</p>
-    <div class="units">
-      <a class="unit" href="#dang-ky" data-unit="1 phòng ngủ (47,4 m²)"><div class="sz">47,4 m²</div><div class="nm">1 phòng ngủ</div><span class="go">Nhận giá →</span></a>
-      <a class="unit" href="#dang-ky" data-unit="2 phòng ngủ (66,5–68,8 m²)"><div class="sz">66,5–68,8 m²</div><div class="nm">2 phòng ngủ</div><span class="go">Nhận giá →</span></a>
-      <a class="unit" href="#dang-ky" data-unit="2 phòng ngủ +1 (76,2–76,9 m²)"><div class="sz">76,2–76,9 m²</div><div class="nm">2 phòng ngủ +1</div><span class="go">Nhận giá →</span></a>
-      <a class="unit" href="#dang-ky" data-unit="3 phòng ngủ (78,6–80 m²)"><div class="sz">78,6–80 m²</div><div class="nm">3 phòng ngủ</div><span class="go">Nhận giá →</span></a>
-      <a class="unit" href="#dang-ky" data-unit="Dual Key (101 m²)"><div class="sz">101 m²</div><div class="nm">Dual Key</div><span class="go">Nhận giá →</span></a>
-    </div>
-    <a class="cta-inline" href="#dang-ky">Xem căn view biển còn trống</a>
-  </div>
-</section>
-
-<section class="alt" id="dau-tu">
-  <div class="wrap">
-    <h2>Vì sao căn hộ du lịch Hải Minh đáng quan tâm?</h2>
-    <p>Căn hộ du lịch mặt biển Đà Nẵng phù hợp với hai nhóm khách: người mua để nghỉ dưỡng cho gia đình và nhà đầu tư muốn khai thác cho thuê theo mùa du lịch.</p>
-    <div class="why">
-      <div><b>🌊 Quỹ đất mặt biển khan hiếm</b>Trục Võ Nguyên Giáp – Trường Sa là tuyến ven biển tập trung resort, khách sạn và dòng khách du lịch của thành phố.</div>
-      <div><b>🔑 Dòng căn linh hoạt</b>Từ 1PN gọn cho thuê ngắn hạn đến Dual Key 101 m² vừa ở vừa tách phòng cho thuê.</div>
-      <div><b>📈 Chọn căn sớm, chọn view đẹp</b>Căn tầng cao, view biển trực diện thường được khách đăng ký trước chọn đầu tiên.</div>
-    </div>
-    <div class="cta-band"><p>📊 Muốn tính thử dòng tiền cho thuê theo từng loại căn?</p><a class="btn-gold" href="#dang-ky">Nhận bảng tính miễn phí</a></div>
-  </div>
-</section>
-
-<section id="tien-ich">
-  <div class="wrap two">
-    <div>
-      <h2>Tiện ích căn hộ dịch vụ</h2>
-      <p>Hải Minh được định hướng theo mô hình căn hộ du lịch kết hợp khối thương mại dịch vụ, phục vụ khách nghỉ dưỡng, chuyên gia và du khách lưu trú.</p>
-      <p>Danh mục tiện ích chi tiết theo từng tầng có trong bộ tài liệu dự án gửi kèm bảng giá.</p>
-    </div>
-    <div>
-      <h2>Bảng giá và chính sách bán hàng</h2>
-      <p>Bảng giá, chính sách thanh toán, hỗ trợ ngân hàng và danh sách căn view biển được cập nhật theo từng đợt. Đăng ký để nhận bản mới nhất thay vì dùng thông tin cũ trên mạng.</p>
-      <a class="cta-inline" href="#dang-ky">Nhận bảng giá và tính dòng tiền cho thuê</a>
-    </div>
-  </div>
-</section>
-
-<section class="alt" id="hoi-dap">
-  <div class="wrap">
-    <h2>Câu hỏi thường gặp về căn hộ Hải Minh</h2>
-    <details open><summary>Căn hộ dịch vụ Hải Minh nằm ở đâu?</summary><p>Dự án nằm trên hai lô đất A2-1 và A2-2, trục đường biển Võ Nguyên Giáp – Trường Sa, phường Ngũ Hành Sơn, TP. Đà Nẵng, đối diện khu nghỉ dưỡng Silver Shores (Hòn Ngọc Á Châu).</p></details>
-    <details><summary>Chủ đầu tư căn hộ Hải Minh là ai?</summary><p>Chủ đầu tư dự án Khu căn hộ du lịch, thương mại dịch vụ Hải Minh là Công ty TNHH Quản lý và Dịch vụ Hạ tầng kỹ thuật Miền Trung.</p></details>
-    <details><summary>Căn hộ Hải Minh có những loại căn nào?</summary><p>Dự án có căn 1 phòng ngủ 47,4 m², 2 phòng ngủ 66,5–68,8 m², 2 phòng ngủ +1 76,2–76,9 m², 3 phòng ngủ 78,6–80 m² và căn Dual Key 101 m².</p></details>
-    <details><summary>Căn hộ Hải Minh cao bao nhiêu tầng?</summary><p>Dự án gồm một tòa tháp 30 tầng, cao khoảng 117 m, tổng sàn xây dựng hơn 45.000 m² với khoảng 400 căn hộ du lịch.</p></details>
-    <details><summary>Dự án Hải Minh đang triển khai đến đâu?</summary><p>Dự án đang thi công trên trục Võ Nguyên Giáp – Trường Sa. Khách quan tâm có thể đặt lịch xem công trường thực tế và nhận hình ảnh cập nhật tiến độ qua Zalo.</p></details>
-    <details><summary>Làm sao để nhận bảng giá căn hộ Hải Minh?</summary><p>Để lại họ tên và số điện thoại trong form trên trang, hoặc gọi hotline 0904 567 009 để nhận bảng giá, mặt bằng và chính sách bán hàng mới nhất.</p></details>
-    <div class="cta-band"><p>Còn câu hỏi khác về pháp lý, thanh toán hay vận hành cho thuê?</p><a class="btn-gold" href="https://zalo.me/0963380577">Hỏi chuyên viên qua Zalo</a></div>
-  </div>
-</section>
-
-<section id="du-an-sun">
-  <div class="wrap">
-    <h2>Căn hộ Sun tại Đà Nẵng</h2>
+    <h2>Dự án căn hộ khác tại Đà Nẵng</h2>
     <p>Ngoài Hải Minh, chúng tôi phân phối các dự án căn hộ của Sun Property tại Đà Nẵng:</p>
-    <ul class="sun">
-      <li><a href="https://www.s-light-tower.com/">S-Light Tower</a></li>
-      <li><a href="https://www.sun-galaxy-complex.com.vn/">Sun Galaxy Complex</a></li>
-      <li><a href="https://www.sun-danangdowntown.com/">Đà Nẵng Downtown</a></li>
-      <li><a href="https://www.sun-spanatower.com/">Spana Tower</a></li>
-      <li><a href="https://www.cora-tower.com/">Cora Tower</a></li>
-      <li><a href="https://www.sun-fours-tower.com/">FourS Tower</a></li>
-      <li><a href="https://www.sun-symphony5.com/">Symphony 5</a></li>
-    </ul>
+    <div class="rel-grid">
+      <a href="https://www.s-light-tower.com/">S-Light Tower<small>Căn hộ Đà Nẵng</small></a>
+      <a href="https://www.sun-galaxy-complex.com.vn/">Sun Galaxy Complex<small>Căn hộ Đà Nẵng</small></a>
+      <a href="https://www.sun-danangdowntown.com/">Đà Nẵng Downtown<small>Căn hộ Đà Nẵng</small></a>
+      <a href="https://www.sun-spanatower.com/">Spana Tower<small>Căn hộ Đà Nẵng</small></a>
+      <a href="https://www.cora-tower.com/">Cora Tower<small>Căn hộ Đà Nẵng</small></a>
+      <a href="https://www.sun-fours-tower.com/">FourS Tower<small>Căn hộ Đà Nẵng</small></a>
+      <a href="https://www.sun-symphony5.com/">Symphony 5<small>Căn hộ Đà Nẵng</small></a>
+    </div>
   </div>
 </section>
 
 <section class="final">
-  <div class="wrap two">
+  <div class="wrap">
     <div>
       <h2>Ưu tiên chọn căn view biển đẹp</h2>
       <p>Căn view biển trực diện thường được khách chọn trước. Để lại thông tin để nhận danh sách căn, bảng giá và gợi ý căn phù hợp ngân sách của bạn.</p>
-      <p>Hotline: <a href="tel:0904567009" style="color:#fff;font-weight:600">0904 567 009</a><br>Zalo: <a href="https://zalo.me/0963380577" style="color:#fff;font-weight:600">0963 380 577</a></p>
+      <p>Hotline: <a href="tel:0904567009" style="color:#fff;font-weight:700">0904 567 009</a><br>Zalo: <a href="https://zalo.me/0963380577" style="color:#fff;font-weight:700">0963 380 577</a></p>
     </div>
-    <div class="form-card">
+    <div class="card">
       <form>
-        <label for="name2">Họ và tên</label>
-        <input id="name2" name="name" type="text" autocomplete="name" required>
-        <label for="phone2">Số điện thoại (Zalo)</label>
-        <input id="phone2" name="phone" type="tel" inputmode="tel" autocomplete="tel" pattern="[0-9+ ]{9,13}" required>
-        <label for="budget2">Ngân sách dự kiến</label>
+        <label class="sr" for="name2">Họ và tên</label><input id="name2" name="name" type="text" autocomplete="name" placeholder="Họ và tên *" required>
+        <label class="sr" for="phone2">Số điện thoại</label><input id="phone2" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Số điện thoại (Zalo) *" pattern="[0-9+ ]{9,13}" required>
+        <label class="sr" for="budget2">Ngân sách dự kiến</label>
         <select id="budget2" name="ngan_sach">
-          <option value="">Chưa chọn</option>
+          <option value="">Ngân sách dự kiến</option>
           <option>Dưới 3 tỷ</option>
           <option>3 – 5 tỷ</option>
           <option>Trên 5 tỷ</option>
         </select>
-        <button type="submit">NHẬN DANH SÁCH CĂN VIEW BIỂN</button>
+        <button class="btn" type="submit" style="width:100%">NHẬN DANH SÁCH CĂN VIEW BIỂN</button>
         <p class="note">Chuyên viên liên hệ trong giờ làm việc. Không spam.</p>
       </form>
     </div>
   </div>
 </section>
 </main>
+
 <footer>
   <div class="wrap">
-    <p><strong>Căn hộ dịch vụ Hải Minh Đà Nẵng</strong><br>Chủ đầu tư: Công ty TNHH Quản lý và Dịch vụ Hạ tầng kỹ thuật Miền Trung<br>Văn phòng dự án: nút giao đường Minh Mạng và đường Quảng Nam, Đà Nẵng<br>Hotline: <a href="tel:0904567009">0904 567 009</a></p>
-    <p>Website do đơn vị phân phối vận hành, không phải website chính thức của Chủ đầu tư. Thông tin và hình ảnh mang tính tham khảo, có thể điều chỉnh theo quyết định của Chủ đầu tư; thông tin chính thức theo Hợp đồng mua bán.</p>
+    <div>
+      <h3>Căn hộ dịch vụ Hải Minh Đà Nẵng</h3>
+      <p>Chủ đầu tư: Công ty TNHH Quản lý và Dịch vụ Hạ tầng kỹ thuật Miền Trung<br>Văn phòng dự án: nút giao đường Minh Mạng và đường Quảng Nam, Đà Nẵng<br>Hotline: <a href="tel:0904567009">0904 567 009</a> · Zalo: <a href="https://zalo.me/0963380577">0963 380 577</a></p>
+    </div>
+    <div>
+      <h3>Thông tin dự án</h3>
+      <ul>
+        <li><a href="#tong-quan">Tổng quan</a></li>
+        <li><a href="#vi-tri">Vị trí</a></li>
+        <li><a href="#mat-bang">Mặt bằng</a></li>
+        <li><a href="#bang-gia">Bảng giá</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Hỗ trợ</h3>
+      <ul>
+        <li><a href="#tien-do">Tiến độ</a></li>
+        <li><a href="#hoi-dap">Hỏi đáp</a></li>
+        <li><a href="#dang-ky">Đăng ký nhận tin</a></li>
+      </ul>
+    </div>
+    <p class="disc">Website do đơn vị phân phối vận hành, không phải website chính thức của Chủ đầu tư. Thông tin và hình ảnh mang tính tham khảo, có thể điều chỉnh theo quyết định của Chủ đầu tư; thông tin chính thức theo Hợp đồng mua bán.</p>
   </div>
 </footer>
-<a class="zalo-float" href="https://zalo.me/0963380577">💬 Zalo tư vấn</a>
+
+<div class="float">
+  <a class="z" href="https://zalo.me/0963380577" aria-label="Chat Zalo">Zalo</a>
+  <a class="c" href="tel:0904567009" aria-label="Gọi hotline">📞</a>
+</div>
 <nav class="mbar" aria-label="Liên hệ nhanh">
-  <a href="tel:0904567009">📞 Gọi ngay</a>
+  <a href="tel:0904567009">📞 Gọi</a>
   <a href="https://zalo.me/0963380577">💬 Zalo</a>
-  <a class="p" href="#dang-ky">Nhận giá</a>
+  <a class="p" href="#dang-ky" data-pop>Nhận báo giá</a>
 </nav>
+
+<div class="pop" id="pop" role="dialog" aria-modal="true" aria-labelledby="popTitle">
+  <div class="card">
+    <button class="x" type="button" aria-label="Đóng">×</button>
+    <div class="hd"><b id="popTitle">Nhận bảng giá Hải Minh</b>Mặt bằng + danh sách căn view biển gửi qua Zalo</div>
+    <div class="bd">
+      <form>
+        <label class="sr" for="name5">Họ và tên</label><input id="name5" name="name" type="text" autocomplete="name" placeholder="Họ và tên *" required>
+        <label class="sr" for="phone5">Số điện thoại</label><input id="phone5" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Số điện thoại (Zalo) *" pattern="[0-9+ ]{9,13}" required>
+        <label class="sr" for="type5">Loại căn quan tâm</label>
+        <select id="type5" name="loai_can">
+          <option value="">Loại căn quan tâm</option>
+          <option>1 phòng ngủ (47,4 m²)</option>
+          <option>2 phòng ngủ (66,5–68,8 m²)</option>
+          <option>2 phòng ngủ +1 (76,2–76,9 m²)</option>
+          <option>3 phòng ngủ (78,6–80 m²)</option>
+          <option>Dual Key (101 m²)</option>
+        </select>
+        <button class="btn" type="submit" style="width:100%">GỬI CHO TÔI</button>
+        <p class="note">🔒 Không spam. Chỉ dùng để tư vấn dự án này.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
 <script>
-document.querySelectorAll('.unit[data-unit]').forEach(function(a){
-  a.addEventListener('click',function(){
-    var s=document.getElementById('type1');
-    if(s){s.value=a.getAttribute('data-unit');}
-    setTimeout(function(){var n=document.getElementById('name1');if(n){n.focus({preventScroll:true});}},400);
+(function(){
+  var pop=document.getElementById('pop');
+  function seen(set){try{if(set){sessionStorage.setItem('hm_pop','1');return;}return sessionStorage.getItem('hm_pop');}catch(e){return null;}}
+  function open(unit){
+    var s=document.getElementById('type5');
+    if(s&&unit){s.value=unit;}
+    pop.classList.add('show');
+    setTimeout(function(){var n=document.getElementById('name5');if(n)n.focus();},50);
+    seen(true);
+  }
+  function close(){pop.classList.remove('show');}
+  pop.querySelector('.x').addEventListener('click',close);
+  pop.addEventListener('click',function(e){if(e.target===pop)close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+  document.querySelectorAll('[data-pop]').forEach(function(a){
+    a.addEventListener('click',function(e){e.preventDefault();open(a.getAttribute('data-unit'));});
   });
-});
+  setTimeout(function(){if(!seen())open();},25000);
+})();
 </script>
 </body>
 </html>
