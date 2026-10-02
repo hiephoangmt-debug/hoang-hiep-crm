@@ -9,15 +9,17 @@ function hoanghiep_defaults() {
 	return array(
 		// Cá nhân.
 		'hh_person_name'   => 'Hoàng Hiệp',
-		'hh_person_title'  => 'Chuyên viên bất động sản Đà Nẵng',
+		'hh_person_title'  => 'Chuyên gia bất động sản Đà Nẵng',
+		'hh_person_company' => 'Tati Land',
+		'hh_person_career' => "Trưởng nhóm kinh doanh | Trực tiếp tư vấn, dẫn khách và chốt giao dịch tại các dự án Đà Nẵng\nTrưởng phòng kinh doanh | Xây dựng và dẫn dắt đội ngũ chuyên viên tư vấn\nGiám đốc sàn giao dịch | Vận hành sàn, phân phối nhiều dự án căn hộ, đất nền khu vực miền Trung\nGiám đốc kinh doanh | Hoạch định chiến lược bán hàng, làm việc trực tiếp với chủ đầu tư\nCEO | Điều hành doanh nghiệp môi giới, phát triển thị trường Đà Nẵng – miền Trung\nTati Land | Hiện đang công tác",
 		'hh_person_photo'  => '',
 		'hh_person_slogan' => 'Đúng nhu cầu – Đúng giá trị – Đúng pháp lý',
-		'hh_person_bio'    => 'Tôi là Hoàng Hiệp, chuyên tư vấn mua bán, cho thuê và đầu tư bất động sản tại Đà Nẵng – từ căn hộ ven sông Hàn, nhà phố trung tâm đến đất nền ven biển. Mỗi sản phẩm tôi giới thiệu đều được kiểm tra pháp lý, khảo sát thực tế và tư vấn rõ ràng về giá trị, để bạn ra quyết định an tâm nhất.',
+		'hh_person_bio'    => 'Tôi là Hoàng Hiệp, hơn 15 năm gắn bó với thị trường bất động sản Đà Nẵng và miền Trung. Đi lên từ trưởng nhóm, trưởng phòng, giám đốc sàn, giám đốc kinh doanh đến CEO, tôi hiểu rõ từng dự án, từng khu vực và cách chọn đúng sản phẩm cho nhu cầu ở hay đầu tư. Hiện tôi đang công tác tại Tati Land.',
 		// Số liệu (để trống sẽ ẩn).
-		'hh_stat1_num'     => '',
-		'hh_stat1_label'   => 'Năm kinh nghiệm',
-		'hh_stat2_num'     => '',
-		'hh_stat2_label'   => 'Khách hàng đã tư vấn',
+		'hh_stat1_num'     => '15+',
+		'hh_stat1_label'   => 'Năm kinh nghiệm BĐS Đà Nẵng – miền Trung',
+		'hh_stat2_num'     => '5',
+		'hh_stat2_label'   => 'Cấp quản lý, từ trưởng nhóm đến CEO',
 		'hh_stat3_num'     => '',
 		'hh_stat3_label'   => 'Giao dịch thành công',
 		'hh_stat4_num'     => '',
@@ -45,6 +47,18 @@ function hoanghiep_opt( $key ) {
 
 function hoanghiep_tel( $phone = null ) {
 	return preg_replace( '/[^0-9+]/', '', $phone ?? hoanghiep_opt( 'hh_phone' ) );
+}
+
+/** Career steps as [role, note] pairs. */
+function hoanghiep_career() {
+	$rows = array();
+	foreach ( preg_split( '/\R/', hoanghiep_opt( 'hh_person_career' ) ) as $line ) {
+		$parts = array_map( 'trim', explode( '|', $line, 2 ) );
+		if ( '' !== $parts[0] ) {
+			$rows[] = array( $parts[0], $parts[1] ?? '' );
+		}
+	}
+	return $rows;
 }
 
 /** Filled-in stats as [num, label] pairs. */
@@ -80,6 +94,8 @@ function hoanghiep_customize( $wp_customize ) {
 		'hh_person_title'  => array( 'hh_person', 'Chức danh', 'text' ),
 		'hh_person_slogan' => array( 'hh_person', 'Slogan', 'text' ),
 		'hh_person_bio'    => array( 'hh_person', 'Giới thiệu ngắn', 'textarea' ),
+		'hh_person_company' => array( 'hh_person', 'Đơn vị đang công tác', 'text' ),
+		'hh_person_career' => array( 'hh_person', 'Hành trình nghề nghiệp (mỗi dòng: Chức vụ | Mô tả)', 'textarea' ),
 		'hh_phone'         => array( 'hh_contact', 'Hotline', 'text' ),
 		'hh_zalo'          => array( 'hh_contact', 'Số Zalo', 'text' ),
 		'hh_email'         => array( 'hh_contact', 'Email', 'email' ),

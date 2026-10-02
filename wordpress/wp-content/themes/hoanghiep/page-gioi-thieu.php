@@ -22,6 +22,9 @@ $stats = hoanghiep_stats();
 			<p class="eyebrow eyebrow--light"><?php echo esc_html( hoanghiep_opt( 'hh_person_title' ) ); ?></p>
 			<h1 class="display display--xl"><?php echo esc_html( $name ); ?></h1>
 			<p class="profile-hero__slogan">“<?php echo esc_html( hoanghiep_opt( 'hh_person_slogan' ) ); ?>”</p>
+			<?php if ( hoanghiep_opt( 'hh_person_company' ) ) : ?>
+				<p class="company-badge">Hiện công tác tại <strong><?php echo esc_html( hoanghiep_opt( 'hh_person_company' ) ); ?></strong></p>
+			<?php endif; ?>
 			<p class="lead"><?php echo esc_html( hoanghiep_opt( 'hh_person_bio' ) ); ?></p>
 			<?php if ( $stats ) : ?>
 				<dl class="stats stats--light">
@@ -48,6 +51,23 @@ $stats = hoanghiep_stats();
 		</section>
 	<?php endif; ?>
 <?php endwhile; ?>
+
+<?php $career = hoanghiep_career(); ?>
+<?php if ( $career ) : ?>
+	<section class="section">
+		<div class="container">
+			<?php hh_section_head( 'Kinh nghiệm', 'Hành trình nghề nghiệp' ); ?>
+			<ol class="career">
+				<?php foreach ( $career as $i => list( $role, $note ) ) : ?>
+					<li class="<?php echo count( $career ) - 1 === $i ? 'is-current' : ''; ?>">
+						<strong><?php echo esc_html( $role ); ?></strong>
+						<?php if ( $note ) : ?><span><?php echo esc_html( $note ); ?></span><?php endif; ?>
+					</li>
+				<?php endforeach; ?>
+			</ol>
+		</div>
+	</section>
+<?php endif; ?>
 
 <section class="section section--tint">
 	<div class="container">

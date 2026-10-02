@@ -34,6 +34,10 @@ while ( have_posts() ) :
 			<p class="breadcrumb">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Trang chủ</a> /
 				<a href="<?php echo esc_url( hh_deal_url( $deal ) ); ?>"><?php echo 'thue' === $deal ? 'Cho thuê' : 'Mua bán'; ?></a>
+				<?php $crumb_area = get_the_terms( $id, 'khu-vuc' ); ?>
+				<?php if ( $crumb_area && ! is_wp_error( $crumb_area ) ) : ?>
+					/ <a href="<?php echo esc_url( hh_deal_term_url( $deal, $crumb_area[0] ) ); ?>"><?php echo esc_html( $crumb_area[0]->name ); ?></a>
+				<?php endif; ?>
 			</p>
 		</div>
 	</div>

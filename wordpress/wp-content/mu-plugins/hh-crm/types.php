@@ -89,8 +89,10 @@ function hh_register_types() {
 		)
 	);
 
-	// Đẹp URL: /mua-ban/ và /cho-thue/.
+	// Đẹp URL: /mua-ban/, /cho-thue/ và trang đích /mua-ban/{khu-vuc hoặc loai-nha-dat}/.
 	foreach ( array( 'mua-ban' => 'ban', 'cho-thue' => 'thue' ) as $slug => $deal ) {
+		add_rewrite_rule( "^{$slug}/(?!page/)([^/]+)/page/([0-9]+)/?$", 'index.php?post_type=bat-dong-san&hh_deal=' . $deal . '&hh_term=$matches[1]&paged=$matches[2]', 'top' );
+		add_rewrite_rule( "^{$slug}/(?!page/)([^/]+)/?$", 'index.php?post_type=bat-dong-san&hh_deal=' . $deal . '&hh_term=$matches[1]', 'top' );
 		add_rewrite_rule( "^{$slug}/page/([0-9]+)/?$", 'index.php?post_type=bat-dong-san&hh_deal=' . $deal . '&paged=$matches[1]', 'top' );
 		add_rewrite_rule( "^{$slug}/?$", 'index.php?post_type=bat-dong-san&hh_deal=' . $deal, 'top' );
 	}
@@ -193,11 +195,92 @@ function hh_is_high_rise( $post_id = null ) {
 
 add_filter( 'query_vars', 'hh_query_vars' );
 function hh_query_vars( $vars ) {
-	return array_merge( $vars, array( 'hh_deal', 'tk', 'gia', 'dt', 'pn', 'huong', 'sx', 'tt' ) );
+	return array_merge( $vars, array( 'hh_deal', 'hh_term', 'tk', 'gia', 'dt', 'pn', 'huong', 'sx', 'tt' ) );
 }
 
 function hh_deal_url( $deal ) {
 	return home_url( 'ban' === $deal ? '/mua-ban/' : '/cho-thue/' );
+}
+
+/** SEO landing URL, e.g. /mua-ban/son-tra/. */
+function hh_deal_term_url( $deal, $term ) {
+	return trailingslashit( hh_deal_url( $deal ) . $term->slug );
+}
+
+/** Term (khu-vuc or loai-bds) of the current /mua-ban/{slug}/ page, or null. */
+function hh_current_deal_term() {
+	$slug = sanitize_title( (string) get_query_var( 'hh_term' ) );
+	if ( '' === $slug ) {
+		return null;
+	}
+	foreach ( array( 'khu-vuc', 'loai-bds' ) as $tax ) {
+		$term = get_term_by( 'slug', $slug, $tax );
+		if ( $term ) {
+			return $term;
+		}
+	}
+	return false;
+}
+
+/** Landing terms of a deal that have at least one listing: [term, count]. */
+function hh_deal_landing_terms( $deal, $taxonomy ) {
+	$out = array();
+	foreach ( get_terms( array( 'taxonomy' => $taxonomy, 'hide_empty' => true, 'orderby' => 'term_id' ) ) ?: array() as $term ) {
+		$q = new WP_Query(
+			array(
+				'post_type'      => 'bat-dong-san',
+				'posts_per_page' => 1,
+				'fields'         => 'ids',
+				'meta_query'     => array( array( 'key' => 'hh_deal', 'value' => $deal ) ),
+				'tax_query'      => array( array( 'taxonomy' => $taxonomy, 'terms' => $term->term_id ) ),
+			)
+		);
+		if ( $q->found_posts ) {
+			$out[] = array( $term, (int) $q->found_posts );
+		}
+	}
+	return $out;
+}
+
+/**
+ * Market numbers for the current listing archive (all pages, not only the visible one).
+ * Returns count, min/max price (triệu), average price per m² (triệu), latest date, top areas.
+ */
+function hh_listing_stats() {
+	global $wp_query;
+	$vars                   = $wp_query->query_vars;
+	$vars['posts_per_page'] = 500;
+	$vars['paged']          = 1;
+	$vars['fields']         = 'ids';
+	$vars['no_found_rows']  = true;
+	$ids                    = get_posts( $vars );
+	$prices                 = array();
+	$per_m2                 = array();
+	$areas                  = array();
+	$latest                 = 0;
+	foreach ( $ids as $id ) {
+		$price = (float) get_post_meta( $id, 'hh_price', true );
+		$size  = (float) get_post_meta( $id, 'hh_area', true );
+		if ( $price > 0 ) {
+			$prices[] = $price;
+			if ( $size > 0 ) {
+				$per_m2[] = $price / $size;
+			}
+		}
+		$latest = max( $latest, (int) get_post_modified_time( 'U', true, $id ) );
+		foreach ( get_the_terms( $id, 'khu-vuc' ) ?: array() as $t ) {
+			$areas[ $t->name ] = ( $areas[ $t->name ] ?? 0 ) + 1;
+		}
+	}
+	arsort( $areas );
+	return array(
+		'count'  => count( $ids ),
+		'min'    => $prices ? min( $prices ) : 0,
+		'max'    => $prices ? max( $prices ) : 0,
+		'avg_m2' => $per_m2 ? array_sum( $per_m2 ) / count( $per_m2 ) : 0,
+		'latest' => $latest,
+		'areas'  => array_slice( $areas, 0, 3, true ),
+	);
 }
 
 /* -------------------------------------------------------------------------
@@ -500,6 +583,23 @@ function hh_filter_queries( $q ) {
 		if ( in_array( $deal, array( 'ban', 'thue' ), true ) ) {
 			$meta[] = array( 'key' => 'hh_deal', 'value' => $deal );
 		}
+		if ( $q->get( 'hh_term' ) ) {
+			$slug = sanitize_title( (string) $q->get( 'hh_term' ) );
+			$term = null;
+			foreach ( array( 'khu-vuc', 'loai-bds' ) as $tax ) {
+				$term = $term ?: get_term_by( 'slug', $slug, $tax );
+			}
+			if ( $term ) {
+				$q->set( 'tax_query', array( array( 'taxonomy' => $term->taxonomy, 'terms' => $term->term_id, 'include_children' => true ) ) );
+			} else {
+				$q->set( 'post__in', array( 0 ) );
+				add_action( 'template_redirect', static function () {
+					global $wp_query;
+					$wp_query->set_404();
+					status_header( 404 );
+				}, 1 );
+			}
+		}
 		foreach ( array( 'gia' => 'hh_price', 'dt' => 'hh_area' ) as $var => $key ) {
 			$clause = hh_range_clause( $key, $q->get( $var ) );
 			if ( $clause ) {
@@ -533,11 +633,20 @@ function hh_filter_queries( $q ) {
 	}
 }
 
-/** Archive title for listing pages, e.g. "Nhà đất bán". */
+/** Archive title for listing pages, e.g. "Nhà đất bán Sơn Trà, Đà Nẵng", "Cho thuê căn hộ chung cư Đà Nẵng". */
 function hh_listing_archive_title() {
 	$deal = get_query_var( 'hh_deal' );
-	if ( is_tax() ) {
-		return single_term_title( '', false );
+	$term = hh_current_deal_term();
+	if ( ! $term && is_tax( 'loai-bds' ) ) {
+		$term = get_queried_object();
 	}
-	return 'ban' === $deal ? 'Nhà đất bán' : ( 'thue' === $deal ? 'Nhà đất cho thuê' : 'Nhà đất mua bán & cho thuê' );
+	$verb = 'ban' === $deal ? 'Bán' : ( 'thue' === $deal ? 'Cho thuê' : 'Mua bán, cho thuê' );
+	if ( $term && 'loai-bds' === $term->taxonomy ) {
+		return $verb . ' ' . mb_strtolower( $term->name ) . ' Đà Nẵng';
+	}
+	$base = 'ban' === $deal ? 'Nhà đất bán' : ( 'thue' === $deal ? 'Nhà đất cho thuê' : 'Nhà đất mua bán & cho thuê' );
+	if ( $term && 'khu-vuc' === $term->taxonomy ) {
+		return $base . ' ' . $term->name . ', Đà Nẵng';
+	}
+	return $base . ' Đà Nẵng';
 }

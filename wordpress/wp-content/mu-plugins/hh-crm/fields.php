@@ -253,6 +253,19 @@ function hh_format_price( $trieu, $per_month = false ) {
 	return $per_month ? $text . '/tháng' : $text;
 }
 
+/** Lowercase only the first letter (keeps place names like Đà Nẵng). */
+function hh_lcfirst( $text ) {
+	return mb_strtolower( mb_substr( $text, 0, 1 ) ) . mb_substr( $text, 1 );
+}
+
+/** "từ 2,1 tỷ đến 24,5 tỷ" or "3,35 tỷ" when both ends are equal. */
+function hh_price_range( $min, $max, $per_month = false ) {
+	if ( abs( (float) $min - (float) $max ) < 0.001 ) {
+		return hh_format_price( $min, $per_month );
+	}
+	return 'từ ' . hh_format_price( $min, $per_month ) . ' đến ' . hh_format_price( $max, $per_month );
+}
+
 function hh_youtube_id( $url ) {
 	if ( preg_match( '~(?:youtu\.be/|v=|embed/|shorts/)([A-Za-z0-9_-]{11})~', (string) $url, $m ) ) {
 		return $m[1];

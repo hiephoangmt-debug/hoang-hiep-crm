@@ -230,8 +230,11 @@ if ( $news->have_posts() ) :
 		</div>
 		<div class="about-home__text">
 			<p class="eyebrow">Về <?php echo esc_html( hoanghiep_opt( 'hh_person_name' ) ); ?></p>
-			<h2 class="display">Người đồng hành an cư &amp; đầu tư tại Đà Nẵng</h2>
+			<h2 class="display">Hơn 15 năm đồng hành cùng thị trường Đà Nẵng – miền Trung</h2>
 			<p class="lead"><?php echo esc_html( hoanghiep_opt( 'hh_person_bio' ) ); ?></p>
+			<?php if ( hoanghiep_opt( 'hh_person_company' ) ) : ?>
+				<p class="company-badge company-badge--dark">Hiện công tác tại <strong><?php echo esc_html( hoanghiep_opt( 'hh_person_company' ) ); ?></strong></p>
+			<?php endif; ?>
 			<?php $stats = hoanghiep_stats(); ?>
 			<?php if ( $stats ) : ?>
 				<dl class="stats">

@@ -42,9 +42,11 @@ Tick **"Dự án HOT"** / **"Tin HOT"** khi nhập: tin được gắn nhãn HOT
 
 - Tiêu đề và mô tả tự sinh cho từng trang, có từ khóa "Đà Nẵng" (VD: "Nhà đất bán Đà Nẵng", "Dự án đất nền Đà Nẵng"). Phần **Tóm tắt** của bài/dự án được dùng làm mô tả trên Google.
 - Thẻ Open Graph để chia sẻ Facebook/Zalo có ảnh và mô tả.
-- Dữ liệu cấu trúc schema.org: `RealEstateAgent` (Hiệp), `ApartmentComplex`/`Product` + `FAQPage` (dự án), `RealEstateListing` (tin nhà đất), `BlogPosting` (tin tức), `BreadcrumbList`, `ItemList`.
+- Dữ liệu cấu trúc schema.org: `RealEstateAgent` + `Person` (Hiệp, nơi công tác, nghề nghiệp), `ApartmentComplex`/`Product` + `FAQPage` (dự án), `RealEstateListing` (tin nhà đất), `BlogPosting` (tin tức), `BreadcrumbList`, `ItemList`.
 - Sitemap tự động: `/wp-sitemap.xml`. File `robots.txt` cho phép Google, Bing và các bot AI (GPTBot, OAI-SearchBot, ChatGPT-User, PerplexityBot, ClaudeBot, Google-Extended…).
 - **`/llms.txt`**: bản tóm tắt toàn bộ website (giới thiệu, liên hệ, danh sách dự án, nhà đất, tin tức) giúp ChatGPT và các AI đọc và trích dẫn chính xác.
+- **Trang đích Mua bán / Cho thuê chuẩn SEO** cho từng khu vực và loại nhà đất, tự sinh khi có tin: `/mua-ban/son-tra/` (Nhà đất bán Sơn Trà, Đà Nẵng), `/cho-thue/can-ho-chung-cu/` (Cho thuê căn hộ chung cư Đà Nẵng)… Mỗi trang có H1, tiêu đề, mô tả, đường dẫn chuẩn riêng, đoạn giới thiệu tự sinh từ dữ liệu (số tin, khoảng giá, giá trung bình/m², ngày cập nhật), liên kết nội bộ theo khu vực/loại, khối **Hỏi đáp** kèm schema `FAQPage`, và có sitemap riêng (`/wp-sitemap-nhadat-1.xml`).
+- Tiêu đề tin đăng tự thêm giá, diện tích và mã tin, VD: "Bán căn hộ 2PN … – 3,35 tỷ, 68m² | HH00020".
 - Trang lọc/sắp xếp gắn `noindex` để tránh trùng nội dung. Ảnh thiếu chữ thay thế (alt) sẽ tự lấy tên bài. Có ngày "Cập nhật" trên dự án và tin đăng.
 - Nếu sau này cài Yoast SEO / Rank Math, phần SEO của theme tự tắt để không bị trùng.
 
@@ -78,7 +80,7 @@ Mở https://hiephoangmt.com/wp-admin và đăng nhập bằng `WP_ADMIN_USER` /
 
 ### 4. Sau khi cài
 1. **Giao diện → Tùy biến → Hoàng Hiệp – Thương hiệu**:
-   - *Thông tin cá nhân*: họ tên, chức danh, slogan, giới thiệu, **ảnh chân dung**.
+   - *Thông tin cá nhân*: họ tên, chức danh, slogan, giới thiệu, **ảnh chân dung**, đơn vị đang công tác (Tati Land), **hành trình nghề nghiệp** (mỗi dòng: Chức vụ | Mô tả).
    - *Số liệu nổi bật*: năm kinh nghiệm, số giao dịch… (để trống thì ẩn).
    - *Liên hệ & mạng xã hội*: hotline, Zalo, email, Facebook, YouTube, TikTok.
    - *Banner trang chủ*: tiêu đề, mô tả, ảnh nền (dùng khi chưa có dự án nổi bật).

@@ -587,6 +587,29 @@ p { margin: 0 0 1em; }
 .project-link small { display: block; color: var(--muted); }
 .project-link .icon { color: var(--gold-2); }
 
+/* SEO internal links */
+.seo-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 28px; }
+.seo-links__title { flex-basis: 100%; margin: 0 0 2px; font-weight: 700; color: var(--navy); }
+.seo-links a { display: inline-flex; gap: 6px; align-items: center; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); color: var(--ink); font-size: .86rem; }
+.seo-links a span { color: var(--muted); font-size: .76rem; }
+.seo-links a:hover, .seo-links a.is-active { border-color: var(--gold-2); color: var(--gold-2); }
+.faq-block { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line); border-bottom: 0; }
+
+/* Company & career */
+.company-badge { display: inline-block; margin: 0 0 16px; padding: 6px 14px; border: 1px solid rgba(255, 255, 255, .25); border-radius: 999px; font-size: .9rem; color: #dbe4f0; }
+.company-badge strong { color: var(--gold); }
+.company-badge--dark { border-color: var(--line); color: var(--text); background: var(--white); }
+.company-badge--dark strong { color: var(--gold-2); }
+.career { position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; counter-reset: career; }
+.career li { position: relative; padding: 46px 18px 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); counter-increment: career; }
+.career li::before { content: counter(career); position: absolute; top: 14px; left: 18px; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--navy); color: var(--gold); font-size: .78rem; font-weight: 700; }
+.career strong { display: block; color: var(--navy); font-size: 1.02rem; margin-bottom: 6px; }
+.career span { font-size: .88rem; color: var(--text); }
+.career li.is-current { background: var(--navy); border-color: var(--navy); }
+.career li.is-current::before { content: "★"; background: var(--gold-2); color: var(--white); }
+.career li.is-current strong { color: var(--gold); }
+.career li.is-current span { color: #c7d3e3; }
+
 /* Profile page */
 .profile-hero { background: linear-gradient(120deg, var(--navy), var(--navy-2)); color: #c7d3e3; padding-block: clamp(48px, 8vw, 96px); }
 .profile-hero h1 { color: var(--white); margin-bottom: 8px; }

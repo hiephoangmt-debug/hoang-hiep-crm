@@ -5,6 +5,9 @@
 			<p class="site-footer__name"><?php echo esc_html( hoanghiep_opt( 'hh_person_name' ) ); ?></p>
 			<p class="site-footer__title"><?php echo esc_html( hoanghiep_opt( 'hh_person_title' ) ); ?></p>
 			<p><?php echo esc_html( hoanghiep_opt( 'hh_person_slogan' ) ); ?></p>
+			<?php if ( hoanghiep_opt( 'hh_person_company' ) ) : ?>
+				<p>Hiện công tác tại <strong><?php echo esc_html( hoanghiep_opt( 'hh_person_company' ) ); ?></strong></p>
+			<?php endif; ?>
 			<ul class="socials">
 				<?php
 				foreach ( array( 'hh_facebook' => 'Facebook', 'hh_youtube' => 'YouTube', 'hh_tiktok' => 'TikTok' ) as $key => $label ) :

@@ -12,6 +12,45 @@ function hh_seo_plugin_active() {
 	return defined( 'WPSEO_VERSION' ) || defined( 'RANK_MATH_VERSION' ) || defined( 'AIOSEO_VERSION' );
 }
 
+/**
+ * Câu hỏi thường gặp tự sinh từ dữ liệu tin đăng (trang Mua bán / Cho thuê).
+ * Returns [[question, answer], ...].
+ */
+function hh_listing_faq( $stats, $deal, $place, $what ) {
+	$rent  = 'thue' === $deal;
+	$verb  = $rent ? 'thuê' : 'mua';
+	$faq   = array();
+	$date  = wp_date( 'd/m/Y', $stats['latest'] ?: time() );
+	if ( $stats['count'] && $stats['min'] ) {
+		$answer = sprintf(
+			'Theo %d tin đang đăng trên website (cập nhật %s), giá %s %s',
+			$stats['count'],
+			$date,
+			$what,
+			abs( $stats['min'] - $stats['max'] ) < 0.001 ? 'khoảng ' . hh_format_price( $stats['min'], $rent ) : 'dao động ' . hh_price_range( $stats['min'], $stats['max'], $rent )
+		);
+		if ( ! $rent && $stats['avg_m2'] ) {
+			$answer .= ', trung bình khoảng ' . rtrim( rtrim( number_format( $stats['avg_m2'], 1, ',', '.' ), '0' ), ',' ) . ' triệu/m²';
+		}
+		$faq[] = array( 'Giá ' . $what . ' hiện nay khoảng bao nhiêu?', $answer . '. Giá thực tế phụ thuộc vị trí, pháp lý và hiện trạng từng căn.' );
+	}
+	if ( count( $stats['areas'] ) > 1 && false === strpos( $place, ',' ) ) {
+		$parts = array();
+		foreach ( $stats['areas'] as $name => $n ) {
+			$parts[] = $name . ' (' . $n . ' tin)';
+		}
+		$faq[] = array( 'Khu vực nào ở Đà Nẵng đang có nhiều tin ' . ( $rent ? 'cho thuê' : 'bán' ) . ' nhất?', 'Hiện nhiều tin nhất là ' . implode( ', ', $parts ) . '.' );
+	}
+	$who = hoanghiep_opt( 'hh_person_name' ) . ' – ' . mb_strtolower( hoanghiep_opt( 'hh_person_title' ) ) . ( hoanghiep_opt( 'hh_person_company' ) ? ', hiện công tác tại ' . hoanghiep_opt( 'hh_person_company' ) : '' );
+	$faq[] = array( 'Làm sao để xem nhà và được tư vấn ' . $what . '?', 'Gọi hoặc nhắn Zalo ' . hoanghiep_opt( 'hh_phone' ) . ', hoặc để lại thông tin trên website. ' . $who . ' sẽ sắp xếp lịch xem thực tế và kiểm tra pháp lý trước khi giao dịch.' );
+	if ( ! $rent ) {
+		$faq[] = array( 'Mua nhà đất ở ' . $place . ' có được hỗ trợ vay ngân hàng không?', 'Có. Mỗi tin bán có công cụ tính khoản vay, lãi và số tiền trả hằng tháng. Hiệp hỗ trợ kết nối ngân hàng và hồ sơ vay khi bạn chọn được căn phù hợp.' );
+	} else {
+		$faq[] = array( 'Thuê nhà ở ' . $place . ' cần đặt cọc bao nhiêu?', 'Thông thường đặt cọc 1–2 tháng tiền thuê, hợp đồng tối thiểu 6–12 tháng. Điều kiện cụ thể ghi trong mục "Điều kiện thuê" của từng tin.' );
+	}
+	return $faq;
+}
+
 /* -------------------------------------------------------------------------
  * Titles
  * ---------------------------------------------------------------------- */
@@ -19,13 +58,21 @@ function hh_seo_plugin_active() {
 add_filter( 'document_title_parts', 'hh_seo_title_parts' );
 function hh_seo_title_parts( $parts ) {
 	if ( is_post_type_archive( 'bat-dong-san' ) || is_tax( 'loai-bds' ) ) {
-		$parts['title'] = hh_listing_archive_title() . ' Đà Nẵng';
+		$parts['title'] = hh_listing_archive_title() . ( get_query_var( 'hh_deal' ) ? ' – Cập nhật ' . wp_date( 'm/Y' ) : '' );
 	} elseif ( is_post_type_archive( 'du-an' ) ) {
 		$parts['title'] = 'Dự án bất động sản Đà Nẵng';
 	} elseif ( is_tax( 'loai-du-an' ) ) {
 		$parts['title'] = 'Dự án ' . mb_strtolower( single_term_title( '', false ) ) . ' Đà Nẵng';
 	} elseif ( is_tax( 'khu-vuc' ) ) {
 		$parts['title'] = 'Bất động sản ' . single_term_title( '', false ) . ', Đà Nẵng';
+	} elseif ( is_singular( 'bat-dong-san' ) ) {
+		$title = get_the_title();
+		$deal  = 'thue' === hh_meta( 'hh_deal' ) ? 'Cho thuê' : 'Bán';
+		if ( 0 !== mb_stripos( $title, $deal ) ) {
+			$title = $deal . ' ' . mb_strtolower( mb_substr( $title, 0, 1 ) ) . mb_substr( $title, 1 );
+		}
+		$extra          = array_filter( array( hh_listing_price(), hh_meta( 'hh_area' ) ? hh_meta( 'hh_area' ) . 'm²' : '' ) );
+		$parts['title'] = $title . ' – ' . implode( ', ', $extra ) . ' | ' . hh_listing_code();
 	} elseif ( is_singular( 'du-an' ) && hh_meta( 'hh_p_status' ) ) {
 		$parts['title'] = get_the_title() . ' – ' . hh_option_label( hh_project_schema(), 'hh_p_status', hh_meta( 'hh_p_status' ) );
 	} elseif ( is_front_page() ) {
@@ -59,7 +106,7 @@ function hh_seo_description() {
 		$deal = 'thue' === hh_meta( 'hh_deal' ) ? 'Cho thuê' : 'Bán';
 		$bits = array_filter(
 			array(
-				$deal . ' ' . get_the_title(),
+				0 === mb_stripos( get_the_title(), $deal ) ? get_the_title() : $deal . ' ' . mb_strtolower( mb_substr( get_the_title(), 0, 1 ) ) . mb_substr( get_the_title(), 1 ),
 				'giá ' . hh_listing_price(),
 				hh_meta( 'hh_area' ) ? hh_meta( 'hh_area' ) . ' m²' : '',
 				hh_meta( 'hh_bedrooms' ) ? hh_meta( 'hh_bedrooms' ) . ' phòng ngủ' : '',
@@ -91,7 +138,12 @@ function hh_seo_description() {
 		return 'Danh sách dự án cao tầng (căn hộ, căn hộ dịch vụ, penthouse, duplex, shop khối đế) và thấp tầng (biệt thự, đất nền, shophouse) tại Đà Nẵng: vị trí, giá bán, mặt bằng, tiến độ và chính sách mới nhất. Tư vấn: ' . hoanghiep_opt( 'hh_phone' ) . '.';
 	}
 	if ( is_post_type_archive( 'bat-dong-san' ) || is_tax( 'loai-bds' ) ) {
-		return hh_listing_archive_title() . ' tại Đà Nẵng, cập nhật hằng ngày, thông tin pháp lý rõ ràng. Lọc theo giá, diện tích, khu vực. Liên hệ ' . hoanghiep_opt( 'hh_phone' ) . '.';
+		$st = hh_listing_stats();
+		if ( $st['count'] && $st['min'] ) {
+			$rent = 'thue' === get_query_var( 'hh_deal' );
+			return hh_listing_archive_title() . ': ' . $st['count'] . ' tin đang có, giá ' . hh_price_range( $st['min'], $st['max'], $rent ) . ', thông tin pháp lý rõ ràng, cập nhật ' . wp_date( 'd/m/Y', $st['latest'] ?: time() ) . '. Đặt lịch xem nhà: ' . hoanghiep_opt( 'hh_phone' ) . '.';
+		}
+		return hh_listing_archive_title() . ', cập nhật hằng ngày, thông tin pháp lý rõ ràng. Lọc theo giá, diện tích, khu vực. Liên hệ ' . hoanghiep_opt( 'hh_phone' ) . '.';
 	}
 	return get_bloginfo( 'description' );
 }
@@ -117,6 +169,10 @@ function hh_seo_url() {
 	}
 	if ( is_post_type_archive() ) {
 		$deal = get_query_var( 'hh_deal' );
+		$term = $deal ? hh_current_deal_term() : null;
+		if ( $term ) {
+			return hh_deal_term_url( $deal, $term );
+		}
 		return $deal ? hh_deal_url( $deal ) : get_post_type_archive_link( get_query_var( 'post_type' ) );
 	}
 	if ( is_home() && get_option( 'page_for_posts' ) ) {
@@ -161,12 +217,16 @@ function hh_seo_head() {
 /** Filter / sort / search result pages: keep crawlable but out of the index. */
 add_filter( 'wp_robots', 'hh_seo_robots' );
 function hh_seo_robots( $robots ) {
-	foreach ( array( 'tk', 'gia', 'dt', 'pn', 'huong', 'sx', 'tt', 'lien-he' ) as $var ) {
+	foreach ( array( 'tk', 'gia', 'dt', 'pn', 'huong', 'sx', 'tt', 'lien-he', 'khu-vuc', 'loai-bds' ) as $var ) {
 		if ( isset( $_GET[ $var ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 			$robots['noindex'] = true;
 			$robots['follow']  = true;
 			break;
 		}
+	}
+	if ( ( is_post_type_archive( array( 'bat-dong-san', 'du-an' ) ) || is_tax() ) && ! have_posts() ) {
+		$robots['noindex'] = true;
+		$robots['follow']  = true;
 	}
 	if ( ! is_search() && ! isset( $robots['noindex'] ) ) {
 		$robots['max-image-preview'] = 'large';
@@ -188,6 +248,32 @@ function hh_seo_image_alt( $attr, $attachment ) {
  * Structured data (schema.org JSON-LD)
  * ---------------------------------------------------------------------- */
 
+function hh_schema_person() {
+	$person = array(
+		'@type'       => 'Person',
+		'@id'         => home_url( '/#person' ),
+		'name'        => hoanghiep_opt( 'hh_person_name' ),
+		'jobTitle'    => hoanghiep_opt( 'hh_person_title' ),
+		'description' => hoanghiep_opt( 'hh_person_bio' ),
+		'url'         => home_url( '/gioi-thieu/' ),
+		'telephone'   => hoanghiep_tel(),
+		'email'       => hoanghiep_opt( 'hh_email' ),
+		'knowsLanguage' => 'vi',
+		'hasOccupation' => array(
+			'@type'          => 'Occupation',
+			'name'           => 'Môi giới, tư vấn bất động sản',
+			'occupationLocation' => array( '@type' => 'City', 'name' => 'Đà Nẵng' ),
+		),
+	);
+	if ( hoanghiep_opt( 'hh_person_company' ) ) {
+		$person['worksFor'] = array( '@type' => 'Organization', 'name' => hoanghiep_opt( 'hh_person_company' ) );
+	}
+	if ( hoanghiep_opt( 'hh_person_photo' ) ) {
+		$person['image'] = hoanghiep_opt( 'hh_person_photo' );
+	}
+	return $person;
+}
+
 function hh_schema_agent() {
 	$same_as = array_values( array_filter( array( hoanghiep_opt( 'hh_facebook' ), hoanghiep_opt( 'hh_youtube' ), hoanghiep_opt( 'hh_tiktok' ) ) ) );
 	$agent   = array(
@@ -202,7 +288,8 @@ function hh_schema_agent() {
 		'address'     => array( '@type' => 'PostalAddress', 'addressLocality' => hoanghiep_opt( 'hh_address' ), 'addressRegion' => 'Đà Nẵng', 'addressCountry' => 'VN' ),
 		'areaServed'  => array( '@type' => 'City', 'name' => 'Đà Nẵng' ),
 		'knowsLanguage' => 'vi',
-		'founder'     => array( '@type' => 'Person', 'name' => hoanghiep_opt( 'hh_person_name' ), 'jobTitle' => hoanghiep_opt( 'hh_person_title' ) ),
+		'founder'     => hh_schema_person(),
+		'knowsAbout'  => array( 'Bất động sản Đà Nẵng', 'Căn hộ', 'Căn hộ dịch vụ', 'Đất nền', 'Biệt thự', 'Shophouse', 'Vay mua nhà' ),
 	);
 	if ( hoanghiep_opt( 'hh_person_photo' ) ) {
 		$agent['image'] = hoanghiep_opt( 'hh_person_photo' );
@@ -221,6 +308,13 @@ function hh_schema_breadcrumb() {
 	if ( is_singular( 'bat-dong-san' ) ) {
 		$deal    = hh_meta( 'hh_deal' ) ?: 'ban';
 		$items[] = array( 'thue' === $deal ? 'Cho thuê' : 'Mua bán', hh_deal_url( $deal ) );
+		$areas   = get_the_terms( get_the_ID(), 'khu-vuc' );
+		if ( $areas && ! is_wp_error( $areas ) ) {
+			$items[] = array( $areas[0]->name, hh_deal_term_url( $deal, $areas[0] ) );
+		}
+	}
+	if ( is_post_type_archive( 'bat-dong-san' ) && get_query_var( 'hh_deal' ) && hh_current_deal_term() ) {
+		$items[] = array( 'ban' === get_query_var( 'hh_deal' ) ? 'Mua bán' : 'Cho thuê', hh_deal_url( get_query_var( 'hh_deal' ) ) );
 	}
 	if ( is_singular() && ! is_front_page() ) {
 		$items[] = array( get_the_title(), get_permalink() );
@@ -385,7 +479,7 @@ function hh_seo_schema() {
 			'dateModified'     => get_the_modified_date( 'c' ),
 			'mainEntityOfPage' => get_permalink(),
 			'image'            => has_post_thumbnail() ? wp_get_attachment_image_url( get_post_thumbnail_id(), 'large' ) : null,
-			'author'           => array( '@type' => 'Person', 'name' => hoanghiep_opt( 'hh_person_name' ), 'url' => home_url( '/gioi-thieu/' ) ),
+			'author'           => hh_schema_person(),
 			'publisher'        => array( '@id' => home_url( '/#agent' ) ),
 			'inLanguage'       => 'vi-VN',
 		);
@@ -393,16 +487,7 @@ function hh_seo_schema() {
 		$graph[] = array(
 			'@type'      => 'ProfilePage',
 			'url'        => get_permalink(),
-			'mainEntity' => array(
-				'@type'       => 'Person',
-				'name'        => hoanghiep_opt( 'hh_person_name' ),
-				'jobTitle'    => hoanghiep_opt( 'hh_person_title' ),
-				'description' => hoanghiep_opt( 'hh_person_bio' ),
-				'telephone'   => hoanghiep_tel(),
-				'email'       => hoanghiep_opt( 'hh_email' ),
-				'worksFor'    => array( '@id' => home_url( '/#agent' ) ),
-				'image'       => hoanghiep_opt( 'hh_person_photo' ) ?: null,
-			),
+			'mainEntity' => hh_schema_person(),
 		);
 	}
 
@@ -415,6 +500,13 @@ function hh_seo_schema() {
 		if ( $list ) {
 			$graph[] = array( '@type' => 'ItemList', 'name' => wp_get_document_title(), 'itemListElement' => $list );
 		}
+	}
+
+	if ( ( is_post_type_archive( 'bat-dong-san' ) || is_tax( 'loai-bds' ) ) && ! array_intersect( array_keys( $_GET ), array( 'tk', 'gia', 'dt', 'pn', 'huong', 'sx', 'khu-vuc', 'loai-bds' ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+		$deal    = get_query_var( 'hh_deal' );
+		$term    = hh_current_deal_term();
+		$place   = $term && 'khu-vuc' === $term->taxonomy ? $term->name . ', Đà Nẵng' : 'Đà Nẵng';
+		$graph[] = hh_schema_faq( hh_listing_faq( hh_listing_stats(), $deal, $place, hh_lcfirst( hh_listing_archive_title() ) ) );
 	}
 
 	$graph[] = hh_schema_breadcrumb();
@@ -445,6 +537,38 @@ function hh_seo_robots_txt( $output, $public ) {
 	return $out;
 }
 
+/** Sitemap of SEO landing pages: /mua-ban/{khu-vuc|loai}/, /cho-thue/{…}/. */
+add_action( 'init', 'hh_seo_register_sitemap', 20 );
+function hh_seo_register_sitemap() {
+	if ( ! class_exists( 'WP_Sitemaps_Provider' ) || ! function_exists( 'wp_register_sitemap_provider' ) ) {
+		return;
+	}
+	if ( ! class_exists( 'HH_Landing_Sitemap' ) ) {
+		class HH_Landing_Sitemap extends WP_Sitemaps_Provider {
+			public function __construct() {
+				$this->name        = 'nhadat';
+				$this->object_type = 'nhadat';
+			}
+			public function get_url_list( $page_num, $object_subtype = '' ) {
+				$urls = array();
+				foreach ( array( 'ban', 'thue' ) as $deal ) {
+					$urls[] = array( 'loc' => hh_deal_url( $deal ) );
+					foreach ( array( 'khu-vuc', 'loai-bds' ) as $tax ) {
+						foreach ( hh_deal_landing_terms( $deal, $tax ) as list( $term ) ) {
+							$urls[] = array( 'loc' => hh_deal_term_url( $deal, $term ) );
+						}
+					}
+				}
+				return $urls;
+			}
+			public function get_max_num_pages( $object_subtype = '' ) {
+				return 1;
+			}
+		}
+	}
+	wp_register_sitemap_provider( 'nhadat', new HH_Landing_Sitemap() );
+}
+
 /* -------------------------------------------------------------------------
  * /llms.txt – bản tóm tắt website dạng Markdown cho ChatGPT & AI khác
  * ---------------------------------------------------------------------- */
@@ -463,6 +587,8 @@ function hh_seo_llms_txt( $wp ) {
 		'',
 		'> ' . hoanghiep_opt( 'hh_person_bio' ),
 		'',
+		'- Đơn vị đang công tác: ' . hoanghiep_opt( 'hh_person_company' ),
+		'- Kinh nghiệm: ' . implode( ' → ', wp_list_pluck( hoanghiep_career(), 0 ) ),
 		'- Khu vực hoạt động: ' . ( false !== mb_stripos( hoanghiep_opt( 'hh_address' ), 'Đà Nẵng' ) ? hoanghiep_opt( 'hh_address' ) : 'Đà Nẵng (' . hoanghiep_opt( 'hh_address' ) . ')' ),
 		'- Hotline / Zalo: ' . hoanghiep_opt( 'hh_phone' ),
 		'- Email: ' . hoanghiep_opt( 'hh_email' ),
@@ -496,6 +622,12 @@ function hh_seo_llms_txt( $wp ) {
 		$lines[] = '';
 		$lines[] = '## ' . $title;
 		$lines[] = '';
+		foreach ( array( 'khu-vuc', 'loai-bds' ) as $tax ) {
+			foreach ( hh_deal_landing_terms( $deal, $tax ) as list( $term, $n ) ) {
+				$label   = 'khu-vuc' === $tax ? ( 'ban' === $deal ? 'Nhà đất bán ' : 'Nhà đất cho thuê ' ) . $term->name : ( 'ban' === $deal ? 'Bán ' : 'Cho thuê ' ) . mb_strtolower( $term->name );
+				$lines[] = '- [' . $label . ', Đà Nẵng](' . hh_deal_term_url( $deal, $term ) . '): ' . $n . ' tin';
+			}
+		}
 		$posts   = get_posts( array( 'post_type' => 'bat-dong-san', 'numberposts' => 30, 'meta_key' => 'hh_deal', 'meta_value' => $deal ) ); // phpcs:ignore
 		foreach ( $posts as $p ) {
 			$facts   = array_filter(

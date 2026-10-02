@@ -4,7 +4,17 @@ get_header();
 $deal   = get_query_var( 'hh_deal' );
 $deal   = in_array( $deal, array( 'ban', 'thue' ), true ) ? $deal : '';
 $action = $deal ? hh_deal_url( $deal ) : get_post_type_archive_link( 'bat-dong-san' );
-$cur    = static fn( $k ) => sanitize_text_field( (string) get_query_var( $k ) );
+$landing = hh_current_deal_term();
+$cur    = static function ( $k ) use ( $landing ) {
+	$v = sanitize_text_field( (string) get_query_var( $k ) );
+	if ( '' === $v && $landing && $landing->taxonomy === $k ) {
+		$v = $landing->slug;
+	}
+	return $v;
+};
+$stats  = hh_listing_stats();
+$place  = $landing && 'khu-vuc' === $landing->taxonomy ? $landing->name . ', Đà Nẵng' : 'Đà Nẵng';
+$what   = hh_lcfirst( hh_listing_archive_title() );
 
 $selects = array(
 	'khu-vuc'  => array( 'Khu vực', wp_list_pluck( get_terms( array( 'taxonomy' => 'khu-vuc', 'hide_empty' => false ) ) ?: array(), 'name', 'slug' ) ),
@@ -19,8 +29,22 @@ global $wp_query;
 ?>
 <div class="page-head">
 	<div class="container">
-		<p class="breadcrumb"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Trang chủ</a> / <?php echo esc_html( hh_listing_archive_title() ); ?></p>
+		<p class="breadcrumb">
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Trang chủ</a> /
+			<?php if ( $deal && $landing ) : ?>
+				<a href="<?php echo esc_url( hh_deal_url( $deal ) ); ?>"><?php echo 'ban' === $deal ? 'Mua bán' : 'Cho thuê'; ?></a> / <?php echo esc_html( $landing->name ); ?>
+			<?php else : ?>
+				<?php echo esc_html( hh_listing_archive_title() ); ?>
+			<?php endif; ?>
+		</p>
 		<h1 class="page-head__title"><?php echo esc_html( hh_listing_archive_title() ); ?></h1>
+		<p class="page-head__lead">
+			<?php if ( $stats['count'] ) : ?>
+				Hiện có <strong><?php echo (int) $stats['count']; ?></strong> tin <?php echo esc_html( 'thue' === $deal ? 'cho thuê' : ( 'ban' === $deal ? 'bán' : 'nhà đất' ) ); ?> tại <?php echo esc_html( $place ); ?><?php if ( $stats['min'] ) : ?>, giá <strong><?php echo esc_html( hh_price_range( $stats['min'], $stats['max'], 'thue' === $deal ) ); ?></strong><?php endif; ?>. Thông tin được <?php echo esc_html( hoanghiep_opt( 'hh_person_name' ) ); ?> kiểm tra pháp lý và cập nhật ngày <?php echo esc_html( wp_date( 'd/m/Y', $stats['latest'] ?: time() ) ); ?>.
+			<?php else : ?>
+				Hiện chưa có tin phù hợp tại <?php echo esc_html( $place ); ?>. Để lại nhu cầu, Hiệp sẽ gửi sản phẩm mới nhất cho bạn.
+			<?php endif; ?>
+		</p>
 		<nav class="deal-tabs" aria-label="Hình thức">
 			<a class="<?php echo '' === $deal ? 'is-active' : ''; ?>" href="<?php echo esc_url( get_post_type_archive_link( 'bat-dong-san' ) ); ?>">Tất cả</a>
 			<a class="<?php echo 'ban' === $deal ? 'is-active' : ''; ?>" href="<?php echo esc_url( hh_deal_url( 'ban' ) ); ?>">Mua bán</a>
@@ -90,6 +114,38 @@ global $wp_query;
 				<p>Để lại nhu cầu, Hiệp sẽ tìm và gửi sản phẩm phù hợp cho bạn.</p>
 				<a class="btn btn--gold" href="#lien-he">Gửi nhu cầu</a>
 			</div>
+		<?php endif; ?>
+
+		<?php
+		// Liên kết nội bộ tới các trang đích (chuẩn SEO) cùng hình thức.
+		if ( $deal ) :
+			foreach ( array( 'khu-vuc' => 'Theo khu vực', 'loai-bds' => 'Theo loại nhà đất' ) as $tax => $heading ) :
+				$links = hh_deal_landing_terms( $deal, $tax );
+				if ( ! $links ) {
+					continue;
+				}
+				?>
+				<nav class="seo-links" aria-label="<?php echo esc_attr( $heading ); ?>">
+					<p class="seo-links__title"><?php echo esc_html( ( 'ban' === $deal ? 'Nhà đất bán ' : 'Cho thuê ' ) . mb_strtolower( $heading ) ); ?></p>
+					<?php foreach ( $links as list( $t, $count ) ) : ?>
+						<a class="<?php echo $landing && $landing->term_id === $t->term_id ? 'is-active' : ''; ?>" href="<?php echo esc_url( hh_deal_term_url( $deal, $t ) ); ?>"><?php echo esc_html( ( 'khu-vuc' === $tax ? '' : ( 'ban' === $deal ? 'Bán ' : 'Thuê ' ) ) . ( 'khu-vuc' === $tax ? $t->name : mb_strtolower( $t->name ) ) ); ?> <span><?php echo (int) $count; ?></span></a>
+					<?php endforeach; ?>
+				</nav>
+				<?php
+			endforeach;
+		endif;
+
+		$faq = hh_listing_faq( $stats, $deal, $place, $what );
+		if ( $faq ) :
+			?>
+			<section class="block faq-block">
+				<h2 class="block__title">Câu hỏi thường gặp về <?php echo esc_html( $what ); ?></h2>
+				<div class="faq">
+					<?php foreach ( $faq as list( $q, $a ) ) : ?>
+						<details><summary><?php echo esc_html( $q ); ?></summary><p><?php echo esc_html( $a ); ?></p></details>
+					<?php endforeach; ?>
+				</div>
+			</section>
 		<?php endif; ?>
 	</div>
 </div>
