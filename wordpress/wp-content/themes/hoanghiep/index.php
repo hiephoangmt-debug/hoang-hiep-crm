@@ -2,7 +2,6 @@
 get_header();
 
 if ( is_search() ) {
-	/* translators: %s: search query */
 	$heading = sprintf( 'Kết quả tìm kiếm: “%s”', get_search_query() );
 } elseif ( is_archive() ) {
 	$heading = wp_strip_all_tags( get_the_archive_title() );
@@ -13,22 +12,25 @@ if ( is_search() ) {
 }
 ?>
 <div class="page-head">
-	<div class="container"><h1><?php echo esc_html( $heading ); ?></h1></div>
+	<div class="container">
+		<p class="breadcrumb"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Trang chủ</a> / <?php echo esc_html( $heading ); ?></p>
+		<h1 class="page-head__title"><?php echo esc_html( $heading ); ?></h1>
+	</div>
 </div>
 
 <div class="container section">
 	<?php if ( have_posts() ) : ?>
-		<div class="grid">
+		<div class="grid grid--3">
 			<?php
 			while ( have_posts() ) :
 				the_post();
-				get_template_part( 'bat-dong-san' === get_post_type() ? 'template-parts/property-card' : 'template-parts/post-card' );
+				get_template_part( 'template-parts/card' );
 			endwhile;
 			?>
 		</div>
 		<?php the_posts_pagination( array( 'prev_text' => '‹', 'next_text' => '›' ) ); ?>
 	<?php else : ?>
-		<p class="muted">Chưa có nội dung.</p>
+		<p class="empty">Chưa có nội dung.</p>
 	<?php endif; ?>
 </div>
 <?php

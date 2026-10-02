@@ -1,0 +1,68 @@
+<?php
+/**
+ * Trang "Giới thiệu" – hồ sơ cá nhân của Hiệp.
+ * Nội dung soạn trong trang Giới thiệu sẽ hiển thị ở phần "Câu chuyện".
+ */
+get_header();
+
+$name  = hoanghiep_opt( 'hh_person_name' );
+$photo = hoanghiep_opt( 'hh_person_photo' );
+$stats = hoanghiep_stats();
+?>
+<section class="profile-hero">
+	<div class="container profile-hero__grid">
+		<div class="profile-hero__photo">
+			<?php if ( $photo ) : ?>
+				<img src="<?php echo esc_url( $photo ); ?>" alt="<?php echo esc_attr( $name ); ?>">
+			<?php else : ?>
+				<span class="about-home__initials"><?php echo esc_html( hh_initials( $name ) ); ?></span>
+			<?php endif; ?>
+		</div>
+		<div>
+			<p class="eyebrow eyebrow--light"><?php echo esc_html( hoanghiep_opt( 'hh_person_title' ) ); ?></p>
+			<h1 class="display display--xl"><?php echo esc_html( $name ); ?></h1>
+			<p class="profile-hero__slogan">“<?php echo esc_html( hoanghiep_opt( 'hh_person_slogan' ) ); ?>”</p>
+			<p class="lead"><?php echo esc_html( hoanghiep_opt( 'hh_person_bio' ) ); ?></p>
+			<?php if ( $stats ) : ?>
+				<dl class="stats stats--light">
+					<?php foreach ( $stats as list( $num, $label ) ) : ?>
+						<div><dt><?php echo esc_html( $num ); ?></dt><dd><?php echo esc_html( $label ); ?></dd></div>
+					<?php endforeach; ?>
+				</dl>
+			<?php endif; ?>
+			<div class="hero__actions">
+				<a class="btn btn--gold" href="tel:<?php echo esc_attr( hoanghiep_tel() ); ?>"><?php echo hh_icon( 'phone' ); // phpcs:ignore ?> <?php echo esc_html( hoanghiep_opt( 'hh_phone' ) ); ?></a>
+				<a class="btn btn--ghost" href="https://zalo.me/<?php echo esc_attr( hoanghiep_tel( hoanghiep_opt( 'hh_zalo' ) ) ); ?>" target="_blank" rel="noopener">Kết bạn Zalo</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<?php while ( have_posts() ) : the_post(); ?>
+	<?php if ( get_the_content() ) : ?>
+		<section class="section">
+			<div class="container narrow">
+				<p class="eyebrow">Câu chuyện</p>
+				<div class="entry-content"><?php the_content(); ?></div>
+			</div>
+		</section>
+	<?php endif; ?>
+<?php endwhile; ?>
+
+<section class="section section--tint">
+	<div class="container">
+		<?php hh_section_head( 'Dịch vụ', 'Hiệp có thể giúp gì cho bạn?' ); ?>
+		<div class="services">
+			<div class="service"><?php echo hh_icon( 'building' ); // phpcs:ignore ?><h3>Tư vấn dự án mới</h3><p>Phân tích vị trí, chủ đầu tư, pháp lý và chính sách để chọn căn phù hợp nhất.</p></div>
+			<div class="service"><?php echo hh_icon( 'handshake' ); // phpcs:ignore ?><h3>Mua bán nhà đất</h3><p>Tìm nguồn hàng chính chủ, thẩm định giá và đàm phán giá tốt.</p></div>
+			<div class="service"><?php echo hh_icon( 'search' ); // phpcs:ignore ?><h3>Cho thuê &amp; tìm thuê</h3><p>Căn hộ, nhà phố, mặt bằng kinh doanh – đúng nhu cầu, đúng ngân sách.</p></div>
+			<div class="service"><?php echo hh_icon( 'shield' ); // phpcs:ignore ?><h3>Hỗ trợ pháp lý</h3><p>Kiểm tra giấy tờ, công chứng, sang tên, hỗ trợ vay ngân hàng.</p></div>
+			<div class="service"><?php echo hh_icon( 'file' ); // phpcs:ignore ?><h3>Ký gửi bất động sản</h3><p>Nhận ký gửi bán / cho thuê, chụp ảnh và quảng bá chuyên nghiệp.</p></div>
+			<div class="service"><?php echo hh_icon( 'star' ); // phpcs:ignore ?><h3>Tư vấn đầu tư</h3><p>Đánh giá dòng tiền, tiềm năng tăng giá và rủi ro trước khi xuống tiền.</p></div>
+		</div>
+	</div>
+</section>
+
+<?php get_template_part( 'template-parts/cta' ); ?>
+<?php
+get_footer();

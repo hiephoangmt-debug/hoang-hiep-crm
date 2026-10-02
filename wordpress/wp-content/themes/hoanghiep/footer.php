@@ -1,23 +1,34 @@
 </main>
 <footer class="site-footer">
 	<div class="container site-footer__grid">
-		<div>
-			<h3><?php bloginfo( 'name' ); ?></h3>
-			<p><?php bloginfo( 'description' ); ?></p>
+		<div class="site-footer__brand">
+			<p class="site-footer__name"><?php echo esc_html( hoanghiep_opt( 'hh_person_name' ) ); ?></p>
+			<p class="site-footer__title"><?php echo esc_html( hoanghiep_opt( 'hh_person_title' ) ); ?></p>
+			<p><?php echo esc_html( hoanghiep_opt( 'hh_person_slogan' ) ); ?></p>
+			<ul class="socials">
+				<?php
+				foreach ( array( 'hh_facebook' => 'Facebook', 'hh_youtube' => 'YouTube', 'hh_tiktok' => 'TikTok' ) as $key => $label ) :
+					if ( hoanghiep_opt( $key ) ) :
+						?>
+						<li><a href="<?php echo esc_url( hoanghiep_opt( $key ) ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $label ); ?></a></li>
+						<?php
+					endif;
+				endforeach;
+				?>
+				<li><a href="https://zalo.me/<?php echo esc_attr( hoanghiep_tel( hoanghiep_opt( 'hh_zalo' ) ) ); ?>" target="_blank" rel="noopener">Zalo</a></li>
+			</ul>
 		</div>
 		<div>
 			<h3>Liên hệ</h3>
 			<ul class="site-footer__contact">
-				<li>📍 <?php echo esc_html( hoanghiep_opt( 'hh_address' ) ); ?></li>
-				<li>📞 <a href="tel:<?php echo esc_attr( hoanghiep_tel( hoanghiep_opt( 'hh_phone' ) ) ); ?>"><?php echo esc_html( hoanghiep_opt( 'hh_phone' ) ); ?></a></li>
-				<li>✉️ <a href="mailto:<?php echo esc_attr( hoanghiep_opt( 'hh_email' ) ); ?>"><?php echo esc_html( hoanghiep_opt( 'hh_email' ) ); ?></a></li>
-				<?php if ( hoanghiep_opt( 'hh_facebook' ) ) : ?>
-					<li>👍 <a href="<?php echo esc_url( hoanghiep_opt( 'hh_facebook' ) ); ?>" target="_blank" rel="noopener">Facebook</a></li>
-				<?php endif; ?>
+				<li><?php echo hh_icon( 'phone' ); // phpcs:ignore ?> <a href="tel:<?php echo esc_attr( hoanghiep_tel() ); ?>"><?php echo esc_html( hoanghiep_opt( 'hh_phone' ) ); ?></a></li>
+				<li><?php echo hh_icon( 'mail' ); // phpcs:ignore ?> <a href="mailto:<?php echo esc_attr( hoanghiep_opt( 'hh_email' ) ); ?>"><?php echo esc_html( hoanghiep_opt( 'hh_email' ) ); ?></a></li>
+				<li><?php echo hh_icon( 'pin' ); // phpcs:ignore ?> <?php echo esc_html( hoanghiep_opt( 'hh_address' ) ); ?></li>
+				<li><?php echo hh_icon( 'clock' ); // phpcs:ignore ?> <?php echo esc_html( hoanghiep_opt( 'hh_hours' ) ); ?></li>
 			</ul>
 		</div>
 		<div>
-			<h3>Liên kết</h3>
+			<h3>Danh mục</h3>
 			<?php
 			wp_nav_menu(
 				array(
@@ -29,15 +40,41 @@
 			);
 			?>
 		</div>
+		<div>
+			<h3>Khu vực</h3>
+			<ul>
+				<?php
+				$areas = get_terms( array( 'taxonomy' => 'khu-vuc', 'hide_empty' => true, 'number' => 8 ) );
+				if ( $areas && ! is_wp_error( $areas ) ) :
+					foreach ( $areas as $t ) :
+						?>
+						<li><a href="<?php echo esc_url( get_term_link( $t ) ); ?>"><?php echo esc_html( $t->name ); ?></a></li>
+						<?php
+					endforeach;
+				else :
+					?>
+					<li>Đang cập nhật</li>
+				<?php endif; ?>
+			</ul>
+		</div>
 	</div>
 	<div class="site-footer__bottom">
-		<div class="container">© <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?> · <a href="<?php echo esc_url( home_url( '/' ) ); ?>">hiephoangmt.com</a></div>
+		<div class="container">© <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php echo esc_html( hoanghiep_opt( 'hh_person_name' ) ); ?> · hiephoangmt.com</div>
 	</div>
 </footer>
 
-<div class="float-contact">
-	<a class="float-contact__btn float-contact__btn--zalo" href="https://zalo.me/<?php echo esc_attr( hoanghiep_tel( hoanghiep_opt( 'hh_zalo' ) ) ); ?>" target="_blank" rel="noopener" aria-label="Chat Zalo">Zalo</a>
-	<a class="float-contact__btn float-contact__btn--call" href="tel:<?php echo esc_attr( hoanghiep_tel( hoanghiep_opt( 'hh_phone' ) ) ); ?>" aria-label="Gọi điện">📞</a>
+<div class="contact-dock" aria-label="Liên hệ nhanh">
+	<a class="contact-dock__btn contact-dock__btn--call" href="tel:<?php echo esc_attr( hoanghiep_tel() ); ?>"><?php echo hh_icon( 'phone' ); // phpcs:ignore ?><span>Gọi ngay</span></a>
+	<a class="contact-dock__btn contact-dock__btn--zalo" href="https://zalo.me/<?php echo esc_attr( hoanghiep_tel( hoanghiep_opt( 'hh_zalo' ) ) ); ?>" target="_blank" rel="noopener"><b>Zalo</b><span>Chat Zalo</span></a>
+	<a class="contact-dock__btn contact-dock__btn--form" href="<?php echo esc_url( home_url( '/lien-he/' ) ); ?>" data-form-link><?php echo hh_icon( 'mail' ); // phpcs:ignore ?><span>Nhận tư vấn</span></a>
+</div>
+
+<div class="lightbox" hidden>
+	<button class="lightbox__close" aria-label="Đóng">×</button>
+	<button class="lightbox__prev" aria-label="Ảnh trước">‹</button>
+	<img alt="">
+	<button class="lightbox__next" aria-label="Ảnh sau">›</button>
+	<p class="lightbox__count"></p>
 </div>
 <?php wp_footer(); ?>
 </body>

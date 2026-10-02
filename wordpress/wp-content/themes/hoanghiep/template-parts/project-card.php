@@ -1,0 +1,33 @@
+<?php
+$status = hh_option_label( hh_project_schema(), 'hh_p_status', hh_meta( 'hh_p_status' ) );
+$areas  = get_the_terms( get_the_ID(), 'khu-vuc' );
+$place  = $areas && ! is_wp_error( $areas ) ? $areas[0]->name : hh_meta( 'hh_p_address' );
+?>
+<article class="project-card">
+	<a class="project-card__media" href="<?php the_permalink(); ?>">
+		<?php if ( has_post_thumbnail() ) : ?>
+			<?php the_post_thumbnail( 'hh-card', array( 'loading' => 'lazy' ) ); ?>
+		<?php else : ?>
+			<span class="media-placeholder"><?php echo hh_icon( 'building' ); // phpcs:ignore ?></span>
+		<?php endif; ?>
+		<?php hh_pill( $status, hh_meta( 'hh_p_status' ) ); ?>
+	</a>
+	<div class="project-card__body">
+		<?php if ( hh_meta( 'hh_p_developer' ) ) : ?>
+			<p class="project-card__dev"><?php echo esc_html( hh_meta( 'hh_p_developer' ) ); ?></p>
+		<?php endif; ?>
+		<h3 class="project-card__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+		<?php if ( $place ) : ?>
+			<p class="meta-line"><?php echo hh_icon( 'pin' ); // phpcs:ignore ?> <?php echo esc_html( $place ); ?></p>
+		<?php endif; ?>
+		<ul class="project-card__facts">
+			<?php if ( hh_meta( 'hh_p_scale' ) ) : ?><li><span>Quy mô</span><?php echo esc_html( hh_meta( 'hh_p_scale' ) ); ?></li><?php endif; ?>
+			<?php if ( hh_meta( 'hh_p_unit_area' ) ) : ?><li><span>Diện tích</span><?php echo esc_html( hh_meta( 'hh_p_unit_area' ) ); ?></li><?php endif; ?>
+			<?php if ( hh_meta( 'hh_p_handover' ) ) : ?><li><span>Bàn giao</span><?php echo esc_html( hh_meta( 'hh_p_handover' ) ); ?></li><?php endif; ?>
+		</ul>
+		<div class="project-card__foot">
+			<p class="price"><?php echo esc_html( hh_project_price() ); ?></p>
+			<a class="link-arrow" href="<?php the_permalink(); ?>">Chi tiết <?php echo hh_icon( 'arrow' ); // phpcs:ignore ?></a>
+		</div>
+	</div>
+</article>

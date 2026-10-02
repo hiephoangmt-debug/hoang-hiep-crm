@@ -5,9 +5,12 @@ while ( have_posts() ) :
 	the_post();
 	?>
 	<div class="page-head">
-		<div class="container"><h1><?php the_title(); ?></h1></div>
+		<div class="container">
+			<p class="breadcrumb"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Trang chủ</a> / <?php the_title(); ?></p>
+			<h1 class="page-head__title"><?php the_title(); ?></h1>
+		</div>
 	</div>
-	<div class="container section entry-content narrow">
+	<div class="container section narrow entry-content" id="lien-he">
 		<?php the_content(); ?>
 	</div>
 	<?php
