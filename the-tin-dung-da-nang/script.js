@@ -83,9 +83,9 @@
     var now = Date.now();
     if (lastPing[loai] && now - lastPing[loai] < 60000) return; // 1 lần/phút mỗi loại
     lastPing[loai] = now;
-    var where = a.closest('header, .hero, .mobile-bar, .float, footer, section');
+    var where = a.closest('header, .hero, .fab, footer, section');
     var key = where ? (where.id || where.className.split(' ')[0]) : '';
-    var place = { top: 'đầu trang', header: 'đầu trang', hero: 'màn đầu', 'mobile-bar': 'thanh dưới', float: 'nút nổi', 'lien-he': 'phần liên hệ', footer: 'chân trang' }[key] || key;
+    var place = { top: 'đầu trang', header: 'đầu trang', hero: 'màn đầu', fab: 'nút nổi bên cạnh', 'lien-he': 'phần liên hệ', footer: 'chân trang' }[key] || key;
     var body = JSON.stringify({ loai: loai, source: location.hostname || 'www.the-tin-dung-da-nang.com',
       service: 'Nút ' + (loai === 'goi' ? 'Gọi' : 'Zalo') + (place ? ' – ' + place : '') });
     try {

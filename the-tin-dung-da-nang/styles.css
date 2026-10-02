@@ -189,10 +189,6 @@ img { max-width: 100%; }
 .footer__legal { max-width: 720px; margin: 10px auto; font-size: .82rem; }
 
 /* Floating buttons */
-.float { position: fixed; right: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 10px; z-index: 60; }
-.float__btn { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; text-decoration: none; color: #fff; font-weight: 800; box-shadow: 0 6px 18px rgba(0,0,0,.25); font-size: .85rem; }
-.float__btn--zalo { background: #0068ff; }
-.float__btn--call { background: #e53935; font-size: 1.4rem; animation: pulse 1.6s infinite; }
 @keyframes pulse {
   0% { box-shadow: 0 0 0 0 rgba(229,57,53,.6); }
   70% { box-shadow: 0 0 0 16px rgba(229,57,53,0); }
@@ -234,3 +230,30 @@ img { max-width: 100%; }
 .facts b { color: var(--primary-dark); }
 .updated { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 20px; }
 section[id] { scroll-margin-top: 72px; }
+
+/* Nút Zalo / Gọi nổi bên cạnh màn hình */
+.fab { position: fixed; right: 16px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 80; display: grid; gap: 14px; justify-items: end; }
+.fab__btn { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.fab__icon { position: relative; width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: .9rem; box-shadow: 0 8px 20px rgba(0,0,0,.28); }
+.fab__icon::before, .fab__icon::after { content: ""; position: absolute; inset: 0; border-radius: 50%; animation: fab-ring 1.8s ease-out infinite; z-index: -1; }
+.fab__icon::after { animation-delay: .9s; }
+.fab__label { background: #fff; color: #1c2433; font-weight: 700; font-size: .9rem; padding: 7px 12px; border-radius: 999px; box-shadow: 0 4px 14px rgba(0,0,0,.18); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.fab__btn--zalo .fab__icon { background: #0068ff; animation: fab-bob 2.4s ease-in-out infinite; }
+.fab__btn--zalo .fab__icon::before, .fab__btn--zalo .fab__icon::after { background: rgba(0,104,255,.45); }
+.fab__btn--call .fab__icon { background: #e53935; }
+.fab__btn--call .fab__icon svg { animation: fab-shake 1.2s ease-in-out infinite; }
+.fab__btn--call .fab__icon::before, .fab__btn--call .fab__icon::after { background: rgba(229,57,53,.45); }
+.fab__btn--call .fab__label { color: #c62828; }
+.fab__btn:hover .fab__icon, .fab__btn:focus-visible .fab__icon { transform: scale(1.06); }
+.fab__btn:focus-visible { outline: none; }
+.fab__btn:focus-visible .fab__label { outline: 3px solid #1c2433; }
+@keyframes fab-ring { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(1.8); opacity: 0; } }
+@keyframes fab-shake { 0%, 50%, 100% { transform: rotate(0); } 10%, 30% { transform: rotate(-18deg); } 20%, 40% { transform: rotate(18deg); } }
+@keyframes fab-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@media (max-width: 760px) {
+  .fab { right: 12px; gap: 12px; }
+  .fab__icon { width: 52px; height: 52px; }
+  .fab__label { font-size: .8rem; padding: 5px 10px; }
+  .fab__btn--zalo .fab__label { display: none; }
+  .footer { padding-bottom: 150px; }
+}

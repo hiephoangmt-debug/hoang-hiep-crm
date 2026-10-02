@@ -562,9 +562,17 @@
   </footer>
 
   <!-- Floating contact buttons -->
-  <div class="float">
-    <a href="https://zalo.me/0909669325" class="float__btn float__btn--zalo" target="_blank" rel="noopener" aria-label="Chat Zalo">Zalo</a>
-    <a href="tel:0909669325" class="float__btn float__btn--call" aria-label="Gọi điện">📞</a>
+
+  <!-- Nút Zalo / Gọi nổi bên cạnh -->
+  <div class="fab" role="group" aria-label="Liên hệ nhanh">
+    <a class="fab__btn fab__btn--zalo" href="https://zalo.me/0909669325" target="_blank" rel="noopener" aria-label="Nhắn Zalo 0909 669 325">
+      <span class="fab__label">Nhắn Zalo</span>
+      <span class="fab__icon">Zalo</span>
+    </a>
+    <a class="fab__btn fab__btn--call" href="tel:0909669325" aria-label="Gọi 0909 669 325">
+      <span class="fab__label">0909 669 325</span>
+      <span class="fab__icon"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.6a1 1 0 0 1-.25 1z"/></svg></span>
+    </a>
   </div>
 
   <script src="script.js"></script>
