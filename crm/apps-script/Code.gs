@@ -91,6 +91,7 @@ function doPost(e) {
   try {
     var data = parseLeadPayload_(e);
     if (data.website) return json_({ ok: true }); // bẫy bot (honeypot)
+    if (data.loai === 'zalo' || data.loai === 'goi') return json_({ ok: logClick_(data) });
     var lead = saveLead_(data);
     notifyNewLead_(lead);
     return json_({ ok: true, id: lead.id });
@@ -119,7 +120,8 @@ function parseLeadPayload_(e) {
     dich_vu: pick('dich_vu', 'service', 'dichvu'),
     ghi_chu: pick('ghi_chu', 'note', 'message', 'noi_dung', 'content'),
     nguon: pick('nguon', 'source', 'domain', 'url') || 'website',
-    website: pick('website') // honeypot: người thật để trống
+    website: pick('website'), // honeypot: người thật để trống
+    loai: pick('loai', 'event') // 'zalo' | 'goi' khi khách bấm nút Zalo / Gọi trên web
   };
 }
 
@@ -143,6 +145,21 @@ function saveLead_(d) {
     appendObj_('LienHe', lead);
     return lead;
   });
+}
+
+/** Khách bấm nút Zalo / Gọi trên web: chưa có SĐT, ghi lại để biết có khách đang liên hệ. */
+var CLICK_STATUS = { zalo: 'Bấm Zalo', goi: 'Bấm gọi' };
+function logClick_(d) {
+  var cache = CacheService.getScriptCache();
+  var n = Number(cache.get('clicks_hour') || 0);
+  if (n >= 300) return false; // chặn spam
+  cache.put('clicks_hour', String(n + 1), 3600);
+  var nguon = d.nguon.replace(/^https?:\/\//, '').replace(/\/.*$/, '').slice(0, 100);
+  withLock_(function () {
+    appendObj_('LienHe', { id: newId_(), thoi_gian: nowStr_(), ten: '', sdt: '', dich_vu: d.dich_vu.slice(0, 100),
+      ghi_chu: '', nguon: nguon, trang_thai: CLICK_STATUS[d.loai], khach_id: '' });
+  });
+  return true;
 }
 
 function notifyNewLead_(lead) {
@@ -259,7 +276,8 @@ function apiDashboard_() {
     month: summarize_(tx),
     todayTx: summarize_(tx.filter(function (t) { return t.ngay === today; })),
     newLeads: leads.filter(function (l) { return l.trang_thai === 'Mới'; }).reverse().slice(0, 20),
-    leadsThisMonth: leads.filter(function (l) { return String(l.thoi_gian).slice(0, 10) >= monthFrom; }).length,
+    clicksToday: leads.filter(function (l) { return !l.sdt && String(l.thoi_gian).slice(0, 10) === today; }).reverse(),
+    leadsThisMonth: leads.filter(function (l) { return l.sdt && String(l.thoi_gian).slice(0, 10) >= monthFrom; }).length,
     remindToday: rem.filter(function (r) { return r.nhac_ngay <= today && r.trang_thai === 'Chưa báo'; }),
     remindSoon: rem.filter(function (r) { return r.nhac_ngay > today && r.trang_thai === 'Chưa báo'; })
   };
@@ -694,7 +712,8 @@ function apiReport_(p) {
     var s = summarize_(t);
     s.label = pr.label; s.from = pr.from; s.to = pr.to;
     s.khach_moi = customers.filter(function (c) { return inRange(String(c.tao_luc).slice(0, 10), pr.from, pr.to); }).length;
-    s.lead_web = leads.filter(function (l) { return inRange(String(l.thoi_gian).slice(0, 10), pr.from, pr.to); }).length;
+    s.lead_web = leads.filter(function (l) { return l.sdt && inRange(String(l.thoi_gian).slice(0, 10), pr.from, pr.to); }).length;
+    s.bam_web = leads.filter(function (l) { return !l.sdt && inRange(String(l.thoi_gian).slice(0, 10), pr.from, pr.to); }).length;
     return s;
   });
   var all = { from: periods[0].from, to: periods[periods.length - 1].to };
@@ -702,6 +721,7 @@ function apiReport_(p) {
   var total = summarize_(allTx);
   total.khach_moi = rows.reduce(function (a, r) { return a + r.khach_moi; }, 0);
   total.lead_web = rows.reduce(function (a, r) { return a + r.lead_web; }, 0);
+  total.bam_web = rows.reduce(function (a, r) { return a + r.bam_web; }, 0);
   return {
     type: type, year: year, month: month, rows: rows, total: total,
     byService: groupBy_(allTx, 'dich_vu'), byMachine: groupBy_(allTx, 'may'),

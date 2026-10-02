@@ -239,4 +239,22 @@ test('due date on weekend / holiday shifts ±days per bank', () => {
   assert.strictEqual(r.nhac_han, '2026-04-24');
 });
 
+test('Zalo / call button clicks are logged without creating customers or emails', () => {
+  const { gas, fake, call } = fresh('2026-03-02');
+  const post = (obj) => JSON.parse(gas.doPost({ postData: { contents: JSON.stringify(obj) }, parameter: {} }).content);
+  assert.strictEqual(post({ loai: 'zalo', source: 'www.dichvuthetindungdanang.com', service: 'Nút Zalo đầu trang' }).ok, true);
+  assert.strictEqual(post({ loai: 'goi', source: 'https://www.the-tin-dung-da-nang.com/' }).ok, true);
+  assert.strictEqual(call('listCustomers').length, 0);
+  assert.strictEqual(fake.sentMail.length, 0);
+  const leads = call('listLeads');
+  assert.strictEqual(JSON.stringify(leads.map((l) => l.trang_thai).sort()), JSON.stringify(['Bấm Zalo', 'Bấm gọi']));
+  const d = call('dashboard');
+  assert.strictEqual(d.clicksToday.length, 2);
+  assert.strictEqual(d.leadsThisMonth, 0);
+  assert.strictEqual(d.clicksToday.find((c) => c.trang_thai === 'Bấm gọi').nguon, 'www.the-tin-dung-da-nang.com');
+  const rp = call('report', { type: 'month', year: 2026 });
+  assert.strictEqual(rp.rows[2].bam_web, 2);
+  assert.strictEqual(rp.rows[2].lead_web, 0);
+});
+
 console.log(`\n${passed} test(s) passed`);

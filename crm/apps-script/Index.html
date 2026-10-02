@@ -170,6 +170,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       <div class="kpis" id="home-kpis"></div>
       <div class="row row--between"><h2>📞 Cần báo khách hôm nay</h2><button class="btn btn--ghost btn--sm" data-goto="remind">Xem lịch</button></div>
       <div id="home-remind"></div>
+      <h2>📲 Khách bấm Zalo / Gọi trên web hôm nay</h2>
+      <div id="home-clicks"></div>
       <div class="row row--between"><h2>🌐 Khách mới từ website</h2><button class="btn btn--ghost btn--sm" data-goto="customers">Tất cả khách</button></div>
       <div id="home-leads"></div>
       <h2>⏭️ Sắp tới (7 ngày)</h2>
@@ -231,7 +233,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       <div id="leads-wrap" class="hidden">
         <div class="filters">
           <select id="lead-status">
-            <option value="">Mọi trạng thái</option><option>Mới</option><option>Đã liên hệ</option><option>Đã chốt</option><option>Không tiềm năng</option>
+            <option value="">Mọi trạng thái</option><option>Mới</option><option>Đã liên hệ</option><option>Đã chốt</option><option>Không tiềm năng</option><option>Bấm Zalo</option><option>Bấm gọi</option>
           </select>
           <select id="lead-source"><option value="">Mọi website</option></select>
         </div>
@@ -269,7 +271,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
           <label class="f">Đáo hạn: bắt đầu nhắc trước hạn (ngày)<input type="number" id="set-from" min="1" max="30"></label>
           <label class="f">Phải báo xong trước hạn (ngày)<input type="number" id="set-to" min="0" max="30"></label>
           <label class="f">Từ sao kê đến hạn thanh toán (ngày)<span class="hint">Dùng khi thẻ chưa có ngày đáo</span><input type="number" id="set-grace" min="10" max="30"></label>
-          <label class="f">Email nhận thông báo<input type="email" id="set-email"></label>
+          <label class="f">Email nhận thông báo <span class="hint">để trống = không gửi email</span><input type="email" id="set-email"></label>
           <label class="f full" style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="set-cal" style="width:auto"> Tạo sự kiện trên Google Calendar để điện thoại tự báo</label>
         </div>
         <h3>📅 Hạn rơi vào T7, CN, lễ, Tết</h3>
@@ -440,7 +442,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       '<a class="btn btn--ghost btn--sm" target="_blank" rel="noopener" href="https://zalo.me/' + esc(sdt) + '">Zalo</a>';
   }
   function statusBadge(s) {
-    var cls = { 'Khách quen': 'ok', 'Đã chốt': 'ok', 'Đã báo': 'ok', 'Mới': 'warn', 'Đang tư vấn': '', 'Đã liên hệ': '', 'Không tiềm năng': 'muted', 'Ngưng nhắc': 'muted' }[s];
+    var cls = { 'Bấm Zalo': '', 'Bấm gọi': '', 'Khách quen': 'ok', 'Đã chốt': 'ok', 'Đã báo': 'ok', 'Mới': 'warn', 'Đang tư vấn': '', 'Đã liên hệ': '', 'Không tiềm năng': 'muted', 'Ngưng nhắc': 'muted' }[s];
     return '<span class="badge' + (cls ? ' badge--' + cls : '') + '">' + esc(s) + '</span>';
   }
   function kpi(label, value, cls) { return '<div class="kpi"><span>' + esc(label) + '</span><b class="' + (cls || '') + '">' + value + '</b></div>'; }
@@ -518,10 +520,12 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         kpi('Doanh số tháng này', short(m.so_tien)) +
         kpi('Phí của mình tháng này', money(m.loi_nhuan), m.loi_nhuan >= 0 ? 'pos' : 'neg') +
         kpi('Giao dịch tháng (Đáo / Rút)', m.so_gd + ' <small class="muted">(' + m.so_dao + ' / ' + m.so_rut + ')</small>') +
-        kpi('Khách web tháng này', d.leadsThisMonth) +
+        kpi('Khách web để lại số (tháng)', d.leadsThisMonth) +
+        kpi('Bấm Zalo / Gọi hôm nay', d.clicksToday.length) +
         kpi('Hôm nay', d.todayTx.so_gd + ' GD · ' + short(d.todayTx.so_tien));
       $('#home-remind').innerHTML = d.remindToday.length ? d.remindToday.map(remindItem).join('') : '<div class="empty card">Hôm nay không có khách cần báo 🎉</div>';
       $('#home-soon').innerHTML = d.remindSoon.length ? d.remindSoon.map(remindItem).join('') : '<div class="empty card">Không có lịch trong 7 ngày tới.</div>';
+      $('#home-clicks').innerHTML = d.clicksToday.length ? d.clicksToday.slice(0, 15).map(leadItem).join('') : '<div class="empty card">Hôm nay chưa có lượt bấm Zalo / Gọi.</div>';
       $('#home-leads').innerHTML = d.newLeads.length ? d.newLeads.map(leadItem).join('') : '<div class="empty card">Chưa có khách mới từ website.</div>';
       setCount('#remind-count', d.remindToday.length);
       setCount('#lead-count', d.newLeads.length);
@@ -765,6 +769,14 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       }).join('') : '<tr><td colspan="5" class="empty">Chưa có khách.</td></tr>') + '</tbody>';
   }
   function leadItem(l) {
+    if (!l.sdt) {
+      return '<div class="item"><div class="item__head"><div>' +
+        '<div class="item__name">' + (l.trang_thai === 'Bấm gọi' ? '📞 Khách bấm Gọi' : '💬 Khách bấm Zalo') + '</div>' +
+        '<div class="item__meta">' + esc(l.nguon) + ' · ' + esc(dmy(l.thoi_gian)) + ' ' + esc(String(l.thoi_gian).slice(11, 16)) + (l.dich_vu ? ' · ' + esc(l.dich_vu) : '') + '</div>' +
+        '<div class="item__meta">Khách liên hệ trực tiếp qua ' + (l.trang_thai === 'Bấm gọi' ? 'điện thoại' : 'Zalo') + ' – kiểm tra Zalo/cuộc gọi, rồi thêm khách vào CRM.</div>' +
+        '</div>' + statusBadge(l.trang_thai) + '</div><div class="item__actions">' +
+        '<button class="btn btn--ghost btn--sm" data-act="new-customer">+ Thêm khách</button></div></div>';
+    }
     return '<div class="item ' + (l.trang_thai === 'Mới' ? 'item--due' : '') + '"><div class="item__head"><div>' +
       '<div class="item__name">' + esc(l.ten || '(không tên)') + '</div>' +
       '<div class="item__meta">' + esc(l.dich_vu || 'Chưa chọn dịch vụ') + ' · ' + esc(l.nguon) + ' · ' + esc(dmy(l.thoi_gian)) + ' ' + esc(String(l.thoi_gian).slice(11, 16)) + '</div>' +
@@ -851,18 +863,18 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     var t = r.total;
     $('#rp-kpis').innerHTML = kpi('Tổng tiền', short(t.so_tien)) + kpi('Phí khách', money(t.tien_phi)) + kpi('Phí máy', money(t.chi_phi)) +
       kpi('Phí của mình', money(t.loi_nhuan), t.loi_nhuan >= 0 ? 'pos' : 'neg') + kpi('Giao dịch (Đáo / Rút)', t.so_gd + ' (' + t.so_dao + ' / ' + t.so_rut + ')') +
-      kpi('Khách mới / từ web', t.khach_moi + ' / ' + t.lead_web);
+      kpi('Khách mới / từ web', t.khach_moi + ' / ' + t.lead_web) + kpi('Bấm Zalo / Gọi trên web', t.bam_web || 0);
     var max = Math.max.apply(null, r.rows.map(function (x) { return x.so_tien; }).concat([1]));
-    $('#rp-table').innerHTML = '<thead><tr><th>Kỳ</th><th class="num">GD (Đáo/Rút)</th><th class="num">Số tiền</th><th class="num">Phí khách</th><th class="num">Phí máy</th><th class="num">Phí của mình</th><th class="num">Khách mới</th><th class="num">Khách web</th></tr></thead><tbody>' +
+    $('#rp-table').innerHTML = '<thead><tr><th>Kỳ</th><th class="num">GD (Đáo/Rút)</th><th class="num">Số tiền</th><th class="num">Phí khách</th><th class="num">Phí máy</th><th class="num">Phí của mình</th><th class="num">Khách mới</th><th class="num">Khách web</th><th class="num">Bấm Zalo/Gọi</th></tr></thead><tbody>' +
       r.rows.map(function (x) {
         return '<tr class="click" data-from="' + x.from + '" data-to="' + x.to + '"><td data-l="Kỳ"><b>' + esc(x.label) + '</b><div class="bar"><i style="width:' + (x.so_tien / max * 100).toFixed(1) + '%"></i></div></td>' +
           '<td data-l="GD (Đáo/Rút)" class="num">' + x.so_gd + ' (' + x.so_dao + '/' + x.so_rut + ')</td>' +
           '<td data-l="Số tiền" class="num">' + money(x.so_tien) + '</td><td data-l="Phí khách" class="num">' + money(x.tien_phi) + '</td>' +
           '<td data-l="Phí máy" class="num">' + money(x.chi_phi) + '</td><td data-l="Phí của mình" class="num ' + (x.loi_nhuan >= 0 ? 'pos' : 'neg') + '">' + money(x.loi_nhuan) + '</td>' +
-          '<td data-l="Khách mới" class="num">' + x.khach_moi + '</td><td data-l="Khách web" class="num">' + x.lead_web + '</td></tr>';
+          '<td data-l="Khách mới" class="num">' + x.khach_moi + '</td><td data-l="Khách web" class="num">' + x.lead_web + '</td><td data-l="Bấm Zalo/Gọi" class="num">' + (x.bam_web || 0) + '</td></tr>';
       }).join('') + '</tbody><tfoot><tr><td data-l="">Tổng</td><td data-l="GD" class="num">' + t.so_gd + '</td><td data-l="Số tiền" class="num">' + money(t.so_tien) +
       '</td><td data-l="Phí khách" class="num">' + money(t.tien_phi) + '</td><td data-l="Phí máy" class="num">' + money(t.chi_phi) +
-      '</td><td data-l="Phí của mình" class="num">' + money(t.loi_nhuan) + '</td><td data-l="Khách mới" class="num">' + t.khach_moi + '</td><td data-l="Khách web" class="num">' + t.lead_web + '</td></tr></tfoot>';
+      '</td><td data-l="Phí của mình" class="num">' + money(t.loi_nhuan) + '</td><td data-l="Khách mới" class="num">' + t.khach_moi + '</td><td data-l="Khách web" class="num">' + t.lead_web + '</td><td data-l="Bấm Zalo/Gọi" class="num">' + (t.bam_web || 0) + '</td></tr></tfoot>';
     function group(id, list) {
       $(id).innerHTML = '<thead><tr><th></th><th class="num">GD</th><th class="num">Số tiền</th><th class="num">Phí của mình</th></tr></thead><tbody>' +
         (list.length ? list.map(function (g) {

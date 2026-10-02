@@ -61,7 +61,7 @@
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({
         name: name, phone: phone, service: form.service.value, note: note,
-        source: location.hostname, website: form.website ? form.website.value : ''
+        source: location.hostname || 'www.the-tin-dung-da-nang.com', website: form.website ? form.website.value : ''
       })
     }).then(function () {
       msg.className = 'form__msg is-ok';
@@ -73,4 +73,25 @@
       openChat(text);
     }).then(function () { btn.disabled = false; });
   });
+
+  // Khách bấm Zalo / Gọi → ghi vào CRM (mục Liên hệ từ web), không cần để lại số.
+  var lastPing = {};
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href*="zalo.me"]');
+    if (!a || !CRM_URL) return;
+    var loai = a.href.indexOf('tel:') === 0 ? 'goi' : 'zalo';
+    var now = Date.now();
+    if (lastPing[loai] && now - lastPing[loai] < 60000) return; // 1 lần/phút mỗi loại
+    lastPing[loai] = now;
+    var where = a.closest('header, .hero, .mobile-bar, .float, footer, section');
+    var key = where ? (where.id || where.className.split(' ')[0]) : '';
+    var place = { top: 'đầu trang', header: 'đầu trang', hero: 'màn đầu', 'mobile-bar': 'thanh dưới', float: 'nút nổi', 'lien-he': 'phần liên hệ', footer: 'chân trang' }[key] || key;
+    var body = JSON.stringify({ loai: loai, source: location.hostname || 'www.the-tin-dung-da-nang.com',
+      service: 'Nút ' + (loai === 'goi' ? 'Gọi' : 'Zalo') + (place ? ' – ' + place : '') });
+    try {
+      if (!(navigator.sendBeacon && navigator.sendBeacon(CRM_URL, new Blob([body], { type: 'text/plain;charset=utf-8' })))) {
+        fetch(CRM_URL, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: body });
+      }
+    } catch (err) {}
+  }, true);
 })();
