@@ -180,6 +180,8 @@ img { max-width: 100%; }
 .form__msg.is-ok { color: #13803b; }
 .form__msg.is-err { color: #c62828; }
 
+.map { width: 100%; height: 340px; border: 0; border-radius: var(--radius); margin-top: 40px; box-shadow: var(--shadow); }
+
 /* Footer */
 .footer { background: var(--dark); color: #aab6cc; padding: 36px 0 90px; text-align: center; font-size: .92rem; }
 .footer a { color: var(--accent); }
