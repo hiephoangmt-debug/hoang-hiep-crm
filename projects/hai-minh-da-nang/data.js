@@ -1,4 +1,4 @@
-// Dữ liệu MẪU – thay bằng thông tin thực tế của dự án Hải Minh.
+// Thông tin dự án theo nguồn công khai; danh sách căn và khách hàng bên dưới vẫn là dữ liệu MẪU.
 const UNIT_STATUSES = ['Trống', 'Đang giữ chỗ', 'Đã cho thuê', 'Bảo trì'];
 const UNIT_TYPES = ['Studio', '1 phòng ngủ', '2 phòng ngủ'];
 const STAGES = ['Mới', 'Đã liên hệ', 'Xem căn', 'Đàm phán', 'Đặt cọc', 'Ký hợp đồng', 'Thất bại'];
@@ -6,14 +6,14 @@ const SOURCES = ['Facebook', 'Zalo', 'Landing page', 'Giới thiệu', 'Booking/
 
 const SAMPLE_DATA = {
   project: {
-    name: 'Căn hộ dịch vụ Hải Minh',
-    address: 'Đà Nẵng (cập nhật địa chỉ cụ thể)',
-    floors: 8,
-    totalUnits: 12,
-    amenities: 'Thang máy, máy giặt riêng, dọn phòng hàng tuần, wifi, bảo vệ 24/7',
+    name: 'Khu căn hộ du lịch, thương mại dịch vụ Hải Minh',
+    address: 'Lô A2-1 & A2-2, trục Võ Nguyên Giáp – Trường Sa, P. Ngũ Hành Sơn, Đà Nẵng',
+    floors: 30,
+    totalUnits: 400,
+    amenities: 'Condotel ~400 căn, khối thương mại dịch vụ; cao ~117m; sàn XD >45.000 m²; đối diện Silver Shores',
     hotline: '',
     manager: 'Hoàng Hiệp',
-    notes: '',
+    notes: 'CĐT: Công ty TNHH Quản lý và Dịch vụ Hạ tầng Kỹ thuật Miền Trung. Đang thi công.',
   },
   units: [
     { id: 'u1', code: 'HM-201', floor: 2, type: 'Studio', area: 30, price: 6000000, status: 'Đã cho thuê' },
