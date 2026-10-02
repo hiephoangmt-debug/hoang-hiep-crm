@@ -23,8 +23,8 @@ function hoanghiep_defaults() {
 		'hh_stat4_num'     => '',
 		'hh_stat4_label'   => 'Dự án phân phối',
 		// Liên hệ.
-		'hh_phone'         => '0900 000 000',
-		'hh_zalo'          => '0900000000',
+		'hh_phone'         => '0904 567 009',
+		'hh_zalo'          => '0904567009',
 		'hh_email'         => 'hiephoangmt@gmail.com',
 		'hh_address'       => 'Đà Nẵng',
 		'hh_hours'         => '8:00 – 21:00, tất cả các ngày',

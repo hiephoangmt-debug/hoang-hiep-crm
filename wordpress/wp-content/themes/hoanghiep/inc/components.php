@@ -212,3 +212,57 @@ function hh_search_box() {
 	</div>
 	<?php
 }
+
+/* -------------------------------------------------------------------------
+ * Tin tức
+ * ---------------------------------------------------------------------- */
+
+/** "4 phút đọc" – based on ~220 words per minute. */
+function hh_reading_time( $post = null ) {
+	$words = count( preg_split( '/\s+/u', trim( wp_strip_all_tags( strip_shortcodes( get_post_field( 'post_content', $post ) ) ) ), -1, PREG_SPLIT_NO_EMPTY ) );
+	return max( 1, (int) ceil( $words / 220 ) ) . ' phút đọc';
+}
+
+/** "Chuyên mục · 02/10/2026" */
+function hh_post_meta_line() {
+	$cat = get_the_category();
+	return ( $cat ? $cat[0]->name . ' · ' : '' ) . get_the_date( 'd/m/Y' );
+}
+
+/**
+ * Adds ids to h2/h3 in post content and returns [content, toc items].
+ */
+function hh_content_with_toc( $content ) {
+	$toc  = array();
+	$used = array();
+	$content = preg_replace_callback(
+		'/<h([23])([^>]*)>(.*?)<\/h\1>/is',
+		function ( $m ) use ( &$toc, &$used ) {
+			$text = wp_strip_all_tags( $m[3] );
+			if ( preg_match( '/\sid="([^"]+)"/', $m[2], $idm ) ) {
+				$id = $idm[1];
+				$attrs = $m[2];
+			} else {
+				$id = sanitize_title( remove_accents( $text ) ) ?: 'muc';
+				$base = $id;
+				$n    = 2;
+				while ( isset( $used[ $id ] ) ) {
+					$id = $base . '-' . $n++;
+				}
+				$attrs = $m[2] . ' id="' . esc_attr( $id ) . '"';
+			}
+			$used[ $id ] = true;
+			$toc[]       = array( 'level' => (int) $m[1], 'id' => $id, 'text' => $text );
+			return '<h' . $m[1] . $attrs . '>' . $m[3] . '</h' . $m[1] . '>';
+		},
+		$content
+	);
+	return array( $content, $toc );
+}
+
+add_action( 'pre_get_posts', 'hh_news_query' );
+function hh_news_query( $q ) {
+	if ( ! is_admin() && $q->is_main_query() && ( $q->is_home() || $q->is_category() ) ) {
+		$q->set( 'posts_per_page', 14 ); // Trang 1: 1 bài lớn + 4 bài nhỏ + 9 bài dạng lưới.
+	}
+}

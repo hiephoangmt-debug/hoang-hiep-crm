@@ -260,6 +260,27 @@
 		run();
 	} );
 
+	// Chia sẻ bài viết: Zalo dùng menu chia sẻ của điện thoại, máy tính thì sao chép link.
+	$$( '.share' ).forEach( ( bar ) => {
+		const msg = $( '.share__msg', bar );
+		const copy = ( url, note ) => {
+			const done = () => { if ( msg ) { msg.textContent = note; } };
+			if ( navigator.clipboard ) {
+				navigator.clipboard.writeText( url ).then( done, () => window.prompt( 'Sao chép link:', url ) );
+			} else {
+				window.prompt( 'Sao chép link:', url );
+			}
+		};
+		$$( '[data-share-copy]', bar ).forEach( ( b ) => b.addEventListener( 'click', () => copy( b.dataset.shareCopy, 'Đã sao chép link.' ) ) );
+		$$( '[data-share]', bar ).forEach( ( b ) => b.addEventListener( 'click', () => {
+			if ( navigator.share ) {
+				navigator.share( { title: b.dataset.title, url: b.dataset.share } ).catch( () => {} );
+			} else {
+				copy( b.dataset.share, 'Đã sao chép link – dán vào Zalo để gửi.' );
+			}
+		} ) );
+	} );
+
 	// Project sub-navigation highlight.
 	const subLinks = $$( '.subnav a[href^="#"]:not(.subnav__cta)' );
 	if ( subLinks.length && 'IntersectionObserver' in window ) {
