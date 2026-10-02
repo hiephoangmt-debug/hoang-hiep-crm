@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CRM – Căn hộ dịch vụ Hải Minh Đà Nẵng</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Căn hộ dịch vụ Hải Minh – Đà Nẵng</h1>
+    <nav>
+      <button data-tab="dashboard" class="active">Tổng quan</button>
+      <button data-tab="units">Căn hộ</button>
+      <button data-tab="customers">Khách hàng</button>
+      <button data-tab="project">Thông tin dự án</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="dashboard" class="tab active">
+      <div class="stats" id="stats"></div>
+      <h2>Pipeline khách hàng</h2>
+      <div class="pipeline" id="pipeline"></div>
+    </section>
+
+    <section id="units" class="tab">
+      <div class="toolbar">
+        <select id="unitFilter"></select>
+        <button id="addUnit">+ Thêm căn</button>
+      </div>
+      <table>
+        <thead><tr><th>Mã căn</th><th>Tầng</th><th>Loại</th><th>DT (m²)</th><th>Giá thuê/tháng</th><th>Trạng thái</th><th></th></tr></thead>
+        <tbody id="unitRows"></tbody>
+      </table>
+    </section>
+
+    <section id="customers" class="tab">
+      <div class="toolbar">
+        <input id="customerSearch" placeholder="Tìm tên / SĐT...">
+        <select id="stageFilter"></select>
+        <button id="addCustomer">+ Thêm khách</button>
+      </div>
+      <table>
+        <thead><tr><th>Họ tên</th><th>SĐT</th><th>Nguồn</th><th>Căn quan tâm</th><th>Giai đoạn</th><th>Ghi chú</th><th></th></tr></thead>
+        <tbody id="customerRows"></tbody>
+      </table>
+    </section>
+
+    <section id="project" class="tab">
+      <form id="projectForm" class="grid-form"></form>
+      <div class="toolbar">
+        <button id="saveProject">Lưu thông tin</button>
+        <button id="exportData">Xuất JSON</button>
+        <label class="file-btn">Nhập JSON<input type="file" id="importData" accept="application/json" hidden></label>
+        <button id="resetData" class="danger">Khôi phục dữ liệu mẫu</button>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="editor">
+    <form method="dialog" id="editorForm" class="grid-form"></form>
+    <div class="toolbar">
+      <button id="editorSave">Lưu</button>
+      <button id="editorCancel" class="secondary">Huỷ</button>
+    </div>
+  </dialog>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
