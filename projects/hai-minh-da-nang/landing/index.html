@@ -90,13 +90,13 @@ img{max-width:100%;height:auto;display:block}
 a{color:var(--blue)}
 .wrap{max-width:1200px;margin:0 auto;padding:0 16px}
 h1,h2,h3{color:var(--navy);line-height:1.3;margin:0 0 .6em}
-h2{font-size:clamp(22px,3vw,28px);font-weight:700;padding-left:14px;border-left:5px solid var(--gold)}
+h2{font-size:28px;font-weight:700;padding-left:14px;border-left:5px solid var(--gold)}
 h3{font-size:19px;font-weight:600}
 p{margin:0 0 1em}
 .topbar{background:var(--navy);color:#C9D6E3;font-size:13.5px}
 .topbar .wrap{display:flex;justify-content:space-between;align-items:center;min-height:38px;gap:12px}
 .topbar a{color:#fff;text-decoration:none;font-weight:600}
-.header{position:sticky;top:0;z-index:50;background:var(--white);box-shadow:0 2px 12px rgba(11,42,74,.08)}
+.header{background:var(--white);box-shadow:0 2px 12px rgba(11,42,74,.08)}
 .header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:20px}
 .logo{display:flex;flex-direction:column;text-decoration:none;line-height:1.1}
 .logo b{font-size:20px;color:var(--navy);font-weight:800;letter-spacing:.02em}
@@ -111,13 +111,12 @@ p{margin:0 0 1em}
 .btn-gold{background:var(--gold);color:var(--navy)} .btn-gold:hover{background:#B38D38}
 .hero .btn:not(.btn-outline),.final .btn,.pop .btn{background:var(--gold);color:var(--navy)}
 .hero .btn:not(.btn-outline):hover,.final .btn:hover,.pop .btn:hover{background:#B38D38}
-.hero{position:relative;color:#fff;background:var(--navy)}
-.hero img{width:100%;height:clamp(420px,62vh,600px);object-fit:cover;opacity:.55}
-.hero .cap{position:absolute;inset:0;display:flex;align-items:flex-end}
-.hero .cap .wrap{width:100%;padding-bottom:40px}
+.hero-img{background:var(--navy)}
+.hero-img img{width:100%;height:auto;max-width:1200px;margin:0 auto}
+.hero{color:#fff;background:var(--navy);padding:32px 0 36px}
 .tag{display:inline-block;background:var(--gold);color:var(--navy);font-size:13px;font-weight:700;padding:4px 12px;border-radius:3px;margin-bottom:14px;text-transform:uppercase;letter-spacing:.04em}
-.hero h1{color:#fff;font-size:clamp(28px,5vw,50px);font-weight:800;margin:0 0 10px;max-width:820px}
-.hero p{font-size:clamp(15px,2vw,19px);max-width:720px;color:#E3ECF4}
+.hero h1{color:#fff;font-size:44px;line-height:1.25;font-weight:800;margin:0 0 12px}
+.hero p{font-size:18px;line-height:1.6;color:#E3ECF4}
 .hero .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
 .facts{background:var(--white);border-bottom:1px solid var(--line)}
 .facts ul{display:grid;grid-template-columns:repeat(5,1fr);list-style:none;margin:0;padding:0}
@@ -146,11 +145,11 @@ table{width:100%;border-collapse:collapse;font-size:15.5px}
 th,td{text-align:left;padding:11px 14px;border:1px solid var(--line);vertical-align:top}
 th{background:var(--bg);color:var(--navy);font-weight:600;width:34%}
 .tbl{overflow-x:auto}
-.map{position:relative;padding-top:56%;border-radius:6px;overflow:hidden;border:1px solid var(--line);margin:16px 0}
-.map iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.map{border-radius:6px;overflow:hidden;border:1px solid var(--line);margin:16px 0}
+.map iframe{display:block;width:100%;height:380px;border:0}
 .places{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 20px;list-style:none;padding:0;margin:12px 0 0}
-.places li{padding:8px 0 8px 22px;border-bottom:1px dashed var(--line);position:relative;font-size:15.5px}
-.places li:before{content:"";position:absolute;left:2px;top:17px;width:9px;height:9px;border-radius:50%;background:var(--gold)}
+.places li{padding:8px 0;border-bottom:1px dashed var(--line);font-size:15.5px}
+.places li:before{content:"● ";color:var(--gold)}
 .units{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:16px 0}
 .unit{border:1px solid var(--line);border-radius:6px;padding:18px 12px;text-decoration:none;color:inherit;text-align:center;transition:.15s;background:#fff}
 .unit:hover{border-color:var(--gold);box-shadow:0 6px 18px rgba(10,35,66,.14);transform:translateY(-2px)}
@@ -181,17 +180,16 @@ details p{margin:10px 0 0}
 .cta-box input{margin:0}
 .cta-line{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;border:1px dashed var(--blue);background:#EEF3F9;border-radius:6px;padding:16px 20px;margin:14px 0}
 .cta-line p{margin:0;font-weight:600;color:var(--navy)}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 input,select{width:100%;font:inherit;font-size:15.5px;padding:11px 13px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--text);margin-bottom:10px}
 input:focus,select:focus,a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:1px}
 .note{font-size:12.5px;color:var(--muted);margin:8px 0 0;text-align:center}
-.side{position:sticky;top:88px;display:flex;flex-direction:column;gap:18px}
+.side{display:flex;flex-direction:column;gap:18px}
 .side-card{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff;box-shadow:0 6px 20px rgba(11,42,74,.06);scroll-margin-top:90px}
 .side-card .hd{background:var(--navy);border-bottom:3px solid var(--gold);color:#fff;padding:14px 18px;font-weight:700;font-size:17px;text-align:center}
 .side-card .bd{padding:18px}
 .side-card ul{list-style:none;margin:0 0 12px;padding:0;font-size:14.5px}
-.side-card li{padding:4px 0 4px 22px;position:relative}
-.side-card li:before{content:"✓";position:absolute;left:2px;color:var(--gold);font-weight:800}
+.side-card li{padding:4px 0}
+.side-card li:before{content:"✓ ";color:var(--gold);font-weight:800}
 .side-card button{width:100%}
 .side-info dl{margin:0;font-size:14.5px}
 .side-info dt{color:var(--muted);font-size:13px}
@@ -239,6 +237,9 @@ footer li{padding:3px 0}
   .topbar .wrap>span:first-child{display:none}
   .topbar .wrap{justify-content:center}
   .header .btn{display:none}
+  .hero h1{font-size:30px}
+  .hero p{font-size:16px}
+  h2{font-size:23px}
   .facts ul{grid-template-columns:1fr 1fr}
   .facts li{border-bottom:1px solid var(--line)}
   .toc ol{columns:1}
@@ -282,9 +283,10 @@ footer li{padding:3px 0}
 </header>
 
 <main>
-<div class="hero">
+<div class="hero-img">
   <img src="https://static.ladipage.net/5f03d62c83e96d333758e1a6/a89b72de-cf0c-4b25-ac98-e36dcdd3f04b-20260714100621-qjyn7.png" alt="Phối cảnh căn hộ dịch vụ Hải Minh trên đường Võ Nguyên Giáp, Đà Nẵng" width="1200" height="630" fetchpriority="high">
-  <div class="cap">
+</div>
+<div class="hero">
     <div class="wrap">
       <span class="tag">Đang thi công · Nhận đăng ký chọn căn</span>
       <h1>Căn hộ dịch vụ Hải Minh Đà Nẵng</h1>
@@ -294,7 +296,6 @@ footer li{padding:3px 0}
         <a class="btn btn-outline" href="https://zalo.me/0904567009">Chat Zalo với chuyên viên</a>
       </div>
     </div>
-  </div>
 </div>
 
 <div class="facts">
@@ -397,8 +398,8 @@ footer li{padding:3px 0}
           <h3>Nhận mặt bằng tầng & danh sách căn view biển</h3>
           <p>Gửi qua Zalo trong giờ làm việc – miễn phí.</p>
           <form>
-            <label class="sr" for="name3">Họ và tên</label><input id="name3" name="name" type="text" autocomplete="name" placeholder="Họ và tên *" required>
-            <label class="sr" for="phone3">Số điện thoại</label><input id="phone3" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Số điện thoại (Zalo) *" pattern="[0-9+ ]{9,13}" required>
+            <input aria-label="Họ và tên" id="name3" name="name" type="text" autocomplete="name" placeholder="Họ và tên *" required>
+            <input aria-label="Số điện thoại" id="phone3" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Số điện thoại (Zalo) *" pattern="[0-9+ ]{9,13}" required>
             <button class="btn btn-gold" type="submit">Nhận mặt bằng</button>
           </form>
         </div>
@@ -480,8 +481,8 @@ footer li{padding:3px 0}
           <h3>Nhận bảng giá Hải Minh mới nhất</h3>
           <p>Kèm chính sách thanh toán, ưu đãi đợt này và gợi ý căn theo ngân sách.</p>
           <form>
-            <label class="sr" for="name4">Họ và tên</label><input id="name4" name="name" type="text" autocomplete="name" placeholder="Họ và tên *" required>
-            <label class="sr" for="phone4">Số điện thoại</label><input id="phone4" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Số điện thoại (Zalo) *" pattern="[0-9+ ]{9,13}" required>
+            <input aria-label="Họ và tên" id="name4" name="name" type="text" autocomplete="name" placeholder="Họ và tên *" required>
+            <input aria-label="Số điện thoại" id="phone4" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Số điện thoại (Zalo) *" pattern="[0-9+ ]{9,13}" required>
             <button class="btn btn-gold" type="submit">Nhận bảng giá</button>
           </form>
         </div>
@@ -518,10 +519,9 @@ footer li{padding:3px 0}
             <li>Chính sách thanh toán đợt này</li>
           </ul>
           <form>
-            <label class="sr" for="name1">Họ và tên</label><input id="name1" name="name" type="text" autocomplete="name" placeholder="Họ và tên *" required>
-            <label class="sr" for="phone1">Số điện thoại</label><input id="phone1" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Số điện thoại (Zalo) *" pattern="[0-9+ ]{9,13}" required>
-            <label class="sr" for="type1">Loại căn quan tâm</label>
-            <select id="type1" name="loai_can">
+            <input aria-label="Họ và tên" id="name1" name="name" type="text" autocomplete="name" placeholder="Họ và tên *" required>
+            <input aria-label="Số điện thoại" id="phone1" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Số điện thoại (Zalo) *" pattern="[0-9+ ]{9,13}" required>
+            <select aria-label="Loại căn quan tâm" id="type1" name="loai_can">
               <option value="">Loại căn quan tâm</option>
               <option>1 phòng ngủ (47,4 m²)</option>
               <option>2 phòng ngủ (66,5–68,8 m²)</option>
@@ -529,8 +529,7 @@ footer li{padding:3px 0}
               <option>3 phòng ngủ (78,6–80 m²)</option>
               <option>Dual Key (101 m²)</option>
             </select>
-            <label class="sr" for="need1">Mục đích</label>
-            <select id="need1" name="nhu_cau">
+            <select aria-label="Mục đích" id="need1" name="nhu_cau">
               <option value="">Mục đích mua</option>
               <option>Đầu tư cho thuê</option>
               <option>Nghỉ dưỡng gia đình</option>
@@ -581,10 +580,9 @@ footer li{padding:3px 0}
     </div>
     <div class="card">
       <form>
-        <label class="sr" for="name2">Họ và tên</label><input id="name2" name="name" type="text" autocomplete="name" placeholder="Họ và tên *" required>
-        <label class="sr" for="phone2">Số điện thoại</label><input id="phone2" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Số điện thoại (Zalo) *" pattern="[0-9+ ]{9,13}" required>
-        <label class="sr" for="budget2">Ngân sách dự kiến</label>
-        <select id="budget2" name="ngan_sach">
+        <input aria-label="Họ và tên" id="name2" name="name" type="text" autocomplete="name" placeholder="Họ và tên *" required>
+        <input aria-label="Số điện thoại" id="phone2" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Số điện thoại (Zalo) *" pattern="[0-9+ ]{9,13}" required>
+        <select aria-label="Ngân sách dự kiến" id="budget2" name="ngan_sach">
           <option value="">Ngân sách dự kiến</option>
           <option>Dưới 3 tỷ</option>
           <option>3 – 5 tỷ</option>
@@ -641,10 +639,9 @@ footer li{padding:3px 0}
     <div class="hd"><b id="popTitle">Nhận bảng giá Hải Minh</b>Mặt bằng + danh sách căn view biển gửi qua Zalo</div>
     <div class="bd">
       <form>
-        <label class="sr" for="name5">Họ và tên</label><input id="name5" name="name" type="text" autocomplete="name" placeholder="Họ và tên *" required>
-        <label class="sr" for="phone5">Số điện thoại</label><input id="phone5" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Số điện thoại (Zalo) *" pattern="[0-9+ ]{9,13}" required>
-        <label class="sr" for="type5">Loại căn quan tâm</label>
-        <select id="type5" name="loai_can">
+        <input aria-label="Họ và tên" id="name5" name="name" type="text" autocomplete="name" placeholder="Họ và tên *" required>
+        <input aria-label="Số điện thoại" id="phone5" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Số điện thoại (Zalo) *" pattern="[0-9+ ]{9,13}" required>
+        <select aria-label="Loại căn quan tâm" id="type5" name="loai_can">
           <option value="">Loại căn quan tâm</option>
           <option>1 phòng ngủ (47,4 m²)</option>
           <option>2 phòng ngủ (66,5–68,8 m²)</option>
