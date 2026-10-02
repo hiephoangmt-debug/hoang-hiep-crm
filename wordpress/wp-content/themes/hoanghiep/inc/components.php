@@ -143,8 +143,16 @@ function hh_agent_card( $compact = false ) {
 			<div>
 				<p class="agent-card__name"><?php echo esc_html( $name ); ?></p>
 				<p class="agent-card__title"><?php echo esc_html( hoanghiep_opt( 'hh_person_title' ) ); ?></p>
-				<?php if ( hoanghiep_opt( 'hh_person_company' ) ) : ?>
-					<p class="agent-card__company"><?php echo esc_html( hoanghiep_opt( 'hh_person_company' ) ); ?><?php echo 0 === mb_stripos( hoanghiep_opt( 'hh_stat1_label' ), 'Năm' ) && hoanghiep_opt( 'hh_stat1_num' ) ? ' · ' . esc_html( hoanghiep_opt( 'hh_stat1_num' ) ) . ' năm kinh nghiệm' : ''; ?></p>
+				<?php
+				$extra = array_filter(
+					array(
+						hoanghiep_opt( 'hh_person_company' ),
+						0 === mb_stripos( hoanghiep_opt( 'hh_stat1_label' ), 'Năm' ) && hoanghiep_opt( 'hh_stat1_num' ) ? hoanghiep_opt( 'hh_stat1_num' ) . ' năm kinh nghiệm' : '',
+					)
+				);
+				?>
+				<?php if ( $extra ) : ?>
+					<p class="agent-card__company"><?php echo esc_html( implode( ' · ', $extra ) ); ?></p>
 				<?php endif; ?>
 			</div>
 		</div>

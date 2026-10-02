@@ -9,15 +9,15 @@ function hoanghiep_defaults() {
 	return array(
 		// Cá nhân.
 		'hh_person_name'   => 'Hoàng Hiệp',
-		'hh_person_title'  => 'Chuyên gia bất động sản Đà Nẵng',
-		'hh_person_company' => 'Tati Land',
-		'hh_person_career' => "Trưởng nhóm kinh doanh | Trực tiếp tư vấn, dẫn khách và chốt giao dịch tại các dự án Đà Nẵng\nTrưởng phòng kinh doanh | Xây dựng và dẫn dắt đội ngũ chuyên viên tư vấn\nGiám đốc sàn giao dịch | Vận hành sàn, phân phối nhiều dự án căn hộ, đất nền khu vực miền Trung\nGiám đốc kinh doanh | Hoạch định chiến lược bán hàng, làm việc trực tiếp với chủ đầu tư\nCEO | Điều hành doanh nghiệp môi giới, phát triển thị trường Đà Nẵng – miền Trung\nTati Land | Hiện đang công tác",
+		'hh_person_title'  => 'Chuyên gia bất động sản tại Đà Nẵng',
+		'hh_person_company' => '',
+		'hh_person_career' => "Trưởng nhóm kinh doanh | Trực tiếp tư vấn, dẫn khách và chốt giao dịch tại các dự án Đà Nẵng\nTrưởng phòng kinh doanh | Xây dựng và dẫn dắt đội ngũ chuyên viên tư vấn\nGiám đốc sàn giao dịch | Vận hành sàn, phân phối nhiều dự án căn hộ, đất nền khu vực miền Trung\nGiám đốc kinh doanh | Hoạch định chiến lược bán hàng, làm việc trực tiếp với chủ đầu tư\nCEO | Điều hành doanh nghiệp môi giới, phát triển thị trường Đà Nẵng – miền Trung",
 		'hh_person_photo'  => '',
 		'hh_person_photo2' => '',
 		'hh_person_avatar' => '',
 		'hh_highlights'    => '{theme}/assets/img/hoi-nghi-tatiland-2026.jpg | Phát biểu tại Hội nghị tổng kết TATILAND “Thế & Lực 2026” – Furama Resort Đà Nẵng, 07/02/2026',
 		'hh_person_slogan' => 'Đúng nhu cầu – Đúng giá trị – Đúng pháp lý',
-		'hh_person_bio'    => 'Tôi là Hoàng Hiệp, hơn 15 năm gắn bó với thị trường bất động sản Đà Nẵng và miền Trung. Đi lên từ trưởng nhóm, trưởng phòng, giám đốc sàn, giám đốc kinh doanh đến CEO, tôi hiểu rõ từng dự án, từng khu vực và cách chọn đúng sản phẩm cho nhu cầu ở hay đầu tư. Hiện tôi đang công tác tại Tati Land.',
+		'hh_person_bio'    => 'Tôi là Hoàng Hiệp, hơn 15 năm gắn bó với thị trường bất động sản Đà Nẵng và miền Trung. Đi lên từ trưởng nhóm, trưởng phòng, giám đốc sàn, giám đốc kinh doanh đến CEO, tôi hiểu rõ từng dự án, từng khu vực và cách chọn đúng sản phẩm cho nhu cầu ở hay đầu tư.',
 		// Số liệu (để trống sẽ ẩn).
 		'hh_stat1_num'     => '15+',
 		'hh_stat1_label'   => 'Năm kinh nghiệm BĐS Đà Nẵng – miền Trung',
@@ -126,7 +126,7 @@ function hoanghiep_customize( $wp_customize ) {
 		'hh_person_title'  => array( 'hh_person', 'Chức danh', 'text' ),
 		'hh_person_slogan' => array( 'hh_person', 'Slogan', 'text' ),
 		'hh_person_bio'    => array( 'hh_person', 'Giới thiệu ngắn', 'textarea' ),
-		'hh_person_company' => array( 'hh_person', 'Đơn vị đang công tác', 'text' ),
+		'hh_person_company' => array( 'hh_person', 'Đơn vị đang công tác (để trống nếu không muốn hiển thị)', 'text' ),
 		'hh_person_career' => array( 'hh_person', 'Hành trình nghề nghiệp (mỗi dòng: Chức vụ | Mô tả)', 'textarea' ),
 		'hh_highlights'    => array( 'hh_person', 'Hình ảnh hoạt động, sự kiện (mỗi dòng: link ảnh | chú thích). Tải ảnh ở Media → copy link.', 'textarea' ),
 		'hh_phone'         => array( 'hh_contact', 'Hotline', 'text' ),

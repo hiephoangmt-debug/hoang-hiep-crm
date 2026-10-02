@@ -55,7 +55,7 @@ $stats = hoanghiep_stats();
 			<?php hh_section_head( 'Kinh nghiệm', 'Hành trình nghề nghiệp' ); ?>
 			<ol class="career">
 				<?php foreach ( $career as $i => list( $role, $note ) ) : ?>
-					<li class="<?php echo count( $career ) - 1 === $i ? 'is-current' : ''; ?>">
+					<li class="<?php echo 0 === mb_stripos( $note, 'Hiện' ) ? 'is-current' : ''; ?>">
 						<strong><?php echo esc_html( $role ); ?></strong>
 						<?php if ( $note ) : ?><span><?php echo esc_html( $note ); ?></span><?php endif; ?>
 					</li>
