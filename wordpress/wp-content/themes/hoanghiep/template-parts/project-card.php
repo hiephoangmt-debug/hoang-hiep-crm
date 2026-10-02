@@ -22,6 +22,9 @@ $type   = hh_project_type();
 			<p class="project-card__dev"><?php echo esc_html( hh_meta( 'hh_p_developer' ) ); ?></p>
 		<?php endif; ?>
 		<h3 class="project-card__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+		<?php if ( (int) hh_meta( 'hh_p_parent' ) ) : ?>
+			<p class="project-card__parent">Phân khu của <?php echo esc_html( get_the_title( (int) hh_meta( 'hh_p_parent' ) ) ); ?></p>
+		<?php endif; ?>
 		<?php if ( $place ) : ?>
 			<p class="meta-line"><?php echo hh_icon( 'pin' ); // phpcs:ignore ?> <?php echo esc_html( $place ); ?></p>
 		<?php endif; ?>

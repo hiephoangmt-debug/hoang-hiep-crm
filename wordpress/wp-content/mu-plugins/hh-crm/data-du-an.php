@@ -18,7 +18,8 @@ function hh_project_dataset() {
 		array(
 			'slug'    => 'sun-symphony-residence',
 			'title'   => 'Sun Symphony Residence',
-			'type'    => array( 'can-ho-so-huu-lau-dai', 'shophouse' ),
+			'type'    => 'can-ho-so-huu-lau-dai',
+			'remove_types' => array( 'shophouse' ), // Thấp tầng nằm ở phân khu The Sonata.
 			'area'    => 'son-tra',
 			'hot'     => true,
 			'excerpt' => 'Tổ hợp căn hộ, shophouse và biệt thự của Sun Group bên bờ sông Hàn, quy mô 8 ha với 3 tòa căn hộ và 200 sản phẩm thấp tầng.',
@@ -36,7 +37,7 @@ function hh_project_dataset() {
 				'hh_p_handover'     => 'Thấp tầng: Quý 2/2025 · Căn hộ: Quý 1–2/2026 (dự kiến)',
 				'hh_p_highlights'   => "Vị trí ven sông Hàn, trung tâm Đà Nẵng\n3 tòa căn hộ S1 (30 tầng), S2 (24 tầng), S3 (30 tầng)\nThấp tầng gồm 180 nhà phố và 20 biệt thự",
 				'hh_p_unit_types'   => "Studio | 35,8 m² | 1 | Liên hệ\nCăn 1PN+1 | 49,3 m² | 1 | Liên hệ\nCăn 2PN | 68,8 m² | 2 | Liên hệ\nCăn 2PN+1 | 79,2 m² | 2 | Liên hệ\nCăn 3PN | 93,1 m² | 3 | Liên hệ",
-				'hh_p_zones'        => "Khu cao tầng (tòa S1, S2, S3) | Căn hộ, duplex, shop khối đế | 1.313 căn hộ, 77 shop khối đế | Căn hộ bàn giao Quý 1–2/2026 (dự kiến)\nKhu thấp tầng | Nhà phố 3 – 5 tầng, biệt thự song lập và đơn lập | 180 nhà phố, 20 biệt thự | Bàn giao Quý 2/2025 (dự kiến)",
+				'hh_p_zones'        => "Khu cao tầng (tòa S1, S2, S3) | Căn hộ, duplex, shop khối đế | 1.313 căn hộ, 77 shop khối đế | Căn hộ bàn giao Quý 1–2/2026 (dự kiến)\nThe Sonata (thấp tầng, 3 ha) | Nhà phố 3 tầng, shophouse 5 tầng, biệt thự | 180 nhà phố, 20 biệt thự | Bàn giao Quý 2/2025 (dự kiến)",
 				'hh_p_shop_desc'    => '77 shop khối đế tại chân 3 tòa căn hộ ven sông Hàn.',
 				'hh_p_duplex_desc'  => 'Có căn duplex trong rổ hàng mở bán của cụm dự án ven sông Hàn – liên hệ để nhận danh sách căn.',
 			),
@@ -69,7 +70,8 @@ function hh_project_dataset() {
 		array(
 			'slug'    => 'sun-ponte-residence',
 			'title'   => 'Sun Ponte Residence',
-			'type'    => array( 'can-ho-so-huu-lau-dai', 'shophouse' ),
+			'type'    => 'can-ho-so-huu-lau-dai',
+			'remove_types' => array( 'shophouse' ), // Thấp tầng nằm ở phân khu The Rio.
 			'area'    => 'son-tra',
 			'excerpt' => 'Tòa tháp 26 tầng của Sun Group trên đường Trần Hưng Đạo, gồm căn hộ, penthouse, shophouse cùng khu nhà phố và biệt thự.',
 			'meta'    => array(
@@ -82,7 +84,7 @@ function hh_project_dataset() {
 				'hh_p_units'          => '495 căn hộ, 7 penthouse, 26 shophouse; 41 nhà phố, 16 biệt thự',
 				'hh_p_ownership'      => 'Sở hữu lâu dài',
 				'hh_p_handover'       => 'Quý 3/2026 (dự kiến)',
-				'hh_p_zones'          => "Tòa tháp 26 tầng | Căn hộ, penthouse, shophouse khối đế | 495 căn hộ, 7 penthouse, 26 shophouse | Bàn giao Quý 3/2026 (dự kiến)\nKhu thấp tầng | Nhà phố, biệt thự | 41 nhà phố, 16 biệt thự | –",
+				'hh_p_zones'          => "Tòa tháp 26 tầng | Căn hộ, penthouse, shophouse khối đế | 495 căn hộ, 7 penthouse, 26 shophouse | Bàn giao Quý 3/2026 (dự kiến)\nThe Rio (thấp tầng) | Nhà phố 6,5 tầng, biệt thự đơn lập và song lập | 41 nhà phố, 16 biệt thự | Ra mắt tháng 7/2025",
 				'hh_p_shop_desc'      => '26 shophouse tại khối đế tòa tháp.',
 				'hh_p_penthouse_desc' => '7 căn penthouse trên các tầng cao của tòa tháp 26 tầng.',
 			),
@@ -302,6 +304,69 @@ function hh_project_dataset() {
 				'hh_p_highlights' => "Tổng vốn đầu tư khoảng 2.790 tỷ đồng\nCăn hộ 1 – 3 phòng ngủ trong khu đô thị FPT City",
 			),
 			'sources' => array( 'https://www.xn--cnhfptplaza4-ynb8408h.vn/tien-do-xay-dung', 'https://batdongsan.com.vn/ban-can-ho-chung-cu-fpt-plaza-4' ),
+		),
+
+		array(
+			'slug'    => 'fpt-plaza-5',
+			'title'   => 'FPT Plaza 5',
+			'type'    => 'can-ho-so-huu-lau-dai',
+			'area'    => 'ngu-hanh-son',
+			'excerpt' => 'Tòa căn hộ tiếp theo của FPT City Đà Nẵng: 25 tầng, hơn 832 căn hộ, dự kiến mở bán năm 2026.',
+			'meta'    => array(
+				'hh_p_status'    => 'sap-mo-ban',
+				'hh_p_developer' => 'Công ty CP Đô thị FPT Đà Nẵng',
+				'hh_p_type'      => 'Căn hộ',
+				'hh_p_address'   => 'Khu đô thị FPT City, Ngũ Hành Sơn, Đà Nẵng',
+				'hh_p_floors'    => '25 tầng nổi, 2 tầng hầm',
+				'hh_p_units'     => 'Hơn 832 căn hộ',
+				'hh_p_start'     => 'Đang thi công phần móng',
+				'hh_p_handover'  => 'Dự kiến mở bán năm 2026',
+			),
+			'sources' => array( 'https://fpt-plaza5.com/', 'https://nhadatfptdanang.com/can-ho-fpt-plaza-5/' ),
+		),
+		array(
+			'slug'    => 'the-sonata-sun-symphony',
+			'title'   => 'The Sonata – Sun Symphony Residence',
+			'type'    => 'shophouse',
+			'area'    => 'son-tra',
+			'parent'  => 'sun-symphony-residence',
+			'excerpt' => 'Phân khu thấp tầng 3 ha của Sun Symphony Residence bên sông Hàn: 180 nhà phố, shophouse và 20 biệt thự, cảm hứng kiến trúc Hội An đương đại.',
+			'meta'    => array(
+				'hh_p_status'     => 'dang-ban-giao',
+				'hh_p_developer'  => 'Tập đoàn Sun Group',
+				'hh_p_designer'   => 'Sun Group & Design Lab',
+				'hh_p_type'       => 'Nhà phố, shophouse, biệt thự',
+				'hh_p_address'    => 'Ven sông Hàn, Sơn Trà, Đà Nẵng (thuộc Sun Symphony Residence)',
+				'hh_p_scale'      => '3 ha',
+				'hh_p_units'      => '180 nhà phố (104 nhà phố 3 tầng, 76 shophouse 5 tầng), 20 biệt thự',
+				'hh_p_ownership'  => 'Sở hữu lâu dài',
+				'hh_p_handover'   => 'Quý 2/2025 (dự kiến)',
+				'hh_p_unit_types' => "Nhà phố 3 tầng | 263 – 463 m² | – | Liên hệ\nShophouse 5 tầng | 425 – 800 m² | – | Liên hệ\nBiệt thự 3 tầng | 540 – 608 m² | – | Liên hệ",
+				'hh_p_highlights' => "Mặt tiền sông Hàn, ngay trung tâm Đà Nẵng\nKiến trúc lấy cảm hứng từ Hội An đương đại\nTiện ích chung: công viên trung tâm 5.000 m², 3 bến du thuyền, đường dạo ven sông, hồ bơi vô cực",
+			),
+			'sources' => array( 'https://duandanang.com/the-sonata-da-nang-khu-biet-thu-shophouse-cao-cap-thuoc-du-an-sun-symphony/', 'https://vnexpress.net/tiem-nang-thuong-mai-tai-thuong-cang-sun-symphony-residence-da-nang-4776875.html' ),
+		),
+		array(
+			'slug'    => 'the-rio-sun-ponte',
+			'title'   => 'The Rio – Sun Ponte Residence',
+			'type'    => 'shophouse',
+			'area'    => 'son-tra',
+			'parent'  => 'sun-ponte-residence',
+			'hot'     => true,
+			'excerpt' => 'Phân khu thấp tầng giới hạn của Sun Ponte Residence cạnh cầu Rồng: 41 nhà phố và 16 biệt thự kiến trúc châu Âu do Aedas thiết kế, ra mắt tháng 7/2025.',
+			'meta'    => array(
+				'hh_p_status'     => 'dang-mo-ban',
+				'hh_p_developer'  => 'Tập đoàn Sun Group (Sun Property)',
+				'hh_p_designer'   => 'Aedas',
+				'hh_p_type'       => 'Nhà phố, biệt thự',
+				'hh_p_address'    => 'Cạnh cầu Rồng, ven sông Hàn, Sơn Trà, Đà Nẵng (thuộc Sun Ponte Residence)',
+				'hh_p_units'      => '41 nhà phố, 16 biệt thự',
+				'hh_p_ownership'  => 'Sở hữu lâu dài',
+				'hh_p_start'      => 'Ra mắt tháng 7/2025',
+				'hh_p_unit_types' => "Nhà phố 6,5 tầng | 135 – 245,8 m² | – | Liên hệ\nBiệt thự đơn lập, song lập | 180 – 369,3 m² | – | Liên hệ",
+				'hh_p_highlights' => "Vị trí cạnh cầu Rồng, ven sông Hàn\nSố lượng giới hạn, kiến trúc châu Âu\nDùng chung tiện ích Sun Ponte: hồ bơi vô cực, công viên ven sông, khu vui chơi trẻ em",
+			),
+			'sources' => array( 'https://vietnambiz.vn/sun-group-ra-mat-phan-khu-thap-tang-cao-cap-the-rio-can-ke-cau-rong-da-nang-20257411933324.htm', 'https://congly.com.vn/the-rio-phan-khu-thap-tang-gioi-han-cua-sun-group-canh-cau-rong-da-nang/' ),
 		),
 
 		/* ---------------- Cao tầng – Căn hộ dịch vụ ---------------- */
@@ -573,7 +638,24 @@ function hh_import_projects() {
 			}
 		}
 
+		// Bỏ loại cũ một lần duy nhất (không ảnh hưởng nếu sau này bạn tự gắn lại).
+		if ( ! empty( $p['remove_types'] ) && ! get_post_meta( $id, '_hh_types_cleaned', true ) ) {
+			foreach ( $p['remove_types'] as $slug ) {
+				$type = get_term_by( 'slug', $slug, 'loai-du-an' );
+				if ( $type ) {
+					wp_remove_object_terms( $id, (int) $type->term_id, 'loai-du-an' );
+				}
+			}
+			update_post_meta( $id, '_hh_types_cleaned', '1' );
+		}
+
 		$meta = $p['meta'];
+		if ( ! empty( $p['parent'] ) ) {
+			$parent = get_page_by_path( $p['parent'], OBJECT, 'du-an' );
+			if ( $parent ) {
+				$meta['hh_p_parent'] = $parent->ID;
+			}
+		}
 		$meta['hh_p_name'] = $meta['hh_p_name'] ?? $p['title'];
 		if ( ! empty( $p['hot'] ) ) {
 			$meta['hh_p_featured'] = '1';

@@ -58,6 +58,10 @@ while ( have_posts() ) :
 			<p class="breadcrumb breadcrumb--light">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Trang chủ</a> / <a href="<?php echo esc_url( get_post_type_archive_link( 'du-an' ) ); ?>">Dự án</a>
 			</p>
+			<?php $parent_id = (int) hh_meta( 'hh_p_parent' ); ?>
+			<?php if ( $parent_id && 'publish' === get_post_status( $parent_id ) ) : ?>
+				<a class="parent-link" href="<?php echo esc_url( get_permalink( $parent_id ) ); ?>">Phân khu của <strong><?php echo esc_html( get_the_title( $parent_id ) ); ?></strong> <?php echo hh_icon( 'arrow' ); // phpcs:ignore ?></a>
+			<?php endif; ?>
 			<?php hh_pill( $status, $status_key ); ?>
 			<?php foreach ( get_the_terms( $id, 'loai-du-an' ) ?: array() as $t ) : ?><?php if ( $t->parent ) : ?><a class="pill pill--type" href="<?php echo esc_url( get_term_link( $t ) ); ?>"><?php echo esc_html( $t->name ); ?></a><?php endif; ?><?php endforeach; ?>
 			<h1 class="project-hero__title"><?php the_title(); ?></h1>
@@ -107,6 +111,29 @@ while ( have_posts() ) :
 				<?php if ( $zones ) : ?>
 					<h3 class="block__sub">Các phân khu &amp; loại sản phẩm</h3>
 					<?php hh_data_table( array( 'Phân khu', 'Loại sản phẩm', 'Quy mô', 'Tình trạng' ), $zones ); ?>
+				<?php endif; ?>
+				<?php
+				$subzones = new WP_Query(
+					array(
+						'post_type'      => 'du-an',
+						'posts_per_page' => 12,
+						'post__not_in'   => array( $id ),
+						'meta_query'     => array( array( 'key' => 'hh_p_parent', 'value' => $id ) ),
+						'no_found_rows'  => true,
+					)
+				);
+				if ( $subzones->have_posts() ) :
+					?>
+					<h3 class="block__sub">Phân khu có trang thông tin riêng</h3>
+					<div class="grid grid--2">
+						<?php
+						while ( $subzones->have_posts() ) :
+							$subzones->the_post();
+							get_template_part( 'template-parts/project-card' );
+						endwhile;
+						wp_reset_postdata();
+						?>
+					</div>
 				<?php endif; ?>
 				<?php if ( hh_lines( 'hh_p_highlights' ) ) : ?>
 					<h3 class="block__sub">Điểm nổi bật</h3>
