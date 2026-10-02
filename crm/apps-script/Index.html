@@ -732,14 +732,15 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     var done = x.con_lai === 0;
     var pendingIds = x.items.filter(function (i) { return i.hoan_tt !== 'Đã nhận'; }).map(function (i) { return i.id; });
     var gdDays = {};
-    x.items.forEach(function (i) { gdDays[dm(i.ngay)] = 1; });
+    x.items.forEach(function (i) { gdDays[i.ngay] = 1; });
+    var lam = Object.keys(gdDays).map(function (d) { var w = refundWhen(d); return (w ? w.toLowerCase() + ' ' : 'ngày ') + dm(d); }).join(', ');
     var when = refundWhen(x.ngay_hoan);
     var flag = done ? '<span class="badge badge--ok">Đã nhận đủ</span>'
       : late ? '<span class="badge badge--bad">Trễ – chưa nhận ' + money(x.con_lai) + '</span>'
       : x.ngay_hoan === t ? '<span class="badge badge--warn">Nhận hôm nay</span>' : '<span class="badge">Chờ hoàn</span>';
     return '<div class="card rf' + (late ? ' rf--late' : done ? ' rf--done' : '') + '">' +
-      '<div class="rf__head"><div><b>' + (when ? when + ' · ' : '') + dmy(x.ngay_hoan) + '</b> – ' + esc(rn()) + ' hoàn' +
-      '<div class="muted" style="font-size:.85rem">Giao dịch ngày ' + Object.keys(gdDays).join(', ') + ' · ' + x.so_gd + ' GD</div></div>' + flag + '</div>' +
+      '<div class="rf__head"><div>Làm ' + lam + ' → <b>' + esc(rn()) + ' hoàn ' + (when ? when.toLowerCase() + ' ' : 'ngày ') + dm(x.ngay_hoan) + '</b>' +
+      '<div class="muted" style="font-size:.85rem">' + x.so_gd + ' giao dịch</div></div>' + flag + '</div>' +
       '<div class="rf__sum"><div>Tổng tiền<b>' + money(x.so_tien) + '</b></div><div>− Phí máy<b>' + money(x.chi_phi) + '</b></div>' +
       '<div>= ' + esc(rn()) + ' hoàn<b class="big">' + money(x.tien_hoan) + '</b></div>' +
       (x.da_nhan && x.con_lai ? '<div>Đã nhận<b>' + money(x.da_nhan) + '</b></div><div>Còn thiếu<b class="neg">' + money(x.con_lai) + '</b></div>' : '') + '</div>' +
