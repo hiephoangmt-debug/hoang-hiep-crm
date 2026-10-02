@@ -42,7 +42,7 @@ while ( have_posts() ) :
 	$key_facts = array_filter(
 		array(
 			'Giá bán'   => hh_meta( 'hh_p_price_from' ) ? hh_project_price() : 'Liên hệ',
-			'Loại hình' => $type ? $type->name : '',
+			'Loại hình' => hh_project_types_label(),
 			'Quy mô'    => hh_meta( 'hh_p_scale' ),
 			'Sản phẩm'  => hh_meta( 'hh_p_unit_area' ),
 			'Bàn giao'  => hh_meta( 'hh_p_handover' ),
@@ -59,7 +59,7 @@ while ( have_posts() ) :
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Trang chủ</a> / <a href="<?php echo esc_url( get_post_type_archive_link( 'du-an' ) ); ?>">Dự án</a>
 			</p>
 			<?php hh_pill( $status, $status_key ); ?>
-			<?php if ( $type ) : ?><a class="pill pill--type" href="<?php echo esc_url( get_term_link( $type ) ); ?>"><?php echo esc_html( $type->name ); ?></a><?php endif; ?>
+			<?php foreach ( get_the_terms( $id, 'loai-du-an' ) ?: array() as $t ) : ?><?php if ( $t->parent ) : ?><a class="pill pill--type" href="<?php echo esc_url( get_term_link( $t ) ); ?>"><?php echo esc_html( $t->name ); ?></a><?php endif; ?><?php endforeach; ?>
 			<h1 class="project-hero__title"><?php the_title(); ?></h1>
 			<?php if ( hh_meta( 'hh_p_developer' ) ) : ?>
 				<p class="project-hero__dev">Chủ đầu tư: <?php echo esc_html( hh_meta( 'hh_p_developer' ) ); ?></p>
@@ -103,6 +103,11 @@ while ( have_posts() ) :
 					<p class="lead"><?php echo esc_html( get_the_excerpt() ); ?></p>
 				<?php endif; ?>
 				<?php hh_spec_list( hh_project_specs() ); ?>
+				<?php $zones = hh_table( 'hh_p_zones', 4 ); ?>
+				<?php if ( $zones ) : ?>
+					<h3 class="block__sub">Các phân khu &amp; loại sản phẩm</h3>
+					<?php hh_data_table( array( 'Phân khu', 'Loại sản phẩm', 'Quy mô', 'Tình trạng' ), $zones ); ?>
+				<?php endif; ?>
 				<?php if ( hh_lines( 'hh_p_highlights' ) ) : ?>
 					<h3 class="block__sub">Điểm nổi bật</h3>
 					<?php hh_check_list( hh_lines( 'hh_p_highlights' ), 'check-list check-list--boxed' ); ?>

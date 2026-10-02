@@ -1,6 +1,7 @@
 <?php
 /**
  * Dữ liệu dự án Đà Nẵng – Quảng Nam (cũ) tổng hợp từ thông tin công khai (10/2026).
+ * Dự án có cả căn hộ và nhà phố/biệt thự: 'type' là mảng nhiều loại, chi tiết từng khu ở 'hh_p_zones'.
  *
  * Chỉ ghi các thông tin có nguồn; giá bán để trống (website hiện "Liên hệ").
  * Hãy kiểm tra lại với chủ đầu tư trước khi tư vấn. Nguồn tham khảo lưu ở meta "hh_p_sources".
@@ -17,7 +18,7 @@ function hh_project_dataset() {
 		array(
 			'slug'    => 'sun-symphony-residence',
 			'title'   => 'Sun Symphony Residence',
-			'type'    => 'can-ho-so-huu-lau-dai',
+			'type'    => array( 'can-ho-so-huu-lau-dai', 'shophouse' ),
 			'area'    => 'son-tra',
 			'hot'     => true,
 			'excerpt' => 'Tổ hợp căn hộ, shophouse và biệt thự của Sun Group bên bờ sông Hàn, quy mô 8 ha với 3 tòa căn hộ và 200 sản phẩm thấp tầng.',
@@ -35,6 +36,7 @@ function hh_project_dataset() {
 				'hh_p_handover'     => 'Thấp tầng: Quý 2/2025 · Căn hộ: Quý 1–2/2026 (dự kiến)',
 				'hh_p_highlights'   => "Vị trí ven sông Hàn, trung tâm Đà Nẵng\n3 tòa căn hộ S1 (30 tầng), S2 (24 tầng), S3 (30 tầng)\nThấp tầng gồm 180 nhà phố và 20 biệt thự",
 				'hh_p_unit_types'   => "Studio | 35,8 m² | 1 | Liên hệ\nCăn 1PN+1 | 49,3 m² | 1 | Liên hệ\nCăn 2PN | 68,8 m² | 2 | Liên hệ\nCăn 2PN+1 | 79,2 m² | 2 | Liên hệ\nCăn 3PN | 93,1 m² | 3 | Liên hệ",
+				'hh_p_zones'        => "Khu cao tầng (tòa S1, S2, S3) | Căn hộ, duplex, shop khối đế | 1.313 căn hộ, 77 shop khối đế | Căn hộ bàn giao Quý 1–2/2026 (dự kiến)\nKhu thấp tầng | Nhà phố 3 – 5 tầng, biệt thự song lập và đơn lập | 180 nhà phố, 20 biệt thự | Bàn giao Quý 2/2025 (dự kiến)",
 				'hh_p_shop_desc'    => '77 shop khối đế tại chân 3 tòa căn hộ ven sông Hàn.',
 				'hh_p_duplex_desc'  => 'Có căn duplex trong rổ hàng mở bán của cụm dự án ven sông Hàn – liên hệ để nhận danh sách căn.',
 			),
@@ -43,7 +45,7 @@ function hh_project_dataset() {
 		array(
 			'slug'    => 'sun-cosmo-residence',
 			'title'   => 'Sun Cosmo Residence',
-			'type'    => 'can-ho-so-huu-lau-dai',
+			'type'    => array( 'can-ho-so-huu-lau-dai', 'shophouse' ),
 			'area'    => 'ngu-hanh-son',
 			'hot'     => true,
 			'excerpt' => 'Dự án của Sun Group trên đường Trần Thị Lý, gồm 2 phân khu The Panoma và The Cosmo với căn hộ, shop khối đế, nhà phố và biệt thự.',
@@ -58,6 +60,7 @@ function hh_project_dataset() {
 				'hh_p_start'        => 'Quý 1/2023',
 				'hh_p_handover'     => 'Cuối 2025 – đầu 2026 (dự kiến)',
 				'hh_p_highlights'   => "Hai phân khu: The Panoma và The Cosmo\nCăn hộ từ studio đến 3 phòng ngủ và duplex\nNhà phố 6–7 tầng (đất 100–140 m²), biệt thự 3 tầng (đất 200–500 m²)",
+				'hh_p_zones'        => "Khu cao tầng | Căn hộ studio – 3PN, duplex, shop khối đế | Khoảng 650 căn hộ, 38 shop | Bàn giao cuối 2025 – đầu 2026 (dự kiến)\nKhu thấp tầng | Nhà phố 6 – 7 tầng (đất 100 – 140 m²), biệt thự 3 tầng (đất 200 – 500 m²) | 101 nhà phố, 45 biệt thự | –",
 				'hh_p_shop_desc'    => '38 shop khối đế tại khu cao tầng.',
 				'hh_p_duplex_desc'  => 'Có căn duplex trong khu cao tầng – liên hệ để nhận danh sách căn.',
 			),
@@ -66,7 +69,7 @@ function hh_project_dataset() {
 		array(
 			'slug'    => 'sun-ponte-residence',
 			'title'   => 'Sun Ponte Residence',
-			'type'    => 'can-ho-so-huu-lau-dai',
+			'type'    => array( 'can-ho-so-huu-lau-dai', 'shophouse' ),
 			'area'    => 'son-tra',
 			'excerpt' => 'Tòa tháp 26 tầng của Sun Group trên đường Trần Hưng Đạo, gồm căn hộ, penthouse, shophouse cùng khu nhà phố và biệt thự.',
 			'meta'    => array(
@@ -79,6 +82,7 @@ function hh_project_dataset() {
 				'hh_p_units'          => '495 căn hộ, 7 penthouse, 26 shophouse; 41 nhà phố, 16 biệt thự',
 				'hh_p_ownership'      => 'Sở hữu lâu dài',
 				'hh_p_handover'       => 'Quý 3/2026 (dự kiến)',
+				'hh_p_zones'          => "Tòa tháp 26 tầng | Căn hộ, penthouse, shophouse khối đế | 495 căn hộ, 7 penthouse, 26 shophouse | Bàn giao Quý 3/2026 (dự kiến)\nKhu thấp tầng | Nhà phố, biệt thự | 41 nhà phố, 16 biệt thự | –",
 				'hh_p_shop_desc'      => '26 shophouse tại khối đế tòa tháp.',
 				'hh_p_penthouse_desc' => '7 căn penthouse trên các tầng cao của tòa tháp 26 tầng.',
 			),
@@ -138,6 +142,166 @@ function hh_project_dataset() {
 				'hh_p_units'     => 'Khoảng 3.358 căn hộ và shophouse',
 			),
 			'sources' => array( 'https://khudothi.vn/the-ori-garden/', 'https://guland.vn/du-an/the-ori-garden-apartment-tower' ),
+		),
+
+		array(
+			'slug'    => 'the-legend-da-nang',
+			'title'   => 'The Legend Đà Nẵng',
+			'type'    => 'can-ho-so-huu-lau-dai',
+			'area'    => 'son-tra',
+			'hot'     => true,
+			'excerpt' => 'Hai tòa tháp 29 tầng ngay chân cầu Rồng, 4 mặt tiền Võ Văn Kiệt – Ngô Quyền – Mai Hắc Đế – Lý Nam Đế, khoảng 800 căn hộ và 444 phòng khách sạn 5 sao.',
+			'meta'    => array(
+				'hh_p_status'         => 'dang-mo-ban',
+				'hh_p_developer'      => 'Công ty TNHH MTV VIPICO',
+				'hh_p_manager'        => 'Phát triển: Công ty CP ROX Signature',
+				'hh_p_type'           => 'Căn hộ, penthouse, khách sạn 5 sao',
+				'hh_p_address'        => 'Đường Võ Văn Kiệt, phường An Hải Tây (cũ), Sơn Trà, Đà Nẵng – chân cầu Rồng',
+				'hh_p_scale'          => '11.487 m² đất',
+				'hh_p_blocks'         => '2 tòa tháp',
+				'hh_p_floors'         => '29 tầng nổi, 3 tầng hầm',
+				'hh_p_units'          => 'Khoảng 800 căn hộ, 444 phòng khách sạn 5 sao',
+				'hh_p_unit_area'      => '40 – 415 m²',
+				'hh_p_highlights'     => "4 mặt tiền, ngay chân cầu Rồng\nCách biển Mỹ Khê khoảng 1 km, sân bay khoảng 3 km\nCăn 1PN, 1PN+, 2PN, 3PN và penthouse",
+				'hh_p_penthouse_desc' => 'Có căn penthouse trên các tầng cao – liên hệ để nhận danh sách căn.',
+			),
+			'sources' => array( 'https://thelegendcity.com/', 'https://batdongsan.com.vn/ban-can-ho-chung-cu-the-legend-city' ),
+		),
+		array(
+			'slug'    => 'times-square-da-nang',
+			'title'   => 'Times Square Đà Nẵng',
+			'type'    => 'can-ho-so-huu-lau-dai',
+			'area'    => 'son-tra',
+			'excerpt' => 'Tổ hợp trung tâm thương mại, khách sạn và căn hộ cao cấp mặt tiền biển Mỹ Khê trên đường Võ Nguyên Giáp, quy mô 2,1 ha.',
+			'meta'    => array(
+				'hh_p_status'    => 'dang-mo-ban',
+				'hh_p_developer' => 'Kim Long Nam Group (Tập đoàn Phương Trang)',
+				'hh_p_type'      => 'Căn hộ cao cấp, khách sạn, trung tâm thương mại',
+				'hh_p_address'   => 'Đường Võ Nguyên Giáp, Sơn Trà, Đà Nẵng – mặt tiền biển Mỹ Khê',
+				'hh_p_scale'     => '2,1 ha',
+				'hh_p_blocks'    => '7 tháp cao tầng',
+				'hh_p_floors'    => 'CT1, CT2: 50 tầng · CT3: 23 tầng · CT7: 30 tầng',
+				'hh_p_units'     => '560 căn hộ (tòa CT3 và CT7)',
+				'hh_p_unit_area' => '40 – 230 m²',
+				'hh_p_ownership' => 'Sở hữu lâu dài',
+				'hh_p_zones'     => "Tòa CT1, CT2 | Tổ hợp cao 50 tầng | – | –\nTòa CT3 | Căn hộ | 23 tầng | Đang mở bán\nTòa CT7 | Căn hộ | 30 tầng | Đang mở bán",
+			),
+			'sources' => array( 'https://batdongsan.com.vn/ban-can-ho-chung-cu-da-nang-times-square', 'https://minhtrungland.com/du-an/time-square-da-nang/' ),
+		),
+		array(
+			'slug'    => 'capital-square-da-nang',
+			'title'   => 'Capital Square Đà Nẵng',
+			'type'    => 'can-ho-so-huu-lau-dai',
+			'area'    => 'son-tra',
+			'excerpt' => 'Khu căn hộ ven sông Hàn của BRG Group trên đường Trần Hưng Đạo, gồm 2 phân khu Capital Square 2 và Capital Square 3 với 14 tòa, 3.391 căn hộ.',
+			'meta'    => array(
+				'hh_p_status'    => 'dang-mo-ban',
+				'hh_p_developer' => 'BRG Group (Mega Assets – Capital Square 2; SIH – Capital Square 3)',
+				'hh_p_type'      => 'Căn hộ cao cấp',
+				'hh_p_address'   => 'Đường Trần Hưng Đạo, Sơn Trà, Đà Nẵng – ven sông Hàn',
+				'hh_p_blocks'    => '14 tòa',
+				'hh_p_floors'    => '24 – 29 tầng',
+				'hh_p_units'     => '3.391 căn hộ',
+				'hh_p_unit_area' => '34,14 – 128,34 m²',
+				'hh_p_zones'     => "Capital Square 2 | Căn hộ (CĐT Mega Assets) | Khoảng 31.960 m² đất, 7 tòa 26 – 28 tầng, 1.681 căn | –\nCapital Square 3 | Căn hộ (CĐT SIH) | Khoảng 29.427 m² đất, 7 tòa 24 – 29 tầng, 1.710 căn | –",
+				'hh_p_unit_types' => "Căn 1PN | 34,14 – 47,73 m² | 1 | Liên hệ\nCăn 2PN | 67,03 – 93,08 m² | 2 | Liên hệ\nCăn 3PN | 91,49 – 128,34 m² | 3 | Liên hệ",
+			),
+			'sources' => array( 'https://www.capital-square.vn/', 'https://daongocchienthangreal.vn/quy-mo-du-an-capital-square/' ),
+		),
+		array(
+			'slug'    => 'newtown-diamond-da-nang',
+			'title'   => 'Newtown Diamond Đà Nẵng',
+			'type'    => 'can-ho-so-huu-lau-dai',
+			'area'    => 'ngu-hanh-son',
+			'excerpt' => 'Ba tòa tháp 36 tầng gần biển tại ngã tư Trường Sa – Nam Kỳ Khởi Nghĩa, 1.733 căn hộ 1 – 3 phòng ngủ, sổ hồng sở hữu lâu dài.',
+			'meta'    => array(
+				'hh_p_status'    => 'dang-mo-ban',
+				'hh_p_developer' => 'Công ty TNHH Phát triển New Town',
+				'hh_p_builder'   => 'Công ty CP CONINCO 3C',
+				'hh_p_type'      => 'Căn hộ cao cấp ven biển',
+				'hh_p_address'   => 'Ngã tư Trường Sa – Nam Kỳ Khởi Nghĩa, phường Hòa Hải (cũ), Ngũ Hành Sơn, Đà Nẵng',
+				'hh_p_scale'     => '1,47 ha',
+				'hh_p_blocks'    => '3 tòa',
+				'hh_p_floors'    => '36 tầng nổi, 3 tầng hầm',
+				'hh_p_units'     => '1.733 căn hộ',
+				'hh_p_unit_area' => '34,74 – 131,96 m²',
+				'hh_p_ownership' => 'Sở hữu lâu dài (sổ hồng từng căn)',
+				'hh_p_handover'  => 'Quý 3/2026 (dự kiến)',
+				'hh_p_zones'     => "Tòa M1 – The Emerald | Căn hộ | 829 căn | –\nTòa M2 – The Sapphire | Căn hộ | 510 căn | –\nTòa M3 – The Aquamarine | Căn hộ | 394 căn | –",
+			),
+			'sources' => array( 'https://cafeland.vn/du-an/du-an-can-ho-newtown-diamond-da-nang-4382.html', 'https://newtowndiamonds.com/vi-tri/' ),
+		),
+		array(
+			'slug'    => 'fpt-plaza-1',
+			'title'   => 'FPT Plaza 1',
+			'type'    => 'can-ho-so-huu-lau-dai',
+			'area'    => 'ngu-hanh-son',
+			'excerpt' => 'Tòa căn hộ đầu tiên trong khu đô thị FPT City Đà Nẵng: 15 tầng, 586 căn hộ 1 – 3 phòng ngủ.',
+			'meta'    => array(
+				'hh_p_status'    => 'da-ban-giao',
+				'hh_p_developer' => 'Công ty CP Đô thị FPT Đà Nẵng',
+				'hh_p_type'      => 'Căn hộ',
+				'hh_p_address'   => 'Khu đô thị FPT City, Ngũ Hành Sơn, Đà Nẵng',
+				'hh_p_scale'     => '8.863,9 m² đất',
+				'hh_p_floors'    => '15 tầng nổi, 1 tầng hầm',
+				'hh_p_units'     => '586 căn hộ',
+				'hh_p_unit_area' => '45 – 82 m²',
+			),
+			'sources' => array( 'https://fptcity.vn/du-an/fpt-plaza-1/', 'https://fptplaza.com/fptplaza1.html' ),
+		),
+		array(
+			'slug'    => 'fpt-plaza-2',
+			'title'   => 'FPT Plaza 2',
+			'type'    => 'can-ho-so-huu-lau-dai',
+			'area'    => 'ngu-hanh-son',
+			'excerpt' => 'Tòa căn hộ 25 tầng ở trung tâm khu đô thị FPT City Đà Nẵng, 700 căn hộ.',
+			'meta'    => array(
+				'hh_p_status'    => 'da-ban-giao',
+				'hh_p_developer' => 'Công ty CP Đô thị FPT Đà Nẵng',
+				'hh_p_type'      => 'Căn hộ',
+				'hh_p_address'   => 'Khu đô thị FPT City, Ngũ Hành Sơn, Đà Nẵng',
+				'hh_p_scale'     => '5.865 m² đất',
+				'hh_p_floors'    => '25 tầng nổi, 2 tầng hầm',
+				'hh_p_units'     => '700 căn hộ',
+			),
+			'sources' => array( 'https://batdongsan.com.vn/ban-can-ho-chung-cu-fpt-plaza-2', 'https://fptplaza.com/' ),
+		),
+		array(
+			'slug'    => 'fpt-plaza-3',
+			'title'   => 'FPT Plaza 3',
+			'type'    => 'can-ho-so-huu-lau-dai',
+			'area'    => 'ngu-hanh-son',
+			'excerpt' => 'Tòa căn hộ 25 tầng với 837 căn hộ trong khu đô thị FPT City Đà Nẵng.',
+			'meta'    => array(
+				'hh_p_status'    => 'dang-ban-giao',
+				'hh_p_developer' => 'Công ty CP Đô thị FPT Đà Nẵng',
+				'hh_p_type'      => 'Căn hộ',
+				'hh_p_address'   => 'Khu đô thị FPT City, Ngũ Hành Sơn, Đà Nẵng',
+				'hh_p_floors'    => '25 tầng nổi, 2 tầng hầm',
+				'hh_p_units'     => '837 căn hộ',
+				'hh_p_handover'  => 'Quý 1/2026 (dự kiến)',
+			),
+			'sources' => array( 'https://fptplaza3.vn/', 'https://tgdland.com/project/chung-cu-fpt-plaza-3-da-nang/' ),
+		),
+		array(
+			'slug'    => 'fpt-plaza-4',
+			'title'   => 'FPT Plaza 4',
+			'type'    => 'can-ho-so-huu-lau-dai',
+			'area'    => 'ngu-hanh-son',
+			'hot'     => true,
+			'excerpt' => 'Tòa căn hộ mới nhất của FPT City Đà Nẵng: 20 tầng, khoảng 1.400 căn hộ 1 – 3 phòng ngủ, khởi công 3/2025.',
+			'meta'    => array(
+				'hh_p_status'    => 'dang-mo-ban',
+				'hh_p_developer' => 'Công ty CP Đô thị FPT Đà Nẵng',
+				'hh_p_type'      => 'Căn hộ',
+				'hh_p_address'   => 'Khu đô thị FPT City, Ngũ Hành Sơn, Đà Nẵng',
+				'hh_p_floors'    => '20 tầng nổi, 3 tầng hầm',
+				'hh_p_units'     => 'Khoảng 1.395 – 1.473 căn hộ (theo các nguồn)',
+				'hh_p_start'     => '19/03/2025',
+				'hh_p_handover'  => 'Quý 2/2027 (dự kiến)',
+				'hh_p_highlights' => "Tổng vốn đầu tư khoảng 2.790 tỷ đồng\nCăn hộ 1 – 3 phòng ngủ trong khu đô thị FPT City",
+			),
+			'sources' => array( 'https://www.xn--cnhfptplaza4-ynb8408h.vn/tien-do-xay-dung', 'https://batdongsan.com.vn/ban-can-ho-chung-cu-fpt-plaza-4' ),
 		),
 
 		/* ---------------- Cao tầng – Căn hộ dịch vụ ---------------- */
@@ -395,10 +559,11 @@ function hh_import_projects() {
 			++$created;
 		}
 
-		if ( ! has_term( '', 'loai-du-an', $id ) ) {
-			$type = get_term_by( 'slug', $p['type'], 'loai-du-an' );
-			if ( $type ) {
-				wp_set_object_terms( $id, (int) $type->term_id, 'loai-du-an' );
+		// Loại dự án: thêm các loại còn thiếu (dự án có cả căn hộ và nhà phố được gắn 2 loại).
+		foreach ( (array) $p['type'] as $slug ) {
+			$type = get_term_by( 'slug', $slug, 'loai-du-an' );
+			if ( $type && ! has_term( (int) $type->term_id, 'loai-du-an', $id ) ) {
+				wp_set_object_terms( $id, (int) $type->term_id, 'loai-du-an', true );
 			}
 		}
 		if ( ! has_term( '', 'khu-vuc', $id ) ) {

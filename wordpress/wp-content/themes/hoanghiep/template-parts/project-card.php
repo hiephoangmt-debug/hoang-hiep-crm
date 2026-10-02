@@ -14,7 +14,7 @@ $type   = hh_project_type();
 		<?php hh_pill( $status, hh_meta( 'hh_p_status' ) ); ?>
 		<?php if ( hh_is_hot() ) : ?><span class="hot-badge">HOT</span><?php endif; ?>
 		<?php if ( $type ) : ?>
-			<span class="project-card__type"><?php echo esc_html( $type->name ); ?></span>
+			<span class="project-card__type"><?php echo esc_html( hh_project_types_label() ); ?></span>
 		<?php endif; ?>
 	</a>
 	<div class="project-card__body">

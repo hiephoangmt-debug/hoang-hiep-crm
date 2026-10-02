@@ -83,7 +83,7 @@ if ! wp menu list --fields=name --format=csv | grep -q "^Menu chính$"; then
 	LOW=$(wp menu item add-custom "Menu chính" "Thấp tầng" "$SITE_URL/loai-du-an/thap-tang/" --parent-id="$PROJECTS" --porcelain)
 	wp menu item add-custom "Menu chính" "Biệt thự nghỉ dưỡng" "$SITE_URL/loai-du-an/biet-thu/" --parent-id="$LOW"
 	wp menu item add-custom "Menu chính" "Đất nền" "$SITE_URL/loai-du-an/dat-nen/" --parent-id="$LOW"
-	wp menu item add-custom "Menu chính" "Shophouse" "$SITE_URL/loai-du-an/shophouse/" --parent-id="$LOW"
+	wp menu item add-custom "Menu chính" "Nhà phố – Shophouse" "$SITE_URL/loai-du-an/shophouse/" --parent-id="$LOW"
 	wp menu item add-custom "Menu chính" "Mua bán" "$SITE_URL/mua-ban/"
 	wp menu item add-custom "Menu chính" "Cho thuê" "$SITE_URL/cho-thue/"
 	wp menu item add-post "Menu chính" "$NEWS_ID" --title="Tin tức"

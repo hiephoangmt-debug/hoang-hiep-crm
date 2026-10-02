@@ -63,7 +63,7 @@ function hoanghiep_fallback_menu( $args = array() ) {
 			array( 'Thấp tầng', $type_link( 'thap-tang', $projects ), array(
 				array( 'Biệt thự nghỉ dưỡng', $type_link( 'biet-thu', $projects ) ),
 				array( 'Đất nền', $type_link( 'dat-nen', $projects ) ),
-				array( 'Shophouse', $type_link( 'shophouse', $projects ) ),
+				array( 'Nhà phố – Shophouse', $type_link( 'shophouse', $projects ) ),
 			) ),
 		) ),
 		array( 'Mua bán', hh_deal_url( 'ban' ) ),

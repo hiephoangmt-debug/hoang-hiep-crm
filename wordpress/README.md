@@ -25,13 +25,15 @@ Khi thêm **Dự án** hoặc **Nhà đất**, bên dưới khung soạn thảo 
 
 ### Dữ liệu dự án Đà Nẵng – Quảng Nam (cũ)
 
-Script cài đặt tự nhập sẵn 18 dự án (có thể nhập lại ở **Dự án → Nhập dữ liệu Đà Nẵng**):
+Script cài đặt tự nhập sẵn 26 dự án (có thể nhập lại ở **Dự án → Nhập dữ liệu Đà Nẵng**):
 
-- **Căn hộ sở hữu lâu dài**: Sun Symphony Residence, Sun Cosmo Residence, Sun Ponte Residence, Peninsula Đà Nẵng, Hiyori Garden Tower, The Ori Garden
+- **Căn hộ sở hữu lâu dài**: Sun Symphony Residence, Sun Cosmo Residence, Sun Ponte Residence, The Legend, Times Square, Capital Square (2 phân khu), Newtown Diamond, Peninsula Đà Nẵng, Hiyori Garden Tower, The Ori Garden, FPT Plaza 1 – 4
 - **Căn hộ dịch vụ**: Hoiana Residences
 - **Biệt thự nghỉ dưỡng**: Casamia Balanca (đang bán), Casamia Calm, Casamia Hội An, Hoiana Beach Villas, Hoiana Shores Golf Villas, The Ocean Villas Đà Nẵng
-- **Shophouse**: Nam Hội An City
+- **Nhà phố – Shophouse**: Nam Hội An City; phần nhà phố, biệt thự của Sun Symphony, Sun Cosmo, Sun Ponte
 - **Đất nền**: FPT City Đà Nẵng, Dragon Smart City, Lakeside Palace, One World Regency
+
+**Dự án có nhiều loại sản phẩm** (căn hộ + nhà phố/biệt thự) được gắn nhiều loại dự án cùng lúc nên hiện ở cả mục Cao tầng và Thấp tầng; từng khu ghi ở bảng **Các phân khu** (tab Tổng quan).
 
 Thông tin (chủ đầu tư, vị trí, quy mô, số căn, tình trạng) tổng hợp từ nguồn công khai, lưu kèm link nguồn trong từng dự án. **Giá để trống** (hiện "Liên hệ"). Chạy lại không tạo trùng và không ghi đè ô đã sửa. Cần bổ sung ảnh đại diện và kiểm tra lại tình trạng mở bán/bàn giao với chủ đầu tư. Danh sách nằm trong `mu-plugins/hh-crm/data-du-an.php`.
 

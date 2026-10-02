@@ -116,7 +116,7 @@ function hh_default_terms() {
 			'thap-tang' => array( 'Thấp tầng', array(
 				'biet-thu'  => 'Biệt thự nghỉ dưỡng',
 				'dat-nen'   => 'Đất nền',
-				'shophouse' => 'Shophouse',
+				'shophouse' => 'Nhà phố – Shophouse',
 			) ),
 		),
 		'loai-bds'   => array(
@@ -149,8 +149,13 @@ function hh_default_terms() {
 
 add_action( 'init', 'hh_seed_terms', 20 );
 function hh_seed_terms() {
-	if ( wp_installing() || '4' === get_option( 'hh_terms_seeded' ) ) {
+	if ( wp_installing() || '5' === get_option( 'hh_terms_seeded' ) ) {
 		return;
+	}
+	// Đổi tên cũ "Shophouse" → "Nhà phố – Shophouse".
+	$shop = get_term_by( 'slug', 'shophouse', 'loai-du-an' );
+	if ( $shop && 'Shophouse' === $shop->name ) {
+		wp_update_term( $shop->term_id, 'loai-du-an', array( 'name' => 'Nhà phố – Shophouse' ) );
 	}
 	// Đổi tên cũ "Biệt thự" → "Biệt thự nghỉ dưỡng".
 	$villa = get_term_by( 'slug', 'biet-thu', 'loai-du-an' );
@@ -175,7 +180,7 @@ function hh_seed_terms() {
 			}
 		}
 	}
-	update_option( 'hh_terms_seeded', '4' );
+	update_option( 'hh_terms_seeded', '5' );
 }
 
 /** Most specific "Loại dự án" of a project (child term preferred). */
@@ -184,8 +189,18 @@ function hh_project_type( $post_id = null ) {
 	if ( ! $terms || is_wp_error( $terms ) ) {
 		return null;
 	}
-	usort( $terms, fn( $a, $b ) => (int) ( 0 === $a->parent ) - (int) ( 0 === $b->parent ) );
+	usort( $terms, fn( $a, $b ) => ( (int) ( 0 === $a->parent ) - (int) ( 0 === $b->parent ) ) ?: $a->term_id - $b->term_id );
 	return $terms[0];
+}
+
+/** All specific types of a project, e.g. "Căn hộ sở hữu lâu dài · Nhà phố – Shophouse". */
+function hh_project_types_label( $post_id = null ) {
+	$terms = get_the_terms( $post_id ?: get_the_ID(), 'loai-du-an' );
+	if ( ! $terms || is_wp_error( $terms ) ) {
+		return '';
+	}
+	$children = array_filter( $terms, fn( $t ) => 0 !== $t->parent );
+	return implode( ' · ', wp_list_pluck( $children ?: $terms, 'name' ) );
 }
 
 /** Whether a project belongs to the "Cao tầng" branch. */

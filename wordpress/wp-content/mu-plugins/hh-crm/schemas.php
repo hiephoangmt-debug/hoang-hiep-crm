@@ -51,6 +51,7 @@ function hh_project_schema() {
 				'hh_p_start'        => array( 'type' => 'text', 'label' => 'Khởi công', 'placeholder' => 'VD: Quý 2/2025', 'half' => true ),
 				'hh_p_handover'     => array( 'type' => 'text', 'label' => 'Bàn giao dự kiến', 'placeholder' => 'VD: Quý 4/2027', 'half' => true ),
 				'hh_p_handover_std' => array( 'type' => 'text', 'label' => 'Tiêu chuẩn bàn giao', 'placeholder' => 'VD: Hoàn thiện cơ bản, thiết bị bếp Bosch' ),
+				'hh_p_zones'        => array( 'type' => 'table', 'label' => 'Các phân khu (dự án có nhiều khu / nhiều loại sản phẩm)', 'columns' => array( 'Phân khu', 'Loại sản phẩm', 'Quy mô', 'Tình trạng' ), 'placeholder' => "Khu cao tầng (tòa S1–S3) | Căn hộ, shop khối đế | 1.313 căn hộ | Đang bàn giao\nKhu thấp tầng | Nhà phố, biệt thự | 180 nhà phố, 20 biệt thự | Đã bàn giao", 'help' => 'Dự án có cả căn hộ và nhà phố/biệt thự: chọn cả 2 loại ở ô "Loại dự án" bên phải (VD: Căn hộ sở hữu lâu dài + Nhà phố – Shophouse).' ),
 				'hh_p_highlights'   => array( 'type' => 'lines', 'label' => 'Điểm nổi bật', 'placeholder' => "Mặt tiền sông Hàn, view cầu Rồng và pháo hoa\nThanh toán 30% nhận nhà\nNgân hàng hỗ trợ vay 70%, ân hạn gốc lãi 24 tháng" ),
 			),
 		),
