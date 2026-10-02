@@ -6,17 +6,13 @@
 get_header();
 
 $name  = hoanghiep_opt( 'hh_person_name' );
-$photo = hoanghiep_opt( 'hh_person_photo' );
+$photo = hoanghiep_photo( 'portrait2' );
 $stats = hoanghiep_stats();
 ?>
 <section class="profile-hero">
 	<div class="container profile-hero__grid">
 		<div class="profile-hero__photo">
-			<?php if ( $photo ) : ?>
-				<img src="<?php echo esc_url( $photo ); ?>" alt="<?php echo esc_attr( $name ); ?>">
-			<?php else : ?>
-				<span class="about-home__initials"><?php echo esc_html( hh_initials( $name ) ); ?></span>
-			<?php endif; ?>
+			<img src="<?php echo esc_url( $photo ); ?>" alt="<?php echo esc_attr( $name . ' – ' . hoanghiep_opt( 'hh_person_title' ) ); ?>" width="900" height="1350">
 		</div>
 		<div>
 			<p class="eyebrow eyebrow--light"><?php echo esc_html( hoanghiep_opt( 'hh_person_title' ) ); ?></p>
@@ -65,6 +61,20 @@ $stats = hoanghiep_stats();
 					</li>
 				<?php endforeach; ?>
 			</ol>
+		</div>
+	</section>
+<?php endif; ?>
+
+<?php if ( hoanghiep_highlights() ) : ?>
+	<section class="section section--navy">
+		<div class="container">
+			<div class="section-head section-head--light">
+				<div>
+					<p class="eyebrow eyebrow--light">Hoạt động</p>
+					<h2 class="section-head__title">Hoạt động &amp; dấu ấn</h2>
+				</div>
+			</div>
+			<?php hh_highlights( 0, 'highlights highlights--dark' ); ?>
 		</div>
 	</section>
 <?php endif; ?>

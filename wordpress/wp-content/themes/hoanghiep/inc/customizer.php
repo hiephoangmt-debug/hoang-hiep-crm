@@ -13,6 +13,9 @@ function hoanghiep_defaults() {
 		'hh_person_company' => 'Tati Land',
 		'hh_person_career' => "Trưởng nhóm kinh doanh | Trực tiếp tư vấn, dẫn khách và chốt giao dịch tại các dự án Đà Nẵng\nTrưởng phòng kinh doanh | Xây dựng và dẫn dắt đội ngũ chuyên viên tư vấn\nGiám đốc sàn giao dịch | Vận hành sàn, phân phối nhiều dự án căn hộ, đất nền khu vực miền Trung\nGiám đốc kinh doanh | Hoạch định chiến lược bán hàng, làm việc trực tiếp với chủ đầu tư\nCEO | Điều hành doanh nghiệp môi giới, phát triển thị trường Đà Nẵng – miền Trung\nTati Land | Hiện đang công tác",
 		'hh_person_photo'  => '',
+		'hh_person_photo2' => '',
+		'hh_person_avatar' => '',
+		'hh_highlights'    => '{theme}/assets/img/hoi-nghi-tatiland-2026.jpg | Phát biểu tại Hội nghị tổng kết TATILAND “Thế & Lực 2026” – Furama Resort Đà Nẵng, 07/02/2026',
 		'hh_person_slogan' => 'Đúng nhu cầu – Đúng giá trị – Đúng pháp lý',
 		'hh_person_bio'    => 'Tôi là Hoàng Hiệp, hơn 15 năm gắn bó với thị trường bất động sản Đà Nẵng và miền Trung. Đi lên từ trưởng nhóm, trưởng phòng, giám đốc sàn, giám đốc kinh doanh đến CEO, tôi hiểu rõ từng dự án, từng khu vực và cách chọn đúng sản phẩm cho nhu cầu ở hay đầu tư. Hiện tôi đang công tác tại Tati Land.',
 		// Số liệu (để trống sẽ ẩn).
@@ -47,6 +50,35 @@ function hoanghiep_opt( $key ) {
 
 function hoanghiep_tel( $phone = null ) {
 	return preg_replace( '/[^0-9+]/', '', $phone ?? hoanghiep_opt( 'hh_phone' ) );
+}
+
+/**
+ * Ảnh của Hiệp: ảnh tải lên trong Tùy biến, nếu chưa có thì dùng ảnh có sẵn trong theme.
+ *
+ * @param string $which portrait | portrait2 | avatar
+ */
+function hoanghiep_photo( $which = 'portrait' ) {
+	$map = array(
+		'portrait'  => array( 'hh_person_photo', 'hoang-hiep-chan-dung-2.jpg' ),
+		'portrait2' => array( 'hh_person_photo2', 'hoang-hiep-chan-dung-1.jpg' ),
+		'avatar'    => array( 'hh_person_avatar', 'hoang-hiep-avatar.jpg' ),
+	);
+	list( $key, $file ) = $map[ $which ] ?? $map['portrait'];
+	return hoanghiep_opt( $key ) ?: get_theme_file_uri( 'assets/img/' . $file );
+}
+
+/** Hình ảnh hoạt động: [url, caption] pairs ("{theme}" = thư mục theme). */
+function hoanghiep_highlights() {
+	$rows = array();
+	foreach ( preg_split( '/\R/', hoanghiep_opt( 'hh_highlights' ) ) as $line ) {
+		$parts = array_map( 'trim', explode( '|', $line, 2 ) );
+		if ( '' === $parts[0] ) {
+			continue;
+		}
+		$url    = str_replace( '{theme}', untrailingslashit( get_theme_file_uri() ), $parts[0] );
+		$rows[] = array( $url, $parts[1] ?? '' );
+	}
+	return $rows;
 }
 
 /** Career steps as [role, note] pairs. */
@@ -96,6 +128,7 @@ function hoanghiep_customize( $wp_customize ) {
 		'hh_person_bio'    => array( 'hh_person', 'Giới thiệu ngắn', 'textarea' ),
 		'hh_person_company' => array( 'hh_person', 'Đơn vị đang công tác', 'text' ),
 		'hh_person_career' => array( 'hh_person', 'Hành trình nghề nghiệp (mỗi dòng: Chức vụ | Mô tả)', 'textarea' ),
+		'hh_highlights'    => array( 'hh_person', 'Hình ảnh hoạt động, sự kiện (mỗi dòng: link ảnh | chú thích). Tải ảnh ở Media → copy link.', 'textarea' ),
 		'hh_phone'         => array( 'hh_contact', 'Hotline', 'text' ),
 		'hh_zalo'          => array( 'hh_contact', 'Số Zalo', 'text' ),
 		'hh_email'         => array( 'hh_contact', 'Email', 'email' ),
@@ -124,7 +157,7 @@ function hoanghiep_customize( $wp_customize ) {
 		$wp_customize->add_control( $id, array( 'label' => $label, 'section' => $section, 'type' => $type ) );
 	}
 
-	foreach ( array( 'hh_person_photo' => array( 'hh_person', 'Ảnh chân dung' ), 'hh_hero_image' => array( 'hh_hero', 'Ảnh nền banner' ) ) as $id => list( $section, $label ) ) {
+	foreach ( array( 'hh_person_photo' => array( 'hh_person', 'Ảnh chân dung chính (để trống = ảnh có sẵn)' ), 'hh_person_photo2' => array( 'hh_person', 'Ảnh chân dung phụ – trang Về Hiệp' ), 'hh_person_avatar' => array( 'hh_person', 'Ảnh đại diện vuông (logo, thẻ liên hệ)' ), 'hh_hero_image' => array( 'hh_hero', 'Ảnh nền banner' ) ) as $id => list( $section, $label ) ) {
 		$wp_customize->add_setting( $id, array( 'sanitize_callback' => 'esc_url_raw' ) );
 		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, $id, array( 'label' => $label, 'section' => $section ) ) );
 	}

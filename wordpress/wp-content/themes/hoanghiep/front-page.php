@@ -221,11 +221,7 @@ if ( $news->have_posts() ) :
 <section class="section section--tint about-home">
 	<div class="container about-home__grid">
 		<div class="about-home__photo">
-			<?php if ( hoanghiep_opt( 'hh_person_photo' ) ) : ?>
-				<img src="<?php echo esc_url( hoanghiep_opt( 'hh_person_photo' ) ); ?>" alt="<?php echo esc_attr( hoanghiep_opt( 'hh_person_name' ) ); ?>">
-			<?php else : ?>
-				<span class="about-home__initials"><?php echo esc_html( hh_initials( hoanghiep_opt( 'hh_person_name' ) ) ); ?></span>
-			<?php endif; ?>
+			<img src="<?php echo esc_url( hoanghiep_photo( 'portrait' ) ); ?>" alt="<?php echo esc_attr( hoanghiep_opt( 'hh_person_name' ) . ' – ' . hoanghiep_opt( 'hh_person_title' ) ); ?>" loading="lazy" width="900" height="1350">
 			<p class="about-home__badge"><?php echo esc_html( hoanghiep_opt( 'hh_person_slogan' ) ); ?></p>
 		</div>
 		<div class="about-home__text">
@@ -249,6 +245,7 @@ if ( $news->have_posts() ) :
 					<li><?php echo hh_icon( 'handshake' ); // phpcs:ignore ?><span><strong>Đồng hành trọn vẹn</strong>Từ xem nhà đến công chứng, bàn giao</span></li>
 				</ul>
 			<?php endif; ?>
+			<?php hh_highlights( 1, 'highlights highlights--inline' ); ?>
 			<div class="about-home__actions">
 				<a class="btn btn--navy" href="<?php echo esc_url( home_url( '/gioi-thieu/' ) ); ?>">Tìm hiểu thêm</a>
 				<a class="btn btn--outline" href="tel:<?php echo esc_attr( hoanghiep_tel() ); ?>"><?php echo hh_icon( 'phone' ); // phpcs:ignore ?> <?php echo esc_html( hoanghiep_opt( 'hh_phone' ) ); ?></a>

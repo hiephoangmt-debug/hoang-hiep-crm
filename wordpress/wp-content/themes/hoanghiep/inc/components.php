@@ -135,19 +135,17 @@ function hh_spec_list( $rows ) {
 
 /** Personal card of Hiệp with call / Zalo buttons. */
 function hh_agent_card( $compact = false ) {
-	$photo = hoanghiep_opt( 'hh_person_photo' );
 	$name  = hoanghiep_opt( 'hh_person_name' );
 	?>
 	<div class="agent-card<?php echo $compact ? ' agent-card--compact' : ''; ?>">
 		<div class="agent-card__head">
-			<?php if ( $photo ) : ?>
-				<img class="agent-card__photo" src="<?php echo esc_url( $photo ); ?>" alt="<?php echo esc_attr( $name ); ?>" width="72" height="72">
-			<?php else : ?>
-				<span class="agent-card__photo agent-card__photo--initials"><?php echo esc_html( hh_initials( $name ) ); ?></span>
-			<?php endif; ?>
+			<img class="agent-card__photo" src="<?php echo esc_url( hoanghiep_photo( 'avatar' ) ); ?>" alt="<?php echo esc_attr( $name ); ?>" width="72" height="72" loading="lazy">
 			<div>
 				<p class="agent-card__name"><?php echo esc_html( $name ); ?></p>
 				<p class="agent-card__title"><?php echo esc_html( hoanghiep_opt( 'hh_person_title' ) ); ?></p>
+				<?php if ( hoanghiep_opt( 'hh_person_company' ) ) : ?>
+					<p class="agent-card__company"><?php echo esc_html( hoanghiep_opt( 'hh_person_company' ) ); ?><?php echo 0 === mb_stripos( hoanghiep_opt( 'hh_stat1_label' ), 'Năm' ) && hoanghiep_opt( 'hh_stat1_num' ) ? ' · ' . esc_html( hoanghiep_opt( 'hh_stat1_num' ) ) . ' năm kinh nghiệm' : ''; ?></p>
+				<?php endif; ?>
 			</div>
 		</div>
 		<a class="btn btn--gold btn--block" href="tel:<?php echo esc_attr( hoanghiep_tel() ); ?>"><?php echo hh_icon( 'phone' ); // phpcs:ignore ?> <?php echo esc_html( hoanghiep_opt( 'hh_phone' ) ); ?></a>
@@ -265,4 +263,25 @@ function hh_news_query( $q ) {
 	if ( ! is_admin() && $q->is_main_query() && ( $q->is_home() || $q->is_category() ) ) {
 		$q->set( 'posts_per_page', 14 ); // Trang 1: 1 bài lớn + 4 bài nhỏ + 9 bài dạng lưới.
 	}
+}
+
+/** Grid of activity photos with captions (lightbox group "hoat-dong"). */
+function hh_highlights( $limit = 0, $class = 'highlights' ) {
+	$items = hoanghiep_highlights();
+	if ( $limit ) {
+		$items = array_slice( $items, 0, $limit );
+	}
+	if ( ! $items ) {
+		return;
+	}
+	printf( '<div class="%s">', esc_attr( $class ) );
+	foreach ( $items as list( $url, $caption ) ) {
+		printf(
+			'<figure><a href="%1$s" data-lightbox="hoat-dong"><img src="%1$s" alt="%2$s" loading="lazy"></a>%3$s</figure>',
+			esc_url( $url ),
+			esc_attr( $caption ?: hoanghiep_opt( 'hh_person_name' ) ),
+			$caption ? '<figcaption>' . esc_html( $caption ) . '</figcaption>' : ''
+		);
+	}
+	echo '</div>';
 }

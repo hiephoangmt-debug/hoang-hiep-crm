@@ -21,7 +21,7 @@ while ( have_posts() ) :
 			<?php endif; ?>
 			<h1 class="article-head__title"><?php the_title(); ?></h1>
 			<p class="article-head__meta">
-				<span class="article-head__author"><?php echo esc_html( hh_initials( hoanghiep_opt( 'hh_person_name' ) ) ); ?></span>
+				<img class="article-head__author" src="<?php echo esc_url( hoanghiep_photo( 'avatar' ) ); ?>" alt="<?php echo esc_attr( hoanghiep_opt( 'hh_person_name' ) ); ?>" width="40" height="40">
 				<span><strong><?php echo esc_html( hoanghiep_opt( 'hh_person_name' ) ); ?></strong> · <time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date( 'd/m/Y' ) ); ?></time> · <?php echo esc_html( hh_reading_time() ); ?><?php if ( get_the_modified_date( 'Ymd' ) !== get_the_date( 'Ymd' ) ) : ?> · Cập nhật <?php echo esc_html( get_the_modified_date( 'd/m/Y' ) ); ?><?php endif; ?></span>
 			</p>
 		</div>
@@ -68,14 +68,10 @@ while ( have_posts() ) :
 			</div>
 
 			<aside class="author-box">
-				<?php if ( hoanghiep_opt( 'hh_person_photo' ) ) : ?>
-					<img src="<?php echo esc_url( hoanghiep_opt( 'hh_person_photo' ) ); ?>" alt="<?php echo esc_attr( hoanghiep_opt( 'hh_person_name' ) ); ?>" width="72" height="72">
-				<?php else : ?>
-					<span class="author-box__initials"><?php echo esc_html( hh_initials( hoanghiep_opt( 'hh_person_name' ) ) ); ?></span>
-				<?php endif; ?>
+				<img src="<?php echo esc_url( hoanghiep_photo( 'avatar' ) ); ?>" alt="<?php echo esc_attr( hoanghiep_opt( 'hh_person_name' ) ); ?>" width="72" height="72" loading="lazy">
 				<div>
 					<p class="author-box__name"><?php echo esc_html( hoanghiep_opt( 'hh_person_name' ) ); ?></p>
-					<p class="author-box__title"><?php echo esc_html( hoanghiep_opt( 'hh_person_title' ) ); ?></p>
+					<p class="author-box__title"><?php echo esc_html( hoanghiep_opt( 'hh_person_title' ) ); ?><?php echo hoanghiep_opt( 'hh_person_company' ) ? ' · ' . esc_html( hoanghiep_opt( 'hh_person_company' ) ) : ''; ?></p>
 					<p><?php echo esc_html( hoanghiep_opt( 'hh_person_bio' ) ); ?></p>
 					<a class="link-arrow" href="<?php echo esc_url( home_url( '/gioi-thieu/' ) ); ?>">Tìm hiểu thêm về <?php echo esc_html( hoanghiep_opt( 'hh_person_name' ) ); ?> <?php echo hh_icon( 'arrow' ); // phpcs:ignore ?></a>
 				</div>

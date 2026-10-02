@@ -24,7 +24,7 @@
 				<?php the_custom_logo(); ?>
 			<?php else : ?>
 				<a class="brand__link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-					<span class="brand__mark"><?php echo esc_html( hh_initials( hoanghiep_opt( 'hh_person_name' ) ) ); ?></span>
+					<img class="brand__mark" src="<?php echo esc_url( hoanghiep_photo( 'avatar' ) ); ?>" alt="<?php echo esc_attr( hoanghiep_opt( 'hh_person_name' ) ); ?>" width="46" height="46">
 					<span class="brand__text">
 						<span class="brand__name"><?php echo esc_html( hoanghiep_opt( 'hh_person_name' ) ); ?></span>
 						<span class="brand__tag"><?php echo esc_html( hoanghiep_opt( 'hh_person_title' ) ); ?></span>

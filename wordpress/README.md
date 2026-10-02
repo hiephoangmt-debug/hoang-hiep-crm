@@ -80,7 +80,7 @@ Mở https://hiephoangmt.com/wp-admin và đăng nhập bằng `WP_ADMIN_USER` /
 
 ### 4. Sau khi cài
 1. **Giao diện → Tùy biến → Hoàng Hiệp – Thương hiệu**:
-   - *Thông tin cá nhân*: họ tên, chức danh, slogan, giới thiệu, **ảnh chân dung**, đơn vị đang công tác (Tati Land), **hành trình nghề nghiệp** (mỗi dòng: Chức vụ | Mô tả).
+   - *Thông tin cá nhân*: họ tên, chức danh, slogan, giới thiệu, **ảnh chân dung chính/phụ, ảnh đại diện vuông** (theme đã có sẵn ảnh của Hiệp, tải ảnh mới để thay), **hình ảnh hoạt động** (mỗi dòng: link ảnh | chú thích), đơn vị đang công tác (Tati Land), **hành trình nghề nghiệp** (mỗi dòng: Chức vụ | Mô tả).
    - *Số liệu nổi bật*: năm kinh nghiệm, số giao dịch… (để trống thì ẩn).
    - *Liên hệ & mạng xã hội*: hotline, Zalo, email, Facebook, YouTube, TikTok.
    - *Banner trang chủ*: tiêu đề, mô tả, ảnh nền (dùng khi chưa có dự án nổi bật).

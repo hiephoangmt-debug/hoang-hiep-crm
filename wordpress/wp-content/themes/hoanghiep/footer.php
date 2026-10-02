@@ -2,6 +2,7 @@
 <footer class="site-footer">
 	<div class="container site-footer__grid">
 		<div class="site-footer__brand">
+			<img class="site-footer__avatar" src="<?php echo esc_url( hoanghiep_photo( 'avatar' ) ); ?>" alt="<?php echo esc_attr( hoanghiep_opt( 'hh_person_name' ) ); ?>" width="64" height="64" loading="lazy">
 			<p class="site-footer__name"><?php echo esc_html( hoanghiep_opt( 'hh_person_name' ) ); ?></p>
 			<p class="site-footer__title"><?php echo esc_html( hoanghiep_opt( 'hh_person_title' ) ); ?></p>
 			<p><?php echo esc_html( hoanghiep_opt( 'hh_person_slogan' ) ); ?></p>

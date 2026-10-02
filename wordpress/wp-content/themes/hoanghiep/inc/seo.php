@@ -152,7 +152,10 @@ function hh_seo_image() {
 	if ( is_singular() && has_post_thumbnail() ) {
 		return wp_get_attachment_image_url( get_post_thumbnail_id(), 'large' );
 	}
-	$fallback = hoanghiep_opt( 'hh_hero_image' ) ?: hoanghiep_opt( 'hh_person_photo' );
+	if ( is_page( 'gioi-thieu' ) || is_front_page() && ! hoanghiep_opt( 'hh_hero_image' ) ) {
+		return hoanghiep_photo( 'portrait' );
+	}
+	$fallback = hoanghiep_opt( 'hh_hero_image' );
 	if ( ! $fallback ) {
 		$latest = get_posts( array( 'post_type' => 'du-an', 'numberposts' => 1, 'meta_key' => '_thumbnail_id', 'fields' => 'ids' ) ); // phpcs:ignore
 		$fallback = $latest ? wp_get_attachment_image_url( get_post_thumbnail_id( $latest[0] ), 'large' ) : '';
@@ -268,9 +271,7 @@ function hh_schema_person() {
 	if ( hoanghiep_opt( 'hh_person_company' ) ) {
 		$person['worksFor'] = array( '@type' => 'Organization', 'name' => hoanghiep_opt( 'hh_person_company' ) );
 	}
-	if ( hoanghiep_opt( 'hh_person_photo' ) ) {
-		$person['image'] = hoanghiep_opt( 'hh_person_photo' );
-	}
+	$person['image'] = array( hoanghiep_photo( 'portrait' ), hoanghiep_photo( 'portrait2' ), hoanghiep_photo( 'avatar' ) );
 	return $person;
 }
 
@@ -291,9 +292,7 @@ function hh_schema_agent() {
 		'founder'     => hh_schema_person(),
 		'knowsAbout'  => array( 'Bất động sản Đà Nẵng', 'Căn hộ', 'Căn hộ dịch vụ', 'Đất nền', 'Biệt thự', 'Shophouse', 'Vay mua nhà' ),
 	);
-	if ( hoanghiep_opt( 'hh_person_photo' ) ) {
-		$agent['image'] = hoanghiep_opt( 'hh_person_photo' );
-	}
+	$agent['image'] = hoanghiep_photo( 'avatar' );
 	if ( $same_as ) {
 		$agent['sameAs'] = $same_as;
 	}
