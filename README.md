@@ -12,3 +12,6 @@ Cấu hình một lần:
 2. DNS tại nhà cung cấp tên miền:
    - `CNAME` `www` → `hiephoangmt-debug.github.io`
    - `A` `@` → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` (để tên miền gốc chuyển về `www`)
+
+SEO / AI search: JSON-LD (`LocalBusiness`, `FAQPage`) được sinh từ chính nội dung trang;
+`robots.txt` cho phép bot tìm kiếm của AI (OAI-SearchBot, GPTBot, PerplexityBot...); `llms.txt` tóm tắt doanh nghiệp cho AI.

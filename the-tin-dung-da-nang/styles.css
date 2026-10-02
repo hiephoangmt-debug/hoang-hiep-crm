@@ -226,3 +226,11 @@ img { max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* Intro facts */
+.section--intro p { font-size: 1.05rem; }
+.facts { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 10px; }
+.facts li { background: var(--bg-alt); border-left: 4px solid var(--accent); border-radius: 8px; padding: 10px 14px; }
+.facts b { color: var(--primary-dark); }
+.updated { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 20px; }
+section[id] { scroll-margin-top: 72px; }
