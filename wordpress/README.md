@@ -8,9 +8,9 @@ Website thương hiệu cá nhân **Hoàng Hiệp – bất động sản Đà N
 
 | Phần | Mô tả |
 |------|-------|
-| **Trang chủ** | Banner tự chạy slide các dự án nổi bật, ô tìm kiếm (Mua bán / Cho thuê / Dự án), **Dự án căn hộ**, **Dự án đất nền**, **Nhà đất bán**, **Nhà đất cho thuê**, **Tin tức mới nhất**, giới thiệu Hiệp, khu vực Đà Nẵng, quy trình làm việc, form nhận tư vấn |
-| **Dự án** (`/du-an/`, `/loai-du-an/can-ho/`, `/loai-du-an/dat-nen/`) | Lọc theo loại, tình trạng, khu vực. Trang chi tiết có mục lục dính khi cuộn: Tổng quan · Vị trí · Tiện ích · Mặt bằng · Giá & thanh toán · Tiến độ · Hình ảnh · Hỏi đáp, form "Nhận bảng giá" |
-| **Mua bán / Cho thuê** (`/mua-ban/`, `/cho-thue/`) | Lọc theo khu vực, loại, mức giá, diện tích, phòng ngủ, hướng; sắp xếp theo giá, diện tích. Trang chi tiết có album ảnh phóng to, bảng thông số, đơn giá/m², điều kiện thuê, video, bản đồ, form "Đặt lịch xem nhà" |
+| **Trang chủ** | Banner tự chạy slide các dự án HOT, ô tìm kiếm (Mua bán / Cho thuê / Dự án), **Dự án cao tầng**, **Dự án thấp tầng**, **Nhà đất bán hot mới**, **Nhà cho thuê hot mới**, **Tin tức mới nhất**, giới thiệu Hiệp, khu vực Đà Nẵng, quy trình làm việc, form nhận tư vấn |
+| **Dự án** (`/du-an/`) | **Cao tầng**: Căn hộ sở hữu lâu dài · Căn hộ dịch vụ (50 năm). **Thấp tầng**: Biệt thự · Đất nền · Shophouse. Lọc theo loại, tình trạng, khu vực. Trang chi tiết có mục lục dính khi cuộn: Tổng quan · Vị trí · Tiện ích · Mặt bằng · **Shop khối đế · Penthouse · Duplex** · Giá & thanh toán · **Dòng tiền & vay** · Tiến độ · Hình ảnh · Hỏi đáp, form "Nhận bảng giá". Cuối trang: **Dự án hot mới** (chỉ dự án) |
+| **Mua bán / Cho thuê** (`/mua-ban/`, `/cho-thue/`) | Lọc theo khu vực, loại, mức giá, diện tích, phòng ngủ, hướng; sắp xếp theo giá, diện tích. Trang chi tiết có album ảnh phóng to, bảng thông số, đơn giá/m², **tính vay** (tin bán), điều kiện thuê, video, bản đồ, form "Đặt lịch xem nhà". Cuối trang: **tin hot mới cùng loại** (bán → bán, thuê → thuê) |
 | **Về Hiệp** (`/gioi-thieu/`) | Hồ sơ cá nhân: ảnh, slogan, giới thiệu, số liệu, dịch vụ |
 | **Khách hàng** (trong quản trị) | Mỗi lần khách gửi form, website lưu lại khách kèm căn/dự án họ quan tâm và gửi email báo cho bạn. Trạng thái: Mới → Đã liên hệ → Đang chăm sóc → Đã chốt |
 | **Điện thoại** | Thanh dưới cùng: Gọi ngay · Chat Zalo · Nhận tư vấn |
@@ -22,6 +22,21 @@ Khi thêm **Dự án** hoặc **Nhà đất**, bên dưới khung soạn thảo 
 - **Dự án**: Tổng quan (chủ đầu tư, quy mô, mật độ, số tòa, pháp lý, bàn giao, điểm nổi bật…) · Vị trí (mô tả, kết nối vùng, bản đồ) · Tiện ích nội/ngoại khu · Mặt bằng & loại sản phẩm · Bảng giá, tiến độ thanh toán, chính sách, hỗ trợ vay, link brochure · Tiến độ xây dựng · Thư viện ảnh, video YouTube · Hỏi đáp.
 - **Nhà đất**: Bán/Cho thuê, tình trạng, giá (nhập số triệu, website tự hiện "3,2 tỷ" và tính đơn giá/m²) · Diện tích, kích thước, mặt tiền, hẻm, hướng, số tầng, phòng ngủ, WC, nội thất, pháp lý · Điều kiện thuê · Đặc điểm nổi bật, tiện ích xung quanh · Ảnh, video, bản đồ. Mỗi tin tự có mã (VD: HH00020).
 - Bảng (bảng giá, kết nối, tiến độ…): mỗi dòng một hàng, các cột cách nhau bằng dấu `|`, ví dụ `Căn 2PN | 68 m² | 3,35 tỷ | View sông`.
+
+### Bài toán dòng tiền & vay ngân hàng
+
+Trang dự án có bảng tính tương tác (khách tự chỉnh số, kết quả cập nhật ngay):
+
+- **Vay ngân hàng**: vốn tự có, khoản vay, trả tháng đầu, trả cao nhất/tháng, tổng lãi, tổng thanh toán; hỗ trợ lãi ưu đãi, lãi thả nổi, ân hạn gốc, CĐT hỗ trợ lãi 0%; 2 cách trả (gốc đều lãi giảm dần / trả đều hằng tháng); lịch trả nợ từng năm.
+- **Dòng tiền theo tiến độ**: lấy từ bảng "Tiến độ thanh toán", chia số tiền từng đợt thành phần vốn tự có và phần ngân hàng giải ngân.
+- **Bài toán cho thuê**: thu nhập ròng/tháng, lợi suất/năm, dòng tiền sau khi trả ngân hàng.
+- **Phân tích tự viết** và **Bảng tính bổ sung** do Hiệp nhập trong tab *Dòng tiền & vay vốn*.
+
+Số liệu mặc định (giá căn mẫu, tỷ lệ vay, lãi suất, ân hạn, giá thuê…) nhập trong tab **Dòng tiền & vay vốn** của từng dự án.
+
+### HOT & mới
+
+Tick **"Dự án HOT"** / **"Tin HOT"** khi nhập: tin được gắn nhãn HOT, lên banner trang chủ (dự án) và luôn đứng đầu mục "hot mới" ở cuối các trang cùng loại. Các mục không lẫn sang nhau: trang dự án chỉ gợi ý dự án, tin bán chỉ gợi ý tin bán, tin cho thuê chỉ gợi ý tin cho thuê.
 
 ### SEO Google & ChatGPT
 
@@ -57,7 +72,7 @@ git clone <repo này> && cd hoang-hiep-crm/wordpress
 cp .env.example .env
 nano .env                      # đổi toàn bộ mật khẩu
 docker compose --profile production up -d
-./scripts/setup.sh             # cài WordPress, theme, trang, menu, khu vực Đà Nẵng, loại dự án
+./scripts/setup.sh             # cài WordPress, theme, trang, menu 3 cấp, khu vực Đà Nẵng, loại dự án
 ```
 Mở https://hiephoangmt.com/wp-admin và đăng nhập bằng `WP_ADMIN_USER` / `WP_ADMIN_PASSWORD`.
 
@@ -67,7 +82,7 @@ Mở https://hiephoangmt.com/wp-admin và đăng nhập bằng `WP_ADMIN_USER` /
    - *Số liệu nổi bật*: năm kinh nghiệm, số giao dịch… (để trống thì ẩn).
    - *Liên hệ & mạng xã hội*: hotline, Zalo, email, Facebook, YouTube, TikTok.
    - *Banner trang chủ*: tiêu đề, mô tả, ảnh nền (dùng khi chưa có dự án nổi bật).
-2. **Dự án → Thêm dự án**: nhập thông tin, đặt **ảnh đại diện** (ảnh banner), chọn **Loại dự án** (Căn hộ / Đất nền…) và **Khu vực**, tick "Dự án nổi bật" để lên slide trang chủ.
+2. **Dự án → Thêm dự án**: nhập thông tin theo từng tab, đặt **ảnh đại diện** (ảnh banner), chọn **Loại dự án** (Cao tầng → Căn hộ sở hữu lâu dài / Căn hộ dịch vụ; Thấp tầng → Biệt thự / Đất nền / Shophouse) và **Khu vực**, tick "Dự án HOT" để lên slide trang chủ.
 3. **Nhà đất → Đăng tin**: chọn Bán/Cho thuê, nhập giá, diện tích…, chọn Loại nhà đất và Khu vực.
 4. **Bài viết → Viết bài mới** cho mục Tin tức (nhớ điền phần Tóm tắt và ảnh đại diện).
 5. Nên cài thêm plugin gửi mail SMTP (VD: *WP Mail SMTP*) để email báo khách mới không vào thư rác, và một plugin sao lưu.

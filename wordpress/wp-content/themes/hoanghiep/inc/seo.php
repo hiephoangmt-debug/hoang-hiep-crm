@@ -46,7 +46,7 @@ function hh_seo_description() {
 		$bits = array_filter(
 			array(
 				get_the_title(),
-				hh_meta( 'hh_p_type' ),
+				hh_project_type() ? 'dự án ' . mb_strtolower( hh_project_type()->name ) : hh_meta( 'hh_p_type' ),
 				hh_meta( 'hh_p_address' ) ? 'tại ' . hh_meta( 'hh_p_address' ) : '',
 				hh_meta( 'hh_p_developer' ) ? 'chủ đầu tư ' . hh_meta( 'hh_p_developer' ) : '',
 				'giá ' . mb_strtolower( hh_project_price() ),
@@ -84,8 +84,11 @@ function hh_seo_description() {
 			return wp_strip_all_tags( $desc );
 		}
 	}
-	if ( is_post_type_archive( 'du-an' ) || is_tax( 'loai-du-an' ) ) {
-		return 'Danh sách dự án căn hộ, đất nền, nhà phố tại Đà Nẵng: vị trí, giá bán, mặt bằng, tiến độ và chính sách mới nhất. Tư vấn: ' . hoanghiep_opt( 'hh_phone' ) . '.';
+	if ( is_tax( 'loai-du-an' ) ) {
+		return 'Danh sách dự án ' . mb_strtolower( single_term_title( '', false ) ) . ' tại Đà Nẵng: vị trí, giá bán, mặt bằng, chính sách bán hàng mới nhất. Tư vấn: ' . hoanghiep_opt( 'hh_phone' ) . '.';
+	}
+	if ( is_post_type_archive( 'du-an' ) ) {
+		return 'Danh sách dự án cao tầng (căn hộ, căn hộ dịch vụ, penthouse, duplex, shop khối đế) và thấp tầng (biệt thự, đất nền, shophouse) tại Đà Nẵng: vị trí, giá bán, mặt bằng, tiến độ và chính sách mới nhất. Tư vấn: ' . hoanghiep_opt( 'hh_phone' ) . '.';
 	}
 	if ( is_post_type_archive( 'bat-dong-san' ) || is_tax( 'loai-bds' ) ) {
 		return hh_listing_archive_title() . ' tại Đà Nẵng, cập nhật hằng ngày, thông tin pháp lý rõ ràng. Lọc theo giá, diện tích, khu vực. Liên hệ ' . hoanghiep_opt( 'hh_phone' ) . '.';
@@ -254,11 +257,7 @@ function hh_schema_images( $ids ) {
 function hh_schema_project() {
 	$id     = get_the_ID();
 	$images = hh_schema_images( array_merge( array( get_post_thumbnail_id() ), hh_ids( 'hh_p_gallery' ) ) );
-	$type   = 'Residence';
-	$terms  = get_the_terms( $id, 'loai-du-an' );
-	if ( $terms && ! is_wp_error( $terms ) && 'can-ho' === $terms[0]->slug ) {
-		$type = 'ApartmentComplex';
-	}
+	$type   = hh_is_high_rise( $id ) ? 'ApartmentComplex' : 'Residence';
 	$data = array(
 		'@type'       => array( $type, 'Product' ),
 		'@id'         => get_permalink() . '#du-an',
@@ -266,6 +265,7 @@ function hh_schema_project() {
 		'url'         => get_permalink(),
 		'description' => hh_seo_description(),
 		'address'     => array( '@type' => 'PostalAddress', 'streetAddress' => hh_meta( 'hh_p_address' ), 'addressRegion' => 'Đà Nẵng', 'addressCountry' => 'VN' ),
+		'category'    => hh_project_type( $id ) ? hh_project_type( $id )->name : null,
 		'brand'       => hh_meta( 'hh_p_developer' ) ? array( '@type' => 'Organization', 'name' => hh_meta( 'hh_p_developer' ) ) : null,
 		'image'       => $images ?: null,
 		'amenityFeature' => array_map(
@@ -296,7 +296,7 @@ function hh_schema_listing() {
 	$id    = get_the_ID();
 	$terms = get_the_terms( $id, 'loai-bds' );
 	$slug  = $terms && ! is_wp_error( $terms ) ? $terms[0]->slug : '';
-	$map   = array( 'can-ho' => 'Apartment', 'nha-pho' => 'House', 'nha-hem' => 'House', 'biet-thu' => 'SingleFamilyResidence' );
+	$map   = array( 'can-ho' => 'Apartment', 'penthouse' => 'Apartment', 'duplex' => 'Apartment', 'nha-pho' => 'House', 'nha-kiet' => 'House', 'shophouse' => 'House', 'biet-thu' => 'SingleFamilyResidence' );
 	$kind  = 'Place';
 	foreach ( $map as $prefix => $type ) {
 		if ( 0 === strpos( $slug, $prefix ) ) {
@@ -471,7 +471,7 @@ function hh_seo_llms_txt( $wp ) {
 		'',
 		'## Trang chính',
 		'',
-		'- [Dự án Đà Nẵng](' . get_post_type_archive_link( 'du-an' ) . '): dự án căn hộ, đất nền, nhà phố đang phân phối',
+		'- [Dự án Đà Nẵng](' . get_post_type_archive_link( 'du-an' ) . '): dự án cao tầng (căn hộ sở hữu lâu dài, căn hộ dịch vụ 50 năm) và thấp tầng (biệt thự, đất nền, shophouse)',
 		'- [Nhà đất bán Đà Nẵng](' . hh_deal_url( 'ban' ) . ')',
 		'- [Nhà đất cho thuê Đà Nẵng](' . hh_deal_url( 'thue' ) . ')',
 		'- [Giới thiệu ' . $name . '](' . home_url( '/gioi-thieu/' ) . ')',
@@ -483,6 +483,7 @@ function hh_seo_llms_txt( $wp ) {
 	foreach ( get_posts( array( 'post_type' => 'du-an', 'numberposts' => 50 ) ) as $p ) {
 		$facts   = array_filter(
 			array(
+				hh_project_type( $p->ID ) ? hh_project_type( $p->ID )->name : '',
 				hh_option_label( hh_project_schema(), 'hh_p_status', hh_meta( 'hh_p_status', $p->ID ) ),
 				hh_meta( 'hh_p_address', $p->ID ),
 				hh_project_price( $p->ID ),

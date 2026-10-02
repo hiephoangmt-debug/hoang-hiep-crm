@@ -17,6 +17,7 @@ $photos = count( hh_ids( 'hh_gallery' ) ) + ( has_post_thumbnail() ? 1 : 0 );
 		<?php if ( $status && 'con-hang' !== $status ) : ?>
 			<?php hh_pill( hh_option_label( $schema, 'hh_status', $status ), $status ); ?>
 		<?php endif; ?>
+		<?php if ( hh_is_hot() && 'da-giao-dich' !== $status ) : ?><span class="hot-badge hot-badge--left">HOT</span><?php endif; ?>
 		<?php if ( $photos > 1 ) : ?>
 			<span class="listing-card__count"><?php echo (int) $photos; ?> ảnh</span>
 		<?php endif; ?>

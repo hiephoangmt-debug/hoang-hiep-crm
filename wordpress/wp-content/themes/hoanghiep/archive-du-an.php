@@ -5,10 +5,12 @@ $statuses = hh_project_schema()['tong-quan']['fields']['hh_p_status']['options']
 $current  = sanitize_key( (string) get_query_var( 'tt' ) );
 $area     = sanitize_title( (string) get_query_var( 'khu-vuc' ) );
 $areas    = get_terms( array( 'taxonomy' => 'khu-vuc', 'hide_empty' => false ) );
-$types    = get_terms( array( 'taxonomy' => 'loai-du-an', 'hide_empty' => false ) );
+$types    = get_terms( array( 'taxonomy' => 'loai-du-an', 'hide_empty' => false, 'parent' => 0, 'orderby' => 'term_id' ) );
 $term     = is_tax( 'loai-du-an' ) ? get_queried_object() : null;
 $base     = $term ? get_term_link( $term ) : get_post_type_archive_link( 'du-an' );
 $title    = $term ? 'Dự án ' . mb_strtolower( $term->name ) . ' Đà Nẵng' : 'Dự án Đà Nẵng';
+$group    = $term ? ( $term->parent ? get_term( $term->parent, 'loai-du-an' ) : $term ) : null;
+$subtypes = $group ? get_terms( array( 'taxonomy' => 'loai-du-an', 'hide_empty' => false, 'parent' => $group->term_id, 'orderby' => 'term_id' ) ) : array();
 ?>
 <div class="page-head">
 	<div class="container">
@@ -23,7 +25,15 @@ $title    = $term ? 'Dự án ' . mb_strtolower( $term->name ) . ' Đà Nẵng' 
 			<nav class="deal-tabs" aria-label="Loại dự án">
 				<a class="<?php echo $term ? '' : 'is-active'; ?>" href="<?php echo esc_url( get_post_type_archive_link( 'du-an' ) ); ?>">Tất cả</a>
 				<?php foreach ( $types as $t ) : ?>
-					<a class="<?php echo $term && $term->term_id === $t->term_id ? 'is-active' : ''; ?>" href="<?php echo esc_url( get_term_link( $t ) ); ?>"><?php echo esc_html( $t->name ); ?></a>
+					<a class="<?php echo $group && $group->term_id === $t->term_id ? 'is-active' : ''; ?>" href="<?php echo esc_url( get_term_link( $t ) ); ?>"><?php echo esc_html( $t->name ); ?></a>
+				<?php endforeach; ?>
+			</nav>
+		<?php endif; ?>
+		<?php if ( $subtypes && ! is_wp_error( $subtypes ) ) : ?>
+			<nav class="type-chips type-chips--head" aria-label="Loại <?php echo esc_attr( mb_strtolower( $group->name ) ); ?>">
+				<a class="<?php echo $term->term_id === $group->term_id ? 'is-active' : ''; ?>" href="<?php echo esc_url( get_term_link( $group ) ); ?>">Tất cả <?php echo esc_html( mb_strtolower( $group->name ) ); ?></a>
+				<?php foreach ( $subtypes as $t ) : ?>
+					<a class="<?php echo $term->term_id === $t->term_id ? 'is-active' : ''; ?>" href="<?php echo esc_url( get_term_link( $t ) ); ?>"><?php echo esc_html( $t->name ); ?> <span><?php echo (int) $t->count; ?></span></a>
 				<?php endforeach; ?>
 			</nav>
 		<?php endif; ?>

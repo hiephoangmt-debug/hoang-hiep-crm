@@ -30,7 +30,7 @@ function hh_project_schema() {
 					'dang-ban-giao' => 'Đang bàn giao',
 					'da-ban-giao'   => 'Đã bàn giao',
 				) ),
-				'hh_p_featured'     => array( 'type' => 'checkbox', 'label' => 'Dự án nổi bật (hiện ở banner & trang chủ)', 'half' => true ),
+				'hh_p_featured'     => array( 'type' => 'checkbox', 'label' => 'Dự án HOT (lên banner, trang chủ và mục "Dự án hot mới")', 'half' => true ),
 				'hh_p_name'         => array( 'type' => 'text', 'label' => 'Tên thương mại', 'placeholder' => 'VD: Aurelia Riverside', 'half' => true ),
 				'hh_p_type'         => array( 'type' => 'text', 'label' => 'Loại hình', 'placeholder' => 'VD: Căn hộ cao cấp, nhà phố, shophouse', 'half' => true ),
 				'hh_p_developer'    => array( 'type' => 'text', 'label' => 'Chủ đầu tư', 'placeholder' => 'VD: Công ty CP Địa ốc ABC', 'half' => true ),
@@ -47,7 +47,7 @@ function hh_project_schema() {
 				'hh_p_price_from'   => array( 'type' => 'number', 'label' => 'Giá từ (triệu đồng)', 'placeholder' => 'VD: 2500 (= 2,5 tỷ)', 'half' => true, 'help' => 'Nhập số, đơn vị triệu. Để trống sẽ hiện "Đang cập nhật".' ),
 				'hh_p_price_m2'     => array( 'type' => 'text', 'label' => 'Đơn giá / m²', 'placeholder' => 'VD: 55 – 65 triệu/m²', 'half' => true ),
 				'hh_p_legal'        => array( 'type' => 'text', 'label' => 'Pháp lý', 'placeholder' => 'VD: Đã có giấy phép xây dựng, sổ hồng riêng từng căn', 'half' => true ),
-				'hh_p_ownership'    => array( 'type' => 'text', 'label' => 'Hình thức sở hữu', 'placeholder' => 'VD: Sở hữu lâu dài', 'half' => true ),
+				'hh_p_ownership'    => array( 'type' => 'text', 'label' => 'Hình thức sở hữu', 'placeholder' => 'VD: Sở hữu lâu dài / 50 năm (căn hộ dịch vụ)', 'half' => true ),
 				'hh_p_start'        => array( 'type' => 'text', 'label' => 'Khởi công', 'placeholder' => 'VD: Quý 2/2025', 'half' => true ),
 				'hh_p_handover'     => array( 'type' => 'text', 'label' => 'Bàn giao dự kiến', 'placeholder' => 'VD: Quý 4/2027', 'half' => true ),
 				'hh_p_handover_std' => array( 'type' => 'text', 'label' => 'Tiêu chuẩn bàn giao', 'placeholder' => 'VD: Hoàn thiện cơ bản, thiết bị bếp Bosch' ),
@@ -87,8 +87,35 @@ function hh_project_schema() {
 				'hh_p_payment'       => array( 'type' => 'table', 'label' => 'Tiến độ thanh toán', 'columns' => array( 'Đợt', 'Thời điểm', 'Tỷ lệ' ), 'placeholder' => "Đợt 1 | Ký thỏa thuận đặt cọc | 10%\nĐợt 2 | Ký HĐMB (30 ngày) | 20%\nĐợt 3 | Nhận bàn giao | 65%\nĐợt 4 | Nhận sổ hồng | 5%" ),
 				'hh_p_policy'        => array( 'type' => 'lines', 'label' => 'Chính sách bán hàng & ưu đãi', 'placeholder' => "Chiết khấu 3% khi thanh toán nhanh 50%\nTặng gói nội thất 100 triệu\nMiễn phí quản lý 2 năm" ),
 				'hh_p_loan'          => array( 'type' => 'textarea', 'label' => 'Hỗ trợ vay ngân hàng', 'placeholder' => 'VD: Vietcombank, BIDV hỗ trợ vay 70%, ân hạn gốc lãi 18 tháng …' ),
+				'hh_p_rental'        => array( 'type' => 'textarea', 'label' => 'Chương trình cho thuê / cam kết lợi nhuận (căn hộ dịch vụ, condotel)', 'placeholder' => 'VD: Cam kết lợi nhuận 8%/năm trong 3 năm đầu, chủ nhà được nghỉ miễn phí 15 đêm/năm …' ),
 				'hh_p_pricelist_url' => array( 'type' => 'url', 'label' => 'Link tải bảng giá / brochure (Google Drive, PDF…)', 'placeholder' => 'https://' ),
 			),
+		),
+		'tai-chinh' => array(
+			'title'  => 'Dòng tiền & vay vốn',
+			'intro'  => 'Số liệu mặc định cho bảng tính vay và dòng tiền trên trang dự án; khách có thể tự chỉnh khi xem. Nhập số, không cần đơn vị.',
+			'fields' => array(
+				'hh_p_calc_price'        => array( 'type' => 'number', 'label' => 'Giá căn mẫu để tính (triệu đồng)', 'placeholder' => 'VD: 3350 (để trống = dùng "Giá từ")', 'half' => true ),
+				'hh_p_loan_bank'         => array( 'type' => 'text', 'label' => 'Ngân hàng hỗ trợ vay', 'placeholder' => 'VD: Vietcombank, BIDV, VPBank', 'half' => true ),
+				'hh_p_loan_ratio'        => array( 'type' => 'number', 'label' => 'Tỷ lệ cho vay tối đa (%)', 'placeholder' => 'VD: 70', 'half' => true ),
+				'hh_p_loan_years'        => array( 'type' => 'number', 'label' => 'Thời hạn vay tối đa (năm)', 'placeholder' => 'VD: 25', 'half' => true ),
+				'hh_p_loan_rate_promo'   => array( 'type' => 'number', 'label' => 'Lãi suất ưu đãi (%/năm)', 'placeholder' => 'VD: 6,5', 'half' => true ),
+				'hh_p_loan_promo_months' => array( 'type' => 'number', 'label' => 'Thời gian ưu đãi lãi (tháng)', 'placeholder' => 'VD: 12', 'half' => true ),
+				'hh_p_loan_rate_float'   => array( 'type' => 'number', 'label' => 'Lãi suất thả nổi sau ưu đãi (%/năm)', 'placeholder' => 'VD: 10,5', 'half' => true ),
+				'hh_p_loan_grace'        => array( 'type' => 'number', 'label' => 'Ân hạn nợ gốc (tháng)', 'placeholder' => 'VD: 24', 'half' => true ),
+				'hh_p_loan_zero_months'  => array( 'type' => 'number', 'label' => 'Chủ đầu tư hỗ trợ lãi 0% (tháng)', 'placeholder' => 'VD: 18', 'half' => true ),
+				'hh_p_rent_estimate'     => array( 'type' => 'number', 'label' => 'Giá thuê dự kiến (triệu đồng/tháng)', 'placeholder' => 'VD: 15', 'half' => true ),
+				'hh_p_occupancy'         => array( 'type' => 'number', 'label' => 'Tỷ lệ lấp đầy dự kiến (%)', 'placeholder' => 'VD: 85', 'half' => true ),
+				'hh_p_rent_cost'         => array( 'type' => 'number', 'label' => 'Chi phí vận hành, quản lý (% tiền thuê)', 'placeholder' => 'VD: 15', 'half' => true ),
+				'hh_p_growth'            => array( 'type' => 'number', 'label' => 'Tăng giá dự kiến (%/năm) – để tham khảo', 'placeholder' => 'VD: 6', 'half' => true ),
+				'hh_p_cashflow_note'     => array( 'type' => 'textarea', 'label' => 'Phân tích dòng tiền / bài toán đầu tư (viết tự do)', 'placeholder' => 'VD: Với căn 2PN giá 3,35 tỷ, khách chỉ cần chuẩn bị 1 tỷ, phần còn lại ngân hàng giải ngân theo tiến độ, ân hạn gốc 24 tháng, CĐT hỗ trợ lãi 0% đến khi nhận nhà …' ),
+				'hh_p_custom_table'      => array( 'type' => 'table', 'label' => 'Bảng tính bổ sung', 'columns' => array( 'Hạng mục', 'Giá trị', 'Ghi chú' ), 'placeholder' => "Giá căn 2PN | 3,35 tỷ | View sông\nVốn tự có 30% | 1,005 tỷ | Thanh toán theo tiến độ\nNgân hàng cho vay 70% | 2,345 tỷ | 25 năm\nTiền thuê dự kiến | 15 triệu/tháng | Full nội thất" ),
+			),
+		),
+		'dac-biet'  => array(
+			'title'  => 'Shop khối đế · Penthouse · Duplex',
+			'intro'  => 'Dành cho dự án cao tầng. Loại nào dự án không có thì để trống, website tự ẩn.',
+			'fields' => hh_special_product_fields(),
 		),
 		'tien-do'   => array(
 			'title'  => 'Tiến độ',
@@ -114,6 +141,38 @@ function hh_project_schema() {
 	);
 }
 
+/** Shop khối đế, Penthouse, Duplex: key => label. */
+const HH_SPECIAL_PRODUCTS = array(
+	'shop'      => 'Shop khối đế',
+	'penthouse' => 'Penthouse',
+	'duplex'    => 'Duplex',
+);
+
+function hh_special_product_fields() {
+	$examples = array(
+		'shop'      => array( 'Mặt tiền đường Trần Hưng Đạo, trần cao 5m, phù hợp cà phê, showroom, ngân hàng…', "S-01 | 120 m² | 15 tỷ | Góc 2 mặt tiền\nS-02 | 85 m² | 9,8 tỷ | Mặt sông" ),
+		'penthouse' => array( 'Hai tầng trên cùng, hồ bơi riêng, sân vườn trên không, view toàn cảnh sông Hàn…', "PH-01 | 280 m² | 4 | 28 tỷ\nPH-02 | 310 m² | 5 | 32 tỷ" ),
+		'duplex'    => array( 'Căn 2 tầng thông nhau, phòng khách trần cao gấp đôi, cầu thang riêng…', "DL-2501 | 160 m² | 3 | 12,5 tỷ\nDL-2503 | 175 m² | 4 | 13,8 tỷ" ),
+	);
+	$columns = array(
+		'shop'      => array( 'Mã căn', 'Diện tích', 'Giá bán', 'Ghi chú' ),
+		'penthouse' => array( 'Mã căn', 'Diện tích', 'Phòng ngủ', 'Giá bán' ),
+		'duplex'    => array( 'Mã căn', 'Diện tích', 'Phòng ngủ', 'Giá bán' ),
+	);
+	$fields = array();
+	foreach ( HH_SPECIAL_PRODUCTS as $key => $label ) {
+		$fields[ "hh_p_{$key}_desc" ]    = array( 'type' => 'textarea', 'label' => $label . ' – mô tả', 'placeholder' => 'VD: ' . $examples[ $key ][0] );
+		$fields[ "hh_p_{$key}_table" ]   = array( 'type' => 'table', 'label' => $label . ' – danh sách căn', 'columns' => $columns[ $key ], 'placeholder' => $examples[ $key ][1] );
+		$fields[ "hh_p_{$key}_gallery" ] = array( 'type' => 'gallery', 'label' => $label . ' – hình ảnh' );
+	}
+	return $fields;
+}
+
+/** Columns of a special product table. */
+function hh_special_columns( $key ) {
+	return hh_project_schema()['dac-biet']['fields'][ "hh_p_{$key}_table" ]['columns'];
+}
+
 function hh_listing_schema() {
 	return array(
 		'co-ban'   => array(
@@ -130,7 +189,7 @@ function hh_listing_schema() {
 				'hh_negotiable' => array( 'type' => 'checkbox', 'label' => 'Giá còn thương lượng', 'half' => true ),
 				'hh_address'    => array( 'type' => 'text', 'label' => 'Địa chỉ', 'placeholder' => 'VD: 123 Võ Nguyên Giáp, Ngũ Hành Sơn, Đà Nẵng' ),
 				'hh_project'    => array( 'type' => 'post', 'label' => 'Thuộc dự án', 'post_type' => 'du-an', 'half' => true ),
-				'hh_featured'   => array( 'type' => 'checkbox', 'label' => 'Tin nổi bật (hiện ở trang chủ)', 'half' => true ),
+				'hh_featured'   => array( 'type' => 'checkbox', 'label' => 'Tin HOT (xếp đầu mục "hot mới" cuối trang)', 'half' => true ),
 			),
 		),
 		'dac-diem'  => array(

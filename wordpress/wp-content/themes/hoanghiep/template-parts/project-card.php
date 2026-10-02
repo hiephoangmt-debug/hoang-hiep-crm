@@ -2,6 +2,7 @@
 $status = hh_option_label( hh_project_schema(), 'hh_p_status', hh_meta( 'hh_p_status' ) );
 $areas  = get_the_terms( get_the_ID(), 'khu-vuc' );
 $place  = $areas && ! is_wp_error( $areas ) ? $areas[0]->name : hh_meta( 'hh_p_address' );
+$type   = hh_project_type();
 ?>
 <article class="project-card">
 	<a class="project-card__media" href="<?php the_permalink(); ?>">
@@ -11,6 +12,10 @@ $place  = $areas && ! is_wp_error( $areas ) ? $areas[0]->name : hh_meta( 'hh_p_a
 			<span class="media-placeholder"><?php echo hh_icon( 'building' ); // phpcs:ignore ?></span>
 		<?php endif; ?>
 		<?php hh_pill( $status, hh_meta( 'hh_p_status' ) ); ?>
+		<?php if ( hh_is_hot() ) : ?><span class="hot-badge">HOT</span><?php endif; ?>
+		<?php if ( $type ) : ?>
+			<span class="project-card__type"><?php echo esc_html( $type->name ); ?></span>
+		<?php endif; ?>
 	</a>
 	<div class="project-card__body">
 		<?php if ( hh_meta( 'hh_p_developer' ) ) : ?>
@@ -19,6 +24,17 @@ $place  = $areas && ! is_wp_error( $areas ) ? $areas[0]->name : hh_meta( 'hh_p_a
 		<h3 class="project-card__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 		<?php if ( $place ) : ?>
 			<p class="meta-line"><?php echo hh_icon( 'pin' ); // phpcs:ignore ?> <?php echo esc_html( $place ); ?></p>
+		<?php endif; ?>
+		<?php
+		$extras = array();
+		foreach ( HH_SPECIAL_PRODUCTS as $key => $label ) {
+			if ( hh_meta( "hh_p_{$key}_table" ) || hh_meta( "hh_p_{$key}_desc" ) ) {
+				$extras[] = $label;
+			}
+		}
+		?>
+		<?php if ( $extras ) : ?>
+			<p class="project-card__extras">Có <?php echo esc_html( implode( ' · ', $extras ) ); ?></p>
 		<?php endif; ?>
 		<ul class="project-card__facts">
 			<?php if ( hh_meta( 'hh_p_scale' ) ) : ?><li><span>Quy mô</span><?php echo esc_html( hh_meta( 'hh_p_scale' ) ); ?></li><?php endif; ?>

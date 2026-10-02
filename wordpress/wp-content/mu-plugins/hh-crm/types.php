@@ -101,6 +101,96 @@ function hh_register_types() {
 	}
 }
 
+/**
+ * Default categories, created once (sửa / thêm trong quản trị sau đó).
+ */
+function hh_default_terms() {
+	return array(
+		'loai-du-an' => array(
+			'cao-tang'  => array( 'Cao tầng', array(
+				'can-ho-so-huu-lau-dai' => 'Căn hộ sở hữu lâu dài',
+				'can-ho-dich-vu'  => 'Căn hộ dịch vụ (50 năm)',
+			) ),
+			'thap-tang' => array( 'Thấp tầng', array(
+				'biet-thu'  => 'Biệt thự',
+				'dat-nen'   => 'Đất nền',
+				'shophouse' => 'Shophouse',
+			) ),
+		),
+		'loai-bds'   => array(
+			'can-ho-chung-cu'     => array( 'Căn hộ chung cư', array() ),
+			'can-ho-dich-vu'      => array( 'Căn hộ dịch vụ', array() ),
+			'penthouse'           => array( 'Penthouse', array() ),
+			'duplex'              => array( 'Duplex', array() ),
+			'shop-khoi-de'        => array( 'Shop khối đế', array() ),
+			'nha-pho'             => array( 'Nhà phố', array() ),
+			'nha-kiet'            => array( 'Nhà kiệt / hẻm', array() ),
+			'biet-thu'            => array( 'Biệt thự', array() ),
+			'shophouse'           => array( 'Shophouse', array() ),
+			'dat-nen'             => array( 'Đất nền', array() ),
+			'mat-bang-kinh-doanh' => array( 'Mặt bằng kinh doanh', array() ),
+		),
+		'khu-vuc'    => array(
+			'hai-chau'      => array( 'Hải Châu', array() ),
+			'thanh-khe'     => array( 'Thanh Khê', array() ),
+			'son-tra'       => array( 'Sơn Trà', array() ),
+			'ngu-hanh-son'  => array( 'Ngũ Hành Sơn', array() ),
+			'lien-chieu'    => array( 'Liên Chiểu', array() ),
+			'cam-le'        => array( 'Cẩm Lệ', array() ),
+			'hoa-vang'      => array( 'Hòa Vang', array() ),
+			'hoi-an'        => array( 'Hội An', array() ),
+			'dien-ban'      => array( 'Điện Bàn', array() ),
+		),
+	);
+}
+
+add_action( 'init', 'hh_seed_terms', 20 );
+function hh_seed_terms() {
+	if ( wp_installing() || '3' === get_option( 'hh_terms_seeded' ) ) {
+		return;
+	}
+	// Đổi tên cũ "Căn hộ lâu dài" → "Căn hộ sở hữu lâu dài".
+	$old = get_term_by( 'slug', 'can-ho-lau-dai', 'loai-du-an' );
+	if ( $old ) {
+		wp_update_term( $old->term_id, 'loai-du-an', array( 'name' => 'Căn hộ sở hữu lâu dài', 'slug' => 'can-ho-so-huu-lau-dai' ) );
+	}
+	foreach ( hh_default_terms() as $tax => $terms ) {
+		foreach ( $terms as $slug => list( $name, $children ) ) {
+			$parent = term_exists( $slug, $tax ) ?: wp_insert_term( $name, $tax, array( 'slug' => $slug ) );
+			if ( is_wp_error( $parent ) ) {
+				continue;
+			}
+			foreach ( $children as $child_slug => $child_name ) {
+				if ( ! term_exists( $child_slug, $tax ) ) {
+					wp_insert_term( $child_name, $tax, array( 'slug' => $child_slug, 'parent' => (int) $parent['term_id'] ) );
+				}
+			}
+		}
+	}
+	update_option( 'hh_terms_seeded', '3' );
+}
+
+/** Most specific "Loại dự án" of a project (child term preferred). */
+function hh_project_type( $post_id = null ) {
+	$terms = get_the_terms( $post_id ?: get_the_ID(), 'loai-du-an' );
+	if ( ! $terms || is_wp_error( $terms ) ) {
+		return null;
+	}
+	usort( $terms, fn( $a, $b ) => (int) ( 0 === $a->parent ) - (int) ( 0 === $b->parent ) );
+	return $terms[0];
+}
+
+/** Whether a project belongs to the "Cao tầng" branch. */
+function hh_is_high_rise( $post_id = null ) {
+	$type = hh_project_type( $post_id );
+	if ( ! $type ) {
+		return false;
+	}
+	$ancestors = get_ancestors( $type->term_id, 'loai-du-an', 'taxonomy' );
+	$root      = $ancestors ? get_term( (int) end( $ancestors ), 'loai-du-an' ) : $type;
+	return $root && ! is_wp_error( $root ) && 'cao-tang' === $root->slug;
+}
+
 add_filter( 'query_vars', 'hh_query_vars' );
 function hh_query_vars( $vars ) {
 	return array_merge( $vars, array( 'hh_deal', 'tk', 'gia', 'dt', 'pn', 'huong', 'sx', 'tt' ) );
@@ -301,6 +391,53 @@ function hh_project_specs( $post_id = null ) {
 		'Tình trạng'            => hh_option_label( hh_project_schema(), 'hh_p_status', $m( 'hh_p_status' ) ),
 	);
 	return array_filter( $rows, 'strlen' );
+}
+
+/**
+ * "Hot & mới": tin/dự án đánh dấu HOT trước, sau đó tới bài mới nhất – chỉ cùng loại.
+ *
+ * @param string $post_type du-an | bat-dong-san
+ * @param array  $args      exclude (int[]), limit (int), deal (ban|thue), type_term (int, loai-du-an)
+ */
+function hh_hot_query( $post_type, $args = array() ) {
+	$args  = wp_parse_args( $args, array( 'exclude' => array(), 'limit' => 6, 'deal' => '', 'type_term' => 0 ) );
+	$flag  = 'du-an' === $post_type ? 'hh_p_featured' : 'hh_featured';
+	$base  = array(
+		'post_type'      => $post_type,
+		'post_status'    => 'publish',
+		'fields'         => 'ids',
+		'posts_per_page' => $args['limit'],
+		'post__not_in'   => array_map( 'intval', (array) $args['exclude'] ),
+		'no_found_rows'  => true,
+	);
+	$meta = array();
+	if ( $args['deal'] ) {
+		$meta[] = array( 'key' => 'hh_deal', 'value' => $args['deal'] );
+	}
+	if ( 'bat-dong-san' === $post_type ) {
+		$meta[] = array( 'key' => 'hh_status', 'value' => 'da-giao-dich', 'compare' => '!=' );
+	}
+	if ( $args['type_term'] ) {
+		$base['tax_query'] = array( array( 'taxonomy' => 'loai-du-an', 'terms' => (int) $args['type_term'], 'include_children' => true ) );
+	}
+	$hot = get_posts( array_merge( $base, array( 'meta_query' => array_merge( $meta, array( array( 'key' => $flag, 'value' => '1' ) ) ) ) ) );
+	$new = get_posts( array_merge( $base, $meta ? array( 'meta_query' => $meta ) : array() ) );
+	$ids = array_slice( array_values( array_unique( array_merge( $hot, $new ) ) ), 0, $args['limit'] );
+
+	return new WP_Query(
+		array(
+			'post_type'           => $post_type,
+			'post__in'            => $ids ?: array( 0 ),
+			'orderby'             => 'post__in',
+			'posts_per_page'      => $args['limit'],
+			'ignore_sticky_posts' => true,
+		)
+	);
+}
+
+function hh_is_hot( $post_id = null ) {
+	$post_id = $post_id ?: get_the_ID();
+	return '1' === hh_meta( 'du-an' === get_post_type( $post_id ) ? 'hh_p_featured' : 'hh_featured', $post_id );
 }
 
 /* -------------------------------------------------------------------------

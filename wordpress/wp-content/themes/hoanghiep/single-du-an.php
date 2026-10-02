@@ -15,6 +15,14 @@ while ( have_posts() ) :
 	$progress    = hh_table( 'hh_p_progress', 2 );
 	$faq         = hh_table( 'hh_p_faq', 2 );
 	$gallery     = hh_ids( 'hh_p_gallery' );
+	$special     = array();
+	foreach ( HH_SPECIAL_PRODUCTS as $key => $label ) {
+		$rows = hh_table( "hh_p_{$key}_table", count( hh_special_columns( $key ) ) );
+		if ( $rows || hh_meta( "hh_p_{$key}_desc" ) || hh_ids( "hh_p_{$key}_gallery" ) ) {
+			$special[ $key ] = array( $label, $rows );
+		}
+	}
+	$type        = hh_project_type();
 
 	$sections = array_filter(
 		array(
@@ -22,7 +30,9 @@ while ( have_posts() ) :
 			'vi-tri'    => ( hh_meta( 'hh_p_location_desc' ) || $connections || hh_meta( 'hh_p_location_img' ) || hh_meta( 'hh_p_address' ) ) ? 'Vị trí' : '',
 			'tien-ich'  => ( hh_lines( 'hh_p_amenities_in' ) || hh_lines( 'hh_p_amenities_out' ) || hh_ids( 'hh_p_amenities_img' ) ) ? 'Tiện ích' : '',
 			'mat-bang'  => ( $unit_types || hh_meta( 'hh_p_masterplan_img' ) || hh_meta( 'hh_p_design_desc' ) || hh_ids( 'hh_p_floorplans' ) ) ? 'Mặt bằng' : '',
-			'gia-ban'   => ( $price_table || $payment || hh_lines( 'hh_p_policy' ) || hh_meta( 'hh_p_loan' ) ) ? 'Giá & thanh toán' : '',
+			'dac-biet'  => $special ? implode( ' · ', wp_list_pluck( $special, 0 ) ) : '',
+			'gia-ban'   => ( $price_table || $payment || hh_lines( 'hh_p_policy' ) || hh_meta( 'hh_p_loan' ) || hh_meta( 'hh_p_rental' ) ) ? 'Giá & thanh toán' : '',
+			'tai-chinh' => 'Dòng tiền & vay',
 			'tien-do'   => ( $progress || hh_ids( 'hh_p_progress_gallery' ) ) ? 'Tiến độ' : '',
 			'thu-vien'  => ( $gallery || hh_meta( 'hh_p_video' ) ) ? 'Hình ảnh' : '',
 			'hoi-dap'   => $faq ? 'Hỏi đáp' : '',
@@ -32,6 +42,7 @@ while ( have_posts() ) :
 	$key_facts = array_filter(
 		array(
 			'Giá bán'   => hh_project_price(),
+			'Loại hình' => $type ? $type->name : '',
 			'Quy mô'    => hh_meta( 'hh_p_scale' ),
 			'Sản phẩm'  => hh_meta( 'hh_p_unit_area' ),
 			'Bàn giao'  => hh_meta( 'hh_p_handover' ),
@@ -48,6 +59,7 @@ while ( have_posts() ) :
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Trang chủ</a> / <a href="<?php echo esc_url( get_post_type_archive_link( 'du-an' ) ); ?>">Dự án</a>
 			</p>
 			<?php hh_pill( $status, $status_key ); ?>
+			<?php if ( $type ) : ?><a class="pill pill--type" href="<?php echo esc_url( get_term_link( $type ) ); ?>"><?php echo esc_html( $type->name ); ?></a><?php endif; ?>
 			<h1 class="project-hero__title"><?php the_title(); ?></h1>
 			<?php if ( hh_meta( 'hh_p_developer' ) ) : ?>
 				<p class="project-hero__dev">Chủ đầu tư: <?php echo esc_html( hh_meta( 'hh_p_developer' ) ); ?></p>
@@ -152,6 +164,29 @@ while ( have_posts() ) :
 				</section>
 			<?php endif; ?>
 
+			<?php if ( $special ) : ?>
+				<section class="block" id="dac-biet">
+					<h2 class="block__title"><?php echo esc_html( $sections['dac-biet'] ); ?></h2>
+					<?php if ( count( $special ) > 1 ) : ?>
+						<div class="ptabs" role="tablist">
+							<?php $first = true; foreach ( $special as $key => list( $label ) ) : ?>
+								<button type="button" role="tab" class="ptabs__tab<?php echo $first ? ' is-active' : ''; ?>" aria-selected="<?php echo $first ? 'true' : 'false'; ?>" data-ptab="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></button>
+							<?php $first = false; endforeach; ?>
+						</div>
+					<?php endif; ?>
+					<?php $first = true; foreach ( $special as $key => list( $label, $rows ) ) : ?>
+						<div class="ptabs__panel<?php echo $first ? ' is-active' : ''; ?>" data-ppanel="<?php echo esc_attr( $key ); ?>">
+							<h3 class="block__sub"><?php echo esc_html( $label ); ?></h3>
+							<?php if ( hh_meta( "hh_p_{$key}_desc" ) ) : ?>
+								<p class="prose"><?php echo nl2br( esc_html( hh_meta( "hh_p_{$key}_desc" ) ) ); ?></p>
+							<?php endif; ?>
+							<?php hh_data_table( hh_special_columns( $key ), $rows ); ?>
+							<?php hh_gallery( hh_ids( "hh_p_{$key}_gallery" ), 'dac-biet-' . $key ); ?>
+						</div>
+					<?php $first = false; endforeach; ?>
+				</section>
+			<?php endif; ?>
+
 			<?php if ( isset( $sections['gia-ban'] ) ) : ?>
 				<section class="block" id="gia-ban">
 					<h2 class="block__title">Giá bán &amp; thanh toán</h2>
@@ -173,9 +208,20 @@ while ( have_posts() ) :
 						<h3 class="block__sub">Hỗ trợ vay ngân hàng</h3>
 						<p class="prose"><?php echo nl2br( esc_html( hh_meta( 'hh_p_loan' ) ) ); ?></p>
 					<?php endif; ?>
+					<?php if ( hh_meta( 'hh_p_rental' ) ) : ?>
+						<div class="policy">
+							<h3 class="block__sub">Chương trình cho thuê &amp; lợi nhuận</h3>
+							<p class="prose"><?php echo nl2br( esc_html( hh_meta( 'hh_p_rental' ) ) ); ?></p>
+						</div>
+					<?php endif; ?>
 					<p class="note">Giá và chính sách có thể thay đổi theo từng đợt mở bán. Liên hệ để nhận bảng giá mới nhất.</p>
 				</section>
 			<?php endif; ?>
+
+			<section class="block" id="tai-chinh">
+				<h2 class="block__title">Bài toán dòng tiền &amp; vay ngân hàng</h2>
+				<?php get_template_part( 'template-parts/finance', null, array( 'mode' => 'project' ) ); ?>
+			</section>
 
 			<?php if ( isset( $sections['tien-do'] ) ) : ?>
 				<section class="block" id="tien-do">
@@ -229,42 +275,25 @@ while ( have_posts() ) :
 	</div>
 
 	<?php
-	$listings = new WP_Query(
-		array(
-			'post_type'      => 'bat-dong-san',
-			'posts_per_page' => 8,
-			'meta_query'     => array( array( 'key' => 'hh_project', 'value' => $id ) ),
-		)
-	);
-	if ( $listings->have_posts() ) :
+	// Phía dưới: dự án hot mới – ưu tiên cùng nhóm (cao tầng / thấp tầng), chỉ dự án.
+	$group = null;
+	if ( $type ) {
+		$ancestors = get_ancestors( $type->term_id, 'loai-du-an', 'taxonomy' );
+		$group     = $ancestors ? get_term( (int) end( $ancestors ), 'loai-du-an' ) : $type;
+	}
+	$hot = hh_hot_query( 'du-an', array( 'exclude' => array( $id ), 'limit' => 6, 'type_term' => $group ? $group->term_id : 0 ) );
+	if ( $hot->post_count < 3 && $group ) {
+		$hot = hh_hot_query( 'du-an', array( 'exclude' => array( $id ), 'limit' => 6 ) );
+	}
+	if ( $hot->have_posts() ) :
 		?>
 		<section class="section section--tint">
 			<div class="container">
-				<?php hh_section_head( 'Chuyển nhượng', 'Sản phẩm đang bán & cho thuê tại ' . get_the_title( $id ) ); ?>
-				<div class="grid grid--4">
-					<?php
-					while ( $listings->have_posts() ) :
-						$listings->the_post();
-						get_template_part( 'template-parts/listing-card' );
-					endwhile;
-					wp_reset_postdata();
-					?>
-				</div>
-			</div>
-		</section>
-	<?php endif; ?>
-
-	<?php
-	$others = new WP_Query( array( 'post_type' => 'du-an', 'posts_per_page' => 3, 'post__not_in' => array( $id ) ) );
-	if ( $others->have_posts() ) :
-		?>
-		<section class="section">
-			<div class="container">
-				<?php hh_section_head( 'Dự án', 'Dự án khác', get_post_type_archive_link( 'du-an' ) ); ?>
+				<?php hh_section_head( 'Dự án', 'Dự án hot mới', $group ? get_term_link( $group ) : get_post_type_archive_link( 'du-an' ) ); ?>
 				<div class="grid grid--3">
 					<?php
-					while ( $others->have_posts() ) :
-						$others->the_post();
+					while ( $hot->have_posts() ) :
+						$hot->the_post();
 						get_template_part( 'template-parts/project-card' );
 					endwhile;
 					wp_reset_postdata();

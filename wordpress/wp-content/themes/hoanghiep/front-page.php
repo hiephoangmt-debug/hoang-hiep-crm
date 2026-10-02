@@ -72,33 +72,35 @@ $hero_image = hoanghiep_opt( 'hh_hero_image' );
 </div>
 
 <?php
-// Dự án theo loại: mỗi loại có ít nhất một dự án sẽ thành một mục riêng.
+// Dự án theo nhóm: Cao tầng, Thấp tầng (kèm các loại con).
 $project_sections = array(
-	'can-ho'  => array( 'Dự án căn hộ', 'Căn hộ Đà Nẵng' ),
-	'dat-nen' => array( 'Dự án đất nền', 'Đất nền Đà Nẵng' ),
+	'cao-tang'  => array( 'Dự án cao tầng', 'Căn hộ · Penthouse · Duplex · Shop khối đế' ),
+	'thap-tang' => array( 'Dự án thấp tầng', 'Biệt thự · Đất nền · Shophouse' ),
 );
 $shown_projects   = 0;
 $tint             = false;
 foreach ( $project_sections as $slug => list( $title, $eyebrow ) ) :
-	$type = get_term_by( 'slug', $slug, 'loai-du-an' );
-	if ( ! $type ) {
+	$group = get_term_by( 'slug', $slug, 'loai-du-an' );
+	if ( ! $group ) {
 		continue;
 	}
-	$projects = new WP_Query(
-		array(
-			'post_type'      => 'du-an',
-			'posts_per_page' => 6,
-			'tax_query'      => array( array( 'taxonomy' => 'loai-du-an', 'terms' => $type->term_id ) ),
-		)
-	);
+	$projects = hh_hot_query( 'du-an', array( 'limit' => 6, 'type_term' => $group->term_id ) );
 	if ( ! $projects->have_posts() ) {
 		continue;
 	}
 	$shown_projects += $projects->post_count;
+	$children        = get_terms( array( 'taxonomy' => 'loai-du-an', 'parent' => $group->term_id, 'hide_empty' => false, 'orderby' => 'term_id' ) );
 	?>
 	<section class="section<?php echo $tint ? ' section--tint' : ''; ?>">
 		<div class="container">
-			<?php hh_section_head( $eyebrow, $title, get_term_link( $type ), 'Xem tất cả' ); ?>
+			<?php hh_section_head( $eyebrow, $title, get_term_link( $group ), 'Xem tất cả' ); ?>
+			<?php if ( $children && ! is_wp_error( $children ) ) : ?>
+				<nav class="type-chips" aria-label="<?php echo esc_attr( $title ); ?>">
+					<?php foreach ( $children as $child ) : ?>
+						<a href="<?php echo esc_url( get_term_link( $child ) ); ?>"><?php echo esc_html( $child->name ); ?> <span><?php echo (int) $child->count; ?></span></a>
+					<?php endforeach; ?>
+				</nav>
+			<?php endif; ?>
 			<div class="grid grid--3">
 				<?php
 				while ( $projects->have_posts() ) :
@@ -139,14 +141,8 @@ endif;
 ?>
 
 <?php
-foreach ( array( 'ban' => array( 'Mua bán', 'Nhà đất bán mới nhất' ), 'thue' => array( 'Cho thuê', 'Nhà đất cho thuê mới nhất' ) ) as $deal => list( $eyebrow, $title ) ) :
-	$listings = new WP_Query(
-		array(
-			'post_type'      => 'bat-dong-san',
-			'posts_per_page' => 8,
-			'meta_query'     => array( array( 'key' => 'hh_deal', 'value' => $deal ) ),
-		)
-	);
+foreach ( array( 'ban' => array( 'Mua bán', 'Nhà đất bán hot mới' ), 'thue' => array( 'Cho thuê', 'Nhà cho thuê hot mới' ) ) as $deal => list( $eyebrow, $title ) ) :
+	$listings = hh_hot_query( 'bat-dong-san', array( 'limit' => 8, 'deal' => $deal ) );
 	if ( ! $listings->have_posts() ) {
 		continue;
 	}

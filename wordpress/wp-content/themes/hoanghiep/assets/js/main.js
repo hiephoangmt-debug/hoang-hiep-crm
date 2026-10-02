@@ -92,6 +92,174 @@
 		formLink.setAttribute( 'href', '#lien-he' );
 	}
 
+	// Tabs inside project page (Shop khối đế · Penthouse · Duplex).
+	$$( '.ptabs' ).forEach( ( bar ) => {
+		const block = bar.parentElement;
+		$$( '.ptabs__tab', bar ).forEach( ( tab ) => {
+			tab.addEventListener( 'click', () => {
+				$$( '.ptabs__tab', bar ).forEach( ( t ) => {
+					t.classList.toggle( 'is-active', t === tab );
+					t.setAttribute( 'aria-selected', t === tab ? 'true' : 'false' );
+				} );
+				$$( '.ptabs__panel', block ).forEach( ( p ) => p.classList.toggle( 'is-active', p.dataset.ppanel === tab.dataset.ptab ) );
+			} );
+		} );
+	} );
+
+	// Bài toán dòng tiền & vay ngân hàng. Amounts are in "triệu đồng".
+	const fmtNum = ( n, d ) => n.toLocaleString( 'vi-VN', { maximumFractionDigits: d === undefined ? 1 : d } );
+	const money = ( tr ) => {
+		if ( ! isFinite( tr ) ) {
+			return '—';
+		}
+		const neg = tr < -0.0005 ? '−' : '';
+		const v = Math.abs( tr );
+		if ( v < 0.0005 ) {
+			return '0 đ';
+		}
+		return neg + ( v >= 1000 ? fmtNum( v / 1000, 3 ) + ' tỷ' : fmtNum( v, v < 10 ? 2 : 1 ) + ' triệu' );
+	};
+
+	/** Monthly schedule. Returns [{m, interest, principal, balanceStart}] */
+	function amortize( p ) {
+		const n = Math.max( 1, Math.round( p.years * 12 ) );
+		const grace = Math.min( Math.max( 0, Math.round( p.grace ) ), n - 1 );
+		const rows = [];
+		let bal = p.loan;
+		for ( let m = 1; m <= n && bal > 1e-9; m++ ) {
+			const yearly = m <= p.zero ? 0 : ( m <= p.promoM ? p.promo : p.float );
+			const r = yearly / 100 / 12;
+			const interest = bal * r;
+			let principal = 0;
+			if ( m > grace ) {
+				const left = n - m + 1;
+				if ( p.method === 'deu' ) {
+					const pay = r > 0 ? bal * r / ( 1 - Math.pow( 1 + r, -left ) ) : bal / left;
+					principal = pay - interest;
+				} else {
+					principal = p.loan / ( n - grace );
+				}
+				principal = Math.min( principal, bal );
+			}
+			rows.push( { m, interest, principal, balanceStart: bal } );
+			bal -= principal;
+		}
+		return rows;
+	}
+
+	$$( '[data-finance]' ).forEach( ( box ) => {
+		let cfg;
+		try {
+			cfg = JSON.parse( box.dataset.finance );
+		} catch ( e ) {
+			return;
+		}
+		const out = ( k ) => box.querySelector( '[data-out="' + k + '"]' );
+		const set = ( k, v ) => { const el = out( k ); if ( el ) { el.textContent = v; } };
+		const val = ( name ) => {
+			const el = box.querySelector( '[name="' + name + '"]' );
+			const v = el ? parseFloat( String( el.value ).replace( ',', '.' ) ) : NaN;
+			return isFinite( v ) ? v : 0;
+		};
+
+		const run = () => {
+			const p = {
+				price: val( 'price' ), ratio: Math.min( 100, val( 'ratio' ) ), years: val( 'years' ) || 1,
+				promo: val( 'promo' ), promoM: val( 'promoM' ), float: val( 'float' ), grace: val( 'grace' ), zero: val( 'zero' ),
+				method: ( box.querySelector( '[name="method"]' ) || {} ).value || 'giam-dan',
+			};
+			p.loan = p.price * p.ratio / 100;
+			const equity = p.price - p.loan;
+			const rows = amortize( p );
+			const pays = rows.map( ( r ) => r.interest + r.principal );
+			const totalInterest = rows.reduce( ( a, r ) => a + r.interest, 0 );
+			let maxI = 0;
+			pays.forEach( ( v, i ) => { if ( v > pays[ maxI ] + 1e-9 ) { maxI = i; } } );
+
+			set( 'equity', money( equity ) );
+			set( 'loan', money( p.loan ) );
+			set( 'first', pays.length ? money( pays[ 0 ] ) : '—' );
+			set( 'max', pays.length ? money( pays[ maxI ] ) : '—' );
+			set( 'maxWhen', pays.length ? 'từ tháng thứ ' + ( maxI + 1 ) : '' );
+			set( 'interest', money( totalInterest ) );
+			set( 'total', money( p.loan + totalInterest ) );
+			const after = Math.max( p.zero, p.promoM, p.grace ) + 1;
+			const afterPay = pays[ Math.min( after, pays.length ) - 1 ];
+			set( 'summary', p.loan > 0
+				? 'Vay ' + money( p.loan ) + ' trong ' + fmtNum( p.years, 0 ) + ' năm. ' +
+					( p.zero > 0 ? 'Chủ đầu tư hỗ trợ lãi 0% trong ' + fmtNum( p.zero, 0 ) + ' tháng đầu. ' : '' ) +
+					( p.grace > 0 ? 'Ân hạn gốc ' + fmtNum( p.grace, 0 ) + ' tháng. ' : '' ) +
+					( afterPay !== undefined ? 'Từ tháng thứ ' + Math.min( after, pays.length ) + ', mỗi tháng trả khoảng ' + money( afterPay ) + '.' : '' )
+				: 'Không vay ngân hàng.' );
+
+			// Dòng tiền theo đợt: vốn tự có trả trước, ngân hàng giải ngân phần còn lại.
+			const tbody = out( 'schedule' );
+			if ( tbody ) {
+				let eqLeft = equity;
+				let pctTotal = 0;
+				let eqTotal = 0;
+				let bankTotal = 0;
+				tbody.innerHTML = '';
+				( cfg.payment || [] ).forEach( ( st ) => {
+					const amount = p.price * st.pct / 100;
+					const fromEq = Math.min( amount, Math.max( 0, eqLeft ) );
+					const fromBank = amount - fromEq;
+					eqLeft -= fromEq;
+					pctTotal += st.pct;
+					eqTotal += fromEq;
+					bankTotal += fromBank;
+					const tr = document.createElement( 'tr' );
+					[ st.stage, st.when, fmtNum( st.pct, 2 ) + '%', money( amount ), fromEq > 0.0001 ? money( fromEq ) : '—', fromBank > 0.0001 ? money( fromBank ) : '—' ].forEach( ( text ) => {
+						const td = document.createElement( 'td' );
+						td.textContent = text;
+						tr.appendChild( td );
+					} );
+					tbody.appendChild( tr );
+				} );
+				set( 'pctTotal', fmtNum( pctTotal, 2 ) + '%' );
+				set( 'priceTotal', money( p.price * pctTotal / 100 ) );
+				set( 'equityTotal', money( eqTotal ) );
+				set( 'bankTotal', money( bankTotal ) );
+			}
+
+			// Bài toán cho thuê.
+			const rent = val( 'rent' );
+			const net = rent * val( 'occ' ) / 100 * ( 1 - val( 'cost' ) / 100 );
+			set( 'netRent', rent > 0 ? money( net ) : '—' );
+			set( 'yield', rent > 0 && p.price > 0 ? fmtNum( net * 12 / p.price * 100, 2 ) + '%' : '—' );
+			const cf = net - ( afterPay || 0 );
+			const cfEl = out( 'cashflow' );
+			if ( cfEl ) {
+				cfEl.textContent = rent > 0 ? ( cf >= 0 ? '+' : '' ) + money( cf ) : '—';
+				cfEl.classList.toggle( 'is-neg', rent > 0 && cf < 0 );
+				cfEl.classList.toggle( 'is-pos', rent > 0 && cf >= 0 );
+			}
+
+			// Lịch trả nợ theo năm.
+			const amort = out( 'amort' );
+			if ( amort ) {
+				amort.innerHTML = '';
+				for ( let y = 0; y * 12 < rows.length; y++ ) {
+					const part = rows.slice( y * 12, y * 12 + 12 );
+					const pr = part.reduce( ( a, r ) => a + r.principal, 0 );
+					const it = part.reduce( ( a, r ) => a + r.interest, 0 );
+					const start = part[ 0 ].balanceStart;
+					const tr = document.createElement( 'tr' );
+					[ String( y + 1 ), money( start ), money( pr ), money( it ), money( pr + it ), money( ( pr + it ) / part.length ), money( Math.max( 0, start - pr ) ) ].forEach( ( text ) => {
+						const td = document.createElement( 'td' );
+						td.textContent = text;
+						tr.appendChild( td );
+					} );
+					amort.appendChild( tr );
+				}
+			}
+		};
+
+		box.addEventListener( 'input', run );
+		box.addEventListener( 'change', run );
+		run();
+	} );
+
 	// Project sub-navigation highlight.
 	const subLinks = $$( '.subnav a[href^="#"]:not(.subnav__cta)' );
 	if ( subLinks.length && 'IntersectionObserver' in window ) {

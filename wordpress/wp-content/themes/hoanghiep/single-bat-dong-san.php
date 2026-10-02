@@ -115,6 +115,13 @@ while ( have_posts() ) :
 				</section>
 			<?php endif; ?>
 
+			<?php if ( 'ban' === $deal ) : ?>
+				<section class="block" id="tai-chinh">
+					<h2 class="block__title">Tính khoản vay &amp; dòng tiền</h2>
+					<?php get_template_part( 'template-parts/finance', null, array( 'mode' => 'listing' ) ); ?>
+				</section>
+			<?php endif; ?>
+
 			<?php if ( hh_meta( 'hh_video' ) ) : ?>
 				<section class="block">
 					<h2 class="block__title">Video</h2>
@@ -163,23 +170,17 @@ while ( have_posts() ) :
 	</div>
 
 	<?php
-	$related = new WP_Query(
-		array(
-			'post_type'      => 'bat-dong-san',
-			'posts_per_page' => 4,
-			'post__not_in'   => array( $id ),
-			'meta_query'     => array( array( 'key' => 'hh_deal', 'value' => $deal ) ),
-		)
-	);
-	if ( $related->have_posts() ) :
+	// Phía dưới: tin hot mới cùng hình thức (bán → bán, cho thuê → cho thuê).
+	$hot = hh_hot_query( 'bat-dong-san', array( 'exclude' => array( $id ), 'limit' => 8, 'deal' => $deal ) );
+	if ( $hot->have_posts() ) :
 		?>
 		<section class="section section--tint">
 			<div class="container">
-				<?php hh_section_head( '', 'thue' === $deal ? 'Nhà cho thuê khác' : 'Nhà đất bán khác', hh_deal_url( $deal ) ); ?>
+				<?php hh_section_head( 'thue' === $deal ? 'Cho thuê' : 'Mua bán', 'thue' === $deal ? 'Nhà cho thuê hot mới' : 'Nhà đất bán hot mới', hh_deal_url( $deal ) ); ?>
 				<div class="grid grid--4">
 					<?php
-					while ( $related->have_posts() ) :
-						$related->the_post();
+					while ( $hot->have_posts() ) :
+						$hot->the_post();
 						get_template_part( 'template-parts/listing-card' );
 					endwhile;
 					wp_reset_postdata();

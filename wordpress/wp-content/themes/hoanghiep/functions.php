@@ -56,8 +56,15 @@ function hoanghiep_fallback_menu( $args = array() ) {
 	$items    = array(
 		array( 'Trang chủ', home_url( '/' ) ),
 		array( 'Dự án', $projects, array(
-			array( 'Dự án căn hộ', $type_link( 'can-ho', $projects ) ),
-			array( 'Dự án đất nền', $type_link( 'dat-nen', $projects ) ),
+			array( 'Cao tầng', $type_link( 'cao-tang', $projects ), array(
+				array( 'Căn hộ sở hữu lâu dài', $type_link( 'can-ho-so-huu-lau-dai', $projects ) ),
+				array( 'Căn hộ dịch vụ (50 năm)', $type_link( 'can-ho-dich-vu', $projects ) ),
+			) ),
+			array( 'Thấp tầng', $type_link( 'thap-tang', $projects ), array(
+				array( 'Biệt thự', $type_link( 'biet-thu', $projects ) ),
+				array( 'Đất nền', $type_link( 'dat-nen', $projects ) ),
+				array( 'Shophouse', $type_link( 'shophouse', $projects ) ),
+			) ),
 		) ),
 		array( 'Mua bán', hh_deal_url( 'ban' ) ),
 		array( 'Cho thuê', hh_deal_url( 'thue' ) ),
