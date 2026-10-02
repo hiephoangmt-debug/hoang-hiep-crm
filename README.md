@@ -15,3 +15,7 @@ Cấu hình một lần:
 
 SEO / AI search: JSON-LD (`LocalBusiness`, `FAQPage`) được sinh từ chính nội dung trang;
 `robots.txt` cho phép bot tìm kiếm của AI (OAI-SearchBot, GPTBot, PerplexityBot...); `llms.txt` tóm tắt doanh nghiệp cho AI.
+
+## CRM Thẻ Tín Dụng
+
+Thư mục `crm/`: CRM trên Google Sheets + Apps Script, gồm nhận khách từ website, sổ giao dịch, nhắc đáo hạn (7→5 ngày trước hạn, có dời ngày nghỉ), gợi ý rút sau ngày sao kê và báo cáo tuần/tháng/năm. Hướng dẫn cài đặt: [`crm/README.md`](crm/README.md).
