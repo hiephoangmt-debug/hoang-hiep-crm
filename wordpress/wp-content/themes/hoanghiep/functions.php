@@ -61,7 +61,7 @@ function hoanghiep_fallback_menu( $args = array() ) {
 				array( 'Căn hộ dịch vụ (50 năm)', $type_link( 'can-ho-dich-vu', $projects ) ),
 			) ),
 			array( 'Thấp tầng', $type_link( 'thap-tang', $projects ), array(
-				array( 'Biệt thự', $type_link( 'biet-thu', $projects ) ),
+				array( 'Biệt thự nghỉ dưỡng', $type_link( 'biet-thu', $projects ) ),
 				array( 'Đất nền', $type_link( 'dat-nen', $projects ) ),
 				array( 'Shophouse', $type_link( 'shophouse', $projects ) ),
 			) ),

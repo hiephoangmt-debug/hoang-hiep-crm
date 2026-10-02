@@ -63,6 +63,10 @@ wp option update page_for_posts "$NEWS_ID"
 # được plugin Hoàng Hiệp CRM tự tạo ở lần chạy đầu tiên.
 wp eval 'hh_seed_terms();'
 
+# Dự án Đà Nẵng – Quảng Nam (cũ): căn hộ, căn hộ dịch vụ, biệt thự nghỉ dưỡng, shophouse, đất nền.
+# Có thể chạy lại bất cứ lúc nào: Dự án → Nhập dữ liệu Đà Nẵng.
+wp eval 'hh_import_projects();'
+
 # Chuyên mục tin tức
 wp term update category 1 --name="Thị trường Đà Nẵng" --slug=thi-truong-da-nang >/dev/null 2>&1 || true
 for term in "Tin dự án" "Kinh nghiệm mua bán" "Pháp lý nhà đất"; do
@@ -77,7 +81,7 @@ if ! wp menu list --fields=name --format=csv | grep -q "^Menu chính$"; then
 	wp menu item add-custom "Menu chính" "Căn hộ sở hữu lâu dài" "$SITE_URL/loai-du-an/can-ho-so-huu-lau-dai/" --parent-id="$HIGH"
 	wp menu item add-custom "Menu chính" "Căn hộ dịch vụ (50 năm)" "$SITE_URL/loai-du-an/can-ho-dich-vu/" --parent-id="$HIGH"
 	LOW=$(wp menu item add-custom "Menu chính" "Thấp tầng" "$SITE_URL/loai-du-an/thap-tang/" --parent-id="$PROJECTS" --porcelain)
-	wp menu item add-custom "Menu chính" "Biệt thự" "$SITE_URL/loai-du-an/biet-thu/" --parent-id="$LOW"
+	wp menu item add-custom "Menu chính" "Biệt thự nghỉ dưỡng" "$SITE_URL/loai-du-an/biet-thu/" --parent-id="$LOW"
 	wp menu item add-custom "Menu chính" "Đất nền" "$SITE_URL/loai-du-an/dat-nen/" --parent-id="$LOW"
 	wp menu item add-custom "Menu chính" "Shophouse" "$SITE_URL/loai-du-an/shophouse/" --parent-id="$LOW"
 	wp menu item add-custom "Menu chính" "Mua bán" "$SITE_URL/mua-ban/"

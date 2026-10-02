@@ -114,7 +114,7 @@ function hh_default_terms() {
 				'can-ho-dich-vu'  => 'Căn hộ dịch vụ (50 năm)',
 			) ),
 			'thap-tang' => array( 'Thấp tầng', array(
-				'biet-thu'  => 'Biệt thự',
+				'biet-thu'  => 'Biệt thự nghỉ dưỡng',
 				'dat-nen'   => 'Đất nền',
 				'shophouse' => 'Shophouse',
 			) ),
@@ -142,14 +142,20 @@ function hh_default_terms() {
 			'hoa-vang'      => array( 'Hòa Vang', array() ),
 			'hoi-an'        => array( 'Hội An', array() ),
 			'dien-ban'      => array( 'Điện Bàn', array() ),
+			'duy-xuyen'     => array( 'Duy Xuyên', array() ),
 		),
 	);
 }
 
 add_action( 'init', 'hh_seed_terms', 20 );
 function hh_seed_terms() {
-	if ( wp_installing() || '3' === get_option( 'hh_terms_seeded' ) ) {
+	if ( wp_installing() || '4' === get_option( 'hh_terms_seeded' ) ) {
 		return;
+	}
+	// Đổi tên cũ "Biệt thự" → "Biệt thự nghỉ dưỡng".
+	$villa = get_term_by( 'slug', 'biet-thu', 'loai-du-an' );
+	if ( $villa && 'Biệt thự' === $villa->name ) {
+		wp_update_term( $villa->term_id, 'loai-du-an', array( 'name' => 'Biệt thự nghỉ dưỡng' ) );
 	}
 	// Đổi tên cũ "Căn hộ lâu dài" → "Căn hộ sở hữu lâu dài".
 	$old = get_term_by( 'slug', 'can-ho-lau-dai', 'loai-du-an' );
@@ -169,7 +175,7 @@ function hh_seed_terms() {
 			}
 		}
 	}
-	update_option( 'hh_terms_seeded', '3' );
+	update_option( 'hh_terms_seeded', '4' );
 }
 
 /** Most specific "Loại dự án" of a project (child term preferred). */
@@ -404,7 +410,7 @@ function hh_listing_price_m2( $post_id = null ) {
 
 function hh_project_price( $post_id = null ) {
 	$from = hh_meta( 'hh_p_price_from', $post_id );
-	return '' === $from ? 'Đang cập nhật' : 'Từ ' . hh_format_price( $from );
+	return '' === $from ? 'Giá: Liên hệ' : 'Từ ' . hh_format_price( $from );
 }
 
 /** Spec rows [label => value] for a listing, skipping empty values. */

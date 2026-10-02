@@ -96,7 +96,7 @@ function hh_seo_description() {
 				hh_project_type() ? 'dự án ' . mb_strtolower( hh_project_type()->name ) : hh_meta( 'hh_p_type' ),
 				hh_meta( 'hh_p_address' ) ? 'tại ' . hh_meta( 'hh_p_address' ) : '',
 				hh_meta( 'hh_p_developer' ) ? 'chủ đầu tư ' . hh_meta( 'hh_p_developer' ) : '',
-				'giá ' . mb_strtolower( hh_project_price() ),
+				hh_meta( 'hh_p_price_from' ) ? 'giá ' . mb_strtolower( hh_project_price() ) : '',
 			)
 		);
 		$lead = has_excerpt() ? get_the_excerpt() : '';

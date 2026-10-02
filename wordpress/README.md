@@ -23,6 +23,18 @@ Khi thêm **Dự án** hoặc **Nhà đất**, bên dưới khung soạn thảo 
 - **Nhà đất**: Bán/Cho thuê, tình trạng, giá (nhập số triệu, website tự hiện "3,2 tỷ" và tính đơn giá/m²) · Diện tích, kích thước, mặt tiền, hẻm, hướng, số tầng, phòng ngủ, WC, nội thất, pháp lý · Điều kiện thuê · Đặc điểm nổi bật, tiện ích xung quanh · Ảnh, video, bản đồ. Mỗi tin tự có mã (VD: HH00020).
 - Bảng (bảng giá, kết nối, tiến độ…): mỗi dòng một hàng, các cột cách nhau bằng dấu `|`, ví dụ `Căn 2PN | 68 m² | 3,35 tỷ | View sông`.
 
+### Dữ liệu dự án Đà Nẵng – Quảng Nam (cũ)
+
+Script cài đặt tự nhập sẵn 18 dự án (có thể nhập lại ở **Dự án → Nhập dữ liệu Đà Nẵng**):
+
+- **Căn hộ sở hữu lâu dài**: Sun Symphony Residence, Sun Cosmo Residence, Sun Ponte Residence, Peninsula Đà Nẵng, Hiyori Garden Tower, The Ori Garden
+- **Căn hộ dịch vụ**: Hoiana Residences
+- **Biệt thự nghỉ dưỡng**: Casamia Balanca (đang bán), Casamia Calm, Casamia Hội An, Hoiana Beach Villas, Hoiana Shores Golf Villas, The Ocean Villas Đà Nẵng
+- **Shophouse**: Nam Hội An City
+- **Đất nền**: FPT City Đà Nẵng, Dragon Smart City, Lakeside Palace, One World Regency
+
+Thông tin (chủ đầu tư, vị trí, quy mô, số căn, tình trạng) tổng hợp từ nguồn công khai, lưu kèm link nguồn trong từng dự án. **Giá để trống** (hiện "Liên hệ"). Chạy lại không tạo trùng và không ghi đè ô đã sửa. Cần bổ sung ảnh đại diện và kiểm tra lại tình trạng mở bán/bàn giao với chủ đầu tư. Danh sách nằm trong `mu-plugins/hh-crm/data-du-an.php`.
+
 ### Bài toán dòng tiền & vay ngân hàng
 
 Trang dự án có bảng tính tương tác (khách tự chỉnh số, kết quả cập nhật ngay):

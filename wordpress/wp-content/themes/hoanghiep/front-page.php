@@ -54,7 +54,8 @@ $hero_image = hoanghiep_opt( 'hh_hero_image' );
 			<?php if ( $hero_image ) : ?>
 				<img class="hero__bg" src="<?php echo esc_url( $hero_image ); ?>" alt="">
 			<?php endif; ?>
-			<div class="container hero__content">
+			<div class="container hero__content hero__content--person">
+				<img class="hero__portrait" src="<?php echo esc_url( hoanghiep_photo( 'portrait2' ) ); ?>" alt="<?php echo esc_attr( hoanghiep_opt( 'hh_person_name' ) ); ?>" width="900" height="1350">
 				<p class="eyebrow eyebrow--light"><?php echo esc_html( hoanghiep_opt( 'hh_person_title' ) ); ?></p>
 				<h1 class="hero__title"><?php echo esc_html( hoanghiep_opt( 'hh_hero_title' ) ); ?></h1>
 				<p class="hero__text"><?php echo esc_html( hoanghiep_opt( 'hh_hero_text' ) ); ?></p>

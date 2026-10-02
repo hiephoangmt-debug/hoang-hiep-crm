@@ -41,7 +41,7 @@ while ( have_posts() ) :
 
 	$key_facts = array_filter(
 		array(
-			'Giá bán'   => hh_project_price(),
+			'Giá bán'   => hh_meta( 'hh_p_price_from' ) ? hh_project_price() : 'Liên hệ',
 			'Loại hình' => $type ? $type->name : '',
 			'Quy mô'    => hh_meta( 'hh_p_scale' ),
 			'Sản phẩm'  => hh_meta( 'hh_p_unit_area' ),
