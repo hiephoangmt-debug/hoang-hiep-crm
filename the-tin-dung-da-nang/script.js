@@ -16,7 +16,7 @@
   document.getElementById('year').textContent = new Date().getFullYear();
 
   // Contact form → CRM (Google Apps Script). Until CRM_URL is filled in, fall back to SMS / Zalo.
-  var CRM_URL = '';
+  var CRM_URL = 'https://script.google.com/macros/s/AKfycbzJxDXzFGBt0fZi-18p5ZIYFtMJtRSSidJWFyIL0AHC1RezxptJ2ZbAxfgFb_DColkX/exec';
   var form = document.getElementById('contact-form');
   var msg = form.querySelector('.form__msg');
   var HOTLINE = '0909669325';
