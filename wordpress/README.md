@@ -8,8 +8,8 @@ Website thương hiệu cá nhân **Hoàng Hiệp – bất động sản Đà N
 
 | Phần | Mô tả |
 |------|-------|
-| **Trang chủ** | Banner tự chạy slide các dự án HOT, ô tìm kiếm (Mua bán / Cho thuê / Dự án), **Dự án cao tầng**, **Dự án thấp tầng**, **Nhà đất bán hot mới**, **Nhà cho thuê hot mới**, **Tin tức mới nhất**, giới thiệu Hiệp, khu vực Đà Nẵng, quy trình làm việc, form nhận tư vấn |
-| **Dự án** (`/du-an/`) | **Cao tầng**: Căn hộ sở hữu lâu dài · Căn hộ dịch vụ (50 năm). **Thấp tầng**: Biệt thự · Đất nền · Shophouse. Lọc theo loại, tình trạng, khu vực. Trang chi tiết có mục lục dính khi cuộn: Tổng quan · Vị trí · Tiện ích · Mặt bằng · **Shop khối đế · Penthouse · Duplex** · Giá & thanh toán · **Dòng tiền & vay** · Tiến độ · Hình ảnh · Hỏi đáp, form "Nhận bảng giá". Cuối trang: **Dự án hot mới** (chỉ dự án) |
+| **Trang chủ** | Banner tự chạy slide các dự án HOT, ô tìm kiếm (Mua bán / Cho thuê / Dự án), **Tổ hợp dự án**, **Dự án cao tầng**, **Dự án thấp tầng**, **Nhà đất bán hot mới**, **Nhà cho thuê hot mới**, **Tin tức mới nhất**, giới thiệu Hiệp, khu vực Đà Nẵng, quy trình làm việc, form nhận tư vấn |
+| **Dự án** (`/du-an/`) | **Tổ hợp dự án** (khu City/Residence gồm nhiều loại sản phẩm). **Cao tầng**: Căn hộ sở hữu lâu dài · Căn hộ dịch vụ (50 năm). **Thấp tầng**: Biệt thự · Đất nền · Shophouse. Lọc theo loại, tình trạng, khu vực. Trang chi tiết có mục lục dính khi cuộn: Tổng quan · Vị trí · Tiện ích · Mặt bằng · **Shop khối đế · Penthouse · Duplex** · Giá & thanh toán · **Dòng tiền & vay** · Tiến độ · Hình ảnh · Hỏi đáp, form "Nhận bảng giá". Cuối trang: **Dự án hot mới** (chỉ dự án) |
 | **Mua bán / Cho thuê** (`/mua-ban/`, `/cho-thue/`) | Lọc theo khu vực, loại, mức giá, diện tích, phòng ngủ, hướng; sắp xếp theo giá, diện tích. Trang chi tiết có album ảnh phóng to, bảng thông số, đơn giá/m², **tính vay** (tin bán), điều kiện thuê, video, bản đồ, form "Đặt lịch xem nhà". Cuối trang: **tin hot mới cùng loại** (bán → bán, thuê → thuê) |
 | **Về Hiệp** (`/gioi-thieu/`) | Hồ sơ cá nhân: ảnh, slogan, giới thiệu, số liệu, dịch vụ |
 | **Khách hàng** (trong quản trị) | Mỗi lần khách gửi form, website lưu lại khách kèm căn/dự án họ quan tâm và gửi email báo cho bạn. Trạng thái: Mới → Đã liên hệ → Đang chăm sóc → Đã chốt |
@@ -25,15 +25,16 @@ Khi thêm **Dự án** hoặc **Nhà đất**, bên dưới khung soạn thảo 
 
 ### Dữ liệu dự án Đà Nẵng – Quảng Nam (cũ)
 
-Script cài đặt tự nhập sẵn 29 dự án (có thể nhập lại ở **Dự án → Nhập dữ liệu Đà Nẵng**):
+Script cài đặt tự nhập sẵn 30 dự án (có thể nhập lại ở **Dự án → Nhập dữ liệu Đà Nẵng**):
 
+- **Tổ hợp dự án**: FPT City Đà Nẵng (gồm FPT Plaza 1 – 5), Hoiana Resort & Golf (gồm Hoiana Residences, Hoiana Beach Villas, Hoiana Shores Golf Villas), Sun Symphony Residence (gồm The Sonata), Sun Ponte Residence (gồm The Rio), Sun Cosmo Residence, Times Square, Casamia Balanca, Nam Hội An City, Dragon Smart City
 - **Căn hộ sở hữu lâu dài**: Sun Symphony Residence, Sun Cosmo Residence, Sun Ponte Residence, The Legend, Times Square, Capital Square (2 phân khu), Newtown Diamond, Peninsula Đà Nẵng, Hiyori Garden Tower, The Ori Garden, FPT Plaza 1 – 5
 - **Căn hộ dịch vụ**: Hoiana Residences
 - **Biệt thự nghỉ dưỡng**: Casamia Balanca (đang bán), Casamia Calm, Casamia Hội An, Hoiana Beach Villas, Hoiana Shores Golf Villas, The Ocean Villas Đà Nẵng
 - **Nhà phố – Shophouse**: Nam Hội An City, The Sonata (phân khu của Sun Symphony), The Rio (phân khu của Sun Ponte), phần thấp tầng của Sun Cosmo
 - **Đất nền**: FPT City Đà Nẵng, Dragon Smart City, Lakeside Palace, One World Regency
 
-**Dự án có nhiều loại sản phẩm** (căn hộ + nhà phố/biệt thự) được gắn nhiều loại dự án cùng lúc nên hiện ở cả mục Cao tầng và Thấp tầng; từng khu ghi ở bảng **Các phân khu** (tab Tổng quan). Phân khu lớn có thể tạo thành dự án riêng và chọn ô **"Là phân khu của dự án"**: trang dự án mẹ tự hiện thẻ phân khu, trang phân khu ghi "Phân khu của …".
+**Tổ hợp dự án** (thường tên City, Residence… gồm cả căn hộ, biệt thự, nhà phố, đất nền): tick loại **"Tổ hợp dự án"** cùng các loại sản phẩm nó có, nên dự án hiện ở mục Tổ hợp và cả mục Cao tầng/Thấp tầng tương ứng. Từng khu ghi ở bảng **Các phân khu** (tab Tổng quan). Dự án thành phần (VD: FPT Plaza 5) tạo thành dự án riêng và chọn ô **"Thuộc tổ hợp / là phân khu của dự án"**: trang tổ hợp tự hiện thẻ "Dự án thành phần & phân khu", thẻ tổ hợp ghi "Gồm N dự án thành phần", trang thành phần ghi "Thuộc tổ hợp …".
 
 Thông tin (chủ đầu tư, vị trí, quy mô, số căn, tình trạng) tổng hợp từ nguồn công khai, lưu kèm link nguồn trong từng dự án. **Giá để trống** (hiện "Liên hệ"). Chạy lại không tạo trùng và không ghi đè ô đã sửa. Cần bổ sung ảnh đại diện và kiểm tra lại tình trạng mở bán/bàn giao với chủ đầu tư. Danh sách nằm trong `mu-plugins/hh-crm/data-du-an.php`.
 
@@ -98,7 +99,7 @@ Mở https://hiephoangmt.com/wp-admin và đăng nhập bằng `WP_ADMIN_USER` /
    - *Số liệu nổi bật*: năm kinh nghiệm, số giao dịch… (để trống thì ẩn).
    - *Liên hệ & mạng xã hội*: hotline, Zalo, email, Facebook, YouTube, TikTok.
    - *Banner trang chủ*: tiêu đề, mô tả, ảnh nền (dùng khi chưa có dự án nổi bật).
-2. **Dự án → Thêm dự án**: nhập thông tin theo từng tab, đặt **ảnh đại diện** (ảnh banner), chọn **Loại dự án** (Cao tầng → Căn hộ sở hữu lâu dài / Căn hộ dịch vụ; Thấp tầng → Biệt thự / Đất nền / Shophouse) và **Khu vực**, tick "Dự án HOT" để lên slide trang chủ.
+2. **Dự án → Thêm dự án**: nhập thông tin theo từng tab, đặt **ảnh đại diện** (ảnh banner), chọn **Loại dự án** (Tổ hợp dự án; Cao tầng → Căn hộ sở hữu lâu dài / Căn hộ dịch vụ; Thấp tầng → Biệt thự / Đất nền / Shophouse) và **Khu vực**, tick "Dự án HOT" để lên slide trang chủ.
 3. **Nhà đất → Đăng tin**: chọn Bán/Cho thuê, nhập giá, diện tích…, chọn Loại nhà đất và Khu vực.
 4. **Bài viết → Viết bài mới** cho mục Tin tức (nhớ điền phần Tóm tắt và ảnh đại diện).
 5. Nên cài thêm plugin gửi mail SMTP (VD: *WP Mail SMTP*) để email báo khách mới không vào thư rác, và một plugin sao lưu.

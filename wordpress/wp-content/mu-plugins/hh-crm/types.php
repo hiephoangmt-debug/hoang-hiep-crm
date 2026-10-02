@@ -109,6 +109,7 @@ function hh_register_types() {
 function hh_default_terms() {
 	return array(
 		'loai-du-an' => array(
+			'to-hop'    => array( 'Tổ hợp dự án', array() ),
 			'cao-tang'  => array( 'Cao tầng', array(
 				'can-ho-so-huu-lau-dai' => 'Căn hộ sở hữu lâu dài',
 				'can-ho-dich-vu'  => 'Căn hộ dịch vụ (50 năm)',
@@ -149,7 +150,7 @@ function hh_default_terms() {
 
 add_action( 'init', 'hh_seed_terms', 20 );
 function hh_seed_terms() {
-	if ( wp_installing() || '5' === get_option( 'hh_terms_seeded' ) ) {
+	if ( wp_installing() || '6' === get_option( 'hh_terms_seeded' ) ) {
 		return;
 	}
 	// Đổi tên cũ "Shophouse" → "Nhà phố – Shophouse".
@@ -180,7 +181,7 @@ function hh_seed_terms() {
 			}
 		}
 	}
-	update_option( 'hh_terms_seeded', '5' );
+	update_option( 'hh_terms_seeded', '6' );
 }
 
 /** Most specific "Loại dự án" of a project (child term preferred). */
@@ -193,14 +194,44 @@ function hh_project_type( $post_id = null ) {
 	return $terms[0];
 }
 
-/** All specific types of a project, e.g. "Căn hộ sở hữu lâu dài · Nhà phố – Shophouse". */
+/** All types of a project, e.g. "Tổ hợp dự án · Căn hộ sở hữu lâu dài". */
 function hh_project_types_label( $post_id = null ) {
 	$terms = get_the_terms( $post_id ?: get_the_ID(), 'loai-du-an' );
 	if ( ! $terms || is_wp_error( $terms ) ) {
 		return '';
 	}
-	$children = array_filter( $terms, fn( $t ) => 0 !== $t->parent );
-	return implode( ' · ', wp_list_pluck( $children ?: $terms, 'name' ) );
+	// Chỉ hiện loại cụ thể (con) và "Tổ hợp dự án"; bỏ nhóm cha Cao tầng / Thấp tầng.
+	$shown = array_filter( $terms, fn( $t ) => 0 !== $t->parent || 'to-hop' === $t->slug );
+	usort( $shown, fn( $a, $b ) => ( (int) ( 'to-hop' !== $a->slug ) - (int) ( 'to-hop' !== $b->slug ) ) ?: $a->term_id - $b->term_id );
+	return implode( ' · ', wp_list_pluck( $shown ?: $terms, 'name' ) );
+}
+
+/** Top-level project groups in display order: Tổ hợp, Cao tầng, Thấp tầng. */
+function hh_project_groups() {
+	$order  = array( 'to-hop', 'cao-tang', 'thap-tang' );
+	$groups = get_terms( array( 'taxonomy' => 'loai-du-an', 'hide_empty' => false, 'parent' => 0 ) ) ?: array();
+	usort(
+		$groups,
+		function ( $a, $b ) use ( $order ) {
+			$ia = array_search( $a->slug, $order, true );
+			$ib = array_search( $b->slug, $order, true );
+			return ( false === $ia ? 99 : $ia ) - ( false === $ib ? 99 : $ib );
+		}
+	);
+	return $groups;
+}
+
+/** Child projects (thành phần / phân khu) of a project. */
+function hh_project_children( $post_id = null ) {
+	return get_posts(
+		array(
+			'post_type'   => 'du-an',
+			'numberposts' => 50,
+			'meta_query'  => array( array( 'key' => 'hh_p_parent', 'value' => (int) ( $post_id ?: get_the_ID() ) ) ),
+			'orderby'     => 'title',
+			'order'       => 'ASC',
+		)
+	);
 }
 
 /** Whether a project belongs to the "Cao tầng" branch. */

@@ -77,6 +77,7 @@ if ! wp menu list --fields=name --format=csv | grep -q "^Menu chính$"; then
 	wp menu create "Menu chính"
 	wp menu item add-custom "Menu chính" "Trang chủ" "$SITE_URL/"
 	PROJECTS=$(wp menu item add-custom "Menu chính" "Dự án" "$SITE_URL/du-an/" --porcelain)
+	wp menu item add-custom "Menu chính" "Tổ hợp dự án" "$SITE_URL/loai-du-an/to-hop/" --parent-id="$PROJECTS"
 	HIGH=$(wp menu item add-custom "Menu chính" "Cao tầng" "$SITE_URL/loai-du-an/cao-tang/" --parent-id="$PROJECTS" --porcelain)
 	wp menu item add-custom "Menu chính" "Căn hộ sở hữu lâu dài" "$SITE_URL/loai-du-an/can-ho-so-huu-lau-dai/" --parent-id="$HIGH"
 	wp menu item add-custom "Menu chính" "Căn hộ dịch vụ (50 năm)" "$SITE_URL/loai-du-an/can-ho-dich-vu/" --parent-id="$HIGH"

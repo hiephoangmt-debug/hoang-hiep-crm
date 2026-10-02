@@ -5,7 +5,7 @@ $statuses = hh_project_schema()['tong-quan']['fields']['hh_p_status']['options']
 $current  = sanitize_key( (string) get_query_var( 'tt' ) );
 $area     = sanitize_title( (string) get_query_var( 'khu-vuc' ) );
 $areas    = get_terms( array( 'taxonomy' => 'khu-vuc', 'hide_empty' => false ) );
-$types    = get_terms( array( 'taxonomy' => 'loai-du-an', 'hide_empty' => false, 'parent' => 0, 'orderby' => 'term_id' ) );
+$types    = hh_project_groups();
 $term     = is_tax( 'loai-du-an' ) ? get_queried_object() : null;
 $base     = $term ? get_term_link( $term ) : get_post_type_archive_link( 'du-an' );
 $title    = $term ? 'Dự án ' . mb_strtolower( $term->name ) . ' Đà Nẵng' : 'Dự án Đà Nẵng';

@@ -14,11 +14,31 @@ defined( 'ABSPATH' ) || exit;
 
 function hh_project_dataset() {
 	return array(
+
+		/* ---------------- Tổ hợp dự án ---------------- */
+		array(
+			'slug'    => 'hoiana-resort-golf',
+			'title'   => 'Hoiana Resort & Golf',
+			'type'    => array( 'to-hop', 'biet-thu' ),
+			'area'    => 'duy-xuyen',
+			'hot'     => true,
+			'excerpt' => 'Quần thể nghỉ dưỡng tích hợp gần 1.000 ha tại Nam Hội An, tổng vốn khoảng 4 tỷ USD: sân golf, beach club, khách sạn, căn hộ khách sạn và biệt thự biển.',
+			'meta'    => array(
+				'hh_p_status'     => 'dang-mo-ban',
+				'hh_p_developer'  => 'Công ty TNHH Phát triển Nam Hội An',
+				'hh_p_type'       => 'Quần thể nghỉ dưỡng: căn hộ khách sạn, biệt thự biển, biệt thự sân golf',
+				'hh_p_address'    => 'Xã Duy Hải, Duy Xuyên (Quảng Nam cũ), Đà Nẵng – cách phố cổ Hội An khoảng 15 phút',
+				'hh_p_scale'      => '985,6 ha',
+				'hh_p_highlights' => "Quần thể nghỉ dưỡng tích hợp tổng vốn khoảng 4 tỷ USD\nSân golf, beach club, nhà hàng, spa, câu lạc bộ thể thao, trung tâm mua sắm\nSản phẩm sở hữu: căn hộ khách sạn Hoiana Residences, biệt thự Hoiana Beach Villas và Hoiana Shores Golf Villas",
+				'hh_p_zones'      => "Hoiana Residences | Căn hộ khách sạn | 2 tòa, 270 căn | Đang mở bán\nHoiana Beach Villas | Biệt thự biển | 36,6 ha, 198 căn | Đang mở bán – bàn giao Quý 1/2028 (dự kiến)\nHoiana Shores Golf Villas | Biệt thự sân golf | 88 căn | Đang mở bán",
+			),
+			'sources' => array( 'https://cafeland.vn/du-an/khu-phuc-hop-hoiana-1382.html', 'https://batdongsan.com.vn/du-an-khu-nghi-duong-sinh-thai-duy-xuyen-qna/hoiana-resort-golf-pj5415' ),
+		),
 		/* ---------------- Cao tầng – Căn hộ sở hữu lâu dài ---------------- */
 		array(
 			'slug'    => 'sun-symphony-residence',
 			'title'   => 'Sun Symphony Residence',
-			'type'    => 'can-ho-so-huu-lau-dai',
+			'type'    => array( 'to-hop', 'can-ho-so-huu-lau-dai' ),
 			'remove_types' => array( 'shophouse' ), // Thấp tầng nằm ở phân khu The Sonata.
 			'area'    => 'son-tra',
 			'hot'     => true,
@@ -46,7 +66,7 @@ function hh_project_dataset() {
 		array(
 			'slug'    => 'sun-cosmo-residence',
 			'title'   => 'Sun Cosmo Residence',
-			'type'    => array( 'can-ho-so-huu-lau-dai', 'shophouse' ),
+			'type'    => array( 'to-hop', 'can-ho-so-huu-lau-dai', 'shophouse' ),
 			'area'    => 'ngu-hanh-son',
 			'hot'     => true,
 			'excerpt' => 'Dự án của Sun Group trên đường Trần Thị Lý, gồm 2 phân khu The Panoma và The Cosmo với căn hộ, shop khối đế, nhà phố và biệt thự.',
@@ -70,7 +90,7 @@ function hh_project_dataset() {
 		array(
 			'slug'    => 'sun-ponte-residence',
 			'title'   => 'Sun Ponte Residence',
-			'type'    => 'can-ho-so-huu-lau-dai',
+			'type'    => array( 'to-hop', 'can-ho-so-huu-lau-dai' ),
 			'remove_types' => array( 'shophouse' ), // Thấp tầng nằm ở phân khu The Rio.
 			'area'    => 'son-tra',
 			'excerpt' => 'Tòa tháp 26 tầng của Sun Group trên đường Trần Hưng Đạo, gồm căn hộ, penthouse, shophouse cùng khu nhà phố và biệt thự.',
@@ -172,7 +192,7 @@ function hh_project_dataset() {
 		array(
 			'slug'    => 'times-square-da-nang',
 			'title'   => 'Times Square Đà Nẵng',
-			'type'    => 'can-ho-so-huu-lau-dai',
+			'type'    => array( 'to-hop', 'can-ho-so-huu-lau-dai' ),
 			'area'    => 'son-tra',
 			'excerpt' => 'Tổ hợp trung tâm thương mại, khách sạn và căn hộ cao cấp mặt tiền biển Mỹ Khê trên đường Võ Nguyên Giáp, quy mô 2,1 ha.',
 			'meta'    => array(
@@ -238,6 +258,7 @@ function hh_project_dataset() {
 			'title'   => 'FPT Plaza 1',
 			'type'    => 'can-ho-so-huu-lau-dai',
 			'area'    => 'ngu-hanh-son',
+			'parent'  => 'fpt-city-da-nang',
 			'excerpt' => 'Tòa căn hộ đầu tiên trong khu đô thị FPT City Đà Nẵng: 15 tầng, 586 căn hộ 1 – 3 phòng ngủ.',
 			'meta'    => array(
 				'hh_p_status'    => 'da-ban-giao',
@@ -256,6 +277,7 @@ function hh_project_dataset() {
 			'title'   => 'FPT Plaza 2',
 			'type'    => 'can-ho-so-huu-lau-dai',
 			'area'    => 'ngu-hanh-son',
+			'parent'  => 'fpt-city-da-nang',
 			'excerpt' => 'Tòa căn hộ 25 tầng ở trung tâm khu đô thị FPT City Đà Nẵng, 700 căn hộ.',
 			'meta'    => array(
 				'hh_p_status'    => 'da-ban-giao',
@@ -273,6 +295,7 @@ function hh_project_dataset() {
 			'title'   => 'FPT Plaza 3',
 			'type'    => 'can-ho-so-huu-lau-dai',
 			'area'    => 'ngu-hanh-son',
+			'parent'  => 'fpt-city-da-nang',
 			'excerpt' => 'Tòa căn hộ 25 tầng với 837 căn hộ trong khu đô thị FPT City Đà Nẵng.',
 			'meta'    => array(
 				'hh_p_status'    => 'dang-ban-giao',
@@ -290,6 +313,7 @@ function hh_project_dataset() {
 			'title'   => 'FPT Plaza 4',
 			'type'    => 'can-ho-so-huu-lau-dai',
 			'area'    => 'ngu-hanh-son',
+			'parent'  => 'fpt-city-da-nang',
 			'hot'     => true,
 			'excerpt' => 'Tòa căn hộ mới nhất của FPT City Đà Nẵng: 20 tầng, khoảng 1.400 căn hộ 1 – 3 phòng ngủ, khởi công 3/2025.',
 			'meta'    => array(
@@ -311,6 +335,7 @@ function hh_project_dataset() {
 			'title'   => 'FPT Plaza 5',
 			'type'    => 'can-ho-so-huu-lau-dai',
 			'area'    => 'ngu-hanh-son',
+			'parent'  => 'fpt-city-da-nang',
 			'excerpt' => 'Tòa căn hộ tiếp theo của FPT City Đà Nẵng: 25 tầng, hơn 832 căn hộ, dự kiến mở bán năm 2026.',
 			'meta'    => array(
 				'hh_p_status'    => 'sap-mo-ban',
@@ -375,6 +400,7 @@ function hh_project_dataset() {
 			'title'   => 'Hoiana Residences',
 			'type'    => 'can-ho-dich-vu',
 			'area'    => 'duy-xuyen',
+			'parent'  => 'hoiana-resort-golf',
 			'excerpt' => 'Hai tòa căn hộ khách sạn trong quần thể Hoiana Resort & Golf (985,6 ha), vận hành bởi New World (Rosewood Hotel Group).',
 			'meta'    => array(
 				'hh_p_status'    => 'dang-mo-ban',
@@ -395,7 +421,7 @@ function hh_project_dataset() {
 		array(
 			'slug'    => 'casamia-balanca-hoi-an',
 			'title'   => 'Casamia Balanca Hội An',
-			'type'    => 'biet-thu',
+			'type'    => array( 'to-hop', 'biet-thu' ),
 			'area'    => 'hoi-an',
 			'hot'     => true,
 			'excerpt' => 'Khu đô thị sinh thái 31,1 ha của Đạt Phương tại Cẩm Thanh, Hội An: 297 biệt thự, 74 shophouse, 3 khách sạn, ra mắt tháng 6/2025.',
@@ -456,6 +482,7 @@ function hh_project_dataset() {
 			'title'   => 'Hoiana Beach Villas',
 			'type'    => 'biet-thu',
 			'area'    => 'duy-xuyen',
+			'parent'  => 'hoiana-resort-golf',
 			'hot'     => true,
 			'excerpt' => '198 biệt thự biển trên 36,6 ha trong quần thể Hoiana Resort & Golf, 3 – 9 phòng ngủ, cách phố cổ Hội An khoảng 15 phút.',
 			'meta'    => array(
@@ -476,6 +503,7 @@ function hh_project_dataset() {
 			'title'   => 'Hoiana Shores Golf Villas',
 			'type'    => 'biet-thu',
 			'area'    => 'duy-xuyen',
+			'parent'  => 'hoiana-resort-golf',
 			'excerpt' => '88 biệt thự sân golf 3 – 5 phòng ngủ trong quần thể Hoiana, đất 710 – 1.500 m², sổ đỏ từng căn.',
 			'meta'    => array(
 				'hh_p_status'    => 'dang-mo-ban',
@@ -511,7 +539,7 @@ function hh_project_dataset() {
 		array(
 			'slug'    => 'nam-hoi-an-city',
 			'title'   => 'Nam Hội An City',
-			'type'    => 'shophouse',
+			'type'    => array( 'to-hop', 'shophouse' ),
 			'area'    => 'duy-xuyen',
 			'hot'     => true,
 			'excerpt' => 'Khu phố thương mại ven sông Thu Bồn phía nam cầu Cửa Đại: 420 nhà phố 3 tầng kiến trúc phố cổ, cách phố cổ Hội An khoảng 5 km.',
@@ -531,7 +559,7 @@ function hh_project_dataset() {
 		array(
 			'slug'    => 'fpt-city-da-nang',
 			'title'   => 'FPT City Đà Nẵng',
-			'type'    => 'dat-nen',
+			'type'    => array( 'to-hop', 'dat-nen' ),
 			'area'    => 'ngu-hanh-son',
 			'hot'     => true,
 			'excerpt' => 'Khu đô thị xanh thông minh hơn 181 ha của FPT, hơn 3 km mặt sông Cổ Cò, cách biển khoảng 1 km.',
@@ -541,6 +569,7 @@ function hh_project_dataset() {
 				'hh_p_type'      => 'Đất nền, shophouse, căn hộ, biệt thự',
 				'hh_p_address'   => 'Đường Võ Chí Công, phường Hòa Hải (cũ), Ngũ Hành Sơn, Đà Nẵng',
 				'hh_p_scale'     => 'Hơn 181 ha (hơn 100 ha công viên, cây xanh, mặt nước)',
+				'hh_p_zones'     => "Căn hộ FPT Plaza 1 – 5 | Căn hộ chung cư | 5 tòa (xem các dự án thành phần) | Plaza 1–2 đã bàn giao, Plaza 3–4 đang triển khai, Plaza 5 sắp mở bán\nĐất nền, shophouse, biệt thự | Thấp tầng | – | –",
 				'hh_p_highlights' => "Hơn 3 km mặt sông Cổ Cò\nCách biển khoảng 1 km, trên trục Đà Nẵng – Hội An\nĐịnh hướng khu đô thị xanh thông minh kiểu mẫu",
 			),
 			'sources' => array( 'https://fptcity.vn/', 'https://cafeland.vn/du-an/fpt-city-da-nang-khu-do-thi-sinh-thai-kieu-mau-421.html' ),
@@ -548,7 +577,7 @@ function hh_project_dataset() {
 		array(
 			'slug'    => 'dragon-smart-city',
 			'title'   => 'Dragon Smart City',
-			'type'    => 'dat-nen',
+			'type'    => array( 'to-hop', 'dat-nen' ),
 			'area'    => 'lien-chieu',
 			'excerpt' => 'Khu đô thị 78 ha tại Liên Chiểu với 2.544 lô đất nền, nhà phố, biệt thự và căn hộ.',
 			'meta'    => array(
@@ -650,12 +679,6 @@ function hh_import_projects() {
 		}
 
 		$meta = $p['meta'];
-		if ( ! empty( $p['parent'] ) ) {
-			$parent = get_page_by_path( $p['parent'], OBJECT, 'du-an' );
-			if ( $parent ) {
-				$meta['hh_p_parent'] = $parent->ID;
-			}
-		}
 		$meta['hh_p_name'] = $meta['hh_p_name'] ?? $p['title'];
 		if ( ! empty( $p['hot'] ) ) {
 			$meta['hh_p_featured'] = '1';
@@ -666,6 +689,17 @@ function hh_import_projects() {
 			}
 		}
 		update_post_meta( $id, 'hh_p_sources', implode( "\n", $p['sources'] ) );
+	}
+	// Lượt 2: nối dự án thành phần / phân khu với tổ hợp (sau khi mọi dự án đã được tạo).
+	foreach ( hh_project_dataset() as $p ) {
+		if ( empty( $p['parent'] ) ) {
+			continue;
+		}
+		$child  = get_page_by_path( $p['slug'], OBJECT, 'du-an' );
+		$parent = get_page_by_path( $p['parent'], OBJECT, 'du-an' );
+		if ( $child && $parent && ! get_post_meta( $child->ID, 'hh_p_parent', true ) ) {
+			update_post_meta( $child->ID, 'hh_p_parent', $parent->ID );
+		}
 	}
 	return array( $created, $updated );
 }

@@ -60,7 +60,7 @@ while ( have_posts() ) :
 			</p>
 			<?php $parent_id = (int) hh_meta( 'hh_p_parent' ); ?>
 			<?php if ( $parent_id && 'publish' === get_post_status( $parent_id ) ) : ?>
-				<a class="parent-link" href="<?php echo esc_url( get_permalink( $parent_id ) ); ?>">Phân khu của <strong><?php echo esc_html( get_the_title( $parent_id ) ); ?></strong> <?php echo hh_icon( 'arrow' ); // phpcs:ignore ?></a>
+				<a class="parent-link" href="<?php echo esc_url( get_permalink( $parent_id ) ); ?>"><?php echo esc_html( hh_parent_label( $parent_id ) ); ?> <strong><?php echo esc_html( get_the_title( $parent_id ) ); ?></strong> <?php echo hh_icon( 'arrow' ); // phpcs:ignore ?></a>
 			<?php endif; ?>
 			<?php hh_pill( $status, $status_key ); ?>
 			<?php foreach ( get_the_terms( $id, 'loai-du-an' ) ?: array() as $t ) : ?><?php if ( $t->parent ) : ?><a class="pill pill--type" href="<?php echo esc_url( get_term_link( $t ) ); ?>"><?php echo esc_html( $t->name ); ?></a><?php endif; ?><?php endforeach; ?>
@@ -119,12 +119,14 @@ while ( have_posts() ) :
 						'posts_per_page' => 12,
 						'post__not_in'   => array( $id ),
 						'meta_query'     => array( array( 'key' => 'hh_p_parent', 'value' => $id ) ),
+						'orderby'        => 'title',
+						'order'          => 'ASC',
 						'no_found_rows'  => true,
 					)
 				);
 				if ( $subzones->have_posts() ) :
 					?>
-					<h3 class="block__sub">Phân khu có trang thông tin riêng</h3>
+					<h3 class="block__sub"><?php echo has_term( 'to-hop', 'loai-du-an', $id ) ? 'Dự án thành phần &amp; phân khu' : 'Phân khu có trang thông tin riêng'; ?></h3>
 					<div class="grid grid--2">
 						<?php
 						while ( $subzones->have_posts() ) :

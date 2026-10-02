@@ -75,6 +75,7 @@ $hero_image = hoanghiep_opt( 'hh_hero_image' );
 <?php
 // Dự án theo nhóm: Cao tầng, Thấp tầng (kèm các loại con).
 $project_sections = array(
+	'to-hop'    => array( 'Tổ hợp dự án', 'Khu đô thị · Khu phức hợp · Residence' ),
 	'cao-tang'  => array( 'Dự án cao tầng', 'Căn hộ · Penthouse · Duplex · Shop khối đế' ),
 	'thap-tang' => array( 'Dự án thấp tầng', 'Biệt thự · Đất nền · Shophouse' ),
 );

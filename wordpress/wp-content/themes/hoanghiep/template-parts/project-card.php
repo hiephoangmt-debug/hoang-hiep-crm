@@ -23,7 +23,11 @@ $type   = hh_project_type();
 		<?php endif; ?>
 		<h3 class="project-card__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 		<?php if ( (int) hh_meta( 'hh_p_parent' ) ) : ?>
-			<p class="project-card__parent">Phân khu của <?php echo esc_html( get_the_title( (int) hh_meta( 'hh_p_parent' ) ) ); ?></p>
+			<p class="project-card__parent"><?php echo esc_html( hh_parent_label( (int) hh_meta( 'hh_p_parent' ) ) . ' ' . get_the_title( (int) hh_meta( 'hh_p_parent' ) ) ); ?></p>
+		<?php endif; ?>
+		<?php $parts = has_term( 'to-hop', 'loai-du-an' ) ? count( hh_project_children() ) : 0; ?>
+		<?php if ( $parts ) : ?>
+			<p class="project-card__parent">Gồm <?php echo (int) $parts; ?> dự án thành phần</p>
 		<?php endif; ?>
 		<?php if ( $place ) : ?>
 			<p class="meta-line"><?php echo hh_icon( 'pin' ); // phpcs:ignore ?> <?php echo esc_html( $place ); ?></p>
@@ -40,7 +44,7 @@ $type   = hh_project_type();
 			<p class="project-card__extras">Có <?php echo esc_html( implode( ' · ', $extras ) ); ?></p>
 		<?php endif; ?>
 		<ul class="project-card__facts">
-			<?php if ( hh_meta( 'hh_p_scale' ) ) : ?><li><span>Quy mô</span><?php echo esc_html( hh_meta( 'hh_p_scale' ) ); ?></li><?php endif; ?>
+			<?php if ( hh_meta( 'hh_p_scale' ) ) : ?><li><span>Quy mô</span><?php echo esc_html( trim( preg_replace( '/\s*\(.*$/u', '', hh_meta( 'hh_p_scale' ) ) ) ); ?></li><?php endif; ?>
 			<?php if ( hh_meta( 'hh_p_unit_area' ) ) : ?><li><span>Diện tích</span><?php echo esc_html( hh_meta( 'hh_p_unit_area' ) ); ?></li><?php endif; ?>
 			<?php if ( hh_meta( 'hh_p_handover' ) ) : ?><li><span>Bàn giao</span><?php echo esc_html( hh_meta( 'hh_p_handover' ) ); ?></li><?php endif; ?>
 		</ul>

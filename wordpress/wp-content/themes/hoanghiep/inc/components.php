@@ -293,3 +293,8 @@ function hh_highlights( $limit = 0, $class = 'highlights' ) {
 	}
 	echo '</div>';
 }
+
+/** "Thuộc tổ hợp" when the parent is a complex, otherwise "Phân khu của". */
+function hh_parent_label( $parent_id ) {
+	return has_term( 'to-hop', 'loai-du-an', $parent_id ) ? 'Thuộc tổ hợp' : 'Phân khu của';
+}

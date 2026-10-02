@@ -31,7 +31,7 @@ function hh_project_schema() {
 					'da-ban-giao'   => 'Đã bàn giao',
 				) ),
 				'hh_p_featured'     => array( 'type' => 'checkbox', 'label' => 'Dự án HOT (lên banner, trang chủ và mục "Dự án hot mới")', 'half' => true ),
-				'hh_p_parent'       => array( 'type' => 'post', 'label' => 'Là phân khu của dự án (nếu có)', 'post_type' => 'du-an', 'half' => true, 'help' => 'VD: The Sonata là phân khu của Sun Symphony Residence.' ),
+				'hh_p_parent'       => array( 'type' => 'post', 'label' => 'Thuộc tổ hợp / là phân khu của dự án', 'post_type' => 'du-an', 'half' => true, 'help' => 'VD: FPT Plaza 4 thuộc FPT City Đà Nẵng; The Sonata là phân khu của Sun Symphony Residence.' ),
 				'hh_p_name'         => array( 'type' => 'text', 'label' => 'Tên thương mại', 'placeholder' => 'VD: Aurelia Riverside', 'half' => true ),
 				'hh_p_type'         => array( 'type' => 'text', 'label' => 'Loại hình', 'placeholder' => 'VD: Căn hộ cao cấp, nhà phố, shophouse', 'half' => true ),
 				'hh_p_developer'    => array( 'type' => 'text', 'label' => 'Chủ đầu tư', 'placeholder' => 'VD: Công ty CP Địa ốc ABC', 'half' => true ),
