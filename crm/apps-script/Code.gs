@@ -286,6 +286,7 @@ function apiBootstrap_() {
       ownerEmail: props.getProperty('OWNER_EMAIL') || '',
       calendar: props.getProperty('CALENDAR') !== 'off',
       refundName: refundName_(),
+      refundPhone: PropertiesService.getScriptProperties().getProperty('HOAN_SDT') || '',
       sheetUrl: SpreadsheetApp.getActive().getUrl(),
       webAppUrl: ScriptApp.getService().getUrl()
     }
@@ -474,6 +475,7 @@ function apiSaveSettings_(p) {
   if (p.ownerEmail !== undefined) props.setProperty('OWNER_EMAIL', String(p.ownerEmail).trim());
   if (p.calendar !== undefined) props.setProperty('CALENDAR', p.calendar ? 'on' : 'off');
   if (p.refundName !== undefined) props.setProperty('HOAN_NGUOI', String(p.refundName).trim() || 'C.Trâm');
+  if (p.refundPhone !== undefined) props.setProperty('HOAN_SDT', normalizePhone_(p.refundPhone));
   return apiBootstrap_().settings;
 }
 

@@ -157,6 +157,10 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
 .stmt tr.sub td { color: var(--muted); font-size: .82rem; font-weight: 400; padding-left: 12px; }
 .stmt tr.total td { border-bottom: 0; border-top: 2px solid var(--text); font-size: 1.05rem; padding-top: 8px; }
 .msg { width: 100%; font-family: inherit; font-size: .85rem; border: 1px solid var(--line); border-radius: 10px; padding: 10px; background: var(--bg); }
+.zl { display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; padding: 4px 10px; font-size: .82rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.zl--zalo { background: #0068ff; color: #fff; }
+.zl--tel { background: var(--ok-bg); color: var(--ok); }
+.zl-row { display: inline-flex; gap: 6px; flex-wrap: wrap; align-items: center; }
 .pay-chip { display: inline-block; white-space: normal; text-align: right; max-width: 100%; background: var(--info-bg); border-radius: 8px; padding: 2px 8px; margin: 2px 0; font-size: .82rem; cursor: pointer; border: 0; color: var(--primary-dark); }
 .copy input { font-size: .8rem; }
 </style>
@@ -251,7 +255,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         <details style="margin-top:10px"><summary class="muted" style="cursor:pointer">Tin nhắn gửi <span class="refund-name">C.Trâm</span></summary>
           <textarea class="msg" id="sum-msg" rows="9" readonly style="margin-top:8px"></textarea>
         </details>
-        <div class="row" style="margin-top:10px"><button class="btn btn--ghost btn--sm" data-act="copy-sum">📋 Chép tin nhắn</button></div>
+        <div class="row" style="margin-top:10px"><button class="btn btn--ghost btn--sm" data-act="copy-sum">📋 Chép tin nhắn</button><button class="btn btn--sm" style="background:#0068ff;color:#fff" data-act="zalo-sum">💬 Gửi Zalo <span class="refund-name">C.Trâm</span></button></div>
       </div>
       <h2>⏳ Khoản còn thiếu</h2>
       <div id="refund-list"></div>
@@ -343,6 +347,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
           <label class="f">Phải báo xong trước hạn (ngày)<input type="number" id="set-to" min="0" max="30"></label>
           <label class="f">Từ sao kê đến hạn thanh toán (ngày)<span class="hint">Dùng khi thẻ chưa có ngày đáo</span><input type="number" id="set-grace" min="10" max="30"></label>
           <label class="f">Người hoàn tiền (giữ máy) <span class="hint">hiện trên mục Tiền hoàn</span><input id="set-refund-name" placeholder="C.Trâm"></label>
+          <label class="f">SĐT Zalo của người hoàn tiền <span class="hint">để bấm gửi tin nhắn đối chiếu</span><input id="set-refund-phone" inputmode="tel" placeholder="09…"></label>
           <label class="f">Email nhận thông báo <span class="hint">để trống = không gửi email</span><input type="email" id="set-email"></label>
           <label class="f full" style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="set-cal" style="width:auto"> Tạo sự kiện trên Google Calendar để điện thoại tự báo</label>
         </div>
@@ -459,7 +464,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     <textarea class="msg" id="close-msg" rows="9" readonly></textarea>
     <p class="hint">Sau khi kết: số liệu đến hết ngày kết bị khóa (không thêm/sửa/xóa được), số dư chuyển sang kỳ sau. Bỏ lần kết gần nhất nếu cần sửa.</p>
     <div class="row row--between" style="margin-top:10px">
-      <button type="button" class="btn btn--ghost" data-act="copy-close">📋 Chép tin nhắn</button>
+      <div class="row"><button type="button" class="btn btn--ghost" data-act="copy-close">📋 Chép</button><button type="button" class="btn" style="background:#0068ff;color:#fff" data-act="zalo-close">💬 Gửi Zalo</button></div>
       <div class="row">
         <button type="button" class="btn btn--ghost" data-close>Hủy</button>
         <button type="button" class="btn" data-act="do-close">📌 Kết sổ</button>
@@ -560,10 +565,18 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     setTimeout(function () { t.remove(); }, err ? 5000 : 2500);
   }
   function fail(e) { toast(e.message || String(e), true); }
+  function zaloUrl(sdt) { return 'https://zalo.me/' + encodeURIComponent(String(sdt || '').replace(/\D/g, '')); }
+  // Nút nhỏ trên từng dòng: bấm là mở Zalo chat / gọi luôn, không mở chi tiết khách.
+  function quickContact(sdt, withNumber) {
+    if (!sdt) return withNumber ? '<span class="muted">—</span>' : '';
+    return '<span class="zl-row">' + (withNumber ? '<span>' + esc(sdt) + '</span>' : '') +
+      '<a class="zl zl--zalo" data-quick target="_blank" rel="noopener" href="' + zaloUrl(sdt) + '">💬 Zalo</a>' +
+      '<a class="zl zl--tel" data-quick href="tel:' + esc(sdt) + '">📞 Gọi</a></span>';
+  }
   function telBtns(sdt) {
     if (!sdt) return '<span class="muted">Chưa có SĐT</span>';
     return '<a class="btn btn--sm" href="tel:' + esc(sdt) + '">📞 ' + esc(sdt) + '</a>' +
-      '<a class="btn btn--ghost btn--sm" target="_blank" rel="noopener" href="https://zalo.me/' + esc(sdt) + '">Zalo</a>';
+      '<a class="btn btn--sm" style="background:#0068ff;color:#fff" target="_blank" rel="noopener" href="' + zaloUrl(sdt) + '">💬 Zalo</a>';
   }
   function statusBadge(s) {
     var cls = { 'Bấm Zalo': '', 'Bấm gọi': '', 'Khách quen': 'ok', 'Đã chốt': 'ok', 'Đã báo': 'ok', 'Mới': 'warn', 'Đang tư vấn': '', 'Đã liên hệ': '', 'Không tiềm năng': 'muted', 'Ngưng nhắc': 'muted' }[s];
@@ -699,7 +712,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
           '<td data-l="Dịch vụ">' + esc(t.dich_vu) + '</td>' +
           '<td data-l="Thẻ"><b>' + esc(t.the) + '</b></td>' +
           '<td data-l="Ngày đáo / sao kê" class="opt">' + (t.ngay_dao ? 'Đáo ' + esc(t.ngay_dao) : '') + (t.ngay_sao_ke ? (t.ngay_dao ? ' · ' : '') + 'SK ' + esc(t.ngay_sao_ke) : '') + '</td>' +
-          '<td data-l="Khách">' + esc(t.ten_khach) + '</td>' +
+          '<td data-l="Khách">' + esc(t.ten_khach) + (t.sdt ? ' ' + quickContact(t.sdt) : '') + '</td>' +
           '<td data-l="Số tiền" class="num">' + money(t.so_tien) + '</td>' +
           '<td data-l="Máy" class="opt">' + esc(t.may) + '</td>' +
           '<td data-l="Phí khách/máy" class="num opt">' + pct(t.phi_khach) + ' / ' + pct(t.phi_may) + '</td>' +
@@ -708,6 +721,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       }).join('') : '<tr><td colspan="10" class="empty">Không có giao dịch.</td></tr>') + '</tbody>';
   }
   $('#tx-table').addEventListener('click', function (e) {
+    if (e.target.closest('[data-quick]')) return;
     var tr = e.target.closest('[data-tx]');
     if (tr) openTx(S.tx.filter(function (t) { return t.id === tr.dataset.tx; })[0]);
   });
@@ -912,6 +926,13 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); done();
     });
   }
+  // Zalo không cho điền sẵn nội dung: chép tin nhắn rồi mở khung chat, chỉ cần dán và gửi.
+  function sendZaloRefund(text) {
+    copyText(text);
+    var sdt = S.boot.settings.refundPhone;
+    if (!sdt) return toast('Đã chép tin nhắn. Thêm SĐT Zalo của ' + rn() + ' trong Cài đặt để bấm là mở Zalo luôn.', true);
+    window.open(zaloUrl(sdt), '_blank');
+  }
   function closingText(c) {
     var ten = rn().replace(/^C\.\s*/i, '');
     function no(v) { return v > 0 ? 'chị còn nợ em ' + money(v) : v < 0 ? 'chị ứng dư ' + money(-v) : 'không còn nợ'; }
@@ -934,6 +955,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     if (act === 'open-close') openClose();
     if (act === 'copy-close' && $('#close-msg').value) copyText($('#close-msg').value);
     if (act === 'copy-sum' && $('#sum-msg').value) copyText($('#sum-msg').value);
+    if (act === 'zalo-sum' && $('#sum-msg').value) sendZaloRefund($('#sum-msg').value);
+    if (act === 'zalo-close' && $('#close-msg').value) sendZaloRefund($('#close-msg').value);
     if (act === 'do-close') {
       var st = S.closePreview;
       if (!st || st.ngay !== $('#close-date').value) return;
@@ -1181,7 +1204,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     }).sort(function (a, b) { return String(b.cap_nhat).localeCompare(String(a.cap_nhat)); });
     $('#cust-table').innerHTML = '<thead><tr><th>Tên</th><th>SĐT</th><th>Trạng thái</th><th>Nguồn</th><th>Cập nhật</th></tr></thead><tbody>' +
       (rows.length ? rows.map(function (c) {
-        return '<tr class="click" data-cust="' + esc(c.id) + '"><td data-l="Tên"><b>' + esc(c.ten) + '</b></td><td data-l="SĐT">' + esc(c.sdt) +
+        return '<tr class="click" data-cust="' + esc(c.id) + '"><td data-l="Tên"><b>' + esc(c.ten) + '</b></td><td data-l="SĐT">' + quickContact(c.sdt, true) +
           '</td><td data-l="Trạng thái">' + statusBadge(c.trang_thai) + '</td><td data-l="Nguồn">' + esc(c.nguon) + '</td><td data-l="Cập nhật" class="opt">' + dmy(c.cap_nhat) + '</td></tr>';
       }).join('') : '<tr><td colspan="5" class="empty">Chưa có khách.</td></tr>') + '</tbody>';
   }
@@ -1222,7 +1245,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       show(S.tab);
     }).catch(fail);
   });
-  $('#cust-table').addEventListener('click', function (e) { var tr = e.target.closest('[data-cust]'); if (tr) openCustomer(tr.dataset.cust); });
+  $('#cust-table').addEventListener('click', function (e) { if (e.target.closest('[data-quick]')) return; var tr = e.target.closest('[data-cust]'); if (tr) openCustomer(tr.dataset.cust); });
 
   var custForm = $('#cust-form');
   function openCustomer(id) {
@@ -1314,6 +1337,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     $('#set-email').value = s.ownerEmail; $('#set-cal').checked = s.calendar;
     $('#set-after').value = s.shiftAfterCards || '';
     $('#set-refund-name').value = s.refundName || 'C.Trâm';
+    $('#set-refund-phone').value = s.refundPhone || '';
     $('#set-holidays').value = (s.holidays || []).map(dmy).join('\n');
     $('#set-webhook').value = s.webAppUrl; $('#set-sheet').href = s.sheetUrl;
   }
@@ -1336,7 +1360,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       if (act === 'save-settings') {
         call('saveSettings', { remindFrom: $('#set-from').value, remindTo: $('#set-to').value, graceDays: $('#set-grace').value,
           ownerEmail: $('#set-email').value, calendar: $('#set-cal').checked,
-          shiftAfterCards: $('#set-after').value, holidays: $('#set-holidays').value, refundName: $('#set-refund-name').value })
+          shiftAfterCards: $('#set-after').value, holidays: $('#set-holidays').value, refundName: $('#set-refund-name').value, refundPhone: $('#set-refund-phone').value })
           .then(function (s) { S.boot.settings = s; applyRefundName(); toast('Đã lưu cài đặt'); }).catch(fail);
       }
       if (act === 'change-pin') {
