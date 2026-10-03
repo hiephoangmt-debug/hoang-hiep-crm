@@ -11,20 +11,74 @@ Bạn cần 2 file:
 
 > Tự tạo lại 2 file: trong thư mục `wordpress/` chạy `./scripts/build-zip.sh`, file nằm ở `wordpress/dist/`.
 
-### Đã có sẵn hiephoangmt.com?
+## PHẦN A – Cài lại trên hiephoangmt.com đang chạy (giao diện Houzez)
 
-Mở **https://hiephoangmt.com/wp-admin**:
+Website hiện tại dùng **Houzez + Elementor + Rank Math**. Làm đúng thứ tự dưới đây: tin đã đăng trên Houzez được **chuyển sang** giao diện mới, link cũ **tự chuyển hướng** (giữ thứ hạng Google), giao diện Houzez **vẫn còn** để quay lại bất cứ lúc nào.
 
-- **Hiện trang đăng nhập WordPress** → website đã có WordPress: **bỏ qua Bước 1–4**, làm từ **Bước 0** dưới đây rồi sang **Bước 5**.
-- **Không hiện** (báo lỗi, trang trống, trang của nhà cung cấp) → mới có tên miền, chưa có hosting/WordPress: làm từ **Bước 1** (bỏ phần mua tên miền).
+### A1. Sao lưu (bắt buộc)
 
-**Bước 0 – sao lưu trước khi thay giao diện (website đang chạy):**
-1. **Plugin → Cài mới** → tìm **UpdraftPlus** → Cài đặt → Kích hoạt → **Cài đặt → Sao lưu UpdraftPlus** → **Sao lưu ngay** (tick cả cơ sở dữ liệu và tệp).
-2. Tải bản sao lưu về máy hoặc kết nối Google Drive.
+1. Thanh trên cùng → **Bảng tin** → menu trái **Plugin → Cài mới** → ô tìm kiếm gõ `UpdraftPlus` → **Cài đặt** → **Kích hoạt**.
+2. **Cài đặt → Sao lưu UpdraftPlus** → **Sao lưu ngay** → tick *cơ sở dữ liệu* và *tệp* → **Sao lưu ngay**. Đợi báo xong.
+3. Bấm vào bản sao lưu → tải 5 file về máy (hoặc tab *Cài đặt* → kết nối Google Drive).
 
-Khi cài sang giao diện Hoàng Hiệp: bài viết, trang, ảnh cũ **giữ nguyên**. Nút *Cài đặt nhanh* sẽ **đặt lại trang chủ** thành trang "Trang chủ" mới và gán **Menu chính** mới cho đầu trang; trang cũ cùng đường dẫn (`/tin-tuc/`, `/lien-he/`, `/gioi-thieu/`) được dùng lại, không tạo trùng. Nếu đang dùng plugin SEO khác (Rank Math, Yoast…) cứ giữ – giao diện tự tương thích. Plugin dựng trang (Elementor…) có thể tắt sau khi kiểm tra trang mới ổn.
+> Hosting có **Staging / WP Toolkit / Softaculous → Clone** thì nên tạo bản thử (VD `thu.hiephoangmt.com`), làm A2–A7 trên bản thử, ưng rồi làm lại trên web chính.
+
+### A2. Cài plugin Hoàng Hiệp CRM
+
+**Plugin → Cài mới → Tải plugin lên** (nút trên cùng) → **Chọn tệp** → `hoang-hiep-crm.zip` → **Cài đặt ngay** → **Kích hoạt plugin**.
+
+Menu trái có thêm **Dự án**, **Nhà đất**, **Khách hàng**. Website **chưa thay đổi gì** ở bước này.
+
+### A3. Chuyển tin từ Houzez (làm TRƯỚC khi đổi giao diện)
+
+1. **Công cụ → Chuyển dữ liệu Houzez**.
+2. Xem bảng **Xem trước**: từng tin Houzez sẽ thành *Nhà đất – Bán*, *Nhà đất – Cho thuê* hoặc *Dự án* (tin có loại "Dự án"). Cột **Giá gốc → triệu** cho thấy giá sau khi đổi (VD `3.250.000.000 → 3,25 tỷ`).
+3. Bấm **Chuyển dữ liệu**. Tin Houzez gốc **không bị xóa**; chạy lại không tạo trùng.
+
+Được chuyển: tiêu đề, nội dung, ảnh đại diện, thư viện ảnh, giá, diện tích, phòng ngủ, WC, địa chỉ, video, tiện ích, khu vực, loại nhà đất, tiêu đề & mô tả Rank Math.
+
+### A4. Đổi sang giao diện Hoàng Hiệp
+
+**Giao diện → Giao diện → Thêm mới → Tải giao diện lên** → `hoanghiep.zip` → **Cài đặt ngay** → **Kích hoạt**.
+
+### A5. Bấm "Cài đặt nhanh"
+
+**Công cụ → Cài đặt nhanh Hoàng Hiệp** → **Cài đặt nhanh**. Website tự: đặt trang chủ, tạo trang còn thiếu (Tin tức, Về Hiệp, Liên hệ – trang cũ cùng tên được dùng lại), tạo **Menu chính** mới và gắn lên đầu trang, tạo loại dự án / khu vực, nhập **30 dự án** Đà Nẵng – Quảng Nam.
+
+Sau đó: **Cài đặt → Đường dẫn tĩnh** → **Lưu thay đổi** (1 lần).
+
+### A6. Kiểm tra
+
+Mở từng link, thấy giao diện navy – trắng là đúng:
+
+- `https://hiephoangmt.com/` · `/du-an/` · `/mua-ban/` · `/cho-thue/` · `/tin-tuc/` · `/lien-he/`
+- Một link tin cũ của Houzez (VD `https://hiephoangmt.com/property/ten-tin/`) → phải tự chuyển sang `/nha-dat/ten-tin/`.
+- Bài viết "Thông tin thị trường" cũ hiện ở `/tin-tuc/`.
+
+**Muốn quay lại giao diện cũ:** **Giao diện → Giao diện → Houzez → Kích hoạt**. Không mất gì.
+
+### A7. Rank Math (giữ nguyên plugin)
+
+1. **Rank Math SEO → Tiêu đề & Meta → Dự án** → *Loại Schema*: **Không có (None)** → Lưu. Làm tương tự với **Nhà đất**.
+2. **Rank Math SEO → Cài đặt Sitemap**: bật **Dự án** và **Nhà đất**; **tắt "Properties"** (tin Houzez cũ, đã chuyển hướng).
+3. **Google Search Console → Sơ đồ trang web** → gửi lại `sitemap_index.xml` và thêm `nhadat-sitemap.xml`.
+
+### A8. Hoàn thiện
+
+- **Giao diện → Tùy biến → Hoàng Hiệp – Thương hiệu**: số điện thoại, Zalo, ảnh chân dung, giới thiệu, hành trình nghề nghiệp → **Đăng**.
+- **Dự án**: thêm ảnh đại diện, bảng giá, lịch thanh toán cho dự án đang bán (xem Bước 9 bên dưới).
+- **Nhà đất**: mở các tin vừa chuyển, chọn **Thuộc dự án** để tin hiện trong trang dự án.
+- **Giao diện → Menu**: menu cũ của Houzez vẫn còn, xóa được khi không dùng.
+
+### A9. Dọn dẹp (sau 1–2 tuần chạy ổn)
+
+**Plugin** → **Tắt** các plugin của Houzez (*Houzez Theme – Functionality*, *Houzez Login Register*, *Houzez CRM*… tên tùy bản) và **Elementor** nếu không còn trang nào cần. Link cũ vẫn tự chuyển hướng. Giữ giao diện Houzez thêm một thời gian rồi mới xóa. Sau đó cập nhật WordPress và plugin (biểu tượng ↻ trên thanh quản trị) – nhớ sao lưu trước.
 
 ---
+
+## PHẦN B – Cài mới từ đầu (hosting trống)
+
+Chỉ dùng khi chưa có WordPress. Website đã chạy thì làm **Phần A**.
 
 ## Bước 1. Mua hosting WordPress
 

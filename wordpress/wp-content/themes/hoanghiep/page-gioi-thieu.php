@@ -38,7 +38,7 @@ $stats = hoanghiep_stats();
 </section>
 
 <?php while ( have_posts() ) : the_post(); ?>
-	<?php if ( get_the_content() ) : ?>
+	<?php if ( get_the_content() && ! hh_is_builder_page() ) : ?>
 		<section class="section">
 			<div class="container narrow">
 				<p class="eyebrow">Câu chuyện</p>

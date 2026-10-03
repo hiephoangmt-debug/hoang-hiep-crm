@@ -25,3 +25,4 @@ require HH_CRM_DIR . 'leads.php';
 require HH_CRM_DIR . 'data-du-an.php';
 require HH_CRM_DIR . 'data-du-an-chi-tiet.php';
 require HH_CRM_DIR . 'setup.php';
+require HH_CRM_DIR . 'houzez-import.php';

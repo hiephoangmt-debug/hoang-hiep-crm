@@ -15,7 +15,7 @@ get_header();
 		<?php
 		while ( have_posts() ) :
 			the_post();
-			$content = trim( str_replace( '[hh_lead_form]', '', get_the_content() ) );
+			$content = hh_is_builder_page() ? '' : trim( str_replace( '[hh_lead_form]', '', get_the_content() ) );
 			if ( $content ) :
 				?>
 				<div class="entry-content block"><?php echo apply_filters( 'the_content', $content ); // phpcs:ignore ?></div>

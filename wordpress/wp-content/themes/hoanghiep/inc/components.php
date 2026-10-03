@@ -309,3 +309,8 @@ function hh_pending( $text, $button = 'Nhận thông tin mới nhất' ) {
 	</div>
 	<?php
 }
+
+/** Trang dựng bằng Elementor cho giao diện cũ (Houzez…): bỏ qua nội dung để không vỡ bố cục. */
+function hh_is_builder_page( $post_id = null ) {
+	return 'builder' === get_post_meta( $post_id ?: get_the_ID(), '_elementor_edit_mode', true );
+}
