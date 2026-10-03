@@ -128,12 +128,22 @@ function hh_ucfirst( $text ) {
 
 /** Liên kết vùng: [rows, is_reference]. */
 function hh_project_connections( $post_id = null ) {
-	$rows = hh_table( 'hh_p_connections', 2, $post_id );
-	if ( $rows ) {
+	$rows    = hh_table( 'hh_p_connections', 2, $post_id );
+	$profile = hh_project_area_profile( $post_id );
+	if ( count( $rows ) >= 4 || ! $profile ) {
 		return array( $rows, false );
 	}
-	$profile = hh_project_area_profile( $post_id );
-	return array( $profile ? $profile['links'] : array(), true );
+	// Ít mốc: bổ sung mốc tham khảo theo khu vực, bỏ địa điểm đã có.
+	$added = false;
+	$have  = mb_strtolower( implode( ' ', wp_list_pluck( $rows, 1 ) ) );
+	foreach ( $profile['links'] as $link ) {
+		$key = implode( ' ', array_slice( preg_split( '/[\s,]+/u', mb_strtolower( $link[1] ) ), 0, 2 ) );
+		if ( false === mb_strpos( $have, $key ) ) {
+			$rows[] = $link;
+			$added  = true;
+		}
+	}
+	return array( $rows, $added );
 }
 
 /** Tiện ích ngoại khu: [items, is_reference]. */
