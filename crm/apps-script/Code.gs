@@ -386,10 +386,14 @@ function moneyOverview_(today) {
 
 /** Danh sách khách kèm tình trạng giữ thẻ: thẻ mình đang giữ / thẻ khách giữ. */
 function apiListCustomers_() {
-  var byKhach = {};
+  var byKhach = {}, lastLog = {}, photos = {};
+  readAll_('GiuThe').forEach(function (l) { lastLog[l.the_id] = l; });
+  readAll_('TaiLieu').forEach(function (d) { if (d.loai === 'Ảnh giữ / trả thẻ') (photos[d.ghi_chu] = photos[d.ghi_chu] || []).push(d.id); });
   readAll_('TheKhach').forEach(function (k) {
     var g = byKhach[k.khach_id] || (byKhach[k.khach_id] = { minh: [], khach: [] });
-    var item = { ten_the: k.ten_the, ngay_giu: k.ngay_giu || '', ngay_tra: k.ngay_tra || '' };
+    var l = lastLog[k.id];
+    var item = { the_id: k.id, ten_the: k.ten_the, ngay_giu: k.ngay_giu || '', ngay_tra: k.ngay_tra || '',
+      ghi_chu: l ? l.ghi_chu : '', hanh_dong: l ? l.hanh_dong : '', anh: l ? (photos[l.id] || []) : [] };
     if (k.giu_the === 'Mình giữ') g.minh.push(item); else g.khach.push(item);
   });
   return readAll_('KhachHang').map(function (c) {

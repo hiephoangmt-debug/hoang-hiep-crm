@@ -51,6 +51,10 @@ const shim = `
       api(token, 'saveCard', Object.assign({}, k, { loai_the: ['Visa', 'MasterCard', 'JCB'][i], han_muc: [100000000, 80000000, 50000000][i], so_cuoi: ['1234', '5678', '9012'][i] }));
       api(token, 'holdCard', { the_id: k.id, hanh_dong: 'Nhận giữ', ngay: d(-5 + i), ghi_chu: 'giữ để đáo tháng sau' });
     });
+    var ret = api(token, 'heldCards', { mode: 'Khách giữ' })[0];
+    api(token, 'holdCard', { the_id: ret.id, hanh_dong: 'Nhận giữ', ngay: d(-6), ghi_chu: 'giữ đáo' });
+    var lg = api(token, 'holdCard', { the_id: ret.id, hanh_dong: 'Trả thẻ', ngay: d(-1), ghi_chu: 'trả tận tay, khách ký nhận' });
+    api(token, 'uploadDoc', { khach_id: ret.khach_id, loai: 'Ảnh giữ / trả thẻ', the_id: ret.id, ghi_chu: lg.id, data: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==' });
     [['Lan', '0906222001', 'Rút tiền thẻ tín dụng', 'www.the-tin-dung-da-nang.com', 'Cần rút 20tr thẻ VPBank'],
      ['Hùng', '0906222002', 'Đáo hạn thẻ tín dụng', 'dichvuthetindungdanang.com', ''],
      ['Mai', '0906222003', 'Rút tiền ví trả sau', 'www.the-tin-dung-da-nang.com', 'SPayLater 5tr']].forEach(function (l) {

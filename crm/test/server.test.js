@@ -584,6 +584,9 @@ test('card custody: hold / return with notes and photos, held-cards list with li
   lc = call('listCustomers').find((x) => x.id === c.id);
   assert.strictEqual(lc.the_minh_giu.length, 0);
   assert.strictEqual(lc.the_khach_giu[0].ten_the, 'VCB');
+  assert.strictEqual(lc.the_khach_giu[0].hanh_dong, 'Trả thẻ');
+  assert.strictEqual(lc.the_khach_giu[0].ghi_chu, 'trả tận tay, khách ký nhận');
+  assert.strictEqual(lc.the_khach_giu[0].anh.length, 1);
   const hist = call('cardHistory', { the_id: card.id });
   assert.strictEqual(hist.logs.length, 2);
   assert.strictEqual(hist.logs[0].hanh_dong, 'Trả thẻ');

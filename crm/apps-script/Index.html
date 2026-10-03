@@ -1453,8 +1453,16 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     function holdCell(c) {
       var mg = c.the_minh_giu || [], kg = c.the_khach_giu || [];
       if (!mg.length && !kg.length) return '<span class="muted">—</span>';
-      return (mg.length ? '<div><span class="badge badge--bad">🔒 Mình giữ ' + mg.length + '</span> <small>' + mg.map(function (k) { return '<b>' + esc(k.ten_the) + '</b>' + (k.ngay_giu ? ' (từ ' + dm(k.ngay_giu) + ')' : ''); }).join(', ') + '</small></div>' : '') +
-        (kg.length ? '<div style="margin-top:3px"><span class="badge badge--muted">Khách giữ ' + kg.length + '</span> <small class="muted">' + kg.map(function (k) { return esc(k.ten_the); }).join(', ') + '</small></div>' : '');
+      function extra(k) {
+        return (k.ghi_chu ? ' · 📝 ' + esc(k.ghi_chu) : '') +
+          (k.anh && k.anh.length ? ' <button type="button" class="pay-chip" data-quick data-photos="' + esc(k.anh.join(',')) + '">📷 ' + k.anh.length + '</button>' : '');
+      }
+      return (mg.length ? '<div><span class="badge badge--bad">🔒 Mình giữ ' + mg.length + '</span> <small>' + mg.map(function (k) {
+          return '<b>' + esc(k.ten_the) + '</b>' + (k.ngay_giu ? ' (từ ' + dm(k.ngay_giu) + ')' : '') + (k.hanh_dong === 'Nhận giữ' ? extra(k) : '');
+        }).join('<br>') + '</small></div>' : '') +
+        (kg.length ? '<div style="margin-top:3px"><span class="badge badge--muted">Khách giữ ' + kg.length + '</span> <small class="muted">' + kg.map(function (k) {
+          return esc(k.ten_the) + (k.ngay_tra ? ' (↩️ trả ' + dm(k.ngay_tra) + ')' : '') + (k.hanh_dong === 'Trả thẻ' ? extra(k) : '');
+        }).join('<br>') + '</small></div>' : '');
     }
     $('#cust-table').innerHTML = '<thead><tr><th>Tên</th><th>SĐT</th><th>Giữ thẻ</th><th>Trạng thái</th><th>Nguồn</th><th>Cập nhật</th></tr></thead><tbody>' +
       (rows.length ? rows.map(function (c) {
@@ -2021,8 +2029,22 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       call('deleteCard', { id: cardForm.elements.id.value }).then(function () { toast('Đã xóa thẻ'); $('#card-modal').classList.add('hidden'); afterCardChange(); }).catch(fail);
       return;
     }
+    var ph = e.target.closest('[data-photos]');
+    if (ph) {
+      var ids = ph.dataset.photos.split(','), idx = 0;
+      var showIt = function () {
+        var id = ids[idx];
+        var go = docCache[id] ? Promise.resolve({ dataUrl: docCache[id] }) : call('getDoc', { id: id });
+        go.then(function (r) { docCache[id] = r.dataUrl; $('#viewer img').src = r.dataUrl; $('#viewer').classList.remove('hidden'); }).catch(fail);
+      };
+      // bấm vào ảnh để xem ảnh tiếp theo; hết ảnh thì đóng
+      S.viewerNext = ids.length > 1 ? function () { if (idx + 1 >= ids.length) { S.viewerNext = null; return false; } idx++; showIt(); return true; } : null;
+      showIt();
+      return;
+    }
+    if (e.target.closest('#viewer') && S.viewerNext && S.viewerNext()) return;
     var im = e.target.closest('img[data-doc]');
-    if (im && im.src.indexOf('data:image/gif') !== 0) { $('#viewer img').src = im.src; $('#viewer').classList.remove('hidden'); return; }
+    if (im && im.src.indexOf('data:image/gif') !== 0) { S.viewerNext = null; $('#viewer img').src = im.src; $('#viewer').classList.remove('hidden'); return; }
     if (e.target.closest('#viewer')) $('#viewer').classList.add('hidden');
   });
 
