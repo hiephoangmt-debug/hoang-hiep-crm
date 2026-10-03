@@ -656,6 +656,12 @@ HTML
 
 <h2>Penthouse khu Nam Đà Nẵng</h2>
 <p>Từ tháng 8/2026, Sun Property mở booking dòng penthouse và shophouse khối đế giới hạn, tổng 132 căn cho cả <a href="/du-an/cora-tower/">Cora Tower</a>, Spana Tower và S-Light Tower. Diện tích và giá đang cập nhật theo từng đợt.</p>
+<p>Penthouse khu Nam Đà Nẵng phù hợp khách muốn diện tích lớn với tổng ngân sách thấp hơn nhóm ven sông Hàn trung tâm. Các tòa tháp tại Sun NeO City được công bố sở hữu lâu dài, Cora Tower dự kiến bàn giao 30/07/2027.</p>
+
+<h2>Penthouse, Sky Villa và duplex khác nhau thế nào?</h2>
+<p>Penthouse là căn trên tầng cao nhất, thường có sân thượng hoặc vườn riêng. Sky Villa là căn rộng trên tầng cao, có thể kèm hồ bơi riêng như ở Nobu, nhưng không nhất thiết nằm trên cùng.</p>
+<p>Duplex là căn hai tầng nối bằng cầu thang nội bộ, có thể nằm ở nhiều vị trí trong tòa. Penthouse The Legend kết hợp cả hai: vừa ở tầng cao nhất, vừa thiết kế thông tầng.</p>
+<p>Với người mua, sự khác biệt này ảnh hưởng đến công năng, chi phí vận hành và giá bán lại. Hãy xem kỹ mặt bằng thực tế trước khi so giá.</p>
 
 <h2>Lưu ý khi mua penthouse</h2>
 <ul>
@@ -726,6 +732,15 @@ HTML
 <p>Shop thường bàn giao thô, người mua phải đầu tư thêm hoàn thiện. Giá mỗi m² shop cũng thường cao hơn căn hộ cùng dự án.</p>
 <h3>Vị trí trong khối đế</h3>
 <p>Shop góc, mặt tiền đường lớn khác rất xa shop nằm trong hoặc mặt sau. Hiện chưa có đủ dữ liệu công khai về giá thuê shop từng dự án, nên cần khảo sát thực tế trước khi tính dòng tiền.</p>
+
+<h2>Cách đánh giá một căn shop khối đế</h2>
+<ul>
+<li><strong>Quy mô cư dân:</strong> đếm số căn hộ phía trên và tỷ lệ cư dân đã về ở.</li>
+<li><strong>Mặt tiền và lưu lượng:</strong> shop ra đường chính, góc giao lộ có lợi thế lớn.</li>
+<li><strong>Chiều cao tầng:</strong> ví dụ shop Sun Ponte có tầng 1 cao 7 m, có thể làm gác tăng diện tích sử dụng.</li>
+<li><strong>Ngành hàng phù hợp:</strong> F&amp;B, tiện lợi, dịch vụ cư dân thường bền hơn thời trang, đồ cao cấp.</li>
+<li><strong>Thời hạn và pháp lý:</strong> xác nhận sở hữu lâu dài hay có thời hạn, có được cấp giấy chứng nhận riêng không.</li>
+</ul>
 
 <h2>Có nên đầu tư shop khối đế Đà Nẵng?</h2>
 <p>Nên cân nhắc nếu anh chị có vốn dài hạn, chọn dự án quy mô lớn, mặt tiền đường chính và chấp nhận 1 – 2 năm đầu dòng tiền chưa tối ưu. Không phù hợp nếu cần dòng tiền ngay hoặc vay tỷ lệ cao.</p>

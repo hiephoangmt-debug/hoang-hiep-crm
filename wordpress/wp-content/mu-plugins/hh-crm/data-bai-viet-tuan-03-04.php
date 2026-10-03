@@ -508,6 +508,8 @@ HTML
 <li>Mùa mưa cuối năm ở Hội An ảnh hưởng đến khai thác du lịch.</li>
 </ul>
 
+<p>Trước khi tham quan, bạn nên chuẩn bị ngân sách tổng, mục đích sử dụng (ở, nghỉ dưỡng hay cho thuê) và thời gian nắm giữ dự kiến để chọn đúng dòng sản phẩm.</p>
+
 <p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận mặt bằng phân khu, quỹ căn Casamia Balanca Hội An đang mở và lịch tham quan nhà mẫu.</p>
 HTML
 		,
@@ -587,6 +589,8 @@ HTML
 <p>Cách đọc đúng: hỏi rõ mã căn, diện tích đất, diện tích xây dựng, giá trước và sau chiết khấu, đã gồm VAT hay chưa. Chỉ khi cùng tiêu chí, việc so sánh mới có ý nghĩa.</p>
 <h3>Giá thứ cấp</h3>
 <p>Khi dự án bàn giao và có giấy chứng nhận, thị trường chuyển nhượng sẽ hình thành rõ hơn. Hiện mức giá chuyển nhượng lại đang cập nhật theo từng giao dịch, liên hệ để nhận thông tin căn cụ thể.</p>
+
+<p>Một lưu ý nữa: với tài sản giá trị lớn, hãy để dành dự phòng tài chính cho ít nhất vài kỳ thanh toán, tránh bị động khi tiến độ hoặc lãi suất thay đổi.</p>
 
 <p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bảng giá Casamia Balanca đợt hiện hành theo từng căn và bảng tính tổng chi phí sở hữu.</p>
 HTML
@@ -673,6 +677,8 @@ HTML
 <li><strong>Tặng phí quản lý:</strong> xác định rõ số năm, mức phí sau thời gian tặng.</li>
 <li><strong>Thời hạn ưu đãi:</strong> chỉ áp dụng với hợp đồng ký trong khung thời gian nhất định.</li>
 </ul>
+
+<p>Hoàng Hiệp tư vấn, phân phối dự án nên sẽ gửi bạn bản chính sách đang áp dụng, đồng thời chỉ ra các điều khoản cần hỏi lại trước khi đặt cọc.</p>
 
 <p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận bản chính sách Casamia Balanca đang áp dụng và bảng tính so sánh phương án thanh toán theo căn bạn quan tâm.</p>
 HTML
