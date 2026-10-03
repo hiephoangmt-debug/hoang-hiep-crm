@@ -298,3 +298,14 @@ function hh_highlights( $limit = 0, $class = 'highlights' ) {
 function hh_parent_label( $parent_id ) {
 	return has_term( 'to-hop', 'loai-du-an', $parent_id ) ? 'Thuộc tổ hợp' : 'Phân khu của';
 }
+
+/** Ô "đang cập nhật" cho mục dự án chưa có dữ liệu, kèm nút nhận thông tin. */
+function hh_pending( $text, $button = 'Nhận thông tin mới nhất' ) {
+	?>
+	<div class="pending">
+		<span class="pending__icon"><?php echo hh_icon( 'clock' ); // phpcs:ignore ?></span>
+		<p><?php echo esc_html( $text ); ?></p>
+		<a class="btn btn--outline btn--sm" href="#lien-he"><?php echo esc_html( $button ); ?></a>
+	</div>
+	<?php
+}

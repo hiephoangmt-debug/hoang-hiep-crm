@@ -59,6 +59,19 @@ while ( have_posts() ) :
 				</p>
 			<?php endif; ?>
 
+			<?php $project_id = (int) get_post_meta( $id, 'hh_post_project', true ); ?>
+			<?php if ( $project_id && 'publish' === get_post_status( $project_id ) ) : ?>
+				<div class="related-project">
+					<p class="related-project__title">Dự án trong bài viết</p>
+					<?php
+					$GLOBALS['post'] = get_post( $project_id ); // phpcs:ignore
+					setup_postdata( $GLOBALS['post'] );
+					get_template_part( 'template-parts/project-card' );
+					wp_reset_postdata();
+					?>
+				</div>
+			<?php endif; ?>
+
 			<div class="share">
 				<span>Chia sẻ bài viết:</span>
 				<a class="share__btn share__btn--fb" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo esc_attr( $share ); ?>" target="_blank" rel="noopener">Facebook</a>

@@ -197,7 +197,7 @@ function hh_admin_assets( $hook ) {
 		return;
 	}
 	$screen = get_current_screen();
-	if ( ! $screen || ! in_array( $screen->post_type, array( 'du-an', 'bat-dong-san', 'khach-hang' ), true ) ) {
+	if ( ! $screen || ! in_array( $screen->post_type, array( 'du-an', 'bat-dong-san', 'khach-hang', 'post' ), true ) ) {
 		return;
 	}
 	wp_enqueue_media();
@@ -253,8 +253,12 @@ function hh_format_price( $trieu, $per_month = false ) {
 	return $per_month ? $text . '/tháng' : $text;
 }
 
-/** Lowercase only the first letter (keeps place names like Đà Nẵng). */
+/** Lowercase only the first letter (keeps place names like Đà Nẵng and acronyms like FPT). */
 function hh_lcfirst( $text ) {
+	$second = mb_substr( $text, 1, 1 );
+	if ( '' !== $second && mb_strtoupper( $second ) === $second && mb_strtolower( $second ) !== $second ) {
+		return $text;
+	}
 	return mb_strtolower( mb_substr( $text, 0, 1 ) ) . mb_substr( $text, 1 );
 }
 

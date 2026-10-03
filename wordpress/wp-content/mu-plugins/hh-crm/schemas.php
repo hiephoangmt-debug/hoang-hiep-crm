@@ -57,10 +57,10 @@ function hh_project_schema() {
 			),
 		),
 		'vi-tri'    => array(
-			'title'  => 'Vị trí',
+			'title'  => 'Vị trí & liên kết vùng',
 			'fields' => array(
 				'hh_p_location_desc' => array( 'type' => 'textarea', 'label' => 'Mô tả vị trí', 'placeholder' => 'VD: Dự án nằm ven sông Hàn, ngay trung tâm quận Sơn Trà …' ),
-				'hh_p_connections'   => array( 'type' => 'table', 'label' => 'Kết nối vùng', 'columns' => array( 'Thời gian / khoảng cách', 'Địa điểm' ), 'placeholder' => "3 phút | Cầu Rồng\n5 phút | Biển Mỹ Khê\n10 phút | Sân bay quốc tế Đà Nẵng\n30 phút | Phố cổ Hội An" ),
+				'hh_p_connections'   => array( 'type' => 'table', 'label' => 'Liên kết vùng', 'help' => 'Để trống sẽ dùng thời gian di chuyển tham khảo theo khu vực của dự án.', 'columns' => array( 'Thời gian / khoảng cách', 'Địa điểm' ), 'placeholder' => "3 phút | Cầu Rồng\n5 phút | Biển Mỹ Khê\n10 phút | Sân bay quốc tế Đà Nẵng\n30 phút | Phố cổ Hội An" ),
 				'hh_p_map_address'   => array( 'type' => 'text', 'label' => 'Địa chỉ trên bản đồ Google', 'placeholder' => 'Để trống sẽ dùng địa chỉ dự án', 'half' => true ),
 				'hh_p_location_img'  => array( 'type' => 'image', 'label' => 'Ảnh sơ đồ vị trí', 'half' => true ),
 			),
@@ -78,15 +78,24 @@ function hh_project_schema() {
 			'fields' => array(
 				'hh_p_masterplan_img' => array( 'type' => 'image', 'label' => 'Ảnh mặt bằng tổng thể', 'half' => true ),
 				'hh_p_design_desc'    => array( 'type' => 'textarea', 'label' => 'Mô tả thiết kế', 'placeholder' => 'VD: Mỗi sàn 10 căn, 4 thang máy, thiết kế đón gió tự nhiên …' ),
-				'hh_p_unit_types'     => array( 'type' => 'table', 'label' => 'Các loại sản phẩm', 'columns' => array( 'Loại sản phẩm', 'Diện tích', 'Phòng ngủ', 'Giá tham khảo' ), 'placeholder' => "Studio | 35 – 40 m² | 1 | 1,8 – 2 tỷ\nCăn 2PN | 65 – 75 m² | 2 | 3,2 – 3,8 tỷ\nCăn 3PN | 95 – 110 m² | 3 | 4,8 – 5,6 tỷ" ),
 				'hh_p_floorplans'     => array( 'type' => 'gallery', 'label' => 'Ảnh mặt bằng căn hộ / tầng' ),
 			),
 		),
+		'dac-biet'  => array(
+			'title'  => 'Loại sản phẩm',
+			'intro'  => 'Căn hộ, shop khối đế, penthouse, duplex, biệt thự / villa, nhà phố – shophouse, block đất nền. Website tự hiện các loại có trong dự án (theo "Loại dự án" và "Loại hình"); loại chưa nhập sẽ ghi "Đang cập nhật rổ hàng".',
+			'fields' => array_merge(
+				array(
+					'hh_p_unit_types'     => array( 'type' => 'table', 'label' => 'Căn hộ – các loại căn', 'columns' => array( 'Loại căn', 'Diện tích', 'Phòng ngủ', 'Giá tham khảo' ), 'placeholder' => "Studio | 35 – 40 m² | 1 | 1,8 – 2 tỷ\nCăn 2PN | 65 – 75 m² | 2 | 3,2 – 3,8 tỷ\nCăn 3PN | 95 – 110 m² | 3 | 4,8 – 5,6 tỷ" ),
+				),
+				hh_special_product_fields()
+			),
+		),
 		'gia-ban'   => array(
-			'title'  => 'Giá & thanh toán',
+			'title'  => 'Giá & chính sách',
 			'fields' => array(
 				'hh_p_price_table'   => array( 'type' => 'table', 'label' => 'Bảng giá', 'columns' => array( 'Sản phẩm', 'Diện tích', 'Giá bán', 'Ghi chú' ), 'placeholder' => "A-12.05 – 2PN | 68 m² | 3,35 tỷ | View sông\nB-08.10 – 3PN | 98 m² | 5,1 tỷ | Căn góc" ),
-				'hh_p_payment'       => array( 'type' => 'table', 'label' => 'Tiến độ thanh toán', 'columns' => array( 'Đợt', 'Thời điểm', 'Tỷ lệ' ), 'placeholder' => "Đợt 1 | Ký thỏa thuận đặt cọc | 10%\nĐợt 2 | Ký HĐMB (30 ngày) | 20%\nĐợt 3 | Nhận bàn giao | 65%\nĐợt 4 | Nhận sổ hồng | 5%" ),
+				'hh_p_payment'       => array( 'type' => 'table', 'label' => 'Lịch thanh toán', 'columns' => array( 'Đợt', 'Thời điểm', 'Tỷ lệ' ), 'placeholder' => "Đợt 1 | Ký thỏa thuận đặt cọc | 10%\nĐợt 2 | Ký HĐMB (30 ngày) | 20%\nĐợt 3 | Nhận bàn giao | 65%\nĐợt 4 | Nhận sổ hồng | 5%" ),
 				'hh_p_policy'        => array( 'type' => 'lines', 'label' => 'Chính sách bán hàng & ưu đãi', 'placeholder' => "Chiết khấu 3% khi thanh toán nhanh 50%\nTặng gói nội thất 100 triệu\nMiễn phí quản lý 2 năm" ),
 				'hh_p_loan'          => array( 'type' => 'textarea', 'label' => 'Hỗ trợ vay ngân hàng', 'placeholder' => 'VD: Vietcombank, BIDV hỗ trợ vay 70%, ân hạn gốc lãi 18 tháng …' ),
 				'hh_p_rental'        => array( 'type' => 'textarea', 'label' => 'Chương trình cho thuê / cam kết lợi nhuận (căn hộ dịch vụ, condotel)', 'placeholder' => 'VD: Cam kết lợi nhuận 8%/năm trong 3 năm đầu, chủ nhà được nghỉ miễn phí 15 đêm/năm …' ),
@@ -114,11 +123,6 @@ function hh_project_schema() {
 				'hh_p_custom_table'      => array( 'type' => 'table', 'label' => 'Bảng tính bổ sung', 'columns' => array( 'Hạng mục', 'Giá trị', 'Ghi chú' ), 'placeholder' => "Giá căn 2PN | 3,35 tỷ | View sông\nVốn tự có 30% | 1,005 tỷ | Thanh toán theo tiến độ\nNgân hàng cho vay 70% | 2,345 tỷ | 25 năm\nTiền thuê dự kiến | 15 triệu/tháng | Full nội thất" ),
 			),
 		),
-		'dac-biet'  => array(
-			'title'  => 'Shop khối đế · Penthouse · Duplex',
-			'intro'  => 'Dành cho dự án cao tầng. Loại nào dự án không có thì để trống, website tự ẩn.',
-			'fields' => hh_special_product_fields(),
-		),
 		'tien-do'   => array(
 			'title'  => 'Tiến độ',
 			'fields' => array(
@@ -137,17 +141,20 @@ function hh_project_schema() {
 		'hoi-dap'   => array(
 			'title'  => 'Hỏi đáp',
 			'fields' => array(
-				'hh_p_faq' => array( 'type' => 'table', 'label' => 'Câu hỏi thường gặp', 'columns' => array( 'Câu hỏi', 'Trả lời' ), 'placeholder' => "Dự án có sổ hồng chưa? | Sổ hồng cấp sau khi nhận nhà khoảng 12 tháng.\nNgười nước ngoài có mua được không? | Được, theo hạn mức 30% số căn mỗi tòa." ),
+				'hh_p_faq' => array( 'type' => 'table', 'label' => 'Câu hỏi thường gặp', 'help' => 'Để trống, website tự tạo câu hỏi từ thông tin dự án (chủ đầu tư, vị trí, pháp lý, bàn giao…).', 'columns' => array( 'Câu hỏi', 'Trả lời' ), 'placeholder' => "Dự án có sổ hồng chưa? | Sổ hồng cấp sau khi nhận nhà khoảng 12 tháng.\nNgười nước ngoài có mua được không? | Được, theo hạn mức 30% số căn mỗi tòa." ),
 			),
 		),
 	);
 }
 
-/** Shop khối đế, Penthouse, Duplex: key => label. */
+/** Loại sản phẩm (ngoài căn hộ thường): key => label. */
 const HH_SPECIAL_PRODUCTS = array(
 	'shop'      => 'Shop khối đế',
 	'penthouse' => 'Penthouse',
 	'duplex'    => 'Duplex',
+	'villa'     => 'Biệt thự / Villa',
+	'nha-pho'   => 'Nhà phố – Shophouse',
+	'dat-nen'   => 'Block đất nền',
 );
 
 function hh_special_product_fields() {
@@ -155,11 +162,17 @@ function hh_special_product_fields() {
 		'shop'      => array( 'Mặt tiền đường Trần Hưng Đạo, trần cao 5m, phù hợp cà phê, showroom, ngân hàng…', "S-01 | 120 m² | 15 tỷ | Góc 2 mặt tiền\nS-02 | 85 m² | 9,8 tỷ | Mặt sông" ),
 		'penthouse' => array( 'Hai tầng trên cùng, hồ bơi riêng, sân vườn trên không, view toàn cảnh sông Hàn…', "PH-01 | 280 m² | 4 | 28 tỷ\nPH-02 | 310 m² | 5 | 32 tỷ" ),
 		'duplex'    => array( 'Căn 2 tầng thông nhau, phòng khách trần cao gấp đôi, cầu thang riêng…', "DL-2501 | 160 m² | 3 | 12,5 tỷ\nDL-2503 | 175 m² | 4 | 13,8 tỷ" ),
+		'villa'     => array( 'Biệt thự đơn lập, song lập 2–3 tầng, sân vườn, hồ bơi riêng…', "Đơn lập | 300 m² | 260 m² | 25 tỷ\nSong lập | 200 m² | 210 m² | 16 tỷ" ),
+		'nha-pho'   => array( 'Nhà phố 5 tầng, tầng 1 kinh doanh, mặt tiền đường 15m…', "Nhà phố | 100 m² | 5 tầng | 12 tỷ\nShophouse góc | 140 m² | 5 tầng | 18 tỷ" ),
+		'dat-nen'   => array( 'Đất nền đã có sổ, hạ tầng hoàn thiện, đường 7,5 – 10,5m…', "Block A (lô A1 – A20) | 100 – 125 m² | Đường 7,5m | 2,8 – 3,5 tỷ\nBlock B (lô góc) | 150 m² | Đường 10,5m | 4,6 tỷ" ),
 	);
 	$columns = array(
 		'shop'      => array( 'Mã căn', 'Diện tích', 'Giá bán', 'Ghi chú' ),
 		'penthouse' => array( 'Mã căn', 'Diện tích', 'Phòng ngủ', 'Giá bán' ),
 		'duplex'    => array( 'Mã căn', 'Diện tích', 'Phòng ngủ', 'Giá bán' ),
+		'villa'     => array( 'Loại / mã căn', 'Diện tích đất', 'Diện tích xây dựng', 'Giá bán' ),
+		'nha-pho'   => array( 'Loại / mã căn', 'Diện tích đất', 'Số tầng', 'Giá bán' ),
+		'dat-nen'   => array( 'Block / lô', 'Diện tích', 'Mặt đường', 'Giá bán' ),
 	);
 	$fields = array();
 	foreach ( HH_SPECIAL_PRODUCTS as $key => $label ) {
@@ -173,6 +186,18 @@ function hh_special_product_fields() {
 /** Columns of a special product table. */
 function hh_special_columns( $key ) {
 	return hh_project_schema()['dac-biet']['fields'][ "hh_p_{$key}_table" ]['columns'];
+}
+
+/** Tin tức: gắn bài viết với dự án để hiện ở mục "Tin tức" của trang dự án. */
+function hh_post_schema() {
+	return array(
+		'du-an' => array(
+			'title'  => 'Dự án liên quan',
+			'fields' => array(
+				'hh_post_project' => array( 'type' => 'post', 'label' => 'Bài viết này nói về dự án', 'post_type' => 'du-an', 'help' => 'Bài sẽ hiện ở mục "Tin tức" của trang dự án (và trang tổ hợp chứa dự án đó). Bài có nhắc tên dự án trong tiêu đề cũng tự được gợi ý.' ),
+			),
+		),
+	);
 }
 
 function hh_listing_schema() {

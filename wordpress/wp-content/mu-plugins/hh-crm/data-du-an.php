@@ -632,7 +632,13 @@ function hh_import_projects() {
 	}
 	$created = 0;
 	$updated = 0;
+	// Chi tiết bổ sung (vị trí, liên kết vùng, tiện ích, tiến độ…) ở data-du-an-chi-tiet.php.
+	$details = function_exists( 'hh_project_enrichment' ) ? hh_project_enrichment() : array();
 	foreach ( hh_project_dataset() as $p ) {
+		if ( isset( $details[ $p['slug'] ] ) ) {
+			$p['meta']   += $details[ $p['slug'] ]['meta'] ?? array();
+			$p['sources'] = array_values( array_unique( array_merge( $p['sources'] ?? array(), $details[ $p['slug'] ]['sources'] ?? array() ) ) );
+		}
 		$existing = get_page_by_path( $p['slug'], OBJECT, 'du-an' );
 		if ( $existing ) {
 			$id = $existing->ID;

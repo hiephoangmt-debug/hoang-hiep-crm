@@ -466,7 +466,7 @@ function hh_seo_schema() {
 
 	if ( is_singular( 'du-an' ) ) {
 		$graph[] = hh_schema_project();
-		$graph[] = hh_schema_faq( hh_table( 'hh_p_faq', 2 ) );
+		$graph[] = hh_schema_faq( hh_project_faq() );
 	} elseif ( is_singular( 'bat-dong-san' ) ) {
 		$graph[] = hh_schema_listing();
 	} elseif ( is_singular( 'post' ) ) {

@@ -466,6 +466,28 @@ p { margin: 0 0 1em; }
 .prose { white-space: normal; }
 .note { margin-top: 16px; font-size: .85rem; color: var(--muted); font-style: italic; }
 
+/* Mục dự án chưa có dữ liệu */
+.pending { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 12px 0; padding: 14px 18px; border: 1px dashed var(--gold); border-radius: var(--radius); background: var(--gold-soft); }
+.pending p { flex: 1 1 240px; margin: 0; font-size: .92rem; color: var(--ink); }
+.pending__icon { display: grid; place-items: center; flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--white); color: var(--gold-2); }
+.pending__icon svg { width: 18px; height: 18px; }
+.btn--sm { padding: 8px 14px; font-size: .85rem; }
+.address-line { display: flex; align-items: flex-start; gap: 8px; color: var(--navy); }
+.address-line svg { flex: none; width: 18px; height: 18px; margin-top: 3px; color: var(--gold-2); }
+
+/* Liên hệ cuối trang dự án */
+.contact-block { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; padding: 28px; border: 0; border-radius: var(--radius-lg); background: var(--navy); color: var(--white); }
+.contact-block .block__title { color: var(--white); }
+.contact-block .check-list li { color: rgba(255, 255, 255, .9); }
+.contact-block__phone { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+@media (max-width: 760px) { .contact-block { grid-template-columns: 1fr; padding: 22px 16px; } }
+
+.related-project { max-width: 420px; margin: 28px 0; }
+.related-project__title { margin: 0 0 10px; font-weight: 700; color: var(--navy); }
+.side-box { margin-top: 16px; padding: 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
+.side-box__title { margin: 0 0 8px; font-weight: 700; color: var(--navy); }
+.side-box .check-list { margin-bottom: 14px; font-size: .9rem; }
+
 .spec-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
 .spec-list div { display: grid; grid-template-columns: 42% 1fr; gap: 12px; padding: 11px 16px; border-bottom: 1px solid var(--line); }
 .spec-list div:nth-child(4n + 1), .spec-list div:nth-child(4n + 2) { background: var(--tint); }

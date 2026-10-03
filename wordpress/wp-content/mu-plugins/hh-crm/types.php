@@ -343,6 +343,7 @@ add_action( 'add_meta_boxes', 'hh_add_meta_boxes' );
 function hh_add_meta_boxes() {
 	add_meta_box( 'hh_project', 'Thông tin dự án', fn( $post ) => hh_render_meta_box( $post, hh_project_schema() ), 'du-an', 'normal', 'high' );
 	add_meta_box( 'hh_listing', 'Thông tin nhà đất', fn( $post ) => hh_render_meta_box( $post, hh_listing_schema() ), 'bat-dong-san', 'normal', 'high' );
+	add_meta_box( 'hh_post', 'Dự án liên quan', fn( $post ) => hh_render_meta_box( $post, hh_post_schema() ), 'post', 'side', 'default' );
 }
 
 add_action( 'save_post', 'hh_save_post_meta', 10, 2 );
@@ -357,6 +358,8 @@ function hh_save_post_meta( $post_id, $post ) {
 		hh_save_schema( $post_id, hh_project_schema() );
 	} elseif ( 'bat-dong-san' === $post->post_type ) {
 		hh_save_schema( $post_id, hh_listing_schema() );
+	} elseif ( 'post' === $post->post_type ) {
+		hh_save_schema( $post_id, hh_post_schema() );
 	}
 }
 
