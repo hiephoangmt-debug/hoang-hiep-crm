@@ -322,6 +322,53 @@ test('refund: amount − machine fee, due next day; C.Trâm lump-sum advances ar
   assert.strictEqual(call('bootstrap').settings.refundName, 'C.Trâm (máy MB)');
 });
 
+test('close balance (kết số dư) as of a date: C.Trâm still owes, message, lock, carry forward', () => {
+  const { fake, call } = fresh('2026-10-01');
+  // Nợ cũ trước khi dùng CRM
+  call('savePayment', { ngay: '2026-09-30', loai: 'Nợ cũ', so_tien: 12000000, ghi_chu: 'sổ tay' });
+  call('savePayment', { ngay: '2026-10-01', loai: 'Ứng trước', so_tien: 300000000 });
+  const a = call('saveTransaction', { ngay: '2026-10-01', dich_vu: 'Đáo hạn', ten_khach: 'C.Nhi', the: 'SC', so_tien: 500000000, may: 'MB Vân', phi_khach: 1.7, phi_may_text: '1.4' });
+  fake.setToday('2026-10-03');
+  call('saveTransaction', { ngay: '2026-10-03', dich_vu: 'Rút tiền', ten_khach: 'A.Hùng', the: 'TP', so_tien: 10000000, may: 'MB Vân', phi_khach: 2, phi_may_text: '1.5' });
+
+  const pv = call('previewClose', { ngay: '2026-10-02' });
+  assert.strictEqual(pv.tu_ngay, '2026-09-30');
+  assert.strictEqual(pv.so_gd, 1);
+  assert.strictEqual(pv.phat_sinh, a.tien_hoan); // 493.000.000
+  assert.strictEqual(pv.da_chuyen, 300000000 - 12000000);
+  assert.strictEqual(pv.so_du, 493000000 - 288000000);
+  assert.match(pv.tin_nhan, /Chị Trâm ơi/);
+  assert.match(pv.tin_nhan, /chị còn nợ em 205\.000\.000đ/);
+
+  const c1 = call('closeBalance', { ngay: '2026-10-02' });
+  assert.strictEqual(c1.so_du, 205000000);
+  assert.throws(() => call('closeBalance', { ngay: '2026-10-02' }), /hãy chọn ngày sau/);
+  assert.throws(() => call('closeBalance', { ngay: '2026-10-09' }), /tương lai/);
+  // Khóa sổ trước ngày kết
+  assert.throws(() => call('savePayment', { ngay: '2026-10-01', loai: 'Hoàn tiền', so_tien: 1 }), /Đã kết số dư/);
+  assert.throws(() => call('saveTransaction', Object.assign({}, a, { so_tien: 1 })), /Đã kết số dư/);
+  assert.throws(() => call('deleteTransaction', { id: a.id }), /Đã kết số dư/);
+
+  // Kỳ sau: mang số dư sang
+  call('savePayment', { ngay: '2026-10-03', loai: 'Hoàn tiền', so_tien: 205000000 });
+  const pv2 = call('previewClose', { ngay: '2026-10-03' });
+  assert.strictEqual(pv2.tu_ngay, '2026-10-03');
+  assert.strictEqual(pv2.so_du_truoc, 205000000);
+  assert.strictEqual(pv2.so_du, 10000000 - 150000);
+  assert.match(pv2.tin_nhan, /Số dư kết ngày 02\/10\/2026: chị còn nợ em 205\.000\.000đ/);
+  assert.strictEqual(call('refunds', {}).summary.so_du, pv2.so_du, 'closing agrees with running balance');
+  const r = call('refunds', {});
+  assert.strictEqual(r.lastClosing.ngay, '2026-10-02');
+  assert.strictEqual(r.ledger.find((x) => x.ngay === '2026-10-02').ket.so_du, 205000000);
+
+  // Bỏ lần kết gần nhất để sửa
+  const c2 = call('closeBalance', { ngay: '2026-10-03' });
+  assert.throws(() => call('deleteClosing', { id: c1.id }), /gần nhất/);
+  call('deleteClosing', { id: c2.id });
+  call('deleteClosing', { id: c1.id });
+  call('savePayment', { ngay: '2026-10-01', loai: 'Hoàn tiền', so_tien: 1 });
+});
+
 test('refund columns are added to an existing sheet; old rows get computed values', () => {
   const { gas, fake } = load();
   fake.setToday('2026-10-02');

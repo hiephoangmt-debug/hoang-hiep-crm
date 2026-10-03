@@ -150,6 +150,13 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
 .bal__rows { max-width: 560px; display: grid; grid-template-columns: 1fr auto; gap: 3px 12px; font-size: .9rem; color: var(--muted); }
 .bal__rows b { color: var(--text); text-align: right; }
 .ledger td small { display: block; color: var(--muted); }
+.ket { display: inline-block; background: #fff4e0; color: #5c3b00; border-radius: 8px; padding: 3px 8px; font-size: .82rem; font-weight: 700; margin-top: 4px; }
+.stmt { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.stmt td { padding: 5px 0; border-bottom: 1px dashed var(--line); vertical-align: top; }
+.stmt td:last-child { text-align: right; font-weight: 700; white-space: nowrap; padding-left: 10px; }
+.stmt tr.sub td { color: var(--muted); font-size: .82rem; font-weight: 400; padding-left: 12px; }
+.stmt tr.total td { border-bottom: 0; border-top: 2px solid var(--text); font-size: 1.05rem; padding-top: 8px; }
+.msg { width: 100%; font-family: inherit; font-size: .85rem; border: 1px solid var(--line); border-radius: 10px; padding: 10px; background: var(--bg); }
 .pay-chip { display: inline-block; white-space: normal; text-align: right; max-width: 100%; background: var(--info-bg); border-radius: 8px; padding: 2px 8px; margin: 2px 0; font-size: .82rem; cursor: pointer; border: 0; color: var(--primary-dark); }
 .copy input { font-size: .8rem; }
 </style>
@@ -238,6 +245,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         </div>
       </div>
       <div class="card scroll-x"><table class="tbl stack ledger" id="refund-ledger"></table></div>
+      <h2>📌 Các lần kết số dư</h2>
+      <div id="refund-closings"></div>
     </section>
 
     <!-- Nhắc lịch -->
@@ -399,6 +408,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         <option value="Ứng trước">Ứng trước (chưa có giao dịch)</option>
         <option value="Hoàn tiền">Hoàn tiền giao dịch</option>
         <option value="Mình trả lại">Mình trả lại (ứng dư)</option>
+        <option value="Nợ cũ">Nợ cũ (còn nợ mình từ trước)</option>
         <option value="Điều chỉnh số dư">Điều chỉnh số dư / số dư đầu</option>
       </select></label>
       <label class="f">Số tiền <span class="hint">300tr · 1.5 tỷ · 8.999 = 8.999.000đ</span><input name="so_tien_text" required inputmode="decimal"></label>
@@ -413,6 +423,29 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       </div>
     </div>
   </form>
+</div>
+
+<!-- Modal kết số dư -->
+<div class="modal hidden" id="close-modal">
+  <div class="modal__box">
+    <div class="modal__head"><h2>📌 Kết số dư <span class="refund-name">C.Trâm</span></h2><button type="button" class="x" data-close>×</button></div>
+    <div class="form-grid">
+      <label class="f">Kết đến hết ngày<input type="date" id="close-date"></label>
+      <label class="f">Ghi chú<input id="close-note" placeholder="VD: đã gửi Zalo"></label>
+    </div>
+    <p class="muted" id="close-range" style="margin:10px 0 6px"></p>
+    <table class="stmt" id="close-stmt"></table>
+    <h3 style="margin:14px 0 6px">Tin nhắn gửi <span class="refund-name">C.Trâm</span></h3>
+    <textarea class="msg" id="close-msg" rows="9" readonly></textarea>
+    <p class="hint">Sau khi kết: số liệu đến hết ngày kết bị khóa (không thêm/sửa/xóa được), số dư chuyển sang kỳ sau. Bỏ lần kết gần nhất nếu cần sửa.</p>
+    <div class="row row--between" style="margin-top:10px">
+      <button type="button" class="btn btn--ghost" data-act="copy-close">📋 Chép tin nhắn</button>
+      <div class="row">
+        <button type="button" class="btn btn--ghost" data-close>Hủy</button>
+        <button type="button" class="btn" data-act="do-close">📌 Kết sổ</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Modal khách -->
@@ -598,6 +631,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         kpi('Bấm Zalo / Gọi hôm nay', d.clicksToday.length) +
         kpi('Hôm nay', d.todayTx.so_gd + ' GD · ' + short(d.todayTx.so_tien)) +
         '';
+      S.lastClosing = d.refunds.lastClosing;
       $('#home-refund').innerHTML = balanceCard(d.refunds.summary);
       setCount('#refund-count', d.refunds.summary.den_han_con_thieu > 0 ? '!' : 0);
       $('#home-remind').innerHTML = d.remindToday.length ? d.remindToday.map(remindItem).join('') : '<div class="empty card">Hôm nay không có khách cần báo 🎉</div>';
@@ -773,8 +807,79 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       '<span>− ' + name + ' đã chuyển / ứng</span><b>' + money(m.tong_da_chuyen) + '</b>' +
       (m.den_han_con_thieu > 0 ? '<span class="neg">Đến hôm nay còn thiếu</span><b class="neg">' + money(m.den_han_con_thieu) + '</b>' : '') +
       (m.sap_toi > 0 ? '<span>Giao dịch hôm nay, mai hoàn</span><b>' + money(m.sap_toi) + '</b>' : '') +
-      '</div><div class="row" style="margin-top:10px"><button class="btn btn--sm" data-pay="new">+ Ghi tiền ' + name + ' chuyển / ứng</button></div></div>';
+      '</div>' + (S.lastClosing ? '<div class="muted" style="margin-top:6px;font-size:.85rem">📌 Đã kết đến hết ' + dmy(S.lastClosing.ngay) + ': ' + oweText(Number(S.lastClosing.so_du)) + '</div>' : '') +
+      '<div class="row" style="margin-top:10px"><button class="btn btn--sm" data-pay="new">+ Ghi tiền ' + name + ' chuyển / ứng</button>' +
+      '<button class="btn btn--accent btn--sm" data-act="open-close">📌 Kết số dư</button></div></div>';
   }
+  function oweText(v) { return v > 0 ? esc(rn()) + ' còn nợ ' + money(v) : v < 0 ? esc(rn()) + ' ứng dư ' + money(-v) : 'hết nợ'; }
+
+  /* Kết số dư */
+  function openClose() {
+    var t = S.boot.today;
+    $('#close-date').min = S.lastClosing ? addDays(S.lastClosing.ngay, 1) : '';
+    $('#close-date').max = t;
+    $('#close-date').value = t;
+    $('#close-note').value = '';
+    $('#close-modal').classList.remove('hidden');
+    previewClose();
+  }
+  function previewClose() {
+    var d = $('#close-date').value;
+    if (!d) return;
+    call('previewClose', { ngay: d }).then(function (st) {
+      S.closePreview = st;
+      $('#close-range').innerHTML = 'Kỳ đối chiếu: <b>' + dmy(st.tu_ngay) + ' → ' + dmy(st.ngay) + '</b>' + (st.ket_truoc ? ' (sau lần kết ' + dmy(st.ket_truoc) + ')' : '');
+      var rows = '';
+      if (st.ket_truoc) rows += '<tr><td>Số dư kết ngày ' + dmy(st.ket_truoc) + '<br><small class="muted">' + oweText(st.so_du_truoc) + '</small></td><td>' + (st.so_du_truoc < 0 ? '−' : '') + money(Math.abs(st.so_du_truoc)) + '</td></tr>';
+      rows += '<tr><td>+ Tiền hoàn phát sinh<br><small class="muted">' + st.so_gd + ' GD · ' + money(st.so_tien) + ' − phí máy ' + money(st.chi_phi) + '</small></td><td>' + money(st.phat_sinh) + '</td></tr>';
+      st.ngay_lam.forEach(function (x) { rows += '<tr class="sub"><td>' + dm(x.ngay) + ': ' + x.so_gd + ' GD ' + money(x.so_tien) + ' − ' + money(x.chi_phi) + '</td><td>' + money(x.phat_sinh) + '</td></tr>'; });
+      rows += '<tr><td>− ' + esc(rn()) + ' đã chuyển / ứng</td><td>' + (st.da_chuyen < 0 ? '+' : '') + money(Math.abs(st.da_chuyen)) + '</td></tr>';
+      st.payments.forEach(function (x) { rows += '<tr class="sub"><td>' + dm(x.ngay) + ' · ' + esc(x.loai) + (x.ghi_chu ? ' · ' + esc(x.ghi_chu) : '') + '</td><td>' + (x.tien < 0 ? '+' : '−') + money(Math.abs(x.tien)) + '</td></tr>'; });
+      rows += '<tr class="total"><td>= ' + (st.so_du > 0 ? esc(rn()) + ' còn nợ mình' : st.so_du < 0 ? esc(rn()) + ' ứng dư' : 'Hết nợ') + '</td><td class="' + (st.so_du > 0 ? 'neg' : 'pos') + '">' + money(Math.abs(st.so_du)) + '</td></tr>';
+      $('#close-stmt').innerHTML = rows;
+      $('#close-msg').value = st.tin_nhan;
+    }).catch(function (e) { S.closePreview = null; $('#close-stmt').innerHTML = ''; $('#close-msg').value = ''; fail(e); });
+  }
+  $('#close-date').addEventListener('change', previewClose);
+  function copyText(text) {
+    function done() { toast('Đã chép – dán vào Zalo để gửi'); }
+    (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(done, function () {
+      var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); done();
+    });
+  }
+  function closingText(c) {
+    var ten = rn().replace(/^C\.\s*/i, '');
+    function no(v) { return v > 0 ? 'chị còn nợ em ' + money(v) : v < 0 ? 'chị ứng dư ' + money(-v) : 'không còn nợ'; }
+    return 'Chị ' + ten + ' ơi, em gửi đối chiếu đến hết ngày ' + dmy(c.ngay) + ':\n' +
+      (Number(c.so_du_truoc) ? '• Số dư kỳ trước: ' + no(Number(c.so_du_truoc)) + '\n' : '') +
+      '• Từ ' + dmy(c.tu_ngay) + ' làm ' + c.so_gd + ' GD: ' + money(c.so_tien) + ', phí máy ' + money(c.chi_phi) + ' → tiền hoàn ' + money(c.phat_sinh) + '\n' +
+      '• Chị đã chuyển / ứng: ' + money(c.da_chuyen) + '\n' +
+      '=> Kết đến hết ' + dmy(c.ngay) + ': ' + no(Number(c.so_du)) + '.';
+  }
+  document.addEventListener('click', function (e) {
+    var cc = e.target.closest('[data-copyket]');
+    if (cc) { var c = ((S.refund || {}).closings || []).filter(function (x) { return x.id === cc.dataset.copyket; })[0]; if (c) copyText(closingText(c)); }
+    var dk = e.target.closest('[data-delket]');
+    if (dk && confirm('Bỏ lần kết số dư này? Số liệu trong kỳ sẽ được mở khóa để sửa.')) {
+      call('deleteClosing', { id: dk.dataset.delket }).then(function () { toast('Đã bỏ lần kết'); show(S.tab); }).catch(fail);
+    }
+    var a = e.target.closest('[data-act]');
+    if (!a) return;
+    var act = a.dataset.act;
+    if (act === 'open-close') openClose();
+    if (act === 'copy-close' && $('#close-msg').value) copyText($('#close-msg').value);
+    if (act === 'do-close') {
+      var st = S.closePreview;
+      if (!st || st.ngay !== $('#close-date').value) return;
+      if (!confirm('Kết số dư đến hết ngày ' + dmy(st.ngay) + ': ' + oweText(st.so_du) + '?\nSố liệu đến ngày này sẽ bị khóa.')) return;
+      a.disabled = true;
+      call('closeBalance', { ngay: st.ngay, ghi_chu: $('#close-note').value }).then(function () {
+        a.disabled = false;
+        copyText(st.tin_nhan);
+        closeModals(); show(S.tab);
+      }).catch(function (err) { a.disabled = false; fail(err); });
+    }
+  });
   function refundDay(x) {
     var t = S.boot.today;
     var late = x.con_lai > 0 && x.ngay_hoan <= t;
@@ -810,7 +915,15 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   function loadRefund() {
     call('refunds', refundRange()).then(function (r) {
       S.refund = r;
+      S.lastClosing = r.lastClosing;
       $('#refund-balance').innerHTML = balanceCard(r.summary);
+      $('#refund-closings').innerHTML = r.closings.length ? r.closings.map(function (c, i) {
+        return '<div class="item"><div class="item__head"><div><div class="item__name">Kết đến hết ' + dmy(c.ngay) + '</div>' +
+          '<div class="item__meta">Kỳ ' + dmy(c.tu_ngay) + ' → ' + dmy(c.ngay) + ' · ' + c.so_gd + ' GD · tiền hoàn ' + money(c.phat_sinh) + ' · đã chuyển/ứng ' + money(c.da_chuyen) + (c.ghi_chu ? ' · ' + esc(c.ghi_chu) : '') + '</div></div>' +
+          '<b class="' + (Number(c.so_du) > 0 ? 'neg' : 'pos') + '">' + oweText(Number(c.so_du)) + '</b></div>' +
+          '<div class="item__actions"><button class="btn btn--ghost btn--sm" data-copyket="' + esc(c.id) + '">📋 Chép tin nhắn</button>' +
+          (i === 0 ? '<button class="btn btn--danger btn--sm" data-delket="' + esc(c.id) + '">Bỏ lần kết này</button>' : '') + '</div></div>';
+      }).join('') : '<div class="empty card">Chưa kết số dư lần nào. Bấm <b>📌 Kết số dư</b> ở trên để chốt với ' + esc(rn()) + '.</div>';
       var open = r.days.filter(function (x) { return x.con_lai > 0; }).reverse();
       $('#refund-list').innerHTML = open.length ? open.map(refundDay).join('') : '<div class="empty card">Không còn khoản nào thiếu 🎉</div>';
       var name = esc(rn());
@@ -823,7 +936,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
             '<td data-l="' + name + ' chuyển / ứng" class="num">' + x.payments.map(function (p) {
               return '<button class="pay-chip" data-pay="' + esc(p.id) + '" title="Sửa">' + (p.tien < 0 ? '+' : '−') + money(Math.abs(p.tien)) + ' · ' + esc(p.loai) + (p.ghi_chu ? ' · ' + esc(p.ghi_chu) : '') + ' ✏️</button>';
             }).join('<br>') + '</td>' +
-            '<td data-l="Số dư" class="num"><b class="' + (x.so_du > 0 ? 'neg' : 'pos') + '">' + money(Math.abs(x.so_du)) + '</b><small>' + (x.so_du > 0 ? name + ' nợ' : x.so_du < 0 ? 'ứng dư' : 'hết nợ') + '</small></td></tr>';
+            '<td data-l="Số dư" class="num"><b class="' + (x.so_du > 0 ? 'neg' : 'pos') + '">' + money(Math.abs(x.so_du)) + '</b><small>' + (x.so_du > 0 ? name + ' nợ' : x.so_du < 0 ? 'ứng dư' : 'hết nợ') + '</small>' + (x.ket ? '<span class="ket">📌 Kết sổ</span>' : '') + '</td></tr>';
         }).join('') : '<tr><td colspan="6" class="empty">Chưa có số liệu.</td></tr>') + '</tbody>';
       setCount('#refund-count', r.summary.den_han_con_thieu > 0 ? '!' : 0);
     }).catch(fail);
@@ -841,7 +954,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     payForm.reset();
     var f = payForm.elements;
     f.id.value = p.id || '';
-    f.ngay.value = p.ngay || S.boot.today;
+    var first = S.lastClosing && S.lastClosing.ngay >= S.boot.today ? addDays(S.lastClosing.ngay, 1) : S.boot.today; // ngày đã kết bị khóa
+    f.ngay.value = p.ngay || first;
     f.loai.value = p.loai || 'Hoàn tiền';
     f.so_tien_text.value = p.so_tien ? amountText(Math.abs(p.so_tien)) : '';
     if (p.loai === 'Điều chỉnh số dư' && p.so_tien < 0) f.so_tien_text.value = '-' + amountText(-p.so_tien);

@@ -9,7 +9,9 @@ CRM cho mảng đáo hạn / rút tiền thẻ tín dụng, chạy miễn phí t
 - **Công nợ C.Trâm (người giữ máy):** mỗi giao dịch tự tính **Tiền hoàn = Số tiền (rút/đáo) − Phí máy**; làm hôm nay thì mai C.Trâm hoàn (ngày hoàn sửa được trong form).
   - C.Trâm chuyển tiền hay **ứng trước** một số tròn (VD ngày làm 500 triệu, ứng trước 300 triệu) thì bấm **+ Ghi tiền**, không cần khớp từng giao dịch. CRM trừ dần vào các khoản cũ nhất.
   - **Số dư** = tổng tiền hoàn − tổng C.Trâm đã chuyển/ứng: dương là C.Trâm còn phải chuyển, âm là C.Trâm đang ứng dư (trừ vào giao dịch sau).
-  - **Sổ đối chiếu** theo ngày: làm bao nhiêu, phí máy, tiền hoàn phát sinh, C.Trâm chuyển/ứng, số dư lũy kế. Loại tiền: Ứng trước, Hoàn tiền, Mình trả lại, Điều chỉnh số dư (nhập số dư đầu kỳ).
+  - **📌 Kết số dư:** chọn ngày chốt, CRM tính số dư đến hết ngày đó (số dư lần kết trước + tiền hoàn phát sinh − tiền đã chuyển/ứng), soạn sẵn tin nhắn đối chiếu để chép gửi Zalo. Số liệu đến ngày kết bị khóa; kỳ sau bắt đầu từ số dư đã kết. Bỏ lần kết gần nhất nếu cần sửa.
+  - Nợ từ trước khi dùng CRM: ghi **Nợ cũ** (C.Trâm còn nợ mình) với ngày trước ngày bắt đầu.
+  - **Sổ đối chiếu** theo ngày: làm bao nhiêu, phí máy, tiền hoàn phát sinh, C.Trâm chuyển/ứng, số dư lũy kế. Loại tiền: Ứng trước, Hoàn tiền, Mình trả lại, Nợ cũ, Điều chỉnh số dư.
 - **Nhắc lịch:**
   - **Đáo hạn:** nhắc từ **7 đến 5 ngày trước hạn** tháng sau. Hạn rơi vào T7, CN, lễ hoặc Tết thì dời ±1–2 ngày: mặc định dời lên trước, thẻ nào ngân hàng dời ra sau thì khai trong Cài đặt.
   - **Rút tiền:** tư vấn khách rút **ngay sau ngày sao kê** để được miễn lãi tối đa khoảng 55 ngày. Form tính sẵn số ngày miễn lãi, và tháng sau CRM nhắc gọi khách trước 2 ngày.
@@ -62,7 +64,8 @@ Dán lại `Code.gs` / `Index.html`, rồi vào **Triển khai → Quản lý tr
 | `KhachHang` | id, tên, SĐT, nguồn (website / nhập tay), trạng thái (Mới, Đang tư vấn, Khách quen, Không tiềm năng), ghi chú |
 | `LienHe` | mỗi lần khách để lại thông tin trên website |
 | `GiaoDich` | sổ giao dịch, kèm tiền phí khách, chi phí máy, phí của mình, tiền hoàn (`tien_hoan`), ngày hoàn, đã nhận / chưa nhận. Cột mới được tự thêm vào cuối khi mở CRM. |
-| `DoiSoat` | tiền C.Trâm chuyển / ứng trước / mình trả lại / điều chỉnh (tự tạo khi cập nhật) |
+| `DoiSoat` | tiền C.Trâm chuyển / ứng trước / mình trả lại / nợ cũ / điều chỉnh (tự tạo khi cập nhật) |
+| `KetSo` | các lần kết số dư với C.Trâm (tự tạo khi cập nhật) |
 | `NhacLich` | trạng thái nhắc (Đã báo / Ngưng nhắc) và sự kiện Calendar đã tạo |
 
 Có thể xem và lọc trực tiếp trong Google Sheet, nhưng **không đổi tên cột hay thứ tự cột**.
