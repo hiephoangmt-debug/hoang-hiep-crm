@@ -509,6 +509,42 @@ test('missing Drive permission gives a clear how-to instead of a raw error', () 
   assert.match(gas.setup(), /CHƯA bật được lưu ảnh/);
 });
 
+test('manual Mục 1: closing balance entered by hand on a date; Mục 2 only counts what comes after', () => {
+  const { fake, call } = fresh('2026-10-03');
+  // Giao dịch cũ trước ngày chốt (đã tính trong số chốt tay)
+  call('saveTransaction', { ngay: '2026-09-30', dich_vu: 'Đáo hạn', ten_khach: 'C.Nhi', the: 'SC', so_tien: 500000000, phi_khach: 1.7, phi_may_text: '1.4' });
+  const m = call('manualClosing', { ngay: '2026-09-30', so_du: 120000000, ghi_chu: 'theo sổ tay' });
+  assert.strictEqual(m.nhap_tay, 'x');
+  assert.throws(() => call('manualClosing', { ngay: '2026-09-29', so_du: 1 }), /hãy chọn ngày sau/);
+  assert.throws(() => call('manualClosing', { ngay: '2026-10-09', so_du: 1 }), /tương lai/);
+  assert.throws(() => call('savePayment', { ngay: '2026-09-30', loai: 'Hoàn tiền', so_tien: 1 }), /Đã kết số dư/);
+
+  const t = call('saveTransaction', { ngay: '2026-10-02', dich_vu: 'Đáo hạn', ten_khach: 'C.Lan', the: 'VCB', so_tien: 100000000, phi_khach: 1.7, phi_may_text: '1.3' });
+  call('savePayment', { ngay: '2026-10-03', loai: 'Ứng trước', so_tien: 150000000, ghi_chu: 'sáng' });
+  const r = call('refunds', {});
+  assert.strictEqual(r.congNo.chot_ngay, '2026-09-30');
+  assert.strictEqual(r.congNo.ton1, 120000000);
+  assert.strictEqual(r.congNo.tu_ngay, '2026-10-01');
+  assert.strictEqual(r.congNo.so_gd, 1, 'only transactions after the closing date');
+  assert.strictEqual(r.congNo.phat_sinh, t.tien_hoan);
+  assert.strictEqual(r.congNo.tong, 120000000 + t.tien_hoan - 150000000);
+  assert.strictEqual(r.summary.so_du, r.congNo.tong);
+  // Ứng 150tr trừ vào tồn chốt 120tr trước, rồi vào giao dịch 02/10
+  const tonDay = r.days.find((d) => d.ngay_hoan === '2026-09-30');
+  assert.ok(!tonDay || tonDay.con_lai === 0);
+  assert.strictEqual(r.days.find((d) => d.ngay_hoan === '2026-10-03').da_nhan, 30000000);
+  assert.strictEqual(r.ledger.find((x) => x.ngay === '2026-09-30').so_du, 120000000);
+  assert.strictEqual(r.ledger[r.ledger.length - 1].so_du, r.congNo.tong);
+  // Tổng kết từ 01/10: đầu kỳ = tồn chốt tay
+  assert.strictEqual(call('periodSummary', { from: '2026-10-01', to: '2026-10-03' }).so_du_truoc, 120000000);
+  // Chốt tiếp (tự tính) dựa trên tồn chốt tay
+  assert.strictEqual(call('previewClose', { ngay: '2026-10-03' }).so_du, r.congNo.tong);
+  // Chốt tay số âm = chị ứng dư
+  call('deleteClosing', { id: m.id });
+  call('manualClosing', { ngay: '2026-09-30', so_du: -20000000 });
+  assert.strictEqual(call('refunds', {}).congNo.tong, -20000000 + t.tien_hoan - 150000000);
+});
+
 test('refund columns are added to an existing sheet; old rows get computed values', () => {
   const { gas, fake } = load();
   fake.setToday('2026-10-02');

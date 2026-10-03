@@ -469,6 +469,26 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   </form>
 </div>
 
+<!-- Modal nhập tay Mục 1 -->
+<div class="modal hidden" id="manual-modal">
+  <form class="modal__box" id="manual-form" autocomplete="off">
+    <div class="modal__head"><h2>✏️ Nhập công nợ chốt (Mục 1)</h2><button type="button" class="x" data-close>×</button></div>
+    <p class="muted" style="margin-top:0">Nhập số công nợ thực tế với <span class="refund-name">C.Trâm</span> tính đến hết một ngày (VD theo sổ tay). Mục 2 sẽ chỉ tính giao dịch và tạm ứng <b>sau</b> ngày này.</p>
+    <div class="form-grid">
+      <label class="f">Chốt công nợ đến hết ngày<input type="date" name="ngay" required></label>
+      <label class="f">Số tiền <span class="hint">VD: 120tr · 1.2 tỷ</span><input name="so_tien_text" required inputmode="decimal"></label>
+      <label class="f full">Chiều công nợ<select name="chieu">
+        <option value="1">➕ C.Trâm còn nợ mình</option>
+        <option value="-1">➖ C.Trâm ứng dư (mình đang giữ tiền của chị)</option>
+      </select></label>
+      <label class="f full">Ghi chú<input name="ghi_chu" placeholder="VD: theo sổ tay"></label>
+      <div class="full calc" id="manual-calc" style="grid-template-columns:1fr"></div>
+    </div>
+    <p class="hint">Giao dịch và tiền ứng từ ngày chốt trở về trước được coi như đã gồm trong số này và sẽ bị khóa. Nhập sai thì vào "Các lần kết số dư" → Bỏ lần kết này.</p>
+    <div class="row" style="margin-top:12px;justify-content:flex-end"><button type="button" class="btn btn--ghost" data-close>Hủy</button><button type="submit" class="btn">Lưu Mục 1</button></div>
+  </form>
+</div>
+
 <!-- Modal kết số dư -->
 <div class="modal hidden" id="close-modal">
   <div class="modal__box">
@@ -916,6 +936,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       '<div class="bal__rows" style="max-width:none">' +
       '<span><b style="text-align:left">📌 Mục 1 – ' + (cn.chot_ngay ? 'Chốt đến ngày ' + dmy(cn.chot_ngay) : 'Chưa chốt lần nào') + '</b></span>' +
       '<b class="' + (cn.ton1 > 0 ? 'neg' : 'pos') + '">Tồn ' + signed(cn.ton1) + '<br><small class="muted">' + tonText(cn.ton1) + '</small></b>' +
+      '<span style="grid-column:1/-1"><button class="btn btn--ghost btn--sm" data-act="open-manual">✏️ ' + (cn.chot_ngay ? 'Nhập lại số chốt (sau ngày ' + dm(cn.chot_ngay) + ')' : 'Nhập công nợ chốt đến ngày…') + '</button></span>' +
       '<span style="grid-column:1/-1;border-top:1px dashed var(--line);margin-top:4px;padding-top:6px"><b style="text-align:left">📥 Mục 2 – Từ ' + dmy(cn.tu_ngay) + (cn.chot_ngay ? ' (sau ngày chốt)' : '') + ' đến nay</b></span>' +
       line('&nbsp;&nbsp;➕ Tổng tiền hoàn phát sinh (số tiền − phí máy)', '+' + money(cn.phat_sinh), '', cn.so_gd ? '&nbsp;&nbsp;&nbsp;&nbsp;' + cn.so_gd + ' GD · ' + money(cn.so_tien) + ' − phí máy ' + money(cn.chi_phi) : '') +
       (ung || line('&nbsp;&nbsp;Chưa có tạm ứng', '0đ')) +
@@ -987,6 +1008,43 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     }).catch(fail);
   }
 
+  /* Nhập tay Mục 1 */
+  var manualForm = $('#manual-form');
+  function openManual() {
+    manualForm.reset();
+    var f = manualForm.elements, t = S.boot.today;
+    f.ngay.max = t;
+    f.ngay.min = S.lastClosing ? addDays(S.lastClosing.ngay, 1) : '';
+    f.ngay.value = S.lastClosing && S.lastClosing.ngay >= addDays(t, -1) ? t : addDays(t, -1);
+    updateManual();
+    $('#manual-modal').classList.remove('hidden');
+    setTimeout(function () { f.so_tien_text.focus(); }, 50);
+  }
+  function manualAmount() {
+    var t = manualForm.elements.so_tien_text.value.trim().toLowerCase();
+    var m = t.match(/^([\d.,]+)\s*(tỷ|ty|tỉ)$/);
+    return m ? Math.round(Number(m[1].replace(',', '.')) * 1e9) : parseAmount(t);
+  }
+  function updateManual() {
+    var f = manualForm.elements, n = manualAmount() * Number(f.chieu.value);
+    $('#manual-calc').innerHTML = f.ngay.value
+      ? '📌 Mục 1 – Chốt đến ngày <strong>' + dmy(f.ngay.value) + '</strong>: Tồn <strong class="' + (n > 0 ? 'neg' : 'pos') + '">' + signed(n) + '</strong> (' + tonText(n) + ')' +
+        '<br>Mục 2 sẽ tính từ ngày ' + dmy(addDays(f.ngay.value, 1)) + ' đến nay.'
+      : 'Chọn ngày chốt';
+  }
+  manualForm.addEventListener('input', updateManual);
+  manualForm.addEventListener('change', updateManual);
+  manualForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = manualForm.elements, amt = manualAmount();
+    if (!amt && f.so_tien_text.value.trim() !== '0') return toast('Số tiền chưa đúng', true);
+    var n = amt * Number(f.chieu.value);
+    if (!confirm('Chốt công nợ đến hết ngày ' + dmy(f.ngay.value) + ': ' + signed(n) + ' (' + tonText(n) + ')?')) return;
+    call('manualClosing', { ngay: f.ngay.value, so_du: n, ghi_chu: f.ghi_chu.value || 'Nhập tay' }).then(function () {
+      $('#manual-modal').classList.add('hidden'); toast('Đã lưu Mục 1'); show(S.tab);
+    }).catch(fail);
+  });
+
   /* Kết số dư */
   function openClose() {
     var t = S.boot.today;
@@ -1046,6 +1104,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     if (!a) return;
     var act = a.dataset.act;
     if (act === 'open-close') openClose();
+    if (act === 'open-manual') openManual();
     if (act === 'copy-close' && $('#close-msg').value) copyText($('#close-msg').value);
     if (act === 'copy-sum' && $('#sum-msg').value) copyText($('#sum-msg').value);
     if (act === 'zalo-sum' && $('#sum-msg').value) sendZaloRefund($('#sum-msg').value);
@@ -1101,8 +1160,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       $('#refund-balance').innerHTML = balanceCard(r.summary, r.congNo);
       if (!$('#sum-from').value) setSumRange('today'); else loadSum();
       $('#refund-closings').innerHTML = r.closings.length ? r.closings.map(function (c, i) {
-        return '<div class="item"><div class="item__head"><div><div class="item__name">Kết đến hết ' + dmy(c.ngay) + '</div>' +
-          '<div class="item__meta">Kỳ ' + dmy(c.tu_ngay) + ' → ' + dmy(c.ngay) + ' · ' + c.so_gd + ' GD · tiền hoàn ' + money(c.phat_sinh) + ' · đã chuyển/ứng ' + money(c.da_chuyen) + (c.ghi_chu ? ' · ' + esc(c.ghi_chu) : '') + '</div></div>' +
+        return '<div class="item"><div class="item__head"><div><div class="item__name">Kết đến hết ' + dmy(c.ngay) + (c.nhap_tay ? ' <span class="badge badge--warn">nhập tay</span>' : '') + '</div>' +
+          '<div class="item__meta">' + (c.nhap_tay ? 'Số chốt nhập tay' : 'Kỳ ' + dmy(c.tu_ngay) + ' → ' + dmy(c.ngay) + ' · ' + c.so_gd + ' GD · tiền hoàn ' + money(c.phat_sinh) + ' · đã chuyển/ứng ' + money(c.da_chuyen)) + (c.ghi_chu ? ' · ' + esc(c.ghi_chu) : '') + '</div></div>' +
           '<b class="' + (Number(c.so_du) > 0 ? 'neg' : 'pos') + '">' + oweText(Number(c.so_du)) + '</b></div>' +
           '<div class="item__actions"><button class="btn btn--ghost btn--sm" data-copyket="' + esc(c.id) + '">📋 Chép tin nhắn</button>' +
           (i === 0 ? '<button class="btn btn--danger btn--sm" data-delket="' + esc(c.id) + '">Bỏ lần kết này</button>' : '') + '</div></div>';
