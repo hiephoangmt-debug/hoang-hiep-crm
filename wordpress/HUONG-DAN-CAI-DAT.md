@@ -11,6 +11,19 @@ Bạn cần 2 file:
 
 > Tự tạo lại 2 file: trong thư mục `wordpress/` chạy `./scripts/build-zip.sh`, file nằm ở `wordpress/dist/`.
 
+### Đã có sẵn hiephoangmt.com?
+
+Mở **https://hiephoangmt.com/wp-admin**:
+
+- **Hiện trang đăng nhập WordPress** → website đã có WordPress: **bỏ qua Bước 1–4**, làm từ **Bước 0** dưới đây rồi sang **Bước 5**.
+- **Không hiện** (báo lỗi, trang trống, trang của nhà cung cấp) → mới có tên miền, chưa có hosting/WordPress: làm từ **Bước 1** (bỏ phần mua tên miền).
+
+**Bước 0 – sao lưu trước khi thay giao diện (website đang chạy):**
+1. **Plugin → Cài mới** → tìm **UpdraftPlus** → Cài đặt → Kích hoạt → **Cài đặt → Sao lưu UpdraftPlus** → **Sao lưu ngay** (tick cả cơ sở dữ liệu và tệp).
+2. Tải bản sao lưu về máy hoặc kết nối Google Drive.
+
+Khi cài sang giao diện Hoàng Hiệp: bài viết, trang, ảnh cũ **giữ nguyên**. Nút *Cài đặt nhanh* sẽ **đặt lại trang chủ** thành trang "Trang chủ" mới và gán **Menu chính** mới cho đầu trang; trang cũ cùng đường dẫn (`/tin-tuc/`, `/lien-he/`, `/gioi-thieu/`) được dùng lại, không tạo trùng. Nếu đang dùng plugin SEO khác (Rank Math, Yoast…) cứ giữ – giao diện tự tương thích. Plugin dựng trang (Elementor…) có thể tắt sau khi kiểm tra trang mới ổn.
+
 ---
 
 ## Bước 1. Mua hosting WordPress
