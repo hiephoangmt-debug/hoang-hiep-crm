@@ -259,6 +259,11 @@ function hh_seo_noindex_request() {
 	if ( hh_seo_special_key() ) {
 		return ! hh_special_projects( hh_seo_special_key() );
 	}
+	// Trang Mua bán có bảng giá thị trường (biệt thự, đất lớn, khách sạn): vẫn lập chỉ mục dù chưa có tin.
+	$landing = 'ban' === get_query_var( 'hh_deal' ) ? hh_current_deal_term() : null;
+	if ( $landing && ( 'biet-thu' === $landing->slug || ( function_exists( 'hh_market_board' ) && hh_market_board( $landing->slug ) ) ) ) {
+		return false;
+	}
 	return ( is_post_type_archive( array( 'bat-dong-san', 'du-an' ) ) || is_tax() ) && ! have_posts();
 }
 
@@ -626,6 +631,13 @@ function hh_seo_landing_urls() {
 			}
 		}
 	}
+	foreach ( array( 'biet-thu', 'dat-nen', 'khach-san' ) as $slug ) {
+		$t = get_term_by( 'slug', $slug, 'loai-bds' );
+		if ( $t && ( 'biet-thu' === $slug || ( function_exists( 'hh_market_board' ) && hh_market_board( $slug ) ) ) ) {
+			$urls[] = hh_deal_term_url( 'ban', $t );
+		}
+	}
+	$urls = array_values( array_unique( $urls ) );
 	if ( function_exists( 'hh_special_projects' ) ) {
 		foreach ( array_keys( HH_SPECIAL_PAGES ) as $key ) {
 			if ( hh_special_projects( $key ) ) {

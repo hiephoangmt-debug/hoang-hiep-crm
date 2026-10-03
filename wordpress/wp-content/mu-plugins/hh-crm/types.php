@@ -137,6 +137,7 @@ function hh_default_terms() {
 			'shophouse'           => array( 'Shophouse', array() ),
 			'dat-nen'             => array( 'Đất nền', array() ),
 			'mat-bang-kinh-doanh' => array( 'Mặt bằng kinh doanh', array() ),
+			'khach-san'           => array( 'Khách sạn', array() ),
 		),
 		'khu-vuc'    => array(
 			'hai-chau'      => array( 'Hải Châu', array() ),
@@ -155,7 +156,7 @@ function hh_default_terms() {
 
 add_action( 'init', 'hh_seed_terms', 20 );
 function hh_seed_terms() {
-	if ( wp_installing() || '6' === get_option( 'hh_terms_seeded' ) ) {
+	if ( wp_installing() || '7' === get_option( 'hh_terms_seeded' ) ) {
 		return;
 	}
 	// Đổi tên cũ "Shophouse" → "Nhà phố – Shophouse".
@@ -186,7 +187,7 @@ function hh_seed_terms() {
 			}
 		}
 	}
-	update_option( 'hh_terms_seeded', '6' );
+	update_option( 'hh_terms_seeded', '7' );
 }
 
 /** Most specific "Loại dự án" of a project (child term preferred). */
@@ -722,4 +723,14 @@ function hh_listing_archive_title() {
 		return $base . ' ' . $term->name . ', Đà Nẵng';
 	}
 	return $base . ' Đà Nẵng';
+}
+
+/**
+ * Bảng giá thị trường theo khu vực cho trang Mua bán (đất lớn, khách sạn ven biển…), nạp qua filter "hh_market_boards".
+ * Trả về bảng ứng với trang đích loại nhà đất (slug), không có thì null.
+ */
+function hh_market_board( $landing_slug ) {
+	$map    = array( 'dat-nen' => 'dat-lon', 'khach-san' => 'khach-san' );
+	$boards = apply_filters( 'hh_market_boards', array() );
+	return isset( $map[ $landing_slug ], $boards[ $map[ $landing_slug ] ] ) ? $boards[ $map[ $landing_slug ] ] : null;
 }

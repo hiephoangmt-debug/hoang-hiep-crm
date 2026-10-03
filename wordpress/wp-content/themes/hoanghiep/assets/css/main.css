@@ -937,3 +937,4 @@ body.has-pop { overflow: hidden; }
 
 /* Ẩn nút gọi nổi của plugin khác (trùng với nút liên hệ của theme). */
 .hotline-phone-ring-wrap, .hotline-bar, #callnowbutton, .call-now-button, .phonering-alo-phone, .quick-alo-phone, .fixed-call-button { display: none !important; }
+.sources { margin-top: 12px; font-size: .85rem; color: var(--muted); } .sources summary { cursor: pointer; } .sources ul { margin: 6px 0 0; padding-left: 18px; }
