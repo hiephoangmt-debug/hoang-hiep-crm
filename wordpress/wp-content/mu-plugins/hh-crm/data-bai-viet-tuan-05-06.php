@@ -509,6 +509,19 @@ HTML
 <p>Tỷ suất gộp = tiền thuê cả năm chia giá mua. Ví dụ căn 2PN mua khoảng 5 tỷ, cho thuê 25 triệu/tháng thì thu khoảng 300 triệu/năm, tỷ suất gộp khoảng 6%/năm.</p>
 <p>Sau khi trừ phí quản lý, thời gian trống phòng, bảo trì và thuế, tỷ suất ròng sẽ thấp hơn. Nếu có vay, cần so dòng tiền thuê với tiền trả nợ, xem thêm bài <a href="/vay-mua-can-ho-da-nang-2026-lai-suat/">vay mua căn hộ Đà Nẵng 2026</a>.</p>
 
+<h2>Chi phí cần trừ khi cho thuê</h2>
+<table>
+<thead><tr><th>Khoản chi</th><th>Ghi chú</th></tr></thead>
+<tbody>
+<tr><td>Phí quản lý tòa nhà</td><td>Tính theo m², trả hằng tháng dù có khách hay không</td></tr>
+<tr><td>Thời gian trống phòng</td><td>Nên dự phòng 1 – 2 tháng/năm với thuê dài hạn</td></tr>
+<tr><td>Bảo trì, thay nội thất</td><td>Cao hơn với căn thuê ngắn hạn, căn gần biển</td></tr>
+<tr><td>Thuế cho thuê tài sản</td><td>Theo quy định hiện hành với cá nhân cho thuê</td></tr>
+<tr><td>Phí môi giới, vận hành</td><td>Khi thuê đơn vị quản lý hoặc tìm khách qua môi giới</td></tr>
+</tbody>
+</table>
+<p>Lập bảng dòng tiền đầy đủ giúp anh chị so sánh trung thực giữa các dự án, thay vì chỉ nhìn giá thuê đăng trên tin rao.</p>
+
 <h2>Nên mua căn nào để cho thuê?</h2>
 <ul>
 <li>Ngân sách vừa phải: studio, 1PN gần sông Hàn hoặc biển, dễ cho thuê cho người đi làm và khách du lịch.</li>
@@ -573,6 +586,11 @@ HTML
 
 <h2>Trường hợp đặc biệt cần đọc kỹ hợp đồng</h2>
 <p>Một số dự án có mô hình riêng. <a href="/du-an/m-riverside-da-nang/">M Riverside</a> là căn hộ dịch vụ thương mại, chủ đầu tư công bố đất sử dụng lâu dài và cấp giấy chứng nhận khi đủ điều kiện. Với mô hình lai như vậy, hãy đọc kỹ điều khoản về loại đất và thời hạn trong hợp đồng mua bán.</p>
+
+<h2>Giá và khả năng cho thuê: so sánh thực tế</h2>
+<p>Căn hộ khách sạn mặt biển thường có giá vào thấp hơn căn sở hữu lâu dài cùng vị trí. Ví dụ, studio Wyndham Soleil chuyển nhượng khoảng 2,3 – 2,6 tỷ, trong khi studio/1PN Times Square sở hữu lâu dài khoảng 6,5 – 8,5 tỷ (tham khảo).</p>
+<p>Về cho thuê, Wyndham Soleil có thể ủy thác cho Wyndham vận hành, các chương trình chia lợi nhuận đã giới thiệu ở từng giai đoạn cần xác nhận lại. Căn sở hữu lâu dài như Sun Cosmo có giá thuê tham khảo 2PN khoảng 30 – 35 triệu/tháng, chủ nhà tự quyết cách khai thác.</p>
+<p>Chênh lệch giá phản ánh khác biệt thời hạn và quyền sử dụng. Đừng chỉ so giá mỗi m², hãy so cả giá trị còn lại theo thời gian.</p>
 
 <h2>Nên chọn loại nào?</h2>
 <ul>
