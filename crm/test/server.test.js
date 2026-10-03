@@ -724,6 +724,15 @@ test('bill matching (ví trả sau): A has a 5tr bill, B pays it with a pay-late
   assert.strictEqual(m.thang_nay.tong_lai, 100000);
   assert.throws(() => call('saveBill', { ngay: '2026-10-05', so_tien: 1000, a_ten: 'X', phi_a: 60, phi_minh: 50 }), /Phí không hợp lệ/);
   assert.ok(call('auditLog', { doi_tuong: 'Hoá đơn' }).length >= 4);
+  const rp = call('report', { type: 'month', year: 2026 });
+  assert.strictEqual(rp.rows[9].hd_so, 1);
+  assert.strictEqual(rp.rows[9].hd_lai, 100000);
+  assert.strictEqual(rp.total.tong_lai, 100000);
+  assert.strictEqual(rp.byBillType[0].name, 'Hoá đơn điện');
+  assert.strictEqual(rp.byWallet[0].name, 'MoMo Ví Trả Sau');
+  const wk = call('report', { type: 'week', year: 2026, month: 10 });
+  assert.strictEqual(wk.rows.reduce((a, r) => a + r.hd_lai, 0), 100000);
+  assert.strictEqual(call('report', { type: 'year', year: 2026 }).rows.find((r) => r.label === 'Năm 2026').hd_so, 1);
   call('deleteBill', { id: b.id });
   assert.strictEqual(call('listBills', { mode: 'all' }).rows.length, 0);
 });

@@ -4,7 +4,7 @@ CRM cho mảng đáo hạn / rút tiền thẻ tín dụng, chạy miễn phí t
 
 - **🧾 Ghép hoá đơn (ví trả sau):** người **A** có hoá đơn (điện, nước, nạp MoMo, bảo hiểm, internet, học phí…), người **B** cần rút tiền dùng **ví trả sau** (MoMo Ví Trả Sau, SPayLater, Kredivo, Home PayLater, Fundiin…) thanh toán hoá đơn đó.
   - A chuyển lại cho mình **100% − phí A**; mình chuyển cho B **100% − phí A − phí mình**; **doanh thu = phần chênh lệch**. VD hoá đơn 5tr, phí A 3%, phí mình 2%: A chuyển 4.850.000, mình chuyển B 4.750.000, doanh thu 100.000.
-  - Trạng thái: Chờ ghép (có hoá đơn, chưa có người rút) → Chờ B thanh toán → Chờ đối soát → Hoàn tất. A và B tự thành khách trong CRM. Doanh thu hoá đơn cộng vào Tổng quan (Tổng lãi).
+  - Trạng thái: Chờ ghép (có hoá đơn, chưa có người rút) → Chờ B thanh toán → Chờ đối soát → Hoàn tất. A và B tự thành khách trong CRM. Doanh thu hoá đơn cộng vào Tổng quan và **Báo cáo tuần / tháng / năm** (cột HĐ ghép, Lãi HĐ, Tổng lãi; bảng theo loại hoá đơn và theo ví trả sau).
 - **Tổng quan:** chỉ tính tiền: **hôm nay / tuần này / tháng này** (số tiền, số GD đáo/rút, phí khách, phí máy, phí của mình, so với hôm qua / tuần trước / cùng kỳ tháng trước) và **bảng so sánh tháng này với 2 tháng trước**.
 - **Khách từ website:** form của 2 website gửi thẳng vào CRM (mục *Khách hàng → Liên hệ từ web*), kèm email báo ngay.
 - **Sổ giao dịch:** thay sổ tay, gồm Ngày, Dịch vụ, Thẻ, Ngày đáo, Ngày sao kê, Tên, Số tiền, Máy, Phí khách / Phí máy.

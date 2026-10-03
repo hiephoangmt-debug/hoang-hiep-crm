@@ -423,6 +423,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         <div class="card scroll-x"><h3 style="margin-top:0">Theo máy POS</h3><table class="tbl" id="rp-machine"></table></div>
         <div class="card scroll-x"><h3 style="margin-top:0">Theo thẻ / ví</h3><table class="tbl" id="rp-card"></table></div>
         <div class="card scroll-x"><h3 style="margin-top:0">Top khách</h3><table class="tbl" id="rp-top"></table></div>
+        <div class="card scroll-x"><h3 style="margin-top:0">🧾 Hoá đơn theo loại</h3><table class="tbl" id="rp-billtype"></table></div>
+        <div class="card scroll-x"><h3 style="margin-top:0">🧾 Hoá đơn theo ví trả sau</h3><table class="tbl" id="rp-wallet"></table></div>
       </div>
     </section>
 
@@ -1881,18 +1883,23 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     var t = r.total;
     $('#rp-kpis').innerHTML = kpi('Tổng tiền', short(t.so_tien)) + kpi('Phí khách', money(t.tien_phi)) + kpi('Phí máy', money(t.chi_phi)) +
       kpi('Phí của mình', money(t.loi_nhuan), t.loi_nhuan >= 0 ? 'pos' : 'neg') + kpi(rn() + ' hoàn', money(t.tien_hoan)) + kpi('Giao dịch (Đáo / Rút)', t.so_gd + ' (' + t.so_dao + ' / ' + t.so_rut + ')') +
-      kpi('Khách mới / từ web', t.khach_moi + ' / ' + t.lead_web) + kpi('Bấm Zalo / Gọi trên web', t.bam_web || 0);
+      kpi('Khách mới / từ web', t.khach_moi + ' / ' + t.lead_web) + kpi('Bấm Zalo / Gọi trên web', t.bam_web || 0) +
+      kpi('🧾 Hoá đơn ghép (hoàn tất)', (t.hd_so || 0) + ' · ' + short(t.hd_tien || 0)) + kpi('🧾 Lãi hoá đơn', money(t.hd_lai || 0), 'pos') +
+      kpi('💰 Tổng lãi (thẻ + hoá đơn)', money(t.tong_lai || 0), (t.tong_lai || 0) >= 0 ? 'pos' : 'neg');
     var max = Math.max.apply(null, r.rows.map(function (x) { return x.so_tien; }).concat([1]));
-    $('#rp-table').innerHTML = '<thead><tr><th>Kỳ</th><th class="num">GD (Đáo/Rút)</th><th class="num">Số tiền</th><th class="num">Phí khách</th><th class="num">Phí máy</th><th class="num">Phí của mình</th><th class="num">Khách mới</th><th class="num">Khách web</th><th class="num">Bấm Zalo/Gọi</th></tr></thead><tbody>' +
+    $('#rp-table').innerHTML = '<thead><tr><th>Kỳ</th><th class="num">GD (Đáo/Rút)</th><th class="num">Số tiền</th><th class="num">Phí khách</th><th class="num">Phí máy</th><th class="num">Phí của mình</th><th class="num">HĐ ghép</th><th class="num">Lãi HĐ</th><th class="num">Tổng lãi</th><th class="num">Khách mới</th><th class="num">Khách web</th><th class="num">Bấm Zalo/Gọi</th></tr></thead><tbody>' +
       r.rows.map(function (x) {
         return '<tr class="click" data-from="' + x.from + '" data-to="' + x.to + '"><td data-l="Kỳ"><b>' + esc(x.label) + '</b><div class="bar"><i style="width:' + (x.so_tien / max * 100).toFixed(1) + '%"></i></div></td>' +
           '<td data-l="GD (Đáo/Rút)" class="num">' + x.so_gd + ' (' + x.so_dao + '/' + x.so_rut + ')</td>' +
           '<td data-l="Số tiền" class="num">' + money(x.so_tien) + '</td><td data-l="Phí khách" class="num">' + money(x.tien_phi) + '</td>' +
           '<td data-l="Phí máy" class="num">' + money(x.chi_phi) + '</td><td data-l="Phí của mình" class="num ' + (x.loi_nhuan >= 0 ? 'pos' : 'neg') + '">' + money(x.loi_nhuan) + '</td>' +
+          '<td data-l="HĐ ghép" class="num">' + (x.hd_so ? x.hd_so + ' · ' + short(x.hd_tien) : '—') + '</td><td data-l="Lãi HĐ" class="num pos">' + money(x.hd_lai || 0) + '</td>' +
+          '<td data-l="Tổng lãi" class="num"><b class="' + ((x.tong_lai || 0) >= 0 ? 'pos' : 'neg') + '">' + money(x.tong_lai || 0) + '</b></td>' +
           '<td data-l="Khách mới" class="num">' + x.khach_moi + '</td><td data-l="Khách web" class="num">' + x.lead_web + '</td><td data-l="Bấm Zalo/Gọi" class="num">' + (x.bam_web || 0) + '</td></tr>';
       }).join('') + '</tbody><tfoot><tr><td data-l="">Tổng</td><td data-l="GD" class="num">' + t.so_gd + '</td><td data-l="Số tiền" class="num">' + money(t.so_tien) +
       '</td><td data-l="Phí khách" class="num">' + money(t.tien_phi) + '</td><td data-l="Phí máy" class="num">' + money(t.chi_phi) +
-      '</td><td data-l="Phí của mình" class="num">' + money(t.loi_nhuan) + '</td><td data-l="Khách mới" class="num">' + t.khach_moi + '</td><td data-l="Khách web" class="num">' + t.lead_web + '</td><td data-l="Bấm Zalo/Gọi" class="num">' + (t.bam_web || 0) + '</td></tr></tfoot>';
+      '</td><td data-l="Phí của mình" class="num">' + money(t.loi_nhuan) + '</td><td data-l="HĐ ghép" class="num">' + (t.hd_so || 0) + ' · ' + short(t.hd_tien || 0) +
+      '</td><td data-l="Lãi HĐ" class="num">' + money(t.hd_lai || 0) + '</td><td data-l="Tổng lãi" class="num">' + money(t.tong_lai || 0) + '</td><td data-l="Khách mới" class="num">' + t.khach_moi + '</td><td data-l="Khách web" class="num">' + t.lead_web + '</td><td data-l="Bấm Zalo/Gọi" class="num">' + (t.bam_web || 0) + '</td></tr></tfoot>';
     function group(id, list) {
       $(id).innerHTML = '<thead><tr><th></th><th class="num">GD</th><th class="num">Số tiền</th><th class="num">Phí của mình</th></tr></thead><tbody>' +
         (list.length ? list.map(function (g) {
@@ -1900,6 +1907,13 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         }).join('') : '<tr><td colspan="4" class="empty">—</td></tr>') + '</tbody>';
     }
     group('#rp-service', r.byService); group('#rp-machine', r.byMachine); group('#rp-card', r.byCard); group('#rp-top', r.topCustomers);
+    function bgroup(id, list) {
+      $(id).innerHTML = '<thead><tr><th></th><th class="num">HĐ</th><th class="num">Tiền HĐ</th><th class="num">Lãi</th></tr></thead><tbody>' +
+        (list && list.length ? list.map(function (g) {
+          return '<tr><td>' + esc(g.name) + '</td><td class="num">' + g.hd_so + '</td><td class="num">' + short(g.hd_tien) + '</td><td class="num pos">' + money(g.hd_lai) + '</td></tr>';
+        }).join('') : '<tr><td colspan="4" class="empty">—</td></tr>') + '</tbody>';
+    }
+    bgroup('#rp-billtype', r.byBillType); bgroup('#rp-wallet', r.byWallet);
   }
   $('#rp-table').addEventListener('click', function (e) {
     var tr = e.target.closest('[data-from]'); if (!tr) return;

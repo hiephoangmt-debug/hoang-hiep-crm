@@ -1638,6 +1638,7 @@ function apiReport_(p) {
   } else {
     var years = {};
     tx.forEach(function (t) { years[t.ngay.slice(0, 4)] = 1; });
+    readAll_('HoaDon').forEach(function (b) { if (b.ngay) years[String(b.ngay).slice(0, 4)] = 1; });
     years[String(year)] = 1;
     Object.keys(years).sort().forEach(function (y) {
       periods.push({ label: 'Năm ' + y, from: y + '-01-01', to: y + '-12-31' });
@@ -1645,6 +1646,20 @@ function apiReport_(p) {
   }
 
   function inRange(d, a, b) { return d >= a && d <= b; }
+  // Hoá đơn ghép (ví trả sau) đã hoàn tất, tính theo ngày ghép
+  var bills = readAll_('HoaDon').map(billCalc_).filter(function (b) { return b.trang_thai === 'Hoàn tất'; });
+  function billSum(list, s) {
+    s.hd_so = list.length;
+    s.hd_tien = list.reduce(function (a, b) { return a + b.so_tien; }, 0);
+    s.hd_lai = list.reduce(function (a, b) { return a + b.doanh_thu; }, 0);
+    s.tong_lai = (s.loi_nhuan || 0) + s.hd_lai;
+    return s;
+  }
+  function billGroup(list, field) {
+    var g = {};
+    list.forEach(function (b) { var k = b[field] || '(trống)'; (g[k] = g[k] || []).push(b); });
+    return Object.keys(g).map(function (k) { return billSum(g[k], { name: k, loi_nhuan: 0 }); }).sort(function (a, b) { return b.hd_tien - a.hd_tien; });
+  }
   var rows = periods.map(function (pr) {
     var t = tx.filter(function (x) { return inRange(x.ngay, pr.from, pr.to); });
     var s = summarize_(t);
@@ -1652,6 +1667,7 @@ function apiReport_(p) {
     s.khach_moi = customers.filter(function (c) { return inRange(String(c.tao_luc).slice(0, 10), pr.from, pr.to); }).length;
     s.lead_web = leads.filter(function (l) { return l.sdt && inRange(String(l.thoi_gian).slice(0, 10), pr.from, pr.to); }).length;
     s.bam_web = leads.filter(function (l) { return !l.sdt && inRange(String(l.thoi_gian).slice(0, 10), pr.from, pr.to); }).length;
+    billSum(bills.filter(function (b) { return inRange(b.ngay, pr.from, pr.to); }), s);
     return s;
   });
   var all = { from: periods[0].from, to: periods[periods.length - 1].to };
@@ -1660,8 +1676,11 @@ function apiReport_(p) {
   total.khach_moi = rows.reduce(function (a, r) { return a + r.khach_moi; }, 0);
   total.lead_web = rows.reduce(function (a, r) { return a + r.lead_web; }, 0);
   total.bam_web = rows.reduce(function (a, r) { return a + r.bam_web; }, 0);
+  var allBills = bills.filter(function (b) { return inRange(b.ngay, all.from, all.to); });
+  billSum(allBills, total);
   return {
     type: type, year: year, month: month, rows: rows, total: total,
+    byBillType: billGroup(allBills, 'loai_hd'), byWallet: billGroup(allBills, 'vi_b'),
     byService: groupBy_(allTx, 'dich_vu'), byMachine: groupBy_(allTx, 'may'),
     byCard: groupBy_(allTx, 'the'), topCustomers: groupBy_(allTx, 'ten_khach').slice(0, 10)
   };
