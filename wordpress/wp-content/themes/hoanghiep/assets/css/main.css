@@ -881,3 +881,56 @@ img.article-head__author { object-fit: cover; border: 2px solid var(--gold); }
 .lead-pop__eyebrow { display: flex; align-items: center; gap: 6px; margin: 0 0 6px; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-2); }
 .lead-pop__title { margin: 0 0 12px; font-family: var(--font-display); font-size: 1.45rem; color: var(--navy); }
 body.has-pop { overflow: hidden; }
+
+/* Mặt bằng tầng dạng tab */
+.floors { margin-top: 8px; }
+.floors__tabs { margin-bottom: 14px; }
+.floors__panel a { display: block; padding: 12px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--white); box-shadow: var(--shadow); cursor: zoom-in; }
+.floors__panel img { width: 100%; height: auto; border-radius: var(--radius); }
+.floors__hint { margin: 10px 0 0; font-size: .85rem; color: var(--muted); text-align: center; }
+
+/* Các loại căn hộ */
+.units { display: grid; grid-template-columns: minmax(180px, 260px) minmax(0, 1fr); gap: 18px; margin-top: 8px; }
+.units__list { display: grid; gap: 10px; align-content: start; }
+.units__item { display: grid; gap: 4px; padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); text-align: left; cursor: pointer; font: inherit; transition: background .2s, color .2s; }
+.units__item strong { font-family: var(--font-display); font-size: 1.12rem; color: var(--navy); }
+.units__item span { font-size: .85rem; color: var(--muted); }
+.units__item.is-active { border-color: var(--navy); background: var(--navy); }
+.units__item.is-active strong { color: var(--white); }
+.units__item.is-active span { color: var(--gold); }
+.units__view { min-width: 0; }
+.units__panel { display: none; padding: 16px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--white); box-shadow: var(--shadow); }
+.units__panel.is-active { display: block; }
+.units__panel > a { display: block; margin-bottom: 14px; cursor: zoom-in; }
+.units__panel img { width: 100%; height: auto; border-radius: var(--radius); }
+.units__name { margin: 0 0 10px; font-family: var(--font-display); font-size: 1.5rem; color: var(--navy); }
+.units__info dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin: 0 0 16px; }
+.units__info dl div { padding: 10px 12px; border-radius: var(--radius); background: var(--tint); }
+.units__info dt { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.units__info dd { margin: 2px 0 0; font-weight: 700; color: var(--navy); }
+.units__info .units__price { color: #b8312f; }
+@media (max-width: 640px) {
+	.units { grid-template-columns: 1fr; }
+	.units__list { display: flex; overflow-x: auto; gap: 8px; scrollbar-width: none; }
+	.units__item { flex: none; min-width: 130px; }
+}
+
+/* Ưu đãi có hạn + đếm ngược */
+.block__title-em { font-style: italic; color: var(--gold-2); }
+.offer-banner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin: 6px 0 20px; padding: 24px; border-radius: var(--radius-lg); background: linear-gradient(120deg, #7c1d1d, #b3312c 55%, var(--gold-2)); color: var(--white); box-shadow: var(--shadow-lg); }
+.offer-banner__text { flex: 1 1 300px; }
+.offer-banner__tag { display: inline-block; margin-bottom: 10px; padding: 4px 12px; border-radius: 999px; background: rgba(255, 255, 255, .16); font-size: .75rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.offer-banner__title { margin: 0; font-family: var(--font-display); font-size: clamp(1.35rem, 3vw, 1.9rem); line-height: 1.25; color: var(--white); }
+.offer-banner__title em { font-style: normal; color: #ffd27a; }
+.offer-banner__note { margin: 8px 0 0; font-size: .92rem; color: rgba(255, 255, 255, .88); }
+.countdown { display: flex; gap: 8px; }
+.countdown div { display: grid; place-items: center; min-width: 64px; padding: 10px 6px; border: 1px solid rgba(255, 255, 255, .25); border-radius: var(--radius); background: rgba(0, 0, 0, .18); }
+.countdown b { font-family: var(--font-display); font-size: 1.7rem; line-height: 1; }
+.countdown span { margin-top: 4px; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; opacity: .85; }
+.discount { margin-bottom: 20px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--white); overflow: hidden; }
+.discount__title { margin: 0; padding: 14px 18px; font-weight: 700; color: var(--navy); }
+.discount .table-wrap { margin: 0; border: 0; border-radius: 0; }
+.discount__table th:last-child { background: var(--gold); color: var(--navy); text-align: center; }
+.discount__table td:last-child { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--gold-2); text-align: center; }
+@media (max-width: 640px) { .countdown { width: 100%; } .countdown div { flex: 1; min-width: 0; } }
+@media (max-width: 640px) { .discount__table { min-width: 0; } .discount__table th, .discount__table td { white-space: normal; padding: 10px; font-size: .88rem; } }

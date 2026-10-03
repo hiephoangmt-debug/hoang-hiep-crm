@@ -362,13 +362,27 @@ function hh_cta_box( $args ) {
 
 /** Ưu đãi đầu trang dự án: lấy từ ô "Chính sách & ưu đãi", chưa nhập thì dùng các quyền lợi chung khi đăng ký. */
 function hh_project_offer( $post_id = null ) {
-	$text  = preg_replace( '/^[^:\n]{0,45}:\s*/u', '', trim( (string) hh_meta( 'hh_p_policy', $post_id ) ) ); // Bỏ "Chính sách … :" ở đầu.
-	$lines = array_values( array_filter( array_map( 'trim', preg_split( '/\R|;\s*|(?<=\.)\s+(?=\p{Lu})/u', $text ) ) ) );
-	$lines = array_map( static fn( $l ) => mb_strtoupper( mb_substr( $l, 0, 1 ) ) . mb_substr( rtrim( $l, '.' ), 1 ), $lines );
-	$lines = array_map( static fn( $l ) => mb_strlen( $l ) > 140 ? mb_substr( $l, 0, 137 ) . '…' : $l, array_slice( $lines, 0, 3 ) );
-	return $lines ?: array(
+	return hh_project_offer_lines( $post_id ) ?: array(
 		'Bảng giá và chính sách chiết khấu của đợt mở bán hiện tại',
 		'Danh sách căn đẹp còn trống: tầng cao, căn góc, view đẹp',
 		'Phương án thanh toán và hỗ trợ vay ngân hàng phù hợp số vốn của bạn',
 	);
+}
+
+/** "dd/mm/yyyy" → thời điểm cuối ngày đó (giờ Việt Nam), sai định dạng trả 0. */
+function hh_parse_vn_date( $text ) {
+	if ( ! preg_match( '#(\d{1,2})[/.\-](\d{1,2})[/.\-](\d{4})#', (string) $text, $m ) || ! checkdate( (int) $m[2], (int) $m[1], (int) $m[3] ) ) {
+		return 0;
+	}
+	$d = date_create( sprintf( '%04d-%02d-%02d 23:59:59', $m[3], $m[2], $m[1] ), new DateTimeZone( 'Asia/Ho_Chi_Minh' ) );
+	return $d ? $d->getTimestamp() : 0;
+}
+
+/** Các dòng ưu đãi tách từ ô "Chính sách & ưu đãi" (tối đa 3, mỗi dòng ≤ 140 ký tự). */
+function hh_project_offer_lines( $post_id = null ) {
+	$text  = preg_replace( '/^[^:\n]{0,45}:\s*/u', '', trim( (string) hh_meta( 'hh_p_policy', $post_id ) ) ); // Bỏ "Chính sách … :" ở đầu.
+	$lines = array_values( array_filter( array_map( 'trim', preg_split( '/\R|;\s*|(?<=\.)\s+(?=\p{Lu})/u', $text ) ) ) );
+	$lines = array_map( static fn( $l ) => mb_strtoupper( mb_substr( $l, 0, 1 ) ) . mb_substr( rtrim( $l, '.' ), 1 ), $lines );
+	$lines = array_map( static fn( $l ) => mb_strlen( $l ) > 140 ? mb_substr( $l, 0, 137 ) . '…' : $l, array_slice( $lines, 0, 3 ) );
+	return $lines;
 }

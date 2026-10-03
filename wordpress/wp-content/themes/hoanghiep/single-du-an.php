@@ -283,8 +283,8 @@ while ( have_posts() ) :
 					<p class="prose"><?php echo nl2br( esc_html( hh_meta( 'hh_p_design_desc' ) ) ); ?></p>
 				<?php endif; ?>
 				<?php if ( hh_ids( 'hh_p_floorplans' ) ) : ?>
-					<h3 class="block__sub">Mặt bằng tầng / căn</h3>
-					<?php hh_gallery( hh_ids( 'hh_p_floorplans' ), 'mat-bang' ); ?>
+					<h3 class="block__sub">Mặt bằng tầng <?php echo esc_html( $title ); ?></h3>
+					<?php get_template_part( 'template-parts/project-floors', null, array( 'ids' => hh_ids( 'hh_p_floorplans' ) ) ); ?>
 				<?php endif; ?>
 				<?php if ( ! $has_plan ) : ?>
 					<?php hh_pending( 'Mặt bằng tổng thể và mặt bằng chi tiết từng loại sản phẩm: liên hệ Hiệp để nhận bản PDF đầy đủ.', '' ); ?>
@@ -311,7 +311,11 @@ while ( have_posts() ) :
 							<?php if ( $p['in_zones'] && ! $p['rows'] ) : ?>
 								<?php hh_data_table( array( 'Phân khu', 'Loại sản phẩm', 'Quy mô', 'Tình trạng' ), $p['in_zones'] ); ?>
 							<?php endif; ?>
-							<?php hh_data_table( $p['cols'], $p['rows'] ); ?>
+							<?php if ( 'can-ho' === $key && count( $p['rows'] ) > 1 ) : ?>
+								<?php get_template_part( 'template-parts/project-units', null, array( 'rows' => $p['rows'] ) ); ?>
+							<?php else : ?>
+								<?php hh_data_table( $p['cols'], $p['rows'] ); ?>
+							<?php endif; ?>
 							<?php hh_gallery( $p['gallery'], 'san-pham-' . $key ); ?>
 							<?php if ( defined( 'HH_SPECIAL_PAGES' ) && isset( HH_SPECIAL_PAGES[ $key ] ) && ! $resale ) : ?>
 								<p class="note"><a href="<?php echo esc_url( hh_special_url( $key ) ); ?>">So sánh <?php echo esc_html( hh_lcfirst( $p['label'] ) ); ?> các dự án đang mở bán tại Đà Nẵng →</a></p>
@@ -340,7 +344,8 @@ while ( have_posts() ) :
 						<?php hh_data_table( array( 'Đợt', 'Thời điểm', 'Tỷ lệ' ), $payment ); ?>
 					<?php endif; ?>
 				<?php else : ?>
-					<h2 class="block__title">Chính sách bán hàng &amp; thanh toán</h2>
+					<h2 class="block__title">Chính sách <?php echo esc_html( $title ); ?><?php echo hh_parse_vn_date( hh_meta( 'hh_p_offer_start' ) ) ? ' – <span class="block__title-em">áp dụng từ ' . esc_html( wp_date( 'd/m/Y', hh_parse_vn_date( hh_meta( 'hh_p_offer_start' ) ) ) ) . '</span>' : ''; // phpcs:ignore ?></h2>
+					<?php get_template_part( 'template-parts/project-offer' ); ?>
 					<h3 class="block__sub">Bảng giá</h3>
 					<?php if ( $price_table ) : ?>
 						<?php hh_data_table( array( 'Sản phẩm', 'Diện tích', 'Giá bán', 'Ghi chú' ), $price_table ); ?>

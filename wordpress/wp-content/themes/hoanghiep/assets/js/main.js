@@ -179,6 +179,38 @@
 		} );
 	}
 
+	// Các loại căn hộ: chọn loại bên trái, hiện layout bên phải.
+	$$( '.units' ).forEach( ( wrap ) => {
+		$$( '.units__item', wrap ).forEach( ( item ) => {
+			item.addEventListener( 'click', () => {
+				$$( '.units__item', wrap ).forEach( ( i ) => {
+					i.classList.toggle( 'is-active', i === item );
+					i.setAttribute( 'aria-selected', i === item ? 'true' : 'false' );
+				} );
+				$$( '.units__panel', wrap ).forEach( ( p ) => p.classList.toggle( 'is-active', p.dataset.unitPanel === item.dataset.unit ) );
+			} );
+		} );
+	} );
+
+	// Đồng hồ đếm ngược ưu đãi.
+	$$( '.countdown[data-deadline]' ).forEach( ( cd ) => {
+		const end = parseInt( cd.dataset.deadline, 10 ) * 1000;
+		const pad = ( n ) => String( n ).padStart( 2, '0' );
+		const tick = () => {
+			const left = Math.max( 0, end - Date.now() );
+			const sec = Math.floor( left / 1000 );
+			$( '[data-cd="d"]', cd ).textContent = pad( Math.floor( sec / 86400 ) );
+			$( '[data-cd="h"]', cd ).textContent = pad( Math.floor( ( sec % 86400 ) / 3600 ) );
+			$( '[data-cd="m"]', cd ).textContent = pad( Math.floor( ( sec % 3600 ) / 60 ) );
+			$( '[data-cd="s"]', cd ).textContent = pad( sec % 60 );
+			if ( ! left ) {
+				clearInterval( timer );
+			}
+		};
+		const timer = setInterval( tick, 1000 );
+		tick();
+	} );
+
 	// Bảng tính gập ở cuối trang dự án: link #tai-chinh mở ra.
 	const openCalc = () => {
 		const fold = document.querySelector( 'details#tai-chinh' );

@@ -80,7 +80,8 @@ function hh_project_schema() {
 			'fields' => array(
 				'hh_p_masterplan_img' => array( 'type' => 'image', 'label' => 'Ảnh mặt bằng tổng thể', 'half' => true ),
 				'hh_p_design_desc'    => array( 'type' => 'textarea', 'label' => 'Mô tả thiết kế', 'placeholder' => 'VD: Mỗi sàn 10 căn, 4 thang máy, thiết kế đón gió tự nhiên …' ),
-				'hh_p_floorplans'     => array( 'type' => 'gallery', 'label' => 'Ảnh mặt bằng căn hộ / tầng' ),
+				'hh_p_floorplans'     => array( 'type' => 'gallery', 'label' => 'Ảnh mặt bằng tầng', 'help' => 'Đặt tiêu đề mỗi ảnh là tên tầng (VD: Tầng 1, Tầng 8 – 19) – trang dự án hiện thành các tab, bấm ảnh để phóng to.' ),
+				'hh_p_unit_layouts'   => array( 'type' => 'gallery', 'label' => 'Ảnh layout từng loại căn', 'help' => 'Đặt tiêu đề ảnh trùng tên loại căn trong bảng "Căn hộ – các loại căn" (VD: Studio, Căn 2PN) hoặc xếp đúng thứ tự bảng.' ),
 			),
 		),
 		'dac-biet'  => array(
@@ -98,6 +99,11 @@ function hh_project_schema() {
 			'fields' => array(
 				'hh_p_price_table'   => array( 'type' => 'table', 'label' => 'Bảng giá', 'columns' => array( 'Sản phẩm', 'Diện tích', 'Giá bán', 'Ghi chú' ), 'placeholder' => "A-12.05 – 2PN | 68 m² | 3,35 tỷ | View sông\nB-08.10 – 3PN | 98 m² | 5,1 tỷ | Căn góc" ),
 				'hh_p_payment'       => array( 'type' => 'table', 'label' => 'Lịch thanh toán', 'columns' => array( 'Đợt', 'Thời điểm', 'Tỷ lệ' ), 'placeholder' => "Đợt 1 | Ký thỏa thuận đặt cọc | 10%\nĐợt 2 | Ký HĐMB (30 ngày) | 20%\nĐợt 3 | Nhận bàn giao | 65%\nĐợt 4 | Nhận sổ hồng | 5%" ),
+				'hh_p_offer_title'    => array( 'type' => 'text', 'label' => 'Ưu đãi nổi bật (dòng chữ lớn)', 'placeholder' => 'VD: Chiết khấu tới 12% khi thanh toán sớm', 'help' => 'Để trống: lấy dòng đầu của "Chính sách bán hàng & ưu đãi".' ),
+				'hh_p_offer_note'     => array( 'type' => 'text', 'label' => 'Ghi chú ưu đãi', 'placeholder' => 'VD: Áp dụng cho khách hàng thanh toán trước ngày 25/10/2026' ),
+				'hh_p_offer_start'    => array( 'type' => 'text', 'label' => 'Chính sách áp dụng từ ngày', 'placeholder' => 'VD: 26/09/2026', 'half' => true ),
+				'hh_p_offer_deadline' => array( 'type' => 'text', 'label' => 'Hạn ưu đãi (đồng hồ đếm ngược)', 'placeholder' => 'VD: 25/10/2026', 'half' => true, 'help' => 'Hết hạn tự ẩn đồng hồ.' ),
+				'hh_p_discount_table' => array( 'type' => 'table', 'label' => 'Bảng chiết khấu theo phương án thanh toán', 'columns' => array( 'Phương án', 'Hạn thanh toán', 'Chiết khấu' ), 'placeholder' => "Thanh toán 95% – nhận nhà khi nghiệm thu | Trước 25/10/2026 | 12%\nThanh toán 70% – còn lại theo tiến độ | Trước 25/10/2026 | 5%" ),
 				'hh_p_policy'        => array( 'type' => 'lines', 'label' => 'Chính sách bán hàng & ưu đãi', 'placeholder' => "Chiết khấu 3% khi thanh toán nhanh 50%\nTặng gói nội thất 100 triệu\nMiễn phí quản lý 2 năm" ),
 				'hh_p_loan'          => array( 'type' => 'textarea', 'label' => 'Hỗ trợ vay ngân hàng', 'placeholder' => 'VD: Vietcombank, BIDV hỗ trợ vay 70%, ân hạn gốc lãi 18 tháng …' ),
 				'hh_p_rental'        => array( 'type' => 'textarea', 'label' => 'Chương trình cho thuê / cam kết lợi nhuận (căn hộ dịch vụ, condotel)', 'placeholder' => 'VD: Cam kết lợi nhuận 8%/năm trong 3 năm đầu, chủ nhà được nghỉ miễn phí 15 đêm/năm …' ),
