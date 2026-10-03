@@ -572,11 +572,18 @@ test('card custody: hold / return with notes and photos, held-cards list with li
   assert.strictEqual(h.lan_cuoi.so_tien, 20000000);
   assert.strictEqual(h.so_ngay_giu, 3);
   assert.strictEqual(call('dashboard').heldCards, 1);
+  let lc = call('listCustomers').find((x) => x.id === c.id);
+  assert.strictEqual(lc.the_minh_giu.length, 1);
+  assert.strictEqual(lc.the_minh_giu[0].ten_the, 'VCB');
+  assert.strictEqual(lc.the_minh_giu[0].ngay_giu, '2026-09-28');
   // Trả thẻ, có ghi chú
   const back = call('holdCard', { the_id: card.id, hanh_dong: 'Trả thẻ', ngay: '2026-10-01', ghi_chu: 'trả tận tay, khách ký nhận' });
   call('uploadDoc', { khach_id: c.id, loai: 'Ảnh giữ / trả thẻ', the_id: card.id, ghi_chu: back.id, data: 'data:image/jpeg;base64,R0hJ' });
   assert.strictEqual(call('heldCards', { mode: 'Mình giữ' }).length, 0);
   assert.strictEqual(call('heldCards', { mode: 'Khách giữ' }).length, 1);
+  lc = call('listCustomers').find((x) => x.id === c.id);
+  assert.strictEqual(lc.the_minh_giu.length, 0);
+  assert.strictEqual(lc.the_khach_giu[0].ten_the, 'VCB');
   const hist = call('cardHistory', { the_id: card.id });
   assert.strictEqual(hist.logs.length, 2);
   assert.strictEqual(hist.logs[0].hanh_dong, 'Trả thẻ');

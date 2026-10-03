@@ -321,6 +321,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
           <input type="search" id="cust-q" placeholder="Tìm tên, SĐT…">
           <select id="cust-status"><option value="">Mọi trạng thái</option></select>
           <select id="cust-source"><option value="">Mọi nguồn</option></select>
+          <select id="cust-hold"><option value="">Mọi tình trạng thẻ</option><option value="minh">🔒 Mình đang giữ thẻ</option><option value="khach">Khách giữ thẻ</option><option value="none">Chưa có thẻ</option></select>
         </div>
         <div class="scroll-x"><table class="tbl stack" id="cust-table"></table></div>
       </div>
@@ -1436,18 +1437,30 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     $('#held-wrap').classList.toggle('hidden', S.custView !== 'held');
     if (S.custView === 'held') loadHeld();
   });
-  ['#cust-q', '#cust-status', '#cust-source'].forEach(function (s) { $(s).addEventListener('input', renderCustomers); });
+  ['#cust-q', '#cust-status', '#cust-source', '#cust-hold'].forEach(function (s) { $(s).addEventListener('input', renderCustomers); });
   ['#lead-status', '#lead-source'].forEach(function (s) { $(s).addEventListener('input', renderLeads); });
   function renderCustomers() {
-    var q = $('#cust-q').value.trim().toLowerCase(), st = $('#cust-status').value, src = $('#cust-source').value;
+    var q = $('#cust-q').value.trim().toLowerCase(), st = $('#cust-status').value, src = $('#cust-source').value, hold = $('#cust-hold').value;
     var rows = S.customers.filter(function (c) {
-      return (!st || c.trang_thai === st) && (!src || c.nguon === src) && (!q || (c.ten + ' ' + c.sdt + ' ' + (c.sdt2 || '')).toLowerCase().indexOf(q) >= 0);
-    }).sort(function (a, b) { return String(b.cap_nhat).localeCompare(String(a.cap_nhat)); });
-    $('#cust-table').innerHTML = '<thead><tr><th>Tên</th><th>SĐT</th><th>Trạng thái</th><th>Nguồn</th><th>Cập nhật</th></tr></thead><tbody>' +
+      var mg = (c.the_minh_giu || []).length, kg = (c.the_khach_giu || []).length;
+      var okHold = !hold || (hold === 'minh' && mg) || (hold === 'khach' && kg) || (hold === 'none' && !mg && !kg);
+      return okHold && (!st || c.trang_thai === st) && (!src || c.nguon === src) &&
+        (!q || (c.ten + ' ' + c.sdt + ' ' + (c.sdt2 || '') + ' ' + (c.the_minh_giu || []).concat(c.the_khach_giu || []).map(function (k) { return k.ten_the; }).join(' ')).toLowerCase().indexOf(q) >= 0);
+    }).sort(function (a, b) {
+      // khách mình đang giữ thẻ lên đầu
+      return ((b.the_minh_giu || []).length ? 1 : 0) - ((a.the_minh_giu || []).length ? 1 : 0) || String(b.cap_nhat).localeCompare(String(a.cap_nhat));
+    });
+    function holdCell(c) {
+      var mg = c.the_minh_giu || [], kg = c.the_khach_giu || [];
+      if (!mg.length && !kg.length) return '<span class="muted">—</span>';
+      return (mg.length ? '<div><span class="badge badge--bad">🔒 Mình giữ ' + mg.length + '</span> <small>' + mg.map(function (k) { return '<b>' + esc(k.ten_the) + '</b>' + (k.ngay_giu ? ' (từ ' + dm(k.ngay_giu) + ')' : ''); }).join(', ') + '</small></div>' : '') +
+        (kg.length ? '<div style="margin-top:3px"><span class="badge badge--muted">Khách giữ ' + kg.length + '</span> <small class="muted">' + kg.map(function (k) { return esc(k.ten_the); }).join(', ') + '</small></div>' : '');
+    }
+    $('#cust-table').innerHTML = '<thead><tr><th>Tên</th><th>SĐT</th><th>Giữ thẻ</th><th>Trạng thái</th><th>Nguồn</th><th>Cập nhật</th></tr></thead><tbody>' +
       (rows.length ? rows.map(function (c) {
         return '<tr class="click" data-cust="' + esc(c.id) + '"><td data-l="Tên"><b>' + esc(c.ten) + '</b></td><td data-l="SĐT">' + quickContact(c.sdt, true) + (c.sdt2 ? '<div style="margin-top:4px">' + quickContact(c.sdt2, true) + '</div>' : '') +
-          '</td><td data-l="Trạng thái">' + statusBadge(c.trang_thai) + '</td><td data-l="Nguồn">' + esc(c.nguon) + '</td><td data-l="Cập nhật" class="opt">' + dmy(c.cap_nhat) + '</td></tr>';
-      }).join('') : '<tr><td colspan="5" class="empty">Chưa có khách.</td></tr>') + '</tbody>';
+          '</td><td data-l="Giữ thẻ">' + holdCell(c) + '</td><td data-l="Trạng thái">' + statusBadge(c.trang_thai) + '</td><td data-l="Nguồn">' + esc(c.nguon) + '</td><td data-l="Cập nhật" class="opt">' + dmy(c.cap_nhat) + '</td></tr>';
+      }).join('') : '<tr><td colspan="6" class="empty">Chưa có khách.</td></tr>') + '</tbody>';
   }
   function leadItem(l) {
     if (!l.sdt) {

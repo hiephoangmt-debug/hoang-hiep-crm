@@ -257,7 +257,7 @@ function api(token, action, payload) {
   var handlers = {
     bootstrap: apiBootstrap_,
     dashboard: apiDashboard_,
-    listCustomers: function () { return readAll_('KhachHang'); },
+    listCustomers: apiListCustomers_,
     saveCustomer: apiSaveCustomer_,
     customerDetail: apiCustomerDetail_,
     listLeads: function () { return readAll_('LienHe').reverse(); },
@@ -382,6 +382,22 @@ function moneyOverview_(today) {
     tuan_nay: sum(weekFrom, today), tuan_truoc: sum(addDays_(weekFrom, -7), addDays_(today, -7)),
     thang_nay: months[0], thang_truoc: months[1], hai_thang_truoc: months[2]
   };
+}
+
+/** Danh sách khách kèm tình trạng giữ thẻ: thẻ mình đang giữ / thẻ khách giữ. */
+function apiListCustomers_() {
+  var byKhach = {};
+  readAll_('TheKhach').forEach(function (k) {
+    var g = byKhach[k.khach_id] || (byKhach[k.khach_id] = { minh: [], khach: [] });
+    var item = { ten_the: k.ten_the, ngay_giu: k.ngay_giu || '', ngay_tra: k.ngay_tra || '' };
+    if (k.giu_the === 'Mình giữ') g.minh.push(item); else g.khach.push(item);
+  });
+  return readAll_('KhachHang').map(function (c) {
+    var g = byKhach[c.id] || { minh: [], khach: [] };
+    c.the_minh_giu = g.minh;
+    c.the_khach_giu = g.khach;
+    return c;
+  });
 }
 
 function apiSaveCustomer_(c) {
