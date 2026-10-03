@@ -1675,7 +1675,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         : '<b>' + esc(k.ten_the) + '</b>' + (k.so_cuoi ? ' ****' + esc(k.so_cuoi) : '') +
           (k.ngay_tra ? ' · ↩️ đã trả <b>' + dmy(k.ngay_tra) + '</b>' : ' · khách tự giữ') +
           (k.hold_action === 'Trả thẻ' && k.hold_note ? '<br><small class="muted">📝 ' + esc(k.hold_note) + '</small>' : '') + (k.hold_action === 'Trả thẻ' ? photos(k) : '');
-      return '<div class="cardrow"><div class="cardrow__info">' + info + '</div>' +
+      return '<div class="cardrow">' + docImg(k.anh_id, 'cardrow__img', '💳') + '<div class="cardrow__info">' + info + '</div>' +
         (isMine ? '<button type="button" class="btn btn--sm" data-custhold="Trả thẻ" data-id="' + esc(k.id) + '">↩️ Trả</button>'
                 : '<button type="button" class="btn btn--ghost btn--sm" data-custhold="Nhận giữ" data-id="' + esc(k.id) + '">📥 Nhận giữ</button>') + '</div>';
     }
@@ -1706,7 +1706,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     }).join('');
     return (d.driveReady === false ? '<div class="advice" style="margin-top:12px">⚠️ ' + esc(d.driveHelp) + '</div>' : '') +
       custHoldHtml(d) +
-      '<h3>🪪 Căn cước công dân</h3><div class="docs">' + slot('CCCD mặt trước') + slot('CCCD mặt sau') + '</div>' +
+      '<h3>🪪 Căn cước công dân <span class="hint">· bấm vào ảnh để xem to, bấm lần nữa để đóng</span></h3><div class="docs">' + slot('CCCD mặt trước') + slot('CCCD mặt sau') + '</div>' +
       '<div class="row row--between" style="margin-top:14px"><h3 style="margin:0">💳 Thẻ của khách (' + d.cards.length + ')</h3>' +
       '<button type="button" class="btn btn--sm" data-card="new">+ Thêm thẻ</button></div>' +
       (cards || '<p class="muted">Chưa có thẻ. Ghi giao dịch là thẻ tự được thêm, hoặc bấm + Thêm thẻ.</p>');
