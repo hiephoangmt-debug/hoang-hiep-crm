@@ -227,6 +227,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       <button class="tab is-active" data-tab="home">Tổng quan</button>
       <button class="tab" data-tab="tx">Giao dịch</button>
       <button class="tab" data-tab="refund">Công nợ <span class="refund-name">C.Trâm</span> <span class="count hidden" id="refund-count"></span></button>
+      <button class="tab" data-tab="bills">🧾 Hoá đơn <span class="count hidden" id="bill-count"></span></button>
       <button class="tab" data-tab="remind">Nhắc lịch <span class="count hidden" id="remind-count"></span></button>
       <button class="tab" data-tab="customers">Khách hàng <span class="count hidden" id="lead-count"></span></button>
       <button class="tab" data-tab="report">Báo cáo</button>
@@ -329,6 +330,22 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       </div>
       <h2>📌 Các lần kết số dư</h2>
       <div id="refund-closings"></div>
+    </section>
+
+    <!-- Ghép hoá đơn ví trả sau -->
+    <section data-view="bills" class="hidden">
+      <p class="muted">Người <b>A</b> có hoá đơn (điện, nước, MoMo, bảo hiểm…) → người <b>B</b> dùng <b>ví trả sau</b> thanh toán hoá đơn đó → A chuyển lại cho mình (100% − phí A) → mình chuyển cho B (100% − phí A − phí mình). <b>Doanh thu = phần chênh lệch.</b></p>
+      <div class="row row--between" style="margin-bottom:10px">
+        <div class="seg" id="bill-filter">
+          <button data-v="open" class="is-active">Đang xử lý</button>
+          <button data-v="wait">Chờ ghép</button>
+          <button data-v="done">Hoàn tất (tháng này)</button>
+          <button data-v="all">Tất cả</button>
+        </div>
+        <button class="btn btn--accent btn--sm" data-act="new-bill">+ Hoá đơn</button>
+      </div>
+      <div class="kpis" id="bill-kpis"></div>
+      <div id="bill-list"></div>
     </section>
 
     <!-- Nhắc lịch -->
@@ -571,6 +588,43 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   </div>
 </div>
 
+<!-- Modal hoá đơn -->
+<div class="modal hidden" id="bill-modal">
+  <form class="modal__box" id="bill-form" autocomplete="off">
+    <div class="modal__head"><h2 id="bill-title">🧾 Hoá đơn</h2><button type="button" class="x" data-close>×</button></div>
+    <input type="hidden" name="id"><input type="hidden" name="a_khach_id"><input type="hidden" name="b_khach_id">
+    <div class="form-grid">
+      <label class="f">Ngày<input type="date" name="ngay" required></label>
+      <label class="f">Loại hoá đơn<select name="loai_hd"></select></label>
+      <label class="f">Mã hoá đơn / mã KH<input name="ma_hd" placeholder="VD: PE0123456"></label>
+      <label class="f">Số tiền hoá đơn <span class="hint">5tr · 5.000</span><input name="so_tien_text" required inputmode="decimal"></label>
+    </div>
+    <h3 style="margin:14px 0 6px">👤 Người A – có hoá đơn</h3>
+    <div class="form-grid">
+      <label class="f">Tên<input name="a_ten" list="dl-customers" required></label>
+      <label class="f">SĐT<input name="a_sdt" inputmode="tel"></label>
+      <label class="f">Phí A (%) <span class="hint">A được giảm, chuyển lại cho mình phần còn lại</span><input name="phi_a" inputmode="decimal" value="3"></label>
+      <label class="f">A đã chuyển cho mình ngày<input type="date" name="a_ck_ngay"></label>
+    </div>
+    <h3 style="margin:14px 0 6px">💳 Người B – cần rút tiền bằng ví trả sau <span class="hint">(để trống nếu chưa ghép)</span></h3>
+    <div class="form-grid">
+      <label class="f">Tên<input name="b_ten" list="dl-customers"></label>
+      <label class="f">SĐT<input name="b_sdt" inputmode="tel"></label>
+      <label class="f">Ví trả sau của B<select name="vi_b"></select></label>
+      <label class="f">Phí của mình (%)<input name="phi_minh" inputmode="decimal" value="2"></label>
+      <label class="f">B đã thanh toán hoá đơn ngày<input type="date" name="b_tt_ngay"></label>
+      <label class="f">Mình đã chuyển cho B ngày<input type="date" name="b_ck_ngay"></label>
+      <label class="f full">Ghi chú<input name="ghi_chu"></label>
+      <label class="f full" style="display:flex;gap:8px;align-items:center"><input type="checkbox" name="huy" style="width:auto"> Huỷ lần ghép này</label>
+      <div class="full calc" id="bill-calc" style="grid-template-columns:1fr"></div>
+    </div>
+    <div class="row row--between" style="margin-top:14px">
+      <button type="button" class="btn btn--danger hidden" data-act="delete-bill">Xóa</button>
+      <div class="row" style="margin-left:auto"><button type="button" class="btn btn--ghost" data-close>Hủy</button><button type="submit" class="btn">Lưu</button></div>
+    </div>
+  </form>
+</div>
+
 <!-- Modal khách -->
 <div class="modal hidden" id="cust-modal">
   <div class="modal__box">
@@ -809,7 +863,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     S.tab = tab;
     $$('.tab').forEach(function (t) { t.classList.toggle('is-active', t.dataset.tab === tab); });
     $$('[data-view]').forEach(function (v) { v.classList.toggle('hidden', v.dataset.view !== tab); });
-    ({ home: loadHome, tx: loadTx, refund: loadRefund, remind: loadRemind, customers: loadCustomers, report: loadReport, settings: renderSettings })[tab]();
+    ({ home: loadHome, tx: loadTx, bills: loadBills, refund: loadRefund, remind: loadRemind, customers: loadCustomers, report: loadReport, settings: renderSettings })[tab]();
     window.scrollTo(0, 0);
   }
 
@@ -827,7 +881,9 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       '<div class="mcard__row"><span>Giao dịch (đáo / rút)</span><b>' + cur.so_gd + ' (' + cur.so_dao + ' / ' + cur.so_rut + ')</b></div>' +
       '<div class="mcard__row"><span>Phí khách</span><b>' + money(cur.tien_phi) + '</b></div>' +
       '<div class="mcard__row"><span>Phí máy</span><b>' + money(cur.chi_phi) + '</b></div>' +
-      '<div class="mcard__row"><span>Phí của mình</span><b class="pos">' + money(cur.loi_nhuan) + '</b></div>' +
+      '<div class="mcard__row"><span>Phí của mình (thẻ)</span><b class="pos">' + money(cur.loi_nhuan) + '</b></div>' +
+      '<div class="mcard__row"><span>🧾 Ghép hoá đơn (' + (cur.hd_so || 0) + ' HĐ)</span><b class="pos">' + money(cur.hd_lai || 0) + '</b></div>' +
+      '<div class="mcard__row" style="border-top:1px solid var(--line)"><span><b>Tổng lãi</b></span><b class="pos">' + money(cur.tong_lai || cur.loi_nhuan) + '</b></div>' +
       '<div class="mcard__row muted"><span>' + prevLabel.charAt(0).toUpperCase() + prevLabel.slice(1) + '</span><span>' + money(prev.so_tien) + ' · lãi ' + money(prev.loi_nhuan) + '</span></div>' +
       '</div></div>';
   }
@@ -1487,6 +1543,119 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     if (e.target.closest('[data-act=delete-pay]')) {
       if (!confirm('Xóa khoản tiền này?')) return;
       call('deletePayment', { id: payForm.elements.id.value }).then(function () { closeModals(); toast('Đã xóa'); show(S.tab); }).catch(fail);
+    }
+  });
+
+  /* ---------- Ghép hoá đơn ví trả sau ---------- */
+  S.billMode = 'open';
+  function billBadge(st) {
+    var cls = { 'Chờ ghép': 'warn', 'Chờ B thanh toán': 'warn', 'Chờ đối soát': 'bad', 'Hoàn tất': 'ok', 'Huỷ': 'muted' }[st] || '';
+    return '<span class="badge badge--' + cls + '">' + esc(st) + '</span>';
+  }
+  function loadBills() {
+    var t = S.boot.today, p = parts(t);
+    var q = { mode: S.billMode };
+    if (S.billMode === 'done') { q.from = ymd(p.y, p.m, 1); q.to = t; }
+    call('listBills', q).then(function (r) {
+      S.bills = r.rows;
+      var st = r.stats;
+      $('#bill-kpis').innerHTML = kpi('Hoá đơn chờ ghép', st.cho_ghep.so + ' · ' + short(st.cho_ghep.tien)) +
+        kpi('Đang xử lý', st.dang_xu_ly.so + ' · ' + short(st.dang_xu_ly.tien)) +
+        kpi('Hoàn tất tháng này', st.thang_nay.so + ' · ' + short(st.thang_nay.tien)) +
+        kpi('Doanh thu tháng này', money(st.thang_nay.lai), 'pos');
+      setCount('#bill-count', st.cho_ghep.so + st.dang_xu_ly.so);
+      $('#bill-list').innerHTML = r.rows.length ? r.rows.map(function (b) {
+        function step(done, label, amt, field) {
+          return '<div class="mcard__row"><span>' + (done ? '✅ ' : '⬜ ') + label + '</span><span><b>' + money(amt) + '</b>' +
+            (done ? ' <small class="muted">' + dm(done) + '</small>' : (field ? ' <button type="button" class="btn btn--ghost btn--sm" data-billdone="' + field + '" data-id="' + esc(b.id) + '">✔ Xong</button>' : '')) + '</span></div>';
+        }
+        return '<div class="item ' + (b.trang_thai === 'Hoàn tất' ? 'item--done' : b.trang_thai === 'Chờ đối soát' ? 'item--late' : 'item--due') + '">' +
+          '<div class="item__head"><div><div class="item__name">' + esc(b.loai_hd) + (b.ma_hd ? ' · ' + esc(b.ma_hd) : '') + ' · ' + money(b.so_tien) + '</div>' +
+          '<div class="item__meta">' + dmy(b.ngay) + (b.ghi_chu ? ' · ' + esc(b.ghi_chu) : '') + '</div></div>' + billBadge(b.trang_thai) + '</div>' +
+          '<div style="margin-top:6px;font-size:.9rem">' +
+          '<div class="mcard__row"><span>👤 A: <b>' + esc(b.a_ten) + '</b> ' + quickContact(b.a_sdt) + '</span><span class="muted">phí A ' + pct(b.phi_a) + '</span></div>' +
+          (b.b_ten ? '<div class="mcard__row"><span>💳 B: <b>' + esc(b.b_ten) + '</b>' + (b.vi_b ? ' · ' + esc(b.vi_b) : '') + ' ' + quickContact(b.b_sdt) + '</span><span class="muted">phí mình ' + pct(b.phi_minh) + '</span></div>'
+                   : '<div class="mcard__row"><span class="muted">Chưa có người rút (B)</span><button type="button" class="btn btn--sm" data-billedit="' + esc(b.id) + '">+ Ghép người B</button></div>') +
+          (b.b_ten ? step(b.b_tt_ngay, 'B thanh toán hoá đơn bằng ví trả sau', b.so_tien, 'b_tt_ngay') : '') +
+          step(b.a_ck_ngay, 'A chuyển lại cho mình (' + pct(100 - b.phi_a) + ')', b.a_chuyen, b.b_ten && b.b_tt_ngay ? 'a_ck_ngay' : '') +
+          (b.b_ten ? step(b.b_ck_ngay, 'Mình chuyển cho B (' + pct(100 - b.phi_a - b.phi_minh) + ')', b.b_nhan, b.b_tt_ngay ? 'b_ck_ngay' : '') : '') +
+          '<div class="mcard__row" style="border-top:1px solid var(--line)"><span><b>Doanh thu của mình</b></span><b class="pos">' + money(b.doanh_thu) + '</b></div>' +
+          '</div><div class="item__actions"><button type="button" class="btn btn--ghost btn--sm" data-billedit="' + esc(b.id) + '">Sửa</button></div></div>';
+      }).join('') : '<div class="empty card">Không có hoá đơn nào.</div>';
+    }).catch(fail);
+  }
+  $('#bill-filter').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    S.billMode = b.dataset.v;
+    $$('#bill-filter button').forEach(function (x) { x.classList.toggle('is-active', x === b); });
+    loadBills();
+  });
+  var billForm = $('#bill-form');
+  function openBill(b) {
+    billForm.reset();
+    var f = billForm.elements;
+    b = b || {};
+    f.loai_hd.innerHTML = (S.boot.billTypes || []).map(function (v) { return '<option>' + esc(v) + '</option>'; }).join('');
+    f.vi_b.innerHTML = '<option value="">— chọn ví —</option>' + (S.boot.paylaterWallets || []).map(function (v) { return '<option>' + esc(v) + '</option>'; }).join('');
+    ['id', 'a_khach_id', 'b_khach_id', 'ma_hd', 'a_ten', 'a_sdt', 'b_ten', 'b_sdt', 'ghi_chu', 'a_ck_ngay', 'b_tt_ngay', 'b_ck_ngay'].forEach(function (k) { f[k].value = b[k] || ''; });
+    f.ngay.value = b.ngay || S.boot.today;
+    f.loai_hd.value = b.loai_hd || 'Hoá đơn điện';
+    f.vi_b.value = b.vi_b || '';
+    f.so_tien_text.value = b.so_tien ? amountText(b.so_tien) : '';
+    f.phi_a.value = b.phi_a != null && b.phi_a !== '' ? b.phi_a : 3;
+    f.phi_minh.value = b.phi_minh != null && b.phi_minh !== '' ? b.phi_minh : 2;
+    f.huy.checked = !!b.huy;
+    $('#bill-title').textContent = b.id ? '🧾 Sửa hoá đơn' : '🧾 Thêm hoá đơn';
+    $('[data-act=delete-bill]').classList.toggle('hidden', !b.id);
+    updateBill();
+    $('#bill-modal').classList.remove('hidden');
+  }
+  function updateBill() {
+    var f = billForm.elements, amt = parseAmount(f.so_tien_text.value), pa = num(f.phi_a.value), pm = num(f.phi_minh.value);
+    var aCk = Math.round(amt * (100 - pa) / 100), bNhan = Math.round(amt * (100 - pa - pm) / 100);
+    $('#bill-calc').innerHTML = 'Hoá đơn <strong>' + money(amt) + '</strong> (B thanh toán bằng ví trả sau)<br>' +
+      '→ A chuyển lại cho mình ' + pct(100 - pa) + ' = <strong>' + money(aCk) + '</strong> <span class="muted">(A được giảm ' + money(amt - aCk) + ')</span><br>' +
+      '→ Mình chuyển cho B ' + pct(100 - pa - pm) + ' = <strong>' + money(bNhan) + '</strong> <span class="muted">(B chịu phí ' + pct(pa + pm) + ')</span><br>' +
+      '💰 <b>Doanh thu của mình</b> = ' + money(aCk) + ' − ' + money(bNhan) + ' = <strong class="pos">' + money(aCk - bNhan) + '</strong>';
+  }
+  billForm.addEventListener('input', function (e) {
+    var f = billForm.elements;
+    // nhận ra khách cũ theo tên / SĐT cho cả A và B
+    ['a', 'b'].forEach(function (k) {
+      if (e.target.name === k + '_ten') { var c = S.boot.customers.filter(function (x) { return normName(x.ten) === normName(e.target.value); })[0]; f[k + '_khach_id'].value = c ? c.id : ''; if (c && c.sdt && !f[k + '_sdt'].value) f[k + '_sdt'].value = c.sdt; }
+      if (e.target.name === k + '_sdt') { var ph = phoneNorm(e.target.value); var c2 = ph.length >= 10 ? S.boot.customers.filter(function (x) { return x.sdt === ph || x.sdt2 === ph; })[0] : null; if (c2) { f[k + '_khach_id'].value = c2.id; f[k + '_ten'].value = c2.ten; } }
+    });
+    updateBill();
+  });
+  function billPayload() {
+    var f = billForm.elements;
+    return { id: f.id.value, ngay: f.ngay.value, loai_hd: f.loai_hd.value, ma_hd: f.ma_hd.value, so_tien: parseAmount(f.so_tien_text.value),
+      a_khach_id: f.a_khach_id.value, a_ten: f.a_ten.value.trim(), a_sdt: f.a_sdt.value.trim(), phi_a: num(f.phi_a.value), a_ck_ngay: f.a_ck_ngay.value,
+      b_khach_id: f.b_khach_id.value, b_ten: f.b_ten.value.trim(), b_sdt: f.b_sdt.value.trim(), vi_b: f.vi_b.value, phi_minh: num(f.phi_minh.value),
+      b_tt_ngay: f.b_tt_ngay.value, b_ck_ngay: f.b_ck_ngay.value, ghi_chu: f.ghi_chu.value, huy: f.huy.checked };
+  }
+  billForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var pl = billPayload();
+    if (!pl.so_tien) return toast('Số tiền chưa đúng', true);
+    call('saveBill', pl).then(function (b) { $('#bill-modal').classList.add('hidden'); toast('Đã lưu · ' + b.trang_thai); reboot().then(function () { show(S.tab); }); }).catch(fail);
+  });
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-act=new-bill]');
+    if (a) { openBill(); return; }
+    var ed = e.target.closest('[data-billedit]');
+    if (ed) { openBill((S.bills || []).filter(function (x) { return x.id === ed.dataset.billedit; })[0]); return; }
+    var dn = e.target.closest('[data-billdone]');
+    if (dn) {
+      var b = (S.bills || []).filter(function (x) { return x.id === dn.dataset.id; })[0];
+      if (!b) return;
+      var upd = Object.assign({}, b); upd[dn.dataset.billdone] = S.boot.today;
+      call('saveBill', upd).then(function (r) { toast('Đã cập nhật · ' + r.trang_thai); loadBills(); }).catch(fail);
+      return;
+    }
+    if (e.target.closest('[data-act=delete-bill]')) {
+      if (!confirm('Xóa hoá đơn này?')) return;
+      call('deleteBill', { id: billForm.elements.id.value }).then(function () { $('#bill-modal').classList.add('hidden'); toast('Đã xóa'); loadBills(); }).catch(fail);
     }
   });
 

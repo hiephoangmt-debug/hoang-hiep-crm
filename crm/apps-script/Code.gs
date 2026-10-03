@@ -13,6 +13,8 @@
  *   TaiLieu   – ảnh CCCD / ảnh thẻ; file ảnh nằm riêng tư trong Google Drive của chủ CRM
  *   GiuThe    – lịch sử nhận giữ / trả thẻ của khách (ngày, ghi chú, ảnh lúc giao nhận)
  *   NhatKy    – lịch sử thêm / sửa / xóa giao dịch, tiền C.Trâm, chốt sổ (trước → sau)
+ *   HoaDon    – ghép hoá đơn: người A có hoá đơn (điện, nước, MoMo, bảo hiểm…), người B dùng ví trả sau thanh toán,
+ *               A chuyển lại cho mình (100% − phí A), mình chuyển cho B (100% − phí A − phí mình); doanh thu = chênh lệch.
  *
  * Công nợ với C.Trâm: mỗi giao dịch phát sinh tiền hoàn = số tiền − phí máy (tien_hoan = so_tien − chi_phi),
  *   đến hạn ngày GD + 1. Tiền C.Trâm chuyển/ứng (sheet DoiSoat) trừ dần vào các khoản cũ nhất trước.
@@ -32,12 +34,16 @@ var SHEETS = {
   TheKhach: ['id', 'khach_id', 'ten_the', 'ngan_hang', 'so_cuoi', 'han_muc', 'ngay_sao_ke', 'ngay_dao', 'ghi_chu', 'tao_luc', 'cap_nhat',
     'chu_the', 'quan_he', 'loai_the', 'giu_the', 'ngay_giu', 'ngay_tra'],
   GiuThe: ['id', 'the_id', 'khach_id', 'hanh_dong', 'ngay', 'ghi_chu', 'tao_luc'],
+  HoaDon: ['id', 'ngay', 'loai_hd', 'ma_hd', 'so_tien', 'a_khach_id', 'a_ten', 'a_sdt', 'phi_a', 'b_khach_id', 'b_ten', 'b_sdt', 'vi_b',
+    'phi_minh', 'a_chuyen', 'b_nhan', 'doanh_thu', 'b_tt_ngay', 'a_ck_ngay', 'b_ck_ngay', 'huy', 'ghi_chu', 'tao_luc', 'cap_nhat'],
   NhatKy: ['id', 'thoi_gian', 'doi_tuong', 'hanh_dong', 'ref_id', 'ngay', 'mo_ta', 'truoc', 'sau'],
   TaiLieu: ['id', 'khach_id', 'loai', 'the_id', 'file_id', 'ten_file', 'ghi_chu', 'tao_luc'],
   KetSo: ['id', 'ngay', 'tu_ngay', 'so_du_truoc', 'so_gd', 'so_tien', 'chi_phi', 'phat_sinh', 'da_chuyen', 'so_du', 'ghi_chu', 'tao_luc', 'nhap_tay']
 };
 // Sheet thêm ở bản cập nhật: tự tạo khi cần, không phải chạy lại setup().
-var AUTO_SHEETS = ['DoiSoat', 'KetSo', 'TheKhach', 'TaiLieu', 'GiuThe', 'NhatKy'];
+var AUTO_SHEETS = ['DoiSoat', 'KetSo', 'TheKhach', 'TaiLieu', 'GiuThe', 'NhatKy', 'HoaDon'];
+var BILL_TYPES = ['Hoá đơn điện', 'Hoá đơn nước', 'Nạp ví MoMo', 'Thanh toán bảo hiểm', 'Internet / truyền hình', 'Học phí', 'Khác'];
+var PAYLATER_WALLETS = ['MoMo Ví Trả Sau', 'SPayLater (Shopee)', 'Kredivo', 'Home PayLater', 'Fundiin', 'ZaloPay trả sau', 'Khác'];
 var DOC_TYPES = ['CCCD mặt trước', 'CCCD mặt sau', 'Ảnh thẻ', 'CCCD chủ thẻ', 'Ảnh giữ / trả thẻ', 'Khác'];
 // Loại ảnh lưu nhiều tấm (không thay ảnh cũ).
 var MULTI_DOC_TYPES = ['Khác', 'Ảnh giữ / trả thẻ'];
@@ -50,9 +56,10 @@ var CARD_RELATIONS = ['Chính chủ', 'Vợ', 'Chồng', 'Bố', 'Mẹ', 'Con', 
 
 // Cột lưu dạng chữ để Sheets không tự đổi ngày/số (mất số 0 đầu SĐT).
 var TEXT_COLUMNS = ['id', 'sdt', 'ngay', 'thoi_gian', 'tao_luc', 'cap_nhat', 'key', 'han', 'khach_id', 'phi_may_text',
-  'ngay_hoan', 'hoan_luc', 'tu_ngay', 'so_cuoi', 'file_id', 'the_id', 'sdt2', 'thoi_gian', 'ref_id'];
+  'ngay_hoan', 'hoan_luc', 'tu_ngay', 'so_cuoi', 'file_id', 'the_id', 'sdt2', 'thoi_gian', 'ref_id',
+  'ma_hd', 'a_sdt', 'b_sdt', 'a_khach_id', 'b_khach_id', 'b_tt_ngay', 'a_ck_ngay', 'b_ck_ngay'];
 // Cột ngày dạng yyyy-MM-dd (nếu Sheets lỡ đổi thành Date thì đọc lại đúng dạng).
-var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan', 'tu_ngay'];
+var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan', 'tu_ngay', 'b_tt_ngay', 'a_ck_ngay', 'b_ck_ngay'];
 // Kiểu tiền với C.Trâm. "Ứng trước"/"Hoàn tiền" làm giảm nợ; "Mình trả lại"/"Nợ cũ" làm tăng nợ;
 // "Điều chỉnh số dư" nhập được số âm (âm = tăng nợ).
 var PAYMENT_TYPES = ['Ứng trước', 'Hoàn tiền', 'Mình trả lại', 'Nợ cũ', 'Điều chỉnh số dư'];
@@ -278,6 +285,9 @@ function api(token, action, payload) {
     previewClose: function (p) { return statementAt_(p.ngay); },
     periodSummary: apiPeriodSummary_,
     auditLog: apiAuditLog_,
+    listBills: apiListBills_,
+    saveBill: apiSaveBill_,
+    deleteBill: apiDeleteBill_,
     congNoDetail: function (p) { return congNoDetail_(p.from, p.to); },
     exportCongNo: apiExportCongNo_,
     listCards: function (p) { return cardsOf_(p.khach_id); },
@@ -317,6 +327,8 @@ function apiBootstrap_() {
     customerStatuses: CUSTOMER_STATUSES,
     cardRelations: CARD_RELATIONS,
     cardBrands: CARD_BRANDS,
+    billTypes: BILL_TYPES,
+    paylaterWallets: PAYLATER_WALLETS,
     cards: distinct('the'),
     machines: distinct('may'),
     customers: readAll_('KhachHang').map(function (c) { return { id: c.id, ten: c.ten, sdt: c.sdt, sdt2: c.sdt2 || '' }; }),
@@ -366,9 +378,15 @@ function apiDashboard_() {
  */
 function moneyOverview_(today) {
   var all = readAll_('GiaoDich');
+  var bills = readAll_('HoaDon').map(billCalc_).filter(function (b) { return b.trang_thai === 'Hoàn tất'; });
   function sum(from, to) {
     var s = summarize_(all.filter(function (t) { return t.ngay >= from && t.ngay <= to; }));
     s.from = from; s.to = to;
+    var hb = bills.filter(function (b) { return b.ngay >= from && b.ngay <= to; });
+    s.hd_so = hb.length;
+    s.hd_tien = hb.reduce(function (a, b) { return a + b.so_tien; }, 0);
+    s.hd_lai = hb.reduce(function (a, b) { return a + b.doanh_thu; }, 0);
+    s.tong_lai = s.loi_nhuan + s.hd_lai;
     return s;
   }
   var p = parseYmd_(today);
@@ -988,6 +1006,93 @@ function apiDeleteDoc_(p) {
     var d = readAll_('TaiLieu').filter(function (x) { return x.id === p.id; })[0];
     if (d) trashDoc_(d);
     return true;
+  });
+}
+
+/* Ghép hoá đơn – ví trả sau ------------------------------------------- */
+
+/** Tính tiền và trạng thái của một lần ghép hoá đơn. */
+function billCalc_(b) {
+  var amt = Number(b.so_tien) || 0, pa = Number(b.phi_a) || 0, pm = Number(b.phi_minh) || 0;
+  b.so_tien = amt; b.phi_a = pa; b.phi_minh = pm;
+  b.a_chuyen = Math.round(amt * (100 - pa) / 100);          // A chuyển lại cho mình
+  b.b_nhan = Math.round(amt * (100 - pa - pm) / 100);       // mình chuyển cho B
+  b.doanh_thu = b.a_chuyen - b.b_nhan;                      // phí của mình
+  b.giam_a = amt - b.a_chuyen;                              // A được giảm
+  b.phi_b = amt - b.b_nhan;                                 // B chịu tổng phí
+  b.trang_thai = b.huy ? 'Huỷ' : !b.b_ten ? 'Chờ ghép' : !b.b_tt_ngay ? 'Chờ B thanh toán'
+    : (b.a_ck_ngay && b.b_ck_ngay) ? 'Hoàn tất' : 'Chờ đối soát';
+  return b;
+}
+
+function apiListBills_(p) {
+  p = p || {};
+  var rows = readAll_('HoaDon').map(billCalc_);
+  var mode = p.mode || 'open';
+  rows = rows.filter(function (b) {
+    if (mode === 'open') return b.trang_thai !== 'Hoàn tất' && b.trang_thai !== 'Huỷ';
+    if (mode === 'done') return b.trang_thai === 'Hoàn tất' && (!p.from || b.ngay >= p.from) && (!p.to || b.ngay <= p.to);
+    if (mode === 'wait') return b.trang_thai === 'Chờ ghép';
+    return (!p.from || b.ngay >= p.from) && (!p.to || b.ngay <= p.to);
+  }).sort(function (a, b) { return a.ngay < b.ngay ? 1 : a.ngay > b.ngay ? -1 : String(b.tao_luc).localeCompare(String(a.tao_luc)); });
+  var all = readAll_('HoaDon').map(billCalc_);
+  var t = parseYmd_(todayStr_()), mFrom = ymd_(t.y, t.m, 1);
+  function agg(list) { return { so: list.length, tien: list.reduce(function (a, b) { return a + b.so_tien; }, 0), lai: list.reduce(function (a, b) { return a + b.doanh_thu; }, 0) }; }
+  return {
+    rows: rows,
+    stats: {
+      cho_ghep: agg(all.filter(function (b) { return b.trang_thai === 'Chờ ghép'; })),
+      dang_xu_ly: agg(all.filter(function (b) { return b.trang_thai === 'Chờ B thanh toán' || b.trang_thai === 'Chờ đối soát'; })),
+      thang_nay: agg(all.filter(function (b) { return b.trang_thai === 'Hoàn tất' && b.ngay >= mFrom; }))
+    }
+  };
+}
+
+function billText_(b) {
+  return fmtDmy_(b.ngay) + ' · ' + b.loai_hd + (b.ma_hd ? ' ' + b.ma_hd : '') + ' · ' + fmtMoney_(b.so_tien) + ' · A: ' + b.a_ten + ' (' + b.phi_a + '%)' +
+    (b.b_ten ? ' · B: ' + b.b_ten + (b.vi_b ? ' – ' + b.vi_b : '') : '') + ' · mình ' + b.phi_minh + '% = ' + fmtMoney_(b.doanh_thu) + ' · ' + b.trang_thai;
+}
+
+function apiSaveBill_(x) {
+  var ngay = String(x.ngay || '');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(ngay)) throw new Error('Ngày không hợp lệ.');
+  var amt = Number(x.so_tien);
+  if (!(amt > 0)) throw new Error('Số tiền hoá đơn phải lớn hơn 0.');
+  var pa = Number(x.phi_a) || 0, pm = Number(x.phi_minh) || 0;
+  if (pa < 0 || pm < 0 || pa + pm >= 100) throw new Error('Phí không hợp lệ.');
+  if (!String(x.a_ten || '').trim()) throw new Error('Nhập người có hoá đơn (A).');
+  function okDate(v) { v = String(v || ''); return /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : ''; }
+  return withLock_(function () {
+    var a = resolveCustomer_({ khach_id: x.a_khach_id, ten_khach: x.a_ten, sdt: x.a_sdt });
+    var hasB = String(x.b_ten || '').trim() || String(x.b_sdt || '').trim();
+    var b = hasB ? resolveCustomer_({ khach_id: x.b_khach_id, ten_khach: x.b_ten || x.b_sdt, sdt: x.b_sdt }) : null;
+    var obj = {
+      ngay: ngay, loai_hd: BILL_TYPES.indexOf(x.loai_hd) >= 0 ? x.loai_hd : (String(x.loai_hd || '').trim() || 'Khác'), ma_hd: String(x.ma_hd || '').trim(),
+      so_tien: amt, a_khach_id: a.id, a_ten: a.ten, a_sdt: a.sdt || '', phi_a: pa,
+      b_khach_id: b ? b.id : '', b_ten: b ? b.ten : '', b_sdt: b ? (b.sdt || '') : '', vi_b: b ? String(x.vi_b || '').trim() : '',
+      phi_minh: pm, b_tt_ngay: b ? okDate(x.b_tt_ngay) : '', a_ck_ngay: okDate(x.a_ck_ngay), b_ck_ngay: b ? okDate(x.b_ck_ngay) : '',
+      huy: x.huy ? 'x' : '', ghi_chu: String(x.ghi_chu || '').trim(), cap_nhat: nowStr_()
+    };
+    billCalc_(obj);
+    if (x.id) {
+      var old = readAll_('HoaDon').filter(function (r) { return r.id === x.id; })[0];
+      updateObj_('HoaDon', x.id, obj); obj.id = x.id;
+      audit_('Hoá đơn', 'Sửa', obj.id, ngay, billText_(obj), old ? billText_(billCalc_(old)) : '', billText_(obj));
+    } else {
+      obj.id = newId_(); obj.tao_luc = obj.cap_nhat;
+      appendObj_('HoaDon', obj);
+      audit_('Hoá đơn', 'Thêm', obj.id, ngay, billText_(obj), '', billText_(obj));
+    }
+    return obj;
+  });
+}
+
+function apiDeleteBill_(p) {
+  return withLock_(function () {
+    var old = readAll_('HoaDon').filter(function (r) { return r.id === p.id; })[0];
+    var ok = deleteObj_('HoaDon', p.id);
+    if (ok && old) audit_('Hoá đơn', 'Xóa', old.id, old.ngay, billText_(billCalc_(old)), billText_(old), '');
+    return ok;
   });
 }
 

@@ -696,6 +696,38 @@ test('audit log of changes and Excel-like detailed ledger with export to a sheet
   assert.strictEqual(sh._rows[sh._rows.length - 1][1], 'TỔNG');
 });
 
+test('bill matching (ví trả sau): A has a 5tr bill, B pays it with a pay-later wallet; revenue = 97% − 95%', () => {
+  const { call } = fresh('2026-10-05');
+  // Hoá đơn của A, chưa có người rút
+  const b0 = call('saveBill', { ngay: '2026-10-05', loai_hd: 'Hoá đơn điện', ma_hd: 'PE0123', so_tien: 5000000, a_ten: 'Người A', a_sdt: '0905000001', phi_a: 3, phi_minh: 2 });
+  assert.strictEqual(b0.trang_thai, 'Chờ ghép');
+  assert.strictEqual(b0.a_chuyen, 4850000);
+  assert.strictEqual(b0.b_nhan, 4750000);
+  assert.strictEqual(b0.doanh_thu, 100000);
+  assert.strictEqual(call('listBills', { mode: 'wait' }).rows.length, 1);
+  // Ghép người B
+  let b = call('saveBill', Object.assign({}, b0, { b_ten: 'Người B', b_sdt: '0905000002', vi_b: 'MoMo Ví Trả Sau' }));
+  assert.strictEqual(b.trang_thai, 'Chờ B thanh toán');
+  b = call('saveBill', Object.assign({}, b, { b_tt_ngay: '2026-10-05' }));
+  assert.strictEqual(b.trang_thai, 'Chờ đối soát');
+  b = call('saveBill', Object.assign({}, b, { a_ck_ngay: '2026-10-05', b_ck_ngay: '2026-10-05' }));
+  assert.strictEqual(b.trang_thai, 'Hoàn tất');
+  // A và B thành khách trong CRM
+  const names = call('listCustomers').map((c) => c.ten).sort();
+  assert.deepStrictEqual(JSON.parse(JSON.stringify(names)), ['Người A', 'Người B']);
+  const r = call('listBills', { mode: 'all' });
+  assert.strictEqual(r.stats.thang_nay.so, 1);
+  assert.strictEqual(r.stats.thang_nay.lai, 100000);
+  const m = call('dashboard').money;
+  assert.strictEqual(m.hom_nay.hd_lai, 100000);
+  assert.strictEqual(m.thang_nay.hd_so, 1);
+  assert.strictEqual(m.thang_nay.tong_lai, 100000);
+  assert.throws(() => call('saveBill', { ngay: '2026-10-05', so_tien: 1000, a_ten: 'X', phi_a: 60, phi_minh: 50 }), /Phí không hợp lệ/);
+  assert.ok(call('auditLog', { doi_tuong: 'Hoá đơn' }).length >= 4);
+  call('deleteBill', { id: b.id });
+  assert.strictEqual(call('listBills', { mode: 'all' }).rows.length, 0);
+});
+
 test('refund columns are added to an existing sheet; old rows get computed values', () => {
   const { gas, fake } = load();
   fake.setToday('2026-10-02');

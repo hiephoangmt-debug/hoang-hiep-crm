@@ -46,6 +46,12 @@ const shim = `
     api(token, 'savePayment', { ngay: d(-1), loai: 'Hoàn tiền', so_tien: old.reduce(function (a, t) { return a + t.tien_hoan; }, 0), ghi_chu: 'CK VCB' });
     api(token, 'savePayment', { ngay: d(0), loai: 'Ứng trước', so_tien: 30000000, ghi_chu: 'sáng' });
     api(token, 'savePayment', { ngay: d(0), loai: 'Ứng trước', so_tien: 20000000, ghi_chu: 'chiều' });
+    // Ghép hoá đơn ví trả sau
+    api(token, 'saveBill', { ngay: d(0), loai_hd: 'Hoá đơn điện', ma_hd: 'PE0400123', so_tien: 5000000, a_ten: 'Cô Hạnh (HĐ điện)', a_sdt: '0907333001', phi_a: 3, phi_minh: 2 });
+    api(token, 'saveBill', { ngay: d(0), loai_hd: 'Thanh toán bảo hiểm', ma_hd: 'BV-77812', so_tien: 12000000, a_ten: 'Anh Tùng (bảo hiểm)', a_sdt: '0907333002', phi_a: 3, phi_minh: 2,
+      b_ten: 'Chị Ngân', b_sdt: '0907333003', vi_b: 'MoMo Ví Trả Sau', b_tt_ngay: d(0) });
+    api(token, 'saveBill', { ngay: d(-1), loai_hd: 'Nạp ví MoMo', so_tien: 3000000, a_ten: 'Bé Vy', a_sdt: '0907333004', phi_a: 2.5, phi_minh: 2,
+      b_ten: 'Anh Quang', b_sdt: '0907333005', vi_b: 'SPayLater (Shopee)', b_tt_ngay: d(-1), a_ck_ngay: d(-1), b_ck_ngay: d(-1) });
     // Thẻ mình đang giữ
     api(token, 'heldCards', { mode: 'all' }).slice(0, 3).forEach(function (k, i) {
       api(token, 'saveCard', Object.assign({}, k, { loai_the: ['Visa', 'MasterCard', 'JCB'][i], han_muc: [100000000, 80000000, 50000000][i], so_cuoi: ['1234', '5678', '9012'][i] }));
