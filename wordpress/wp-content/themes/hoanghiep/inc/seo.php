@@ -98,7 +98,8 @@ function hh_seo_title_parts( $parts ) {
 	} elseif ( is_singular( 'du-an' ) && hh_meta( 'hh_p_status' ) ) {
 		$parts['title'] = get_the_title() . ' – ' . hh_option_label( hh_project_schema(), 'hh_p_status', hh_meta( 'hh_p_status' ) );
 	} elseif ( is_front_page() ) {
-		$parts['tagline'] = hoanghiep_opt( 'hh_person_title' );
+		// Trang chủ là trang tĩnh "Trang chủ" hay trang tin: luôn dùng tên thương hiệu, không ra "Trang chủ - …".
+		return array( 'title' => hh_seo_home_title() );
 	}
 	return $parts;
 }
@@ -112,7 +113,7 @@ function hh_seo_description() {
 		return hh_seo_custom_meta( 'description' );
 	}
 	if ( is_front_page() ) {
-		return hoanghiep_opt( 'hh_hero_text' ) . ' ' . hoanghiep_opt( 'hh_person_name' ) . ' – ' . hoanghiep_opt( 'hh_person_title' ) . ', hotline ' . hoanghiep_opt( 'hh_phone' ) . '.';
+		return hh_seo_home_description();
 	}
 	if ( is_singular( 'du-an' ) ) {
 		$bits = array_filter(
@@ -794,3 +795,51 @@ function hh_seo_llms_txt( $wp ) {
 	echo implode( "\n", $lines ) . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput -- plain text.
 	exit;
 }
+
+/* -------------------------------------------------------------------------
+ * Trang chủ: tiêu đề, mô tả, ảnh chia sẻ chuẩn (kể cả khi Rank Math / Yoast tự lấy "Trang chủ"
+ * và chữ đầu tiên của trang dựng bằng Elementor, VD "streamline-icon-check-badge@40x40").
+ * Chỉ áp dụng khi bạn chưa tự nhập tiêu đề / mô tả cho trang chủ trong plugin SEO.
+ * ---------------------------------------------------------------------- */
+
+function hh_seo_home_title() {
+	return hoanghiep_opt( 'hh_person_name' ) . ' – ' . hoanghiep_opt( 'hh_person_title' );
+}
+
+function hh_seo_home_description() {
+	return hoanghiep_opt( 'hh_person_name' ) . ' – ' . mb_strtolower( mb_substr( hoanghiep_opt( 'hh_person_title' ), 0, 1 ) ) . mb_substr( hoanghiep_opt( 'hh_person_title' ), 1 ) . ': dự án mới, căn hộ, biệt thự, đất nền mua bán và cho thuê, pháp lý minh bạch. Hotline/Zalo ' . hoanghiep_opt( 'hh_phone' ) . '.';
+}
+
+function hh_seo_home_override( $value, $kind ) {
+	if ( ! is_front_page() || hh_seo_custom_meta( $kind ) || is_paged() ) {
+		return $value;
+	}
+	if ( 'title' === $kind ) {
+		return hh_seo_home_title();
+	}
+	return hh_seo_home_description();
+}
+
+foreach ( array( 'rank_math/frontend/title', 'rank_math/opengraph/facebook/og_title', 'rank_math/opengraph/twitter/twitter_title', 'wpseo_title', 'wpseo_opengraph_title', 'wpseo_twitter_title', 'aioseo_title' ) as $hh_filter ) {
+	add_filter( $hh_filter, static fn( $v ) => hh_seo_home_override( $v, 'title' ), 99 );
+}
+foreach ( array( 'rank_math/frontend/description', 'rank_math/opengraph/facebook/og_description', 'rank_math/opengraph/twitter/twitter_description', 'wpseo_metadesc', 'wpseo_opengraph_desc', 'wpseo_twitter_description', 'aioseo_description' ) as $hh_filter ) {
+	add_filter( $hh_filter, static fn( $v ) => hh_seo_home_override( $v, 'description' ), 99 );
+}
+unset( $hh_filter );
+
+/** Ảnh chia sẻ trang chủ: dùng ảnh banner / chân dung khi plugin SEO không có ảnh hoặc lấy nhầm icon nhỏ. */
+add_filter(
+	'rank_math/opengraph/facebook/image',
+	static function ( $img ) {
+		return is_front_page() && ( ! $img || preg_match( '/icon|@\d+x\d+|\.svg/i', (string) $img ) ) ? hh_seo_image() : $img;
+	},
+	99
+);
+add_filter(
+	'wpseo_opengraph_image',
+	static function ( $img ) {
+		return is_front_page() && ( ! $img || preg_match( '/icon|@\d+x\d+|\.svg/i', (string) $img ) ) ? hh_seo_image() : $img;
+	},
+	99
+);
