@@ -19,6 +19,7 @@ CRM cho mảng đáo hạn / rút tiền thẻ tín dụng, chạy miễn phí t
 - **Hồ sơ khách:** chụp hoặc tải ảnh **CCCD mặt trước / mặt sau**. Ảnh nén trên điện thoại rồi lưu **riêng tư** trong Google Drive của chủ CRM (thư mục `CRM Thẻ Tín Dụng – Hồ sơ khách (riêng tư)`), chỉ xem được trong CRM sau khi nhập PIN.
 - **Chụp ngay khi ghi giao dịch:** form giao dịch có ô **📷 Ảnh khách & thẻ** (CCCD mặt trước / sau, ảnh thẻ), dùng được cả với khách mới; bấm Lưu giao dịch là ảnh được lưu vào hồ sơ khách và thẻ tương ứng.
 - **Thẻ của khách:** tên thẻ như trong sổ, ngân hàng, **chỉ 4 số cuối**, hạn mức, ngày sao kê, ngày đáo, ảnh mặt trước của thẻ. Một khách có nhiều thẻ; thẻ của người thân / người quen (vợ, chồng, bố, mẹ, anh, chị, em…) ghi rõ **thẻ của ai**, **tên chủ thẻ** và chụp được **CCCD chủ thẻ**. Ghi giao dịch với thẻ mới thì thẻ tự được thêm; trong form giao dịch bấm chip thẻ để điền nhanh tên thẻ, ngày đáo, ngày sao kê.
+- **Giữ thẻ của khách:** mỗi thẻ ghi rõ **Mình đang giữ / Khách giữ**; nhận giữ hoặc trả thẻ có ngày, ghi chú, ảnh lúc giao nhận và lịch sử. Mục **Khách hàng → 💳 Thẻ đang giữ** liệt kê thẻ đang giữ với loại thẻ, ngân hàng, hạn mức, tổng rút / đáo, lần gần nhất và số ngày đã giữ.
 - **Nhắc lịch:**
   - **Đáo hạn:** nhắc từ **7 đến 5 ngày trước hạn** tháng sau. Hạn rơi vào T7, CN, lễ hoặc Tết thì dời ±1–2 ngày: mặc định dời lên trước, thẻ nào ngân hàng dời ra sau thì khai trong Cài đặt.
   - **Rút tiền:** tư vấn khách rút **ngay sau ngày sao kê** để được miễn lãi tối đa khoảng 55 ngày. Form tính sẵn số ngày miễn lãi, và tháng sau CRM nhắc gọi khách trước 2 ngày.
@@ -74,6 +75,7 @@ Dán lại `Code.gs` / `Index.html`, rồi vào **Triển khai → Quản lý tr
 | `DoiSoat` | tiền C.Trâm chuyển / ứng trước / mình trả lại / nợ cũ / điều chỉnh (tự tạo khi cập nhật) |
 | `TheKhach` | thẻ của từng khách (tự tạo khi cập nhật) |
 | `TaiLieu` | danh sách ảnh CCCD / ảnh thẻ, trỏ tới file trong Drive (tự tạo khi cập nhật) |
+| `GiuThe` | lịch sử nhận giữ / trả thẻ (tự tạo khi cập nhật) |
 | `KetSo` | các lần kết số dư với C.Trâm (tự tạo khi cập nhật) |
 | `NhacLich` | trạng thái nhắc (Đã báo / Ngưng nhắc) và sự kiện Calendar đã tạo |
 

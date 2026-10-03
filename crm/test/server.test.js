@@ -547,6 +547,45 @@ test('manual Mục 1: closing balance entered by hand on a date; Mục 2 only co
   assert.strictEqual(call('refunds', {}).congNo.tong, -20000000 + t.tien_hoan - 150000000);
 });
 
+test('card custody: hold / return with notes and photos, held-cards list with limits and withdrawals', () => {
+  const { fake, call } = fresh('2026-10-01');
+  const c = call('saveCustomer', { ten: 'Chị Lan', sdt: '0905123456' });
+  call('saveTransaction', { ngay: '2026-09-20', dich_vu: 'Rút tiền', khach_id: c.id, ten_khach: 'Chị Lan', the: 'VCB', so_tien: 30000000, phi_khach: 2, phi_may_text: '1.3' });
+  call('saveTransaction', { ngay: '2026-09-28', dich_vu: 'Rút tiền', khach_id: c.id, ten_khach: 'Chị Lan', the: 'VCB', so_tien: 20000000, phi_khach: 2, phi_may_text: '1.3' });
+  call('saveTransaction', { ngay: '2026-09-25', dich_vu: 'Đáo hạn', khach_id: c.id, ten_khach: 'Chị Lan', the: 'VCB', so_tien: 50000000, phi_khach: 1.7, phi_may_text: '1.3' });
+  let card = call('listCards', { khach_id: c.id })[0];
+  assert.strictEqual(card.giu_the, 'Khách giữ');
+  call('saveCard', { id: card.id, khach_id: c.id, ten_the: 'VCB', loai_the: 'Visa', han_muc: 80000000, so_cuoi: '1234' });
+  const log = call('holdCard', { the_id: card.id, hanh_dong: 'Nhận giữ', ngay: '2026-09-28', ghi_chu: 'giữ để đáo tháng sau' });
+  call('uploadDoc', { khach_id: c.id, loai: 'Ảnh giữ / trả thẻ', the_id: card.id, ghi_chu: log.id, data: 'data:image/jpeg;base64,QUJD' });
+  call('uploadDoc', { khach_id: c.id, loai: 'Ảnh giữ / trả thẻ', the_id: card.id, ghi_chu: log.id, data: 'data:image/jpeg;base64,REVG' });
+  let held = call('heldCards', { mode: 'Mình giữ' });
+  assert.strictEqual(held.length, 1);
+  const h = held[0];
+  assert.strictEqual(h.ten_khach, 'Chị Lan');
+  assert.strictEqual(h.loai_the, 'Visa');
+  assert.strictEqual(h.han_muc, 80000000);
+  assert.strictEqual(h.tong_rut, 50000000);
+  assert.strictEqual(h.tong_dao, 50000000);
+  assert.strictEqual(h.so_gd, 3);
+  assert.strictEqual(h.lan_cuoi.ngay, '2026-09-28');
+  assert.strictEqual(h.lan_cuoi.so_tien, 20000000);
+  assert.strictEqual(h.so_ngay_giu, 3);
+  assert.strictEqual(call('dashboard').heldCards, 1);
+  // Trả thẻ, có ghi chú
+  const back = call('holdCard', { the_id: card.id, hanh_dong: 'Trả thẻ', ngay: '2026-10-01', ghi_chu: 'trả tận tay, khách ký nhận' });
+  call('uploadDoc', { khach_id: c.id, loai: 'Ảnh giữ / trả thẻ', the_id: card.id, ghi_chu: back.id, data: 'data:image/jpeg;base64,R0hJ' });
+  assert.strictEqual(call('heldCards', { mode: 'Mình giữ' }).length, 0);
+  assert.strictEqual(call('heldCards', { mode: 'Khách giữ' }).length, 1);
+  const hist = call('cardHistory', { the_id: card.id });
+  assert.strictEqual(hist.logs.length, 2);
+  assert.strictEqual(hist.logs[0].hanh_dong, 'Trả thẻ');
+  assert.strictEqual(hist.logs[0].anh.length, 1);
+  assert.strictEqual(hist.logs[1].anh.length, 2, 'both photos kept');
+  assert.strictEqual(hist.giao_dich.length, 3);
+  assert.throws(() => call('holdCard', { the_id: card.id, hanh_dong: 'x' }), /Nhận giữ hoặc Trả thẻ/);
+});
+
 test('refund columns are added to an existing sheet; old rows get computed values', () => {
   const { gas, fake } = load();
   fake.setToday('2026-10-02');

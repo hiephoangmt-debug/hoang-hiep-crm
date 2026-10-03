@@ -46,6 +46,11 @@ const shim = `
     api(token, 'savePayment', { ngay: d(-1), loai: 'Hoàn tiền', so_tien: old.reduce(function (a, t) { return a + t.tien_hoan; }, 0), ghi_chu: 'CK VCB' });
     api(token, 'savePayment', { ngay: d(0), loai: 'Ứng trước', so_tien: 30000000, ghi_chu: 'sáng' });
     api(token, 'savePayment', { ngay: d(0), loai: 'Ứng trước', so_tien: 20000000, ghi_chu: 'chiều' });
+    // Thẻ mình đang giữ
+    api(token, 'heldCards', { mode: 'all' }).slice(0, 3).forEach(function (k, i) {
+      api(token, 'saveCard', Object.assign({}, k, { loai_the: ['Visa', 'MasterCard', 'JCB'][i], han_muc: [100000000, 80000000, 50000000][i], so_cuoi: ['1234', '5678', '9012'][i] }));
+      api(token, 'holdCard', { the_id: k.id, hanh_dong: 'Nhận giữ', ngay: d(-5 + i), ghi_chu: 'giữ để đáo tháng sau' });
+    });
     [['Lan', '0906222001', 'Rút tiền thẻ tín dụng', 'www.the-tin-dung-da-nang.com', 'Cần rút 20tr thẻ VPBank'],
      ['Hùng', '0906222002', 'Đáo hạn thẻ tín dụng', 'dichvuthetindungdanang.com', ''],
      ['Mai', '0906222003', 'Rút tiền ví trả sau', 'www.the-tin-dung-da-nang.com', 'SPayLater 5tr']].forEach(function (l) {

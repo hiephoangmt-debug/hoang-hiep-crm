@@ -308,6 +308,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         <div class="seg" id="cust-seg">
           <button data-v="customers" class="is-active">Khách hàng</button>
           <button data-v="leads">Liên hệ từ web</button>
+          <button data-v="held">💳 Thẻ đang giữ</button>
         </div>
         <button class="btn btn--ghost btn--sm" data-act="new-customer">+ Khách</button>
       </div>
@@ -318,6 +319,17 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
           <select id="cust-source"><option value="">Mọi nguồn</option></select>
         </div>
         <div class="scroll-x"><table class="tbl stack" id="cust-table"></table></div>
+      </div>
+      <div id="held-wrap" class="hidden">
+        <div class="row" style="margin-bottom:10px">
+          <div class="seg" id="held-filter">
+            <button data-v="Mình giữ" class="is-active">🔒 Mình đang giữ</button>
+            <button data-v="Khách giữ">Khách giữ</button>
+            <button data-v="all">Tất cả thẻ</button>
+          </div>
+        </div>
+        <div class="kpis" id="held-kpis"></div>
+        <div id="held-list"></div>
       </div>
       <div id="leads-wrap" class="hidden">
         <div class="filters">
@@ -541,7 +553,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     <p class="muted" id="card-cust" style="margin-top:0"></p>
     <div class="form-grid">
       <label class="f">Tên thẻ <span class="hint">như ghi trong sổ: SC, TP, VCB…</span><input name="ten_the" required></label>
-      <label class="f">Ngân hàng<input name="ngan_hang" placeholder="VD: Techcombank Visa"></label>
+      <label class="f">Ngân hàng<input name="ngan_hang" placeholder="VD: Techcombank"></label>
+      <label class="f">Loại thẻ<select name="loai_the"></select></label>
       <label class="f">Thẻ của ai<select name="quan_he"></select></label>
       <label class="f" id="card-holder">Tên chủ thẻ <span class="hint">tên in trên thẻ</span><input name="chu_the" placeholder="VD: TRAN VAN NAM"></label>
       <label class="f">4 số cuối <span class="hint">chỉ lưu 4 số cuối</span><input name="so_cuoi" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" placeholder="1234"></label>
@@ -565,10 +578,30 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         <div class="cardrow__info"><div class="row"><button type="button" class="btn btn--sm" data-pick="card" data-loai="CCCD chủ thẻ" data-cap="1">📷 Chụp</button><button type="button" class="btn btn--ghost btn--sm" data-pick="card" data-loai="CCCD chủ thẻ">📁 Tải lên</button></div></div>
       </div>
     </div>
+    <div id="card-hold-box" class="hidden">
+      <h3 style="margin:14px 0 6px">🔒 Giữ thẻ</h3>
+      <div id="card-hold"></div>
+    </div>
     <div class="row row--between" style="margin-top:14px">
       <button type="button" class="btn btn--danger hidden" data-act="delete-card">Xóa thẻ</button>
       <div class="row" style="margin-left:auto"><button type="button" class="btn btn--ghost" data-close>Đóng</button><button type="submit" class="btn">Lưu thẻ</button></div>
     </div>
+  </form>
+</div>
+<!-- Modal nhận giữ / trả thẻ -->
+<div class="modal hidden" id="hold-modal">
+  <form class="modal__box" id="hold-form" autocomplete="off">
+    <div class="modal__head"><h2 id="hold-title">Nhận giữ thẻ</h2><button type="button" class="x" data-close>×</button></div>
+    <input type="hidden" name="the_id"><input type="hidden" name="khach_id"><input type="hidden" name="hanh_dong">
+    <p class="muted" id="hold-card" style="margin-top:0"></p>
+    <div class="form-grid">
+      <label class="f">Ngày<input type="date" name="ngay" required></label>
+      <label class="f full">Ghi chú <span class="hint">VD: giữ để đáo tháng sau · trả tận tay, khách ký nhận</span><textarea name="ghi_chu" rows="2"></textarea></label>
+    </div>
+    <h3 style="margin:12px 0 6px">📷 Ảnh lúc giao nhận <span class="hint">(thẻ, biên nhận, khách ký…)</span></h3>
+    <div class="docs" id="hold-photos"></div>
+    <div class="row" style="margin-top:8px"><button type="button" class="btn btn--sm" data-holdpick="1" data-cap="1">📷 Chụp</button><button type="button" class="btn btn--ghost btn--sm" data-holdpick="1">📁 Tải lên</button></div>
+    <div class="row" style="margin-top:14px;justify-content:flex-end"><button type="button" class="btn btn--ghost" data-close>Hủy</button><button type="submit" class="btn" id="hold-submit">Lưu</button></div>
   </form>
 </div>
 <div class="viewer hidden" id="viewer"><img alt="Ảnh"></div>
@@ -742,6 +775,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         kpi('Giao dịch tháng (Đáo / Rút)', m.so_gd + ' <small class="muted">(' + m.so_dao + ' / ' + m.so_rut + ')</small>') +
         kpi('Khách web để lại số (tháng)', d.leadsThisMonth) +
         kpi('Bấm Zalo / Gọi hôm nay', d.clicksToday.length) +
+        kpi('🔒 Thẻ khách mình đang giữ', d.heldCards || 0) +
         kpi('Hôm nay', d.todayTx.so_gd + ' GD · ' + short(d.todayTx.so_tien)) +
         '';
       S.lastClosing = d.refunds.lastClosing;
@@ -1369,6 +1403,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     $$('#cust-seg button').forEach(function (x) { x.classList.toggle('is-active', x === b); });
     $('#cust-wrap').classList.toggle('hidden', S.custView !== 'customers');
     $('#leads-wrap').classList.toggle('hidden', S.custView !== 'leads');
+    $('#held-wrap').classList.toggle('hidden', S.custView !== 'held');
+    if (S.custView === 'held') loadHeld();
   });
   ['#cust-q', '#cust-status', '#cust-source'].forEach(function (s) { $(s).addEventListener('input', renderCustomers); });
   ['#lead-status', '#lead-source'].forEach(function (s) { $(s).addEventListener('input', renderLeads); });
@@ -1588,6 +1624,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       return '<div class="cardrow">' + docImg(k.anh_id, 'cardrow__img', '💳') +
         '<div class="cardrow__info"><b>' + esc(k.ten_the) + '</b>' + (k.ngan_hang ? ' · ' + esc(k.ngan_hang) : '') + (k.so_cuoi ? ' · ****' + esc(k.so_cuoi) : '') +
         (relText(k) ? '<div><span class="badge badge--warn">' + relText(k) + '</span>' + (k.cccd_id ? ' <span class="badge badge--ok">có CCCD</span>' : '') + '</div>' : '') +
+        '<div>' + holdBadge(k) + (k.loai_the ? ' <span class="badge">' + esc(k.loai_the) + '</span>' : '') + '</div>' +
+        (k.so_gd ? '<div class="muted">' + cardStatText(k) + '</div>' : '') +
         '<div class="muted">' + [k.han_muc ? 'HM ' + short(k.han_muc) : '', k.ngay_sao_ke ? 'Sao kê ' + esc(k.ngay_sao_ke) : '', k.ngay_dao ? 'Đáo ' + esc(k.ngay_dao) : '', esc(k.ghi_chu)].filter(String).join(' · ') + '</div></div>' +
         '<button type="button" class="btn btn--ghost btn--sm" data-card="' + esc(k.id) + '">Sửa / 📷</button></div>';
     }).join('');
@@ -1637,6 +1675,10 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   $('#img-pick').addEventListener('change', function () {
     var f = this.files && this.files[0], t = pickTarget;
     if (!f || !t) return;
+    if (t.hold) {
+      compress(f).then(function (dataUrl) { S.holdPhotos.push(dataUrl); renderHoldPhotos(); }).catch(fail);
+      return;
+    }
     if (t.pending) {
       compress(f).then(function (dataUrl) { S.txPhotos[t.loai] = dataUrl; renderTxPhotos(); }).catch(fail);
       return;
@@ -1667,6 +1709,10 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     f.quan_he.innerHTML = (S.boot.cardRelations || ['Chính chủ']).map(function (r) { return '<option>' + esc(r) + '</option>'; }).join('');
     f.quan_he.value = card.quan_he || 'Chính chủ'; f.chu_the.value = card.chu_the || '';
     $('#card-cccd').outerHTML = docImg(card.cccd_id, 'cardrow__img" id="card-cccd', '🪪');
+    f.loai_the.innerHTML = '<option value="">— chọn —</option>' + (S.boot.cardBrands || []).map(function (r) { return '<option>' + esc(r) + '</option>'; }).join('');
+    f.loai_the.value = card.loai_the || '';
+    S.cardCurrent = card;
+    renderCardHold(card);
     toggleHolder();
     $('#card-cust').textContent = 'Khách: ' + (khach.ten || '') + (khach.sdt ? ' · ' + khach.sdt : '');
     $('#card-title').textContent = card.id ? 'Thẻ ' + card.ten_the : 'Thêm thẻ';
@@ -1676,6 +1722,118 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     S.cardKhach = khach;
     $('#card-modal').classList.remove('hidden');
   }
+  function holdBadge(k) {
+    return k.giu_the === 'Mình giữ'
+      ? '<span class="badge badge--bad">🔒 Mình đang giữ' + (k.ngay_giu ? ' từ ' + dm(k.ngay_giu) : '') + '</span>'
+      : '<span class="badge badge--muted">Khách giữ' + (k.ngay_tra ? ' · trả ' + dm(k.ngay_tra) : '') + '</span>';
+  }
+  function cardStatText(k) {
+    return [k.tong_rut ? 'Đã rút ' + short(k.tong_rut) : '', k.tong_dao ? 'Đáo ' + short(k.tong_dao) : '', k.so_gd + ' GD',
+      k.lan_cuoi ? 'gần nhất ' + dm(k.lan_cuoi.ngay) + ': ' + esc(k.lan_cuoi.dich_vu) + ' ' + short(k.lan_cuoi.so_tien) : ''].filter(String).join(' · ');
+  }
+  function renderCardHold(card) {
+    $('#card-hold-box').classList.toggle('hidden', !card.id);
+    if (!card.id) return;
+    var mine = card.giu_the === 'Mình giữ';
+    $('#card-hold').innerHTML = '<div class="row row--between">' + holdBadge(card) +
+      (mine ? '<button type="button" class="btn btn--sm" data-hold="Trả thẻ">↩️ Trả thẻ cho khách</button>'
+            : '<button type="button" class="btn btn--sm" data-hold="Nhận giữ">📥 Mình nhận giữ thẻ</button>') + '</div>' +
+      '<div id="card-hold-log" class="muted" style="margin-top:8px">Đang tải lịch sử…</div>';
+    call('cardHistory', { the_id: card.id }).then(function (h) {
+      var log = h.logs.map(function (l) {
+        return '<div class="item ' + (l.hanh_dong === 'Trả thẻ' ? 'item--done' : 'item--due') + '" style="margin:6px 0"><div class="item__name">' +
+          (l.hanh_dong === 'Trả thẻ' ? '↩️ Trả thẻ' : '📥 Nhận giữ') + ' · ' + dmy(l.ngay) + '</div>' +
+          (l.ghi_chu ? '<div class="item__meta">📝 ' + esc(l.ghi_chu) + '</div>' : '') +
+          (l.anh.length ? '<div class="docs" style="grid-template-columns:repeat(auto-fill,minmax(80px,1fr));margin-top:6px">' + l.anh.map(function (id) { return docImg(id, 'doc__img', ''); }).join('') + '</div>' : '') + '</div>';
+      }).join('');
+      var gd = h.giao_dich.slice(0, 10).map(function (t) { return '<tr class="sub"><td>' + dmy(t.ngay) + ' · ' + esc(t.dich_vu) + (t.may ? ' · ' + esc(t.may) : '') + '</td><td>' + money(t.so_tien) + '</td></tr>'; }).join('');
+      $('#card-hold-log').innerHTML = (log || '<span>Chưa có lần giữ / trả nào.</span>') +
+        (gd ? '<h4 style="margin:10px 0 4px;color:var(--text)">Giao dịch của thẻ (gần nhất)</h4><table class="stmt">' + gd + '</table>' : '');
+      hydrateDocs($('#card-hold-log'));
+    }).catch(function () { $('#card-hold-log').textContent = ''; });
+  }
+
+  // Danh sách thẻ đang giữ
+  S.heldMode = 'Mình giữ';
+  function loadHeld() {
+    call('heldCards', { mode: S.heldMode }).then(function (rows) {
+      S.held = rows;
+      var tongHM = rows.reduce(function (a, k) { return a + (Number(k.han_muc) || 0); }, 0);
+      var tongRut = rows.reduce(function (a, k) { return a + (Number(k.tong_rut) || 0); }, 0);
+      $('#held-kpis').innerHTML = kpi('Số thẻ', rows.length) + kpi('Tổng hạn mức', short(tongHM)) + kpi('Tổng đã rút', short(tongRut));
+      $('#held-list').innerHTML = rows.length ? rows.map(function (k) {
+        return '<div class="item ' + (k.giu_the === 'Mình giữ' ? 'item--due' : '') + '"><div class="cardrow" style="border:0;padding:0">' + docImg(k.anh_id, 'cardrow__img', '💳') +
+          '<div class="cardrow__info"><div class="item__name">' + esc(k.ten_khach) + ' · ' + esc(k.ten_the) + '</div>' +
+          '<div class="item__meta">' + [esc(k.loai_the), esc(k.ngan_hang), k.so_cuoi ? '****' + esc(k.so_cuoi) : '', relText(k)].filter(String).join(' · ') + '</div>' +
+          '<div class="item__meta">' + [k.han_muc ? 'Hạn mức <b>' + short(k.han_muc) + '</b>' : 'Chưa nhập hạn mức', k.ngay_sao_ke ? 'SK ' + esc(k.ngay_sao_ke) : '', k.ngay_dao ? 'Đáo ' + esc(k.ngay_dao) : ''].filter(String).join(' · ') + '</div>' +
+          (k.so_gd ? '<div class="item__meta">' + cardStatText(k) + '</div>' : '') +
+          '<div style="margin-top:4px">' + holdBadge(k) + (k.so_ngay_giu !== '' ? ' <span class="badge badge--warn">' + k.so_ngay_giu + ' ngày</span>' : '') + '</div></div></div>' +
+          '<div class="item__actions">' + quickContact(k.sdt) +
+          '<button class="btn btn--ghost btn--sm" data-heldopen="' + esc(k.id) + '">Chi tiết / lịch sử</button>' +
+          (k.giu_the === 'Mình giữ' ? '<button class="btn btn--sm" data-heldact="Trả thẻ" data-id="' + esc(k.id) + '">↩️ Trả thẻ</button>'
+            : '<button class="btn btn--sm" data-heldact="Nhận giữ" data-id="' + esc(k.id) + '">📥 Nhận giữ</button>') + '</div></div>';
+      }).join('') : '<div class="empty card">' + (S.heldMode === 'Mình giữ' ? 'Hiện không giữ thẻ nào của khách.' : 'Chưa có thẻ.') + '</div>';
+      hydrateDocs($('#held-list'));
+    }).catch(fail);
+  }
+  $('#held-filter').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    S.heldMode = b.dataset.v;
+    $$('#held-filter button').forEach(function (x) { x.classList.toggle('is-active', x === b); });
+    loadHeld();
+  });
+
+  // Nhận giữ / trả thẻ: ngày, ghi chú, nhiều ảnh (giữ tạm, lưu xong mới gửi)
+  var holdForm = $('#hold-form');
+  function openHold(card, action) {
+    holdForm.reset();
+    var f = holdForm.elements;
+    f.the_id.value = card.id; f.khach_id.value = card.khach_id; f.hanh_dong.value = action; f.ngay.value = S.boot.today;
+    S.holdPhotos = [];
+    renderHoldPhotos();
+    $('#hold-title').textContent = action === 'Trả thẻ' ? '↩️ Trả thẻ cho khách' : '📥 Mình nhận giữ thẻ';
+    $('#hold-submit').textContent = action === 'Trả thẻ' ? 'Lưu trả thẻ' : 'Lưu nhận giữ';
+    $('#hold-card').textContent = (card.ten_khach || (S.cardKhach || {}).ten || '') + ' · thẻ ' + card.ten_the + (card.so_cuoi ? ' ****' + card.so_cuoi : '');
+    $('#hold-modal').classList.remove('hidden');
+  }
+  function renderHoldPhotos() {
+    $('#hold-photos').innerHTML = S.holdPhotos.map(function (u, i) {
+      return '<div class="doc"><img class="doc__img" alt="Ảnh" src="' + u + '"><div class="row" style="margin-top:4px"><button type="button" class="btn btn--danger btn--sm" data-holdun="' + i + '">✕</button></div></div>';
+    }).join('') || '<p class="muted" style="margin:0">Chưa có ảnh (không bắt buộc).</p>';
+  }
+  holdForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = holdForm.elements, photos = S.holdPhotos.slice(), btn = $('#hold-submit');
+    btn.disabled = true;
+    call('holdCard', { the_id: f.the_id.value, hanh_dong: f.hanh_dong.value, ngay: f.ngay.value, ghi_chu: f.ghi_chu.value }).then(function (log) {
+      return photos.reduce(function (p, u) {
+        return p.then(function () { return call('uploadDoc', { khach_id: f.khach_id.value, loai: 'Ảnh giữ / trả thẻ', the_id: f.the_id.value, ghi_chu: log.id, data: u }); });
+      }, Promise.resolve()).then(function () {
+        btn.disabled = false;
+        $('#hold-modal').classList.add('hidden');
+        toast(f.hanh_dong.value === 'Trả thẻ' ? '✅ Đã ghi trả thẻ' : '✅ Đã ghi nhận giữ thẻ');
+        if (!$('#card-modal').classList.contains('hidden') && S.cardCurrent) {
+          S.cardCurrent.giu_the = f.hanh_dong.value === 'Trả thẻ' ? 'Khách giữ' : 'Mình giữ';
+          if (f.hanh_dong.value === 'Trả thẻ') S.cardCurrent.ngay_tra = f.ngay.value; else S.cardCurrent.ngay_giu = f.ngay.value;
+          renderCardHold(S.cardCurrent);
+        }
+        if (S.custView === 'held' && S.tab === 'customers') loadHeld();
+        afterCardChange();
+      });
+    }).catch(function (err) { btn.disabled = false; alert('Chưa lưu được.\n\n' + (err.message || err)); });
+  });
+  document.addEventListener('click', function (e) {
+    var h = e.target.closest('[data-hold]');
+    if (h && S.cardCurrent) { openHold(Object.assign({ khach_id: cardForm.elements.khach_id.value }, S.cardCurrent), h.dataset.hold); return; }
+    var ha = e.target.closest('[data-heldact]');
+    if (ha) { var k = (S.held || []).filter(function (x) { return x.id === ha.dataset.id; })[0]; if (k) openHold(k, ha.dataset.heldact); return; }
+    var ho = e.target.closest('[data-heldopen]');
+    if (ho) { var k2 = (S.held || []).filter(function (x) { return x.id === ho.dataset.heldopen; })[0]; if (k2) openCard(k2, { id: k2.khach_id, ten: k2.ten_khach, sdt: k2.sdt }); return; }
+    var hp = e.target.closest('[data-holdpick]');
+    if (hp) { pickImage(!!hp.dataset.cap, { hold: true, loai: 'Ảnh giữ / trả thẻ' }); return; }
+    var hu = e.target.closest('[data-holdun]');
+    if (hu) { S.holdPhotos.splice(Number(hu.dataset.holdun), 1); renderHoldPhotos(); }
+  });
   function toggleHolder() {
     var own = cardForm.elements.quan_he.value === 'Chính chủ';
     $('#card-holder').classList.toggle('hidden', own);
@@ -1687,7 +1845,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     var f = cardForm.elements;
     return { id: f.id.value, khach_id: f.khach_id.value, ten_the: f.ten_the.value.trim(), ngan_hang: f.ngan_hang.value, so_cuoi: f.so_cuoi.value,
       han_muc: parseAmount(f.han_muc_text.value) || '', ngay_sao_ke: f.ngay_sao_ke.value, ngay_dao: f.ngay_dao.value, ghi_chu: f.ghi_chu.value,
-      quan_he: f.quan_he.value, chu_the: f.chu_the.value };
+      quan_he: f.quan_he.value, chu_the: f.chu_the.value, loai_the: f.loai_the.value };
   }
   function afterCardChange() {
     if (!$('#cust-modal').classList.contains('hidden')) refreshCustDocs();

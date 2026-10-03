@@ -11,6 +11,7 @@
  *   KetSo     – các lần kết số dư với C.Trâm (sổ trước ngày kết bị khóa)
  *   TheKhach  – thẻ của từng khách (ngân hàng, 4 số cuối, hạn mức, ngày sao kê, ngày đáo, ảnh thẻ)
  *   TaiLieu   – ảnh CCCD / ảnh thẻ; file ảnh nằm riêng tư trong Google Drive của chủ CRM
+ *   GiuThe    – lịch sử nhận giữ / trả thẻ của khách (ngày, ghi chú, ảnh lúc giao nhận)
  *
  * Công nợ với C.Trâm: mỗi giao dịch phát sinh tiền hoàn = số tiền − phí máy (tien_hoan = so_tien − chi_phi),
  *   đến hạn ngày GD + 1. Tiền C.Trâm chuyển/ứng (sheet DoiSoat) trừ dần vào các khoản cũ nhất trước.
@@ -28,15 +29,20 @@ var SHEETS = {
   NhacLich: ['key', 'han', 'trang_thai', 'ghi_chu', 'event_id', 'cap_nhat'],
   DoiSoat: ['id', 'ngay', 'loai', 'so_tien', 'ghi_chu', 'tao_luc'],
   TheKhach: ['id', 'khach_id', 'ten_the', 'ngan_hang', 'so_cuoi', 'han_muc', 'ngay_sao_ke', 'ngay_dao', 'ghi_chu', 'tao_luc', 'cap_nhat',
-    'chu_the', 'quan_he'],
+    'chu_the', 'quan_he', 'loai_the', 'giu_the', 'ngay_giu', 'ngay_tra'],
+  GiuThe: ['id', 'the_id', 'khach_id', 'hanh_dong', 'ngay', 'ghi_chu', 'tao_luc'],
   TaiLieu: ['id', 'khach_id', 'loai', 'the_id', 'file_id', 'ten_file', 'ghi_chu', 'tao_luc'],
   KetSo: ['id', 'ngay', 'tu_ngay', 'so_du_truoc', 'so_gd', 'so_tien', 'chi_phi', 'phat_sinh', 'da_chuyen', 'so_du', 'ghi_chu', 'tao_luc', 'nhap_tay']
 };
 // Sheet thêm ở bản cập nhật: tự tạo khi cần, không phải chạy lại setup().
-var AUTO_SHEETS = ['DoiSoat', 'KetSo', 'TheKhach', 'TaiLieu'];
-var DOC_TYPES = ['CCCD mặt trước', 'CCCD mặt sau', 'Ảnh thẻ', 'CCCD chủ thẻ', 'Khác'];
+var AUTO_SHEETS = ['DoiSoat', 'KetSo', 'TheKhach', 'TaiLieu', 'GiuThe'];
+var DOC_TYPES = ['CCCD mặt trước', 'CCCD mặt sau', 'Ảnh thẻ', 'CCCD chủ thẻ', 'Ảnh giữ / trả thẻ', 'Khác'];
+// Loại ảnh lưu nhiều tấm (không thay ảnh cũ).
+var MULTI_DOC_TYPES = ['Khác', 'Ảnh giữ / trả thẻ'];
+var CARD_BRANDS = ['Visa', 'MasterCard', 'JCB', 'Amex', 'Napas', 'UnionPay', 'Ví trả sau', 'Khác'];
+var HOLD_ACTIONS = ['Nhận giữ', 'Trả thẻ'];
 // Ảnh gắn với một thẻ cụ thể (mỗi thẻ 1 ảnh mỗi loại).
-var CARD_DOC_TYPES = ['Ảnh thẻ', 'CCCD chủ thẻ'];
+var CARD_DOC_TYPES = ['Ảnh thẻ', 'CCCD chủ thẻ', 'Ảnh giữ / trả thẻ'];
 // Thẻ của chính khách hoặc của người thân / người quen khách mang đến làm.
 var CARD_RELATIONS = ['Chính chủ', 'Vợ', 'Chồng', 'Bố', 'Mẹ', 'Con', 'Anh', 'Chị', 'Em', 'Người quen', 'Khác'];
 
@@ -270,6 +276,9 @@ function api(token, action, payload) {
     previewClose: function (p) { return statementAt_(p.ngay); },
     periodSummary: apiPeriodSummary_,
     listCards: function (p) { return cardsOf_(p.khach_id); },
+    holdCard: apiHoldCard_,
+    heldCards: apiHeldCards_,
+    cardHistory: apiCardHistory_,
     customerDocs: function (p) {
       return { cards: cardsOf_(p.khach_id), docs: readAll_('TaiLieu').filter(function (d) { return d.khach_id === p.khach_id; }) };
     },
@@ -300,6 +309,7 @@ function apiBootstrap_() {
     services: SERVICES,
     customerStatuses: CUSTOMER_STATUSES,
     cardRelations: CARD_RELATIONS,
+    cardBrands: CARD_BRANDS,
     cards: distinct('the'),
     machines: distinct('may'),
     customers: readAll_('KhachHang').map(function (c) { return { id: c.id, ten: c.ten, sdt: c.sdt }; }),
@@ -327,8 +337,10 @@ function apiDashboard_() {
   var leads = readAll_('LienHe');
   var rem = computeReminders_(addDays_(today, -30), addDays_(today, 7));
   var refunds = apiRefunds_({ from: today, to: today });
+  var held = readAll_('TheKhach').filter(function (c) { return c.giu_the === 'Mình giữ'; }).length;
   return {
     month: summarize_(tx),
+    heldCards: held,
     refundName: refundName_(),
     refunds: { summary: refunds.summary, days: refunds.days, congNo: refunds.congNo, lastClosing: refunds.lastClosing },
     todayTx: summarize_(tx.filter(function (t) { return t.ngay === today; })),
@@ -668,14 +680,31 @@ function apiDeletePayment_(p) {
 
 /* Thẻ của khách & ảnh CCCD / thẻ ------------------------------------- */
 
+/** Số liệu giao dịch theo từng thẻ: số lần, tổng rút / đáo, lần gần nhất. */
+function cardStats_(cards, tx) {
+  var key = {};
+  cards.forEach(function (c) { key[c.khach_id + '|' + normName_(c.ten_the)] = c; c.so_gd = 0; c.tong_rut = 0; c.tong_dao = 0; c.lan_cuoi = null; });
+  tx.forEach(function (t) {
+    var c = key[t.khach_id + '|' + normName_(t.the)];
+    if (!c) return;
+    var amt = Number(t.so_tien) || 0;
+    c.so_gd++;
+    if (t.dich_vu === 'Đáo hạn') c.tong_dao += amt; else c.tong_rut += amt;
+    if (!c.lan_cuoi || t.ngay >= c.lan_cuoi.ngay) c.lan_cuoi = { ngay: t.ngay, so_tien: amt, dich_vu: t.dich_vu };
+  });
+  return cards;
+}
+
 function cardsOf_(khachId) {
   var docs = readAll_('TaiLieu');
-  return readAll_('TheKhach').filter(function (c) { return c.khach_id === khachId; }).map(function (c) {
+  var tx = readAll_('GiaoDich').filter(function (t) { return t.khach_id === khachId; });
+  return cardStats_(readAll_('TheKhach').filter(function (c) { return c.khach_id === khachId; }), tx).map(function (c) {
     var photo = docs.filter(function (d) { return d.the_id === c.id && d.loai === 'Ảnh thẻ'; }).pop();
     var cccd = docs.filter(function (d) { return d.the_id === c.id && d.loai === 'CCCD chủ thẻ'; }).pop();
     c.anh_id = photo ? photo.id : '';
     c.cccd_id = cccd ? cccd.id : '';
     c.quan_he = c.quan_he || 'Chính chủ';
+    c.giu_the = c.giu_the || 'Khách giữ';
     return c;
   }).sort(function (a, b) { return String(a.ten_the).localeCompare(String(b.ten_the)); });
 }
@@ -696,7 +725,8 @@ function apiSaveCard_(c) {
   var obj = { khach_id: c.khach_id, ten_the: ten, ngan_hang: String(c.ngan_hang || '').trim(), so_cuoi: last4_(c.so_cuoi),
     han_muc: Number(c.han_muc) || '', ngay_sao_ke: dayOrBlank_(c.ngay_sao_ke, 'Ngày sao kê'), ngay_dao: dayOrBlank_(c.ngay_dao, 'Ngày đáo'),
     ghi_chu: String(c.ghi_chu || '').trim(), cap_nhat: nowStr_(),
-    chu_the: String(c.chu_the || '').trim(), quan_he: CARD_RELATIONS.indexOf(c.quan_he) >= 0 ? c.quan_he : 'Chính chủ' };
+    chu_the: String(c.chu_the || '').trim(), quan_he: CARD_RELATIONS.indexOf(c.quan_he) >= 0 ? c.quan_he : 'Chính chủ',
+    loai_the: CARD_BRANDS.indexOf(c.loai_the) >= 0 ? c.loai_the : '' };
   if (obj.quan_he !== 'Chính chủ' && !obj.chu_the) throw new Error('Thẻ của người thân: nhập tên chủ thẻ.');
   return withLock_(function () {
     if (c.id) { updateObj_('TheKhach', c.id, obj); obj.id = c.id; return obj; }
@@ -731,6 +761,61 @@ function upsertCardFromTx_(t) {
   if (t.ngay_sao_ke && !c.ngay_sao_ke) upd.ngay_sao_ke = t.ngay_sao_ke;
   if (Object.keys(upd).length) { upd.cap_nhat = now; updateObj_('TheKhach', c.id, upd); }
   return c.id;
+}
+
+/* Giữ thẻ của khách ------------------------------------------------- */
+
+/** Ghi nhận mình nhận giữ thẻ / trả thẻ cho khách. Trả về dòng lịch sử (dùng id để gắn ảnh lúc giao nhận). */
+function apiHoldCard_(p) {
+  var hd = HOLD_ACTIONS.indexOf(p.hanh_dong) >= 0 ? p.hanh_dong : '';
+  if (!hd) throw new Error('Chọn Nhận giữ hoặc Trả thẻ.');
+  var ngay = String(p.ngay || todayStr_());
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(ngay)) throw new Error('Ngày không hợp lệ.');
+  return withLock_(function () {
+    var c = readAll_('TheKhach').filter(function (x) { return x.id === p.the_id; })[0];
+    if (!c) throw new Error('Không tìm thấy thẻ.');
+    var log = { id: newId_(), the_id: c.id, khach_id: c.khach_id, hanh_dong: hd, ngay: ngay, ghi_chu: String(p.ghi_chu || '').trim(), tao_luc: nowStr_() };
+    appendObj_('GiuThe', log);
+    var upd = hd === 'Nhận giữ' ? { giu_the: 'Mình giữ', ngay_giu: ngay, ngay_tra: '' } : { giu_the: 'Khách giữ', ngay_tra: ngay };
+    upd.cap_nhat = nowStr_();
+    updateObj_('TheKhach', c.id, upd);
+    return log;
+  });
+}
+
+function apiCardHistory_(p) {
+  var docs = readAll_('TaiLieu').filter(function (d) { return d.the_id === p.the_id && d.loai === 'Ảnh giữ / trả thẻ'; });
+  var tx = readAll_('GiaoDich');
+  var card = readAll_('TheKhach').filter(function (c) { return c.id === p.the_id; })[0];
+  return {
+    logs: readAll_('GiuThe').filter(function (l) { return l.the_id === p.the_id; }).map(function (l) {
+      l.anh = docs.filter(function (d) { return d.ghi_chu === l.id; }).map(function (d) { return d.id; });
+      return l;
+    }).reverse(),
+    giao_dich: card ? tx.filter(function (t) { return t.khach_id === card.khach_id && normName_(t.the) === normName_(card.ten_the); })
+      .sort(byDateDesc_).map(function (t) { return { ngay: t.ngay, dich_vu: t.dich_vu, so_tien: t.so_tien, may: t.may }; }) : []
+  };
+}
+
+/** Danh sách thẻ mình đang giữ (hoặc khách giữ / tất cả), kèm khách, hạn mức, tổng rút, lần rút gần nhất. */
+function apiHeldCards_(p) {
+  var mode = p.mode || 'Mình giữ';
+  var customers = {};
+  readAll_('KhachHang').forEach(function (c) { customers[c.id] = c; });
+  var docs = readAll_('TaiLieu');
+  var cards = readAll_('TheKhach').map(function (c) { c.giu_the = c.giu_the || 'Khách giữ'; return c; })
+    .filter(function (c) { return mode === 'all' || c.giu_the === mode; });
+  cardStats_(cards, readAll_('GiaoDich'));
+  var today = todayStr_();
+  return cards.map(function (c) {
+    var k = customers[c.khach_id] || {};
+    c.ten_khach = k.ten || ''; c.sdt = k.sdt || '';
+    c.so_ngay_giu = c.giu_the === 'Mình giữ' && c.ngay_giu ? diffDays_(today, c.ngay_giu) : '';
+    var photo = docs.filter(function (d) { return d.the_id === c.id && d.loai === 'Ảnh thẻ'; }).pop();
+    c.anh_id = photo ? photo.id : '';
+    c.quan_he = c.quan_he || 'Chính chủ';
+    return c;
+  }).sort(function (a, b) { return String(a.ngay_giu || '9').localeCompare(String(b.ngay_giu || '9')) || String(a.ten_khach).localeCompare(String(b.ten_khach)); });
 }
 
 var DRIVE_HELP = 'CRM chưa được cấp quyền Google Drive để lưu ảnh. Cách bật: mở Apps Script → dán đủ file appsscript.json mới → ' +
@@ -782,7 +867,7 @@ function apiUploadDoc_(p) {
   return withLock_(function () {
     var file = withDrive_(function () { return docFolder_(khach).createFile(Utilities.newBlob(Utilities.base64Decode(m[2]), m[1], name)); });
     readAll_('TaiLieu').filter(function (d) {
-      return d.khach_id === khach.id && d.loai === loai && loai !== 'Khác' && (CARD_DOC_TYPES.indexOf(loai) < 0 || d.the_id === p.the_id);
+      return d.khach_id === khach.id && d.loai === loai && MULTI_DOC_TYPES.indexOf(loai) < 0 && (CARD_DOC_TYPES.indexOf(loai) < 0 || d.the_id === p.the_id);
     }).forEach(function (d) { trashDoc_(d); });
     var obj = { id: newId_(), khach_id: khach.id, loai: loai, the_id: p.the_id || '', file_id: file.getId(), ten_file: name,
       ghi_chu: String(p.ghi_chu || ''), tao_luc: nowStr_() };
