@@ -10,6 +10,15 @@
 		toggle.addEventListener( 'click', () => {
 			const open = nav.classList.toggle( 'is-open' );
 			toggle.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
+			document.documentElement.classList.toggle( 'nav-locked', open ); // Trang phía sau không cuộn theo, menu dài vuốt được.
+		} );
+		// Bấm một mục (kể cả link #) thì đóng menu.
+		nav.addEventListener( 'click', ( e ) => {
+			if ( e.target.closest( 'a' ) && nav.classList.contains( 'is-open' ) ) {
+				nav.classList.remove( 'is-open' );
+				toggle.setAttribute( 'aria-expanded', 'false' );
+				document.documentElement.classList.remove( 'nav-locked' );
+			}
 		} );
 	}
 
