@@ -107,3 +107,49 @@ function hoanghiep_tax_query( $q ) {
 		$q->set( 'posts_per_page', 12 );
 	}
 }
+
+/**
+ * Web chuyển từ giao diện cũ (Elementor / Elementor Pro theme builder): trang có mẫu Elementor gán sẵn
+ * vẫn hiển thị bằng mẫu của Hoàng Hiệp cho trang chủ, dự án, nhà đất, tin tức, giới thiệu, liên hệ.
+ */
+add_filter( 'template_include', 'hoanghiep_override_builder_template', 999 );
+function hoanghiep_override_builder_template( $template ) {
+	if ( false === strpos( wp_normalize_path( (string) $template ), '/plugins/elementor' ) ) {
+		return $template;
+	}
+	$ours = '';
+	if ( is_front_page() ) {
+		$ours = get_front_page_template();
+	} elseif ( is_home() ) {
+		$ours = get_home_template();
+	} elseif ( is_singular( array( 'du-an', 'bat-dong-san', 'post' ) ) ) {
+		$ours = get_single_template();
+	} elseif ( is_page( array( 'gioi-thieu', 'lien-he', 'tin-tuc' ) ) ) {
+		$ours = get_page_template();
+	} elseif ( is_tax( array( 'loai-du-an', 'khu-vuc', 'loai-bds' ) ) ) {
+		$ours = get_taxonomy_template();
+	} elseif ( is_post_type_archive( array( 'du-an', 'bat-dong-san' ) ) || is_category() ) {
+		$ours = is_category() ? get_category_template() : get_archive_template();
+	}
+	return $ours ?: $template;
+}
+
+
+/** Nhắc tắt các plugin chỉ chạy được với giao diện Houzez (gây lỗi nghiêm trọng khi đã đổi giao diện). */
+add_action( 'admin_notices', 'hoanghiep_old_theme_plugins_notice' );
+function hoanghiep_old_theme_plugins_notice() {
+	if ( ! current_user_can( 'activate_plugins' ) ) {
+		return;
+	}
+	$old = array_filter(
+		(array) get_option( 'active_plugins', array() ),
+		static fn( $p ) => 0 === strpos( $p, 'houzez-' ) || 0 === strpos( $p, 'redux-framework/' )
+	);
+	if ( $old ) {
+		printf(
+			'<div class="notice notice-error"><p><strong>Giao diện Hoàng Hiệp:</strong> hãy <a href="%s">vô hiệu hóa</a> các plugin của giao diện Houzez cũ (%s) – chúng gây lỗi nghiêm trọng khi không dùng giao diện Houzez.</p></div>',
+			esc_url( admin_url( 'plugins.php?plugin_status=active' ) ),
+			esc_html( implode( ', ', array_map( static fn( $p ) => dirname( $p ), $old ) ) )
+		);
+	}
+}

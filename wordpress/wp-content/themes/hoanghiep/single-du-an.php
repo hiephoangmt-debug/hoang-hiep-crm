@@ -115,7 +115,7 @@ while ( have_posts() ) :
 				<?php if ( has_excerpt() ) : ?>
 					<p class="lead"><?php echo esc_html( get_the_excerpt() ); ?></p>
 				<?php endif; ?>
-				<?php if ( trim( get_the_content() ) ) : ?>
+				<?php if ( trim( get_the_content() ) && ! hh_is_builder_page() ) : ?>
 					<div class="entry-content"><?php the_content(); ?></div>
 				<?php else : ?>
 					<div class="entry-content">
