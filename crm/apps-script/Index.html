@@ -440,7 +440,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       <label class="f">Số tiền <span class="hint">8.999 = 8.999.000đ · 110tr</span><input name="so_tien_text" required inputmode="decimal"></label>
       <div class="full chips" id="tx-cards" style="margin-top:-4px"></div>
       <div class="full" id="tx-photos-box">
-        <div class="hint" style="font-weight:700;color:var(--text);margin-bottom:6px">📷 Ảnh khách &amp; thẻ <span class="hint" style="font-weight:400">– chụp luôn khi làm, lưu cùng giao dịch</span></div>
+        <div class="hint" style="font-weight:700;color:var(--text);margin-bottom:6px">📷 Ảnh khách &amp; thẻ <span class="hint" style="font-weight:400">– khách cũ hiện ảnh đã lưu; bấm Thay mới nếu cần đổi</span></div>
         <div class="docs" id="tx-photos"></div>
       </div>
       <label class="f" data-for="dao">Ngày đáo (hạn thanh toán)<input type="number" name="ngay_dao" min="1" max="31"></label>
@@ -904,7 +904,6 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     $('[data-act=delete-tx]').classList.toggle('hidden', !t.id);
     S.txPhotos = {};
     S.txDocs = [];
-    S.txRetake = false;
     S.txHistory = null;
     updateTxForm();
     loadTxCards();
@@ -1989,7 +1988,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   function renderTxHistory() {
     var box = $('#tx-history');
     if (!S.txHistory || !txForm.elements.khach_id.value) { box.innerHTML = ''; return; }
-    box.innerHTML = '<div class="card" style="margin:0;background:var(--info-bg)"><div style="margin-bottom:6px">👤 <b>Khách cũ quay lại</b> – đã có hồ sơ, không cần chụp lại CCCD / thẻ đã có.</div>' + historyHtml(S.txHistory, false) + '</div>';
+    box.innerHTML = '<div class="card" style="margin:0;background:var(--info-bg)"><div style="margin-bottom:6px">👤 <b>Khách cũ quay lại</b> – đã có hồ sơ, ảnh CCCD / thẻ đã lưu hiện ở mục ảnh phía trên.</div>' + historyHtml(S.txHistory, false) + '</div>';
   }
 
   // Ô ảnh trong form giao dịch: ảnh chụp mới giữ tạm, bấm Lưu giao dịch xong mới gửi lên.
@@ -1997,21 +1996,19 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   function renderTxPhotos() {
     var the = txForm.elements.the.value.trim().toLowerCase();
     var card = (S.txCards || []).filter(function (k) { return k.ten_the.toLowerCase() === the; })[0];
-    var haveAll = TX_PHOTO_TYPES.every(function (loai) {
-      return loai === 'Ảnh thẻ' ? !!(card && card.anh_id) : (S.txDocs || []).some(function (d) { return d.loai === loai; });
-    });
-    var anyPending = Object.keys(S.txPhotos || {}).length > 0;
-    if (haveAll && !anyPending && !S.txRetake) {
-      $('#tx-photos').innerHTML = '<div class="doc" style="grid-column:1/-1;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:8px">' +
-        '<span>✅ Đã có ảnh CCCD 2 mặt và ảnh thẻ <b>' + esc(card.ten_the) + '</b> – không cần chụp lại.</span>' +
-        '<button type="button" class="btn btn--ghost btn--sm" data-txretake="1">📷 Chụp lại</button></div>';
-      return;
-    }
     $('#tx-photos').innerHTML = TX_PHOTO_TYPES.map(function (loai) {
       var pending = (S.txPhotos || {})[loai];
       var have = loai === 'Ảnh thẻ' ? (card && card.anh_id) : ((S.txDocs || []).filter(function (d) { return d.loai === loai; })[0] || {}).id;
       var img = pending ? '<img class="doc__img" alt="Ảnh" src="' + pending + '">' : docImg(have, 'doc__img', loai === 'Ảnh thẻ' ? '💳 Chưa có ảnh' : '🪪 Chưa có ảnh');
-      return '<div class="doc">' + img + '<div class="doc__label">' + loai + (pending ? ' <span class="badge badge--warn">chờ lưu</span>' : have ? ' <span class="badge badge--ok">đã có</span>' : '') + '</div>' +
+      var label = loai === 'Ảnh thẻ' && card ? 'Ảnh thẻ ' + esc(card.ten_the) : loai;
+      if (have && !pending) {
+        // Khách cũ: hiện ảnh đã lưu, muốn đổi thì bấm Thay mới (chụp hoặc tải)
+        return '<div class="doc">' + img + '<div class="doc__label">' + label + ' <span class="badge badge--ok">đã có</span></div>' +
+          '<div class="row"><span class="hint" style="width:100%">🔄 Thay mới:</span>' +
+          '<button type="button" class="btn btn--ghost btn--sm" data-txpick="' + loai + '" data-cap="1">📷 Chụp</button>' +
+          '<button type="button" class="btn btn--ghost btn--sm" data-txpick="' + loai + '">📁 Tải</button></div></div>';
+      }
+      return '<div class="doc">' + img + '<div class="doc__label">' + label + (pending ? ' <span class="badge badge--warn">' + (have ? 'ảnh mới – chờ lưu' : 'chờ lưu') + '</span>' : '') + '</div>' +
         '<div class="row"><button type="button" class="btn btn--sm" data-txpick="' + loai + '" data-cap="1">📷 Chụp</button>' +
         '<button type="button" class="btn btn--ghost btn--sm" data-txpick="' + loai + '">📁 Tải</button>' +
         (pending ? '<button type="button" class="btn btn--danger btn--sm" data-txunpick="' + loai + '">✕</button>' : '') + '</div></div>';
@@ -2070,7 +2067,6 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       pickImage(!!tp.dataset.cap, { pending: true, loai: tp.dataset.txpick });
       return;
     }
-    if (e.target.closest('[data-txretake]')) { S.txRetake = true; renderTxPhotos(); return; }
     var hn = e.target.closest('[data-histn]');
     if (hn) {
       S.histN = Number(hn.dataset.histn);
