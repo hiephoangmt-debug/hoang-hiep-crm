@@ -383,9 +383,12 @@ test('several advances in one day before transactions, over-advance, and summary
   assert.strictEqual(today.da_chuyen, 250000000);
   assert.strictEqual(today.so_du, -200000000);
   assert.match(today.tin_nhan, /tổng kết ngày 05\/10\/2026/);
-  assert.match(today.tin_nhan, /Số dư đầu ngày: chị còn nợ em 50\.000\.000đ/);
-  assert.match(today.tin_nhan, /\(3 lần\): 250\.000\.000đ/);
-  assert.match(today.tin_nhan, /chị ứng dư 200\.000\.000đ/);
+  assert.match(today.tin_nhan, /Công nợ trước đó: chị còn nợ em 50\.000\.000đ/);
+  // Ứng nhiều hơn số nợ: trừ hết nợ, phần dư là ứng dư
+  assert.match(today.tin_nhan, /− Ứng trước 100\.000\.000đ \(sáng\) → trừ hết nợ 50\.000\.000đ, dư 50\.000\.000đ \(chị ứng dư\)/);
+  assert.match(today.tin_nhan, /− Ứng trước 50\.000\.000đ \(trưa\) → chị ứng dư 100\.000\.000đ/);
+  assert.match(today.tin_nhan, /Số dư cuối 05\/10\/2026: chị ứng dư 200\.000\.000đ/);
+  assert.strictEqual(today.payments[0].so_du_sau, -50000000);
   // Tối làm GD 300tr → chị lại còn nợ
   const t = call('saveTransaction', { ngay: '2026-10-05', dich_vu: 'Đáo hạn', ten_khach: 'C.Lan', the: 'VCB', so_tien: 300000000, may: 'MB', phi_khach: 1.7, phi_may_text: '1.3' });
   today = call('periodSummary', { from: '2026-10-05', to: '2026-10-05' });
@@ -408,6 +411,18 @@ test('several advances in one day before transactions, over-advance, and summary
   // Kỳ chỉ ngày 07 thì số dư đầu kỳ = cuối ngày 05
   assert.strictEqual(call('periodSummary', { from: '2026-10-06', to: '2026-10-07' }).so_du_truoc, today.so_du);
   assert.throws(() => call('periodSummary', { from: '2026-10-07', to: '2026-10-05' }), /trước/);
+});
+
+test('advance less than the existing debt leaves the rest owed; transactions are added at end of day', () => {
+  const { call } = fresh('2026-10-05');
+  call('savePayment', { ngay: '2026-10-04', loai: 'Nợ cũ', so_tien: 50000000 });
+  call('savePayment', { ngay: '2026-10-05', loai: 'Ứng trước', so_tien: 30000000, ghi_chu: 'sáng' });
+  call('saveTransaction', { ngay: '2026-10-05', dich_vu: 'Đáo hạn', ten_khach: 'C.Lan', the: 'VCB', so_tien: 100000000, may: 'MB', phi_khach: 1.7, phi_may_text: '1.3' });
+  const st = call('periodSummary', { from: '2026-10-05', to: '2026-10-05' });
+  assert.strictEqual(st.payments[0].so_du_sau, 20000000);
+  assert.match(st.tin_nhan, /− Ứng trước 30\.000\.000đ \(sáng\) → chị còn nợ 20\.000\.000đ/);
+  assert.match(st.tin_nhan, /\+ Kết GD: 1 GD 100\.000\.000đ − phí máy 1\.300\.000đ = 98\.700\.000đ → chị còn nợ 118\.700\.000đ/);
+  assert.strictEqual(st.so_du, 118700000);
 });
 
 test('refund columns are added to an existing sheet; old rows get computed values', () => {

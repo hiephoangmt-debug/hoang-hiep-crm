@@ -847,6 +847,28 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   }
   function oweText(v) { return v > 0 ? esc(rn()) + ' còn nợ ' + money(v) : v < 0 ? esc(rn()) + ' ứng dư ' + money(-v) : 'hết nợ'; }
 
+  // Ứng ít hơn số nợ → còn nợ; ứng nhiều hơn số nợ → trừ hết nợ, phần dư là ứng dư.
+  function effectText(before, after) {
+    var name = esc(rn());
+    if (before > 0 && after < 0) return 'trừ hết nợ ' + money(before) + ', dư <b class="pos" style="display:inline">' + money(-after) + '</b> (' + name + ' ứng dư)';
+    if (before > 0 && after === 0) return 'trừ hết nợ ' + money(before) + ', hết nợ';
+    return after > 0 ? name + ' còn nợ <b class="neg" style="display:inline">' + money(after) + '</b>' : after < 0 ? name + ' ứng dư <b class="pos" style="display:inline">' + money(-after) + '</b>' : 'hết nợ';
+  }
+  // Từng ngày theo thứ tự: đầu ngày → từng lần ứng/chuyển (trừ vào nợ trước) → kết giao dịch cuối ngày.
+  function stmtDayRows(st, one) {
+    var rows = '';
+    st.ngay_lam.forEach(function (d) {
+      if (!one) rows += '<tr><td colspan="2" style="padding-top:10px"><b>' + dmy(d.ngay) + '</b> <small class="muted">đầu ngày: ' + oweText(d.so_du_dau) + '</small></td></tr>';
+      st.payments.filter(function (x) { return x.ngay === d.ngay; }).forEach(function (x) {
+        rows += '<tr class="sub"><td>' + (x.tien < 0 ? '➕ ' : '➖ ') + esc(x.loai) + (x.ghi_chu ? ' · ' + esc(x.ghi_chu) : '') +
+          '<br>→ ' + effectText(x.so_du_truoc, x.so_du_sau) + '</td><td>' + (x.tien < 0 ? '+' : '−') + money(Math.abs(x.tien)) + '</td></tr>';
+      });
+      if (d.so_gd) rows += '<tr class="sub"><td>➕ Kết GD: ' + d.so_gd + ' GD ' + money(d.so_tien) + ' − phí máy ' + money(d.chi_phi) +
+        '<br>→ ' + effectText(d.so_du_truoc_gd, d.so_du) + '</td><td>+' + money(d.phat_sinh) + '</td></tr>';
+    });
+    if (!st.ngay_lam.length) rows += '<tr class="sub"><td>Không có giao dịch hay tiền chuyển/ứng trong kỳ.</td><td></td></tr>';
+    return rows;
+  }
   /* Tổng kết từ ngày a đến ngày b */
   function sumQuick(v) {
     var t = S.boot.today, p = parts(t);
@@ -873,18 +895,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       $('#sum-kpis').innerHTML = kpi('Giao dịch (Đáo / Rút)', g.so_gd + ' <small class="muted">(' + g.so_dao + ' / ' + g.so_rut + ')</small>') +
         kpi('Tổng tiền', money(g.so_tien)) + kpi('Phí khách', money(g.tien_phi)) + kpi('Phí máy', money(g.chi_phi)) +
         kpi('Phí của mình', money(g.loi_nhuan), g.loi_nhuan >= 0 ? 'pos' : 'neg');
-      var rows = '<tr><td>Số dư đầu ' + (one ? 'ngày ' : 'kỳ ') + dmy(st.tu_ngay) + '<br><small class="muted">' + oweText(st.so_du_truoc) + '</small></td><td class="' + (st.so_du_truoc > 0 ? 'neg' : 'pos') + '">' + money(Math.abs(st.so_du_truoc)) + '</td></tr>';
-      var byDay = {};
-      st.payments.forEach(function (x) { (byDay[x.ngay] = byDay[x.ngay] || []).push(x); });
-      st.ngay_lam.forEach(function (d) {
-        if (!one) rows += '<tr><td colspan="2" style="padding-top:10px"><b>' + dmy(d.ngay) + '</b></td></tr>';
-        if (d.so_gd) rows += '<tr class="sub"><td>+ Làm ' + d.so_gd + ' GD ' + money(d.so_tien) + ' − phí máy ' + money(d.chi_phi) + '</td><td>+' + money(d.phat_sinh) + '</td></tr>';
-        (byDay[d.ngay] || []).forEach(function (x) {
-          rows += '<tr class="sub"><td>' + (x.tien < 0 ? '+ ' : '− ') + esc(x.loai) + (x.ghi_chu ? ' · ' + esc(x.ghi_chu) : '') + '</td><td>' + (x.tien < 0 ? '+' : '−') + money(Math.abs(x.tien)) + '</td></tr>';
-        });
-        if (!one) rows += '<tr class="sub"><td>Số dư cuối ngày</td><td class="' + (d.so_du > 0 ? 'neg' : 'pos') + '">' + (d.so_du > 0 ? name + ' nợ ' : d.so_du < 0 ? 'ứng dư ' : '') + money(Math.abs(d.so_du)) + '</td></tr>';
-      });
-      if (!st.ngay_lam.length) rows += '<tr class="sub"><td>Không có giao dịch hay tiền chuyển/ứng trong kỳ.</td><td></td></tr>';
+      var rows = '<tr><td>Công nợ trước đó (đầu ' + (one ? 'ngày ' : 'kỳ ') + dmy(st.tu_ngay) + ')<br><small class="muted">' + oweText(st.so_du_truoc) + '</small></td><td class="' + (st.so_du_truoc > 0 ? 'neg' : 'pos') + '">' + money(Math.abs(st.so_du_truoc)) + '</td></tr>';
+      rows += stmtDayRows(st, one);
       rows += '<tr><td>Tổng: tiền hoàn + ' + money(st.phat_sinh) + ' · ' + name + ' chuyển/ứng ' + (st.so_lan_chuyen ? st.so_lan_chuyen + ' lần ' : '') + '− ' + money(st.da_chuyen) + '</td><td></td></tr>';
       rows += '<tr class="total"><td>= Số dư cuối ' + (one ? 'ngày' : 'kỳ') + ': ' + (st.so_du > 0 ? name + ' còn nợ mình' : st.so_du < 0 ? name + ' ứng dư (mình giữ của chị)' : 'hết nợ') + '</td><td class="' + (st.so_du > 0 ? 'neg' : 'pos') + '">' + money(Math.abs(st.so_du)) + '</td></tr>';
       $('#sum-stmt').innerHTML = rows;
@@ -909,11 +921,9 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       S.closePreview = st;
       $('#close-range').innerHTML = 'Kỳ đối chiếu: <b>' + dmy(st.tu_ngay) + ' → ' + dmy(st.ngay) + '</b>' + (st.ket_truoc ? ' (sau lần kết ' + dmy(st.ket_truoc) + ')' : '');
       var rows = '';
-      if (st.ket_truoc) rows += '<tr><td>Số dư kết ngày ' + dmy(st.ket_truoc) + '<br><small class="muted">' + oweText(st.so_du_truoc) + '</small></td><td>' + (st.so_du_truoc < 0 ? '−' : '') + money(Math.abs(st.so_du_truoc)) + '</td></tr>';
-      rows += '<tr><td>+ Tiền hoàn phát sinh<br><small class="muted">' + st.so_gd + ' GD · ' + money(st.so_tien) + ' − phí máy ' + money(st.chi_phi) + '</small></td><td>' + money(st.phat_sinh) + '</td></tr>';
-      st.ngay_lam.forEach(function (x) { rows += '<tr class="sub"><td>' + dm(x.ngay) + ': ' + x.so_gd + ' GD ' + money(x.so_tien) + ' − ' + money(x.chi_phi) + '</td><td>' + money(x.phat_sinh) + '</td></tr>'; });
-      rows += '<tr><td>− ' + esc(rn()) + ' đã chuyển / ứng</td><td>' + (st.da_chuyen < 0 ? '+' : '') + money(Math.abs(st.da_chuyen)) + '</td></tr>';
-      st.payments.forEach(function (x) { rows += '<tr class="sub"><td>' + dm(x.ngay) + ' · ' + esc(x.loai) + (x.ghi_chu ? ' · ' + esc(x.ghi_chu) : '') + '</td><td>' + (x.tien < 0 ? '+' : '−') + money(Math.abs(x.tien)) + '</td></tr>'; });
+      rows += '<tr><td>' + (st.ket_truoc ? 'Số dư kết ngày ' + dmy(st.ket_truoc) : 'Công nợ trước đó') + '<br><small class="muted">' + oweText(st.so_du_truoc) + '</small></td><td class="' + (st.so_du_truoc > 0 ? 'neg' : 'pos') + '">' + money(Math.abs(st.so_du_truoc)) + '</td></tr>';
+      rows += stmtDayRows(st, st.tu_ngay === st.ngay);
+      rows += '<tr><td>Cộng: tiền hoàn +' + money(st.phat_sinh) + ' (' + st.so_gd + ' GD) · ' + esc(rn()) + ' chuyển/ứng −' + money(st.da_chuyen) + '</td><td></td></tr>';
       rows += '<tr class="total"><td>= ' + (st.so_du > 0 ? esc(rn()) + ' còn nợ mình' : st.so_du < 0 ? esc(rn()) + ' ứng dư' : 'Hết nợ') + '</td><td class="' + (st.so_du > 0 ? 'neg' : 'pos') + '">' + money(Math.abs(st.so_du)) + '</td></tr>';
       $('#close-stmt').innerHTML = rows;
       $('#close-msg').value = st.tin_nhan;
@@ -1071,7 +1081,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       : '<span class="neg">➕ Cộng vào số ' + name + ' nợ: <b style="display:inline">+' + money(Math.abs(n)) + '</b></span>') : 'Nhập số tiền';
     if (m) {
       var after = m.so_du - sign;
-      html += '<br>Hiện tại: ' + oweText(m.so_du) + '<br>Sau khi ghi: <b style="display:inline" class="' + (after > 0 ? 'neg' : 'pos') + '">' + oweText(after) + '</b>';
+      html += '<br>Công nợ hiện tại: ' + oweText(m.so_du) + '<br>Sau khi ghi → ' + effectText(m.so_du, after);
     }
     $('#pay-calc').innerHTML = html;
   }
