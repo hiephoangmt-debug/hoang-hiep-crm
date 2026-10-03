@@ -1,5 +1,8 @@
 # Website WordPress – hiephoangmt.com
 
+> **Cài lên hosting (cPanel) từng bước:** xem [HUONG-DAN-CAI-DAT.md](HUONG-DAN-CAI-DAT.md) – chỉ cần tải 2 file zip lên trang quản trị và bấm *Cài đặt nhanh*. Tương thích Rank Math / Yoast SEO.
+
+
 Website thương hiệu cá nhân **Hoàng Hiệp – bất động sản Đà Nẵng**. Tông màu navy và trắng, điểm nhấn màu nâu.
 
 ![Trang chủ](docs/trang-chu.png)

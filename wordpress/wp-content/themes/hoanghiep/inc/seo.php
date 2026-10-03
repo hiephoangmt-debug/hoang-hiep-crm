@@ -3,7 +3,9 @@
  * SEO cho Google và công cụ tìm kiếm AI (ChatGPT, Perplexity, Gemini…):
  * meta description, Open Graph, schema.org JSON-LD, robots.txt, sitemap, /llms.txt.
  *
- * Nếu cài Yoast SEO hoặc Rank Math, phần meta & schema ở đây tự tắt để tránh trùng.
+ * Nếu cài Rank Math / Yoast SEO / AIOSEO: plugin lo tiêu đề, meta, Open Graph, sitemap chính;
+ * theme chỉ bổ sung phần plugin không có (schema dự án / tin nhà đất / hỏi đáp, mô tả tự sinh khi
+ * plugin để trống, noindex trang lọc, sitemap trang Mua bán – Cho thuê theo khu vực) để không trùng.
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -218,17 +220,19 @@ function hh_seo_head() {
 	}
 }
 
-/** Filter / sort / search result pages: keep crawlable but out of the index. */
-add_filter( 'wp_robots', 'hh_seo_robots' );
-function hh_seo_robots( $robots ) {
+/** Trang lọc / sắp xếp / tìm kiếm hoặc danh sách rỗng: cho Google đi qua nhưng không lập chỉ mục. */
+function hh_seo_noindex_request() {
 	foreach ( array( 'tk', 'gia', 'dt', 'pn', 'huong', 'sx', 'tt', 'duan', 'lien-he', 'khu-vuc', 'loai-bds' ) as $var ) {
 		if ( isset( $_GET[ $var ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
-			$robots['noindex'] = true;
-			$robots['follow']  = true;
-			break;
+			return true;
 		}
 	}
-	if ( ( is_post_type_archive( array( 'bat-dong-san', 'du-an' ) ) || is_tax() ) && ! have_posts() ) {
+	return ( is_post_type_archive( array( 'bat-dong-san', 'du-an' ) ) || is_tax() ) && ! have_posts();
+}
+
+add_filter( 'wp_robots', 'hh_seo_robots' );
+function hh_seo_robots( $robots ) {
+	if ( hh_seo_noindex_request() ) {
 		$robots['noindex'] = true;
 		$robots['follow']  = true;
 	}
@@ -443,12 +447,14 @@ function hh_schema_listing() {
 
 add_action( 'wp_head', 'hh_seo_schema', 20 );
 function hh_seo_schema() {
-	if ( hh_seo_plugin_active() || is_404() ) {
+	if ( is_404() ) {
 		return;
 	}
-	$graph = array( hh_schema_agent() );
+	// Có plugin SEO: plugin đã xuất WebSite, bài viết, breadcrumb – theme chỉ thêm schema bất động sản.
+	$plugin = hh_seo_plugin_active();
+	$graph  = array( hh_schema_agent() );
 
-	if ( is_front_page() ) {
+	if ( is_front_page() && ! $plugin ) {
 		$graph[] = array(
 			'@type'           => 'WebSite',
 			'@id'             => home_url( '/#website' ),
@@ -470,7 +476,7 @@ function hh_seo_schema() {
 		$graph[] = hh_schema_faq( hh_project_faq() );
 	} elseif ( is_singular( 'bat-dong-san' ) ) {
 		$graph[] = hh_schema_listing();
-	} elseif ( is_singular( 'post' ) ) {
+	} elseif ( is_singular( 'post' ) && ! $plugin ) {
 		$graph[] = array(
 			'@type'            => 'BlogPosting',
 			'headline'         => get_the_title(),
@@ -483,7 +489,7 @@ function hh_seo_schema() {
 			'publisher'        => array( '@id' => home_url( '/#agent' ) ),
 			'inLanguage'       => 'vi-VN',
 		);
-	} elseif ( is_page( 'gioi-thieu' ) ) {
+	} elseif ( is_page( 'gioi-thieu' ) && ! $plugin ) {
 		$graph[] = array(
 			'@type'      => 'ProfilePage',
 			'url'        => get_permalink(),
@@ -509,8 +515,10 @@ function hh_seo_schema() {
 		$graph[] = hh_schema_faq( hh_listing_faq( hh_listing_stats(), $deal, $place, hh_lcfirst( hh_listing_archive_title() ) ) );
 	}
 
-	$graph[] = hh_schema_breadcrumb();
-	$graph   = array_values( array_filter( $graph ) );
+	if ( ! $plugin ) {
+		$graph[] = hh_schema_breadcrumb();
+	}
+	$graph = array_values( array_filter( $graph ) );
 
 	echo '<script type="application/ld+json">' . wp_json_encode( array( '@context' => 'https://schema.org', '@graph' => $graph ), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP ) . "</script>\n";
 }
@@ -533,7 +541,12 @@ function hh_seo_robots_txt( $output, $public ) {
 	foreach ( $ai as $bot ) {
 		$out .= "User-agent: {$bot}\nAllow: /\nDisallow: /wp-admin/\n\n";
 	}
-	$out .= 'Sitemap: ' . home_url( '/wp-sitemap.xml' ) . "\n";
+	if ( hh_seo_plugin_active() ) {
+		$out .= 'Sitemap: ' . home_url( defined( 'AIOSEO_VERSION' ) ? '/sitemap.xml' : '/sitemap_index.xml' ) . "\n";
+		$out .= 'Sitemap: ' . home_url( '/nhadat-sitemap.xml' ) . "\n";
+	} else {
+		$out .= 'Sitemap: ' . home_url( '/wp-sitemap.xml' ) . "\n";
+	}
 	return $out;
 }
 
@@ -550,16 +563,7 @@ function hh_seo_register_sitemap() {
 				$this->object_type = 'nhadat';
 			}
 			public function get_url_list( $page_num, $object_subtype = '' ) {
-				$urls = array();
-				foreach ( array( 'ban', 'thue' ) as $deal ) {
-					$urls[] = array( 'loc' => hh_deal_url( $deal ) );
-					foreach ( array( 'khu-vuc', 'loai-bds' ) as $tax ) {
-						foreach ( hh_deal_landing_terms( $deal, $tax ) as list( $term ) ) {
-							$urls[] = array( 'loc' => hh_deal_term_url( $deal, $term ) );
-						}
-					}
-				}
-				return $urls;
+				return array_map( static fn( $loc ) => array( 'loc' => $loc ), hh_seo_landing_urls() );
 			}
 			public function get_max_num_pages( $object_subtype = '' ) {
 				return 1;
@@ -567,6 +571,72 @@ function hh_seo_register_sitemap() {
 		}
 	}
 	wp_register_sitemap_provider( 'nhadat', new HH_Landing_Sitemap() );
+}
+
+/** URL các trang Mua bán / Cho thuê theo khu vực và loại nhà đất. */
+function hh_seo_landing_urls() {
+	$urls = array();
+	foreach ( array( 'ban', 'thue' ) as $deal ) {
+		$urls[] = hh_deal_url( $deal );
+		foreach ( array( 'khu-vuc', 'loai-bds' ) as $tax ) {
+			foreach ( hh_deal_landing_terms( $deal, $tax ) as list( $term ) ) {
+				$urls[] = hh_deal_term_url( $deal, $term );
+			}
+		}
+	}
+	return $urls;
+}
+
+/* -------------------------------------------------------------------------
+ * Tương thích Rank Math / Yoast SEO / AIOSEO
+ * ---------------------------------------------------------------------- */
+
+/** Mô tả tự sinh khi plugin SEO để trống ô mô tả. */
+function hh_seo_fill_description( $desc ) {
+	if ( '' !== trim( (string) $desc ) || is_404() ) {
+		return $desc;
+	}
+	$auto = trim( preg_replace( '/\s+/u', ' ', hh_seo_description() ) );
+	return mb_strlen( $auto ) > 300 ? mb_substr( $auto, 0, 297 ) . '…' : $auto;
+}
+add_filter( 'rank_math/frontend/description', 'hh_seo_fill_description' );
+add_filter( 'wpseo_metadesc', 'hh_seo_fill_description' );
+add_filter( 'wpseo_opengraph_desc', 'hh_seo_fill_description' );
+add_filter( 'aioseo_description', 'hh_seo_fill_description' );
+
+/** Trang lọc / tìm kiếm: noindex cả khi plugin SEO tự xuất thẻ robots. */
+add_filter(
+	'rank_math/frontend/robots',
+	static function ( $robots ) {
+		if ( hh_seo_noindex_request() ) {
+			$robots['index']  = 'noindex';
+			$robots['follow'] = 'follow';
+		}
+		return $robots;
+	}
+);
+add_filter( 'wpseo_robots', static fn( $robots ) => hh_seo_noindex_request() ? 'noindex, follow' : $robots );
+
+/** Đưa trang Mua bán – Cho thuê theo khu vực vào sitemap của plugin. */
+function hh_seo_sitemap_index_entry( $xml = '' ) {
+	return $xml . '<sitemap><loc>' . esc_url( home_url( '/nhadat-sitemap.xml' ) ) . '</loc><lastmod>' . esc_html( gmdate( 'c' ) ) . "</lastmod></sitemap>\n";
+}
+add_filter( 'rank_math/sitemap/index', 'hh_seo_sitemap_index_entry', 11 );
+add_filter( 'wpseo_sitemap_index', 'hh_seo_sitemap_index_entry' );
+
+add_action( 'parse_request', 'hh_seo_landing_sitemap' );
+function hh_seo_landing_sitemap( $wp ) {
+	if ( 'nhadat-sitemap.xml' !== trim( (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+		return;
+	}
+	status_header( 200 );
+	header( 'Content-Type: application/xml; charset=utf-8' );
+	echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+	foreach ( hh_seo_landing_urls() as $url ) {
+		echo '<url><loc>' . esc_url( $url ) . "</loc></url>\n";
+	}
+	echo "</urlset>\n";
+	exit;
 }
 
 /* -------------------------------------------------------------------------

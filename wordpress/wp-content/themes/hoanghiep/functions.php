@@ -8,8 +8,10 @@ defined( 'ABSPATH' ) || exit;
 if ( ! defined( 'HH_CRM_VERSION' ) ) {
 	add_action(
 		'admin_notices',
-		fn() => print '<div class="notice notice-error"><p>Theme Hoàng Hiệp cần plugin <strong>Hoàng Hiệp CRM</strong> (thư mục <code>wp-content/mu-plugins/</code>). Hãy tải lên trước khi dùng.</p></div>'
+		fn() => print '<div class="notice notice-error"><p>Giao diện Hoàng Hiệp cần plugin <strong>Hoàng Hiệp CRM</strong>: vào <a href="' . esc_url( admin_url( 'plugin-install.php?tab=upload' ) ) . '">Plugin → Cài mới → Tải plugin lên</a>, chọn file <code>hoang-hiep-crm.zip</code> rồi bấm Kích hoạt.</p></div>'
 	);
+	// Ngoài website: hiện trang thông báo thay vì lỗi.
+	add_filter( 'template_include', fn() => get_theme_file_path( 'no-plugin.php' ), 99 );
 	return;
 }
 
