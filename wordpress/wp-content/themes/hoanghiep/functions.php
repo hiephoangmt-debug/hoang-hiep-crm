@@ -113,6 +113,13 @@ function hoanghiep_tax_query( $q ) {
  * Web chuyển từ giao diện cũ (Elementor / Elementor Pro theme builder): trang có mẫu Elementor gán sẵn
  * vẫn hiển thị bằng mẫu của Hoàng Hiệp cho trang chủ, dự án, nhà đất, tin tức, giới thiệu, liên hệ.
  */
+/** Trang tổng hợp /san-pham/shop-khoi-de/, /san-pham/penthouse/, /san-pham/duplex/. */
+add_filter(
+	'template_include',
+	static fn( $template ) => function_exists( 'hh_special_key' ) && hh_special_key( (string) get_query_var( 'hh_sp' ) ) ? get_theme_file_path( 'san-pham.php' ) : $template,
+	98
+);
+
 add_filter( 'template_include', 'hoanghiep_override_builder_template', 999 );
 function hoanghiep_override_builder_template( $template ) {
 	if ( false === strpos( wp_normalize_path( (string) $template ), '/plugins/elementor' ) ) {
@@ -129,6 +136,8 @@ function hoanghiep_override_builder_template( $template ) {
 		$ours = get_page_template();
 	} elseif ( is_tax( array( 'loai-du-an', 'khu-vuc', 'loai-bds' ) ) ) {
 		$ours = get_taxonomy_template();
+	} elseif ( get_query_var( 'hh_sp' ) ) {
+		$ours = get_theme_file_path( 'san-pham.php' );
 	} elseif ( is_post_type_archive( array( 'du-an', 'bat-dong-san' ) ) || is_category() ) {
 		$ours = is_category() ? get_category_template() : get_archive_template();
 	}

@@ -265,6 +265,9 @@ while ( have_posts() ) :
 							<?php endif; ?>
 							<?php hh_data_table( $p['cols'], $p['rows'] ); ?>
 							<?php hh_gallery( $p['gallery'], 'san-pham-' . $key ); ?>
+							<?php if ( defined( 'HH_SPECIAL_PAGES' ) && isset( HH_SPECIAL_PAGES[ $key ] ) && ! $resale ) : ?>
+								<p class="note"><a href="<?php echo esc_url( hh_special_url( $key ) ); ?>">So sánh <?php echo esc_html( hh_lcfirst( $p['label'] ) ); ?> các dự án đang mở bán tại Đà Nẵng →</a></p>
+							<?php endif; ?>
 							<?php if ( ! $p['rows'] ) : ?>
 								<?php hh_pending( $resale ? 'Liên hệ để nhận danh sách ' . hh_lcfirst( $p['label'] ) . ' đang chuyển nhượng, cho thuê trong dự án.' : 'Rổ hàng ' . hh_lcfirst( $p['label'] ) . ' (mã căn, diện tích, giá) đang được cập nhật theo từng đợt mở bán.', $resale ? 'Nhận danh sách căn' : 'Nhận rổ hàng' ); ?>
 							<?php endif; ?>

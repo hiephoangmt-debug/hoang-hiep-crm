@@ -97,6 +97,9 @@ function hh_setup_menu( $pages ) {
 	$high = $add( 'Cao tầng', '/loai-du-an/cao-tang/', $projects );
 	$add( 'Căn hộ sở hữu lâu dài', '/loai-du-an/can-ho-so-huu-lau-dai/', $high );
 	$add( 'Căn hộ dịch vụ (50 năm)', '/loai-du-an/can-ho-dich-vu/', $high );
+	$add( 'Shop khối đế', '/san-pham/shop-khoi-de/', $high );
+	$add( 'Penthouse', '/san-pham/penthouse/', $high );
+	$add( 'Duplex', '/san-pham/duplex/', $high );
 	$low = $add( 'Thấp tầng', '/loai-du-an/thap-tang/', $projects );
 	$add( 'Biệt thự nghỉ dưỡng', '/loai-du-an/biet-thu/', $low );
 	$add( 'Đất nền', '/loai-du-an/dat-nen/', $low );

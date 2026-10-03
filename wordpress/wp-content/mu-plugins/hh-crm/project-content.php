@@ -190,6 +190,10 @@ function hh_project_products( $post_id = null ) {
 		$rows    = 'can-ho' === $key ? hh_table( 'hh_p_unit_types', 4, $post_id ) : hh_table( "hh_p_{$key}_table", count( $cols ), $post_id );
 		$desc    = 'can-ho' === $key ? '' : hh_meta( "hh_p_{$key}_desc", $post_id );
 		$gallery = 'can-ho' === $key ? array() : hh_ids( "hh_p_{$key}_gallery", $post_id );
+		// Shop khối đế, penthouse, duplex: chỉ hiện khi dự án có thông tin thật (mô tả, bảng căn hoặc ảnh).
+		if ( isset( HH_SPECIAL_PAGES[ $key ] ) ) {
+			$relevant = false;
+		}
 		if ( ! $relevant && ! $rows && ! $desc && ! $gallery ) {
 			continue;
 		}
@@ -405,4 +409,96 @@ function hh_project_listings( $post_id, $deal, $limit = 6 ) {
 /** Link tất cả tin bán / cho thuê của dự án. */
 function hh_project_listings_url( $post_id, $deal ) {
 	return add_query_arg( 'duan', get_post_field( 'post_name', $post_id ), hh_deal_url( $deal ) );
+}
+
+/* -------------------------------------------------------------------------
+ * Trang tổng hợp /san-pham/shop-khoi-de/, /san-pham/penthouse/, /san-pham/duplex/
+ * ---------------------------------------------------------------------- */
+
+/** Slug trang tổng hợp => [khóa sản phẩm, tên]. */
+const HH_SPECIAL_PAGES = array(
+	'shop'      => array( 'shop-khoi-de', 'Shop khối đế' ),
+	'penthouse' => array( 'penthouse', 'Penthouse' ),
+	'duplex'    => array( 'duplex', 'Duplex' ),
+);
+
+/** Khóa sản phẩm từ slug trang (shop-khoi-de => shop). */
+function hh_special_key( $slug ) {
+	foreach ( HH_SPECIAL_PAGES as $key => list( $s ) ) {
+		if ( $s === $slug ) {
+			return $key;
+		}
+	}
+	return '';
+}
+
+function hh_special_url( $key ) {
+	return home_url( '/san-pham/' . HH_SPECIAL_PAGES[ $key ][0] . '/' );
+}
+
+/**
+ * Dự án sắp mở bán, đang mở bán, đang bàn giao (chưa bán hết) có thông tin loại sản phẩm $key.
+ * Trả về [post_id => dữ liệu sản phẩm], dự án HOT lên trước.
+ */
+function hh_special_projects( $key ) {
+	$ids = get_posts(
+		array(
+			'post_type'      => 'du-an',
+			'posts_per_page' => 200,
+			'fields'         => 'ids',
+			'orderby'        => 'title',
+			'order'          => 'ASC',
+			'meta_query'     => array( array( 'key' => 'hh_p_status', 'value' => array( 'sap-mo-ban', 'dang-mo-ban', 'dang-ban-giao' ), 'compare' => 'IN' ) ),
+		)
+	);
+	$out = array();
+	foreach ( $ids as $id ) {
+		if ( hh_meta( 'hh_p_sold_out', $id ) ) {
+			continue;
+		}
+		$products = hh_project_products( $id );
+		if ( isset( $products[ $key ] ) ) {
+			$out[ $id ] = $products[ $key ];
+		}
+	}
+	uksort( $out, static fn( $a, $b ) => (int) (bool) hh_meta( 'hh_p_featured', $b ) - (int) (bool) hh_meta( 'hh_p_featured', $a ) );
+	return $out;
+}
+
+function hh_special_title( $key ) {
+	return HH_SPECIAL_PAGES[ $key ][1] . ' Đà Nẵng – dự án đang mở bán';
+}
+
+/** Đoạn mở đầu và hỏi đáp cho trang tổng hợp. */
+function hh_special_intro( $key ) {
+	$phone = function_exists( 'hoanghiep_opt' ) ? hoanghiep_opt( 'hh_phone' ) : '0904 567 009';
+	$data  = array(
+		'shop'      => array(
+			'lead' => 'Shop khối đế (shophouse chân đế) tại các dự án căn hộ đang mở bán ở Đà Nẵng: số lượng, diện tích, giá tham khảo và vị trí từng dự án.',
+			'faq'  => array(
+				array( 'Shop khối đế là gì?', 'Là các căn thương mại ở tầng 1 – 2 (đôi khi đến tầng 3) dưới chân tòa căn hộ, mặt tiền đường hoặc nội khu, dùng để kinh doanh hoặc cho thuê. Phần lớn dự án ở Đà Nẵng bán shop khối đế sở hữu lâu dài.' ),
+				array( 'Shop khối đế khác shophouse thấp tầng thế nào?', 'Shop khối đế nằm trong tòa căn hộ, giá thấp hơn, khách hàng sẵn có là cư dân tòa nhà; shophouse thấp tầng là nhà phố riêng biệt có đất, nhiều tầng, giá cao hơn.' ),
+				array( 'Nên chọn shop khối đế thế nào?', 'Ưu tiên căn mặt tiền đường lớn, góc hai mặt tiền, trần cao, dự án đông cư dân và đã có kế hoạch bàn giao rõ ràng. Hỏi kỹ phí quản lý, giờ hoạt động và quy định ngành nghề kinh doanh.' ),
+				array( 'Liên hệ nhận rổ hàng shop khối đế ở đâu?', 'Gọi hoặc Zalo Hoàng Hiệp ' . $phone . ' để nhận danh sách căn, bảng giá và chính sách mới nhất của từng dự án.' ),
+			),
+		),
+		'penthouse' => array(
+			'lead' => 'Căn penthouse tại các dự án đang mở bán ở Đà Nẵng: số căn, diện tích, giá tham khảo, view sông Hàn, biển và vị trí từng dự án.',
+			'faq'  => array(
+				array( 'Penthouse là gì?', 'Là căn hộ trên các tầng cao nhất của tòa nhà, diện tích lớn, trần cao, nhiều căn có sân vườn hoặc hồ bơi riêng và tầm nhìn toàn cảnh.' ),
+				array( 'Penthouse ở Đà Nẵng có sở hữu lâu dài không?', 'Tùy dự án. Penthouse trong dự án căn hộ ở có sổ hồng sở hữu lâu dài; penthouse trong dự án căn hộ dịch vụ, condotel thường sở hữu có thời hạn 50 năm. Xem mục pháp lý trên trang từng dự án.' ),
+				array( 'Số lượng penthouse mỗi dự án có nhiều không?', 'Rất ít – thường chỉ vài căn đến vài chục căn mỗi dự án, nên giá và chính sách thường được chủ đầu tư công bố riêng.' ),
+				array( 'Liên hệ nhận danh sách penthouse ở đâu?', 'Gọi hoặc Zalo Hoàng Hiệp ' . $phone . ' để nhận danh sách căn penthouse còn trống và bảng giá mới nhất.' ),
+			),
+		),
+		'duplex'    => array(
+			'lead' => 'Căn duplex (căn hộ thông tầng) tại các dự án đang mở bán ở Đà Nẵng: diện tích, số phòng ngủ, giá tham khảo và vị trí từng dự án.',
+			'faq'  => array(
+				array( 'Căn duplex là gì?', 'Là căn hộ có 2 tầng nối với nhau bằng cầu thang riêng bên trong căn, phòng khách thường có trần cao gấp đôi, phù hợp gia đình nhiều thế hệ.' ),
+				array( 'Duplex khác penthouse thế nào?', 'Duplex có thể nằm ở bất kỳ tầng nào, điểm đặc trưng là 2 tầng thông nhau; penthouse nằm trên tầng cao nhất. Một số dự án có căn penthouse thiết kế dạng duplex.' ),
+				array( 'Liên hệ nhận danh sách căn duplex ở đâu?', 'Gọi hoặc Zalo Hoàng Hiệp ' . $phone . ' để nhận danh sách căn duplex còn trống và bảng giá mới nhất.' ),
+			),
+		),
+	);
+	return $data[ $key ];
 }

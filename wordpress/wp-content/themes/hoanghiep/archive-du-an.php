@@ -37,6 +37,13 @@ $subtypes = $group ? get_terms( array( 'taxonomy' => 'loai-du-an', 'hide_empty' 
 				<?php endforeach; ?>
 			</nav>
 		<?php endif; ?>
+		<?php if ( defined( 'HH_SPECIAL_PAGES' ) && ( ! $term || in_array( $term->slug, array( 'cao-tang', 'can-ho-so-huu-lau-dai', 'can-ho-dich-vu' ), true ) ) ) : ?>
+			<nav class="type-chips type-chips--head" aria-label="Sản phẩm cao tầng">
+				<?php foreach ( HH_SPECIAL_PAGES as $k => list( , $name ) ) : ?>
+					<a href="<?php echo esc_url( hh_special_url( $k ) ); ?>"><?php echo esc_html( $name ); ?></a>
+				<?php endforeach; ?>
+			</nav>
+		<?php endif; ?>
 		<nav class="status-tabs" aria-label="Tình trạng">
 			<a class="<?php echo '' === $current ? 'is-active' : ''; ?>" href="<?php echo esc_url( remove_query_arg( 'tt', $base . ( $area ? '?khu-vuc=' . rawurlencode( $area ) : '' ) ) ); ?>">Mọi tình trạng</a>
 			<?php foreach ( $statuses as $value => $label ) : ?>

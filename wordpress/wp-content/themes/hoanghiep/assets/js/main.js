@@ -115,6 +115,17 @@
 			} );
 		} );
 	} );
+	// Link từ trang tổng hợp (VD .../#sp-penthouse) mở đúng tab sản phẩm.
+	if ( /^#sp-[a-z-]+$/.test( location.hash ) ) {
+		const tab = document.querySelector( '.ptabs__tab[data-ptab="' + location.hash.slice( 4 ) + '"]' );
+		if ( tab ) {
+			tab.click();
+		}
+		const sec = document.getElementById( 'san-pham' );
+		if ( sec ) {
+			sec.scrollIntoView();
+		}
+	}
 
 	// Bài toán dòng tiền & vay ngân hàng. Amounts are in "triệu đồng".
 	const fmtNum = ( n, d ) => n.toLocaleString( 'vi-VN', { maximumFractionDigits: d === undefined ? 1 : d } );

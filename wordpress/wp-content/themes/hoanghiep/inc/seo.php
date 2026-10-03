@@ -79,6 +79,8 @@ function hh_seo_title_parts( $parts ) {
 	}
 	if ( is_post_type_archive( 'bat-dong-san' ) || is_tax( 'loai-bds' ) ) {
 		$parts['title'] = hh_listing_archive_title() . ( get_query_var( 'hh_deal' ) ? ' – Cập nhật ' . wp_date( 'm/Y' ) : '' );
+	} elseif ( hh_seo_special_key() ) {
+		$parts['title'] = hh_special_title( hh_seo_special_key() ) . ' ' . wp_date( 'm/Y' );
 	} elseif ( is_post_type_archive( 'du-an' ) ) {
 		$parts['title'] = 'Dự án bất động sản Đà Nẵng';
 	} elseif ( is_tax( 'loai-du-an' ) ) {
@@ -155,6 +157,9 @@ function hh_seo_description() {
 			return wp_strip_all_tags( $desc );
 		}
 	}
+	if ( hh_seo_special_key() ) {
+		return hh_special_intro( hh_seo_special_key() )['lead'] . ' Tư vấn: ' . hoanghiep_opt( 'hh_phone' ) . '.';
+	}
 	if ( is_tax( 'loai-du-an' ) ) {
 		return 'Danh sách dự án ' . mb_strtolower( single_term_title( '', false ) ) . ' tại Đà Nẵng: vị trí, giá bán, mặt bằng, chính sách bán hàng mới nhất. Tư vấn: ' . hoanghiep_opt( 'hh_phone' ) . '.';
 	}
@@ -193,6 +198,9 @@ function hh_seo_url() {
 	}
 	if ( is_tax() || is_category() || is_tag() ) {
 		return get_term_link( get_queried_object() );
+	}
+	if ( hh_seo_special_key() ) {
+		return hh_special_url( hh_seo_special_key() );
 	}
 	if ( is_post_type_archive() ) {
 		$deal = get_query_var( 'hh_deal' );
@@ -247,6 +255,9 @@ function hh_seo_noindex_request() {
 		if ( isset( $_GET[ $var ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 			return true;
 		}
+	}
+	if ( hh_seo_special_key() ) {
+		return ! hh_special_projects( hh_seo_special_key() );
 	}
 	return ( is_post_type_archive( array( 'bat-dong-san', 'du-an' ) ) || is_tax() ) && ! have_posts();
 }
@@ -343,6 +354,8 @@ function hh_schema_breadcrumb() {
 	}
 	if ( is_singular() && ! is_front_page() ) {
 		$items[] = array( get_the_title(), get_permalink() );
+	} elseif ( hh_seo_special_key() ) {
+		$items[] = array( HH_SPECIAL_PAGES[ hh_seo_special_key() ][1], hh_seo_url() );
 	} elseif ( is_tax() || is_post_type_archive( 'bat-dong-san' ) ) {
 		$items[] = array( wp_get_document_title(), hh_seo_url() );
 	}
@@ -493,6 +506,9 @@ function hh_seo_schema() {
 		);
 	}
 
+	if ( hh_seo_special_key() ) {
+		$graph[] = hh_schema_faq( hh_special_intro( hh_seo_special_key() )['faq'] );
+	}
 	if ( is_singular( 'du-an' ) ) {
 		$graph[] = hh_schema_project();
 		$graph[] = hh_schema_faq( hh_project_faq() );
@@ -610,7 +626,19 @@ function hh_seo_landing_urls() {
 			}
 		}
 	}
+	if ( function_exists( 'hh_special_projects' ) ) {
+		foreach ( array_keys( HH_SPECIAL_PAGES ) as $key ) {
+			if ( hh_special_projects( $key ) ) {
+				$urls[] = hh_special_url( $key );
+			}
+		}
+	}
 	return $urls;
+}
+
+/** Khóa sản phẩm khi đang ở trang tổng hợp /san-pham/…/ (shop, penthouse, duplex), ngược lại ''. */
+function hh_seo_special_key() {
+	return function_exists( 'hh_special_key' ) ? hh_special_key( (string) get_query_var( 'hh_sp' ) ) : '';
 }
 
 /* -------------------------------------------------------------------------

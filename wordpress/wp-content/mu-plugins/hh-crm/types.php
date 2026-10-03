@@ -99,6 +99,9 @@ function hh_register_types() {
 		add_rewrite_rule( "^{$slug}/?$", 'index.php?post_type=bat-dong-san&hh_deal=' . $deal, 'top' );
 	}
 
+	// Trang tổng hợp loại sản phẩm: /san-pham/shop-khoi-de/, /san-pham/penthouse/, /san-pham/duplex/.
+	add_rewrite_rule( '^san-pham/(shop-khoi-de|penthouse|duplex)/?$', 'index.php?post_type=du-an&hh_sp=$matches[1]', 'top' );
+
 	if ( ! wp_installing() && get_option( 'hh_crm_rewrite' ) !== HH_CRM_VERSION ) {
 		flush_rewrite_rules( false );
 		update_option( 'hh_crm_rewrite', HH_CRM_VERSION );
@@ -249,7 +252,7 @@ function hh_is_high_rise( $post_id = null ) {
 
 add_filter( 'query_vars', 'hh_query_vars' );
 function hh_query_vars( $vars ) {
-	return array_merge( $vars, array( 'hh_deal', 'hh_term', 'tk', 'gia', 'dt', 'pn', 'huong', 'sx', 'tt', 'duan' ) );
+	return array_merge( $vars, array( 'hh_deal', 'hh_term', 'tk', 'gia', 'dt', 'pn', 'huong', 'sx', 'tt', 'duan', 'hh_sp' ) );
 }
 
 function hh_deal_url( $deal ) {
@@ -611,6 +614,11 @@ function hh_range_clause( $key, $range ) {
 add_action( 'pre_get_posts', 'hh_filter_queries' );
 function hh_filter_queries( $q ) {
 	if ( is_admin() || ! $q->is_main_query() ) {
+		return;
+	}
+	if ( $q->get( 'hh_sp' ) ) { // Trang tổng hợp tự lấy dự án (hh_special_projects).
+		$q->set( 'posts_per_page', 1 );
+		$q->set( 'no_found_rows', true );
 		return;
 	}
 
