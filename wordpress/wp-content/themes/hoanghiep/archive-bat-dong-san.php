@@ -50,6 +50,10 @@ global $wp_query;
 			<a class="<?php echo 'ban' === $deal ? 'is-active' : ''; ?>" href="<?php echo esc_url( hh_deal_url( 'ban' ) ); ?>">Mua bán</a>
 			<a class="<?php echo 'thue' === $deal ? 'is-active' : ''; ?>" href="<?php echo esc_url( hh_deal_url( 'thue' ) ); ?>">Cho thuê</a>
 		</nav>
+		<?php if ( 'ban' === $deal ) : ?>
+			<p class="market-cards__title">Bảng giá thị trường Đà Nẵng</p>
+			<?php hh_market_cards( $landing ? $landing->slug : '' ); ?>
+		<?php endif; ?>
 	</div>
 </div>
 
@@ -101,6 +105,13 @@ global $wp_query;
 			</form>
 		</div>
 
+		<?php
+		// Đất lớn, khách sạn: bảng giá thị trường lên trước danh sách tin.
+		if ( 'ban' === $deal && $landing && function_exists( 'hh_market_board' ) && hh_market_board( $landing->slug ) ) {
+			get_template_part( 'template-parts/market-board', null, array( 'board' => hh_market_board( $landing->slug ), 'what' => $landing->name ) );
+		}
+		?>
+
 		<?php if ( have_posts() ) : ?>
 			<div class="grid grid--3">
 				<?php
@@ -121,9 +132,6 @@ global $wp_query;
 
 		<?php
 		// Trang Mua bán biệt thự: bảng giá thị trường các dự án biệt thự (chủ đầu tư + chuyển nhượng).
-		if ( 'ban' === $deal && $landing && function_exists( 'hh_market_board' ) && hh_market_board( $landing->slug ) ) {
-			get_template_part( 'template-parts/market-board', null, array( 'board' => hh_market_board( $landing->slug ), 'what' => $landing->name ) );
-		}
 		if ( 'ban' === $deal && $landing && 'biet-thu' === $landing->slug ) {
 			get_template_part( 'template-parts/project-price-board', null, array( 'type' => 'biet-thu', 'title' => 'Giá biệt thự Đà Nẵng – Hội An theo dự án' ) );
 		} elseif ( $deal && ( ! $landing || 'khu-vuc' === $landing->taxonomy || in_array( $landing->slug, array( 'can-ho-chung-cu', 'can-ho-dich-vu', 'penthouse', 'duplex' ), true ) ) ) {
@@ -142,17 +150,6 @@ global $wp_query;
 		}
 		?>
 
-		<?php if ( 'ban' === $deal ) : ?>
-			<nav class="seo-links" aria-label="Bảng giá thị trường">
-				<p class="seo-links__title">Bảng giá thị trường Đà Nẵng</p>
-				<?php foreach ( array( 'biet-thu' => 'Biệt thự, villa ven biển', 'dat-nen' => 'Đất lớn, đất xây khách sạn', 'khach-san' => 'Khách sạn ven biển', 'can-ho-chung-cu' => 'Căn hộ theo dự án' ) as $slug => $label ) : ?>
-					<?php $t = get_term_by( 'slug', $slug, 'loai-bds' ); ?>
-					<?php if ( $t ) : ?>
-						<a href="<?php echo esc_url( hh_deal_term_url( 'ban', $t ) ); ?>"><?php echo esc_html( $label ); ?></a>
-					<?php endif; ?>
-				<?php endforeach; ?>
-			</nav>
-		<?php endif; ?>
 
 		<?php
 		// Liên kết nội bộ tới các trang đích (chuẩn SEO) cùng hình thức.

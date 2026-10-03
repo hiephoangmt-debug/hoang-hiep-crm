@@ -142,6 +142,13 @@ if ( ! $shown_projects ) :
 endif;
 ?>
 
+<section class="section section--tint">
+	<div class="container">
+		<?php hh_section_head( 'Bảng giá', 'Bảng giá thị trường Đà Nẵng', hh_deal_url( 'ban' ), 'Xem trang Mua bán' ); ?>
+		<?php hh_market_cards(); ?>
+	</div>
+</section>
+
 <?php
 foreach ( array( 'ban' => array( 'Mua bán', 'Nhà đất bán hot mới' ), 'thue' => array( 'Cho thuê', 'Nhà cho thuê hot mới' ) ) as $deal => list( $eyebrow, $title ) ) :
 	$listings = hh_hot_query( 'bat-dong-san', array( 'limit' => 8, 'deal' => $deal ) );

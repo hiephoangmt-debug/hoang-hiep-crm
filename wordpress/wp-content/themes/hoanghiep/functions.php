@@ -163,3 +163,47 @@ function hoanghiep_old_theme_plugins_notice() {
 		);
 	}
 }
+
+/**
+ * Menu chính: tự thêm các trang "Bảng giá thị trường" vào dưới mục Mua bán (khi mục đó chưa có menu con),
+ * để menu đã tạo sẵn trên web cũ cũng có, không cần sửa tay.
+ */
+add_filter( 'wp_nav_menu_objects', 'hoanghiep_market_submenu', 10, 2 );
+function hoanghiep_market_submenu( $items, $args ) {
+	if ( 'primary' !== ( $args->theme_location ?? '' ) || ! function_exists( 'hh_deal_url' ) || ! function_exists( 'hh_market_pages' ) ) {
+		return $items;
+	}
+	$target = untrailingslashit( hh_deal_url( 'ban' ) );
+	$parent = null;
+	foreach ( $items as $item ) {
+		if ( untrailingslashit( $item->url ) === $target && ! $item->menu_item_parent ) {
+			$parent = $item;
+		}
+	}
+	if ( ! $parent ) {
+		return $items;
+	}
+	foreach ( $items as $item ) {
+		if ( (int) $item->menu_item_parent === (int) $parent->ID ) {
+			return $items; // Đã có menu con do bạn tự tạo.
+		}
+	}
+	$parent->classes[] = 'menu-item-has-children';
+	$i                 = 0;
+	foreach ( hh_market_pages() as $slug => list( $name ) ) {
+		$term = get_term_by( 'slug', $slug, 'loai-bds' );
+		if ( ! $term ) {
+			continue;
+		}
+		$child                   = clone $parent;
+		$child->ID               = -1000 - ( ++$i );
+		$child->db_id            = $child->ID;
+		$child->menu_item_parent = (string) $parent->ID;
+		$child->title            = 'Bảng giá ' . mb_strtolower( $name );
+		$child->url              = hh_deal_term_url( 'ban', $term );
+		$child->classes          = array( 'menu-item' );
+		$child->current          = false;
+		$items[]                 = $child;
+	}
+	return $items;
+}

@@ -938,3 +938,19 @@ body.has-pop { overflow: hidden; }
 /* Ẩn nút gọi nổi của plugin khác (trùng với nút liên hệ của theme). */
 .hotline-phone-ring-wrap, .hotline-bar, #callnowbutton, .call-now-button, .phonering-alo-phone, .quick-alo-phone, .fixed-call-button { display: none !important; }
 .sources { margin-top: 12px; font-size: .85rem; color: var(--muted); } .sources summary { cursor: pointer; } .sources ul { margin: 6px 0 0; padding-left: 18px; }
+
+/* Thẻ bảng giá thị trường */
+.market-cards__title { margin: 22px 0 10px; font-weight: 700; color: var(--navy); }
+.market-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 12px; }
+.market-card { display: flex; align-items: center; gap: 12px; padding: 16px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--white); color: var(--ink); box-shadow: var(--shadow); transition: transform .2s, border-color .2s; }
+.market-card:hover { transform: translateY(-2px); border-color: var(--gold-2); color: var(--ink); }
+.market-card__icon { display: grid; place-items: center; flex: none; width: 46px; height: 46px; border-radius: 12px; background: var(--navy); color: var(--gold); }
+.market-card__body { display: grid; gap: 2px; flex: 1; min-width: 0; }
+.market-card__body strong { color: var(--navy); font-size: 1rem; }
+.market-card__body small { color: var(--muted); font-size: .84rem; }
+.market-card > .icon--arrow { flex: none; color: var(--gold-2); }
+.market-card.is-active { border-color: var(--navy); background: var(--navy); }
+.market-card.is-active strong { color: var(--white); }
+.market-card.is-active small { color: #c4d0e0; }
+.market-card.is-active .market-card__icon { background: var(--gold-2); color: var(--white); }
+.market-board { margin-top: 0; }

@@ -386,3 +386,39 @@ function hh_project_offer_lines( $post_id = null ) {
 	$lines = array_map( static fn( $l ) => mb_strlen( $l ) > 140 ? mb_substr( $l, 0, 137 ) . '…' : $l, array_slice( $lines, 0, 3 ) );
 	return $lines;
 }
+
+/** Các trang bảng giá thị trường (slug loại nhà đất => [tên, mô tả, icon]). */
+function hh_market_pages() {
+	$boards = apply_filters( 'hh_market_boards', array() );
+	$rows   = static fn( $k ) => isset( $boards[ $k ]['rows'] ) ? count( $boards[ $k ]['rows'] ) : 0;
+	return array(
+		'can-ho-chung-cu' => array( 'Căn hộ theo dự án', 'Giá bán lại, giá thuê từng dự án', 'building' ),
+		'biet-thu'        => array( 'Biệt thự, villa ven biển', 'Giá villa các dự án Đà Nẵng – Hội An', 'star' ),
+		'dat-nen'         => array( 'Đất lớn, đất xây khách sạn', $rows( 'dat-lon' ) ? 'Giá theo ' . $rows( 'dat-lon' ) . ' tuyến đường' : 'Giá theo tuyến đường', 'area' ),
+		'khach-san'       => array( 'Khách sạn ven biển', $rows( 'khach-san' ) ? 'Giá theo ' . $rows( 'khach-san' ) . ' khu vực ven biển' : 'Giá theo khu vực ven biển', 'pin' ),
+	);
+}
+
+/** Thẻ dẫn tới các trang bảng giá thị trường (trang Mua bán, trang chủ). */
+function hh_market_cards( $current = '' ) {
+	if ( ! function_exists( 'hh_deal_term_url' ) ) {
+		return;
+	}
+	echo '<div class="market-cards">';
+	foreach ( hh_market_pages() as $slug => list( $name, $desc, $icon ) ) {
+		$term = get_term_by( 'slug', $slug, 'loai-bds' );
+		if ( ! $term ) {
+			continue;
+		}
+		printf(
+			'<a class="market-card%s" href="%s"><span class="market-card__icon">%s</span><span class="market-card__body"><strong>%s</strong><small>%s</small></span>%s</a>',
+			$current === $slug ? ' is-active' : '',
+			esc_url( hh_deal_term_url( 'ban', $term ) ),
+			hh_icon( $icon ), // phpcs:ignore
+			esc_html( $name ),
+			esc_html( $desc ),
+			hh_icon( 'arrow' ) // phpcs:ignore
+		);
+	}
+	echo '</div>';
+}
