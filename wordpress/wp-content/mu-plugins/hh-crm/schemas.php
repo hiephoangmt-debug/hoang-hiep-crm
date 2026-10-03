@@ -172,7 +172,7 @@ function hh_special_product_fields() {
 		'shop'      => array( 'Mặt tiền đường Trần Hưng Đạo, trần cao 5m, phù hợp cà phê, showroom, ngân hàng…', "S-01 | 120 m² | 15 tỷ | Góc 2 mặt tiền\nS-02 | 85 m² | 9,8 tỷ | Mặt sông" ),
 		'penthouse' => array( 'Hai tầng trên cùng, hồ bơi riêng, sân vườn trên không, view toàn cảnh sông Hàn…', "PH-01 | 280 m² | 4 | 28 tỷ\nPH-02 | 310 m² | 5 | 32 tỷ" ),
 		'duplex'    => array( 'Căn 2 tầng thông nhau, phòng khách trần cao gấp đôi, cầu thang riêng…', "DL-2501 | 160 m² | 3 | 12,5 tỷ\nDL-2503 | 175 m² | 4 | 13,8 tỷ" ),
-		'villa'     => array( 'Biệt thự đơn lập, song lập 2–3 tầng, sân vườn, hồ bơi riêng…', "Đơn lập | 300 m² | 260 m² | 25 tỷ\nSong lập | 200 m² | 210 m² | 16 tỷ" ),
+		'villa'     => array( 'Biệt thự đơn lập, song lập 2–3 tầng, sân vườn, hồ bơi riêng…', "Đơn lập | 300 m² | 3 tầng, DTXD 260 m² | 25 tỷ\nSong lập | 200 m² | 3 tầng, DTXD 210 m² | 16 tỷ" ),
 		'nha-pho'   => array( 'Nhà phố 5 tầng, tầng 1 kinh doanh, mặt tiền đường 15m…', "Nhà phố | 100 m² | 5 tầng | 12 tỷ\nShophouse góc | 140 m² | 5 tầng | 18 tỷ" ),
 		'dat-nen'   => array( 'Đất nền đã có sổ, hạ tầng hoàn thiện, đường 7,5 – 10,5m…', "Block A (lô A1 – A20) | 100 – 125 m² | Đường 7,5m | 2,8 – 3,5 tỷ\nBlock B (lô góc) | 150 m² | Đường 10,5m | 4,6 tỷ" ),
 	);
@@ -180,7 +180,7 @@ function hh_special_product_fields() {
 		'shop'      => array( 'Mã căn', 'Diện tích', 'Giá bán', 'Ghi chú' ),
 		'penthouse' => array( 'Mã căn', 'Diện tích', 'Phòng ngủ', 'Giá bán' ),
 		'duplex'    => array( 'Mã căn', 'Diện tích', 'Phòng ngủ', 'Giá bán' ),
-		'villa'     => array( 'Loại / mã căn', 'Diện tích đất', 'Diện tích xây dựng', 'Giá bán' ),
+		'villa'     => array( 'Loại / mã căn', 'Diện tích đất', 'Quy cách', 'Giá bán' ),
 		'nha-pho'   => array( 'Loại / mã căn', 'Diện tích đất', 'Số tầng', 'Giá bán' ),
 		'dat-nen'   => array( 'Block / lô', 'Diện tích', 'Mặt đường', 'Giá bán' ),
 	);

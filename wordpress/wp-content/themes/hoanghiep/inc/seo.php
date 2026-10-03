@@ -57,8 +57,26 @@ function hh_listing_faq( $stats, $deal, $place, $what ) {
  * Titles
  * ---------------------------------------------------------------------- */
 
+/** Tiêu đề / mô tả SEO nhập sẵn cho bài (ô của Rank Math / Yoast), dùng cả khi chưa cài plugin. */
+function hh_seo_custom_meta( $kind ) {
+	if ( ! is_singular() ) {
+		return '';
+	}
+	$keys  = 'title' === $kind ? array( 'rank_math_title', '_yoast_wpseo_title' ) : array( 'rank_math_description', '_yoast_wpseo_metadesc' );
+	foreach ( $keys as $key ) {
+		$value = trim( (string) get_post_meta( get_queried_object_id(), $key, true ) );
+		if ( '' !== $value && ! preg_match( '/%%?[a-z_]+%%?/i', $value ) ) { // Bỏ qua mẫu có biến của plugin (%title%, %%sep%%…).
+			return $value;
+		}
+	}
+	return '';
+}
+
 add_filter( 'document_title_parts', 'hh_seo_title_parts' );
 function hh_seo_title_parts( $parts ) {
+	if ( hh_seo_custom_meta( 'title' ) ) {
+		return array( 'title' => hh_seo_custom_meta( 'title' ) );
+	}
 	if ( is_post_type_archive( 'bat-dong-san' ) || is_tax( 'loai-bds' ) ) {
 		$parts['title'] = hh_listing_archive_title() . ( get_query_var( 'hh_deal' ) ? ' – Cập nhật ' . wp_date( 'm/Y' ) : '' );
 	} elseif ( is_post_type_archive( 'du-an' ) ) {
@@ -88,6 +106,9 @@ function hh_seo_title_parts( $parts ) {
  * ---------------------------------------------------------------------- */
 
 function hh_seo_description() {
+	if ( hh_seo_custom_meta( 'description' ) ) {
+		return hh_seo_custom_meta( 'description' );
+	}
 	if ( is_front_page() ) {
 		return hoanghiep_opt( 'hh_hero_text' ) . ' ' . hoanghiep_opt( 'hh_person_name' ) . ' – ' . hoanghiep_opt( 'hh_person_title' ) . ', hotline ' . hoanghiep_opt( 'hh_phone' ) . '.';
 	}

@@ -13,7 +13,8 @@
 defined( 'ABSPATH' ) || exit;
 
 function hh_project_dataset() {
-	return array(
+	// Dự án khai báo ở file riêng (VD data-vinhomes-hai-van-bay.php) được thêm qua bộ lọc này.
+	return apply_filters( 'hh_project_dataset', array(
 
 		/* ---------------- Tổ hợp dự án ---------------- */
 		array(
@@ -620,7 +621,7 @@ function hh_project_dataset() {
 			),
 			'sources' => array( 'https://homedy.com/one-world-regency-pj40102508', 'https://resviet.vn/one-world-regency/' ),
 		),
-	);
+	) );
 }
 
 /**
@@ -651,6 +652,7 @@ function hh_import_projects() {
 					'post_name'    => $p['slug'],
 					'post_title'   => $p['title'],
 					'post_excerpt' => $p['excerpt'],
+					'post_content' => $p['content'] ?? '',
 				)
 			);
 			if ( ! $id || is_wp_error( $id ) ) {
@@ -682,6 +684,11 @@ function hh_import_projects() {
 				}
 			}
 			update_post_meta( $id, '_hh_types_cleaned', '1' );
+		}
+
+		// Bài giới thiệu chi tiết: chỉ điền khi dự án chưa có nội dung.
+		if ( ! empty( $p['content'] ) && '' === trim( get_post_field( 'post_content', $id ) ) ) {
+			wp_update_post( array( 'ID' => $id, 'post_content' => $p['content'] ) );
 		}
 
 		$meta = $p['meta'];
