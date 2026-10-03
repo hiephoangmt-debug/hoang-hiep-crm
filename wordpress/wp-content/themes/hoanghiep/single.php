@@ -59,6 +59,18 @@ while ( have_posts() ) :
 				</p>
 			<?php endif; ?>
 
+			<?php $post_faq = hh_table( 'hh_post_faq', 2, $id ); ?>
+			<?php if ( $post_faq && false === mb_strpos( $content, 'Câu hỏi thường gặp' ) ) : ?>
+				<section class="faq-block">
+					<h2>Câu hỏi thường gặp</h2>
+					<div class="faq">
+						<?php foreach ( $post_faq as list( $q, $a ) ) : ?>
+							<details><summary><?php echo esc_html( $q ); ?></summary><p><?php echo esc_html( $a ); ?></p></details>
+						<?php endforeach; ?>
+					</div>
+				</section>
+			<?php endif; ?>
+
 			<?php $project_id = (int) get_post_meta( $id, 'hh_post_project', true ); ?>
 			<?php if ( $project_id && 'publish' === get_post_status( $project_id ) ) : ?>
 				<div class="related-project">

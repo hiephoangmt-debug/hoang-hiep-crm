@@ -498,7 +498,11 @@ function hh_seo_schema() {
 		$graph[] = hh_schema_faq( hh_project_faq() );
 	} elseif ( is_singular( 'bat-dong-san' ) ) {
 		$graph[] = hh_schema_listing();
-	} elseif ( is_singular( 'post' ) && ! $plugin ) {
+	}
+	if ( is_singular( 'post' ) ) {
+		$graph[] = hh_schema_faq( hh_table( 'hh_post_faq', 2 ) );
+	}
+	if ( is_singular( 'post' ) && ! $plugin ) {
 		$graph[] = array(
 			'@type'            => 'BlogPosting',
 			'headline'         => get_the_title(),

@@ -230,45 +230,209 @@ HTML,
 	);
 }
 
-/** Tạo bài tin tức hạ tầng (chỉ tạo bài chưa có). Trả về số bài tạo mới. */
+
+/** SEO cho từng bài: tiêu đề Google (≤ 60 ký tự), mô tả (≤ 155), điểm chính, hỏi đáp. */
+function hh_news_seo() {
+	return array(
+		'toan-canh-ha-tang-da-nang-2026-tac-dong-bat-dong-san' => array(
+			'seo_title' => 'Hạ tầng Đà Nẵng 2026: công trình trọng điểm và tác động BĐS',
+			'desc'      => 'Toàn cảnh hạ tầng Đà Nẵng 2026: cảng Liên Chiểu, trung tâm tài chính, cầu Hòa Xuân, sân bay, QL14D và khu vực bất động sản hưởng lợi.',
+			'points'    => array(
+				'Đà Nẵng hợp nhất với Quảng Nam từ 1/7/2025, năm 2026 triển khai hàng loạt công trình hạ tầng trọng điểm.',
+				'Các động lực lớn: cảng Liên Chiểu và khu thương mại tự do, trung tâm tài chính quốc tế, cụm nút giao cầu Hòa Xuân, mở rộng nhà ga T2, Quốc lộ 14D.',
+				'Khu vực hưởng lợi rõ: Liên Chiểu – Hải Vân, Sơn Trà ven sông Hàn, Hòa Xuân – Nam Hòa Xuân, dải ven biển Ngũ Hành Sơn – Hội An.',
+			),
+			'faq'       => array(
+				array( 'Năm 2026 Đà Nẵng có những dự án hạ tầng lớn nào?', 'Nổi bật gồm cảng Liên Chiểu và khu thương mại tự do, trung tâm tài chính quốc tế, cụm nút giao cầu Hòa Xuân (hơn 1.378 tỷ đồng), mở rộng nhà ga T2 sân bay (gần 1.500 tỷ đồng) và cải tạo Quốc lộ 14D (4.518 tỷ đồng).' ),
+				array( 'Khu vực nào ở Đà Nẵng hưởng lợi nhiều nhất từ hạ tầng?', 'Liên Chiểu – Hải Vân (cảng, khu thương mại tự do), Sơn Trà ven sông Hàn (trung tâm tài chính), Hòa Xuân – Nam Hòa Xuân (cầu Hòa Xuân) và dải ven biển Ngũ Hành Sơn – Hội An.' ),
+				array( 'Có nên mua bất động sản theo hạ tầng?', 'Nên ưu tiên dự án có pháp lý rõ ràng, gần công trình đã khởi công hoặc sắp hoàn thành, và tính dòng tiền thận trọng thay vì mua theo tin đồn quy hoạch.' ),
+			),
+		),
+		'cang-lien-chieu-khu-thuong-mai-tu-do-bat-dong-san-lien-chieu' => array(
+			'seo_title' => 'Cảng Liên Chiểu, khu thương mại tự do và BĐS Liên Chiểu',
+			'desc'      => 'Cảng Liên Chiểu hoàn thành hạ tầng dùng chung, khu thương mại tự do Đà Nẵng 1.881 ha: tác động đến căn hộ, đất nền Liên Chiểu – Hải Vân.',
+			'points'    => array(
+				'Ngày 28/3/2026, hạ tầng dùng chung cảng Liên Chiểu hoàn thành; khởi động bến container vốn hơn 2 tỷ USD.',
+				'Khu thương mại tự do Đà Nẵng gắn với cảng Liên Chiểu, quy mô khoảng 1.881 ha tại 7 vị trí.',
+				'Nhu cầu ở và thuê tại Liên Chiểu tăng theo lao động, chuyên gia; đô thị ven vịnh Hải Vân được định giá lại.',
+			),
+			'faq'       => array(
+				array( 'Cảng Liên Chiểu ở đâu, khi nào hoạt động?', 'Cảng nằm tại vịnh Đà Nẵng, phía Tây Bắc thành phố (Liên Chiểu). Phần hạ tầng dùng chung hoàn thành ngày 28/3/2026; bến container đang được đầu tư tiếp.' ),
+				array( 'Khu thương mại tự do Đà Nẵng rộng bao nhiêu?', 'Khoảng 1.881 ha tại 7 vị trí không liền kề, gồm sản xuất, logistics, thương mại – dịch vụ, công nghiệp số và đổi mới sáng tạo.' ),
+				array( 'Bất động sản nào hưởng lợi từ cảng Liên Chiểu?', 'Căn hộ, đất nền và đô thị ven vịnh Liên Chiểu – Hải Vân như Vinhomes Hải Vân Bay, Dragon Smart City, Lakeside Palace, The Ori Garden.' ),
+			),
+		),
+		'trung-tam-tai-chinh-quoc-te-da-nang-tac-dong-bat-dong-san' => array(
+			'seo_title' => 'Trung tâm tài chính quốc tế Đà Nẵng: vị trí và tác động BĐS',
+			'desc'      => 'Trung tâm tài chính quốc tế Đà Nẵng khai trương 9/1/2026, khoảng 300 ha: các vị trí trên Võ Văn Kiệt, Thuận Phước, lấn biển và căn hộ hưởng lợi.',
+			'points'    => array(
+				'Khai trương ngày 9/1/2026, tổng diện tích khoảng 300 ha.',
+				'Vị trí: lô A12 – A15 đường Võ Văn Kiệt (6,17 ha), khu Thuận Phước (9,7 ha), 282 ha lấn biển Nguyễn Tất Thành.',
+				'Căn hộ cao cấp ven sông Hàn (Sơn Trà) và căn hộ cho thuê chuyên gia hưởng lợi trực tiếp.',
+			),
+			'faq'       => array(
+				array( 'Trung tâm tài chính quốc tế Đà Nẵng nằm ở đâu?', 'Cơ quan điều hành đặt tại Khu công viên phần mềm số 2 (chân cầu Thuận Phước); các lô đất trên đường Võ Văn Kiệt (Sơn Trà), khu Thuận Phước và khu lấn biển đối diện Nguyễn Tất Thành.' ),
+				array( 'Trung tâm tài chính quốc tế Đà Nẵng khai trương khi nào?', 'Ngày 9/1/2026.' ),
+				array( 'Căn hộ nào hưởng lợi từ trung tâm tài chính quốc tế?', 'Căn hộ cao cấp ven sông Hàn khu Sơn Trà như The Legend, Sun Ponte Residence, Sun Symphony Residence, Capital Square, Hiyori Garden Tower.' ),
+			),
+		),
+		'cum-nut-giao-cau-hoa-xuan-bat-dong-san-nam-da-nang' => array(
+			'seo_title' => 'Cụm nút giao cầu Hòa Xuân 1.378 tỷ và BĐS Nam Đà Nẵng',
+			'desc'      => 'Cụm nút giao cầu Hòa Xuân hơn 1.378 tỷ đồng, cầu mới 303,5 m, thực hiện 2026 – 2029: tác động đến căn hộ, đất nền Hòa Xuân, Nam Hòa Xuân.',
+			'points'    => array(
+				'Tổng vốn hơn 1.378 tỷ đồng, thực hiện giai đoạn 2026 – 2029.',
+				'Giữ cầu hiện hữu, xây thêm cầu mới phía hạ lưu dài khoảng 303,5 m, rộng 14 m; thêm cầu vượt, hầm chui tách luồng xe.',
+				'Hưởng lợi: Sun NeO City (Cora, Spana, S-Light), Sun Riverpolis (FourS Tower, đất nền Đầm Sen), Cồn Dầu, Euro Village 2.',
+			),
+			'faq'       => array(
+				array( 'Dự án cụm nút giao cầu Hòa Xuân gồm những gì?', 'Giữ cầu Hòa Xuân hiện hữu, xây thêm cầu mới phía hạ lưu dài khoảng 303,5 m, rộng 14 m, kết hợp nút giao Lê Thanh Nghị – Cách Mạng Tháng Tám – Thăng Long với cầu vượt, hầm chui.' ),
+				array( 'Khi nào cụm nút giao cầu Hòa Xuân hoàn thành?', 'Dự án thực hiện giai đoạn 2026 – 2029.' ),
+				array( 'Dự án nào ở Hòa Xuân hưởng lợi từ cầu Hòa Xuân mới?', 'Các tòa căn hộ Spana Tower, Cora Tower, S-Light Tower (Sun NeO City), FourS Tower và đất nền Đầm Sen (Sun Riverpolis), đất nền Cồn Dầu và Euro Village 2.' ),
+			),
+		),
+		'duong-ven-bien-129-vo-chi-cong-bat-dong-san-ven-bien-hoi-an' => array(
+			'seo_title' => 'Đường ven biển 129 Võ Chí Công 6 làn và BĐS ven biển Hội An',
+			'desc'      => 'Đường ven biển 129 (Võ Chí Công) dài 26,5 km mở rộng lên 6 làn, nối cầu Cửa Đại – Chu Lai: bất động sản nghỉ dưỡng Hội An, Nam Hội An hưởng lợi.',
+			'points'    => array(
+				'Tuyến dài khoảng 26,5 km, mở rộng từ 2 lên 6 làn xe.',
+				'Nối dải ven biển từ cầu Cửa Đại đến khu vực sân bay Chu Lai.',
+				'Hưởng lợi: Hoiana, Nam Hội An City, Casamia Balanca, Casamia Calm và đất nền ven biển phía Bắc trục.',
+			),
+			'faq'       => array(
+				array( 'Đường ven biển 129 (Võ Chí Công) dài bao nhiêu?', 'Khoảng 26,5 km, từ giao Quốc lộ 40B đến giao đường 620, được mở rộng từ 2 lên 6 làn.' ),
+				array( 'Đường ven biển 129 kết nối những đâu?', 'Nối dải ven biển từ cầu Cửa Đại (Hội An) đến khu vực sân bay Chu Lai.' ),
+				array( 'Bất động sản nào hưởng lợi từ đường ven biển 129?', 'Biệt thự, khu nghỉ dưỡng ven biển Hội An – Duy Xuyên như Hoiana Resort & Golf, Nam Hội An City, Casamia Balanca, Casamia Calm.' ),
+			),
+		),
+		'mo-rong-nha-ga-t2-san-bay-da-nang-bat-dong-san-cho-thue' => array(
+			'seo_title' => 'Mở rộng nhà ga T2 sân bay Đà Nẵng: cơ hội căn hộ cho thuê',
+			'desc'      => 'Nhà ga T2 sân bay Đà Nẵng mở rộng gần 1.500 tỷ đồng, nâng công suất lên 6 triệu khách/năm: động lực cho căn hộ cho thuê, căn hộ dịch vụ.',
+			'points'    => array(
+				'Tổng vốn gần 1.500 tỷ đồng, mở rộng thêm khoảng 3.600 m², tổng diện tích sử dụng khoảng 21.085 m².',
+				'Quầy thủ tục tăng từ 54 lên 85, cầu ống lồng từ 4 lên 7; công suất nhà ga T2 đạt 6 triệu khách/năm.',
+				'Khách quốc tế tăng kéo theo nhu cầu căn hộ dịch vụ, căn hộ cho thuê ven sông Hàn và ven biển.',
+			),
+			'faq'       => array(
+				array( 'Nhà ga T2 sân bay Đà Nẵng mở rộng bao nhiêu?', 'Mở rộng thêm khoảng 3.600 m², nâng tổng diện tích sử dụng lên khoảng 21.085 m² và công suất lên 6 triệu khách/năm.' ),
+				array( 'Dự án mở rộng nhà ga T2 có vốn bao nhiêu?', 'Gần 1.500 tỷ đồng, khai thác trong giai đoạn 2026 – 2030.' ),
+				array( 'Mở rộng sân bay ảnh hưởng thế nào đến bất động sản Đà Nẵng?', 'Lượng khách quốc tế tăng làm tăng nhu cầu lưu trú, có lợi cho căn hộ dịch vụ và căn hộ cho thuê ven sông Hàn, ven biển và khu gần sân bay.' ),
+			),
+		),
+		'ga-duong-sat-toc-do-cao-da-nang-hoa-son-bat-dong-san-hoa-vang' => array(
+			'seo_title' => 'Ga đường sắt tốc độ cao Đà Nẵng tại Hòa Sơn và BĐS Hòa Vang',
+			'desc'      => 'Ga đường sắt tốc độ cao Đà Nẵng dự kiến đặt tại Hòa Sơn (Hòa Vang), tuyến 350 km/h khai thác từ 2035: cơ hội và lưu ý cho bất động sản phía Tây.',
+			'points'    => array(
+				'Tuyến Bắc – Nam dài khoảng 1.541 km, tốc độ 350 km/h, vốn sơ bộ khoảng 67,34 tỷ USD, khai thác từ 2035.',
+				'Ga Đà Nẵng dự kiến đặt tại xã Hòa Sơn (Hòa Vang), gần nút giao Bà Nà – Suối Mơ với cao tốc.',
+				'Cơ hội dài hạn cho đất nền Hòa Vang; vị trí ga có thể điều chỉnh, chỉ nên đầu tư bằng vốn nhàn rỗi.',
+			),
+			'faq'       => array(
+				array( 'Ga đường sắt tốc độ cao ở Đà Nẵng đặt ở đâu?', 'Theo phương án hiện tại, ga Đà Nẵng dự kiến đặt tại xã Hòa Sơn (Hòa Vang), phía Bắc nút giao đường Bà Nà – Suối Mơ với cao tốc Bắc – Nam.' ),
+				array( 'Khi nào đường sắt tốc độ cao Bắc – Nam hoạt động?', 'Dự kiến khai thác từ năm 2035 theo Nghị quyết 172/2024/QH15.' ),
+				array( 'Có nên mua đất gần ga đường sắt tốc độ cao Đà Nẵng?', 'Chỉ nên xem là kênh đầu tư dài hạn, chọn đất có sổ và hạ tầng hiện hữu vì vị trí ga có thể điều chỉnh trong quá trình lập dự án.' ),
+			),
+		),
+		'hop-nhat-da-nang-quang-nam-bat-dong-san-vung-giap-ranh' => array(
+			'seo_title' => 'Hợp nhất Đà Nẵng – Quảng Nam: BĐS vùng giáp ranh ra sao',
+			'desc'      => 'Đà Nẵng hợp nhất Quảng Nam từ 1/7/2025: vùng giáp ranh Điện Ngọc, Hòa Xuân, Ngũ Hành Sơn, Hội An được định vị lại, dự án nào hưởng lợi.',
+			'points'    => array(
+				'Đà Nẵng hợp nhất với Quảng Nam từ ngày 1/7/2025, hướng tới siêu đô thị biển.',
+				'Vùng giáp ranh Điện Ngọc, Điện Bàn, Hòa Xuân, Hòa Tiến, Ngũ Hành Sơn có cơ hội đầu tư hạ tầng liền mạch.',
+				'Khi có thông tin sáp nhập (3/2025), đất nền Điện Ngọc tăng khoảng 15% theo ghi nhận báo chí.',
+			),
+			'faq'       => array(
+				array( 'Đà Nẵng và Quảng Nam hợp nhất từ khi nào?', 'Từ ngày 1/7/2025.' ),
+				array( 'Vùng nào hưởng lợi khi Đà Nẵng hợp nhất Quảng Nam?', 'Các khu giáp ranh như Điện Ngọc, Điện Bàn, Hòa Xuân, Hòa Tiến, Ngũ Hành Sơn và dải biển Hội An – Duy Xuyên.' ),
+				array( 'Hợp nhất có làm giá đất tăng không?', 'Khi có thông tin sáp nhập (3/2025), giá đất nền khu Điện Ngọc tăng khoảng 15%; giá trị bền vững vẫn phụ thuộc hạ tầng thực tế và pháp lý dự án.' ),
+			),
+		),
+	);
+}
+
+/** Nội dung đầy đủ của một bài: điểm chính + thân bài + hỏi đáp + nguồn. */
+function hh_news_build_content( $n, $seo ) {
+	$html = '';
+	if ( ! empty( $seo['points'] ) ) {
+		$html .= '<div class="key-points"><p><strong>Điểm chính</strong></p><ul>';
+		foreach ( $seo['points'] as $point ) {
+			$html .= '<li>' . esc_html( $point ) . '</li>';
+		}
+		$html .= "</ul></div>\n\n";
+	}
+	$html .= $n['content'];
+	if ( ! empty( $seo['faq'] ) ) {
+		$html .= "\n<h2>Câu hỏi thường gặp</h2>\n";
+		foreach ( $seo['faq'] as list( $question, $answer ) ) {
+			$html .= '<h3>' . esc_html( $question ) . "</h3>\n<p>" . esc_html( $answer ) . "</p>\n";
+		}
+	}
+	$links = array_map( static fn( $u ) => '<a href="' . esc_url( $u ) . '" rel="nofollow noopener" target="_blank">' . esc_html( wp_parse_url( $u, PHP_URL_HOST ) ) . '</a>', $n['sources'] );
+	return $html . "\n<p><em>Nguồn tổng hợp: " . implode( ', ', $links ) . '. Bài viết mang tính tham khảo, thông tin dự án có thể thay đổi theo quyết định của cơ quan có thẩm quyền.</em></p>';
+}
+
+/**
+ * Tạo bài tin tức hạ tầng. Bài đã có: chỉ cập nhật nội dung nếu bạn chưa sửa bài (so mã băm),
+ * và chỉ điền các ô SEO còn trống. Trả về số bài tạo mới.
+ */
 function hh_import_news() {
 	$cat = term_exists( 'Hạ tầng & quy hoạch', 'category' );
 	if ( ! $cat ) {
 		$cat = wp_insert_term( 'Hạ tầng & quy hoạch', 'category', array( 'slug' => 'ha-tang-quy-hoach' ) );
 	}
 	$cat_id  = is_array( $cat ) ? (int) $cat['term_id'] : (int) $cat;
+	$seo_all = hh_news_seo();
 	$created = 0;
 	$i       = 0;
 	foreach ( hh_news_dataset() as $n ) {
 		++$i;
-		if ( get_page_by_path( $n['slug'], OBJECT, 'post' ) ) {
-			continue;
+		$seo     = $seo_all[ $n['slug'] ] ?? array();
+		$content = hh_news_build_content( $n, $seo );
+		$post    = get_page_by_path( $n['slug'], OBJECT, 'post' );
+		if ( $post ) {
+			$id   = $post->ID;
+			$hash = get_post_meta( $id, '_hh_news_hash', true );
+			if ( $hash && md5( $post->post_content ) === $hash && md5( $content ) !== $hash ) {
+				wp_update_post( array( 'ID' => $id, 'post_content' => $content ) );
+				update_post_meta( $id, '_hh_news_hash', md5( get_post_field( 'post_content', $id ) ) );
+			} elseif ( ! $hash && false === strpos( $post->post_content, 'key-points' ) && false !== strpos( $post->post_content, 'Nguồn tổng hợp' ) ) {
+				// Bài bản đầu (chưa có mã băm) và chưa bị sửa phần cấu trúc: nâng cấp lên bản có điểm chính, hỏi đáp.
+				wp_update_post( array( 'ID' => $id, 'post_content' => $content ) );
+				update_post_meta( $id, '_hh_news_hash', md5( get_post_field( 'post_content', $id ) ) );
+			}
+		} else {
+			$id = wp_insert_post(
+				array(
+					'post_type'     => 'post',
+					'post_status'   => 'publish',
+					'post_name'     => $n['slug'],
+					'post_title'    => $n['title'],
+					'post_excerpt'  => $n['excerpt'],
+					'post_content'  => $content,
+					'post_category' => $cat_id ? array( $cat_id ) : array(),
+					'post_date'     => wp_date( 'Y-m-d H:i:s', time() - $i * HOUR_IN_SECONDS ),
+				)
+			);
+			if ( ! $id || is_wp_error( $id ) ) {
+				continue;
+			}
+			update_post_meta( $id, '_hh_news_hash', md5( get_post_field( 'post_content', $id ) ) );
+			++$created;
 		}
-		$links   = array_map( static fn( $u ) => '<a href="' . esc_url( $u ) . '" rel="nofollow noopener" target="_blank">' . esc_html( wp_parse_url( $u, PHP_URL_HOST ) ) . '</a>', $n['sources'] );
-		$content = $n['content'] . "\n<p><em>Nguồn tổng hợp: " . implode( ', ', $links ) . '. Bài viết mang tính tham khảo, thông tin dự án có thể thay đổi theo quyết định của cơ quan có thẩm quyền.</em></p>';
-		$id      = wp_insert_post(
-			array(
-				'post_type'     => 'post',
-				'post_status'   => 'publish',
-				'post_name'     => $n['slug'],
-				'post_title'    => $n['title'],
-				'post_excerpt'  => $n['excerpt'],
-				'post_content'  => $content,
-				'post_category' => $cat_id ? array( $cat_id ) : array(),
-				'post_date'     => wp_date( 'Y-m-d H:i:s', time() - $i * HOUR_IN_SECONDS ),
-			)
+		$meta = array(
+			'rank_math_focus_keyword' => $n['keyword'],
+			'rank_math_title'         => $seo['seo_title'] ?? '',
+			'rank_math_description'   => $seo['desc'] ?? '',
+			'hh_post_faq'             => implode( "\n", array_map( static fn( $f ) => str_replace( '|', '/', $f[0] ) . ' | ' . str_replace( '|', '/', $f[1] ), $seo['faq'] ?? array() ) ),
 		);
-		if ( ! $id || is_wp_error( $id ) ) {
-			continue;
-		}
 		if ( $n['project'] ) {
 			$project = get_page_by_path( $n['project'], OBJECT, 'du-an' );
-			if ( $project ) {
-				update_post_meta( $id, 'hh_post_project', $project->ID );
+			$meta['hh_post_project'] = $project ? $project->ID : '';
+		}
+		foreach ( array_filter( $meta, 'strlen' ) as $key => $value ) {
+			if ( '' === (string) get_post_meta( $id, $key, true ) ) {
+				update_post_meta( $id, $key, $value );
 			}
 		}
-		update_post_meta( $id, 'rank_math_focus_keyword', $n['keyword'] );
-		++$created;
 	}
 	return $created;
 }

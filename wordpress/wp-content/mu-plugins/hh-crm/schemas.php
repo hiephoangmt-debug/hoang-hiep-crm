@@ -205,6 +205,7 @@ function hh_post_schema() {
 		'du-an' => array(
 			'title'  => 'Dự án liên quan',
 			'fields' => array(
+				'hh_post_faq'     => array( 'type' => 'table', 'label' => 'Hỏi đáp (giúp Google, ChatGPT trích dẫn)', 'columns' => array( 'Câu hỏi', 'Trả lời ngắn' ), 'placeholder' => "Cầu Hòa Xuân mới khi nào xong? | Dự kiến hoàn thành năm 2029." ),
 				'hh_post_project' => array( 'type' => 'post', 'label' => 'Bài viết này nói về dự án', 'post_type' => 'du-an', 'help' => 'Bài sẽ hiện ở mục "Tin tức" của trang dự án (và trang tổ hợp chứa dự án đó). Bài có nhắc tên dự án trong tiêu đề cũng tự được gợi ý.' ),
 			),
 		),
