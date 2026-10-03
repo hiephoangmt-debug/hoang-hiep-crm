@@ -21,7 +21,7 @@
 var TZ = 'Asia/Ho_Chi_Minh';
 
 var SHEETS = {
-  KhachHang: ['id', 'ten', 'sdt', 'nguon', 'trang_thai', 'ghi_chu', 'tao_luc', 'cap_nhat'],
+  KhachHang: ['id', 'ten', 'sdt', 'nguon', 'trang_thai', 'ghi_chu', 'tao_luc', 'cap_nhat', 'sdt2'],
   LienHe: ['id', 'thoi_gian', 'ten', 'sdt', 'dich_vu', 'ghi_chu', 'nguon', 'trang_thai', 'khach_id'],
   GiaoDich: ['id', 'ngay', 'dich_vu', 'the', 'ngay_dao', 'ngay_sao_ke', 'khach_id', 'ten_khach', 'sdt', 'so_tien',
     'may', 'phi_khach', 'phi_may', 'phi_may_text', 'tien_phi', 'chi_phi', 'loi_nhuan', 'ghi_chu', 'tao_luc',
@@ -48,7 +48,7 @@ var CARD_RELATIONS = ['Chính chủ', 'Vợ', 'Chồng', 'Bố', 'Mẹ', 'Con', 
 
 // Cột lưu dạng chữ để Sheets không tự đổi ngày/số (mất số 0 đầu SĐT).
 var TEXT_COLUMNS = ['id', 'sdt', 'ngay', 'thoi_gian', 'tao_luc', 'cap_nhat', 'key', 'han', 'khach_id', 'phi_may_text',
-  'ngay_hoan', 'hoan_luc', 'tu_ngay', 'so_cuoi', 'file_id', 'the_id'];
+  'ngay_hoan', 'hoan_luc', 'tu_ngay', 'so_cuoi', 'file_id', 'the_id', 'sdt2'];
 // Cột ngày dạng yyyy-MM-dd (nếu Sheets lỡ đổi thành Date thì đọc lại đúng dạng).
 var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan', 'tu_ngay'];
 // Kiểu tiền với C.Trâm. "Ứng trước"/"Hoàn tiền" làm giảm nợ; "Mình trả lại"/"Nợ cũ" làm tăng nợ;
@@ -312,7 +312,7 @@ function apiBootstrap_() {
     cardBrands: CARD_BRANDS,
     cards: distinct('the'),
     machines: distinct('may'),
-    customers: readAll_('KhachHang').map(function (c) { return { id: c.id, ten: c.ten, sdt: c.sdt }; }),
+    customers: readAll_('KhachHang').map(function (c) { return { id: c.id, ten: c.ten, sdt: c.sdt, sdt2: c.sdt2 || '' }; }),
     settings: {
       remindFrom: remindWindow_().from,
       remindTo: remindWindow_().to,
@@ -356,7 +356,7 @@ function apiSaveCustomer_(c) {
   return withLock_(function () {
     var now = nowStr_();
     var fields = {
-      ten: String(c.ten || '').trim(), sdt: normalizePhone_(c.sdt), nguon: String(c.nguon || 'Nhập tay'),
+      ten: String(c.ten || '').trim(), sdt: normalizePhone_(c.sdt), sdt2: normalizePhone_(c.sdt2), nguon: String(c.nguon || 'Nhập tay'),
       trang_thai: CUSTOMER_STATUSES.indexOf(c.trang_thai) >= 0 ? c.trang_thai : 'Mới',
       ghi_chu: String(c.ghi_chu || ''), cap_nhat: now
     };
@@ -467,7 +467,7 @@ function findCustomer_(q) {
   var all = readAll_('KhachHang');
   var hit = null;
   if (q.id) hit = all.filter(function (c) { return c.id === q.id; })[0];
-  if (!hit && q.sdt) hit = all.filter(function (c) { return c.sdt === q.sdt; })[0];
+  if (!hit && q.sdt) hit = all.filter(function (c) { return c.sdt === q.sdt || (c.sdt2 && c.sdt2 === q.sdt); })[0];
   if (!hit && q.ten) {
     var key = normName_(q.ten);
     hit = all.filter(function (c) { return normName_(c.ten) === key; })[0];
@@ -1450,6 +1450,7 @@ function readAll_(name) {
       o[h] = v === null || v === undefined ? '' : v;
     });
     if (o.sdt !== undefined && o.sdt !== '') o.sdt = normalizePhone_(o.sdt);
+    if (o.sdt2 !== undefined && o.sdt2 !== '') o.sdt2 = normalizePhone_(o.sdt2);
     if (name === 'GiaoDich' && o.id !== '') fillRefund_(o);
     return o;
   }).filter(function (o) { return o[headers[0]] !== ''; });

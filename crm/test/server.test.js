@@ -586,6 +586,20 @@ test('card custody: hold / return with notes and photos, held-cards list with li
   assert.throws(() => call('holdCard', { the_id: card.id, hanh_dong: 'x' }), /Nhận giữ hoặc Trả thẻ/);
 });
 
+test('customer second phone number: saved, normalized, matches web leads and transactions', () => {
+  const { gas, call } = fresh('2026-10-05');
+  const c = call('saveCustomer', { ten: 'Chị Lan', sdt: '0905123456', sdt2: '+84 913 222 333' });
+  assert.strictEqual(c.sdt2, '0913222333');
+  // Khách để lại số thứ hai trên web → nhận ra khách cũ
+  gas.doPost({ postData: { contents: JSON.stringify({ name: 'Lan', phone: '0913222333', service: 'Đáo hạn' }) }, parameter: {} });
+  assert.strictEqual(call('listCustomers').length, 1);
+  assert.strictEqual(call('listLeads')[0].khach_id, c.id);
+  const t = call('saveTransaction', { ngay: '2026-10-05', dich_vu: 'Đáo hạn', ten_khach: 'Lan khác tên', sdt: '0913222333', the: 'SC', so_tien: 1000000, phi_khach: 1.7, phi_may_text: '1.3' });
+  assert.strictEqual(t.khach_id, c.id);
+  assert.strictEqual(call('listCustomers')[0].sdt2, '0913222333');
+  assert.strictEqual(call('bootstrap').customers[0].sdt2, '0913222333');
+});
+
 test('refund columns are added to an existing sheet; old rows get computed values', () => {
   const { gas, fake } = load();
   fake.setToday('2026-10-02');

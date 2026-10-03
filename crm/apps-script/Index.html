@@ -532,6 +532,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       <input type="hidden" name="id">
       <label class="f">Tên<input name="ten" required></label>
       <label class="f">SĐT<input name="sdt" inputmode="tel"></label>
+      <label class="f">SĐT 2 <span class="hint">số thứ hai (nếu có)</span><input name="sdt2" inputmode="tel"></label>
       <label class="f">Trạng thái<select name="trang_thai"></select></label>
       <label class="f">Nguồn<input name="nguon"></label>
       <label class="f full">Ghi chú<textarea name="ghi_chu" rows="2"></textarea></label>
@@ -1411,11 +1412,11 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   function renderCustomers() {
     var q = $('#cust-q').value.trim().toLowerCase(), st = $('#cust-status').value, src = $('#cust-source').value;
     var rows = S.customers.filter(function (c) {
-      return (!st || c.trang_thai === st) && (!src || c.nguon === src) && (!q || (c.ten + ' ' + c.sdt).toLowerCase().indexOf(q) >= 0);
+      return (!st || c.trang_thai === st) && (!src || c.nguon === src) && (!q || (c.ten + ' ' + c.sdt + ' ' + (c.sdt2 || '')).toLowerCase().indexOf(q) >= 0);
     }).sort(function (a, b) { return String(b.cap_nhat).localeCompare(String(a.cap_nhat)); });
     $('#cust-table').innerHTML = '<thead><tr><th>Tên</th><th>SĐT</th><th>Trạng thái</th><th>Nguồn</th><th>Cập nhật</th></tr></thead><tbody>' +
       (rows.length ? rows.map(function (c) {
-        return '<tr class="click" data-cust="' + esc(c.id) + '"><td data-l="Tên"><b>' + esc(c.ten) + '</b></td><td data-l="SĐT">' + quickContact(c.sdt, true) +
+        return '<tr class="click" data-cust="' + esc(c.id) + '"><td data-l="Tên"><b>' + esc(c.ten) + '</b></td><td data-l="SĐT">' + quickContact(c.sdt, true) + (c.sdt2 ? '<div style="margin-top:4px">' + quickContact(c.sdt2, true) + '</div>' : '') +
           '</td><td data-l="Trạng thái">' + statusBadge(c.trang_thai) + '</td><td data-l="Nguồn">' + esc(c.nguon) + '</td><td data-l="Cập nhật" class="opt">' + dmy(c.cap_nhat) + '</td></tr>';
       }).join('') : '<tr><td colspan="5" class="empty">Chưa có khách.</td></tr>') + '</tbody>';
   }
@@ -1470,8 +1471,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     if (!id) { custForm.elements.nguon.value = 'Nhập tay'; $('#cust-detail').innerHTML = '<p class="muted">Lưu khách xong sẽ chụp / tải được CCCD và thêm thẻ.</p>'; return; }
     call('customerDetail', { id: id }).then(function (d) {
       var c = d.customer, f = custForm.elements;
-      f.ten.value = c.ten; f.sdt.value = c.sdt; f.trang_thai.value = c.trang_thai; f.nguon.value = c.nguon; f.ghi_chu.value = c.ghi_chu;
-      $('#cust-contact').innerHTML = telBtns(c.sdt);
+      f.ten.value = c.ten; f.sdt.value = c.sdt; f.sdt2.value = c.sdt2 || ''; f.trang_thai.value = c.trang_thai; f.nguon.value = c.nguon; f.ghi_chu.value = c.ghi_chu;
+      $('#cust-contact').innerHTML = telBtns(c.sdt) + (c.sdt2 ? '<span class="muted" style="align-self:center">SĐT 2:</span>' + telBtns(c.sdt2) : '');
       var s = d.summary;
       S.custDetail = d;
       $('#cust-detail').innerHTML = custDocsHtml(d) + '<div class="kpis" style="margin-top:14px">' + kpi('Số giao dịch', s.so_gd) + kpi('Tổng tiền', short(s.so_tien)) +
@@ -1495,7 +1496,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   custForm.addEventListener('submit', function (e) {
     e.preventDefault();
     var f = custForm.elements;
-    call('saveCustomer', { id: f.id.value, ten: f.ten.value, sdt: f.sdt.value, trang_thai: f.trang_thai.value, nguon: f.nguon.value, ghi_chu: f.ghi_chu.value })
+    call('saveCustomer', { id: f.id.value, ten: f.ten.value, sdt: f.sdt.value, sdt2: f.sdt2.value, trang_thai: f.trang_thai.value, nguon: f.nguon.value, ghi_chu: f.ghi_chu.value })
       .then(function () { toast('Đã lưu khách'); closeModals(); reboot().then(function () { show(S.tab); }); }).catch(fail);
   });
 
