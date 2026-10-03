@@ -36,9 +36,9 @@ $intro    = hh_special_intro( $key );
 							<?php $area = hh_project_area( $id ); ?>
 							<tr>
 								<td><a href="#du-an-<?php echo (int) $id; ?>"><?php echo esc_html( get_the_title( $id ) ); ?></a></td>
-								<td><?php echo esc_html( $area ? $area->name : '' ); ?></td>
-								<td><?php echo esc_html( hh_option_label( hh_project_schema(), 'hh_p_status', hh_meta( 'hh_p_status', $id ) ) ); ?></td>
-								<td><?php echo esc_html( hh_meta( 'hh_p_developer', $id ) ); ?></td>
+								<td data-label="Khu vực"><?php echo esc_html( $area ? $area->name : '' ); ?></td>
+								<td data-label="Tình trạng"><?php echo esc_html( hh_option_label( hh_project_schema(), 'hh_p_status', hh_meta( 'hh_p_status', $id ) ) ); ?></td>
+								<td data-label="Chủ đầu tư"><?php echo esc_html( hh_meta( 'hh_p_developer', $id ) ); ?></td>
 							</tr>
 						<?php endforeach; ?>
 					</tbody>

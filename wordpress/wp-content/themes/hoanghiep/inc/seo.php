@@ -906,3 +906,25 @@ add_filter(
 	},
 	99
 );
+
+/* -------------------------------------------------------------------------
+ * Trang danh sách (Mua bán, Cho thuê, Dự án, loại dự án, khu vực, /san-pham/…): dùng tiêu đề, mô tả của theme
+ * thay cho mẫu chung của Rank Math / Yoast ("Nhà đất Archive - …").
+ * ---------------------------------------------------------------------- */
+
+function hh_seo_is_listing_page() {
+	return is_post_type_archive( array( 'bat-dong-san', 'du-an' ) ) || is_tax( array( 'loai-du-an', 'khu-vuc', 'loai-bds' ) ) || hh_seo_special_key();
+}
+
+function hh_seo_listing_title() {
+	$parts = hh_seo_title_parts( array( 'title' => wp_strip_all_tags( (string) get_the_archive_title() ) ) );
+	return trim( $parts['title'] ) . ' – ' . get_bloginfo( 'name' );
+}
+
+foreach ( array( 'rank_math/frontend/title', 'rank_math/opengraph/facebook/og_title', 'rank_math/opengraph/twitter/twitter_title', 'wpseo_title', 'wpseo_opengraph_title', 'aioseo_title' ) as $hh_filter ) {
+	add_filter( $hh_filter, static fn( $v ) => hh_seo_is_listing_page() ? hh_seo_listing_title() : $v, 98 );
+}
+foreach ( array( 'rank_math/frontend/description', 'rank_math/opengraph/facebook/og_description', 'rank_math/opengraph/twitter/twitter_description', 'wpseo_metadesc', 'wpseo_opengraph_desc', 'aioseo_description' ) as $hh_filter ) {
+	add_filter( $hh_filter, static fn( $v ) => hh_seo_is_listing_page() ? trim( preg_replace( '/\s+/u', ' ', hh_seo_description() ) ) : $v, 98 );
+}
+unset( $hh_filter );

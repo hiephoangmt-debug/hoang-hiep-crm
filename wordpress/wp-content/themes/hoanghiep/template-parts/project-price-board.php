@@ -40,22 +40,23 @@ wp_reset_postdata();
 if ( ! $rows ) {
 	return;
 }
-$what = 'thue' === $deal ? 'cho thuê' : 'bán';
+$what        = 'thue' === $deal ? 'cho thuê' : 'bán';
+$price_label = 'thue' === $deal ? 'Giá thuê tham khảo' : 'Giá tham khảo';
 ?>
 <section class="block price-board">
 	<h2 class="block__title"><?php echo esc_html( $args['title'] ); ?></h2>
 	<p class="prose"><?php echo esc_html( 'Mặt bằng giá ' . $what . ' tham khảo theo từng dự án – tổng hợp từ tin đăng trên website, bảng giá chủ đầu tư và tin rao công khai, cập nhật ' . wp_date( 'm/Y' ) . '. Bấm tên dự án để xem vị trí, tiện ích và các căn đang giao dịch.' ); ?></p>
 	<div class="table-wrap">
 		<table class="data-table">
-			<thead><tr><th>Dự án</th><th>Khu vực</th><th><?php echo 'thue' === $deal ? 'Giá thuê tham khảo' : 'Giá tham khảo'; ?></th><th>Nguồn</th><th></th></tr></thead>
+			<thead><tr><th>Dự án</th><th>Khu vực</th><th><?php echo esc_html( $price_label ); ?></th><th>Nguồn</th><th></th></tr></thead>
 			<tbody>
 				<?php foreach ( $rows as list( $name, $link, $place, $price, $kind ) ) : ?>
 					<tr>
 						<td><a href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $name ); ?></a></td>
-						<td><?php echo esc_html( $place ); ?></td>
-						<td><?php echo esc_html( $price ); ?></td>
-						<td><?php echo esc_html( $kind ); ?></td>
-						<td><a class="btn btn--outline btn--sm" href="#lien-he" data-need="<?php echo 'thue' === $deal ? 'Thuê' : 'Mua'; ?>" data-msg="<?php echo esc_attr( 'Gửi tôi danh sách căn đang ' . $what . ' tại ' . $name . '.' ); ?>">Nhận căn</a></td>
+						<td data-label="Khu vực"><?php echo esc_html( $place ); ?></td>
+						<td data-label="<?php echo esc_attr( $price_label ); ?>"><?php echo esc_html( $price ); ?></td>
+						<td data-label="Nguồn"><?php echo esc_html( $kind ); ?></td>
+						<td class="data-table__action"><a class="btn btn--outline btn--sm" href="#lien-he" data-need="<?php echo 'thue' === $deal ? 'Thuê' : 'Mua'; ?>" data-msg="<?php echo esc_attr( 'Gửi tôi danh sách căn đang ' . $what . ' tại ' . $name . '.' ); ?>">Nhận căn</a></td>
 					</tr>
 				<?php endforeach; ?>
 			</tbody>

@@ -20,9 +20,9 @@ if ( ! $b || empty( $b['rows'] ) ) {
 				<?php foreach ( $b['rows'] as $row ) : ?>
 					<tr>
 						<?php foreach ( $row as $i => $cell ) : ?>
-							<td><?php echo 0 === $i ? '<strong>' . esc_html( $cell ) . '</strong>' : esc_html( $cell ); ?></td>
+							<td data-label="<?php echo esc_attr( $b['columns'][ $i ] ?? '' ); ?>"><?php echo 0 === $i ? '<strong>' . esc_html( $cell ) . '</strong>' : esc_html( $cell ); ?></td>
 						<?php endforeach; ?>
-						<td><a class="btn btn--outline btn--sm" href="#lien-he" data-need="Mua" data-msg="<?php echo esc_attr( 'Gửi tôi danh sách ' . mb_strtolower( $args['what'] ?? 'sản phẩm' ) . ' đang bán khu vực ' . $row[0] . '.' ); ?>">Nhận danh sách</a></td>
+						<td class="data-table__action"><a class="btn btn--outline btn--sm" href="#lien-he" data-need="Mua" data-msg="<?php echo esc_attr( 'Gửi tôi danh sách ' . mb_strtolower( $args['what'] ?? 'sản phẩm' ) . ' đang bán khu vực ' . $row[0] . '.' ); ?>">Nhận danh sách</a></td>
 					</tr>
 				<?php endforeach; ?>
 			</tbody>

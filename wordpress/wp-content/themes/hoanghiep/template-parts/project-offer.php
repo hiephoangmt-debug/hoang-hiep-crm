@@ -42,7 +42,7 @@ $live     = $deadline && $deadline > time();
 				<thead><tr><th>Phương án</th><th>Hạn thanh toán</th><th>Chiết khấu</th></tr></thead>
 				<tbody>
 					<?php foreach ( $discount as list( $plan, $due, $pct ) ) : ?>
-						<tr><td><?php echo esc_html( $plan ); ?></td><td><?php echo esc_html( $due ); ?></td><td><?php echo esc_html( $pct ); ?></td></tr>
+						<tr><td><?php echo esc_html( $plan ); ?></td><td data-label="Hạn thanh toán"><?php echo esc_html( $due ); ?></td><td data-label="Chiết khấu"><?php echo esc_html( $pct ); ?></td></tr>
 					<?php endforeach; ?>
 				</tbody>
 			</table>
