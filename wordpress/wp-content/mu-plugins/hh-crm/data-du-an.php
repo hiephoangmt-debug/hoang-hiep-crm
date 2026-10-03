@@ -250,7 +250,7 @@ function hh_project_dataset() {
 				'hh_p_unit_area' => '34,74 – 131,96 m²',
 				'hh_p_ownership' => 'Sở hữu lâu dài (sổ hồng từng căn)',
 				'hh_p_handover'  => 'Quý 3/2026 (dự kiến)',
-				'hh_p_zones'     => "Tòa M1 – The Emerald | Căn hộ | 829 căn | –\nTòa M2 – The Sapphire | Căn hộ | 510 căn | –\nTòa M3 – The Aquamarine | Căn hộ | 394 căn | –",
+				'hh_p_zones'     => "Tòa The Ruby | Căn hộ | 829 căn | Đã cất nóc 4/2026\nTòa The Sapphire | Căn hộ | 510 căn | Đang xây dựng\nTòa The Diamond | Căn hộ | 394 căn | Đang xây dựng",
 			),
 			'sources' => array( 'https://cafeland.vn/du-an/du-an-can-ho-newtown-diamond-da-nang-4382.html', 'https://newtowndiamonds.com/vi-tri/' ),
 		),
@@ -695,6 +695,12 @@ function hh_import_projects() {
 		$meta['hh_p_name'] = $meta['hh_p_name'] ?? $p['title'];
 		if ( ! empty( $p['hot'] ) ) {
 			$meta['hh_p_featured'] = '1';
+		}
+		// Sửa dữ liệu cũ đã nhập sai: chỉ thay khi giá trị hiện tại vẫn đúng bằng bản cũ (không đè chỗ bạn đã tự sửa).
+		foreach ( $p['fix_meta'] ?? array() as $key => $old ) {
+			if ( isset( $meta[ $key ] ) && (string) get_post_meta( $id, $key, true ) === $old ) {
+				update_post_meta( $id, $key, $meta[ $key ] );
+			}
 		}
 		foreach ( $meta as $key => $value ) {
 			if ( '' === (string) get_post_meta( $id, $key, true ) ) {
