@@ -37,6 +37,7 @@ require HH_CRM_DIR . 'data-landmark.php';
 require HH_CRM_DIR . 'data-m-riverside.php';
 require HH_CRM_DIR . 'data-san-pham-cao-tang.php';
 require HH_CRM_DIR . 'data-gia-thi-truong.php';
+require HH_CRM_DIR . 'data-gia-dat-khach-san.php';
 require HH_CRM_DIR . 'data-tin-tuc-ha-tang.php';
 require HH_CRM_DIR . 'setup.php';
 require HH_CRM_DIR . 'houzez-import.php';
