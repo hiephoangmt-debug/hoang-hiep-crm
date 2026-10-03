@@ -120,6 +120,13 @@ global $wp_query;
 		<?php endif; ?>
 
 		<?php
+		// Trang Mua bán biệt thự: bảng giá thị trường các dự án biệt thự (chủ đầu tư + chuyển nhượng).
+		if ( 'ban' === $deal && $landing && 'biet-thu' === $landing->slug ) {
+			get_template_part( 'template-parts/project-price-board', null, array( 'type' => 'biet-thu', 'title' => 'Giá biệt thự Đà Nẵng – Hội An theo dự án' ) );
+		}
+		?>
+
+		<?php
 		// Liên kết nội bộ tới các trang đích (chuẩn SEO) cùng hình thức.
 		if ( $deal ) :
 			foreach ( array( 'khu-vuc' => 'Theo khu vực', 'loai-bds' => 'Theo loại nhà đất' ) as $tax => $heading ) :

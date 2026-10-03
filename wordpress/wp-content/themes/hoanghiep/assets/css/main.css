@@ -472,6 +472,8 @@ p { margin: 0 0 1em; }
 .pending__icon { display: grid; place-items: center; flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--white); color: var(--gold-2); }
 .pending__icon svg { width: 18px; height: 18px; }
 .btn--sm { padding: 8px 14px; font-size: .85rem; }
+.price-board { margin-top: 40px; }
+.price-board td:first-child a { font-weight: 600; color: var(--navy); }
 .key-points { margin: 0 0 24px; padding: 16px 20px; border-left: 4px solid var(--gold-2); border-radius: var(--radius); background: var(--gold-soft); }
 .key-points p { margin: 0 0 8px; color: var(--navy); }
 .key-points ul { margin: 0; padding-left: 20px; }
