@@ -69,13 +69,29 @@ function hh_gallery( $ids, $group, $class = 'gallery-grid' ) {
 	echo '</div>';
 }
 
-function hh_map( $address ) {
-	if ( ! $address ) {
+/** "16.0602, 108.2280" → array( lat, lng ) hoặc null. */
+function hh_parse_coords( $text ) {
+	if ( preg_match( '/^\s*(-?\d{1,2}(?:\.\d+)?)\s*[,;\s]\s*(-?\d{1,3}(?:\.\d+)?)\s*$/', (string) $text, $m ) && abs( (float) $m[1] ) <= 90 && abs( (float) $m[2] ) <= 180 ) {
+		return array( (float) $m[1], (float) $m[2] );
+	}
+	return null;
+}
+
+/** Bản đồ Google: ưu tiên tọa độ (ghim chính xác), sau đó tên / địa chỉ. Kèm nút mở Google Maps, chỉ đường. */
+function hh_map( $address, $coords = '' ) {
+	$point = hh_parse_coords( $coords );
+	$query = $point ? $point[0] . ',' . $point[1] : trim( (string) $address );
+	if ( '' === $query ) {
 		return;
 	}
 	printf(
-		'<div class="map"><iframe title="Bản đồ" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=%s&amp;output=embed"></iframe></div>',
-		rawurlencode( $address )
+		'<div class="map"><iframe title="Bản đồ" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=%s&amp;z=%d&amp;output=embed"></iframe></div>',
+		rawurlencode( $query ),
+		$point ? 16 : 15
+	);
+	printf(
+		'<p class="map-links"><a href="https://www.google.com/maps/search/?api=1&amp;query=%1$s" target="_blank" rel="noopener">Mở trên Google Maps</a> · <a href="https://www.google.com/maps/dir/?api=1&amp;destination=%1$s" target="_blank" rel="noopener">Chỉ đường</a></p>',
+		rawurlencode( $query )
 	);
 }
 

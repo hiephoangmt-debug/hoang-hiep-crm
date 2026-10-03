@@ -384,6 +384,7 @@ function hh_schema_project() {
 		'url'         => get_permalink(),
 		'description' => hh_seo_description(),
 		'address'     => array( '@type' => 'PostalAddress', 'streetAddress' => hh_meta( 'hh_p_address' ), 'addressRegion' => 'Đà Nẵng', 'addressCountry' => 'VN' ),
+		'geo'         => hh_parse_coords( hh_meta( 'hh_p_map_coords' ) ) ? array( '@type' => 'GeoCoordinates', 'latitude' => hh_parse_coords( hh_meta( 'hh_p_map_coords' ) )[0], 'longitude' => hh_parse_coords( hh_meta( 'hh_p_map_coords' ) )[1] ) : null,
 		'category'    => hh_project_type( $id ) ? hh_project_type( $id )->name : null,
 		'brand'       => hh_meta( 'hh_p_developer' ) ? array( '@type' => 'Organization', 'name' => hh_meta( 'hh_p_developer' ) ) : null,
 		'image'       => $images ?: null,

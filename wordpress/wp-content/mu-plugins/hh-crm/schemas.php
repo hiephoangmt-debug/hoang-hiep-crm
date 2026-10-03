@@ -62,7 +62,8 @@ function hh_project_schema() {
 			'fields' => array(
 				'hh_p_location_desc' => array( 'type' => 'textarea', 'label' => 'Mô tả vị trí', 'placeholder' => 'VD: Dự án nằm ven sông Hàn, ngay trung tâm quận Sơn Trà …' ),
 				'hh_p_connections'   => array( 'type' => 'table', 'label' => 'Liên kết vùng', 'help' => 'Để trống sẽ dùng thời gian di chuyển tham khảo theo khu vực của dự án.', 'columns' => array( 'Thời gian / khoảng cách', 'Địa điểm' ), 'placeholder' => "3 phút | Cầu Rồng\n5 phút | Biển Mỹ Khê\n10 phút | Sân bay quốc tế Đà Nẵng\n30 phút | Phố cổ Hội An" ),
-				'hh_p_map_address'   => array( 'type' => 'text', 'label' => 'Địa chỉ trên bản đồ Google', 'placeholder' => 'Để trống sẽ dùng địa chỉ dự án', 'half' => true ),
+				'hh_p_map_coords'    => array( 'type' => 'text', 'label' => 'Tọa độ bản đồ (chính xác nhất)', 'placeholder' => 'VD: 16.0602, 108.2280', 'half' => true, 'help' => 'Mở Google Maps → bấm chuột phải đúng vị trí dự án → bấm dòng số đầu tiên (tọa độ) để sao chép → dán vào đây.' ),
+				'hh_p_map_address'   => array( 'type' => 'text', 'label' => 'Hoặc tên / địa chỉ tìm trên Google Maps', 'placeholder' => 'Để trống: tìm theo tên dự án', 'half' => true ),
 				'hh_p_location_img'  => array( 'type' => 'image', 'label' => 'Ảnh sơ đồ vị trí', 'half' => true ),
 			),
 		),

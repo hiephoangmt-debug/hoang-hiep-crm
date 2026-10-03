@@ -181,7 +181,12 @@ while ( have_posts() ) :
 					<p class="prose"><?php echo esc_html( $title . ' thuộc khu vực ' . $profile['name'] . '. ' . $profile['desc'] ); ?></p>
 				<?php endif; ?>
 				<?php hh_gallery( hh_ids( 'hh_p_location_img' ), 'vi-tri', 'gallery-single' ); ?>
-				<?php hh_map( hh_meta( 'hh_p_map_address' ) ?: hh_meta( 'hh_p_address' ) ); ?>
+				<?php
+				// Tìm theo tên dự án (Google Maps nhận diện tốt hơn địa chỉ chung chung) nếu chưa nhập tọa độ / địa chỉ bản đồ.
+				$map_name = trim( preg_replace( '/\s*\([^)]*\)/u', '', $title ) );
+				$map_name = false === mb_stripos( $map_name, 'Đà Nẵng' ) ? $map_name . ', Đà Nẵng' : $map_name;
+				hh_map( hh_meta( 'hh_p_map_address' ) ?: $map_name, hh_meta( 'hh_p_map_coords' ) );
+				?>
 			</section>
 
 			<section class="block" id="lien-ket">
