@@ -280,7 +280,9 @@ function api(token, action, payload) {
     heldCards: apiHeldCards_,
     cardHistory: apiCardHistory_,
     customerDocs: function (p) {
-      return { cards: cardsOf_(p.khach_id), docs: readAll_('TaiLieu').filter(function (d) { return d.khach_id === p.khach_id; }) };
+      var tx = readAll_('GiaoDich').filter(function (t) { return t.khach_id === p.khach_id; });
+      return { cards: cardsOf_(p.khach_id), docs: readAll_('TaiLieu').filter(function (d) { return d.khach_id === p.khach_id; }),
+        history: monthHistory_(tx, 5) };
     },
     saveCard: apiSaveCard_,
     deleteCard: apiDeleteCard_,
@@ -431,7 +433,29 @@ function apiCustomerDetail_(p) {
   var tx = readAll_('GiaoDich').filter(function (t) { return t.khach_id === p.id; }).sort(byDateDesc_);
   var leads = readAll_('LienHe').filter(function (l) { return l.khach_id === p.id; }).reverse();
   var docs = readAll_('TaiLieu').filter(function (d) { return d.khach_id === p.id; });
-  return { driveReady: driveReady_(), driveHelp: DRIVE_HELP, customer: c, transactions: tx, leads: leads, summary: summarize_(tx), cards: cardsOf_(p.id), docs: docs };
+  return { driveReady: driveReady_(), driveHelp: DRIVE_HELP, customer: c, transactions: tx, leads: leads, summary: summarize_(tx), cards: cardsOf_(p.id), docs: docs,
+    history: monthHistory_(tx, 5) };
+}
+
+/**
+ * Mốc thời gian theo tháng của một khách (n tháng gần nhất, kể cả tháng chưa làm): mỗi tháng số lần, tổng rút / đáo,
+ * từng giao dịch (ngày, thẻ, dịch vụ, số tiền). Kèm lần làm gần nhất (kể cả cũ hơn n tháng).
+ */
+function monthHistory_(tx, n) {
+  var p = parseYmd_(todayStr_());
+  var months = [];
+  for (var k = 0; k < n; k++) {
+    var m = addMonths_(p.y, p.m, -k);
+    var from = ymd_(m.y, m.m, 1), to = ymd_(m.y, m.m, daysInMonth_(m.y, m.m));
+    var items = tx.filter(function (t) { return t.ngay >= from && t.ngay <= to; }).sort(function (a, b) { return a.ngay < b.ngay ? -1 : 1; });
+    var s = summarize_(items);
+    months.push({ thang: m.m, nam: m.y, so_gd: s.so_gd, so_tien: s.so_tien, loi_nhuan: s.loi_nhuan,
+      rut: items.filter(function (t) { return t.dich_vu !== 'Đáo hạn'; }).reduce(function (a, t) { return a + (Number(t.so_tien) || 0); }, 0),
+      dao: items.filter(function (t) { return t.dich_vu === 'Đáo hạn'; }).reduce(function (a, t) { return a + (Number(t.so_tien) || 0); }, 0),
+      items: items.map(function (t) { return { id: t.id, ngay: t.ngay, the: t.the, dich_vu: t.dich_vu, so_tien: t.so_tien }; }) });
+  }
+  var last = tx.slice().sort(byDateDesc_)[0];
+  return { months: months, lan_cuoi: last ? { ngay: last.ngay, the: last.the, dich_vu: last.dich_vu, so_tien: last.so_tien } : null, tong_gd: tx.length };
 }
 
 function apiUpdateLead_(p) {

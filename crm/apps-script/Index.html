@@ -185,6 +185,11 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
 .delta--up { background: var(--ok-bg); color: var(--ok); }
 .delta--down { background: var(--bad-bg); color: var(--bad); }
 .delta--flat { background: #eef0f4; color: var(--muted); }
+.tl { display: grid; gap: 8px; }
+.tl__m { border-left: 3px solid var(--line); padding: 4px 0 4px 10px; }
+.tl__m.has { border-left-color: var(--primary); }
+.tl__head { display: flex; justify-content: space-between; gap: 8px; font-size: .9rem; }
+.tl__items { font-size: .82rem; color: var(--muted); margin-top: 2px; }
 .pay-chip { display: inline-block; white-space: normal; text-align: right; max-width: 100%; background: var(--info-bg); border-radius: 8px; padding: 2px 8px; margin: 2px 0; font-size: .82rem; cursor: pointer; border: 0; color: var(--primary-dark); }
 .copy input { font-size: .8rem; }
 </style>
@@ -434,6 +439,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       <label class="f">Thẻ / ví<input name="the" list="dl-cards" required placeholder="VD: SC, TP, Momo"></label>
       <label class="f">Số tiền <span class="hint">8.999 = 8.999.000đ · 110tr</span><input name="so_tien_text" required inputmode="decimal"></label>
       <div class="full chips" id="tx-cards" style="margin-top:-4px"></div>
+      <div class="full" id="tx-history"></div>
       <div class="full" id="tx-photos-box">
         <div class="hint" style="font-weight:700;color:var(--text);margin-bottom:6px">📷 Ảnh khách &amp; thẻ <span class="hint" style="font-weight:400">– chụp luôn khi làm, lưu cùng giao dịch</span></div>
         <div class="docs" id="tx-photos"></div>
@@ -898,6 +904,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     $('[data-act=delete-tx]').classList.toggle('hidden', !t.id);
     S.txPhotos = {};
     S.txDocs = [];
+    S.txRetake = false;
+    S.txHistory = null;
     updateTxForm();
     loadTxCards();
     $('#tx-modal').classList.remove('hidden');
@@ -1706,6 +1714,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     }).join('');
     return (d.driveReady === false ? '<div class="advice" style="margin-top:12px">⚠️ ' + esc(d.driveHelp) + '</div>' : '') +
       custHoldHtml(d) +
+      '<div class="card" style="margin-top:12px" id="cust-history">' + historyHtml(d.history, false) + '</div>' +
       '<h3>🪪 Căn cước công dân <span class="hint">· bấm vào ảnh để xem to, bấm lần nữa để đóng</span></h3><div class="docs">' + slot('CCCD mặt trước') + slot('CCCD mặt sau') + '</div>' +
       '<div class="row row--between" style="margin-top:14px"><h3 style="margin:0">💳 Thẻ của khách (' + d.cards.length + ')</h3>' +
       '<button type="button" class="btn btn--sm" data-card="new">+ Thêm thẻ</button></div>' +
@@ -1945,11 +1954,13 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   // Chip thẻ trong form giao dịch: bấm để điền tên thẻ, ngày đáo, ngày sao kê.
   function loadTxCards() {
     var id = txForm.elements.khach_id.value, box = $('#tx-cards');
-    if (!id) { S.txCards = []; S.txDocs = []; box.innerHTML = ''; renderTxPhotos(); return; }
+    if (!id) { S.txCards = []; S.txDocs = []; S.txHistory = null; box.innerHTML = ''; renderTxHistory(); renderTxPhotos(); return; }
     call('customerDocs', { khach_id: id }).then(function (r) {
       var cards = r.cards;
       S.txCards = cards;
       S.txDocs = r.docs;
+      S.txHistory = r.history;
+      renderTxHistory();
       renderTxPhotos();
       box.innerHTML = cards.map(function (k) {
         return '<button type="button" class="chip" data-txcard="' + esc(k.id) + '">💳 ' + esc(k.ten_the) + (k.so_cuoi ? ' ·' + esc(k.so_cuoi) : '') +
@@ -1958,11 +1969,42 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       markTxCard();
     }).catch(function () {});
   }
+  // Mốc thời gian theo tháng (3 hoặc 5 tháng gần nhất)
+  S.histN = 5;
+  function historyHtml(h, compact) {
+    if (!h) return '';
+    var months = h.months.slice(0, S.histN);
+    var seg = '<span class="seg" style="transform:scale(.85);transform-origin:right"><button type="button" data-histn="3"' + (S.histN === 3 ? ' class="is-active"' : '') + '>3 tháng</button><button type="button" data-histn="5"' + (S.histN === 5 ? ' class="is-active"' : '') + '>5 tháng</button></span>';
+    return '<div class="row row--between"><b>📅 Lịch sử ' + S.histN + ' tháng</b>' + seg + '</div>' +
+      (h.lan_cuoi ? '<div class="muted" style="font-size:.85rem;margin:2px 0 6px">Lần gần nhất: <b>' + dmy(h.lan_cuoi.ngay) + '</b> · ' + esc(h.lan_cuoi.dich_vu) + ' ' + esc(h.lan_cuoi.the) + ' ' + money(h.lan_cuoi.so_tien) + ' · tổng ' + h.tong_gd + ' GD</div>' : '<div class="muted">Chưa có giao dịch.</div>') +
+      '<div class="tl">' + months.map(function (m) {
+        return '<div class="tl__m' + (m.so_gd ? ' has' : '') + '"><div class="tl__head"><b>Tháng ' + m.thang + '/' + m.nam + '</b>' +
+          (m.so_gd ? '<span>' + m.so_gd + ' lần · <b>' + money(m.so_tien) + '</b></span>' : '<span class="muted">không làm</span>') + '</div>' +
+          (m.so_gd ? '<div class="tl__items">' + (m.rut ? 'Rút ' + short(m.rut) : '') + (m.rut && m.dao ? ' · ' : '') + (m.dao ? 'Đáo ' + short(m.dao) : '') +
+            (compact ? '' : '<br>' + m.items.map(function (t) { return dm(t.ngay) + ' ' + esc(t.the) + ' ' + (t.dich_vu === 'Đáo hạn' ? 'đáo' : 'rút') + ' ' + short(t.so_tien); }).join(' · ')) + '</div>' : '') + '</div>';
+      }).join('') + '</div>';
+  }
+  function renderTxHistory() {
+    var box = $('#tx-history');
+    if (!S.txHistory || !txForm.elements.khach_id.value) { box.innerHTML = ''; return; }
+    box.innerHTML = '<div class="card" style="margin:0;background:var(--info-bg)"><div style="margin-bottom:6px">👤 <b>Khách cũ quay lại</b> – đã có hồ sơ, không cần chụp lại CCCD / thẻ đã có.</div>' + historyHtml(S.txHistory, false) + '</div>';
+  }
+
   // Ô ảnh trong form giao dịch: ảnh chụp mới giữ tạm, bấm Lưu giao dịch xong mới gửi lên.
   var TX_PHOTO_TYPES = ['CCCD mặt trước', 'CCCD mặt sau', 'Ảnh thẻ'];
   function renderTxPhotos() {
     var the = txForm.elements.the.value.trim().toLowerCase();
     var card = (S.txCards || []).filter(function (k) { return k.ten_the.toLowerCase() === the; })[0];
+    var haveAll = TX_PHOTO_TYPES.every(function (loai) {
+      return loai === 'Ảnh thẻ' ? !!(card && card.anh_id) : (S.txDocs || []).some(function (d) { return d.loai === loai; });
+    });
+    var anyPending = Object.keys(S.txPhotos || {}).length > 0;
+    if (haveAll && !anyPending && !S.txRetake) {
+      $('#tx-photos').innerHTML = '<div class="doc" style="grid-column:1/-1;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:8px">' +
+        '<span>✅ Đã có ảnh CCCD 2 mặt và ảnh thẻ <b>' + esc(card.ten_the) + '</b> – không cần chụp lại.</span>' +
+        '<button type="button" class="btn btn--ghost btn--sm" data-txretake="1">📷 Chụp lại</button></div>';
+      return;
+    }
     $('#tx-photos').innerHTML = TX_PHOTO_TYPES.map(function (loai) {
       var pending = (S.txPhotos || {})[loai];
       var have = loai === 'Ảnh thẻ' ? (card && card.anh_id) : ((S.txDocs || []).filter(function (d) { return d.loai === loai; })[0] || {}).id;
@@ -2024,6 +2066,14 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     if (tp) {
       if (tp.dataset.txpick === 'Ảnh thẻ' && !txForm.elements.the.value.trim()) return toast('Nhập tên thẻ (ô Thẻ / ví) trước khi chụp ảnh thẻ', true);
       pickImage(!!tp.dataset.cap, { pending: true, loai: tp.dataset.txpick });
+      return;
+    }
+    if (e.target.closest('[data-txretake]')) { S.txRetake = true; renderTxPhotos(); return; }
+    var hn = e.target.closest('[data-histn]');
+    if (hn) {
+      S.histN = Number(hn.dataset.histn);
+      renderTxHistory();
+      if (S.custDetail && !$('#cust-modal').classList.contains('hidden')) $('#cust-history').innerHTML = historyHtml(S.custDetail.history, false);
       return;
     }
     var tu = e.target.closest('[data-txunpick]');

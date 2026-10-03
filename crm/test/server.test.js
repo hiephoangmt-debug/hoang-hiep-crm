@@ -639,6 +639,25 @@ test('overview money: today, this week, this month vs previous 2 months', () => 
   assert.strictEqual(m.hai_thang_truoc.cung_ky.so_tien, 8000000);
 });
 
+test('returning customer: 5-month timeline of withdrawals per month', () => {
+  const { call } = fresh('2026-10-07');
+  const c = call('saveCustomer', { ten: 'Chị Lan', sdt: '0905123456' });
+  const tx = (ngay, dv, so_tien) => call('saveTransaction', { ngay, dich_vu: dv, khach_id: c.id, ten_khach: 'Chị Lan', the: 'VCB', so_tien, phi_khach: 2, phi_may_text: '1.5' });
+  tx('2026-10-05', 'Rút tiền', 20000000);
+  tx('2026-09-06', 'Rút tiền', 15000000); tx('2026-09-20', 'Đáo hạn', 30000000);
+  tx('2026-07-10', 'Rút tiền', 10000000);
+  tx('2026-04-10', 'Rút tiền', 9000000); // cũ hơn 5 tháng
+  const h = call('customerDocs', { khach_id: c.id }).history;
+  assert.strictEqual(h.months.length, 5);
+  assert.deepStrictEqual(JSON.parse(JSON.stringify(h.months.map((m) => [m.thang, m.so_gd]))), [[10, 1], [9, 2], [8, 0], [7, 1], [6, 0]]);
+  assert.strictEqual(h.months[1].rut, 15000000);
+  assert.strictEqual(h.months[1].dao, 30000000);
+  assert.strictEqual(h.months[1].items[0].ngay, '2026-09-06');
+  assert.strictEqual(h.lan_cuoi.ngay, '2026-10-05');
+  assert.strictEqual(h.tong_gd, 5);
+  assert.strictEqual(call('customerDetail', { id: c.id }).history.months[0].so_tien, 20000000);
+});
+
 test('refund columns are added to an existing sheet; old rows get computed values', () => {
   const { gas, fake } = load();
   fake.setToday('2026-10-02');
