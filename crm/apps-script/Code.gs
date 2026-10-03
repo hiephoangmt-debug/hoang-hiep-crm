@@ -9,6 +9,8 @@
  *
  *   DoiSoat   – tiền C.Trâm (người giữ máy) chuyển / ứng trước cho mình, không theo từng giao dịch
  *   KetSo     – các lần kết số dư với C.Trâm (sổ trước ngày kết bị khóa)
+ *   TheKhach  – thẻ của từng khách (ngân hàng, 4 số cuối, hạn mức, ngày sao kê, ngày đáo, ảnh thẻ)
+ *   TaiLieu   – ảnh CCCD / ảnh thẻ; file ảnh nằm riêng tư trong Google Drive của chủ CRM
  *
  * Công nợ với C.Trâm: mỗi giao dịch phát sinh tiền hoàn = số tiền − phí máy (tien_hoan = so_tien − chi_phi),
  *   đến hạn ngày GD + 1. Tiền C.Trâm chuyển/ứng (sheet DoiSoat) trừ dần vào các khoản cũ nhất trước.
@@ -25,14 +27,17 @@ var SHEETS = {
     'tien_hoan', 'ngay_hoan', 'hoan_tt', 'hoan_luc'],
   NhacLich: ['key', 'han', 'trang_thai', 'ghi_chu', 'event_id', 'cap_nhat'],
   DoiSoat: ['id', 'ngay', 'loai', 'so_tien', 'ghi_chu', 'tao_luc'],
+  TheKhach: ['id', 'khach_id', 'ten_the', 'ngan_hang', 'so_cuoi', 'han_muc', 'ngay_sao_ke', 'ngay_dao', 'ghi_chu', 'tao_luc', 'cap_nhat'],
+  TaiLieu: ['id', 'khach_id', 'loai', 'the_id', 'file_id', 'ten_file', 'ghi_chu', 'tao_luc'],
   KetSo: ['id', 'ngay', 'tu_ngay', 'so_du_truoc', 'so_gd', 'so_tien', 'chi_phi', 'phat_sinh', 'da_chuyen', 'so_du', 'ghi_chu', 'tao_luc']
 };
 // Sheet thêm ở bản cập nhật: tự tạo khi cần, không phải chạy lại setup().
-var AUTO_SHEETS = ['DoiSoat', 'KetSo'];
+var AUTO_SHEETS = ['DoiSoat', 'KetSo', 'TheKhach', 'TaiLieu'];
+var DOC_TYPES = ['CCCD mặt trước', 'CCCD mặt sau', 'Ảnh thẻ', 'Khác'];
 
 // Cột lưu dạng chữ để Sheets không tự đổi ngày/số (mất số 0 đầu SĐT).
 var TEXT_COLUMNS = ['id', 'sdt', 'ngay', 'thoi_gian', 'tao_luc', 'cap_nhat', 'key', 'han', 'khach_id', 'phi_may_text',
-  'ngay_hoan', 'hoan_luc', 'tu_ngay'];
+  'ngay_hoan', 'hoan_luc', 'tu_ngay', 'so_cuoi', 'file_id', 'the_id'];
 // Cột ngày dạng yyyy-MM-dd (nếu Sheets lỡ đổi thành Date thì đọc lại đúng dạng).
 var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan', 'tu_ngay'];
 // Kiểu tiền với C.Trâm. "Ứng trước"/"Hoàn tiền" làm giảm nợ; "Mình trả lại"/"Nợ cũ" làm tăng nợ;
@@ -254,6 +259,12 @@ function api(token, action, payload) {
     deletePayment: apiDeletePayment_,
     previewClose: function (p) { return statementAt_(p.ngay); },
     periodSummary: apiPeriodSummary_,
+    listCards: function (p) { return cardsOf_(p.khach_id); },
+    saveCard: apiSaveCard_,
+    deleteCard: apiDeleteCard_,
+    uploadDoc: apiUploadDoc_,
+    getDoc: apiGetDoc_,
+    deleteDoc: apiDeleteDoc_,
     closeBalance: apiCloseBalance_,
     deleteClosing: apiDeleteClosing_,
     withdrawAdvice: function (p) { return withdrawAdvice_(p.ngay || todayStr_(), Number(p.ngay_sao_ke), Number(p.ngay_dao) || 0, p.the); }
@@ -340,7 +351,8 @@ function apiCustomerDetail_(p) {
   if (!c) throw new Error('Không tìm thấy khách.');
   var tx = readAll_('GiaoDich').filter(function (t) { return t.khach_id === p.id; }).sort(byDateDesc_);
   var leads = readAll_('LienHe').filter(function (l) { return l.khach_id === p.id; }).reverse();
-  return { customer: c, transactions: tx, leads: leads, summary: summarize_(tx) };
+  var docs = readAll_('TaiLieu').filter(function (d) { return d.khach_id === p.id; });
+  return { customer: c, transactions: tx, leads: leads, summary: summarize_(tx), cards: cardsOf_(p.id), docs: docs };
 }
 
 function apiUpdateLead_(p) {
@@ -372,6 +384,7 @@ function apiSaveTransaction_(t) {
       obj.hoan_tt = 'Chưa nhận';
       appendObj_('GiaoDich', obj);
     }
+    upsertCardFromTx_(obj);
     return obj;
   });
 }
@@ -624,6 +637,125 @@ function apiDeletePayment_(p) {
     var old = readAll_('DoiSoat').filter(function (y) { return y.id === p.id; })[0];
     if (old) assertOpen_(old.ngay);
     return deleteObj_('DoiSoat', p.id);
+  });
+}
+
+/* Thẻ của khách & ảnh CCCD / thẻ ------------------------------------- */
+
+function cardsOf_(khachId) {
+  var docs = readAll_('TaiLieu');
+  return readAll_('TheKhach').filter(function (c) { return c.khach_id === khachId; }).map(function (c) {
+    var photo = docs.filter(function (d) { return d.the_id === c.id; }).pop();
+    c.anh_id = photo ? photo.id : '';
+    return c;
+  }).sort(function (a, b) { return String(a.ten_the).localeCompare(String(b.ten_the)); });
+}
+
+/** Chỉ giữ 4 số cuối – không lưu số thẻ đầy đủ. */
+function last4_(v) { var d = String(v || '').replace(/\D/g, ''); return d ? d.slice(-4) : ''; }
+function dayOrBlank_(v, label) {
+  if (v === '' || v == null) return '';
+  var n = Number(v);
+  if (!(n >= 1 && n <= 31)) throw new Error(label + ' phải từ 1 đến 31.');
+  return n;
+}
+
+function apiSaveCard_(c) {
+  if (!c.khach_id) throw new Error('Chưa chọn khách.');
+  var ten = String(c.ten_the || '').trim();
+  if (!ten) throw new Error('Nhập tên thẻ (VD: SC, TP Visa).');
+  var obj = { khach_id: c.khach_id, ten_the: ten, ngan_hang: String(c.ngan_hang || '').trim(), so_cuoi: last4_(c.so_cuoi),
+    han_muc: Number(c.han_muc) || '', ngay_sao_ke: dayOrBlank_(c.ngay_sao_ke, 'Ngày sao kê'), ngay_dao: dayOrBlank_(c.ngay_dao, 'Ngày đáo'),
+    ghi_chu: String(c.ghi_chu || '').trim(), cap_nhat: nowStr_() };
+  return withLock_(function () {
+    if (c.id) { updateObj_('TheKhach', c.id, obj); obj.id = c.id; return obj; }
+    var dup = readAll_('TheKhach').filter(function (x) { return x.khach_id === c.khach_id && normName_(x.ten_the) === normName_(ten); })[0];
+    if (dup) { updateObj_('TheKhach', dup.id, obj); obj.id = dup.id; return obj; }
+    obj.id = newId_(); obj.tao_luc = obj.cap_nhat;
+    appendObj_('TheKhach', obj);
+    return obj;
+  });
+}
+
+function apiDeleteCard_(p) {
+  return withLock_(function () {
+    readAll_('TaiLieu').filter(function (d) { return d.the_id === p.id; }).forEach(function (d) { trashDoc_(d); });
+    return deleteObj_('TheKhach', p.id);
+  });
+}
+
+/** Ghi giao dịch với thẻ mới thì tự thêm vào danh sách thẻ của khách (kèm ngày đáo / sao kê). */
+function upsertCardFromTx_(t) {
+  if (!t.khach_id || !t.the) return;
+  var c = readAll_('TheKhach').filter(function (x) { return x.khach_id === t.khach_id && normName_(x.ten_the) === normName_(t.the); })[0];
+  var now = nowStr_();
+  if (!c) {
+    appendObj_('TheKhach', { id: newId_(), khach_id: t.khach_id, ten_the: t.the, ngan_hang: '', so_cuoi: '', han_muc: '',
+      ngay_sao_ke: t.ngay_sao_ke || '', ngay_dao: t.ngay_dao || '', ghi_chu: '', tao_luc: now, cap_nhat: now });
+    return;
+  }
+  var upd = {};
+  if (t.ngay_dao && !c.ngay_dao) upd.ngay_dao = t.ngay_dao;
+  if (t.ngay_sao_ke && !c.ngay_sao_ke) upd.ngay_sao_ke = t.ngay_sao_ke;
+  if (Object.keys(upd).length) { upd.cap_nhat = now; updateObj_('TheKhach', c.id, upd); }
+}
+
+/** Thư mục riêng tư trong Drive của chủ CRM: <gốc>/<tên khách – SĐT>. Không chia sẻ cho ai. */
+function docFolder_(khach) {
+  var props = PropertiesService.getScriptProperties();
+  var root = null, id = props.getProperty('DOC_FOLDER');
+  if (id) { try { root = DriveApp.getFolderById(id); } catch (e) { root = null; } }
+  if (!root) {
+    root = DriveApp.createFolder('CRM Thẻ Tín Dụng – Hồ sơ khách (riêng tư)');
+    props.setProperty('DOC_FOLDER', root.getId());
+  }
+  var name = (khach.ten || 'Khách') + (khach.sdt ? ' – ' + khach.sdt : '') + ' (' + khach.id + ')';
+  var it = root.getFoldersByName(name);
+  return it.hasNext() ? it.next() : root.createFolder(name);
+}
+
+var MAX_DOC_BYTES = 6 * 1024 * 1024;
+
+/** Lưu ảnh CCCD / ảnh thẻ (base64 từ điện thoại, đã nén). Ảnh CCCD cùng mặt hoặc ảnh của cùng thẻ: thay ảnh cũ. */
+function apiUploadDoc_(p) {
+  var khach = readAll_('KhachHang').filter(function (c) { return c.id === p.khach_id; })[0];
+  if (!khach) throw new Error('Lưu khách trước rồi mới thêm ảnh.');
+  var loai = DOC_TYPES.indexOf(p.loai) >= 0 ? p.loai : 'Khác';
+  var m = String(p.data || '').match(/^data:(image\/(?:jpeg|png|webp));base64,(.+)$/);
+  if (!m) throw new Error('Chỉ nhận ảnh (JPG, PNG).');
+  if (m[2].length * 0.75 > MAX_DOC_BYTES) throw new Error('Ảnh quá lớn (tối đa 6MB).');
+  if (loai === 'Ảnh thẻ' && !p.the_id) throw new Error('Chưa chọn thẻ.');
+  var ext = m[1] === 'image/png' ? '.png' : m[1] === 'image/webp' ? '.webp' : '.jpg';
+  var name = loai + (p.the_ten ? ' ' + p.the_ten : '') + ' – ' + nowStr_().replace(/[: ]/g, '-') + ext;
+  return withLock_(function () {
+    var file = docFolder_(khach).createFile(Utilities.newBlob(Utilities.base64Decode(m[2]), m[1], name));
+    readAll_('TaiLieu').filter(function (d) {
+      return d.khach_id === khach.id && d.loai === loai && loai !== 'Khác' && (loai !== 'Ảnh thẻ' || d.the_id === p.the_id);
+    }).forEach(function (d) { trashDoc_(d); });
+    var obj = { id: newId_(), khach_id: khach.id, loai: loai, the_id: p.the_id || '', file_id: file.getId(), ten_file: name,
+      ghi_chu: String(p.ghi_chu || ''), tao_luc: nowStr_() };
+    appendObj_('TaiLieu', obj);
+    return obj;
+  });
+}
+
+function apiGetDoc_(p) {
+  var d = readAll_('TaiLieu').filter(function (x) { return x.id === p.id; })[0];
+  if (!d) throw new Error('Không tìm thấy ảnh.');
+  var blob = DriveApp.getFileById(d.file_id).getBlob();
+  return { id: d.id, loai: d.loai, dataUrl: 'data:' + blob.getContentType() + ';base64,' + Utilities.base64Encode(blob.getBytes()) };
+}
+
+function trashDoc_(d) {
+  try { DriveApp.getFileById(d.file_id).setTrashed(true); } catch (e) { /* file đã bị xóa tay */ }
+  deleteObj_('TaiLieu', d.id);
+}
+
+function apiDeleteDoc_(p) {
+  return withLock_(function () {
+    var d = readAll_('TaiLieu').filter(function (x) { return x.id === p.id; })[0];
+    if (d) trashDoc_(d);
+    return true;
   });
 }
 

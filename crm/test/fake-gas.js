@@ -59,6 +59,7 @@
   var sentMail = [];
   var events = [];
   var fakeToday = null;
+  var drive = { folders: {}, files: {} };
 
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   function sha(str) { // không phải mã hóa thật – chỉ để test
@@ -90,7 +91,11 @@
       DigestAlgorithm: { SHA_256: 'sha256' },
       Charset: { UTF_8: 'utf8' },
       computeDigest: function (alg, s) { return sha(s); },
-      base64Encode: function (b) { return b.join('.'); },
+      base64Encode: function (b) { return b && b.__b64 !== undefined ? b.__b64 : b.join('.'); },
+      base64Decode: function (s) { return { __b64: s }; },
+      newBlob: function (bytes, type, name) {
+        return { getBytes: function () { return bytes; }, getContentType: function () { return type; }, getName: function () { return name; } };
+      },
       getUuid: function () {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function () { return (Math.random() * 16 | 0).toString(16); });
       },
@@ -132,11 +137,43 @@
       MimeType: { JSON: 'json' },
       createTextOutput: function (s) { return { content: s, setMimeType: function () { return this; } }; }
     },
+    DriveApp: (function () {
+      var n = 0;
+      function folder(name) {
+        var f = { id: 'fo' + (++n), name: name, children: [] };
+        drive.folders[f.id] = f;
+        return {
+          getId: function () { return f.id; },
+          getFoldersByName: function (nm) {
+            var hits = f.children.filter(function (c) { return drive.folders[c].name === nm; });
+            return { hasNext: function () { return hits.length > 0; }, next: function () { return wrapFolder(hits.shift()); } };
+          },
+          createFolder: function (nm) { var c = folder(nm); wraps[c.getId()] = c; f.children.push(c.getId()); return c; },
+          createFile: function (blob) {
+            var id = 'fi' + (++n);
+            drive.files[id] = { blob: blob, folder: f.id, trashed: false };
+            return { getId: function () { return id; } };
+          }
+        };
+      }
+      var wraps = {};
+      function wrapFolder(id) { return wraps[id]; }
+      return {
+        createFolder: function (name) { var w = folder(name); wraps[w.getId()] = w; return w; },
+        getFolderById: function (id) { if (!wraps[id]) throw new Error('no folder'); return wraps[id]; },
+        getFileById: function (id) {
+          var f = drive.files[id];
+          if (!f) throw new Error('no file');
+          return { getBlob: function () { return f.blob; }, setTrashed: function (v) { f.trashed = v; } };
+        }
+      };
+    })(),
     HtmlService: {},
     Logger: { log: function () {} },
     __fake: {
       setToday: function (s) { fakeToday = s; },
       sentMail: sentMail,
+      drive: drive,
       events: events,
       props: props,
       sheets: sheets

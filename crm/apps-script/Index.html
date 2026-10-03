@@ -161,6 +161,20 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
 .zl--zalo { background: #0068ff; color: #fff; }
 .zl--tel { background: var(--ok-bg); color: var(--ok); }
 .zl-row { display: inline-flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.docs { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.doc { border: 1px dashed var(--line); border-radius: 10px; padding: 8px; text-align: center; background: var(--bg); }
+.doc__img { width: 100%; aspect-ratio: 1.586; object-fit: cover; border-radius: 8px; background: #e8edf5; display: grid; place-items: center; color: var(--muted); font-size: .8rem; cursor: zoom-in; }
+.doc__label { font-weight: 700; font-size: .85rem; margin: 6px 0; }
+.doc .row { justify-content: center; gap: 4px; }
+.doc .btn { padding: 5px 9px; font-size: .78rem; }
+.cardrow { display: flex; gap: 10px; align-items: center; padding: 8px 0; border-top: 1px solid var(--line); }
+.cardrow__img { width: 72px; flex: 0 0 72px; aspect-ratio: 1.586; border-radius: 6px; object-fit: cover; background: #e8edf5; display: grid; place-items: center; font-size: 1.4rem; cursor: zoom-in; }
+.cardrow__info { flex: 1; min-width: 0; font-size: .88rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.chip { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 4px 10px; font-size: .82rem; cursor: pointer; }
+.chip.is-on { background: var(--primary); color: #fff; border-color: var(--primary); }
+.viewer { position: fixed; inset: 0; background: rgba(0,0,0,.85); z-index: 80; display: grid; place-items: center; padding: 12px; }
+.viewer img { max-width: 100%; max-height: 90vh; border-radius: 8px; }
 .pay-chip { display: inline-block; white-space: normal; text-align: right; max-width: 100%; background: var(--info-bg); border-radius: 8px; padding: 2px 8px; margin: 2px 0; font-size: .82rem; cursor: pointer; border: 0; color: var(--primary-dark); }
 .copy input { font-size: .8rem; }
 </style>
@@ -402,6 +416,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       <label class="f">SĐT<input name="sdt" inputmode="tel" placeholder="09…"></label>
       <label class="f">Thẻ / ví<input name="the" list="dl-cards" required placeholder="VD: SC, TP, Momo"></label>
       <label class="f">Số tiền <span class="hint">8.999 = 8.999.000đ · 110tr</span><input name="so_tien_text" required inputmode="decimal"></label>
+      <div class="full chips" id="tx-cards" style="margin-top:-4px"></div>
       <label class="f" data-for="dao">Ngày đáo (hạn thanh toán)<input type="number" name="ngay_dao" min="1" max="31"></label>
       <label class="f" data-for="rut">Ngày sao kê<input type="number" name="ngay_sao_ke" min="1" max="31"></label>
       <label class="f">Máy POS<input name="may" list="dl-machines" placeholder="VD: MB Vân"></label>
@@ -493,6 +508,38 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     <div id="cust-detail"></div>
   </div>
 </div>
+
+<!-- Modal thẻ của khách -->
+<div class="modal hidden" id="card-modal">
+  <form class="modal__box" id="card-form" autocomplete="off">
+    <div class="modal__head"><h2 id="card-title">Thẻ của khách</h2><button type="button" class="x" data-close>×</button></div>
+    <input type="hidden" name="id"><input type="hidden" name="khach_id">
+    <p class="muted" id="card-cust" style="margin-top:0"></p>
+    <div class="form-grid">
+      <label class="f">Tên thẻ <span class="hint">như ghi trong sổ: SC, TP, VCB…</span><input name="ten_the" required></label>
+      <label class="f">Ngân hàng<input name="ngan_hang" placeholder="VD: Techcombank Visa"></label>
+      <label class="f">4 số cuối <span class="hint">chỉ lưu 4 số cuối</span><input name="so_cuoi" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" placeholder="1234"></label>
+      <label class="f">Hạn mức<input name="han_muc_text" inputmode="decimal" placeholder="VD: 50tr"></label>
+      <label class="f">Ngày sao kê<input type="number" name="ngay_sao_ke" min="1" max="31"></label>
+      <label class="f">Ngày đáo (hạn thanh toán)<input type="number" name="ngay_dao" min="1" max="31"></label>
+      <label class="f full">Ghi chú<input name="ghi_chu"></label>
+    </div>
+    <h3 style="margin:14px 0 6px">📷 Ảnh thẻ</h3>
+    <div class="cardrow" style="border:0">
+      <div class="cardrow__img" id="card-photo">💳</div>
+      <div class="cardrow__info">
+        <div class="row"><button type="button" class="btn btn--sm" data-pick="card" data-cap="1">📷 Chụp</button><button type="button" class="btn btn--ghost btn--sm" data-pick="card">📁 Tải lên</button></div>
+        <p class="hint" style="margin:6px 0 0">Chỉ chụp <b>mặt trước</b>. Không chụp mặt sau (mã CVV).</p>
+      </div>
+    </div>
+    <div class="row row--between" style="margin-top:14px">
+      <button type="button" class="btn btn--danger hidden" data-act="delete-card">Xóa thẻ</button>
+      <div class="row" style="margin-left:auto"><button type="button" class="btn btn--ghost" data-close>Đóng</button><button type="submit" class="btn">Lưu thẻ</button></div>
+    </div>
+  </form>
+</div>
+<div class="viewer hidden" id="viewer"><img alt="Ảnh"></div>
+<input type="file" id="img-pick" accept="image/*" class="hidden">
 
 <datalist id="dl-customers"></datalist>
 <datalist id="dl-cards"></datalist>
@@ -752,6 +799,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     $('#tx-title').textContent = t.id ? 'Sửa giao dịch' : 'Thêm giao dịch';
     $('[data-act=delete-tx]').classList.toggle('hidden', !t.id);
     updateTxForm();
+    loadTxCards();
     $('#tx-modal').classList.remove('hidden');
     if (!t.id) setTimeout(function () { (f.ten_khach.value ? f.the : f.ten_khach).focus(); }, 50);
   }
@@ -794,7 +842,9 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       var c = S.boot.customers.filter(function (x) { return x.ten === e.target.value; })[0];
       txForm.elements.khach_id.value = c ? c.id : '';
       if (c && c.sdt && !txForm.elements.sdt.value) txForm.elements.sdt.value = c.sdt;
+      loadTxCards();
     }
+    if (e.target.name === 'the') markTxCard();
     updateTxForm();
   });
   txForm.addEventListener('change', updateTxForm);
@@ -1266,13 +1316,14 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     $('#cust-title').textContent = id ? 'Khách hàng' : 'Thêm khách';
     $('[data-act=tx-for-customer]').classList.toggle('hidden', !id);
     $('#cust-modal').classList.remove('hidden');
-    if (!id) { custForm.elements.nguon.value = 'Nhập tay'; return; }
+    if (!id) { custForm.elements.nguon.value = 'Nhập tay'; $('#cust-detail').innerHTML = '<p class="muted">Lưu khách xong sẽ chụp / tải được CCCD và thêm thẻ.</p>'; return; }
     call('customerDetail', { id: id }).then(function (d) {
       var c = d.customer, f = custForm.elements;
       f.ten.value = c.ten; f.sdt.value = c.sdt; f.trang_thai.value = c.trang_thai; f.nguon.value = c.nguon; f.ghi_chu.value = c.ghi_chu;
       $('#cust-contact').innerHTML = telBtns(c.sdt);
       var s = d.summary;
-      $('#cust-detail').innerHTML = '<div class="kpis" style="margin-top:14px">' + kpi('Số giao dịch', s.so_gd) + kpi('Tổng tiền', short(s.so_tien)) +
+      S.custDetail = d;
+      $('#cust-detail').innerHTML = custDocsHtml(d) + '<div class="kpis" style="margin-top:14px">' + kpi('Số giao dịch', s.so_gd) + kpi('Tổng tiền', short(s.so_tien)) +
         kpi('Phí của mình', money(s.loi_nhuan), s.loi_nhuan >= 0 ? 'pos' : 'neg') + '</div>' +
         '<h3>Lịch sử giao dịch</h3>' + (d.transactions.length ? '<table class="tbl stack"><tbody>' + d.transactions.map(function (t) {
           return '<tr class="click" data-tx2="' + esc(t.id) + '"><td data-l="Ngày">' + dmy(t.ngay) + '</td><td data-l="DV">' + esc(t.dich_vu) + ' · <b>' + esc(t.the) + '</b>' +
@@ -1283,6 +1334,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
           return '<p class="muted">' + esc(dmy(l.thoi_gian)) + ' · ' + esc(l.nguon) + ' · ' + esc(l.dich_vu) + (l.ghi_chu ? ' · “' + esc(l.ghi_chu) + '”' : '') + '</p>';
         }).join('') : '');
       S.custTx = d.transactions;
+      hydrateDocs($('#cust-detail'));
     }).catch(fail);
   }
   $('#cust-detail').addEventListener('click', function (e) {
@@ -1391,8 +1443,207 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       inp.select();
       (navigator.clipboard ? navigator.clipboard.writeText(inp.value) : Promise.reject()).then(function () { toast('Đã chép'); }, function () { document.execCommand('copy'); toast('Đã chép'); });
     }
-    if (e.target.closest('[data-close]') || e.target.classList.contains('modal')) closeModals();
+    var cl = e.target.closest('[data-close]');
+    if (cl) cl.closest('.modal').classList.add('hidden');
+    else if (e.target.classList.contains('modal')) e.target.classList.add('hidden');
   });
+  /* ---------- Ảnh CCCD / thẻ & thẻ của khách ---------- */
+  var docCache = {};
+  function docImg(docId, cls, empty) {
+    if (!docId) return '<div class="' + cls + '">' + empty + '</div>';
+    return '<img class="' + cls + '" data-doc="' + esc(docId) + '" alt="Ảnh" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=">';
+  }
+  function hydrateDocs(root) {
+    $$('img[data-doc]', root).forEach(function (img) {
+      var id = img.dataset.doc;
+      if (docCache[id]) { img.src = docCache[id]; return; }
+      call('getDoc', { id: id }).then(function (r) { docCache[id] = r.dataUrl; img.src = r.dataUrl; }).catch(function () { img.alt = 'Không tải được ảnh'; });
+    });
+  }
+  function custDocsHtml(d) {
+    var c = d.customer;
+    function slot(loai) {
+      var doc = d.docs.filter(function (x) { return x.loai === loai; })[0];
+      return '<div class="doc">' + docImg(doc && doc.id, 'doc__img', '🪪 Chưa có ảnh') + '<div class="doc__label">' + loai + '</div>' +
+        '<div class="row"><button type="button" class="btn btn--sm" data-pick="cccd" data-loai="' + loai + '" data-cap="1">📷 Chụp</button>' +
+        '<button type="button" class="btn btn--ghost btn--sm" data-pick="cccd" data-loai="' + loai + '">📁 Tải</button>' +
+        (doc ? '<button type="button" class="btn btn--danger btn--sm" data-deldoc="' + esc(doc.id) + '">🗑</button>' : '') + '</div></div>';
+    }
+    var cards = d.cards.map(function (k) {
+      return '<div class="cardrow">' + docImg(k.anh_id, 'cardrow__img', '💳') +
+        '<div class="cardrow__info"><b>' + esc(k.ten_the) + '</b>' + (k.ngan_hang ? ' · ' + esc(k.ngan_hang) : '') + (k.so_cuoi ? ' · ****' + esc(k.so_cuoi) : '') +
+        '<div class="muted">' + [k.han_muc ? 'HM ' + short(k.han_muc) : '', k.ngay_sao_ke ? 'Sao kê ' + esc(k.ngay_sao_ke) : '', k.ngay_dao ? 'Đáo ' + esc(k.ngay_dao) : '', esc(k.ghi_chu)].filter(String).join(' · ') + '</div></div>' +
+        '<button type="button" class="btn btn--ghost btn--sm" data-card="' + esc(k.id) + '">Sửa / 📷</button></div>';
+    }).join('');
+    return '<h3>🪪 Căn cước công dân</h3><div class="docs">' + slot('CCCD mặt trước') + slot('CCCD mặt sau') + '</div>' +
+      '<div class="row row--between" style="margin-top:14px"><h3 style="margin:0">💳 Thẻ của khách (' + d.cards.length + ')</h3>' +
+      '<button type="button" class="btn btn--sm" data-card="new">+ Thêm thẻ</button></div>' +
+      (cards || '<p class="muted">Chưa có thẻ. Ghi giao dịch là thẻ tự được thêm, hoặc bấm + Thêm thẻ.</p>');
+  }
+  function refreshCustDocs() {
+    var id = custForm.elements.id.value;
+    if (!id) return;
+    call('customerDetail', { id: id }).then(function (d) {
+      S.custDetail = d;
+      var box = $('#cust-detail');
+      var tmp = document.createElement('div'); tmp.innerHTML = custDocsHtml(d);
+      var kp = box.querySelector('.kpis');
+      while (box.firstChild && box.firstChild !== kp) box.removeChild(box.firstChild);
+      while (tmp.lastChild) box.insertBefore(tmp.lastChild, box.firstChild);
+      hydrateDocs(box);
+    }).catch(fail);
+  }
+
+  // Chọn ảnh: chụp bằng camera hoặc lấy từ máy, nén còn tối đa 1600px trước khi gửi.
+  var pickTarget = null;
+  function pickImage(capture, target) {
+    pickTarget = target;
+    var inp = $('#img-pick');
+    inp.value = '';
+    if (capture) inp.setAttribute('capture', 'environment'); else inp.removeAttribute('capture');
+    inp.click();
+  }
+  function compress(file) {
+    return new Promise(function (resolve, reject) {
+      var url = URL.createObjectURL(file), img = new Image();
+      img.onload = function () {
+        var max = 1600, w = img.naturalWidth, h = img.naturalHeight, k = Math.min(1, max / Math.max(w, h));
+        var cv = document.createElement('canvas'); cv.width = Math.round(w * k); cv.height = Math.round(h * k);
+        cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+        URL.revokeObjectURL(url);
+        resolve(cv.toDataURL('image/jpeg', 0.85));
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('Không đọc được ảnh.')); };
+      img.src = url;
+    });
+  }
+  $('#img-pick').addEventListener('change', function () {
+    var f = this.files && this.files[0], t = pickTarget;
+    if (!f || !t) return;
+    compress(f).then(function (dataUrl) {
+      return call('uploadDoc', { khach_id: t.khach_id, loai: t.loai, the_id: t.the_id || '', the_ten: t.the_ten || '', data: dataUrl }).then(function (doc) {
+        docCache[doc.id] = dataUrl;
+        toast('Đã lưu ảnh ' + t.loai);
+        if (t.after) t.after(doc);
+      });
+    }).catch(fail);
+  });
+
+  // Thẻ của khách
+  var cardForm = $('#card-form');
+  function openCard(card, khach) {
+    cardForm.reset();
+    var f = cardForm.elements;
+    card = card || {};
+    f.id.value = card.id || ''; f.khach_id.value = khach.id;
+    f.ten_the.value = card.ten_the || ''; f.ngan_hang.value = card.ngan_hang || ''; f.so_cuoi.value = card.so_cuoi || '';
+    f.han_muc_text.value = card.han_muc ? amountText(card.han_muc) : '';
+    f.ngay_sao_ke.value = card.ngay_sao_ke || ''; f.ngay_dao.value = card.ngay_dao || ''; f.ghi_chu.value = card.ghi_chu || '';
+    $('#card-cust').textContent = 'Khách: ' + (khach.ten || '') + (khach.sdt ? ' · ' + khach.sdt : '');
+    $('#card-title').textContent = card.id ? 'Thẻ ' + card.ten_the : 'Thêm thẻ';
+    $('[data-act=delete-card]').classList.toggle('hidden', !card.id);
+    $('#card-photo').outerHTML = docImg(card.anh_id, 'cardrow__img" id="card-photo', '💳');
+    hydrateDocs(cardForm);
+    S.cardKhach = khach;
+    $('#card-modal').classList.remove('hidden');
+  }
+  function cardPayload() {
+    var f = cardForm.elements;
+    return { id: f.id.value, khach_id: f.khach_id.value, ten_the: f.ten_the.value.trim(), ngan_hang: f.ngan_hang.value, so_cuoi: f.so_cuoi.value,
+      han_muc: parseAmount(f.han_muc_text.value) || '', ngay_sao_ke: f.ngay_sao_ke.value, ngay_dao: f.ngay_dao.value, ghi_chu: f.ghi_chu.value };
+  }
+  function afterCardChange() {
+    if (!$('#cust-modal').classList.contains('hidden')) refreshCustDocs();
+    if (!$('#tx-modal').classList.contains('hidden')) loadTxCards();
+  }
+  cardForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    call('saveCard', cardPayload()).then(function () { toast('Đã lưu thẻ'); $('#card-modal').classList.add('hidden'); afterCardChange(); }).catch(fail);
+  });
+
+  // Chip thẻ trong form giao dịch: bấm để điền tên thẻ, ngày đáo, ngày sao kê.
+  function loadTxCards() {
+    var id = txForm.elements.khach_id.value, box = $('#tx-cards');
+    if (!id) { S.txCards = []; box.innerHTML = ''; return; }
+    call('listCards', { khach_id: id }).then(function (cards) {
+      S.txCards = cards;
+      box.innerHTML = cards.map(function (k) {
+        return '<button type="button" class="chip" data-txcard="' + esc(k.id) + '">💳 ' + esc(k.ten_the) + (k.so_cuoi ? ' ·' + esc(k.so_cuoi) : '') + '</button>';
+      }).join('') + '<button type="button" class="chip" data-card="new-tx">+ Thẻ / 📷</button>';
+      markTxCard();
+    }).catch(function () {});
+  }
+  function markTxCard() {
+    var v = txForm.elements.the.value.trim().toLowerCase();
+    $$('#tx-cards [data-txcard]').forEach(function (b) {
+      var k = (S.txCards || []).filter(function (x) { return x.id === b.dataset.txcard; })[0];
+      b.classList.toggle('is-on', !!k && k.ten_the.toLowerCase() === v);
+    });
+  }
+
+  document.addEventListener('click', function (e) {
+    var pk = e.target.closest('[data-pick]');
+    if (pk) {
+      if (pk.dataset.pick === 'cccd') {
+        var cid = custForm.elements.id.value;
+        pickImage(!!pk.dataset.cap, { khach_id: cid, loai: pk.dataset.loai, after: refreshCustDocs });
+      } else {
+        var cp = cardPayload();
+        if (!cp.ten_the) return toast('Nhập tên thẻ trước', true);
+        // Lưu thẻ trước (nếu mới) rồi mới gắn ảnh
+        call('saveCard', cp).then(function (card) {
+          cardForm.elements.id.value = card.id;
+          $('[data-act=delete-card]').classList.remove('hidden');
+          pickImage(!!pk.dataset.cap, { khach_id: card.khach_id, loai: 'Ảnh thẻ', the_id: card.id, the_ten: card.ten_the, after: function (doc) {
+            $('#card-photo').outerHTML = docImg(doc.id, 'cardrow__img" id="card-photo', '💳');
+            hydrateDocs(cardForm);
+            afterCardChange();
+          } });
+        }).catch(fail);
+      }
+      return;
+    }
+    var dd = e.target.closest('[data-deldoc]');
+    if (dd) {
+      if (confirm('Xóa ảnh này?')) call('deleteDoc', { id: dd.dataset.deldoc }).then(function () { toast('Đã xóa ảnh'); refreshCustDocs(); }).catch(fail);
+      return;
+    }
+    var cb = e.target.closest('[data-card]');
+    if (cb) {
+      var v = cb.dataset.card;
+      if (v === 'new-tx') {
+        var tf = txForm.elements;
+        if (!tf.khach_id.value) return toast('Chọn khách có sẵn trong danh sách trước (hoặc lưu giao dịch rồi thêm thẻ trong mục khách).', true);
+        openCard({ ten_the: tf.the.value.trim(), ngay_dao: tf.ngay_dao.value, ngay_sao_ke: tf.ngay_sao_ke.value }, { id: tf.khach_id.value, ten: tf.ten_khach.value, sdt: tf.sdt.value });
+      } else {
+        var d = S.custDetail || { cards: [], customer: {} };
+        var khach = { id: custForm.elements.id.value, ten: custForm.elements.ten.value, sdt: custForm.elements.sdt.value };
+        openCard(v === 'new' ? null : d.cards.filter(function (k) { return k.id === v; })[0], khach);
+      }
+      return;
+    }
+    var tc = e.target.closest('[data-txcard]');
+    if (tc) {
+      var k = (S.txCards || []).filter(function (x) { return x.id === tc.dataset.txcard; })[0];
+      if (k) {
+        var f = txForm.elements;
+        f.the.value = k.ten_the;
+        if (k.ngay_dao) f.ngay_dao.value = k.ngay_dao;
+        if (k.ngay_sao_ke) f.ngay_sao_ke.value = k.ngay_sao_ke;
+        updateTxForm(); markTxCard();
+      }
+      return;
+    }
+    if (e.target.closest('[data-act=delete-card]')) {
+      if (!confirm('Xóa thẻ này (và ảnh thẻ)?')) return;
+      call('deleteCard', { id: cardForm.elements.id.value }).then(function () { toast('Đã xóa thẻ'); $('#card-modal').classList.add('hidden'); afterCardChange(); }).catch(fail);
+      return;
+    }
+    var im = e.target.closest('img[data-doc]');
+    if (im && im.src.indexOf('data:image/gif') !== 0) { $('#viewer img').src = im.src; $('#viewer').classList.remove('hidden'); return; }
+    if (e.target.closest('#viewer')) $('#viewer').classList.add('hidden');
+  });
+
   function closeModals() { $$('.modal').forEach(function (m) { m.classList.add('hidden'); }); }
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModals(); });
 

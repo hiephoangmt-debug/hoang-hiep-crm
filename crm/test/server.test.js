@@ -425,6 +425,44 @@ test('advance less than the existing debt leaves the rest owed; transactions are
   assert.strictEqual(st.so_du, 118700000);
 });
 
+test('customer cards (last 4 digits only) and private CCCD / card photos in Drive', () => {
+  const { fake, call } = fresh('2026-10-05');
+  const c = call('saveCustomer', { ten: 'Chị Lan', sdt: '0905123456' });
+  // Ghi giao dịch với thẻ mới → tự thêm vào thẻ của khách
+  call('saveTransaction', { ngay: '2026-10-05', dich_vu: 'Đáo hạn', khach_id: c.id, ten_khach: 'Chị Lan', the: 'SC', ngay_dao: 4, so_tien: 10000000, phi_khach: 1.7, phi_may_text: '1.3' });
+  let cards = call('listCards', { khach_id: c.id });
+  assert.strictEqual(cards.length, 1);
+  assert.strictEqual(cards[0].ten_the, 'SC');
+  assert.strictEqual(cards[0].ngay_dao, 4);
+  // Nhập thêm thông tin: số thẻ đầy đủ chỉ giữ 4 số cuối
+  const card = call('saveCard', { id: cards[0].id, khach_id: c.id, ten_the: 'SC', ngan_hang: 'Standard Chartered', so_cuoi: '4111 1111 1111 1234', han_muc: 50000000, ngay_sao_ke: 10, ngay_dao: 4 });
+  assert.strictEqual(card.so_cuoi, '1234');
+  assert.throws(() => call('saveCard', { khach_id: c.id, ten_the: 'TP', ngay_dao: 40 }), /1 đến 31/);
+  call('saveCard', { khach_id: c.id, ten_the: 'sc', ngan_hang: 'SCB' }); // trùng tên → cập nhật
+  assert.strictEqual(call('listCards', { khach_id: c.id }).length, 1);
+
+  // Ảnh CCCD + ảnh thẻ
+  const img = 'data:image/jpeg;base64,QUJD';
+  assert.throws(() => call('uploadDoc', { khach_id: 'nope', loai: 'CCCD mặt trước', data: img }), /Lưu khách trước/);
+  assert.throws(() => call('uploadDoc', { khach_id: c.id, loai: 'CCCD mặt trước', data: 'data:text/html;base64,PGI+' }), /Chỉ nhận ảnh/);
+  const front = call('uploadDoc', { khach_id: c.id, loai: 'CCCD mặt trước', data: img });
+  call('uploadDoc', { khach_id: c.id, loai: 'CCCD mặt sau', data: img });
+  const front2 = call('uploadDoc', { khach_id: c.id, loai: 'CCCD mặt trước', data: 'data:image/png;base64,WFla' }); // chụp lại: thay ảnh cũ
+  const ph = call('uploadDoc', { khach_id: c.id, loai: 'Ảnh thẻ', the_id: card.id, the_ten: 'SC', data: img });
+  const d = call('customerDetail', { id: c.id });
+  assert.strictEqual(d.docs.length, 3);
+  assert.strictEqual(d.cards[0].anh_id, ph.id);
+  assert.strictEqual(fake.drive.files[front.file_id].trashed, true, 'old front photo trashed');
+  assert.strictEqual(call('getDoc', { id: front2.id }).dataUrl, 'data:image/png;base64,WFla');
+  // Thư mục riêng của khách
+  const folder = fake.drive.folders[fake.drive.files[front2.file_id].folder];
+  assert.match(folder.name, /Chị Lan – 0905123456/);
+  call('deleteCard', { id: card.id });
+  assert.strictEqual(fake.drive.files[ph.file_id].trashed, true);
+  call('deleteDoc', { id: front2.id });
+  assert.strictEqual(call('customerDetail', { id: c.id }).docs.length, 1);
+});
+
 test('refund columns are added to an existing sheet; old rows get computed values', () => {
   const { gas, fake } = load();
   fake.setToday('2026-10-02');
