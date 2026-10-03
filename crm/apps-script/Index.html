@@ -721,7 +721,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         kpi('Hôm nay', d.todayTx.so_gd + ' GD · ' + short(d.todayTx.so_tien)) +
         '';
       S.lastClosing = d.refunds.lastClosing;
-      $('#home-refund').innerHTML = balanceCard(d.refunds.summary);
+      $('#home-refund').innerHTML = balanceCard(d.refunds.summary, d.refunds.congNo);
       setCount('#refund-count', d.refunds.summary.den_han_con_thieu > 0 ? '!' : 0);
       $('#home-remind').innerHTML = d.remindToday.length ? d.remindToday.map(remindItem).join('') : '<div class="empty card">Hôm nay không có khách cần báo 🎉</div>';
       $('#home-soon').innerHTML = d.remindSoon.length ? d.remindSoon.map(remindItem).join('') : '<div class="empty card">Không có lịch trong 7 ngày tới.</div>';
@@ -889,20 +889,37 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     if (d === addDays(t, -1)) return 'Hôm qua';
     return '';
   }
-  function balanceCard(m) {
+  function signed(v) { return (v > 0 ? '+' : v < 0 ? '−' : '') + money(Math.abs(v)); }
+  function tonText(v) { return v > 0 ? 'chị nợ' : v < 0 ? 'chị ứng dư' : 'hết nợ'; }
+  // Công nợ C.Trâm: Mục 1 (chốt đến ngày) + Mục 2 (từ ngày chốt đến nay) = tổng công nợ hiện tại.
+  function balanceCard(m, cn) {
     var name = esc(rn());
-    var cls = m.so_du > 0 ? '' : m.so_du < 0 ? ' bal--ung' : ' bal--zero';
-    var head = m.so_du > 0 ? name + ' còn phải chuyển cho mình' : m.so_du < 0 ? name + ' đang ứng dư – mình đang giữ tiền của chị (trừ vào giao dịch sau hoặc trả lại)' : 'Đã đối chiếu xong, không ai nợ ai';
-    return '<div class="bal' + cls + '"><div class="muted">' + head + '</div>' +
-      '<div class="bal__big ' + (m.so_du > 0 ? 'neg' : 'pos') + '">' + money(Math.abs(m.so_du)) + '</div>' +
-      '<div class="bal__rows">' +
-      '<span>Tổng tiền hoàn phát sinh (số tiền − phí máy)</span><b>' + money(m.tong_phai_hoan) + '</b>' +
-      '<span>− ' + name + ' đã chuyển / ứng</span><b>' + money(m.tong_da_chuyen) + '</b>' +
-      (m.den_han_con_thieu > 0 ? '<span class="neg">Đến hôm nay còn thiếu</span><b class="neg">' + money(m.den_han_con_thieu) + '</b>' : '') +
-      (m.sap_toi > 0 ? '<span>Giao dịch hôm nay, mai hoàn</span><b>' + money(m.sap_toi) + '</b>' : '') +
-      '</div>' + (S.lastClosing ? '<div class="muted" style="margin-top:6px;font-size:.85rem">📌 Đã kết đến hết ' + dmy(S.lastClosing.ngay) + ': ' + oweText(Number(S.lastClosing.so_du)) + '</div>' : '') +
-      '<div class="row" style="margin-top:10px"><button class="btn btn--sm" data-pay="new">+ Ghi tiền ' + name + ' chuyển / ứng</button>' +
-      '<button class="btn btn--accent btn--sm" data-act="open-close">📌 Kết số dư</button></div></div>';
+    cn = cn || { ton1: 0, tam_ung: [], phat_sinh: m.tong_phai_hoan, tong_tam_ung: m.tong_da_chuyen, ton2: m.so_du, tong: m.so_du, so_gd: 0 };
+    S.congNo = cn;
+    var tong = cn.tong;
+    var cls = tong > 0 ? '' : tong < 0 ? ' bal--ung' : ' bal--zero';
+    function line(label, v, cls2, sub) {
+      return '<span>' + label + (sub ? '<br><small class="muted">' + sub + '</small>' : '') + '</span><b class="' + (cls2 || '') + '">' + v + '</b>';
+    }
+    var ung = cn.tam_ung.map(function (x, i) {
+      return line('&nbsp;&nbsp;' + (x.tien < 0 ? '➕ ' : '➖ ') + (i + 1) + '. ' + (x.loai === 'Ứng trước' ? 'Tạm ứng' : esc(x.loai)) + ' · ' + dm(x.ngay) + (x.ghi_chu ? ' · ' + esc(x.ghi_chu) : ''),
+        '<button class="pay-chip" data-pay="' + esc(x.id) + '" title="Sửa">' + (x.tien < 0 ? '+' : '−') + money(Math.abs(x.tien)) + ' ✏️</button>');
+    }).join('');
+    return '<div class="bal' + cls + '">' +
+      '<div class="bal__rows" style="max-width:none">' +
+      '<span><b style="text-align:left">📌 Mục 1 – ' + (cn.chot_ngay ? 'Chốt đến ngày ' + dmy(cn.chot_ngay) : 'Chưa chốt lần nào') + '</b></span>' +
+      '<b class="' + (cn.ton1 > 0 ? 'neg' : 'pos') + '">Tồn ' + signed(cn.ton1) + '<br><small class="muted">' + tonText(cn.ton1) + '</small></b>' +
+      '<span style="grid-column:1/-1;border-top:1px dashed var(--line);margin-top:4px;padding-top:6px"><b style="text-align:left">📥 Mục 2 – Từ ' + dmy(cn.tu_ngay) + (cn.chot_ngay ? ' (sau ngày chốt)' : '') + ' đến nay</b></span>' +
+      line('&nbsp;&nbsp;➕ Tổng tiền hoàn phát sinh (số tiền − phí máy)', '+' + money(cn.phat_sinh), '', cn.so_gd ? '&nbsp;&nbsp;&nbsp;&nbsp;' + cn.so_gd + ' GD · ' + money(cn.so_tien) + ' − phí máy ' + money(cn.chi_phi) : '') +
+      (ung || line('&nbsp;&nbsp;Chưa có tạm ứng', '0đ')) +
+      line('&nbsp;&nbsp;<b>Tồn mục 2</b>', signed(cn.ton2), cn.ton2 > 0 ? 'neg' : 'pos') +
+      '</div>' +
+      '<div style="border-top:2px solid var(--text);margin-top:8px;padding-top:8px"><div class="muted">Tổng công nợ hiện tại (mục 1 + mục 2)</div>' +
+      '<div class="bal__big ' + (tong > 0 ? 'neg' : 'pos') + '" style="margin-bottom:0">' + signed(tong) + '</div>' +
+      '<div class="muted">' + (tong > 0 ? name + ' còn nợ mình' : tong < 0 ? name + ' ứng dư – mình đang giữ tiền của chị' : 'Không ai nợ ai') + '</div></div>' +
+      (m.den_han_con_thieu > 0 ? '<div class="neg" style="font-size:.85rem;margin-top:4px">Trong đó đến hôm nay đã tới hạn mà còn thiếu: ' + money(m.den_han_con_thieu) + '</div>' : '') +
+      '<div class="row" style="margin-top:10px"><button class="btn btn--sm" data-pay="new">+ Tạm ứng / chuyển tiền</button>' +
+      '<button class="btn btn--accent btn--sm" data-act="open-close">📌 Chốt số dư</button></div></div>';
   }
   function oweText(v) { return v > 0 ? esc(rn()) + ' còn nợ ' + money(v) : v < 0 ? esc(rn()) + ' ứng dư ' + money(-v) : 'hết nợ'; }
 
@@ -1074,7 +1091,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     call('refunds', refundRange()).then(function (r) {
       S.refund = r;
       S.lastClosing = r.lastClosing;
-      $('#refund-balance').innerHTML = balanceCard(r.summary);
+      $('#refund-balance').innerHTML = balanceCard(r.summary, r.congNo);
       if (!$('#sum-from').value) setSumRange('today'); else loadSum();
       $('#refund-closings').innerHTML = r.closings.length ? r.closings.map(function (c, i) {
         return '<div class="item"><div class="item__head"><div><div class="item__name">Kết đến hết ' + dmy(c.ngay) + '</div>' +
@@ -1166,7 +1183,12 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       } else {
         var p = null;
         ((S.refund || {}).ledger || []).forEach(function (x) { x.payments.forEach(function (y) { if (y.id === b.dataset.pay) p = y; }); });
-        if (p) openPay(p);
+        ((S.congNo || {}).tam_ung || []).forEach(function (y) { if (!p && y.id === b.dataset.pay) p = y; });
+        if (p) {
+          if (p.so_tien === undefined) p = Object.assign({}, p, { so_tien: p.loai === 'Điều chỉnh số dư' ? p.tien : Math.abs(p.tien) });
+          var ens = S.refund ? Promise.resolve() : call('refunds', refundRange()).then(function (r) { S.refund = r; });
+          ens.then(function () { openPay(p); });
+        }
       }
     }
     if (e.target.closest('[data-act=delete-pay]')) {

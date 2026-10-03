@@ -359,6 +359,15 @@ test('close balance (kết số dư) as of a date: C.Trâm still owes, message, 
   assert.strictEqual(call('refunds', {}).summary.so_du, pv2.so_du, 'closing agrees with running balance');
   const r = call('refunds', {});
   assert.strictEqual(r.lastClosing.ngay, '2026-10-02');
+  // Mục 1 (chốt đến 02/10) + Mục 2 (từ 03/10 đến nay) = tổng công nợ
+  assert.strictEqual(r.congNo.chot_ngay, '2026-10-02');
+  assert.strictEqual(r.congNo.ton1, 205000000);
+  assert.strictEqual(r.congNo.tu_ngay, '2026-10-03');
+  assert.strictEqual(r.congNo.phat_sinh, 10000000 - 150000);
+  assert.strictEqual(r.congNo.tam_ung.length, 1);
+  assert.strictEqual(r.congNo.ton2, 10000000 - 150000 - 205000000);
+  assert.strictEqual(r.congNo.tong, r.summary.so_du);
+  assert.strictEqual(call('dashboard').refunds.congNo.tong, r.summary.so_du);
   assert.strictEqual(r.ledger.find((x) => x.ngay === '2026-10-02').ket.so_du, 205000000);
 
   // Bỏ lần kết gần nhất để sửa

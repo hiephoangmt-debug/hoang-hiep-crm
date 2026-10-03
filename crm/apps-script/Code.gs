@@ -321,7 +321,7 @@ function apiDashboard_() {
   return {
     month: summarize_(tx),
     refundName: refundName_(),
-    refunds: { summary: refunds.summary, days: refunds.days },
+    refunds: { summary: refunds.summary, days: refunds.days, congNo: refunds.congNo, lastClosing: refunds.lastClosing },
     todayTx: summarize_(tx.filter(function (t) { return t.ngay === today; })),
     newLeads: leads.filter(function (l) { return l.trang_thai === 'Mới'; }).reverse().slice(0, 20),
     clicksToday: leads.filter(function (l) { return !l.sdt && String(l.thoi_gian).slice(0, 10) === today; }).reverse(),
@@ -606,6 +606,7 @@ function apiRefunds_(p) {
   return {
     refundName: refundName_(), today: today, summary: summary, ledger: ledger,
     closings: closings.slice().reverse(), lastClosing: closings.length ? closings[closings.length - 1] : null,
+    congNo: congNo_(closings.length ? closings[closings.length - 1] : null),
     days: Object.keys(days).sort().map(function (k) { return days[k]; })
       .filter(function (d) { return d.con_lai > 0 || (d.ngay_hoan >= from && d.ngay_hoan <= to); })
   };
@@ -839,6 +840,24 @@ function periodStatement_(from, to, opening) {
   st.giao_dich.tien_hoan = st.giao_dich.tien_hoan || 0;
   st.refundName = refundName_();
   return st;
+}
+
+/**
+ * Công nợ hiện tại theo 2 mục:
+ *   Mục 1 – chốt đến ngày (lần kết gần nhất): tồn.
+ *   Mục 2 – từ ngày chốt đến nay: tiền hoàn phát sinh − các lần tạm ứng / chuyển = tồn mục 2.
+ *   Tổng công nợ = mục 1 + mục 2 (dương = C.Trâm còn nợ mình, âm = C.Trâm ứng dư).
+ */
+function congNo_(last) {
+  var from = last ? addDays_(last.ngay, 1) : '';
+  var st = periodStatement_(from, '9999-12-31', last ? Number(last.so_du) || 0 : 0);
+  var ton2 = st.phat_sinh - st.da_chuyen;
+  return {
+    chot_ngay: last ? last.ngay : '', ton1: st.so_du_truoc,
+    tu_ngay: from || (st.ngay_lam.length ? st.ngay_lam[0].ngay : todayStr_()),
+    so_gd: st.so_gd, so_tien: st.so_tien, chi_phi: st.chi_phi, phat_sinh: st.phat_sinh,
+    tam_ung: st.payments, tong_tam_ung: st.da_chuyen, ton2: ton2, tong: st.so_du_truoc + ton2
+  };
 }
 
 /** Bảng đối chiếu để kết số dư đến hết ngày `ngay` (kỳ bắt đầu sau lần kết gần nhất). */

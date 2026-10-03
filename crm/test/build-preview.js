@@ -46,6 +46,7 @@ const shim = `
     api(token, 'savePayment', { ngay: d(-1), loai: 'Hoàn tiền', so_tien: old.reduce(function (a, t) { return a + t.tien_hoan; }, 0), ghi_chu: 'CK VCB' });
     api(token, 'savePayment', { ngay: d(0), loai: 'Ứng trước', so_tien: 30000000, ghi_chu: 'sáng' });
     api(token, 'savePayment', { ngay: d(0), loai: 'Ứng trước', so_tien: 20000000, ghi_chu: 'chiều' });
+    api(token, 'closeBalance', { ngay: d(-2), ghi_chu: 'đã gửi Zalo' });
     [['Lan', '0906222001', 'Rút tiền thẻ tín dụng', 'www.the-tin-dung-da-nang.com', 'Cần rút 20tr thẻ VPBank'],
      ['Hùng', '0906222002', 'Đáo hạn thẻ tín dụng', 'dichvuthetindungdanang.com', ''],
      ['Mai', '0906222003', 'Rút tiền ví trả sau', 'www.the-tin-dung-da-nang.com', 'SPayLater 5tr']].forEach(function (l) {
