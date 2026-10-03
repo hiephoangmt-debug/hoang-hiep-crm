@@ -31,6 +31,7 @@ function hh_project_schema() {
 					'da-ban-giao'   => 'Đã bàn giao',
 				) ),
 				'hh_p_featured'     => array( 'type' => 'checkbox', 'label' => 'Dự án HOT (lên banner, trang chủ và mục "Dự án hot mới")', 'half' => true ),
+				'hh_p_sold_out'     => array( 'type' => 'checkbox', 'label' => 'Chủ đầu tư đã bán hết (trang dự án chuyển sang mua bán, chuyển nhượng, cho thuê)', 'half' => true, 'help' => 'Dự án "Đã bàn giao" cũng tự hiện mục chuyển nhượng & cho thuê lên đầu trang.' ),
 				'hh_p_parent'       => array( 'type' => 'post', 'label' => 'Thuộc tổ hợp / là phân khu của dự án', 'post_type' => 'du-an', 'half' => true, 'help' => 'VD: FPT Plaza 4 thuộc FPT City Đà Nẵng; The Sonata là phân khu của Sun Symphony Residence.' ),
 				'hh_p_name'         => array( 'type' => 'text', 'label' => 'Tên thương mại', 'placeholder' => 'VD: Aurelia Riverside', 'half' => true ),
 				'hh_p_type'         => array( 'type' => 'text', 'label' => 'Loại hình', 'placeholder' => 'VD: Căn hộ cao cấp, nhà phố, shophouse', 'half' => true ),
@@ -100,6 +101,15 @@ function hh_project_schema() {
 				'hh_p_loan'          => array( 'type' => 'textarea', 'label' => 'Hỗ trợ vay ngân hàng', 'placeholder' => 'VD: Vietcombank, BIDV hỗ trợ vay 70%, ân hạn gốc lãi 18 tháng …' ),
 				'hh_p_rental'        => array( 'type' => 'textarea', 'label' => 'Chương trình cho thuê / cam kết lợi nhuận (căn hộ dịch vụ, condotel)', 'placeholder' => 'VD: Cam kết lợi nhuận 8%/năm trong 3 năm đầu, chủ nhà được nghỉ miễn phí 15 đêm/năm …' ),
 				'hh_p_pricelist_url' => array( 'type' => 'url', 'label' => 'Link tải bảng giá / brochure (Google Drive, PDF…)', 'placeholder' => 'https://' ),
+			),
+		),
+		'thu-cap'   => array(
+			'title'  => 'Chuyển nhượng & cho thuê',
+			'intro'  => 'Tin mua bán / cho thuê chọn "Thuộc dự án" là dự án này sẽ tự hiện trên trang dự án, kèm khoảng giá tính từ các tin đang đăng. Các ô dưới đây để ghi giá tham khảo khi chưa có tin.',
+			'fields' => array(
+				'hh_p_resale_price' => array( 'type' => 'text', 'label' => 'Giá chuyển nhượng tham khảo', 'placeholder' => 'VD: 45 – 55 triệu/m² · 2PN từ 3,2 tỷ', 'half' => true ),
+				'hh_p_rent_price'   => array( 'type' => 'text', 'label' => 'Giá thuê tham khảo', 'placeholder' => 'VD: 1PN 9 – 12 triệu/tháng · 2PN 14 – 18 triệu/tháng', 'half' => true ),
+				'hh_p_resale_note'  => array( 'type' => 'textarea', 'label' => 'Nhận định thị trường thứ cấp', 'placeholder' => 'VD: Thanh khoản tốt với căn 2PN view sông; khách thuê chủ yếu là chuyên gia nước ngoài, công suất cho thuê 80 – 90% …' ),
 			),
 		),
 		'tai-chinh' => array(
@@ -215,7 +225,7 @@ function hh_listing_schema() {
 				'hh_price'      => array( 'type' => 'number', 'label' => 'Giá (triệu đồng) – cho thuê: triệu/tháng', 'placeholder' => 'VD: 3200 (= 3,2 tỷ) hoặc 12', 'half' => true, 'help' => 'Để trống sẽ hiện "Thỏa thuận".' ),
 				'hh_negotiable' => array( 'type' => 'checkbox', 'label' => 'Giá còn thương lượng', 'half' => true ),
 				'hh_address'    => array( 'type' => 'text', 'label' => 'Địa chỉ', 'placeholder' => 'VD: 123 Võ Nguyên Giáp, Ngũ Hành Sơn, Đà Nẵng' ),
-				'hh_project'    => array( 'type' => 'post', 'label' => 'Thuộc dự án', 'post_type' => 'du-an', 'half' => true ),
+				'hh_project'    => array( 'type' => 'post', 'label' => 'Thuộc dự án', 'post_type' => 'du-an', 'half' => true, 'help' => 'Tin sẽ hiện ở mục "Chuyển nhượng & cho thuê" của trang dự án.' ),
 				'hh_featured'   => array( 'type' => 'checkbox', 'label' => 'Tin HOT (xếp đầu mục "hot mới" cuối trang)', 'half' => true ),
 			),
 		),

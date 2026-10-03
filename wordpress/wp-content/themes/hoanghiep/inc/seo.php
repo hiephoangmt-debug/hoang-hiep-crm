@@ -100,7 +100,8 @@ function hh_seo_description() {
 			)
 		);
 		$lead = has_excerpt() ? get_the_excerpt() : '';
-		return trim( $lead ? $lead . ' ' . implode( ', ', $bits ) . '.' : implode( ', ', $bits ) . '. Bảng giá, mặt bằng, tiến độ, chính sách mới nhất.' );
+		$tail = hh_project_is_resale() ? ' Căn chuyển nhượng, cho thuê và giá thị trường mới nhất.' : ' Bảng giá, mặt bằng, tiến độ, chính sách mới nhất.';
+		return trim( $lead ? $lead . ' ' . implode( ', ', $bits ) . '.' : implode( ', ', $bits ) . '.' . $tail );
 	}
 	if ( is_singular( 'bat-dong-san' ) ) {
 		$deal = 'thue' === hh_meta( 'hh_deal' ) ? 'Cho thuê' : 'Bán';
@@ -220,7 +221,7 @@ function hh_seo_head() {
 /** Filter / sort / search result pages: keep crawlable but out of the index. */
 add_filter( 'wp_robots', 'hh_seo_robots' );
 function hh_seo_robots( $robots ) {
-	foreach ( array( 'tk', 'gia', 'dt', 'pn', 'huong', 'sx', 'tt', 'lien-he', 'khu-vuc', 'loai-bds' ) as $var ) {
+	foreach ( array( 'tk', 'gia', 'dt', 'pn', 'huong', 'sx', 'tt', 'duan', 'lien-he', 'khu-vuc', 'loai-bds' ) as $var ) {
 		if ( isset( $_GET[ $var ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 			$robots['noindex'] = true;
 			$robots['follow']  = true;

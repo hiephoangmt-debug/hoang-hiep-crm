@@ -92,6 +92,16 @@
 		formLink.setAttribute( 'href', '#lien-he' );
 	}
 
+	// Nút "Ký gửi…" chọn sẵn nhu cầu trong form liên hệ.
+	$$( '[data-need]' ).forEach( ( btn ) => {
+		btn.addEventListener( 'click', () => {
+			const sel = document.querySelector( '#lien-he select[name="need"]' );
+			if ( sel ) {
+				sel.value = btn.dataset.need;
+			}
+		} );
+	} );
+
 	// Tabs inside project page (Shop khối đế · Penthouse · Duplex).
 	$$( '.ptabs' ).forEach( ( bar ) => {
 		const block = bar.parentElement;

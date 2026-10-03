@@ -89,7 +89,7 @@ function hh_project_intro( $post_id = null ) {
 		$s .= ' do ' . $m( 'hh_p_developer' ) . ' phát triển';
 	}
 	if ( $m( 'hh_p_address' ) ) {
-		$s .= ', tọa lạc tại ' . hh_lcfirst( $m( 'hh_p_address' ) );
+		$s .= ', tọa lạc tại ' . hh_lc_address( $m( 'hh_p_address' ) );
 	}
 	$paras[] = $s . '.';
 
@@ -112,14 +112,22 @@ function hh_project_intro( $post_id = null ) {
 			$m( 'hh_p_ownership' ) ? 'Hình thức sở hữu: ' . hh_lcfirst( $m( 'hh_p_ownership' ) ) : '',
 			$m( 'hh_p_legal' ) ? 'pháp lý: ' . hh_lcfirst( $m( 'hh_p_legal' ) ) : '',
 			$status ? 'tình trạng hiện tại: ' . mb_strtolower( $status ) : '',
-			$m( 'hh_p_handover' ) ? 'bàn giao ' . hh_lcfirst( $m( 'hh_p_handover' ) ) : '',
+			$m( 'hh_p_handover' ) && 0 !== mb_stripos( $m( 'hh_p_handover' ), 'đã' ) ? 'bàn giao ' . hh_lcfirst( $m( 'hh_p_handover' ) ) : '',
 		)
 	);
 	if ( $legal ) {
 		$paras[] = hh_ucfirst( implode( '; ', $legal ) ) . '.';
 	}
-	$paras[] = 'Hoàng Hiệp cập nhật bảng giá, rổ hàng, lịch thanh toán và chính sách mới nhất của ' . $title . ', hỗ trợ đi xem dự án và tính toán phương án vay vốn phù hợp.';
+	$paras[] = hh_project_is_resale( $post_id )
+		? 'Hoàng Hiệp cập nhật các căn chuyển nhượng, cho thuê và giá thị trường mới nhất của ' . $title . ', hỗ trợ kiểm tra pháp lý, thủ tục sang tên và nhận ký gửi bán, cho thuê.'
+		: 'Hoàng Hiệp cập nhật bảng giá, rổ hàng, lịch thanh toán và chính sách mới nhất của ' . $title . ', hỗ trợ đi xem dự án và tính toán phương án vay vốn phù hợp.';
 	return $paras;
+}
+
+/** Viết thường chữ đầu địa chỉ chỉ khi bắt đầu bằng danh từ chung (Đường, Khu, Xã…), giữ nguyên địa danh. */
+function hh_lc_address( $address ) {
+	$first = mb_strtolower( (string) strtok( $address, ' ,' ) );
+	return in_array( $first, array( 'đường', 'khu', 'xã', 'phường', 'lô', 'ven', 'mặt', 'thôn', 'ngã', 'giao', 'số', 'trục', 'tuyến', 'quận', 'huyện' ), true ) ? hh_lcfirst( $address ) : $address;
 }
 
 function hh_ucfirst( $text ) {
@@ -236,19 +244,26 @@ function hh_project_faq( $post_id = null ) {
 		$faq[] = array( 'Chủ đầu tư dự án ' . $title . ' là ai?', 'Dự án do ' . $m( 'hh_p_developer' ) . ' làm chủ đầu tư.' );
 	}
 	if ( $m( 'hh_p_address' ) ) {
-		$faq[] = array( $title . ' nằm ở đâu?', 'Dự án tọa lạc tại ' . hh_lcfirst( $m( 'hh_p_address' ) ) . '.' );
+		$faq[] = array( $title . ' nằm ở đâu?', 'Dự án tọa lạc tại ' . hh_lc_address( $m( 'hh_p_address' ) ) . '.' );
 	}
 	if ( $m( 'hh_p_type' ) || $m( 'hh_p_units' ) ) {
 		$faq[] = array( $title . ' có những loại sản phẩm nào?', hh_ucfirst( trim( implode( '; ', array_filter( array( $m( 'hh_p_type' ), $m( 'hh_p_units' ) ? 'quy mô ' . hh_lcfirst( $m( 'hh_p_units' ) ) : '' ) ) ) ) ) . '.' );
 	}
 	if ( $m( 'hh_p_ownership' ) || $m( 'hh_p_legal' ) ) {
-		$faq[] = array( 'Pháp lý và hình thức sở hữu của ' . $title . ' thế nào?', hh_ucfirst( implode( '; ', array_filter( array( $m( 'hh_p_ownership' ), $m( 'hh_p_legal' ) ) ) ) ) . '.' );
+		$faq[] = array( 'Pháp lý và hình thức sở hữu của ' . $title . ' thế nào?', hh_ucfirst( implode( '; ', array_filter( array( hh_lcfirst( $m( 'hh_p_ownership' ) ), hh_lcfirst( $m( 'hh_p_legal' ) ) ) ) ) ) . '.' );
 	}
 	if ( $m( 'hh_p_handover' ) || $m( 'hh_p_status' ) ) {
 		$status = hh_option_label( hh_project_schema(), 'hh_p_status', $m( 'hh_p_status' ) );
-		$faq[]  = array( 'Khi nào ' . $title . ' bàn giao?', hh_ucfirst( implode( '. ', array_filter( array( $status ? 'Tình trạng hiện tại: ' . mb_strtolower( $status ) : '', $m( 'hh_p_handover' ) ? 'Thời gian bàn giao: ' . hh_lcfirst( $m( 'hh_p_handover' ) ) : '' ) ) ) ) . '.' );
+		$faq[]  = array( 'Khi nào ' . $title . ' bàn giao?', hh_ucfirst( implode( '. ', array_filter( array( $status ? 'Tình trạng hiện tại: ' . mb_strtolower( $status ) : '', $m( 'hh_p_handover' ) && 0 !== mb_stripos( $m( 'hh_p_handover' ), 'đã' ) ? 'Thời gian bàn giao: ' . hh_lcfirst( $m( 'hh_p_handover' ) ) : '' ) ) ) ) . '.' );
 	}
-	$faq[] = array( 'Giá bán ' . $title . ' hiện nay bao nhiêu?', ( $m( 'hh_p_price_from' ) ? hh_project_price( $post_id ) . '. ' : '' ) . 'Giá và chính sách thay đổi theo từng đợt mở bán, vị trí căn. Gọi hoặc nhắn Zalo ' . $phone . ' để nhận bảng giá, lịch thanh toán và rổ hàng mới nhất.' );
+	if ( hh_project_is_resale( $post_id ) ) {
+		$market = hh_project_market( $post_id );
+		$range  = $market['ban']['range'] ? 'Các căn đang chuyển nhượng có giá ' . $market['ban']['range'] . '. ' : ( $m( 'hh_p_resale_price' ) ? 'Giá chuyển nhượng tham khảo: ' . $m( 'hh_p_resale_price' ) . '. ' : '' );
+		$faq[]  = array( 'Giá chuyển nhượng ' . $title . ' hiện nay bao nhiêu?', $range . 'Giá tùy vị trí, tầng, view và nội thất từng căn. Gọi hoặc nhắn Zalo ' . $phone . ' để nhận danh sách căn đang bán.' );
+		$faq[]  = array( 'Giá thuê tại ' . $title . ' bao nhiêu?', ( $market['thue']['range'] ? 'Các căn đang cho thuê có giá ' . $market['thue']['range'] . '. ' : ( $m( 'hh_p_rent_price' ) ? 'Giá thuê tham khảo: ' . $m( 'hh_p_rent_price' ) . '. ' : '' ) ) . 'Liên hệ ' . $phone . ' để nhận danh sách căn trống và lịch xem nhà.' );
+	} else {
+		$faq[] = array( 'Giá bán ' . $title . ' hiện nay bao nhiêu?', ( $m( 'hh_p_price_from' ) ? hh_project_price( $post_id ) . '. ' : '' ) . 'Giá và chính sách thay đổi theo từng đợt mở bán, vị trí căn. Gọi hoặc nhắn Zalo ' . $phone . ' để nhận bảng giá, lịch thanh toán và rổ hàng mới nhất.' );
+	}
 	$faq[] = array( 'Mua ' . $title . ' có được hỗ trợ vay ngân hàng không?', $m( 'hh_p_loan' ) ? $m( 'hh_p_loan' ) : 'Trang dự án có bảng tính vay và dòng tiền để bạn tự ước tính số tiền trả hằng tháng. Hiệp hỗ trợ kết nối ngân hàng, hồ sơ vay khi bạn chọn được căn phù hợp.' );
 	return $faq;
 }
@@ -299,4 +314,95 @@ function hh_project_news( $post_id = null, $limit = 6 ) {
 			'no_found_rows'  => true,
 		)
 	);
+}
+
+/* -------------------------------------------------------------------------
+ * Thị trường thứ cấp: mua bán, chuyển nhượng, cho thuê trong dự án
+ * ---------------------------------------------------------------------- */
+
+/** Dự án đã bán hết hoặc đã bàn giao: ưu tiên hiện chuyển nhượng & cho thuê. */
+function hh_project_is_resale( $post_id = null ) {
+	$post_id = $post_id ?: get_the_ID();
+	return '1' === hh_meta( 'hh_p_sold_out', $post_id ) || 'da-ban-giao' === hh_meta( 'hh_p_status', $post_id );
+}
+
+/** Dự án và các dự án thành phần / phân khu của nó. */
+function hh_project_family( $post_id = null ) {
+	$post_id = $post_id ?: get_the_ID();
+	$kids    = get_posts( array( 'post_type' => 'du-an', 'fields' => 'ids', 'numberposts' => 50, 'meta_key' => 'hh_p_parent', 'meta_value' => $post_id ) );
+	return array_map( 'strval', array_merge( array( $post_id ), $kids ) );
+}
+
+/** Tin đang đăng (chưa giao dịch) thuộc dự án, theo hình thức ban / thue. */
+function hh_project_listing_ids( $post_id, $deal ) {
+	static $cache = array();
+	$key = $post_id . $deal;
+	if ( ! isset( $cache[ $key ] ) ) {
+		$cache[ $key ] = get_posts(
+			array(
+				'post_type'   => 'bat-dong-san',
+				'fields'      => 'ids',
+				'numberposts' => 200,
+				'meta_query'  => array(
+					array( 'key' => 'hh_project', 'value' => hh_project_family( $post_id ), 'compare' => 'IN' ),
+					array( 'key' => 'hh_deal', 'value' => $deal ),
+					array( 'key' => 'hh_status', 'value' => 'da-giao-dich', 'compare' => '!=' ),
+				),
+			)
+		);
+	}
+	return $cache[ $key ];
+}
+
+/** Tóm tắt thị trường: số tin, khoảng giá, đơn giá trung bình/m² (tin bán). */
+function hh_project_market( $post_id = null ) {
+	$post_id = $post_id ?: get_the_ID();
+	$out     = array();
+	foreach ( array( 'ban', 'thue' ) as $deal ) {
+		$ids    = hh_project_listing_ids( $post_id, $deal );
+		$prices = array();
+		$per_m2 = array();
+		foreach ( $ids as $id ) {
+			$price = (float) hh_meta( 'hh_price', $id );
+			$area  = (float) hh_meta( 'hh_area', $id );
+			if ( $price > 0 ) {
+				$prices[] = $price;
+				if ( $area > 0 && 'ban' === $deal ) {
+					$per_m2[] = $price / $area;
+				}
+			}
+		}
+		$out[ $deal ] = array(
+			'count' => count( $ids ),
+			'range' => $prices ? hh_price_range( min( $prices ), max( $prices ), 'thue' === $deal ) : '',
+			'm2'    => $per_m2 ? number_format( array_sum( $per_m2 ) / count( $per_m2 ), 1, ',', '.' ) . ' triệu/m²' : '',
+		);
+	}
+	return $out;
+}
+
+/** Danh sách tin của dự án: tin HOT trước, rồi mới nhất. */
+function hh_project_listings( $post_id, $deal, $limit = 6 ) {
+	$ids = hh_project_listing_ids( $post_id, $deal );
+	if ( ! $ids ) {
+		return null;
+	}
+	usort(
+		$ids,
+		static fn( $a, $b ) => ( hh_is_hot( $b ) <=> hh_is_hot( $a ) ) ?: ( get_post_time( 'U', true, $b ) <=> get_post_time( 'U', true, $a ) )
+	);
+	return new WP_Query(
+		array(
+			'post_type'      => 'bat-dong-san',
+			'post__in'       => array_slice( $ids, 0, $limit ),
+			'orderby'        => 'post__in',
+			'posts_per_page' => $limit,
+			'no_found_rows'  => true,
+		)
+	);
+}
+
+/** Link tất cả tin bán / cho thuê của dự án. */
+function hh_project_listings_url( $post_id, $deal ) {
+	return add_query_arg( 'duan', get_post_field( 'post_name', $post_id ), hh_deal_url( $deal ) );
 }

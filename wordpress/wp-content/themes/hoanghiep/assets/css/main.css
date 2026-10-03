@@ -475,6 +475,19 @@ p { margin: 0 0 1em; }
 .address-line { display: flex; align-items: flex-start; gap: 8px; color: var(--navy); }
 .address-line svg { flex: none; width: 18px; height: 18px; margin-top: 3px; color: var(--gold-2); }
 
+/* Chuyển nhượng & cho thuê trong dự án */
+.market { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 14px; margin: 8px 0 20px; }
+.market__box { padding: 16px 18px; border: 1px solid var(--line); border-left: 4px solid var(--gold-2); border-radius: var(--radius); background: var(--white); }
+.market__label { margin: 0; font-size: .82rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.market__value { margin: 4px 0; font-size: 1.25rem; font-weight: 700; color: var(--navy); }
+.market__meta { margin: 0; font-size: .86rem; color: var(--muted); }
+.market__more { margin-top: 16px; text-align: center; }
+.consign { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 24px; padding: 16px 20px; border-radius: var(--radius); background: var(--tint); }
+.consign p { flex: 1 1 280px; margin: 0; font-size: .92rem; }
+.project-card__market { margin: 0 0 6px; font-size: .84rem; font-weight: 600; color: var(--gold-2); }
+.project-card .pill--sold { margin-left: 0; }
+.pill--sold { margin-left: 6px; background: var(--gold-2); color: var(--white); }
+
 /* Liên hệ cuối trang dự án */
 .contact-block { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; padding: 28px; border: 0; border-radius: var(--radius-lg); background: var(--navy); color: var(--white); }
 .contact-block .block__title { color: var(--white); }

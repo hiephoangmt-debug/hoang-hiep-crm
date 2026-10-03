@@ -215,7 +215,7 @@ function hh_meta( $key, $post_id = null ) {
 
 /** Non-empty trimmed lines of a "lines" field. */
 function hh_lines( $key, $post_id = null ) {
-	return array_values( array_filter( array_map( 'trim', preg_split( '/\R/', hh_meta( $key, $post_id ) ) ), 'strlen' ) );
+	return array_values( array_filter( array_map( 'trim', preg_split( '/\R/u', hh_meta( $key, $post_id ) ) ), 'strlen' ) );
 }
 
 /** Rows of a "table" field, each padded to $cols cells. */

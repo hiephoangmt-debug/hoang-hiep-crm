@@ -74,6 +74,9 @@ global $wp_query;
 				</label>
 			<?php endforeach; ?>
 			<input type="hidden" name="sx" value="<?php echo esc_attr( $cur( 'sx' ) ); ?>">
+			<?php if ( $cur( 'duan' ) ) : ?>
+				<input type="hidden" name="duan" value="<?php echo esc_attr( $cur( 'duan' ) ); ?>">
+			<?php endif; ?>
 			<button class="btn btn--gold btn--block" type="submit">Áp dụng</button>
 			<a class="filter-panel__reset" href="<?php echo esc_url( $action ); ?>">Xoá bộ lọc</a>
 		</form>
@@ -83,7 +86,7 @@ global $wp_query;
 		<div class="results-bar">
 			<p><strong><?php echo (int) $wp_query->found_posts; ?></strong> tin phù hợp</p>
 			<form method="get" action="<?php echo esc_url( $action ); ?>" data-autosubmit>
-				<?php foreach ( array_merge( array( 'tk' ), array_keys( $selects ) ) as $keep ) : ?>
+				<?php foreach ( array_merge( array( 'tk', 'duan' ), array_keys( $selects ) ) as $keep ) : ?>
 					<?php if ( $cur( $keep ) ) : ?>
 						<input type="hidden" name="<?php echo esc_attr( $keep ); ?>" value="<?php echo esc_attr( $cur( $keep ) ); ?>">
 					<?php endif; ?>

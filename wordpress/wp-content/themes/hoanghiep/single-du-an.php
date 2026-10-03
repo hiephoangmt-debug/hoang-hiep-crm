@@ -18,17 +18,22 @@ while ( have_posts() ) :
 	$gallery     = hh_ids( 'hh_p_gallery' );
 	$type        = hh_project_type();
 	$title       = get_the_title();
+	$resale      = hh_project_is_resale();
+	$market      = hh_project_market();
+	$has_market  = $resale || $market['ban']['count'] || $market['thue']['count'] || hh_meta( 'hh_p_resale_price' ) || hh_meta( 'hh_p_rent_price' );
 
 	// Mọi trang dự án đều đủ các mục; mục chưa nhập sẽ tự soạn hoặc ghi "đang cập nhật".
 	$sections = array(
 		'gioi-thieu' => 'Giới thiệu',
 		'tong-quan'  => 'Tổng quan',
+		'giao-dich'  => $resale ? 'Chuyển nhượng & cho thuê' : '',
 		'vi-tri'     => 'Vị trí',
 		'lien-ket'   => 'Liên kết vùng',
 		'tien-ich'   => 'Tiện ích',
 		'mat-bang'   => 'Mặt bằng',
 		'san-pham'   => 'Loại sản phẩm',
-		'chinh-sach' => 'Chính sách',
+		'chinh-sach' => $resale ? 'Giá & bảng tính' : 'Chính sách',
+		'thu-cap'    => ! $resale && $has_market ? 'Chuyển nhượng & cho thuê' : '',
 		'tien-do'    => 'Tiến độ',
 		'thu-vien'   => ( $gallery || hh_meta( 'hh_p_video' ) ) ? 'Hình ảnh' : '',
 		'tin-tuc'    => 'Tin tức',
@@ -39,7 +44,9 @@ while ( have_posts() ) :
 
 	$key_facts = array_filter(
 		array(
-			'Giá bán'   => hh_meta( 'hh_p_price_from' ) ? hh_project_price() : 'Liên hệ',
+			'Giá bán'   => $resale ? '' : ( hh_meta( 'hh_p_price_from' ) ? hh_project_price() : 'Liên hệ' ),
+			'Giá chuyển nhượng' => $resale ? ( hh_meta( 'hh_p_resale_price' ) ?: ( $market['ban']['range'] ? hh_ucfirst( $market['ban']['range'] ) : 'Liên hệ' ) ) : '',
+			'Đang giao dịch'    => $resale ? $market['ban']['count'] . ' căn bán · ' . $market['thue']['count'] . ' căn thuê' : '',
 			'Loại hình' => hh_project_types_label(),
 			'Quy mô'    => hh_meta( 'hh_p_scale' ),
 			'Sản phẩm'  => hh_meta( 'hh_p_unit_area' ),
@@ -61,6 +68,7 @@ while ( have_posts() ) :
 				<a class="parent-link" href="<?php echo esc_url( get_permalink( $parent_id ) ); ?>"><?php echo esc_html( hh_parent_label( $parent_id ) ); ?> <strong><?php echo esc_html( get_the_title( $parent_id ) ); ?></strong> <?php echo hh_icon( 'arrow' ); // phpcs:ignore ?></a>
 			<?php endif; ?>
 			<?php hh_pill( $status, $status_key ); ?>
+			<?php if ( '1' === hh_meta( 'hh_p_sold_out' ) ) : ?><span class="pill pill--sold">Đã bán hết</span><?php endif; ?>
 			<?php foreach ( get_the_terms( $id, 'loai-du-an' ) ?: array() as $t ) : ?><?php if ( $t->parent ) : ?><a class="pill pill--type" href="<?php echo esc_url( get_term_link( $t ) ); ?>"><?php echo esc_html( $t->name ); ?></a><?php endif; ?><?php endforeach; ?>
 			<h1 class="project-hero__title"><?php the_title(); ?></h1>
 			<?php if ( hh_meta( 'hh_p_developer' ) ) : ?>
@@ -71,7 +79,11 @@ while ( have_posts() ) :
 			<?php endif; ?>
 			<p class="project-hero__updated">Cập nhật: <time datetime="<?php echo esc_attr( get_the_modified_date( 'c' ) ); ?>"><?php echo esc_html( get_the_modified_date( 'd/m/Y' ) ); ?></time></p>
 			<div class="hero__actions">
-				<a class="btn btn--gold" href="#lien-he">Nhận bảng giá &amp; chính sách</a>
+				<?php if ( $resale ) : ?>
+					<a class="btn btn--gold" href="#giao-dich">Xem căn chuyển nhượng &amp; cho thuê</a>
+				<?php else : ?>
+					<a class="btn btn--gold" href="#lien-he">Nhận bảng giá &amp; chính sách</a>
+				<?php endif; ?>
 				<?php if ( hh_meta( 'hh_p_pricelist_url' ) ) : ?>
 					<a class="btn btn--ghost" href="<?php echo esc_url( hh_meta( 'hh_p_pricelist_url' ) ); ?>" target="_blank" rel="noopener"><?php echo hh_icon( 'file' ); // phpcs:ignore ?> Tải brochure</a>
 				<?php endif; ?>
@@ -152,6 +164,10 @@ while ( have_posts() ) :
 					</div>
 				<?php endif; ?>
 			</section>
+
+			<?php if ( $resale ) : ?>
+				<?php get_template_part( 'template-parts/project-market', null, array( 'id' => 'giao-dich', 'market' => $market, 'resale' => true ) ); ?>
+			<?php endif; ?>
 
 			<section class="block" id="vi-tri">
 				<h2 class="block__title">Vị trí dự án</h2>
@@ -245,7 +261,7 @@ while ( have_posts() ) :
 							<?php hh_data_table( $p['cols'], $p['rows'] ); ?>
 							<?php hh_gallery( $p['gallery'], 'san-pham-' . $key ); ?>
 							<?php if ( ! $p['rows'] ) : ?>
-								<?php hh_pending( 'Rổ hàng ' . hh_lcfirst( $p['label'] ) . ' (mã căn, diện tích, giá) đang được cập nhật theo từng đợt mở bán.', 'Nhận rổ hàng' ); ?>
+								<?php hh_pending( $resale ? 'Liên hệ để nhận danh sách ' . hh_lcfirst( $p['label'] ) . ' đang chuyển nhượng, cho thuê trong dự án.' : 'Rổ hàng ' . hh_lcfirst( $p['label'] ) . ' (mã căn, diện tích, giá) đang được cập nhật theo từng đợt mở bán.', $resale ? 'Nhận danh sách căn' : 'Nhận rổ hàng' ); ?>
 							<?php endif; ?>
 						</div>
 					<?php $first = false; endforeach; ?>
@@ -255,18 +271,31 @@ while ( have_posts() ) :
 			</section>
 
 			<section class="block" id="chinh-sach">
-				<h2 class="block__title">Chính sách bán hàng &amp; thanh toán</h2>
-				<h3 class="block__sub">Bảng giá</h3>
-				<?php if ( $price_table ) : ?>
-					<?php hh_data_table( array( 'Sản phẩm', 'Diện tích', 'Giá bán', 'Ghi chú' ), $price_table ); ?>
+				<?php if ( $resale ) : ?>
+					<h2 class="block__title">Giá &amp; bảng tính vay</h2>
+					<p class="prose"><?php echo esc_html( '1' === hh_meta( 'hh_p_sold_out' ) ? $title . ' đã bán hết từ chủ đầu tư.' : $title . ' đã bàn giao.' ); ?> Giá hiện nay là giá chuyển nhượng giữa các chủ nhà, tùy vị trí, tầng, view và nội thất – xem các căn đang bán ở mục <a href="#giao-dich">Chuyển nhượng &amp; cho thuê</a>.</p>
+					<?php if ( $price_table ) : ?>
+						<h3 class="block__sub">Bảng giá gốc của chủ đầu tư (tham khảo)</h3>
+						<?php hh_data_table( array( 'Sản phẩm', 'Diện tích', 'Giá bán', 'Ghi chú' ), $price_table ); ?>
+					<?php endif; ?>
+					<?php if ( $payment ) : ?>
+						<h3 class="block__sub">Lịch thanh toán gốc</h3>
+						<?php hh_data_table( array( 'Đợt', 'Thời điểm', 'Tỷ lệ' ), $payment ); ?>
+					<?php endif; ?>
 				<?php else : ?>
-					<?php hh_pending( 'Giá ' . $title . ' thay đổi theo từng đợt mở bán và vị trí căn. Liên hệ để nhận bảng giá mới nhất.', 'Nhận bảng giá' ); ?>
-				<?php endif; ?>
-				<h3 class="block__sub">Lịch thanh toán</h3>
-				<?php if ( $payment ) : ?>
-					<?php hh_data_table( array( 'Đợt', 'Thời điểm', 'Tỷ lệ' ), $payment ); ?>
-				<?php else : ?>
-					<?php hh_pending( 'Lịch thanh toán chuẩn và các phương án thanh toán nhanh / vay ngân hàng đang được cập nhật.', 'Nhận lịch thanh toán' ); ?>
+					<h2 class="block__title">Chính sách bán hàng &amp; thanh toán</h2>
+					<h3 class="block__sub">Bảng giá</h3>
+					<?php if ( $price_table ) : ?>
+						<?php hh_data_table( array( 'Sản phẩm', 'Diện tích', 'Giá bán', 'Ghi chú' ), $price_table ); ?>
+					<?php else : ?>
+						<?php hh_pending( 'Giá ' . $title . ' thay đổi theo từng đợt mở bán và vị trí căn. Liên hệ để nhận bảng giá mới nhất.', 'Nhận bảng giá' ); ?>
+					<?php endif; ?>
+					<h3 class="block__sub">Lịch thanh toán</h3>
+					<?php if ( $payment ) : ?>
+						<?php hh_data_table( array( 'Đợt', 'Thời điểm', 'Tỷ lệ' ), $payment ); ?>
+					<?php else : ?>
+						<?php hh_pending( 'Lịch thanh toán chuẩn và các phương án thanh toán nhanh / vay ngân hàng đang được cập nhật.', 'Nhận lịch thanh toán' ); ?>
+					<?php endif; ?>
 				<?php endif; ?>
 				<?php if ( hh_lines( 'hh_p_policy' ) ) : ?>
 					<div class="policy">
@@ -291,6 +320,10 @@ while ( have_posts() ) :
 				<?php get_template_part( 'template-parts/finance', null, array( 'mode' => 'project' ) ); ?>
 				<p class="note">Giá và chính sách có thể thay đổi theo từng đợt mở bán. Liên hệ để nhận thông tin mới nhất.</p>
 			</section>
+
+			<?php if ( ! $resale && $has_market ) : ?>
+				<?php get_template_part( 'template-parts/project-market', null, array( 'id' => 'thu-cap', 'market' => $market, 'resale' => false ) ); ?>
+			<?php endif; ?>
 
 			<section class="block" id="tien-do">
 				<h2 class="block__title">Cập nhật tiến độ</h2>
@@ -345,7 +378,7 @@ while ( have_posts() ) :
 				<div class="contact-block__text">
 					<h2 class="block__title">Liên hệ tư vấn <?php echo esc_html( $title ); ?></h2>
 					<p>Để lại thông tin, Hiệp sẽ gọi lại và gửi bạn:</p>
-					<?php hh_check_list( array( 'Bảng giá, rổ hàng căn đẹp mới nhất', 'Lịch thanh toán, chính sách chiết khấu, hỗ trợ vay', 'Mặt bằng, brochure, pháp lý dự án', 'Lịch đi xem dự án, nhà mẫu' ) ); ?>
+					<?php hh_check_list( $resale ? array( 'Danh sách căn chuyển nhượng, cho thuê mới nhất', 'Định giá, kiểm tra pháp lý, sổ hồng từng căn', 'Hỗ trợ vay ngân hàng, thủ tục sang tên', 'Ký gửi bán / cho thuê căn của bạn' ) : array( 'Bảng giá, rổ hàng căn đẹp mới nhất', 'Lịch thanh toán, chính sách chiết khấu, hỗ trợ vay', 'Mặt bằng, brochure, pháp lý dự án', 'Lịch đi xem dự án, nhà mẫu' ) ); ?>
 					<p class="contact-block__phone">
 						<a class="btn btn--gold" href="tel:<?php echo esc_attr( hoanghiep_tel() ); ?>"><?php echo hh_icon( 'phone' ); // phpcs:ignore ?> <?php echo esc_html( hoanghiep_opt( 'hh_phone' ) ); ?></a>
 						<a class="btn btn--zalo" href="https://zalo.me/<?php echo esc_attr( hoanghiep_tel( hoanghiep_opt( 'hh_zalo' ) ) ); ?>" target="_blank" rel="noopener">Chat Zalo</a>
@@ -355,9 +388,9 @@ while ( have_posts() ) :
 				echo hh_lead_form( // phpcs:ignore
 					array(
 						'ref_id' => $id,
-						'title'  => 'Nhận bảng giá & chính sách',
-						'need'   => 'Nhận bảng giá dự án',
-						'button' => 'Nhận bảng giá',
+						'title'  => $resale ? 'Nhận danh sách căn & tư vấn' : 'Nhận bảng giá & chính sách',
+						'need'   => $resale ? 'Mua' : 'Nhận bảng giá dự án',
+						'button' => $resale ? 'Gửi yêu cầu' : 'Nhận bảng giá',
 					)
 				);
 				?>
@@ -369,8 +402,8 @@ while ( have_posts() ) :
 				<?php hh_agent_card( true ); ?>
 				<div class="side-box">
 					<p class="side-box__title">Nhận ngay về <?php echo esc_html( $title ); ?></p>
-					<?php hh_check_list( array( 'Bảng giá & rổ hàng mới nhất', 'Lịch thanh toán, chính sách', 'Mặt bằng, brochure' ) ); ?>
-					<a class="btn btn--navy btn--block" href="#lien-he">Nhận bảng giá</a>
+					<?php hh_check_list( $resale ? array( 'Căn chuyển nhượng, cho thuê mới nhất', 'Định giá & kiểm tra pháp lý', 'Ký gửi căn của bạn' ) : array( 'Bảng giá & rổ hàng mới nhất', 'Lịch thanh toán, chính sách', 'Mặt bằng, brochure' ) ); ?>
+					<a class="btn btn--navy btn--block" href="#lien-he"><?php echo $resale ? 'Nhận danh sách căn' : 'Nhận bảng giá'; ?></a>
 				</div>
 			</div>
 		</aside>

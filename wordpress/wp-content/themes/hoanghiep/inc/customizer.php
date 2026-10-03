@@ -70,7 +70,7 @@ function hoanghiep_photo( $which = 'portrait' ) {
 /** Hình ảnh hoạt động: [url, caption] pairs ("{theme}" = thư mục theme). */
 function hoanghiep_highlights() {
 	$rows = array();
-	foreach ( preg_split( '/\R/', hoanghiep_opt( 'hh_highlights' ) ) as $line ) {
+	foreach ( preg_split( '/\R/u', hoanghiep_opt( 'hh_highlights' ) ) as $line ) {
 		$parts = array_map( 'trim', explode( '|', $line, 2 ) );
 		if ( '' === $parts[0] ) {
 			continue;
@@ -84,7 +84,7 @@ function hoanghiep_highlights() {
 /** Career steps as [role, note] pairs. */
 function hoanghiep_career() {
 	$rows = array();
-	foreach ( preg_split( '/\R/', hoanghiep_opt( 'hh_person_career' ) ) as $line ) {
+	foreach ( preg_split( '/\R/u', hoanghiep_opt( 'hh_person_career' ) ) as $line ) {
 		$parts = array_map( 'trim', explode( '|', $line, 2 ) );
 		if ( '' !== $parts[0] ) {
 			$rows[] = array( $parts[0], $parts[1] ?? '' );

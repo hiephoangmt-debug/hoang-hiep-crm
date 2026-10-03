@@ -247,7 +247,7 @@ function hh_is_high_rise( $post_id = null ) {
 
 add_filter( 'query_vars', 'hh_query_vars' );
 function hh_query_vars( $vars ) {
-	return array_merge( $vars, array( 'hh_deal', 'hh_term', 'tk', 'gia', 'dt', 'pn', 'huong', 'sx', 'tt' ) );
+	return array_merge( $vars, array( 'hh_deal', 'hh_term', 'tk', 'gia', 'dt', 'pn', 'huong', 'sx', 'tt', 'duan' ) );
 }
 
 function hh_deal_url( $deal ) {
@@ -661,6 +661,10 @@ function hh_filter_queries( $q ) {
 				$meta[] = $clause;
 			}
 		}
+		$project = $q->get( 'duan' ) ? get_page_by_path( sanitize_title( (string) $q->get( 'duan' ) ), OBJECT, 'du-an' ) : null;
+		if ( $project ) {
+			$meta[] = array( 'key' => 'hh_project', 'value' => hh_project_family( $project->ID ), 'compare' => 'IN' );
+		}
 		$pn = absint( $q->get( 'pn' ) );
 		if ( $pn ) {
 			$meta[] = array( 'key' => 'hh_bedrooms', 'value' => $pn, 'compare' => $pn >= 4 ? '>=' : '=', 'type' => 'NUMERIC' );
@@ -696,6 +700,10 @@ function hh_listing_archive_title() {
 		$term = get_queried_object();
 	}
 	$verb = 'ban' === $deal ? 'Bán' : ( 'thue' === $deal ? 'Cho thuê' : 'Mua bán, cho thuê' );
+	$project = get_query_var( 'duan' ) ? get_page_by_path( sanitize_title( (string) get_query_var( 'duan' ) ), OBJECT, 'du-an' ) : null;
+	if ( $project ) {
+		return ( 'ban' === $deal ? 'Mua bán – chuyển nhượng' : $verb ) . ' ' . get_the_title( $project );
+	}
 	if ( $term && 'loai-bds' === $term->taxonomy ) {
 		return $verb . ' ' . mb_strtolower( $term->name ) . ' Đà Nẵng';
 	}

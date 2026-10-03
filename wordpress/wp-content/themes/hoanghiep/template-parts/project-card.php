@@ -3,6 +3,13 @@ $status = hh_option_label( hh_project_schema(), 'hh_p_status', hh_meta( 'hh_p_st
 $areas  = get_the_terms( get_the_ID(), 'khu-vuc' );
 $place  = $areas && ! is_wp_error( $areas ) ? $areas[0]->name : hh_meta( 'hh_p_address' );
 $type   = hh_project_type();
+$resale = hh_project_is_resale();
+$market = hh_project_market();
+$price  = hh_project_price();
+if ( $resale ) {
+	$range = hh_meta( 'hh_p_resale_price' ) ?: ( $market['ban']['range'] ? hh_ucfirst( $market['ban']['range'] ) : 'Liên hệ' );
+	$price = 'Chuyển nhượng: ' . hh_lcfirst( $range );
+}
 ?>
 <article class="project-card">
 	<a class="project-card__media" href="<?php the_permalink(); ?>">
@@ -11,7 +18,7 @@ $type   = hh_project_type();
 		<?php else : ?>
 			<span class="media-placeholder"><?php echo hh_icon( 'building' ); // phpcs:ignore ?></span>
 		<?php endif; ?>
-		<?php hh_pill( $status, hh_meta( 'hh_p_status' ) ); ?>
+		<?php hh_pill( '1' === hh_meta( 'hh_p_sold_out' ) ? 'Đã bán hết' : $status, '1' === hh_meta( 'hh_p_sold_out' ) ? 'sold' : hh_meta( 'hh_p_status' ) ); ?>
 		<?php if ( hh_is_hot() ) : ?><span class="hot-badge">HOT</span><?php endif; ?>
 		<?php if ( $type ) : ?>
 			<span class="project-card__type"><?php echo esc_html( hh_project_types_label() ); ?></span>
@@ -43,13 +50,16 @@ $type   = hh_project_type();
 		<?php if ( $extras ) : ?>
 			<p class="project-card__extras">Có <?php echo esc_html( implode( ' · ', $extras ) ); ?></p>
 		<?php endif; ?>
+		<?php if ( $market['ban']['count'] || $market['thue']['count'] ) : ?>
+			<p class="project-card__market"><?php echo esc_html( implode( ' · ', array_filter( array( $market['ban']['count'] ? $market['ban']['count'] . ' căn chuyển nhượng' : '', $market['thue']['count'] ? $market['thue']['count'] . ' căn cho thuê' : '' ) ) ) ); ?></p>
+		<?php endif; ?>
 		<ul class="project-card__facts">
 			<?php if ( hh_meta( 'hh_p_scale' ) ) : ?><li><span>Quy mô</span><?php echo esc_html( trim( preg_replace( '/\s*\(.*$/u', '', hh_meta( 'hh_p_scale' ) ) ) ); ?></li><?php endif; ?>
 			<?php if ( hh_meta( 'hh_p_unit_area' ) ) : ?><li><span>Diện tích</span><?php echo esc_html( hh_meta( 'hh_p_unit_area' ) ); ?></li><?php endif; ?>
 			<?php if ( hh_meta( 'hh_p_handover' ) ) : ?><li><span>Bàn giao</span><?php echo esc_html( hh_meta( 'hh_p_handover' ) ); ?></li><?php endif; ?>
 		</ul>
 		<div class="project-card__foot">
-			<p class="price"><?php echo esc_html( hh_project_price() ); ?></p>
+			<p class="price"><?php echo esc_html( $price ); ?></p>
 			<a class="link-arrow" href="<?php the_permalink(); ?>">Chi tiết <?php echo hh_icon( 'arrow' ); // phpcs:ignore ?></a>
 		</div>
 	</div>
