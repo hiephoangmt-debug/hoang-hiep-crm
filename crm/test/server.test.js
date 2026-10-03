@@ -526,6 +526,8 @@ test('manual Mục 1: closing balance entered by hand on a date; Mục 2 only co
   assert.strictEqual(r.congNo.ton1, 120000000);
   assert.strictEqual(r.congNo.tu_ngay, '2026-10-01');
   assert.strictEqual(r.congNo.so_gd, 1, 'only transactions after the closing date');
+  assert.strictEqual(r.congNo.giao_dich.length, 1);
+  assert.strictEqual(r.congNo.giao_dich[0].ten_khach, 'C.Lan', 'Mục 2 starts at the first transaction after the closing date');
   assert.strictEqual(r.congNo.phat_sinh, t.tien_hoan);
   assert.strictEqual(r.congNo.tong, 120000000 + t.tien_hoan - 150000000);
   assert.strictEqual(r.summary.so_du, r.congNo.tong);

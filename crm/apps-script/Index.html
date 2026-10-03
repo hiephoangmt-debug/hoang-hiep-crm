@@ -919,6 +919,17 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   function signed(v) { return (v > 0 ? '+' : v < 0 ? '−' : '') + money(Math.abs(v)); }
   function tonText(v) { return v > 0 ? 'chị nợ' : v < 0 ? 'chị ứng dư' : 'hết nợ'; }
   // Công nợ C.Trâm: Mục 1 (chốt đến ngày) + Mục 2 (từ ngày chốt đến nay) = tổng công nợ hiện tại.
+  // Mục 2 bắt đầu từ giao dịch nào + danh sách từng giao dịch trong Mục 2.
+  function gdList(cn) {
+    var gd = cn.giao_dich || [];
+    if (!gd.length) return '<span style="grid-column:1/-1" class="muted">&nbsp;&nbsp;&nbsp;&nbsp;Chưa có giao dịch nào sau ngày chốt.</span>';
+    var f = gd[0];
+    return '<span style="grid-column:1/-1;font-size:.85rem">&nbsp;&nbsp;&nbsp;&nbsp;▶ Bắt đầu từ GD: <b style="text-align:left">' + dm(f.ngay) + ' · ' + esc(f.ten_khach) + ' · ' + esc(f.the) + ' · ' + money(f.so_tien) + '</b>' +
+      '<details style="margin:4px 0 0 18px"><summary class="muted" style="cursor:pointer">Xem ' + gd.length + ' giao dịch trong Mục 2</summary>' +
+      '<table class="stmt" style="margin-top:4px">' + gd.map(function (t, i) {
+        return '<tr class="sub"><td>' + (i + 1) + '. ' + dm(t.ngay) + ' · ' + esc(t.ten_khach) + ' · ' + esc(t.the) + '<br>' + money(t.so_tien) + ' − phí ' + money(t.chi_phi) + '</td><td>+' + money(t.tien_hoan) + '</td></tr>';
+      }).join('') + '</table></details></span>';
+  }
   function balanceCard(m, cn) {
     var name = esc(rn());
     cn = cn || { ton1: 0, tam_ung: [], phat_sinh: m.tong_phai_hoan, tong_tam_ung: m.tong_da_chuyen, ton2: m.so_du, tong: m.so_du, so_gd: 0 };
@@ -937,10 +948,11 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       '<span><b style="text-align:left">📌 Mục 1 – ' + (cn.chot_ngay ? 'Chốt đến ngày ' + dmy(cn.chot_ngay) : 'Chưa chốt lần nào') + '</b></span>' +
       '<b class="' + (cn.ton1 > 0 ? 'neg' : 'pos') + '">Tồn ' + signed(cn.ton1) + '<br><small class="muted">' + tonText(cn.ton1) + '</small></b>' +
       '<span style="grid-column:1/-1"><button class="btn btn--ghost btn--sm" data-act="open-manual">✏️ ' + (cn.chot_ngay ? 'Nhập lại số chốt (sau ngày ' + dm(cn.chot_ngay) + ')' : 'Nhập công nợ chốt đến ngày…') + '</button></span>' +
-      '<span style="grid-column:1/-1;border-top:1px dashed var(--line);margin-top:4px;padding-top:6px"><b style="text-align:left">📥 Mục 2 – Từ ' + dmy(cn.tu_ngay) + (cn.chot_ngay ? ' (sau ngày chốt)' : '') + ' đến nay</b></span>' +
+      '<span style="grid-column:1/-1;border-top:1px dashed var(--line);margin-top:4px;padding-top:6px"><b style="text-align:left">📥 Mục 2 – Công nợ từ ' + (cn.chot_ngay ? 'ngày chốt ' + dm(cn.chot_ngay) + ' (tính từ ' + dm(cn.tu_ngay) + ')' : dmy(cn.tu_ngay)) + ' đến hiện tại</b></span>' +
       line('&nbsp;&nbsp;➕ Tổng tiền hoàn phát sinh (số tiền − phí máy)', '+' + money(cn.phat_sinh), '', cn.so_gd ? '&nbsp;&nbsp;&nbsp;&nbsp;' + cn.so_gd + ' GD · ' + money(cn.so_tien) + ' − phí máy ' + money(cn.chi_phi) : '') +
+      gdList(cn) +
       (ung || line('&nbsp;&nbsp;Chưa có tạm ứng', '0đ')) +
-      line('&nbsp;&nbsp;<b>Tồn mục 2</b>', signed(cn.ton2), cn.ton2 > 0 ? 'neg' : 'pos') +
+      line('&nbsp;&nbsp;<b>Tổng công nợ mục 2</b>', signed(cn.ton2), cn.ton2 > 0 ? 'neg' : 'pos', '&nbsp;&nbsp;từ ngày chốt đến hiện tại = tiền hoàn phát sinh − tạm ứng') +
       '</div>' +
       '<div style="border-top:2px solid var(--text);margin-top:8px;padding-top:8px"><div class="muted">Tổng công nợ hiện tại (mục 1 + mục 2)</div>' +
       '<div class="bal__big ' + (tong > 0 ? 'neg' : 'pos') + '" style="margin-bottom:0">' + signed(tong) + '</div>' +

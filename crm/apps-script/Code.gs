@@ -895,11 +895,15 @@ function congNo_(last) {
   var from = last ? addDays_(last.ngay, 1) : '';
   var st = periodStatement_(from, '9999-12-31', last ? Number(last.so_du) || 0 : 0);
   var ton2 = st.phat_sinh - st.da_chuyen;
+  // Danh sách giao dịch thuộc Mục 2 (cũ trước) để biết bắt đầu từ giao dịch nào.
+  var gd = readAll_('GiaoDich').filter(function (t) { return t.hoan_tt !== 'Đã nhận' && Number(t.tien_hoan) && (!from || t.ngay >= from); })
+    .sort(function (a, b) { return a.ngay < b.ngay ? -1 : a.ngay > b.ngay ? 1 : String(a.tao_luc).localeCompare(String(b.tao_luc)); })
+    .map(function (t) { return { id: t.id, ngay: t.ngay, ten_khach: t.ten_khach, the: t.the, dich_vu: t.dich_vu, so_tien: t.so_tien, chi_phi: t.chi_phi, tien_hoan: t.tien_hoan }; });
   return {
     chot_ngay: last ? last.ngay : '', ton1: st.so_du_truoc,
     tu_ngay: from || (st.ngay_lam.length ? st.ngay_lam[0].ngay : todayStr_()),
     so_gd: st.so_gd, so_tien: st.so_tien, chi_phi: st.chi_phi, phat_sinh: st.phat_sinh,
-    tam_ung: st.payments, tong_tam_ung: st.da_chuyen, ton2: ton2, tong: st.so_du_truoc + ton2
+    tam_ung: st.payments, tong_tam_ung: st.da_chuyen, ton2: ton2, tong: st.so_du_truoc + ton2, giao_dich: gd
   };
 }
 
