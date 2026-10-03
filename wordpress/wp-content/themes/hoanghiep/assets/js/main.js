@@ -307,7 +307,9 @@
 					subLinks.forEach( ( a ) => a.classList.remove( 'is-active' ) );
 					const a = map.get( e.target );
 					a.classList.add( 'is-active' );
-					a.scrollIntoView( { block: 'nearest', inline: 'center', behavior: reduceMotion ? 'auto' : 'smooth' } );
+					// Chỉ cuộn ngang thanh mục lục; scrollIntoView sẽ kéo cả trang và làm trang bị giật.
+					const bar = a.parentElement;
+					bar.scrollTo( { left: a.offsetLeft - ( bar.clientWidth - a.offsetWidth ) / 2, behavior: reduceMotion ? 'auto' : 'smooth' } );
 				}
 			} );
 		}, { rootMargin: '-35% 0px -60% 0px' } );

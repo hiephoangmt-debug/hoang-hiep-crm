@@ -41,8 +41,9 @@ add_action( 'wp_enqueue_scripts', 'hoanghiep_assets' );
 function hoanghiep_assets() {
 	$ver = wp_get_theme()->get( 'Version' );
 	wp_enqueue_style( 'hoanghiep-fonts', 'https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap', array(), null );
-	wp_enqueue_style( 'hoanghiep', get_theme_file_uri( 'assets/css/main.css' ), array(), $ver );
-	wp_enqueue_script( 'hoanghiep', get_theme_file_uri( 'assets/js/main.js' ), array(), $ver, array( 'strategy' => 'defer' ) );
+	// Thêm thời điểm sửa file vào phiên bản để trình duyệt / cache tải bản mới ngay sau khi cập nhật.
+	wp_enqueue_style( 'hoanghiep', get_theme_file_uri( 'assets/css/main.css' ), array(), $ver . '.' . filemtime( get_theme_file_path( 'assets/css/main.css' ) ) );
+	wp_enqueue_script( 'hoanghiep', get_theme_file_uri( 'assets/js/main.js' ), array(), $ver . '.' . filemtime( get_theme_file_path( 'assets/js/main.js' ) ), array( 'strategy' => 'defer' ) );
 }
 
 /**
