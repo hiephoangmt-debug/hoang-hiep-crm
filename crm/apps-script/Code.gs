@@ -339,6 +339,7 @@ function apiDashboard_() {
   var refunds = apiRefunds_({ from: today, to: today });
   var held = readAll_('TheKhach').filter(function (c) { return c.giu_the === 'Mình giữ'; }).length;
   return {
+    money: moneyOverview_(today),
     month: summarize_(tx),
     heldCards: held,
     refundName: refundName_(),
@@ -349,6 +350,37 @@ function apiDashboard_() {
     leadsThisMonth: leads.filter(function (l) { return l.sdt && String(l.thoi_gian).slice(0, 10) >= monthFrom; }).length,
     remindToday: rem.filter(function (r) { return r.nhac_ngay <= today && r.trang_thai === 'Chưa báo'; }),
     remindSoon: rem.filter(function (r) { return r.nhac_ngay > today && r.trang_thai === 'Chưa báo'; })
+  };
+}
+
+/**
+ * Tiền theo kỳ cho trang Tổng quan: hôm nay, tuần này (từ thứ 2), tháng này (đến hôm nay),
+ * kèm kỳ trước để so sánh (hôm qua, tuần trước cùng số ngày, tháng trước cùng kỳ) và 2 tháng trước trọn tháng.
+ */
+function moneyOverview_(today) {
+  var all = readAll_('GiaoDich');
+  function sum(from, to) {
+    var s = summarize_(all.filter(function (t) { return t.ngay >= from && t.ngay <= to; }));
+    s.from = from; s.to = to;
+    return s;
+  }
+  var p = parseYmd_(today);
+  var wd = weekday_(today), weekFrom = addDays_(today, -wd);
+  var monthFrom = ymd_(p.y, p.m, 1);
+  var months = [0, 1, 2].map(function (k) {
+    var m = addMonths_(p.y, p.m, -k);
+    var from = ymd_(m.y, m.m, 1), end = ymd_(m.y, m.m, daysInMonth_(m.y, m.m));
+    var s = sum(from, k === 0 ? today : end);
+    s.thang = m.m; s.nam = m.y; s.den_hom_nay = k === 0;
+    // cùng kỳ: từ ngày 1 đến cùng ngày trong tháng (để so công bằng với tháng đang chạy)
+    if (k > 0) s.cung_ky = sum(from, ymd_(m.y, m.m, Math.min(p.d, daysInMonth_(m.y, m.m))));
+    return s;
+  });
+  return {
+    today: today,
+    hom_nay: sum(today, today), hom_qua: sum(addDays_(today, -1), addDays_(today, -1)),
+    tuan_nay: sum(weekFrom, today), tuan_truoc: sum(addDays_(weekFrom, -7), addDays_(today, -7)),
+    thang_nay: months[0], thang_truoc: months[1], hai_thang_truoc: months[2]
   };
 }
 

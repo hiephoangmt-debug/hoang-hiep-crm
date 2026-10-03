@@ -600,6 +600,31 @@ test('customer second phone number: saved, normalized, matches web leads and tra
   assert.strictEqual(call('bootstrap').customers[0].sdt2, '0913222333');
 });
 
+test('overview money: today, this week, this month vs previous 2 months', () => {
+  const { call } = fresh('2026-10-07'); // thứ 4
+  const tx = (ngay, so_tien) => call('saveTransaction', { ngay, dich_vu: 'Đáo hạn', ten_khach: 'A', the: 'SC', so_tien, phi_khach: 2, phi_may_text: '1.5' });
+  tx('2026-10-07', 10000000); tx('2026-10-06', 20000000); tx('2026-10-05', 5000000); // tuần này (T2 05/10)
+  tx('2026-10-02', 7000000);                                                            // tháng này, tuần trước
+  tx('2026-09-29', 4000000); tx('2026-09-03', 3000000); tx('2026-09-20', 9000000);      // tháng 9
+  tx('2026-08-05', 8000000); tx('2026-08-25', 1000000);                                 // tháng 8
+  const m = call('dashboard').money;
+  assert.strictEqual(m.hom_nay.so_tien, 10000000);
+  assert.strictEqual(m.hom_qua.so_tien, 20000000);
+  assert.strictEqual(m.tuan_nay.from, '2026-10-05');
+  assert.strictEqual(m.tuan_nay.so_tien, 35000000);
+  assert.strictEqual(m.tuan_truoc.from, '2026-09-28');
+  assert.strictEqual(m.tuan_truoc.to, '2026-09-30');
+  assert.strictEqual(m.tuan_truoc.so_tien, 4000000);
+  assert.strictEqual(m.thang_nay.so_tien, 42000000);
+  assert.strictEqual(m.thang_nay.loi_nhuan, 210000);
+  assert.strictEqual(m.thang_truoc.thang, 9);
+  assert.strictEqual(m.thang_truoc.so_tien, 16000000);
+  assert.strictEqual(m.thang_truoc.cung_ky.so_tien, 3000000);
+  assert.strictEqual(m.hai_thang_truoc.thang, 8);
+  assert.strictEqual(m.hai_thang_truoc.so_tien, 9000000);
+  assert.strictEqual(m.hai_thang_truoc.cung_ky.so_tien, 8000000);
+});
+
 test('refund columns are added to an existing sheet; old rows get computed values', () => {
   const { gas, fake } = load();
   fake.setToday('2026-10-02');

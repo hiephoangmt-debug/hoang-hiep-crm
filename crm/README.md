@@ -2,6 +2,7 @@
 
 CRM cho mảng đáo hạn / rút tiền thẻ tín dụng, chạy miễn phí trên **Google Sheets + Apps Script**. Dữ liệu nằm trong Google Drive của bạn.
 
+- **Tổng quan:** chỉ tính tiền: **hôm nay / tuần này / tháng này** (số tiền, số GD đáo/rút, phí khách, phí máy, phí của mình, so với hôm qua / tuần trước / cùng kỳ tháng trước) và **bảng so sánh tháng này với 2 tháng trước**.
 - **Khách từ website:** form của 2 website gửi thẳng vào CRM (mục *Khách hàng → Liên hệ từ web*), kèm email báo ngay.
 - **Sổ giao dịch:** thay sổ tay, gồm Ngày, Dịch vụ, Thẻ, Ngày đáo, Ngày sao kê, Tên, Số tiền, Máy, Phí khách / Phí máy.
   - **Phí của mình = phí khách − phí máy**, CRM tự tính.

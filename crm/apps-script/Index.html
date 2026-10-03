@@ -175,6 +175,16 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
 .chip.is-on { background: var(--primary); color: #fff; border-color: var(--primary); }
 .viewer { position: fixed; inset: 0; background: rgba(0,0,0,.85); z-index: 80; display: grid; place-items: center; padding: 12px; }
 .viewer img { max-width: 100%; max-height: 90vh; border-radius: 8px; }
+.money3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-bottom: 18px; }
+.mcard { background: var(--card); border-radius: var(--radius); padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.06); border-top: 4px solid var(--primary); }
+.mcard h3 { margin: 0; font-size: .95rem; color: var(--muted); font-weight: 600; }
+.mcard__big { font-size: 1.7rem; font-weight: 800; color: var(--primary-dark); margin: 4px 0 2px; }
+.mcard__row { display: flex; justify-content: space-between; font-size: .9rem; padding: 3px 0; }
+.mcard__row b.pos { color: var(--ok); }
+.delta { font-size: .82rem; font-weight: 700; border-radius: 999px; padding: 2px 8px; display: inline-block; }
+.delta--up { background: var(--ok-bg); color: var(--ok); }
+.delta--down { background: var(--bad-bg); color: var(--bad); }
+.delta--flat { background: #eef0f4; color: var(--muted); }
 .pay-chip { display: inline-block; white-space: normal; text-align: right; max-width: 100%; background: var(--info-bg); border-radius: 8px; padding: 2px 8px; margin: 2px 0; font-size: .82rem; cursor: pointer; border: 0; color: var(--primary-dark); }
 .copy input { font-size: .8rem; }
 </style>
@@ -213,17 +223,11 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   <main>
     <!-- Tổng quan -->
     <section data-view="home">
-      <div class="kpis" id="home-kpis"></div>
-      <div class="row row--between"><h2>💸 Công nợ <span class="refund-name">C.Trâm</span></h2><button class="btn btn--ghost btn--sm" data-goto="refund">Sổ đối chiếu</button></div>
-      <div id="home-refund"></div>
-      <div class="row row--between"><h2>📞 Cần báo khách hôm nay</h2><button class="btn btn--ghost btn--sm" data-goto="remind">Xem lịch</button></div>
-      <div id="home-remind"></div>
-      <h2>📲 Khách bấm Zalo / Gọi trên web hôm nay</h2>
-      <div id="home-clicks"></div>
-      <div class="row row--between"><h2>🌐 Khách mới từ website</h2><button class="btn btn--ghost btn--sm" data-goto="customers">Tất cả khách</button></div>
-      <div id="home-leads"></div>
-      <h2>⏭️ Sắp tới (7 ngày)</h2>
-      <div id="home-soon"></div>
+      <div class="money3" id="home-money"></div>
+      <h2>📊 So sánh tháng này với 2 tháng trước</h2>
+      <div class="card scroll-x"><table class="tbl stack" id="home-months"></table></div>
+      <p class="muted" id="home-months-note"></p>
+      <div id="home-refund" class="hidden"></div>
     </section>
 
     <!-- Giao dịch -->
@@ -767,25 +771,50 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   }
 
   /* ---------- Tổng quan ---------- */
+  function delta(cur, prev, label) {
+    if (!prev && !cur) return '<span class="delta delta--flat">= ' + label + '</span>';
+    if (!prev) return '<span class="delta delta--up">▲ mới · ' + label + ' 0đ</span>';
+    var pc = Math.round((cur - prev) / prev * 100);
+    return '<span class="delta ' + (pc > 0 ? 'delta--up' : pc < 0 ? 'delta--down' : 'delta--flat') + '">' + (pc > 0 ? '▲ ' : pc < 0 ? '▼ ' : '= ') + Math.abs(pc) + '% so với ' + label + '</span>';
+  }
+  function moneyCard(title, sub, cur, prev, prevLabel) {
+    return '<div class="mcard"><h3>' + title + ' <small>' + sub + '</small></h3>' +
+      '<div class="mcard__big">' + money(cur.so_tien) + '</div>' + delta(cur.so_tien, prev.so_tien, prevLabel) +
+      '<div style="margin-top:8px">' +
+      '<div class="mcard__row"><span>Giao dịch (đáo / rút)</span><b>' + cur.so_gd + ' (' + cur.so_dao + ' / ' + cur.so_rut + ')</b></div>' +
+      '<div class="mcard__row"><span>Phí khách</span><b>' + money(cur.tien_phi) + '</b></div>' +
+      '<div class="mcard__row"><span>Phí máy</span><b>' + money(cur.chi_phi) + '</b></div>' +
+      '<div class="mcard__row"><span>Phí của mình</span><b class="pos">' + money(cur.loi_nhuan) + '</b></div>' +
+      '<div class="mcard__row muted"><span>' + prevLabel.charAt(0).toUpperCase() + prevLabel.slice(1) + '</span><span>' + money(prev.so_tien) + ' · lãi ' + money(prev.loi_nhuan) + '</span></div>' +
+      '</div></div>';
+  }
   function loadHome() {
     call('dashboard').then(function (d) {
-      var m = d.month;
-      $('#home-kpis').innerHTML =
-        kpi('Doanh số tháng này', short(m.so_tien)) +
-        kpi('Phí của mình tháng này', money(m.loi_nhuan), m.loi_nhuan >= 0 ? 'pos' : 'neg') +
-        kpi('Giao dịch tháng (Đáo / Rút)', m.so_gd + ' <small class="muted">(' + m.so_dao + ' / ' + m.so_rut + ')</small>') +
-        kpi('Khách web để lại số (tháng)', d.leadsThisMonth) +
-        kpi('Bấm Zalo / Gọi hôm nay', d.clicksToday.length) +
-        kpi('🔒 Thẻ khách mình đang giữ', d.heldCards || 0) +
-        kpi('Hôm nay', d.todayTx.so_gd + ' GD · ' + short(d.todayTx.so_tien)) +
-        '';
+      var mo = d.money, tm = mo.thang_nay, t1 = mo.thang_truoc, t2 = mo.hai_thang_truoc;
+      $('#home-money').innerHTML =
+        moneyCard('📅 Hôm nay', dmy(mo.today), mo.hom_nay, mo.hom_qua, 'hôm qua') +
+        moneyCard('🗓 Tuần này', dm(mo.tuan_nay.from) + ' → ' + dm(mo.tuan_nay.to), mo.tuan_nay, mo.tuan_truoc, 'tuần trước') +
+        moneyCard('📆 Tháng ' + tm.thang, '(đến ' + dm(mo.today) + ')', tm, t1.cung_ky, 'cùng kỳ T' + t1.thang);
+      var rows = [tm, t1, t2];
+      var max = Math.max.apply(null, rows.map(function (x) { return x.so_tien; }).concat([1]));
+      function pctOf(a, b) { return b ? (a >= b ? '+' : '−') + Math.abs(Math.round((a - b) / b * 100)) + '%' : '—'; }
+      $('#home-months').innerHTML = '<thead><tr><th>Tháng</th><th class="num">Số tiền</th><th class="num">GD (đáo/rút)</th><th class="num">Phí khách</th><th class="num">Phí máy</th><th class="num">Phí của mình</th></tr></thead><tbody>' +
+        rows.map(function (x, i) {
+          return '<tr><td data-l="Tháng"><b>Tháng ' + x.thang + '/' + x.nam + '</b>' + (x.den_hom_nay ? ' <small class="muted">(đến ' + dm(mo.today) + ')</small>' : '') +
+            '<div class="bar"><i style="width:' + (x.so_tien / max * 100).toFixed(1) + '%"></i></div></td>' +
+            '<td data-l="Số tiền" class="num"><b>' + money(x.so_tien) + '</b></td>' +
+            '<td data-l="GD (đáo/rút)" class="num">' + x.so_gd + ' (' + x.so_dao + '/' + x.so_rut + ')</td>' +
+            '<td data-l="Phí khách" class="num">' + money(x.tien_phi) + '</td>' +
+            '<td data-l="Phí máy" class="num">' + money(x.chi_phi) + '</td>' +
+            '<td data-l="Phí của mình" class="num pos"><b>' + money(x.loi_nhuan) + '</b></td></tr>';
+        }).join('') + '</tbody>';
+      $('#home-months-note').innerHTML = 'Tháng ' + tm.thang + ' (đến ' + dm(mo.today) + ') so với <b>cùng kỳ</b>: ' +
+        'T' + t1.thang + ' ' + pctOf(tm.so_tien, t1.cung_ky.so_tien) + ' tiền, ' + pctOf(tm.loi_nhuan, t1.cung_ky.loi_nhuan) + ' lãi · ' +
+        'T' + t2.thang + ' ' + pctOf(tm.so_tien, t2.cung_ky.so_tien) + ' tiền, ' + pctOf(tm.loi_nhuan, t2.cung_ky.loi_nhuan) + ' lãi. ' +
+        'So với trọn tháng: đạt ' + (t1.so_tien ? Math.round(tm.so_tien / t1.so_tien * 100) + '% T' + t1.thang : '—') + ', ' + (t2.so_tien ? Math.round(tm.so_tien / t2.so_tien * 100) + '% T' + t2.thang : '—') + '.';
       S.lastClosing = d.refunds.lastClosing;
-      $('#home-refund').innerHTML = balanceCard(d.refunds.summary, d.refunds.congNo);
+      S.congNo = d.refunds.congNo;
       setCount('#refund-count', d.refunds.summary.den_han_con_thieu > 0 ? '!' : 0);
-      $('#home-remind').innerHTML = d.remindToday.length ? d.remindToday.map(remindItem).join('') : '<div class="empty card">Hôm nay không có khách cần báo 🎉</div>';
-      $('#home-soon').innerHTML = d.remindSoon.length ? d.remindSoon.map(remindItem).join('') : '<div class="empty card">Không có lịch trong 7 ngày tới.</div>';
-      $('#home-clicks').innerHTML = d.clicksToday.length ? d.clicksToday.slice(0, 15).map(leadItem).join('') : '<div class="empty card">Hôm nay chưa có lượt bấm Zalo / Gọi.</div>';
-      $('#home-leads').innerHTML = d.newLeads.length ? d.newLeads.map(leadItem).join('') : '<div class="empty card">Chưa có khách mới từ website.</div>';
       setCount('#remind-count', d.remindToday.length);
       setCount('#lead-count', d.newLeads.length);
     }).catch(fail);
