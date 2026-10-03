@@ -934,3 +934,6 @@ body.has-pop { overflow: hidden; }
 .discount__table td:last-child { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--gold-2); text-align: center; }
 @media (max-width: 640px) { .countdown { width: 100%; } .countdown div { flex: 1; min-width: 0; } }
 @media (max-width: 640px) { .discount__table { min-width: 0; } .discount__table th, .discount__table td { white-space: normal; padding: 10px; font-size: .88rem; } }
+
+/* Ẩn nút gọi nổi của plugin khác (trùng với nút liên hệ của theme). */
+.hotline-phone-ring-wrap, .hotline-bar, #callnowbutton, .call-now-button, .phonering-alo-phone, .quick-alo-phone, .fixed-call-button { display: none !important; }

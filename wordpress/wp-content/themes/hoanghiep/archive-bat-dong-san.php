@@ -123,6 +123,19 @@ global $wp_query;
 		// Trang Mua bán biệt thự: bảng giá thị trường các dự án biệt thự (chủ đầu tư + chuyển nhượng).
 		if ( 'ban' === $deal && $landing && 'biet-thu' === $landing->slug ) {
 			get_template_part( 'template-parts/project-price-board', null, array( 'type' => 'biet-thu', 'title' => 'Giá biệt thự Đà Nẵng – Hội An theo dự án' ) );
+		} elseif ( $deal && ( ! $landing || 'khu-vuc' === $landing->taxonomy || in_array( $landing->slug, array( 'can-ho-chung-cu', 'can-ho-dich-vu', 'penthouse', 'duplex' ), true ) ) ) {
+			// Mua bán / Cho thuê căn hộ: bảng giá thị trường theo dự án (lọc theo khu vực khi ở trang khu vực).
+			$where = $landing && 'khu-vuc' === $landing->taxonomy ? $landing->name : 'Đà Nẵng';
+			get_template_part(
+				'template-parts/project-price-board',
+				null,
+				array(
+					'type'  => array( 'can-ho-so-huu-lau-dai', 'can-ho-dich-vu' ),
+					'deal'  => $deal,
+					'area'  => $landing && 'khu-vuc' === $landing->taxonomy ? $landing->slug : '',
+					'title' => ( 'thue' === $deal ? 'Giá thuê căn hộ ' : 'Giá bán căn hộ ' ) . $where . ' theo dự án',
+				)
+			);
 		}
 		?>
 

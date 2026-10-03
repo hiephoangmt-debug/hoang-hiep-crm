@@ -1,46 +1,65 @@
 <?php
 /**
- * Bảng giá thị trường theo dự án (VD trang Mua bán biệt thự): khoảng giá chuyển nhượng / giá bán
- * của các dự án cùng loại, link sang trang dự án. Args: type (slug loại dự án), title.
+ * Bảng giá thị trường theo dự án (trang Mua bán / Cho thuê): khoảng giá bán lại hoặc giá thuê của từng dự án,
+ * tổng hợp từ tin của web và mặt bằng giá tin rao công khai – link sang trang dự án.
+ * Args: type (slug hoặc mảng slug loại dự án), deal (ban | thue), area (slug khu vực, tùy chọn), title.
  */
+$deal  = $args['deal'] ?? 'ban';
+$tax   = array( array( 'taxonomy' => 'loai-du-an', 'field' => 'slug', 'terms' => (array) $args['type'] ) );
+if ( ! empty( $args['area'] ) ) {
+	$tax[] = array( 'taxonomy' => 'khu-vuc', 'field' => 'slug', 'terms' => $args['area'] );
+}
 $board = new WP_Query(
 	array(
 		'post_type'      => 'du-an',
-		'posts_per_page' => 40,
+		'posts_per_page' => 60,
 		'orderby'        => 'title',
 		'order'          => 'ASC',
 		'no_found_rows'  => true,
-		'tax_query'      => array( array( 'taxonomy' => 'loai-du-an', 'field' => 'slug', 'terms' => $args['type'] ) ),
+		'tax_query'      => $tax, // phpcs:ignore WordPress.DB.SlowDBQuery
 	)
 );
 $rows = array();
 while ( $board->have_posts() ) {
 	$board->the_post();
 	$market = hh_project_market();
-	$price  = $market['ban']['range'] ? hh_ucfirst( $market['ban']['range'] ) : ( hh_meta( 'hh_p_resale_price' ) ?: ( hh_meta( 'hh_p_price_from' ) ? hh_project_price() : '' ) );
+	if ( 'thue' === $deal ) {
+		$price = $market['thue']['range'] ? hh_ucfirst( $market['thue']['range'] ) : hh_meta( 'hh_p_rent_price' );
+		$kind  = $market['thue']['count'] ? $market['thue']['count'] . ' căn đang cho thuê' : 'Giá thị trường';
+	} else {
+		$price = $market['ban']['range'] ? hh_ucfirst( $market['ban']['range'] ) : ( hh_meta( 'hh_p_resale_price' ) ?: ( hh_meta( 'hh_p_price_from' ) && ! hh_project_is_resale() ? hh_project_price() : '' ) );
+		$kind  = $market['ban']['count'] ? $market['ban']['count'] . ' căn đang bán' : ( hh_meta( 'hh_p_resale_price' ) ? 'Chuyển nhượng' : 'Chủ đầu tư' );
+	}
 	if ( ! $price ) {
 		continue;
 	}
 	$area   = hh_project_area();
-	$rows[] = array( get_the_title(), get_permalink(), $area ? $area->name : '', hh_meta( 'hh_p_unit_area' ) ?: hh_meta( 'hh_p_units' ), $price, hh_project_is_resale() ? 'Chuyển nhượng' : 'Chủ đầu tư' );
+	$rows[] = array( get_the_title(), get_permalink(), $area ? $area->name : '', $price, $kind );
 }
 wp_reset_postdata();
 if ( ! $rows ) {
 	return;
 }
+$what = 'thue' === $deal ? 'cho thuê' : 'bán';
 ?>
 <section class="block price-board">
 	<h2 class="block__title"><?php echo esc_html( $args['title'] ); ?></h2>
-	<p class="prose">Mặt bằng giá tham khảo theo từng dự án (tổng hợp từ bảng giá chủ đầu tư và tin rao chuyển nhượng công khai). Bấm tên dự án để xem chi tiết, vị trí, tiện ích và danh sách căn đang bán.</p>
+	<p class="prose"><?php echo esc_html( 'Mặt bằng giá ' . $what . ' tham khảo theo từng dự án – tổng hợp từ tin đăng trên website, bảng giá chủ đầu tư và tin rao công khai, cập nhật ' . wp_date( 'm/Y' ) . '. Bấm tên dự án để xem vị trí, tiện ích và các căn đang giao dịch.' ); ?></p>
 	<div class="table-wrap">
 		<table class="data-table">
-			<thead><tr><th>Dự án</th><th>Khu vực</th><th>Diện tích / quy mô</th><th>Giá tham khảo</th><th>Thị trường</th></tr></thead>
+			<thead><tr><th>Dự án</th><th>Khu vực</th><th><?php echo 'thue' === $deal ? 'Giá thuê tham khảo' : 'Giá tham khảo'; ?></th><th>Nguồn</th><th></th></tr></thead>
 			<tbody>
-				<?php foreach ( $rows as list( $name, $link, $place, $size, $price, $kind ) ) : ?>
-					<tr><td><a href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $name ); ?></a></td><td><?php echo esc_html( $place ); ?></td><td><?php echo esc_html( $size ); ?></td><td><?php echo esc_html( $price ); ?></td><td><?php echo esc_html( $kind ); ?></td></tr>
+				<?php foreach ( $rows as list( $name, $link, $place, $price, $kind ) ) : ?>
+					<tr>
+						<td><a href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $name ); ?></a></td>
+						<td><?php echo esc_html( $place ); ?></td>
+						<td><?php echo esc_html( $price ); ?></td>
+						<td><?php echo esc_html( $kind ); ?></td>
+						<td><a class="btn btn--outline btn--sm" href="#lien-he" data-need="<?php echo 'thue' === $deal ? 'Thuê' : 'Mua'; ?>" data-msg="<?php echo esc_attr( 'Gửi tôi danh sách căn đang ' . $what . ' tại ' . $name . '.' ); ?>">Nhận căn</a></td>
+					</tr>
 				<?php endforeach; ?>
 			</tbody>
 		</table>
 	</div>
-	<p class="note">Giá chỉ để tham khảo, thay đổi theo vị trí căn, nội thất và thời điểm. Liên hệ <?php echo esc_html( hoanghiep_opt( 'hh_phone' ) ); ?> để nhận danh sách căn thật đang bán.</p>
+	<p class="note">Giá chỉ để tham khảo, thay đổi theo tầng, view, nội thất và thời điểm. Liên hệ <?php echo esc_html( hoanghiep_opt( 'hh_phone' ) ); ?> để nhận danh sách căn thật đang <?php echo esc_html( $what ); ?>. Bạn có căn cần <?php echo esc_html( $what ); ?>? <a href="#lien-he" data-need="Ký gửi bán / cho thuê" data-msg="Tôi muốn ký gửi căn hộ.">Ký gửi với Hiệp</a>.</p>
 </section>
