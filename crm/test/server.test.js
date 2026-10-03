@@ -461,6 +461,23 @@ test('customer cards (last 4 digits only) and private CCCD / card photos in Driv
   assert.strictEqual(fake.drive.files[ph.file_id].trashed, true);
   call('deleteDoc', { id: front2.id });
   assert.strictEqual(call('customerDetail', { id: c.id }).docs.length, 1);
+
+  // Một khách nhiều thẻ, có thẻ của người thân
+  assert.throws(() => call('saveCard', { khach_id: c.id, ten_the: 'VP chồng', quan_he: 'Chồng' }), /nhập tên chủ thẻ/);
+  const wife = call('saveCard', { khach_id: c.id, ten_the: 'VP chồng', quan_he: 'Chồng', chu_the: 'Trần Văn Nam', ngay_dao: 15 });
+  call('saveCard', { khach_id: c.id, ten_the: 'MSB mẹ', quan_he: 'Mẹ', chu_the: 'Nguyễn Thị Hoa' });
+  call('saveCard', { khach_id: c.id, ten_the: 'TCB' });
+  const cccd = call('uploadDoc', { khach_id: c.id, loai: 'CCCD chủ thẻ', the_id: wife.id, data: img });
+  call('uploadDoc', { khach_id: c.id, loai: 'Ảnh thẻ', the_id: wife.id, data: img });
+  cards = call('listCards', { khach_id: c.id });
+  assert.strictEqual(cards.length, 3);
+  const w = cards.find((k) => k.id === wife.id);
+  assert.strictEqual(w.chu_the, 'Trần Văn Nam');
+  assert.strictEqual(w.quan_he, 'Chồng');
+  assert.strictEqual(w.cccd_id, cccd.id);
+  assert.ok(w.anh_id && w.anh_id !== cccd.id);
+  assert.strictEqual(cards.find((k) => k.ten_the === 'TCB').quan_he, 'Chính chủ');
+  assert.ok(call('bootstrap').cardRelations.includes('Vợ'));
 });
 
 test('refund columns are added to an existing sheet; old rows get computed values', () => {

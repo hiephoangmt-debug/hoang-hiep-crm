@@ -518,6 +518,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     <div class="form-grid">
       <label class="f">Tên thẻ <span class="hint">như ghi trong sổ: SC, TP, VCB…</span><input name="ten_the" required></label>
       <label class="f">Ngân hàng<input name="ngan_hang" placeholder="VD: Techcombank Visa"></label>
+      <label class="f">Thẻ của ai<select name="quan_he"></select></label>
+      <label class="f" id="card-holder">Tên chủ thẻ <span class="hint">tên in trên thẻ</span><input name="chu_the" placeholder="VD: TRAN VAN NAM"></label>
       <label class="f">4 số cuối <span class="hint">chỉ lưu 4 số cuối</span><input name="so_cuoi" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" placeholder="1234"></label>
       <label class="f">Hạn mức<input name="han_muc_text" inputmode="decimal" placeholder="VD: 50tr"></label>
       <label class="f">Ngày sao kê<input type="number" name="ngay_sao_ke" min="1" max="31"></label>
@@ -530,6 +532,13 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       <div class="cardrow__info">
         <div class="row"><button type="button" class="btn btn--sm" data-pick="card" data-cap="1">📷 Chụp</button><button type="button" class="btn btn--ghost btn--sm" data-pick="card">📁 Tải lên</button></div>
         <p class="hint" style="margin:6px 0 0">Chỉ chụp <b>mặt trước</b>. Không chụp mặt sau (mã CVV).</p>
+      </div>
+    </div>
+    <div id="card-cccd-box">
+      <h3 style="margin:10px 0 6px">🪪 CCCD chủ thẻ <span class="hint">(thẻ của người thân / người quen)</span></h3>
+      <div class="cardrow" style="border:0">
+        <div class="cardrow__img" id="card-cccd">🪪</div>
+        <div class="cardrow__info"><div class="row"><button type="button" class="btn btn--sm" data-pick="card" data-loai="CCCD chủ thẻ" data-cap="1">📷 Chụp</button><button type="button" class="btn btn--ghost btn--sm" data-pick="card" data-loai="CCCD chủ thẻ">📁 Tải lên</button></div></div>
       </div>
     </div>
     <div class="row row--between" style="margin-top:14px">
@@ -1472,6 +1481,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     var cards = d.cards.map(function (k) {
       return '<div class="cardrow">' + docImg(k.anh_id, 'cardrow__img', '💳') +
         '<div class="cardrow__info"><b>' + esc(k.ten_the) + '</b>' + (k.ngan_hang ? ' · ' + esc(k.ngan_hang) : '') + (k.so_cuoi ? ' · ****' + esc(k.so_cuoi) : '') +
+        (relText(k) ? '<div><span class="badge badge--warn">' + relText(k) + '</span>' + (k.cccd_id ? ' <span class="badge badge--ok">có CCCD</span>' : '') + '</div>' : '') +
         '<div class="muted">' + [k.han_muc ? 'HM ' + short(k.han_muc) : '', k.ngay_sao_ke ? 'Sao kê ' + esc(k.ngay_sao_ke) : '', k.ngay_dao ? 'Đáo ' + esc(k.ngay_dao) : '', esc(k.ghi_chu)].filter(String).join(' · ') + '</div></div>' +
         '<button type="button" class="btn btn--ghost btn--sm" data-card="' + esc(k.id) + '">Sửa / 📷</button></div>';
     }).join('');
@@ -1539,6 +1549,10 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     f.ten_the.value = card.ten_the || ''; f.ngan_hang.value = card.ngan_hang || ''; f.so_cuoi.value = card.so_cuoi || '';
     f.han_muc_text.value = card.han_muc ? amountText(card.han_muc) : '';
     f.ngay_sao_ke.value = card.ngay_sao_ke || ''; f.ngay_dao.value = card.ngay_dao || ''; f.ghi_chu.value = card.ghi_chu || '';
+    f.quan_he.innerHTML = (S.boot.cardRelations || ['Chính chủ']).map(function (r) { return '<option>' + esc(r) + '</option>'; }).join('');
+    f.quan_he.value = card.quan_he || 'Chính chủ'; f.chu_the.value = card.chu_the || '';
+    $('#card-cccd').outerHTML = docImg(card.cccd_id, 'cardrow__img" id="card-cccd', '🪪');
+    toggleHolder();
     $('#card-cust').textContent = 'Khách: ' + (khach.ten || '') + (khach.sdt ? ' · ' + khach.sdt : '');
     $('#card-title').textContent = card.id ? 'Thẻ ' + card.ten_the : 'Thêm thẻ';
     $('[data-act=delete-card]').classList.toggle('hidden', !card.id);
@@ -1547,10 +1561,18 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     S.cardKhach = khach;
     $('#card-modal').classList.remove('hidden');
   }
+  function toggleHolder() {
+    var own = cardForm.elements.quan_he.value === 'Chính chủ';
+    $('#card-holder').classList.toggle('hidden', own);
+    $('#card-cccd-box').classList.toggle('hidden', own);
+  }
+  cardForm.elements.quan_he.addEventListener('change', toggleHolder);
+  function relText(k) { return k.quan_he && k.quan_he !== 'Chính chủ' ? '👤 ' + esc(k.quan_he) + (k.chu_the ? ': ' + esc(k.chu_the) : '') : ''; }
   function cardPayload() {
     var f = cardForm.elements;
     return { id: f.id.value, khach_id: f.khach_id.value, ten_the: f.ten_the.value.trim(), ngan_hang: f.ngan_hang.value, so_cuoi: f.so_cuoi.value,
-      han_muc: parseAmount(f.han_muc_text.value) || '', ngay_sao_ke: f.ngay_sao_ke.value, ngay_dao: f.ngay_dao.value, ghi_chu: f.ghi_chu.value };
+      han_muc: parseAmount(f.han_muc_text.value) || '', ngay_sao_ke: f.ngay_sao_ke.value, ngay_dao: f.ngay_dao.value, ghi_chu: f.ghi_chu.value,
+      quan_he: f.quan_he.value, chu_the: f.chu_the.value };
   }
   function afterCardChange() {
     if (!$('#cust-modal').classList.contains('hidden')) refreshCustDocs();
@@ -1568,7 +1590,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     call('listCards', { khach_id: id }).then(function (cards) {
       S.txCards = cards;
       box.innerHTML = cards.map(function (k) {
-        return '<button type="button" class="chip" data-txcard="' + esc(k.id) + '">💳 ' + esc(k.ten_the) + (k.so_cuoi ? ' ·' + esc(k.so_cuoi) : '') + '</button>';
+        return '<button type="button" class="chip" data-txcard="' + esc(k.id) + '">💳 ' + esc(k.ten_the) + (k.so_cuoi ? ' ·' + esc(k.so_cuoi) : '') +
+          (k.quan_he && k.quan_he !== 'Chính chủ' ? ' <small>(' + esc(k.quan_he) + ')</small>' : '') + '</button>';
       }).join('') + '<button type="button" class="chip" data-card="new-tx">+ Thẻ / 📷</button>';
       markTxCard();
     }).catch(function () {});
@@ -1594,8 +1617,9 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         call('saveCard', cp).then(function (card) {
           cardForm.elements.id.value = card.id;
           $('[data-act=delete-card]').classList.remove('hidden');
-          pickImage(!!pk.dataset.cap, { khach_id: card.khach_id, loai: 'Ảnh thẻ', the_id: card.id, the_ten: card.ten_the, after: function (doc) {
-            $('#card-photo').outerHTML = docImg(doc.id, 'cardrow__img" id="card-photo', '💳');
+          var loai = pk.dataset.loai || 'Ảnh thẻ', slot = loai === 'Ảnh thẻ' ? 'card-photo' : 'card-cccd';
+          pickImage(!!pk.dataset.cap, { khach_id: card.khach_id, loai: loai, the_id: card.id, the_ten: card.ten_the, after: function (doc) {
+            $('#' + slot).outerHTML = docImg(doc.id, 'cardrow__img" id="' + slot, loai === 'Ảnh thẻ' ? '💳' : '🪪');
             hydrateDocs(cardForm);
             afterCardChange();
           } });
