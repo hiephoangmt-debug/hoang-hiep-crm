@@ -366,7 +366,10 @@ function hh_news_build_content( $n, $seo ) {
 			$html .= '<h3>' . esc_html( $question ) . "</h3>\n<p>" . esc_html( $answer ) . "</p>\n";
 		}
 	}
-	$links = array_map( static fn( $u ) => '<a href="' . esc_url( $u ) . '" rel="nofollow noopener" target="_blank">' . esc_html( wp_parse_url( $u, PHP_URL_HOST ) ) . '</a>', $n['sources'] );
+	$links = array_map( static fn( $u ) => '<a href="' . esc_url( $u ) . '" rel="nofollow noopener" target="_blank">' . esc_html( wp_parse_url( $u, PHP_URL_HOST ) ) . '</a>', $n['sources'] ?? array() );
+	if ( ! $links ) {
+		return $html . "\n<p><em>Thông tin mang tính tham khảo, cập nhật " . esc_html( wp_date( 'm/Y' ) ) . '. Giá và chính sách thay đổi theo từng đợt – liên hệ để nhận thông tin mới nhất.</em></p>';
+	}
 	return $html . "\n<p><em>Nguồn tổng hợp: " . implode( ', ', $links ) . '. Bài viết mang tính tham khảo, thông tin dự án có thể thay đổi theo quyết định của cơ quan có thẩm quyền.</em></p>';
 }
 
@@ -374,20 +377,45 @@ function hh_news_build_content( $n, $seo ) {
  * Tạo bài tin tức hạ tầng. Bài đã có: chỉ cập nhật nội dung nếu bạn chưa sửa bài (so mã băm),
  * và chỉ điền các ô SEO còn trống. Trả về số bài tạo mới.
  */
-function hh_import_news() {
-	$cat = term_exists( 'Hạ tầng & quy hoạch', 'category' );
-	if ( ! $cat ) {
-		$cat = wp_insert_term( 'Hạ tầng & quy hoạch', 'category', array( 'slug' => 'ha-tang-quy-hoach' ) );
+/** Chuyên mục theo tên (tạo nếu chưa có), trả về term_id. */
+function hh_news_category( $name ) {
+	static $cache = array();
+	if ( ! isset( $cache[ $name ] ) ) {
+		$cat            = term_exists( $name, 'category' ) ?: wp_insert_term( $name, 'category', array( 'slug' => sanitize_title( remove_accents( $name ) ) ) );
+		$cache[ $name ] = is_array( $cat ) ? (int) $cat['term_id'] : (int) $cat;
 	}
-	$cat_id  = is_array( $cat ) ? (int) $cat['term_id'] : (int) $cat;
+	return $cache[ $name ];
+}
+
+/**
+ * Ngày đăng theo kế hoạch nội dung: tuần 1 = ngày nhập lần đầu, mỗi tuần 5 bài, cách nhau 1 ngày, 8:00 sáng.
+ * Bài có ngày trong tương lai được lên lịch (WordPress tự đăng đúng ngày).
+ */
+function hh_news_plan_date( $week, $pos ) {
+	$start = (int) get_option( 'hh_news_plan_start' );
+	if ( ! $start ) {
+		$start = (int) strtotime( wp_date( 'Y-m-d' ) . ' 08:00:00 ' . wp_timezone_string() );
+		update_option( 'hh_news_plan_start', $start );
+	}
+	return $start + ( ( (int) $week - 1 ) * 7 + (int) $pos ) * DAY_IN_SECONDS;
+}
+
+function hh_import_news() {
 	$seo_all = hh_news_seo();
 	$created = 0;
 	$i       = 0;
-	foreach ( hh_news_dataset() as $n ) {
+	// Bài hạ tầng (cố định) + bài theo kế hoạch nội dung (các file data-bai-viet-*.php nạp qua filter "hh_news_posts").
+	$items = array_map( static fn( $n ) => $n + array( 'category' => 'Hạ tầng & quy hoạch' ), hh_news_dataset() );
+	$items = array_merge( $items, apply_filters( 'hh_news_posts', array() ) );
+	$pos   = array();
+	foreach ( $items as $n ) {
 		++$i;
-		$seo     = $seo_all[ $n['slug'] ] ?? array();
+		$seo     = $n['seo'] ?? ( $seo_all[ $n['slug'] ] ?? array() );
+		$cat_id  = hh_news_category( $n['category'] );
+		$week    = (int) ( $n['week'] ?? 0 );
+		$date    = $week ? hh_news_plan_date( $week, $pos[ $week ] = ( $pos[ $week ] ?? -1 ) + 1 ) : time() - $i * HOUR_IN_SECONDS;
 		$content = hh_news_build_content( $n, $seo );
-		$post    = get_page_by_path( $n['slug'], OBJECT, 'post' );
+		$post    = get_posts( array( 'name' => $n['slug'], 'post_type' => 'post', 'post_status' => array( 'publish', 'future', 'draft', 'pending', 'private' ), 'numberposts' => 1 ) )[0] ?? null;
 		if ( $post ) {
 			$id   = $post->ID;
 			$hash = get_post_meta( $id, '_hh_news_hash', true );
@@ -403,13 +431,13 @@ function hh_import_news() {
 			$id = wp_insert_post(
 				array(
 					'post_type'     => 'post',
-					'post_status'   => 'publish',
+					'post_status'   => $date > time() ? 'future' : 'publish',
 					'post_name'     => $n['slug'],
 					'post_title'    => $n['title'],
 					'post_excerpt'  => $n['excerpt'],
 					'post_content'  => $content,
 					'post_category' => $cat_id ? array( $cat_id ) : array(),
-					'post_date'     => wp_date( 'Y-m-d H:i:s', time() - $i * HOUR_IN_SECONDS ),
+					'post_date'     => wp_date( 'Y-m-d H:i:s', $date ),
 				)
 			);
 			if ( ! $id || is_wp_error( $id ) ) {
