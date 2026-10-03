@@ -5,7 +5,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
-add_action( 'init', 'hh_register_types' );
+// Ưu tiên 15: đăng ký sau ACF / CPT UI / giao diện cũ (thường ưu tiên ≤ 10) nên cấu hình "Dự án",
+// "Khu vực" của Hoàng Hiệp được dùng nếu website cũ đã có loại nội dung trùng tên (du-an, khu-vuc).
+add_action( 'init', 'hh_register_types', 15 );
 function hh_register_types() {
 	register_post_type(
 		'du-an',
