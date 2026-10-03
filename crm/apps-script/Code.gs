@@ -253,6 +253,7 @@ function api(token, action, payload) {
     savePayment: apiSavePayment_,
     deletePayment: apiDeletePayment_,
     previewClose: function (p) { return statementAt_(p.ngay); },
+    periodSummary: apiPeriodSummary_,
     closeBalance: apiCloseBalance_,
     deleteClosing: apiDeleteClosing_,
     withdrawAdvice: function (p) { return withdrawAdvice_(p.ngay || todayStr_(), Number(p.ngay_sao_ke), Number(p.ngay_dao) || 0, p.the); }
@@ -641,64 +642,104 @@ function assertOpen_(ngay) {
 }
 
 /**
- * Bảng đối chiếu đến hết ngày `ngay`: số dư kỳ trước (lần kết gần nhất) + tiền hoàn phát sinh
- * (giao dịch làm trong kỳ) − tiền C.Trâm chuyển/ứng trong kỳ = số dư kết. Dương = C.Trâm còn nợ mình.
+ * Bảng đối chiếu với C.Trâm cho kỳ [from, to]:
+ *   số dư đầu kỳ + tiền hoàn phát sinh (giao dịch làm trong kỳ) − tiền C.Trâm chuyển/ứng trong kỳ = số dư cuối kỳ.
+ * `opening` bỏ trống thì tự tính từ toàn bộ sổ trước ngày `from`. Dương = C.Trâm còn nợ mình, âm = C.Trâm ứng dư.
+ * Kèm tổng kết mọi giao dịch trong kỳ (phí khách, phí máy, phí của mình…).
  */
+function periodStatement_(from, to, opening) {
+  var allTx = readAll_('GiaoDich');
+  var dues = allTx.filter(function (t) { return t.hoan_tt !== 'Đã nhận' && Number(t.tien_hoan); });
+  var pays = readAll_('DoiSoat').map(function (x) { x.tien = paymentSign_(x); return x; })
+    .sort(function (a, b) { return a.ngay < b.ngay ? -1 : a.ngay > b.ngay ? 1 : String(a.tao_luc).localeCompare(String(b.tao_luc)); });
+  if (opening === undefined) {
+    opening = 0;
+    dues.forEach(function (t) { if (t.ngay < from) opening += Number(t.tien_hoan) || 0; });
+    pays.forEach(function (x) { if (x.ngay < from) opening -= x.tien; });
+  }
+  var st = { tu_ngay: from, ngay: to, so_du_truoc: opening, so_gd: 0, so_tien: 0, chi_phi: 0, phat_sinh: 0, da_chuyen: 0,
+    so_lan_chuyen: 0, payments: [], ngay_lam: [] };
+  var days = {};
+  function day(d) { return days[d] || (days[d] = { ngay: d, so_gd: 0, so_tien: 0, chi_phi: 0, phat_sinh: 0, da_chuyen: 0 }); }
+  dues.forEach(function (t) {
+    if (t.ngay < from || t.ngay > to) return;
+    st.so_gd++;
+    st.so_tien += Number(t.so_tien) || 0;
+    st.chi_phi += Number(t.chi_phi) || 0;
+    st.phat_sinh += Number(t.tien_hoan) || 0;
+    var d = day(t.ngay);
+    d.so_gd++; d.so_tien += Number(t.so_tien) || 0; d.chi_phi += Number(t.chi_phi) || 0; d.phat_sinh += Number(t.tien_hoan) || 0;
+  });
+  pays.forEach(function (x) {
+    if (x.ngay < from || x.ngay > to) return;
+    st.da_chuyen += x.tien;
+    st.so_lan_chuyen++;
+    day(x.ngay).da_chuyen += x.tien;
+    st.payments.push({ id: x.id, ngay: x.ngay, loai: x.loai, tien: x.tien, ghi_chu: x.ghi_chu });
+  });
+  var bal = opening;
+  st.ngay_lam = Object.keys(days).sort().map(function (k) {
+    var d = days[k];
+    bal += d.phat_sinh - d.da_chuyen;
+    d.so_du = bal;
+    return d;
+  });
+  st.so_du = opening + st.phat_sinh - st.da_chuyen;
+  st.giao_dich = summarize_(allTx.filter(function (t) { return t.ngay >= from && t.ngay <= to; }));
+  st.giao_dich.tien_hoan = st.giao_dich.tien_hoan || 0;
+  st.refundName = refundName_();
+  return st;
+}
+
+/** Bảng đối chiếu để kết số dư đến hết ngày `ngay` (kỳ bắt đầu sau lần kết gần nhất). */
 function statementAt_(ngay) {
   ngay = String(ngay || todayStr_());
   if (!/^\d{4}-\d{2}-\d{2}$/.test(ngay)) throw new Error('Ngày kết không hợp lệ.');
   var last = lastClosing_();
   if (last && ngay <= last.ngay) throw new Error('Đã kết đến ngày ' + fmtDmy_(last.ngay) + ', hãy chọn ngày sau đó.');
-  var from = last ? addDays_(last.ngay, 1) : '';
-  var st = { ngay: ngay, tu_ngay: from, ket_truoc: last ? last.ngay : '', so_du_truoc: last ? Number(last.so_du) || 0 : 0,
-    so_gd: 0, so_tien: 0, chi_phi: 0, phat_sinh: 0, da_chuyen: 0, payments: [], ngay_lam: {} };
-  readAll_('GiaoDich').forEach(function (t) {
-    if (t.hoan_tt === 'Đã nhận' || !Number(t.tien_hoan) || t.ngay > ngay || (from && t.ngay < from)) return;
-    st.so_gd++;
-    st.so_tien += Number(t.so_tien) || 0;
-    st.chi_phi += Number(t.chi_phi) || 0;
-    st.phat_sinh += Number(t.tien_hoan) || 0;
-    var d = st.ngay_lam[t.ngay] || (st.ngay_lam[t.ngay] = { ngay: t.ngay, so_gd: 0, so_tien: 0, chi_phi: 0, phat_sinh: 0 });
-    d.so_gd++; d.so_tien += Number(t.so_tien) || 0; d.chi_phi += Number(t.chi_phi) || 0; d.phat_sinh += Number(t.tien_hoan) || 0;
-  });
-  st.ngay_lam = Object.keys(st.ngay_lam).sort().map(function (k) { return st.ngay_lam[k]; });
-  readAll_('DoiSoat').filter(function (x) { return x.ngay <= ngay && (!from || x.ngay >= from); })
-    .sort(function (a, b) { return a.ngay < b.ngay ? -1 : a.ngay > b.ngay ? 1 : String(a.tao_luc).localeCompare(String(b.tao_luc)); })
-    .forEach(function (x) {
-      var tien = paymentSign_(x);
-      st.da_chuyen += tien;
-      st.payments.push({ ngay: x.ngay, loai: x.loai, tien: tien, ghi_chu: x.ghi_chu });
-    });
-  if (!st.tu_ngay) {
-    var first = st.ngay_lam.length ? st.ngay_lam[0].ngay : '';
-    if (st.payments.length && (!first || st.payments[0].ngay < first)) first = st.payments[0].ngay;
-    st.tu_ngay = first || ngay;
+  var st;
+  if (last) {
+    st = periodStatement_(addDays_(last.ngay, 1), ngay, Number(last.so_du) || 0);
+    st.ket_truoc = last.ngay;
+  } else {
+    st = periodStatement_('', ngay, 0);
+    st.ket_truoc = '';
+    st.tu_ngay = st.ngay_lam.length ? st.ngay_lam[0].ngay : ngay;
   }
-  st.so_du = st.so_du_truoc + st.phat_sinh - st.da_chuyen;
-  st.refundName = refundName_();
-  st.tin_nhan = statementText_(st);
+  st.tin_nhan = statementText_(st, 'ket');
   return st;
 }
 
-function statementText_(st) {
+/** Tổng kết từ ngày a đến ngày b (không khóa sổ). */
+function apiPeriodSummary_(p) {
+  var from = String(p.from || ''), to = String(p.to || '');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(from) || !/^\d{4}-\d{2}-\d{2}$/.test(to)) throw new Error('Chọn đủ từ ngày và đến ngày.');
+  if (from > to) throw new Error('"Từ ngày" phải trước "đến ngày".');
+  var st = periodStatement_(from, to);
+  st.tin_nhan = statementText_(st, 'range');
+  return st;
+}
+
+function statementText_(st, mode) {
   var name = st.refundName, ten = name.replace(/^C\.\s*/i, '');
   function no(v) { return v > 0 ? 'chị còn nợ em ' + fmtMoney_(v) : v < 0 ? 'chị ứng dư ' + fmtMoney_(-v) : 'không còn nợ'; }
-  var lines = ['Chị ' + ten + ' ơi, em gửi đối chiếu đến hết ngày ' + fmtDmy_(st.ngay) + ':'];
-  if (st.ket_truoc) lines.push('• Số dư kết ngày ' + fmtDmy_(st.ket_truoc) + ': ' + no(st.so_du_truoc));
-  lines.push('• Từ ' + fmtDmy_(st.tu_ngay) + ' làm ' + st.so_gd + ' GD: ' + fmtMoney_(st.so_tien) + ', phí máy ' + fmtMoney_(st.chi_phi) +
-    ' → tiền hoàn ' + fmtMoney_(st.phat_sinh));
-  st.ngay_lam.forEach(function (d) {
-    lines.push('   - ' + fmtDm_(d.ngay) + ': ' + d.so_gd + ' GD ' + fmtMoney_(d.so_tien) + ' − phí ' + fmtMoney_(d.chi_phi) + ' = ' + fmtMoney_(d.phat_sinh));
-  });
-  if (st.payments.length) {
-    lines.push('• Chị đã chuyển / ứng: ' + fmtMoney_(st.da_chuyen));
-    st.payments.forEach(function (x) {
-      lines.push('   - ' + fmtDm_(x.ngay) + ' ' + x.loai.toLowerCase() + ' ' + (x.tien < 0 ? '+' : '') + fmtMoney_(Math.abs(x.tien)) + (x.ghi_chu ? ' (' + x.ghi_chu + ')' : ''));
-    });
-  } else {
-    lines.push('• Chị đã chuyển / ứng: 0đ');
+  var one = st.tu_ngay === st.ngay;
+  var lines = [mode === 'ket'
+    ? 'Chị ' + ten + ' ơi, em gửi đối chiếu đến hết ngày ' + fmtDmy_(st.ngay) + ':'
+    : 'Chị ' + ten + ' ơi, em gửi tổng kết ' + (one ? 'ngày ' + fmtDmy_(st.ngay) : 'từ ' + fmtDmy_(st.tu_ngay) + ' đến ' + fmtDmy_(st.ngay)) + ':'];
+  if (mode === 'ket' ? st.ket_truoc : st.so_du_truoc) {
+    lines.push('• ' + (mode === 'ket' ? 'Số dư kết ngày ' + fmtDmy_(st.ket_truoc) : 'Số dư đầu ' + (one ? 'ngày' : 'kỳ')) + ': ' + no(st.so_du_truoc));
   }
-  lines.push('=> Kết đến hết ' + fmtDmy_(st.ngay) + ': ' + no(st.so_du) + '.');
+  lines.push('• ' + (mode === 'ket' ? 'Từ ' + fmtDmy_(st.tu_ngay) + ' l' : 'L') + 'àm ' + st.so_gd + ' GD: ' + fmtMoney_(st.so_tien) + ', phí máy ' + fmtMoney_(st.chi_phi) +
+    ' → tiền hoàn ' + fmtMoney_(st.phat_sinh));
+  if (!one) st.ngay_lam.forEach(function (d) {
+    if (d.so_gd) lines.push('   - ' + fmtDm_(d.ngay) + ': ' + d.so_gd + ' GD ' + fmtMoney_(d.so_tien) + ' − phí ' + fmtMoney_(d.chi_phi) + ' = ' + fmtMoney_(d.phat_sinh));
+  });
+  lines.push('• Chị đã chuyển / ứng' + (st.so_lan_chuyen > 1 ? ' (' + st.so_lan_chuyen + ' lần)' : '') + ': ' + fmtMoney_(st.da_chuyen));
+  st.payments.forEach(function (x) {
+    lines.push('   - ' + fmtDm_(x.ngay) + ' ' + x.loai.toLowerCase() + ' ' + (x.tien < 0 ? '+' : '') + fmtMoney_(Math.abs(x.tien)) + (x.ghi_chu ? ' (' + x.ghi_chu + ')' : ''));
+  });
+  lines.push('=> ' + (mode === 'ket' ? 'Kết đến hết ' : 'Số dư cuối ') + fmtDmy_(st.ngay) + ': ' + no(st.so_du) + '.');
   return lines.join('\n');
 }
 

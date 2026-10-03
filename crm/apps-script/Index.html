@@ -233,6 +233,26 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       <p class="muted">Mỗi giao dịch: <b>Tiền hoàn = Số tiền (rút/đáo) − Phí máy</b>, làm hôm nay thì mai <span class="refund-name">C.Trâm</span> hoàn.
         Tiền <span class="refund-name">C.Trâm</span> chuyển hoặc <b>ứng trước</b> (số tròn, không theo giao dịch) thì bấm <b>+ Ghi tiền</b>: CRM tự trừ vào các khoản cũ nhất và tính số dư.</p>
       <div id="refund-balance"></div>
+      <div class="card" id="sum-card">
+        <div class="row row--between"><h2 style="margin:0">🧾 Tổng kết</h2>
+          <div class="seg" id="sum-quick">
+            <button data-v="today" class="is-active">Hôm nay</button>
+            <button data-v="yesterday">Hôm qua</button>
+            <button data-v="week">Tuần này</button>
+            <button data-v="month">Tháng này</button>
+          </div>
+        </div>
+        <div class="form-grid" style="margin-top:10px">
+          <label class="f">Từ ngày<input type="date" id="sum-from"></label>
+          <label class="f">Đến ngày<input type="date" id="sum-to"></label>
+        </div>
+        <div class="kpis" id="sum-kpis" style="margin-top:12px"></div>
+        <table class="stmt" id="sum-stmt"></table>
+        <details style="margin-top:10px"><summary class="muted" style="cursor:pointer">Tin nhắn gửi <span class="refund-name">C.Trâm</span></summary>
+          <textarea class="msg" id="sum-msg" rows="9" readonly style="margin-top:8px"></textarea>
+        </details>
+        <div class="row" style="margin-top:10px"><button class="btn btn--ghost btn--sm" data-act="copy-sum">📋 Chép tin nhắn</button></div>
+      </div>
       <h2>⏳ Khoản còn thiếu</h2>
       <div id="refund-list"></div>
       <div class="row row--between" style="margin-top:6px">
@@ -405,7 +425,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     <div class="form-grid">
       <label class="f">Ngày<input type="date" name="ngay" required></label>
       <label class="f">Loại<select name="loai">
-        <option value="Ứng trước">Ứng trước (chưa có giao dịch)</option>
+        <option value="Ứng trước">Ứng / mượn trước (chưa kết giao dịch)</option>
         <option value="Hoàn tiền">Hoàn tiền giao dịch</option>
         <option value="Mình trả lại">Mình trả lại (ứng dư)</option>
         <option value="Nợ cũ">Nợ cũ (còn nợ mình từ trước)</option>
@@ -799,7 +819,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   function balanceCard(m) {
     var name = esc(rn());
     var cls = m.so_du > 0 ? '' : m.so_du < 0 ? ' bal--ung' : ' bal--zero';
-    var head = m.so_du > 0 ? name + ' còn phải chuyển cho mình' : m.so_du < 0 ? name + ' đang ứng dư (trừ vào giao dịch sau)' : 'Đã đối chiếu xong, không ai nợ ai';
+    var head = m.so_du > 0 ? name + ' còn phải chuyển cho mình' : m.so_du < 0 ? name + ' đang ứng dư – mình đang giữ tiền của chị (trừ vào giao dịch sau hoặc trả lại)' : 'Đã đối chiếu xong, không ai nợ ai';
     return '<div class="bal' + cls + '"><div class="muted">' + head + '</div>' +
       '<div class="bal__big ' + (m.so_du > 0 ? 'neg' : 'pos') + '">' + money(Math.abs(m.so_du)) + '</div>' +
       '<div class="bal__rows">' +
@@ -812,6 +832,51 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       '<button class="btn btn--accent btn--sm" data-act="open-close">📌 Kết số dư</button></div></div>';
   }
   function oweText(v) { return v > 0 ? esc(rn()) + ' còn nợ ' + money(v) : v < 0 ? esc(rn()) + ' ứng dư ' + money(-v) : 'hết nợ'; }
+
+  /* Tổng kết từ ngày a đến ngày b */
+  function sumQuick(v) {
+    var t = S.boot.today, p = parts(t);
+    if (v === 'yesterday') return [addDays(t, -1), addDays(t, -1)];
+    if (v === 'week') { var wd = (new Date(Date.UTC(p.y, p.m - 1, p.d)).getUTCDay() + 6) % 7; return [addDays(t, -wd), t]; }
+    if (v === 'month') return [ymd(p.y, p.m, 1), t];
+    return [t, t];
+  }
+  function setSumRange(v) {
+    var r = sumQuick(v);
+    $('#sum-from').value = r[0]; $('#sum-to').value = r[1];
+    $$('#sum-quick button').forEach(function (x) { x.classList.toggle('is-active', x.dataset.v === v); });
+    loadSum();
+  }
+  $('#sum-quick').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) setSumRange(b.dataset.v); });
+  ['#sum-from', '#sum-to'].forEach(function (id) {
+    $(id).addEventListener('change', function () { $$('#sum-quick button').forEach(function (x) { x.classList.remove('is-active'); }); loadSum(); });
+  });
+  function loadSum() {
+    var from = $('#sum-from').value, to = $('#sum-to').value;
+    if (!from || !to) return;
+    call('periodSummary', { from: from, to: to }).then(function (st) {
+      var g = st.giao_dich, name = esc(rn()), one = st.tu_ngay === st.ngay;
+      $('#sum-kpis').innerHTML = kpi('Giao dịch (Đáo / Rút)', g.so_gd + ' <small class="muted">(' + g.so_dao + ' / ' + g.so_rut + ')</small>') +
+        kpi('Tổng tiền', money(g.so_tien)) + kpi('Phí khách', money(g.tien_phi)) + kpi('Phí máy', money(g.chi_phi)) +
+        kpi('Phí của mình', money(g.loi_nhuan), g.loi_nhuan >= 0 ? 'pos' : 'neg');
+      var rows = '<tr><td>Số dư đầu ' + (one ? 'ngày ' : 'kỳ ') + dmy(st.tu_ngay) + '<br><small class="muted">' + oweText(st.so_du_truoc) + '</small></td><td class="' + (st.so_du_truoc > 0 ? 'neg' : 'pos') + '">' + money(Math.abs(st.so_du_truoc)) + '</td></tr>';
+      var byDay = {};
+      st.payments.forEach(function (x) { (byDay[x.ngay] = byDay[x.ngay] || []).push(x); });
+      st.ngay_lam.forEach(function (d) {
+        if (!one) rows += '<tr><td colspan="2" style="padding-top:10px"><b>' + dmy(d.ngay) + '</b></td></tr>';
+        if (d.so_gd) rows += '<tr class="sub"><td>+ Làm ' + d.so_gd + ' GD ' + money(d.so_tien) + ' − phí máy ' + money(d.chi_phi) + '</td><td>+' + money(d.phat_sinh) + '</td></tr>';
+        (byDay[d.ngay] || []).forEach(function (x) {
+          rows += '<tr class="sub"><td>' + (x.tien < 0 ? '+ ' : '− ') + esc(x.loai) + (x.ghi_chu ? ' · ' + esc(x.ghi_chu) : '') + '</td><td>' + (x.tien < 0 ? '+' : '−') + money(Math.abs(x.tien)) + '</td></tr>';
+        });
+        if (!one) rows += '<tr class="sub"><td>Số dư cuối ngày</td><td class="' + (d.so_du > 0 ? 'neg' : 'pos') + '">' + (d.so_du > 0 ? name + ' nợ ' : d.so_du < 0 ? 'ứng dư ' : '') + money(Math.abs(d.so_du)) + '</td></tr>';
+      });
+      if (!st.ngay_lam.length) rows += '<tr class="sub"><td>Không có giao dịch hay tiền chuyển/ứng trong kỳ.</td><td></td></tr>';
+      rows += '<tr><td>Tổng: tiền hoàn + ' + money(st.phat_sinh) + ' · ' + name + ' chuyển/ứng ' + (st.so_lan_chuyen ? st.so_lan_chuyen + ' lần ' : '') + '− ' + money(st.da_chuyen) + '</td><td></td></tr>';
+      rows += '<tr class="total"><td>= Số dư cuối ' + (one ? 'ngày' : 'kỳ') + ': ' + (st.so_du > 0 ? name + ' còn nợ mình' : st.so_du < 0 ? name + ' ứng dư (mình giữ của chị)' : 'hết nợ') + '</td><td class="' + (st.so_du > 0 ? 'neg' : 'pos') + '">' + money(Math.abs(st.so_du)) + '</td></tr>';
+      $('#sum-stmt').innerHTML = rows;
+      $('#sum-msg').value = st.tin_nhan;
+    }).catch(fail);
+  }
 
   /* Kết số dư */
   function openClose() {
@@ -868,6 +933,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     var act = a.dataset.act;
     if (act === 'open-close') openClose();
     if (act === 'copy-close' && $('#close-msg').value) copyText($('#close-msg').value);
+    if (act === 'copy-sum' && $('#sum-msg').value) copyText($('#sum-msg').value);
     if (act === 'do-close') {
       var st = S.closePreview;
       if (!st || st.ngay !== $('#close-date').value) return;
@@ -917,6 +983,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       S.refund = r;
       S.lastClosing = r.lastClosing;
       $('#refund-balance').innerHTML = balanceCard(r.summary);
+      if (!$('#sum-from').value) setSumRange('today'); else loadSum();
       $('#refund-closings').innerHTML = r.closings.length ? r.closings.map(function (c, i) {
         return '<div class="item"><div class="item__head"><div><div class="item__name">Kết đến hết ' + dmy(c.ngay) + '</div>' +
           '<div class="item__meta">Kỳ ' + dmy(c.tu_ngay) + ' → ' + dmy(c.ngay) + ' · ' + c.so_gd + ' GD · tiền hoàn ' + money(c.phat_sinh) + ' · đã chuyển/ứng ' + money(c.da_chuyen) + (c.ghi_chu ? ' · ' + esc(c.ghi_chu) : '') + '</div></div>' +

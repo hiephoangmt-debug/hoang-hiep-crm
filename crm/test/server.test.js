@@ -369,6 +369,47 @@ test('close balance (kết số dư) as of a date: C.Trâm still owes, message, 
   call('savePayment', { ngay: '2026-10-01', loai: 'Hoàn tiền', so_tien: 1 });
 });
 
+test('several advances in one day before transactions, over-advance, and summary from day a to day b', () => {
+  const { fake, call } = fresh('2026-10-05');
+  // Chị đang nợ 50tr từ trước
+  call('savePayment', { ngay: '2026-10-04', loai: 'Nợ cũ', so_tien: 50000000 });
+  // Hôm nay chưa làm GD đã nhờ chị ứng 3 lần: tổng 250tr > 50tr chị nợ → chị ứng dư 200tr
+  call('savePayment', { ngay: '2026-10-05', loai: 'Ứng trước', so_tien: 100000000, ghi_chu: 'sáng' });
+  call('savePayment', { ngay: '2026-10-05', loai: 'Ứng trước', so_tien: 50000000, ghi_chu: 'trưa' });
+  call('savePayment', { ngay: '2026-10-05', loai: 'Ứng trước', so_tien: 100000000, ghi_chu: 'chiều' });
+  let today = call('periodSummary', { from: '2026-10-05', to: '2026-10-05' });
+  assert.strictEqual(today.so_du_truoc, 50000000);
+  assert.strictEqual(today.so_lan_chuyen, 3);
+  assert.strictEqual(today.da_chuyen, 250000000);
+  assert.strictEqual(today.so_du, -200000000);
+  assert.match(today.tin_nhan, /tổng kết ngày 05\/10\/2026/);
+  assert.match(today.tin_nhan, /Số dư đầu ngày: chị còn nợ em 50\.000\.000đ/);
+  assert.match(today.tin_nhan, /\(3 lần\): 250\.000\.000đ/);
+  assert.match(today.tin_nhan, /chị ứng dư 200\.000\.000đ/);
+  // Tối làm GD 300tr → chị lại còn nợ
+  const t = call('saveTransaction', { ngay: '2026-10-05', dich_vu: 'Đáo hạn', ten_khach: 'C.Lan', the: 'VCB', so_tien: 300000000, may: 'MB', phi_khach: 1.7, phi_may_text: '1.3' });
+  today = call('periodSummary', { from: '2026-10-05', to: '2026-10-05' });
+  assert.strictEqual(today.so_du, 50000000 + t.tien_hoan - 250000000);
+  assert.strictEqual(today.giao_dich.loi_nhuan, t.loi_nhuan);
+  assert.strictEqual(today.giao_dich.tien_phi, t.tien_phi);
+
+  fake.setToday('2026-10-07');
+  const u = call('saveTransaction', { ngay: '2026-10-07', dich_vu: 'Rút tiền', ten_khach: 'A.Bình', the: 'TP', so_tien: 20000000, may: 'MB', phi_khach: 2, phi_may_text: '1.5' });
+  call('savePayment', { ngay: '2026-10-07', loai: 'Hoàn tiền', so_tien: 40000000 });
+  const r = call('periodSummary', { from: '2026-10-05', to: '2026-10-07' });
+  assert.strictEqual(r.so_du_truoc, 50000000);
+  assert.strictEqual(r.so_gd, 2);
+  assert.strictEqual(r.phat_sinh, t.tien_hoan + u.tien_hoan);
+  assert.strictEqual(r.da_chuyen, 290000000);
+  assert.strictEqual(r.so_du, call('refunds', {}).summary.so_du, 'period end = running balance');
+  assert.strictEqual(r.ngay_lam.length, 2);
+  assert.strictEqual(r.ngay_lam[1].so_du, r.so_du);
+  assert.match(r.tin_nhan, /từ 05\/10\/2026 đến 07\/10\/2026/);
+  // Kỳ chỉ ngày 07 thì số dư đầu kỳ = cuối ngày 05
+  assert.strictEqual(call('periodSummary', { from: '2026-10-06', to: '2026-10-07' }).so_du_truoc, today.so_du);
+  assert.throws(() => call('periodSummary', { from: '2026-10-07', to: '2026-10-05' }), /trước/);
+});
+
 test('refund columns are added to an existing sheet; old rows get computed values', () => {
   const { gas, fake } = load();
   fake.setToday('2026-10-02');

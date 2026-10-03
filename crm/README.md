@@ -9,6 +9,8 @@ CRM cho mảng đáo hạn / rút tiền thẻ tín dụng, chạy miễn phí t
 - **Công nợ C.Trâm (người giữ máy):** mỗi giao dịch tự tính **Tiền hoàn = Số tiền (rút/đáo) − Phí máy**; làm hôm nay thì mai C.Trâm hoàn (ngày hoàn sửa được trong form).
   - C.Trâm chuyển tiền hay **ứng trước** một số tròn (VD ngày làm 500 triệu, ứng trước 300 triệu) thì bấm **+ Ghi tiền**, không cần khớp từng giao dịch. CRM trừ dần vào các khoản cũ nhất.
   - **Số dư** = tổng tiền hoàn − tổng C.Trâm đã chuyển/ứng: dương là C.Trâm còn phải chuyển, âm là C.Trâm đang ứng dư (trừ vào giao dịch sau).
+  - Trong ngày chưa kết giao dịch mà nhờ C.Trâm **ứng/mượn trước** 1, 2 hay nhiều lần thì ghi từng lần. Ứng nhiều hơn số chị đang nợ thì số dư thành **ứng dư** (mình đang giữ tiền của chị), trừ dần vào giao dịch sau.
+  - **🧾 Tổng kết từ ngày A đến ngày B** (Hôm nay / Hôm qua / Tuần này / Tháng này / tùy chọn): số GD, tổng tiền, phí khách, phí máy, phí của mình; số dư đầu kỳ, từng ngày làm và từng lần chuyển/ứng, số dư cuối ngày, số dư cuối kỳ; kèm tin nhắn để chép gửi Zalo. Không khóa sổ.
   - **📌 Kết số dư:** chọn ngày chốt, CRM tính số dư đến hết ngày đó (số dư lần kết trước + tiền hoàn phát sinh − tiền đã chuyển/ứng), soạn sẵn tin nhắn đối chiếu để chép gửi Zalo. Số liệu đến ngày kết bị khóa; kỳ sau bắt đầu từ số dư đã kết. Bỏ lần kết gần nhất nếu cần sửa.
   - Nợ từ trước khi dùng CRM: ghi **Nợ cũ** (C.Trâm còn nợ mình) với ngày trước ngày bắt đầu.
   - **Sổ đối chiếu** theo ngày: làm bao nhiêu, phí máy, tiền hoàn phát sinh, C.Trâm chuyển/ứng, số dư lũy kế. Loại tiền: Ứng trước, Hoàn tiền, Mình trả lại, Nợ cũ, Điều chỉnh số dư.
