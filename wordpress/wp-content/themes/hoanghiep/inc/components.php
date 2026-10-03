@@ -404,6 +404,12 @@ function hh_market_cards( $current = '' ) {
 	if ( ! function_exists( 'hh_deal_term_url' ) ) {
 		return;
 	}
+	// CSS đi kèm ngay trong trang: vẫn hiển thị đúng khi plugin cache / gộp CSS còn giữ bản main.css cũ.
+	static $styled = false;
+	if ( ! $styled ) {
+		$styled = true;
+		echo '<style id="hh-market-cards">.market-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}.market-card{display:flex;align-items:center;gap:12px;padding:16px;border:1px solid #e2e7ef;border-radius:16px;background:#fff;color:#14223a;box-shadow:0 10px 30px rgba(10,35,66,.08);text-decoration:none;transition:transform .2s,border-color .2s}.market-card:hover{transform:translateY(-2px);border-color:#8a5a36}.market-card__icon{display:grid;place-items:center;flex:none;width:46px;height:46px;border-radius:12px;background:#0a2342;color:#c99b70}.market-card__body{display:grid;gap:2px;flex:1;min-width:0}.market-card__body strong{color:#0a2342;font-size:1rem}.market-card__body small{color:#7a869a;font-size:.84rem}.market-card>.icon--arrow{flex:none;color:#8a5a36}.market-card.is-active{border-color:#0a2342;background:#0a2342}.market-card.is-active strong{color:#fff}.market-card.is-active small{color:#c4d0e0}.market-card.is-active .market-card__icon{background:#8a5a36;color:#fff}.market-cards__title{margin:22px 0 10px;font-weight:700;color:#0a2342}</style>'; // phpcs:ignore
+	}
 	echo '<div class="market-cards">';
 	foreach ( hh_market_pages() as $slug => list( $name, $desc, $icon ) ) {
 		$term = get_term_by( 'slug', $slug, 'loai-bds' );
