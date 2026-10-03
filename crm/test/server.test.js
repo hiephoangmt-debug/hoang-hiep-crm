@@ -587,6 +587,10 @@ test('card custody: hold / return with notes and photos, held-cards list with li
   assert.strictEqual(lc.the_khach_giu[0].hanh_dong, 'Trả thẻ');
   assert.strictEqual(lc.the_khach_giu[0].ghi_chu, 'trả tận tay, khách ký nhận');
   assert.strictEqual(lc.the_khach_giu[0].anh.length, 1);
+  const dc = call('customerDetail', { id: c.id }).cards[0];
+  assert.strictEqual(dc.hold_action, 'Trả thẻ');
+  assert.strictEqual(dc.hold_note, 'trả tận tay, khách ký nhận');
+  assert.strictEqual(dc.hold_anh.length, 1);
   const hist = call('cardHistory', { the_id: card.id });
   assert.strictEqual(hist.logs.length, 2);
   assert.strictEqual(hist.logs[0].hanh_dong, 'Trả thẻ');

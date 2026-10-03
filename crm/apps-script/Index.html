@@ -1662,6 +1662,30 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       call('getDoc', { id: id }).then(function (r) { docCache[id] = r.dataUrl; img.src = r.dataUrl; }).catch(function () { img.alt = 'Không tải được ảnh'; });
     });
   }
+  // Tình trạng giữ thẻ của khách: mình giữ mấy thẻ, thẻ nào; khách giữ thẻ nào; lần trả gần nhất (ghi chú, ảnh).
+  function custHoldHtml(d) {
+    var mine = d.cards.filter(function (k) { return k.giu_the === 'Mình giữ'; });
+    var theirs = d.cards.filter(function (k) { return k.giu_the !== 'Mình giữ'; });
+    function photos(k) { return k.hold_anh && k.hold_anh.length ? ' <button type="button" class="pay-chip" data-photos="' + esc(k.hold_anh.join(',')) + '">📷 ' + k.hold_anh.length + '</button>' : ''; }
+    function row(k, isMine) {
+      var info = isMine
+        ? '<b>' + esc(k.ten_the) + '</b>' + (k.so_cuoi ? ' ****' + esc(k.so_cuoi) : '') + ' · giữ từ <b>' + (k.ngay_giu ? dmy(k.ngay_giu) : '?') + '</b>' +
+          (k.ngay_giu ? ' (' + Math.max(0, Math.round((Date.parse(S.boot.today) - Date.parse(k.ngay_giu)) / 864e5)) + ' ngày)' : '') +
+          (k.hold_action === 'Nhận giữ' && k.hold_note ? '<br><small class="muted">📝 ' + esc(k.hold_note) + '</small>' : '') + (k.hold_action === 'Nhận giữ' ? photos(k) : '')
+        : '<b>' + esc(k.ten_the) + '</b>' + (k.so_cuoi ? ' ****' + esc(k.so_cuoi) : '') +
+          (k.ngay_tra ? ' · ↩️ đã trả <b>' + dmy(k.ngay_tra) + '</b>' : ' · khách tự giữ') +
+          (k.hold_action === 'Trả thẻ' && k.hold_note ? '<br><small class="muted">📝 ' + esc(k.hold_note) + '</small>' : '') + (k.hold_action === 'Trả thẻ' ? photos(k) : '');
+      return '<div class="cardrow"><div class="cardrow__info">' + info + '</div>' +
+        (isMine ? '<button type="button" class="btn btn--sm" data-custhold="Trả thẻ" data-id="' + esc(k.id) + '">↩️ Trả</button>'
+                : '<button type="button" class="btn btn--ghost btn--sm" data-custhold="Nhận giữ" data-id="' + esc(k.id) + '">📥 Nhận giữ</button>') + '</div>';
+    }
+    return '<div class="card" style="margin-top:14px;border-left:4px solid ' + (mine.length ? 'var(--bad)' : 'var(--line)') + '">' +
+      '<h3 style="margin-top:0">🔒 Giữ thẻ</h3>' +
+      (d.cards.length ? '' : '<p class="muted" style="margin:0">Khách chưa có thẻ nào. <button type="button" class="btn btn--ghost btn--sm" data-card="new">+ Thêm thẻ</button></p>') +
+      (mine.length ? '<div><span class="badge badge--bad">🔒 Mình đang giữ ' + mine.length + ' thẻ</span></div>' + mine.map(function (k) { return row(k, true); }).join('') : (d.cards.length ? '<div><span class="badge badge--ok">Mình không giữ thẻ nào</span></div>' : '')) +
+      (theirs.length ? '<div style="margin-top:8px"><span class="badge badge--muted">Khách giữ ' + theirs.length + ' thẻ</span></div>' + theirs.map(function (k) { return row(k, false); }).join('') : '') +
+      '</div>';
+  }
   function custDocsHtml(d) {
     var c = d.customer;
     function slot(loai) {
@@ -1681,6 +1705,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         '<button type="button" class="btn btn--ghost btn--sm" data-card="' + esc(k.id) + '">Sửa / 📷</button></div>';
     }).join('');
     return (d.driveReady === false ? '<div class="advice" style="margin-top:12px">⚠️ ' + esc(d.driveHelp) + '</div>' : '') +
+      custHoldHtml(d) +
       '<h3>🪪 Căn cước công dân</h3><div class="docs">' + slot('CCCD mặt trước') + slot('CCCD mặt sau') + '</div>' +
       '<div class="row row--between" style="margin-top:14px"><h3 style="margin:0">💳 Thẻ của khách (' + d.cards.length + ')</h3>' +
       '<button type="button" class="btn btn--sm" data-card="new">+ Thêm thẻ</button></div>' +
@@ -1880,6 +1905,16 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     if (ha) { var k = (S.held || []).filter(function (x) { return x.id === ha.dataset.id; })[0]; if (k) openHold(k, ha.dataset.heldact); return; }
     var ho = e.target.closest('[data-heldopen]');
     if (ho) { var k2 = (S.held || []).filter(function (x) { return x.id === ho.dataset.heldopen; })[0]; if (k2) openCard(k2, { id: k2.khach_id, ten: k2.ten_khach, sdt: k2.sdt }); return; }
+    var ch = e.target.closest('[data-custhold]');
+    if (ch) {
+      var cd = S.custDetail || { cards: [] }, ck = cd.cards.filter(function (x) { return x.id === ch.dataset.id; })[0];
+      if (ck) {
+        S.cardCurrent = null;
+        S.cardKhach = { id: custForm.elements.id.value, ten: custForm.elements.ten.value, sdt: custForm.elements.sdt.value };
+        openHold(Object.assign({ ten_khach: custForm.elements.ten.value }, ck), ch.dataset.custhold);
+      }
+      return;
+    }
     var hp = e.target.closest('[data-holdpick]');
     if (hp) { pickImage(!!hp.dataset.cap, { hold: true, loai: 'Ảnh giữ / trả thẻ' }); return; }
     var hu = e.target.closest('[data-holdun]');

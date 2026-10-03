@@ -749,6 +749,8 @@ function cardStats_(cards, tx) {
 
 function cardsOf_(khachId) {
   var docs = readAll_('TaiLieu');
+  var lastLog = {};
+  readAll_('GiuThe').forEach(function (l) { if (l.khach_id === khachId) lastLog[l.the_id] = l; });
   var tx = readAll_('GiaoDich').filter(function (t) { return t.khach_id === khachId; });
   return cardStats_(readAll_('TheKhach').filter(function (c) { return c.khach_id === khachId; }), tx).map(function (c) {
     var photo = docs.filter(function (d) { return d.the_id === c.id && d.loai === 'Ảnh thẻ'; }).pop();
@@ -757,6 +759,9 @@ function cardsOf_(khachId) {
     c.cccd_id = cccd ? cccd.id : '';
     c.quan_he = c.quan_he || 'Chính chủ';
     c.giu_the = c.giu_the || 'Khách giữ';
+    var l = lastLog[c.id];
+    c.hold_action = l ? l.hanh_dong : ''; c.hold_ngay = l ? l.ngay : ''; c.hold_note = l ? l.ghi_chu : '';
+    c.hold_anh = l ? docs.filter(function (d) { return d.loai === 'Ảnh giữ / trả thẻ' && d.ghi_chu === l.id; }).map(function (d) { return d.id; }) : [];
     return c;
   }).sort(function (a, b) { return String(a.ten_the).localeCompare(String(b.ten_the)); });
 }
