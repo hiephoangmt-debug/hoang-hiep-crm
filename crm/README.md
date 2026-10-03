@@ -14,13 +14,15 @@ CRM cho mảng đáo hạn / rút tiền thẻ tín dụng, chạy miễn phí t
   - Ô công nợ chia 4 mục: **Mục 1 – chốt đến ngày** (tồn +/−, nhập tay được); **Mục 2 – công nợ từ ngày chốt đến hiện tại** (tiền hoàn phát sinh của từng giao dịch); **Mục 3 – công nợ ứng** (tạm ứng 1, 2, 3…, **tồn sau ứng = mục 2 − tổng ứng**); **Mục 4 – tồn công nợ (chốt sổ) hiện tại = mục 1 + tồn sau ứng**.
   - **✏️ Nhập tay Mục 1:** chốt công nợ đến một ngày với số tiền thực tế (chị còn nợ / chị ứng dư), VD lấy từ sổ tay; Mục 2 chỉ tính giao dịch và tạm ứng sau ngày đó.
   - **🧾 Tổng kết từ ngày A đến ngày B** (Hôm nay / Hôm qua / Tuần này / Tháng này / tùy chọn): số GD, tổng tiền, phí khách, phí máy, phí của mình; số dư đầu kỳ, từng ngày làm và từng lần chuyển/ứng, số dư cuối ngày, số dư cuối kỳ; kèm tin nhắn để chép gửi Zalo. Không khóa sổ.
+  - **📊 Bảng chi tiết công nợ (như Excel):** từng dòng giao dịch / tạm ứng / chốt sổ với số tiền, phí máy, tiền hoàn, tiền chuyển, **số dư sau mỗi dòng**; mở bằng Google Sheet (trang `Xuất công nợ`) hoặc tải file CSV.
+  - **🕘 Lịch sử thay đổi:** mọi lần thêm / sửa / xóa giao dịch, tiền C.Trâm, chốt sổ, có thời gian và nội dung **trước → sau** (sheet `NhatKy`).
   - **📌 Kết số dư:** chọn ngày chốt, CRM tính số dư đến hết ngày đó (số dư lần kết trước + tiền hoàn phát sinh − tiền đã chuyển/ứng), soạn sẵn tin nhắn đối chiếu để chép gửi Zalo. Số liệu đến ngày kết bị khóa; kỳ sau bắt đầu từ số dư đã kết. Bỏ lần kết gần nhất nếu cần sửa.
   - Nợ từ trước khi dùng CRM: ghi **Nợ cũ** (C.Trâm còn nợ mình) với ngày trước ngày bắt đầu.
   - **Sổ đối chiếu** theo ngày: làm bao nhiêu, phí máy, tiền hoàn phát sinh, C.Trâm chuyển/ứng, số dư lũy kế. Loại tiền: Ứng trước, Hoàn tiền, Mình trả lại, Nợ cũ, Điều chỉnh số dư.
 - **Khách có 2 số điện thoại:** nhập thêm **SĐT 2**; số nào cũng có nút Zalo / Gọi, tìm và nhận diện khách (từ web, khi ghi giao dịch) theo cả hai số.
 - **Hồ sơ khách:** chụp hoặc tải ảnh **CCCD mặt trước / mặt sau**. Ảnh nén trên điện thoại rồi lưu **riêng tư** trong Google Drive của chủ CRM (thư mục `CRM Thẻ Tín Dụng – Hồ sơ khách (riêng tư)`), chỉ xem được trong CRM sau khi nhập PIN.
 - **Chụp ngay khi ghi giao dịch:** form giao dịch có ô **📷 Ảnh khách & thẻ** (CCCD mặt trước / sau, ảnh thẻ), dùng được cả với khách mới; bấm Lưu giao dịch là ảnh được lưu vào hồ sơ khách và thẻ tương ứng.
-- **Khách cũ quay lại:** form giao dịch nhận ra khách cũ, hiện **lịch sử 3 / 5 tháng** (mỗi tháng số lần, tổng rút / đáo, từng giao dịch) và **hiện luôn ảnh CCCD / thẻ đã lưu** (không cần chụp lại), mỗi ảnh có nút **🔄 Thay mới**. Hồ sơ khách cũng có mốc thời gian này. Dữ liệu cũ vẫn giữ đủ.
+- **Khách cũ quay lại:** form giao dịch nhận ra khách cũ, hiện **lịch sử 3 / 5 / 12 / 24 tháng** (mỗi tháng số lần, tổng rút / đáo, từng giao dịch) và **hiện luôn ảnh CCCD / thẻ đã lưu** (không cần chụp lại), mỗi ảnh có nút **🔄 Thay mới**. Hồ sơ khách cũng có mốc thời gian này. Dữ liệu cũ vẫn giữ đủ.
 - **Thẻ của khách:** tên thẻ như trong sổ, ngân hàng, **chỉ 4 số cuối**, hạn mức, ngày sao kê, ngày đáo, ảnh mặt trước của thẻ. Một khách có nhiều thẻ; thẻ của người thân / người quen (vợ, chồng, bố, mẹ, anh, chị, em…) ghi rõ **thẻ của ai**, **tên chủ thẻ** và chụp được **CCCD chủ thẻ**. Ghi giao dịch với thẻ mới thì thẻ tự được thêm; trong form giao dịch bấm chip thẻ để điền nhanh tên thẻ, ngày đáo, ngày sao kê.
 - **Giữ thẻ của khách:** mỗi thẻ ghi rõ **Mình đang giữ / Khách giữ**; nhận giữ hoặc trả thẻ có ngày, ghi chú, ảnh lúc giao nhận và lịch sử. Mục **Khách hàng → 💳 Thẻ đang giữ** liệt kê thẻ đang giữ với loại thẻ, ngân hàng, hạn mức, tổng rút / đáo, lần gần nhất và số ngày đã giữ.
 - **Nhắc lịch:**
@@ -79,6 +81,7 @@ Dán lại `Code.gs` / `Index.html`, rồi vào **Triển khai → Quản lý tr
 | `TheKhach` | thẻ của từng khách (tự tạo khi cập nhật) |
 | `TaiLieu` | danh sách ảnh CCCD / ảnh thẻ, trỏ tới file trong Drive (tự tạo khi cập nhật) |
 | `GiuThe` | lịch sử nhận giữ / trả thẻ (tự tạo khi cập nhật) |
+| `NhatKy` | lịch sử thêm / sửa / xóa (tự tạo khi cập nhật) |
 | `KetSo` | các lần kết số dư với C.Trâm (tự tạo khi cập nhật) |
 | `NhacLich` | trạng thái nhắc (Đã báo / Ngưng nhắc) và sự kiện Calendar đã tạo |
 

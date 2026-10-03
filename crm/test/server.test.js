@@ -648,14 +648,52 @@ test('returning customer: 5-month timeline of withdrawals per month', () => {
   tx('2026-07-10', 'Rút tiền', 10000000);
   tx('2026-04-10', 'Rút tiền', 9000000); // cũ hơn 5 tháng
   const h = call('customerDocs', { khach_id: c.id }).history;
-  assert.strictEqual(h.months.length, 5);
-  assert.deepStrictEqual(JSON.parse(JSON.stringify(h.months.map((m) => [m.thang, m.so_gd]))), [[10, 1], [9, 2], [8, 0], [7, 1], [6, 0]]);
+  assert.strictEqual(h.months.length, 24, 'keeps 24 months of history');
+  assert.deepStrictEqual(JSON.parse(JSON.stringify(h.months.slice(0, 7).map((m) => [m.thang, m.so_gd]))), [[10, 1], [9, 2], [8, 0], [7, 1], [6, 0], [5, 0], [4, 1]]);
   assert.strictEqual(h.months[1].rut, 15000000);
   assert.strictEqual(h.months[1].dao, 30000000);
   assert.strictEqual(h.months[1].items[0].ngay, '2026-09-06');
   assert.strictEqual(h.lan_cuoi.ngay, '2026-10-05');
   assert.strictEqual(h.tong_gd, 5);
   assert.strictEqual(call('customerDetail', { id: c.id }).history.months[0].so_tien, 20000000);
+});
+
+test('audit log of changes and Excel-like detailed ledger with export to a sheet', () => {
+  const { gas, fake, call } = fresh('2026-10-05');
+  const t = call('saveTransaction', { ngay: '2026-10-04', dich_vu: 'Đáo hạn', ten_khach: 'C.Lan', the: 'VCB', so_tien: 100000000, may: 'MB', phi_khach: 1.7, phi_may_text: '1.3' });
+  call('saveTransaction', Object.assign({}, t, { so_tien: 120000000 }));
+  const pay = call('savePayment', { ngay: '2026-10-04', loai: 'Ứng trước', so_tien: 50000000, ghi_chu: 'sáng' });
+  call('savePayment', { id: pay.id, ngay: '2026-10-04', loai: 'Ứng trước', so_tien: 60000000, ghi_chu: 'sáng' });
+  const t2 = call('saveTransaction', { ngay: '2026-10-05', dich_vu: 'Rút tiền', ten_khach: 'A.Bình', the: 'TP', so_tien: 10000000, phi_khach: 2, phi_may_text: '1.5' });
+  call('deleteTransaction', { id: t2.id });
+  const log = call('auditLog', {});
+  assert.strictEqual(log.length, 6);
+  assert.strictEqual(log[0].hanh_dong, 'Xóa');
+  const edit = log.find((r) => r.doi_tuong === 'Giao dịch' && r.hanh_dong === 'Sửa');
+  assert.match(edit.truoc, /100\.000\.000đ/);
+  assert.match(edit.sau, /120\.000\.000đ/);
+  const pedit = log.find((r) => r.doi_tuong.indexOf('Tiền') === 0 && r.hanh_dong === 'Sửa');
+  assert.match(pedit.truoc, /50\.000\.000đ/);
+  assert.match(pedit.sau, /60\.000\.000đ/);
+  assert.strictEqual(call('auditLog', { doi_tuong: 'Giao dịch' }).length, 4);
+
+  const d = call('congNoDetail', { from: '2026-10-01', to: '2026-10-05' });
+  assert.strictEqual(d.rows[0].loai, 'Số dư đầu kỳ');
+  assert.strictEqual(d.rows[1].loai, 'Ứng trước');
+  assert.strictEqual(d.rows[1].so_du, -60000000);
+  assert.strictEqual(d.rows[2].loai, 'Giao dịch');
+  assert.strictEqual(d.rows[2].so_du, -60000000 + (120000000 - 1560000));
+  assert.strictEqual(d.so_du_cuoi, call('refunds', {}).summary.so_du);
+  call('manualClosing', { ngay: '2026-10-04', so_du: 5000000 });
+  assert.strictEqual(call('auditLog', {})[0].hanh_dong, 'Nhập tay Mục 1');
+  const d2 = call('congNoDetail', { from: '2026-10-01', to: '' });
+  assert.strictEqual(d2.rows[d2.rows.length - 1].loai, 'Chốt sổ (nhập tay)');
+  assert.strictEqual(d2.so_du_cuoi, 5000000);
+  const ex = call('exportCongNo', { from: '2026-10-01', to: '2026-10-05' });
+  assert.match(ex.url, /#gid=/);
+  const sh = gas.SpreadsheetApp.getActive().getSheetByName('Xuất công nợ');
+  assert.strictEqual(sh._rows[1][0], 'Ngày');
+  assert.strictEqual(sh._rows[sh._rows.length - 1][1], 'TỔNG');
 });
 
 test('refund columns are added to an existing sheet; old rows get computed values', () => {

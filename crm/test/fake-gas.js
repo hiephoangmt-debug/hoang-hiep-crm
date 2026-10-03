@@ -44,6 +44,9 @@
     this.appendRow = function (row) { this._rows.push(row.slice()); };
     this.deleteRow = function (r) { this._rows.splice(r - 1, 1); };
     this.setFrozenRows = function () {};
+    this.clear = function () { this._rows = []; return this; };
+    this.getSheetId = function () { return 12345; };
+    this.autoResizeColumns = function () {};
   }
 
   var sheets = {};

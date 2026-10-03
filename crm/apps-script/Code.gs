@@ -12,6 +12,7 @@
  *   TheKhach  – thẻ của từng khách (ngân hàng, 4 số cuối, hạn mức, ngày sao kê, ngày đáo, ảnh thẻ)
  *   TaiLieu   – ảnh CCCD / ảnh thẻ; file ảnh nằm riêng tư trong Google Drive của chủ CRM
  *   GiuThe    – lịch sử nhận giữ / trả thẻ của khách (ngày, ghi chú, ảnh lúc giao nhận)
+ *   NhatKy    – lịch sử thêm / sửa / xóa giao dịch, tiền C.Trâm, chốt sổ (trước → sau)
  *
  * Công nợ với C.Trâm: mỗi giao dịch phát sinh tiền hoàn = số tiền − phí máy (tien_hoan = so_tien − chi_phi),
  *   đến hạn ngày GD + 1. Tiền C.Trâm chuyển/ứng (sheet DoiSoat) trừ dần vào các khoản cũ nhất trước.
@@ -31,11 +32,12 @@ var SHEETS = {
   TheKhach: ['id', 'khach_id', 'ten_the', 'ngan_hang', 'so_cuoi', 'han_muc', 'ngay_sao_ke', 'ngay_dao', 'ghi_chu', 'tao_luc', 'cap_nhat',
     'chu_the', 'quan_he', 'loai_the', 'giu_the', 'ngay_giu', 'ngay_tra'],
   GiuThe: ['id', 'the_id', 'khach_id', 'hanh_dong', 'ngay', 'ghi_chu', 'tao_luc'],
+  NhatKy: ['id', 'thoi_gian', 'doi_tuong', 'hanh_dong', 'ref_id', 'ngay', 'mo_ta', 'truoc', 'sau'],
   TaiLieu: ['id', 'khach_id', 'loai', 'the_id', 'file_id', 'ten_file', 'ghi_chu', 'tao_luc'],
   KetSo: ['id', 'ngay', 'tu_ngay', 'so_du_truoc', 'so_gd', 'so_tien', 'chi_phi', 'phat_sinh', 'da_chuyen', 'so_du', 'ghi_chu', 'tao_luc', 'nhap_tay']
 };
 // Sheet thêm ở bản cập nhật: tự tạo khi cần, không phải chạy lại setup().
-var AUTO_SHEETS = ['DoiSoat', 'KetSo', 'TheKhach', 'TaiLieu', 'GiuThe'];
+var AUTO_SHEETS = ['DoiSoat', 'KetSo', 'TheKhach', 'TaiLieu', 'GiuThe', 'NhatKy'];
 var DOC_TYPES = ['CCCD mặt trước', 'CCCD mặt sau', 'Ảnh thẻ', 'CCCD chủ thẻ', 'Ảnh giữ / trả thẻ', 'Khác'];
 // Loại ảnh lưu nhiều tấm (không thay ảnh cũ).
 var MULTI_DOC_TYPES = ['Khác', 'Ảnh giữ / trả thẻ'];
@@ -48,7 +50,7 @@ var CARD_RELATIONS = ['Chính chủ', 'Vợ', 'Chồng', 'Bố', 'Mẹ', 'Con', 
 
 // Cột lưu dạng chữ để Sheets không tự đổi ngày/số (mất số 0 đầu SĐT).
 var TEXT_COLUMNS = ['id', 'sdt', 'ngay', 'thoi_gian', 'tao_luc', 'cap_nhat', 'key', 'han', 'khach_id', 'phi_may_text',
-  'ngay_hoan', 'hoan_luc', 'tu_ngay', 'so_cuoi', 'file_id', 'the_id', 'sdt2'];
+  'ngay_hoan', 'hoan_luc', 'tu_ngay', 'so_cuoi', 'file_id', 'the_id', 'sdt2', 'thoi_gian', 'ref_id'];
 // Cột ngày dạng yyyy-MM-dd (nếu Sheets lỡ đổi thành Date thì đọc lại đúng dạng).
 var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan', 'tu_ngay'];
 // Kiểu tiền với C.Trâm. "Ứng trước"/"Hoàn tiền" làm giảm nợ; "Mình trả lại"/"Nợ cũ" làm tăng nợ;
@@ -275,6 +277,9 @@ function api(token, action, payload) {
     deletePayment: apiDeletePayment_,
     previewClose: function (p) { return statementAt_(p.ngay); },
     periodSummary: apiPeriodSummary_,
+    auditLog: apiAuditLog_,
+    congNoDetail: function (p) { return congNoDetail_(p.from, p.to); },
+    exportCongNo: apiExportCongNo_,
     listCards: function (p) { return cardsOf_(p.khach_id); },
     holdCard: apiHoldCard_,
     heldCards: apiHeldCards_,
@@ -282,7 +287,7 @@ function api(token, action, payload) {
     customerDocs: function (p) {
       var tx = readAll_('GiaoDich').filter(function (t) { return t.khach_id === p.khach_id; });
       return { cards: cardsOf_(p.khach_id), docs: readAll_('TaiLieu').filter(function (d) { return d.khach_id === p.khach_id; }),
-        history: monthHistory_(tx, 5) };
+        history: monthHistory_(tx, 24) };
     },
     saveCard: apiSaveCard_,
     deleteCard: apiDeleteCard_,
@@ -434,7 +439,7 @@ function apiCustomerDetail_(p) {
   var leads = readAll_('LienHe').filter(function (l) { return l.khach_id === p.id; }).reverse();
   var docs = readAll_('TaiLieu').filter(function (d) { return d.khach_id === p.id; });
   return { driveReady: driveReady_(), driveHelp: DRIVE_HELP, customer: c, transactions: tx, leads: leads, summary: summarize_(tx), cards: cardsOf_(p.id), docs: docs,
-    history: monthHistory_(tx, 5) };
+    history: monthHistory_(tx, 24) };
 }
 
 /**
@@ -481,11 +486,13 @@ function apiSaveTransaction_(t) {
       if (old && old.hoan_tt !== 'Đã nhận') assertOpen_(old.ngay);
       obj.id = t.id;
       updateObj_('GiaoDich', t.id, obj);
+      audit_('Giao dịch', 'Sửa', obj.id, obj.ngay, txText_(obj), old ? txText_(old) : '', txText_(obj));
     } else {
       obj.id = newId_();
       obj.tao_luc = nowStr_();
       obj.hoan_tt = 'Chưa nhận';
       appendObj_('GiaoDich', obj);
+      audit_('Giao dịch', 'Thêm', obj.id, obj.ngay, txText_(obj), '', txText_(obj));
     }
     obj.the_id = upsertCardFromTx_(obj) || '';
     return obj;
@@ -555,7 +562,9 @@ function apiDeleteTransaction_(p) {
   return withLock_(function () {
     var old = readAll_('GiaoDich').filter(function (x) { return x.id === p.id; })[0];
     if (old && old.hoan_tt !== 'Đã nhận') assertOpen_(old.ngay);
-    return deleteObj_('GiaoDich', p.id);
+    var ok = deleteObj_('GiaoDich', p.id);
+    if (ok && old) audit_('Giao dịch', 'Xóa', old.id, old.ngay, txText_(old), txText_(old), '');
+    return ok;
   });
 }
 
@@ -737,11 +746,14 @@ function apiSavePayment_(x) {
     if (x.id) {
       var old = readAll_('DoiSoat').filter(function (y) { return y.id === x.id; })[0];
       if (old) assertOpen_(old.ngay);
-      updateObj_('DoiSoat', x.id, obj); obj.id = x.id; return obj;
+      updateObj_('DoiSoat', x.id, obj); obj.id = x.id;
+      audit_('Tiền ' + refundName_(), 'Sửa', obj.id, obj.ngay, payText_(obj), old ? payText_(old) : '', payText_(obj));
+      return obj;
     }
     obj.id = newId_();
     obj.tao_luc = nowStr_();
     appendObj_('DoiSoat', obj);
+    audit_('Tiền ' + refundName_(), 'Thêm', obj.id, obj.ngay, payText_(obj), '', payText_(obj));
     return obj;
   });
 }
@@ -750,7 +762,9 @@ function apiDeletePayment_(p) {
   return withLock_(function () {
     var old = readAll_('DoiSoat').filter(function (y) { return y.id === p.id; })[0];
     if (old) assertOpen_(old.ngay);
-    return deleteObj_('DoiSoat', p.id);
+    var ok = deleteObj_('DoiSoat', p.id);
+    if (ok && old) audit_('Tiền ' + refundName_(), 'Xóa', old.id, old.ngay, payText_(old), payText_(old), '');
+    return ok;
   });
 }
 
@@ -977,6 +991,98 @@ function apiDeleteDoc_(p) {
   });
 }
 
+/* Nhật ký thay đổi, bảng chi tiết công nợ ------------------------------ */
+
+function audit_(doiTuong, hanhDong, refId, ngay, moTa, truoc, sau) {
+  try {
+    appendObj_('NhatKy', { id: newId_(), thoi_gian: nowStr_(), doi_tuong: doiTuong, hanh_dong: hanhDong, ref_id: refId || '',
+      ngay: ngay || '', mo_ta: String(moTa || '').slice(0, 500), truoc: String(truoc || '').slice(0, 500), sau: String(sau || '').slice(0, 500) });
+  } catch (e) { /* không để nhật ký làm hỏng thao tác chính */ }
+}
+function txText_(t) {
+  return fmtDmy_(t.ngay) + ' · ' + (t.ten_khach || '') + ' · ' + (t.the || '') + ' · ' + (t.dich_vu || '') + ' · ' + fmtMoney_(t.so_tien) +
+    ' · phí máy ' + (t.phi_may_text || t.phi_may || 0) + '% · hoàn ' + fmtMoney_(t.tien_hoan) + (t.may ? ' · máy ' + t.may : '');
+}
+function payText_(x) {
+  return fmtDmy_(x.ngay) + ' · ' + x.loai + ' ' + fmtMoney_(Math.abs(Number(x.so_tien) || 0)) + (x.ghi_chu ? ' · ' + x.ghi_chu : '');
+}
+
+function apiAuditLog_(p) {
+  var from = p.from || '', to = p.to || '9999-12-31';
+  return readAll_('NhatKy').filter(function (r) {
+    var d = String(r.thoi_gian).slice(0, 10);
+    return d >= from && d <= to && (!p.doi_tuong || String(r.doi_tuong).indexOf(p.doi_tuong) === 0);
+  }).reverse().slice(0, Number(p.limit) || 500);
+}
+
+/**
+ * Bảng chi tiết công nợ C.Trâm kiểu Excel: số dư đầu kỳ, rồi từng dòng theo ngày
+ * (tiền ứng / chuyển trước, giao dịch sau), số dư lũy kế sau mỗi dòng; dòng chốt sổ nếu có.
+ */
+function congNoDetail_(from, to) {
+  from = String(from || ''); to = String(to || '9999-12-31');
+  var st = periodStatement_(from || '0000-00-00', to);
+  var rows = [{ ngay: from || '', loai: 'Số dư đầu kỳ', khach: '', the: '', dich_vu: '', so_tien: '', phi_may: '', chi_phi: '', phat_sinh: '', chuyen: '',
+    so_du: st.so_du_truoc, ghi_chu: '' }];
+  var tx = readAll_('GiaoDich').filter(function (t) { return t.hoan_tt !== 'Đã nhận' && Number(t.tien_hoan) && t.ngay >= (from || '0000') && t.ngay <= to; });
+  var pays = readAll_('DoiSoat').filter(function (x) { return x.ngay >= (from || '0000') && x.ngay <= to; });
+  var closings = closings_().filter(function (c) { return c.ngay >= (from || '0000') && c.ngay <= to; });
+  var days = {};
+  tx.forEach(function (t) { (days[t.ngay] = days[t.ngay] || { tx: [], pay: [] }).tx.push(t); });
+  pays.forEach(function (x) { (days[x.ngay] = days[x.ngay] || { tx: [], pay: [] }).pay.push(x); });
+  closings.forEach(function (c) { days[c.ngay] = days[c.ngay] || { tx: [], pay: [] }; });
+  var bal = st.so_du_truoc;
+  var byClose = {};
+  closings.forEach(function (c) { byClose[c.ngay] = c; });
+  Object.keys(days).sort().forEach(function (d) {
+    days[d].pay.sort(function (a, b) { return String(a.tao_luc).localeCompare(String(b.tao_luc)); }).forEach(function (x) {
+      var tien = paymentSign_(x);
+      bal -= tien;
+      rows.push({ ngay: d, loai: x.loai, khach: '', the: '', dich_vu: '', so_tien: '', phi_may: '', chi_phi: '', phat_sinh: '',
+        chuyen: tien, so_du: bal, ghi_chu: x.ghi_chu || '', id: x.id, kind: 'pay' });
+    });
+    days[d].tx.sort(function (a, b) { return String(a.tao_luc).localeCompare(String(b.tao_luc)); }).forEach(function (t) {
+      bal += Number(t.tien_hoan) || 0;
+      rows.push({ ngay: d, loai: 'Giao dịch', khach: t.ten_khach, the: t.the, dich_vu: t.dich_vu, so_tien: Number(t.so_tien) || 0,
+        phi_may: t.phi_may, chi_phi: Number(t.chi_phi) || 0, phat_sinh: Number(t.tien_hoan) || 0, chuyen: '', so_du: bal,
+        ghi_chu: [t.may ? 'máy ' + t.may : '', t.ghi_chu].filter(String).join(' · '), id: t.id, kind: 'tx' });
+    });
+    var c = byClose[d];
+    if (c) {
+      if (c.nhap_tay) bal = Number(c.so_du) || 0; // số chốt nhập tay thay cho số tính
+      rows.push({ ngay: d, loai: c.nhap_tay ? 'Chốt sổ (nhập tay)' : 'Chốt sổ', khach: '', the: '', dich_vu: '', so_tien: '', phi_may: '', chi_phi: '',
+        phat_sinh: '', chuyen: '', so_du: Number(c.so_du) || 0, ghi_chu: c.ghi_chu || '', kind: 'close' });
+    }
+  });
+  var tong = { so_tien: 0, chi_phi: 0, phat_sinh: 0, chuyen: 0 };
+  rows.forEach(function (r) { ['so_tien', 'chi_phi', 'phat_sinh', 'chuyen'].forEach(function (k) { if (r[k] !== '') tong[k] += Number(r[k]) || 0; }); });
+  return { from: from, to: to === '9999-12-31' ? '' : to, rows: rows, tong: tong, so_du_cuoi: rows[rows.length - 1].so_du, refundName: refundName_() };
+}
+
+var EXPORT_SHEET = 'Xuất công nợ';
+
+/** Ghi bảng chi tiết công nợ ra một trang tính "Xuất công nợ" để xem / lọc / in như Excel. */
+function apiExportCongNo_(p) {
+  var d = congNoDetail_(p.from, p.to);
+  var ss = SpreadsheetApp.getActive();
+  var sh = ss.getSheetByName(EXPORT_SHEET) || ss.insertSheet(EXPORT_SHEET);
+  sh.clear();
+  var head = ['Ngày', 'Loại', 'Khách', 'Thẻ', 'Dịch vụ', 'Số tiền', 'Phí máy %', 'Phí máy', 'Tiền hoàn (+)', d.refundName + ' chuyển / ứng (−)', 'Số dư', 'Ghi chú'];
+  var data = [['Công nợ ' + d.refundName + ' – ' + (d.from ? 'từ ' + fmtDmy_(d.from) : 'từ đầu') + (d.to ? ' đến ' + fmtDmy_(d.to) : ' đến nay') + ' – xuất lúc ' + nowStr_(), '', '', '', '', '', '', '', '', '', '', ''], head];
+  d.rows.forEach(function (r) {
+    data.push([r.ngay ? fmtDmy_(r.ngay) : '', r.loai, r.khach, r.the, r.dich_vu, r.so_tien, r.phi_may, r.chi_phi, r.phat_sinh, r.chuyen, r.so_du, r.ghi_chu]);
+  });
+  data.push(['', 'TỔNG', '', '', '', d.tong.so_tien, '', d.tong.chi_phi, d.tong.phat_sinh, d.tong.chuyen, d.so_du_cuoi, '']);
+  sh.getRange(1, 1, data.length, head.length).setValues(data);
+  try {
+    sh.getRange(2, 1, 1, head.length).setFontWeight('bold').setBackground('#e8f0fb');
+    sh.getRange(3, 6, data.length - 2, 6).setNumberFormat('#,##0');
+    sh.setFrozenRows(2);
+    sh.autoResizeColumns(1, head.length);
+  } catch (e) { /* định dạng không bắt buộc */ }
+  return { url: ss.getUrl() + '#gid=' + sh.getSheetId(), rows: d.rows.length };
+}
+
 /* Kết số dư ----------------------------------------------------------- */
 
 function closings_() {
@@ -1147,6 +1253,7 @@ function apiCloseBalance_(p) {
     var obj = { id: newId_(), ngay: st.ngay, tu_ngay: st.tu_ngay, so_du_truoc: st.so_du_truoc, so_gd: st.so_gd, so_tien: st.so_tien,
       chi_phi: st.chi_phi, phat_sinh: st.phat_sinh, da_chuyen: st.da_chuyen, so_du: st.so_du, ghi_chu: String(p.ghi_chu || '').trim(), tao_luc: nowStr_() };
     appendObj_('KetSo', obj);
+    audit_('Chốt sổ', 'Chốt', obj.id, obj.ngay, 'Chốt đến hết ' + fmtDmy_(obj.ngay) + ': tồn ' + fmtMoney_(obj.so_du), '', 'Tồn ' + fmtMoney_(obj.so_du));
     obj.tin_nhan = st.tin_nhan;
     return obj;
   });
@@ -1168,6 +1275,7 @@ function apiManualClosing_(p) {
     var obj = { id: newId_(), ngay: ngay, tu_ngay: '', so_du_truoc: '', so_gd: 0, so_tien: 0, chi_phi: 0, phat_sinh: 0, da_chuyen: 0,
       so_du: n, ghi_chu: String(p.ghi_chu || '').trim(), tao_luc: nowStr_(), nhap_tay: 'x' };
     appendObj_('KetSo', obj);
+    audit_('Chốt sổ', 'Nhập tay Mục 1', obj.id, ngay, 'Chốt đến hết ' + fmtDmy_(ngay) + ': tồn ' + fmtMoney_(n) + (obj.ghi_chu ? ' (' + obj.ghi_chu + ')' : ''), '', 'Tồn ' + fmtMoney_(n));
     return obj;
   });
 }
@@ -1177,7 +1285,9 @@ function apiDeleteClosing_(p) {
   return withLock_(function () {
     var last = lastClosing_();
     if (!last || last.id !== p.id) throw new Error('Chỉ bỏ được lần kết số dư gần nhất.');
-    return deleteObj_('KetSo', p.id);
+    var ok = deleteObj_('KetSo', p.id);
+    if (ok) audit_('Chốt sổ', 'Bỏ chốt', last.id, last.ngay, 'Bỏ lần chốt đến hết ' + fmtDmy_(last.ngay), 'Tồn ' + fmtMoney_(last.so_du), '');
+    return ok;
   });
 }
 
