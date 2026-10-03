@@ -489,6 +489,18 @@ test('customer cards (last 4 digits only) and private CCCD / card photos in Driv
   assert.ok(call('bootstrap').cardRelations.includes('Vợ'));
 });
 
+test('missing Drive permission gives a clear how-to instead of a raw error', () => {
+  const { gas, call } = fresh('2026-10-05');
+  const c = call('saveCustomer', { ten: 'Chị Lan', sdt: '0905123456' });
+  const deny = () => { throw new Error('Exception: You do not have permission to call DriveApp.createFolder.'); };
+  gas.DriveApp = { createFolder: deny, getFolderById: deny, getFileById: deny };
+  gas.CacheService.getScriptCache().remove('drive_ok');
+  assert.throws(() => call('uploadDoc', { khach_id: c.id, loai: 'CCCD mặt trước', data: 'data:image/jpeg;base64,QUJD' }), /chưa được cấp quyền Google Drive.*setup/);
+  const d = call('customerDetail', { id: c.id });
+  assert.strictEqual(d.driveReady, false);
+  assert.match(gas.setup(), /CHƯA bật được lưu ảnh/);
+});
+
 test('refund columns are added to an existing sheet; old rows get computed values', () => {
   const { gas, fake } = load();
   fake.setToday('2026-10-02');

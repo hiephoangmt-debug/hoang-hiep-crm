@@ -548,7 +548,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   </form>
 </div>
 <div class="viewer hidden" id="viewer"><img alt="Ảnh"></div>
-<input type="file" id="img-pick" accept="image/*" class="hidden">
+<input type="file" id="img-pick" accept="image/*" style="position:fixed;left:-9999px;top:0;width:1px;height:1px;opacity:0" tabindex="-1" aria-hidden="true">
 
 <datalist id="dl-customers"></datalist>
 <datalist id="dl-cards"></datalist>
@@ -1507,7 +1507,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         '<div class="muted">' + [k.han_muc ? 'HM ' + short(k.han_muc) : '', k.ngay_sao_ke ? 'Sao kê ' + esc(k.ngay_sao_ke) : '', k.ngay_dao ? 'Đáo ' + esc(k.ngay_dao) : '', esc(k.ghi_chu)].filter(String).join(' · ') + '</div></div>' +
         '<button type="button" class="btn btn--ghost btn--sm" data-card="' + esc(k.id) + '">Sửa / 📷</button></div>';
     }).join('');
-    return '<h3>🪪 Căn cước công dân</h3><div class="docs">' + slot('CCCD mặt trước') + slot('CCCD mặt sau') + '</div>' +
+    return (d.driveReady === false ? '<div class="advice" style="margin-top:12px">⚠️ ' + esc(d.driveHelp) + '</div>' : '') +
+      '<h3>🪪 Căn cước công dân</h3><div class="docs">' + slot('CCCD mặt trước') + slot('CCCD mặt sau') + '</div>' +
       '<div class="row row--between" style="margin-top:14px"><h3 style="margin:0">💳 Thẻ của khách (' + d.cards.length + ')</h3>' +
       '<button type="button" class="btn btn--sm" data-card="new">+ Thêm thẻ</button></div>' +
       (cards || '<p class="muted">Chưa có thẻ. Ghi giao dịch là thẻ tự được thêm, hoặc bấm + Thêm thẻ.</p>');
@@ -1552,13 +1553,17 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   $('#img-pick').addEventListener('change', function () {
     var f = this.files && this.files[0], t = pickTarget;
     if (!f || !t) return;
+    var wait = document.createElement('div');
+    wait.className = 'toast'; wait.textContent = '⏳ Đang tải ảnh lên…';
+    document.body.appendChild(wait);
     compress(f).then(function (dataUrl) {
       return call('uploadDoc', { khach_id: t.khach_id, loai: t.loai, the_id: t.the_id || '', the_ten: t.the_ten || '', data: dataUrl }).then(function (doc) {
         docCache[doc.id] = dataUrl;
-        toast('Đã lưu ảnh ' + t.loai);
+        wait.remove();
+        toast('✅ Đã lưu ảnh ' + t.loai);
         if (t.after) t.after(doc);
       });
-    }).catch(fail);
+    }).catch(function (e) { wait.remove(); alert('Chưa lưu được ảnh.\n\n' + (e.message || e)); });
   });
 
   // Thẻ của khách

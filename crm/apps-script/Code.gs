@@ -91,7 +91,12 @@ function setup() {
   if (!props.getProperty('CALENDAR')) props.setProperty('CALENDAR', 'on');
   if (!props.getProperty('HOAN_NGUOI')) props.setProperty('HOAN_NGUOI', 'C.Trâm');
   installTriggers_();
+  // Tạo sẵn thư mục ảnh để Google hỏi luôn quyền Drive khi chạy setup.
+  var driveMsg = '';
+  try { docRoot_(); driveMsg = ' Đã bật lưu ảnh CCCD / thẻ (Google Drive).'; }
+  catch (e) { driveMsg = ' CHƯA bật được lưu ảnh: ' + e.message + ' – kiểm tra file appsscript.json có quyền drive.'; }
   var msg = pin ? 'Mã PIN đăng nhập CRM: ' + pin + ' (đổi trong mục Cài đặt).' : 'Đã có mã PIN, giữ nguyên.';
+  msg += driveMsg;
   Logger.log(msg);
   return msg;
 }
@@ -358,7 +363,7 @@ function apiCustomerDetail_(p) {
   var tx = readAll_('GiaoDich').filter(function (t) { return t.khach_id === p.id; }).sort(byDateDesc_);
   var leads = readAll_('LienHe').filter(function (l) { return l.khach_id === p.id; }).reverse();
   var docs = readAll_('TaiLieu').filter(function (d) { return d.khach_id === p.id; });
-  return { customer: c, transactions: tx, leads: leads, summary: summarize_(tx), cards: cardsOf_(p.id), docs: docs };
+  return { driveReady: driveReady_(), driveHelp: DRIVE_HELP, customer: c, transactions: tx, leads: leads, summary: summarize_(tx), cards: cardsOf_(p.id), docs: docs };
 }
 
 function apiUpdateLead_(p) {
@@ -712,15 +717,34 @@ function upsertCardFromTx_(t) {
   if (Object.keys(upd).length) { upd.cap_nhat = now; updateObj_('TheKhach', c.id, upd); }
 }
 
-/** Thư mục riêng tư trong Drive của chủ CRM: <gốc>/<tên khách – SĐT>. Không chia sẻ cho ai. */
-function docFolder_(khach) {
+var DRIVE_HELP = 'CRM chưa được cấp quyền Google Drive để lưu ảnh. Cách bật: mở Apps Script → dán đủ file appsscript.json mới → ' +
+  'chọn hàm setup → bấm Chạy → Cho phép (Allow) → rồi Triển khai "Phiên bản mới".';
+
+function docRoot_() {
   var props = PropertiesService.getScriptProperties();
   var root = null, id = props.getProperty('DOC_FOLDER');
-  if (id) { try { root = DriveApp.getFolderById(id); } catch (e) { root = null; } }
+  if (id) { try { root = DriveApp.getFolderById(id); } catch (e) { if (isAuthError_(e)) throw e; root = null; } }
   if (!root) {
     root = DriveApp.createFolder('CRM Thẻ Tín Dụng – Hồ sơ khách (riêng tư)');
     props.setProperty('DOC_FOLDER', root.getId());
   }
+  return root;
+}
+function isAuthError_(e) { return /permission|quyền|authoriz|scope|DriveApp/i.test(String(e && e.message || e)); }
+/** Gọi Drive; lỗi do chưa cấp quyền thì báo hướng dẫn dễ hiểu. */
+function withDrive_(fn) {
+  try { return fn(); } catch (e) { if (isAuthError_(e)) throw new Error(DRIVE_HELP); throw e; }
+}
+/** Kiểm tra quyền Drive (lưu kết quả 10 phút) để giao diện báo trước. */
+function driveReady_() {
+  var cache = CacheService.getScriptCache();
+  if (cache.get('drive_ok') === '1') return true;
+  try { docRoot_(); cache.put('drive_ok', '1', 600); return true; } catch (e) { return false; }
+}
+
+/** Thư mục riêng tư trong Drive của chủ CRM: <gốc>/<tên khách – SĐT>. Không chia sẻ cho ai. */
+function docFolder_(khach) {
+  var root = docRoot_();
   var name = (khach.ten || 'Khách') + (khach.sdt ? ' – ' + khach.sdt : '') + ' (' + khach.id + ')';
   var it = root.getFoldersByName(name);
   return it.hasNext() ? it.next() : root.createFolder(name);
@@ -740,7 +764,7 @@ function apiUploadDoc_(p) {
   var ext = m[1] === 'image/png' ? '.png' : m[1] === 'image/webp' ? '.webp' : '.jpg';
   var name = loai + (p.the_ten ? ' ' + p.the_ten : '') + ' – ' + nowStr_().replace(/[: ]/g, '-') + ext;
   return withLock_(function () {
-    var file = docFolder_(khach).createFile(Utilities.newBlob(Utilities.base64Decode(m[2]), m[1], name));
+    var file = withDrive_(function () { return docFolder_(khach).createFile(Utilities.newBlob(Utilities.base64Decode(m[2]), m[1], name)); });
     readAll_('TaiLieu').filter(function (d) {
       return d.khach_id === khach.id && d.loai === loai && loai !== 'Khác' && (CARD_DOC_TYPES.indexOf(loai) < 0 || d.the_id === p.the_id);
     }).forEach(function (d) { trashDoc_(d); });
@@ -754,7 +778,7 @@ function apiUploadDoc_(p) {
 function apiGetDoc_(p) {
   var d = readAll_('TaiLieu').filter(function (x) { return x.id === p.id; })[0];
   if (!d) throw new Error('Không tìm thấy ảnh.');
-  var blob = DriveApp.getFileById(d.file_id).getBlob();
+  var blob = withDrive_(function () { return DriveApp.getFileById(d.file_id).getBlob(); });
   return { id: d.id, loai: d.loai, dataUrl: 'data:' + blob.getContentType() + ';base64,' + Utilities.base64Encode(blob.getBytes()) };
 }
 
