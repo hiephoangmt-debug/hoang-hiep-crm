@@ -82,9 +82,9 @@ function hh_seo_title_parts( $parts ) {
 	} elseif ( hh_seo_special_key() ) {
 		$parts['title'] = hh_special_title( hh_seo_special_key() ) . ' ' . wp_date( 'm/Y' );
 	} elseif ( is_post_type_archive( 'du-an' ) ) {
-		$parts['title'] = 'Dự án bất động sản Đà Nẵng';
+		$parts['title'] = hh_pillar_heading() . ' – Căn hộ, biệt thự, đất nền';
 	} elseif ( is_tax( 'loai-du-an' ) ) {
-		$parts['title'] = 'Dự án ' . mb_strtolower( single_term_title( '', false ) ) . ' Đà Nẵng';
+		$parts['title'] = hh_pillar_heading( get_queried_object() );
 	} elseif ( is_tax( 'khu-vuc' ) ) {
 		$parts['title'] = 'Bất động sản ' . single_term_title( '', false ) . ', Đà Nẵng';
 	} elseif ( is_singular( 'bat-dong-san' ) ) {
@@ -294,11 +294,20 @@ function hh_seo_image_alt( $attr, $attachment ) {
  * Structured data (schema.org JSON-LD)
  * ---------------------------------------------------------------------- */
 
+/** Cách gọi khác của thương hiệu (tên đảo, tên miền) để Google gộp về một người. */
+function hh_brand_aliases() {
+	$name  = trim( (string) hoanghiep_opt( 'hh_person_name' ) );
+	$parts = preg_split( '/\s+/u', $name );
+	$alias = array( count( $parts ) === 2 ? $parts[1] . ' ' . $parts[0] : '', $name . ' Đà Nẵng', $name . ' BĐS Đà Nẵng', 'HiepHoangMT' );
+	return array_values( array_unique( array_filter( $alias ) ) );
+}
+
 function hh_schema_person() {
 	$person = array(
 		'@type'       => 'Person',
 		'@id'         => home_url( '/#person' ),
 		'name'        => hoanghiep_opt( 'hh_person_name' ),
+		'alternateName' => hh_brand_aliases(),
 		'jobTitle'    => hoanghiep_opt( 'hh_person_title' ),
 		'description' => hoanghiep_opt( 'hh_person_bio' ),
 		'url'         => home_url( '/gioi-thieu/' ),
@@ -337,6 +346,7 @@ function hh_schema_agent() {
 		'@type'       => 'RealEstateAgent',
 		'@id'         => home_url( '/#agent' ),
 		'name'        => hoanghiep_opt( 'hh_person_name' ),
+		'alternateName' => hh_brand_aliases(),
 		'description' => hoanghiep_opt( 'hh_person_bio' ),
 		'slogan'      => hoanghiep_opt( 'hh_person_slogan' ),
 		'url'         => home_url( '/' ),

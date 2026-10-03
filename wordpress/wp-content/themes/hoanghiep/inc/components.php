@@ -428,3 +428,67 @@ function hh_market_cards( $current = '' ) {
 	}
 	echo '</div>';
 }
+
+/**
+ * Trang trụ cột (pillar) theo từ khóa chính: tiêu đề H1 / title cho trang Dự án và các loại dự án.
+ * VD: /loai-du-an/cao-tang/ → "Căn hộ Đà Nẵng – các dự án đang mở bán 2026".
+ */
+function hh_pillar_heading( $term = null ) {
+	$year = wp_date( 'Y' );
+	if ( ! $term ) {
+		return 'Dự án bất động sản Đà Nẵng ' . $year;
+	}
+	$map = array(
+		'cao-tang'              => 'Căn hộ Đà Nẵng – các dự án đang mở bán ' . $year,
+		'can-ho-so-huu-lau-dai' => 'Căn hộ sở hữu lâu dài Đà Nẵng ' . $year,
+		'can-ho-dich-vu'        => 'Căn hộ dịch vụ, condotel Đà Nẵng ' . $year,
+		'thap-tang'             => 'Biệt thự, nhà phố, đất nền Đà Nẵng ' . $year,
+		'biet-thu'              => 'Biệt thự nghỉ dưỡng Đà Nẵng – Hội An ' . $year,
+		'dat-nen'               => 'Dự án đất nền Đà Nẵng ' . $year,
+		'shophouse'             => 'Nhà phố, shophouse Đà Nẵng ' . $year,
+		'to-hop'                => 'Tổ hợp dự án bất động sản Đà Nẵng ' . $year,
+	);
+	return $map[ $term->slug ] ?? 'Dự án ' . mb_strtolower( $term->name ) . ' Đà Nẵng ' . $year;
+}
+
+/**
+ * Cụm chủ đề cho bài viết: link về trang dự án (trang chính), tổ hợp, bài cùng dự án, trang trụ cột, khu vực, liên hệ.
+ * Returns [[label, url], ...].
+ */
+function hh_post_cluster_links( $post_id ) {
+	$links   = array();
+	$project = (int) get_post_meta( $post_id, 'hh_post_project', true );
+	if ( $project && 'publish' === get_post_status( $project ) ) {
+		$name    = get_the_title( $project );
+		$links[] = array( $name . ' – tổng quan, giá bán, mặt bằng, chính sách', get_permalink( $project ) );
+		$parent  = (int) get_post_meta( $project, 'hh_p_parent', true );
+		if ( $parent && 'publish' === get_post_status( $parent ) ) {
+			$links[] = array( get_the_title( $parent ) . ' – toàn bộ phân khu', get_permalink( $parent ) );
+		}
+		$siblings = get_posts( array( 'post_type' => 'post', 'numberposts' => 4, 'post__not_in' => array( $post_id ), 'meta_key' => 'hh_post_project', 'meta_value' => $project ) ); // phpcs:ignore
+		foreach ( $siblings as $p ) {
+			$links[] = array( get_the_title( $p ), get_permalink( $p ) );
+		}
+		$types = get_the_terms( $project, 'loai-du-an' ) ?: array();
+		foreach ( $types as $t ) {
+			$top     = $t->parent ? get_term( $t->parent, 'loai-du-an' ) : $t;
+			$links[] = array( hh_pillar_heading( $top ), get_term_link( $top ) );
+			break;
+		}
+		$areas = get_the_terms( $project, 'khu-vuc' ) ?: array();
+		if ( $areas ) {
+			$links[] = array( 'Dự án, nhà đất ' . $areas[0]->name, get_term_link( $areas[0] ) );
+		}
+	} else {
+		$cao = get_term_by( 'slug', 'cao-tang', 'loai-du-an' );
+		$links[] = array( hh_pillar_heading(), get_post_type_archive_link( 'du-an' ) );
+		if ( $cao ) {
+			$links[] = array( hh_pillar_heading( $cao ), get_term_link( $cao ) );
+		}
+		if ( function_exists( 'hh_deal_url' ) ) {
+			$links[] = array( 'Mua bán nhà đất Đà Nẵng – bảng giá thị trường', hh_deal_url( 'ban' ) );
+		}
+	}
+	$links[] = array( 'Liên hệ ' . hoanghiep_opt( 'hh_person_name' ) . ' – tư vấn, nhận bảng giá', home_url( '/lien-he/' ) );
+	return array_values( array_filter( $links, static fn( $l ) => $l[1] && ! is_wp_error( $l[1] ) ) );
+}

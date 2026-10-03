@@ -84,6 +84,15 @@ while ( have_posts() ) :
 				</div>
 			<?php endif; ?>
 
+			<nav class="see-also" aria-label="Xem thêm">
+				<p class="see-also__title">Xem thêm</p>
+				<ul>
+					<?php foreach ( hh_post_cluster_links( $id ) as list( $label, $url ) ) : ?>
+						<li><a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $label ); ?></a></li>
+					<?php endforeach; ?>
+				</ul>
+			</nav>
+
 			<div class="share">
 				<span>Chia sẻ bài viết:</span>
 				<a class="share__btn share__btn--fb" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo esc_attr( $share ); ?>" target="_blank" rel="noopener">Facebook</a>

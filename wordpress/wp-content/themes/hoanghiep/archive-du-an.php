@@ -8,7 +8,7 @@ $areas    = get_terms( array( 'taxonomy' => 'khu-vuc', 'hide_empty' => false ) )
 $types    = hh_project_groups();
 $term     = is_tax( 'loai-du-an' ) ? get_queried_object() : null;
 $base     = $term ? get_term_link( $term ) : get_post_type_archive_link( 'du-an' );
-$title    = $term ? 'Dự án ' . mb_strtolower( $term->name ) . ' Đà Nẵng' : 'Dự án Đà Nẵng';
+$title    = hh_pillar_heading( $term );
 $group    = $term ? ( $term->parent ? get_term( $term->parent, 'loai-du-an' ) : $term ) : null;
 $subtypes = $group ? get_terms( array( 'taxonomy' => 'loai-du-an', 'hide_empty' => false, 'parent' => $group->term_id, 'orderby' => 'term_id' ) ) : array();
 ?>
