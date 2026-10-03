@@ -174,14 +174,19 @@ function hh_project_products( $post_id = null ) {
 	$zones   = hh_table( 'hh_p_zones', 4, $post_id );
 	$text    = mb_strtolower( hh_meta( 'hh_p_type', $post_id ) . ' ' . implode( ' ', wp_list_pluck( $zones, 1 ) ) );
 	$has     = static fn( $words ) => (bool) array_filter( (array) $words, static fn( $w ) => false !== mb_strpos( $text, $w ) );
+	// Thấp tầng: bỏ các cụm của cao tầng ("shophouse khối đế", "Sky Villa") để không hiện nhầm mục nhà phố / biệt thự.
+	$podium  = static fn( $z ) => false !== mb_strpos( mb_strtolower( implode( ' ', $z ) ), 'khối đế' );
+	$low     = mb_strtolower( hh_meta( 'hh_p_type', $post_id ) . ' ' . implode( ' ', wp_list_pluck( array_filter( $zones, static fn( $z ) => ! $podium( $z ) ), 1 ) ) );
+	$low     = str_replace( array( 'shophouse khối đế', 'shop khối đế', 'sky villa' ), ' ', $low );
+	$has_low = static fn( $words ) => (bool) array_filter( (array) $words, static fn( $w ) => false !== mb_strpos( $low, $w ) );
 
 	$defs = array(
 		'can-ho'    => array( 'Căn hộ', array( 'Loại căn', 'Diện tích', 'Phòng ngủ', 'Giá tham khảo' ), array_intersect( $terms, array( 'can-ho-so-huu-lau-dai', 'can-ho-dich-vu' ) ) || $has( array( 'căn hộ', 'condotel' ) ), array( 'căn hộ', 'cao tầng' ) ),
 		'shop'      => array( 'Shop khối đế', hh_special_columns( 'shop' ), $has( array( 'shop khối đế', 'khối đế' ) ), array( 'shop', 'khối đế' ) ),
 		'penthouse' => array( 'Penthouse', hh_special_columns( 'penthouse' ), $has( 'penthouse' ), array( 'penthouse' ) ),
 		'duplex'    => array( 'Duplex', hh_special_columns( 'duplex' ), $has( 'duplex' ), array( 'duplex' ) ),
-		'villa'     => array( 'Biệt thự / Villa', hh_special_columns( 'villa' ), in_array( 'biet-thu', $terms, true ) || $has( array( 'biệt thự', 'villa' ) ), array( 'biệt thự', 'villa' ) ),
-		'nha-pho'   => array( 'Nhà phố – Shophouse', hh_special_columns( 'nha-pho' ), in_array( 'shophouse', $terms, true ) || $has( array( 'nhà phố', 'shophouse', 'liền kề' ) ), array( 'nhà phố', 'shophouse', 'liền kề' ) ),
+		'villa'     => array( 'Biệt thự / Villa', hh_special_columns( 'villa' ), in_array( 'biet-thu', $terms, true ) || $has_low( array( 'biệt thự', 'villa' ) ), array( 'biệt thự', 'villa' ) ),
+		'nha-pho'   => array( 'Nhà phố – Shophouse', hh_special_columns( 'nha-pho' ), in_array( 'shophouse', $terms, true ) || $has_low( array( 'nhà phố', 'shophouse', 'liền kề' ) ), array( 'nhà phố', 'shophouse', 'liền kề' ) ),
 		'dat-nen'   => array( 'Block đất nền', hh_special_columns( 'dat-nen' ), in_array( 'dat-nen', $terms, true ) || $has( 'đất nền' ), array( 'đất nền', 'lô đất' ) ),
 	);
 
@@ -202,6 +207,12 @@ function hh_project_products( $post_id = null ) {
 				$zones,
 				static function ( $z ) use ( $words ) {
 					$t = mb_strtolower( $z[0] . ' ' . $z[1] );
+					if ( array_intersect( $words, array( 'biệt thự', 'villa', 'nhà phố', 'shophouse', 'liền kề' ) ) ) {
+						if ( false !== mb_strpos( mb_strtolower( implode( ' ', $z ) ), 'khối đế' ) ) {
+							return false;
+						}
+						$t = str_replace( array( 'shophouse khối đế', 'shop khối đế', 'sky villa' ), ' ', $t );
+					}
 					foreach ( $words as $w ) {
 						if ( false !== mb_strpos( $t, $w ) ) {
 							return true;
