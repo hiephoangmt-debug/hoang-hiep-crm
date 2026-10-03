@@ -417,6 +417,10 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       <label class="f">Thẻ / ví<input name="the" list="dl-cards" required placeholder="VD: SC, TP, Momo"></label>
       <label class="f">Số tiền <span class="hint">8.999 = 8.999.000đ · 110tr</span><input name="so_tien_text" required inputmode="decimal"></label>
       <div class="full chips" id="tx-cards" style="margin-top:-4px"></div>
+      <div class="full" id="tx-photos-box">
+        <div class="hint" style="font-weight:700;color:var(--text);margin-bottom:6px">📷 Ảnh khách &amp; thẻ <span class="hint" style="font-weight:400">– chụp luôn khi làm, lưu cùng giao dịch</span></div>
+        <div class="docs" id="tx-photos"></div>
+      </div>
       <label class="f" data-for="dao">Ngày đáo (hạn thanh toán)<input type="number" name="ngay_dao" min="1" max="31"></label>
       <label class="f" data-for="rut">Ngày sao kê<input type="number" name="ngay_sao_ke" min="1" max="31"></label>
       <label class="f">Máy POS<input name="may" list="dl-machines" placeholder="VD: MB Vân"></label>
@@ -807,6 +811,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     if (!f.ngay_hoan.value) f.ngay_hoan.value = addDays(f.ngay.value, 1);
     $('#tx-title').textContent = t.id ? 'Sửa giao dịch' : 'Thêm giao dịch';
     $('[data-act=delete-tx]').classList.toggle('hidden', !t.id);
+    S.txPhotos = {};
+    S.txDocs = [];
     updateTxForm();
     loadTxCards();
     $('#tx-modal').classList.remove('hidden');
@@ -853,7 +859,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       if (c && c.sdt && !txForm.elements.sdt.value) txForm.elements.sdt.value = c.sdt;
       loadTxCards();
     }
-    if (e.target.name === 'the') markTxCard();
+    if (e.target.name === 'the') { markTxCard(); renderTxPhotos(); }
     updateTxForm();
   });
   txForm.addEventListener('change', updateTxForm);
@@ -873,11 +879,12 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     };
     var btn = txForm.querySelector('[type=submit]');
     btn.disabled = true;
-    call('saveTransaction', payload).then(function () {
+    var hasPhotos = Object.keys(S.txPhotos || {}).length > 0;
+    call('saveTransaction', payload).then(function (saved) {
       btn.disabled = false;
       closeModals();
-      toast('Đã lưu giao dịch');
-      reboot().then(function () { show(S.tab); });
+      if (!hasPhotos) toast('Đã lưu giao dịch');
+      return uploadTxPhotos(saved).then(function () { return reboot(); }).then(function () { show(S.tab); });
     }).catch(function (err) { btn.disabled = false; fail(err); });
   });
 
@@ -1553,6 +1560,10 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   $('#img-pick').addEventListener('change', function () {
     var f = this.files && this.files[0], t = pickTarget;
     if (!f || !t) return;
+    if (t.pending) {
+      compress(f).then(function (dataUrl) { S.txPhotos[t.loai] = dataUrl; renderTxPhotos(); }).catch(fail);
+      return;
+    }
     var wait = document.createElement('div');
     wait.className = 'toast'; wait.textContent = '⏳ Đang tải ảnh lên…';
     document.body.appendChild(wait);
@@ -1613,15 +1624,49 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   // Chip thẻ trong form giao dịch: bấm để điền tên thẻ, ngày đáo, ngày sao kê.
   function loadTxCards() {
     var id = txForm.elements.khach_id.value, box = $('#tx-cards');
-    if (!id) { S.txCards = []; box.innerHTML = ''; return; }
-    call('listCards', { khach_id: id }).then(function (cards) {
+    if (!id) { S.txCards = []; S.txDocs = []; box.innerHTML = ''; renderTxPhotos(); return; }
+    call('customerDocs', { khach_id: id }).then(function (r) {
+      var cards = r.cards;
       S.txCards = cards;
+      S.txDocs = r.docs;
+      renderTxPhotos();
       box.innerHTML = cards.map(function (k) {
         return '<button type="button" class="chip" data-txcard="' + esc(k.id) + '">💳 ' + esc(k.ten_the) + (k.so_cuoi ? ' ·' + esc(k.so_cuoi) : '') +
           (k.quan_he && k.quan_he !== 'Chính chủ' ? ' <small>(' + esc(k.quan_he) + ')</small>' : '') + '</button>';
       }).join('') + '<button type="button" class="chip" data-card="new-tx">+ Thẻ / 📷</button>';
       markTxCard();
     }).catch(function () {});
+  }
+  // Ô ảnh trong form giao dịch: ảnh chụp mới giữ tạm, bấm Lưu giao dịch xong mới gửi lên.
+  var TX_PHOTO_TYPES = ['CCCD mặt trước', 'CCCD mặt sau', 'Ảnh thẻ'];
+  function renderTxPhotos() {
+    var the = txForm.elements.the.value.trim().toLowerCase();
+    var card = (S.txCards || []).filter(function (k) { return k.ten_the.toLowerCase() === the; })[0];
+    $('#tx-photos').innerHTML = TX_PHOTO_TYPES.map(function (loai) {
+      var pending = (S.txPhotos || {})[loai];
+      var have = loai === 'Ảnh thẻ' ? (card && card.anh_id) : ((S.txDocs || []).filter(function (d) { return d.loai === loai; })[0] || {}).id;
+      var img = pending ? '<img class="doc__img" alt="Ảnh" src="' + pending + '">' : docImg(have, 'doc__img', loai === 'Ảnh thẻ' ? '💳 Chưa có ảnh' : '🪪 Chưa có ảnh');
+      return '<div class="doc">' + img + '<div class="doc__label">' + loai + (pending ? ' <span class="badge badge--warn">chờ lưu</span>' : have ? ' <span class="badge badge--ok">đã có</span>' : '') + '</div>' +
+        '<div class="row"><button type="button" class="btn btn--sm" data-txpick="' + loai + '" data-cap="1">📷 Chụp</button>' +
+        '<button type="button" class="btn btn--ghost btn--sm" data-txpick="' + loai + '">📁 Tải</button>' +
+        (pending ? '<button type="button" class="btn btn--danger btn--sm" data-txunpick="' + loai + '">✕</button>' : '') + '</div></div>';
+    }).join('');
+    hydrateDocs($('#tx-photos'));
+  }
+  function uploadTxPhotos(saved) {
+    var todo = TX_PHOTO_TYPES.filter(function (l) { return (S.txPhotos || {})[l]; });
+    if (!todo.length) return Promise.resolve();
+    var photos = S.txPhotos;
+    S.txPhotos = {};
+    var wait = document.createElement('div');
+    wait.className = 'toast'; wait.textContent = '⏳ Đang lưu ' + todo.length + ' ảnh…';
+    document.body.appendChild(wait);
+    return todo.reduce(function (p, loai) {
+      return p.then(function () {
+        return call('uploadDoc', { khach_id: saved.khach_id, loai: loai, the_id: loai === 'Ảnh thẻ' ? saved.the_id : '', the_ten: saved.the, data: photos[loai] });
+      });
+    }, Promise.resolve()).then(function () { wait.remove(); toast('✅ Đã lưu giao dịch và ' + todo.length + ' ảnh'); },
+      function (e) { wait.remove(); alert('Giao dịch đã lưu nhưng chưa lưu được ảnh.\n\n' + (e.message || e)); });
   }
   function markTxCard() {
     var v = txForm.elements.the.value.trim().toLowerCase();
@@ -1654,6 +1699,14 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       }
       return;
     }
+    var tp = e.target.closest('[data-txpick]');
+    if (tp) {
+      if (tp.dataset.txpick === 'Ảnh thẻ' && !txForm.elements.the.value.trim()) return toast('Nhập tên thẻ (ô Thẻ / ví) trước khi chụp ảnh thẻ', true);
+      pickImage(!!tp.dataset.cap, { pending: true, loai: tp.dataset.txpick });
+      return;
+    }
+    var tu = e.target.closest('[data-txunpick]');
+    if (tu) { delete S.txPhotos[tu.dataset.txunpick]; renderTxPhotos(); return; }
     var dd = e.target.closest('[data-deldoc]');
     if (dd) {
       if (confirm('Xóa ảnh này?')) call('deleteDoc', { id: dd.dataset.deldoc }).then(function () { toast('Đã xóa ảnh'); refreshCustDocs(); }).catch(fail);
@@ -1681,7 +1734,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         f.the.value = k.ten_the;
         if (k.ngay_dao) f.ngay_dao.value = k.ngay_dao;
         if (k.ngay_sao_ke) f.ngay_sao_ke.value = k.ngay_sao_ke;
-        updateTxForm(); markTxCard();
+        updateTxForm(); markTxCard(); renderTxPhotos();
       }
       return;
     }

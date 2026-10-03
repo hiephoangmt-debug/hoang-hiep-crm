@@ -270,6 +270,9 @@ function api(token, action, payload) {
     previewClose: function (p) { return statementAt_(p.ngay); },
     periodSummary: apiPeriodSummary_,
     listCards: function (p) { return cardsOf_(p.khach_id); },
+    customerDocs: function (p) {
+      return { cards: cardsOf_(p.khach_id), docs: readAll_('TaiLieu').filter(function (d) { return d.khach_id === p.khach_id; }) };
+    },
     saveCard: apiSaveCard_,
     deleteCard: apiDeleteCard_,
     uploadDoc: apiUploadDoc_,
@@ -395,7 +398,7 @@ function apiSaveTransaction_(t) {
       obj.hoan_tt = 'Chưa nhận';
       appendObj_('GiaoDich', obj);
     }
-    upsertCardFromTx_(obj);
+    obj.the_id = upsertCardFromTx_(obj) || '';
     return obj;
   });
 }
@@ -707,14 +710,16 @@ function upsertCardFromTx_(t) {
   var c = readAll_('TheKhach').filter(function (x) { return x.khach_id === t.khach_id && normName_(x.ten_the) === normName_(t.the); })[0];
   var now = nowStr_();
   if (!c) {
-    appendObj_('TheKhach', { id: newId_(), khach_id: t.khach_id, ten_the: t.the, ngan_hang: '', so_cuoi: '', han_muc: '',
+    var id = newId_();
+    appendObj_('TheKhach', { id: id, khach_id: t.khach_id, ten_the: t.the, ngan_hang: '', so_cuoi: '', han_muc: '',
       ngay_sao_ke: t.ngay_sao_ke || '', ngay_dao: t.ngay_dao || '', ghi_chu: '', tao_luc: now, cap_nhat: now, chu_the: '', quan_he: 'Chính chủ' });
-    return;
+    return id;
   }
   var upd = {};
   if (t.ngay_dao && !c.ngay_dao) upd.ngay_dao = t.ngay_dao;
   if (t.ngay_sao_ke && !c.ngay_sao_ke) upd.ngay_sao_ke = t.ngay_sao_ke;
   if (Object.keys(upd).length) { upd.cap_nhat = now; updateObj_('TheKhach', c.id, upd); }
+  return c.id;
 }
 
 var DRIVE_HELP = 'CRM chưa được cấp quyền Google Drive để lưu ảnh. Cách bật: mở Apps Script → dán đủ file appsscript.json mới → ' +

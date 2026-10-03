@@ -441,6 +441,14 @@ test('customer cards (last 4 digits only) and private CCCD / card photos in Driv
   call('saveTransaction', { ngay: '2026-10-05', dich_vu: 'Đáo hạn', khach_id: c.id, ten_khach: 'Chị Lan', the: 'SC', ngay_dao: 4, so_tien: 10000000, phi_khach: 1.7, phi_may_text: '1.3' });
   let cards = call('listCards', { khach_id: c.id });
   assert.strictEqual(cards.length, 1);
+  // Khách mới ngay trong giao dịch: trả về khach_id + the_id để gắn ảnh chụp lúc làm
+  const nt = call('saveTransaction', { ngay: '2026-10-05', dich_vu: 'Rút tiền', ten_khach: 'Khách mới', sdt: '0906000111', the: 'MB', so_tien: 5000000, phi_khach: 2, phi_may_text: '1.5' });
+  assert.ok(nt.khach_id && nt.the_id);
+  call('uploadDoc', { khach_id: nt.khach_id, loai: 'Ảnh thẻ', the_id: nt.the_id, data: 'data:image/jpeg;base64,QUJD' });
+  call('uploadDoc', { khach_id: nt.khach_id, loai: 'CCCD mặt trước', data: 'data:image/jpeg;base64,QUJD' });
+  const cd = call('customerDocs', { khach_id: nt.khach_id });
+  assert.strictEqual(cd.docs.length, 2);
+  assert.ok(cd.cards[0].anh_id);
   assert.strictEqual(cards[0].ten_the, 'SC');
   assert.strictEqual(cards[0].ngay_dao, 4);
   // Nhập thêm thông tin: số thẻ đầy đủ chỉ giữ 4 số cuối
