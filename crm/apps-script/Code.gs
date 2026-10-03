@@ -7,8 +7,11 @@
  *   GiaoDich  – sổ giao dịch (đáo hạn / rút tiền / ví trả sau)
  *   NhacLich  – trạng thái nhắc: đáo hạn (7→5 ngày trước hạn) và rút tiền sau ngày sao kê
  *
- * Tiền hoàn: mỗi giao dịch, người giữ máy (mặc định C.Trâm) hoàn lại hôm sau
- *   tiền hoàn = số tiền − phí máy (tien_hoan = so_tien − chi_phi), ngày hoàn = ngày GD + 1.
+ *   DoiSoat   – tiền C.Trâm (người giữ máy) chuyển / ứng trước cho mình, không theo từng giao dịch
+ *
+ * Công nợ với C.Trâm: mỗi giao dịch phát sinh tiền hoàn = số tiền − phí máy (tien_hoan = so_tien − chi_phi),
+ *   đến hạn ngày GD + 1. Tiền C.Trâm chuyển/ứng (sheet DoiSoat) trừ dần vào các khoản cũ nhất trước.
+ *   Số dư = tổng tiền hoàn − tổng đã chuyển/ứng: dương = C.Trâm còn phải chuyển, âm = C.Trâm đã ứng dư.
  */
 
 var TZ = 'Asia/Ho_Chi_Minh';
@@ -19,7 +22,8 @@ var SHEETS = {
   GiaoDich: ['id', 'ngay', 'dich_vu', 'the', 'ngay_dao', 'ngay_sao_ke', 'khach_id', 'ten_khach', 'sdt', 'so_tien',
     'may', 'phi_khach', 'phi_may', 'phi_may_text', 'tien_phi', 'chi_phi', 'loi_nhuan', 'ghi_chu', 'tao_luc',
     'tien_hoan', 'ngay_hoan', 'hoan_tt', 'hoan_luc'],
-  NhacLich: ['key', 'han', 'trang_thai', 'ghi_chu', 'event_id', 'cap_nhat']
+  NhacLich: ['key', 'han', 'trang_thai', 'ghi_chu', 'event_id', 'cap_nhat'],
+  DoiSoat: ['id', 'ngay', 'loai', 'so_tien', 'ghi_chu', 'tao_luc']
 };
 
 // Cột lưu dạng chữ để Sheets không tự đổi ngày/số (mất số 0 đầu SĐT).
@@ -27,7 +31,8 @@ var TEXT_COLUMNS = ['id', 'sdt', 'ngay', 'thoi_gian', 'tao_luc', 'cap_nhat', 'ke
   'ngay_hoan', 'hoan_luc'];
 // Cột ngày dạng yyyy-MM-dd (nếu Sheets lỡ đổi thành Date thì đọc lại đúng dạng).
 var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan'];
-var REFUND_STATUSES = ['Chưa nhận', 'Đã nhận'];
+// Kiểu tiền với C.Trâm. "Mình trả lại" trừ ngược; "Điều chỉnh số dư" nhập được số âm.
+var PAYMENT_TYPES = ['Ứng trước', 'Hoàn tiền', 'Mình trả lại', 'Điều chỉnh số dư'];
 
 var CUSTOMER_STATUSES = ['Mới', 'Đang tư vấn', 'Khách quen', 'Không tiềm năng'];
 var SERVICES = ['Đáo hạn', 'Rút tiền', 'Đáo + Rút', 'Ví trả sau'];
@@ -240,7 +245,8 @@ function api(token, action, payload) {
     saveSettings: apiSaveSettings_,
     importTransactions: apiImportTransactions_,
     refunds: apiRefunds_,
-    markRefund: apiMarkRefund_,
+    savePayment: apiSavePayment_,
+    deletePayment: function (p) { return withLock_(function () { return deleteObj_('DoiSoat', p.id); }); },
     withdrawAdvice: function (p) { return withdrawAdvice_(p.ngay || todayStr_(), Number(p.ngay_sao_ke), Number(p.ngay_dao) || 0, p.the); }
   };
   if (!handlers[action]) throw new Error('Không rõ thao tác: ' + action);
@@ -284,11 +290,11 @@ function apiDashboard_() {
   var tx = readAll_('GiaoDich').filter(function (t) { return t.ngay >= monthFrom && t.ngay <= monthTo; });
   var leads = readAll_('LienHe');
   var rem = computeReminders_(addDays_(today, -30), addDays_(today, 7));
-  var refunds = apiRefunds_({ from: today, to: addDays_(today, 1) }).days;
+  var refunds = apiRefunds_({ from: today, to: today });
   return {
     month: summarize_(tx),
     refundName: refundName_(),
-    refunds: refunds,
+    refunds: { summary: refunds.summary, days: refunds.days },
     todayTx: summarize_(tx.filter(function (t) { return t.ngay === today; })),
     newLeads: leads.filter(function (l) { return l.trang_thai === 'Mới'; }).reverse().slice(0, 20),
     clicksToday: leads.filter(function (l) { return !l.sdt && String(l.thoi_gian).slice(0, 10) === today; }).reverse(),
@@ -495,47 +501,92 @@ function apiImportTransactions_(p) {
 function refundName_() { return PropertiesService.getScriptProperties().getProperty('HOAN_NGUOI') || 'C.Trâm'; }
 
 /**
- * Giao dịch có ngày hoàn trong [from, to], cộng mọi giao dịch còn "Chưa nhận" (kể cả đã trễ),
- * gom theo ngày hoàn. Mỗi ngày: tổng tiền, phí máy, tiền hoàn, đã nhận, còn thiếu và từng giao dịch.
+ * Sổ công nợ với C.Trâm.
+ *  - Khoản phải hoàn: mỗi giao dịch (trừ giao dịch cũ đã tất toán ngoài sổ: hoan_tt = 'Đã nhận').
+ *  - Tiền đã chuyển/ứng: sheet DoiSoat, trừ dần vào khoản đến hạn sớm nhất (FIFO), ứng dư thì để dành cho giao dịch sau.
+ * Trả về: tổng hợp (luôn tính trên toàn bộ sổ), các ngày còn thiếu, và sổ đối chiếu theo ngày trong [from, to].
  */
 function apiRefunds_(p) {
+  var today = todayStr_();
+  var dues = readAll_('GiaoDich').filter(function (t) { return t.hoan_tt !== 'Đã nhận' && Number(t.tien_hoan); })
+    .sort(function (a, b) { return a.ngay_hoan < b.ngay_hoan ? -1 : a.ngay_hoan > b.ngay_hoan ? 1 : a.ngay < b.ngay ? -1 : a.ngay > b.ngay ? 1 : String(a.tao_luc).localeCompare(String(b.tao_luc)); });
+  var pays = readAll_('DoiSoat').map(function (x) { x.tien = paymentSign_(x); return x; })
+    .sort(function (a, b) { return a.ngay < b.ngay ? -1 : a.ngay > b.ngay ? 1 : String(a.tao_luc).localeCompare(String(b.tao_luc)); });
+  var paid = pays.reduce(function (a, x) { return a + x.tien; }, 0);
+
+  // Phân bổ tiền đã chuyển vào từng giao dịch, cũ trước.
+  var left = paid, days = {};
+  dues.forEach(function (t) {
+    var due = Number(t.tien_hoan) || 0;
+    var got = Math.max(0, Math.min(due, left));
+    left -= got;
+    var d = days[t.ngay_hoan] || (days[t.ngay_hoan] = { ngay_hoan: t.ngay_hoan, so_gd: 0, so_tien: 0, chi_phi: 0, tien_hoan: 0, da_nhan: 0, con_lai: 0, items: [] });
+    d.so_gd++;
+    d.so_tien += Number(t.so_tien) || 0;
+    d.chi_phi += Number(t.chi_phi) || 0;
+    d.tien_hoan += due;
+    d.da_nhan += got;
+    d.con_lai += due - got;
+    d.items.push({ id: t.id, ngay: t.ngay, dich_vu: t.dich_vu, the: t.the, ten_khach: t.ten_khach, so_tien: t.so_tien,
+      may: t.may, phi_may: t.phi_may, chi_phi: t.chi_phi, tien_hoan: due, da_nhan: got, con_lai: due - got });
+  });
+
+  var tong = dues.reduce(function (a, t) { return a + (Number(t.tien_hoan) || 0); }, 0);
+  var denHan = dues.filter(function (t) { return t.ngay_hoan <= today; }).reduce(function (a, t) { return a + (Number(t.tien_hoan) || 0); }, 0);
+  var summary = {
+    tong_phai_hoan: tong, tong_da_chuyen: paid, so_du: tong - paid,
+    den_han: denHan, den_han_con_thieu: Math.max(0, denHan - paid),
+    sap_toi: tong - denHan, // giao dịch hôm nay, hoàn ngày mai
+    ung_du: Math.max(0, paid - tong)
+  };
+
+  // Sổ đối chiếu theo ngày giao dịch / ngày chuyển tiền, số dư lũy kế.
   var from = p.from || '', to = p.to || '9999-12-31';
-  var tx = readAll_('GiaoDich'), days = {};
-  tx.forEach(function (t) {
-    if ((t.ngay_hoan >= from && t.ngay_hoan <= to) || (p.pending !== false && t.hoan_tt === 'Chưa nhận')) days[t.ngay_hoan] = 1;
+  var book = {};
+  function row(d) { return book[d] || (book[d] = { ngay: d, so_gd: 0, so_tien: 0, chi_phi: 0, phat_sinh: 0, da_chuyen: 0, payments: [] }); }
+  dues.forEach(function (t) {
+    var r = row(t.ngay);
+    r.so_gd++; r.so_tien += Number(t.so_tien) || 0; r.chi_phi += Number(t.chi_phi) || 0; r.phat_sinh += Number(t.tien_hoan) || 0;
   });
-  // Lấy đủ mọi giao dịch của ngày đó để thấy cả phần đã nhận lẫn còn thiếu.
-  return { refundName: refundName_(), days: refundDays_(tx.filter(function (t) { return days[t.ngay_hoan]; })) };
+  pays.forEach(function (x) {
+    var r = row(x.ngay);
+    r.da_chuyen += x.tien;
+    r.payments.push({ id: x.id, ngay: x.ngay, loai: x.loai, so_tien: Number(x.so_tien) || 0, tien: x.tien, ghi_chu: x.ghi_chu });
+  });
+  var bal = 0;
+  var ledger = Object.keys(book).sort().map(function (k) {
+    var r = book[k];
+    bal += r.phat_sinh - r.da_chuyen;
+    r.so_du = bal;
+    return r;
+  }).filter(function (r) { return r.ngay >= from && r.ngay <= to; });
+
+  return {
+    refundName: refundName_(), today: today, summary: summary, ledger: ledger,
+    days: Object.keys(days).sort().map(function (k) { return days[k]; })
+      .filter(function (d) { return d.con_lai > 0 || (d.ngay_hoan >= from && d.ngay_hoan <= to); })
+  };
 }
 
-function refundDays_(tx) {
-  var g = {};
-  tx.forEach(function (t) {
-    var d = t.ngay_hoan;
-    if (!g[d]) g[d] = { ngay_hoan: d, so_gd: 0, so_tien: 0, chi_phi: 0, tien_hoan: 0, da_nhan: 0, con_lai: 0, items: [] };
-    var x = g[d], hoan = Number(t.tien_hoan) || 0;
-    x.so_gd++;
-    x.so_tien += Number(t.so_tien) || 0;
-    x.chi_phi += Number(t.chi_phi) || 0;
-    x.tien_hoan += hoan;
-    if (t.hoan_tt === 'Đã nhận') x.da_nhan += hoan; else x.con_lai += hoan;
-    x.items.push({ id: t.id, ngay: t.ngay, dich_vu: t.dich_vu, the: t.the, ten_khach: t.ten_khach, so_tien: t.so_tien,
-      may: t.may, phi_may: t.phi_may, chi_phi: t.chi_phi, tien_hoan: hoan, hoan_tt: t.hoan_tt, hoan_luc: t.hoan_luc });
-  });
-  return Object.keys(g).sort().map(function (k) {
-    g[k].items.sort(function (a, b) { return a.ngay < b.ngay ? -1 : a.ngay > b.ngay ? 1 : 0; });
-    return g[k];
-  });
+function paymentSign_(x) {
+  var n = Number(x.so_tien) || 0;
+  return x.loai === 'Mình trả lại' ? -Math.abs(n) : x.loai === 'Điều chỉnh số dư' ? n : Math.abs(n);
 }
 
-/** Đánh dấu đã nhận / chưa nhận tiền hoàn cho một hoặc nhiều giao dịch (`ids`, VD cả một ngày). */
-function apiMarkRefund_(p) {
-  var st = REFUND_STATUSES.indexOf(p.trang_thai) >= 0 ? p.trang_thai : 'Đã nhận';
-  var ids = {};
-  (p.ids || []).forEach(function (id) { ids[id] = 1; });
+/** Ghi / sửa một lần C.Trâm chuyển tiền hoặc ứng trước (không gắn với giao dịch nào). */
+function apiSavePayment_(x) {
+  var ngay = String(x.ngay || '');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(ngay)) throw new Error('Ngày không hợp lệ.');
+  var loai = PAYMENT_TYPES.indexOf(x.loai) >= 0 ? x.loai : 'Hoàn tiền';
+  var n = Number(x.so_tien);
+  if (!n || (loai !== 'Điều chỉnh số dư' && n < 0)) throw new Error('Số tiền phải lớn hơn 0.');
+  var obj = { ngay: ngay, loai: loai, so_tien: n, ghi_chu: String(x.ghi_chu || '').trim() };
   return withLock_(function () {
-    return updateWhere_('GiaoDich', function (t) { return ids[String(t.id)] === 1; },
-      { hoan_tt: st, hoan_luc: st === 'Đã nhận' ? nowStr_() : '' });
+    if (x.id) { updateObj_('DoiSoat', x.id, obj); obj.id = x.id; return obj; }
+    obj.id = newId_();
+    obj.tao_luc = nowStr_();
+    appendObj_('DoiSoat', obj);
+    return obj;
   });
 }
 
@@ -848,6 +899,14 @@ var checkedSheets_ = {};
 
 function sheet_(name) {
   var sh = SpreadsheetApp.getActive().getSheetByName(name);
+  if (!sh && name === 'DoiSoat') { // sheet mới thêm ở bản cập nhật: tự tạo
+    sh = SpreadsheetApp.getActive().insertSheet(name);
+    sh.getRange(1, 1, 1, SHEETS[name].length).setValues([SHEETS[name]]);
+    sh.setFrozenRows(1);
+    SHEETS[name].forEach(function (h, i) {
+      if (TEXT_COLUMNS.indexOf(h) >= 0) sh.getRange(2, i + 1, sh.getMaxRows() - 1, 1).setNumberFormat('@');
+    });
+  }
   if (!sh) throw new Error('Chưa có sheet "' + name + '". Hãy chạy hàm setup() một lần.');
   if (!checkedSheets_[name]) {
     checkedSheets_[name] = true;

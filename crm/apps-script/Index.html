@@ -143,6 +143,14 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
 .rf__info { min-width: 0; font-size: .88rem; }
 .rf__calc { color: var(--muted); font-size: .84rem; }
 .rf__calc b { color: var(--text); }
+.bal { background: var(--card); border-radius: var(--radius); padding: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.06); margin-bottom: 14px; border-left: 5px solid var(--bad); }
+.bal--ung { border-left-color: var(--primary); }
+.bal--zero { border-left-color: var(--ok); }
+.bal__big { font-size: 1.5rem; font-weight: 800; margin: 2px 0 6px; }
+.bal__rows { max-width: 560px; display: grid; grid-template-columns: 1fr auto; gap: 3px 12px; font-size: .9rem; color: var(--muted); }
+.bal__rows b { color: var(--text); text-align: right; }
+.ledger td small { display: block; color: var(--muted); }
+.pay-chip { display: inline-block; white-space: normal; text-align: right; max-width: 100%; background: var(--info-bg); border-radius: 8px; padding: 2px 8px; margin: 2px 0; font-size: .82rem; cursor: pointer; border: 0; color: var(--primary-dark); }
 .copy input { font-size: .8rem; }
 </style>
 </head>
@@ -169,7 +177,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     <nav class="tabs" id="tabs">
       <button class="tab is-active" data-tab="home">Tổng quan</button>
       <button class="tab" data-tab="tx">Giao dịch</button>
-      <button class="tab" data-tab="refund"><span class="refund-name">C.Trâm</span> hoàn <span class="count hidden" id="refund-count"></span></button>
+      <button class="tab" data-tab="refund">Công nợ <span class="refund-name">C.Trâm</span> <span class="count hidden" id="refund-count"></span></button>
       <button class="tab" data-tab="remind">Nhắc lịch <span class="count hidden" id="remind-count"></span></button>
       <button class="tab" data-tab="customers">Khách hàng <span class="count hidden" id="lead-count"></span></button>
       <button class="tab" data-tab="report">Báo cáo</button>
@@ -181,7 +189,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     <!-- Tổng quan -->
     <section data-view="home">
       <div class="kpis" id="home-kpis"></div>
-      <div class="row row--between"><h2>💸 <span class="refund-name">C.Trâm</span> hoàn lại</h2><button class="btn btn--ghost btn--sm" data-goto="refund">Xem tất cả</button></div>
+      <div class="row row--between"><h2>💸 Công nợ <span class="refund-name">C.Trâm</span></h2><button class="btn btn--ghost btn--sm" data-goto="refund">Sổ đối chiếu</button></div>
       <div id="home-refund"></div>
       <div class="row row--between"><h2>📞 Cần báo khách hôm nay</h2><button class="btn btn--ghost btn--sm" data-goto="remind">Xem lịch</button></div>
       <div id="home-remind"></div>
@@ -213,19 +221,23 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       <div class="scroll-x"><table class="tbl stack" id="tx-table"></table></div>
     </section>
 
-    <!-- Tiền hoàn -->
+    <!-- Công nợ C.Trâm -->
     <section data-view="refund" class="hidden">
-      <p class="muted">Mỗi giao dịch: <b>Tiền hoàn = Số tiền (rút/đáo) − Phí máy</b>, <span class="refund-name">C.Trâm</span> hoàn lại vào <b>ngày hôm sau</b>. Nhận đủ thì bấm <b>✔ Đã nhận</b>.</p>
-      <div class="row" style="margin-bottom:12px">
+      <p class="muted">Mỗi giao dịch: <b>Tiền hoàn = Số tiền (rút/đáo) − Phí máy</b>, làm hôm nay thì mai <span class="refund-name">C.Trâm</span> hoàn.
+        Tiền <span class="refund-name">C.Trâm</span> chuyển hoặc <b>ứng trước</b> (số tròn, không theo giao dịch) thì bấm <b>+ Ghi tiền</b>: CRM tự trừ vào các khoản cũ nhất và tính số dư.</p>
+      <div id="refund-balance"></div>
+      <h2>⏳ Khoản còn thiếu</h2>
+      <div id="refund-list"></div>
+      <div class="row row--between" style="margin-top:6px">
+        <h2>📒 Sổ đối chiếu</h2>
         <div class="seg" id="refund-filter">
-          <button data-v="pending" class="is-active">Chưa nhận</button>
           <button data-v="week">7 ngày</button>
-          <button data-v="month">Tháng này</button>
+          <button data-v="month" class="is-active">Tháng này</button>
           <button data-v="lastmonth">Tháng trước</button>
+          <button data-v="all">Tất cả</button>
         </div>
       </div>
-      <div class="kpis" id="refund-kpis"></div>
-      <div id="refund-list"></div>
+      <div class="card scroll-x"><table class="tbl stack ledger" id="refund-ledger"></table></div>
     </section>
 
     <!-- Nhắc lịch -->
@@ -376,6 +388,33 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   </form>
 </div>
 
+<!-- Modal tiền C.Trâm chuyển / ứng -->
+<div class="modal hidden" id="pay-modal">
+  <form class="modal__box" id="pay-form" autocomplete="off">
+    <div class="modal__head"><h2 id="pay-title">Ghi tiền</h2><button type="button" class="x" data-close>×</button></div>
+    <input type="hidden" name="id">
+    <div class="form-grid">
+      <label class="f">Ngày<input type="date" name="ngay" required></label>
+      <label class="f">Loại<select name="loai">
+        <option value="Ứng trước">Ứng trước (chưa có giao dịch)</option>
+        <option value="Hoàn tiền">Hoàn tiền giao dịch</option>
+        <option value="Mình trả lại">Mình trả lại (ứng dư)</option>
+        <option value="Điều chỉnh số dư">Điều chỉnh số dư / số dư đầu</option>
+      </select></label>
+      <label class="f">Số tiền <span class="hint">300tr · 1.5 tỷ · 8.999 = 8.999.000đ</span><input name="so_tien_text" required inputmode="decimal"></label>
+      <label class="f">Ghi chú<input name="ghi_chu" placeholder="VD: CK Vietcombank"></label>
+      <div class="full calc" id="pay-calc" style="grid-template-columns:1fr"></div>
+    </div>
+    <div class="row row--between" style="margin-top:14px">
+      <button type="button" class="btn btn--danger hidden" data-act="delete-pay">Xóa</button>
+      <div class="row" style="margin-left:auto">
+        <button type="button" class="btn btn--ghost" data-close>Hủy</button>
+        <button type="submit" class="btn">Lưu</button>
+      </div>
+    </div>
+  </form>
+</div>
+
 <!-- Modal khách -->
 <div class="modal hidden" id="cust-modal">
   <div class="modal__box">
@@ -407,7 +446,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
 
   /* ---------- State & API ---------- */
   var S = { token: null, boot: null, tab: 'home', tx: [], customers: [], leads: [], reminders: [], remindFilter: 'all',
-    rpType: 'month', custView: 'customers', refundFilter: 'pending', refundDays: [] };
+    rpType: 'month', custView: 'customers', refundFilter: 'month', refund: null };
   try { S.token = sessionStorage.getItem('crm_token'); } catch (e) {}
 
   var loadingN = 0;
@@ -558,12 +597,9 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         kpi('Khách web để lại số (tháng)', d.leadsThisMonth) +
         kpi('Bấm Zalo / Gọi hôm nay', d.clicksToday.length) +
         kpi('Hôm nay', d.todayTx.so_gd + ' GD · ' + short(d.todayTx.so_tien)) +
-        kpi(rn() + ' còn phải hoàn', money(d.refunds.reduce(function (a, x) { return a + x.con_lai; }, 0)));
-      var today = S.boot.today;
-      var homeDays = d.refunds.filter(function (x) { return x.con_lai > 0 || x.ngay_hoan >= today; });
-      $('#home-refund').innerHTML = homeDays.length ? homeDays.map(refundDay).join('') : '<div class="empty card">Không còn khoản nào chờ hoàn 🎉</div>';
-      S.refundDays = d.refunds;
-      setCount('#refund-count', d.refunds.filter(function (x) { return x.con_lai > 0 && x.ngay_hoan <= today; }).length);
+        '';
+      $('#home-refund').innerHTML = balanceCard(d.refunds.summary);
+      setCount('#refund-count', d.refunds.summary.den_han_con_thieu > 0 ? '!' : 0);
       $('#home-remind').innerHTML = d.remindToday.length ? d.remindToday.map(remindItem).join('') : '<div class="empty card">Hôm nay không có khách cần báo 🎉</div>';
       $('#home-soon').innerHTML = d.remindSoon.length ? d.remindSoon.map(remindItem).join('') : '<div class="empty card">Không có lịch trong 7 ngày tới.</div>';
       $('#home-clicks').innerHTML = d.clicksToday.length ? d.clicksToday.slice(0, 15).map(leadItem).join('') : '<div class="empty card">Hôm nay chưa có lượt bấm Zalo / Gọi.</div>';
@@ -614,7 +650,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
           '<td data-l="Máy" class="opt">' + esc(t.may) + '</td>' +
           '<td data-l="Phí khách/máy" class="num opt">' + pct(t.phi_khach) + ' / ' + pct(t.phi_may) + '</td>' +
           '<td data-l="Phí của mình" class="num ' + (t.loi_nhuan >= 0 ? 'pos' : 'neg') + '">' + money(t.loi_nhuan) + '</td>' +
-          '<td data-l="' + esc(rn()) + ' hoàn" class="num">' + money(t.tien_hoan) + ' <small>' + (t.hoan_tt === 'Đã nhận' ? '✅' : '⏳ ' + dm(t.ngay_hoan)) + '</small></td></tr>';
+          '<td data-l="' + esc(rn()) + ' hoàn" class="num">' + money(t.tien_hoan) + ' <small class="muted">' + (t.hoan_tt === 'Đã nhận' ? '' : 'hoàn ' + dm(t.ngay_hoan)) + '</small></td></tr>';
       }).join('') : '<tr><td colspan="10" class="empty">Không có giao dịch.</td></tr>') + '</tbody>';
   }
   $('#tx-table').addEventListener('click', function (e) {
@@ -726,53 +762,70 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     if (d === addDays(t, -1)) return 'Hôm qua';
     return '';
   }
+  function balanceCard(m) {
+    var name = esc(rn());
+    var cls = m.so_du > 0 ? '' : m.so_du < 0 ? ' bal--ung' : ' bal--zero';
+    var head = m.so_du > 0 ? name + ' còn phải chuyển cho mình' : m.so_du < 0 ? name + ' đang ứng dư (trừ vào giao dịch sau)' : 'Đã đối chiếu xong, không ai nợ ai';
+    return '<div class="bal' + cls + '"><div class="muted">' + head + '</div>' +
+      '<div class="bal__big ' + (m.so_du > 0 ? 'neg' : 'pos') + '">' + money(Math.abs(m.so_du)) + '</div>' +
+      '<div class="bal__rows">' +
+      '<span>Tổng tiền hoàn phát sinh (số tiền − phí máy)</span><b>' + money(m.tong_phai_hoan) + '</b>' +
+      '<span>− ' + name + ' đã chuyển / ứng</span><b>' + money(m.tong_da_chuyen) + '</b>' +
+      (m.den_han_con_thieu > 0 ? '<span class="neg">Đến hôm nay còn thiếu</span><b class="neg">' + money(m.den_han_con_thieu) + '</b>' : '') +
+      (m.sap_toi > 0 ? '<span>Giao dịch hôm nay, mai hoàn</span><b>' + money(m.sap_toi) + '</b>' : '') +
+      '</div><div class="row" style="margin-top:10px"><button class="btn btn--sm" data-pay="new">+ Ghi tiền ' + name + ' chuyển / ứng</button></div></div>';
+  }
   function refundDay(x) {
     var t = S.boot.today;
-    var late = x.con_lai > 0 && x.ngay_hoan < t;
-    var done = x.con_lai === 0;
-    var pendingIds = x.items.filter(function (i) { return i.hoan_tt !== 'Đã nhận'; }).map(function (i) { return i.id; });
+    var late = x.con_lai > 0 && x.ngay_hoan <= t;
     var gdDays = {};
     x.items.forEach(function (i) { gdDays[i.ngay] = 1; });
     var lam = Object.keys(gdDays).map(function (d) { var w = refundWhen(d); return (w ? w.toLowerCase() + ' ' : 'ngày ') + dm(d); }).join(', ');
     var when = refundWhen(x.ngay_hoan);
-    var flag = done ? '<span class="badge badge--ok">Đã nhận đủ</span>'
-      : late ? '<span class="badge badge--bad">Trễ – chưa nhận ' + money(x.con_lai) + '</span>'
-      : x.ngay_hoan === t ? '<span class="badge badge--warn">Nhận hôm nay</span>' : '<span class="badge">Chờ hoàn</span>';
-    return '<div class="card rf' + (late ? ' rf--late' : done ? ' rf--done' : '') + '">' +
+    var flag = x.con_lai === 0 ? '<span class="badge badge--ok">Đã đủ</span>'
+      : late ? '<span class="badge badge--bad">Còn thiếu ' + money(x.con_lai) + '</span>'
+      : '<span class="badge">Chờ hoàn</span>';
+    return '<div class="card rf' + (late ? ' rf--late' : x.con_lai === 0 ? ' rf--done' : '') + '">' +
       '<div class="rf__head"><div>Làm ' + lam + ' → <b>' + esc(rn()) + ' hoàn ' + (when ? when.toLowerCase() + ' ' : 'ngày ') + dm(x.ngay_hoan) + '</b>' +
       '<div class="muted" style="font-size:.85rem">' + x.so_gd + ' giao dịch</div></div>' + flag + '</div>' +
       '<div class="rf__sum"><div>Tổng tiền<b>' + money(x.so_tien) + '</b></div><div>− Phí máy<b>' + money(x.chi_phi) + '</b></div>' +
-      '<div>= ' + esc(rn()) + ' hoàn<b class="big">' + money(x.tien_hoan) + '</b></div>' +
-      (x.da_nhan && x.con_lai ? '<div>Đã nhận<b>' + money(x.da_nhan) + '</b></div><div>Còn thiếu<b class="neg">' + money(x.con_lai) + '</b></div>' : '') + '</div>' +
+      '<div>= Tiền hoàn<b class="big">' + money(x.tien_hoan) + '</b></div>' +
+      (x.da_nhan ? '<div>Đã trừ (chuyển/ứng)<b>' + money(x.da_nhan) + '</b></div><div>Còn thiếu<b class="neg">' + money(x.con_lai) + '</b></div>' : '') + '</div>' +
       x.items.map(function (i) {
-        var ok = i.hoan_tt === 'Đã nhận';
-        return '<div class="rf__item' + (ok ? ' is-done' : '') + '"><div class="rf__info">' +
+        return '<div class="rf__item' + (i.con_lai === 0 ? ' is-done' : '') + '"><div class="rf__info">' +
           '<div>' + dm(i.ngay) + ' · <b>' + esc(i.ten_khach) + '</b> · ' + esc(i.the) + ' <span class="muted">' + esc(i.dich_vu) + (i.may ? ' · ' + esc(i.may) : '') + '</span></div>' +
           '<div class="rf__calc">' + money(i.so_tien) + ' − ' + money(i.chi_phi) + ' <small>(' + pct(i.phi_may) + ')</small> = <b>' + money(i.tien_hoan) + '</b></div></div>' +
-          (ok ? '<button class="btn btn--ghost btn--sm" data-refund="' + esc(i.id) + '" data-st="Chưa nhận" title="Bỏ đánh dấu">✅ Đã nhận</button>'
-            : '<button class="btn btn--sm" data-refund="' + esc(i.id) + '" data-st="Đã nhận">✔ Đã nhận</button>') + '</div>';
+          '<span class="badge ' + (i.con_lai === 0 ? 'badge--ok">Đủ' : i.da_nhan ? 'badge--warn">Thiếu ' + money(i.con_lai) : '">Chưa') + '</span></div>';
       }).join('') +
-      (pendingIds.length > 1 ? '<div class="row" style="margin-top:8px"><button class="btn btn--sm" data-refund="' + esc(pendingIds.join(',')) + '" data-st="Đã nhận">✔ Đã nhận đủ cả ngày (' + money(x.con_lai) + ')</button></div>' : '') +
+      (x.con_lai > 0 ? '<div class="row" style="margin-top:8px"><button class="btn btn--sm" data-pay="new" data-amount="' + x.con_lai + '" data-note="Hoàn GD ' + esc(lam) + '">✔ ' + esc(rn()) + ' đã chuyển đủ (' + money(x.con_lai) + ')</button></div>' : '') +
       '</div>';
   }
   function refundRange() {
     var t = S.boot.today, p = parts(t), v = S.refundFilter;
-    if (v === 'week') return { from: addDays(t, -6), to: addDays(t, 1), pending: false };
-    if (v === 'month') return { from: ymd(p.y, p.m, 1), to: ymd(p.y, p.m, dim(p.y, p.m)), pending: false };
-    if (v === 'lastmonth') { var lm = p.m === 1 ? { y: p.y - 1, m: 12 } : { y: p.y, m: p.m - 1 }; return { from: ymd(lm.y, lm.m, 1), to: ymd(lm.y, lm.m, dim(lm.y, lm.m)), pending: false }; }
-    return { from: t, to: addDays(t, 1) }; // Chưa nhận: mọi khoản còn thiếu + hôm nay, ngày mai
+    if (v === 'week') return { from: addDays(t, -6), to: t };
+    if (v === 'month') return { from: ymd(p.y, p.m, 1), to: ymd(p.y, p.m, dim(p.y, p.m)) };
+    if (v === 'lastmonth') { var lm = p.m === 1 ? { y: p.y - 1, m: 12 } : { y: p.y, m: p.m - 1 }; return { from: ymd(lm.y, lm.m, 1), to: ymd(lm.y, lm.m, dim(lm.y, lm.m)) }; }
+    return {};
   }
   function loadRefund() {
     call('refunds', refundRange()).then(function (r) {
-      var t = S.boot.today;
-      var days = r.days;
-      if (S.refundFilter === 'pending') days = days.filter(function (x) { return x.con_lai > 0; });
-      days = days.slice().reverse();
-      var sum = days.reduce(function (a, x) { a.tien += x.so_tien; a.cp += x.chi_phi; a.hoan += x.tien_hoan; a.con += x.con_lai; return a; }, { tien: 0, cp: 0, hoan: 0, con: 0 });
-      $('#refund-kpis').innerHTML = kpi('Tổng tiền', money(sum.tien)) + kpi('Phí máy', money(sum.cp)) +
-        kpi(rn() + ' hoàn', money(sum.hoan), 'pos') + kpi('Còn chưa nhận', money(sum.con), sum.con ? 'neg' : 'pos');
-      $('#refund-list').innerHTML = days.length ? days.map(refundDay).join('') : '<div class="empty card">Không có khoản nào.</div>';
-      setCount('#refund-count', r.days.filter(function (x) { return x.con_lai > 0 && x.ngay_hoan <= t; }).length);
+      S.refund = r;
+      $('#refund-balance').innerHTML = balanceCard(r.summary);
+      var open = r.days.filter(function (x) { return x.con_lai > 0; }).reverse();
+      $('#refund-list').innerHTML = open.length ? open.map(refundDay).join('') : '<div class="empty card">Không còn khoản nào thiếu 🎉</div>';
+      var name = esc(rn());
+      $('#refund-ledger').innerHTML = '<thead><tr><th>Ngày</th><th class="num">Làm (GD)</th><th class="num">Phí máy</th><th class="num">Tiền hoàn phát sinh</th><th class="num">' + name + ' chuyển / ứng</th><th class="num">Số dư</th></tr></thead><tbody>' +
+        (r.ledger.length ? r.ledger.slice().reverse().map(function (x) {
+          return '<tr><td data-l="Ngày"><b>' + dmy(x.ngay) + '</b></td>' +
+            '<td data-l="Làm (GD)" class="num">' + (x.so_gd ? money(x.so_tien) + '<small>' + x.so_gd + ' GD</small>' : '') + '</td>' +
+            '<td data-l="Phí máy" class="num">' + (x.so_gd ? money(x.chi_phi) : '') + '</td>' +
+            '<td data-l="Tiền hoàn phát sinh" class="num">' + (x.phat_sinh ? '+' + money(x.phat_sinh) : '') + '</td>' +
+            '<td data-l="' + name + ' chuyển / ứng" class="num">' + x.payments.map(function (p) {
+              return '<button class="pay-chip" data-pay="' + esc(p.id) + '" title="Sửa">' + (p.tien < 0 ? '+' : '−') + money(Math.abs(p.tien)) + ' · ' + esc(p.loai) + (p.ghi_chu ? ' · ' + esc(p.ghi_chu) : '') + ' ✏️</button>';
+            }).join('<br>') + '</td>' +
+            '<td data-l="Số dư" class="num"><b class="' + (x.so_du > 0 ? 'neg' : 'pos') + '">' + money(Math.abs(x.so_du)) + '</b><small>' + (x.so_du > 0 ? name + ' nợ' : x.so_du < 0 ? 'ứng dư' : 'hết nợ') + '</small></td></tr>';
+        }).join('') : '<tr><td colspan="6" class="empty">Chưa có số liệu.</td></tr>') + '</tbody>';
+      setCount('#refund-count', r.summary.den_han_con_thieu > 0 ? '!' : 0);
     }).catch(fail);
   }
   $('#refund-filter').addEventListener('click', function (e) {
@@ -781,16 +834,69 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     $$('#refund-filter button').forEach(function (x) { x.classList.toggle('is-active', x === b); });
     loadRefund();
   });
+
+  /* Ghi tiền C.Trâm chuyển / ứng */
+  var payForm = $('#pay-form');
+  function openPay(p) {
+    payForm.reset();
+    var f = payForm.elements;
+    f.id.value = p.id || '';
+    f.ngay.value = p.ngay || S.boot.today;
+    f.loai.value = p.loai || 'Hoàn tiền';
+    f.so_tien_text.value = p.so_tien ? amountText(Math.abs(p.so_tien)) : '';
+    if (p.loai === 'Điều chỉnh số dư' && p.so_tien < 0) f.so_tien_text.value = '-' + amountText(-p.so_tien);
+    f.ghi_chu.value = p.ghi_chu || '';
+    $('#pay-title').textContent = (p.id ? 'Sửa' : 'Ghi') + ' tiền ' + rn() + ' chuyển / ứng';
+    $('[data-act=delete-pay]').classList.toggle('hidden', !p.id);
+    updatePay();
+    $('#pay-modal').classList.remove('hidden');
+    if (!p.id) setTimeout(function () { f.so_tien_text.focus(); }, 50);
+  }
+  function payAmount() {
+    var t = payForm.elements.so_tien_text.value.trim(), neg = /^-/.test(t);
+    var m = t.replace(/^-/, '').toLowerCase().match(/^([\d.,]+)\s*(tỷ|ty|tỉ)$/);
+    var n = m ? Math.round(Number(m[1].replace(',', '.')) * 1e9) : parseAmount(t.replace(/^-/, ''));
+    return neg ? -n : n;
+  }
+  function updatePay() {
+    var f = payForm.elements, n = payAmount(), m = (S.refund || {}).summary;
+    var sign = f.loai.value === 'Mình trả lại' ? -Math.abs(n) : f.loai.value === 'Điều chỉnh số dư' ? n : Math.abs(n);
+    var html = 'Số tiền: <b style="display:inline">' + money(Math.abs(n)) + '</b>';
+    if (m) {
+      var after = m.so_du - sign;
+      html += '<br>Số dư sau khi ghi: <b style="display:inline" class="' + (after > 0 ? 'neg' : 'pos') + '">' + money(Math.abs(after)) + '</b> ' +
+        (after > 0 ? '(' + esc(rn()) + ' còn phải chuyển)' : after < 0 ? '(' + esc(rn()) + ' ứng dư)' : '(hết nợ)');
+    }
+    $('#pay-calc').innerHTML = html;
+  }
+  payForm.addEventListener('input', updatePay);
+  payForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = payForm.elements, n = payAmount();
+    if (!n) return toast('Số tiền chưa đúng', true);
+    if (n < 0 && f.loai.value !== 'Điều chỉnh số dư') return toast('Số âm chỉ dùng cho "Điều chỉnh số dư"', true);
+    var btn = payForm.querySelector('[type=submit]');
+    btn.disabled = true;
+    call('savePayment', { id: f.id.value, ngay: f.ngay.value, loai: f.loai.value, so_tien: n, ghi_chu: f.ghi_chu.value.trim() }).then(function () {
+      btn.disabled = false; closeModals(); toast('Đã ghi'); show(S.tab);
+    }).catch(function (err) { btn.disabled = false; fail(err); });
+  });
   document.addEventListener('click', function (e) {
-    var b = e.target.closest('[data-refund]');
-    if (!b) return;
-    var st = b.dataset.st;
-    if (st === 'Chưa nhận' && !confirm('Bỏ đánh dấu đã nhận cho giao dịch này?')) return;
-    b.disabled = true;
-    call('markRefund', { ids: b.dataset.refund.split(','), trang_thai: st }).then(function () {
-      toast(st === 'Đã nhận' ? 'Đã ghi nhận tiền hoàn' : 'Đã bỏ đánh dấu');
-      show(S.tab);
-    }).catch(function (err) { b.disabled = false; fail(err); });
+    var b = e.target.closest('[data-pay]');
+    if (b) {
+      if (b.dataset.pay === 'new') {
+        var ensure = S.tab === 'refund' && S.refund ? Promise.resolve() : call('refunds', refundRange()).then(function (r) { S.refund = r; });
+        ensure.then(function () { openPay({ so_tien: Number(b.dataset.amount) || 0, ghi_chu: b.dataset.note || '', loai: b.dataset.amount ? 'Hoàn tiền' : 'Ứng trước' }); });
+      } else {
+        var p = null;
+        ((S.refund || {}).ledger || []).forEach(function (x) { x.payments.forEach(function (y) { if (y.id === b.dataset.pay) p = y; }); });
+        if (p) openPay(p);
+      }
+    }
+    if (e.target.closest('[data-act=delete-pay]')) {
+      if (!confirm('Xóa khoản tiền này?')) return;
+      call('deletePayment', { id: payForm.elements.id.value }).then(function () { closeModals(); toast('Đã xóa'); show(S.tab); }).catch(fail);
+    }
   });
 
   /* ---------- Nhắc lịch ---------- */

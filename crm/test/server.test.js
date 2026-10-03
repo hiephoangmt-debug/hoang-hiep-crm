@@ -257,47 +257,67 @@ test('Zalo / call button clicks are logged without creating customers or emails'
   assert.strictEqual(rp.rows[2].lead_web, 0);
 });
 
-test('refund: amount − machine fee, paid back next day by C.Trâm, per transaction and per day', () => {
+test('refund: amount − machine fee, due next day; C.Trâm lump-sum advances are netted against it', () => {
   const { fake, call } = fresh('2026-10-02');
-  const a = call('saveTransaction', { ngay: '2026-10-02', dich_vu: 'Đáo hạn', ten_khach: 'C.Nhi', the: 'SC', so_tien: 17983000, may: 'VP Phượng', phi_khach: 1.7, phi_may_text: '1.36' });
-  const b = call('saveTransaction', { ngay: '2026-10-02', dich_vu: 'Rút tiền', ten_khach: 'A.Hùng', the: 'TP', so_tien: 10000000, may: 'MB Vân', phi_khach: 2, phi_may_text: '1.2+0.3' });
-  assert.strictEqual(a.chi_phi, 244569);
-  assert.strictEqual(a.tien_hoan, 17983000 - 244569);
+  // Hôm trước C.Trâm ứng 300 triệu trước khi làm
+  call('savePayment', { ngay: '2026-10-02', loai: 'Ứng trước', so_tien: 300000000, ghi_chu: 'ứng trước' });
+  let r = call('refunds', {});
+  assert.strictEqual(r.summary.so_du, -300000000);
+  assert.strictEqual(r.summary.ung_du, 300000000);
+
+  const a = call('saveTransaction', { ngay: '2026-10-02', dich_vu: 'Đáo hạn', ten_khach: 'C.Nhi', the: 'SC', so_tien: 250000000, may: 'VP Phượng', phi_khach: 1.7, phi_may_text: '1.36' });
+  const b = call('saveTransaction', { ngay: '2026-10-02', dich_vu: 'Rút tiền', ten_khach: 'A.Hùng', the: 'TP', so_tien: 250000000, may: 'MB Vân', phi_khach: 2, phi_may_text: '1.2+0.3' });
+  assert.strictEqual(a.tien_hoan, 250000000 - 3400000);
   assert.strictEqual(a.ngay_hoan, '2026-10-03');
-  assert.strictEqual(b.tien_hoan, 10000000 - 150000);
-  assert.strictEqual(call('bootstrap').settings.refundName, 'C.Trâm');
+  assert.strictEqual(b.tien_hoan, 250000000 - 3750000);
+  const tong = a.tien_hoan + b.tien_hoan; // 492.850.000
 
-  let d = call('dashboard');
-  assert.strictEqual(d.refunds.length, 1);
-  const day = d.refunds[0];
+  r = call('refunds', {});
+  assert.strictEqual(r.summary.tong_phai_hoan, tong);
+  assert.strictEqual(r.summary.so_du, tong - 300000000);
+  assert.strictEqual(r.summary.den_han_con_thieu, 0, 'not due until tomorrow');
+  assert.strictEqual(r.summary.sap_toi, tong);
+  // Ứng 300tr trừ vào giao dịch cũ nhất trước
+  const day = r.days[0];
   assert.strictEqual(day.ngay_hoan, '2026-10-03');
-  assert.strictEqual(day.so_tien, 27983000);
-  assert.strictEqual(day.chi_phi, 394569);
-  assert.strictEqual(day.tien_hoan, 27983000 - 394569);
-  assert.strictEqual(day.con_lai, day.tien_hoan);
-  assert.strictEqual(day.items.length, 2);
+  assert.strictEqual(day.da_nhan, 300000000);
+  assert.strictEqual(day.con_lai, tong - 300000000);
+  assert.strictEqual(day.items[0].con_lai, 0);
+  assert.strictEqual(day.items[1].da_nhan, 300000000 - a.tien_hoan);
+  assert.strictEqual(r.ledger.length, 1);
+  assert.strictEqual(r.ledger[0].phat_sinh, tong);
+  assert.strictEqual(r.ledger[0].da_chuyen, 300000000);
+  assert.strictEqual(r.ledger[0].so_du, tong - 300000000);
 
-  // nhận 1 giao dịch, sau đó nhận nốt
-  call('markRefund', { ids: [a.id], trang_thai: 'Đã nhận' });
-  fake.setToday('2026-10-04');
-  let r = call('refunds', { from: '2026-10-04', to: '2026-10-05' });
-  assert.strictEqual(r.days.length, 1, 'still pending from yesterday shows up');
-  assert.strictEqual(r.days[0].da_nhan, a.tien_hoan);
-  assert.strictEqual(r.days[0].con_lai, b.tien_hoan);
-  call('markRefund', { ids: [b.id], trang_thai: 'Đã nhận' });
-  r = call('refunds', { from: '2026-10-04', to: '2026-10-05' });
-  assert.strictEqual(r.days.length, 0);
+  // Hôm sau: đến hạn, còn thiếu → C.Trâm chuyển nốt
+  fake.setToday('2026-10-03');
+  r = call('refunds', {});
+  assert.strictEqual(r.summary.den_han_con_thieu, tong - 300000000);
+  assert.strictEqual(call('dashboard').refunds.summary.den_han_con_thieu, tong - 300000000);
+  const pay = call('savePayment', { ngay: '2026-10-03', loai: 'Hoàn tiền', so_tien: tong - 300000000 });
+  r = call('refunds', {});
+  assert.strictEqual(r.summary.so_du, 0);
+  assert.strictEqual(r.days.filter((d) => d.con_lai > 0).length, 0);
+  assert.strictEqual(r.ledger[1].so_du, 0);
 
-  // sửa giao dịch không làm mất trạng thái đã nhận; đổi ngày hoàn thủ công
-  const a2 = call('saveTransaction', Object.assign({}, a, { phi_may_text: '1.4', ngay_hoan: '2026-10-05' }));
-  const t = call('listTransactions', {}).find((x) => x.id === a.id);
-  assert.strictEqual(t.hoan_tt, 'Đã nhận');
-  assert.strictEqual(t.ngay_hoan, '2026-10-05');
-  assert.strictEqual(t.tien_hoan, a2.so_tien - a2.chi_phi);
+  // Mình trả lại / điều chỉnh / sửa / xóa
+  call('savePayment', { ngay: '2026-10-03', loai: 'Mình trả lại', so_tien: 1000000 });
+  assert.strictEqual(call('refunds', {}).summary.so_du, 1000000);
+  call('savePayment', { id: pay.id, ngay: '2026-10-03', loai: 'Hoàn tiền', so_tien: tong - 300000000 + 1000000 });
+  assert.strictEqual(call('refunds', {}).summary.so_du, 0);
+  call('savePayment', { ngay: '2026-10-03', loai: 'Điều chỉnh số dư', so_tien: -500000 });
+  assert.strictEqual(call('refunds', {}).summary.so_du, 500000);
+  assert.throws(() => call('savePayment', { ngay: '2026-10-03', loai: 'Hoàn tiền', so_tien: -5 }), /lớn hơn 0/);
+  call('deletePayment', { id: pay.id });
+  assert.strictEqual(call('refunds', {}).summary.so_du, tong - 300000000 + 1000000 + 500000);
+
+  // sửa giao dịch, đổi ngày hoàn
+  call('saveTransaction', Object.assign({}, a, { ngay_hoan: '2026-10-05' }));
+  assert.strictEqual(call('listTransactions', {}).find((x) => x.id === a.id).ngay_hoan, '2026-10-05');
   assert.throws(() => call('saveTransaction', Object.assign({}, a, { ngay_hoan: '2026-10-01' })), /trước ngày giao dịch/);
 
   const rp = call('report', { type: 'month', year: 2026 });
-  assert.strictEqual(rp.rows[9].tien_hoan, t.tien_hoan + b.tien_hoan);
+  assert.strictEqual(rp.rows[9].tien_hoan, tong);
   call('saveSettings', { refundName: 'C.Trâm (máy MB)' });
   assert.strictEqual(call('bootstrap').settings.refundName, 'C.Trâm (máy MB)');
 });
@@ -323,8 +343,10 @@ test('refund columns are added to an existing sheet; old rows get computed value
   assert.strictEqual(old.hoan_tt, 'Đã nhận', 'old ledger rows count as already paid back');
   assert.strictEqual(now.ngay_hoan, '2026-10-03');
   assert.strictEqual(now.hoan_tt, 'Chưa nhận');
-  gas.api(tok, 'markRefund', { ids: ['ktoday'], trang_thai: 'Đã nhận' });
-  assert.strictEqual(gas.api(tok, 'listTransactions', {}).find((t) => t.id === 'ktoday').hoan_tt, 'Đã nhận');
+  // Sổ công nợ chỉ tính giao dịch chưa tất toán; sheet DoiSoat tự tạo
+  const r = gas.api(tok, 'refunds', {});
+  assert.strictEqual(r.summary.tong_phai_hoan, 986400);
+  assert.ok(gas.SpreadsheetApp.getActive().getSheetByName('DoiSoat'));
 });
 
 console.log(`\n${passed} test(s) passed`);

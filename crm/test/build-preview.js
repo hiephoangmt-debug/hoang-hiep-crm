@@ -41,9 +41,10 @@ const shim = `
       tx({ ngay: d(r[0]), dich_vu: r[1], the: r[2], ngay_dao: r[3], ten_khach: r[4], sdt: r[5], so_tien: r[6],
         may: r[7], phi_khach: r[8], phi_may_text: r[9], ngay_sao_ke: r[10] || '' });
     });
-    // Tiền hoàn: giao dịch cũ đã nhận đủ; hôm qua mới nhận 1 phần
-    var old = api(token, 'listTransactions', {}).filter(function (t) { return t.ngay < d(-2) || t.ten_khach === 'Chú Ái'; });
-    api(token, 'markRefund', { ids: old.map(function (t) { return t.id; }), trang_thai: 'Đã nhận' });
+    // Công nợ C.Trâm: hoàn các khoản cũ, hôm nay ứng trước 300tr
+    var old = api(token, 'listTransactions', {}).filter(function (t) { return t.ngay < d(-1); });
+    api(token, 'savePayment', { ngay: d(-1), loai: 'Hoàn tiền', so_tien: old.reduce(function (a, t) { return a + t.tien_hoan; }, 0), ghi_chu: 'CK VCB' });
+    api(token, 'savePayment', { ngay: d(0), loai: 'Ứng trước', so_tien: 300000000, ghi_chu: 'ứng trước' });
     [['Lan', '0906222001', 'Rút tiền thẻ tín dụng', 'www.the-tin-dung-da-nang.com', 'Cần rút 20tr thẻ VPBank'],
      ['Hùng', '0906222002', 'Đáo hạn thẻ tín dụng', 'dichvuthetindungdanang.com', ''],
      ['Mai', '0906222003', 'Rút tiền ví trả sau', 'www.the-tin-dung-da-nang.com', 'SPayLater 5tr']].forEach(function (l) {
