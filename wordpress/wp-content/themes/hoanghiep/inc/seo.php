@@ -318,6 +318,19 @@ function hh_schema_person() {
 	return $person;
 }
 
+/** Giờ làm việc từ ô "Giờ làm việc" (VD "8:00 – 21:00, tất cả các ngày") → openingHoursSpecification. */
+function hh_schema_hours() {
+	if ( ! preg_match( '/(\d{1,2})[:h](\d{2})?\D+(\d{1,2})[:h](\d{2})?/u', (string) hoanghiep_opt( 'hh_hours' ), $m ) ) {
+		return null;
+	}
+	return array(
+		'@type'     => 'OpeningHoursSpecification',
+		'dayOfWeek' => array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ),
+		'opens'     => sprintf( '%02d:%02d', $m[1], $m[2] ?? 0 ),
+		'closes'    => sprintf( '%02d:%02d', $m[3], $m[4] ?? 0 ),
+	);
+}
+
 function hh_schema_agent() {
 	$same_as = array_values( array_filter( array( hoanghiep_opt( 'hh_facebook' ), hoanghiep_opt( 'hh_youtube' ), hoanghiep_opt( 'hh_tiktok' ) ) ) );
 	$agent   = array(
@@ -329,7 +342,9 @@ function hh_schema_agent() {
 		'url'         => home_url( '/' ),
 		'telephone'   => hoanghiep_tel(),
 		'email'       => hoanghiep_opt( 'hh_email' ),
-		'address'     => array( '@type' => 'PostalAddress', 'addressLocality' => hoanghiep_opt( 'hh_address' ), 'addressRegion' => 'Đà Nẵng', 'addressCountry' => 'VN' ),
+		'address'     => array( '@type' => 'PostalAddress', 'streetAddress' => hoanghiep_opt( 'hh_address' ), 'addressLocality' => 'Đà Nẵng', 'addressRegion' => 'Đà Nẵng', 'postalCode' => '550000', 'addressCountry' => 'VN' ),
+		'priceRange'  => 'Theo từng dự án',
+		'openingHoursSpecification' => hh_schema_hours(),
 		'areaServed'  => array( '@type' => 'City', 'name' => 'Đà Nẵng' ),
 		'knowsLanguage' => 'vi',
 		'founder'     => hh_schema_person(),
@@ -339,7 +354,7 @@ function hh_schema_agent() {
 	if ( $same_as ) {
 		$agent['sameAs'] = $same_as;
 	}
-	return $agent;
+	return array_filter( $agent, static fn( $v ) => null !== $v && '' !== $v );
 }
 
 function hh_schema_breadcrumb() {
@@ -840,6 +855,54 @@ add_filter(
 	'wpseo_opengraph_image',
 	static function ( $img ) {
 		return is_front_page() && ( ! $img || preg_match( '/icon|@\d+x\d+|\.svg/i', (string) $img ) ) ? hh_seo_image() : $img;
+	},
+	99
+);
+
+/* -------------------------------------------------------------------------
+ * Rank Math: đưa Dự án, Nhà đất và các trang loại dự án / khu vực vào sitemap (kể cả khi chưa bật trong cài đặt),
+ * và gộp schema để không trùng (1 RealEstateAgent của theme thay cho Organization/LocalBusiness của plugin;
+ * bỏ "Article" trên trang chủ).
+ * ---------------------------------------------------------------------- */
+
+add_filter( 'rank_math/sitemap/exclude_post_type', static fn( $exclude, $type ) => in_array( $type, array( 'du-an', 'bat-dong-san' ), true ) ? false : $exclude, 99, 2 );
+add_filter( 'rank_math/sitemap/exclude_taxonomy', static fn( $exclude, $tax ) => in_array( $tax, array( 'loai-du-an', 'khu-vuc' ), true ) ? false : $exclude, 99, 2 );
+
+/** Đổi mọi tham chiếu {"@id": cũ} sang @id của theme. */
+function hh_seo_repoint_ids( $node, $ids, $to ) {
+	if ( ! is_array( $node ) ) {
+		return $node;
+	}
+	if ( isset( $node['@id'] ) && 1 === count( $node ) && in_array( $node['@id'], $ids, true ) ) {
+		return array( '@id' => $to );
+	}
+	foreach ( $node as $k => $v ) {
+		$node[ $k ] = hh_seo_repoint_ids( $v, $ids, $to );
+	}
+	return $node;
+}
+
+add_filter(
+	'rank_math/json_ld',
+	static function ( $data ) {
+		if ( ! is_array( $data ) ) {
+			return $data;
+		}
+		$ids = array();
+		foreach ( $data as $k => $entity ) {
+			if ( ! is_array( $entity ) ) {
+				continue;
+			}
+			$types = (array) ( $entity['@type'] ?? array() );
+			$id    = (string) ( $entity['@id'] ?? '' );
+			if ( array_intersect( $types, array( 'Organization', 'LocalBusiness', 'RealEstateAgent', 'Corporation' ) ) && preg_match( '/#(organization|localbusiness)$/i', $id ) ) {
+				$ids[] = $id;
+				unset( $data[ $k ] );
+			} elseif ( is_front_page() && array_intersect( $types, array( 'Article', 'BlogPosting', 'NewsArticle' ) ) ) {
+				unset( $data[ $k ] );
+			}
+		}
+		return $ids ? hh_seo_repoint_ids( $data, $ids, home_url( '/#agent' ) ) : $data;
 	},
 	99
 );
