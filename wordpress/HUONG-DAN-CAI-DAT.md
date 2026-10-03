@@ -15,6 +15,28 @@ Bạn cần 2 file:
 
 Website hiện tại dùng **Houzez + Elementor + Rank Math**. Làm đúng thứ tự dưới đây: tin đã đăng trên Houzez được **chuyển sang** giao diện mới, link cũ **tự chuyển hướng** (giữ thứ hạng Google), giao diện Houzez **vẫn còn** để quay lại bất cứ lúc nào.
 
+### A0. Hosting InterData – vào cPanel và kiểm tra 3 thứ
+
+Website đang chạy trên gói hosting tại **InterData** (support.interdata.vn). Toàn bộ việc cài đặt làm trong trang quản trị WordPress (`https://hiephoangmt.com/wp-admin`); cPanel chỉ dùng để **sao lưu toàn bộ** và kiểm tra cấu hình.
+
+**Vào cPanel:** đăng nhập **support.interdata.vn** → menu **Dịch vụ → Dịch vụ của tôi** (hoặc nút **Quản lý dịch vụ** ở trang myDashboard) → bấm vào gói hosting của `hiephoangmt.com` → nút **Đăng nhập cPanel** (Login to cPanel). Không thấy nút thì dùng tài khoản cPanel trong email kích hoạt hosting của InterData.
+
+> ⚠️ **Không bấm "Edit Website" ở khung Sitejet Builder.** Sitejet là trình dựng web riêng của cPanel; nếu xuất bản từ Sitejet, trang Sitejet có thể **ghi đè** website WordPress đang chạy. Website của bạn là WordPress, không dùng Sitejet.
+
+Trong cPanel kiểm tra:
+
+| Mục trong cPanel | Kiểm tra | Cần |
+|---|---|---|
+| **Select PHP Version** hoặc **MultiPHP Manager** | Phiên bản PHP của hiephoangmt.com | **7.4 trở lên** (khuyên 8.1–8.2). Đang thấp hơn 7.4 thì nhờ InterData nâng, hoặc tự chọn 8.1 → Apply; nếu web báo lỗi thì chọn lại bản cũ |
+| **SSL/TLS Status** | `hiephoangmt.com` và `www` có ổ khóa xanh | Chưa có → bấm **Run AutoSSL** |
+| **Disk Usage** (thanh bên phải) | Dung lượng còn trống | Còn ít nhất 1 GB cho bản sao lưu |
+
+**Sao lưu toàn bộ hosting (thêm 1 lớp an toàn):** cPanel → **Backup** → *Download a Full Account Backup* (hoặc **JetBackup** nếu gói có) → chọn *Home Directory* → **Generate Backup**. Đợi email báo xong rồi tải file về máy.
+
+> Gói có **WordPress Toolkit** hoặc **Softaculous** (biểu tượng trong cPanel) thì dùng chức năng **Clone / Staging** tạo bản thử `thu.hiephoangmt.com`, làm A2–A7 trên bản thử trước. Không có thì mở ticket **Mở Ticket** nhờ InterData tạo bản staging, hoặc làm thẳng trên web chính sau khi đã sao lưu.
+
+Gặp lỗi hosting (giới hạn tải lên, trang trắng, email không gửi): **Mở Ticket** ở support.interdata.vn – kỹ thuật InterData hỗ trợ 24/7.
+
 ### A1. Sao lưu (bắt buộc)
 
 1. Thanh trên cùng → **Bảng tin** → menu trái **Plugin → Cài mới** → ô tìm kiếm gõ `UpdraftPlus` → **Cài đặt** → **Kích hoạt**.
