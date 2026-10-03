@@ -435,7 +435,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       <label class="f">Ngày<input type="date" name="ngay" required></label>
       <label class="f">Dịch vụ<select name="dich_vu"></select></label>
       <label class="f">Tên khách<input name="ten_khach" list="dl-customers" required placeholder="VD: C.Nhi"></label>
-      <label class="f">SĐT<input name="sdt" inputmode="tel" placeholder="09…"></label>
+      <label class="f">SĐT <span class="hint">gõ số là nhận ra khách cũ</span><input name="sdt" inputmode="tel" placeholder="09…"></label>
+      <div class="full" id="tx-cust-status" style="font-size:.88rem;margin-top:-4px"></div>
       <label class="f">Thẻ / ví<input name="the" list="dl-cards" required placeholder="VD: SC, TP, Momo"></label>
       <label class="f">Số tiền <span class="hint">8.999 = 8.999.000đ · 110tr</span><input name="so_tien_text" required inputmode="decimal"></label>
       <div class="full chips" id="tx-cards" style="margin-top:-4px"></div>
@@ -904,6 +905,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     $('[data-act=delete-tx]').classList.toggle('hidden', !t.id);
     S.txPhotos = {};
     S.txDocs = [];
+    S.txMatchedBy = f.khach_id.value ? 'name' : '';
+    $('#tx-cust-status').innerHTML = f.khach_id.value ? '👤 <b>Khách cũ:</b> ' + esc(f.ten_khach.value) + (f.sdt.value ? ' · ' + esc(f.sdt.value) : '') : '';
     S.txHistory = null;
     updateTxForm();
     loadTxCards();
@@ -946,15 +949,43 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     if (e.target.name === 'ngay' && f.ngay_hoan.dataset.auto && f.ngay.value) f.ngay_hoan.value = addDays(f.ngay.value, 1);
     if (e.target.name === 'ngay_hoan') f.ngay_hoan.dataset.auto = '';
     if (e.target.name === 'ten_khach') {
-      var c = S.boot.customers.filter(function (x) { return x.ten === e.target.value; })[0];
-      txForm.elements.khach_id.value = c ? c.id : '';
-      if (c && c.sdt && !txForm.elements.sdt.value) txForm.elements.sdt.value = c.sdt;
-      loadTxCards();
+      // Nhận ra khách cũ theo tên (không phân biệt hoa / thường, dấu cách thừa)
+      var key = normName(e.target.value);
+      var c = key ? S.boot.customers.filter(function (x) { return normName(x.ten) === key; })[0] : null;
+      if (c) setTxCustomer(c, 'name');
+      else if (S.txMatchedBy !== 'phone') setTxCustomer(null);
+    }
+    if (e.target.name === 'sdt') {
+      // Nhận ra khách cũ theo số điện thoại (SĐT 1 hoặc SĐT 2)
+      var ph = phoneNorm(e.target.value);
+      var c2 = ph.length >= 10 ? S.boot.customers.filter(function (x) { return x.sdt === ph || (x.sdt2 && x.sdt2 === ph); })[0] : null;
+      if (c2) setTxCustomer(c2, 'phone');
+      else if (S.txMatchedBy === 'phone') setTxCustomer(null);
     }
     if (e.target.name === 'the') { markTxCard(); renderTxPhotos(); }
     updateTxForm();
   });
   txForm.addEventListener('change', updateTxForm);
+  function normName(v) { return String(v || '').trim().toLowerCase().replace(/\s+/g, ' '); }
+  function phoneNorm(v) {
+    var d = String(v || '').replace(/[^\d+]/g, '');
+    if (d.indexOf('+84') === 0) d = '0' + d.slice(3); else if (d.indexOf('84') === 0 && d.length === 11) d = '0' + d.slice(2);
+    return d;
+  }
+  // Gắn giao dịch với khách cũ (điền tên / SĐT còn thiếu, tải thẻ, ảnh, lịch sử) hoặc bỏ gắn (khách mới).
+  function setTxCustomer(c, by) {
+    var f = txForm.elements, prev = f.khach_id.value;
+    f.khach_id.value = c ? c.id : '';
+    S.txMatchedBy = c ? by : '';
+    if (c) {
+      if (by === 'phone' && normName(f.ten_khach.value) !== normName(c.ten)) f.ten_khach.value = c.ten;
+      if (by === 'name' && c.sdt && !f.sdt.value) f.sdt.value = c.sdt;
+    }
+    $('#tx-cust-status').innerHTML = c
+      ? '👤 <b>Khách cũ:</b> ' + esc(c.ten) + (c.sdt ? ' · ' + esc(c.sdt) : '') + (c.sdt2 ? ' · ' + esc(c.sdt2) : '') + ' <span class="muted">(nhận ra theo ' + (by === 'phone' ? 'số điện thoại' : 'tên') + ')</span>'
+      : (f.ten_khach.value.trim() || f.sdt.value.trim() ? '🆕 <b>Khách mới</b> <span class="muted">– lưu giao dịch là tạo hồ sơ khách</span>' : '');
+    if ((c ? c.id : '') !== prev) loadTxCards();
+  }
   txForm.addEventListener('submit', function (e) {
     e.preventDefault();
     var f = txForm.elements;
