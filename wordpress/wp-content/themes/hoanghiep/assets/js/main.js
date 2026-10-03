@@ -99,6 +99,14 @@
 			if ( sel ) {
 				sel.value = btn.dataset.need;
 			}
+			const msg = document.querySelector( '#lien-he textarea[name="message"]' );
+			if ( msg && btn.dataset.msg ) {
+				msg.value = btn.dataset.msg;
+			}
+			const name = document.querySelector( '#lien-he input[name="name"]' );
+			if ( name ) {
+				setTimeout( () => name.focus( { preventScroll: true } ), 400 );
+			}
 		} );
 	} );
 
@@ -125,6 +133,62 @@
 		if ( sec ) {
 			sec.scrollIntoView();
 		}
+	}
+
+	// Popup nhận ưu đãi trang dự án: hiện 1 lần mỗi phiên, sau 35 giây hoặc khi đọc quá nửa trang.
+	const pop = document.getElementById( 'lead-pop' );
+	if ( pop && ! /lien-he=/.test( location.search ) ) {
+		let seen = false;
+		try {
+			seen = '1' === sessionStorage.getItem( 'hhPop' );
+		} catch ( e ) {}
+		const close = () => {
+			pop.hidden = true;
+			document.body.classList.remove( 'has-pop' );
+		};
+		const show = () => {
+			if ( seen || ( document.activeElement && document.activeElement.closest( 'form' ) ) ) {
+				return;
+			}
+			seen = true;
+			try {
+				sessionStorage.setItem( 'hhPop', '1' );
+			} catch ( e ) {}
+			pop.hidden = false;
+			document.body.classList.add( 'has-pop' );
+		};
+		if ( ! seen ) {
+			setTimeout( show, 35000 );
+			const onScroll = () => {
+				if ( window.scrollY > ( document.documentElement.scrollHeight - window.innerHeight ) * 0.5 ) {
+					window.removeEventListener( 'scroll', onScroll );
+					show();
+				}
+			};
+			window.addEventListener( 'scroll', onScroll, { passive: true } );
+		}
+		pop.addEventListener( 'click', ( e ) => {
+			if ( e.target === pop || e.target.closest( '.lead-pop__close' ) ) {
+				close();
+			}
+		} );
+		document.addEventListener( 'keydown', ( e ) => {
+			if ( 'Escape' === e.key ) {
+				close();
+			}
+		} );
+	}
+
+	// Bảng tính gập ở cuối trang dự án: link #tai-chinh mở ra.
+	const openCalc = () => {
+		const fold = document.querySelector( 'details#tai-chinh' );
+		if ( fold ) {
+			fold.open = true;
+		}
+	};
+	$$( 'a[href="#tai-chinh"]' ).forEach( ( a ) => a.addEventListener( 'click', openCalc ) );
+	if ( '#tai-chinh' === location.hash ) {
+		openCalc();
 	}
 
 	// Bài toán dòng tiền & vay ngân hàng. Amounts are in "triệu đồng".

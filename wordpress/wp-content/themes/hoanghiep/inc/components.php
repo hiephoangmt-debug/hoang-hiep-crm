@@ -25,6 +25,7 @@ function hh_icon( $name ) {
 		'handshake' => '<path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.9-3.9a3 3 0 0 0-4.2 0l-.9.9a1 1 0 1 1-3-3l2.8-2.8a5 5 0 0 1 6 0l.4.3a2 2 0 0 0 1.5.3L21 4"/><path d="m21 3 1 11h-2M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3M3 4h8"/>',
 		'star'     => '<path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.2-6.2 3.2L7 14.2 2 9.3l6.9-1z"/>',
 		'play'     => '<polygon points="6 3 20 12 6 21 6 3"/>',
+		'gift'     => '<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v9H5v-9M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/>',
 		'menu'     => '<path d="M4 6h16M4 12h16M4 18h16"/>',
 	);
 	if ( ! isset( $paths[ $name ] ) ) {
@@ -321,7 +322,9 @@ function hh_pending( $text, $button = 'Nhận thông tin mới nhất' ) {
 	<div class="pending">
 		<span class="pending__icon"><?php echo hh_icon( 'clock' ); // phpcs:ignore ?></span>
 		<p><?php echo esc_html( $text ); ?></p>
-		<a class="btn btn--outline btn--sm" href="#lien-he"><?php echo esc_html( $button ); ?></a>
+		<?php if ( $button ) : ?>
+			<a class="btn btn--outline btn--sm" href="#lien-he"><?php echo esc_html( $button ); ?></a>
+		<?php endif; ?>
 	</div>
 	<?php
 }
@@ -329,4 +332,43 @@ function hh_pending( $text, $button = 'Nhận thông tin mới nhất' ) {
 /** Trang dựng bằng Elementor cho giao diện cũ (Houzez…): bỏ qua nội dung để không vỡ bố cục. */
 function hh_is_builder_page( $post_id = null ) {
 	return 'builder' === get_post_meta( $post_id ?: get_the_ID(), '_elementor_edit_mode', true );
+}
+
+/**
+ * Khung kêu gọi để lại thông tin trong từng mục trang dự án.
+ * Nút chính kéo xuống form liên hệ, chọn sẵn nhu cầu và điền sẵn lời nhắn.
+ */
+function hh_cta_box( $args ) {
+	$args = wp_parse_args( $args, array( 'icon' => 'star', 'title' => '', 'text' => '', 'button' => 'Nhận thông tin', 'need' => 'Nhận bảng giá dự án', 'msg' => '', 'variant' => '', 'link' => '', 'link_text' => '' ) );
+	?>
+	<div class="cta-box<?php echo $args['variant'] ? ' cta-box--' . esc_attr( $args['variant'] ) : ''; ?>">
+		<span class="cta-box__icon"><?php echo hh_icon( $args['icon'] ); // phpcs:ignore ?></span>
+		<div class="cta-box__body">
+			<p class="cta-box__title"><?php echo esc_html( $args['title'] ); ?></p>
+			<?php if ( $args['text'] ) : ?>
+				<p class="cta-box__text"><?php echo esc_html( $args['text'] ); ?></p>
+			<?php endif; ?>
+		</div>
+		<div class="cta-box__actions">
+			<a class="btn btn--gold btn--sm" href="#lien-he" data-need="<?php echo esc_attr( $args['need'] ); ?>" data-msg="<?php echo esc_attr( $args['msg'] ); ?>"><?php echo esc_html( $args['button'] ); ?></a>
+			<a class="btn btn--zalo btn--sm" href="https://zalo.me/<?php echo esc_attr( hoanghiep_tel( hoanghiep_opt( 'hh_zalo' ) ) ); ?>" target="_blank" rel="noopener">Zalo</a>
+			<?php if ( $args['link'] ) : ?>
+				<a class="cta-box__link" href="<?php echo esc_url( $args['link'] ); ?>"><?php echo esc_html( $args['link_text'] ); ?></a>
+			<?php endif; ?>
+		</div>
+	</div>
+	<?php
+}
+
+/** Ưu đãi đầu trang dự án: lấy từ ô "Chính sách & ưu đãi", chưa nhập thì dùng các quyền lợi chung khi đăng ký. */
+function hh_project_offer( $post_id = null ) {
+	$text  = preg_replace( '/^[^:\n]{0,45}:\s*/u', '', trim( (string) hh_meta( 'hh_p_policy', $post_id ) ) ); // Bỏ "Chính sách … :" ở đầu.
+	$lines = array_values( array_filter( array_map( 'trim', preg_split( '/\R|;\s*|(?<=\.)\s+(?=\p{Lu})/u', $text ) ) ) );
+	$lines = array_map( static fn( $l ) => mb_strtoupper( mb_substr( $l, 0, 1 ) ) . mb_substr( rtrim( $l, '.' ), 1 ), $lines );
+	$lines = array_map( static fn( $l ) => mb_strlen( $l ) > 140 ? mb_substr( $l, 0, 137 ) . '…' : $l, array_slice( $lines, 0, 3 ) );
+	return $lines ?: array(
+		'Bảng giá và chính sách chiết khấu của đợt mở bán hiện tại',
+		'Danh sách căn đẹp còn trống: tầng cao, căn góc, view đẹp',
+		'Phương án thanh toán và hỗ trợ vay ngân hàng phù hợp số vốn của bạn',
+	);
 }

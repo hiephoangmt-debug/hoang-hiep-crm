@@ -32,7 +32,7 @@ while ( have_posts() ) :
 		'tien-ich'   => 'Tiện ích',
 		'mat-bang'   => 'Mặt bằng',
 		'san-pham'   => 'Loại sản phẩm',
-		'chinh-sach' => $resale ? 'Giá & bảng tính' : 'Chính sách',
+		'chinh-sach' => $resale ? 'Giá chuyển nhượng' : 'Chính sách',
 		'thu-cap'    => ! $resale && $has_market ? 'Chuyển nhượng & cho thuê' : '',
 		'tien-do'    => 'Tiến độ',
 		'thu-vien'   => ( $gallery || hh_meta( 'hh_p_video' ) ) ? 'Hình ảnh' : '',
@@ -41,6 +41,30 @@ while ( have_posts() ) :
 		'lien-he'    => 'Liên hệ',
 	);
 	$sections = array_filter( $sections );
+
+	// Kêu gọi để lại thông tin ở từng mục.
+	$msg  = static fn( $text ) => $text . ' ' . $title . '.';
+	$ctas = $resale ? array(
+		'gioi-thieu' => array( 'icon' => 'gift', 'variant' => 'offer', 'title' => 'Tìm căn ' . $title . ' giá tốt', 'text' => 'Hiệp gửi danh sách căn chuyển nhượng, cho thuê đang có kèm giá thật và ảnh thực tế – cập nhật hằng tuần.', 'button' => 'Nhận danh sách căn', 'need' => 'Mua', 'msg' => $msg( 'Gửi tôi danh sách căn đang bán / cho thuê tại' ) ),
+		'tong-quan'  => array( 'icon' => 'shield', 'title' => 'Kiểm tra pháp lý trước khi xuống tiền', 'text' => 'Hiệp kiểm tra sổ hồng, tình trạng thế chấp và hợp đồng của căn bạn quan tâm – miễn phí.', 'button' => 'Nhờ kiểm tra pháp lý', 'need' => 'Mua', 'msg' => $msg( 'Nhờ kiểm tra pháp lý căn tôi quan tâm tại' ) ),
+		'vi-tri'     => array( 'icon' => 'pin', 'title' => 'Xem căn thực tế cùng Hiệp', 'text' => 'Hẹn lịch xem các căn đang trống vào thời gian bạn rảnh, kể cả cuối tuần.', 'button' => 'Đặt lịch xem căn', 'need' => 'Đặt lịch xem nhà', 'msg' => $msg( 'Tôi muốn hẹn lịch xem căn tại' ) ),
+		'tien-ich'   => array( 'icon' => 'building', 'title' => 'Nhận ảnh, video thực tế', 'text' => 'Bộ ảnh và video thực tế căn hộ, hồ bơi, gym, cảnh quan để bạn đánh giá đúng chất lượng sống.', 'button' => 'Nhận ảnh & video', 'need' => 'Mua', 'msg' => $msg( 'Gửi tôi ảnh, video thực tế' ) ),
+		'mat-bang'   => array( 'icon' => 'handshake', 'title' => 'Bạn có căn ' . $title . ' cần bán hoặc cho thuê?', 'text' => 'Ký gửi với Hiệp: định giá miễn phí, chụp ảnh, đăng tin và dẫn khách xem tận nơi.', 'button' => 'Ký gửi căn', 'need' => 'Ký gửi bán / cho thuê', 'msg' => $msg( 'Tôi muốn ký gửi căn hộ tại' ) ),
+		'san-pham'   => array( 'icon' => 'star', 'title' => 'Báo giá căn đúng nhu cầu', 'text' => 'Cho Hiệp biết diện tích, tầng, hướng và ngân sách – Hiệp lọc 3 – 5 căn phù hợp nhất kèm giá.', 'button' => 'Nhận căn phù hợp', 'need' => 'Mua', 'msg' => $msg( 'Tìm giúp tôi căn phù hợp tại' ) ),
+		'chinh-sach' => array( 'icon' => 'gift', 'variant' => 'offer', 'title' => 'Tính khoản vay khi mua căn chuyển nhượng', 'text' => 'Hiệp lập phương án vay ngân hàng, số tiền trả mỗi tháng và thủ tục sang tên phù hợp số vốn của bạn.', 'button' => 'Nhận phương án tài chính', 'need' => 'Tư vấn đầu tư', 'msg' => $msg( 'Tư vấn phương án vay khi mua căn tại' ), 'link' => '#tai-chinh', 'link_text' => 'Hoặc tự tính bằng bảng tính →' ),
+		'tien-do'    => array( 'icon' => 'clock', 'title' => 'Báo ngay khi có căn mới', 'text' => 'Căn giá tốt thường được giao dịch trong vài ngày. Để lại số điện thoại, Hiệp báo bạn đầu tiên.', 'button' => 'Đăng ký nhận căn mới', 'need' => 'Mua', 'msg' => $msg( 'Báo tôi khi có căn mới tại' ) ),
+		'hoi-dap'    => array( 'icon' => 'phone', 'title' => 'Chưa thấy câu trả lời bạn cần?', 'text' => 'Gọi hoặc nhắn Zalo cho Hiệp – trả lời ngay trong giờ làm việc ' . hoanghiep_opt( 'hh_hours' ) . '.', 'button' => 'Gửi câu hỏi', 'need' => 'Tư vấn đầu tư', 'msg' => $msg( 'Tôi cần hỏi thêm về' ) ),
+	) : array(
+		'gioi-thieu' => array( 'icon' => 'gift', 'variant' => 'offer', 'title' => 'Giữ chỗ căn đẹp ' . $title . ' trước khi hết', 'text' => 'Hiệp gửi rổ hàng, giá từng căn và chính sách ưu đãi đang áp dụng – miễn phí, không ràng buộc.', 'button' => 'Nhận rổ hàng & ưu đãi', 'need' => 'Nhận bảng giá dự án', 'msg' => $msg( 'Gửi tôi rổ hàng và chính sách ưu đãi' ) ),
+		'tong-quan'  => array( 'icon' => 'file', 'title' => 'Nhận trọn bộ hồ sơ ' . $title, 'text' => 'Brochure, mặt bằng, pháp lý và bảng giá chi tiết – gửi qua Zalo chỉ sau vài phút.', 'button' => 'Nhận hồ sơ dự án', 'need' => 'Nhận bảng giá dự án', 'msg' => $msg( 'Gửi tôi brochure, pháp lý và bảng giá' ) ),
+		'vi-tri'     => array( 'icon' => 'pin', 'title' => 'Đi xem thực tế cùng Hiệp', 'text' => 'Hẹn lịch xem vị trí, nhà mẫu và căn đang trống vào thời gian bạn rảnh, kể cả cuối tuần.', 'button' => 'Đặt lịch tham quan', 'need' => 'Đặt lịch xem nhà', 'msg' => $msg( 'Tôi muốn đặt lịch tham quan dự án, nhà mẫu' ) ),
+		'tien-ich'   => array( 'icon' => 'building', 'title' => 'Xem ảnh, video thực tế tiện ích', 'text' => 'Bộ ảnh và video hồ bơi, gym, cảnh quan, nhà mẫu để bạn đánh giá đúng chất lượng sống.', 'button' => 'Nhận ảnh & video', 'need' => 'Nhận bảng giá dự án', 'msg' => $msg( 'Gửi tôi ảnh, video thực tế tiện ích và nhà mẫu' ) ),
+		'mat-bang'   => array( 'icon' => 'star', 'title' => 'Căn đẹp thường hết sớm nhất', 'text' => 'Căn góc, tầng cao, view đẹp được giữ chỗ trước. Để lại số điện thoại để nhận danh sách căn còn trống kèm mặt bằng từng căn.', 'button' => 'Nhận danh sách căn trống', 'need' => 'Nhận bảng giá dự án', 'msg' => $msg( 'Gửi tôi danh sách căn còn trống và mặt bằng' ) ),
+		'san-pham'   => array( 'icon' => 'star', 'title' => 'Báo giá căn đúng nhu cầu', 'text' => 'Cho Hiệp biết loại căn, tầng, hướng và ngân sách – Hiệp lọc 3 – 5 căn phù hợp nhất kèm giá và chiết khấu.', 'button' => 'Nhận căn phù hợp', 'need' => 'Nhận bảng giá dự án', 'msg' => $msg( 'Lọc giúp tôi căn phù hợp và báo giá' ) ),
+		'chinh-sach' => array( 'icon' => 'gift', 'variant' => 'offer', 'title' => 'Tính dòng tiền riêng cho bạn', 'text' => 'Cho Hiệp biết số vốn hiện có – Hiệp lập phương án thanh toán, chiết khấu và vay ngân hàng tiết kiệm nhất cho bạn.', 'button' => 'Nhận phương án tài chính', 'need' => 'Tư vấn đầu tư', 'msg' => $msg( 'Lập giúp tôi phương án thanh toán và vay ngân hàng' ), 'link' => '#tai-chinh', 'link_text' => 'Hoặc tự tính bằng bảng tính →' ),
+		'tien-do'    => array( 'icon' => 'clock', 'title' => 'Nhận ảnh tiến độ mỗi tháng qua Zalo', 'text' => 'Theo dõi công trường mà không cần đến tận nơi – Hiệp gửi ảnh, video thi công mới nhất.', 'button' => 'Đăng ký nhận tiến độ', 'need' => 'Nhận bảng giá dự án', 'msg' => $msg( 'Gửi tôi ảnh tiến độ hằng tháng' ) ),
+		'hoi-dap'    => array( 'icon' => 'phone', 'title' => 'Chưa thấy câu trả lời bạn cần?', 'text' => 'Gọi hoặc nhắn Zalo cho Hiệp – trả lời ngay trong giờ làm việc ' . hoanghiep_opt( 'hh_hours' ) . '.', 'button' => 'Gửi câu hỏi', 'need' => 'Tư vấn đầu tư', 'msg' => $msg( 'Tôi cần hỏi thêm về' ) ),
+	);
 
 	$key_facts = array_filter(
 		array(
@@ -60,6 +84,7 @@ while ( have_posts() ) :
 			<?php the_post_thumbnail( 'hh-hero', array( 'class' => 'project-hero__bg', 'alt' => '' ) ); ?>
 		<?php endif; ?>
 		<div class="container project-hero__content">
+			<div class="project-hero__main">
 			<p class="breadcrumb breadcrumb--light">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Trang chủ</a> / <a href="<?php echo esc_url( get_post_type_archive_link( 'du-an' ) ); ?>">Dự án</a>
 			</p>
@@ -81,13 +106,31 @@ while ( have_posts() ) :
 			<div class="hero__actions">
 				<?php if ( $resale ) : ?>
 					<a class="btn btn--gold" href="#giao-dich">Xem căn chuyển nhượng &amp; cho thuê</a>
-				<?php else : ?>
-					<a class="btn btn--gold" href="#lien-he">Nhận bảng giá &amp; chính sách</a>
 				<?php endif; ?>
 				<?php if ( hh_meta( 'hh_p_pricelist_url' ) ) : ?>
 					<a class="btn btn--ghost" href="<?php echo esc_url( hh_meta( 'hh_p_pricelist_url' ) ); ?>" target="_blank" rel="noopener"><?php echo hh_icon( 'file' ); // phpcs:ignore ?> Tải brochure</a>
 				<?php endif; ?>
 			</div>
+			</div>
+			<aside class="hero-offer">
+				<p class="hero-offer__title"><?php echo hh_icon( 'gift' ); // phpcs:ignore ?> <?php echo esc_html( $resale ? 'Căn chuyển nhượng, cho thuê đang có' : 'Ưu đãi & chính sách tháng ' . wp_date( 'm/Y' ) ); ?></p>
+				<?php hh_check_list( $resale ? array( 'Danh sách căn bán, cho thuê kèm giá thật – cập nhật hằng tuần', 'Định giá miễn phí, kiểm tra sổ hồng trước khi giao dịch', 'Ký gửi bán / cho thuê căn của bạn' ) : hh_project_offer() ); ?>
+				<?php
+				echo hh_lead_form( // phpcs:ignore
+					array(
+						'ref_id'  => $id,
+						'title'   => '',
+						'compact' => true,
+						'need'    => $resale ? 'Mua' : 'Nhận bảng giá dự án',
+						'message' => ( $resale ? 'Gửi tôi danh sách căn đang bán / cho thuê tại ' : 'Gửi tôi bảng giá và chính sách ưu đãi mới nhất ' ) . $title . '. (Form đầu trang)',
+						'button'  => $resale ? 'Nhận danh sách căn' : 'Nhận bảng giá & ưu đãi',
+					)
+				);
+				?>
+				<?php if ( ! $resale ) : ?>
+					<span class="hero-offer__note">Chính sách thay đổi theo từng đợt – đăng ký để nhận bản mới nhất.</span>
+				<?php endif; ?>
+			</aside>
 		</div>
 	</section>
 
@@ -128,6 +171,7 @@ while ( have_posts() ) :
 					<h3 class="block__sub">Điểm nổi bật</h3>
 					<?php hh_check_list( hh_lines( 'hh_p_highlights' ), 'check-list check-list--boxed' ); ?>
 				<?php endif; ?>
+				<?php hh_cta_box( $ctas['gioi-thieu'] ); ?>
 			</section>
 
 			<section class="block" id="tong-quan">
@@ -163,6 +207,7 @@ while ( have_posts() ) :
 						?>
 					</div>
 				<?php endif; ?>
+				<?php hh_cta_box( $ctas['tong-quan'] ); ?>
 			</section>
 
 			<?php if ( $resale ) : ?>
@@ -187,6 +232,7 @@ while ( have_posts() ) :
 				$map_name = false === mb_stripos( $map_name, 'Đà Nẵng' ) ? $map_name . ', Đà Nẵng' : $map_name;
 				hh_map( hh_meta( 'hh_p_map_address' ) ?: $map_name, hh_meta( 'hh_p_map_coords' ) );
 				?>
+				<?php hh_cta_box( $ctas['vi-tri'] ); ?>
 			</section>
 
 			<section class="block" id="lien-ket">
@@ -213,7 +259,7 @@ while ( have_posts() ) :
 						<?php if ( hh_lines( 'hh_p_amenities_in' ) ) : ?>
 							<?php hh_check_list( hh_lines( 'hh_p_amenities_in' ) ); ?>
 						<?php else : ?>
-							<?php hh_pending( 'Danh sách tiện ích nội khu đang được cập nhật.', 'Nhận brochure' ); ?>
+							<?php hh_pending( 'Danh sách tiện ích nội khu đang được cập nhật.', '' ); ?>
 						<?php endif; ?>
 					</div>
 					<div>
@@ -226,6 +272,7 @@ while ( have_posts() ) :
 					</div>
 				</div>
 				<?php hh_gallery( hh_ids( 'hh_p_amenities_img' ), 'tien-ich' ); ?>
+				<?php hh_cta_box( $ctas['tien-ich'] ); ?>
 			</section>
 
 			<section class="block" id="mat-bang">
@@ -240,8 +287,9 @@ while ( have_posts() ) :
 					<?php hh_gallery( hh_ids( 'hh_p_floorplans' ), 'mat-bang' ); ?>
 				<?php endif; ?>
 				<?php if ( ! $has_plan ) : ?>
-					<?php hh_pending( 'Mặt bằng tổng thể và mặt bằng chi tiết từng loại sản phẩm: liên hệ Hiệp để nhận bản PDF đầy đủ.', 'Nhận mặt bằng' ); ?>
+					<?php hh_pending( 'Mặt bằng tổng thể và mặt bằng chi tiết từng loại sản phẩm: liên hệ Hiệp để nhận bản PDF đầy đủ.', '' ); ?>
 				<?php endif; ?>
+				<?php hh_cta_box( $ctas['mat-bang'] ); ?>
 			</section>
 
 			<section class="block" id="san-pham">
@@ -276,11 +324,12 @@ while ( have_posts() ) :
 				<?php else : ?>
 					<?php hh_pending( 'Thông tin các loại sản phẩm đang được cập nhật.', 'Nhận rổ hàng' ); ?>
 				<?php endif; ?>
+				<?php hh_cta_box( $ctas['san-pham'] ); ?>
 			</section>
 
 			<section class="block" id="chinh-sach">
 				<?php if ( $resale ) : ?>
-					<h2 class="block__title">Giá &amp; bảng tính vay</h2>
+					<h2 class="block__title">Giá chuyển nhượng <?php echo esc_html( $title ); ?></h2>
 					<p class="prose"><?php echo esc_html( '1' === hh_meta( 'hh_p_sold_out' ) ? $title . ' đã bán hết từ chủ đầu tư.' : $title . ' đã bàn giao.' ); ?> Giá hiện nay là giá chuyển nhượng giữa các chủ nhà, tùy vị trí, tầng, view và nội thất – xem các căn đang bán ở mục <a href="#giao-dich">Chuyển nhượng &amp; cho thuê</a>.</p>
 					<?php if ( $price_table ) : ?>
 						<h3 class="block__sub">Bảng giá gốc của chủ đầu tư (tham khảo)</h3>
@@ -296,13 +345,13 @@ while ( have_posts() ) :
 					<?php if ( $price_table ) : ?>
 						<?php hh_data_table( array( 'Sản phẩm', 'Diện tích', 'Giá bán', 'Ghi chú' ), $price_table ); ?>
 					<?php else : ?>
-						<?php hh_pending( 'Giá ' . $title . ' thay đổi theo từng đợt mở bán và vị trí căn. Liên hệ để nhận bảng giá mới nhất.', 'Nhận bảng giá' ); ?>
+						<?php hh_pending( 'Giá ' . $title . ' thay đổi theo từng đợt mở bán và vị trí căn. Liên hệ để nhận bảng giá mới nhất.', '' ); ?>
 					<?php endif; ?>
 					<h3 class="block__sub">Lịch thanh toán</h3>
 					<?php if ( $payment ) : ?>
 						<?php hh_data_table( array( 'Đợt', 'Thời điểm', 'Tỷ lệ' ), $payment ); ?>
 					<?php else : ?>
-						<?php hh_pending( 'Lịch thanh toán chuẩn và các phương án thanh toán nhanh / vay ngân hàng đang được cập nhật.', 'Nhận lịch thanh toán' ); ?>
+						<?php hh_pending( 'Lịch thanh toán chuẩn và các phương án thanh toán nhanh / vay ngân hàng đang được cập nhật.', '' ); ?>
 					<?php endif; ?>
 				<?php endif; ?>
 				<?php if ( hh_lines( 'hh_p_policy' ) ) : ?>
@@ -324,9 +373,8 @@ while ( have_posts() ) :
 				<?php if ( hh_meta( 'hh_p_pricelist_url' ) ) : ?>
 					<p><a class="btn btn--outline" href="<?php echo esc_url( hh_meta( 'hh_p_pricelist_url' ) ); ?>" target="_blank" rel="noopener"><?php echo hh_icon( 'file' ); // phpcs:ignore ?> Tải bảng giá / brochure</a></p>
 				<?php endif; ?>
-				<h3 class="block__sub" id="tai-chinh">Bảng tính dòng tiền &amp; vay ngân hàng</h3>
-				<?php get_template_part( 'template-parts/finance', null, array( 'mode' => 'project' ) ); ?>
 				<p class="note">Giá và chính sách có thể thay đổi theo từng đợt mở bán. Liên hệ để nhận thông tin mới nhất.</p>
+				<?php hh_cta_box( $ctas['chinh-sach'] ); ?>
 			</section>
 
 			<?php if ( ! $resale && $has_market ) : ?>
@@ -344,8 +392,9 @@ while ( have_posts() ) :
 				<?php endif; ?>
 				<?php hh_gallery( hh_ids( 'hh_p_progress_gallery' ), 'tien-do' ); ?>
 				<?php if ( $timeline[1] && ! hh_ids( 'hh_p_progress_gallery' ) ) : ?>
-					<?php hh_pending( 'Hình ảnh và báo cáo tiến độ thi công thực tế được cập nhật định kỳ.', 'Nhận ảnh tiến độ' ); ?>
+					<?php hh_pending( 'Hình ảnh và báo cáo tiến độ thi công thực tế được cập nhật định kỳ.', '' ); ?>
 				<?php endif; ?>
+				<?php hh_cta_box( $ctas['tien-do'] ); ?>
 			</section>
 
 			<?php if ( isset( $sections['thu-vien'] ) ) : ?>
@@ -380,6 +429,7 @@ while ( have_posts() ) :
 						<details><summary><?php echo esc_html( $q ); ?></summary><p><?php echo esc_html( $a ); ?></p></details>
 					<?php endforeach; ?>
 				</div>
+				<?php hh_cta_box( $ctas['hoi-dap'] ); ?>
 			</section>
 
 			<section class="block contact-block" id="lien-he">
@@ -403,6 +453,13 @@ while ( have_posts() ) :
 				);
 				?>
 			</section>
+
+			<details class="calc-fold" id="tai-chinh">
+				<summary><?php echo hh_icon( 'file' ); // phpcs:ignore ?> <span>Bảng tính dòng tiền &amp; vay ngân hàng <?php echo esc_html( $title ); ?></span><em>Bấm để mở</em></summary>
+				<div class="calc-fold__body">
+					<?php get_template_part( 'template-parts/finance', null, array( 'mode' => 'project' ) ); ?>
+				</div>
+			</details>
 		</div>
 
 		<aside class="layout__side">
@@ -445,6 +502,26 @@ while ( have_posts() ) :
 			</div>
 		</section>
 	<?php endif; ?>
+	<div class="lead-pop" id="lead-pop" role="dialog" aria-modal="true" aria-labelledby="lead-pop-title" hidden>
+		<div class="lead-pop__box">
+			<button type="button" class="lead-pop__close" aria-label="Đóng">&times;</button>
+			<p class="lead-pop__eyebrow"><?php echo hh_icon( 'gift' ); // phpcs:ignore ?> <?php echo esc_html( $resale ? 'Căn mới mỗi tuần' : 'Ưu đãi tháng ' . wp_date( 'm/Y' ) ); ?></p>
+			<p class="lead-pop__title" id="lead-pop-title"><?php echo esc_html( ( $resale ? 'Nhận danh sách căn ' : 'Nhận bảng giá & ưu đãi ' ) . $title ); ?></p>
+			<?php hh_check_list( $resale ? array( 'Căn bán, cho thuê kèm giá thật', 'Định giá, kiểm tra pháp lý miễn phí' ) : array_slice( hh_project_offer(), 0, 2 ) ); ?>
+			<?php
+			echo hh_lead_form( // phpcs:ignore
+				array(
+					'ref_id'  => $id,
+					'title'   => '',
+					'compact' => true,
+					'need'    => $resale ? 'Mua' : 'Nhận bảng giá dự án',
+					'message' => ( $resale ? 'Gửi tôi danh sách căn đang bán / cho thuê tại ' : 'Gửi tôi bảng giá và chính sách ưu đãi mới nhất ' ) . $title . '. (Popup)',
+					'button'  => 'Gửi cho tôi',
+				)
+			);
+			?>
+		</div>
+	</div>
 	<?php
 endwhile;
 

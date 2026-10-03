@@ -137,6 +137,8 @@ function hh_lead_form( $atts = array() ) {
 			'title'  => 'Nhận tư vấn miễn phí',
 			'need'   => '',
 			'button' => 'Gửi thông tin',
+			'compact' => false, // Chỉ họ tên + số điện thoại (form đầu trang, popup).
+			'message' => '',
 		),
 		$atts,
 		'hh_lead_form'
@@ -146,7 +148,7 @@ function hh_lead_form( $atts = array() ) {
 
 	ob_start();
 	?>
-	<form class="hh-form" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+	<form class="hh-form<?php echo $atts['compact'] ? ' hh-form--compact' : ''; ?>" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 		<?php if ( $atts['title'] ) : ?>
 			<h3 class="hh-form__title"><?php echo esc_html( $atts['title'] ); ?></h3>
 		<?php endif; ?>
@@ -163,6 +165,10 @@ function hh_lead_form( $atts = array() ) {
 		</div>
 		<label>Họ và tên *<input type="text" name="name" required maxlength="100" autocomplete="name"></label>
 		<label>Số điện thoại *<input type="tel" name="phone" required pattern="[0-9+ .]{9,15}" maxlength="15" autocomplete="tel"></label>
+		<?php if ( $atts['compact'] ) : ?>
+			<input type="hidden" name="need" value="<?php echo esc_attr( $atts['need'] ); ?>">
+			<input type="hidden" name="message" value="<?php echo esc_attr( $atts['message'] ); ?>">
+		<?php else : ?>
 		<label>Nhu cầu
 			<select name="need">
 				<?php foreach ( HH_LEAD_NEEDS as $need ) : ?>
@@ -171,6 +177,7 @@ function hh_lead_form( $atts = array() ) {
 			</select>
 		</label>
 		<label>Lời nhắn<textarea name="message" rows="3" maxlength="1000"></textarea></label>
+		<?php endif; ?>
 		<button type="submit" class="btn btn--gold btn--block"><?php echo esc_html( $atts['button'] ); ?></button>
 		<p class="hh-form__note">Thông tin của bạn được bảo mật và chỉ dùng để tư vấn.</p>
 	</form>
