@@ -952,13 +952,15 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       line('&nbsp;&nbsp;➕ Tổng tiền hoàn phát sinh (số tiền − phí máy)', '+' + money(cn.phat_sinh), '', cn.so_gd ? '&nbsp;&nbsp;&nbsp;&nbsp;' + cn.so_gd + ' GD · ' + money(cn.so_tien) + ' − phí máy ' + money(cn.chi_phi) : '') +
       gdList(cn) +
       line('&nbsp;&nbsp;<b>Tổng công nợ mục 2</b>', '+' + money(cn.phat_sinh), 'neg', '&nbsp;&nbsp;từ ngày chốt đến hiện tại') +
-      '<span style="grid-column:1/-1;border-top:1px dashed var(--line);margin-top:4px;padding-top:6px"><b style="text-align:left">💵 Mục 3 – Ứng khi chưa chốt công nợ</b></span>' +
+      '<span style="grid-column:1/-1;border-top:1px dashed var(--line);margin-top:4px;padding-top:6px"><b style="text-align:left">💵 Mục 3 – Công nợ ứng <small class="muted" style="font-weight:400">(ứng khi chưa chốt sổ)</small></b></span>' +
       (ung || line('&nbsp;&nbsp;Chưa có lần ứng nào', '0đ')) +
-      line('&nbsp;&nbsp;<b>Tổng ứng mục 3</b>', (cn.tong_tam_ung > 0 ? '−' : cn.tong_tam_ung < 0 ? '+' : '') + money(Math.abs(cn.tong_tam_ung)), 'pos',
+      line('&nbsp;&nbsp;Tổng ứng', (cn.tong_tam_ung > 0 ? '−' : cn.tong_tam_ung < 0 ? '+' : '') + money(Math.abs(cn.tong_tam_ung)), 'pos',
         cn.tam_ung.length ? '&nbsp;&nbsp;' + cn.tam_ung.length + ' lần ứng / chuyển' : '') +
+      line('&nbsp;&nbsp;<b>Tồn sau ứng</b>', signed(cn.ton2), cn.ton2 > 0 ? 'neg' : 'pos',
+        '&nbsp;&nbsp;= mục 2 − tổng ứng = ' + money(cn.phat_sinh) + ' − ' + (cn.tong_tam_ung < 0 ? '(' + signed(cn.tong_tam_ung) + ')' : money(cn.tong_tam_ung))) +
       '</div>' +
-      '<div style="border-top:2px solid var(--text);margin-top:8px;padding-top:8px"><div class="muted">Tổng công nợ hiện tại = mục 1 + mục 2 − mục 3<br>' +
-      '<small>' + signed(cn.ton1) + ' + ' + money(cn.phat_sinh) + ' − ' + (cn.tong_tam_ung < 0 ? '(' + signed(cn.tong_tam_ung) + ')' : money(cn.tong_tam_ung)) + '</small></div>' +
+      '<div style="border-top:2px solid var(--text);margin-top:8px;padding-top:8px"><div class="muted"><b style="color:var(--text)">🧾 Mục 4 – Tồn công nợ (chốt sổ) hiện tại</b><br>= mục 1 + tồn sau ứng = ' +
+      signed(cn.ton1) + ' + (' + signed(cn.ton2) + ')</div>' +
       '<div class="bal__big ' + (tong > 0 ? 'neg' : 'pos') + '" style="margin-bottom:0">' + signed(tong) + '</div>' +
       '<div class="muted">' + (tong > 0 ? name + ' còn nợ mình' : tong < 0 ? name + ' ứng dư – mình đang giữ tiền của chị' : 'Không ai nợ ai') + '</div></div>' +
       (m.den_han_con_thieu > 0 ? '<div class="neg" style="font-size:.85rem;margin-top:4px">Trong đó đến hôm nay đã tới hạn mà còn thiếu: ' + money(m.den_han_con_thieu) + '</div>' : '') +
