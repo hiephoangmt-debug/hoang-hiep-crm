@@ -83,7 +83,7 @@
 	}
 	function renderChips() {
 		chips.innerHTML = '';
-		if ( state.lead || state.msgs.filter( function ( m ) { return m.role === 'user'; } ).length > 3 ) {
+		if ( state.lead || state.msgs.some( function ( m ) { return m.role === 'user'; } ) ) {
 			return;
 		}
 		( C.chips || [] ).forEach( function ( c ) {

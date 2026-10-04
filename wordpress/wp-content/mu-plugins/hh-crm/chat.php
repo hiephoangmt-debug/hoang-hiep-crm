@@ -123,6 +123,12 @@ function hh_chat_handle() {
 		}
 	}
 
+	// Báo Telegram khi khách bắt đầu chat (1 lần mỗi cuộc chat), chưa cần số điện thoại.
+	if ( ! $lead_id && function_exists( 'hh_tg_send' ) && '0' !== (string) hh_chat_opt( 'tg_start', '1' ) && ! get_transient( 'hh_chat_tg_' . $conv ) ) {
+		set_transient( 'hh_chat_tg_' . $conv, 1, DAY_IN_SECONDS );
+		hh_tg_send( "💬 Khách đang chat trên web (chưa để số)\n" . ( $page ? 'Đang xem: ' . get_the_title( $page ) . ' – ' . get_permalink( $page ) . "\n" : '' ) . 'Khách hỏi: ' . $last . "\n\nKhi khách để lại số, tin nhắn có số điện thoại sẽ về đây." );
+	}
+
 	$reply = '';
 	$mode  = 'script';
 	if ( hh_chat_api_key() && hh_chat_budget_ok() ) {
@@ -365,18 +371,29 @@ function hh_chat_budget( $t ) {
 	if ( preg_match( '/(\d+(?:[.,]\d+)?)\s*(ty|ti)\b/u', $t, $m ) ) {
 		return (float) str_replace( ',', '.', $m[1] ) * 1000;
 	}
-	if ( preg_match( '/(\d{3,4})\s*(trieu|tr)\b/u', $t, $m ) ) {
+	if ( preg_match( '/(\d{1,4})\s*(trieu|tr)\b/u', $t, $m ) ) {
 		return (float) $m[1];
 	}
 	return 0;
 }
 
 /** 3 phương án cụ thể theo nhu cầu: dự án (căn hộ / biệt thự / đất nền / shophouse) hoặc tin cho thuê. */
-function hh_chat_options( $need, $budget = 0, $exclude = 0 ) {
+function hh_chat_options( $need, $budget = 0, $exclude = 0, $rooms = '' ) {
 	$rows = array();
 	if ( 'thue' === $need ) {
-		foreach ( get_posts( array( 'post_type' => 'bat-dong-san', 'numberposts' => 3, 'meta_key' => 'hh_deal', 'meta_value' => 'thue' ) ) as $p ) {
+		$room_re = '' === $rooms ? '' : ( 'studio' === $rooms ? '/studio/iu' : '/\\b' . $rooms . '\\s*(pn|phòng ngủ)/iu' );
+		foreach ( get_posts( array( 'post_type' => 'bat-dong-san', 'numberposts' => 40, 'meta_key' => 'hh_deal', 'meta_value' => 'thue' ) ) as $p ) {
+			if ( $room_re && ! preg_match( $room_re, $p->post_title ) ) {
+				continue;
+			}
+			$price = (float) get_post_meta( $p->ID, 'hh_price', true );
+			if ( $budget && $budget < 300 && $price && $price > $budget * 1.2 ) {
+				continue; // Ngân sách thuê theo tháng (triệu).
+			}
 			$rows[] = $p->post_title . ( function_exists( 'hh_listing_price' ) ? ' – ' . hh_listing_price( $p->ID ) : '' );
+			if ( count( $rows ) >= 3 ) {
+				break;
+			}
 		}
 		return $rows;
 	}
@@ -484,15 +501,20 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 		if ( $turn < 2 && ! $budget && ! $asked_budget ) {
 			return 'Dạ, anh/chị tìm ' . $labels[ $need ] . ( 'thue' === $need ? ' khu vực nào và tầm giá thuê bao nhiêu mỗi tháng ạ?' : ' để ở hay đầu tư, tầm tài chính khoảng bao nhiêu ạ? Em lọc căn phù hợp cho anh/chị.' );
 		}
-		$opts = hh_chat_options( $need, $budget, $page );
-		if ( $opts && false !== mb_strpos( $prev, $opts[0] ) ) {
+		$rooms = preg_match( '/\bstudio\b/', $t ) ? 'studio' : ( preg_match( '/\b([1-4])\s*(pn|phong ngu|phong)\b/', $t, $rm ) ? $rm[1] : '' );
+		$opts  = hh_chat_options( $need, $budget, $page, $rooms );
+		if ( $rooms && ! $opts ) {
+			return $ack . 'Hiện trên web chưa đăng căn ' . ( 'studio' === $rooms ? 'studio' : $rooms . ' phòng ngủ' ) . ' ' . $labels[ $need ] . ' phù hợp, ' . $name . ' có thêm nhiều căn chưa đăng.' . ( $has_lead ? ' Em báo ' . $name . ' gửi danh sách cho anh/chị ngay ạ.' : ' Anh/chị cho em xin số Zalo, em gửi danh sách căn đúng nhu cầu nhé.' );
+		}
+		$seen = array_filter( $opts, static fn( $o ) => false !== mb_strpos( $prev, $o ) );
+		if ( $opts && count( $seen ) === count( $opts ) && ! $rooms ) {
 			// Đã gửi danh sách này ở lượt trước → bước tiếp theo, không lặp lại.
 			return $has_lead
 				? 'Dạ vâng ạ. ' . $name . ' sẽ gửi chi tiết các căn này qua Zalo và gọi anh/chị sớm. Anh/chị muốn đặt lịch đi xem thực tế luôn không ạ?'
 				: 'Dạ vâng ạ. Anh/chị muốn em gửi chi tiết phương án nào trước, hay đặt lịch đi xem thực tế cả 3 trong một buổi ạ? Để lại số Zalo, ' . $name . ' sắp xếp và gọi xác nhận ngay.';
 		}
 		if ( $opts ) {
-			return $ack . 'Em gợi ý ' . count( $opts ) . ' phương án ' . $labels[ $need ] . ( $budget ? ' trong tầm ' . hh_format_price( $budget ) : '' ) . ' anh/chị tham khảo:' . "\n• " . implode( "\n• ", $opts ) . "\n" . ( $ask ? trim( $ask ) : 'Anh/chị thấy phương án nào hợp, em gửi chi tiết căn trống ạ?' );
+			return $ack . 'Em gợi ý ' . count( $opts ) . ' phương án ' . $labels[ $need ] . ( $rooms ? ( 'studio' === $rooms ? ' studio' : ' ' . $rooms . ' phòng ngủ' ) : '' ) . ( $budget ? ' trong tầm ' . hh_format_price( $budget, 'thue' === $need && $budget < 300 ) : '' ) . ' anh/chị tham khảo:' . "\n• " . implode( "\n• ", $opts ) . "\n" . ( $ask ? trim( $ask ) : 'Anh/chị thấy phương án nào hợp, em gửi chi tiết căn trống ạ?' );
 		}
 	}
 
@@ -529,6 +551,7 @@ function hh_chat_settings_page() {
 			array(
 				'enabled'     => empty( $_POST['enabled'] ) ? '0' : '1',
 				'popup'       => empty( $_POST['popup'] ) ? '0' : '1',
+				'tg_start'    => empty( $_POST['tg_start'] ) ? '0' : '1',
 				'api_key'     => '' === $key ? ( $old['api_key'] ?? '' ) : ( '-' === $key ? '' : $key ),
 				'model'       => isset( HH_CHAT_MODELS[ $_POST['model'] ?? '' ] ) ? sanitize_text_field( wp_unslash( $_POST['model'] ) ) : 'claude-opus-5-5',
 				'daily_limit' => absint( $_POST['daily_limit'] ?? 300 ),
@@ -551,6 +574,7 @@ function hh_chat_settings_page() {
 			<table class="form-table">
 				<tr><th>Bật chat</th><td><label><input type="checkbox" name="enabled" value="1" <?php checked( hh_chat_enabled() ); ?>> Hiện khung chat trên web</label></td></tr>
 				<tr><th>Tự mở lời chào</th><td><label><input type="checkbox" name="popup" value="1" <?php checked( '0' !== (string) hh_chat_opt( 'popup', '1' ) ); ?>> Sau khoảng 25 giây hiện bong bóng lời chào (1 lần mỗi lượt truy cập)</label></td></tr>
+				<tr><th>Báo Telegram</th><td><label><input type="checkbox" name="tg_start" value="1" <?php checked( '0' !== (string) hh_chat_opt( 'tg_start', '1' ) ); ?>> Báo ngay khi khách bắt đầu chat (chưa để số). Khách để số luôn được báo.</label></td></tr>
 				<tr><th>API key Claude</th><td>
 					<input type="text" name="hh_claude_key" class="regular-text code" autocomplete="off" data-lpignore="true" data-1p-ignore spellcheck="false" placeholder="<?php echo $has_key ? 'Đã lưu: …' . esc_attr( substr( hh_chat_api_key(), -4 ) ) . ' – để trống nếu giữ nguyên' : 'sk-ant-…'; ?>" <?php disabled( defined( 'HH_CLAUDE_API_KEY' ) ); ?>>
 					<p class="description">Lấy tại console.anthropic.com → API Keys. Nhập <code>-</code> để xoá key. An toàn hơn: thêm <code>define( 'HH_CLAUDE_API_KEY', 'sk-ant-…' );</code> vào wp-config.php.</p>

@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 04/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.12.3** + plugin Hoàng Hiệp CRM **2.15.3**)
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.12.3** + plugin Hoàng Hiệp CRM **2.15.4**)
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt (khoảng 5 phút)
@@ -11,7 +11,7 @@
 4. **Cài đặt → Đường dẫn tĩnh** → bấm **Lưu** (để trang mới Tòa F2, phân khu Hải Vân Bay chạy được).
 5. **LiteSpeed Cache → Purge All**, rồi Ctrl + Shift + R (điện thoại: tắt hẳn tab, mở lại).
 
-**Kiểm tra sau khi cài:** Giao diện hiện 2.12.3 · Plugin hiện 2.15.3 · mở `/du-an/fours-tower-f2-thap-mai/` thấy 4 con số 18% – 25% – 15% – 70%.
+**Kiểm tra sau khi cài:** Giao diện hiện 2.12.3 · Plugin hiện 2.15.4 · mở `/du-an/fours-tower-f2-thap-mai/` thấy 4 con số 18% – 25% – 15% – 70%.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
 
