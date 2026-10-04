@@ -1,13 +1,16 @@
-/* Hoàng Hiệp – navy đậm, xanh dương & cam (đổi bảng màu: Giao diện → Tùy biến → Bảng màu) */
+/* Hoàng Hiệp – xanh navy, nâu & cam (đổi bảng màu: Giao diện → Tùy biến → Bảng màu) */
 :root {
 	--navy: #0b2447;
 	--navy-2: #123a74;
 	--navy-3: #1d5fbf;
-	/* Màu nhấn: --gold = sáng (chữ, đường kẻ trên nền navy), --gold-2 = đậm (nút, chữ nhấn trên nền trắng). */
-	--gold: #ffb627;
-	--gold-2: #ea580c;
-	--gold-3: #c2410c;
-	--gold-soft: #fff3e8;
+	/* Nâu: --gold = nâu sáng / vàng đồng (chữ, đường kẻ trên nền navy), --gold-2 = nâu đậm (nhãn, chữ nhấn trên nền trắng). */
+	--gold: #e9a35c;
+	--gold-2: #8a5a36;
+	--gold-3: #6e4527;
+	--gold-soft: #f7eee6;
+	/* Cam: nút kêu gọi hành động. */
+	--cta: #ea580c;
+	--cta-2: #c2410c;
 	--ink: #14223a;
 	--text: #44526a;
 	--muted: #7a869a;
@@ -71,8 +74,8 @@ p { margin: 0 0 1em; }
 	transition: background .2s, color .2s, border-color .2s, transform .2s;
 }
 .btn:hover { transform: translateY(-1px); }
-.btn--gold { background: var(--gold-2); color: var(--white); }
-.btn--gold:hover { background: var(--gold-3); color: var(--white); }
+.btn--gold { background: var(--cta); color: var(--white); }
+.btn--gold:hover { background: var(--cta-2); color: var(--white); }
 .btn--navy { background: var(--navy); color: var(--white); }
 .btn--navy:hover { background: var(--navy-3); color: var(--white); }
 .btn--outline { border-color: var(--navy); color: var(--navy); background: transparent; }
@@ -826,7 +829,7 @@ img.article-head__author { object-fit: cover; border: 2px solid var(--gold); }
 .contact-dock__btn:hover { color: var(--white); transform: scale(1.06); }
 .contact-dock__btn--call { background: var(--ok); animation: hh-pulse 2.2s infinite; }
 .contact-dock__btn--zalo { background: var(--zalo); font-size: .8rem; }
-.contact-dock__btn--form { background: var(--gold-2); color: var(--white); }
+.contact-dock__btn--form { background: var(--cta); color: var(--white); }
 @keyframes hh-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(46, 125, 79, .5); } 50% { box-shadow: 0 0 0 12px rgba(46, 125, 79, 0); } }
 /* Màn hình máy tính: nút tròn nằm ở lề trái, nội dung luôn chừa lề đủ rộng để nút không che chữ (hai bên đều nhau). */
 @media (min-width: 701px) {

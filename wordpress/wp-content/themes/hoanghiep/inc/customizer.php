@@ -171,10 +171,11 @@ function hoanghiep_customize( $wp_customize ) {
 /** Bảng màu chọn được trong Tùy biến (mặc định: navy đậm + xanh dương + cam – trong main.css). */
 function hoanghiep_palettes() {
 	return array(
-		'cam'  => array( 'label' => 'Navy đậm + xanh dương + cam (mặc định – nổi bật)', 'vars' => array() ),
-		'do'   => array( 'label' => 'Navy + đỏ + vàng (khuyến mãi, mạnh mẽ)', 'vars' => array( '--navy' => '#0a2342', '--navy-2' => '#11407a', '--navy-3' => '#1a63c4', '--gold' => '#ffcf4d', '--gold-2' => '#d62828', '--gold-3' => '#a4161a', '--gold-soft' => '#fdeeee' ) ),
-		'vang' => array( 'label' => 'Xanh dương + vàng cam (tươi sáng)', 'vars' => array( '--navy' => '#06204a', '--navy-2' => '#0b3d8c', '--navy-3' => '#1565e0', '--gold' => '#ffc83d', '--gold-2' => '#f59e0b', '--gold-3' => '#d97706', '--gold-soft' => '#fff7e0' ) ),
-		'nau'  => array( 'label' => 'Navy + nâu (cổ điển, bản cũ)', 'vars' => array( '--navy' => '#0a2342', '--navy-2' => '#123761', '--navy-3' => '#1d4a7d', '--gold' => '#c99b70', '--gold-2' => '#8a5a36', '--gold-3' => '#6e4527', '--gold-soft' => '#f5ede5' ) ),
+		'cam'  => array( 'label' => 'Xanh navy + nâu + nút cam (mặc định)', 'vars' => array() ),
+		'navycam' => array( 'label' => 'Navy + cam (không nâu – nổi bật nhất)', 'vars' => array( '--gold' => '#ffb627', '--gold-2' => '#ea580c', '--gold-3' => '#c2410c', '--gold-soft' => '#fff3e8' ) ),
+		'do'   => array( 'label' => 'Navy + đỏ + vàng (khuyến mãi, mạnh mẽ)', 'vars' => array( '--navy' => '#0a2342', '--navy-2' => '#11407a', '--navy-3' => '#1a63c4', '--gold' => '#ffcf4d', '--gold-2' => '#d62828', '--gold-3' => '#a4161a', '--gold-soft' => '#fdeeee', '--cta' => '#d62828', '--cta-2' => '#a4161a' ) ),
+		'vang' => array( 'label' => 'Xanh dương + vàng cam (tươi sáng)', 'vars' => array( '--navy' => '#06204a', '--navy-2' => '#0b3d8c', '--navy-3' => '#1565e0', '--gold' => '#ffc83d', '--gold-2' => '#f59e0b', '--gold-3' => '#d97706', '--gold-soft' => '#fff7e0', '--cta' => '#f59e0b', '--cta-2' => '#d97706' ) ),
+		'nau'  => array( 'label' => 'Navy + nâu (bản cũ, nút nâu)', 'vars' => array( '--navy' => '#0a2342', '--navy-2' => '#123761', '--navy-3' => '#1d4a7d', '--gold' => '#c99b70', '--gold-2' => '#8a5a36', '--gold-3' => '#6e4527', '--gold-soft' => '#f5ede5', '--cta' => '#8a5a36', '--cta-2' => '#6e4527' ) ),
 	);
 }
 
