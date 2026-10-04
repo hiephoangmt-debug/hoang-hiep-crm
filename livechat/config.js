@@ -35,8 +35,8 @@ module.exports = {
     agentTitle: 'Chuyên viên tư vấn dự án',
     hotline: process.env.HOTLINE || '0900000000',
     zalo: process.env.ZALO || '0900000000',
-    primaryColor: '#0b2a5b',
-    accentColor: '#f47c20',
+    primaryColor: process.env.PRIMARY_COLOR || '#0b2a5b', // xanh navy
+    accentColor: process.env.ACCENT_COLOR || '#f47c20', // cam
   },
 
   welcome:
