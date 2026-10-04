@@ -1,0 +1,53 @@
+# Gói cập nhật hiephoangmt.com – 04/10/2026
+
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.10.3** + plugin Hoàng Hiệp CRM **2.13.3**)
+**Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
+
+## Cài đặt (khoảng 5 phút)
+
+1. **File Manager** → mở `public_html/wp-content` (đứng *trong* wp-content).
+2. Tải lên `hoang-hiep-tron-goi.zip` → chuột phải → **Extract** vào `/public_html/wp-content` → chọn **ghi đè**.
+3. WordPress → **Dự án → Nhập dữ liệu Đà Nẵng** → bấm **Nhập / cập nhật dữ liệu**.
+4. **Cài đặt → Đường dẫn tĩnh** → bấm **Lưu** (để trang mới Tòa F2, phân khu Hải Vân Bay chạy được).
+5. **LiteSpeed Cache → Purge All**, rồi Ctrl + Shift + R (điện thoại: tắt hẳn tab, mở lại).
+
+**Kiểm tra sau khi cài:** Giao diện hiện 2.10.3 · Plugin hiện 2.13.3 · mở `/du-an/fours-tower-f2-thap-mai/` thấy 4 con số 18% – 25% – 15% – 70%.
+
+Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới
+
+### Dự án FourS Tower & trang Tòa F2 (dạng landing để chạy quảng cáo)
+- Trang mới **FourS Tower F2 – Tháp Mai**: 4 con số chính, vốn tự có theo loại căn (Studio ~405 triệu, 1PN+ ~619 triệu, 2PN ~857 triệu – vay 70%) có nút nhận căn qua Zalo, bảng "Một căn 3 tỷ trả bao nhiêu" 5 phương án, tiến độ Sun Early Key, FAQ, SEO.
+- Mục Chính sách gọn: khung ưu đãi có đồng hồ đếm ngược đến 25/10/2026 + 1 nút; bảng chiết khấu cộng dồn (17,2% / 10,6% / 8,3% / 5,9% / 3%), lịch thanh toán, vay ngân hàng nằm trong nút **Xem chi tiết**.
+- Số liệu theo phiếu tính giá CĐT – CSBH 4.2 Tòa F2 (từ 26/9/2026). Giá "từ" là giá tham khảo nguồn phân phối; có bảng giá chính thức F2 thì gửi để thay.
+
+### Vinhomes Hải Vân Bay
+- Cập nhật 10/2026; 4 trang phân khu Bạch Vân, Vịnh Mây, Đảo Ngọc, Tinh Vân (giá, tiện ích, giỏ hàng 6 căn giá "Liên hệ", FAQ).
+- Ô **Link ảnh**: dán link Google Drive từng ảnh, web tự tải ảnh về (chạy ngầm, vài phút). Link phải chia sẻ "Bất kỳ ai có đường liên kết".
+
+### Giao diện
+- Màu: **xanh navy + nâu**, **cam** chỉ ở điểm nổi bật (nút gửi thông tin, ưu đãi, con số chính). Đổi bảng màu: Giao diện → Tùy biến → Hoàng Hiệp – Thương hiệu → Bảng màu.
+- Nút Gọi / Zalo / Tư vấn ở bên trái, nằm giữa mép màn hình và chữ; cột phải gọn (≈ 1/3 cột chữ).
+- Bảng trong bài hiển thị gọn trên điện thoại (không tràn, chữ đều); tiêu đề trên ảnh luôn trắng, rõ.
+- Trang dự án tự ẩn phần bài giới thiệu trùng với mục Tổng quan / Vị trí / Bảng giá / Chính sách.
+
+### Chức năng
+- Tìm dự án gõ sai, không dấu vẫn ra (VD "Fous" → FourS Tower), dự án khớp nhất lên đầu.
+- Sửa lỗi nghiêm trọng khi bấm Nhập dữ liệu (tải ảnh chuyển sang chạy ngầm); nếu có lỗi khác, trang báo dòng lỗi thay vì trang trắng.
+
+## Ô mới trong quản trị (Dự án → tab Giá & chính sách)
+
+| Ô | Dùng để | Ví dụ nhập |
+|---|---|---|
+| Con số nổi bật | 4 số lớn trong khung ưu đãi; có nhập thì mục Chính sách tự gọn | `18% \| Chiết khấu cộng dồn tối đa` |
+| Bảng chiết khấu (4 cột) | Phương án \| Hạn \| % cộng dồn \| Cách tính | `Thanh toán sớm 95% \| Trước 25/10/2026 \| 17,2% \| EB 3% + 3% + 12%` |
+| Vốn tự có theo loại căn | Thẻ vốn tự có + nút Zalo (chèn vào bài: `[hh_von_tu_co]`) | `Studio \| Giá từ ~1,7 tỷ \| ~405 triệu \| Ngân hàng cho vay ~1,13 tỷ` |
+| Hạn ưu đãi | Đồng hồ đếm ngược, hết hạn tự ẩn | `25/10/2026` |
+| Link ảnh (tab Thư viện) | Ảnh từ Google Drive | `link \| chú thích \| thư viện / tiện ích / mặt bằng / đại diện` |
+
+## Còn chờ anh
+- Bảng giá chính thức Tòa F2 (thay giá tham khảo, tính lại vốn tự có).
+- Kiểm tra quyền chia sẻ các link ảnh Drive Hải Vân Bay; ảnh riêng cho từng phân khu.
+- Chính sách CĐT bản chính thức tháng 10/2026 của Hải Vân Bay.
+- Nội dung thật trang Giới thiệu, địa chỉ văn phòng.
