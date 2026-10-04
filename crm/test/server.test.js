@@ -933,6 +933,32 @@ test('fees and amounts accept both 1.8 and 1,8', () => {
   assert.strictEqual(b.doanh_thu, 125000);
 });
 
+test('amounts of 100 million+ written in thousands (124.523) and duplicate lines', () => {
+  const { call, gas, fake } = fresh();
+  fake.setToday('2026-10-04');
+  assert.strictEqual(gas.parseAmount_('124.523'), 124523000);
+  assert.strictEqual(gas.parseAmount_('1.975.061'), 1975061);
+  assert.strictEqual(gas.parseAmount_('1,5 tỷ'), 1500000000);
+  // lần dán trước (bản cũ) lưu nhầm 124.523đ
+  call('saveTransaction', { ngay: '2026-09-29', dich_vu: 'Đáo hạn', the: 'VP', ten_khach: 'Khách K', so_tien: 124523, phi_khach: 1.9, phi_may_text: '1.6' });
+  const text = ['29/9: Hoàn 122.531', 'ĐH VP Khách K 124.523/1.9 hoàn 1.6', 'ĐH TCB Khách L 62.500/1.9 hoàn 1.6', 'ĐH TCB Khách L 62.500/1.9 hoàn 1.6',
+    'ĐH MB Khách M 10.000/1.9 hoàn 1.6', 'ĐH MB Khách M 10.000/1.9 hoàn 1.6 lần 2'].join('\n');
+  const pv = call('pasteNotes', { text });
+  const tx = pv.items.filter((i) => i.kind === 'tx');
+  assert.strictEqual(tx[0].so_tien, 124523000);
+  assert.strictEqual(tx[0].so_cu, 124523, 'old wrong amount found');
+  assert.ok(tx[2].trung, 'exact same line twice → skipped');
+  assert.ok(tx[4].canh_bao && !tx[4].trung, '"lần 2" → warned but saved');
+  const sv = call('pasteNotes', { text, save: true });
+  assert.strictEqual(sv.saved.sua, 1);
+  assert.strictEqual(sv.saved.tx, 3);
+  const all = call('listTransactions', {});
+  assert.strictEqual(all.length, 4);
+  assert.strictEqual(all.find((t) => t.the === 'VP').so_tien, 124523000);
+  assert.strictEqual(all.filter((t) => t.the === 'TCB').length, 1);
+  assert.strictEqual(all.filter((t) => t.the === 'MB').length, 2);
+});
+
 test('pasting earlier months: history before closing, December notes pasted in January, saving in rounds', () => {
   const { call, fake } = fresh();
   fake.setToday('2027-01-05');

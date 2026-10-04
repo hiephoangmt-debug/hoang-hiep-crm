@@ -789,14 +789,24 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   function num(s) { return Number(String(s == null ? '' : s).replace(',', '.').replace('%', '').trim()) || 0; }
   function sumExpr(s) { return Math.round(String(s || '').replace(/[()%\s]/g, '').split('+').reduce(function (a, x) { return a + num(x); }, 0) * 100) / 100; }
   function parseAmount(s) {
-    var t = String(s || '').trim().toLowerCase();
-    var m = t.match(/^([\d.,]+)\s*(tr|triệu|trieu|m)$/);
+    var t = String(s || '').trim().toLowerCase().replace(/\s+/g, ' ');
+    var m = t.match(/^([\d.,]+)\s*(tỷ|ty|tỉ|ti)$/);
+    if (m) return Math.round(Number(m[1].replace(',', '.')) * 1e9);
+    m = t.match(/^([\d.,]+)\s*(tr|triệu|trieu|m)$/);
     if (m) return Math.round(Number(m[1].replace(',', '.')) * 1e6);
+    m = t.match(/^([\d.,]+)\s*k$/);
+    if (m) return Math.round(Number(m[1].replace(',', '.')) * 1e3);
+    // Ghi theo nghìn đồng như sổ: "8.999" = 8.999.000đ, "124.523" = 124.523.000đ (1 dấu ngăn cách);
+    // "1.975.061" (từ 2 dấu ngăn cách) = ghi đủ đồng.
+    if (/^\d{1,3}([.,]\d{3})+$/.test(t)) {
+      var g = t.split(/[.,]/).length - 1, v = Number(t.replace(/[.,]/g, ''));
+      return g === 1 ? v * 1000 : v;
+    }
     var n = Number(t.replace(/[.,\s]/g, ''));
     if (!(n > 0)) return 0;
     return n < 100000 ? n * 1000 : n;
   }
-  function amountText(n) { n = Number(n) || 0; return n % 1000 === 0 && n < 1e8 ? String(n / 1000).replace(/\B(?=(\d{3})+(?!\d))/g, '.') : String(n); }
+  function amountText(n) { n = Number(n) || 0; return n % 1000 === 0 && n < 1e9 ? String(n / 1000).replace(/\B(?=(\d{3})+(?!\d))/g, '.') : String(n); }
   function toast(msg, err) {
     var t = document.createElement('div');
     t.className = 'toast' + (err ? ' err' : '');
@@ -854,7 +864,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       S.boot = b;
       $('#login').classList.add('hidden');
       $('#app').classList.remove('hidden');
-      var UI_VERSION = 'v04.10j';
+      var UI_VERSION = 'v04.10k';
       $('#today-label').textContent = dmy(b.today) + ' · ' + UI_VERSION + (b.version === UI_VERSION ? '' : ' ⚠ Mã.gs chưa cập nhật');
       fillSelect($('[name=dich_vu]'), b.services);
       fillSelect($('#tx-service'), b.services, true);
@@ -970,15 +980,20 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     var rows = S.tx.filter(function (t) {
       return (!svc || t.dich_vu === svc) && (!q || [t.ten_khach, t.the, t.may, t.sdt, t.ghi_chu].join(' ').toLowerCase().indexOf(q) >= 0);
     });
+    var dupKey = {};
+    S.tx.forEach(function (t) { var k = t.ngay + '|' + normName(t.the) + '|' + t.so_tien + '|' + normName(t.ten_khach); dupKey[k] = (dupKey[k] || 0) + 1; });
+    function isDup(t) { return dupKey[t.ngay + '|' + normName(t.the) + '|' + t.so_tien + '|' + normName(t.ten_khach)] > 1; }
+    var nDup = rows.filter(isDup).length;
     var s = rows.reduce(function (a, t) { a.n++; a.tien += +t.so_tien || 0; a.phi += +t.tien_phi || 0; a.cp += +t.chi_phi || 0; a.ln += +t.loi_nhuan || 0; a.hoan += +t.tien_hoan || 0; if (t.hoan_tt === 'Đã nhận') { a.ngoai += +t.tien_hoan || 0; a.nn++; } return a; }, { n: 0, tien: 0, phi: 0, cp: 0, ln: 0, hoan: 0, ngoai: 0, nn: 0 });
     $('#tx-kpis').innerHTML = kpi('Số giao dịch', s.n) + kpi('Tổng tiền', short(s.tien)) + kpi('Phí khách', money(s.phi)) +
       kpi('Phí máy', money(s.cp)) + kpi('Phí của mình', money(s.ln), s.ln >= 0 ? 'pos' : 'neg') +
       kpi(rn() + ' hoàn (tiền − phí máy)', money(s.hoan)) +
-      (s.nn ? kpi('Ngoài sổ công nợ (' + s.nn + ' GD)', money(s.ngoai), 'neg') + kpi('Tính vào công nợ', money(s.hoan - s.ngoai)) : '');
+      (s.nn ? kpi('Ngoài sổ công nợ (' + s.nn + ' GD)', money(s.ngoai), 'neg') + kpi('Tính vào công nợ', money(s.hoan - s.ngoai)) : '') +
+      (nDup ? kpi('⚠ Có thể nhập trùng', nDup + ' GD – bấm vào để xoá bớt', 'neg') : '');
     $('#tx-table').innerHTML = '<thead><tr><th>Ngày</th><th>DV</th><th>Thẻ</th><th>Ngày đáo / SK</th><th>Khách</th><th class="num">Số tiền</th><th>Máy</th><th class="num">Phí khách/máy</th><th class="num">Phí của mình</th><th class="num">' + esc(rn()) + ' hoàn</th></tr></thead><tbody>' +
       (rows.length ? rows.map(function (t) {
         return '<tr class="click" data-tx="' + esc(t.id) + '">' +
-          '<td data-l="Ngày">' + dm(t.ngay) + '</td>' +
+          '<td data-l="Ngày">' + dm(t.ngay) + (isDup(t) ? ' <span class="badge badge--bad">⚠ trùng?</span>' : '') + '</td>' +
           '<td data-l="Dịch vụ">' + esc(t.dich_vu) + '</td>' +
           '<td data-l="Thẻ"><b>' + esc(t.the) + '</b></td>' +
           '<td data-l="Ngày đáo / sao kê" class="opt">' + (t.ngay_dao ? 'Đáo ' + esc(t.ngay_dao) : '') + (t.ngay_sao_ke ? (t.ngay_dao ? ' · ' : '') + 'SK ' + esc(t.ngay_sao_ke) : '') + '</td>' +
@@ -1119,6 +1134,10 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       may: f.may.value.trim(), phi_khach: num(f.phi_khach.value), phi_may_text: f.phi_may_text.value.trim() || '0', ghi_chu: f.ghi_chu.value.trim(),
       ngay_hoan: f.ngay_hoan.value, vao_so: f.vao_so.checked
     };
+    if (!payload.id) {
+      var twin = (S.tx || []).filter(function (t) { return t.ngay === payload.ngay && normName(t.the) === normName(payload.the) && Number(t.so_tien) === payload.so_tien; })[0];
+      if (twin && !confirm('Đã có giao dịch ' + dmy(twin.ngay) + ' · ' + twin.the + ' · ' + money(twin.so_tien) + ' của ' + twin.ten_khach + '.\nVẫn lưu thêm (2 lần quẹt)?')) return;
+    }
     var btn = txForm.querySelector('[type=submit]');
     btn.disabled = true;
     var hasPhotos = Object.keys(S.txPhotos || {}).length > 0;
@@ -1140,7 +1159,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     call('pasteNotes', { text: text, year: yr && yr !== S.boot.today.slice(0, 4) ? yr : '', save: save }).then(function (r) {
       btn.disabled = false;
       renderNotes(r);
-      var todo = r.items.filter(function (i) { return /tx|pay|bill/.test(i.kind) && (!i.da_co || i.sua_ngoai || i.sua_pay) && !i.da_luu; }).length;
+      var todo = r.items.filter(function (i) { return /tx|pay|bill/.test(i.kind) && (!i.da_co || i.sua_ngoai || i.sua_pay) && !i.trung && !i.da_luu; }).length;
       $('[data-act=notes-save]').disabled = save ? !r.saved.con_lai : !todo;
       if (save) {
         var sv = r.saved;
@@ -1224,6 +1243,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         : i.kind === 'bill' ? esc(i.loai_hd) + ' của ' + esc(i.a_ten) + ' · ' + money(i.so_tien) + ' · B: ' + esc(i.b_ten) + ' (' + esc(i.vi_b) + ') · A giảm ' + pct(i.phi_a) + ', mình ' + pct(i.phi_minh) + ' → lãi ' + money(i.lai)
         : '<span class="muted">' + esc(i.line) + '</span>';
       var st = i.loi ? '<span class="neg">' + esc(i.loi) + '</span>' : i.ghi_chu_chot ? '<span class="muted">' + esc(i.ghi_chu_chot) + '</span>'
+        : i.sua_tien && !i.da_luu ? '<span class="neg">đã lưu nhầm ' + money(i.so_cu) + ' → khi Lưu sẽ sửa thành ' + money(i.so_tien) + '</span>'
+        : i.canh_bao && !i.da_luu ? '<span class="neg">⚠ ' + esc(i.canh_bao) + '</span>'
         : i.sua_pay && !i.da_luu ? '<span class="neg">đã lưu trước đây ' + money(i.so_cu) + ' → khi Lưu sẽ sửa thành ' + money(i.so_tien) + '</span>'
         : i.sua_ngoai && !i.da_luu ? '<span class="neg">đã có nhưng đang tính vào công nợ → khi Lưu sẽ chuyển ra ngoài sổ</span>'
         : i.da_luu && i.truoc_chot && i.kind === 'tx' ? '<span class="pos">✓ đã lưu</span> <small class="muted">(ngoài sổ – trước chốt)</small>'

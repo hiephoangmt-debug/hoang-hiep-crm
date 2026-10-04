@@ -63,7 +63,7 @@ var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan', 'tu_ngay', 'b_tt_ngay', 'a_ck_ng
 // Kiểu tiền với C.Trâm. "Ứng trước"/"Hoàn tiền" làm giảm nợ; "Mình trả lại"/"Nợ cũ" làm tăng nợ;
 // "Điều chỉnh số dư" nhập được số âm (âm = tăng nợ).
 // Đổi mỗi lần cập nhật code – hiện cạnh ngày trên đầu app để biết đã triển khai bản mới chưa.
-var APP_VERSION = 'v04.10j';
+var APP_VERSION = 'v04.10k';
 
 var PAYMENT_TYPES = ['Ứng trước', 'Hoàn tiền', 'Mình trả lại', 'Nợ cũ', 'Điều chỉnh số dư'];
 
@@ -794,6 +794,17 @@ function apiPasteNotes_(p) {
       d2.lai += it.lai; d2.so_gd++;
       var same = allTx.filter(function (t) { return t.ngay === cur && Number(t.so_tien) === it.so_tien && normName_(t.the) === normName_(it.the); })[0];
       it.da_co = !!same;
+      // Trùng trong chính đoạn dán: cùng ngày, cùng thẻ, cùng số tiền
+      var twin = items.filter(function (x) { return x.kind === 'tx' && x.ngay === cur && x.so_tien === it.so_tien && normName_(x.the) === normName_(it.the); })[0];
+      if (twin) {
+        if (normName_(twin.line) === normName_(line)) { it.trung = twin.dong; it.da_co = true; it.loi = 'Trùng y hệt dòng ' + twin.dong + ' – bỏ qua (nếu đúng là 2 lần quẹt, ghi thêm chữ "lần 2" vào cuối dòng)'; }
+        else it.canh_bao = 'Giống dòng ' + twin.dong + ' (cùng thẻ, cùng số tiền) – kiểm tra có nhập trùng không';
+      }
+      // Lần dán trước app hiểu nhầm đơn vị (VD "124.523" thành 124.523đ thay vì 124.523.000đ) → sửa lại số tiền
+      if (!same) {
+        var wrong = allTx.filter(function (t) { return t.ngay === cur && normName_(t.the) === normName_(it.the) && Number(t.so_tien) * 1000 === it.so_tien; })[0];
+        if (wrong) { it.sua_tien = wrong; it.so_cu = Number(wrong.so_tien); }
+      }
       // Dán lại: dòng trong ngoặc trước đây lỡ tính vào công nợ → chuyển ra ngoài sổ
       if (same && it.ngoai && same.hoan_tt !== 'Đã nhận') it.sua_ngoai = same;
     } else if (it.kind === 'bill') {
@@ -826,6 +837,13 @@ function apiPasteNotes_(p) {
     saved.con_lai = 0;
     items.forEach(function (it) {
       if (['tx', 'pay', 'bill'].indexOf(it.kind) < 0) return;
+      if (it.sua_tien) {
+        try {
+          apiSaveTransaction_(Object.assign({}, it.sua_tien, { so_tien: it.so_tien, phi_khach: it.phi_khach, phi_may_text: it.phi_may_text }));
+          it.da_luu = true; saved.sua = (saved.sua || 0) + 1;
+        } catch (e) { it.loi = e.message || String(e); }
+        return;
+      }
       if (it.sua_pay) {
         try {
           apiSavePayment_({ id: it.sua_pay.id, ngay: it.ngay, loai: it.loai, so_tien: it.so_tien, ghi_chu: it.ghi_chu });
@@ -2133,9 +2151,19 @@ function sumExpr_(s) {
 
 /** Số tiền như trong sổ: "8.999" = 8.999.000đ, "110tr" = 110.000.000đ, "500000" = 500.000đ. */
 function parseAmount_(s) {
-  var t = String(s || '').trim().toLowerCase();
-  var m = t.match(/^([\d.,]+)\s*(tr|triệu|trieu|m)$/);
+  var t = String(s || '').trim().toLowerCase().replace(/\s+/g, ' ');
+  var m = t.match(/^([\d.,]+)\s*(tỷ|ty|tỉ|ti)$/);
+  if (m) return Math.round(Number(m[1].replace(',', '.')) * 1e9);
+  m = t.match(/^([\d.,]+)\s*(tr|triệu|trieu|m)$/);
   if (m) return Math.round(Number(m[1].replace(',', '.')) * 1e6);
+  m = t.match(/^([\d.,]+)\s*k$/);
+  if (m) return Math.round(Number(m[1].replace(',', '.')) * 1e3);
+  // Ghi theo nghìn đồng như sổ: "8.999" = 8.999.000đ, "124.523" = 124.523.000đ (1 dấu ngăn cách);
+  // "1.975.061" (từ 2 dấu ngăn cách) = ghi đủ đồng.
+  if (/^\d{1,3}([.,]\d{3})+$/.test(t)) {
+    var g = t.split(/[.,]/).length - 1, v = Number(t.replace(/[.,]/g, ''));
+    return g === 1 ? v * 1000 : v;
+  }
   var n = Number(t.replace(/[.,\s]/g, ''));
   if (!(n > 0)) return 0;
   return n < 100000 ? n * 1000 : n;
