@@ -520,7 +520,10 @@ add_action(
 function hh_chat_settings_page() {
 	if ( isset( $_POST['hh_chat_save'] ) && check_admin_referer( 'hh_chat' ) ) {
 		$old = (array) get_option( 'hh_chat', array() );
-		$key = trim( sanitize_text_field( wp_unslash( $_POST['api_key'] ?? '' ) ) );
+		$key = trim( sanitize_text_field( wp_unslash( $_POST['hh_claude_key'] ?? '' ) ) );
+		if ( '' !== $key && '-' !== $key && ! preg_match( '/^sk-ant-[A-Za-z0-9_-]{20,}$/', $key ) ) {
+			$key = ''; // Không phải API key (VD trình duyệt tự điền mật khẩu) – bỏ qua.
+		}
 		update_option(
 			'hh_chat',
 			array(
@@ -549,7 +552,7 @@ function hh_chat_settings_page() {
 				<tr><th>Bật chat</th><td><label><input type="checkbox" name="enabled" value="1" <?php checked( hh_chat_enabled() ); ?>> Hiện khung chat trên web</label></td></tr>
 				<tr><th>Tự mở lời chào</th><td><label><input type="checkbox" name="popup" value="1" <?php checked( '0' !== (string) hh_chat_opt( 'popup', '1' ) ); ?>> Sau khoảng 25 giây hiện bong bóng lời chào (1 lần mỗi lượt truy cập)</label></td></tr>
 				<tr><th>API key Claude</th><td>
-					<input type="password" name="api_key" class="regular-text" autocomplete="off" placeholder="<?php echo $has_key ? '•••••••• đã lưu – để trống nếu giữ nguyên' : 'sk-ant-…'; ?>" <?php disabled( defined( 'HH_CLAUDE_API_KEY' ) ); ?>>
+					<input type="text" name="hh_claude_key" class="regular-text code" autocomplete="off" data-lpignore="true" data-1p-ignore spellcheck="false" placeholder="<?php echo $has_key ? 'Đã lưu: …' . esc_attr( substr( hh_chat_api_key(), -4 ) ) . ' – để trống nếu giữ nguyên' : 'sk-ant-…'; ?>" <?php disabled( defined( 'HH_CLAUDE_API_KEY' ) ); ?>>
 					<p class="description">Lấy tại console.anthropic.com → API Keys. Nhập <code>-</code> để xoá key. An toàn hơn: thêm <code>define( 'HH_CLAUDE_API_KEY', 'sk-ant-…' );</code> vào wp-config.php.</p>
 				</td></tr>
 				<tr><th>Mô hình AI</th><td><select name="model">

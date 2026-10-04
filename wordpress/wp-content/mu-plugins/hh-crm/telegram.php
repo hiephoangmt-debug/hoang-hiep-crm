@@ -70,13 +70,20 @@ function hh_tg_page() {
 	if ( isset( $_POST['hh_tg_action'] ) && check_admin_referer( 'hh_tg' ) ) {
 		$opt    = (array) get_option( 'hh_telegram', array() );
 		$action = sanitize_key( $_POST['hh_tg_action'] );
-		$token  = trim( sanitize_text_field( wp_unslash( $_POST['token'] ?? '' ) ) );
-		if ( '' !== $token ) {
-			$opt['token'] = '-' === $token ? '' : $token;
+		$token  = trim( sanitize_text_field( wp_unslash( $_POST['tg_bot_token'] ?? '' ) ) );
+		if ( '-' === $token ) {
+			$opt['token'] = '';
+		} elseif ( '' !== $token ) {
+			// Lấy đúng token dạng 123456789:AA… dù dán cả câu của BotFather hoặc có chữ "bot" phía trước.
+			if ( preg_match( '/(\d{6,}:[A-Za-z0-9_-]{30,})/', $token, $m ) ) {
+				$opt['token'] = $m[1];
+			} else {
+				$notice = 'Token chưa đúng định dạng (dạng 123456789:AAH…). Mở BotFather, copy lại nguyên dòng token.';
+			}
 		}
 		$opt['chat_ids'] = sanitize_text_field( wp_unslash( $_POST['chat_ids'] ?? ( $opt['chat_ids'] ?? '' ) ) );
 
-		if ( 'detect' === $action && ! empty( $opt['token'] ) ) {
+		if ( 'detect' === $action && '' === $notice && ! empty( $opt['token'] ) ) {
 			$res  = wp_remote_get( 'https://api.telegram.org/bot' . preg_replace( '/[^A-Za-z0-9:_-]/', '', $opt['token'] ) . '/getUpdates', array( 'timeout' => 10 ) );
 			$data = is_wp_error( $res ) ? null : json_decode( (string) wp_remote_retrieve_body( $res ), true );
 			$ids  = array();
@@ -93,7 +100,7 @@ function hh_tg_page() {
 			} elseif ( is_wp_error( $res ) ) {
 				$notice = 'Không kết nối được Telegram: ' . $res->get_error_message();
 			} elseif ( empty( $data['ok'] ) ) {
-				$notice = 'Token không đúng: ' . ( $data['description'] ?? 'Telegram từ chối' );
+				$notice = 'Telegram báo token không đúng (' . ( $data['description'] ?? 'từ chối' ) . '). Dán lại token copy từ BotFather vào ô Token bot rồi bấm Lưu.';
 			} else {
 				$notice = 'Chưa thấy tin nhắn nào. Mở Telegram, tìm bot của anh, bấm Start (hoặc nhắn "hi"), rồi bấm lại "Lấy Chat ID".';
 			}
@@ -101,8 +108,8 @@ function hh_tg_page() {
 		update_option( 'hh_telegram', $opt, false );
 		if ( 'test' === $action ) {
 			$notice = hh_tg_send( "✅ Thử thông báo từ " . home_url() . "\nKhi có khách để lại số trên web, tin nhắn sẽ về đây." ) ? 'Đã gửi tin thử – anh mở Telegram kiểm tra nhé.' : 'Gửi chưa được: ' . get_option( 'hh_tg_last_error', 'thiếu token hoặc Chat ID' );
-		} elseif ( 'save' === $action ) {
-			$notice = 'Đã lưu.';
+		} elseif ( 'save' === $action && '' === $notice ) {
+			$notice = 'Đã lưu. Giờ mở bot trong Telegram bấm Start, rồi bấm "Lấy Chat ID".';
 		}
 	}
 	$has_token = '' !== hh_tg_opt( 'token' );
@@ -120,7 +127,7 @@ function hh_tg_page() {
 		<form method="post">
 			<?php wp_nonce_field( 'hh_tg' ); ?>
 			<table class="form-table">
-				<tr><th>Token bot</th><td><input type="password" name="token" class="regular-text" autocomplete="off" placeholder="<?php echo $has_token ? '•••••••• đã lưu – để trống nếu giữ nguyên' : '123456789:AA…'; ?>"><p class="description">Nhập <code>-</code> để xoá token.</p></td></tr>
+				<tr><th>Token bot</th><td><input type="text" name="tg_bot_token" class="regular-text code" autocomplete="off" data-lpignore="true" data-1p-ignore spellcheck="false" placeholder="<?php echo $has_token ? 'Đã lưu: …' . esc_attr( substr( hh_tg_opt( 'token' ), -6 ) ) . ' – để trống nếu giữ nguyên' : '123456789:AAH…'; ?>"><p class="description">Nhập <code>-</code> để xoá token.</p></td></tr>
 				<tr><th>Chat ID nhận tin</th><td><input type="text" name="chat_ids" class="regular-text" value="<?php echo esc_attr( hh_tg_opt( 'chat_ids' ) ); ?>" placeholder="Tự điền khi bấm Lấy Chat ID"><p class="description">Nhiều nơi nhận: cách nhau bằng dấu phẩy (VD: anh và nhóm sale).</p></td></tr>
 			</table>
 			<?php if ( get_option( 'hh_tg_last_error' ) ) : ?><p style="color:#b32d2e">Lỗi gần nhất: <?php echo esc_html( get_option( 'hh_tg_last_error' ) ); ?></p><?php endif; ?>
