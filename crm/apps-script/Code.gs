@@ -63,7 +63,7 @@ var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan', 'tu_ngay', 'b_tt_ngay', 'a_ck_ng
 // Kiểu tiền với C.Trâm. "Ứng trước"/"Hoàn tiền" làm giảm nợ; "Mình trả lại"/"Nợ cũ" làm tăng nợ;
 // "Điều chỉnh số dư" nhập được số âm (âm = tăng nợ).
 // Đổi mỗi lần cập nhật code – hiện cạnh ngày trên đầu app để biết đã triển khai bản mới chưa.
-var APP_VERSION = 'v04.10d';
+var APP_VERSION = 'v04.10e';
 
 var PAYMENT_TYPES = ['Ứng trước', 'Hoàn tiền', 'Mình trả lại', 'Nợ cũ', 'Điều chỉnh số dư'];
 
@@ -753,6 +753,8 @@ function apiPasteNotes_(p) {
     var h = line.match(/^(\d{1,2}[\/.-]\d{1,2}(?:[\/.-]\d{2,4})?)\s*:\s*(.*)$/);
     if (h) {
       try { cur = parseDateLoose_(h[1], year); } catch (e) { items.push({ dong: i + 1, line: line, kind: 'err', loi: e.message }); return; }
+      // Sổ tháng 12 dán vào tháng 1: ngày chưa tới thì hiểu là năm trước
+      if (!p.year && !/\d{1,2}[\/.-]\d{1,2}[\/.-]\d/.test(h[1]) && cur > addDays_(todayStr_(), 1)) cur = parseDateLoose_(h[1], year - 1);
       var d = day(cur), hh = h[2].match(/hoàn\s+([\d.,]+\s*k?)/i), ll = h[2].match(/lãi\s+([\d.,]+\s*k?)/i);
       if (hh) d.hoan_so = noteThousand_(hh[1]);
       if (ll) d.lai_so = noteThousand_(ll[1]);
@@ -786,9 +788,14 @@ function apiPasteNotes_(p) {
   });
   var saved = { tx: 0, pay: 0, bill: 0, bo_qua: 0 };
   if (p.save) {
+    // Dán cả tháng: Apps Script chỉ chạy tối đa 6 phút/lần → lưu tới ~4 phút rồi dừng, bấm Lưu lần nữa để lưu tiếp
+    // (dòng đã lưu sẽ tự bỏ qua).
+    var started = Date.now(), budget = Number(p.budgetMs) || 240000;
+    saved.con_lai = 0;
     items.forEach(function (it) {
       if (['tx', 'pay', 'bill'].indexOf(it.kind) < 0) return;
       if (it.da_co) { saved.bo_qua++; return; }
+      if (Date.now() - started > budget) { saved.con_lai++; return; }
       if (it.kind === 'pay' && it.truoc_chot) { saved.bo_qua++; return; }
       try {
         if (it.kind === 'tx') {

@@ -852,7 +852,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       S.boot = b;
       $('#login').classList.add('hidden');
       $('#app').classList.remove('hidden');
-      var UI_VERSION = 'v04.10d';
+      var UI_VERSION = 'v04.10e';
       $('#today-label').textContent = dmy(b.today) + ' · ' + UI_VERSION + (b.version === UI_VERSION ? '' : ' ⚠ Mã.gs chưa cập nhật');
       fillSelect($('[name=dich_vu]'), b.services);
       fillSelect($('#tx-service'), b.services, true);
@@ -1133,13 +1133,21 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     var text = $('#notes-text').value;
     if (!text.trim()) return toast('Dán nội dung sổ vào ô trước', true);
     btn.disabled = true;
-    call('pasteNotes', { text: text, year: $('#notes-year').value, save: save }).then(function (r) {
+    if (!save) $('[data-act=notes-save]').textContent = 'Lưu vào app';
+    var yr = $('#notes-year').value;
+    call('pasteNotes', { text: text, year: yr && yr !== S.boot.today.slice(0, 4) ? yr : '', save: save }).then(function (r) {
       btn.disabled = false;
       renderNotes(r);
       var todo = r.items.filter(function (i) { return /tx|pay|bill/.test(i.kind) && !i.da_co && !i.da_luu; }).length;
-      $('[data-act=notes-save]').disabled = save || !todo;
+      $('[data-act=notes-save]').disabled = save ? !r.saved.con_lai : !todo;
       if (save) {
         var sv = r.saved;
+        if (sv.con_lai) {
+          toast('Đã lưu ' + sv.tx + ' giao dịch. Còn ' + sv.con_lai + ' dòng – bấm "Lưu vào app" lần nữa để lưu tiếp', true);
+          $('[data-act=notes-save]').textContent = 'Lưu tiếp (' + sv.con_lai + ' dòng)';
+          return;
+        }
+        $('[data-act=notes-save]').textContent = 'Lưu vào app';
         toast('Đã lưu ' + sv.tx + ' giao dịch, ' + sv.pay + ' lần chuyển tiền, ' + sv.bill + ' hoá đơn' + (sv.bo_qua ? ' · bỏ qua ' + sv.bo_qua + ' dòng đã có' : ''));
         reboot().then(function () { show(S.tab); });
       }
@@ -1151,7 +1159,25 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       var ok = Math.abs(so - app) < 1000;
       return money(app) + (ok ? ' <span class="pos">✓ khớp sổ</span>' : ' <span class="neg">⚠ sổ ghi ' + money(so) + ' (lệch ' + money(app - so) + ')</span>');
     }
-    var days = r.days.map(function (d) {
+    // Tổng theo tháng (dán sổ nhiều tháng trước)
+    var months = {}, mOrder = [];
+    r.days.forEach(function (d) {
+      var k = d.ngay.slice(0, 7), m = months[k];
+      if (!m) { m = months[k] = { k: k, gd: 0, hoan: 0, lai: 0, tra: 0, ngay: 0, lech: 0, chot: 0 }; mOrder.push(k); }
+      m.gd += d.so_gd; m.hoan += d.hoan; m.lai += d.lai; m.tra += d.tra; m.ngay++;
+      if ((d.hoan_so != null && Math.abs(d.hoan_so - d.hoan) >= 1000) || (d.lai_so != null && Math.abs(d.lai_so - d.lai) >= 1000)) m.lech++;
+      if (r.chot && d.ngay <= r.chot) m.chot++;
+    });
+    var monthTbl = mOrder.length > 1 || r.days.length > 7 ? '<div style="overflow-x:auto;margin-bottom:8px"><table class="tbl" style="font-size:.85rem"><thead><tr><th>Tháng</th><th class="num">Ngày</th><th class="num">GD</th><th class="num">' + esc(rn()) + ' hoàn</th><th class="num">Lãi</th><th>Đối chiếu sổ</th></tr></thead><tbody>' +
+      mOrder.map(function (k) {
+        var m = months[k];
+        return '<tr><td><b>' + k.slice(5) + '/' + k.slice(0, 4) + '</b>' + (m.chot ? ' <small class="muted">🔒' + (m.chot < m.ngay ? ' ' + m.chot + ' ngày' : '') + ' trước chốt</small>' : '') + '</td><td class="num">' + m.ngay + '</td><td class="num">' + m.gd + '</td><td class="num">' + money(m.hoan) + '</td><td class="num">' + money(m.lai) + '</td><td>' +
+          (m.lech ? '<span class="neg">⚠ ' + m.lech + ' ngày lệch</span>' : '<span class="pos">✓ khớp</span>') + '</td></tr>';
+      }).join('') + '</tbody></table></div>' : '';
+    var many = r.days.length > 7;
+    var days = r.days.filter(function (d) {
+      return !many || (d.hoan_so != null && Math.abs(d.hoan_so - d.hoan) >= 1000) || (d.lai_so != null && Math.abs(d.lai_so - d.lai) >= 1000);
+    }).map(function (d) {
       return '<div class="calc" style="grid-template-columns:1fr;margin-bottom:6px"><div><b style="display:inline">' + dmy(d.ngay) + '</b> · ' + d.so_gd + ' giao dịch</div>' +
         '<div>' + esc(rn()) + ' hoàn: ' + chk(d.hoan_so, d.hoan) + '</div>' +
         '<div>Lãi: ' + chk(d.lai_so, d.lai) + '</div>' +
@@ -1172,7 +1198,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     }).join('');
     var chotNote = r.chot && r.days.some(function (d) { return d.ngay <= r.chot; }) ?
       '<div class="advice" style="margin-bottom:8px">🔒 Sổ đã chốt đến hết <b>' + dmy(r.chot) + '</b>. Giao dịch từ ngày này trở về trước đã gồm trong số chốt (Mục 1) nên app <b>chỉ lưu lịch sử &amp; doanh thu</b>, không cộng lại vào công nợ; tiền ' + esc(rn()) + ' chuyển trước ngày chốt không lưu. Muốn tính lại công nợ những ngày đó thì vào Công nợ → bỏ lần chốt sổ rồi dán lại.</div>' : '';
-    $('#notes-result').innerHTML = chotNote + days + '<div style="overflow-x:auto"><table class="tbl" style="font-size:.85rem"><tbody>' + rows + '</tbody></table></div>';
+    $('#notes-result').innerHTML = chotNote + monthTbl + (many && days ? '<div class="hint" style="margin:4px 0">Các ngày lệch sổ:</div>' : '') + days + '<div style="overflow-x:auto"><table class="tbl" style="font-size:.85rem"><tbody>' + rows + '</tbody></table></div>';
   }
 
   /* ---------- Tiền hoàn (số tiền − phí máy, hoàn hôm sau) ---------- */

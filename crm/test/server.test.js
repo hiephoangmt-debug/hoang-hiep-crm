@@ -812,7 +812,7 @@ test('paste daily notes: transactions, C.Trâm transfers and a pay-later bill, w
   assert.strictEqual(call('listTransactions', {}).length, 0, 'preview does not save');
 
   const sv = call('pasteNotes', { text, year: 2026, save: true });
-  assert.strictEqual(JSON.stringify(sv.saved), JSON.stringify({ tx: 4, pay: 2, bill: 2, bo_qua: 0 }));
+  assert.strictEqual(JSON.stringify(sv.saved), JSON.stringify({ tx: 4, pay: 2, bill: 2, bo_qua: 0, con_lai: 0 }));
   const r = call('refunds', {});
   assert.strictEqual(r.summary.tong_phai_hoan, 9840000 + 1970000 + 27636000 + 4950000, 'all pasted rows count in công nợ');
   assert.strictEqual(r.summary.tong_da_chuyen, 130000000);
@@ -826,7 +826,7 @@ test('paste daily notes: transactions, C.Trâm transfers and a pay-later bill, w
   assert.strictEqual(v2.trang_thai, 'Chờ đối soát');
   assert.strictEqual(v2.doanh_thu, 50000);
   // dán lại: không nhân đôi
-  assert.strictEqual(JSON.stringify(call('pasteNotes', { text, year: 2026, save: true }).saved), JSON.stringify({ tx: 0, pay: 0, bill: 0, bo_qua: 8 }));
+  assert.strictEqual(JSON.stringify(call('pasteNotes', { text, year: 2026, save: true }).saved), JSON.stringify({ tx: 0, pay: 0, bill: 0, bo_qua: 8, con_lai: 0 }));
 });
 
 test('before the closing date: transactions are kept as history only (not in công nợ), transfers are skipped', () => {
@@ -839,7 +839,7 @@ test('before the closing date: transactions are kept as history only (not in cô
   assert.strictEqual(pv.chot, '2026-10-02');
   assert.ok(pv.items[0].truoc_chot && !pv.items[2].truoc_chot);
   const sv = call('pasteNotes', { text, year: 2026, save: true });
-  assert.strictEqual(JSON.stringify(sv.saved), JSON.stringify({ tx: 2, pay: 1, bill: 0, bo_qua: 1 }));
+  assert.strictEqual(JSON.stringify(sv.saved), JSON.stringify({ tx: 2, pay: 1, bill: 0, bo_qua: 1, con_lai: 0 }));
   const tx = call('listTransactions', {});
   assert.strictEqual(tx.find((t) => t.ngay === '2026-10-02').hoan_tt, 'Đã nhận', 'already inside Mục 1');
   assert.strictEqual(tx.find((t) => t.ngay === '2026-10-03').hoan_tt, 'Chưa nhận');
@@ -851,6 +851,31 @@ test('before the closing date: transactions are kept as history only (not in cô
   const ok = call('saveTransaction', Object.assign({ vao_so: false }, base));
   assert.strictEqual(ok.hoan_tt, 'Đã nhận');
   assert.strictEqual(call('refunds', {}).summary.tong_phai_hoan, 54950000);
+});
+
+test('pasting earlier months: history before closing, December notes pasted in January, saving in rounds', () => {
+  const { call, fake } = fresh();
+  fake.setToday('2027-01-05');
+  call('manualClosing', { ngay: '2027-01-02', so_du: 0 });
+  const lines = [];
+  for (let d = 1; d <= 10; d++) lines.push(d + '/12: Hoàn 984', 'Rút VP Khách ' + d + ' 1.000/1.9 hoàn 1.6', 'Hoàn 1');
+  lines.push('3/1: Hoàn 984', 'Rút VP Khách Z 1.000/1.9 hoàn 1.6');
+  const text = lines.join('\n');
+  const pv = call('pasteNotes', { text });
+  assert.strictEqual(pv.days[0].ngay, '2026-12-01', 'December pasted in January = last year');
+  assert.strictEqual(pv.days[10].ngay, '2027-01-03');
+  // lần 1: hết giờ ngay → chưa lưu gì, báo còn lại
+  const r1 = call('pasteNotes', { text, save: true, budgetMs: -1 });
+  assert.strictEqual(r1.saved.tx, 0);
+  assert.strictEqual(r1.saved.con_lai, 21);
+  // lần 2: lưu tiếp hết
+  const r2 = call('pasteNotes', { text, save: true });
+  assert.strictEqual(r2.saved.tx, 11);
+  assert.strictEqual(r2.saved.con_lai, 0);
+  assert.strictEqual(r2.saved.bo_qua, 10, 'transfers before closing are already in the closing balance');
+  const tx = call('listTransactions', { from: '2026-12-01', to: '2027-01-31' });
+  assert.strictEqual(tx.filter((t) => t.hoan_tt === 'Đã nhận').length, 10, 'old months: history + revenue only');
+  assert.strictEqual(call('refunds', {}).summary.tong_phai_hoan, 984000);
 });
 
 console.log(`\n${passed} test(s) passed`);
