@@ -63,7 +63,7 @@ var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan', 'tu_ngay', 'b_tt_ngay', 'a_ck_ng
 // Kiểu tiền với C.Trâm. "Ứng trước"/"Hoàn tiền" làm giảm nợ; "Mình trả lại"/"Nợ cũ" làm tăng nợ;
 // "Điều chỉnh số dư" nhập được số âm (âm = tăng nợ).
 // Đổi mỗi lần cập nhật code – hiện cạnh ngày trên đầu app để biết đã triển khai bản mới chưa.
-var APP_VERSION = 'v04.10e';
+var APP_VERSION = 'v04.10f';
 
 var PAYMENT_TYPES = ['Ứng trước', 'Hoàn tiền', 'Mình trả lại', 'Nợ cũ', 'Điều chỉnh số dư'];
 
@@ -697,7 +697,7 @@ function parseNoteLine_(line, ngay) {
     return { kind: 'pay', ngay: ngay, loai: /^ứng/i.test(pm[1]) ? 'Ứng trước' : 'Hoàn tiền', so_tien: amt,
       con: pm[4] ? noteThousand_(pm[4]) : null, ghi_chu: 'Dán sổ: ' + line };
   }
-  var m = inner.match(/^(đh\s*\/\s*rút|đh\s*\+\s*rút|đáo\s*\/\s*rút|đh|đáo hạn|đáo|rút)(\s+qr)?\s+(.+?)\s+([\d.,]+\s*(?:tr|triệu)?)\s*\/\s*([\d.,]+)\s*(k)?\s+hoàn\s+([\d.,+]+)(.*)$/i);
+  var m = inner.match(/^(đh\s*\/\s*rút|đh\s*\+\s*rút|đáo\s*\/\s*rút|đh|đáo hạn|đáo|rút)(\s+qr)?\s+(.+?)\s+([\d.,]+\s*(?:tr|triệu)?)\s*\/\s*([\d.,]+)\s*(k|%)?\s+hoàn\s+([\d.,+]+)\s*%?(.*)$/i);
   if (!m) {
     var lai = inner.match(/^(.+?)\s+lãi\s+([\d.,]+\s*k?)(.*)$/i);
     if (!lai) return { kind: 'skip', lai: 0 };
@@ -712,7 +712,7 @@ function parseNoteLine_(line, ngay) {
   while (tokens.length > 1 && NOTE_CARD_EXTRA.test(tokens[0])) the.push(tokens.shift());
   var ten = tokens.join(' ') || the.join(' ');
   var amt2 = /tr|triệu/i.test(m[4]) ? parseAmount_(m[4].replace(/\s/g, '')) : (m[4].split('.').length > 2 ? noteMoney_(m[4]) : parseAmount_(m[4]));
-  var feeN = parseNum_(m[5].replace(',', '.')), fixed = !!m[6] || feeN >= 10;
+  var feeN = parseNum_(m[5].replace(',', '.')), fixed = /k/i.test(m[6] || '') || (m[6] !== '%' && feeN >= 10);
   var phiMay = sumExpr_(m[7]);
   var rest = m[8].trim();
   var o = { ngay: ngay, so_tien: amt2, phi_may_text: String(phiMay), the: the.join(' '), ten_khach: ten,

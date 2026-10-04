@@ -785,6 +785,7 @@ test('paste daily notes: transactions, C.Trâm transfers and a pay-later bill, w
     'Hoàn 30 còn 10.004',
     '3/10: Hoàn 4.950',
     'ĐH Cake Khách G 5tr/150 hoàn 1',
+    'Rút TCB Khách T - Xanh SM 26tr/4% hoàn 3.2% RR',
     'Hoàn 100. Còn hoàn 14.954',
     'Vé xyz lãi 60k'
   ].join('\n');
@@ -795,7 +796,10 @@ test('paste daily notes: transactions, C.Trâm transfers and a pay-later bill, w
   assert.strictEqual(d2.hoan_so, 40004000);
   assert.strictEqual(d2.lai, 30000 + 70000 + 140000 + 60000, 'lãi = phí khách − phí máy + lãi hoá đơn');
   const tx = pv.items.filter((i) => i.kind === 'tx');
-  assert.strictEqual(JSON.stringify(tx.map((i) => i.the)), JSON.stringify(['VP', 'FE JCB', 'TCB vàng', 'Cake']));
+  assert.strictEqual(JSON.stringify(tx.map((i) => i.the)), JSON.stringify(['VP', 'FE JCB', 'TCB vàng', 'Cake', 'TCB']));
+  assert.strictEqual(tx[4].phi_khach, 4, '"4%" = 4 percent');
+  assert.strictEqual(tx[4].tien_hoan, 26000000 - 832000);
+  assert.strictEqual(tx[4].lai, 1040000 - 832000);
   assert.strictEqual(tx[1].ten_khach, 'Khách B');
   assert.strictEqual(tx[2].dich_vu, 'Đáo + Rút');
   assert.strictEqual(tx[3].so_tien, 5000000);
@@ -812,9 +816,9 @@ test('paste daily notes: transactions, C.Trâm transfers and a pay-later bill, w
   assert.strictEqual(call('listTransactions', {}).length, 0, 'preview does not save');
 
   const sv = call('pasteNotes', { text, year: 2026, save: true });
-  assert.strictEqual(JSON.stringify(sv.saved), JSON.stringify({ tx: 4, pay: 2, bill: 2, bo_qua: 0, con_lai: 0 }));
+  assert.strictEqual(JSON.stringify(sv.saved), JSON.stringify({ tx: 5, pay: 2, bill: 2, bo_qua: 0, con_lai: 0 }));
   const r = call('refunds', {});
-  assert.strictEqual(r.summary.tong_phai_hoan, 9840000 + 1970000 + 27636000 + 4950000, 'all pasted rows count in công nợ');
+  assert.strictEqual(r.summary.tong_phai_hoan, 9840000 + 1970000 + 27636000 + 4950000 + 25168000, 'all pasted rows count in công nợ');
   assert.strictEqual(r.summary.tong_da_chuyen, 130000000);
   // hoá đơn + vé đều vào tab Hoá đơn, đã hoàn tất → tính vào doanh thu
   const bills = call('listBills', { mode: 'all' }).rows;
@@ -826,7 +830,7 @@ test('paste daily notes: transactions, C.Trâm transfers and a pay-later bill, w
   assert.strictEqual(v2.trang_thai, 'Chờ đối soát');
   assert.strictEqual(v2.doanh_thu, 50000);
   // dán lại: không nhân đôi
-  assert.strictEqual(JSON.stringify(call('pasteNotes', { text, year: 2026, save: true }).saved), JSON.stringify({ tx: 0, pay: 0, bill: 0, bo_qua: 8, con_lai: 0 }));
+  assert.strictEqual(JSON.stringify(call('pasteNotes', { text, year: 2026, save: true }).saved), JSON.stringify({ tx: 0, pay: 0, bill: 0, bo_qua: 9, con_lai: 0 }));
 });
 
 test('before the closing date: transactions are kept as history only (not in công nợ), transfers are skipped', () => {

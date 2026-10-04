@@ -535,6 +535,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         <button type="button" class="btn" data-act="notes-save" disabled>Lưu vào app</button>
       </div>
     </div>
+    <div id="notes-saved-view" style="margin-top:8px"></div>
     <div id="notes-result" style="margin-top:10px"></div>
   </div>
 </div>
@@ -852,7 +853,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       S.boot = b;
       $('#login').classList.add('hidden');
       $('#app').classList.remove('hidden');
-      var UI_VERSION = 'v04.10e';
+      var UI_VERSION = 'v04.10f';
       $('#today-label').textContent = dmy(b.today) + ' · ' + UI_VERSION + (b.version === UI_VERSION ? '' : ' ⚠ Mã.gs chưa cập nhật');
       fillSelect($('[name=dich_vu]'), b.services);
       fillSelect($('#tx-service'), b.services, true);
@@ -1148,10 +1149,29 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
           return;
         }
         $('[data-act=notes-save]').textContent = 'Lưu vào app';
-        toast('Đã lưu ' + sv.tx + ' giao dịch, ' + sv.pay + ' lần chuyển tiền, ' + sv.bill + ' hoá đơn' + (sv.bo_qua ? ' · bỏ qua ' + sv.bo_qua + ' dòng đã có' : ''));
-        reboot().then(function () { show(S.tab); });
+        var nErr = r.items.filter(function (i) { return i.loi && /tx|pay|bill/.test(i.kind); }).length;
+        toast('Đã lưu ' + sv.tx + ' giao dịch, ' + sv.pay + ' lần chuyển tiền, ' + sv.bill + ' hoá đơn' + (sv.bo_qua ? ' · bỏ qua ' + sv.bo_qua + ' dòng đã có' : '') +
+          (nErr ? ' · ⚠ ' + nErr + ' dòng lỗi (xem chữ đỏ trong danh sách)' : ''), !!nErr);
+        $('#notes-saved-view').innerHTML = '';
+        var ds = r.days.map(function (d) { return d.ngay; }).sort();
+        if (ds.length) {
+          // Giao dịch dán vào có thể thuộc tháng trước → mở tab Giao dịch đúng khoảng ngày vừa dán
+          S.notesRange = [ds[0], ds[ds.length - 1]];
+          $('#notes-saved-view').innerHTML = '<button type="button" class="btn btn--sm" data-act="notes-open-tx">📋 Xem ' + (sv.tx + sv.bo_qua) + ' giao dịch từ ' + dmy(ds[0]) + ' đến ' + dmy(ds[ds.length - 1]) + '</button>';
+        }
+        reboot().then(function () { if (!nErr && ds.length) openNotesTx(); else show(S.tab); });
       }
     }).catch(function (err) { btn.disabled = false; fail(err); });
+  }
+  function openNotesTx() {
+    if (!S.notesRange) return;
+    $('#tx-range').value = 'custom';
+    $('#tx-from').value = S.notesRange[0];
+    $('#tx-to').value = S.notesRange[1];
+    $('#tx-service').value = '';
+    $('#tx-q').value = '';
+    $('#notes-modal').classList.add('hidden');
+    show('tx');
   }
   function renderNotes(r) {
     function chk(so, app) {
@@ -2049,9 +2069,11 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         $('#notes-year').value = $('#notes-year').value || S.boot.today.slice(0, 4);
         $('#notes-result').innerHTML = '';
         $('[data-act=notes-save]').disabled = true;
+        $('#notes-saved-view').innerHTML = '';
         $('#notes-modal').classList.remove('hidden');
       }
       if (act === 'notes-preview' || act === 'notes-save') pasteNotes(act === 'notes-save', a);
+      if (act === 'notes-open-tx') openNotesTx();
       if (act === 'new-customer') openCustomer();
       if (act === 'logout') logout();
       if (act === 'tx-for-customer') {
