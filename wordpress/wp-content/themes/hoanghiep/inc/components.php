@@ -193,43 +193,65 @@ function hh_pill( $text, $variant = '' ) {
 	}
 }
 
-/** Search box with Mua bán / Cho thuê / Dự án tabs. */
-function hh_search_box() {
+/**
+ * Search box with Mua bán / Cho thuê / Dự án tabs (trang chủ và các trang nhà đất dùng chung).
+ * $args: active (ban|thue|du-an|all), links (tab là đường dẫn thay vì nút chuyển form),
+ *        all (thêm tab "Tất cả"), values (tk, khu-vuc, loai-bds đang chọn), hidden (ô ẩn giữ lại), action.
+ */
+function hh_search_box( $args = array() ) {
+	$args  = wp_parse_args( $args, array( 'active' => 'ban', 'links' => false, 'all' => false, 'values' => array(), 'hidden' => array(), 'action' => '' ) );
 	$areas = get_terms( array( 'taxonomy' => 'khu-vuc', 'hide_empty' => false, 'parent' => 0 ) );
 	$types = get_terms( array( 'taxonomy' => 'loai-bds', 'hide_empty' => false ) );
-	$tabs  = array(
+	$tabs  = array();
+	if ( $args['all'] ) {
+		$tabs['all'] = array( 'Tất cả', get_post_type_archive_link( 'bat-dong-san' ) );
+	}
+	$tabs += array(
 		'ban'   => array( 'Mua bán', hh_deal_url( 'ban' ) ),
 		'thue'  => array( 'Cho thuê', hh_deal_url( 'thue' ) ),
 		'du-an' => array( 'Dự án', get_post_type_archive_link( 'du-an' ) ),
 	);
+	$active = isset( $tabs[ $args['active'] ] ) ? $args['active'] : 'ban';
+	$val    = static fn( $k ) => (string) ( $args['values'][ $k ] ?? '' );
+	$ph     = array(
+		'thue'  => 'Tìm căn hộ, nhà, mặt bằng cho thuê theo dự án, đường, khu vực…',
+		'du-an' => 'Nhập tên dự án, chủ đầu tư, khu vực…',
+	);
 	?>
 	<div class="search-box" data-search-box>
 		<div class="search-box__tabs" role="tablist">
-			<?php $first = true; foreach ( $tabs as $key => list( $label, $url ) ) : ?>
-				<button type="button" role="tab" class="search-box__tab<?php echo $first ? ' is-active' : ''; ?>" data-action="<?php echo esc_url( $url ); ?>" data-kind="<?php echo esc_attr( $key ); ?>" aria-selected="<?php echo $first ? 'true' : 'false'; ?>"><?php echo esc_html( $label ); ?></button>
-			<?php $first = false; endforeach; ?>
+			<?php foreach ( $tabs as $key => list( $label, $url ) ) : ?>
+				<?php if ( $args['links'] ) : ?>
+					<a class="search-box__tab<?php echo $key === $active ? ' is-active' : ''; ?>" href="<?php echo esc_url( $url ); ?>"<?php echo $key === $active ? ' aria-current="page"' : ''; ?>><?php echo esc_html( $label ); ?></a>
+				<?php else : ?>
+					<button type="button" role="tab" class="search-box__tab<?php echo $key === $active ? ' is-active' : ''; ?>" data-action="<?php echo esc_url( $url ); ?>" data-kind="<?php echo esc_attr( $key ); ?>" aria-selected="<?php echo $key === $active ? 'true' : 'false'; ?>"><?php echo esc_html( $label ); ?></button>
+				<?php endif; ?>
+			<?php endforeach; ?>
 		</div>
-		<form class="search-box__form" action="<?php echo esc_url( hh_deal_url( 'ban' ) ); ?>" method="get">
+		<form class="search-box__form" action="<?php echo esc_url( $args['action'] ?: $tabs[ $active ][1] ); ?>" method="get" role="search">
 			<label class="search-box__field search-box__field--grow">
 				<?php echo hh_icon( 'search' ); // phpcs:ignore ?>
-				<input type="search" name="tk" placeholder="Nhập tên dự án, đường, khu vực…" aria-label="Từ khóa">
+				<input type="search" name="tk" value="<?php echo esc_attr( $val( 'tk' ) ); ?>" placeholder="<?php echo esc_attr( $ph[ $active ] ?? 'Nhập tên dự án, đường, khu vực…' ); ?>" aria-label="Từ khóa">
 			</label>
 			<?php if ( $areas && ! is_wp_error( $areas ) ) : ?>
 				<select name="khu-vuc" aria-label="Khu vực" class="search-box__field">
 					<option value="">Tất cả khu vực</option>
 					<?php foreach ( $areas as $t ) : ?>
-						<option value="<?php echo esc_attr( $t->slug ); ?>"><?php echo esc_html( $t->name ); ?></option>
+						<option value="<?php echo esc_attr( $t->slug ); ?>" <?php selected( $val( 'khu-vuc' ), $t->slug ); ?>><?php echo esc_html( $t->name ); ?></option>
 					<?php endforeach; ?>
 				</select>
 			<?php endif; ?>
-			<?php if ( $types && ! is_wp_error( $types ) ) : ?>
+			<?php if ( $types && ! is_wp_error( $types ) && 'du-an' !== $active ) : ?>
 				<select name="loai-bds" aria-label="Loại nhà đất" class="search-box__field" data-hide-for="du-an">
 					<option value="">Loại nhà đất</option>
 					<?php foreach ( $types as $t ) : ?>
-						<option value="<?php echo esc_attr( $t->slug ); ?>"><?php echo esc_html( $t->name ); ?></option>
+						<option value="<?php echo esc_attr( $t->slug ); ?>" <?php selected( $val( 'loai-bds' ), $t->slug ); ?>><?php echo esc_html( $t->name ); ?></option>
 					<?php endforeach; ?>
 				</select>
 			<?php endif; ?>
+			<?php foreach ( array_filter( (array) $args['hidden'], 'strlen' ) as $k => $v ) : ?>
+				<input type="hidden" name="<?php echo esc_attr( $k ); ?>" value="<?php echo esc_attr( $v ); ?>">
+			<?php endforeach; ?>
 			<button class="btn btn--gold" type="submit">Tìm kiếm</button>
 		</form>
 	</div>

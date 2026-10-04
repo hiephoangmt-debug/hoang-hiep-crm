@@ -1064,3 +1064,4 @@ html.nav-locked, html.nav-locked body { overflow: hidden; }
 .quick-search__state { margin: 10px 0 0; font-size: .9rem; color: var(--muted); }
 .listing-page .layout__main { max-width: none; }
 .calc-table td[data-label="Số tiền"] { white-space: nowrap; }
+@media (max-width: 600px) { .search-box { padding: 6px 14px 16px; } .search-box__tabs { overflow-x: auto; scrollbar-width: none; } .search-box__tabs::-webkit-scrollbar { display: none; } .search-box__tab { flex: 1 0 auto; padding: 12px 8px; font-size: .95rem; } }
