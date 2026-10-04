@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tư vấn viên – Casamia Balanca</title>
+<style>
+  :root{--c:#0b2a5b;--a:#f47c20;--bg:#f3f6fb;--line:#e1e7f0;--muted:#64748b;--text:#0f1d33}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);height:100vh;display:flex;flex-direction:column}
+  header{background:var(--c);color:#fff;border-bottom:3px solid var(--a);padding:10px 16px;display:flex;align-items:center;gap:12px}
+  header h1{font-size:16px;margin:0}
+  header .sp{flex:1}
+  header a,header button{color:#fff;background:rgba(255,255,255,.15);border:0;border-radius:6px;padding:6px 10px;font-size:13px;cursor:pointer;text-decoration:none}
+  #login{margin:auto;background:#fff;padding:28px;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,.08);width:320px;display:flex;flex-direction:column;gap:12px}
+  #login h2{margin:0;font-size:18px;color:var(--c)}
+  input,select,textarea{font:inherit;font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:9px 10px;outline:none;width:100%}
+  input:focus,textarea:focus{border-color:var(--c)}
+  .btn{background:var(--a);color:#fff;border:0;border-radius:8px;padding:10px;font-weight:600;cursor:pointer}
+  .err{color:#e53935;font-size:13px}
+  #app{flex:1;display:none;min-height:0}
+  #list{width:320px;border-right:1px solid var(--line);background:#fff;overflow-y:auto;flex:none}
+  .filters{display:flex;gap:4px;padding:8px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff}
+  .filters button{flex:1;border:1px solid var(--line);background:#fff;border-radius:6px;padding:5px;font-size:12px;cursor:pointer}
+  .filters button.on{background:var(--c);color:#fff;border-color:var(--c)}
+  .item{padding:11px 14px;border-bottom:1px solid var(--line);cursor:pointer;display:flex;gap:10px}
+  .item:hover{background:#f7f9fc}.item.active{background:#eef3fb}
+  .item .av{width:38px;height:38px;border-radius:50%;background:var(--a);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}
+  .item .info{flex:1;min-width:0}
+  .item .row{display:flex;justify-content:space-between;gap:6px}
+  .item b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .item time{font-size:11px;color:var(--muted);flex:none}
+  .item p{margin:3px 0 0;font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .badge{background:#e53935;color:#fff;border-radius:10px;font-size:11px;padding:1px 7px;font-weight:700}
+  .tag{font-size:10px;border-radius:4px;padding:1px 5px;font-weight:600;white-space:nowrap;align-self:flex-start}
+  .tag.new{background:#fff3e0;color:#e65100}.tag.contacted{background:#e3f2fd;color:#1565c0}.tag.closed{background:#eceff1;color:#546e7a}
+  .empty{padding:30px;text-align:center;color:var(--muted);font-size:14px}
+  #chat{flex:1;display:flex;flex-direction:column;min-width:0}
+  #msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:8px}
+  .msg{max-width:70%;padding:9px 12px;border-radius:14px;font-size:14px;line-height:1.45;white-space:pre-wrap;word-wrap:break-word}
+  .msg.visitor{background:#fff;align-self:flex-start;border-bottom-left-radius:4px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+  .msg.agent{background:var(--c);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+  .msg.auto{background:#5b6f91}
+  .msg time{display:block;font-size:10px;opacity:.65;margin-top:3px}
+  #typing{height:18px;font-size:12px;color:var(--muted);padding:0 16px}
+  #compose{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line);background:#fff}
+  #compose textarea{flex:1;resize:none;height:44px}
+  #side{width:280px;border-left:1px solid var(--line);background:#fff;padding:14px;overflow-y:auto;flex:none;display:flex;flex-direction:column;gap:10px}
+  #side h3{margin:0;font-size:14px;color:var(--c)}
+  #side label{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+  #side .meta{font-size:12px;color:var(--muted);word-break:break-all}
+  .call{display:block;text-align:center;background:#e53935;color:#fff;text-decoration:none;border-radius:8px;padding:9px;font-weight:600;font-size:14px}
+  .placeholder{margin:auto;color:var(--muted);text-align:center}
+  .back{display:none}
+  @media(max-width:900px){#side{display:none}}
+  @media(max-width:640px){
+    #list{width:100%}#chat{display:none}
+    #app.viewing #list{display:none}#app.viewing #chat{display:flex}
+    .back{display:inline-block}
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>💬 Live chat – Casamia Balanca</h1>
+  <span class="sp"></span>
+  <span id="online" style="font-size:12px"></span>
+  <a id="export" href="#" style="display:none">⬇ Xuất lead (CSV)</a>
+  <button id="notifyBtn" style="display:none">🔔 Bật thông báo</button>
+  <button id="logout" style="display:none">Đăng xuất</button>
+</header>
+
+<form id="login">
+  <h2>Đăng nhập tư vấn viên</h2>
+  <input id="pw" type="password" placeholder="Mật khẩu" autofocus>
+  <span class="err" id="loginErr"></span>
+  <button class="btn">Đăng nhập</button>
+</form>
+
+<div id="app">
+  <aside id="list">
+    <div class="filters">
+      <button data-f="all" class="on">Tất cả</button>
+      <button data-f="new">Mới</button>
+      <button data-f="contacted">Đã liên hệ</button>
+      <button data-f="closed">Đã đóng</button>
+    </div>
+    <div id="items"></div>
+  </aside>
+  <section id="chat"><div class="placeholder">Chọn một hội thoại để bắt đầu trả lời khách</div></section>
+  <aside id="side" style="display:none"></aside>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = t => {
+  const d = new Date(t), now = new Date();
+  const hm = d.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+  return d.toDateString() === now.toDateString() ? hm : d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' }) + ' ' + hm;
+};
+const STATUS = { new: 'Mới', contacted: 'Đã liên hệ', closed: 'Đã đóng' };
+
+let token = localStorage.getItem('agent_token');
+let socket, convs = {}, current = null, filter = 'all', typingTimer;
+
+$('#login').onsubmit = async e => {
+  e.preventDefault();
+  const r = await fetch('/api/agent/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: $('#pw').value }) });
+  if (!r.ok) return ($('#loginErr').textContent = 'Sai mật khẩu');
+  token = (await r.json()).token;
+  localStorage.setItem('agent_token', token);
+  start();
+};
+$('#logout').onclick = () => { localStorage.removeItem('agent_token'); location.reload(); };
+
+function start() {
+  socket = io({ auth: { role: 'agent', token } });
+  socket.on('auth:error', () => { localStorage.removeItem('agent_token'); location.reload(); });
+  socket.on('connect', () => {
+    $('#login').style.display = 'none';
+    $('#app').style.display = 'flex';
+    $('#logout').style.display = $('#export').style.display = '';
+    $('#export').href = '/api/leads.csv?token=' + encodeURIComponent(token);
+    $('#online').textContent = '🟢 Đang trực tuyến';
+    if ('Notification' in window && Notification.permission === 'default') $('#notifyBtn').style.display = '';
+    if (current) openConv(current);
+  });
+  socket.on('disconnect', () => ($('#online').textContent = '🔴 Mất kết nối...'));
+  socket.on('conversations', list => { convs = {}; list.forEach(c => (convs[c.id] = c)); renderList(); });
+  socket.on('conversation:new', c => { convs[c.id] = c; renderList(); notify('Khách mới vào chat', 'Có khách vừa bắt đầu hội thoại'); });
+  socket.on('conversation:update', c => {
+    convs[c.id] = c;
+    if (c.id === current && c.unread) socket.emit('conversation:open', c.id, () => {});
+    renderList();
+    if (c.id === current && !$('#side').contains(document.activeElement)) renderSide(c);
+  });
+  socket.on('message', ({ conversationId, message }) => {
+    if (conversationId === current) { addMsg(message); $('#typing').textContent = ''; }
+    if (message.from === 'visitor' && (conversationId !== current || document.hidden)) {
+      const c = convs[conversationId];
+      notify(c?.lead?.name || 'Khách hàng', message.text);
+    }
+  });
+  socket.on('typing', id => {
+    if (id !== current) return;
+    $('#typing').textContent = 'Khách đang soạn tin...';
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(() => ($('#typing').textContent = ''), 3000);
+  });
+}
+
+$('#notifyBtn').onclick = () => Notification.requestPermission().then(() => ($('#notifyBtn').style.display = 'none'));
+
+function beep() {
+  try {
+    const ctx = new AudioContext(), o = ctx.createOscillator(), g = ctx.createGain();
+    o.frequency.value = 880; g.gain.value = 0.1; o.connect(g).connect(ctx.destination);
+    o.start(); o.stop(ctx.currentTime + 0.15);
+  } catch {}
+}
+function notify(title, body) {
+  beep();
+  if ('Notification' in window && Notification.permission === 'granted' && document.hidden) new Notification(title, { body });
+  const n = Object.values(convs).reduce((s, c) => s + (c.unread || 0), 0);
+  document.title = (n ? `(${n}) ` : '') + 'Tư vấn viên – Casamia Balanca';
+}
+
+document.querySelectorAll('.filters button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.filters button').forEach(x => x.classList.remove('on'));
+  b.classList.add('on'); filter = b.dataset.f; renderList();
+});
+
+function label(c) { return c.lead?.name || c.lead?.phone || 'Khách #' + c.id.slice(0, 6); }
+
+function renderList() {
+  const list = Object.values(convs).filter(c => filter === 'all' || c.status === filter).sort((a, b) => b.updatedAt - a.updatedAt);
+  $('#items').innerHTML = list.length ? list.map(c => `
+    <div class="item ${c.id === current ? 'active' : ''}" data-id="${esc(c.id)}">
+      <div class="av">${esc(label(c).slice(0, 1).toUpperCase())}</div>
+      <div class="info">
+        <div class="row"><b>${esc(label(c))}</b><time>${c.lastMessage ? fmt(c.lastMessage.at) : ''}</time></div>
+        <div class="row"><p>${c.lastMessage ? (c.lastMessage.from === 'agent' ? 'Bạn: ' : '') + esc(c.lastMessage.text) : ''}</p>
+          ${c.unread ? `<span class="badge">${c.unread}</span>` : `<span class="tag ${c.status}">${STATUS[c.status]}</span>`}</div>
+        ${c.lead?.phone ? `<p>📞 ${esc(c.lead.phone)}</p>` : ''}
+      </div>
+    </div>`).join('') : '<div class="empty">Chưa có hội thoại nào</div>';
+  document.querySelectorAll('.item').forEach(el => el.onclick = () => openConv(el.dataset.id));
+  const n = Object.values(convs).reduce((s, c) => s + (c.unread || 0), 0);
+  document.title = (n ? `(${n}) ` : '') + 'Tư vấn viên – Casamia Balanca';
+}
+
+function openConv(id) {
+  current = id;
+  $('#app').classList.add('viewing');
+  socket.emit('conversation:open', id, conv => {
+    if (!conv) return;
+    $('#chat').innerHTML = `
+      <div style="padding:10px 14px;border-bottom:1px solid var(--line);background:#fff;display:flex;gap:10px;align-items:center">
+        <button class="back btn" style="padding:5px 10px">←</button><b>${esc(label(conv))}</b></div>
+      <div id="msgs"></div><div id="typing"></div>
+      <form id="compose"><textarea placeholder="Trả lời khách... (Enter để gửi, Shift+Enter xuống dòng)"></textarea><button class="btn">Gửi</button></form>`;
+    $('.back').onclick = () => { $('#app').classList.remove('viewing'); current = null; renderList(); };
+    conv.messages.forEach(addMsg);
+    const ta = $('#compose textarea');
+    const send = () => { const text = ta.value.trim(); if (!text) return; socket.emit('message', { conversationId: id, text }); ta.value = ''; };
+    $('#compose').onsubmit = e => { e.preventDefault(); send(); };
+    let last = 0;
+    ta.onkeydown = e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } };
+    ta.oninput = () => { if (Date.now() - last > 2000) { last = Date.now(); socket.emit('typing', id); } };
+    ta.focus();
+    renderSide(convs[id] || conv);
+    renderList();
+  });
+}
+
+function addMsg(m) {
+  const box = $('#msgs'); if (!box) return;
+  const el = document.createElement('div');
+  el.className = 'msg ' + m.from + (m.auto ? ' auto' : '');
+  el.textContent = m.text;
+  el.insertAdjacentHTML('beforeend', `<time>${fmt(m.at)}${m.auto ? ' • tự động' : ''}</time>`);
+  box.appendChild(el);
+  box.scrollTop = box.scrollHeight;
+}
+
+function renderSide(c) {
+  const side = $('#side');
+  side.style.display = '';
+  side.innerHTML = `
+    <h3>Thông tin khách hàng</h3>
+    <label>Họ tên<input id="lName" value="${esc(c.lead?.name)}"></label>
+    <label>Số điện thoại<input id="lPhone" value="${esc(c.lead?.phone)}"></label>
+    ${c.lead?.phone ? `<a class="call" href="tel:${esc(c.lead.phone)}">📞 Gọi ${esc(c.lead.phone)}</a>
+      <a class="call" style="background:#0068ff" target="_blank" href="https://zalo.me/${esc(c.lead.phone.replace(/\D/g, '').replace(/^84/, '0'))}">Zalo</a>` : ''}
+    <label>Ghi chú (nhu cầu, ngân sách, sản phẩm quan tâm...)<textarea id="lNote" rows="4">${esc(c.lead?.note)}</textarea></label>
+    <button class="btn" id="saveLead">Lưu thông tin</button>
+    <label>Trạng thái
+      <select id="lStatus">${Object.entries(STATUS).map(([k, v]) => `<option value="${k}" ${c.status === k ? 'selected' : ''}>${v}</option>`).join('')}</select>
+    </label>
+    <div class="meta">Bắt đầu: ${fmt(c.createdAt)}</div>
+    ${c.page ? `<div class="meta">Trang: ${esc(c.page)}</div>` : ''}`;
+  $('#saveLead').onclick = () => socket.emit('lead:update', { conversationId: c.id, name: $('#lName').value, phone: $('#lPhone').value, note: $('#lNote').value });
+  $('#lStatus').onchange = e => socket.emit('conversation:status', { conversationId: c.id, status: e.target.value });
+}
+
+if (token) start();
+</script>
+</body>
+</html>
