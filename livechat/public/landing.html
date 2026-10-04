@@ -198,6 +198,19 @@
   .hnums u{text-decoration:none;color:var(--orange);font-weight:700}
   .src{font-size:12px;color:rgba(255,255,255,.55);margin:14px 0 0}
   .know .src,.day .src{color:var(--muted)}
+  .hpol{background:#fff;color:var(--navy);border-radius:14px;padding:14px 16px;margin:0 0 22px;cursor:pointer;border:2px solid var(--orange);box-shadow:0 10px 28px rgba(244,124,32,.25);transition:transform .15s}
+  .hpol:hover{transform:translateY(-2px)}
+  .hpol-h{font-weight:800;font-size:14px;color:var(--orange);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+  .hpol-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .hpol-row span{font-size:12px;color:var(--muted);line-height:1.3;border-right:1px solid var(--line);padding-right:8px}
+  .hpol-row span:last-child{border-right:0}
+  .hpol-row b{display:block;font-size:34px;color:var(--orange);font-weight:800;margin-top:2px;line-height:1.1;letter-spacing:-.5px}
+  .hpol-row i{display:block;font-style:normal;font-size:12px;font-weight:700;color:var(--navy)}
+  .shine{background:linear-gradient(105deg,var(--orange) 0%,var(--orange) 38%,#fff3e6 50%,var(--orange) 62%,var(--orange) 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:shine 2.6s ease-in-out infinite alternate;filter:drop-shadow(0 2px 6px rgba(244,124,32,.25))}
+  .shine-w{background:linear-gradient(105deg,var(--orange) 0%,var(--orange) 38%,#ffe2c7 50%,var(--orange) 62%,var(--orange) 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 3s ease-in-out infinite alternate}
+  @keyframes shine{from{background-position:115% 0}to{background-position:-15% 0}}
+  @media (prefers-reduced-motion:reduce){.shine,.shine-w{animation:none}}
+  .hpol-cta{margin-top:10px;font-weight:700;font-size:14px;color:#fff;background:var(--orange);border-radius:8px;padding:8px 12px;text-align:center}
   .price-badge[hidden]{display:none}
   .price-badge{display:inline-flex;gap:8px;align-items:center;background:#fff;color:var(--navy);border-radius:999px;padding:8px 16px;margin:0 0 20px;font-size:15px}
   .price-badge b{color:var(--orange);font-size:18px}
@@ -289,7 +302,8 @@
   .pol{background:#fff;color:var(--navy);border-radius:14px;padding:22px 18px;text-align:center;border-bottom:4px solid var(--orange)}
   .pol>span{font-size:28px}
   .pol h3{font-size:15px;margin:8px 0 6px;min-height:38px}
-  .pol b{display:block;font-size:30px;color:var(--orange);font-weight:800}
+  strong.o{color:var(--orange)}
+  .pol b{display:block;font-size:52px;color:var(--orange);font-weight:800;line-height:1.1;letter-spacing:-1px}
   .pol p{margin:4px 0 0;font-size:13px;color:var(--muted)}
   .pol-cta{display:flex;align-items:center;justify-content:space-between;gap:20px;background:rgba(255,255,255,.07);border:1px dashed rgba(255,255,255,.35);border-radius:14px;padding:20px 24px;flex-wrap:wrap}
   .pol-cta p{margin:4px 0 0;color:rgba(255,255,255,.8);font-size:15px;max-width:560px}
@@ -316,6 +330,7 @@
     .hero{padding:44px 0 80px}
     .hero p.sub{font-size:16px}
     .hnums b{font-size:21px}
+    .hpol-row{grid-template-columns:1fr 1fr;row-gap:12px}.hpol-row span:nth-child(2){border-right:0}.hpol-row b{font-size:30px}
     .bignum>b{font-size:38px}
     .timeline::before{left:62px}.tl{grid-template-columns:56px 1fr;gap:20px}.tl::before{left:49px}.tl time{font-size:14px}
     .card-form{padding:22px}
@@ -345,8 +360,18 @@
   <div class="wrap">
     <div>
       <span class="eyebrow">Biệt thự nghỉ dưỡng · Hội An</span>
-      <h1><span class="js-count" data-to="4.4" data-dec="1">4,4</span> triệu lượt khách đến Hội An mỗi năm. <em>Chỉ 363 căn</em> biệt thự giữa rừng dừa để họ ở lại.</h1>
+      <h1><span class="js-count" data-to="4.4" data-dec="1">4,4</span> triệu lượt khách đến Hội An mỗi năm. <em class="shine-w">Chỉ 363 căn</em> biệt thự giữa rừng dừa để họ ở lại.</h1>
       <p class="sub">Sáng thức dậy giữa rừng dừa Bảy Mẫu, khoảng 10 phút tới phố cổ đèn lồng, chiều ra biển An Bàng. Gia đình anh/chị nghỉ dưỡng vài tuần mỗi năm. <b>Những ngày còn lại, căn nhà đón khách và tạo dòng tiền.</b></p>
+      <div class="hpol js-open" data-title="Mở khoá chính sách bán hàng tháng này" data-need="Chính sách bán hàng" role="button" tabindex="0">
+        <div class="hpol-h">🎁 Chính sách tháng này</div>
+        <div class="hpol-row">
+          <span>Thanh toán đợt đầu<b data-pol="firstPay">██%</b></span>
+          <span>Chiết khấu vốn tự có<b data-pol="discount">██%</b></span>
+          <span>Lãi suất<b data-pol="finance">██%</b><i data-pol="financeNote">██ tháng</i></span>
+          <span>Ngân hàng cho vay<b data-pol="gift">██%</b></span>
+        </div>
+        <div class="hpol-cta">Nhận chính sách chi tiết &amp; bảng tính theo căn →</div>
+      </div>
       <div class="price-badge js-price" hidden>Giá chỉ từ <b class="js-price-val"></b> · <button class="link-cta js-open" data-title="Nhận bảng giá căn còn trống" data-need="Bảng giá">Xem bảng giá →</button></div>
       <div class="hnums">
         <div><b><span class="js-count" data-to="1.87" data-dec="2">1,87</span> triệu</b><span>lượt khách <u>ở lại qua đêm</u> tại Hội An năm 2024</span></div>
@@ -397,6 +422,26 @@
     </div>
   </div>
 </div>
+
+<!-- CHÍNH SÁCH -->
+<section class="policy" id="chinh-sach" data-chat-topic="chính sách thanh toán ưu đãi">
+  <div class="wrap">
+    <span class="eyebrow">Chính sách bán hàng</span>
+    <h2>Chính sách <em>tháng này</em> có gì?</h2>
+    <p class="lead-text">Chỉ cần <strong class="o" data-pol="firstPay">██</strong> để ký hợp đồng, ngân hàng hỗ trợ tới <strong class="o" data-pol="gift">██</strong> với lãi suất <strong class="o" data-pol="finance">██</strong> trong <strong class="o" data-pol="financeNote">██</strong>.</p>
+    <div class="pol-grid">
+      <div class="pol reveal"><span>💳</span><h3>Thanh toán đợt đầu</h3><b class="blur" data-pol="firstPay">██%</b><p>giá trị căn khi ký hợp đồng</p></div>
+      <div class="pol reveal"><span>🏷️</span><h3>Chiết khấu vốn tự có</h3><b class="blur" data-pol="discount">██%</b><p>+ chiết khấu thanh toán sớm <span data-pol="earlyPay">██</span></p></div>
+      <div class="pol reveal"><span>🏦</span><h3>Hỗ trợ lãi suất</h3><b class="blur" data-pol="finance">██%</b><p>trong <span data-pol="financeNote">██ tháng</span> từ ngày giải ngân</p></div>
+      <div class="pol reveal"><span>🎁</span><h3>Ngân hàng cho vay tới</h3><b class="blur" data-pol="gift">██%</b><p>giá trị hợp đồng</p></div>
+    </div>
+    <div class="pol-cta reveal">
+      <div><b>🔒 Chính sách chính thức mới nhất</b><p>Em gửi bản chính sách, tiến độ thanh toán và bảng tính dòng tiền đã áp ưu đãi, đúng căn anh/chị chọn.</p></div>
+      <button class="btn btn-orange pulse js-open" data-title="Mở khoá chính sách bán hàng tháng này" data-need="Chính sách bán hàng">Mở khoá chính sách tháng này →</button>
+    </div>
+    <p class="src" style="color:var(--muted)">Chính sách thay đổi theo từng đợt, áp dụng theo công bố chính thức của chủ đầu tư.</p>
+  </div>
+</section>
 
 <!-- BẠN CÓ BIẾT -->
 <section class="know" id="bi-mat">
@@ -578,26 +623,6 @@
   </div>
 </section>
 
-<!-- CHÍNH SÁCH -->
-<section class="policy" id="chinh-sach" data-chat-topic="chính sách thanh toán ưu đãi">
-  <div class="wrap">
-    <span class="eyebrow">Chính sách bán hàng</span>
-    <h2>Chính sách <em>tháng này</em> có gì?</h2>
-    <p class="lead-text">Mỗi đợt mở bán có chính sách khác nhau. Anh/chị vào đúng đợt có thể tiết kiệm đáng kể.</p>
-    <div class="pol-grid">
-      <div class="pol reveal"><span>💳</span><h3>Thanh toán đợt đầu</h3><b class="blur">██%</b><p>giá trị căn</p></div>
-      <div class="pol reveal"><span>🏷️</span><h3>Chiết khấu thanh toán sớm</h3><b class="blur">██%</b><p>theo tiến độ chọn</p></div>
-      <div class="pol reveal"><span>🏦</span><h3>Hỗ trợ tài chính</h3><b class="blur">██ tháng</b><p>theo ngân hàng liên kết</p></div>
-      <div class="pol reveal"><span>🎁</span><h3>Ưu đãi riêng đợt này</h3><b class="blur">█████</b><p>áp dụng theo căn</p></div>
-    </div>
-    <div class="pol-cta reveal">
-      <div><b>🔒 Chính sách chính thức mới nhất</b><p>Em gửi bản chính sách, tiến độ thanh toán và bảng tính dòng tiền đã áp ưu đãi, đúng căn anh/chị chọn.</p></div>
-      <button class="btn btn-orange pulse js-open" data-title="Mở khoá chính sách bán hàng tháng này" data-need="Chính sách bán hàng">Mở khoá chính sách tháng này →</button>
-    </div>
-    <p class="src" style="color:var(--muted)">Chính sách thay đổi theo từng đợt, áp dụng theo công bố chính thức của chủ đầu tư.</p>
-  </div>
-</section>
-
 <!-- ARCHITECTURE -->
 <section class="arch" data-chat-topic="thiết kế sản phẩm">
   <div class="wrap grid">
@@ -734,6 +759,17 @@ const IMAGES = {
 };
 // Giá hiển thị ở đầu trang, ví dụ '8,7 tỷ'. Để trống = ẩn (chỉ điền giá chính thức đã xác nhận).
 const PRICE_FROM = '';
+// Chính sách bán hàng hiện hành. Điền giá trị chính thức (ví dụ firstPay: '15%') để hiện rõ;
+// để trống = làm mờ, khách để lại số để "mở khoá".
+// Mặc định theo chính sách GĐ1 các sàn đang công bố – KIỂM TRA lại với chính sách chính thức của CĐT trước khi chạy ads.
+const POLICY = {
+  firstPay: '30%',            // thanh toán đợt 1 khi ký HĐ
+  discount: '8%',             // chiết khấu vốn tự có
+  earlyPay: '9%/năm',         // chiết khấu thanh toán sớm
+  finance: '0%',              // lãi suất hỗ trợ
+  financeNote: '24 tháng',    // thời gian hỗ trợ lãi suất
+  gift: '70%',                // tỷ lệ cho vay tối đa
+};
 // Địa chỉ server live chat. Để trống nếu landing page chạy cùng server chat.
 const API_BASE = '';
 
@@ -825,6 +861,13 @@ const API_BASE = '';
       btn.disabled = false; btn.textContent = label;
     }
   }));
+
+  // Chính sách: hiện giá trị đã điền, còn lại làm mờ
+  $$('[data-pol]').forEach(el => {
+    const v = POLICY[el.dataset.pol];
+    if (v) { el.textContent = v; el.classList.remove('blur'); if (el.tagName === 'B') el.classList.add('shine'); } else el.classList.add('blur');
+  });
+  $$('.hpol').forEach(el => el.addEventListener('keydown', e => { if (e.key === 'Enter') el.click(); }));
 
   // Giá từ
   if (PRICE_FROM) { $('.js-price-val').textContent = PRICE_FROM; $('.js-price').hidden = false; }
