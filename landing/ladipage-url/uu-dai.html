@@ -484,12 +484,12 @@ footer p{margin-bottom:6px}
 
 <main id="top"><!-- ADSHERO -->
 <style>
-.ads-hero{position:relative;color:#fff;padding:56px 0 90px;background:linear-gradient(100deg,rgba(2,13,62,.94) 0%,rgba(2,13,62,.78) 48%,rgba(14,25,71,.35) 100%),url("https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/landing/vinhomes-hai-van-bay/landing/dist/img/aerial-bay.webp") center/cover;overflow:hidden}
-.ads-hero::after{content:"";position:absolute;inset:auto 0 0 0;height:90px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 90' preserveAspectRatio='none'%3E%3Cpath d='M0 45 C240 90 480 0 720 40 S1200 80 1440 30 V90 H0Z' fill='%23ffffff'/%3E%3C/svg%3E") bottom/100% 100% no-repeat}
-.ads-hero .container{position:relative;z-index:1;display:grid;grid-template-columns:1.2fr .9fr;gap:36px;align-items:center}
-.ads-hero h1{font-family:"Playfair Display",serif;font-weight:600;font-size:clamp(34px,5.4vw,60px);line-height:1.12;margin:14px 0}
-.ads-hero h1 em{font-style:normal;color:var(--gold-light)}
-.ads-hero .lede{font-size:18px;color:#DCE4F7;max-width:600px}
+.hvb-hero{position:relative;color:#fff;padding:56px 0 90px;background:linear-gradient(100deg,rgba(2,13,62,.94) 0%,rgba(2,13,62,.78) 48%,rgba(14,25,71,.35) 100%),url("https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/landing/vinhomes-hai-van-bay/landing/dist/img/aerial-bay.webp") center/cover;overflow:hidden}
+.hvb-hero::after{content:"";position:absolute;inset:auto 0 0 0;height:90px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 90' preserveAspectRatio='none'%3E%3Cpath d='M0 45 C240 90 480 0 720 40 S1200 80 1440 30 V90 H0Z' fill='%23ffffff'/%3E%3C/svg%3E") bottom/100% 100% no-repeat}
+.hvb-hero .container{position:relative;z-index:1;display:grid;grid-template-columns:1.2fr .9fr;gap:36px;align-items:center}
+.hvb-hero h1{font-family:"Playfair Display",serif;font-weight:600;font-size:clamp(34px,5.4vw,60px);line-height:1.12;margin:14px 0}
+.hvb-hero h1 em{font-style:normal;color:var(--gold-light)}
+.hvb-hero .lede{font-size:18px;color:#DCE4F7;max-width:600px}
 .price-from{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}
 .price-from div{background:rgba(255,255,255,.08);border:1px solid rgba(229,184,128,.45);border-radius:14px;padding:10px 14px;min-width:132px}
 .price-from small{display:block;color:#C9D3EE;font-size:12px}
@@ -497,15 +497,15 @@ footer p{margin-bottom:6px}
 .countdown{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0 20px;font-size:14px;color:#DCE4F7}
 .countdown span.u{background:#fff;color:var(--navy-800);border-radius:10px;padding:6px 10px;font-weight:800;min-width:48px;text-align:center}
 .countdown span.u small{display:block;font-size:10px;font-weight:600;color:var(--muted)}
-.ads-badges{display:flex;flex-wrap:wrap;gap:8px}
-.ads-badges span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:6px 12px;border-radius:999px;font-size:13px}
-@media(max-width:900px){.ads-hero .container{grid-template-columns:1fr}}
-.ribbon .grid.ads-rib{grid-template-columns:repeat(6,1fr)}
+.hvb-badges{display:flex;flex-wrap:wrap;gap:8px}
+.hvb-badges span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:6px 12px;border-radius:999px;font-size:13px}
+@media(max-width:900px){.hvb-hero .container{grid-template-columns:1fr}}
+.ribbon .grid.hvb-rib{grid-template-columns:repeat(6,1fr)}
 .offer4{grid-template-columns:repeat(4,1fr)}
-@media(max-width:980px){.ribbon .grid.ads-rib{grid-template-columns:repeat(3,1fr)}.offer4{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.ribbon .grid.ads-rib{grid-template-columns:1fr 1fr}.ribbon .grid.ads-rib .item:last-child{grid-column:auto}.offer4{grid-template-columns:1fr}.price-from div{min-width:0;flex:1 1 45%}}
+@media(max-width:980px){.ribbon .grid.hvb-rib{grid-template-columns:repeat(3,1fr)}.offer4{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.ribbon .grid.hvb-rib{grid-template-columns:1fr 1fr}.ribbon .grid.hvb-rib .item:last-child{grid-column:auto}.offer4{grid-template-columns:1fr}.price-from div{min-width:0;flex:1 1 45%}}
 </style>
-<section class="ads-hero" id="top-ads">
+<section class="hvb-hero" id="top-uudai">
   <div class="container">
     <div>
       <span class="badge"><i></i> Chính sách mới áp dụng từ 01/10/2026</span>
@@ -520,7 +520,7 @@ footer p{margin-bottom:6px}
       <div class="countdown" id="cd" aria-live="polite">⏳ Ưu đãi VinClub tháng 10 kết thúc sau:
         <span class="u" data-u="d">--<small>ngày</small></span><span class="u" data-u="h">--<small>giờ</small></span><span class="u" data-u="m">--<small>phút</small></span>
       </div>
-      <div class="ads-badges"><span>✓ Sở hữu lâu dài (~90%)</span><span>✓ Pháp lý quy hoạch 1/500</span><span>✓ Cách sân bay 20–30 phút</span></div>
+      <div class="hvb-badges"><span>✓ Sở hữu lâu dài (~90%)</span><span>✓ Pháp lý quy hoạch 1/500</span><span>✓ Cách sân bay 20–30 phút</span></div>
     </div>
     <form class="lead-card js-lead" data-source="Ads hero" novalidate>
       <h2>🔓 Mở khóa bảng giá nội bộ</h2>
@@ -540,7 +540,7 @@ footer p{margin-bottom:6px}
 <!-- ADSNUM -->
 <section class="section" style="padding:36px 0 20px">
   <div class="container">
-    <div class="ribbon" style="margin-top:0"><div class="grid ads-rib">
+    <div class="ribbon" style="margin-top:0"><div class="grid hvb-rib">
       <div class="item"><b>70%</b><span>Hỗ trợ vay</span><small>theo điều kiện NH</small></div>
       <div class="item"><b>0%</b><span>Lãi suất</span><small>18 – 36 tháng</small></div>
       <div class="item"><b>D+540</b><span>Giãn xây</span><small>mới trả phần xây</small></div>
