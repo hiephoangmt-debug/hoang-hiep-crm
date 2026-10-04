@@ -1,0 +1,47 @@
+/* Chat trực tiếp trên web */
+.hhc { --hhc-navy: var(--navy, #0b2447); --hhc-cta: var(--cta, #ea580c); --hhc-gold: var(--gold, #c99b70); --hhc-line: var(--line, #e2e7ef); --hhc-tint: var(--tint, #f3f6fa); --hhc-ink: var(--ink, #14223a); font-family: var(--font-body, system-ui, sans-serif); }
+.hhc__fab { position: fixed; right: 20px; bottom: 20px; z-index: 70; display: flex; align-items: center; gap: 10px; padding: 6px 18px 6px 6px; border: 0; border-radius: 999px; background: var(--hhc-cta); color: #fff; font: inherit; font-weight: 700; font-size: .95rem; cursor: pointer; box-shadow: 0 12px 30px rgba(11, 36, 71, .28); }
+.hhc__fab img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; }
+.hhc__fab:hover { filter: brightness(1.05); }
+.hhc__dot { position: absolute; top: 6px; left: 40px; width: 12px; height: 12px; border-radius: 50%; background: #22c55e; border: 2px solid #fff; }
+.hhc.is-open .hhc__fab { display: none; }
+.hhc__bubble { position: fixed; right: 20px; bottom: 84px; z-index: 70; max-width: 300px; padding: 14px 34px 14px 16px; border-radius: 14px 14px 4px 14px; background: #fff; color: var(--hhc-ink); box-shadow: 0 12px 30px rgba(11, 36, 71, .2); font-size: .92rem; line-height: 1.5; }
+.hhc__bubble p { margin: 0; cursor: pointer; }
+.hhc__bubble-x { position: absolute; top: 4px; right: 6px; border: 0; background: none; font-size: 1.2rem; color: #7a869a; cursor: pointer; }
+.hhc__panel { position: fixed; right: 20px; bottom: 20px; z-index: 80; display: flex; flex-direction: column; width: 370px; max-width: calc(100vw - 24px); height: min(560px, calc(100vh - 110px)); border-radius: 16px; overflow: hidden; background: #fff; box-shadow: 0 24px 60px rgba(11, 36, 71, .3); }
+.hhc__panel[hidden] { display: none; }
+.hhc__head { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--hhc-navy); color: #fff; }
+.hhc__head img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--hhc-gold); }
+.hhc__head div { flex: 1; min-width: 0; line-height: 1.3; }
+.hhc__head strong { display: block; font-size: 1rem; }
+.hhc__head span { font-size: .76rem; color: #c7d3e3; }
+.hhc__head i { display: inline-block; width: 8px; height: 8px; margin-right: 4px; border-radius: 50%; background: #22c55e; }
+.hhc__close { border: 0; background: none; color: #fff; font-size: 1.6rem; line-height: 1; cursor: pointer; }
+.hhc__log { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding: 14px; background: var(--hhc-tint); }
+.hhc__msg { max-width: 85%; padding: 9px 12px; border-radius: 14px; font-size: .92rem; line-height: 1.5; overflow-wrap: anywhere; }
+.hhc__msg--assistant { align-self: flex-start; background: #fff; color: var(--hhc-ink); border-bottom-left-radius: 4px; box-shadow: 0 2px 6px rgba(11, 36, 71, .06); }
+.hhc__msg--user { align-self: flex-end; background: var(--hhc-navy); color: #fff; border-bottom-right-radius: 4px; }
+.hhc__msg a { color: inherit; text-decoration: underline; }
+.hhc__typing { display: flex; gap: 4px; }
+.hhc__typing i { width: 7px; height: 7px; border-radius: 50%; background: #9aa6b8; animation: hhc-blink 1s infinite; }
+.hhc__typing i:nth-child(2) { animation-delay: .2s; } .hhc__typing i:nth-child(3) { animation-delay: .4s; }
+@keyframes hhc-blink { 0%, 100% { opacity: .3; } 50% { opacity: 1; } }
+.hhc__chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 12px; background: var(--hhc-tint); }
+.hhc__chips:not(:empty) { padding-bottom: 10px; }
+.hhc__chip { padding: 6px 12px; border: 1px solid var(--hhc-cta); border-radius: 999px; background: #fff; color: var(--hhc-cta); font: inherit; font-size: .8rem; font-weight: 600; cursor: pointer; }
+.hhc__chip:hover { background: var(--hhc-cta); color: #fff; }
+.hhc__form { display: flex; gap: 8px; padding: 10px; border-top: 1px solid var(--hhc-line); background: #fff; }
+.hhc__form input { flex: 1; min-width: 0; padding: 10px 12px; border: 1px solid var(--hhc-line); border-radius: 999px; font: inherit; font-size: 16px; color: var(--hhc-ink); }
+.hhc__form input:focus { outline: 2px solid var(--hhc-gold); border-color: transparent; }
+.hhc__form button { width: 42px; border: 0; border-radius: 50%; background: var(--hhc-cta); color: #fff; font-size: 1rem; cursor: pointer; }
+.hhc__foot { margin: 0; padding: 0 12px 10px; background: #fff; font-size: .76rem; color: #7a869a; text-align: center; }
+.hhc__foot a { color: var(--hhc-navy); font-weight: 700; }
+@media (prefers-reduced-motion: reduce) { .hhc__typing i { animation: none; } }
+/* Điện thoại: nút chat nằm trên thanh Gọi / Zalo / Tư vấn ở đáy. */
+@media (max-width: 700px) {
+	.hhc__fab { right: 12px; bottom: calc(72px + env(safe-area-inset-bottom, 0px)); padding: 4px; }
+	.hhc__fab-text { display: none; }
+	.hhc__dot { left: auto; right: 2px; top: 2px; }
+	.hhc__bubble { right: 12px; bottom: calc(132px + env(safe-area-inset-bottom, 0px)); max-width: calc(100vw - 80px); }
+	.hhc__panel { right: 8px; left: 8px; bottom: calc(68px + env(safe-area-inset-bottom, 0px)); width: auto; max-width: none; height: min(70vh, calc(100vh - 140px)); }
+}

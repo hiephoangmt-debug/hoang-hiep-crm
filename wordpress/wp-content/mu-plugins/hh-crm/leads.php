@@ -266,6 +266,7 @@ function hh_lead_mail( $subject, $body ) {
 		$headers[] = 'From: Website ' . get_bloginfo( 'name' ) . ' <no-reply@' . preg_replace( '/^www\./', '', (string) $host ) . '>';
 	}
 	$ok = wp_mail( hh_lead_recipients(), $subject, $body, $headers );
+	do_action( 'hh_lead_notified', $subject, $body ); // Telegram…
 	update_option( 'hh_lead_mail_last', array( 'ok' => (bool) $ok, 'at' => time(), 'error' => $ok ? '' : get_option( 'hh_lead_mail_error', 'wp_mail() trả về lỗi' ) ), false );
 	return $ok;
 }
