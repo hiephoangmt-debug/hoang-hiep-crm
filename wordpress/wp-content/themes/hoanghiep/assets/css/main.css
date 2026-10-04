@@ -1100,3 +1100,13 @@ html.nav-locked, html.nav-locked body { overflow: hidden; }
 .listing-page .layout__main { max-width: none; }
 .calc-table td[data-label="Số tiền"] { white-space: nowrap; }
 @media (max-width: 600px) { .search-box { padding: 6px 14px 16px; } .search-box__tabs { overflow-x: auto; scrollbar-width: none; } .search-box__tabs::-webkit-scrollbar { display: none; } .search-box__tab { flex: 1 0 auto; padding: 12px 8px; font-size: .95rem; } }
+
+/* Tiêu đề trên nền ảnh tối: giữ màu trắng kể cả khi plugin (Elementor kit, Foxtool…) đặt màu chung cho h1/h2. */
+.hero .hero__title, .project-hero .project-hero__title { color: var(--white) !important; text-shadow: 0 2px 16px rgba(5, 15, 30, .45); }
+.hero .eyebrow, .hero .hero__meta, .project-hero .project-hero__meta { text-shadow: 0 1px 8px rgba(5, 15, 30, .5); }
+@media (max-width: 760px) {
+	/* Điện thoại: chữ phủ cả chiều ngang ảnh → lớp phủ tối đều hơn. */
+	.hero__slide::before { background: linear-gradient(180deg, rgba(10, 35, 66, .55) 0%, rgba(10, 35, 66, .78) 45%, rgba(10, 35, 66, .9) 100%); }
+	.hero__meta { align-items: flex-start; }
+	.hero__meta svg { flex: none; margin-top: 4px; }
+}
