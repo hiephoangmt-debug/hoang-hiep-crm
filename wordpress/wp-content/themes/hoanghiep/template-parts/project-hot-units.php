@@ -43,8 +43,8 @@ $title = get_the_title();
 </section>
 <style>
 .hot-units__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:14px;margin:18px 0 20px}
-.hot-unit{display:flex;flex-direction:column;gap:8px;padding:18px;border:1px solid var(--line,#e3e8ef);border-top:4px solid var(--gold-2,#8b5a35);border-radius:14px;background:#fff;box-shadow:0 8px 24px rgba(10,35,66,.08)}
-.hot-unit__zone{margin:0;font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-2,#8b5a35)}
+.hot-unit{display:flex;flex-direction:column;gap:8px;padding:18px;border:1px solid var(--line,#e3e8ef);border-top:4px solid var(--gold-2,#ea580c);border-radius:14px;background:#fff;box-shadow:0 8px 24px rgba(10,35,66,.08)}
+.hot-unit__zone{margin:0;font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-2,#ea580c)}
 .hot-unit__code{margin:0;font-size:1.45rem;color:var(--navy,#0a2342)}
 .hot-unit__facts{margin:0;padding:0;list-style:none;display:grid;gap:6px}
 .hot-unit__facts li{display:flex;justify-content:space-between;gap:10px;font-size:.92rem;border-bottom:1px dashed var(--line,#e3e8ef);padding-bottom:6px}

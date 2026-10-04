@@ -145,6 +145,11 @@ function hoanghiep_customize( $wp_customize ) {
 		$fields[ "hh_stat{$i}_label" ] = array( 'hh_stats', "Số liệu {$i} – mô tả", 'text' );
 	}
 
+	// Bảng màu.
+	$wp_customize->add_section( 'hh_colors', array( 'title' => 'Bảng màu', 'panel' => 'hh_brand', 'priority' => 5 ) );
+	$wp_customize->add_setting( 'hh_palette', array( 'default' => 'cam', 'sanitize_callback' => static fn( $v ) => isset( hoanghiep_palettes()[ $v ] ) ? $v : 'cam' ) );
+	$wp_customize->add_control( 'hh_palette', array( 'label' => 'Bảng màu website', 'section' => 'hh_colors', 'type' => 'radio', 'choices' => wp_list_pluck( hoanghiep_palettes(), 'label' ) ) );
+
 	$defaults = hoanghiep_defaults();
 	foreach ( $fields as $id => list( $section, $label, $type ) ) {
 		$sanitize = array(
@@ -162,3 +167,28 @@ function hoanghiep_customize( $wp_customize ) {
 		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, $id, array( 'label' => $label, 'section' => $section ) ) );
 	}
 }
+
+/** Bảng màu chọn được trong Tùy biến (mặc định: navy đậm + xanh dương + cam – trong main.css). */
+function hoanghiep_palettes() {
+	return array(
+		'cam'  => array( 'label' => 'Navy đậm + xanh dương + cam (mặc định – nổi bật)', 'vars' => array() ),
+		'do'   => array( 'label' => 'Navy + đỏ + vàng (khuyến mãi, mạnh mẽ)', 'vars' => array( '--navy' => '#0a2342', '--navy-2' => '#11407a', '--navy-3' => '#1a63c4', '--gold' => '#ffcf4d', '--gold-2' => '#d62828', '--gold-3' => '#a4161a', '--gold-soft' => '#fdeeee' ) ),
+		'vang' => array( 'label' => 'Xanh dương + vàng cam (tươi sáng)', 'vars' => array( '--navy' => '#06204a', '--navy-2' => '#0b3d8c', '--navy-3' => '#1565e0', '--gold' => '#ffc83d', '--gold-2' => '#f59e0b', '--gold-3' => '#d97706', '--gold-soft' => '#fff7e0' ) ),
+		'nau'  => array( 'label' => 'Navy + nâu (cổ điển, bản cũ)', 'vars' => array( '--navy' => '#0a2342', '--navy-2' => '#123761', '--navy-3' => '#1d4a7d', '--gold' => '#c99b70', '--gold-2' => '#8a5a36', '--gold-3' => '#6e4527', '--gold-soft' => '#f5ede5' ) ),
+	);
+}
+
+add_action(
+	'wp_enqueue_scripts',
+	static function () {
+		$vars = hoanghiep_palettes()[ get_theme_mod( 'hh_palette', 'cam' ) ]['vars'] ?? array();
+		if ( $vars ) {
+			$css = '';
+			foreach ( $vars as $k => $v ) {
+				$css .= $k . ':' . $v . ';';
+			}
+			wp_add_inline_style( 'hoanghiep', ':root{' . $css . '}' );
+		}
+	},
+	20
+);

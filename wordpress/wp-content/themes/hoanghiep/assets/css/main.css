@@ -1,13 +1,13 @@
-/* Hoàng Hiệp – navy & white with brown accents */
+/* Hoàng Hiệp – navy đậm, xanh dương & cam (đổi bảng màu: Giao diện → Tùy biến → Bảng màu) */
 :root {
-	--navy: #0a2342;
-	--navy-2: #123761;
-	--navy-3: #1d4a7d;
-	/* Accent browns: --gold = light caramel (on navy, lines), --gold-2 = deep brown (buttons, text on white). */
-	--gold: #c99b70;
-	--gold-2: #8a5a36;
-	--gold-3: #6e4527;
-	--gold-soft: #f5ede5;
+	--navy: #0b2447;
+	--navy-2: #123a74;
+	--navy-3: #1d5fbf;
+	/* Màu nhấn: --gold = sáng (chữ, đường kẻ trên nền navy), --gold-2 = đậm (nút, chữ nhấn trên nền trắng). */
+	--gold: #ffb627;
+	--gold-2: #ea580c;
+	--gold-3: #c2410c;
+	--gold-soft: #fff3e8;
 	--ink: #14223a;
 	--text: #44526a;
 	--muted: #7a869a;
@@ -872,7 +872,7 @@ img.article-head__author { object-fit: cover; border: 2px solid var(--gold); }
 .cta-box--offer .cta-box__link { color: var(--gold); }
 
 /* Ưu đãi đầu trang dự án */
-.hero-offer { max-width: 560px; margin-top: 22px; padding: 18px 20px; border: 1px solid rgba(201, 155, 112, .55); border-radius: var(--radius-lg); background: rgba(10, 35, 66, .72); backdrop-filter: blur(6px); color: var(--white); }
+.hero-offer { max-width: 560px; margin-top: 22px; padding: 18px 20px; border: 1px solid rgba(255, 182, 39, .55); border-radius: var(--radius-lg); background: rgba(10, 35, 66, .72); backdrop-filter: blur(6px); color: var(--white); }
 .hero-offer__title { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; font-weight: 700; color: var(--gold); }
 .hero-offer .check-list { margin-bottom: 14px; }
 .hero-offer .check-list li { color: rgba(255, 255, 255, .92); font-size: .92rem; }
