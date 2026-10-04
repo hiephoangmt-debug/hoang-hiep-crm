@@ -965,8 +965,19 @@ body.has-pop { overflow: hidden; }
 .discount { margin-bottom: 20px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--white); overflow: hidden; }
 .discount__title { margin: 0; padding: 14px 18px; font-weight: 700; color: var(--navy); }
 .discount .table-wrap { margin: 0; border: 0; border-radius: 0; }
-.discount__table th:last-child { background: var(--gold); color: var(--navy); text-align: center; }
-.discount__table td:last-child { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--gold-2); text-align: center; }
+.discount__table th:nth-child(2) { background: var(--gold); color: var(--navy); text-align: center; }
+.discount__table td { vertical-align: middle; }
+.discount__plan { display: block; color: var(--navy); }
+.discount__how { display: block; margin-top: 3px; font-size: .82rem; color: var(--muted); }
+.discount__pct { text-align: center; white-space: nowrap; }
+.discount__pct b { display: block; font-family: var(--font-display); font-size: 1.6rem; line-height: 1.1; color: #b8312f; }
+.discount__due { display: inline-flex; align-items: center; gap: 4px; margin-top: 4px; font-size: .78rem; font-weight: 600; color: var(--gold-2); }
+.discount__due svg { width: 13px; height: 13px; }
+.discount__val { display: block; }
+.discount__go { text-align: right; width: 1%; white-space: nowrap; }
+.discount__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-top: 1px solid var(--line); background: var(--gold-soft); }
+.discount__foot p { flex: 1 1 320px; margin: 0; font-size: .88rem; color: var(--ink); }
+.screen-reader-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (max-width: 640px) { .countdown { width: 100%; } .countdown div { flex: 1; min-width: 0; } }
 @media (max-width: 640px) { .discount__table { min-width: 0; } .discount__table th, .discount__table td { white-space: normal; padding: 10px; font-size: .88rem; } }
 
@@ -1007,7 +1018,11 @@ body.has-pop { overflow: hidden; }
 	.data-table td.data-table__action { display: block; }
 	.data-table td.data-table__action::before { content: none; }
 	.data-table td.data-table__action .btn { width: 100%; justify-content: center; }
-	.discount__table td:last-child { font-size: 1.05rem; }
+	.discount__pct { text-align: left; }
+	.discount__pct b { display: inline; font-size: 1.35rem; margin-right: 8px; }
+	.discount__pct .discount__due { margin-top: 0; }
+	.discount__table td:first-child .discount__how { color: #b9c6d8; }
+	.discount__foot .btn { width: 100%; justify-content: center; }
 }
 @media (max-width: 480px) { .brand__tag { white-space: normal; overflow: visible; font-size: .6rem; letter-spacing: .04em; line-height: 1.3; } }
 html.nav-locked, html.nav-locked body { overflow: hidden; }

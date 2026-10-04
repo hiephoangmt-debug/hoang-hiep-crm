@@ -17,11 +17,16 @@ function hh_fours_f2_policy_meta() {
 		'hh_p_offer_note'     => 'CSBH 4.2 Tòa F2 áp dụng từ 26/9/2026 – hạn thanh toán sớm 25/10/2026. Ví dụ căn niêm yết 3 tỷ còn khoảng 2,48 tỷ (theo phiếu tính giá CĐT).',
 		'hh_p_offer_start'    => '26/09/2026',
 		'hh_p_offer_deadline' => '25/10/2026',
-		'hh_p_discount_table' => "Thanh toán sớm 95% (cộng dồn Early Bird 3% + không vay 3%) | Trước 25/10/2026 | 12%\nThanh toán sớm 70% – nhận nhà rồi trả 25% còn lại | Trước 25/10/2026 | 5%\nThanh toán sớm 50% | Trước 25/10/2026 | 2,5%\nTiến độ chuẩn, không vay ngân hàng (Early Bird 3% + không vay 3%) | Theo tiến độ | 6%\nVay ngân hàng – giải ngân 70% (Early Bird) | Theo tiến độ | 3%",
+		'hh_p_discount_table' => "Thanh toán sớm 95% | Trước 25/10/2026 | 17,2% | Early Bird 3% + không vay 3% + thanh toán sớm 12%\nThanh toán sớm 70% – nhận nhà rồi trả 25% còn lại | Trước 25/10/2026 | 10,6% | Early Bird 3% + không vay 3% + thanh toán sớm 5%\nThanh toán sớm 50% | Trước 25/10/2026 | 8,3% | Early Bird 3% + không vay 3% + thanh toán sớm 2,5%\nTiến độ chuẩn, không vay ngân hàng | Early Bird có thời hạn | 5,9% | Early Bird 3% + không vay 3%\nVay ngân hàng – giải ngân 70% | Early Bird có thời hạn | 3% | Early Bird 3%",
 		'hh_p_policy'         => "Early Bird 3% (có thời hạn) áp dụng khi ký thỏa thuận đặt cọc\nKhông vay ngân hàng: chiết khấu thêm 3%\nThanh toán sớm 95% / 70% / 50% trước 25/10/2026: chiết khấu thêm 12% / 5% / 2,5%\nĐặt cọc 100 triệu (Studio, 1PN, 1PN+, 2PN) – 150 triệu (3PN)\nSun Early Key: nhận bàn giao sử dụng khi đã thanh toán 70% (dự kiến 31/5/2028), 25% còn lại trả dần sau khi nhận nhà\nVay ngân hàng: ngân hàng giải ngân 70% ngay sau ký hợp đồng mua bán\nChính sách theo CSBH 4.2 Tòa F2 từ 26/9/2026 – thay đổi theo đợt, liên hệ để nhận bản mới nhất",
 		'hh_p_payment'        => "Đặt cọc | Ký thỏa thuận đặt cọc | 100 – 150 triệu\nĐợt 2 | Khoảng 2 tuần sau đặt cọc | 15%\nKý hợp đồng mua bán | Khoảng 3 tuần sau đặt cọc | –\nĐợt 3 – 7 | Mỗi 3 tháng (từ quý 1/2027) | 10% mỗi đợt\nĐợt 8 | Trước bàn giao | 5%\nNhận bàn giao sử dụng (Sun Early Key) | Dự kiến 31/5/2028 | Đã thanh toán 70%\nĐợt 9 – 13 | Mỗi 4 tháng sau khi nhận nhà | 5% mỗi đợt\nĐợt cuối | Khi nhận giấy chứng nhận | 5% + kinh phí bảo trì",
 		'hh_p_loan'           => 'Phương án vay: ngân hàng giải ngân 70% giá trị căn ngay sau khi ký hợp đồng mua bán; khách thanh toán 15% (gồm tiền cọc) và 10% theo tiến độ. Phương án vay không áp dụng chiết khấu "không vay" 3%, vẫn được Early Bird 3%. Lãi suất, ân hạn theo gói ngân hàng liên kết từng thời điểm – liên hệ để nhận bảng tính khoản vay theo căn cụ thể.',
 	);
+}
+
+/** Bảng chiết khấu bản trước (đã gửi) – thay nếu anh chưa sửa. */
+function hh_fours_f2_old_meta() {
+	return array( 'hh_p_discount_table' => "Thanh toán sớm 95% (cộng dồn Early Bird 3% + không vay 3%) | Trước 25/10/2026 | 12%\nThanh toán sớm 70% – nhận nhà rồi trả 25% còn lại | Trước 25/10/2026 | 5%\nThanh toán sớm 50% | Trước 25/10/2026 | 2,5%\nTiến độ chuẩn, không vay ngân hàng (Early Bird 3% + không vay 3%) | Theo tiến độ | 6%\nVay ngân hàng – giải ngân 70% (Early Bird) | Theo tiến độ | 3%" );
 }
 
 /** Ví dụ trong phiếu tính giá CĐT: căn niêm yết 3 tỷ (gồm VAT & KPBT). */
@@ -51,7 +56,7 @@ function hh_dataset_fours_f2( $projects ) {
 			'rank_math_title'       => 'FourS Tower Đà Nẵng: Giá & Chính sách Tòa F2 T10/2026',
 			'rank_math_description' => 'FourS Tower (Tháp Bốn Mùa) Sun Group – ngã tư Nguyễn Phước Lan, Đà Nẵng. Tòa F2 cọc 100 triệu, tiết kiệm đến ~17% khi thanh toán sớm, nhận nhà khi trả 70%.',
 		);
-		$projects[ $i ]['fix_meta'] = array_intersect_key( $p['meta'], $upd ) + ( $p['fix_meta'] ?? array() );
+		$projects[ $i ]['fix_meta'] = hh_fours_f2_old_meta() + array_intersect_key( $p['meta'], $upd ) + ( $p['fix_meta'] ?? array() );
 		$projects[ $i ]['meta']     = array_merge( $p['meta'], $upd );
 		$projects[ $i ]['content']  = hh_fours_tower_content();
 	}
@@ -84,6 +89,7 @@ function hh_dataset_fours_f2( $projects ) {
 			'rank_math_description'   => 'FourS Tower F2 – Tháp Mai Đà Nẵng: 1.369 lượt đặt chỗ ngày ra mắt. Cọc 100 triệu, 15% ký HĐMB, nhận nhà khi trả 70%, thanh toán sớm tiết kiệm ~17%. Nhận phiếu tính giá.',
 			'rank_math_focus_keyword' => 'FourS Tower F2,tòa F2 FourS Tower,giá FourS Tower F2',
 		),
+		'fix_meta' => hh_fours_f2_old_meta(),
 		'content' => hh_fours_f2_content(),
 		'sources' => array(
 			'https://vnexpress.net/thap-f2-fours-tower-ghi-nhan-gan-1-400-luot-dat-cho-5125919.html',
