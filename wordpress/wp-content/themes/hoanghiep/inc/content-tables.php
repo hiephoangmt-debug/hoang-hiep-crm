@@ -52,3 +52,41 @@ function hoanghiep_content_tables( $html ) {
 	);
 }
 add_filter( 'the_content', 'hoanghiep_content_tables', 30 );
+
+/**
+ * Trang dự án: bài giới thiệu thường có các mục "Tổng quan", "Vị trí", "Bảng giá", "Chính sách"… trùng với các mục
+ * trang tự dựng từ dữ liệu bên dưới. Ẩn mục trùng (chỉ khi mục bên dưới đã có dữ liệu), giữ phần nhận định riêng.
+ */
+function hoanghiep_project_dedupe( $html ) {
+	if ( ! is_singular( 'du-an' ) || false === stripos( $html, '<h2' ) || ! in_the_loop() ) {
+		return $html;
+	}
+	$id   = get_the_ID();
+	$has  = static fn( $key ) => '' !== trim( (string) get_post_meta( $id, $key, true ) );
+	$dups = array(
+		'/^(thông tin )?tổng quan/u'          => true,
+		'/^\d+ phân khu/u'                    => $has( 'hh_p_zones' ),
+		'/^vị trí/u'                          => $has( 'hh_p_location_desc' ),
+		'/^tiện ích/u'                        => $has( 'hh_p_amenities_in' ),
+		'/^bảng giá/u'                        => $has( 'hh_p_price_table' ),
+		'/^chính sách/u'                      => $has( 'hh_p_policy' ),
+		'/^tiến độ/u'                         => $has( 'hh_p_progress' ),
+		'/^pháp lý/u'                         => $has( 'hh_p_legal' ),
+		'/^(câu hỏi|hỏi đáp)/u'               => $has( 'hh_p_faq' ),
+	);
+	$parts = preg_split( '#(?=<h2[\s>])#i', $html );
+	foreach ( $parts as $i => $part ) {
+		if ( ! preg_match( '#^<h2[^>]*>(.*?)</h2>#is', $part, $m ) ) {
+			continue;
+		}
+		$head = mb_strtolower( trim( html_entity_decode( wp_strip_all_tags( $m[1] ) ) ) );
+		foreach ( $dups as $re => $on ) {
+			if ( $on && preg_match( $re, $head ) ) {
+				unset( $parts[ $i ] );
+				break;
+			}
+		}
+	}
+	return implode( '', $parts );
+}
+add_filter( 'the_content', 'hoanghiep_project_dedupe', 25 );
