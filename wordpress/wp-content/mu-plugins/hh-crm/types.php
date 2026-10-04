@@ -765,6 +765,82 @@ function hh_listing_search_extend( $search, $q ) {
 	);
 	$meta  = $wpdb->prepare( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key IN ('hh_address','hh_project_name') AND meta_value LIKE %s", $like );
 	$proj  = $wpdb->prepare( "SELECT pm.post_id FROM {$wpdb->postmeta} pm INNER JOIN {$wpdb->posts} p ON p.ID = pm.meta_value WHERE pm.meta_key = 'hh_project' AND p.post_type = 'du-an' AND p.post_title LIKE %s", $like );
+	// Gõ sai / thiếu chữ (VD "Fous" → FourS, "casamya" → Casamia): dự án có tên gần đúng.
+	$fuzzy = hh_project_fuzzy_ids( $q->get( 'tk' ) );
+	$extra = '';
+	if ( $fuzzy ) {
+		$ids    = implode( ',', array_map( 'intval', $fuzzy ) );
+		$extra .= "{$wpdb->posts}.ID IN ($ids) OR {$wpdb->posts}.ID IN (SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = 'hh_project' AND meta_value IN ($ids)) OR ";
+	}
 	// $search có dạng " AND ((...))" – thêm điều kiện OR vào trong.
-	return preg_replace( '/^\s*AND\s*\(/', " AND ( {$wpdb->posts}.ID IN ($terms) OR {$wpdb->posts}.ID IN ($meta) OR {$wpdb->posts}.ID IN ($proj) OR ", $search, 1 );
+	return preg_replace( '/^\s*AND\s*\(/', " AND ( {$wpdb->posts}.ID IN ($terms) OR {$wpdb->posts}.ID IN ($meta) OR {$wpdb->posts}.ID IN ($proj) OR $extra", $search, 1 );
 }
+
+/** Chuẩn hoá chữ để so: bỏ dấu, chữ thường, tách từ. */
+function hh_search_words( $text ) {
+	$text = strtolower( remove_accents( html_entity_decode( (string) $text ) ) );
+	return array_values( array_filter( preg_split( '/[^a-z0-9]+/', $text ), 'strlen' ) );
+}
+
+/**
+ * ID dự án có tên gần đúng với từ khoá: mỗi từ khoá (từ 3 ký tự) khớp đầu một từ trong tên, hoặc sai 1 ký tự
+ * (2 ký tự với từ dài từ 7 chữ). Tên viết liền ("fourstower") cũng so.
+ */
+function hh_project_fuzzy_ids( $kw, $with_scores = false ) {
+	$words = array_filter( hh_search_words( $kw ), static fn( $w ) => strlen( $w ) >= 3 );
+	if ( ! $words ) {
+		return array();
+	}
+	$titles = get_transient( 'hh_project_titles' );
+	if ( false === $titles ) {
+		$titles = array();
+		foreach ( get_posts( array( 'post_type' => 'du-an', 'post_status' => 'publish', 'numberposts' => -1, 'fields' => 'ids' ) ) as $id ) {
+			$titles[ $id ] = hh_search_words( get_post_field( 'post_title', $id ) . ' ' . get_post_field( 'post_name', $id ) );
+		}
+		set_transient( 'hh_project_titles', $titles, DAY_IN_SECONDS );
+	}
+	$scores = array();
+	$phrase = implode( ' ', $words );
+	foreach ( $titles as $id => $tw ) {
+		$score = false !== strpos( ' ' . implode( ' ', $tw ) . ' ', ' ' . $phrase ) ? 0 : 0.5;
+		$tw[]  = implode( '', $tw );
+		foreach ( $words as $w ) {
+			$max  = strlen( $w ) >= 7 ? 2 : ( strlen( $w ) >= 4 ? 1 : 0 );
+			$best = null;
+			foreach ( $tw as $t ) {
+				$d = $t === $w ? 0 : ( 0 === strpos( $t, $w ) ? 0.2 : min( levenshtein( $w, $t ), levenshtein( $w, substr( $t, 0, strlen( $w ) ) ) + 0.3 ) );
+				if ( $d > 0.2 ) {
+					similar_text( $w, $t, $pct );
+					$d += ( 100 - $pct ) / 1000; // Cùng số lỗi: tên giống hơn xếp trước.
+				}
+				$best = null === $best ? $d : min( $best, $d );
+			}
+			if ( $best > ( $max ? $max + 0.45 : 0.2 ) ) {
+				continue 2;
+			}
+			$score += $best;
+		}
+		$scores[ (int) $id ] = $score + count( $tw ) / 10000; // Bằng điểm: tên ngắn (dự án chính) trước.
+	}
+	asort( $scores );
+	return $with_scores ? $scores : array_keys( $scores );
+}
+
+/** Trang Dự án: tìm kiếm xếp dự án khớp tên nhất lên đầu (đúng tên → gõ thiếu → gõ sai). */
+add_filter(
+	'posts_orderby',
+	static function ( $orderby, $q ) {
+		if ( is_admin() || ! $q->is_main_query() || ! $q->get( 'tk' ) || ! ( $q->is_post_type_archive( 'du-an' ) || $q->is_tax( 'loai-du-an' ) ) ) {
+			return $orderby;
+		}
+		$ids = hh_project_fuzzy_ids( $q->get( 'tk' ) );
+		if ( ! $ids ) {
+			return $orderby;
+		}
+		global $wpdb;
+		return 'FIELD(' . $wpdb->posts . '.ID, ' . implode( ',', array_map( 'intval', array_reverse( $ids ) ) ) . ') DESC' . ( $orderby ? ', ' . $orderby : '' );
+	},
+	10,
+	2
+);
+add_action( 'save_post_du-an', static function () { delete_transient( 'hh_project_titles' ); } );
