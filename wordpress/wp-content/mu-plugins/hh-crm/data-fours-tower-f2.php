@@ -13,9 +13,9 @@ defined( 'ABSPATH' ) || exit;
 /** Các ô chung cho FourS Tower và Tòa F2 (chính sách F2 đang mở bán). */
 function hh_fours_f2_policy_meta() {
 	return array(
-		'hh_p_offer_title'    => 'Chiết khấu lên đến 18% – chỉ cần 25% vốn đến khi nhận nhà',
+		'hh_p_offer_title'    => 'Chiết khấu lên đến 19% – chỉ cần 25% vốn đến khi nhận nhà',
 		'hh_p_offer_note'     => 'CSBH 4.2 Tòa F2 – hạn chiết khấu thanh toán sớm 25/10/2026.',
-		'hh_p_offer_stats'    => "18% | Chiết khấu cộng dồn tối đa\n25% | Vốn tự có đến khi nhận nhà (vay 70%)\n15% | Thanh toán đến khi ký HĐMB\n70% | Đã nhận nhà – Sun Early Key",
+		'hh_p_offer_stats'    => "19% | Chiết khấu lên đến\n25% | Vốn tự có đến khi nhận nhà (vay 70%)\n15% | Thanh toán đến khi ký HĐMB\n70% | Đã nhận nhà – Sun Early Key",
 		'hh_p_capital_title'  => 'Chỉ từ khoảng 405 triệu vốn tự có – ngân hàng cho vay 70%',
 		'hh_p_capital_table'  => "Studio | Giá từ ~1,7 tỷ | ~405 triệu | Ngân hàng cho vay ~1,13 tỷ\n1PN+ | Giá từ ~2,6 tỷ | ~619 triệu | Ngân hàng cho vay ~1,73 tỷ\n2PN | Giá từ ~3,6 tỷ | ~857 triệu | Ngân hàng cho vay ~2,4 tỷ",
 		'hh_p_capital_note'   => 'Giá từ: tham khảo theo nguồn phân phối FourS Tower. Vốn tự có = 25% giá sau Early Bird 3% (gồm VAT) – phương án vay 70% theo CSBH 4.2 Tòa F2, thanh toán trước khi nhận nhà; chưa gồm kinh phí bảo trì 2% và 5% khi nhận nhà. Căn 1PN, 3PN, căn góc, sân vườn: nhận giá qua Zalo.',
@@ -31,7 +31,8 @@ function hh_fours_f2_policy_meta() {
 /** Bảng chiết khấu bản trước (đã gửi) – thay nếu anh chưa sửa. */
 function hh_fours_f2_old_meta() {
 	return array(
-		'hh_p_offer_title' => 'Tiết kiệm đến khoảng 17% giá niêm yết khi thanh toán sớm 95% – Tòa F2',
+		'hh_p_offer_title' => array( 'Tiết kiệm đến khoảng 17% giá niêm yết khi thanh toán sớm 95% – Tòa F2', 'Chiết khấu lên đến 18% – chỉ cần 25% vốn đến khi nhận nhà' ),
+		'hh_p_offer_stats' => "18% | Chiết khấu cộng dồn tối đa\n25% | Vốn tự có đến khi nhận nhà (vay 70%)\n15% | Thanh toán đến khi ký HĐMB\n70% | Đã nhận nhà – Sun Early Key",
 		'hh_p_offer_note'  => 'CSBH 4.2 Tòa F2 áp dụng từ 26/9/2026 – hạn thanh toán sớm 25/10/2026. Ví dụ căn niêm yết 3 tỷ còn khoảng 2,48 tỷ (theo phiếu tính giá CĐT).',
 		'hh_p_discount_table' => "Thanh toán sớm 95% (cộng dồn Early Bird 3% + không vay 3%) | Trước 25/10/2026 | 12%\nThanh toán sớm 70% – nhận nhà rồi trả 25% còn lại | Trước 25/10/2026 | 5%\nThanh toán sớm 50% | Trước 25/10/2026 | 2,5%\nTiến độ chuẩn, không vay ngân hàng (Early Bird 3% + không vay 3%) | Theo tiến độ | 6%\nVay ngân hàng – giải ngân 70% (Early Bird) | Theo tiến độ | 3%" );
 }
@@ -66,7 +67,7 @@ function hh_dataset_fours_f2( $projects ) {
 		$projects[ $i ]['fix_meta'] = hh_fours_f2_old_meta() + array_intersect_key( $p['meta'], $upd ) + ( $p['fix_meta'] ?? array() );
 		$projects[ $i ]['meta']     = array_merge( $p['meta'], $upd );
 		$projects[ $i ]['content']     = hh_fours_tower_content();
-		$projects[ $i ]['fix_content'] = array( hh_fours_tower_content( 1 ) );
+		$projects[ $i ]['fix_content'] = array( hh_fours_tower_content( 1 ), hh_fours_18( hh_fours_tower_content() ) );
 	}
 
 	$projects[] = array(
@@ -99,7 +100,7 @@ function hh_dataset_fours_f2( $projects ) {
 		),
 		'fix_meta' => hh_fours_f2_old_meta(),
 		'content' => hh_fours_f2_content(),
-		'fix_content' => array( hh_fours_f2_content( 1 ), hh_fours_f2_content( 2 ) ),
+		'fix_content' => array( hh_fours_f2_content( 1 ), hh_fours_18( hh_fours_f2_content( 2 ) ), hh_fours_18( hh_fours_f2_content( 3 ) ) ),
 		'sources' => array(
 			'https://vnexpress.net/thap-f2-fours-tower-ghi-nhan-gan-1-400-luot-dat-cho-5125919.html',
 			'https://tuoitre.vn/fours-tower-an-cu-dau-tu-tai-trung-tam-nam-da-nang-20260410181212744.htm',
@@ -110,7 +111,12 @@ function hh_dataset_fours_f2( $projects ) {
 
 /** 4 con số chính (chiết khấu cộng dồn 3% + 3% + 12%; vay: 15% + 10% vốn tự có trước bàn giao, ngân hàng giải ngân 70%). */
 function hh_fours_stats() {
-	return "<div class=\"lp-stats\">\n<p><b>18%</b><span>chiết khấu cộng dồn tối đa</span></p>\n<p><b>25%</b><span>vốn tự có đến khi nhận nhà (vay 70%)</span></p>\n<p><b>15%</b><span>thanh toán đến khi ký HĐMB</span></p>\n<p><b>70%</b><span>đã nhận nhà – Sun Early Key</span></p>\n</div>";
+	return "<div class=\"lp-stats\">\n<p><b>19%</b><span>chiết khấu lên đến</span></p>\n<p><b>25%</b><span>vốn tự có đến khi nhận nhà (vay 70%)</span></p>\n<p><b>15%</b><span>thanh toán đến khi ký HĐMB</span></p>\n<p><b>70%</b><span>đã nhận nhà – Sun Early Key</span></p>\n</div>";
+}
+
+/** Bản bài đã nhập trước đó (con số 18%) – để thay bằng bản 19% nếu anh chưa sửa bài. */
+function hh_fours_18( $html ) {
+	return str_replace( '<p><b>19%</b><span>chiết khấu lên đến</span></p>', '<p><b>18%</b><span>chiết khấu cộng dồn tối đa</span></p>', $html );
 }
 
 /** Nút gọi nhận thông tin (mở form liên hệ, điền sẵn lời nhắn). */

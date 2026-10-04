@@ -713,7 +713,7 @@ function hh_import_projects() {
 		}
 		// Sửa dữ liệu cũ đã nhập sai: chỉ thay khi giá trị hiện tại vẫn đúng bằng bản cũ (không đè chỗ bạn đã tự sửa).
 		foreach ( $p['fix_meta'] ?? array() as $key => $old ) {
-			if ( isset( $meta[ $key ] ) && (string) get_post_meta( $id, $key, true ) === $old ) {
+			if ( isset( $meta[ $key ] ) && in_array( (string) get_post_meta( $id, $key, true ), (array) $old, true ) ) {
 				update_post_meta( $id, $key, $meta[ $key ] );
 			}
 		}
