@@ -853,7 +853,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       S.boot = b;
       $('#login').classList.add('hidden');
       $('#app').classList.remove('hidden');
-      var UI_VERSION = 'v04.10f';
+      var UI_VERSION = 'v04.10g';
       $('#today-label').textContent = dmy(b.today) + ' · ' + UI_VERSION + (b.version === UI_VERSION ? '' : ' ⚠ Mã.gs chưa cập nhật');
       fillSelect($('[name=dich_vu]'), b.services);
       fillSelect($('#tx-service'), b.services, true);
@@ -1139,7 +1139,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     call('pasteNotes', { text: text, year: yr && yr !== S.boot.today.slice(0, 4) ? yr : '', save: save }).then(function (r) {
       btn.disabled = false;
       renderNotes(r);
-      var todo = r.items.filter(function (i) { return /tx|pay|bill/.test(i.kind) && !i.da_co && !i.da_luu; }).length;
+      var todo = r.items.filter(function (i) { return /tx|pay|bill/.test(i.kind) && (!i.da_co || i.sua_ngoai) && !i.da_luu; }).length;
       $('[data-act=notes-save]').disabled = save ? !r.saved.con_lai : !todo;
       if (save) {
         var sv = r.saved;
@@ -1150,7 +1150,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         }
         $('[data-act=notes-save]').textContent = 'Lưu vào app';
         var nErr = r.items.filter(function (i) { return i.loi && /tx|pay|bill/.test(i.kind); }).length;
-        toast('Đã lưu ' + sv.tx + ' giao dịch, ' + sv.pay + ' lần chuyển tiền, ' + sv.bill + ' hoá đơn' + (sv.bo_qua ? ' · bỏ qua ' + sv.bo_qua + ' dòng đã có' : '') +
+        toast('Đã lưu ' + sv.tx + ' giao dịch, ' + sv.pay + ' lần chuyển tiền, ' + sv.bill + ' hoá đơn' + (sv.bo_qua ? ' · bỏ qua ' + sv.bo_qua + ' dòng đã có' : '') + (sv.sua ? ' · chuyển ' + sv.sua + ' dòng trong ngoặc ra ngoài sổ' : '') +
           (nErr ? ' · ⚠ ' + nErr + ' dòng lỗi (xem chữ đỏ trong danh sách)' : ''), !!nErr);
         $('#notes-saved-view').innerHTML = '';
         var ds = r.days.map(function (d) { return d.ngay; }).sort();
@@ -1200,11 +1200,22 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     }).map(function (d) {
       return '<div class="calc" style="grid-template-columns:1fr;margin-bottom:6px"><div><b style="display:inline">' + dmy(d.ngay) + '</b> · ' + d.so_gd + ' giao dịch</div>' +
         '<div>' + esc(rn()) + ' hoàn: ' + chk(d.hoan_so, d.hoan) + '</div>' +
+        (d.hoan_ngoai ? '<div class="muted">(Dòng trong ngoặc, ngoài sổ ' + esc(rn()) + ': ' + money(d.hoan_ngoai) + ' – không cộng)</div>' : '') +
         '<div>Lãi: ' + chk(d.lai_so, d.lai) + '</div>' +
         (d.tra ? '<div>' + esc(rn()) + ' chuyển: ' + money(d.tra) + (d.con_so != null ? ' · sổ ghi còn ' + money(d.con_so) : '') + '</div>' : '') + '</div>';
     }).join('');
     var icon = { tx: '💳', pay: '💸', bill: '🧾', skip: '❓', err: '⚠' };
+    var dayOf = {}; r.days.forEach(function (d) { dayOf[d.ngay] = d; });
+    function lech(d) { return d && ((d.hoan_so != null && Math.abs(d.hoan_so - d.hoan) >= 1000) || (d.lai_so != null && Math.abs(d.lai_so - d.lai) >= 1000)); }
+    var lastDay = '';
     var rows = r.items.map(function (i) {
+      var sep = '';
+      if (i.ngay && i.ngay !== lastDay) {
+        lastDay = i.ngay;
+        var d = dayOf[i.ngay];
+        sep = '<tr><td colspan="3" style="background:var(--bg);font-weight:700">' + dmy(i.ngay) +
+          (lech(d) ? ' <span class="neg">⚠ lệch sổ: hoàn ' + money(d.hoan - (d.hoan_so || d.hoan)) + ' · lãi ' + money(d.lai - (d.lai_so == null ? d.lai : d.lai_so)) + '</span>' : ' <span class="pos">✓</span>') + '</td></tr>';
+      }
       var what = i.kind === 'tx' ? esc(i.dich_vu) + ' · <b>' + esc(i.the) + '</b> · ' + esc(i.ten_khach) + ' · ' + money(i.so_tien) +
           ' · phí ' + pct(i.phi_khach) + ' / máy ' + pct(i.phi_may_text) + ' → hoàn ' + money(i.tien_hoan) + ' · lãi ' + money(i.lai) + (i.ghi_chu ? ' <small class="muted">' + esc(i.ghi_chu) + '</small>' : '')
         : i.kind === 'pay' ? esc(i.loai) + ' ' + money(i.so_tien)
@@ -1212,9 +1223,10 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         : i.kind === 'bill' ? esc(i.loai_hd) + ' của ' + esc(i.a_ten) + ' · ' + money(i.so_tien) + ' · B: ' + esc(i.b_ten) + ' (' + esc(i.vi_b) + ') · A giảm ' + pct(i.phi_a) + ', mình ' + pct(i.phi_minh) + ' → lãi ' + money(i.lai)
         : '<span class="muted">' + esc(i.line) + '</span>';
       var st = i.loi ? '<span class="neg">' + esc(i.loi) + '</span>' : i.ghi_chu_chot ? '<span class="muted">' + esc(i.ghi_chu_chot) + '</span>'
+        : i.sua_ngoai && !i.da_luu ? '<span class="neg">đã có nhưng đang tính vào công nợ → khi Lưu sẽ chuyển ra ngoài sổ</span>'
         : i.da_luu && i.truoc_chot && i.kind === 'tx' ? '<span class="pos">✓ đã lưu</span> <small class="muted">(ngoài sổ – trước chốt)</small>'
         : !i.da_co && !i.da_luu && i.truoc_chot && i.kind === 'tx' ? '<span class="muted">trước chốt sổ → chỉ lưu lịch sử &amp; doanh thu</span>' : i.da_luu ? '<span class="pos">✓ đã lưu</span>' : i.da_co ? '<span class="muted">đã có – bỏ qua</span>' : '<span class="muted">mới</span>';
-      return '<tr><td>' + (icon[i.kind] || '') + '</td><td>' + what + '</td><td>' + st + '</td></tr>';
+      return sep + '<tr><td>' + (icon[i.kind] || '') + '</td><td>' + what + '</td><td>' + st + '</td></tr>';
     }).join('');
     var chotNote = r.chot && r.days.some(function (d) { return d.ngay <= r.chot; }) ?
       '<div class="advice" style="margin-bottom:8px">🔒 Sổ đã chốt đến hết <b>' + dmy(r.chot) + '</b>. Giao dịch từ ngày này trở về trước đã gồm trong số chốt (Mục 1) nên app <b>chỉ lưu lịch sử &amp; doanh thu</b>, không cộng lại vào công nợ; tiền ' + esc(rn()) + ' chuyển trước ngày chốt không lưu. Muốn tính lại công nợ những ngày đó thì vào Công nợ → bỏ lần chốt sổ rồi dán lại.</div>' : '';
