@@ -1,0 +1,244 @@
+<!-- ADSHERO -->
+<style>
+.ads-hero{position:relative;color:#fff;padding:56px 0 90px;background:linear-gradient(100deg,rgba(2,13,62,.94) 0%,rgba(2,13,62,.78) 48%,rgba(14,25,71,.35) 100%),url("img/aerial-bay.webp") center/cover;overflow:hidden}
+.ads-hero::after{content:"";position:absolute;inset:auto 0 0 0;height:90px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 90' preserveAspectRatio='none'%3E%3Cpath d='M0 45 C240 90 480 0 720 40 S1200 80 1440 30 V90 H0Z' fill='%23ffffff'/%3E%3C/svg%3E") bottom/100% 100% no-repeat}
+.ads-hero .container{position:relative;z-index:1;display:grid;grid-template-columns:1.2fr .9fr;gap:36px;align-items:center}
+.ads-hero h1{font-family:"Playfair Display",serif;font-weight:600;font-size:clamp(34px,5.4vw,60px);line-height:1.12;margin:14px 0}
+.ads-hero h1 em{font-style:normal;color:var(--gold-light)}
+.ads-hero .lede{font-size:18px;color:#DCE4F7;max-width:600px}
+.price-from{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}
+.price-from div{background:rgba(255,255,255,.08);border:1px solid rgba(229,184,128,.45);border-radius:14px;padding:10px 14px;min-width:132px}
+.price-from small{display:block;color:#C9D3EE;font-size:12px}
+.price-from b{font-size:22px;color:var(--gold-light)}
+.countdown{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0 20px;font-size:14px;color:#DCE4F7}
+.countdown span.u{background:#fff;color:var(--navy-800);border-radius:10px;padding:6px 10px;font-weight:800;min-width:48px;text-align:center}
+.countdown span.u small{display:block;font-size:10px;font-weight:600;color:var(--muted)}
+.ads-badges{display:flex;flex-wrap:wrap;gap:8px}
+.ads-badges span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:6px 12px;border-radius:999px;font-size:13px}
+@media(max-width:900px){.ads-hero .container{grid-template-columns:1fr}}
+.ribbon .grid.ads-rib{grid-template-columns:repeat(6,1fr)}
+.offer4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:980px){.ribbon .grid.ads-rib{grid-template-columns:repeat(3,1fr)}.offer4{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.ribbon .grid.ads-rib{grid-template-columns:1fr 1fr}.ribbon .grid.ads-rib .item:last-child{grid-column:auto}.offer4{grid-template-columns:1fr}.price-from div{min-width:0;flex:1 1 45%}}
+</style>
+<section class="ads-hero" id="top-ads">
+  <div class="container">
+    <div>
+      <span class="badge"><i></i> Chính sách mới áp dụng từ 01/10/2026</span>
+      <h1>Sáng chạy bộ biển, chiều ngắm hoàng hôn – <em>về Đà Nẵng ở luôn</em> với nhà phố Vinhomes Hải Vân Bay</h1>
+      <p class="lede">Đô thị nghỉ dưỡng 512 ha giữa núi – rừng – biển Hải Vân. Vay 70%, <b>lãi suất 0% đến 36 tháng</b>, giãn xây chỉ trả phần xây từ D+540 ngày.</p>
+      <div class="price-from">
+        <div><small>Bạch Vân · Liền kề</small><b>từ ~5,3 tỷ</b></div>
+        <div><small>Vịnh Mây · Liền kề</small><b>từ ~5,6 tỷ</b></div>
+        <div><small>Biệt thự song lập</small><b>từ ~9,4 tỷ</b></div>
+        <div><small>Đảo Ngọc · sát biển</small><b>từ ~10,2 tỷ</b></div>
+      </div>
+      <div class="countdown" id="cd" aria-live="polite">⏳ Ưu đãi VinClub tháng 10 kết thúc sau:
+        <span class="u" data-u="d">--<small>ngày</small></span><span class="u" data-u="h">--<small>giờ</small></span><span class="u" data-u="m">--<small>phút</small></span>
+      </div>
+      <div class="ads-badges"><span>✓ Sở hữu lâu dài (~90%)</span><span>✓ Pháp lý quy hoạch 1/500</span><span>✓ Cách sân bay 20–30 phút</span></div>
+    </div>
+    <form class="lead-card js-lead" data-source="Ads hero" novalidate>
+      <h2>🔓 Mở khóa bảng giá nội bộ</h2>
+      <p>Nhận ngay qua Zalo trong 5 phút:</p>
+      <ul class="hero-benefits"><li>Danh sách căn độc quyền chưa công khai</li><li>Phiếu tính dòng tiền – vay 0% lãi 36 tháng</li><li>Lịch xem nhà mẫu & xe đón miễn phí</li></ul>
+      <div class="form-row"><label for="a-name">Họ và tên</label><input id="a-name" name="name" required autocomplete="name" placeholder="Nguyễn Văn A"></div>
+      <div class="form-row"><label for="a-phone">Số điện thoại / Zalo</label><input id="a-phone" name="phone" type="tel" required autocomplete="tel" placeholder="09xx xxx xxx"></div>
+      <div class="form-row"><label for="a-need">Ngân sách dự kiến</label>
+        <select id="a-need" name="need"><option>Dưới 7 tỷ</option><option>7 – 12 tỷ</option><option>12 – 20 tỷ</option><option>Trên 20 tỷ</option></select></div>
+      <button class="btn btn-gold" type="submit">NHẬN BẢNG GIÁ NỘI BỘ</button>
+      <p class="note">🔒 Bảo mật thông tin · Hotline <a href="tel:0909882555"><b>0909 882 555</b></a></p>
+    </form>
+  </div>
+</section>
+
+<!-- ADSNUM -->
+<section class="section" style="padding:36px 0 20px">
+  <div class="container">
+    <div class="ribbon" style="margin-top:0"><div class="grid ads-rib">
+      <div class="item"><b>70%</b><span>Hỗ trợ vay</span><small>theo điều kiện NH</small></div>
+      <div class="item"><b>0%</b><span>Lãi suất</span><small>18 – 36 tháng</small></div>
+      <div class="item"><b>D+540</b><span>Giãn xây</span><small>mới trả phần xây</small></div>
+      <div class="item"><b>11%</b><span>Chiết khấu TTS</span><small>/năm</small></div>
+      <div class="item"><b>30%</b><span>Voucher</span><small>giá trị nhà</small></div>
+      <div class="item"><b>7%</b><span>Cam kết thuê</span><small>/năm × 3 năm*</small></div>
+    </div></div>
+    <p class="disc center">*CKTT áp dụng căn hoàn thiện Đảo Ngọc theo danh sách. Chính sách có điều kiện, theo CĐT tại từng thời điểm.</p>
+  </div>
+</section>
+
+<!-- ADSLIFE -->
+<style>
+.life{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.life article{position:relative;border-radius:18px;overflow:hidden;min-height:260px;color:#fff;display:flex;align-items:flex-end;box-shadow:var(--shadow);background-size:cover;background-position:center}
+.life article::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,13,62,0) 30%,rgba(2,13,62,.9))}
+.life article div{position:relative;padding:18px}
+.life h3{font-size:19px;margin-bottom:4px}
+.life p{font-size:14px;color:#DCE4F7}
+@media(max-width:900px){.life{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.life{grid-template-columns:1fr}}
+</style>
+<section class="section" id="song-o-da-nang">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Một ngày ở Hải Vân Bay</span>
+      <h2 class="title">Vì sao nên về Đà Nẵng ở luôn?</h2>
+      <p class="lead">Thành phố biển đáng sống bậc nhất Việt Nam – nhịp sống chậm, không khí trong lành, mà vẫn đủ đầy tiện ích đô thị.</p>
+    </div>
+    <div class="life">
+      <article style="background-image:url('img/beach.webp')"><div><h3>🌅 Biển ngay trước nhà</h3><p>Bãi biển nội khu, vịnh nước xanh – tắm biển mỗi sáng như kỳ nghỉ kéo dài cả năm.</p></div></article>
+      <article style="background-image:url('img/pool-dao-ngoc.webp')"><div><h3>🎡 VinWonders cho cả nhà</h3><p>Tổ hợp vui chơi, Botanica Park 8 ha, Pearl Garden – cuối tuần không cần đi xa.</p></div></article>
+      <article style="background-image:url('img/river-bach-van.webp')"><div><h3>🌿 Sống giữa thiên nhiên</h3><p>Suối, thác, rừng và đồi dưới chân đèo Hải Vân – không khí trong lành mỗi ngày.</p></div></article>
+      <article style="background-image:url('img/coast-road-vinh-may.webp')"><div><h3>✈️ 20–30 phút ra sân bay</h3><p>Kết nối trung tâm Đà Nẵng, hầm Hải Vân đi Huế, cảng Liên Chiểu.</p></div></article>
+      <article style="background-image:url('img/street-vinh-may.webp')"><div><h3>🏪 Ở kết hợp kinh doanh</h3><p>Shophouse, phố thương mại, chợ Hong Kong, làng ẩm thực ven suối.</p></div></article>
+      <article style="background-image:url('img/interior.webp')"><div><h3>🏡 Nhà thật, sổ lâu dài</h3><p>Phần lớn sản phẩm thấp tầng sở hữu lâu dài – tài sản để lại cho con cháu.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ADSOFFER -->
+<section class="section dark" id="uu-dai">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Chính sách tốt nhất hiện tại</span>
+      <h2 class="title">Sở hữu nhà Đà Nẵng nhẹ nhàng hơn bạn nghĩ</h2>
+      <p class="lead">Ví dụ căn liền kề Bạch Vân ~5,3 tỷ (giá gồm VAT): vay 70% → <b style="color:var(--gold-light)">vốn tự có chỉ khoảng 1,6 tỷ</b>, hỗ trợ lãi suất 0% đến 36 tháng*.</p>
+    </div>
+    <div class="grid offer4" style="margin-top:28px">
+      <div class="card" style="background:var(--navy-800);border-color:rgba(255,255,255,.1);color:#fff"><b style="font-size:30px;color:var(--gold-light)">0%</b><h3 style="margin:6px 0">Lãi suất 36 tháng</h3><p style="color:#C9D3EE;font-size:14px">Không trả lãi hằng tháng trong thời gian hỗ trợ (giá điều chỉnh theo gói).</p></div>
+      <div class="card" style="background:var(--navy-800);border-color:rgba(255,255,255,.1);color:#fff"><b style="font-size:30px;color:var(--gold-light)">D+540</b><h3 style="margin:6px 0">Giãn xây Vịnh Mây</h3><p style="color:#C9D3EE;font-size:14px">18 tháng đầu chỉ trả phần đất & thương mại, phần xây trả sau.</p></div>
+      <div class="card" style="background:var(--navy-800);border-color:rgba(255,255,255,.1);color:#fff"><b style="font-size:30px;color:var(--gold-light)">10%</b><h3 style="margin:6px 0">Về ở sớm</h3><p style="color:#C9D3EE;font-size:14px">Bạch Vân & Đảo Ngọc: chiết khấu đến 10% khi về ở sớm.</p></div>
+      <div class="card" style="background:var(--navy-800);border-color:rgba(255,255,255,.1);color:#fff"><b style="font-size:30px;color:var(--gold-light)">21%</b><h3 style="margin:6px 0">Thu nhập 3 năm</h3><p style="color:#C9D3EE;font-size:14px">Căn hoàn thiện Đảo Ngọc: cam kết thuê 7%/năm × 3 năm.</p></div>
+    </div>
+    <div class="more"><a href="#lien-he" class="btn btn-gold" data-need="Phiếu tính dòng tiền theo ngân sách" data-pop>Tính dòng tiền theo ngân sách của tôi →</a></div>
+    <p class="disc center" style="color:#A9B6D9">*Vay theo điều kiện ngân hàng chỉ định. Ví dụ minh họa; số tiền thực tế theo phiếu tính từng căn.</p>
+  </div>
+</section>
+
+<!-- ADSQUIZ -->
+<style>
+.quiz{max-width:760px;margin:28px auto 0;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:26px}
+.quiz .q{display:none}.quiz .q.on{display:block}
+.quiz h3{color:var(--navy-800);font-size:20px;margin-bottom:14px}
+.quiz .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.quiz .opts button{font:inherit;font-weight:700;text-align:left;padding:14px 16px;border-radius:14px;border:1.5px solid var(--line);background:var(--blue-50);color:var(--navy-800);cursor:pointer}
+.quiz .opts button:hover{border-color:var(--gold);background:var(--gold-soft)}
+.quiz .bar{height:6px;background:var(--blue-100);border-radius:99px;margin-bottom:18px;overflow:hidden}
+.quiz .bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .3s}
+.quiz .res{display:none;text-align:center}.quiz .res.on{display:block}
+.quiz .res b.z{display:block;font-family:"Playfair Display",serif;font-size:32px;color:var(--navy-800);margin:6px 0}
+@media(max-width:560px){.quiz .opts{grid-template-columns:1fr}}
+</style>
+<section class="section alt" id="quiz">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">30 giây</span>
+      <h2 class="title">Phân khu nào sinh ra dành cho bạn?</h2>
+      <p class="lead">Trả lời 3 câu hỏi – nhận ngay gợi ý phân khu và 3 căn phù hợp nhất với ngân sách.</p>
+    </div>
+    <div class="quiz" id="qz">
+      <div class="bar"><i id="qbar"></i></div>
+      <div class="q on" data-k="goal"><h3>1. Bạn mua để làm gì?</h3><div class="opts">
+        <button data-v="o">🏡 Về ở / an cư</button><button data-v="t">💰 Cho thuê, thu nhập đều</button>
+        <button data-v="k">🏪 Ở kết hợp kinh doanh</button><button data-v="n">🌴 Nghỉ dưỡng cuối tuần</button></div></div>
+      <div class="q" data-k="budget"><h3>2. Ngân sách dự kiến?</h3><div class="opts">
+        <button data-v="1">Dưới 7 tỷ</button><button data-v="2">7 – 12 tỷ</button>
+        <button data-v="3">12 – 20 tỷ</button><button data-v="4">Trên 20 tỷ</button></div></div>
+      <div class="q" data-k="love"><h3>3. Bạn mê điều gì nhất?</h3><div class="opts">
+        <button data-v="b">🌊 Sát biển, sóng vỗ</button><button data-v="h">⛰️ View đồi, vịnh trên cao</button>
+        <button data-v="u">🛍️ Tiện ích sôi động</button><button data-v="g">🌿 Yên tĩnh, xanh mát</button></div></div>
+      <div class="res" id="qres">
+        <span class="eyebrow">Phân khu hợp với bạn nhất</span>
+        <b class="z" id="qzone">—</b>
+        <p id="qwhy" style="color:var(--muted)"></p>
+        <form class="js-lead" data-source="Ads quiz" novalidate style="max-width:440px;margin:16px auto 0;display:grid;gap:10px">
+          <input name="name" placeholder="Họ và tên" required autocomplete="name" aria-label="Họ và tên" style="font:inherit;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px">
+          <input name="phone" type="tel" placeholder="Số điện thoại / Zalo" required autocomplete="tel" aria-label="Số điện thoại" style="font:inherit;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px">
+          <input type="hidden" name="need" id="qneed" value="">
+          <button class="btn btn-gold" type="submit">NHẬN 3 CĂN PHÙ HỢP NHẤT</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADSPOTENTIAL -->
+<section class="section" id="tiem-nang">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Tiềm năng</span>
+      <h2 class="title">Vì sao mua lúc này là thời điểm đẹp?</h2>
+    </div>
+    <div class="why">
+      <div class="card"><h3>🚢 Cảng Liên Chiểu & hạ tầng mới</h3><p>Cảng nước sâu, tuyến ven biển nối QL1A (dự kiến 2026), hầm Hải Vân – cú hích việc làm, logistics và nhu cầu ở.</p></div>
+      <div class="card"><h3>🏗️ Giai đoạn đầu, giá đầu</h3><p>Hạ tầng nội khu đang hình thành, giai đoạn 1 dự kiến bàn giao từ 2027 – mua sớm hưởng chính sách tốt và biên tăng giá theo tiến độ.</p></div>
+      <div class="card"><h3>🌏 Quỹ đất ven vịnh khan hiếm</h3><p>512 ha dưới chân đèo Hải Vân, đa số sở hữu lâu dài – loại tài sản ngày càng hiếm tại Đà Nẵng.</p></div>
+    </div>
+    <div class="more"><a href="#lien-he" class="btn btn-primary" data-need="Báo cáo phân tích tiềm năng tăng giá" data-pop>Nhận báo cáo phân tích tiềm năng</a></div>
+    <p class="disc center">Thông tin hạ tầng, tiến độ theo công bố và dự kiến; không phải cam kết lợi nhuận.</p>
+  </div>
+</section>
+
+<!-- ADSVISIT -->
+<section class="section dark" id="tham-quan">
+  <div class="container contact">
+    <div>
+      <span class="eyebrow">Đi xem tận nơi</span>
+      <h2 class="title">Đặt lịch tham quan – xe đón miễn phí</h2>
+      <p class="lead">Tận mắt xem bãi biển, nhà mẫu, tiến độ thực tế. Chuyên viên đi cùng, tính sẵn dòng tiền cho từng căn bạn thích.</p>
+      <ul class="c-list">
+        <li><span class="ic">🚗</span><div><small>Đưa đón</small><b>Tận nơi tại Đà Nẵng</b></div></li>
+        <li><span class="ic">🏠</span><div><small>Lịch xem</small><b>Cả cuối tuần</b></div></li>
+        <li><span class="ic">☎</span><div><small>Hotline / Zalo</small><b><a href="tel:0909882555">0909 882 555</a></b></div></li>
+      </ul>
+    </div>
+    <form class="lead-card js-lead" data-source="Ads đặt lịch tham quan" novalidate>
+      <h2>Giữ lịch tham quan</h2>
+      <p>Chọn ngày bạn muốn đi, chuyên viên xác nhận qua Zalo.</p>
+      <div class="form-row"><label for="v-name">Họ và tên</label><input id="v-name" name="name" required autocomplete="name" placeholder="Nguyễn Văn A"></div>
+      <div class="form-row"><label for="v-phone">Số điện thoại / Zalo</label><input id="v-phone" name="phone" type="tel" required autocomplete="tel" placeholder="09xx xxx xxx"></div>
+      <div class="form-row"><label for="v-day">Ngày muốn đi</label>
+        <select id="v-day" name="need"><option>Đặt lịch tham quan – Thứ Bảy tuần này</option><option>Đặt lịch tham quan – Chủ Nhật tuần này</option><option>Đặt lịch tham quan – Ngày trong tuần</option><option>Đặt lịch tham quan – Tư vấn online trước</option></select></div>
+      <button class="btn btn-gold" type="submit">GIỮ LỊCH THAM QUAN</button>
+    </form>
+  </div>
+</section>
+
+<!-- ADSSCRIPT -->
+<script>
+(function(){
+  // Countdown to the end of the October VinClub offer (31/10/2026, GMT+7)
+  var end = new Date("2026-10-31T23:59:59+07:00").getTime(), cd = document.getElementById("cd");
+  function tick(){
+    var t = Math.max(0, end - Date.now());
+    if (!t){ cd.style.display = "none"; return; }
+    var d = Math.floor(t / 864e5), h = Math.floor(t % 864e5 / 36e5), m = Math.floor(t % 36e5 / 6e4);
+    cd.querySelector('[data-u="d"]').firstChild.nodeValue = d;
+    cd.querySelector('[data-u="h"]').firstChild.nodeValue = h;
+    cd.querySelector('[data-u="m"]').firstChild.nodeValue = m;
+  }
+  if (cd){ tick(); setInterval(tick, 30000); }
+
+  // Quiz → zone suggestion
+  var qz = document.getElementById("qz"); if (!qz) return;
+  var ans = {}, qs = qz.querySelectorAll(".q"), step = 0;
+  qz.querySelectorAll(".q button").forEach(function(b){
+    b.addEventListener("click", function(){
+      ans[b.closest(".q").dataset.k] = b.dataset.v;
+      qs[step].classList.remove("on"); step++;
+      document.getElementById("qbar").style.width = (step / qs.length * 100) + "%";
+      if (step < qs.length){ qs[step].classList.add("on"); return; }
+      var z, why;
+      if (ans.goal === "t" || ans.love === "b"){ z = "Đảo Ngọc"; why = "Sát biển, cạnh VinWonders – có căn hoàn thiện nhận cam kết thuê 7%/năm × 3 năm."; }
+      else if (ans.love === "h" || ans.goal === "n" || ans.budget === "4"){ z = "Vịnh Mây"; why = "Đồi hướng vịnh, biệt thự đơn lập, giãn xây chỉ trả phần xây từ D+540 ngày."; }
+      else { z = "Bạch Vân"; why = "Cửa ngõ, tiện ích thương mại sôi động, giá dễ tiếp cận và chiết khấu Về ở sớm đến 10%."; }
+      if (ans.budget === "1" && z === "Đảo Ngọc"){ z = "Bạch Vân"; why = "Vừa ngân sách dưới 7 tỷ, gần biển và tiện ích – chiết khấu Về ở sớm đến 10%."; }
+      document.getElementById("qzone").textContent = "Phân khu " + z;
+      document.getElementById("qwhy").textContent = why;
+      var L = {o:"về ở", t:"cho thuê", k:"ở + kinh doanh", n:"nghỉ dưỡng", "1":"dưới 7 tỷ", "2":"7–12 tỷ", "3":"12–20 tỷ", "4":"trên 20 tỷ", b:"sát biển", h:"view đồi/vịnh", u:"tiện ích sôi động", g:"yên tĩnh xanh mát"};
+      document.getElementById("qneed").value = "Quiz: hợp phân khu " + z + " · mục tiêu " + L[ans.goal] + " · ngân sách " + L[ans.budget] + " · thích " + L[ans.love];
+      document.getElementById("qres").classList.add("on");
+    });
+  });
+})();
+</script>

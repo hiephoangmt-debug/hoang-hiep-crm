@@ -43,6 +43,20 @@ PAGES = [
 ]
 
 
+PAGES.append({
+    "file": "uu-dai.html", "path": "/uu-dai", "crumb": "Ưu đãi", "ads": True, "nohero": True,
+    "title": "Vinhomes Hải Vân Bay – Nhà Phố Đà Nẵng Chỉ Từ ~5,3 Tỷ, Vay 70%, Lãi Suất 0% 36 Tháng",
+    "desc": "Về Đà Nẵng ở luôn: nhà phố Vinhomes Hải Vân Bay chỉ từ ~5,3 tỷ (gồm VAT), vay 70%, lãi suất 0% đến 36 tháng, giãn xây D+540. Mở khóa bảng giá nội bộ & đặt lịch tham quan miễn phí – 0909 882 555.",
+    "extra_file": "ads.html",
+    "faq": [
+        ("Giá nhà phố Vinhomes Hải Vân Bay thấp nhất bao nhiêu?", "Theo bảng hàng hiện tại, liền kề Bạch Vân từ khoảng 5,3 tỷ, Vịnh Mây từ khoảng 5,6 tỷ, biệt thự song lập từ khoảng 9,4 tỷ, Đảo Ngọc từ khoảng 10,2 tỷ (giá đã gồm VAT). Giá từng căn thay đổi theo vị trí – liên hệ 0909 882 555 để nhận bảng giá nội bộ."),
+        ("Cần bao nhiêu vốn ban đầu?", "Với gói vay 70% theo điều kiện ngân hàng, vốn tự có khoảng 30% giá trị căn – ví dụ căn khoảng 5,3 tỷ cần chuẩn bị khoảng 1,6 tỷ. Có gói hỗ trợ lãi suất 0% từ 18 đến 36 tháng."),
+        ("Có được đi xem dự án không?", "Có. Đặt lịch qua form hoặc Zalo 0909 882 555, chuyên viên đưa đón tham quan miễn phí, xem nhà mẫu và tiến độ thực tế."),
+        ("Sản phẩm có sở hữu lâu dài không?", "Phần lớn (~90%) sản phẩm thấp tầng có quyền sở hữu lâu dài; dự án có chủ trương đầu tư, quy hoạch 1/500 và giấy phép xây dựng hạ tầng."),
+    ],
+    "sections": ["ADSHERO", "ADSNUM", "ADSLIFE", "CART", "ADSOFFER", "ADSQUIZ", "ADSPOTENTIAL", "PHAPLY", "GALLERY", "ADSVISIT", "FAQ", "CONTACT", "ADSSCRIPT"],
+})
+
 for _z in ZONES:
     PAGES.append({
         "file": _z["slug"] + ".html", "path": "/" + _z["slug"], "crumb": "Phân khu " + _z["name"],
@@ -80,6 +94,8 @@ def build():
     for pg in PAGES:
         names = pg["sections"] or order
         secs = dict(sections, **pg.get("extra", {}))
+        if pg.get("extra_file"):
+            secs.update(split_sections((ROOT / "src" / pg["extra_file"]).read_text(encoding="utf-8")))
         if pg.get("faq"):
             secs["FAQ"] = faq_html(pg["faq"])
         if pg.get("policy_tab") and "POLICIES" in secs:
@@ -88,11 +104,11 @@ def build():
             pol = pol.replace('class="tab" data-tab="%s"' % pg["policy_tab"], 'class="tab active" data-tab="%s"' % pg["policy_tab"])
             pol = pol.replace('<div class="panel" id="%s">' % pg["policy_tab"], '<div class="panel active" id="%s">' % pg["policy_tab"])
             secs["POLICIES"] = pol
-        body = "\n".join(secs[n] for n in (["HERO"] + [x for x in names if x != "HERO"]) if n in secs)
+        body = "\n".join(secs[n] for n in (([] if pg.get("nohero") else ["HERO"]) + [x for x in names if x != "HERO"]) if n in secs)
         head, tail = before, after
         url = SITE + pg["path"]
 
-        if pg["sections"]:
+        if pg["sections"] and not pg.get("nohero"):
             hero = sections["HERO"]
             hero = re.sub(r"<h1>.*?</h1>", "<h1>" + pg["h1"] + "</h1>", hero, count=1, flags=re.S)
             hero = re.sub(r'<p class="sub">.*?</p>', '<p class="sub">' + pg["sub"] + "</p>", hero, count=1, flags=re.S)
@@ -105,6 +121,7 @@ def build():
                 hero = hero.replace('<section class="hero">', '<section class="hero" style="background-image:linear-gradient(100deg,rgba(4,13,32,.93) 0%%,rgba(6,20,46,.8) 45%%,rgba(10,31,68,.45) 100%%),url(\'img/%s.webp\')">' % pg["hero_img"], 1)
             body = body.replace(sections["HERO"], hero, 1)
 
+        if pg["sections"]:
             head = re.sub(r"<title>.*?</title>", "<title>" + pg["title"] + "</title>", head, count=1)
             head = re.sub(r'(<meta name="description" content=")[^"]*', r"\g<1>" + pg["desc"], head, count=1)
             head = re.sub(r'(<meta property="og:title" content=")[^"]*', r"\g<1>" + pg["title"], head, count=1)
@@ -120,6 +137,9 @@ def build():
                     {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in pg["faq"]]}
                 head = re.sub(r'(<script type="application/ld\+json" id="ld-faq">).*?(</script>)',
                               lambda mm: mm.group(1) + "\n" + json.dumps(ld, ensure_ascii=False) + "\n" + mm.group(2), head, count=1, flags=re.S)
+        if pg.get("ads"):
+            head = re.sub(r'<nav class="nav".*?</nav>', "", head, count=1, flags=re.S)
+            head = head.replace('<meta name="robots" content="index,follow,max-image-preview:large">', '<meta name="robots" content="noindex,follow">', 1)
         if pg.get("zone"):
             head = head.replace("<body>", '<body data-zone="%s">' % pg["zone"], 1)
 
@@ -140,7 +160,7 @@ def build():
     today = date.today().isoformat()
     urls = "\n".join(
         "  <url><loc>%s%s</loc><lastmod>%s</lastmod><changefreq>daily</changefreq><priority>%s</priority></url>"
-        % (SITE, p["path"], today, "1.0" if p["path"] == "/" else "0.8") for p in PAGES)
+        % (SITE, p["path"], today, "1.0" if p["path"] == "/" else "0.8") for p in PAGES if not p.get("ads"))
     (DIST / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + urls + "\n</urlset>\n", encoding="utf-8")
