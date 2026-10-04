@@ -85,6 +85,8 @@ Trang `public/landing.html` (mở tại `/landing.html`) dùng tông navy – tr
 - **Tiện ích "về ở & cho thuê"**: mỗi tiện ích (rừng dừa, sân hiên ven sông, Clubhouse, phố cổ, biển, CĐT vận hành) nêu rõ 🏡 giá trị khi về ở và 💰 giá trị khi cho thuê, có nút chuyển góc nhìn.
 - **Nút Gọi / Zalo** ở màn hình đầu, dưới các form, trong popup, khối chính sách, đặt lịch tham quan và nút nổi trên máy tính; bấm vào được ghi nhận sự kiện `Contact` cho Pixel / Google.
 
+**Chat tự động không cần server:** nếu trang có `window.CASAMIA_CHAT_CONFIG` (file xuất đã nhúng sẵn), khung chat tự chạy kịch bản trên trình duyệt khi không có server hoặc server lỗi: chào khách, nút hỏi nhanh, trả lời 4 bước, hỏi chủ động khi khách đọc chậm, xin số, chuyển Zalo. Ở bản xem thử, lead trong chat chỉ lưu trên máy khách; ở bản thật, lead vẫn được gửi về `/api/lead`.
+
 **Xuất thử 1 file:** `npm run export` tạo `dist/casamia-balanca-landing-xem-thu.html`, nhúng sẵn ảnh, mở trực tiếp không cần server (form chỉ mô phỏng). `npm run export -- https://ten-mien-chat` tạo bản thật, form và khung chat gửi về server đó, dùng để đăng lên hosting hoặc LadiPage (HTML).
 
 Dữ liệu chính sách nằm trong biến `POLICIES`, `BANK`, `PERKS` cuối file `landing.html`. Khi có chính sách mới, sửa tại đó.

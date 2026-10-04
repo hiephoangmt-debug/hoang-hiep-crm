@@ -180,7 +180,13 @@ const intentKeywords = config.intents.map(it => ({ it, res: it.keywords.map(kwRe
 function findIntent(text, byKeyword) {
   const byLabel = config.intents.find(it => it.label === text);
   if (byLabel || !byKeyword) return byLabel;
-  return intentKeywords.find(({ res }) => res.some(r => r.test(text)))?.it;
+  // Chọn chủ đề có nhiều từ khoá khớp nhất (vd. "vay ngân hàng bao nhiêu" → Vay, không phải Giá)
+  let best = null, bestHits = 0;
+  for (const { it, res } of intentKeywords) {
+    const hits = res.filter(r => r.test(text)).length;
+    if (hits > bestHits) { best = it; bestHits = hits; }
+  }
+  return best;
 }
 
 // Kịch bản 4 bước: ghi nhận → phương án → xin thông tin (hoặc chuyển Zalo nếu đã có SĐT).

@@ -1054,6 +1054,13 @@ const API_BASE = '';
     if (window.innerWidth < 960 && window.scrollY / (document.body.scrollHeight - innerHeight) > 0.7) nudge();
   }, { passive: true });
 
+  // Lead từ khung chat khi chat chạy cục bộ (server chat tạm lỗi): vẫn gửi về hệ thống lead
+  window.CasamiaOnLead = lead => {
+    if (PREVIEW) return;
+    fetch(API_BASE + '/api/lead', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...lead, form: 'Chat (cục bộ)', visitorId, page: location.href, referrer: document.referrer, utm: store.get('casamia_utm') || '' }) }).catch(() => {});
+  };
+
   // Gửi form
   const PHONE_RE = /^(?:\+?84|0)(?:[\s.-]?\d){9}$/;
   $$('.js-lead').forEach(form => form.addEventListener('submit', async e => {

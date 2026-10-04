@@ -8,11 +8,14 @@
   window.__casamiaChat = true;
 
   var script = document.currentScript || document.querySelector('script[src*="widget.js"]');
-  var BASE = new URL(script.src).origin;
+  var BASE = script && script.src ? new URL(script.src).origin : '';
+  // Kịch bản để chat tự chạy trên trình duyệt khi không có server (bản xem thử / landing đăng riêng).
+  var LOCAL = window.CASAMIA_CHAT_CONFIG || null;
   // Tuỳ chọn trên thẻ script: data-contacts="off" ẩn nút Gọi/Zalo nổi (khi trang đã có sẵn),
   // data-mobile-bottom="80" đẩy nút chat lên trên thanh liên hệ cố định của trang trên điện thoại.
-  var CONTACTS = script.getAttribute('data-contacts') || 'on'; // on | off | desktop
-  var OPTS = { contacts: CONTACTS !== 'off', mobileBottom: parseInt(script.getAttribute('data-mobile-bottom'), 10) || 0 };
+  var attr = function (k) { return script && script.getAttribute(k); };
+  var CONTACTS = attr('data-contacts') || 'on'; // on | off | desktop
+  var OPTS = { contacts: CONTACTS !== 'off', mobileBottom: parseInt(attr('data-mobile-bottom'), 10) || 0 };
 
   function uuid() {
     if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
@@ -33,9 +36,131 @@
     s.src = src; s.onload = cb; document.head.appendChild(s);
   }
 
-  fetch(BASE + '/api/config').then(function (r) { return r.json(); }).then(function (cfg) {
-    loadScript(BASE + '/socket.io/socket.io.js', function () { init(cfg); });
-  }).catch(function (e) { console.warn('[Casamia chat] Không tải được cấu hình', e); });
+  function startLocal() {
+    var L = LOCAL;
+    init({
+      project: L.project,
+      welcome: fillTpl(L.welcome, {}),
+      quickReplies: L.intents.map(function (q) { return q.label; }),
+      agentsOnline: false,
+      proactive: L.proactive && L.proactive.enabled ? {
+        dwellSeconds: L.proactive.dwellSeconds || 8,
+        maxPerVisit: L.proactive.maxPerVisit || 2,
+        topics: L.intents.map(function (it, i) { return { i: i, keywords: (it.browse && it.browse.keywords) || [] }; }).filter(function (t) { return t.keywords.length; }),
+      } : null,
+      __local: true,
+    });
+  }
+
+  if (!BASE || attr('data-mode') === 'local') {
+    if (LOCAL) startLocal(); else console.warn('[Casamia chat] Thiếu CASAMIA_CHAT_CONFIG cho chế độ cục bộ');
+  } else {
+    fetch(BASE + '/api/config').then(function (r) { return r.json(); }).then(function (cfg) {
+      loadScript(BASE + '/socket.io/socket.io.js', function () { init(cfg); });
+    }).catch(function (e) {
+      if (LOCAL) startLocal(); else console.warn('[Casamia chat] Không tải được cấu hình', e);
+    });
+  }
+
+  // ===== Chế độ cục bộ: chạy kịch bản 4 bước ngay trên trình duyệt (giống server) =====
+  function fillTpl(tpl, lead) {
+    var L = LOCAL, vars = { name: (lead && lead.name) || 'anh/chị', phone: (lead && lead.phone) || '', zalo: L.project.zalo, hotline: L.project.hotline, project: L.project.name };
+    var out = String(tpl).replace(/\{(\w+)\}/g, function (m, k) { return k in vars ? vars[k] : m; });
+    return out.charAt(0).toUpperCase() + out.slice(1);
+  }
+
+  function makeLocalSocket() {
+    var L = LOCAL, handlers = {}, KEY = 'casamia_chat_local';
+    var PHONE_RE = /(?:\+?84|0)(?:[\s.-]?\d){9}/;
+    var state;
+    try { state = JSON.parse(storage(KEY) || 'null'); } catch (e) { state = null; }
+    state = state || { messages: [], lead: { name: '', phone: '' }, asked: [], offlineNotified: false };
+    var save = function () { storage(KEY, JSON.stringify(state)); };
+    var fire = function (ev, data) { (handlers[ev] || []).forEach(function (h) { h(data); }); };
+    var kwRe = function (kw) { return new RegExp('(^|[^\\p{L}])' + kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '([^\\p{L}]|$)', 'iu'); };
+    var intentKw = L.intents.map(function (it) { return { it: it, res: (it.keywords || []).map(kwRe) }; });
+    var timers = [];
+    var cancel = function () { timers.forEach(clearTimeout); timers = []; };
+
+    function push(msg) {
+      var m = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), at: Date.now() };
+      for (var k in msg) m[k] = msg[k];
+      state.messages.push(m); save();
+      fire('message', m);
+      return m;
+    }
+    function reply(texts, extra) {
+      cancel();
+      texts.forEach(function (t, i) {
+        var last = i === texts.length - 1;
+        timers.push(setTimeout(function () {
+          fire('typing');
+          timers.push(setTimeout(function () {
+            var m = { from: 'agent', text: fillTpl(t, state.lead), auto: true };
+            if (last && extra) for (var k in extra) m[k] = extra[k];
+            push(m);
+            if (last) timers = [];
+          }, 900));
+        }, i * 1600 + 300));
+      });
+    }
+    function zaloReply(first) { reply(first.concat([L.zaloTransfer]), { action: 'zalo' }); }
+    function findIntent(text) {
+      for (var i = 0; i < L.intents.length; i++) if (L.intents[i].label === text) return L.intents[i];
+      // Chọn chủ đề có nhiều từ khoá khớp nhất (vd. "vay ngân hàng bao nhiêu" → Vay, không phải Giá)
+      var best = null, bestHits = 0;
+      intentKw.forEach(function (x) {
+        var hits = x.res.filter(function (r) { return r.test(text); }).length;
+        if (hits > bestHits) { best = x.it; bestHits = hits; }
+      });
+      return best;
+    }
+    function askLead() { setTimeout(function () { if (!state.lead.phone) fire('lead:request'); }, 5200); }
+    function setLead(name, phone) {
+      if (name) state.lead.name = String(name).trim().slice(0, 100);
+      state.lead.phone = phone; save();
+      fire('lead:saved', state.lead);
+      // Gửi lead đi nếu landing có cấu hình nơi nhận (webhook / form)
+      if (typeof window.CasamiaOnLead === 'function') try { window.CasamiaOnLead({ name: state.lead.name, phone: phone, source: 'chat' }); } catch (e) {}
+    }
+
+    var api = {
+      on: function (ev, h) { (handlers[ev] = handlers[ev] || []).push(h); return api; },
+      emit: function (ev, data) {
+        data = data || {};
+        if (ev === 'message') {
+          var text = String(data.text || '').trim().slice(0, 2000);
+          if (!text) return;
+          push({ from: 'visitor', text: text });
+          var pm = text.match(PHONE_RE);
+          if (pm && !state.lead.phone) { setLead('', pm[0].replace(/[\s.-]/g, '')); return zaloReply([L.leadThanks]); }
+          var it = findIntent(text);
+          if (it) {
+            var st = it.steps;
+            if (state.lead.phone) zaloReply([st[0], st[1]]); else { reply([st[0], st[1], st[2]]); askLead(); }
+            return;
+          }
+          if (!state.lead.phone && !state.offlineNotified) { state.offlineNotified = true; save(); reply(L.fallback); askLead(); }
+        } else if (ev === 'lead') {
+          var ph = String(data.phone || '').match(PHONE_RE);
+          if (!ph) return fire('lead:error', 'Số điện thoại chưa đúng, anh/chị kiểm tra lại giúp em ạ.');
+          setLead(data.name, ph[0].replace(/[\s.-]/g, ''));
+          push({ from: 'visitor', text: '📋 Thông tin liên hệ: ' + (state.lead.name || '') + ' – ' + state.lead.phone });
+          zaloReply([L.leadThanks]);
+        } else if (ev === 'browse') {
+          var pa = L.proactive || {}, intent = L.intents[data.topic];
+          if (!pa.enabled || !intent || !intent.browse || state.lead.phone) return;
+          if (state.asked.indexOf(data.topic) >= 0 || state.asked.length >= (pa.maxPerVisit || 2) || timers.length) return;
+          var lastMsg = state.messages[state.messages.length - 1];
+          if (lastMsg && Date.now() - lastMsg.at < (pa.quietSeconds || 45) * 1000) return;
+          state.asked.push(data.topic); save();
+          reply([intent.browse.question], { proactive: true });
+        }
+      },
+    };
+    setTimeout(function () { fire('history', { messages: state.messages, lead: state.lead, agentsOnline: false }); }, 0);
+    return api;
+  }
 
   function init(cfg) {
     var P = cfg.project;
@@ -197,7 +322,7 @@
       scroll();
     }
 
-    var socket = io(BASE, {
+    var socket = cfg.__local ? makeLocalSocket() : io(BASE, {
       auth: { visitorId: visitorId, page: location.href, referrer: document.referrer },
       transports: ['websocket', 'polling'],
     });
