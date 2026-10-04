@@ -608,17 +608,12 @@ footer p{margin-bottom:6px}
   <div class="container">
     <div class="center">
       <span class="eyebrow">Giỏ hàng Hải Vân Bay</span>
-      <h2 class="title">Quỹ căn độc quyền & căn giá tốt</h2>
-      <p class="lead">Cập nhật hằng ngày từ bảng hàng liên kết. Giá ưu đãi báo trực tiếp – bấm <b>Liên hệ</b> để check tình trạng, giá và phiếu tính chi tiết từng căn.</p>
+      <h2 class="title">Quỹ căn độc quyền Hải Vân Bay</h2>
+      <p class="lead">Hàng độc quyền cập nhật hằng ngày. Gõ mã căn bất kỳ để tra cứu toàn bộ rổ hàng – nhắn <b>Zalo</b> để nhận giá, tình trạng và phiếu tính chi tiết.</p>
     </div>
 
     <div class="cart-tabs" role="tablist" aria-label="Giỏ hàng">
       <button class="tab active" data-cart="excl" role="tab">★ Quỹ căn độc quyền</button>
-      <button class="tab" data-cart="dq" role="tab">Căn giá tốt nhất hiện tại</button>
-      <button class="tab" data-cart="type" role="tab">5 căn giá tốt nhất từng loại căn</button>
-      <button class="tab" data-cart="scarce" role="tab">Căn khan hiếm – 5 dòng căn còn ít nhất</button>
-      <button class="tab" data-cart="zone" role="tab">Giá tốt từng phân khu</button>
-      <button class="tab" data-cart="ch" role="tab">Quỹ căn khác</button>
     </div>
 
     <div class="cart-tools">
@@ -1119,11 +1114,6 @@ footer p{margin-bottom:6px}
   var ZCLASS = {"Bạch Vân":"bv","Vịnh Mây":"vm","Đảo Ngọc":"dn","Tinh Vân":"vm"};
   var cartMode = "excl", cartZone = "Bạch Vân", cartType = "";
   var PAGE_ZONE = document.body.dataset.zone || "";
-  // zone pages without exclusive units open on the best-price tab
-  if (PAGE_ZONE && !UNITS.some(function(u){ return u.excl && u.zone === PAGE_ZONE; })){
-    cartMode = "dq";
-    document.querySelectorAll("[data-cart]").forEach(function(x){ x.classList.toggle("active", x.dataset.cart === "dq"); });
-  }
   if (PAGE_ZONE && document.getElementById("fz")){
     document.getElementById("fz").value = PAGE_ZONE; cartZone = PAGE_ZONE;
     document.querySelectorAll("#zchips .chip").forEach(function(x){ x.classList.toggle("active", x.dataset.z === PAGE_ZONE); });
@@ -1137,7 +1127,7 @@ footer p{margin-bottom:6px}
     return '<article class="unit ' + (ZCLASS[u.zone]||"vm") + '">' +
       '<div class="thumb" style="background-image:url(\'' + (IMGDATA[u.img] || "") + '\')"><span class="hot">' + esc(u.tag||"Giá tốt") + '</span></div>' +
       '<div class="top">' +
-      '<div class="code">' + esc(u.code) + '<span class="pool ' + u.pool + '">' + (u.virtual?"Rổ hàng":(u.excl?"Độc quyền":(u.pool==="ch"?"Quỹ khác":"Giá tốt"))) + '</span></div>' +
+      '<div class="code">' + esc(u.code) + '<span class="pool ' + u.pool + '">' + (u.excl?"Độc quyền":"Rổ hàng") + '</span></div>' +
       '<div class="zn">' + (u.zone ? "Phân khu " + esc(u.zone) : "Vinhomes Hải Vân Bay") + '</div></div>' +
       '<table><tr><td>Loại căn</td><td>' + esc(u.type) + '</td></tr>' +
       '<tr><td>Diện tích đất</td><td>' + (u.land ? num(u.land) + ' m²' : "Liên hệ") + '</td></tr>' +
@@ -1214,8 +1204,8 @@ footer p{margin-bottom:6px}
     var raw = document.getElementById("q").value.trim();
     if (!list.length){
       var label = raw ? "căn “" + esc(raw) + "”" : "phân khu này";
-      grid.innerHTML = '<div class="empty"><h3>' + (raw ? "Có căn phù hợp “" + esc(raw) + "” trong rổ hàng" : "Quỹ căn đang cập nhật") + '</h3>' +
-        '<p>Rổ hàng cập nhật hằng ngày. Nhắn Zalo để nhận danh sách căn ' + (raw ? "theo “" + esc(raw) + "”" : "phân khu này") + ' kèm giá, chính sách và phiếu tính chi tiết.</p>' +
+      grid.innerHTML = '<div class="empty"><h3>' + (raw ? "Có căn phù hợp “" + esc(raw) + "” trong rổ hàng" : "Quỹ độc quyền phân khu này đang cập nhật") + '</h3>' +
+        '<p>Rổ hàng cập nhật hằng ngày. ' + (raw ? "Nhắn Zalo để nhận danh sách căn theo “" + esc(raw) + "”" : "Gõ mã căn vào ô tìm kiếm để tra cứu toàn bộ rổ hàng, hoặc nhắn Zalo để nhận danh sách căn phân khu này") + ' kèm giá, chính sách và phiếu tính chi tiết.</p>' +
         '<button type="button" class="btn btn-primary" style="background:#0068FF" data-zalo="' + esc(raw || "theo phân khu") + '" data-zone="' + esc(cartZone) + '">Nhắn Zalo nhận danh sách</button> ' +
         '<a href="tel:0909882555" class="btn btn-outline" style="margin-top:8px">☎ 0909 882 555</a></div>';
       count.innerHTML = "";
