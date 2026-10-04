@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 04/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.11.1** + plugin Hoàng Hiệp CRM **2.13.3**)
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.12.0** + plugin Hoàng Hiệp CRM **2.14.0**)
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt (khoảng 5 phút)
@@ -11,7 +11,7 @@
 4. **Cài đặt → Đường dẫn tĩnh** → bấm **Lưu** (để trang mới Tòa F2, phân khu Hải Vân Bay chạy được).
 5. **LiteSpeed Cache → Purge All**, rồi Ctrl + Shift + R (điện thoại: tắt hẳn tab, mở lại).
 
-**Kiểm tra sau khi cài:** Giao diện hiện 2.11.1 · Plugin hiện 2.13.3 · mở `/du-an/fours-tower-f2-thap-mai/` thấy 4 con số 18% – 25% – 15% – 70%.
+**Kiểm tra sau khi cài:** Giao diện hiện 2.12.0 · Plugin hiện 2.14.0 · mở `/du-an/fours-tower-f2-thap-mai/` thấy 4 con số 18% – 25% – 15% – 70%.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
 
@@ -19,6 +19,7 @@
 
 ### Đầu trang dự án
 - Khung form đầu trang: dòng ưu đãi + 4 con số chính (18% · 25% · 15% · 70%) + "Còn N ngày – hạn …" ngay trên ô họ tên / số điện thoại.
+- **Đồng bộ mọi dự án:** dự án chưa nhập "Con số nổi bật" tự lấy 4 con số từ dữ liệu sẵn có – chiết khấu, % vay, số tháng hỗ trợ lãi / giãn thanh toán, giá từ, quy mô, số căn, bàn giao, sở hữu (VD The Camellia: 13% · 70% · 18 tháng · 1,98 tỷ). Dự án ít dữ liệu (dưới 2 con số) giữ danh sách chính sách như cũ.
 - Khung mở đầu mục Giới thiệu: 3 điểm nổi bật, "Ưu đãi còn N ngày", nút **Nhận bảng giá & phiếu tính giá** (cam) và **Chat Zalo**.
 
 ### Dự án FourS Tower & trang Tòa F2 (dạng landing để chạy quảng cáo)

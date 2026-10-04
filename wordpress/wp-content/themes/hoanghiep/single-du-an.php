@@ -116,7 +116,12 @@ while ( have_posts() ) :
 			</div>
 			<aside class="hero-offer">
 				<p class="hero-offer__title"><?php echo hh_icon( 'gift' ); // phpcs:ignore ?> <?php echo esc_html( $resale ? 'Căn chuyển nhượng, cho thuê đang có' : 'Ưu đãi & chính sách tháng ' . wp_date( 'm/Y' ) ); ?></p>
-				<?php $hero_stats = $resale ? array() : array_slice( hh_table( 'hh_p_offer_stats', 2 ), 0, 4 ); ?>
+				<?php
+				list( $hero_stats, $hero_manual ) = $resale || ! function_exists( 'hh_project_key_stats' ) ? array( array(), false ) : hh_project_key_stats( $id );
+				if ( ! $hero_manual && count( $hero_stats ) < 2 ) {
+					$hero_stats = array(); // Dữ liệu chưa đủ số – giữ danh sách chính sách như cũ.
+				}
+				?>
 				<?php if ( $hero_stats ) : ?>
 					<?php $hero_dl = hh_parse_vn_date( hh_meta( 'hh_p_offer_deadline' ) ); ?>
 					<?php if ( hh_meta( 'hh_p_offer_title' ) ) : ?>

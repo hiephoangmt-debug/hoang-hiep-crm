@@ -844,3 +844,68 @@ add_filter(
 	2
 );
 add_action( 'save_post_du-an', static function () { delete_transient( 'hh_project_titles' ); } );
+
+/**
+ * Con số nổi bật của dự án cho khung form đầu trang.
+ * Có nhập ô "Con số nổi bật" thì dùng nguyên; không thì tự rút từ dữ liệu sẵn có (chính sách, giá từ, quy mô, số căn,
+ * bàn giao, sở hữu) – chỉ lấy số đã có trong dữ liệu dự án, không tự đặt số.
+ *
+ * @return array{0: array, 1: bool} array( danh sách [số, nhãn], true nếu là số nhập tay ).
+ */
+function hh_project_key_stats( $post_id = null, $max = 4 ) {
+	$post_id = $post_id ?: get_the_ID();
+	$manual  = hh_table( 'hh_p_offer_stats', 2, $post_id );
+	if ( $manual ) {
+		return array( array_slice( $manual, 0, $max ), true );
+	}
+	$m      = static fn( $k ) => trim( (string) hh_meta( $k, $post_id ) );
+	$policy = $m( 'hh_p_policy' ) . "\n" . $m( 'hh_p_loan' );
+	$num    = static fn( $s ) => (float) str_replace( ',', '.', $s );
+	$stats  = array();
+
+	// Chiết khấu cao nhất được nêu trong chính sách.
+	if ( preg_match_all( '/chiết khấu[^.\n;,]*?(\d+(?:[.,]\d+)?)\s*%/iu', $policy, $mm ) ) {
+		$best = max( array_map( $num, $mm[1] ) );
+		if ( $best > 0 && $best < 50 ) {
+			$stats[] = array( str_replace( '.', ',', (string) $best ) . '%', 'Chiết khấu tối đa' );
+		}
+	}
+	// Tỷ lệ vay ngân hàng.
+	if ( preg_match_all( '/vay[^.\n;]*?(?:đến|tới)?\s*(?:\d+\s*[–-]\s*)?(\d{2})\s*%/iu', $policy, $mm ) ) {
+		$stats[] = array( max( array_map( 'intval', $mm[1] ) ) . '%', 'Ngân hàng cho vay' );
+	}
+	// Hỗ trợ lãi suất / ân hạn / giãn thanh toán (số tháng).
+	if ( preg_match( '/(0%\s*lãi|hỗ trợ lãi suất|ân hạn|không lãi|giãn xây|không trả gốc)[^.\n;]*?(?:\d+\s*–\s*)?(\d+)\s*tháng|(\d+)\s*(?:–\s*(\d+)\s*)?tháng[^.\n;]*?(0%|không lãi|hỗ trợ lãi|ân hạn|không trả gốc)/iu', $policy, $x ) ) {
+		$months = $x[2] ?: ( $x[4] ?? '' ) ?: $x[3];
+		$kind   = mb_strtolower( $x[1] ?: $x[5] );
+		$label  = false !== strpos( $kind, 'giãn' ) ? 'Giãn thanh toán' : ( false !== strpos( $kind, 'ân hạn' ) || false !== strpos( $kind, 'gốc' ) ? 'Ân hạn nợ gốc' : 'Hỗ trợ lãi suất' );
+		$stats[] = array( (int) $months . ' tháng', $label );
+	}
+	// Giá từ.
+	if ( '' !== $m( 'hh_p_price_from' ) && (float) $m( 'hh_p_price_from' ) > 0 ) {
+		$stats[] = array( hh_format_price( $m( 'hh_p_price_from' ) ), 'Giá từ (tham khảo)' );
+	}
+	// Quy mô (ha).
+	if ( preg_match( '/(\d+(?:[.,]\d+)?)\s*ha\b/u', $m( 'hh_p_scale' ), $x ) ) {
+		$stats[] = array( $x[1] . ' ha', 'Quy mô' );
+	}
+	// Số căn / sản phẩm.
+	if ( preg_match( '/(\d{1,3}(?:\.\d{3})+|\d{2,})\s*(căn|sản phẩm|lô|biệt thự)/u', $m( 'hh_p_units' ), $x ) ) {
+		$stats[] = array( $x[1], 'căn' === $x[2] ? 'Số căn' : ( 'lô' === $x[2] ? 'Lô đất' : 'Sản phẩm' ) );
+	}
+	// Bàn giao.
+	$year = (int) wp_date( 'Y' );
+	if ( preg_match( '/quý\s*(\d)\s*\/\s*(20\d\d)/iu', $m( 'hh_p_handover' ), $x ) && ( (int) $x[2] > $year || ( (int) $x[2] === $year && (int) $x[1] >= (int) ceil( wp_date( 'n' ) / 3 ) ) ) ) {
+		$stats[] = array( 'Q' . $x[1] . '/' . $x[2], 'Bàn giao (dự kiến)' );
+	} elseif ( preg_match( '/(20\d\d)/', $m( 'hh_p_handover' ), $x ) && (int) $x[1] > $year ) {
+		$stats[] = array( $x[1], 'Bàn giao (dự kiến)' );
+	}
+	// Sở hữu.
+	$own = mb_strtolower( $m( 'hh_p_ownership' ) );
+	if ( false !== strpos( $own, 'lâu dài' ) ) {
+		$stats[] = array( 'Lâu dài', 'Sổ hồng sở hữu' );
+	} elseif ( preg_match( '/(\d+)\s*năm/u', $own, $x ) ) {
+		$stats[] = array( $x[1] . ' năm', 'Thời hạn sở hữu' );
+	}
+	return array( array_slice( $stats, 0, $max ), false );
+}
