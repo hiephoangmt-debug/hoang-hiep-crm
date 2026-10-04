@@ -518,7 +518,10 @@ function overview() {
 
   const top = T.t.filter(x => x.type === 'chi').sort((a, b) => b.amount - a.amount).slice(0, 5);
 
-  return `
+  const emptyBanner = T.t.length ? '' : `<div class="alert warn" style="margin-top:16px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+    <span>${monthLabel(m)} chưa có dữ liệu. Nhập nhanh bằng ảnh chụp bảng thu chi hoặc file Excel.</span>
+    <button class="btn primary" data-import>📷 Nhập ${monthLabel(m).toLowerCase()}</button></div>`;
+  return `${emptyBanner}
   <div class="grid kpis">
     <div class="card kpi"><div class="lbl">Tổng thu</div><div class="val pos">${fmt(T.thu)}</div><div class="sub">${delta(T.thu, prev.thu)}</div></div>
     <div class="card kpi"><div class="lbl">Tổng chi</div><div class="val neg">${fmt(T.chi)}</div><div class="sub">Cố định ${fmtShort(fixedChi)} · Phát sinh ${fmtShort(psChi)}</div></div>
@@ -629,7 +632,7 @@ function ledger() {
         <td class="hide-sm small">${esc(cat(x.cat).name)}</td>
         <td class="num pos">${x.type === 'thu' ? fmt(x.amount) : ''}</td>
         <td class="num neg">${x.type === 'chi' ? fmt(x.amount) : ''}</td>
-        <td class="num"><button class="iconbtn" data-edit="${x.id}" aria-label="Sửa">✎</button></td></tr>`).join('') || `<tr><td colspan="6" class="empty">Chưa có giao dịch. Bấm “+ Thu” hoặc “+ Chi” để thêm.</td></tr>`}
+        <td class="num"><button class="iconbtn" data-edit="${x.id}" aria-label="Sửa">✎</button></td></tr>`).join('') || `<tr><td colspan="6" class="empty">${monthLabel(UI.m)} chưa có giao dịch.<br><br><button class="btn primary" data-import>📷 Nhập ${monthLabel(UI.m).toLowerCase()} từ ảnh chụp / Excel</button><br><br><span class="small">hoặc bấm “+ Thu”, “+ Chi” để thêm từng khoản</span></td></tr>`}
       </tbody>
       <tfoot><tr class="total"><td></td><td>Cộng (${rows.length} khoản)</td><td class="hide-sm"></td><td class="num pos">${fmt(thu)}</td><td class="num neg">${fmt(chi)}</td><td class="num ${thu - chi < 0 ? 'neg' : 'pos'}">${fmtS(thu - chi)}</td></tr></tfoot>
     </table>

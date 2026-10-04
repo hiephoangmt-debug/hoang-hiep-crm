@@ -24,6 +24,7 @@ function xoaMaBaoMat() {
 function doGet(e) {
   const p = (e && e.parameter) || {};
   if (p.action) return handle_(p.action, p);
+  if (p.capnhat) CacheService.getScriptCache().remove('app_html'); // mở link kèm ?capnhat=1 để lấy bản mới ngay
   const t = appTemplate_();
   t.syncUrl = ScriptApp.getService().getUrl();
   return t.evaluate()
@@ -32,7 +33,13 @@ function doGet(e) {
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
-// Lấy giao diện app: ưu tiên bản trên GitHub (lưu tạm 6 giờ), nếu lỗi thì dùng file HTML "Index" (nếu có)
+/** Chạy hàm này nếu muốn app lấy bản mới nhất từ GitHub ngay lập tức. */
+function capNhatApp() {
+  CacheService.getScriptCache().remove('app_html');
+  Logger.log('Đã xóa bản lưu tạm. Tải lại trang app để dùng bản mới nhất.');
+}
+
+// Lấy giao diện app: ưu tiên bản trên GitHub (lưu tạm 10 phút), nếu lỗi thì dùng file HTML "Index" (nếu có)
 function appTemplate_() {
   const cache = CacheService.getScriptCache();
   let html = cache.get('app_html');
@@ -41,7 +48,7 @@ function appTemplate_() {
       const r = UrlFetchApp.fetch(APP_URL, { muteHttpExceptions: true });
       if (r.getResponseCode() === 200) {
         html = r.getContentText('UTF-8');
-        try { cache.put('app_html', html, 21600); } catch (e) {}
+        try { cache.put('app_html', html, 600); } catch (e) {} // lưu tạm 10 phút
       }
     } catch (e) {}
   }

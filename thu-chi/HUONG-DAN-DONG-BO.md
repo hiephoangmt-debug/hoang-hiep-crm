@@ -73,3 +73,30 @@ Cài **một lần trên máy tính**, mất khoảng 10 phút. Không phải s�
 - **Không xóa sheet ẩn `_data`**, vì đó là nơi chứa dữ liệu thật.
 - Mất mạng vẫn nhập được, có mạng lại app tự đồng bộ.
 - Khi app có bản mới trên GitHub, app trong Sheet tự cập nhật trong vòng 6 giờ, không cần làm gì.
+
+---
+
+## Cập nhật app lên bản mới
+App tự lấy bản mới từ GitHub. Muốn có bản mới **ngay** thì làm như sau:
+- **Cách nhanh:** mở link app, thêm `?capnhat=1` vào cuối (ví dụ `https://script.google.com/macros/s/…/exec?capnhat=1`) rồi bấm Enter.
+  Cách này chỉ dùng được khi Apps Script đã có code mới nhất (xem cách đầy đủ bên dưới).
+- **Cách đầy đủ** (làm khi code Apps Script là bản cũ, trước ngày 04/10/2026):
+  1. Mở lại link code ở Bước 1, Ctrl+A, Ctrl+C.
+  2. Trong Apps Script: bấm vào khung code, Ctrl+A, Ctrl+V, rồi **Ctrl+S**.
+  3. **Triển khai → Quản lý các bản triển khai** → bấm ✏ → mục Phiên bản chọn **Phiên bản mới** → **Triển khai**.
+  4. Tải lại trang app (trên điện thoại: đóng app rồi mở lại).
+
+Dữ liệu cũ vẫn giữ nguyên. Link app không đổi.
+
+## Nhập dữ liệu các tháng trước
+1. Bấm ◀ ở góc trên để lùi về tháng cần nhập (ví dụ Tháng 7/2026).
+2. Bấm **📷 Nhập tháng 7/2026**, hoặc vào tab Lịch sử → **⬆ Nhập từ Excel**.
+3. Chọn một trong 3 cách:
+   - **Dán từ Excel:** bôi đen bảng → Ctrl+C → dán vào ô. Chính xác 100%.
+   - **Chọn file Excel:** chọn file .xlsx (có nhiều sheet thì chọn sheet của tháng đó).
+   - **📷 Chụp ảnh / 🖼 Chọn ảnh:** app tự đọc chữ, nhưng **phải kiểm tra lại số tiền**. Nếu ảnh có dòng TỔNG CỘNG, app sẽ báo ✓ khi khớp hoặc ⚠ khi lệch.
+4. Xem bảng xem trước, sửa chỗ sai, rồi bấm **Nhập**.
+
+Ghi chú:
+- Dòng không ghi ngày sẽ lấy theo ô "Tháng". Nếu ảnh có tiêu đề "THU CHI THÁNG x/yyyy", app tự lấy tháng đó.
+- Khoản đã có trong app sẽ tự được bỏ chọn, nên nhập lại cũng không bị trùng.
