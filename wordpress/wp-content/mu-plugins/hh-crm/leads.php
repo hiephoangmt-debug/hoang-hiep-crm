@@ -238,8 +238,87 @@ function hh_handle_lead() {
 			$body .= 'Quan tâm: ' . get_the_title( $ref_id ) . ' – ' . get_permalink( $ref_id ) . "\n";
 		}
 		$body .= "\nLời nhắn:\n{$message}\n\nXem trong quản trị: " . admin_url( 'post.php?post=' . $lead_id . '&action=edit' );
-		wp_mail( get_option( 'admin_email' ), '[Website] Khách hàng mới: ' . $name, $body );
+		hh_lead_mail( '[Website] Khách hàng mới: ' . $name . ' – ' . $phone, $body );
 	}
 
 	$go( 'ok' );
+}
+
+/* -------------------------------------------------------------------------
+ * Email báo khách mới: người nhận, gửi thử, ghi lỗi gửi
+ * ---------------------------------------------------------------------- */
+
+/** Danh sách email nhận thông báo: ô "Email nhận thông báo" → email liên hệ của giao diện → email quản trị. */
+function hh_lead_recipients() {
+	$list = (string) get_option( 'hh_lead_emails', '' );
+	if ( '' === trim( $list ) && function_exists( 'hoanghiep_opt' ) ) {
+		$list = (string) hoanghiep_opt( 'hh_email' );
+	}
+	$emails = array_filter( array_map( 'sanitize_email', preg_split( '/[\s,;]+/', $list . ',' . get_option( 'admin_email' ) ) ), 'is_email' );
+	return array_values( array_unique( array_map( 'strtolower', $emails ) ) );
+}
+
+/** Gửi email thông báo; lưu lỗi gần nhất để hiện trong trang Thông báo email. */
+function hh_lead_mail( $subject, $body ) {
+	$host    = wp_parse_url( home_url(), PHP_URL_HOST );
+	$headers = array( 'Content-Type: text/plain; charset=UTF-8' );
+	if ( ! has_filter( 'wp_mail_from' ) ) {
+		$headers[] = 'From: Website ' . get_bloginfo( 'name' ) . ' <no-reply@' . preg_replace( '/^www\./', '', (string) $host ) . '>';
+	}
+	$ok = wp_mail( hh_lead_recipients(), $subject, $body, $headers );
+	update_option( 'hh_lead_mail_last', array( 'ok' => (bool) $ok, 'at' => time(), 'error' => $ok ? '' : get_option( 'hh_lead_mail_error', 'wp_mail() trả về lỗi' ) ), false );
+	return $ok;
+}
+
+add_action(
+	'wp_mail_failed',
+	static function ( $err ) {
+		update_option( 'hh_lead_mail_error', $err->get_error_message(), false );
+	}
+);
+
+add_action( 'admin_menu', 'hh_lead_mail_menu' );
+function hh_lead_mail_menu() {
+	add_submenu_page( 'edit.php?post_type=khach-hang', 'Thông báo email', 'Thông báo email', 'manage_options', 'hh-lead-mail', 'hh_lead_mail_page' );
+}
+
+function hh_lead_mail_page() {
+	$sent = null;
+	if ( isset( $_POST['hh_lead_emails'] ) && check_admin_referer( 'hh_lead_mail' ) ) {
+		update_option( 'hh_lead_emails', sanitize_text_field( wp_unslash( $_POST['hh_lead_emails'] ) ), false );
+		if ( ! empty( $_POST['hh_test'] ) ) {
+			delete_option( 'hh_lead_mail_error' );
+			$sent = hh_lead_mail( '[Website] Email thử – thông báo khách hàng mới', "Đây là email thử từ " . home_url( '/' ) . ".\nNếu anh nhận được email này, form để lại thông tin trên web sẽ báo về đúng địa chỉ này.\n\nGửi lúc " . wp_date( 'H:i d/m/Y' ) );
+		}
+	}
+	$last = get_option( 'hh_lead_mail_last' );
+	$smtp = has_filter( 'wp_mail_from' ) || class_exists( 'WPMailSMTP\\Core' ) || defined( 'WPMS_PLUGIN_VER' ) || function_exists( 'fluentSmtpInit' ) || class_exists( 'FluentMail\\App\\App' );
+	?>
+	<div class="wrap">
+		<h1>Thông báo email khi khách để lại thông tin</h1>
+		<?php if ( null !== $sent ) : ?>
+			<div class="notice notice-<?php echo $sent ? 'success' : 'error'; ?>"><p><?php echo $sent ? 'Đã gửi email thử tới: ' . esc_html( implode( ', ', hh_lead_recipients() ) ) . '. Kiểm tra cả hộp thư Spam / Quảng cáo.' : 'Gửi KHÔNG được: ' . esc_html( get_option( 'hh_lead_mail_error', 'máy chủ không gửi được email' ) ) . '. Cài plugin WP Mail SMTP (hướng dẫn bên dưới).'; ?></p></div>
+		<?php endif; ?>
+		<p>Mỗi khi khách điền form trên web, khách được lưu ở <strong>Khách hàng</strong> và web gửi email báo tới các địa chỉ dưới đây.</p>
+		<form method="post">
+			<?php wp_nonce_field( 'hh_lead_mail' ); ?>
+			<p><label><strong>Email nhận thông báo</strong> (nhiều email cách nhau dấu phẩy)<br>
+				<input type="text" class="regular-text" name="hh_lead_emails" value="<?php echo esc_attr( get_option( 'hh_lead_emails', '' ) ); ?>" placeholder="hiephoangmt@gmail.com"></label></p>
+			<p>Đang gửi tới: <code><?php echo esc_html( implode( ', ', hh_lead_recipients() ) ); ?></code></p>
+			<p><button class="button">Lưu</button> <button class="button button-primary" name="hh_test" value="1">Lưu &amp; gửi email thử</button></p>
+		</form>
+		<?php if ( $last ) : ?>
+			<p>Lần gửi gần nhất: <?php echo esc_html( wp_date( 'H:i d/m/Y', $last['at'] ) ); ?> – <?php echo $last['ok'] ? '<span style="color:#00701a">máy chủ báo đã gửi</span>' : '<span style="color:#b32d2e">lỗi: ' . esc_html( $last['error'] ) . '</span>'; ?></p>
+		<?php endif; ?>
+		<h2>Nếu email không đến (hoặc vào Spam)</h2>
+		<p><?php echo $smtp ? 'Đã có plugin gửi mail SMTP.' : '<strong>Chưa có plugin gửi mail SMTP</strong> – hosting gửi mail trực tiếp nên Gmail hay chặn hoặc cho vào Spam.'; ?> Cách chắc chắn nhất:</p>
+		<ol>
+			<li>Plugin → Cài mới → tìm <strong>WP Mail SMTP</strong> → Cài đặt → Kích hoạt.</li>
+			<li>Chọn <strong>Other SMTP</strong>: SMTP Host <code>smtp.gmail.com</code>, Encryption <strong>TLS</strong>, Port <code>587</code>, bật Authentication.</li>
+			<li>Username: <code>hiephoangmt@gmail.com</code>; Password: <strong>mật khẩu ứng dụng</strong> của Gmail (tạo tại myaccount.google.com → Bảo mật → Xác minh 2 bước → Mật khẩu ứng dụng), không dùng mật khẩu Gmail thường.</li>
+			<li>From Email: <code>hiephoangmt@gmail.com</code>, From Name: Website Hoàng Hiệp → Lưu → quay lại trang này bấm <strong>Lưu &amp; gửi email thử</strong>.</li>
+		</ol>
+		<p>Dù email lỗi, thông tin khách vẫn luôn được lưu ở <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=khach-hang' ) ); ?>">Khách hàng</a>.</p>
+	</div>
+	<?php
 }
