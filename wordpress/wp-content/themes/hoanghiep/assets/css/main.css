@@ -794,7 +794,7 @@ img.article-head__author { object-fit: cover; border: 2px solid var(--gold); }
 @media (max-width: 560px) { .site-footer__grid { grid-template-columns: 1fr; } }
 
 /* Contact dock: floating on desktop, bottom bar on phones */
-.contact-dock { position: fixed; right: 18px; bottom: 18px; z-index: 60; display: grid; gap: 10px; }
+.contact-dock { position: fixed; left: 18px; bottom: 18px; z-index: 60; display: grid; gap: 10px; }
 .contact-dock__btn { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; color: var(--white); box-shadow: var(--shadow-lg); }
 .contact-dock__btn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .contact-dock__btn:hover { color: var(--white); transform: scale(1.06); }

@@ -735,12 +735,12 @@ function hh_import_projects() {
 			update_post_meta( $child->ID, 'hh_p_parent', $parent->ID );
 		}
 	}
-	// Ảnh từ link (Google Drive) của các dự án có ô "Link ảnh".
-	if ( function_exists( 'hh_img_links_import' ) && current_user_can( 'upload_files' ) ) {
+	// Ảnh từ link (Google Drive): chỉ đưa vào hàng chờ, tải ngầm từng ít một (tải ngay dễ quá thời gian → lỗi nghiêm trọng).
+	if ( function_exists( 'hh_img_links_queue' ) ) {
 		foreach ( hh_project_dataset() as $p ) {
 			$post = ! empty( $p['meta']['hh_p_image_links'] ) ? get_page_by_path( $p['slug'], OBJECT, 'du-an' ) : null;
-			if ( $post ) {
-				hh_img_links_import( $post->ID );
+			if ( $post && hh_img_links_pending( $post->ID ) ) {
+				hh_img_links_queue( $post->ID );
 			}
 		}
 	}
@@ -760,8 +760,16 @@ function hh_import_menu() {
 
 function hh_import_page() {
 	$result = null;
+	$error  = '';
 	if ( isset( $_POST['hh_import'] ) && check_admin_referer( 'hh_import_du_an' ) ) {
-		$result = hh_import_projects();
+		if ( function_exists( 'set_time_limit' ) ) {
+			@set_time_limit( 300 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
+		}
+		try {
+			$result = hh_import_projects();
+		} catch ( \Throwable $e ) {
+			$error = $e->getMessage() . ' (' . basename( $e->getFile() ) . ':' . $e->getLine() . ')';
+		}
 	}
 	$published = null;
 	if ( isset( $_POST['hh_publish_week'] ) && check_admin_referer( 'hh_import_du_an' ) && function_exists( 'hh_news_publish_now' ) ) {
@@ -770,6 +778,9 @@ function hh_import_page() {
 	?>
 	<div class="wrap">
 		<h1>Nhập dữ liệu dự án Đà Nẵng – Quảng Nam</h1>
+		<?php if ( $error ) : ?>
+			<div class="notice notice-error"><p>Nhập dữ liệu bị lỗi: <?php echo esc_html( $error ); ?> – chụp màn hình gửi lại để sửa.</p></div>
+		<?php endif; ?>
 		<?php if ( $result ) : ?>
 			<div class="notice notice-success"><p>Đã tạo <?php echo (int) $result[0]; ?> dự án mới, cập nhật <?php echo (int) $result[1]; ?> dự án có sẵn, đăng <?php echo (int) ( $result[2] ?? 0 ); ?> bài tin tức mới, <?php echo (int) ( $result[3] ?? 0 ); ?> tin mua bán / cho thuê mới.</p></div>
 		<?php endif; ?>
