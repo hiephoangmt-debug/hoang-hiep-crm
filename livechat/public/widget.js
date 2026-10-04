@@ -65,6 +65,11 @@
       '.msg.visitor{background:var(--c);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}' +
       '.msg time{display:block;font-size:10px;opacity:.6;margin-top:3px}' +
       '.zalo-btn{display:block;margin-top:8px;background:#0068ff;color:#fff;text-align:center;text-decoration:none;font-weight:700;border-radius:8px;padding:9px 12px;font-size:14px}' +
+      '.who{font-size:11px;color:#64748b;margin:10px 4px -4px;font-weight:600}.who.me{align-self:flex-end}.who.agent{align-self:flex-start}' +
+      '.peek{position:relative;max-width:260px;background:#fff;color:#0f1d33;border-radius:14px 14px 4px 14px;padding:12px 30px 12px 14px;font-size:14px;line-height:1.45;box-shadow:0 8px 28px rgba(0,0,0,.18);border-left:4px solid var(--a);cursor:pointer;display:none;animation:in .3s ease-out}' +
+      '.peek b{display:block;font-size:12px;color:var(--c);margin-bottom:3px}' +
+      '.peek .x{position:absolute;top:4px;right:8px;border:0;background:none;font-size:18px;color:#94a3b8;cursor:pointer;line-height:1}' +
+      '@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}' +
       '.quick{display:flex;flex-wrap:wrap;gap:6px;padding:4px 0}' +
       '.quick button{border:1px solid var(--a);color:var(--a);background:#fff;border-radius:16px;padding:6px 11px;font-size:13px;cursor:pointer}' +
       '.quick button:hover{background:var(--a);color:#fff}' +
@@ -91,7 +96,7 @@
       '  <form class="foot"><textarea placeholder="Nhập tin nhắn..." rows="1"></textarea>' +
       '    <button type="submit" aria-label="Gửi"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg></button></form>' +
       '</div>' +
-      '<div class="launcher">' +
+      '<div class="launcher"><div class="peek"><button class="x" aria-label="Ẩn">×</button><b></b><span></span></div>' +
       (P.zalo ? '<a class="mini zalo" target="_blank" rel="noopener" title="Chat Zalo">Zalo</a>' : '') +
       (P.hotline ? '<a class="mini call" title="Gọi hotline"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1z"/></svg></a>' : '') +
       '  <button class="fab pulse" aria-label="Mở chat tư vấn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.4 1.3 4.6 3.4 6.1L4.5 21l4.2-2.2c1 .3 2.1.4 3.3.4 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg><span class="dot"></span></button>' +
@@ -105,7 +110,11 @@
     if ($('.zalo')) $('.zalo').href = 'https://zalo.me/' + P.zalo.replace(/\D/g, '');
     if ($('.call')) $('.call').href = 'tel:' + P.hotline.replace(/[^\d+]/g, '');
 
-    var unread = 0, leadShown = false, hasLead = false, rendered = {}, quickEl = null, typingTimer;
+    var unread = 0, leadShown = false, hasLead = false, rendered = {}, quickEl = null, typingTimer, lastFrom = null;
+    var peek = $('.peek');
+    peek.querySelector('b').textContent = P.agentName + ' – Tư vấn viên';
+    peek.onclick = function () { toggle(true); };
+    peek.querySelector('.x').onclick = function (e) { e.stopPropagation(); peek.style.display = 'none'; };
 
     function initials(n) { return n.split(/\s+/).map(function (w) { return w[0]; }).slice(-2).join('').toUpperCase(); }
     function fmt(t) { var d = new Date(t); return ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2); }
@@ -117,8 +126,18 @@
     }
 
     function addMsg(m) {
+      if (m.from === 'system') return;
       if (m.id && rendered[m.id]) return;
       if (m.id) rendered[m.id] = true;
+      // Tách lượt: đổi người nói thì hiện tên, cách 1 dòng.
+      var from = m.from === 'visitor' ? 'me' : 'agent';
+      if (from !== lastFrom) {
+        var w = document.createElement('div');
+        w.className = 'who ' + from;
+        w.textContent = from === 'me' ? 'Bạn' : '💼 ' + P.agentName + ' – Tư vấn';
+        body.appendChild(w);
+        lastFrom = from;
+      }
       var el = document.createElement('div');
       el.className = 'msg ' + (m.from === 'visitor' ? 'visitor' : 'agent');
       el.textContent = m.text;
@@ -136,6 +155,10 @@
       scroll();
       if (m.from !== 'visitor' && !panel.classList.contains('open')) {
         unread++; dot.textContent = unread; dot.style.display = 'flex';
+        if (m.id) { // tin mới (không phải lịch sử) → bong bóng xem trước
+          peek.querySelector('span').textContent = m.text.length > 140 ? m.text.slice(0, 140) + '…' : m.text;
+          peek.style.display = 'block';
+        }
       }
     }
 
@@ -174,13 +197,13 @@
     });
 
     socket.on('history', function (h) {
-      body.innerHTML = ''; rendered = {}; quickEl = null;
+      body.innerHTML = ''; rendered = {}; quickEl = null; lastFrom = null;
       hasLead = !!(h.lead && h.lead.phone);
       setOnline(h.agentsOnline);
       addMsg({ from: 'agent', text: cfg.welcome, at: h.messages[0] ? h.messages[0].at : Date.now() });
       if (!h.messages.length) showQuick();
-      h.messages.forEach(addMsg);
-      unread = 0; dot.style.display = 'none';
+      h.messages.forEach(function (m) { addMsg({ from: m.from, text: m.text, at: m.at, action: m.action }); rendered[m.id] = true; });
+      unread = 0; dot.style.display = 'none'; peek.style.display = 'none';
     });
     socket.on('message', function (m) { typingEl.textContent = ''; addMsg(m); });
     socket.on('agents:online', setOnline);
@@ -218,10 +241,63 @@
     function toggle(open) {
       panel.classList.toggle('open', open);
       fab.classList.remove('pulse');
-      if (open) { unread = 0; dot.style.display = 'none'; setTimeout(function () { input.focus(); scroll(); }, 50); }
+      if (open) { unread = 0; dot.style.display = 'none'; peek.style.display = 'none'; setTimeout(function () { input.focus(); scroll(); }, 50); }
     }
     fab.onclick = function () { toggle(!panel.classList.contains('open')); };
     $('.close').onclick = function () { toggle(false); };
+
+    // Theo dõi khách đọc trang: dừng lâu ở mục nào thì báo server để chủ động hỏi.
+    // Có thể gắn chủ đề cho một khối bằng thuộc tính data-chat-topic="bảng giá".
+    if (cfg.proactive && cfg.proactive.topics.length) {
+      var PA = cfg.proactive, sentTopics = {}, sentCount = 0, curKey = null, dwell = 0, lastY = window.scrollY;
+      var norm = function (s) { return (s || '').toLowerCase().replace(/\s+/g, ' '); };
+      var hasKw = function (text, kw) {
+        var i = text.indexOf(kw);
+        while (i !== -1) {
+          var b = text.charAt(i - 1), a = text.charAt(i + kw.length);
+          if (!/\p{L}/u.test(b) && !/\p{L}/u.test(a)) return true;
+          i = text.indexOf(kw, i + 1);
+        }
+        return false;
+      };
+      var topicOf = function (text) {
+        var best = null, bestHits = 0;
+        PA.topics.forEach(function (t) {
+          var hits = t.keywords.filter(function (k) { return hasKw(text, norm(k)); }).length;
+          if (hits > bestHits) { best = t.i; bestHits = hits; }
+        });
+        return best;
+      };
+      // Khối nội dung đang ở giữa màn hình (hỗ trợ section thường và LadiPage).
+      var currentBlock = function () {
+        var el = document.elementFromPoint(window.innerWidth / 2, window.innerHeight * 0.45);
+        if (!el || el === host) return null;
+        var block = el.closest('[data-chat-topic], .ladi-section, section, article');
+        if (block && block !== document.body) {
+          var heads = Array.prototype.map.call(block.querySelectorAll('h1,h2,h3,h4'), function (h) { return h.textContent; }).join(' ');
+          return { el: block, text: norm((block.getAttribute('data-chat-topic') || '') + ' ' + heads + ' ' + (block.innerText || '').slice(0, 400)) };
+        }
+        var hs = document.querySelectorAll('h1,h2,h3'), cur = null;
+        for (var i = 0; i < hs.length; i++) if (hs[i].getBoundingClientRect().top < window.innerHeight * 0.5) cur = hs[i];
+        if (!cur) return null;
+        var next = cur.nextElementSibling;
+        return { el: cur, text: norm(cur.textContent + ' ' + (next ? (next.innerText || '').slice(0, 300) : '')) };
+      };
+      var timer = setInterval(function () {
+        if (sentCount >= PA.maxPerVisit) return clearInterval(timer);
+        if (document.hidden || panel.classList.contains('open')) { dwell = 0; return; }
+        var y = window.scrollY, fast = Math.abs(y - lastY) > window.innerHeight * 0.35;
+        lastY = y;
+        var b = currentBlock();
+        var topic = b ? topicOf(b.text) : null;
+        if (topic === null || fast || (curKey && curKey.el !== b.el)) { dwell = 0; curKey = topic === null ? null : { el: b.el }; return; }
+        curKey = { el: b.el };
+        if (++dwell >= PA.dwellSeconds && !sentTopics[topic]) {
+          sentTopics[topic] = true; sentCount++; dwell = 0;
+          socket.emit('browse', { topic: topic, seconds: PA.dwellSeconds });
+        }
+      }, 1000);
+    }
 
     // API cho website: window.CasamiaChat.open()
     window.CasamiaChat = { open: function () { toggle(true); }, close: function () { toggle(false); } };

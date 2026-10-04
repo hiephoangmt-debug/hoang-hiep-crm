@@ -31,11 +31,20 @@ Nội dung kịch bản nằm trong `config.js` (`intents`, `cannedReplies`, `za
 ```bash
 cd livechat
 npm install
-AGENT_PASSWORD=matkhau-cua-ban HOTLINE=09xxxxxxxx ZALO=09xxxxxxxx npm start
+cp .env.example .env   # rồi mở .env điền mật khẩu, hotline, Zalo, Telegram
+npm start
 ```
 
 - Trang demo: http://localhost:3000/
 - Trang tư vấn viên: http://localhost:3000/agent.html
+
+## Chủ động hỏi khi khách đọc chậm
+
+Widget theo dõi khách cuộn trang. Khách lướt nhanh thì không làm gì; khách **dừng đọc ở một mục khoảng 8 giây** (bảng giá, mặt bằng, vị trí, pháp lý, vay…) thì bot chủ động hỏi đúng mục đó. Câu hỏi hiện thành bong bóng cạnh nút chat, đồng thời Telegram báo *"👀 Khách đang đọc kỹ: Bảng giá"*.
+
+- Nhận diện mục theo tiêu đề và nội dung (hỗ trợ `section` thường và LadiPage). Muốn chỉ định rõ thì thêm thuộc tính `data-chat-topic="bảng giá"` vào khối đó.
+- Tối đa 2 lần hỏi mỗi khách, và không chen ngang khi khách hoặc tư vấn viên vừa nhắn trong 45 giây.
+- Chỉnh câu hỏi và từ khoá trong `intents[].browse`, chỉnh thời gian trong `proactive` (`config.js`).
 
 ## Thông báo & trả lời qua Telegram
 
@@ -44,6 +53,9 @@ Khi có khách nhắn, điện thoại báo ngay qua Telegram, kể cả khi b�
 - 🔔 **Khách mới vào chat**: kèm câu hỏi đầu tiên và trang khách đang xem.
 - 💬 **Tin nhắn mới**: cùng một khách nhắn liên tục thì gộp, tối đa 1 thông báo/phút.
 - 🔥 **Có số điện thoại khách**: kèm số để bấm gọi lại.
+- 👀 **Khách đang đọc kỹ một mục**: kèm câu bot đã chủ động hỏi.
+
+Mỗi thông báo kèm đoạn hội thoại gần nhất, tách từng lượt **🙋 KHÁCH / 💼 TƯ VẤN / 🤖 TƯ VẤN (tự động)**, mỗi lượt cách nhau 1 dòng.
 
 **Trả lời khách ngay trong Telegram:** bấm giữ tin thông báo → **Reply** → gõ câu trả lời. Khách nhận được ngay trên khung chat website. Gõ `/zalo` (dạng Reply) để gửi lời mời Zalo kèm nút bấm. Khi bạn trả lời, các tin tự động còn đang chờ gửi sẽ bị huỷ để không nói chen.
 
@@ -53,16 +65,9 @@ Khi có khách nhắn, điện thoại báo ngay qua Telegram, kể cả khi b�
    - Đặt tên hiển thị, ví dụ `Casamia Balanca Chat`.
    - Đặt username kết thúc bằng `bot`, ví dụ `casamia_hiep_bot`.
    - BotFather gửi lại **token** dạng `123456789:AAH...`. Giữ bí mật token này.
-2. **Chạy server với token:**
-   ```bash
-   TELEGRAM_BOT_TOKEN=123456789:AAH... PUBLIC_URL=https://ten-mien-chat AGENT_PASSWORD=... npm start
-   ```
+2. **Dán token vào file `.env`:** sao chép `.env.example` thành `.env`, điền `TELEGRAM_BOT_TOKEN=123456789:AAH...` rồi chạy lại server (`npm start`). Nếu dùng Render/Railway thì dán vào mục **Environment Variables** trên trang quản lý.
 3. **Lấy chat ID:** mở bot vừa tạo, bấm **Start** và gửi tin bất kỳ. Bot trả lời *"Chat ID của bạn là: 5xxxxxxx"*.
-4. **Khởi động lại server với chat ID:**
-   ```bash
-   TELEGRAM_BOT_TOKEN=... TELEGRAM_CHAT_ID=5xxxxxxx PUBLIC_URL=https://ten-mien-chat AGENT_PASSWORD=... npm start
-   ```
-   Gửi `/start` cho bot, thấy *"✅ Đã kết nối"* là xong.
+4. **Điền chat ID vào `.env`** (`TELEGRAM_CHAT_ID=5xxxxxxx`) rồi chạy lại server. Gửi `/start` cho bot, thấy *"✅ Đã kết nối"* là xong.
 
 **Cả nhóm sale cùng nhận:** tạo nhóm Telegram, thêm bot vào nhóm. Vào @BotFather → `/mybots` → chọn bot → **Bot Settings → Group Privacy → Turn off** (để bot đọc được tin Reply trong nhóm). Gửi một tin trong nhóm để lấy chat ID của nhóm (số âm, ví dụ `-100123...`). Nhiều người nhận riêng thì ghi các ID cách nhau dấu phẩy: `TELEGRAM_CHAT_ID=5111,5222`.
 

@@ -28,7 +28,6 @@ async function call(method, body) {
 
 async function broadcast(conv, html) {
   if (!enabled || !CHAT_IDS.length) return;
-  lastNotified.set(conv.id, Date.now());
   const link = PUBLIC_URL ? `\n\n<a href="${PUBLIC_URL}/agent.html#${conv.id}">Mở hội thoại</a>` : '';
   const hint = '\n<i>↩️ Reply tin này để trả lời khách · gõ /zalo để chuyển Zalo</i>';
   for (const chatId of CHAT_IDS) {
@@ -47,13 +46,37 @@ function who(conv) {
   return l.name || l.phone ? `${esc(l.name || 'Khách')}${l.phone ? ' – ' + esc(l.phone) : ''}` : `Khách #${conv.id.slice(0, 6)}`;
 }
 
+// Hội thoại gần nhất, tách từng lượt Khách / Tư vấn, mỗi lượt cách nhau 1 dòng trống.
+function transcript(conv, max = 8) {
+  const LABEL = { visitor: '🙋 <b>KHÁCH</b>', agent: '💼 <b>TƯ VẤN</b>', auto: '🤖 <b>TƯ VẤN (tự động)</b>' };
+  const groups = [];
+  for (const m of (conv.messages || []).slice(-max)) {
+    if (m.from === 'system') { groups.push({ note: m.text }); continue; }
+    const who = m.from === 'visitor' ? 'visitor' : m.auto ? 'auto' : 'agent';
+    const text = m.text.length > 300 ? m.text.slice(0, 300) + '…' : m.text;
+    const g = groups[groups.length - 1];
+    if (g && g.who === who) g.lines.push(text);
+    else groups.push({ who, lines: [text] });
+  }
+  const out = groups.map(g => g.note ? `<i>${esc(g.note)}</i>` : `${LABEL[g.who]}\n${g.lines.map(esc).join('\n')}`).join('\n\n');
+  return out.length > 3000 ? '…' + out.slice(-3000) : out;
+}
+
 function notifyMessage(conv, text, { isNew, agentsOnline }) {
   const recent = Date.now() - (lastNotified.get(conv.id) || 0) < QUIET_MS;
   if (!isNew && recent) return;
+  lastNotified.set(conv.id, Date.now());
   const title = isNew ? '🔔 <b>KHÁCH MỚI VÀO CHAT</b>' : '💬 <b>Tin nhắn mới</b>';
   const status = agentsOnline ? '' : '\n⚠️ Chưa có tư vấn viên trực tuyến – chat đang tự trả lời';
   const page = isNew && conv.page ? `\n🌐 ${esc(conv.page)}` : '';
-  broadcast(conv, `${title}\n👤 ${who(conv)}\n\n“${esc(text)}”${page}${status}`);
+  broadcast(conv, `${title}\n👤 ${who(conv)}${page}${status}\n──────────\n\n${transcript(conv)}`);
+}
+
+function notifyBrowse(conv, topic, seconds, question) {
+  broadcast(conv,
+    `👀 <b>KHÁCH ĐANG ĐỌC KỸ: ${esc(topic.toUpperCase())}</b>\n👤 ${who(conv)} · dừng ${seconds} giây` +
+    (conv.page ? `\n🌐 ${esc(conv.page)}` : '') +
+    `\n──────────\n\n🤖 <b>TƯ VẤN (tự động)</b> đã hỏi:\n${esc(question)}`);
 }
 
 function notifyLead(conv) {
@@ -112,4 +135,4 @@ function start(onReply) {
   console.log(`  • Telegram: bật (${CHAT_IDS.length ? CHAT_IDS.length + ' người nhận' : 'chưa có TELEGRAM_CHAT_ID – nhắn bot để lấy ID'})`);
 }
 
-module.exports = { start, notifyMessage, notifyLead };
+module.exports = { start, notifyMessage, notifyLead, notifyBrowse };

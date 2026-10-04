@@ -35,7 +35,15 @@ function checkAgent(req, res, next) {
 // Cấu hình công khai cho widget.
 app.get('/api/config', (req, res) => {
   const { project, welcome, intents } = config;
-  res.json({ project, welcome: fill(welcome), quickReplies: intents.map(q => q.label), agentsOnline: onlineAgents() > 0 });
+  const pa = config.proactive || {};
+  res.json({
+    project, welcome: fill(welcome), quickReplies: intents.map(q => q.label), agentsOnline: onlineAgents() > 0,
+    proactive: pa.enabled ? {
+      dwellSeconds: pa.dwellSeconds || 8,
+      maxPerVisit: pa.maxPerVisit || 2,
+      topics: intents.map((it, i) => ({ i, keywords: it.browse?.keywords || [] })).filter(t => t.keywords.length),
+    } : null,
+  });
 });
 
 // Mẫu câu theo kịch bản 4 bước cho trang tư vấn viên.
@@ -218,7 +226,9 @@ io.on('connection', socket => {
     sendMessage(conv, { from: 'visitor', text });
 
     const agentsOn = onlineAgents() > 0;
-    telegram.notifyMessage(conv, text, { isNew, agentsOnline: agentsOn });
+    // Tin đầu tiên của khách luôn báo (kể cả khi trước đó bot đã chủ động hỏi).
+    const firstFromVisitor = conv.messages.filter(m => m.from === 'visitor').length === 1;
+    telegram.notifyMessage(conv, text, { isNew: firstFromVisitor, agentsOnline: agentsOn });
     const phone = text.match(PHONE_RE)?.[0].replace(/[\s.-]/g, '');
     if (phone && !conv.lead.phone) {
       setLead(conv, { phone });
@@ -252,6 +262,27 @@ io.on('connection', socket => {
       text: `📋 Thông tin liên hệ: ${conv.lead.name || ''} – ${conv.lead.phone || ''}`.trim(),
     });
     systemReply(conv, [config.leadThanks, zaloStep()[0]], zaloStep()[1]);
+  });
+
+  // Khách đọc chậm ở một mục trên trang → chủ động hỏi đúng mục đó.
+  socket.on('browse', ({ topic, seconds } = {}) => {
+    const pa = config.proactive || {};
+    const intent = config.intents[topic];
+    if (!pa.enabled || !intent?.browse || throttle(socket)) return;
+    const isNew = !store.get(visitorId);
+    const conv = store.ensure(visitorId, { page: clean(meta.page, 500), referrer: clean(meta.referrer, 500) });
+    const asked = conv.proactiveAsked || [];
+    const last = conv.messages.filter(m => m.from !== 'system').pop();
+    if (asked.includes(topic) || asked.length >= (pa.maxPerVisit || 2)) return;
+    if (last && Date.now() - last.at < (pa.quietSeconds || 45) * 1000) return;
+    if (pendingAuto.has(conv.id)) return;
+    store.update(conv.id, { proactiveAsked: [...asked, topic] });
+    if (isNew) io.to('agents').emit('conversation:new', store.summary(conv));
+    const topicName = intent.label.replace(/^\P{L}+/u, '');
+    const secs = Math.min(Number(seconds) || pa.dwellSeconds || 8, 600);
+    sendMessage(conv, { from: 'system', text: `👀 Khách đọc chậm ở mục "${topicName}" (${secs} giây) – đã chủ động hỏi` });
+    systemReply(conv, [intent.browse.question], { proactive: true });
+    telegram.notifyBrowse(conv, topicName, secs, fill(intent.browse.question, conv));
   });
 
   socket.on('typing', () => io.to('agents').emit('typing', visitorId));
