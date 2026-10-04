@@ -493,3 +493,22 @@ function hh_news_schedule_summary() {
 	ksort( $out );
 	return $out;
 }
+
+/**
+ * Bài lên lịch có thể liên kết tới bài tuần sau chưa đăng: tạm bỏ liên kết (giữ chữ) để không dẫn tới trang 404,
+ * bài kia đăng xong liên kết tự hiện lại.
+ */
+add_filter( 'the_content', 'hh_news_unlink_unpublished', 20 );
+function hh_news_unlink_unpublished( $html ) {
+	if ( ! is_singular( 'post' ) || false === strpos( $html, 'href="/' ) ) {
+		return $html;
+	}
+	return preg_replace_callback(
+		'#<a\s+href="/([a-z0-9-]+)/"[^>]*>(.*?)</a>#u',
+		static function ( $m ) {
+			$p = get_page_by_path( $m[1], OBJECT, 'post' );
+			return $p && 'publish' !== $p->post_status ? $m[2] : $m[0];
+		},
+		$html
+	);
+}
