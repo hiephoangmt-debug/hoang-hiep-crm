@@ -143,4 +143,6 @@ Sửa `config.js` (lời chào, kịch bản 4 bước, mẫu câu, màu sắc) 
 | `PUBLIC_URL` | Địa chỉ server chat, dùng cho link "Mở hội thoại" |
 | `ALLOWED_ORIGINS` | Domain được phép nhúng, cách nhau dấu phẩy |
 
+**Phương án miễn phí qua Google (không cần server):** chat bot chạy trên trình duyệt, lead và tin nhắn lưu vào Google Sheet, báo Telegram, trả lời khách bằng Reply trên Telegram. Xem [HUONG-DAN-GOOGLE.md](HUONG-DAN-GOOGLE.md) và mã `google-apps-script/Code.gs`; xuất landing bằng `npm run export -- --gas <URL /exec>`.
+
 Dữ liệu hội thoại lưu ở `data/conversations.json` (đổi bằng biến `DATA_DIR`). **Đưa lên mạng: xem [HUONG-DAN-RENDER.md](HUONG-DAN-RENDER.md)**. Repo có sẵn `render.yaml` để tạo dịch vụ trên Render chỉ với vài cú bấm.

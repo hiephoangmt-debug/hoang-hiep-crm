@@ -980,6 +980,8 @@ const POLICIES = {
 const PREVIEW = false;
 // Hotline / Zalo dùng khi không lấy được cấu hình từ server.
 const FALLBACK_CONTACT = { hotline: '0904 567 009', zalo: '0904567009' };
+// Phương án miễn phí qua Google: URL ứng dụng web Apps Script (kết thúc bằng /exec). Có giá trị thì form gửi về Google Sheet + Telegram.
+const GAS_URL = '';
 // Địa chỉ server live chat. Để trống nếu landing page chạy cùng server chat.
 const API_BASE = '';
 
@@ -1056,7 +1058,7 @@ const API_BASE = '';
 
   // Lead từ khung chat khi chat chạy cục bộ (server chat tạm lỗi): vẫn gửi về hệ thống lead
   window.CasamiaOnLead = lead => {
-    if (PREVIEW) return;
+    if (PREVIEW || GAS_URL) return; // phương án Google: khung chat tự gửi lead
     fetch(API_BASE + '/api/lead', { method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...lead, form: 'Chat (cục bộ)', visitorId, page: location.href, referrer: document.referrer, utm: store.get('casamia_utm') || '' }) }).catch(() => {});
   };
@@ -1071,13 +1073,17 @@ const API_BASE = '';
     err.textContent = ''; btn.disabled = true; const label = btn.textContent; btn.textContent = 'Đang gửi…';
     try {
       if (PREVIEW) await new Promise(r => setTimeout(r, 500));
-      const r = PREVIEW ? { ok: true, json: async () => ({ ok: true }) } : await fetch(API_BASE + '/api/lead', {
+      const payload = { ...data, form: form.dataset.form, visitorId, page: location.href, referrer: document.referrer, utm: store.get('casamia_utm') || '' };
+      const r = PREVIEW ? { ok: true, json: async () => ({ ok: true }) }
+        : GAS_URL ? await fetch(GAS_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ ...payload, type: 'lead', v: visitorId }) })
+        : await fetch(API_BASE + '/api/lead', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...data, form: form.dataset.form, visitorId, page: location.href, referrer: document.referrer, utm: store.get('casamia_utm') || '' }),
       });
       const res = await r.json();
-      if (!r.ok) throw new Error(res.error || 'Gửi chưa thành công');
+      if (!r.ok || res.ok === false) throw new Error(res.error || 'Gửi chưa thành công');
       submitted = true; store.set('casamia_lead_sent', '1');
+      window.dispatchEvent(new CustomEvent('casamia:lead', { detail: { name: data.name || '', phone: String(data.phone || '').replace(/[\s.-]/g, '') } }));
       if (window.fbq) fbq('track', 'Lead');
       if (window.gtag) gtag('event', 'generate_lead');
       const name = (data.name || '').trim();

@@ -1,11 +1,18 @@
 // Xuất landing page thành 1 file HTML duy nhất (ảnh nhúng sẵn) để xem thử hoặc gửi cho người khác.
 //   node tools/export-landing.js                 → bản xem thử (form mô phỏng, chat tự động chạy trên trình duyệt)
 //   node tools/export-landing.js https://chat.x  → bản thật, form và khung chat gửi về server chat đó
+//   node tools/export-landing.js --gas https://script.google.com/macros/s/…/exec
+//                                                → bản thật miễn phí qua Google: lead vào Google Sheet, báo Telegram
 const fs = require('fs');
 const path = require('path');
 const config = require('../config');
 
-const api = (process.argv[2] || '').replace(/\/$/, '');
+// Tham số: [URL server chat] hoặc --gas <URL Apps Script /exec> (phương án miễn phí qua Google)
+const argv = process.argv.slice(2);
+const gi = argv.indexOf('--gas');
+const gas = gi >= 0 ? (argv[gi + 1] || '') : '';
+if (gi >= 0 && !/^https?:\/\/.+/.test(gas)) throw new Error('Thiếu URL sau --gas');
+const api = (gi >= 0 ? '' : argv[0] || '').replace(/\/$/, '');
 const pub = path.join(__dirname, '..', 'public');
 let html = fs.readFileSync(path.join(pub, 'landing.html'), 'utf8');
 
@@ -18,7 +25,8 @@ html = html.replace(/'img\/([\w.-]+\.(?:jpe?g|png|webp))'/g, (m, f) => {
 
 const { hotline, zalo } = config.project;
 html = html
-  .replace("const PREVIEW = false;", `const PREVIEW = ${api ? 'false' : 'true'};`)
+  .replace("const PREVIEW = false;", `const PREVIEW = ${api || gas ? 'false' : 'true'};`)
+  .replace("const GAS_URL = '';", `const GAS_URL = ${JSON.stringify(gas)};`)
   .replace("const FALLBACK_CONTACT = { hotline: '0904 567 009', zalo: '0904567009' };", `const FALLBACK_CONTACT = ${JSON.stringify({ hotline, zalo })};`)
   .replace("const API_BASE = '';", `const API_BASE = ${JSON.stringify(api)};`);
 
@@ -30,6 +38,7 @@ const chatCfg = {
   leadThanks: config.leadThanks,
   fallback: config.fallback,
   proactive: config.proactive,
+  gas: gas || undefined,
   intents: config.intents.map(({ label, keywords, steps, browse }) => ({ label, keywords, steps, browse })),
 };
 const cfgTag = `<script>window.CASAMIA_CHAT_CONFIG = ${JSON.stringify(chatCfg).replace(/</g, '\\u003c')};</script>`;
@@ -45,7 +54,7 @@ if (api) {
   html = html.replace(widgetTag[0], () => `${cfgTag}\n<script${attrs} data-mode="local">\n${widgetJs}\n</script>`);
 }
 
-const out = path.join(__dirname, '..', 'dist', api ? 'casamia-balanca-landing.html' : 'casamia-balanca-landing-xem-thu.html');
+const out = path.join(__dirname, '..', 'dist', api || gas ? 'casamia-balanca-landing.html' : 'casamia-balanca-landing-xem-thu.html');
 fs.mkdirSync(path.dirname(out), { recursive: true });
 fs.writeFileSync(out, html);
 console.log(`Đã xuất: ${out} (${(fs.statSync(out).size / 1024).toFixed(0)} KB)`);

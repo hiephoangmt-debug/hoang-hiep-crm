@@ -82,6 +82,54 @@
     var timers = [];
     var cancel = function () { timers.forEach(clearTimeout); timers = []; };
 
+    // ----- Kết nối Google Apps Script (lưu Google Sheet, báo Telegram, nhận trả lời từ Telegram) -----
+    var GAS = L.gas || '';
+    var lastActivity = 0, pollTimer = null;
+    function gasPost(type, extra) {
+      if (!GAS) return;
+      var body = {
+        type: type, v: visitorId, page: location.href, utm: storage('casamia_utm') || '',
+        name: state.lead.name, phone: state.lead.phone,
+        transcript: state.messages.slice(-8).map(function (m) { return { from: m.from, text: m.text, auto: !!m.auto }; }),
+      };
+      for (var k in extra) body[k] = extra[k];
+      fetch(GAS, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) }).catch(function () {});
+      startPolling();
+    }
+    function startPolling() {
+      if (!GAS) return;
+      lastActivity = Date.now();
+      if (!pollTimer) schedulePoll(3000);
+    }
+    function schedulePoll(ms) { pollTimer = setTimeout(poll, ms); }
+    function poll() {
+      var idle = Date.now() - lastActivity;
+      if (idle > 60 * 60 * 1000) { pollTimer = null; return; } // 1 giờ không hoạt động thì dừng
+      var next = idle > 5 * 60 * 1000 ? 15000 : 4000;
+      if (document.hidden) return schedulePoll(next);
+      fetch(GAS + (GAS.indexOf('?') < 0 ? '?' : '&') + 'action=replies&v=' + encodeURIComponent(visitorId) + '&after=' + (state.lastReplyAt || 0))
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          (d.replies || []).forEach(function (r) {
+            if (r.at <= (state.lastReplyAt || 0)) return;
+            state.lastReplyAt = r.at; save();
+            cancel(); // tư vấn viên trả lời thì bot dừng các tin tự động đang chờ
+            var m = { from: 'agent', text: r.text };
+            if (r.action === 'zalo') m.action = 'zalo';
+            push(m);
+            lastActivity = Date.now();
+          });
+        })
+        .catch(function () {})
+        .then(function () { schedulePoll(next); });
+    }
+    // Form trên landing gửi lead xong → bắt đầu nhận trả lời từ Telegram
+    window.addEventListener('casamia:lead', function (e) {
+      var d = (e && e.detail) || {};
+      if (d.phone && !state.lead.phone) { state.lead.phone = d.phone; if (d.name) state.lead.name = d.name; save(); }
+      startPolling();
+    });
+
     function push(msg) {
       var m = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), at: Date.now() };
       for (var k in msg) m[k] = msg[k];
@@ -132,8 +180,13 @@
           var text = String(data.text || '').trim().slice(0, 2000);
           if (!text) return;
           push({ from: 'visitor', text: text });
+          gasPost('message', { text: text, first: state.messages.filter(function (m) { return m.from === 'visitor'; }).length === 1 });
           var pm = text.match(PHONE_RE);
-          if (pm && !state.lead.phone) { setLead('', pm[0].replace(/[\s.-]/g, '')); return zaloReply([L.leadThanks]); }
+          if (pm && !state.lead.phone) {
+            setLead('', pm[0].replace(/[\s.-]/g, ''));
+            gasPost('lead', { form: 'Khung chat (gõ số)' });
+            return zaloReply([L.leadThanks]);
+          }
           var it = findIntent(text);
           if (it) {
             var st = it.steps;
@@ -146,6 +199,7 @@
           if (!ph) return fire('lead:error', 'Số điện thoại chưa đúng, anh/chị kiểm tra lại giúp em ạ.');
           setLead(data.name, ph[0].replace(/[\s.-]/g, ''));
           push({ from: 'visitor', text: '📋 Thông tin liên hệ: ' + (state.lead.name || '') + ' – ' + state.lead.phone });
+          gasPost('lead', { form: 'Khung chat' });
           zaloReply([L.leadThanks]);
         } else if (ev === 'browse') {
           var pa = L.proactive || {}, intent = L.intents[data.topic];
@@ -155,10 +209,14 @@
           if (lastMsg && Date.now() - lastMsg.at < (pa.quietSeconds || 45) * 1000) return;
           state.asked.push(data.topic); save();
           reply([intent.browse.question], { proactive: true });
+          gasPost('browse', { topic: intent.label.replace(/^[^\p{L}]+/u, ''), question: fillTpl(intent.browse.question, state.lead) });
         }
       },
     };
     setTimeout(function () { fire('history', { messages: state.messages, lead: state.lead, agentsOnline: false }); }, 0);
+    // Khách quay lại trong ngày: tiếp tục nhận trả lời từ Telegram
+    var lastVisitor = state.messages.filter(function (m) { return m.from === 'visitor'; }).pop();
+    if (GAS && (lastVisitor && Date.now() - lastVisitor.at < 24 * 3600 * 1000 || state.lead.phone)) startPolling();
     return api;
   }
 
