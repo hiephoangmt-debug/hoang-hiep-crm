@@ -450,7 +450,7 @@ HTML
 <tr><td>Thiết kế</td><td>VTN Architects / ENCITY</td></tr>
 <tr><td>Vị trí</td><td>Xã Cẩm Thanh, Hội An (Quảng Nam cũ), nay thuộc Đà Nẵng</td></tr>
 <tr><td>Quy mô</td><td>31,1 ha; mật độ xây dựng khoảng 38%, khoảng 8 ha cây xanh, mặt nước</td></tr>
-<tr><td>Sản phẩm</td><td>Theo công bố ban đầu: 297 biệt thự, 74 shophouse, 3 tòa khách sạn; một số nguồn cập nhật 363 sản phẩm thấp tầng</td></tr>
+<tr><td>Sản phẩm</td><td>363 sản phẩm thấp tầng: 173 biệt thự đơn lập, 116 biệt thự song lập, 74 shophouse; cùng khu khách sạn</td></tr>
 <tr><td>Sở hữu</td><td>Lâu dài với người Việt Nam</td></tr>
 <tr><td>Ra mắt</td><td>Tháng 6/2025</td></tr>
 </tbody>
@@ -524,7 +524,7 @@ HTML
 			'faq'       => array(
 				array( 'Casamia Balanca Hội An ở đâu?', 'Tại xã Cẩm Thanh, Hội An, trong vùng rừng dừa Bảy Mẫu, tiếp giáp trục Võ Chí Công.' ),
 				array( 'Chủ đầu tư Casamia Balanca là ai?', 'Tập đoàn Đạt Phương, cũng là chủ đầu tư Casamia Hội An và Casamia Calm.' ),
-				array( 'Casamia Balanca có bao nhiêu căn?', 'Công bố ban đầu gồm 297 biệt thự, 74 shophouse và 3 khách sạn; một số nguồn cập nhật 363 sản phẩm thấp tầng.' ),
+				array( 'Casamia Balanca có bao nhiêu căn?', 'Dự án có tổng 363 sản phẩm thấp tầng: 173 biệt thự đơn lập, 116 biệt thự song lập và 74 shophouse.' ),
 				array( 'Khi nào Casamia Balanca bàn giao?', 'Theo ĐHĐCĐ 2026 của Đạt Phương, kế hoạch bàn giao khoảng 100 căn trong tháng 11 – 12/2026.' ),
 			),
 		),

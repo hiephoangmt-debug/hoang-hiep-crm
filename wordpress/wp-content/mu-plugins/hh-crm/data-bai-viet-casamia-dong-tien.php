@@ -139,7 +139,7 @@ HTML
 <h2>Điểm mạnh và điểm yếu của Casamia Balanca</h2>
 <h3>Điểm mạnh</h3>
 <ul>
-<li>Quy mô 31,1 ha với 297 biệt thự, 74 shophouse, 3 tòa khách sạn, có dòng sông trong nội khu và bến du thuyền.</li>
+<li>Quy mô 31,1 ha với 363 sản phẩm thấp tầng (173 biệt thự đơn lập, 116 song lập, 74 shophouse), có dòng sông trong nội khu và bến du thuyền.</li>
 <li>Nằm trong Khu dự trữ sinh quyển thế giới Cù Lao Chàm – Hội An, tiếp giáp trục Võ Chí Công nối Đà Nẵng – Hội An – Chu Lai.</li>
 <li>Sở hữu lâu dài cho người Việt; chủ đầu tư Đạt Phương đã bàn giao Casamia Hội An và Casamia Calm.</li>
 <li>Mức giá vào cửa thấp hơn nhiều so với biệt thự mặt biển Ngũ Hành Sơn.</li>

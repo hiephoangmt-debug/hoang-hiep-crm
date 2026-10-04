@@ -390,10 +390,10 @@ HTML
 <tr><td>F2</td><td>Tháp Mai</td><td>Mùa Xuân</td></tr>
 <tr><td>F3</td><td>Tháp Trúc</td><td>Mùa Hạ</td></tr>
 <tr><td>F1</td><td>Tháp Tùng</td><td>Mùa Đông</td></tr>
-<tr><td>F5 (một số nguồn ghi F4)</td><td>Tháp Cúc</td><td>Mùa Thu</td></tr>
+<tr><td>F5</td><td>Tháp Cúc</td><td>Mùa Thu</td></tr>
 </tbody>
 </table>
-<p>Mã tòa và thứ tự mở bán được tổng hợp từ báo chí và trang phân phối; một số nguồn ghi chưa thống nhất nên anh chị nên đối chiếu với tài liệu bán hàng chính thức. Theo báo chí, Tháp Mùa Xuân F2 là tòa thứ ba được giới thiệu trong bộ sưu tập.</p>
+<p>Dự án không dùng số 4 khi đặt mã tòa, vì vậy tòa thứ tư là F5 (Tháp Cúc): bốn tòa gồm F1 Tùng, F2 Mai, F3 Trúc và F5 Cúc. Theo báo chí, Tháp Mùa Xuân F2 là tòa thứ ba được giới thiệu trong bộ sưu tập.</p>
 
 <h2>Vị trí và kết nối</h2>
 <p>FourS Tower nằm ở trung tâm Sun Riverpolis, khu vực được bao quanh bởi sông nước ở phía Nam Đà Nẵng. Từ dự án có thể kết nối cầu Hòa Xuân, cầu Đồng Nò 2 và các trục giao thông chính đến biển Sơn Thủy, Ngũ Hành Sơn, Hội An.</p>
@@ -707,7 +707,7 @@ HTML
 <thead><tr><th>Tháp</th><th>Mùa</th><th>Thời điểm giới thiệu (theo nguồn công khai)</th></tr></thead>
 <tbody>
 <tr><td>F1 – Tháp Tùng</td><td>Đông</td><td>Đợt đầu (từ 3/2026)</td></tr>
-<tr><td>F5 – Tháp Cúc (một số nguồn ghi F4)</td><td>Thu</td><td>Đợt đầu (từ 3/2026)</td></tr>
+<tr><td>F5 – Tháp Cúc</td><td>Thu</td><td>Đợt đầu (từ 3/2026)</td></tr>
 <tr><td>F2 – Tháp Mai</td><td>Xuân</td><td>Sự kiện 26/9/2026, tòa thứ ba</td></tr>
 <tr><td>F3 – Tháp Trúc</td><td>Hạ</td><td>Chưa có thông tin mở bán công khai</td></tr>
 </tbody>

@@ -421,11 +421,13 @@ function hh_project_dataset() {
 		/* ---------------- Thấp tầng – Biệt thự nghỉ dưỡng ---------------- */
 		array(
 			'slug'    => 'casamia-balanca-hoi-an',
+			'fix_meta'    => array( 'hh_p_units' => '297 biệt thự, 74 shophouse, 3 tòa khách sạn' ),
+			'fix_excerpt' => 'Khu đô thị sinh thái 31,1 ha của Đạt Phương tại Cẩm Thanh, Hội An: 297 biệt thự, 74 shophouse, 3 khách sạn, ra mắt tháng 6/2025.',
 			'title'   => 'Casamia Balanca Hội An',
 			'type'    => array( 'to-hop', 'biet-thu' ),
 			'area'    => 'hoi-an',
 			'hot'     => true,
-			'excerpt' => 'Khu đô thị sinh thái 31,1 ha của Đạt Phương tại Cẩm Thanh, Hội An: 297 biệt thự, 74 shophouse, 3 khách sạn, ra mắt tháng 6/2025.',
+			'excerpt' => 'Khu đô thị sinh thái 31,1 ha của Đạt Phương tại Cẩm Thanh, Hội An: 363 sản phẩm thấp tầng gồm 173 biệt thự đơn lập, 116 song lập, 74 shophouse, ra mắt tháng 6/2025.',
 			'meta'    => array(
 				'hh_p_status'     => 'dang-mo-ban',
 				'hh_p_developer'  => 'Tập đoàn Đạt Phương',
@@ -433,7 +435,7 @@ function hh_project_dataset() {
 				'hh_p_type'       => 'Biệt thự sinh thái, shophouse',
 				'hh_p_address'    => 'Xã Cẩm Thanh, Hội An (Quảng Nam cũ), Đà Nẵng',
 				'hh_p_scale'      => '31,1 ha',
-				'hh_p_units'      => '297 biệt thự, 74 shophouse, 3 tòa khách sạn',
+				'hh_p_units'      => '363 sản phẩm thấp tầng: 173 biệt thự đơn lập, 116 biệt thự song lập, 74 shophouse',
 				'hh_p_legal'      => 'Sổ đỏ',
 				'hh_p_ownership'  => 'Sở hữu lâu dài',
 				'hh_p_start'      => 'Ra mắt tháng 6/2025',
@@ -684,6 +686,11 @@ function hh_import_projects() {
 				}
 			}
 			update_post_meta( $id, '_hh_types_cleaned', '1' );
+		}
+
+		// Sửa mô tả ngắn cũ đã nhập sai (chỉ khi bạn chưa tự sửa).
+		if ( ! empty( $p['fix_excerpt'] ) && $p['fix_excerpt'] === get_post_field( 'post_excerpt', $id ) ) {
+			wp_update_post( array( 'ID' => $id, 'post_excerpt' => $p['excerpt'] ) );
 		}
 
 		// Bài giới thiệu chi tiết: chỉ điền khi dự án chưa có nội dung.

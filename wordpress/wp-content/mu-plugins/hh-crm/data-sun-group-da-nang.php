@@ -129,6 +129,7 @@ function hh_dataset_sun_group_da_nang( $projects ) {
 	);
 	$projects[] = array(
 		'slug'    => 'fours-tower',
+		'fix_meta' => array( 'hh_p_blocks' => '4 tòa (Mai, Trúc, Cúc, Tùng)' ),
 		'title'   => 'FourS Tower (Tháp Bốn Mùa) Đà Nẵng',
 		'type'    => 'can-ho-so-huu-lau-dai',
 		'area'    => 'ngu-hanh-son',
@@ -140,7 +141,8 @@ function hh_dataset_sun_group_da_nang( $projects ) {
 			'hh_p_developer'   => $sun,
 			'hh_p_type'        => 'Căn hộ Studio – 3 phòng ngủ',
 			'hh_p_address'     => 'Ngã tư Nguyễn Phước Lan – Minh Mạng, phường Hòa Quý (cũ), Ngũ Hành Sơn, Đà Nẵng',
-			'hh_p_blocks'      => '4 tòa (Mai, Trúc, Cúc, Tùng)',
+			'hh_p_blocks'      => '4 tòa: F1 Tùng, F2 Mai, F3 Trúc, F5 Cúc (không dùng số 4)',
+			'hh_p_zones'       => "F1 – Tháp Tùng (Mùa Đông) | Căn hộ Studio – 3PN | 20 tầng | Đang mở bán (đợt đầu từ 3/2026)\nF5 – Tháp Cúc (Mùa Thu) | Căn hộ Studio – 3PN | 20 tầng | Đang mở bán (đợt đầu từ 3/2026)\nF2 – Tháp Mai (Mùa Xuân) | Căn hộ Studio – 3PN | 20 tầng | Ra mắt 26/9/2026\nF3 – Tháp Trúc (Mùa Hạ) | Căn hộ | 20 tầng | Chưa công bố mở bán",
 			'hh_p_floors'      => '20 tầng nổi, 2 tầng hầm',
 			'hh_p_units'       => 'Khoảng 2.291 căn hộ',
 			'hh_p_ownership'   => 'Sở hữu lâu dài',
