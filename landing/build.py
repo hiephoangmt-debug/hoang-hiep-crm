@@ -30,7 +30,7 @@ PAGES = [
         "desc": "Giỏ hàng Vinhomes Hải Vân Bay cập nhật hằng ngày: quỹ căn độc quyền, căn giá tốt từng phân khu, tra cứu mã căn, chính sách bán hàng mới nhất, phân tích chi phí từng phương án thanh toán và công cụ tính giá. Liên hệ 0909 882 555.",
         "badge": "Giỏ hàng cập nhật hằng ngày",
         "h1": "Giỏ hàng Vinhomes Hải Vân Bay<span>Quỹ căn độc quyền · Căn giá tốt từng phân khu</span>",
-        "sub": "Tra cứu mã căn, xem nhanh thông số và nhận <b>giá tốt nhất</b> trực tiếp. Quỹ căn chéo còn nhiều căn chưa đưa lên web – để lại số điện thoại để nhận đầy đủ.",
+        "sub": "Tra cứu mã căn, xem nhanh thông số và nhận <b>giá tốt nhất</b> trực tiếp. Gõ mã căn bất kỳ để tra cứu toàn bộ rổ hàng, nhắn Zalo nhận giá & tình trạng căn.",
         "sections": ["RIBBON", "CART", "CTABAND", "POLICIES", "PHANTICH", "CALCULATOR", "NEWS", "GALLERY", "FAQ", "CONTACT"],
     "faq": [
             ("Nên thanh toán sớm hay vay 70% khi mua Vinhomes Hải Vân Bay?", "Theo phiếu giá căn mẫu T10/2026, thanh toán sớm rẻ hơn tiến độ chuẩn khoảng 3,4%, vay 70% đắt hơn khoảng 2,7%. Có vốn nhàn rỗi thì thanh toán sớm (chiết khấu tương đương 11%/năm); muốn giữ vốn thì vay 70%."),

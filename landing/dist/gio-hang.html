@@ -476,7 +476,7 @@ footer p{margin-bottom:6px}
       <nav class="crumb" aria-label="breadcrumb"><a href="/">Trang chủ</a> › <span>Giỏ hàng</span></nav>
       <span class="badge"><i></i> Giỏ hàng cập nhật hằng ngày</span>
       <h1>Giỏ hàng Vinhomes Hải Vân Bay<span>Quỹ căn độc quyền · Căn giá tốt từng phân khu</span></h1>
-      <p class="sub">Tra cứu mã căn, xem nhanh thông số và nhận <b>giá tốt nhất</b> trực tiếp. Quỹ căn chéo còn nhiều căn chưa đưa lên web – để lại số điện thoại để nhận đầy đủ.</p>
+      <p class="sub">Tra cứu mã căn, xem nhanh thông số và nhận <b>giá tốt nhất</b> trực tiếp. Gõ mã căn bất kỳ để tra cứu toàn bộ rổ hàng, nhắn Zalo nhận giá & tình trạng căn.</p>
       <div class="hero-stats">
         <div><b>512ha</b><small>Quy mô</small></div>
         <div><b>44.000</b><small>Tỷ đồng đầu tư</small></div>
@@ -538,7 +538,7 @@ footer p{margin-bottom:6px}
     <div class="cart-tabs" role="tablist" aria-label="Giỏ hàng">
       <button class="tab active" data-cart="dq" role="tab">★ Quỹ căn độc quyền · 5 căn giá tốt</button>
       <button class="tab" data-cart="zone" role="tab">Giá tốt từng phân khu</button>
-      <button class="tab" data-cart="ch" role="tab">Quỹ căn chéo</button>
+      <button class="tab" data-cart="ch" role="tab">Quỹ căn khác</button>
     </div>
 
     <div class="cart-tools">
@@ -560,7 +560,7 @@ footer p{margin-bottom:6px}
       <a href="#lien-he" class="btn btn-gold" data-need="Toàn bộ bảng hàng liên kết">Nhận toàn bộ bảng hàng liên kết</a>
       <a href="tel:0909882555" class="btn btn-outline">☎ Gọi 0909 882 555</a>
     </div>
-    <p class="cart-note">Quỹ căn chéo chỉ hiển thị một phần – nhập mã căn để tra cứu, hoặc liên hệ để nhận danh sách đầy đủ.</p>
+    <p class="cart-note">Nhập bất kỳ mã căn nào để tra cứu – toàn bộ rổ hàng đều có, nhắn Zalo để nhận giá & tình trạng căn.</p>
   </div>
 </section>
 
@@ -1041,7 +1041,7 @@ footer p{margin-bottom:6px}
       <small>Quà tặng khách đăng ký</small>
       <h3 id="pop-title">Nhận trọn bộ “Giỏ hàng độc quyền” Hải Vân Bay</h3>
       <ul>
-        <li><b>①</b><span>Quỹ căn độc quyền & quỹ căn chéo – giá tốt nhất tuần</span></li>
+        <li><b>①</b><span>Quỹ căn độc quyền & quỹ căn khác – giá tốt nhất tuần</span></li>
         <li><b>②</b><span>Phiếu tính giá cá nhân: TTS, vay 70%, giãn 24/36T</span></li>
         <li><b>③</b><span>Bộ tài liệu CĐT: TMB, layout, brochure, chính sách PDF</span></li>
         <li><b>④</b><span>Ưu tiên giữ căn & tham quan dự án miễn phí</span></li>
@@ -1063,10 +1063,11 @@ footer p{margin-bottom:6px}
     <h3 id="sh-title">Chia sẻ căn <span id="sh-code"></span></h3>
     <p style="font-size:13.5px;color:var(--muted)">Gửi link căn cho người thân, đối tác cùng xem.</p>
     <div class="link"><input id="sh-url" readonly aria-label="Link căn"><button class="btn btn-primary" id="sh-copy" type="button" style="padding:10px 16px">Sao chép</button></div>
+    <button type="button" id="sh-zalo" class="btn" style="width:100%;background:#0068FF;color:#fff;margin-bottom:10px">Gửi qua Zalo</button>
     <div class="opts">
-      <button type="button" id="sh-zalo"><span style="background:#0068FF">Z</span>Zalo</button>
       <a id="sh-fb" target="_blank" rel="noopener"><span style="background:#1877F2">f</span>Facebook</a>
       <a id="sh-mail"><span style="background:var(--navy-700)">✉</span>Email</a>
+      <a href="https://zalo.me/0909882555" target="_blank" rel="noopener"><span style="background:#0068FF">☎</span>Hỏi tư vấn</a>
     </div>
     <button type="button" class="btn btn-outline" data-close style="width:100%;margin-top:14px">Đóng</button>
   </div>
@@ -1153,7 +1154,7 @@ footer p{margin-bottom:6px}
 
   /* ===== GIỎ HÀNG =====
      Dán dữ liệu từ Google Sheet vào UNITS.
-     pool: "dq" = quỹ căn độc quyền, "ch" = quỹ căn chéo
+     pool: "dq" = quỹ căn độc quyền, "ch" = quỹ căn khác
      top:  true  = nằm trong "5 căn giá tốt" (tab độc quyền)
      best: true  = hiện ở tab "Giá tốt từng phân khu"
      show: false = KHÔNG hiện trong danh sách, chỉ ra khi khách tìm đúng mã căn */
@@ -1169,9 +1170,9 @@ footer p{margin-bottom:6px}
   ];
   var SITE = "https://www.giohanghaivanbay.com";
   function shareUnit(code){
-    var u = UNITS.filter(function(x){ return x.code === code; })[0] || {code:code, zone:"", type:""};
+    var u = UNITS.filter(function(x){ return x.code === code; })[0] || virtualUnit(code);
     var url = SITE + "/gio-hang?can=" + encodeURIComponent(code);
-    var text = "Căn " + code + " – " + u.type + " " + (u.land ? u.land + "m² đất" : "") + ", phân khu " + u.zone + " · Vinhomes Hải Vân Bay. Giá tốt – liên hệ 0909 882 555";
+    var text = "Căn " + code + (u.land ? " – " + u.type + " " + u.land + "m² đất" : "") + (u.zone ? ", phân khu " + u.zone : "") + " · Vinhomes Hải Vân Bay. Giá tốt – Zalo 0909 882 555";
     if (navigator.share){ navigator.share({title:"Căn " + code + " – Giỏ hàng Hải Vân Bay", text:text, url:url}).catch(function(){}); return; }
     var sh = document.getElementById("sheet");
     document.getElementById("sh-code").textContent = code;
@@ -1181,15 +1182,39 @@ footer p{margin-bottom:6px}
     sh.dataset.text = text + "\n" + url;
     sh.classList.add("show");
   }
-  function copyText(t){
-    if (navigator.clipboard) navigator.clipboard.writeText(t).then(function(){ toast("Đã sao chép link căn"); }, function(){ toast("Hãy sao chép link thủ công"); });
-    else { var i = document.getElementById("sh-url"); i.select(); try { document.execCommand("copy"); toast("Đã sao chép link căn"); } catch(e){} }
+  function copyText(t, msg){
+    msg = msg || "Đã sao chép link căn";
+    if (navigator.clipboard) navigator.clipboard.writeText(t).then(function(){ toast(msg); }, function(){ toast(msg); });
+    else { var ta = document.createElement("textarea"); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); } catch(e){} ta.remove(); toast(msg); }
+  }
+  // Contact via Zalo: copy a ready-made message, then open the consultant's Zalo chat.
+  var ZALO = "https://zalo.me/0909882555";
+  function zaloUnit(code, zone){
+    var msg = "Chào anh/chị, tôi quan tâm căn " + code + (zone ? " (phân khu " + zone + ")" : "") +
+              " – Vinhomes Hải Vân Bay. Gửi giúp tôi giá, chính sách và tình trạng căn. " + SITE + "/gio-hang?can=" + encodeURIComponent(code);
+    copyText(msg, "Đã sao chép tin nhắn – dán vào Zalo để gửi");
+    window.open(ZALO, "_blank", "noopener");
+  }
+  // Searched codes that are not listed on the page still show as available.
+  function guessZone(code){
+    var c = norm(code);
+    if (/^vm/.test(c)) return "Vịnh Mây";
+    if (/^(vu|dlhv|bv)/.test(c)) return "Bạch Vân";
+    if (/^(sv|lv|dn)/.test(c)) return "Đảo Ngọc";
+    if (/^tv/.test(c)) return "Tinh Vân";
+    return "";
+  }
+  var ZIMG = {"Vịnh Mây":"street-vinh-may","Bạch Vân":"house-bach-van","Đảo Ngọc":"house-dao-ngoc","Tinh Vân":"street-vinh-may","":"street-vinh-may"};
+  function virtualUnit(raw){
+    var code = raw.toUpperCase().replace(/\s+/g, "");
+    var z = guessZone(code);
+    return {code:code, img:ZIMG[z], zone:z, type:"Đang cập nhật", land:0, build:0, hand:"Liên hệ", pool:"ch", tag:"Có trong giỏ hàng", virtual:true};
   }
   var sheet = document.getElementById("sheet");
   if (sheet){
     sheet.addEventListener("click", function(e){ if (e.target === sheet || e.target.dataset.close !== undefined) sheet.classList.remove("show"); });
     document.getElementById("sh-copy").addEventListener("click", function(){ copyText(document.getElementById("sh-url").value); });
-    document.getElementById("sh-zalo").addEventListener("click", function(){ copyText(sheet.dataset.text); window.open("https://chat.zalo.me/", "_blank", "noopener"); });
+    document.getElementById("sh-zalo").addEventListener("click", function(){ copyText(sheet.dataset.text, "Đã sao chép – dán vào Zalo để gửi"); window.open("https://chat.zalo.me/", "_blank", "noopener"); });
   }
   // Gallery lightbox
   var lb = document.getElementById("lightbox");
@@ -1220,15 +1245,15 @@ footer p{margin-bottom:6px}
     return '<article class="unit ' + (ZCLASS[u.zone]||"vm") + '">' +
       '<div class="thumb" style="background-image:url(\'img/' + esc(u.img||"aerial-bay") + '.webp\')"><span class="hot">' + esc(u.tag||"Giá tốt") + '</span></div>' +
       '<div class="top">' +
-      '<div class="code">' + esc(u.code) + '<span class="pool ' + u.pool + '">' + (u.pool==="dq"?"Độc quyền":"Quỹ chéo") + '</span></div>' +
-      '<div class="zn">Phân khu ' + esc(u.zone) + '</div></div>' +
+      '<div class="code">' + esc(u.code) + '<span class="pool ' + u.pool + '">' + (u.virtual?"Rổ hàng":(u.pool==="dq"?"Độc quyền":"Quỹ khác")) + '</span></div>' +
+      '<div class="zn">' + (u.zone ? "Phân khu " + esc(u.zone) : "Vinhomes Hải Vân Bay") + '</div></div>' +
       '<table><tr><td>Loại căn</td><td>' + esc(u.type) + '</td></tr>' +
-      '<tr><td>Diện tích đất</td><td>' + num(u.land) + ' m²</td></tr>' +
-      '<tr><td>Diện tích xây dựng</td><td>' + num(u.build) + ' m²</td></tr>' +
+      '<tr><td>Diện tích đất</td><td>' + (u.land ? num(u.land) + ' m²' : "Liên hệ") + '</td></tr>' +
+      '<tr><td>Diện tích xây dựng</td><td>' + (u.build ? num(u.build) + ' m²' : "Liên hệ") + '</td></tr>' +
       '<tr><td>Bàn giao</td><td>' + esc(u.hand) + '</td></tr></table>' +
       '<div class="price"><div><small>Giá</small><b>Liên hệ</b></div>' +
       '<div class="acts"><button type="button" class="btn btn-share" data-share="' + esc(u.code) + '" aria-label="Chia sẻ căn ' + esc(u.code) + '">↗ Chia sẻ</button>' +
-      '<a href="#lien-he" class="btn btn-primary" data-need="Check căn ' + esc(u.code) + ' (' + esc(u.zone) + ')">Liên hệ</a></div></div></article>';
+      '<button type="button" class="btn btn-primary" style="background:#0068FF" data-zalo="' + esc(u.code) + '" data-zone="' + esc(u.zone) + '" aria-label="Liên hệ Zalo căn ' + esc(u.code) + '">Zalo</button></div></div></article>';
   }
 
   function renderCart(){
@@ -1238,8 +1263,10 @@ footer p{margin-bottom:6px}
     document.getElementById("zchips").hidden = cartMode !== "zone" || !!q;
     var list;
     if (q){
-      // Search covers every unit, including hidden cross-listed ones.
+      // Search covers every unit, including ones hidden from the lists.
       list = UNITS.filter(function(u){ return norm(u.code + u.zone + u.type + u.hand).indexOf(q) > -1; });
+      // A code-like query with no match still shows as an available unit to check via Zalo.
+      if (!list.length && /\d/.test(q)) list = [virtualUnit(document.getElementById("q").value.trim())];
     } else if (cartMode === "dq"){
       list = UNITS.filter(function(u){ return u.pool === "dq" && u.top && u.show; });
     } else if (cartMode === "zone"){
@@ -1247,24 +1274,25 @@ footer p{margin-bottom:6px}
     } else {
       list = UNITS.filter(function(u){ return u.pool === "ch" && u.show; });
     }
-    if (fz) list = list.filter(function(u){ return u.zone === fz; });
-    if (ft) list = list.filter(function(u){ return u.type === ft; });
+    if (fz) list = list.filter(function(u){ return u.virtual || u.zone === fz; });
+    if (ft) list = list.filter(function(u){ return u.virtual || u.type === ft; });
 
     var raw = document.getElementById("q").value.trim();
     if (!list.length){
       var label = raw ? "căn “" + esc(raw) + "”" : "phân khu này";
-      grid.innerHTML = '<div class="empty"><h3>' + (raw ? "Căn " + esc(raw) + " chưa hiển thị công khai" : "Quỹ căn đang cập nhật") + '</h3>' +
-        '<p>Còn nhiều căn trong bảng hàng liên kết & quỹ căn chéo chưa đưa lên web. Liên hệ để check ' + label + ' – tình trạng, giá và phiếu tính chi tiết.</p>' +
-        '<a href="#lien-he" class="btn btn-primary" data-need="Check ' + label.replace(/“|”/g,"") + '">Liên hệ check căn</a> ' +
+      grid.innerHTML = '<div class="empty"><h3>' + (raw ? "Có căn phù hợp “" + esc(raw) + "” trong rổ hàng" : "Quỹ căn đang cập nhật") + '</h3>' +
+        '<p>Rổ hàng cập nhật hằng ngày. Nhắn Zalo để nhận danh sách căn ' + (raw ? "theo “" + esc(raw) + "”" : "phân khu này") + ' kèm giá, chính sách và phiếu tính chi tiết.</p>' +
+        '<button type="button" class="btn btn-primary" style="background:#0068FF" data-zalo="' + esc(raw || "theo phân khu") + '" data-zone="' + esc(cartZone) + '">Nhắn Zalo nhận danh sách</button> ' +
         '<a href="tel:0909882555" class="btn btn-outline" style="margin-top:8px">☎ 0909 882 555</a></div>';
-      count.innerHTML = raw ? "Không tìm thấy trong danh sách hiển thị" : "";
+      count.innerHTML = "";
     } else {
       grid.innerHTML = list.map(function(u){ return card(u); }).join("");
       count.innerHTML = (q ? "Kết quả tìm kiếm: " : "Đang hiển thị: ") + "<b>" + list.length + " căn</b>" +
-        (cartMode === "ch" && !q ? " · quỹ căn chéo còn nhiều căn chưa hiển thị" : "");
+        (cartMode === "ch" && !q ? " · nhập mã căn để tra cứu toàn bộ rổ hàng" : "");
     }
     bindNeed(grid);
     grid.querySelectorAll("[data-share]").forEach(function(b){ b.addEventListener("click", function(){ shareUnit(b.dataset.share); }); });
+    grid.querySelectorAll("[data-zalo]").forEach(function(b){ b.addEventListener("click", function(){ zaloUnit(b.dataset.zalo, b.dataset.zone); }); });
   }
 
   document.querySelectorAll("[data-cart]").forEach(function(t){
