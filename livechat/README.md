@@ -5,6 +5,7 @@ Chat thời gian thực giữa khách xem website dự án và tư vấn viên. 
 - **Widget nhúng** (`public/widget.js`): nút chat nổi, nút Zalo và gọi hotline, câu hỏi nhanh, form để lại họ tên/SĐT khi không có tư vấn viên trực tuyến. Giao diện mobile toàn màn hình.
 - **Trang tư vấn viên** (`/agent.html`): danh sách hội thoại theo thời gian thực, số tin chưa đọc, âm báo và thông báo trình duyệt, trạng thái (Mới / Đã liên hệ / Đã đóng), ghi chú khách hàng, nút gọi/Zalo, xuất lead ra CSV.
 - **Tự nhận số điện thoại** trong tin nhắn của khách và lưu vào thông tin lead.
+- **Thông báo Telegram**: báo khách mới / có SĐT, trả lời khách ngay trong Telegram.
 - **Webhook lead** (tuỳ chọn): đẩy lead mới sang Google Sheet / LadiPage / n8n...
 
 ## Kịch bản phản hồi 4 bước
@@ -36,6 +37,35 @@ AGENT_PASSWORD=matkhau-cua-ban HOTLINE=09xxxxxxxx ZALO=09xxxxxxxx npm start
 - Trang demo: http://localhost:3000/
 - Trang tư vấn viên: http://localhost:3000/agent.html
 
+## Thông báo & trả lời qua Telegram
+
+Khi có khách nhắn, điện thoại báo ngay qua Telegram, kể cả khi bạn không mở trang tư vấn viên:
+
+- 🔔 **Khách mới vào chat**: kèm câu hỏi đầu tiên và trang khách đang xem.
+- 💬 **Tin nhắn mới**: cùng một khách nhắn liên tục thì gộp, tối đa 1 thông báo/phút.
+- 🔥 **Có số điện thoại khách**: kèm số để bấm gọi lại.
+
+**Trả lời khách ngay trong Telegram:** bấm giữ tin thông báo → **Reply** → gõ câu trả lời. Khách nhận được ngay trên khung chat website. Gõ `/zalo` (dạng Reply) để gửi lời mời Zalo kèm nút bấm. Khi bạn trả lời, các tin tự động còn đang chờ gửi sẽ bị huỷ để không nói chen.
+
+### Cài đặt (khoảng 5 phút)
+
+1. **Tạo bot:** mở Telegram, tìm **@BotFather** (có dấu tích xanh) → bấm **Start** → gõ `/newbot`.
+   - Đặt tên hiển thị, ví dụ `Casamia Balanca Chat`.
+   - Đặt username kết thúc bằng `bot`, ví dụ `casamia_hiep_bot`.
+   - BotFather gửi lại **token** dạng `123456789:AAH...`. Giữ bí mật token này.
+2. **Chạy server với token:**
+   ```bash
+   TELEGRAM_BOT_TOKEN=123456789:AAH... PUBLIC_URL=https://ten-mien-chat AGENT_PASSWORD=... npm start
+   ```
+3. **Lấy chat ID:** mở bot vừa tạo, bấm **Start** và gửi tin bất kỳ. Bot trả lời *"Chat ID của bạn là: 5xxxxxxx"*.
+4. **Khởi động lại server với chat ID:**
+   ```bash
+   TELEGRAM_BOT_TOKEN=... TELEGRAM_CHAT_ID=5xxxxxxx PUBLIC_URL=https://ten-mien-chat AGENT_PASSWORD=... npm start
+   ```
+   Gửi `/start` cho bot, thấy *"✅ Đã kết nối"* là xong.
+
+**Cả nhóm sale cùng nhận:** tạo nhóm Telegram, thêm bot vào nhóm. Vào @BotFather → `/mybots` → chọn bot → **Bot Settings → Group Privacy → Turn off** (để bot đọc được tin Reply trong nhóm). Gửi một tin trong nhóm để lấy chat ID của nhóm (số âm, ví dụ `-100123...`). Nhiều người nhận riêng thì ghi các ID cách nhau dấu phẩy: `TELEGRAM_CHAT_ID=5111,5222`.
+
 ## Nhúng vào website / LadiPage
 
 Dán vào trước `</body>` (hoặc phần HTML/Javascript của LadiPage):
@@ -56,6 +86,9 @@ Sửa `config.js` (lời chào, kịch bản 4 bước, mẫu câu, màu sắc) 
 | `AGENT_PASSWORD` | Mật khẩu trang tư vấn viên – **bắt buộc đổi** |
 | `HOTLINE`, `ZALO` | Số hotline và Zalo hiển thị trên widget |
 | `LEAD_WEBHOOK_URL` | URL nhận lead (JSON POST) khi khách để lại SĐT |
+| `TELEGRAM_BOT_TOKEN` | Token bot Telegram (từ @BotFather) |
+| `TELEGRAM_CHAT_ID` | Chat ID nhận thông báo, cách nhau dấu phẩy |
+| `PUBLIC_URL` | Địa chỉ server chat, dùng cho link "Mở hội thoại" |
 | `ALLOWED_ORIGINS` | Domain được phép nhúng, cách nhau dấu phẩy |
 
 Dữ liệu hội thoại lưu ở `data/conversations.json`. Khi triển khai (VPS, Render, Railway...) cần chạy HTTPS và giữ lại thư mục `data/`.

@@ -5,6 +5,7 @@ const express = require('express');
 const { Server } = require('socket.io');
 const config = require('./config');
 const store = require('./store');
+const telegram = require('./telegram');
 
 const app = express();
 const server = http.createServer(app);
@@ -89,7 +90,10 @@ function setLead(conv, fields) {
   store.update(conv.id, { lead });
   io.to('agents').emit('conversation:update', store.summary(conv));
   io.to(`conv:${conv.id}`).emit('lead:saved', lead);
-  if (!hadPhone && lead.phone) pushLead(conv);
+  if (!hadPhone && lead.phone) {
+    pushLead(conv);
+    telegram.notifyLead(conv);
+  }
 }
 
 function sendMessage(conv, msg) {
@@ -113,15 +117,23 @@ function fill(tpl, conv) {
   return out.charAt(0).toUpperCase() + out.slice(1);
 }
 
-// Gửi lần lượt từng câu như người thật đang gõ.
+// Gửi lần lượt từng câu như người thật đang gõ. Chuỗi mới (hoặc tư vấn viên trả lời) huỷ chuỗi cũ còn dở.
+const pendingAuto = new Map(); // conversationId -> timers
+function cancelAuto(id) {
+  (pendingAuto.get(id) || []).forEach(clearTimeout);
+  pendingAuto.delete(id);
+}
 function systemReply(conv, texts, extra = {}) {
+  cancelAuto(conv.id);
+  const timers = [];
   [].concat(texts).forEach((text, i, all) => {
     const last = i === all.length - 1;
-    setTimeout(() => {
+    timers.push(setTimeout(() => {
       io.to(`conv:${conv.id}`).emit('typing');
-      setTimeout(() => sendMessage(conv, { from: 'agent', text: fill(text, conv), auto: true, ...(last ? extra : {}) }), 900);
-    }, i * 1600 + 300);
+      timers.push(setTimeout(() => sendMessage(conv, { from: 'agent', text: fill(text, conv), auto: true, ...(last ? extra : {}) }), 900));
+    }, i * 1600 + 300));
   });
+  pendingAuto.set(conv.id, timers);
 }
 
 const zaloStep = () => [config.zaloTransfer, { action: 'zalo' }];
@@ -166,13 +178,7 @@ io.on('connection', socket => {
       ack?.(conv);
     });
 
-    socket.on('message', ({ conversationId, text, action } = {}) => {
-      const conv = store.get(conversationId);
-      text = clean(text) || (action === 'zalo' ? fill(config.zaloTransfer, conv) : '');
-      if (!conv || !text) return;
-      store.update(conv.id, { unread: 0, status: conv.status === 'new' ? 'contacted' : conv.status });
-      sendMessage(conv, { from: 'agent', text, ...(action === 'zalo' ? { action } : {}) });
-    });
+    socket.on('message', ({ conversationId, text, action } = {}) => agentReply(conversationId, text, action));
 
     socket.on('typing', conversationId => io.to(`conv:${conversationId}`).emit('typing'));
 
@@ -212,6 +218,7 @@ io.on('connection', socket => {
     sendMessage(conv, { from: 'visitor', text });
 
     const agentsOn = onlineAgents() > 0;
+    telegram.notifyMessage(conv, text, { isNew, agentsOnline: agentsOn });
     const phone = text.match(PHONE_RE)?.[0].replace(/[\s.-]/g, '');
     if (phone && !conv.lead.phone) {
       setLead(conv, { phone });
@@ -224,13 +231,13 @@ io.on('connection', socket => {
     const intent = findIntent(text, !agentsOn);
     if (intent) {
       replyIntent(conv, intent);
-      if (!conv.lead.phone) setTimeout(() => socket.emit('lead:request'), 5200);
+      setTimeout(() => !store.get(visitorId)?.lead.phone && socket.emit('lead:request'), 5200);
       return;
     }
     if (!agentsOn && !conv.lead.phone && !conv.offlineNotified) {
       store.update(conv.id, { offlineNotified: true });
       systemReply(conv, config.fallback);
-      setTimeout(() => socket.emit('lead:request'), 5200);
+      setTimeout(() => !store.get(visitorId)?.lead.phone && socket.emit('lead:request'), 5200);
     }
   });
 
@@ -250,9 +257,21 @@ io.on('connection', socket => {
   socket.on('typing', () => io.to('agents').emit('typing', visitorId));
 });
 
+// Tư vấn viên trả lời từ Telegram.
+function agentReply(conversationId, text, action) {
+  const conv = store.get(conversationId);
+  text = clean(text) || (action === 'zalo' ? fill(config.zaloTransfer, conv) : '');
+  if (!conv || !text) return false;
+  cancelAuto(conv.id);
+  store.update(conv.id, { unread: 0, status: conv.status === 'new' ? 'contacted' : conv.status });
+  sendMessage(conv, { from: 'agent', text, ...(action === 'zalo' ? { action } : {}) });
+  return true;
+}
+
 server.listen(config.port, () => {
   console.log(`Live chat ${config.project.name} chạy tại http://localhost:${config.port}`);
   console.log(`  • Trang demo:        http://localhost:${config.port}/`);
   console.log(`  • Trang tư vấn viên: http://localhost:${config.port}/agent.html`);
+  telegram.start(agentReply);
   if (config.agentPassword === 'doimatkhau') console.warn('  ⚠ Đang dùng mật khẩu mặc định – hãy đặt AGENT_PASSWORD.');
 });

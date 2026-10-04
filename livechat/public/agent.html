@@ -137,7 +137,12 @@ function start() {
     if (current) openConv(current);
   });
   socket.on('disconnect', () => ($('#online').textContent = '🔴 Mất kết nối...'));
-  socket.on('conversations', list => { convs = {}; list.forEach(c => (convs[c.id] = c)); renderList(); });
+  socket.on('conversations', list => {
+    convs = {}; list.forEach(c => (convs[c.id] = c)); renderList();
+    // Mở thẳng hội thoại từ link trong thông báo Telegram (agent.html#<id>).
+    const h = decodeURIComponent(location.hash.slice(1));
+    if (h && convs[h] && !current) { history.replaceState(null, '', location.pathname); openConv(h); }
+  });
   socket.on('conversation:new', c => { convs[c.id] = c; renderList(); notify('Khách mới vào chat', 'Có khách vừa bắt đầu hội thoại'); });
   socket.on('conversation:update', c => {
     convs[c.id] = c;
