@@ -176,6 +176,14 @@ label.f input,label.f select,label.f textarea{padding:9px 10px;border:1px solid 
 <div class="toast" id="toast"></div>
 
 <script>
+// Hiện lỗi lên màn hình (để chụp gửi hỗ trợ)
+window.addEventListener('error', function (e) {
+  var d = document.getElementById('fatal') || document.body.appendChild(Object.assign(document.createElement('div'), { id: 'fatal' }));
+  d.style.cssText = 'margin:16px;padding:12px;border-radius:10px;background:#fbe8e5;color:#c0392b;font:13px/1.4 monospace;white-space:pre-wrap';
+  d.textContent += 'Lỗi: ' + (e.message || e) + (e.lineno ? ' (dòng ' + e.lineno + ':' + e.colno + ')' : '') + '\n';
+});
+</script>
+<script>
 /* ============ Tiện ích ============ */
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -480,7 +488,7 @@ function render() {
   $('#mLabel').textContent = monthLabel(UI.m);
   $$('#tabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === UI.tab));
   const v = $('#view');
-  v.innerHTML = ({ overview, ledger, history, stats, plan, budget, report, settings })[UI.tab]();
+  v.innerHTML = ({ overview, ledger, history: historyTab, stats: statsTab, plan, budget, report, settings })[UI.tab]();
   bindView(v);
 }
 
@@ -520,7 +528,7 @@ function overview() {
 
   const emptyBanner = T.t.length ? '' : `<div class="alert warn" style="margin-top:16px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap">
     <span>${monthLabel(m)} chưa có dữ liệu. Nhập nhanh bằng ảnh chụp bảng thu chi hoặc file Excel.</span>
-    <button class="btn primary" data-import>📷 Nhập ${monthLabel(m).toLowerCase()}</button></div>`;
+    <button class="btn primary" data-import>&#x1F4F7; Nhập ${monthLabel(m).toLowerCase()}</button></div>`;
   return `${emptyBanner}
   <div class="grid kpis">
     <div class="card kpi"><div class="lbl">Tổng thu</div><div class="val pos">${fmt(T.thu)}</div><div class="sub">${delta(T.thu, prev.thu)}</div></div>
@@ -632,7 +640,7 @@ function ledger() {
         <td class="hide-sm small">${esc(cat(x.cat).name)}</td>
         <td class="num pos">${x.type === 'thu' ? fmt(x.amount) : ''}</td>
         <td class="num neg">${x.type === 'chi' ? fmt(x.amount) : ''}</td>
-        <td class="num"><button class="iconbtn" data-edit="${x.id}" aria-label="Sửa">✎</button></td></tr>`).join('') || `<tr><td colspan="6" class="empty">${monthLabel(UI.m)} chưa có giao dịch.<br><br><button class="btn primary" data-import>📷 Nhập ${monthLabel(UI.m).toLowerCase()} từ ảnh chụp / Excel</button><br><br><span class="small">hoặc bấm “+ Thu”, “+ Chi” để thêm từng khoản</span></td></tr>`}
+        <td class="num"><button class="iconbtn" data-edit="${x.id}" aria-label="Sửa">✎</button></td></tr>`).join('') || `<tr><td colspan="6" class="empty">${monthLabel(UI.m)} chưa có giao dịch.<br><br><button class="btn primary" data-import>&#x1F4F7; Nhập ${monthLabel(UI.m).toLowerCase()} từ ảnh chụp / Excel</button><br><br><span class="small">hoặc bấm “+ Thu”, “+ Chi” để thêm từng khoản</span></td></tr>`}
       </tbody>
       <tfoot><tr class="total"><td></td><td>Cộng (${rows.length} khoản)</td><td class="hide-sm"></td><td class="num pos">${fmt(thu)}</td><td class="num neg">${fmt(chi)}</td><td class="num ${thu - chi < 0 ? 'neg' : 'pos'}">${fmtS(thu - chi)}</td></tr></tfoot>
     </table>
@@ -753,7 +761,7 @@ function download(name, text, type) {
 }
 
 /* ============ Tab: Thống kê theo tháng / năm ============ */
-function stats() {
+function statsTab() {
   const Y = UI.m.slice(0, 4);
   const months = Array.from({ length: 12 }, (_, i) => `${Y}-${pad(i + 1)}`);
   const rows = months.map(m => {
@@ -847,7 +855,7 @@ function historyRows() {
   if (h.q) { const q = norm(h.q); rows = rows.filter(x => norm(x.desc + ' ' + (x.note || '') + ' ' + cat(x.cat).name).includes(q)); }
   return rows.sort((a, b) => b.date.localeCompare(a.date) || (b.u || 0) - (a.u || 0));
 }
-function history() {
+function historyTab() {
   const h = UI.h, rows = historyRows();
   const thu = sum(rows.filter(x => x.type === 'thu')), chi = sum(rows.filter(x => x.type === 'chi'));
   const shown = rows.slice(0, h.limit);
@@ -924,7 +932,7 @@ function loadXLSX() {
     document.head.appendChild(s);
   });
 }
-const norm = s => String(s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/\s+/g, ' ').trim();
+const norm = s => String(s ?? '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/\s+/g, ' ').trim();
 const CAT_RULES = [
   ['dong_nha', /dong ?tien ?(fpt|can ?ho|nha)|\bdot ?\d|fpt ?dot/], ['lai_vay', /lai (can ho|vay|nha)/], ['bao_hiem', /bhxh|bhyt|bao hiem/],
   ['con', /\bmon\b|hoc phi|\bhoc\b|sua\b|bim|ta\b/], ['di_lai', /xang|bai xe|gui xe|grab|taxi|ve xe|ve may bay|sua xe|rua xe/],
@@ -1011,8 +1019,8 @@ function importDialog() {
   openDialog('Nhập dữ liệu (Excel hoặc ảnh chụp)', `
     <div class="alert ok" style="margin:0">Cách 1: Mở file Excel → bôi đen các dòng (gồm cột <b>Ngày, Diễn giải, Thu, Chi</b>) → <b>Ctrl+C</b> → dán vào ô dưới.<br>Cách 2: Chọn file Excel (.xlsx, .xls, .csv).<br>Cách 3: <b>Chụp ảnh</b> bảng thu chi (màn hình Excel, sổ ghi tay, giấy tờ) – app tự đọc chữ.</div>
     <div class="actions" style="justify-content:flex-start">
-      <label class="btn primary">📷 Chụp ảnh<input type="file" id="impCam" accept="image/*" capture="environment" hidden></label>
-      <label class="btn">🖼 Chọn ảnh có sẵn<input type="file" id="impImg" accept="image/*" hidden></label>
+      <label class="btn primary">&#x1F4F7; Chụp ảnh<input type="file" id="impCam" accept="image/*" capture="environment" hidden></label>
+      <label class="btn">&#x1F5BC; Chọn ảnh có sẵn<input type="file" id="impImg" accept="image/*" hidden></label>
       <span class="small muted" id="ocrStatus"></span>
     </div>
     <label class="f">Dán dữ liệu từ Excel<textarea id="impText" rows="5" placeholder="05/08/2026	Lương ck + hoa hồng	54,000,000&#10;	Chợ + gas		3,000,000"></textarea></label>
