@@ -6,10 +6,15 @@ CRM – Real Estate Sales Management System
 Ứng dụng quản lý thu chi trong tháng (1 file HTML, không cần cài đặt) – mở `thu-chi/index.html` bằng trình duyệt:
 
 - **Tổng quan**: tổng thu / chi / tồn, ngân sách còn lại, dự kiến tồn cuối tháng, chi theo danh mục, cảnh báo vượt ngân sách, khoản sắp đến hạn, xu hướng 6 tháng.
-- **Sổ thu chi**: các khoản đã thu/chi, lọc theo loại, nhóm (cố định/phát sinh), danh mục, tìm kiếm.
+- **Sổ thu chi**: các khoản đã thu/chi trong tháng, lọc theo loại, nhóm (cố định/phát sinh), danh mục, tìm kiếm.
+- **Lịch sử**: toàn bộ giao dịch mọi tháng (lọc theo khoảng ngày, danh mục, tìm kiếm) + nhật ký thêm/sửa/xóa trên mọi máy.
+- **Thống kê**: 12 tháng trong năm – thu, chi, cố định, phát sinh, tồn, tồn lũy kế, % tiết kiệm, chi theo danh mục từng tháng.
+- **Excel**: nhập bằng cách dán từ Excel hoặc chọn file .xlsx/.csv (tự nhận mẫu "THU CHI THÁNG"); xuất Excel theo tháng / năm / bộ lọc.
 - **Kế hoạch sắp tới**: khoản cố định hằng tháng + kế hoạch riêng, bấm "Đã chi/Đã thu" để ghi sổ, khoản quá hạn, dự báo tháng sau.
 - **Ngân sách**: đặt ngân sách theo danh mục (mặc định hoặc riêng từng tháng), theo dõi % đã dùng.
 - **Báo cáo tháng**: giống mẫu Excel (Chi phí cố định / phát sinh / Tổng cộng), xuất CSV, in PDF.
 - **Cài đặt**: danh mục, khoản cố định, sao lưu/khôi phục dữ liệu (.json).
+
+File Excel mẫu dùng độc lập (có công thức thống kê): `thu-chi/Thu-Chi-Me-Van-2026.xlsx`.
 
 Dữ liệu lưu trên trình duyệt và **đồng bộ nhiều máy qua Google Sheets** – xem [`thu-chi/HUONG-DAN-DONG-BO.md`](thu-chi/HUONG-DAN-DONG-BO.md). Đã nạp sẵn dữ liệu tháng 8/2026.
