@@ -160,9 +160,9 @@ function hh_chat_find_phone( $text ) {
 function hh_chat_transcript( $msgs ) {
 	$lines = array();
 	foreach ( $msgs as $m ) {
-		$lines[] = ( 'user' === $m['role'] ? 'Khách: ' : 'Trợ lý: ' ) . $m['text'];
+		$lines[] = ( 'user' === $m['role'] ? '👤 KHÁCH: ' : '💬 Tư vấn: ' ) . $m['text'];
 	}
-	return implode( "\n", $lines );
+	return implode( "\n\n", $lines );
 }
 
 function hh_chat_save_lead( $phone, $msgs, $page ) {
@@ -171,7 +171,7 @@ function hh_chat_save_lead( $phone, $msgs, $page ) {
 			'post_type'    => 'khach-hang',
 			'post_status'  => 'private',
 			'post_title'   => 'Khách chat web – ' . $phone,
-			'post_content' => "Nội dung chat trên web:\n" . hh_chat_transcript( $msgs ),
+			'post_content' => "Nội dung chat trên web:\n\n" . hh_chat_transcript( $msgs ),
 		)
 	);
 	if ( ! $lead_id || is_wp_error( $lead_id ) ) {
@@ -183,13 +183,13 @@ function hh_chat_save_lead( $phone, $msgs, $page ) {
 	if ( $page ) {
 		update_post_meta( $lead_id, 'hh_property_id', $page );
 	}
-	$body = "Khách để lại số qua CHAT trên website:\n\nĐiện thoại / Zalo: {$phone}\n";
+	$body = "📞 Điện thoại / Zalo: {$phone}\n";
 	if ( $page ) {
-		$body .= 'Đang xem: ' . get_the_title( $page ) . ' – ' . get_permalink( $page ) . "\n";
+		$body .= '🏢 Đang xem: ' . get_the_title( $page ) . "\n" . get_permalink( $page ) . "\n";
 	}
-	$body .= "\nNội dung chat:\n" . hh_chat_transcript( $msgs ) . "\n\nXem trong quản trị: " . admin_url( 'post.php?post=' . $lead_id . '&action=edit' );
+	$body .= "\n━━━━━━ NỘI DUNG CHAT ━━━━━━\n\n" . hh_chat_transcript( $msgs ) . "\n\n━━━━━━━━━━━━━━━━━━━━\nXem trong quản trị: " . admin_url( 'post.php?post=' . $lead_id . '&action=edit' );
 	if ( function_exists( 'hh_lead_mail' ) ) {
-		hh_lead_mail( '[Chat web] Khách mới: ' . $phone, $body );
+		hh_lead_mail( 'KHÁCH MỚI qua chat web – ' . $phone, $body );
 	}
 	return (int) $lead_id;
 }
@@ -197,9 +197,9 @@ function hh_chat_save_lead( $phone, $msgs, $page ) {
 function hh_chat_append_transcript( $lead_id, $user_msgs, $reply ) {
 	$add = '';
 	foreach ( $user_msgs as $m ) {
-		$add .= "\nKhách: " . $m['text'];
+		$add .= "\n\n👤 KHÁCH: " . $m['text'];
 	}
-	$add .= "\nTrợ lý: " . $reply;
+	$add .= "\n\n💬 Tư vấn: " . $reply;
 	$post = get_post( $lead_id );
 	if ( $post && mb_strlen( $post->post_content ) < 20000 ) {
 		wp_update_post( array( 'ID' => $lead_id, 'post_content' => $post->post_content . $add ) );
