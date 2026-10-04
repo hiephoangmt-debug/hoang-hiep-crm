@@ -252,7 +252,12 @@ while ( have_posts() ) :
 			</section>
 
 			<section class="block" id="tien-ich">
-				<h2 class="block__title">Tiện ích</h2>
+				<h2 class="block__title">Tiện ích <?php echo esc_html( $title ); ?></h2>
+				<?php $amenities = hh_lines( 'hh_p_amenities_in' ); ?>
+				<?php if ( $amenities ) : ?>
+					<p class="amenity-lead"><?php echo esc_html( implode( ' · ', array_slice( array_map( static fn( $a ) => preg_replace( '/\s*\(.*\)$/u', '', $a ), $amenities ), 0, 6 ) ) ); ?></p>
+				<?php endif; ?>
+				<?php get_template_part( 'template-parts/project-amenities', null, array( 'ids' => hh_ids( 'hh_p_amenities_img' ), 'names' => $amenities ) ); ?>
 				<div class="two-col">
 					<div>
 						<h3 class="block__sub">Nội khu</h3>
@@ -271,7 +276,6 @@ while ( have_posts() ) :
 						<?php endif; ?>
 					</div>
 				</div>
-				<?php hh_gallery( hh_ids( 'hh_p_amenities_img' ), 'tien-ich' ); ?>
 				<?php hh_cta_box( $ctas['tien-ich'] ); ?>
 			</section>
 

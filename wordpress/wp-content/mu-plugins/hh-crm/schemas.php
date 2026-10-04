@@ -72,7 +72,7 @@ function hh_project_schema() {
 			'fields' => array(
 				'hh_p_amenities_in'  => array( 'type' => 'lines', 'label' => 'Tiện ích nội khu', 'placeholder' => "Hồ bơi tràn bờ 50m\nPhòng gym, yoga\nVườn BBQ\nKhu vui chơi trẻ em\nAn ninh 24/7, thẻ từ thang máy" ),
 				'hh_p_amenities_out' => array( 'type' => 'lines', 'label' => 'Tiện ích ngoại khu', 'placeholder' => "Trường quốc tế – 500m\nBệnh viện Vinmec Đà Nẵng – 2km\nChợ Hàn – 1,5km" ),
-				'hh_p_amenities_img' => array( 'type' => 'gallery', 'label' => 'Ảnh tiện ích' ),
+				'hh_p_amenities_img' => array( 'type' => 'gallery', 'label' => 'Ảnh tiện ích', 'help' => 'Ảnh đầu tiên hiện lớn, các ảnh sau xếp 2 cột. Tên trên ảnh = Chú thích (hoặc Tiêu đề) của ảnh, VD: "Clubhouse & bể bơi tiêu chuẩn Olympic". Không đặt thì lấy theo thứ tự danh sách tiện ích nội khu.' ),
 			),
 		),
 		'mat-bang'  => array(
