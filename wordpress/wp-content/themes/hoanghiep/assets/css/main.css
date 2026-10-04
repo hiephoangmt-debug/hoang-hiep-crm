@@ -1000,6 +1000,19 @@ html.nav-locked, html.nav-locked body { overflow: hidden; }
 .calc-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 12px; margin-bottom: 22px; padding: 18px; border-radius: var(--radius-lg); background: var(--navy); scroll-margin-top: calc(var(--header-h) + 16px); }
 .calc-form label { display: grid; gap: 6px; font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); }
 .calc-form select { width: 100%; padding: 12px; border: 0; border-radius: var(--radius); font: inherit; font-size: .98rem; text-transform: none; letter-spacing: 0; color: var(--ink); background: var(--white); }
+.calc-form input[type=text] { width: 100%; padding: 12px; border: 0; border-radius: var(--radius); font: inherit; font-size: .98rem; color: var(--ink); background: var(--white); }
+.calc-form__wide { grid-column: span 2; }
+.calc-form__opts { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 0; padding: 10px 0 0; border: 0; border-top: 1px solid rgba(255,255,255,.15); }
+.calc-form__opts legend { float: left; width: 100%; margin-bottom: 4px; font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); }
+.calc-form .calc-form__check { display: flex; align-items: center; gap: 8px; font-size: .95rem; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--white); }
+.calc-form__check input { width: 18px; height: 18px; accent-color: var(--gold); }
+.calc-form__submit { display: flex; align-items: flex-end; }
+.calc-form__submit .btn { width: 100%; justify-content: center; }
+.calc-result__note { margin: 12px 0 0; padding: 10px 14px; border-radius: var(--radius); background: var(--gold-soft); font-size: .92rem; color: var(--navy); }
+.calc-sched td:nth-child(2):not(:last-child) { font-size: .88rem; color: var(--muted); }
+.calc-sched__milestone td { background: var(--tint) !important; font-size: .82rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--navy); text-align: left !important; }
+.calc-sched__bank { display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 99px; background: var(--navy); color: var(--white); font-size: .72rem; font-weight: 600; white-space: nowrap; }
+@media (max-width: 640px) { .calc-form__wide { grid-column: auto; } .calc-sched__milestone td { display: block; } .calc-sched__milestone td::before { content: none !important; } }
 .calc-result { margin-bottom: 32px; padding: 22px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--white); box-shadow: var(--shadow-lg); }
 .calc-result__head { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: flex-end; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
 .calc-result__eyebrow { margin: 0; font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-2); }
@@ -1041,7 +1054,7 @@ html.nav-locked, html.nav-locked body { overflow: hidden; }
 .units-link strong::after { content: " →"; }
 .units-link span { font-size: .9rem; color: #c4d0e0; }
 .units-link:hover { color: var(--white); transform: translateY(-1px); }
-.units-list .link-arrow { white-space: normal; display: inline; }
+.units-page .link-arrow { white-space: normal; display: inline; }
 
 /* Ô tìm kiếm duy nhất trên trang Mua bán / Cho thuê */
 .quick-search { display: flex; align-items: center; gap: 8px; max-width: 760px; margin-top: 18px; padding: 6px 6px 6px 16px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); box-shadow: var(--shadow); }
@@ -1050,3 +1063,4 @@ html.nav-locked, html.nav-locked body { overflow: hidden; }
 .quick-search .btn { border-radius: 999px; padding-inline: 22px; }
 .quick-search__state { margin: 10px 0 0; font-size: .9rem; color: var(--muted); }
 .listing-page .layout__main { max-width: none; }
+.calc-table td[data-label="Số tiền"] { white-space: nowrap; }

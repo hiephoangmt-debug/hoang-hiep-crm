@@ -334,7 +334,7 @@ while ( have_posts() ) :
 					<?php hh_pending( 'Thông tin các loại sản phẩm đang được cập nhật.', 'Nhận rổ hàng' ); ?>
 				<?php endif; ?>
 				<?php if ( $units_data ) : ?>
-					<p><a class="btn btn--navy" href="<?php echo esc_url( hh_units_url( $id ) ); ?>">Xem bảng giá &amp; tính giá từng căn (<?php echo (int) count( $units_data['units'] ); ?> căn)</a></p>
+					<p><a class="btn btn--navy" href="<?php echo esc_url( hh_units_url( $id ) ); ?>">Xem bảng giá &amp; tính giá từng căn (<?php echo esc_html( hh_units_summary( $units_data ) ); ?>)</a></p>
 				<?php endif; ?>
 				<?php hh_cta_box( $ctas['san-pham'] ); ?>
 			</section>
@@ -356,8 +356,8 @@ while ( have_posts() ) :
 					<?php get_template_part( 'template-parts/project-offer' ); ?>
 					<?php if ( $units_data ) : ?>
 						<a class="units-link" href="<?php echo esc_url( hh_units_url( $id ) ); ?>">
-							<strong>Bảng tính căn chi tiết – <?php echo (int) count( $units_data['units'] ); ?> căn</strong>
-							<span>Chọn căn → giá sau chiết khấu, lịch thanh toán, khoản vay. Cập nhật <?php echo esc_html( wp_date( 'd/m/Y', (int) $units_data['at'] ) ); ?></span>
+							<strong>Bảng tính căn chi tiết – <?php echo esc_html( hh_units_summary( $units_data ) ); ?></strong>
+							<span><?php echo $units_data['units'] ? 'Chọn căn' : 'Nhập giá căn'; ?> → giá sau chiết khấu, lịch thanh toán, khoản vay. Cập nhật <?php echo esc_html( wp_date( 'd/m/Y', (int) $units_data['at'] ) ); ?></span>
 						</a>
 					<?php endif; ?>
 					<h3 class="block__sub">Bảng giá</h3>

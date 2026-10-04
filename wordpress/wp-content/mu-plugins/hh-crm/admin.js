@@ -23,8 +23,8 @@
 		const multiple = wrap.data( 'multiple' ) === 1 || wrap.data( 'multiple' ) === '1';
 		const isFile = wrap.data( 'type' ) === 'file';
 		const frame = wp.media( {
-			title: isFile ? 'Chọn file bảng hàng (.xlsx, .csv)' : ( multiple ? 'Chọn ảnh (giữ Ctrl/Shift để chọn nhiều)' : 'Chọn ảnh' ),
-			button: { text: isFile ? 'Dùng file này' : 'Dùng ảnh này' },
+			title: isFile ? 'Chọn file Excel của chủ đầu tư (.xlsx, .xls, .csv)' + ( multiple ? ' – giữ Ctrl/Shift để chọn nhiều' : '' ) : ( multiple ? 'Chọn ảnh (giữ Ctrl/Shift để chọn nhiều)' : 'Chọn ảnh' ),
+			button: { text: isFile ? 'Dùng file đã chọn' : 'Dùng ảnh này' },
 			library: isFile ? {} : { type: 'image' },
 			multiple: multiple ? 'add' : false,
 		} );

@@ -3,7 +3,7 @@
  * Generic field engine: renders tabbed meta boxes from a schema, saves and reads values.
  *
  * Schema shape: [ group_id => [ 'title' => …, 'fields' => [ meta_key => field ] ] ]
- * Field keys: type (text|number|url|textarea|lines|table|select|checkbox|image|gallery|post),
+ * Field keys: type (text|number|url|textarea|lines|table|select|checkbox|image|gallery|file|files|post),
  *             label, placeholder, help, options (select), columns (table), post_type (post), half (bool).
  */
 
@@ -121,12 +121,15 @@ function hh_render_field( $post_id, $key, $f ) {
 			break;
 
 		case 'file':
-			$fid = absint( $value );
-			printf( '<div class="hh-media hh-media--file" data-multiple="0" data-type="file"><input type="hidden" id="%1$s" name="%1$s" value="%2$s"><ul class="hh-media__list">', esc_attr( $key ), $fid ? (int) $fid : '' );
-			if ( $fid && get_post( $fid ) ) {
-				printf( '<li data-id="%d"><span class="dashicons dashicons-media-spreadsheet"></span> %s</li>', (int) $fid, esc_html( wp_basename( (string) get_attached_file( $fid ) ) ) );
+		case 'files':
+			$fids = array_filter( array_map( 'absint', explode( ',', (string) $value ) ) );
+			printf( '<div class="hh-media hh-media--file" data-multiple="%3$s" data-type="file"><input type="hidden" id="%1$s" name="%1$s" value="%2$s"><ul class="hh-media__list">', esc_attr( $key ), esc_attr( implode( ',', $fids ) ), 'files' === $type ? '1' : '0' );
+			foreach ( $fids as $fid ) {
+				if ( get_post( $fid ) ) {
+					printf( '<li data-id="%d" title="Bấm để bỏ file này"><span class="dashicons dashicons-media-spreadsheet"></span> %s</li>', (int) $fid, esc_html( wp_basename( (string) get_attached_file( $fid ) ) ) );
+				}
 			}
-			echo '</ul><button type="button" class="button hh-media__add">Chọn / tải file</button> <button type="button" class="button-link hh-media__clear">Xoá</button></div>';
+			printf( '</ul><button type="button" class="button hh-media__add">%s</button> <button type="button" class="button-link hh-media__clear">Xoá</button></div>', 'files' === $type ? 'Chọn / tải file (chọn được nhiều)' : 'Chọn / tải file' );
 			break;
 
 		case 'image':
@@ -186,6 +189,7 @@ function hh_save_schema( $post_id, $schema ) {
 					$value = absint( $raw ) ?: '';
 					break;
 				case 'gallery':
+				case 'files':
 					$value = implode( ',', array_filter( array_map( 'absint', explode( ',', (string) $raw ) ) ) );
 					break;
 				default:

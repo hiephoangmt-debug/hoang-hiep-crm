@@ -116,7 +116,7 @@ function hh_seo_description() {
 	}
 	if ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) {
 		$d = hh_units_data( get_the_ID() );
-		return 'Bảng giá ' . get_the_title() . ( $d ? ' ' . count( $d['units'] ) . ' căn' : '' ) . ': chọn căn để xem giá, chiết khấu, lịch thanh toán, khoản vay chi tiết. Nhận báo giá chính thức: ' . hoanghiep_opt( 'hh_phone' ) . '.';
+		return 'Bảng giá ' . get_the_title() . ( $d ? ' (' . hh_units_summary( $d ) . ')' : '' ) . ': chọn căn hoặc nhập giá để xem giá, chiết khấu, lịch thanh toán, khoản vay chi tiết. Nhận báo giá chính thức: ' . hoanghiep_opt( 'hh_phone' ) . '.';
 	}
 	if ( is_front_page() ) {
 		return hh_seo_home_description();
@@ -262,7 +262,7 @@ function hh_seo_head() {
 /** Trang lọc / sắp xếp / tìm kiếm hoặc danh sách rỗng: cho Google đi qua nhưng không lập chỉ mục. */
 function hh_seo_noindex_request() {
 	if ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) {
-		return isset( $_GET['can'] ) || isset( $_GET['tt'] ) || isset( $_GET['bg'] ) || ! hh_units_data( get_the_ID() ); // phpcs:ignore WordPress.Security.NonceVerification
+		return isset( $_GET['can'] ) || isset( $_GET['tt'] ) || isset( $_GET['bg'] ) || isset( $_GET['gia'] ) || isset( $_GET['loai'] ) || isset( $_GET['ckf'] ) || ! hh_units_data( get_the_ID() ); // phpcs:ignore WordPress.Security.NonceVerification
 	}
 	foreach ( array( 'tk', 'gia', 'dt', 'pn', 'huong', 'sx', 'tt', 'duan', 'lien-he', 'khu-vuc', 'loai-bds' ) as $var ) {
 		if ( isset( $_GET[ $var ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
