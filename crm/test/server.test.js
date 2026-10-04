@@ -868,6 +868,22 @@ test('before the closing date: transactions are kept as history only (not in cô
   assert.strictEqual(call('refunds', {}).summary.tong_phai_hoan, 54950000);
 });
 
+test('paste notes: transfer written as a sum "Hoàn 45 + 245 = 290" with hidden characters from the phone', () => {
+  const { call, fake } = fresh();
+  fake.setToday('2026-10-04');
+  const text = ['14/9: Hoàn 9.840', 'Rút VP Khách A 10.000/1.9 hoàn 1.6', 'Hoàn 45 + 245 ‎ = 290', '15/9:', 'Ứng 10 + 20', 'Hoàn 1.5tr + 500k còn 3.000'].join('\n');
+  const pays = call('pasteNotes', { text }).items.filter((i) => i.kind === 'pay');
+  assert.strictEqual(JSON.stringify(pays.map((p) => p.so_tien)), JSON.stringify([290000000, 30000000, 2000000]));
+  assert.strictEqual(pays[1].loai, 'Ứng trước');
+  assert.strictEqual(pays[2].con, 3000000);
+  // bản cũ từng lưu "Hoàn 45 + 245 = 290" thành 45tr → dán lại sửa thành 290tr, không thêm khoản mới
+  call('savePayment', { ngay: '2026-09-14', loai: 'Hoàn tiền', so_tien: 45000000, ghi_chu: 'Dán sổ: Hoàn 45 + 245 ‎ = 290' });
+  const sv = call('pasteNotes', { text, save: true });
+  assert.strictEqual(sv.saved.sua, 1);
+  const r = call('refunds', {});
+  assert.strictEqual(r.summary.tong_da_chuyen, 290000000 + 30000000 + 2000000);
+});
+
 test('pasting earlier months: history before closing, December notes pasted in January, saving in rounds', () => {
   const { call, fake } = fresh();
   fake.setToday('2027-01-05');

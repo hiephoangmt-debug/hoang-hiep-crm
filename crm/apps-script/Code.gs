@@ -63,7 +63,7 @@ var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan', 'tu_ngay', 'b_tt_ngay', 'a_ck_ng
 // Kiểu tiền với C.Trâm. "Ứng trước"/"Hoàn tiền" làm giảm nợ; "Mình trả lại"/"Nợ cũ" làm tăng nợ;
 // "Điều chỉnh số dư" nhập được số âm (âm = tăng nợ).
 // Đổi mỗi lần cập nhật code – hiện cạnh ngày trên đầu app để biết đã triển khai bản mới chưa.
-var APP_VERSION = 'v04.10g';
+var APP_VERSION = 'v04.10h';
 
 var PAYMENT_TYPES = ['Ứng trước', 'Hoàn tiền', 'Mình trả lại', 'Nợ cũ', 'Điều chỉnh số dư'];
 
@@ -687,13 +687,25 @@ function noteThousand_(s) { // "274.806" → 274.806.000; "1.406k" → 1.406.000
 
 function parseNoteLine_(line, ngay) {
   var inner = line.replace(/^\((.*)\)$/, '$1').trim();
+  function payAmt(raw, unit) {
+    raw = raw.replace(/[.,]+$/, ''); unit = (unit || '').toLowerCase();
+    if (unit === 'tỷ' || unit === 'ty') return Math.round(parseNum_(raw.replace(',', '.')) * 1e9);
+    if (unit === 'tr' || unit === 'triệu') return Math.round(parseNum_(raw.replace(',', '.')) * 1e6);
+    if (unit === 'k') return noteMoney_(raw) * 1000;
+    return /[.,]/.test(raw) ? noteMoney_(raw) * 1000 : noteMoney_(raw) * 1e6; // "Hoàn 400" = 400tr
+  }
+  // "Hoàn 45 + 245 = 290" → C.Trâm chuyển 290tr (lấy số sau dấu =, không có thì cộng các khoản)
+  var sumM = inner.match(/^(hoàn|ứng|chuyển|ck)\s+((?:[\d.,]+\s*(?:tỷ|ty|tr|triệu|k)?\s*\+\s*)+[\d.,]+\s*(?:tỷ|ty|tr|triệu|k)?)\s*(?:=\s*([\d.,]+)\s*(tỷ|ty|tr|triệu|k)?)?\.?\s*(.*)$/i);
+  if (sumM && !/\//.test(inner)) {
+    var parts = sumM[2].split('+').map(function (x) { var q = x.trim().match(/^([\d.,]+)\s*(tỷ|ty|tr|triệu|k)?$/i); return q ? payAmt(q[1], q[2]) : 0; });
+    var total = sumM[3] ? payAmt(sumM[3], sumM[4]) : parts.reduce(function (a, b) { return a + b; }, 0);
+    var con = (sumM[5] || '').match(/còn(?:\s+hoàn)?\s+([\d.,]+)/i);
+    return { kind: 'pay', ngay: ngay, loai: /^ứng/i.test(sumM[1]) ? 'Ứng trước' : 'Hoàn tiền', so_tien: total,
+      con: con ? noteThousand_(con[1]) : null, ghi_chu: 'Dán sổ: ' + line };
+  }
   var pm = inner.match(/^(hoàn|ứng|chuyển|ck)\s+([\d.,]+)\s*(tỷ|ty|tr|triệu|k)?\b\.?\s*(?:,?\s*còn(?:\s+hoàn)?\s+([\d.,]+)\s*(?:k|tr)?)?/i);
   if (pm && !/\//.test(inner)) {
-    var raw = pm[2].replace(/[.,]+$/, ''), unit = (pm[3] || '').toLowerCase(), amt;
-    if (unit === 'tỷ' || unit === 'ty') amt = Math.round(parseNum_(raw.replace(',', '.')) * 1e9);
-    else if (unit === 'tr' || unit === 'triệu') amt = Math.round(parseNum_(raw.replace(',', '.')) * 1e6);
-    else if (unit === 'k') amt = noteMoney_(raw) * 1000;
-    else amt = /[.,]/.test(raw) ? noteMoney_(raw) * 1000 : noteMoney_(raw) * 1e6; // "Hoàn 400" = 400tr
+    var amt = payAmt(pm[2], pm[3]);
     return { kind: 'pay', ngay: ngay, loai: /^ứng/i.test(pm[1]) ? 'Ứng trước' : 'Hoàn tiền', so_tien: amt,
       con: pm[4] ? noteThousand_(pm[4]) : null, ghi_chu: 'Dán sổ: ' + line };
   }
@@ -751,7 +763,7 @@ function apiPasteNotes_(p) {
   var allTx = readAll_('GiaoDich'), allPay = readAll_('DoiSoat'), allBill = readAll_('HoaDon');
   function day(d) { if (!days[d]) { days[d] = { ngay: d, hoan_so: null, lai_so: null, hoan: 0, lai: 0, so_gd: 0, tra: 0, con_so: null }; order.push(d); } return days[d]; }
   lines.forEach(function (raw, i) {
-    var line = raw.replace(/\s+/g, ' ').trim();
+    var line = raw.replace(/[\u200B-\u200F\u202A-\u202E\u2060\uFEFF]/g, '').replace(/\s+/g, ' ').trim(); // bỏ ký tự ẩn khi copy từ điện thoại
     if (!line) return;
     var h = line.match(/^(\d{1,2}[\/.-]\d{1,2}(?:[\/.-]\d{2,4})?)\s*:\s*(.*)$/);
     if (h) {
@@ -786,6 +798,12 @@ function apiPasteNotes_(p) {
     } else if (it.kind === 'pay') {
       d2.tra += it.so_tien; if (it.con != null) d2.con_so = it.con;
       it.da_co = allPay.some(function (x) { return x.ngay === cur && x.loai === it.loai && Number(x.so_tien) === it.so_tien; });
+      // Dán lại dòng trước đây đọc sai số tiền (VD "Hoàn 45 + 245 = 290" từng lưu thành 45tr) → sửa lại số tiền
+      if (!it.da_co) {
+        var clean = function (v) { return String(v || '').replace(/[\u200B-\u200F\u202A-\u202E\u2060\uFEFF]/g, '').replace(/\s+/g, ' ').trim(); };
+        var oldPay = allPay.filter(function (x) { return x.ngay === cur && x.loai === it.loai && clean(x.ghi_chu) === clean(it.ghi_chu); })[0];
+        if (oldPay) { it.sua_pay = oldPay; it.so_cu = Number(oldPay.so_tien); }
+      }
       if (it.truoc_chot && !it.da_co) it.ghi_chu_chot = 'Trước ngày chốt sổ ' + fmtDmy_(chot) + ' – đã gồm trong số chốt, không lưu';
     } else {
       d2.lai += it.lai || 0;
@@ -801,6 +819,13 @@ function apiPasteNotes_(p) {
     saved.con_lai = 0;
     items.forEach(function (it) {
       if (['tx', 'pay', 'bill'].indexOf(it.kind) < 0) return;
+      if (it.sua_pay) {
+        try {
+          apiSavePayment_({ id: it.sua_pay.id, ngay: it.ngay, loai: it.loai, so_tien: it.so_tien, ghi_chu: it.ghi_chu });
+          it.da_luu = true; saved.sua = (saved.sua || 0) + 1;
+        } catch (e) { it.loi = e.message || String(e); }
+        return;
+      }
       if (it.sua_ngoai) {
         try {
           apiSaveTransaction_(Object.assign({}, it.sua_ngoai, { vao_so: false }));

@@ -853,7 +853,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       S.boot = b;
       $('#login').classList.add('hidden');
       $('#app').classList.remove('hidden');
-      var UI_VERSION = 'v04.10g';
+      var UI_VERSION = 'v04.10h';
       $('#today-label').textContent = dmy(b.today) + ' · ' + UI_VERSION + (b.version === UI_VERSION ? '' : ' ⚠ Mã.gs chưa cập nhật');
       fillSelect($('[name=dich_vu]'), b.services);
       fillSelect($('#tx-service'), b.services, true);
@@ -1139,7 +1139,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     call('pasteNotes', { text: text, year: yr && yr !== S.boot.today.slice(0, 4) ? yr : '', save: save }).then(function (r) {
       btn.disabled = false;
       renderNotes(r);
-      var todo = r.items.filter(function (i) { return /tx|pay|bill/.test(i.kind) && (!i.da_co || i.sua_ngoai) && !i.da_luu; }).length;
+      var todo = r.items.filter(function (i) { return /tx|pay|bill/.test(i.kind) && (!i.da_co || i.sua_ngoai || i.sua_pay) && !i.da_luu; }).length;
       $('[data-act=notes-save]').disabled = save ? !r.saved.con_lai : !todo;
       if (save) {
         var sv = r.saved;
@@ -1150,7 +1150,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         }
         $('[data-act=notes-save]').textContent = 'Lưu vào app';
         var nErr = r.items.filter(function (i) { return i.loi && /tx|pay|bill/.test(i.kind); }).length;
-        toast('Đã lưu ' + sv.tx + ' giao dịch, ' + sv.pay + ' lần chuyển tiền, ' + sv.bill + ' hoá đơn' + (sv.bo_qua ? ' · bỏ qua ' + sv.bo_qua + ' dòng đã có' : '') + (sv.sua ? ' · chuyển ' + sv.sua + ' dòng trong ngoặc ra ngoài sổ' : '') +
+        toast('Đã lưu ' + sv.tx + ' giao dịch, ' + sv.pay + ' lần chuyển tiền, ' + sv.bill + ' hoá đơn' + (sv.bo_qua ? ' · bỏ qua ' + sv.bo_qua + ' dòng đã có' : '') + (sv.sua ? ' · sửa lại ' + sv.sua + ' dòng đã lưu trước đây' : '') +
           (nErr ? ' · ⚠ ' + nErr + ' dòng lỗi (xem chữ đỏ trong danh sách)' : ''), !!nErr);
         $('#notes-saved-view').innerHTML = '';
         var ds = r.days.map(function (d) { return d.ngay; }).sort();
@@ -1223,6 +1223,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         : i.kind === 'bill' ? esc(i.loai_hd) + ' của ' + esc(i.a_ten) + ' · ' + money(i.so_tien) + ' · B: ' + esc(i.b_ten) + ' (' + esc(i.vi_b) + ') · A giảm ' + pct(i.phi_a) + ', mình ' + pct(i.phi_minh) + ' → lãi ' + money(i.lai)
         : '<span class="muted">' + esc(i.line) + '</span>';
       var st = i.loi ? '<span class="neg">' + esc(i.loi) + '</span>' : i.ghi_chu_chot ? '<span class="muted">' + esc(i.ghi_chu_chot) + '</span>'
+        : i.sua_pay && !i.da_luu ? '<span class="neg">đã lưu trước đây ' + money(i.so_cu) + ' → khi Lưu sẽ sửa thành ' + money(i.so_tien) + '</span>'
         : i.sua_ngoai && !i.da_luu ? '<span class="neg">đã có nhưng đang tính vào công nợ → khi Lưu sẽ chuyển ra ngoài sổ</span>'
         : i.da_luu && i.truoc_chot && i.kind === 'tx' ? '<span class="pos">✓ đã lưu</span> <small class="muted">(ngoài sổ – trước chốt)</small>'
         : !i.da_co && !i.da_luu && i.truoc_chot && i.kind === 'tx' ? '<span class="muted">trước chốt sổ → chỉ lưu lịch sử &amp; doanh thu</span>' : i.da_luu ? '<span class="pos">✓ đã lưu</span>' : i.da_co ? '<span class="muted">đã có – bỏ qua</span>' : '<span class="muted">mới</span>';
