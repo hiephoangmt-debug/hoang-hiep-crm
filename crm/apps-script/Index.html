@@ -852,7 +852,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       S.boot = b;
       $('#login').classList.add('hidden');
       $('#app').classList.remove('hidden');
-      $('#today-label').textContent = dmy(b.today);
+      var UI_VERSION = 'v04.10c';
+      $('#today-label').textContent = dmy(b.today) + ' · ' + UI_VERSION + (b.version === UI_VERSION ? '' : ' ⚠ Mã.gs chưa cập nhật');
       fillSelect($('[name=dich_vu]'), b.services);
       fillSelect($('#tx-service'), b.services, true);
       fillSelect($('#cust-status'), b.customerStatuses, true);

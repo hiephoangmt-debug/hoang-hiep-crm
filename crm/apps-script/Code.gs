@@ -62,6 +62,9 @@ var TEXT_COLUMNS = ['id', 'sdt', 'ngay', 'thoi_gian', 'tao_luc', 'cap_nhat', 'ke
 var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan', 'tu_ngay', 'b_tt_ngay', 'a_ck_ngay', 'b_ck_ngay'];
 // Kiểu tiền với C.Trâm. "Ứng trước"/"Hoàn tiền" làm giảm nợ; "Mình trả lại"/"Nợ cũ" làm tăng nợ;
 // "Điều chỉnh số dư" nhập được số âm (âm = tăng nợ).
+// Đổi mỗi lần cập nhật code – hiện cạnh ngày trên đầu app để biết đã triển khai bản mới chưa.
+var APP_VERSION = 'v04.10c';
+
 var PAYMENT_TYPES = ['Ứng trước', 'Hoàn tiền', 'Mình trả lại', 'Nợ cũ', 'Điều chỉnh số dư'];
 
 var CUSTOMER_STATUSES = ['Mới', 'Đang tư vấn', 'Khách quen', 'Không tiềm năng'];
@@ -323,6 +326,7 @@ function apiBootstrap_() {
     return Object.keys(seen).sort(function (a, b) { return seen[b] - seen[a]; });
   }
   return {
+    version: APP_VERSION,
     today: todayStr_(),
     services: SERVICES,
     customerStatuses: CUSTOMER_STATUSES,
