@@ -406,7 +406,7 @@ p { margin: 0 0 1em; }
 .deal-tabs a.is-active, .deal-tabs a:hover { background: var(--navy); border-color: var(--navy); color: var(--white); }
 
 /* Layout with sidebar */
-.layout { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 36px; padding-block: 36px 64px; }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 290px; gap: 40px; padding-block: 36px 64px; }
 .layout--filters { grid-template-columns: 280px minmax(0, 1fr); }
 .layout__main { min-width: 0; }
 .sticky { position: sticky; top: calc(var(--header-h) + 64px); display: grid; gap: 16px; }
@@ -601,9 +601,9 @@ p { margin: 0 0 1em; }
 }
 
 /* Agent card */
-.agent-card { display: grid; gap: 10px; padding: 20px; background: var(--navy); color: #c7d3e3; border-radius: var(--radius-lg); }
+.agent-card { display: grid; gap: 8px; padding: 16px; background: var(--navy); color: #c7d3e3; border-radius: var(--radius-lg); }
 .agent-card__head { display: flex; gap: 14px; align-items: center; margin-bottom: 6px; }
-.agent-card__photo { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); flex: none; }
+.agent-card__photo { width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); flex: none; }
 .agent-card__photo--initials { display: grid; place-items: center; background: var(--navy-2); color: var(--gold); font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; }
 .agent-card__name { margin: 0; font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--white); }
 .agent-card__title { margin: 0; font-size: .82rem; color: var(--gold); }
