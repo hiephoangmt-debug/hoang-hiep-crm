@@ -82,6 +82,11 @@ Trang `public/landing.html` (mở tại `/landing.html`) dùng tông navy – tr
 - **Chính sách chi tiết theo tab**: Forestside / Parkhome × bàn giao thô 2026 / nội thất 2027. Mỗi tab có chiết khấu, chương trình thuê lại hoặc ủy thác, ưu đãi miễn phí, **tiến độ thanh toán vay và không vay**.
 - Popup CTA theo ngữ cảnh, thanh Gọi / Zalo / Nhận bảng giá trên điện thoại; form gửi về hệ thống chat và Telegram kèm nhu cầu và UTM.
 
+- **Tiện ích "về ở & cho thuê"**: mỗi tiện ích (rừng dừa, sân hiên ven sông, Clubhouse, phố cổ, biển, CĐT vận hành) nêu rõ 🏡 giá trị khi về ở và 💰 giá trị khi cho thuê, có nút chuyển góc nhìn.
+- **Nút Gọi / Zalo** ở màn hình đầu, dưới các form, trong popup, khối chính sách, đặt lịch tham quan và nút nổi trên máy tính; bấm vào được ghi nhận sự kiện `Contact` cho Pixel / Google.
+
+**Xuất thử 1 file:** `npm run export` tạo `dist/casamia-balanca-landing-xem-thu.html`, nhúng sẵn ảnh, mở trực tiếp không cần server (form chỉ mô phỏng). `npm run export -- https://ten-mien-chat` tạo bản thật, form và khung chat gửi về server đó, dùng để đăng lên hosting hoặc LadiPage (HTML).
+
 Dữ liệu chính sách nằm trong biến `POLICIES`, `BANK`, `PERKS` cuối file `landing.html`. Khi có chính sách mới, sửa tại đó.
 Ảnh phối cảnh trong `public/img/` được cắt từ ấn phẩm chính sách bán hàng của dự án.
 

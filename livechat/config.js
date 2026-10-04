@@ -33,8 +33,8 @@ module.exports = {
     name: 'Casamia Balanca',
     agentName: 'Hoàng Hiệp',
     agentTitle: 'Chuyên viên tư vấn dự án',
-    hotline: process.env.HOTLINE || '0900000000',
-    zalo: process.env.ZALO || '0900000000',
+    hotline: process.env.HOTLINE || '0904 567 009',
+    zalo: process.env.ZALO || '0904567009',
     primaryColor: process.env.PRIMARY_COLOR || '#0b2a5b', // xanh navy
     accentColor: process.env.ACCENT_COLOR || '#f47c20', // cam
   },

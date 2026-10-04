@@ -11,7 +11,8 @@
   var BASE = new URL(script.src).origin;
   // Tuỳ chọn trên thẻ script: data-contacts="off" ẩn nút Gọi/Zalo nổi (khi trang đã có sẵn),
   // data-mobile-bottom="80" đẩy nút chat lên trên thanh liên hệ cố định của trang trên điện thoại.
-  var OPTS = { contacts: script.getAttribute('data-contacts') !== 'off', mobileBottom: parseInt(script.getAttribute('data-mobile-bottom'), 10) || 0 };
+  var CONTACTS = script.getAttribute('data-contacts') || 'on'; // on | off | desktop
+  var OPTS = { contacts: CONTACTS !== 'off', mobileBottom: parseInt(script.getAttribute('data-mobile-bottom'), 10) || 0 };
 
   function uuid() {
     if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
@@ -88,6 +89,7 @@
       '.foot textarea:focus{border-color:var(--c)}' +
       '.foot button{width:42px;height:42px;border-radius:50%;border:0;background:var(--a);color:#fff;cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center}' +
       '.foot button svg{width:20px;height:20px}' +
+      (CONTACTS === 'desktop' ? '@media(max-width:960px){.mini{display:none!important}}' : '') +
       (OPTS.mobileBottom ? '@media(max-width:960px){.launcher{bottom:' + OPTS.mobileBottom + 'px}.panel{bottom:' + (OPTS.mobileBottom + 72) + 'px}}' : '') +
       '@media(max-width:480px){.panel{right:0;bottom:0;width:100vw;max-width:100vw;height:100%;max-height:100%;border-radius:0}}' +
       '</style>' +
