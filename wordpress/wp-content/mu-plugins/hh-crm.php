@@ -28,6 +28,7 @@ require HH_CRM_DIR . 'data-vinhomes-hai-van-bay.php';
 require HH_CRM_DIR . 'data-sun-group-da-nang.php';
 require HH_CRM_DIR . 'data-biet-thu-ven-bien.php';
 require HH_CRM_DIR . 'data-vinpearl-villa.php';
+require HH_CRM_DIR . 'data-shantira.php';
 require HH_CRM_DIR . 'data-newtown.php';
 require HH_CRM_DIR . 'data-filmore.php';
 require HH_CRM_DIR . 'data-du-an-moi-a.php';
