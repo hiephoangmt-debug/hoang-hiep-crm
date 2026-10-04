@@ -729,6 +729,15 @@ function hh_import_projects() {
 			update_post_meta( $child->ID, 'hh_p_parent', $parent->ID );
 		}
 	}
+	// Ảnh từ link (Google Drive) của các dự án có ô "Link ảnh".
+	if ( function_exists( 'hh_img_links_import' ) && current_user_can( 'upload_files' ) ) {
+		foreach ( hh_project_dataset() as $p ) {
+			$post = ! empty( $p['meta']['hh_p_image_links'] ) ? get_page_by_path( $p['slug'], OBJECT, 'du-an' ) : null;
+			if ( $post ) {
+				hh_img_links_import( $post->ID );
+			}
+		}
+	}
 	$news     = function_exists( 'hh_import_news' ) ? hh_import_news() : 0;
 	$listings = function_exists( 'hh_import_listings' ) ? hh_import_listings() : 0;
 	return array( $created, $updated, $news, $listings );
