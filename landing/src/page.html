@@ -858,7 +858,9 @@ footer p{margin-bottom:6px}
     </div>
 
     <div class="cart-tabs" role="tablist" aria-label="Giỏ hàng">
-      <button class="tab active" data-cart="dq" role="tab">★ Quỹ căn độc quyền · 5 căn giá tốt</button>
+      <button class="tab active" data-cart="dq" role="tab">★ Căn giá tốt nhất hiện tại</button>
+      <button class="tab" data-cart="type" role="tab">5 căn giá tốt nhất từng loại căn</button>
+      <button class="tab" data-cart="scarce" role="tab">Căn khan hiếm – 5 dòng căn còn ít nhất</button>
       <button class="tab" data-cart="zone" role="tab">Giá tốt từng phân khu</button>
       <button class="tab" data-cart="ch" role="tab">Quỹ căn khác</button>
     </div>
@@ -874,6 +876,7 @@ footer p{margin-bottom:6px}
       <button class="chip" data-z="Đảo Ngọc">Đảo Ngọc</button>
       <button class="chip" data-z="Tinh Vân">Tinh Vân</button>
     </div>
+    <div class="zone-chips" id="tchips" hidden></div>
     <div class="cart-meta"><span id="cart-count"></span><span>Giá: <b>Liên hệ</b> · Đã có VAT & KPBT khi báo giá</span></div>
 
     <div class="grid units" id="cart-grid"></div>
@@ -1350,16 +1353,25 @@ footer p{margin-bottom:6px}
      pool: "dq" = quỹ căn độc quyền, "ch" = quỹ căn khác
      top:  true  = nằm trong "5 căn giá tốt" (tab độc quyền)
      best: true  = hiện ở tab "Giá tốt từng phân khu"
-     show: false = KHÔNG hiện trong danh sách, chỉ ra khi khách tìm đúng mã căn */
+     show: false = KHÔNG hiện trong danh sách, chỉ ra khi khách tìm đúng mã căn
+     rank: thứ hạng giá (1 = tổng giá thấp nhất) – chỉ dùng để sắp xếp, không hiển thị giá */
   var UNITS = [
-    {code:"VM-04", img:"street-vinh-may",    zone:"Vịnh Mây", type:"Liền kề",          land:75.0,  build:231.0, hand:"Giãn xây 24T", pool:"dq", top:true,  best:true, show:true,  tag:"Giá tốt"},
-    {code:"VU4-13", img:"house-bach-van",   zone:"Bạch Vân", type:"Liền kề",          land:70.0,  build:212.9, hand:"Xây thô",      pool:"dq", top:true,  best:true, show:true,  tag:"Về ở sớm"},
-    {code:"SV7-24", img:"house-classic",   zone:"Đảo Ngọc", type:"Liền kề",          land:70.0,  build:217.1, hand:"Giãn xây 18T", pool:"dq", top:true,  best:true, show:true,  tag:"Gần biển"},
-    {code:"ĐLHV-355", img:"house-bach-van", zone:"Bạch Vân", type:"Liền kề",          land:80.0,  build:244.9, hand:"Xây thô",      pool:"dq", top:true,  best:true, show:true,  tag:"Về ở sớm"},
-    {code:"VM4-47", img:"villa-vinh-may",   zone:"Vịnh Mây", type:"Biệt thự đơn lập", land:275.5, build:463.0, hand:"Giãn xây 24T", pool:"dq", top:true,  best:true, show:true,  tag:"Biệt thự"},
-    {code:"VM-01", img:"street-vinh-may",    zone:"Vịnh Mây", type:"Liền kề góc",      land:148.3, build:337.8, hand:"Giãn xây 24T", pool:"ch", top:false, best:true, show:true,  tag:"Căn góc"},
-    {code:"SV4-18", img:"pool-dao-ngoc",   zone:"Đảo Ngọc", type:"Liền kề",          land:80.0,  build:232.3, hand:"Hoàn thiện",   pool:"ch", top:false, best:true, show:true,  tag:"CKTT 7%"},
-    {code:"LV5-08", img:"house-dao-ngoc",   zone:"Đảo Ngọc", type:"Liền kề",          land:70.0,  build:214.0, hand:"Giãn xây 18T", pool:"ch", top:false, best:false, show:false, tag:"Ven biển"}
+    {code:"VM-04", rank:1, img:"street-vinh-may",    zone:"Vịnh Mây", type:"Liền kề",          land:75.0,  build:231.0, hand:"Giãn xây 24T", pool:"dq", top:true,  best:true, show:true,  tag:"Giá tốt"},
+    {code:"VU4-13", rank:2, img:"house-bach-van",   zone:"Bạch Vân", type:"Liền kề",          land:70.0,  build:212.9, hand:"Xây thô",      pool:"dq", top:true,  best:true, show:true,  tag:"Về ở sớm"},
+    {code:"SV7-24", rank:4, img:"house-classic",   zone:"Đảo Ngọc", type:"Liền kề",          land:70.0,  build:217.1, hand:"Giãn xây 18T", pool:"dq", top:true,  best:true, show:true,  tag:"Gần biển"},
+    {code:"ĐLHV-355", rank:3, img:"house-bach-van", zone:"Bạch Vân", type:"Liền kề",          land:80.0,  build:244.9, hand:"Xây thô",      pool:"dq", top:true,  best:true, show:true,  tag:"Về ở sớm"},
+    {code:"VM4-47", rank:8, img:"villa-vinh-may",   zone:"Vịnh Mây", type:"Biệt thự đơn lập", land:275.5, build:463.0, hand:"Giãn xây 24T", pool:"dq", top:true,  best:true, show:true,  tag:"Biệt thự"},
+    {code:"VM-01", rank:5, img:"street-vinh-may",    zone:"Vịnh Mây", type:"Liền kề góc",      land:148.3, build:337.8, hand:"Giãn xây 24T", pool:"ch", top:false, best:true, show:true,  tag:"Căn góc"},
+    {code:"SV4-18", rank:7, img:"pool-dao-ngoc",   zone:"Đảo Ngọc", type:"Liền kề",          land:80.0,  build:232.3, hand:"Hoàn thiện",   pool:"ch", top:false, best:true, show:true,  tag:"CKTT 7%"},
+    {code:"LV5-08", rank:6, img:"house-dao-ngoc",   zone:"Đảo Ngọc", type:"Liền kề",          land:70.0,  build:214.0, hand:"Giãn xây 18T", pool:"ch", top:false, best:false, show:false, tag:"Ven biển"}
+  ];
+  /* Dòng căn khan hiếm: left = số căn còn lại (để null nếu chưa muốn công bố số lượng) */
+  var LINES = [
+    {name:"Liền kề góc Vịnh Mây", zone:"Vịnh Mây", type:"Liền kề góc", area:"~148 m² đất", img:"street-vinh-may", codes:["VM-01"], left:null, note:"Căn góc – số lượng rất hạn chế"},
+    {name:"Biệt thự đơn lập đồi Vịnh Mây", zone:"Vịnh Mây", type:"Biệt thự đơn lập", area:"~275 m² đất", img:"villa-vinh-may", codes:["VM4-47"], left:null, note:"Biệt thự trên đồi hướng vịnh – quỹ hiếm"},
+    {name:"Liền kề hoàn thiện nhận CKTT 7%", zone:"Đảo Ngọc", type:"Liền kề", area:"~80 m² đất", img:"pool-dao-ngoc", codes:["SV4-18"], left:null, note:"Hữu hạn 223 căn theo danh sách CĐT"},
+    {name:"Liền kề 80 m² Về ở sớm", zone:"Bạch Vân", type:"Liền kề", area:"~80 m² đất", img:"house-bach-van", codes:["ĐLHV-355"], left:null, note:"Xây thô, chiết khấu Về ở sớm đến 10%"},
+    {name:"Liền kề ven biển Đảo Ngọc", zone:"Đảo Ngọc", type:"Liền kề", area:"~70 m² đất", img:"house-classic", codes:["SV7-24","LV5-08"], left:null, note:"Sát biển, cạnh VinWonders"}
   ];
   var SITE = "https://www.giohangvinhaivanbay.com";
   function shareUnit(code){
@@ -1423,7 +1435,7 @@ footer p{margin-bottom:6px}
     lb.addEventListener("click", function(){ lb.classList.remove("show"); });
   }
   var ZCLASS = {"Bạch Vân":"bv","Vịnh Mây":"vm","Đảo Ngọc":"dn","Tinh Vân":"vm"};
-  var cartMode = "dq", cartZone = "Bạch Vân";
+  var cartMode = "dq", cartZone = "Bạch Vân", cartType = "";
   var PAGE_ZONE = document.body.dataset.zone || "";
   if (PAGE_ZONE && document.getElementById("fz")){
     document.getElementById("fz").value = PAGE_ZONE; cartZone = PAGE_ZONE;
@@ -1449,11 +1461,47 @@ footer p{margin-bottom:6px}
       '<button type="button" class="btn btn-primary" style="background:#0068FF" data-zalo="' + esc(u.code) + '" data-zone="' + esc(u.zone) + '" aria-label="Liên hệ Zalo căn ' + esc(u.code) + '">Zalo</button></div></div></article>';
   }
 
+  function lineCard(l){
+    var status = l.left ? "Còn " + l.left + " căn" : "Còn ít";
+    return '<article class="unit ' + (ZCLASS[l.zone]||"vm") + '">' +
+      '<div class="thumb" style="background-image:url(\'img/' + esc(l.img) + '.webp\')"><span class="hot">🔥 ' + esc(status) + '</span></div>' +
+      '<div class="top"><div class="code" style="font-size:20px">' + esc(l.name) + '</div><div class="zn">Phân khu ' + esc(l.zone) + '</div></div>' +
+      '<table><tr><td>Loại căn</td><td>' + esc(l.type) + '</td></tr>' +
+      '<tr><td>Diện tích</td><td>' + esc(l.area) + '</td></tr>' +
+      '<tr><td>Căn tiêu biểu</td><td>' + l.codes.map(esc).join(", ") + '</td></tr>' +
+      '<tr><td colspan="2" style="text-align:left;font-weight:600;color:var(--orange)">' + esc(l.note) + '</td></tr></table>' +
+      '<div class="price"><div><small>Tình trạng</small><b>' + esc(status) + '</b></div>' +
+      '<div class="acts"><button type="button" class="btn btn-share" data-find="' + esc(l.codes[0]) + '">Xem căn</button>' +
+      '<button type="button" class="btn btn-primary" style="background:#0068FF" data-zalo="dòng ' + esc(l.name) + '" data-zone="' + esc(l.zone) + '">Zalo</button></div></div></article>';
+  }
+  function typeChips(){
+    var box = document.getElementById("tchips");
+    var types = [];
+    var fz = document.getElementById("fz").value;
+    UNITS.forEach(function(u){ if (u.show && (!fz || u.zone === fz) && types.indexOf(u.type) < 0) types.push(u.type); });
+    if (types.indexOf(cartType) < 0) cartType = types[0] || "";
+    box.innerHTML = types.map(function(t){ return '<button class="chip' + (t === cartType ? " active" : "") + '" data-t="' + esc(t) + '">' + esc(t) + '</button>'; }).join("");
+    box.querySelectorAll(".chip").forEach(function(c){ c.addEventListener("click", function(){ cartType = c.dataset.t; renderCart(); }); });
+  }
+  function byRank(a, b){ return (a.rank || 99) - (b.rank || 99); }
+
   function renderCart(){
     var q = norm(document.getElementById("q").value);
     var fz = document.getElementById("fz").value, ft = document.getElementById("ft").value;
     var grid = document.getElementById("cart-grid"), count = document.getElementById("cart-count");
     document.getElementById("zchips").hidden = cartMode !== "zone" || !!q;
+    document.getElementById("tchips").hidden = cartMode !== "type" || !!q;
+    if (cartMode === "type" && !q) typeChips();
+    if (cartMode === "scarce" && !q){
+      var lines = LINES.filter(function(l){ return !fz || l.zone === fz; })
+                       .sort(function(a, b){ return (a.left || 0) - (b.left || 0); }).slice(0, 5);
+      grid.innerHTML = lines.length ? lines.map(lineCard).join("") :
+        '<div class="empty"><h3>Đang cập nhật dòng căn khan hiếm</h3><p>Nhắn Zalo để nhận danh sách căn còn ít nhất hôm nay.</p><button type="button" class="btn btn-primary" style="background:#0068FF" data-zalo="căn khan hiếm" data-zone="' + esc(fz) + '">Nhắn Zalo</button></div>';
+      count.innerHTML = "<b>" + lines.length + " dòng căn</b> còn ít nhất · cập nhật theo bảng hàng";
+      grid.querySelectorAll("[data-zalo]").forEach(function(b){ b.addEventListener("click", function(){ zaloUnit(b.dataset.zalo, b.dataset.zone); }); });
+      grid.querySelectorAll("[data-find]").forEach(function(b){ b.addEventListener("click", function(){ document.getElementById("q").value = b.dataset.find; renderCart(); }); });
+      return;
+    }
     var list;
     if (q){
       // Search covers every unit, including ones hidden from the lists.
@@ -1461,7 +1509,9 @@ footer p{margin-bottom:6px}
       // A code-like query with no match still shows as an available unit to check via Zalo.
       if (!list.length && /\d/.test(q)) list = [virtualUnit(document.getElementById("q").value.trim())];
     } else if (cartMode === "dq"){
-      list = UNITS.filter(function(u){ return u.pool === "dq" && u.top && u.show; });
+      list = UNITS.filter(function(u){ return u.top && u.show; }).sort(byRank);
+    } else if (cartMode === "type"){
+      list = UNITS.filter(function(u){ return u.show && u.type === cartType; }).sort(byRank).slice(0, 5);
     } else if (cartMode === "zone"){
       list = UNITS.filter(function(u){ return u.best && u.show && u.zone === cartZone; });
     } else {

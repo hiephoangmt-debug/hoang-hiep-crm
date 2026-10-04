@@ -36,5 +36,6 @@ for f in sorted(DIST.glob("*.html")):
         table = "var IMGDATA={%s};" % ",".join('"%s":"%s"' % (u, src(u + ".webp")) for u in used)
         html = html.replace("  var SITE = ", "  " + table + "\n  var SITE = ", 1)
         html = html.replace("""url(\\'img/' + esc(u.img||"aerial-bay") + '.webp\\')""", """url(\\'' + (IMGDATA[u.img] || "") + '\\')""")
+        html = html.replace("""url(\\'img/' + esc(l.img) + '.webp\\')""", """url(\\'' + (IMGDATA[l.img] || "") + '\\')""")
     (OUT / f.name).write_text(html, encoding="utf-8")
     print(OUT.name, f.name, len(html) // 1024, "KB")
