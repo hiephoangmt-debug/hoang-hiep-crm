@@ -54,7 +54,7 @@ PAGES.append({
         ("Có được đi xem dự án không?", "Có. Đặt lịch qua form hoặc Zalo 0909 882 555, chuyên viên đưa đón tham quan miễn phí, xem nhà mẫu và tiến độ thực tế."),
         ("Sản phẩm có sở hữu lâu dài không?", "Phần lớn (~90%) sản phẩm thấp tầng có quyền sở hữu lâu dài; dự án có chủ trương đầu tư, quy hoạch 1/500 và giấy phép xây dựng hạ tầng."),
     ],
-    "sections": ["ADSHERO", "ADSNUM", "ADSLIFE", "CART", "ADSOFFER", "ADSQUIZ", "ADSPOTENTIAL", "PHAPLY", "GALLERY", "ADSVISIT", "FAQ", "CONTACT", "ADSSCRIPT"],
+    "sections": ["ADSHERO", "ADSNUM", "ADSLIFE", "OVERVIEW", "LOCATION", "ZONES", "CART", "ADSOFFER", "ADSQUIZ", "ADSPOTENTIAL", "PHAPLY", "GALLERY", "ADSVISIT", "FAQ", "CONTACT", "ADSSCRIPT"],
 })
 
 for _z in ZONES:
