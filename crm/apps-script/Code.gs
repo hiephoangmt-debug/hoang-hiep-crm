@@ -63,7 +63,7 @@ var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan', 'tu_ngay', 'b_tt_ngay', 'a_ck_ng
 // Kiểu tiền với C.Trâm. "Ứng trước"/"Hoàn tiền" làm giảm nợ; "Mình trả lại"/"Nợ cũ" làm tăng nợ;
 // "Điều chỉnh số dư" nhập được số âm (âm = tăng nợ).
 // Đổi mỗi lần cập nhật code – hiện cạnh ngày trên đầu app để biết đã triển khai bản mới chưa.
-var APP_VERSION = 'v04.10c';
+var APP_VERSION = 'v04.10d';
 
 var PAYMENT_TYPES = ['Ứng trước', 'Hoàn tiền', 'Mình trả lại', 'Nợ cũ', 'Điều chỉnh số dư'];
 
@@ -503,19 +503,22 @@ function apiListTransactions_(p) {
 function apiSaveTransaction_(t) {
   return withLock_(function () {
     var obj = buildTransaction_(t);
-    assertOpen_(obj.ngay);
+    var old = t.id ? readAll_('GiaoDich').filter(function (x) { return x.id === t.id; })[0] : null;
+    var status = t.vao_so === true ? 'Chưa nhận' : t.vao_so === false ? 'Đã nhận' : (old ? old.hoan_tt : 'Chưa nhận');
+    // Sổ đã chốt: giao dịch tính vào công nợ thì bị khoá; giao dịch ngoài sổ (chỉ lưu lịch sử, doanh thu) vẫn nhập được.
+    var c = lastClosing_();
+    if (c && ((status !== 'Đã nhận' && obj.ngay <= c.ngay) || (old && old.hoan_tt !== 'Đã nhận' && old.ngay <= c.ngay))) {
+      throw new Error('Đã kết số dư (chốt sổ) với ' + refundName_() + ' đến hết ngày ' + fmtDmy_(c.ngay) + '. Giao dịch ngày ' + fmtDmy_(obj.ngay) +
+        ' đã gồm trong số chốt: bỏ chọn "Tính vào công nợ" để chỉ lưu lịch sử (vẫn tính doanh thu), hoặc vào Công nợ → bỏ lần chốt sổ đó rồi nhập.');
+    }
+    obj.hoan_tt = status;
     if (t.id) {
-      var old = readAll_('GiaoDich').filter(function (x) { return x.id === t.id; })[0];
-      if (old && old.hoan_tt !== 'Đã nhận') assertOpen_(old.ngay);
       obj.id = t.id;
-      if (t.vao_so === true) obj.hoan_tt = 'Chưa nhận';
-      else if (t.vao_so === false) obj.hoan_tt = 'Đã nhận';
       updateObj_('GiaoDich', t.id, obj);
       audit_('Giao dịch', 'Sửa', obj.id, obj.ngay, txText_(obj), old ? txText_(old) : '', txText_(obj));
     } else {
       obj.id = newId_();
       obj.tao_luc = nowStr_();
-      obj.hoan_tt = t.vao_so === false ? 'Đã nhận' : 'Chưa nhận';
       appendObj_('GiaoDich', obj);
       audit_('Giao dịch', 'Thêm', obj.id, obj.ngay, txText_(obj), '', txText_(obj));
     }
@@ -741,6 +744,7 @@ function apiPasteNotes_(p) {
   var year = Number(p.year) || parseYmd_(todayStr_()).y;
   var lines = String(p.text || '').split(/\r?\n/);
   var cur = '', days = {}, order = [], items = [];
+  var closing = lastClosing_(), chot = closing ? closing.ngay : '';
   var allTx = readAll_('GiaoDich'), allPay = readAll_('DoiSoat'), allBill = readAll_('HoaDon');
   function day(d) { if (!days[d]) { days[d] = { ngay: d, hoan_so: null, lai_so: null, hoan: 0, lai: 0, so_gd: 0, tra: 0, con_so: null }; order.push(d); } return days[d]; }
   lines.forEach(function (raw, i) {
@@ -757,6 +761,7 @@ function apiPasteNotes_(p) {
     if (!cur) { items.push({ dong: i + 1, line: line, kind: 'err', loi: 'Chưa có dòng ngày (VD "2/10:") ở phía trên' }); return; }
     var it = parseNoteLine_(line, cur);
     it.dong = i + 1; it.line = line;
+    it.truoc_chot = !!(chot && cur <= chot);
     var d2 = day(cur);
     if (it.kind === 'tx') {
       var chi = Math.round(it.so_tien * Number(it.phi_may_text) / 100), phi = Math.round(it.so_tien * it.phi_khach / 100);
@@ -772,6 +777,7 @@ function apiPasteNotes_(p) {
     } else if (it.kind === 'pay') {
       d2.tra += it.so_tien; if (it.con != null) d2.con_so = it.con;
       it.da_co = allPay.some(function (x) { return x.ngay === cur && x.loai === it.loai && Number(x.so_tien) === it.so_tien; });
+      if (it.truoc_chot && !it.da_co) it.ghi_chu_chot = 'Trước ngày chốt sổ ' + fmtDmy_(chot) + ' – đã gồm trong số chốt, không lưu';
     } else {
       d2.lai += it.lai || 0;
       it.loi = it.lai ? 'Chưa đọc được – lãi ' + fmtMoney_(it.lai) + ' đã cộng vào ô kiểm tra lãi; thêm tay nếu cần' : 'Chưa đọc được dòng này – thêm tay';
@@ -783,10 +789,12 @@ function apiPasteNotes_(p) {
     items.forEach(function (it) {
       if (['tx', 'pay', 'bill'].indexOf(it.kind) < 0) return;
       if (it.da_co) { saved.bo_qua++; return; }
+      if (it.kind === 'pay' && it.truoc_chot) { saved.bo_qua++; return; }
       try {
         if (it.kind === 'tx') {
           apiSaveTransaction_({ ngay: it.ngay, dich_vu: it.dich_vu, the: it.the, ten_khach: it.ten_khach, so_tien: it.so_tien,
-            phi_khach: it.phi_khach, phi_may_text: it.phi_may_text, ghi_chu: it.ghi_chu, vao_so: true });
+            phi_khach: it.phi_khach, phi_may_text: it.phi_may_text, vao_so: !it.truoc_chot,
+            ghi_chu: it.truoc_chot ? (it.ghi_chu ? it.ghi_chu + ' · ' : '') + 'trước chốt sổ' : it.ghi_chu });
           saved.tx++;
         } else if (it.kind === 'pay') {
           apiSavePayment_({ ngay: it.ngay, loai: it.loai, so_tien: it.so_tien, ghi_chu: it.ghi_chu });
@@ -801,7 +809,7 @@ function apiPasteNotes_(p) {
       } catch (e) { it.loi = e.message || String(e); }
     });
   }
-  return { days: order.map(function (d) { return days[d]; }), items: items, saved: p.save ? saved : null };
+  return { days: order.map(function (d) { return days[d]; }), items: items, saved: p.save ? saved : null, chot: chot };
 }
 
 /* ------------------------------------------------------------------ */

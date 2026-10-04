@@ -852,7 +852,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       S.boot = b;
       $('#login').classList.add('hidden');
       $('#app').classList.remove('hidden');
-      var UI_VERSION = 'v04.10c';
+      var UI_VERSION = 'v04.10d';
       $('#today-label').textContent = dmy(b.today) + ' · ' + UI_VERSION + (b.version === UI_VERSION ? '' : ' ⚠ Mã.gs chưa cập nhật');
       fillSelect($('[name=dich_vu]'), b.services);
       fillSelect($('#tx-service'), b.services, true);
@@ -1165,10 +1165,14 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         : i.kind === 'bill' && i.lai_tay ? esc(i.loai_hd) + ' · ' + esc(i.a_ten) + ' → lãi ' + money(i.lai) + ' <small class="muted">(vào tab Hoá đơn)</small>'
         : i.kind === 'bill' ? esc(i.loai_hd) + ' của ' + esc(i.a_ten) + ' · ' + money(i.so_tien) + ' · B: ' + esc(i.b_ten) + ' (' + esc(i.vi_b) + ') · A giảm ' + pct(i.phi_a) + ', mình ' + pct(i.phi_minh) + ' → lãi ' + money(i.lai)
         : '<span class="muted">' + esc(i.line) + '</span>';
-      var st = i.loi ? '<span class="neg">' + esc(i.loi) + '</span>' : i.da_luu ? '<span class="pos">✓ đã lưu</span>' : i.da_co ? '<span class="muted">đã có – bỏ qua</span>' : '<span class="muted">mới</span>';
+      var st = i.loi ? '<span class="neg">' + esc(i.loi) + '</span>' : i.ghi_chu_chot ? '<span class="muted">' + esc(i.ghi_chu_chot) + '</span>'
+        : i.da_luu && i.truoc_chot && i.kind === 'tx' ? '<span class="pos">✓ đã lưu</span> <small class="muted">(ngoài sổ – trước chốt)</small>'
+        : !i.da_co && !i.da_luu && i.truoc_chot && i.kind === 'tx' ? '<span class="muted">trước chốt sổ → chỉ lưu lịch sử &amp; doanh thu</span>' : i.da_luu ? '<span class="pos">✓ đã lưu</span>' : i.da_co ? '<span class="muted">đã có – bỏ qua</span>' : '<span class="muted">mới</span>';
       return '<tr><td>' + (icon[i.kind] || '') + '</td><td>' + what + '</td><td>' + st + '</td></tr>';
     }).join('');
-    $('#notes-result').innerHTML = days + '<div style="overflow-x:auto"><table class="tbl" style="font-size:.85rem"><tbody>' + rows + '</tbody></table></div>';
+    var chotNote = r.chot && r.days.some(function (d) { return d.ngay <= r.chot; }) ?
+      '<div class="advice" style="margin-bottom:8px">🔒 Sổ đã chốt đến hết <b>' + dmy(r.chot) + '</b>. Giao dịch từ ngày này trở về trước đã gồm trong số chốt (Mục 1) nên app <b>chỉ lưu lịch sử &amp; doanh thu</b>, không cộng lại vào công nợ; tiền ' + esc(rn()) + ' chuyển trước ngày chốt không lưu. Muốn tính lại công nợ những ngày đó thì vào Công nợ → bỏ lần chốt sổ rồi dán lại.</div>' : '';
+    $('#notes-result').innerHTML = chotNote + days + '<div style="overflow-x:auto"><table class="tbl" style="font-size:.85rem"><tbody>' + rows + '</tbody></table></div>';
   }
 
   /* ---------- Tiền hoàn (số tiền − phí máy, hoàn hôm sau) ---------- */

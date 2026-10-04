@@ -829,4 +829,28 @@ test('paste daily notes: transactions, C.Trâm transfers and a pay-later bill, w
   assert.strictEqual(JSON.stringify(call('pasteNotes', { text, year: 2026, save: true }).saved), JSON.stringify({ tx: 0, pay: 0, bill: 0, bo_qua: 8 }));
 });
 
+test('before the closing date: transactions are kept as history only (not in công nợ), transfers are skipped', () => {
+  const { call, fake } = fresh();
+  fake.setToday('2026-10-04');
+  call('manualClosing', { ngay: '2026-10-02', so_du: 50000000 });
+  const text = ['2/10: Hoàn 9.840', 'Rút VP Khách A 10.000/1.9 hoàn 1.6', 'Hoàn 30 còn 29.840',
+    '3/10: Hoàn 4.950', 'ĐH Cake Khách G 5tr/1.8 hoàn 1', 'Hoàn 2'].join('\n');
+  const pv = call('pasteNotes', { text, year: 2026 });
+  assert.strictEqual(pv.chot, '2026-10-02');
+  assert.ok(pv.items[0].truoc_chot && !pv.items[2].truoc_chot);
+  const sv = call('pasteNotes', { text, year: 2026, save: true });
+  assert.strictEqual(JSON.stringify(sv.saved), JSON.stringify({ tx: 2, pay: 1, bill: 0, bo_qua: 1 }));
+  const tx = call('listTransactions', {});
+  assert.strictEqual(tx.find((t) => t.ngay === '2026-10-02').hoan_tt, 'Đã nhận', 'already inside Mục 1');
+  assert.strictEqual(tx.find((t) => t.ngay === '2026-10-03').hoan_tt, 'Chưa nhận');
+  const r = call('refunds', {});
+  assert.strictEqual(r.summary.tong_phai_hoan, 50000000 + 4950000, 'Mục 1 + only the day after closing');
+  // nhập tay trước ngày chốt: tính vào công nợ thì bị chặn kèm hướng dẫn, ngoài sổ thì lưu được
+  const base = { ngay: '2026-10-01', dich_vu: 'Rút tiền', the: 'MB', ten_khach: 'Khách K', so_tien: 1000000, phi_khach: 2, phi_may_text: '1.3' };
+  assert.throws(() => call('saveTransaction', Object.assign({ vao_so: true }, base)), /bỏ chọn "Tính vào công nợ"/);
+  const ok = call('saveTransaction', Object.assign({ vao_so: false }, base));
+  assert.strictEqual(ok.hoan_tt, 'Đã nhận');
+  assert.strictEqual(call('refunds', {}).summary.tong_phai_hoan, 54950000);
+});
+
 console.log(`\n${passed} test(s) passed`);
