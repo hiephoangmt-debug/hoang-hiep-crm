@@ -97,6 +97,8 @@ function hh_project_schema() {
 		'gia-ban'   => array(
 			'title'  => 'Giá & chính sách',
 			'fields' => array(
+				'hh_p_hot_title'     => array( 'type' => 'text', 'label' => 'Tiêu đề giỏ hàng nổi bật', 'placeholder' => 'Giỏ hàng độc quyền – căn giá tốt' ),
+				'hh_p_hot_units'     => array( 'type' => 'table', 'label' => 'Giỏ hàng nổi bật (hiện trên trang, giá ghi "Liên hệ")', 'columns' => array( 'Mã căn', 'Phân khu', 'Loại hình', 'Diện tích đất', 'Ghi chú' ), 'placeholder' => "LV7-23 | Vịnh Mây | Liền kề | 105 m² | Thanh toán giãn 24 tháng\nBV12-27 | Bạch Vân | Song lập | 140 m² | Giá tốt nhất dòng song lập", 'help' => 'Chỉ nhập 3 – 6 căn muốn khoe. Không hiện giá: khách bấm "Nhận giá & phiếu tính giá" để để lại số điện thoại.' ),
 				'hh_p_price_table'   => array( 'type' => 'table', 'label' => 'Bảng giá', 'columns' => array( 'Sản phẩm', 'Diện tích', 'Giá bán', 'Ghi chú' ), 'placeholder' => "A-12.05 – 2PN | 68 m² | 3,35 tỷ | View sông\nB-08.10 – 3PN | 98 m² | 5,1 tỷ | Căn góc" ),
 				'hh_p_payment'       => array( 'type' => 'table', 'label' => 'Lịch thanh toán', 'columns' => array( 'Đợt', 'Thời điểm', 'Tỷ lệ' ), 'placeholder' => "Đợt 1 | Ký thỏa thuận đặt cọc | 10%\nĐợt 2 | Ký HĐMB (30 ngày) | 20%\nĐợt 3 | Nhận bàn giao | 65%\nĐợt 4 | Nhận sổ hồng | 5%" ),
 				'hh_p_offer_title'    => array( 'type' => 'text', 'label' => 'Ưu đãi nổi bật (dòng chữ lớn)', 'placeholder' => 'VD: Chiết khấu tới 12% khi thanh toán sớm', 'help' => 'Để trống: lấy dòng đầu của "Chính sách bán hàng & ưu đãi".' ),

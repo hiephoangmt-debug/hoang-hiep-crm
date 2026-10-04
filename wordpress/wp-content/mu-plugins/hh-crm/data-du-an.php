@@ -693,8 +693,10 @@ function hh_import_projects() {
 			wp_update_post( array( 'ID' => $id, 'post_excerpt' => $p['excerpt'] ) );
 		}
 
-		// Bài giới thiệu chi tiết: chỉ điền khi dự án chưa có nội dung.
-		if ( ! empty( $p['content'] ) && '' === trim( get_post_field( 'post_content', $id ) ) ) {
+		// Bài giới thiệu chi tiết: chỉ điền khi dự án chưa có nội dung, hoặc nội dung vẫn là bản cũ do web nhập (fix_content) – không đè bài bạn đã tự sửa.
+		$current = get_post_field( 'post_content', $id );
+		$same    = static fn( $a, $b ) => preg_replace( '/\s+/', '', wp_unslash( (string) $a ) ) === preg_replace( '/\s+/', '', (string) $b );
+		if ( ! empty( $p['content'] ) && ( '' === trim( $current ) || ( ! empty( $p['fix_content'] ) && $same( $current, $p['fix_content'] ) ) ) ) {
 			wp_update_post( array( 'ID' => $id, 'post_content' => $p['content'] ) );
 		}
 

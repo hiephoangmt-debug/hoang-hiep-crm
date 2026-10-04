@@ -32,6 +32,7 @@ while ( have_posts() ) :
 		'lien-ket'   => 'Liên kết vùng',
 		'tien-ich'   => 'Tiện ích',
 		'mat-bang'   => 'Mặt bằng',
+		'gio-hang'   => hh_table( 'hh_p_hot_units', 5 ) ? 'Giỏ hàng' : '',
 		'san-pham'   => 'Loại sản phẩm',
 		'chinh-sach' => $resale ? 'Giá chuyển nhượng' : 'Chính sách',
 		'thu-cap'    => ! $resale && $has_market ? 'Chuyển nhượng & cho thuê' : '',
@@ -296,6 +297,8 @@ while ( have_posts() ) :
 				<?php endif; ?>
 				<?php hh_cta_box( $ctas['mat-bang'] ); ?>
 			</section>
+
+			<?php get_template_part( 'template-parts/project-hot-units' ); ?>
 
 			<section class="block" id="san-pham">
 				<h2 class="block__title">Loại sản phẩm</h2>
