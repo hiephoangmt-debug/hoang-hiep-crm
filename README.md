@@ -12,4 +12,4 @@ CRM – Real Estate Sales Management System
 - **Báo cáo tháng**: giống mẫu Excel (Chi phí cố định / phát sinh / Tổng cộng), xuất CSV, in PDF.
 - **Cài đặt**: danh mục, khoản cố định, sao lưu/khôi phục dữ liệu (.json).
 
-Dữ liệu lưu trên trình duyệt (localStorage); đã nạp sẵn dữ liệu tháng 8/2026.
+Dữ liệu lưu trên trình duyệt và **đồng bộ nhiều máy qua Google Sheets** – xem [`thu-chi/HUONG-DAN-DONG-BO.md`](thu-chi/HUONG-DAN-DONG-BO.md). Đã nạp sẵn dữ liệu tháng 8/2026.

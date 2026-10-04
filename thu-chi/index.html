@@ -133,6 +133,7 @@ label.f input,label.f select,label.f textarea{padding:9px 10px;border:1px solid 
   <div class="wrap" style="padding-bottom:0">
     <div class="top">
       <h1>Thu Chi Gia Đình · Mẹ Vân</h1>
+      <button id="syncChip" class="pill" style="border:0;cursor:pointer" data-go-settings>☁ Chưa đồng bộ</button>
       <div class="month">
         <button class="iconbtn" id="mPrev" aria-label="Tháng trước">◀</button>
         <b id="mLabel"></b>
@@ -155,6 +156,8 @@ label.f input,label.f select,label.f textarea{padding:9px 10px;border:1px solid 
 </header>
 
 <main class="wrap" id="view"></main>
+<!-- Khi chạy trên Google Apps Script, địa chỉ đồng bộ được điền tự động vào đây -->
+<div id="syncUrl" data-url="<?= syncUrl ?>" hidden></div>
 
 <div class="fab">
   <button class="btn thu" data-add="thu">+ Thu</button>
@@ -227,7 +230,8 @@ const SEED_CATS = [
   { id: 'khac', name: 'Chi khác', kind: 'chi' },
 ];
 function seedState() {
-  const T = (date, type, group, cat, desc, amount) => ({ id: uid(), date, type, group, cat, desc, amount });
+  let n = 0;
+  const T = (date, type, group, cat, desc, amount) => ({ id: 's' + (++n), date, type, group, cat, desc, amount });
   const tx = [
     T('2026-08-05', 'thu', 'co_dinh', 'luong', 'Lương ck + hoa hồng', 54000000),
     T('2026-08-05', 'thu', 'co_dinh', 'luong', 'Lương vk + lãi làm thẻ + vé máy bay', 40851000),
@@ -255,7 +259,8 @@ function seedState() {
     T('2026-08-16', 'chi', 'phat_sinh', 'gia_dung', 'Ra gối mền', 2779000),
     T('2026-08-31', 'chi', 'phat_sinh', 'cong_viec', 'Mkt ck', 1000000),
   ];
-  const R = (name, type, cat, amount, day, extra = {}) => ({ id: uid(), name, type, group: 'co_dinh', cat, amount, day, start: '2026-10', end: '', active: true, ...extra });
+  let k = 0;
+  const R = (name, type, cat, amount, day, extra = {}) => ({ id: 'r' + (++k), name, type, group: 'co_dinh', cat, amount, day, start: '2026-10', end: '', active: true, ...extra });
   const recurring = [
     R('Lương ck + hoa hồng', 'thu', 'luong', 54000000, 5),
     R('Lương vk + lãi làm thẻ', 'thu', 'luong', 40851000, 5),
@@ -276,18 +281,144 @@ function seedState() {
     hoa_don: 2100000, mua_sam: 2500000, gia_dung: 1000000, hieu_hi: 2000000, giao_luu: 1000000,
     y_te: 500000, cong_viec: 1500000, khac: 1000000,
   }, months: {} };
-  return { v: 1, categories: SEED_CATS.map(c => ({ ...c })), tx, recurring, plans: [], skips: {}, budgets };
+  return { v: 2, categories: SEED_CATS.map(c => ({ ...c })), tx, recurring, plans: [], skips: {}, budgets, deleted: {}, meta: {} };
 }
 
 /* ============ Lưu trữ ============ */
 const KEY = 'thuchi-me-van-v1';
 let S;
+function normalize(d) {
+  d = d || {};
+  for (const c of ['categories', 'tx', 'recurring', 'plans']) d[c] = Array.isArray(d[c]) ? d[c] : [];
+  d.skips = d.skips || {}; d.deleted = d.deleted || {}; d.meta = d.meta || {};
+  d.budgets = d.budgets || {}; d.budgets.default = d.budgets.default || {}; d.budgets.months = d.budgets.months || {};
+  d.v = 2; return d;
+}
 function load() {
-  try { const raw = localStorage.getItem(KEY); if (raw) { S = JSON.parse(raw); return; } } catch (e) {}
+  try { const raw = localStorage.getItem(KEY); if (raw) { S = normalize(JSON.parse(raw)); return; } } catch (e) {}
   S = seedState();
 }
-function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+function saveLocal() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+function save() { saveLocal(); scheduleSync(); }
 load();
+
+/* --- Đánh dấu thay đổi (để gộp dữ liệu giữa các máy) --- */
+const now = () => Date.now();
+// thêm mới / cập nhật 1 bản ghi theo id (luôn tìm lại trong S hiện tại vì dữ liệu có thể vừa được đồng bộ)
+function upsert(col, rec) {
+  rec.u = now();
+  const i = S[col].findIndex(x => x.id === rec.id);
+  if (i >= 0) S[col][i] = { ...S[col][i], ...rec }; else S[col].push(rec);
+  return S[col].find(x => x.id === rec.id);
+}
+function remove(col, id) { S[col] = S[col].filter(x => x.id !== id); S.deleted[id] = now(); }
+const touch = k => { S.meta[k] = now(); };
+function setBudget(scope, catId, n) {
+  const target = scope === 'default' ? S.budgets.default : (S.budgets.months[scope] ||= {});
+  if (n == null) delete target[catId]; else target[catId] = n;
+  touch(scope === 'default' ? `b:default:${catId}` : `b:m:${scope}:${catId}`);
+}
+function setSkip(key, on) { if (on) S.skips[key] = true; else delete S.skips[key]; touch('s:' + key); }
+
+/* --- Gộp 2 bản dữ liệu: bản ghi nào sửa sau thì thắng, có ghi nhớ khoản đã xóa --- */
+function flatMeta(s) {
+  const f = {};
+  for (const [c, v] of Object.entries(s.budgets?.default || {})) f['b:default:' + c] = v;
+  for (const [m, o] of Object.entries(s.budgets?.months || {})) for (const [c, v] of Object.entries(o || {})) f[`b:m:${m}:${c}`] = v;
+  for (const [k, v] of Object.entries(s.skips || {})) if (v) f['s:' + k] = true;
+  return f;
+}
+function mergeState(a, b) {
+  a = normalize(a); b = normalize(b);
+  const out = normalize({});
+  for (const s of [a, b]) for (const [id, t] of Object.entries(s.deleted)) out.deleted[id] = Math.max(out.deleted[id] || 0, t);
+  for (const col of ['categories', 'tx', 'recurring', 'plans']) {
+    const map = new Map();
+    for (const s of [a, b]) for (const r of s[col]) { const cur = map.get(r.id); if (!cur || (r.u || 0) > (cur.u || 0)) map.set(r.id, r); }
+    out[col] = [...map.values()].filter(r => !((out.deleted[r.id] || 0) >= (r.u || 0) && out.deleted[r.id]));
+  }
+  const fa = flatMeta(a), fb = flatMeta(b);
+  for (const k of new Set([...Object.keys(fa), ...Object.keys(fb), ...Object.keys(a.meta), ...Object.keys(b.meta)])) {
+    const ta = a.meta[k] || 0, tb = b.meta[k] || 0;
+    const src = tb > ta ? fb : ta > tb ? fa : (k in fa ? fa : fb);
+    if (ta || tb) out.meta[k] = Math.max(ta, tb);
+    if (!(k in src)) continue;
+    if (k.startsWith('s:')) out.skips[k.slice(2)] = true;
+    else if (k.startsWith('b:default:')) out.budgets.default[k.slice(10)] = src[k];
+    else { const [, , m, c] = k.split(':'); (out.budgets.months[m] ||= {})[c] = src[k]; }
+  }
+  return out;
+}
+// chuỗi JSON ổn định (sắp xếp khóa & bản ghi) để so sánh 2 bản dữ liệu
+function stable(v) {
+  if (Array.isArray(v)) return '[' + v.map(stable).sort().join(',') + ']';
+  if (v && typeof v === 'object') return '{' + Object.keys(v).sort().filter(k => v[k] !== undefined).map(k => JSON.stringify(k) + ':' + stable(v[k])).join(',') + '}';
+  return JSON.stringify(v);
+}
+
+/* --- Đồng bộ với Google Sheets (Apps Script) --- */
+const SYNC_KEY = KEY + '-sync';
+const SY = { cfg: {}, state: 'off', msg: '', last: 0, busy: false, again: false, timer: 0 };
+try { SY.cfg = JSON.parse(localStorage.getItem(SYNC_KEY) || '{}'); } catch (e) {}
+const injectedUrl = (document.getElementById('syncUrl')?.dataset.url || '');
+if (!SY.cfg.url && /^https:\/\//.test(injectedUrl)) SY.cfg.url = injectedUrl;
+const saveCfg = () => { try { localStorage.setItem(SYNC_KEY, JSON.stringify(SY.cfg)); } catch (e) {} };
+const syncOn = () => !!(SY.cfg.url && SY.cfg.key && SY.cfg.linked);
+
+async function api(action, payload = {}, cfg = SY.cfg) {
+  let r;
+  if (action === 'load') r = await fetch(`${cfg.url}?action=load&key=${encodeURIComponent(cfg.key)}&t=${now()}`);
+  else r = await fetch(cfg.url, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action, key: cfg.key, ...payload }) });
+  const txt = await r.text();
+  try { return JSON.parse(txt); } catch (e) { throw new Error('Địa chỉ đồng bộ không đúng hoặc chưa cấp quyền "Bất kỳ ai"'); }
+}
+function setSync(state, msg = '') { SY.state = state; SY.msg = msg; paintSync(); }
+function paintSync() {
+  const el = document.getElementById('syncChip'); if (!el) return;
+  const t = SY.last ? new Date(SY.last).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }) : '';
+  const map = { off: ['☁ Chưa đồng bộ', ''], syncing: ['⟳ Đang đồng bộ…', 'info'], ok: ['☁ Đã đồng bộ ' + t, 'done'], error: ['⚠ Lỗi đồng bộ', 'warn'], offline: ['⚠ Mất mạng – sẽ đồng bộ lại', 'warn'] };
+  const [txt, cls] = map[syncOn() ? SY.state : 'off'];
+  el.textContent = txt; el.className = 'pill ' + cls; el.title = SY.msg || '';
+  const st = document.getElementById('syncStatus'); if (st) st.textContent = SY.msg ? txt + ' – ' + SY.msg : txt;
+}
+function scheduleSync() { if (!syncOn()) return; clearTimeout(SY.timer); SY.timer = setTimeout(() => syncNow(), 1200); }
+// mode: 'merge' (mặc định) | 'force' (ghi đè máy chủ bằng dữ liệu máy này) | 'remote' (lấy dữ liệu máy chủ)
+async function syncNow(mode = 'merge') {
+  if (!syncOn()) return;
+  if (SY.busy) { SY.again = true; return; }
+  SY.busy = true; setSync('syncing');
+  try {
+    for (let i = 0; i < 4; i++) {
+      const res = await api('load');
+      if (!res.ok) throw new Error(res.error || 'Lỗi máy chủ');
+      const remote = res.data ? normalize(res.data) : null;
+      const merged = mode === 'force' || !remote ? S : mode === 'remote' ? remote : mergeState(S, remote);
+      if (stable(merged) !== stable(S)) { S = merged; saveLocal(); safeRender(); }
+      if (remote && stable(merged) === stable(remote)) break;
+      const w = await api('save', { baseRev: res.rev, data: S, force: mode === 'force' });
+      if (w.ok) break;
+      if (!w.conflict) throw new Error(w.error || 'Không lưu được');
+      mode = 'merge'; // máy khác vừa lưu: tải lại rồi gộp tiếp
+    }
+    SY.last = now(); setSync('ok');
+  } catch (e) {
+    setSync(navigator.onLine === false ? 'offline' : 'error', e.message);
+  } finally {
+    SY.busy = false;
+    if (SY.again) { SY.again = false; syncNow(); }
+  }
+}
+// không vẽ lại khi đang gõ trong ô nhập (tránh mất chữ), sẽ vẽ lại sau
+let pendingRender = false;
+function safeRender() {
+  const a = document.activeElement;
+  if (a && a.closest && a.closest('#view') && /INPUT|SELECT|TEXTAREA/.test(a.tagName)) { pendingRender = true; return; }
+  render();
+}
+document.addEventListener('focusout', () => setTimeout(() => { if (pendingRender && !document.activeElement?.closest?.('#view input,#view select')) { pendingRender = false; render(); } }, 50));
+setInterval(() => { if (document.visibilityState === 'visible') syncNow(); }, 30000);
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') syncNow(); });
+window.addEventListener('online', () => syncNow());
 
 /* ============ Truy vấn ============ */
 const cat = id => S.categories.find(c => c.id === id) || { id, name: 'Chưa phân loại', kind: 'chi' };
@@ -636,6 +767,16 @@ function settings() {
       <tfoot><tr class="total"><td>Mỗi tháng: thu ${fmtShort(recThu)} · chi ${fmtShort(recChi)}</td><td class="num ${recThu - recChi < 0 ? 'neg' : 'pos'}">${fmtS(recThu - recChi)}</td><td></td></tr></tfoot></table>
     </div>
     <div class="grid" style="align-content:start">
+      <div class="card" id="syncCard">
+        <h3>Đồng bộ nhiều máy (Google Sheets)</h3>
+        <p class="small muted" style="margin-top:0">Kết nối với Google Sheet để dùng chung dữ liệu trên điện thoại, máy tính của cả nhà. Xem hướng dẫn trong file <b>HUONG-DAN-DONG-BO.md</b>.</p>
+        <label class="f">Địa chỉ đồng bộ (Web App URL)<input id="syUrl" value="${esc(SY.cfg.url || '')}" placeholder="https://script.google.com/macros/s/…/exec" ${injectedUrl.startsWith('https://') ? 'readonly' : ''}></label>
+        <label class="f" style="margin-top:8px">Mã bảo mật<input id="syKey" type="password" value="${esc(SY.cfg.key || '')}" placeholder="mã đã đặt trong Apps Script"></label>
+        <div class="actions" style="justify-content:flex-start;margin-top:10px">
+          ${syncOn() ? `<button class="btn primary" id="syNow">Đồng bộ ngay</button><button class="btn" id="syOff">Ngắt kết nối</button>` : `<button class="btn primary" id="syConnect">Kết nối</button>`}
+        </div>
+        <p class="small" id="syncStatus" style="margin-bottom:0"></p>
+      </div>
       <div class="card">
         <h3>Danh mục <button class="btn sm" data-newcat>+ Thêm</button></h3>
         <div class="list">${S.categories.map(c => `<div class="item"><span class="pill ${c.kind}">${c.kind === 'thu' ? 'Thu' : 'Chi'}</span><div class="main">${esc(c.name)}</div>
@@ -643,7 +784,7 @@ function settings() {
       </div>
       <div class="card">
         <h3>Sao lưu dữ liệu</h3>
-        <p class="small muted" style="margin-top:0">Dữ liệu được lưu ngay trên trình duyệt của máy này. Nên “Tải bản sao lưu” định kỳ, và dùng “Khôi phục” để chuyển sang máy/điện thoại khác.</p>
+        <p class="small muted" style="margin-top:0">Dữ liệu luôn được lưu trên máy này${syncOn() ? ' và tự đồng bộ lên Google Sheet' : ''}. Nên “Tải bản sao lưu” định kỳ để phòng khi cần.</p>
         <div class="actions" style="justify-content:flex-start">
           <button class="btn" id="bk">Tải bản sao lưu (.json)</button>
           <label class="btn">Khôi phục từ file<input type="file" id="rs" accept=".json,application/json" hidden></label>
@@ -709,13 +850,12 @@ function txDialog(tx, preset = {}, after) {
     <label class="f">Ghi chú<input name="note" value="${esc(x.note || '')}" placeholder="không bắt buộc"></label>`,
     `${isNew ? '' : '<button class="btn" value="del" style="color:var(--chi);margin-right:auto" formnovalidate>Xóa</button>'}<button class="btn" value="cancel" formnovalidate>Hủy</button><button class="btn primary" value="ok">Lưu</button>`,
     (act, b) => {
-      if (act === 'del') { if (!confirm('Xóa giao dịch này?')) return false; S.tx = S.tx.filter(t => t.id !== tx.id); S.plans.forEach(p => { if (p.txId === tx.id) delete p.txId; }); save(); render(); toast('Đã xóa'); return; }
+      if (act === 'del') { if (!confirm('Xóa giao dịch này?')) return false; remove('tx', tx.id); S.plans.filter(p => p.txId === tx.id).forEach(p => upsert('plans', { id: p.id, txId: undefined })); save(); render(); toast('Đã xóa'); return; }
       const amount = parseMoney(val(b, 'amount'));
       if (!amount) { alert('Vui lòng nhập số tiền'); return false; }
       const data = { date: val(b, 'date'), type: val(b, 'type'), group: val(b, 'group'), cat: val(b, 'cat'), desc: val(b, 'desc').trim(), amount, note: val(b, 'note').trim() };
       let saved;
-      if (isNew) { saved = { id: uid(), ...data, ...(preset.recId ? { recId: preset.recId } : {}) }; S.tx.push(saved); }
-      else { Object.assign(tx, data); saved = tx; }
+      saved = upsert('tx', isNew ? { id: uid(), ...data, ...(preset.recId ? { recId: preset.recId } : {}) } : { id: tx.id, ...data });
       after && after(saved);
       save(); UI.m = monthOf(data.date); render(); toast('Đã lưu ' + (data.type === 'thu' ? '+' : '−') + fmt(amount));
     });
@@ -734,11 +874,11 @@ function planDialog(p) {
     <label class="f">Ghi chú<input name="note" value="${esc(x.note || '')}"></label>`,
     `${isNew ? '' : '<button class="btn" value="del" style="color:var(--chi);margin-right:auto" formnovalidate>Xóa</button>'}<button class="btn" value="cancel" formnovalidate>Hủy</button><button class="btn primary" value="ok">Lưu</button>`,
     (act, b) => {
-      if (act === 'del') { S.plans = S.plans.filter(q => q.id !== p.id); save(); render(); return; }
+      if (act === 'del') { remove('plans', p.id); save(); render(); return; }
       const amount = parseMoney(val(b, 'amount'));
       if (!amount) { alert('Vui lòng nhập số tiền'); return false; }
       const data = { date: val(b, 'date'), type: val(b, 'type'), group: val(b, 'group'), cat: val(b, 'cat'), name: val(b, 'name').trim(), amount, note: val(b, 'note').trim() };
-      if (isNew) S.plans.push({ id: uid(), ...data }); else Object.assign(p, data);
+      upsert('plans', { id: isNew ? uid() : p.id, ...data });
       save(); UI.m = monthOf(data.date); render(); toast('Đã lưu kế hoạch');
     });
   wireMoney($('#dlgBody')); wireTypeSwitch($('#dlgBody'));
@@ -758,12 +898,12 @@ function recDialog(r) {
     <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" name="active" ${x.active ? 'checked' : ''}> Đang áp dụng</label>`,
     `${isNew ? '' : '<button class="btn" value="del" style="color:var(--chi);margin-right:auto" formnovalidate>Xóa</button>'}<button class="btn" value="cancel" formnovalidate>Hủy</button><button class="btn primary" value="ok">Lưu</button>`,
     (act, b) => {
-      if (act === 'del') { if (!confirm('Xóa khoản cố định này? (Các giao dịch đã ghi vẫn giữ nguyên)')) return false; S.recurring = S.recurring.filter(q => q.id !== r.id); save(); render(); return; }
+      if (act === 'del') { if (!confirm('Xóa khoản cố định này? (Các giao dịch đã ghi vẫn giữ nguyên)')) return false; remove('recurring', r.id); save(); render(); return; }
       const amount = parseMoney(val(b, 'amount'));
       if (!amount) { alert('Vui lòng nhập số tiền'); return false; }
       const data = { name: val(b, 'name').trim(), type: val(b, 'type'), group: val(b, 'group'), cat: val(b, 'cat'), amount, day: Math.max(1, Math.min(31, Number(val(b, 'day')) || 1)),
         start: val(b, 'start'), end: val(b, 'end'), note: val(b, 'note').trim(), active: $('[name=active]', b).checked };
-      if (isNew) S.recurring.push({ id: uid(), ...data }); else Object.assign(r, data);
+      upsert('recurring', { id: isNew ? uid() : r.id, ...data });
       save(); render(); toast('Đã lưu');
     });
   wireMoney($('#dlgBody')); wireTypeSwitch($('#dlgBody'));
@@ -778,9 +918,9 @@ function catDialog(c) {
     ${used ? '<p class="hint">Danh mục đang được dùng nên không thể xóa.</p>' : ''}`,
     `${!isNew && !used ? '<button class="btn" value="del" style="color:var(--chi);margin-right:auto" formnovalidate>Xóa</button>' : ''}<button class="btn" value="cancel" formnovalidate>Hủy</button><button class="btn primary" value="ok">Lưu</button>`,
     (act, b) => {
-      if (act === 'del') { S.categories = S.categories.filter(q => q.id !== c.id); delete S.budgets.default[c.id]; save(); render(); return; }
+      if (act === 'del') { remove('categories', c.id); setBudget('default', c.id, null); save(); render(); return; }
       const name = val(b, 'name').trim();
-      if (isNew) S.categories.push({ id: 'c_' + uid(), name, kind: val(b, 'kind') }); else c.name = name;
+      upsert('categories', isNew ? { id: 'c_' + uid(), name, kind: val(b, 'kind') } : { id: c.id, name });
       save(); render();
     });
 }
@@ -812,11 +952,11 @@ function bindView(v) {
         txDialog(null, { type: r.type, group: r.group, cat: r.cat, desc: `${r.name} T${Number(o.m.slice(5))}`, amount: r.amount, date: date <= today ? date : today, recId: r.id });
       } else {
         const p = o.ref;
-        txDialog(null, { type: p.type, group: p.group, cat: p.cat, desc: p.name, amount: p.amount, note: p.note, date: p.date <= today ? p.date : today }, saved => { p.txId = saved.id; });
+        txDialog(null, { type: p.type, group: p.group, cat: p.cat, desc: p.name, amount: p.amount, note: p.note, date: p.date <= today ? p.date : today }, saved => { upsert('plans', { id: p.id, txId: saved.id }); });
       }
     }
-    else if (d.skip) { const o = findOcc(d.skip); if (o.kind === 'rec') S.skips[d.skip] = true; else o.ref.skipped = true; save(); render(); }
-    else if (d.unskip) { const o = findOcc(d.unskip); if (o.kind === 'rec') delete S.skips[d.unskip]; else delete o.ref.skipped; save(); render(); }
+    else if (d.skip) { const o = findOcc(d.skip); if (o.kind === 'rec') setSkip(d.skip, true); else upsert('plans', { id: o.ref.id, skipped: true }); save(); render(); }
+    else if (d.unskip) { const o = findOcc(d.unskip); if (o.kind === 'rec') setSkip(d.unskip, false); else upsert('plans', { id: o.ref.id, skipped: undefined }); save(); render(); }
   };
   // bộ lọc sổ
   const fq = $('#fq', v);
@@ -827,19 +967,43 @@ function bindView(v) {
   // ngân sách
   $$('input.bud', v).forEach(i => i.onchange = () => {
     const n = i.value.trim() === '' ? null : parseMoney(i.value);
-    const target = UI.budMode === 'month' ? (S.budgets.months[UI.m] ||= {}) : S.budgets.default;
-    if (n == null) delete target[i.dataset.cat]; else target[i.dataset.cat] = n;
+    setBudget(UI.budMode === 'month' ? UI.m : 'default', i.dataset.cat, n);
     save(); render(); toast('Đã cập nhật ngân sách');
   });
   $('#csv', v) && ($('#csv', v).onclick = exportCSV);
+  $('#syConnect', v) && ($('#syConnect', v).onclick = connectSync);
+  $('#syNow', v) && ($('#syNow', v).onclick = () => syncNow());
+  $('#syOff', v) && ($('#syOff', v).onclick = () => { if (!confirm('Ngắt đồng bộ trên máy này? Dữ liệu trên máy và trên Google Sheet vẫn giữ nguyên.')) return; SY.cfg.linked = false; saveCfg(); render(); });
+  paintSync();
   $('#bk', v) && ($('#bk', v).onclick = () => download(`thu-chi-me-van-${today}.json`, JSON.stringify(S, null, 1), 'application/json'));
   $('#rs', v) && ($('#rs', v).onchange = async e => {
     const f = e.target.files[0]; if (!f) return;
-    try { const d = JSON.parse(await f.text()); if (!d.tx || !d.categories) throw 0; if (!confirm(`Khôi phục ${d.tx.length} giao dịch? Dữ liệu hiện tại sẽ bị thay thế.`)) return; S = d; save(); UI.m = defaultMonth(); render(); toast('Đã khôi phục'); }
+    try { const d = JSON.parse(await f.text()); if (!d.tx || !d.categories) throw 0; if (!confirm(`Khôi phục ${d.tx.length} giao dịch? Dữ liệu hiện tại${syncOn() ? ' (và dữ liệu trên Google Sheet)' : ''} sẽ bị thay thế.`)) return; S = normalize(d); saveLocal(); syncNow('force'); UI.m = defaultMonth(); render(); toast('Đã khôi phục'); }
     catch { alert('File sao lưu không hợp lệ'); }
   });
-  $('#reset', v) && ($('#reset', v).onclick = () => { if (!confirm('Xóa toàn bộ dữ liệu và nạp lại dữ liệu mẫu tháng 8/2026?')) return; S = seedState(); save(); UI.m = defaultMonth(); render(); });
+  $('#reset', v) && ($('#reset', v).onclick = () => { if (!confirm('Xóa toàn bộ dữ liệu và nạp lại dữ liệu mẫu tháng 8/2026?' + (syncOn() ? ' Dữ liệu trên Google Sheet cũng bị thay thế.' : ''))) return; S = seedState(); saveLocal(); syncNow('force'); UI.m = defaultMonth(); render(); });
 }
+
+async function connectSync() {
+  const cfg = { url: $('#syUrl').value.trim(), key: $('#syKey').value.trim() };
+  if (!/^https:\/\/script\.google(usercontent)?\.com\//.test(cfg.url)) { alert('Địa chỉ đồng bộ phải có dạng https://script.google.com/macros/s/…/exec'); return; }
+  if (!cfg.key) { alert('Vui lòng nhập mã bảo mật'); return; }
+  const btn = $('#syConnect'); btn.disabled = true; btn.textContent = 'Đang kết nối…';
+  try {
+    const res = await api('load', {}, cfg);
+    if (!res.ok) throw new Error(res.error || 'Không kết nối được');
+    let mode = 'merge';
+    if (res.data && (res.data.tx || []).length) {
+      mode = confirm(`Google Sheet đã có ${res.data.tx.length} giao dịch.\n\nOK = Dùng dữ liệu trên Google Sheet (khuyên dùng khi mở trên máy mới).\nHủy = Gộp chung với dữ liệu đang có trên máy này.`) ? 'remote' : 'merge';
+    }
+    SY.cfg = { ...cfg, linked: true }; saveCfg();
+    await syncNow(mode);
+    render(); toast(SY.state === 'ok' ? 'Đã kết nối đồng bộ' : 'Kết nối lỗi: ' + SY.msg);
+  } catch (e) {
+    alert('Không kết nối được: ' + e.message); btn.disabled = false; btn.textContent = 'Kết nối';
+  }
+}
+$('#syncChip').onclick = () => { UI.tab = 'settings'; render(); setTimeout(() => $('#syncCard')?.scrollIntoView({ behavior: 'smooth' }), 50); };
 
 $('#tabs').onclick = e => { const b = e.target.closest('button'); if (!b) return; UI.tab = b.dataset.tab; try { localStorage.setItem(KEY + '-tab', UI.tab); } catch (e) {} render(); };
 $('#mPrev').onclick = () => { UI.m = addMonth(UI.m, -1); render(); };
@@ -847,6 +1011,8 @@ $('#mNext').onclick = () => { UI.m = addMonth(UI.m, 1); render(); };
 $$('[data-add]').forEach(b => b.onclick = () => txDialog(null, { type: b.dataset.add, group: 'phat_sinh' }));
 
 render();
+paintSync();
+syncNow();
 </script>
 </body>
 </html>
