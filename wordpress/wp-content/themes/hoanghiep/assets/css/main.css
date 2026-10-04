@@ -1138,3 +1138,22 @@ html.nav-locked, html.nav-locked body { overflow: hidden; }
 	.entry-content .lp-stats { grid-template-columns: repeat(3, 1fr); }
 	.entry-content .lp-stats:has(> p:nth-child(4):last-child) { grid-template-columns: repeat(4, 1fr); }
 }
+
+/* Khung ưu đãi gọn: 4 con số lớn + 1 nút; chi tiết thu vào "Xem chi tiết". */
+.offer-stats { flex: 1 1 100%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 4px 0 0; padding: 0; list-style: none; }
+.offer-stats li { padding: 14px 10px; border-radius: var(--radius); background: rgba(255, 255, 255, .12); text-align: center; line-height: 1.35; }
+.offer-stats b { display: block; font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.4rem); line-height: 1.1; color: #ffd27a; }
+.offer-stats span { font-size: .84rem; color: rgba(255, 255, 255, .9); }
+.offer-banner__cta { flex: 1 1 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.offer-banner__cta span { font-size: .9rem; font-weight: 600; color: #ffe3b0; }
+.policy-more { margin: 0 0 18px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--white); }
+.policy-more > summary { cursor: pointer; padding: 14px 18px; font-weight: 700; color: var(--navy); list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+.policy-more > summary::-webkit-details-marker { display: none; }
+.policy-more > summary::after { content: "+"; font-size: 1.3rem; line-height: 1; color: var(--gold-2); }
+.policy-more[open] > summary::after { content: "–"; }
+.policy-more[open] { padding: 0 18px 6px; }
+.policy-more[open] > summary { margin: 0 -18px 12px; border-bottom: 1px solid var(--line); }
+@media (max-width: 640px) {
+	.offer-stats { grid-template-columns: 1fr 1fr; }
+	.offer-banner__cta .btn { width: 100%; justify-content: center; }
+}

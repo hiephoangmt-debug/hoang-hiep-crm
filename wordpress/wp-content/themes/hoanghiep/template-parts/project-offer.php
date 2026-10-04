@@ -2,7 +2,9 @@
 /**
  * Khung ưu đãi đầu mục Chính sách: dòng ưu đãi lớn, đồng hồ đếm ngược đến hạn ưu đãi, bảng chiết khấu theo phương án.
  */
+$part     = $args['part'] ?? 'all'; // all | banner | discount
 $title    = get_the_title();
+$stats    = hh_table( 'hh_p_offer_stats', 2 );
 $headline = hh_meta( 'hh_p_offer_title' ) ?: ( hh_project_offer_lines() ? hh_project_offer_lines()[0] : '' );
 $discount = hh_table( 'hh_p_discount_table', 4 );
 if ( ! $headline && ! $discount ) {
@@ -11,8 +13,8 @@ if ( ! $headline && ! $discount ) {
 $deadline = hh_parse_vn_date( hh_meta( 'hh_p_offer_deadline' ) );
 $live     = $deadline && $deadline > time();
 ?>
-<?php if ( $headline ) : ?>
-	<div class="offer-banner">
+<?php if ( $headline && 'discount' !== $part ) : ?>
+	<div class="offer-banner<?php echo $stats ? ' offer-banner--stats' : ''; ?>">
 		<div class="offer-banner__text">
 			<span class="offer-banner__tag"><?php echo $live ? 'Ưu đãi có hạn' : 'Ưu đãi đang áp dụng'; ?></span>
 			<p class="offer-banner__title"><?php echo wp_kses( preg_replace( '/(\d+(?:[.,]\d+)?\s?%)/u', '<em>$1</em>', esc_html( $headline ) ), array( 'em' => array() ) ); ?></p>
@@ -29,12 +31,23 @@ $live     = $deadline && $deadline > time();
 				<div><b data-cd="m">00</b><span>Phút</span></div>
 				<div><b data-cd="s">00</b><span>Giây</span></div>
 			</div>
-		<?php else : ?>
+		<?php elseif ( ! $stats ) : ?>
 			<a class="btn btn--gold" href="#lien-he" data-need="Nhận bảng giá dự án" data-msg="<?php echo esc_attr( 'Gửi tôi chính sách bán hàng mới nhất ' . $title . '.' ); ?>">Nhận chính sách</a>
+		<?php endif; ?>
+		<?php if ( $stats ) : ?>
+			<ul class="offer-stats">
+				<?php foreach ( array_slice( $stats, 0, 4 ) as list( $num, $label ) ) : ?>
+					<li><b><?php echo esc_html( $num ); ?></b><span><?php echo esc_html( $label ); ?></span></li>
+				<?php endforeach; ?>
+			</ul>
+			<div class="offer-banner__cta">
+				<a class="btn btn--gold" href="#lien-he" data-need="Nhận bảng giá dự án" data-msg="<?php echo esc_attr( 'Gửi tôi phiếu tính giá và chính sách mới nhất ' . $title . '. Căn tôi quan tâm: ' ); ?>">Nhận phiếu tính giá căn của bạn</a>
+				<?php if ( $live ) : ?><span>Còn <?php echo esc_html( (string) max( 1, (int) floor( ( $deadline - time() ) / DAY_IN_SECONDS ) ) ); ?> ngày hưởng chiết khấu thanh toán sớm</span><?php endif; ?>
+			</div>
 		<?php endif; ?>
 	</div>
 <?php endif; ?>
-<?php if ( $discount ) : ?>
+<?php if ( $discount && 'banner' !== $part ) : ?>
 	<div class="discount">
 		<p class="discount__title">Chiết khấu theo phương án thanh toán <?php echo esc_html( $title ); ?></p>
 		<div class="table-wrap">

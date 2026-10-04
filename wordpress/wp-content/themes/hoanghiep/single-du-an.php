@@ -109,6 +109,9 @@ while ( have_posts() ) :
 				<?php if ( $resale ) : ?>
 					<a class="btn btn--gold" href="#giao-dich">Xem căn chuyển nhượng &amp; cho thuê</a>
 				<?php endif; ?>
+				<?php if ( ! $resale && ! empty( $compact ) ) : ?>
+					</details>
+				<?php endif; ?>
 				<?php if ( hh_meta( 'hh_p_pricelist_url' ) ) : ?>
 					<a class="btn btn--ghost" href="<?php echo esc_url( hh_meta( 'hh_p_pricelist_url' ) ); ?>" target="_blank" rel="noopener"><?php echo hh_icon( 'file' ); // phpcs:ignore ?> Tải brochure</a>
 				<?php endif; ?>
@@ -355,7 +358,13 @@ while ( have_posts() ) :
 					<?php endif; ?>
 				<?php else : ?>
 					<h2 class="block__title">Chính sách <?php echo esc_html( $title ); ?><?php echo hh_parse_vn_date( hh_meta( 'hh_p_offer_start' ) ) ? ' – <span class="block__title-em">áp dụng từ ' . esc_html( wp_date( 'd/m/Y', hh_parse_vn_date( hh_meta( 'hh_p_offer_start' ) ) ) ) . '</span>' : ''; // phpcs:ignore ?></h2>
-					<?php get_template_part( 'template-parts/project-offer' ); ?>
+					<?php $compact = (bool) hh_table( 'hh_p_offer_stats', 2 ); ?>
+					<?php get_template_part( 'template-parts/project-offer', null, array( 'part' => $compact ? 'banner' : 'all' ) ); ?>
+					<?php if ( $compact ) : ?>
+						<details class="policy-more">
+							<summary>Xem chi tiết: chiết khấu từng phương án, lịch thanh toán, vay ngân hàng</summary>
+							<?php get_template_part( 'template-parts/project-offer', null, array( 'part' => 'discount' ) ); ?>
+					<?php endif; ?>
 					<?php if ( $units_data ) : ?>
 						<a class="units-link" href="<?php echo esc_url( hh_units_url( $id ) ); ?>">
 							<strong>Bảng tính căn chi tiết – <?php echo esc_html( hh_units_summary( $units_data ) ); ?></strong>

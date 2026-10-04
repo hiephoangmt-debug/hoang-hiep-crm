@@ -13,8 +13,9 @@ defined( 'ABSPATH' ) || exit;
 /** Các ô chung cho FourS Tower và Tòa F2 (chính sách F2 đang mở bán). */
 function hh_fours_f2_policy_meta() {
 	return array(
-		'hh_p_offer_title'    => 'Tiết kiệm đến khoảng 17% giá niêm yết khi thanh toán sớm 95% – Tòa F2',
-		'hh_p_offer_note'     => 'CSBH 4.2 Tòa F2 áp dụng từ 26/9/2026 – hạn thanh toán sớm 25/10/2026. Ví dụ căn niêm yết 3 tỷ còn khoảng 2,48 tỷ (theo phiếu tính giá CĐT).',
+		'hh_p_offer_title'    => 'Chiết khấu lên đến 18% – chỉ cần 25% vốn đến khi nhận nhà',
+		'hh_p_offer_note'     => 'CSBH 4.2 Tòa F2 – hạn chiết khấu thanh toán sớm 25/10/2026.',
+		'hh_p_offer_stats'    => "18% | Chiết khấu cộng dồn tối đa\n25% | Vốn tự có đến khi nhận nhà (vay 70%)\n15% | Thanh toán đến khi ký HĐMB\n70% | Đã nhận nhà – Sun Early Key",
 		'hh_p_offer_start'    => '26/09/2026',
 		'hh_p_offer_deadline' => '25/10/2026',
 		'hh_p_discount_table' => "Thanh toán sớm 95% | Trước 25/10/2026 | 17,2% | Early Bird 3% + không vay 3% + thanh toán sớm 12%\nThanh toán sớm 70% – nhận nhà rồi trả 25% còn lại | Trước 25/10/2026 | 10,6% | Early Bird 3% + không vay 3% + thanh toán sớm 5%\nThanh toán sớm 50% | Trước 25/10/2026 | 8,3% | Early Bird 3% + không vay 3% + thanh toán sớm 2,5%\nTiến độ chuẩn, không vay ngân hàng | Early Bird có thời hạn | 5,9% | Early Bird 3% + không vay 3%\nVay ngân hàng – giải ngân 70% | Early Bird có thời hạn | 3% | Early Bird 3%",
@@ -26,7 +27,10 @@ function hh_fours_f2_policy_meta() {
 
 /** Bảng chiết khấu bản trước (đã gửi) – thay nếu anh chưa sửa. */
 function hh_fours_f2_old_meta() {
-	return array( 'hh_p_discount_table' => "Thanh toán sớm 95% (cộng dồn Early Bird 3% + không vay 3%) | Trước 25/10/2026 | 12%\nThanh toán sớm 70% – nhận nhà rồi trả 25% còn lại | Trước 25/10/2026 | 5%\nThanh toán sớm 50% | Trước 25/10/2026 | 2,5%\nTiến độ chuẩn, không vay ngân hàng (Early Bird 3% + không vay 3%) | Theo tiến độ | 6%\nVay ngân hàng – giải ngân 70% (Early Bird) | Theo tiến độ | 3%" );
+	return array(
+		'hh_p_offer_title' => 'Tiết kiệm đến khoảng 17% giá niêm yết khi thanh toán sớm 95% – Tòa F2',
+		'hh_p_offer_note'  => 'CSBH 4.2 Tòa F2 áp dụng từ 26/9/2026 – hạn thanh toán sớm 25/10/2026. Ví dụ căn niêm yết 3 tỷ còn khoảng 2,48 tỷ (theo phiếu tính giá CĐT).',
+		'hh_p_discount_table' => "Thanh toán sớm 95% (cộng dồn Early Bird 3% + không vay 3%) | Trước 25/10/2026 | 12%\nThanh toán sớm 70% – nhận nhà rồi trả 25% còn lại | Trước 25/10/2026 | 5%\nThanh toán sớm 50% | Trước 25/10/2026 | 2,5%\nTiến độ chuẩn, không vay ngân hàng (Early Bird 3% + không vay 3%) | Theo tiến độ | 6%\nVay ngân hàng – giải ngân 70% (Early Bird) | Theo tiến độ | 3%" );
 }
 
 /** Ví dụ trong phiếu tính giá CĐT: căn niêm yết 3 tỷ (gồm VAT & KPBT). */
@@ -58,7 +62,8 @@ function hh_dataset_fours_f2( $projects ) {
 		);
 		$projects[ $i ]['fix_meta'] = hh_fours_f2_old_meta() + array_intersect_key( $p['meta'], $upd ) + ( $p['fix_meta'] ?? array() );
 		$projects[ $i ]['meta']     = array_merge( $p['meta'], $upd );
-		$projects[ $i ]['content']  = hh_fours_tower_content();
+		$projects[ $i ]['content']     = hh_fours_tower_content();
+		$projects[ $i ]['fix_content'] = array( hh_fours_tower_content( 1 ) );
 	}
 
 	$projects[] = array(
@@ -91,6 +96,7 @@ function hh_dataset_fours_f2( $projects ) {
 		),
 		'fix_meta' => hh_fours_f2_old_meta(),
 		'content' => hh_fours_f2_content(),
+		'fix_content' => array( hh_fours_f2_content( 1 ) ),
 		'sources' => array(
 			'https://vnexpress.net/thap-f2-fours-tower-ghi-nhan-gan-1-400-luot-dat-cho-5125919.html',
 			'https://tuoitre.vn/fours-tower-an-cu-dau-tu-tai-trung-tam-nam-da-nang-20260410181212744.htm',
@@ -99,22 +105,25 @@ function hh_dataset_fours_f2( $projects ) {
 	return $projects;
 }
 
+/** 4 con số chính (chiết khấu cộng dồn 3% + 3% + 12%; vay: 15% + 10% vốn tự có trước bàn giao, ngân hàng giải ngân 70%). */
+function hh_fours_stats() {
+	return "<div class=\"lp-stats\">\n<p><b>18%</b><span>chiết khấu cộng dồn tối đa</span></p>\n<p><b>25%</b><span>vốn tự có đến khi nhận nhà (vay 70%)</span></p>\n<p><b>15%</b><span>thanh toán đến khi ký HĐMB</span></p>\n<p><b>70%</b><span>đã nhận nhà – Sun Early Key</span></p>\n</div>";
+}
+
 /** Nút gọi nhận thông tin (mở form liên hệ, điền sẵn lời nhắn). */
 function hh_fours_cta( $label, $msg, $class = 'btn btn--gold' ) {
 	return '<a class="' . esc_attr( $class ) . '" href="#lien-he" data-need="Nhận bảng giá dự án" data-msg="' . esc_attr( $msg ) . '">' . esc_html( $label ) . '</a>';
 }
 
-function hh_fours_tower_content() {
-	$cta = hh_fours_cta( 'Nhận bảng giá & căn trống F2', 'Gửi tôi bảng giá, căn trống Tòa F2 và phiếu tính giá FourS Tower.' );
+function hh_fours_tower_content( $v = 2 ) {
+	$cta   = hh_fours_cta( 'Nhận bảng giá & căn trống F2', 'Gửi tôi bảng giá, căn trống Tòa F2 và phiếu tính giá FourS Tower.' );
+	$stats = 1 === $v
+		? "<div class=\"lp-stats\">\n<p><b>1.369</b><span>lượt đặt chỗ ngày ra mắt Tòa F2</span></p>\n<p><b>~17%</b><span>tiết kiệm tối đa khi thanh toán sớm 95%</span></p>\n<p><b>100 triệu</b><span>đặt cọc giữ căn</span></p>\n<p><b>70%</b><span>đã nhận nhà (Sun Early Key)</span></p>\n</div>"
+		: hh_fours_stats();
 	return <<<HTML
 <p><strong>FourS Tower</strong> (Tháp Bốn Mùa) là phân khu căn hộ đầu tiên của Sun Riverpolis – 4 tháp Mai, Trúc, Cúc, Tùng cao 20 tầng tại ngã tư Nguyễn Phước Lan – Minh Mạng, trung tâm khu Nam Đà Nẵng, sở hữu lâu dài. Tòa đang được quan tâm nhất hiện nay là <a href="/du-an/fours-tower-f2-thap-mai/">Tòa F2 – Tháp Mai</a>, ra mắt 26/9/2026 với 1.369 lượt đặt chỗ.</p>
 
-<div class="lp-stats">
-<p><b>1.369</b><span>lượt đặt chỗ ngày ra mắt Tòa F2</span></p>
-<p><b>~17%</b><span>tiết kiệm tối đa khi thanh toán sớm 95%</span></p>
-<p><b>100 triệu</b><span>đặt cọc giữ căn</span></p>
-<p><b>70%</b><span>đã nhận nhà (Sun Early Key)</span></p>
-</div>
+{$stats}
 
 <p class="lp-cta">{$cta} <a href="/du-an/fours-tower-f2-thap-mai/">Xem trang Tòa F2 →</a></p>
 
@@ -128,7 +137,7 @@ function hh_fours_tower_content() {
 HTML;
 }
 
-function hh_fours_f2_content() {
+function hh_fours_f2_content( $v = 2 ) {
 	$rows = '';
 	foreach ( hh_fours_f2_example_rows() as list( $plan, $ck, $pay, $save ) ) {
 		$rows .= "<tr><td>{$plan}</td><td>{$ck}</td><td>{$pay}</td><td><strong>{$save}</strong></td></tr>\n";
@@ -136,17 +145,11 @@ function hh_fours_f2_content() {
 	$cta1 = hh_fours_cta( 'Nhận bảng giá & căn trống Tòa F2', 'Gửi tôi bảng giá và danh sách căn còn trống Tòa F2 FourS Tower.' );
 	$cta2 = hh_fours_cta( 'Gửi mã căn – nhận phiếu tính giá', 'Tôi muốn nhận phiếu tính giá Tòa F2 FourS Tower cho căn: ', 'btn btn--navy' );
 	$cta3 = hh_fours_cta( 'Xem căn tầng đẹp còn lại', 'Gửi tôi các căn tầng đẹp, view sông còn trống Tòa F2 FourS Tower.' );
+	$intro = 1 === $v
+		? "<p><strong>FourS Tower F2</strong> – Tháp Mai (Mùa Xuân) – ra mắt sáng 26/9/2026 tại Royal Lotus Đà Nẵng. 6 con số anh chị nên biết trước khi chọn căn Tòa F2:</p>\n\n<div class=\"lp-stats\">\n<p><b>1.369</b><span>lượt đặt chỗ ngày ra mắt 26/9</span></p>\n<p><b>~17%</b><span>tiết kiệm tối đa so với giá niêm yết</span></p>\n<p><b>100 triệu</b><span>đặt cọc (3PN: 150 triệu)</span></p>\n<p><b>15%</b><span>thanh toán đến khi ký HĐMB</span></p>\n<p><b>70%</b><span>đã nhận nhà – Sun Early Key</span></p>\n<p><b>25/10</b><span>hạn chiết khấu thanh toán sớm</span></p>\n</div>"
+		: "<p><strong>FourS Tower F2</strong> – Tháp Mai (Mùa Xuân) – ra mắt sáng 26/9/2026 tại Royal Lotus Đà Nẵng với 1.369 lượt đặt chỗ. 4 con số đáng chú ý nhất:</p>\n\n" . hh_fours_stats();
 	return <<<HTML
-<p><strong>FourS Tower F2</strong> – Tháp Mai (Mùa Xuân) – ra mắt sáng 26/9/2026 tại Royal Lotus Đà Nẵng. 6 con số anh chị nên biết trước khi chọn căn Tòa F2:</p>
-
-<div class="lp-stats">
-<p><b>1.369</b><span>lượt đặt chỗ ngày ra mắt 26/9</span></p>
-<p><b>~17%</b><span>tiết kiệm tối đa so với giá niêm yết</span></p>
-<p><b>100 triệu</b><span>đặt cọc (3PN: 150 triệu)</span></p>
-<p><b>15%</b><span>thanh toán đến khi ký HĐMB</span></p>
-<p><b>70%</b><span>đã nhận nhà – Sun Early Key</span></p>
-<p><b>25/10</b><span>hạn chiết khấu thanh toán sớm</span></p>
-</div>
+{$intro}
 
 <p class="lp-cta">{$cta1} {$cta2}</p>
 
