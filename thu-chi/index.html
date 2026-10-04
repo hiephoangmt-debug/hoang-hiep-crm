@@ -954,9 +954,9 @@ function cellDate(v, defYear) {
   if (typeof v === 'number' && v > 20000 && v < 80000) { const d = new Date(Math.round((v - 25569) * 864e5)); return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`; }
   if (v instanceof Date && !isNaN(v)) return `${v.getFullYear()}-${pad(v.getMonth() + 1)}-${pad(v.getDate())}`;
   const s = String(v).trim();
-  let m = s.match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/);
+  let m = s.match(/^(\d{4})[-\/.](\d{1,2})[-\/.](\d{1,2})/);
   if (m) return `${m[1]}-${pad(m[2])}-${pad(m[3])}`;
-  m = s.match(/^(\d{1,2})[-/.](\d{1,2})(?:[-/.](\d{2,4}))?$/);
+  m = s.match(/^(\d{1,2})[-\/.](\d{1,2})(?:[-\/.](\d{2,4}))?$/);
   if (m) { let y = m[3] ? Number(m[3]) : Number(defYear); if (y < 100) y += 2000; const d = Number(m[1]), mo = Number(m[2]); if (d >= 1 && d <= 31 && mo >= 1 && mo <= 12) return `${y}-${pad(mo)}-${pad(d)}`; }
   return '';
 }
@@ -968,7 +968,7 @@ function cellMoney(v) {
 // Đọc bảng (mảng 2 chiều) theo mẫu "THU CHI THÁNG x" hoặc "Sổ giao dịch" → danh sách giao dịch
 function gridToTx(grid, defMonth) {
   grid = grid.map(r => (r || []).map(c => (typeof c === 'string' ? c.trim() : c)));
-  for (const r of grid.slice(0, 8)) for (const c of r) { const m = norm(c).match(/thang\s*(\d{1,2})\s*[/\-.]\s*(\d{4})/); if (m) { defMonth = `${m[2]}-${pad(m[1])}`; break; } }
+  for (const r of grid.slice(0, 8)) for (const c of r) { const m = norm(c).match(/thang\s*(\d{1,2})\s*[\/\-.]\s*(\d{4})/); if (m) { defMonth = `${m[2]}-${pad(m[1])}`; break; } }
   let hi = grid.findIndex((r, i) => i < 15 && r.some(c => /dien giai|noi dung|mo ta|khoan/.test(norm(c))));
   const H = hi >= 0 ? grid[hi].map(norm) : [];
   const col = re => H.findIndex(h => re.test(h));
@@ -1176,10 +1176,10 @@ async function ocrImage(file, onProgress) {
   } finally { await worker.terminate(); }
 }
 // --- làm sạch từng từ OCR ---
-const ocrStrip = t => t.replace(/[|]/g, '').replace(/^[„“”"'‘’`,.¡!\[\](){}:;_~^*\\\/<>«»—–-]+/, '').replace(/[„“”"'‘’`¡!\[\](){}:;_~^*\\<>«»—–|.,]+$/, '').trim();
+const ocrStrip = t => t.replace(/[|]/g, '').replace(/^[\u201E\u201C\u201D\x22\x27\u2018\u2019\x60,.\xA1!\[\](){}:;_~^*\\\/\x3C\x3E\xAB\xBB\u2014\u2013-]+/, '').replace(/[\u201E\u201C\u201D\x22\x27\u2018\u2019\x60\xA1!\[\](){}:;_~^*\\\x3C\x3E\xAB\xBB\u2014\u2013|.,]+$/, '').trim();
 // "05082026", "160822026", "5/8/2026" → "dd/mm/yyyy"
 function ocrDate(t, prefMonth) {
-  let m = t.match(/^(\d{1,2})[/.\-](\d{1,2})(?:[/.\-](\d{2,4}))?$/);
+  let m = t.match(/^(\d{1,2})[\/.\-](\d{1,2})(?:[\/.\-](\d{2,4}))?$/);
   if (m) return m[3] ? `${m[1]}/${m[2]}/${m[3]}` : `${m[1]}/${m[2]}`;
   if (!/^\d{8,9}$/.test(t)) return '';
   // "05082026" hoặc thừa 1 chữ số do OCR ("120082026") → thử bỏ từng chữ số
@@ -1249,7 +1249,7 @@ function ocrToGrid(data) {
       if (xs[2].length) numCols.push(['ton', med(xs[2])]);
     }
   }
-  const titleM = (() => { for (const r of rows.slice(0, 6)) { const m = norm(r.ws.map(w => w.t).join(' ')).match(/thang\s*(\d{1,2})\s*[/\-.]/); if (m) return +m[1]; } return 0; })();
+  const titleM = (() => { for (const r of rows.slice(0, 6)) { const m = norm(r.ws.map(w => w.t).join(' ')).match(/thang\s*(\d{1,2})\s*[\/\-.]/); if (m) return +m[1]; } return 0; })();
   const junk = t => t.length === 1 && !/[a-zA-Z0-9À-ỹ+&]/.test(t);
   const out = [];
   let lastM = 0;
