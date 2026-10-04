@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Biệt thự Hội An có dòng tiền – Casamia Balanca</title>
+<meta name="description" content="Biệt thự giữa rừng dừa Bảy Mẫu – Hội An. Vừa nghỉ dưỡng, vừa có kịch bản dòng tiền cho thuê. Nhận bảng giá, mặt bằng và bảng tính dòng tiền qua Zalo trong 5 phút.">
+<meta property="og:title" content="Biệt thự giữa rừng dừa Hội An – vừa nghỉ dưỡng, vừa tạo dòng tiền">
+<meta property="og:description" content="Căn nào đang có dòng tiền tốt nhất? Nhận bảng tính dòng tiền & bảng giá Casamia Balanca qua Zalo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!--
+  ẢNH DỰ ÁN: đặt ảnh vào thư mục public/img/ rồi điền đường dẫn vào biến IMAGES ở cuối file.
+  FACEBOOK PIXEL / GOOGLE ADS: dán mã theo dõi ngay dưới dòng này. Khi khách gửi form,
+  trang tự gọi fbq('track','Lead') và gtag('event','generate_lead') nếu có.
+-->
+<style>
+  :root{--navy:#0b2a5b;--navy-2:#071d40;--orange:#f47c20;--orange-2:#e06a10;--white:#fff;--ink:#0b2a5b;--muted:#5b6b85;--line:#dbe3ef;--soft:#f5f8fc}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:"Be Vietnam Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+  .eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange)}
+  h1,h2,h3{line-height:1.25;margin:0}
+  h2{font-size:clamp(26px,3.4vw,38px);font-weight:800;margin:8px 0 14px}
+  h2 em,h1 em{font-style:normal;color:var(--orange)}
+  .lead-text{font-size:17px;color:var(--muted);max-width:720px}
+  section{padding:80px 0}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:10px;padding:15px 24px;font:inherit;font-weight:700;font-size:16px;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .15s,background .15s}
+  .btn-orange{background:var(--orange);color:#fff;box-shadow:0 8px 22px rgba(244,124,32,.35)}
+  .btn-orange:hover{background:var(--orange-2);transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.55)}
+  .btn-ghost:hover{border-color:#fff}
+  .btn-navy{background:var(--navy);color:#fff}
+  .btn-navy:hover{background:var(--navy-2)}
+  .btn-block{width:100%}
+  .pulse{animation:pulse 2.2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(244,124,32,.55)}70%{box-shadow:0 0 0 14px rgba(244,124,32,0)}100%{box-shadow:0 0 0 0 rgba(244,124,32,0)}}
+
+  /* Topbar */
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(11,42,91,.97);backdrop-filter:blur(6px);color:#fff}
+  .topbar .wrap{display:flex;align-items:center;gap:16px;height:62px}
+  .logo{font-weight:800;letter-spacing:2px;font-size:15px}
+  .logo small{display:block;font-size:10px;letter-spacing:3px;color:var(--orange);font-weight:600}
+  .topbar nav{display:flex;gap:22px;margin-left:auto;font-size:14px}
+  .topbar nav a{text-decoration:none;opacity:.85}.topbar nav a:hover{opacity:1;color:var(--orange)}
+  .topbar .call{margin-left:12px;background:var(--orange);padding:9px 16px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+
+  /* Hero */
+  .hero{position:relative;color:#fff;background:var(--navy);overflow:hidden;padding:70px 0 90px}
+  .hero::before{content:"";position:absolute;inset:0;background:var(--hero-img,none) center/cover no-repeat;opacity:.35}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(7,29,64,.96) 0%,rgba(11,42,91,.85) 55%,rgba(11,42,91,.55) 100%)}
+  .hero .palms{position:absolute;right:-40px;bottom:-10px;width:520px;opacity:.12;z-index:1}
+  .hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:center}
+  .hero h1{font-size:clamp(32px,4.6vw,54px);font-weight:800;margin:14px 0 18px;letter-spacing:-.5px}
+  .hero p.sub{font-size:18px;opacity:.9;margin:0 0 22px;max-width:600px}
+  .ticks{list-style:none;padding:0;margin:0 0 30px;display:grid;gap:10px}
+  .ticks li{display:flex;gap:10px;align-items:flex-start;font-weight:500}
+  .ticks li::before{content:"✓";flex:none;width:22px;height:22px;border-radius:50%;background:var(--orange);color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+
+  /* Form card */
+  .card-form{background:#fff;color:var(--ink);border-radius:18px;padding:28px;box-shadow:0 24px 60px rgba(0,0,0,.35);border-top:6px solid var(--orange)}
+  .card-form h3{font-size:21px;font-weight:800}
+  .card-form .gets{list-style:none;padding:0;margin:14px 0 18px;display:grid;gap:7px;font-size:14px}
+  .card-form .gets li{display:flex;gap:8px}
+  .card-form .gets li span{color:var(--orange);font-weight:800}
+  .field{display:block;margin-bottom:11px}
+  .field input,.field select{width:100%;font:inherit;font-size:15px;color:var(--ink);padding:13px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff;outline:none;transition:border-color .15s}
+  .field input:focus,.field select:focus{border-color:var(--orange)}
+  .micro{font-size:12px;color:var(--muted);text-align:center;margin:10px 0 0}
+  .form-err{color:var(--orange-2);font-size:13px;font-weight:600;min-height:18px;margin:2px 0 6px}
+  .done{text-align:center;padding:10px 0}
+  .done .big{font-size:44px;line-height:1}
+  .done h3{margin:10px 0 6px}
+  .done p{color:var(--muted);margin:0 0 16px;font-size:15px}
+  .seats{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-top:12px;justify-content:center}
+  .seats i{width:8px;height:8px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 4px rgba(244,124,32,.2)}
+
+  /* Stats */
+  .stats{background:#fff;margin-top:-46px;position:relative;z-index:3}
+  .stats .grid{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-radius:16px;box-shadow:0 14px 40px rgba(11,42,91,.12);overflow:hidden}
+  .stats .it{padding:24px 18px;text-align:center;border-right:1px solid var(--line)}
+  .stats .it:last-child{border-right:0}
+  .stats b{display:block;font-size:30px;font-weight:800;color:var(--navy)}
+  .stats b em{font-style:normal;color:var(--orange)}
+  .stats span{font-size:13px;color:var(--muted)}
+
+  /* Curiosity */
+  .curious{background:#fff}
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:36px}
+  .qcard{border:1.5px solid var(--line);border-radius:16px;padding:26px;position:relative;transition:border-color .2s,transform .2s;background:#fff}
+  .qcard:hover{border-color:var(--orange);transform:translateY(-4px)}
+  .qcard .n{font-size:13px;font-weight:800;color:#fff;background:var(--navy);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+  .qcard h3{font-size:19px;margin-bottom:10px}
+  .qcard p{color:var(--muted);margin:0 0 16px;font-size:15px}
+  .link-cta{background:none;border:0;padding:0;font:inherit;font-weight:700;color:var(--orange);cursor:pointer;font-size:15px}
+  .link-cta:hover{text-decoration:underline}
+
+  /* Cash flow */
+  .cash{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+  .cash .lead-text{color:rgba(255,255,255,.8)}
+  .ways{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:34px 0 40px}
+  .way{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:22px}
+  .way .ic{font-size:28px}
+  .way h3{font-size:18px;margin:10px 0 6px}
+  .way p{margin:0;font-size:14.5px;color:rgba(255,255,255,.78)}
+  .locked{position:relative;background:#fff;color:var(--ink);border-radius:18px;padding:28px;max-width:760px;margin:0 auto;overflow:hidden}
+  .locked h3{font-size:19px;margin-bottom:14px}
+  .locked table{width:100%;border-collapse:collapse;font-size:15px;filter:blur(5px);user-select:none}
+  .locked td{padding:11px 6px;border-bottom:1px dashed var(--line)}
+  .locked td:last-child{text-align:right;font-weight:800;color:var(--navy)}
+  .locked tr:last-child td{color:var(--orange);border-bottom:0;font-size:18px}
+  .lock-over{position:absolute;inset:60px 0 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:20px;background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,.92) 45%)}
+  .lock-over .ico{font-size:34px}
+  .lock-over p{margin:0;font-weight:600;max-width:420px}
+  .note{font-size:12.5px;color:rgba(255,255,255,.6);text-align:center;margin-top:16px}
+
+  /* Location */
+  .loc .grid{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:center}
+  .visual{border-radius:18px;min-height:380px;background:var(--img,linear-gradient(135deg,var(--navy),#123a78)) center/cover;position:relative;overflow:hidden;box-shadow:0 18px 40px rgba(11,42,91,.18)}
+  .visual .tag{position:absolute;left:16px;bottom:16px;background:rgba(255,255,255,.95);color:var(--navy);font-weight:700;font-size:13px;padding:8px 12px;border-radius:8px;border-left:4px solid var(--orange)}
+  .visual svg{position:absolute;inset:0;width:100%;height:100%;opacity:.18}
+  .points{list-style:none;padding:0;margin:20px 0 26px;display:grid;gap:14px}
+  .points li{display:flex;gap:14px;align-items:flex-start}
+  .points li b{flex:none;width:42px;height:42px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:20px;border:1px solid var(--line)}
+  .points li div strong{display:block}
+  .points li div span{color:var(--muted);font-size:14.5px}
+
+  /* Products */
+  .products{background:var(--soft)}
+  .prods{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:34px}
+  .prod{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(11,42,91,.08);display:flex;flex-direction:column}
+  .prod .ph{height:200px;background:var(--img,linear-gradient(135deg,#123a78,var(--navy))) center/cover;position:relative}
+  .prod .ph span{position:absolute;top:14px;left:14px;background:var(--orange);color:#fff;font-size:12px;font-weight:700;padding:5px 10px;border-radius:6px}
+  .prod .bd{padding:22px;display:flex;flex-direction:column;flex:1}
+  .prod h3{font-size:20px;margin-bottom:8px}
+  .prod p{color:var(--muted);font-size:14.5px;margin:0 0 18px;flex:1}
+
+  /* Architecture */
+  .arch .grid{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:center}
+  .quote{border-left:5px solid var(--orange);padding:6px 0 6px 18px;font-size:18px;font-weight:600;margin:18px 0}
+
+  /* Trust */
+  .trust{background:var(--soft)}
+  .checks{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:28px 0 30px}
+  .checks div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;gap:12px;align-items:center;font-weight:600}
+  .checks div i{font-style:normal;flex:none;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px}
+
+  /* Visit */
+  .visit{background:linear-gradient(90deg,var(--orange),#ff9442);color:#fff;padding:56px 0}
+  .visit .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .visit h2{margin:0 0 6px;font-size:clamp(24px,3vw,32px)}
+  .visit p{margin:0;opacity:.95}
+  .visit .btn{background:#fff;color:var(--orange-2)}
+
+  /* FAQ */
+  .faq details{border-bottom:1px solid var(--line);padding:18px 4px}
+  .faq summary{cursor:pointer;font-weight:700;font-size:17px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";color:var(--orange);font-size:24px;line-height:1;font-weight:400}
+  .faq details[open] summary::after{content:"–"}
+  .faq details p{color:var(--muted);margin:10px 0 0}
+
+  /* Final */
+  .final{background:var(--navy);color:#fff}
+  .final .grid{display:grid;grid-template-columns:1.1fr 1fr;gap:46px;align-items:center}
+  .final .lead-text{color:rgba(255,255,255,.82)}
+  footer{background:var(--navy-2);color:rgba(255,255,255,.65);font-size:13px;padding:30px 0 100px}
+  footer b{color:#fff}
+
+  /* Mobile sticky bar */
+  .mbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;box-shadow:0 -6px 20px rgba(0,0,0,.12);padding:8px;gap:8px}
+  .mbar a,.mbar button{flex:1;padding:12px 6px;border-radius:10px;font:inherit;font-weight:700;font-size:14px;text-align:center;text-decoration:none;border:0;cursor:pointer}
+  .mbar .c1{background:var(--soft);color:var(--navy)}
+  .mbar .c2{background:var(--navy);color:#fff}
+  .mbar .c3{background:var(--orange);color:#fff;flex:1.4}
+
+  /* Modal */
+  .modal{position:fixed;inset:0;z-index:100;background:rgba(7,29,64,.72);display:none;align-items:center;justify-content:center;padding:16px}
+  .modal.open{display:flex}
+  .modal .card-form{width:100%;max-width:440px;position:relative;animation:pop .25s ease-out}
+  .modal .x{position:absolute;top:10px;right:14px;background:none;border:0;font-size:28px;color:var(--muted);cursor:pointer;line-height:1}
+  @keyframes pop{from{transform:scale(.94);opacity:0}to{transform:none;opacity:1}}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:960px){
+    .hero .wrap,.loc .grid,.arch .grid,.final .grid{grid-template-columns:1fr}
+    .cards3,.ways,.prods{grid-template-columns:1fr}
+    .stats .grid{grid-template-columns:repeat(2,1fr)}
+    .stats .it:nth-child(2){border-right:0}
+    .stats .it:nth-child(-n+2){border-bottom:1px solid var(--line)}
+    .topbar nav{display:none}
+    .topbar .call{margin-left:auto}
+    .checks{grid-template-columns:1fr}
+    section{padding:60px 0}
+    .visual{min-height:260px}
+    .mbar{display:flex}
+  }
+  @media(max-width:480px){
+    .hero{padding:44px 0 80px}
+    .hero p.sub{font-size:16px}
+    .card-form{padding:22px}
+    .btn{width:100%}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="logo">CASAMIA BALANCA<small>HỘI AN</small></div>
+    <nav>
+      <a href="#dong-tien">Dòng tiền</a>
+      <a href="#vi-tri">Vị trí</a>
+      <a href="#san-pham">Sản phẩm</a>
+      <a href="#phap-ly">Pháp lý</a>
+      <a href="#hoi-dap">Hỏi đáp</a>
+    </nav>
+    <a class="call js-tel" href="#">📞 <span class="js-hotline"></span></a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" data-chat-topic="off">
+  <svg class="palms" viewBox="0 0 400 300" fill="#fff" aria-hidden="true"><path d="M90 300c6-60 4-120-10-170 30-6 60 4 78 26-20-30-52-44-86-36 18-28 52-38 80-26-30-14-62-10-86 10 4-30 34-50 66-46-34-6-64 10-78 38-14-26-44-40-74-34 30 4 52 26 58 52-26-16-60-14-82 6 30-6 58 6 72 30-28-6-56 6-70 30 26-16 56-14 74 6 12 44 14 100 8 144zm190 0c4-44 2-88-8-124 22-4 44 4 56 18-14-22-38-32-62-26 12-20 38-28 58-18-22-10-46-8-62 8 2-22 24-36 48-34-24-4-46 8-56 28-10-20-32-28-54-24 22 2 38 18 42 38-20-12-44-10-60 4 22-4 42 4 52 22-20-4-40 4-50 22 18-12 40-10 54 4 8 32 10 72 6 106z"/></svg>
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Biệt thự nghỉ dưỡng · Hội An</span>
+      <h1>Một căn biệt thự giữa rừng dừa Hội An — <em>vừa để nghỉ dưỡng, vừa tạo dòng tiền</em></h1>
+      <p class="sub">Mở cửa là rừng dừa Bảy Mẫu, vài phút là phố cổ, vài bước là biển. Casamia Balanca gồm 363 biệt thự &amp; shophouse do Đạt Phương phát triển.</p>
+      <ul class="ticks">
+        <li>Nằm giữa 2 di sản thế giới, trong khu dự trữ sinh quyển UNESCO</li>
+        <li>3 kịch bản tạo dòng tiền: cho thuê nghỉ dưỡng, cho thuê dài hạn, kinh doanh</li>
+        <li>Kiến trúc mang hồn Hội An, tư vấn thiết kế VTN Architects</li>
+      </ul>
+      <div class="ctas">
+        <button class="btn btn-orange pulse js-open" data-title="Căn nào đang có dòng tiền tốt nhất?" data-need="Đầu tư cho thuê">Xem căn nào có dòng tiền tốt nhất →</button>
+        <a class="btn btn-ghost" href="#bi-mat">Vì sao biệt thự Hội An khan hiếm? ↓</a>
+      </div>
+    </div>
+    <div class="card-form" id="form-top">
+      <form class="js-lead" data-form="Hero">
+        <h3>Nhận trọn bộ trong 5 phút qua Zalo</h3>
+        <ul class="gets">
+          <li><span>①</span> Bảng giá &amp; danh sách căn còn trống</li>
+          <li><span>②</span> Bảng tính dòng tiền cho thuê theo từng căn</li>
+          <li><span>③</span> Mặt bằng, video thực tế &amp; chính sách mới nhất</li>
+        </ul>
+        <label class="field"><input name="name" placeholder="Họ và tên" autocomplete="name" maxlength="80"></label>
+        <label class="field"><input name="phone" type="tel" placeholder="Số điện thoại / Zalo *" autocomplete="tel" required maxlength="20"></label>
+        <label class="field"><select name="need">
+          <option value="">Anh/chị quan tâm…</option>
+          <option>Đầu tư cho thuê – dòng tiền</option>
+          <option>Mua để nghỉ dưỡng gia đình</option>
+          <option>Shophouse kinh doanh</option>
+          <option>Chỉ đang tham khảo</option>
+        </select></label>
+        <div class="form-err"></div>
+        <button class="btn btn-orange btn-block">Gửi tài liệu cho tôi ngay</button>
+        <p class="micro">🔒 Thông tin được bảo mật. Chỉ gửi đúng tài liệu anh/chị yêu cầu.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="wrap">
+    <div class="grid">
+      <div class="it"><b>31,1<em> ha</em></b><span>Quy mô dự án</span></div>
+      <div class="it"><b>363</b><span>Biệt thự &amp; shophouse</span></div>
+      <div class="it"><b>2</b><span>Di sản thế giới lân cận</span></div>
+      <div class="it"><b>VTN</b><span>Kiến trúc Võ Trọng Nghĩa</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- CURIOSITY -->
+<section class="curious" id="bi-mat">
+  <div class="wrap">
+    <span class="eyebrow">Điều ít người để ý</span>
+    <h2>Vì sao nhà đầu tư đang <em>để mắt</em> đến biệt thự Hội An?</h2>
+    <p class="lead-text">Hội An không thiếu khách du lịch. Thứ thiếu là những căn biệt thự nguyên căn, đẹp, đúng chất Hội An để họ ở lại lâu hơn.</p>
+    <div class="cards3">
+      <div class="qcard reveal">
+        <div class="n">01</div>
+        <h3>Quỹ đất ở đô thị di sản có giới hạn</h3>
+        <p>Hội An được bảo tồn nghiêm ngặt, các khu biệt thự quy mô lớn gần phố cổ và biển không xuất hiện thường xuyên.</p>
+        <button class="link-cta js-open" data-title="Nhận phân tích quỹ đất & giá khu vực Hội An" data-need="Đầu tư cho thuê – dòng tiền">Xem phân tích khu vực →</button>
+      </div>
+      <div class="qcard reveal">
+        <div class="n">02</div>
+        <h3>Khách gia đình &amp; nhóm thích thuê nguyên căn</h3>
+        <p>Đi cùng gia đình, bạn bè, khách muốn không gian riêng, hồ bơi, bếp. Đó là thứ phòng khách sạn khó đáp ứng.</p>
+        <button class="link-cta js-open" data-title="Nhận kịch bản cho thuê nghỉ dưỡng" data-need="Đầu tư cho thuê – dòng tiền">Xem kịch bản cho thuê →</button>
+      </div>
+      <div class="qcard reveal">
+        <div class="n">03</div>
+        <h3>Vừa có chỗ nghỉ, vừa có dòng tiền</h3>
+        <p>Gia đình nghỉ dưỡng vài tuần mỗi năm, thời gian còn lại cho thuê. Câu hỏi là: căn nào, vị trí nào cho dòng tiền tốt nhất?</p>
+        <button class="link-cta js-open" data-title="Căn nào cho dòng tiền tốt nhất?" data-need="Đầu tư cho thuê – dòng tiền">Hỏi ngay căn phù hợp →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASH FLOW -->
+<section class="cash" id="dong-tien" data-chat-topic="bảng giá thanh toán chính sách">
+  <div class="wrap">
+    <span class="eyebrow">Dòng tiền</span>
+    <h2>3 cách một căn biệt thự Casamia Balanca <em>tự làm ra tiền</em></h2>
+    <p class="lead-text">Cùng một căn, mỗi cách khai thác cho dòng tiền khác nhau. Tư vấn viên sẽ tính riêng theo căn và ngân sách của anh/chị.</p>
+    <div class="ways">
+      <div class="way reveal"><div class="ic">🌴</div><h3>Cho thuê nghỉ dưỡng theo đêm</h3><p>Đón khách du lịch gia đình, nhóm bạn theo mùa cao điểm của Hội An.</p></div>
+      <div class="way reveal"><div class="ic">🗝️</div><h3>Cho thuê dài hạn</h3><p>Cho chuyên gia, người nước ngoài sống tại Hội An – Đà Nẵng thuê theo tháng, theo năm. Dòng tiền ổn định.</p></div>
+      <div class="way reveal"><div class="ic">🏪</div><h3>Shophouse kinh doanh</h3><p>Tự kinh doanh hoặc cho thuê mặt bằng: café, nhà hàng, homestay, cửa hàng lưu niệm.</p></div>
+    </div>
+    <div class="locked reveal">
+      <h3>📊 Bảng tính dòng tiền mẫu – biệt thự cho thuê nghỉ dưỡng</h3>
+      <table aria-hidden="true">
+        <tr><td>Giá thuê trung bình / đêm</td><td>x.xxx.xxx đ</td></tr>
+        <tr><td>Công suất cho thuê dự kiến</td><td>xx %</td></tr>
+        <tr><td>Doanh thu / năm</td><td>x.xxx.xxx.xxx đ</td></tr>
+        <tr><td>Chi phí vận hành / năm</td><td>xxx.xxx.xxx đ</td></tr>
+        <tr><td>Dòng tiền ròng ước tính / năm</td><td>x.xxx.xxx.xxx đ</td></tr>
+      </table>
+      <div class="lock-over">
+        <div class="ico">🔒</div>
+        <p>Bảng tính được lập riêng theo từng căn. Để lại số, em gửi bảng tính đúng căn anh/chị quan tâm qua Zalo.</p>
+        <button class="btn btn-orange js-open" data-title="Mở khoá bảng tính dòng tiền" data-need="Đầu tư cho thuê – dòng tiền">Mở khoá bảng tính →</button>
+      </div>
+    </div>
+    <p class="note">Dòng tiền là kịch bản tham khảo, phụ thuộc thị trường và cách vận hành, không phải cam kết lợi nhuận.</p>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="loc" id="vi-tri" data-chat-topic="vị trí tiện ích">
+  <div class="wrap grid">
+    <div class="visual reveal" data-img="location">
+      <svg viewBox="0 0 400 300" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><path d="M0 220c60-30 120-30 180 0s120 30 220 0"/><path d="M0 250c60-30 120-30 180 0s120 30 220 0"/><circle cx="250" cy="110" r="10"/><path d="M250 120v40M60 80l40 40 60-30 90 20"/></svg>
+      <div class="tag">📍 Rừng dừa Bảy Mẫu – Cẩm Thanh, Hội An</div>
+    </div>
+    <div>
+      <span class="eyebrow">Vị trí</span>
+      <h2>Mở cửa là rừng dừa — <em>vài phút là phố cổ</em> — vài bước là biển</h2>
+      <ul class="points">
+        <li><b>🌴</b><div><strong>Giữa rừng dừa Bảy Mẫu</strong><span>Thuộc khu dự trữ sinh quyển thế giới Cù Lao Chàm – Hội An được UNESCO công nhận.</span></div></li>
+        <li><b>🏮</b><div><strong>Gần phố cổ Hội An</strong><span>Di sản văn hoá thế giới, điểm đến hút khách du lịch quanh năm.</span></div></li>
+        <li><b>🛣️</b><div><strong>Trên trục Võ Chí Công</strong><span>Kết nối Đà Nẵng – Hội An – sân bay Chu Lai.</span></div></li>
+        <li><b>🌊</b><div><strong>Gần biển</strong><span>Không gian nghỉ dưỡng biển – sông – rừng dừa hiếm có.</span></div></li>
+      </ul>
+      <button class="btn btn-navy js-open" data-title="Nhận bản đồ vị trí & thời gian di chuyển" data-need="Mua để nghỉ dưỡng gia đình">Nhận bản đồ &amp; thời gian di chuyển →</button>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="san-pham" data-chat-topic="mặt bằng sản phẩm">
+  <div class="wrap">
+    <span class="eyebrow">Sản phẩm</span>
+    <h2>Chọn căn phù hợp với <em>cách anh/chị muốn khai thác</em></h2>
+    <p class="lead-text">Mỗi dòng sản phẩm phù hợp một mục tiêu: nghỉ dưỡng, cho thuê hay kinh doanh.</p>
+    <div class="prods">
+      <div class="prod reveal"><div class="ph" data-img="villa1"><span>Riêng tư nhất</span></div><div class="bd">
+        <h3>Biệt thự đơn lập</h3><p>Không gian riêng tư, sân vườn rộng. Phù hợp nghỉ dưỡng gia đình và cho thuê nguyên căn phân khúc cao.</p>
+        <button class="btn btn-orange js-open" data-title="Nhận mặt bằng & giá biệt thự đơn lập" data-need="Biệt thự đơn lập">Xem mặt bằng &amp; giá</button></div></div>
+      <div class="prod reveal"><div class="ph" data-img="villa2"><span>Cân bằng</span></div><div class="bd">
+        <h3>Biệt thự song lập</h3><p>Cân bằng giữa ngân sách và không gian sống, dễ khai thác cho thuê nghỉ dưỡng.</p>
+        <button class="btn btn-orange js-open" data-title="Nhận mặt bằng & giá biệt thự song lập" data-need="Biệt thự song lập">Xem mặt bằng &amp; giá</button></div></div>
+      <div class="prod reveal"><div class="ph" data-img="shophouse"><span>Kinh doanh</span></div><div class="bd">
+        <h3>Shophouse</h3><p>Vừa ở vừa kinh doanh, hoặc cho thuê mặt bằng cho các mô hình dịch vụ du lịch.</p>
+        <button class="btn btn-orange js-open" data-title="Nhận mặt bằng & giá shophouse" data-need="Shophouse kinh doanh">Xem mặt bằng &amp; giá</button></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="arch" data-chat-topic="thiết kế sản phẩm">
+  <div class="wrap grid">
+    <div>
+      <span class="eyebrow">Kiến trúc</span>
+      <h2>Kiến trúc mang <em>hồn Hội An</em></h2>
+      <p class="lead-text">Lấy cảm hứng từ ngói nâu đất, sắc xanh cây lá và chất liệu gốm ánh kim của Hội An. Dự án có sự tham gia tư vấn thiết kế của VTN Architects – kiến trúc sư Võ Trọng Nghĩa.</p>
+      <p class="quote">“Không chỉ là một căn nhà – là nơi gia đình muốn quay về mỗi kỳ nghỉ.”</p>
+      <button class="btn btn-navy js-open" data-title="Nhận bộ ảnh phối cảnh & video dự án" data-need="Mua để nghỉ dưỡng gia đình">Xem bộ ảnh &amp; video dự án →</button>
+    </div>
+    <div class="visual reveal" data-img="architecture">
+      <svg viewBox="0 0 400 300" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><path d="M60 200l80-60 80 60M90 200v60h100v-60M220 210l70-50 70 50M240 210v50h100v-50"/></svg>
+      <div class="tag">🏡 Thiết kế nhiệt đới, xanh, mở</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust" id="phap-ly" data-chat-topic="pháp lý tiến độ">
+  <div class="wrap">
+    <span class="eyebrow">Minh bạch</span>
+    <h2>Muốn biết chắc <em>trước khi xuống tiền?</em></h2>
+    <p class="lead-text">Anh/chị không cần tin lời quảng cáo. Em gửi đầy đủ hồ sơ để anh/chị tự kiểm tra:</p>
+    <div class="checks">
+      <div><i>✓</i>Hồ sơ pháp lý dự án</div>
+      <div><i>✓</i>Ảnh &amp; video tiến độ thi công mới nhất</div>
+      <div><i>✓</i>Mẫu hợp đồng &amp; tiến độ thanh toán</div>
+      <div><i>✓</i>Thông tin chủ đầu tư Đạt Phương</div>
+    </div>
+    <button class="btn btn-orange js-open" data-title="Nhận bộ hồ sơ pháp lý & tiến độ" data-need="Pháp lý & tiến độ">Nhận bộ hồ sơ để tự kiểm tra →</button>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="visit" data-chat-topic="tham quan">
+  <div class="wrap">
+    <div>
+      <h2>Đi xem thực tế – trước khi quyết định</h2>
+      <p>Đón tận nơi tại Đà Nẵng / Hội An, xem dự án và khu vực xung quanh. Hoàn toàn miễn phí.</p>
+    </div>
+    <button class="btn js-open" data-title="Đặt lịch tham quan dự án" data-need="Đặt lịch tham quan">📅 Đặt lịch tham quan</button>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="hoi-dap">
+  <div class="wrap" style="max-width:860px">
+    <span class="eyebrow">Hỏi đáp</span>
+    <h2>Những câu khách hay hỏi nhất</h2>
+    <details><summary>Giá biệt thự Casamia Balanca khoảng bao nhiêu?</summary><p>Giá từng căn khác nhau theo loại hình, vị trí, diện tích và hướng. Anh/chị để lại số, em gửi bảng giá các căn còn trống kèm chính sách mới nhất.</p></details>
+    <details><summary>Mua để cho thuê thì dòng tiền tính thế nào?</summary><p>Dòng tiền phụ thuộc giá thuê, công suất theo mùa và chi phí vận hành. Em lập bảng tính riêng theo căn và cách khai thác anh/chị chọn (tự vận hành hoặc giao đơn vị vận hành).</p></details>
+    <details><summary>Có hỗ trợ vay ngân hàng không?</summary><p>Em sẽ gửi phương án tài chính và bảng tính trả góp theo số tiền vay, thời hạn anh/chị mong muốn.</p></details>
+    <details><summary>Pháp lý dự án thế nào?</summary><p>Em gửi bộ hồ sơ pháp lý và mẫu hợp đồng để anh/chị tự kiểm tra trước khi quyết định.</p></details>
+    <details><summary>Ở xa có xem được dự án không?</summary><p>Được ạ. Em gửi video thực tế, có thể gọi video trực tiếp tại dự án, hoặc đón anh/chị tham quan khi tiện.</p></details>
+    <p style="margin-top:24px"><button class="link-cta js-chat">💬 Câu hỏi khác? Chat với tư vấn viên ngay →</button></p>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="final" data-chat-topic="off">
+  <div class="wrap grid">
+    <div>
+      <span class="eyebrow">Bước tiếp theo</span>
+      <h2>Chỉ 30 giây – nhận trọn bộ tài liệu <em>qua Zalo</em></h2>
+      <p class="lead-text">Bảng giá căn còn trống, mặt bằng, bảng tính dòng tiền theo căn, hồ sơ pháp lý và video thực tế. Tư vấn viên gửi trong 5 phút (giờ hành chính).</p>
+      <ul class="ticks" style="margin-top:20px">
+        <li>Không mất phí, không ràng buộc</li>
+        <li>Tư vấn đúng nhu cầu: nghỉ dưỡng hay dòng tiền</li>
+        <li>Có thể hỏi qua Zalo bất cứ lúc nào</li>
+      </ul>
+    </div>
+    <div class="card-form">
+      <form class="js-lead" data-form="Cuối trang">
+        <h3>Gửi tài liệu cho tôi</h3>
+        <p style="color:var(--muted);margin:6px 0 16px;font-size:14px">Điền 2 thông tin, em liên hệ ngay qua Zalo.</p>
+        <label class="field"><input name="name" placeholder="Họ và tên" autocomplete="name" maxlength="80"></label>
+        <label class="field"><input name="phone" type="tel" placeholder="Số điện thoại / Zalo *" autocomplete="tel" required maxlength="20"></label>
+        <label class="field"><select name="need">
+          <option value="">Anh/chị quan tâm…</option>
+          <option>Đầu tư cho thuê – dòng tiền</option>
+          <option>Mua để nghỉ dưỡng gia đình</option>
+          <option>Shophouse kinh doanh</option>
+          <option>Chỉ đang tham khảo</option>
+        </select></label>
+        <div class="form-err"></div>
+        <button class="btn btn-orange btn-block pulse">Nhận tài liệu ngay</button>
+        <p class="micro">🔒 Thông tin được bảo mật tuyệt đối.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b>Hoàng Hiệp</b> – Chuyên viên tư vấn dự án Casamia Balanca · Hotline/Zalo: <a class="js-tel"><span class="js-hotline"></span></a></p>
+    <p>Trang thông tin do chuyên viên tư vấn cung cấp, không phải website chính thức của chủ đầu tư. Thông tin, hình ảnh mang tính tham khảo. Giá, chính sách và pháp lý theo công bố chính thức tại thời điểm giao dịch. Các kịch bản dòng tiền chỉ để tham khảo, không phải cam kết lợi nhuận.</p>
+  </div>
+</footer>
+
+<!-- Thanh liên hệ trên điện thoại -->
+<div class="mbar">
+  <a class="c1 js-tel" href="#">📞 Gọi</a>
+  <a class="c2 js-zalo" href="#" target="_blank" rel="noopener">Zalo</a>
+  <button class="c3 js-open" data-title="Nhận bảng giá & bảng tính dòng tiền" data-need="">Nhận bảng giá</button>
+</div>
+
+<!-- Popup form -->
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="card-form">
+    <button class="x" aria-label="Đóng">×</button>
+    <form class="js-lead" data-form="Popup">
+      <h3 class="js-mtitle">Nhận bảng giá &amp; bảng tính dòng tiền</h3>
+      <p style="color:var(--muted);margin:6px 0 16px;font-size:14px">Để lại số, em gửi ngay qua Zalo trong 5 phút.</p>
+      <label class="field"><input name="name" placeholder="Họ và tên" autocomplete="name" maxlength="80"></label>
+      <label class="field"><input name="phone" type="tel" placeholder="Số điện thoại / Zalo *" autocomplete="tel" required maxlength="20"></label>
+      <input type="hidden" name="need">
+      <div class="form-err"></div>
+      <button class="btn btn-orange btn-block">Gửi cho tôi ngay</button>
+      <p class="micro">🔒 Không spam. Chỉ gửi đúng tài liệu anh/chị yêu cầu.</p>
+    </form>
+  </div>
+</div>
+
+<script>
+// ===== Ảnh dự án: điền đường dẫn ảnh thật (ví dụ 'img/hero.jpg'). Để trống = nền navy. =====
+const IMAGES = {
+  hero: '',
+  location: '',
+  villa1: '',
+  villa2: '',
+  shophouse: '',
+  architecture: '',
+};
+// Địa chỉ server live chat. Để trống nếu landing page chạy cùng server chat.
+const API_BASE = '';
+
+(function () {
+  const $ = (s, el = document) => el.querySelector(s);
+  const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch {} },
+  };
+
+  // Ảnh
+  if (IMAGES.hero) $('.hero').style.setProperty('--hero-img', `url("${IMAGES.hero}")`);
+  $$('[data-img]').forEach(el => { const src = IMAGES[el.dataset.img]; if (src) { el.style.setProperty('--img', `url("${src}")`); const s = el.querySelector('svg'); if (s) s.remove(); } });
+
+  // Hotline / Zalo lấy từ cấu hình server
+  let P = { hotline: '', zalo: '' };
+  fetch(API_BASE + '/api/config').then(r => r.json()).then(c => {
+    P = c.project;
+    $$('.js-hotline').forEach(el => (el.textContent = P.hotline));
+    $$('.js-tel').forEach(el => (el.href = 'tel:' + P.hotline.replace(/[^\d+]/g, '')));
+    $$('.js-zalo').forEach(el => (el.href = 'https://zalo.me/' + P.zalo.replace(/\D/g, '')));
+  }).catch(() => {});
+
+  // Mã khách dùng chung với khung chat để gộp đăng ký + hội thoại
+  let visitorId = store.get('casamia_chat_id');
+  if (!visitorId) {
+    visitorId = (crypto.randomUUID ? crypto.randomUUID() : 'v' + Date.now().toString(36) + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2));
+    store.set('casamia_chat_id', visitorId);
+  }
+
+  // Nguồn quảng cáo (UTM)
+  const qs = new URLSearchParams(location.search);
+  const utm = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].map(k => qs.get(k) && `${k.slice(4)}=${qs.get(k)}`).filter(Boolean).join(', ') || (qs.get('fbclid') ? 'facebook' : '');
+  if (utm) store.set('casamia_utm', utm);
+
+  // Popup
+  const modal = $('#modal');
+  let submitted = store.get('casamia_lead_sent') === '1';
+  function openModal(title, need) {
+    if (title) $('.js-mtitle').textContent = title;
+    $('#modal input[name=need]').value = need || '';
+    modal.classList.add('open');
+    setTimeout(() => $('#modal input[name=name]').focus(), 50);
+  }
+  const closeModal = () => modal.classList.remove('open');
+  $$('.js-open').forEach(b => b.addEventListener('click', () => openModal(b.dataset.title, b.dataset.need)));
+  $('.x', modal).onclick = closeModal;
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  $$('.js-chat').forEach(b => b.addEventListener('click', () => window.CasamiaChat && window.CasamiaChat.open()));
+
+  // Popup giữ chân: rê chuột ra khỏi trang (máy tính) hoặc đọc 70% trang (điện thoại) – chỉ 1 lần
+  let nudged = sessionStorage.getItem('casamia_nudged') === '1';
+  function nudge() {
+    if (nudged || submitted || modal.classList.contains('open')) return;
+    nudged = true; try { sessionStorage.setItem('casamia_nudged', '1'); } catch {}
+    openModal('Khoan đã! Anh/chị có muốn biết căn nào đang có dòng tiền tốt nhất?', 'Đầu tư cho thuê – dòng tiền');
+  }
+  document.addEventListener('mouseout', e => { if (!e.relatedTarget && e.clientY < 10) nudge(); });
+  window.addEventListener('scroll', () => {
+    if (window.innerWidth < 960 && window.scrollY / (document.body.scrollHeight - innerHeight) > 0.7) nudge();
+  }, { passive: true });
+
+  // Gửi form
+  const PHONE_RE = /^(?:\+?84|0)(?:[\s.-]?\d){9}$/;
+  $$('.js-lead').forEach(form => form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const err = $('.form-err', form), btn = $('button.btn', form);
+    const data = Object.fromEntries(new FormData(form));
+    if (!PHONE_RE.test((data.phone || '').trim())) { err.textContent = 'Số điện thoại chưa đúng, anh/chị kiểm tra lại giúp em ạ.'; $('input[name=phone]', form).focus(); return; }
+    err.textContent = ''; btn.disabled = true; const label = btn.textContent; btn.textContent = 'Đang gửi…';
+    try {
+      const r = await fetch(API_BASE + '/api/lead', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, form: form.dataset.form, visitorId, page: location.href, referrer: document.referrer, utm: store.get('casamia_utm') || '' }),
+      });
+      const res = await r.json();
+      if (!r.ok) throw new Error(res.error || 'Gửi chưa thành công');
+      submitted = true; store.set('casamia_lead_sent', '1');
+      if (window.fbq) fbq('track', 'Lead');
+      if (window.gtag) gtag('event', 'generate_lead');
+      const name = (data.name || '').trim();
+      form.innerHTML = `<div class="done"><div class="big">🎉</div><h3>Em đã nhận thông tin${name ? ' của ' + name.replace(/[<>&"]/g, '') : ''}!</h3>
+        <p>Em sẽ gửi tài liệu qua Zalo trong ít phút. Để nhận nhanh hơn, anh/chị kết bạn Zalo với em nhé.</p>
+        <a class="btn btn-orange btn-block" target="_blank" rel="noopener" href="https://zalo.me/${(P.zalo || '').replace(/\D/g, '')}">Mở Zalo nhận tài liệu ngay</a></div>`;
+    } catch (ex) {
+      err.textContent = ex.message || 'Mạng chập chờn, anh/chị thử lại giúp em ạ.';
+      btn.disabled = false; btn.textContent = label;
+    }
+  }));
+
+  // Hiệu ứng xuất hiện khi cuộn
+  const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: .15 });
+  $$('.reveal').forEach(el => io.observe(el));
+})();
+</script>
+<!-- Khung chat trực tiếp: tự hỏi khách theo mục đang đọc (data-chat-topic) -->
+<script src="/widget.js" data-contacts="off" data-mobile-bottom="76" async></script>
+</body>
+</html>

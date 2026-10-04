@@ -74,6 +74,34 @@ app.get('/api/leads.csv', checkAgent, (req, res) => {
   res.send('﻿' + rows.map(r => r.map(esc).join(',')).join('\r\n'));
 });
 
+// Form đăng ký trên landing page → lưu thành lead, gắn với hội thoại chat của cùng khách.
+const formHits = new Map(); // ip -> [thời điểm]
+app.post('/api/lead', (req, res) => {
+  const ip = req.ip;
+  const now = Date.now();
+  const hits = (formHits.get(ip) || []).filter(t => now - t < 10 * 60 * 1000);
+  if (hits.length >= 5) return res.status(429).json({ error: 'Anh/chị gửi quá nhiều lần, vui lòng thử lại sau ít phút.' });
+  formHits.set(ip, [...hits, now]);
+
+  const b = req.body || {};
+  const phone = String(b.phone || '').match(PHONE_RE)?.[0].replace(/[\s.-]/g, '');
+  if (!phone) return res.status(400).json({ error: 'Số điện thoại chưa đúng, anh/chị kiểm tra lại giúp em ạ.' });
+
+  const id = ID_RE.test(b.visitorId || '') ? b.visitorId : crypto.randomUUID();
+  const isNew = !store.get(id);
+  const conv = store.ensure(id, { page: clean(b.page, 500), referrer: clean(b.referrer, 500) });
+  if (isNew) io.to('agents').emit('conversation:new', store.summary(conv));
+
+  const utm = clean(b.utm, 300);
+  const details = [b.need && `Nhu cầu: ${clean(b.need, 100)}`, b.form && `Form: ${clean(b.form, 60)}`, utm && `Nguồn: ${utm}`].filter(Boolean);
+  const note = [conv.lead.note, ...details].filter(Boolean).join(' | ').slice(0, 500);
+  sendMessage(conv, { from: 'system', text: `📝 Đăng ký từ landing page – ${clean(b.name, 100) || 'Khách'} – ${phone}${details.length ? '\n' + details.join('\n') : ''}` });
+  const hadPhone = Boolean(conv.lead.phone);
+  setLead(conv, { name: b.name, phone, note });
+  if (hadPhone) telegram.notifyLead(conv); // khách cũ đăng ký lại vẫn báo (lần đầu setLead đã báo)
+  res.json({ ok: true, visitorId: id });
+});
+
 async function pushLead(conv) {
   if (!config.leadWebhookUrl) return;
   try {
@@ -94,7 +122,7 @@ async function pushLead(conv) {
 function setLead(conv, fields) {
   const hadPhone = Boolean(conv.lead.phone);
   const lead = { ...conv.lead };
-  for (const k of ['name', 'phone', 'note']) if (fields[k]) lead[k] = clean(fields[k], 200);
+  for (const k of ['name', 'phone', 'note']) if (fields[k]) lead[k] = clean(fields[k], k === 'note' ? 500 : 200);
   store.update(conv.id, { lead });
   io.to('agents').emit('conversation:update', store.summary(conv));
   io.to(`conv:${conv.id}`).emit('lead:saved', lead);
@@ -273,7 +301,7 @@ io.on('connection', socket => {
     const conv = store.ensure(visitorId, { page: clean(meta.page, 500), referrer: clean(meta.referrer, 500) });
     const asked = conv.proactiveAsked || [];
     const last = conv.messages.filter(m => m.from !== 'system').pop();
-    if (asked.includes(topic) || asked.length >= (pa.maxPerVisit || 2)) return;
+    if (asked.includes(topic) || asked.length >= (pa.maxPerVisit || 2) || conv.lead.phone) return;
     if (last && Date.now() - last.at < (pa.quietSeconds || 45) * 1000) return;
     if (pendingAuto.has(conv.id)) return;
     store.update(conv.id, { proactiveAsked: [...asked, topic] });

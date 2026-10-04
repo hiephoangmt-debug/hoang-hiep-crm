@@ -71,6 +71,32 @@ Mỗi thông báo kèm đoạn hội thoại gần nhất, tách từng lượt 
 
 **Cả nhóm sale cùng nhận:** tạo nhóm Telegram, thêm bot vào nhóm. Vào @BotFather → `/mybots` → chọn bot → **Bot Settings → Group Privacy → Turn off** (để bot đọc được tin Reply trong nhóm). Gửi một tin trong nhóm để lấy chat ID của nhóm (số âm, ví dụ `-100123...`). Nhiều người nhận riêng thì ghi các ID cách nhau dấu phẩy: `TELEGRAM_CHAT_ID=5111,5222`.
 
+## Landing page chạy ads: biệt thự Hội An có dòng tiền
+
+Trang `public/landing.html` (mở tại `/landing.html`) dùng tông navy – trắng – cam, gồm:
+
+- **Hero**: tiêu đề "vừa nghỉ dưỡng, vừa tạo dòng tiền" và form nhận tài liệu qua Zalo ngay màn hình đầu.
+- **Gây tò mò**: "Vì sao nhà đầu tư để mắt đến biệt thự Hội An?" và **bảng tính dòng tiền bị làm mờ**, khách phải để lại số để "mở khoá".
+- **Các mục nội dung**: 3 cách khai thác dòng tiền, vị trí, sản phẩm (đơn lập / song lập / shophouse), kiến trúc, minh bạch pháp lý, đặt lịch tham quan, hỏi đáp, form cuối trang.
+- **CTA**: mọi nút đều mở popup form với tiêu đề đúng ngữ cảnh. Có popup giữ chân 1 lần (rê chuột rời trang hoặc cuộn 70% trên điện thoại) và thanh **Gọi / Zalo / Nhận bảng giá** cố định trên điện thoại.
+- **Form → hệ thống chat**: lead hiện trên trang tư vấn viên, báo Telegram kèm nhu cầu và **nguồn quảng cáo (UTM)**, gộp với hội thoại chat của cùng khách. Tự gọi `fbq('track','Lead')` và `gtag('event','generate_lead')` nếu đã cài Pixel / Google Ads.
+- **Khung chat** tự hỏi theo mục khách đang đọc (`data-chat-topic`), không hỏi khi khách đang điền form hoặc đã để lại số.
+
+Trước khi chạy ads:
+
+1. **Ảnh:** chép ảnh dự án vào `public/img/` và điền đường dẫn vào biến `IMAGES` cuối file `landing.html`.
+2. **Mã theo dõi:** dán mã Facebook Pixel / Google tag vào `<head>` (có ghi chú vị trí).
+3. **Link quảng cáo:** gắn UTM để biết lead từ chiến dịch nào, ví dụ `https://ten-mien/landing.html?utm_source=facebook&utm_campaign=bietthu-dongtien&utm_content=video1`.
+
+Trang không nêu giá hay tỷ suất cụ thể, và có ghi chú "không phải cam kết lợi nhuận". Khi viết quảng cáo bất động sản nên giữ nguyên tắc này để tránh bị từ chối duyệt.
+
+### Gợi ý nội dung quảng cáo
+
+- **Mẫu 1 – Tò mò:** "Ở Hội An, khách du lịch không thiếu – thứ thiếu là biệt thự nguyên căn đẹp để họ ở lại. 🌴 Casamia Balanca: biệt thự giữa rừng dừa Bảy Mẫu, vài phút ra phố cổ. 👉 Căn nào đang có dòng tiền tốt nhất? Nhận bảng tính miễn phí."
+- **Mẫu 2 – Lợi ích kép:** "Một căn biệt thự – 2 giá trị: gia đình nghỉ dưỡng vài tuần mỗi năm, thời gian còn lại cho thuê tạo dòng tiền. Nhận bảng giá + bảng tính dòng tiền theo căn qua Zalo trong 5 phút."
+- **Mẫu 3 – Khan hiếm:** "Hội An là đô thị di sản – quỹ đất biệt thự gần phố cổ và biển không nhiều. 363 sản phẩm tại Casamia Balanca, kiến trúc Võ Trọng Nghĩa. Xem căn còn trống 👉"
+- **Tiêu đề ngắn:** "Biệt thự Hội An tự làm ra tiền?" · "Căn nào có dòng tiền tốt nhất?" · "Mở khoá bảng tính dòng tiền"
+
 ## Nhúng vào website / LadiPage
 
 Dán vào trước `</body>` (hoặc phần HTML/Javascript của LadiPage):
@@ -80,6 +106,8 @@ Dán vào trước `</body>` (hoặc phần HTML/Javascript của LadiPage):
 ```
 
 Mở chat từ nút bất kỳ: `onclick="CasamiaChat.open()"`.
+
+Tuỳ chọn trên thẻ script: `data-contacts="off"` ẩn nút Gọi/Zalo nổi (khi trang đã có), `data-mobile-bottom="76"` đẩy nút chat lên trên thanh liên hệ cố định của trang trên điện thoại.
 
 ## Cấu hình
 

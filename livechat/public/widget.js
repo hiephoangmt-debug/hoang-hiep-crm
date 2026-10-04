@@ -9,6 +9,9 @@
 
   var script = document.currentScript || document.querySelector('script[src*="widget.js"]');
   var BASE = new URL(script.src).origin;
+  // Tuỳ chọn trên thẻ script: data-contacts="off" ẩn nút Gọi/Zalo nổi (khi trang đã có sẵn),
+  // data-mobile-bottom="80" đẩy nút chat lên trên thanh liên hệ cố định của trang trên điện thoại.
+  var OPTS = { contacts: script.getAttribute('data-contacts') !== 'off', mobileBottom: parseInt(script.getAttribute('data-mobile-bottom'), 10) || 0 };
 
   function uuid() {
     if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
@@ -45,7 +48,7 @@
       ':host{all:initial;--c:' + P.primaryColor + ';--a:' + P.accentColor + ';font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}' +
       '*{box-sizing:border-box}' +
       '.launcher{position:fixed;right:20px;bottom:20px;z-index:2147483000;display:flex;flex-direction:column;gap:10px;align-items:flex-end}' +
-      '.fab{width:60px;height:60px;border-radius:50%;border:0;cursor:pointer;background:var(--c);color:#fff;box-shadow:0 6px 20px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;position:relative}' +
+      '.fab{width:60px;height:60px;border-radius:50%;border:3px solid #fff;cursor:pointer;background:var(--c);color:#fff;box-shadow:0 6px 20px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;position:relative}' +
       '.fab svg{width:28px;height:28px}' +
       '.fab .dot{position:absolute;top:2px;right:2px;min-width:20px;height:20px;border-radius:10px;background:var(--a);color:#fff;font-size:12px;font-weight:700;display:none;align-items:center;justify-content:center;padding:0 5px}' +
       '.fab.pulse{animation:p 2s infinite}@keyframes p{0%{box-shadow:0 0 0 0 rgba(11,42,91,.5)}70%{box-shadow:0 0 0 16px rgba(11,42,91,0)}100%{box-shadow:0 0 0 0 rgba(11,42,91,0)}}' +
@@ -85,6 +88,7 @@
       '.foot textarea:focus{border-color:var(--c)}' +
       '.foot button{width:42px;height:42px;border-radius:50%;border:0;background:var(--a);color:#fff;cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center}' +
       '.foot button svg{width:20px;height:20px}' +
+      (OPTS.mobileBottom ? '@media(max-width:960px){.launcher{bottom:' + OPTS.mobileBottom + 'px}.panel{bottom:' + (OPTS.mobileBottom + 72) + 'px}}' : '') +
       '@media(max-width:480px){.panel{right:0;bottom:0;width:100vw;max-width:100vw;height:100%;max-height:100%;border-radius:0}}' +
       '</style>' +
       '<div class="panel" part="panel">' +
@@ -97,8 +101,8 @@
       '    <button type="submit" aria-label="Gửi"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg></button></form>' +
       '</div>' +
       '<div class="launcher"><div class="peek"><button class="x" aria-label="Ẩn">×</button><b></b><span></span></div>' +
-      (P.zalo ? '<a class="mini zalo" target="_blank" rel="noopener" title="Chat Zalo">Zalo</a>' : '') +
-      (P.hotline ? '<a class="mini call" title="Gọi hotline"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1z"/></svg></a>' : '') +
+      (P.zalo && OPTS.contacts ? '<a class="mini zalo" target="_blank" rel="noopener" title="Chat Zalo">Zalo</a>' : '') +
+      (P.hotline && OPTS.contacts ? '<a class="mini call" title="Gọi hotline"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1z"/></svg></a>' : '') +
       '  <button class="fab pulse" aria-label="Mở chat tư vấn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.4 1.3 4.6 3.4 6.1L4.5 21l4.2-2.2c1 .3 2.1.4 3.3.4 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg><span class="dot"></span></button>' +
       '</div>';
 
@@ -273,6 +277,7 @@
         var el = document.elementFromPoint(window.innerWidth / 2, window.innerHeight * 0.45);
         if (!el || el === host) return null;
         var block = el.closest('[data-chat-topic], .ladi-section, section, article');
+        if (block && block.getAttribute('data-chat-topic') === 'off') return null;
         if (block && block !== document.body) {
           var heads = Array.prototype.map.call(block.querySelectorAll('h1,h2,h3,h4'), function (h) { return h.textContent; }).join(' ');
           return { el: block, text: norm((block.getAttribute('data-chat-topic') || '') + ' ' + heads + ' ' + (block.innerText || '').slice(0, 400)) };
@@ -285,7 +290,9 @@
       };
       var timer = setInterval(function () {
         if (sentCount >= PA.maxPerVisit) return clearInterval(timer);
-        if (document.hidden || panel.classList.contains('open')) { dwell = 0; return; }
+        var ae = document.activeElement;
+        var typing = ae && ae !== host && /^(INPUT|SELECT|TEXTAREA)$/.test(ae.tagName);
+        if (document.hidden || panel.classList.contains('open') || typing) { dwell = 0; return; }
         var y = window.scrollY, fast = Math.abs(y - lastY) > window.innerHeight * 0.35;
         lastY = y;
         var b = currentBlock();

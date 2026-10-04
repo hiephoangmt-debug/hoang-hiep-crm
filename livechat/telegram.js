@@ -83,6 +83,7 @@ function notifyLead(conv) {
   const l = conv.lead;
   broadcast(conv,
     `🔥 <b>CÓ SỐ ĐIỆN THOẠI KHÁCH</b>\n👤 ${esc(l.name || '(chưa có tên)')}\n📞 <b>${esc(l.phone)}</b>` +
+    (l.note ? `\n📝 ${esc(l.note)}` : '') +
     `\n\nGọi lại ngay: tel:${esc(l.phone)}`);
 }
 
