@@ -246,7 +246,7 @@ def zone_analysis_html(z):
 
 def zone_toc_html(z):
     items = [("tong-quan", "Thông số"), ("tien-ich-pk", "Tiện ích"), ("bang-gia", "Giá bán"), ("mat-bang", "Mặt bằng & layout"),
-             ("gio-hang", "Bảng hàng"), ("chinh-sach", "Chính sách"), ("phan-tich", "Phân tích"), ("faq", "Hỏi đáp")]
+             ("gio-hang", "Bảng hàng"), ("chinh-sach", "Chính sách"), ("phap-ly", "Pháp lý"), ("phan-tich", "Phân tích"), ("faq", "Hỏi đáp")]
     if not z["policy_tab"]:
         items = [x for x in items if x[0] != "chinh-sach"]
     return ('<nav class="ztoc" aria-label="Mục lục phân khu"><div class="container">' +

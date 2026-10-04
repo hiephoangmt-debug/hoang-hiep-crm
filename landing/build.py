@@ -31,7 +31,7 @@ PAGES = [
         "badge": "Giỏ hàng cập nhật hằng ngày",
         "h1": "Giỏ hàng Vinhomes Hải Vân Bay<span>Quỹ căn độc quyền · Căn giá tốt từng phân khu</span>",
         "sub": "Tra cứu mã căn, xem nhanh thông số và nhận <b>giá tốt nhất</b> trực tiếp. Gõ mã căn bất kỳ để tra cứu toàn bộ rổ hàng, nhắn Zalo nhận giá & tình trạng căn.",
-        "sections": ["RIBBON", "CART", "CTABAND", "POLICIES", "PHANTICH", "CALCULATOR", "NEWS", "GALLERY", "FAQ", "CONTACT"],
+        "sections": ["RIBBON", "CART", "CTABAND", "POLICIES", "PHAPLY", "PHANTICH", "CALCULATOR", "NEWS", "GALLERY", "FAQ", "CONTACT"],
     "faq": [
             ("Nên thanh toán sớm hay vay 70% khi mua Vinhomes Hải Vân Bay?", "Theo phiếu giá căn mẫu T10/2026, thanh toán sớm rẻ hơn tiến độ chuẩn khoảng 3,4%, vay 70% đắt hơn khoảng 2,7%. Có vốn nhàn rỗi thì thanh toán sớm (chiết khấu tương đương 11%/năm); muốn giữ vốn thì vay 70%."),
             ("Vay lãi cố định (PA01) hay hỗ trợ lãi suất 0% (PA02) lợi hơn?", "Trên cùng giá trị gốc và vay đủ 70% suốt kỳ hạn, PA01 rẻ hơn PA02 từ 0,35% (18 tháng) đến 3,75% (36 tháng) và càng lợi khi trả trước hạn. PA02 phù hợp khi không muốn trả tiền hằng tháng."),
@@ -49,7 +49,7 @@ for _z in ZONES:
         "title": _z["title"], "desc": _z["desc"], "badge": _z["badge"], "h1": _z["h1"], "sub": _z["sub"],
         "zone": _z["zone_key"], "hero_img": _z["hero_img"], "policy_tab": _z["policy_tab"], "faq": _z["faq"],
         "extra": {"ZONEINFO": zone_toc_html(_z) + zone_info_html(_z), "ZONEDETAIL": zone_detail_html(_z), "ZONEANALYSIS": zone_analysis_html(_z), "ZONELINKS": zone_links_html(_z["slug"])},
-        "sections": ["ZONEINFO", "ZONEDETAIL", "CART"] + (["POLICIES"] if _z["policy_tab"] else []) +
+        "sections": ["ZONEINFO", "ZONEDETAIL", "CART"] + (["POLICIES"] if _z["policy_tab"] else []) + ["PHAPLY"] +
                     ["ZONEANALYSIS", "RIBBON", "CALCULATOR", "GALLERY", "NEWS", "ZONELINKS", "FAQ", "CONTACT"],
     })
 

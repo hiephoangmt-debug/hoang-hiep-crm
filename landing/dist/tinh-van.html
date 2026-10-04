@@ -202,11 +202,11 @@ section .zone .head{position:relative;background-size:cover!important;background
 .patool input,.patool select{width:100%;font:inherit;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px}
 @media(max-width:960px){.an-grid,.drivers{grid-template-columns:1fr}.persona{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.persona{grid-template-columns:1fr}.bar{grid-template-columns:110px 1fr 56px;font-size:13px}}
-.ztoc{position:sticky;top:64px;z-index:40;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 4px 12px rgba(6,20,46,.06)}
+.ztoc{position:sticky;top:78px;z-index:40;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 4px 12px rgba(6,20,46,.06)}
 .ztoc .container{display:flex;gap:6px;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:none}
 .ztoc a{flex:0 0 auto;font-size:14px;font-weight:700;color:var(--navy-700);padding:7px 14px;border-radius:999px;background:var(--blue-50);border:1px solid var(--line)}
 .ztoc a:hover{background:var(--blue-500);color:#fff}
-section[id]{scroll-margin-top:120px}
+section[id]{scroll-margin-top:136px}
 .locked-doc{display:grid;grid-template-columns:150px 1fr;gap:16px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--shadow);align-items:center;transition:.2s}
 .locked-doc:hover{transform:translateY(-3px);border-color:var(--blue-500)}
 .ld-img{height:130px;border-radius:12px;background-size:cover;background-position:center;filter:blur(2px) saturate(.8);position:relative}
@@ -214,14 +214,32 @@ section[id]{scroll-margin-top:120px}
 .ld-body small{display:block;color:var(--muted);font-size:13.5px;margin-bottom:12px}
 .ld-body .btn{padding:10px 16px;font-size:14px}
 @media(max-width:520px){.locked-doc{grid-template-columns:1fr}.ld-img{height:150px}}
+/* Legal */
+.legal{display:grid;grid-template-columns:1.5fr 1fr;gap:20px;margin-top:28px;align-items:start}
+.ltl{list-style:none;position:relative;padding-left:26px}
+.ltl::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--blue-300)}
+.ltl li{position:relative;margin-bottom:16px}
+.ltl li::before{content:"";position:absolute;left:-23px;top:5px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--blue-500)}
+.ltl b{display:block;color:var(--navy-700);font-size:15px}
+.ltl .doc-no{display:inline-block;font-size:12.5px;font-weight:800;color:var(--blue-600);background:var(--blue-100);padding:2px 8px;border-radius:6px;margin:3px 0}
+.ltl p{font-size:14px;color:var(--muted)}
+.lbadges{display:grid;gap:12px}
+.lbadge{display:flex;gap:12px;align-items:center;background:var(--navy-700);color:#fff;border-radius:14px;padding:14px 16px}
+.lbadge i{flex:0 0 40px;height:40px;border-radius:50%;background:rgba(212,175,106,.18);color:var(--gold);display:grid;place-items:center;font-style:normal;font-weight:800}
+.lbadge b{display:block;font-size:16px}.lbadge small{color:#C9D6EE;font-size:13px}
+@media(max-width:900px){.legal{grid-template-columns:1fr}}
 /* Header */
 .topbar{position:sticky;top:0;z-index:50;background:rgba(4,13,32,.94);backdrop-filter:blur(8px);color:#fff;border-bottom:1px solid rgba(255,255,255,.08)}
-.topbar .container{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.topbar .container{display:flex;align-items:center;justify-content:space-between;height:78px;gap:16px}
 .brand{display:flex;flex-direction:column;line-height:1.1}
 .brand b{font-family:"Playfair Display",serif;font-size:19px;letter-spacing:.04em}
 .brand small{font-size:11px;color:var(--gold);letter-spacing:.18em;text-transform:uppercase}
 .nav{display:flex;gap:18px;font-size:14px;font-weight:500;white-space:nowrap}
-.brand{white-space:nowrap}
+.brand{white-space:nowrap;display:flex;flex-direction:row;align-items:center;gap:10px}
+.brand .b-sym{height:50px;width:auto}
+.brand .b-txt{display:flex;flex-direction:column;gap:5px}
+.brand .b-word{height:26px;width:auto}
+.brand small{font-size:11px;letter-spacing:.06em;color:var(--gold);text-transform:none}
 .nav a{opacity:.85}.nav a:hover{opacity:1;color:var(--gold)}
 .hotline{background:var(--gold);color:var(--navy-900);font-weight:800;padding:9px 16px;border-radius:999px;font-size:15px;white-space:nowrap}
 @media(max-width:1100px){.nav{display:none}}
@@ -455,13 +473,14 @@ footer p{margin-bottom:6px}
 <div class="announce">🔥 Vịnh Mây áp dụng <b>Giãn xây</b> từ 01/10/2026 – chỉ thanh toán phần xây từ D+540 ngày. <a href="#lien-he" data-need="Phiếu tính giá Giãn xây Vịnh Mây" data-pop>Nhận phiếu tính miễn phí →</a></div>
 <header class="topbar">
   <div class="container">
-    <a href="#top" class="brand"><b>GIỎ HÀNG HẢI VÂN BAY</b><small>giohangvinhaivanbay.com</small></a>
+    <a href="#top" class="brand" aria-label="Giỏ hàng Vinhomes Hải Vân Bay – trang chủ"><img class="b-sym" src="img/logo-symbol.webp" alt="Logo Vinhomes Hải Vân Bay" width="35" height="50"><span class="b-txt"><img class="b-word" src="img/logo-word.webp" alt="Vinhomes Hai Van Bay" width="110" height="26"><small>giohangvinhaivanbay.com</small></span></a>
     <nav class="nav" aria-label="Điều hướng">
       <a href="#tong-quan">Tổng quan</a>
       <a href="/#phan-khu">Phân khu</a>
       <a href="/#chinh-sach">Chính sách</a>
       <a href="#gio-hang">Giỏ hàng</a>
       <a href="#tinh-gia">Tính giá</a>
+      <a href="#phap-ly">Pháp lý</a>
       <a href="#phan-tich">Phân tích</a>
       <a href="#tin-tuc">Tin tức</a>
     </nav>
@@ -512,7 +531,7 @@ footer p{margin-bottom:6px}
 </section>
 
 
-<nav class="ztoc" aria-label="Mục lục phân khu"><div class="container"><a href="#tong-quan">Thông số</a><a href="#tien-ich-pk">Tiện ích</a><a href="#bang-gia">Giá bán</a><a href="#mat-bang">Mặt bằng & layout</a><a href="#gio-hang">Bảng hàng</a><a href="#phan-tich">Phân tích</a><a href="#faq">Hỏi đáp</a></div></nav>
+<nav class="ztoc" aria-label="Mục lục phân khu"><div class="container"><a href="#tong-quan">Thông số</a><a href="#tien-ich-pk">Tiện ích</a><a href="#bang-gia">Giá bán</a><a href="#mat-bang">Mặt bằng & layout</a><a href="#gio-hang">Bảng hàng</a><a href="#phap-ly">Pháp lý</a><a href="#phan-tich">Phân tích</a><a href="#faq">Hỏi đáp</a></div></nav>
 <!-- ZONEINFO -->
 <section class="section" id="tong-quan">
   <div class="container overview" style="align-items:start">
@@ -618,6 +637,40 @@ footer p{margin-bottom:6px}
       <a href="tel:0909882555" class="btn btn-outline">☎ Gọi 0909 882 555</a>
     </div>
     <p class="cart-note">Nhập bất kỳ mã căn nào để tra cứu – toàn bộ rổ hàng đều có, nhắn Zalo để nhận giá & tình trạng căn.</p>
+  </div>
+</section>
+
+
+<!-- PHAPLY -->
+<section class="section alt" id="phap-ly">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Pháp lý dự án</span>
+      <h2 class="title">Pháp lý Vinhomes Hải Vân Bay: minh bạch, đầy đủ</h2>
+      <p class="lead">Dự án Khu du lịch nghỉ dưỡng và giải trí tổng hợp Làng Vân do Vinhomes phát triển – hồ sơ từ chủ trương đầu tư, quy hoạch 1/500 đến giấy phép xây dựng hạ tầng.</p>
+    </div>
+    <div class="legal">
+      <div class="an-box">
+        <h3 style="color:var(--navy-700);margin-bottom:14px">Các văn bản pháp lý chính</h3>
+        <ul class="ltl">
+          <li><b>Chủ trương đầu tư</b><span class="doc-no">QĐ 5805/QĐ-UBND · 27/08/2016</span><p>UBND TP. Đà Nẵng quyết định chủ trương đầu tư dự án.</p></li>
+          <li><b>Quy hoạch chi tiết 1/500</b><span class="doc-no">QĐ 1755, 9043, 5462, 5820 · 2014 – 2016</span><p>Các quyết định phê duyệt quy hoạch chi tiết tỷ lệ 1/500 của dự án.</p></li>
+          <li><b>Điều chỉnh chủ trương đầu tư</b><span class="doc-no">QĐ 1432/QĐ-TTg · 20/11/2024</span><p>Thủ tướng Chính phủ chấp thuận điều chỉnh chủ trương đầu tư dự án Làng Vân.</p></li>
+          <li><b>Điều chỉnh quy hoạch 1/500</b><span class="doc-no">QĐ 7064/QĐ-UBND · 31/12/2024</span><p>UBND TP. Đà Nẵng phê duyệt điều chỉnh quy hoạch chi tiết.</p></li>
+          <li><b>Giấy phép xây dựng hạ tầng kỹ thuật</b><span class="doc-no">GPXD 1116/SXD-GPXD · 19/06/2025</span><p>Sở Xây dựng cấp phép xây dựng hạ tầng kỹ thuật.</p></li>
+          <li><b>Thẩm định báo cáo nghiên cứu khả thi</b><span class="doc-no">2761/SXD-CPXD (2025) · 5151/SXD-CPXD (06/04/2026)</span><p>Văn bản thẩm định của Sở Xây dựng.</p></li>
+        </ul>
+        <p class="disc">Tổng hợp theo danh mục tài liệu pháp lý công bố trên trang chính thức của Vinhomes (cập nhật 04/2026). Thông tin pháp lý của từng căn theo HĐMB.</p>
+      </div>
+      <div class="lbadges">
+        <div class="lbadge"><i>∞</i><div><b>Sở hữu lâu dài</b><small>Phần lớn (~90%) sản phẩm thấp tầng</small></div></div>
+        <div class="lbadge"><i>✓</i><div><b>Quy hoạch 1/500 đã phê duyệt</b><small>Điều chỉnh mới nhất 31/12/2024</small></div></div>
+        <div class="lbadge"><i>₫</i><div><b>Bảo lãnh ngân hàng</b><small>Phí bảo lãnh 0,5% theo chính sách</small></div></div>
+        <div class="lbadge"><i>🏗</i><div><b>Đã cấp phép xây dựng hạ tầng</b><small>GPXD 1116/SXD-GPXD · 06/2025</small></div></div>
+        <a href="https://market.vinhomes.vn/blog/tai-lieu/vinhomes-hai-van-bay" target="_blank" rel="noopener" class="btn btn-outline" style="width:100%">Xem tài liệu gốc trên Vinhomes ↗</a>
+        <a href="#lien-he" class="btn btn-gold" style="width:100%" data-need="Bộ hồ sơ pháp lý dự án (PDF)" data-pop>Nhận bộ hồ sơ pháp lý PDF</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -846,6 +899,7 @@ footer p{margin-bottom:6px}
 
 <footer>
   <div class="container">
+    <p style="margin-bottom:14px"><img src="img/logo-hvb.webp" alt="Logo Vinhomes Hải Vân Bay" width="64" height="70" style="height:70px;width:auto"><span style="display:block;color:var(--gold);font-size:12px;letter-spacing:.08em;margin-top:4px">giohangvinhaivanbay.com</span></p>
     <p><b style="color:#fff">Giỏ Hàng Hải Vân Bay</b> · www.giohangvinhaivanbay.com · Hotline <a href="tel:0909882555" style="color:var(--gold)">0909 882 555</a> · <a href="mailto:dangquy.tran@gmail.com">dangquy.tran@gmail.com</a></p>
     <p><a href="/">Trang chủ</a> · <a href="/gio-hang">Giỏ hàng</a> · <a href="/#chinh-sach">Chính sách</a> · <a href="#phan-tich">Phân tích</a> · <a href="#tinh-gia">Tính giá</a> · <a href="#tin-tuc">Tin tức</a></p>
     <p>Phân khu: <a href="/bach-van">Bạch Vân</a> · <a href="/vinh-may">Vịnh Mây</a> · <a href="/dao-ngoc">Đảo Ngọc</a> · <a href="/tinh-van">Tinh Vân</a></p>
