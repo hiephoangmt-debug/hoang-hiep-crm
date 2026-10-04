@@ -655,6 +655,7 @@ function hh_import_projects() {
 					'post_title'   => $p['title'],
 					'post_excerpt' => $p['excerpt'],
 					'post_content' => $p['content'] ?? '',
+					'menu_order'   => (int) ( $p['order'] ?? 0 ),
 				)
 			);
 			if ( ! $id || is_wp_error( $id ) ) {
@@ -693,10 +694,15 @@ function hh_import_projects() {
 			wp_update_post( array( 'ID' => $id, 'post_excerpt' => $p['excerpt'] ) );
 		}
 
+		// Thứ tự hiển thị (VD phân khu Khu 1 → Khu 4) cho dự án đã có.
+		if ( ! empty( $p['order'] ) && 0 === (int) get_post_field( 'menu_order', $id ) ) {
+			wp_update_post( array( 'ID' => $id, 'menu_order' => (int) $p['order'] ) );
+		}
+
 		// Bài giới thiệu chi tiết: chỉ điền khi dự án chưa có nội dung, hoặc nội dung vẫn là bản cũ do web nhập (fix_content) – không đè bài bạn đã tự sửa.
 		$current = get_post_field( 'post_content', $id );
 		$same    = static fn( $a, $b ) => preg_replace( '/\s+/', '', wp_unslash( (string) $a ) ) === preg_replace( '/\s+/', '', (string) $b );
-		if ( ! empty( $p['content'] ) && ( '' === trim( $current ) || ( ! empty( $p['fix_content'] ) && $same( $current, $p['fix_content'] ) ) ) ) {
+		if ( ! empty( $p['content'] ) && ( '' === trim( $current ) || ( ! empty( $p['fix_content'] ) && array_filter( (array) $p['fix_content'], static fn( $old ) => $same( $current, $old ) ) ) ) ) {
 			wp_update_post( array( 'ID' => $id, 'post_content' => $p['content'] ) );
 		}
 

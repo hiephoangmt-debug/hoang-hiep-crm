@@ -15,6 +15,10 @@ function hh_dataset_hai_van_bay_2026_10( $projects ) {
 			continue;
 		}
 		$upd = array(
+			'hh_p_units'         => '4 phân khu: Bạch Vân ~2.524 căn thấp tầng + 15 tòa cao tầng, Đảo Ngọc 2.376 căn, Vịnh Mây 690 sản phẩm; Tinh Vân chưa công bố',
+			'hh_p_unit_area'     => 'Liền kề 63 – 174 m² · Song lập 140 – 221 m² · Đơn lập 140 – 420 m²',
+			'hh_p_price_from'    => '5300',
+			'hh_p_price_m2'      => 'Khoảng 53 – 130 triệu/m² đất tùy phân khu và dòng sản phẩm (tham khảo)',
 			'hh_p_address'       => 'Vịnh Nam Chơn (Làng Vân), chân đèo Hải Vân, phường Hải Vân (trước đây phường Hòa Hiệp Bắc, Liên Chiểu), TP Đà Nẵng',
 			'hh_p_handover'      => 'Bạch Vân: khoảng 345 căn thấp tầng bàn giao thô quý 4/2026; cao tầng Bạch Vân quý 4/2027; toàn dự án khoảng 2029 (dự kiến)',
 			'hh_p_highlights'    => "Quy mô 512 ha, vốn khoảng 44.000 tỷ đồng, chủ đầu tư Vinpearl – Vinhomes phát triển (Vingroup)\nVịnh Nam Chơn tựa núi Hải Vân, ba mặt hướng biển – cửa ngõ phía Bắc Đà Nẵng\n4 phân khu: Bạch Vân (Hong Kong), Vịnh Mây (Malibu), Đảo Ngọc (Costa Smeralda – Ý), Tinh Vân (Nhật Bản)\nHơn 90% sản phẩm thấp tầng sở hữu lâu dài – hiếm có ở bất động sản ven biển\nVinWonders Hải Vân kết nối Đảo Ngọc; Lifestyle Hub, chợ Hong Kong, làng ẩm thực ven suối tại Bạch Vân\nThanh toán giãn xây 18 – 24 tháng, vay đến 70 – 80%, khóa trần lãi suất theo từng đợt",
@@ -35,7 +39,9 @@ function hh_dataset_hai_van_bay_2026_10( $projects ) {
 		$projects[ $i ]['meta']        = array_merge( $p['meta'], $upd );
 		$projects[ $i ]['fix_excerpt'] = $p['excerpt'];
 		$projects[ $i ]['excerpt']     = 'Vinhomes Hải Vân Bay (Làng Vân) – đô thị vịnh biển 512 ha dưới chân đèo Hải Vân, Đà Nẵng. 4 phân khu Bạch Vân, Vịnh Mây, Đảo Ngọc, Tinh Vân; liền kề từ khoảng 5,3 tỷ, biệt thự sở hữu lâu dài, thanh toán giãn xây 18 – 24 tháng.';
-		$projects[ $i ]['fix_content'] = $p['content'];
+		// Bản cũ do web nhập: bài 2024–9/2026 và bản 10/2026 trước khi có link phân khu.
+		$unlinked = preg_replace( '#<a href="/du-an/vinhomes-hai-van-bay-[a-z-]+/">(Khu \d – [^<]+)</a>#u', '$1', hh_hai_van_bay_content_2026_10() );
+		$projects[ $i ]['fix_content'] = array( $p['content'], $unlinked, str_replace( 'giỏ hàng độc quyền 6 căn', 'giỏ hàng độc quyền 5 căn', $unlinked ) );
 		$projects[ $i ]['content']     = hh_hai_van_bay_content_2026_10();
 		$projects[ $i ]['sources']     = array_values(
 			array_unique(
@@ -81,10 +87,10 @@ function hh_hai_van_bay_content_2026_10() {
 <table>
 <thead><tr><th>Phân khu</th><th>Diện tích</th><th>Phong cách</th><th>Sản phẩm</th><th>Tình trạng</th></tr></thead>
 <tbody>
-<tr><td>Khu 1 – Bạch Vân</td><td>~112 ha</td><td>Hong Kong</td><td>~2.524 căn thấp tầng + 15 tòa cao tầng</td><td>Đang bán (từ 20/4/2026)</td></tr>
-<tr><td>Khu 2 – Vịnh Mây</td><td>~99,6 ha</td><td>Malibu</td><td>690 sản phẩm: 429 biệt thự, 261 liền kề</td><td>Ra mắt 26/9/2026</td></tr>
-<tr><td>Khu 3 – Đảo Ngọc</td><td>~138,8 ha</td><td>Costa Smeralda (Ý)</td><td>2.376 căn thấp tầng</td><td>Đang bán (từ 5/5/2026)</td></tr>
-<tr><td>Khu 4 – Tinh Vân</td><td>~161,8 ha</td><td>Nhật Bản</td><td>Nghỉ dưỡng cao cấp, sở hữu 50 năm</td><td>Chưa mở bán</td></tr>
+<tr><td><a href="/du-an/vinhomes-hai-van-bay-bach-van/">Khu 1 – Bạch Vân</a></td><td>~112 ha</td><td>Hong Kong</td><td>~2.524 căn thấp tầng + 15 tòa cao tầng</td><td>Đang bán (từ 20/4/2026)</td></tr>
+<tr><td><a href="/du-an/vinhomes-hai-van-bay-vinh-may/">Khu 2 – Vịnh Mây</a></td><td>~99,6 ha</td><td>Malibu</td><td>690 sản phẩm: 429 biệt thự, 261 liền kề</td><td>Ra mắt 26/9/2026</td></tr>
+<tr><td><a href="/du-an/vinhomes-hai-van-bay-dao-ngoc/">Khu 3 – Đảo Ngọc</a></td><td>~138,8 ha</td><td>Costa Smeralda (Ý)</td><td>2.376 căn thấp tầng</td><td>Đang bán (từ 5/5/2026)</td></tr>
+<tr><td><a href="/du-an/vinhomes-hai-van-bay-tinh-van/">Khu 4 – Tinh Vân</a></td><td>~161,8 ha</td><td>Nhật Bản</td><td>Nghỉ dưỡng cao cấp, sở hữu 50 năm</td><td>Chưa mở bán</td></tr>
 </tbody>
 </table>
 <h3>Khu 1 – Bạch Vân: sôi động kiểu Hong Kong</h3>

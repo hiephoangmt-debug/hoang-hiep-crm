@@ -191,8 +191,7 @@ while ( have_posts() ) :
 						'posts_per_page' => 12,
 						'post__not_in'   => array( $id ),
 						'meta_query'     => array( array( 'key' => 'hh_p_parent', 'value' => $id ) ),
-						'orderby'        => 'title',
-						'order'          => 'ASC',
+						'orderby'        => array( 'menu_order' => 'ASC', 'title' => 'ASC' ),
 						'no_found_rows'  => true,
 					)
 				);
