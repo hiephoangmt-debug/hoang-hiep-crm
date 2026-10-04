@@ -107,6 +107,13 @@ Trang không nêu giá hay tỷ suất cụ thể, và có ghi chú "không ph�
 - **Mẫu 3 – Khan hiếm:** "Hội An là đô thị di sản – quỹ đất biệt thự gần phố cổ và biển không nhiều. 363 sản phẩm tại Casamia Balanca, kiến trúc Võ Trọng Nghĩa. Xem căn còn trống 👉"
 - **Tiêu đề ngắn:** "Biệt thự Hội An tự làm ra tiền?" · "Căn nào có dòng tiền tốt nhất?" · "Mở khoá bảng tính dòng tiền"
 
+## Bộ ảnh quảng cáo
+
+`ads/out/` có sẵn 5 mẫu × 2 khổ (1080×1080 bài đăng, 1080×1920 Story/Reels): thuê lại 60 triệu/tháng, chiết khấu 4 tỷ, cọc 300 triệu, bản đồ vị trí, gây tò mò 4,4 triệu khách – 363 căn. Lời quảng cáo, tiêu đề, link UTM và gợi ý tệp khách nằm trong `ads/NOI-DUNG-QUANG-CAO.md`.
+Sửa mẫu trong `ads/creatives.html`, xuất lại bằng `node ads/render-ads.js` (cần Playwright + Chromium).
+
+Landing page có thêm **bản đồ Google** và nút **Chỉ đường** ở khối Vị trí.
+
 ## Nhúng vào website / LadiPage
 
 Dán vào trước `</body>` (hoặc phần HTML/Javascript của LadiPage):
