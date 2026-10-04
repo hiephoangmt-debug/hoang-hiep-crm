@@ -51,8 +51,8 @@
 
   /* Hero */
   .hero{position:relative;color:#fff;background:var(--navy);overflow:hidden;padding:70px 0 90px}
-  .hero::before{content:"";position:absolute;inset:0;background:var(--hero-img,none) center/cover no-repeat;opacity:.35}
-  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(7,29,64,.96) 0%,rgba(11,42,91,.85) 55%,rgba(11,42,91,.55) 100%)}
+  .hero::before{content:"";position:absolute;inset:0;background:var(--hero-img,none) center/cover no-repeat;opacity:1}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(7,29,64,.94) 0%,rgba(11,42,91,.8) 48%,rgba(11,42,91,.25) 100%)}
   .hero .palms{position:absolute;right:-40px;bottom:-10px;width:520px;opacity:.12;z-index:1}
   .hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:center}
   .hero h1{font-size:clamp(32px,4.6vw,54px);font-weight:800;margin:14px 0 18px;letter-spacing:-.5px}
@@ -204,7 +204,7 @@
   .hpol-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
   .hpol-row span{font-size:12px;color:var(--muted);line-height:1.3;border-right:1px solid var(--line);padding-right:8px}
   .hpol-row span:last-child{border-right:0}
-  .hpol-row b{display:block;font-size:34px;color:var(--orange);font-weight:800;margin-top:2px;line-height:1.1;letter-spacing:-.5px}
+  .hpol-row b{display:block;font-size:38px;color:var(--orange);font-weight:800;margin-top:2px;line-height:1.1;letter-spacing:-.5px}
   .hpol-row i{display:block;font-style:normal;font-size:12px;font-weight:700;color:var(--navy)}
   .shine{background:linear-gradient(105deg,var(--orange) 0%,var(--orange) 38%,#fff3e6 50%,var(--orange) 62%,var(--orange) 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:shine 2.6s ease-in-out infinite alternate;filter:drop-shadow(0 2px 6px rgba(244,124,32,.25))}
   .shine-w{background:linear-gradient(105deg,var(--orange) 0%,var(--orange) 38%,#ffe2c7 50%,var(--orange) 62%,var(--orange) 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 3s ease-in-out infinite alternate}
@@ -309,9 +309,62 @@
   .pol-cta p{margin:4px 0 0;color:rgba(255,255,255,.8);font-size:15px;max-width:560px}
   .policy .src{color:rgba(255,255,255,.55)!important}
 
+
+  /* Chính sách theo phân khu */
+  .ptabs{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 20px}
+  .ptabs button{font:inherit;font-weight:700;font-size:14px;border:1.5px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:999px;padding:10px 16px;cursor:pointer}
+  .ptabs button.on{background:var(--orange);border-color:var(--orange)}
+  .pname{font-size:20px;margin:0 0 14px;color:#fff}
+  .pbody .pol-grid{margin:0 0 16px}
+  .pbody .pol h3{min-height:0;margin:0 0 4px;font-size:14px;color:var(--muted);font-weight:600}
+  .pbody .pol b{font-size:40px}
+  .perks{list-style:none;padding:0;margin:0 0 20px;display:flex;flex-wrap:wrap;gap:8px}
+  .perks li{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:6px 12px;font-size:13.5px}
+  .perks li::before{content:"✓ ";color:var(--orange);font-weight:800}
+  .pay{background:#fff;color:var(--navy);border-radius:16px;padding:22px;margin-bottom:22px}
+  .pay-h{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:4px 0 10px}
+  .pay-h b{background:var(--navy);color:#fff;border-radius:8px;padding:6px 12px;font-size:14px}
+  .pay-h span{color:var(--orange);font-weight:700;font-size:14px}
+  .steps{display:flex;flex-wrap:wrap;row-gap:16px;padding:6px 0 10px;position:relative}
+  .st{flex:1 0 96px;max-width:160px;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative}
+  .st::before{content:"";position:absolute;top:33px;left:0;right:0;height:2px;background:var(--line)}
+  .st:first-child::before{left:50%}.st:last-child::before{right:50%}
+  .st b{font-size:17px;font-weight:800;color:var(--navy);height:26px}
+  .st i{width:12px;height:12px;border-radius:50%;background:var(--orange);border:3px solid #fff;box-shadow:0 0 0 1px var(--orange);margin:2px 0 6px;position:relative;z-index:1}
+  .st span{font-size:12px;color:var(--muted);line-height:1.3;padding:0 4px}
+  .pay-note{font-size:14px;color:var(--muted);margin:2px 0 16px}
+  /* Cam kết thuê */
+  .commit{display:grid;grid-template-columns:1.6fr 1fr;gap:18px;margin:30px 0 30px}
+  .cm{background:#fff;color:var(--navy);border-radius:18px;padding:24px;text-align:center;border-bottom:5px solid var(--orange)}
+  .cm-h{display:inline-block;background:var(--navy);color:#fff;font-weight:700;font-size:14px;padding:6px 14px;border-radius:999px;text-transform:uppercase;letter-spacing:.5px}
+  .cm>b{display:block;font-size:60px;font-weight:800;line-height:1.1;margin:12px 0 14px;letter-spacing:-1.5px}
+  .cm>b small{font-size:22px;letter-spacing:0}
+  .cm-sub{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .cm-sub.one{grid-template-columns:1fr}
+  .cm-sub>div{background:var(--soft);border-radius:12px;padding:14px;font-size:15px}
+  .cm-sub strong{font-size:28px;color:var(--navy)}
+  .cm-sub p{margin:4px 0 6px;font-size:13px;color:var(--muted)}
+  .cm-sub em{font-style:normal;font-weight:800;color:var(--orange)}
+  .cm.hl{border:3px solid var(--orange)}
+  .pick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+  .pick button{font:inherit;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;cursor:pointer;font-weight:700;font-size:14px;color:var(--navy)}
+  .pick button small{display:block;font-weight:500;font-size:12px;color:var(--muted)}
+  .pick button.on{border-color:var(--orange);background:#fff6ef;box-shadow:inset 0 0 0 1px var(--orange)}
+  .calc .perks li{background:var(--soft);border-color:var(--line);color:var(--navy)}
+  .js-ctype{font-weight:700;color:var(--navy)!important;font-size:14px!important;margin:0 0 6px!important}
+  /* Sản phẩm 2 phân khu */
+  .prods.two{grid-template-columns:1fr 1fr}
+  .prods.two .ph{height:260px}
+  .ph-n{position:absolute;right:14px;bottom:14px;background:var(--orange);color:#fff;font-size:20px;font-weight:800;padding:6px 12px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+  .opts{list-style:none;padding:0;margin:0 0 14px;display:grid;gap:8px}
+  .opts li{background:var(--soft);border-left:3px solid var(--orange);border-radius:8px;padding:10px 12px;font-size:14px;color:var(--muted)}
+  .opts li b{display:block;color:var(--navy);font-size:14px}
+
   @media(max-width:960px){
+    .hero::after{background:linear-gradient(180deg,rgba(7,29,64,.9),rgba(11,42,91,.82))}
     .hero .wrap,.loc .grid,.arch .grid,.final .grid{grid-template-columns:1fr}
-    .cards3,.ways,.prods,.calc,.radius{grid-template-columns:1fr}
+    .cards3,.ways,.prods,.calc,.radius,.commit,.prods.two{grid-template-columns:1fr}
+    .cm>b{font-size:46px}.pbody .pol b{font-size:32px}
     .pol-grid{grid-template-columns:1fr 1fr}
     .hot-spot span{font-size:11px;padding:4px 7px}
     .legend{position:static;justify-content:center;flex-wrap:wrap;border-top:1px solid var(--line)}
@@ -330,6 +383,7 @@
     .hero{padding:44px 0 80px}
     .hero p.sub{font-size:16px}
     .hnums b{font-size:21px}
+    .cm-sub{grid-template-columns:1fr}.pick{grid-template-columns:1fr}
     .hpol-row{grid-template-columns:1fr 1fr;row-gap:12px}.hpol-row span:nth-child(2){border-right:0}.hpol-row b{font-size:30px}
     .bignum>b{font-size:38px}
     .timeline::before{left:62px}.tl{grid-template-columns:56px 1fr;gap:20px}.tl::before{left:49px}.tl time{font-size:14px}
@@ -356,52 +410,47 @@
 
 <!-- HERO -->
 <section class="hero" data-chat-topic="off">
-  <svg class="palms" viewBox="0 0 400 300" fill="#fff" aria-hidden="true"><path d="M90 300c6-60 4-120-10-170 30-6 60 4 78 26-20-30-52-44-86-36 18-28 52-38 80-26-30-14-62-10-86 10 4-30 34-50 66-46-34-6-64 10-78 38-14-26-44-40-74-34 30 4 52 26 58 52-26-16-60-14-82 6 30-6 58 6 72 30-28-6-56 6-70 30 26-16 56-14 74 6 12 44 14 100 8 144zm190 0c4-44 2-88-8-124 22-4 44 4 56 18-14-22-38-32-62-26 12-20 38-28 58-18-22-10-46-8-62 8 2-22 24-36 48-34-24-4-46 8-56 28-10-20-32-28-54-24 22 2 38 18 42 38-20-12-44-10-60 4 22-4 42 4 52 22-20-4-40 4-50 22 18-12 40-10 54 4 8 32 10 72 6 106z"/></svg>
   <div class="wrap">
     <div>
-      <span class="eyebrow">Biệt thự nghỉ dưỡng · Hội An</span>
-      <h1><span class="js-count" data-to="4.4" data-dec="1">4,4</span> triệu lượt khách đến Hội An mỗi năm. <em class="shine-w">Chỉ 363 căn</em> biệt thự giữa rừng dừa để họ ở lại.</h1>
-      <p class="sub">Sáng thức dậy giữa rừng dừa Bảy Mẫu, khoảng 10 phút tới phố cổ đèn lồng, chiều ra biển An Bàng. Gia đình anh/chị nghỉ dưỡng vài tuần mỗi năm. <b>Những ngày còn lại, căn nhà đón khách và tạo dòng tiền.</b></p>
-      <div class="hpol js-open" data-title="Mở khoá chính sách bán hàng tháng này" data-need="Chính sách bán hàng" role="button" tabindex="0">
-        <div class="hpol-h">🎁 Chính sách tháng này</div>
+      <span class="eyebrow">Casamia Balanca · Hội An · Chính sách mới từ 09/2026</span>
+      <h1>Biệt thự giữa rừng dừa Hội An. Chủ đầu tư <em class="shine-w">thuê lại 60 triệu/tháng</em></h1>
+      <p class="sub">Sáng cà phê bên rừng dừa Bảy Mẫu, khoảng 10 phút ra phố cổ, chiều ra biển An Bàng. Gia đình về nghỉ khi muốn. <b>Những tháng còn lại, chủ đầu tư thuê lại hoặc vận hành cho thuê giúp anh/chị.</b></p>
+      <div class="hpol js-open" data-title="Nhận chính sách bán hàng đầy đủ & bảng giá" data-need="Chính sách bán hàng" role="button" tabindex="0">
+        <div class="hpol-h">🎁 Chính sách bán hàng mới nhất</div>
         <div class="hpol-row">
-          <span>Thanh toán đợt đầu<b data-pol="firstPay">██%</b></span>
-          <span>Chiết khấu vốn tự có<b data-pol="discount">██%</b></span>
-          <span>Lãi suất<b data-pol="finance">██%</b><i data-pol="financeNote">██ tháng</i></span>
-          <span>Ngân hàng cho vay<b data-pol="gift">██%</b></span>
+          <span>CĐT thuê lại<b class="shine">60tr</b><i>mỗi tháng · Forestside</i></span>
+          <span>Đặt cọc chỉ<b class="shine">300tr</b><i>giữ căn</i></span>
+          <span>Lãi suất<b class="shine">0%</b><i>24 tháng · vay 70%</i></span>
+          <span>Chiết khấu tới<b class="shine">4 tỷ</b><i>khi nhận bàn giao thô</i></span>
         </div>
-        <div class="hpol-cta">Nhận chính sách chi tiết &amp; bảng tính theo căn →</div>
+        <div class="hpol-cta">Xem chính sách đầy đủ &amp; bảng giá →</div>
       </div>
-      <div class="price-badge js-price" hidden>Giá chỉ từ <b class="js-price-val"></b> · <button class="link-cta js-open" data-title="Nhận bảng giá căn còn trống" data-need="Bảng giá">Xem bảng giá →</button></div>
       <div class="hnums">
-        <div><b><span class="js-count" data-to="1.87" data-dec="2">1,87</span> triệu</b><span>lượt khách <u>ở lại qua đêm</u> tại Hội An năm 2024</span></div>
-        <div><b>+<span class="js-count" data-to="18.64" data-dec="2">18,64</span>%</b><span>khách lưu trú tăng, nhanh gần <u>gấp 3</u> tổng lượt khách</span></div>
-        <div><b>~<span class="js-count" data-to="14" data-dec="0">14</span> tỷ/ngày</b><span>doanh thu du lịch Hội An (5.200 tỷ/năm)</span></div>
-        <div><b>1 : <span class="js-count" data-to="12000" data-dec="0">12.000</span></b><span>cứ ~12.000 lượt khách mới có 1 căn Casamia Balanca</span></div>
+        <div><b><span class="js-count" data-to="4.4" data-dec="1">4,4</span> triệu</b><span>lượt khách đến Hội An năm 2024</span></div>
+        <div><b>+<span class="js-count" data-to="18.64" data-dec="2">18,64</span>%</b><span>khách <u>ở lại qua đêm</u>, tăng gần gấp 3 tổng lượt khách</span></div>
       </div>
       <div class="ctas">
-        <button class="btn btn-orange pulse js-open" data-title="Căn nào đang có dòng tiền tốt nhất?" data-need="Đầu tư cho thuê">Xem căn nào có dòng tiền tốt nhất →</button>
-        <a class="btn btn-ghost" href="#tinh-dong-tien">🧮 Tự tính dòng tiền ↓</a>
+        <button class="btn btn-orange pulse js-open" data-title="Căn nào nhận được 60 triệu/tháng?" data-need="Đầu tư nhận tiền thuê">Căn nào nhận 60 triệu/tháng? →</button>
+        <a class="btn btn-ghost" href="#dong-tien">🧮 Tính tiền thuê nhận về ↓</a>
       </div>
-      <p class="src">Số liệu du lịch: UBND TP Hội An, năm 2024.</p>
     </div>
     <div class="card-form" id="form-top">
       <form class="js-lead" data-form="Hero">
         <div class="hot">🔥 Bảng hàng tháng này</div>
         <h3>Nhận trọn bộ trong 5 phút qua Zalo</h3>
         <ul class="gets">
-          <li><span>①</span> Bảng giá &amp; danh sách căn còn trống</li>
-          <li><span>②</span> Bảng tính dòng tiền cho thuê theo từng căn</li>
-          <li><span>③</span> Mặt bằng, video thực tế &amp; chính sách mới nhất</li>
+          <li><span>①</span> Bảng giá &amp; căn còn trống Forestside / Parkhome</li>
+          <li><span>②</span> Chính sách chi tiết &amp; tiến độ thanh toán theo căn</li>
+          <li><span>③</span> Bảng tính tiền thuê CĐT trả hằng tháng</li>
         </ul>
         <label class="field"><input name="name" placeholder="Họ và tên" autocomplete="name" maxlength="80"></label>
         <label class="field"><input name="phone" type="tel" placeholder="Số điện thoại / Zalo *" autocomplete="tel" required maxlength="20"></label>
         <label class="field"><select name="need">
           <option value="">Anh/chị quan tâm…</option>
-          <option>Đầu tư cho thuê – dòng tiền</option>
+          <option>Forestside Villa – biệt thự rừng dừa</option>
+          <option>Parkhome – biệt thự sân vườn</option>
+          <option>Đầu tư nhận tiền thuê hằng tháng</option>
           <option>Mua để nghỉ dưỡng gia đình</option>
-          <option>Shophouse kinh doanh</option>
-          <option>Chỉ đang tham khảo</option>
         </select></label>
         <div class="form-err"></div>
         <button class="btn btn-orange btn-block">Gửi tài liệu cho tôi ngay</button>
@@ -416,32 +465,12 @@
   <div class="wrap">
     <div class="grid">
       <div class="it"><b><span class="js-count" data-to="31.1" data-dec="1">31,1</span><em> ha</em></b><span>giữa rừng dừa Bảy Mẫu</span></div>
-      <div class="it"><b><span class="js-count" data-to="363" data-dec="0">363</span></b><span>biệt thự &amp; shophouse – không hơn</span></div>
-      <div class="it"><b>~5<em> km</em></b><span>tới biển An Bàng</span></div>
-      <div class="it"><b>Thứ 3</b><span>dự án của Đạt Phương tại Hội An</span></div>
+      <div class="it"><b><span class="js-count" data-to="363" data-dec="0">363</span></b><span>sản phẩm – không hơn</span></div>
+      <div class="it"><b>5<em> năm</em></b><span>hợp đồng ủy thác cho thuê</span></div>
+      <div class="it"><b>2026<em>–27</em></b><span>nhận bàn giao nhà</span></div>
     </div>
   </div>
 </div>
-
-<!-- CHÍNH SÁCH -->
-<section class="policy" id="chinh-sach" data-chat-topic="chính sách thanh toán ưu đãi">
-  <div class="wrap">
-    <span class="eyebrow">Chính sách bán hàng</span>
-    <h2>Chính sách <em>tháng này</em> có gì?</h2>
-    <p class="lead-text">Chỉ cần <strong class="o" data-pol="firstPay">██</strong> để ký hợp đồng, ngân hàng hỗ trợ tới <strong class="o" data-pol="gift">██</strong> với lãi suất <strong class="o" data-pol="finance">██</strong> trong <strong class="o" data-pol="financeNote">██</strong>.</p>
-    <div class="pol-grid">
-      <div class="pol reveal"><span>💳</span><h3>Thanh toán đợt đầu</h3><b class="blur" data-pol="firstPay">██%</b><p>giá trị căn khi ký hợp đồng</p></div>
-      <div class="pol reveal"><span>🏷️</span><h3>Chiết khấu vốn tự có</h3><b class="blur" data-pol="discount">██%</b><p>+ chiết khấu thanh toán sớm <span data-pol="earlyPay">██</span></p></div>
-      <div class="pol reveal"><span>🏦</span><h3>Hỗ trợ lãi suất</h3><b class="blur" data-pol="finance">██%</b><p>trong <span data-pol="financeNote">██ tháng</span> từ ngày giải ngân</p></div>
-      <div class="pol reveal"><span>🎁</span><h3>Ngân hàng cho vay tới</h3><b class="blur" data-pol="gift">██%</b><p>giá trị hợp đồng</p></div>
-    </div>
-    <div class="pol-cta reveal">
-      <div><b>🔒 Chính sách chính thức mới nhất</b><p>Em gửi bản chính sách, tiến độ thanh toán và bảng tính dòng tiền đã áp ưu đãi, đúng căn anh/chị chọn.</p></div>
-      <button class="btn btn-orange pulse js-open" data-title="Mở khoá chính sách bán hàng tháng này" data-need="Chính sách bán hàng">Mở khoá chính sách tháng này →</button>
-    </div>
-    <p class="src" style="color:var(--muted)">Chính sách thay đổi theo từng đợt, áp dụng theo công bố chính thức của chủ đầu tư.</p>
-  </div>
-</section>
 
 <!-- BẠN CÓ BIẾT -->
 <section class="know" id="bi-mat">
@@ -483,7 +512,7 @@
       <div class="tl reveal"><time>09:00</time><div><h3>Phố cổ chỉ ~10 phút</h3><p>Lang thang những con phố vàng rêu đã 400 năm tuổi, ăn tô cao lầu đúng vị, rồi về nhà trước giờ nắng gắt.</p></div></div>
       <div class="tl reveal"><time>16:00</time><div><h3>Biển An Bàng ~5 km</h3><p>Lũ trẻ chạy trên cát, người lớn ngắm hoàng hôn. Đây là bãi biển từng được bình chọn trong top đẹp của châu Á.</p></div></div>
       <div class="tl reveal"><time>20:00</time><div><h3>Bữa tối trong căn nhà của mình</h3><p>Ba thế hệ quây quần trong khu vườn riêng: không phòng khách sạn chật chội, không giờ trả phòng.</p></div></div>
-      <div class="tl hl reveal"><time>Còn lại</time><div><h3>Khi gia đình về thành phố…</h3><p>Căn nhà tiếp tục đón những vị khách trong số <b>1,87 triệu lượt khách lưu trú</b> mỗi năm. <b>Dòng tiền vẫn chảy về tài khoản của anh/chị.</b></p></div></div>
+      <div class="tl hl reveal"><time>Còn lại</time><div><h3>Khi gia đình về thành phố…</h3><p>Chủ đầu tư thuê lại hoặc vận hành cho thuê, đón khách trong số <b>1,87 triệu lượt khách lưu trú</b> mỗi năm. <b>Tiền thuê tới 60 triệu/tháng vẫn về tài khoản của anh/chị.</b></p></div></div>
     </div>
     <div style="text-align:center;margin-top:30px"><button class="btn btn-orange js-open" data-title="Tôi muốn sở hữu một căn như thế" data-need="Mua để nghỉ dưỡng gia đình">Tôi muốn một ngày như thế →</button></div>
   </div>
@@ -492,32 +521,46 @@
 <!-- CASH FLOW -->
 <section class="cash" id="dong-tien" data-chat-topic="bảng giá thanh toán chính sách">
   <div class="wrap">
-    <span class="eyebrow">Dòng tiền</span>
-    <h2>3 cách một căn biệt thự Casamia Balanca <em>tự làm ra tiền</em></h2>
-    <p class="lead-text">Cùng một căn, mỗi cách khai thác cho dòng tiền khác nhau. Kéo thử bên dưới để thấy con số.</p>
-    <div class="ways">
-      <div class="way reveal"><div class="ic">🌴</div><h3>Cho thuê nghỉ dưỡng theo đêm</h3><p>Đón khách gia đình, nhóm bạn trong 1,87 triệu lượt khách lưu trú mỗi năm của Hội An.</p></div>
-      <div class="way reveal"><div class="ic">🗝️</div><h3>Cho thuê dài hạn</h3><p>Cho chuyên gia, người nước ngoài sống tại Hội An – Đà Nẵng thuê theo tháng, theo năm. Dòng tiền đều đặn.</p></div>
-      <div class="way reveal"><div class="ic">🏪</div><h3>Shophouse kinh doanh</h3><p>Café, nhà hàng, homestay, quà lưu niệm, phục vụ dòng khách 4,4 triệu lượt mỗi năm.</p></div>
+    <span class="eyebrow">Dòng tiền · áp dụng từ 01/09/2026</span>
+    <h2>Chủ đầu tư &amp; đơn vị khai thác <em>cam kết thuê</em></h2>
+    <p class="lead-text">Không cần tự tìm khách, không cần tự vận hành. Tiền thuê về tài khoản <b>hằng tháng</b>.</p>
+    <div class="commit">
+      <div class="cm reveal">
+        <span class="cm-h">Biệt thự sân vườn</span>
+        <b class="shine">50 triệu<small>/tháng</small></b>
+        <div class="cm-sub">
+          <div><strong>5 năm</strong> liên tiếp<p>nếu mua quỹ căn full nội thất của M VILLAGE</p><em>≈ 3 tỷ tiền thuê</em></div>
+          <div><strong>3 năm</strong> liên tiếp<p>nếu mua thô &amp; tự hoàn thiện nội thất theo tiêu chuẩn CĐT</p><em>≈ 1,8 tỷ tiền thuê</em></div>
+        </div>
+      </div>
+      <div class="cm hl reveal">
+        <span class="cm-h">Biệt thự rừng dừa</span>
+        <b class="shine">60 triệu<small>/tháng</small></b>
+        <div class="cm-sub one">
+          <div><strong>3 năm</strong> liên tiếp<p>kể từ khi bàn giao biệt thự full nội thất theo tiêu chuẩn CĐT</p><em>≈ 2,16 tỷ tiền thuê</em></div>
+        </div>
+      </div>
     </div>
 
     <div class="calc reveal" id="tinh-dong-tien">
       <div class="calc-in">
-        <h3>🧮 Tự tính dòng tiền cho thuê nghỉ dưỡng</h3>
-        <label>Giá thuê trung bình / đêm <output class="js-o1"></output>
-          <input type="range" class="js-r1" min="2" max="20" step="0.5" value="6"></label>
-        <label>Số đêm cho thuê / năm <output class="js-o2"></output>
-          <input type="range" class="js-r2" min="30" max="300" step="5" value="150"></label>
-        <label>Chi phí vận hành (% doanh thu) <output class="js-o3"></output>
-          <input type="range" class="js-r3" min="15" max="60" step="1" value="35"></label>
-        <p class="assume">Đây là giả định do anh/chị tự chọn, không phải cam kết lợi nhuận.</p>
+        <h3>🧮 Tính tiền thuê anh/chị nhận về</h3>
+        <p class="assume" style="margin:0 0 14px">Chọn phân khu và phương án:</p>
+        <div class="pick js-pick">
+          <button data-m="60" data-y="3" data-t="CĐT trực tiếp thuê lại" class="on">Forestside · Thô 2026<small>thuê lại 60tr × 3 năm</small></button>
+          <button data-m="60" data-y="5" data-t="Ủy thác CĐT vận hành – thu nhập tối thiểu" data-u="1">Forestside · Nội thất 2027<small>ủy thác ≥ 60tr × 5 năm</small></button>
+          <button data-m="50" data-y="3" data-t="CĐT trực tiếp thuê lại">Parkhome · Thô 2026<small>thuê lại 50tr × 3 năm</small></button>
+          <button data-m="50" data-y="5" data-t="Ủy thác CĐT vận hành – thu nhập tối thiểu" data-u="1">Parkhome · Nội thất 2027<small>ủy thác ≥ 50tr × 5 năm</small></button>
+        </div>
+        <ul class="perks js-perks"></ul>
       </div>
       <div class="calc-out">
-        <span>Doanh thu / năm</span><b class="js-rev"></b>
-        <span>Dòng tiền ròng / năm</span><b class="js-net big"></b>
-        <span>Trung bình mỗi tháng</span><b class="js-month"></b>
-        <button class="btn btn-orange btn-block js-open" data-title="Nhận giá thuê thực tế khu vực & bảng tính theo căn" data-need="Đầu tư cho thuê – dòng tiền">🔒 Nhận số liệu thực tế theo căn →</button>
-        <p class="assume">Giá thuê thực tế khu vực &amp; căn nào đạt mức này? Em gửi qua Zalo.</p>
+        <span class="js-ctype"></span>
+        <span>Mỗi tháng</span><b class="js-month"></b>
+        <span>Mỗi năm</span><b class="js-year"></b>
+        <span>Tổng trong hợp đồng</span><b class="js-total big shine"></b>
+        <button class="btn btn-orange btn-block js-open" data-title="Căn nào đủ điều kiện nhận tiền thuê này?" data-need="Đầu tư nhận tiền thuê hằng tháng">Căn nào đủ điều kiện? Hỏi ngay →</button>
+        <p class="assume">Ủy thác: chỉ áp dụng với biệt thự đủ điều kiện vận hành; Parkhome áp dụng quỹ 50 căn trong chương trình cho thuê.</p>
       </div>
     </div>
   </div>
@@ -551,7 +594,7 @@
         <div class="ring-card reveal"><span class="ring-tag">Xa hơn · Kết nối nhanh</span>
           <ul><li>🏝️ <b>Cù Lao Chàm</b> – ca nô từ Cửa Đại</li><li>✈️ <b>Sân bay quốc tế Đà Nẵng</b> ~30 km qua trục Võ Chí Công</li><li>🛣️ Trục Võ Chí Công nối Đà Nẵng – Hội An – sân bay Chu Lai</li></ul></div>
         <div class="ring-card locked-card reveal"><span class="ring-tag">🔒 Tiện ích nội khu</span>
-          <p>Danh sách tiện ích nội khu, phối cảnh và vị trí từng tiện ích so với căn anh/chị chọn.</p>
+          <p>Clubhouse Casamia với Fitness &amp; Pool (miễn phí 1 năm cho chủ nhà), danh sách tiện ích nội khu và phối cảnh chi tiết.</p>
           <button class="btn btn-orange js-open" data-title="Nhận danh sách & phối cảnh tiện ích nội khu" data-need="Vị trí & tiện ích">Xem tiện ích nội khu →</button></div>
       </div>
     </div>
@@ -588,9 +631,9 @@
       </svg>
       <button class="hot-spot" style="left:21%;top:32%" data-title="Hỏi giá căn góc 2 mặt tiền" data-need="Căn key: căn góc 2 mặt tiền"><i></i><span>🔥 Căn góc 2 mặt tiền</span></button>
       <button class="hot-spot" style="left:64%;top:30%" data-title="Hỏi giá shophouse mặt đường chính" data-need="Căn key: shophouse mặt đường chính"><i></i><span>🔥 Shophouse mặt đường chính</span></button>
-      <button class="hot-spot" style="left:30%;top:72%" data-title="Hỏi giá căn sát rừng dừa" data-need="Căn key: căn sát rừng dừa"><i></i><span>🔥 Căn sát rừng dừa</span></button>
-      <button class="hot-spot" style="left:72%;top:12%" data-title="Hỏi giá căn gần công viên" data-need="Căn key: căn gần công viên"><i></i><span>🔥 Căn gần công viên</span></button>
-      <div class="legend"><span><i class="l-solo"></i>Biệt thự đơn lập</span><span><i class="l-duo"></i>Biệt thự song lập</span><span><i class="l-shop"></i>Shophouse</span></div>
+      <button class="hot-spot" style="left:30%;top:72%" data-title="Hỏi giá Forestside sát rừng dừa" data-need="Căn key: Forestside sát rừng dừa"><i></i><span>🔥 Forestside sát rừng dừa</span></button>
+      <button class="hot-spot" style="left:72%;top:12%" data-title="Hỏi giá Parkhome gần công viên" data-need="Căn key: Parkhome gần công viên"><i></i><span>🔥 Parkhome gần công viên</span></button>
+      <div class="legend"><span><i class="l-solo"></i>Forestside Villa</span><span><i class="l-duo"></i>Parkhome</span><span><i class="l-shop"></i>Shophouse</span></div>
     </div>
     <p class="src" style="color:var(--muted)">Sơ đồ minh hoạ để dễ hình dung, không phải mặt bằng chính thức. Mặt bằng tổng thể chính thức và căn còn trống em gửi qua Zalo.</p>
     <div style="text-align:center;margin-top:18px"><button class="btn btn-navy js-open" data-title="Nhận mặt bằng tổng thể & danh sách căn key còn trống" data-need="Mặt bằng tổng thể">📐 Nhận mặt bằng tổng thể chính thức →</button></div>
@@ -601,25 +644,50 @@
 <section class="products" id="san-pham" data-chat-topic="mặt bằng sản phẩm">
   <div class="wrap">
     <span class="eyebrow">Sản phẩm &amp; layout</span>
-    <h2>Chọn căn phù hợp với <em>cách anh/chị muốn khai thác</em></h2>
-    <p class="lead-text">Thông số, layout từng tầng và giá từng căn được cập nhật theo bảng hàng. Bấm để mở khoá.</p>
-    <div class="prods">
-      <div class="prod reveal"><div class="ph" data-img="villa1"><span>Riêng tư nhất</span></div><div class="bd">
-        <h3>Biệt thự đơn lập</h3><p>Không gian riêng tư, sân vườn rộng. Hợp nghỉ dưỡng ba thế hệ và cho thuê nguyên căn phân khúc cao.</p>
+    <h2>2 phân khu, <em>2 cách nhận dòng tiền</em></h2>
+    <p class="lead-text">Diện tích, layout từng tầng và giá từng căn cập nhật theo bảng hàng. Bấm để mở khoá.</p>
+    <div class="prods two">
+      <div class="prod reveal"><div class="ph" data-img="villa1"><span>Biệt thự rừng dừa</span><b class="ph-n">60tr/tháng</b></div><div class="bd">
+        <h3>Forestside Villa</h3><p>Biệt thự ven sông, giữa rừng dừa. Phân khu nhận mức thuê cao nhất dự án.</p>
+        <ul class="opts">
+          <li><b>Bàn giao thô 2026</b>chiết khấu <strong class="o">4 tỷ</strong> · CĐT thuê lại <strong class="o">60tr/tháng × 3 năm</strong></li>
+          <li><b>Nội thất 2027</b>chiết khấu <strong class="o">400 triệu</strong> · ủy thác <strong class="o">5 năm</strong>, tối thiểu 60tr/tháng, +10 đêm nghỉ/năm</li>
+        </ul>
         <ul class="specs"><li>Diện tích đất<b class="blur">███ m²</b></li><li>Số tầng / phòng ngủ<b class="blur">█ tầng · █ PN</b></li><li>Giá từ<b class="blur">██,█ tỷ</b></li></ul>
-        <div class="fp js-open" data-title="Xem layout biệt thự đơn lập" data-need="Layout biệt thự đơn lập"><svg viewBox="0 0 120 70"><rect x="4" y="4" width="112" height="62"/><path d="M60 4v40M4 36h56M60 44h56M86 44v22M30 36v30"/></svg><span>🔒 Xem layout tầng 1 – tầng 2</span></div>
-        <button class="btn btn-orange js-open" data-title="Nhận mặt bằng & giá biệt thự đơn lập" data-need="Biệt thự đơn lập">Mở khoá giá &amp; layout</button></div></div>
-      <div class="prod reveal"><div class="ph" data-img="villa2"><span>Cân bằng</span></div><div class="bd">
-        <h3>Biệt thự song lập</h3><p>Cân bằng giữa ngân sách và không gian sống, dễ khai thác cho thuê nghỉ dưỡng theo đêm.</p>
+        <div class="fp js-open" data-title="Xem layout Forestside Villa" data-need="Layout Forestside Villa"><svg viewBox="0 0 120 70"><rect x="4" y="4" width="112" height="62"/><path d="M60 4v40M4 36h56M60 44h56M86 44v22M30 36v30"/></svg><span>🔒 Xem layout từng tầng</span></div>
+        <button class="btn btn-orange js-open" data-title="Nhận giá & layout Forestside Villa" data-need="Forestside Villa – biệt thự rừng dừa">Mở khoá giá &amp; layout</button></div></div>
+      <div class="prod reveal"><div class="ph" data-img="villa2"><span>Biệt thự sân vườn</span><b class="ph-n">50tr/tháng</b></div><div class="bd">
+        <h3>Parkhome</h3><p>Biệt thự sân vườn ngập cây xanh, hợp gia đình nghỉ dưỡng và cho thuê dài hạn.</p>
+        <ul class="opts">
+          <li><b>Bàn giao thô 2026</b>chiết khấu <strong class="o">3,5 tỷ</strong>* · CĐT thuê lại <strong class="o">50tr/tháng × 3 năm</strong></li>
+          <li><b>Nội thất 2027</b>chiết khấu <strong class="o">300 triệu</strong>* · ủy thác <strong class="o">5 năm</strong>, tối thiểu 50tr/tháng (quỹ 50 căn)</li>
+        </ul>
         <ul class="specs"><li>Diện tích đất<b class="blur">███ m²</b></li><li>Số tầng / phòng ngủ<b class="blur">█ tầng · █ PN</b></li><li>Giá từ<b class="blur">██,█ tỷ</b></li></ul>
-        <div class="fp js-open" data-title="Xem layout biệt thự song lập" data-need="Layout biệt thự song lập"><svg viewBox="0 0 120 70"><rect x="4" y="4" width="112" height="62"/><path d="M50 4v62M4 30h46M50 40h66M84 4v36"/></svg><span>🔒 Xem layout tầng 1 – tầng 2</span></div>
-        <button class="btn btn-orange js-open" data-title="Nhận mặt bằng & giá biệt thự song lập" data-need="Biệt thự song lập">Mở khoá giá &amp; layout</button></div></div>
-      <div class="prod reveal"><div class="ph" data-img="shophouse"><span>Kinh doanh</span></div><div class="bd">
-        <h3>Shophouse</h3><p>Tầng dưới kinh doanh, tầng trên để ở hoặc cho thuê. Đón dòng khách 4,4 triệu lượt mỗi năm.</p>
-        <ul class="specs"><li>Diện tích đất<b class="blur">███ m²</b></li><li>Mặt tiền / số tầng<b class="blur">█ m · █ tầng</b></li><li>Giá từ<b class="blur">██,█ tỷ</b></li></ul>
-        <div class="fp js-open" data-title="Xem layout shophouse" data-need="Layout shophouse"><svg viewBox="0 0 120 70"><rect x="4" y="4" width="112" height="62"/><path d="M4 46h112M40 4v42M80 4v42"/></svg><span>🔒 Xem layout từng tầng</span></div>
-        <button class="btn btn-orange js-open" data-title="Nhận mặt bằng & giá shophouse" data-need="Shophouse kinh doanh">Mở khoá giá &amp; layout</button></div></div>
+        <div class="fp js-open" data-title="Xem layout Parkhome" data-need="Layout Parkhome"><svg viewBox="0 0 120 70"><rect x="4" y="4" width="112" height="62"/><path d="M50 4v62M4 30h46M50 40h66M84 4v36"/></svg><span>🔒 Xem layout từng tầng</span></div>
+        <button class="btn btn-orange js-open" data-title="Nhận giá & layout Parkhome" data-need="Parkhome – biệt thự sân vườn">Mở khoá giá &amp; layout</button></div></div>
     </div>
+    <p class="src" style="color:var(--muted)">* Áp dụng với quỹ căn trong danh sách quy định của chủ đầu tư.</p>
+  </div>
+</section>
+
+<!-- CHÍNH SÁCH -->
+<section class="policy" id="chinh-sach" data-chat-topic="chính sách thanh toán ưu đãi">
+  <div class="wrap">
+    <span class="eyebrow">Chính sách bán hàng · áp dụng từ 09/09/2026</span>
+    <h2>Chọn phân khu, xem <em>chính sách &amp; tiến độ thanh toán</em></h2>
+    <p class="lead-text">Đặt cọc <strong class="o">300 triệu</strong>. Vay tới <strong class="o">70%</strong>, lãi suất <strong class="o">0% trong 24 tháng</strong>, <strong class="o">ân hạn nợ gốc 24 tháng</strong>.</p>
+    <div class="ptabs" role="tablist">
+      <button class="on" data-k="FT">Forestside · Bàn giao thô 2026</button>
+      <button data-k="FN">Forestside · Nội thất 2027</button>
+      <button data-k="PT">Parkhome · Bàn giao thô 2026</button>
+      <button data-k="PN">Parkhome · Nội thất 2027</button>
+    </div>
+    <div class="pbody js-pbody"></div>
+    <div class="pol-cta reveal">
+      <div><b>📩 Bản chính sách gốc + bảng tính theo căn</b><p>Em gửi file chính sách chính thức, bảng giá căn còn trống và bảng tính dòng tiền đã trừ chiết khấu, đúng căn anh/chị chọn.</p></div>
+      <button class="btn btn-orange pulse js-open" data-title="Nhận file chính sách & bảng tính theo căn" data-need="Chính sách bán hàng">Nhận chính sách &amp; bảng giá →</button>
+    </div>
+    <p class="src">Áp dụng từ 09/09/2026 đến khi có chính sách bán hàng thay thế. Điều kiện chi tiết theo hợp đồng với chủ đầu tư.</p>
   </div>
 </section>
 
@@ -672,10 +740,10 @@
   <div class="wrap" style="max-width:860px">
     <span class="eyebrow">Hỏi đáp</span>
     <h2>Những câu khách hay hỏi nhất</h2>
-    <details><summary>Giá biệt thự Casamia Balanca khoảng bao nhiêu?</summary><p>Giá từng căn khác nhau theo loại hình, vị trí, diện tích và hướng. Anh/chị để lại số, em gửi bảng giá các căn còn trống kèm chính sách mới nhất.</p></details>
-    <details><summary>Mua để cho thuê thì dòng tiền tính thế nào?</summary><p>Dòng tiền phụ thuộc giá thuê, công suất theo mùa và chi phí vận hành. Em lập bảng tính riêng theo căn và cách khai thác anh/chị chọn (tự vận hành hoặc giao đơn vị vận hành).</p></details>
-    <details><summary>Có hỗ trợ vay ngân hàng không?</summary><p>Em sẽ gửi phương án tài chính và bảng tính trả góp theo số tiền vay, thời hạn anh/chị mong muốn.</p></details>
-    <details><summary>Pháp lý dự án thế nào?</summary><p>Em gửi bộ hồ sơ pháp lý và mẫu hợp đồng để anh/chị tự kiểm tra trước khi quyết định.</p></details>
+    <details><summary>Giá biệt thự Casamia Balanca khoảng bao nhiêu?</summary><p>Giá từng căn khác nhau theo phân khu (Forestside / Parkhome), vị trí, diện tích và phương án bàn giao. Chiết khấu tới 4 tỷ khi chọn bàn giao thô. Anh/chị để lại số, em gửi bảng giá căn còn trống đã trừ chiết khấu.</p></details>
+    <details><summary>Chủ đầu tư thuê lại cụ thể thế nào?</summary><p>Bàn giao thô 2026: CĐT trực tiếp thuê lại 60 triệu/tháng (Forestside) hoặc 50 triệu/tháng (Parkhome), hợp đồng thuê 3 năm. Bàn giao nội thất 2027: ủy thác CĐT vận hành 5 năm, chủ nhà hưởng 45% doanh thu cho thuê thuần, thu nhập tối thiểu 60 triệu / 50 triệu mỗi tháng, kèm 10 đêm nghỉ miễn phí mỗi năm.</p></details>
+    <details><summary>Cần bao nhiêu tiền ban đầu?</summary><p>Đặt cọc 300 triệu. Nếu vay ngân hàng, anh/chị tự thanh toán khoảng 30% (cọc + ký HĐMB + 1 đợt), ngân hàng hỗ trợ tới 70% với lãi suất 0% và ân hạn nợ gốc trong 24 tháng.</p></details>
+    <details><summary>Không vay thì có ưu đãi gì?</summary><p>Thanh toán sớm 95% được chiết khấu thêm 2–5% tuỳ phân khu, cộng lãi suất 11% cho phần thanh toán sớm. Miễn phí 2 năm phí quản lý và 1 năm Fitness &amp; Pool tại Clubhouse Casamia.</p></details>
     <details><summary>Ở xa có xem được dự án không?</summary><p>Được ạ. Em gửi video thực tế, có thể gọi video trực tiếp tại dự án, hoặc đón anh/chị tham quan khi tiện.</p></details>
     <p style="margin-top:24px"><button class="link-cta js-chat">💬 Câu hỏi khác? Chat với tư vấn viên ngay →</button></p>
   </div>
@@ -687,7 +755,7 @@
     <div>
       <span class="eyebrow">Bước tiếp theo</span>
       <h2>Chỉ 30 giây – nhận trọn bộ tài liệu <em>qua Zalo</em></h2>
-      <p class="lead-text">Bảng giá căn còn trống, mặt bằng, bảng tính dòng tiền theo căn, hồ sơ pháp lý và video thực tế. Tư vấn viên gửi trong 5 phút (giờ hành chính).</p>
+      <p class="lead-text">Bảng giá căn còn trống, chính sách chi tiết, bảng tính tiền thuê CĐT trả theo căn, hồ sơ pháp lý và video thực tế. Tư vấn viên gửi trong 5 phút (giờ hành chính).</p>
       <ul class="ticks" style="margin-top:20px">
         <li>Không mất phí, không ràng buộc</li>
         <li>Tư vấn đúng nhu cầu: nghỉ dưỡng hay dòng tiền</li>
@@ -702,10 +770,10 @@
         <label class="field"><input name="phone" type="tel" placeholder="Số điện thoại / Zalo *" autocomplete="tel" required maxlength="20"></label>
         <label class="field"><select name="need">
           <option value="">Anh/chị quan tâm…</option>
-          <option>Đầu tư cho thuê – dòng tiền</option>
+          <option>Forestside Villa – biệt thự rừng dừa</option>
+          <option>Parkhome – biệt thự sân vườn</option>
+          <option>Đầu tư nhận tiền thuê hằng tháng</option>
           <option>Mua để nghỉ dưỡng gia đình</option>
-          <option>Shophouse kinh doanh</option>
-          <option>Chỉ đang tham khảo</option>
         </select></label>
         <div class="form-err"></div>
         <button class="btn btn-orange btn-block pulse">Nhận tài liệu ngay</button>
@@ -719,7 +787,7 @@
   <div class="wrap">
     <p><b>Hoàng Hiệp</b> – Chuyên viên tư vấn dự án Casamia Balanca · Hotline/Zalo: <a class="js-tel"><span class="js-hotline"></span></a></p>
     <p>Nguồn số liệu du lịch: UBND TP Hội An năm 2024 (4,4 triệu lượt khách, tăng 6,58%; 1,87 triệu lượt lưu trú, tăng 18,64%, bình quân 2,14 ngày; doanh thu du lịch ~5.200 tỷ đồng), đăng trên Báo Đà Nẵng và Tạp chí Công Thương. Thông tin dự án: 31,1 ha, 363 sản phẩm, chủ đầu tư Đạt Phương.</p>
-    <p>Trang thông tin do chuyên viên tư vấn cung cấp, không phải website chính thức của chủ đầu tư. Thông tin, hình ảnh mang tính tham khảo. Giá, chính sách và pháp lý theo công bố chính thức tại thời điểm giao dịch. Các kịch bản dòng tiền chỉ để tham khảo, không phải cam kết lợi nhuận.</p>
+    <p>Trang thông tin do chuyên viên tư vấn cung cấp, không phải website chính thức của chủ đầu tư. Thông tin, hình ảnh mang tính tham khảo. Chính sách bán hàng áp dụng từ 09/09/2026 (chương trình cam kết thuê từ 01/09/2026) đến khi có chính sách thay thế; điều kiện thuê lại, ủy thác vận hành và quỹ căn áp dụng theo hợp đồng và quy định của chủ đầu tư. Giá và pháp lý theo công bố chính thức tại thời điểm giao dịch.</p>
   </div>
 </footer>
 
@@ -750,25 +818,39 @@
 <script>
 // ===== Ảnh dự án: điền đường dẫn ảnh thật (ví dụ 'img/hero.jpg'). Để trống = nền navy. =====
 const IMAGES = {
-  hero: '',
+  hero: 'img/waterway.jpg',
   location: '',
-  villa1: '',
-  villa2: '',
+  villa1: 'img/forestside.jpg',
+  villa2: 'img/parkhome.jpg',
   shophouse: '',
-  architecture: '',
+  architecture: 'img/terrace.jpg',
 };
 // Giá hiển thị ở đầu trang, ví dụ '8,7 tỷ'. Để trống = ẩn (chỉ điền giá chính thức đã xác nhận).
 const PRICE_FROM = '';
-// Chính sách bán hàng hiện hành. Điền giá trị chính thức (ví dụ firstPay: '15%') để hiện rõ;
-// để trống = làm mờ, khách để lại số để "mở khoá".
-// Mặc định theo chính sách GĐ1 các sàn đang công bố – KIỂM TRA lại với chính sách chính thức của CĐT trước khi chạy ads.
-const POLICY = {
-  firstPay: '30%',            // thanh toán đợt 1 khi ký HĐ
-  discount: '8%',             // chiết khấu vốn tự có
-  earlyPay: '9%/năm',         // chiết khấu thanh toán sớm
-  finance: '0%',              // lãi suất hỗ trợ
-  financeNote: '24 tháng',    // thời gian hỗ trợ lãi suất
-  gift: '70%',                // tỷ lệ cho vay tối đa
+// Chính sách bán hàng theo CSBH của CĐT (áp dụng từ 09/09/2026). Sửa tại đây khi có chính sách mới.
+const BANK = 'Vay tới 70% · lãi suất 0% 24 tháng · ân hạn nợ gốc 24 tháng';
+const NOLOAN = 'Lãi suất 11% cho phần thanh toán sớm';
+const PERKS = ['Miễn phí 2 năm phí quản lý khu đô thị', 'Miễn phí 1 năm Fitness & Pool tại Clubhouse Casamia'];
+const POLICIES = {
+  FT: { name: 'Forestside Villa · Bàn giao thô · nhận nhà 2026',
+    hi: [['4 tỷ', 'Chiết khấu', 'khi chọn bàn giao thô'], ['60tr/tháng', 'CĐT trực tiếp thuê lại', 'hợp đồng thuê 3 năm'], ['2%', 'Chiết khấu', 'khi thanh toán sớm 95%'], ['1%', 'Chiết khấu', 'khách hàng thân thiết']],
+    noLoan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['25%', 'T10/26'], ['25%', 'T11/26'], ['25%', 'T12/26 · Bàn giao nhà'], ['5%', 'T1/27 · Nhận GCN']],
+    loan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T10/26'], ['40%', 'T11/26 · NH giải ngân'], ['25%', 'T12/26 · Bàn giao nhà'], ['5%', 'T1/27 · Nhận GCN']], self: '30%' },
+  FN: { name: 'Forestside Villa · Bàn giao nội thất · nhận nhà 2027',
+    hi: [['400tr', 'Chiết khấu', 'khi nhận gói nội thất cơ bản'], ['≥60tr/tháng', 'Thu nhập tối thiểu', 'ủy thác CĐT vận hành 5 năm'], ['45%', 'Doanh thu cho thuê thuần', 'chia cho chủ nhà'], ['10 đêm', 'Lưu trú miễn phí', 'mỗi năm cho gia đình']],
+    extra: ['Chiết khấu 4% khi thanh toán sớm 95%', 'Chiết khấu 1% khách hàng thân thiết', 'Ủy thác chỉ áp dụng với biệt thự đủ điều kiện vận hành của đơn vị khai thác'],
+    noLoan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T10/26'], ['10%', 'T11/26'], ['10%', 'T12/26'], ['5%', 'T1/27'], ['5%', 'T2/27'], ['5%', 'T3/27'], ['5%', 'T4/27'], ['25%', 'T6/27 · Bàn giao nhà'], ['5%', 'Nhận GCN']],
+    loan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T10/26'], ['40%', 'T3/27 · NH giải ngân'], ['25%', 'T6/27 · Bàn giao nhà'], ['5%', 'Nhận GCN']], self: '30%' },
+  PT: { name: 'Parkhome · Bàn giao thô · nhận nhà 2026',
+    hi: [['3,5 tỷ', 'Chiết khấu', 'khi nhận bàn giao thô*'], ['50tr/tháng', 'CĐT trực tiếp thuê lại', 'hợp đồng thuê 3 năm'], ['5%', 'Chiết khấu', 'khi thanh toán sớm 95%'], ['2 năm', 'Miễn phí phí quản lý', '+ 1 năm Fitness & Pool']],
+    extra: ['* Chiết khấu 3,5 tỷ áp dụng với quỹ căn trong danh sách quy định của CĐT'],
+    noLoan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T11/26'], ['20%', 'T12/26 · Bàn giao nhà'], ['5%', 'T1/27'], ['5%', 'T2/27'], ['5%', 'T3/27'], ['5%', 'T4/27'], ['5%', 'T5/27'], ['5%', 'T6/27'], ['5%', 'T7/27'], ['5%', 'T8/27'], ['5%', 'T9/27'], ['5%', 'T11/27 · Nhận GCN']],
+    loan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T11/26'], ['20%', 'T12/26 · Bàn giao · NH giải ngân'], ['20%', 'T1/27'], ['25%', 'T2/27'], ['5%', 'T6/27 · Nhận GCN']], self: '30%' },
+  PN: { name: 'Parkhome · Bàn giao nội thất · nhận nhà 2027',
+    hi: [['300tr', 'Chiết khấu', 'khi nhận gói nội thất cơ bản*'], ['≥50tr/tháng', 'Thu nhập tối thiểu', 'ủy thác CĐT vận hành 5 năm'], ['45%', 'Doanh thu cho thuê thuần', 'chia cho chủ nhà'], ['10 đêm', 'Lưu trú miễn phí', 'mỗi năm cho gia đình']],
+    extra: ['Chiết khấu 5% khi thanh toán sớm 95%', 'Ủy thác áp dụng với quỹ 50 căn trong chương trình cho thuê', '* Áp dụng với quỹ căn trong danh sách quy định của CĐT'],
+    noLoan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T11/26'], ['5%', 'T12/26'], ['5%', 'T1/27'], ['5%', 'T2/27'], ['5%', 'T3/27 · Bàn giao nhà'], ['10%', 'T4/27'], ['10%', 'T5/27'], ['10%', 'T6/27'], ['10%', 'T7/27'], ['5%', 'T9/27'], ['5%', 'T11/27 · Nhận GCN']],
+    loan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T11/26'], ['10%', 'T12/26 · NH giải ngân'], ['10%', 'T3/27 · Bàn giao nhà'], ['45%', 'T4/27'], ['5%', 'T6/27 · Nhận GCN']], self: '30%' },
 };
 // Địa chỉ server live chat. Để trống nếu landing page chạy cùng server chat.
 const API_BASE = '';
@@ -862,18 +944,52 @@ const API_BASE = '';
     }
   }));
 
-  // Chính sách: hiện giá trị đã điền, còn lại làm mờ
-  $$('[data-pol]').forEach(el => {
-    const v = POLICY[el.dataset.pol];
-    if (v) { el.textContent = v; el.classList.remove('blur'); if (el.tagName === 'B') el.classList.add('shine'); } else el.classList.add('blur');
-  });
+  const fmtNum = (n, dec) => n.toLocaleString('vi-VN', { minimumFractionDigits: dec, maximumFractionDigits: dec });
   $$('.hpol').forEach(el => el.addEventListener('keydown', e => { if (e.key === 'Enter') el.click(); }));
+
+  // Chính sách theo phân khu (tab)
+  const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const steps = arr => '<div class="steps">' + arr.map(([v, l]) => `<div class="st"><b>${esc(v)}</b><i></i><span>${esc(l)}</span></div>`).join('') + '</div>';
+  function renderPolicy(k) {
+    const P = POLICIES[k];
+    $('.js-pbody').innerHTML = `
+      <h3 class="pname">${esc(P.name)}</h3>
+      <div class="pol-grid">${P.hi.map(([v, t, d]) => `<div class="pol"><h3>${esc(t)}</h3><b class="shine">${esc(v)}</b><p>${esc(d)}</p></div>`).join('')}</div>
+      <ul class="perks">${PERKS.concat(P.extra || []).map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+      <div class="pay">
+        <div class="pay-h"><b>Phương án vay ngân hàng</b><span>${esc(BANK)}</span></div>
+        ${steps(P.loan)}
+        <p class="pay-note">Khách tự thanh toán khoảng <strong class="o">${esc(P.self)}</strong> (đặt cọc + ký HĐMB + 1 đợt), phần còn lại ngân hàng giải ngân.</p>
+        <div class="pay-h"><b>Phương án không vay</b><span>${esc(NOLOAN)}</span></div>
+        ${steps(P.noLoan)}
+      </div>`;
+  }
+  $$('.ptabs button').forEach(b => b.addEventListener('click', () => {
+    $$('.ptabs button').forEach(x => x.classList.toggle('on', x === b));
+    renderPolicy(b.dataset.k);
+  }));
+  renderPolicy('FT');
+
+  // Tính tiền thuê nhận về
+  const fmtTy = trieu => trieu >= 1000 ? fmtNum(trieu / 1000, trieu % 1000 ? 2 : 0).replace(/(,\d*?)0+$/, '$1').replace(/,$/, '') + ' tỷ' : fmtNum(trieu, 0) + ' triệu';
+  function pick(b) {
+    $$('.js-pick button').forEach(x => x.classList.toggle('on', x === b));
+    const m = +b.dataset.m, y = +b.dataset.y, u = b.dataset.u;
+    $('.js-ctype').textContent = b.dataset.t;
+    $('.js-month').textContent = (u ? 'tối thiểu ' : '') + m + ' triệu';
+    $('.js-year').textContent = fmtTy(m * 12);
+    $('.js-total').textContent = (u ? '≥ ' : '') + fmtTy(m * 12 * y);
+    $('.js-perks').innerHTML = (u
+      ? ['Hưởng 45% doanh thu cho thuê thuần nếu cao hơn mức tối thiểu', '10 đêm lưu trú miễn phí mỗi năm cho gia đình', 'Hợp đồng ủy thác ' + y + ' năm, CĐT vận hành toàn bộ']
+      : ['CĐT trực tiếp thuê lại, tiền thuê cố định hằng tháng', 'Hợp đồng thuê bất động sản ' + y + ' năm', 'Không cần tự tìm khách, không lo vận hành']).map(x => `<li>${x}</li>`).join('');
+  }
+  $$('.js-pick button').forEach(b => b.addEventListener('click', () => pick(b)));
+  pick($('.js-pick button'));
 
   // Giá từ
   if (PRICE_FROM) { $('.js-price-val').textContent = PRICE_FROM; $('.js-price').hidden = false; }
 
   // Số đếm chạy khi xuất hiện trên màn hình
-  const fmtNum = (n, dec) => n.toLocaleString('vi-VN', { minimumFractionDigits: dec, maximumFractionDigits: dec });
   const counter = new IntersectionObserver(es => es.forEach(en => {
     if (!en.isIntersecting) return;
     counter.unobserve(en.target);
@@ -886,22 +1002,6 @@ const API_BASE = '';
     requestAnimationFrame(tick);
   }), { threshold: .4 });
   $$('.js-count').forEach(el => counter.observe(el));
-
-  // Máy tính dòng tiền
-  const r1 = $('.js-r1'), r2 = $('.js-r2'), r3 = $('.js-r3');
-  const money = v => v >= 1000 ? fmtNum(v / 1000, 2) + ' tỷ' : fmtNum(Math.round(v), 0) + ' triệu';
-  function calc() {
-    const price = +r1.value, nights = +r2.value, cost = +r3.value;
-    const rev = price * nights, net = rev * (1 - cost / 100);
-    $('.js-o1').textContent = fmtNum(price, price % 1 ? 1 : 0) + ' triệu';
-    $('.js-o2').textContent = nights + ' đêm (' + Math.round(nights / 3.65) + '%)';
-    $('.js-o3').textContent = cost + '%';
-    $('.js-rev').textContent = money(rev);
-    $('.js-net').textContent = money(net);
-    $('.js-month').textContent = money(net / 12) + ' / tháng';
-  }
-  [r1, r2, r3].forEach(r => r.addEventListener('input', calc));
-  calc();
 
   // Hiệu ứng xuất hiện khi cuộn
   const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: .15 });

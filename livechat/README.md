@@ -73,18 +73,17 @@ Mỗi thông báo kèm đoạn hội thoại gần nhất, tách từng lượt 
 
 ## Landing page chạy ads: biệt thự Hội An có dòng tiền
 
-Trang `public/landing.html` (mở tại `/landing.html`) dùng tông navy – trắng – cam. Nội dung dẫn dắt bằng **con số thật + cảm xúc**:
+Trang `public/landing.html` (mở tại `/landing.html`) dùng tông navy – trắng – cam, chạy theo **chính sách bán hàng áp dụng từ 09/09/2026**. Thứ tự trang: **con số hấp dẫn ở đầu để gây tò mò, phần diễn giải chính sách chi tiết ở dưới**.
 
-- **Hero bằng con số**: "4,4 triệu lượt khách đến Hội An mỗi năm. Chỉ 363 căn…", kèm 4 ô số đếm chạy: 1,87 triệu lượt lưu trú, +18,64%, ~14 tỷ/ngày, tỷ lệ 1 căn : 12.000 lượt khách. Form nhận tài liệu ngay bên cạnh.
-- **Bạn có biết?**: 3 con số lớn về thị trường lưu trú Hội An, có ghi nguồn (UBND TP Hội An 2024).
-- **Một ngày ở Casamia Balanca**: kể chuyện theo giờ (rừng dừa, phố cổ, biển An Bàng, bữa tối gia đình), kết bằng ý "căn nhà vẫn tạo dòng tiền".
-- **Máy tính dòng tiền**: khách tự kéo giá thuê/đêm, số đêm, chi phí để thấy doanh thu và dòng tiền ròng; nút nhận số liệu thực tế theo căn.
-- **Vị trí & tiện ích theo bán kính**: 0 km / ~5 km / xa hơn, bản đồ vòng tròn; tiện ích nội khu bị khoá để khách hỏi.
-- **Mặt bằng & căn key**: sơ đồ minh hoạ, bấm các điểm 🔥 (căn góc, shophouse mặt đường, căn sát rừng dừa, căn gần công viên) để hỏi giá.
-- **Sản phẩm & layout**: thông số, giá, layout từng tầng bị làm mờ, nút "Mở khoá giá & layout".
-- **Chính sách tháng này**: 4 ô (thanh toán đợt đầu, chiết khấu, hỗ trợ tài chính, ưu đãi riêng) bị làm mờ, nút "Mở khoá".
-- Kiến trúc, minh bạch pháp lý, đặt lịch tham quan, hỏi đáp, form cuối trang; popup CTA theo ngữ cảnh; thanh Gọi / Zalo / Nhận bảng giá trên điện thoại.
-- **Form → hệ thống chat**: lead kèm nhu cầu (ví dụ "Căn key: căn góc 2 mặt tiền") và nguồn quảng cáo (UTM), báo Telegram ngay.
+- **Hero**: "Chủ đầu tư **thuê lại 60 triệu/tháng**" trên nền ảnh phối cảnh. Dải số lớn có ánh sáng chạy qua lại: 60tr/tháng · đặt cọc 300tr · lãi suất 0% 24 tháng · chiết khấu tới 4 tỷ. Form nhận tài liệu ngay bên cạnh.
+- **Bạn có biết? / Một ngày ở Casamia Balanca**: số liệu du lịch Hội An 2024 có nguồn, kể chuyện kết bằng tiền thuê về tài khoản.
+- **Cam kết thuê** (từ 01/09/2026): biệt thự sân vườn 50tr/tháng × 5 năm (full nội thất M VILLAGE) hoặc 3 năm (thô tự hoàn thiện); biệt thự rừng dừa 60tr/tháng × 3 năm. Kèm **máy tính tiền thuê**: chọn phân khu và phương án để ra số tiền mỗi tháng, mỗi năm và tổng hợp đồng.
+- **Vị trí & tiện ích, mặt bằng căn key, sản phẩm** Forestside Villa / Parkhome (ảnh phối cảnh, giá và layout làm mờ để mở khoá).
+- **Chính sách chi tiết theo tab**: Forestside / Parkhome × bàn giao thô 2026 / nội thất 2027. Mỗi tab có chiết khấu, chương trình thuê lại hoặc ủy thác, ưu đãi miễn phí, **tiến độ thanh toán vay và không vay**.
+- Popup CTA theo ngữ cảnh, thanh Gọi / Zalo / Nhận bảng giá trên điện thoại; form gửi về hệ thống chat và Telegram kèm nhu cầu và UTM.
+
+Dữ liệu chính sách nằm trong biến `POLICIES`, `BANK`, `PERKS` cuối file `landing.html`. Khi có chính sách mới, sửa tại đó.
+Ảnh phối cảnh trong `public/img/` được cắt từ ấn phẩm chính sách bán hàng của dự án.
 
 Trước khi chạy ads:
 

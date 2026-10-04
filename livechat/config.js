@@ -68,14 +68,14 @@ module.exports = {
       keywords: ['giá', 'gia', 'bao nhiêu', 'chính sách', 'chiết khấu', 'ưu đãi', 'thanh toán', 'tiền'],
       steps: [
         'Dạ em ghi nhận {name} đang quan tâm bảng giá và chính sách bán hàng ạ.',
-        'Hiện dự án có nhiều phương án thanh toán: thanh toán chuẩn theo tiến độ, thanh toán sớm nhận chiết khấu, hoặc hỗ trợ vay ngân hàng. Giá mỗi căn khác nhau theo vị trí, diện tích và hướng.',
+        'Chính sách mới từ 09/2026: đặt cọc 300 triệu, ngân hàng hỗ trợ vay 70% với lãi suất 0% và ân hạn gốc 24 tháng; chiết khấu tới 4 tỷ khi nhận bàn giao thô. Đặc biệt chủ đầu tư thuê lại 60 triệu/tháng (Forestside) hoặc 50 triệu/tháng (Parkhome).',
         'Để em lọc đúng căn và tính dòng tiền phù hợp, {name} cho em hỏi ngân sách dự kiến khoảng bao nhiêu và mình mua để ở hay đầu tư ạ?',
       ],
       // Khách đọc chậm ở mục có các từ này trên trang -> chủ động hỏi câu dưới.
       browse: {
         keywords: ["giá", "bảng giá", "giá bán", "chính sách", "thanh toán", "ưu đãi", "chiết khấu"],
         question:
-          "Dạ em thấy anh/chị đang xem kỹ phần giá và chính sách ạ. Mỗi căn có giá và ưu đãi khác nhau – anh/chị đang nhắm căn nào để em tính thử dòng tiền cụ thể cho mình nhé?",
+          "Dạ em thấy anh/chị đang xem kỹ phần chính sách ạ. Căn nào được chủ đầu tư thuê lại 60 triệu/tháng và chiết khấu bao nhiêu thì tuỳ phân khu – anh/chị quan tâm Forestside hay Parkhome để em gửi bảng tính đúng căn ạ?",
       },
     },
     {
@@ -143,7 +143,7 @@ module.exports = {
       keywords: ['vay', 'ngân hàng', 'lãi suất', 'trả góp', 'góp'],
       steps: [
         'Dạ em ghi nhận {name} cần hỗ trợ phương án vay ạ.',
-        'Dự án có ngân hàng liên kết hỗ trợ cho vay; em có thể lập bảng tính trả góp hàng tháng theo số tiền vay và thời hạn mình mong muốn.',
+        'Ngân hàng hỗ trợ vay tới 70%, lãi suất 0% và ân hạn nợ gốc trong 24 tháng. Anh/chị chỉ tự thanh toán khoảng 30% (đặt cọc 300 triệu + ký HĐMB + 1 đợt), trong khi tiền thuê chủ đầu tư trả 50–60 triệu/tháng.',
         '{name} dự kiến vay khoảng bao nhiêu và trả trong bao lâu ạ? Em tính sẵn dòng tiền cho mình tham khảo.',
       ],
       // Khách đọc chậm ở mục có các từ này trên trang -> chủ động hỏi câu dưới.
