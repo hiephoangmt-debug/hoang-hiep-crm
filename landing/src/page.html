@@ -399,6 +399,7 @@ section[id]{scroll-margin-top:136px}
 .chip.active{background:var(--blue-500);border-color:var(--blue-500);color:#fff}
 .pool{display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;padding:3px 9px;border-radius:999px;margin-left:6px;vertical-align:middle}
 .pool.dq{background:var(--gold);color:var(--navy-900)}
+.pool.gt{background:var(--gold-soft);color:var(--navy-900)}
 .pool.ch{background:rgba(255,255,255,.22);color:#fff;border:1px solid rgba(255,255,255,.5)}
 .empty{background:#fff;border:1.5px dashed var(--blue-300);border-radius:18px;padding:28px;text-align:center;max-width:620px;margin:0 auto}
 .empty h3{color:var(--navy-700);margin-bottom:6px}
@@ -857,7 +858,8 @@ footer p{margin-bottom:6px}
     </div>
 
     <div class="cart-tabs" role="tablist" aria-label="Giỏ hàng">
-      <button class="tab active" data-cart="dq" role="tab">★ Căn giá tốt nhất hiện tại</button>
+      <button class="tab active" data-cart="excl" role="tab">★ Quỹ căn độc quyền</button>
+      <button class="tab" data-cart="dq" role="tab">Căn giá tốt nhất hiện tại</button>
       <button class="tab" data-cart="type" role="tab">5 căn giá tốt nhất từng loại căn</button>
       <button class="tab" data-cart="scarce" role="tab">Căn khan hiếm – 5 dòng căn còn ít nhất</button>
       <button class="tab" data-cart="zone" role="tab">Giá tốt từng phân khu</button>
@@ -1359,7 +1361,7 @@ footer p{margin-bottom:6px}
   var UNITS = HVB.units.map(function(r){
     return {code:r[0], zone:HVB.zones[r[1]], type:HVB.types[r[2]], hand:HVB.hands[r[3]], land:r[4], build:0,
             rank:r[5], show:!!(r[6] & 1), top:!!(r[6] & 2), best:!!(r[6] & 4), typeTop:!!(r[6] & 8),
-            pool:(r[6] & 16) ? "ch" : "dq", img:r[7], tag:r[8]};
+            pool:(r[6] & 32) ? "dq" : ((r[6] & 16) ? "ch" : "gt"), excl:!!(r[6] & 32), img:r[7], tag:(r[6] & 32) ? "Độc quyền" : r[8]};
   });
   /* Dòng căn khan hiếm: left = số căn còn lại (để null nếu chưa muốn công bố số lượng) */
   var LINES = HVB.lines;
@@ -1425,8 +1427,13 @@ footer p{margin-bottom:6px}
     lb.addEventListener("click", function(){ lb.classList.remove("show"); });
   }
   var ZCLASS = {"Bạch Vân":"bv","Vịnh Mây":"vm","Đảo Ngọc":"dn","Tinh Vân":"vm"};
-  var cartMode = "dq", cartZone = "Bạch Vân", cartType = "";
+  var cartMode = "excl", cartZone = "Bạch Vân", cartType = "";
   var PAGE_ZONE = document.body.dataset.zone || "";
+  // zone pages without exclusive units open on the best-price tab
+  if (PAGE_ZONE && !UNITS.some(function(u){ return u.excl && u.zone === PAGE_ZONE; })){
+    cartMode = "dq";
+    document.querySelectorAll("[data-cart]").forEach(function(x){ x.classList.toggle("active", x.dataset.cart === "dq"); });
+  }
   if (PAGE_ZONE && document.getElementById("fz")){
     document.getElementById("fz").value = PAGE_ZONE; cartZone = PAGE_ZONE;
     document.querySelectorAll("#zchips .chip").forEach(function(x){ x.classList.toggle("active", x.dataset.z === PAGE_ZONE); });
@@ -1440,7 +1447,7 @@ footer p{margin-bottom:6px}
     return '<article class="unit ' + (ZCLASS[u.zone]||"vm") + '">' +
       '<div class="thumb" style="background-image:url(\'img/' + esc(u.img||"aerial-bay") + '.webp\')"><span class="hot">' + esc(u.tag||"Giá tốt") + '</span></div>' +
       '<div class="top">' +
-      '<div class="code">' + esc(u.code) + '<span class="pool ' + u.pool + '">' + (u.virtual?"Rổ hàng":(u.pool==="dq"?"Giá tốt":"Quỹ khác")) + '</span></div>' +
+      '<div class="code">' + esc(u.code) + '<span class="pool ' + u.pool + '">' + (u.virtual?"Rổ hàng":(u.excl?"Độc quyền":(u.pool==="ch"?"Quỹ khác":"Giá tốt"))) + '</span></div>' +
       '<div class="zn">' + (u.zone ? "Phân khu " + esc(u.zone) : "Vinhomes Hải Vân Bay") + '</div></div>' +
       '<table><tr><td>Loại căn</td><td>' + esc(u.type) + '</td></tr>' +
       '<tr><td>Diện tích đất</td><td>' + (u.land ? num(u.land) + ' m²' : "Liên hệ") + '</td></tr>' +
@@ -1498,6 +1505,8 @@ footer p{margin-bottom:6px}
       list = UNITS.filter(function(u){ return norm(u.code + u.zone + u.type + u.hand).indexOf(q) > -1; });
       // A code-like query with no match still shows as an available unit to check via Zalo.
       if (!list.length && /\d/.test(q)) list = [virtualUnit(document.getElementById("q").value.trim())];
+    } else if (cartMode === "excl"){
+      list = UNITS.filter(function(u){ return u.excl; }).sort(byRank);
     } else if (cartMode === "dq"){
       list = PAGE_ZONE
         ? UNITS.filter(function(u){ return u.zone === PAGE_ZONE && u.rank < 9999; }).sort(byRank).slice(0, 5)

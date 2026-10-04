@@ -19,11 +19,13 @@ import openpyxl
 SHEET = "CỤM 6 - HVB"
 OUT = Path(__file__).parent / "src" / "units.json"
 # column indexes in SHEET (data rows are offset from the header row)
-C_ZONE, C_CODE, C_TYPE, C_HAND, C_LAND, C_PRICE, C_STATUS = 1, 2, 4, 5, 6, 7, 12
+C_ZONE, C_CODE, C_TYPE, C_HAND, C_LAND, C_PRICE, C_SOURCE, C_STATUS = 1, 2, 4, 5, 6, 7, 8, 12
+# units from these sources are the exclusive inventory (shown in full); the source name is never published
+EXCLUSIVE_SOURCES = ("AKA HOMES", "AKAHOMES", "AKA REAL", "AKAREAL")
 
 ZONES = {"BẠCH VÂN": "Bạch Vân", "VỊNH MÂY": "Vịnh Mây", "ĐẢO NGỌC": "Đảo Ngọc", "TINH VÂN": "Tinh Vân"}
 
-FLAG_SHOW, FLAG_TOP, FLAG_BEST, FLAG_TYPE, FLAG_OTHER = 1, 2, 4, 8, 16
+FLAG_SHOW, FLAG_TOP, FLAG_BEST, FLAG_TYPE, FLAG_OTHER, FLAG_EXCL = 1, 2, 4, 8, 16, 32
 
 
 def norm_type(t):
@@ -94,7 +96,7 @@ def tag_for(typ, hand):
 def main(path):
     wb = openpyxl.load_workbook(path, data_only=True, read_only=True)
     rows = list(wb[SHEET].iter_rows(values_only=True))[1:]
-    units = {}
+    units, exclusive = {}, set()
     for r in rows:
         if not r or not r[C_CODE] or str(r[C_STATUS]).strip() != "Còn hàng":
             continue
@@ -105,6 +107,8 @@ def main(path):
         typ = norm_type(r[C_TYPE])
         hand = norm_hand(r[C_HAND], r[C_TYPE])
         price = num(r[C_PRICE])
+        if re.sub(r"\s+", " ", str(r[C_SOURCE] or "")).strip().upper() in EXCLUSIVE_SOURCES:
+            exclusive.add(code)
         if price is not None and price < 1e9:              # malformed price cell
             price = None
         u = {"code": code, "zone": zone, "type": typ, "hand": hand, "land": num(r[C_LAND]), "price": price}
@@ -131,6 +135,9 @@ def main(path):
     for i, u in enumerate(ul, 1):
         u["rank"] = i if u["price"] is not None else 9999
         u["flags"] = 0
+    for u in ul:
+        if u["code"] in exclusive:
+            u["flags"] |= FLAG_EXCL | FLAG_SHOW
     priced = [u for u in ul if u["price"] is not None]
 
     # ★ best price now: 5 cheapest, at most 2 per zone
@@ -185,6 +192,7 @@ def main(path):
     }
     OUT.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     shown = sum(1 for u in ul if u["flags"] & FLAG_SHOW)
+    print("exclusive", sorted(exclusive))
     print("units", len(ul), "shown", shown, "hidden (search only)", len(ul) - shown, "->", OUT)
     print("zones", Counter(u["zone"] for u in ul))
     print("types", Counter(u["type"] for u in ul))
