@@ -7,10 +7,20 @@
 	const toggle = $( '.nav-toggle' );
 	const nav = $( '#primary-nav' );
 	if ( toggle && nav ) {
+		// Menu mở: cố định từ mép dưới đầu trang đến đáy màn hình thật (trình duyệt trong Zalo/Facebook có thanh công cụ che bớt).
+		const place = () => {
+			const head = nav.closest( '.site-header' ) || toggle;
+			nav.style.top = Math.max( 0, Math.round( head.getBoundingClientRect().bottom ) ) + 'px';
+		};
+		window.addEventListener( 'resize', () => nav.classList.contains( 'is-open' ) && place() );
 		toggle.addEventListener( 'click', () => {
 			const open = nav.classList.toggle( 'is-open' );
 			toggle.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
 			document.documentElement.classList.toggle( 'nav-locked', open ); // Trang phía sau không cuộn theo, menu dài vuốt được.
+			if ( open ) {
+				place();
+				nav.scrollTop = 0;
+			}
 		} );
 		// Bấm một mục (kể cả link #) thì đóng menu.
 		nav.addEventListener( 'click', ( e ) => {

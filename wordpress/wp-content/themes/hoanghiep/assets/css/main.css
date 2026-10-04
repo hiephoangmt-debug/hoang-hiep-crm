@@ -160,7 +160,9 @@ p { margin: 0 0 1em; }
 		position: absolute; top: 100%; left: 0; right: 0; margin: 0;
 		background: var(--navy); box-shadow: var(--shadow-lg); padding: 8px 16px 16px; display: none; border-top: 1px solid rgba(255, 255, 255, .08);
 	}
-	.primary-nav.is-open { display: block; max-height: calc(100vh - var(--header-h) - env(safe-area-inset-top, 0px)); max-height: calc(100dvh - var(--header-h) - env(safe-area-inset-top, 0px)); overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding-bottom: calc(130px + env(safe-area-inset-bottom, 0px)); }
+	.primary-nav.is-open { display: block; position: fixed; top: var(--header-h); bottom: 0; left: 0; right: 0; z-index: 70; max-height: none; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding-bottom: calc(48px + env(safe-area-inset-bottom, 0px)); }
+	html.nav-locked .contact-dock { display: none; }
+	html.nav-locked .site-header { position: fixed; top: 0; left: 0; right: 0; }
 	.primary-nav ul { flex-direction: column; }
 	.primary-nav a { padding: 14px 0; border-bottom: 1px solid rgba(255, 255, 255, .08); color: #e6edf6; }
 	.primary-nav .sub-menu { background: transparent; }
