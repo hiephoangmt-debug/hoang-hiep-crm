@@ -493,7 +493,7 @@ while ( have_posts() ) :
 					<p>Để lại thông tin, Hiệp sẽ gọi lại và gửi bạn:</p>
 					<?php hh_check_list( $resale ? array( 'Danh sách căn chuyển nhượng, cho thuê mới nhất', 'Định giá, kiểm tra pháp lý, sổ hồng từng căn', 'Hỗ trợ vay ngân hàng, thủ tục sang tên', 'Ký gửi bán / cho thuê căn của bạn' ) : array( 'Bảng giá, rổ hàng căn đẹp mới nhất', 'Lịch thanh toán, chính sách chiết khấu, hỗ trợ vay', 'Mặt bằng, brochure, pháp lý dự án', 'Lịch đi xem dự án, nhà mẫu' ) ); ?>
 					<p class="contact-block__phone">
-						<a class="btn btn--gold" href="tel:<?php echo esc_attr( hoanghiep_tel() ); ?>"><?php echo hh_icon( 'phone' ); // phpcs:ignore ?> <?php echo esc_html( hoanghiep_opt( 'hh_phone' ) ); ?></a>
+						<a class="btn btn--gold btn--cta" href="tel:<?php echo esc_attr( hoanghiep_tel() ); ?>"><?php echo hh_icon( 'phone' ); // phpcs:ignore ?> <?php echo esc_html( hoanghiep_opt( 'hh_phone' ) ); ?></a>
 						<a class="btn btn--zalo" href="https://zalo.me/<?php echo esc_attr( hoanghiep_tel( hoanghiep_opt( 'hh_zalo' ) ) ); ?>" target="_blank" rel="noopener">Chat Zalo</a>
 					</p>
 				</div>

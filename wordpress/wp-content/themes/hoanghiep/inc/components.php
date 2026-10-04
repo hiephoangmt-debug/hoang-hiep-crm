@@ -173,7 +173,7 @@ function hh_agent_card( $compact = false ) {
 				<?php endif; ?>
 			</div>
 		</div>
-		<a class="btn btn--gold btn--block" href="tel:<?php echo esc_attr( hoanghiep_tel() ); ?>"><?php echo hh_icon( 'phone' ); // phpcs:ignore ?> <?php echo esc_html( hoanghiep_opt( 'hh_phone' ) ); ?></a>
+		<a class="btn btn--gold btn--cta btn--block" href="tel:<?php echo esc_attr( hoanghiep_tel() ); ?>"><?php echo hh_icon( 'phone' ); // phpcs:ignore ?> <?php echo esc_html( hoanghiep_opt( 'hh_phone' ) ); ?></a>
 		<a class="btn btn--zalo btn--block" href="https://zalo.me/<?php echo esc_attr( hoanghiep_tel( hoanghiep_opt( 'hh_zalo' ) ) ); ?>" target="_blank" rel="noopener">Chat Zalo</a>
 	</div>
 	<?php
