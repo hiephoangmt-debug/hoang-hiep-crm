@@ -850,6 +850,21 @@ const $ = s => document.querySelector(s);
 // Tên trang để biết khách chat ở đâu
 const PATH = location.pathname.replace(/\/+$/, '') || '/';
 const PAGE = {'/': 'Trang chủ', '/toa-f2': 'Tòa F2', '/toa-f2-ads': 'ADS', '/bang-tinh-f2': 'Bảng tính', '/gio-hang': 'Giỏ hàng', '/phap-ly': 'Pháp lý'}[PATH] || PATH;
+// Lời chào theo trang khách đang xem
+const CTX = ({
+  'Trang chủ': {hi: 'Anh/chị đang tìm hiểu dự án Sun FourS Tower ạ – hiện <b>Tòa F2</b> đang mở bán, giá từ 1,98 tỷ. Cần hỏi gì cứ nhắn em nhé.',
+    teaser: 'Chào anh/chị 👋 Cần xem <b>giá</b> hay tính thử <b>vốn vay</b> cho căn nào, cứ nhắn em nhé.'},
+  'Tòa F2': {hi: 'Anh/chị đang xem <b>Tòa F2</b> – tòa đang mở bán, có căn sân vườn riêng ở tầng 2–7. Cần hỏi gì cứ nhắn em nhé.',
+    teaser: 'Chào anh/chị 👋 Anh/chị cần em gửi <b>giá</b> hoặc <b>căn còn trống</b> Tòa F2 không ạ?'},
+  'ADS': {hi: 'Anh/chị đang xem chương trình <b>vay 70%</b> – chỉ khoảng 25% vốn đến khi nhận nhà. Cần em tính thử cho căn nào cứ nhắn nhé.',
+    teaser: 'Chào anh/chị 👋 Cần tính thử <b>vốn tự có</b> khi vay 70% cho căn nào, cứ nhắn em nhé.'},
+  'Bảng tính': {hi: 'Anh/chị đang dùng <b>bảng tính dòng tiền</b> Tòa F2 ạ. Muốn em tính giúp căn cụ thể thì cứ nhắn <b>mã căn</b> (vd: F2-12A-01).',
+    teaser: 'Chào anh/chị 👋 Cần em tính giúp <b>dòng tiền</b> căn cụ thể, cứ nhắn mã căn nhé.'},
+  'Giỏ hàng': {hi: 'Anh/chị đang xem <b>giỏ hàng</b> – hơn 200 căn đang bán. Em lọc nhanh giúp căn hợp tài chính cho anh/chị nhé.',
+    teaser: 'Chào anh/chị 👋 Em lọc giúp <b>căn còn trống</b> hợp tài chính của anh/chị nhé?'},
+  'Pháp lý': {hi: 'Anh/chị đang xem <b>pháp lý</b> dự án – Tòa F2 có 607 căn đủ điều kiện bán, Techcombank bảo lãnh. Cần hỏi thêm gì cứ nhắn em nhé.',
+    teaser: 'Chào anh/chị 👋 Anh/chị cần hỏi gì về <b>pháp lý</b> dự án, cứ nhắn em nhé.'}
+})[PAGE] || {hi: 'Cần hỏi gì cứ nhắn em nhé.', teaser: 'Chào anh/chị 👋 Cần xem <b>giá</b> hay tính thử <b>vốn vay</b> cho căn nào, cứ nhắn em nhé.'};
 const SRC_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'gclid', 'ttclid'];
 SRC_KEYS.forEach(k => { const v = new URLSearchParams(location.search).get(k); if (v) ss.set('src_' + k, v); });
 const launch = $('#chatBtn'), box = $('#chatBox'), body = $('#chatBody'), form = $('#chatForm'), inp = $('#chatIn');
@@ -864,10 +879,11 @@ let queue = Promise.resolve();
 const scroll = () => { body.scrollTop = body.scrollHeight; };
 function bot(html) {
   queue = queue.then(async () => {
+    await sleep(500);   // nghỉ một nhịp như người thật đọc tin rồi mới gõ
     const m = document.createElement('div');
     m.className = 'cm bot typing'; m.innerHTML = '<i></i><i></i><i></i>';
     body.appendChild(m); scroll();
-    await sleep(Math.min(1500, 450 + html.length * 8));
+    await sleep(Math.min(3000, 1000 + html.length * 14));
     m.className = 'cm bot'; m.innerHTML = html; scroll();
     st.log.push('🤖 Bot: ' + m.textContent);
   });
@@ -924,6 +940,7 @@ const GOAL_LINE = {
 
 // Trả lời nhanh khi khách tự gõ câu hỏi
 const FAQ = [
+  [/f2[\s\-._]*\d{1,2}[ab]?[\s\-._]*\d{1,2}/i, () => 'Dạ em ghi lại mã căn này ạ. Chuyên viên sẽ kiểm tra căn còn trống không và gửi <b>bảng tính giá sau chiết khấu</b> đúng căn cho anh/chị.'],
   [/chiết khấu|\bck\b|ưu đãi|giảm giá|khuyến mãi/i, () => live
     ? 'Chiết khấu cộng dồn tới <b>19%</b>: Early Bird 3% + không vay 3% + từ chối bảo lãnh 1% + thanh toán sớm tới 12% (trước <b>25/10/2026</b>). Mỗi căn trừ ra số tiền khác nhau.'
     : 'Hiện có chiết khấu Early Bird 3%, không vay thêm 3% và từ chối bảo lãnh 1% theo chính sách CSBH 4.2.'],
@@ -951,8 +968,9 @@ function start() {
     thanksChoices();
     return;
   }
-  bot('Chào anh/chị 👋 Em là trợ lý tư vấn <b>Sun FourS Tower</b> Đà Nẵng – Tòa F2 đang mở bán.');
-  bot('Anh/chị cần hỏi gì cứ nhắn em nhé. Để em gợi ý đúng căn, anh/chị đang tìm căn để <b>ở</b> hay <b>đầu tư</b> ạ?');
+  bot('Chào anh/chị 👋 Em là trợ lý tư vấn <b>Sun FourS Tower</b> Đà Nẵng.');
+  bot(topic ? topic.ask : CTX.hi);
+  bot(topic ? 'Hoặc để em gợi ý căn, anh/chị mua để <b>ở</b> hay <b>đầu tư</b> ạ?' : 'Để em gợi ý đúng căn, anh/chị đang tìm căn để <b>ở</b> hay <b>đầu tư</b> ạ?');
   st.step = 'goal';
   choices(['🏠 Mua để ở', '📈 Đầu tư cho thuê', '👀 Tham khảo trước'].map(t => ({t, fn: () => pickGoal(t.replace(/^\S+\s/, ''))})));
 }
@@ -1009,7 +1027,7 @@ function ping() {
   ss.set('chat_ping', '1');
   queue.then(() => {
     const data = Object.assign({
-      thong_bao: 'Khách đang chat trên trang ' + PAGE + ' (chưa để số điện thoại)',
+      thong_bao: 'Khách đang chat trên trang ' + PAGE + (topic ? ', đang xem mục ' + topic.label : '') + ' (chưa để số điện thoại)',
       nhu_cau: st.goal, tai_chinh: st.budget, cau_hoi: st.question, hoi_thoai: st.log.join('\n').trim(),
       time: new Date().toLocaleString('vi-VN'), source: location.href.split('?')[0],
       _subject: '💬 Khách đang chat – Tòa F2 FourS Tower (' + new Date().toLocaleTimeString('vi-VN', {hour: '2-digit', minute: '2-digit'}) + ')',
@@ -1027,7 +1045,7 @@ function finish() {
   setInput('Nhắn thêm cho tư vấn viên…', false);
   const data = {
     name: st.name || 'Khách chat', phone: st.phone, toa: 'F2',
-    interest: 'Chat ' + PAGE + (st.goal ? ' – ' + st.goal : '') + (st.budget ? ' – ' + st.budget : ''),
+    interest: 'Chat ' + PAGE + (topic ? ' – mục ' + topic.label : '') + (st.goal ? ' – ' + st.goal : '') + (st.budget ? ' – ' + st.budget : ''),
     nhu_cau: st.goal, tai_chinh: st.budget, cau_hoi: st.question, hoi_thoai: st.log.join('\n').trim(),
     time: new Date().toLocaleString('vi-VN'), source: location.href.split('?')[0]
   };
@@ -1092,14 +1110,60 @@ teaser.addEventListener('click', e => {
 teaser.addEventListener('keydown', e => { if (e.key === 'Enter') open(); });
 addEventListener('keydown', e => { if (e.key === 'Escape' && !box.hidden) close(); });
 
-// Chào nhẹ một lần mỗi phiên: sau 25 giây hiện lời chào nhỏ cạnh nút chat, không tự mở khung chat
-const greet = () => {
-  if (ss.get('chat_teased') || ss.get('cro_sent')) return;
-  if (!box.hidden || document.querySelector('.modal.on')) { setTimeout(greet, 5000); return; }
-  $('#chatTeaserTxt').innerHTML = 'Chào anh/chị 👋 Cần xem <b>giá</b> hay tính thử <b>vốn vay</b> cho căn nào, cứ nhắn em nhé.';
-  teaser.hidden = false; badge.hidden = false;
+// Theo dõi khách đọc tới mục nào: dừng lâu ở mục nào (8 giây) thì hỏi đúng chuyện mục đó.
+// Chỉ hỏi 1 lần mỗi phiên; không tự mở khung chat. Khách không dừng ở mục nào thì 60 giây sau chào chung.
+const ASK = {
+  vonit: ['Vay 70%', 'Anh/chị đang xem phần <b>vay 70%</b> ạ. Anh/chị cần em tính thử <b>vốn tự có</b> cho căn khoảng bao nhiêu tiền không?'],
+  tongquan: ['Tổng quan', 'Anh/chị đang tìm hiểu <b>tổng quan dự án</b> ạ. Anh/chị mua để ở hay đầu tư, để em gợi ý đúng căn?'],
+  sanvuon: ['Căn sân vườn', 'Anh/chị đang xem <b>căn sân vườn</b> ạ – loại này rất ít căn. Em gửi danh sách căn sân vườn còn trống cho anh/chị nhé?'],
+  vitri: ['Vị trí', 'Anh/chị đang xem <b>vị trí</b> dự án ạ. Anh/chị đang ở Đà Nẵng hay ở tỉnh khác, để em hỗ trợ xem dự án cho tiện?'],
+  view: ['View', 'Anh/chị đang xem <b>view</b> dự án ạ. Anh/chị thích view sông, biển hay nội khu để em lọc căn còn trống?'],
+  tienich: ['Tiện ích', 'Anh/chị đang xem <b>tiện ích</b> ạ. Anh/chị mua để ở cho gia đình hay đầu tư cho thuê ạ?'],
+  matbang: ['Mặt bằng', 'Anh/chị đang xem <b>mặt bằng</b> ạ. Anh/chị quan tâm loại căn nào – Studio, 1PN hay 2PN – để em lọc căn còn trống?'],
+  gia: ['Bảng giá', 'Anh/chị đang xem <b>bảng giá</b> ạ. Ưng căn nào anh/chị cứ nhắn mã căn, em tính giúp <b>giá sau chiết khấu</b> nhé.'],
+  chinhsach: ['Chính sách', 'Anh/chị đang xem <b>chính sách ưu đãi</b> ạ. Anh/chị dự định vay ngân hàng hay thanh toán nhanh, để em tính phương án lợi nhất?'],
+  phaply: ['Pháp lý', 'Anh/chị đang xem <b>pháp lý</b> ạ. Anh/chị cần em gửi bản scan văn bản pháp lý qua Zalo không ạ?'],
+  bangiao: ['Bàn giao', 'Anh/chị đang xem <b>tiến độ bàn giao</b> ạ. Anh/chị cần nhận nhà sớm hay không gấp ạ?'],
+  hoidap: ['Hỏi đáp', 'Anh/chị chưa thấy câu trả lời mình cần ạ? Cứ nhắn câu hỏi, em trả lời ngay.'],
+  tinh: ['Bảng tính', 'Anh/chị đang tính <b>dòng tiền</b> ạ. Cần em tính giúp căn cụ thể thì cứ nhắn <b>mã căn</b> nhé.']
 };
-setTimeout(greet, 25000);
+const KEY_OF = {
+  'von-it': 'vonit', 'tong-quan': 'tongquan', 'tong-quan-f2': 'tongquan', 'ly-do': 'chinhsach', 'san-vuon': 'sanvuon',
+  'vi-tri': 'vitri', 'tour-360': 'view', 'hinh-anh': 'view', 'thu-vien': 'view', 'tien-ich': 'tienich',
+  'mat-bang': 'matbang', 'mat-bang-tang': 'matbang', 'loai-can': 'matbang', 'bang-gia': 'gia', 'bang-gia-f2': 'gia',
+  'gia-tot': 'gia', 'danh-sach': 'gia', 'chinh-sach': 'chinhsach', 'chinh-sach-f2': 'chinhsach', 'uu-dai': 'chinhsach',
+  'phap-ly': 'phaply', 'tong-quan-pl': 'phaply', 'van-ban': 'phaply', 'toa': 'phaply', 'quyen-loi': 'phaply',
+  'ban-giao': 'bangiao', 'hoi-dap': 'hoidap', 'hoi-dap-f2': 'hoidap', 'hoi-dap-bt': 'hoidap', 'hoi-dap-pl': 'hoidap', 'tinh': 'tinh'
+};
+const keyOf = s => {
+  if (KEY_OF[s.id]) return KEY_OF[s.id];
+  const c = s.className || '';
+  if (/views|location|\bloc\b|towers/.test(c)) return /location|\bloc\b/.test(c) ? 'vitri' : /towers/.test(c) ? 'tongquan' : 'view';
+  if (/faq/.test(c)) return 'hoidap';
+  if (s.querySelector('.legal')) return 'phaply';
+  if (/sân vườn/i.test((s.querySelector('h2') || {}).textContent || '')) return 'sanvuon';
+  return '';
+};
+const t0 = Date.now();
+let curKey = '', since = 0, topic = null;
+const tease = (html, k) => {
+  if (ss.get('chat_teased') || ss.get('cro_sent') || !box.hidden || document.querySelector('.modal.on, .lb.on')) return false;
+  topic = k ? {key: k, label: ASK[k][0], ask: ASK[k][1]} : null;
+  $('#chatTeaserTxt').innerHTML = html;
+  teaser.hidden = false; badge.hidden = false;
+  ss.set('chat_teased', '1');
+  return true;
+};
+const watch = setInterval(() => {
+  if (ss.get('chat_teased') || ss.get('cro_sent')) { clearInterval(watch); return; }
+  const mid = innerHeight / 2;
+  const sec = [...document.querySelectorAll('main section, body > section')].find(s => { const r = s.getBoundingClientRect(); return r.top <= mid && r.bottom >= mid; });
+  const k = sec ? keyOf(sec) : '';
+  if (k !== curKey) { curKey = k; since = Date.now(); }
+  const onPage = Date.now() - t0;
+  if (k && onPage > 10000 && scrollY > 300 && Date.now() - since > 8000) { if (tease('👋 ' + ASK[k][1], k)) clearInterval(watch); }
+  else if (onPage > 60000 && tease(CTX.teaser)) clearInterval(watch);
+}, 1000);
 })();
 </script>
 </body>
