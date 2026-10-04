@@ -33,8 +33,13 @@ function checkAgent(req, res, next) {
 
 // Cấu hình công khai cho widget.
 app.get('/api/config', (req, res) => {
-  const { project, welcome, quickReplies } = config;
-  res.json({ project, welcome, quickReplies: quickReplies.map(q => q.label), agentsOnline: onlineAgents() > 0 });
+  const { project, welcome, intents } = config;
+  res.json({ project, welcome: fill(welcome), quickReplies: intents.map(q => q.label), agentsOnline: onlineAgents() > 0 });
+});
+
+// Mẫu câu theo kịch bản 4 bước cho trang tư vấn viên.
+app.get('/api/agent/canned', checkAgent, (req, res) => {
+  res.json({ cannedReplies: config.cannedReplies, zaloTransfer: config.zaloTransfer, project: config.project });
 });
 
 app.post('/api/agent/login', (req, res) => {
@@ -95,8 +100,46 @@ function sendMessage(conv, msg) {
   return m;
 }
 
-function systemReply(conv, text) {
-  setTimeout(() => sendMessage(conv, { from: 'agent', text, auto: true }), 700);
+// Thay biến {name}, {phone}, {zalo}, {hotline}, {project} trong câu mẫu.
+function fill(tpl, conv) {
+  const vars = {
+    name: conv?.lead?.name || 'anh/chị',
+    phone: conv?.lead?.phone || '',
+    zalo: config.project.zalo,
+    hotline: config.project.hotline,
+    project: config.project.name,
+  };
+  const out = tpl.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m));
+  return out.charAt(0).toUpperCase() + out.slice(1);
+}
+
+// Gửi lần lượt từng câu như người thật đang gõ.
+function systemReply(conv, texts, extra = {}) {
+  [].concat(texts).forEach((text, i, all) => {
+    const last = i === all.length - 1;
+    setTimeout(() => {
+      io.to(`conv:${conv.id}`).emit('typing');
+      setTimeout(() => sendMessage(conv, { from: 'agent', text: fill(text, conv), auto: true, ...(last ? extra : {}) }), 900);
+    }, i * 1600 + 300);
+  });
+}
+
+const zaloStep = () => [config.zaloTransfer, { action: 'zalo' }];
+
+const kwRegex = kw => new RegExp(`(^|[^\\p{L}])${kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}([^\\p{L}]|$)`, 'iu');
+const intentKeywords = config.intents.map(it => ({ it, res: it.keywords.map(kwRegex) }));
+
+function findIntent(text, byKeyword) {
+  const byLabel = config.intents.find(it => it.label === text);
+  if (byLabel || !byKeyword) return byLabel;
+  return intentKeywords.find(({ res }) => res.some(r => r.test(text)))?.it;
+}
+
+// Kịch bản 4 bước: ghi nhận → phương án → xin thông tin (hoặc chuyển Zalo nếu đã có SĐT).
+function replyIntent(conv, intent) {
+  const [ack, option, ask] = intent.steps;
+  if (conv.lead.phone) systemReply(conv, [ack, option, zaloStep()[0]], zaloStep()[1]);
+  else systemReply(conv, [ack, option, ask]);
 }
 
 function throttle(socket) {
@@ -123,12 +166,12 @@ io.on('connection', socket => {
       ack?.(conv);
     });
 
-    socket.on('message', ({ conversationId, text } = {}) => {
+    socket.on('message', ({ conversationId, text, action } = {}) => {
       const conv = store.get(conversationId);
-      text = clean(text);
+      text = clean(text) || (action === 'zalo' ? fill(config.zaloTransfer, conv) : '');
       if (!conv || !text) return;
       store.update(conv.id, { unread: 0, status: conv.status === 'new' ? 'contacted' : conv.status });
-      sendMessage(conv, { from: 'agent', text });
+      sendMessage(conv, { from: 'agent', text, ...(action === 'zalo' ? { action } : {}) });
     });
 
     socket.on('typing', conversationId => io.to(`conv:${conversationId}`).emit('typing'));
@@ -168,15 +211,26 @@ io.on('connection', socket => {
     if (isNew) io.to('agents').emit('conversation:new', store.summary(conv));
     sendMessage(conv, { from: 'visitor', text });
 
+    const agentsOn = onlineAgents() > 0;
     const phone = text.match(PHONE_RE)?.[0].replace(/[\s.-]/g, '');
-    if (phone && !conv.lead.phone) setLead(conv, { phone });
+    if (phone && !conv.lead.phone) {
+      setLead(conv, { phone });
+      // Khách vừa cho SĐT: ghi nhận + chuyển Zalo (khi có tư vấn viên thì để người trả lời).
+      if (!agentsOn) systemReply(conv, [config.leadThanks, zaloStep()[0]], zaloStep()[1]);
+      return;
+    }
 
-    const quick = config.quickReplies.find(q => q.label === text);
-    if (quick?.reply) return systemReply(conv, quick.reply);
-    if (!onlineAgents() && !conv.lead.phone && !conv.offlineNotified) {
+    // Nút hỏi nhanh luôn trả lời tự động; khách tự gõ thì chỉ tự động khi chưa có tư vấn viên.
+    const intent = findIntent(text, !agentsOn);
+    if (intent) {
+      replyIntent(conv, intent);
+      if (!conv.lead.phone) setTimeout(() => socket.emit('lead:request'), 5200);
+      return;
+    }
+    if (!agentsOn && !conv.lead.phone && !conv.offlineNotified) {
       store.update(conv.id, { offlineNotified: true });
-      systemReply(conv, config.offlineReply);
-      setTimeout(() => socket.emit('lead:request'), 800);
+      systemReply(conv, config.fallback);
+      setTimeout(() => socket.emit('lead:request'), 5200);
     }
   });
 
@@ -190,7 +244,7 @@ io.on('connection', socket => {
       from: 'visitor',
       text: `📋 Thông tin liên hệ: ${conv.lead.name || ''} – ${conv.lead.phone || ''}`.trim(),
     });
-    systemReply(conv, `Cảm ơn ${conv.lead.name || 'anh/chị'}! Em sẽ liên hệ lại qua số ${conv.lead.phone} trong thời gian sớm nhất ạ.`);
+    systemReply(conv, [config.leadThanks, zaloStep()[0]], zaloStep()[1]);
   });
 
   socket.on('typing', () => io.to('agents').emit('typing', visitorId));

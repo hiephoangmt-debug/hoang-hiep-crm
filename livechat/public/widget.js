@@ -64,6 +64,7 @@
       '.msg.agent{background:#fff;align-self:flex-start;border-bottom-left-radius:4px;box-shadow:0 1px 2px rgba(0,0,0,.06)}' +
       '.msg.visitor{background:var(--c);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}' +
       '.msg time{display:block;font-size:10px;opacity:.6;margin-top:3px}' +
+      '.zalo-btn{display:block;margin-top:8px;background:#0068ff;color:#fff;text-align:center;text-decoration:none;font-weight:700;border-radius:8px;padding:9px 12px;font-size:14px}' +
       '.quick{display:flex;flex-wrap:wrap;gap:6px;padding:4px 0}' +
       '.quick button{border:1px solid var(--a);color:var(--a);background:#fff;border-radius:16px;padding:6px 11px;font-size:13px;cursor:pointer}' +
       '.quick button:hover{background:var(--a);color:#fff}' +
@@ -121,6 +122,13 @@
       var el = document.createElement('div');
       el.className = 'msg ' + (m.from === 'visitor' ? 'visitor' : 'agent');
       el.textContent = m.text;
+      if (m.action === 'zalo' && P.zalo) {
+        var z = document.createElement('a');
+        z.className = 'zalo-btn'; z.target = '_blank'; z.rel = 'noopener';
+        z.href = 'https://zalo.me/' + P.zalo.replace(/\D/g, '');
+        z.textContent = 'Chat Zalo ' + P.zalo;
+        el.appendChild(z);
+      }
       var t = document.createElement('time'); t.textContent = fmt(m.at || Date.now());
       el.appendChild(t);
       body.appendChild(el);

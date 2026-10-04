@@ -43,6 +43,15 @@
   .msg.auto{background:#5b6f91}
   .msg time{display:block;font-size:10px;opacity:.65;margin-top:3px}
   #typing{height:18px;font-size:12px;color:var(--muted);padding:0 16px}
+  #script{border-top:1px solid var(--line);background:#fff;padding:8px 10px 0}
+  #script .tabs{display:flex;gap:4px;flex-wrap:wrap}
+  #script .tabs button{border:1px solid var(--line);background:#fff;border-radius:14px;padding:4px 10px;font-size:12px;cursor:pointer;color:var(--c);font-weight:600}
+  #script .tabs button.on{background:var(--c);color:#fff;border-color:var(--c)}
+  #script .tabs button.zalo{background:#0068ff;color:#fff;border-color:#0068ff}
+  #script .items{display:flex;gap:6px;overflow-x:auto;padding:8px 0}
+  #script .items button{flex:none;max-width:280px;text-align:left;border:1px dashed var(--a);background:#fff8f2;color:var(--text);border-radius:8px;padding:6px 9px;font-size:12px;cursor:pointer;white-space:normal;line-height:1.35}
+  #script .items:empty{display:none}
+  .msg .zl{display:inline-block;margin-top:6px;background:#0068ff;color:#fff;border-radius:6px;padding:3px 8px;font-size:12px;font-weight:600}
   #compose{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line);background:#fff}
   #compose textarea{flex:1;resize:none;height:44px}
   #side{width:280px;border-left:1px solid var(--line);background:#fff;padding:14px;overflow-y:auto;flex:none;display:flex;flex-direction:column;gap:10px}
@@ -200,6 +209,7 @@ function openConv(id) {
       <div style="padding:10px 14px;border-bottom:1px solid var(--line);background:#fff;display:flex;gap:10px;align-items:center">
         <button class="back btn" style="padding:5px 10px">←</button><b>${esc(label(conv))}</b></div>
       <div id="msgs"></div><div id="typing"></div>
+      <div id="script"><div class="tabs"></div><div class="items"></div></div>
       <form id="compose"><textarea placeholder="Trả lời khách... (Enter để gửi, Shift+Enter xuống dòng)"></textarea><button class="btn">Gửi</button></form>`;
     $('.back').onclick = () => { $('#app').classList.remove('viewing'); current = null; renderList(); };
     conv.messages.forEach(addMsg);
@@ -210,6 +220,7 @@ function openConv(id) {
     ta.onkeydown = e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } };
     ta.oninput = () => { if (Date.now() - last > 2000) { last = Date.now(); socket.emit('typing', id); } };
     ta.focus();
+    renderScript(id, ta);
     renderSide(convs[id] || conv);
     renderList();
   });
@@ -220,9 +231,45 @@ function addMsg(m) {
   const el = document.createElement('div');
   el.className = 'msg ' + m.from + (m.auto ? ' auto' : '');
   el.textContent = m.text;
+  if (m.action === 'zalo') el.insertAdjacentHTML('beforeend', '<br><span class="zl">Nút Chat Zalo</span>');
   el.insertAdjacentHTML('beforeend', `<time>${fmt(m.at)}${m.auto ? ' • tự động' : ''}</time>`);
   box.appendChild(el);
   box.scrollTop = box.scrollHeight;
+}
+
+// Kịch bản phản hồi: 1. Dạ ghi nhận → 2. Đưa phương án → 3. Dẫn dắt xin thông tin → 4. Chuyển Zalo
+let canned = null, cannedTab = 0;
+async function loadCanned() {
+  if (canned) return canned;
+  const r = await fetch('/api/agent/canned', { headers: { 'x-agent-token': token } });
+  return (canned = r.ok ? await r.json() : { cannedReplies: [] });
+}
+function fillTpl(tpl, c) {
+  const vars = { name: c?.lead?.name || 'anh/chị', phone: c?.lead?.phone || '', zalo: canned.project?.zalo || '', hotline: canned.project?.hotline || '', project: canned.project?.name || '' };
+  const out = tpl.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m));
+  return out.charAt(0).toUpperCase() + out.slice(1);
+}
+async function renderScript(id, ta) {
+  await loadCanned();
+  if (current !== id || !$('#script')) return;
+  const groups = canned.cannedReplies;
+  $('#script .tabs').innerHTML = groups.map((g, i) => `<button type="button" data-i="${i}" class="${i === cannedTab ? 'on' : ''}">${esc(g.step)}</button>`).join('') +
+    '<button type="button" class="zalo" title="Gửi tin mời kết bạn Zalo kèm nút bấm">4. Chuyển Zalo ➜</button>';
+  const items = () => {
+    $('#script .items').innerHTML = (groups[cannedTab]?.items || []).map((t, j) => `<button type="button" data-j="${j}">${esc(fillTpl(t, convs[id]))}</button>`).join('');
+    $('#script .items').querySelectorAll('button').forEach(b => b.onclick = () => {
+      const text = fillTpl(groups[cannedTab].items[b.dataset.j], convs[id]);
+      ta.value = ta.value.trim() ? ta.value.trim() + ' ' + text : text;
+      ta.focus();
+    });
+  };
+  $('#script .tabs').querySelectorAll('button[data-i]').forEach(b => b.onclick = () => {
+    cannedTab = +b.dataset.i;
+    $('#script .tabs').querySelectorAll('button[data-i]').forEach(x => x.classList.toggle('on', x === b));
+    items();
+  });
+  $('#script .zalo').onclick = () => socket.emit('message', { conversationId: id, action: 'zalo' });
+  items();
 }
 
 function renderSide(c) {

@@ -7,6 +7,24 @@ Chat thời gian thực giữa khách xem website dự án và tư vấn viên. 
 - **Tự nhận số điện thoại** trong tin nhắn của khách và lưu vào thông tin lead.
 - **Webhook lead** (tuỳ chọn): đẩy lead mới sang Google Sheet / LadiPage / n8n...
 
+## Kịch bản phản hồi 4 bước
+
+Mọi câu trả lời (tự động lẫn mẫu câu cho tư vấn viên) đi theo trình tự:
+
+1. **Dạ ghi nhận**: xác nhận nhu cầu của khách ("Dạ em ghi nhận anh/chị đang quan tâm…").
+2. **Đưa phương án**: gợi ý hướng giải quyết, các lựa chọn phù hợp.
+3. **Dẫn dắt xin thông tin**: hỏi ngân sách, nhu cầu, tên và số điện thoại.
+4. **Chuyển Zalo**: mời kết bạn Zalo, tin nhắn có kèm nút **Chat Zalo**.
+
+Cách hoạt động:
+
+- Khách bấm nút hỏi nhanh: tự trả lời bước 1 → 2 → 3, sau đó hiện form để lại SĐT.
+- Khách tự gõ câu hỏi khi chưa có tư vấn viên trực tuyến: nhận diện chủ đề theo từ khoá (giá, mặt bằng, vị trí, pháp lý, tham quan, vay) và trả lời theo kịch bản.
+- Khách đã để lại SĐT: cảm ơn và chuyển sang bước 4 (chuyển Zalo).
+- Trang tư vấn viên có thanh mẫu câu theo từng bước: bấm vào để chèn vào ô chat (sửa được trước khi gửi). Nút **4. Chuyển Zalo** gửi ngay tin mời Zalo kèm nút bấm.
+
+Nội dung kịch bản nằm trong `config.js` (`intents`, `cannedReplies`, `zaloTransfer`, `leadThanks`, `fallback`). Phần "phương án" đang viết chung, bạn nên bổ sung số liệu thực tế của dự án.
+
 ## Chạy
 
 ```bash
@@ -30,7 +48,7 @@ Mở chat từ nút bất kỳ: `onclick="CasamiaChat.open()"`.
 
 ## Cấu hình
 
-Sửa `config.js` (lời chào, câu hỏi nhanh, câu trả lời tự động, màu sắc) hoặc dùng biến môi trường:
+Sửa `config.js` (lời chào, kịch bản 4 bước, mẫu câu, màu sắc) hoặc dùng biến môi trường:
 
 | Biến | Ý nghĩa |
 |---|---|
