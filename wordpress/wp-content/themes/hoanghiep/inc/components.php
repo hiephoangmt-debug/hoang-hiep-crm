@@ -528,3 +528,40 @@ add_filter(
 	10,
 	2
 );
+
+/**
+ * Thẻ "Vốn tự có theo loại căn" (ô Vốn tự có theo loại căn – tab Giá & chính sách): mỗi loại căn một thẻ,
+ * số vốn lớn, nút nhận căn chi tiết qua Zalo. Dùng trong mục Chính sách và shortcode [hh_von_tu_co] trong bài.
+ */
+function hoanghiep_capital_cards( $post_id = null ) {
+	$post_id = $post_id ?: get_the_ID();
+	$rows    = hh_table( 'hh_p_capital_table', 4, $post_id );
+	if ( ! $rows ) {
+		return '';
+	}
+	$title = get_the_title( $post_id );
+	$zalo  = 'https://zalo.me/' . hoanghiep_tel( hoanghiep_opt( 'hh_zalo' ) );
+	ob_start();
+	?>
+	<div class="capital">
+		<p class="capital__title"><?php echo esc_html( hh_meta( 'hh_p_capital_title', $post_id ) ?: 'Vốn tự có theo loại căn – ' . $title ); ?></p>
+		<div class="capital__grid">
+			<?php foreach ( $rows as list( $type, $price, $own, $note ) ) : ?>
+				<div class="capital__item">
+					<p class="capital__type"><?php echo esc_html( $type ); ?></p>
+					<p class="capital__own"><?php echo esc_html( $own ); ?></p>
+					<p class="capital__price"><?php echo esc_html( $price ); ?></p>
+					<?php if ( $note ) : ?><p class="capital__note"><?php echo esc_html( $note ); ?></p><?php endif; ?>
+					<a class="btn btn--zalo btn--sm" href="<?php echo esc_url( $zalo ); ?>" target="_blank" rel="noopener">Nhận căn qua Zalo</a>
+				</div>
+			<?php endforeach; ?>
+		</div>
+		<a class="btn btn--zalo capital__all" href="<?php echo esc_url( $zalo ); ?>" target="_blank" rel="noopener">Nhận căn chi tiết &amp; giá từng căn qua Zalo</a>
+		<?php if ( hh_meta( 'hh_p_capital_note', $post_id ) ) : ?>
+			<p class="capital__foot"><?php echo esc_html( hh_meta( 'hh_p_capital_note', $post_id ) ); ?></p>
+		<?php endif; ?>
+	</div>
+	<?php
+	return ob_get_clean();
+}
+add_shortcode( 'hh_von_tu_co', static fn() => hoanghiep_capital_cards() );

@@ -16,6 +16,9 @@ function hh_fours_f2_policy_meta() {
 		'hh_p_offer_title'    => 'Chiết khấu lên đến 18% – chỉ cần 25% vốn đến khi nhận nhà',
 		'hh_p_offer_note'     => 'CSBH 4.2 Tòa F2 – hạn chiết khấu thanh toán sớm 25/10/2026.',
 		'hh_p_offer_stats'    => "18% | Chiết khấu cộng dồn tối đa\n25% | Vốn tự có đến khi nhận nhà (vay 70%)\n15% | Thanh toán đến khi ký HĐMB\n70% | Đã nhận nhà – Sun Early Key",
+		'hh_p_capital_title'  => 'Chỉ từ khoảng 405 triệu vốn tự có – ngân hàng cho vay 70%',
+		'hh_p_capital_table'  => "Studio | Giá từ ~1,7 tỷ | ~405 triệu | Ngân hàng cho vay ~1,13 tỷ\n1PN+ | Giá từ ~2,6 tỷ | ~619 triệu | Ngân hàng cho vay ~1,73 tỷ\n2PN | Giá từ ~3,6 tỷ | ~857 triệu | Ngân hàng cho vay ~2,4 tỷ",
+		'hh_p_capital_note'   => 'Giá từ: tham khảo theo nguồn phân phối FourS Tower. Vốn tự có = 25% giá sau Early Bird 3% (gồm VAT) – phương án vay 70% theo CSBH 4.2 Tòa F2, thanh toán trước khi nhận nhà; chưa gồm kinh phí bảo trì 2% và 5% khi nhận nhà. Căn 1PN, 3PN, căn góc, sân vườn: nhận giá qua Zalo.',
 		'hh_p_offer_start'    => '26/09/2026',
 		'hh_p_offer_deadline' => '25/10/2026',
 		'hh_p_discount_table' => "Thanh toán sớm 95% | Trước 25/10/2026 | 17,2% | Early Bird 3% + không vay 3% + thanh toán sớm 12%\nThanh toán sớm 70% – nhận nhà rồi trả 25% còn lại | Trước 25/10/2026 | 10,6% | Early Bird 3% + không vay 3% + thanh toán sớm 5%\nThanh toán sớm 50% | Trước 25/10/2026 | 8,3% | Early Bird 3% + không vay 3% + thanh toán sớm 2,5%\nTiến độ chuẩn, không vay ngân hàng | Early Bird có thời hạn | 5,9% | Early Bird 3% + không vay 3%\nVay ngân hàng – giải ngân 70% | Early Bird có thời hạn | 3% | Early Bird 3%",
@@ -96,7 +99,7 @@ function hh_dataset_fours_f2( $projects ) {
 		),
 		'fix_meta' => hh_fours_f2_old_meta(),
 		'content' => hh_fours_f2_content(),
-		'fix_content' => array( hh_fours_f2_content( 1 ) ),
+		'fix_content' => array( hh_fours_f2_content( 1 ), hh_fours_f2_content( 2 ) ),
 		'sources' => array(
 			'https://vnexpress.net/thap-f2-fours-tower-ghi-nhan-gan-1-400-luot-dat-cho-5125919.html',
 			'https://tuoitre.vn/fours-tower-an-cu-dau-tu-tai-trung-tam-nam-da-nang-20260410181212744.htm',
@@ -137,7 +140,7 @@ function hh_fours_tower_content( $v = 2 ) {
 HTML;
 }
 
-function hh_fours_f2_content( $v = 2 ) {
+function hh_fours_f2_content( $v = 3 ) {
 	$rows = '';
 	foreach ( hh_fours_f2_example_rows() as list( $plan, $ck, $pay, $save ) ) {
 		$rows .= "<tr><td>{$plan}</td><td>{$ck}</td><td>{$pay}</td><td><strong>{$save}</strong></td></tr>\n";
@@ -147,7 +150,7 @@ function hh_fours_f2_content( $v = 2 ) {
 	$cta3 = hh_fours_cta( 'Xem căn tầng đẹp còn lại', 'Gửi tôi các căn tầng đẹp, view sông còn trống Tòa F2 FourS Tower.' );
 	$intro = 1 === $v
 		? "<p><strong>FourS Tower F2</strong> – Tháp Mai (Mùa Xuân) – ra mắt sáng 26/9/2026 tại Royal Lotus Đà Nẵng. 6 con số anh chị nên biết trước khi chọn căn Tòa F2:</p>\n\n<div class=\"lp-stats\">\n<p><b>1.369</b><span>lượt đặt chỗ ngày ra mắt 26/9</span></p>\n<p><b>~17%</b><span>tiết kiệm tối đa so với giá niêm yết</span></p>\n<p><b>100 triệu</b><span>đặt cọc (3PN: 150 triệu)</span></p>\n<p><b>15%</b><span>thanh toán đến khi ký HĐMB</span></p>\n<p><b>70%</b><span>đã nhận nhà – Sun Early Key</span></p>\n<p><b>25/10</b><span>hạn chiết khấu thanh toán sớm</span></p>\n</div>"
-		: "<p><strong>FourS Tower F2</strong> – Tháp Mai (Mùa Xuân) – ra mắt sáng 26/9/2026 tại Royal Lotus Đà Nẵng với 1.369 lượt đặt chỗ. 4 con số đáng chú ý nhất:</p>\n\n" . hh_fours_stats();
+		: "<p><strong>FourS Tower F2</strong> – Tháp Mai (Mùa Xuân) – ra mắt sáng 26/9/2026 tại Royal Lotus Đà Nẵng với 1.369 lượt đặt chỗ. 4 con số đáng chú ý nhất:</p>\n\n" . hh_fours_stats() . ( $v >= 3 ? "\n\n[hh_von_tu_co]" : '' );
 	return <<<HTML
 {$intro}
 

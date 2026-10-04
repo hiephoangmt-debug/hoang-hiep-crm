@@ -47,6 +47,11 @@ $live     = $deadline && $deadline > time();
 		<?php endif; ?>
 	</div>
 <?php endif; ?>
+<?php
+if ( 'discount' !== $part && function_exists( 'hoanghiep_capital_cards' ) && false === strpos( (string) get_post_field( 'post_content', get_the_ID() ), '[hh_von_tu_co]' ) ) {
+	echo hoanghiep_capital_cards(); // phpcs:ignore
+}
+?>
 <?php if ( $discount && 'banner' !== $part ) : ?>
 	<div class="discount">
 		<p class="discount__title">Chiết khấu theo phương án thanh toán <?php echo esc_html( $title ); ?></p>
