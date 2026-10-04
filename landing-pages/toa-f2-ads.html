@@ -596,13 +596,14 @@ document.addEventListener('click', function (e) { var a = e.target.closest && e.
       <div class="spec"><b class="glow">607</b><span>căn hộ đủ điều kiện bán</span></div>
       <div class="spec"><b class="glow">32</b><span>căn/tầng (tầng điển hình 8–19)</span></div>
       <div class="spec"><b class="glow">30–87<small> m²</small></b><span>Studio, 1PN, 1PN+, 2PN, 3PN (thông thủy)</span></div>
-      <div class="spec"><b class="glow">3.910<small> m²</small></b><span>lô đất A3-10, sổ đỏ CP 912579</span></div>
+      <div class="spec"><b class="glow">8</b><span>thang máy, chia đều 2 bên (mỗi bên 4 thang)</span></div>
       <div class="spec"><b class="glow">05/2028</b><span>nhận nhà dự kiến (31/05/2028)</span></div>
     </div>
     <div class="spec-cols">
       <div class="floors rv">
         <h3>Công năng từng tầng</h3>
         <dl>
+          <div><dt>Thang máy</dt><dd>8 thang máy, chia đều 2 bên – mỗi bên 4 thang, đi lại nhanh, ít phải chờ</dd></div>
           <div><dt>Tầng hầm</dt><dd>2 tầng hầm</dd></div>
           <div><dt>Tầng 1</dt><dd>Sảnh đón cao 6 m, căn hộ tầng trệt; khối đế shophouse – cafe</dd></div>
           <div><dt>Tầng 2</dt><dd>Tầng tiện ích: hồ bơi bốn mùa, gym, yoga, spa, Kids Club, phòng khám Mặt Trời + căn hộ ban công lớn</dd></div>
@@ -1227,9 +1228,9 @@ const GOAL_LINE = {
 
 // Trả lời nhanh khi khách tự gõ câu hỏi
 const FAQ = [
-  [/thang máy/i, () => 'Số thang máy và thông số kỹ thuật chi tiết, em gửi anh/chị theo đúng hồ sơ thiết kế của chủ đầu tư qua Zalo ạ.'],
+  [/thang máy/i, () => 'Tòa F2 có <b>8 thang máy</b>, chia đều 2 bên – mỗi bên 4 thang, nên giờ cao điểm cũng ít phải chờ ạ.'],
   [/phí quản lý|phí dịch vụ|quản lý phí|tặng|quà|được gì/i, () => 'Mua Tòa F2 được <b>miễn phí dịch vụ quản lý 2 năm</b> kể từ ngày bàn giao, kèm tích thưởng Sun Signature 0,7–2% và lãi 8%/năm khi thanh toán trước hạn.'],
-  [/hầm|bao nhiêu tầng|mấy tầng|chiều cao|cao bao nhiêu|quy mô|bao nhiêu căn|mấy căn/i, () => 'Tòa F2 cao <b>20 tầng nổi, 2 tầng hầm</b> (77,95 m), 607 căn; tầng 8–19 mỗi tầng 32 căn, tầng 2 là tầng tiện ích, tầng 3–7 có căn sân vườn.'],
+  [/hầm|bao nhiêu tầng|mấy tầng|chiều cao|cao bao nhiêu|quy mô|bao nhiêu căn|mấy căn/i, () => 'Tòa F2 cao <b>20 tầng nổi, 2 tầng hầm</b> (77,95 m), 8 thang máy, 607 căn; tầng 8–19 mỗi tầng 32 căn, tầng 2 là tầng tiện ích, tầng 3–7 có căn sân vườn.'],
   [/f2[\s\-._]*\d{1,2}[ab]?[\s\-._]*\d{1,2}/i, () => 'Dạ em ghi lại mã căn này ạ. Chuyên viên sẽ kiểm tra căn còn trống không và gửi <b>bảng tính giá sau chiết khấu</b> đúng căn cho anh/chị.'],
   [/chiết khấu|\bck\b|ưu đãi|giảm giá|khuyến mãi/i, () => live
     ? 'Chiết khấu cộng dồn tới <b>19%</b>: Early Bird 3% + không vay 3% + từ chối bảo lãnh 1% + thanh toán sớm tới 12% (trước <b>25/10/2026</b>). Mỗi căn trừ ra số tiền khác nhau.'

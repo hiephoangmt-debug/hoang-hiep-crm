@@ -940,9 +940,9 @@ const GOAL_LINE = {
 
 // Trả lời nhanh khi khách tự gõ câu hỏi
 const FAQ = [
-  [/thang máy/i, () => 'Số thang máy và thông số kỹ thuật chi tiết, em gửi anh/chị theo đúng hồ sơ thiết kế của chủ đầu tư qua Zalo ạ.'],
+  [/thang máy/i, () => 'Tòa F2 có <b>8 thang máy</b>, chia đều 2 bên – mỗi bên 4 thang, nên giờ cao điểm cũng ít phải chờ ạ.'],
   [/phí quản lý|phí dịch vụ|quản lý phí|tặng|quà|được gì/i, () => 'Mua Tòa F2 được <b>miễn phí dịch vụ quản lý 2 năm</b> kể từ ngày bàn giao, kèm tích thưởng Sun Signature 0,7–2% và lãi 8%/năm khi thanh toán trước hạn.'],
-  [/hầm|bao nhiêu tầng|mấy tầng|chiều cao|cao bao nhiêu|quy mô|bao nhiêu căn|mấy căn/i, () => 'Tòa F2 cao <b>20 tầng nổi, 2 tầng hầm</b> (77,95 m), 607 căn; tầng 8–19 mỗi tầng 32 căn, tầng 2 là tầng tiện ích, tầng 3–7 có căn sân vườn.'],
+  [/hầm|bao nhiêu tầng|mấy tầng|chiều cao|cao bao nhiêu|quy mô|bao nhiêu căn|mấy căn/i, () => 'Tòa F2 cao <b>20 tầng nổi, 2 tầng hầm</b> (77,95 m), 8 thang máy, 607 căn; tầng 8–19 mỗi tầng 32 căn, tầng 2 là tầng tiện ích, tầng 3–7 có căn sân vườn.'],
   [/f2[\s\-._]*\d{1,2}[ab]?[\s\-._]*\d{1,2}/i, () => 'Dạ em ghi lại mã căn này ạ. Chuyên viên sẽ kiểm tra căn còn trống không và gửi <b>bảng tính giá sau chiết khấu</b> đúng căn cho anh/chị.'],
   [/chiết khấu|\bck\b|ưu đãi|giảm giá|khuyến mãi/i, () => live
     ? 'Chiết khấu cộng dồn tới <b>19%</b>: Early Bird 3% + không vay 3% + từ chối bảo lãnh 1% + thanh toán sớm tới 12% (trước <b>25/10/2026</b>). Mỗi căn trừ ra số tiền khác nhau.'
