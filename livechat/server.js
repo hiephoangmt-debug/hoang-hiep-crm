@@ -15,7 +15,12 @@ const io = new Server(server, {
   },
 });
 
+// Chạy sau proxy (Render, Nginx…): lấy đúng IP khách cho chống spam form.
+app.set('trust proxy', 1);
 app.use(express.json());
+
+// Render dùng để kiểm tra server còn chạy.
+app.get('/healthz', (req, res) => res.send('ok'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 const agentTokens = new Set();

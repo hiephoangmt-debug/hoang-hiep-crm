@@ -143,4 +143,4 @@ Sửa `config.js` (lời chào, kịch bản 4 bước, mẫu câu, màu sắc) 
 | `PUBLIC_URL` | Địa chỉ server chat, dùng cho link "Mở hội thoại" |
 | `ALLOWED_ORIGINS` | Domain được phép nhúng, cách nhau dấu phẩy |
 
-Dữ liệu hội thoại lưu ở `data/conversations.json`. Khi triển khai (VPS, Render, Railway...) cần chạy HTTPS và giữ lại thư mục `data/`.
+Dữ liệu hội thoại lưu ở `data/conversations.json` (đổi bằng biến `DATA_DIR`). **Đưa lên mạng: xem [HUONG-DAN-RENDER.md](HUONG-DAN-RENDER.md)**. Repo có sẵn `render.yaml` để tạo dịch vụ trên Render chỉ với vài cú bấm.

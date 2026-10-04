@@ -1,0 +1,34 @@
+# Cấu hình Render (Blueprint) cho live chat + landing Casamia Balanca.
+# Render → New → Blueprint → chọn repo này. Các biến "sync: false" sẽ được hỏi khi tạo.
+services:
+  - type: web
+    name: casamia-livechat
+    runtime: node
+    rootDir: livechat
+    plan: starter            # cần gói trả phí để gắn ổ đĩa lưu dữ liệu và không bị "ngủ"
+    region: singapore        # gần Việt Nam nhất
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    autoDeploy: true
+    disk:
+      name: casamia-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: DATA_DIR
+        value: /var/data
+      - key: HOTLINE
+        value: "0904 567 009"
+      - key: ZALO
+        value: "0904567009"
+      - key: AGENT_PASSWORD
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: PUBLIC_URL
+        sync: false

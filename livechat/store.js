@@ -2,7 +2,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const DATA_DIR = path.join(__dirname, 'data');
+// Trên Render: đặt DATA_DIR trỏ tới ổ đĩa lưu trữ (Disk) để không mất dữ liệu khi khởi động lại.
+const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, 'data');
 const DATA_FILE = path.join(DATA_DIR, 'conversations.json');
 
 let conversations = {};
