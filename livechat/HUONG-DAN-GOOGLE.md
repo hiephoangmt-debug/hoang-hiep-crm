@@ -24,7 +24,9 @@ Phù hợp khi mới chạy ads, lượng khách vừa phải (vài trăm khách
 
 1. Vào **sheets.google.com**, tạo bảng tính mới, đặt tên `Casamia – Lead & Chat`.
 2. Menu **Tiện ích mở rộng → Apps Script**.
-3. Xoá hết nội dung có sẵn, dán **toàn bộ** file `livechat/google-apps-script/Code.gs`.
+3. Xoá hết nội dung có sẵn, dán **toàn bộ** file `livechat/google-apps-script/Code.gs` (208 dòng).
+   - Nếu báo lỗi *"SyntaxError: Unexpected end of input"* là **mã bị dán thiếu**. Dùng bản chia nhỏ trong thư mục `google-apps-script/chia-nho/`: tạo 3 file bằng nút **＋ → Tập lệnh** (đặt tên `Phan1`, `Phan2`, `Phan3`) rồi dán từng phần vào đúng file. Nhớ xoá mã cũ bị thiếu trong file `Mã.gs`.
+   - Kiểm tra: dòng cuối của mỗi phần phải là dấu `}`.
 4. Ở đầu file, điền:
    ```js
    const TELEGRAM_BOT_TOKEN = '123456789:AAH...';   // token từ @BotFather
