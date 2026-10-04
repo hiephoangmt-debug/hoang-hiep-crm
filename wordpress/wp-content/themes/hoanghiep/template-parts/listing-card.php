@@ -8,8 +8,11 @@ $photos = count( hh_ids( 'hh_gallery' ) ) + ( has_post_thumbnail() ? 1 : 0 );
 ?>
 <article class="listing-card<?php echo 'da-giao-dich' === $status ? ' is-closed' : ''; ?>">
 	<a class="listing-card__media" href="<?php the_permalink(); ?>">
+		<?php $proj_thumb = has_post_thumbnail() ? 0 : get_post_thumbnail_id( (int) hh_meta( 'hh_project' ) ); ?>
 		<?php if ( has_post_thumbnail() ) : ?>
 			<?php the_post_thumbnail( 'hh-card', array( 'loading' => 'lazy' ) ); ?>
+		<?php elseif ( $proj_thumb ) : ?>
+			<?php echo wp_get_attachment_image( $proj_thumb, 'hh-card', false, array( 'loading' => 'lazy', 'alt' => get_the_title() ) ); ?>
 		<?php else : ?>
 			<span class="media-placeholder"><?php echo hh_icon( 'building' ); // phpcs:ignore ?></span>
 		<?php endif; ?>

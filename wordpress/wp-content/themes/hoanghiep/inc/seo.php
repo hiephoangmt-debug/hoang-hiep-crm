@@ -184,12 +184,17 @@ function hh_seo_description() {
 	return get_bloginfo( 'description' );
 }
 
+/** Ảnh chia sẻ khổ ngang 1200×630 (ảnh chân dung dọc bị Zalo/Facebook cắt mất đầu). */
+function hh_seo_share_image() {
+	return get_theme_file_uri( 'assets/img/og-hoang-hiep.jpg' );
+}
+
 function hh_seo_image() {
 	if ( is_singular() && has_post_thumbnail() ) {
 		return wp_get_attachment_image_url( get_post_thumbnail_id(), 'large' );
 	}
-	if ( is_page( 'gioi-thieu' ) || is_front_page() && ! hoanghiep_opt( 'hh_hero_image' ) ) {
-		return hoanghiep_photo( 'portrait' );
+	if ( is_page( 'gioi-thieu' ) || is_front_page() ) {
+		return hh_seo_share_image();
 	}
 	$fallback = hoanghiep_opt( 'hh_hero_image' );
 	if ( ! $fallback ) {
@@ -251,6 +256,9 @@ function hh_seo_head() {
 	}
 	if ( $image ) {
 		printf( "<meta property=\"og:image\" content=\"%s\">\n", esc_url( $image ) );
+		if ( hh_seo_share_image() === $image ) {
+			echo "<meta property=\"og:image:width\" content=\"1200\">\n<meta property=\"og:image:height\" content=\"630\">\n";
+		}
 	}
 	printf( "<meta name=\"twitter:card\" content=\"%s\">\n", $image ? 'summary_large_image' : 'summary' );
 	if ( is_singular( 'post' ) ) {
@@ -516,7 +524,13 @@ function hh_schema_listing() {
 	);
 	if ( (float) hh_meta( 'hh_price' ) > 0 ) {
 		$data['offers']['price'] = (float) hh_meta( 'hh_price' ) * 1000000;
-		if ( 'thue' === hh_meta( 'hh_deal' ) ) {
+		if ( (float) hh_meta( 'hh_price_max' ) > (float) hh_meta( 'hh_price' ) ) {
+			// Tin tổng hợp khoảng giá.
+			$data['offers']['@type']     = 'AggregateOffer';
+			$data['offers']['lowPrice']  = $data['offers']['price'];
+			$data['offers']['highPrice'] = (float) hh_meta( 'hh_price_max' ) * 1000000;
+			unset( $data['offers']['price'] );
+		} elseif ( 'thue' === hh_meta( 'hh_deal' ) ) {
 			$data['offers']['priceSpecification'] = array( '@type' => 'UnitPriceSpecification', 'price' => $data['offers']['price'], 'priceCurrency' => 'VND', 'unitCode' => 'MON' );
 		}
 	}
@@ -870,21 +884,17 @@ foreach ( array( 'rank_math/frontend/description', 'rank_math/opengraph/facebook
 }
 unset( $hh_filter );
 
-/** Ảnh chia sẻ trang chủ: dùng ảnh banner / chân dung khi plugin SEO không có ảnh hoặc lấy nhầm icon nhỏ. */
-add_filter(
-	'rank_math/opengraph/facebook/image',
-	static function ( $img ) {
-		return is_front_page() && ( ! $img || preg_match( '/icon|@\d+x\d+|\.svg/i', (string) $img ) ) ? hh_seo_image() : $img;
-	},
-	99
-);
-add_filter(
-	'wpseo_opengraph_image',
-	static function ( $img ) {
-		return is_front_page() && ( ! $img || preg_match( '/icon|@\d+x\d+|\.svg/i', (string) $img ) ) ? hh_seo_image() : $img;
-	},
-	99
-);
+/** Ảnh chia sẻ trang chủ / giới thiệu: luôn dùng ảnh ngang 1200×630 (không để plugin SEO lấy ảnh dọc hay icon nhỏ). */
+foreach ( array( 'rank_math/opengraph/facebook/image', 'rank_math/opengraph/twitter/image', 'wpseo_opengraph_image', 'wpseo_twitter_image' ) as $hh_filter ) {
+	add_filter(
+		$hh_filter,
+		static function ( $img ) {
+			return is_front_page() || is_page( 'gioi-thieu' ) || ( ! $img || preg_match( '/icon|@\d+x\d+|\.svg/i', (string) $img ) ) ? ( hh_seo_image() ?: $img ) : $img;
+		},
+		99
+	);
+}
+unset( $hh_filter );
 
 /* -------------------------------------------------------------------------
  * Rank Math: đưa Dự án, Nhà đất và các trang loại dự án / khu vực vào sitemap (kể cả khi chưa bật trong cài đặt),

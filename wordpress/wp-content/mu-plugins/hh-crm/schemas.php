@@ -243,6 +243,8 @@ function hh_listing_schema() {
 					'da-giao-dich' => 'Đã giao dịch',
 				) ),
 				'hh_price'      => array( 'type' => 'number', 'label' => 'Giá (triệu đồng) – cho thuê: triệu/tháng', 'placeholder' => 'VD: 3200 (= 3,2 tỷ) hoặc 12', 'half' => true, 'help' => 'Để trống sẽ hiện "Thỏa thuận".' ),
+				'hh_price_max'  => array( 'type' => 'number', 'label' => 'Giá đến (triệu) – nếu là khoảng giá', 'placeholder' => 'VD: 6800 → hiện "3,6 – 6,8 tỷ"', 'half' => true ),
+				'hh_price_from' => array( 'type' => 'select', 'label' => 'Chữ trước giá', 'half' => true, 'options' => array( '' => 'Không', '1' => 'Từ …', '2' => 'Khoảng …' ) ),
 				'hh_negotiable' => array( 'type' => 'checkbox', 'label' => 'Giá còn thương lượng', 'half' => true ),
 				'hh_address'    => array( 'type' => 'text', 'label' => 'Địa chỉ', 'placeholder' => 'VD: 123 Võ Nguyên Giáp, Ngũ Hành Sơn, Đà Nẵng' ),
 				'hh_project'    => array( 'type' => 'post', 'label' => 'Thuộc dự án', 'post_type' => 'du-an', 'half' => true, 'help' => 'Tin sẽ hiện ở mục "Chuyển nhượng & cho thuê" của trang dự án.' ),

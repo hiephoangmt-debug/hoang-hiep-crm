@@ -727,8 +727,9 @@ function hh_import_projects() {
 			update_post_meta( $child->ID, 'hh_p_parent', $parent->ID );
 		}
 	}
-	$news = function_exists( 'hh_import_news' ) ? hh_import_news() : 0;
-	return array( $created, $updated, $news );
+	$news     = function_exists( 'hh_import_news' ) ? hh_import_news() : 0;
+	$listings = function_exists( 'hh_import_listings' ) ? hh_import_listings() : 0;
+	return array( $created, $updated, $news, $listings );
 }
 
 /* -------------------------------------------------------------------------
@@ -753,7 +754,7 @@ function hh_import_page() {
 	<div class="wrap">
 		<h1>Nhập dữ liệu dự án Đà Nẵng – Quảng Nam</h1>
 		<?php if ( $result ) : ?>
-			<div class="notice notice-success"><p>Đã tạo <?php echo (int) $result[0]; ?> dự án mới, cập nhật <?php echo (int) $result[1]; ?> dự án có sẵn, đăng <?php echo (int) ( $result[2] ?? 0 ); ?> bài tin tức mới.</p></div>
+			<div class="notice notice-success"><p>Đã tạo <?php echo (int) $result[0]; ?> dự án mới, cập nhật <?php echo (int) $result[1]; ?> dự án có sẵn, đăng <?php echo (int) ( $result[2] ?? 0 ); ?> bài tin tức mới, <?php echo (int) ( $result[3] ?? 0 ); ?> tin mua bán / cho thuê mới.</p></div>
 		<?php endif; ?>
 		<p>Tạo sẵn <?php echo count( hh_project_dataset() ); ?> dự án (căn hộ, căn hộ dịch vụ, biệt thự nghỉ dưỡng, shophouse, đất nền) với thông tin công khai: chủ đầu tư, vị trí, quy mô, tình trạng. <strong>Giá bán để trống</strong> – website hiển thị "Liên hệ".</p>
 		<p>Chạy lại nhiều lần không tạo trùng. Ô bạn đã tự nhập sẽ không bị ghi đè. Sau khi nhập, hãy thêm <strong>ảnh đại diện</strong> cho từng dự án và kiểm tra lại số liệu với chủ đầu tư.</p>

@@ -449,7 +449,20 @@ function hh_listing_code( $post_id = null ) {
 
 function hh_listing_price( $post_id = null ) {
 	$post_id = $post_id ?: get_the_ID();
-	return hh_format_price( hh_meta( 'hh_price', $post_id ), 'thue' === hh_meta( 'hh_deal', $post_id ) );
+	$rent = 'thue' === hh_meta( 'hh_deal', $post_id );
+	$min  = (float) hh_meta( 'hh_price', $post_id );
+	$max  = (float) hh_meta( 'hh_price_max', $post_id );
+	if ( $min > 0 && $max > $min ) {
+		// Khoảng giá: "3,6 – 6,8 tỷ", "850 triệu – 1,2 tỷ", "23 – 30 triệu/tháng".
+		$a = hh_format_price( $min );
+		$b = hh_format_price( $max );
+		if ( ( $min >= 1000 ) === ( $max >= 1000 ) ) {
+			$a = preg_replace( '/\s(tỷ|triệu)$/u', '', $a );
+		}
+		return $a . ' – ' . $b . ( $rent ? '/tháng' : '' );
+	}
+	$prefix = array( '1' => 'Từ ', '2' => 'Khoảng ' );
+	return ( $min > 0 ? ( $prefix[ (string) hh_meta( 'hh_price_from', $post_id ) ] ?? '' ) : '' ) . hh_format_price( hh_meta( 'hh_price', $post_id ), $rent );
 }
 
 /** Price per m² for sale listings, e.g. "44,4 triệu/m²". */
@@ -457,7 +470,7 @@ function hh_listing_price_m2( $post_id = null ) {
 	$post_id = $post_id ?: get_the_ID();
 	$price   = (float) hh_meta( 'hh_price', $post_id );
 	$area    = (float) hh_meta( 'hh_area', $post_id );
-	if ( 'thue' === hh_meta( 'hh_deal', $post_id ) || $price <= 0 || $area <= 0 ) {
+	if ( 'thue' === hh_meta( 'hh_deal', $post_id ) || $price <= 0 || $area <= 0 || (float) hh_meta( 'hh_price_max', $post_id ) > $price ) {
 		return '';
 	}
 	return rtrim( rtrim( number_format( $price / $area, 1, ',', '.' ), '0' ), ',' ) . ' triệu/m²';
