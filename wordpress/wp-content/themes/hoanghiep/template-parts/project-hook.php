@@ -4,9 +4,10 @@
  * Dữ liệu: Ưu đãi nổi bật, Con số nổi bật, Hạn ưu đãi (tab Giá & chính sách); không có thì lấy 3 điểm nổi bật.
  */
 $title    = get_the_title();
-$stats    = array_slice( hh_table( 'hh_p_offer_stats', 2 ), 0, 4 );
-$offer    = hh_meta( 'hh_p_offer_title' );
-$points   = $stats ? array() : array_slice( hh_lines( 'hh_p_highlights' ), 0, 3 );
+// Con số nổi bật đã hiện ở khung form đầu trang → ở đây dùng 3 điểm nổi bật (không lặp lại).
+$stats    = array();
+$offer    = '';
+$points   = array_slice( hh_lines( 'hh_p_highlights' ), 0, 3 );
 $deadline = hh_parse_vn_date( hh_meta( 'hh_p_offer_deadline' ) );
 $days     = $deadline && $deadline > time() ? max( 1, (int) floor( ( $deadline - time() ) / DAY_IN_SECONDS ) ) : 0;
 if ( ! $stats && ! $offer && ! $points ) {

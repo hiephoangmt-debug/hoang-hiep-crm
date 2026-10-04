@@ -1213,3 +1213,13 @@ html.nav-locked, html.nav-locked body { overflow: hidden; }
 	.hook__stats { grid-template-columns: 1fr 1fr; }
 	.hook__actions .btn { width: 100%; }
 }
+
+/* Khung form đầu trang dự án: con số ưu đãi */
+.hero-offer__headline { margin: 0 0 12px; font-family: var(--font-display); font-size: 1.25rem; line-height: 1.3; color: var(--navy); }
+.hero-offer__headline em { font-style: normal; color: var(--cta); }
+.hero-offer__stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 10px; padding: 0; list-style: none; }
+.hero-offer__stats li { padding: 10px 6px; border-radius: 8px; background: var(--gold-soft); text-align: center; line-height: 1.25; }
+.hero-offer__stats b { display: block; font-family: var(--font-display); font-size: 1.45rem; line-height: 1.1; color: var(--cta); }
+.hero-offer__stats span { font-size: .78rem; color: var(--text); }
+.hero-offer__deadline { display: flex; align-items: center; gap: 6px; margin: 0 0 12px; font-size: .85rem; font-weight: 700; color: var(--cta-2); }
+.hero-offer__deadline svg { width: 16px; height: 16px; }

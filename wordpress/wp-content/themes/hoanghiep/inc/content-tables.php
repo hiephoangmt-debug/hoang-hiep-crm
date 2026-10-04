@@ -74,7 +74,7 @@ function hoanghiep_project_dedupe( $html ) {
 		'/^pháp lý/u'                         => $has( 'hh_p_legal' ),
 		'/^(câu hỏi|hỏi đáp)/u'               => $has( 'hh_p_faq' ),
 	);
-	// Con số chính đã hiện ở khung mở đầu (Con số nổi bật) – bỏ khối số liệu lặp lại trong bài.
+	// Con số chính đã hiện ở khung form đầu trang (Con số nổi bật) – bỏ khối số liệu lặp lại trong bài.
 	if ( $has( 'hh_p_offer_stats' ) && false !== strpos( $html, 'lp-stats' ) ) {
 		$html = preg_replace( '#<div class="lp-stats">.*?</div>#s', '', $html, 1 );
 		$html = preg_replace( '#\s*\d+ con số [^<:]*:(</p>)#u', '$1', $html, 1 );

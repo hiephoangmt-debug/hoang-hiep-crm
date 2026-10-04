@@ -109,9 +109,6 @@ while ( have_posts() ) :
 				<?php if ( $resale ) : ?>
 					<a class="btn btn--gold" href="#giao-dich">Xem căn chuyển nhượng &amp; cho thuê</a>
 				<?php endif; ?>
-				<?php if ( ! $resale && ! empty( $compact ) ) : ?>
-					</details>
-				<?php endif; ?>
 				<?php if ( hh_meta( 'hh_p_pricelist_url' ) ) : ?>
 					<a class="btn btn--ghost" href="<?php echo esc_url( hh_meta( 'hh_p_pricelist_url' ) ); ?>" target="_blank" rel="noopener"><?php echo hh_icon( 'file' ); // phpcs:ignore ?> Tải brochure</a>
 				<?php endif; ?>
@@ -119,7 +116,23 @@ while ( have_posts() ) :
 			</div>
 			<aside class="hero-offer">
 				<p class="hero-offer__title"><?php echo hh_icon( 'gift' ); // phpcs:ignore ?> <?php echo esc_html( $resale ? 'Căn chuyển nhượng, cho thuê đang có' : 'Ưu đãi & chính sách tháng ' . wp_date( 'm/Y' ) ); ?></p>
-				<?php hh_check_list( $resale ? array( 'Danh sách căn bán, cho thuê kèm giá thật – cập nhật hằng tuần', 'Định giá miễn phí, kiểm tra sổ hồng trước khi giao dịch', 'Ký gửi bán / cho thuê căn của bạn' ) : hh_project_offer() ); ?>
+				<?php $hero_stats = $resale ? array() : array_slice( hh_table( 'hh_p_offer_stats', 2 ), 0, 4 ); ?>
+				<?php if ( $hero_stats ) : ?>
+					<?php $hero_dl = hh_parse_vn_date( hh_meta( 'hh_p_offer_deadline' ) ); ?>
+					<?php if ( hh_meta( 'hh_p_offer_title' ) ) : ?>
+						<p class="hero-offer__headline"><?php echo wp_kses( preg_replace( '/(\d+(?:[.,]\d+)?\s?%)/u', '<em>$1</em>', esc_html( hh_meta( 'hh_p_offer_title' ) ) ), array( 'em' => array() ) ); ?></p>
+					<?php endif; ?>
+					<ul class="hero-offer__stats">
+						<?php foreach ( $hero_stats as list( $num, $label ) ) : ?>
+							<li><b><?php echo esc_html( $num ); ?></b><span><?php echo esc_html( $label ); ?></span></li>
+						<?php endforeach; ?>
+					</ul>
+					<?php if ( $hero_dl && $hero_dl > time() ) : ?>
+						<p class="hero-offer__deadline"><?php echo hh_icon( 'clock' ); // phpcs:ignore ?> Còn <?php echo esc_html( (string) max( 1, (int) floor( ( $hero_dl - time() ) / DAY_IN_SECONDS ) ) ); ?> ngày – hạn <?php echo esc_html( wp_date( 'd/m/Y', $hero_dl ) ); ?></p>
+					<?php endif; ?>
+				<?php else : ?>
+					<?php hh_check_list( $resale ? array( 'Danh sách căn bán, cho thuê kèm giá thật – cập nhật hằng tuần', 'Định giá miễn phí, kiểm tra sổ hồng trước khi giao dịch', 'Ký gửi bán / cho thuê căn của bạn' ) : hh_project_offer() ); ?>
+				<?php endif; ?>
 				<?php
 				echo hh_lead_form( // phpcs:ignore
 					array(
@@ -402,6 +415,9 @@ while ( have_posts() ) :
 						<h3 class="block__sub">Chương trình cho thuê &amp; lợi nhuận</h3>
 						<p class="prose"><?php echo nl2br( esc_html( hh_meta( 'hh_p_rental' ) ) ); ?></p>
 					</div>
+				<?php endif; ?>
+				<?php if ( ! $resale && ! empty( $compact ) ) : ?>
+					</details>
 				<?php endif; ?>
 				<?php if ( hh_meta( 'hh_p_pricelist_url' ) ) : ?>
 					<p><a class="btn btn--outline" href="<?php echo esc_url( hh_meta( 'hh_p_pricelist_url' ) ); ?>" target="_blank" rel="noopener"><?php echo hh_icon( 'file' ); // phpcs:ignore ?> Tải bảng giá / brochure</a></p>
