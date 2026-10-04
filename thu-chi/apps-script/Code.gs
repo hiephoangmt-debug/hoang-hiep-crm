@@ -1,39 +1,52 @@
 /**
  * Thu Chi Mẹ Vân – máy chủ đồng bộ chạy trên Google Apps Script.
+ * Hướng dẫn: thu-chi/HUONG-DAN-DONG-BO.md
  *
- * Cách dùng: xem thu-chi/HUONG-DAN-DONG-BO.md
- *  1. Tạo Google Sheet mới → Tiện ích mở rộng → Apps Script.
- *  2. Dán file này vào Code.gs, tạo thêm file HTML tên "Index" và dán nội dung thu-chi/index.html.
- *  3. Đổi MA_BAO_MAT bên dưới, chạy hàm caiDat() một lần và cấp quyền.
- *  4. Triển khai → Tùy chọn triển khai mới → Ứng dụng web
- *     (Thực thi với tư cách: Tôi, Người có quyền truy cập: Bất kỳ ai).
+ * Chỉ cần dán file này vào Code.gs của Apps Script (gắn với 1 Google Sheet) rồi
+ * Triển khai → Ứng dụng web. Giao diện app được tự tải từ GitHub (APP_URL).
+ * Mã bảo mật: lần Kết nối đầu tiên trong app, mã được nhập sẽ trở thành mã bảo mật.
  */
 
-// ĐỔI mã này thành mã riêng của gia đình (dài, khó đoán), rồi chạy hàm caiDat()
-const MA_BAO_MAT = 'doi-ma-nay-thanh-ma-rieng-cua-nha-minh';
+// Địa chỉ giao diện app (file index.html trên GitHub)
+const APP_URL = 'https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/claude/quirky-knuth-tncnth/thu-chi/index.html';
 
 const SHEET_DATA = '_data';        // sheet ẩn chứa toàn bộ dữ liệu (JSON)
 const SHEET_SO = 'Sổ thu chi';     // bản xem dạng bảng, tự cập nhật sau mỗi lần lưu
 const SHEET_THANG = 'Tổng hợp tháng';
 const CHUNK = 40000;               // mỗi ô Google Sheet chứa tối đa 50.000 ký tự
 
-/** Chạy 1 lần sau khi dán code: lưu mã bảo mật và tạo các sheet. */
-function caiDat() {
-  if (!MA_BAO_MAT || MA_BAO_MAT.indexOf('doi-ma-nay') === 0) throw new Error('Hãy đổi MA_BAO_MAT trước khi chạy caiDat()');
-  PropertiesService.getScriptProperties().setProperty('SYNC_KEY', MA_BAO_MAT);
-  dataSheet_();
-  Logger.log('Đã cài đặt xong. Tiếp theo: Triển khai → Tùy chọn triển khai mới → Ứng dụng web.');
+/** Quên mã / muốn đổi mã: chạy hàm này, lần Kết nối tiếp theo trong app sẽ đặt mã mới. */
+function xoaMaBaoMat() {
+  PropertiesService.getScriptProperties().deleteProperty('SYNC_KEY');
+  Logger.log('Đã xóa mã bảo mật. Mở app → Cài đặt → Kết nối với mã mới.');
 }
 
 function doGet(e) {
   const p = (e && e.parameter) || {};
   if (p.action) return handle_(p.action, p);
-  const t = HtmlService.createTemplateFromFile('Index');
+  const t = appTemplate_();
   t.syncUrl = ScriptApp.getService().getUrl();
   return t.evaluate()
     .setTitle('Thu Chi Mẹ Vân')
     .addMetaTag('viewport', 'width=device-width, initial-scale=1')
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+}
+
+// Lấy giao diện app: ưu tiên bản trên GitHub (lưu tạm 6 giờ), nếu lỗi thì dùng file HTML "Index" (nếu có)
+function appTemplate_() {
+  const cache = CacheService.getScriptCache();
+  let html = cache.get('app_html');
+  if (!html) {
+    try {
+      const r = UrlFetchApp.fetch(APP_URL, { muteHttpExceptions: true });
+      if (r.getResponseCode() === 200) {
+        html = r.getContentText('UTF-8');
+        try { cache.put('app_html', html, 21600); } catch (e) {}
+      }
+    } catch (e) {}
+  }
+  if (html) return HtmlService.createTemplate(html);
+  return HtmlService.createTemplateFromFile('Index');
 }
 
 function doPost(e) {
@@ -43,8 +56,15 @@ function doPost(e) {
 }
 
 function handle_(action, p) {
-  const key = PropertiesService.getScriptProperties().getProperty('SYNC_KEY');
-  if (!key) return json_({ ok: false, error: 'Chưa chạy hàm caiDat() trong Apps Script' });
+  const props = PropertiesService.getScriptProperties();
+  let key = props.getProperty('SYNC_KEY');
+  if (!key) {
+    // Lần kết nối đầu tiên: mã người dùng nhập trở thành mã bảo mật
+    const k = String(p.key || '');
+    if (k.length < 6) return json_({ ok: false, error: 'Lần đầu kết nối: hãy đặt mã bảo mật từ 6 ký tự trở lên' });
+    props.setProperty('SYNC_KEY', k);
+    key = k;
+  }
   if (String(p.key || '') !== key) return json_({ ok: false, error: 'Sai mã bảo mật' });
 
   if (action === 'load') return json_({ ok: true, rev: getRev_(), data: readData_() });

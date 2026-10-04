@@ -1,81 +1,75 @@
-# Hướng dẫn đồng bộ dữ liệu Thu Chi (Google Sheets)
+# Hướng dẫn cài đồng bộ Thu Chi (Google Sheets) – từng bước
 
-Sau khi cài xong, cả nhà mở **cùng một đường link** trên điện thoại và máy tính. Dữ liệu tự đồng bộ: khi lưu và khoảng 30 giây một lần khi đang mở app. Toàn bộ dữ liệu nằm trong Google Sheet của mẹ, có sẵn bảng **"Sổ thu chi"** và **"Tổng hợp tháng"** để xem như Excel.
-
-Thời gian cài: khoảng 10 phút, chỉ làm **một lần**, trên máy tính.
+Cài **một lần trên máy tính**, mất khoảng 10 phút. Không phải sửa code, chỉ cần dán một lần.
 
 ---
 
-## Bước 1 – Tạo Google Sheet
-1. Vào <https://sheets.google.com> (đăng nhập Gmail của mẹ) → **Trang tính trống**.
-2. Đặt tên, ví dụ: `Thu Chi Mẹ Vân`.
+## BƯỚC 1 – Lấy đoạn code
+1. Trên máy tính, mở link sau bằng Chrome:
+   **https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/claude/quirky-knuth-tncnth/thu-chi/apps-script/Code.gs**
+2. Trang chỉ có chữ (code). Bấm **Ctrl + A** để chọn hết, rồi **Ctrl + C** để sao chép.
+   (Máy Mac: **⌘ + A**, rồi **⌘ + C**.)
 
-## Bước 2 – Mở Apps Script và dán code
-1. Trong Sheet: menu **Tiện ích mở rộng → Apps Script**.
-2. Ở file `Code.gs`: xóa hết nội dung cũ, dán toàn bộ nội dung file **`thu-chi/apps-script/Code.gs`**.
-3. Sửa dòng:
-   ```js
-   const MA_BAO_MAT = 'doi-ma-nay-thanh-ma-rieng-cua-nha-minh';
-   ```
-   thành một mã riêng, dài và khó đoán, ví dụ `'vanmon-2026-ab83kq'`. **Ghi lại mã này**, vì sẽ cần nhập trên mỗi máy.
-4. Bấm dấu **＋** cạnh "Tệp" → **HTML** → đặt tên đúng là **`Index`** (không gõ đuôi `.html`).
-   Xóa nội dung mặc định, dán toàn bộ nội dung file **`thu-chi/index.html`**.
-5. Bấm **💾 Lưu** (Ctrl+S).
+## BƯỚC 2 – Tạo Google Sheet
+1. Mở tab mới, vào **https://sheets.google.com** và đăng nhập Gmail của mẹ.
+2. Bấm **Trang tính trống** (ô có dấu **+** lớn).
+3. Bấm chữ "Bảng tính không có tiêu đề" ở góc trái và đặt tên: **Thu Chi Mẹ Vân**.
 
-## Bước 3 – Chạy cài đặt và cấp quyền
-1. Ở thanh trên cùng, chọn hàm **`caiDat`** → bấm **▶ Chạy**.
-2. Google hỏi quyền → **Xem xét quyền** → chọn tài khoản của mẹ.
-3. Nếu hiện "Google chưa xác minh ứng dụng này": bấm **Nâng cao → Đi tới … (không an toàn)** → **Cho phép**.
-   (Đây là script do chính mình tạo, chỉ đọc/ghi Sheet này.)
-4. Nhật ký hiện "Đã cài đặt xong" là được.
+## BƯỚC 3 – Dán code vào Apps Script
+1. Trên thanh menu của Sheet, bấm **Tiện ích mở rộng** → **Apps Script**. Một tab mới mở ra.
+2. Trong khung soạn code có sẵn mấy dòng `function myFunction() {...}`:
+   - bấm vào khung code;
+   - **Ctrl + A** để chọn hết, rồi bấm phím **Delete** để xóa;
+   - **Ctrl + V** để dán code đã sao chép ở Bước 1.
+3. Bấm biểu tượng **💾 (Lưu dự án)**, hoặc **Ctrl + S**.
 
-## Bước 4 – Triển khai thành ứng dụng web
-1. Bấm **Triển khai → Tùy chọn triển khai mới**.
-2. Bấm ⚙ cạnh "Chọn loại" → **Ứng dụng web**.
-3. Điền:
-   - **Thực thi với tư cách:** `Tôi`
-   - **Người có quyền truy cập:** `Bất kỳ ai`
-     (cần chọn mục này để điện thoại mở được mà không phải đăng nhập. Dữ liệu vẫn được bảo vệ bằng mã bảo mật.)
-4. Bấm **Triển khai** → sao chép **URL ứng dụng web** (dạng `https://script.google.com/macros/s/…/exec`).
+## BƯỚC 4 – Triển khai thành ứng dụng web
+1. Góc trên bên phải, bấm nút xanh **Triển khai** → **Tùy chọn triển khai mới**.
+2. Cạnh chữ "Chọn loại", bấm **⚙ (bánh răng)** → chọn **Ứng dụng web**.
+3. Điền như sau:
+   - **Mô tả:** Thu chi
+   - **Thực thi với tư cách:** **Tôi (email của mẹ)**
+   - **Người có quyền truy cập:** **Bất kỳ ai**
+4. Bấm **Triển khai**.
+5. Google yêu cầu cấp quyền. Bấm **Cấp quyền truy cập** → chọn tài khoản Gmail của mẹ.
+   - Nếu hiện **"Google chưa xác minh ứng dụng này"**: bấm **Nâng cao** (chữ nhỏ bên dưới) → **Đi tới Dự án không có tiêu đề (không an toàn)** → **Cho phép**.
+     Script này là của chính nhà mình, chỉ đọc và ghi vào Sheet này.
+6. Hiện ra **URL ứng dụng web** (bắt đầu bằng `https://script.google.com/macros/s/` và kết thúc bằng `/exec`). Bấm **Sao chép**, rồi **Xong**.
 
-## Bước 5 – Mở app và kết nối
-1. Mở URL vừa sao chép bằng trình duyệt.
-2. Bấm nút **☁ Chưa đồng bộ** ở góc trên (hoặc vào tab **Cài đặt**).
-3. Ô **Địa chỉ đồng bộ** đã được điền sẵn. Nhập **Mã bảo mật** → bấm **Kết nối**.
-4. Thấy **☁ Đã đồng bộ hh:mm** là xong. Dữ liệu tháng 8/2026 có sẵn sẽ được đưa lên Sheet.
+## BƯỚC 5 – Mở app và đặt mã bảo mật
+1. Dán URL vừa sao chép vào thanh địa chỉ của Chrome rồi bấm Enter. App Thu Chi hiện ra.
+   (Dòng chữ xám phía trên "Ứng dụng này do người dùng Google Apps Script tạo" là bình thường.)
+2. Bấm nút **☁ Chưa đồng bộ** ở góc trên.
+3. Ô **Địa chỉ đồng bộ** đã được điền sẵn.
+4. Ô **Mã bảo mật**: **tự nghĩ một mã** từ 6 ký tự trở lên, ví dụ `vanmon2026`. **Ghi mã này ra giấy.**
+   Lần kết nối đầu tiên, mã này trở thành mã của cả nhà.
+5. Bấm **Kết nối**. Góc trên đổi thành **☁ Đã đồng bộ hh:mm** là xong.
+   Mở lại tab Google Sheet sẽ thấy 2 bảng mới: **Sổ thu chi** và **Tổng hợp tháng**.
 
-## Bước 6 – Dùng trên điện thoại (và máy của người khác trong nhà)
-1. Gửi URL qua Zalo cho mình hoặc cho người nhà, rồi mở trên điện thoại.
-2. Vào **Cài đặt** → nhập **Mã bảo mật** → **Kết nối**.
-   Khi app hỏi "Google Sheet đã có … giao dịch", bấm **OK** để dùng dữ liệu trên Sheet.
-3. Thêm vào màn hình chính để mở nhanh như một app:
-   - **iPhone (Safari):** nút Chia sẻ → **Thêm vào MH chính**.
-   - **Android (Chrome):** menu ⋮ → **Thêm vào màn hình chính**.
+## BƯỚC 6 – Cài trên điện thoại (mẹ, bố, người nhà)
+1. Gửi **URL ở Bước 4** qua Zalo, rồi bấm mở trên điện thoại.
+2. Bấm **☁ Chưa đồng bộ** → nhập **đúng mã bảo mật** ở Bước 5 → **Kết nối**.
+3. App hỏi "Google Sheet đã có … giao dịch" → bấm **OK**.
+4. Đưa app ra màn hình chính để lần sau mở nhanh:
+   - **iPhone:** mở link bằng **Safari** → nút **Chia sẻ** (ô vuông có mũi tên lên) → **Thêm vào MH chính**.
+   - **Android:** mở bằng **Chrome** → nút **⋮** → **Thêm vào màn hình chính**.
+
+✅ **Xong!** Từ giờ nhập ở máy nào thì các máy khác cũng tự cập nhật, chậm nhất khoảng 30 giây.
 
 ---
 
-## Câu hỏi thường gặp
+## Gặp lỗi?
 
-**Mất mạng thì sao?**
-Vẫn ghi được bình thường, vì dữ liệu luôn được lưu trên máy. Khi có mạng lại, app tự đồng bộ. Trong lúc mất mạng, góc trên hiện "⚠ Mất mạng – sẽ đồng bộ lại".
+| Thông báo | Cách xử lý |
+|---|---|
+| "Địa chỉ đồng bộ không đúng hoặc chưa cấp quyền…" | Làm lại Bước 4, chú ý chọn **Bất kỳ ai**. URL phải kết thúc bằng `/exec`. |
+| "Sai mã bảo mật" | Nhập lại đúng mã (phân biệt chữ hoa, chữ thường). |
+| Quên mã bảo mật | Vào Apps Script → ô chọn hàm phía trên chọn **xoaMaBaoMat** → bấm **▶ Chạy**. Sau đó Kết nối lại trong app với mã mới; mã mới cần nhập lại trên mọi máy. |
+| Trang trắng, không hiện app | Đợi vài giây rồi tải lại trang. Nếu vẫn lỗi, kiểm tra Bước 3 đã bấm **Lưu** chưa, rồi làm lại Bước 4. |
+| Sửa code xong nhưng app chưa đổi | **Triển khai → Quản lý các bản triển khai** → ✏ → Phiên bản: **Phiên bản mới** → **Triển khai**. URL giữ nguyên. |
 
-**Hai người cùng nhập một lúc có mất dữ liệu không?**
-Không. App tự gộp dữ liệu: khoản thêm ở máy nào cũng được giữ, khoản xóa ở máy nào cũng bị xóa. Nếu hai máy cùng sửa **một** khoản, bản sửa sau cùng được giữ.
-
-**Sửa trực tiếp trong Google Sheet được không?**
-Sheet "Sổ thu chi" và "Tổng hợp tháng" **chỉ để xem**, vì được ghi đè sau mỗi lần đồng bộ. Mọi thay đổi hãy làm trong app. **Không xóa hoặc sửa sheet ẩn `_data`**, vì đó là nơi chứa dữ liệu thật.
-
-**Cập nhật app khi có phiên bản mới?**
-Dán nội dung `index.html` mới vào file `Index` trong Apps Script → **Triển khai → Quản lý các bản triển khai** → ✏ → Phiên bản: **Phiên bản mới** → **Triển khai**. URL giữ nguyên.
-
-**Đổi mã bảo mật?**
-Sửa `MA_BAO_MAT` → chạy lại `caiDat` → nhập mã mới trên từng máy (Cài đặt → Ngắt kết nối → Kết nối).
-
-**Sao lưu?**
-Google Sheet có sẵn lịch sử phiên bản (Tệp → Nhật ký phiên bản). Mẹ cũng có thể bấm **Tải bản sao lưu (.json)** trong tab Cài đặt.
-
-**Báo "Địa chỉ đồng bộ không đúng hoặc chưa cấp quyền 'Bất kỳ ai'"?**
-Kiểm tra lại Bước 4: phải chọn **Bất kỳ ai**, và URL phải kết thúc bằng `/exec`.
-
-**Báo "Sai mã bảo mật"?**
-Nhập lại đúng mã đã đặt ở Bước 2 (phân biệt chữ hoa, chữ thường).
+## Lưu ý
+- Hai bảng **Sổ thu chi** và **Tổng hợp tháng** trong Google Sheet chỉ để **xem**. Thêm, sửa, xóa hãy làm trong app.
+- **Không xóa sheet ẩn `_data`**, vì đó là nơi chứa dữ liệu thật.
+- Mất mạng vẫn nhập được, có mạng lại app tự đồng bộ.
+- Khi app có bản mới trên GitHub, app trong Sheet tự cập nhật trong vòng 6 giờ, không cần làm gì.

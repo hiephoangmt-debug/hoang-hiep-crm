@@ -771,7 +771,7 @@ function settings() {
         <h3>Đồng bộ nhiều máy (Google Sheets)</h3>
         <p class="small muted" style="margin-top:0">Kết nối với Google Sheet để dùng chung dữ liệu trên điện thoại, máy tính của cả nhà. Xem hướng dẫn trong file <b>HUONG-DAN-DONG-BO.md</b>.</p>
         <label class="f">Địa chỉ đồng bộ (Web App URL)<input id="syUrl" value="${esc(SY.cfg.url || '')}" placeholder="https://script.google.com/macros/s/…/exec" ${injectedUrl.startsWith('https://') ? 'readonly' : ''}></label>
-        <label class="f" style="margin-top:8px">Mã bảo mật<input id="syKey" type="password" value="${esc(SY.cfg.key || '')}" placeholder="mã đã đặt trong Apps Script"></label>
+        <label class="f" style="margin-top:8px">Mã bảo mật<input id="syKey" type="password" value="${esc(SY.cfg.key || '')}" placeholder="lần đầu: tự đặt mã từ 6 ký tự"></label>
         <div class="actions" style="justify-content:flex-start;margin-top:10px">
           ${syncOn() ? `<button class="btn primary" id="syNow">Đồng bộ ngay</button><button class="btn" id="syOff">Ngắt kết nối</button>` : `<button class="btn primary" id="syConnect">Kết nối</button>`}
         </div>
