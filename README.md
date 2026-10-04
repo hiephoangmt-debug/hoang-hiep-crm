@@ -9,6 +9,7 @@ CRM – Real Estate Sales Management System
 - **Sổ thu chi**: các khoản đã thu/chi trong tháng, lọc theo loại, nhóm (cố định/phát sinh), danh mục, tìm kiếm.
 - **Lịch sử**: toàn bộ giao dịch mọi tháng (lọc theo khoảng ngày, danh mục, tìm kiếm) + nhật ký thêm/sửa/xóa trên mọi máy.
 - **Thống kê**: 12 tháng trong năm – thu, chi, cố định, phát sinh, tồn, tồn lũy kế, % tiết kiệm, chi theo danh mục từng tháng.
+- **Ảnh chụp**: chụp/chọn ảnh bảng thu chi → đọc chữ tiếng Việt ngay trên máy (Tesseract.js), tự tách cột Ngày/Diễn giải/Thu/Chi, đối chiếu dòng TỔNG CỘNG, cho sửa trước khi nhập.
 - **Excel**: nhập bằng cách dán từ Excel hoặc chọn file .xlsx/.csv (tự nhận mẫu "THU CHI THÁNG"); xuất Excel theo tháng / năm / bộ lọc.
 - **Kế hoạch sắp tới**: khoản cố định hằng tháng + kế hoạch riêng, bấm "Đã chi/Đã thu" để ghi sổ, khoản quá hạn, dự báo tháng sau.
 - **Ngân sách**: đặt ngân sách theo danh mục (mặc định hoặc riêng từng tháng), theo dõi % đã dùng.

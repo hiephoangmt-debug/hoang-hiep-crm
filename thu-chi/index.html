@@ -923,7 +923,7 @@ function loadXLSX() {
 }
 const norm = s => String(s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/\s+/g, ' ').trim();
 const CAT_RULES = [
-  ['dong_nha', /dong tien (fpt|can ho|nha)|\bdot \d/], ['lai_vay', /lai (can ho|vay|nha)/], ['bao_hiem', /bhxh|bhyt|bao hiem/],
+  ['dong_nha', /dong ?tien ?(fpt|can ?ho|nha)|\bdot ?\d|fpt ?dot/], ['lai_vay', /lai (can ho|vay|nha)/], ['bao_hiem', /bhxh|bhyt|bao hiem/],
   ['con', /\bmon\b|hoc phi|\bhoc\b|sua\b|bim|ta\b/], ['di_lai', /xang|bai xe|gui xe|grab|taxi|ve xe|ve may bay|sua xe|rua xe/],
   ['hoa_don', /\bdien\b|\bnuoc\b|card|internet|wifi|\bnet\b|truyen hinh|cuoc/], ['y_te', /thuoc|kham|benh vien|nha khoa|vitamin/],
   ['hieu_hi', /cung|chua|dam (ma|cuoi|gio)|\bsn\b|sinh nhat|cuoi|mung|\ble\b|than tai|ram|gio/], ['giao_luu', /nhau|karaoke|bia|tiec/],
@@ -934,7 +934,7 @@ function guessCat(desc, type) {
   const n = norm(desc).replace(/\bt\d{1,2}\b/g, '').replace(/\d+/g, '').trim();
   const hit = S.tx.filter(t => t.type === type && norm(t.desc).replace(/\bt\d{1,2}\b/g, '').replace(/\d+/g, '').trim() === n).sort((a, b) => (b.u || 0) - (a.u || 0))[0];
   if (hit && S.categories.some(c => c.id === hit.cat)) return hit.cat;
-  if (type === 'thu') return /luong|hoa hong|thuong/.test(n) ? 'luong' : (S.categories.find(c => c.id === 'thu_khac') || S.categories.find(c => c.kind === 'thu'))?.id;
+  if (type === 'thu') return /luong|hoa hong|thuong (thang|tet|quy|nam|du an)|^thuong$/.test(n) ? 'luong' : (S.categories.find(c => c.id === 'thu_khac') || S.categories.find(c => c.kind === 'thu'))?.id;
   for (const [c, re] of CAT_RULES) if (re.test(n) && S.categories.some(x => x.id === c)) return c;
   return (S.categories.find(c => c.id === 'khac') || S.categories.find(c => c.kind === 'chi'))?.id;
 }
@@ -957,7 +957,7 @@ function cellMoney(v) {
 // Đọc bảng (mảng 2 chiều) theo mẫu "THU CHI THÁNG x" hoặc "Sổ giao dịch" → danh sách giao dịch
 function gridToTx(grid, defMonth) {
   grid = grid.map(r => (r || []).map(c => (typeof c === 'string' ? c.trim() : c)));
-  for (const r of grid.slice(0, 8)) for (const c of r) { const m = String(c ?? '').match(/th[aá]ng\s*(\d{1,2})\s*[/\-.]\s*(\d{4})/i); if (m) { defMonth = `${m[2]}-${pad(m[1])}`; break; } }
+  for (const r of grid.slice(0, 8)) for (const c of r) { const m = norm(c).match(/thang\s*(\d{1,2})\s*[/\-.]\s*(\d{4})/); if (m) { defMonth = `${m[2]}-${pad(m[1])}`; break; } }
   let hi = grid.findIndex((r, i) => i < 15 && r.some(c => /dien giai|noi dung|mo ta|khoan/.test(norm(c))));
   const H = hi >= 0 ? grid[hi].map(norm) : [];
   const col = re => H.findIndex(h => re.test(h));
@@ -970,12 +970,17 @@ function gridToTx(grid, defMonth) {
   const get = (r, k) => (C[k] >= 0 ? r[C[k]] : '');
   const out = [];
   let section = 'phat_sinh', lastDate = '';
+  const totals = {};
   for (const r of grid.slice(hi + 1)) {
     const desc = String(get(r, 'desc') ?? '').trim(), nd = norm(desc);
     if (!desc && r.every(c => c === '' || c == null)) continue;
-    if (/^tong( cong)?$|^cong$|^tong thu|^tong chi/.test(nd)) continue;
-    if (/^(chi phi |chi )?co dinh$/.test(nd)) { section = 'co_dinh'; continue; }
-    if (/^(chi phi |chi )?phat sinh$/.test(nd)) { section = 'phat_sinh'; continue; }
+    const isSec = /(^|\s)chi ph/.test(nd) && nd.length < 30;
+    if (/^tong( cong)?$|^cong$|^tong thu|^tong chi|t\w{0,3}ng c\w{0,2}ng/.test(nd)) {
+      if (C.thu >= 0) { totals.thu = cellMoney(get(r, 'thu')) || totals.thu; totals.chi = cellMoney(get(r, 'chi')) || totals.chi; }
+      continue;
+    }
+    if (/^(chi phi |chi )?co dinh$/.test(nd) || (isSec && /dinh/.test(nd))) { section = 'co_dinh'; continue; }
+    if (/^(chi phi |chi )?phat sinh$/.test(nd) || (isSec && /sinh|phat/.test(nd))) { section = 'phat_sinh'; continue; }
     const d = cellDate(get(r, 'date'), defMonth.slice(0, 4));
     if (d) lastDate = d;
     const date = d || lastDate || `${defMonth}-01`;
@@ -993,17 +998,23 @@ function gridToTx(grid, defMonth) {
   const keyOf = x => `${x.date}|${x.type}|${x.amount}|${norm(x.desc)}`;
   const have = new Set(S.tx.map(keyOf));
   out.forEach(x => { x.dup = have.has(keyOf(x)); x.on = !x.dup; });
+  out.totals = totals; // dòng TỔNG CỘNG trong bảng (nếu có) để đối chiếu
   return out;
 }
 
 function importDialog() {
-  let rows = [], wb = null;
+  let rows = [], wb = null, ocrGrid = null;
   $('#dlg').classList.add('wide');
-  openDialog('Nhập dữ liệu từ Excel', `
-    <div class="alert ok" style="margin:0">Cách 1: Mở file Excel → bôi đen các dòng (gồm cột <b>Ngày, Diễn giải, Thu, Chi</b>) → <b>Ctrl+C</b> → dán vào ô dưới.<br>Cách 2: Chọn file Excel (.xlsx, .xls, .csv).</div>
+  openDialog('Nhập dữ liệu (Excel hoặc ảnh chụp)', `
+    <div class="alert ok" style="margin:0">Cách 1: Mở file Excel → bôi đen các dòng (gồm cột <b>Ngày, Diễn giải, Thu, Chi</b>) → <b>Ctrl+C</b> → dán vào ô dưới.<br>Cách 2: Chọn file Excel (.xlsx, .xls, .csv).<br>Cách 3: <b>Chụp ảnh</b> bảng thu chi (màn hình Excel, sổ ghi tay, giấy tờ) – app tự đọc chữ.</div>
+    <div class="actions" style="justify-content:flex-start">
+      <label class="btn primary">📷 Chụp ảnh<input type="file" id="impCam" accept="image/*" capture="environment" hidden></label>
+      <label class="btn">🖼 Chọn ảnh có sẵn<input type="file" id="impImg" accept="image/*" hidden></label>
+      <span class="small muted" id="ocrStatus"></span>
+    </div>
     <label class="f">Dán dữ liệu từ Excel<textarea id="impText" rows="5" placeholder="05/08/2026	Lương ck + hoa hồng	54,000,000&#10;	Chợ + gas		3,000,000"></textarea></label>
     <div class="frow">
-      <label class="f">Hoặc chọn file<input type="file" id="impFile" accept=".xlsx,.xls,.csv"></label>
+      <label class="f">Hoặc chọn file Excel<input type="file" id="impFile" accept=".xlsx,.xls,.csv"></label>
       <label class="f">Tháng (cho dòng không ghi ngày)<input type="month" id="impMonth" value="${UI.m}"></label>
     </div>
     <label class="f" id="impSheetWrap" hidden>Trang tính (sheet)<select id="impSheet"></select></label>
@@ -1028,31 +1039,57 @@ function importDialog() {
       const names = wb.SheetNames;
       $('#impSheet').innerHTML = names.map(n => `<option ${/so giao dich/.test(norm(n)) ? 'selected' : ''}>${esc(n)}</option>`).join('');
       $('#impSheetWrap').hidden = names.length < 2;
-      $('#impText').value = '';
+      $('#impText').value = ''; ocrGrid = null;
       preview();
     } catch (err) { alert(err.message || 'Không đọc được file'); }
   };
   $('#impSheet', body).onchange = preview;
+  const onImage = async e => {
+    const f = e.target.files[0]; if (!f) return;
+    const st = $('#ocrStatus'); st.textContent = 'Đang tải bộ đọc ảnh… (lần đầu hơi lâu)';
+    $$('#impCam, #impImg').forEach(i => i.disabled = true);
+    try {
+      const data = await ocrImage(f, p => { st.textContent = `Đang đọc ảnh… ${p}%`; });
+      ocrGrid = ocrToGrid(data); wb = null; $('#impText').value = ''; $('#impSheetWrap').hidden = true;
+      preview();
+      st.textContent = rows.length ? `✓ Đọc được ${rows.length} khoản – hãy kiểm tra lại số tiền và diễn giải` : 'Không đọc được khoản nào – thử chụp rõ, thẳng và đủ sáng hơn';
+    } catch (err) { st.textContent = ''; alert(err.message || 'Không đọc được ảnh'); }
+    finally { $$('#impCam, #impImg').forEach(i => { i.disabled = false; i.value = ''; }); }
+  };
+  $('#impCam', body).onchange = onImage; $('#impImg', body).onchange = onImage;
   function preview() {
     const txt = $('#impText').value;
     const defM = $('#impMonth').value || UI.m;
     if (txt.trim()) rows = gridToTx(txt.replace(/\r/g, '').split('\n').map(l => l.split('\t')), defM);
+    else if (ocrGrid) rows = gridToTx(ocrGrid, defM);
     else if (wb) rows = gridToTx(sheetGrid(), defM);
     else { alert('Hãy dán dữ liệu hoặc chọn file'); return; }
     paint();
+  }
+  function checkTotals(rows) {
+    const t = rows.totals || {}; if (!t.thu && !t.chi) return '';
+    const all = rows.filter(x => !x.dup || x.on);
+    const thu = sum(all.filter(x => x.type === 'thu')), chi = sum(all.filter(x => x.type === 'chi'));
+    const okT = !t.thu || t.thu === thu, okC = !t.chi || t.chi === chi;
+    return okT && okC ? `<div class="alert ok">✓ Khớp dòng TỔNG CỘNG trong bảng: thu ${fmt(t.thu || 0)} · chi ${fmt(t.chi || 0)}</div>`
+      : `<div class="alert warn">⚠ Chưa khớp dòng TỔNG CỘNG trong bảng – kiểm tra lại số tiền (ô vàng là số lẻ, dễ đọc sai):<br>
+         ${t.thu ? `Thu trên bảng <b>${fmt(t.thu)}</b> · đọc được <b>${fmt(thu)}</b> ${okT ? '✓' : `(lệch ${fmtS(thu - t.thu)})`}<br>` : ''}
+         ${t.chi ? `Chi trên bảng <b>${fmt(t.chi)}</b> · đọc được <b>${fmt(chi)}</b> ${okC ? '✓' : `(lệch ${fmtS(chi - t.chi)})`}` : ''}</div>`;
   }
   function paint() {
     const on = rows.filter(x => x.on), dups = rows.filter(x => x.dup).length;
     const opt = (type, sel) => catOptions(type, sel);
     $('#impPreview').innerHTML = rows.length ? `
       <div class="small" style="margin-bottom:6px">Đọc được <b>${rows.length}</b> khoản · chọn nhập <b>${on.length}</b> · thu <b class="pos">${fmt(sum(on.filter(x => x.type === 'thu')))}</b> · chi <b class="neg">${fmt(sum(on.filter(x => x.type === 'chi')))}</b>${dups ? ` · <span class="pill warn">${dups} khoản đã có (bỏ chọn sẵn)</span>` : ''}</div>
+      ${checkTotals(rows)}
       <div class="tablewrap" style="max-height:45vh;overflow:auto;border:1px solid var(--border);border-radius:10px">
       <table class="small"><thead><tr><th><input type="checkbox" id="impAll" ${on.length === rows.length ? 'checked' : ''}></th><th>Ngày</th><th>Diễn giải</th><th class="num">Số tiền</th><th>Nhóm</th><th>Danh mục</th></tr></thead>
       <tbody>${rows.map((x, i) => `<tr style="${x.dup ? 'opacity:.55' : ''}">
         <td><input type="checkbox" data-i="${i}" data-k="on" ${x.on ? 'checked' : ''}></td>
         <td><input type="date" data-i="${i}" data-k="date" value="${x.date}" style="border:0;background:transparent;width:120px"></td>
-        <td>${esc(x.desc)}${x.dup ? ' <span class="pill warn">đã có</span>' : ''}</td>
-        <td class="num ${x.type === 'thu' ? 'pos' : 'neg'}">${x.type === 'thu' ? '+' : '−'}${fmt(x.amount)}</td>
+        <td><input data-i="${i}" data-k="desc" value="${esc(x.desc)}" style="border:0;border-bottom:1px dashed var(--border);background:transparent;width:100%;min-width:160px">${x.dup ? ' <span class="pill warn">đã có</span>' : ''}</td>
+        <td class="num" style="white-space:nowrap;${x.amount % 1000 ? 'background:var(--warn-soft)' : ''}" title="${x.amount % 1000 ? 'Số tiền lẻ – kiểm tra lại' : ''}"><select data-i="${i}" data-k="type" style="border:0;background:transparent" class="${x.type === 'thu' ? 'pos' : 'neg'}"><option value="chi" ${x.type === 'chi' ? 'selected' : ''}>Chi</option><option value="thu" ${x.type === 'thu' ? 'selected' : ''}>Thu</option></select>
+          <input data-i="${i}" data-k="amount" inputmode="decimal" value="${fmt(x.amount)}" class="${x.type === 'thu' ? 'pos' : 'neg'}" style="border:0;border-bottom:1px dashed var(--border);background:transparent;width:110px;text-align:right"></td>
         <td><select data-i="${i}" data-k="group" style="border:0;background:transparent"><option value="co_dinh" ${x.group === 'co_dinh' ? 'selected' : ''}>Cố định</option><option value="phat_sinh" ${x.group === 'phat_sinh' ? 'selected' : ''}>Phát sinh</option></select></td>
         <td><select data-i="${i}" data-k="cat" style="border:0;background:transparent;max-width:170px">${opt(x.type, x.cat)}</select></td></tr>`).join('')}</tbody></table></div>
       <p class="hint">Danh mục được đoán tự động theo tên khoản – kiểm tra và sửa lại nếu cần trước khi bấm “Nhập”.</p>`
@@ -1061,11 +1098,179 @@ function importDialog() {
     $('#impOk').textContent = on.length ? `Nhập ${on.length} khoản` : 'Nhập';
     $$('#impPreview [data-i]').forEach(el => el.onchange = () => {
       const x = rows[el.dataset.i];
-      x[el.dataset.k] = el.type === 'checkbox' ? el.checked : el.value;
-      if (el.dataset.k === 'on') paint();
+      const k = el.dataset.k;
+      x[k] = el.type === 'checkbox' ? el.checked : k === 'amount' ? parseMoney(el.value) : el.value;
+      if (k === 'type') x.cat = guessCat(x.desc, x.type);
+      if (k === 'on' || k === 'type' || k === 'amount') paint();
     });
     const all = $('#impAll'); if (all) all.onchange = () => { rows.forEach(x => x.on = all.checked); paint(); };
   }
+}
+
+/* ============ Đọc ảnh chụp (OCR tiếng Việt, chạy ngay trên máy, miễn phí) ============ */
+const OCR_CDN = {
+  lib: 'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js',
+  workerPath: 'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/worker.min.js',
+  corePath: 'https://cdn.jsdelivr.net/npm/tesseract.js-core@5.1.1',
+  langPath: 'https://cdn.jsdelivr.net/npm/@tesseract.js-data/vie@1.0.0/4.0.0_best_int',
+};
+function loadTesseract() {
+  if (window.Tesseract) return Promise.resolve();
+  return new Promise((res, rej) => {
+    const s = document.createElement('script'); s.src = OCR_CDN.lib;
+    s.onload = res; s.onerror = () => rej(new Error('Không tải được bộ đọc ảnh – kiểm tra kết nối mạng'));
+    document.head.appendChild(s);
+  });
+}
+// Chuẩn bị ảnh: phóng to, chuyển đen trắng, xóa đường kẻ ô của bảng (giúp đọc chữ chính xác hơn)
+async function prepImage(file) {
+  const url = URL.createObjectURL(file);
+  try {
+    const img = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => rej(new Error('Không mở được ảnh')); i.src = url; });
+    const scale = Math.min(3, Math.max(0.5, 2400 / img.naturalWidth));
+    const W = Math.round(img.naturalWidth * scale), H = Math.round(img.naturalHeight * scale);
+    const c = document.createElement('canvas'); c.width = W; c.height = H;
+    const g = c.getContext('2d', { willReadFrequently: true }); g.imageSmoothingQuality = 'high';
+    g.drawImage(img, 0, 0, W, H);
+    const id = g.getImageData(0, 0, W, H), px = id.data, n = W * H;
+    const lum = new Uint8Array(n);
+    for (let i = 0; i < n; i++) lum[i] = (px[i * 4] * 299 + px[i * 4 + 1] * 587 + px[i * 4 + 2] * 114) / 1000;
+    // ngưỡng Otsu
+    const hist = new Array(256).fill(0); for (let i = 0; i < n; i++) hist[lum[i]]++;
+    let sumAll = 0; for (let t = 0; t < 256; t++) sumAll += t * hist[t];
+    let sB = 0, wB = 0, best = 0, thr = 128;
+    for (let t = 0; t < 256; t++) { wB += hist[t]; if (!wB) continue; const wF = n - wB; if (!wF) break; sB += t * hist[t];
+      const mB = sB / wB, mF = (sumAll - sB) / wF, v = wB * wF * (mB - mF) ** 2; if (v > best) { best = v; thr = t; } }
+    const dark = new Uint8Array(n); for (let i = 0; i < n; i++) dark[i] = lum[i] < thr ? 1 : 0;
+    const kill = new Uint8Array(n);
+    const hLen = Math.max(60, W * 0.05), vLen = Math.max(30, H * 0.03);
+    for (let y = 0; y < H; y++) { let run = 0; for (let x = 0; x <= W; x++) { if (x < W && dark[y * W + x]) run++; else { if (run >= hLen) for (let k = x - run; k < x; k++) kill[y * W + k] = 1; run = 0; } } }
+    for (let x = 0; x < W; x++) { let run = 0; for (let y = 0; y <= H; y++) { if (y < H && dark[y * W + x]) run++; else { if (run >= vLen) for (let k = y - run; k < y; k++) kill[k * W + x] = 1; run = 0; } } }
+    for (let i = 0; i < n; i++) { const v = dark[i] && !kill[i] ? 0 : 255; px[i * 4] = px[i * 4 + 1] = px[i * 4 + 2] = v; px[i * 4 + 3] = 255; }
+    g.putImageData(id, 0, 0);
+    return c;
+  } finally { URL.revokeObjectURL(url); }
+}
+async function ocrImage(file, onProgress) {
+  await loadTesseract();
+  const canvas = await prepImage(file);
+  const worker = await Tesseract.createWorker('vie', 1, {
+    workerPath: OCR_CDN.workerPath, corePath: OCR_CDN.corePath, langPath: OCR_CDN.langPath,
+    logger: m => { if (m.status === 'recognizing text') onProgress(Math.round(m.progress * 100)); },
+  });
+  try {
+    await worker.setParameters({ tessedit_pageseg_mode: window.OCR_PSM || '4', preserve_interword_spaces: '1' });
+    const { data } = await worker.recognize(canvas);
+    return data;
+  } finally { await worker.terminate(); }
+}
+// --- làm sạch từng từ OCR ---
+const ocrStrip = t => t.replace(/[|]/g, '').replace(/^[„“”"'‘’`,.¡!\[\](){}:;_~^*\\\/<>«»—–-]+/, '').replace(/[„“”"'‘’`¡!\[\](){}:;_~^*\\<>«»—–|.,]+$/, '').trim();
+// "05082026", "160822026", "5/8/2026" → "dd/mm/yyyy"
+function ocrDate(t, prefMonth) {
+  let m = t.match(/^(\d{1,2})[/.\-](\d{1,2})(?:[/.\-](\d{2,4}))?$/);
+  if (m) return m[3] ? `${m[1]}/${m[2]}/${m[3]}` : `${m[1]}/${m[2]}`;
+  if (!/^\d{8,9}$/.test(t)) return '';
+  // "05082026" hoặc thừa 1 chữ số do OCR ("120082026") → thử bỏ từng chữ số
+  const cands = t.length === 8 ? [t] : [...t].map((_, i) => t.slice(0, i) + t.slice(i + 1));
+  const ok = cands.map(c => c.match(/^(\d{2})(\d{2})(20\d{2})$/)).filter(m => m && +m[1] >= 1 && +m[1] <= 31 && +m[2] >= 1 && +m[2] <= 12);
+  const best = ok.find(m => prefMonth && +m[2] === prefMonth) || ok[0];
+  return best ? `${best[1]}/${best[2]}/${best[3]}` : '';
+}
+// "54,000,000", "8014000.", "...5840,851.000", "3tr" → số tiền (0 nếu không phải tiền)
+function ocrMoney(t) {
+  if (/^\d+([.,]\d+)?(tr|k|triệu|trieu)$/i.test(t)) return parseMoney(t);
+  const c = t.replace(/[oO]/g, '0').replace(/[lI]/g, '1').replace(/[đ₫]$/i, '').replace(/[.,]+$/, '');
+  if (!/\d/.test(c) || /[^\d.,()]/.test(c.replace(/^[^\d]+/, ''))) return 0;
+  const body = c.replace(/^[^\d]+/, '');
+  let v = Number(body.replace(/\D/g, ''));
+  if (v > 999999999 || /^[^\d]/.test(c)) { const g = body.match(/\d{1,3}(?:[.,]\d{3})+$/); if (g) v = Number(g[0].replace(/\D/g, '')); } // có ký tự rác phía trước → lấy phần đuôi đúng dạng 1,234,000
+  // số quá lớn thường do đường kẻ dọc bị đọc thành chữ số thừa ở đầu ("840,851,000" → 40,851,000)
+  if (v >= 300000000) { const g = body.match(/\d{1,2}(?:[.,]\d{3})+$/); const v2 = g ? Number(g[0].replace(/\D/g, '')) : Number(String(v).slice(1)); if (v2 >= 1000) v = v2; }
+  if (v >= 100000 && v % 1000 && (v % 1000 < 20 || v % 1000 > 980)) v = Math.round(v / 1000) * 1000; // "3277.009" → 3,277,000
+  return v >= 1000 ? v : 0;
+}
+// Kết quả OCR (các từ + vị trí) → bảng [Ngày, Diễn giải, Thu, Chi] để dùng chung bộ đọc Excel
+function ocrToGrid(data) {
+  let words = (data.words || []).map(w => ({ t: ocrStrip(w.text || ''), x0: w.bbox.x0, x1: w.bbox.x1, xc: (w.bbox.x0 + w.bbox.x1) / 2, yc: (w.bbox.y0 + w.bbox.y1) / 2, h: w.bbox.y1 - w.bbox.y0 }))
+    .filter(w => w.t);
+  if (!words.length) return [];
+  const hs = words.map(w => w.h).sort((a, b) => a - b), hMed = hs[hs.length >> 1] || 10;
+  const maxX = Math.max(...words.map(w => w.x1));
+  // gom thành các dòng theo vị trí dọc
+  words.sort((a, b) => a.yc - b.yc);
+  const rows = [];
+  for (const w of words) {
+    const r = rows[rows.length - 1];
+    if (r && Math.abs(w.yc - r.yc) < hMed * 0.6) { r.ws.push(w); r.yc += (w.yc - r.yc) / r.ws.length; } else rows.push({ yc: w.yc, ws: [w] });
+  }
+  rows.forEach(r => {
+    r.ws.sort((a, b) => a.x0 - b.x0);
+    const m = []; // nối các mảnh số bị tách ("54,000," + "000")
+    for (const w of r.ws) {
+      const p = m[m.length - 1];
+      if (p && (/[.,]/.test(p.t) || /^\d{3}$/.test(w.t)) && /[\d.,]$/.test(p.t) && /^\d/.test(w.t) && w.x0 - p.x1 < hMed * 0.7 && ocrMoney(p.t + w.t) && !ocrDate(p.t)) { p.t += w.t; p.x1 = w.x1; p.xc = (p.x0 + p.x1) / 2; }
+      else m.push({ ...w });
+    }
+    r.ws = m;
+  });
+  // dòng tiêu đề NGÀY | DIỄN GIẢI | THU | CHI | TỒN
+  let hi = -1, numCols = null, numLeft = maxX * 0.45, dateRight = maxX * 0.2;
+  for (let i = 0; i < Math.min(rows.length, 15); i++) {
+    const f = re => rows[i].ws.find(w => re.test(norm(w.t)));
+    const thu = f(/^thu$/), chi = f(/^chi$/);
+    if (thu && chi && (f(/^ngay/) || f(/^dien|giai$/) || f(/^ton$/)) && !f(/^thang/)) {
+      hi = i; numCols = [['thu', thu.xc], ['chi', chi.xc]];
+      const ton = f(/^ton$/); if (ton) numCols.push(['ton', ton.xc]);
+      const step = Math.abs(chi.xc - thu.xc);
+      numLeft = Math.min(thu.xc, chi.xc) - step * 0.7;
+      const dg = f(/^dien|giai$/); if (dg) dateRight = Math.min(dateRight, dg.x0);
+      break;
+    }
+  }
+  // không thấy tiêu đề: đoán vị trí cột Thu / Chi từ các dòng có từ 2 số tiền trở lên (dòng tổng, dòng nhóm)
+  if (!numCols) {
+    const xs = [[], [], []];
+    rows.forEach(r => { const n = r.ws.filter(w => w.xc >= numLeft && ocrMoney(w.t)); if (n.length === 3) n.forEach((w, k) => xs[k].push(w.xc)); }); // dòng nhóm/tổng: Thu | Chi | Tồn
+    const med = a => a.sort((p, q) => p - q)[a.length >> 1];
+    if (xs[0].length && xs[1].length && med(xs[1]) - med(xs[0]) > hMed * 3) {
+      numCols = [['thu', med(xs[0])], ['chi', med(xs[1])]];
+      if (xs[2].length) numCols.push(['ton', med(xs[2])]);
+    }
+  }
+  const titleM = (() => { for (const r of rows.slice(0, 6)) { const m = norm(r.ws.map(w => w.t).join(' ')).match(/thang\s*(\d{1,2})\s*[/\-.]/); if (m) return +m[1]; } return 0; })();
+  const junk = t => t.length === 1 && !/[a-zA-Z0-9À-ỹ+&]/.test(t);
+  const out = [];
+  let lastM = 0;
+  rows.forEach((r, i) => {
+    if (i < hi || (hi < 0 && i < 4 && /thang\s*\d/.test(norm(r.ws.map(w => w.t).join(' '))))) { out.push([r.ws.map(w => w.t).join(' ')]); return; } // vd "THU CHI THÁNG 8/2026"
+    if (i === hi) { out.push(['Ngày', 'Diễn giải', 'Thu', 'Chi']); return; }
+    let date = '', thu = 0, chi = 0;
+    const desc = [], nums = [];
+    for (const w of r.ws) {
+      const d = w.x0 < dateRight || !desc.length ? ocrDate(w.t, titleM || lastM) : '';
+      if (d) lastM = +d.split('/')[1];
+      const v = w.xc >= numLeft ? ocrMoney(w.t) : 0;
+      if (d && !date) date = d;
+      else if (v) nums.push({ v, xc: w.xc, x1: w.x1 });
+      else if (w.xc < numLeft && !junk(w.t)) desc.push(w.t);
+    }
+    if (numCols) {
+      // số tiền canh lề phải → so mép phải của số với ranh giới giữa các cột
+      const cs = numCols.slice().sort((a, b) => a[1] - b[1]);
+      for (const n of nums) {
+        let col = cs[cs.length - 1][0];
+        for (let k = 0; k < cs.length - 1; k++) if (n.x1 <= (cs[k][1] + cs[k + 1][1]) / 2 + hMed * 0.3) { col = cs[k][0]; break; }
+        if (col === 'thu' && !thu) thu = n.v; else if (col === 'chi' && !chi) chi = n.v;
+      }
+    } else if (nums.length) { // không có tiêu đề (danh sách tự ghi, hóa đơn…): đoán thu/chi theo nội dung
+      const d = norm(desc.join(' '));
+      if (/luong|hoa hong|thuong|hoan|tien ve|nhan tien|\bthu\b/.test(d)) thu = nums[0].v; else chi = nums[0].v;
+    }
+    out.push([date, desc.join(' ').replace(/\s+/g, ' ').trim(), thu || '', chi || '']);
+  });
+  if (hi < 0) out.unshift(['Ngày', 'Diễn giải', 'Thu', 'Chi']);
+  return out;
 }
 
 async function exportXlsx(kind) {
