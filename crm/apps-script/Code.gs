@@ -35,14 +35,14 @@ var SHEETS = {
     'chu_the', 'quan_he', 'loai_the', 'giu_the', 'ngay_giu', 'ngay_tra'],
   GiuThe: ['id', 'the_id', 'khach_id', 'hanh_dong', 'ngay', 'ghi_chu', 'tao_luc'],
   HoaDon: ['id', 'ngay', 'loai_hd', 'ma_hd', 'so_tien', 'a_khach_id', 'a_ten', 'a_sdt', 'phi_a', 'b_khach_id', 'b_ten', 'b_sdt', 'vi_b',
-    'phi_minh', 'a_chuyen', 'b_nhan', 'doanh_thu', 'b_tt_ngay', 'a_ck_ngay', 'b_ck_ngay', 'huy', 'ghi_chu', 'tao_luc', 'cap_nhat'],
+    'phi_minh', 'a_chuyen', 'b_nhan', 'doanh_thu', 'b_tt_ngay', 'a_ck_ngay', 'b_ck_ngay', 'huy', 'ghi_chu', 'tao_luc', 'cap_nhat', 'lai_tay'],
   NhatKy: ['id', 'thoi_gian', 'doi_tuong', 'hanh_dong', 'ref_id', 'ngay', 'mo_ta', 'truoc', 'sau'],
   TaiLieu: ['id', 'khach_id', 'loai', 'the_id', 'file_id', 'ten_file', 'ghi_chu', 'tao_luc'],
   KetSo: ['id', 'ngay', 'tu_ngay', 'so_du_truoc', 'so_gd', 'so_tien', 'chi_phi', 'phat_sinh', 'da_chuyen', 'so_du', 'ghi_chu', 'tao_luc', 'nhap_tay']
 };
 // Sheet thêm ở bản cập nhật: tự tạo khi cần, không phải chạy lại setup().
 var AUTO_SHEETS = ['DoiSoat', 'KetSo', 'TheKhach', 'TaiLieu', 'GiuThe', 'NhatKy', 'HoaDon'];
-var BILL_TYPES = ['Hoá đơn điện', 'Hoá đơn nước', 'Nạp ví MoMo', 'Thanh toán bảo hiểm', 'Internet / truyền hình', 'Học phí', 'Khác'];
+var BILL_TYPES = ['Hoá đơn điện', 'Hoá đơn nước', 'Nạp ví MoMo', 'Thanh toán bảo hiểm', 'Internet / truyền hình', 'Học phí', 'Vé máy bay / tàu xe', 'Khác'];
 var PAYLATER_WALLETS = ['MoMo Ví Trả Sau', 'SPayLater (Shopee)', 'Kredivo', 'Home PayLater', 'Fundiin', 'ZaloPay trả sau', 'Khác'];
 var DOC_TYPES = ['CCCD mặt trước', 'CCCD mặt sau', 'Ảnh thẻ', 'CCCD chủ thẻ', 'Ảnh giữ / trả thẻ', 'Khác'];
 // Loại ảnh lưu nhiều tấm (không thay ảnh cũ).
@@ -692,8 +692,14 @@ function parseNoteLine_(line, ngay) {
   }
   var m = inner.match(/^(đh\s*\/\s*rút|đh\s*\+\s*rút|đáo\s*\/\s*rút|đh|đáo hạn|đáo|rút)(\s+qr)?\s+(.+?)\s+([\d.,]+\s*(?:tr|triệu)?)\s*\/\s*([\d.,]+)\s*(k)?\s+hoàn\s+([\d.,+]+)(.*)$/i);
   if (!m) {
-    var lai = inner.match(/lãi\s+([\d.,]+\s*k?)/i);
-    return { kind: 'skip', lai: lai ? noteThousand_(lai[1]) : 0 };
+    var lai = inner.match(/^(.+?)\s+lãi\s+([\d.,]+\s*k?)(.*)$/i);
+    if (!lai) return { kind: 'skip', lai: 0 };
+    var words = lai[1].split(' '), w0 = words[0].toLowerCase();
+    var types = { 'vé': 'Vé máy bay / tàu xe', 've': 'Vé máy bay / tàu xe', 'điện': 'Hoá đơn điện', 'nước': 'Hoá đơn nước', 'momo': 'Nạp ví MoMo', 'học': 'Học phí' };
+    var loaiK = types[w0] || 'Khác';
+    if (types[w0] && words.length > 1) words.shift();
+    return { kind: 'bill', ngay: ngay, loai_hd: loaiK, so_tien: 0, a_ten: words.join(' '), lai_tay: noteThousand_(lai[2]),
+      phi_a: 0, phi_minh: 0, done: true, ghi_chu: 'Dán sổ: ' + line };
   }
   var tokens = m[3].split(' '), the = [tokens.shift()];
   while (tokens.length > 1 && NOTE_CARD_EXTRA.test(tokens[0])) the.push(tokens.shift());
@@ -754,9 +760,11 @@ function apiPasteNotes_(p) {
       d2.hoan += it.tien_hoan; d2.lai += it.lai; d2.so_gd++;
       it.da_co = allTx.some(function (t) { return t.ngay === cur && Number(t.so_tien) === it.so_tien && normName_(t.the) === normName_(it.the); });
     } else if (it.kind === 'bill') {
-      var b = billCalc_({ so_tien: it.so_tien, phi_a: it.phi_a, phi_minh: it.phi_minh });
+      var b = billCalc_({ so_tien: it.so_tien, phi_a: it.phi_a, phi_minh: it.phi_minh, lai_tay: it.lai_tay });
       it.lai = b.doanh_thu; d2.lai += it.lai;
-      it.da_co = allBill.some(function (x) { return x.ngay === cur && Number(x.so_tien) === it.so_tien; });
+      it.da_co = allBill.some(function (x) {
+        return x.ngay === cur && Number(x.so_tien || 0) === it.so_tien && (!it.lai_tay || (Number(x.lai_tay) === it.lai_tay && normName_(x.a_ten) === normName_(it.a_ten)));
+      });
     } else if (it.kind === 'pay') {
       d2.tra += it.so_tien; if (it.con != null) d2.con_so = it.con;
       it.da_co = allPay.some(function (x) { return x.ngay === cur && x.loai === it.loai && Number(x.so_tien) === it.so_tien; });
@@ -782,7 +790,7 @@ function apiPasteNotes_(p) {
         } else {
           apiSaveBill_({ ngay: it.ngay, loai_hd: it.loai_hd, so_tien: it.so_tien, a_ten: it.a_ten, phi_a: it.phi_a, phi_minh: it.phi_minh,
             b_ten: it.b_ten, vi_b: it.vi_b, b_tt_ngay: it.done ? it.ngay : '', a_ck_ngay: it.done ? it.ngay : '', b_ck_ngay: it.done ? it.ngay : '',
-            ghi_chu: it.ghi_chu });
+            ghi_chu: it.ghi_chu, lai_tay: it.lai_tay || '' });
           saved.bill++;
         }
         it.da_luu = true;
@@ -1157,7 +1165,9 @@ function billCalc_(b) {
   b.doanh_thu = b.a_chuyen - b.b_nhan;                      // phí của mình
   b.giam_a = amt - b.a_chuyen;                              // A được giảm
   b.phi_b = amt - b.b_nhan;                                 // B chịu tổng phí
-  b.trang_thai = b.huy ? 'Huỷ' : !b.b_ten ? 'Chờ ghép' : !b.b_tt_ngay ? 'Chờ B thanh toán'
+  var lai = Number(b.lai_tay) || 0;                         // vé / dịch vụ khác: chỉ ghi số lãi
+  if (lai > 0) b.doanh_thu = lai;
+  b.trang_thai = b.huy ? 'Huỷ' : (lai > 0 && !b.b_ten) ? (b.a_ck_ngay ? 'Hoàn tất' : 'Chờ đối soát') : !b.b_ten ? 'Chờ ghép' : !b.b_tt_ngay ? 'Chờ B thanh toán'
     : (b.a_ck_ngay && b.b_ck_ngay) ? 'Hoàn tất' : 'Chờ đối soát';
   return b;
 }
@@ -1193,8 +1203,8 @@ function billText_(b) {
 function apiSaveBill_(x) {
   var ngay = String(x.ngay || '');
   if (!/^\d{4}-\d{2}-\d{2}$/.test(ngay)) throw new Error('Ngày không hợp lệ.');
-  var amt = Number(x.so_tien);
-  if (!(amt > 0)) throw new Error('Số tiền hoá đơn phải lớn hơn 0.');
+  var amt = Number(x.so_tien) || 0, laiTay = Math.round(Number(x.lai_tay) || 0);
+  if (!(amt > 0) && !(laiTay > 0)) throw new Error('Nhập số tiền hoá đơn, hoặc số lãi (với vé / dịch vụ khác).');
   var pa = Number(x.phi_a) || 0, pm = Number(x.phi_minh) || 0;
   if (pa < 0 || pm < 0 || pa + pm >= 100) throw new Error('Phí không hợp lệ.');
   if (!String(x.a_ten || '').trim()) throw new Error('Nhập người có hoá đơn (A).');
@@ -1208,7 +1218,7 @@ function apiSaveBill_(x) {
       so_tien: amt, a_khach_id: a.id, a_ten: a.ten, a_sdt: a.sdt || '', phi_a: pa,
       b_khach_id: b ? b.id : '', b_ten: b ? b.ten : '', b_sdt: b ? (b.sdt || '') : '', vi_b: b ? String(x.vi_b || '').trim() : '',
       phi_minh: pm, b_tt_ngay: b ? okDate(x.b_tt_ngay) : '', a_ck_ngay: okDate(x.a_ck_ngay), b_ck_ngay: b ? okDate(x.b_ck_ngay) : '',
-      huy: x.huy ? 'x' : '', ghi_chu: String(x.ghi_chu || '').trim(), cap_nhat: nowStr_()
+      huy: x.huy ? 'x' : '', ghi_chu: String(x.ghi_chu || '').trim(), cap_nhat: nowStr_(), lai_tay: laiTay > 0 ? laiTay : ''
     };
     billCalc_(obj);
     if (x.id) {

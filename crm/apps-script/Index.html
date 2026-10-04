@@ -619,7 +619,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       <label class="f">Ngày<input type="date" name="ngay" required></label>
       <label class="f">Loại hoá đơn<select name="loai_hd"></select></label>
       <label class="f">Mã hoá đơn / mã KH<input name="ma_hd" placeholder="VD: PE0123456"></label>
-      <label class="f">Số tiền hoá đơn <span class="hint">5tr · 5.000</span><input name="so_tien_text" required inputmode="decimal"></label>
+      <label class="f">Số tiền hoá đơn <span class="hint">5tr · 5.000</span><input name="so_tien_text" inputmode="decimal"></label>
+      <label class="f">Lãi nhập tay <span class="hint">vé, dịch vụ khác – để trống nếu tính theo %</span><input name="lai_tay_text" inputmode="decimal" placeholder="VD: 60k"></label>
     </div>
     <h3 style="margin:14px 0 6px">👤 Người A – có hoá đơn</h3>
     <div class="form-grid">
@@ -1160,6 +1161,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       var what = i.kind === 'tx' ? esc(i.dich_vu) + ' · <b>' + esc(i.the) + '</b> · ' + esc(i.ten_khach) + ' · ' + money(i.so_tien) +
           ' · phí ' + pct(i.phi_khach) + ' / máy ' + pct(i.phi_may_text) + ' → hoàn ' + money(i.tien_hoan) + ' · lãi ' + money(i.lai) + (i.ghi_chu ? ' <small class="muted">' + esc(i.ghi_chu) + '</small>' : '')
         : i.kind === 'pay' ? esc(i.loai) + ' ' + money(i.so_tien)
+        : i.kind === 'bill' && i.lai_tay ? esc(i.loai_hd) + ' · ' + esc(i.a_ten) + ' → lãi ' + money(i.lai) + ' <small class="muted">(vào tab Hoá đơn)</small>'
         : i.kind === 'bill' ? esc(i.loai_hd) + ' của ' + esc(i.a_ten) + ' · ' + money(i.so_tien) + ' · B: ' + esc(i.b_ten) + ' (' + esc(i.vi_b) + ') · A giảm ' + pct(i.phi_a) + ', mình ' + pct(i.phi_minh) + ' → lãi ' + money(i.lai)
         : '<span class="muted">' + esc(i.line) + '</span>';
       var st = i.loi ? '<span class="neg">' + esc(i.loi) + '</span>' : i.da_luu ? '<span class="pos">✓ đã lưu</span>' : i.da_co ? '<span class="muted">đã có – bỏ qua</span>' : '<span class="muted">mới</span>';
@@ -1636,15 +1638,16 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
             (done ? ' <small class="muted">' + dm(done) + '</small>' : (field ? ' <button type="button" class="btn btn--ghost btn--sm" data-billdone="' + field + '" data-id="' + esc(b.id) + '">✔ Xong</button>' : '')) + '</span></div>';
         }
         return '<div class="item ' + (b.trang_thai === 'Hoàn tất' ? 'item--done' : b.trang_thai === 'Chờ đối soát' ? 'item--late' : 'item--due') + '">' +
-          '<div class="item__head"><div><div class="item__name">' + esc(b.loai_hd) + (b.ma_hd ? ' · ' + esc(b.ma_hd) : '') + ' · ' + money(b.so_tien) + '</div>' +
+          '<div class="item__head"><div><div class="item__name">' + esc(b.loai_hd) + (b.ma_hd ? ' · ' + esc(b.ma_hd) : '') + (Number(b.so_tien) ? ' · ' + money(b.so_tien) : '') + '</div>' +
           '<div class="item__meta">' + dmy(b.ngay) + (b.ghi_chu ? ' · ' + esc(b.ghi_chu) : '') + '</div></div>' + billBadge(b.trang_thai) + '</div>' +
           '<div style="margin-top:6px;font-size:.9rem">' +
-          '<div class="mcard__row"><span>👤 A: <b>' + esc(b.a_ten) + '</b> ' + quickContact(b.a_sdt) + '</span><span class="muted">phí A ' + pct(b.phi_a) + '</span></div>' +
-          (b.b_ten ? '<div class="mcard__row"><span>💳 B: <b>' + esc(b.b_ten) + '</b>' + (b.vi_b ? ' · ' + esc(b.vi_b) : '') + ' ' + quickContact(b.b_sdt) + '</span><span class="muted">phí mình ' + pct(b.phi_minh) + '</span></div>'
+          '<div class="mcard__row"><span>👤 ' + (Number(b.lai_tay) && !b.b_ten ? '' : 'A: ') + '<b>' + esc(b.a_ten) + '</b> ' + quickContact(b.a_sdt) + '</span><span class="muted">' + (Number(b.lai_tay) ? 'lãi nhập tay' : 'phí A ' + pct(b.phi_a)) + '</span></div>' +
+          (Number(b.lai_tay) && !b.b_ten ? step(b.a_ck_ngay, 'Đã xong / đã nhận tiền', b.lai_tay, 'a_ck_ngay') :
+          b.b_ten ? '<div class="mcard__row"><span>💳 B: <b>' + esc(b.b_ten) + '</b>' + (b.vi_b ? ' · ' + esc(b.vi_b) : '') + ' ' + quickContact(b.b_sdt) + '</span><span class="muted">phí mình ' + pct(b.phi_minh) + '</span></div>'
                    : '<div class="mcard__row"><span class="muted">Chưa có người rút (B)</span><button type="button" class="btn btn--sm" data-billedit="' + esc(b.id) + '">+ Ghép người B</button></div>') +
-          (b.b_ten ? step(b.b_tt_ngay, 'B thanh toán hoá đơn bằng ví trả sau', b.so_tien, 'b_tt_ngay') : '') +
+          (Number(b.lai_tay) && !b.b_ten ? '' : (b.b_ten ? step(b.b_tt_ngay, 'B thanh toán hoá đơn bằng ví trả sau', b.so_tien, 'b_tt_ngay') : '') +
           step(b.a_ck_ngay, 'A chuyển lại cho mình (' + pct(100 - b.phi_a) + ')', b.a_chuyen, b.b_ten && b.b_tt_ngay ? 'a_ck_ngay' : '') +
-          (b.b_ten ? step(b.b_ck_ngay, 'Mình chuyển cho B (' + pct(100 - b.phi_a - b.phi_minh) + ')', b.b_nhan, b.b_tt_ngay ? 'b_ck_ngay' : '') : '') +
+          (b.b_ten ? step(b.b_ck_ngay, 'Mình chuyển cho B (' + pct(100 - b.phi_a - b.phi_minh) + ')', b.b_nhan, b.b_tt_ngay ? 'b_ck_ngay' : '') : '')) +
           '<div class="mcard__row" style="border-top:1px solid var(--line)"><span><b>Doanh thu của mình</b></span><b class="pos">' + money(b.doanh_thu) + '</b></div>' +
           '</div><div class="item__actions"><button type="button" class="btn btn--ghost btn--sm" data-billedit="' + esc(b.id) + '">Sửa</button></div></div>';
       }).join('') : '<div class="empty card">Không có hoá đơn nào.</div>';
@@ -1668,6 +1671,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     f.loai_hd.value = b.loai_hd || 'Hoá đơn điện';
     f.vi_b.value = b.vi_b || '';
     f.so_tien_text.value = b.so_tien ? amountText(b.so_tien) : '';
+    f.lai_tay_text.value = b.lai_tay ? amountText(b.lai_tay) : '';
     f.phi_a.value = b.phi_a != null && b.phi_a !== '' ? b.phi_a : 3;
     f.phi_minh.value = b.phi_minh != null && b.phi_minh !== '' ? b.phi_minh : 2;
     f.huy.checked = !!b.huy;
@@ -1679,6 +1683,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   function updateBill() {
     var f = billForm.elements, amt = parseAmount(f.so_tien_text.value), pa = num(f.phi_a.value), pm = num(f.phi_minh.value);
     var aCk = Math.round(amt * (100 - pa) / 100), bNhan = Math.round(amt * (100 - pa - pm) / 100);
+    var lai = laiTay(f.lai_tay_text.value);
+    if (lai) { $('#bill-calc').innerHTML = '💰 <b>Doanh thu của mình</b> (nhập tay) = <strong class="pos">' + money(lai) + '</strong>' + (amt ? ' · hoá đơn ' + money(amt) : ''); return; }
     $('#bill-calc').innerHTML = 'Hoá đơn <strong>' + money(amt) + '</strong> (B thanh toán bằng ví trả sau)<br>' +
       '→ A chuyển lại cho mình ' + pct(100 - pa) + ' = <strong>' + money(aCk) + '</strong> <span class="muted">(A được giảm ' + money(amt - aCk) + ')</span><br>' +
       '→ Mình chuyển cho B ' + pct(100 - pa - pm) + ' = <strong>' + money(bNhan) + '</strong> <span class="muted">(B chịu phí ' + pct(pa + pm) + ')</span><br>' +
@@ -1693,17 +1699,23 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     });
     updateBill();
   });
+  function laiTay(v) { // "60k" / "60" = 60.000đ; "1.5tr" / "1.500" = 1.500.000đ
+    v = String(v || '').trim().toLowerCase();
+    if (!v) return 0;
+    if (/k$/.test(v)) return Math.round(num(v.replace(/k$/, '').replace(/\./g, '')) * 1000);
+    return parseAmount(v);
+  }
   function billPayload() {
     var f = billForm.elements;
     return { id: f.id.value, ngay: f.ngay.value, loai_hd: f.loai_hd.value, ma_hd: f.ma_hd.value, so_tien: parseAmount(f.so_tien_text.value),
       a_khach_id: f.a_khach_id.value, a_ten: f.a_ten.value.trim(), a_sdt: f.a_sdt.value.trim(), phi_a: num(f.phi_a.value), a_ck_ngay: f.a_ck_ngay.value,
       b_khach_id: f.b_khach_id.value, b_ten: f.b_ten.value.trim(), b_sdt: f.b_sdt.value.trim(), vi_b: f.vi_b.value, phi_minh: num(f.phi_minh.value),
-      b_tt_ngay: f.b_tt_ngay.value, b_ck_ngay: f.b_ck_ngay.value, ghi_chu: f.ghi_chu.value, huy: f.huy.checked };
+      b_tt_ngay: f.b_tt_ngay.value, b_ck_ngay: f.b_ck_ngay.value, ghi_chu: f.ghi_chu.value, huy: f.huy.checked, lai_tay: laiTay(f.lai_tay_text.value) };
   }
   billForm.addEventListener('submit', function (e) {
     e.preventDefault();
     var pl = billPayload();
-    if (!pl.so_tien) return toast('Số tiền chưa đúng', true);
+    if (!pl.so_tien && !pl.lai_tay) return toast('Nhập số tiền hoá đơn, hoặc lãi nhập tay', true);
     call('saveBill', pl).then(function (b) { $('#bill-modal').classList.add('hidden'); toast('Đã lưu · ' + b.trang_thai); reboot().then(function () { show(S.tab); }); }).catch(fail);
   });
   document.addEventListener('click', function (e) {

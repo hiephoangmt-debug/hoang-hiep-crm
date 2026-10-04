@@ -804,16 +804,29 @@ test('paste daily notes: transactions, C.Trâm transfers and a pay-later bill, w
   assert.strictEqual(bill.phi_minh, 3);
   const pays = pv.items.filter((i) => i.kind === 'pay');
   assert.strictEqual(JSON.stringify(pays.map((p) => p.so_tien)), JSON.stringify([30000000, 100000000]), '"Hoàn 30" = 30 triệu');
-  assert.strictEqual(pv.items.filter((i) => i.kind === 'skip').length, 1);
+  assert.strictEqual(pv.items.filter((i) => i.kind === 'skip').length, 0);
+  const ve = pv.items.filter((i) => i.kind === 'bill')[1];
+  assert.strictEqual(ve.loai_hd, 'Vé máy bay / tàu xe');
+  assert.strictEqual(ve.a_ten, 'xyz');
+  assert.strictEqual(ve.lai, 60000, 'vé: only the profit is known');
   assert.strictEqual(call('listTransactions', {}).length, 0, 'preview does not save');
 
   const sv = call('pasteNotes', { text, year: 2026, save: true });
-  assert.strictEqual(JSON.stringify(sv.saved), JSON.stringify({ tx: 4, pay: 2, bill: 1, bo_qua: 0 }));
+  assert.strictEqual(JSON.stringify(sv.saved), JSON.stringify({ tx: 4, pay: 2, bill: 2, bo_qua: 0 }));
   const r = call('refunds', {});
   assert.strictEqual(r.summary.tong_phai_hoan, 9840000 + 1970000 + 27636000 + 4950000, 'all pasted rows count in công nợ');
   assert.strictEqual(r.summary.tong_da_chuyen, 130000000);
+  // hoá đơn + vé đều vào tab Hoá đơn, đã hoàn tất → tính vào doanh thu
+  const bills = call('listBills', { mode: 'all' }).rows;
+  assert.strictEqual(bills.length, 2);
+  assert.ok(bills.every((b) => b.trang_thai === 'Hoàn tất'));
+  assert.strictEqual(bills.find((b) => b.lai_tay).doanh_thu, 60000);
+  // nhập tay vé không có số tiền hoá đơn
+  const v2 = call('saveBill', { ngay: '2026-10-04', loai_hd: 'Vé máy bay / tàu xe', a_ten: 'Khách H', lai_tay: 50000 });
+  assert.strictEqual(v2.trang_thai, 'Chờ đối soát');
+  assert.strictEqual(v2.doanh_thu, 50000);
   // dán lại: không nhân đôi
-  assert.strictEqual(JSON.stringify(call('pasteNotes', { text, year: 2026, save: true }).saved), JSON.stringify({ tx: 0, pay: 0, bill: 0, bo_qua: 7 }));
+  assert.strictEqual(JSON.stringify(call('pasteNotes', { text, year: 2026, save: true }).saved), JSON.stringify({ tx: 0, pay: 0, bill: 0, bo_qua: 8 }));
 });
 
 console.log(`\n${passed} test(s) passed`);
