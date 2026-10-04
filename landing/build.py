@@ -12,7 +12,7 @@ import shutil
 from datetime import date
 from pathlib import Path
 
-from zones import ZONES, faq_html, zone_info_html, zone_links_html
+from zones import ZONES, faq_html, zone_analysis_html, zone_detail_html, zone_info_html, zone_links_html, zone_toc_html
 
 ROOT = Path(__file__).parent
 SRC = ROOT / "src" / "page.html"
@@ -63,14 +63,32 @@ PAGES = [
 ]
 
 
+PAGES.append({
+    "file": "phan-tich.html", "path": "/phan-tich", "crumb": "Phân tích đầu tư",
+    "title": "Phân Tích Đầu Tư Vinhomes Hải Vân Bay 2026 – Chi Phí Thực, Vay 0% Hay Lãi Cố Định, Nên Mua Phân Khu Nào",
+    "desc": "Phân tích chuyên sâu Vinhomes Hải Vân Bay: chi phí thực từng phương án thanh toán, so sánh vay lãi cố định và HTLS 0%, CKTT 7% hay Về ở sớm 10%, so sánh 4 phân khu, động lực tăng giá và rủi ro.",
+    "badge": "Số liệu từ phiếu giá CĐT T10/2026",
+    "h1": "Phân tích đầu tư Hải Vân Bay<span>Chọn phương án & phân khu lợi nhất cho dòng tiền của bạn</span>",
+    "sub": "So sánh chi phí thực, vay lãi cố định hay lãi suất 0%, cam kết thuê hay Về ở sớm. Nhận <b>báo cáo phân tích theo ngân sách</b> riêng của bạn.",
+    "hero_img": "aerial-vinh-may",
+    "faq": [
+        ("Nên thanh toán sớm hay vay 70% khi mua Vinhomes Hải Vân Bay?", "Theo phiếu giá căn mẫu T10/2026, thanh toán sớm rẻ hơn tiến độ chuẩn khoảng 3,4%, vay 70% đắt hơn khoảng 2,7%. Có vốn nhàn rỗi thì thanh toán sớm (chiết khấu tương đương 11%/năm); muốn giữ vốn thì vay 70%."),
+        ("Vay lãi cố định (PA01) hay hỗ trợ lãi suất 0% (PA02) lợi hơn?", "Trên cùng giá trị gốc và vay đủ 70% suốt kỳ hạn, PA01 rẻ hơn PA02 từ 0,35% (18 tháng) đến 3,75% (36 tháng) và càng lợi khi trả trước hạn. PA02 phù hợp khi không muốn trả tiền hằng tháng."),
+        ("Đảo Ngọc nên chọn cam kết thuê 7% hay Về ở sớm 10%?", "CKTT 7%/năm × 3 năm tổng 21% danh nghĩa, quy về hiện tại khoảng 18%, phù hợp đầu tư thụ động. Về ở sớm giảm ngay 10% vào giá HĐMB, phù hợp khi muốn tự ở hoặc tự khai thác."),
+        ("Giãn thanh toán 24 hay 36 tháng có đắt không?", "Tại Vịnh Mây và Đảo Ngọc, giãn 24 tháng đắt hơn tiến độ chuẩn khoảng 7,6%, 36 tháng khoảng 13,2%. Tại Bạch Vân chênh lớn hơn (khoảng 16% và 21%)."),
+        ("Phân khu nào phù hợp để cho thuê?", "Đảo Ngọc phù hợp nhất cho thuê nhờ sát biển, cạnh VinWonders và có căn hoàn thiện nhận cam kết tiền thuê 7%/năm trong 3 năm."),
+    ],
+    "sections": ["PHANTICH", "CTABAND", "CALCULATOR", "POLICIES", "CART", "FAQ", "CONTACT"],
+})
+
 for _z in ZONES:
     PAGES.append({
         "file": _z["slug"] + ".html", "path": "/" + _z["slug"], "crumb": "Phân khu " + _z["name"],
         "title": _z["title"], "desc": _z["desc"], "badge": _z["badge"], "h1": _z["h1"], "sub": _z["sub"],
         "zone": _z["zone_key"], "hero_img": _z["hero_img"], "policy_tab": _z["policy_tab"], "faq": _z["faq"],
-        "extra": {"ZONEINFO": zone_info_html(_z), "ZONELINKS": zone_links_html(_z["slug"])},
-        "sections": ["ZONEINFO", "RIBBON", "CART"] + (["POLICIES"] if _z["policy_tab"] else []) +
-                    ["CTABAND", "CALCULATOR", "GALLERY", "ZONELINKS", "FAQ", "CONTACT"],
+        "extra": {"ZONEINFO": zone_toc_html(_z) + zone_info_html(_z), "ZONEDETAIL": zone_detail_html(_z), "ZONEANALYSIS": zone_analysis_html(_z), "ZONELINKS": zone_links_html(_z["slug"])},
+        "sections": ["ZONEINFO", "ZONEDETAIL", "CART"] + (["POLICIES"] if _z["policy_tab"] else []) +
+                    ["ZONEANALYSIS", "RIBBON", "CALCULATOR", "GALLERY", "ZONELINKS", "FAQ", "CONTACT"],
     })
 
 
@@ -117,6 +135,8 @@ def build():
             hero = re.sub(r'(<span class="badge"><i></i>).*?(</span>)', r"\g<1> " + pg["badge"] + r"\2", hero, count=1, flags=re.S)
             hero = hero.replace('data-source="Hero"', 'data-source="Hero ' + pg["path"] + '"')
             hero = hero.replace('<span class="badge">', '<nav class="crumb" aria-label="breadcrumb"><a href="/">Trang chủ</a> › <span>%s</span></nav>\n      <span class="badge">' % pg["crumb"], 1)
+            if pg.get("zone"):
+                hero = hero.replace("<option>Bảng giá & giỏ hàng độc quyền</option>", "<option>Bảng giá & giỏ hàng phân khu %s</option>" % pg["zone"], 1)
             if pg.get("hero_img"):
                 hero = hero.replace('<section class="hero">', '<section class="hero" style="background-image:linear-gradient(100deg,rgba(4,13,32,.93) 0%%,rgba(6,20,46,.8) 45%%,rgba(10,31,68,.45) 100%%),url(\'img/%s.webp\')">' % pg["hero_img"], 1)
             body = body.replace(sections["HERO"], hero, 1)
@@ -148,7 +168,7 @@ def build():
         present = set(re.findall(r'<section[^>]*\sid="([^"]+)"', body)) | {"top"}
         html = re.sub(r'href="#([\w-]+)"',
                       lambda mm: mm.group(0) if mm.group(1) in present else 'href="/#%s"' % mm.group(1), html)
-        for sec, page in (("gio-hang", "/gio-hang"), ("chinh-sach", "/chinh-sach"), ("tinh-gia", "/tinh-gia"), ("tin-tuc", "/tin-tuc")):
+        for sec, page in (("gio-hang", "/gio-hang"), ("chinh-sach", "/chinh-sach"), ("tinh-gia", "/tinh-gia"), ("tin-tuc", "/tin-tuc"), ("phan-tich", "/phan-tich")):
             html = html.replace('href="/#%s"' % sec, 'href="%s"' % page)
         (DIST / pg["file"]).write_text(html, encoding="utf-8")
         print("built", pg["file"], len(html) // 1024, "KB")

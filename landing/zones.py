@@ -25,6 +25,21 @@ ZONES = [
         "products": [("Liền kề", "70 – 80 m²", "~213 – 245 m²", "Xây thô"),
                      ("Shophouse", "Theo bảng hàng", "Theo bảng hàng", "Xây thô / Giãn xây"),
                      ("Biệt thự", "Theo bảng hàng", "Theo bảng hàng", "Giãn xây")],
+        "amenities": [("Làng ẩm thực ven suối", "Phố ẩm thực dọc suối cảnh quan, điểm hẹn cư dân & du khách."),
+                      ("Chợ Hong Kong", "Khu thương mại sôi động theo cảm hứng Hong Kong."),
+                      ("Lifestyle Hub", "Tổ hợp thể thao & giải trí ngoài trời."),
+                      ("Hồ Ngọc Trai", "Hồ cảnh quan trung tâm, đường dạo ven hồ."),
+                      ("Suối & thác cảnh quan", "Dòng suối xuyên phân khu, thác nước và công viên xanh."),
+                      ("Kết nối cửa ngõ", "Gần trục giao thông chính, cảng Liên Chiểu, hầm Hải Vân.")],
+        "prices": [("Liền kề 70 m² · xây thô", "6,4", "6,5", "6,8", "7,6", "7,9"),
+                   ("Liền kề 80 m² · xây thô", "8,2", "8,4", "8,7", "9,7", "10,2")],
+        "analysis": {
+            "verdict": "Điểm vào vốn dễ tiếp cận nhất dự án, phù hợp an cư và kinh doanh thương mại.",
+            "strategy": "Ưu tiên tiến độ chuẩn hoặc vay 70% (chỉ +3,5% so với chuẩn) kết hợp Về ở sớm để nhận đủ 10%. Hạn chế giãn 24/36 tháng vì theo phiếu giá căn mẫu chênh tới +16% / +21%.",
+            "pros": ["Vốn từ ~6,5 tỷ (đã gồm VAT & KPBT)", "Chiết khấu Về ở sớm tổng 10%", "Gần chợ Hong Kong, làng ẩm thực, Lifestyle Hub – lợi thế khai thác kinh doanh", "Cửa ngõ, kết nối nhanh trung tâm & cảng Liên Chiểu"],
+            "cons": ["Giãn thanh toán đắt hơn các phân khu khác", "Không sát biển như Đảo Ngọc", "5% Về ở sớm thứ hai chỉ hoàn khi đủ điều kiện"],
+            "table": [("Thanh toán sớm", "−2,7%"), ("Tiến độ chuẩn", "0%"), ("Vay 70% · 18T", "+3,5%"), ("Giãn 24 tháng", "+16,0%"), ("Giãn 36 tháng", "+21,3%")],
+        },
         "faq": [
             ("Phân khu Bạch Vân Vinhomes Hải Vân Bay ở đâu?", "Bạch Vân là phân khu cửa ngõ của Vinhomes Hải Vân Bay tại Làng Vân, Hòa Hiệp Bắc, Liên Chiểu, Đà Nẵng, gần trục kết nối trung tâm thành phố và cảng Liên Chiểu."),
             ("Bạch Vân có những loại sản phẩm nào?", "Bạch Vân gồm nhà phố liền kề, shophouse và biệt thự. Các căn liền kề phổ biến diện tích đất 70–80 m², diện tích xây dựng khoảng 213–245 m², bàn giao xây thô."),
@@ -51,6 +66,22 @@ ZONES = [
         "products": [("Liền kề", "~75 m²", "~231 m²", "Giãn xây 24T"),
                      ("Liền kề góc", "~148 m²", "~338 m²", "Giãn xây 24T"),
                      ("Biệt thự đơn lập", "~275 m²", "~463 m²", "Giãn xây 24T")],
+        "amenities": [("Oceania Clubhouse 6.500 m²", "Nhà hàng, lounge, không gian thư giãn dành riêng cư dân."),
+                      ("Đồi biệt thự hướng vịnh", "Quần thể biệt thự đơn lập trên địa hình giật cấp, view biển."),
+                      ("Phố thương mại", "Dãy liền kề – shophouse dọc trục chính, kinh doanh dịch vụ."),
+                      ("Bãi biển & vịnh", "Tầm nhìn vịnh biển, kết nối bãi tắm trong dự án."),
+                      ("Rừng & đường dạo", "Cảnh quan rừng tự nhiên, đường dạo bộ ven đồi."),
+                      ("Trục ven biển", "Liền kề trục đường ven biển, kết nối nhanh trung tâm Đà Nẵng.")],
+        "prices": [("Liền kề 75 m² · giãn xây 24T", "6,4", "6,6", "6,8", "7,1", "7,5"),
+                   ("Liền kề góc 148 m² · giãn xây 24T", "11,3", "11,8", "12,1", "12,7", "13,5"),
+                   ("Biệt thự đơn lập 275 m² · giãn xây 24T", "16,3", "17,1", "17,5", "18,4", "19,5")],
+        "analysis": {
+            "verdict": "Lựa chọn nhẹ vốn nhất để sở hữu view vịnh – nhờ giãn xây, 18 tháng đầu chỉ trả phần đất & thương mại.",
+            "strategy": "Vốn vừa: tiến độ thường hoặc vay 70% PA01 18–24T cho phần đất & thương mại, dồn tiền xây từ D+540. Vốn dồi dào: thanh toán sớm tiết kiệm ~4% so với tiến độ chuẩn.",
+            "pros": ["Giãn xây: phần xây từ D+540 ngày, đợt đầu chỉ 10%", "Địa thế đồi, nhiều căn view vịnh & thành phố", "Quỹ biệt thự đơn lập lớn – sản phẩm hiếm", "Thanh toán sớm tiết kiệm ~3,6–4,4% (căn mẫu)"],
+            "cons": ["Phải chuẩn bị dòng tiền xây dựng từ D+540", "Giãn 36 tháng cộng ~13–14% tổng giá", "Biệt thự vốn lớn (~17 tỷ trở lên)"],
+            "table": [("Thanh toán sớm", "−4,1%"), ("Tiến độ chuẩn", "0%"), ("Vay 70% · 18T", "+2,6%"), ("Giãn 24 tháng", "+7,3%"), ("Giãn 36 tháng", "+13,8%")],
+        },
         "faq": [
             ("Phân khu Vịnh Mây có gì đặc biệt?", "Vịnh Mây rộng khoảng 99,59 ha, phong cách Malibu, nằm trên đồi giật cấp hướng vịnh với khoảng 689 sản phẩm gồm liền kề, shophouse và biệt thự đơn lập, có Oceania Clubhouse 6.500 m²."),
             ("Chính sách giãn xây Vịnh Mây áp dụng thế nào?", "Từ 01/10/2026, giá trị căn nhà gồm phần đất & thương mại và phần xây dựng. Khách thanh toán phần đất & thương mại theo phương án lựa chọn; phần xây dựng bắt đầu từ D+540 ngày, đợt đầu 10%, các đợt sau theo tiến độ và thông báo bàn giao."),
@@ -77,6 +108,22 @@ ZONES = [
         "products": [("Liền kề hoàn thiện", "~80 m²", "~232 m²", "Hoàn thiện nội thất"),
                      ("Liền kề", "~70 m²", "~214 – 217 m²", "Giãn xây 18T"),
                      ("Shophouse", "Theo bảng hàng", "Theo bảng hàng", "Theo bảng hàng")],
+        "amenities": [("VinWonders Hải Vân", "Tổ hợp vui chơi giải trí đa chủ đề cho mọi thế hệ."),
+                      ("Botanica Park 8 ha", "Công viên thực vật, không gian xanh trung tâm."),
+                      ("Pearl Garden 6.500 m²", "Vườn cảnh quan và hồ bơi – công viên trung tâm."),
+                      ("Bãi biển nội khu", "Bãi cát trắng, vịnh nước xanh ngay trước dãy nhà phố."),
+                      ("Phố shophouse phong cách Ý", "Trục thương mại – dịch vụ phục vụ du khách."),
+                      ("Hồ bơi & quảng trường", "Không gian sự kiện, vui chơi cho cư dân và du khách.")],
+        "prices": [("Liền kề 70 m² · giãn xây 18T", "9,2", "9,4", "9,7", "10,2", "10,5"),
+                   ("Liền kề 70 m² vị trí đẹp · giãn xây 18T", "12,5", "12,9", "13,2", "13,9", "14,5"),
+                   ("Liền kề 80 m² · hoàn thiện (CKTT)", "15,4", "15,8", "16,4", "—", "—")],
+        "analysis": {
+            "verdict": "Phân khu mạnh nhất cho mục tiêu cho thuê và thu nhập thụ động nhờ biển, VinWonders và CKTT 7%/năm.",
+            "strategy": "Đầu tư thụ động: chọn căn hoàn thiện nhận CKTT 7%/năm × 3 năm (≈18% quy về hiện tại). Muốn tự ở/tự khai thác: chọn Về ở sớm 10% trong danh sách 223 căn. Căn giãn xây 18T: vay 70% chỉ +2,7–3%.",
+            "pros": ["Sát bãi biển nội khu, cạnh VinWonders, Botanica Park", "CKTT 7%/năm × 3 năm cho căn hoàn thiện", "Có cả bản hoàn thiện nội thất – khai thác ngay", "Bảo lãnh ngân hàng 0,5%"],
+            "cons": ["Mức vốn cao hơn Bạch Vân, Vịnh Mây", "HTLS 0% không áp dụng với căn nhận CKTT", "Căn CKTT phải giao CĐT khai thác trong 3 năm"],
+            "table": [("Thanh toán sớm", "−2,5%"), ("Tiến độ chuẩn", "0%"), ("Vay 70% · 18T", "+2,9%"), ("Giãn 24 tháng", "+8,2%"), ("Giãn 36 tháng", "+12,3%")],
+        },
         "faq": [
             ("Phân khu Đảo Ngọc có tiện ích gì?", "Đảo Ngọc rộng khoảng 138,84 ha với bãi biển nội khu, VinWonders Hải Vân, Botanica Park 8 ha, Pearl Garden 6.500 m² và hồ bơi – công viên trung tâm."),
             ("Cam kết tiền thuê Đảo Ngọc thế nào?", "Căn hoàn thiện nhận cam kết tiền thuê (CKTT) 7%/năm trong 3 năm, khách bàn giao lại nhà cho Chủ đầu tư khai thác. Gói HTLS 0% không áp dụng với căn nhận CKTT."),
@@ -102,6 +149,17 @@ ZONES = [
                 ("Ưu tiên khách sớm", "Khách đăng ký trước được ưu tiên nhận thông tin, chọn căn và chính sách giai đoạn đầu.")],
         "products": [("Biệt thự nghỉ dưỡng", "Đang cập nhật", "Đang cập nhật", "Đang cập nhật"),
                      ("Sản phẩm khác", "Đang cập nhật", "Đang cập nhật", "Đang cập nhật")],
+        "amenities": [("Cảnh quan rừng – biển", "Không gian xanh dưới chân đèo Hải Vân."),
+                      ("Định hướng nghỉ dưỡng", "Biệt thự nghỉ dưỡng, khách sạn – resort cao cấp."),
+                      ("Kết nối toàn dự án", "Dùng chung hệ sinh thái tiện ích 512 ha của Hải Vân Bay.")],
+        "prices": [],
+        "analysis": {
+            "verdict": "Phân khu đón đầu – phù hợp khách muốn có thông tin và quỹ căn sớm nhất khi Chủ đầu tư công bố.",
+            "strategy": "Đăng ký nhận thông tin sớm; trong lúc chờ, tham khảo chính sách hiện hành của Bạch Vân, Vịnh Mây, Đảo Ngọc để chuẩn bị phương án vốn.",
+            "pros": ["Quy mô lớn nhất dự án (~162 ha)", "Định hướng nghỉ dưỡng cao cấp, cảnh quan rừng – biển", "Khách đăng ký sớm được ưu tiên thông tin giai đoạn đầu"],
+            "cons": ["Chưa có sản phẩm, giá và chính sách chính thức", "Tiến độ mở bán chưa xác định"],
+            "table": [],
+        },
         "faq": [
             ("Phân khu Tinh Vân Vinhomes Hải Vân Bay rộng bao nhiêu?", "Tinh Vân rộng khoảng 161,75 ha, là phân khu lớn nhất trong 4 phân khu của Vinhomes Hải Vân Bay."),
             ("Tinh Vân theo phong cách gì?", "Theo thông tin dự án, Tinh Vân được định hướng nghỉ dưỡng cao cấp lấy cảm hứng phong cách Nhật Bản."),
@@ -157,3 +215,100 @@ def zone_links_html(current):
             '    <div class="center"><span class="eyebrow">Khám phá thêm</span><h2 class="title" style="font-size:clamp(22px,3vw,30px)">Các phân khu khác tại Hải Vân Bay</h2></div>\n'
             '    <div class="qlinks" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">' + cards +
             '<a href="/"><b>Tổng quan dự án</b><small>Vinhomes Hải Vân Bay 512ha</small></a></div>\n  </div>\n</section>\n\n')
+
+
+def zone_analysis_html(z):
+    a = z["analysis"]
+    pros = "".join("<li><i>+</i><span>%s</span></li>" % escape(x) for x in a["pros"])
+    cons = "".join("<li><i>!</i><span>%s</span></li>" % escape(x) for x in a["cons"])
+    rows = "".join('<tr><td><b>%s</b></td><td class="%s">%s</td></tr>' % (escape(k), "good" if v.startswith("−") else ("bad" if v.startswith("+") else ""), escape(v)) for k, v in a["table"])
+    table = ('<div class="an-box"><h3>Chi phí theo phương án thanh toán</h3><p class="sub">So với tiến độ chuẩn, theo phiếu giá căn mẫu %s T10/2026.</p>'
+             '<table class="cmp"><thead><tr><th>Phương án</th><th>Chênh lệch tổng giá</th></tr></thead><tbody>%s</tbody></table></div>' % (escape(z["name"]), rows)) if rows else ""
+    return f'''<!-- ZONEANALYSIS -->
+<section class="section alt" id="phan-tich">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Phân tích đầu tư</span>
+      <h2 class="title">Có nên mua phân khu {escape(z["name"])}?</h2>
+      <p class="lead">{escape(a["verdict"])}</p>
+    </div>
+    <div class="insight" style="max-width:900px;margin:22px auto 0"><b>Chiến lược gợi ý:</b> {escape(a["strategy"])}</div>
+    <div class="drivers">
+      <div class="an-box up"><h3>Điểm mạnh</h3><ul>{pros}</ul></div>
+      <div class="an-box risk"><h3>Cần cân nhắc</h3><ul>{cons}</ul></div>
+    </div>
+    <div class="an-grid">{table}<div class="an-box"><h3>Xem phân tích toàn dự án</h3><p class="sub">PA01 hay PA02, CKTT hay Về ở sớm, so sánh 4 phân khu và động lực tăng giá.</p><a href="/phan-tich" class="btn btn-outline">Đọc phân tích chi tiết →</a><a href="#lien-he" class="btn btn-gold" style="margin-top:10px;width:100%" data-need="Báo cáo phân tích phân khu {escape(z["name"])}" data-pop>Nhận báo cáo phân khu {escape(z["name"])}</a></div></div>
+  </div>
+</section>
+
+'''
+
+
+def zone_toc_html(z):
+    items = [("tong-quan", "Thông số"), ("tien-ich-pk", "Tiện ích"), ("bang-gia", "Giá bán"), ("mat-bang", "Mặt bằng & layout"),
+             ("gio-hang", "Bảng hàng"), ("chinh-sach", "Chính sách"), ("phan-tich", "Phân tích"), ("faq", "Hỏi đáp")]
+    if not z["policy_tab"]:
+        items = [x for x in items if x[0] != "chinh-sach"]
+    return ('<nav class="ztoc" aria-label="Mục lục phân khu"><div class="container">' +
+            "".join('<a href="#%s">%s</a>' % (a, t) for a, t in items) + "</div></nav>\n")
+
+
+def zone_detail_html(z):
+    n = escape(z["name"])
+    amen = "".join('<div class="card"><div class="ic">✦</div><h3>%s</h3><p>%s</p></div>' % (escape(a), escape(b)) for a, b in z["amenities"])
+    if z["prices"]:
+        rows = "".join("<tr><td><b>%s</b></td>%s</tr>" % (escape(r[0]), "".join("<td>%s</td>" % ("từ ~%s tỷ" % v if v != "—" else "—") for v in r[1:])) for r in z["prices"])
+        price = (f'''<div style="overflow-x:auto"><table class="cmp" style="min-width:720px"><thead><tr><th>Loại căn</th><th>Thanh toán sớm</th><th>Tiến độ chuẩn</th><th>Vay 70% · 18T</th><th>Giãn 24T</th><th>Giãn 36T</th></tr></thead><tbody>{rows}</tbody></table></div>
+      <p class="disc">Giá tham khảo đã gồm VAT & KPBT, theo phiếu giá căn mẫu T10/2026. Giá từng căn thay đổi theo vị trí, hướng, tầng – <b>liên hệ để nhận giá chính xác và giá ưu đãi độc quyền</b>.</p>''')
+    else:
+        price = '<div class="empty"><h3>Bảng giá đang chờ công bố</h3><p>Để lại thông tin để nhận bảng giá Tinh Vân ngay khi Chủ đầu tư phát hành.</p><a href="#lien-he" class="btn btn-primary" data-need="Bảng giá Tinh Vân khi công bố" data-pop>Đăng ký nhận bảng giá</a></div>'
+    img0, img1 = z["imgs"][0], z["imgs"][-1]
+    return f'''<!-- ZONEAMEN -->
+<section class="section alt" id="tien-ich-pk">
+  <div class="container">
+    <div class="center"><span class="eyebrow">Tiện ích phân khu</span><h2 class="title">Tiện ích nổi bật tại {n}</h2>
+      <p class="lead">Cư dân {n} sử dụng tiện ích riêng của phân khu và toàn bộ hệ sinh thái 512 ha của Vinhomes Hải Vân Bay.</p></div>
+    <div class="grid amen" style="margin-top:28px">{amen}</div>
+  </div>
+</section>
+
+<!-- ZONEPRICE -->
+<section class="section" id="bang-gia">
+  <div class="container">
+    <div class="center"><span class="eyebrow">Giá bán</span><h2 class="title">Bảng giá tham khảo phân khu {n}</h2>
+      <p class="lead">So sánh nhanh giá theo loại căn và phương án thanh toán.</p></div>
+    <div class="an-box" style="margin-top:24px">{price}</div>
+  </div>
+</section>
+
+<!-- ZONEPLAN -->
+<section class="section alt" id="mat-bang">
+  <div class="container">
+    <div class="center"><span class="eyebrow">Mặt bằng & layout</span><h2 class="title">Tổng mặt bằng & layout mẫu nhà {n}</h2>
+      <p class="lead">Tài liệu chính thức từ Chủ đầu tư, bản nét cao – gửi qua Zalo trong 5 phút.</p></div>
+    <div class="an-grid">
+      <a class="locked-doc" href="#lien-he" data-need="Tổng mặt bằng phân khu {n} (bản nét)" data-pop>
+        <span class="ld-img" style="background-image:url(\'img/{img0}.webp\')"></span>
+        <span class="ld-body"><b>Tổng mặt bằng phân khu {n}</b><small>Vị trí từng lô, hướng, trục đường, tiện ích theo quy hoạch điều chỉnh mới nhất.</small><span class="btn btn-primary">🔒 Nhận TMB bản nét</span></span>
+      </a>
+      <a class="locked-doc" href="#lien-he" data-need="Layout mẫu nhà (LOSK) phân khu {n}" data-pop>
+        <span class="ld-img" style="background-image:url(\'img/{img1}.webp\')"></span>
+        <span class="ld-body"><b>Layout mẫu nhà (LOSK)</b><small>Mặt bằng công năng từng tầng, kích thước phòng, phương án bố trí kinh doanh – ở.</small><span class="btn btn-primary">🔒 Nhận layout chi tiết</span></span>
+      </a>
+    </div>
+    <div class="cta-band" style="margin-top:28px">
+      <div>
+        <h3>Nhận trọn bộ hồ sơ phân khu {n}</h3>
+        <ul><li>Bảng giá & giỏ hàng độc quyền cập nhật hôm nay</li><li>Tổng mặt bằng, layout từng tầng, brochure</li><li>Phiếu tính giá theo phương án bạn chọn</li><li>Ưu tiên giữ căn đẹp & lịch tham quan miễn phí</li></ul>
+      </div>
+      <form class="js-lead" data-source="Hồ sơ phân khu {n}" novalidate>
+        <input name="name" placeholder="Họ và tên" required autocomplete="name" aria-label="Họ và tên">
+        <input name="phone" type="tel" placeholder="Số điện thoại / Zalo" required autocomplete="tel" aria-label="Số điện thoại">
+        <input type="hidden" name="need" value="Trọn bộ hồ sơ phân khu {n}">
+        <button class="btn btn-gold" type="submit">NHẬN HỒ SƠ {n.upper()}</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+'''
