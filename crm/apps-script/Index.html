@@ -221,7 +221,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   <header class="top">
     <div class="top__bar">
       <div class="top__title">💳 CRM Thẻ Tín Dụng <small id="today-label"></small></div>
-      <div class="row" style="gap:6px"><button class="btn btn--ghost btn--sm" data-pay="new" style="background:#fff">± Ứng</button><button class="btn btn--accent btn--sm" data-act="new-tx">+ Giao dịch</button></div>
+      <div class="row" style="gap:6px"><button class="btn btn--ghost btn--sm" data-act="paste-notes" style="background:#fff">📝 Dán sổ</button><button class="btn btn--ghost btn--sm" data-pay="new" style="background:#fff">± Ứng</button><button class="btn btn--accent btn--sm" data-act="new-tx">+ Giao dịch</button></div>
     </div>
     <nav class="tabs" id="tabs">
       <button class="tab is-active" data-tab="home">Tổng quan</button>
@@ -518,6 +518,25 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       </div>
     </div>
   </form>
+</div>
+
+<!-- Modal dán sổ ghi chú hằng ngày -->
+<div class="modal hidden" id="notes-modal">
+  <div class="modal__box" style="max-width:760px">
+    <div class="modal__head"><h2>📝 Dán sổ ngày</h2><button type="button" class="x" data-close>×</button></div>
+    <p class="hint" style="margin:0 0 6px">Dán nguyên đoạn ghi chú như trên điện thoại. Mỗi ngày bắt đầu bằng dòng <b>2/10: Hoàn … lãi …</b>; mỗi giao dịch một dòng
+      <b>Rút VP a Thắng 13.068/1.9 hoàn 1.6</b> (số tiền nghìn đồng / phí khách % hoặc 100k / phí máy %). Dòng <b>Hoàn 400 còn 57.053</b> = chị chuyển 400tr.
+      Dòng trong ngoặc có <b>điện / nước / bảo hiểm … tên A lãi …</b> = hoá đơn ví trả sau. Dòng đã có trong app sẽ tự bỏ qua.</p>
+    <textarea id="notes-text" rows="9" placeholder="2/10: Hoàn 274.806 lãi 1.653&#10;Rút VP a Đức Thắng FPT 13.068/1.9 hoàn 1.6 RR&#10;…&#10;Hoàn 400 còn 57.053"></textarea>
+    <div class="row" style="margin-top:8px;gap:8px">
+      <label class="hint" style="display:flex;gap:6px;align-items:center">Năm <input id="notes-year" type="number" style="width:90px"></label>
+      <div class="row" style="margin-left:auto;gap:8px">
+        <button type="button" class="btn btn--ghost" data-act="notes-preview">Xem trước</button>
+        <button type="button" class="btn" data-act="notes-save" disabled>Lưu vào app</button>
+      </div>
+    </div>
+    <div id="notes-result" style="margin-top:10px"></div>
+  </div>
 </div>
 
 <!-- Modal tiền C.Trâm chuyển / ứng -->
@@ -1106,6 +1125,48 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       return uploadTxPhotos(saved).then(function () { return reboot(); }).then(function () { show(S.tab); });
     }).catch(function (err) { btn.disabled = false; fail(err); });
   });
+
+  /* ---------- Dán sổ ghi chú hằng ngày ---------- */
+  function pasteNotes(save, btn) {
+    var text = $('#notes-text').value;
+    if (!text.trim()) return toast('Dán nội dung sổ vào ô trước', true);
+    btn.disabled = true;
+    call('pasteNotes', { text: text, year: $('#notes-year').value, save: save }).then(function (r) {
+      btn.disabled = false;
+      renderNotes(r);
+      var todo = r.items.filter(function (i) { return /tx|pay|bill/.test(i.kind) && !i.da_co && !i.da_luu; }).length;
+      $('[data-act=notes-save]').disabled = save || !todo;
+      if (save) {
+        var sv = r.saved;
+        toast('Đã lưu ' + sv.tx + ' giao dịch, ' + sv.pay + ' lần chuyển tiền, ' + sv.bill + ' hoá đơn' + (sv.bo_qua ? ' · bỏ qua ' + sv.bo_qua + ' dòng đã có' : ''));
+        reboot().then(function () { show(S.tab); });
+      }
+    }).catch(function (err) { btn.disabled = false; fail(err); });
+  }
+  function renderNotes(r) {
+    function chk(so, app) {
+      if (so == null) return money(app);
+      var ok = Math.abs(so - app) < 1000;
+      return money(app) + (ok ? ' <span class="pos">✓ khớp sổ</span>' : ' <span class="neg">⚠ sổ ghi ' + money(so) + ' (lệch ' + money(app - so) + ')</span>');
+    }
+    var days = r.days.map(function (d) {
+      return '<div class="calc" style="grid-template-columns:1fr;margin-bottom:6px"><div><b style="display:inline">' + dmy(d.ngay) + '</b> · ' + d.so_gd + ' giao dịch</div>' +
+        '<div>' + esc(rn()) + ' hoàn: ' + chk(d.hoan_so, d.hoan) + '</div>' +
+        '<div>Lãi: ' + chk(d.lai_so, d.lai) + '</div>' +
+        (d.tra ? '<div>' + esc(rn()) + ' chuyển: ' + money(d.tra) + (d.con_so != null ? ' · sổ ghi còn ' + money(d.con_so) : '') + '</div>' : '') + '</div>';
+    }).join('');
+    var icon = { tx: '💳', pay: '💸', bill: '🧾', skip: '❓', err: '⚠' };
+    var rows = r.items.map(function (i) {
+      var what = i.kind === 'tx' ? esc(i.dich_vu) + ' · <b>' + esc(i.the) + '</b> · ' + esc(i.ten_khach) + ' · ' + money(i.so_tien) +
+          ' · phí ' + pct(i.phi_khach) + ' / máy ' + pct(i.phi_may_text) + ' → hoàn ' + money(i.tien_hoan) + ' · lãi ' + money(i.lai) + (i.ghi_chu ? ' <small class="muted">' + esc(i.ghi_chu) + '</small>' : '')
+        : i.kind === 'pay' ? esc(i.loai) + ' ' + money(i.so_tien)
+        : i.kind === 'bill' ? esc(i.loai_hd) + ' của ' + esc(i.a_ten) + ' · ' + money(i.so_tien) + ' · B: ' + esc(i.b_ten) + ' (' + esc(i.vi_b) + ') · A giảm ' + pct(i.phi_a) + ', mình ' + pct(i.phi_minh) + ' → lãi ' + money(i.lai)
+        : '<span class="muted">' + esc(i.line) + '</span>';
+      var st = i.loi ? '<span class="neg">' + esc(i.loi) + '</span>' : i.da_luu ? '<span class="pos">✓ đã lưu</span>' : i.da_co ? '<span class="muted">đã có – bỏ qua</span>' : '<span class="muted">mới</span>';
+      return '<tr><td>' + (icon[i.kind] || '') + '</td><td>' + what + '</td><td>' + st + '</td></tr>';
+    }).join('');
+    $('#notes-result').innerHTML = days + '<div style="overflow-x:auto"><table class="tbl" style="font-size:.85rem"><tbody>' + rows + '</tbody></table></div>';
+  }
 
   /* ---------- Tiền hoàn (số tiền − phí máy, hoàn hôm sau) ---------- */
   function refundWhen(d) {
@@ -1941,6 +2002,13 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     if (a) {
       var act = a.dataset.act;
       if (act === 'new-tx') openTx();
+      if (act === 'paste-notes') {
+        $('#notes-year').value = $('#notes-year').value || S.boot.today.slice(0, 4);
+        $('#notes-result').innerHTML = '';
+        $('[data-act=notes-save]').disabled = true;
+        $('#notes-modal').classList.remove('hidden');
+      }
+      if (act === 'notes-preview' || act === 'notes-save') pasteNotes(act === 'notes-save', a);
       if (act === 'new-customer') openCustomer();
       if (act === 'logout') logout();
       if (act === 'tx-for-customer') {

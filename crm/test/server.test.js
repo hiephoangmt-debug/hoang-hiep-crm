@@ -773,4 +773,47 @@ test('refund columns are added to an existing sheet; old rows get computed value
   assert.strictEqual(gas.api(tok, 'refunds', {}).summary.tong_phai_hoan, 986400);
 });
 
+test('paste daily notes: transactions, C.Trâm transfers and a pay-later bill, with totals checked against the header', () => {
+  const { call, fake } = fresh();
+  fake.setToday('2026-10-04');
+  const text = [
+    '2/10: Hoàn 40.004 lãi 342',
+    'Rút VP Khách A 10.000/1.9 hoàn 1.6 RR',
+    'Rút QR FE JCB Khách B 2.000/100k hoàn 1.5 RR',
+    'ĐH/rút TCB vàng Khách C - D 28.000/1.8 hoàn 1.3 phí 504 RR',
+    '(Rút SC Khách E 2.000.000/5.0 hoàn 2.0 điện Khách F lãi 60k RR)',
+    'Hoàn 30 còn 10.004',
+    '3/10: Hoàn 4.950',
+    'ĐH Cake Khách G 5tr/150 hoàn 1',
+    'Hoàn 100. Còn hoàn 14.954',
+    'Vé xyz lãi 60k'
+  ].join('\n');
+  const pv = call('pasteNotes', { text, year: 2026 });
+  const d2 = pv.days[0];
+  assert.strictEqual(d2.ngay, '2026-10-02');
+  assert.strictEqual(d2.hoan, 9840000 + 1970000 + 27636000);
+  assert.strictEqual(d2.hoan_so, 40004000);
+  assert.strictEqual(d2.lai, 30000 + 70000 + 140000 + 60000, 'lãi = phí khách − phí máy + lãi hoá đơn');
+  const tx = pv.items.filter((i) => i.kind === 'tx');
+  assert.strictEqual(JSON.stringify(tx.map((i) => i.the)), JSON.stringify(['VP', 'FE JCB', 'TCB vàng', 'Cake']));
+  assert.strictEqual(tx[1].ten_khach, 'Khách B');
+  assert.strictEqual(tx[2].dich_vu, 'Đáo + Rút');
+  assert.strictEqual(tx[3].so_tien, 5000000);
+  const bill = pv.items.find((i) => i.kind === 'bill');
+  assert.strictEqual(bill.a_ten, 'Khách F');
+  assert.strictEqual(bill.phi_minh, 3);
+  const pays = pv.items.filter((i) => i.kind === 'pay');
+  assert.strictEqual(JSON.stringify(pays.map((p) => p.so_tien)), JSON.stringify([30000000, 100000000]), '"Hoàn 30" = 30 triệu');
+  assert.strictEqual(pv.items.filter((i) => i.kind === 'skip').length, 1);
+  assert.strictEqual(call('listTransactions', {}).length, 0, 'preview does not save');
+
+  const sv = call('pasteNotes', { text, year: 2026, save: true });
+  assert.strictEqual(JSON.stringify(sv.saved), JSON.stringify({ tx: 4, pay: 2, bill: 1, bo_qua: 0 }));
+  const r = call('refunds', {});
+  assert.strictEqual(r.summary.tong_phai_hoan, 9840000 + 1970000 + 27636000 + 4950000, 'all pasted rows count in công nợ');
+  assert.strictEqual(r.summary.tong_da_chuyen, 130000000);
+  // dán lại: không nhân đôi
+  assert.strictEqual(JSON.stringify(call('pasteNotes', { text, year: 2026, save: true }).saved), JSON.stringify({ tx: 0, pay: 0, bill: 0, bo_qua: 7 }));
+});
+
 console.log(`\n${passed} test(s) passed`);

@@ -279,6 +279,7 @@ function api(token, action, payload) {
     report: apiReport_,
     saveSettings: apiSaveSettings_,
     importTransactions: apiImportTransactions_,
+    pasteNotes: apiPasteNotes_,
     refunds: apiRefunds_,
     savePayment: apiSavePayment_,
     deletePayment: apiDeletePayment_,
@@ -655,6 +656,140 @@ function apiImportTransactions_(p) {
     }
   });
   return { ok: ok, errors: errors };
+}
+
+/**
+ * Dán sổ ghi chú hằng ngày (viết tay trên điện thoại), ví dụ:
+ *   2/10: Hoàn 274.806 lãi 1.653
+ *   Rút VP a Đức Thắng FPT 13.068/1.9 hoàn 1.6 RR      → Rút tiền · thẻ VP · khách · 13.068.000đ · phí khách 1.9% · phí máy 1.6%
+ *   Rút QR FE Hưng SB 2.980/100k hoàn 1.5 RR            → phí khách cố định 100k
+ *   (Rút SC Hiếu Đinh HN 1.975.061/5.0 hoàn 2.0 điện Thuỷ lãi 60k RR) → hoá đơn điện của Thuỷ, B = Hiếu Đinh trả bằng ví SC
+ *   Hoàn 400 còn 57.053                                  → C.Trâm chuyển 400tr
+ * Số trong sổ tính theo nghìn đồng ("13.068" = 13.068.000đ); riêng "Hoàn 400" (không có dấu chấm) = 400 triệu.
+ * save = false: chỉ xem trước. save = true: lưu (bỏ qua dòng đã có trong app).
+ */
+var NOTE_CARD_EXTRA = /^(jcb|visa|master|mastercard|mc|vàng|vang|plat|platinum|signature|bạch|kim|infinite|world)$/i;
+var NOTE_BILL_WORD = /(?:^|\s)(điện|nước|bảo hiểm|internet|học phí|momo|hđ|hoá đơn|hóa đơn)\s+(.+?)\s+lãi\b/i;
+
+function noteMoney_(s) { return Math.round(parseNum_(String(s).replace(/\./g, '').replace(',', '.'))); }
+function noteThousand_(s) { // "274.806" → 274.806.000; "1.406k" → 1.406.000; "60k" → 60.000
+  var t = String(s || '').toLowerCase().replace(/\s/g, '');
+  if (/tr$|triệu$/.test(t)) return parseAmount_(t);
+  return noteMoney_(t.replace(/k$/, '')) * 1000;
+}
+
+function parseNoteLine_(line, ngay) {
+  var inner = line.replace(/^\((.*)\)$/, '$1').trim();
+  var pm = inner.match(/^(hoàn|ứng|chuyển|ck)\s+([\d.,]+)\s*(tỷ|ty|tr|triệu|k)?\b\.?\s*(?:,?\s*còn(?:\s+hoàn)?\s+([\d.,]+)\s*(?:k|tr)?)?/i);
+  if (pm && !/\//.test(inner)) {
+    var raw = pm[2].replace(/[.,]+$/, ''), unit = (pm[3] || '').toLowerCase(), amt;
+    if (unit === 'tỷ' || unit === 'ty') amt = Math.round(parseNum_(raw.replace(',', '.')) * 1e9);
+    else if (unit === 'tr' || unit === 'triệu') amt = Math.round(parseNum_(raw.replace(',', '.')) * 1e6);
+    else if (unit === 'k') amt = noteMoney_(raw) * 1000;
+    else amt = /[.,]/.test(raw) ? noteMoney_(raw) * 1000 : noteMoney_(raw) * 1e6; // "Hoàn 400" = 400tr
+    return { kind: 'pay', ngay: ngay, loai: /^ứng/i.test(pm[1]) ? 'Ứng trước' : 'Hoàn tiền', so_tien: amt,
+      con: pm[4] ? noteThousand_(pm[4]) : null, ghi_chu: 'Dán sổ: ' + line };
+  }
+  var m = inner.match(/^(đh\s*\/\s*rút|đh\s*\+\s*rút|đáo\s*\/\s*rút|đh|đáo hạn|đáo|rút)(\s+qr)?\s+(.+?)\s+([\d.,]+\s*(?:tr|triệu)?)\s*\/\s*([\d.,]+)\s*(k)?\s+hoàn\s+([\d.,+]+)(.*)$/i);
+  if (!m) {
+    var lai = inner.match(/lãi\s+([\d.,]+\s*k?)/i);
+    return { kind: 'skip', lai: lai ? noteThousand_(lai[1]) : 0 };
+  }
+  var tokens = m[3].split(' '), the = [tokens.shift()];
+  while (tokens.length > 1 && NOTE_CARD_EXTRA.test(tokens[0])) the.push(tokens.shift());
+  var ten = tokens.join(' ') || the.join(' ');
+  var amt2 = /tr|triệu/i.test(m[4]) ? parseAmount_(m[4].replace(/\s/g, '')) : (m[4].split('.').length > 2 ? noteMoney_(m[4]) : parseAmount_(m[4]));
+  var feeN = parseNum_(m[5].replace(',', '.')), fixed = !!m[6] || feeN >= 10;
+  var phiMay = sumExpr_(m[7]);
+  var rest = m[8].trim();
+  var o = { ngay: ngay, so_tien: amt2, phi_may_text: String(phiMay), the: the.join(' '), ten_khach: ten,
+    dich_vu: parseService_(m[1]), lai_so: 0 };
+  if (!(amt2 > 0)) return { kind: 'skip', lai: 0 };
+  if (fixed) o.phi_khach = feeN * 1000 / amt2 * 100;
+  else o.phi_khach = feeN;
+  var bill = rest.match(NOTE_BILL_WORD);
+  if (bill && !fixed) {
+    var w = bill[1].toLowerCase();
+    var loai = w === 'điện' ? 'Hoá đơn điện' : w === 'nước' ? 'Hoá đơn nước' : w === 'bảo hiểm' ? 'Thanh toán bảo hiểm'
+      : w === 'internet' ? 'Internet / truyền hình' : w === 'học phí' ? 'Học phí' : w === 'momo' ? 'Nạp ví MoMo' : 'Khác';
+    return { kind: 'bill', ngay: ngay, loai_hd: loai, so_tien: amt2, a_ten: bill[2].trim(), phi_a: phiMay,
+      phi_minh: round2_(feeN - phiMay), b_ten: ten, vi_b: o.the, done: /\bR+\b/.test(rest), ghi_chu: 'Dán sổ: ' + line };
+  }
+  var notes = [];
+  if (m[2]) notes.push('QR');
+  if (fixed) notes.push('phí ' + feeN + 'k');
+  var thu = rest.match(/phí\s+([\d.,]+)\s*k?/i);
+  if (thu) { notes.push('thu phí ' + thu[1] + 'k'); rest = rest.replace(thu[0], ''); }
+  rest = rest.trim();
+  if (rest) notes.push(rest);
+  o.ghi_chu = notes.join(' · ');
+  o.kind = 'tx';
+  return o;
+}
+
+function apiPasteNotes_(p) {
+  var year = Number(p.year) || parseYmd_(todayStr_()).y;
+  var lines = String(p.text || '').split(/\r?\n/);
+  var cur = '', days = {}, order = [], items = [];
+  var allTx = readAll_('GiaoDich'), allPay = readAll_('DoiSoat'), allBill = readAll_('HoaDon');
+  function day(d) { if (!days[d]) { days[d] = { ngay: d, hoan_so: null, lai_so: null, hoan: 0, lai: 0, so_gd: 0, tra: 0, con_so: null }; order.push(d); } return days[d]; }
+  lines.forEach(function (raw, i) {
+    var line = raw.replace(/\s+/g, ' ').trim();
+    if (!line) return;
+    var h = line.match(/^(\d{1,2}[\/.-]\d{1,2}(?:[\/.-]\d{2,4})?)\s*:\s*(.*)$/);
+    if (h) {
+      try { cur = parseDateLoose_(h[1], year); } catch (e) { items.push({ dong: i + 1, line: line, kind: 'err', loi: e.message }); return; }
+      var d = day(cur), hh = h[2].match(/hoàn\s+([\d.,]+\s*k?)/i), ll = h[2].match(/lãi\s+([\d.,]+\s*k?)/i);
+      if (hh) d.hoan_so = noteThousand_(hh[1]);
+      if (ll) d.lai_so = noteThousand_(ll[1]);
+      return;
+    }
+    if (!cur) { items.push({ dong: i + 1, line: line, kind: 'err', loi: 'Chưa có dòng ngày (VD "2/10:") ở phía trên' }); return; }
+    var it = parseNoteLine_(line, cur);
+    it.dong = i + 1; it.line = line;
+    var d2 = day(cur);
+    if (it.kind === 'tx') {
+      var chi = Math.round(it.so_tien * Number(it.phi_may_text) / 100), phi = Math.round(it.so_tien * it.phi_khach / 100);
+      it.tien_hoan = it.so_tien - chi; it.lai = phi - chi;
+      d2.hoan += it.tien_hoan; d2.lai += it.lai; d2.so_gd++;
+      it.da_co = allTx.some(function (t) { return t.ngay === cur && Number(t.so_tien) === it.so_tien && normName_(t.the) === normName_(it.the); });
+    } else if (it.kind === 'bill') {
+      var b = billCalc_({ so_tien: it.so_tien, phi_a: it.phi_a, phi_minh: it.phi_minh });
+      it.lai = b.doanh_thu; d2.lai += it.lai;
+      it.da_co = allBill.some(function (x) { return x.ngay === cur && Number(x.so_tien) === it.so_tien; });
+    } else if (it.kind === 'pay') {
+      d2.tra += it.so_tien; if (it.con != null) d2.con_so = it.con;
+      it.da_co = allPay.some(function (x) { return x.ngay === cur && x.loai === it.loai && Number(x.so_tien) === it.so_tien; });
+    } else {
+      d2.lai += it.lai || 0;
+      it.loi = it.lai ? 'Chưa đọc được – lãi ' + fmtMoney_(it.lai) + ' đã cộng vào ô kiểm tra lãi; thêm tay nếu cần' : 'Chưa đọc được dòng này – thêm tay';
+    }
+    items.push(it);
+  });
+  var saved = { tx: 0, pay: 0, bill: 0, bo_qua: 0 };
+  if (p.save) {
+    items.forEach(function (it) {
+      if (['tx', 'pay', 'bill'].indexOf(it.kind) < 0) return;
+      if (it.da_co) { saved.bo_qua++; return; }
+      try {
+        if (it.kind === 'tx') {
+          apiSaveTransaction_({ ngay: it.ngay, dich_vu: it.dich_vu, the: it.the, ten_khach: it.ten_khach, so_tien: it.so_tien,
+            phi_khach: it.phi_khach, phi_may_text: it.phi_may_text, ghi_chu: it.ghi_chu, vao_so: true });
+          saved.tx++;
+        } else if (it.kind === 'pay') {
+          apiSavePayment_({ ngay: it.ngay, loai: it.loai, so_tien: it.so_tien, ghi_chu: it.ghi_chu });
+          saved.pay++;
+        } else {
+          apiSaveBill_({ ngay: it.ngay, loai_hd: it.loai_hd, so_tien: it.so_tien, a_ten: it.a_ten, phi_a: it.phi_a, phi_minh: it.phi_minh,
+            b_ten: it.b_ten, vi_b: it.vi_b, b_tt_ngay: it.done ? it.ngay : '', a_ck_ngay: it.done ? it.ngay : '', b_ck_ngay: it.done ? it.ngay : '',
+            ghi_chu: it.ghi_chu });
+          saved.bill++;
+        }
+        it.da_luu = true;
+      } catch (e) { it.loi = e.message || String(e); }
+    });
+  }
+  return { days: order.map(function (d) { return days[d]; }), items: items, saved: p.save ? saved : null };
 }
 
 /* ------------------------------------------------------------------ */
