@@ -950,6 +950,11 @@ const live = Date.now() < DEADLINE;
 const ss = {get: k => { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
             set: (k, v) => { try { sessionStorage.setItem(k, v); } catch (e) {} }};
 const $ = s => document.querySelector(s);
+// Tên trang để biết khách chat ở đâu
+const PATH = location.pathname.replace(/\/+$/, '') || '/';
+const PAGE = {'/': 'Trang chủ', '/toa-f2': 'Tòa F2', '/toa-f2-ads': 'ADS', '/bang-tinh-f2': 'Bảng tính', '/gio-hang': 'Giỏ hàng', '/phap-ly': 'Pháp lý'}[PATH] || PATH;
+const SRC_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'gclid', 'ttclid'];
+SRC_KEYS.forEach(k => { const v = new URLSearchParams(location.search).get(k); if (v) ss.set('src_' + k, v); });
 const launch = $('#chatBtn'), box = $('#chatBox'), body = $('#chatBody'), form = $('#chatForm'), inp = $('#chatIn');
 const teaser = $('#chatTeaser'), badge = $('#chatDot');
 const mobile = () => matchMedia('(max-width:640px)').matches;
@@ -967,7 +972,7 @@ function bot(html) {
     body.appendChild(m); scroll();
     await sleep(Math.min(1500, 450 + html.length * 8));
     m.className = 'cm bot'; m.innerHTML = html; scroll();
-    st.log.push('Tư vấn: ' + m.textContent);
+    st.log.push('🤖 Bot: ' + m.textContent);
   });
   return queue;
 }
@@ -975,14 +980,14 @@ function me(text) {
   const m = document.createElement('div');
   m.className = 'cm me'; m.textContent = text;
   body.appendChild(m); scroll();
-  st.log.push('Khách: ' + text);
+  st.log.push('\n👤 KHÁCH: ' + text);
 }
 function choices(list) {
   queue = queue.then(() => {
     const w = document.createElement('div'); w.className = 'chat-qr';
     list.forEach(c => {
       const el = document.createElement(c.href ? 'a' : 'button');
-      if (c.href) { el.href = c.href; if (c.href.indexOf('http') === 0) { el.target = '_blank'; el.rel = 'noopener'; } el.addEventListener('click', () => st.log.push('Khách bấm: ' + c.t)); }
+      if (c.href) { el.href = c.href; if (c.href.indexOf('http') === 0) { el.target = '_blank'; el.rel = 'noopener'; } el.addEventListener('click', () => st.log.push('\n👤 KHÁCH BẤM: ' + c.t)); }
       else el.type = 'button';
       if (c.pri) el.className = 'pri';
       el.textContent = c.t;
@@ -1049,7 +1054,7 @@ function start() {
     thanksChoices();
     return;
   }
-  bot('Chào anh/chị 👋 Em là trợ lý tư vấn <b>Tòa F2 – Sun FourS Tower</b> Đà Nẵng.');
+  bot('Chào anh/chị 👋 Em là trợ lý tư vấn <b>Sun FourS Tower</b> Đà Nẵng – Tòa F2 đang mở bán.');
   bot('Anh/chị cần hỏi gì cứ nhắn em nhé. Để em gợi ý đúng căn, anh/chị đang tìm căn để <b>ở</b> hay <b>đầu tư</b> ạ?');
   st.step = 'goal';
   choices(['🏠 Mua để ở', '📈 Đầu tư cho thuê', '👀 Tham khảo trước'].map(t => ({t, fn: () => pickGoal(t.replace(/^\S+\s/, ''))})));
@@ -1070,7 +1075,7 @@ function pickBudget(b) {
 // Mời khách để lại số Zalo, nhẹ nhàng, có nút từ chối
 function offer() {
   st.step = 'phone';
-  bot('Trên trang mới đăng một phần giỏ hàng. Nếu anh/chị muốn, em gửi <b>danh sách căn còn trống đúng tầm tài chính</b> kèm <b>bảng tính giá sau chiết khấu</b> qua Zalo để anh/chị xem lúc rảnh ạ.');
+  bot('Nếu anh/chị muốn, em gửi <b>danh sách căn còn trống đúng tầm tài chính</b> kèm <b>bảng tính giá sau chiết khấu</b> qua Zalo để anh/chị xem lúc rảnh ạ.');
   setInput('Nhập số điện thoại / Zalo…', true);
   choices([
     {t: '📱 Để lại số Zalo', pri: true, silent: true, fn: () => { setInput('Nhập số điện thoại / Zalo…', true); inp.focus(); }},
@@ -1099,7 +1104,7 @@ function thanksChoices() {
 // Báo cho Giám đốc kinh doanh biết có khách đang chat (gửi email 1 lần mỗi phiên, kể cả khi khách chưa để số)
 const srcData = () => {
   const d = {}, qs = new URLSearchParams(location.search);
-  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'gclid', 'ttclid'].forEach(k => { const v = qs.get(k) || ss.get('src_' + k); if (v) d[k] = v; });
+  SRC_KEYS.forEach(k => { const v = qs.get(k) || ss.get('src_' + k); if (v) d[k] = v; });
   return d;
 };
 function ping() {
@@ -1107,8 +1112,8 @@ function ping() {
   ss.set('chat_ping', '1');
   queue.then(() => {
     const data = Object.assign({
-      thong_bao: 'Khách đang chat trên trang ads (chưa để số điện thoại)',
-      nhu_cau: st.goal, tai_chinh: st.budget, cau_hoi: st.question, hoi_thoai: st.log.join('\n'),
+      thong_bao: 'Khách đang chat trên trang ' + PAGE + ' (chưa để số điện thoại)',
+      nhu_cau: st.goal, tai_chinh: st.budget, cau_hoi: st.question, hoi_thoai: st.log.join('\n').trim(),
       time: new Date().toLocaleString('vi-VN'), source: location.href.split('?')[0],
       _subject: '💬 Khách đang chat – Tòa F2 FourS Tower (' + new Date().toLocaleTimeString('vi-VN', {hour: '2-digit', minute: '2-digit'}) + ')',
       _template: 'table', _captcha: 'false'
@@ -1125,8 +1130,8 @@ function finish() {
   setInput('Nhắn thêm cho tư vấn viên…', false);
   const data = {
     name: st.name || 'Khách chat', phone: st.phone, toa: 'F2',
-    interest: 'ADS – chat' + (st.goal ? ' – ' + st.goal : '') + (st.budget ? ' – ' + st.budget : ''),
-    nhu_cau: st.goal, tai_chinh: st.budget, cau_hoi: st.question, hoi_thoai: st.log.join('\n'),
+    interest: 'Chat ' + PAGE + (st.goal ? ' – ' + st.goal : '') + (st.budget ? ' – ' + st.budget : ''),
+    nhu_cau: st.goal, tai_chinh: st.budget, cau_hoi: st.question, hoi_thoai: st.log.join('\n').trim(),
     time: new Date().toLocaleString('vi-VN'), source: location.href.split('?')[0]
   };
   Object.assign(data, srcData());

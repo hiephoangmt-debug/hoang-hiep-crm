@@ -869,5 +869,324 @@ $$('.lead-form').forEach(f => f.addEventListener('submit', async e => {
 
 })();
 </script>
+<style>
+/* ===== Chat tư vấn tự động: chào khách, mời để lại số Zalo ===== */
+.chat-launch{position:fixed;right:18px;bottom:160px;z-index:65;width:60px;height:60px;border-radius:50%;cursor:pointer;background:#13285a;color:#fff;border:2px solid #f47a1f;box-shadow:0 12px 28px -8px rgba(11,26,58,.55);display:grid;place-items:center;padding:0}
+.chat-launch .dot{position:absolute;top:-5px;right:-5px;min-width:22px;height:22px;border-radius:999px;background:#f47a1f;color:#fff;font:800 12px/18px var(--sans);text-align:center;padding:0 6px;border:2px solid #fff}
+.chat-launch.pulse{animation:chatPulse 2s infinite}
+@keyframes chatPulse{0%{box-shadow:0 0 0 0 rgba(244,122,31,.55)}70%{box-shadow:0 0 0 16px rgba(244,122,31,0)}100%{box-shadow:0 0 0 0 rgba(244,122,31,0)}}
+.chat-teaser{position:fixed;right:90px;bottom:166px;z-index:65;max-width:270px;background:#fff;color:#1b2333;border-radius:16px 16px 4px 16px;padding:12px 30px 12px 14px;font-size:14.5px;line-height:1.45;box-shadow:0 14px 34px -10px rgba(11,26,58,.45);border:1px solid #dfe5f0;border-left:4px solid #f47a1f;cursor:pointer;animation:chatIn .35s ease-out}
+.chat-teaser b{color:#13285a}
+.chat-teaser .cx{position:absolute;top:2px;right:4px;background:none;border:0;font-size:19px;color:#8a93a6;cursor:pointer;line-height:1;padding:4px}
+.chat-box{position:fixed;right:18px;bottom:22px;z-index:90;width:370px;max-width:calc(100vw - 24px);height:560px;max-height:calc(100vh - 60px);background:#fff;border-radius:18px;box-shadow:0 24px 60px -18px rgba(11,26,58,.6);display:flex;flex-direction:column;overflow:hidden;animation:chatIn .3s ease-out;font-family:var(--sans)}
+.chat-box[hidden],.chat-teaser[hidden],.chat-launch[hidden]{display:none}
+@keyframes chatIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.chat-head{display:flex;align-items:center;gap:10px;padding:13px 12px 11px 14px;background:linear-gradient(120deg,#0b1a3a,#1f3f82);color:#fff;border-bottom:3px solid #f47a1f}
+.chat-av{flex:0 0 40px;height:40px;border-radius:50%;background:#f47a1f;color:#fff;display:grid;place-items:center;font-weight:800;font-size:17px}
+.chat-head b{display:block;font-size:15px;line-height:1.3}
+.chat-head small{font-size:12.5px;opacity:.88;display:flex;align-items:center;gap:6px}
+.chat-head small::before{content:"";width:8px;height:8px;border-radius:50%;background:#ffa04a;box-shadow:0 0 0 3px rgba(255,160,74,.25)}
+.chat-head .cx{margin-left:auto;background:none;border:0;color:#fff;font-size:28px;cursor:pointer;line-height:1;padding:2px 8px}
+.chat-body{flex:1;overflow-y:auto;padding:14px 12px;background:#f3f6fb;display:flex;flex-direction:column;gap:8px;overscroll-behavior:contain}
+.cm{max-width:86%;padding:10px 13px;border-radius:16px;font-size:14.5px;line-height:1.45;animation:chatIn .25s ease-out;overflow-wrap:anywhere}
+.cm.bot{align-self:flex-start;background:#fff;color:#1b2333;border:1px solid #dfe5f0;border-bottom-left-radius:4px}
+.cm.bot b{color:#13285a}
+.cm.me{align-self:flex-end;background:linear-gradient(135deg,#ffa04a,#f47a1f);color:#fff;border-bottom-right-radius:4px}
+.cm.typing{display:flex;gap:4px;padding:13px 14px}
+.cm.typing i{width:7px;height:7px;border-radius:50%;background:#9aa6bf;animation:chatDot 1s infinite}
+.cm.typing i:nth-child(2){animation-delay:.15s}.cm.typing i:nth-child(3){animation-delay:.3s}
+@keyframes chatDot{0%,60%,100%{opacity:.35;transform:none}30%{opacity:1;transform:translateY(-3px)}}
+.chat-qr{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+.chat-qr button,.chat-qr a{border:1.5px solid #f47a1f;background:#fff;color:#13285a;border-radius:999px;padding:8px 13px;font:600 13.5px/1.2 var(--sans);cursor:pointer;text-decoration:none}
+.chat-qr button:hover,.chat-qr a:hover{background:#fff3e8}
+.chat-qr .pri{background:#f47a1f;color:#fff}.chat-qr .pri:hover{background:#e0600a}
+.chat-foot{display:flex;gap:8px;padding:10px 10px 6px;border-top:1px solid #dfe5f0;background:#fff}
+.chat-foot input{flex:1;min-width:0;padding:11px 15px;border:1px solid #dfe5f0;border-radius:999px;font:inherit;font-size:16px;color:#1b2333;background:#fff}
+.chat-foot input:focus{outline:none;border-color:#f47a1f;box-shadow:0 0 0 3px rgba(244,122,31,.2)}
+.chat-foot button{flex:0 0 44px;height:44px;border-radius:50%;border:0;background:#f47a1f;color:#fff;cursor:pointer;display:grid;place-items:center;padding:0}
+.chat-note{font-size:11.5px;color:#5a6275;text-align:center;padding:0 10px 8px;background:#fff;margin:0}
+@media (max-width:640px){
+  .chat-launch{right:14px;bottom:64px;width:54px;height:54px}
+  .chat-teaser{right:76px;bottom:68px;max-width:calc(100vw - 96px);font-size:14px}
+  .chat-box{right:0;left:0;bottom:0;width:auto;max-width:none;height:min(80vh,600px);max-height:none;border-radius:18px 18px 0 0;z-index:95}
+}
+@media (prefers-reduced-motion:reduce){.chat-launch.pulse{animation:none}}
+</style>
+<button type="button" class="chat-launch" id="chatBtn" aria-label="Chat với tư vấn viên" aria-expanded="false"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.9 2 11.7c0 2.7 1.4 5.1 3.7 6.7L5 22l4.2-2.2c.9.2 1.8.3 2.8.3 5.5 0 10-3.9 10-8.7S17.5 3 12 3zm-4.5 10a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6zm4.5 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6zm4.5 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6z"/></svg><span class="dot" id="chatDot" hidden>1</span></button>
+<div class="chat-teaser" id="chatTeaser" role="button" tabindex="0" hidden><button type="button" class="cx" aria-label="Ẩn lời chào">×</button><span id="chatTeaserTxt"></span></div>
+<div class="chat-box" id="chatBox" role="dialog" aria-label="Chat tư vấn Sun FourS Tower" hidden>
+  <div class="chat-head"><span class="chat-av" aria-hidden="true">S</span><div><b>Tư vấn Sun FourS Tower</b><small>Đang trực tuyến · trả lời ngay</small></div><button type="button" class="cx" aria-label="Thu nhỏ chat">×</button></div>
+  <div class="chat-body" id="chatBody" aria-live="polite"></div>
+  <form class="chat-foot" id="chatForm" autocomplete="off"><input id="chatIn" type="text" placeholder="Nhập tin nhắn hoặc số điện thoại…" aria-label="Tin nhắn" enterkeyhint="send" maxlength="300"><button type="submit" aria-label="Gửi"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 20.5 21 12 3 3.5l.01 6.6L15 12 3.01 13.9z"/></svg></button></form>
+  <p class="chat-note">🔒 Số điện thoại chỉ dùng để tư vấn, không spam.</p>
+</div>
+<script>
+/* Chat tư vấn tự động: chào khách, hỏi nhu cầu & tài chính, gợi ý căn phù hợp, mời để lại số Zalo rồi gửi về CRM + email + Telegram */
+(function () {
+'use strict';
+const CRM = 'https://script.google.com/macros/s/AKfycbzOsX6tHZmXEDAdVLZY__hrAeCVslIyG2eFpYZ2Q-lEptukacOW6r7VSvlButoyOrZY/exec?key=4ezop6bxuvicj8wykd2gl19t';
+const MAIL = 'https://formsubmit.co/ajax/hiephoangmt@gmail.com';
+const TG = 'https://script.google.com/macros/s/AKfycbwvmG1HMtrQOeUXCuBJ6CHmMb4TcCZ53_n5lwPAt3-6-lG2_fIRX0q25Rv-6LPwVWXZHw/exec?key=sft-tg-4821';
+const ZALO = 'https://zalo.me/0904567009', TEL = 'tel:0904567009';
+const DEADLINE = new Date('2026-10-25T23:59:59+07:00').getTime();
+const live = Date.now() < DEADLINE;
+const ss = {get: k => { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
+            set: (k, v) => { try { sessionStorage.setItem(k, v); } catch (e) {} }};
+const $ = s => document.querySelector(s);
+// Tên trang để biết khách chat ở đâu
+const PATH = location.pathname.replace(/\/+$/, '') || '/';
+const PAGE = {'/': 'Trang chủ', '/toa-f2': 'Tòa F2', '/toa-f2-ads': 'ADS', '/bang-tinh-f2': 'Bảng tính', '/gio-hang': 'Giỏ hàng', '/phap-ly': 'Pháp lý'}[PATH] || PATH;
+const SRC_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'gclid', 'ttclid'];
+SRC_KEYS.forEach(k => { const v = new URLSearchParams(location.search).get(k); if (v) ss.set('src_' + k, v); });
+const launch = $('#chatBtn'), box = $('#chatBox'), body = $('#chatBody'), form = $('#chatForm'), inp = $('#chatIn');
+const teaser = $('#chatTeaser'), badge = $('#chatDot');
+const mobile = () => matchMedia('(max-width:640px)').matches;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const st = {step: '', goal: '', budget: '', question: '', phone: '', name: '', log: [], started: false, refused: 0};
+
+// Tin nhắn: bot hiện "đang gõ…" rồi mới hiện chữ, chạy lần lượt theo hàng đợi
+let queue = Promise.resolve();
+const scroll = () => { body.scrollTop = body.scrollHeight; };
+function bot(html) {
+  queue = queue.then(async () => {
+    const m = document.createElement('div');
+    m.className = 'cm bot typing'; m.innerHTML = '<i></i><i></i><i></i>';
+    body.appendChild(m); scroll();
+    await sleep(Math.min(1500, 450 + html.length * 8));
+    m.className = 'cm bot'; m.innerHTML = html; scroll();
+    st.log.push('🤖 Bot: ' + m.textContent);
+  });
+  return queue;
+}
+function me(text) {
+  const m = document.createElement('div');
+  m.className = 'cm me'; m.textContent = text;
+  body.appendChild(m); scroll();
+  st.log.push('\n👤 KHÁCH: ' + text);
+}
+function choices(list) {
+  queue = queue.then(() => {
+    const w = document.createElement('div'); w.className = 'chat-qr';
+    list.forEach(c => {
+      const el = document.createElement(c.href ? 'a' : 'button');
+      if (c.href) { el.href = c.href; if (c.href.indexOf('http') === 0) { el.target = '_blank'; el.rel = 'noopener'; } el.addEventListener('click', () => st.log.push('\n👤 KHÁCH BẤM: ' + c.t)); }
+      else el.type = 'button';
+      if (c.pri) el.className = 'pri';
+      el.textContent = c.t;
+      if (c.fn) el.addEventListener('click', () => { w.remove(); if (!c.silent) me(c.t); c.fn(); });
+      w.appendChild(el);
+    });
+    body.appendChild(w); scroll();
+  });
+  return queue;
+}
+const clearChoices = () => body.querySelectorAll('.chat-qr').forEach(e => e.remove());
+const setInput = (ph, tel) => { inp.placeholder = ph; inp.type = tel ? 'tel' : 'text'; inp.inputMode = tel ? 'tel' : 'text'; };
+const focusInput = () => queue.then(() => { if (!mobile()) inp.focus(); });
+
+// Số điện thoại Việt Nam: 10 số, đầu 03/05/07/08/09 (chấp nhận +84, khoảng trắng, dấu chấm)
+const normPhone = s => {
+  let d = String(s).replace(/[^\d+]/g, '');
+  if (d.indexOf('+84') === 0) d = '0' + d.slice(3);
+  else if (d.indexOf('84') === 0 && d.length === 11) d = '0' + d.slice(2);
+  return /^0[35789]\d{8}$/.test(d) ? d : '';
+};
+const findPhone = s => { const m = String(s).replace(/[\s.\-()]/g, '').match(/(\+?84|0)\d{9}/); return m ? normPhone(m[0]) : ''; };
+const showPhone = p => p.replace(/^(\d{4})(\d{3})(\d{3})$/, '$1 $2 $3');
+
+// Gợi ý căn theo tài chính (giỏ hàng Tòa F2 cập nhật 03/10/2026, giá gồm VAT, trước chiết khấu)
+const PITCH = {
+  'Dưới 2,5 tỷ': 'Tầm này anh/chị chọn được <b>Studio từ 1,98 tỷ</b> hoặc <b>1PN từ 2,22 tỷ</b> – có căn view sông, biển, Sunneva.',
+  '2,5 – 3,5 tỷ': 'Tầm này là <b>1PN+ (47–61 m²)</b>, từ <b>2,80 tỷ</b> – nhiều căn view sông, biển, Ngũ Hành Sơn, có phòng đa năng làm phòng ngủ nhỏ.',
+  'Trên 3,5 tỷ': 'Tầm này có <b>2PN từ 4,30 tỷ</b> và <b>căn góc 3PN ~86 m² khoảng 5,91 tỷ</b> view sông, biển, pháo hoa DIFF – loại căn hiếm, ít căn còn lại.',
+  'Vốn ít – muốn vay': 'Phương án hợp nhất là <b>vay 70%</b>, chủ đầu tư hỗ trợ <b>lãi suất 0% trong 24 tháng</b> – anh/chị chỉ cần khoảng <b>25%</b> đến khi nhận nhà. Ví dụ căn 2PN chỉ cần khoảng <b>725 triệu</b>.'
+};
+const GOAL_LINE = {
+  'Mua để ở': 'Mua để ở thì tầng 2–7 có <b>căn sân vườn riêng tới ~69 m²</b> – rất hiếm ở Đà Nẵng, tầng 2 có hồ bơi bốn mùa, gym, Kids Club.',
+  'Đầu tư cho thuê': 'Đầu tư thì khách hay chọn Studio, 1PN vì tổng tiền thấp, dễ cho thuê; vay 70% thì vốn bỏ ra chỉ khoảng 25%.',
+  'Tham khảo trước': 'Dạ tham khảo kỹ là đúng ạ – em gửi anh/chị đủ số liệu để so sánh.'
+};
+
+// Trả lời nhanh khi khách tự gõ câu hỏi
+const FAQ = [
+  [/chiết khấu|\bck\b|ưu đãi|giảm giá|khuyến mãi/i, () => live
+    ? 'Chiết khấu cộng dồn tới <b>19%</b>: Early Bird 3% + không vay 3% + từ chối bảo lãnh 1% + thanh toán sớm tới 12% (trước <b>25/10/2026</b>). Mỗi căn trừ ra số tiền khác nhau.'
+    : 'Hiện có chiết khấu Early Bird 3%, không vay thêm 3% và từ chối bảo lãnh 1% theo chính sách CSBH 4.2.'],
+  [/giá|bao nhiêu|nhiêu tiền|tỷ|tr\/m|triệu/i, () => 'Giá Tòa F2 (gồm VAT, trước chiết khấu): <b>Studio từ 1,98 tỷ</b>, 1PN từ 2,22 tỷ, 1PN+ từ 2,80 tỷ, 2PN từ 4,30 tỷ, 3PN khoảng 5,91 tỷ.'],
+  [/vay|ngân hàng|lãi|trả góp|góp/i, () => 'Ngân hàng cho vay <b>70%</b>, chủ đầu tư hỗ trợ <b>lãi suất 0% trong 24 tháng</b> và ân hạn nợ gốc – chỉ cần khoảng <b>25%</b> đến khi nhận nhà.'],
+  [/pháp lý|sổ|giấy phép|đủ điều kiện|bảo lãnh/i, () => 'Tòa F2 có <b>sổ đỏ lô đất</b> (CP 912579), Sở Xây dựng xác nhận <b>607 căn đủ điều kiện bán</b> (VB 17239/SXD-QLN), <b>Techcombank bảo lãnh</b> cho người mua.'],
+  [/cọc|đặt chỗ|giữ chỗ|giữ căn/i, () => 'Cọc chỉ <b>100 triệu</b> (căn 3PN 150 triệu), sau 15 ngày bổ sung đủ 15%. Em giữ căn giúp anh/chị được, chỉ cần kiểm tra căn còn trống trước.'],
+  [/bàn giao|nhận nhà|khi nào|tiến độ|xây/i, () => 'Tòa F2 khởi công 21/07/2026; thanh toán đủ 70% là <b>nhận nhà dự kiến 31/05/2028</b>.'],
+  [/vị trí|ở đâu|địa chỉ|chỗ nào|đường/i, () => 'Dự án ở <b>ngã tư Nguyễn Phước Lan – Minh Mạng</b>, phường Ngũ Hành Sơn, Đà Nẵng – nằm trong đại đô thị Sun Riverpolis, gần sông Cổ Cò và biển.'],
+  [/tiện ích|hồ bơi|gym|spa|trường|công viên/i, () => 'Tầng 2 có <b>hồ bơi bốn mùa</b>, gym, yoga, spa, Kids Club, phòng khám; xung quanh là công viên và tiện ích Sun Riverpolis.'],
+  [/cho thuê|đầu tư|lợi nhuận|sinh lời|lời/i, () => 'Khách đầu tư hay chọn Studio, 1PN vì tổng tiền thấp, dễ cho thuê; vay 70% thì vốn bỏ ra chỉ khoảng 25%. Em gửi anh/chị phương án dòng tiền cụ thể từng căn.'],
+  [/sân vườn|view|biển|sông|pháo hoa|tầng cao/i, () => 'Tầng 2–7 có <b>căn sân vườn tới ~69 m²</b>; tầng cao có view sông, biển, pháo hoa DIFF. Căn đẹp thường hết trước.'],
+  [/nhà mẫu|tham quan|xem nhà|xem dự án|đi xem|gặp/i, () => 'Em sắp xếp lịch <b>xem dự án / nhà mẫu</b> cho anh/chị được ạ, có chuyên viên đón và dẫn đi.'],
+  [/studio|1pn|2pn|3pn|phòng ngủ|diện tích|m2|m²/i, () => 'Tòa F2 có Studio 30–34 m², 1PN ~42 m², 1PN+ 47–61 m², 2PN 59–64 m², 3PN 85–87 m² (thông thủy).']
+];
+const answerFaq = v => { for (const [re, fn] of FAQ) if (re.test(v)) return fn(); return ''; };
+const NO = /^(không|ko|k|chưa|thôi|để sau|không cần|ko cần|no)\b/i;
+
+function start() {
+  if (st.started) return;
+  st.started = true;
+  if (ss.get('chat_done')) {
+    st.step = 'done';
+    bot('Chào anh/chị 👋 Em đã nhận số điện thoại của anh/chị rồi, chuyên viên sẽ liên hệ sớm ạ. Anh/chị cần thêm gì cứ nhắn em nhé.');
+    thanksChoices();
+    return;
+  }
+  bot('Chào anh/chị 👋 Em là trợ lý tư vấn <b>Sun FourS Tower</b> Đà Nẵng – Tòa F2 đang mở bán.');
+  bot('Anh/chị cần hỏi gì cứ nhắn em nhé. Để em gợi ý đúng căn, anh/chị đang tìm căn để <b>ở</b> hay <b>đầu tư</b> ạ?');
+  st.step = 'goal';
+  choices(['🏠 Mua để ở', '📈 Đầu tư cho thuê', '👀 Tham khảo trước'].map(t => ({t, fn: () => pickGoal(t.replace(/^\S+\s/, ''))})));
+}
+function pickGoal(g) {
+  st.goal = g;
+  bot(GOAL_LINE[g]);
+  bot('Tài chính anh/chị dự kiến khoảng bao nhiêu để em lọc căn phù hợp ạ?');
+  st.step = 'budget';
+  choices(Object.keys(PITCH).map(t => ({t, fn: () => pickBudget(t)})));
+}
+function pickBudget(b) {
+  st.budget = b;
+  bot(PITCH[b]);
+  ping();
+  offer();
+}
+// Mời khách để lại số Zalo, nhẹ nhàng, có nút từ chối
+function offer() {
+  st.step = 'phone';
+  bot('Nếu anh/chị muốn, em gửi <b>danh sách căn còn trống đúng tầm tài chính</b> kèm <b>bảng tính giá sau chiết khấu</b> qua Zalo để anh/chị xem lúc rảnh ạ.');
+  setInput('Nhập số điện thoại / Zalo…', true);
+  choices([
+    {t: '📱 Để lại số Zalo', pri: true, silent: true, fn: () => { setInput('Nhập số điện thoại / Zalo…', true); inp.focus(); }},
+    {t: 'Nhắn Zalo chuyên viên', href: ZALO},
+    {t: 'Xem thêm đã', fn: () => objection()}
+  ]);
+}
+// Khách chưa muốn để số: không hỏi lại, vẫn trả lời câu hỏi bình thường
+function objection() {
+  st.refused++;
+  st.step = 'chat';
+  setInput('Nhập câu hỏi của anh/chị…', false);
+  bot('Dạ vâng ạ, anh/chị cứ xem thoải mái 🙂 Có gì thắc mắc về giá, vay hay pháp lý cứ nhắn em ở đây nhé.');
+}
+function askName() {
+  st.step = 'name';
+  setInput('Nhập tên anh/chị…', false);
+  bot('Em nhận được số <b>' + showPhone(st.phone) + '</b> rồi ạ 👍 Anh/chị cho em xin <b>tên</b> để chuyên viên tiện xưng hô nhé?');
+  choices([{t: 'Bỏ qua', fn: () => finish()}]);
+  focusInput();
+}
+function thanksChoices() {
+  choices([{t: 'Nhắn Zalo 0904 567 009', href: ZALO, pri: true}, {t: '📞 Gọi ngay', href: TEL}]);
+}
+
+// Báo cho Giám đốc kinh doanh biết có khách đang chat (gửi email 1 lần mỗi phiên, kể cả khi khách chưa để số)
+const srcData = () => {
+  const d = {}, qs = new URLSearchParams(location.search);
+  SRC_KEYS.forEach(k => { const v = qs.get(k) || ss.get('src_' + k); if (v) d[k] = v; });
+  return d;
+};
+function ping() {
+  if (ss.get('chat_ping') || ss.get('chat_done')) return;
+  ss.set('chat_ping', '1');
+  queue.then(() => {
+    const data = Object.assign({
+      thong_bao: 'Khách đang chat trên trang ' + PAGE + ' (chưa để số điện thoại)',
+      nhu_cau: st.goal, tai_chinh: st.budget, cau_hoi: st.question, hoi_thoai: st.log.join('\n').trim(),
+      time: new Date().toLocaleString('vi-VN'), source: location.href.split('?')[0],
+      _subject: '💬 Khách đang chat – Tòa F2 FourS Tower (' + new Date().toLocaleTimeString('vi-VN', {hour: '2-digit', minute: '2-digit'}) + ')',
+      _template: 'table', _captcha: 'false'
+    }, srcData());
+    try { fetch(MAIL, {method: 'POST', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}, body: JSON.stringify(data)}).catch(() => {}); } catch (e) {}
+    try { fetch(TG, {method: 'POST', mode: 'no-cors', keepalive: true, headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify(data)}).catch(() => {}); } catch (e) {}
+  });
+}
+
+// Gửi số điện thoại về CRM + email, giống form đăng ký trên trang
+function finish() {
+  if (st.step === 'done') return;
+  st.step = 'done';
+  setInput('Nhắn thêm cho tư vấn viên…', false);
+  const data = {
+    name: st.name || 'Khách chat', phone: st.phone, toa: 'F2',
+    interest: 'Chat ' + PAGE + (st.goal ? ' – ' + st.goal : '') + (st.budget ? ' – ' + st.budget : ''),
+    nhu_cau: st.goal, tai_chinh: st.budget, cau_hoi: st.question, hoi_thoai: st.log.join('\n').trim(),
+    time: new Date().toLocaleString('vi-VN'), source: location.href.split('?')[0]
+  };
+  Object.assign(data, srcData());
+  data._subject = (document.body.dataset.subject || 'Lead ADS') + ' (chat): ' + data.name + ' - ' + data.phone;
+  data._template = 'table'; data._captcha = 'false';
+  try { fetch(CRM, {method: 'POST', mode: 'no-cors', keepalive: true, headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify(Object.assign({project: 'Sun FourS Tower'}, data))}).catch(() => {}); } catch (e) {}
+  try { fetch(MAIL, {method: 'POST', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}, body: JSON.stringify(data)}).catch(() => {}); } catch (e) {}
+  try { fetch(TG, {method: 'POST', mode: 'no-cors', keepalive: true, headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify(data)}).catch(() => {}); } catch (e) {}
+  try { if (window.gtag) gtag('event', 'generate_lead', {event_label: data.interest}); } catch (e) {}
+  try { if (window.fbq) fbq('track', 'Lead', {content_name: data.interest}); } catch (e) {}
+  try { if (window.ttq) ttq.track('SubmitForm'); } catch (e) {}
+  try { (window.dataLayer = window.dataLayer || []).push({event: 'lead_submit', lead_interest: data.interest}); } catch (e) {}
+  ss.set('cro_sent', '1'); ss.set('chat_done', '1');
+  bot('Em cảm ơn ' + (st.name ? 'anh/chị <b>' + esc(st.name) + '</b>' : 'anh/chị') + '! 🙏 Chuyên viên sẽ gửi <b>danh sách căn trống + bảng tính giá sau chiết khấu</b> qua Zalo số <b>' + showPhone(st.phone) + '</b> trong khoảng 15 phút (giờ hành chính).');
+  bot('Nếu cần gấp, anh/chị có thể nhắn Zalo hoặc gọi trực tiếp ạ:');
+  thanksChoices();
+}
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const v = inp.value.trim();
+  if (!v) return;
+  inp.value = '';
+  clearChoices();
+  me(v);
+  if (!st.started) start();
+  if (st.step === 'done') { bot('Em đã ghi lại ạ. Để được trả lời nhanh nhất, anh/chị nhắn Zalo giúp em nhé.'); thanksChoices(); return; }
+  if (st.step === 'name') { st.name = v.slice(0, 60); finish(); return; }
+  const p = findPhone(v);
+  if (p) { st.phone = p; askName(); return; }
+  ping();
+  if (/zalo/i.test(v) && !answerFaq(v)) { bot('Dạ anh/chị bấm nút dưới để nhắn Zalo chuyên viên, hoặc để lại số Zalo em gửi thông tin luôn ạ.'); choices([{t: 'Nhắn Zalo ngay', href: ZALO, pri: true}]); return; }
+  if (st.step === 'phone' && NO.test(v)) { objection(); return; }
+  if (st.step === 'phone' && v.replace(/\D/g, '').length >= 6) { bot('Số điện thoại hình như chưa đúng (cần 10 số, ví dụ 0904 567 009). Anh/chị kiểm tra lại giúp em ạ.'); return; }
+  // Câu hỏi tự do: trả lời ngắn nếu có; chỉ mời để số khi khách chưa từ chối
+  st.question = st.question ? st.question + ' | ' + v : v;
+  const a = answerFaq(v);
+  bot(a || 'Dạ câu này em cần chuyên viên kiểm tra để trả lời chính xác cho anh/chị ạ.');
+  if (st.refused && a) return;
+  st.step = 'phone';
+  bot(a ? 'Nếu anh/chị muốn xem chi tiết từng căn, em gửi qua Zalo cho dễ xem ạ – anh/chị để lại số Zalo là được.' : 'Anh/chị để lại <b>số Zalo</b>, chuyên viên trả lời và gửi tài liệu cho anh/chị trong khoảng 15 phút ạ.');
+  setInput('Nhập số điện thoại / Zalo…', true);
+  choices([{t: 'Nhắn Zalo chuyên viên', href: ZALO}, {t: 'Không cần ạ', fn: () => objection()}]);
+});
+
+// Mở / đóng khung chat
+function open() {
+  box.hidden = false; teaser.hidden = true; badge.hidden = true; launch.hidden = true;
+  launch.classList.remove('pulse'); launch.setAttribute('aria-expanded', 'true');
+  ss.set('cro_popped', '1'); ss.set('chat_teased', '1');
+  start();
+  if (!mobile()) setTimeout(() => inp.focus({preventScroll: true}), 350);
+}
+function close() { box.hidden = true; launch.hidden = false; launch.setAttribute('aria-expanded', 'false'); }
+launch.addEventListener('click', () => box.hidden ? open() : close());
+$('.chat-head .cx').addEventListener('click', close);
+teaser.addEventListener('click', e => {
+  if (e.target.closest('.cx')) { teaser.hidden = true; ss.set('chat_teased', '1'); return; }
+  open();
+});
+teaser.addEventListener('keydown', e => { if (e.key === 'Enter') open(); });
+addEventListener('keydown', e => { if (e.key === 'Escape' && !box.hidden) close(); });
+
+// Chào nhẹ một lần mỗi phiên: sau 25 giây hiện lời chào nhỏ cạnh nút chat, không tự mở khung chat
+const greet = () => {
+  if (ss.get('chat_teased') || ss.get('cro_sent')) return;
+  if (!box.hidden || document.querySelector('.modal.on')) { setTimeout(greet, 5000); return; }
+  $('#chatTeaserTxt').innerHTML = 'Chào anh/chị 👋 Cần xem <b>giá</b> hay tính thử <b>vốn vay</b> cho căn nào, cứ nhắn em nhé.';
+  teaser.hidden = false; badge.hidden = false;
+};
+setTimeout(greet, 25000);
+})();
+</script>
 </body>
 </html>
