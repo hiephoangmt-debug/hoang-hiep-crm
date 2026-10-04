@@ -1,8 +1,8 @@
 /* Hoàng Hiệp – xanh navy, nâu & cam (đổi bảng màu: Giao diện → Tùy biến → Bảng màu) */
 :root {
 	--navy: #0b2447;
-	--navy-2: #123a74;
-	--navy-3: #1d5fbf;
+	--navy-2: #133a6b;
+	--navy-3: #1e4f8a;
 	/* Nâu: --gold = nâu sáng / vàng đồng (chữ, đường kẻ trên nền navy), --gold-2 = nâu đậm (nhãn, chữ nhấn trên nền trắng). */
 	--gold: #e9a35c;
 	--gold-2: #8a5a36;
@@ -20,7 +20,7 @@
 	--ok: #2e7d4f;
 	--rent: #1f6fb8;
 	--closed: #8a94a6;
-	--zalo: #0068ff;
+	--zalo: #1c5196;
 
 	--font-body: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 	--font-display: "Playfair Display", Georgia, "Times New Roman", serif;
@@ -83,7 +83,7 @@ p { margin: 0 0 1em; }
 .btn--ghost { border-color: rgba(255, 255, 255, .6); color: var(--white); background: rgba(255, 255, 255, .06); }
 .btn--ghost:hover { background: var(--white); color: var(--navy); }
 .btn--zalo { background: var(--zalo); color: var(--white); }
-.btn--zalo:hover { background: #0052cc; color: var(--white); }
+.btn--zalo:hover { background: #163f75; color: var(--white); }
 .btn--block { width: 100%; }
 .link-arrow { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: var(--navy-3); white-space: nowrap; }
 .link-arrow .icon { transition: transform .2s; }
@@ -1181,3 +1181,9 @@ html.nav-locked, html.nav-locked body { overflow: hidden; }
 	.capital__item { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "type own" "price own" "note btn"; align-items: center; gap: 2px 12px; text-align: left; }
 	.capital__type { grid-area: type; } .capital__own { grid-area: own; font-size: 1.4rem; text-align: right; } .capital__price { grid-area: price; } .capital__note { grid-area: note; } .capital__item .btn { grid-area: btn; margin: 6px 0 0; }
 }
+
+/* Nút Zalo trong thẻ loại căn: viền, bớt mảng xanh. */
+.capital__item .btn--zalo { background: var(--white); color: var(--navy); border: 1.5px solid var(--navy-3); }
+.capital__item .btn--zalo:hover { background: var(--navy); color: var(--white); }
+.entry-content .capital__item a.btn--zalo { color: var(--navy); }
+.entry-content .capital__item a.btn--zalo:hover { color: var(--white); }
