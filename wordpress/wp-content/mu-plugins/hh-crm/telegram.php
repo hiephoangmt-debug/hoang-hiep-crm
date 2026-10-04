@@ -102,7 +102,9 @@ function hh_tg_page() {
 			} elseif ( empty( $data['ok'] ) ) {
 				$notice = 'Telegram báo token không đúng (' . ( $data['description'] ?? 'từ chối' ) . '). Dán lại token copy từ BotFather vào ô Token bot rồi bấm Lưu.';
 			} else {
-				$notice = 'Chưa thấy tin nhắn nào. Mở Telegram, tìm bot của anh, bấm Start (hoặc nhắn "hi"), rồi bấm lại "Lấy Chat ID".';
+				$me     = json_decode( (string) wp_remote_retrieve_body( wp_remote_get( 'https://api.telegram.org/bot' . preg_replace( '/[^A-Za-z0-9:_-]/', '', $opt['token'] ) . '/getMe', array( 'timeout' => 10 ) ) ), true );
+				$user   = (string) ( $me['result']['username'] ?? '' );
+				$notice = 'Token đúng nhưng bot chưa nhận được tin nhắn nào. ' . ( $user ? 'Mở https://t.me/' . $user . ' (bot @' . $user . ' – không phải BotFather), bấm Start hoặc nhắn "hi", ' : 'Mở bot của anh (không phải BotFather), bấm Start hoặc nhắn "hi", ' ) . 'rồi bấm lại "Lấy Chat ID".';
 			}
 		}
 		update_option( 'hh_telegram', $opt, false );
