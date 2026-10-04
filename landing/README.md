@@ -1,4 +1,4 @@
-# Giỏ Hàng Hải Vân Bay – www.giohanghaivanbay.com
+# Giỏ Hàng Hải Vân Bay – www.giohangvinhaivanbay.com
 
 - `src/page.html`: file gốc duy nhất cần sửa (nội dung, giỏ hàng `UNITS`, tin tức).
 - `src/img/`: ảnh phối cảnh (webp).

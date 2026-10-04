@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the main page + sub pages for www.giohanghaivanbay.com from src/page.html.
+"""Build the main page + sub pages for www.giohangvinhaivanbay.com from src/page.html.
 
 Sections in src/page.html are delimited by HTML comments like <!-- CART -->.
 Each sub page reuses those sections, so edit src/page.html only, then run:
@@ -17,7 +17,7 @@ from zones import ZONES, faq_html, zone_analysis_html, zone_detail_html, zone_in
 ROOT = Path(__file__).parent
 SRC = ROOT / "src" / "page.html"
 DIST = ROOT / "dist"
-SITE = "https://www.giohanghaivanbay.com"
+SITE = "https://www.giohangvinhaivanbay.com"
 
 PAGES = [
     {
