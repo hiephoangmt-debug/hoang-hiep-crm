@@ -6,10 +6,13 @@ Each sub page reuses those sections, so edit src/page.html only, then run:
 
     python3 landing/build.py
 """
+import json
 import re
 import shutil
 from datetime import date
 from pathlib import Path
+
+from zones import ZONES, faq_html, zone_info_html, zone_links_html
 
 ROOT = Path(__file__).parent
 SRC = ROOT / "src" / "page.html"
@@ -22,7 +25,7 @@ PAGES = [
         "sections": None,  # all
     },
     {
-        "file": "gio-hang.html", "path": "/gio-hang",
+        "file": "gio-hang.html", "path": "/gio-hang", "crumb": "Giỏ hàng",
         "title": "Giỏ Hàng Vinhomes Hải Vân Bay – Quỹ Căn Độc Quyền & Căn Giá Tốt T10/2026",
         "desc": "Giỏ hàng Vinhomes Hải Vân Bay cập nhật hằng ngày: quỹ căn độc quyền, 5 căn giá tốt, căn giá tốt từng phân khu Bạch Vân – Vịnh Mây – Đảo Ngọc, tra cứu mã căn. Liên hệ 0909 882 555.",
         "badge": "Giỏ hàng cập nhật hằng ngày",
@@ -31,7 +34,7 @@ PAGES = [
         "sections": ["RIBBON", "CART", "CTABAND", "CALCULATOR", "GALLERY", "FAQ", "CONTACT"],
     },
     {
-        "file": "chinh-sach.html", "path": "/chinh-sach",
+        "file": "chinh-sach.html", "path": "/chinh-sach", "crumb": "Chính sách bán hàng",
         "title": "Chính Sách Bán Hàng Vinhomes Hải Vân Bay T10/2026 – Giãn Xây, HTLS 0%, CKTT 7%",
         "desc": "Chính sách bán hàng Vinhomes Hải Vân Bay mới nhất: giãn xây Vịnh Mây từ 01/10/2026, Bạch Vân & Đảo Ngọc từ 20/09/2026, vay 70%, HTLS 0% 18–36 tháng, CKTT 7%/năm, chiết khấu TTS 11%/năm.",
         "badge": "Áp dụng từ 01/10/2026",
@@ -40,7 +43,7 @@ PAGES = [
         "sections": ["RIBBON", "POLICIES", "CALCULATOR", "CTABAND", "CART", "FAQ", "CONTACT"],
     },
     {
-        "file": "tinh-gia.html", "path": "/tinh-gia",
+        "file": "tinh-gia.html", "path": "/tinh-gia", "crumb": "Tính giá",
         "title": "Tính Giá Vinhomes Hải Vân Bay – So Sánh Thanh Toán Sớm, Vay 70%, Giãn 24/36 Tháng",
         "desc": "Công cụ tính giá thử Vinhomes Hải Vân Bay: so sánh thanh toán sớm, tiến độ chuẩn, vay 70% lãi cố định, HTLS 0%, giãn 24/36 tháng. Nhận phiếu tính chi tiết theo mã căn.",
         "badge": "Phiếu tính giá miễn phí",
@@ -49,7 +52,7 @@ PAGES = [
         "sections": ["CALCULATOR", "POLICIES", "CTABAND", "CART", "FAQ", "CONTACT"],
     },
     {
-        "file": "tin-tuc.html", "path": "/tin-tuc",
+        "file": "tin-tuc.html", "path": "/tin-tuc", "crumb": "Tin tức",
         "title": "Tin Tức Vinhomes Hải Vân Bay – Dự Án, Hạ Tầng, Tiến Độ & Chính Sách Mới Nhất",
         "desc": "Tin tức mới nhất Vinhomes Hải Vân Bay: chính sách bán hàng, hạ tầng cảng Liên Chiểu, tuyến ven biển, tiến độ xây dựng, tiện ích VinWonders. Nhận bản tin qua Zalo.",
         "badge": "Bản tin dự án",
@@ -58,6 +61,17 @@ PAGES = [
         "sections": ["NEWS", "GALLERY", "CTABAND", "RIBBON", "FAQ", "CONTACT"],
     },
 ]
+
+
+for _z in ZONES:
+    PAGES.append({
+        "file": _z["slug"] + ".html", "path": "/" + _z["slug"], "crumb": "Phân khu " + _z["name"],
+        "title": _z["title"], "desc": _z["desc"], "badge": _z["badge"], "h1": _z["h1"], "sub": _z["sub"],
+        "zone": _z["zone_key"], "hero_img": _z["hero_img"], "policy_tab": _z["policy_tab"], "faq": _z["faq"],
+        "extra": {"ZONEINFO": zone_info_html(_z), "ZONELINKS": zone_links_html(_z["slug"])},
+        "sections": ["ZONEINFO", "RIBBON", "CART"] + (["POLICIES"] if _z["policy_tab"] else []) +
+                    ["CTABAND", "CALCULATOR", "GALLERY", "ZONELINKS", "FAQ", "CONTACT"],
+    })
 
 
 def split_sections(main):
@@ -83,7 +97,16 @@ def build():
 
     for pg in PAGES:
         names = pg["sections"] or order
-        body = "\n".join(sections[n] for n in (["HERO"] + [x for x in names if x != "HERO"]) if n in sections)
+        secs = dict(sections, **pg.get("extra", {}))
+        if pg.get("faq"):
+            secs["FAQ"] = faq_html(pg["faq"])
+        if pg.get("policy_tab") and "POLICIES" in secs:
+            pol = secs["POLICIES"].replace('class="tab active"', 'class="tab"').replace('class="panel active"', 'class="panel"')
+            pol = pol.replace('data-tab="%s"' % pg["policy_tab"], 'data-tab="%s" aria-selected="true"' % pg["policy_tab"])
+            pol = pol.replace('class="tab" data-tab="%s"' % pg["policy_tab"], 'class="tab active" data-tab="%s"' % pg["policy_tab"])
+            pol = pol.replace('<div class="panel" id="%s">' % pg["policy_tab"], '<div class="panel active" id="%s">' % pg["policy_tab"])
+            secs["POLICIES"] = pol
+        body = "\n".join(secs[n] for n in (["HERO"] + [x for x in names if x != "HERO"]) if n in secs)
         head, tail = before, after
         url = SITE + pg["path"]
 
@@ -93,12 +116,28 @@ def build():
             hero = re.sub(r'<p class="sub">.*?</p>', '<p class="sub">' + pg["sub"] + "</p>", hero, count=1, flags=re.S)
             hero = re.sub(r'(<span class="badge"><i></i>).*?(</span>)', r"\g<1> " + pg["badge"] + r"\2", hero, count=1, flags=re.S)
             hero = hero.replace('data-source="Hero"', 'data-source="Hero ' + pg["path"] + '"')
+            hero = hero.replace('<span class="badge">', '<nav class="crumb" aria-label="breadcrumb"><a href="/">Trang chủ</a> › <span>%s</span></nav>\n      <span class="badge">' % pg["crumb"], 1)
+            if pg.get("hero_img"):
+                hero = hero.replace('<section class="hero">', '<section class="hero" style="background-image:linear-gradient(100deg,rgba(4,13,32,.93) 0%%,rgba(6,20,46,.8) 45%%,rgba(10,31,68,.45) 100%%),url(\'img/%s.webp\')">' % pg["hero_img"], 1)
             body = body.replace(sections["HERO"], hero, 1)
 
             head = re.sub(r"<title>.*?</title>", "<title>" + pg["title"] + "</title>", head, count=1)
             head = re.sub(r'(<meta name="description" content=")[^"]*', r"\g<1>" + pg["desc"], head, count=1)
             head = re.sub(r'(<meta property="og:title" content=")[^"]*', r"\g<1>" + pg["title"], head, count=1)
             head = re.sub(r'(<meta property="og:description" content=")[^"]*', r"\g<1>" + pg["desc"], head, count=1)
+            crumb = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": SITE + "/"},
+                {"@type": "ListItem", "position": 2, "name": pg["crumb"], "item": url}]}
+            head = head.replace("</head>", '<script type="application/ld+json">%s</script>\n</head>' % json.dumps(crumb, ensure_ascii=False), 1)
+            if pg.get("hero_img"):
+                head = re.sub(r'(<meta property="og:image" content=")[^"]*', r"\g<1>%s/img/%s.webp" % (SITE, pg["hero_img"]), head, count=1)
+            if pg.get("faq"):
+                ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+                    {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in pg["faq"]]}
+                head = re.sub(r'(<script type="application/ld\+json" id="ld-faq">).*?(</script>)',
+                              lambda mm: mm.group(1) + "\n" + json.dumps(ld, ensure_ascii=False) + "\n" + mm.group(2), head, count=1, flags=re.S)
+        if pg.get("zone"):
+            head = head.replace("<body>", '<body data-zone="%s">' % pg["zone"], 1)
 
         head = re.sub(r'(<link rel="canonical" href=")[^"]*', r"\g<1>" + url, head, count=1)
         head = re.sub(r'(<link rel="alternate" hreflang="vi" href=")[^"]*', r"\g<1>" + url, head, count=1)

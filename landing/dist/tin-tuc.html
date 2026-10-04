@@ -27,8 +27,12 @@
   "@graph":[
     {"@type":"WebSite","name":"Giỏ Hàng Hải Vân Bay","url":"https://www.giohanghaivanbay.com/","inLanguage":"vi"},
     {"@type":"RealEstateAgent","name":"Giỏ Hàng Hải Vân Bay","url":"https://www.giohanghaivanbay.com/","telephone":"+84909882555","email":"dangquy.tran@gmail.com","areaServed":"Đà Nẵng","address":{"@type":"PostalAddress","addressLocality":"Liên Chiểu","addressRegion":"Đà Nẵng","addressCountry":"VN"}},
-    {"@type":"Place","name":"Vinhomes Hải Vân Bay","alternateName":["Vinhomes Làng Vân","Vinhomes Hai Van Bay"],"description":"Đô thị nghỉ dưỡng biển 512ha dưới chân đèo Hải Vân, 4 phân khu Bạch Vân, Vịnh Mây, Đảo Ngọc, Tinh Vân.","address":{"@type":"PostalAddress","streetAddress":"Làng Vân, phường Hòa Hiệp Bắc","addressLocality":"Liên Chiểu","addressRegion":"Đà Nẵng","addressCountry":"VN"}},
-    {"@type":"FAQPage","mainEntity":[
+    {"@type":"Place","name":"Vinhomes Hải Vân Bay","alternateName":["Vinhomes Làng Vân","Vinhomes Hai Van Bay"],"description":"Đô thị nghỉ dưỡng biển 512ha dưới chân đèo Hải Vân, 4 phân khu Bạch Vân, Vịnh Mây, Đảo Ngọc, Tinh Vân.","address":{"@type":"PostalAddress","streetAddress":"Làng Vân, phường Hòa Hiệp Bắc","addressLocality":"Liên Chiểu","addressRegion":"Đà Nẵng","addressCountry":"VN"}}
+  ]
+}
+</script>
+<script type="application/ld+json" id="ld-faq">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
       {"@type":"Question","name":"Vinhomes Hải Vân Bay ở đâu?","acceptedAnswer":{"@type":"Answer","text":"Dự án nằm tại Làng Vân, phường Hòa Hiệp Bắc, quận Liên Chiểu, Đà Nẵng, dưới chân đèo Hải Vân, cách sân bay quốc tế Đà Nẵng khoảng 15–20 km (20–30 phút)."}},
       {"@type":"Question","name":"Giá Vinhomes Hải Vân Bay bao nhiêu?","acceptedAnswer":{"@type":"Answer","text":"Giá nhà phố liền kề tham khảo từ khoảng 6 tỷ (đã gồm VAT & KPBT), biệt thự đơn lập từ khoảng 16–17 tỷ tùy vị trí, phân khu và phương án thanh toán. Liên hệ 0909 882 555 để nhận bảng giá và giỏ hàng độc quyền."}},
       {"@type":"Question","name":"Chính sách giãn xây Vịnh Mây là gì?","acceptedAnswer":{"@type":"Answer","text":"Áp dụng từ 01/10/2026: giá trị căn nhà = giá trị đất & thương mại + giá trị xây dựng. Khách thanh toán phần đất & thương mại theo phương án lựa chọn; phần xây dựng bắt đầu thanh toán từ D+540 ngày, đợt đầu 10%, các đợt sau theo tiến độ và thông báo bàn giao."}},
@@ -36,8 +40,6 @@
       {"@type":"Question","name":"Thanh toán sớm được chiết khấu bao nhiêu?","acceptedAnswer":{"@type":"Answer","text":"Chiết khấu thanh toán sớm tương đương 11%/năm theo số tiền và số ngày thanh toán trước hạn, kèm voucher đặc quyền thanh toán tối đa 30% giá trị nhà theo điều kiện chương trình."}},
       {"@type":"Question","name":"Sản phẩm có sổ hồng lâu dài không?","acceptedAnswer":{"@type":"Answer","text":"Theo thông tin dự án, phần lớn sản phẩm thấp tầng có quyền sở hữu lâu dài. Thông tin pháp lý chính thức theo HĐMB của Chủ đầu tư."}}
     ]}
-  ]
-}
 </script>
 
 <style>
@@ -164,6 +166,17 @@ section .zone .head{position:relative;background-size:cover!important;background
 .sheet .opts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .sheet .opts a,.sheet .opts button{display:flex;flex-direction:column;align-items:center;gap:6px;font:inherit;font-size:13px;font-weight:600;color:var(--navy-700);background:var(--blue-50);border:1px solid var(--line);border-radius:14px;padding:12px 6px;cursor:pointer}
 .sheet .opts span{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:14px}
+.crumb{font-size:13px;color:#A9BCE0;margin-bottom:12px}.crumb a{color:#DCE7FA}.crumb a:hover{color:var(--gold)}
+.zfacts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}
+.zimgs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.zimgs img{width:100%;height:220px;object-fit:cover;border-radius:16px}
+.zimgs img:first-child{grid-column:1/-1;height:300px}
+.ptable{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:12px;background:#fff;border-radius:14px;overflow:hidden}
+.ptable th{background:var(--navy-700);color:#fff;text-align:left;padding:12px;font-size:13px}
+.ptable td{padding:12px;border-bottom:1px solid var(--line)}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.why .card h3{font-size:16px;color:var(--navy-700);margin-bottom:6px}.why .card p{font-size:14px;color:var(--muted)}
+@media(max-width:900px){.zfacts{grid-template-columns:1fr 1fr}.why{grid-template-columns:1fr}}
 /* Header */
 .topbar{position:sticky;top:0;z-index:50;background:rgba(4,13,32,.94);backdrop-filter:blur(8px);color:#fff;border-bottom:1px solid rgba(255,255,255,.08)}
 .topbar .container{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
@@ -248,6 +261,7 @@ section .zone .head{position:relative;background-size:cover!important;background
 .zone .head .ha{font-size:13px;opacity:.85}
 .zone .body{padding:18px 20px 22px;font-size:14.5px;color:var(--muted);flex:1;display:flex;flex-direction:column}
 .zone ul{padding-left:18px;margin:8px 0 14px}
+.zone .zlink{display:block;margin-top:12px;font-weight:700;color:var(--blue-600);font-size:14px}
 .zone .tag{display:inline-block;font-size:12px;font-weight:700;color:var(--blue-600);background:var(--blue-100);padding:4px 10px;border-radius:999px;margin-top:auto;align-self:flex-start}
 @media(max-width:1000px){.zones{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.zones{grid-template-columns:1fr}}
@@ -396,6 +410,7 @@ footer p{margin-bottom:6px}
 }
 .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--navy-700);color:#fff;padding:12px 20px;border-radius:12px;font-size:14px;z-index:80;display:none;max-width:calc(100% - 32px)}
 </style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://www.giohanghaivanbay.com/"}, {"@type": "ListItem", "position": 2, "name": "Tin tức", "item": "https://www.giohanghaivanbay.com/tin-tuc"}]}</script>
 </head>
 <body>
 
@@ -421,6 +436,7 @@ footer p{margin-bottom:6px}
 <section class="hero">
   <div class="container">
     <div>
+      <nav class="crumb" aria-label="breadcrumb"><a href="/">Trang chủ</a> › <span>Tin tức</span></nav>
       <span class="badge"><i></i> Bản tin dự án</span>
       <h1>Tin tức Vinhomes Hải Vân Bay<span>Dự án · Hạ tầng · Tiến độ · Chính sách</span></h1>
       <p class="sub">Cập nhật nhanh những thay đổi quan trọng cho người mua và nhà đầu tư. Đăng ký để nhận <b>bản tin & ảnh tiến độ</b> qua Zalo.</p>
@@ -634,6 +650,7 @@ footer p{margin-bottom:6px}
   <div class="container">
     <p><b style="color:#fff">Giỏ Hàng Hải Vân Bay</b> · www.giohanghaivanbay.com · Hotline <a href="tel:0909882555" style="color:var(--gold)">0909 882 555</a> · <a href="mailto:dangquy.tran@gmail.com">dangquy.tran@gmail.com</a></p>
     <p><a href="/">Trang chủ</a> · <a href="/gio-hang">Giỏ hàng</a> · <a href="/chinh-sach">Chính sách</a> · <a href="/tinh-gia">Tính giá</a> · <a href="/tin-tuc">Tin tức</a></p>
+    <p>Phân khu: <a href="/bach-van">Bạch Vân</a> · <a href="/vinh-may">Vịnh Mây</a> · <a href="/dao-ngoc">Đảo Ngọc</a> · <a href="/tinh-van">Tinh Vân</a></p>
     <p>Đây là trang thông tin của chuyên viên tư vấn phân phối, không phải website chính thức của Chủ đầu tư. Thông tin, hình ảnh và chính sách mang tính tham khảo; thông số chính thức theo HĐMB và chính sách bán hàng của Chủ đầu tư tại từng thời điểm.</p>
   </div>
 </footer>
@@ -819,6 +836,11 @@ footer p{margin-bottom:6px}
   }
   var ZCLASS = {"Bạch Vân":"bv","Vịnh Mây":"vm","Đảo Ngọc":"dn","Tinh Vân":"vm"};
   var cartMode = "dq", cartZone = "Bạch Vân";
+  var PAGE_ZONE = document.body.dataset.zone || "";
+  if (PAGE_ZONE && document.getElementById("fz")){
+    document.getElementById("fz").value = PAGE_ZONE; cartZone = PAGE_ZONE;
+    document.querySelectorAll("#zchips .chip").forEach(function(x){ x.classList.toggle("active", x.dataset.z === PAGE_ZONE); });
+  }
 
   function norm(t){ return (t||"").toString().toLowerCase().replace(/đ/g,"d").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]/g,""); }
   function esc(t){ return String(t).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]}); }
