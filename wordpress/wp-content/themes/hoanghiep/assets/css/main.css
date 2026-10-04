@@ -825,6 +825,16 @@ img.article-head__author { object-fit: cover; border: 2px solid var(--gold); }
 .contact-dock__btn--zalo { background: var(--zalo); font-size: .8rem; }
 .contact-dock__btn--form { background: var(--gold-2); color: var(--white); }
 @keyframes hh-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(46, 125, 79, .5); } 50% { box-shadow: 0 0 0 12px rgba(46, 125, 79, 0); } }
+/* Màn hình chưa đủ rộng để nút tròn nằm ngoài lề nội dung → thanh liên hệ mảnh ở đáy, không che chữ. */
+@media (min-width: 701px) and (max-width: 1459px) {
+	body { padding-bottom: 52px; }
+	.contact-dock { left: 0; right: 0; bottom: 0; grid-template-columns: repeat(3, minmax(0, 220px)); justify-content: center; gap: 0; background: var(--navy); box-shadow: 0 -4px 20px rgba(10, 35, 66, .18); }
+	.contact-dock__btn { width: auto; height: 52px; border-radius: 0; box-shadow: none; animation: none; display: flex; gap: 8px; justify-content: center; align-items: center; font-size: .92rem; }
+	.contact-dock__btn span { position: static; width: auto; height: auto; overflow: visible; clip: auto; font-weight: 600; }
+	.contact-dock__btn--zalo b { display: none; }
+	.contact-dock__btn:hover { transform: none; filter: brightness(1.08); }
+}
+@media (min-width: 1460px) { .contact-dock { left: max(10px, calc((100vw - var(--container)) / 2 - 64px)); } }
 @media (max-width: 700px) {
 	body { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)); }
 	.contact-dock { left: 0; right: 0; bottom: 0; grid-template-columns: repeat(3, 1fr); gap: 0; padding-bottom: env(safe-area-inset-bottom, 0px); background: var(--white); box-shadow: 0 -4px 20px rgba(10, 35, 66, .12); }
