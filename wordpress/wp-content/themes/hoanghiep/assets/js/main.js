@@ -94,6 +94,29 @@
 		} );
 	} );
 	$$( '[data-autosubmit] select' ).forEach( ( sel ) => sel.addEventListener( 'change', () => sel.form.submit() ) );
+	$$( '[data-autosubmit-field]' ).forEach( ( sel ) => sel.addEventListener( 'change', () => sel.form.submit() ) );
+
+	// Bảng tính căn: lọc danh sách căn theo mã, tòa, loại, tình trạng.
+	$$( '[data-units-filter]' ).forEach( ( bar ) => {
+		const rows = $$( '.units-table tbody tr' );
+		const count = $( '[data-count]', bar );
+		const run = () => {
+			const f = {};
+			$$( '[data-f]', bar ).forEach( ( el ) => { f[ el.dataset.f ] = el.value.trim().toLowerCase(); } );
+			let n = 0;
+			rows.forEach( ( tr ) => {
+				const ok = ( ! f.q || tr.dataset.q.includes( f.q ) ) &&
+					[ 'tower', 'type', 'status' ].every( ( k ) => ! f[ k ] || ( tr.dataset[ k ] || '' ).toLowerCase() === f[ k ] );
+				tr.hidden = ! ok;
+				n += ok ? 1 : 0;
+			} );
+			if ( count ) {
+				count.textContent = n + ' căn';
+			}
+		};
+		bar.addEventListener( 'input', run );
+		bar.addEventListener( 'change', run );
+	} );
 
 	// "Nhận tư vấn" button scrolls to the form on pages that have one.
 	const formLink = $( '[data-form-link]' );

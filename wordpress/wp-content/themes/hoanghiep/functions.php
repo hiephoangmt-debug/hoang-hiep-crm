@@ -113,6 +113,13 @@ function hoanghiep_tax_query( $q ) {
  * Web chuyển từ giao diện cũ (Elementor / Elementor Pro theme builder): trang có mẫu Elementor gán sẵn
  * vẫn hiển thị bằng mẫu của Hoàng Hiệp cho trang chủ, dự án, nhà đất, tin tức, giới thiệu, liên hệ.
  */
+/** Trang bảng tính căn /du-an/<dự án>/bang-tinh/. */
+add_filter(
+	'template_include',
+	static fn( $template ) => function_exists( 'hh_is_units_page' ) && hh_is_units_page() ? get_theme_file_path( 'bang-tinh.php' ) : $template,
+	97
+);
+
 /** Trang tổng hợp /san-pham/shop-khoi-de/, /san-pham/penthouse/, /san-pham/duplex/. */
 add_filter(
 	'template_include',
@@ -130,12 +137,14 @@ function hoanghiep_override_builder_template( $template ) {
 		$ours = get_front_page_template();
 	} elseif ( is_home() ) {
 		$ours = get_home_template();
-	} elseif ( is_singular( array( 'du-an', 'bat-dong-san', 'post' ) ) ) {
+	} elseif ( is_singular( array( 'du-an', 'bat-dong-san', 'post' ) ) && ! ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) ) {
 		$ours = get_single_template();
 	} elseif ( is_page( array( 'gioi-thieu', 'lien-he', 'tin-tuc' ) ) ) {
 		$ours = get_page_template();
 	} elseif ( is_tax( array( 'loai-du-an', 'khu-vuc', 'loai-bds' ) ) ) {
 		$ours = get_taxonomy_template();
+	} elseif ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) {
+		$ours = get_theme_file_path( 'bang-tinh.php' );
 	} elseif ( get_query_var( 'hh_sp' ) ) {
 		$ours = get_theme_file_path( 'san-pham.php' );
 	} elseif ( is_post_type_archive( array( 'du-an', 'bat-dong-san' ) ) || is_category() ) {

@@ -110,6 +110,18 @@ function hh_project_schema() {
 				'hh_p_pricelist_url' => array( 'type' => 'url', 'label' => 'Link tải bảng giá / brochure (Google Drive, PDF…)', 'placeholder' => 'https://' ),
 			),
 		),
+		'bang-tinh' => array(
+			'title'  => 'Bảng tính căn',
+			'intro'  => 'Nhập file bảng hàng (Excel .xlsx hoặc .csv) hoặc link Google Sheets → website tự tạo trang /du-an/<dự án>/bang-tinh/: danh sách căn có lọc, chọn căn → bảng giá, chiết khấu, lịch thanh toán, khoản vay. Dòng đầu file là tiêu đề cột, VD: Mã căn | Tòa | Tầng | Loại căn | Diện tích | Hướng | View | Giá chưa VAT | VAT | KPBT | Tổng giá | Tình trạng. Cột nào không có cứ bỏ, giá ghi số đồng (3.250.000.000), triệu hoặc "3,25 tỷ" đều được.',
+			'fields' => array(
+				'hh_p_units_file'  => array( 'type' => 'file', 'label' => 'File bảng hàng (.xlsx hoặc .csv)', 'half' => true ),
+				'hh_p_units_sheet' => array( 'type' => 'url', 'label' => 'Hoặc link Google Sheets', 'placeholder' => 'https://docs.google.com/spreadsheets/d/…', 'half' => true, 'help' => 'Chia sẻ: Bất kỳ ai có đường liên kết đều xem được. Mỗi lần bấm Cập nhật dự án, web đọc lại bảng.' ),
+				'hh_p_calc_plans'  => array( 'type' => 'table', 'label' => 'Phương án thanh toán', 'columns' => array( 'Mã', 'Tên phương án', 'Chiết khấu (%)', 'Lịch thanh toán (Đợt:%; …)', 'Vay ngân hàng (%)' ), 'placeholder' => "chuan | Thanh toán chuẩn theo tiến độ | 0 | Ký HĐMB:20; 3 tháng:10; 6 tháng:10; Bàn giao:55; Nhận sổ:5 | 0\nv24 | Vay 70%, hỗ trợ lãi 24 tháng | 0 | Ký HĐMB:15; 1 tháng:15; Giải ngân vay:70 | 70\nnhanh | Thanh toán nhanh 95% | 9 | Ký HĐMB:95; Nhận sổ:5 | 0", 'help' => 'Mã ngắn không dấu (dùng trên đường link, VD ?tt=v24). Chiết khấu trừ vào giá chưa VAT nếu file có cột giá chưa VAT, không thì trừ vào tổng giá.' ),
+				'hh_p_vat'         => array( 'type' => 'number', 'label' => 'Thuế VAT (%)', 'placeholder' => '10', 'half' => true ),
+				'hh_p_kpbt'        => array( 'type' => 'number', 'label' => 'Kinh phí bảo trì (% giá chưa VAT)', 'placeholder' => '2', 'half' => true ),
+				'hh_p_units_note'  => array( 'type' => 'textarea', 'label' => 'Ghi chú dưới bảng tính', 'placeholder' => 'VD: Bảng giá áp dụng từ 01/10/2026, có thể thay đổi theo từng đợt.' ),
+			),
+		),
 		'thu-cap'   => array(
 			'title'  => 'Chuyển nhượng & cho thuê',
 			'intro'  => 'Tin mua bán / cho thuê chọn "Thuộc dự án" là dự án này sẽ tự hiện trên trang dự án, kèm khoảng giá tính từ các tin đang đăng. Các ô dưới đây để ghi giá tham khảo khi chưa có tin.',

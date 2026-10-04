@@ -59,7 +59,7 @@ function hh_listing_faq( $stats, $deal, $place, $what ) {
 
 /** Tiêu đề / mô tả SEO nhập sẵn cho bài (ô của Rank Math / Yoast), dùng cả khi chưa cài plugin. */
 function hh_seo_custom_meta( $kind ) {
-	if ( ! is_singular() ) {
+	if ( ! is_singular() || ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) ) {
 		return '';
 	}
 	$keys  = 'title' === $kind ? array( 'rank_math_title', '_yoast_wpseo_title' ) : array( 'rank_math_description', '_yoast_wpseo_metadesc' );
@@ -79,6 +79,8 @@ function hh_seo_title_parts( $parts ) {
 	}
 	if ( is_post_type_archive( 'bat-dong-san' ) || is_tax( 'loai-bds' ) ) {
 		$parts['title'] = hh_listing_archive_title() . ( get_query_var( 'hh_deal' ) ? ' – Cập nhật ' . wp_date( 'm/Y' ) : '' );
+	} elseif ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) {
+		$parts['title'] = 'Bảng giá & bảng tính căn ' . get_the_title() . ' – cập nhật ' . wp_date( 'm/Y' );
 	} elseif ( hh_seo_special_key() ) {
 		$parts['title'] = hh_special_title( hh_seo_special_key() ) . ' ' . wp_date( 'm/Y' );
 	} elseif ( is_post_type_archive( 'du-an' ) ) {
@@ -111,6 +113,10 @@ function hh_seo_title_parts( $parts ) {
 function hh_seo_description() {
 	if ( hh_seo_custom_meta( 'description' ) ) {
 		return hh_seo_custom_meta( 'description' );
+	}
+	if ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) {
+		$d = hh_units_data( get_the_ID() );
+		return 'Bảng giá ' . get_the_title() . ( $d ? ' ' . count( $d['units'] ) . ' căn' : '' ) . ': chọn căn để xem giá, chiết khấu, lịch thanh toán, khoản vay chi tiết. Nhận báo giá chính thức: ' . hoanghiep_opt( 'hh_phone' ) . '.';
 	}
 	if ( is_front_page() ) {
 		return hh_seo_home_description();
@@ -194,6 +200,9 @@ function hh_seo_image() {
 }
 
 function hh_seo_url() {
+	if ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) {
+		return hh_units_url( get_the_ID() );
+	}
 	if ( is_singular() ) {
 		return get_permalink();
 	}
@@ -252,6 +261,9 @@ function hh_seo_head() {
 
 /** Trang lọc / sắp xếp / tìm kiếm hoặc danh sách rỗng: cho Google đi qua nhưng không lập chỉ mục. */
 function hh_seo_noindex_request() {
+	if ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) {
+		return isset( $_GET['can'] ) || isset( $_GET['tt'] ) || isset( $_GET['bg'] ) || ! hh_units_data( get_the_ID() ); // phpcs:ignore WordPress.Security.NonceVerification
+	}
 	foreach ( array( 'tk', 'gia', 'dt', 'pn', 'huong', 'sx', 'tt', 'duan', 'lien-he', 'khu-vuc', 'loai-bds' ) as $var ) {
 		if ( isset( $_GET[ $var ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 			return true;
@@ -663,6 +675,11 @@ function hh_seo_landing_urls() {
 			$urls[] = hh_deal_term_url( 'ban', $t );
 		}
 	}
+	if ( function_exists( 'hh_units_data' ) ) {
+		foreach ( get_posts( array( 'post_type' => 'du-an', 'numberposts' => -1, 'fields' => 'ids', 'meta_key' => '_hh_units' ) ) as $pid ) { // phpcs:ignore
+			$urls[] = hh_units_url( $pid );
+		}
+	}
 	$urls = array_values( array_unique( $urls ) );
 	if ( function_exists( 'hh_special_projects' ) ) {
 		foreach ( array_keys( HH_SPECIAL_PAGES ) as $key ) {
@@ -923,7 +940,7 @@ add_filter(
  * ---------------------------------------------------------------------- */
 
 function hh_seo_is_listing_page() {
-	return is_post_type_archive( array( 'bat-dong-san', 'du-an' ) ) || is_tax( array( 'loai-du-an', 'khu-vuc', 'loai-bds' ) ) || hh_seo_special_key();
+	return ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) || is_post_type_archive( array( 'bat-dong-san', 'du-an' ) ) || is_tax( array( 'loai-du-an', 'khu-vuc', 'loai-bds' ) ) || hh_seo_special_key();
 }
 
 function hh_seo_listing_title() {

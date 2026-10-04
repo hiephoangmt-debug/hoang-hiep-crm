@@ -50,6 +50,17 @@ global $wp_query;
 			<a class="<?php echo 'ban' === $deal ? 'is-active' : ''; ?>" href="<?php echo esc_url( hh_deal_url( 'ban' ) ); ?>">Mua bán</a>
 			<a class="<?php echo 'thue' === $deal ? 'is-active' : ''; ?>" href="<?php echo esc_url( hh_deal_url( 'thue' ) ); ?>">Cho thuê</a>
 		</nav>
+		<form class="quick-search" action="<?php echo esc_url( $action ); ?>" method="get" role="search">
+			<?php echo hh_icon( 'search' ); // phpcs:ignore ?>
+			<input type="search" name="tk" value="<?php echo esc_attr( $cur( 'tk' ) ); ?>" placeholder="<?php echo esc_attr( 'thue' === $deal ? 'Tìm căn hộ, dự án, đường, khu vực cho thuê…' : 'Tìm căn hộ, biệt thự, đất, dự án, đường, khu vực…' ); ?>" aria-label="Tìm kiếm nhà đất">
+			<?php if ( $cur( 'duan' ) ) : ?>
+				<input type="hidden" name="duan" value="<?php echo esc_attr( $cur( 'duan' ) ); ?>">
+			<?php endif; ?>
+			<button class="btn btn--gold" type="submit">Tìm</button>
+		</form>
+		<?php if ( $cur( 'tk' ) ) : ?>
+			<p class="quick-search__state">Kết quả cho “<?php echo esc_html( $cur( 'tk' ) ); ?>” · <a href="<?php echo esc_url( $action ); ?>">Xoá tìm kiếm</a></p>
+		<?php endif; ?>
 		<?php if ( 'ban' === $deal ) : ?>
 			<p class="market-cards__title">Bảng giá thị trường Đà Nẵng</p>
 			<?php hh_market_cards( $landing ? $landing->slug : '' ); ?>
@@ -57,35 +68,7 @@ global $wp_query;
 	</div>
 </div>
 
-<div class="container layout layout--filters">
-	<aside class="layout__side layout__side--left">
-		<form class="filter-panel" action="<?php echo esc_url( $action ); ?>" method="get">
-			<p class="filter-panel__title">Lọc kết quả</p>
-			<label class="filter-panel__field">
-				<span>Từ khóa</span>
-				<input type="search" name="tk" value="<?php echo esc_attr( $cur( 'tk' ) ); ?>" placeholder="Tên đường, dự án…">
-			</label>
-			<?php foreach ( $selects as $name => list( $label, $options ) ) : ?>
-				<?php if ( ! $options ) { continue; } ?>
-				<label class="filter-panel__field">
-					<span><?php echo esc_html( $label ); ?></span>
-					<select name="<?php echo esc_attr( $name ); ?>">
-						<option value="">Tất cả</option>
-						<?php foreach ( $options as $value => $text ) : ?>
-							<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $cur( $name ), (string) $value ); ?>><?php echo esc_html( $text ); ?></option>
-						<?php endforeach; ?>
-					</select>
-				</label>
-			<?php endforeach; ?>
-			<input type="hidden" name="sx" value="<?php echo esc_attr( $cur( 'sx' ) ); ?>">
-			<?php if ( $cur( 'duan' ) ) : ?>
-				<input type="hidden" name="duan" value="<?php echo esc_attr( $cur( 'duan' ) ); ?>">
-			<?php endif; ?>
-			<button class="btn btn--gold btn--block" type="submit">Áp dụng</button>
-			<a class="filter-panel__reset" href="<?php echo esc_url( $action ); ?>">Xoá bộ lọc</a>
-		</form>
-	</aside>
-
+<div class="container section listing-page">
 	<div class="layout__main">
 		<div class="results-bar">
 			<p><strong><?php echo (int) $wp_query->found_posts; ?></strong> tin phù hợp</p>

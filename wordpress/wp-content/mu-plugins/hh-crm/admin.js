@@ -21,10 +21,11 @@
 		e.preventDefault();
 		const wrap = $( this ).closest( '.hh-media' );
 		const multiple = wrap.data( 'multiple' ) === 1 || wrap.data( 'multiple' ) === '1';
+		const isFile = wrap.data( 'type' ) === 'file';
 		const frame = wp.media( {
-			title: multiple ? 'Chọn ảnh (giữ Ctrl/Shift để chọn nhiều)' : 'Chọn ảnh',
-			button: { text: 'Dùng ảnh này' },
-			library: { type: 'image' },
+			title: isFile ? 'Chọn file bảng hàng (.xlsx, .csv)' : ( multiple ? 'Chọn ảnh (giữ Ctrl/Shift để chọn nhiều)' : 'Chọn ảnh' ),
+			button: { text: isFile ? 'Dùng file này' : 'Dùng ảnh này' },
+			library: isFile ? {} : { type: 'image' },
 			multiple: multiple ? 'add' : false,
 		} );
 		frame.on( 'select', function () {
@@ -35,6 +36,10 @@
 			frame.state().get( 'selection' ).each( function ( att ) {
 				const a = att.toJSON();
 				if ( list.find( 'li[data-id="' + a.id + '"]' ).length ) {
+					return;
+				}
+				if ( isFile ) {
+					list.append( $( '<li>' ).attr( 'data-id', a.id ).text( a.filename || a.title ) );
 					return;
 				}
 				const src = a.sizes && a.sizes.thumbnail ? a.sizes.thumbnail.url : a.url;

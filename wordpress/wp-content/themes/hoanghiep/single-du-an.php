@@ -20,6 +20,7 @@ while ( have_posts() ) :
 	$title       = get_the_title();
 	$resale      = hh_project_is_resale();
 	$market      = hh_project_market();
+	$units_data  = function_exists( 'hh_units_data' ) ? hh_units_data( get_the_ID() ) : null;
 	$has_market  = $resale || $market['ban']['count'] || $market['thue']['count'] || hh_meta( 'hh_p_resale_price' ) || hh_meta( 'hh_p_rent_price' );
 
 	// Mọi trang dự án đều đủ các mục; mục chưa nhập sẽ tự soạn hoặc ghi "đang cập nhật".
@@ -332,6 +333,9 @@ while ( have_posts() ) :
 				<?php else : ?>
 					<?php hh_pending( 'Thông tin các loại sản phẩm đang được cập nhật.', 'Nhận rổ hàng' ); ?>
 				<?php endif; ?>
+				<?php if ( $units_data ) : ?>
+					<p><a class="btn btn--navy" href="<?php echo esc_url( hh_units_url( $id ) ); ?>">Xem bảng giá &amp; tính giá từng căn (<?php echo (int) count( $units_data['units'] ); ?> căn)</a></p>
+				<?php endif; ?>
 				<?php hh_cta_box( $ctas['san-pham'] ); ?>
 			</section>
 
@@ -350,6 +354,12 @@ while ( have_posts() ) :
 				<?php else : ?>
 					<h2 class="block__title">Chính sách <?php echo esc_html( $title ); ?><?php echo hh_parse_vn_date( hh_meta( 'hh_p_offer_start' ) ) ? ' – <span class="block__title-em">áp dụng từ ' . esc_html( wp_date( 'd/m/Y', hh_parse_vn_date( hh_meta( 'hh_p_offer_start' ) ) ) ) . '</span>' : ''; // phpcs:ignore ?></h2>
 					<?php get_template_part( 'template-parts/project-offer' ); ?>
+					<?php if ( $units_data ) : ?>
+						<a class="units-link" href="<?php echo esc_url( hh_units_url( $id ) ); ?>">
+							<strong>Bảng tính căn chi tiết – <?php echo (int) count( $units_data['units'] ); ?> căn</strong>
+							<span>Chọn căn → giá sau chiết khấu, lịch thanh toán, khoản vay. Cập nhật <?php echo esc_html( wp_date( 'd/m/Y', (int) $units_data['at'] ) ); ?></span>
+						</a>
+					<?php endif; ?>
 					<h3 class="block__sub">Bảng giá</h3>
 					<?php if ( $price_table ) : ?>
 						<?php hh_data_table( array( 'Sản phẩm', 'Diện tích', 'Giá bán', 'Ghi chú' ), $price_table ); ?>

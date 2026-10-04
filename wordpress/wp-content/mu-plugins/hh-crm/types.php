@@ -734,3 +734,24 @@ function hh_market_board( $landing_slug ) {
 	$boards = apply_filters( 'hh_market_boards', array() );
 	return isset( $map[ $landing_slug ], $boards[ $map[ $landing_slug ] ] ) ? $boards[ $map[ $landing_slug ] ] : null;
 }
+
+/**
+ * Ô tìm kiếm trang Mua bán / Cho thuê: ngoài tiêu đề, nội dung còn tìm theo loại nhà đất, khu vực,
+ * dự án (tên) và địa chỉ – gõ "biệt thự", "Sơn Trà", "Bạch Đằng", "Sun Symphony" đều ra.
+ */
+add_filter( 'posts_search', 'hh_listing_search_extend', 10, 2 );
+function hh_listing_search_extend( $search, $q ) {
+	if ( is_admin() || ! $q->is_main_query() || ! $q->get( 'tk' ) || '' === $search ) {
+		return $search;
+	}
+	global $wpdb;
+	$like  = '%' . $wpdb->esc_like( sanitize_text_field( $q->get( 'tk' ) ) ) . '%';
+	$terms = $wpdb->prepare(
+		"SELECT tr.object_id FROM {$wpdb->term_relationships} tr INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN {$wpdb->terms} t ON t.term_id = tt.term_id WHERE tt.taxonomy IN ('loai-bds','khu-vuc') AND t.name LIKE %s",
+		$like
+	);
+	$meta  = $wpdb->prepare( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key IN ('hh_address','hh_project_name') AND meta_value LIKE %s", $like );
+	$proj  = $wpdb->prepare( "SELECT pm.post_id FROM {$wpdb->postmeta} pm INNER JOIN {$wpdb->posts} p ON p.ID = pm.meta_value WHERE pm.meta_key = 'hh_project' AND p.post_type = 'du-an' AND p.post_title LIKE %s", $like );
+	// $search có dạng " AND ((...))" – thêm điều kiện OR vào trong.
+	return preg_replace( '/^\s*AND\s*\(/', " AND ( {$wpdb->posts}.ID IN ($terms) OR {$wpdb->posts}.ID IN ($meta) OR {$wpdb->posts}.ID IN ($proj) OR ", $search, 1 );
+}

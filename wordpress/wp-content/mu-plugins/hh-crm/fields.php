@@ -120,6 +120,15 @@ function hh_render_field( $post_id, $key, $f ) {
 			echo '</select>';
 			break;
 
+		case 'file':
+			$fid = absint( $value );
+			printf( '<div class="hh-media hh-media--file" data-multiple="0" data-type="file"><input type="hidden" id="%1$s" name="%1$s" value="%2$s"><ul class="hh-media__list">', esc_attr( $key ), $fid ? (int) $fid : '' );
+			if ( $fid && get_post( $fid ) ) {
+				printf( '<li data-id="%d"><span class="dashicons dashicons-media-spreadsheet"></span> %s</li>', (int) $fid, esc_html( wp_basename( (string) get_attached_file( $fid ) ) ) );
+			}
+			echo '</ul><button type="button" class="button hh-media__add">Chọn / tải file</button> <button type="button" class="button-link hh-media__clear">Xoá</button></div>';
+			break;
+
 		case 'image':
 		case 'gallery':
 			$ids = array_filter( array_map( 'absint', explode( ',', (string) $value ) ) );
@@ -172,6 +181,7 @@ function hh_save_schema( $post_id, $schema ) {
 					$value = empty( $raw ) ? '0' : '1';
 					break;
 				case 'image':
+				case 'file':
 				case 'post':
 					$value = absint( $raw ) ?: '';
 					break;
