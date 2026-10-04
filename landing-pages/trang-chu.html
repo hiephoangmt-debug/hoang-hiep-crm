@@ -1490,6 +1490,9 @@ const GOAL_LINE = {
 
 // Trả lời nhanh khi khách tự gõ câu hỏi
 const FAQ = [
+  [/thang máy/i, () => 'Số thang máy và thông số kỹ thuật chi tiết, em gửi anh/chị theo đúng hồ sơ thiết kế của chủ đầu tư qua Zalo ạ.'],
+  [/phí quản lý|phí dịch vụ|quản lý phí|tặng|quà|được gì/i, () => 'Mua Tòa F2 được <b>miễn phí dịch vụ quản lý 2 năm</b> kể từ ngày bàn giao, kèm tích thưởng Sun Signature 0,7–2% và lãi 8%/năm khi thanh toán trước hạn.'],
+  [/hầm|bao nhiêu tầng|mấy tầng|chiều cao|cao bao nhiêu|quy mô|bao nhiêu căn|mấy căn/i, () => 'Tòa F2 cao <b>20 tầng nổi, 2 tầng hầm</b> (77,95 m), 607 căn; tầng 8–19 mỗi tầng 32 căn, tầng 2 là tầng tiện ích, tầng 3–7 có căn sân vườn.'],
   [/f2[\s\-._]*\d{1,2}[ab]?[\s\-._]*\d{1,2}/i, () => 'Dạ em ghi lại mã căn này ạ. Chuyên viên sẽ kiểm tra căn còn trống không và gửi <b>bảng tính giá sau chiết khấu</b> đúng căn cho anh/chị.'],
   [/chiết khấu|\bck\b|ưu đãi|giảm giá|khuyến mãi/i, () => live
     ? 'Chiết khấu cộng dồn tới <b>19%</b>: Early Bird 3% + không vay 3% + từ chối bảo lãnh 1% + thanh toán sớm tới 12% (trước <b>25/10/2026</b>). Mỗi căn trừ ra số tiền khác nhau.'
@@ -1675,6 +1678,7 @@ const ASK = {
   phaply: ['Pháp lý', 'Anh/chị đang xem <b>pháp lý</b> ạ. Anh/chị cần em gửi bản scan văn bản pháp lý qua Zalo không ạ?'],
   bangiao: ['Bàn giao', 'Anh/chị đang xem <b>tiến độ bàn giao</b> ạ. Anh/chị cần nhận nhà sớm hay không gấp ạ?'],
   hoidap: ['Hỏi đáp', 'Anh/chị chưa thấy câu trả lời mình cần ạ? Cứ nhắn câu hỏi, em trả lời ngay.'],
+  thongso: ['Thông số', 'Anh/chị đang xem <b>thông số Tòa F2</b> ạ. Cần em gửi mặt bằng từng tầng và hồ sơ chi tiết qua Zalo không ạ?'],
   tinh: ['Bảng tính', 'Anh/chị đang tính <b>dòng tiền</b> ạ. Cần em tính giúp căn cụ thể thì cứ nhắn <b>mã căn</b> nhé.']
 };
 const KEY_OF = {
@@ -1683,7 +1687,7 @@ const KEY_OF = {
   'mat-bang': 'matbang', 'mat-bang-tang': 'matbang', 'loai-can': 'matbang', 'bang-gia': 'gia', 'bang-gia-f2': 'gia',
   'gia-tot': 'gia', 'danh-sach': 'gia', 'chinh-sach': 'chinhsach', 'chinh-sach-f2': 'chinhsach', 'uu-dai': 'chinhsach',
   'phap-ly': 'phaply', 'tong-quan-pl': 'phaply', 'van-ban': 'phaply', 'toa': 'phaply', 'quyen-loi': 'phaply',
-  'ban-giao': 'bangiao', 'hoi-dap': 'hoidap', 'hoi-dap-f2': 'hoidap', 'hoi-dap-bt': 'hoidap', 'hoi-dap-pl': 'hoidap', 'tinh': 'tinh'
+  'ban-giao': 'bangiao', 'hoi-dap': 'hoidap', 'hoi-dap-f2': 'hoidap', 'hoi-dap-bt': 'hoidap', 'hoi-dap-pl': 'hoidap', 'tinh': 'tinh', 'thong-so': 'thongso'
 };
 const keyOf = s => {
   if (KEY_OF[s.id]) return KEY_OF[s.id];
