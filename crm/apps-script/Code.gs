@@ -63,7 +63,7 @@ var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan', 'tu_ngay', 'b_tt_ngay', 'a_ck_ng
 // Kiểu tiền với C.Trâm. "Ứng trước"/"Hoàn tiền" làm giảm nợ; "Mình trả lại"/"Nợ cũ" làm tăng nợ;
 // "Điều chỉnh số dư" nhập được số âm (âm = tăng nợ).
 // Đổi mỗi lần cập nhật code – hiện cạnh ngày trên đầu app để biết đã triển khai bản mới chưa.
-var APP_VERSION = 'v04.10i';
+var APP_VERSION = 'v04.10j';
 
 var PAYMENT_TYPES = ['Ứng trước', 'Hoàn tiền', 'Mình trả lại', 'Nợ cũ', 'Điều chỉnh số dư'];
 
@@ -537,7 +537,7 @@ function buildTransaction_(t) {
   if (ngayDao !== '' && !(ngayDao >= 1 && ngayDao <= 31)) throw new Error('Ngày đáo phải từ 1 đến 31.');
   var ngaySaoKe = t.ngay_sao_ke === '' || t.ngay_sao_ke == null ? '' : Number(t.ngay_sao_ke);
   if (ngaySaoKe !== '' && !(ngaySaoKe >= 1 && ngaySaoKe <= 31)) throw new Error('Ngày sao kê phải từ 1 đến 31.');
-  var phiKhach = Number(t.phi_khach) || 0;
+  var phiKhach = parseNum_(t.phi_khach); // nhận cả 1.8 và 1,8
   var phiMay = t.phi_may_text ? sumExpr_(t.phi_may_text) : (Number(t.phi_may) || 0);
   var customer = resolveCustomer_(t);
   var tienPhi = Math.round(soTien * phiKhach / 100);
@@ -678,11 +678,17 @@ function apiImportTransactions_(p) {
 var NOTE_CARD_EXTRA = /^(jcb|visa|master|mastercard|mc|vàng|vang|plat|platinum|signature|bạch|kim|infinite|world)$/i;
 var NOTE_BILL_WORD = /(?:^|\s)(điện|nước|bảo hiểm|internet|học phí|momo|hđ|hoá đơn|hóa đơn)\s+(.+?)\s+lãi\b/i;
 
-function noteMoney_(s) { return Math.round(parseNum_(String(s).replace(/\./g, '').replace(',', '.'))); }
+// "274.806" hay "274,806" (ngăn cách hàng nghìn) = 274806; "1,5" hay "1.5" (thập phân) = 1.5
+function noteMoney_(s) {
+  var t = String(s).trim();
+  if (/^\d{1,3}([.,]\d{3})+$/.test(t)) return Number(t.replace(/[.,]/g, ''));
+  return parseNum_(t.replace(/,/g, '.').replace(/\.(?=.*\.)/g, ''));
+}
+function isThousands_(s) { return /^\d{1,3}([.,]\d{3})+$/.test(String(s).trim()); }
 function noteThousand_(s) { // "274.806" → 274.806.000; "1.406k" → 1.406.000; "60k" → 60.000
   var t = String(s || '').toLowerCase().replace(/\s/g, '');
   if (/tr$|triệu$/.test(t)) return parseAmount_(t);
-  return noteMoney_(t.replace(/k$/, '')) * 1000;
+  return Math.round(noteMoney_(t.replace(/k$/, '')) * 1000);
 }
 
 function parseNoteLine_(line, ngay) {
@@ -691,8 +697,9 @@ function parseNoteLine_(line, ngay) {
     raw = raw.replace(/[.,]+$/, ''); unit = (unit || '').toLowerCase();
     if (unit === 'tỷ' || unit === 'ty') return Math.round(parseNum_(raw.replace(',', '.')) * 1e9);
     if (unit === 'tr' || unit === 'triệu') return Math.round(parseNum_(raw.replace(',', '.')) * 1e6);
-    if (unit === 'k') return noteMoney_(raw) * 1000;
-    return /[.,]/.test(raw) ? noteMoney_(raw) * 1000 : noteMoney_(raw) * 1e6; // "Hoàn 400" = 400tr
+    if (unit === 'k') return Math.round(noteMoney_(raw) * 1000);
+    // "Hoàn 57.053" = 57.053.000đ (nghìn đồng); "Hoàn 400" hay "Hoàn 1,5" = 400tr / 1,5tr
+    return isThousands_(raw) ? noteMoney_(raw) * 1000 : Math.round(noteMoney_(raw) * 1e6);
   }
   // "Hoàn 45 + 245 = 290" → C.Trâm chuyển 290tr (lấy số sau dấu =, không có thì cộng các khoản)
   var sumM = inner.match(/^(hoàn|ứng|chuyển|ck)\s+((?:[\d.,]+\s*(?:tỷ|ty|tr|triệu|k)?\s*\+\s*)+[\d.,]+\s*(?:tỷ|ty|tr|triệu|k)?)\s*(?:=\s*([\d.,]+)\s*(tỷ|ty|tr|triệu|k)?)?\.?\s*(.*)$/i);
@@ -1263,7 +1270,7 @@ function apiSaveBill_(x) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(ngay)) throw new Error('Ngày không hợp lệ.');
   var amt = Number(x.so_tien) || 0, laiTay = Math.round(Number(x.lai_tay) || 0);
   if (!(amt > 0) && !(laiTay > 0)) throw new Error('Nhập số tiền hoá đơn, hoặc số lãi (với vé / dịch vụ khác).');
-  var pa = Number(x.phi_a) || 0, pm = Number(x.phi_minh) || 0;
+  var pa = parseNum_(x.phi_a), pm = parseNum_(x.phi_minh);
   if (pa < 0 || pm < 0 || pa + pm >= 100) throw new Error('Phí không hợp lệ.');
   if (!String(x.a_ten || '').trim()) throw new Error('Nhập người có hoá đơn (A).');
   function okDate(v) { v = String(v || ''); return /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : ''; }
@@ -2117,7 +2124,7 @@ function normalizePhone_(v) {
 
 function normName_(s) { return String(s || '').trim().toLowerCase().replace(/\s+/g, ' '); }
 
-function parseNum_(s) { return Number(String(s || '').replace(',', '.').replace('%', '').trim()) || 0; }
+function parseNum_(s) { return typeof s === 'number' ? s : Number(String(s || '').replace(',', '.').replace('%', '').trim()) || 0; }
 
 /** "1.36+0.4" → 1.76 (phí máy cộng dồn nhiều khoản như trong sổ). */
 function sumExpr_(s) {

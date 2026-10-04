@@ -910,6 +910,29 @@ test('report by day: every day of the chosen month', () => {
   assert.strictEqual(r3.rows[29].cn.so_du, 3000000, 'after a closing the balance follows the closing');
 });
 
+test('fees and amounts accept both 1.8 and 1,8', () => {
+  const { call, fake } = fresh();
+  fake.setToday('2026-10-04');
+  const text = ['3/10: Hoàn 14,775 lãi 75', 'Rút VP Khách A 10,000/1,9 hoàn 1,6', 'ĐH TCB Khách B 5.000/1.9 hoàn 1.6', 'Hoàn 1,5 còn 13,275'].join('\n');
+  const r = call('pasteNotes', { text });
+  const tx = r.items.filter((i) => i.kind === 'tx');
+  assert.strictEqual(tx[0].so_tien, 10000000);
+  assert.strictEqual(tx[0].phi_khach, 1.9);
+  assert.strictEqual(tx[0].tien_hoan, 9840000);
+  assert.strictEqual(tx[1].tien_hoan, 4920000);
+  assert.strictEqual(r.days[0].hoan_so, 14775000, 'header "14,775" = 14.775.000đ');
+  assert.strictEqual(r.days[0].lai_so, 75000);
+  const pay = r.items.find((i) => i.kind === 'pay');
+  assert.strictEqual(pay.so_tien, 1500000, '"Hoàn 1,5" = 1,5 triệu');
+  assert.strictEqual(pay.con, 13275000);
+  // nhập tay / hoá đơn: chuỗi "1,8" cũng hiểu là 1,8%
+  const t = call('saveTransaction', { ngay: '2026-10-04', dich_vu: 'Rút tiền', the: 'MB', ten_khach: 'Khách C', so_tien: 10000000, phi_khach: '1,8', phi_may_text: '1,3' });
+  assert.strictEqual(t.tien_phi, 180000);
+  assert.strictEqual(t.chi_phi, 130000);
+  const b = call('saveBill', { ngay: '2026-10-04', so_tien: 5000000, a_ten: 'Khách D', phi_a: '3', phi_minh: '2,5', b_ten: 'Khách E' });
+  assert.strictEqual(b.doanh_thu, 125000);
+});
+
 test('pasting earlier months: history before closing, December notes pasted in January, saving in rounds', () => {
   const { call, fake } = fresh();
   fake.setToday('2027-01-05');
