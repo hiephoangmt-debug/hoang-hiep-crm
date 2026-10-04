@@ -31,7 +31,7 @@ for f in sorted(DIST.glob("*.html")):
     # og:image is already an absolute URL and is left alone
     html = re.sub(r"(?<![/\w])img/([\w-]+\.webp)", lambda m: src(m.group(1)), html)
     # cart JS builds thumbnail paths at runtime
-    used = sorted(set(re.findall(r'img:"([\w-]+)"', html)))
+    used = sorted(p.stem for p in (DIST / "img").glob("*.webp") if not p.stem.startswith("logo") and '"%s"' % p.stem in html)
     if used:
         table = "var IMGDATA={%s};" % ",".join('"%s":"%s"' % (u, src(u + ".webp")) for u in used)
         html = html.replace("  var SITE = ", "  " + table + "\n  var SITE = ", 1)

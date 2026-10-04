@@ -65,6 +65,8 @@ def split_sections(main):
 
 def build():
     src = SRC.read_text(encoding="utf-8")
+    units = (ROOT / "src" / "units.json").read_text(encoding="utf-8").strip()
+    src = re.sub(r"/\*HVB_DATA\*/\{[^\n]*?\};", lambda m: "/*HVB_DATA*/" + units + ";", src, count=1)
     m = re.search(r'(<main id="top">)(.*)(</main>)', src, re.S)
     before, main, after = src[:m.start(2)], m.group(2), src[m.end(2):]
     sections = dict(split_sections(main))
