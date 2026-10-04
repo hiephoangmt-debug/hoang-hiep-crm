@@ -50,6 +50,7 @@ global $wp_query;
 			<a class="<?php echo 'ban' === $deal ? 'is-active' : ''; ?>" href="<?php echo esc_url( hh_deal_url( 'ban' ) ); ?>">Mua bán</a>
 			<a class="<?php echo 'thue' === $deal ? 'is-active' : ''; ?>" href="<?php echo esc_url( hh_deal_url( 'thue' ) ); ?>">Cho thuê</a>
 		</nav>
+		<style>.quick-search{display:flex;align-items:center;gap:10px;width:100%;max-width:820px;margin-top:20px;padding:8px 8px 8px 20px;border:2px solid #d9dee8;border-radius:999px;background:#fff;box-shadow:0 10px 30px rgba(10,35,66,.10)}.quick-search:focus-within{border-color:#8b5a35}.quick-search .icon{flex:none;width:24px;height:24px;color:#0a2342}.quick-search input[type=search]{flex:1;min-width:0;height:52px;border:0;outline:0;padding:0 4px;font:inherit;font-size:1.08rem;color:#0a2342;background:none;-webkit-appearance:none;appearance:none}.quick-search .btn{flex:none;min-height:52px;border-radius:999px;padding:0 30px;font-size:1.05rem}@media(max-width:640px){.quick-search{padding:6px 6px 6px 14px}.quick-search input[type=search]{height:48px;font-size:1rem}.quick-search .btn{min-height:48px;padding:0 20px}}</style>
 		<form class="quick-search" action="<?php echo esc_url( $action ); ?>" method="get" role="search">
 			<?php echo hh_icon( 'search' ); // phpcs:ignore ?>
 			<input type="search" name="tk" value="<?php echo esc_attr( $cur( 'tk' ) ); ?>" placeholder="<?php echo esc_attr( 'thue' === $deal ? 'Tìm căn hộ, dự án, đường, khu vực cho thuê…' : 'Tìm căn hộ, biệt thự, đất, dự án, đường, khu vực…' ); ?>" aria-label="Tìm kiếm nhà đất">

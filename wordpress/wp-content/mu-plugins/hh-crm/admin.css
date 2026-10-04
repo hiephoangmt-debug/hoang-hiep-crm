@@ -18,3 +18,9 @@
 .hh-media__list img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .hh-media__clear { color: #b32d2e; }
 @media (max-width: 782px) { .hh-box__grid { grid-template-columns: 1fr; } }
+.hh-units-read { grid-column: 1 / -1; margin-top: 14px; padding: 14px 16px; border: 1px solid #c3c4c7; border-left: 4px solid #0a2342; border-radius: 4px; background: #f6f7f7; }
+.hh-units-read__hint { color: #646970; font-size: 12px; }
+.hh-units-read__ok { color: #00701a; }
+.hh-units-read__empty, .hh-units-read__warn { color: #996800; }
+.hh-units-read__err { color: #b32d2e; }
+.hh-units-read__list { margin: 4px 0 8px 18px; list-style: disc; }

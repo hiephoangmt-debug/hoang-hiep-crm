@@ -36,7 +36,9 @@ function hh_render_meta_box( $post, $schema ) {
 		foreach ( $group['fields'] as $key => $field ) {
 			hh_render_field( $post->ID, $key, $field );
 		}
-		echo '</div></section>';
+		echo '</div>';
+		do_action( 'hh_meta_panel_end', $group_id, $post );
+		echo '</section>';
 		$first = false;
 	}
 	echo '</div>';

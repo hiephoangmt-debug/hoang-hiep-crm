@@ -771,12 +771,7 @@ function hh_units_on_save( $post_id, $post ) {
 		set_transient( 'hh_units_msg_' . get_current_user_id(), array( 'error', 'Bảng tính căn: ' . $result->get_error_message() ), 60 );
 	} elseif ( array_sum( $result ) ) {
 		$data = hh_units_data( $post_id );
-		$warn = array();
-		foreach ( (array) ( $data['plans'] ?? array() ) as $p ) {
-			if ( $p['check'] > 0.002 ) {
-				$warn[] = $p['name'];
-			}
-		}
+		$warn = hh_units_warnings( $data );
 		set_transient(
 			'hh_units_msg_' . get_current_user_id(),
 			array(
@@ -786,6 +781,77 @@ function hh_units_on_save( $post_id, $post ) {
 			60
 		);
 	}
+}
+
+/** Phương án tính lại chưa khớp tổng tiền của phiếu mẫu. */
+function hh_units_warnings( $data ) {
+	$warn = array();
+	foreach ( (array) ( $data['plans'] ?? array() ) as $p ) {
+		if ( ( $p['check'] ?? 0 ) > 0.002 ) {
+			$warn[] = $p['name'];
+		}
+	}
+	return array_unique( $warn );
+}
+
+/** Ô trạng thái + nút "Đọc file" trong tab Bảng tính căn (trình soạn thảo khối không hiện thông báo sau khi lưu). */
+add_action( 'hh_meta_panel_end', 'hh_units_admin_panel', 10, 2 );
+function hh_units_admin_panel( $group_id, $post ) {
+	if ( 'bang-tinh' !== $group_id ) {
+		return;
+	}
+	printf(
+		'<div class="hh-units-read" data-post="%d" data-nonce="%s"><p><button type="button" class="button button-primary hh-units-read__go">Đọc file &amp; tạo trang bảng tính</button> <span class="hh-units-read__hint">Chọn file ở trên rồi bấm nút này – không cần chờ bấm Cập nhật.</span></p><div class="hh-units-read__out">%s</div></div>',
+		(int) $post->ID,
+		esc_attr( wp_create_nonce( 'hh_units_read' ) ),
+		hh_units_admin_status( $post->ID ) // phpcs:ignore WordPress.Security.EscapeOutput -- đã escape bên trong.
+	);
+}
+
+function hh_units_admin_status( $post_id ) {
+	$data = hh_units_data( $post_id );
+	if ( ! $data ) {
+		return '<p class="hh-units-read__empty">Chưa kết nối bảng tính: chưa đọc được file nào cho dự án này.</p>';
+	}
+	$out  = sprintf( '<p class="hh-units-read__ok"><strong>Đã kết nối:</strong> %s – đọc lúc %s.</p>', esc_html( hh_units_summary( $data ) ), esc_html( wp_date( 'H:i d/m/Y', (int) $data['at'] ) ) );
+	$out .= '<ul class="hh-units-read__list">';
+	foreach ( (array) ( $data['sources'] ?? array() ) as $src ) {
+		$out .= '<li>' . esc_html( $src ) . '</li>';
+	}
+	$out .= '</ul>';
+	$warn = hh_units_warnings( $data );
+	if ( $warn ) {
+		$out .= '<p class="hh-units-read__warn">Lưu ý: tổng tiền tính lại chưa khớp phiếu mẫu ở phương án ' . esc_html( implode( ', ', $warn ) ) . ' – kiểm tra lại trên trang.</p>';
+	}
+	if ( 'publish' === get_post_status( $post_id ) ) {
+		$out .= sprintf( '<p><a class="button" href="%s" target="_blank" rel="noopener">Mở trang bảng tính →</a> <code>%s</code></p>', esc_url( hh_units_url( $post_id ) ), esc_html( hh_units_url( $post_id ) ) );
+	} else {
+		$out .= '<p>Dự án chưa đăng (Xuất bản) nên trang bảng tính chưa xem được ngoài web.</p>';
+	}
+	return $out;
+}
+
+add_action( 'wp_ajax_hh_units_read', 'hh_units_ajax_read' );
+function hh_units_ajax_read() {
+	check_ajax_referer( 'hh_units_read' );
+	$post_id = absint( $_POST['post_id'] ?? 0 );
+	if ( ! $post_id || 'du-an' !== get_post_type( $post_id ) || ! current_user_can( 'edit_post', $post_id ) ) {
+		wp_send_json_error( array( 'html' => '<p class="hh-units-read__err">Không có quyền sửa dự án này.</p>' ) );
+	}
+	$files = implode( ',', array_filter( array_map( 'absint', explode( ',', sanitize_text_field( wp_unslash( $_POST['files'] ?? '' ) ) ) ) ) );
+	$sheet = esc_url_raw( trim( wp_unslash( $_POST['sheet'] ?? '' ) ) );
+	foreach ( array( 'hh_p_units_file' => $files, 'hh_p_units_sheet' => $sheet ) as $key => $val ) {
+		if ( '' === $val ) {
+			delete_post_meta( $post_id, $key );
+		} else {
+			update_post_meta( $post_id, $key, $val );
+		}
+	}
+	$result = hh_units_refresh( $post_id );
+	if ( is_wp_error( $result ) ) {
+		wp_send_json_error( array( 'html' => '<p class="hh-units-read__err"><strong>Chưa đọc được:</strong> ' . esc_html( $result->get_error_message() ) . '</p>' ) );
+	}
+	wp_send_json_success( array( 'html' => hh_units_admin_status( $post_id ) ) );
 }
 
 add_action( 'admin_notices', 'hh_units_notice' );
