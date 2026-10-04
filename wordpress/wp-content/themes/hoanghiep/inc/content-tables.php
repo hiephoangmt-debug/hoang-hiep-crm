@@ -74,6 +74,11 @@ function hoanghiep_project_dedupe( $html ) {
 		'/^pháp lý/u'                         => $has( 'hh_p_legal' ),
 		'/^(câu hỏi|hỏi đáp)/u'               => $has( 'hh_p_faq' ),
 	);
+	// Con số chính đã hiện ở khung mở đầu (Con số nổi bật) – bỏ khối số liệu lặp lại trong bài.
+	if ( $has( 'hh_p_offer_stats' ) && false !== strpos( $html, 'lp-stats' ) ) {
+		$html = preg_replace( '#<div class="lp-stats">.*?</div>#s', '', $html, 1 );
+		$html = preg_replace( '#\s*\d+ con số [^<:]*:(</p>)#u', '$1', $html, 1 );
+	}
 	$parts = preg_split( '#(?=<h2[\s>])#i', $html );
 	foreach ( $parts as $i => $part ) {
 		if ( ! preg_match( '#^<h2[^>]*>(.*?)</h2>#is', $part, $m ) ) {

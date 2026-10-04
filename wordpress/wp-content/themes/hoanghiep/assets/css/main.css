@@ -1195,3 +1195,21 @@ html.nav-locked, html.nav-locked body { overflow: hidden; }
 .hh-form button[type="submit"], .offer-banner .btn--gold, .discount .btn--gold, .entry-content .lp-cta .btn--gold, .contact-dock__btn--form, .cta-box .btn--gold { background: var(--cta); }
 .hh-form button[type="submit"]:hover, .offer-banner .btn--gold:hover, .discount .btn--gold:hover, .entry-content .lp-cta .btn--gold:hover, .cta-box .btn--gold:hover { background: var(--cta-2); }
 .hero__price, .project-hero__price { color: var(--cta-light); }
+
+/* Khung mở đầu mục Giới thiệu: ưu đãi + con số + nút */
+.hook { display: grid; gap: 16px; margin: 0 0 24px; padding: clamp(18px, 3vw, 26px); border-radius: var(--radius-lg); background: linear-gradient(120deg, var(--navy) 0%, var(--navy-2) 60%, var(--gold-3) 100%); color: #d7e0ec; box-shadow: var(--shadow-lg); }
+.hook__head { display: grid; gap: 8px; justify-items: start; }
+.hook__tag { padding: 4px 12px; border-radius: 999px; background: var(--cta); color: var(--white); font-size: .78rem; font-weight: 700; letter-spacing: .04em; }
+.hook__title { margin: 0; font-family: var(--font-display); font-size: clamp(1.3rem, 2.6vw, 1.75rem); line-height: 1.3; color: var(--white); }
+.hook__title em { font-style: normal; color: var(--cta-light); }
+.hook__stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 0; padding: 0; list-style: none; }
+.hook__stats li { padding: 12px 8px; border-radius: var(--radius); background: rgba(255, 255, 255, .1); text-align: center; line-height: 1.3; }
+.hook__stats b { display: block; font-family: var(--font-display); font-size: clamp(1.6rem, 3.4vw, 2.1rem); line-height: 1.1; color: var(--cta-light); }
+.hook__stats span { font-size: .8rem; color: rgba(255, 255, 255, .88); }
+.hook__points li { color: var(--white); }
+.hook__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.hook__note { margin: -4px 0 0; font-size: .8rem; color: rgba(255, 255, 255, .7); }
+@media (max-width: 600px) {
+	.hook__stats { grid-template-columns: 1fr 1fr; }
+	.hook__actions .btn { width: 100%; }
+}

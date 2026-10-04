@@ -160,6 +160,9 @@ while ( have_posts() ) :
 
 			<section class="block" id="gioi-thieu">
 				<h2 class="block__title">Giới thiệu <?php echo esc_html( $title ); ?></h2>
+				<?php if ( ! $resale ) : ?>
+					<?php get_template_part( 'template-parts/project-hook' ); ?>
+				<?php endif; ?>
 				<?php if ( has_excerpt() ) : ?>
 					<p class="lead"><?php echo esc_html( get_the_excerpt() ); ?></p>
 				<?php endif; ?>
