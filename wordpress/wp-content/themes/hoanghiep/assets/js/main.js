@@ -192,6 +192,14 @@
 			if ( seen || ( document.activeElement && document.activeElement.closest( 'form' ) ) ) {
 				return;
 			}
+			// Khung chat đã hỏi khách / khách đang chat → không bật thêm popup form.
+			let chatBusy = !! document.querySelector( '.hhc.is-open, .hhc__bubble:not([hidden])' );
+			try {
+				chatBusy = chatBusy || !! sessionStorage.getItem( 'hh_nudge_n' );
+			} catch ( e ) {}
+			if ( chatBusy ) {
+				return;
+			}
 			seen = true;
 			try {
 				sessionStorage.setItem( 'hhPop', '1' );
@@ -199,9 +207,15 @@
 			pop.hidden = false;
 			document.body.classList.add( 'has-pop' );
 		};
+		// Trang có chat hỏi theo mục đang đọc → chat ưu tiên; popup form chỉ là phương án dự phòng sau 90 giây.
+		const chatNudges = () => !! ( window.HH_CHAT && window.HH_CHAT.nudges && Object.keys( window.HH_CHAT.nudges ).length );
 		if ( ! seen ) {
-			setTimeout( show, 35000 );
+			setTimeout( () => ( chatNudges() ? setTimeout( show, 55000 ) : show() ), 35000 );
 			const onScroll = () => {
+				if ( chatNudges() ) {
+					window.removeEventListener( 'scroll', onScroll );
+					return;
+				}
 				if ( window.scrollY > ( document.documentElement.scrollHeight - window.innerHeight ) * 0.5 ) {
 					window.removeEventListener( 'scroll', onScroll );
 					show();

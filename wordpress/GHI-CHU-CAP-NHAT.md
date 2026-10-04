@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 04/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.12.3** + plugin Hoàng Hiệp CRM **2.15.5**)
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.12.4** + plugin Hoàng Hiệp CRM **2.16.0**)
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt (khoảng 5 phút)
@@ -11,7 +11,7 @@
 4. **Cài đặt → Đường dẫn tĩnh** → bấm **Lưu** (để trang mới Tòa F2, phân khu Hải Vân Bay chạy được).
 5. **LiteSpeed Cache → Purge All**, rồi Ctrl + Shift + R (điện thoại: tắt hẳn tab, mở lại).
 
-**Kiểm tra sau khi cài:** Giao diện hiện 2.12.3 · Plugin hiện 2.15.5 · mở `/du-an/fours-tower-f2-thap-mai/` thấy 4 con số 18% – 25% – 15% – 70%.
+**Kiểm tra sau khi cài:** Giao diện hiện 2.12.4 · Plugin hiện 2.16.0 · mở `/du-an/fours-tower-f2-thap-mai/` thấy 4 con số 18% – 25% – 15% – 70%.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
 
@@ -40,6 +40,7 @@
 ### Chat trực tiếp & Telegram (mới)
 - **Chat trên web** (góc phải mọi trang, điện thoại nằm trên thanh Gọi/Zalo): chào theo trang khách đang xem, nút gợi ý (Bảng giá, Vốn tự có, Đặt lịch xem nhà…), trả lời bằng số liệu dự án và xin số Zalo. Khách gõ số điện thoại → tự lưu vào **Khách hàng** kèm nội dung chat + email + Telegram.
 - Mặc định trả lời theo **kịch bản** (miễn phí). Dán **API key Claude** ở **Khách hàng → Chat trên web** để trả lời tự nhiên bằng AI (có giới hạn lượt/ngày; lỗi hoặc hết lượt tự quay về kịch bản).
+- **Hỏi theo mục đang đọc**: khách dừng ~8 giây ở một mục (Vị trí, Tiện ích, Giỏ hàng, Chính sách, Tiến độ…) → bong bóng hỏi đúng chuyện mục đó kèm 2 nút trả lời nhanh; tối đa 2 lần mỗi lượt truy cập. Popup form "Nhận bảng giá" lùi lại (sau 90 giây, chỉ khi khách chưa chat). Tắt/bật: Khách hàng → Chat trên web.
 - **Thông báo Telegram**: **Khách hàng → Thông báo Telegram** – tạo bot ở @BotFather, dán token, nhắn Start cho bot, bấm *Lấy Chat ID* → *Gửi thử*. Mọi khách mới (form + chat) về Telegram ngay.
 
 ### Chức năng

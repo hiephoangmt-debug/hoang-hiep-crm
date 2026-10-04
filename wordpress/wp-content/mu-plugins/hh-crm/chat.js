@@ -41,7 +41,7 @@
 		'<button type="button" class="hhc__fab" aria-label="Chat với ' + esc( C.name ) + '">' +
 			( C.avatar ? '<img src="' + esc( C.avatar ) + '" alt="">' : '' ) +
 			'<span class="hhc__fab-text">Chat tư vấn</span><span class="hhc__dot"></span></button>' +
-		'<div class="hhc__bubble" hidden><button type="button" class="hhc__bubble-x" aria-label="Đóng">×</button><p></p></div>' +
+		'<div class="hhc__bubble" hidden><button type="button" class="hhc__bubble-x" aria-label="Đóng">×</button><p></p><div class="hhc__bubble-chips"></div></div>' +
 		'<section class="hhc__panel" hidden role="dialog" aria-label="Chat tư vấn">' +
 			'<header class="hhc__head">' +
 				( C.avatar ? '<img src="' + esc( C.avatar ) + '" alt="">' : '' ) +
@@ -102,16 +102,20 @@
 			chips.appendChild( b );
 		} );
 	}
+	var pendingNudge = null;
 	function open() {
 		panel.hidden = false;
 		bubble.hidden = true;
 		root.classList.add( 'is-open' );
 		if ( ! log.childElementCount ) {
-			if ( ! state.msgs.length ) {
+			state.msgs.forEach( function ( m ) { addMsg( m.role, m.text, false ); } );
+			if ( ! state.msgs.length && ! pendingNudge ) {
 				addMsg( 'assistant', C.greet, true );
-			} else {
-				state.msgs.forEach( function ( m ) { addMsg( m.role, m.text, false ); } );
 			}
+		}
+		if ( pendingNudge ) {
+			addMsg( 'assistant', pendingNudge, true );
+			pendingNudge = null;
 		}
 		renderChips();
 		setTimeout( function () { input.focus(); }, 50 );
@@ -185,10 +189,83 @@
 		}
 	} );
 
-	// Bong bóng lời chào sau 25 giây (1 lần mỗi lượt truy cập).
+	// Hỏi chủ động theo mục khách đang dừng đọc (~8 giây ở cùng một mục).
+	var nudges = C.nudges || {};
+	var hasNudges = Object.keys( nudges ).length > 0;
+	function sget( k ) { try { return sessionStorage.getItem( k ); } catch ( e ) { return null; } }
+	function sset( k, v ) { try { sessionStorage.setItem( k, v ); } catch ( e ) {} }
+	function chatted() {
+		return state.lead || state.msgs.some( function ( m ) { return 'user' === m.role && Date.now() - state.at < 30 * 60e3; } );
+	}
+	function showNudge( key ) {
+		var n = nudges[ key ];
+		var count = parseInt( sget( 'hh_nudge_n' ) || '0', 10 );
+		var last = parseInt( sget( 'hh_nudge_at' ) || '0', 10 );
+		var done = ( sget( 'hh_nudge_done' ) || '' ).split( ',' );
+		if ( ! n || count >= 2 || Date.now() - last < 30e3 || done.indexOf( key ) > -1 || ! panel.hidden || chatted() || document.body.classList.contains( 'has-pop' ) ) {
+			return;
+		}
+		sset( 'hh_nudge_n', String( count + 1 ) );
+		sset( 'hh_nudge_at', String( Date.now() ) );
+		sset( 'hh_nudge_done', done.concat( key ).join( ',' ) );
+		sset( 'hh_chat_seen', '1' );
+		bubble.querySelector( 'p' ).textContent = n[ 0 ];
+		bubble.dataset.q = n[ 0 ];
+		var box = bubble.querySelector( '.hhc__bubble-chips' );
+		box.innerHTML = '';
+		( n[ 1 ] || [] ).forEach( function ( c ) {
+			var b = el( 'button', 'hhc__chip', c );
+			b.type = 'button';
+			b.addEventListener( 'click', function ( e ) {
+				e.stopPropagation();
+				pendingNudge = n[ 0 ];
+				open();
+				send( c );
+			} );
+			box.appendChild( b );
+		} );
+		bubble.hidden = false;
+	}
+	if ( hasNudges && 'IntersectionObserver' in window ) {
+		var current = null, since = 0, t0 = Date.now();
+		var targets = Object.keys( nudges ).map( function ( k ) { return document.getElementById( k ); } ).filter( Boolean );
+		var io = new IntersectionObserver( function ( entries ) {
+			entries.forEach( function ( en ) {
+				if ( en.isIntersecting ) {
+					if ( current !== en.target.id ) {
+						current = en.target.id;
+						since = Date.now();
+					}
+				} else if ( current === en.target.id ) {
+					current = null;
+				}
+			} );
+		}, { rootMargin: '-45% 0px -45% 0px' } ); // Mục nằm ở giữa màn hình = đang đọc.
+		targets.forEach( function ( t ) { io.observe( t ); } );
+		setInterval( function () {
+			if ( document.hidden || Date.now() - t0 < 6000 ) {
+				return;
+			}
+			if ( current && Date.now() - since >= 8000 ) {
+				showNudge( current );
+				since = Infinity;
+			}
+			if ( nudges.page && Date.now() - t0 >= 30000 ) {
+				showNudge( 'page' );
+			}
+		}, 1000 );
+	}
+	bubble.querySelector( 'p' ).addEventListener( 'click', function () {
+		if ( bubble.dataset.q ) {
+			pendingNudge = bubble.dataset.q;
+			bubble.dataset.q = '';
+		}
+	}, true );
+
+	// Bong bóng lời chào sau 25 giây (1 lần mỗi lượt truy cập) – trang không có câu hỏi theo mục.
 	var seen = false;
 	try { seen = !! sessionStorage.getItem( 'hh_chat_seen' ); } catch ( e ) {}
-	if ( C.popup && ! seen && ! state.lead ) {
+	if ( C.popup && ! seen && ! state.lead && ! hasNudges ) {
 		setTimeout( function () {
 			if ( panel.hidden ) {
 				bubble.querySelector( 'p' ).textContent = C.greet;

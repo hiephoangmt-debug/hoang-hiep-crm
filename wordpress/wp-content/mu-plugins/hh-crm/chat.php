@@ -64,10 +64,48 @@ add_action(
 					? array( 'Bảng giá & chính sách', 'Vốn tự có bao nhiêu?', 'Đặt lịch xem nhà', 'Gửi số Zalo nhận tài liệu' )
 					: array( 'Tìm căn hộ', 'Mua đất nền / biệt thự', 'Thuê nhà', 'Gửi số Zalo để được tư vấn' ),
 				'popup'   => '0' !== (string) hh_chat_opt( 'popup', '1' ),
+				'nudges'  => '0' !== (string) hh_chat_opt( 'nudge', '1' ) ? hh_chat_nudges( $id ) : array(),
 			)
 		);
 	}
 );
+
+/**
+ * Câu hỏi chủ động theo mục khách đang dừng đọc (khoảng 8 giây): [câu hỏi, 2 nút trả lời nhanh].
+ * Khóa = id mục trên trang dự án; "page" = trang danh sách / trang khác.
+ */
+function hh_chat_nudges( $id ) {
+	if ( $id && 'du-an' === get_post_type( $id ) ) {
+		$t   = get_the_title( $id );
+		$dl  = trim( (string) hh_meta( 'hh_p_offer_deadline', $id ) );
+		$off = trim( (string) hh_meta( 'hh_p_offer_title', $id ) );
+		return array(
+			'gioi-thieu' => array( 'Anh/chị tìm hiểu ' . $t . ' để ở hay đầu tư ạ? Em gửi bản tóm tắt 1 trang cho dễ so sánh nhé.', array( 'Mua để ở', 'Đầu tư cho thuê' ) ),
+			'tong-quan'  => array( 'Anh/chị muốn xem mặt bằng tổng thể và các tòa / phân khu đang mở bán của ' . $t . ' không ạ?', array( 'Gửi mặt bằng tổng thể', 'Phân khu nào đang bán?' ) ),
+			'vi-tri'     => array( 'Anh/chị làm việc hay cho con học ở khu nào ạ? Em tính giúp thời gian di chuyển từ ' . $t . '.', array( 'Gửi bản đồ vị trí', 'Gần trường, bệnh viện nào?' ) ),
+			'lien-ket'   => array( 'Anh/chị cần đi lại thường xuyên tới đâu ạ – trung tâm, sân bay hay biển? Em gửi thời gian di chuyển thực tế.', array( 'Ra sân bay bao lâu?', 'Ra biển bao lâu?' ) ),
+			'tien-ich'   => array( 'Tiện ích nào anh/chị quan tâm nhất ạ – hồ bơi, trường học hay khu vui chơi cho bé? Em gửi ảnh thực tế.', array( 'Gửi ảnh tiện ích', 'Có trường học gần không?' ) ),
+			'mat-bang'   => array( 'Anh/chị đang cân nhắc căn mấy phòng ngủ ạ? Em lọc căn đẹp còn trống đúng loại đó, kèm mặt bằng căn.', array( 'Căn 2 phòng ngủ', 'Căn 3 phòng ngủ' ) ),
+			'san-pham'   => array( 'Anh/chị đang cân nhắc loại căn nào ạ? Em gửi giá và căn đẹp còn trống đúng loại đó.', array( 'Giá căn 2PN?', 'Giá căn 3PN?' ) ),
+			'gio-hang'   => array( 'Anh/chị thích căn nào trong giỏ hàng ạ? Em gửi giá và phiếu tính giá căn đó ngay.', array( 'Nhận giá các căn này', 'Còn căn nào khác?' ) ),
+			'chinh-sach' => array( ( $off ? $off . '. ' : '' ) . 'Anh/chị dự định vay ngân hàng hay thanh toán sớm ạ? Em tính phương án có lợi nhất cho căn anh/chị chọn' . ( $dl ? ' (ưu đãi hạn ' . $dl . ').' : '.' ), array( 'Vay ngân hàng', 'Thanh toán sớm' ) ),
+			'tai-chinh'  => array( 'Anh/chị muốn em tính khoản vay và số tiền trả hằng tháng cho căn cụ thể không ạ?', array( 'Vốn tự có bao nhiêu?', 'Trả hằng tháng bao nhiêu?' ) ),
+			'tien-do'    => array( 'Anh/chị cần nhận nhà khoảng thời gian nào ạ? Em gửi tiến độ thi công mới nhất kèm ảnh công trường.', array( 'Khi nào bàn giao?', 'Gửi ảnh tiến độ' ) ),
+			'thu-vien'   => array( 'Anh/chị muốn đi xem nhà mẫu / dự án thực tế không ạ? ' . ( function_exists( 'hoanghiep_opt' ) ? hoanghiep_opt( 'hh_person_name' ) : 'Hiệp' ) . ' đưa đi miễn phí.', array( 'Đặt lịch xem nhà', 'Gửi thêm ảnh thực tế' ) ),
+			'hoi-dap'    => array( 'Anh/chị còn băn khoăn điều gì về ' . $t . ' không ạ? Em trả lời ngay.', array( 'Pháp lý thế nào?', 'Giá có tăng không?' ) ),
+		);
+	}
+	if ( $id && 'bat-dong-san' === get_post_type( $id ) ) {
+		return array(
+			'page'      => array( 'Anh/chị quan tâm căn này ạ? Em gửi thêm ảnh thực tế và hẹn lịch xem nhà nhé.', array( 'Đặt lịch xem nhà', 'Còn căn tương tự không?' ) ),
+			'tai-chinh' => array( 'Anh/chị muốn em tính khoản vay cho căn này không ạ?', array( 'Vốn tự có bao nhiêu?', 'Trả hằng tháng bao nhiêu?' ) ),
+		);
+	}
+	if ( is_post_type_archive( array( 'du-an', 'bat-dong-san' ) ) || is_tax() || is_search() ) {
+		return array( 'page' => array( 'Anh/chị đang tìm khu vực nào, tầm giá bao nhiêu ạ? Em lọc giúp 2–3 căn phù hợp nhất.', array( 'Dưới 3 tỷ', 'Cho thuê dưới 15 triệu' ) ) );
+	}
+	return array();
+}
 
 /* -------------------------------------------------------------------------
  * Xử lý tin nhắn
@@ -441,6 +479,8 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 	$may_ask    = ! $has_lead && $turn >= 2 && ! $asked_last;
 	$ask        = $may_ask ? ( $title ? ' Anh/chị cho em xin số Zalo, em gửi bảng giá chi tiết và phiếu tính giá đúng căn anh/chị quan tâm nhé.' : ' Anh/chị cho em xin số Zalo, em gửi chi tiết từng căn kèm hình ảnh để anh/chị xem kỹ hơn nhé.' ) : '';
 	$ack        = $turn >= 2 ? 'Dạ em nhận thông tin ạ. ' : 'Dạ ';
+	// Sau "Dạ " (lượt đầu) viết thường chữ đầu của câu chung, giữ hoa cho tên dự án.
+	$lc = static fn( $txt ) => $turn >= 2 ? $txt : mb_strtolower( mb_substr( $txt, 0, 1 ) ) . mb_substr( $txt, 1 );
 
 	if ( $new_lead ) {
 		return 'Em cảm ơn anh/chị! ' . $name . ' sẽ gọi/Zalo cho anh/chị trong ít phút (8:00–21:00) để gửi bảng giá, chính sách và tư vấn kỹ hơn. Anh/chị tiện liên hệ khung giờ nào ạ?';
@@ -471,21 +511,21 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 			}
 			$p = $f['Giá'] ?? '';
 			$caps = hh_table( 'hh_p_capital_table', 4, $page );
-			return $ack . ( $p && false === strpos( $p, 'Liên hệ' ) ? $title . ' hiện ' . mb_strtolower( $p ) . ' (tham khảo).' : ( $caps ? 'Giá tham khảo: ' . implode( '; ', array_map( static fn( $r ) => $r[0] . ' ' . mb_strtolower( $r[1] ), $caps ) ) . '.' : 'Giá ' . $title . ' thay đổi theo từng đợt và từng căn.' ) ) . ( $ask ?: ' Anh/chị đang cần loại căn mấy phòng ngủ ạ?' );
+			return $ack . ( $p && false === strpos( $p, 'Liên hệ' ) ? $title . ' hiện ' . mb_strtolower( $p ) . ' (tham khảo).' : ( $caps ? $lc( 'Giá tham khảo: ' ) . implode( '; ', array_map( static fn( $r ) => $r[0] . ' ' . mb_strtolower( $r[1] ), $caps ) ) . '.' : $lc( 'Giá ' ) . $title . ' thay đổi theo từng đợt và từng căn.' ) ) . ( $ask ?: ' Anh/chị đang cần loại căn mấy phòng ngủ ạ?' );
 		}
 		if ( $has( 'chinh sach', 'chiet khau', 'uu dai', 'khuyen mai', 'giam' ) ) {
 			$o = $f['Ưu đãi chính'] ?? ( $f['Chính sách'] ?? '' );
-			return $ack . ( $o ? 'Chính sách hiện tại: ' . mb_substr( $o, 0, 220 ) . ( isset( $f['Hạn ưu đãi'] ) ? ' (hạn ' . $f['Hạn ưu đãi'] . ').' : '.' ) : 'Chính sách thay đổi theo từng đợt mở bán.' ) . ( $ask ?: ' Anh/chị dự định vay ngân hàng hay thanh toán sớm để em tính phương án có lợi nhất ạ?' );
+			return $ack . ( $o ? $lc( 'Chính sách hiện tại: ' ) . mb_substr( $o, 0, 220 ) . ( isset( $f['Hạn ưu đãi'] ) ? ' (hạn ' . $f['Hạn ưu đãi'] . ').' : '.' ) : $lc( 'Chính sách thay đổi theo từng đợt mở bán.' ) ) . ( $ask ?: ' Anh/chị dự định vay ngân hàng hay thanh toán sớm để em tính phương án có lợi nhất ạ?' );
 		}
 		if ( $has( 'von', 'vay', 'tra gop', 'thanh toan', 'tien do' ) ) {
 			$v = $f['Vốn tự có'] ?? ( $f['Vay'] ?? '' );
-			return $ack . ( $v ? 'Vốn tự có tham khảo – ' . mb_substr( $v, 0, 240 ) . '.' : 'Em tính được vốn tự có và lịch thanh toán theo đúng căn anh/chị chọn.' ) . ( $ask ?: ' Anh/chị dự kiến chuẩn bị khoảng bao nhiêu vốn ban đầu ạ?' );
+			return $ack . ( $v ? $lc( 'Vốn tự có tham khảo – ' ) . mb_substr( $v, 0, 240 ) . '.' : $lc( 'Em tính được vốn tự có và lịch thanh toán theo đúng căn anh/chị chọn.' ) ) . ( $ask ?: ' Anh/chị dự kiến chuẩn bị khoảng bao nhiêu vốn ban đầu ạ?' );
 		}
 		if ( $has( 'o dau', 'vi tri', 'dia chi', 'duong' ) && isset( $f['Vị trí'] ) ) {
 			return $ack . $title . ' nằm tại ' . $f['Vị trí'] . '.' . ( $ask ?: ' Anh/chị muốn em gửi bản đồ và ảnh thực tế không ạ?' );
 		}
 		if ( $has( 'phap ly', 'so hong', 'so do', 'lau dai' ) && isset( $f['Pháp lý'] ) ) {
-			return $ack . 'Pháp lý: ' . $f['Pháp lý'] . '.' . $ask;
+			return $ack . $lc( 'Pháp lý: ' ) . $f['Pháp lý'] . '.' . $ask;
 		}
 	}
 	if ( $has( 'xem nha', 'di xem', 'tham quan', 'lich', 'nha mau' ) ) {
@@ -552,6 +592,7 @@ function hh_chat_settings_page() {
 				'enabled'     => empty( $_POST['enabled'] ) ? '0' : '1',
 				'popup'       => empty( $_POST['popup'] ) ? '0' : '1',
 				'tg_start'    => empty( $_POST['tg_start'] ) ? '0' : '1',
+				'nudge'       => empty( $_POST['nudge'] ) ? '0' : '1',
 				'api_key'     => '' === $key ? ( $old['api_key'] ?? '' ) : ( '-' === $key ? '' : $key ),
 				'model'       => isset( HH_CHAT_MODELS[ $_POST['model'] ?? '' ] ) ? sanitize_text_field( wp_unslash( $_POST['model'] ) ) : 'claude-opus-5-5',
 				'daily_limit' => absint( $_POST['daily_limit'] ?? 300 ),
@@ -574,6 +615,7 @@ function hh_chat_settings_page() {
 			<table class="form-table">
 				<tr><th>Bật chat</th><td><label><input type="checkbox" name="enabled" value="1" <?php checked( hh_chat_enabled() ); ?>> Hiện khung chat trên web</label></td></tr>
 				<tr><th>Tự mở lời chào</th><td><label><input type="checkbox" name="popup" value="1" <?php checked( '0' !== (string) hh_chat_opt( 'popup', '1' ) ); ?>> Sau khoảng 25 giây hiện bong bóng lời chào (1 lần mỗi lượt truy cập)</label></td></tr>
+				<tr><th>Hỏi theo mục đang đọc</th><td><label><input type="checkbox" name="nudge" value="1" <?php checked( '0' !== (string) hh_chat_opt( 'nudge', '1' ) ); ?>> Khách dừng đọc khoảng 8 giây ở một mục (Vị trí, Tiện ích, Chính sách…) → hiện câu hỏi đúng mục đó (tối đa 2 lần mỗi lượt truy cập)</label></td></tr>
 				<tr><th>Báo Telegram</th><td><label><input type="checkbox" name="tg_start" value="1" <?php checked( '0' !== (string) hh_chat_opt( 'tg_start', '1' ) ); ?>> Báo ngay khi khách bắt đầu chat (chưa để số). Khách để số luôn được báo.</label></td></tr>
 				<tr><th>API key Claude</th><td>
 					<input type="text" name="hh_claude_key" class="regular-text code" autocomplete="off" data-lpignore="true" data-1p-ignore spellcheck="false" placeholder="<?php echo $has_key ? 'Đã lưu: …' . esc_attr( substr( hh_chat_api_key(), -4 ) ) . ' – để trống nếu giữ nguyên' : 'sk-ant-…'; ?>" <?php disabled( defined( 'HH_CLAUDE_API_KEY' ) ); ?>>

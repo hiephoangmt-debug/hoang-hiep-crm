@@ -5,8 +5,12 @@
 .hhc__fab:hover { filter: brightness(1.05); }
 .hhc__dot { position: absolute; top: 6px; left: 40px; width: 12px; height: 12px; border-radius: 50%; background: #22c55e; border: 2px solid #fff; }
 .hhc.is-open .hhc__fab { display: none; }
-.hhc__bubble { position: fixed; right: 20px; bottom: 84px; z-index: 70; max-width: 300px; padding: 14px 34px 14px 16px; border-radius: 14px 14px 4px 14px; background: #fff; color: var(--hhc-ink); box-shadow: 0 12px 30px rgba(11, 36, 71, .2); font-size: .92rem; line-height: 1.5; }
+.hhc__bubble { position: fixed; right: 20px; bottom: 84px; z-index: 70; max-width: 320px; padding: 14px 34px 14px 16px; border-radius: 14px 14px 4px 14px; background: #fff; color: var(--hhc-ink); box-shadow: 0 12px 30px rgba(11, 36, 71, .2); font-size: .92rem; line-height: 1.5; }
 .hhc__bubble p { margin: 0; cursor: pointer; }
+.hhc__bubble-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.hhc__bubble-chips:not(:empty) { margin-top: 10px; }
+.hhc__bubble { animation: hhc-in .3s ease; }
+@keyframes hhc-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 .hhc__bubble-x { position: absolute; top: 4px; right: 6px; border: 0; background: none; font-size: 1.2rem; color: #7a869a; cursor: pointer; }
 .hhc__panel { position: fixed; right: 20px; bottom: 20px; z-index: 80; display: flex; flex-direction: column; width: 370px; max-width: calc(100vw - 24px); height: min(560px, calc(100vh - 110px)); border-radius: 16px; overflow: hidden; background: #fff; box-shadow: 0 24px 60px rgba(11, 36, 71, .3); }
 .hhc__panel[hidden] { display: none; }
