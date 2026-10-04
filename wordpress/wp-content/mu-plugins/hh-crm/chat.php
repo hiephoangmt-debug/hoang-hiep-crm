@@ -132,7 +132,7 @@ function hh_chat_handle() {
 		}
 	}
 	if ( '' === $reply ) {
-		$reply = hh_chat_script_reply( $last, $page, (bool) $lead_id, $new_lead );
+		$reply = hh_chat_script_reply( $msgs, $page, (bool) $lead_id, $new_lead );
 	}
 
 	// Ghi nội dung chat vào khách hàng (nếu đã có số).
@@ -271,7 +271,8 @@ Mục tiêu: giúp khách thật sự, tạo tin tưởng, rồi xin được s�
 Cách trả lời:
 - Tiếng Việt tự nhiên, thân thiện như một sale giỏi nhắn Zalo: xưng "em", gọi khách "anh/chị". Mỗi lượt 1–3 câu ngắn (tối đa khoảng 60 từ). Không dùng markdown, không gạch đầu dòng dài.
 - Trả lời đúng câu khách hỏi trước, dùng con số cụ thể trong "Dữ liệu" bên dưới khi có. Sau đó hỏi thêm 1 câu để hiểu nhu cầu (mua ở hay đầu tư, ngân sách, loại căn, thời điểm).
-- Sau 1–2 lượt hữu ích, xin số điện thoại/Zalo một cách tự nhiên kèm lý do rõ ràng: gửi bảng giá chi tiết và phiếu tính giá đúng căn, danh sách căn đẹp còn trống, giữ suất ưu đãi trước hạn, đặt lịch xem nhà. Ví dụ: "Anh/chị cho em xin số Zalo, em gửi ngay bảng giá và phiếu tính giá căn 2PN để anh/chị so sánh nhé."
+- Không vồ vập: lượt đầu chỉ trả lời và hỏi 1 câu, chưa xin số. Từ lượt thứ hai mở đầu bằng "Dạ em nhận thông tin ạ" rồi đưa 2–3 phương án cụ thể (tên dự án/căn, giá tham khảo) theo nhu cầu khách. Không bao giờ lặp lại nguyên câu đã gửi.
+- Xin số tối đa 1 lần mỗi 2 lượt, sau khi đã giúp được khách, kèm lý do rõ ràng: gửi bảng giá chi tiết và phiếu tính giá đúng căn, danh sách căn đẹp còn trống, giữ suất ưu đãi trước hạn, đặt lịch xem nhà. Ví dụ: "Anh/chị cho em xin số Zalo, em gửi ngay bảng giá và phiếu tính giá căn 2PN để anh/chị so sánh nhé."
 - Khách ngại cho số: tôn trọng, không ép; đưa số {$phone} (gọi/Zalo) để khách chủ động liên hệ, và vẫn trả lời tiếp câu hỏi.
 - Khi khách đã cho số: cảm ơn, xác nhận {$name} sẽ gọi/Zalo trong ít phút (giờ làm việc 8:00–21:00), hỏi khách tiện liên hệ giờ nào hoặc cần chuẩn bị tài liệu gì. Không xin số lần nữa.
 
@@ -359,55 +360,150 @@ function hh_chat_ai_reply( $msgs, $page, $lead_phone ) {
  * Trả lời theo kịch bản (không cần API)
  * ---------------------------------------------------------------------- */
 
-function hh_chat_script_reply( $text, $page, $has_lead, $new_lead ) {
+/** Ngân sách khách nêu (triệu đồng): "3 tỷ", "2,5 ty", "800 triệu". */
+function hh_chat_budget( $t ) {
+	if ( preg_match( '/(\d+(?:[.,]\d+)?)\s*(ty|ti)\b/u', $t, $m ) ) {
+		return (float) str_replace( ',', '.', $m[1] ) * 1000;
+	}
+	if ( preg_match( '/(\d{3,4})\s*(trieu|tr)\b/u', $t, $m ) ) {
+		return (float) $m[1];
+	}
+	return 0;
+}
+
+/** 3 phương án cụ thể theo nhu cầu: dự án (căn hộ / biệt thự / đất nền / shophouse) hoặc tin cho thuê. */
+function hh_chat_options( $need, $budget = 0, $exclude = 0 ) {
+	$rows = array();
+	if ( 'thue' === $need ) {
+		foreach ( get_posts( array( 'post_type' => 'bat-dong-san', 'numberposts' => 3, 'meta_key' => 'hh_deal', 'meta_value' => 'thue' ) ) as $p ) {
+			$rows[] = $p->post_title . ( function_exists( 'hh_listing_price' ) ? ' – ' . hh_listing_price( $p->ID ) : '' );
+		}
+		return $rows;
+	}
+	$tax = array( 'can-ho' => array( 'can-ho-so-huu-lau-dai', 'can-ho-dich-vu' ), 'biet-thu' => array( 'biet-thu' ), 'dat-nen' => array( 'dat-nen' ), 'shophouse' => array( 'shophouse' ) )[ $need ] ?? array();
+	$args = array( 'post_type' => 'du-an', 'numberposts' => 40, 'post__not_in' => array( (int) $exclude ), 'meta_key' => 'hh_p_featured', 'orderby' => array( 'meta_value' => 'DESC', 'date' => 'DESC' ) );
+	if ( $tax ) {
+		$args['tax_query'] = array( array( 'taxonomy' => 'loai-du-an', 'field' => 'slug', 'terms' => $tax ) );
+	}
+	$priced = array();
+	$other  = array();
+	foreach ( get_posts( $args ) as $p ) {
+		if ( (int) get_post_meta( $p->ID, 'hh_p_parent', true ) && ! $tax ) {
+			continue;
+		}
+		$from = (float) get_post_meta( $p->ID, 'hh_p_price_from', true );
+		if ( $budget && $from && $from > $budget * 1.1 ) {
+			continue;
+		}
+		$line = $p->post_title . ( $from ? ' – từ ' . hh_format_price( $from ) : '' );
+		if ( $from ) {
+			$priced[] = $line;
+		} else {
+			$other[] = $line;
+		}
+	}
+	return array_slice( array_merge( $priced, $other ), 0, 3 );
+}
+
+function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 	$name  = function_exists( 'hoanghiep_opt' ) ? hoanghiep_opt( 'hh_person_name' ) : 'Hoàng Hiệp';
 	$phone = function_exists( 'hoanghiep_opt' ) ? hoanghiep_opt( 'hh_phone' ) : '0904 567 009';
+	$user  = array_values( array_filter( $msgs, static fn( $m ) => 'user' === $m['role'] ) );
+	$bots  = array_values( array_filter( $msgs, static fn( $m ) => 'assistant' === $m['role'] ) );
+	$turn  = count( $user );
+	$text  = end( $user )['text'];
 	$t     = mb_strtolower( remove_accents( $text ) );
+	$all   = mb_strtolower( remove_accents( implode( ' ', array_column( $user, 'text' ) ) ) );
 	$has   = static fn( ...$words ) => (bool) array_filter( $words, static fn( $w ) => false !== strpos( $t, $w ) );
 	$f     = hh_chat_project_facts( $page );
 	$title = $f['Tên'] ?? '';
-	$ask   = $has_lead ? '' : ' Anh/chị cho em xin số Zalo, em gửi ngay bảng giá, phiếu tính giá và căn đẹp còn trống nhé.';
+	$prev  = $bots ? end( $bots )['text'] : '';
+
+	// Xin số tối đa 1 lần mỗi 2 lượt, không xin ở lượt đầu; lượt trước đã xin thì lượt này thôi.
+	$asked_last = (bool) preg_match( '/xin số|số zalo|số điện thoại/u', $prev );
+	$may_ask    = ! $has_lead && $turn >= 2 && ! $asked_last;
+	$ask        = $may_ask ? ( $title ? ' Anh/chị cho em xin số Zalo, em gửi bảng giá chi tiết và phiếu tính giá đúng căn anh/chị quan tâm nhé.' : ' Anh/chị cho em xin số Zalo, em gửi chi tiết từng căn kèm hình ảnh để anh/chị xem kỹ hơn nhé.' ) : '';
+	$ack        = $turn >= 2 ? 'Dạ em nhận thông tin ạ. ' : 'Dạ ';
 
 	if ( $new_lead ) {
 		return 'Em cảm ơn anh/chị! ' . $name . ' sẽ gọi/Zalo cho anh/chị trong ít phút (8:00–21:00) để gửi bảng giá, chính sách và tư vấn kỹ hơn. Anh/chị tiện liên hệ khung giờ nào ạ?';
 	}
-	if ( $has( 'gia', 'bang gia', 'bao nhieu tien', 'ty', 'trieu' ) && ! $has( 'von', 'vay' ) ) {
-		// Khách hỏi đúng loại căn có trong bảng vốn tự có → trả lời theo loại căn đó.
-		foreach ( $page ? hh_table( 'hh_p_capital_table', 4, $page ) : array() as $r ) {
-			if ( $r[0] && false !== strpos( $t, mb_strtolower( remove_accents( $r[0] ) ) ) ) {
-				return 'Căn ' . $r[0] . ' ' . mb_strtolower( $r[1] ) . ', vốn tự có ' . $r[2] . ' (vay 70%) ạ – giá từng căn theo tầng, hướng.' . ( $ask ?: ' Em gửi bảng giá căn ' . $r[0] . ' qua Zalo cho anh/chị nhé.' );
+
+	// Nhu cầu chung (trang chủ, trang danh sách) → hỏi 1 câu, rồi đưa phương án.
+	$need = $has( 'thue' ) ? 'thue' : ( $has( 'dat nen', 'dat ' ) ? 'dat-nen' : ( $has( 'biet thu', 'villa' ) ? 'biet-thu' : ( $has( 'shophouse', 'nha pho' ) ? 'shophouse' : ( $has( 'can ho', 'chung cu', 'studio', '1pn', '2pn', '3pn' ) ? 'can-ho' : '' ) ) ) );
+	if ( '' === $need ) {
+		foreach ( array( 'thue' => array( 'thue' ), 'dat-nen' => array( 'dat nen' ), 'biet-thu' => array( 'biet thu' ), 'shophouse' => array( 'shophouse' ), 'can-ho' => array( 'can ho', 'chung cu' ) ) as $k => $ws ) {
+			foreach ( $ws as $w ) {
+				if ( false !== strpos( $all, $w ) ) {
+					$need = $k;
+					break 2;
+				}
 			}
 		}
-		$p = $f['Giá'] ?? '';
-		return ( $title && $p && false === strpos( $p, 'Liên hệ' ) ? $title . ' hiện ' . mb_strtolower( $p ) . ' (tham khảo), giá từng căn theo tầng, hướng và loại căn.' : 'Giá thay đổi theo từng đợt và từng căn ạ.' ) . ( $ask ?: ' Em gửi bảng giá chi tiết qua Zalo cho anh/chị ngay nhé.' );
 	}
-	if ( $has( 'chinh sach', 'chiet khau', 'uu dai', 'khuyen mai', 'giam' ) ) {
-		$o = $f['Ưu đãi chính'] ?? ( $f['Chính sách'] ?? '' );
-		return ( $o ? 'Chính sách hiện tại: ' . mb_substr( $o, 0, 220 ) . ( isset( $f['Hạn ưu đãi'] ) ? ' (hạn ' . $f['Hạn ưu đãi'] . ').' : '.' ) : 'Chính sách thay đổi theo từng đợt mở bán ạ.' ) . ( $ask ?: ' Em gửi bản chính sách đầy đủ qua Zalo nhé.' );
-	}
-	if ( $has( 'von', 'vay', 'tra gop', 'thanh toan', 'tien do' ) ) {
-		$v = $f['Vốn tự có'] ?? ( $f['Vay'] ?? '' );
-		return ( $v ? mb_substr( $v, 0, 240 ) . '.' : 'Em tính được vốn tự có và lịch thanh toán theo đúng căn anh/chị chọn ạ.' ) . ( $ask ? ' Anh/chị cho em xin số Zalo, em gửi phiếu tính giá chi tiết theo phương án vay hoặc thanh toán sớm nhé.' : '' );
-	}
-	if ( $has( 'o dau', 'vi tri', 'dia chi', 'duong' ) && isset( $f['Vị trí'] ) ) {
-		return $title . ' nằm tại ' . $f['Vị trí'] . '.' . ( $ask ?: ' Em gửi bản đồ và ảnh thực tế qua Zalo nhé.' );
-	}
-	if ( $has( 'phap ly', 'so hong', 'so do', 'lau dai' ) && isset( $f['Pháp lý'] ) ) {
-		return 'Pháp lý: ' . $f['Pháp lý'] . '.' . ( $ask ?: '' );
+	$budget = hh_chat_budget( $t ) ?: hh_chat_budget( $all );
+	$labels = array( 'thue' => 'thuê', 'dat-nen' => 'đất nền', 'biet-thu' => 'biệt thự', 'shophouse' => 'shophouse / nhà phố', 'can-ho' => 'căn hộ' );
+
+	// Câu hỏi về dự án đang xem.
+	if ( $title ) {
+		if ( $has( 'gia', 'bang gia', 'bao nhieu tien', 'ty', 'trieu' ) && ! $has( 'von', 'vay' ) ) {
+			foreach ( hh_table( 'hh_p_capital_table', 4, $page ) as $r ) {
+				if ( $r[0] && false !== strpos( $t, mb_strtolower( remove_accents( $r[0] ) ) ) ) {
+					return $ack . ( $turn >= 2 ? 'Căn ' : 'căn ' ) . $r[0] . ' ' . mb_strtolower( $r[1] ) . ', vốn tự có ' . $r[2] . ' nếu vay 70%; giá từng căn còn theo tầng và hướng.' . ( $ask ?: ' Anh/chị quan tâm tầng cao hay tầng trung ạ?' );
+				}
+			}
+			$p = $f['Giá'] ?? '';
+			$caps = hh_table( 'hh_p_capital_table', 4, $page );
+			return $ack . ( $p && false === strpos( $p, 'Liên hệ' ) ? $title . ' hiện ' . mb_strtolower( $p ) . ' (tham khảo).' : ( $caps ? 'Giá tham khảo: ' . implode( '; ', array_map( static fn( $r ) => $r[0] . ' ' . mb_strtolower( $r[1] ), $caps ) ) . '.' : 'Giá ' . $title . ' thay đổi theo từng đợt và từng căn.' ) ) . ( $ask ?: ' Anh/chị đang cần loại căn mấy phòng ngủ ạ?' );
+		}
+		if ( $has( 'chinh sach', 'chiet khau', 'uu dai', 'khuyen mai', 'giam' ) ) {
+			$o = $f['Ưu đãi chính'] ?? ( $f['Chính sách'] ?? '' );
+			return $ack . ( $o ? 'Chính sách hiện tại: ' . mb_substr( $o, 0, 220 ) . ( isset( $f['Hạn ưu đãi'] ) ? ' (hạn ' . $f['Hạn ưu đãi'] . ').' : '.' ) : 'Chính sách thay đổi theo từng đợt mở bán.' ) . ( $ask ?: ' Anh/chị dự định vay ngân hàng hay thanh toán sớm để em tính phương án có lợi nhất ạ?' );
+		}
+		if ( $has( 'von', 'vay', 'tra gop', 'thanh toan', 'tien do' ) ) {
+			$v = $f['Vốn tự có'] ?? ( $f['Vay'] ?? '' );
+			return $ack . ( $v ? 'Vốn tự có tham khảo – ' . mb_substr( $v, 0, 240 ) . '.' : 'Em tính được vốn tự có và lịch thanh toán theo đúng căn anh/chị chọn.' ) . ( $ask ?: ' Anh/chị dự kiến chuẩn bị khoảng bao nhiêu vốn ban đầu ạ?' );
+		}
+		if ( $has( 'o dau', 'vi tri', 'dia chi', 'duong' ) && isset( $f['Vị trí'] ) ) {
+			return $ack . $title . ' nằm tại ' . $f['Vị trí'] . '.' . ( $ask ?: ' Anh/chị muốn em gửi bản đồ và ảnh thực tế không ạ?' );
+		}
+		if ( $has( 'phap ly', 'so hong', 'so do', 'lau dai' ) && isset( $f['Pháp lý'] ) ) {
+			return $ack . 'Pháp lý: ' . $f['Pháp lý'] . '.' . $ask;
+		}
 	}
 	if ( $has( 'xem nha', 'di xem', 'tham quan', 'lich', 'nha mau' ) ) {
-		return 'Dạ được ạ, ' . $name . ' đưa anh/chị đi xem trực tiếp, miễn phí.' . ( $has_lead ? ' Anh/chị muốn đi ngày nào, buổi sáng hay chiều ạ?' : ' Anh/chị cho em xin số điện thoại và ngày giờ tiện, em xếp lịch ngay nhé.' );
-	}
-	if ( $has( 'thue' ) ) {
-		return 'Anh/chị cần thuê loại nào (căn hộ, nhà nguyên căn, mặt bằng), khu vực và tầm giá bao nhiêu ạ?' . ( $ask ? ' Hoặc để lại số Zalo, em gửi danh sách căn phù hợp ngay.' : '' );
+		return $ack . $name . ' đưa anh/chị đi xem trực tiếp, miễn phí. Anh/chị tiện ngày nào, buổi sáng hay chiều ạ?' . ( $has_lead ? '' : ' Em xin số điện thoại để xác nhận lịch nhé.' );
 	}
 	if ( $has( 'zalo', 'so dien thoai', 'goi', 'lien he' ) ) {
-		return $has_lead ? $name . ' sẽ liên hệ anh/chị sớm ạ. Anh/chị cũng có thể gọi/Zalo trực tiếp ' . $phone . '.' : 'Anh/chị nhập số điện thoại/Zalo ngay tại đây, hoặc gọi/Zalo trực tiếp ' . $phone . ' ạ.';
+		return $has_lead ? $name . ' sẽ liên hệ anh/chị sớm ạ. Anh/chị cũng có thể gọi/Zalo trực tiếp ' . $phone . '.' : 'Dạ anh/chị nhập số điện thoại/Zalo ngay tại đây, hoặc gọi/Zalo trực tiếp ' . $phone . ' ạ.';
 	}
-	if ( $has_lead ) {
-		return 'Em đã ghi lại để ' . $name . ' trả lời kỹ khi gọi cho anh/chị ạ. Anh/chị còn cần thông tin gì thêm không ạ?';
+
+	// Đã biết nhu cầu: lượt đầu hỏi thêm 1 câu, từ lượt 2 đưa phương án cụ thể.
+	if ( $need ) {
+		$asked_budget = false !== mb_strpos( $prev, 'tài chính' ) || false !== mb_strpos( $prev, 'ngân sách' ) || false !== mb_strpos( $prev, 'tầm giá' );
+		if ( $turn < 2 && ! $budget && ! $asked_budget ) {
+			return 'Dạ, anh/chị tìm ' . $labels[ $need ] . ( 'thue' === $need ? ' khu vực nào và tầm giá thuê bao nhiêu mỗi tháng ạ?' : ' để ở hay đầu tư, tầm tài chính khoảng bao nhiêu ạ? Em lọc căn phù hợp cho anh/chị.' );
+		}
+		$opts = hh_chat_options( $need, $budget, $page );
+		if ( $opts && false !== mb_strpos( $prev, $opts[0] ) ) {
+			// Đã gửi danh sách này ở lượt trước → bước tiếp theo, không lặp lại.
+			return $has_lead
+				? 'Dạ vâng ạ. ' . $name . ' sẽ gửi chi tiết các căn này qua Zalo và gọi anh/chị sớm. Anh/chị muốn đặt lịch đi xem thực tế luôn không ạ?'
+				: 'Dạ vâng ạ. Anh/chị muốn em gửi chi tiết phương án nào trước, hay đặt lịch đi xem thực tế cả 3 trong một buổi ạ? Để lại số Zalo, ' . $name . ' sắp xếp và gọi xác nhận ngay.';
+		}
+		if ( $opts ) {
+			return $ack . 'Em gợi ý ' . count( $opts ) . ' phương án ' . $labels[ $need ] . ( $budget ? ' trong tầm ' . hh_format_price( $budget ) : '' ) . ' anh/chị tham khảo:' . "\n• " . implode( "\n• ", $opts ) . "\n" . ( $ask ? trim( $ask ) : 'Anh/chị thấy phương án nào hợp, em gửi chi tiết căn trống ạ?' );
+		}
 	}
-	return ( $title ? 'Dạ ' . $title . ' em có đủ bảng giá, chính sách, mặt bằng và căn đang trống ạ.' : 'Dạ em hỗ trợ anh/chị ngay ạ.' ) . ' Anh/chị đang tìm để ở hay đầu tư, tầm tài chính bao nhiêu ạ? Cho em xin số Zalo để ' . $name . ' gửi tài liệu và tư vấn nhanh nhất nhé.';
+
+	// Không rõ ý: không lặp lại câu trước.
+	$generic = $title
+		? $ack . 'Ở ' . $title . ' em có đủ bảng giá, chính sách, mặt bằng và căn đang trống. Anh/chị muốn xem phần nào trước ạ?'
+		: $ack . 'Anh/chị đang quan tâm căn hộ, đất nền, biệt thự hay nhà cho thuê, khu vực nào ạ?';
+	if ( $generic === $prev || ( $turn >= 2 && $may_ask ) ) {
+		return $ack . 'Để không làm mất thời gian của anh/chị, ' . $name . ' sẽ gửi đúng 2–3 căn hợp nhu cầu qua Zalo, kèm giá và hình thực tế. Anh/chị cho em xin số Zalo nhé, hoặc nhắn trực tiếp ' . $phone . ' ạ.';
+	}
+	return $generic;
 }
 
 /* -------------------------------------------------------------------------
