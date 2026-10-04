@@ -152,6 +152,7 @@ p { margin: 0 0 1em; }
 .brand { flex: 0 1 auto; min-width: 0; }
 .brand__link, .brand__text { min-width: 0; }
 .brand__tag { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (min-width: 1001px) and (max-width: 1500px) { .primary-nav a { padding-inline: 9px; } .primary-nav a::after { left: 9px; right: 9px; } }
 .nav-toggle { flex: none; }
 @media (max-width: 1000px) {
 	:root { --header-h: 64px; }
@@ -827,8 +828,9 @@ img.article-head__author { object-fit: cover; border: 2px solid var(--gold); }
 @keyframes hh-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(46, 125, 79, .5); } 50% { box-shadow: 0 0 0 12px rgba(46, 125, 79, 0); } }
 /* Màn hình máy tính: nút tròn nằm ở lề trái, nội dung luôn chừa lề đủ rộng để nút không che chữ (hai bên đều nhau). */
 @media (min-width: 701px) {
-	.contact-dock { left: max(12px, calc((100vw - var(--container)) / 2 - 64px)); }
-	.container { padding-inline: max(24px, calc(76px - max(0px, (100vw - var(--container)) / 2))); }
+	.contact-dock { left: max(12px, calc((100vw - var(--container)) / 2 - 8px)); }
+	/* Khung lệch phải ~32px: lề trái rộng (chỗ cho nút tròn), lề phải hẹp. */
+	.container { width: auto; margin-left: max(0px, calc((100vw - var(--container)) / 2 + 32px)); margin-right: 0; padding-left: max(24px, calc(96px - max(0px, (100vw - var(--container)) / 2 + 32px))); padding-right: 16px; }
 }
 @media (max-width: 700px) {
 	body { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)); }
