@@ -446,6 +446,9 @@ function hh_import_news() {
 			update_post_meta( $id, '_hh_news_hash', md5( get_post_field( 'post_content', $id ) ) );
 			++$created;
 		}
+		if ( $week ) {
+			update_post_meta( $id, '_hh_plan_week', $week );
+		}
 		$meta = array(
 			'rank_math_focus_keyword' => $n['keyword'],
 			'rank_math_title'         => $seo['seo_title'] ?? '',
@@ -463,4 +466,30 @@ function hh_import_news() {
 		}
 	}
 	return $created;
+}
+
+/** Đăng ngay các bài đã lên lịch của một tuần (hoặc tất cả khi $week = 0): ngày đăng = bây giờ. */
+function hh_news_publish_now( $week = 0 ) {
+	$args = array( 'post_type' => 'post', 'post_status' => 'future', 'numberposts' => -1, 'orderby' => 'date', 'order' => 'ASC', 'fields' => 'ids' );
+	if ( $week ) {
+		$args['meta_key']   = '_hh_plan_week'; // phpcs:ignore
+		$args['meta_value'] = (int) $week; // phpcs:ignore
+	}
+	$ids = get_posts( $args );
+	foreach ( $ids as $i => $id ) {
+		$time = time() - ( count( $ids ) - $i ) * MINUTE_IN_SECONDS; // Giữ thứ tự bài trong tuần.
+		wp_update_post( array( 'ID' => $id, 'post_status' => 'publish', 'post_date' => wp_date( 'Y-m-d H:i:s', $time ), 'post_date_gmt' => gmdate( 'Y-m-d H:i:s', $time ) ) );
+	}
+	return count( $ids );
+}
+
+/** Lịch bài viết: số bài đã lên lịch theo tuần. */
+function hh_news_schedule_summary() {
+	$out = array();
+	foreach ( get_posts( array( 'post_type' => 'post', 'post_status' => 'future', 'numberposts' => -1, 'fields' => 'ids', 'meta_key' => '_hh_plan_week' ) ) as $id ) { // phpcs:ignore
+		$w = (int) get_post_meta( $id, '_hh_plan_week', true );
+		$out[ $w ][] = $id;
+	}
+	ksort( $out );
+	return $out;
 }

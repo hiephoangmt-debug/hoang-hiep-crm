@@ -738,6 +738,10 @@ function hh_import_page() {
 	if ( isset( $_POST['hh_import'] ) && check_admin_referer( 'hh_import_du_an' ) ) {
 		$result = hh_import_projects();
 	}
+	$published = null;
+	if ( isset( $_POST['hh_publish_week'] ) && check_admin_referer( 'hh_import_du_an' ) && function_exists( 'hh_news_publish_now' ) ) {
+		$published = hh_news_publish_now( absint( $_POST['hh_publish_week'] ) );
+	}
 	?>
 	<div class="wrap">
 		<h1>Nhập dữ liệu dự án Đà Nẵng – Quảng Nam</h1>
@@ -750,6 +754,31 @@ function hh_import_page() {
 			<?php wp_nonce_field( 'hh_import_du_an' ); ?>
 			<p><button class="button button-primary" name="hh_import" value="1">Nhập / cập nhật dữ liệu</button></p>
 		</form>
+		<?php if ( null !== $published ) : ?>
+			<div class="notice notice-success"><p>Đã đăng ngay <?php echo (int) $published; ?> bài viết.</p></div>
+		<?php endif; ?>
+		<?php $plan = function_exists( 'hh_news_schedule_summary' ) ? hh_news_schedule_summary() : array(); ?>
+		<?php if ( $plan ) : ?>
+			<h2>Bài viết đã lên lịch (kế hoạch nội dung)</h2>
+			<p>Bài tự đăng 1 bài/ngày lúc 8:00. Muốn đăng sớm cả tuần nào thì bấm nút của tuần đó.</p>
+			<form method="post">
+				<?php wp_nonce_field( 'hh_import_du_an' ); ?>
+				<table class="widefat striped" style="max-width:760px">
+					<thead><tr><th>Tuần</th><th>Bài</th><th>Ngày đăng dự kiến</th><th></th></tr></thead>
+					<tbody>
+						<?php foreach ( $plan as $week => $ids ) : ?>
+							<tr>
+								<td><?php echo (int) $week; ?></td>
+								<td><?php echo esc_html( implode( ' · ', array_map( 'get_the_title', $ids ) ) ); ?></td>
+								<td><?php echo esc_html( get_the_date( 'd/m', $ids[0] ) . ' – ' . get_the_date( 'd/m', end( $ids ) ) ); ?></td>
+								<td><button class="button" name="hh_publish_week" value="<?php echo (int) $week; ?>">Đăng ngay tuần <?php echo (int) $week; ?></button></td>
+							</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+				<p><button class="button" name="hh_publish_week" value="0" onclick="return confirm('Đăng ngay tất cả bài đã lên lịch?')">Đăng ngay tất cả</button></p>
+			</form>
+		<?php endif; ?>
 		<h2>Danh sách</h2>
 		<ul style="list-style:disc;padding-left:20px">
 			<?php foreach ( hh_project_dataset() as $p ) : ?>
