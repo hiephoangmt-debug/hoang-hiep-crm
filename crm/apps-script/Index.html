@@ -504,6 +504,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       <label class="f">Phí khách (%)<input name="phi_khach" inputmode="decimal" placeholder="1.7"></label>
       <label class="f">Phí máy (%) <span class="hint">được cộng: 1.36+0.4</span><input name="phi_may_text" inputmode="decimal" placeholder="1.36"></label>
       <label class="f">Ngày nhận tiền hoàn <span class="hint">mặc định: hôm sau</span><input type="date" name="ngay_hoan"></label>
+      <label class="f full" style="display:flex;gap:8px;align-items:center"><input type="checkbox" name="vao_so" style="width:auto" checked> Tính vào công nợ (chưa nhận tiền hoàn) <span class="hint">– bỏ chọn nếu đã nhận/tất toán ngoài sổ</span></label>
       <label class="f">Ghi chú<input name="ghi_chu"></label>
       <div class="full calc" id="tx-calc"></div>
       <div class="full advice hidden" id="tx-advice"></div>
@@ -946,10 +947,11 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     var rows = S.tx.filter(function (t) {
       return (!svc || t.dich_vu === svc) && (!q || [t.ten_khach, t.the, t.may, t.sdt, t.ghi_chu].join(' ').toLowerCase().indexOf(q) >= 0);
     });
-    var s = rows.reduce(function (a, t) { a.n++; a.tien += +t.so_tien || 0; a.phi += +t.tien_phi || 0; a.cp += +t.chi_phi || 0; a.ln += +t.loi_nhuan || 0; a.hoan += +t.tien_hoan || 0; return a; }, { n: 0, tien: 0, phi: 0, cp: 0, ln: 0, hoan: 0 });
+    var s = rows.reduce(function (a, t) { a.n++; a.tien += +t.so_tien || 0; a.phi += +t.tien_phi || 0; a.cp += +t.chi_phi || 0; a.ln += +t.loi_nhuan || 0; a.hoan += +t.tien_hoan || 0; if (t.hoan_tt === 'Đã nhận') { a.ngoai += +t.tien_hoan || 0; a.nn++; } return a; }, { n: 0, tien: 0, phi: 0, cp: 0, ln: 0, hoan: 0, ngoai: 0, nn: 0 });
     $('#tx-kpis').innerHTML = kpi('Số giao dịch', s.n) + kpi('Tổng tiền', short(s.tien)) + kpi('Phí khách', money(s.phi)) +
       kpi('Phí máy', money(s.cp)) + kpi('Phí của mình', money(s.ln), s.ln >= 0 ? 'pos' : 'neg') +
-      kpi(rn() + ' hoàn (tiền − phí máy)', money(s.hoan));
+      kpi(rn() + ' hoàn (tiền − phí máy)', money(s.hoan)) +
+      (s.nn ? kpi('Ngoài sổ công nợ (' + s.nn + ' GD)', money(s.ngoai), 'neg') + kpi('Tính vào công nợ', money(s.hoan - s.ngoai)) : '');
     $('#tx-table').innerHTML = '<thead><tr><th>Ngày</th><th>DV</th><th>Thẻ</th><th>Ngày đáo / SK</th><th>Khách</th><th class="num">Số tiền</th><th>Máy</th><th class="num">Phí khách/máy</th><th class="num">Phí của mình</th><th class="num">' + esc(rn()) + ' hoàn</th></tr></thead><tbody>' +
       (rows.length ? rows.map(function (t) {
         return '<tr class="click" data-tx="' + esc(t.id) + '">' +
@@ -962,7 +964,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
           '<td data-l="Máy" class="opt">' + esc(t.may) + '</td>' +
           '<td data-l="Phí khách/máy" class="num opt">' + pct(t.phi_khach) + ' / ' + pct(t.phi_may) + '</td>' +
           '<td data-l="Phí của mình" class="num ' + (t.loi_nhuan >= 0 ? 'pos' : 'neg') + '">' + money(t.loi_nhuan) + '</td>' +
-          '<td data-l="' + esc(rn()) + ' hoàn" class="num">' + money(t.tien_hoan) + ' <small class="muted">' + (t.hoan_tt === 'Đã nhận' ? '' : 'hoàn ' + dm(t.ngay_hoan)) + '</small></td></tr>';
+          '<td data-l="' + esc(rn()) + ' hoàn" class="num">' + money(t.tien_hoan) + ' <small class="muted">' + (t.hoan_tt === 'Đã nhận' ? '</small> <small class="neg">⚠ ngoài sổ công nợ</small>' : 'hoàn ' + dm(t.ngay_hoan) + '</small>') + '</td></tr>';
       }).join('') : '<tr><td colspan="10" class="empty">Không có giao dịch.</td></tr>') + '</tbody>';
   }
   $('#tx-table').addEventListener('click', function (e) {
@@ -994,6 +996,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     f.ngay_hoan.value = t.ngay_hoan || '';
     f.ngay_hoan.dataset.auto = t.ngay_hoan && t.ngay_hoan !== addDays(t.ngay, 1) ? '' : '1';
     if (!f.ngay_hoan.value) f.ngay_hoan.value = addDays(f.ngay.value, 1);
+    f.vao_so.checked = t.hoan_tt !== 'Đã nhận';
     $('#tx-title').textContent = t.id ? 'Sửa giao dịch' : 'Thêm giao dịch';
     $('[data-act=delete-tx]').classList.toggle('hidden', !t.id);
     S.txPhotos = {};
@@ -1091,7 +1094,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       ngay_dao: svc === 'Rút tiền' || svc === 'Ví trả sau' ? '' : f.ngay_dao.value,
       ngay_sao_ke: isRutService(svc) ? f.ngay_sao_ke.value : '',
       may: f.may.value.trim(), phi_khach: num(f.phi_khach.value), phi_may_text: f.phi_may_text.value.trim() || '0', ghi_chu: f.ghi_chu.value.trim(),
-      ngay_hoan: f.ngay_hoan.value
+      ngay_hoan: f.ngay_hoan.value, vao_so: f.vao_so.checked
     };
     var btn = txForm.querySelector('[type=submit]');
     btn.disabled = true;

@@ -762,6 +762,15 @@ test('refund columns are added to an existing sheet; old rows get computed value
   const r = gas.api(tok, 'refunds', {});
   assert.strictEqual(r.summary.tong_phai_hoan, 986400);
   assert.ok(gas.SpreadsheetApp.getActive().getSheetByName('DoiSoat'));
+  // Giao dịch cũ bị coi là 'Đã nhận' → sửa, tick "Tính vào công nợ" → vào lại sổ
+  const o2 = Object.assign({}, old, { vao_so: true });
+  gas.api(tok, 'saveTransaction', o2);
+  const fixed = gas.api(tok, 'listTransactions', {}).find((t) => t.id === 'kold1');
+  assert.strictEqual(fixed.hoan_tt, 'Chưa nhận');
+  assert.strictEqual(gas.api(tok, 'refunds', {}).summary.tong_phai_hoan, 986400 * 2);
+  // Bỏ chọn → ngoài sổ
+  gas.api(tok, 'saveTransaction', Object.assign({}, fixed, { vao_so: false }));
+  assert.strictEqual(gas.api(tok, 'refunds', {}).summary.tong_phai_hoan, 986400);
 });
 
 console.log(`\n${passed} test(s) passed`);

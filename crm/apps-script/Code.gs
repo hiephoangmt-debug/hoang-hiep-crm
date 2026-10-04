@@ -503,12 +503,14 @@ function apiSaveTransaction_(t) {
       var old = readAll_('GiaoDich').filter(function (x) { return x.id === t.id; })[0];
       if (old && old.hoan_tt !== 'Đã nhận') assertOpen_(old.ngay);
       obj.id = t.id;
+      if (t.vao_so === true) obj.hoan_tt = 'Chưa nhận';
+      else if (t.vao_so === false) obj.hoan_tt = 'Đã nhận';
       updateObj_('GiaoDich', t.id, obj);
       audit_('Giao dịch', 'Sửa', obj.id, obj.ngay, txText_(obj), old ? txText_(old) : '', txText_(obj));
     } else {
       obj.id = newId_();
       obj.tao_luc = nowStr_();
-      obj.hoan_tt = 'Chưa nhận';
+      obj.hoan_tt = t.vao_so === false ? 'Đã nhận' : 'Chưa nhận';
       appendObj_('GiaoDich', obj);
       audit_('Giao dịch', 'Thêm', obj.id, obj.ngay, txText_(obj), '', txText_(obj));
     }
@@ -1106,7 +1108,7 @@ function audit_(doiTuong, hanhDong, refId, ngay, moTa, truoc, sau) {
 }
 function txText_(t) {
   return fmtDmy_(t.ngay) + ' · ' + (t.ten_khach || '') + ' · ' + (t.the || '') + ' · ' + (t.dich_vu || '') + ' · ' + fmtMoney_(t.so_tien) +
-    ' · phí máy ' + (t.phi_may_text || t.phi_may || 0) + '% · hoàn ' + fmtMoney_(t.tien_hoan) + (t.may ? ' · máy ' + t.may : '');
+    ' · phí máy ' + (t.phi_may_text || t.phi_may || 0) + '% · hoàn ' + fmtMoney_(t.tien_hoan) + (t.hoan_tt === 'Đã nhận' ? ' (ngoài sổ)' : '') + (t.may ? ' · máy ' + t.may : '');
 }
 function payText_(x) {
   return fmtDmy_(x.ngay) + ' · ' + x.loai + ' ' + fmtMoney_(Math.abs(Number(x.so_tien) || 0)) + (x.ghi_chu ? ' · ' + x.ghi_chu : '');
