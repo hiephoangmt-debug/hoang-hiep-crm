@@ -12,6 +12,7 @@
   header h1{font-size:16px;margin:0}
   header .sp{flex:1}
   header a,header button{color:#fff;background:rgba(255,255,255,.15);border:0;border-radius:6px;padding:6px 10px;font-size:13px;cursor:pointer;text-decoration:none}
+  .st{display:inline-block;width:9px;height:9px;border-radius:50%;background:#fff;opacity:.6;margin-right:6px;vertical-align:middle}.st.on{background:var(--a);opacity:1;box-shadow:0 0 0 3px rgba(244,124,32,.3)}
   #login{margin:auto;background:#fff;padding:28px;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,.08);width:320px;display:flex;flex-direction:column;gap:12px}
   #login h2{margin:0;font-size:18px;color:var(--c)}
   input,select,textarea{font:inherit;font-size:14px;border:1px solid #cbd5e1;border-radius:8px;padding:9px 10px;outline:none;width:100%}
@@ -137,11 +138,11 @@ function start() {
     $('#app').style.display = 'flex';
     $('#logout').style.display = $('#export').style.display = '';
     $('#export').href = '/api/leads.csv?token=' + encodeURIComponent(token);
-    $('#online').textContent = '🟢 Đang trực tuyến';
+    $('#online').innerHTML = '<i class="st on"></i>Đang trực tuyến';
     if ('Notification' in window && Notification.permission === 'default') $('#notifyBtn').style.display = '';
     if (current) openConv(current);
   });
-  socket.on('disconnect', () => ($('#online').textContent = '🔴 Mất kết nối...'));
+  socket.on('disconnect', () => ($('#online').innerHTML = '<i class="st"></i>Mất kết nối...'));
   socket.on('conversations', list => {
     convs = {}; list.forEach(c => (convs[c.id] = c)); renderList();
     // Mở thẳng hội thoại từ link trong thông báo Telegram (agent.html#<id>).
