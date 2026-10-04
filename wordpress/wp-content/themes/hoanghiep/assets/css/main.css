@@ -536,8 +536,8 @@ p { margin: 0 0 1em; }
 .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 24px; }
 .two-col .block__sub, .two-col .block__title { margin-top: 0; }
 
-.connections { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 12px; margin: 20px 0; padding: 0; list-style: none; }
-.connections li { display: flex; gap: 12px; align-items: center; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; }
+.connections { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 12px; margin: 20px 0; padding: 0; list-style: none; }
+.connections li { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; padding: 14px 16px; border: 1px solid var(--line); border-radius: 8px; }
 .connections strong { flex: none; min-width: 64px; padding: 6px 8px; border-radius: 6px; background: var(--navy); color: var(--gold); text-align: center; font-size: .85rem; }
 .connections span { font-size: .92rem; color: var(--ink); }
 
