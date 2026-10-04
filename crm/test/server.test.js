@@ -884,6 +884,32 @@ test('paste notes: transfer written as a sum "Hoàn 45 + 245 = 290" with hidden 
   assert.strictEqual(r.summary.tong_da_chuyen, 290000000 + 30000000 + 2000000);
 });
 
+test('report by day: every day of the chosen month', () => {
+  const { call, fake } = fresh();
+  fake.setToday('2026-10-04');
+  call('saveTransaction', { ngay: '2026-09-02', dich_vu: 'Rút tiền', the: 'VP', ten_khach: 'Khách A', so_tien: 10000000, phi_khach: 2, phi_may_text: '1.5' });
+  call('saveTransaction', { ngay: '2026-09-02', dich_vu: 'Đáo hạn', the: 'TCB', ten_khach: 'Khách B', so_tien: 5000000, phi_khach: 2, phi_may_text: '1.5' });
+  const r = call('report', { type: 'day', year: 2026, month: 9 });
+  assert.strictEqual(r.rows.length, 30);
+  assert.strictEqual(r.rows[1].label, '02/09 T4');
+  assert.strictEqual(r.rows[1].so_gd, 2);
+  assert.strictEqual(r.rows[1].tien_hoan, 14775000);
+  assert.strictEqual(r.total.so_gd, 2);
+  // sổ C.Trâm từng ngày: hoàn, chuyển, còn nợ cuối ngày
+  call('savePayment', { ngay: '2026-09-02', loai: 'Hoàn tiền', so_tien: 4775000 });
+  call('savePayment', { ngay: '2026-09-05', loai: 'Hoàn tiền', so_tien: 6000000 });
+  const r2 = call('report', { type: 'day', year: 2026, month: 9 });
+  assert.strictEqual(r2.rows[1].cn.phat_sinh, 14775000);
+  assert.strictEqual(r2.rows[1].cn.da_chuyen, 4775000);
+  assert.strictEqual(r2.rows[1].cn.so_du, 10000000);
+  assert.strictEqual(r2.rows[3].cn.so_du, 10000000, 'carried over days without activity');
+  assert.strictEqual(r2.rows[4].cn.so_du, 4000000);
+  call('manualClosing', { ngay: '2026-09-10', so_du: 3000000 });
+  const r3 = call('report', { type: 'day', year: 2026, month: 9 });
+  assert.ok(r3.rows[9].cn.chot);
+  assert.strictEqual(r3.rows[29].cn.so_du, 3000000, 'after a closing the balance follows the closing');
+});
+
 test('pasting earlier months: history before closing, December notes pasted in January, saving in rounds', () => {
   const { call, fake } = fresh();
   fake.setToday('2027-01-05');

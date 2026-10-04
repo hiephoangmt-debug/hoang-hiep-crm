@@ -63,7 +63,7 @@ var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan', 'tu_ngay', 'b_tt_ngay', 'a_ck_ng
 // Kiểu tiền với C.Trâm. "Ứng trước"/"Hoàn tiền" làm giảm nợ; "Mình trả lại"/"Nợ cũ" làm tăng nợ;
 // "Điều chỉnh số dư" nhập được số âm (âm = tăng nợ).
 // Đổi mỗi lần cập nhật code – hiện cạnh ngày trên đầu app để biết đã triển khai bản mới chưa.
-var APP_VERSION = 'v04.10h';
+var APP_VERSION = 'v04.10i';
 
 var PAYMENT_TYPES = ['Ứng trước', 'Hoàn tiền', 'Mình trả lại', 'Nợ cũ', 'Điều chỉnh số dư'];
 
@@ -1826,7 +1826,14 @@ function apiReport_(p) {
   var leads = readAll_('LienHe');
   var periods = [];
 
-  if (type === 'week') {
+  if (type === 'day') {
+    // Từng ngày của 1 tháng (chọn năm + tháng)
+    var thu = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+    for (var dd = 1; dd <= daysInMonth_(year, month); dd++) {
+      var dstr = ymd_(year, month, dd);
+      periods.push({ label: fmtDm_(dstr) + ' ' + thu[(weekday_(dstr) + 1) % 7], from: dstr, to: dstr });
+    }
+  } else if (type === 'week') {
     var first = ymd_(year, month, 1), last = ymd_(year, month, daysInMonth_(year, month));
     var start = first, n = 1;
     while (start <= last) {
@@ -1875,6 +1882,11 @@ function apiReport_(p) {
     billSum(bills.filter(function (b) { return inRange(b.ngay, pr.from, pr.to); }), s);
     return s;
   });
+  if (type === 'day') {
+    // Sổ C.Trâm từng ngày: tiền hoàn tính vào sổ, C.Trâm chuyển/ứng, còn nợ cuối ngày (như sổ tay)
+    var led = ledgerDays_(periods[0].from, periods[periods.length - 1].to);
+    rows.forEach(function (r) { r.cn = led[r.from]; });
+  }
   var all = { from: periods[0].from, to: periods[periods.length - 1].to };
   var allTx = tx.filter(function (x) { return inRange(x.ngay, all.from, all.to); });
   var total = summarize_(allTx);
@@ -1889,6 +1901,32 @@ function apiReport_(p) {
     byService: groupBy_(allTx, 'dich_vu'), byMachine: groupBy_(allTx, 'may'),
     byCard: groupBy_(allTx, 'the'), topCustomers: groupBy_(allTx, 'ten_khach').slice(0, 10)
   };
+}
+
+/** Công nợ C.Trâm theo từng ngày trong [from, to]; gặp ngày chốt sổ thì số dư lấy theo số chốt. */
+function ledgerDays_(from, to) {
+  var out = {}, start = from, opening;
+  var cuts = closings_().filter(function (c) { return c.ngay >= from && c.ngay <= to; });
+  function fill(a, b, op) {
+    var st = periodStatement_(a, b, op);
+    var bal = st.so_du_truoc, byDay = {};
+    st.ngay_lam.forEach(function (d) { byDay[d.ngay] = d; });
+    for (var d = a; d <= b; d = addDays_(d, 1)) {
+      var x = byDay[d];
+      if (x) bal = x.so_du;
+      out[d] = { phat_sinh: x ? x.phat_sinh : 0, da_chuyen: x ? x.da_chuyen : 0, so_du: bal, dau: x ? x.so_du_dau : bal };
+    }
+    return bal;
+  }
+  cuts.forEach(function (c) {
+    if (start <= c.ngay) fill(start, c.ngay, opening);
+    out[c.ngay].so_du = Number(c.so_du) || 0;
+    out[c.ngay].chot = true;
+    start = addDays_(c.ngay, 1);
+    opening = Number(c.so_du) || 0;
+  });
+  if (start <= to) fill(start, to, opening);
+  return out;
 }
 
 function summarize_(tx) {
