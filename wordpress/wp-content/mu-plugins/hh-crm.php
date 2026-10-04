@@ -44,5 +44,6 @@ require HH_CRM_DIR . 'data-bai-viet-tuan-03-04.php';
 require HH_CRM_DIR . 'data-bai-viet-tuan-05-06.php';
 require HH_CRM_DIR . 'data-bai-viet-tuan-07-08.php';
 require HH_CRM_DIR . 'data-bai-viet-tuan-09-10.php';
+require HH_CRM_DIR . 'data-bai-viet-casamia-dong-tien.php';
 require HH_CRM_DIR . 'setup.php';
 require HH_CRM_DIR . 'houzez-import.php';
