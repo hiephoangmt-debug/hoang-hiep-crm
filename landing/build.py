@@ -26,60 +26,22 @@ PAGES = [
     },
     {
         "file": "gio-hang.html", "path": "/gio-hang", "crumb": "Giỏ hàng",
-        "title": "Giỏ Hàng Vinhomes Hải Vân Bay – Quỹ Căn Độc Quyền & Căn Giá Tốt T10/2026",
-        "desc": "Giỏ hàng Vinhomes Hải Vân Bay cập nhật hằng ngày: quỹ căn độc quyền, 5 căn giá tốt, căn giá tốt từng phân khu Bạch Vân – Vịnh Mây – Đảo Ngọc, tra cứu mã căn. Liên hệ 0909 882 555.",
+        "title": "Giỏ Hàng Vinhomes Hải Vân Bay – Quỹ Căn Độc Quyền, Bảng Giá, Chính Sách & Phân Tích T10/2026",
+        "desc": "Giỏ hàng Vinhomes Hải Vân Bay cập nhật hằng ngày: quỹ căn độc quyền, căn giá tốt từng phân khu, tra cứu mã căn, chính sách bán hàng mới nhất, phân tích chi phí từng phương án thanh toán và công cụ tính giá. Liên hệ 0909 882 555.",
         "badge": "Giỏ hàng cập nhật hằng ngày",
         "h1": "Giỏ hàng Vinhomes Hải Vân Bay<span>Quỹ căn độc quyền · Căn giá tốt từng phân khu</span>",
         "sub": "Tra cứu mã căn, xem nhanh thông số và nhận <b>giá tốt nhất</b> trực tiếp. Quỹ căn chéo còn nhiều căn chưa đưa lên web – để lại số điện thoại để nhận đầy đủ.",
-        "sections": ["RIBBON", "CART", "CTABAND", "CALCULATOR", "GALLERY", "FAQ", "CONTACT"],
-    },
-    {
-        "file": "chinh-sach.html", "path": "/chinh-sach", "crumb": "Chính sách bán hàng",
-        "title": "Chính Sách Bán Hàng Vinhomes Hải Vân Bay T10/2026 – Giãn Xây, HTLS 0%, CKTT 7%",
-        "desc": "Chính sách bán hàng Vinhomes Hải Vân Bay mới nhất: giãn xây Vịnh Mây từ 01/10/2026, Bạch Vân & Đảo Ngọc từ 20/09/2026, vay 70%, HTLS 0% 18–36 tháng, CKTT 7%/năm, chiết khấu TTS 11%/năm.",
-        "badge": "Áp dụng từ 01/10/2026",
-        "h1": "Chính sách bán hàng Hải Vân Bay<span>Giãn xây · HTLS 0% · Vay 70% · CKTT 7%/năm</span>",
-        "sub": "Tổng hợp đầy đủ chính sách Chủ đầu tư cho từng phân khu. Nhận <b>phiếu tính giá</b> theo dòng tiền của bạn chỉ trong 5 phút.",
-        "sections": ["RIBBON", "POLICIES", "CALCULATOR", "CTABAND", "CART", "FAQ", "CONTACT"],
-    },
-    {
-        "file": "tinh-gia.html", "path": "/tinh-gia", "crumb": "Tính giá",
-        "title": "Tính Giá Vinhomes Hải Vân Bay – So Sánh Thanh Toán Sớm, Vay 70%, Giãn 24/36 Tháng",
-        "desc": "Công cụ tính giá thử Vinhomes Hải Vân Bay: so sánh thanh toán sớm, tiến độ chuẩn, vay 70% lãi cố định, HTLS 0%, giãn 24/36 tháng. Nhận phiếu tính chi tiết theo mã căn.",
-        "badge": "Phiếu tính giá miễn phí",
-        "h1": "Tính giá & dòng tiền Hải Vân Bay<span>So sánh 6 phương án thanh toán trong 30 giây</span>",
-        "sub": "Nhập giá thuần để ước tính ngay. Cần <b>phiếu tính chính thức theo mã căn</b> – để lại thông tin, chuyên viên gửi qua Zalo.",
-        "sections": ["CALCULATOR", "POLICIES", "CTABAND", "CART", "FAQ", "CONTACT"],
-    },
-    {
-        "file": "tin-tuc.html", "path": "/tin-tuc", "crumb": "Tin tức",
-        "title": "Tin Tức Vinhomes Hải Vân Bay – Dự Án, Hạ Tầng, Tiến Độ & Chính Sách Mới Nhất",
-        "desc": "Tin tức mới nhất Vinhomes Hải Vân Bay: chính sách bán hàng, hạ tầng cảng Liên Chiểu, tuyến ven biển, tiến độ xây dựng, tiện ích VinWonders. Nhận bản tin qua Zalo.",
-        "badge": "Bản tin dự án",
-        "h1": "Tin tức Vinhomes Hải Vân Bay<span>Dự án · Hạ tầng · Tiến độ · Chính sách</span>",
-        "sub": "Cập nhật nhanh những thay đổi quan trọng cho người mua và nhà đầu tư. Đăng ký để nhận <b>bản tin & ảnh tiến độ</b> qua Zalo.",
-        "sections": ["NEWS", "GALLERY", "CTABAND", "RIBBON", "FAQ", "CONTACT"],
+        "sections": ["RIBBON", "CART", "CTABAND", "POLICIES", "PHANTICH", "CALCULATOR", "NEWS", "GALLERY", "FAQ", "CONTACT"],
+    "faq": [
+            ("Nên thanh toán sớm hay vay 70% khi mua Vinhomes Hải Vân Bay?", "Theo phiếu giá căn mẫu T10/2026, thanh toán sớm rẻ hơn tiến độ chuẩn khoảng 3,4%, vay 70% đắt hơn khoảng 2,7%. Có vốn nhàn rỗi thì thanh toán sớm (chiết khấu tương đương 11%/năm); muốn giữ vốn thì vay 70%."),
+            ("Vay lãi cố định (PA01) hay hỗ trợ lãi suất 0% (PA02) lợi hơn?", "Trên cùng giá trị gốc và vay đủ 70% suốt kỳ hạn, PA01 rẻ hơn PA02 từ 0,35% (18 tháng) đến 3,75% (36 tháng) và càng lợi khi trả trước hạn. PA02 phù hợp khi không muốn trả tiền hằng tháng."),
+            ("Đảo Ngọc nên chọn cam kết thuê 7% hay Về ở sớm 10%?", "CKTT 7%/năm × 3 năm tổng 21% danh nghĩa, quy về hiện tại khoảng 18%, phù hợp đầu tư thụ động. Về ở sớm giảm ngay 10% vào giá HĐMB, phù hợp khi muốn tự ở hoặc tự khai thác."),
+            ("Giãn thanh toán 24 hay 36 tháng có đắt không?", "Tại Vịnh Mây và Đảo Ngọc, giãn 24 tháng đắt hơn tiến độ chuẩn khoảng 7,6%, 36 tháng khoảng 13,2%. Tại Bạch Vân chênh lớn hơn (khoảng 16% và 21%)."),
+            ("Phân khu nào phù hợp để cho thuê?", "Đảo Ngọc phù hợp nhất cho thuê nhờ sát biển, cạnh VinWonders và có căn hoàn thiện nhận cam kết tiền thuê 7%/năm trong 3 năm."),
+        ],
     },
 ]
 
-
-PAGES.append({
-    "file": "phan-tich.html", "path": "/phan-tich", "crumb": "Phân tích đầu tư",
-    "title": "Phân Tích Đầu Tư Vinhomes Hải Vân Bay 2026 – Chi Phí Thực, Vay 0% Hay Lãi Cố Định, Nên Mua Phân Khu Nào",
-    "desc": "Phân tích chuyên sâu Vinhomes Hải Vân Bay: chi phí thực từng phương án thanh toán, so sánh vay lãi cố định và HTLS 0%, CKTT 7% hay Về ở sớm 10%, so sánh 4 phân khu, động lực tăng giá và rủi ro.",
-    "badge": "Số liệu từ phiếu giá CĐT T10/2026",
-    "h1": "Phân tích đầu tư Hải Vân Bay<span>Chọn phương án & phân khu lợi nhất cho dòng tiền của bạn</span>",
-    "sub": "So sánh chi phí thực, vay lãi cố định hay lãi suất 0%, cam kết thuê hay Về ở sớm. Nhận <b>báo cáo phân tích theo ngân sách</b> riêng của bạn.",
-    "hero_img": "aerial-vinh-may",
-    "faq": [
-        ("Nên thanh toán sớm hay vay 70% khi mua Vinhomes Hải Vân Bay?", "Theo phiếu giá căn mẫu T10/2026, thanh toán sớm rẻ hơn tiến độ chuẩn khoảng 3,4%, vay 70% đắt hơn khoảng 2,7%. Có vốn nhàn rỗi thì thanh toán sớm (chiết khấu tương đương 11%/năm); muốn giữ vốn thì vay 70%."),
-        ("Vay lãi cố định (PA01) hay hỗ trợ lãi suất 0% (PA02) lợi hơn?", "Trên cùng giá trị gốc và vay đủ 70% suốt kỳ hạn, PA01 rẻ hơn PA02 từ 0,35% (18 tháng) đến 3,75% (36 tháng) và càng lợi khi trả trước hạn. PA02 phù hợp khi không muốn trả tiền hằng tháng."),
-        ("Đảo Ngọc nên chọn cam kết thuê 7% hay Về ở sớm 10%?", "CKTT 7%/năm × 3 năm tổng 21% danh nghĩa, quy về hiện tại khoảng 18%, phù hợp đầu tư thụ động. Về ở sớm giảm ngay 10% vào giá HĐMB, phù hợp khi muốn tự ở hoặc tự khai thác."),
-        ("Giãn thanh toán 24 hay 36 tháng có đắt không?", "Tại Vịnh Mây và Đảo Ngọc, giãn 24 tháng đắt hơn tiến độ chuẩn khoảng 7,6%, 36 tháng khoảng 13,2%. Tại Bạch Vân chênh lớn hơn (khoảng 16% và 21%)."),
-        ("Phân khu nào phù hợp để cho thuê?", "Đảo Ngọc phù hợp nhất cho thuê nhờ sát biển, cạnh VinWonders và có căn hoàn thiện nhận cam kết tiền thuê 7%/năm trong 3 năm."),
-    ],
-    "sections": ["PHANTICH", "CTABAND", "CALCULATOR", "POLICIES", "CART", "FAQ", "CONTACT"],
-})
 
 for _z in ZONES:
     PAGES.append({
@@ -88,7 +50,7 @@ for _z in ZONES:
         "zone": _z["zone_key"], "hero_img": _z["hero_img"], "policy_tab": _z["policy_tab"], "faq": _z["faq"],
         "extra": {"ZONEINFO": zone_toc_html(_z) + zone_info_html(_z), "ZONEDETAIL": zone_detail_html(_z), "ZONEANALYSIS": zone_analysis_html(_z), "ZONELINKS": zone_links_html(_z["slug"])},
         "sections": ["ZONEINFO", "ZONEDETAIL", "CART"] + (["POLICIES"] if _z["policy_tab"] else []) +
-                    ["ZONEANALYSIS", "RIBBON", "CALCULATOR", "GALLERY", "ZONELINKS", "FAQ", "CONTACT"],
+                    ["ZONEANALYSIS", "RIBBON", "CALCULATOR", "GALLERY", "NEWS", "ZONELINKS", "FAQ", "CONTACT"],
     })
 
 
@@ -168,7 +130,7 @@ def build():
         present = set(re.findall(r'<section[^>]*\sid="([^"]+)"', body)) | {"top"}
         html = re.sub(r'href="#([\w-]+)"',
                       lambda mm: mm.group(0) if mm.group(1) in present else 'href="/#%s"' % mm.group(1), html)
-        for sec, page in (("gio-hang", "/gio-hang"), ("chinh-sach", "/chinh-sach"), ("tinh-gia", "/tinh-gia"), ("tin-tuc", "/tin-tuc"), ("phan-tich", "/phan-tich")):
+        for sec, page in (("gio-hang", "/gio-hang"),):
             html = html.replace('href="/#%s"' % sec, 'href="%s"' % page)
         (DIST / pg["file"]).write_text(html, encoding="utf-8")
         print("built", pg["file"], len(html) // 1024, "KB")

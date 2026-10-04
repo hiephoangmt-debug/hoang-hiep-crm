@@ -237,7 +237,7 @@ def zone_analysis_html(z):
       <div class="an-box up"><h3>Điểm mạnh</h3><ul>{pros}</ul></div>
       <div class="an-box risk"><h3>Cần cân nhắc</h3><ul>{cons}</ul></div>
     </div>
-    <div class="an-grid">{table}<div class="an-box"><h3>Xem phân tích toàn dự án</h3><p class="sub">PA01 hay PA02, CKTT hay Về ở sớm, so sánh 4 phân khu và động lực tăng giá.</p><a href="/phan-tich" class="btn btn-outline">Đọc phân tích chi tiết →</a><a href="#lien-he" class="btn btn-gold" style="margin-top:10px;width:100%" data-need="Báo cáo phân tích phân khu {escape(z["name"])}" data-pop>Nhận báo cáo phân khu {escape(z["name"])}</a></div></div>
+    <div class="an-grid">{table}<div class="an-box"><h3>Xem phân tích toàn dự án</h3><p class="sub">PA01 hay PA02, CKTT hay Về ở sớm, so sánh 4 phân khu và động lực tăng giá.</p><a href="/gio-hang#phan-tich" class="btn btn-outline">Đọc phân tích chi tiết →</a><a href="#lien-he" class="btn btn-gold" style="margin-top:10px;width:100%" data-need="Báo cáo phân tích phân khu {escape(z["name"])}" data-pop>Nhận báo cáo phân khu {escape(z["name"])}</a></div></div>
   </div>
 </section>
 
