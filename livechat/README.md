@@ -73,18 +73,24 @@ Mỗi thông báo kèm đoạn hội thoại gần nhất, tách từng lượt 
 
 ## Landing page chạy ads: biệt thự Hội An có dòng tiền
 
-Trang `public/landing.html` (mở tại `/landing.html`) dùng tông navy – trắng – cam, gồm:
+Trang `public/landing.html` (mở tại `/landing.html`) dùng tông navy – trắng – cam. Nội dung dẫn dắt bằng **con số thật + cảm xúc**:
 
-- **Hero**: tiêu đề "vừa nghỉ dưỡng, vừa tạo dòng tiền" và form nhận tài liệu qua Zalo ngay màn hình đầu.
-- **Gây tò mò**: "Vì sao nhà đầu tư để mắt đến biệt thự Hội An?" và **bảng tính dòng tiền bị làm mờ**, khách phải để lại số để "mở khoá".
-- **Các mục nội dung**: 3 cách khai thác dòng tiền, vị trí, sản phẩm (đơn lập / song lập / shophouse), kiến trúc, minh bạch pháp lý, đặt lịch tham quan, hỏi đáp, form cuối trang.
-- **CTA**: mọi nút đều mở popup form với tiêu đề đúng ngữ cảnh. Có popup giữ chân 1 lần (rê chuột rời trang hoặc cuộn 70% trên điện thoại) và thanh **Gọi / Zalo / Nhận bảng giá** cố định trên điện thoại.
-- **Form → hệ thống chat**: lead hiện trên trang tư vấn viên, báo Telegram kèm nhu cầu và **nguồn quảng cáo (UTM)**, gộp với hội thoại chat của cùng khách. Tự gọi `fbq('track','Lead')` và `gtag('event','generate_lead')` nếu đã cài Pixel / Google Ads.
-- **Khung chat** tự hỏi theo mục khách đang đọc (`data-chat-topic`), không hỏi khi khách đang điền form hoặc đã để lại số.
+- **Hero bằng con số**: "4,4 triệu lượt khách đến Hội An mỗi năm. Chỉ 363 căn…", kèm 4 ô số đếm chạy: 1,87 triệu lượt lưu trú, +18,64%, ~14 tỷ/ngày, tỷ lệ 1 căn : 12.000 lượt khách. Form nhận tài liệu ngay bên cạnh.
+- **Bạn có biết?**: 3 con số lớn về thị trường lưu trú Hội An, có ghi nguồn (UBND TP Hội An 2024).
+- **Một ngày ở Casamia Balanca**: kể chuyện theo giờ (rừng dừa, phố cổ, biển An Bàng, bữa tối gia đình), kết bằng ý "căn nhà vẫn tạo dòng tiền".
+- **Máy tính dòng tiền**: khách tự kéo giá thuê/đêm, số đêm, chi phí để thấy doanh thu và dòng tiền ròng; nút nhận số liệu thực tế theo căn.
+- **Vị trí & tiện ích theo bán kính**: 0 km / ~5 km / xa hơn, bản đồ vòng tròn; tiện ích nội khu bị khoá để khách hỏi.
+- **Mặt bằng & căn key**: sơ đồ minh hoạ, bấm các điểm 🔥 (căn góc, shophouse mặt đường, căn sát rừng dừa, căn gần công viên) để hỏi giá.
+- **Sản phẩm & layout**: thông số, giá, layout từng tầng bị làm mờ, nút "Mở khoá giá & layout".
+- **Chính sách tháng này**: 4 ô (thanh toán đợt đầu, chiết khấu, hỗ trợ tài chính, ưu đãi riêng) bị làm mờ, nút "Mở khoá".
+- Kiến trúc, minh bạch pháp lý, đặt lịch tham quan, hỏi đáp, form cuối trang; popup CTA theo ngữ cảnh; thanh Gọi / Zalo / Nhận bảng giá trên điện thoại.
+- **Form → hệ thống chat**: lead kèm nhu cầu (ví dụ "Căn key: căn góc 2 mặt tiền") và nguồn quảng cáo (UTM), báo Telegram ngay.
 
 Trước khi chạy ads:
 
 1. **Ảnh:** chép ảnh dự án vào `public/img/` và điền đường dẫn vào biến `IMAGES` cuối file `landing.html`.
+   **Giá:** điền `PRICE_FROM` (ví dụ `'8,7 tỷ'`) để hiện ô "Giá chỉ từ" ở đầu trang. Chỉ điền giá chính thức đã xác nhận.
+   **Mặt bằng:** sơ đồ hiện tại là minh hoạ; có mặt bằng chính thức thì thay vào và chỉnh vị trí các điểm 🔥 cho đúng căn key thật.
 2. **Mã theo dõi:** dán mã Facebook Pixel / Google tag vào `<head>` (có ghi chú vị trí).
 3. **Link quảng cáo:** gắn UTM để biết lead từ chiến dịch nào, ví dụ `https://ten-mien/landing.html?utm_source=facebook&utm_campaign=bietthu-dongtien&utm_content=video1`.
 

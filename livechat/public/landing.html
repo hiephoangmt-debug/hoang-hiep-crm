@@ -189,9 +189,119 @@
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
   .reveal.in{opacity:1;transform:none}
 
+
+  /* Con số */
+  .hnums{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 28px}
+  .hnums div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-left:4px solid var(--orange);border-radius:12px;padding:12px 14px}
+  .hnums b{display:block;font-size:26px;font-weight:800;color:#fff;line-height:1.2}
+  .hnums div>span{font-size:13px;color:rgba(255,255,255,.78);line-height:1.4;display:block}
+  .hnums u{text-decoration:none;color:var(--orange);font-weight:700}
+  .src{font-size:12px;color:rgba(255,255,255,.55);margin:14px 0 0}
+  .know .src,.day .src{color:var(--muted)}
+  .price-badge[hidden]{display:none}
+  .price-badge{display:inline-flex;gap:8px;align-items:center;background:#fff;color:var(--navy);border-radius:999px;padding:8px 16px;margin:0 0 20px;font-size:15px}
+  .price-badge b{color:var(--orange);font-size:18px}
+  .hot{display:inline-block;background:var(--orange);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;margin-bottom:10px}
+  .know{background:#fff}
+  .bignum{border:1.5px solid var(--line);border-radius:16px;padding:28px 24px;background:#fff;transition:border-color .2s,transform .2s}
+  .bignum:hover{border-color:var(--orange);transform:translateY(-4px)}
+  .bignum>b{display:block;font-size:46px;font-weight:800;color:var(--orange);line-height:1.1;margin-bottom:8px}
+  .bignum h3{font-size:19px;margin-bottom:8px}
+  .bignum p{color:var(--muted);margin:0 0 16px;font-size:15px}
+  .bignum p b{color:var(--navy)}
+  .day{background:var(--soft)}
+  .timeline{position:relative;max-width:820px;margin:34px auto 0;padding-left:8px}
+  .timeline::before{content:"";position:absolute;left:92px;top:8px;bottom:8px;width:2px;background:var(--line)}
+  .tl{display:grid;grid-template-columns:84px 1fr;gap:28px;padding:14px 0;position:relative}
+  .tl::before{content:"";position:absolute;left:79px;top:24px;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--navy)}
+  .tl time{font-weight:800;color:var(--navy);font-size:18px;padding-top:12px;text-align:right;padding-right:8px}
+  .tl>div{background:#fff;border-radius:14px;padding:16px 20px;border:1px solid var(--line)}
+  .tl h3{font-size:18px;margin-bottom:4px}
+  .tl p{margin:0;color:var(--muted);font-size:15px}
+  .tl.hl::before{background:var(--orange);border-color:var(--orange)}
+  .tl.hl time{color:var(--orange)}
+  .tl.hl>div{background:var(--navy);border-color:var(--navy)}
+  .tl.hl h3{color:#fff}.tl.hl p{color:rgba(255,255,255,.85)}.tl.hl p b{color:var(--orange)}
+  .calc{display:grid;grid-template-columns:1.2fr 1fr;background:#fff;color:var(--ink);border-radius:18px;overflow:hidden;max-width:960px;margin:0 auto}
+  .calc-in{padding:28px}
+  .calc-in h3{font-size:20px;margin-bottom:18px}
+  .calc-in label{display:block;font-weight:600;margin-bottom:18px;font-size:15px}
+  .calc-in output{float:right;color:var(--orange);font-weight:800}
+  .calc input[type=range]{width:100%;margin-top:8px;accent-color:var(--orange);height:6px}
+  .calc-out{background:var(--soft);padding:28px;display:flex;flex-direction:column;border-left:4px solid var(--orange)}
+  .calc-out span{font-size:13px;color:var(--muted);margin-top:6px}
+  .calc-out b{font-size:24px;font-weight:800;color:var(--navy);margin-bottom:8px}
+  .calc-out b.big{font-size:34px;color:var(--orange)}
+  .calc-out .btn{margin-top:14px}
+  .assume{font-size:12px;color:var(--muted);margin:6px 0 0}
+
+
+  /* Tiện ích bán kính */
+  .radius{display:grid;grid-template-columns:1fr 1.2fr;gap:40px;align-items:center;margin-top:34px}
+  .rings svg{width:100%;max-width:440px;display:block;margin:0 auto}
+  .rings circle.r3{fill:#f5f8fc;stroke:var(--line);stroke-width:2}
+  .rings circle.r2{fill:#eef3fb;stroke:#c9d6ea;stroke-width:2;stroke-dasharray:6 6}
+  .rings circle.r1{fill:#e3ecf8;stroke:var(--orange);stroke-width:2;stroke-dasharray:4 5}
+  .rings .rl{font:700 12px "Be Vietnam Pro",sans-serif;fill:var(--muted);text-anchor:middle}
+  .rings .dot circle{fill:var(--navy)}
+  .rings .dot text{font:800 9px "Be Vietnam Pro",sans-serif;fill:#fff;text-anchor:middle;letter-spacing:.5px}
+  .rings .pin circle{fill:var(--orange);stroke:#fff;stroke-width:3}
+  .rings .pin text{font:700 12px "Be Vietnam Pro",sans-serif;fill:var(--navy)}
+  .rings .pin{animation:bob 3s ease-in-out infinite}
+  .rings .pin:nth-child(even){animation-delay:1.5s}
+  @keyframes bob{50%{transform:translateY(-3px)}}
+  .amen{display:grid;gap:14px}
+  .ring-card{border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:#fff}
+  .ring-card ul{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:6px;font-size:15px}
+  .ring-tag{display:inline-block;background:var(--navy);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px}
+  .locked-card{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .locked-card .ring-tag{background:var(--orange)}
+  .locked-card p{margin:10px 0 12px;color:rgba(255,255,255,.85);font-size:15px}
+  .loc .src,.plan .src{color:var(--muted)}
+  /* Mặt bằng */
+  .plan{background:#fff}
+  .siteplan{position:relative;margin-top:30px;border-radius:18px;overflow:hidden;box-shadow:0 18px 40px rgba(11,42,91,.14);border:1px solid var(--line)}
+  .siteplan svg{display:block;width:100%;height:auto}
+  .siteplan .b-solo rect{fill:var(--navy);rx:4}
+  .siteplan .b-duo rect{fill:#3d5f97;rx:4}
+  .siteplan .b-shop rect{fill:var(--orange);rx:3}
+  .siteplan .lbl{font:700 14px "Be Vietnam Pro",sans-serif;fill:#2f5a2a;text-anchor:middle}
+  .hot-spot{position:absolute;transform:translate(-50%,-50%);background:none;border:0;cursor:pointer;display:flex;align-items:center;gap:8px;padding:0;font:inherit}
+  .hot-spot i{width:18px;height:18px;border-radius:50%;background:var(--orange);border:3px solid #fff;box-shadow:0 0 0 0 rgba(244,124,32,.6);animation:pulse 1.8s infinite;flex:none}
+  .hot-spot span{background:#fff;color:var(--navy);font-weight:700;font-size:13px;padding:6px 10px;border-radius:8px;box-shadow:0 6px 16px rgba(0,0,0,.15);white-space:nowrap;border-left:3px solid var(--orange)}
+  .hot-spot:hover span{background:var(--navy);color:#fff}
+  .legend{position:absolute;right:12px;bottom:12px;background:rgba(255,255,255,.95);border-radius:10px;padding:8px 12px;display:flex;gap:14px;font-size:12px;font-weight:600}
+  .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+  .l-solo{background:var(--navy)}.l-duo{background:#3d5f97}.l-shop{background:var(--orange)}
+  /* Layout & specs */
+  .specs{list-style:none;padding:0;margin:0 0 14px;border-top:1px dashed var(--line)}
+  .specs li{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--line);font-size:14px;color:var(--muted)}
+  .specs b{color:var(--navy)}
+  .blur{filter:blur(5px);user-select:none}
+  .fp{position:relative;border:1.5px dashed var(--orange);border-radius:10px;margin-bottom:14px;cursor:pointer;overflow:hidden;background:#fff}
+  .fp svg{display:block;width:100%;height:110px;filter:blur(2.5px);fill:none;stroke:var(--navy);stroke-width:2}
+  .fp span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--navy);background:rgba(255,255,255,.55);font-size:14px}
+  .fp:hover span{background:rgba(244,124,32,.12)}
+  /* Chính sách */
+  .policy{background:var(--navy);color:#fff}
+  .policy .lead-text{color:rgba(255,255,255,.8)}
+  .pol-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:32px 0 22px}
+  .pol{background:#fff;color:var(--navy);border-radius:14px;padding:22px 18px;text-align:center;border-bottom:4px solid var(--orange)}
+  .pol>span{font-size:28px}
+  .pol h3{font-size:15px;margin:8px 0 6px;min-height:38px}
+  .pol b{display:block;font-size:30px;color:var(--orange);font-weight:800}
+  .pol p{margin:4px 0 0;font-size:13px;color:var(--muted)}
+  .pol-cta{display:flex;align-items:center;justify-content:space-between;gap:20px;background:rgba(255,255,255,.07);border:1px dashed rgba(255,255,255,.35);border-radius:14px;padding:20px 24px;flex-wrap:wrap}
+  .pol-cta p{margin:4px 0 0;color:rgba(255,255,255,.8);font-size:15px;max-width:560px}
+  .policy .src{color:rgba(255,255,255,.55)!important}
+
   @media(max-width:960px){
     .hero .wrap,.loc .grid,.arch .grid,.final .grid{grid-template-columns:1fr}
-    .cards3,.ways,.prods{grid-template-columns:1fr}
+    .cards3,.ways,.prods,.calc,.radius{grid-template-columns:1fr}
+    .pol-grid{grid-template-columns:1fr 1fr}
+    .hot-spot span{font-size:11px;padding:4px 7px}
+    .legend{position:static;justify-content:center;flex-wrap:wrap;border-top:1px solid var(--line)}
+    .calc-out{border-left:0;border-top:4px solid var(--orange)}
     .stats .grid{grid-template-columns:repeat(2,1fr)}
     .stats .it:nth-child(2){border-right:0}
     .stats .it:nth-child(-n+2){border-bottom:1px solid var(--line)}
@@ -205,6 +315,9 @@
   @media(max-width:480px){
     .hero{padding:44px 0 80px}
     .hero p.sub{font-size:16px}
+    .hnums b{font-size:21px}
+    .bignum>b{font-size:38px}
+    .timeline::before{left:62px}.tl{grid-template-columns:56px 1fr;gap:20px}.tl::before{left:49px}.tl time{font-size:14px}
     .card-form{padding:22px}
     .btn{width:100%}
   }
@@ -218,8 +331,8 @@
     <nav>
       <a href="#dong-tien">Dòng tiền</a>
       <a href="#vi-tri">Vị trí</a>
-      <a href="#san-pham">Sản phẩm</a>
-      <a href="#phap-ly">Pháp lý</a>
+      <a href="#mat-bang">Mặt bằng</a>
+      <a href="#chinh-sach">Chính sách</a>
       <a href="#hoi-dap">Hỏi đáp</a>
     </nav>
     <a class="call js-tel" href="#">📞 <span class="js-hotline"></span></a>
@@ -232,20 +345,24 @@
   <div class="wrap">
     <div>
       <span class="eyebrow">Biệt thự nghỉ dưỡng · Hội An</span>
-      <h1>Một căn biệt thự giữa rừng dừa Hội An — <em>vừa để nghỉ dưỡng, vừa tạo dòng tiền</em></h1>
-      <p class="sub">Mở cửa là rừng dừa Bảy Mẫu, vài phút là phố cổ, vài bước là biển. Casamia Balanca gồm 363 biệt thự &amp; shophouse do Đạt Phương phát triển.</p>
-      <ul class="ticks">
-        <li>Nằm giữa 2 di sản thế giới, trong khu dự trữ sinh quyển UNESCO</li>
-        <li>3 kịch bản tạo dòng tiền: cho thuê nghỉ dưỡng, cho thuê dài hạn, kinh doanh</li>
-        <li>Kiến trúc mang hồn Hội An, tư vấn thiết kế VTN Architects</li>
-      </ul>
+      <h1><span class="js-count" data-to="4.4" data-dec="1">4,4</span> triệu lượt khách đến Hội An mỗi năm. <em>Chỉ 363 căn</em> biệt thự giữa rừng dừa để họ ở lại.</h1>
+      <p class="sub">Sáng thức dậy giữa rừng dừa Bảy Mẫu, khoảng 10 phút tới phố cổ đèn lồng, chiều ra biển An Bàng. Gia đình anh/chị nghỉ dưỡng vài tuần mỗi năm. <b>Những ngày còn lại, căn nhà đón khách và tạo dòng tiền.</b></p>
+      <div class="price-badge js-price" hidden>Giá chỉ từ <b class="js-price-val"></b> · <button class="link-cta js-open" data-title="Nhận bảng giá căn còn trống" data-need="Bảng giá">Xem bảng giá →</button></div>
+      <div class="hnums">
+        <div><b><span class="js-count" data-to="1.87" data-dec="2">1,87</span> triệu</b><span>lượt khách <u>ở lại qua đêm</u> tại Hội An năm 2024</span></div>
+        <div><b>+<span class="js-count" data-to="18.64" data-dec="2">18,64</span>%</b><span>khách lưu trú tăng, nhanh gần <u>gấp 3</u> tổng lượt khách</span></div>
+        <div><b>~<span class="js-count" data-to="14" data-dec="0">14</span> tỷ/ngày</b><span>doanh thu du lịch Hội An (5.200 tỷ/năm)</span></div>
+        <div><b>1 : <span class="js-count" data-to="12000" data-dec="0">12.000</span></b><span>cứ ~12.000 lượt khách mới có 1 căn Casamia Balanca</span></div>
+      </div>
       <div class="ctas">
         <button class="btn btn-orange pulse js-open" data-title="Căn nào đang có dòng tiền tốt nhất?" data-need="Đầu tư cho thuê">Xem căn nào có dòng tiền tốt nhất →</button>
-        <a class="btn btn-ghost" href="#bi-mat">Vì sao biệt thự Hội An khan hiếm? ↓</a>
+        <a class="btn btn-ghost" href="#tinh-dong-tien">🧮 Tự tính dòng tiền ↓</a>
       </div>
+      <p class="src">Số liệu du lịch: UBND TP Hội An, năm 2024.</p>
     </div>
     <div class="card-form" id="form-top">
       <form class="js-lead" data-form="Hero">
+        <div class="hot">🔥 Bảng hàng tháng này</div>
         <h3>Nhận trọn bộ trong 5 phút qua Zalo</h3>
         <ul class="gets">
           <li><span>①</span> Bảng giá &amp; danh sách căn còn trống</li>
@@ -273,40 +390,57 @@
 <div class="stats">
   <div class="wrap">
     <div class="grid">
-      <div class="it"><b>31,1<em> ha</em></b><span>Quy mô dự án</span></div>
-      <div class="it"><b>363</b><span>Biệt thự &amp; shophouse</span></div>
-      <div class="it"><b>2</b><span>Di sản thế giới lân cận</span></div>
-      <div class="it"><b>VTN</b><span>Kiến trúc Võ Trọng Nghĩa</span></div>
+      <div class="it"><b><span class="js-count" data-to="31.1" data-dec="1">31,1</span><em> ha</em></b><span>giữa rừng dừa Bảy Mẫu</span></div>
+      <div class="it"><b><span class="js-count" data-to="363" data-dec="0">363</span></b><span>biệt thự &amp; shophouse – không hơn</span></div>
+      <div class="it"><b>~5<em> km</em></b><span>tới biển An Bàng</span></div>
+      <div class="it"><b>Thứ 3</b><span>dự án của Đạt Phương tại Hội An</span></div>
     </div>
   </div>
 </div>
 
-<!-- CURIOSITY -->
-<section class="curious" id="bi-mat">
+<!-- BẠN CÓ BIẾT -->
+<section class="know" id="bi-mat">
   <div class="wrap">
-    <span class="eyebrow">Điều ít người để ý</span>
-    <h2>Vì sao nhà đầu tư đang <em>để mắt</em> đến biệt thự Hội An?</h2>
-    <p class="lead-text">Hội An không thiếu khách du lịch. Thứ thiếu là những căn biệt thự nguyên căn, đẹp, đúng chất Hội An để họ ở lại lâu hơn.</p>
+    <span class="eyebrow">Bạn có biết?</span>
+    <h2>Hội An không thiếu khách. <em>Hội An thiếu chỗ để khách ở lại.</em></h2>
+    <p class="lead-text">3 con số khiến nhà đầu tư dừng lại khi nhìn vào thị trường nghỉ dưỡng Hội An.</p>
     <div class="cards3">
-      <div class="qcard reveal">
-        <div class="n">01</div>
-        <h3>Quỹ đất ở đô thị di sản có giới hạn</h3>
-        <p>Hội An được bảo tồn nghiêm ngặt, các khu biệt thự quy mô lớn gần phố cổ và biển không xuất hiện thường xuyên.</p>
-        <button class="link-cta js-open" data-title="Nhận phân tích quỹ đất & giá khu vực Hội An" data-need="Đầu tư cho thuê – dòng tiền">Xem phân tích khu vực →</button>
+      <div class="bignum reveal">
+        <b>+<span class="js-count" data-to="18.64" data-dec="2">18,64</span>%</b>
+        <h3>Khách ở lại tăng nhanh gấp 3</h3>
+        <p>Năm 2024, khách lưu trú tại Hội An tăng 18,64%, trong khi tổng lượt khách tăng 6,58%. Khách không còn ghé qua trong ngày nữa, họ muốn <b>ở lại</b>.</p>
+        <button class="link-cta js-open" data-title="Nhận phân tích thị trường cho thuê Hội An" data-need="Đầu tư cho thuê – dòng tiền">Xem phân tích thị trường →</button>
       </div>
-      <div class="qcard reveal">
-        <div class="n">02</div>
-        <h3>Khách gia đình &amp; nhóm thích thuê nguyên căn</h3>
-        <p>Đi cùng gia đình, bạn bè, khách muốn không gian riêng, hồ bơi, bếp. Đó là thứ phòng khách sạn khó đáp ứng.</p>
+      <div class="bignum reveal">
+        <b>~<span class="js-count" data-to="4" data-dec="0">4</span> triệu</b>
+        <h3>đêm lưu trú mỗi năm</h3>
+        <p>1,87 triệu lượt khách × 2,14 ngày lưu trú bình quân. Mỗi đêm đều cần một chỗ ngủ, và khách gia đình, nhóm bạn ngày càng chọn <b>biệt thự nguyên căn</b>.</p>
         <button class="link-cta js-open" data-title="Nhận kịch bản cho thuê nghỉ dưỡng" data-need="Đầu tư cho thuê – dòng tiền">Xem kịch bản cho thuê →</button>
       </div>
-      <div class="qcard reveal">
-        <div class="n">03</div>
-        <h3>Vừa có chỗ nghỉ, vừa có dòng tiền</h3>
-        <p>Gia đình nghỉ dưỡng vài tuần mỗi năm, thời gian còn lại cho thuê. Câu hỏi là: căn nào, vị trí nào cho dòng tiền tốt nhất?</p>
-        <button class="link-cta js-open" data-title="Căn nào cho dòng tiền tốt nhất?" data-need="Đầu tư cho thuê – dòng tiền">Hỏi ngay căn phù hợp →</button>
+      <div class="bignum reveal">
+        <b>1 : <span class="js-count" data-to="12000" data-dec="0">12.000</span></b>
+        <h3>Khan hiếm là có thật</h3>
+        <p>4,4 triệu lượt khách mỗi năm, chỉ 363 căn tại Casamia Balanca. Hội An là đô thị di sản, quỹ đất biệt thự gần phố cổ và biển <b>không sinh thêm</b>.</p>
+        <button class="link-cta js-open" data-title="Xem danh sách căn còn trống" data-need="Bảng giá">Xem căn còn trống →</button>
       </div>
     </div>
+    <p class="src" style="text-align:center;margin-top:22px">Nguồn: số liệu du lịch 2024 của UBND TP Hội An (Báo Đà Nẵng, Tạp chí Công Thương). Mục tiêu 2025: 4,97 triệu lượt khách.</p>
+  </div>
+</section>
+
+<!-- MỘT NGÀY -->
+<section class="day" data-chat-topic="vị trí tiện ích">
+  <div class="wrap">
+    <span class="eyebrow">Hãy hình dung</span>
+    <h2>Một ngày ở <em>Casamia Balanca</em></h2>
+    <div class="timeline">
+      <div class="tl reveal"><time>06:00</time><div><h3>Sương sớm trên rừng dừa</h3><p>Mở cửa là 7 mẫu dừa nước xanh mướt, nơi thuộc khu dự trữ sinh quyển thế giới. Cà phê trên ban công, nghe tiếng thuyền thúng gõ nước.</p></div></div>
+      <div class="tl reveal"><time>09:00</time><div><h3>Phố cổ chỉ ~10 phút</h3><p>Lang thang những con phố vàng rêu đã 400 năm tuổi, ăn tô cao lầu đúng vị, rồi về nhà trước giờ nắng gắt.</p></div></div>
+      <div class="tl reveal"><time>16:00</time><div><h3>Biển An Bàng ~5 km</h3><p>Lũ trẻ chạy trên cát, người lớn ngắm hoàng hôn. Đây là bãi biển từng được bình chọn trong top đẹp của châu Á.</p></div></div>
+      <div class="tl reveal"><time>20:00</time><div><h3>Bữa tối trong căn nhà của mình</h3><p>Ba thế hệ quây quần trong khu vườn riêng: không phòng khách sạn chật chội, không giờ trả phòng.</p></div></div>
+      <div class="tl hl reveal"><time>Còn lại</time><div><h3>Khi gia đình về thành phố…</h3><p>Căn nhà tiếp tục đón những vị khách trong số <b>1,87 triệu lượt khách lưu trú</b> mỗi năm. <b>Dòng tiền vẫn chảy về tài khoản của anh/chị.</b></p></div></div>
+    </div>
+    <div style="text-align:center;margin-top:30px"><button class="btn btn-orange js-open" data-title="Tôi muốn sở hữu một căn như thế" data-need="Mua để nghỉ dưỡng gia đình">Tôi muốn một ngày như thế →</button></div>
   </div>
 </section>
 
@@ -315,69 +449,152 @@
   <div class="wrap">
     <span class="eyebrow">Dòng tiền</span>
     <h2>3 cách một căn biệt thự Casamia Balanca <em>tự làm ra tiền</em></h2>
-    <p class="lead-text">Cùng một căn, mỗi cách khai thác cho dòng tiền khác nhau. Tư vấn viên sẽ tính riêng theo căn và ngân sách của anh/chị.</p>
+    <p class="lead-text">Cùng một căn, mỗi cách khai thác cho dòng tiền khác nhau. Kéo thử bên dưới để thấy con số.</p>
     <div class="ways">
-      <div class="way reveal"><div class="ic">🌴</div><h3>Cho thuê nghỉ dưỡng theo đêm</h3><p>Đón khách du lịch gia đình, nhóm bạn theo mùa cao điểm của Hội An.</p></div>
-      <div class="way reveal"><div class="ic">🗝️</div><h3>Cho thuê dài hạn</h3><p>Cho chuyên gia, người nước ngoài sống tại Hội An – Đà Nẵng thuê theo tháng, theo năm. Dòng tiền ổn định.</p></div>
-      <div class="way reveal"><div class="ic">🏪</div><h3>Shophouse kinh doanh</h3><p>Tự kinh doanh hoặc cho thuê mặt bằng: café, nhà hàng, homestay, cửa hàng lưu niệm.</p></div>
+      <div class="way reveal"><div class="ic">🌴</div><h3>Cho thuê nghỉ dưỡng theo đêm</h3><p>Đón khách gia đình, nhóm bạn trong 1,87 triệu lượt khách lưu trú mỗi năm của Hội An.</p></div>
+      <div class="way reveal"><div class="ic">🗝️</div><h3>Cho thuê dài hạn</h3><p>Cho chuyên gia, người nước ngoài sống tại Hội An – Đà Nẵng thuê theo tháng, theo năm. Dòng tiền đều đặn.</p></div>
+      <div class="way reveal"><div class="ic">🏪</div><h3>Shophouse kinh doanh</h3><p>Café, nhà hàng, homestay, quà lưu niệm, phục vụ dòng khách 4,4 triệu lượt mỗi năm.</p></div>
     </div>
-    <div class="locked reveal">
-      <h3>📊 Bảng tính dòng tiền mẫu – biệt thự cho thuê nghỉ dưỡng</h3>
-      <table aria-hidden="true">
-        <tr><td>Giá thuê trung bình / đêm</td><td>x.xxx.xxx đ</td></tr>
-        <tr><td>Công suất cho thuê dự kiến</td><td>xx %</td></tr>
-        <tr><td>Doanh thu / năm</td><td>x.xxx.xxx.xxx đ</td></tr>
-        <tr><td>Chi phí vận hành / năm</td><td>xxx.xxx.xxx đ</td></tr>
-        <tr><td>Dòng tiền ròng ước tính / năm</td><td>x.xxx.xxx.xxx đ</td></tr>
-      </table>
-      <div class="lock-over">
-        <div class="ico">🔒</div>
-        <p>Bảng tính được lập riêng theo từng căn. Để lại số, em gửi bảng tính đúng căn anh/chị quan tâm qua Zalo.</p>
-        <button class="btn btn-orange js-open" data-title="Mở khoá bảng tính dòng tiền" data-need="Đầu tư cho thuê – dòng tiền">Mở khoá bảng tính →</button>
+
+    <div class="calc reveal" id="tinh-dong-tien">
+      <div class="calc-in">
+        <h3>🧮 Tự tính dòng tiền cho thuê nghỉ dưỡng</h3>
+        <label>Giá thuê trung bình / đêm <output class="js-o1"></output>
+          <input type="range" class="js-r1" min="2" max="20" step="0.5" value="6"></label>
+        <label>Số đêm cho thuê / năm <output class="js-o2"></output>
+          <input type="range" class="js-r2" min="30" max="300" step="5" value="150"></label>
+        <label>Chi phí vận hành (% doanh thu) <output class="js-o3"></output>
+          <input type="range" class="js-r3" min="15" max="60" step="1" value="35"></label>
+        <p class="assume">Đây là giả định do anh/chị tự chọn, không phải cam kết lợi nhuận.</p>
+      </div>
+      <div class="calc-out">
+        <span>Doanh thu / năm</span><b class="js-rev"></b>
+        <span>Dòng tiền ròng / năm</span><b class="js-net big"></b>
+        <span>Trung bình mỗi tháng</span><b class="js-month"></b>
+        <button class="btn btn-orange btn-block js-open" data-title="Nhận giá thuê thực tế khu vực & bảng tính theo căn" data-need="Đầu tư cho thuê – dòng tiền">🔒 Nhận số liệu thực tế theo căn →</button>
+        <p class="assume">Giá thuê thực tế khu vực &amp; căn nào đạt mức này? Em gửi qua Zalo.</p>
       </div>
     </div>
-    <p class="note">Dòng tiền là kịch bản tham khảo, phụ thuộc thị trường và cách vận hành, không phải cam kết lợi nhuận.</p>
   </div>
 </section>
 
-<!-- LOCATION -->
+<!-- VỊ TRÍ & TIỆN ÍCH -->
 <section class="loc" id="vi-tri" data-chat-topic="vị trí tiện ích">
-  <div class="wrap grid">
-    <div class="visual reveal" data-img="location">
-      <svg viewBox="0 0 400 300" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><path d="M0 220c60-30 120-30 180 0s120 30 220 0"/><path d="M0 250c60-30 120-30 180 0s120 30 220 0"/><circle cx="250" cy="110" r="10"/><path d="M250 120v40M60 80l40 40 60-30 90 20"/></svg>
-      <div class="tag">📍 Rừng dừa Bảy Mẫu – Cẩm Thanh, Hội An</div>
+  <div class="wrap">
+    <span class="eyebrow">Vị trí &amp; tiện ích</span>
+    <h2>Mở cửa là rừng dừa — <em>~5 km là phố cổ &amp; biển</em> — 2 di sản thế giới bao quanh</h2>
+    <p class="lead-text">Hiếm nơi nào ở Việt Nam gom đủ <b>rừng – sông – biển – phố cổ</b> trong một bán kính nhỏ như vậy.</p>
+    <div class="radius">
+      <div class="rings reveal" aria-hidden="true">
+        <svg viewBox="0 0 400 400">
+          <circle cx="200" cy="200" r="190" class="r3"/><circle cx="200" cy="200" r="130" class="r2"/><circle cx="200" cy="200" r="66" class="r1"/>
+          <text x="200" y="22" class="rl">~30 km</text><text x="200" y="82" class="rl">~5 km</text><text x="200" y="146" class="rl">0 km</text>
+          <g class="dot"><circle cx="200" cy="200" r="30"/><text x="200" y="196">CASAMIA</text><text x="200" y="210">BALANCA</text></g>
+          <g class="pin"><circle cx="250" cy="236" r="7"/><text x="262" y="240">Rừng dừa</text></g>
+          <g class="pin"><circle cx="95" cy="160" r="7"/><text x="50" y="146">Phố cổ</text></g>
+          <g class="pin"><circle cx="300" cy="120" r="7"/><text x="282" y="104">An Bàng</text></g>
+          <g class="pin"><circle cx="318" cy="250" r="7"/><text x="300" y="276">Cửa Đại</text></g>
+          <g class="pin"><circle cx="350" cy="320" r="7"/><text x="300" y="350">Cù Lao Chàm</text></g>
+          <g class="pin"><circle cx="70" cy="320" r="7"/><text x="20" y="350">Sân bay Đà Nẵng</text></g>
+        </svg>
+      </div>
+      <div class="amen">
+        <div class="ring-card reveal"><span class="ring-tag">0 km · Ngay tại dự án</span>
+          <ul><li>🌴 <b>Rừng dừa Bảy Mẫu</b> – đi thuyền thúng giữa dừa nước</li><li>🌿 Thuộc <b>khu dự trữ sinh quyển thế giới</b> Cù Lao Chàm – Hội An (UNESCO)</li></ul></div>
+        <div class="ring-card reveal"><span class="ring-tag">~5 km · Vài phút di chuyển</span>
+          <ul><li>🏮 <b>Phố cổ Hội An</b> – di sản văn hoá thế giới UNESCO</li><li>🌊 <b>Biển An Bàng</b> &amp; <b>biển Cửa Đại</b></li><li>🥬 Làng rau Trà Quế, chợ đêm, sông Hoài</li></ul></div>
+        <div class="ring-card reveal"><span class="ring-tag">Xa hơn · Kết nối nhanh</span>
+          <ul><li>🏝️ <b>Cù Lao Chàm</b> – ca nô từ Cửa Đại</li><li>✈️ <b>Sân bay quốc tế Đà Nẵng</b> ~30 km qua trục Võ Chí Công</li><li>🛣️ Trục Võ Chí Công nối Đà Nẵng – Hội An – sân bay Chu Lai</li></ul></div>
+        <div class="ring-card locked-card reveal"><span class="ring-tag">🔒 Tiện ích nội khu</span>
+          <p>Danh sách tiện ích nội khu, phối cảnh và vị trí từng tiện ích so với căn anh/chị chọn.</p>
+          <button class="btn btn-orange js-open" data-title="Nhận danh sách & phối cảnh tiện ích nội khu" data-need="Vị trí & tiện ích">Xem tiện ích nội khu →</button></div>
+      </div>
     </div>
-    <div>
-      <span class="eyebrow">Vị trí</span>
-      <h2>Mở cửa là rừng dừa — <em>vài phút là phố cổ</em> — vài bước là biển</h2>
-      <ul class="points">
-        <li><b>🌴</b><div><strong>Giữa rừng dừa Bảy Mẫu</strong><span>Thuộc khu dự trữ sinh quyển thế giới Cù Lao Chàm – Hội An được UNESCO công nhận.</span></div></li>
-        <li><b>🏮</b><div><strong>Gần phố cổ Hội An</strong><span>Di sản văn hoá thế giới, điểm đến hút khách du lịch quanh năm.</span></div></li>
-        <li><b>🛣️</b><div><strong>Trên trục Võ Chí Công</strong><span>Kết nối Đà Nẵng – Hội An – sân bay Chu Lai.</span></div></li>
-        <li><b>🌊</b><div><strong>Gần biển</strong><span>Không gian nghỉ dưỡng biển – sông – rừng dừa hiếm có.</span></div></li>
-      </ul>
-      <button class="btn btn-navy js-open" data-title="Nhận bản đồ vị trí & thời gian di chuyển" data-need="Mua để nghỉ dưỡng gia đình">Nhận bản đồ &amp; thời gian di chuyển →</button>
-    </div>
+    <p class="src">Khoảng cách ước tính theo đường di chuyển, tham khảo.</p>
   </div>
 </section>
 
-<!-- PRODUCTS -->
+<!-- MẶT BẰNG & CĂN KEY -->
+<section class="plan" id="mat-bang" data-chat-topic="mặt bằng sản phẩm">
+  <div class="wrap">
+    <span class="eyebrow">Mặt bằng</span>
+    <h2>363 căn, nhưng <em>không phải căn nào cũng như nhau</em></h2>
+    <p class="lead-text">Vị trí trong dự án quyết định giá thuê và giá trị tăng thêm. Bấm vào các điểm 🔥 để hỏi về <b>căn key</b>.</p>
+    <div class="siteplan reveal">
+      <svg viewBox="0 0 900 460" aria-label="Sơ đồ minh hoạ mặt bằng">
+        <rect width="900" height="460" fill="#eaf1ea"/>
+        <path d="M0 380 C200 330 330 430 520 380 S800 320 900 360 V460 H0Z" fill="#cfe3f1"/>
+        <g fill="#b9d8b5" opacity=".9"><circle cx="80" cy="80" r="46"/><circle cx="140" cy="140" r="38"/><circle cx="820" cy="90" r="50"/><circle cx="760" cy="160" r="36"/><circle cx="60" cy="250" r="40"/></g>
+        <rect x="0" y="196" width="900" height="26" fill="#fff"/><rect x="430" y="0" width="22" height="380" fill="#fff"/>
+        <g class="b-shop">
+          <rect x="200" y="160" width="40" height="30"/><rect x="246" y="160" width="40" height="30"/><rect x="292" y="160" width="40" height="30"/><rect x="338" y="160" width="40" height="30"/>
+          <rect x="470" y="160" width="40" height="30"/><rect x="516" y="160" width="40" height="30"/><rect x="562" y="160" width="40" height="30"/><rect x="608" y="160" width="40" height="30"/>
+        </g>
+        <g class="b-duo">
+          <rect x="200" y="60" width="54" height="40"/><rect x="262" y="60" width="54" height="40"/><rect x="324" y="60" width="54" height="40"/>
+          <rect x="470" y="60" width="54" height="40"/><rect x="532" y="60" width="54" height="40"/><rect x="594" y="60" width="54" height="40"/>
+        </g>
+        <g class="b-solo">
+          <rect x="200" y="240" width="70" height="56"/><rect x="290" y="240" width="70" height="56"/><rect x="470" y="240" width="70" height="56"/><rect x="560" y="240" width="70" height="56"/><rect x="650" y="240" width="70" height="56"/>
+          <rect x="250" y="310" width="70" height="50"/><rect x="560" y="310" width="70" height="50"/>
+        </g>
+        <rect x="690" y="40" width="120" height="110" rx="14" fill="#9fcf98"/><text x="750" y="100" class="lbl">Công viên</text>
+        <text x="110" y="425" class="lbl">Sông / rừng dừa</text>
+      </svg>
+      <button class="hot-spot" style="left:21%;top:32%" data-title="Hỏi giá căn góc 2 mặt tiền" data-need="Căn key: căn góc 2 mặt tiền"><i></i><span>🔥 Căn góc 2 mặt tiền</span></button>
+      <button class="hot-spot" style="left:64%;top:30%" data-title="Hỏi giá shophouse mặt đường chính" data-need="Căn key: shophouse mặt đường chính"><i></i><span>🔥 Shophouse mặt đường chính</span></button>
+      <button class="hot-spot" style="left:30%;top:72%" data-title="Hỏi giá căn sát rừng dừa" data-need="Căn key: căn sát rừng dừa"><i></i><span>🔥 Căn sát rừng dừa</span></button>
+      <button class="hot-spot" style="left:72%;top:12%" data-title="Hỏi giá căn gần công viên" data-need="Căn key: căn gần công viên"><i></i><span>🔥 Căn gần công viên</span></button>
+      <div class="legend"><span><i class="l-solo"></i>Biệt thự đơn lập</span><span><i class="l-duo"></i>Biệt thự song lập</span><span><i class="l-shop"></i>Shophouse</span></div>
+    </div>
+    <p class="src" style="color:var(--muted)">Sơ đồ minh hoạ để dễ hình dung, không phải mặt bằng chính thức. Mặt bằng tổng thể chính thức và căn còn trống em gửi qua Zalo.</p>
+    <div style="text-align:center;margin-top:18px"><button class="btn btn-navy js-open" data-title="Nhận mặt bằng tổng thể & danh sách căn key còn trống" data-need="Mặt bằng tổng thể">📐 Nhận mặt bằng tổng thể chính thức →</button></div>
+  </div>
+</section>
+
+<!-- SẢN PHẨM & LAYOUT -->
 <section class="products" id="san-pham" data-chat-topic="mặt bằng sản phẩm">
   <div class="wrap">
-    <span class="eyebrow">Sản phẩm</span>
+    <span class="eyebrow">Sản phẩm &amp; layout</span>
     <h2>Chọn căn phù hợp với <em>cách anh/chị muốn khai thác</em></h2>
-    <p class="lead-text">Mỗi dòng sản phẩm phù hợp một mục tiêu: nghỉ dưỡng, cho thuê hay kinh doanh.</p>
+    <p class="lead-text">Thông số, layout từng tầng và giá từng căn được cập nhật theo bảng hàng. Bấm để mở khoá.</p>
     <div class="prods">
       <div class="prod reveal"><div class="ph" data-img="villa1"><span>Riêng tư nhất</span></div><div class="bd">
-        <h3>Biệt thự đơn lập</h3><p>Không gian riêng tư, sân vườn rộng. Phù hợp nghỉ dưỡng gia đình và cho thuê nguyên căn phân khúc cao.</p>
-        <button class="btn btn-orange js-open" data-title="Nhận mặt bằng & giá biệt thự đơn lập" data-need="Biệt thự đơn lập">Xem mặt bằng &amp; giá</button></div></div>
+        <h3>Biệt thự đơn lập</h3><p>Không gian riêng tư, sân vườn rộng. Hợp nghỉ dưỡng ba thế hệ và cho thuê nguyên căn phân khúc cao.</p>
+        <ul class="specs"><li>Diện tích đất<b class="blur">███ m²</b></li><li>Số tầng / phòng ngủ<b class="blur">█ tầng · █ PN</b></li><li>Giá từ<b class="blur">██,█ tỷ</b></li></ul>
+        <div class="fp js-open" data-title="Xem layout biệt thự đơn lập" data-need="Layout biệt thự đơn lập"><svg viewBox="0 0 120 70"><rect x="4" y="4" width="112" height="62"/><path d="M60 4v40M4 36h56M60 44h56M86 44v22M30 36v30"/></svg><span>🔒 Xem layout tầng 1 – tầng 2</span></div>
+        <button class="btn btn-orange js-open" data-title="Nhận mặt bằng & giá biệt thự đơn lập" data-need="Biệt thự đơn lập">Mở khoá giá &amp; layout</button></div></div>
       <div class="prod reveal"><div class="ph" data-img="villa2"><span>Cân bằng</span></div><div class="bd">
-        <h3>Biệt thự song lập</h3><p>Cân bằng giữa ngân sách và không gian sống, dễ khai thác cho thuê nghỉ dưỡng.</p>
-        <button class="btn btn-orange js-open" data-title="Nhận mặt bằng & giá biệt thự song lập" data-need="Biệt thự song lập">Xem mặt bằng &amp; giá</button></div></div>
+        <h3>Biệt thự song lập</h3><p>Cân bằng giữa ngân sách và không gian sống, dễ khai thác cho thuê nghỉ dưỡng theo đêm.</p>
+        <ul class="specs"><li>Diện tích đất<b class="blur">███ m²</b></li><li>Số tầng / phòng ngủ<b class="blur">█ tầng · █ PN</b></li><li>Giá từ<b class="blur">██,█ tỷ</b></li></ul>
+        <div class="fp js-open" data-title="Xem layout biệt thự song lập" data-need="Layout biệt thự song lập"><svg viewBox="0 0 120 70"><rect x="4" y="4" width="112" height="62"/><path d="M50 4v62M4 30h46M50 40h66M84 4v36"/></svg><span>🔒 Xem layout tầng 1 – tầng 2</span></div>
+        <button class="btn btn-orange js-open" data-title="Nhận mặt bằng & giá biệt thự song lập" data-need="Biệt thự song lập">Mở khoá giá &amp; layout</button></div></div>
       <div class="prod reveal"><div class="ph" data-img="shophouse"><span>Kinh doanh</span></div><div class="bd">
-        <h3>Shophouse</h3><p>Vừa ở vừa kinh doanh, hoặc cho thuê mặt bằng cho các mô hình dịch vụ du lịch.</p>
-        <button class="btn btn-orange js-open" data-title="Nhận mặt bằng & giá shophouse" data-need="Shophouse kinh doanh">Xem mặt bằng &amp; giá</button></div></div>
+        <h3>Shophouse</h3><p>Tầng dưới kinh doanh, tầng trên để ở hoặc cho thuê. Đón dòng khách 4,4 triệu lượt mỗi năm.</p>
+        <ul class="specs"><li>Diện tích đất<b class="blur">███ m²</b></li><li>Mặt tiền / số tầng<b class="blur">█ m · █ tầng</b></li><li>Giá từ<b class="blur">██,█ tỷ</b></li></ul>
+        <div class="fp js-open" data-title="Xem layout shophouse" data-need="Layout shophouse"><svg viewBox="0 0 120 70"><rect x="4" y="4" width="112" height="62"/><path d="M4 46h112M40 4v42M80 4v42"/></svg><span>🔒 Xem layout từng tầng</span></div>
+        <button class="btn btn-orange js-open" data-title="Nhận mặt bằng & giá shophouse" data-need="Shophouse kinh doanh">Mở khoá giá &amp; layout</button></div></div>
     </div>
+  </div>
+</section>
+
+<!-- CHÍNH SÁCH -->
+<section class="policy" id="chinh-sach" data-chat-topic="chính sách thanh toán ưu đãi">
+  <div class="wrap">
+    <span class="eyebrow">Chính sách bán hàng</span>
+    <h2>Chính sách <em>tháng này</em> có gì?</h2>
+    <p class="lead-text">Mỗi đợt mở bán có chính sách khác nhau. Anh/chị vào đúng đợt có thể tiết kiệm đáng kể.</p>
+    <div class="pol-grid">
+      <div class="pol reveal"><span>💳</span><h3>Thanh toán đợt đầu</h3><b class="blur">██%</b><p>giá trị căn</p></div>
+      <div class="pol reveal"><span>🏷️</span><h3>Chiết khấu thanh toán sớm</h3><b class="blur">██%</b><p>theo tiến độ chọn</p></div>
+      <div class="pol reveal"><span>🏦</span><h3>Hỗ trợ tài chính</h3><b class="blur">██ tháng</b><p>theo ngân hàng liên kết</p></div>
+      <div class="pol reveal"><span>🎁</span><h3>Ưu đãi riêng đợt này</h3><b class="blur">█████</b><p>áp dụng theo căn</p></div>
+    </div>
+    <div class="pol-cta reveal">
+      <div><b>🔒 Chính sách chính thức mới nhất</b><p>Em gửi bản chính sách, tiến độ thanh toán và bảng tính dòng tiền đã áp ưu đãi, đúng căn anh/chị chọn.</p></div>
+      <button class="btn btn-orange pulse js-open" data-title="Mở khoá chính sách bán hàng tháng này" data-need="Chính sách bán hàng">Mở khoá chính sách tháng này →</button>
+    </div>
+    <p class="src" style="color:var(--muted)">Chính sách thay đổi theo từng đợt, áp dụng theo công bố chính thức của chủ đầu tư.</p>
   </div>
 </section>
 
@@ -476,6 +693,7 @@
 <footer>
   <div class="wrap">
     <p><b>Hoàng Hiệp</b> – Chuyên viên tư vấn dự án Casamia Balanca · Hotline/Zalo: <a class="js-tel"><span class="js-hotline"></span></a></p>
+    <p>Nguồn số liệu du lịch: UBND TP Hội An năm 2024 (4,4 triệu lượt khách, tăng 6,58%; 1,87 triệu lượt lưu trú, tăng 18,64%, bình quân 2,14 ngày; doanh thu du lịch ~5.200 tỷ đồng), đăng trên Báo Đà Nẵng và Tạp chí Công Thương. Thông tin dự án: 31,1 ha, 363 sản phẩm, chủ đầu tư Đạt Phương.</p>
     <p>Trang thông tin do chuyên viên tư vấn cung cấp, không phải website chính thức của chủ đầu tư. Thông tin, hình ảnh mang tính tham khảo. Giá, chính sách và pháp lý theo công bố chính thức tại thời điểm giao dịch. Các kịch bản dòng tiền chỉ để tham khảo, không phải cam kết lợi nhuận.</p>
   </div>
 </footer>
@@ -514,6 +732,8 @@ const IMAGES = {
   shophouse: '',
   architecture: '',
 };
+// Giá hiển thị ở đầu trang, ví dụ '8,7 tỷ'. Để trống = ẩn (chỉ điền giá chính thức đã xác nhận).
+const PRICE_FROM = '';
 // Địa chỉ server live chat. Để trống nếu landing page chạy cùng server chat.
 const API_BASE = '';
 
@@ -560,7 +780,7 @@ const API_BASE = '';
     setTimeout(() => $('#modal input[name=name]').focus(), 50);
   }
   const closeModal = () => modal.classList.remove('open');
-  $$('.js-open').forEach(b => b.addEventListener('click', () => openModal(b.dataset.title, b.dataset.need)));
+  $$('.js-open, .hot-spot').forEach(b => b.addEventListener('click', () => openModal(b.dataset.title, b.dataset.need)));
   $('.x', modal).onclick = closeModal;
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
@@ -605,6 +825,40 @@ const API_BASE = '';
       btn.disabled = false; btn.textContent = label;
     }
   }));
+
+  // Giá từ
+  if (PRICE_FROM) { $('.js-price-val').textContent = PRICE_FROM; $('.js-price').hidden = false; }
+
+  // Số đếm chạy khi xuất hiện trên màn hình
+  const fmtNum = (n, dec) => n.toLocaleString('vi-VN', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+  const counter = new IntersectionObserver(es => es.forEach(en => {
+    if (!en.isIntersecting) return;
+    counter.unobserve(en.target);
+    const el = en.target, to = parseFloat(el.dataset.to), dec = +el.dataset.dec || 0, t0 = performance.now(), dur = 1400;
+    const tick = t => {
+      const k = Math.min(1, (t - t0) / dur), v = to * (1 - Math.pow(1 - k, 3));
+      el.textContent = fmtNum(k < 1 ? v : to, dec);
+      if (k < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }), { threshold: .4 });
+  $$('.js-count').forEach(el => counter.observe(el));
+
+  // Máy tính dòng tiền
+  const r1 = $('.js-r1'), r2 = $('.js-r2'), r3 = $('.js-r3');
+  const money = v => v >= 1000 ? fmtNum(v / 1000, 2) + ' tỷ' : fmtNum(Math.round(v), 0) + ' triệu';
+  function calc() {
+    const price = +r1.value, nights = +r2.value, cost = +r3.value;
+    const rev = price * nights, net = rev * (1 - cost / 100);
+    $('.js-o1').textContent = fmtNum(price, price % 1 ? 1 : 0) + ' triệu';
+    $('.js-o2').textContent = nights + ' đêm (' + Math.round(nights / 3.65) + '%)';
+    $('.js-o3').textContent = cost + '%';
+    $('.js-rev').textContent = money(rev);
+    $('.js-net').textContent = money(net);
+    $('.js-month').textContent = money(net / 12) + ' / tháng';
+  }
+  [r1, r2, r3].forEach(r => r.addEventListener('input', calc));
+  calc();
 
   // Hiệu ứng xuất hiện khi cuộn
   const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: .15 });
