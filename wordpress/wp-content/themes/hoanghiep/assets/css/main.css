@@ -1110,3 +1110,16 @@ html.nav-locked, html.nav-locked body { overflow: hidden; }
 	.hero__meta { align-items: flex-start; }
 	.hero__meta svg { flex: none; margin-top: 4px; }
 }
+
+/* Khối số liệu & nút kêu gọi trong bài giới thiệu dự án (dạng landing page). */
+.entry-content .lp-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 22px 0; }
+.entry-content .lp-stats p { margin: 0; padding: 16px 14px; border-radius: var(--radius); background: var(--navy); color: #c7d3e3; line-height: 1.4; text-align: center; }
+.entry-content .lp-stats b { display: block; font-family: var(--font-display); font-size: 1.9rem; line-height: 1.15; color: var(--gold); }
+.entry-content .lp-stats span { font-size: .85rem; }
+.entry-content .lp-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 18px 0 26px; }
+.entry-content .lp-cta .btn { text-decoration: none; }
+@media (max-width: 520px) { .entry-content .lp-stats { grid-template-columns: 1fr 1fr; } .entry-content .lp-stats b { font-size: 1.5rem; } .entry-content .lp-cta .btn { width: 100%; justify-content: center; } }
+@media (min-width: 521px) {
+	.entry-content .lp-stats { grid-template-columns: repeat(3, 1fr); }
+	.entry-content .lp-stats:has(> p:nth-child(4):last-child) { grid-template-columns: repeat(4, 1fr); }
+}

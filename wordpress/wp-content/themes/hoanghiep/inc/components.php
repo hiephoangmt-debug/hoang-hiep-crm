@@ -514,3 +514,17 @@ function hh_post_cluster_links( $post_id ) {
 	$links[] = array( 'Liên hệ ' . hoanghiep_opt( 'hh_person_name' ) . ' – tư vấn, nhận bảng giá', home_url( '/lien-he/' ) );
 	return array_values( array_filter( $links, static fn( $l ) => $l[1] && ! is_wp_error( $l[1] ) ) );
 }
+
+/** Phân khu / tòa con chưa có ảnh đại diện: dùng ảnh của dự án mẹ. */
+add_filter(
+	'post_thumbnail_id',
+	static function ( $thumb_id, $post ) {
+		if ( $thumb_id || ! $post || 'du-an' !== get_post_type( $post ) ) {
+			return $thumb_id;
+		}
+		$parent = (int) get_post_meta( is_object( $post ) ? $post->ID : (int) $post, 'hh_p_parent', true );
+		return $parent ? (int) get_post_thumbnail_id( $parent ) : $thumb_id;
+	},
+	10,
+	2
+);
