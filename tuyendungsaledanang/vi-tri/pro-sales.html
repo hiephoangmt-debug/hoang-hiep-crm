@@ -59,9 +59,10 @@ img{max-width:100%}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--orange);display:inline-block}
 .hero h1{font-size:34px;line-height:1.14;font-weight:800;margin-top:16px;letter-spacing:-.8px}
 .hero h1 em{font-style:normal;color:var(--orange)}
-.hero h1 .kw{display:block;font-size:13px;line-height:1.4;letter-spacing:2.5px;text-transform:uppercase;color:#FFB98F;font-weight:700;margin-bottom:12px}
-.hero h1 .kw:before{content:"";display:inline-block;width:22px;height:2px;background:var(--orange);vertical-align:middle;margin-right:10px}
-.hero h1 .lite{display:block;font-size:.8em;font-weight:600;color:#DCE4F3;letter-spacing:-.4px;margin-top:8px}
+.hero .kw{margin:16px 0 0;display:block;font-size:13px;line-height:1.4;letter-spacing:2.5px;text-transform:uppercase;color:#FFB98F;font-weight:700;margin-bottom:12px}
+.hero .kw:before{content:"";display:inline-block;width:22px;height:2px;background:var(--orange);vertical-align:middle;margin-right:10px}
+@media(max-width:799px){.hero .lite{font-size:22px!important}.hero .kw{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.8px!important;font-size:11.5px!important}.hero .kw:before{width:14px;margin-right:6px}}
+.hero .lite{display:block;font-size:26px;line-height:1.25;font-weight:600;color:#DCE4F3;letter-spacing:-.4px;margin-top:8px}
 .nw{white-space:nowrap}
 @media(min-width:800px){.hero h1{font-size:46px}}
 .hero .sub{font-size:18px;color:#D6DFEF;margin-top:18px;max-width:610px}
@@ -128,7 +129,7 @@ img{max-width:100%}
 .dot{animation:pulse 2s infinite}
 .hero h1{font-weight:700!important;letter-spacing:-.6px!important}
 .hero h1 em{background:linear-gradient(90deg,#FF6B1A 0%,#FFD0B0 25%,#FF8A3D 50%,#FFD0B0 75%,#FF6B1A 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#FF8A3D;animation:textshine 4s linear infinite}
-.hero h1 .kw:before{animation:linegrow 2.4s ease-in-out infinite}
+.hero .kw:before{animation:linegrow 2.4s ease-in-out infinite}
 .kpis div,.ladderk a{position:relative;overflow:hidden;border-radius:18px!important;border:1px solid rgba(255,255,255,.16)!important;background:linear-gradient(140deg,rgba(255,255,255,.14),rgba(255,255,255,.03))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 10px 30px rgba(8,18,52,.25);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .kpis div:before,.ladderk a:before{content:"";position:absolute;top:0;left:0;width:35%;height:100%;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.22),rgba(255,255,255,0));animation:shine 5s ease-in-out infinite;pointer-events:none}
 .kpis > :nth-child(2):before{animation-delay:.6s}.kpis > :nth-child(3):before{animation-delay:1.2s}.kpis > :nth-child(4):before{animation-delay:1.8s}
@@ -165,7 +166,7 @@ img{max-width:100%}
 @media(max-width:799px){
 .hero-b{background:linear-gradient(90deg,rgba(21,36,90,.92) 0%,rgba(21,36,90,.6) 50%,rgba(21,36,90,0) 80%),linear-gradient(180deg,rgba(21,36,90,0) 0%,rgba(21,36,90,0) 52%,#15245A 72%),url("https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/hoang-hiep-walk.jpg") 78% 0/auto 640px no-repeat #15245A!important;padding-top:28px}
 .hero-b h1{font-size:30px!important;max-width:64%}
-.hero-b h1 .kw{white-space:nowrap;letter-spacing:1.2px;font-size:12px}
+.hero-b .kw{white-space:nowrap;letter-spacing:1.2px;font-size:12px}
 .hero-b .quote{max-width:62%;font-size:14px}
 .hero-b .badge{max-width:100%}
 .hero-b .ladderk{margin-top:150px}
@@ -371,7 +372,8 @@ img{max-width:100%}
     <div>
       <p class="crumb"><a href="https://www.tuyendungsaledanang.com/">Tuyển Sale Đà Nẵng</a> › Chuyên gia kinh doanh (Pro Sales)</p>
       <span class="badge"><i class="dot"></i> Dành cho Sale bản lĩnh</span>
-      <h1><span class="kw">Tuyển Pro Sales BĐS Đà Nẵng</span>Pro Sales: lương <em class="nw">7–10 triệu</em><br>chưa tính hoa hồng.</h1>
+      <p class="kw">Tuyển Pro Sales BĐS Đà Nẵng</p>
+      <h1>Pro Sales: lương <em class="nw">7–10 triệu</em><br>chưa tính hoa hồng.</h1>
       <p class="sub">Bạn đã chứng minh mình bán được hàng. Ở đây Pro Sales có lương tháng, marketing mạnh và thưởng theo từng giao dịch.</p>
       <div class="kpis"><div><b>7–10<i>TR</i></b><span>Lương/tháng</span></div><div><b>10<i>TR</i></b><span>Thưởng MKT/giao dịch</span></div><div><b>100%</b><span>Hỗ trợ marketing</span></div><div><b>03</b><span>Tháng xét cấp bậc</span></div></div>
       <p class="hiring">Các vị trí đang tuyển:</p>

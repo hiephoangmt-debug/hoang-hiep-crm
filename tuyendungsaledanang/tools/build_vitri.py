@@ -112,7 +112,8 @@ def page(p):
     <div>
       <p class="crumb"><a href="{SITE}/">Tuyển Sale Đà Nẵng</a> › {p["crumb"]}</p>
       <span class="badge"><i class="dot"></i> {p["badge"]}</span>
-      <h1><span class="kw">{p["kw"]}</span>{p["h1"]}</h1>
+      <p class="kw">{p["kw"]}</p>
+      <h1>{p["h1"]}</h1>
       <p class="sub">{p["sub"]}</p>
       <div class="kpis">{kp}</div>
       <p class="hiring">Các vị trí đang tuyển:</p>
