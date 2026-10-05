@@ -1,0 +1,43 @@
+S=.45
+def P(x,y): return x*S,y*S
+body=open('v3.txt').read(); vcc=open('vcc.txt').read()
+o=[]
+o.append('<rect x="0" y="0" width="920" height="720" fill="#f4f6f3"/>')
+o.append('<path d="M858 0 H920 V720 H880 C905 640 915 560 905 470 C895 380 880 300 868 210 C860 140 858 70 858 0Z" fill="#d6ebf5"/>')
+# đại lộ Võ Chí Công
+o.append(f'<path id="vcc" d="{vcc}" fill="none" stroke="#c9d1dc" stroke-width="37" stroke-linecap="butt" stroke-linejoin="round"/>')
+o.append(f'<path d="{vcc}" fill="none" stroke="#eef1f5" stroke-width="34" stroke-linejoin="round"/>')
+o.append(f'<path d="{vcc}" fill="none" stroke="#9fc48f" stroke-width="2.4" stroke-linejoin="round"/>')
+o.append(body)
+o.append('<text class="road" dy="-5"><textPath href="#vcc" startOffset="30%">ĐƯỜNG VÕ CHÍ CÔNG</textPath></text>')
+o.append('<polygon points="14,128 44,124 26,150" fill="#0b2a5b"/><polygon points="160,700 182,700 171,716" fill="#0b2a5b"/>')
+o.append('<text x="40" y="118" class="dir">↖ Đi Đà Nẵng · sân bay</text>')
+o.append('<text x="190" y="706" class="dir">Đi Tam Kỳ ↓</text>')
+def lab(x,y,t,cls='lm',anchor='middle'):
+    X,Y=P(x,y); o.append(f'<text x="{X:.0f}" y="{Y:.0f}" class="{cls}" text-anchor="{anchor}">{t}</text>')
+lab(560,425,'KHU TTTM &amp; DỊCH VỤ')
+lab(800,470,'Nhà trẻ')
+lab(318,948,'Lối vào chính →','lm','end')
+lab(1890,500,'22 Bungalow')
+lab(1800,1300,'Khách sạn Đảo Dừa')
+lab(1150,315,'LA PALMA','zone'); lab(650,1040,'LA SUNA','zone'); lab(1060,1205,'LA RIVA','zone')
+for n,(x,y),c in [('P1',(1010,585),''),('P2',(830,640),''),('P3',(1172,722),'lake'),('P4',(1330,815),'flo'),('P5',(1790,660),'')]:
+    X,Y=P(x,y); o.append(f'<g class="pk {c}"><circle cx="{X:.0f}" cy="{Y:.0f}" r="12"/><text x="{X:.0f}" y="{Y+4:.0f}">{n}</text></g>')
+for n,(x,y) in [('01',(430,900)),('02',(640,455)),('03',(880,485)),('04',(1885,620)),('05',(1240,670)),('06',(1080,880)),('07',(1130,905)),('08',(880,690))]:
+    X,Y=P(x,y); o.append(f'<g class="nt"><circle cx="{X:.0f}" cy="{Y:.0f}" r="9"/><text x="{X:.0f}" y="{Y+3.4:.1f}">{n}</text></g>')
+o.append('<text transform="translate(892 250) rotate(80)" class="water">SÔNG CỔ CÒ</text>')
+o.append('<g transform="translate(840 70)"><circle r="18" fill="#fff" stroke="#c9d6ea"/><path d="M0 -14 L5 4 L0 0 L-5 4Z" fill="#0b2a5b"/><text y="-22" class="nb">B</text></g>')
+svg='<svg viewBox="0 0 920 720" aria-label="Sơ đồ phân khu Casamia Balanca, vẽ lại theo mặt bằng chủ đầu tư">\n'+'\n'.join(o)+'\n</svg>'
+open('plan2.svg','w').write(svg)
+css='''<style>body{margin:0;background:#fff}svg{width:1000px;display:block}
+svg .pk circle{fill:#fff;stroke:#5fa35a;stroke-width:2.5}svg .pk.lake circle{stroke:#2aa3b5}svg .pk.flo circle{stroke:#e46aa0}
+svg .pk text{font:800 11px sans-serif;fill:#0b2a5b;text-anchor:middle}
+svg .zone{font:700 15px serif;fill:#0b2a5b;opacity:.55;letter-spacing:4px;text-anchor:middle}
+svg .nt circle{fill:#9a1b1b;stroke:#fff;stroke-width:1.5}svg .nt text{font:700 9px sans-serif;fill:#fff;text-anchor:middle}
+svg .dir{font:800 13px sans-serif;fill:#0b2a5b}
+svg .road{font:800 11px sans-serif;fill:#0b2a5b;letter-spacing:2px}
+svg .water{font:800 13px sans-serif;fill:#2c6e98;letter-spacing:2px}
+svg .nb{font:800 11px sans-serif;text-anchor:middle;fill:#0b2a5b}
+svg .lm{font:700 10.5px sans-serif;fill:#33433a;paint-order:stroke;stroke:#fff;stroke-width:3px}</style>'''
+open('p2.html','w').write('<!doctype html><meta charset="utf-8">'+css+svg)
+print(len(svg)//1024,'KB')
