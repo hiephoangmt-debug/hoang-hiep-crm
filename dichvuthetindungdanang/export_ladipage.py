@@ -106,6 +106,13 @@ def convert(s, slug):
     s = re.sub(r'<div class="tbl"><table>.*?</table></div>', table_to_list, s, flags=re.S)
     s = re.sub(r'<dl class="facts">.*?</dl>', facts_to_list, s, flags=re.S)
 
+    # Link "#..." tới trang khác: LadiPage không nhảy được tới mục -> trỏ thẳng trang đó
+    s = re.sub(r'href="(https://www\.dichvuthetindungdanang\.com/[^"#]*)#[^"]*"', r'href="\1"', s)
+    s = re.sub(r'\s*<li><a href="[^"]*">Câu hỏi thường gặp</a></li>', "", s)
+
+    # Mục lục: LadiPage bỏ id của tiêu đề nên link "#..." không nhảy -> bỏ mục lục
+    s = re.sub(r'<nav class="toc".*?</nav>', "", s, flags=re.S)
+
     # Dọn phần cần JS
     s = s.replace("<details open>", "<details>")
     s = s.replace(' class="reveal"', "").replace(" reveal", "")
