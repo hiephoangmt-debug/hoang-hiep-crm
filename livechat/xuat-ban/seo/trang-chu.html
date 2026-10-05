@@ -306,6 +306,13 @@ html:not([data-kv=hn]) .kv-hn,html:not([data-kv=dn]) .kv-dn,html[data-kv] .kv-de
 .kv-faq div{border-left:3px solid var(--orange);padding:2px 0 2px 14px}.kv-faq b{color:var(--navy)}.kv-faq p{margin:4px 0 0;color:var(--muted);font-size:14.5px}
 .kv-b{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:30px}
 @media(max-width:980px){.kv-g,.kv-faq{grid-template-columns:1fr}.kv-tabs button{flex:1 1 100%}}
+.vals{background:#fff;padding-top:80px}
+.vgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:36px}
+.vgrid>div{background:var(--soft);border-radius:18px;padding:24px 20px}
+.vgrid b{font:600 30px/1 var(--serif);color:var(--orange)}
+.vgrid h3{font:600 20px/1.3 var(--serif);margin:12px 0 8px}
+.vgrid p{margin:0;color:var(--muted);font-size:15px}
+@media(max-width:980px){.vgrid{grid-template-columns:1fr 1fr}}@media(max-width:600px){.vgrid{grid-template-columns:1fr}}
 /* hiệu ứng */
 .rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s ease}
 .rv.in{opacity:1;transform:none}
@@ -365,10 +372,9 @@ if(k==='hn'||k==='dn')document.documentElement.setAttribute('data-kv',k);}catch(
   <div class="wrap">
     <div class="hero-grid">
     <div>
-    <div class="kv-def"><span class="eye">Casamia Balanca Hội An · chỉ 363 căn</span>
-    <h1><small>Biệt thự &amp; nhà vườn bên sông Cổ Cò</small>An cư bên sông.<br><em>Nhẹ tài chính</em> ngay từ đầu.</h1>
-    <p class="sub">Vốn tự có từ <b>~3,1 tỷ*</b>, vay 70% <b>hỗ trợ lãi 0% tới 24 tháng</b>, những năm đầu <b>CĐT thuê lại theo chính sách</b> (căn đủ điều kiện). Giữa 31,1ha sông nước, rừng dừa, 10 phút ra phố cổ.</p>
-    </div>
+    <div class="kv-def"><span class="eye">Casamia Balanca Hội An · KĐT Cồn Tiến</span>
+    <h1><small>Biệt thự &amp; nhà vườn compound bên sông Cổ Cò</small>Phố cổ, biển và sông.<br><em>Đều ngay cạnh nhà.</em></h1>
+    <p class="sub">10 phút ra <b>phố cổ Hội An</b>, vài phút ra <b>biển An Bàng, Cửa Đại</b>. Sông Cổ Cò được dẫn vào tận trong khu bằng kênh nội khu 20m, sát <b>rừng dừa Bảy Mẫu</b>. Khu đô thị compound cao ráo, hạ tầng đồng bộ, <b>nhà đã xây hiện hữu</b>, không phải chờ.</p></div>
     <div class="kv-hn"><span class="eye">Casamia Balanca Hội An · dành cho khách ở xa</span>
     <h1><small>Biệt thự sổ hồng lâu dài tại Hội An</small>Ở xa vẫn <em>yên tâm sở hữu.</em></h1>
     <p class="sub">Chủ đầu tư Đạt Phương vận hành và <b>thuê lại theo chính sách</b> (căn đủ điều kiện), <b>miễn phí quản lý 2 năm</b>, 10 đêm lưu trú mỗi năm*. Một tài sản có sổ, để giữ và để lại cho con cháu.</p></div>
@@ -383,7 +389,7 @@ if(k==='hn'||k==='dn')document.documentElement.setAttribute('data-kv',k);}catch(
       <button class="btn btn-o js-open kv-dn" data-title="Đặt lịch đi xem trong ngày" data-need="Đi xem trong ngày (khách Hội An–ĐN)">Đi xem trong ngày</button>
       <button class="btn btn-w js-open kv-dn" data-title="Báo em khi có mưa lớn, em đón đi xem" data-need="Xem dự án mùa mưa">Xem ngay mùa mưa</button>
     </div>
-    <div class="chips"><span><b>Sổ hồng</b> lâu dài</span><span><b>−3,5 tỷ</b> căn bàn giao thô</span><span>Cọc <b>300 triệu</b></span></div>
+    <div class="chips"><span><b>Nhà xây</b> hiện hữu</span><span>Compound <b>363 căn</b></span><span><b>Sổ hồng</b> lâu dài</span></div>
     </div>
     <form class="hero-form f" data-form="Trang chủ – Form đầu trang" novalidate>
       <div class="kv-def"><b class="hf-t">Xem giá căn đẹp trước khi hết</b>
@@ -404,14 +410,27 @@ if(k==='hn'||k==='dn')document.documentElement.setAttribute('data-kv',k);}catch(
 </section>
 
 <div class="nums"><div class="wrap">
-  <div><b>~3,1 tỷ</b><span>Vốn tự có cho Park Home*</span></div>
-  <div><b>0%</b><span>Lãi suất 24 tháng, vay 70%</span></div>
-  <div><b>3 năm</b><span>CĐT thuê lại theo chính sách*</span></div>
-  <div><b>−3,5 tỷ</b><span>Chiết khấu căn bàn giao thô</span></div>
-  <div class="cta-cell"><button class="btn btn-o js-open" data-title="Tính vốn tự có &amp; dòng tiền cho căn tôi chọn" data-need="Tính vốn tự có + dòng tiền">Tính cho căn của tôi</button></div>
+  <div><b>10′</b><span>Phố cổ Hội An</span></div>
+  <div><b>~5 km</b><span>Biển An Bàng</span></div>
+  <div><b>7′</b><span>Biển Cửa Đại</span></div>
+  <div><b>20m</b><span>Kênh dẫn sông vào trong khu</span></div>
+  <div class="cta-cell"><button class="btn btn-o js-open" data-title="Nhận video vị trí &amp; nhà thực tế" data-need="Video vị trí + nhà thực tế">Xem nhà thực tế</button></div>
 </div></div>
 
 
+
+<section class="sec vals" id="gia-tri">
+  <div class="wrap">
+    <div class="center"><span class="eye rv">Giá trị đã có sẵn</span><h2 class="rv">Nhìn thấy được, <em>không phải chờ</em></h2></div>
+    <div class="vgrid">
+      <div class="rv"><b>01</b><h3>Vị trí bốn cận</h3><p>Cận phố cổ, cận biển An Bàng – Cửa Đại, cận sông Cổ Cò, cận lộ Võ Chí Công. Cạnh rừng dừa Bảy Mẫu.</p></div>
+      <div class="rv"><b>02</b><h3>Đô thị dẫn sông vào trong</h3><p>Kênh nội khu rộng 20m nối thẳng sông Cổ Cò, chảy qua giữa các phân khu. Nhiều căn có mặt nước trước nhà.</p></div>
+      <div class="rv"><b>03</b><h3>Compound cao ráo, đồng bộ</h3><p>363 căn trong một khu khép kín, có cổng, ban quản lý, hạ tầng điện – viễn thông đi ngầm, cao độ nền theo quy hoạch 1/500.</p></div>
+      <div class="rv"><b>04</b><h3>Nhà đã xây, hiện hữu</h3><p>Đến là xem được nhà thật, công viên, trường mầm non đã hoạt động. Nhận nhà từ cuối 2026, không phải chờ nhiều năm.</p></div>
+    </div>
+    <p class="center rv" style="margin-top:28px"><button class="btn btn-o js-open" data-title="Đặt lịch xem nhà thực tế" data-need="Xem nhà thực tế">Đặt lịch xem nhà thực tế</button></p>
+  </div>
+</section>
 <section class="sec kvs" id="khach">
   <div class="wrap">
     <div class="center"><span class="eye rv">Anh/chị đang ở đâu?</span><h2 class="rv">Mỗi nơi một <em>câu hỏi khác nhau</em></h2></div>
@@ -454,7 +473,7 @@ if(k==='hn'||k==='dn')document.documentElement.setAttribute('data-kv',k);}catch(
 <section class="sec intro center" id="tong-quan">
   <div class="wrap">
     <span class="eye rv">Casamia Balanca là gì?</span>
-    <p class="q rv">Không phải một dự án để <em>ghé chơi</em> vài ngày rồi tiếc. Đây là nơi 363 gia đình được gọi Hội An là <em>nhà</em>: có ban quản lý, có trường cho con, có hàng xóm cùng gu sống.</p>
+    <p class="q rv">Ở Hội An, gần phố cổ thì chật, gần biển thì xa phố. Hiếm nơi có đủ <em>phố cổ, biển, sông và rừng dừa</em> trong vài phút, lại là một khu đô thị <em>đồng bộ, đã xây xong</em>.</p>
     <p class="lead rv" style="margin-top:22px"><strong>Casamia Balanca Hội An</strong> (KĐT Cồn Tiến) là khu đô thị sinh thái thấp tầng của <strong>Công ty CP Đạt Phương Hội An</strong>, tiếp nối khu biệt thự Casamia Hội An đã vận hành tại Võng Nhi. Bao quanh bởi sông Cổ Cò, vịnh Cửa Đại và 3,6ha rừng dừa nước, một trong số ít dự án <strong>bất động sản Hội An</strong> hội đủ cận hải, cận giang, cận lâm, cận lộ.</p>
     <div class="stats rv">
       <div><b>31,1ha</b><span>Quy mô khu đô thị</span></div>
