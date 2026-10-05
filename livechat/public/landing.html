@@ -9,7 +9,7 @@
 <meta property="og:description" content="Khu biệt thự compound Casamia Balanca: riêng tư, an yên, đủ đầy. Nhận mặt bằng, bảng giá & lịch xem nhà mẫu qua Zalo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 <!--
   ẢNH DỰ ÁN: đặt ảnh vào thư mục public/img/ rồi điền đường dẫn vào biến IMAGES ở cuối file.
   FACEBOOK PIXEL / GOOGLE ADS: dán mã theo dõi ngay dưới dòng này. Khi khách gửi form,
@@ -385,6 +385,76 @@
   .cash-sm .commit{margin:22px 0 18px}
   .cash-sm .cm>b{font-size:44px}
   .cash-cta{text-align:center}
+
+  /* ===== Phong cách cao cấp ===== */
+  :root{--serif:"Playfair Display",Georgia,"Times New Roman",serif}
+  h1,h2,.serif{font-family:var(--serif);font-weight:600;letter-spacing:-.3px;font-variant-numeric:lining-nums}
+  .hline b,.ask p b,.dbar-t b,.lv-ic span{font-variant-numeric:lining-nums}
+  h2 em,h1 em{font-style:italic;font-weight:500}
+  section{padding:96px 0}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;letter-spacing:3px;font-size:11.5px}
+  .eyebrow::before{content:"";width:28px;height:1px;background:currentColor;display:inline-block}
+  .lead-text{font-weight:300;font-size:17.5px;line-height:1.75}
+  .btn{letter-spacing:.3px}
+  .btn-line{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}
+  .btn-line:hover{background:var(--navy);color:#fff}
+  .cash .btn-line,.final .btn-line,.policy .btn-line,.dbar .btn-line{color:#fff;border-color:rgba(255,255,255,.6)}
+  /* Hero */
+  .hero.lux{min-height:min(94vh,900px);display:flex;align-items:center;padding:90px 0 110px}
+  .hero.lux .wrap{width:100%}
+  .hero.lux::after{background:linear-gradient(95deg,rgba(6,22,48,.92) 0%,rgba(8,30,66,.66) 45%,rgba(8,30,66,.08) 100%)}
+  .hero.lux h1{font-size:clamp(38px,4.8vw,62px);line-height:1.12;margin:18px 0 22px}
+  .hero.lux h1 em{color:var(--orange)}
+  .hero.lux .sub{font-weight:300;font-size:18px;line-height:1.75;max-width:560px;opacity:.92}
+  .hline{display:flex;gap:0;margin:30px 0 34px;border-top:1px solid rgba(255,255,255,.22);border-bottom:1px solid rgba(255,255,255,.22);max-width:600px}
+  .hline div{flex:1;padding:16px 0 14px;text-align:center;border-right:1px solid rgba(255,255,255,.18)}
+  .hline div:last-child{border-right:0}
+  .hline b{display:block;font-family:var(--serif);font-size:30px;font-weight:600;color:#fff}
+  .hline div>span{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;opacity:.75}
+  .lux-form{background:rgba(255,255,255,.97);border-top:0;border-radius:6px;padding:34px 32px;box-shadow:0 30px 70px rgba(0,0,0,.35)}
+  .form-kicker{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);font-weight:700}
+  .lux-form h3{font-size:28px;margin:8px 0 8px;color:var(--navy)}
+  .form-sub{color:var(--muted);font-size:14.5px;margin:0 0 18px;line-height:1.6}
+  .lux-form .field input,.lux-form .field select{border-radius:4px;border-color:#d7dfeb;background:#fbfcfe}
+  .lux-form .btn,.reserve-form .btn{border-radius:4px}
+  /* Dải ưu đãi */
+  .offer{background:var(--navy-2);position:relative;z-index:3}
+  .offer-in{display:flex;align-items:center;gap:0;color:#fff;cursor:pointer;padding:6px 0}
+  .offer-in>div{flex:1;padding:22px 18px;border-left:1px solid rgba(255,255,255,.12);text-align:center}
+  .offer-in b{display:block;font-size:34px;font-weight:800;line-height:1.1}
+  .offer-in>div span{font-size:13px;opacity:.75}
+  .offer-h{font-family:var(--serif);font-style:italic;font-size:20px;padding-right:24px;line-height:1.3;color:#ffd2ad}
+  .offer-go{padding-left:24px;font-weight:700;color:var(--orange);white-space:nowrap}
+  .offer-in:hover .offer-go{text-decoration:underline}
+  /* Dòng hành động cuối mỗi mục */
+  .ask{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:30px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--orange);border-radius:6px;padding:20px 24px;box-shadow:0 10px 30px rgba(11,42,91,.06)}
+  .ask p{margin:0;color:var(--muted);font-size:15px;max-width:560px}
+  .ask p b{display:block;color:var(--navy);font-family:var(--serif);font-size:21px;font-weight:600;margin-bottom:3px}
+  .ask-btns{display:flex;gap:10px;flex-wrap:wrap}
+  .ask-btns .btn{padding:12px 20px;font-size:15px;border-radius:4px}
+  /* Ảnh bấm được */
+  .js-photo{cursor:pointer}
+  .ph-ask{display:block;font-style:normal;font-weight:700;color:var(--orange);margin-top:6px;font-size:13px;opacity:0;transform:translateY(6px);transition:all .3s}
+  .js-photo:hover .ph-ask,.js-photo:focus .ph-ask{opacity:1;transform:none}
+  /* Đăng ký tham quan giữa trang */
+  .reserve{padding:0;background:var(--navy)}
+  .reserve-in{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;padding:64px 0;color:#fff}
+  .reserve-copy h2{font-size:clamp(28px,3.2vw,40px);margin:10px 0 12px}
+  .reserve-copy h2 em{color:var(--orange)}
+  .reserve-copy p{opacity:.85;font-weight:300;font-size:17px;margin:0}
+  .reserve-form{display:grid;grid-template-columns:1fr 1fr;gap:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);padding:22px;border-radius:6px}
+  .reserve-form .field{margin:0}
+  .reserve-form .btn{grid-column:1/-1}
+  .reserve-form .form-err{grid-column:1/-1;color:#ffb27a;margin:0}
+  /* Thanh liên hệ cố định trên máy tính */
+  .dbar{position:fixed;left:0;right:0;bottom:0;z-index:55;background:rgba(6,22,48,.96);backdrop-filter:blur(8px);color:#fff;transform:translateY(100%);transition:transform .35s ease;box-shadow:0 -10px 30px rgba(0,0,0,.2)}
+  .dbar.show{transform:none}
+  .dbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px}
+  .dbar-t{font-size:14px;opacity:.9}
+  .dbar-t b{font-family:var(--serif);font-size:17px;font-weight:600}
+  .dbar-b{display:flex;gap:10px}
+  .dbar-b .btn{padding:10px 18px;font-size:14px;border-radius:4px}
+  .lv-ic span{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--navy)}
   /* Chính sách theo phân khu */
   .ptabs{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 20px}
   .ptabs button{font:inherit;font-weight:700;font-size:14px;border:1.5px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:999px;padding:10px 16px;cursor:pointer}
@@ -438,7 +508,16 @@
   @media(max-width:960px){
     .hero::after{background:linear-gradient(180deg,rgba(7,29,64,.88),rgba(11,42,91,.78) 60%,rgba(11,42,91,.9))}
     .hero .wrap,.loc .grid,.arch .grid,.final .grid{grid-template-columns:1fr}
-    .cards3,.ways,.prods,.calc,.radius,.commit,.prods.two,.loves,.gmap,.songs{grid-template-columns:1fr}
+    .cards3,.ways,.prods,.calc,.radius,.commit,.prods.two,.loves,.gmap,.songs,.reserve-in{grid-template-columns:1fr}
+    .dbar{display:none}
+    .hero.lux{min-height:0;padding:56px 0 70px}
+    .hero.lux::after{background:linear-gradient(180deg,rgba(6,22,48,.86),rgba(8,30,66,.74) 55%,rgba(6,22,48,.92))}
+    .offer-in{flex-wrap:wrap}.offer-in>div{flex:1 1 50%;border-left:0;border-top:1px solid rgba(255,255,255,.12);padding:16px 10px}.offer-h{width:100%;padding:14px 0 4px;text-align:center}.offer-go{width:100%;text-align:center;padding:12px 0}
+    .offer-in b{font-size:28px}
+    .ph-ask{opacity:1;transform:none}
+    .reserve-form{grid-template-columns:1fr}
+    section{padding:64px 0}
+    .ask{padding:18px}.ask-btns{width:100%}.ask-btns .btn{flex:1}
     .gal{grid-template-columns:1fr 1fr;grid-template-rows:auto}.gal figure{height:220px}.gal .g1{grid-column:1/3;grid-row:auto;height:300px}.gal .g4,.gal .g5{grid-column:auto}
     .gal figcaption{font-size:12.5px;padding:30px 12px 12px}.gal figcaption b{font-size:15px}
     .gmap-side{border-left:0;border-top:4px solid var(--orange)}.gmap-frame,.gmap-frame iframe{min-height:300px}
@@ -463,6 +542,7 @@
     .hero{padding:44px 0 80px}
     .hero p.sub{font-size:16px}
     .hnums b{font-size:21px}
+    .hline b{font-size:22px}.hline div>span{font-size:10px;letter-spacing:1px}
     .cm-sub{grid-template-columns:1fr}.pick{grid-template-columns:1fr}
     .hpol-row{grid-template-columns:1fr 1fr;row-gap:12px}.hpol-row span:nth-child(2){border-right:0}.hpol-row b{font-size:30px}
     .bignum>b{font-size:38px}
@@ -489,50 +569,35 @@
       <a href="#chinh-sach">Chính sách</a>
       <a href="#hoi-dap">Hỏi đáp</a>
     </nav>
-    <a class="call js-tel" href="#">📞 <span class="js-hotline"></span></a>
+    <a class="call js-tel" href="#"><span class="js-hotline"></span></a>
   </div>
 </header>
 
 <!-- HERO -->
-<section class="hero" data-chat-topic="off">
+<section class="hero lux" data-chat-topic="off">
   <div class="hero-bg" style="background-image:url('img/forestside.jpg')"></div>
   <div class="wrap">
-    <div>
-      <span class="eyebrow">Khu biệt thự compound · Rừng dừa Bảy Mẫu · Hội An</span>
-      <h1><span class="js-count" data-to="31.1" data-dec="1">31,1</span> ha rừng dừa. Chỉ <em class="shine-w">363 gia đình</em> được gọi nơi này là nhà.</h1>
-      <p class="sub">Sáng nghe tiếng chim trong rừng dừa, tối nghe tiếng sông trước hiên nhà. Khu biệt thự có ban quản lý, Clubhouse hồ bơi &amp; gym, cách phố cổ khoảng 10 phút. <b>Chất lượng sống mà phố thị không có.</b></p>
-      <div class="hpol js-open" data-title="Nhận chính sách bán hàng đầy đủ & bảng giá" data-need="Chính sách bán hàng" role="button" tabindex="0">
-        <div class="hpol-h">🎁 Ưu đãi mua nhà từ 09/2026</div>
-        <div class="hpol-row">
-          <span>Đặt cọc chỉ<b class="shine">300tr</b><i>giữ căn</i></span>
-          <span>Lãi suất<b class="shine">0%</b><i>24 tháng · vay 70%</i></span>
-          <span>Chiết khấu tới<b class="shine">4 tỷ</b><i>khi nhận bàn giao thô</i></span>
-          <span>Miễn phí<b class="shine">2 năm</b><i>phí quản lý khu đô thị</i></span>
-        </div>
-        <div class="hpol-cta">Xem chính sách đầy đủ &amp; bảng giá →</div>
-      </div>
-      <div class="hnums h4">
-        <div><b>~<span class="js-count" data-to="12" data-dec="0">12</span> căn/ha</b><span>mật độ thấp: <u>363 căn</u> trên 31,1 ha</span></div>
-        <div><b>0 km</b><span>rừng dừa Bảy Mẫu <u>ngay trước cửa</u></span></div>
-        <div><b>~10 phút</b><span>ra phố cổ Hội An (di sản UNESCO)</span></div>
-        <div><b>~5 km</b><span>ra biển An Bàng &amp; Cửa Đại</span></div>
+    <div class="hero-copy">
+      <span class="eyebrow">Casamia Balanca · Hội An</span>
+      <h1 class="serif"><span class="js-count" data-to="31.1" data-dec="1">31,1</span> ha sông nước &amp; rừng dừa.<br><em>Chỉ 363 gia đình.</em></h1>
+      <p class="sub">Một khu biệt thự compound khép kín, tách biệt khỏi phố thị ồn ào, nhưng chỉ cách phố cổ Hội An khoảng 10 phút. Nơi mỗi ngày đều chậm rãi, riêng tư và trọn vẹn.</p>
+      <div class="hline">
+        <div><b><span class="js-count" data-to="363" data-dec="0">363</span></b><span>căn biệt thự</span></div>
+        <div><b>~12</b><span>căn / ha</span></div>
+        <div><b>0 km</b><span>tới rừng dừa</span></div>
+        <div><b>10'</b><span>tới phố cổ</span></div>
       </div>
       <div class="ctas">
-        <button class="btn btn-orange pulse js-open" data-title="Đặt lịch xem nhà mẫu – đón tận nơi" data-need="Đặt lịch xem nhà mẫu">📅 Đặt lịch xem nhà mẫu →</button>
-        <a class="btn btn-ghost" href="#song">Sống ở đây thế nào? ↓</a>
+        <button class="btn btn-orange js-open" data-title="Đặt lịch tham quan riêng – có xe đón" data-need="Đặt lịch tham quan riêng">Đặt lịch tham quan riêng</button>
+        <a class="btn btn-ghost" href="#khong-gian">Xem không gian sống ↓</a>
       </div>
-      <div class="qc qc-hero"><a class="qc-call js-tel" href="#">📞 Gọi <span class="js-hotline"></span></a><a class="qc-zalo js-zalo" href="#" target="_blank" rel="noopener">💬 Chat Zalo ngay</a>
-      </div>
+      <div class="qc qc-hero"><a class="qc-call js-tel" href="#">Gọi <span class="js-hotline"></span></a><a class="qc-zalo js-zalo" href="#" target="_blank" rel="noopener">Chat Zalo</a></div>
     </div>
-    <div class="card-form" id="form-top">
+    <div class="card-form lux-form" id="form-top">
       <form class="js-lead" data-form="Hero">
-        <div class="hot">🔥 Bảng hàng tháng này</div>
-        <h3>Nhận trọn bộ trong 5 phút qua Zalo</h3>
-        <ul class="gets">
-          <li><span>①</span> Bảng giá &amp; căn còn trống Forestside / Parkhome</li>
-          <li><span>②</span> Mặt bằng, layout &amp; phối cảnh tiện ích nội khu</li>
-          <li><span>③</span> Chính sách, tiến độ thanh toán &amp; lịch xem nhà mẫu</li>
-        </ul>
+        <span class="form-kicker">Dành riêng cho khách quan tâm</span>
+        <h3 class="serif">Đăng ký tham quan riêng</h3>
+        <p class="form-sub">Nhận mặt bằng, bảng giá căn còn trống và lịch xem nhà mẫu. Em gửi qua Zalo trong 5 phút.</p>
         <label class="field"><input name="name" placeholder="Họ và tên" autocomplete="name" maxlength="80"></label>
         <label class="field"><input name="phone" type="tel" placeholder="Số điện thoại / Zalo *" autocomplete="tel" required maxlength="20"></label>
         <label class="field"><select name="need">
@@ -543,41 +608,46 @@
           <option>Đầu tư nhận tiền thuê hằng tháng</option>
         </select></label>
         <div class="form-err"></div>
-        <button class="btn btn-orange btn-block">Gửi tài liệu cho tôi ngay</button>
-        <p class="micro">🔒 Thông tin được bảo mật. Chỉ gửi đúng tài liệu anh/chị yêu cầu.</p>
+        <button class="btn btn-orange btn-block">Giữ lịch tham quan</button>
+        <p class="micro">Thông tin được bảo mật, chỉ dùng để tư vấn dự án.</p>
       </form>
-      <div class="qc-or">hoặc liên hệ ngay</div>
-      <div class="qc"><a class="qc-call js-tel" href="#">📞 Gọi <span class="js-hotline"></span></a><a class="qc-zalo js-zalo" href="#" target="_blank" rel="noopener">💬 Chat Zalo</a></div>
     </div>
   </div>
 </section>
 
-<!-- STATS -->
-<div class="stats">
+<!-- ƯU ĐÃI -->
+<div class="offer">
   <div class="wrap">
-    <div class="grid">
-      <div class="it"><b><span class="js-count" data-to="31.1" data-dec="1">31,1</span><em> ha</em></b><span>giữa rừng dừa Bảy Mẫu</span></div>
-      <div class="it"><b><span class="js-count" data-to="363" data-dec="0">363</span></b><span>gia đình – một cộng đồng chọn lọc</span></div>
-      <div class="it"><b>~12<em> căn/ha</em></b><span>mật độ thấp, nhiều khoảng xanh</span></div>
-      <div class="it"><b>2026<em>–27</em></b><span>nhận nhà về ở</span></div>
+    <div class="offer-in js-open" data-title="Nhận chính sách bán hàng đầy đủ & bảng giá" data-need="Chính sách bán hàng" role="button" tabindex="0">
+      <span class="offer-h">Ưu đãi mua nhà<br>từ 09/2026</span>
+      <div><b class="shine">300tr</b><span>đặt cọc giữ căn</span></div>
+      <div><b class="shine">0%</b><span>lãi suất 24 tháng</span></div>
+      <div><b class="shine">4 tỷ</b><span>chiết khấu tối đa</span></div>
+      <div><b class="shine">2 năm</b><span>miễn phí phí quản lý</span></div>
+      <span class="offer-go">Xem chính sách →</span>
     </div>
   </div>
 </div>
 
 <!-- ẢNH: CẢM XÚC -->
-<section class="gallery" data-chat-topic="thiết kế sản phẩm">
+<section class="gallery" id="khong-gian" data-chat-topic="thiết kế sản phẩm">
   <div class="wrap">
-    <span class="eyebrow">Hãy hình dung</span>
+    <span class="eyebrow">Không gian sống</span>
     <h2>Không chỉ là một căn nhà, <em>là nơi cả nhà muốn quay về</em></h2>
+    <p class="lead-text">Bấm vào không gian anh/chị thích, em gửi ảnh thực tế và những căn có góc nhìn tương tự.</p>
     <div class="gal">
-      <figure class="g1 reveal"><img src="img/terrace.jpg" alt="Sân hiên ven sông lúc hoàng hôn" loading="lazy"><figcaption><b>Hoàng hôn trên sân hiên riêng</b>Gió sông, mặt nước vàng óng và một tách trà. Khoảnh khắc mà phố thị không có.</figcaption></figure>
-      <figure class="g2 reveal"><img src="img/forestside.jpg" alt="Biệt thự Forestside ven sông" loading="lazy"><figcaption><b>Biệt thự ven sông giữa rừng dừa</b>Bước ra là mặt nước, ngẩng lên là hàng dừa.</figcaption></figure>
-      <figure class="g3 reveal"><img src="img/waterway.jpg" alt="Dãy biệt thự soi bóng mặt nước" loading="lazy"><figcaption><b>Cả dãy biệt thự soi bóng mặt nước</b>Buổi tối lên đèn, đẹp như một khu nghỉ dưỡng.</figcaption></figure>
-      <figure class="g4 reveal"><img src="img/parkhome.jpg" alt="Phố vườn Parkhome ngập hoa giấy" loading="lazy"><figcaption><b>Phố vườn ngập hoa giấy</b>Trẻ con chạy chơi, người lớn dạo bộ dưới tán cây.</figcaption></figure>
-      <figure class="g5 reveal"><img src="img/interior.jpg" alt="Phòng khách mở ra khu vườn" loading="lazy"><figcaption><b>Phòng khách mở ra khu vườn</b>Kéo cửa kính là thiên nhiên tràn vào nhà.</figcaption></figure>
+      <figure data-title="Thích không gian: Hoàng hôn trên sân hiên riêng?" data-need="Ảnh: Hoàng hôn trên sân hiên riêng" role="button" tabindex="0" class="js-photo g1 reveal"><img src="img/terrace.jpg" alt="Sân hiên ven sông lúc hoàng hôn" loading="lazy"><figcaption><b>Hoàng hôn trên sân hiên riêng</b>Gió sông, mặt nước vàng óng và một tách trà. Khoảnh khắc mà phố thị không có.<i class="ph-ask">Hỏi về không gian này →</i></figcaption></figure>
+      <figure data-title="Thích không gian: Biệt thự ven sông giữa rừng dừa?" data-need="Ảnh: Biệt thự ven sông giữa rừng dừa" role="button" tabindex="0" class="js-photo g2 reveal"><img src="img/forestside.jpg" alt="Biệt thự Forestside ven sông" loading="lazy"><figcaption><b>Biệt thự ven sông giữa rừng dừa</b>Bước ra là mặt nước, ngẩng lên là hàng dừa.<i class="ph-ask">Hỏi về không gian này →</i></figcaption></figure>
+      <figure data-title="Thích không gian: Cả dãy biệt thự soi bóng mặt nước?" data-need="Ảnh: Cả dãy biệt thự soi bóng mặt nước" role="button" tabindex="0" class="js-photo g3 reveal"><img src="img/waterway.jpg" alt="Dãy biệt thự soi bóng mặt nước" loading="lazy"><figcaption><b>Cả dãy biệt thự soi bóng mặt nước</b>Buổi tối lên đèn, đẹp như một khu nghỉ dưỡng.<i class="ph-ask">Hỏi về không gian này →</i></figcaption></figure>
+      <figure data-title="Thích không gian: Phố vườn ngập hoa giấy?" data-need="Ảnh: Phố vườn ngập hoa giấy" role="button" tabindex="0" class="js-photo g4 reveal"><img src="img/parkhome.jpg" alt="Phố vườn Parkhome ngập hoa giấy" loading="lazy"><figcaption><b>Phố vườn ngập hoa giấy</b>Trẻ con chạy chơi, người lớn dạo bộ dưới tán cây.<i class="ph-ask">Hỏi về không gian này →</i></figcaption></figure>
+      <figure data-title="Thích không gian: Phòng khách mở ra khu vườn?" data-need="Ảnh: Phòng khách mở ra khu vườn" role="button" tabindex="0" class="js-photo g5 reveal"><img src="img/interior.jpg" alt="Phòng khách mở ra khu vườn" loading="lazy"><figcaption><b>Phòng khách mở ra khu vườn</b>Kéo cửa kính là thiên nhiên tràn vào nhà.<i class="ph-ask">Hỏi về không gian này →</i></figcaption></figure>
     </div>
     <p class="src" style="color:var(--muted)">Hình ảnh phối cảnh minh hoạ.</p>
-    <div style="text-align:center;margin-top:18px"><button class="btn btn-orange js-open" data-title="Nhận trọn bộ ảnh & video thực tế" data-need="Ảnh & video dự án">📸 Nhận trọn bộ ảnh &amp; video thực tế →</button></div>
+        <div class="ask reveal">
+      <p><b>Thích một không gian trong số này?</b>Em gửi trọn bộ ảnh thực tế, video và căn có góc nhìn tương tự.</p>
+      <div class="ask-btns"><button class="btn btn-orange js-ask" data-ask="Em muốn xem thêm ảnh thực tế và video của dự án">Hỏi ngay</button><button class="btn btn-line js-open" data-title="Nhận trọn bộ ảnh & video thực tế" data-need="Ảnh & video dự án">Nhận tư vấn</button><a class="btn btn-line js-tel" href="#">Gọi ngay</a></div>
+    </div>
+
   </div>
 </section>
 
@@ -585,8 +655,8 @@
 <section class="song" id="song" data-chat-topic="tiện ích vị trí">
   <div class="wrap">
     <span class="eyebrow">Sống trong khu compound</span>
-    <h2>Riêng tư, an yên, đủ đầy: <em>chất lượng sống trong từng con số</em></h2>
-    <p class="lead-text">Không chen chúc như chung cư, không ồn ào như phố. Một khu biệt thự khép kín giữa thiên nhiên, có quản lý, có tiện ích, có hàng xóm cùng nếp sống.</p>
+    <h2>Tách biệt để riêng tư. <em>Gần đủ để tiện nghi.</em></h2>
+    <p class="lead-text">Sông nước và rừng dừa bao quanh tạo nên một khu biệt thự khép kín, yên tĩnh như một khu nghỉ dưỡng riêng. Có ban quản lý, có Clubhouse, có hàng xóm cùng nếp sống. Phố cổ, biển và sân bay vẫn chỉ cách một quãng ngắn.</p>
     <div class="songs">
       <div class="sg reveal"><b class="shine">~12</b><span>căn / ha</span><h3>Mật độ thấp, nhiều khoảng xanh</h3><p>31,1 ha chỉ có 363 căn. Nhà thưa, cây nhiều, gió sông thổi qua từng ngõ.</p></div>
       <div class="sg reveal"><b class="shine">363</b><span>gia đình</span><h3>Một cộng đồng chọn lọc</h3><p>Hàng xóm cùng nếp sống chậm, trẻ con có bạn chơi, người lớn có bạn dạo bộ mỗi chiều.</p></div>
@@ -595,9 +665,29 @@
       <div class="sg reveal"><b class="shine">0 km</b><span>tới rừng dừa</span><h3>Thiên nhiên bao quanh</h3><p>Rừng dừa Bảy Mẫu thuộc khu dự trữ sinh quyển thế giới, sông nước bao quanh, không khí trong lành quanh năm.</p></div>
       <div class="sg reveal"><b class="shine">VTN</b><span>kiến trúc</span><h3>Nhà mang hồn Hội An</h3><p>Tư vấn thiết kế VTN Architects (Võ Trọng Nghĩa): mở, xanh, đón gió và ánh sáng tự nhiên.</p></div>
     </div>
-    <div class="song-cta reveal">
-      <div><b>Muốn biết sống ở đây thực tế ra sao?</b><p>Em gửi quy hoạch tổng thể, danh sách tiện ích nội khu, quy định vận hành khu và đón anh/chị đi xem tận nơi.</p></div>
-      <div class="pol-act"><button class="btn btn-orange js-open" data-title="Nhận quy hoạch, tiện ích nội khu & lịch xem nhà mẫu" data-need="Mua để ở – tìm hiểu khu compound">Nhận quy hoạch &amp; lịch xem nhà →</button></div>
+    <div class="ask reveal">
+      <p><b>Muốn biết sống ở đây thực tế ra sao?</b>Em gửi quy hoạch tổng thể, tiện ích nội khu, quy định vận hành khu và đón anh/chị đi xem tận nơi.</p>
+      <div class="ask-btns"><button class="btn btn-orange js-ask" data-ask="Cho em hỏi về tiện ích nội khu và quy định vận hành của khu">Hỏi ngay</button><button class="btn btn-line js-open" data-title="Nhận quy hoạch, tiện ích nội khu & lịch xem nhà" data-need="Mua để ở – tìm hiểu khu compound">Nhận tư vấn</button><a class="btn btn-line js-tel" href="#">Gọi ngay</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ĐĂNG KÝ THAM QUAN -->
+<section class="reserve">
+  <div class="wrap">
+    <div class="reserve-in reveal">
+      <div class="reserve-copy">
+        <span class="eyebrow">Tham quan riêng</span>
+        <h2 class="serif">Cảm nhận tận nơi, <em>trước khi quyết định</em></h2>
+        <p>Đón tận nơi tại Đà Nẵng hoặc Hội An, đi xem nhà mẫu, Clubhouse và từng phân khu. Miễn phí, không ràng buộc.</p>
+      </div>
+      <form class="js-lead reserve-form" data-form="Giữa trang">
+        <input type="hidden" name="need" value="Đặt lịch tham quan riêng">
+        <label class="field"><input name="name" placeholder="Họ và tên" autocomplete="name" maxlength="80"></label>
+        <label class="field"><input name="phone" type="tel" placeholder="Số điện thoại / Zalo *" autocomplete="tel" required maxlength="20"></label>
+        <button class="btn btn-orange">Giữ lịch tham quan</button>
+        <div class="form-err"></div>
+      </form>
     </div>
   </div>
 </section>
@@ -614,7 +704,11 @@
       <div class="tl reveal"><time>20:00</time><div><img class="tl-img" src="img/waterway.jpg" alt="" loading="lazy"><h3>Bữa tối trong căn nhà của mình</h3><p>Ba thế hệ quây quần trong khu vườn riêng: không phòng khách sạn chật chội, không giờ trả phòng.</p></div></div>
       <div class="tl hl reveal"><time>Mỗi ngày</time><div><h3>Không phải kỳ nghỉ, mà là cuộc sống</h3><p>Ở hẳn, hay về mỗi cuối tuần, đều được. Khi cả nhà đi vắng, <b>ban quản lý vẫn chăm sóc khu</b>: về là ở, không phải dọn dẹp.</p></div></div>
     </div>
-    <div style="text-align:center;margin-top:30px"><button class="btn btn-orange js-open" data-title="Tôi muốn sở hữu một căn như thế" data-need="Mua để nghỉ dưỡng gia đình">Tôi muốn một ngày như thế →</button></div>
+    <div style="margin-top:30px">    <div class="ask reveal">
+      <p><b>Anh/chị muốn những ngày như thế?</b>Em tư vấn căn hợp với gia đình mình: số người, phong cách sống, ngân sách.</p>
+      <div class="ask-btns"><button class="btn btn-orange js-ask" data-ask="Em muốn tìm căn phù hợp gia đình mình">Hỏi ngay</button><button class="btn btn-line js-open" data-title="Tìm căn phù hợp gia đình tôi" data-need="Mua để ở / an cư">Nhận tư vấn</button><a class="btn btn-line js-tel" href="#">Gọi ngay</a></div>
+    </div>
+</div>
   </div>
 </section>
 
@@ -626,50 +720,51 @@
     <p class="lead-text">Mỗi tiện ích có 2 giá trị: cho gia đình anh/chị khi về nghỉ, và cho khách thuê khi anh/chị vắng nhà.</p>
     <div class="lens" role="tablist">
       <button data-l="both">Cả hai</button>
-      <button class="on" data-l="live">🏡 Khi về ở</button>
-      <button data-l="rent">💰 Khi cho thuê</button>
+      <button class="on" data-l="live">Khi về ở</button>
+      <button data-l="rent">Khi cho thuê</button>
     </div>
     <div class="loves js-loves l-live">
       <article class="lv lv-wide reveal">
         <div class="lv-img" data-img="architecture" style="background-image:url('img/terrace.jpg')"><span>Theo phối cảnh</span></div>
-        <h3>🛥️ Biệt thự ven sông, sân hiên ngắm hoàng hôn</h3>
+        <h3>Biệt thự ven sông, sân hiên ngắm hoàng hôn</h3>
         <p class="live">Bữa tối ngoài sân hiên, ngắm hoàng hôn trên mặt nước. Không gian riêng tư cho ba thế hệ.</p>
         <p class="rent">Một tấm ảnh hoàng hôn từ sân hiên ven sông là <b>"đặc sản" giúp khách chốt đặt phòng</b> nhanh hơn, dễ đặt giá thuê cao hơn.</p>
       </article>
       <article class="lv reveal">
-        <div class="lv-ic">🌴</div>
+        <div class="lv-ic"><span>Rừng dừa</span></div>
         <h3>Rừng dừa Bảy Mẫu ngay trước cửa</h3>
         <p class="live">Sáng đi bộ dưới hàng dừa, chiều cùng con đi thuyền thúng. Không khí trong lành giữa khu dự trữ sinh quyển thế giới.</p>
         <p class="rent">Thuyền thúng rừng dừa là trải nghiệm nhiều khách quốc tế tìm đến Hội An. Ở ngay đó là <b>lợi thế lớn khi khách chọn chỗ ở</b>.</p>
       </article>
       <article class="lv reveal">
-        <div class="lv-ic">🏊</div>
+        <div class="lv-ic"><span>Clubhouse</span></div>
         <h3>Clubhouse Casamia: Fitness &amp; Pool</h3>
         <p class="live">Tập gym, bơi lội như ở resort. <b>Miễn phí 1 năm</b> cho chủ nhà.</p>
         <p class="rent">Khách thuê dài hạn (chuyên gia, gia đình nước ngoài) <b>luôn hỏi gym và hồ bơi</b>. Có sẵn thì dễ cho thuê theo tháng.</p>
       </article>
       <article class="lv reveal">
-        <div class="lv-ic">🏮</div>
+        <div class="lv-ic"><span>Phố cổ</span></div>
         <h3>Phố cổ Hội An ~10 phút</h3>
         <p class="live">Tối dạo phố đèn lồng, ăn cao lầu, mì Quảng rồi về nhà trong vài phút, không chen chúc.</p>
         <p class="rent">Phố cổ là lý do chính trong <b>4,4 triệu lượt khách</b> đến Hội An mỗi năm. Gần phố cổ nhưng yên tĩnh là điều khách rất thích.</p>
       </article>
       <article class="lv reveal">
-        <div class="lv-ic">🌊</div>
+        <div class="lv-ic"><span>Biển</span></div>
         <h3>Biển An Bàng &amp; Cửa Đại ~5 km</h3>
         <p class="live">Cuối tuần tắm biển, ăn hải sản, rồi về biệt thự giữa rừng dừa.</p>
         <p class="rent">Combo <b>"rừng – sông – biển – phố cổ"</b> trong một chuyến đi là thứ khách gia đình, nhóm bạn tìm, và họ ở lâu hơn.</p>
       </article>
       <article class="lv reveal">
-        <div class="lv-ic">🔑</div>
+        <div class="lv-ic"><span>Vận hành</span></div>
         <h3>Chủ đầu tư vận hành giúp</h3>
         <p class="live"><b>10 đêm nghỉ miễn phí mỗi năm</b> (ủy thác), <b>miễn phí 2 năm</b> phí quản lý. Về là ở, không lo dọn dẹp.</p>
         <p class="rent">Không tự tìm khách, không quản lý. Nhận <b>45% doanh thu</b>, tối thiểu <b>50–60 triệu/tháng</b> theo hợp đồng.</p>
       </article>
     </div>
-    <div class="love-cta reveal">
-      <p>✈️ Sân bay quốc tế Đà Nẵng ~30 km · 🏝️ Cù Lao Chàm đi ca nô từ Cửa Đại · 🥬 Làng rau Trà Quế · 🛶 Sông Hoài</p>
-      <button class="btn btn-orange js-open" data-title="Nhận danh sách & phối cảnh tiện ích" data-need="Tiện ích">Nhận bộ ảnh tiện ích &amp; video thực tế →</button>
+    <p class="src" style="color:var(--muted);margin-top:18px">Xa hơn: sân bay quốc tế Đà Nẵng ~30 km · Cù Lao Chàm đi ca nô từ Cửa Đại · làng rau Trà Quế · sông Hoài.</p>
+    <div class="ask reveal">
+      <p><b>Tiện ích nào quan trọng nhất với gia đình anh/chị?</b>Em gửi bản đồ tiện ích nội khu, ngoại khu và khoảng cách thực tế từ từng căn.</p>
+      <div class="ask-btns"><button class="btn btn-orange js-ask" data-ask="Cho em xin danh sách tiện ích nội khu và ngoại khu">Hỏi ngay</button><button class="btn btn-line js-open" data-title="Nhận bản đồ tiện ích & khoảng cách thực tế" data-need="Tiện ích">Nhận tư vấn</button><a class="btn btn-line js-tel" href="#">Gọi ngay</a></div>
     </div>
   </div>
 </section>
@@ -696,12 +791,12 @@
       </div>
       <div class="amen">
         <div class="ring-card reveal"><span class="ring-tag">0 km · Ngay tại dự án</span>
-          <ul><li>🌴 <b>Rừng dừa Bảy Mẫu</b> – đi thuyền thúng giữa dừa nước</li><li>🌿 Thuộc <b>khu dự trữ sinh quyển thế giới</b> Cù Lao Chàm – Hội An (UNESCO)</li></ul></div>
+          <ul><li><b>Rừng dừa Bảy Mẫu</b> – đi thuyền thúng giữa dừa nước</li><li>Thuộc <b>khu dự trữ sinh quyển thế giới</b> Cù Lao Chàm – Hội An (UNESCO)</li></ul></div>
         <div class="ring-card reveal"><span class="ring-tag">~5 km · Vài phút di chuyển</span>
-          <ul><li>🏮 <b>Phố cổ Hội An</b> – di sản văn hoá thế giới UNESCO</li><li>🌊 <b>Biển An Bàng</b> &amp; <b>biển Cửa Đại</b></li><li>🥬 Làng rau Trà Quế, chợ đêm, sông Hoài</li></ul></div>
+          <ul><li><b>Phố cổ Hội An</b> – di sản văn hoá thế giới UNESCO</li><li><b>Biển An Bàng</b> &amp; <b>biển Cửa Đại</b></li><li>Làng rau Trà Quế, chợ đêm, sông Hoài</li></ul></div>
         <div class="ring-card reveal"><span class="ring-tag">Xa hơn · Kết nối nhanh</span>
-          <ul><li>🏝️ <b>Cù Lao Chàm</b> – ca nô từ Cửa Đại</li><li>✈️ <b>Sân bay quốc tế Đà Nẵng</b> ~30 km qua trục Võ Chí Công</li><li>🛣️ Trục Võ Chí Công nối Đà Nẵng – Hội An – sân bay Chu Lai</li></ul></div>
-        <div class="ring-card locked-card reveal"><span class="ring-tag">🔒 Tiện ích nội khu</span>
+          <ul><li><b>Cù Lao Chàm</b> – ca nô từ Cửa Đại</li><li><b>Sân bay quốc tế Đà Nẵng</b> ~30 km qua trục Võ Chí Công</li><li>Trục Võ Chí Công nối Đà Nẵng – Hội An – sân bay Chu Lai</li></ul></div>
+        <div class="ring-card locked-card reveal"><span class="ring-tag">Tiện ích nội khu</span>
           <p>Clubhouse Casamia với Fitness &amp; Pool (miễn phí 1 năm cho chủ nhà), danh sách tiện ích nội khu và phối cảnh chi tiết.</p>
           <button class="btn btn-orange js-open" data-title="Nhận danh sách & phối cảnh tiện ích nội khu" data-need="Vị trí & tiện ích">Xem tiện ích nội khu →</button></div>
       </div>
@@ -710,10 +805,10 @@
     <div class="gmap reveal">
       <div class="gmap-frame"><iframe title="Bản đồ Casamia Balanca Hội An" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Casamia%20Balanca%2C%20C%E1%BA%A9m%20Thanh%2C%20H%E1%BB%99i%20An&amp;z=14&amp;output=embed"></iframe></div>
       <div class="gmap-side">
-        <b>📍 Casamia Balanca</b>
+        <b>Casamia Balanca</b>
         <p>Cẩm Thanh, Hội An, giữa rừng dừa Bảy Mẫu. Trục Võ Chí Công nối Đà Nẵng – Hội An – sân bay Chu Lai.</p>
-        <a class="btn btn-navy btn-block" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;destination=Casamia%20Balanca%2C%20C%E1%BA%A9m%20Thanh%2C%20H%E1%BB%99i%20An">🧭 Chỉ đường bằng Google Maps</a>
-        <button class="btn btn-orange btn-block js-open" data-title="Đặt lịch tham quan – đón tận nơi" data-need="Đặt lịch tham quan">📅 Đặt lịch tham quan, đón tận nơi</button>
+        <a class="btn btn-navy btn-block" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;destination=Casamia%20Balanca%2C%20C%E1%BA%A9m%20Thanh%2C%20H%E1%BB%99i%20An">Chỉ đường bằng Google Maps</a>
+        <button class="btn btn-orange btn-block js-open" data-title="Đặt lịch tham quan – đón tận nơi" data-need="Đặt lịch tham quan">Đặt lịch tham quan, đón tận nơi</button>
       </div>
     </div>
   </div>
@@ -724,7 +819,7 @@
   <div class="wrap">
     <span class="eyebrow">Mặt bằng</span>
     <h2>363 căn, nhưng <em>không phải căn nào cũng như nhau</em></h2>
-    <p class="lead-text">Vị trí trong dự án quyết định giá thuê và giá trị tăng thêm. Bấm vào các điểm 🔥 để hỏi về <b>căn key</b>.</p>
+    <p class="lead-text">Vị trí trong dự án quyết định giá thuê và giá trị tăng thêm. Bấm vào các điểm để hỏi về <b>căn key</b>.</p>
     <div class="siteplan reveal">
       <svg viewBox="0 0 900 460" aria-label="Sơ đồ minh hoạ mặt bằng">
         <rect width="900" height="460" fill="#eaf1ea"/>
@@ -746,14 +841,14 @@
         <rect x="690" y="40" width="120" height="110" rx="14" fill="#9fcf98"/><text x="750" y="100" class="lbl">Công viên</text>
         <text x="110" y="425" class="lbl">Sông / rừng dừa</text>
       </svg>
-      <button class="hot-spot" style="left:21%;top:32%" data-title="Hỏi giá căn góc 2 mặt tiền" data-need="Căn key: căn góc 2 mặt tiền"><i></i><span>🔥 Căn góc 2 mặt tiền</span></button>
-      <button class="hot-spot" style="left:64%;top:30%" data-title="Hỏi giá shophouse mặt đường chính" data-need="Căn key: shophouse mặt đường chính"><i></i><span>🔥 Shophouse mặt đường chính</span></button>
-      <button class="hot-spot" style="left:30%;top:72%" data-title="Hỏi giá Forestside sát rừng dừa" data-need="Căn key: Forestside sát rừng dừa"><i></i><span>🔥 Forestside sát rừng dừa</span></button>
-      <button class="hot-spot" style="left:72%;top:12%" data-title="Hỏi giá Parkhome gần công viên" data-need="Căn key: Parkhome gần công viên"><i></i><span>🔥 Parkhome gần công viên</span></button>
+      <button class="hot-spot" style="left:21%;top:32%" data-title="Hỏi giá căn góc 2 mặt tiền" data-need="Căn key: căn góc 2 mặt tiền"><i></i><span>Căn góc 2 mặt tiền</span></button>
+      <button class="hot-spot" style="left:64%;top:30%" data-title="Hỏi giá shophouse mặt đường chính" data-need="Căn key: shophouse mặt đường chính"><i></i><span>Shophouse mặt đường chính</span></button>
+      <button class="hot-spot" style="left:30%;top:72%" data-title="Hỏi giá Forestside sát rừng dừa" data-need="Căn key: Forestside sát rừng dừa"><i></i><span>Forestside sát rừng dừa</span></button>
+      <button class="hot-spot" style="left:72%;top:12%" data-title="Hỏi giá Parkhome gần công viên" data-need="Căn key: Parkhome gần công viên"><i></i><span>Parkhome gần công viên</span></button>
       <div class="legend"><span><i class="l-solo"></i>Forestside Villa</span><span><i class="l-duo"></i>Parkhome</span><span><i class="l-shop"></i>Shophouse</span></div>
     </div>
     <p class="src" style="color:var(--muted)">Sơ đồ minh hoạ để dễ hình dung, không phải mặt bằng chính thức. Mặt bằng tổng thể chính thức và căn còn trống em gửi qua Zalo.</p>
-    <div style="text-align:center;margin-top:18px"><button class="btn btn-navy js-open" data-title="Nhận mặt bằng tổng thể & danh sách căn key còn trống" data-need="Mặt bằng tổng thể">📐 Nhận mặt bằng tổng thể chính thức →</button></div>
+    <div style="text-align:center;margin-top:18px"><button class="btn btn-navy js-open" data-title="Nhận mặt bằng tổng thể & danh sách căn key còn trống" data-need="Mặt bằng tổng thể">Nhận mặt bằng tổng thể chính thức →</button></div>
   </div>
 </section>
 
@@ -771,7 +866,7 @@
           <li><b>Nội thất 2027</b>chiết khấu <strong class="o">400 triệu</strong> · ủy thác <strong class="o">5 năm</strong>, tối thiểu 60tr/tháng, +10 đêm nghỉ/năm</li>
         </ul>
         <ul class="specs"><li>Diện tích đất<b class="blur">███ m²</b></li><li>Số tầng / phòng ngủ<b class="blur">█ tầng · █ PN</b></li><li>Giá từ<b class="blur">██,█ tỷ</b></li></ul>
-        <div class="fp js-open" data-title="Xem layout Forestside Villa" data-need="Layout Forestside Villa"><svg viewBox="0 0 120 70"><rect x="4" y="4" width="112" height="62"/><path d="M60 4v40M4 36h56M60 44h56M86 44v22M30 36v30"/></svg><span>🔒 Xem layout từng tầng</span></div>
+        <div class="fp js-open" data-title="Xem layout Forestside Villa" data-need="Layout Forestside Villa"><svg viewBox="0 0 120 70"><rect x="4" y="4" width="112" height="62"/><path d="M60 4v40M4 36h56M60 44h56M86 44v22M30 36v30"/></svg><span>Xem layout từng tầng</span></div>
         <button class="btn btn-orange js-open" data-title="Nhận giá & layout Forestside Villa" data-need="Forestside Villa – biệt thự rừng dừa">Mở khoá giá &amp; layout</button></div></div>
       <div class="prod reveal"><div class="ph" data-img="villa2" style="background-image:url('img/parkhome.jpg')"><span>Biệt thự sân vườn</span><b class="ph-n">50tr/tháng</b></div><div class="bd">
         <h3>Parkhome</h3><p>Biệt thự trong phố vườn ngập cây xanh và hoa giấy, gần công viên. Hợp gia đình có con nhỏ, ông bà.</p>
@@ -780,7 +875,7 @@
           <li><b>Nội thất 2027</b>chiết khấu <strong class="o">300 triệu</strong>* · ủy thác <strong class="o">5 năm</strong>, tối thiểu 50tr/tháng (quỹ 50 căn)</li>
         </ul>
         <ul class="specs"><li>Diện tích đất<b class="blur">███ m²</b></li><li>Số tầng / phòng ngủ<b class="blur">█ tầng · █ PN</b></li><li>Giá từ<b class="blur">██,█ tỷ</b></li></ul>
-        <div class="fp js-open" data-title="Xem layout Parkhome" data-need="Layout Parkhome"><svg viewBox="0 0 120 70"><rect x="4" y="4" width="112" height="62"/><path d="M50 4v62M4 30h46M50 40h66M84 4v36"/></svg><span>🔒 Xem layout từng tầng</span></div>
+        <div class="fp js-open" data-title="Xem layout Parkhome" data-need="Layout Parkhome"><svg viewBox="0 0 120 70"><rect x="4" y="4" width="112" height="62"/><path d="M50 4v62M4 30h46M50 40h66M84 4v36"/></svg><span>Xem layout từng tầng</span></div>
         <button class="btn btn-orange js-open" data-title="Nhận giá & layout Parkhome" data-need="Parkhome – biệt thự sân vườn">Mở khoá giá &amp; layout</button></div></div>
     </div>
     <p class="src" style="color:var(--muted)">* Áp dụng với quỹ căn trong danh sách quy định của chủ đầu tư.</p>
@@ -801,8 +896,8 @@
     </div>
     <div class="pbody js-pbody"></div>
     <div class="pol-cta reveal">
-      <div><b>📩 Bản chính sách gốc + bảng tính theo căn</b><p>Em gửi file chính sách chính thức, bảng giá căn còn trống và bảng tính dòng tiền đã trừ chiết khấu, đúng căn anh/chị chọn.</p></div>
-      <div class="pol-act"><button class="btn btn-orange pulse js-open" data-title="Nhận file chính sách & bảng tính theo căn" data-need="Chính sách bán hàng">Nhận chính sách &amp; bảng giá →</button><div class="qc"><a class="qc-call js-tel" href="#">📞 Gọi <span class="js-hotline"></span></a><a class="qc-zalo js-zalo" href="#" target="_blank" rel="noopener">💬 Chat Zalo</a></div></div>
+      <div><b>Bản chính sách gốc + bảng tính theo căn</b><p>Em gửi file chính sách chính thức, bảng giá căn còn trống và bảng tính dòng tiền đã trừ chiết khấu, đúng căn anh/chị chọn.</p></div>
+      <div class="pol-act"><button class="btn btn-orange pulse js-open" data-title="Nhận file chính sách & bảng tính theo căn" data-need="Chính sách bán hàng">Nhận chính sách &amp; bảng giá →</button><div class="qc"><a class="qc-call js-tel" href="#">Gọi <span class="js-hotline"></span></a><a class="qc-zalo js-zalo" href="#" target="_blank" rel="noopener">Chat Zalo</a></div></div>
     </div>
     <p class="src">Áp dụng từ 09/09/2026 đến khi có chính sách bán hàng thay thế. Điều kiện chi tiết theo hợp đồng với chủ đầu tư.</p>
   </div>
@@ -816,10 +911,10 @@
       <h2>Kiến trúc mang <em>hồn Hội An</em></h2>
       <p class="lead-text">Lấy cảm hứng từ ngói nâu đất, sắc xanh cây lá và chất liệu gốm ánh kim của Hội An. Dự án có sự tham gia tư vấn thiết kế của VTN Architects – kiến trúc sư Võ Trọng Nghĩa.</p>
       <p class="quote">“Không chỉ là một căn nhà – là nơi gia đình muốn quay về mỗi kỳ nghỉ.”</p>
-      <button class="btn btn-navy js-open" data-title="Nhận bộ ảnh phối cảnh & video dự án" data-need="Mua để nghỉ dưỡng gia đình">Xem bộ ảnh &amp; video dự án →</button>
+      <button class="btn btn-navy js-open" data-title="Nhận bộ ảnh phối cảnh & video dự án" data-need="Ảnh & video dự án">Xem bộ ảnh &amp; video dự án →</button> <button class="btn btn-line js-ask" data-ask="Cho em hỏi về thiết kế và vật liệu của biệt thự">Hỏi ngay</button>
     </div>
     <div class="visual reveal" data-img="architecture" style="background-image:url('img/terrace.jpg')">
-      <div class="tag">🏡 Thiết kế nhiệt đới, xanh, mở</div>
+      <div class="tag">Thiết kế nhiệt đới, xanh, mở</div>
     </div>
   </div>
 </section>
@@ -831,10 +926,10 @@
     <h2>Muốn biết chắc <em>trước khi xuống tiền?</em></h2>
     <p class="lead-text">Anh/chị không cần tin lời quảng cáo. Em gửi đầy đủ hồ sơ để anh/chị tự kiểm tra:</p>
     <div class="checks">
-      <div><i>✓</i>Hồ sơ pháp lý dự án</div>
-      <div><i>✓</i>Ảnh &amp; video tiến độ thi công mới nhất</div>
-      <div><i>✓</i>Mẫu hợp đồng &amp; tiến độ thanh toán</div>
-      <div><i>✓</i>Thông tin chủ đầu tư Đạt Phương</div>
+      <div><i></i>Hồ sơ pháp lý dự án</div>
+      <div><i></i>Ảnh &amp; video tiến độ thi công mới nhất</div>
+      <div><i></i>Mẫu hợp đồng &amp; tiến độ thanh toán</div>
+      <div><i></i>Thông tin chủ đầu tư Đạt Phương</div>
     </div>
     <button class="btn btn-orange js-open" data-title="Nhận bộ hồ sơ pháp lý & tiến độ" data-need="Pháp lý & tiến độ">Nhận bộ hồ sơ để tự kiểm tra →</button>
   </div>
@@ -847,7 +942,7 @@
       <h2>Đi xem thực tế – trước khi quyết định</h2>
       <p>Đón tận nơi tại Đà Nẵng / Hội An, xem dự án và khu vực xung quanh. Hoàn toàn miễn phí.</p>
     </div>
-    <div class="pol-act"><button class="btn js-open" data-title="Đặt lịch tham quan dự án" data-need="Đặt lịch tham quan">📅 Đặt lịch tham quan</button><div class="qc qc-light"><a class="qc-call js-tel" href="#">📞 Gọi <span class="js-hotline"></span></a><a class="qc-zalo js-zalo" href="#" target="_blank" rel="noopener">💬 Chat Zalo</a></div></div>
+    <div class="pol-act"><button class="btn js-open" data-title="Đặt lịch tham quan dự án" data-need="Đặt lịch tham quan">Đặt lịch tham quan</button><div class="qc qc-light"><a class="qc-call js-tel" href="#">Gọi <span class="js-hotline"></span></a><a class="qc-zalo js-zalo" href="#" target="_blank" rel="noopener">Chat Zalo</a></div></div>
   </div>
 </section>
 
@@ -892,7 +987,7 @@
     <details><summary>Cần bao nhiêu tiền ban đầu?</summary><p>Đặt cọc 300 triệu. Nếu vay ngân hàng, anh/chị tự thanh toán khoảng 30% (cọc + ký HĐMB + 1 đợt), ngân hàng hỗ trợ tới 70% với lãi suất 0% và ân hạn nợ gốc trong 24 tháng.</p></details>
     <details><summary>Không vay thì có ưu đãi gì?</summary><p>Thanh toán sớm 95% được chiết khấu thêm 2–5% tuỳ phân khu, cộng lãi suất 11% cho phần thanh toán sớm. Miễn phí 2 năm phí quản lý và 1 năm Fitness &amp; Pool tại Clubhouse Casamia.</p></details>
     <details><summary>Ở xa có xem được dự án không?</summary><p>Được ạ. Em gửi video thực tế, có thể gọi video trực tiếp tại dự án, hoặc đón anh/chị tham quan khi tiện.</p></details>
-    <p style="margin-top:24px"><button class="link-cta js-chat">💬 Câu hỏi khác? Chat với tư vấn viên ngay →</button></p>
+    <p style="margin-top:24px"><button class="link-cta js-chat">Câu hỏi khác? Chat với tư vấn viên ngay →</button></p>
   </div>
 </section>
 
@@ -924,10 +1019,10 @@
         </select></label>
         <div class="form-err"></div>
         <button class="btn btn-orange btn-block pulse">Nhận tài liệu ngay</button>
-        <p class="micro">🔒 Thông tin được bảo mật tuyệt đối.</p>
+        <p class="micro">Thông tin được bảo mật tuyệt đối.</p>
       </form>
       <div class="qc-or">hoặc liên hệ ngay</div>
-      <div class="qc"><a class="qc-call js-tel" href="#">📞 Gọi <span class="js-hotline"></span></a><a class="qc-zalo js-zalo" href="#" target="_blank" rel="noopener">💬 Chat Zalo</a></div>
+      <div class="qc"><a class="qc-call js-tel" href="#">Gọi <span class="js-hotline"></span></a><a class="qc-zalo js-zalo" href="#" target="_blank" rel="noopener">Chat Zalo</a></div>
     </div>
   </div>
 </section>
@@ -940,9 +1035,21 @@
   </div>
 </footer>
 
+<!-- Thanh liên hệ cố định trên máy tính -->
+<div class="dbar">
+  <div class="wrap">
+    <span class="dbar-t"><b>Casamia Balanca</b> · Chỉ 363 căn biệt thự compound · Ưu đãi từ 09/2026</span>
+    <div class="dbar-b">
+      <button class="btn btn-line js-ask" data-ask="Em muốn được tư vấn về Casamia Balanca">Hỏi ngay</button>
+      <a class="btn btn-line js-tel" href="#">Gọi <span class="js-hotline"></span></a>
+      <button class="btn btn-orange js-open" data-title="Đặt lịch tham quan riêng – có xe đón" data-need="Đặt lịch tham quan riêng">Đặt lịch tham quan</button>
+    </div>
+  </div>
+</div>
+
 <!-- Thanh liên hệ trên điện thoại -->
 <div class="mbar">
-  <a class="c1 js-tel" href="#">📞 Gọi</a>
+  <a class="c1 js-tel" href="#">Gọi</a>
   <a class="c2 js-zalo" href="#" target="_blank" rel="noopener">Zalo</a>
   <button class="c3 js-open" data-title="Nhận bảng giá & bảng tính dòng tiền" data-need="">Nhận bảng giá</button>
 </div>
@@ -959,10 +1066,10 @@
       <input type="hidden" name="need">
       <div class="form-err"></div>
       <button class="btn btn-orange btn-block">Gửi cho tôi ngay</button>
-      <p class="micro">🔒 Không spam. Chỉ gửi đúng tài liệu anh/chị yêu cầu.</p>
+      <p class="micro">Không spam. Chỉ gửi đúng tài liệu anh/chị yêu cầu.</p>
     </form>
     <div class="qc-or">hoặc liên hệ ngay</div>
-    <div class="qc"><a class="qc-call js-tel" href="#">📞 Gọi <span class="js-hotline"></span></a><a class="qc-zalo js-zalo" href="#" target="_blank" rel="noopener">💬 Chat Zalo</a></div>
+    <div class="qc"><a class="qc-call js-tel" href="#">Gọi <span class="js-hotline"></span></a><a class="qc-zalo js-zalo" href="#" target="_blank" rel="noopener">Chat Zalo</a></div>
   </div>
 </div>
 
@@ -1058,7 +1165,16 @@ const API_BASE = '';
     setTimeout(() => $('#modal input[name=name]').focus(), 50);
   }
   const closeModal = () => modal.classList.remove('open');
-  $$('.js-open, .hot-spot').forEach(b => b.addEventListener('click', () => openModal(b.dataset.title, b.dataset.need)));
+  $$('.js-open, .hot-spot, .js-photo').forEach(b => b.addEventListener('click', () => openModal(b.dataset.title, b.dataset.need)));
+  $$('.js-photo, .offer-in').forEach(b => b.addEventListener('keydown', e => { if (e.key === 'Enter') b.click(); }));
+  // "Hỏi ngay": mở chat và gửi sẵn câu hỏi đúng mục; chưa có chat thì mở form
+  $$('.js-ask').forEach(b => b.addEventListener('click', () => {
+    if (window.CasamiaChat && window.CasamiaChat.ask) window.CasamiaChat.ask(b.dataset.ask);
+    else openModal('Anh/chị cần tư vấn gì ạ?', b.dataset.ask);
+  }));
+  // Thanh liên hệ cố định (máy tính): hiện sau khi cuộn qua màn hình đầu
+  const dbar = $('.dbar'), heroEl = $('.hero');
+  if (dbar && heroEl) window.addEventListener('scroll', () => dbar.classList.toggle('show', window.scrollY > heroEl.offsetHeight - 80), { passive: true });
   $('.x', modal).onclick = closeModal;
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
@@ -1189,6 +1305,6 @@ const API_BASE = '';
 })();
 </script>
 <!-- Khung chat trực tiếp: tự hỏi khách theo mục đang đọc (data-chat-topic) -->
-<script src="/widget.js" data-contacts="desktop" data-mobile-bottom="76" async></script>
+<script src="/widget.js" data-contacts="desktop" data-mobile-bottom="76" data-desktop-bottom="88" async></script>
 </body>
 </html>
