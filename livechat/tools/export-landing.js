@@ -12,7 +12,7 @@ const argv = process.argv.slice(2);
 const gi = argv.indexOf('--gas');
 const gas = gi >= 0 ? (argv[gi + 1] || '') : '';
 if (gi >= 0 && !/^https?:\/\/.+/.test(gas)) throw new Error('Thiếu URL sau --gas');
-const api = (gi >= 0 ? '' : argv[0] || '').replace(/\/$/, '');
+const api = (gi >= 0 || !/^https?:\/\//.test(argv[0] || '') ? '' : argv[0]).replace(/\/$/, '');
 const pub = path.join(__dirname, '..', 'public');
 let html = fs.readFileSync(path.join(pub, 'landing.html'), 'utf8');
 
