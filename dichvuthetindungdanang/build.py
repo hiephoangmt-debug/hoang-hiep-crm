@@ -237,7 +237,7 @@ def build_sitemap():
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + items + "</urlset>\n")
 
 
-AREAS = "Hải Châu, Thanh Khê, Sơn Trà, Ngũ Hành Sơn, Liên Chiểu, Cẩm Lệ và Hòa Vang"
+AREAS = "Hải Châu, Thanh Khê, Sơn Trà, Ngũ Hành Sơn, Liên Chiểu, Cẩm Lệ, Hòa Vang và Điện Bàn"
 
 PAGES = [
 # ---------------------------------------------------------------- ĐÁO HẠN
