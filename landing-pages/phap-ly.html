@@ -421,6 +421,29 @@ footer{background:var(--green-900,#0b1a3a)}
   gtag('config', 'AW-872503827');
 </script>
 <script>
+/* Chuyển đổi Google Ads: dán NHÃN chuyển đổi (phần sau dấu "/" trong send_to) lấy ở Google Ads > Mục tiêu > Chuyển đổi.
+   Để trống = chưa gửi. lead: gửi form / chat để lại số · call: bấm gọi · zalo: bấm Zalo */
+var SFT_ADS = {lead: '', call: '', zalo: ''};
+(function () {
+  var g = window.gtag, done = {};
+  function send(k) {
+    var label = SFT_ADS[k]; if (!label) return;
+    var key = k === 'lead' ? 'lead' + (window.sftPhone || '') : k; if (done[key]) return; done[key] = 1;
+    try {
+      if (k === 'lead' && window.sftPhone) { var p = String(window.sftPhone).replace(/\D/g, ''); if (p.charAt(0) === '0') p = '84' + p.slice(1); g('set', 'user_data', {phone_number: '+' + p}); }
+      g('event', 'conversion', {send_to: 'AW-872503827/' + label});
+    } catch (e) {}
+  }
+  window.gtag = function () {
+    g.apply(this, arguments);
+    var a = arguments; if (a[0] !== 'event') return;
+    if (a[1] === 'generate_lead') send('lead'); else if (a[1] === 'phone_call_click') send('call'); else if (a[1] === 'zalo_click') send('zalo');
+  };
+  // Lưu số điện thoại khách vừa gửi để Google đối chiếu (chuyển đổi nâng cao, Google tự mã hóa)
+  document.addEventListener('submit', function (e) { var i = e.target && e.target.querySelector && e.target.querySelector('[name=phone]'); if (i && i.value) window.sftPhone = i.value; }, true);
+})();
+</script>
+<script>
 /* Google Ads: ghi nhận khách gửi form, bấm gọi, bấm Zalo */
 document.addEventListener('submit', function (e) { var f = e.target; if (f.classList && f.classList.contains('lead-form')) gtag('event', 'generate_lead', {event_label: document.title}); }, true);
 document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href*="zalo.me"]'); if (a) gtag('event', a.href.indexOf('tel:') === 0 ? 'phone_call_click' : 'zalo_click'); }, true);
@@ -1075,6 +1098,7 @@ function finish() {
   try { fetch(CRM, {method: 'POST', mode: 'no-cors', keepalive: true, headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify(Object.assign({project: 'Sun FourS Tower'}, data))}).catch(() => {}); } catch (e) {}
   try { fetch(MAIL, {method: 'POST', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}, body: JSON.stringify(data)}).catch(() => {}); } catch (e) {}
   try { fetch(TG, {method: 'POST', mode: 'no-cors', keepalive: true, headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify(data)}).catch(() => {}); } catch (e) {}
+  window.sftPhone = st.phone;
   try { if (window.gtag) gtag('event', 'generate_lead', {event_label: data.interest}); } catch (e) {}
   try { if (window.fbq) fbq('track', 'Lead', {content_name: data.interest}); } catch (e) {}
   try { if (window.ttq) ttq.track('SubmitForm'); } catch (e) {}
