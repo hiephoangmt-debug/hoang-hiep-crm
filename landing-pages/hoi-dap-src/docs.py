@@ -12,10 +12,11 @@ DOCS = {
  'gh': ('Giỏ hàng cập nhật 03/10/2026', 'Đơn vị phân phối', '03/10/2026', 'Danh sách căn đang bán, diện tích, hướng view, giá niêm yết gồm VAT & KPBT.'),
  'mb': ('Mặt bằng tầng & căn hộ Tòa F2', 'Chủ đầu tư phát hành', '', 'Mã căn, diện tích tim tường và thông thủy, vị trí sân vườn, công năng từng tầng.'),
  'hsbh': ('Hồ sơ dự án do chủ đầu tư công bố', 'Sun Property', '', 'Quy mô, tiện ích, tiêu chuẩn vật liệu bàn giao, vị trí và kết nối.'),
+ 'ev': ('Thư mời sự kiện Tháp F2', 'Sun Property', '11/10/2026', 'Sự kiện Giới thiệu dự án FourS Tower – Tháp F2, 9:00 Chủ nhật 11/10/2026, Novotel Danang Premier Han River, 36 Bạch Đằng.'),
  'luat': ('Luật KDBĐS 2023 & Luật Nhà ở 2023', 'Quốc hội', '', 'Điều 24, 26 Luật Kinh doanh BĐS (điều kiện bán, bảo lãnh); Điều 153 (kinh phí bảo trì), khoản 2 Điều 183 (giải chấp) và quy định bảo hành nhà chung cư tối thiểu 60 tháng của Luật Nhà ở.'),
 }
 SRC = {
- 'chu-dau-tu':['qd2755','tb57'], 'quy-mo':['vb17239','tb151'], 'toa-f2':['vb17239','csbh'], 'thang-may':['mb','hsbh'],
+ 'su-kien':['ev'], 'chu-dau-tu':['qd2755','tb57'], 'quy-mo':['vb17239','tb151'], 'toa-f2':['vb17239','csbh'], 'thang-may':['mb','hsbh'],
  'cong-nang-tang':['mb'], 'tien-do':['tb151','pccc'],
  'dia-chi':['hsbh'], 'bien':['hsbh'], 'san-bay':['hsbh'], 'xung-quanh':['hsbh'], 'o-xa':['tv'],
  'du-dieu-kien':['vb17239','luat'], 'so-do':['gcn'], 'bao-lanh':['tcb','vb17239'], 'hop-dong-mau':['tb1738'],

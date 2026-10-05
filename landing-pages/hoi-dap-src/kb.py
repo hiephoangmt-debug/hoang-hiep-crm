@@ -18,6 +18,9 @@ CATS = [
 
 KB = [
 # ---------- TỔNG QUAN ----------
+('tong-quan','su-kien','Có sự kiện giới thiệu Tháp F2 không? Diễn ra khi nào, ở đâu?',
+ 'Có. Sun Property tổ chức sự kiện <b>Giới thiệu dự án FourS Tower – Tháp F2</b> (“Tọa độ Mùa xuân – Khởi sinh Thịnh vượng”) lúc <b>9:00 Chủ nhật 11/10/2026</b> tại <b>Novotel Danang Premier Han River</b>, 36 Bạch Đằng, Hải Châu, Đà Nẵng. Anh/chị để lại số Zalo, chuyên viên giữ chỗ và gửi thư mời ghi tên.',
+ ['su kien','event','hoi thao','novotel','novotel o dau','su kien o dau','to chuc o dau','11/10','chu nhat','gioi thieu du an','ra mat','le mo ban','thu moi','tham du','giu cho su kien']),
 ('tong-quan','chu-dau-tu','Chủ đầu tư Sun FourS Tower là ai? Có phải Sun Group không?',
  'Chủ đầu tư (pháp nhân) là <b>Công ty Cổ phần Địa Cầu</b> (MSDN 0400470419, 36-38 Bạch Đằng, phường Hải Châu, Đà Nẵng), được UBND TP. Đà Nẵng chấp thuận nhà đầu tư tại Quyết định 2755/QĐ-UBND ngày 24/06/2026. Dự án do <b>Sun Property – thương hiệu bất động sản của Tập đoàn Sun Group</b> phát triển.',
  ['chu dau tu','cdt','sun group','sun property','dia cau','cong ty nao','ai lam','ai xay','xay dung boi','tap doan']),
