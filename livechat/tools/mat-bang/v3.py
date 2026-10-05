@@ -167,6 +167,16 @@ for k,(pts,wd) in roads3.R.items():
     if k=='ring': segs=[tuple(p) for p in pts]; ws=np.full(len(pts),wd*.8)
     cls={'blvd':30,'ring':30,'sl5':30,'hotel':30,'entry':30,'west':22,'east':22,'r12':22,'r34':22,'lk2e':20,'lk2s':20}
     RD[k]=[list(map(list,segs)),float(cls.get(k,17))]
+def fitline(Q):
+    Q=np.array(Q,float); vx,vy,x0,y0=cv2.fitLine(Q.astype(np.float32),cv2.DIST_L2,0,.01,.01).ravel()
+    u=np.array([vx,vy]); c=np.array([x0,y0]); t=(Q-c)@u
+    return [list(c+u*t.min()), list(c+u*t.max())] if (Q[-1]-Q[0])@u>0 else [list(c+u*t.max()), list(c+u*t.min())]
+STRAIGHT=['entry','blvd','west','east','r12','r34','lk2e','lk2s','t7','t8','t9','t11','t12','t13','t14']
+for k in STRAIGHT:
+    if k in RD: RD[k][0]=fitline(RD[k][0])
+# đường vòng: đoạn cong đầu + đoạn thẳng chéo; SL5: đoạn cong đầu + thẳng tới cuối
+P=RD['ring'][0]; i0=[i for i,p in enumerate(P) if p[0]>=1060][0]; RD['ring'][0]=P[:i0]+fitline(P[i0:])
+P=RD['sl5'][0]; i0=[i for i,p in enumerate(P) if p[0]>=1140][0]; RD['sl5'][0]=P[:i0]+fitline(P[i0:])
 def dense(P):
     P=np.array(P,float); o=[]
     for a,b in zip(P[:-1],P[1:]):
