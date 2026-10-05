@@ -55,11 +55,13 @@ img{max-width:100%}
 .hero{background:linear-gradient(105deg,rgba(21,36,90,.94) 0%,rgba(27,45,107,.84) 50%,rgba(38,64,143,.5) 100%),url("https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/landing/vinhomes-hai-van-bay/landing/dist/img/aerial-bay.webp") center/cover no-repeat var(--navy);color:#fff;padding:48px 0 60px}
 .hero .wrap{display:grid;gap:34px}
 @media(min-width:980px){.hero .wrap{grid-template-columns:1.12fr .88fr;align-items:center;gap:56px}.hero{padding:88px 0}}
-.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,107,26,.14);border:1px solid rgba(255,107,26,.6);color:#FFD2B8;padding:7px 14px;border-radius:999px;font-size:13px;font-weight:700}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);color:#E6ECF7;padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:600;letter-spacing:.2px}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--orange);display:inline-block}
-.hero h1{font-size:32px;line-height:1.12;font-weight:900;margin-top:18px;letter-spacing:-.3px}
+.hero h1{font-size:34px;line-height:1.14;font-weight:800;margin-top:16px;letter-spacing:-.8px}
 .hero h1 em{font-style:normal;color:var(--orange)}
-.hero h1 .kw{display:block;font-size:15px;line-height:1.4;letter-spacing:1.5px;text-transform:uppercase;color:#FFB98F;font-weight:800;margin-bottom:10px}
+.hero h1 .kw{display:block;font-size:13px;line-height:1.4;letter-spacing:2.5px;text-transform:uppercase;color:#FFB98F;font-weight:700;margin-bottom:12px}
+.hero h1 .kw:before{content:"";display:inline-block;width:22px;height:2px;background:var(--orange);vertical-align:middle;margin-right:10px}
+.hero h1 .lite{display:block;font-size:.8em;font-weight:600;color:#DCE4F3;letter-spacing:-.4px;margin-top:8px}
 .nw{white-space:nowrap}
 @media(min-width:800px){.hero h1{font-size:46px}}
 .hero .sub{font-size:18px;color:#D6DFEF;margin-top:18px;max-width:610px}
@@ -71,9 +73,10 @@ img{max-width:100%}
 
 .kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
 @media(min-width:800px){.kpis{grid-template-columns:repeat(4,1fr)}}
-.kpis div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-top:3px solid var(--orange);border-radius:12px;padding:14px 12px}
-.kpis b{display:block;font-size:26px;font-weight:900;color:var(--orange);line-height:1.1}
-.kpis span{font-size:13px;color:#C4D0E6;font-weight:600;line-height:1.35;display:block;margin-top:4px}
+.kpis div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:14px}
+.kpis b{display:block;font-size:30px;font-weight:800;color:#fff;line-height:1;letter-spacing:-1px;font-variant-numeric:tabular-nums;margin-top:6px}
+.kpis b i{font-style:normal;font-size:15px;font-weight:700;color:var(--orange);letter-spacing:0;margin-left:3px}
+.kpis span{font-size:12.5px;color:#AFC0DE;font-weight:500;line-height:1.35;display:block;margin-top:6px}
 .hiring{margin-top:22px;font-size:13px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#FFB98F}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .chips a{white-space:nowrap;text-decoration:none;background:#fff;color:var(--navy);font-weight:800;font-size:15px;padding:8px 14px;border-radius:10px;line-height:1.25}
@@ -108,8 +111,10 @@ img{max-width:100%}
 @media(min-width:900px){.mosaic .m1{grid-column:auto}}
 .mosaic img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
 .mosaic figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 12px 10px;background:linear-gradient(transparent,rgba(21,36,90,.85));color:#fff;font-weight:800;font-size:13.5px}
-.ladderk a{display:block;text-decoration:none;color:inherit;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-top:3px solid var(--orange);border-radius:12px;padding:12px}
-.ladderk small{display:block;font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#fff;opacity:.85}
+.ladderk a{display:block;text-decoration:none;color:inherit;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:14px;position:relative}
+.ladderk a:after{content:"›";position:absolute;right:12px;top:10px;color:var(--orange);font-weight:800;font-size:18px}
+@media(min-width:800px){.kpis.ladderk{grid-template-columns:1fr 1fr}}
+.ladderk small{display:block;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#FFB98F}
 /* form */
 .form{background:#fff;color:var(--ink);border-radius:16px;border-top:6px solid var(--orange);padding:26px 22px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
 .form h2{font-size:24px;font-weight:900;color:var(--navy);line-height:1.25}
@@ -262,12 +267,12 @@ img{max-width:100%}
   <div class="wrap">
     <div>
       <span class="badge"><i class="dot"></i> Đang tuyển Sale BĐS Đà Nẵng · 10/2026</span>
-      <h1><span class="kw">Tuyển Sale BĐS Đà Nẵng 2026</span>Lương <em class="nw">7–10 triệu</em><br>chỉ là mức sàn.<br>Trần của bạn bao nhiêu?</h1>
+      <h1><span class="kw">Tuyển Sale BĐS Đà Nẵng 2026</span>Lương <em class="nw">7–10 triệu</em><br>chỉ là mức sàn.<span class="lite">Trần của bạn bao nhiêu?</span></h1>
       <div class="kpis ladderk">
-        <a href="https://www.tuyendungsaledanang.com/tuyen-sale-moi-ra-truong"><small>Mới ra trường</small><b>0 KN</b><span>Không cần KN</span></a>
-        <a href="https://www.tuyendungsaledanang.com/tuyen-chuyen-gia-kinh-doanh-pro-sales-da-nang"><small>Pro Sales</small><b>7–10TR</b><span>Lương / tháng</span></a>
-        <a href="https://www.tuyendungsaledanang.com/tuyen-truong-nhom-truong-phong-kinh-doanh-bds-da-nang"><small>Trưởng phòng</small><b>10–20TR</b><span>Lương / tháng</span></a>
-        <a href="#chinh-sach"><small>Mỗi giao dịch</small><b>+10TR</b><span>Thưởng marketing</span></a>
+        <a href="https://www.tuyendungsaledanang.com/tuyen-sale-moi-ra-truong"><small>Mới ra trường</small><b>0<i>KN</i></b><span>Ngành nào cũng được</span></a>
+        <a href="https://www.tuyendungsaledanang.com/tuyen-chuyen-gia-kinh-doanh-pro-sales-da-nang"><small>Pro Sales</small><b>7–10<i>TR</i></b><span>Lương / tháng</span></a>
+        <a href="https://www.tuyendungsaledanang.com/tuyen-truong-nhom-truong-phong-kinh-doanh-bds-da-nang"><small>Trưởng phòng</small><b>10–20<i>TR</i></b><span>Lương / tháng</span></a>
+        <a href="#chinh-sach"><small>Mỗi giao dịch</small><b>+10<i>TR</i></b><span>Thưởng marketing</span></a>
       </div>
       <p class="hiring">Chọn vị trí của bạn:</p>
       <div class="chips">

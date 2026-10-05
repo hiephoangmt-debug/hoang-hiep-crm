@@ -98,7 +98,8 @@ def page(p):
     h += EXTRA_CSS
     h += jsonld(p)
     h += '<link rel="canonical" href="' + URL[p['key']] + '">\n<style>.crumb{font-size:13px;color:#C9D3EA;margin-bottom:12px}.crumb a{color:#FFB98F;text-decoration:none}\n.role-lv{display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:13px;padding:3px 12px;border-radius:999px;margin-bottom:10px}\n.panel h4{margin:14px 0 4px;font-size:15px;font-weight:800;color:inherit}</style>\n'
-    kp = ''.join(f'<div><b>{a}</b><span>{b}</span></div>' for a, b in p['kpis'])
+    unit = lambda a: re.sub(r'^([+]?\d[\d–%]*)([A-Za-zĐđ]+)$', r'\1<i>\2</i>', a)
+    kp = ''.join('<div><b>%s</b><span>%s</span></div>' % (unit(a), b) for a, b in p['kpis'])
     fields = ''.join(f'''      <label for="{fid}">{lab}</label>
       <select id="{fid}" name="{nm}">{opts(o)}</select>
 ''' for fid, nm, lab, o in p['selects'])
