@@ -28,11 +28,48 @@ def lp_url(slug):
     return DOMAIN + flat(slug) if slug else DOMAIN
 
 
+TLIST_CSS = """
+/* Bản LadiPage: bảng -> danh sách xếp dọc (LadiPage cố định chiều cao ô bảng nên chữ bị che trên mobile) */
+.tlist{list-style:none;margin:16px 0 20px;padding:0}
+.tlist li{background:#f5f7fb;border-radius:12px;padding:14px 16px;margin:0 0 10px;line-height:1.65;color:#2a3654}
+.tlist li strong{color:#0b1f44}
+.tlist .fee{color:#d65f00;font-weight:800}
+.calc .tlist li{background:#fff}
+"""
+
+
+def cell(html):
+    return re.sub(r"\s+", " ", html).strip()
+
+
+def table_to_list(m):
+    t = m.group(0)
+    heads = [cell(re.sub(r"<.*?>", "", h)) for h in re.findall(r"<th[^>]*>(.*?)</th>", t, re.S)]
+    items = []
+    for row in re.findall(r"<tr>(.*?)</tr>", re.sub(r"<thead>.*?</thead>", "", t, flags=re.S), re.S):
+        cells = re.findall(r"<td( class=\"fee\")?>(.*?)</td>", row, re.S)
+        if not cells:
+            continue
+        vals = [(f'<span class="fee">{cell(v)}</span>' if fee else cell(v)) for fee, v in cells]
+        first = re.sub(r"</?strong>", "", vals[0])
+        if heads:
+            rest = "<br>".join(f"{heads[i]}: {v}" for i, v in enumerate(vals[1:], 1))
+            items.append(f"<li><strong>{first}</strong><br>{rest}</li>")
+        else:
+            items.append(f"<li><strong>{first}</strong>: {' · '.join(vals[1:])}</li>")
+    return '<ul class="tlist">' + "".join(items) + "</ul>"
+
+
+def facts_to_list(m):
+    pairs = re.findall(r"<dt>(.*?)</dt><dd>(.*?)</dd>", m.group(0), re.S)
+    return '<ul class="tlist">' + "".join(f"<li><strong>{d}</strong>: {v}</li>" for d, v in pairs) + "</ul>"
+
+
 def convert(s, slug):
     # CSS inline + marker LadiPage
     s = re.sub(r'<link rel="stylesheet" href="[./]*assets/site.css">',
                lambda m: '<meta name="ladipage-rules" content="v2">\n<style>\n' + CSS +
-               "\n.calc .tbl{background:#fff;color:#0f1b33}\n.reveal{opacity:1;transform:none}\n</style>", s)
+               "\n.reveal{opacity:1;transform:none}\n" + TLIST_CSS + "</style>", s)
     s = re.sub(r'<script src="[./]*assets/site.js"></script>', "", s)
 
     # Icon: thay <use href="#id"> bằng nội dung symbol (LadiPage không giữ sprite)
@@ -64,6 +101,10 @@ def convert(s, slug):
         target = "" if target in (".", "") else target.strip("/")
         return f'href="{lp_url(target)}{"#" + anchor if anchor else ""}"'
     s = re.sub(r'href="([^"]*)"', relink, s)
+
+    # Bảng & danh sách thông tin -> danh sách xếp dọc
+    s = re.sub(r'<div class="tbl"><table>.*?</table></div>', table_to_list, s, flags=re.S)
+    s = re.sub(r'<dl class="facts">.*?</dl>', facts_to_list, s, flags=re.S)
 
     # Dọn phần cần JS
     s = s.replace("<details open>", "<details>")
@@ -99,6 +140,7 @@ def convert_home(s):
     s = s.replace("Kéo thanh trượt để xem ước tính chi phí khi để thẻ trễ hạn.", "Bảng ước tính chi phí khi để thẻ trễ hạn 1 tháng.")
     s = re.sub(r'<span class="status" id="status">.*?</span></span>',
                '<span class="status"><i></i><span>Trả lời Zalo trong 5 phút (7h30 – 21h00)</span></span>', s, flags=re.S)
+    s = re.sub(r'<div class="tbl"><table>.*?</table></div>', table_to_list, s, flags=re.S)
     return s
 
 
