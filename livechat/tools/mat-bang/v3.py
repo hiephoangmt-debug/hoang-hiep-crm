@@ -12,6 +12,22 @@ def path(m,eps,minA,hole=True):
         if len(a)<3: continue
         d.append('M'+' L'.join(f'{x*S:.1f} {y*S:.1f}' for x,y in a)+'Z')
     return ' '.join(d)
+def spath(m,sig,eps,minA,hole=True):
+    m=cv2.GaussianBlur(m,(0,0),sig); m=(m>127).astype(np.uint8)*255
+    cs,_=cv2.findContours(m,cv2.RETR_CCOMP if hole else cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
+    d=[]
+    for c in cs:
+        if abs(cv2.contourArea(c))<minA: continue
+        P=cv2.approxPolyDP(c,eps,True)[:,0].astype(float)*S
+        n=len(P)
+        if n<3: continue
+        s=f'M{P[0][0]:.1f} {P[0][1]:.1f}'
+        for k in range(n):
+            p0,p1,p2,p3=P[(k-1)%n],P[k],P[(k+1)%n],P[(k+2)%n]
+            c1=p1+(p2-p0)/6; c2=p2-(p3-p1)/6
+            s+=f' C{c1[0]:.1f} {c1[1]:.1f} {c2[0]:.1f} {c2[1]:.1f} {p2[0]:.1f} {p2[1]:.1f}'
+        d.append(s+'Z')
+    return ' '.join(d)
 legend=((xx>440)&(xx<1380)&(yy>1300))|((xx>1760)&(yy<330))|(yy>1420)   # bảng chú thích, la bàn
 out=[]
 # ---- khu đất (nền cỏ) ----
@@ -32,24 +48,24 @@ cv2.polylines(vm,[vp],False,255,roads3.R['vcc'][1]+6)
 site[vm>0]=0; site[(yy>1130)&(xx<600)]=0
 n,lab,st,_=cv2.connectedComponentsWithStats(site); big=1+np.argmax(st[1:,4]); site=((lab==big)*255).astype(np.uint8)
 site=cv2.GaussianBlur(site,(0,0),4); site=(site>128).astype(np.uint8)*255
-out.append(f'<path d="{path(site,2,5000,False)}" fill="#c6e3ba" stroke="#a9cf9c" stroke-width="1.2"/>')
+out.append(f'<path d="{spath(site,6,7,5000,False)}" fill="#c6e3ba" stroke="#a9cf9c" stroke-width="1.2"/>')
 x0,y0,w0,h0=cv2.boundingRect(site); json.dump([x0*S,y0*S,w0*S,h0*S],open('bbox.json','w'))
 # ---- rừng dừa ----
 forest=near((70,141,75),36)&site; forest[xx<1500]=0
 forest=cv2.morphologyEx(forest,cv2.MORPH_CLOSE,np.ones((61,61),np.uint8)); forest=cv2.morphologyEx(forest,cv2.MORPH_OPEN,np.ones((21,21),np.uint8))
-out.append(f'<path d="{path(forest,3,15000,False)}" fill="#7fb47a"/>')
+out.append(f'<path d="{spath(forest,7,7,15000,False)}" fill="#7fb47a"/>')
 # ---- nước ----
 w=(water|lake)&site; w[legend]=0
 w=cv2.morphologyEx(w,cv2.MORPH_CLOSE,np.ones((13,13),np.uint8)); w=cv2.morphologyEx(w,cv2.MORPH_OPEN,np.ones((7,7),np.uint8))
 cv2.circle(w,(1172,722),88,0,-1); w=cv2.GaussianBlur(w,(0,0),2.5); w=(w>128).astype(np.uint8)*255
-out.append(f'<path d="{path(w,1.5,1500)}" fill="#9fd6ec" fill-rule="evenodd"/>')
+WATER_IDX=len(out); out.append(None)
 lk=lake&site; lk=cv2.morphologyEx(lk,cv2.MORPH_CLOSE,np.ones((15,15),np.uint8)); lk=cv2.morphologyEx(lk,cv2.MORPH_OPEN,np.ones((7,7),np.uint8))
 cs,_=cv2.findContours(lk,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE); c=max(cs,key=cv2.contourArea); (lx,ly),lr=cv2.minEnclosingCircle(c); lx,ly,lr=1172,722,74
 out.append(f'<circle cx="{lx*S:.1f}" cy="{ly*S:.1f}" r="{lr*S*.95:.1f}" fill="#c3eef2" stroke="#fff" stroke-width="2"/><circle cx="{lx*S:.1f}" cy="{ly*S:.1f}" r="{lr*S*.95+7:.1f}" fill="none" stroke="#dfe6dc" stroke-width="6"/>')
 print('lake',lx,ly,lr)
 # ---- lô đất ----
 PAL={'ph':'#c8197a','pv':'#f07fb4','lk':'#a7865f','fs':'#0b2a5b','ws':'#4f78b0'}
-groups={k:[] for k in PAL}; dividers=[]; cents={k:[] for k in PAL}; LOTS=np.zeros((H,W),np.uint8)
+BOX=[]; groups={k:[] for k in PAL}; dividers=[]; cents={k:[] for k in PAL}; LOTS=np.zeros((H,W),np.uint8)
 for k,m in masks.items():
     m=m.copy(); m[legend]=0; m&=site
     mm=cv2.morphologyEx(m,cv2.MORPH_CLOSE,np.ones((7,7),np.uint8)); mm=cv2.morphologyEx(mm,cv2.MORPH_OPEN,np.ones((5,5),np.uint8))
@@ -77,32 +93,42 @@ for k,m in masks.items():
         # số lô: đếm vạch sáng cắt ngang trục dài
         blk=np.zeros((H,W),np.uint8); cv2.drawContours(blk,[c],-1,255,-1)
         if fill>0.88:
-            box=cv2.boxPoints(((rx,ry),(rw-1,rh-1),ang)); cv2.fillPoly(LOTS,[box.astype(np.int32)],255)
-            groups[g].append('M'+' L'.join(f'{x*S:.1f} {y*S:.1f}' for x,y in box)+'Z')
-            # đếm lô theo dải sáng dọc trục dài
-            ux,uy=np.cos(np.radians(ang)),np.sin(np.radians(ang)); vx,vy=-uy,ux
-            prof=[]
-            for t in np.linspace(-rw/2+2,rw/2-2,int(rw)):
-                vals=[]
-                for q in np.linspace(-rh/2+3,rh/2-3,7):
-                    px,py=int(rx+ux*t+vx*q),int(ry+uy*t+vy*q)
-                    if 0<=px<W and 0<=py<H: vals.append(im[py,px].sum())
-                prof.append(np.mean(vals) if vals else 0)
-            prof=np.array(prof); thr=np.percentile(prof,90)
-            peaks=0; inpk=False
-            for v in prof:
-                if v>=thr and not inpk: peaks+=1; inpk=True
-                elif v<thr: inpk=False
-            unitW={'ph':17,'pv':17,'lk':16,'fs':21,'ws':21}[g]
-            kU=max(2,round(rw/unitW))
-            for j in range(1,kU):
-                t=-rw/2+rw*j/kU; px,py=rx+ux*t,ry+uy*t
-                x1,y1=px+vx*(rh/2-1),py+vy*(rh/2-1); x2,y2=px-vx*(rh/2-1),py-vy*(rh/2-1)
-                dividers.append(f'M{x1*S:.1f} {y1*S:.1f} L{x2*S:.1f} {y2*S:.1f}')
+            BOX.append([g,rx,ry,rw,rh,ang])
         else:
             a2=cv2.approxPolyDP(c,2.5,True)[:,0]; cv2.fillPoly(LOTS,[a2.astype(np.int32)],255)
             groups[g].append('M'+' L'.join(f'{x*S:.1f} {y*S:.1f}' for x,y in a2)+'Z')
         cents[g].append((cx*S,cy*S,A))
+# ---- chuẩn hoá dãy: cùng góc, cùng bề dày, thẳng hàng ----
+def unit(a): r=np.radians(a); return np.array([np.cos(r),np.sin(r)])
+for B in BOX: B[5]=B[5]%180
+for g in PAL:
+    bs=[B for B in BOX if B[0]==g]
+    # gom các dãy song song (lệch góc <5°) -> dùng chung một góc
+    done=set()
+    for i,b in enumerate(bs):
+        if i in done: continue
+        fam=[j for j,c in enumerate(bs) if j not in done and min(abs(c[5]-b[5]),180-abs(c[5]-b[5]))<5]
+        angs=[bs[j][5] if abs(bs[j][5]-b[5])<90 else bs[j][5]+(180 if bs[j][5]<b[5] else -180) for j in fam]
+        A0=float(np.median(angs))
+        for j in fam: bs[j][5]=A0; done.add(j)
+    # gom các khối cùng hàng (cùng góc, lệch ngang < 0.6 bề dày) -> cùng tim, cùng bề dày
+    done=set()
+    for i,b in enumerate(bs):
+        if i in done: continue
+        u=unit(b[5]); n=np.array([-u[1],u[0]])
+        row=[j for j,c in enumerate(bs) if j not in done and c[5]==b[5] and abs(np.dot([c[1]-b[1],c[2]-b[2]],n))<0.6*b[4]]
+        off=float(np.median([np.dot([bs[j][1],bs[j][2]],n) for j in row])); hh=float(np.median([bs[j][4] for j in row]))
+        for j in row:
+            c=bs[j]; along=np.dot([c[1],c[2]],u); p=along*u+off*n; c[1],c[2],c[4]=p[0],p[1],hh; done.add(j)
+for g,rx,ry,rw,rh,ang in BOX:
+    box=cv2.boxPoints(((rx,ry),(rw-1,rh-1),ang)); cv2.fillPoly(LOTS,[box.astype(np.int32)],255)
+    groups[g].append('M'+' L'.join(f'{x*S:.1f} {y*S:.1f}' for x,y in box)+'Z')
+    ux,uy=np.cos(np.radians(ang)),np.sin(np.radians(ang)); vx,vy=-uy,ux
+    unitW={'ph':17,'pv':17,'lk':16,'fs':21,'ws':21}[g]; kU=max(2,round(rw/unitW))
+    for j in range(1,kU):
+        t=-rw/2+rw*j/kU; px,py=rx+ux*t,ry+uy*t
+        x1,y1=px+vx*(rh/2-1),py+vy*(rh/2-1); x2,y2=px-vx*(rh/2-1),py-vy*(rh/2-1)
+        dividers.append(f'M{x1*S:.1f} {y1*S:.1f} L{x2*S:.1f} {y2*S:.1f}')
 band=[(963,862),(972,930),(1000,995),(1050,1048),(1110,1088),(1165,1113)]; BW=60
 pts=np.array(band,float); seg=np.diff(pts,axis=0); L=np.hypot(*seg.T); cum=np.r_[0,np.cumsum(L)]
 def at(t):
@@ -117,6 +143,8 @@ for j in range(1,nU):
     p,nrm=at(cum[-1]*j/nU); a1=p+nrm*(BW/2-1); a2=p-nrm*(BW/2-1)
     dividers.append(f'M{a1[0]*S:.1f} {a1[1]*S:.1f} L{a2[0]*S:.1f} {a2[1]*S:.1f}')
 cents['pv'].append((1050*S,1000*S,BW*cum[-1]))
+w2=w.copy(); w2[cv2.dilate(LOTS,cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(19,19)))>0]=0
+out[WATER_IDX]=f'<path d="{spath(w2,4,4,1500)}" fill="#9fd6ec" fill-rule="evenodd"/>'
 # ---- đường (vẽ tay theo tim đường, bề rộng đều) ----
 import roads3
 rm=np.zeros((H,W),np.uint8)
@@ -131,14 +159,29 @@ def smooth_d(P):
         c1=(p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6); c2=(p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6)
         d+=f' C{c1[0]:.1f} {c1[1]:.1f} {c2[0]:.1f} {c2[1]:.1f} {p2[0]:.1f} {p2[1]:.1f}'
     return d
-curb=[];top=[]
+curb=[];top=[]; RD={}
 for k,(pts,wd) in roads3.R.items():
     if k=='vcc': continue
-    cl,ws=snap(pts,wd,Lb)
-    if k=='ring': cl=np.array(pts,float); ws=np.full(len(pts),wd*.8)
-    w=float(np.clip(np.percentile(ws,25),14,wd))
-    a=cv2.approxPolyDP(cl.astype(np.float32).reshape(-1,1,2),3.0,False)[:,0]
-    d=smooth_d(a)
+    cl,ws,segs=snap(pts,wd,Lb)
+    if k=='ring': segs=[tuple(p) for p in pts]; ws=np.full(len(pts),wd*.8)
+    cls={'blvd':30,'ring':30,'sl5':30,'hotel':30,'entry':30,'west':22,'east':22,'r12':22,'r34':22,'lk2e':20,'lk2s':20}
+    RD[k]=[list(map(list,segs)),float(cls.get(k,17))]
+def dense(P):
+    P=np.array(P,float); o=[]
+    for a,b in zip(P[:-1],P[1:]):
+        n=int(np.hypot(*(b-a))//3)+1; o+= [a+(b-a)*t for t in np.linspace(0,1,n)]
+    return np.array(o)
+# nối đầu mút vào tim tuyến gần nhất (ngã ba khớp, không lòi đầu)
+for k,(P,w) in RD.items():
+    for e in (0,-1):
+        p=np.array(P[e]); best=None
+        for k2,(P2,w2) in RD.items():
+            if k2==k: continue
+            D=dense(P2); dd=np.hypot(*(D-p).T); i2=dd.argmin()
+            if dd[i2]<max(w2,w)*1.2 and (best is None or dd[i2]<best[0]): best=(dd[i2],D[i2])
+        if best is not None: P[e]=list(best[1])
+for k,(P,w) in RD.items():
+    d=smooth_d(P)
     curb.append(f'<path d="{d}" stroke-width="{w*S+2.4:.1f}"/>'); top.append(f'<path d="{d}" stroke-width="{w*S:.1f}"/>')
 ROAD_SVG=('<g fill="none" stroke="#b9d7ad" stroke-linecap="round" stroke-linejoin="round">'+''.join(curb)+'</g>'
           '<g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round">'+''.join(top)+'</g>')
