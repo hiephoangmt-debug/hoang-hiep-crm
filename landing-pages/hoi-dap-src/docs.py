@@ -12,7 +12,7 @@ DOCS = {
  'gh': ('Giỏ hàng cập nhật 03/10/2026', 'Đơn vị phân phối', '03/10/2026', 'Danh sách căn đang bán, diện tích, hướng view, giá niêm yết gồm VAT & KPBT.'),
  'mb': ('Mặt bằng tầng & căn hộ Tòa F2', 'Chủ đầu tư phát hành', '', 'Mã căn, diện tích tim tường và thông thủy, vị trí sân vườn, công năng từng tầng.'),
  'hsbh': ('Hồ sơ dự án do chủ đầu tư công bố', 'Sun Property', '', 'Quy mô, tiện ích, tiêu chuẩn vật liệu bàn giao, vị trí và kết nối.'),
- 'ev': ('Thư mời sự kiện Tháp F2', 'Sun Property', '11/10/2026', 'Sự kiện Giới thiệu dự án FourS Tower – Tháp F2, 9:00 Chủ nhật 11/10/2026, Novotel Danang Premier Han River, 36 Bạch Đằng.'),
+ 'ev': ('Thư mời sự kiện Tháp F2', 'Sun Property', '11/10/2026', 'Sự kiện Giới thiệu dự án FourS Tower – Tháp F2, 9:00–11:20 Chủ nhật 11/10/2026, Novotel Danang Premier Han River, 36 Bạch Đằng; chương trình và quà bốc thăm may mắn.'),
  'luat': ('Luật KDBĐS 2023 & Luật Nhà ở 2023', 'Quốc hội', '', 'Điều 24, 26 Luật Kinh doanh BĐS (điều kiện bán, bảo lãnh); Điều 153 (kinh phí bảo trì), khoản 2 Điều 183 (giải chấp) và quy định bảo hành nhà chung cư tối thiểu 60 tháng của Luật Nhà ở.'),
 }
 SRC = {

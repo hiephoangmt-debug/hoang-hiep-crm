@@ -25,6 +25,20 @@
 .ev-form p{font-size:13px;color:var(--muted);margin:0;text-align:center}
 .ev-form h3{font-size:17px;color:var(--green-900);margin:0}
 .ev .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.ev-gift{background:linear-gradient(120deg,rgba(240,123,31,.22),rgba(240,123,31,.06));border:1px solid rgba(255,176,103,.45);border-radius:14px;padding:14px 16px;margin:0 0 18px}
+.ev-gift h3{font-size:15px;color:#ffb067;margin:0 0 8px;letter-spacing:.04em;text-transform:uppercase}
+.ev-gift ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.ev-gift li{display:flex;gap:10px;align-items:center;font-size:15px}
+.ev-gift li b{flex:none;min-width:78px;font-size:13px;background:#f07b1f;color:#fff;border-radius:999px;padding:3px 10px;text-align:center}
+.ev-gift p{margin:8px 0 0;font-size:13px;opacity:.8}
+.ev-agenda{margin-top:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:0 16px}
+.ev-agenda summary{cursor:pointer;padding:13px 0;font-weight:600;color:#ffb067;list-style:none}
+.ev-agenda summary::-webkit-details-marker{display:none}
+.ev-agenda summary::after{content:" ▾"}.ev-agenda[open] summary::after{content:" ▴"}
+.ev-agenda ul{list-style:none;margin:0;padding:0 0 14px;display:grid;gap:8px;border-left:2px solid rgba(255,176,103,.5);padding-left:14px}
+.ev-agenda li{font-size:14.5px;position:relative}
+.ev-agenda li::before{content:"";position:absolute;left:-20px;top:7px;width:10px;height:10px;border-radius:50%;background:#f07b1f}
+.ev-agenda li b{display:inline-block;min-width:52px;color:#ffb067}
 @media (max-width:860px){.ev{padding:44px 0}.ev-grid{grid-template-columns:1fr;gap:26px}.ev-card{max-width:340px;margin:0 auto}.ev-form{grid-template-columns:1fr}.ev-cd div{min-width:0;flex:1}}
 </style>
 <section class="ev" id="su-kien" aria-labelledby="h-ev">
@@ -35,9 +49,14 @@
       <h2 id="h-ev">Giới thiệu dự án FourS Tower – Tháp F2</h2>
       <p class="ev-sub">Tọa độ Mùa xuân – Khởi sinh Thịnh vượng</p>
       <ul class="ev-info">
-        <li><i aria-hidden="true">📅</i><div><b>Chủ nhật, 11/10/2026 – 9:00 sáng</b></div></li>
+        <li><i aria-hidden="true">📅</i><div><b>Chủ nhật, 11/10/2026 · 9:00 – 11:20</b><span>Đón khách &amp; teabreak từ 9h00</span></div></li>
         <li><i aria-hidden="true">📍</i><div><b>Novotel Danang Premier Han River</b><span>36 Bạch Đằng, Hải Châu, Đà Nẵng</span><br><a href="https://www.google.com/maps/search/?api=1&amp;query=Novotel+Danang+Premier+Han+River+36+B%E1%BA%A1ch+%C4%90%E1%BA%B1ng" target="_blank" rel="noopener">Chỉ đường ↗</a></div></li>
       </ul>
+      <div class="ev-gift"><h3>🎁 Bốc thăm may mắn cho khách tham dự</h3><ol>
+        <li><b>Giải nhất</b><span>Loa Bluetooth Marshall Acton III</span></li>
+        <li><b>Giải nhì</b><span>Máy massage cổ vai gáy Philips PPM3306</span></li>
+        <li><b>Giải ba</b><span>Tai nghe Bluetooth Sony WH-CH520</span></li>
+      </ol></div>
       <div class="ev-cd" id="evCd" aria-label="Thời gian còn lại đến sự kiện"><div><b id="evD">–</b><span>ngày</span></div><div><b id="evH">–</b><span>giờ</span></div><div><b id="evM">–</b><span>phút</span></div></div>
       <form class="ev-form lead-form" aria-labelledby="ev-form-title">
         <h3 class="full" id="ev-form-title">Giữ chỗ tham dự – nhận thư mời ghi tên qua Zalo</h3>
@@ -48,6 +67,15 @@
         <button class="btn btn-gold full" type="submit">Giữ chỗ tham dự →</button>
         <p class="full">Số lượng chỗ có hạn · Thông tin được bảo mật</p>
       </form>
+      <details class="ev-agenda"><summary>Xem chương trình sự kiện</summary><ul>
+        <li><b>9h00</b> Đón khách &amp; teabreak</li>
+        <li><b>9h30</b> Khai mạc</li>
+        <li><b>9h40</b> Giới thiệu về Sun Group &amp; Hành trình làm đẹp những vùng đất</li>
+        <li><b>10h00</b> Giới thiệu dự án FourS Tower – Tháp F2</li>
+        <li><b>10h30</b> Tư vấn chuyên sâu</li>
+        <li><b>11h00</b> Bốc thăm may mắn</li>
+        <li><b>11h20</b> Kết thúc chương trình</li>
+      </ul></details>
     </div>
   </div>
 </section>
