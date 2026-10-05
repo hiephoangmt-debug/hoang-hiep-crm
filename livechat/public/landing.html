@@ -455,7 +455,11 @@
     .btn{width:100%}
   }
 </style>
-<script>document.documentElement.classList.add('js');</script>
+<script>
+  // Có JavaScript: bật hiệu ứng hiện dần. Chốt an toàn: sau 2,5 giây mọi khối tự hiện dù mã phía sau có lỗi.
+  document.documentElement.classList.add('js');
+  setTimeout(function () { var r = document.querySelectorAll('.reveal'); for (var i = 0; i < r.length; i++) r[i].classList.add('in'); }, 2500);
+</script>
 </head>
 <body>
 
@@ -1069,7 +1073,8 @@ const API_BASE = '';
   $$('.js-chat').forEach(b => b.addEventListener('click', () => window.CasamiaChat && window.CasamiaChat.open()));
 
   // Popup giữ chân: rê chuột ra khỏi trang (máy tính) hoặc đọc 70% trang (điện thoại) – chỉ 1 lần
-  let nudged = sessionStorage.getItem('casamia_nudged') === '1';
+  let nudged = false;
+  try { nudged = sessionStorage.getItem('casamia_nudged') === '1'; } catch {}
   function nudge() {
     if (nudged || submitted || modal.classList.contains('open')) return;
     nudged = true; try { sessionStorage.setItem('casamia_nudged', '1'); } catch {}
