@@ -52,11 +52,18 @@
   .btn-ghost:hover{border-color:#fff}
   .btn-navy{background:var(--navy);color:#fff}
   .btn-navy:hover{background:var(--navy-2)}
+  .lbx{position:fixed;inset:0;z-index:10000;background:rgba(6,14,30,.92);display:none;align-items:center;justify-content:center;flex-direction:column;padding:20px}
+  .lbx.on{display:flex}.lbx img{max-width:94vw;max-height:80vh;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .lbx p{color:#fff;margin:14px 0 0;font:600 15px "Be Vietnam Pro",sans-serif;text-align:center}
+  .lbx button{position:absolute;background:rgba(255,255,255,.12);border:0;color:#fff;font-size:30px;width:52px;height:52px;border-radius:50%;cursor:pointer}
+  .lbx .lx{top:16px;right:16px}.lbx .lp{left:16px;top:50%}.lbx .ln{right:16px;top:50%}
+  .realg .rf{cursor:zoom-in}
   .realg{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:210px;grid-auto-flow:dense;gap:10px;margin-top:30px}
   .realg .rf{margin:0;position:relative;border-radius:14px;overflow:hidden;background:#e9edf3}
   .realg .rf img{width:100%!important;height:100%!important;max-width:none!important;object-fit:cover;display:block;transition:transform .6s}
   .realg .rf:hover img{transform:scale(1.04)}
-  .realg .rf-t{grid-row:span 2}.realg .rf-w{grid-column:span 2}
+  .realg .rf-t{grid-row:span 2}
+  .realg.life{grid-auto-rows:190px}.realg .rf-w{grid-column:span 2}
   .realg figcaption{position:absolute;left:10px;bottom:10px;right:10px;color:#fff;font-size:13px;font-weight:600;text-shadow:0 1px 8px rgba(0,0,0,.6)}
   .realg .rf::after{content:"";position:absolute;inset:auto 0 0;height:45%;background:linear-gradient(transparent,rgba(0,0,0,.45));pointer-events:none}
   .real-tag{display:inline-block;background:#1e8e4e;color:#fff;font-size:12px;font-weight:700;border-radius:999px;padding:4px 12px;letter-spacing:.5px}
@@ -723,7 +730,7 @@ html:not([data-kv=hn]) .kv-hn,html:not([data-kv=dn]) .kv-dn,html[data-kv] .kv-de
 
 <!-- HERO -->
 <section class="hero lux" data-chat-topic="off">
-  <div class="hero-bg" style="background-image:url('img/forestside.jpg')"></div>
+  <div class="hero-bg" style="background-image:url('https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/bdf5ba41b1d604454b39b7aa6ba0128850f7c60b/livechat/public/img/thuc-te/dao-ben-ho-dua.jpg');background-position:center 40%"></div>
   <div class="wrap">
     <div class="hero-copy">
       <div class="kv-hn">
@@ -880,26 +887,8 @@ html:not([data-kv=hn]) .kv-hn,html:not([data-kv=dn]) .kv-dn,html[data-kv] .kv-de
   </div>
 </section>
 
-<!-- ẢNH THỰC TẾ -->
-<section class="kvsec alt" id="anh-thuc-te" data-chat-topic="thiết kế sản phẩm">
-  <div class="wrap">
-    <div class="kv-h"><span class="real-tag">ẢNH THỰC TẾ · KHÔNG PHẢI PHỐI CẢNH</span>
-    <h2>Nhà đã xây xong, <em>vào xem được ngay</em></h2>
-    <p class="lead-text">Ảnh chụp thực tế nhà mẫu và cảnh quan nội khu. Đến tận nơi, anh/chị sẽ thấy đúng như vậy.</p></div>
-    <div class="realg">
-      <figure class="rf rf-t"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/2810d14ee825c43a236aa6984307f5c3e7fec6bd/livechat/public/img/thuc-te/mat-tien-nha-mau.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Mặt tiền phủ cây xanh" loading="lazy" decoding="async"><figcaption>Mặt tiền phủ cây xanh</figcaption></figure>
-      <figure class="rf rf-w"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/2810d14ee825c43a236aa6984307f5c3e7fec6bd/livechat/public/img/thuc-te/phong-khach-bep.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Phòng khách thông bếp, trần bê tông mộc" loading="lazy" decoding="async"><figcaption>Phòng khách thông bếp, trần bê tông mộc</figcaption></figure>
-      <figure class="rf"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/2810d14ee825c43a236aa6984307f5c3e7fec6bd/livechat/public/img/thuc-te/ban-an-nhin-ra-vuon.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Bàn ăn nhìn ra vườn" loading="lazy" decoding="async"><figcaption>Bàn ăn nhìn ra vườn</figcaption></figure>
-      <figure class="rf"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/2810d14ee825c43a236aa6984307f5c3e7fec6bd/livechat/public/img/thuc-te/phong-khach-ban-cong.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Phòng khách mở ra ban công" loading="lazy" decoding="async"><figcaption>Phòng khách mở ra ban công</figcaption></figure>
-      <figure class="rf"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/2810d14ee825c43a236aa6984307f5c3e7fec6bd/livechat/public/img/thuc-te/phong-ngu.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Phòng ngủ, ban công nhìn xa" loading="lazy" decoding="async"><figcaption>Phòng ngủ, ban công nhìn xa</figcaption></figure>
-      <figure class="rf"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/2810d14ee825c43a236aa6984307f5c3e7fec6bd/livechat/public/img/thuc-te/bep-va-ban-an.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Bếp và bàn ăn gỗ tự nhiên" loading="lazy" decoding="async"><figcaption>Bếp và bàn ăn gỗ tự nhiên</figcaption></figure>
-      <figure class="rf"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/2810d14ee825c43a236aa6984307f5c3e7fec6bd/livechat/public/img/thuc-te/goc-doc-sach.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Góc đọc sách cạnh giếng trời" loading="lazy" decoding="async"><figcaption>Góc đọc sách cạnh giếng trời</figcaption></figure>
-      <figure class="rf"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/2810d14ee825c43a236aa6984307f5c3e7fec6bd/livechat/public/img/thuc-te/phong-tam.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Phòng tắm đá, bồn tắm nằm" loading="lazy" decoding="async"><figcaption>Phòng tắm đá, bồn tắm nằm</figcaption></figure>
-      <figure class="rf rf-w"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/2810d14ee825c43a236aa6984307f5c3e7fec6bd/livechat/public/img/thuc-te/duong-dao-cong-vien.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Đường dạo trong công viên nội khu" loading="lazy" decoding="async"><figcaption>Đường dạo trong công viên nội khu</figcaption></figure>
-    </div>
-    <div class="kv-cta"><button class="btn btn-orange js-open" data-title="Đặt lịch xem nhà mẫu thực tế" data-need="Xem nhà mẫu thực tế">Đặt lịch xem nhà mẫu</button><button class="btn btn-navy js-open" data-title="Nhận video thực tế nhà mẫu" data-need="Video thực tế nhà mẫu">Nhận video thực tế</button></div>
-  </div>
-</section>
+
+
 
 <!-- THEO HÀNH TRÌNH KHÁCH: mới tìm hiểu / đã đến Hội An / rành Hội An -->
 <section class="journey kv-def" id="bat-dau">
@@ -993,6 +982,27 @@ html:not([data-kv=hn]) .kv-hn,html:not([data-kv=dn]) .kv-dn,html[data-kv] .kv-de
   </div>
 </section>
 
+<!-- ẢNH THỰC TẾ -->
+<section class="kvsec alt" id="anh-thuc-te" data-chat-topic="thiết kế sản phẩm">
+  <div class="wrap">
+    <div class="kv-h"><span class="real-tag">ẢNH THỰC TẾ · KHÔNG PHẢI PHỐI CẢNH</span>
+    <h2>Nhà đã xây xong, <em>vào xem được ngay</em></h2>
+    <p class="lead-text">Ảnh chụp thực tế nhà mẫu và cảnh quan nội khu. Đến tận nơi, anh/chị sẽ thấy đúng như vậy.</p></div>
+    <div class="realg">
+      <figure class="rf rf-t"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/2810d14ee825c43a236aa6984307f5c3e7fec6bd/livechat/public/img/thuc-te/mat-tien-nha-mau.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Mặt tiền phủ cây xanh" loading="lazy" decoding="async"><figcaption>Mặt tiền phủ cây xanh</figcaption></figure>
+      <figure class="rf rf-w"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/2810d14ee825c43a236aa6984307f5c3e7fec6bd/livechat/public/img/thuc-te/phong-khach-bep.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Phòng khách thông bếp, trần bê tông mộc" loading="lazy" decoding="async"><figcaption>Phòng khách thông bếp, trần bê tông mộc</figcaption></figure>
+      <figure class="rf"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/2810d14ee825c43a236aa6984307f5c3e7fec6bd/livechat/public/img/thuc-te/ban-an-nhin-ra-vuon.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Bàn ăn nhìn ra vườn" loading="lazy" decoding="async"><figcaption>Bàn ăn nhìn ra vườn</figcaption></figure>
+      <figure class="rf"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/2810d14ee825c43a236aa6984307f5c3e7fec6bd/livechat/public/img/thuc-te/phong-khach-ban-cong.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Phòng khách mở ra ban công" loading="lazy" decoding="async"><figcaption>Phòng khách mở ra ban công</figcaption></figure>
+      <figure class="rf"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/2810d14ee825c43a236aa6984307f5c3e7fec6bd/livechat/public/img/thuc-te/phong-ngu.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Phòng ngủ, ban công nhìn xa" loading="lazy" decoding="async"><figcaption>Phòng ngủ, ban công nhìn xa</figcaption></figure>
+      <figure class="rf"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/2810d14ee825c43a236aa6984307f5c3e7fec6bd/livechat/public/img/thuc-te/bep-va-ban-an.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Bếp và bàn ăn gỗ tự nhiên" loading="lazy" decoding="async"><figcaption>Bếp và bàn ăn gỗ tự nhiên</figcaption></figure>
+      <figure class="rf"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/2810d14ee825c43a236aa6984307f5c3e7fec6bd/livechat/public/img/thuc-te/goc-doc-sach.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Góc đọc sách cạnh giếng trời" loading="lazy" decoding="async"><figcaption>Góc đọc sách cạnh giếng trời</figcaption></figure>
+      <figure class="rf"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/2810d14ee825c43a236aa6984307f5c3e7fec6bd/livechat/public/img/thuc-te/phong-tam.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Phòng tắm đá, bồn tắm nằm" loading="lazy" decoding="async"><figcaption>Phòng tắm đá, bồn tắm nằm</figcaption></figure>
+      <figure class="rf rf-w"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/2810d14ee825c43a236aa6984307f5c3e7fec6bd/livechat/public/img/thuc-te/duong-dao-cong-vien.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Đường dạo trong công viên nội khu" loading="lazy" decoding="async"><figcaption>Đường dạo trong công viên nội khu</figcaption></figure>
+    </div>
+    <div class="kv-cta"><button class="btn btn-orange js-open" data-title="Đặt lịch xem nhà mẫu thực tế" data-need="Xem nhà mẫu thực tế">Đặt lịch xem nhà mẫu</button><button class="btn btn-navy js-open" data-title="Nhận video thực tế nhà mẫu" data-need="Video thực tế nhà mẫu">Nhận video thực tế</button></div>
+  </div>
+</section>
+
 <!-- SỐNG TRONG COMPOUND -->
 <section class="song" id="song" data-chat-topic="tiện ích vị trí">
   <div class="wrap">
@@ -1011,6 +1021,28 @@ html:not([data-kv=hn]) .kv-hn,html:not([data-kv=dn]) .kv-dn,html[data-kv] .kv-de
       <p><b>Muốn biết sống ở đây thực tế ra sao?</b>Em gửi quy hoạch tổng thể, tiện ích nội khu, quy định vận hành khu và đón anh/chị đi xem tận nơi.</p>
       <div class="ask-btns"><button class="btn btn-orange js-ask" data-ask="Cho em hỏi về tiện ích nội khu và quy định vận hành của khu">Hỏi ngay</button><button class="btn btn-line js-open" data-title="Nhận quy hoạch, tiện ích nội khu & lịch xem nhà" data-need="Mua để ở – tìm hiểu khu compound">Nhận tư vấn</button><a class="btn btn-line js-tel" href="#">Gọi ngay</a></div>
     </div>
+  </div>
+</section>
+
+<!-- CUỘC SỐNG GIA ĐÌNH -->
+<section class="kvsec" id="gia-dinh" data-chat-topic="thiết kế sản phẩm">
+  <div class="wrap">
+    <div class="kv-h"><span class="real-tag">ẢNH THỰC TẾ TẠI NHÀ MẪU</span>
+    <h2>Một ngôi nhà để <em>cả nhà cùng về</em></h2>
+    <p class="lead-text">Bữa cơm nhìn ra vườn, tối nướng BBQ ngoài sân, con cháu về thăm ông bà. Không gian đủ rộng cho ba thế hệ, đủ riêng tư cho từng người.</p></div>
+    <div class="realg">
+      <figure class="rf rf-w"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/bdf5ba41b1d604454b39b7aa6ba0128850f7c60b/livechat/public/img/thuc-te/sum-hop-ba-the-he.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Ba thế hệ sum họp trong phòng khách" loading="lazy" decoding="async"><figcaption>Ba thế hệ sum họp trong phòng khách</figcaption></figure>
+      <figure class="rf rf-t"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/bdf5ba41b1d604454b39b7aa6ba0128850f7c60b/livechat/public/img/thuc-te/ca-nha-ve-tham.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Con cháu về thăm ông bà" loading="lazy" decoding="async"><figcaption>Con cháu về thăm ông bà</figcaption></figure>
+      <figure class="rf"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/bdf5ba41b1d604454b39b7aa6ba0128850f7c60b/livechat/public/img/thuc-te/bua-com-gia-dinh.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Bữa cơm nhìn ra vườn" loading="lazy" decoding="async"><figcaption>Bữa cơm nhìn ra vườn</figcaption></figure>
+      <figure class="rf"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/bdf5ba41b1d604454b39b7aa6ba0128850f7c60b/livechat/public/img/thuc-te/nau-an-cung-nhau.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Cả nhà vào bếp" loading="lazy" decoding="async"><figcaption>Cả nhà vào bếp</figcaption></figure>
+      <figure class="rf rf-t"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/bdf5ba41b1d604454b39b7aa6ba0128850f7c60b/livechat/public/img/thuc-te/bbq-san-vuon.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Tối BBQ ngoài sân vườn" loading="lazy" decoding="async"><figcaption>Tối BBQ ngoài sân vườn</figcaption></figure>
+      <figure class="rf rf-w"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/bdf5ba41b1d604454b39b7aa6ba0128850f7c60b/livechat/public/img/thuc-te/gia-dinh-phong-khach.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Phòng khách mở ra vườn xanh" loading="lazy" decoding="async"><figcaption>Phòng khách mở ra vườn xanh</figcaption></figure>
+      <figure class="rf rf-t"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/bdf5ba41b1d604454b39b7aa6ba0128850f7c60b/livechat/public/img/thuc-te/cam-hoa-buoi-sang.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Cắm hoa buổi sáng, làm việc tại nhà" loading="lazy" decoding="async"><figcaption>Cắm hoa buổi sáng, làm việc tại nhà</figcaption></figure>
+      <figure class="rf"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/bdf5ba41b1d604454b39b7aa6ba0128850f7c60b/livechat/public/img/thuc-te/phong-ngu-ban-cong.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Phòng ngủ mở ra ban công" loading="lazy" decoding="async"><figcaption>Phòng ngủ mở ra ban công</figcaption></figure>
+      <figure class="rf"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/bdf5ba41b1d604454b39b7aa6ba0128850f7c60b/livechat/public/img/thuc-te/goc-lam-viec-gieng-troi.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Góc làm việc cạnh giếng trời" loading="lazy" decoding="async"><figcaption>Góc làm việc cạnh giếng trời</figcaption></figure>
+      <figure class="rf rf-w"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/bdf5ba41b1d604454b39b7aa6ba0128850f7c60b/livechat/public/img/thuc-te/vay-chao-tu-ban-cong.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Vẫy chào từ ban công" loading="lazy" decoding="async"><figcaption>Vẫy chào từ ban công</figcaption></figure>
+    </div>
+    <div class="kv-cta"><button class="btn btn-orange js-open" data-title="Đặt lịch đưa cả nhà đi xem nhà mẫu" data-need="Cả nhà đi xem nhà mẫu">Đưa cả nhà đi xem nhà mẫu</button><button class="btn btn-navy js-open" data-title="Nhận layout từng tầng" data-need="Layout từng tầng">Nhận layout từng tầng</button></div>
   </div>
 </section>
 
@@ -1108,6 +1140,29 @@ html:not([data-kv=hn]) .kv-hn,html:not([data-kv=dn]) .kv-dn,html[data-kv] .kv-de
       <p><b>Tiện ích nào quan trọng nhất với gia đình anh/chị?</b>Em gửi bản đồ tiện ích nội khu, ngoại khu và khoảng cách thực tế từ từng căn.</p>
       <div class="ask-btns"><button class="btn btn-orange js-ask" data-ask="Cho em xin danh sách tiện ích nội khu và ngoại khu">Hỏi ngay</button><button class="btn btn-line js-open" data-title="Nhận bản đồ tiện ích & khoảng cách thực tế" data-need="Tiện ích">Nhận tư vấn</button><a class="btn btn-line js-tel" href="#">Gọi ngay</a></div>
     </div>
+  </div>
+</section>
+
+<!-- CÔNG VIÊN & THỂ THAO -->
+<section class="kvsec" id="song-khoe" data-chat-topic="tiện ích vị trí">
+  <div class="wrap">
+    <div class="kv-h"><span class="real-tag">ẢNH THỰC TẾ · ĐANG SỬ DỤNG</span>
+    <h2>Sáng chạy bộ, chiều pickleball, <em>ngay trước cửa nhà</em></h2>
+    <p class="lead-text">Công viên, đường chạy, sân pickleball và gym ngoài trời trong khu đã đưa vào sử dụng. Đây là nhịp sống thường ngày ở Casamia Balanca.</p></div>
+    <div class="realg life">
+      <figure class="rf rf-w"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/cab9dd1a9fa4ac3f36cb886b0ed2081b3ba6e2e7/livechat/public/img/thuc-te/dap-xe-cong-casamia-balanca.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Đạp xe quanh quảng trường cổng chính" loading="lazy" decoding="async"><figcaption>Đạp xe quanh quảng trường cổng chính</figcaption></figure>
+      <figure class="rf rf-t"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/cab9dd1a9fa4ac3f36cb886b0ed2081b3ba6e2e7/livechat/public/img/thuc-te/chay-bo-pho-noi-khu.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Chạy bộ dưới hàng cây nội khu" loading="lazy" decoding="async"><figcaption>Chạy bộ dưới hàng cây nội khu</figcaption></figure>
+      <figure class="rf rf-t"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/cab9dd1a9fa4ac3f36cb886b0ed2081b3ba6e2e7/livechat/public/img/thuc-te/pickleball-cung-nhau.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Sân pickleball" loading="lazy" decoding="async"><figcaption>Sân pickleball</figcaption></figure>
+      <figure class="rf rf-w"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/cab9dd1a9fa4ac3f36cb886b0ed2081b3ba6e2e7/livechat/public/img/thuc-te/yoga-cong-vien.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Yoga trên bãi cỏ công viên" loading="lazy" decoding="async"><figcaption>Yoga trên bãi cỏ công viên</figcaption></figure>
+      <figure class="rf rf-w"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/cab9dd1a9fa4ac3f36cb886b0ed2081b3ba6e2e7/livechat/public/img/thuc-te/gym-ngoai-troi-ven-ho.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Gym ngoài trời ven hồ" loading="lazy" decoding="async"><figcaption>Gym ngoài trời ven hồ</figcaption></figure>
+      <figure class="rf rf-t"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/cab9dd1a9fa4ac3f36cb886b0ed2081b3ba6e2e7/livechat/public/img/thuc-te/dap-xe-hang-cay.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Đạp xe trên đường nội khu" loading="lazy" decoding="async"><figcaption>Đạp xe trên đường nội khu</figcaption></figure>
+      <figure class="rf rf-t"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/cab9dd1a9fa4ac3f36cb886b0ed2081b3ba6e2e7/livechat/public/img/thuc-te/thien-trong-cong-vien.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Thiền giữa vườn cây" loading="lazy" decoding="async"><figcaption>Thiền giữa vườn cây</figcaption></figure>
+      <figure class="rf rf-t"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/cab9dd1a9fa4ac3f36cb886b0ed2081b3ba6e2e7/livechat/public/img/thuc-te/san-pickleball.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Một trận pickleball buổi chiều" loading="lazy" decoding="async"><figcaption>Một trận pickleball buổi chiều</figcaption></figure>
+      <figure class="rf rf-w"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/bdf5ba41b1d604454b39b7aa6ba0128850f7c60b/livechat/public/img/thuc-te/dao-ben-ho-dua.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Đi dạo bên hồ dưới hàng dừa" loading="lazy" decoding="async"><figcaption>Đi dạo bên hồ dưới hàng dừa</figcaption></figure>
+      <figure class="rf rf-w"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/bdf5ba41b1d604454b39b7aa6ba0128850f7c60b/livechat/public/img/thuc-te/cong-an-ninh-xe-dien.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Cổng có bảo vệ, xe điện nội khu" loading="lazy" decoding="async"><figcaption>Cổng có bảo vệ, xe điện nội khu</figcaption></figure>
+      <figure class="rf rf-t"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/bdf5ba41b1d604454b39b7aa6ba0128850f7c60b/livechat/public/img/thuc-te/dao-cong-vien-cung-cun.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Dắt cún dạo công viên" loading="lazy" decoding="async"><figcaption>Dắt cún dạo công viên</figcaption></figure>
+    </div>
+    <div class="kv-cta"><button class="btn btn-orange js-open" data-title="Đặt lịch trải nghiệm một buổi sáng ở Casamia Balanca" data-need="Trải nghiệm công viên &amp; thể thao nội khu">Đặt lịch trải nghiệm</button></div>
   </div>
 </section>
 
@@ -1890,5 +1945,11 @@ if (/[?&]debug=1/.test(location.search)) setTimeout(function () {
   document.body.appendChild(d);
 }, 3500);
 </script>
+<div class="lbx" id="lbx" role="dialog" aria-label="Xem ảnh"><button class="lx" aria-label="Đóng">×</button><button class="lp" aria-label="Ảnh trước">‹</button><img alt=""><p></p><button class="ln" aria-label="Ảnh sau">›</button></div>
+<script>(function(){var L=document.getElementById('lbx');if(!L)return;var im=L.querySelector('img'),cap=L.querySelector('p'),list=[],k=0;
+function show(i){k=(i+list.length)%list.length;var f=list[k];im.src=f.querySelector('img').src;im.alt=f.querySelector('img').alt;cap.textContent=(f.querySelector('figcaption')||{}).textContent||'';L.classList.add('on');}
+document.addEventListener('click',function(e){var f=e.target.closest('.realg .rf');if(f){list=[].slice.call(f.parentNode.querySelectorAll('.rf'));show(list.indexOf(f));return;}
+if(!L.classList.contains('on'))return;if(e.target.closest('.lp'))show(k-1);else if(e.target.closest('.ln'))show(k+1);else if(e.target===L||e.target.closest('.lx'))L.classList.remove('on');});
+document.addEventListener('keydown',function(e){if(!L.classList.contains('on'))return;if(e.key==='Escape')L.classList.remove('on');if(e.key==='ArrowLeft')show(k-1);if(e.key==='ArrowRight')show(k+1);});})();</script>
 </body>
 </html>
