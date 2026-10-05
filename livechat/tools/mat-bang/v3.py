@@ -120,20 +120,24 @@ cents['pv'].append((1050*S,1000*S,BW*cum[-1]))
 # ---- đường (vẽ tay theo tim đường, bề rộng đều) ----
 import roads3
 rm=np.zeros((H,W),np.uint8)
+from snaproads import snap
+Lb=LOTS>0
 for k,(pts,wd) in roads3.R.items():
     if k=='vcc': continue
-    cv2.polylines(rm,[np.array(pts,np.int32)],False,255,wd,cv2.LINE_AA)
+    cl,ws=snap(pts,wd,Lb)
+    for j in range(len(cl)-1):
+        cv2.line(rm,tuple(cl[j].round().astype(int)),tuple(cl[j+1].round().astype(int)),255,int(round(min(ws[j],ws[j+1]))),cv2.LINE_AA)
+rm[cv2.dilate(LOTS,np.ones((5,5),np.uint8))>0]=0
 rm=(rm>128).astype(np.uint8)*255
-rm[cv2.dilate(LOTS,np.ones((7,7),np.uint8))>0]=0
+np.save('lots.npy',LOTS)
 rm=cv2.morphologyEx(rm,cv2.MORPH_OPEN,np.ones((5,5),np.uint8))
-rm=cv2.GaussianBlur(rm,(0,0),1.5); rm=(rm>128).astype(np.uint8)*255
-ROAD_SVG=f'<path class="rd" d="{path(rm,1.0,300)}" fill="#ffffff" stroke="#c3ccd8" stroke-width=".9" fill-rule="evenodd"/>'
+rm=cv2.GaussianBlur(rm,(0,0),2.5); rm=(rm>128).astype(np.uint8)*255
+ROAD_SVG=f'<path class="rd" d="{path(rm,1.0,300)}" fill="#ffffff" stroke="#c6e3ba" stroke-width="2.6" paint-order="stroke" fill-rule="evenodd"/>'
 vp=roads3.R['vcc'][0]
 VCC_D='M'+' L'.join(f'{x*S:.1f} {y*S:.1f}' for x,y in vp)
-out.append(ROAD_SVG)
 for g,ps in groups.items():
     out.append(f'<path class="lot-{g}" d="{" ".join(ps)}" fill="{PAL[g]}"/>')
 out.append(f'<path d="{" ".join(dividers)}" stroke="#ffffff" stroke-width=".9" opacity=".9"/>')
-open('v3.txt','w').write('\n'.join(out)); open('vcc.txt','w').write(VCC_D)
+out.append(ROAD_SVG); open('v3.txt','w').write('\n'.join(out)); open('vcc.txt','w').write(VCC_D)
 json.dump({g:[sum(x*a for x,y,a in v)/sum(a for *_,a in v), sum(y*a for x,y,a in v)/sum(a for *_,a in v)] for g,v in cents.items() if v},open('cents.json','w'))
 print({g:len(v) for g,v in groups.items()}, 'KB',len('\n'.join(out))//1024, json.load(open('bbox.json')))
