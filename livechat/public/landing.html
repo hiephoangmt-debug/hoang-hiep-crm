@@ -206,8 +206,8 @@
   .hpol-row span:last-child{border-right:0}
   .hpol-row b{display:block;font-size:38px;color:var(--orange);font-weight:800;margin-top:2px;line-height:1.1;letter-spacing:-.5px}
   .hpol-row i{display:block;font-style:normal;font-size:12px;font-weight:700;color:var(--navy)}
-  .shine{background:linear-gradient(105deg,var(--orange) 0%,var(--orange) 38%,#fff3e6 50%,var(--orange) 62%,var(--orange) 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:shine 2.6s ease-in-out infinite alternate;filter:drop-shadow(0 2px 6px rgba(244,124,32,.25))}
-  .shine-w{background:linear-gradient(105deg,var(--orange) 0%,var(--orange) 38%,#ffe2c7 50%,var(--orange) 62%,var(--orange) 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 3s ease-in-out infinite alternate}
+  .shine{background:linear-gradient(105deg,var(--orange) 0%,var(--orange) 38%,#ffc58f 50%,var(--orange) 62%,var(--orange) 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:shine 2.6s ease-in-out infinite alternate;filter:drop-shadow(0 2px 6px rgba(244,124,32,.25))}
+  .shine-w{background:linear-gradient(105deg,var(--orange) 0%,var(--orange) 38%,#ffc58f 50%,var(--orange) 62%,var(--orange) 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 3s ease-in-out infinite alternate}
   @keyframes shine{from{background-position:115% 0}to{background-position:-15% 0}}
   @media (prefers-reduced-motion:reduce){.shine,.shine-w{animation:none}}
   .hpol-cta{margin-top:10px;font-weight:700;font-size:14px;color:#fff;background:var(--orange);border-radius:8px;padding:8px 12px;text-align:center}
@@ -369,6 +369,22 @@
   .gal .g1{grid-row:1/3}
   .gal .g4{grid-column:2/3}
   .gal .g5{grid-column:3/4}
+  /* Sống trong compound */
+  .song{background:var(--soft)}
+  .songs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+  .sg{background:#fff;border-radius:16px;padding:24px;border:1px solid var(--line);border-top:4px solid var(--orange)}
+  .sg>b{display:inline-block;font-size:44px;font-weight:800;line-height:1;letter-spacing:-1px}
+  .sg>span{display:inline-block;margin-left:8px;color:var(--muted);font-weight:600;font-size:14px}
+  .sg h3{font-size:18px;margin:12px 0 6px}
+  .sg p{margin:0;color:var(--muted);font-size:15px}
+  .song-cta{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:24px;background:var(--navy);color:#fff;border-radius:16px;padding:22px 26px}
+  .song-cta p{margin:4px 0 0;opacity:.85;font-size:15px;max-width:620px}
+  .hnums.h4 b{font-size:22px}
+  .cash-sm{padding:56px 0}
+  .cash-sm h2{font-size:clamp(22px,2.6vw,30px)}
+  .cash-sm .commit{margin:22px 0 18px}
+  .cash-sm .cm>b{font-size:44px}
+  .cash-cta{text-align:center}
   /* Chính sách theo phân khu */
   .ptabs{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 20px}
   .ptabs button{font:inherit;font-weight:700;font-size:14px;border:1.5px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:999px;padding:10px 16px;cursor:pointer}
@@ -422,7 +438,7 @@
   @media(max-width:960px){
     .hero::after{background:linear-gradient(180deg,rgba(7,29,64,.88),rgba(11,42,91,.78) 60%,rgba(11,42,91,.9))}
     .hero .wrap,.loc .grid,.arch .grid,.final .grid{grid-template-columns:1fr}
-    .cards3,.ways,.prods,.calc,.radius,.commit,.prods.two,.loves,.gmap{grid-template-columns:1fr}
+    .cards3,.ways,.prods,.calc,.radius,.commit,.prods.two,.loves,.gmap,.songs{grid-template-columns:1fr}
     .gal{grid-template-columns:1fr 1fr;grid-template-rows:auto}.gal figure{height:220px}.gal .g1{grid-column:1/3;grid-row:auto;height:300px}.gal .g4,.gal .g5{grid-column:auto}
     .gal figcaption{font-size:12.5px;padding:30px 12px 12px}.gal figcaption b{font-size:15px}
     .gmap-side{border-left:0;border-top:4px solid var(--orange)}.gmap-frame,.gmap-frame iframe{min-height:300px}
@@ -467,7 +483,7 @@
   <div class="wrap">
     <div class="logo">CASAMIA BALANCA<small>HỘI AN</small></div>
     <nav>
-      <a href="#dong-tien">Dòng tiền</a>
+      <a href="#song">Sống ở đây</a>
       <a href="#tien-ich">Tiện ích</a>
       <a href="#mat-bang">Mặt bằng</a>
       <a href="#chinh-sach">Chính sách</a>
@@ -482,26 +498,28 @@
   <div class="hero-bg" style="background-image:url('img/forestside.jpg')"></div>
   <div class="wrap">
     <div>
-      <span class="eyebrow">Casamia Balanca · Hội An · Chính sách mới từ 09/2026</span>
-      <h1>Biệt thự giữa rừng dừa Hội An. Chủ đầu tư <em class="shine-w">thuê lại 60 triệu/tháng</em></h1>
-      <p class="sub">Sáng cà phê bên rừng dừa Bảy Mẫu, khoảng 10 phút ra phố cổ, chiều ra biển An Bàng. Gia đình về nghỉ khi muốn. <b>Những tháng còn lại, chủ đầu tư thuê lại hoặc vận hành cho thuê giúp anh/chị.</b></p>
+      <span class="eyebrow">Khu biệt thự compound · Rừng dừa Bảy Mẫu · Hội An</span>
+      <h1><span class="js-count" data-to="31.1" data-dec="1">31,1</span> ha rừng dừa. Chỉ <em class="shine-w">363 gia đình</em> được gọi nơi này là nhà.</h1>
+      <p class="sub">Sáng nghe tiếng chim trong rừng dừa, tối nghe tiếng sông trước hiên nhà. Khu biệt thự có ban quản lý, Clubhouse hồ bơi &amp; gym, cách phố cổ khoảng 10 phút. <b>Chất lượng sống mà phố thị không có.</b></p>
       <div class="hpol js-open" data-title="Nhận chính sách bán hàng đầy đủ & bảng giá" data-need="Chính sách bán hàng" role="button" tabindex="0">
-        <div class="hpol-h">🎁 Chính sách bán hàng mới nhất</div>
+        <div class="hpol-h">🎁 Ưu đãi mua nhà từ 09/2026</div>
         <div class="hpol-row">
-          <span>CĐT thuê lại<b class="shine">60tr</b><i>mỗi tháng · Forestside</i></span>
           <span>Đặt cọc chỉ<b class="shine">300tr</b><i>giữ căn</i></span>
           <span>Lãi suất<b class="shine">0%</b><i>24 tháng · vay 70%</i></span>
           <span>Chiết khấu tới<b class="shine">4 tỷ</b><i>khi nhận bàn giao thô</i></span>
+          <span>Miễn phí<b class="shine">2 năm</b><i>phí quản lý khu đô thị</i></span>
         </div>
         <div class="hpol-cta">Xem chính sách đầy đủ &amp; bảng giá →</div>
       </div>
-      <div class="hnums">
-        <div><b><span class="js-count" data-to="4.4" data-dec="1">4,4</span> triệu</b><span>lượt khách đến Hội An năm 2024</span></div>
-        <div><b>+<span class="js-count" data-to="18.64" data-dec="2">18,64</span>%</b><span>khách <u>ở lại qua đêm</u>, tăng gần gấp 3 tổng lượt khách</span></div>
+      <div class="hnums h4">
+        <div><b>~<span class="js-count" data-to="12" data-dec="0">12</span> căn/ha</b><span>mật độ thấp: <u>363 căn</u> trên 31,1 ha</span></div>
+        <div><b>0 km</b><span>rừng dừa Bảy Mẫu <u>ngay trước cửa</u></span></div>
+        <div><b>~10 phút</b><span>ra phố cổ Hội An (di sản UNESCO)</span></div>
+        <div><b>~5 km</b><span>ra biển An Bàng &amp; Cửa Đại</span></div>
       </div>
       <div class="ctas">
-        <button class="btn btn-orange pulse js-open" data-title="Căn nào nhận được 60 triệu/tháng?" data-need="Đầu tư nhận tiền thuê">Căn nào nhận 60 triệu/tháng? →</button>
-        <a class="btn btn-ghost" href="#dong-tien">🧮 Tính tiền thuê nhận về ↓</a>
+        <button class="btn btn-orange pulse js-open" data-title="Đặt lịch xem nhà mẫu – đón tận nơi" data-need="Đặt lịch xem nhà mẫu">📅 Đặt lịch xem nhà mẫu →</button>
+        <a class="btn btn-ghost" href="#song">Sống ở đây thế nào? ↓</a>
       </div>
       <div class="qc qc-hero"><a class="qc-call js-tel" href="#">📞 Gọi <span class="js-hotline"></span></a><a class="qc-zalo js-zalo" href="#" target="_blank" rel="noopener">💬 Chat Zalo ngay</a>
       </div>
@@ -512,17 +530,17 @@
         <h3>Nhận trọn bộ trong 5 phút qua Zalo</h3>
         <ul class="gets">
           <li><span>①</span> Bảng giá &amp; căn còn trống Forestside / Parkhome</li>
-          <li><span>②</span> Chính sách chi tiết &amp; tiến độ thanh toán theo căn</li>
-          <li><span>③</span> Bảng tính tiền thuê CĐT trả hằng tháng</li>
+          <li><span>②</span> Mặt bằng, layout &amp; phối cảnh tiện ích nội khu</li>
+          <li><span>③</span> Chính sách, tiến độ thanh toán &amp; lịch xem nhà mẫu</li>
         </ul>
         <label class="field"><input name="name" placeholder="Họ và tên" autocomplete="name" maxlength="80"></label>
         <label class="field"><input name="phone" type="tel" placeholder="Số điện thoại / Zalo *" autocomplete="tel" required maxlength="20"></label>
         <label class="field"><select name="need">
           <option value="">Anh/chị quan tâm…</option>
-          <option>Forestside Villa – biệt thự rừng dừa</option>
-          <option>Parkhome – biệt thự sân vườn</option>
+          <option>Mua để ở / an cư</option>
+          <option>Nhà nghỉ dưỡng cuối tuần cho gia đình</option>
+          <option>Vừa ở vừa cho thuê</option>
           <option>Đầu tư nhận tiền thuê hằng tháng</option>
-          <option>Mua để nghỉ dưỡng gia đình</option>
         </select></label>
         <div class="form-err"></div>
         <button class="btn btn-orange btn-block">Gửi tài liệu cho tôi ngay</button>
@@ -539,9 +557,9 @@
   <div class="wrap">
     <div class="grid">
       <div class="it"><b><span class="js-count" data-to="31.1" data-dec="1">31,1</span><em> ha</em></b><span>giữa rừng dừa Bảy Mẫu</span></div>
-      <div class="it"><b><span class="js-count" data-to="363" data-dec="0">363</span></b><span>sản phẩm – không hơn</span></div>
-      <div class="it"><b>5<em> năm</em></b><span>hợp đồng ủy thác cho thuê</span></div>
-      <div class="it"><b>2026<em>–27</em></b><span>nhận bàn giao nhà</span></div>
+      <div class="it"><b><span class="js-count" data-to="363" data-dec="0">363</span></b><span>gia đình – một cộng đồng chọn lọc</span></div>
+      <div class="it"><b>~12<em> căn/ha</em></b><span>mật độ thấp, nhiều khoảng xanh</span></div>
+      <div class="it"><b>2026<em>–27</em></b><span>nhận nhà về ở</span></div>
     </div>
   </div>
 </div>
@@ -563,96 +581,95 @@
   </div>
 </section>
 
-<!-- BẠN CÓ BIẾT -->
-<section class="know" id="bi-mat">
+<!-- SỐNG TRONG COMPOUND -->
+<section class="song" id="song" data-chat-topic="tiện ích vị trí">
   <div class="wrap">
-    <span class="eyebrow">Bạn có biết?</span>
-    <h2>Hội An không thiếu khách. <em>Hội An thiếu chỗ để khách ở lại.</em></h2>
-    <p class="lead-text">3 con số khiến nhà đầu tư dừng lại khi nhìn vào thị trường nghỉ dưỡng Hội An.</p>
-    <div class="cards3">
-      <div class="bignum reveal">
-        <b>+<span class="js-count" data-to="18.64" data-dec="2">18,64</span>%</b>
-        <h3>Khách ở lại tăng nhanh gấp 3</h3>
-        <p>Năm 2024, khách lưu trú tại Hội An tăng 18,64%, trong khi tổng lượt khách tăng 6,58%. Khách không còn ghé qua trong ngày nữa, họ muốn <b>ở lại</b>.</p>
-        <button class="link-cta js-open" data-title="Nhận phân tích thị trường cho thuê Hội An" data-need="Đầu tư cho thuê – dòng tiền">Xem phân tích thị trường →</button>
-      </div>
-      <div class="bignum reveal">
-        <b>~<span class="js-count" data-to="4" data-dec="0">4</span> triệu</b>
-        <h3>đêm lưu trú mỗi năm</h3>
-        <p>1,87 triệu lượt khách × 2,14 ngày lưu trú bình quân. Mỗi đêm đều cần một chỗ ngủ, và khách gia đình, nhóm bạn ngày càng chọn <b>biệt thự nguyên căn</b>.</p>
-        <button class="link-cta js-open" data-title="Nhận kịch bản cho thuê nghỉ dưỡng" data-need="Đầu tư cho thuê – dòng tiền">Xem kịch bản cho thuê →</button>
-      </div>
-      <div class="bignum reveal">
-        <b>1 : <span class="js-count" data-to="12000" data-dec="0">12.000</span></b>
-        <h3>Khan hiếm là có thật</h3>
-        <p>4,4 triệu lượt khách mỗi năm, chỉ 363 căn tại Casamia Balanca. Hội An là đô thị di sản, quỹ đất biệt thự gần phố cổ và biển <b>không sinh thêm</b>.</p>
-        <button class="link-cta js-open" data-title="Xem danh sách căn còn trống" data-need="Bảng giá">Xem căn còn trống →</button>
-      </div>
+    <span class="eyebrow">Sống trong khu compound</span>
+    <h2>Riêng tư, an yên, đủ đầy: <em>chất lượng sống trong từng con số</em></h2>
+    <p class="lead-text">Không chen chúc như chung cư, không ồn ào như phố. Một khu biệt thự khép kín giữa thiên nhiên, có quản lý, có tiện ích, có hàng xóm cùng nếp sống.</p>
+    <div class="songs">
+      <div class="sg reveal"><b class="shine">~12</b><span>căn / ha</span><h3>Mật độ thấp, nhiều khoảng xanh</h3><p>31,1 ha chỉ có 363 căn. Nhà thưa, cây nhiều, gió sông thổi qua từng ngõ.</p></div>
+      <div class="sg reveal"><b class="shine">363</b><span>gia đình</span><h3>Một cộng đồng chọn lọc</h3><p>Hàng xóm cùng nếp sống chậm, trẻ con có bạn chơi, người lớn có bạn dạo bộ mỗi chiều.</p></div>
+      <div class="sg reveal"><b class="shine">1 năm</b><span>miễn phí</span><h3>Clubhouse: hồ bơi &amp; gym</h3><p>Bơi buổi sáng, tập gym buổi chiều như ở resort. Chủ nhà được miễn phí Fitness &amp; Pool năm đầu.</p></div>
+      <div class="sg reveal"><b class="shine">2 năm</b><span>miễn phí quản lý</span><h3>Có ban quản lý khu đô thị</h3><p>Cảnh quan, vệ sinh, vận hành chung có người lo. Về là ở, không phải bận tâm.</p></div>
+      <div class="sg reveal"><b class="shine">0 km</b><span>tới rừng dừa</span><h3>Thiên nhiên bao quanh</h3><p>Rừng dừa Bảy Mẫu thuộc khu dự trữ sinh quyển thế giới, sông nước bao quanh, không khí trong lành quanh năm.</p></div>
+      <div class="sg reveal"><b class="shine">VTN</b><span>kiến trúc</span><h3>Nhà mang hồn Hội An</h3><p>Tư vấn thiết kế VTN Architects (Võ Trọng Nghĩa): mở, xanh, đón gió và ánh sáng tự nhiên.</p></div>
     </div>
-    <p class="src" style="text-align:center;margin-top:22px">Nguồn: số liệu du lịch 2024 của UBND TP Hội An (Báo Đà Nẵng, Tạp chí Công Thương). Mục tiêu 2025: 4,97 triệu lượt khách.</p>
+    <div class="song-cta reveal">
+      <div><b>Muốn biết sống ở đây thực tế ra sao?</b><p>Em gửi quy hoạch tổng thể, danh sách tiện ích nội khu, quy định vận hành khu và đón anh/chị đi xem tận nơi.</p></div>
+      <div class="pol-act"><button class="btn btn-orange js-open" data-title="Nhận quy hoạch, tiện ích nội khu & lịch xem nhà mẫu" data-need="Mua để ở – tìm hiểu khu compound">Nhận quy hoạch &amp; lịch xem nhà →</button></div>
+    </div>
   </div>
 </section>
 
 <!-- MỘT NGÀY -->
 <section class="day" data-chat-topic="vị trí tiện ích">
   <div class="wrap">
-    <span class="eyebrow">Hãy hình dung</span>
+    <span class="eyebrow">Một ngày bình thường</span>
     <h2>Một ngày ở <em>Casamia Balanca</em></h2>
     <div class="timeline">
       <div class="tl reveal"><time>06:00</time><div><h3>Sương sớm trên rừng dừa</h3><p>Mở cửa là 7 mẫu dừa nước xanh mướt, nơi thuộc khu dự trữ sinh quyển thế giới. Cà phê trên ban công, nghe tiếng thuyền thúng gõ nước.</p></div></div>
       <div class="tl reveal"><time>09:00</time><div><h3>Phố cổ chỉ ~10 phút</h3><p>Lang thang những con phố vàng rêu đã 400 năm tuổi, ăn tô cao lầu đúng vị, rồi về nhà trước giờ nắng gắt.</p></div></div>
       <div class="tl reveal"><time>17:30</time><div><img class="tl-img" src="img/terrace.jpg" alt="" loading="lazy"><h3>Hoàng hôn trên sân hiên</h3><p>Chiều đưa cả nhà ra biển An Bàng (~5 km), về kịp ngắm mặt trời lặn trên sông từ sân hiên nhà mình.</p></div></div>
       <div class="tl reveal"><time>20:00</time><div><img class="tl-img" src="img/waterway.jpg" alt="" loading="lazy"><h3>Bữa tối trong căn nhà của mình</h3><p>Ba thế hệ quây quần trong khu vườn riêng: không phòng khách sạn chật chội, không giờ trả phòng.</p></div></div>
-      <div class="tl hl reveal"><time>Còn lại</time><div><h3>Khi gia đình về thành phố…</h3><p>Chủ đầu tư thuê lại hoặc vận hành cho thuê, đón khách trong số <b>1,87 triệu lượt khách lưu trú</b> mỗi năm. <b>Tiền thuê tới 60 triệu/tháng vẫn về tài khoản của anh/chị.</b></p></div></div>
+      <div class="tl hl reveal"><time>Mỗi ngày</time><div><h3>Không phải kỳ nghỉ, mà là cuộc sống</h3><p>Ở hẳn, hay về mỗi cuối tuần, đều được. Khi cả nhà đi vắng, <b>ban quản lý vẫn chăm sóc khu</b>: về là ở, không phải dọn dẹp.</p></div></div>
     </div>
     <div style="text-align:center;margin-top:30px"><button class="btn btn-orange js-open" data-title="Tôi muốn sở hữu một căn như thế" data-need="Mua để nghỉ dưỡng gia đình">Tôi muốn một ngày như thế →</button></div>
   </div>
 </section>
 
-<!-- CASH FLOW -->
-<section class="cash" id="dong-tien" data-chat-topic="bảng giá thanh toán chính sách">
+<!-- TIỆN ÍCH: Ở & CHO THUÊ -->
+<section class="love" id="tien-ich" data-chat-topic="tiện ích vị trí">
   <div class="wrap">
-    <span class="eyebrow">Dòng tiền · áp dụng từ 01/09/2026</span>
-    <h2>Chủ đầu tư &amp; đơn vị khai thác <em>cam kết thuê</em></h2>
-    <p class="lead-text">Không cần tự tìm khách, không cần tự vận hành. Tiền thuê về tài khoản <b>hằng tháng</b>.</p>
-    <div class="commit">
-      <div class="cm reveal">
-        <span class="cm-h">Biệt thự sân vườn</span>
-        <b class="shine">50 triệu<small>/tháng</small></b>
-        <div class="cm-sub">
-          <div><strong>5 năm</strong> liên tiếp<p>nếu mua quỹ căn full nội thất của M VILLAGE</p><em>≈ 3 tỷ tiền thuê</em></div>
-          <div><strong>3 năm</strong> liên tiếp<p>nếu mua thô &amp; tự hoàn thiện nội thất theo tiêu chuẩn CĐT</p><em>≈ 1,8 tỷ tiền thuê</em></div>
-        </div>
-      </div>
-      <div class="cm hl reveal">
-        <span class="cm-h">Biệt thự rừng dừa</span>
-        <b class="shine">60 triệu<small>/tháng</small></b>
-        <div class="cm-sub one">
-          <div><strong>3 năm</strong> liên tiếp<p>kể từ khi bàn giao biệt thự full nội thất theo tiêu chuẩn CĐT</p><em>≈ 2,16 tỷ tiền thuê</em></div>
-        </div>
-      </div>
+    <span class="eyebrow">Tiện ích</span>
+    <h2>Vì sao khách <em>mê ở đây</em>: về ở thì sướng, cho thuê thì đắt khách</h2>
+    <p class="lead-text">Mỗi tiện ích có 2 giá trị: cho gia đình anh/chị khi về nghỉ, và cho khách thuê khi anh/chị vắng nhà.</p>
+    <div class="lens" role="tablist">
+      <button data-l="both">Cả hai</button>
+      <button class="on" data-l="live">🏡 Khi về ở</button>
+      <button data-l="rent">💰 Khi cho thuê</button>
     </div>
-
-    <div class="calc reveal" id="tinh-dong-tien">
-      <div class="calc-in">
-        <h3>🧮 Tính tiền thuê anh/chị nhận về</h3>
-        <p class="assume" style="margin:0 0 14px">Chọn phân khu và phương án:</p>
-        <div class="pick js-pick">
-          <button data-m="60" data-y="3" data-t="CĐT trực tiếp thuê lại" class="on">Forestside · Thô 2026<small>thuê lại 60tr × 3 năm</small></button>
-          <button data-m="60" data-y="5" data-t="Ủy thác CĐT vận hành – thu nhập tối thiểu" data-u="1">Forestside · Nội thất 2027<small>ủy thác ≥ 60tr × 5 năm</small></button>
-          <button data-m="50" data-y="3" data-t="CĐT trực tiếp thuê lại">Parkhome · Thô 2026<small>thuê lại 50tr × 3 năm</small></button>
-          <button data-m="50" data-y="5" data-t="Ủy thác CĐT vận hành – thu nhập tối thiểu" data-u="1">Parkhome · Nội thất 2027<small>ủy thác ≥ 50tr × 5 năm</small></button>
-        </div>
-        <ul class="perks js-perks"></ul>
-      </div>
-      <div class="calc-out">
-        <span class="js-ctype"></span>
-        <span>Mỗi tháng</span><b class="js-month"></b>
-        <span>Mỗi năm</span><b class="js-year"></b>
-        <span>Tổng trong hợp đồng</span><b class="js-total big shine"></b>
-        <button class="btn btn-orange btn-block js-open" data-title="Căn nào đủ điều kiện nhận tiền thuê này?" data-need="Đầu tư nhận tiền thuê hằng tháng">Căn nào đủ điều kiện? Hỏi ngay →</button>
-        <p class="assume">Ủy thác: chỉ áp dụng với biệt thự đủ điều kiện vận hành; Parkhome áp dụng quỹ 50 căn trong chương trình cho thuê.</p>
-      </div>
+    <div class="loves js-loves l-live">
+      <article class="lv lv-wide reveal">
+        <div class="lv-img" data-img="architecture" style="background-image:url('img/terrace.jpg')"><span>Theo phối cảnh</span></div>
+        <h3>🛥️ Biệt thự ven sông, sân hiên ngắm hoàng hôn</h3>
+        <p class="live">Bữa tối ngoài sân hiên, ngắm hoàng hôn trên mặt nước. Không gian riêng tư cho ba thế hệ.</p>
+        <p class="rent">Một tấm ảnh hoàng hôn từ sân hiên ven sông là <b>"đặc sản" giúp khách chốt đặt phòng</b> nhanh hơn, dễ đặt giá thuê cao hơn.</p>
+      </article>
+      <article class="lv reveal">
+        <div class="lv-ic">🌴</div>
+        <h3>Rừng dừa Bảy Mẫu ngay trước cửa</h3>
+        <p class="live">Sáng đi bộ dưới hàng dừa, chiều cùng con đi thuyền thúng. Không khí trong lành giữa khu dự trữ sinh quyển thế giới.</p>
+        <p class="rent">Thuyền thúng rừng dừa là trải nghiệm nhiều khách quốc tế tìm đến Hội An. Ở ngay đó là <b>lợi thế lớn khi khách chọn chỗ ở</b>.</p>
+      </article>
+      <article class="lv reveal">
+        <div class="lv-ic">🏊</div>
+        <h3>Clubhouse Casamia: Fitness &amp; Pool</h3>
+        <p class="live">Tập gym, bơi lội như ở resort. <b>Miễn phí 1 năm</b> cho chủ nhà.</p>
+        <p class="rent">Khách thuê dài hạn (chuyên gia, gia đình nước ngoài) <b>luôn hỏi gym và hồ bơi</b>. Có sẵn thì dễ cho thuê theo tháng.</p>
+      </article>
+      <article class="lv reveal">
+        <div class="lv-ic">🏮</div>
+        <h3>Phố cổ Hội An ~10 phút</h3>
+        <p class="live">Tối dạo phố đèn lồng, ăn cao lầu, mì Quảng rồi về nhà trong vài phút, không chen chúc.</p>
+        <p class="rent">Phố cổ là lý do chính trong <b>4,4 triệu lượt khách</b> đến Hội An mỗi năm. Gần phố cổ nhưng yên tĩnh là điều khách rất thích.</p>
+      </article>
+      <article class="lv reveal">
+        <div class="lv-ic">🌊</div>
+        <h3>Biển An Bàng &amp; Cửa Đại ~5 km</h3>
+        <p class="live">Cuối tuần tắm biển, ăn hải sản, rồi về biệt thự giữa rừng dừa.</p>
+        <p class="rent">Combo <b>"rừng – sông – biển – phố cổ"</b> trong một chuyến đi là thứ khách gia đình, nhóm bạn tìm, và họ ở lâu hơn.</p>
+      </article>
+      <article class="lv reveal">
+        <div class="lv-ic">🔑</div>
+        <h3>Chủ đầu tư vận hành giúp</h3>
+        <p class="live"><b>10 đêm nghỉ miễn phí mỗi năm</b> (ủy thác), <b>miễn phí 2 năm</b> phí quản lý. Về là ở, không lo dọn dẹp.</p>
+        <p class="rent">Không tự tìm khách, không quản lý. Nhận <b>45% doanh thu</b>, tối thiểu <b>50–60 triệu/tháng</b> theo hợp đồng.</p>
+      </article>
+    </div>
+    <div class="love-cta reveal">
+      <p>✈️ Sân bay quốc tế Đà Nẵng ~30 km · 🏝️ Cù Lao Chàm đi ca nô từ Cửa Đại · 🥬 Làng rau Trà Quế · 🛶 Sông Hoài</p>
+      <button class="btn btn-orange js-open" data-title="Nhận danh sách & phối cảnh tiện ích" data-need="Tiện ích">Nhận bộ ảnh tiện ích &amp; video thực tế →</button>
     </div>
   </div>
 </section>
@@ -702,62 +719,6 @@
   </div>
 </section>
 
-<!-- TIỆN ÍCH: Ở & CHO THUÊ -->
-<section class="love" id="tien-ich" data-chat-topic="tiện ích vị trí">
-  <div class="wrap">
-    <span class="eyebrow">Tiện ích</span>
-    <h2>Vì sao khách <em>mê ở đây</em>: về ở thì sướng, cho thuê thì đắt khách</h2>
-    <p class="lead-text">Mỗi tiện ích có 2 giá trị: cho gia đình anh/chị khi về nghỉ, và cho khách thuê khi anh/chị vắng nhà.</p>
-    <div class="lens" role="tablist">
-      <button class="on" data-l="both">Cả hai</button>
-      <button data-l="live">🏡 Khi về ở</button>
-      <button data-l="rent">💰 Khi cho thuê</button>
-    </div>
-    <div class="loves js-loves">
-      <article class="lv lv-wide reveal">
-        <div class="lv-img" data-img="architecture" style="background-image:url('img/terrace.jpg')"><span>Theo phối cảnh</span></div>
-        <h3>🛥️ Biệt thự ven sông, sân hiên ngắm hoàng hôn</h3>
-        <p class="live">Bữa tối ngoài sân hiên, ngắm hoàng hôn trên mặt nước. Không gian riêng tư cho ba thế hệ.</p>
-        <p class="rent">Một tấm ảnh hoàng hôn từ sân hiên ven sông là <b>"đặc sản" giúp khách chốt đặt phòng</b> nhanh hơn, dễ đặt giá thuê cao hơn.</p>
-      </article>
-      <article class="lv reveal">
-        <div class="lv-ic">🌴</div>
-        <h3>Rừng dừa Bảy Mẫu ngay trước cửa</h3>
-        <p class="live">Sáng đi bộ dưới hàng dừa, chiều cùng con đi thuyền thúng. Không khí trong lành giữa khu dự trữ sinh quyển thế giới.</p>
-        <p class="rent">Thuyền thúng rừng dừa là trải nghiệm nhiều khách quốc tế tìm đến Hội An. Ở ngay đó là <b>lợi thế lớn khi khách chọn chỗ ở</b>.</p>
-      </article>
-      <article class="lv reveal">
-        <div class="lv-ic">🏊</div>
-        <h3>Clubhouse Casamia: Fitness &amp; Pool</h3>
-        <p class="live">Tập gym, bơi lội như ở resort. <b>Miễn phí 1 năm</b> cho chủ nhà.</p>
-        <p class="rent">Khách thuê dài hạn (chuyên gia, gia đình nước ngoài) <b>luôn hỏi gym và hồ bơi</b>. Có sẵn thì dễ cho thuê theo tháng.</p>
-      </article>
-      <article class="lv reveal">
-        <div class="lv-ic">🏮</div>
-        <h3>Phố cổ Hội An ~10 phút</h3>
-        <p class="live">Tối dạo phố đèn lồng, ăn cao lầu, mì Quảng rồi về nhà trong vài phút, không chen chúc.</p>
-        <p class="rent">Phố cổ là lý do chính trong <b>4,4 triệu lượt khách</b> đến Hội An mỗi năm. Gần phố cổ nhưng yên tĩnh là điều khách rất thích.</p>
-      </article>
-      <article class="lv reveal">
-        <div class="lv-ic">🌊</div>
-        <h3>Biển An Bàng &amp; Cửa Đại ~5 km</h3>
-        <p class="live">Cuối tuần tắm biển, ăn hải sản, rồi về biệt thự giữa rừng dừa.</p>
-        <p class="rent">Combo <b>"rừng – sông – biển – phố cổ"</b> trong một chuyến đi là thứ khách gia đình, nhóm bạn tìm, và họ ở lâu hơn.</p>
-      </article>
-      <article class="lv reveal">
-        <div class="lv-ic">🔑</div>
-        <h3>Chủ đầu tư vận hành giúp</h3>
-        <p class="live"><b>10 đêm nghỉ miễn phí mỗi năm</b> (ủy thác), <b>miễn phí 2 năm</b> phí quản lý. Về là ở, không lo dọn dẹp.</p>
-        <p class="rent">Không tự tìm khách, không quản lý. Nhận <b>45% doanh thu</b>, tối thiểu <b>50–60 triệu/tháng</b> theo hợp đồng.</p>
-      </article>
-    </div>
-    <div class="love-cta reveal">
-      <p>✈️ Sân bay quốc tế Đà Nẵng ~30 km · 🏝️ Cù Lao Chàm đi ca nô từ Cửa Đại · 🥬 Làng rau Trà Quế · 🛶 Sông Hoài</p>
-      <button class="btn btn-orange js-open" data-title="Nhận danh sách & phối cảnh tiện ích" data-need="Tiện ích">Nhận bộ ảnh tiện ích &amp; video thực tế →</button>
-    </div>
-  </div>
-</section>
-
 <!-- MẶT BẰNG & CĂN KEY -->
 <section class="plan" id="mat-bang" data-chat-topic="mặt bằng sản phẩm">
   <div class="wrap">
@@ -800,11 +761,11 @@
 <section class="products" id="san-pham" data-chat-topic="mặt bằng sản phẩm">
   <div class="wrap">
     <span class="eyebrow">Sản phẩm &amp; layout</span>
-    <h2>2 phân khu, <em>2 cách nhận dòng tiền</em></h2>
+    <h2>2 phân khu, <em>2 phong cách sống</em></h2>
     <p class="lead-text">Diện tích, layout từng tầng và giá từng căn cập nhật theo bảng hàng. Bấm để mở khoá.</p>
     <div class="prods two">
       <div class="prod reveal"><div class="ph" data-img="villa1" style="background-image:url('img/forestside.jpg')"><span>Biệt thự rừng dừa</span><b class="ph-n">60tr/tháng</b></div><div class="bd">
-        <h3>Forestside Villa</h3><p>Biệt thự ven sông, giữa rừng dừa. Phân khu nhận mức thuê cao nhất dự án.</p>
+        <h3>Forestside Villa</h3><p>Biệt thự ven sông, giữa rừng dừa. Mở cửa là mặt nước, hợp gia đình thích yên tĩnh, riêng tư. Mức thuê lại cao nhất dự án.</p>
         <ul class="opts">
           <li><b>Bàn giao thô 2026</b>chiết khấu <strong class="o">4 tỷ</strong> · CĐT thuê lại <strong class="o">60tr/tháng × 3 năm</strong></li>
           <li><b>Nội thất 2027</b>chiết khấu <strong class="o">400 triệu</strong> · ủy thác <strong class="o">5 năm</strong>, tối thiểu 60tr/tháng, +10 đêm nghỉ/năm</li>
@@ -813,7 +774,7 @@
         <div class="fp js-open" data-title="Xem layout Forestside Villa" data-need="Layout Forestside Villa"><svg viewBox="0 0 120 70"><rect x="4" y="4" width="112" height="62"/><path d="M60 4v40M4 36h56M60 44h56M86 44v22M30 36v30"/></svg><span>🔒 Xem layout từng tầng</span></div>
         <button class="btn btn-orange js-open" data-title="Nhận giá & layout Forestside Villa" data-need="Forestside Villa – biệt thự rừng dừa">Mở khoá giá &amp; layout</button></div></div>
       <div class="prod reveal"><div class="ph" data-img="villa2" style="background-image:url('img/parkhome.jpg')"><span>Biệt thự sân vườn</span><b class="ph-n">50tr/tháng</b></div><div class="bd">
-        <h3>Parkhome</h3><p>Biệt thự sân vườn ngập cây xanh, hợp gia đình nghỉ dưỡng và cho thuê dài hạn.</p>
+        <h3>Parkhome</h3><p>Biệt thự trong phố vườn ngập cây xanh và hoa giấy, gần công viên. Hợp gia đình có con nhỏ, ông bà.</p>
         <ul class="opts">
           <li><b>Bàn giao thô 2026</b>chiết khấu <strong class="o">3,5 tỷ</strong>* · CĐT thuê lại <strong class="o">50tr/tháng × 3 năm</strong></li>
           <li><b>Nội thất 2027</b>chiết khấu <strong class="o">300 triệu</strong>* · ủy thác <strong class="o">5 năm</strong>, tối thiểu 50tr/tháng (quỹ 50 căn)</li>
@@ -890,11 +851,42 @@
   </div>
 </section>
 
+<!-- CASH FLOW -->
+<section class="cash cash-sm" id="dong-tien" data-chat-topic="bảng giá thanh toán chính sách">
+  <div class="wrap">
+    <span class="eyebrow">Khi chưa về ở · áp dụng từ 01/09/2026</span>
+    <h2>Những tháng chưa về ở, <em>nhà vẫn sinh lời</em></h2>
+    <p class="lead-text">Chủ đầu tư &amp; đơn vị khai thác <b>cam kết thuê</b> trong những năm đầu: không cần tự tìm khách, không cần tự vận hành, tiền thuê về tài khoản <b>hằng tháng</b>. Khi nào cả nhà muốn về ở hẳn, căn nhà vẫn là của mình.</p>
+    <div class="commit">
+      <div class="cm reveal">
+        <span class="cm-h">Biệt thự sân vườn</span>
+        <b class="shine">50 triệu<small>/tháng</small></b>
+        <div class="cm-sub">
+          <div><strong>5 năm</strong> liên tiếp<p>nếu mua quỹ căn full nội thất của M VILLAGE</p><em>≈ 3 tỷ tiền thuê</em></div>
+          <div><strong>3 năm</strong> liên tiếp<p>nếu mua thô &amp; tự hoàn thiện nội thất theo tiêu chuẩn CĐT</p><em>≈ 1,8 tỷ tiền thuê</em></div>
+        </div>
+      </div>
+      <div class="cm hl reveal">
+        <span class="cm-h">Biệt thự rừng dừa</span>
+        <b class="shine">60 triệu<small>/tháng</small></b>
+        <div class="cm-sub one">
+          <div><strong>3 năm</strong> liên tiếp<p>kể từ khi bàn giao biệt thự full nội thất theo tiêu chuẩn CĐT</p><em>≈ 2,16 tỷ tiền thuê</em></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cash-cta"><button class="btn btn-orange js-open" data-title="Nhận chi tiết chương trình thuê lại" data-need="Vừa ở vừa cho thuê">Nhận chi tiết chương trình thuê lại →</button>
+      <p class="note" style="margin:10px 0 0">Theo chính sách của chủ đầu tư từ 01/09/2026, áp dụng với căn đủ điều kiện theo hợp đồng.</p></div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="faq" id="hoi-dap">
   <div class="wrap" style="max-width:860px">
     <span class="eyebrow">Hỏi đáp</span>
     <h2>Những câu khách hay hỏi nhất</h2>
+    <details><summary>Mua để ở lâu dài có tiện không? Trường học, chợ, bệnh viện?</summary><p>Dự án cách trung tâm Hội An khoảng 10 phút, nơi có đủ trường học, chợ, bệnh viện; Đà Nẵng và sân bay quốc tế khoảng 30 km. Em gửi anh/chị bản đồ tiện ích xung quanh và thời gian di chuyển cụ thể.</p></details>
+    <details><summary>Khu có quản lý, an ninh thế nào?</summary><p>Khu đô thị có ban quản lý vận hành (chủ nhà được miễn phí phí quản lý 2 năm đầu). Quy định vận hành, an ninh và tiện ích nội khu em gửi bản chính thức để anh/chị xem, và tốt nhất là đi xem thực tế một lần.</p></details>
     <details><summary>Giá biệt thự Casamia Balanca khoảng bao nhiêu?</summary><p>Giá từng căn khác nhau theo phân khu (Forestside / Parkhome), vị trí, diện tích và phương án bàn giao. Chiết khấu tới 4 tỷ khi chọn bàn giao thô. Anh/chị để lại số, em gửi bảng giá căn còn trống đã trừ chiết khấu.</p></details>
     <details><summary>Chủ đầu tư thuê lại cụ thể thế nào?</summary><p>Bàn giao thô 2026: CĐT trực tiếp thuê lại 60 triệu/tháng (Forestside) hoặc 50 triệu/tháng (Parkhome), hợp đồng thuê 3 năm. Bàn giao nội thất 2027: ủy thác CĐT vận hành 5 năm, chủ nhà hưởng 45% doanh thu cho thuê thuần, thu nhập tối thiểu 60 triệu / 50 triệu mỗi tháng, kèm 10 đêm nghỉ miễn phí mỗi năm.</p></details>
     <details><summary>Cần bao nhiêu tiền ban đầu?</summary><p>Đặt cọc 300 triệu. Nếu vay ngân hàng, anh/chị tự thanh toán khoảng 30% (cọc + ký HĐMB + 1 đợt), ngân hàng hỗ trợ tới 70% với lãi suất 0% và ân hạn nợ gốc trong 24 tháng.</p></details>
@@ -909,11 +901,11 @@
   <div class="wrap grid">
     <div>
       <span class="eyebrow">Bước tiếp theo</span>
-      <h2>Chỉ 30 giây – nhận trọn bộ tài liệu <em>qua Zalo</em></h2>
-      <p class="lead-text">Bảng giá căn còn trống, chính sách chi tiết, bảng tính tiền thuê CĐT trả theo căn, hồ sơ pháp lý và video thực tế. Tư vấn viên gửi trong 5 phút (giờ hành chính).</p>
+      <h2>Chỉ 30 giây – nhận mặt bằng, bảng giá &amp; <em>lịch xem nhà mẫu</em></h2>
+      <p class="lead-text">Bảng giá căn còn trống, mặt bằng và layout, quy hoạch tiện ích nội khu, chính sách và tiến độ thanh toán, video thực tế. Tư vấn viên gửi qua Zalo trong 5 phút (giờ hành chính) và hẹn lịch đưa anh/chị đi xem.</p>
       <ul class="ticks" style="margin-top:20px">
         <li>Không mất phí, không ràng buộc</li>
-        <li>Tư vấn đúng nhu cầu: nghỉ dưỡng hay dòng tiền</li>
+        <li>Tư vấn đúng nhu cầu: an cư, nghỉ dưỡng hay cho thuê</li>
         <li>Có thể hỏi qua Zalo bất cứ lúc nào</li>
       </ul>
     </div>
@@ -925,10 +917,10 @@
         <label class="field"><input name="phone" type="tel" placeholder="Số điện thoại / Zalo *" autocomplete="tel" required maxlength="20"></label>
         <label class="field"><select name="need">
           <option value="">Anh/chị quan tâm…</option>
-          <option>Forestside Villa – biệt thự rừng dừa</option>
-          <option>Parkhome – biệt thự sân vườn</option>
+          <option>Mua để ở / an cư</option>
+          <option>Nhà nghỉ dưỡng cuối tuần cho gia đình</option>
+          <option>Vừa ở vừa cho thuê</option>
           <option>Đầu tư nhận tiền thuê hằng tháng</option>
-          <option>Mua để nghỉ dưỡng gia đình</option>
         </select></label>
         <div class="form-err"></div>
         <button class="btn btn-orange btn-block pulse">Nhận tài liệu ngay</button>
@@ -1171,7 +1163,8 @@ const API_BASE = '';
       : ['CĐT trực tiếp thuê lại, tiền thuê cố định hằng tháng', 'Hợp đồng thuê bất động sản ' + y + ' năm', 'Không cần tự tìm khách, không lo vận hành']).map(x => `<li>${x}</li>`).join('');
   }
   $$('.js-pick button').forEach(b => b.addEventListener('click', () => pick(b)));
-  pick($('.js-pick button'));
+  const firstPick = $('.js-pick button');
+  if (firstPick) pick(firstPick); // máy tính tiền thuê có thể đã bị bỏ khỏi trang
 
   // Giá từ
   if (PRICE_FROM) { $('.js-price-val').textContent = PRICE_FROM; $('.js-price').hidden = false; }
