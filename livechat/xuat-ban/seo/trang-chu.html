@@ -255,6 +255,38 @@ footer .disc{border-top:1px solid rgba(255,255,255,.1);margin-top:36px;padding-t
 .x{position:absolute;right:12px;top:8px;border:0;background:none;font-size:30px;color:#9aa6b8;cursor:pointer}
 .mbar{display:none}
 .fabz{position:fixed;right:18px;bottom:22px;z-index:60;width:58px;height:58px;border-radius:50%;background:#0068ff;color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px;text-decoration:none;box-shadow:0 10px 24px rgba(0,104,255,.35)}
+
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:end}
+.hero .sub b{color:#ffcfa8}
+.hero-form{background:rgba(255,255,255,.96);color:var(--ink);border-radius:20px;padding:24px 22px;box-shadow:0 24px 50px rgba(0,0,0,.3)}
+.hf-t{display:block;font:700 19px/1.35 var(--sans);color:var(--navy)}
+.hf-s{display:block;font-size:14px;color:var(--muted);margin:6px 0 14px}
+.hero-form small{color:var(--muted)}
+.nums{background:var(--navy);color:#fff}
+.nums .wrap{display:grid;grid-template-columns:repeat(4,1fr) auto;gap:10px;align-items:center;padding-top:22px;padding-bottom:22px}
+.nums b{display:block;font:600 30px/1.1 var(--serif);color:#ffb27a}
+.nums span{font-size:13.5px;color:#cdd7e7}
+.quiz{background:var(--cream)}
+.qz{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.qn{font-weight:700;color:var(--navy);margin:0 0 8px;font-size:15px}
+.qcard .chipset{margin-bottom:16px}
+.icta{background:#fff4ea;border-top:1px solid #f6dcc6;border-bottom:1px solid #f6dcc6}
+.icta-d{background:var(--navy);border:0}
+.icta .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:22px;padding-bottom:22px}
+.ic-t b{display:block;font:600 21px/1.3 var(--serif);color:var(--navy)}.ic-t span{font-size:14.5px;color:var(--muted)}
+.icta-d .ic-t b{color:#fff}.icta-d .ic-t span{color:#cdd7e7}
+.ic-f{display:flex;gap:8px;flex-wrap:wrap;min-width:380px;position:relative}
+.ic-f input{margin:0;flex:1;min-width:180px}
+.ic-f .btn{width:auto;border-radius:12px;padding:14px 22px}
+.ic-f .err{position:absolute;left:0;top:100%;margin-top:4px}
+.ok1{margin:0;font-weight:700;color:#1e8e4e;background:#eafaf1;border-radius:12px;padding:12px 16px}
+.ex{background:rgba(255,255,255,.08);border:1px dashed rgba(255,178,122,.6);border-radius:16px;padding:16px 18px;margin:0 0 26px;max-width:760px}
+.ex b{display:block;color:#ffb27a;margin-bottom:6px}.ex span{display:block;font-size:14.5px;color:#e3e9f3}.ex strong{color:#fff}
+.ex span:last-child{font-size:12.5px;color:#aab7cc;margin-top:6px}
+.fabc{position:fixed;right:88px;bottom:30px;z-index:60;border:0;cursor:pointer;background:var(--orange);color:#fff;font:700 14.5px var(--sans);padding:13px 20px;border-radius:999px;box-shadow:0 12px 26px rgba(244,124,32,.4);animation:pulse 2.6s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 12px 26px rgba(244,124,32,.4)}50%{box-shadow:0 12px 26px rgba(244,124,32,.4),0 0 0 10px rgba(244,124,32,.12)}}
+@media(max-width:980px){.hero-grid,.qz{grid-template-columns:1fr;gap:24px}.nums .wrap{grid-template-columns:1fr 1fr}.nums .cta-cell{grid-column:span 2}.nums .cta-cell .btn{width:100%}.icta .wrap{flex-direction:column;align-items:stretch}.ic-f{min-width:0}}
+@media(max-width:700px){.hero .btns,.hero .chips,.hero h1 small{display:none}.hero h1{font-size:34px;margin:10px 0 12px}.hero .sub{font-size:15px;margin-bottom:16px}.hero{min-height:auto}.hero .wrap{padding-bottom:28px}.fabc{display:none}.hero .wrap{padding-top:96px}.hero-form{padding:18px}.ic-f .btn{flex:1 1 100%}}
 /* hiệu ứng */
 .rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s ease}
 .rv.in{opacity:1;transform:none}
@@ -307,19 +339,38 @@ footer .disc{border-top:1px solid rgba(255,255,255,.1);margin-top:36px;padding-t
     <img src="https://casamia-balanca-img.netlify.app/img/casamia-balanca-hoi-an-phoi-canh-tong-the.jpg" alt="Phối cảnh tổng thể khu đô thị Casamia Balanca Hội An bên sông Cổ Cò" width="1600" height="900" fetchpriority="high">
   </picture>
   <div class="wrap">
-    <span class="eye">Khu đô thị sinh thái Cồn Tiến · Hội An</span>
-    <h1><small>Casamia Balanca Hội An</small>Về nhà là về với <em>sông, rừng dừa</em> và phố cổ.</h1>
-    <p class="sub">31,1ha sông nước bên Cổ Cò, chỉ 363 nhà vườn &amp; biệt thự. Mỗi sáng nghe chim trong rừng dừa, chiều dắt con dạo bờ sông, 10 phút đã ngồi giữa phố cổ đèn lồng.</p>
+    <div class="hero-grid">
+    <div>
+    <span class="eye">Casamia Balanca Hội An · chỉ 363 căn</span>
+    <h1><small>Biệt thự &amp; nhà vườn bên sông Cổ Cò</small>Ở như nghỉ dưỡng.<br><em>Có người trả tiền thuê</em> mỗi tháng.</h1>
+    <p class="sub">Vốn tự có từ <b>~3,1 tỷ*</b>, vay 70% <b>0% lãi 24 tháng</b>, Chủ đầu tư <b>thuê lại tới 60 triệu/tháng</b> trong 3 năm. Giữa 31,1ha sông nước, rừng dừa, 10 phút ra phố cổ.</p>
     <div class="btns">
-      <button class="btn btn-o js-open" data-title="Nhận bảng giá &amp; căn đẹp tháng 10/2026" data-need="Bảng giá tháng 10/2026">Nhận bảng giá &amp; căn đẹp</button>
+      <button class="btn btn-o js-open" data-title="Nhận bảng giá &amp; căn còn trống tháng 10/2026" data-need="Bảng giá tháng 10/2026">Nhận bảng giá &amp; căn còn trống</button>
       <button class="btn btn-w js-open" data-title="Đặt lịch xem nhà mẫu cuối tuần" data-need="Đặt lịch xem nhà mẫu">Đặt lịch xem nhà mẫu</button>
     </div>
-    <div class="chips"><span><b>Sổ hồng</b> sở hữu lâu dài</span><span><b>Vay 70%</b> · 0% lãi tới 24 tháng</span><span><b>Cọc 300 triệu</b> giữ căn</span><span>Park Home từ <b>~10,4 tỷ*</b></span></div>
+    <div class="chips"><span><b>Sổ hồng</b> lâu dài</span><span><b>−3,5 tỷ</b> căn bàn giao thô</span><span>Cọc <b>300 triệu</b></span></div>
+    </div>
+    <form class="hero-form f" data-form="Trang chủ – Form đầu trang" novalidate>
+      <b class="hf-t">Xem giá căn đẹp trước khi hết</b>
+      <span class="hf-s">Em gửi bảng giá từng căn + danh sách căn còn trống qua Zalo trong 5 phút.</span>
+      <input name="phone" type="tel" inputmode="tel" placeholder="Số Zalo của anh/chị *" autocomplete="tel" aria-label="Số điện thoại" required>
+      <input type="hidden" name="need" value="Bảng giá + căn còn trống (đầu trang)">
+      <p class="err" role="alert"></p>
+      <button class="btn btn-o" type="submit">Gửi bảng giá cho tôi →</button>
+      <small>✓ Miễn phí &nbsp;·&nbsp; ✓ Không làm phiền &nbsp;·&nbsp; ✓ Tư vấn trực tiếp: Hoàng Hiệp</small>
+    </form>
+  </div>
   </div>
   <span class="scroll">CUỘN XUỐNG</span>
 </section>
 
-<div class="ribbon"><div class="wrap"><p>Ưu đãi tháng 10/2026: <b>chiết khấu tới 3,5 tỷ</b> · vay 70% <b>0% lãi 24 tháng</b> · miễn phí 2 năm phí quản lý</p><button class="btn btn-o js-open" data-title="Nhận chính sách tháng 10/2026" data-need="Chính sách tháng 10/2026">Xem ưu đãi của tôi</button></div></div>
+<div class="nums"><div class="wrap">
+  <div><b>~3,1 tỷ</b><span>Vốn tự có cho Park Home*</span></div>
+  <div><b>0%</b><span>Lãi suất 24 tháng, vay 70%</span></div>
+  <div><b>60tr</b><span>CĐT thuê lại mỗi tháng, 3 năm</span></div>
+  <div><b>−3,5 tỷ</b><span>Chiết khấu căn bàn giao thô</span></div>
+  <div class="cta-cell"><button class="btn btn-o js-open" data-title="Tính vốn tự có &amp; dòng tiền cho căn tôi chọn" data-need="Tính vốn tự có + dòng tiền">Tính cho căn của tôi</button></div>
+</div></div>
 
 <section class="sec intro center" id="tong-quan">
   <div class="wrap">
@@ -338,7 +389,7 @@ footer .disc{border-top:1px solid rgba(255,255,255,.1);margin-top:36px;padding-t
 
 <section class="sec" id="cach-song">
   <div class="wrap">
-    <div class="center"><span class="eye rv">Anh/chị tìm điều gì?</span><h2 class="rv">Một nơi, <em>ba cách sống</em></h2><p class="lead rv">Chọn điều anh/chị quan tâm nhất, em gửi đúng tài liệu cho nhu cầu đó.</p></div>
+    <div class="center"><span class="eye rv">Anh/chị tìm điều gì?</span><h2 class="rv">Một căn nhà, <em>ba giá trị</em></h2><p class="lead rv">Để ở, để nghỉ dưỡng, hay để dòng tiền tự chảy về. Chọn điều anh/chị cần, em gửi đúng tài liệu.</p></div>
     <div class="ways">
       <button class="way rv js-open" data-title="Tài liệu cho gia đình mua để ở" data-need="Mua để ở – gia đình"><img src="https://casamia-balanca-img.netlify.app/img/san-vuon-park-home-casamia-balanca.jpg" alt="Sân vườn Park Home Casamia Balanca cho gia đình" loading="lazy"><div class="t"><small>Để ở</small><h3>Cho con lớn lên giữa thiên nhiên</h3><p>Trường mầm non trong khu, sân vườn riêng, bể bơi &amp; công viên trước nhà.</p><span class="go">Gợi ý căn cho gia đình →</span></div></button>
       <button class="way rv js-open" data-title="Tài liệu nhà thứ hai / nghỉ dưỡng" data-need="Nhà thứ hai – nghỉ dưỡng"><img src="https://casamia-balanca-img.netlify.app/img/forestside-villa-kenh-noi-khu-du-thuyen.jpg" alt="Kênh nội khu và biệt thự Forestside ven rừng dừa" loading="lazy"><div class="t"><small>Nghỉ dưỡng</small><h3>Ngôi nhà thứ hai ở Hội An</h3><p>Biệt thự ven kênh, rừng dừa, có người vận hành khi anh/chị vắng nhà.</p><span class="go">Xem biệt thự ven sông →</span></div></button>
@@ -347,6 +398,26 @@ footer .disc{border-top:1px solid rgba(255,255,255,.1);margin-top:36px;padding-t
   </div>
 </section>
 
+
+<section class="sec quiz" id="tim-can">
+  <div class="wrap qz">
+    <div class="rv">
+      <span class="eye">30 giây</span>
+      <h2>Căn nào <em>hợp nhất</em> với anh/chị?</h2>
+      <p class="lead">Trả lời 2 câu, em lọc sẵn 3 căn còn trống phù hợp nhất kèm giá và phương án thanh toán, gửi qua Zalo.</p>
+    </div>
+    <form class="card f qcard rv" data-form="Trang chủ – Tìm căn 30 giây" novalidate>
+      <p class="qn">1. Anh/chị mua để làm gì?</p>
+      <div class="chipset"><label><input type="radio" name="muc_dich" value="Để ở" checked><span>Để ở</span></label><label><input type="radio" name="muc_dich" value="Nghỉ dưỡng"><span>Nghỉ dưỡng</span></label><label><input type="radio" name="muc_dich" value="Đầu tư cho thuê"><span>Đầu tư cho thuê</span></label></div>
+      <p class="qn">2. Ngân sách dự kiến?</p>
+      <div class="chipset"><label><input type="radio" name="ngan_sach" value="Dưới 12 tỷ" checked><span>Dưới 12 tỷ</span></label><label><input type="radio" name="ngan_sach" value="12 – 18 tỷ"><span>12 – 18 tỷ</span></label><label><input type="radio" name="ngan_sach" value="Trên 18 tỷ"><span>Trên 18 tỷ</span></label></div>
+      <p class="qn">3. Em gửi 3 căn phù hợp vào Zalo nào ạ?</p>
+      <input name="phone" type="tel" inputmode="tel" placeholder="Số Zalo / điện thoại *" autocomplete="tel" aria-label="Số điện thoại" required>
+      <p class="err" role="alert"></p>
+      <button class="btn btn-o" type="submit">Gửi 3 căn phù hợp cho tôi</button>
+    </form>
+  </div>
+</section>
 <section class="sec day" id="mot-ngay">
   <div class="wrap">
     <span class="eye rv">Một ngày bình thường</span>
@@ -363,6 +434,9 @@ footer .disc{border-top:1px solid rgba(255,255,255,.1);margin-top:36px;padding-t
   </div>
 </section>
 
+
+<div class="icta"><div class="wrap"><div class="ic-t"><b>Muốn xem nhà mẫu tận nơi?</b><span>Để lại số, em xếp lịch cuối tuần và gửi định vị qua Zalo.</span></div>
+<form class="f ic-f" data-form="Trang chủ – Đặt lịch (sau Một ngày)" novalidate><input name="phone" type="tel" inputmode="tel" placeholder="Số Zalo *" aria-label="Số điện thoại" required><input type="hidden" name="need" value="Đặt lịch xem nhà mẫu"><button class="btn btn-o" type="submit">Đặt lịch</button><p class="err" role="alert"></p></form></div></div>
 <section class="sec" id="mat-bang">
   <div class="wrap">
     <div class="center"><span class="eye rv">Mặt bằng &amp; sản phẩm</span><h2 class="rv">3 phân khu, <em>5 dòng nhà</em></h2><p class="lead rv">La Suna, La Palma, La Riva. Kênh đào nội khu rộng 20m nối thẳng ra sông Cổ Cò, nhiều căn có bến thuyền riêng.</p></div>
@@ -389,6 +463,9 @@ footer .disc{border-top:1px solid rgba(255,255,255,.1);margin-top:36px;padding-t
   </div>
 </section>
 
+
+<div class="icta icta-d"><div class="wrap"><div class="ic-t"><b>Căn nào nhìn thẳng rừng dừa, căn nào có bến thuyền?</b><span>Em gửi mặt bằng đánh dấu sẵn căn đẹp còn trống.</span></div>
+<form class="f ic-f" data-form="Trang chủ – Mặt bằng căn trống" novalidate><input name="phone" type="tel" inputmode="tel" placeholder="Số Zalo *" aria-label="Số điện thoại" required><input type="hidden" name="need" value="Mặt bằng căn đẹp còn trống"><button class="btn btn-o" type="submit">Nhận mặt bằng</button><p class="err" role="alert"></p></form></div></div>
 <section class="sec amen" id="tien-ich">
   <div class="wrap">
     <div class="center"><span class="eye rv">Tiện ích</span><h2 class="rv">Ra khỏi nhà là <em>kỳ nghỉ</em></h2><p class="lead rv">5 công viên chủ đề (Hill Park, Sport Park, Grand Central Park, Floral Park, Nipa Park), Clubhouse, trường mầm non, bể bơi vô cực, Sky bar, khách sạn và trung tâm thương mại.</p></div>
@@ -425,10 +502,14 @@ footer .disc{border-top:1px solid rgba(255,255,255,.1);margin-top:36px;padding-t
       <div><b>5%</b><span>Chiết khấu khi thanh toán sớm 95% lúc ký HĐMB</span></div>
       <div><b>2 năm</b><span>Miễn phí quản lý + 1 năm gym &amp; bể bơi Clubhouse</span></div>
     </div>
+    <div class="ex rv"><b>Ví dụ Park Home ~10,4 tỷ*</b><span>Vốn tự có ~30% ≈ <strong>3,1 tỷ</strong> (gồm cọc 300 triệu)</span><span>Ngân hàng cho vay ~70% ≈ <strong>7,3 tỷ</strong>, 0% lãi 24 tháng, ân hạn gốc</span><span>Chính sách áp dụng có thời hạn; số căn bàn giao thô chiết khấu 3,5 tỷ có giới hạn theo danh sách CĐT.</span></div>
     <div class="btns rv"><button class="btn btn-o js-open" data-title="Tính phương án thanh toán có lợi nhất cho tôi" data-need="Tính phương án thanh toán">Tính phương án có lợi nhất cho tôi</button><a class="btn btn-w" href="https://www.casamia-balanca.com.vn/chinh-sach-ban-hang">Xem chính sách chi tiết</a></div>
   </div>
 </section>
 
+
+<div class="icta"><div class="wrap"><div class="ic-t"><b>Cùng một căn, chọn phương án khác có thể chênh hàng tỷ.</b><span>Em tính sẵn 3 phương án thanh toán cho căn anh/chị thích.</span></div>
+<form class="f ic-f" data-form="Trang chủ – Tính phương án" novalidate><input name="phone" type="tel" inputmode="tel" placeholder="Số Zalo *" aria-label="Số điện thoại" required><input type="hidden" name="need" value="Tính phương án thanh toán"><button class="btn btn-o" type="submit">Tính giúp tôi</button><p class="err" role="alert"></p></form></div></div>
 <section class="sec" id="thuc-te">
   <div class="wrap real">
     <div class="pics rv">
@@ -455,8 +536,8 @@ footer .disc{border-top:1px solid rgba(255,255,255,.1);margin-top:36px;padding-t
   <div class="wrap in">
     <div class="rv">
       <span class="eye">Dành cho anh/chị</span>
-      <h2>Để lại số, em gửi ngay <em>trọn bộ</em> qua Zalo</h2>
-      <p class="lead">Không cần gọi, không cần hẹn. Anh/chị xem trước ở nhà, thấy hợp rồi mình nói chuyện tiếp.</p>
+      <h2>Căn đẹp không chờ ai. <em>Xem trước</em>, quyết sau.</h2>
+      <p class="lead">Để lại số Zalo, em gửi ngay trọn bộ. Không cần gọi, không cần hẹn; thấy hợp rồi mình nói chuyện tiếp.</p>
       <ul class="gifts">
         <li><i>📋</i><div><b>Bảng giá từng căn tháng 10/2026</b><span>Kèm 3 phương án bàn giao và mức chiết khấu từng căn</span></div></li>
         <li><i>🗺️</i><div><b>Mặt bằng &amp; danh sách căn đẹp còn trống</b><span>Đánh dấu căn view rừng dừa, căn có bến thuyền</span></div></li>
@@ -531,6 +612,7 @@ footer .disc{border-top:1px solid rgba(255,255,255,.1);margin-top:36px;padding-t
     <small>Hoặc gọi/Zalo trực tiếp <a href="tel:0904567009"><b>0904 567 009</b></a></small>
   </form>
 </div>
+<button class="fabc js-open" data-title="Nhận bảng giá &amp; căn còn trống" data-need="Bảng giá (nút nổi)">🔥 Nhận bảng giá</button>
 <a class="fabz" href="https://zalo.me/0904567009" target="_blank" rel="noopener" aria-label="Chat Zalo">Zalo</a>
 <nav class="mbar" aria-label="Liên hệ nhanh"><a href="tel:0904567009">Gọi</a><a href="https://zalo.me/0904567009" target="_blank" rel="noopener">Zalo</a><button type="button" class="js-open" data-title="Nhận bảng giá &amp; căn đẹp tháng 10/2026" data-need="Bảng giá (thanh dưới)">Nhận bảng giá</button></nav>
 
@@ -558,18 +640,18 @@ footer .disc{border-top:1px solid rgba(255,255,255,.1);margin-top:36px;padding-t
     var err=$('.err',f),btn=$('button[type=submit]',f);
     if(!PHONE.test(String(d.phone||'').trim())){err.textContent='Số điện thoại chưa đúng, anh/chị kiểm tra lại giúp em ạ.';$('input[name=phone]',f).focus();return;}
     err.textContent='';var lb=btn.textContent;btn.disabled=true;btn.textContent='Đang gửi…';
-    var body={type:'lead',v:vid,name:d.name||'',phone:String(d.phone).trim(),need:d.need||'',form:f.getAttribute('data-form')||'Trang chủ',page:location.href,referrer:document.referrer,utm:st.get('cm_utm')||''};
+    var body={type:'lead',v:vid,name:d.name||'',phone:String(d.phone).trim(),need:[d.need,d.muc_dich,d.ngan_sach].filter(Boolean).join(' · '),form:f.getAttribute('data-form')||'Trang chủ',page:location.href,referrer:document.referrer,utm:st.get('cm_utm')||''};
     fetch(GAS,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}).then(function(r){return r.json()}).then(function(res){
       if(res&&res.ok===false)throw new Error(res.error||'');
       st.set(KEY,'1');if(window.gtag)gtag('event','generate_lead');if(window.fbq)fbq('track','Lead');
       var n=(d.name||'').replace(/[<>&"]/g,'').trim();
-      f.innerHTML='<div class="done"><div class="big">🌿</div><h3>Em đã nhận thông tin'+(n?' của '+n:'')+'!</h3><p>Em gửi tài liệu qua Zalo trong ít phút. Cần gấp, anh/chị gọi <a href="tel:0904567009"><b>0904 567 009</b></a> nhé.</p></div>';
+      f.innerHTML=f.classList.contains('ic-f')?'<p class="ok1">✓ Em đã nhận số'+(n?' của '+n:'')+', sẽ nhắn Zalo ngay ạ.</p>':'<div class="done"><div class="big">🌿</div><h3>Em đã nhận thông tin'+(n?' của '+n:'')+'!</h3><p>Em gửi tài liệu qua Zalo trong ít phút. Cần gấp, anh/chị gọi <a href="tel:0904567009"><b>0904 567 009</b></a> nhé.</p></div>';
     }).catch(function(x){btn.disabled=false;btn.textContent=lb;err.textContent=(x&&x.message)?x.message:'Gửi chưa được, anh/chị thử lại hoặc nhắn Zalo 0904 567 009 giúp em.';});
   });
   // mời nhẹ một lần
   var nd=false;try{nd=!!sessionStorage.getItem('cm_nudged')}catch(e){}
   function nudge(){var r=$('#dang-ky').getBoundingClientRect();if(nd||st.get(KEY)||!modal.hidden||(r.top<innerHeight&&r.bottom>0)||document.activeElement&&document.activeElement.closest&&document.activeElement.closest('form'))return;nd=true;try{sessionStorage.setItem('cm_nudged','1')}catch(e){}openM('Anh/chị đã xem gần hết rồi, em gửi luôn bảng giá căn đẹp nhé?','Bảng giá (mời khi đọc trang)');}
-  addEventListener('scroll',function(){if(scrollY/Math.max(1,document.body.scrollHeight-innerHeight)>.65)nudge()},{passive:true});
+  addEventListener('scroll',function(){if(scrollY/Math.max(1,document.body.scrollHeight-innerHeight)>.6)nudge()},{passive:true});setTimeout(nudge,45000);
   document.addEventListener('mouseout',function(e){if(!e.relatedTarget&&e.clientY<8)nudge()});
 })();
 </script>
