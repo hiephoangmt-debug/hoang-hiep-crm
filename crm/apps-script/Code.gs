@@ -67,7 +67,7 @@ var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan', 'tu_ngay', 'b_tt_ngay', 'a_ck_ng
 // Kiểu tiền với C.Trâm. "Ứng trước"/"Hoàn tiền" làm giảm nợ; "Mình trả lại"/"Nợ cũ" làm tăng nợ;
 // "Điều chỉnh số dư" nhập được số âm (âm = tăng nợ).
 // Đổi mỗi lần cập nhật code – hiện cạnh ngày trên đầu app để biết đã triển khai bản mới chưa.
-var APP_VERSION = 'v04.11c';
+var APP_VERSION = 'v04.11d';
 
 var PAYMENT_TYPES = ['Ứng trước', 'Hoàn tiền', 'Mình trả lại', 'Nợ cũ', 'Điều chỉnh số dư'];
 
@@ -702,6 +702,30 @@ function noteThousand_(s) { // "274.806" → 274.806.000; "1.406k" → 1.406.000
   return Math.round(noteMoney_(t.replace(/k$/, '')) * 1000);
 }
 
+var TRIP_WORDS = /(vé máy bay|vé mb|vé tàu|vé xe|vé|khách sạn|\bks\b|tour|visa)/i;
+function parseTripLine_(inner, line, ngay) {
+  // dòng giao dịch thẻ (có "/" phí … hoàn …) không phải vé
+  if (/\/\s*[\d.,]+\s*(k|%)?\s+hoàn\s/i.test(inner)) return null;
+  var tw = inner.match(TRIP_WORDS);
+  if (!tw) return null;
+  var w = tw[1].toLowerCase();
+  // "vé" đứng một mình chỉ tính khi có chữ lãi hoặc số tiền ở cuối dòng (tránh nhầm chữ khác)
+  var laiM = inner.match(/lãi\s*:?\s*([\d.,]+\s*(?:k|tr)?)/i) || inner.match(/([\d.,]+\s*(?:k|tr)?)\s*(?:RR|R)?\s*$/i);
+  if (!laiM) return null;
+  var loai = /máy bay|mb/.test(w) || w === 'vé' ? 'Vé máy bay' : /tàu/.test(w) ? 'Vé tàu' : /xe/.test(w) ? 'Vé xe'
+    : w === 'tour' ? 'Tour' : w === 'visa' ? 'Visa' : 'Khách sạn';
+  var lai = noteThousand_(laiM[1]);
+  if (!(lai > 0)) return null;
+  // phần còn lại là tên khách (+ ghi chú sau dấu " - ")
+  var rest = inner.replace(laiM[0], ' ').replace(tw[0], ' ').replace(/^\s*lãi\b/i, ' ').replace(/\b(RR|R)\s*$/, ' ');
+  var n = 1, np = rest.match(/(?:^|\s)(?:x\s*(\d+)|(\d+)\s*(?:người|ng|vé|khách|pax|phòng|đêm))(?=\s|$)/i);
+  if (np) { n = Number(np[1] || np[2]) || 1; rest = rest.slice(0, np.index) + ' ' + rest.slice(np.index + np[0].length); }
+  rest = rest.replace(/\s+/g, ' ').replace(/^[\s:\-·]+|[\s:\-·]+$/g, '');
+  var bits = rest.split(/\s+-\s+/), ten = (bits.shift() || '').trim(), extra = bits.join(' - ');
+  return { kind: 'trip', ngay: ngay, loai: loai, ten: ten || '(khách lẻ)', so_nguoi: n, phi: Math.round(lai / n), lai: lai,
+    ghi_chu: (extra ? extra + ' · ' : '') + 'Dán sổ: ' + line };
+}
+
 function parseNoteLine_(line, ngay) {
   var inner = line.replace(/^\((.*)\)$/, '$1').trim();
   function payAmt(raw, unit) {
@@ -727,6 +751,9 @@ function parseNoteLine_(line, ngay) {
     return { kind: 'pay', ngay: ngay, loai: /^ứng/i.test(pm[1]) ? 'Ứng trước' : 'Hoàn tiền', so_tien: amt,
       con: pm[4] ? noteThousand_(pm[4]) : null, ghi_chu: 'Dán sổ: ' + line };
   }
+  // Có chữ vé máy bay / vé tàu / vé xe / khách sạn / tour / visa ở bất kỳ đâu trong dòng → tab ✈️ Vé & KS
+  var trip = parseTripLine_(inner, line, ngay);
+  if (trip) return trip;
   var m = inner.match(/^(đh\s*\/\s*rút|đh\s*\+\s*rút|đáo\s*\/\s*rút|đh|đáo hạn|đáo|rút)(\s+qr)?\s+(.+?)\s+([\d.,]+\s*(?:tr|triệu)?)\s*\/\s*([\d.,]+)\s*(k|%)?\s+hoàn\s+([\d.,+]+)\s*%?(.*)$/i);
   if (!m) {
     // "Vé Hạnh lãi 60k" hoặc "Lãi vé máy bay Quang - ck Yến 120" (lãi ghi trước, số ở cuối)
@@ -736,20 +763,6 @@ function parseNoteLine_(line, ngay) {
       var lai2 = inner.match(/^lãi\s+(.+?)\s*[:=]?\s+([\d.,]+\s*k?)\s*(?:RR|R)?$/i);
       if (!lai2) return { kind: 'skip', lai: 0 };
       desc = lai2[1]; laiRaw = lai2[2];
-    }
-    // Vé máy bay / tàu / xe, khách sạn, tour, visa → tab ✈️ Vé & KS
-    var tt = desc.toLowerCase().match(/^(vé máy bay|vé mb|vé tàu|vé xe|vé|ve|khách sạn|ks|tour|visa)\s*/);
-    if (tt) {
-      var w2 = tt[1];
-      var loaiT = /máy bay|mb/.test(w2) || w2 === 'vé' || w2 === 've' ? 'Vé máy bay' : /tàu/.test(w2) ? 'Vé tàu' : /xe/.test(w2) ? 'Vé xe'
-        : w2 === 'tour' ? 'Tour' : w2 === 'visa' ? 'Visa' : 'Khách sạn';
-      var rest2 = desc.slice(tt[0].length), nPeople = 1;
-      var np = rest2.match(/(?:^|\s)(?:x\s*(\d+)|(\d+)\s*(?:người|ng|vé|khách|pax|phòng))(?=\s|$)/i);
-      if (np) { nPeople = Number(np[1] || np[2]) || 1; rest2 = (rest2.slice(0, np.index) + rest2.slice(np.index + np[0].length)).trim(); }
-      var bits2 = rest2.split(/\s+-\s+/), ten2 = bits2.shift().trim(), extra2 = bits2.join(' - ');
-      var laiT = noteThousand_(laiRaw);
-      return { kind: 'trip', ngay: ngay, loai: loaiT, ten: ten2 || '(khách lẻ)', so_nguoi: nPeople, phi: Math.round(laiT / nPeople), lai: laiT,
-        ghi_chu: (extra2 ? extra2 + ' · ' : '') + 'Dán sổ: ' + line };
     }
     var loaiK = 'Khác', dl = desc.toLowerCase();
     var tm = dl.match(/^(điện|nước|momo|học phí|bảo hiểm)\s*/);
@@ -1328,6 +1341,13 @@ function billText_(b) {
 }
 
 function apiSaveBill_(x) {
+  // Nhận diện chữ: lãi vé máy bay / vé tàu / khách sạn nhập ở Hoá đơn → lưu sang tab ✈️ Vé & KS
+  if (!x.id && !x.huy && isTicketBill_({ loai_hd: x.loai_hd, lai_tay: x.lai_tay, b_ten: x.b_ten, ghi_chu: x.ghi_chu, ma_hd: x.ma_hd, a_ten: x.a_ten })) {
+    var v = apiSaveTrip_({ ngay: x.ngay, khach_id: x.a_khach_id, ten: x.a_ten, sdt: x.a_sdt, ngay_thu: x.a_ck_ngay, ghi_chu: x.ghi_chu,
+      chi_tiet: [{ loai: ticketType_([x.loai_hd, x.ghi_chu, x.ma_hd, x.a_ten].join(' ')), so_nguoi: 1, lai: Math.round(Number(x.lai_tay) || 0), mo_ta: x.ma_hd || '' }] });
+    v.chuyen_ve = true;
+    return v;
+  }
   var ngay = String(x.ngay || '');
   if (!/^\d{4}-\d{2}-\d{2}$/.test(ngay)) throw new Error('Ngày không hợp lệ.');
   var amt = Number(x.so_tien) || 0, laiTay = Math.round(Number(x.lai_tay) || 0);
@@ -1413,13 +1433,23 @@ function tripText_(v) {
 }
 
 /** Vé máy bay / tàu ghi ở tab Hoá đơn (bản cũ) → chuyển sang tab ✈️ Vé & KS, xoá khỏi Hoá đơn (không tính trùng). */
+function isTicketBill_(b) {
+  if (/^Vé/i.test(String(b.loai_hd || ''))) return true;
+  // lãi nhập tay, không có người B, ghi chú / mã có chữ vé máy bay, vé tàu, khách sạn…
+  return Number(b.lai_tay) > 0 && !String(b.b_ten || '').trim() && TRIP_WORDS.test([b.ghi_chu, b.ma_hd, b.a_ten].join(' '));
+}
+function ticketType_(text) {
+  var w = (String(text || '').match(TRIP_WORDS) || [])[1] || 'vé';
+  w = w.toLowerCase();
+  return /máy bay|mb/.test(w) || w === 'vé' ? 'Vé máy bay' : /tàu/.test(w) ? 'Vé tàu' : /xe/.test(w) ? 'Vé xe' : w === 'tour' ? 'Tour' : w === 'visa' ? 'Visa' : 'Khách sạn';
+}
 function migrateTicketBills_() {
-  var olds = readAll_('HoaDon').filter(function (b) { return /^Vé/i.test(String(b.loai_hd || '')); });
+  var olds = readAll_('HoaDon').filter(function (b) { return isTicketBill_(b); });
   if (!olds.length) return 0;
   return withLock_(function () {
     olds.forEach(function (b) {
       b = billCalc_(b);
-      var t = /tàu/i.test(b.ghi_chu + ' ' + b.a_ten) ? 'Vé tàu' : /xe/i.test(b.ghi_chu) ? 'Vé xe' : 'Vé máy bay';
+      var t = ticketType_([b.loai_hd, b.ghi_chu, b.ma_hd, b.a_ten].join(' '));
       var obj = { id: newId_(), ngay: b.ngay, khach_id: b.a_khach_id, ten: b.a_ten, sdt: b.a_sdt || '',
         chi_tiet: JSON.stringify([{ loai: t, so_nguoi: 1, lai: b.doanh_thu, gia: 0, mo_ta: b.ma_hd || '' }]),
         ngay_di: '', ngay_thu: b.huy ? '' : (b.a_ck_ngay || ''), huy: b.huy || '', ghi_chu: b.ghi_chu || '', tao_luc: b.tao_luc || nowStr_(), cap_nhat: nowStr_() };

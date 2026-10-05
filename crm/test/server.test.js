@@ -833,7 +833,7 @@ test('paste daily notes: transactions, C.Trâm transfers and a pay-later bill, w
   assert.strictEqual(trips[0].doanh_thu, 60000);
   assert.strictEqual(trips[0].trang_thai, 'Đã thu');
   // nhập tay vé không có số tiền hoá đơn
-  const v2 = call('saveBill', { ngay: '2026-10-04', loai_hd: 'Vé máy bay / tàu xe', a_ten: 'Khách H', lai_tay: 50000 });
+  const v2 = call('saveBill', { ngay: '2026-10-04', loai_hd: 'Khác', a_ten: 'Khách H', lai_tay: 50000 });
   assert.strictEqual(v2.trang_thai, 'Chờ đối soát');
   assert.strictEqual(v2.doanh_thu, 50000);
   // dòng trong ngoặc trước đây lỡ tính vào công nợ: dán lại sẽ chuyển ra ngoài sổ
@@ -1039,6 +1039,26 @@ test('old ticket rows in Hoá đơn move to ✈️ Vé & KS once, without double
   assert.strictEqual(call('dashboard').money.thang_nay.tong_lai, before, 'same total profit after moving');
   call('listTrips', { mode: 'all' });
   assert.strictEqual(call('listTrips', { mode: 'all' }).rows.length, 1, 'moved only once');
+  // nhập ở Hoá đơn mà ghi chú có chữ "vé máy bay" → tự lưu sang Vé & KS
+  const r = call('saveBill', { ngay: '2026-10-05', loai_hd: 'Khác', a_ten: 'Quang', a_sdt: '0905333444', lai_tay: 120000, ghi_chu: 'vé máy bay ĐN-HN', a_ck_ngay: '2026-10-05' });
+  assert.ok(r.chuyen_ve);
+  assert.strictEqual(call('listTrips', { mode: 'all' }).rows.length, 2);
+  assert.strictEqual(call('listBills', { mode: 'all' }).rows.length, 1);
+});
+
+test('any line mentioning vé máy bay / vé tàu / khách sạn goes to ✈️ Vé & KS', () => {
+  const { call, fake } = fresh();
+  fake.setToday('2026-10-05');
+  const text = ['5/10: Hoàn 9.840', 'Rút VP Khách A 10.000/1.9 hoàn 1.6', 'Quang vé máy bay 2 vé lãi 120', 'Chị Mai đặt vé tàu SE1 lãi 50k',
+    'Khách sạn Mường Thanh - Long 3 đêm 450', 'Hoàn 9'].join('\n');
+  const items = call('pasteNotes', { text }).items;
+  const t = items.filter((i) => i.kind === 'trip');
+  assert.strictEqual(t.length, 3);
+  assert.strictEqual(t[0].ten, 'Quang'); assert.strictEqual(t[0].so_nguoi, 2); assert.strictEqual(t[0].lai, 120000);
+  assert.strictEqual(t[1].loai, 'Vé tàu'); assert.strictEqual(t[1].lai, 50000);
+  assert.strictEqual(t[2].loai, 'Khách sạn'); assert.strictEqual(t[2].so_nguoi, 3); assert.strictEqual(t[2].lai, 450000);
+  assert.strictEqual(items.filter((i) => i.kind === 'tx').length, 1, 'card lines unchanged');
+  assert.strictEqual(items.filter((i) => i.kind === 'pay').length, 1);
 });
 
 test('pasting earlier months: history before closing, December notes pasted in January, saving in rounds', () => {

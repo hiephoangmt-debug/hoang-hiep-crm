@@ -909,7 +909,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       S.boot = b;
       $('#login').classList.add('hidden');
       $('#app').classList.remove('hidden');
-      var UI_VERSION = 'v04.11c';
+      var UI_VERSION = 'v04.11d';
       $('#today-label').textContent = dmy(b.today) + ' · ' + UI_VERSION + (b.version === UI_VERSION ? '' : ' ⚠ Mã.gs chưa cập nhật');
       fillSelect($('[name=dich_vu]'), b.services);
       fillSelect($('#tx-service'), b.services, true);
@@ -1993,7 +1993,11 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     e.preventDefault();
     var pl = billPayload();
     if (!pl.so_tien && !pl.lai_tay) return toast('Nhập số tiền hoá đơn, hoặc lãi nhập tay', true);
-    call('saveBill', pl).then(function (b) { $('#bill-modal').classList.add('hidden'); toast('Đã lưu · ' + b.trang_thai); reboot().then(function () { show(S.tab); }); }).catch(fail);
+    call('saveBill', pl).then(function (b) {
+      $('#bill-modal').classList.add('hidden');
+      toast(b.chuyen_ve ? '✈️ Có chữ vé / khách sạn → đã lưu vào tab Vé & KS · ' + money(b.doanh_thu) : 'Đã lưu · ' + b.trang_thai);
+      reboot().then(function () { show(b.chuyen_ve ? 'trips' : S.tab); });
+    }).catch(fail);
   });
   document.addEventListener('click', function (e) {
     var a = e.target.closest('[data-act=new-bill]');
