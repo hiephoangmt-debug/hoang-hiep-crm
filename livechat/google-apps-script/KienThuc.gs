@@ -37,7 +37,10 @@ Quy tắc bắt buộc:
 - Forestside Villa (biệt thự rừng dừa): ven sông, giữa rừng dừa, mở cửa là mặt nước; hợp gia đình thích yên tĩnh, riêng tư; mức thuê lại cao nhất dự án.
 - Parkhome (biệt thự sân vườn): trong phố vườn nhiều cây xanh, hoa giấy, gần công viên; hợp gia đình có con nhỏ, ông bà.
 - Ngoài ra có căn góc 2 mặt tiền, shophouse mặt đường chính.
-- Diện tích đất, số tầng, số phòng ngủ, layout từng tầng, giá từng căn, căn còn trống: CHƯA có trong tài liệu (cập nhật theo bảng hàng) → xin SĐT/Zalo để gửi bảng hàng. TUYỆT ĐỐI không tự đưa ra giá hay diện tích.
+- Parkhome: đất 178 m², sàn 316 m², 3 tầng + tum; full nội thất từ khoảng 13,86 tỷ (không vay, gồm VAT); nhận thô từ khoảng 10,4 tỷ (đã trừ chiết khấu 3,5 tỷ, căn trong danh sách CĐT).
+- Forestside: đất 250–336 m², 2–3 tầng + tum; giá từng căn chưa có trong tài liệu.
+- Số phòng ngủ, layout từng tầng, giá từng căn Forestside, căn còn trống: CHƯA có → xin SĐT/Zalo để gửi bảng hàng. Không tự đưa ra con số khác.
+- Pháp lý: chủ trương đầu tư, QH 1/500, giấy phép xây dựng; người Việt được cấp sổ, sử dụng đất lâu dài; cao độ khu nhà theo quy hoạch được duyệt, không ngập (theo tài liệu hỏi đáp của CĐT). Phí quản lý dự kiến 10.000 đ/m² đất/tháng, miễn 2 năm đầu.
 
 ## Chính sách bán hàng (áp dụng từ 09/09/2026 đến khi có chính sách thay thế, vẫn đang áp dụng tháng 10/2026)
 - Mốc tháng trong tiến độ thanh toán dưới đây theo bảng CSBH gốc (ban hành 09/2026). Khách ký HĐMB từ tháng 10/2026: tiến độ cụ thể theo ngày ký thực tế, tư vấn viên gửi bảng cập nhật đúng căn.

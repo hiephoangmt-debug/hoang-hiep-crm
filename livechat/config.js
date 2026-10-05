@@ -69,7 +69,7 @@ module.exports = {
       label: 'Chính sách & giá',
       keywords: ['giá', 'gia', 'bao nhiêu', 'chính sách', 'chiết khấu', 'ưu đãi', 'thanh toán', 'tiền', 'thuê lại', 'cam kết thuê'],
       steps: [
-        'Dạ, giá mỗi căn chênh nhau khá nhiều theo vị trí và cách nhận nhà, nên em xin phép không báo một con số chung chung kẻo anh/chị hiểu chưa đúng ạ. Chính sách hiện tại khá tốt: cọc 300 triệu, ngân hàng hỗ trợ 70% với 0% lãi trong 24 tháng, chọn nhận nhà thô còn được chiết khấu tới 4 tỷ.',
+        'Dạ, để anh/chị dễ hình dung: Parkhome nhận thô từ khoảng 10,4 tỷ (đã trừ chiết khấu 3,5 tỷ); Forestside ven rừng dừa thì giá chênh nhiều theo vị trí từng căn. Hiện cọc 300 triệu, ngân hàng hỗ trợ 70% với 0% lãi trong 24 tháng.',
         'Anh/chị đang để ý biệt thự ven rừng dừa hay biệt thự sân vườn ạ? Em lọc vài căn hợp ý gửi mình xem.',
       ],
       browse: {

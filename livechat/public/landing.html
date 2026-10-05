@@ -598,6 +598,28 @@
     .card-form{padding:22px}
     .btn{width:100%}
   }
+
+  /* ===== Theo hành trình khách ===== */
+  .journey{padding:46px 0 10px;background:#fff}
+  .journey h2{font-family:var(--serif);font-size:32px;color:var(--navy);margin:8px 0 6px}
+  .journey .sub{color:var(--muted);margin:0 0 18px}
+  .jtabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .jtabs button{border:1.5px solid var(--navy);background:#fff;color:var(--navy);border-radius:999px;padding:10px 16px;font:inherit;font-weight:700;font-size:14.5px;cursor:pointer}
+  .jtabs button.on{background:var(--navy);color:#fff}
+  .jpane{display:none;border:1px solid var(--line);border-radius:18px;padding:22px;background:var(--soft)}
+  .jpane.on{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:center}
+  .jpane ul{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+  .jpane li{padding-left:28px;position:relative;color:var(--ink);font-size:15.5px;line-height:1.55}
+  .jpane li:before{content:"";position:absolute;left:4px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--orange)}
+  .jpane li b{color:var(--navy)}
+  .jcta{display:flex;flex-direction:column;gap:10px}
+  .jcta .btn{width:100%;text-align:center}
+  .jcta small{color:var(--muted);font-size:12.5px;text-align:center}
+  .jlink{background:transparent;border:0;color:var(--navy);font:inherit;font-weight:700;text-decoration:underline;cursor:pointer;padding:4px}
+  .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 22px}
+  .facts div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--muted)}
+  .facts b{display:block;color:var(--navy);font-size:15px;margin-bottom:2px}
+  @media(max-width:960px){.jpane.on{grid-template-columns:1fr}.journey h2{font-size:25px}.facts{grid-template-columns:1fr 1fr}.jtabs button{flex:1 1 auto;font-size:13.5px;padding:9px 12px}}
 </style>
 <script>
   // Có JavaScript: bật hiệu ứng hiện dần. Chốt an toàn: sau 2,5 giây mọi khối tự hiện dù mã phía sau có lỗi.
@@ -678,6 +700,59 @@
     </div>
   </div>
 </div>
+
+<!-- THEO HÀNH TRÌNH KHÁCH: mới tìm hiểu / đã đến Hội An / rành Hội An -->
+<section class="journey" id="bat-dau">
+  <div class="wrap">
+    <span class="eyebrow">Bắt đầu từ đâu</span>
+    <h2>Anh/chị đang ở bước nào với Hội An?</h2>
+    <p class="sub">Chọn một mục, em đưa đúng thông tin anh/chị cần, không vòng vo.</p>
+    <div class="jtabs" role="tablist">
+      <button type="button" class="on" data-j="moi">Mới tìm hiểu Hội An</button>
+      <button type="button" data-j="biet">Đã từng đến Hội An</button>
+      <button type="button" data-j="ranh">Rành Hội An, cần số liệu</button>
+    </div>
+    <div class="jpane on" data-j="moi">
+      <ul>
+        <li><b>Đi lại dễ hơn anh/chị nghĩ:</b> bay Hà Nội hoặc TP.HCM ra Đà Nẵng khoảng 1 giờ 20 phút; từ sân bay về dự án khoảng 35 phút.</li>
+        <li><b>Sống đủ tiện nghi:</b> trung tâm Hội An khoảng 10 phút với trường học, chợ, bệnh viện; biển An Bàng – Cửa Đại khoảng 5 km.</li>
+        <li><b>Một nơi cả thế giới tìm đến:</b> phố cổ là di sản văn hoá thế giới, rừng dừa thuộc khu dự trữ sinh quyển Cù Lao Chàm – Hội An; khoảng 4,4 triệu lượt khách năm 2024.</li>
+        <li><b>Ở xa vẫn xem được:</b> em gọi video trực tiếp tại dự án, hoặc đón anh/chị khi ra Đà Nẵng – Hội An.</li>
+      </ul>
+      <div class="jcta">
+        <button class="btn btn-orange js-open" data-title="Nhận cẩm nang sống ở Hội An & video thực tế dự án" data-need="Mới tìm hiểu Hội An – cẩm nang & video">Nhận cẩm nang sống ở Hội An</button>
+        <button class="jlink js-ask" type="button" data-ask="Vị trí dự án đi lại thế nào em?">Hoặc hỏi em ngay trong chat</button>
+        <small>Gửi qua Zalo · không mất phí · không ràng buộc</small>
+      </div>
+    </div>
+    <div class="jpane" data-j="biet">
+      <ul>
+        <li><b>Khác condotel và biệt thự nghỉ dưỡng có thời hạn:</b> đây là nhà ở thấp tầng, sân vườn riêng; người Việt được cấp sổ, sử dụng đất lâu dài.</li>
+        <li><b>Chủ đầu tư đã làm thật ở Hội An:</b> Đạt Phương phát triển Casamia Hội An (Võng Nhi), khu biệt thự đã bàn giao và đang vận hành, anh/chị có thể ghé xem.</li>
+        <li><b>Không đông đúc như phố biển:</b> chỉ 363 căn trên 31,1 ha, compound có ban quản lý, ra phố cổ vẫn chỉ khoảng 10 phút.</li>
+        <li><b>Những tháng chưa về ở:</b> chủ đầu tư thuê lại 50–60 triệu/tháng trong 3 năm (theo chính sách, căn đủ điều kiện).</li>
+      </ul>
+      <div class="jcta">
+        <button class="btn btn-orange js-open" data-title="Đặt lịch xem nhà mẫu – đón tận nơi" data-need="Đã đến Hội An – đặt lịch xem nhà mẫu">Đặt lịch xem nhà mẫu, đón tận nơi</button>
+        <button class="jlink js-ask" type="button" data-ask="Pháp lý sổ hồng dự án thế nào em?">Hỏi về pháp lý, sở hữu</button>
+        <small>Xem cả Casamia Hội An đã vận hành trong cùng chuyến</small>
+      </div>
+    </div>
+    <div class="jpane" data-j="ranh">
+      <ul>
+        <li><b>Pháp lý:</b> chủ trương đầu tư, quy hoạch 1/500, giấy phép xây dựng; đủ điều kiện bán theo chủ đầu tư. Cao độ khu nhà theo quy hoạch được duyệt, không ngập (theo tài liệu hỏi đáp của CĐT).</li>
+        <li><b>Parkhome:</b> đất 178 m², sàn 316 m², 3 tầng + tum; từ khoảng <b>10,4 tỷ</b> khi nhận thô (đã trừ chiết khấu 3,5 tỷ, căn trong danh sách CĐT).</li>
+        <li><b>Forestside:</b> đất 250–336 m², ven rừng dừa; CĐT thuê lại 60 triệu/tháng × 3 năm hoặc chiết khấu tới 4 tỷ khi nhận thô.</li>
+        <li><b>Chi phí giữ nhà:</b> phí quản lý dự kiến 10.000 đ/m² đất/tháng, miễn 2 năm đầu; vay 70%, lãi 0% và ân hạn gốc 24 tháng.</li>
+      </ul>
+      <div class="jcta">
+        <button class="btn btn-orange js-open" data-title="Nhận bảng hàng & giá sau chiết khấu từng căn" data-need="Rành Hội An – bảng hàng & giá sau CK">Nhận bảng hàng, giá sau chiết khấu</button>
+        <button class="jlink js-ask" type="button" data-ask="Cho anh xin bảng giá từng căn còn trống">Hỏi căn đẹp còn trống</button>
+        <small>Bảng hàng cập nhật theo ngày · gửi riêng qua Zalo</small>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- CHAT NGAY TRÊN TRANG -->
 <section class="lchat-sec" id="hoi-ngay">
@@ -932,7 +1007,7 @@
           <li><b>Bàn giao thô 2026</b>chiết khấu <strong class="o">4 tỷ</strong> · CĐT thuê lại <strong class="o">60tr/tháng × 3 năm</strong></li>
           <li><b>Nội thất 2027</b>chiết khấu <strong class="o">400 triệu</strong> · ủy thác <strong class="o">5 năm</strong>, tối thiểu 60tr/tháng, +10 đêm nghỉ/năm</li>
         </ul>
-        <ul class="specs"><li>Diện tích đất<b class="blur">███ m²</b></li><li>Số tầng / phòng ngủ<b class="blur">█ tầng · █ PN</b></li><li>Giá từ<b class="blur">██,█ tỷ</b></li></ul>
+        <ul class="specs"><li>Diện tích đất<b>250 – 336 m²</b></li><li>Số tầng<b>2 – 3 tầng + tum</b></li><li>Giá từng căn<b class="blur">██,█ tỷ</b></li></ul>
         <div class="fp js-open" data-title="Xem layout Forestside Villa" data-need="Layout Forestside Villa"><svg viewBox="0 0 120 70"><rect x="4" y="4" width="112" height="62"/><path d="M60 4v40M4 36h56M60 44h56M86 44v22M30 36v30"/></svg><span>Xem layout từng tầng</span></div>
         <button class="btn btn-orange js-open" data-title="Nhận giá & layout Forestside Villa" data-need="Forestside Villa – biệt thự rừng dừa">Mở khoá giá &amp; layout</button></div></div>
       <div class="prod reveal"><div class="ph" data-img="villa2" style="background-image:url('img/parkhome.jpg')"><span>Biệt thự sân vườn</span><b class="ph-n">50tr/tháng</b></div><div class="bd">
@@ -941,11 +1016,11 @@
           <li><b>Bàn giao thô 2026</b>chiết khấu <strong class="o">3,5 tỷ</strong>* · CĐT thuê lại <strong class="o">50tr/tháng × 3 năm</strong></li>
           <li><b>Nội thất 2027</b>chiết khấu <strong class="o">300 triệu</strong>* · ủy thác <strong class="o">5 năm</strong>, tối thiểu 50tr/tháng (quỹ 50 căn)</li>
         </ul>
-        <ul class="specs"><li>Diện tích đất<b class="blur">███ m²</b></li><li>Số tầng / phòng ngủ<b class="blur">█ tầng · █ PN</b></li><li>Giá từ<b class="blur">██,█ tỷ</b></li></ul>
+        <ul class="specs"><li>Đất / sàn<b>178 m² · 316 m²</b></li><li>Số tầng<b>3 tầng + tum</b></li><li>Giá từ (nhận thô)<b>~10,4 tỷ*</b></li></ul>
         <div class="fp js-open" data-title="Xem layout Parkhome" data-need="Layout Parkhome"><svg viewBox="0 0 120 70"><rect x="4" y="4" width="112" height="62"/><path d="M50 4v62M4 30h46M50 40h66M84 4v36"/></svg><span>Xem layout từng tầng</span></div>
         <button class="btn btn-orange js-open" data-title="Nhận giá & layout Parkhome" data-need="Parkhome – biệt thự sân vườn">Mở khoá giá &amp; layout</button></div></div>
     </div>
-    <p class="src" style="color:var(--muted)">* Áp dụng với quỹ căn trong danh sách quy định của chủ đầu tư.</p>
+    <p class="src" style="color:var(--muted)">* Áp dụng với quỹ căn trong danh sách quy định của chủ đầu tư. Parkhome nhận thô từ ~10,4 tỷ là giá đã trừ chiết khấu 3,5 tỷ (full nội thất từ ~13,86 tỷ, không vay, gồm VAT), tham khảo theo bảng giá hiện hành.</p>
   </div>
 </section>
 
@@ -991,6 +1066,12 @@
   <div class="wrap">
     <span class="eyebrow">Minh bạch</span>
     <h2>Muốn biết chắc <em>trước khi xuống tiền?</em></h2>
+    <div class="facts">
+      <div><b>Sổ lâu dài</b>Người Việt được cấp sổ, sử dụng đất lâu dài</div>
+      <div><b>QH 1/500 · GPXD</b>Đủ điều kiện bán theo chủ đầu tư</div>
+      <div><b>Không ngập</b>Cao độ theo quy hoạch được duyệt</div>
+      <div><b>Đạt Phương</b>Đã bàn giao, vận hành Casamia Hội An</div>
+    </div>
     <p class="lead-text">Anh/chị không cần tin lời quảng cáo. Em gửi đầy đủ hồ sơ để anh/chị tự kiểm tra:</p>
     <div class="checks">
       <div><i></i>Hồ sơ pháp lý dự án</div>
@@ -1053,6 +1134,9 @@
     <details><summary>Chủ đầu tư thuê lại cụ thể thế nào?</summary><p>Bàn giao thô 2026: CĐT trực tiếp thuê lại 60 triệu/tháng (Forestside) hoặc 50 triệu/tháng (Parkhome), hợp đồng thuê 3 năm. Bàn giao nội thất 2027: ủy thác CĐT vận hành 5 năm, chủ nhà hưởng 45% doanh thu cho thuê thuần, thu nhập tối thiểu 60 triệu / 50 triệu mỗi tháng, kèm 10 đêm nghỉ miễn phí mỗi năm.</p></details>
     <details><summary>Cần bao nhiêu tiền ban đầu?</summary><p>Đặt cọc 300 triệu. Nếu vay ngân hàng, anh/chị tự thanh toán khoảng 30% (cọc + ký HĐMB + 1 đợt), ngân hàng hỗ trợ tới 70% với lãi suất 0% và ân hạn nợ gốc trong 24 tháng.</p></details>
     <details><summary>Không vay thì có ưu đãi gì?</summary><p>Thanh toán sớm 95% được chiết khấu thêm 2–5% tuỳ phân khu, cộng lãi suất 11% cho phần thanh toán sớm. Miễn phí 2 năm phí quản lý và 1 năm Fitness &amp; Pool tại Clubhouse Casamia.</p></details>
+    <details><summary>Hội An mùa mưa bão, khu này có ngập không?</summary><p>Theo tài liệu hỏi đáp của chủ đầu tư, cao độ khu nhà được thiết kế theo quy hoạch được duyệt, đảm bảo không ngập lụt; mực nước kênh nội khu lên xuống theo thủy triều. Khi tham quan, em đưa anh/chị xem thực tế hạ tầng và cao độ từng phân khu.</p></details>
+    <details><summary>Khác gì condotel hay biệt thự nghỉ dưỡng có thời hạn?</summary><p>Casamia Balanca là nhà ở thấp tầng trong khu đô thị: người Việt ký hợp đồng mua bán với chủ đầu tư và được cấp sổ, sử dụng đất lâu dài. Anh/chị ở hẳn được, cho thuê hoặc để lại cho con cháu.</p></details>
+    <details><summary>Từ Hà Nội, TP.HCM ra đây đi lại thế nào?</summary><p>Bay ra Đà Nẵng khoảng 1 giờ 20 phút, nhiều chuyến mỗi ngày; từ sân bay về dự án khoảng 35 phút qua trục ven biển Võ Chí Công. Em có thể đón anh/chị tại sân bay khi đi xem nhà mẫu.</p></details>
     <details><summary>Ở xa có xem được dự án không?</summary><p>Được ạ. Em gửi video thực tế, có thể gọi video trực tiếp tại dự án, hoặc đón anh/chị tham quan khi tiện.</p></details>
     <p style="margin-top:24px"><button class="link-cta js-chat">Câu hỏi khác? Chat với tư vấn viên ngay →</button></p>
   </div>
@@ -1310,6 +1394,12 @@ const API_BASE = '';
   // Tháng hiện tại cho dòng "Ưu đãi đang áp dụng tháng …"
   const now = new Date(), MONTH = (now.getMonth() + 1) + '/' + now.getFullYear();
   if (now.getFullYear() >= 2026) $$('.js-month').forEach(el => { el.textContent = MONTH; });
+
+  // Theo hành trình khách: đổi tab
+  $$('.jtabs button').forEach(b => b.addEventListener('click', () => {
+    $$('.jtabs button').forEach(x => x.classList.toggle('on', x === b));
+    $$('.jpane').forEach(x => x.classList.toggle('on', x.dataset.j === b.dataset.j));
+  }));
 
   // Chính sách theo phân khu (tab)
   const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
