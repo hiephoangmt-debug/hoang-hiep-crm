@@ -61,6 +61,29 @@ def business_schema():
     }
 
 
+THUMB_ICONS = {
+    "question": '<circle cx="200" cy="60" r="34" fill="#ff7a00"/><text x="200" y="75" text-anchor="middle" font-family="Be Vietnam Pro,Arial" font-weight="800" font-size="44" fill="#fff">?</text>',
+    "calendar": '<rect x="166" y="30" width="68" height="62" rx="10" fill="#fff"/><rect x="166" y="30" width="68" height="18" rx="9" fill="#ff7a00"/><rect x="166" y="40" width="68" height="8" fill="#ff7a00"/>'
+                '<rect x="180" y="22" width="6" height="16" rx="3" fill="#ff9a3c"/><rect x="214" y="22" width="6" height="16" rx="3" fill="#ff9a3c"/>'
+                '<text x="200" y="83" text-anchor="middle" font-family="Be Vietnam Pro,Arial" font-weight="800" font-size="26" fill="#0b1f44">15</text>',
+    "warning": '<path d="M200 24L240 94H160Z" fill="#ff7a00" stroke="#ff7a00" stroke-width="8" stroke-linejoin="round"/>'
+               '<rect x="196" y="46" width="8" height="26" rx="4" fill="#fff"/><circle cx="200" cy="82" r="5" fill="#fff"/>',
+}
+
+
+def thumb_svg(key):
+    """Ảnh đầu thẻ bài viết: SVG tự căn giữa (giữ đúng bố cục khi chuyển sang LadiPage)."""
+    return ('<svg class="thumb" viewBox="0 0 400 120" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'
+            '<defs><linearGradient id="tg-' + key + '" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1f44"/><stop offset="1" stop-color="#1d4391"/></linearGradient></defs>'
+            '<rect width="400" height="120" fill="url(#tg-' + key + ')"/><circle cx="200" cy="60" r="52" fill="#fff" opacity=".06"/>'
+            + THUMB_ICONS.get(key, THUMB_ICONS["question"]) + "</svg>")
+
+
+def short(text, n):
+    """Cắt mô tả ở ranh giới từ, không cắt giữa chữ."""
+    return text if len(text) <= n else text[:n].rsplit(" ", 1)[0].rstrip(",.;:–-") + "…"
+
+
 def tldr_html(items):
     if not items:
         return ""
@@ -195,7 +218,7 @@ def build_page(p):
     root = "../" * depth
     url = DOMAIN + slug + "/"
     body = fill(p["body"], root).replace("{{POSTS}}", "".join(
-        f'<a href="{root}{q["slug"]}/">{q["h1"]}<small>{q["desc"][:110]}…</small></a>' for q in PAGES if q.get("article")))
+        f'<a href="{root}{q["slug"]}/">{q["h1"]}<small>{short(q["desc"], 110)}</small></a>' for q in PAGES if q.get("article")))
     crumbs = [("Trang chủ", DOMAIN)] + [(t, DOMAIN + s + "/") for s, t in p.get("parents", [])] + [(p["crumb"], url)]
     schemas = [
         {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
@@ -223,7 +246,7 @@ def build_page(p):
     related = ""
     if p.get("related"):
         cards = "".join(
-            f'<a href="{root}{q["slug"]}/">{q["h1"]}<small>{q["desc"][:95]}…</small></a>'
+            f'<a href="{root}{q["slug"]}/">{q["h1"]}<small>{short(q["desc"], 95)}</small></a>'
             for q in PAGES if q["slug"] in p["related"])
         related = f'<h2 id="bai-lien-quan">Bài viết liên quan</h2><div class="related">{cards}</div>'
     out = (head_common(p["title"], p["desc"], url, root, "article" if p.get("article") else "website")
@@ -261,8 +284,8 @@ def build_page(p):
 def build_index():
     root = ""
     blog = "".join(
-        f'<a class="post reveal" href="{q["slug"]}/"><span class="thumb">{q.get("icon","₫")}</span>'
-        f'<div class="c"><h3>{q["h1"]}</h3><p>{q["desc"][:110]}…</p></div></a>'
+        f'<a class="post reveal" href="{q["slug"]}/">{thumb_svg(q.get("icon", "question"))}'
+        f'<div class="c"><h3>{q["h1"]}</h3><p>{short(q["desc"], 110)}</p></div></a>'
         for q in PAGES if q.get("article"))[:6000]
     body = fill(read("src/pages/index.body.html"), root).replace("{{POSTS}}", blog)
     website = {"@context": "https://schema.org", "@type": "WebSite", "@id": DOMAIN + "#website", "url": DOMAIN,
@@ -526,7 +549,7 @@ PAGES = [
 ],
 "parents": [("kien-thuc", "Kiến thức")],
 "crumb": "Đáo hạn thẻ tín dụng là gì?",
-"article": True, "icon": "?",
+"article": True, "icon": "question",
 "title": "Đáo Hạn Thẻ Tín Dụng Là Gì? Có Nên Đáo Hạn Không? (2026)",
 "desc": "Giải thích dễ hiểu đáo hạn thẻ tín dụng là gì, cách hoạt động, chi phí, lợi ích và rủi ro, khi nào nên và không nên đáo hạn thẻ.",
 "h1": "Đáo Hạn Thẻ Tín Dụng Là Gì? Có Nên Đáo Hạn Không?",
@@ -580,7 +603,7 @@ PAGES = [
 ],
 "parents": [("kien-thuc", "Kiến thức")],
 "crumb": "Ngày sao kê và ngày đến hạn",
-"article": True, "icon": "📅",
+"article": True, "icon": "calendar",
 "title": "Ngày Sao Kê Và Ngày Đến Hạn Thẻ Tín Dụng: Cách Tính Để Không Bị Phạt",
 "desc": "Phân biệt ngày sao kê, ngày đến hạn thanh toán thẻ tín dụng, cách tính 45–55 ngày miễn lãi và mẹo chọn thời điểm chi tiêu thông minh.",
 "h1": "Ngày Sao Kê Và Ngày Đến Hạn Thẻ Tín Dụng – Hiểu Đúng Để Không Bị Phạt",
@@ -627,7 +650,7 @@ PAGES = [
 ],
 "parents": [("kien-thuc", "Kiến thức")],
 "crumb": "Trả chậm thẻ tín dụng bị phạt bao nhiêu?",
-"article": True, "icon": "⚠",
+"article": True, "icon": "warning",
 "title": "Trả Chậm Thẻ Tín Dụng Bị Phạt Bao Nhiêu? Có Bị Nợ Xấu Không?",
 "desc": "Trả chậm thẻ tín dụng 1 ngày bị phạt bao nhiêu, lãi tính thế nào, bao lâu thì bị nợ xấu CIC và cách xử lý khi lỡ trễ hạn.",
 "h1": "Trả Chậm Thẻ Tín Dụng Bị Phạt Bao Nhiêu? Có Bị Nợ Xấu Không?",
