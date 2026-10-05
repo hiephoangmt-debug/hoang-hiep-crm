@@ -68,7 +68,7 @@ module.exports = {
       keywords: ['giá', 'gia', 'bao nhiêu', 'chính sách', 'chiết khấu', 'ưu đãi', 'thanh toán', 'tiền'],
       steps: [
         'Dạ em ghi nhận {name} đang quan tâm bảng giá và chính sách bán hàng ạ.',
-        'Chính sách mới từ 09/2026: đặt cọc 300 triệu, ngân hàng hỗ trợ vay 70% với lãi suất 0% và ân hạn gốc 24 tháng; chiết khấu tới 4 tỷ khi nhận bàn giao thô. Đặc biệt chủ đầu tư thuê lại 60 triệu/tháng (Forestside) hoặc 50 triệu/tháng (Parkhome).',
+        'Chính sách đang áp dụng (CSBH từ 09/09/2026): đặt cọc 300 triệu, ngân hàng hỗ trợ vay 70% với lãi suất 0% và ân hạn gốc 24 tháng; chiết khấu tới 4 tỷ khi nhận bàn giao thô. Đặc biệt chủ đầu tư thuê lại 60 triệu/tháng (Forestside) hoặc 50 triệu/tháng (Parkhome).',
         'Để em lọc đúng căn và tính dòng tiền phù hợp, {name} cho em hỏi ngân sách dự kiến khoảng bao nhiêu và mình mua để ở hay đầu tư ạ?',
       ],
       // Khách đọc chậm ở mục có các từ này trên trang -> chủ động hỏi câu dưới.

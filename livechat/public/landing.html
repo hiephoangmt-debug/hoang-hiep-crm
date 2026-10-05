@@ -619,7 +619,7 @@
 <div class="offer">
   <div class="wrap">
     <div class="offer-in js-open" data-title="Nhận chính sách bán hàng đầy đủ & bảng giá" data-need="Chính sách bán hàng" role="button" tabindex="0">
-      <span class="offer-h">Ưu đãi mua nhà<br>từ 09/2026</span>
+      <span class="offer-h">Ưu đãi đang áp dụng<br>tháng <span class="js-month">10/2026</span></span>
       <div><b class="shine">300tr</b><span>đặt cọc giữ căn</span></div>
       <div><b class="shine">0%</b><span>lãi suất 24 tháng</span></div>
       <div><b class="shine">4 tỷ</b><span>chiết khấu tối đa</span></div>
@@ -1038,7 +1038,7 @@
 <!-- Thanh liên hệ cố định trên máy tính -->
 <div class="dbar">
   <div class="wrap">
-    <span class="dbar-t"><b>Casamia Balanca</b> · Chỉ 363 căn biệt thự compound · Ưu đãi từ 09/2026</span>
+    <span class="dbar-t"><b>Casamia Balanca</b> · Chỉ 363 căn biệt thự compound · Ưu đãi tháng <span class="js-month">10/2026</span></span>
     <div class="dbar-b">
       <button class="btn btn-line js-ask" data-ask="Em muốn được tư vấn về Casamia Balanca">Hỏi ngay</button>
       <a class="btn btn-line js-tel" href="#">Gọi <span class="js-hotline"></span></a>
@@ -1085,23 +1085,23 @@ const PERKS = ['Miễn phí 2 năm phí quản lý khu đô thị', 'Miễn phí
 const POLICIES = {
   FT: { name: 'Forestside Villa · Bàn giao thô · nhận nhà 2026',
     hi: [['4 tỷ', 'Chiết khấu', 'khi chọn bàn giao thô'], ['60tr/tháng', 'CĐT trực tiếp thuê lại', 'hợp đồng thuê 3 năm'], ['2%', 'Chiết khấu', 'khi thanh toán sớm 95%'], ['1%', 'Chiết khấu', 'khách hàng thân thiết']],
-    noLoan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['25%', 'T10/26'], ['25%', 'T11/26'], ['25%', 'T12/26 · Bàn giao nhà'], ['5%', 'T1/27 · Nhận GCN']],
-    loan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T10/26'], ['40%', 'T11/26 · NH giải ngân'], ['25%', 'T12/26 · Bàn giao nhà'], ['5%', 'T1/27 · Nhận GCN']], self: '30%' },
+    noLoan: [['300tr', 'Đặt cọc'], ['20%', 'Ký HĐMB'], ['25%', 'T10/26'], ['25%', 'T11/26'], ['25%', 'T12/26 · Bàn giao nhà'], ['5%', 'T1/27 · Nhận GCN']],
+    loan: [['300tr', 'Đặt cọc'], ['20%', 'Ký HĐMB'], ['10%', 'T10/26'], ['40%', 'T11/26 · NH giải ngân'], ['25%', 'T12/26 · Bàn giao nhà'], ['5%', 'T1/27 · Nhận GCN']], self: '30%' },
   FN: { name: 'Forestside Villa · Bàn giao nội thất · nhận nhà 2027',
     hi: [['400tr', 'Chiết khấu', 'khi nhận gói nội thất cơ bản'], ['≥60tr/tháng', 'Thu nhập tối thiểu', 'ủy thác CĐT vận hành 5 năm'], ['45%', 'Doanh thu cho thuê thuần', 'chia cho chủ nhà'], ['10 đêm', 'Lưu trú miễn phí', 'mỗi năm cho gia đình']],
     extra: ['Chiết khấu 4% khi thanh toán sớm 95%', 'Chiết khấu 1% khách hàng thân thiết', 'Ủy thác chỉ áp dụng với biệt thự đủ điều kiện vận hành của đơn vị khai thác'],
-    noLoan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T10/26'], ['10%', 'T11/26'], ['10%', 'T12/26'], ['5%', 'T1/27'], ['5%', 'T2/27'], ['5%', 'T3/27'], ['5%', 'T4/27'], ['25%', 'T6/27 · Bàn giao nhà'], ['5%', 'Nhận GCN']],
-    loan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T10/26'], ['40%', 'T3/27 · NH giải ngân'], ['25%', 'T6/27 · Bàn giao nhà'], ['5%', 'Nhận GCN']], self: '30%' },
+    noLoan: [['300tr', 'Đặt cọc'], ['20%', 'Ký HĐMB'], ['10%', 'T10/26'], ['10%', 'T11/26'], ['10%', 'T12/26'], ['5%', 'T1/27'], ['5%', 'T2/27'], ['5%', 'T3/27'], ['5%', 'T4/27'], ['25%', 'T6/27 · Bàn giao nhà'], ['5%', 'Nhận GCN']],
+    loan: [['300tr', 'Đặt cọc'], ['20%', 'Ký HĐMB'], ['10%', 'T10/26'], ['40%', 'T3/27 · NH giải ngân'], ['25%', 'T6/27 · Bàn giao nhà'], ['5%', 'Nhận GCN']], self: '30%' },
   PT: { name: 'Parkhome · Bàn giao thô · nhận nhà 2026',
     hi: [['3,5 tỷ', 'Chiết khấu', 'khi nhận bàn giao thô*'], ['50tr/tháng', 'CĐT trực tiếp thuê lại', 'hợp đồng thuê 3 năm'], ['5%', 'Chiết khấu', 'khi thanh toán sớm 95%'], ['2 năm', 'Miễn phí phí quản lý', '+ 1 năm Fitness & Pool']],
     extra: ['* Chiết khấu 3,5 tỷ áp dụng với quỹ căn trong danh sách quy định của CĐT'],
-    noLoan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T11/26'], ['20%', 'T12/26 · Bàn giao nhà'], ['5%', 'T1/27'], ['5%', 'T2/27'], ['5%', 'T3/27'], ['5%', 'T4/27'], ['5%', 'T5/27'], ['5%', 'T6/27'], ['5%', 'T7/27'], ['5%', 'T8/27'], ['5%', 'T9/27'], ['5%', 'T11/27 · Nhận GCN']],
-    loan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T11/26'], ['20%', 'T12/26 · Bàn giao · NH giải ngân'], ['20%', 'T1/27'], ['25%', 'T2/27'], ['5%', 'T6/27 · Nhận GCN']], self: '30%' },
+    noLoan: [['300tr', 'Đặt cọc'], ['20%', 'Ký HĐMB'], ['10%', 'T11/26'], ['20%', 'T12/26 · Bàn giao nhà'], ['5%', 'T1/27'], ['5%', 'T2/27'], ['5%', 'T3/27'], ['5%', 'T4/27'], ['5%', 'T5/27'], ['5%', 'T6/27'], ['5%', 'T7/27'], ['5%', 'T8/27'], ['5%', 'T9/27'], ['5%', 'T11/27 · Nhận GCN']],
+    loan: [['300tr', 'Đặt cọc'], ['20%', 'Ký HĐMB'], ['10%', 'T11/26'], ['20%', 'T12/26 · Bàn giao · NH giải ngân'], ['20%', 'T1/27'], ['25%', 'T2/27'], ['5%', 'T6/27 · Nhận GCN']], self: '30%' },
   PN: { name: 'Parkhome · Bàn giao nội thất · nhận nhà 2027',
     hi: [['300tr', 'Chiết khấu', 'khi nhận gói nội thất cơ bản*'], ['≥50tr/tháng', 'Thu nhập tối thiểu', 'ủy thác CĐT vận hành 5 năm'], ['45%', 'Doanh thu cho thuê thuần', 'chia cho chủ nhà'], ['10 đêm', 'Lưu trú miễn phí', 'mỗi năm cho gia đình']],
     extra: ['Chiết khấu 5% khi thanh toán sớm 95%', 'Ủy thác áp dụng với quỹ 50 căn trong chương trình cho thuê', '* Áp dụng với quỹ căn trong danh sách quy định của CĐT'],
-    noLoan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T11/26'], ['5%', 'T12/26'], ['5%', 'T1/27'], ['5%', 'T2/27'], ['5%', 'T3/27 · Bàn giao nhà'], ['10%', 'T4/27'], ['10%', 'T5/27'], ['10%', 'T6/27'], ['10%', 'T7/27'], ['5%', 'T9/27'], ['5%', 'T11/27 · Nhận GCN']],
-    loan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T11/26'], ['10%', 'T12/26 · NH giải ngân'], ['10%', 'T3/27 · Bàn giao nhà'], ['45%', 'T4/27'], ['5%', 'T6/27 · Nhận GCN']], self: '30%' },
+    noLoan: [['300tr', 'Đặt cọc'], ['20%', 'Ký HĐMB'], ['10%', 'T11/26'], ['5%', 'T12/26'], ['5%', 'T1/27'], ['5%', 'T2/27'], ['5%', 'T3/27 · Bàn giao nhà'], ['10%', 'T4/27'], ['10%', 'T5/27'], ['10%', 'T6/27'], ['10%', 'T7/27'], ['5%', 'T9/27'], ['5%', 'T11/27 · Nhận GCN']],
+    loan: [['300tr', 'Đặt cọc'], ['20%', 'Ký HĐMB'], ['10%', 'T11/26'], ['10%', 'T12/26 · NH giải ngân'], ['10%', 'T3/27 · Bàn giao nhà'], ['45%', 'T4/27'], ['5%', 'T6/27 · Nhận GCN']], self: '30%' },
 };
 // Bản xuất thử (file đơn, không có server): PREVIEW = true, form chỉ mô phỏng gửi thành công.
 const PREVIEW = false;
@@ -1236,6 +1236,10 @@ const API_BASE = '';
   const fmtNum = (n, dec) => n.toLocaleString('vi-VN', { minimumFractionDigits: dec, maximumFractionDigits: dec });
   $$('.hpol').forEach(el => el.addEventListener('keydown', e => { if (e.key === 'Enter') el.click(); }));
 
+  // Tháng hiện tại cho dòng "Ưu đãi đang áp dụng tháng …"
+  const now = new Date(), MONTH = (now.getMonth() + 1) + '/' + now.getFullYear();
+  if (now.getFullYear() >= 2026) $$('.js-month').forEach(el => { el.textContent = MONTH; });
+
   // Chính sách theo phân khu (tab)
   const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const steps = arr => '<div class="steps">' + arr.map(([v, l]) => `<div class="st"><b>${esc(v)}</b><i></i><span>${esc(l)}</span></div>`).join('') + '</div>';
@@ -1251,6 +1255,7 @@ const API_BASE = '';
         <p class="pay-note">Khách tự thanh toán khoảng <strong class="o">${esc(P.self)}</strong> (đặt cọc + ký HĐMB + 1 đợt), phần còn lại ngân hàng giải ngân.</p>
         <div class="pay-h"><b>Phương án không vay</b><span>${esc(NOLOAN)}</span></div>
         ${steps(P.noLoan)}
+        <p class="pay-note">Mốc tháng theo bảng CSBH gốc (ban hành 09/2026). Ký HĐMB từ tháng ${esc(MONTH)}: tiến độ cụ thể theo ngày ký thực tế, em gửi bảng cập nhật đúng căn qua Zalo.</p>
       </div>`;
   }
   $$('.ptabs button').forEach(b => b.addEventListener('click', () => {

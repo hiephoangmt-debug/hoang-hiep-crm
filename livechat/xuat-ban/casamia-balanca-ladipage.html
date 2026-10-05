@@ -619,7 +619,7 @@
 <div class="offer">
   <div class="wrap">
     <div class="offer-in js-open" data-title="Nhận chính sách bán hàng đầy đủ & bảng giá" data-need="Chính sách bán hàng" role="button" tabindex="0">
-      <span class="offer-h">Ưu đãi mua nhà<br>từ 09/2026</span>
+      <span class="offer-h">Ưu đãi đang áp dụng<br>tháng <span class="js-month">10/2026</span></span>
       <div><b class="shine">300tr</b><span>đặt cọc giữ căn</span></div>
       <div><b class="shine">0%</b><span>lãi suất 24 tháng</span></div>
       <div><b class="shine">4 tỷ</b><span>chiết khấu tối đa</span></div>
@@ -1038,7 +1038,7 @@
 <!-- Thanh liên hệ cố định trên máy tính -->
 <div class="dbar">
   <div class="wrap">
-    <span class="dbar-t"><b>Casamia Balanca</b> · Chỉ 363 căn biệt thự compound · Ưu đãi từ 09/2026</span>
+    <span class="dbar-t"><b>Casamia Balanca</b> · Chỉ 363 căn biệt thự compound · Ưu đãi tháng <span class="js-month">10/2026</span></span>
     <div class="dbar-b">
       <button class="btn btn-line js-ask" data-ask="Em muốn được tư vấn về Casamia Balanca">Hỏi ngay</button>
       <a class="btn btn-line js-tel" href="#">Gọi <span class="js-hotline"></span></a>
@@ -1085,23 +1085,23 @@ const PERKS = ['Miễn phí 2 năm phí quản lý khu đô thị', 'Miễn phí
 const POLICIES = {
   FT: { name: 'Forestside Villa · Bàn giao thô · nhận nhà 2026',
     hi: [['4 tỷ', 'Chiết khấu', 'khi chọn bàn giao thô'], ['60tr/tháng', 'CĐT trực tiếp thuê lại', 'hợp đồng thuê 3 năm'], ['2%', 'Chiết khấu', 'khi thanh toán sớm 95%'], ['1%', 'Chiết khấu', 'khách hàng thân thiết']],
-    noLoan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['25%', 'T10/26'], ['25%', 'T11/26'], ['25%', 'T12/26 · Bàn giao nhà'], ['5%', 'T1/27 · Nhận GCN']],
-    loan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T10/26'], ['40%', 'T11/26 · NH giải ngân'], ['25%', 'T12/26 · Bàn giao nhà'], ['5%', 'T1/27 · Nhận GCN']], self: '30%' },
+    noLoan: [['300tr', 'Đặt cọc'], ['20%', 'Ký HĐMB'], ['25%', 'T10/26'], ['25%', 'T11/26'], ['25%', 'T12/26 · Bàn giao nhà'], ['5%', 'T1/27 · Nhận GCN']],
+    loan: [['300tr', 'Đặt cọc'], ['20%', 'Ký HĐMB'], ['10%', 'T10/26'], ['40%', 'T11/26 · NH giải ngân'], ['25%', 'T12/26 · Bàn giao nhà'], ['5%', 'T1/27 · Nhận GCN']], self: '30%' },
   FN: { name: 'Forestside Villa · Bàn giao nội thất · nhận nhà 2027',
     hi: [['400tr', 'Chiết khấu', 'khi nhận gói nội thất cơ bản'], ['≥60tr/tháng', 'Thu nhập tối thiểu', 'ủy thác CĐT vận hành 5 năm'], ['45%', 'Doanh thu cho thuê thuần', 'chia cho chủ nhà'], ['10 đêm', 'Lưu trú miễn phí', 'mỗi năm cho gia đình']],
     extra: ['Chiết khấu 4% khi thanh toán sớm 95%', 'Chiết khấu 1% khách hàng thân thiết', 'Ủy thác chỉ áp dụng với biệt thự đủ điều kiện vận hành của đơn vị khai thác'],
-    noLoan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T10/26'], ['10%', 'T11/26'], ['10%', 'T12/26'], ['5%', 'T1/27'], ['5%', 'T2/27'], ['5%', 'T3/27'], ['5%', 'T4/27'], ['25%', 'T6/27 · Bàn giao nhà'], ['5%', 'Nhận GCN']],
-    loan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T10/26'], ['40%', 'T3/27 · NH giải ngân'], ['25%', 'T6/27 · Bàn giao nhà'], ['5%', 'Nhận GCN']], self: '30%' },
+    noLoan: [['300tr', 'Đặt cọc'], ['20%', 'Ký HĐMB'], ['10%', 'T10/26'], ['10%', 'T11/26'], ['10%', 'T12/26'], ['5%', 'T1/27'], ['5%', 'T2/27'], ['5%', 'T3/27'], ['5%', 'T4/27'], ['25%', 'T6/27 · Bàn giao nhà'], ['5%', 'Nhận GCN']],
+    loan: [['300tr', 'Đặt cọc'], ['20%', 'Ký HĐMB'], ['10%', 'T10/26'], ['40%', 'T3/27 · NH giải ngân'], ['25%', 'T6/27 · Bàn giao nhà'], ['5%', 'Nhận GCN']], self: '30%' },
   PT: { name: 'Parkhome · Bàn giao thô · nhận nhà 2026',
     hi: [['3,5 tỷ', 'Chiết khấu', 'khi nhận bàn giao thô*'], ['50tr/tháng', 'CĐT trực tiếp thuê lại', 'hợp đồng thuê 3 năm'], ['5%', 'Chiết khấu', 'khi thanh toán sớm 95%'], ['2 năm', 'Miễn phí phí quản lý', '+ 1 năm Fitness & Pool']],
     extra: ['* Chiết khấu 3,5 tỷ áp dụng với quỹ căn trong danh sách quy định của CĐT'],
-    noLoan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T11/26'], ['20%', 'T12/26 · Bàn giao nhà'], ['5%', 'T1/27'], ['5%', 'T2/27'], ['5%', 'T3/27'], ['5%', 'T4/27'], ['5%', 'T5/27'], ['5%', 'T6/27'], ['5%', 'T7/27'], ['5%', 'T8/27'], ['5%', 'T9/27'], ['5%', 'T11/27 · Nhận GCN']],
-    loan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T11/26'], ['20%', 'T12/26 · Bàn giao · NH giải ngân'], ['20%', 'T1/27'], ['25%', 'T2/27'], ['5%', 'T6/27 · Nhận GCN']], self: '30%' },
+    noLoan: [['300tr', 'Đặt cọc'], ['20%', 'Ký HĐMB'], ['10%', 'T11/26'], ['20%', 'T12/26 · Bàn giao nhà'], ['5%', 'T1/27'], ['5%', 'T2/27'], ['5%', 'T3/27'], ['5%', 'T4/27'], ['5%', 'T5/27'], ['5%', 'T6/27'], ['5%', 'T7/27'], ['5%', 'T8/27'], ['5%', 'T9/27'], ['5%', 'T11/27 · Nhận GCN']],
+    loan: [['300tr', 'Đặt cọc'], ['20%', 'Ký HĐMB'], ['10%', 'T11/26'], ['20%', 'T12/26 · Bàn giao · NH giải ngân'], ['20%', 'T1/27'], ['25%', 'T2/27'], ['5%', 'T6/27 · Nhận GCN']], self: '30%' },
   PN: { name: 'Parkhome · Bàn giao nội thất · nhận nhà 2027',
     hi: [['300tr', 'Chiết khấu', 'khi nhận gói nội thất cơ bản*'], ['≥50tr/tháng', 'Thu nhập tối thiểu', 'ủy thác CĐT vận hành 5 năm'], ['45%', 'Doanh thu cho thuê thuần', 'chia cho chủ nhà'], ['10 đêm', 'Lưu trú miễn phí', 'mỗi năm cho gia đình']],
     extra: ['Chiết khấu 5% khi thanh toán sớm 95%', 'Ủy thác áp dụng với quỹ 50 căn trong chương trình cho thuê', '* Áp dụng với quỹ căn trong danh sách quy định của CĐT'],
-    noLoan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T11/26'], ['5%', 'T12/26'], ['5%', 'T1/27'], ['5%', 'T2/27'], ['5%', 'T3/27 · Bàn giao nhà'], ['10%', 'T4/27'], ['10%', 'T5/27'], ['10%', 'T6/27'], ['10%', 'T7/27'], ['5%', 'T9/27'], ['5%', 'T11/27 · Nhận GCN']],
-    loan: [['300tr', 'Đặt cọc'], ['20%', 'T9/26 · Ký HĐMB'], ['10%', 'T11/26'], ['10%', 'T12/26 · NH giải ngân'], ['10%', 'T3/27 · Bàn giao nhà'], ['45%', 'T4/27'], ['5%', 'T6/27 · Nhận GCN']], self: '30%' },
+    noLoan: [['300tr', 'Đặt cọc'], ['20%', 'Ký HĐMB'], ['10%', 'T11/26'], ['5%', 'T12/26'], ['5%', 'T1/27'], ['5%', 'T2/27'], ['5%', 'T3/27 · Bàn giao nhà'], ['10%', 'T4/27'], ['10%', 'T5/27'], ['10%', 'T6/27'], ['10%', 'T7/27'], ['5%', 'T9/27'], ['5%', 'T11/27 · Nhận GCN']],
+    loan: [['300tr', 'Đặt cọc'], ['20%', 'Ký HĐMB'], ['10%', 'T11/26'], ['10%', 'T12/26 · NH giải ngân'], ['10%', 'T3/27 · Bàn giao nhà'], ['45%', 'T4/27'], ['5%', 'T6/27 · Nhận GCN']], self: '30%' },
 };
 // Bản xuất thử (file đơn, không có server): PREVIEW = true, form chỉ mô phỏng gửi thành công.
 const PREVIEW = true;
@@ -1236,6 +1236,10 @@ const API_BASE = "";
   const fmtNum = (n, dec) => n.toLocaleString('vi-VN', { minimumFractionDigits: dec, maximumFractionDigits: dec });
   $$('.hpol').forEach(el => el.addEventListener('keydown', e => { if (e.key === 'Enter') el.click(); }));
 
+  // Tháng hiện tại cho dòng "Ưu đãi đang áp dụng tháng …"
+  const now = new Date(), MONTH = (now.getMonth() + 1) + '/' + now.getFullYear();
+  if (now.getFullYear() >= 2026) $$('.js-month').forEach(el => { el.textContent = MONTH; });
+
   // Chính sách theo phân khu (tab)
   const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const steps = arr => '<div class="steps">' + arr.map(([v, l]) => `<div class="st"><b>${esc(v)}</b><i></i><span>${esc(l)}</span></div>`).join('') + '</div>';
@@ -1251,6 +1255,7 @@ const API_BASE = "";
         <p class="pay-note">Khách tự thanh toán khoảng <strong class="o">${esc(P.self)}</strong> (đặt cọc + ký HĐMB + 1 đợt), phần còn lại ngân hàng giải ngân.</p>
         <div class="pay-h"><b>Phương án không vay</b><span>${esc(NOLOAN)}</span></div>
         ${steps(P.noLoan)}
+        <p class="pay-note">Mốc tháng theo bảng CSBH gốc (ban hành 09/2026). Ký HĐMB từ tháng ${esc(MONTH)}: tiến độ cụ thể theo ngày ký thực tế, em gửi bảng cập nhật đúng căn qua Zalo.</p>
       </div>`;
   }
   $$('.ptabs button').forEach(b => b.addEventListener('click', () => {
@@ -1305,7 +1310,7 @@ const API_BASE = "";
 })();
 </script>
 <!-- Khung chat trực tiếp: tự hỏi khách theo mục đang đọc (data-chat-topic) -->
-<script>window.CASAMIA_CHAT_CONFIG = {"project":{"name":"Casamia Balanca","agentName":"Hoàng Hiệp","agentTitle":"Chuyên viên tư vấn dự án","hotline":"0904 567 009","zalo":"0904567009","primaryColor":"#0b2a5b","accentColor":"#f47c20"},"welcome":"Dạ em chào {name} 👋 Em là Hiệp – chuyên viên tư vấn dự án {project}. Anh/chị đang quan tâm đến thông tin nào để em hỗ trợ mình nhanh nhất ạ?","zaloTransfer":"Dạ để em gửi {name} trọn bộ tài liệu (bảng giá, mặt bằng, chính sách, hình ảnh thực tế) cho tiện xem lại, mình kết bạn Zalo {zalo} với em nhé. Em đã chuẩn bị sẵn tài liệu, {name} bấm nút bên dưới là nhận được ngay ạ 👇","leadThanks":"Dạ em đã ghi nhận thông tin của {name} rồi ạ. Em sẽ gọi lại cho mình qua số {phone} trong ít phút để tư vấn chi tiết.","fallback":["Dạ em ghi nhận câu hỏi của {name} rồi ạ.","Nội dung này em cần tư vấn kỹ theo đúng nhu cầu của mình để không thiếu thông tin quan trọng.","{name} cho em xin tên và số điện thoại/Zalo, em gọi lại giải đáp chi tiết ngay nhé ạ."],"proactive":{"enabled":true,"dwellSeconds":8,"maxPerVisit":2,"quietSeconds":45},"intents":[{"label":"💰 Bảng giá & chính sách","keywords":["giá","gia","bao nhiêu","chính sách","chiết khấu","ưu đãi","thanh toán","tiền"],"steps":["Dạ em ghi nhận {name} đang quan tâm bảng giá và chính sách bán hàng ạ.","Chính sách mới từ 09/2026: đặt cọc 300 triệu, ngân hàng hỗ trợ vay 70% với lãi suất 0% và ân hạn gốc 24 tháng; chiết khấu tới 4 tỷ khi nhận bàn giao thô. Đặc biệt chủ đầu tư thuê lại 60 triệu/tháng (Forestside) hoặc 50 triệu/tháng (Parkhome).","Để em lọc đúng căn và tính dòng tiền phù hợp, {name} cho em hỏi ngân sách dự kiến khoảng bao nhiêu và mình mua để ở hay đầu tư ạ?"],"browse":{"keywords":["giá","bảng giá","giá bán","chính sách","thanh toán","ưu đãi","chiết khấu"],"question":"Dạ em thấy anh/chị đang xem kỹ phần chính sách ạ. Căn nào được chủ đầu tư thuê lại 60 triệu/tháng và chiết khấu bao nhiêu thì tuỳ phân khu – anh/chị quan tâm Forestside hay Parkhome để em gửi bảng tính đúng căn ạ?"}},{"label":"🏠 Mặt bằng & loại sản phẩm","keywords":["mặt bằng","diện tích","loại","căn","phòng ngủ","pn","biệt thự","shophouse","nhà phố"],"steps":["Dạ em ghi nhận {name} muốn xem mặt bằng và các loại sản phẩm ạ.","Dự án có nhiều dòng sản phẩm với diện tích và vị trí khác nhau; em có thể gợi ý 2–3 lựa chọn đúng nhu cầu kèm mặt bằng chi tiết từng căn.","{name} cho em biết mình cần khoảng mấy phòng ngủ, gia đình mấy người để em chọn mặt bằng phù hợp nhất ạ?"],"browse":{"keywords":["mặt bằng","sản phẩm","loại hình","diện tích","thiết kế","biệt thự","shophouse","nhà phố","căn hộ"],"question":"Dạ anh/chị đang xem mặt bằng và sản phẩm ạ? Em gửi mình mặt bằng chi tiết đúng nhu cầu nhé – gia đình mình cần khoảng mấy phòng ngủ ạ?"}},{"label":"📍 Vị trí & tiện ích","keywords":["vị trí","ở đâu","đường","tiện ích","gần","trường","chợ","biển","bản đồ"],"steps":["Dạ em ghi nhận {name} đang tìm hiểu vị trí và tiện ích dự án ạ.","Em có sẵn bản đồ vị trí, sơ đồ kết nối và danh sách tiện ích nội khu – ngoại khu; nếu tiện, em sắp xếp đưa mình đi xem thực tế luôn.","{name} đang ở khu vực nào ạ? Em gửi lộ trình và thời gian di chuyển cụ thể cho mình nhé."],"browse":{"keywords":["vị trí","tiện ích","kết nối","bản đồ","liên kết vùng","ngoại khu","nội khu"],"question":"Dạ anh/chị đang tìm hiểu vị trí và tiện ích ạ? Anh/chị đang ở khu vực nào để em gửi lộ trình và thời gian di chuyển cụ thể cho mình nhé."}},{"label":"📜 Pháp lý & tiến độ","keywords":["pháp lý","sổ","giấy tờ","tiến độ","bàn giao","xây","chủ đầu tư","cđt"],"steps":["Dạ em ghi nhận {name} quan tâm pháp lý và tiến độ dự án – đây là điều rất nên tìm hiểu kỹ ạ.","Em có thể gửi mình hồ sơ pháp lý, hình ảnh cập nhật tiến độ thi công mới nhất và mẫu hợp đồng để mình xem trước.","{name} cho em xin số điện thoại/Zalo để em gửi bộ hồ sơ đầy đủ cho mình ạ?"],"browse":{"keywords":["pháp lý","tiến độ","chủ đầu tư","sổ hồng","bàn giao","giấy phép"],"question":"Dạ phần pháp lý và tiến độ rất nên tìm hiểu kỹ ạ. Em gửi anh/chị bộ hồ sơ pháp lý và hình ảnh thi công mới nhất qua Zalo nhé?"}},{"label":"📅 Đặt lịch tham quan","keywords":["tham quan","xem nhà","nhà mẫu","lịch","đi xem","gặp"],"steps":["Dạ em ghi nhận {name} muốn đi tham quan dự án ạ.","Em có thể đón mình xem nhà mẫu và thực tế dự án vào ngày trong tuần hoặc cuối tuần, em sẽ chuẩn bị sẵn bảng giá các căn còn trống.","{name} cho em xin tên, số điện thoại và thời gian thuận tiện để em giữ lịch cho mình nhé ạ."],"browse":{"keywords":["tham quan","đăng ký","nhận thông tin","nhà mẫu"],"question":"Dạ anh/chị có muốn đi xem thực tế dự án không ạ? Em giữ lịch tham quan cuối tuần này cho mình nhé – anh/chị tiện ngày nào ạ?"}},{"label":"🏦 Vay ngân hàng","keywords":["vay","ngân hàng","lãi suất","trả góp","góp"],"steps":["Dạ em ghi nhận {name} cần hỗ trợ phương án vay ạ.","Ngân hàng hỗ trợ vay tới 70%, lãi suất 0% và ân hạn nợ gốc trong 24 tháng. Anh/chị chỉ tự thanh toán khoảng 30% (đặt cọc 300 triệu + ký HĐMB + 1 đợt), trong khi tiền thuê chủ đầu tư trả 50–60 triệu/tháng.","{name} dự kiến vay khoảng bao nhiêu và trả trong bao lâu ạ? Em tính sẵn dòng tiền cho mình tham khảo."],"browse":{"keywords":["vay","ngân hàng","lãi suất","trả góp","hỗ trợ tài chính"],"question":"Dạ anh/chị có cần em lập bảng tính trả góp hàng tháng không ạ? Chỉ cần cho em số tiền dự kiến vay là em tính ngay cho mình."}}]};</script>
+<script>window.CASAMIA_CHAT_CONFIG = {"project":{"name":"Casamia Balanca","agentName":"Hoàng Hiệp","agentTitle":"Chuyên viên tư vấn dự án","hotline":"0904 567 009","zalo":"0904567009","primaryColor":"#0b2a5b","accentColor":"#f47c20"},"welcome":"Dạ em chào {name} 👋 Em là Hiệp – chuyên viên tư vấn dự án {project}. Anh/chị đang quan tâm đến thông tin nào để em hỗ trợ mình nhanh nhất ạ?","zaloTransfer":"Dạ để em gửi {name} trọn bộ tài liệu (bảng giá, mặt bằng, chính sách, hình ảnh thực tế) cho tiện xem lại, mình kết bạn Zalo {zalo} với em nhé. Em đã chuẩn bị sẵn tài liệu, {name} bấm nút bên dưới là nhận được ngay ạ 👇","leadThanks":"Dạ em đã ghi nhận thông tin của {name} rồi ạ. Em sẽ gọi lại cho mình qua số {phone} trong ít phút để tư vấn chi tiết.","fallback":["Dạ em ghi nhận câu hỏi của {name} rồi ạ.","Nội dung này em cần tư vấn kỹ theo đúng nhu cầu của mình để không thiếu thông tin quan trọng.","{name} cho em xin tên và số điện thoại/Zalo, em gọi lại giải đáp chi tiết ngay nhé ạ."],"proactive":{"enabled":true,"dwellSeconds":8,"maxPerVisit":2,"quietSeconds":45},"intents":[{"label":"💰 Bảng giá & chính sách","keywords":["giá","gia","bao nhiêu","chính sách","chiết khấu","ưu đãi","thanh toán","tiền"],"steps":["Dạ em ghi nhận {name} đang quan tâm bảng giá và chính sách bán hàng ạ.","Chính sách đang áp dụng (CSBH từ 09/09/2026): đặt cọc 300 triệu, ngân hàng hỗ trợ vay 70% với lãi suất 0% và ân hạn gốc 24 tháng; chiết khấu tới 4 tỷ khi nhận bàn giao thô. Đặc biệt chủ đầu tư thuê lại 60 triệu/tháng (Forestside) hoặc 50 triệu/tháng (Parkhome).","Để em lọc đúng căn và tính dòng tiền phù hợp, {name} cho em hỏi ngân sách dự kiến khoảng bao nhiêu và mình mua để ở hay đầu tư ạ?"],"browse":{"keywords":["giá","bảng giá","giá bán","chính sách","thanh toán","ưu đãi","chiết khấu"],"question":"Dạ em thấy anh/chị đang xem kỹ phần chính sách ạ. Căn nào được chủ đầu tư thuê lại 60 triệu/tháng và chiết khấu bao nhiêu thì tuỳ phân khu – anh/chị quan tâm Forestside hay Parkhome để em gửi bảng tính đúng căn ạ?"}},{"label":"🏠 Mặt bằng & loại sản phẩm","keywords":["mặt bằng","diện tích","loại","căn","phòng ngủ","pn","biệt thự","shophouse","nhà phố"],"steps":["Dạ em ghi nhận {name} muốn xem mặt bằng và các loại sản phẩm ạ.","Dự án có nhiều dòng sản phẩm với diện tích và vị trí khác nhau; em có thể gợi ý 2–3 lựa chọn đúng nhu cầu kèm mặt bằng chi tiết từng căn.","{name} cho em biết mình cần khoảng mấy phòng ngủ, gia đình mấy người để em chọn mặt bằng phù hợp nhất ạ?"],"browse":{"keywords":["mặt bằng","sản phẩm","loại hình","diện tích","thiết kế","biệt thự","shophouse","nhà phố","căn hộ"],"question":"Dạ anh/chị đang xem mặt bằng và sản phẩm ạ? Em gửi mình mặt bằng chi tiết đúng nhu cầu nhé – gia đình mình cần khoảng mấy phòng ngủ ạ?"}},{"label":"📍 Vị trí & tiện ích","keywords":["vị trí","ở đâu","đường","tiện ích","gần","trường","chợ","biển","bản đồ"],"steps":["Dạ em ghi nhận {name} đang tìm hiểu vị trí và tiện ích dự án ạ.","Em có sẵn bản đồ vị trí, sơ đồ kết nối và danh sách tiện ích nội khu – ngoại khu; nếu tiện, em sắp xếp đưa mình đi xem thực tế luôn.","{name} đang ở khu vực nào ạ? Em gửi lộ trình và thời gian di chuyển cụ thể cho mình nhé."],"browse":{"keywords":["vị trí","tiện ích","kết nối","bản đồ","liên kết vùng","ngoại khu","nội khu"],"question":"Dạ anh/chị đang tìm hiểu vị trí và tiện ích ạ? Anh/chị đang ở khu vực nào để em gửi lộ trình và thời gian di chuyển cụ thể cho mình nhé."}},{"label":"📜 Pháp lý & tiến độ","keywords":["pháp lý","sổ","giấy tờ","tiến độ","bàn giao","xây","chủ đầu tư","cđt"],"steps":["Dạ em ghi nhận {name} quan tâm pháp lý và tiến độ dự án – đây là điều rất nên tìm hiểu kỹ ạ.","Em có thể gửi mình hồ sơ pháp lý, hình ảnh cập nhật tiến độ thi công mới nhất và mẫu hợp đồng để mình xem trước.","{name} cho em xin số điện thoại/Zalo để em gửi bộ hồ sơ đầy đủ cho mình ạ?"],"browse":{"keywords":["pháp lý","tiến độ","chủ đầu tư","sổ hồng","bàn giao","giấy phép"],"question":"Dạ phần pháp lý và tiến độ rất nên tìm hiểu kỹ ạ. Em gửi anh/chị bộ hồ sơ pháp lý và hình ảnh thi công mới nhất qua Zalo nhé?"}},{"label":"📅 Đặt lịch tham quan","keywords":["tham quan","xem nhà","nhà mẫu","lịch","đi xem","gặp"],"steps":["Dạ em ghi nhận {name} muốn đi tham quan dự án ạ.","Em có thể đón mình xem nhà mẫu và thực tế dự án vào ngày trong tuần hoặc cuối tuần, em sẽ chuẩn bị sẵn bảng giá các căn còn trống.","{name} cho em xin tên, số điện thoại và thời gian thuận tiện để em giữ lịch cho mình nhé ạ."],"browse":{"keywords":["tham quan","đăng ký","nhận thông tin","nhà mẫu"],"question":"Dạ anh/chị có muốn đi xem thực tế dự án không ạ? Em giữ lịch tham quan cuối tuần này cho mình nhé – anh/chị tiện ngày nào ạ?"}},{"label":"🏦 Vay ngân hàng","keywords":["vay","ngân hàng","lãi suất","trả góp","góp"],"steps":["Dạ em ghi nhận {name} cần hỗ trợ phương án vay ạ.","Ngân hàng hỗ trợ vay tới 70%, lãi suất 0% và ân hạn nợ gốc trong 24 tháng. Anh/chị chỉ tự thanh toán khoảng 30% (đặt cọc 300 triệu + ký HĐMB + 1 đợt), trong khi tiền thuê chủ đầu tư trả 50–60 triệu/tháng.","{name} dự kiến vay khoảng bao nhiêu và trả trong bao lâu ạ? Em tính sẵn dòng tiền cho mình tham khảo."],"browse":{"keywords":["vay","ngân hàng","lãi suất","trả góp","hỗ trợ tài chính"],"question":"Dạ anh/chị có cần em lập bảng tính trả góp hàng tháng không ạ? Chỉ cần cho em số tiền dự kiến vay là em tính ngay cho mình."}}]};</script>
 <script data-contacts="desktop" data-mobile-bottom="76" data-desktop-bottom="88" data-mode="local">
 /*
  * Widget live chat Casamia Balanca.
@@ -1399,7 +1404,7 @@ const API_BASE = "";
       var body = {
         type: type, v: visitorId, page: location.href, utm: storage('casamia_utm') || '',
         name: state.lead.name, phone: state.lead.phone,
-        transcript: state.messages.slice(-8).map(function (m) { return { from: m.from, text: m.text, auto: !!m.auto }; }),
+        transcript: state.messages.slice(-8).map(function (m) { return { from: m.from, text: m.text, auto: !!m.auto, ai: !!m.ai }; }),
       };
       for (var k in extra) body[k] = extra[k];
       fetch(GAS, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) }).catch(function () {});
@@ -1423,6 +1428,7 @@ const API_BASE = "";
             if (r.at <= (state.lastReplyAt || 0)) return;
             state.lastReplyAt = r.at; save();
             cancel(); // tư vấn viên trả lời thì bot dừng các tin tự động đang chờ
+            state.lastHumanAt = Date.now();
             var m = { from: 'agent', text: r.text };
             if (r.action === 'zalo') m.action = 'zalo';
             push(m);
@@ -1461,6 +1467,32 @@ const API_BASE = "";
         }, i * 1600 + 300));
       });
     }
+    // ----- Chat AI: Google Apps Script gọi Claude (AI.gs). Lỗi/quá lâu/chưa cài khoá → trả về false để dùng kịch bản -----
+    var aiBusy = false;
+    function aiAsk(text, first, fallback) {
+      var done = false, typingTick;
+      var finish = function (d) {
+        if (done) return; done = true; aiBusy = false; clearInterval(typingTick);
+        if (!d || !d.reply) return fallback();
+        var m = { from: 'agent', text: String(d.reply), auto: true, ai: true };
+        if (d.action === 'zalo') m.action = 'zalo';
+        push(m);
+        if (d.action === 'form' && !state.lead.phone) setTimeout(function () { if (!state.lead.phone) fire('lead:request'); }, 1200);
+      };
+      aiBusy = true;
+      fire('typing'); typingTick = setInterval(function () { fire('typing'); }, 2500);
+      setTimeout(function () { finish(null); }, 30000);
+      var body = {
+        type: 'message', ai: true, text: text, first: first, v: visitorId, page: location.href, utm: storage('casamia_utm') || '',
+        name: state.lead.name, phone: state.lead.phone,
+        transcript: state.messages.slice(-8).map(function (m) { return { from: m.from, text: m.text, auto: !!m.auto, ai: !!m.ai }; }),
+        history: state.messages.slice(-14).map(function (m) { return { from: m.from, text: m.text }; }),
+      };
+      fetch(GAS, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) })
+        .then(function (r) { return r.json(); }).then(finish, function () { finish(null); });
+      startPolling();
+    }
+
     function zaloReply(first) { reply(first.concat([L.zaloTransfer]), { action: 'zalo' }); }
     function findIntent(text) {
       for (var i = 0; i < L.intents.length; i++) if (L.intents[i].label === text) return L.intents[i];
@@ -1481,6 +1513,22 @@ const API_BASE = "";
       if (typeof window.CasamiaOnLead === 'function') try { window.CasamiaOnLead({ name: state.lead.name, phone: phone, source: 'chat' }); } catch (e) {}
     }
 
+    // Kịch bản soạn sẵn 4 bước (câu hỏi nhanh, hoặc khi chat AI không trả lời được)
+    function scripted(text, pm) {
+      if (pm && !state.lead.phone) {
+        setLead('', pm[0].replace(/[\s.-]/g, ''));
+        gasPost('lead', { form: 'Khung chat (gõ số)' });
+        return zaloReply([L.leadThanks]);
+      }
+      var it = findIntent(text);
+      if (it) {
+        var st = it.steps;
+        if (state.lead.phone) zaloReply([st[0], st[1]]); else { reply([st[0], st[1], st[2]]); askLead(); }
+        return;
+      }
+      if (!state.lead.phone && !state.offlineNotified) { state.offlineNotified = true; save(); reply(L.fallback); askLead(); }
+    }
+
     var api = {
       on: function (ev, h) { (handlers[ev] = handlers[ev] || []).push(h); return api; },
       emit: function (ev, data) {
@@ -1489,20 +1537,15 @@ const API_BASE = "";
           var text = String(data.text || '').trim().slice(0, 2000);
           if (!text) return;
           push({ from: 'visitor', text: text });
-          gasPost('message', { text: text, first: state.messages.filter(function (m) { return m.from === 'visitor'; }).length === 1 });
+          var first = state.messages.filter(function (m) { return m.from === 'visitor'; }).length === 1;
           var pm = text.match(PHONE_RE);
-          if (pm && !state.lead.phone) {
-            setLead('', pm[0].replace(/[\s.-]/g, ''));
-            gasPost('lead', { form: 'Khung chat (gõ số)' });
-            return zaloReply([L.leadThanks]);
-          }
-          var it = findIntent(text);
-          if (it) {
-            var st = it.steps;
-            if (state.lead.phone) zaloReply([st[0], st[1]]); else { reply([st[0], st[1], st[2]]); askLead(); }
-            return;
-          }
-          if (!state.lead.phone && !state.offlineNotified) { state.offlineNotified = true; save(); reply(L.fallback); askLead(); }
+          var isQuick = L.intents.some(function (q) { return q.label === text; });
+          // Câu tự gõ → chat AI (nếu bật), trừ khi tư vấn viên vừa trả lời qua Telegram trong 10 phút
+          if (aiBusy && !isQuick) return gasPost('message', { text: text }); // AI đang soạn câu trả lời, chỉ ghi lại tin
+          var useAi = GAS && L.ai && !isQuick && !(pm && !state.lead.phone) && !(Date.now() - (state.lastHumanAt || 0) < 10 * 60 * 1000);
+          if (useAi) { cancel(); return aiAsk(text, first, function () { scripted(text, null); }); }
+          gasPost('message', { text: text, first: first });
+          scripted(text, pm);
         } else if (ev === 'lead') {
           var ph = String(data.phone || '').match(PHONE_RE);
           if (!ph) return fire('lead:error', 'Số điện thoại chưa đúng, anh/chị kiểm tra lại giúp em ạ.');
