@@ -349,13 +349,13 @@ ROLE = {
 'nhan-vien': dict(
   illu=('nv-hanh-trinh.png', 'Hành trình 90 ngày đầu của Nhân viên kinh doanh: đào tạo, có người kèm, giao dịch đầu, xét lương sau 03 tháng'),
   love_eyebrow='Vì sao người mới thích vị trí này', love_h2='Không ai bắt bạn <em>tự bơi.</em>',
-  love=[('🎓', 'Học từ con số 0', 'Sản phẩm, pháp lý, tìm khách, chốt giao dịch: học bài bản, có giáo trình.'),
+  love=[('🎓', 'Học từ con số 0', 'Sản phẩm, pháp lý, tìm khách, chốt giao dịch: được đào tạo bài bản.'),
         ('🧑‍🏫', 'Có người kèm thật', 'Quản lý và đồng đội đi cùng bạn trong những cuộc gọi, những lần dẫn khách đầu tiên.'),
         ('📲', 'Có khách để tư vấn ngay', 'Lead được phân bổ cho cả đội, người mới không phải tự bỏ tiền chạy quảng cáo.'),
         ('🚀', 'Lên cấp nhanh', '03 tháng xét lương và cấp bậc. Làm tốt là lên Chuyên viên, không chờ thâm niên.')],
   day_h2='Một ngày của <em>Nhân viên kinh doanh</em>',
   day=[('08:30', 'Họp đầu ngày', 'Nghe cập nhật giỏ hàng, nhận mục tiêu trong ngày.'), ('09:00', 'Học & luyện kịch bản', 'Ôn sản phẩm, luyện tư vấn cùng quản lý.'), ('10:00', 'Gọi lead được phân bổ', 'Chăm khách, có người kèm khi cần.'), ('13:30', 'Đi dự án', 'Cùng đồng đội đi nhà mẫu, nắm sản phẩm tận nơi.'), ('15:30', 'Dẫn khách cùng đội', 'Quan sát, hỗ trợ, học cách chốt.'), ('17:00', 'Tổng kết', 'Cập nhật CRM, rút kinh nghiệm với quản lý.')],
-  truth=('Tháng đầu sẽ có lúc bỡ ngỡ.', 'Đó là bình thường. Bạn có giáo trình, có người kèm và có khách thật để luyện tập. Việc của bạn là học nhanh và không bỏ cuộc.'),
+  truth=('Tháng đầu sẽ có lúc bỡ ngỡ.', 'Đó là bình thường. Bạn được đào tạo, có người kèm và có khách thật để luyện tập. Việc của bạn là học nhanh và không bỏ cuộc.'),
   phone=True),
 'chuyen-vien': dict(
   illu=('cv-do-nghe.png', 'Chuyên viên kinh doanh ở trung tâm, xung quanh là lead đều mỗi ngày, ngân sách marketing hỗ trợ đến 100%, giỏ hàng lớn và thưởng marketing đến 10 triệu mỗi giao dịch'),
