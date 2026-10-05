@@ -46,8 +46,8 @@ module.exports = {
 
   // Mời Zalo (chỉ dùng 1 lần, khi khách đã hỏi tới câu thứ 2 hoặc vừa để lại số). Hiện kèm nút "Nhắn Zalo cho em".
   zaloTransfer:
-    'Bảng giá từng căn, mặt bằng và file chính sách gốc xem trên Zalo sẽ rõ hơn nhiều. ' +
-    'Khi nào thuận tiện, {name} nhắn em qua Zalo {zalo}, em gửi riêng cho mình ạ.',
+    'Mấy tài liệu như bảng giá từng căn hay mặt bằng chi tiết, anh/chị xem qua Zalo sẽ rõ hơn. ' +
+    'Lúc nào tiện, mình nhắn em ở Zalo {zalo} nhé.',
 
   // Khách vừa để lại số.
   leadThanks:
@@ -56,8 +56,8 @@ module.exports = {
 
   // Câu hỏi ngoài các chủ đề có sẵn, khi chưa có tư vấn viên trực tuyến.
   fallback: [
-    'Dạ câu này em muốn trả lời thật chính xác cho {name}, em kiểm tra lại và phản hồi ngay tại đây ạ.',
-    'Nếu tiện, mình để lại số hoặc Zalo, em gửi kèm tài liệu để anh/chị đối chiếu cho dễ.',
+    'Dạ câu này em xin phép kiểm tra lại cho thật chính xác rồi trả lời anh/chị ngay ạ.',
+    'Nếu tiện, anh/chị để lại số, em gọi lại nói kỹ hơn vài phút.',
   ],
 
   // Chủ đề tư vấn. "label" = nút hỏi nhanh; "keywords" = tự nhận diện khi khách tự gõ.
@@ -69,8 +69,8 @@ module.exports = {
       label: 'Chính sách & giá',
       keywords: ['giá', 'gia', 'bao nhiêu', 'chính sách', 'chiết khấu', 'ưu đãi', 'thanh toán', 'tiền', 'thuê lại', 'cam kết thuê'],
       steps: [
-        'Dạ, chính sách đang áp dụng (ban hành 09/09/2026): đặt cọc 300 triệu, ngân hàng hỗ trợ 70% với lãi suất 0% và ân hạn gốc 24 tháng. Chọn bàn giao thô được chiết khấu tới 4 tỷ (Forestside) hoặc 3,5 tỷ (Parkhome); chủ đầu tư thuê lại 60 triệu/tháng (Forestside) hoặc 50 triệu/tháng (Parkhome) trong 3 năm.',
-        'Giá từng căn chênh nhau khá nhiều theo vị trí và phương án bàn giao. {name} đang nghiêng về biệt thự ven rừng dừa hay biệt thự sân vườn ạ?',
+        'Dạ, giá mỗi căn chênh nhau khá nhiều theo vị trí và cách nhận nhà, nên em xin phép không báo một con số chung chung kẻo anh/chị hiểu chưa đúng ạ. Chính sách hiện tại khá tốt: cọc 300 triệu, ngân hàng hỗ trợ 70% với 0% lãi trong 24 tháng, chọn nhận nhà thô còn được chiết khấu tới 4 tỷ.',
+        'Anh/chị đang để ý biệt thự ven rừng dừa hay biệt thự sân vườn ạ? Em lọc vài căn hợp ý gửi mình xem.',
       ],
       browse: {
         keywords: ['giá', 'bảng giá', 'giá bán', 'chính sách', 'thanh toán', 'ưu đãi', 'chiết khấu'],
@@ -82,8 +82,8 @@ module.exports = {
       label: 'Mặt bằng các căn',
       keywords: ['mặt bằng', 'diện tích', 'loại', 'căn', 'phòng ngủ', 'pn', 'biệt thự', 'shophouse', 'nhà phố', 'layout'],
       steps: [
-        'Dạ, dự án có 2 dòng chính: Forestside Villa ven sông, giữa rừng dừa, riêng tư và yên tĩnh; Parkhome là biệt thự sân vườn gần công viên, hợp gia đình có trẻ nhỏ và ông bà. Mỗi căn có vị trí, hướng nhìn và diện tích khác nhau.',
-        'Gia đình mình thường về mấy người, để em chọn vài căn có layout vừa vặn nhất ạ?',
+        'Dạ, bên em có hai dòng chính: Forestside ven sông, giữa rừng dừa, rất riêng tư; và Parkhome có sân vườn, gần công viên, hợp nhà có trẻ nhỏ và ông bà.',
+        'Gia đình mình thường về mấy người ạ? Em chọn căn có số phòng vừa vặn để anh/chị xem layout.',
       ],
       browse: {
         keywords: ['mặt bằng', 'sản phẩm', 'loại hình', 'diện tích', 'thiết kế', 'biệt thự', 'layout', 'căn hộ'],
@@ -95,8 +95,8 @@ module.exports = {
       label: 'Vị trí & tiện ích',
       keywords: ['vị trí', 'ở đâu', 'đường', 'tiện ích', 'gần', 'trường', 'chợ', 'biển', 'bản đồ', 'clubhouse', 'hồ bơi'],
       steps: [
-        'Dạ, dự án nằm giữa rừng dừa Bảy Mẫu (Cẩm Thanh), cách phố cổ khoảng 10 phút, biển An Bàng – Cửa Đại khoảng 5 km, sân bay Đà Nẵng khoảng 30 km. Trong khu có Clubhouse với hồ bơi và gym (đang hoàn thiện nội thất), có ban quản lý vận hành.',
-        '{name} đang ở Đà Nẵng hay ở xa ạ? Em gửi lộ trình và thời gian di chuyển cụ thể cho mình.',
+        'Dạ, dự án nằm ngay rừng dừa Bảy Mẫu, ra phố cổ khoảng 10 phút, ra biển An Bàng khoảng 5 km. Ở trong yên như khu nghỉ dưỡng, cần đi đâu cũng gần.',
+        'Anh/chị đang ở Đà Nẵng hay ở xa ạ? Em gửi thời gian di chuyển cụ thể cho mình.',
       ],
       browse: {
         keywords: ['vị trí', 'tiện ích', 'kết nối', 'bản đồ', 'liên kết vùng', 'ngoại khu', 'nội khu'],
@@ -108,8 +108,8 @@ module.exports = {
       label: 'Pháp lý & bàn giao',
       keywords: ['pháp lý', 'sổ', 'giấy tờ', 'tiến độ', 'bàn giao', 'xây', 'chủ đầu tư', 'cđt', 'đạt phương'],
       steps: [
-        'Dạ, đây là phần rất nên tìm hiểu kỹ. Chủ đầu tư là Đạt Phương; em có thể gửi hồ sơ pháp lý, ảnh và video tiến độ thi công mới nhất cùng mẫu hợp đồng để anh/chị tự đối chiếu.',
-        '{name} quan tâm nhất phần sở hữu lâu dài hay thời điểm nhận nhà ạ?',
+        'Dạ, phần này anh/chị hỏi rất đúng. Chủ đầu tư là Đạt Phương; em có đủ hồ sơ pháp lý, ảnh tiến độ mới nhất và mẫu hợp đồng để mình tự xem.',
+        'Anh/chị muốn xem trước phần sổ hay tiến độ bàn giao ạ?',
       ],
       browse: {
         keywords: ['pháp lý', 'tiến độ', 'chủ đầu tư', 'sổ hồng', 'bàn giao', 'giấy phép', 'minh bạch'],
@@ -121,8 +121,8 @@ module.exports = {
       label: 'Hẹn xem nhà mẫu',
       keywords: ['tham quan', 'xem nhà', 'nhà mẫu', 'lịch', 'đi xem', 'gặp', 'đón'],
       steps: [
-        'Dạ, em đón anh/chị tại Đà Nẵng hoặc Hội An, xem nhà mẫu, Clubhouse và từng phân khu, hoàn toàn không ràng buộc. Em chuẩn bị sẵn những căn đang còn để mình xem tận nơi.',
-        '{name} thuận tiện ngày trong tuần hay cuối tuần ạ?',
+        'Dạ được ạ. Em đón anh/chị ở Đà Nẵng hoặc Hội An, đi xem nhà mẫu và từng phân khu, không ràng buộc gì.',
+        'Mình tiện ngày thường hay cuối tuần ạ?',
       ],
       browse: {
         keywords: ['tham quan', 'đăng ký', 'nhận thông tin', 'nhà mẫu', 'tận nơi'],
@@ -134,8 +134,8 @@ module.exports = {
       label: 'Phương án vay',
       keywords: ['vay', 'ngân hàng', 'lãi suất', 'trả góp', 'góp'],
       steps: [
-        'Dạ, ngân hàng hỗ trợ tới 70%, lãi suất 0% và ân hạn gốc trong 24 tháng; anh/chị chủ động khoảng 30% (cọc, ký hợp đồng và 1 đợt). Không vay thì thanh toán sớm được chiết khấu thêm.',
-        'Em tính sẵn dòng tiền từng tháng theo căn cụ thể được, {name} dự kiến vay khoảng bao nhiêu ạ?',
+        'Dạ, ngân hàng hỗ trợ tới 70%, 24 tháng đầu lãi 0% và chưa phải trả gốc. Anh/chị chủ động khoảng 30% theo tiến độ là được.',
+        'Em lập thử dòng tiền theo một căn cụ thể cho mình xem nhé, anh/chị dự kiến vay khoảng bao nhiêu ạ?',
       ],
       browse: {
         keywords: ['vay', 'ngân hàng', 'lãi suất', 'trả góp', 'hỗ trợ tài chính'],

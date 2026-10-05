@@ -568,6 +568,8 @@
 </style>
 <script>
   // Có JavaScript: bật hiệu ứng hiện dần. Chốt an toàn: sau 2,5 giây mọi khối tự hiện dù mã phía sau có lỗi.
+  // Ghi lỗi để kiểm tra trên điện thoại (mở trang với ?debug=1)
+  window.__errs = []; window.addEventListener('error', function (e) { window.__errs.push((e.message || 'lỗi tải ' + ((e.target && (e.target.src || e.target.href)) || '')) + (e.lineno ? ' (dòng ' + e.lineno + ')' : '')); }, true);
   document.documentElement.classList.add('js');
   setTimeout(function () { var r = document.querySelectorAll('.reveal'); for (var i = 0; i < r.length; i++) r[i].classList.add('in'); }, 2500);
 </script>
@@ -1330,5 +1332,21 @@ const API_BASE = '';
 </script>
 <!-- Khung chat trực tiếp: tự hỏi khách theo mục đang đọc (data-chat-topic) -->
 <script src="/widget.js" data-contacts="desktop" data-mobile-bottom="76" data-desktop-bottom="88" async></script>
+<script>
+// ?debug=1 → hiện tình trạng khung chat ngay trên trang (để kiểm tra trên điện thoại)
+if (/[?&]debug=1/.test(location.search)) setTimeout(function () {
+  var h = document.getElementById('casamia-chat'), r = h && h.shadowRoot && h.shadowRoot.querySelector('.fab');
+  var box = r ? r.getBoundingClientRect() : null, d = document.createElement('div');
+  d.style.cssText = 'position:fixed;left:8px;right:8px;top:8px;z-index:2147483647;background:#fff8e6;border:2px solid #f47c20;border-radius:10px;padding:10px;font:12px/1.4 monospace;color:#111;white-space:pre-wrap;word-break:break-all';
+  d.textContent = 'KIỂM TRA CHAT\n' +
+    'Khung chat: ' + (h ? 'CÓ' : 'KHÔNG') + ' | nút: ' + (box ? Math.round(box.left) + ',' + Math.round(box.top) + ' ' + Math.round(box.width) + 'px' : '-') + '\n' +
+    'Cấu hình: ' + (window.CASAMIA_CHAT_CONFIG ? 'có' : 'không') + ' | API: ' + (window.CasamiaChat ? 'có' : 'không') + '\n' +
+    'Màn hình: ' + innerWidth + '×' + innerHeight + (window.top !== window ? ' (trong khung)' : '') + '\n' +
+    'Trình duyệt: ' + navigator.userAgent + '\n' +
+    'Lỗi: ' + ((window.__errs || []).slice(0, 5).join(' | ') || 'không có');
+  d.onclick = function () { d.remove(); };
+  document.body.appendChild(d);
+}, 3500);
+</script>
 </body>
 </html>
