@@ -10,7 +10,7 @@ for c,i,q,a,k in KB:
     items.append({'c':c,'id':i,'q':q,'a':a,'k':[fold(x) for x in k]})
 js = ('// Bộ hỏi đáp dùng chung với trang /hoi-dap (sinh tự động từ kb.py)\n'
  'const QA_URL = \'https://www.sun-fours-tower.com/hoi-dap\';\n'
- 'const QA_LIVE = false;   // đổi thành true khi trang /hoi-dap đã xuất bản\n'
+ 'const QA_LIVE = true;    // đổi thành true khi trang /hoi-dap đã xuất bản\n'
  'const KB = ' + json.dumps(items, ensure_ascii=False, separators=(',',':')) + ';\n'
  "const fold = s => ' ' + String(s).toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').replace(/đ/g, 'd')\n"
  "  .replace(/gia dinh/g, 'giadinh').replace(/cong ty/g, 'congty').replace(/[^a-z0-9%]+/g, ' ').trim() + ' ';\n"
