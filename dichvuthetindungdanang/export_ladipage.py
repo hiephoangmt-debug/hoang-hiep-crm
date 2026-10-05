@@ -34,6 +34,10 @@ s = s.replace('<link rel="stylesheet" href="assets/site.css">',
               '<meta name="ladipage-rules" content="v2">\n<style>\n' + css + "\n.calc .tbl{background:#fff;color:#0f1b33}\n</style>")
 s = s.replace('<script src="assets/site.js"></script>', "")
 
+# Logo: bỏ dòng phụ (LadiPage phóng to chữ nhỏ -> tràn dòng trên mobile)
+s = s.replace("<span>Thẻ Tín Dụng Đà Nẵng<small>ĐÁO HẠN · RÚT TIỀN · MỞ THẺ</small></span>",
+              '<span style="white-space:nowrap">Thẻ Tín Dụng Đà Nẵng</span>')
+
 # Menu cho bản 1 trang
 s = re.sub(r'<nav class="menu".*?</nav>', '''<nav class="menu" aria-label="Menu chính">
       <a href="#dich-vu">Dịch vụ</a>
