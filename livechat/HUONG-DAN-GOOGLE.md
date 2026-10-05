@@ -130,7 +130,7 @@ Cách khác, không qua Telegram: ⚙️ **Cài đặt dự án → Thuộc tín
 
 **5. Xuất lại landing**
 
-Chạy lại lệnh ở Bước 4. Bản xuất kèm `--gas` tự bật AI; thêm `--no-ai` nếu muốn tắt.
+Chạy lại lệnh ở Bước 4 và **thêm `--ai`** vào cuối lệnh. Không có `--ai` thì khung chat dùng kiểu cũ (kịch bản soạn sẵn), không gọi AI.
 
 **Chi phí và an toàn**
 - Mỗi câu trả lời tốn một khoản nhỏ theo bảng giá của Anthropic. Lời dặn được lưu đệm (prompt caching) nên các câu sau rẻ hơn.

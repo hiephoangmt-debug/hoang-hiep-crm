@@ -3,7 +3,7 @@
 //   node tools/export-landing.js https://chat.x  → bản thật, form và khung chat gửi về server chat đó
 //   node tools/export-landing.js --gas https://script.google.com/macros/s/…/exec
 //                                                → bản thật miễn phí qua Google: lead vào Google Sheet, báo Telegram,
-//                                                  chat AI trả lời câu tự gõ (thêm --no-ai để tắt)
+//                                                  thêm --ai để chat AI trả lời câu tự gõ (mặc định: chat kịch bản)
 const fs = require('fs');
 const path = require('path');
 const config = require('../config');
@@ -44,7 +44,7 @@ const chatCfg = {
   fallback: config.fallback,
   proactive: config.proactive,
   gas: gas || undefined,
-  ai: gas && !argv.includes('--no-ai') ? true : undefined, // chat AI qua Google (AI.gs), tắt bằng --no-ai
+  ai: gas && argv.includes('--ai') ? true : undefined, // chat AI qua Google (AI.gs): thêm --ai để bật; mặc định chat kịch bản
   intents: config.intents.map(({ label, keywords, steps, browse }) => ({ label, keywords, steps, browse })),
 };
 const cfgTag = `<script>window.CASAMIA_CHAT_CONFIG = ${JSON.stringify(chatCfg).replace(/</g, '\\u003c')};</script>`;
