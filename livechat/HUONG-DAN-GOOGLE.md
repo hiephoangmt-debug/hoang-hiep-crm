@@ -95,10 +95,12 @@ AI được dặn:
 - không dùng chữ "cam kết lợi nhuận";
 - nếu khách hỏi "em là người hay máy", AI nói thật mình là trợ lý tự động của anh Hiệp.
 
-**1. Lấy khoá API**
-1. Vào **console.anthropic.com**, đăng ký và nạp tiền (Billing).
-2. Vào **API Keys → Create Key**, copy khoá (dạng `sk-ant-...`).
-3. Nên đặt **giới hạn chi tiêu hằng tháng** trong mục **Limits** của Console.
+**1. Lấy khoá API** (trên **platform.claude.com**)
+1. Đăng nhập **https://platform.claude.com/dashboard**.
+2. **Nạp tiền:** menu trái **Settings → Billing** (platform.claude.com/settings/billing) → **Buy credits**.
+3. **Tạo khoá:** **Settings → API keys** (platform.claude.com/settings/keys) → **Create key**, đặt tên `casamia-chat` → copy khoá (dạng `sk-ant-...`). Khoá chỉ hiện **một lần**, copy ngay.
+4. **Giới hạn chi tiêu:** **Settings → Limits** → đặt mức chi tối đa mỗi tháng (ví dụ 20–50 USD) để yên tâm.
+5. Theo dõi số câu và chi phí ở **Usage / Cost** trên dashboard.
 
 **2. Dán mã AI vào Apps Script**
 1. Trong Apps Script, bấm **＋ → Tập lệnh**, tạo 2 file `AI` và `KienThuc`.
@@ -113,7 +115,7 @@ Bấm ⚙️ **Cài đặt dự án** → kéo xuống **Thuộc tính tập l�
 
 Sau đó bấm **Lưu**.
 
-⚠️ **Không dán khoá vào code, không gửi khoá qua chat hay GitHub.** Lộ khoá thì vào Console bấm **Delete** khoá đó và tạo khoá mới.
+⚠️ **Không dán khoá vào code, không gửi khoá qua chat hay GitHub.** Lộ khoá thì vào platform.claude.com → **Settings → API keys** xoá khoá đó và tạo khoá mới.
 
 **4. Triển khai lại**
 

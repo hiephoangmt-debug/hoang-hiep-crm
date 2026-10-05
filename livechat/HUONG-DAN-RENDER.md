@@ -59,7 +59,7 @@ Muốn cả nhóm sale cùng nhận: xem hướng dẫn nhóm trong `README.md`,
 
 ### Bật chat AI thông minh (tuỳ chọn)
 
-Render → **Environment** → thêm `ANTHROPIC_API_KEY` = khoá `sk-ant-...` (lấy ở console.anthropic.com) → **Save Changes**.
+Render → **Environment** → thêm `ANTHROPIC_API_KEY` = khoá `sk-ant-...` (lấy ở platform.claude.com → Settings → API keys) → **Save Changes**.
 
 Khi chưa có tư vấn viên trực tuyến, câu khách tự gõ sẽ được AI trả lời. Có tư vấn viên đăng nhập thì để người trả lời. Log khởi động hiện *"Chat AI: BẬT"*.
 
