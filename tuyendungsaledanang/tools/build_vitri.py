@@ -38,9 +38,11 @@ def chips(cur):
 
 def ul(items): return '<ul>' + ''.join(f'<li>{i}</li>' for i in items) + '</ul>'
 
-TEAM = sections['team']
-TEAM_IMG = re.search(r'<img class="teamhero"[^>]*>', TEAM).group(0)
-PICS = re.findall(r'<img src="https://lh3[^>]*>', TEAM)[:3]
+TEAM = sections['doi-ngu']
+GAL = re.search(r'<div class="gal">.*?</div>', TEAM, re.S).group(0)
+FIGS = re.findall(r'<figure.*?</figure>', GAL, re.S)
+TEAM_IMG = FIGS[0].replace('<figure class="big">', '<figure class="big" style="grid-column:1/-1">')
+PICS = [f.replace(' class="big"', '') for f in FIGS[1:]]
 ENV = f"""<section class="sec navy" id="moi-truong">
   <div class="wrap">
     <div class="center">
@@ -48,7 +50,7 @@ ENV = f"""<section class="sec navy" id="moi-truong">
       <h2 class="h2">Một nơi để bạn <em>lớn lên mỗi ngày</em></h2>
       <p class="lead">Không ai phải đi một mình. Mỗi giao dịch là công sức của cả đội.</p>
     </div>
-    {TEAM_IMG}
+    <div class="gal">{TEAM_IMG}{''.join(PICS[:4])}</div>
     <p class="slogan">Con người là nền tảng · Gắn kết tạo giá trị</p>
     <div class="envgrid">
       <div><i>🏢</i><b>Văn phòng trung tâm</b><span>23–25 Nguyễn Phước Lan, Đà Nẵng, gần các dự án trọng điểm.</span></div>
@@ -58,7 +60,7 @@ ENV = f"""<section class="sec navy" id="moi-truong">
       <div><i>🧭</i><b>Quản lý đi cùng bạn</b><span>Quản lý trực tiếp đi thị trường, kèm từng giao dịch.</span></div>
       <div><i>📈</i><b>Đánh giá minh bạch</b><span>Xét lương và cấp bậc mỗi 03 tháng, dựa trên kết quả.</span></div>
     </div>
-    <div class="pics">{''.join(PICS)}</div>
+    <div class="gal">{''.join(PICS[4:])}</div>
   </div>
 </section>
 """
