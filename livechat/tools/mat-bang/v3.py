@@ -47,17 +47,18 @@ vm=np.zeros((H,W),np.uint8); cv2.fillPoly(vm,[np.vstack([vp,[[0,H],[0,0],[vp[0][
 cv2.polylines(vm,[vp],False,255,roads3.R['vcc'][1]+6)
 site[vm>0]=0; site[(yy>1130)&(xx<600)]=0
 n,lab,st,_=cv2.connectedComponentsWithStats(site); big=1+np.argmax(st[1:,4]); site=((lab==big)*255).astype(np.uint8)
-site=cv2.GaussianBlur(site,(0,0),4); site=(site>128).astype(np.uint8)*255
-out.append(f'<path d="{spath(site,6,7,5000,False)}" fill="#c6e3ba" stroke="#a9cf9c" stroke-width="1.2"/>')
+from sitepoly import SITE
+site=np.zeros((H,W),np.uint8); cv2.fillPoly(site,[np.array(SITE,np.int32)],255)
+out.append(f'<path d="{spath(site,3,3,5000,False)}" fill="#c6e3ba" stroke="#a9cf9c" stroke-width="1.2"/>')
 x0,y0,w0,h0=cv2.boundingRect(site); json.dump([x0*S,y0*S,w0*S,h0*S],open('bbox.json','w'))
 # ---- rừng dừa ----
 forest=near((70,141,75),36)&site; forest[xx<1500]=0
-forest=cv2.morphologyEx(forest,cv2.MORPH_CLOSE,np.ones((61,61),np.uint8)); forest=cv2.morphologyEx(forest,cv2.MORPH_OPEN,np.ones((21,21),np.uint8))
+forest=cv2.morphologyEx(forest,cv2.MORPH_CLOSE,cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(121,121))); forest&=site; forest=cv2.morphologyEx(forest,cv2.MORPH_OPEN,np.ones((21,21),np.uint8))
 out.append(f'<path d="{spath(forest,7,7,15000,False)}" fill="#7fb47a"/>')
 # ---- nước ----
 w=(water|lake)&site; w[legend]=0
 w=cv2.morphologyEx(w,cv2.MORPH_CLOSE,np.ones((13,13),np.uint8)); w=cv2.morphologyEx(w,cv2.MORPH_OPEN,np.ones((7,7),np.uint8))
-cv2.circle(w,(1172,722),88,0,-1); w=cv2.GaussianBlur(w,(0,0),2.5); w=(w>128).astype(np.uint8)*255
+cv2.circle(w,(1172,722),125,0,-1); w=cv2.GaussianBlur(w,(0,0),2.5); w=(w>128).astype(np.uint8)*255
 WATER_IDX=len(out); out.append(None)
 lk=lake&site; lk=cv2.morphologyEx(lk,cv2.MORPH_CLOSE,np.ones((15,15),np.uint8)); lk=cv2.morphologyEx(lk,cv2.MORPH_OPEN,np.ones((7,7),np.uint8))
 cs,_=cv2.findContours(lk,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE); c=max(cs,key=cv2.contourArea); (lx,ly),lr=cv2.minEnclosingCircle(c); lx,ly,lr=1172,722,74
@@ -143,8 +144,8 @@ for j in range(1,nU):
     p,nrm=at(cum[-1]*j/nU); a1=p+nrm*(BW/2-1); a2=p-nrm*(BW/2-1)
     dividers.append(f'M{a1[0]*S:.1f} {a1[1]*S:.1f} L{a2[0]*S:.1f} {a2[1]*S:.1f}')
 cents['pv'].append((1050*S,1000*S,BW*cum[-1]))
-w2=w.copy(); w2[cv2.dilate(LOTS,cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(19,19)))>0]=0
-out[WATER_IDX]=f'<path d="{spath(w2,4,4,1500)}" fill="#9fd6ec" fill-rule="evenodd"/>'
+WM=w.copy(); WM[cv2.dilate(LOTS,cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(19,19)))>0]=0
+out[WATER_IDX]=f'<path d="{spath(WM,4,4,1500)}" fill="#9fd6ec" fill-rule="evenodd"/>'
 # ---- đường (vẽ tay theo tim đường, bề rộng đều) ----
 import roads3
 rm=np.zeros((H,W),np.uint8)
@@ -183,6 +184,29 @@ for k,(P,w) in RD.items():
 for k,(P,w) in RD.items():
     d=smooth_d(P)
     curb.append(f'<path d="{d}" stroke-width="{w*S+2.4:.1f}"/>'); top.append(f'<path d="{d}" stroke-width="{w*S:.1f}"/>')
+def csample(P,step):
+    P=np.array(P,float); out=[]
+    for k in range(len(P)-1):
+        p0,p1,p2,p3=P[max(k-1,0)],P[k],P[k+1],P[min(k+2,len(P)-1)]
+        c1=p1+(p2-p0)/6; c2=p2-(p3-p1)/6
+        for t in np.linspace(0,1,40,endpoint=False):
+            out.append((1-t)**3*p1+3*(1-t)**2*t*c1+3*(1-t)*t*t*c2+t**3*p2)
+    out.append(P[-1]); out=np.array(out)
+    L=np.r_[0,np.cumsum(np.hypot(*np.diff(out,axis=0).T))]
+    ts=np.arange(step/2,L[-1],step); idx=np.searchsorted(L,ts)
+    idx=np.clip(idx,1,len(out)-1); pts=out[idx]; tg=out[idx]-out[idx-1]; tg/=np.linalg.norm(tg,axis=1,keepdims=True)+1e-9
+    return pts,np.c_[-tg[:,1],tg[:,0]]
+RR=np.zeros((H,W),np.uint8)
+for k,(P,w) in RD.items(): cv2.polylines(RR,[csample(P,3)[0].astype(np.int32)],False,255,int(w)+8)
+bad=(cv2.dilate(LOTS,np.ones((13,13),np.uint8))>0)|(RR>0)|(WM>0)|(site==0)
+trees=[]
+for k in ('blvd','ring','sl5','hotel','east','west'):
+    P,w=RD[k]; pts,nr=csample(P,24)
+    for s in (1,-1):
+        for p,n_ in zip(pts,nr):
+            q=p+n_*s*(w/2+9); x,y=int(q[0]),int(q[1])
+            if 0<=x<W and 0<=y<H and not bad[y,x]: trees.append(f'<circle cx="{q[0]*S:.1f}" cy="{q[1]*S:.1f}" r="2.6"/>')
+TREE_SVG='<g fill="#7fb06f" stroke="#5f9152" stroke-width=".6">'+''.join(trees)+'</g>'
 ROAD_SVG=('<g fill="none" stroke="#b9d7ad" stroke-linecap="round" stroke-linejoin="round">'+''.join(curb)+'</g>'
           '<g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round">'+''.join(top)+'</g>')
 vp=roads3.R['vcc'][0]
@@ -190,6 +214,6 @@ VCC_D='M'+' L'.join(f'{x*S:.1f} {y*S:.1f}' for x,y in vp)
 for g,ps in groups.items():
     out.append(f'<path class="lot-{g}" d="{" ".join(ps)}" fill="{PAL[g]}"/>')
 out.append(f'<path d="{" ".join(dividers)}" stroke="#ffffff" stroke-width=".9" opacity=".9"/>')
-out.append(ROAD_SVG); open('v3.txt','w').write('\n'.join(out)); open('vcc.txt','w').write(VCC_D)
+out.append(ROAD_SVG); out.append(TREE_SVG); open('v3.txt','w').write('\n'.join(out)); open('vcc.txt','w').write(VCC_D)
 json.dump({g:[sum(x*a for x,y,a in v)/sum(a for *_,a in v), sum(y*a for x,y,a in v)/sum(a for *_,a in v)] for g,v in cents.items() if v},open('cents.json','w'))
 print({g:len(v) for g,v in groups.items()}, 'KB',len('\n'.join(out))//1024, json.load(open('bbox.json')))
