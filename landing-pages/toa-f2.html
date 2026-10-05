@@ -333,6 +333,22 @@ footer .disc{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);padding
   .mbar a{padding:13px 4px;text-align:center;color:#fff;font-size:13px;font-weight:600}
   .mbar a:nth-child(2){background:#0068ff}.mbar a:nth-child(3){background:var(--gold);color:var(--green-900)}
 }
+/* Hình dung vị trí cho khách ở xa */
+.location .container.w2-wrap,.loc .container.w2-wrap{display:block}
+.w2 .eyebrow{color:var(--gold-dark)!important}
+.w2{margin-top:34px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:var(--shadow)}
+.w2-head h3{font-family:var(--serif);color:var(--green-900);font-size:clamp(1.25rem,2.6vw,1.6rem);margin:6px 0 18px;line-height:1.3}
+.w2-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center}
+.w2-map{margin:0}.w2-map svg{width:100%;height:auto;display:block;border-radius:14px}
+.w2-map figcaption{font-size:.82rem;color:var(--muted);margin-top:8px;text-align:center}
+.w2-map figcaption a{color:var(--gold-dark);font-weight:600}
+.w2-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.w2-list li{display:flex;gap:12px;align-items:flex-start}
+.w2-list i{font-style:normal;font-size:1.3rem;width:40px;height:40px;flex:none;display:grid;place-items:center;background:#fff3e8;border-radius:12px}
+.w2-list b{display:block;color:var(--green-900)}.w2-list span{color:var(--muted);font-size:.92rem}
+.w2-cta{margin-top:22px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--green-900);color:#fff;border-radius:14px;padding:16px 18px}
+.w2-cta b{display:block}.w2-cta span{opacity:.85;font-size:.92rem}
+@media (max-width:760px){.w2{padding:18px}.w2-grid{grid-template-columns:1fr}.w2-cta .btn{width:100%}}
 </style>
 
 <script type="application/ld+json">
@@ -696,7 +712,7 @@ document.addEventListener('click', function (e) { var a = e.target.closest && e.
       <dl class="facts">
         <div><dt>Tên tòa</dt><dd>Tòa F2 (Tòa Mai) – Sun FourS Tower</dd></div>
         <div><dt>Chủ đầu tư</dt><dd>Công ty Cổ phần Địa Cầu · phát triển bởi Sun Property (Sun Group)</dd></div>
-        <div><dt>Vị trí</dt><dd>Ngã tư Nguyễn Phước Lan – Minh Mạng, phường Ngũ Hành Sơn (trước là phường Hòa Quý), Đà Nẵng</dd></div>
+        <div><dt>Vị trí</dt><dd>Ngã tư Nguyễn Phước Lan – Minh Mạng, phường Ngũ Hành Sơn (trước là phường Hòa Quý), Đà Nẵng · <a href="https://maps.app.goo.gl/yy5cwvUcBVJZqtSF9" target="_blank" rel="noopener">Xem bản đồ ↗</a></dd></div>
         <div><dt>Quy mô</dt><dd>20 tầng nổi, 2 tầng hầm · 8 thang máy chia đều 2 bên</dd></div>
         <div><dt>Tầng 1</dt><dd>Sảnh đón và căn hộ tầng trệt, cao 6 m</dd></div>
         <div><dt>Tầng 2</dt><dd>Tầng tiện ích có hồ bơi + căn hộ có sân vườn</dd></div>
@@ -711,6 +727,53 @@ document.addEventListener('click', function (e) { var a = e.target.closest && e.
       <time class="updated" datetime="2026-10-02">Cập nhật: 02/10/2026</time>
     </div>
   </div>
+<div class="container w2-wrap">
+<div class="w2 rv">
+  <div class="w2-head">
+    <span class="eyebrow">Ở xa vẫn dễ hình dung</span>
+    <h3>Biển cách 2 km – xuống máy bay 10 phút là về tới nhà</h3>
+  </div>
+  <div class="w2-grid">
+    <figure class="w2-map">
+      <svg viewBox="0 0 360 300" role="img" aria-label="Sơ đồ minh họa vị trí Sun FourS Tower: phía đông là sông Cổ Cò, danh thắng Ngũ Hành Sơn và biển Sơn Thủy cách khoảng 2 km; sân bay Đà Nẵng ở phía bắc, Hội An ở phía nam" font-family="inherit">
+        <rect width="360" height="300" rx="14" fill="#f6f1ec"/>
+        <path d="M286 0H360V300H262C276 240 294 180 284 120 278 70 300 30 286 0Z" fill="#1f3f82" opacity=".9"/>
+        <path d="M286 0C300 30 278 70 284 120 294 180 276 240 262 300" fill="none" stroke="#ffb067" stroke-width="5" stroke-dasharray="2 7" stroke-linecap="round"/>
+        <text x="324" y="22" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">↑ Sơn Trà</text>
+        <text x="324" y="160" fill="#fff" font-size="15" font-weight="700" text-anchor="middle" transform="rotate(90 324 160)">BIỂN ĐÔNG</text>
+        <path d="M212 0C200 60 222 110 206 160 194 210 214 255 204 300" fill="none" stroke="#7fa6d9" stroke-width="9" stroke-linecap="round"/>
+        <text x="198" y="100" fill="#1f3f82" font-size="11" font-weight="700" text-anchor="end">sông Cổ Cò</text>
+        <path d="M226 96l10-16 9 16zM240 96l9-20 10 20zM252 96l7-12 7 12z" fill="#0b1a3a" opacity=".75"/>
+        <text x="246" y="70" fill="#0b1a3a" font-size="10" font-weight="700" text-anchor="middle">Ngũ Hành Sơn</text>
+        <path d="M108 170 H272" stroke="#f07b1f" stroke-width="2.5" stroke-dasharray="6 5"/>
+        <path d="M274 170l-10-5v10z" fill="#f07b1f"/>
+        <rect x="138" y="140" width="80" height="24" rx="12" fill="#f07b1f"/>
+        <text x="178" y="156" fill="#fff" font-size="12" font-weight="700" text-anchor="middle">~2 km · 5'</text>
+        <text x="236" y="192" fill="#0b1a3a" font-size="11" font-weight="700" text-anchor="middle">Biển</text>
+        <text x="236" y="205" fill="#0b1a3a" font-size="11" font-weight="700" text-anchor="middle">Sơn Thủy</text>
+        <circle cx="90" cy="170" r="22" fill="#f07b1f" opacity=".22"/>
+        <circle cx="90" cy="170" r="11" fill="#f07b1f" stroke="#fff" stroke-width="3"/>
+        <rect x="14" y="198" width="168" height="40" rx="9" fill="#0b1a3a"/>
+        <text x="98" y="215" fill="#fff" font-size="12.5" font-weight="700" text-anchor="middle">SUN FOURS TOWER</text>
+        <text x="98" y="230" fill="#ffb067" font-size="9.5" text-anchor="middle">Nguyễn Phước Lan – Minh Mạng</text>
+        <path d="M90 148 V44" stroke="#5a6275" stroke-width="2" stroke-dasharray="4 5"/>
+        <text x="16" y="30" fill="#0b1a3a" font-size="11.5" font-weight="700">✈ Sân bay Đà Nẵng · 10'</text>
+        <path d="M90 242 V276" stroke="#5a6275" stroke-width="2" stroke-dasharray="4 5"/>
+        <text x="100" y="286" fill="#0b1a3a" font-size="11" font-weight="700">↓ hướng Hội An</text>
+      </svg>
+      <figcaption>Sơ đồ minh họa, không theo tỉ lệ · <a href="https://maps.app.goo.gl/yy5cwvUcBVJZqtSF9" target="_blank" rel="noopener">Xem Google Maps ↗</a></figcaption>
+    </figure>
+    <ul class="w2-list">
+      <li><i>✈️</i><div><b>Xuống máy bay, 10 phút về tới nhà</b><span>Sân bay quốc tế Đà Nẵng gần, ở xa ra thăm nhà hay đón người thân đều tiện.</span></div></li>
+      <li><i>🏖️</i><div><b>Biển Sơn Thủy cách ~2 km – 5 phút</b><span>Sáng ra biển, tối về nhà mà không phải chịu giá căn hộ sát mặt biển.</span></div></li>
+      <li><i>🌊</i><div><b>Ngay bên sông Cổ Cò</b><span>Nằm giữa sông và biển, tầng cao nhìn được sông, biển và danh thắng Ngũ Hành Sơn.</span></div></li>
+      <li><i>⛰️</i><div><b>5 phút tới danh thắng Ngũ Hành Sơn</b><span>Thuận đường đi Hội An và Thánh địa Mỹ Sơn.</span></div></li>
+      <li><i>🛒</i><div><b>5 phút AEON Mall · 8 phút điểm bắn pháo hoa DIFF</b><span>Gần FPT City, Làng Đại học – khu dân cư hiện hữu, không phải nơi hoang vắng.</span></div></li>
+    </ul>
+  </div>
+  <div class="w2-cta"><div><b>Ở xa chưa ra được Đà Nẵng?</b><span>Em gọi video Zalo, đi thực tế từ dự án ra biển cho anh/chị xem tận mắt.</span></div><button type="button" class="btn btn-gold" data-pop data-interest="Xem vị trí qua video call (khách ở xa)" data-title="Xem vị trí thực tế qua video call" data-sub="Để lại số Zalo, em gọi video dẫn anh/chị xem dự án, đường ra biển và khu xung quanh." data-btn="Hẹn gọi video cho tôi →">Hẹn gọi video xem vị trí</button></div>
+</div>
+</div>
 </section>
 
 <!-- GARDEN -->
@@ -1059,7 +1122,7 @@ document.addEventListener('click', function (e) { var a = e.target.closest && e.
     </div>
     <div>
       <h2>Địa chỉ dự án</h2>
-      <address style="font-style:normal">Ngã tư Nguyễn Phước Lan – Minh Mạng,<br>phường Ngũ Hành Sơn, TP. Đà Nẵng</address>
+      <address style="font-style:normal">Ngã tư Nguyễn Phước Lan – Minh Mạng,<br>phường Ngũ Hành Sơn, TP. Đà Nẵng<br><a href="https://maps.app.goo.gl/yy5cwvUcBVJZqtSF9" target="_blank" rel="noopener">📍 Chỉ đường Google Maps ↗</a></address>
     </div>
     <div>
       <h2>Tư vấn &amp; bán hàng</h2>
@@ -1533,7 +1596,7 @@ const FAQ = [
   [/pháp lý|sổ|giấy phép|đủ điều kiện|bảo lãnh/i, () => 'Tòa F2 có <b>sổ đỏ lô đất</b> (CP 912579), Sở Xây dựng xác nhận <b>607 căn đủ điều kiện bán</b> (VB 17239/SXD-QLN), <b>Techcombank bảo lãnh</b> cho người mua.'],
   [/cọc|đặt chỗ|giữ chỗ|giữ căn/i, () => 'Cọc chỉ <b>100 triệu</b> (căn 3PN 150 triệu), sau 15 ngày bổ sung đủ 15%. Em giữ căn giúp anh/chị được, chỉ cần kiểm tra căn còn trống trước.'],
   [/bàn giao|nhận nhà|khi nào|tiến độ|xây/i, () => 'Tòa F2 khởi công 21/07/2026; thanh toán đủ 70% là <b>nhận nhà dự kiến 31/05/2028</b>.'],
-  [/vị trí|ở đâu|địa chỉ|chỗ nào|đường/i, () => 'Dự án ở <b>ngã tư Nguyễn Phước Lan – Minh Mạng</b>, phường Ngũ Hành Sơn, Đà Nẵng – nằm trong đại đô thị Sun Riverpolis, gần sông Cổ Cò và biển.'],
+  [/vị trí|ở đâu|địa chỉ|chỗ nào|đường/i, () => 'Dự án ở <b>ngã tư Nguyễn Phước Lan – Minh Mạng</b>, phường Ngũ Hành Sơn, Đà Nẵng – trong đại đô thị Sun Riverpolis, ngay bên sông Cổ Cò, <b>cách biển Sơn Thủy ~2 km (5 phút)</b>, ra sân bay 10 phút. <a href="https://maps.app.goo.gl/yy5cwvUcBVJZqtSF9" target="_blank" rel="noopener">📍 Xem bản đồ chỉ đường ↗</a>'],
   [/tiện ích|hồ bơi|gym|spa|trường|công viên/i, () => 'Tầng 2 có <b>hồ bơi bốn mùa</b>, gym, yoga, spa, Kids Club, phòng khám; xung quanh là công viên và tiện ích Sun Riverpolis.'],
   [/cho thuê|đầu tư|lợi nhuận|sinh lời|lời/i, () => 'Khách đầu tư hay chọn Studio, 1PN vì tổng tiền thấp, dễ cho thuê; vay 70% thì vốn bỏ ra chỉ khoảng 25%. Em gửi anh/chị phương án dòng tiền cụ thể từng căn.'],
   [/sân vườn|view|biển|sông|pháo hoa|tầng cao/i, () => 'Tầng 2–7 có <b>căn sân vườn tới ~69 m²</b>; tầng cao có view sông, biển, pháo hoa DIFF. Căn đẹp thường hết trước.'],
