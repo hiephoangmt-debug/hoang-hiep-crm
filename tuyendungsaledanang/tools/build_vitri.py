@@ -99,7 +99,7 @@ def page(p):
     h = re.sub(r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{p["title"]}">', h)
     h = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{p["desc"]}">', h)
     h += EXTRA_CSS
-    BG = {'nv': 'dao-tao', 'cv': 'hop-dau-ngay', 'pro': 'ky-ket-casamia-2', 'tn': 'ra-quan-2', 'sv': 'team-trip-1'}[p['key']]
+    BG = {'nv': 'dao-tao', 'cv': 'hop-dau-ngay', 'pro': 'ky-ket-casamia-2', 'tn': 'ra-quan-1', 'sv': 'team-trip-1'}[p['key']]
     h += '<style>.hero-b{background:linear-gradient(180deg,rgba(21,36,90,.72),rgba(21,36,90,.9)),url("' + IMG + BG + '.jpg") center/cover no-repeat #15245A!important}</style>\n'
     h += jsonld(p)
     h += '<link rel="canonical" href="' + URL[p['key']] + '">\n<style>.crumb{font-size:13px;color:#C9D3EA;margin-bottom:12px}.crumb a{color:#FFB98F;text-decoration:none}\n.role-lv{display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:13px;padding:3px 12px;border-radius:999px;margin-bottom:10px}\n.panel h4{margin:14px 0 4px;font-size:15px;font-weight:800;color:inherit}</style>\n'
