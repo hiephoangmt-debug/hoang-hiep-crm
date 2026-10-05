@@ -31,6 +31,43 @@ FEES = [
 FEE_MIN = "1,7%"
 
 
+AREA_LIST = ["Hải Châu", "Thanh Khê", "Sơn Trà", "Ngũ Hành Sơn", "Liên Chiểu", "Cẩm Lệ", "Hòa Vang", "Điện Bàn"]
+HOURS = "7h30 – 21h00, tất cả các ngày trong tuần (kể cả cuối tuần, lễ Tết)"
+BUSINESS_ID = DOMAIN + "#business"
+
+
+def business_schema():
+    """Thực thể doanh nghiệp dùng chung – giúp Google/ChatGPT nhận diện một thương hiệu nhất quán."""
+    return {
+        "@context": "https://schema.org", "@type": "FinancialService", "@id": BUSINESS_ID,
+        "name": SITE["name"], "url": DOMAIN, "image": DOMAIN + "og-image.png", "logo": DOMAIN + "og-image.png",
+        "description": f"Dịch vụ đáo hạn thẻ tín dụng, rút tiền thẻ tín dụng và tư vấn mở thẻ tại Đà Nẵng. Phí từ {FEE_MIN}, xử lý khoảng 15 phút, hỗ trợ tận nơi.",
+        "telephone": "+84909669325", "email": SITE["email"], "priceRange": f"Phí từ {FEE_MIN}",
+        "address": {"@type": "PostalAddress", "addressLocality": "Đà Nẵng", "addressRegion": "Đà Nẵng", "addressCountry": "VN"},
+        "areaServed": [{"@type": "Place", "name": a + ", Đà Nẵng"} for a in AREA_LIST],
+        "openingHoursSpecification": [{"@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "07:30", "closes": "21:00"}],
+        "contactPoint": [{"@type": "ContactPoint", "telephone": "+84909669325", "contactType": "customer service",
+                          "availableLanguage": "Vietnamese", "areaServed": "VN"}],
+        "knowsAbout": ["Đáo hạn thẻ tín dụng", "Rút tiền thẻ tín dụng", "Thẻ tín dụng", "Phí trả chậm thẻ tín dụng", "Điểm tín dụng CIC"],
+        "makesOffer": [
+            {"@type": "Offer", "url": DOMAIN + "dao-han-the-tin-dung-da-nang/", "description": f"Phí từ {FEE_MIN}",
+             "itemOffered": {"@type": "Service", "name": "Đáo hạn thẻ tín dụng Đà Nẵng"}},
+            {"@type": "Offer", "url": DOMAIN + "rut-tien-the-tin-dung-da-nang/", "description": f"Phí từ {FEES[2][2]}",
+             "itemOffered": {"@type": "Service", "name": "Rút tiền thẻ tín dụng Đà Nẵng"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Tư vấn mở thẻ tín dụng"}, "description": "Miễn phí"},
+        ],
+    }
+
+
+def tldr_html(items):
+    if not items:
+        return ""
+    li = "".join(f"<li>{x}</li>" for x in items)
+    return f'<div class="tldr"><b>Trả lời nhanh</b><ul>{li}</ul></div>'
+
+
 def read(p):
     with open(os.path.join(HERE, p), encoding="utf-8") as f:
         return f.read()
@@ -71,6 +108,7 @@ def example_table():
 def fill(s, root):
     return (s.replace("{{R}}", root).replace("{{FEE_TABLE}}", fee_table()).replace("{{EXAMPLE_TABLE}}", example_table())
              .replace("{{FEE_MIN}}", FEE_MIN).replace("{{UPDATED}}", vn_date(UPDATED))
+             .replace("{{FEE_MIN_RUT}}", FEES[2][2]).replace("{{AREAS}}", ", ".join(AREA_LIST)).replace("{{HOURS}}", HOURS)
              .replace("{{BANK_LINKS}}", "".join(f'<a href="{root}dao-han-the-{k}-da-nang/" class="bank">{n}</a>' for k, n, *_ in BANKS)))
 
 
@@ -126,7 +164,9 @@ def head_common(title, desc, url, root, og_type="website"):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{html.escape(desc)}">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="{SITE['name']}">
+<meta property="article:modified_time" content="{UPDATED}">
 <link rel="canonical" href="{url}">
 <meta name="theme-color" content="#0b1f44">
 <meta name="geo.region" content="VN-DN"><meta name="geo.placename" content="Đà Nẵng">
@@ -162,15 +202,14 @@ def build_page(p):
             {"@type": "ListItem", "position": i + 1, "name": n, "item": u} for i, (n, u) in enumerate(crumbs)]},
         {"@context": "https://schema.org", "@type": "Article" if p.get("article") else "Service",
          **({"headline": p["h1"], "datePublished": p.get("published", UPDATED), "dateModified": UPDATED,
-             "author": {"@type": "Organization", "name": SITE["name"], "url": DOMAIN},
-             "publisher": {"@type": "Organization", "name": SITE["name"], "url": DOMAIN},
+             "author": {"@id": BUSINESS_ID}, "publisher": {"@id": BUSINESS_ID}, "inLanguage": "vi-VN",
              "mainEntityOfPage": url, "image": DOMAIN + "og-image.png"}
             if p.get("article") else
             {"name": p["h1"], "serviceType": p["crumb"], "url": url, "areaServed": {"@type": "City", "name": "Đà Nẵng"},
-             "provider": {"@type": "FinancialService", "name": SITE["name"], "telephone": "+84-909-669-325",
-                          "url": DOMAIN, "address": {"@type": "PostalAddress", "addressLocality": "Đà Nẵng", "addressCountry": "VN"}}}),
+             "provider": {"@id": BUSINESS_ID}}),
          "description": p["desc"]},
     ]
+    schemas.append(business_schema())
     if p.get("faqs"):
         schemas.append({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
             {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": re.sub("<.*?>", "", a)}}
@@ -205,6 +244,7 @@ def build_page(p):
 </section>
 <div class="container page">
   <article class="prose">
+    {tldr_html(p.get('tldr'))}
     {toc_html(body + ('<h2 id="hoi-dap">Câu hỏi thường gặp</h2>' if p.get('faqs') else ''))}
     {body}
     {INLINE_CTA}
@@ -225,7 +265,10 @@ def build_index():
         f'<div class="c"><h3>{q["h1"]}</h3><p>{q["desc"][:110]}…</p></div></a>'
         for q in PAGES if q.get("article"))[:6000]
     body = fill(read("src/pages/index.body.html"), root).replace("{{POSTS}}", blog)
-    out = (fill(read("src/index.head.html"), root) + '<link rel="stylesheet" href="assets/site.css">\n</head>\n<body>\n'
+    website = {"@context": "https://schema.org", "@type": "WebSite", "@id": DOMAIN + "#website", "url": DOMAIN,
+               "name": SITE["name"], "inLanguage": "vi-VN", "publisher": {"@id": BUSINESS_ID}}
+    head = fill(read("src/index.head.html"), root).replace("{{BUSINESS_LD}}", jsonld(business_schema()) + "\n" + jsonld(website))
+    out = (head + '<link rel="stylesheet" href="assets/site.css">\n</head>\n<body>\n'
            + fill(read("src/partials/header.html"), root).replace('<a href="">Trang chủ</a>', '<a href="./" aria-current="page">Trang chủ</a>').replace('href=""', 'href="./"')
            + "\n" + body + "\n" + tail(root))
     write("index.html", out)
@@ -243,6 +286,13 @@ PAGES = [
 # ---------------------------------------------------------------- ĐÁO HẠN
 {
 "slug": "dao-han-the-tin-dung-da-nang",
+"tldr": [
+    "Đáo hạn thẻ tín dụng ở Đà Nẵng: liên hệ Zalo/điện thoại <strong>0909 669 325</strong>.",
+    f"Phí từ <strong>{FEE_MIN}</strong> tùy số tiền; báo phí trọn gói trước, không phí ẩn.",
+    "Thời gian xử lý khoảng <strong>15–30 phút</strong>, tại cửa hàng hoặc tận nơi.",
+    "Phục vụ: " + ", ".join(AREA_LIST) + ".",
+    "Giờ làm việc: " + HOURS + ". Cần mang: thẻ chính chủ + CCCD.",
+],
 "crumb": "Đáo hạn thẻ tín dụng Đà Nẵng",
 "title": "Đáo Hạn Thẻ Tín Dụng Đà Nẵng ✔️ Phí Từ {{FEE_MIN}}, Tận Nơi 15 Phút".replace("{{FEE_MIN}}", FEE_MIN),
 "desc": f"Đáo hạn thẻ tín dụng Đà Nẵng phí từ {FEE_MIN}, xong 15 phút, tận nơi mọi quận. Tránh phạt trễ hạn, giữ điểm tín dụng. Zalo 0909 669 325.",
@@ -317,6 +367,12 @@ PAGES = [
 # ---------------------------------------------------------------- RÚT TIỀN
 {
 "slug": "rut-tien-the-tin-dung-da-nang",
+"tldr": [
+    "Rút tiền thẻ tín dụng ở Đà Nẵng: Zalo/điện thoại <strong>0909 669 325</strong>.",
+    f"Phí từ <strong>{FEES[2][2]}</strong>, thấp hơn mức phí ứng tiền mặt tại ATM (thường 3–4%).",
+    "Nhận tiền mặt hoặc chuyển khoản trong khoảng <strong>15 phút</strong>.",
+    "Hỗ trợ tận nơi: " + ", ".join(AREA_LIST) + ".",
+],
 "crumb": "Rút tiền thẻ tín dụng Đà Nẵng",
 "title": f"Rút Tiền Thẻ Tín Dụng Đà Nẵng ✔️ Phí Thấp, Nhận Tiền 15 Phút",
 "desc": "Rút tiền thẻ tín dụng Đà Nẵng phí thấp hơn rút ATM, nhận tiền mặt hoặc chuyển khoản trong 15 phút, tận nơi mọi quận. Zalo 0909 669 325.",
@@ -367,6 +423,12 @@ PAGES = [
 # ---------------------------------------------------------------- BẢNG PHÍ
 {
 "slug": "bang-phi",
+"tldr": [
+    f"Phí đáo hạn thẻ tín dụng Đà Nẵng: <strong>{FEES[0][1]}</strong> (dưới 10 triệu), <strong>{FEES[1][1]}</strong> (10–50 triệu), <strong>{FEES[2][1]}</strong> (50–100 triệu), trên 100 triệu thoả thuận.",
+    f"Phí rút tiền: <strong>{FEES[0][2]}</strong> / <strong>{FEES[1][2]}</strong> / <strong>{FEES[2][2]}</strong> theo cùng các mức tiền.",
+    "Phí đã gồm công đến tận nơi trong nội thành; có hoá đơn từng giao dịch.",
+    "Báo phí chính xác qua Zalo 0909 669 325.",
+],
 "crumb": "Bảng phí",
 "title": f"Bảng Phí Đáo Hạn, Rút Tiền Thẻ Tín Dụng Đà Nẵng 2026 – Từ {FEE_MIN}",
 "desc": f"Bảng phí đáo hạn và rút tiền thẻ tín dụng tại Đà Nẵng cập nhật 2026, phí từ {FEE_MIN}, không phí ẩn. So sánh với phí trễ hạn và phí rút ATM.",
@@ -397,6 +459,49 @@ PAGES = [
 <p>Muốn tính nhanh theo số dư của bạn? Dùng <a href="{{R}}#tinh-phi">công cụ tính tiền phạt trễ hạn</a> trên trang chủ.</p>
 """,
 },
+# ---------------------------------------------------------------- GIỚI THIỆU
+{
+"slug": "gioi-thieu",
+"crumb": "Giới thiệu & liên hệ",
+"title": "Giới Thiệu Dịch Vụ Thẻ Tín Dụng Đà Nẵng – Liên Hệ 0909 669 325",
+"desc": f"Thông tin về Dịch Vụ Thẻ Tín Dụng Đà Nẵng: dịch vụ, phí từ {FEE_MIN}, khu vực phục vụ, giờ làm việc, cam kết minh bạch và cách liên hệ.",
+"h1": "Giới Thiệu & Liên Hệ – Dịch Vụ Thẻ Tín Dụng Đà Nẵng",
+"intro": "Chúng tôi hỗ trợ người dùng thẻ tín dụng tại Đà Nẵng thanh toán đúng hạn, nhận tiền nhanh và dùng thẻ an toàn – minh bạch phí, có hoá đơn, thẻ không rời tay khách.",
+"tldr": [
+    "Tên: Dịch Vụ Thẻ Tín Dụng Đà Nẵng – website dichvuthetindungdanang.com.",
+    "Liên hệ: Zalo/điện thoại <strong>0909 669 325</strong>, email Km.camvan@gmail.com.",
+    "Giờ làm việc: " + HOURS + ".",
+    "Khu vực: " + ", ".join(AREA_LIST) + ".",
+],
+"related": ["dao-han-the-tin-dung-da-nang", "rut-tien-the-tin-dung-da-nang", "bang-phi"],
+"body": """
+<h2 id="dich-vu">Chúng tôi làm gì?</h2>
+<ul>
+<li><a href="{{R}}dao-han-the-tin-dung-da-nang/">Đáo hạn thẻ tín dụng</a>: thanh toán dư nợ đúng hạn giúp khách, tránh phí phạt và nợ xấu.</li>
+<li><a href="{{R}}rut-tien-the-tin-dung-da-nang/">Rút tiền thẻ tín dụng</a>: nhận tiền mặt hoặc chuyển khoản nhanh, phí thấp hơn rút ATM.</li>
+<li>Tư vấn mở thẻ tín dụng phù hợp và hướng dẫn dùng thẻ an toàn, miễn phí.</li>
+</ul>
+
+<h2 id="cam-ket">Cam kết với khách hàng</h2>
+<ul>
+<li><strong>Báo phí trước</strong> – khách đồng ý mới thực hiện, không phát sinh thêm.</li>
+<li><strong>Thẻ không rời tay khách</strong> – không giữ thẻ, không lưu số thẻ.</li>
+<li><strong>Không bao giờ hỏi mã OTP, CVV, mật khẩu</strong>, không yêu cầu chuyển khoản đặt cọc.</li>
+<li><strong>Hoá đơn đầy đủ</strong> cho từng giao dịch.</li>
+<li>Chỉ phục vụ thẻ chính chủ, đối chiếu CCCD.</li>
+</ul>
+
+<h2 id="lien-he">Thông tin liên hệ</h2>
+<div class="tbl"><table><tbody>
+<tr><td><strong>Điện thoại / Zalo</strong></td><td>0909 669 325</td></tr>
+<tr><td><strong>Email</strong></td><td>Km.camvan@gmail.com</td></tr>
+<tr><td><strong>Website</strong></td><td>www.dichvuthetindungdanang.com</td></tr>
+<tr><td><strong>Giờ làm việc</strong></td><td>{{HOURS}}</td></tr>
+<tr><td><strong>Khu vực phục vụ</strong></td><td>{{AREAS}}</td></tr>
+</tbody></table></div>
+<div class="box"><p><strong>Cảnh giác mạo danh:</strong> chúng tôi chỉ liên hệ qua số 0909 669 325. Mọi số điện thoại, tài khoản khác tự xưng là chúng tôi đều không phải.</p></div>
+""",
+},
 # ---------------------------------------------------------------- KIẾN THỨC (hub)
 {
 "slug": "kien-thuc",
@@ -413,6 +518,12 @@ PAGES = [
 # ---------------------------------------------------------------- BÀI 1
 {
 "slug": "kien-thuc/dao-han-the-tin-dung-la-gi",
+"tldr": [
+    "Đáo hạn thẻ tín dụng là thanh toán dư nợ thẻ đúng hạn bằng nguồn tiền tạm thời, rồi dùng lại hạn mức để hoàn trả.",
+    "Mục đích: tránh phí trả chậm, lãi 25–35%/năm trên toàn bộ dư nợ và nguy cơ nợ xấu CIC.",
+    f"Chi phí thường 1,5–2,5% số tiền; tại Đà Nẵng phí từ {FEE_MIN}.",
+    "Chỉ nên dùng như giải pháp tạm thời, có kế hoạch trả hết dư nợ trong 1–2 kỳ.",
+],
 "parents": [("kien-thuc", "Kiến thức")],
 "crumb": "Đáo hạn thẻ tín dụng là gì?",
 "article": True, "icon": "?",
@@ -462,6 +573,11 @@ PAGES = [
 # ---------------------------------------------------------------- BÀI 2
 {
 "slug": "kien-thuc/ngay-sao-ke-va-ngay-den-han",
+"tldr": [
+    "Ngày sao kê: ngày ngân hàng chốt giao dịch của chu kỳ (~30 ngày).",
+    "Ngày đến hạn: thường sau ngày sao kê 15–25 ngày; trả đủ trước ngày này thì không bị tính lãi.",
+    "Tổng thời gian miễn lãi tối đa thường 45–55 ngày; rút tiền mặt ATM không được miễn lãi.",
+],
 "parents": [("kien-thuc", "Kiến thức")],
 "crumb": "Ngày sao kê và ngày đến hạn",
 "article": True, "icon": "📅",
@@ -503,6 +619,12 @@ PAGES = [
 # ---------------------------------------------------------------- BÀI 3
 {
 "slug": "kien-thuc/tra-cham-the-tin-dung-bi-phat-bao-nhieu",
+"tldr": [
+    "Phí chậm thanh toán thường 4–6% số tiền thanh toán tối thiểu (có mức sàn và trần).",
+    "Lãi 25–35%/năm tính trên toàn bộ dư nợ sao kê, không chỉ phần còn thiếu.",
+    "Quá hạn từ 10 ngày có thể bị xếp nhóm 2 (nợ cần chú ý) trên CIC; trên 90 ngày là nợ xấu.",
+    "Ví dụ: dư nợ 20 triệu trễ 30 ngày tốn khoảng 560.000đ (lãi + phí phạt).",
+],
 "parents": [("kien-thuc", "Kiến thức")],
 "crumb": "Trả chậm thẻ tín dụng bị phạt bao nhiêu?",
 "article": True, "icon": "⚠",
@@ -582,6 +704,11 @@ def bank_page(key, name, full, app, note):
         "h1": f"Đáo Hạn Thẻ Tín Dụng {name} Tại Đà Nẵng",
         "intro": f"Thẻ {name} sắp đến hạn? Hỗ trợ đáo hạn và rút tiền thẻ tín dụng {name} (Visa, Mastercard, JCB…) trong 15 phút, tại cửa hàng hoặc tận nơi khắp Đà Nẵng.",
         "related": ["dao-han-the-tin-dung-da-nang", "bang-phi", "kien-thuc/ngay-sao-ke-va-ngay-den-han"],
+        "tldr": [
+            f"Đáo hạn, rút tiền thẻ tín dụng {name} tại Đà Nẵng: Zalo/điện thoại <strong>0909 669 325</strong>.",
+            f"Phí từ <strong>{FEE_MIN}</strong>, xử lý khoảng 15–30 phút, tận nơi mọi khu vực Đà Nẵng và Điện Bàn.",
+            f"Xem ngày đến hạn thẻ {name} trong ứng dụng <strong>{app}</strong> → Thẻ → Sao kê.",
+        ],
         "faqs": [
             (f"Đáo hạn thẻ {name} mất bao lâu?", "Khoảng 15–30 phút kể từ khi bắt đầu giao dịch, tại cửa hàng hoặc tận nơi trong nội thành Đà Nẵng."),
             (f"Phí đáo hạn thẻ {name} là bao nhiêu?", f"Từ {FEE_MIN} tùy số tiền, áp dụng chung cho thẻ {name}. Nhắn Zalo để được báo phí trọn gói."),
@@ -623,7 +750,51 @@ def bank_page(key, name, full, app, note):
 PAGES += [bank_page(*b) for b in BANKS]
 
 
+def strip(h):
+    return re.sub(r"\s+", " ", re.sub("<.*?>", "", h)).strip()
+
+
+def build_llms():
+    """llms.txt – bản tóm tắt cho ChatGPT, Perplexity, Claude… đọc nhanh nội dung website."""
+    fees = "\n".join(f"- {a}: đáo hạn {b.lower()}, rút tiền {c.lower()}" for a, b, c in FEES)
+    groups = [("Dịch vụ", lambda p: not p.get("article") and not p.get("bank") and p["slug"] != "kien-thuc"),
+              ("Đáo hạn theo ngân hàng", lambda p: p.get("bank")),
+              ("Kiến thức", lambda p: p.get("article"))]
+    sec = ""
+    for g, f in groups:
+        sec += f"\n## {g}\n\n" + "".join(f"- [{q['h1']}]({DOMAIN}{q['slug']}/): {q['desc']}\n" for q in PAGES if f(q))
+    out = f"""# {SITE['name']}
+
+> Dịch vụ đáo hạn thẻ tín dụng, rút tiền thẻ tín dụng và tư vấn mở thẻ tại Đà Nẵng. Phí từ {FEE_MIN}, xử lý khoảng 15–30 phút, hỗ trợ tận nơi. Liên hệ Zalo/điện thoại 0909 669 325.
+
+## Thông tin chính
+
+- Website: {DOMAIN}
+- Điện thoại / Zalo: 0909 669 325
+- Email: {SITE['email']}
+- Giờ làm việc: {HOURS}
+- Khu vực phục vụ (tận nơi): {", ".join(AREA_LIST)}
+- Thẻ hỗ trợ: Visa, Mastercard, JCB, Amex, Napas của hầu hết ngân hàng Việt Nam
+- Cần chuẩn bị: thẻ tín dụng chính chủ + CCCD
+- Cam kết: báo phí trước, không phí ẩn, thẻ không rời tay khách, không hỏi OTP/CVV, có hoá đơn
+
+## Bảng phí (cập nhật {vn_date(UPDATED)})
+
+{fees}
+{sec}"""
+    write("llms.txt", out)
+
+
+def build_robots():
+    bots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "PerplexityBot", "ClaudeBot", "Claude-SearchBot",
+            "Google-Extended", "Bingbot", "Applebot-Extended", "CCBot"]
+    rules = "".join(f"User-agent: {b}\nAllow: /\n\n" for b in bots)
+    write("robots.txt", f"# Cho phép công cụ tìm kiếm và trợ lý AI (ChatGPT, Perplexity, Claude, Gemini…) đọc website\n{rules}User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}sitemap.xml\n")
+
+
 if __name__ == "__main__":
+    build_llms()
+    build_robots()
     for p in PAGES:
         build_page(p)
     build_index()

@@ -319,3 +319,11 @@ footer a:hover{color:#fff}
 @media(max-width:960px){.page{grid-template-columns:1fr}.side{position:static}.related,.posts{grid-template-columns:1fr}}
 .card h3 a:hover{color:var(--orange)}.card.featured h3 a{color:#fff}
 a.bank{transition:.2s;text-decoration:none!important}a.bank:hover{border-color:var(--orange);color:var(--orange)}
+.tldr{background:#f1fbf4;border:1px solid #cdeed6;border-radius:14px;padding:16px 20px;margin:0 0 22px}
+.tldr b{display:block;color:#1b7f3b;margin-bottom:6px}
+.tldr ul{margin:0 0 0 20px}.tldr li{margin-bottom:4px}
+.facts{display:grid;grid-template-columns:200px 1fr;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:28px;background:#fff}
+.facts dt,.facts dd{padding:12px 16px;border-top:1px solid var(--line)}
+.facts dt{font-weight:700;color:var(--navy);background:var(--bg)}
+.facts dt:first-of-type,.facts dd:first-of-type{border-top:0}
+@media(max-width:560px){.facts{grid-template-columns:1fr}.facts dd{border-top:0;padding-top:0;background:var(--bg)}}
