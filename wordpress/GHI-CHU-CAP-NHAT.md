@@ -11,7 +11,7 @@
 4. **Cài đặt → Đường dẫn tĩnh** → bấm **Lưu** (để trang mới Tòa F2, phân khu Hải Vân Bay chạy được).
 5. **LiteSpeed Cache → Purge All**, rồi Ctrl + Shift + R (điện thoại: tắt hẳn tab, mở lại).
 
-**Kiểm tra sau khi cài:** Giao diện hiện 2.12.4 · Plugin hiện 2.17.1 · mở `/du-an/fours-tower-f2-thap-mai/` thấy 4 con số 18% – 25% – 15% – 70%.
+**Kiểm tra sau khi cài:** Giao diện hiện 2.12.4 · Plugin hiện 2.17.1 · mở `/du-an/fours-tower-f2-thap-mai/` thấy 4 con số 19% – 25% – 15% – 70%; FourS Tower có ảnh phối cảnh hoàng hôn ở đầu trang.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
 
@@ -26,6 +26,10 @@
 - Trang mới **FourS Tower F2 – Tháp Mai**: 4 con số chính, vốn tự có theo loại căn (Studio ~405 triệu, 1PN+ ~619 triệu, 2PN ~857 triệu – vay 70%) có nút nhận căn qua Zalo, bảng "Một căn 3 tỷ trả bao nhiêu" 5 phương án, tiến độ Sun Early Key, FAQ, SEO.
 - Mục Chính sách gọn: khung ưu đãi có đồng hồ đếm ngược đến 25/10/2026 + 1 nút; bảng chiết khấu cộng dồn (17,2% / 10,6% / 8,3% / 5,9% / 3%), lịch thanh toán, vay ngân hàng nằm trong nút **Xem chi tiết**.
 - Số liệu theo phiếu tính giá CĐT – CSBH 4.2 Tòa F2 (từ 26/9/2026). Giá "từ" là giá tham khảo nguồn phân phối; có bảng giá chính thức F2 thì gửi để thay.
+
+### Ảnh mới
+- **FourS Tower & Tòa F2:** 5 ảnh phối cảnh (toàn cảnh hoàng hôn làm ảnh đại diện; 4 tháp, trục đường trung tâm, về đêm hướng sông trong Hình ảnh; phố thương mại khối đế trong Tiện ích).
+- **Casamia Balanca Hội An:** 16 ảnh (tổng quan, nhà vườn, nội thất tham khảo, mặt bằng, sự kiện Sound of Balance 25/04/2026).
 
 ### Vinhomes Hải Vân Bay
 - Cập nhật 10/2026; 4 trang phân khu Bạch Vân, Vịnh Mây, Đảo Ngọc, Tinh Vân (giá, tiện ích, giỏ hàng 6 căn giá "Liên hệ", FAQ).
