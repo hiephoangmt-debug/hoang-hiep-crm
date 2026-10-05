@@ -813,22 +813,25 @@ test('paste daily notes: transactions, C.Trâm transfers and a pay-later bill, w
   const d3 = pv.days[1];
   assert.strictEqual(d3.hoan_ngoai, 990000, 'line in brackets is not C.Trâm money');
   assert.strictEqual(d3.hoan, 4950000 + 25168000);
-  const ve = pv.items.filter((i) => i.kind === 'bill')[1];
-  assert.strictEqual(ve.loai_hd, 'Vé máy bay / tàu xe');
-  assert.strictEqual(ve.a_ten, 'xyz');
+  const ve = pv.items.find((i) => i.kind === 'trip');
+  assert.strictEqual(ve.loai, 'Vé máy bay');
+  assert.strictEqual(ve.ten, 'xyz');
   assert.strictEqual(ve.lai, 60000, 'vé: only the profit is known');
   assert.strictEqual(call('listTransactions', {}).length, 0, 'preview does not save');
 
   const sv = call('pasteNotes', { text, year: 2026, save: true });
-  assert.strictEqual(JSON.stringify(sv.saved), JSON.stringify({ tx: 6, pay: 2, bill: 2, bo_qua: 0, con_lai: 0 }));
+  assert.strictEqual(JSON.stringify(sv.saved), JSON.stringify({ tx: 6, pay: 2, bill: 1, bo_qua: 0, con_lai: 0, trip: 1 }));
   const r = call('refunds', {});
   assert.strictEqual(r.summary.tong_phai_hoan, 9840000 + 1970000 + 27636000 + 4950000 + 25168000, 'all pasted rows count in công nợ');
   assert.strictEqual(r.summary.tong_da_chuyen, 130000000);
   // hoá đơn + vé đều vào tab Hoá đơn, đã hoàn tất → tính vào doanh thu
   const bills = call('listBills', { mode: 'all' }).rows;
-  assert.strictEqual(bills.length, 2);
+  assert.strictEqual(bills.length, 1);
   assert.ok(bills.every((b) => b.trang_thai === 'Hoàn tất'));
-  assert.strictEqual(bills.find((b) => b.lai_tay).doanh_thu, 60000);
+  const trips = call('listTrips', { mode: 'all' }).rows;
+  assert.strictEqual(trips.length, 1);
+  assert.strictEqual(trips[0].doanh_thu, 60000);
+  assert.strictEqual(trips[0].trang_thai, 'Đã thu');
   // nhập tay vé không có số tiền hoá đơn
   const v2 = call('saveBill', { ngay: '2026-10-04', loai_hd: 'Vé máy bay / tàu xe', a_ten: 'Khách H', lai_tay: 50000 });
   assert.strictEqual(v2.trang_thai, 'Chờ đối soát');
@@ -959,24 +962,59 @@ test('amounts of 100 million+ written in thousands (124.523) and duplicate lines
   assert.strictEqual(all.filter((t) => t.the === 'MB').length, 2);
 });
 
-test('profit-only lines: "Lãi vé máy bay Quang - ck Yến 120" and "Vé Hạnh lãi 60k"', () => {
+test('profit-only lines: tickets / hotels go to ✈️ Vé & KS, other services to Hoá đơn', () => {
   const { call, fake } = fresh();
   fake.setToday('2026-10-05');
-  const text = ['5/10:', 'Lãi vé máy bay Quang - ck Yến 120', 'Vé máy bay Hạnh lãi 60k', 'Lãi bảo hiểm Long 1.200'].join('\n');
-  const b = call('pasteNotes', { text }).items.filter((i) => i.kind === 'bill');
-  assert.strictEqual(b.length, 3);
-  assert.strictEqual(b[0].loai_hd, 'Vé máy bay / tàu xe');
-  assert.strictEqual(b[0].a_ten, 'Quang');
-  assert.strictEqual(b[0].lai, 120000);
-  assert.ok(b[0].ghi_chu.startsWith('ck Yến'));
-  assert.strictEqual(b[1].a_ten, 'Hạnh');
-  assert.strictEqual(b[1].lai, 60000);
-  assert.strictEqual(b[2].loai_hd, 'Thanh toán bảo hiểm');
-  assert.strictEqual(b[2].lai, 1200000);
+  const text = ['5/10:', 'Lãi vé máy bay Quang - ck Yến 120', 'Vé máy bay Hạnh lãi 60k', 'Lãi khách sạn Long 2 phòng 300', 'Lãi bảo hiểm Long 1.200'].join('\n');
+  const items = call('pasteNotes', { text }).items;
+  const t = items.filter((i) => i.kind === 'trip');
+  assert.strictEqual(t.length, 3);
+  assert.strictEqual(t[0].loai, 'Vé máy bay');
+  assert.strictEqual(t[0].ten, 'Quang');
+  assert.strictEqual(t[0].lai, 120000);
+  assert.ok(t[0].ghi_chu.startsWith('ck Yến'));
+  assert.strictEqual(t[1].ten, 'Hạnh');
+  assert.strictEqual(t[2].loai, 'Khách sạn');
+  assert.strictEqual(t[2].so_nguoi, 2);
+  assert.strictEqual(t[2].phi, 150000);
+  const b = items.filter((i) => i.kind === 'bill');
+  assert.strictEqual(b.length, 1);
+  assert.strictEqual(b[0].loai_hd, 'Thanh toán bảo hiểm');
   const sv = call('pasteNotes', { text, save: true });
-  assert.strictEqual(sv.saved.bill, 3);
+  assert.strictEqual(sv.saved.trip, 3);
+  assert.strictEqual(sv.saved.bill, 1);
   const rep = call('report', { type: 'day', year: 2026, month: 10 });
-  assert.strictEqual(rep.rows[4].hd_lai, 1380000, 'profit shows in the daily report');
+  assert.strictEqual(rep.rows[4].dv_lai, 480000);
+  assert.strictEqual(rep.rows[4].hd_lai, 1200000);
+  assert.strictEqual(rep.rows[4].tong_lai, 1680000);
+  assert.strictEqual(call('pasteNotes', { text, save: true }).saved.trip, undefined, 'paste again: no duplicates');
+});
+
+test('✈️ Vé & KS: one booking with flight + hotel, revenue = people × fee per service, edit later', () => {
+  const { call, fake } = fresh();
+  fake.setToday('2026-10-05');
+  const v = call('saveTrip', { ngay: '2026-10-05', ten: 'Chị Lan', sdt: '0905 123 456', ngay_di: '2026-10-20',
+    chi_tiet: [{ loai: 'Vé máy bay', so_nguoi: 3, phi: 50000, gia: 1500000, mo_ta: 'DAD-SGN' }] });
+  assert.strictEqual(v.doanh_thu, 150000);
+  assert.strictEqual(v.tong_tien, 4500000);
+  assert.strictEqual(v.trang_thai, 'Chưa thu');
+  assert.strictEqual(v.sdt, '0905123456');
+  // thêm khách sạn sau, đã thu tiền
+  const items = v.items.concat([{ loai: 'Khách sạn', so_nguoi: 2, phi: 100000, mo_ta: '2 đêm' }]);
+  const v2 = call('saveTrip', Object.assign({}, v, { chi_tiet: items, ngay_thu: '2026-10-05' }));
+  assert.strictEqual(v2.doanh_thu, 350000);
+  assert.strictEqual(v2.so_nguoi, 5);
+  assert.strictEqual(v2.trang_thai, 'Đã thu');
+  const l = call('listTrips', { mode: 'month' });
+  assert.strictEqual(l.rows.length, 1);
+  assert.strictEqual(l.stats.thang_nay.dv_lai, 350000);
+  assert.strictEqual(l.phi_mac_dinh['Khách sạn'], 100000);
+  assert.strictEqual(l.stats.theo_loai.find((x) => x.name === 'Vé máy bay').nguoi, 3);
+  const d = call('dashboard');
+  assert.strictEqual(d.money.thang_nay.dv_lai, 350000);
+  assert.throws(() => call('saveTrip', { ngay: '2026-10-05', ten: 'X', chi_tiet: [] }), /ít nhất 1 dịch vụ/);
+  call('deleteTrip', { id: v.id });
+  assert.strictEqual(call('listTrips', { mode: 'all' }).rows.length, 0);
 });
 
 test('pasting earlier months: history before closing, December notes pasted in January, saving in rounds', () => {

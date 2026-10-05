@@ -228,6 +228,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       <button class="tab" data-tab="tx">Giao dịch</button>
       <button class="tab" data-tab="refund">Công nợ <span class="refund-name">C.Trâm</span> <span class="count hidden" id="refund-count"></span></button>
       <button class="tab" data-tab="bills">🧾 Hoá đơn <span class="count hidden" id="bill-count"></span></button>
+      <button class="tab" data-tab="trips">✈️ Vé &amp; KS <span class="count hidden" id="trip-count"></span></button>
       <button class="tab" data-tab="remind">Nhắc lịch <span class="count hidden" id="remind-count"></span></button>
       <button class="tab" data-tab="customers">Khách hàng <span class="count hidden" id="lead-count"></span></button>
       <button class="tab" data-tab="report">Báo cáo</button>
@@ -333,6 +334,20 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     </section>
 
     <!-- Ghép hoá đơn ví trả sau -->
+    <section data-view="trips" class="hidden">
+      <p class="muted">Đặt <b>vé máy bay, vé tàu, khách sạn…</b> cho khách. Mỗi lần đặt có thể có nhiều dịch vụ (vé + khách sạn); <b>doanh thu = số người × phí</b> của từng dịch vụ. Bấm vào để sửa hoặc thêm khách sạn sau.</p>
+      <div class="row row--between" style="margin-bottom:10px">
+        <div class="seg" id="trip-filter">
+          <button data-v="open" class="is-active">Chưa thu</button>
+          <button data-v="month">Tháng này</button>
+          <button data-v="all">Tất cả</button>
+        </div>
+        <button class="btn btn--accent btn--sm" data-act="new-trip">+ Đặt vé / KS</button>
+      </div>
+      <div class="kpis" id="trip-kpis"></div>
+      <div id="trip-list"></div>
+    </section>
+
     <section data-view="bills" class="hidden">
       <p class="muted">Người <b>A</b> có hoá đơn (điện, nước, MoMo, bảo hiểm…) → người <b>B</b> dùng <b>ví trả sau</b> thanh toán hoá đơn đó → A chuyển lại cho mình (100% − phí A) → mình chuyển cho B (100% − phí A − phí mình). <b>Doanh thu = phần chênh lệch.</b></p>
       <div class="row row--between" style="margin-bottom:10px">
@@ -342,7 +357,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
           <button data-v="done">Hoàn tất (tháng này)</button>
           <button data-v="all">Tất cả</button>
         </div>
-        <button class="btn btn--accent btn--sm" data-act="new-bill">+ Hoá đơn</button> <button class="btn btn--sm" data-act="new-ticket">✈️ + Vé / lãi khác</button>
+        <button class="btn btn--accent btn--sm" data-act="new-bill">+ Hoá đơn</button> <button class="btn btn--sm" data-act="new-ticket">✨ + Lãi khác</button>
       </div>
       <div class="kpis" id="bill-kpis"></div>
       <div id="bill-list"></div>
@@ -425,6 +440,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         <div class="card scroll-x"><h3 style="margin-top:0">Theo thẻ / ví</h3><table class="tbl" id="rp-card"></table></div>
         <div class="card scroll-x"><h3 style="margin-top:0">Top khách</h3><table class="tbl" id="rp-top"></table></div>
         <div class="card scroll-x"><h3 style="margin-top:0">🧾 Hoá đơn theo loại</h3><table class="tbl" id="rp-billtype"></table></div>
+        <div class="card scroll-x"><h3 style="margin-top:0">✈️ Vé &amp; khách sạn theo loại</h3><table class="tbl" id="rp-triptype"></table></div>
         <div class="card scroll-x"><h3 style="margin-top:0">🧾 Hoá đơn theo ví trả sau</h3><table class="tbl" id="rp-wallet"></table></div>
       </div>
     </section>
@@ -539,6 +555,33 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     <div id="notes-saved-view" style="margin-top:8px"></div>
     <div id="notes-result" style="margin-top:10px"></div>
   </div>
+</div>
+
+<!-- Modal đặt vé / khách sạn -->
+<div class="modal hidden" id="trip-modal">
+  <form class="modal__box" id="trip-form" autocomplete="off">
+    <div class="modal__head"><h2 id="trip-title">✈️ Đặt vé / khách sạn</h2><button type="button" class="x" data-close>×</button></div>
+    <input type="hidden" name="id"><input type="hidden" name="khach_id">
+    <div class="form-grid">
+      <label class="f">Ngày đặt<input type="date" name="ngay" required></label>
+      <label class="f">Ngày đi / nhận phòng <span class="hint">không bắt buộc</span><input type="date" name="ngay_di"></label>
+      <label class="f">Tên khách<input name="ten" list="dl-customers"></label>
+      <label class="f">SĐT<input name="sdt" inputmode="tel"></label>
+    </div>
+    <h3 style="margin:14px 0 6px">🧳 Dịch vụ <span class="hint">số người × phí của mình mỗi người</span></h3>
+    <div id="trip-items"></div>
+    <button type="button" class="btn btn--ghost btn--sm" data-act="trip-add-item" style="margin-top:6px">+ Thêm dịch vụ (khách sạn, vé tàu…)</button>
+    <div class="form-grid" style="margin-top:10px">
+      <label class="f">Đã thu tiền ngày <span class="hint">để trống nếu chưa thu</span><input type="date" name="ngay_thu"></label>
+      <label class="f">Ghi chú<input name="ghi_chu" placeholder="VD: ck Yến, mã đặt chỗ…"></label>
+      <label class="f full" style="display:flex;gap:8px;align-items:center"><input type="checkbox" name="huy" style="width:auto"> Khách huỷ</label>
+      <div class="full calc" id="trip-calc" style="grid-template-columns:1fr"></div>
+    </div>
+    <div class="row row--between" style="margin-top:14px">
+      <button type="button" class="btn btn--danger hidden" data-act="delete-trip">Xóa</button>
+      <div class="row" style="margin-left:auto"><button type="button" class="btn btn--ghost" data-close>Hủy</button><button type="submit" class="btn">Lưu</button></div>
+    </div>
+  </form>
 </div>
 
 <!-- Modal tiền C.Trâm chuyển / ứng -->
@@ -866,7 +909,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       S.boot = b;
       $('#login').classList.add('hidden');
       $('#app').classList.remove('hidden');
-      var UI_VERSION = 'v04.10l';
+      var UI_VERSION = 'v04.11';
       $('#today-label').textContent = dmy(b.today) + ' · ' + UI_VERSION + (b.version === UI_VERSION ? '' : ' ⚠ Mã.gs chưa cập nhật');
       fillSelect($('[name=dich_vu]'), b.services);
       fillSelect($('#tx-service'), b.services, true);
@@ -901,7 +944,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     S.tab = tab;
     $$('.tab').forEach(function (t) { t.classList.toggle('is-active', t.dataset.tab === tab); });
     $$('[data-view]').forEach(function (v) { v.classList.toggle('hidden', v.dataset.view !== tab); });
-    ({ home: loadHome, tx: loadTx, bills: loadBills, refund: loadRefund, remind: loadRemind, customers: loadCustomers, report: loadReport, settings: renderSettings })[tab]();
+    ({ home: loadHome, tx: loadTx, bills: loadBills, trips: loadTrips, refund: loadRefund, remind: loadRemind, customers: loadCustomers, report: loadReport, settings: renderSettings })[tab]();
     window.scrollTo(0, 0);
   }
 
@@ -921,6 +964,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       '<div class="mcard__row"><span>Phí máy</span><b>' + money(cur.chi_phi) + '</b></div>' +
       '<div class="mcard__row"><span>Phí của mình (thẻ)</span><b class="pos">' + money(cur.loi_nhuan) + '</b></div>' +
       '<div class="mcard__row"><span>🧾 Ghép hoá đơn (' + (cur.hd_so || 0) + ' HĐ)</span><b class="pos">' + money(cur.hd_lai || 0) + '</b></div>' +
+      '<div class="mcard__row"><span>✈️ Vé &amp; KS (' + (cur.dv_nguoi || 0) + ' người)</span><b class="pos">' + money(cur.dv_lai || 0) + '</b></div>' +
       '<div class="mcard__row" style="border-top:1px solid var(--line)"><span><b>Tổng lãi</b></span><b class="pos">' + money(cur.tong_lai || cur.loi_nhuan) + '</b></div>' +
       '<div class="mcard__row muted"><span>' + prevLabel.charAt(0).toUpperCase() + prevLabel.slice(1) + '</span><span>' + money(prev.so_tien) + ' · lãi ' + money(prev.loi_nhuan) + '</span></div>' +
       '</div></div>';
@@ -1161,7 +1205,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     call('pasteNotes', { text: text, year: yr && yr !== S.boot.today.slice(0, 4) ? yr : '', save: save }).then(function (r) {
       btn.disabled = false;
       renderNotes(r);
-      var todo = r.items.filter(function (i) { return /tx|pay|bill/.test(i.kind) && (!i.da_co || i.sua_ngoai || i.sua_pay) && !i.trung && !i.da_luu; }).length;
+      var todo = r.items.filter(function (i) { return /tx|pay|bill|trip/.test(i.kind) && (!i.da_co || i.sua_ngoai || i.sua_pay) && !i.trung && !i.da_luu; }).length;
       $('[data-act=notes-save]').disabled = save ? !r.saved.con_lai : !todo;
       if (save) {
         var sv = r.saved;
@@ -1171,8 +1215,8 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
           return;
         }
         $('[data-act=notes-save]').textContent = 'Lưu vào app';
-        var nErr = r.items.filter(function (i) { return i.loi && /tx|pay|bill/.test(i.kind); }).length;
-        toast('Đã lưu ' + sv.tx + ' giao dịch, ' + sv.pay + ' lần chuyển tiền, ' + sv.bill + ' hoá đơn' + (sv.bo_qua ? ' · bỏ qua ' + sv.bo_qua + ' dòng đã có' : '') + (sv.sua ? ' · sửa lại ' + sv.sua + ' dòng đã lưu trước đây' : '') +
+        var nErr = r.items.filter(function (i) { return i.loi && /tx|pay|bill|trip/.test(i.kind); }).length;
+        toast('Đã lưu ' + sv.tx + ' giao dịch, ' + sv.pay + ' lần chuyển tiền, ' + sv.bill + ' hoá đơn' + (sv.trip ? ', ' + sv.trip + ' vé/KS' : '') + (sv.bo_qua ? ' · bỏ qua ' + sv.bo_qua + ' dòng đã có' : '') + (sv.sua ? ' · sửa lại ' + sv.sua + ' dòng đã lưu trước đây' : '') +
           (nErr ? ' · ⚠ ' + nErr + ' dòng lỗi (xem chữ đỏ trong danh sách)' : ''), !!nErr);
         $('#notes-saved-view').innerHTML = '';
         var ds = r.days.map(function (d) { return d.ngay; }).sort();
@@ -1226,7 +1270,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         '<div>Lãi: ' + chk(d.lai_so, d.lai) + '</div>' +
         (d.tra ? '<div>' + esc(rn()) + ' chuyển: ' + money(d.tra) + (d.con_so != null ? ' · sổ ghi còn ' + money(d.con_so) : '') + '</div>' : '') + '</div>';
     }).join('');
-    var icon = { tx: '💳', pay: '💸', bill: '🧾', skip: '❓', err: '⚠' };
+    var icon = { tx: '💳', pay: '💸', bill: '🧾', trip: '✈️', skip: '❓', err: '⚠' };
     var dayOf = {}; r.days.forEach(function (d) { dayOf[d.ngay] = d; });
     function lech(d) { return d && ((d.hoan_so != null && Math.abs(d.hoan_so - d.hoan) >= 1000) || (d.lai_so != null && Math.abs(d.lai_so - d.lai) >= 1000)); }
     var lastDay = '';
@@ -1241,6 +1285,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       var what = i.kind === 'tx' ? esc(i.dich_vu) + ' · <b>' + esc(i.the) + '</b> · ' + esc(i.ten_khach) + ' · ' + money(i.so_tien) +
           ' · phí ' + pct(i.phi_khach) + ' / máy ' + pct(i.phi_may_text) + ' → hoàn ' + money(i.tien_hoan) + ' · lãi ' + money(i.lai) + (i.ghi_chu ? ' <small class="muted">' + esc(i.ghi_chu) + '</small>' : '')
         : i.kind === 'pay' ? esc(i.loai) + ' ' + money(i.so_tien)
+        : i.kind === 'trip' ? (tripIcon[i.loai] || '') + ' ' + esc(i.loai) + ' · ' + esc(i.ten) + ' · ' + i.so_nguoi + ' × ' + money(i.phi) + ' → lãi ' + money(i.lai) + ' <small class="muted">(vào tab ✈️ Vé &amp; KS)</small>'
         : i.kind === 'bill' && i.lai_tay ? esc(i.loai_hd) + ' · ' + esc(i.a_ten) + ' → lãi ' + money(i.lai) + ' <small class="muted">(vào tab Hoá đơn)</small>'
         : i.kind === 'bill' ? esc(i.loai_hd) + ' của ' + esc(i.a_ten) + ' · ' + money(i.so_tien) + ' · B: ' + esc(i.b_ten) + ' (' + esc(i.vi_b) + ') · A giảm ' + pct(i.phi_a) + ', mình ' + pct(i.phi_minh) + ' → lãi ' + money(i.lai)
         : '<span class="muted">' + esc(i.line) + '</span>';
@@ -1702,6 +1747,135 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     }
   });
 
+  /* ---------- Đặt vé máy bay / tàu / khách sạn ---------- */
+  S.tripMode = 'open';
+  var tripIcon = { 'Vé máy bay': '✈️', 'Vé tàu': '🚆', 'Vé xe': '🚌', 'Khách sạn': '🏨', 'Tour': '🗺️', 'Visa': '🛂', 'Khác': '✨' };
+  function loadTrips() {
+    call('listTrips', { mode: S.tripMode }).then(function (r) {
+      S.trips = r.rows; S.tripFees = r.phi_mac_dinh || {};
+      var st = r.stats;
+      $('#trip-kpis').innerHTML = kpi('Doanh thu tháng này', money(st.thang_nay.dv_lai), 'pos') +
+        kpi('Tháng này', st.thang_nay.dv_so + ' lượt · ' + st.thang_nay.dv_nguoi + ' người') +
+        kpi('Chưa thu tiền', st.chua_thu.dv_so + ' lượt · ' + money(st.chua_thu.dv_lai), st.chua_thu.dv_so ? 'neg' : '') +
+        (st.theo_loai || []).map(function (g) { return kpi((tripIcon[g.name] || '') + ' ' + g.name, g.nguoi + ' người · ' + money(g.lai), 'pos'); }).join('');
+      setCount('#trip-count', st.chua_thu.dv_so);
+      $('#trip-list').innerHTML = r.rows.length ? r.rows.map(function (v) {
+        return '<div class="item ' + (v.trang_thai === 'Đã thu' ? 'item--done' : v.trang_thai === 'Huỷ' ? '' : 'item--due') + '">' +
+          '<div class="item__head"><div><div class="item__name">' + esc(v.ten) + ' ' + quickContact(v.sdt) + '</div>' +
+          '<div class="item__meta">Đặt ' + dmy(v.ngay) + (v.ngay_di ? ' · đi ' + dmy(v.ngay_di) : '') + (v.ghi_chu ? ' · ' + esc(v.ghi_chu) : '') + '</div></div>' +
+          '<span class="badge badge--' + (v.trang_thai === 'Đã thu' ? 'ok' : v.trang_thai === 'Huỷ' ? 'muted' : 'warn') + '">' + esc(v.trang_thai) + '</span></div>' +
+          '<div style="margin-top:6px;font-size:.9rem">' + v.items.map(function (it) {
+            return '<div class="mcard__row"><span>' + (tripIcon[it.loai] || '') + ' ' + esc(it.loai) + (it.mo_ta ? ' <small class="muted">' + esc(it.mo_ta) + '</small>' : '') +
+              '</span><span>' + it.so_nguoi + ' × ' + money(it.phi) + ' = <b class="pos">' + money(it.lai) + '</b></span></div>';
+          }).join('') +
+          (v.tong_tien ? '<div class="mcard__row muted"><span>Tiền vé / phòng khách trả</span><span>' + money(v.tong_tien) + '</span></div>' : '') +
+          '<div class="mcard__row" style="border-top:1px solid var(--line)"><span><b>Doanh thu</b> (' + v.so_nguoi + ' người)</span><b class="pos">' + money(v.doanh_thu) + '</b></div></div>' +
+          '<div class="item__actions">' + (v.trang_thai === 'Chưa thu' ? '<button type="button" class="btn btn--sm" data-tripthu="' + esc(v.id) + '">✔ Đã thu tiền</button>' : '') +
+          '<button type="button" class="btn btn--ghost btn--sm" data-tripedit="' + esc(v.id) + '">Sửa / thêm dịch vụ</button></div></div>';
+      }).join('') : '<div class="empty card">Chưa có lượt đặt nào.</div>';
+    }).catch(fail);
+  }
+  $('#trip-filter').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    S.tripMode = b.dataset.v;
+    $$('#trip-filter button').forEach(function (x) { x.classList.toggle('is-active', x === b); });
+    loadTrips();
+  });
+  var tripForm = $('#trip-form');
+  function tripItemRow(it) {
+    it = it || {};
+    var types = S.boot.tripTypes || ['Vé máy bay', 'Vé tàu', 'Khách sạn', 'Khác'];
+    function lab(t, inner, span) { return '<label style="display:grid;gap:2px;font-size:.75rem;color:var(--muted)' + (span ? ';grid-column:span ' + span : '') + '">' + t + inner + '</label>'; }
+    return '<div class="trip-item" style="display:grid;grid-template-columns:1.3fr .7fr 1fr;gap:6px;padding:8px;margin-bottom:6px;border:1px solid var(--line);border-radius:10px">' +
+      lab('Dịch vụ', '<select data-k="loai">' + types.map(function (t) { return '<option' + (t === (it.loai || 'Vé máy bay') ? ' selected' : '') + '>' + esc(t) + '</option>'; }).join('') + '</select>') +
+      lab('Số người', '<input data-k="so_nguoi" inputmode="numeric" value="' + esc(it.so_nguoi || 1) + '">') +
+      lab('Phí mình / người', '<input data-k="phi" inputmode="decimal" placeholder="VD 50" value="' + esc(it.phi ? amountText(it.phi) : '') + '">') +
+      lab('Chặng / tên KS / số đêm', '<input data-k="mo_ta" placeholder="VD: ĐN – SGN 20/10" value="' + esc(it.mo_ta || '') + '">', 2) +
+      lab('Giá vé / người', '<input data-k="gia" inputmode="decimal" placeholder="không bắt buộc" value="' + esc(it.gia ? amountText(it.gia) : '') + '">') +
+      '<button type="button" class="btn btn--ghost btn--sm" data-act="trip-del-item" style="grid-column:1/-1;justify-self:end">✕ Bỏ dịch vụ này</button></div>';
+  }
+  function tripItems() {
+    return $$('#trip-items .trip-item').map(function (row) {
+      function v(k) { return row.querySelector('[data-k=' + k + ']').value; }
+      return { loai: v('loai'), so_nguoi: Math.max(1, Math.round(num(v('so_nguoi'))) || 1), phi: laiTay(v('phi')), gia: parseAmount(v('gia')), mo_ta: v('mo_ta').trim() };
+    }).filter(function (it) { return it.phi || it.gia || it.mo_ta; });
+  }
+  function updateTrip() {
+    var items = tripItems(), total = 0, ppl = 0;
+    var lines = items.map(function (it) { var l = it.so_nguoi * it.phi; total += l; ppl += it.so_nguoi; return (tripIcon[it.loai] || '') + ' ' + esc(it.loai) + ': ' + it.so_nguoi + ' × ' + money(it.phi) + ' = <b style="display:inline">' + money(l) + '</b>'; });
+    $('#trip-calc').innerHTML = (lines.length ? lines.map(function (l) { return '<div>' + l + '</div>'; }).join('') : '<div class="muted">Thêm dịch vụ và phí mỗi người.</div>') +
+      '<div style="border-top:1px solid var(--line);margin-top:4px;padding-top:4px">💰 <span style="font-weight:700">Doanh thu</span> (' + ppl + ' người) = <span class="pos" style="font-weight:700">' + money(total) + '</span></div>' +
+      '<div class="muted">' + (tripForm.elements.huy.checked ? 'Khách huỷ → không tính doanh thu' : tripForm.elements.ngay_thu.value ? '✅ Đã thu → tính vào doanh thu ngày đặt' : 'Chưa thu tiền → chưa tính vào doanh thu') + '</div>';
+  }
+  function openTrip(v) {
+    tripForm.reset();
+    var f = tripForm.elements;
+    v = v || {};
+    f.id.value = v.id || ''; f.khach_id.value = v.khach_id || '';
+    f.ngay.value = v.ngay || S.boot.today;
+    f.ngay_di.value = v.ngay_di || '';
+    f.ten.value = v.ten || ''; f.sdt.value = v.sdt || '';
+    f.ngay_thu.value = v.id ? (v.ngay_thu || '') : S.boot.today;
+    f.ghi_chu.value = v.ghi_chu || '';
+    f.huy.checked = !!v.huy;
+    var items = v.items && v.items.length ? v.items : [{ loai: 'Vé máy bay', so_nguoi: 1, phi: (S.tripFees || {})['Vé máy bay'] || '' }];
+    $('#trip-items').innerHTML = items.map(tripItemRow).join('');
+    $('#trip-title').textContent = v.id ? '✈️ Sửa / thêm dịch vụ' : '✈️ Đặt vé / khách sạn';
+    $('[data-act=delete-trip]').classList.toggle('hidden', !v.id);
+    updateTrip();
+    $('#trip-modal').classList.remove('hidden');
+  }
+  tripForm.addEventListener('input', function (e) {
+    var f = tripForm.elements;
+    if (e.target.name === 'ten') { var c = S.boot.customers.filter(function (x) { return normName(x.ten) === normName(e.target.value); })[0]; f.khach_id.value = c ? c.id : ''; if (c && c.sdt && !f.sdt.value) f.sdt.value = c.sdt; }
+    if (e.target.name === 'sdt') { var ph = phoneNorm(e.target.value); var c2 = ph.length >= 10 ? S.boot.customers.filter(function (x) { return x.sdt === ph || x.sdt2 === ph; })[0] : null; if (c2) { f.khach_id.value = c2.id; f.ten.value = c2.ten; } }
+    if (e.target.dataset.k === 'loai') {
+      var phi = e.target.closest('.trip-item').querySelector('[data-k=phi]');
+      var def = (S.tripFees || {})[e.target.value];
+      if (def && !phi.value) phi.value = amountText(def);
+    }
+    updateTrip();
+  });
+  tripForm.addEventListener('change', updateTrip);
+  tripForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = tripForm.elements, items = tripItems();
+    if (!f.ten.value.trim() && !f.sdt.value.trim()) return toast('Nhập tên hoặc SĐT khách', true);
+    if (!items.length) return toast('Thêm ít nhất 1 dịch vụ', true);
+    var btn = tripForm.querySelector('[type=submit]'); btn.disabled = true;
+    call('saveTrip', { id: f.id.value, khach_id: f.khach_id.value, ngay: f.ngay.value, ngay_di: f.ngay_di.value, ten: f.ten.value.trim(), sdt: f.sdt.value.trim(),
+      chi_tiet: items, ngay_thu: f.ngay_thu.value, ghi_chu: f.ghi_chu.value, huy: f.huy.checked }).then(function (v) {
+      btn.disabled = false;
+      $('#trip-modal').classList.add('hidden');
+      toast('Đã lưu · ' + v.trang_thai + ' · doanh thu ' + money(v.doanh_thu));
+      reboot().then(function () { if (S.tab === 'trips') loadTrips(); else show('trips'); });
+    }).catch(function (err) { btn.disabled = false; fail(err); });
+  });
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-act=new-trip]')) { openTrip(); return; }
+    if (e.target.closest('[data-act=trip-add-item]')) {
+      var last = $$('#trip-items .trip-item').pop(), loai = 'Khách sạn';
+      if (last && last.querySelector('[data-k=loai]').value === 'Khách sạn') loai = 'Vé máy bay';
+      $('#trip-items').insertAdjacentHTML('beforeend', tripItemRow({ loai: loai, so_nguoi: last ? last.querySelector('[data-k=so_nguoi]').value : 1, phi: (S.tripFees || {})[loai] || '' }));
+      updateTrip(); return;
+    }
+    var del = e.target.closest('[data-act=trip-del-item]');
+    if (del) { del.closest('.trip-item').remove(); if (!$$('#trip-items .trip-item').length) $('#trip-items').innerHTML = tripItemRow({}); updateTrip(); return; }
+    var ed = e.target.closest('[data-tripedit]');
+    if (ed) { openTrip((S.trips || []).filter(function (x) { return x.id === ed.dataset.tripedit; })[0]); return; }
+    var th = e.target.closest('[data-tripthu]');
+    if (th) {
+      var v = (S.trips || []).filter(function (x) { return x.id === th.dataset.tripthu; })[0];
+      if (!v) return;
+      call('saveTrip', Object.assign({}, v, { chi_tiet: v.items, ngay_thu: S.boot.today })).then(function () { toast('Đã thu tiền'); loadTrips(); }).catch(fail);
+      return;
+    }
+    if (e.target.closest('[data-act=delete-trip]')) {
+      if (!confirm('Xóa lượt đặt này?')) return;
+      call('deleteTrip', { id: tripForm.elements.id.value }).then(function () { $('#trip-modal').classList.add('hidden'); toast('Đã xóa'); loadTrips(); }).catch(fail);
+    }
+  });
+
   /* ---------- Ghép hoá đơn ví trả sau ---------- */
   S.billMode = 'open';
   function billBadge(st) {
@@ -1817,7 +1991,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   document.addEventListener('click', function (e) {
     var a = e.target.closest('[data-act=new-bill]');
     if (a) { openBill(); return; }
-    if (e.target.closest('[data-act=new-ticket]')) { openBill({ loai_hd: 'Vé máy bay / tàu xe', a_ck_ngay: S.boot.today }); return; }
+    if (e.target.closest('[data-act=new-ticket]')) { openBill({ loai_hd: 'Khác', a_ck_ngay: S.boot.today }); return; }
     var ed = e.target.closest('[data-billedit]');
     if (ed) { openBill((S.bills || []).filter(function (x) { return x.id === ed.dataset.billedit; })[0]); return; }
     var dn = e.target.closest('[data-billdone]');
@@ -2058,10 +2232,11 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       kpi('Phí của mình', money(t.loi_nhuan), t.loi_nhuan >= 0 ? 'pos' : 'neg') + kpi(rn() + ' hoàn', money(t.tien_hoan)) + kpi('Giao dịch (Đáo / Rút)', t.so_gd + ' (' + t.so_dao + ' / ' + t.so_rut + ')') +
       kpi('Khách mới / từ web', t.khach_moi + ' / ' + t.lead_web) + kpi('Bấm Zalo / Gọi trên web', t.bam_web || 0) +
       kpi('🧾 Hoá đơn ghép (hoàn tất)', (t.hd_so || 0) + ' · ' + short(t.hd_tien || 0)) + kpi('🧾 Lãi hoá đơn', money(t.hd_lai || 0), 'pos') +
+      kpi('✈️ Vé & KS', (t.dv_nguoi || 0) + ' người · ' + money(t.dv_lai || 0), 'pos') +
       kpi('💰 Tổng lãi (thẻ + hoá đơn)', money(t.tong_lai || 0), (t.tong_lai || 0) >= 0 ? 'pos' : 'neg');
     var max = Math.max.apply(null, r.rows.map(function (x) { return x.so_tien; }).concat([1]));
-    $('#rp-table').innerHTML = '<thead><tr><th>Kỳ</th><th class="num">GD (Đáo/Rút)</th><th class="num">Số tiền</th><th class="num">Phí khách</th><th class="num">Phí máy</th><th class="num">Phí của mình</th><th class="num">' + esc(rn()) + ' hoàn</th>' + (r.type === 'day' ? '<th class="num">' + esc(rn()) + ' chuyển</th><th class="num">Còn nợ cuối ngày</th>' : '') + '<th class="num">HĐ ghép</th><th class="num">Lãi HĐ</th><th class="num">Tổng lãi</th><th class="num">Khách mới</th><th class="num">Khách web</th><th class="num">Bấm Zalo/Gọi</th></tr></thead><tbody>' +
-      (r.type === 'day' ? r.rows.filter(function (x) { return x.so_gd || x.hd_so || (x.cn && (x.cn.da_chuyen || x.cn.chot)); }) : r.rows).map(function (x) {
+    $('#rp-table').innerHTML = '<thead><tr><th>Kỳ</th><th class="num">GD (Đáo/Rút)</th><th class="num">Số tiền</th><th class="num">Phí khách</th><th class="num">Phí máy</th><th class="num">Phí của mình</th><th class="num">' + esc(rn()) + ' hoàn</th>' + (r.type === 'day' ? '<th class="num">' + esc(rn()) + ' chuyển</th><th class="num">Còn nợ cuối ngày</th>' : '') + '<th class="num">HĐ ghép</th><th class="num">Lãi HĐ</th><th class="num">Lãi vé/KS</th><th class="num">Tổng lãi</th><th class="num">Khách mới</th><th class="num">Khách web</th><th class="num">Bấm Zalo/Gọi</th></tr></thead><tbody>' +
+      (r.type === 'day' ? r.rows.filter(function (x) { return x.so_gd || x.hd_so || x.dv_so || (x.cn && (x.cn.da_chuyen || x.cn.chot)); }) : r.rows).map(function (x) {
         return '<tr class="click" data-from=""' + x.from + '" data-to="' + x.to + '"><td data-l="Kỳ"><b>' + esc(x.label) + '</b><div class="bar"><i style="width:' + (x.so_tien / max * 100).toFixed(1) + '%"></i></div></td>' +
           '<td data-l="GD (Đáo/Rút)" class="num">' + x.so_gd + ' (' + x.so_dao + '/' + x.so_rut + ')</td>' +
           '<td data-l="Số tiền" class="num">' + money(x.so_tien) + '</td><td data-l="Phí khách" class="num">' + money(x.tien_phi) + '</td>' +
@@ -2070,12 +2245,13 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
           (r.type === 'day' ? '<td data-l="' + esc(rn()) + ' chuyển" class="num">' + (x.cn && x.cn.da_chuyen ? money(x.cn.da_chuyen) : '—') + '</td>' +
             '<td data-l="Còn nợ cuối ngày" class="num"><b class="' + (x.cn && x.cn.so_du < 0 ? 'neg' : '') + '">' + (x.cn ? money(x.cn.so_du) : '') + '</b>' + (x.cn && x.cn.chot ? ' <small class="muted">🔒 chốt</small>' : '') + '</td>' : '') +
           '<td data-l="HĐ ghép" class="num">' + (x.hd_so ? x.hd_so + ' · ' + short(x.hd_tien) : '—') + '</td><td data-l="Lãi HĐ" class="num pos">' + money(x.hd_lai || 0) + '</td>' +
+          '<td data-l="Lãi vé/KS" class="num pos">' + (x.dv_so ? money(x.dv_lai) + ' <small class="muted">' + x.dv_nguoi + ' ng</small>' : '—') + '</td>' +
           '<td data-l="Tổng lãi" class="num"><b class="' + ((x.tong_lai || 0) >= 0 ? 'pos' : 'neg') + '">' + money(x.tong_lai || 0) + '</b></td>' +
           '<td data-l="Khách mới" class="num">' + x.khach_moi + '</td><td data-l="Khách web" class="num">' + x.lead_web + '</td><td data-l="Bấm Zalo/Gọi" class="num">' + (x.bam_web || 0) + '</td></tr>';
       }).join('') + '</tbody><tfoot><tr><td data-l="">Tổng</td><td data-l="GD" class="num">' + t.so_gd + '</td><td data-l="Số tiền" class="num">' + money(t.so_tien) +
       '</td><td data-l="Phí khách" class="num">' + money(t.tien_phi) + '</td><td data-l="Phí máy" class="num">' + money(t.chi_phi) +
       '</td><td data-l="Phí của mình" class="num">' + money(t.loi_nhuan) + '</td><td data-l="' + esc(rn()) + ' hoàn" class="num">' + money(t.tien_hoan) + '</td>' + (r.type === 'day' ? '<td data-l="' + esc(rn()) + ' chuyển" class="num">' + money(r.rows.reduce(function (a, x) { return a + (x.cn ? x.cn.da_chuyen : 0); }, 0)) + '</td><td data-l="Còn nợ cuối tháng" class="num">' + money((r.rows[r.rows.length - 1].cn || {}).so_du || 0) + '</td>' : '') + '<td data-l="HĐ ghép" class="num">' + (t.hd_so || 0) + ' · ' + short(t.hd_tien || 0) +
-      '</td><td data-l="Lãi HĐ" class="num">' + money(t.hd_lai || 0) + '</td><td data-l="Tổng lãi" class="num">' + money(t.tong_lai || 0) + '</td><td data-l="Khách mới" class="num">' + t.khach_moi + '</td><td data-l="Khách web" class="num">' + t.lead_web + '</td><td data-l="Bấm Zalo/Gọi" class="num">' + (t.bam_web || 0) + '</td></tr></tfoot>';
+      '</td><td data-l="Lãi HĐ" class="num">' + money(t.hd_lai || 0) + '</td><td data-l="Lãi vé/KS" class="num">' + money(t.dv_lai || 0) + '</td><td data-l="Tổng lãi" class="num">' + money(t.tong_lai || 0) + '</td><td data-l="Khách mới" class="num">' + t.khach_moi + '</td><td data-l="Khách web" class="num">' + t.lead_web + '</td><td data-l="Bấm Zalo/Gọi" class="num">' + (t.bam_web || 0) + '</td></tr></tfoot>';
     function group(id, list) {
       $(id).innerHTML = '<thead><tr><th></th><th class="num">GD</th><th class="num">Số tiền</th><th class="num">Phí của mình</th></tr></thead><tbody>' +
         (list.length ? list.map(function (g) {
@@ -2090,6 +2266,10 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         }).join('') : '<tr><td colspan="4" class="empty">—</td></tr>') + '</tbody>';
     }
     bgroup('#rp-billtype', r.byBillType); bgroup('#rp-wallet', r.byWallet);
+    $('#rp-triptype').innerHTML = '<thead><tr><th></th><th class="num">Lượt</th><th class="num">Người</th><th class="num">Lãi</th></tr></thead><tbody>' +
+      (r.byTripType && r.byTripType.length ? r.byTripType.map(function (g) {
+        return '<tr><td>' + (tripIcon[g.name] || '') + ' ' + esc(g.name) + '</td><td class="num">' + g.so + '</td><td class="num">' + g.nguoi + '</td><td class="num pos">' + money(g.lai) + '</td></tr>';
+      }).join('') : '<tr><td colspan="4" class="empty">—</td></tr>') + '</tbody>';
   }
   $('#rp-table').addEventListener('click', function (e) {
     var tr = e.target.closest('[data-from]'); if (!tr) return;
@@ -2223,7 +2403,11 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       '<h3>🪪 Căn cước công dân <span class="hint">· bấm vào ảnh để xem to, bấm lần nữa để đóng</span></h3><div class="docs">' + slot('CCCD mặt trước') + slot('CCCD mặt sau') + '</div>' +
       '<div class="row row--between" style="margin-top:14px"><h3 style="margin:0">💳 Thẻ của khách (' + d.cards.length + ')</h3>' +
       '<button type="button" class="btn btn--sm" data-card="new">+ Thêm thẻ</button></div>' +
-      (cards || '<p class="muted">Chưa có thẻ. Ghi giao dịch là thẻ tự được thêm, hoặc bấm + Thêm thẻ.</p>');
+      (cards || '<p class="muted">Chưa có thẻ. Ghi giao dịch là thẻ tự được thêm, hoặc bấm + Thêm thẻ.</p>') +
+      (d.trips && d.trips.length ? '<h3 style="margin-top:14px">✈️ Vé &amp; khách sạn đã đặt (' + d.trips.length + ')</h3>' + d.trips.slice(0, 10).map(function (v) {
+        return '<div class="mcard__row"><span>' + dmy(v.ngay) + ' · ' + v.items.map(function (it) { return (tripIcon[it.loai] || '') + ' ' + esc(it.loai) + ' ×' + it.so_nguoi; }).join(', ') +
+          '</span><b class="' + (v.trang_thai === 'Đã thu' ? 'pos' : 'neg') + '">' + money(v.doanh_thu) + (v.trang_thai === 'Đã thu' ? '' : ' · ' + esc(v.trang_thai)) + '</b></div>';
+      }).join('') : '');
   }
   function refreshCustDocs() {
     var id = custForm.elements.id.value;
