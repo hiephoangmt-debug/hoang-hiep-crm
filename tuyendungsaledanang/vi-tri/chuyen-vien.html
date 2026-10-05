@@ -178,6 +178,30 @@ img{max-width:100%}
 .gal figure:hover img{transform:scale(1.06)}
 .gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:24px 12px 10px;background:linear-gradient(transparent,rgba(21,36,90,.9));color:#fff;font-weight:700;font-size:13px}
 @media(max-width:799px){.gal .big{min-height:210px}}
+.layers3{display:grid;gap:14px;margin-top:32px}
+@media(min-width:800px){.layers3{grid-template-columns:repeat(3,1fr)}}
+.layers3 div{background:#fff;border-radius:20px;padding:24px;box-shadow:0 10px 28px rgba(27,45,107,.08);position:relative;overflow:hidden}
+.layers3 div:after{content:"";position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:rgba(255,107,26,.08)}
+.layers3 .no{display:inline-block;background:var(--navy);color:#fff;font-size:12px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:999px}
+.layers3 b{display:block;font-size:21px;font-weight:800;color:var(--navy);margin-top:12px;line-height:1.3}
+.layers3 b em{font-style:normal;color:var(--orange)}
+.layers3 p{color:var(--muted);margin-top:8px;font-size:15px}
+.who3{display:grid;gap:12px;margin-top:18px}
+@media(min-width:800px){.who3{grid-template-columns:repeat(3,1fr)}}
+.who3 div{background:var(--navy);color:#fff;border-radius:18px;padding:20px}
+.who3 i{font-style:normal;font-size:26px}
+.who3 b{display:block;font-size:17px;margin-top:6px}
+.who3 span{display:block;color:#C9D3EA;font-size:14.5px;margin-top:4px}
+.award{margin-top:28px;background:#fff;border-radius:22px;padding:20px 0;box-shadow:0 10px 28px rgba(27,45,107,.08);overflow:hidden}
+.award-h{padding:0 20px 14px}
+.award-h b{display:block;font-size:20px;font-weight:800;color:var(--navy)}
+.award-h b em{font-style:normal;color:var(--orange)}
+.award-h span{font-size:13px;color:var(--muted)}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee{overflow:hidden}
+.track{display:flex;gap:12px;width:max-content;animation:marq 60s linear infinite}
+.track img{height:220px;width:auto;border-radius:14px;display:block}
+.marquee:hover .track{animation-play-state:paused}
 /* form */
 .form{background:#fff;color:var(--ink);border-radius:16px;border-top:6px solid var(--orange);padding:26px 22px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
 .form h2{font-size:24px;font-weight:900;color:var(--navy);line-height:1.25}
@@ -327,7 +351,7 @@ img{max-width:100%}
 .envgrid span{color:#C9D3EA;font-size:15px}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "JobPosting", "title": "Chuyên viên kinh doanh bất động sản", "description": "<p>Tuyển chuyên viên kinh doanh BĐS Đà Nẵng: hỗ trợ marketing 100%, lead đều, thưởng marketing đến 10tr/giao dịch, 03 tháng xét lương, lên Pro Sales.</p><ul><li>Tư vấn sản phẩm, dự án BĐS tại Đà Nẵng</li><li>Khai thác, chăm sóc khách từ lead marketing và mạng lưới cá nhân</li><li>Giới thiệu thông tin, chính sách, phương án phù hợp từng khách</li><li>Dẫn khách tham quan dự án, nhà mẫu</li><li>Hỗ trợ khách hoàn thiện quy trình giao dịch</li><li>Đã có kinh nghiệm Sale BĐS hoặc Sale ngành khác (ô tô, bảo hiểm, ngân hàng, tài chính…)</li><li>Muốn sản phẩm lớn hơn, nguồn khách đều hơn, thu nhập cao hơn</li><li>Làm việc theo mục tiêu, chủ động, kỷ luật</li><li>Muốn lên Pro Sales hoặc Trưởng nhóm</li></ul>", "datePosted": "2026-10-05", "validThrough": "2026-12-31T23:59", "employmentType": "FULL_TIME", "hiringOrganization": {"@type": "Organization", "name": "Tuyển Sale Đà Nẵng", "sameAs": "https://www.tuyendungsaledanang.com/"}, "jobLocation": {"@type": "Place", "address": {"@type": "PostalAddress", "streetAddress": "23–25 Nguyễn Phước Lan", "addressLocality": "Đà Nẵng", "addressRegion": "Đà Nẵng", "addressCountry": "VN"}}, "directApply": true, "url": "https://www.tuyendungsaledanang.com/tuyen-chuyen-vien-kinh-doanh-bds-da-nang"}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Marketing hỗ trợ đến 100% nghĩa là gì?", "acceptedAnswer": {"@type": "Answer", "text": "Chi phí marketing được hỗ trợ đến 100% và giải ngân ngay khi đề xuất. Điều kiện cụ thể trao đổi khi tư vấn."}}, {"@type": "Question", "name": "Thưởng marketing tính thế nào?", "acceptedAnswer": {"@type": "Answer", "text": "Thưởng marketing đến 10tr/giao dịch, cộng hoa hồng và thưởng nóng."}}, {"@type": "Question", "name": "Pro Sales là gì?", "acceptedAnswer": {"@type": "Answer", "text": "Cấp bậc dành cho Sale có kết quả nổi bật, lương 7–10 triệu/tháng, cộng hoa hồng và thưởng theo giao dịch."}}, {"@type": "Question", "name": "Bao lâu được xét tăng lương?", "acceptedAnswer": {"@type": "Answer", "text": "03 tháng xét tăng lương và cấp bậc, kèm thưởng đánh giá cấp bậc."}}, {"@type": "Question", "name": "Có hợp đồng lao động và bảo hiểm không?", "acceptedAnswer": {"@type": "Answer", "text": "Có. Hợp đồng lao động, BHYT và BHXH đầy đủ."}}, {"@type": "Question", "name": "Có cần nộp CV không?", "acceptedAnswer": {"@type": "Answer", "text": "Không bắt buộc. Có CV thì dán link ở form cuối trang hoặc gửi về email hiephoangmt@gmail.com."}}, {"@type": "Question", "name": "Làm việc ở đâu?", "acceptedAnswer": {"@type": "Answer", "text": "Văn phòng 23–25 Nguyễn Phước Lan, Đà Nẵng."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Marketing hỗ trợ 50–100% nghĩa là gì?", "acceptedAnswer": {"@type": "Answer", "text": "Chi phí marketing được hỗ trợ 50–100% và giải ngân ngay khi đề xuất. Điều kiện cụ thể trao đổi khi tư vấn."}}, {"@type": "Question", "name": "Thưởng marketing tính thế nào?", "acceptedAnswer": {"@type": "Answer", "text": "Thưởng marketing đến 10tr/giao dịch, cộng hoa hồng và thưởng nóng."}}, {"@type": "Question", "name": "Pro Sales là gì?", "acceptedAnswer": {"@type": "Answer", "text": "Cấp bậc dành cho Sale có kết quả nổi bật, lương 7–10 triệu/tháng, cộng hoa hồng và thưởng theo giao dịch."}}, {"@type": "Question", "name": "Bao lâu được xét tăng lương?", "acceptedAnswer": {"@type": "Answer", "text": "03 tháng xét tăng lương và cấp bậc, kèm thưởng đánh giá cấp bậc."}}, {"@type": "Question", "name": "Có hợp đồng lao động và bảo hiểm không?", "acceptedAnswer": {"@type": "Answer", "text": "Có. Hợp đồng lao động, BHYT và BHXH đầy đủ."}}, {"@type": "Question", "name": "Có cần nộp CV không?", "acceptedAnswer": {"@type": "Answer", "text": "Không bắt buộc. Có CV thì dán link ở form cuối trang hoặc gửi về email hiephoangmt@gmail.com."}}, {"@type": "Question", "name": "Làm việc ở đâu?", "acceptedAnswer": {"@type": "Answer", "text": "Văn phòng 23–25 Nguyễn Phước Lan, Đà Nẵng."}}]}</script>
 <link rel="canonical" href="https://www.tuyendungsaledanang.com/tuyen-chuyen-vien-kinh-doanh-bds-da-nang">
 <style>.crumb{font-size:13px;color:#C9D3EA;margin-bottom:12px}.crumb a{color:#FFB98F;text-decoration:none}
 .role-lv{display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:13px;padding:3px 12px;border-radius:999px;margin-bottom:10px}
@@ -384,11 +408,11 @@ img{max-width:100%}
 <section class="sec" id="vi-sao-thich">
   <div class="wrap">
     <div class="split">
-      <img class="illu" src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/cv-do-nghe.png" alt="Chuyên viên kinh doanh ở trung tâm, xung quanh là lead đều mỗi ngày, ngân sách marketing hỗ trợ đến 100%, giỏ hàng lớn và thưởng marketing đến 10 triệu mỗi giao dịch" loading="lazy">
+      <img class="illu" src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/cv-do-nghe.png" alt="Chuyên viên kinh doanh ở trung tâm, xung quanh là lead đều mỗi ngày, ngân sách marketing hỗ trợ 50–100%, giỏ hàng lớn và thưởng marketing đến 10 triệu mỗi giao dịch" loading="lazy">
       <div>
         <span class="eyebrow">Vì sao Sale có kinh nghiệm chọn ở đây</span>
         <h2 class="h2" style="font-size:32px">Kỹ năng bạn đã có. <em>Đồ nghề chúng tôi lo.</em></h2>
-        <div class="reasons"><div><i>📈</i><b>Ngân sách marketing đến 100%</b><span>Giải ngân ngay khi đề xuất. Chạy quảng cáo không lo vốn.</span></div><div><i>📲</i><b>Lead đều mỗi ngày</b><span>Marketing đầu tổng phân lead cho cả đội, bạn tập trung tư vấn và chốt.</span></div><div><i>🏙️</i><b>Giỏ hàng dễ tạo niềm tin</b><span>Dự án Sun Group, Vinhomes, Đạt Phương: khách đã biết tên chủ đầu tư.</span></div><div><i>💰</i><b>Mỗi giao dịch đáng giá hơn</b><span>Hoa hồng + thưởng marketing đến 10 triệu + thưởng nóng.</span></div></div>
+        <div class="reasons"><div><i>📈</i><b>Ngân sách marketing 50–100%</b><span>Giải ngân ngay khi đề xuất. Chạy quảng cáo không lo vốn.</span></div><div><i>📲</i><b>Lead đều mỗi ngày</b><span>Marketing đầu tổng phân lead cho cả đội, bạn tập trung tư vấn và chốt.</span></div><div><i>🏙️</i><b>Giỏ hàng dễ tạo niềm tin</b><span>Dự án Sun Group, Vinhomes, Đạt Phương: khách đã biết tên chủ đầu tư.</span></div><div><i>💰</i><b>Mỗi giao dịch đáng giá hơn</b><span>Hoa hồng + thưởng marketing đến 10 triệu + thưởng nóng.</span></div></div>
         <a class="btn" href="#dang-ky" style="margin-top:22px">Ứng tuyển Chuyên viên →</a>
       </div>
     </div>
@@ -460,12 +484,37 @@ img{max-width:100%}
         </ol>
       </div>
     </div>
-    <div class="grid3"><div class="card"><div class="n">100%</div><h3>Marketing hỗ trợ đến 100%</h3><p>Giải ngân ngay khi đề xuất, chạy quảng cáo không lo vốn.</p></div><div class="card"><div class="n">LEAD</div><h3>Marketing đầu tổng phân lead</h3><p>Có khách đều để tư vấn mỗi ngày.</p></div><div class="card"><div class="n">10TR</div><h3>Thưởng marketing đến 10tr/GD</h3><p>Cộng hoa hồng và thưởng nóng mỗi giao dịch.</p></div><div class="card"><div class="n">03</div><h3>Tháng xét lương & cấp bậc</h3><p>Kèm thưởng đánh giá cấp bậc, không phải chờ cả năm.</p></div><div class="card"><div class="n">7–10TR</div><h3>Đặc biệt: Pro Sales</h3><p>Lương 7–10 triệu/tháng khi đạt Pro Sales, cộng hoa hồng và thưởng.</p></div><div class="card"><div class="n">HĐLĐ</div><h3>Hợp đồng & bảo hiểm</h3><p>BHYT, BHXH đầy đủ, chuyên nghiệp, minh bạch.</p></div></div>
+    <div class="grid3"><div class="card"><div class="n">100%</div><h3>Marketing hỗ trợ 50–100%</h3><p>Giải ngân ngay khi đề xuất, chạy quảng cáo không lo vốn.</p></div><div class="card"><div class="n">LEAD</div><h3>Marketing đầu tổng phân lead</h3><p>Có khách đều để tư vấn mỗi ngày.</p></div><div class="card"><div class="n">10TR</div><h3>Thưởng marketing đến 10tr/GD</h3><p>Cộng hoa hồng và thưởng nóng mỗi giao dịch.</p></div><div class="card"><div class="n">03</div><h3>Tháng xét lương & cấp bậc</h3><p>Kèm thưởng đánh giá cấp bậc, không phải chờ cả năm.</p></div><div class="card"><div class="n">7–10TR</div><h3>Đặc biệt: Pro Sales</h3><p>Lương 7–10 triệu/tháng khi đạt Pro Sales, cộng hoa hồng và thưởng.</p></div><div class="card"><div class="n">HĐLĐ</div><h3>Hợp đồng & bảo hiểm</h3><p>BHYT, BHXH đầy đủ, chuyên nghiệp, minh bạch.</p></div></div>
     
     <div class="cta-row"><a class="btn" href="#dang-ky">Ứng tuyển Chuyên viên →</a></div>
   </div>
 </section>
 
+
+<section class="sec soft" id="mkt-3-lop">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Marketing 3 lớp</span>
+      <h2 class="h2">Không biết chạy quảng cáo? <em>Không sao cả.</em></h2>
+      <p class="lead">Ba lớp hỗ trợ marketing để Sale nào cũng có khách: từ người chưa từng chạy quảng cáo đến người đã quen tay.</p>
+    </div>
+    <div class="layers3">
+      <div><span class="no">Lớp 1</span><b>Hỗ trợ chi phí <em>50–100%</em></b><p>Bạn tự chạy quảng cáo, công ty chi 50–100% ngân sách, giải ngân ngay khi đề xuất.</p></div>
+      <div><span class="no">Lớp 2</span><b>Data tổng <em>chạy xuống</em></b><p>Marketing đầu tổng chạy quảng cáo và phân lead xuống cho cả đội, người mới cũng có khách.</p></div>
+      <div><span class="no">Lớp 3</span><b>Giao dịch là <em>có thưởng MKT</em></b><p>Chốt được giao dịch từ nguồn marketing, bạn nhận thêm thưởng marketing, cộng hoa hồng.</p></div>
+    </div>
+    <div class="who3">
+      <div><i>🌱</i><b>Bạn chưa biết gì về marketing?</b><span>Được đào tạo từ đầu, có mẫu bài, mẫu quảng cáo sẵn. Bạn chỉ việc làm theo.</span></div>
+      <div><i>🧭</i><b>Bạn biết nhưng chưa tự tin chạy?</b><span>Có người hướng dẫn trực tiếp: dựng chiến dịch, đọc số liệu, tối ưu từng ngày.</span></div>
+      <div><i>💸</i><b>Bạn thiếu chi phí chạy quảng cáo?</b><span>Công ty hỗ trợ 50–100% ngân sách, bạn không phải bỏ tiền túi.</span></div>
+    </div>
+    <div class="award">
+      <div class="award-h"><b>Trao thưởng marketing <em>là chuyện mỗi tháng</em></b><span>Hình thật tại văn phòng 23–25 Nguyễn Phước Lan</span></div>
+      <div class="marquee"><div class="track"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-1.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-2.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-3.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-4.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-5.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-6.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-7.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-8.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-9.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-10.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-11.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-1.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-2.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-3.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-4.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-5.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-6.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-7.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-8.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-9.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-10.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-11.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"></div></div>
+    </div>
+    <div class="cta-row"><a class="btn" href="#dang-ky">Tôi muốn có khách từ marketing →</a></div>
+  </div>
+</section>
 
 <section class="sec navy" id="moi-truong">
   <div class="wrap">
@@ -569,7 +618,7 @@ img{max-width:100%}
       <span class="eyebrow">Lộ trình của bạn</span>
       <h2 class="h2">Chuyên viên → <em>Pro Sales → Quản lý</em></h2>
     </div>
-    <div class="journey"><div><b>Ngày đầu</b><h3>Nắm sản phẩm</h3><p>Đào tạo dự án, chính sách, bắt nhịp nhanh với kinh nghiệm sẵn có.</p></div><div><b>Hằng ngày</b><h3>Nhận lead, chốt deal</h3><p>Marketing đầu tổng mạnh, ngân sách hỗ trợ đến 100%.</p></div><div><b>Mỗi 03 tháng</b><h3>Xét lương & cấp bậc</h3><p>Kết quả tốt thì tăng lương, tăng cấp.</p></div><div><b>Bước tiếp</b><h3>Pro Sales / Trưởng nhóm</h3><p>Pro Sales lương 7–10 triệu/tháng, hoặc dẫn dắt đội nhóm.</p></div></div>
+    <div class="journey"><div><b>Ngày đầu</b><h3>Nắm sản phẩm</h3><p>Đào tạo dự án, chính sách, bắt nhịp nhanh với kinh nghiệm sẵn có.</p></div><div><b>Hằng ngày</b><h3>Nhận lead, chốt deal</h3><p>Marketing đầu tổng mạnh, ngân sách hỗ trợ 50–100%.</p></div><div><b>Mỗi 03 tháng</b><h3>Xét lương & cấp bậc</h3><p>Kết quả tốt thì tăng lương, tăng cấp.</p></div><div><b>Bước tiếp</b><h3>Pro Sales / Trưởng nhóm</h3><p>Pro Sales lương 7–10 triệu/tháng, hoặc dẫn dắt đội nhóm.</p></div></div>
     <p class="note-s center">* Lộ trình mục tiêu để bạn hình dung. Tốc độ thực tế phụ thuộc vào năng lực và kết quả của từng người.</p>
     <div class="cta-row"><a class="btn" href="#dang-ky">Ứng tuyển Chuyên viên →</a></div>
   </div>
@@ -652,7 +701,7 @@ img{max-width:100%}
       <h2 class="h2">Câu hỏi <em>thường gặp</em></h2>
     </div>
     <div class="faq">
-      <details><summary>Marketing hỗ trợ đến 100% nghĩa là gì?</summary><p>Chi phí marketing được hỗ trợ đến 100% và giải ngân ngay khi đề xuất. Điều kiện cụ thể trao đổi khi tư vấn.</p></details>
+      <details><summary>Marketing hỗ trợ 50–100% nghĩa là gì?</summary><p>Chi phí marketing được hỗ trợ 50–100% và giải ngân ngay khi đề xuất. Điều kiện cụ thể trao đổi khi tư vấn.</p></details>
       <details><summary>Thưởng marketing tính thế nào?</summary><p>Thưởng marketing đến 10tr/giao dịch, cộng hoa hồng và thưởng nóng.</p></details>
       <details><summary>Pro Sales là gì?</summary><p>Cấp bậc dành cho Sale có kết quả nổi bật, lương 7–10 triệu/tháng, cộng hoa hồng và thưởng theo giao dịch.</p></details>
       <details><summary>Bao lâu được xét tăng lương?</summary><p>03 tháng xét tăng lương và cấp bậc, kèm thưởng đánh giá cấp bậc.</p></details>

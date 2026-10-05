@@ -43,6 +43,7 @@ GAL = re.search(r'<div class="gal">.*?</div>', TEAM, re.S).group(0)
 FIGS = re.findall(r'<figure.*?</figure>', GAL, re.S)
 TEAM_IMG = FIGS[0].replace('<figure class="big">', '<figure class="big" style="grid-column:1/-1">')
 PICS = [f.replace(' class="big"', '') for f in FIGS[1:]]
+MKT3 = re.search(r'<section class="sec soft" id="mkt-3-lop">.*?</section>', main, re.S).group(0)
 ENV = f"""<section class="sec navy" id="moi-truong">
   <div class="wrap">
     <div class="center">
@@ -234,7 +235,7 @@ def page(p):
 </section>
 """
     order = [hero, love, roles, sections['su-that'] if p.get('su_that') else '', p.get('extra', ''), policy,
-             ENV, sections['du-an'], journey, day, sections['leader'], final, faq]
+             MKT3, ENV, sections['du-an'], journey, day, sections['leader'], final, faq]
     body = '<body>\n\n' + header + '\n\n' + '\n\n'.join(x for x in order if x) + '\n\n' + footer + '\n\n' + sticky
     html = h + '</head>\n' + body + tail
     html = html.replace('<section class="sec" id="cong-viec">', '<section class="sec" id="cong-viec">', 1)
@@ -248,7 +249,7 @@ COMMON_FAQ_END = [
 PAGES = {
 'nhan-vien': dict(key='nv', position='Nhân viên kinh doanh BĐS', crumb='Nhân viên kinh doanh BĐS',
   title='Tuyển Nhân Viên Kinh Doanh BĐS Đà Nẵng – Nhận SV Mới Ra Trường | Tuyển Sale Đà Nẵng',
-  desc='Tuyển nhân viên kinh doanh BĐS tại Đà Nẵng, nhận sinh viên mới ra trường, không cần kinh nghiệm. Đào tạo từ đầu, phân bổ lead, marketing hỗ trợ đến 100%, thưởng marketing đến 10tr/GD, HĐLĐ & BHXH.',
+  desc='Tuyển nhân viên kinh doanh BĐS tại Đà Nẵng, nhận sinh viên mới ra trường, không cần kinh nghiệm. Đào tạo từ đầu, phân bổ lead, marketing hỗ trợ 50–100%, thưởng marketing đến 10tr/GD, HĐLĐ & BHXH.',
   badge='Không cần kinh nghiệm · Nhận SV mới ra trường',
   h1='Nhân viên kinh doanh BĐS.<br><em>Bắt đầu từ con số 0.</em>',
   sub='Chưa từng bán BĐS? Không sao. Đào tạo bài bản, có lead sẵn, có người kèm từ ngày đầu.',
@@ -259,14 +260,14 @@ PAGES = {
   panels=[dict(eyebrow='Công việc', h='Bạn sẽ làm gì?', btn='Tôi làm được →', lists=[('', ['Tìm hiểu sản phẩm các dự án BĐS tại Đà Nẵng', 'Tiếp nhận, chăm sóc khách từ lead được phân bổ và nguồn cá nhân', 'Tư vấn thông tin, chính sách phù hợp nhu cầu khách', 'Dẫn khách tham quan dự án, nhà mẫu', 'Hỗ trợ khách hoàn thiện thủ tục giao dịch'])]),
           dict(eyebrow='Phù hợp với bạn nếu', h='Bạn có khát vọng, <em>chúng tôi dạy phần còn lại.</em>', btn='Giữ chỗ phỏng vấn →', lists=[('', ['Sinh viên mới ra trường, người muốn chuyển nghề sang kinh doanh', 'Thích giao tiếp, chịu khó, muốn thu nhập theo năng lực', 'Sẵn sàng học hỏi, làm việc theo mục tiêu', 'Muốn phát triển lên Chuyên viên, Trưởng nhóm'])])],
   pol_eyebrow='Chính sách dành cho bạn', pol_h2='Con số rõ ràng, <em>không hứa suông</em>', tower=True,
-  cards=[('100%', 'Marketing hỗ trợ đến 100%', 'Giải ngân ngay khi đề xuất, có ngân sách tiếp cận khách.'), ('LEAD', 'Marketing đầu tổng phân lead', 'Người mới cũng có khách thật để tư vấn.'), ('10TR', 'Thưởng marketing đến 10tr/GD', 'Cộng hoa hồng và thưởng nóng mỗi giao dịch.'), ('03', 'Tháng xét lương & cấp bậc', 'Thăng tiến bằng kết quả, không bằng thâm niên.'), ('7–10TR', 'Lên Pro Sales', 'Pro Sales lương 7–10 triệu/tháng, cộng hoa hồng và thưởng.'), ('HĐLĐ', 'Hợp đồng & bảo hiểm', 'BHYT, BHXH đầy đủ, yên tâm làm lâu dài.')],
+  cards=[('100%', 'Marketing hỗ trợ 50–100%', 'Giải ngân ngay khi đề xuất, có ngân sách tiếp cận khách.'), ('LEAD', 'Marketing đầu tổng phân lead', 'Người mới cũng có khách thật để tư vấn.'), ('10TR', 'Thưởng marketing đến 10tr/GD', 'Cộng hoa hồng và thưởng nóng mỗi giao dịch.'), ('03', 'Tháng xét lương & cấp bậc', 'Thăng tiến bằng kết quả, không bằng thâm niên.'), ('7–10TR', 'Lên Pro Sales', 'Pro Sales lương 7–10 triệu/tháng, cộng hoa hồng và thưởng.'), ('HĐLĐ', 'Hợp đồng & bảo hiểm', 'BHYT, BHXH đầy đủ, yên tâm làm lâu dài.')],
   steps_h2='Từ người mới <em>đến người dẫn đội</em>',
   steps=[('Bước 1', 'Đào tạo', 'Sản phẩm, tìm khách, tư vấn, xử lý từ chối, chốt giao dịch.'), ('Bước 2', 'Ra trận có người kèm', 'Được phân bổ lead, quản lý và đồng đội cùng dẫn khách.'), ('Sau 03 tháng', 'Xét lương & cấp bậc', 'Kết quả tốt thì tăng lương, lên Chuyên viên.'), ('Tiếp theo', 'Pro Sales / Trưởng nhóm', 'Pro Sales lương 7–10 triệu/tháng, hoặc dẫn dắt đội nhóm.')],
-  faq=[('Chưa có kinh nghiệm có ứng tuyển được không?', 'Được. Vị trí Nhân viên kinh doanh không yêu cầu kinh nghiệm, bạn được đào tạo từ đầu.'), ('Sinh viên mới ra trường có được nhận không?', 'Có. Ngành nào cũng được, bạn được đào tạo, có người kèm và được phân bổ lead.'), ('Người mới có khách để tư vấn không?', 'Có. Marketing phân bổ lead cho toàn đội và hỗ trợ chi phí marketing đến 100%.'), ('Thu nhập gồm những gì?', 'Lương, hoa hồng, thưởng marketing đến 10tr/giao dịch và thưởng nóng. Chi tiết trao đổi khi tư vấn 1:1.')] + COMMON_FAQ_END,
+  faq=[('Chưa có kinh nghiệm có ứng tuyển được không?', 'Được. Vị trí Nhân viên kinh doanh không yêu cầu kinh nghiệm, bạn được đào tạo từ đầu.'), ('Sinh viên mới ra trường có được nhận không?', 'Có. Ngành nào cũng được, bạn được đào tạo, có người kèm và được phân bổ lead.'), ('Người mới có khách để tư vấn không?', 'Có. Marketing phân bổ lead cho toàn đội và hỗ trợ chi phí marketing 50–100%.'), ('Thu nhập gồm những gì?', 'Lương, hoa hồng, thưởng marketing đến 10tr/giao dịch và thưởng nóng. Chi tiết trao đổi khi tư vấn 1:1.')] + COMMON_FAQ_END,
   su_that=True, grad=True, timeline=True),
 'chuyen-vien': dict(key='cv', position='Chuyên viên kinh doanh BĐS', crumb='Chuyên viên kinh doanh BĐS',
   title='Tuyển Chuyên Viên Kinh Doanh BĐS Đà Nẵng | Tuyển Sale Đà Nẵng',
-  desc='Tuyển chuyên viên kinh doanh BĐS tại Đà Nẵng. Marketing hỗ trợ đến 100%, phân bổ lead, thưởng marketing đến 10tr/GD + hoa hồng + thưởng nóng, 03 tháng xét lương, lên Pro Sales lương 7–10 triệu/tháng.',
+  desc='Tuyển chuyên viên kinh doanh BĐS tại Đà Nẵng. Marketing hỗ trợ 50–100%, phân bổ lead, thưởng marketing đến 10tr/GD + hoa hồng + thưởng nóng, 03 tháng xét lương, lên Pro Sales lương 7–10 triệu/tháng.',
   badge='Có kinh nghiệm Sale là lợi thế',
   h1='Chuyên viên kinh doanh BĐS.<br><em>Kỹ năng của bạn đáng giá hơn.</em>',
   sub='Bạn đã biết tìm khách, tư vấn, chốt. Ở đây có marketing mạnh, lead đều và chính sách đủ hấp dẫn để kỹ năng ra tiền.',
@@ -277,14 +278,14 @@ PAGES = {
   panels=[dict(eyebrow='Công việc', h='Mô tả công việc', btn='Tôi làm được →', lists=[('', ['Tư vấn sản phẩm, dự án BĐS tại Đà Nẵng', 'Khai thác, chăm sóc khách từ lead marketing và mạng lưới cá nhân', 'Giới thiệu thông tin, chính sách, phương án phù hợp từng khách', 'Dẫn khách tham quan dự án, nhà mẫu', 'Hỗ trợ khách hoàn thiện quy trình giao dịch'])]),
           dict(eyebrow='Phù hợp với bạn nếu', h='Bạn đã chạm trần? <em>Đổi sân chơi.</em>', btn='Giữ chỗ phỏng vấn →', lists=[('', ['Đã có kinh nghiệm Sale BĐS hoặc Sale ngành khác (ô tô, bảo hiểm, ngân hàng, tài chính…)', 'Muốn sản phẩm lớn hơn, nguồn khách đều hơn, thu nhập cao hơn', 'Làm việc theo mục tiêu, chủ động, kỷ luật', 'Muốn lên Pro Sales hoặc Trưởng nhóm'])])],
   pol_eyebrow='Chính sách Chuyên viên kinh doanh', pol_h2='Con số rõ ràng, <em>không hứa suông</em>', tower=True,
-  cards=[('100%', 'Marketing hỗ trợ đến 100%', 'Giải ngân ngay khi đề xuất, chạy quảng cáo không lo vốn.'), ('LEAD', 'Marketing đầu tổng phân lead', 'Có khách đều để tư vấn mỗi ngày.'), ('10TR', 'Thưởng marketing đến 10tr/GD', 'Cộng hoa hồng và thưởng nóng mỗi giao dịch.'), ('03', 'Tháng xét lương & cấp bậc', 'Kèm thưởng đánh giá cấp bậc, không phải chờ cả năm.'), ('7–10TR', 'Đặc biệt: Pro Sales', 'Lương 7–10 triệu/tháng khi đạt Pro Sales, cộng hoa hồng và thưởng.'), ('HĐLĐ', 'Hợp đồng & bảo hiểm', 'BHYT, BHXH đầy đủ, chuyên nghiệp, minh bạch.')],
+  cards=[('100%', 'Marketing hỗ trợ 50–100%', 'Giải ngân ngay khi đề xuất, chạy quảng cáo không lo vốn.'), ('LEAD', 'Marketing đầu tổng phân lead', 'Có khách đều để tư vấn mỗi ngày.'), ('10TR', 'Thưởng marketing đến 10tr/GD', 'Cộng hoa hồng và thưởng nóng mỗi giao dịch.'), ('03', 'Tháng xét lương & cấp bậc', 'Kèm thưởng đánh giá cấp bậc, không phải chờ cả năm.'), ('7–10TR', 'Đặc biệt: Pro Sales', 'Lương 7–10 triệu/tháng khi đạt Pro Sales, cộng hoa hồng và thưởng.'), ('HĐLĐ', 'Hợp đồng & bảo hiểm', 'BHYT, BHXH đầy đủ, chuyên nghiệp, minh bạch.')],
   steps_h2='Chuyên viên → <em>Pro Sales → Quản lý</em>',
-  steps=[('Ngày đầu', 'Nắm sản phẩm', 'Đào tạo dự án, chính sách, bắt nhịp nhanh với kinh nghiệm sẵn có.'), ('Hằng ngày', 'Nhận lead, chốt deal', 'Marketing đầu tổng mạnh, ngân sách hỗ trợ đến 100%.'), ('Mỗi 03 tháng', 'Xét lương & cấp bậc', 'Kết quả tốt thì tăng lương, tăng cấp.'), ('Bước tiếp', 'Pro Sales / Trưởng nhóm', 'Pro Sales lương 7–10 triệu/tháng, hoặc dẫn dắt đội nhóm.')],
-  faq=[('Marketing hỗ trợ đến 100% nghĩa là gì?', 'Chi phí marketing được hỗ trợ đến 100% và giải ngân ngay khi đề xuất. Điều kiện cụ thể trao đổi khi tư vấn.'), ('Thưởng marketing tính thế nào?', 'Thưởng marketing đến 10tr/giao dịch, cộng hoa hồng và thưởng nóng.'), ('Pro Sales là gì?', 'Cấp bậc dành cho Sale có kết quả nổi bật, lương 7–10 triệu/tháng, cộng hoa hồng và thưởng theo giao dịch.'), ('Bao lâu được xét tăng lương?', '03 tháng xét tăng lương và cấp bậc, kèm thưởng đánh giá cấp bậc.')] + COMMON_FAQ_END,
+  steps=[('Ngày đầu', 'Nắm sản phẩm', 'Đào tạo dự án, chính sách, bắt nhịp nhanh với kinh nghiệm sẵn có.'), ('Hằng ngày', 'Nhận lead, chốt deal', 'Marketing đầu tổng mạnh, ngân sách hỗ trợ 50–100%.'), ('Mỗi 03 tháng', 'Xét lương & cấp bậc', 'Kết quả tốt thì tăng lương, tăng cấp.'), ('Bước tiếp', 'Pro Sales / Trưởng nhóm', 'Pro Sales lương 7–10 triệu/tháng, hoặc dẫn dắt đội nhóm.')],
+  faq=[('Marketing hỗ trợ 50–100% nghĩa là gì?', 'Chi phí marketing được hỗ trợ 50–100% và giải ngân ngay khi đề xuất. Điều kiện cụ thể trao đổi khi tư vấn.'), ('Thưởng marketing tính thế nào?', 'Thưởng marketing đến 10tr/giao dịch, cộng hoa hồng và thưởng nóng.'), ('Pro Sales là gì?', 'Cấp bậc dành cho Sale có kết quả nổi bật, lương 7–10 triệu/tháng, cộng hoa hồng và thưởng theo giao dịch.'), ('Bao lâu được xét tăng lương?', '03 tháng xét tăng lương và cấp bậc, kèm thưởng đánh giá cấp bậc.')] + COMMON_FAQ_END,
   su_that=True, timeline=True),
 'pro-sales': dict(key='pro', position='Chuyên gia kinh doanh (Pro Sales)', crumb='Chuyên gia kinh doanh (Pro Sales)',
   title='Tuyển Pro Sales BĐS Đà Nẵng – Lương 7–10 Triệu/Tháng | Tuyển Sale Đà Nẵng',
-  desc='Tuyển chuyên gia kinh doanh BĐS (Pro Sales) tại Đà Nẵng: lương 7–10 triệu/tháng, cộng hoa hồng, thưởng marketing đến 10tr/GD, thưởng nóng, marketing hỗ trợ đến 100%.',
+  desc='Tuyển chuyên gia kinh doanh BĐS (Pro Sales) tại Đà Nẵng: lương 7–10 triệu/tháng, cộng hoa hồng, thưởng marketing đến 10tr/GD, thưởng nóng, marketing hỗ trợ 50–100%.',
   badge='Dành cho Sale bản lĩnh',
   h1='Pro Sales: lương <em class="nw">7–10 triệu</em><br>chưa tính hoa hồng.',
   sub='Bạn đã chứng minh mình bán được hàng. Ở đây Pro Sales có lương tháng, marketing mạnh và thưởng theo từng giao dịch.',
@@ -296,14 +297,14 @@ PAGES = {
           dict(eyebrow='Phù hợp với bạn nếu', h='Bạn tự tin <em>với khách giá trị lớn.</em>', btn='Giữ chỗ phỏng vấn →', lists=[('', ['Đã có kinh nghiệm Sale BĐS và giao dịch thực tế', 'Hoặc Sale ngành khác có thành tích nổi bật', 'Tự tin tư vấn, đàm phán với khách giá trị lớn', 'Muốn thu nhập tương xứng và hướng tới quản lý'])])],
   pol_eyebrow='Chính sách Pro Sales', pol_h2='Thu nhập Pro Sales <em>không chỉ đến từ hoa hồng</em>', tower=True,
   pol_note='Tiêu chí xét Pro Sales cụ thể được trao đổi trực tiếp khi tư vấn 1:1.',
-  cards=[('7–10TR', 'Lương mỗi tháng', 'Lương 7–10 triệu/tháng dành cho Pro Sales.'), ('10TR', 'Thưởng marketing/GD', 'Đến 10tr mỗi giao dịch, cộng hoa hồng và thưởng nóng.'), ('100%', 'Marketing hỗ trợ', 'Hỗ trợ đến 100%, giải ngân ngay khi đề xuất.'), ('LEAD', 'Marketing đầu tổng', 'Phân bổ lead đều cho đội, Pro Sales tập trung chốt.'), ('03', 'Tháng xét cấp bậc', 'Xét tăng lương và cấp bậc, kèm thưởng đánh giá.'), ('HĐLĐ', 'Hợp đồng & bảo hiểm', 'BHYT, BHXH đầy đủ.')],
+  cards=[('7–10TR', 'Lương mỗi tháng', 'Lương 7–10 triệu/tháng dành cho Pro Sales.'), ('10TR', 'Thưởng marketing/GD', 'Đến 10tr mỗi giao dịch, cộng hoa hồng và thưởng nóng.'), ('100%', 'Marketing hỗ trợ', 'Hỗ trợ 50–100%, giải ngân ngay khi đề xuất.'), ('LEAD', 'Marketing đầu tổng', 'Phân bổ lead đều cho đội, Pro Sales tập trung chốt.'), ('03', 'Tháng xét cấp bậc', 'Xét tăng lương và cấp bậc, kèm thưởng đánh giá.'), ('HĐLĐ', 'Hợp đồng & bảo hiểm', 'BHYT, BHXH đầy đủ.')],
   steps_h2='Pro Sales → <em>Trưởng nhóm → Trưởng phòng</em>',
   steps=[('Tuần đầu', 'Nắm giỏ hàng', 'Đào tạo sản phẩm, chính sách các dự án đang phân phối.'), ('Hằng ngày', 'Lead & chốt', 'Nhận lead từ marketing đầu tổng, tập trung tư vấn và chốt.'), ('Mỗi 03 tháng', 'Xét cấp bậc', 'Đánh giá kết quả, tăng lương và cấp bậc.'), ('Bước tiếp', 'Dẫn đội', 'Lên Trưởng nhóm, xây đội của riêng bạn.')],
   faq=[('Lương Pro Sales bao nhiêu?', 'Lương 7–10 triệu/tháng, cộng thêm hoa hồng, thưởng marketing đến 10tr/giao dịch và thưởng nóng.'), ('Điều kiện để là Pro Sales?', 'Tiêu chí cụ thể được trao đổi trực tiếp, dựa trên kinh nghiệm và kết quả kinh doanh của bạn.'), ('Tôi đang làm ở nơi khác, thông tin có được bảo mật?', 'Có. Mọi trao đổi đều 1:1 và bảo mật.')] + COMMON_FAQ_END,
   su_that=True, timeline=True),
 'truong-nhom': dict(key='tn', position='', crumb='Trưởng nhóm / Trưởng phòng kinh doanh',
   title='Tuyển Trưởng Nhóm, Trưởng Phòng Kinh Doanh BĐS Đà Nẵng – Trưởng Phòng 10–20 Triệu | Tuyển Sale Đà Nẵng',
-  desc='Tuyển Trưởng nhóm, Trưởng phòng kinh doanh BĐS tại Đà Nẵng. Trưởng phòng lương 10–20 triệu/tháng. Marketing đầu tổng mạnh, phân bổ lead cho toàn đội, marketing hỗ trợ đến 100%, HĐLĐ & BHXH đầy đủ.',
+  desc='Tuyển Trưởng nhóm, Trưởng phòng kinh doanh BĐS tại Đà Nẵng. Trưởng phòng lương 10–20 triệu/tháng. Marketing đầu tổng mạnh, phân bổ lead cho toàn đội, marketing hỗ trợ 50–100%, HĐLĐ & BHXH đầy đủ.',
   badge='Vị trí quản lý · Trưởng nhóm / Trưởng phòng',
   h1='Đừng chỉ bán.<br><em>Hãy dẫn đội.</em>',
   sub='Bạn đã bán giỏi. Bước tiếp theo là xây một đội cùng bán giỏi. Chúng tôi trao sản phẩm, marketing và hệ thống.',
@@ -315,10 +316,10 @@ PAGES = {
           dict(lv='Cấp 04 · Trưởng phòng · Lương 10–20 triệu', h='Trưởng phòng kinh doanh', btn='Ứng tuyển Trưởng phòng →', lists=[('Công việc', ['Xây dựng, vận hành phòng kinh doanh, quản lý các Trưởng nhóm', 'Hoạch định chiến lược bán hàng, phối hợp marketing triển khai dự án', 'Tuyển dụng, đào tạo, phát triển đội ngũ', 'Chịu trách nhiệm doanh số và hiệu quả của phòng']), ('Phù hợp nếu', ['Đã có kinh nghiệm quản lý đội Sale BĐS', 'Có tư duy chiến lược, muốn phát triển lên cấp Giám đốc'])])],
   pol_eyebrow='Hệ thống phía sau bạn', pol_h2='Quản lý giỏi cần <em>một nền tảng đủ mạnh</em>',
   pol_note='Chế độ chi tiết cho Trưởng nhóm được trao đổi trực tiếp khi tư vấn 1:1.',
-  cards=[('10–20TR', 'Lương Trưởng phòng', 'Lương 10–20 triệu/tháng, cộng thu nhập theo kết quả của phòng.'), ('LEAD', 'Marketing đầu tổng mạnh', 'Phân bổ lead cho toàn đội, đội của bạn luôn có khách để tư vấn.'), ('100%', 'Marketing hỗ trợ', 'Ngân sách marketing hỗ trợ đến 100%, giải ngân ngay khi đề xuất.'), ('7–10TR', 'Pro Sales trong đội', 'Sale giỏi của bạn có lương 7–10 triệu/tháng, dễ giữ người, dễ tạo động lực.'), ('10TR', 'Thưởng marketing/GD', 'Cộng hoa hồng và thưởng nóng, động lực cho cả đội.'), ('03', 'Tháng xét cấp bậc', 'Đánh giá định kỳ, lộ trình rõ ràng cho đội ngũ.')],
+  cards=[('10–20TR', 'Lương Trưởng phòng', 'Lương 10–20 triệu/tháng, cộng thu nhập theo kết quả của phòng.'), ('LEAD', 'Marketing đầu tổng mạnh', 'Phân bổ lead cho toàn đội, đội của bạn luôn có khách để tư vấn.'), ('100%', 'Marketing hỗ trợ', 'Ngân sách marketing hỗ trợ 50–100%, giải ngân ngay khi đề xuất.'), ('7–10TR', 'Pro Sales trong đội', 'Sale giỏi của bạn có lương 7–10 triệu/tháng, dễ giữ người, dễ tạo động lực.'), ('10TR', 'Thưởng marketing/GD', 'Cộng hoa hồng và thưởng nóng, động lực cho cả đội.'), ('03', 'Tháng xét cấp bậc', 'Đánh giá định kỳ, lộ trình rõ ràng cho đội ngũ.')],
   steps_h2='Từ dẫn nhóm <em>đến dẫn khối kinh doanh</em>',
   steps=[('Bước 1', 'Nhận đội', 'Nắm sản phẩm, hệ thống, nhận và xây dựng nhân sự.'), ('Hằng ngày', 'Dẫn đội ra trận', 'Đội nhận lead từ marketing đầu tổng, bạn kèm và cùng chốt.'), ('Mỗi 03 tháng', 'Đánh giá cấp bậc', 'Kết quả của đội là thước đo thăng tiến.'), ('Tiếp theo', 'Trưởng phòng → Giám đốc', 'Mở rộng quy mô, dẫn dắt khối kinh doanh.')],
-  faq=[('Chưa từng quản lý có ứng tuyển Trưởng nhóm được không?', 'Có thể, nếu bạn có kết quả Sale tốt và muốn dẫn đội. Chúng tôi trao đổi 1:1 để tìm lộ trình phù hợp.'), ('Đội của tôi lấy khách từ đâu?', 'Marketing đầu tổng mạnh, phân bổ lead cho toàn đội, kèm ngân sách marketing hỗ trợ đến 100%.'), ('Thu nhập của quản lý thế nào?', 'Trưởng phòng lương 10–20 triệu/tháng. Chế độ chi tiết cho Trưởng nhóm được trao đổi trực tiếp, tương xứng với quy mô và kết quả của đội.'), ('Thông tin ứng tuyển có được bảo mật?', 'Có. Mọi trao đổi đều 1:1 và bảo mật tuyệt đối.')] + COMMON_FAQ_END,
+  faq=[('Chưa từng quản lý có ứng tuyển Trưởng nhóm được không?', 'Có thể, nếu bạn có kết quả Sale tốt và muốn dẫn đội. Chúng tôi trao đổi 1:1 để tìm lộ trình phù hợp.'), ('Đội của tôi lấy khách từ đâu?', 'Marketing đầu tổng mạnh, phân bổ lead cho toàn đội, kèm ngân sách marketing hỗ trợ 50–100%.'), ('Thu nhập của quản lý thế nào?', 'Trưởng phòng lương 10–20 triệu/tháng. Chế độ chi tiết cho Trưởng nhóm được trao đổi trực tiếp, tương xứng với quy mô và kết quả của đội.'), ('Thông tin ứng tuyển có được bảo mật?', 'Có. Mọi trao đổi đều 1:1 và bảo mật tuyệt đối.')] + COMMON_FAQ_END,
   su_that=True),
 }
 COMPARE = """<section class="sec dark" id="so-sanh">
@@ -358,10 +359,10 @@ PAGES['moi-ra-truong'] = dict(key='sv', position='Sale mới ra trường', crum
           dict(eyebrow='Bạn hợp nếu', h='Bạn có 3 thứ này, <em>phần còn lại chúng tôi dạy.</em>', btn='Giữ chỗ phỏng vấn →', lists=[('', ['Thích nói chuyện, không ngại gặp người lạ', 'Muốn thu nhập theo năng lực, không theo thâm niên', 'Chịu khó: gọi điện, đi dự án, học sản phẩm mỗi ngày'])])],
   extra=COMPARE,
   pol_eyebrow='Chính sách dành cho bạn', pol_h2='Con số rõ ràng, <em>không hứa suông</em>', tower=True,
-  cards=[('100%', 'Marketing hỗ trợ đến 100%', 'Giải ngân ngay khi đề xuất, không bỏ tiền túi chạy quảng cáo.'), ('LEAD', 'Có khách ngay từ đầu', 'Marketing đầu tổng phân lead cho cả đội, kể cả người mới.'), ('10TR', 'Thưởng marketing đến 10tr/GD', 'Cộng hoa hồng và thưởng nóng mỗi giao dịch.'), ('03', 'Tháng xét lương & cấp bậc', 'Thăng tiến bằng kết quả, không bằng thâm niên.'), ('7–10TR', 'Lên Pro Sales', 'Pro Sales lương 7–10 triệu/tháng, cộng hoa hồng và thưởng.'), ('HĐLĐ', 'Hợp đồng & bảo hiểm', 'BHYT, BHXH đầy đủ ngay từ đầu.')],
+  cards=[('100%', 'Marketing hỗ trợ 50–100%', 'Giải ngân ngay khi đề xuất, không bỏ tiền túi chạy quảng cáo.'), ('LEAD', 'Có khách ngay từ đầu', 'Marketing đầu tổng phân lead cho cả đội, kể cả người mới.'), ('10TR', 'Thưởng marketing đến 10tr/GD', 'Cộng hoa hồng và thưởng nóng mỗi giao dịch.'), ('03', 'Tháng xét lương & cấp bậc', 'Thăng tiến bằng kết quả, không bằng thâm niên.'), ('7–10TR', 'Lên Pro Sales', 'Pro Sales lương 7–10 triệu/tháng, cộng hoa hồng và thưởng.'), ('HĐLĐ', 'Hợp đồng & bảo hiểm', 'BHYT, BHXH đầy đủ ngay từ đầu.')],
   steps_h2='12 tháng đầu sau khi <em>cầm bằng</em>',
   steps=[('Tháng 1', 'Học & ra trận', 'Nắm sản phẩm, đi dự án, nhận lead, có người kèm từng cuộc gọi.'), ('Tháng 2–3', 'Giao dịch đầu tay', 'Chốt deal đầu tiên, nhận hoa hồng cộng thưởng marketing đến 10tr.'), ('Tháng 3', 'Xét lương & cấp bậc', 'Kết quả tốt thì tăng lương, lên cấp.'), ('Tháng 4–12', 'Pro Sales / Trưởng nhóm', 'Pro Sales lương 7–10 triệu/tháng, hoặc dẫn dắt đội của riêng bạn.')],
-  faq=[('Không học ngành kinh tế có làm được không?', 'Được. Ngành nào cũng được, kiến thức sản phẩm và kỹ năng bán hàng đều được đào tạo từ đầu.'), ('Sắp tốt nghiệp, chưa có bằng có ứng tuyển được không?', 'Bạn cứ để lại thông tin. Hoàng Hiệp sẽ gọi lại trao đổi trực tiếp về thời gian bắt đầu phù hợp.'), ('Người mới có khách để tư vấn không?', 'Có. Marketing phân bổ lead cho toàn đội và hỗ trợ chi phí marketing đến 100%.'), ('Thu nhập gồm những gì?', 'Lương, hoa hồng, thưởng marketing đến 10tr/giao dịch và thưởng nóng. Chi tiết trao đổi khi tư vấn 1:1.'), ('Nghề Sale có áp lực không?', 'Có. Có ngày gọi nhiều mà chưa có khách. Nhưng bạn có lead sẵn, có người kèm và không phải đi một mình.')] + COMMON_FAQ_END,
+  faq=[('Không học ngành kinh tế có làm được không?', 'Được. Ngành nào cũng được, kiến thức sản phẩm và kỹ năng bán hàng đều được đào tạo từ đầu.'), ('Sắp tốt nghiệp, chưa có bằng có ứng tuyển được không?', 'Bạn cứ để lại thông tin. Hoàng Hiệp sẽ gọi lại trao đổi trực tiếp về thời gian bắt đầu phù hợp.'), ('Người mới có khách để tư vấn không?', 'Có. Marketing phân bổ lead cho toàn đội và hỗ trợ chi phí marketing 50–100%.'), ('Thu nhập gồm những gì?', 'Lương, hoa hồng, thưởng marketing đến 10tr/giao dịch và thưởng nóng. Chi tiết trao đổi khi tư vấn 1:1.'), ('Nghề Sale có áp lực không?', 'Có. Có ngày gọi nhiều mà chưa có khách. Nhưng bạn có lead sẵn, có người kèm và không phải đi một mình.')] + COMMON_FAQ_END,
   su_that=True, timeline=True)
 
 ROLE = {
@@ -377,9 +378,9 @@ ROLE = {
   truth=('Tháng đầu sẽ có lúc bỡ ngỡ.', 'Đó là bình thường. Bạn được đào tạo, có người kèm và có khách thật để luyện tập. Việc của bạn là học nhanh và không bỏ cuộc.'),
   phone=True),
 'chuyen-vien': dict(
-  illu=('cv-do-nghe.png', 'Chuyên viên kinh doanh ở trung tâm, xung quanh là lead đều mỗi ngày, ngân sách marketing hỗ trợ đến 100%, giỏ hàng lớn và thưởng marketing đến 10 triệu mỗi giao dịch'),
+  illu=('cv-do-nghe.png', 'Chuyên viên kinh doanh ở trung tâm, xung quanh là lead đều mỗi ngày, ngân sách marketing hỗ trợ 50–100%, giỏ hàng lớn và thưởng marketing đến 10 triệu mỗi giao dịch'),
   love_eyebrow='Vì sao Sale có kinh nghiệm chọn ở đây', love_h2='Kỹ năng bạn đã có. <em>Đồ nghề chúng tôi lo.</em>',
-  love=[('📈', 'Ngân sách marketing đến 100%', 'Giải ngân ngay khi đề xuất. Chạy quảng cáo không lo vốn.'),
+  love=[('📈', 'Ngân sách marketing 50–100%', 'Giải ngân ngay khi đề xuất. Chạy quảng cáo không lo vốn.'),
         ('📲', 'Lead đều mỗi ngày', 'Marketing đầu tổng phân lead cho cả đội, bạn tập trung tư vấn và chốt.'),
         ('🏙️', 'Giỏ hàng dễ tạo niềm tin', 'Dự án Sun Group, Vinhomes, Đạt Phương: khách đã biết tên chủ đầu tư.'),
         ('💰', 'Mỗi giao dịch đáng giá hơn', 'Hoa hồng + thưởng marketing đến 10 triệu + thưởng nóng.')],
@@ -402,7 +403,7 @@ ROLE = {
   illu=('tn-so-do.png', 'Sơ đồ đội: Trưởng phòng lương 10–20 triệu, các Trưởng nhóm và Sale, Marketing đầu tổng phân lead cho cả đội'),
   love_eyebrow='Vì sao quản lý chọn ở đây', love_h2='Bạn dẫn đội. <em>Hệ thống lo nguồn khách.</em>',
   love=[('💼', 'Trưởng phòng lương 10–20 triệu', 'Lương tháng tương xứng với vai trò xây và vận hành phòng.'),
-        ('📲', 'Đội luôn có khách', 'Marketing đầu tổng phân lead cho cả đội, kèm ngân sách hỗ trợ đến 100%.'),
+        ('📲', 'Đội luôn có khách', 'Marketing đầu tổng phân lead cho cả đội, kèm ngân sách hỗ trợ 50–100%.'),
         ('🧲', 'Dễ giữ người giỏi', 'Pro Sales trong đội có lương 7–10 triệu/tháng, tạo động lực ở lại.'),
         ('🪜', 'Lộ trình lên Giám đốc', 'Trưởng nhóm → Trưởng phòng → Giám đốc, thăng tiến bằng kết quả của đội.')],
   day_h2='Một ngày của <em>người dẫn đội</em>',

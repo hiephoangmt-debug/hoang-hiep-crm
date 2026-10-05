@@ -178,6 +178,30 @@ img{max-width:100%}
 .gal figure:hover img{transform:scale(1.06)}
 .gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:24px 12px 10px;background:linear-gradient(transparent,rgba(21,36,90,.9));color:#fff;font-weight:700;font-size:13px}
 @media(max-width:799px){.gal .big{min-height:210px}}
+.layers3{display:grid;gap:14px;margin-top:32px}
+@media(min-width:800px){.layers3{grid-template-columns:repeat(3,1fr)}}
+.layers3 div{background:#fff;border-radius:20px;padding:24px;box-shadow:0 10px 28px rgba(27,45,107,.08);position:relative;overflow:hidden}
+.layers3 div:after{content:"";position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:rgba(255,107,26,.08)}
+.layers3 .no{display:inline-block;background:var(--navy);color:#fff;font-size:12px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:999px}
+.layers3 b{display:block;font-size:21px;font-weight:800;color:var(--navy);margin-top:12px;line-height:1.3}
+.layers3 b em{font-style:normal;color:var(--orange)}
+.layers3 p{color:var(--muted);margin-top:8px;font-size:15px}
+.who3{display:grid;gap:12px;margin-top:18px}
+@media(min-width:800px){.who3{grid-template-columns:repeat(3,1fr)}}
+.who3 div{background:var(--navy);color:#fff;border-radius:18px;padding:20px}
+.who3 i{font-style:normal;font-size:26px}
+.who3 b{display:block;font-size:17px;margin-top:6px}
+.who3 span{display:block;color:#C9D3EA;font-size:14.5px;margin-top:4px}
+.award{margin-top:28px;background:#fff;border-radius:22px;padding:20px 0;box-shadow:0 10px 28px rgba(27,45,107,.08);overflow:hidden}
+.award-h{padding:0 20px 14px}
+.award-h b{display:block;font-size:20px;font-weight:800;color:var(--navy)}
+.award-h b em{font-style:normal;color:var(--orange)}
+.award-h span{font-size:13px;color:var(--muted)}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee{overflow:hidden}
+.track{display:flex;gap:12px;width:max-content;animation:marq 60s linear infinite}
+.track img{height:220px;width:auto;border-radius:14px;display:block}
+.marquee:hover .track{animation-play-state:paused}
 /* form */
 .form{background:#fff;color:var(--ink);border-radius:16px;border-top:6px solid var(--orange);padding:26px 22px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
 .form h2{font-size:24px;font-weight:900;color:var(--navy);line-height:1.25}
@@ -327,7 +351,7 @@ img{max-width:100%}
 .envgrid span{color:#C9D3EA;font-size:15px}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "JobPosting", "title": "Nhân viên kinh doanh bất động sản", "description": "<p>Tuyển nhân viên kinh doanh BĐS Đà Nẵng, nhận SV mới ra trường. Đào tạo từ đầu, có lead sẵn, có người kèm, HĐLĐ & BHXH. Ứng tuyển trong 30 giây.</p><ul><li>Tìm hiểu sản phẩm các dự án BĐS tại Đà Nẵng</li><li>Tiếp nhận, chăm sóc khách từ lead được phân bổ và nguồn cá nhân</li><li>Tư vấn thông tin, chính sách phù hợp nhu cầu khách</li><li>Dẫn khách tham quan dự án, nhà mẫu</li><li>Hỗ trợ khách hoàn thiện thủ tục giao dịch</li><li>Sinh viên mới ra trường, người muốn chuyển nghề sang kinh doanh</li><li>Thích giao tiếp, chịu khó, muốn thu nhập theo năng lực</li><li>Sẵn sàng học hỏi, làm việc theo mục tiêu</li><li>Muốn phát triển lên Chuyên viên, Trưởng nhóm</li></ul>", "datePosted": "2026-10-05", "validThrough": "2026-12-31T23:59", "employmentType": "FULL_TIME", "hiringOrganization": {"@type": "Organization", "name": "Tuyển Sale Đà Nẵng", "sameAs": "https://www.tuyendungsaledanang.com/"}, "jobLocation": {"@type": "Place", "address": {"@type": "PostalAddress", "streetAddress": "23–25 Nguyễn Phước Lan", "addressLocality": "Đà Nẵng", "addressRegion": "Đà Nẵng", "addressCountry": "VN"}}, "directApply": true, "url": "https://www.tuyendungsaledanang.com/tuyen-nhan-vien-kinh-doanh-bds-da-nang"}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Chưa có kinh nghiệm có ứng tuyển được không?", "acceptedAnswer": {"@type": "Answer", "text": "Được. Vị trí Nhân viên kinh doanh không yêu cầu kinh nghiệm, bạn được đào tạo từ đầu."}}, {"@type": "Question", "name": "Sinh viên mới ra trường có được nhận không?", "acceptedAnswer": {"@type": "Answer", "text": "Có. Ngành nào cũng được, bạn được đào tạo, có người kèm và được phân bổ lead."}}, {"@type": "Question", "name": "Người mới có khách để tư vấn không?", "acceptedAnswer": {"@type": "Answer", "text": "Có. Marketing phân bổ lead cho toàn đội và hỗ trợ chi phí marketing đến 100%."}}, {"@type": "Question", "name": "Thu nhập gồm những gì?", "acceptedAnswer": {"@type": "Answer", "text": "Lương, hoa hồng, thưởng marketing đến 10tr/giao dịch và thưởng nóng. Chi tiết trao đổi khi tư vấn 1:1."}}, {"@type": "Question", "name": "Có hợp đồng lao động và bảo hiểm không?", "acceptedAnswer": {"@type": "Answer", "text": "Có. Hợp đồng lao động, BHYT và BHXH đầy đủ."}}, {"@type": "Question", "name": "Có cần nộp CV không?", "acceptedAnswer": {"@type": "Answer", "text": "Không bắt buộc. Có CV thì dán link ở form cuối trang hoặc gửi về email hiephoangmt@gmail.com."}}, {"@type": "Question", "name": "Làm việc ở đâu?", "acceptedAnswer": {"@type": "Answer", "text": "Văn phòng 23–25 Nguyễn Phước Lan, Đà Nẵng."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Chưa có kinh nghiệm có ứng tuyển được không?", "acceptedAnswer": {"@type": "Answer", "text": "Được. Vị trí Nhân viên kinh doanh không yêu cầu kinh nghiệm, bạn được đào tạo từ đầu."}}, {"@type": "Question", "name": "Sinh viên mới ra trường có được nhận không?", "acceptedAnswer": {"@type": "Answer", "text": "Có. Ngành nào cũng được, bạn được đào tạo, có người kèm và được phân bổ lead."}}, {"@type": "Question", "name": "Người mới có khách để tư vấn không?", "acceptedAnswer": {"@type": "Answer", "text": "Có. Marketing phân bổ lead cho toàn đội và hỗ trợ chi phí marketing 50–100%."}}, {"@type": "Question", "name": "Thu nhập gồm những gì?", "acceptedAnswer": {"@type": "Answer", "text": "Lương, hoa hồng, thưởng marketing đến 10tr/giao dịch và thưởng nóng. Chi tiết trao đổi khi tư vấn 1:1."}}, {"@type": "Question", "name": "Có hợp đồng lao động và bảo hiểm không?", "acceptedAnswer": {"@type": "Answer", "text": "Có. Hợp đồng lao động, BHYT và BHXH đầy đủ."}}, {"@type": "Question", "name": "Có cần nộp CV không?", "acceptedAnswer": {"@type": "Answer", "text": "Không bắt buộc. Có CV thì dán link ở form cuối trang hoặc gửi về email hiephoangmt@gmail.com."}}, {"@type": "Question", "name": "Làm việc ở đâu?", "acceptedAnswer": {"@type": "Answer", "text": "Văn phòng 23–25 Nguyễn Phước Lan, Đà Nẵng."}}]}</script>
 <link rel="canonical" href="https://www.tuyendungsaledanang.com/tuyen-nhan-vien-kinh-doanh-bds-da-nang">
 <style>.crumb{font-size:13px;color:#C9D3EA;margin-bottom:12px}.crumb a{color:#FFB98F;text-decoration:none}
 .role-lv{display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:13px;padding:3px 12px;border-radius:999px;margin-bottom:10px}
@@ -460,12 +484,37 @@ img{max-width:100%}
         </ol>
       </div>
     </div>
-    <div class="grid3"><div class="card"><div class="n">100%</div><h3>Marketing hỗ trợ đến 100%</h3><p>Giải ngân ngay khi đề xuất, có ngân sách tiếp cận khách.</p></div><div class="card"><div class="n">LEAD</div><h3>Marketing đầu tổng phân lead</h3><p>Người mới cũng có khách thật để tư vấn.</p></div><div class="card"><div class="n">10TR</div><h3>Thưởng marketing đến 10tr/GD</h3><p>Cộng hoa hồng và thưởng nóng mỗi giao dịch.</p></div><div class="card"><div class="n">03</div><h3>Tháng xét lương & cấp bậc</h3><p>Thăng tiến bằng kết quả, không bằng thâm niên.</p></div><div class="card"><div class="n">7–10TR</div><h3>Lên Pro Sales</h3><p>Pro Sales lương 7–10 triệu/tháng, cộng hoa hồng và thưởng.</p></div><div class="card"><div class="n">HĐLĐ</div><h3>Hợp đồng & bảo hiểm</h3><p>BHYT, BHXH đầy đủ, yên tâm làm lâu dài.</p></div></div>
+    <div class="grid3"><div class="card"><div class="n">100%</div><h3>Marketing hỗ trợ 50–100%</h3><p>Giải ngân ngay khi đề xuất, có ngân sách tiếp cận khách.</p></div><div class="card"><div class="n">LEAD</div><h3>Marketing đầu tổng phân lead</h3><p>Người mới cũng có khách thật để tư vấn.</p></div><div class="card"><div class="n">10TR</div><h3>Thưởng marketing đến 10tr/GD</h3><p>Cộng hoa hồng và thưởng nóng mỗi giao dịch.</p></div><div class="card"><div class="n">03</div><h3>Tháng xét lương & cấp bậc</h3><p>Thăng tiến bằng kết quả, không bằng thâm niên.</p></div><div class="card"><div class="n">7–10TR</div><h3>Lên Pro Sales</h3><p>Pro Sales lương 7–10 triệu/tháng, cộng hoa hồng và thưởng.</p></div><div class="card"><div class="n">HĐLĐ</div><h3>Hợp đồng & bảo hiểm</h3><p>BHYT, BHXH đầy đủ, yên tâm làm lâu dài.</p></div></div>
     
     <div class="cta-row"><a class="btn" href="#dang-ky">Ứng tuyển Nhân viên KD →</a></div>
   </div>
 </section>
 
+
+<section class="sec soft" id="mkt-3-lop">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Marketing 3 lớp</span>
+      <h2 class="h2">Không biết chạy quảng cáo? <em>Không sao cả.</em></h2>
+      <p class="lead">Ba lớp hỗ trợ marketing để Sale nào cũng có khách: từ người chưa từng chạy quảng cáo đến người đã quen tay.</p>
+    </div>
+    <div class="layers3">
+      <div><span class="no">Lớp 1</span><b>Hỗ trợ chi phí <em>50–100%</em></b><p>Bạn tự chạy quảng cáo, công ty chi 50–100% ngân sách, giải ngân ngay khi đề xuất.</p></div>
+      <div><span class="no">Lớp 2</span><b>Data tổng <em>chạy xuống</em></b><p>Marketing đầu tổng chạy quảng cáo và phân lead xuống cho cả đội, người mới cũng có khách.</p></div>
+      <div><span class="no">Lớp 3</span><b>Giao dịch là <em>có thưởng MKT</em></b><p>Chốt được giao dịch từ nguồn marketing, bạn nhận thêm thưởng marketing, cộng hoa hồng.</p></div>
+    </div>
+    <div class="who3">
+      <div><i>🌱</i><b>Bạn chưa biết gì về marketing?</b><span>Được đào tạo từ đầu, có mẫu bài, mẫu quảng cáo sẵn. Bạn chỉ việc làm theo.</span></div>
+      <div><i>🧭</i><b>Bạn biết nhưng chưa tự tin chạy?</b><span>Có người hướng dẫn trực tiếp: dựng chiến dịch, đọc số liệu, tối ưu từng ngày.</span></div>
+      <div><i>💸</i><b>Bạn thiếu chi phí chạy quảng cáo?</b><span>Công ty hỗ trợ 50–100% ngân sách, bạn không phải bỏ tiền túi.</span></div>
+    </div>
+    <div class="award">
+      <div class="award-h"><b>Trao thưởng marketing <em>là chuyện mỗi tháng</em></b><span>Hình thật tại văn phòng 23–25 Nguyễn Phước Lan</span></div>
+      <div class="marquee"><div class="track"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-1.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-2.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-3.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-4.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-5.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-6.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-7.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-8.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-9.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-10.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-11.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-1.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-2.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-3.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-4.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-5.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-6.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-7.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-8.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-9.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-10.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-11.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"></div></div>
+    </div>
+    <div class="cta-row"><a class="btn" href="#dang-ky">Tôi muốn có khách từ marketing →</a></div>
+  </div>
+</section>
 
 <section class="sec navy" id="moi-truong">
   <div class="wrap">
@@ -654,7 +703,7 @@ img{max-width:100%}
     <div class="faq">
       <details><summary>Chưa có kinh nghiệm có ứng tuyển được không?</summary><p>Được. Vị trí Nhân viên kinh doanh không yêu cầu kinh nghiệm, bạn được đào tạo từ đầu.</p></details>
       <details><summary>Sinh viên mới ra trường có được nhận không?</summary><p>Có. Ngành nào cũng được, bạn được đào tạo, có người kèm và được phân bổ lead.</p></details>
-      <details><summary>Người mới có khách để tư vấn không?</summary><p>Có. Marketing phân bổ lead cho toàn đội và hỗ trợ chi phí marketing đến 100%.</p></details>
+      <details><summary>Người mới có khách để tư vấn không?</summary><p>Có. Marketing phân bổ lead cho toàn đội và hỗ trợ chi phí marketing 50–100%.</p></details>
       <details><summary>Thu nhập gồm những gì?</summary><p>Lương, hoa hồng, thưởng marketing đến 10tr/giao dịch và thưởng nóng. Chi tiết trao đổi khi tư vấn 1:1.</p></details>
       <details><summary>Có hợp đồng lao động và bảo hiểm không?</summary><p>Có. Hợp đồng lao động, BHYT và BHXH đầy đủ.</p></details>
       <details><summary>Có cần nộp CV không?</summary><p>Không bắt buộc. Có CV thì dán link ở form cuối trang hoặc gửi về email <a href="mailto:hiephoangmt@gmail.com">hiephoangmt@gmail.com</a>.</p></details>

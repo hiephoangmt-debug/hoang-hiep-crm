@@ -178,6 +178,30 @@ img{max-width:100%}
 .gal figure:hover img{transform:scale(1.06)}
 .gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:24px 12px 10px;background:linear-gradient(transparent,rgba(21,36,90,.9));color:#fff;font-weight:700;font-size:13px}
 @media(max-width:799px){.gal .big{min-height:210px}}
+.layers3{display:grid;gap:14px;margin-top:32px}
+@media(min-width:800px){.layers3{grid-template-columns:repeat(3,1fr)}}
+.layers3 div{background:#fff;border-radius:20px;padding:24px;box-shadow:0 10px 28px rgba(27,45,107,.08);position:relative;overflow:hidden}
+.layers3 div:after{content:"";position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:rgba(255,107,26,.08)}
+.layers3 .no{display:inline-block;background:var(--navy);color:#fff;font-size:12px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:999px}
+.layers3 b{display:block;font-size:21px;font-weight:800;color:var(--navy);margin-top:12px;line-height:1.3}
+.layers3 b em{font-style:normal;color:var(--orange)}
+.layers3 p{color:var(--muted);margin-top:8px;font-size:15px}
+.who3{display:grid;gap:12px;margin-top:18px}
+@media(min-width:800px){.who3{grid-template-columns:repeat(3,1fr)}}
+.who3 div{background:var(--navy);color:#fff;border-radius:18px;padding:20px}
+.who3 i{font-style:normal;font-size:26px}
+.who3 b{display:block;font-size:17px;margin-top:6px}
+.who3 span{display:block;color:#C9D3EA;font-size:14.5px;margin-top:4px}
+.award{margin-top:28px;background:#fff;border-radius:22px;padding:20px 0;box-shadow:0 10px 28px rgba(27,45,107,.08);overflow:hidden}
+.award-h{padding:0 20px 14px}
+.award-h b{display:block;font-size:20px;font-weight:800;color:var(--navy)}
+.award-h b em{font-style:normal;color:var(--orange)}
+.award-h span{font-size:13px;color:var(--muted)}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee{overflow:hidden}
+.track{display:flex;gap:12px;width:max-content;animation:marq 60s linear infinite}
+.track img{height:220px;width:auto;border-radius:14px;display:block}
+.marquee:hover .track{animation-play-state:paused}
 /* form */
 .form{background:#fff;color:var(--ink);border-radius:16px;border-top:6px solid var(--orange);padding:26px 22px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
 .form h2{font-size:24px;font-weight:900;color:var(--navy);line-height:1.25}
@@ -327,7 +351,7 @@ img{max-width:100%}
 .envgrid span{color:#C9D3EA;font-size:15px}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "JobPosting", "title": "Trưởng phòng kinh doanh bất động sản", "description": "<p>Tuyển Trưởng nhóm, Trưởng phòng kinh doanh BĐS Đà Nẵng. Trưởng phòng lương 10–20 triệu/tháng, marketing đầu tổng phân lead cho cả đội. Bảo mật 1:1.</p><ul><li>Dẫn dắt nhóm Sale, đặt mục tiêu và theo dõi kết quả</li><li>Kèm cặp, đào tạo nhân viên mới ra giao dịch</li><li>Cùng đội tư vấn, dẫn khách, chốt giao dịch</li><li>Lập kế hoạch, tìm giải pháp thúc đẩy kết quả</li><li>Đã có kinh nghiệm Sale BĐS và giao dịch thực tế</li><li>Thích chia sẻ, kèm người, muốn xây đội của riêng mình</li><li>Xây dựng, vận hành phòng kinh doanh, quản lý các Trưởng nhóm</li><li>Hoạch định chiến lược bán hàng, phối hợp marketing triển khai dự án</li><li>Tuyển dụng, đào tạo, phát triển đội ngũ</li><li>Chịu trách nhiệm doanh số và hiệu quả của phòng</li><li>Đã có kinh nghiệm quản lý đội Sale BĐS</li><li>Có tư duy chiến lược, muốn phát triển lên cấp Giám đốc</li></ul>", "datePosted": "2026-10-05", "validThrough": "2026-12-31T23:59", "employmentType": "FULL_TIME", "hiringOrganization": {"@type": "Organization", "name": "Tuyển Sale Đà Nẵng", "sameAs": "https://www.tuyendungsaledanang.com/"}, "jobLocation": {"@type": "Place", "address": {"@type": "PostalAddress", "streetAddress": "23–25 Nguyễn Phước Lan", "addressLocality": "Đà Nẵng", "addressRegion": "Đà Nẵng", "addressCountry": "VN"}}, "directApply": true, "url": "https://www.tuyendungsaledanang.com/tuyen-truong-nhom-truong-phong-kinh-doanh-bds-da-nang", "baseSalary": {"@type": "MonetaryAmount", "currency": "VND", "value": {"@type": "QuantitativeValue", "minValue": 10000000, "maxValue": 20000000, "unitText": "MONTH"}}}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Chưa từng quản lý có ứng tuyển Trưởng nhóm được không?", "acceptedAnswer": {"@type": "Answer", "text": "Có thể, nếu bạn có kết quả Sale tốt và muốn dẫn đội. Chúng tôi trao đổi 1:1 để tìm lộ trình phù hợp."}}, {"@type": "Question", "name": "Đội của tôi lấy khách từ đâu?", "acceptedAnswer": {"@type": "Answer", "text": "Marketing đầu tổng mạnh, phân bổ lead cho toàn đội, kèm ngân sách marketing hỗ trợ đến 100%."}}, {"@type": "Question", "name": "Thu nhập của quản lý thế nào?", "acceptedAnswer": {"@type": "Answer", "text": "Trưởng phòng lương 10–20 triệu/tháng. Chế độ chi tiết cho Trưởng nhóm được trao đổi trực tiếp, tương xứng với quy mô và kết quả của đội."}}, {"@type": "Question", "name": "Thông tin ứng tuyển có được bảo mật?", "acceptedAnswer": {"@type": "Answer", "text": "Có. Mọi trao đổi đều 1:1 và bảo mật tuyệt đối."}}, {"@type": "Question", "name": "Có hợp đồng lao động và bảo hiểm không?", "acceptedAnswer": {"@type": "Answer", "text": "Có. Hợp đồng lao động, BHYT và BHXH đầy đủ."}}, {"@type": "Question", "name": "Có cần nộp CV không?", "acceptedAnswer": {"@type": "Answer", "text": "Không bắt buộc. Có CV thì dán link ở form cuối trang hoặc gửi về email hiephoangmt@gmail.com."}}, {"@type": "Question", "name": "Làm việc ở đâu?", "acceptedAnswer": {"@type": "Answer", "text": "Văn phòng 23–25 Nguyễn Phước Lan, Đà Nẵng."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Chưa từng quản lý có ứng tuyển Trưởng nhóm được không?", "acceptedAnswer": {"@type": "Answer", "text": "Có thể, nếu bạn có kết quả Sale tốt và muốn dẫn đội. Chúng tôi trao đổi 1:1 để tìm lộ trình phù hợp."}}, {"@type": "Question", "name": "Đội của tôi lấy khách từ đâu?", "acceptedAnswer": {"@type": "Answer", "text": "Marketing đầu tổng mạnh, phân bổ lead cho toàn đội, kèm ngân sách marketing hỗ trợ 50–100%."}}, {"@type": "Question", "name": "Thu nhập của quản lý thế nào?", "acceptedAnswer": {"@type": "Answer", "text": "Trưởng phòng lương 10–20 triệu/tháng. Chế độ chi tiết cho Trưởng nhóm được trao đổi trực tiếp, tương xứng với quy mô và kết quả của đội."}}, {"@type": "Question", "name": "Thông tin ứng tuyển có được bảo mật?", "acceptedAnswer": {"@type": "Answer", "text": "Có. Mọi trao đổi đều 1:1 và bảo mật tuyệt đối."}}, {"@type": "Question", "name": "Có hợp đồng lao động và bảo hiểm không?", "acceptedAnswer": {"@type": "Answer", "text": "Có. Hợp đồng lao động, BHYT và BHXH đầy đủ."}}, {"@type": "Question", "name": "Có cần nộp CV không?", "acceptedAnswer": {"@type": "Answer", "text": "Không bắt buộc. Có CV thì dán link ở form cuối trang hoặc gửi về email hiephoangmt@gmail.com."}}, {"@type": "Question", "name": "Làm việc ở đâu?", "acceptedAnswer": {"@type": "Answer", "text": "Văn phòng 23–25 Nguyễn Phước Lan, Đà Nẵng."}}]}</script>
 <link rel="canonical" href="https://www.tuyendungsaledanang.com/tuyen-truong-nhom-truong-phong-kinh-doanh-bds-da-nang">
 <style>.crumb{font-size:13px;color:#C9D3EA;margin-bottom:12px}.crumb a{color:#FFB98F;text-decoration:none}
 .role-lv{display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:13px;padding:3px 12px;border-radius:999px;margin-bottom:10px}
@@ -389,7 +413,7 @@ img{max-width:100%}
       <div>
         <span class="eyebrow">Vì sao quản lý chọn ở đây</span>
         <h2 class="h2" style="font-size:32px">Bạn dẫn đội. <em>Hệ thống lo nguồn khách.</em></h2>
-        <div class="reasons"><div><i>💼</i><b>Trưởng phòng lương 10–20 triệu</b><span>Lương tháng tương xứng với vai trò xây và vận hành phòng.</span></div><div><i>📲</i><b>Đội luôn có khách</b><span>Marketing đầu tổng phân lead cho cả đội, kèm ngân sách hỗ trợ đến 100%.</span></div><div><i>🧲</i><b>Dễ giữ người giỏi</b><span>Pro Sales trong đội có lương 7–10 triệu/tháng, tạo động lực ở lại.</span></div><div><i>🪜</i><b>Lộ trình lên Giám đốc</b><span>Trưởng nhóm → Trưởng phòng → Giám đốc, thăng tiến bằng kết quả của đội.</span></div></div>
+        <div class="reasons"><div><i>💼</i><b>Trưởng phòng lương 10–20 triệu</b><span>Lương tháng tương xứng với vai trò xây và vận hành phòng.</span></div><div><i>📲</i><b>Đội luôn có khách</b><span>Marketing đầu tổng phân lead cho cả đội, kèm ngân sách hỗ trợ 50–100%.</span></div><div><i>🧲</i><b>Dễ giữ người giỏi</b><span>Pro Sales trong đội có lương 7–10 triệu/tháng, tạo động lực ở lại.</span></div><div><i>🪜</i><b>Lộ trình lên Giám đốc</b><span>Trưởng nhóm → Trưởng phòng → Giám đốc, thăng tiến bằng kết quả của đội.</span></div></div>
         <a class="btn" href="#dang-ky" style="margin-top:22px">Ứng tuyển vị trí quản lý →</a>
       </div>
     </div>
@@ -427,12 +451,37 @@ img{max-width:100%}
       <span class="eyebrow">Hệ thống phía sau bạn</span>
       <h2 class="h2">Quản lý giỏi cần <em>một nền tảng đủ mạnh</em></h2>
     </div>
-    <div class="grid3"><div class="card"><div class="n">10–20TR</div><h3>Lương Trưởng phòng</h3><p>Lương 10–20 triệu/tháng, cộng thu nhập theo kết quả của phòng.</p></div><div class="card"><div class="n">LEAD</div><h3>Marketing đầu tổng mạnh</h3><p>Phân bổ lead cho toàn đội, đội của bạn luôn có khách để tư vấn.</p></div><div class="card"><div class="n">100%</div><h3>Marketing hỗ trợ</h3><p>Ngân sách marketing hỗ trợ đến 100%, giải ngân ngay khi đề xuất.</p></div><div class="card"><div class="n">7–10TR</div><h3>Pro Sales trong đội</h3><p>Sale giỏi của bạn có lương 7–10 triệu/tháng, dễ giữ người, dễ tạo động lực.</p></div><div class="card"><div class="n">10TR</div><h3>Thưởng marketing/GD</h3><p>Cộng hoa hồng và thưởng nóng, động lực cho cả đội.</p></div><div class="card"><div class="n">03</div><h3>Tháng xét cấp bậc</h3><p>Đánh giá định kỳ, lộ trình rõ ràng cho đội ngũ.</p></div></div>
+    <div class="grid3"><div class="card"><div class="n">10–20TR</div><h3>Lương Trưởng phòng</h3><p>Lương 10–20 triệu/tháng, cộng thu nhập theo kết quả của phòng.</p></div><div class="card"><div class="n">LEAD</div><h3>Marketing đầu tổng mạnh</h3><p>Phân bổ lead cho toàn đội, đội của bạn luôn có khách để tư vấn.</p></div><div class="card"><div class="n">100%</div><h3>Marketing hỗ trợ</h3><p>Ngân sách marketing hỗ trợ 50–100%, giải ngân ngay khi đề xuất.</p></div><div class="card"><div class="n">7–10TR</div><h3>Pro Sales trong đội</h3><p>Sale giỏi của bạn có lương 7–10 triệu/tháng, dễ giữ người, dễ tạo động lực.</p></div><div class="card"><div class="n">10TR</div><h3>Thưởng marketing/GD</h3><p>Cộng hoa hồng và thưởng nóng, động lực cho cả đội.</p></div><div class="card"><div class="n">03</div><h3>Tháng xét cấp bậc</h3><p>Đánh giá định kỳ, lộ trình rõ ràng cho đội ngũ.</p></div></div>
     <p class="center" style="margin-top:18px;color:var(--muted);font-size:14px">Chế độ chi tiết cho Trưởng nhóm được trao đổi trực tiếp khi tư vấn 1:1.</p>
     <div class="cta-row"><a class="btn" href="#dang-ky">Ứng tuyển vị trí quản lý →</a></div>
   </div>
 </section>
 
+
+<section class="sec soft" id="mkt-3-lop">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Marketing 3 lớp</span>
+      <h2 class="h2">Không biết chạy quảng cáo? <em>Không sao cả.</em></h2>
+      <p class="lead">Ba lớp hỗ trợ marketing để Sale nào cũng có khách: từ người chưa từng chạy quảng cáo đến người đã quen tay.</p>
+    </div>
+    <div class="layers3">
+      <div><span class="no">Lớp 1</span><b>Hỗ trợ chi phí <em>50–100%</em></b><p>Bạn tự chạy quảng cáo, công ty chi 50–100% ngân sách, giải ngân ngay khi đề xuất.</p></div>
+      <div><span class="no">Lớp 2</span><b>Data tổng <em>chạy xuống</em></b><p>Marketing đầu tổng chạy quảng cáo và phân lead xuống cho cả đội, người mới cũng có khách.</p></div>
+      <div><span class="no">Lớp 3</span><b>Giao dịch là <em>có thưởng MKT</em></b><p>Chốt được giao dịch từ nguồn marketing, bạn nhận thêm thưởng marketing, cộng hoa hồng.</p></div>
+    </div>
+    <div class="who3">
+      <div><i>🌱</i><b>Bạn chưa biết gì về marketing?</b><span>Được đào tạo từ đầu, có mẫu bài, mẫu quảng cáo sẵn. Bạn chỉ việc làm theo.</span></div>
+      <div><i>🧭</i><b>Bạn biết nhưng chưa tự tin chạy?</b><span>Có người hướng dẫn trực tiếp: dựng chiến dịch, đọc số liệu, tối ưu từng ngày.</span></div>
+      <div><i>💸</i><b>Bạn thiếu chi phí chạy quảng cáo?</b><span>Công ty hỗ trợ 50–100% ngân sách, bạn không phải bỏ tiền túi.</span></div>
+    </div>
+    <div class="award">
+      <div class="award-h"><b>Trao thưởng marketing <em>là chuyện mỗi tháng</em></b><span>Hình thật tại văn phòng 23–25 Nguyễn Phước Lan</span></div>
+      <div class="marquee"><div class="track"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-1.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-2.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-3.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-4.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-5.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-6.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-7.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-8.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-9.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-10.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-11.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-1.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-2.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-3.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-4.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-5.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-6.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-7.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-8.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-9.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-10.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/thuong-mkt-11.jpg" alt="Trao thưởng marketing cho Sale có giao dịch" loading="lazy"></div></div>
+    </div>
+    <div class="cta-row"><a class="btn" href="#dang-ky">Tôi muốn có khách từ marketing →</a></div>
+  </div>
+</section>
 
 <section class="sec navy" id="moi-truong">
   <div class="wrap">
@@ -619,7 +668,7 @@ img{max-width:100%}
     </div>
     <div class="faq">
       <details><summary>Chưa từng quản lý có ứng tuyển Trưởng nhóm được không?</summary><p>Có thể, nếu bạn có kết quả Sale tốt và muốn dẫn đội. Chúng tôi trao đổi 1:1 để tìm lộ trình phù hợp.</p></details>
-      <details><summary>Đội của tôi lấy khách từ đâu?</summary><p>Marketing đầu tổng mạnh, phân bổ lead cho toàn đội, kèm ngân sách marketing hỗ trợ đến 100%.</p></details>
+      <details><summary>Đội của tôi lấy khách từ đâu?</summary><p>Marketing đầu tổng mạnh, phân bổ lead cho toàn đội, kèm ngân sách marketing hỗ trợ 50–100%.</p></details>
       <details><summary>Thu nhập của quản lý thế nào?</summary><p>Trưởng phòng lương 10–20 triệu/tháng. Chế độ chi tiết cho Trưởng nhóm được trao đổi trực tiếp, tương xứng với quy mô và kết quả của đội.</p></details>
       <details><summary>Thông tin ứng tuyển có được bảo mật?</summary><p>Có. Mọi trao đổi đều 1:1 và bảo mật tuyệt đối.</p></details>
       <details><summary>Có hợp đồng lao động và bảo hiểm không?</summary><p>Có. Hợp đồng lao động, BHYT và BHXH đầy đủ.</p></details>
