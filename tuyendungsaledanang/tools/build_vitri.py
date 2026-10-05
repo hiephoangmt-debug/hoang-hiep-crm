@@ -8,6 +8,8 @@ URL = {'nv': SITE + '/tuyen-nhan-vien-kinh-doanh-bds-da-nang', 'cv': SITE + '/tu
        'pro': SITE + '/tuyen-chuyen-gia-kinh-doanh-pro-sales-da-nang', 'tn': SITE + '/tuyen-truong-nhom-truong-phong-kinh-doanh-bds-da-nang', 'sv': SITE + '/tuyen-sale-moi-ra-truong'}
 
 head = main[:main.index('</head>')]
+head = re.sub(r'<link rel="canonical"[^>]*>\n?', '', head)
+head = re.sub(r'<script type="application/ld\+json">.*?</script>\n?', '', head, flags=re.S)
 header = main[main.index('<header class="top">'):main.index('</header>') + 9]
 header = header.replace('<div class="brand">TUYỂN SALE <span>ĐÀ NẴNG</span></div>', f'<a class="brand" href="{SITE}/" style="text-decoration:none">TUYỂN SALE <span>ĐÀ NẴNG</span></a>')
 sections = {}
@@ -74,6 +76,19 @@ EXTRA_CSS = """<style>
 .envgrid span{color:#C9D3EA;font-size:15px}
 </style>
 """
+import json
+def jsonld(p):
+    strip = lambda x: re.sub('<[^>]+>', '', x)
+    job = {"@context": "https://schema.org", "@type": "JobPosting", "title": p['job_title'],
+           "description": '<p>' + strip(p['desc']) + '</p><ul>' + ''.join('<li>' + strip(i) + '</li>' for c in p['panels'] for _, items in c['lists'] for i in items) + '</ul>',
+           "datePosted": "2026-10-05", "validThrough": "2026-12-31T23:59", "employmentType": "FULL_TIME",
+           "hiringOrganization": {"@type": "Organization", "name": "Tuyển Sale Đà Nẵng", "sameAs": SITE + "/"},
+           "jobLocation": {"@type": "Place", "address": {"@type": "PostalAddress", "streetAddress": "23–25 Nguyễn Phước Lan", "addressLocality": "Đà Nẵng", "addressRegion": "Đà Nẵng", "addressCountry": "VN"}},
+           "directApply": True, "url": URL[p['key']]}
+    if p.get('salary'):
+        job["baseSalary"] = {"@type": "MonetaryAmount", "currency": "VND", "value": {"@type": "QuantitativeValue", "minValue": p['salary'][0], "maxValue": p['salary'][1], "unitText": "MONTH"}}
+    faq = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": strip(q), "acceptedAnswer": {"@type": "Answer", "text": strip(a)}} for q, a in p['faq']]}
+    return ''.join('<script type="application/ld+json">' + json.dumps(x, ensure_ascii=False) + '</script>\n' for x in (job, faq))
 def page(p):
     h = head
     h = re.sub(r'<title>.*?</title>', f'<title>{p["title"]}</title>', h, flags=re.S)
@@ -81,6 +96,7 @@ def page(p):
     h = re.sub(r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{p["title"]}">', h)
     h = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{p["desc"]}">', h)
     h += EXTRA_CSS
+    h += jsonld(p)
     h += '<link rel="canonical" href="' + URL[p['key']] + '">\n<style>.crumb{font-size:13px;color:#C9D3EA;margin-bottom:12px}.crumb a{color:#FFB98F;text-decoration:none}\n.role-lv{display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:13px;padding:3px 12px;border-radius:999px;margin-bottom:10px}\n.panel h4{margin:14px 0 4px;font-size:15px;font-weight:800;color:inherit}</style>\n'
     kp = ''.join(f'<div><b>{a}</b><span>{b}</span></div>' for a, b in p['kpis'])
     fields = ''.join(f'''      <label for="{fid}">{lab}</label>
@@ -92,7 +108,7 @@ def page(p):
     <div>
       <p class="crumb"><a href="{SITE}/">Tuyển Sale Đà Nẵng</a> › {p["crumb"]}</p>
       <span class="badge"><i class="dot"></i> {p["badge"]}</span>
-      <h1>{p["h1"]}</h1>
+      <h1><span class="kw">{p["kw"]}</span>{p["h1"]}</h1>
       <p class="sub">{p["sub"]}</p>
       <div class="kpis">{kp}</div>
       <p class="hiring">Các vị trí đang tuyển:</p>
@@ -404,6 +420,10 @@ ROLE = {
 }
 for k, v in ROLE.items():
     PAGES[k].update(v)
+
+SEO = {'nhan-vien': ('Tuyển Nhân Viên Kinh Doanh BĐS Đà Nẵng – Không Cần Kinh Nghiệm', 'Tuyển nhân viên kinh doanh BĐS Đà Nẵng, nhận SV mới ra trường. Đào tạo từ đầu, có lead sẵn, có người kèm, HĐLĐ & BHXH. Ứng tuyển trong 30 giây.', 'Tuyển Nhân viên kinh doanh BĐS Đà Nẵng', 'Nhân viên kinh doanh bất động sản', None), 'chuyen-vien': ('Tuyển Chuyên Viên Kinh Doanh BĐS Đà Nẵng 2026', 'Tuyển chuyên viên kinh doanh BĐS Đà Nẵng: hỗ trợ marketing 100%, lead đều, thưởng marketing đến 10tr/giao dịch, 03 tháng xét lương, lên Pro Sales.', 'Tuyển Chuyên viên kinh doanh BĐS Đà Nẵng', 'Chuyên viên kinh doanh bất động sản', None), 'pro-sales': ('Tuyển Pro Sales BĐS Đà Nẵng – Lương 7–10 Triệu/Tháng', 'Tuyển Pro Sales BĐS Đà Nẵng: lương 7–10 triệu/tháng chưa tính hoa hồng, thưởng marketing đến 10tr/giao dịch, lead từ marketing. Trao đổi 1:1, bảo mật.', 'Tuyển Pro Sales BĐS Đà Nẵng', 'Chuyên gia kinh doanh bất động sản (Pro Sales)', (7000000, 10000000)), 'truong-nhom': ('Tuyển Trưởng Nhóm, Trưởng Phòng Kinh Doanh BĐS Đà Nẵng', 'Tuyển Trưởng nhóm, Trưởng phòng kinh doanh BĐS Đà Nẵng. Trưởng phòng lương 10–20 triệu/tháng, marketing đầu tổng phân lead cho cả đội. Bảo mật 1:1.', 'Tuyển Trưởng nhóm / Trưởng phòng KD BĐS Đà Nẵng', 'Trưởng phòng kinh doanh bất động sản', (10000000, 20000000)), 'moi-ra-truong': ('Tuyển Sale Mới Ra Trường Đà Nẵng 2026 – Không Cần Kinh Nghiệm', 'Tuyển sinh viên mới ra trường làm Sale BĐS Đà Nẵng. Ngành nào cũng được, đào tạo từ con số 0, có lead sẵn, có người kèm, 03 tháng xét lương.', 'Tuyển Sale mới ra trường Đà Nẵng', 'Nhân viên kinh doanh bất động sản (mới ra trường)', None)}
+for k, (t, d, kw, jt, sal) in SEO.items():
+    PAGES[k].update(title=t, desc=d, kw=kw, job_title=jt, salary=sal)
 os.makedirs(os.path.join(ROOT, 'vi-tri'), exist_ok=True)
 for name, p in PAGES.items():
     html = page(p)
