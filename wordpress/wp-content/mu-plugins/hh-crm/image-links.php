@@ -9,6 +9,24 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/** Khóa ghi nhớ của 1 dòng: link web (đã làm sạch) hoặc ảnh đi kèm plugin dạng "plugin:img/…". */
+function hh_img_link_key( $raw ) {
+	$raw = trim( (string) $raw );
+	if ( 0 === strpos( $raw, 'plugin:' ) ) {
+		return 'plugin:' . ltrim( str_replace( array( '..', '\\' ), '', substr( $raw, 7 ) ), '/' );
+	}
+	return esc_url_raw( $raw );
+}
+
+/** Đường dẫn file của ảnh đi kèm plugin ("plugin:img/…"), '' nếu không phải / không có. */
+function hh_img_link_local_path( $key ) {
+	if ( 0 !== strpos( $key, 'plugin:' ) ) {
+		return '';
+	}
+	$path = HH_CRM_DIR . substr( $key, 7 );
+	return is_file( $path ) && preg_match( '/\.(jpe?g|png|webp)$/i', $path ) ? $path : '';
+}
+
 /** Link Drive / Docs → link tải trực tiếp; trả về '' nếu là link thư mục. */
 function hh_img_link_download_url( $url ) {
 	if ( preg_match( '#drive\.google\.com/drive/(u/\d+/)?folders/#', $url ) ) {
@@ -42,7 +60,7 @@ function hh_img_links_import( $post_id, $limit = 2 ) {
 	$errors = array();
 	foreach ( $lines as $n => $line ) {
 		$parts = array_map( 'trim', explode( '|', $line ) );
-		$url   = esc_url_raw( $parts[0] ?? '' );
+		$url   = hh_img_link_key( $parts[0] ?? '' );
 		if ( ! $url || isset( $done[ $url ] ) ) {
 			continue;
 		}
@@ -63,7 +81,16 @@ function hh_img_links_import( $post_id, $limit = 2 ) {
 			@set_time_limit( 90 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
 		}
 		++$tried;
-		$tmp = download_url( $source, 30 );
+		$local = hh_img_link_local_path( $url );
+		if ( $local ) {
+			// Ảnh đi kèm plugin: chép ra file tạm rồi đưa vào Thư viện như ảnh tải về.
+			$tmp = wp_tempnam( basename( $local ) );
+			if ( ! $tmp || ! copy( $local, $tmp ) ) {
+				$tmp = new WP_Error( 'copy', 'không chép được ảnh có sẵn' );
+			}
+		} else {
+			$tmp = download_url( $source, 30 );
+		}
 		if ( is_wp_error( $tmp ) ) {
 			$errors[] = 'Dòng ' . ( $n + 1 ) . ': không tải được (' . $tmp->get_error_message() . ') – kiểm tra quyền chia sẻ "Bất kỳ ai có đường liên kết".';
 			$fails = (int) get_post_meta( $post_id, '_hh_img_fail_' . md5( $url ), true ) + 1;
@@ -101,8 +128,8 @@ function hh_img_links_import( $post_id, $limit = 2 ) {
 		if ( 'dai-dien' === $where || ! has_post_thumbnail( $post_id ) ) {
 			set_post_thumbnail( $post_id, $id );
 		}
-		if ( 'dai-dien' !== $where ) {
-			$key = $targets[ $where ];
+		{
+			$key = $targets[ 'dai-dien' === $where ? 'thu-vien' : $where ]; // Ảnh đại diện cũng vào Thư viện ảnh.
 			$ids = array_filter( array_map( 'absint', explode( ',', (string) get_post_meta( $post_id, $key, true ) ) ) );
 			$ids[] = $id;
 			update_post_meta( $post_id, $key, implode( ',', array_unique( $ids ) ) );
@@ -131,7 +158,7 @@ function hh_img_links_pending( $post_id ) {
 	$done = (array) get_post_meta( $post_id, '_hh_img_links', true );
 	$n    = 0;
 	foreach ( hh_lines( 'hh_p_image_links', $post_id ) as $line ) {
-		$url = esc_url_raw( trim( explode( '|', $line )[0] ) );
+		$url = hh_img_link_key( trim( explode( '|', $line )[0] ) );
 		if ( $url && ! isset( $done[ $url ] ) ) {
 			++$n;
 		}
