@@ -30,7 +30,7 @@ icon('PB',800,600,'Sân pickleball',-10,'end')
 # khách sạn 5*
 X,Y=P(1092,895); o.append(f'<rect x="{X-7:.1f}" y="{Y-11:.1f}" width="14" height="22" rx="2" fill="#e9eef5" stroke="#9aa9bd"/>')
 lab(1065,903,'Clubhouse','lm','end')
-icon('KS',1745,1290,'Khách sạn Đảo Dừa',12)
+icon('KS',1790,1150,'Khách sạn 6 sao Đảo Dừa',-12,'end')
 for n,(x,y),c in [('P1',(1010,585),''),('P2',(850,655),''),('P3',(1172,722),'lake'),('P4',(1330,815),'flo'),('P5',(1790,660),'')]:
     X,Y=P(x,y); o.append(f'<g class="pk {c}"><circle cx="{X:.0f}" cy="{Y:.0f}" r="12"/><text x="{X:.0f}" y="{Y+4:.0f}">{n}</text></g>')
 for n,(x,y) in [('01',(430,900)),('02',(640,455)),('03',(880,485)),('04',(1885,620)),('05',(1240,670)),('06',(1092,895)),('07',(1130,905)),('08',(905,785))]:
@@ -38,7 +38,7 @@ for n,(x,y) in [('01',(430,900)),('02',(640,455)),('03',(880,485)),('04',(1885,6
 o.append('<text transform="translate(892 250) rotate(80)" class="water">SÔNG CỔ CÒ</text>')
 o.append('<g transform="translate(840 70)"><circle r="18" fill="#fff" stroke="#c9d6ea"/><path d="M0 -14 L5 4 L0 0 L-5 4Z" fill="#0b2a5b"/><text y="-22" class="nb">B</text></g>')
 AMEN=[('P1','Công viên Wellness','g'),('P2','Sport Park','g'),('P3','Grand Central Park · hồ vô cực','l'),('P4','Floral Park','f'),('P5','Nipa Park · rừng dừa','g'),
- ('01','Cổng chào hoa giấy','n'),('02','Trung tâm thương mại','n'),('03','Trường mầm non quốc tế','n'),('04','Bungalow','n'),('05','Bể bơi vô cực','n'),('06','Clubhouse 3 tầng · hồ bơi, gym','n'),('07','Sky bar','n'),('08','Trung tâm hội nghị','n'),('PB','Sân pickleball','i'),('KS','Khách sạn Đảo Dừa','i')]
+ ('01','Cổng chào hoa giấy','n'),('02','Trung tâm thương mại','n'),('03','Trường mầm non quốc tế','n'),('04','Bungalow','n'),('05','Bể bơi vô cực','n'),('06','Clubhouse 3 tầng · hồ bơi, gym','n'),('07','Sky bar','n'),('08','Trung tâm hội nghị','n'),('PB','Sân pickleball','i'),('KS','Khách sạn 6 sao Đảo Dừa','i')]
 bx,by,bw,bh=222,726,680,100
 L=[f'<g class="sp-legend"><rect x="{bx}" y="{by}" width="{bw}" height="{bh}" rx="10" fill="#fff" stroke="#dfe6ee"/>',
    f'<text x="{bx+14}" y="{by+16}" class="lg-h">TIỆN ÍCH NỘI KHU</text>']

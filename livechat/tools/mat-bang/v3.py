@@ -177,6 +177,16 @@ for k in STRAIGHT:
 # đường vòng: đoạn cong đầu + đoạn thẳng chéo; SL5: đoạn cong đầu + thẳng tới cuối
 P=RD['ring'][0]; i0=[i for i,p in enumerate(P) if p[0]>=1060][0]; RD['ring'][0]=P[:i0]+fitline(P[i0:])
 P=RD['sl5'][0]; i0=[i for i,p in enumerate(P) if p[0]>=1140][0]; RD['sl5'][0]=P[:i0]+fitline(P[i0:])
+# căn hướng đường theo dãy lô kề bên: song song (đường giữa dãy) hoặc vuông góc (đường ngang)
+def align(k,mode):
+    (p0,p1)=[np.array(p,float) for p in RD[k][0]]; m=(p0+p1)/2; L=np.hypot(*(p1-p0))
+    ds=sorted(BOX,key=lambda B:np.hypot(B[1]-m[0],B[2]-m[1]))[:2]
+    a=np.radians(np.median([B[5] for B in ds])); u=np.array([np.cos(a),np.sin(a)])
+    if mode=='perp': u=np.array([-u[1],u[0]])
+    if u@(p1-p0)<0: u=-u
+    RD[k][0]=[list(m-u*L/2),list(m+u*L/2)]
+for k in ('t7','t8','t9','t11','t12','t13','t14','r12','r34'): align(k,'par')
+for k in ('east','west','lk2e'): align(k,'perp')
 def dense(P):
     P=np.array(P,float); o=[]
     for a,b in zip(P[:-1],P[1:]):
