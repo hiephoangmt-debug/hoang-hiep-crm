@@ -653,83 +653,96 @@ document.addEventListener('click', function (e) { var a = e.target.closest && e.
 
 <!-- SỰ KIỆN 11/10/2026 (tự ẩn sau khi sự kiện kết thúc) -->
 <style>
-.ev{position:relative;overflow:hidden;background:radial-gradient(800px 400px at 90% 0%,rgba(240,123,31,.25),transparent 60%),linear-gradient(160deg,#0b1a3a,#13285a 65%,#0b1a3a);color:#fff;padding:64px 0}
-.ev-grid{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:44px;align-items:center}
-.ev-card{position:relative}
-.ev-card img{width:100%;height:auto;display:block;border-radius:18px;box-shadow:0 30px 60px -24px rgba(0,0,0,.7);border:3px solid rgba(255,176,103,.55)}
-.ev-tag{position:absolute;top:14px;left:-10px;background:#f07b1f;color:#fff;font-weight:700;font-size:13px;letter-spacing:.06em;padding:7px 14px;border-radius:0 999px 999px 0;box-shadow:0 8px 18px -8px rgba(0,0,0,.6)}
+.ev{position:relative;overflow:hidden;background:radial-gradient(900px 420px at 85% 0%,rgba(240,123,31,.25),transparent 60%),radial-gradient(700px 400px at 0% 100%,rgba(31,63,130,.85),transparent 70%),linear-gradient(160deg,#0b1a3a,#13285a 65%,#0b1a3a);color:#fff;padding:64px 0 56px}
+.ev-head{text-align:center;max-width:900px;margin:0 auto 26px}
 .ev-eyebrow{display:inline-flex;gap:8px;align-items:center;padding:6px 14px;border-radius:999px;background:rgba(240,123,31,.16);border:1px solid rgba(255,176,103,.45);color:#ffb067;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
-.ev h2{font-family:var(--serif);font-size:clamp(28px,4vw,44px);line-height:1.15;margin:14px 0 6px;color:#fff}
-.ev .ev-sub{font-family:var(--serif);font-style:italic;color:#ffb067;font-size:clamp(18px,2.2vw,24px);margin-bottom:18px}
-.ev-info{list-style:none;margin:0 0 20px;padding:0;display:grid;gap:10px}
-.ev-info li{display:flex;gap:12px;align-items:flex-start;font-size:16px}
-.ev-info i{font-style:normal;width:36px;height:36px;flex:none;display:grid;place-items:center;border-radius:10px;background:rgba(255,255,255,.1)}
-.ev-info b{display:block}.ev-info span{opacity:.82;font-size:14.5px}
-.ev-info a{color:#ffb067;text-decoration:underline;text-underline-offset:3px;font-size:14px}
-.ev-cd{display:flex;gap:10px;margin:0 0 22px}
-.ev-cd div{min-width:70px;text-align:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:10px 8px}
-.ev-cd b{display:block;font-family:var(--serif);font-size:30px;line-height:1;color:#ffb067}
-.ev-cd span{font-size:12.5px;opacity:.8}
-.ev-form{background:#fff;color:var(--ink);border-radius:16px;padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:10px;box-shadow:0 20px 44px -20px rgba(0,0,0,.6)}
-.ev-form .full{grid-column:1/-1}
-.ev-form input,.ev-form select{width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:10px;font:inherit;font-size:16px;color:var(--ink);background:#fff}
+.ev h2{font-family:var(--serif);font-size:clamp(28px,4.2vw,48px);line-height:1.15;margin:14px 0 6px;color:#fff}
+.ev-sub{font-family:var(--serif);font-style:italic;color:#ffb067;font-size:clamp(18px,2.2vw,24px);margin:0 0 18px}
+.ev-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.ev-chips span{display:inline-block;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:8px 15px;font-size:15px}
+.ev-chips b{color:#fff}.ev-chips a{color:#ffb067;text-decoration:underline;text-underline-offset:3px;font-size:13.5px}
+.ev-pic{position:relative;display:block;max-width:1120px;margin:0 auto;border-radius:22px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.8);border:3px solid rgba(255,176,103,.55);background:#f3f0c8}
+.ev-pic img{width:100%;height:auto;display:block;transition:transform .5s}
+.ev-pic:hover img{transform:scale(1.015)}
+.ev-pic .m{display:none}
+.ev-zoom{position:absolute;right:14px;bottom:14px;background:rgba(11,26,58,.85);color:#fff;font-size:13px;font-weight:600;padding:7px 13px;border-radius:999px;backdrop-filter:blur(4px)}
+.ev-bar{max-width:1120px;margin:22px auto 0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:22px;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:20px;padding:18px}
+.ev-cd{display:flex;gap:8px}
+.ev-cd div{min-width:66px;text-align:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:9px 6px}
+.ev-cd b{display:block;font-family:var(--serif);font-size:28px;line-height:1;color:#ffb067}
+.ev-cd span{font-size:12px;opacity:.8}
+.ev-cdl{font-size:12.5px;opacity:.8;margin:0 0 6px;text-align:center;letter-spacing:.06em;text-transform:uppercase}
+.ev-form{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end;margin:0}
+.ev-form h3{grid-column:1/-1;font-size:16px;color:#fff;margin:0}
+.ev-form h3 small{color:#ffb067;font-weight:500;font-size:13.5px}
+.ev-form input,.ev-form select{width:100%;padding:13px 14px;border:1.5px solid transparent;border-radius:12px;font:inherit;font-size:16px;color:var(--ink);background:#fff}
 .ev-form input:focus,.ev-form select:focus{outline:none;border-color:#f07b1f}
-.ev-form .btn{width:100%;justify-content:center}
-.ev-form p{font-size:13px;color:var(--muted);margin:0;text-align:center}
-.ev-form h3{font-size:17px;color:var(--green-900);margin:0}
-.ev .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-.ev-gift{background:linear-gradient(120deg,rgba(240,123,31,.22),rgba(240,123,31,.06));border:1px solid rgba(255,176,103,.45);border-radius:14px;padding:14px 16px;margin:0 0 18px}
-.ev-gift h3{font-size:15px;color:#ffb067;margin:0 0 8px;letter-spacing:.04em;text-transform:uppercase}
-.ev-gift ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
-.ev-gift li{display:flex;gap:10px;align-items:center;font-size:15px}
-.ev-gift li b{flex:none;min-width:78px;font-size:13px;background:#f07b1f;color:#fff;border-radius:999px;padding:3px 10px;text-align:center}
-.ev-gift p{margin:8px 0 0;font-size:13px;opacity:.8}
-.ev-agenda{margin-top:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:0 16px}
+.ev-form .btn{white-space:nowrap;justify-content:center;padding-top:13px;padding-bottom:13px}
+.ev-gift{display:none}
+.ev-agenda{max-width:1120px;margin:14px auto 0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:0 18px}
 .ev-agenda summary{cursor:pointer;padding:13px 0;font-weight:600;color:#ffb067;list-style:none}
 .ev-agenda summary::-webkit-details-marker{display:none}
 .ev-agenda summary::after{content:" ▾"}.ev-agenda[open] summary::after{content:" ▴"}
-.ev-agenda ul{list-style:none;margin:0;padding:0 0 14px;display:grid;gap:8px;border-left:2px solid rgba(255,176,103,.5);padding-left:14px}
+.ev-agenda ul{list-style:none;margin:0 0 14px 6px;padding:0 0 0 14px;display:grid;gap:8px;border-left:2px solid rgba(255,176,103,.5)}
 .ev-agenda li{font-size:14.5px;position:relative}
 .ev-agenda li::before{content:"";position:absolute;left:-20px;top:7px;width:10px;height:10px;border-radius:50%;background:#f07b1f}
 .ev-agenda li b{display:inline-block;min-width:52px;color:#ffb067}
-@media (max-width:860px){.ev{padding:44px 0}.ev-grid{grid-template-columns:1fr;gap:26px}.ev-card{max-width:340px;margin:0 auto}.ev-form{grid-template-columns:1fr}.ev-cd div{min-width:0;flex:1}}
+.ev .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (max-width:980px){.ev-bar{grid-template-columns:1fr}.ev-cd{justify-content:center}.ev-form{grid-template-columns:1fr 1fr}.ev-form .btn,.ev-form select{grid-column:1/-1}}
+@media (max-width:760px){
+  .ev{padding:44px 0 40px}.ev-head{margin-bottom:18px}
+  .ev-chips span{font-size:14px;padding:7px 12px;border-radius:14px}
+  .ev-pic{max-width:520px;border-radius:18px}.ev-pic .d{display:none}.ev-pic .m{display:block}
+  .ev-gift{display:block;max-width:520px;margin:16px auto 0;background:linear-gradient(120deg,rgba(240,123,31,.22),rgba(240,123,31,.06));border:1px solid rgba(255,176,103,.45);border-radius:14px;padding:14px 16px}
+  .ev-gift h3{font-size:14px;color:#ffb067;margin:0 0 8px;letter-spacing:.04em;text-transform:uppercase}
+  .ev-gift ol{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+  .ev-gift li{display:flex;gap:10px;align-items:center;font-size:14.5px}
+  .ev-gift li b{flex:none;min-width:74px;font-size:12.5px;background:#f07b1f;color:#fff;border-radius:999px;padding:3px 9px;text-align:center}
+  .ev-form{grid-template-columns:1fr}.ev-cd div{flex:1;min-width:0}
+}
 </style>
 <section class="ev" id="su-kien" aria-labelledby="h-ev">
-  <div class="container ev-grid">
-    <div class="ev-card"><span class="ev-tag">THƯ MỜI</span><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@b094b579e8a2a1318b66c4cffc19e587c54e614e/landing-pages/assets/thiep-moi-su-kien-thap-f2-11-10-2026.jpg" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/b094b579e8a2a1318b66c4cffc19e587c54e614e/landing-pages/assets/thiep-moi-su-kien-thap-f2-11-10-2026.jpg'" width="720" height="1297" alt="Thư mời sự kiện Giới thiệu dự án FourS Tower – Tháp F2, Chủ nhật 11/10/2026, 9:00, Novotel Danang Premier Han River" loading="lazy" decoding="async"></div>
-    <div>
+  <div class="container">
+    <div class="ev-head">
       <span class="ev-eyebrow">📅 Sự kiện · Sun Property</span>
       <h2 id="h-ev">Giới thiệu dự án FourS Tower – Tháp F2</h2>
       <p class="ev-sub">Tọa độ Mùa xuân – Khởi sinh Thịnh vượng</p>
-      <ul class="ev-info">
-        <li><i aria-hidden="true">📅</i><div><b>Chủ nhật, 11/10/2026 · 9:00 – 11:20</b><span>Đón khách &amp; teabreak từ 9h00</span></div></li>
-        <li><i aria-hidden="true">📍</i><div><b>Novotel Danang Premier Han River</b><span>36 Bạch Đằng, Hải Châu, Đà Nẵng</span><br><a href="https://www.google.com/maps/search/?api=1&amp;query=Novotel+Danang+Premier+Han+River+36+B%E1%BA%A1ch+%C4%90%E1%BA%B1ng" target="_blank" rel="noopener">Chỉ đường ↗</a></div></li>
-      </ul>
-      <div class="ev-gift"><h3>🎁 Bốc thăm may mắn cho khách tham dự</h3><ol>
-        <li><b>Giải nhất</b><span>Loa Bluetooth Marshall Acton III</span></li>
-        <li><b>Giải nhì</b><span>Máy massage cổ vai gáy Philips PPM3306</span></li>
-        <li><b>Giải ba</b><span>Tai nghe Bluetooth Sony WH-CH520</span></li>
-      </ol></div>
-      <div class="ev-cd" id="evCd" aria-label="Thời gian còn lại đến sự kiện"><div><b id="evD">–</b><span>ngày</span></div><div><b id="evH">–</b><span>giờ</span></div><div><b id="evM">–</b><span>phút</span></div></div>
+      <div class="ev-chips">
+        <span>📅 <b>Chủ nhật 11/10/2026 · 9:00 – 11:20</b></span>
+        <span>📍 <b>Novotel Danang Premier Han River</b> · 36 Bạch Đằng <a href="https://www.google.com/maps/search/?api=1&amp;query=Novotel+Danang+Premier+Han+River+36+B%E1%BA%A1ch+%C4%90%E1%BA%B1ng" target="_blank" rel="noopener">Chỉ đường ↗</a></span>
+        <span>🎁 <b>Bốc thăm may mắn</b> · Marshall, Philips, Sony</span>
+      </div>
+    </div>
+    <a class="ev-pic" href="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ab60afb90727e03888cf4619c7381f53e438c93f/landing-pages/assets/thiep-moi-day-du-su-kien-thap-f2-11-10-2026.jpg" target="_blank" rel="noopener" aria-label="Phóng to thư mời sự kiện">
+      <img class="d" src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@ab60afb90727e03888cf4619c7381f53e438c93f/landing-pages/assets/thiep-moi-day-du-su-kien-thap-f2-11-10-2026.jpg" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ab60afb90727e03888cf4619c7381f53e438c93f/landing-pages/assets/thiep-moi-day-du-su-kien-thap-f2-11-10-2026.jpg'" width="1600" height="1492" alt="Thư mời sự kiện Giới thiệu dự án FourS Tower – Tháp F2: Chủ nhật 11/10/2026 9:00 tại Novotel Danang Premier Han River; chương trình và quà bốc thăm may mắn: loa Marshall Acton III, máy massage Philips PPM3306, tai nghe Sony WH-CH520" loading="lazy" decoding="async">
+      <img class="m" src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@ab60afb90727e03888cf4619c7381f53e438c93f/landing-pages/assets/thiep-moi-su-kien-thap-f2-11-10-2026-900.jpg" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ab60afb90727e03888cf4619c7381f53e438c93f/landing-pages/assets/thiep-moi-su-kien-thap-f2-11-10-2026-900.jpg'" width="900" height="1621" alt="Thư mời sự kiện Giới thiệu dự án FourS Tower – Tháp F2, Chủ nhật 11/10/2026, 9:00, Novotel Danang Premier Han River" loading="lazy" decoding="async">
+      <span class="ev-zoom">🔍 Bấm để xem thư mời</span>
+    </a>
+    <div class="ev-gift"><h3>🎁 Bốc thăm may mắn cho khách tham dự</h3><ol>
+      <li><b>Giải nhất</b><span>Loa Bluetooth Marshall Acton III</span></li>
+      <li><b>Giải nhì</b><span>Máy massage cổ vai gáy Philips PPM3306</span></li>
+      <li><b>Giải ba</b><span>Tai nghe Bluetooth Sony WH-CH520</span></li>
+    </ol></div>
+    <div class="ev-bar">
+      <div><p class="ev-cdl">Còn lại</p><div class="ev-cd" id="evCd" aria-label="Thời gian còn lại đến sự kiện"><div><b id="evD">–</b><span>ngày</span></div><div><b id="evH">–</b><span>giờ</span></div><div><b id="evM">–</b><span>phút</span></div></div></div>
       <form class="ev-form lead-form" aria-labelledby="ev-form-title">
-        <h3 class="full" id="ev-form-title">Giữ chỗ tham dự – nhận thư mời ghi tên qua Zalo</h3>
+        <h3 id="ev-form-title">Giữ chỗ tham dự <small>· nhận thư mời ghi tên qua Zalo, số lượng chỗ có hạn</small></h3>
         <label class="sr" for="ev-name">Họ và tên</label><input id="ev-name" name="name" placeholder="Họ và tên *" autocomplete="name" required>
         <label class="sr" for="ev-phone">Số điện thoại</label><input id="ev-phone" name="phone" type="tel" placeholder="Số điện thoại / Zalo *" autocomplete="tel" inputmode="tel" required pattern="[0-9 +.]{9,14}">
-        <label class="sr" for="ev-n">Số người tham dự</label><select id="ev-n" name="yeu_cau" class="full"><option>Tham dự sự kiện 11/10 – 1 người</option><option>Tham dự sự kiện 11/10 – 2 người</option><option>Tham dự sự kiện 11/10 – 3–4 người</option></select>
+        <label class="sr" for="ev-n">Số người tham dự</label><select id="ev-n" name="yeu_cau"><option value="Tham dự sự kiện 11/10 – 1 người">1 người tham dự</option><option value="Tham dự sự kiện 11/10 – 2 người">2 người tham dự</option><option value="Tham dự sự kiện 11/10 – 3–4 người">3–4 người tham dự</option></select>
         <input type="hidden" name="interest" value="Đăng ký sự kiện Tháp F2 – CN 11/10 Novotel"><input type="hidden" name="toa" value="F2">
-        <button class="btn btn-gold full" type="submit">Giữ chỗ tham dự →</button>
-        <p class="full">Số lượng chỗ có hạn · Thông tin được bảo mật</p>
+        <button class="btn btn-gold" type="submit">Giữ chỗ tham dự →</button>
       </form>
-      <details class="ev-agenda"><summary>Xem chương trình sự kiện</summary><ul>
-        <li><b>9h00</b> Đón khách &amp; teabreak</li>
-        <li><b>9h30</b> Khai mạc</li>
-        <li><b>9h40</b> Giới thiệu về Sun Group &amp; Hành trình làm đẹp những vùng đất</li>
-        <li><b>10h00</b> Giới thiệu dự án FourS Tower – Tháp F2</li>
-        <li><b>10h30</b> Tư vấn chuyên sâu</li>
-        <li><b>11h00</b> Bốc thăm may mắn</li>
-        <li><b>11h20</b> Kết thúc chương trình</li>
-      </ul></details>
     </div>
+    <details class="ev-agenda"><summary>Xem chương trình sự kiện</summary><ul>
+      <li><b>9h00</b> Đón khách &amp; teabreak</li>
+      <li><b>9h30</b> Khai mạc</li>
+      <li><b>9h40</b> Giới thiệu về Sun Group &amp; Hành trình làm đẹp những vùng đất</li>
+      <li><b>10h00</b> Giới thiệu dự án FourS Tower – Tháp F2</li>
+      <li><b>10h30</b> Tư vấn chuyên sâu</li>
+      <li><b>11h00</b> Bốc thăm may mắn</li>
+      <li><b>11h20</b> Kết thúc chương trình</li>
+    </ul></details>
   </div>
 </section>
 <script>
