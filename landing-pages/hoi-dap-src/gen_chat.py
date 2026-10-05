@@ -1,5 +1,6 @@
 import json,re,unicodedata,sys
 sys.path.insert(0,'hd'); from kb import KB,CATS
+from docs import DOCS,SRC
 def fold(s):
     s=unicodedata.normalize('NFD',s.lower()); s=''.join(c for c in s if unicodedata.category(c)!='Mn').replace('đ','d')
     s=s.replace('gia dinh','giadinh').replace('cong ty','congty')
@@ -7,7 +8,8 @@ def fold(s):
 items=[]
 for c,i,q,a,k in KB:
     ks=sorted({fold(x) for x in k+[q]} - {''}, key=len)
-    items.append({'c':c,'id':i,'q':q,'a':a,'k':[fold(x) for x in k]})
+    src=', '.join(DOCS[x][0] for x in SRC[i] if x!='tv') or ''
+    items.append({'c':c,'id':i,'q':q,'a':a,'s':src,'k':[fold(x) for x in k]})
 js = ('// Bộ hỏi đáp dùng chung với trang /hoi-dap (sinh tự động từ kb.py)\n'
  'const QA_URL = \'https://www.sun-fours-tower.com/hoi-dap\';\n'
  'const QA_LIVE = true;    // đổi thành true khi trang /hoi-dap đã xuất bản\n'
@@ -50,7 +52,7 @@ const MA_CAN = /f2[\\s\\-._]*\\d{1,2}[ab]?[\\s\\-._]*\\d{1,2}/i;
 const onQA = PATH === '/hoi-dap';
 function reply(hit) {
   st.qn++; st.seen[hit.id] = 1;
-  bot(hit.a);
+  bot(hit.a + (hit.s ? '<small class="cm-src">📄 Căn cứ: ' + hit.s + '</small>' : ''));
   const rel = KB.filter(x => x.c === hit.c && !st.seen[x.id]).slice(0, 2);
   const ask = st.step !== 'done' && !st.refused && (st.qn === 1 || st.qn % 3 === 0);
   const list = rel.map(x => ({t: x.q, fn: () => reply(x)}));
