@@ -10,6 +10,7 @@ for c,i,q,a,k in KB:
     items.append({'c':c,'id':i,'q':q,'a':a,'k':[fold(x) for x in k]})
 js = ('// Bộ hỏi đáp dùng chung với trang /hoi-dap (sinh tự động từ kb.py)\n'
  'const QA_URL = \'https://www.sun-fours-tower.com/hoi-dap\';\n'
+ 'const QA_LIVE = false;   // đổi thành true khi trang /hoi-dap đã xuất bản\n'
  'const KB = ' + json.dumps(items, ensure_ascii=False, separators=(',',':')) + ';\n'
  "const fold = s => ' ' + String(s).toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').replace(/đ/g, 'd')\n"
  "  .replace(/gia dinh/g, 'giadinh').replace(/cong ty/g, 'congty').replace(/[^a-z0-9%]+/g, ' ').trim() + ' ';\n"
@@ -60,8 +61,8 @@ function reply(hit) {
     list.push({t: '📱 Để lại số Zalo', pri: true, silent: true, fn: () => { setInput('Nhập số điện thoại / Zalo…', true); inp.focus(); }});
   } else if (st.step !== 'done') { if (st.step === 'phone') st.step = 'chat'; setInput('Nhập câu hỏi của anh/chị…', false); }
   list.push(onQA ? {t: '📖 Xem trong trang', silent: true, fn: () => { const d = document.getElementById(hit.id); if (d) { d.open = true; if (mobile()) close(); d.scrollIntoView({behavior: 'smooth', block: 'center'}); } }}
-                 : {t: '📖 Xem tất cả câu hỏi', href: QA_URL + '#' + hit.id});
-  choices(list);
+                 : QA_LIVE ? {t: '📖 Xem tất cả câu hỏi', href: QA_URL + '#' + hit.id} : null);
+  choices(list.filter(Boolean));
 }
 // Cho trang Hỏi đáp: bấm "Hỏi trợ lý" là mở chat và hỏi luôn
 window.sftAsk = q => {
