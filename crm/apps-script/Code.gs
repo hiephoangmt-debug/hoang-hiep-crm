@@ -63,7 +63,7 @@ var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan', 'tu_ngay', 'b_tt_ngay', 'a_ck_ng
 // Kiểu tiền với C.Trâm. "Ứng trước"/"Hoàn tiền" làm giảm nợ; "Mình trả lại"/"Nợ cũ" làm tăng nợ;
 // "Điều chỉnh số dư" nhập được số âm (âm = tăng nợ).
 // Đổi mỗi lần cập nhật code – hiện cạnh ngày trên đầu app để biết đã triển khai bản mới chưa.
-var APP_VERSION = 'v04.10k';
+var APP_VERSION = 'v04.10l';
 
 var PAYMENT_TYPES = ['Ứng trước', 'Hoàn tiền', 'Mình trả lại', 'Nợ cũ', 'Điều chỉnh số dư'];
 
@@ -718,14 +718,25 @@ function parseNoteLine_(line, ngay) {
   }
   var m = inner.match(/^(đh\s*\/\s*rút|đh\s*\+\s*rút|đáo\s*\/\s*rút|đh|đáo hạn|đáo|rút)(\s+qr)?\s+(.+?)\s+([\d.,]+\s*(?:tr|triệu)?)\s*\/\s*([\d.,]+)\s*(k|%)?\s+hoàn\s+([\d.,+]+)\s*%?(.*)$/i);
   if (!m) {
-    var lai = inner.match(/^(.+?)\s+lãi\s+([\d.,]+\s*k?)(.*)$/i);
-    if (!lai) return { kind: 'skip', lai: 0 };
-    var words = lai[1].split(' '), w0 = words[0].toLowerCase();
-    var types = { 'vé': 'Vé máy bay / tàu xe', 've': 'Vé máy bay / tàu xe', 'điện': 'Hoá đơn điện', 'nước': 'Hoá đơn nước', 'momo': 'Nạp ví MoMo', 'học': 'Học phí' };
-    var loaiK = types[w0] || 'Khác';
-    if (types[w0] && words.length > 1) words.shift();
-    return { kind: 'bill', ngay: ngay, loai_hd: loaiK, so_tien: 0, a_ten: words.join(' '), lai_tay: noteThousand_(lai[2]),
-      phi_a: 0, phi_minh: 0, done: true, ghi_chu: 'Dán sổ: ' + line };
+    // "Vé Hạnh lãi 60k" hoặc "Lãi vé máy bay Quang - ck Yến 120" (lãi ghi trước, số ở cuối)
+    var lai = inner.match(/^(.+?)\s+lãi\s+([\d.,]+\s*k?)(.*)$/i), desc, laiRaw;
+    if (lai) { desc = lai[1]; laiRaw = lai[2]; }
+    else {
+      var lai2 = inner.match(/^lãi\s+(.+?)\s*[:=]?\s+([\d.,]+\s*k?)\s*(?:RR|R)?$/i);
+      if (!lai2) return { kind: 'skip', lai: 0 };
+      desc = lai2[1]; laiRaw = lai2[2];
+    }
+    var loaiK = 'Khác', dl = desc.toLowerCase();
+    var tm = dl.match(/^(vé máy bay|vé tàu|vé xe|vé|ve|điện|nước|momo|học phí|bảo hiểm)\s*/);
+    if (tm) {
+      var w = tm[1];
+      loaiK = /^v/.test(w) ? 'Vé máy bay / tàu xe' : w === 'điện' ? 'Hoá đơn điện' : w === 'nước' ? 'Hoá đơn nước' : w === 'momo' ? 'Nạp ví MoMo'
+        : w === 'học phí' ? 'Học phí' : 'Thanh toán bảo hiểm';
+      if (desc.length > tm[0].length) desc = desc.slice(tm[0].length);
+    }
+    var bits = desc.split(/\s+-\s+/), aTen = bits.shift().trim(), extra = bits.join(' - ');
+    return { kind: 'bill', ngay: ngay, loai_hd: loaiK, so_tien: 0, a_ten: aTen, lai_tay: noteThousand_(laiRaw),
+      phi_a: 0, phi_minh: 0, done: true, ghi_chu: (extra ? extra + ' · ' : '') + 'Dán sổ: ' + line };
   }
   var tokens = m[3].split(' '), the = [tokens.shift()];
   while (tokens.length > 1 && NOTE_CARD_EXTRA.test(tokens[0])) the.push(tokens.shift());

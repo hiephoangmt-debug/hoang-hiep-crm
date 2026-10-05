@@ -959,6 +959,26 @@ test('amounts of 100 million+ written in thousands (124.523) and duplicate lines
   assert.strictEqual(all.filter((t) => t.the === 'MB').length, 2);
 });
 
+test('profit-only lines: "Lãi vé máy bay Quang - ck Yến 120" and "Vé Hạnh lãi 60k"', () => {
+  const { call, fake } = fresh();
+  fake.setToday('2026-10-05');
+  const text = ['5/10:', 'Lãi vé máy bay Quang - ck Yến 120', 'Vé máy bay Hạnh lãi 60k', 'Lãi bảo hiểm Long 1.200'].join('\n');
+  const b = call('pasteNotes', { text }).items.filter((i) => i.kind === 'bill');
+  assert.strictEqual(b.length, 3);
+  assert.strictEqual(b[0].loai_hd, 'Vé máy bay / tàu xe');
+  assert.strictEqual(b[0].a_ten, 'Quang');
+  assert.strictEqual(b[0].lai, 120000);
+  assert.ok(b[0].ghi_chu.startsWith('ck Yến'));
+  assert.strictEqual(b[1].a_ten, 'Hạnh');
+  assert.strictEqual(b[1].lai, 60000);
+  assert.strictEqual(b[2].loai_hd, 'Thanh toán bảo hiểm');
+  assert.strictEqual(b[2].lai, 1200000);
+  const sv = call('pasteNotes', { text, save: true });
+  assert.strictEqual(sv.saved.bill, 3);
+  const rep = call('report', { type: 'day', year: 2026, month: 10 });
+  assert.strictEqual(rep.rows[4].hd_lai, 1380000, 'profit shows in the daily report');
+});
+
 test('pasting earlier months: history before closing, December notes pasted in January, saving in rounds', () => {
   const { call, fake } = fresh();
   fake.setToday('2027-01-05');

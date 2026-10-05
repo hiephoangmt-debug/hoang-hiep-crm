@@ -342,7 +342,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
           <button data-v="done">Hoàn tất (tháng này)</button>
           <button data-v="all">Tất cả</button>
         </div>
-        <button class="btn btn--accent btn--sm" data-act="new-bill">+ Hoá đơn</button>
+        <button class="btn btn--accent btn--sm" data-act="new-bill">+ Hoá đơn</button> <button class="btn btn--sm" data-act="new-ticket">✈️ + Vé / lãi khác</button>
       </div>
       <div class="kpis" id="bill-kpis"></div>
       <div id="bill-list"></div>
@@ -620,26 +620,28 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     <div class="form-grid">
       <label class="f">Ngày<input type="date" name="ngay" required></label>
       <label class="f">Loại hoá đơn<select name="loai_hd"></select></label>
-      <label class="f">Mã hoá đơn / mã KH<input name="ma_hd" placeholder="VD: PE0123456"></label>
-      <label class="f">Số tiền hoá đơn <span class="hint">5tr · 5.000</span><input name="so_tien_text" inputmode="decimal"></label>
-      <label class="f">Lãi nhập tay <span class="hint">vé, dịch vụ khác – để trống nếu tính theo %</span><input name="lai_tay_text" inputmode="decimal" placeholder="VD: 60k"></label>
+      <label class="f" data-bill-full>Mã hoá đơn / mã KH<input name="ma_hd" placeholder="VD: PE0123456"></label>
+      <label class="f"><span data-bill-full>Số tiền hoá đơn <span class="hint">5tr · 5.000</span></span><span data-bill-simple>Giá vé / số tiền <span class="hint">không bắt buộc</span></span><input name="so_tien_text" inputmode="decimal"></label>
+      <label class="f">Lãi nhập tay <span class="hint" data-bill-full>vé, dịch vụ khác – để trống nếu tính theo %</span><span class="hint" data-bill-simple>tiền lãi của mình, VD 120 = 120.000đ</span><input name="lai_tay_text" inputmode="decimal" placeholder="VD: 120"></label>
     </div>
-    <h3 style="margin:14px 0 6px">👤 Người A – có hoá đơn</h3>
+    <h3 style="margin:14px 0 6px"><span data-bill-full>👤 Người A – có hoá đơn</span><span data-bill-simple>👤 Khách</span></h3>
     <div class="form-grid">
       <label class="f">Tên<input name="a_ten" list="dl-customers" required></label>
       <label class="f">SĐT<input name="a_sdt" inputmode="tel"></label>
-      <label class="f">Phí A (%) <span class="hint">A được giảm, chuyển lại cho mình phần còn lại</span><input name="phi_a" inputmode="decimal" value="3"></label>
-      <label class="f">A đã chuyển cho mình ngày<input type="date" name="a_ck_ngay"></label>
+      <label class="f" data-bill-full>Phí A (%) <span class="hint">A được giảm, chuyển lại cho mình phần còn lại</span><input name="phi_a" inputmode="decimal" value="3"></label>
+      <label class="f"><span data-bill-full>A đã chuyển cho mình ngày</span><span data-bill-simple>Đã nhận tiền ngày <span class="hint">để trống nếu chưa nhận</span></span><input type="date" name="a_ck_ngay"></label>
     </div>
-    <h3 style="margin:14px 0 6px">💳 Người B – cần rút tiền bằng ví trả sau <span class="hint">(để trống nếu chưa ghép)</span></h3>
-    <div class="form-grid">
+    <h3 style="margin:14px 0 6px" data-bill-full>💳 Người B – cần rút tiền bằng ví trả sau <span class="hint">(để trống nếu chưa ghép)</span></h3>
+    <div class="form-grid" data-bill-full>
       <label class="f">Tên<input name="b_ten" list="dl-customers"></label>
       <label class="f">SĐT<input name="b_sdt" inputmode="tel"></label>
       <label class="f">Ví trả sau của B<select name="vi_b"></select></label>
       <label class="f">Phí của mình (%)<input name="phi_minh" inputmode="decimal" value="2"></label>
       <label class="f">B đã thanh toán hoá đơn ngày<input type="date" name="b_tt_ngay"></label>
       <label class="f">Mình đã chuyển cho B ngày<input type="date" name="b_ck_ngay"></label>
-      <label class="f full">Ghi chú<input name="ghi_chu"></label>
+    </div>
+    <div class="form-grid" style="margin-top:10px">
+      <label class="f full">Ghi chú<input name="ghi_chu" placeholder="VD: ck Yến"></label>
       <label class="f full" style="display:flex;gap:8px;align-items:center"><input type="checkbox" name="huy" style="width:auto"> Huỷ lần ghép này</label>
       <div class="full calc" id="bill-calc" style="grid-template-columns:1fr"></div>
     </div>
@@ -864,7 +866,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       S.boot = b;
       $('#login').classList.add('hidden');
       $('#app').classList.remove('hidden');
-      var UI_VERSION = 'v04.10k';
+      var UI_VERSION = 'v04.10l';
       $('#today-label').textContent = dmy(b.today) + ' · ' + UI_VERSION + (b.version === UI_VERSION ? '' : ' ⚠ Mã.gs chưa cập nhật');
       fillSelect($('[name=dich_vu]'), b.services);
       fillSelect($('#tx-service'), b.services, true);
@@ -1766,11 +1768,19 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     updateBill();
     $('#bill-modal').classList.remove('hidden');
   }
+  function billSimple() {
+    var f = billForm.elements;
+    return /^Vé/.test(f.loai_hd.value) || (!!laiTay(f.lai_tay_text.value) && !f.b_ten.value.trim());
+  }
   function updateBill() {
+    var simple = billSimple();
+    $$('[data-bill-full]', billForm).forEach(function (el) { el.classList.toggle('hidden', simple); });
+    $$('[data-bill-simple]', billForm).forEach(function (el) { el.classList.toggle('hidden', !simple); });
     var f = billForm.elements, amt = parseAmount(f.so_tien_text.value), pa = num(f.phi_a.value), pm = num(f.phi_minh.value);
     var aCk = Math.round(amt * (100 - pa) / 100), bNhan = Math.round(amt * (100 - pa - pm) / 100);
     var lai = laiTay(f.lai_tay_text.value);
-    if (lai) { $('#bill-calc').innerHTML = '💰 <b>Doanh thu của mình</b> (nhập tay) = <strong class="pos">' + money(lai) + '</strong>' + (amt ? ' · hoá đơn ' + money(amt) : ''); return; }
+    if (lai || simple) { $('#bill-calc').innerHTML = '<div>💰 <span style="font-weight:700">Lãi của mình</span> = <span class="pos" style="font-weight:700">' + money(lai) + '</span>' + (amt ? ' · số tiền ' + money(amt) : '') +
+      '</div><div class="muted">' + (f.a_ck_ngay.value ? '✅ Đã nhận tiền → Hoàn tất, tính vào doanh thu' : 'Chưa nhận tiền → Chờ đối soát (điền ngày nhận tiền để tính vào doanh thu)') + '</div>'; return; }
     $('#bill-calc').innerHTML = 'Hoá đơn <strong>' + money(amt) + '</strong> (B thanh toán bằng ví trả sau)<br>' +
       '→ A chuyển lại cho mình ' + pct(100 - pa) + ' = <strong>' + money(aCk) + '</strong> <span class="muted">(A được giảm ' + money(amt - aCk) + ')</span><br>' +
       '→ Mình chuyển cho B ' + pct(100 - pa - pm) + ' = <strong>' + money(bNhan) + '</strong> <span class="muted">(B chịu phí ' + pct(pa + pm) + ')</span><br>' +
@@ -1807,6 +1817,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   document.addEventListener('click', function (e) {
     var a = e.target.closest('[data-act=new-bill]');
     if (a) { openBill(); return; }
+    if (e.target.closest('[data-act=new-ticket]')) { openBill({ loai_hd: 'Vé máy bay / tàu xe', a_ck_ngay: S.boot.today }); return; }
     var ed = e.target.closest('[data-billedit]');
     if (ed) { openBill((S.bills || []).filter(function (x) { return x.id === ed.dataset.billedit; })[0]); return; }
     var dn = e.target.closest('[data-billdone]');
