@@ -665,7 +665,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       <label class="f">Loại hoá đơn<select name="loai_hd"></select></label>
       <label class="f" data-bill-full>Mã hoá đơn / mã KH<input name="ma_hd" placeholder="VD: PE0123456"></label>
       <label class="f"><span data-bill-full>Số tiền hoá đơn <span class="hint">5tr · 5.000</span></span><span data-bill-simple>Giá vé / số tiền <span class="hint">không bắt buộc</span></span><input name="so_tien_text" inputmode="decimal"></label>
-      <label class="f">Lãi nhập tay <span class="hint" data-bill-full>vé, dịch vụ khác – để trống nếu tính theo %</span><span class="hint" data-bill-simple>tiền lãi của mình, VD 120 = 120.000đ</span><input name="lai_tay_text" inputmode="decimal" placeholder="VD: 120"></label>
+      <label class="f">Lãi nhập tay <span class="hint" data-bill-full>dịch vụ khác – để trống nếu tính theo %. Vé &amp; khách sạn ghi ở tab ✈️ Vé &amp; KS</span><span class="hint" data-bill-simple>tiền lãi của mình, VD 120 = 120.000đ</span><input name="lai_tay_text" inputmode="decimal" placeholder="VD: 120"></label>
     </div>
     <h3 style="margin:14px 0 6px"><span data-bill-full>👤 Người A – có hoá đơn</span><span data-bill-simple>👤 Khách</span></h3>
     <div class="form-grid">
@@ -909,7 +909,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       S.boot = b;
       $('#login').classList.add('hidden');
       $('#app').classList.remove('hidden');
-      var UI_VERSION = 'v04.11b';
+      var UI_VERSION = 'v04.11c';
       $('#today-label').textContent = dmy(b.today) + ' · ' + UI_VERSION + (b.version === UI_VERSION ? '' : ' ⚠ Mã.gs chưa cập nhật');
       fillSelect($('[name=dich_vu]'), b.services);
       fillSelect($('#tx-service'), b.services, true);
@@ -1951,7 +1951,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   }
   function billSimple() {
     var f = billForm.elements;
-    return /^Vé/.test(f.loai_hd.value) || (!!laiTay(f.lai_tay_text.value) && !f.b_ten.value.trim());
+    return !!laiTay(f.lai_tay_text.value) && !f.b_ten.value.trim();
   }
   function updateBill() {
     var simple = billSimple();

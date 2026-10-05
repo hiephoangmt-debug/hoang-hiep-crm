@@ -46,7 +46,7 @@ var SHEETS = {
 // Sheet thêm ở bản cập nhật: tự tạo khi cần, không phải chạy lại setup().
 var AUTO_SHEETS = ['DoiSoat', 'KetSo', 'TheKhach', 'TaiLieu', 'GiuThe', 'NhatKy', 'HoaDon', 'DatVe'];
 var TRIP_TYPES = ['Vé máy bay', 'Vé tàu', 'Vé xe', 'Khách sạn', 'Tour', 'Visa', 'Khác'];
-var BILL_TYPES = ['Hoá đơn điện', 'Hoá đơn nước', 'Nạp ví MoMo', 'Thanh toán bảo hiểm', 'Internet / truyền hình', 'Học phí', 'Vé máy bay / tàu xe', 'Khác'];
+var BILL_TYPES = ['Hoá đơn điện', 'Hoá đơn nước', 'Nạp ví MoMo', 'Thanh toán bảo hiểm', 'Internet / truyền hình', 'Học phí', 'Khác'];
 var PAYLATER_WALLETS = ['MoMo Ví Trả Sau', 'SPayLater (Shopee)', 'Kredivo', 'Home PayLater', 'Fundiin', 'ZaloPay trả sau', 'Khác'];
 var DOC_TYPES = ['CCCD mặt trước', 'CCCD mặt sau', 'Ảnh thẻ', 'CCCD chủ thẻ', 'Ảnh giữ / trả thẻ', 'Khác'];
 // Loại ảnh lưu nhiều tấm (không thay ảnh cũ).
@@ -67,7 +67,7 @@ var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan', 'tu_ngay', 'b_tt_ngay', 'a_ck_ng
 // Kiểu tiền với C.Trâm. "Ứng trước"/"Hoàn tiền" làm giảm nợ; "Mình trả lại"/"Nợ cũ" làm tăng nợ;
 // "Điều chỉnh số dư" nhập được số âm (âm = tăng nợ).
 // Đổi mỗi lần cập nhật code – hiện cạnh ngày trên đầu app để biết đã triển khai bản mới chưa.
-var APP_VERSION = 'v04.11b';
+var APP_VERSION = 'v04.11c';
 
 var PAYMENT_TYPES = ['Ứng trước', 'Hoàn tiền', 'Mình trả lại', 'Nợ cũ', 'Điều chỉnh số dư'];
 
@@ -752,10 +752,10 @@ function parseNoteLine_(line, ngay) {
         ghi_chu: (extra2 ? extra2 + ' · ' : '') + 'Dán sổ: ' + line };
     }
     var loaiK = 'Khác', dl = desc.toLowerCase();
-    var tm = dl.match(/^(vé máy bay|vé tàu|vé xe|vé|ve|điện|nước|momo|học phí|bảo hiểm)\s*/);
+    var tm = dl.match(/^(điện|nước|momo|học phí|bảo hiểm)\s*/);
     if (tm) {
       var w = tm[1];
-      loaiK = /^v/.test(w) ? 'Vé máy bay / tàu xe' : w === 'điện' ? 'Hoá đơn điện' : w === 'nước' ? 'Hoá đơn nước' : w === 'momo' ? 'Nạp ví MoMo'
+      loaiK = w === 'điện' ? 'Hoá đơn điện' : w === 'nước' ? 'Hoá đơn nước' : w === 'momo' ? 'Nạp ví MoMo'
         : w === 'học phí' ? 'Học phí' : 'Thanh toán bảo hiểm';
       if (desc.length > tm[0].length) desc = desc.slice(tm[0].length);
     }
@@ -1300,6 +1300,7 @@ function billCalc_(b) {
 
 function apiListBills_(p) {
   p = p || {};
+  migrateTicketBills_();
   var rows = readAll_('HoaDon').map(billCalc_);
   var mode = p.mode || 'open';
   rows = rows.filter(function (b) {
@@ -1411,8 +1412,30 @@ function tripText_(v) {
   }).join(' + ') + ' = ' + fmtMoney_(v.doanh_thu) + ' · ' + v.trang_thai;
 }
 
+/** Vé máy bay / tàu ghi ở tab Hoá đơn (bản cũ) → chuyển sang tab ✈️ Vé & KS, xoá khỏi Hoá đơn (không tính trùng). */
+function migrateTicketBills_() {
+  var olds = readAll_('HoaDon').filter(function (b) { return /^Vé/i.test(String(b.loai_hd || '')); });
+  if (!olds.length) return 0;
+  return withLock_(function () {
+    olds.forEach(function (b) {
+      b = billCalc_(b);
+      var t = /tàu/i.test(b.ghi_chu + ' ' + b.a_ten) ? 'Vé tàu' : /xe/i.test(b.ghi_chu) ? 'Vé xe' : 'Vé máy bay';
+      var obj = { id: newId_(), ngay: b.ngay, khach_id: b.a_khach_id, ten: b.a_ten, sdt: b.a_sdt || '',
+        chi_tiet: JSON.stringify([{ loai: t, so_nguoi: 1, lai: b.doanh_thu, gia: 0, mo_ta: b.ma_hd || '' }]),
+        ngay_di: '', ngay_thu: b.huy ? '' : (b.a_ck_ngay || ''), huy: b.huy || '', ghi_chu: b.ghi_chu || '', tao_luc: b.tao_luc || nowStr_(), cap_nhat: nowStr_() };
+      tripCalc_(obj);
+      var row = {}; SHEETS.DatVe.forEach(function (h) { if (obj[h] !== undefined) row[h] = obj[h]; });
+      appendObj_('DatVe', row);
+      deleteObj_('HoaDon', b.id);
+      audit_('Vé & KS', 'Chuyển từ Hoá đơn', obj.id, obj.ngay, tripText_(obj), billText_(b), tripText_(obj));
+    });
+    return olds.length;
+  });
+}
+
 function apiListTrips_(p) {
   p = p || {};
+  migrateTicketBills_();
   var all = readAll_('DatVe').map(tripCalc_);
   var t = parseYmd_(todayStr_()), mFrom = ymd_(t.y, t.m, 1);
   var mode = p.mode || 'open';

@@ -1021,6 +1021,26 @@ test('✈️ Vé & KS: one booking with flight + hotel, revenue = people × fee 
   assert.strictEqual(call('listTrips', { mode: 'all' }).rows.length, 1);
 });
 
+test('old ticket rows in Hoá đơn move to ✈️ Vé & KS once, without double counting', () => {
+  const { call, gas, fake } = fresh();
+  fake.setToday('2026-10-05');
+  assert.ok(gas.BILL_TYPES.indexOf('Vé máy bay / tàu xe') < 0, 'no ticket type in Hoá đơn');
+  // dòng cũ (bản trước) đã lưu ở Hoá đơn
+  gas.appendObj_('HoaDon', { id: 'old1', ngay: '2026-10-03', loai_hd: 'Vé máy bay / tàu xe', so_tien: 0, a_ten: 'Hạnh', a_sdt: '0905111222', phi_a: 0, phi_minh: 0,
+    lai_tay: 60000, a_ck_ngay: '2026-10-03', ghi_chu: 'tati', tao_luc: '2026-10-03 10:00' });
+  call('saveBill', { ngay: '2026-10-03', loai_hd: 'Hoá đơn điện', so_tien: 1000000, a_ten: 'Thuỷ', phi_a: 2, phi_minh: 3, b_ten: 'Hiếu', b_tt_ngay: '2026-10-03', a_ck_ngay: '2026-10-03', b_ck_ngay: '2026-10-03' });
+  const before = call('dashboard').money.thang_nay.tong_lai;
+  assert.strictEqual(call('listBills', { mode: 'all' }).rows.length, 1);
+  const trips = call('listTrips', { mode: 'all' }).rows;
+  assert.strictEqual(trips.length, 1);
+  assert.strictEqual(trips[0].ten, 'Hạnh');
+  assert.strictEqual(trips[0].doanh_thu, 60000);
+  assert.strictEqual(trips[0].trang_thai, 'Đã thu');
+  assert.strictEqual(call('dashboard').money.thang_nay.tong_lai, before, 'same total profit after moving');
+  call('listTrips', { mode: 'all' });
+  assert.strictEqual(call('listTrips', { mode: 'all' }).rows.length, 1, 'moved only once');
+});
+
 test('pasting earlier months: history before closing, December notes pasted in January, saving in rounds', () => {
   const { call, fake } = fresh();
   fake.setToday('2027-01-05');
