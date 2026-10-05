@@ -8,6 +8,8 @@
  *  3. Triển khai → Ứng dụng web (Thực thi: Tôi · Ai có quyền truy cập: Bất kỳ ai) → copy URL /exec.
  *  4. Dán URL đó vào WEB_APP_URL, lưu, chạy hàm caiDatTelegram() một lần.
  *
+ * Chat AI (tuỳ chọn): thêm file AI.gs và KienThuc.gs, đặt ANTHROPIC_API_KEY trong Thuộc tính tập lệnh.
+ *
  * Sheet tự tạo: Lead (khách để lại số), Chat (tin nhắn), TraLoi (câu trả lời từ Telegram), Map (nội bộ).
  */
 

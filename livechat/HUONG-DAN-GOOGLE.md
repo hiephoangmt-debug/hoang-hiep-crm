@@ -5,6 +5,7 @@ Phương án **không cần thuê server**:
 - **Khung chat trên landing**: bot tự trả lời ngay trên trình duyệt của khách (chào, nút hỏi nhanh, kịch bản 4 bước, tự hỏi khi khách đọc chậm, xin số, chuyển Zalo).
 - **Google Apps Script** (miễn phí) nhận tin nhắn và lead, **lưu vào Google Sheet**, **báo về Telegram**.
 - Bạn **Reply tin báo trong Telegram**, khách thấy câu trả lời trong khung chat sau vài giây. Gõ `/zalo` (dạng Reply) để gửi nút Chat Zalo.
+- **Chat AI thông minh** (tuỳ chọn, xem Bước 7): khách tự gõ câu hỏi thì AI Claude trả lời ngay theo đúng thông tin dự án và cách nói 4 bước.
 
 So với Render:
 
@@ -24,7 +25,7 @@ Phù hợp khi mới chạy ads, lượng khách vừa phải (vài trăm khách
 
 1. Vào **sheets.google.com**, tạo bảng tính mới, đặt tên `Casamia – Lead & Chat`.
 2. Menu **Tiện ích mở rộng → Apps Script**.
-3. Xoá hết nội dung có sẵn, dán **toàn bộ** file `livechat/google-apps-script/Code.gs` (208 dòng).
+3. Xoá hết nội dung có sẵn, dán **toàn bộ** file `livechat/google-apps-script/Code.gs` (218 dòng).
    - Nếu báo lỗi *"SyntaxError: Unexpected end of input"* là **mã bị dán thiếu**. Dùng bản chia nhỏ trong thư mục `google-apps-script/chia-nho/`: tạo 3 file bằng nút **＋ → Tập lệnh** (đặt tên `Phan1`, `Phan2`, `Phan3`) rồi dán từng phần vào đúng file. Nhớ xoá mã cũ bị thiếu trong file `Mã.gs`.
    - Kiểm tra: dòng cuối của mỗi phần phải là dấu `}`.
 4. Ở đầu file, điền:
@@ -83,6 +84,56 @@ Cách khác: đăng file lên hosting bạn đang có, hoặc dán vào LadiPage
 1. Mở landing trên điện thoại, nhắn trong khung chat → Telegram báo **🔔 KHÁCH MỚI VÀO CHAT**.
 2. Reply tin đó trên Telegram → câu trả lời hiện trong khung chat sau vài giây.
 3. Gửi form với số thử → sheet **Lead** có dòng mới, Telegram báo **🔥 CÓ SỐ ĐIỆN THOẠI KHÁCH**.
+
+## Bước 7 – Bật chat AI thông minh (tuỳ chọn)
+
+Khi bật, câu khách **tự gõ** được AI (Claude của Anthropic) trả lời trong vài giây, dựa trên kiến thức dự án và chính sách mới nhất, theo đúng 4 bước: dạ ghi nhận → đưa phương án → dẫn dắt xin thông tin → chuyển Zalo. Nút hỏi nhanh vẫn dùng kịch bản soạn sẵn (tức thì).
+
+AI được dặn:
+- chỉ nói thông tin có trong `ai/kien-thuc.md`;
+- **không tự bịa giá, diện tích, căn trống**: những thứ này AI xin số để gửi bảng hàng;
+- không dùng chữ "cam kết lợi nhuận";
+- nếu khách hỏi "em là người hay máy", AI nói thật mình là trợ lý tự động của anh Hiệp.
+
+**1. Lấy khoá API**
+1. Vào **console.anthropic.com**, đăng ký và nạp tiền (Billing).
+2. Vào **API Keys → Create Key**, copy khoá (dạng `sk-ant-...`).
+3. Nên đặt **giới hạn chi tiêu hằng tháng** trong mục **Limits** của Console.
+
+**2. Dán mã AI vào Apps Script**
+1. Trong Apps Script, bấm **＋ → Tập lệnh**, tạo 2 file `AI` và `KienThuc`.
+2. Dán nội dung `google-apps-script/AI.gs` và `google-apps-script/KienThuc.gs` vào đúng file.
+3. Dán lại `Code.gs` (hoặc `chia-nho/Phan2.gs`) bản mới, vì đã thêm phần gọi AI.
+
+**3. Cất khoá vào nơi bí mật**
+
+Bấm ⚙️ **Cài đặt dự án** → kéo xuống **Thuộc tính tập lệnh** → **Thêm thuộc tính**:
+- Tên: `ANTHROPIC_API_KEY`
+- Giá trị: khoá `sk-ant-...`
+
+Sau đó bấm **Lưu**.
+
+⚠️ **Không dán khoá vào code, không gửi khoá qua chat hay GitHub.** Lộ khoá thì vào Console bấm **Delete** khoá đó và tạo khoá mới.
+
+**4. Triển khai lại**
+
+Vào **Triển khai → Quản lý các bản triển khai → ✏️ → Phiên bản: Phiên bản mới → Triển khai**. URL `/exec` giữ nguyên.
+
+**5. Xuất lại landing**
+
+Chạy lại lệnh ở Bước 4. Bản xuất kèm `--gas` tự bật AI; thêm `--no-ai` nếu muốn tắt.
+
+**Chi phí và an toàn**
+- Mỗi câu trả lời tốn một khoản nhỏ theo bảng giá của Anthropic. Lời dặn được lưu đệm (prompt caching) nên các câu sau rẻ hơn.
+- Mã tự giới hạn **400 câu/ngày** và **25 câu/khách/ngày**. Đổi bằng `AI_DAILY_LIMIT` và `AI_PER_VISITOR` trong `AI.gs`.
+- Mã bật sẵn tính năng **dự phòng phía server** (`fallbacks: "default"`): nếu mô hình chính từ chối một câu, Anthropic tự chạy lại bằng mô hình dự phòng. Nếu vẫn bị từ chối, hoặc AI lỗi, chậm quá 30 giây, chưa có khoá, hay hết hạn mức, khung chat tự quay về kịch bản soạn sẵn. Khách không bao giờ bị bỏ lơ.
+- Khi bạn đã Reply khách trong Telegram, AI tự nhường cho bạn trong 10 phút.
+- Telegram ghi rõ câu nào do **🧠 TRỢ LÝ AI** trả lời. Sheet `Chat` ghi người gửi là `Bot AI`.
+
+**Sửa kiến thức cho AI** (giá, chính sách mới…)
+1. Sửa file `livechat/ai/kien-thuc.md`. Cách nói chuyện nằm ở `ai/prompt.js`.
+2. Chạy `npm run build-gas` để tạo lại `KienThuc.gs`.
+3. Dán `KienThuc.gs` vào Apps Script và triển khai lại.
 
 ## Google Sheet có gì
 

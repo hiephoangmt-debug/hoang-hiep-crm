@@ -48,11 +48,11 @@ function who(conv) {
 
 // Hội thoại gần nhất, tách từng lượt Khách / Tư vấn, mỗi lượt cách nhau 1 dòng trống.
 function transcript(conv, max = 8) {
-  const LABEL = { visitor: '🙋 <b>KHÁCH</b>', agent: '💼 <b>TƯ VẤN</b>', auto: '🤖 <b>TƯ VẤN (tự động)</b>' };
+  const LABEL = { visitor: '🙋 <b>KHÁCH</b>', agent: '💼 <b>TƯ VẤN</b>', auto: '🤖 <b>TƯ VẤN (tự động)</b>', ai: '🧠 <b>TRỢ LÝ AI</b>' };
   const groups = [];
   for (const m of (conv.messages || []).slice(-max)) {
     if (m.from === 'system') { groups.push({ note: m.text }); continue; }
-    const who = m.from === 'visitor' ? 'visitor' : m.auto ? 'auto' : 'agent';
+    const who = m.from === 'visitor' ? 'visitor' : m.ai ? 'ai' : m.auto ? 'auto' : 'agent';
     const text = m.text.length > 300 ? m.text.slice(0, 300) + '…' : m.text;
     const g = groups[groups.length - 1];
     if (g && g.who === who) g.lines.push(text);

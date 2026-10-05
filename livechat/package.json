@@ -7,12 +7,14 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "export": "node tools/export-landing.js"
+    "export": "node tools/export-landing.js",
+    "build-gas": "node tools/build-gas.js"
   },
   "engines": {
     "node": ">=18"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.131.0",
     "express": "^5.2.1",
     "socket.io": "^4.8.4"
   }

@@ -57,6 +57,14 @@ Repo đã có sẵn file `render.yaml`, Render đọc file này và tự điền
 
 Muốn cả nhóm sale cùng nhận: xem hướng dẫn nhóm trong `README.md`, rồi dùng chat ID của nhóm (số âm).
 
+### Bật chat AI thông minh (tuỳ chọn)
+
+Render → **Environment** → thêm `ANTHROPIC_API_KEY` = khoá `sk-ant-...` (lấy ở console.anthropic.com) → **Save Changes**.
+
+Khi chưa có tư vấn viên trực tuyến, câu khách tự gõ sẽ được AI trả lời. Có tư vấn viên đăng nhập thì để người trả lời. Log khởi động hiện *"Chat AI: BẬT"*.
+
+Mặc định giới hạn 400 câu/ngày, đổi bằng `AI_DAILY_LIMIT`. Chi tiết cách AI hoạt động, chi phí và cách sửa kiến thức: xem **Bước 7** trong `HUONG-DAN-GOOGLE.md`.
+
 ## Bước 6 – Kiểm tra
 
 1. `https://…onrender.com/healthz` → hiện chữ **ok**.

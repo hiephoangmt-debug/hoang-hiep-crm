@@ -90,7 +90,7 @@
       var body = {
         type: type, v: visitorId, page: location.href, utm: storage('casamia_utm') || '',
         name: state.lead.name, phone: state.lead.phone,
-        transcript: state.messages.slice(-8).map(function (m) { return { from: m.from, text: m.text, auto: !!m.auto }; }),
+        transcript: state.messages.slice(-8).map(function (m) { return { from: m.from, text: m.text, auto: !!m.auto, ai: !!m.ai }; }),
       };
       for (var k in extra) body[k] = extra[k];
       fetch(GAS, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) }).catch(function () {});
@@ -114,6 +114,7 @@
             if (r.at <= (state.lastReplyAt || 0)) return;
             state.lastReplyAt = r.at; save();
             cancel(); // tư vấn viên trả lời thì bot dừng các tin tự động đang chờ
+            state.lastHumanAt = Date.now();
             var m = { from: 'agent', text: r.text };
             if (r.action === 'zalo') m.action = 'zalo';
             push(m);
@@ -152,6 +153,32 @@
         }, i * 1600 + 300));
       });
     }
+    // ----- Chat AI: Google Apps Script gọi Claude (AI.gs). Lỗi/quá lâu/chưa cài khoá → trả về false để dùng kịch bản -----
+    var aiBusy = false;
+    function aiAsk(text, first, fallback) {
+      var done = false, typingTick;
+      var finish = function (d) {
+        if (done) return; done = true; aiBusy = false; clearInterval(typingTick);
+        if (!d || !d.reply) return fallback();
+        var m = { from: 'agent', text: String(d.reply), auto: true, ai: true };
+        if (d.action === 'zalo') m.action = 'zalo';
+        push(m);
+        if (d.action === 'form' && !state.lead.phone) setTimeout(function () { if (!state.lead.phone) fire('lead:request'); }, 1200);
+      };
+      aiBusy = true;
+      fire('typing'); typingTick = setInterval(function () { fire('typing'); }, 2500);
+      setTimeout(function () { finish(null); }, 30000);
+      var body = {
+        type: 'message', ai: true, text: text, first: first, v: visitorId, page: location.href, utm: storage('casamia_utm') || '',
+        name: state.lead.name, phone: state.lead.phone,
+        transcript: state.messages.slice(-8).map(function (m) { return { from: m.from, text: m.text, auto: !!m.auto, ai: !!m.ai }; }),
+        history: state.messages.slice(-14).map(function (m) { return { from: m.from, text: m.text }; }),
+      };
+      fetch(GAS, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) })
+        .then(function (r) { return r.json(); }).then(finish, function () { finish(null); });
+      startPolling();
+    }
+
     function zaloReply(first) { reply(first.concat([L.zaloTransfer]), { action: 'zalo' }); }
     function findIntent(text) {
       for (var i = 0; i < L.intents.length; i++) if (L.intents[i].label === text) return L.intents[i];
@@ -172,6 +199,22 @@
       if (typeof window.CasamiaOnLead === 'function') try { window.CasamiaOnLead({ name: state.lead.name, phone: phone, source: 'chat' }); } catch (e) {}
     }
 
+    // Kịch bản soạn sẵn 4 bước (câu hỏi nhanh, hoặc khi chat AI không trả lời được)
+    function scripted(text, pm) {
+      if (pm && !state.lead.phone) {
+        setLead('', pm[0].replace(/[\s.-]/g, ''));
+        gasPost('lead', { form: 'Khung chat (gõ số)' });
+        return zaloReply([L.leadThanks]);
+      }
+      var it = findIntent(text);
+      if (it) {
+        var st = it.steps;
+        if (state.lead.phone) zaloReply([st[0], st[1]]); else { reply([st[0], st[1], st[2]]); askLead(); }
+        return;
+      }
+      if (!state.lead.phone && !state.offlineNotified) { state.offlineNotified = true; save(); reply(L.fallback); askLead(); }
+    }
+
     var api = {
       on: function (ev, h) { (handlers[ev] = handlers[ev] || []).push(h); return api; },
       emit: function (ev, data) {
@@ -180,20 +223,15 @@
           var text = String(data.text || '').trim().slice(0, 2000);
           if (!text) return;
           push({ from: 'visitor', text: text });
-          gasPost('message', { text: text, first: state.messages.filter(function (m) { return m.from === 'visitor'; }).length === 1 });
+          var first = state.messages.filter(function (m) { return m.from === 'visitor'; }).length === 1;
           var pm = text.match(PHONE_RE);
-          if (pm && !state.lead.phone) {
-            setLead('', pm[0].replace(/[\s.-]/g, ''));
-            gasPost('lead', { form: 'Khung chat (gõ số)' });
-            return zaloReply([L.leadThanks]);
-          }
-          var it = findIntent(text);
-          if (it) {
-            var st = it.steps;
-            if (state.lead.phone) zaloReply([st[0], st[1]]); else { reply([st[0], st[1], st[2]]); askLead(); }
-            return;
-          }
-          if (!state.lead.phone && !state.offlineNotified) { state.offlineNotified = true; save(); reply(L.fallback); askLead(); }
+          var isQuick = L.intents.some(function (q) { return q.label === text; });
+          // Câu tự gõ → chat AI (nếu bật), trừ khi tư vấn viên vừa trả lời qua Telegram trong 10 phút
+          if (aiBusy && !isQuick) return gasPost('message', { text: text }); // AI đang soạn câu trả lời, chỉ ghi lại tin
+          var useAi = GAS && L.ai && !isQuick && !(pm && !state.lead.phone) && !(Date.now() - (state.lastHumanAt || 0) < 10 * 60 * 1000);
+          if (useAi) { cancel(); return aiAsk(text, first, function () { scripted(text, null); }); }
+          gasPost('message', { text: text, first: first });
+          scripted(text, pm);
         } else if (ev === 'lead') {
           var ph = String(data.phone || '').match(PHONE_RE);
           if (!ph) return fire('lead:error', 'Số điện thoại chưa đúng, anh/chị kiểm tra lại giúp em ạ.');

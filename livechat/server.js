@@ -6,6 +6,7 @@ const { Server } = require('socket.io');
 const config = require('./config');
 const store = require('./store');
 const telegram = require('./telegram');
+const ai = require('./ai');
 
 const app = express();
 const server = http.createServer(app);
@@ -276,21 +277,17 @@ io.on('connection', socket => {
       return;
     }
 
-    // Nút hỏi nhanh luôn trả lời tự động; khách tự gõ thì chỉ tự động khi chưa có tư vấn viên.
-    const intent = findIntent(text, !agentsOn);
-    if (intent) {
-      replyIntent(conv, intent);
-      setTimeout(() => !store.get(visitorId)?.lead.phone && socket.emit('lead:request'), 5200);
-      return;
+    // Câu khách tự gõ, chưa có tư vấn viên → chat AI trả lời; AI lỗi thì dùng kịch bản.
+    const isQuick = config.intents.some(it => it.label === text);
+    if (ai.enabled && !agentsOn && !isQuick) {
+      if (aiBusy.has(conv.id)) return; // AI đang soạn câu trả lời cho tin trước
+      return aiAnswer(conv, socket, () => scripted(conv, text, agentsOn, socket));
     }
-    if (!agentsOn && !conv.lead.phone && !conv.offlineNotified) {
-      store.update(conv.id, { offlineNotified: true });
-      systemReply(conv, config.fallback);
-      setTimeout(() => !store.get(visitorId)?.lead.phone && socket.emit('lead:request'), 5200);
-    }
+    scripted(conv, text, agentsOn, socket);
   });
 
   socket.on('lead', fields => {
+
     if (throttle(socket)) return;
     const phone = String(fields?.phone || '').match(PHONE_RE)?.[0].replace(/[\s.-]/g, '');
     if (!phone) return socket.emit('lead:error', 'Số điện thoại chưa đúng, anh/chị kiểm tra lại giúp em ạ.');
@@ -327,6 +324,41 @@ io.on('connection', socket => {
   socket.on('typing', () => io.to('agents').emit('typing', visitorId));
 });
 
+// Kịch bản 4 bước soạn sẵn. Nút hỏi nhanh luôn trả lời tự động; khách tự gõ thì chỉ tự động khi chưa có tư vấn viên.
+function scripted(conv, text, agentsOn, socket) {
+  const askLead = () => setTimeout(() => !store.get(conv.id)?.lead.phone && socket.emit('lead:request'), 5200);
+  const intent = findIntent(text, !agentsOn);
+  if (intent) {
+    replyIntent(conv, intent);
+    return askLead();
+  }
+  if (!agentsOn && !conv.lead.phone && !conv.offlineNotified) {
+    store.update(conv.id, { offlineNotified: true });
+    systemReply(conv, config.fallback);
+    askLead();
+  }
+}
+
+// Chat AI: hiện "đang soạn tin", gọi Claude, gửi câu trả lời (kèm nút Zalo / form xin số nếu AI gợi ý).
+const aiBusy = new Set();
+async function aiAnswer(conv, socket, fallback) {
+  cancelAuto(conv.id);
+  aiBusy.add(conv.id);
+  const room = io.to(`conv:${conv.id}`);
+  room.emit('typing');
+  const tick = setInterval(() => room.emit('typing'), 2500);
+  const r = await ai.reply(store.get(conv.id) || conv);
+  clearInterval(tick);
+  aiBusy.delete(conv.id);
+  const now = store.get(conv.id) || conv;
+  // Trong lúc chờ, tư vấn viên đã trả lời → bỏ câu AI
+  const last = now.messages[now.messages.length - 1];
+  if (last && last.from === 'agent' && !last.auto) return;
+  if (!r) return fallback();
+  sendMessage(now, { from: 'agent', text: r.text, auto: true, ai: true, ...(r.action === 'zalo' ? { action: 'zalo' } : {}) });
+  if (r.action === 'form' && !now.lead.phone) setTimeout(() => !store.get(conv.id)?.lead.phone && socket.emit('lead:request'), 1200);
+}
+
 // Tư vấn viên trả lời từ Telegram.
 function agentReply(conversationId, text, action) {
   const conv = store.get(conversationId);
@@ -342,6 +374,7 @@ server.listen(config.port, () => {
   console.log(`Live chat ${config.project.name} chạy tại http://localhost:${config.port}`);
   console.log(`  • Trang demo:        http://localhost:${config.port}/`);
   console.log(`  • Trang tư vấn viên: http://localhost:${config.port}/agent.html`);
+  console.log(ai.enabled ? '  • Chat AI: BẬT (Claude)' : '  • Chat AI: tắt (đặt ANTHROPIC_API_KEY để bật)');
   telegram.start(agentReply);
   if (config.agentPassword === 'doimatkhau') console.warn('  ⚠ Đang dùng mật khẩu mặc định – hãy đặt AGENT_PASSWORD.');
 });

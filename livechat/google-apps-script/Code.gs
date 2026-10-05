@@ -7,6 +7,8 @@
  *  3. Triển khai → Ứng dụng web (Thực thi: Tôi · Ai có quyền truy cập: Bất kỳ ai) → copy URL /exec.
  *  4. Dán URL đó vào WEB_APP_URL, lưu, chạy hàm caiDatTelegram() một lần.
  *
+ * Chat AI (tuỳ chọn): thêm file AI.gs và KienThuc.gs, đặt ANTHROPIC_API_KEY trong Thuộc tính tập lệnh.
+ *
  * Sheet tự tạo: Lead (khách để lại số), Chat (tin nhắn), TraLoi (câu trả lời từ Telegram), Map (nội bộ).
  */
 
@@ -92,12 +94,20 @@ function handleWidget_(b) {
     const text = clean_(b.text);
     if (!text) return { ok: false };
     sheet_('Chat').appendRow([now_(), v, 'Khách', text]);
+    // Chat AI (AI.gs): trả lời ngay nếu đã cài ANTHROPIC_API_KEY, lỗi thì khung chat dùng kịch bản soạn sẵn
+    let ai = null;
+    if (b.ai && typeof aiReply_ === 'function') {
+      try { ai = aiReply_({ v: v, history: b.history, hasPhone: !!b.phone }); } catch (err) { console.warn(err); }
+      if (ai) sheet_('Chat').appendRow([now_(), v, 'Bot AI', ai.text]);
+    }
     const key = 'n_' + v;
     if (b.first || !cache.get(key)) {
       cache.put(key, '1', QUIET_MS / 1000);
-      notify_(v, (b.first ? '🔔 <b>KHÁCH MỚI VÀO CHAT</b>' : '💬 <b>Tin nhắn mới</b>') + who_(b) + where_(page, utm) + '\n──────────\n\n' + transcript_(transcript, text));
+      const list = transcript.concat(transcript.length && transcript[transcript.length - 1].text === text ? [] : [{ from: 'visitor', text: text }]);
+      if (ai) list.push({ from: 'agent', auto: true, ai: true, text: ai.text });
+      notify_(v, (b.first ? '🔔 <b>KHÁCH MỚI VÀO CHAT</b>' : '💬 <b>Tin nhắn mới</b>') + who_(b) + where_(page, utm) + '\n──────────\n\n' + transcript_(list));
     }
-    return { ok: true };
+    return ai ? { ok: true, reply: ai.text, action: ai.action } : { ok: true };
   }
 
   if (type === 'lead') {
@@ -126,10 +136,10 @@ function where_(page, utm) { return (utm ? '\n📣 ' + esc_(utm) : '') + (page ?
 function transcript_(list, extra) {
   const items = list.slice();
   if (extra && !(items.length && items[items.length - 1].text === extra)) items.push({ from: 'visitor', text: extra });
-  const LABEL = { visitor: '🙋 <b>KHÁCH</b>', agent: '💼 <b>TƯ VẤN</b>', auto: '🤖 <b>TƯ VẤN (tự động)</b>' };
+  const LABEL = { visitor: '🙋 <b>KHÁCH</b>', agent: '💼 <b>TƯ VẤN</b>', auto: '🤖 <b>TƯ VẤN (tự động)</b>', ai: '🧠 <b>TRỢ LÝ AI</b>' };
   const groups = [];
   items.forEach(function (m) {
-    const k = m.from === 'visitor' ? 'visitor' : (m.auto ? 'auto' : 'agent');
+    const k = m.from === 'visitor' ? 'visitor' : (m.ai ? 'ai' : m.auto ? 'auto' : 'agent');
     const t = String(m.text || '').slice(0, 300);
     const g = groups[groups.length - 1];
     if (g && g.k === k) g.lines.push(t); else groups.push({ k: k, lines: [t] });

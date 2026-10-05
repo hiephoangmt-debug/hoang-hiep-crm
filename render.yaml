@@ -32,3 +32,5 @@ services:
         sync: false
       - key: PUBLIC_URL
         sync: false
+      - key: ANTHROPIC_API_KEY   # chat AI (tuỳ chọn), để trống = tắt
+        sync: false
