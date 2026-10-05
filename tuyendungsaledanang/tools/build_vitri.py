@@ -30,7 +30,7 @@ def opts(items):
     return '<option value="" disabled selected>-- Chọn --</option>' + ''.join(f'<option>{o}</option>' for o in items)
 
 def chips(cur):
-    lst = ([('sv', 'Mới ra trường')] if cur == 'sv' else []) + [('nv', 'Nhân viên KD'), ('cv', 'Chuyên viên KD'), ('pro', 'Pro Sales'), ('tn', 'Trưởng nhóm'), ('tn', 'Trưởng phòng')]
+    lst = [('sv', 'Mới ra trường'), ('nv', 'Nhân viên KD'), ('cv', 'Chuyên viên KD'), ('pro', 'Pro Sales'), ('tn', 'Trưởng nhóm'), ('tn', 'Trưởng phòng')]
     hot = ' class="hot"'
     return '\n'.join('        <a%s href="%s">%s</a>' % (hot if k == cur else '', URL[k], t) for k, t in lst)
 
