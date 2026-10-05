@@ -36,12 +36,51 @@ def chips(cur):
 
 def ul(items): return '<ul>' + ''.join(f'<li>{i}</li>' for i in items) + '</ul>'
 
+TEAM = sections['team']
+TEAM_IMG = re.search(r'<img class="teamhero"[^>]*>', TEAM).group(0)
+PICS = re.findall(r'<img src="https://lh3[^>]*>', TEAM)[:3]
+ENV = f"""<section class="sec navy" id="moi-truong">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Môi trường làm việc</span>
+      <h2 class="h2">Một nơi để bạn <em>lớn lên mỗi ngày</em></h2>
+      <p class="lead">Không ai phải đi một mình. Mỗi giao dịch là công sức của cả đội.</p>
+    </div>
+    {TEAM_IMG}
+    <p class="slogan">Con người là nền tảng · Gắn kết tạo giá trị</p>
+    <div class="envgrid">
+      <div><i>🏢</i><b>Văn phòng trung tâm</b><span>23–25 Nguyễn Phước Lan, Đà Nẵng, gần các dự án trọng điểm.</span></div>
+      <div><i>☀️</i><b>Họp đầu ngày</b><span>Cập nhật giỏ hàng, chính sách mới, đặt mục tiêu cùng đội.</span></div>
+      <div><i>🎓</i><b>Đào tạo liên tục</b><span>Sản phẩm, pháp lý, kỹ năng tư vấn và chốt giao dịch.</span></div>
+      <div><i>🤝</i><b>Đồng đội cùng dẫn khách</b><span>Hỗ trợ nhau tư vấn, dẫn khách, cùng chốt deal.</span></div>
+      <div><i>🧭</i><b>Quản lý đi cùng bạn</b><span>Quản lý trực tiếp đi thị trường, kèm từng giao dịch.</span></div>
+      <div><i>📈</i><b>Đánh giá minh bạch</b><span>Xét lương và cấp bậc mỗi 03 tháng, dựa trên kết quả.</span></div>
+    </div>
+    <div class="pics">{''.join(PICS)}</div>
+  </div>
+</section>
+"""
+EXTRA_CSS = """<style>
+.reasons{display:grid;gap:12px;margin-top:20px}
+.reasons div{display:grid;grid-template-columns:52px 1fr;column-gap:14px;background:var(--soft);border-radius:14px;padding:14px 16px;align-items:start}
+.reasons i{grid-row:span 2;font-style:normal;font-size:26px;width:52px;height:52px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(27,45,107,.08)}
+.reasons b{color:var(--navy);font-size:17px;line-height:1.3}
+.reasons span{color:var(--muted);font-size:15px}
+.envgrid{display:grid;gap:12px;margin-top:28px}
+@media(min-width:760px){.envgrid{grid-template-columns:repeat(3,1fr)}}
+.envgrid div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:18px}
+.envgrid i{font-style:normal;font-size:28px;display:block}
+.envgrid b{display:block;font-size:17px;margin-top:6px}
+.envgrid span{color:#C9D3EA;font-size:15px}
+</style>
+"""
 def page(p):
     h = head
     h = re.sub(r'<title>.*?</title>', f'<title>{p["title"]}</title>', h, flags=re.S)
     h = re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{p["desc"]}">', h)
     h = re.sub(r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{p["title"]}">', h)
     h = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{p["desc"]}">', h)
+    h += EXTRA_CSS
     h += '<link rel="canonical" href="' + URL[p['key']] + '">\n<style>.crumb{font-size:13px;color:#C9D3EA;margin-bottom:12px}.crumb a{color:#FFB98F;text-decoration:none}\n.role-lv{display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:13px;padding:3px 12px;border-radius:999px;margin-bottom:10px}\n.panel h4{margin:14px 0 4px;font-size:15px;font-weight:800;color:inherit}</style>\n'
     kp = ''.join(f'<div><b>{a}</b><span>{b}</span></div>' for a, b in p['kpis'])
     fields = ''.join(f'''      <label for="{fid}">{lab}</label>
@@ -150,9 +189,33 @@ def page(p):
     final = sections['ung-tuyen']
     if p.get('position'):
         final = final.replace('      <button class="btn full" type="submit">Gửi hồ sơ ứng tuyển →</button>', hidden + '      <button class="btn full" type="submit">Gửi hồ sơ ứng tuyển →</button>')
-    order = [hero, sections['su-that'] if p.get('su_that') else '', roles, p.get('extra', ''), policy,
-             sections['moi-ra-truong'] if p.get('grad') else '', sections['du-an'], journey,
-             sections['timeline'] if p.get('timeline') else '', sections['team'], sections['leader'], final, faq]
+    love = f"""<section class="sec" id="vi-sao-thich">
+  <div class="wrap">
+    <div class="split">
+      <img class="illu" src="{IMG}{p['illu'][0]}" alt="{p['illu'][1]}" loading="lazy">
+      <div>
+        <span class="eyebrow">{p['love_eyebrow']}</span>
+        <h2 class="h2" style="font-size:32px">{p['love_h2']}</h2>
+        <div class="reasons">""" + ''.join(f'<div><i>{e}</i><b>{h}</b><span>{d}</span></div>' for e, h, d in p['love']) + f"""</div>
+        <a class="btn" href="#dang-ky" style="margin-top:22px">{p['cta']}</a>
+      </div>
+    </div>
+  </div>
+</section>
+"""
+    tl = ''.join(f'<div><b>{a}</b><p><strong>{h}</strong>{d}</p></div>' for a, h, d in p['day'])
+    phone = f'<img class="illu phone" src="{IMG}lead-moi-ngay.png" alt="Minh hoạ điện thoại Sale nhận lead mới mỗi ngày" loading="lazy">' if p.get('phone') else ''
+    day = f"""<section class="sec">
+  <div class="wrap">
+    <span class="eyebrow">Hình dung trước công việc</span>
+    <h2 class="h2">{p['day_h2']}</h2>
+    <div class="split tlsplit"><div><div class="tl">{tl}</div>
+    <div class="truth"><b>{p['truth'][0]}</b><p>{p['truth'][1]}</p></div></div>{phone}</div>
+  </div>
+</section>
+"""
+    order = [hero, love, roles, sections['su-that'] if p.get('su_that') else '', p.get('extra', ''), policy,
+             ENV, sections['du-an'], journey, day, sections['leader'], final, faq]
     body = '<body>\n\n' + header + '\n\n' + '\n\n'.join(x for x in order if x) + '\n\n' + footer + '\n\n' + sticky
     html = h + '</head>\n' + body + tail
     html = html.replace('<section class="sec" id="cong-viec">', '<section class="sec" id="cong-viec">', 1)
@@ -281,6 +344,66 @@ PAGES['moi-ra-truong'] = dict(key='sv', position='Sale mới ra trường', crum
   steps=[('Tháng 1', 'Học & ra trận', 'Nắm sản phẩm, đi dự án, nhận lead, có người kèm từng cuộc gọi.'), ('Tháng 2–3', 'Giao dịch đầu tay', 'Chốt deal đầu tiên, nhận hoa hồng cộng thưởng marketing đến 10tr.'), ('Tháng 3', 'Xét lương & cấp bậc', 'Kết quả tốt thì tăng lương, lên cấp.'), ('Tháng 4–12', 'Pro Sales / Trưởng nhóm', 'Pro Sales lương 7–10 triệu/tháng, hoặc dẫn dắt đội của riêng bạn.')],
   faq=[('Không học ngành kinh tế có làm được không?', 'Được. Ngành nào cũng được, kiến thức sản phẩm và kỹ năng bán hàng đều được đào tạo từ đầu.'), ('Sắp tốt nghiệp, chưa có bằng có ứng tuyển được không?', 'Bạn cứ để lại thông tin. Hoàng Hiệp sẽ gọi lại trao đổi trực tiếp về thời gian bắt đầu phù hợp.'), ('Người mới có khách để tư vấn không?', 'Có. Marketing phân bổ lead cho toàn đội và hỗ trợ chi phí marketing đến 100%.'), ('Thu nhập gồm những gì?', 'Lương, hoa hồng, thưởng marketing đến 10tr/giao dịch và thưởng nóng. Chi tiết trao đổi khi tư vấn 1:1.'), ('Nghề Sale có áp lực không?', 'Có. Có ngày gọi nhiều mà chưa có khách. Nhưng bạn có lead sẵn, có người kèm và không phải đi một mình.')] + COMMON_FAQ_END,
   su_that=True, timeline=True)
+
+ROLE = {
+'nhan-vien': dict(
+  illu=('nv-hanh-trinh.png', 'Hành trình 90 ngày đầu của Nhân viên kinh doanh: đào tạo, có người kèm, giao dịch đầu, xét lương sau 03 tháng'),
+  love_eyebrow='Vì sao người mới thích vị trí này', love_h2='Không ai bắt bạn <em>tự bơi.</em>',
+  love=[('🎓', 'Học từ con số 0', 'Sản phẩm, pháp lý, tìm khách, chốt giao dịch: học bài bản, có giáo trình.'),
+        ('🧑‍🏫', 'Có người kèm thật', 'Quản lý và đồng đội đi cùng bạn trong những cuộc gọi, những lần dẫn khách đầu tiên.'),
+        ('📲', 'Có khách để tư vấn ngay', 'Lead được phân bổ cho cả đội, người mới không phải tự bỏ tiền chạy quảng cáo.'),
+        ('🚀', 'Lên cấp nhanh', '03 tháng xét lương và cấp bậc. Làm tốt là lên Chuyên viên, không chờ thâm niên.')],
+  day_h2='Một ngày của <em>Nhân viên kinh doanh</em>',
+  day=[('08:30', 'Họp đầu ngày', 'Nghe cập nhật giỏ hàng, nhận mục tiêu trong ngày.'), ('09:00', 'Học & luyện kịch bản', 'Ôn sản phẩm, luyện tư vấn cùng quản lý.'), ('10:00', 'Gọi lead được phân bổ', 'Chăm khách, có người kèm khi cần.'), ('13:30', 'Đi dự án', 'Cùng đồng đội đi nhà mẫu, nắm sản phẩm tận nơi.'), ('15:30', 'Dẫn khách cùng đội', 'Quan sát, hỗ trợ, học cách chốt.'), ('17:00', 'Tổng kết', 'Cập nhật CRM, rút kinh nghiệm với quản lý.')],
+  truth=('Tháng đầu sẽ có lúc bỡ ngỡ.', 'Đó là bình thường. Bạn có giáo trình, có người kèm và có khách thật để luyện tập. Việc của bạn là học nhanh và không bỏ cuộc.'),
+  phone=True),
+'chuyen-vien': dict(
+  illu=('cv-do-nghe.png', 'Chuyên viên kinh doanh ở trung tâm, xung quanh là lead đều mỗi ngày, ngân sách marketing hỗ trợ đến 100%, giỏ hàng lớn và thưởng marketing đến 10 triệu mỗi giao dịch'),
+  love_eyebrow='Vì sao Sale có kinh nghiệm chọn ở đây', love_h2='Kỹ năng bạn đã có. <em>Đồ nghề chúng tôi lo.</em>',
+  love=[('📈', 'Ngân sách marketing đến 100%', 'Giải ngân ngay khi đề xuất. Chạy quảng cáo không lo vốn.'),
+        ('📲', 'Lead đều mỗi ngày', 'Marketing đầu tổng phân lead cho cả đội, bạn tập trung tư vấn và chốt.'),
+        ('🏙️', 'Giỏ hàng dễ tạo niềm tin', 'Dự án Sun Group, Vinhomes, Đạt Phương: khách đã biết tên chủ đầu tư.'),
+        ('💰', 'Mỗi giao dịch đáng giá hơn', 'Hoa hồng + thưởng marketing đến 10 triệu + thưởng nóng.')],
+  day_h2='Một ngày của <em>Chuyên viên kinh doanh</em>',
+  day=[('08:30', 'Họp đầu ngày', 'Giỏ hàng mới, chính sách mới, mục tiêu trong ngày.'), ('09:00', 'Chăm lead & khách cũ', 'Gọi, nhắn Zalo, hẹn lịch xem dự án.'), ('10:30', 'Content cá nhân', 'Đăng bài, livestream, xây thương hiệu cá nhân.'), ('13:30', 'Tư vấn chuyên sâu', 'Gửi bảng tính dòng tiền, so sánh căn, giải đáp pháp lý.'), ('15:00', 'Dẫn khách', 'Đi dự án, nhà mẫu, đàm phán.'), ('17:00', 'Follow-up & chốt', 'Chốt lịch, cập nhật CRM, báo cáo.')],
+  truth=('Bạn không cần học lại từ đầu.', 'Bạn cần sản phẩm đủ lớn, nguồn khách đủ đều và chính sách đủ hấp dẫn để kỹ năng ra tiền. Phần đó đã sẵn sàng.'),
+  phone=True),
+'pro-sales': dict(
+  illu=('pro-chan-dung.png', 'Chân dung Pro Sales: lương 7–10 triệu mỗi tháng, chốt deal giá trị lớn, khách đầu tư, lead từ marketing, hình mẫu của đội'),
+  love_eyebrow='Vì sao Pro Sales chọn ở đây', love_h2='Bạn bán giỏi. <em>Hãy được trả xứng đáng.</em>',
+  love=[('💼', 'Lương 7–10 triệu/tháng', 'Mức sàn đều đặn mỗi tháng, chưa tính hoa hồng và thưởng.'),
+        ('🎯', 'Tập trung vào việc chốt', 'Marketing đầu tổng lo lead, bạn dồn sức cho khách giá trị lớn.'),
+        ('🏆', 'Khách đầu tư, deal lớn', 'Giỏ hàng dự án trọng điểm tại Đà Nẵng – Hội An.'),
+        ('🔒', 'Trao đổi bảo mật', 'Đang làm nơi khác? Mọi trao đổi đều 1:1 và kín đáo.')],
+  day_h2='Một ngày của <em>Pro Sales</em>',
+  day=[('08:30', 'Họp đầu ngày', 'Nắm giỏ hàng, chính sách, phân bổ lead.'), ('09:30', 'Chăm khách đầu tư', 'Cập nhật cơ hội, gửi phân tích dòng tiền.'), ('11:00', 'Hẹn gặp khách', 'Tư vấn trực tiếp, đàm phán phương án.'), ('14:00', 'Dẫn khách VIP', 'Đi dự án, nhà mẫu, chốt căn.'), ('16:00', 'Chia sẻ cho đội', 'Kèm người mới, chia sẻ kinh nghiệm chốt.'), ('17:30', 'Follow-up', 'Hoàn tất thủ tục, cập nhật CRM.')],
+  truth=('Pro Sales là danh hiệu phải giữ.', 'Tiêu chí xét Pro Sales dựa trên kết quả thật và được trao đổi rõ ràng khi tư vấn 1:1. Đạt rồi thì giữ chuẩn để giữ quyền lợi.'),
+  phone=True, su_that=False),
+'truong-nhom': dict(
+  illu=('tn-so-do.png', 'Sơ đồ đội: Trưởng phòng lương 10–20 triệu, các Trưởng nhóm và Sale, Marketing đầu tổng phân lead cho cả đội'),
+  love_eyebrow='Vì sao quản lý chọn ở đây', love_h2='Bạn dẫn đội. <em>Hệ thống lo nguồn khách.</em>',
+  love=[('💼', 'Trưởng phòng lương 10–20 triệu', 'Lương tháng tương xứng với vai trò xây và vận hành phòng.'),
+        ('📲', 'Đội luôn có khách', 'Marketing đầu tổng phân lead cho cả đội, kèm ngân sách hỗ trợ đến 100%.'),
+        ('🧲', 'Dễ giữ người giỏi', 'Pro Sales trong đội có lương 7–10 triệu/tháng, tạo động lực ở lại.'),
+        ('🪜', 'Lộ trình lên Giám đốc', 'Trưởng nhóm → Trưởng phòng → Giám đốc, thăng tiến bằng kết quả của đội.')],
+  day_h2='Một ngày của <em>người dẫn đội</em>',
+  day=[('08:00', 'Chuẩn bị', 'Xem số liệu đội, chuẩn bị nội dung họp.'), ('08:30', 'Họp đầu ngày', 'Truyền lửa, phân bổ lead, đặt mục tiêu.'), ('10:00', 'Kèm 1:1', 'Nghe cuộc gọi, sửa kịch bản, gỡ khó cho từng người.'), ('14:00', 'Ra trận cùng đội', 'Cùng dẫn khách, hỗ trợ chốt deal lớn.'), ('16:00', 'Tuyển & đào tạo', 'Phỏng vấn ứng viên, đào tạo người mới.'), ('17:30', 'Tổng kết', 'Đánh giá kết quả, lên kế hoạch ngày mai.')],
+  truth=('Làm quản lý là chịu trách nhiệm cho kết quả của người khác.', 'Không dễ. Nhưng khi cả đội cùng chốt được, đó là cảm giác không giao dịch đơn lẻ nào mang lại được.'),
+  phone=False, su_that=False),
+'moi-ra-truong': dict(
+  illu=('sv-hai-con-duong.png', 'Minh hoạ hai con đường sau khi ra trường: lương cứng tăng theo thâm niên và Sale BĐS tăng theo kết quả, 03 tháng xét lương, lên Pro Sales, lên quản lý'),
+  love_eyebrow='Vì sao tân cử nhân chọn Sale BĐS', love_h2='Năm đầu đi làm <em>quyết định rất nhiều thứ.</em>',
+  love=[('📚', 'Học nghề thật, không học lý thuyết', 'Đào tạo sản phẩm, pháp lý, kỹ năng và áp dụng ngay với khách thật.'),
+        ('🧑‍🏫', 'Có người kèm từ ngày đầu', 'Không ai bắt bạn tự bơi. Quản lý và đồng đội đi cùng bạn.'),
+        ('💸', 'Thu nhập theo năng lực', 'Lương + hoa hồng + thưởng marketing đến 10 triệu mỗi giao dịch.'),
+        ('🗣️', 'Kỹ năng dùng cả đời', 'Giao tiếp, thuyết phục, đàm phán: mang theo ở bất kỳ nghề nào.')],
+  day_h2='Một ngày của <em>Sale mới ra trường</em>',
+  day=[('08:30', 'Họp đầu ngày', 'Nghe cập nhật, nhận mục tiêu, học từ anh chị đi trước.'), ('09:00', 'Học sản phẩm', 'Đào tạo dự án, luyện kịch bản tư vấn.'), ('10:30', 'Gọi lead', 'Chăm khách được phân bổ, có người kèm khi cần.'), ('13:30', 'Đi dự án', 'Tận mắt xem nhà mẫu, hiểu sản phẩm mình bán.'), ('15:30', 'Dẫn khách cùng đội', 'Học cách tư vấn và chốt từ người có kinh nghiệm.'), ('17:00', 'Tổng kết', 'Ghi lại bài học, cập nhật CRM.')],
+  truth=('Sale có áp lực, và chúng tôi nói thẳng điều đó.', 'Có ngày gọi nhiều mà chưa có khách. Nhưng bạn có lead sẵn, có người kèm và có lộ trình rõ ràng. Người chịu khó sẽ lớn rất nhanh.'),
+  phone=True),
+}
+for k, v in ROLE.items():
+    PAGES[k].update(v)
 os.makedirs(os.path.join(ROOT, 'vi-tri'), exist_ok=True)
 for name, p in PAGES.items():
     html = page(p)
