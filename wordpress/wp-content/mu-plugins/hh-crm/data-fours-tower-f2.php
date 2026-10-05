@@ -10,6 +10,20 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/** Phối cảnh FourS Tower (anh Hiệp gửi 05/10/2026), đi kèm plugin trong img/fours-tower/. */
+function hh_fours_image_links() {
+	return implode(
+		"\n",
+		array(
+			'plugin:img/fours-tower/fours-tower-toan-canh-hoang-hon.jpg | Phối cảnh toàn cảnh FourS Tower Đà Nẵng lúc hoàng hôn | đại diện',
+			'plugin:img/fours-tower/fours-tower-phoi-canh-4-thap.jpg | Phối cảnh 4 tháp FourS Tower – Sun Riverpolis Đà Nẵng | thư viện',
+			'plugin:img/fours-tower/fours-tower-truc-duong-trung-tam.jpg | Trục đường trung tâm giữa các tháp FourS Tower nhìn ra sông | thư viện',
+			'plugin:img/fours-tower/fours-tower-pho-thuong-mai-khoi-de.jpg | Phố thương mại khối đế FourS Tower | tiện ích',
+			'plugin:img/fours-tower/fours-tower-ve-dem-huong-song.jpg | FourS Tower về đêm, hướng sông và biển | thư viện',
+		)
+	);
+}
+
 /** Các ô chung cho FourS Tower và Tòa F2 (chính sách F2 đang mở bán). */
 function hh_fours_f2_policy_meta() {
 	return array(
@@ -61,6 +75,7 @@ function hh_dataset_fours_f2( $projects ) {
 			'hh_p_handover'   => 'Tòa F2: bàn giao sử dụng dự kiến 31/5/2028 (Sun Early Key, theo phiếu tính giá CĐT)',
 			'hh_p_progress'   => "19/3/2026 | Sun Property ra mắt FourS Tower – mở bán Tháp Tùng (F1), Tháp Cúc (F5)\n26/9/2026 | Ra mắt Tòa F2 – Tháp Mai (Mùa Xuân): 1.369 lượt đặt chỗ\n26/9/2026 | Áp dụng CSBH 4.2 Tòa F2 – chiết khấu đến 12% khi thanh toán sớm 95%\n25/10/2026 | Hạn thanh toán sớm 50% / 70% / 95% theo CSBH 4.2\n31/5/2028 | Tòa F2 bàn giao sử dụng (dự kiến)",
 			'hh_p_faq'        => "FourS Tower ở đâu? | Ngã tư Nguyễn Phước Lan – Minh Mạng, phường Hòa Quý (cũ), Ngũ Hành Sơn, Đà Nẵng – phân khu căn hộ đầu tiên của Sun Riverpolis.\nFourS Tower có mấy tòa? | 4 tòa: F1 Tháp Tùng, F2 Tháp Mai, F3 Tháp Trúc, F5 Tháp Cúc (không dùng số 4), mỗi tòa 20 tầng nổi, 2 tầng hầm, tổng khoảng 2.291 căn.\nTòa nào đang mở bán? | F1 và F5 mở bán từ 3/2026; Tòa F2 – Tháp Mai ra mắt 26/9/2026 với chính sách bán hàng 4.2. F3 chưa công bố mở bán.\nChính sách FourS Tower F2 có gì? | Early Bird 3%, không vay thêm 3%, thanh toán sớm 95% / 70% / 50% trước 25/10/2026 thêm 12% / 5% / 2,5%. Ví dụ căn niêm yết 3 tỷ, thanh toán sớm 95% còn khoảng 2,48 tỷ.\nMua FourS Tower cần bao nhiêu tiền ban đầu? | Đặt cọc 100 triệu (Studio – 2PN) hoặc 150 triệu (3PN), khoảng 2 tuần sau thanh toán đủ 15%. Phương án vay: ngân hàng giải ngân 70%.\nKhi nào nhận nhà FourS Tower F2? | Theo phiếu tính giá CĐT, Tòa F2 dự kiến bàn giao sử dụng 31/5/2028 theo Sun Early Key, khi khách đã thanh toán 70%.\nFourS Tower có sở hữu lâu dài không? | Có, căn hộ FourS Tower sở hữu lâu dài cho người Việt Nam.",
+			'hh_p_image_links'      => hh_fours_image_links(),
 			'rank_math_title'       => 'FourS Tower Đà Nẵng: Giá & Chính sách Tòa F2 T10/2026',
 			'rank_math_description' => 'FourS Tower (Tháp Bốn Mùa) Sun Group – ngã tư Nguyễn Phước Lan, Đà Nẵng. Tòa F2 cọc 100 triệu, tiết kiệm đến ~17% khi thanh toán sớm, nhận nhà khi trả 70%.',
 		);
@@ -94,6 +109,7 @@ function hh_dataset_fours_f2( $projects ) {
 			'hh_p_location_desc' => 'Tòa F2 nằm trong cụm 4 tháp FourS Tower tại ngã tư Nguyễn Phước Lan – Minh Mạng, trung tâm khu Nam Đà Nẵng, thuộc đại đô thị Sun Riverpolis (Hòa Quý). Từ đây về trung tâm Hải Châu, biển Mỹ Khê, sân bay và Hội An đều thuận tiện qua các trục Nguyễn Phước Lan, Minh Mạng, Võ Chí Công.',
 			'hh_p_progress'    => "26/9/2026 | Ra mắt Tòa F2 – Tháp Mai tại Royal Lotus Đà Nẵng: 1.369 lượt đặt chỗ\n26/9/2026 | Áp dụng CSBH 4.2 Tòa F2\n25/10/2026 | Hạn thanh toán sớm 50% / 70% / 95%\n31/5/2028 | Bàn giao sử dụng (dự kiến)",
 			'hh_p_faq'         => "FourS Tower F2 là tháp nào? | Tòa F2 là Tháp Mai – Mùa Xuân, một trong 4 tháp Mai, Trúc, Cúc, Tùng của FourS Tower (Sun Group) tại ngã tư Nguyễn Phước Lan – Minh Mạng, Đà Nẵng.\nGiá FourS Tower F2 bao nhiêu? | Giá từng căn theo tầng, hướng, loại căn – liên hệ để nhận bảng giá. Ví dụ trong phiếu tính giá CĐT: căn niêm yết 3 tỷ (gồm VAT, KPBT) thanh toán sớm 95% còn khoảng 2,48 tỷ, tiến độ chuẩn không vay khoảng 2,82 tỷ.\nChiết khấu FourS Tower F2 tối đa bao nhiêu? | Theo CSBH 4.2: Early Bird 3%, không vay 3%, thanh toán sớm 95% thêm 12% (cộng dồn lần lượt trên giá chưa VAT) – tương đương tiết kiệm khoảng 17% so với giá niêm yết.\nCần bao nhiêu tiền để mua căn F2? | Đặt cọc 100 triệu (Studio – 2PN) hoặc 150 triệu (3PN); khoảng 2 tuần sau thanh toán đủ 15%; sau đó 10% mỗi quý theo tiến độ chuẩn.\nSun Early Key là gì? | Chính sách cho khách nhận bàn giao sử dụng khi đã thanh toán 70% giá trị căn (Tòa F2 dự kiến 31/5/2028), phần còn lại trả dần 5% mỗi đợt sau khi nhận nhà.\nCó vay ngân hàng được không? | Được. Ngân hàng giải ngân 70% ngay sau ký hợp đồng mua bán; phương án vay không có chiết khấu không vay 3% nhưng vẫn được Early Bird 3%.\nHạn ưu đãi thanh toán sớm đến khi nào? | Theo CSBH 4.2, mốc thanh toán sớm muộn nhất là 25/10/2026. Chính sách có thể thay đổi theo đợt – liên hệ để nhận bản mới nhất.",
+			'hh_p_image_links'        => hh_fours_image_links(),
 			'rank_math_title'         => 'FourS Tower F2 Tháp Mai: Giá, CSBH 4.2 – Tiết kiệm ~17%',
 			'rank_math_description'   => 'FourS Tower F2 – Tháp Mai Đà Nẵng: 1.369 lượt đặt chỗ ngày ra mắt. Cọc 100 triệu, 15% ký HĐMB, nhận nhà khi trả 70%, thanh toán sớm tiết kiệm ~17%. Nhận phiếu tính giá.',
 			'rank_math_focus_keyword' => 'FourS Tower F2,tòa F2 FourS Tower,giá FourS Tower F2',
