@@ -71,6 +71,7 @@ EXTRA_CSS = """<style>
 .reasons i{grid-row:span 2;font-style:normal;font-size:26px;width:52px;height:52px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(27,45,107,.08)}
 .reasons b{color:var(--navy);font-size:17px;line-height:1.3}
 .reasons span{color:var(--muted);font-size:15px}
+.dayphoto{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:30% center;border-radius:22px;box-shadow:0 16px 36px rgba(27,45,107,.18)}
 .envgrid{display:grid;gap:12px;margin-top:28px}
 @media(min-width:760px){.envgrid{grid-template-columns:repeat(3,1fr)}}
 .envgrid div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:18px}
@@ -228,6 +229,8 @@ def page(p):
 """
     tl = ''.join(f'<div><b>{a}</b><p><strong>{h}</strong>{d}</p></div>' for a, h, d in p['day'])
     phone = f'<img class="illu phone" src="{IMG}lead-moi-ngay.png" alt="Minh hoạ điện thoại Sale nhận lead mới mỗi ngày" loading="lazy">' if p.get('phone') else ''
+    if p.get('day_img'):
+        phone = f'<img class="illu dayphoto" src="{IMG}{p["day_img"][0]}.jpg" alt="{p["day_img"][1]}" loading="lazy">'
     day = f"""<section class="sec">
   <div class="wrap">
     <span class="eyebrow">Hình dung trước công việc</span>
@@ -412,7 +415,7 @@ ROLE = {
   day_h2='Một ngày của <em>người dẫn đội</em>',
   day=[('08:00', 'Chuẩn bị', 'Xem số liệu đội, chuẩn bị nội dung họp.'), ('08:30', 'Họp đầu ngày', 'Truyền lửa, phân bổ lead, đặt mục tiêu.'), ('10:00', 'Kèm 1:1', 'Nghe cuộc gọi, sửa kịch bản, gỡ khó cho từng người.'), ('14:00', 'Ra trận cùng đội', 'Cùng dẫn khách, hỗ trợ chốt deal lớn.'), ('16:00', 'Tuyển & đào tạo', 'Phỏng vấn ứng viên, đào tạo người mới.'), ('17:30', 'Tổng kết', 'Đánh giá kết quả, lên kế hoạch ngày mai.')],
   truth=('Làm quản lý là chịu trách nhiệm cho kết quả của người khác.', 'Không dễ. Nhưng khi cả đội cùng chốt được, đó là cảm giác không giao dịch đơn lẻ nào mang lại được.'),
-  phone=False, su_that=False),
+  phone=False, su_that=False, day_img=('ky-ket-casamia-2', 'Hoàng Hiệp đứng đầu đội ngũ tại lễ ký kết đại lý chiến lược Casamia Balanca')),
 'moi-ra-truong': dict(
   illu=('sv-hai-con-duong.png', 'Minh hoạ hai con đường sau khi ra trường: lương cứng tăng theo thâm niên và Sale BĐS tăng theo kết quả, 03 tháng xét lương, lên Pro Sales, lên quản lý'),
   love_eyebrow='Vì sao tân cử nhân chọn Sale BĐS', love_h2='Năm đầu đi làm <em>quyết định rất nhiều thứ.</em>',
