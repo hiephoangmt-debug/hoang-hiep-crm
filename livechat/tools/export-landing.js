@@ -55,9 +55,9 @@ if (api) {
   // Bản thật: chat kết nối server, nếu server lỗi thì tự chuyển sang chế độ cục bộ
   html = html.replace(widgetTag[0], () => `${cfgTag}\n<script src="${api}/widget.js"${attrs} async></script>`);
 } else {
-  // Bản xem thử: nhúng thẳng widget, chạy chế độ cục bộ
-  const widgetJs = fs.readFileSync(path.join(pub, 'widget.js'), 'utf8').replace(/<\/script/gi, '<\\/script');
-  html = html.replace(widgetTag[0], () => `${cfgTag}\n<script${attrs} data-mode="local">\n${widgetJs}\n</script>`);
+  // Bản Google / xem thử: dùng khung chat nằm sẵn trong trang (mục #hoi-ngay), không nhúng nút chat nổi
+  // (nút nổi từng không hiện trên một số điện thoại; khung trong trang chạy cùng mã với form nên luôn hiện).
+  html = html.replace(widgetTag[0], () => cfgTag);
 }
 
 const out = path.join(__dirname, '..', 'dist', api || gas ? 'casamia-balanca-landing.html' : 'casamia-balanca-landing-xem-thu.html');

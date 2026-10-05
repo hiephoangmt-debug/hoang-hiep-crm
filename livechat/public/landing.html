@@ -401,6 +401,39 @@
   .cash-sm .cm>b{font-size:44px}
   .cash-cta{text-align:center}
 
+
+  /* ===== Chat ngay trên trang ===== */
+  .lchat-sec{padding:34px 0 10px;background:#fff}
+  .lchat-sec .wrap{display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:center}
+  .lchat-intro h2{font-family:var(--serif);font-size:34px;line-height:1.2;margin:8px 0 12px;color:var(--navy)}
+  .lchat-intro p{color:var(--muted);margin:0 0 10px;font-size:16px}
+  .lchat{border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 18px 40px rgba(11,42,91,.10);display:flex;flex-direction:column;overflow:hidden;height:470px}
+  .lchat-h{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--navy);color:#fff}
+  .lchat-av{width:42px;height:42px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;font-weight:800;position:relative;flex:none}
+  .lchat-av i{position:absolute;right:0;bottom:0;width:11px;height:11px;border-radius:50%;background:#22c55e;border:2px solid var(--navy)}
+  .lchat-h b{display:block;font-size:15px}.lchat-h small{opacity:.8;font-size:12.5px}
+  .lchat-x{margin-left:auto;background:transparent;border:0;color:#fff;font-size:28px;line-height:1;cursor:pointer;display:none}
+  .lchat-b{flex:1;overflow-y:auto;padding:16px 14px;background:var(--soft);display:flex;flex-direction:column;gap:8px;-webkit-overflow-scrolling:touch}
+  .lc-m{max-width:86%;padding:10px 13px;border-radius:14px;font-size:14.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word}
+  .lc-a{background:#fff;border:1px solid var(--line);color:var(--ink);align-self:flex-start;border-top-left-radius:4px}
+  .lc-v{background:var(--navy);color:#fff;align-self:flex-end;border-top-right-radius:4px}
+  .lc-zalo{display:block;margin-top:10px;background:var(--orange);color:#fff!important;text-align:center;border-radius:10px;padding:10px;font-weight:700;text-decoration:none}
+  .lc-typing{align-self:flex-start;color:var(--muted);font-size:13px;font-style:italic;padding:2px 4px}
+  .lc-chips{display:flex;flex-wrap:wrap;gap:6px}
+  .lc-chips button{border:1px solid var(--navy);background:#fff;color:var(--navy);border-radius:999px;padding:7px 12px;font:inherit;font-size:13.5px;cursor:pointer}
+  .lc-chips button:hover{background:var(--navy);color:#fff}
+  .lc-lead{align-self:stretch;background:#fff;border:1px solid var(--orange);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px}
+  .lc-lead p{margin:0;font-weight:700;color:var(--navy);font-size:14px}
+  .lc-lead input{border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;font-size:15px}
+  .lc-lead button{background:var(--orange);color:#fff;border:0;border-radius:10px;padding:11px;font:inherit;font-weight:700;cursor:pointer}
+  .lc-lead .e{color:#c2410c;font-size:12.5px;min-height:0}
+  .lchat-f{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line);background:#fff}
+  .lchat-f input{flex:1;min-width:0;border:1px solid var(--line);border-radius:999px;padding:11px 16px;font:inherit;font-size:16px;outline:none}
+  .lchat-f input:focus{border-color:var(--navy)}
+  .lchat-f button{flex:none;width:46px;height:46px;border-radius:50%;border:0;background:var(--orange);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .lchat.full{position:fixed;inset:0;z-index:2147483600;border-radius:0;height:auto;box-shadow:none;border:0}
+  .lchat.full .lchat-x{display:block}
+  @media(max-width:960px){.lchat-sec .wrap{grid-template-columns:1fr;gap:16px}.lchat-intro h2{font-size:26px}.lchat{height:440px}}
   /* ===== Phong cách cao cấp ===== */
   :root{--serif:"Playfair Display",Georgia,"Times New Roman",serif}
   h1,h2,.serif{font-family:var(--serif);font-weight:600;letter-spacing:-.3px;font-variant-numeric:lining-nums}
@@ -645,6 +678,23 @@
     </div>
   </div>
 </div>
+
+<!-- CHAT NGAY TRÊN TRANG -->
+<section class="lchat-sec" id="hoi-ngay">
+  <div class="wrap">
+    <div class="lchat-intro">
+      <span class="eyebrow">Hỏi nhanh</span>
+      <h2>Có điều gì anh/chị muốn biết thêm?</h2>
+      <p>Giá từng căn, chính sách, vị trí hay lịch xem nhà mẫu: anh/chị cứ nhắn, em trả lời ngay tại đây.</p>
+      <p style="font-size:14px">Hoàng Hiệp · Tư vấn dự án · <a class="js-tel" href="#" style="color:var(--orange);font-weight:700"><span class="js-hotline">0904 567 009</span></a></p>
+    </div>
+    <div class="lchat" id="lchat" aria-label="Chat với tư vấn viên">
+      <div class="lchat-h"><div class="lchat-av">HH<i></i></div><div><b>Hoàng Hiệp</b><small>Tư vấn dự án · thường trả lời trong vài phút</small></div><button class="lchat-x" type="button" aria-label="Đóng">×</button></div>
+      <div class="lchat-b" role="log" aria-live="polite"></div>
+      <form class="lchat-f" autocomplete="off"><input type="text" placeholder="Nhập câu hỏi của anh/chị…" maxlength="1000" aria-label="Nhập tin nhắn"><button type="submit" aria-label="Gửi"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg></button></form>
+    </div>
+  </div>
+</section>
 
 <!-- ẢNH: CẢM XÚC -->
 <section class="gallery" id="khong-gian" data-chat-topic="thiết kế sản phẩm">
@@ -1333,9 +1383,165 @@ const API_BASE = '';
 <!-- Khung chat trực tiếp: tự hỏi khách theo mục đang đọc (data-chat-topic) -->
 <script src="/widget.js" data-contacts="desktop" data-mobile-bottom="76" data-desktop-bottom="88" async></script>
 <script>
+// ===== Chat ngay trên trang: kịch bản khéo + gửi về Google Sheet/Telegram + nhận trả lời từ Telegram =====
+(function () {
+  var L = window.CASAMIA_CHAT_CONFIG, root = document.getElementById('lchat');
+  if (!L || !root) { var sec = document.getElementById('hoi-ngay'); if (sec) sec.style.display = 'none'; return; }
+  var GAS = (typeof GAS_URL !== 'undefined' && GAS_URL) || L.gas || '';
+  var P = L.project, ZALO = String(P.zalo || '').replace(/\D/g, '');
+  var body = root.querySelector('.lchat-b'), form = root.querySelector('.lchat-f'), input = form.querySelector('input');
+  var KEY = 'casamia_lchat', PHONE_RE = /(?:\+?84|0)(?:[\s.-]?\d){9}/;
+  function sget(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function sset(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  var vid = sget('casamia_chat_id');
+  if (!vid) { vid = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : 'v' + Date.now().toString(36) + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2); sset('casamia_chat_id', vid); }
+  var st; try { st = JSON.parse(sget(KEY) || 'null'); } catch (e) { st = null; }
+  st = st || { msgs: [], lead: { name: '', phone: '' }, answered: 0, zalo: false, form: false, fallback: false, lastReply: 0 };
+  function save() { sset(KEY, JSON.stringify(st)); }
+
+  function fill(t) {
+    var name = st.lead.name || 'anh/chị';
+    var out = String(t).replace(/\{name\}/g, name).replace(/\{zalo\}/g, P.zalo).replace(/\{hotline\}/g, P.hotline).replace(/\{project\}/g, P.name).replace(/\{phone\}/g, st.lead.phone || '');
+    return out.replace(/(^|[.!?]\s+)([a-zà-ỹđ])/g, function (m, a, c) { return a + c.toUpperCase(); });
+  }
+  function norm(t) { return ' ' + String(t).toLowerCase().replace(/[.,!?;:()"'\/\-–]+/g, ' ').replace(/\s+/g, ' ') + ' '; }
+  function findIntent(text) {
+    for (var i = 0; i < L.intents.length; i++) if (L.intents[i].label === text) return L.intents[i];
+    var t = norm(text), best = null, hits = 0;
+    L.intents.forEach(function (it) {
+      var n = (it.keywords || []).filter(function (k) { return t.indexOf(' ' + k.toLowerCase() + ' ') >= 0; }).length;
+      if (n > hits) { best = it; hits = n; }
+    });
+    return best;
+  }
+
+  // ---- Giao diện ----
+  var chips = null, typingEl = null;
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function scroll() { body.scrollTop = body.scrollHeight; }
+  function render(m) {
+    var b = el('div', 'lc-m ' + (m.from === 'v' ? 'lc-v' : 'lc-a'), m.text);
+    if (m.zalo && ZALO) { var a = el('a', 'lc-zalo', 'Nhắn Zalo cho em'); a.href = 'https://zalo.me/' + ZALO; a.target = '_blank'; a.rel = 'noopener'; a.className += ' js-zalo'; b.appendChild(a); }
+    body.insertBefore(b, chips && chips.parentNode === body ? chips : null);
+    scroll();
+  }
+  function push(m) { m.at = Date.now(); st.msgs.push(m); if (st.msgs.length > 60) st.msgs = st.msgs.slice(-60); save(); render(m); return m; }
+  function typing(on) {
+    if (on && !typingEl) { typingEl = el('div', 'lc-typing', P.agentName + ' đang soạn tin…'); body.appendChild(typingEl); scroll(); }
+    if (!on && typingEl) { typingEl.remove(); typingEl = null; }
+  }
+  var timers = [];
+  function say(texts, zaloLast) {
+    timers.forEach(clearTimeout); timers = [];
+    texts.forEach(function (t, i) {
+      timers.push(setTimeout(function () { typing(true); }, i * 1700 + 250));
+      timers.push(setTimeout(function () { typing(false); push({ from: 'a', text: fill(t), zalo: zaloLast && i === texts.length - 1 }); }, i * 1700 + 1250));
+    });
+  }
+  function showChips() {
+    chips = el('div', 'lc-chips');
+    L.intents.forEach(function (it) { var b = el('button', '', it.label); b.type = 'button'; b.onclick = function () { send(it.label); }; chips.appendChild(b); });
+    body.appendChild(chips); scroll();
+  }
+  function hideChips() { if (chips) { chips.remove(); chips = null; } }
+  function leadForm() {
+    if (st.form || st.lead.phone) return; st.form = true; save();
+    var f = el('form', 'lc-lead');
+    f.innerHTML = '<p>Để em gửi riêng tài liệu cho anh/chị</p><input name="n" placeholder="Anh/chị tên gì ạ?" maxlength="80"><input name="p" type="tel" inputmode="tel" placeholder="Số điện thoại / Zalo"><span class="e"></span><button type="submit">Gửi cho tôi</button>';
+    f.onsubmit = function (e) {
+      e.preventDefault();
+      var ph = (f.p.value.match(PHONE_RE) || [])[0];
+      if (!ph) { f.querySelector('.e').textContent = 'Số điện thoại chưa đúng, anh/chị kiểm tra lại giúp em ạ.'; return; }
+      f.remove(); gotLead(f.n.value.trim(), ph, 'Chat trên trang (form)');
+      push({ from: 'v', text: 'Thông tin liên hệ: ' + (st.lead.name ? st.lead.name + ' – ' : '') + st.lead.phone });
+      thanks();
+    };
+    body.appendChild(f); scroll();
+  }
+
+  // ---- Gửi về Google (Sheet + Telegram) ----
+  function post(type, extra) {
+    if (!GAS) return;
+    var b = { type: type, v: vid, page: location.href, utm: sget('casamia_utm') || '', name: st.lead.name, phone: st.lead.phone,
+      transcript: st.msgs.slice(-8).map(function (m) { return { from: m.from === 'v' ? 'visitor' : 'agent', text: m.text, auto: !m.human }; }) };
+    for (var k in extra) b[k] = extra[k];
+    try { fetch(GAS, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(b) }).catch(function () {}); } catch (e) {}
+    startPoll();
+  }
+  var pollT = null, lastAct = 0;
+  function startPoll() { if (!GAS) return; lastAct = Date.now(); if (!pollT) pollT = setTimeout(poll, 3000); }
+  function poll() {
+    var idle = Date.now() - lastAct; if (idle > 3600000) { pollT = null; return; }
+    var next = idle > 300000 ? 15000 : 4000;
+    if (document.hidden) { pollT = setTimeout(poll, next); return; }
+    fetch(GAS + (GAS.indexOf('?') < 0 ? '?' : '&') + 'action=replies&v=' + encodeURIComponent(vid) + '&after=' + (st.lastReply || 0))
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        (d.replies || []).forEach(function (r) {
+          if (r.at <= (st.lastReply || 0)) return;
+          st.lastReply = r.at; save(); timers.forEach(clearTimeout); typing(false);
+          push({ from: 'a', text: r.text, zalo: r.action === 'zalo', human: true }); lastAct = Date.now();
+        });
+      }).catch(function () {}).then(function () { pollT = setTimeout(poll, next); });
+  }
+  function gotLead(name, phone, src) {
+    if (name) st.lead.name = name.slice(0, 80);
+    st.lead.phone = phone.replace(/[\s.-]/g, ''); save();
+    post('lead', { form: src, name: st.lead.name, phone: st.lead.phone });
+    try { sset('casamia_lead_sent', '1'); if (window.fbq) fbq('track', 'Lead'); } catch (e) {}
+  }
+  function thanks() {
+    if (st.zalo) return say([L.leadThanks]);
+    st.zalo = true; save(); say([L.leadThanks, L.zaloTransfer], true);
+  }
+
+  // ---- Kịch bản: câu 1 trả lời + hỏi nhẹ; câu 2 trả lời + mời Zalo (1 lần); từ câu 3 trả lời + form xin số (1 lần) ----
+  function answer(steps) {
+    if (st.lead.phone) return say([steps[0]]);
+    st.answered++; save();
+    if (st.answered === 1) return say([steps[0], steps[1]]);
+    if (!st.zalo) { st.zalo = true; save(); return say([steps[0], L.zaloTransfer], true); }
+    say([steps[0]]);
+    if (!st.form) setTimeout(leadForm, 2600);
+  }
+  function send(text) {
+    text = String(text || '').trim().slice(0, 1000); if (!text) return;
+    hideChips();
+    var first = !st.msgs.some(function (m) { return m.from === 'v'; });
+    push({ from: 'v', text: text });
+    post('message', { text: text, first: first });
+    var ph = text.match(PHONE_RE);
+    if (ph && !st.lead.phone) { gotLead('', ph[0], 'Chat trên trang (gõ số)'); return thanks(); }
+    var humanRecent = st.msgs.some(function (m) { return m.human && Date.now() - m.at < 600000; });
+    if (humanRecent) return; // anh Hiệp đang trả lời trực tiếp qua Telegram thì bot im lặng
+    var it = findIntent(text);
+    if (it) return answer(it.steps);
+    if (!st.fallback) { st.fallback = true; save(); say(L.fallback); }
+  }
+  form.onsubmit = function (e) { e.preventDefault(); var t = input.value; input.value = ''; send(t); };
+
+  // ---- Khởi động ----
+  if (!st.msgs.length) { var w = { from: 'a', text: fill(L.welcome) }; render(w); }
+  else st.msgs.forEach(render);
+  if (!st.msgs.some(function (m) { return m.from === 'v'; })) showChips();
+  if (st.msgs.length && (st.lead.phone || Date.now() - st.msgs[st.msgs.length - 1].at < 86400000)) startPoll();
+
+  // Mở toàn màn hình (nút Chat ở thanh dưới, "Hỏi ngay" ở các mục)
+  var x = root.querySelector('.lchat-x');
+  function open(full) {
+    if (full === false || window.innerWidth > 960) { document.getElementById('hoi-ngay').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    else { root.classList.add('full'); document.documentElement.style.overflow = 'hidden'; }
+    setTimeout(function () { scroll(); }, 50);
+  }
+  function close() { root.classList.remove('full'); document.documentElement.style.overflow = ''; }
+  x.onclick = close;
+  window.CasamiaChat = { open: open, close: close, ask: function (t) { open(); if (t) setTimeout(function () { send(t); }, 350); } };
+})();
+</script>
+<script>
 // ?debug=1 → hiện tình trạng khung chat ngay trên trang (để kiểm tra trên điện thoại)
 if (/[?&]debug=1/.test(location.search)) setTimeout(function () {
-  var h = document.getElementById('casamia-chat'), r = h && h.shadowRoot && h.shadowRoot.querySelector('.fab');
+  var h = document.getElementById('lchat') || document.getElementById('casamia-chat'), r = h;
   var box = r ? r.getBoundingClientRect() : null, d = document.createElement('div');
   d.style.cssText = 'position:fixed;left:8px;right:8px;top:8px;z-index:2147483647;background:#fff8e6;border:2px solid #f47c20;border-radius:10px;padding:10px;font:12px/1.4 monospace;color:#111;white-space:pre-wrap;word-break:break-all';
   d.textContent = 'KIỂM TRA CHAT\n' +
