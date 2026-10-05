@@ -25,20 +25,20 @@ roadV=near((99,102,124),28); roadV[xx>640]=0
 site=cv2.morphologyEx(cv2.bitwise_and(nonwhite,255-roadV),cv2.MORPH_CLOSE,np.ones((25,25),np.uint8))
 cs,_=cv2.findContours(site,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 c=max(cs,key=cv2.contourArea); c=cv2.approxPolyDP(c,3,True)[:,0]
-out.append(f'<polygon points="{P(c)}" fill="#e9f0e2" stroke="#cbdcbf" stroke-width="1.5"/>')
+out.append(f'<polygon points="{P(c)}" fill="#c4e2b8" stroke="#a9cf9c" stroke-width="1.5"/>')
 sitemask=np.zeros((H,W),np.uint8); cv2.fillPoly(sitemask,[c.reshape(-1,1,2)],255)
 # --- cây xanh ---
 tree=near((92,124,80),36)&sitemask
 tree=cv2.morphologyEx(tree,cv2.MORPH_CLOSE,np.ones((13,13),np.uint8)); tree=cv2.morphologyEx(tree,cv2.MORPH_OPEN,np.ones((9,9),np.uint8))
-polys(tree,3,700,'#9cc792')
+tree=cv2.GaussianBlur(tree,(0,0),5); tree=(tree>140).astype(np.uint8)*255
+polys(tree,3,2500,'#aed69f')
 forest=tree.copy(); forest[xx<1480]=0
 forest=cv2.morphologyEx(forest,cv2.MORPH_CLOSE,np.ones((35,35),np.uint8))
-polys(forest,4,20000,'#6fa86d')
+polys(forest,4,20000,'#7fb47a')
 # --- đường nội khu (xám) ---
 g=im; r,gg,b=g[:,:,0],g[:,:,1],g[:,:,2]
 road=(((abs(r-gg)<14)&(b>=gg-4)&(r>95)&(r<190)&(b<205)).astype(np.uint8)*255)&sitemask
-road=cv2.morphologyEx(road,cv2.MORPH_OPEN,np.ones((5,5),np.uint8)); road=cv2.morphologyEx(road,cv2.MORPH_CLOSE,np.ones((7,7),np.uint8))
-polys(road,2.5,600,'#dfe3ea')
+pass  # đường nội khu vẽ tay trong final.svg
 # --- nước, hồ ---
 water=near((40,150,170),70)&sitemask
 water=cv2.morphologyEx(water,cv2.MORPH_CLOSE,np.ones((9,9),np.uint8)); water=cv2.morphologyEx(water,cv2.MORPH_OPEN,np.ones((5,5),np.uint8))
