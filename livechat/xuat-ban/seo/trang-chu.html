@@ -26,35 +26,7 @@
 <link rel="apple-touch-icon" href="https://casamia-balanca-img.netlify.app/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://casamia-balanca-img.netlify.app/assets/style.css">
-<style id="tong-mau-navy-cam">
-/* Tông màu dự án: xanh navy – trắng – cam (ghi đè style.css) */
-:root{--green:#0b2a5b;--dark:#0b2a5b;--ink:#0b2a5b;--primary:#0b2a5b;--brand:#0b2a5b;--navy:#0b2a5b;--gold:#f47c20;--accent:#f47c20;--red:#f47c20;--orange:#f47c20;--cream:#f5f7fb;--bg2:#f5f7fb;--line:#dde3ee}
-.btn-red,.btn-gold,#menu a.cta,.lead-form button,.fab .call{background:#f47c20!important;border-color:#f47c20!important;color:#fff!important}
-.btn-red:hover,.btn-gold:hover,#menu a.cta:hover,.lead-form button:hover{background:#d9650f!important;border-color:#d9650f!important}
-.btn-line{border-color:#fff!important;color:#fff!important}
-.btn.mini{border-color:#0b2a5b!important;color:#0b2a5b!important;background:#fff!important}
-.sec.dark,footer,#hdr.scrolled,#hdr.solid,#hdr.on,#hdr.fixed,#hdr.stuck{background:#0b2a5b!important}
-.sec.alt{background:#f5f7fb!important}
-.sec.dark .eyebrow,.eyebrow{color:#f47c20!important}
-h1,h2,h3{--c:#0b2a5b}
-.sec:not(.dark) h2,.sec:not(.dark) h3,.card h3,.faq summary{color:#0b2a5b}
-.stats b,.dist b,.sum b,.card .more,.more,.faq summary::marker{color:#f47c20!important}
-.promo b{color:#f47c20!important}
-.badge{background:rgba(244,124,32,.12)!important;color:#c4560a!important}
-table thead th,.tbl-wrap thead th{background:#0b2a5b!important;color:#fff!important}
-table tr.grp td{background:#eef2f8!important;color:#0b2a5b!important}
-.tabs button.on,.ptabs button.on{background:#0b2a5b!important;border-color:#0b2a5b!important;color:#fff!important}
-.ticks li::before{color:#f47c20!important;border-color:#f47c20!important}
-.toc{border-left-color:#f47c20!important}
-a{color:inherit}
-.prose a,.faq a,.note a,.lead a{color:#d9650f}
-.hero::before,.hero::after{background:linear-gradient(180deg,rgba(11,42,91,.35),rgba(11,42,91,.78))!important}
-.steps .done b,.steps b{color:#0b2a5b}
-.bar i{background:#0b2a5b!important}.bar.hi i{background:#f47c20!important}
-input:focus,select:focus{border-color:#f47c20!important;outline-color:#f47c20!important}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 
 <link rel="preload" as="image" href="https://casamia-balanca-img.netlify.app/img/casamia-balanca-hoi-an-phoi-canh-tong-the-800.jpg" imagesrcset="https://casamia-balanca-img.netlify.app/img/casamia-balanca-hoi-an-phoi-canh-tong-the-800.jpg 800w, https://casamia-balanca-img.netlify.app/img/casamia-balanca-hoi-an-phoi-canh-tong-the.jpg 1600w" imagesizes="100vw" fetchpriority="high">
 <script type="application/ld+json">
@@ -104,28 +76,230 @@ input:focus,select:focus{border-color:#f47c20!important;outline-color:#f47c20!im
   ]
 }
 </script>
+<style>
+:root{--navy:#0b2a5b;--navy2:#123a7a;--orange:#f47c20;--orange2:#d9650f;--ink:#1d2b3a;--muted:#5d6b80;--line:#e3e8f0;--cream:#f6f4ef;--soft:#f5f7fb;--serif:"Playfair Display",Georgia,serif;--sans:"Be Vietnam Pro",system-ui,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--sans);color:var(--ink);background:#fff;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.eye{display:inline-flex;align-items:center;gap:10px;font:700 12px/1.4 var(--sans);letter-spacing:3px;text-transform:uppercase;color:var(--orange)}
+.eye::before{content:"";width:28px;height:1.5px;background:currentColor}
+h1,h2,h3{margin:0;color:var(--navy)}
+h2{font:600 clamp(28px,3.6vw,44px)/1.2 var(--serif);margin:12px 0 16px}
+h2 em,h1 em{font-style:italic;color:var(--orange)}
+.lead{font-size:17px;color:var(--muted);max-width:720px}
+.sec{padding:96px 0}
+.center{text-align:center}.center .lead{margin:0 auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;cursor:pointer;font:700 15.5px var(--sans);padding:15px 26px;border-radius:999px;text-decoration:none;transition:transform .15s,background .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn-o{background:var(--orange);color:#fff;box-shadow:0 12px 26px rgba(244,124,32,.35)}.btn-o:hover{background:var(--orange2)}
+.btn-n{background:var(--navy);color:#fff}.btn-n:hover{background:var(--navy2)}
+.btn-w{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.55);backdrop-filter:blur(6px)}.btn-w:hover{background:rgba(255,255,255,.22)}
+.btn-l{background:#fff;color:var(--navy);border:1.5px solid var(--line)}
+/* header */
+#hdr{position:fixed;inset:0 0 auto;z-index:50;transition:background .3s,box-shadow .3s}
+#hdr .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+#hdr.on{background:var(--navy);box-shadow:0 6px 20px rgba(0,0,0,.15)}
+.logo img{height:42px;width:auto}
+#menu{display:flex;gap:22px;list-style:none;margin:0;padding:0;align-items:center}
+#menu a{color:#fff;text-decoration:none;font-size:14.5px;font-weight:500;opacity:.92}
+#menu a:hover{opacity:1;color:#ffcfa8}
+#menu .tel{background:var(--orange);padding:10px 18px;border-radius:999px;font-weight:700;opacity:1}
+#burger{display:none;background:none;border:0;width:40px;height:40px;cursor:pointer;padding:8px}
+#burger span{display:block;height:2px;background:#fff;margin:6px 0;border-radius:2px}
+/* hero */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
+.hero picture,.hero picture img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero picture img{animation:kb 22s ease-out both}
+@keyframes kb{from{transform:scale(1.12)}to{transform:scale(1)}}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,24,52,.35) 0,rgba(8,24,52,.15) 35%,rgba(8,24,52,.85) 100%)}
+.hero .wrap{position:relative;z-index:2;padding-bottom:9vh;padding-top:120px;width:100%}
+.hero .eye{color:#ffb27a}
+.hero h1{color:#fff;font:600 clamp(36px,6vw,76px)/1.06 var(--serif);max-width:900px;margin:16px 0 18px;text-shadow:0 2px 30px rgba(0,0,0,.25)}
+.hero h1 small{display:block;font:500 clamp(14px,1.4vw,17px)/1.4 var(--sans);letter-spacing:4px;text-transform:uppercase;color:#ffd9bd;margin-bottom:14px}
+.hero h1 em{color:#ffb27a}
+.hero p.sub{font-size:clamp(16px,1.6vw,19px);max-width:640px;color:#e9eef6;margin:0 0 28px}
+.hero .btns{display:flex;gap:12px;flex-wrap:wrap}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.chips span{font-size:13.5px;padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(6px)}
+.chips b{color:#ffb27a}
+.scroll{position:absolute;right:28px;bottom:32px;z-index:2;writing-mode:vertical-rl;font-size:11px;letter-spacing:4px;color:#dfe6f2;opacity:.8}
+/* offer ribbon */
+.ribbon{background:var(--navy);color:#fff}
+.ribbon .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:18px;padding-bottom:18px;flex-wrap:wrap}
+.ribbon p{margin:0;font-size:15px}.ribbon b{color:#ffb27a}
+.ribbon .btn{padding:11px 20px;font-size:14.5px}
+/* intro */
+.intro{background:var(--cream)}
+.intro .q{font:500 clamp(26px,3.4vw,42px)/1.35 var(--serif);color:var(--navy);max-width:980px;margin:18px auto 0}
+.intro .q em{color:var(--orange)}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:56px}
+.stats div{background:#fff;border-radius:16px;padding:22px 16px;text-align:center;box-shadow:0 8px 24px rgba(11,42,91,.06)}
+.stats b{display:block;font:600 34px/1.1 var(--serif);color:var(--navy)}
+.stats span{font-size:13.5px;color:var(--muted)}
+/* 3 cách sống */
+.ways{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.way{position:relative;border-radius:22px;overflow:hidden;min-height:480px;color:#fff;display:flex;align-items:flex-end;cursor:pointer;border:0;padding:0;text-align:left;font:inherit;background:#0b2a5b}
+.way img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.way:hover img{transform:scale(1.06)}
+.way::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,24,52,0) 30%,rgba(8,24,52,.9) 100%)}
+.way .t{position:relative;z-index:2;padding:26px}
+.way small{font:700 11.5px var(--sans);letter-spacing:3px;text-transform:uppercase;color:#ffb27a}
+.way h3{color:#fff;font:600 26px/1.25 var(--serif);margin:8px 0 8px}
+.way p{margin:0 0 14px;color:#dfe6f2;font-size:15px}
+.way .go{font-weight:700;font-size:14.5px;border-bottom:1.5px solid #ffb27a;padding-bottom:2px}
+/* một ngày */
+.day{background:var(--navy);color:#fff}
+.day h2{color:#fff}.day .lead{color:#c9d3e4}
+.tl{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:44px}
+.tl figure{margin:0}
+.tl .im{border-radius:16px;overflow:hidden;aspect-ratio:3/4;background:#123a7a}
+.tl img{width:100%;height:100%;object-fit:cover}
+.tl b{display:block;font:600 28px/1 var(--serif);color:#ffb27a;margin:16px 0 6px}
+.tl p{margin:0;color:#dbe3ef;font-size:14.5px}
+/* sản phẩm */
+.prods{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+.prod{border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 14px 34px rgba(11,42,91,.09);display:flex;flex-direction:column}
+.prod .ph{aspect-ratio:16/11;overflow:hidden}.prod .ph img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.prod:hover .ph img{transform:scale(1.05)}
+.prod .bd{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}
+.tag{display:inline-block;font-size:12px;font-weight:700;color:#c4560a;background:#fff1e6;border-radius:999px;padding:4px 12px;align-self:flex-start}
+.prod h3{font:600 23px/1.3 var(--serif);margin:10px 0 6px}
+.prod p{margin:0 0 14px;color:var(--muted);font-size:15px}
+.spec{list-style:none;padding:0;margin:0 0 18px;display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;font-size:13.5px}
+.spec li{border-top:1px solid var(--line);padding-top:8px;color:var(--muted)}.spec b{display:block;color:var(--navy);font-size:14.5px}
+.prod .row{margin-top:auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.prod .row .btn{padding:12px 18px;font-size:14.5px}
+.prod .row a.more{font-size:14px;font-weight:600;color:var(--navy)}
+.more-prods{margin-top:20px;text-align:center;color:var(--muted);font-size:14.5px}
+.more-prods a{color:var(--orange2);font-weight:600}
+/* vị trí */
+.loc{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
+.loc .map{border-radius:20px;overflow:hidden;box-shadow:0 18px 40px rgba(11,42,91,.12)}
+.dist{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:26px 0}
+.dist div{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding:10px 0}
+.dist b{font:600 30px/1 var(--serif);color:var(--orange);min-width:58px}
+.dist span{font-size:15px}
+.note{font-size:13px;color:var(--muted)}
+/* tiện ích */
+.amen{background:var(--soft)}
+.mosaic{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:12px;margin-top:40px}
+.mosaic figure{margin:0;position:relative;border-radius:16px;overflow:hidden}
+.mosaic figure.w{grid-column:span 2;grid-row:span 2}
+.mosaic img{width:100%;height:100%;object-fit:cover}
+.mosaic figcaption{position:absolute;left:12px;bottom:12px;background:rgba(8,24,52,.72);color:#fff;font-size:13px;padding:5px 12px;border-radius:999px}
+.prog{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.prog div{background:#fff;border-radius:14px;padding:16px;border-left:3px solid var(--orange);font-size:14px;color:var(--muted)}
+.prog b{display:block;color:var(--navy);font-size:14.5px;margin-bottom:4px}
+/* chính sách */
+.pol{position:relative;color:#fff;overflow:hidden}
+.pol>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pol::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(8,24,52,.95) 0,rgba(8,24,52,.82) 55%,rgba(8,24,52,.55) 100%);z-index:1}
+.pol .wrap{position:relative;z-index:2}
+.pol h2{color:#fff}.pol .lead{color:#cfd8e6}
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:36px 0 30px}
+.pgrid div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:22px 18px;backdrop-filter:blur(4px)}
+.pgrid b{display:block;font:600 36px/1.1 var(--serif);color:#ffb27a;margin-bottom:6px}
+.pgrid span{font-size:14.5px;color:#e3e9f3}
+.pol .btns{display:flex;gap:12px;flex-wrap:wrap}
+/* thực tế + uy tín */
+.real{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.real .pics{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.real .pics img{border-radius:14px;aspect-ratio:1/1;object-fit:cover;width:100%}
+.real .pics img:first-child{grid-column:span 2;aspect-ratio:16/9}
+.awards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+.awards div{background:var(--soft);border-radius:14px;padding:14px 16px;font-size:14px;color:var(--muted)}
+.awards b{display:block;color:var(--navy);font-size:15px}
+/* quà + form */
+.gift{background:linear-gradient(160deg,#0b2a5b 0,#123a7a 100%);color:#fff}
+.gift .in{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.gift h2{color:#fff}.gift .lead{color:#cfd8e6}
+.gifts{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:12px}
+.gifts li{display:flex;gap:14px;align-items:flex-start;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:14px 16px}
+.gifts i{flex:none;width:38px;height:38px;border-radius:50%;background:var(--orange);display:grid;place-items:center;font-style:normal;font-size:18px}
+.gifts b{display:block;font-size:15.5px}.gifts span{font-size:14px;color:#cdd7e7}
+.card{background:#fff;color:var(--ink);border-radius:22px;padding:30px 26px;box-shadow:0 30px 60px rgba(0,0,0,.25)}
+.card h3{font:700 21px/1.35 var(--sans);margin:0 0 6px}
+.card .sm{font-size:14px;color:var(--muted);margin:0 0 16px}
+.f input,.f select{display:block;width:100%;border:1.5px solid var(--line);border-radius:12px;padding:14px;font:16px var(--sans);margin:0 0 10px;background:#fff;color:var(--ink)}
+.f input:focus,.f select:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(244,124,32,.15)}
+.f .btn{width:100%;border-radius:12px;padding:16px}
+.f small{display:block;margin-top:10px;font-size:12.5px;color:var(--muted);line-height:1.5}
+.chipset{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.chipset label{cursor:pointer}.chipset input{display:none}
+.chipset span{display:inline-block;border:1.5px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13.5px;color:var(--navy)}
+.chipset input:checked+span{background:var(--navy);border-color:var(--navy);color:#fff}
+.err{color:#c0392b;font-size:13.5px;margin:0 0 8px}
+.done{text-align:center;padding:16px 0}.done .big{font-size:44px}.done h3{margin:8px 0}.done p{color:var(--muted)}
+/* hỏi đáp */
+.faq{max-width:860px;margin:36px auto 0}
+.faq details{border-bottom:1px solid var(--line);padding:18px 4px}
+.faq summary{cursor:pointer;font-weight:600;color:var(--navy);font-size:16.5px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::after{content:"+";color:var(--orange);font-size:22px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq details div{color:var(--muted);margin-top:10px;font-size:15.5px}
+.faq a{color:var(--orange2)}
+/* footer */
+footer{background:#081b3a;color:#b9c4d6;padding:64px 0 100px;font-size:14.5px}
+footer .g{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px}
+footer h4{color:#fff;margin:0 0 12px;font-size:15px}
+footer ul{list-style:none;padding:0;margin:0}footer li{margin:6px 0}
+footer a{text-decoration:none}footer a:hover{color:#ffb27a}
+footer .disc{border-top:1px solid rgba(255,255,255,.1);margin-top:36px;padding-top:20px;font-size:12.5px;color:#8a97ad}
+/* modal, thanh dưới */
+.modal{position:fixed;inset:0;z-index:100;background:rgba(6,18,40,.6);display:grid;place-items:center;padding:16px}
+.modal[hidden]{display:none}
+.modal .card{max-width:430px;width:100%;position:relative;animation:pop .25s ease}
+@keyframes pop{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.x{position:absolute;right:12px;top:8px;border:0;background:none;font-size:30px;color:#9aa6b8;cursor:pointer}
+.mbar{display:none}
+.fabz{position:fixed;right:18px;bottom:22px;z-index:60;width:58px;height:58px;border-radius:50%;background:#0068ff;color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px;text-decoration:none;box-shadow:0 10px 24px rgba(0,104,255,.35)}
+/* hiệu ứng */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.hero picture img{animation:none}}
+@media(max-width:980px){
+ #menu{display:none;position:absolute;top:72px;left:0;right:0;background:var(--navy);flex-direction:column;padding:18px 20px 24px;gap:14px;align-items:flex-start}
+ #menu.open{display:flex}#burger{display:block}
+ .stats{grid-template-columns:repeat(3,1fr)}
+ .ways,.prods{grid-template-columns:1fr}.way{min-height:380px}
+ .tl{grid-template-columns:repeat(5,72%);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}.tl figure{scroll-snap-align:start}
+ .loc,.real,.gift .in{grid-template-columns:1fr;gap:30px}
+ .mosaic{grid-template-columns:1fr 1fr;grid-auto-rows:160px}
+ .pgrid,.prog{grid-template-columns:1fr 1fr}
+ footer .g{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+ .sec{padding:64px 0}
+ .stats{grid-template-columns:1fr 1fr}.stats div:last-child{grid-column:span 2}
+ .dist{grid-template-columns:1fr}
+ .ribbon .wrap{justify-content:center;text-align:center}
+ .scroll{display:none}
+ .hero h1 small{letter-spacing:2px}.hero .eye{font-size:10.5px;letter-spacing:2px}.hero .btns .btn{flex:1 1 100%}.chips span:nth-child(n+3){display:none}.chips{margin-top:18px}
+ .fabz{display:none}
+ .mbar{display:grid;grid-template-columns:1fr 1fr 1.5fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);box-shadow:0 -6px 20px rgba(11,42,91,.12)}
+ .mbar a,.mbar button{border:0;border-radius:12px;padding:13px 6px;text-align:center;font:700 15px var(--sans);text-decoration:none;cursor:pointer}
+ .mbar a:nth-child(1){background:#eef2f8;color:var(--navy)}.mbar a:nth-child(2){background:var(--navy);color:#fff}.mbar button{background:var(--orange);color:#fff}
+}
+</style>
 </head>
 <body>
 <header id="hdr">
   <div class="wrap">
-    <a class="logo" href="https://www.casamia-balanca.com.vn/" aria-label="Casamia Balanca Hội An – Trang chủ">
-      <img class="ld" src="https://casamia-balanca-img.netlify.app/img/logo-casamia-balanca-trang.png" alt="Logo Casamia Balanca Hội An" width="137" height="48">
-      <img class="lw" src="https://casamia-balanca-img.netlify.app/img/logo-casamia-balanca-do.png" alt="Logo Casamia Balanca Hội An" width="137" height="48">
-    </a>
+    <a class="logo" href="https://www.casamia-balanca.com.vn/" aria-label="Casamia Balanca Hội An – Trang chủ"><img src="https://casamia-balanca-img.netlify.app/img/logo-casamia-balanca-trang.png" alt="Logo Casamia Balanca Hội An" width="137" height="48"></a>
     <button id="burger" aria-label="Mở menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     <ul id="menu">
-      <li><a href="https://www.casamia-balanca.com.vn/">Tổng quan</a></li>
       <li><a href="https://www.casamia-balanca.com.vn/biet-thu-san-vuon-park-home">Biệt thự sân vườn</a></li>
       <li><a href="https://www.casamia-balanca.com.vn/biet-thu-rung-dua-forestside-villa">Biệt thự rừng dừa</a></li>
       <li><a href="https://www.casamia-balanca.com.vn/biet-thu-vinh-bien-waterside-villa">Biệt thự vịnh biển</a></li>
       <li><a href="https://www.casamia-balanca.com.vn/chinh-sach-ban-hang">Chính sách</a></li>
       <li><a href="https://www.casamia-balanca.com.vn/bang-tinh">Bảng tính</a></li>
       <li><a href="https://www.casamia-balanca.com.vn/hoi-dap">Hỏi đáp</a></li>
-      <li><a class="cta" href="#dang-ky">Nhận bảng giá</a></li>
+      <li><a class="tel" href="tel:0904567009">0904 567 009</a></li>
     </ul>
   </div>
 </header>
-
 
 <section class="hero">
   <picture>
@@ -133,260 +307,184 @@ input:focus,select:focus{border-color:#f47c20!important;outline-color:#f47c20!im
     <img src="https://casamia-balanca-img.netlify.app/img/casamia-balanca-hoi-an-phoi-canh-tong-the.jpg" alt="Phối cảnh tổng thể khu đô thị Casamia Balanca Hội An bên sông Cổ Cò" width="1600" height="900" fetchpriority="high">
   </picture>
   <div class="wrap">
-    <span class="eyebrow" style="color:var(--gold)">Khu đô thị sinh thái Cồn Tiến · Hội An</span>
-    <h1>Casamia Balanca Hội An – nơi mỗi sáng thức dậy bên sông, rừng dừa và phố cổ</h1>
-    <p class="sub">Có những nơi người ta chỉ ghé chơi vài ngày rồi tiếc mãi. Ở Casamia Balanca, đó là nhà mình: nhà vườn và biệt thự giữa 31,1ha sông nước, trường mầm non ngay trong khu, 10 phút ra phố cổ, 7 phút ra biển. Chỉ 363 gia đình được gọi nơi này là nhà.</p>
-    <div class="tags"><span>Sổ hồng sở hữu lâu dài</span><span>Vay 70% – 0% lãi tới 24 tháng</span><span>Nhận nhà 12/2026 – 03/2027</span><span>Park Home từ ~10,4 tỷ*</span></div>
-    <div class="btns"><a href="#nhan-tai-lieu" class="btn btn-red js-cm-open" data-title="Nhận bảng giá &amp; căn đẹp tháng 10/2026" data-need="Bảng giá tháng 10/2026">Nhận bảng giá &amp; căn đẹp qua Zalo</a><a href="#mot-ngay" class="btn btn-line">Một ngày ở đây trông thế nào?</a></div>
-    <p style="font-size:.78rem;color:#d9d2c4;margin-top:14px">*Giá tham khảo sau chiết khấu 3,5 tỷ, áp dụng với căn thuộc danh sách bàn giao thô do CĐT quy định.</p>
+    <span class="eye">Khu đô thị sinh thái Cồn Tiến · Hội An</span>
+    <h1><small>Casamia Balanca Hội An</small>Về nhà là về với <em>sông, rừng dừa</em> và phố cổ.</h1>
+    <p class="sub">31,1ha sông nước bên Cổ Cò, chỉ 363 nhà vườn &amp; biệt thự. Mỗi sáng nghe chim trong rừng dừa, chiều dắt con dạo bờ sông, 10 phút đã ngồi giữa phố cổ đèn lồng.</p>
+    <div class="btns">
+      <button class="btn btn-o js-open" data-title="Nhận bảng giá &amp; căn đẹp tháng 10/2026" data-need="Bảng giá tháng 10/2026">Nhận bảng giá &amp; căn đẹp</button>
+      <button class="btn btn-w js-open" data-title="Đặt lịch xem nhà mẫu cuối tuần" data-need="Đặt lịch xem nhà mẫu">Đặt lịch xem nhà mẫu</button>
+    </div>
+    <div class="chips"><span><b>Sổ hồng</b> sở hữu lâu dài</span><span><b>Vay 70%</b> · 0% lãi tới 24 tháng</span><span><b>Cọc 300 triệu</b> giữ căn</span><span>Park Home từ <b>~10,4 tỷ*</b></span></div>
+  </div>
+  <span class="scroll">CUỘN XUỐNG</span>
+</section>
+
+<div class="ribbon"><div class="wrap"><p>Ưu đãi tháng 10/2026: <b>chiết khấu tới 3,5 tỷ</b> · vay 70% <b>0% lãi 24 tháng</b> · miễn phí 2 năm phí quản lý</p><button class="btn btn-o js-open" data-title="Nhận chính sách tháng 10/2026" data-need="Chính sách tháng 10/2026">Xem ưu đãi của tôi</button></div></div>
+
+<section class="sec intro center" id="tong-quan">
+  <div class="wrap">
+    <span class="eye rv">Casamia Balanca là gì?</span>
+    <p class="q rv">Không phải một dự án để <em>ghé chơi</em> vài ngày rồi tiếc. Đây là nơi 363 gia đình được gọi Hội An là <em>nhà</em>: có ban quản lý, có trường cho con, có hàng xóm cùng gu sống.</p>
+    <p class="lead rv" style="margin-top:22px"><strong>Casamia Balanca Hội An</strong> (KĐT Cồn Tiến) là khu đô thị sinh thái thấp tầng của <strong>Công ty CP Đạt Phương Hội An</strong>, tiếp nối khu biệt thự Casamia Hội An đã vận hành tại Võng Nhi. Bao quanh bởi sông Cổ Cò, vịnh Cửa Đại và 3,6ha rừng dừa nước, một trong số ít dự án <strong>bất động sản Hội An</strong> hội đủ cận hải, cận giang, cận lâm, cận lộ.</p>
+    <div class="stats rv">
+      <div><b>31,1ha</b><span>Quy mô khu đô thị</span></div>
+      <div><b>363</b><span>Nhà vườn &amp; biệt thự</span></div>
+      <div><b>23,1%</b><span>Mật độ xây dựng gộp</span></div>
+      <div><b>3,6ha</b><span>Rừng dừa nước tự nhiên</span></div>
+      <div><b>5</b><span>Công viên chủ đề</span></div>
+    </div>
   </div>
 </section>
 
-<section class="cm-hook" id="nhan-tai-lieu">
-  <div class="cm-wrap cm-hook-in">
-    <div class="cm-hook-txt">
-      <span class="cm-eye">Dành cho gia đình đang tìm một nơi để sống chậm lại</span>
-      <h2>Sáng nghe chim hót trong rừng dừa. Chiều dắt con dạo bờ sông. Tối 10 phút đã ngồi giữa phố cổ.</h2>
-      <p>Casamia Balanca không chỉ bán một căn nhà, mà là nhịp sống Hội An ngay trước hiên nhà mình, có ban quản lý, có trường cho con, có hàng xóm cùng gu sống.</p>
-      <ul class="cm-proof"><li><b>Sổ hồng</b> sở hữu lâu dài</li><li><b>Vay 70%</b> · 0% lãi tới 24 tháng</li><li><b>Cọc 300 triệu</b> giữ căn</li></ul>
+<section class="sec" id="cach-song">
+  <div class="wrap">
+    <div class="center"><span class="eye rv">Anh/chị tìm điều gì?</span><h2 class="rv">Một nơi, <em>ba cách sống</em></h2><p class="lead rv">Chọn điều anh/chị quan tâm nhất, em gửi đúng tài liệu cho nhu cầu đó.</p></div>
+    <div class="ways">
+      <button class="way rv js-open" data-title="Tài liệu cho gia đình mua để ở" data-need="Mua để ở – gia đình"><img src="https://casamia-balanca-img.netlify.app/img/san-vuon-park-home-casamia-balanca.jpg" alt="Sân vườn Park Home Casamia Balanca cho gia đình" loading="lazy"><div class="t"><small>Để ở</small><h3>Cho con lớn lên giữa thiên nhiên</h3><p>Trường mầm non trong khu, sân vườn riêng, bể bơi &amp; công viên trước nhà.</p><span class="go">Gợi ý căn cho gia đình →</span></div></button>
+      <button class="way rv js-open" data-title="Tài liệu nhà thứ hai / nghỉ dưỡng" data-need="Nhà thứ hai – nghỉ dưỡng"><img src="https://casamia-balanca-img.netlify.app/img/forestside-villa-kenh-noi-khu-du-thuyen.jpg" alt="Kênh nội khu và biệt thự Forestside ven rừng dừa" loading="lazy"><div class="t"><small>Nghỉ dưỡng</small><h3>Ngôi nhà thứ hai ở Hội An</h3><p>Biệt thự ven kênh, rừng dừa, có người vận hành khi anh/chị vắng nhà.</p><span class="go">Xem biệt thự ven sông →</span></div></button>
+      <button class="way rv js-open" data-title="Phân tích dòng tiền cho thuê" data-need="Đầu tư – dòng tiền cho thuê"><img src="https://casamia-balanca-img.netlify.app/img/waterside-villa-biet-thu-ho-boi-hoi-an.jpg" alt="Waterside Villa biệt thự hồ bơi cho thuê tại Hội An" loading="lazy"><div class="t"><small>Đầu tư</small><h3>Tài sản tự sinh dòng tiền</h3><p>CĐT thuê lại 50–60 triệu/tháng trong 3 năm, hoặc ủy thác vận hành 5 năm.</p><span class="go">Nhận bảng dòng tiền →</span></div></button>
     </div>
-    <form class="cm-card cm-form" data-form="Trang chủ – Nhận tài liệu" novalidate>
-      <h3>Nhận trọn bộ tài liệu qua Zalo trong 5 phút</h3>
-      <ul class="cm-gift"><li>Bảng giá từng căn tháng 10/2026</li><li>Mặt bằng &amp; danh sách căn đẹp còn trống</li><li>Bảng tính trả góp vay 70%, 0% lãi 24 tháng</li></ul>
+  </div>
+</section>
+
+<section class="sec day" id="mot-ngay">
+  <div class="wrap">
+    <span class="eye rv">Một ngày bình thường</span>
+    <h2 class="rv">Chậm lại, mà vẫn <em>đủ đầy</em></h2>
+    <p class="lead rv">Ở Casamia Balanca, một ngày bình thường đã giống kỳ nghỉ mà nhiều người đợi cả năm.</p>
+    <div class="tl">
+      <figure class="rv"><div class="im"><img src="https://casamia-balanca-img.netlify.app/img/duong-dao-ven-song-casamia-balanca.jpg" alt="Đường dạo ven sông buổi sáng" loading="lazy"></div><b>6:00</b><p>Gió sông Cổ Cò. Chạy bộ ven kênh khi rừng dừa còn đọng sương.</p></figure>
+      <figure class="rv"><div class="im"><img src="https://casamia-balanca-img.netlify.app/img/cong-vien-hoa-giay-casamia-balanca.jpg" alt="Công viên hoa giấy" loading="lazy"></div><b>7:30</b><p>Dắt con đi bộ tới trường mầm non ngay trong khu.</p></figure>
+      <figure class="rv"><div class="im"><img src="https://casamia-balanca-img.netlify.app/img/co-working-clubhouse-casamia-balanca.jpg" alt="Co-working trong Clubhouse" loading="lazy"></div><b>10:00</b><p>Làm việc ở co-working Clubhouse, cà phê nhìn ra hồ.</p></figure>
+      <figure class="rv"><div class="im"><img src="https://casamia-balanca-img.netlify.app/img/sky-bar-casamia-balanca-vinh-cua-dai.jpg" alt="Hoàng hôn vịnh Cửa Đại" loading="lazy"></div><b>17:30</b><p>Hoàng hôn trên vịnh Cửa Đại, con chơi ở công viên.</p></figure>
+      <figure class="rv"><div class="im"><img src="https://casamia-balanca-img.netlify.app/img/cau-hoa-giay-song-co-co-hoi-an.jpg" alt="Cầu hoa giấy ven sông về đêm" loading="lazy"></div><b>19:30</b><p>10 phút ra phố cổ đèn lồng. Về nhà, khu lại yên tĩnh.</p></figure>
+    </div>
+    <div style="margin-top:36px"><button class="btn btn-o js-open" data-title="Đặt lịch trải nghiệm một ngày tại nhà mẫu" data-need="Đặt lịch xem nhà mẫu">Đặt lịch trải nghiệm nhà mẫu</button></div>
+  </div>
+</section>
+
+<section class="sec" id="mat-bang">
+  <div class="wrap">
+    <div class="center"><span class="eye rv">Mặt bằng &amp; sản phẩm</span><h2 class="rv">3 phân khu, <em>5 dòng nhà</em></h2><p class="lead rv">La Suna, La Palma, La Riva. Kênh đào nội khu rộng 20m nối thẳng ra sông Cổ Cò, nhiều căn có bến thuyền riêng.</p></div>
+    <div class="prods">
+      <article class="prod rv"><div class="ph"><img src="https://casamia-balanca-img.netlify.app/img/park-home-casamia-balanca-phan-khu-la-suna.jpg" alt="Biệt thự sân vườn Park Home Casamia Balanca phân khu La Suna" loading="lazy"></div><div class="bd"><span class="tag">97 căn · La Suna</span><h3>Park Home</h3><p>Nhà vườn 3 tầng sân vườn riêng, gần Clubhouse và trường học. Dòng ở thực được chọn nhiều nhất.</p><ul class="spec"><li>Đất<b>178m²</b></li><li>Sàn<b>316m²</b></li><li>Bàn giao<b>12/2026 – 03/2027</b></li><li>Giá từ<b>~10,4 tỷ*</b></li></ul><div class="row"><button class="btn btn-o js-open" data-title="Bảng giá Park Home từng căn" data-need="Park Home">Nhận giá từng căn</button><a class="more" href="https://www.casamia-balanca.com.vn/biet-thu-san-vuon-park-home">Chi tiết →</a></div></div></article>
+      <article class="prod rv"><div class="ph"><img src="https://casamia-balanca-img.netlify.app/img/forestside-villa-biet-thu-rung-dua-hoi-an.jpg" alt="Forestside Villa biệt thự rừng dừa Hội An" loading="lazy"></div><div class="bd"><span class="tag">106 căn · La Palma</span><h3>Forestside Villa</h3><p>Biệt thự giáp rừng dừa nước, kênh chạy trước nhà. Đậm chất sống Hội An nhất dự án.</p><ul class="spec"><li>Đất<b>250 – 336m²</b></li><li>Chiều cao<b>2 – 3 tầng + tum</b></li><li>Loại hình<b>Song lập / đơn lập</b></li><li>Thuê lại<b>60tr/tháng × 3 năm</b></li></ul><div class="row"><button class="btn btn-o js-open" data-title="Bảng giá Forestside Villa" data-need="Forestside Villa">Nhận giá từng căn</button><a class="more" href="https://www.casamia-balanca.com.vn/biet-thu-rung-dua-forestside-villa">Chi tiết →</a></div></div></article>
+      <article class="prod rv"><div class="ph"><img src="https://casamia-balanca-img.netlify.app/img/phan-khu-la-riva-waterside-villa-ve-dem.jpg" alt="Waterside Villa phân khu La Riva về đêm" loading="lazy"></div><div class="bd"><span class="tag">67 căn · La Riva</span><h3>Waterside Villa</h3><p>Mặt nước trực diện, bến thuyền riêng, gần khách sạn và Sky bar. Quỹ căn hiếm nhất.</p><ul class="spec"><li>Đất<b>250 – 336m²</b></li><li>Chiều cao<b>2 – 3 tầng + tum</b></li><li>Loại hình<b>Ven kênh</b></li><li>Bàn giao<b>Trong năm 2026</b></li></ul><div class="row"><button class="btn btn-o js-open" data-title="Bảng giá Waterside Villa" data-need="Waterside Villa">Nhận giá từng căn</button><a class="more" href="https://www.casamia-balanca.com.vn/biet-thu-vinh-bien-waterside-villa">Chi tiết →</a></div></div></article>
+    </div>
+    <p class="more-prods rv">Ngoài ra có <a href="https://www.casamia-balanca.com.vn/biet-thu-hoi-an#park-villa">Park Villa</a> (47 căn, đất 208 – 218m²) và The Boutique (46 shophouse mặt tiền Võ Chí Công). <br>*Giá tham khảo sau chiết khấu 3,5 tỷ, áp dụng với căn thuộc danh sách bàn giao thô do CĐT quy định.</p>
+  </div>
+</section>
+
+<section class="sec" id="vi-tri" style="padding-top:0">
+  <div class="wrap loc">
+    <div class="map rv"><img src="https://casamia-balanca-img.netlify.app/img/vi-tri-casamia-balanca-hoi-an.jpg" alt="Bản đồ vị trí dự án Casamia Balanca Hội An gần phố cổ, biển Cửa Đại, rừng dừa Bảy Mẫu" width="1800" height="938" loading="lazy"></div>
+    <div class="rv">
+      <span class="eye">Vị trí</span>
+      <h2>Mọi thứ đẹp nhất của Hội An, <em>đều gần</em></h2>
+      <p class="lead">Mặt tiền tuyến ven biển Võ Chí Công nối Đà Nẵng – Hội An – Chu Lai, giáp sông Cổ Cò và vịnh Cửa Đại, kế bên rừng dừa Bảy Mẫu. Phường Hội An Đông, TP. Đà Nẵng.</p>
+      <div class="dist"><div><b>05′</b><span>Rừng dừa Bảy Mẫu</span></div><div><b>07′</b><span>Biển Cửa Đại</span></div><div><b>10′</b><span>Phố cổ Hội An</span></div><div><b>10′</b><span>VinWonders Nam Hội An</span></div><div><b>08′</b><span>Hoiana Shores</span></div><div><b>35′</b><span>Sân bay Đà Nẵng</span></div></div>
+      <button class="btn btn-n js-open" data-title="Nhận video đường đi thực tế tới dự án" data-need="Video vị trí thực tế">Nhận video đường đi thực tế</button>
+      <p class="note" style="margin-top:12px">Thời gian di chuyển mang tính tham khảo.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec amen" id="tien-ich">
+  <div class="wrap">
+    <div class="center"><span class="eye rv">Tiện ích</span><h2 class="rv">Ra khỏi nhà là <em>kỳ nghỉ</em></h2><p class="lead rv">5 công viên chủ đề (Hill Park, Sport Park, Grand Central Park, Floral Park, Nipa Park), Clubhouse, trường mầm non, bể bơi vô cực, Sky bar, khách sạn và trung tâm thương mại.</p></div>
+    <div class="mosaic">
+      <figure class="w rv"><img src="https://casamia-balanca-img.netlify.app/img/clubhouse-casamia-balanca-be-boi-olympic.jpg" alt="Clubhouse Casamia Balanca với bể bơi tiêu chuẩn Olympic" loading="lazy"><figcaption>Clubhouse &amp; bể bơi Olympic</figcaption></figure>
+      <figure class="rv"><img src="https://casamia-balanca-img.netlify.app/img/be-boi-vo-cuc-casamia-balanca.jpg" alt="Bể bơi vô cực hướng vịnh Cửa Đại" loading="lazy"><figcaption>Bể bơi vô cực</figcaption></figure>
+      <figure class="rv"><img src="https://casamia-balanca-img.netlify.app/img/sky-bar-casamia-balanca-vinh-cua-dai.jpg" alt="Sky bar nhìn ra vịnh Cửa Đại" loading="lazy"><figcaption>Sky bar</figcaption></figure>
+      <figure class="rv"><img src="https://casamia-balanca-img.netlify.app/img/quang-truong-nhac-nuoc-casamia-balanca.jpg" alt="Quảng trường nhạc nước Grand Central Park" loading="lazy"><figcaption>Quảng trường trung tâm</figcaption></figure>
+      <figure class="rv"><img src="https://casamia-balanca-img.netlify.app/img/khach-san-5-sao-casamia-balanca-song-co-co.jpg" alt="Khách sạn bên sông Cổ Cò" loading="lazy"><figcaption>Khách sạn</figcaption></figure>
+      <figure class="rv"><img src="https://casamia-balanca-img.netlify.app/img/cong-vien-hoa-giay-casamia-balanca.jpg" alt="Floral Park công viên hoa giấy" loading="lazy"><figcaption>Floral Park</figcaption></figure>
+      <figure class="rv"><img src="https://casamia-balanca-img.netlify.app/img/trung-tam-thuong-mai-casamia-balanca.jpg" alt="Trung tâm thương mại Casamia Balanca" loading="lazy"><figcaption>Trung tâm thương mại</figcaption></figure>
+      <figure class="w rv"><img src="https://casamia-balanca-img.netlify.app/img/clubhouse-nomad-hub-casamia-balanca.jpg" alt="Bistro và cà phê trong Clubhouse" loading="lazy"><figcaption>Bistro &amp; Coffee</figcaption></figure>
+      <figure class="rv"><img src="https://casamia-balanca-img.netlify.app/img/co-working-clubhouse-casamia-balanca.jpg" alt="Co-working space Clubhouse" loading="lazy"><figcaption>Co-working</figcaption></figure>
+      <figure class="rv"><img src="https://casamia-balanca-img.netlify.app/img/cau-hoa-giay-song-co-co-hoi-an.jpg" alt="Cầu hoa giấy và đường dạo ven sông" loading="lazy"><figcaption>Đường dạo ven sông</figcaption></figure>
+    </div>
+    <div class="prog rv">
+      <div><b>Đã hoàn thành</b>5 công viên, sân bóng rổ, gym ngoài trời, trường mầm non</div>
+      <div><b>05/2026</b>Cụm 7 sân Pickleball</div>
+      <div><b>Đang hoàn thiện</b>Clubhouse: nhà hàng, bể bơi, gym, co-working (hoàn thiện nội thất, chưa khai trương)</div>
+      <div><b>2027 (dự kiến)</b>Khách sạn, trung tâm hội nghị</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec pol" id="chinh-sach">
+  <img src="https://casamia-balanca-img.netlify.app/img/khu-do-thi-casamia-balanca-hoi-an-ve-dem.jpg" alt="Khu đô thị Casamia Balanca Hội An về đêm" loading="lazy">
+  <div class="wrap">
+    <span class="eye rv">Chính sách đang áp dụng · tháng 10/2026</span>
+    <h2 class="rv">Nhẹ tài chính ngay <em>từ hôm nay</em></h2>
+    <p class="lead rv">Áp dụng từ 09/09/2026 cho khách đặt cọc 300 triệu/căn và ký thỏa thuận đặt cọc trong thời gian hiệu lực chính sách.</p>
+    <div class="pgrid rv">
+      <div><b>0%</b><span>Lãi suất tối đa 24 tháng khi vay tới 70%, ân hạn gốc</span></div>
+      <div><b>−3,5 tỷ</b><span>Chiết khấu khi nhận bàn giao thô, tự hoàn thiện theo gu gia đình</span></div>
+      <div><b>5%</b><span>Chiết khấu khi thanh toán sớm 95% lúc ký HĐMB</span></div>
+      <div><b>2 năm</b><span>Miễn phí quản lý + 1 năm gym &amp; bể bơi Clubhouse</span></div>
+    </div>
+    <div class="btns rv"><button class="btn btn-o js-open" data-title="Tính phương án thanh toán có lợi nhất cho tôi" data-need="Tính phương án thanh toán">Tính phương án có lợi nhất cho tôi</button><a class="btn btn-w" href="https://www.casamia-balanca.com.vn/chinh-sach-ban-hang">Xem chính sách chi tiết</a></div>
+  </div>
+</section>
+
+<section class="sec" id="thuc-te">
+  <div class="wrap real">
+    <div class="pics rv">
+      <img src="https://casamia-balanca-img.netlify.app/img/thuc-te-casamia-hoi-an-biet-thu-ho-boi.jpg" alt="Ảnh thực tế biệt thự hồ bơi tại Casamia Hội An" loading="lazy">
+      <img src="https://casamia-balanca-img.netlify.app/img/thuc-te-casamia-hoi-an-phong-khach.jpg" alt="Phòng khách biệt thự Casamia Hội An thực tế" loading="lazy">
+      <img src="https://casamia-balanca-img.netlify.app/img/thuc-te-casamia-hoi-an-loi-vao.jpg" alt="Lối vào biệt thự Casamia Hội An" loading="lazy">
+    </div>
+    <div class="rv">
+      <span class="eye">Không chỉ là phối cảnh</span>
+      <h2>Đạt Phương đã làm, <em>đã vận hành</em></h2>
+      <p class="lead">Khu biệt thự Casamia Hội An tại Võng Nhi đã bàn giao và vận hành cho thuê, là minh chứng thật cho chất lượng và năng lực của Chủ đầu tư. Tập đoàn Đạt Phương thành lập năm 2002; kiến trúc &amp; cảnh quan bởi KTS Võ Trọng Nghĩa.</p>
+      <div class="awards">
+        <div><b>2021 · PropertyGuru</b>Thiết kế kiến trúc cảnh quan đẹp nhất Việt Nam</div>
+        <div><b>2022 · VUPA</b>Giải Bạc quy hoạch khu đô thị</div>
+        <div><b>2026 · VCCI</b>"Dự án Đáng sống"</div>
+        <div><b>An tâm</b>Điện ngầm, không ngập lụt, camera &amp; an ninh</div>
+      </div>
+      <button class="btn btn-n js-open" data-title="Đặt lịch tham quan Casamia Balanca &amp; Casamia Hội An" data-need="Tham quan dự án + Casamia đã vận hành" style="margin-top:24px">Đặt lịch tham quan tận nơi</button>
+    </div>
+  </div>
+</section>
+
+<section class="sec gift" id="dang-ky">
+  <div class="wrap in">
+    <div class="rv">
+      <span class="eye">Dành cho anh/chị</span>
+      <h2>Để lại số, em gửi ngay <em>trọn bộ</em> qua Zalo</h2>
+      <p class="lead">Không cần gọi, không cần hẹn. Anh/chị xem trước ở nhà, thấy hợp rồi mình nói chuyện tiếp.</p>
+      <ul class="gifts">
+        <li><i>📋</i><div><b>Bảng giá từng căn tháng 10/2026</b><span>Kèm 3 phương án bàn giao và mức chiết khấu từng căn</span></div></li>
+        <li><i>🗺️</i><div><b>Mặt bằng &amp; danh sách căn đẹp còn trống</b><span>Đánh dấu căn view rừng dừa, căn có bến thuyền</span></div></li>
+        <li><i>🧮</i><div><b>Bảng tính trả góp cá nhân</b><span>Vay 70%, 0% lãi 24 tháng: mỗi tháng trả bao nhiêu</span></div></li>
+        <li><i>🎥</i><div><b>Video thực tế dự án &amp; nhà mẫu</b><span>Xem như đang đứng giữa Hội An</span></div></li>
+      </ul>
+    </div>
+    <form class="card f rv" data-form="Trang chủ – Nhận trọn bộ" novalidate>
+      <h3>Nhận trọn bộ tài liệu</h3>
+      <p class="sm">Em là Hiệp, tư vấn trực tiếp dự án. Gửi trong khoảng 5 phút.</p>
+      <div class="chipset" role="group" aria-label="Quan tâm">
+        <label><input type="radio" name="need" value="Park Home" checked><span>Park Home</span></label>
+        <label><input type="radio" name="need" value="Forestside Villa"><span>Forestside</span></label>
+        <label><input type="radio" name="need" value="Waterside Villa"><span>Waterside</span></label>
+        <label><input type="radio" name="need" value="Chưa rõ – cần tư vấn"><span>Chưa rõ</span></label>
+      </div>
       <input name="name" placeholder="Anh/chị tên gì ạ?" autocomplete="name" aria-label="Họ tên">
       <input name="phone" type="tel" inputmode="tel" placeholder="Số Zalo / điện thoại *" autocomplete="tel" aria-label="Số điện thoại" required>
-      <input type="hidden" name="need" value="Bảng giá + mặt bằng + bảng tính">
-      <p class="cm-err" role="alert"></p>
-      <button type="submit" class="cm-btn">Gửi tài liệu cho tôi</button>
-      <small>Em là Hiệp, tư vấn trực tiếp dự án. Chỉ gửi đúng tài liệu anh/chị cần, không làm phiền.</small>
+      <p class="err" role="alert"></p>
+      <button class="btn btn-o" type="submit">Gửi trọn bộ cho tôi</button>
+      <small>Thông tin chỉ dùng để tư vấn dự án, không chia sẻ cho bên thứ ba. Cần gấp: <a href="tel:0904567009"><b>0904 567 009</b></a></small>
     </form>
   </div>
 </section>
 
-<div class="wrap">
-  <div class="stats rv">
-    <div><b>31,1 ha</b><span>Quy mô khu đô thị</span></div>
-    <div><b>363</b><span>Nhà vườn &amp; biệt thự</span></div>
-    <div><b>23,1%</b><span>Mật độ xây dựng gộp</span></div>
-    <div><b>3,6 ha</b><span>Rừng dừa nước tự nhiên</span></div>
-    <div><b>5</b><span>Công viên chủ đề</span></div>
-  </div>
-</div>
-
-<section class="sec" id="tong-quan">
-  <div class="wrap split">
-    <div class="rv">
-      <span class="eyebrow">Tổng quan dự án</span>
-      <h2>Casamia Balanca là gì?</h2>
-      <p><strong>Casamia Balanca Hội An</strong> (tên pháp lý: Đầu tư xây dựng nhà ở Khu đô thị Cồn Tiến) là khu đô thị sinh thái thấp tầng do <strong>Công ty CP Đạt Phương Hội An</strong> – thành viên Tập đoàn Đạt Phương – phát triển, nối tiếp thành công của khu biệt thự <strong>Casamia Hội An</strong> đã vận hành tại Võng Nhi.</p>
-      <p>Dự án được bao bọc bởi “hội thủy” ba con sông Thu Bồn – Cổ Cò – Đế Võng, hướng ra vịnh Cửa Đại và nằm trong vùng lõi Khu dự trữ sinh quyển thế giới Cù Lao Chàm. Đây là một trong số ít dự án <strong>bất động sản Hội An</strong> có đủ bốn yếu tố cận hải – cận giang – cận lâm – cận lộ.</p>
-      <p>Tên dự án mang ý nghĩa “ngôi nhà bên sông của tôi” (Casamia) và “cân bằng” (Balanca) – cân bằng giữa bản sắc phố Hội và nhịp sống hiện đại.</p>
-      <ul class="spec">
-        <li><span>Tên dự án</span><b>Casamia Balanca Hoi An (KĐT Cồn Tiến)</b></li>
-        <li><span>Chủ đầu tư</span><b>Công ty CP Đạt Phương Hội An</b></li>
-        <li><span>Vị trí</span><b>Đường Võ Chí Công, P. Hội An Đông, TP. Đà Nẵng</b></li>
-        <li><span>Quy mô</span><b>31,1ha · 363 sản phẩm thấp tầng</b></li>
-        <li><span>Đất ở / Cây xanh – mặt nước</span><b>119.307m² / 90.614m²</b></li>
-        <li><span>Phân khu</span><b>La Suna · La Palma · La Riva</b></li>
-        <li><span>Pháp lý</span><b>Chủ trương đầu tư · QH 1/500 · Giấy phép xây dựng</b></li>
-        <li><span>Nhà mẫu</span><b>Park Home SL4.15 · The Boutique LK3.15</b></li>
-        <li><span>Thời hạn sử dụng đất</span><b>Lâu dài</b></li>
-      </ul>
-    </div>
-    <div class="ph rv"><img src="https://casamia-balanca-img.netlify.app/img/khu-do-thi-casamia-balanca-hoi-an-ve-dem.jpg" alt="Khu đô thị Casamia Balanca Hội An về đêm nhìn từ trên cao" width="1600" height="990" loading="lazy"></div>
-  </div>
-</section>
-
-
-<section class="cm-day" id="mot-ngay">
-  <div class="cm-wrap">
-    <span class="cm-eye">Một ngày bình thường</span>
-    <h2>Một ngày ở Casamia Balanca, chậm và đủ đầy</h2>
-    <div class="cm-day-grid">
-      <figure class="cm-day-img"><img src="https://casamia-balanca-img.netlify.app/img/duong-dao-ven-song-casamia-balanca.jpg" alt="Đường dạo ven sông Cổ Cò trong khu Casamia Balanca" width="1600" height="900" loading="lazy"></figure>
-      <ol class="cm-time">
-        <li><b>6:00</b><span>Mở cửa là gió sông Cổ Cò. Chạy bộ một vòng đường dạo ven kênh, rừng dừa còn đọng sương.</span></li>
-        <li><b>7:30</b><span>Dắt con đi bộ tới trường mầm non ngay trong khu. Không kẹt xe, không vội.</span></li>
-        <li><b>10:00</b><span>Làm việc ở co-working Clubhouse, ly cà phê nhìn ra hồ trung tâm.</span></li>
-        <li><b>17:00</b><span>Cả nhà ra công viên hoa giấy, con chơi, bố mẹ ngồi ngắm hoàng hôn trên vịnh Cửa Đại.</span></li>
-        <li><b>19:30</b><span>10 phút lái xe là ngồi giữa phố cổ đèn lồng. Về nhà, khu lại yên như một khu nghỉ dưỡng.</span></li>
-      </ol>
-    </div>
-    <div class="cm-center"><button class="cm-btn cm-btn-ghost js-cm-open" data-title="Đặt lịch trải nghiệm nhà mẫu" data-need="Đặt lịch xem nhà mẫu">Đặt lịch trải nghiệm nhà mẫu →</button></div>
-  </div>
-</section>
-
-<section class="sec alt" id="vi-tri">
-  <div class="wrap">
-    <div class="center rv">
-      <span class="eyebrow">Vị trí</span>
-      <h2>Vị trí Casamia Balanca – trên “tuyến đường di sản miền Trung”</h2>
-      <p class="lead">Mặt tiền tuyến ven biển Võ Chí Công nối Đà Nẵng – Hội An – Chu Lai, giáp sông Cổ Cò và vịnh Cửa Đại, kế bên rừng dừa Bảy Mẫu.</p>
-    </div>
-    <div class="ph rv" style="margin-top:28px"><img src="https://casamia-balanca-img.netlify.app/img/vi-tri-casamia-balanca-hoi-an.jpg" alt="Bản đồ vị trí dự án Casamia Balanca Hội An gần phố cổ, biển Cửa Đại, rừng dừa Bảy Mẫu" width="1800" height="938" loading="lazy"></div>
-    <div class="dist rv">
-      <div><b>05′</b><span>Rừng dừa Bảy Mẫu</span></div>
-      <div><b>07′</b><span>Biển Cửa Đại</span></div>
-      <div><b>08′</b><span>Hoiana Shores</span></div>
-      <div><b>10′</b><span>Phố cổ Hội An</span></div>
-      <div><b>10′</b><span>VinWonders Nam Hội An</span></div>
-      <div><b>35′</b><span>Sân bay quốc tế Đà Nẵng</span></div>
-    </div>
-    <p class="note center">Thời gian di chuyển mang tính tham khảo, có thể thay đổi theo tuyến đường và điều kiện giao thông.</p>
-  </div>
-</section>
-
-
-<div class="cm-band"><div class="cm-wrap cm-band-in"><p>Căn nào ra biển gần nhất? Căn nào nhìn thẳng rừng dừa, căn nào có bến thuyền riêng? Em đánh dấu sẵn trên mặt bằng cho anh/chị.</p><button class="cm-btn js-cm-open" data-title="Nhận sơ đồ căn còn trống" data-need="Sơ đồ căn còn trống">Nhận sơ đồ căn còn trống</button></div></div>
-<section class="sec" id="mat-bang">
-  <div class="wrap">
-    <div class="center rv">
-      <span class="eyebrow">Mặt bằng &amp; sản phẩm</span>
-      <h2>Mặt bằng Casamia Balanca: 3 phân khu, 5 dòng sản phẩm</h2>
-      <p class="lead">Kênh đào nội khu rộng 20m, sâu trung bình 2m kết nối trực tiếp sông Cổ Cò – nhiều căn biệt thự có bến thuyền riêng.</p>
-    </div>
-    <div class="ph rv" style="margin-top:28px"><img src="https://casamia-balanca-img.netlify.app/img/phan-tich-phan-khu-casamia-balanca.jpg" alt="Phân tích chi tiết từng phân khu Casamia Balanca: The Boutique, Park Home, Park Villa, Forestside Villa, Waterside Villa" width="2000" height="1309" loading="lazy"></div>
-    <div class="tbl-wrap rv">
-      <table class="wide">
-        <thead><tr><th>Dòng sản phẩm</th><th>Phân khu</th><th class="num">Số căn</th><th>Loại hình</th><th>Diện tích đất</th><th>Chiều cao</th><th>Bàn giao dự kiến</th></tr></thead>
-        <tbody>
-          <tr><td><a href="https://www.casamia-balanca.com.vn/biet-thu-san-vuon-park-home"><b>Park Home</b> (BT sân vườn)</a></td><td>La Suna</td><td class="num">97</td><td>Nhà vườn song lập</td><td>178m²</td><td>3 tầng + tum</td><td>12/2026 – 03/2027</td></tr>
-          <tr><td><b>The Boutique</b></td><td>La Suna</td><td class="num">46</td><td>Shophouse mặt tiền Võ Chí Công</td><td>169 – 178m²</td><td>3 tầng + tum</td><td>Triển khai 2027</td></tr>
-          <tr><td><a href="https://www.casamia-balanca.com.vn/biet-thu-hoi-an#park-villa"><b>Park Villa</b></a></td><td>La Suna</td><td class="num">47</td><td>Biệt thự song lập</td><td>208 – 218m²</td><td>3 tầng + tum</td><td>Liên hệ</td></tr>
-          <tr><td><a href="https://www.casamia-balanca.com.vn/biet-thu-rung-dua-forestside-villa"><b>Forestside Villa</b> (BT rừng dừa)</a></td><td>La Palma</td><td class="num">106</td><td>Song lập / đơn lập</td><td>250 – 336m²</td><td>2 – 3 tầng + tum</td><td>Trong năm 2026</td></tr>
-          <tr><td><a href="https://www.casamia-balanca.com.vn/biet-thu-vinh-bien-waterside-villa"><b>Waterside Villa</b> (BT vịnh biển)</a></td><td>La Riva</td><td class="num">67</td><td>Song lập / đơn lập ven kênh</td><td>250 – 336m²</td><td>2 – 3 tầng + tum</td><td>Trong năm 2026</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="grid g3" style="margin-top:36px">
-      <article class="card rv">
-        <img src="https://casamia-balanca-img.netlify.app/img/park-home-casamia-balanca-phan-khu-la-suna.jpg" alt="Phối cảnh phân khu Park Home Casamia Balanca về đêm" width="1600" height="900" loading="lazy">
-        <div class="bd"><span class="badge">97 căn · La Suna</span><h3>Biệt thự sân vườn Park Home</h3><p>Nhà vườn 3 tầng, sàn 316m², sân vườn riêng, gần Clubhouse &amp; trường học – dòng sản phẩm ở thực tốt nhất dự án.</p><a class="more" href="https://www.casamia-balanca.com.vn/biet-thu-san-vuon-park-home">Giá &amp; mặt bằng biệt thự sân vườn →</a></div>
-      </article>
-      <article class="card rv">
-        <img src="https://casamia-balanca-img.netlify.app/img/waterside-villa-biet-thu-ho-boi-hoi-an.jpg" alt="Waterside Villa Casamia Balanca – biệt thự hồ bơi ven kênh có bến thuyền" width="1600" height="900" loading="lazy">
-        <div class="bd"><span class="badge">67 căn · La Riva</span><h3>Biệt thự vịnh biển Waterside Villa</h3><p>Biệt thự view nước trực diện, bến du thuyền, gần khách sạn 5 sao &amp; Sky bar – quỹ căn hiếm nhất dự án.</p><a class="more" href="https://www.casamia-balanca.com.vn/biet-thu-vinh-bien-waterside-villa">Xem biệt thự vịnh biển →</a></div>
-      </article>
-      <article class="card rv">
-        <img src="https://casamia-balanca-img.netlify.app/img/forestside-villa-biet-thu-rung-dua-hoi-an.jpg" alt="Forestside Villa Casamia Balanca – biệt thự giáp rừng dừa nước Hội An" width="1600" height="900" loading="lazy">
-        <div class="bd"><span class="badge">106 căn · La Palma</span><h3>Biệt thự rừng dừa Forestside Villa</h3><p>Biệt thự giáp rừng dừa, kênh vào nội khu, đậm chất sống Hội An – DNA sinh thái đặc trưng Casamia.</p><a class="more" href="https://www.casamia-balanca.com.vn/biet-thu-rung-dua-forestside-villa">Xem biệt thự rừng dừa →</a></div>
-      </article>
-    </div>
-  </div>
-</section>
-
-
-<div class="cm-band cm-band-l"><div class="cm-wrap cm-band-in"><p>Mỗi dãy một giá, mỗi hướng một cảm giác sống. Để em gửi bảng giá từng căn, anh/chị so cho dễ.</p><button class="cm-btn js-cm-open" data-title="Nhận bảng giá từng căn tháng 10/2026" data-need="Bảng giá từng căn">Nhận bảng giá từng căn</button></div></div>
-<section class="sec alt" id="tien-ich">
-  <div class="wrap">
-    <div class="center rv">
-      <span class="eyebrow">Tiện ích</span>
-      <h2>Tiện ích Casamia Balanca: 5 công viên chủ đề &amp; Clubhouse</h2>
-      <p class="lead">Hill Park · Sport Park · Grand Central Park · Floral Park · Nipa Park – cùng Clubhouse, trường mầm non, khách sạn 5 sao, bể bơi vô cực, Sky bar và trung tâm hội nghị.</p>
-    </div>
-    <div class="gal rv" style="margin-top:28px">
-      <figure class="w2"><img src="https://casamia-balanca-img.netlify.app/img/clubhouse-casamia-balanca-be-boi-olympic.jpg" alt="Clubhouse Casamia Balanca với bể bơi tiêu chuẩn Olympic" width="1600" height="893" loading="lazy"><figcaption>Clubhouse &amp; bể bơi tiêu chuẩn Olympic</figcaption></figure>
-      <figure><img src="https://casamia-balanca-img.netlify.app/img/be-boi-vo-cuc-casamia-balanca.jpg" alt="Bể bơi vô cực hướng vịnh Cửa Đại tại Casamia Balanca" width="1600" height="900" loading="lazy"><figcaption>Bể bơi vô cực</figcaption></figure>
-      <figure><img src="https://casamia-balanca-img.netlify.app/img/sky-bar-casamia-balanca-vinh-cua-dai.jpg" alt="Sky bar Casamia Balanca nhìn ra vịnh Cửa Đại lúc hoàng hôn" width="1600" height="900" loading="lazy"><figcaption>Sky bar</figcaption></figure>
-      <figure><img src="https://casamia-balanca-img.netlify.app/img/khach-san-5-sao-casamia-balanca-song-co-co.jpg" alt="Khách sạn 5 sao bên sông Cổ Cò trong Casamia Balanca" width="1600" height="900" loading="lazy"><figcaption>Khách sạn 5 sao</figcaption></figure>
-      <figure><img src="https://casamia-balanca-img.netlify.app/img/quang-truong-nhac-nuoc-casamia-balanca.jpg" alt="Quảng trường nhạc nước Grand Central Park Casamia Balanca" width="1600" height="900" loading="lazy"><figcaption>Quảng trường trung tâm</figcaption></figure>
-      <figure><img src="https://casamia-balanca-img.netlify.app/img/cong-vien-hoa-giay-casamia-balanca.jpg" alt="Công viên hoa giấy Floral Park Casamia Balanca" width="1600" height="901" loading="lazy"><figcaption>Floral Park – công viên hoa giấy</figcaption></figure>
-      <figure><img src="https://casamia-balanca-img.netlify.app/img/cau-hoa-giay-song-co-co-hoi-an.jpg" alt="Cầu hoa giấy và đường dạo ven sông Cổ Cò" width="1600" height="899" loading="lazy"><figcaption>Đường dạo ven sông</figcaption></figure>
-      <figure><img src="https://casamia-balanca-img.netlify.app/img/trung-tam-thuong-mai-casamia-balanca.jpg" alt="Trung tâm thương mại Casamia Balanca Hội An" width="1600" height="900" loading="lazy"><figcaption>Trung tâm thương mại</figcaption></figure>
-      <figure><img src="https://casamia-balanca-img.netlify.app/img/clubhouse-nomad-hub-casamia-balanca.jpg" alt="Không gian Bistro – Coffee trong Clubhouse Casamia Balanca" width="1600" height="893" loading="lazy"><figcaption>Bistro &amp; Coffee</figcaption></figure>
-      <figure><img src="https://casamia-balanca-img.netlify.app/img/co-working-clubhouse-casamia-balanca.jpg" alt="Co-working space tại Clubhouse Casamia Balanca" width="1600" height="893" loading="lazy"><figcaption>Co-working space</figcaption></figure>
-    </div>
-    <h3 style="margin-top:40px" class="rv">Tiến độ tiện ích (cập nhật theo CĐT)</h3>
-    <div class="steps rv">
-      <div class="done"><b>Đã hoàn thành</b><span>5 công viên chủ đề, sân bóng rổ, khu vui chơi &amp; gym ngoài trời, trường mầm non</span></div>
-      <div class="done"><b>05/2026</b><span>Cụm 7 sân Pickleball</span></div>
-      <div><b>Đang hoàn thiện</b><span>Clubhouse: nhà hàng, bể bơi vô cực, gym, game zone, co-working – đang hoàn thiện nội thất, chưa khai trương (cập nhật 10/2026)</span></div>
-      <div><b>2027</b><span>Khách sạn 5 sao, trung tâm hội nghị (dự kiến)</span></div>
-    </div>
-    <div class="ph rv" style="margin-top:28px"><img src="https://casamia-balanca-img.netlify.app/img/so-do-mat-bang-casamia-balanca-hoi-an.jpg" alt="Sơ đồ mặt bằng tổng thể Casamia Balanca Hội An: 5 dòng sản phẩm, 5 công viên chủ đề và tiện ích" width="1800" height="1520" loading="lazy"></div>
-  </div>
-</section>
-
-<section class="sec dark" id="chinh-sach">
-  <div class="wrap">
-    <span class="eyebrow">Chính sách bán hàng đang áp dụng · tháng 10/2026</span>
-    <h2>Ưu đãi khi mua Park Home Casamia Balanca</h2>
-    <p class="lead">Áp dụng từ 09/09/2026 cho khách hàng đặt cọc 300 triệu/căn và ký Thỏa thuận đặt cọc trong thời gian hiệu lực của chính sách.</p>
-    <div class="promo">
-      <div><b>0%</b><span>Lãi suất tối đa 24 tháng khi vay tới 70% giá trị HĐ, ân hạn gốc</span></div>
-      <div><b>5%</b><span>Chiết khấu khi thanh toán sớm 95% lúc ký HĐMB</span></div>
-      <div><b>− 3,5 tỷ</b><span>Chiết khấu khi nhận bàn giao thô để tự hoàn thiện theo gu gia đình</span></div>
-      <div><b>2 năm</b><span>Miễn phí quản lý khu đô thị + 1 năm gym &amp; bể bơi Clubhouse</span></div>
-    </div>
-    <div class="btns"><a href="https://www.casamia-balanca.com.vn/bang-tinh" class="btn btn-gold">Tính giá &amp; tiến độ từng căn</a><a href="https://www.casamia-balanca.com.vn/chinh-sach-ban-hang" class="btn btn-line">Xem chính sách bán hàng</a></div>
-  </div>
-</section>
-
-
-<div class="cm-band"><div class="cm-wrap cm-band-in"><p>Chính sách 09/09/2026 đang áp dụng. Cùng một căn, chọn phương án bàn giao và thanh toán khác nhau có thể chênh hàng tỷ đồng.</p><button class="cm-btn js-cm-open" data-title="Tính phương án thanh toán có lợi nhất" data-need="Tính phương án thanh toán">Tính phương án có lợi nhất cho tôi</button></div></div>
-<section class="sec" id="song-o-casamia-balanca">
-  <div class="wrap split rev">
-    <div class="rv">
-      <span class="eyebrow">An cư tại Hội An</span>
-      <h2>Sống ở Casamia Balanca – một ngày bình thường đáng sống</h2>
-      <ul class="ticks">
-        <li><b>Con đi học gần:</b> trường mầm non ngay trong khu (đã hoàn thành); Trường Quốc tế Hội An và Green Shoots International School trong bán kính quanh trung tâm Hội An.</li>
-        <li><b>Khám chữa bệnh thuận tiện:</b> Bệnh viện Đa khoa Hội An và Bệnh viện Đa khoa Thái Bình Dương nằm ở khu trung tâm, gần phố cổ Hội An.</li>
-        <li><b>Thể thao mỗi ngày:</b> Clubhouse với bể bơi tiêu chuẩn Olympic, gym, sân Pickleball, bóng rổ, khu vui chơi trẻ em – cư dân được miễn phí 1 năm theo CSBH.</li>
-        <li><b>Làm việc từ xa:</b> co-working space, nhà hàng, game zone trong Clubhouse (đang hoàn thiện nội thất).</li>
-        <li><b>Không khí trong lành:</b> 3,6ha rừng dừa nước, 5 công viên chủ đề, đường dạo ven sông – mật độ xây dựng gộp chỉ 23,1%.</li>
-        <li><b>Phố cổ &amp; biển trong tầm tay:</b> 10 phút tới phố cổ Hội An, 7 phút ra biển Cửa Đại, 35 phút tới sân bay Đà Nẵng.</li>
-      </ul>
-      <p class="note">Chưa dọn về ở ngay? Căn full nội thất có thể để CĐT thuê lại 50 triệu/tháng trong 3 năm hoặc ủy thác vận hành 5 năm (cam kết tối thiểu 50 triệu/tháng) – theo CSBH 09/2026. <a href="https://www.casamia-balanca.com.vn/dong-tien-cho-thue">Xem phân tích dòng tiền chi tiết →</a></p>
-    </div>
-    <div class="ph rv"><img src="https://casamia-balanca-img.netlify.app/img/duong-dao-ven-song-casamia-balanca.jpg" alt="Đường dạo ven sông và khách sạn trong khu đô thị Casamia Balanca" width="1600" height="900" loading="lazy"></div>
-  </div>
-</section>
-
-<section class="sec" id="chu-dau-tu">
-  <div class="wrap">
-    <div class="center rv">
-      <span class="eyebrow">Đơn vị phát triển</span>
-      <h2>Chủ đầu tư Đạt Phương &amp; đội ngũ thiết kế</h2>
-      <p class="lead">Tập đoàn Đạt Phương (DPG) thành lập năm 2002, hoạt động trong xây dựng, năng lượng, sản xuất kính, bất động sản và dịch vụ nghỉ dưỡng. Casamia Balanca tiếp nối Casamia và Casamia Calm Hội An.</p>
-    </div>
-    <div class="grid g4" style="margin-top:28px">
-      <div class="card rv"><div class="bd"><span class="badge">Chủ đầu tư</span><h3>Đạt Phương Hội An</h3><p>Công ty CP Đạt Phương Hội An – thành viên Tập đoàn Đạt Phương.</p></div></div>
-      <div class="card rv"><div class="bd"><span class="badge">Kiến trúc &amp; cảnh quan</span><h3>KTS Võ Trọng Nghĩa</h3><p>Quy hoạch: EnCity Urban Solutions.</p></div></div>
-      <div class="card rv"><div class="bd"><span class="badge">Giám sát thi công</span><h3>Coninco – Thăng Long</h3><p>Tư vấn giám sát chất lượng xây dựng.</p></div></div>
-      <div class="card rv"><div class="bd"><span class="badge">Quản lý vận hành</span><h3>Bpmax</h3><p>Vận hành khu đô thị; cho thuê do M.Village khai thác.</p></div></div>
-    </div>
-    <div class="promo light rv">
-      <div><b>2021</b><span>PropertyGuru – Thiết kế kiến trúc cảnh quan đẹp nhất Việt Nam</span></div>
-      <div><b>2022</b><span>Giải Bạc quy hoạch khu đô thị – Giải thưởng Quy hoạch đô thị Quốc gia (VUPA)</span></div>
-      <div><b>2026</b><span>“Dự án Đáng sống” – VCCI &amp; Tạp chí Diễn đàn Doanh nghiệp</span></div>
-      <div><b>An tâm</b><span>Điện, viễn thông đi ngầm · không ngập lụt · camera &amp; chốt an ninh · hàng rào cây xanh</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec alt" id="thuc-te">
-  <div class="wrap">
-    <div class="center rv">
-      <span class="eyebrow">Sản phẩm thật của Chủ đầu tư</span>
-      <h2>Casamia Hội An – hình ảnh thực tế đã vận hành</h2>
-      <p class="lead">Khu biệt thự sinh thái Casamia tại Võng Nhi, Hội An – dự án tiền nhiệm của Đạt Phương, minh chứng cho chất lượng xây dựng và năng lực vận hành cho thuê của Chủ đầu tư.</p>
-    </div>
-    <div class="gal rv" style="margin-top:28px">
-      <figure class="w2"><img src="https://casamia-balanca-img.netlify.app/img/thuc-te-casamia-hoi-an-biet-thu-ho-boi.jpg" alt="Ảnh thực tế biệt thự hồ bơi tại Casamia Hội An" width="1024" height="683" loading="lazy"><figcaption>Biệt thự hồ bơi – ảnh thực tế</figcaption></figure>
-      <figure><img src="https://casamia-balanca-img.netlify.app/img/thuc-te-casamia-hoi-an-ho-boi-rieng.jpg" alt="Hồ bơi riêng trong biệt thự Casamia Hội An" width="1024" height="683" loading="lazy"><figcaption>Hồ bơi riêng</figcaption></figure>
-      <figure><img src="https://casamia-balanca-img.netlify.app/img/thuc-te-casamia-hoi-an-phong-khach.jpg" alt="Phòng khách biệt thự Casamia Hội An thực tế" width="1024" height="683" loading="lazy"><figcaption>Phòng khách</figcaption></figure>
-      <figure><img src="https://casamia-balanca-img.netlify.app/img/thuc-te-casamia-hoi-an-phong-ngu.jpg" alt="Phòng ngủ biệt thự Casamia Hội An thực tế" width="1024" height="683" loading="lazy"><figcaption>Phòng ngủ</figcaption></figure>
-      <figure><img src="https://casamia-balanca-img.netlify.app/img/thuc-te-casamia-hoi-an-loi-vao.jpg" alt="Lối vào biệt thự Casamia Hội An với xe đạp và cây xanh" width="1024" height="683" loading="lazy"><figcaption>Lối vào</figcaption></figure>
-    </div>
-  </div>
-</section>
-
-
-<div class="cm-band cm-band-l"><div class="cm-wrap cm-band-in"><p>Ảnh đẹp mấy cũng không bằng một buổi chiều đứng giữa rừng dừa. Em đón anh/chị tham quan nhà mẫu và khu Casamia đã vận hành.</p><button class="cm-btn js-cm-open" data-title="Đặt lịch tham quan dự án" data-need="Đặt lịch tham quan">Đặt lịch tham quan</button></div></div>
 <section class="sec" id="hoi-dap">
-  <div class="wrap" style="max-width:860px">
-    <div class="center rv"><span class="eyebrow">Hỏi đáp</span><h2>Câu hỏi thường gặp về Casamia Balanca</h2></div>
+  <div class="wrap">
+    <div class="center"><span class="eye rv">Hỏi đáp</span><h2 class="rv">Câu hỏi thường gặp về <em>Casamia Balanca</em></h2></div>
     <div class="faq rv">
       <details open><summary>Casamia Balanca Hội An nằm ở đâu?</summary><div>Dự án nằm trên đường Võ Chí Công, phường Hội An Đông, TP. Đà Nẵng (trước đây là xã Cẩm Thanh, TP. Hội An, Quảng Nam), giáp sông Cổ Cò và vịnh Cửa Đại. Khoảng 7 phút tới biển Cửa Đại, 10 phút tới phố cổ Hội An, 35 phút tới sân bay quốc tế Đà Nẵng.</div></details>
       <details><summary>Chủ đầu tư Casamia Balanca là ai?</summary><div>Công ty Cổ phần Đạt Phương Hội An, thuộc Tập đoàn Đạt Phương – đơn vị đã phát triển khu biệt thự sinh thái Casamia Hội An tại Võng Nhi.</div></details>
@@ -395,209 +493,85 @@ input:focus,select:focus{border-color:#f47c20!important;outline-color:#f47c20!im
       <details><summary>Có hỗ trợ vay ngân hàng không?</summary><div>Vay tối đa 70% giá trị hợp đồng, Chủ đầu tư hỗ trợ lãi suất 0% tối đa 24 tháng (không quá 31/12/2028), ân hạn gốc, miễn phí trả nợ trước hạn trong thời gian hỗ trợ. Ngân hàng: MB (CN Đà Nẵng), VPBank (Hội sở), Bảo Việt Bank (CN Đà Nẵng), VietinBank (CN Nam Thăng Long).</div></details>
       <details><summary>Pháp lý Casamia Balanca thế nào?</summary><div>Khách hàng ký Hợp đồng mua bán với Chủ đầu tư và được cấp Giấy chứng nhận quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất; người Việt Nam sở hữu lâu dài. Với Park Home, CĐT dự kiến thông báo nhận sổ trong năm 2027.</div></details>
     </div>
-    <p class="center" style="margin-top:20px"><a class="btn btn-red" href="https://www.casamia-balanca.com.vn/hoi-dap">Xem đầy đủ 39 câu hỏi về Casamia Balanca →</a></p>
-  </div>
-</section>
-
-<section class="sec dark" id="dang-ky">
-  <div class="wrap lead-box">
-    <div>
-      <span class="eyebrow">Tư vấn &amp; tham quan dự án</span>
-      <h2>Căn đẹp thường được chọn trước. Anh/chị xem bảng giá hôm nay nhé?</h2>
-      <p class="lead">Để lại thông tin để nhận bảng hàng Park Home – Park Villa – Waterside Villa – Forestside Villa, chính sách bán hàng đang áp dụng tháng 10/2026, quỹ căn đẹp và lịch tham quan nhà mẫu tại Hội An.</p>
-      <ul class="ticks">
-        <li>Bảng giá chi tiết từng căn, 3 phương án bàn giao</li>
-        <li>Tính dòng tiền &amp; phương án vay 0% lãi suất tới 24 tháng</li>
-        <li>Đưa đón tham quan dự án Casamia Balanca &amp; Casamia Hội An đã vận hành</li>
-      </ul>
-      <p style="margin-top:18px">Hotline/Zalo: <a href="tel:0904567009" style="color:var(--gold);font-weight:700;font-size:1.25rem">0904 567 009</a></p>
-    </div>
-    <form class="lead-form cm-form" data-form="Trang chủ – Form cuối" autocomplete="on" novalidate>
-      <h3>Nhận bảng giá qua Zalo trong 5 phút</h3>
-      <input name="name" placeholder="Họ và tên *" required aria-label="Họ và tên">
-      <input name="phone" type="tel" placeholder="Số điện thoại / Zalo *" required pattern="[0-9 +.]{9,15}" aria-label="Số điện thoại">
-      <select name="interest" aria-label="Sản phẩm quan tâm">
-        <option>Park Home (nhà vườn 3 tầng)</option>
-        <option>Park Villa</option>
-        <option>Waterside Villa (biệt thự ven sông)</option>
-        <option>Forestside Villa (biệt thự rừng dừa)</option>
-        <option>The Boutique (shophouse)</option>
-        <option>Chưa rõ – cần tư vấn</option>
-      </select>
-      <select name="need" aria-label="Nhu cầu">
-        <option>Mua để ở / nghỉ dưỡng</option>
-        <option>Đầu tư cho thuê</option>
-        <option>Cả hai</option>
-      </select>
-      <input type="hidden" name="note">
-      <button type="submit" class="btn btn-red">Gửi bảng giá cho tôi</button><p class="cm-err" role="alert"></p>
-      <small>Thông tin chỉ dùng để tư vấn dự án, không chia sẻ cho bên thứ ba.</small>
-    </form>
+    <p class="center" style="margin-top:28px"><a class="btn btn-l" href="https://www.casamia-balanca.com.vn/hoi-dap">Xem đầy đủ 39 câu hỏi →</a></p>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <div class="grid">
-      <div>
-        <img src="https://casamia-balanca-img.netlify.app/img/logo-casamia-balanca-trang.png" alt="Casamia Balanca Hội An" width="171" height="60" style="margin-bottom:14px" loading="lazy">
-        <p>Khu đô thị sinh thái Casamia Balanca Hội An (KĐT Cồn Tiến) – 31,1ha, 363 nhà vườn &amp; biệt thự bên sông Cổ Cò, đường Võ Chí Công, phường Hội An Đông, TP. Đà Nẵng. Chủ đầu tư: Công ty CP Đạt Phương Hội An (Tập đoàn Đạt Phương).</p>
-      </div>
-      <div>
-        <h4>Thông tin dự án</h4>
-        <ul>
-          <li><a href="https://www.casamia-balanca.com.vn/">Casamia Balanca Hội An</a></li>
-          <li><a href="https://www.casamia-balanca.com.vn/biet-thu-hoi-an">Biệt thự Hội An</a></li>
-          <li><a href="https://www.casamia-balanca.com.vn/biet-thu-san-vuon-park-home">Biệt thự sân vườn Park Home</a></li>
-          <li><a href="https://www.casamia-balanca.com.vn/biet-thu-rung-dua-forestside-villa">Biệt thự rừng dừa Forestside Villa</a></li>
-          <li><a href="https://www.casamia-balanca.com.vn/biet-thu-vinh-bien-waterside-villa">Biệt thự vịnh biển Waterside Villa</a></li>
-          <li><a href="https://www.casamia-balanca.com.vn/chinh-sach-ban-hang">Chính sách bán hàng (cập nhật 10/2026)</a></li>
-          <li><a href="https://www.casamia-balanca.com.vn/bang-tinh">Bảng tính từng căn</a></li>
-          <li><a href="https://www.casamia-balanca.com.vn/dong-tien-cho-thue">Phân tích dòng tiền cho thuê</a></li>
-          <li><a href="https://www.casamia-balanca.com.vn/hoi-dap">Hỏi đáp dự án</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Liên hệ tư vấn</h4>
-        <ul>
-          <li>Hoàng Hiệp – Tư vấn dự án</li>
-          <li>Hotline/Zalo: <a href="tel:0904567009">0904 567 009</a></li>
-          <li>Email: <a href="mailto:hiephoangmt@gmail.com">hiephoangmt@gmail.com</a></li>
-          <li>Khu vực: Hội An – Đà Nẵng</li>
-        </ul>
-      </div>
+    <div class="g">
+      <div><img src="https://casamia-balanca-img.netlify.app/img/logo-casamia-balanca-trang.png" alt="Casamia Balanca Hội An" width="171" height="60" style="margin-bottom:14px;height:52px;width:auto" loading="lazy"><p>Khu đô thị sinh thái Casamia Balanca Hội An (KĐT Cồn Tiến) – 31,1ha, 363 nhà vườn &amp; biệt thự bên sông Cổ Cò, đường Võ Chí Công, phường Hội An Đông, TP. Đà Nẵng. Chủ đầu tư: Công ty CP Đạt Phương Hội An (Tập đoàn Đạt Phương).</p></div>
+      <div><h4>Thông tin dự án</h4><ul>
+        <li><a href="https://www.casamia-balanca.com.vn/biet-thu-hoi-an">Biệt thự Hội An</a></li>
+        <li><a href="https://www.casamia-balanca.com.vn/biet-thu-san-vuon-park-home">Biệt thự sân vườn Park Home</a></li>
+        <li><a href="https://www.casamia-balanca.com.vn/biet-thu-rung-dua-forestside-villa">Biệt thự rừng dừa Forestside Villa</a></li>
+        <li><a href="https://www.casamia-balanca.com.vn/biet-thu-vinh-bien-waterside-villa">Biệt thự vịnh biển Waterside Villa</a></li>
+        <li><a href="https://www.casamia-balanca.com.vn/chinh-sach-ban-hang">Chính sách bán hàng (10/2026)</a></li>
+        <li><a href="https://www.casamia-balanca.com.vn/bang-tinh">Bảng tính từng căn</a></li>
+        <li><a href="https://www.casamia-balanca.com.vn/dong-tien-cho-thue">Phân tích dòng tiền cho thuê</a></li>
+        <li><a href="https://www.casamia-balanca.com.vn/hoi-dap">Hỏi đáp dự án</a></li>
+      </ul></div>
+      <div><h4>Liên hệ tư vấn</h4><ul><li>Hoàng Hiệp – Tư vấn dự án</li><li>Hotline/Zalo: <a href="tel:0904567009">0904 567 009</a></li><li>Email: <a href="mailto:hiephoangmt@gmail.com">hiephoangmt@gmail.com</a></li><li>Khu vực: Hội An – Đà Nẵng</li></ul></div>
     </div>
     <p class="disc">Website thông tin do đơn vị tư vấn – phân phối vận hành, không phải website chính thức của Chủ đầu tư. Hình ảnh phối cảnh mang tính minh họa; giá bán, chính sách và tiến độ có thể thay đổi theo thông báo của Chủ đầu tư tại từng thời điểm. Cập nhật: 10/2026.</p>
   </div>
 </footer>
 
-<div class="fab">
-  <a class="zalo" href="https://zalo.me/0904567009" target="_blank" rel="noopener" aria-label="Chat Zalo">Zalo</a>
-  <a class="call" href="tel:0904567009" aria-label="Gọi hotline 0904 567 009"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1z"/></svg></a>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mt" hidden>
+  <form class="card f" data-form="Trang chủ – Popup" novalidate>
+    <button class="x" type="button" aria-label="Đóng">×</button>
+    <span class="eye" style="margin-bottom:8px">Casamia Balanca Hội An</span>
+    <h3 id="mt">Nhận bảng giá &amp; căn đẹp</h3>
+    <p class="sm">Em gửi qua Zalo trong vài phút. Anh/chị chỉ cần để lại số.</p>
+    <input name="name" placeholder="Anh/chị tên gì ạ?" autocomplete="name" aria-label="Họ tên">
+    <input name="phone" type="tel" inputmode="tel" placeholder="Số Zalo / điện thoại *" autocomplete="tel" aria-label="Số điện thoại" required>
+    <input type="hidden" name="need">
+    <p class="err" role="alert"></p>
+    <button class="btn btn-o" type="submit">Gửi cho tôi</button>
+    <small>Hoặc gọi/Zalo trực tiếp <a href="tel:0904567009"><b>0904 567 009</b></a></small>
+  </form>
 </div>
+<a class="fabz" href="https://zalo.me/0904567009" target="_blank" rel="noopener" aria-label="Chat Zalo">Zalo</a>
+<nav class="mbar" aria-label="Liên hệ nhanh"><a href="tel:0904567009">Gọi</a><a href="https://zalo.me/0904567009" target="_blank" rel="noopener">Zalo</a><button type="button" class="js-open" data-title="Nhận bảng giá &amp; căn đẹp tháng 10/2026" data-need="Bảng giá (thanh dưới)">Nhận bảng giá</button></nav>
 
-<div id="lb" role="dialog" aria-label="Xem ảnh"><button class="x" aria-label="Đóng">×</button><button class="p" aria-label="Ảnh trước">‹</button><img alt=""><button class="n" aria-label="Ảnh sau">›</button></div>
-<div id="modal" role="dialog" aria-label="Đã gửi"><div class="box"><button class="x" aria-label="Đóng">×</button><h3>Cảm ơn Anh/Chị!</h3><p>Chuyên viên sẽ liên hệ trong ít phút để gửi bảng giá Casamia Balanca. Cần gấp, vui lòng gọi <a href="tel:0904567009"><b>0904 567 009</b></a>.</p></div></div>
-
-<div class="cm-modal" id="cm-modal" role="dialog" aria-modal="true" aria-labelledby="cm-mt" hidden>
-  <div class="cm-modal-box">
-    <button class="cm-x" type="button" aria-label="Đóng">×</button>
-    <form class="cm-form" data-form="Trang chủ – Popup" novalidate>
-      <span class="cm-eye">Casamia Balanca Hội An</span>
-      <h3 id="cm-mt">Nhận bảng giá &amp; căn đẹp</h3>
-      <p class="cm-msub">Em gửi qua Zalo ngay trong vài phút. Anh/chị chỉ cần để lại số.</p>
-      <input name="name" placeholder="Anh/chị tên gì ạ?" autocomplete="name" aria-label="Họ tên">
-      <input name="phone" type="tel" inputmode="tel" placeholder="Số Zalo / điện thoại *" autocomplete="tel" aria-label="Số điện thoại" required>
-      <input type="hidden" name="need">
-      <p class="cm-err" role="alert"></p>
-      <button type="submit" class="cm-btn">Gửi cho tôi</button>
-      <small>Hoặc gọi/Zalo trực tiếp <a href="tel:0904567009">0904 567 009</a></small>
-    </form>
-  </div>
-</div>
-<nav class="cm-bar" aria-label="Liên hệ nhanh"><a href="tel:0904567009">Gọi</a><a href="https://zalo.me/0904567009" target="_blank" rel="noopener">Zalo</a><button type="button" class="js-cm-open" data-title="Nhận bảng giá &amp; căn đẹp tháng 10/2026" data-need="Bảng giá (thanh dưới)">Nhận bảng giá</button></nav>
-<style id="cm-cam-xuc">
-.cm-wrap{max-width:1160px;margin:0 auto;padding:0 20px}
-.cm-eye{display:block;font:700 12px/1.4 "Be Vietnam Pro",sans-serif;letter-spacing:2px;text-transform:uppercase;color:#f47c20;margin-bottom:10px}
-.cm-hook,.cm-day{font-family:"Be Vietnam Pro",sans-serif;color:#1d2b3a}
-.cm-hook{background:linear-gradient(160deg,#0b2a5b 0,#123a7a 100%);padding:56px 0}
-.cm-hook-in{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
-.cm-hook-txt{color:#fff}
-.cm-hook-txt h2{font:500 clamp(24px,3vw,36px)/1.3 "Playfair Display",serif;color:#fff;margin:0 0 14px}
-.cm-hook-txt p{color:#d7deea;font-size:16px;line-height:1.7;margin:0 0 18px}
-.cm-proof{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:10px}
-.cm-proof li{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:7px 14px;font-size:13.5px;color:#fff}
-.cm-proof b{color:#ffb27a}
-.cm-card{background:#fff;border-radius:18px;padding:26px 24px;box-shadow:0 24px 50px rgba(11,42,91,.22)}
-.cm-card h3,.cm-modal h3{font:700 20px/1.35 "Be Vietnam Pro",sans-serif;color:#0b2a5b;margin:0 0 12px}
-.cm-gift{list-style:none;padding:0;margin:0 0 16px}
-.cm-gift li{position:relative;padding:5px 0 5px 26px;font-size:14.5px;color:#33435a}
-.cm-gift li::before{content:"✓";position:absolute;left:0;top:4px;width:18px;height:18px;border-radius:50%;background:#fff1e6;color:#f47c20;font-weight:800;font-size:12px;display:grid;place-items:center}
-.cm-form input{display:block;width:100%;box-sizing:border-box;border:1.5px solid #dde3ee;border-radius:12px;padding:13px 14px;font:16px "Be Vietnam Pro",sans-serif;margin:0 0 10px;background:#fff;color:#1d2b3a}
-.cm-form input:focus{outline:none;border-color:#f47c20;box-shadow:0 0 0 3px rgba(244,124,32,.15)}
-.cm-btn{display:inline-block;border:0;cursor:pointer;background:#f47c20;color:#fff!important;font:700 16px "Be Vietnam Pro",sans-serif;padding:14px 22px;border-radius:12px;box-shadow:0 10px 22px rgba(244,124,32,.3);transition:transform .15s,background .15s;text-decoration:none}
-.cm-btn:hover{background:#d9650f;transform:translateY(-1px)}
-.cm-form .cm-btn{width:100%}
-.cm-btn-ghost{background:#0b2a5b;box-shadow:0 10px 22px rgba(11,42,91,.22)}.cm-btn-ghost:hover{background:#123a7a}
-.cm-form small{display:block;margin-top:10px;font-size:12.5px;color:#6b7a90;line-height:1.5}
-.cm-err{color:#c0392b;font-size:13.5px;margin:0 0 8px;min-height:0}
-.cm-day{padding:70px 0;background:#fff}
-.cm-day h2{font:500 clamp(26px,3.2vw,38px)/1.25 "Playfair Display",serif;color:#0b2a5b;margin:0 0 28px}
-.cm-day-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
-.cm-day-img{margin:0;border-radius:18px;overflow:hidden;box-shadow:0 20px 40px rgba(11,42,91,.15)}
-.cm-day-img img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
-.cm-time{list-style:none;margin:0;padding:0;border-left:2px solid #f2d6c0}
-.cm-time li{position:relative;padding:0 0 18px 22px}
-.cm-time li::before{content:"";position:absolute;left:-7px;top:4px;width:12px;height:12px;border-radius:50%;background:#f47c20;box-shadow:0 0 0 4px #fff1e6}
-.cm-time b{display:block;font:700 15px "Be Vietnam Pro",sans-serif;color:#f47c20}
-.cm-time span{font-size:15.5px;line-height:1.65;color:#33435a}
-.cm-center{text-align:center;margin-top:24px}
-.cm-band{background:#0b2a5b;font-family:"Be Vietnam Pro",sans-serif}
-.cm-band-l{background:#fff4ea}
-.cm-band-in{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:26px;padding-bottom:26px}
-.cm-band p{margin:0;color:#fff;font:500 17px/1.6 "Be Vietnam Pro",sans-serif;max-width:720px}
-.cm-band-l p{color:#0b2a5b}
-.cm-band .cm-btn{flex:none}
-.cm-modal{position:fixed;inset:0;z-index:9999;background:rgba(8,22,48,.55);display:grid;place-items:center;padding:16px;font-family:"Be Vietnam Pro",sans-serif}
-.cm-modal[hidden]{display:none}
-.cm-modal-box{position:relative;background:#fff;border-radius:18px;max-width:420px;width:100%;padding:28px 24px 22px;box-shadow:0 30px 60px rgba(0,0,0,.3);animation:cmIn .25s ease}
-@keyframes cmIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.cm-x{position:absolute;right:10px;top:8px;border:0;background:none;font-size:28px;color:#8a97ab;cursor:pointer;line-height:1}
-.cm-msub{color:#5a6a80;font-size:14.5px;margin:-4px 0 14px}
-.cm-done{text-align:center;padding:10px 0}.cm-done .big{font-size:40px}.cm-done h3{margin:6px 0}.cm-done p{color:#5a6a80;font-size:14.5px}
-.cm-bar{display:none}
-@media(max-width:860px){
- .cm-hook{background:#0b2a5b;padding:36px 0 30px}
- .cm-hook-in,.cm-day-grid{grid-template-columns:1fr;gap:24px}
- .cm-band-in{flex-direction:column;align-items:flex-start;gap:14px}
- .cm-band .cm-btn{width:100%;text-align:center}
- .cm-day{padding:48px 0}
- .cm-bar{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:9000;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);box-shadow:0 -6px 20px rgba(11,42,91,.12);font-family:"Be Vietnam Pro",sans-serif}
- .cm-bar a,.cm-bar button{border:0;border-radius:12px;padding:13px 6px;text-align:center;font:700 15px "Be Vietnam Pro",sans-serif;text-decoration:none;cursor:pointer}
- .cm-bar a:nth-child(1){background:#eef2f8;color:#0b2a5b}
- .cm-bar a:nth-child(2){background:#0b2a5b;color:#fff}
- .cm-bar button{background:#f47c20;color:#fff}
- body{padding-bottom:70px}
- .fab{display:none!important}
-}
-</style>
 <script>
 (function(){
-  var GAS='https://script.google.com/macros/s/AKfycbyZzODGVmY-_ooB6cOSvs5CQXpQ2CuUo8ERJQsDHZo89_ozx_TFLgnhqeqRaXLePpNVCw/exec', PHONE=/^(?:\+?84|0)(?:[\s.-]?\d){9}$/, KEY='cm_lead_sent', modal=document.getElementById('cm-modal');
-  var store={get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
-  try{var q=new URLSearchParams(location.search),u=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid'].filter(function(k){return q.get(k)}).map(function(k){return k+'='+q.get(k)}).join('&');if(u)store.set('cm_utm',u);}catch(e){}
-  var vid=store.get('cm_vid');if(!vid){vid='v'+Math.random().toString(36).slice(2,10);store.set('cm_vid',vid);}
-  function openM(t,need){if(!modal)return;modal.querySelector('#cm-mt').innerHTML=t||'Nhận bảng giá &amp; căn đẹp';var f=modal.querySelector('form');if(f&&f.need)f.need.value=need||'';modal.hidden=false;setTimeout(function(){var i=modal.querySelector('input[name=phone]');if(i&&innerWidth>860)i.focus();},60);}
-  function closeM(){if(modal)modal.hidden=true;}
-  document.addEventListener('click',function(e){var b=e.target.closest('.js-cm-open');if(b){e.preventDefault();openM(b.getAttribute('data-title'),b.getAttribute('data-need'));if(window.gtag)gtag('event','open_lead_form');}
-    if(e.target===modal||e.target.closest('.cm-x'))closeM();});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
-  // Gửi form (chặn xử lý cũ của trang, gửi thẳng về Google Sheet + Telegram)
+  var GAS='https://script.google.com/macros/s/AKfycbyZzODGVmY-_ooB6cOSvs5CQXpQ2CuUo8ERJQsDHZo89_ozx_TFLgnhqeqRaXLePpNVCw/exec', PHONE=/^(?:\+?84|0)(?:[\s.-]?\d){9}$/, KEY='cm_lead_sent', $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+  var st={get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+  try{var q=new URLSearchParams(location.search),u=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid'].filter(function(k){return q.get(k)}).map(function(k){return k+'='+q.get(k)}).join('&');if(u)st.set('cm_utm',u);}catch(e){}
+  var vid=st.get('cm_vid');if(!vid){vid='v'+Math.random().toString(36).slice(2,10);st.set('cm_vid',vid);}
+  // header + menu
+  var hdr=$('#hdr');function hs(){hdr.classList.toggle('on',scrollY>40||$('#menu').classList.contains('open'))}addEventListener('scroll',hs,{passive:true});hs();
+  $('#burger').addEventListener('click',function(){var m=$('#menu');m.classList.toggle('open');this.setAttribute('aria-expanded',m.classList.contains('open'));hs();});
+  // hiện dần khi cuộn
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});$$('.rv').forEach(function(el){io.observe(el)});}else $$('.rv').forEach(function(el){el.classList.add('in')});
+  // modal
+  var modal=$('#modal');
+  function openM(t,need){$('#mt').innerHTML=t||'Nhận bảng giá &amp; căn đẹp';var f=$('form',modal);if(f.need)f.need.value=need||'';modal.hidden=false;if(window.gtag)gtag('event','open_lead_form');setTimeout(function(){if(innerWidth>860)$('input[name=phone]',modal).focus()},60);}
+  function closeM(){modal.hidden=true}
+  document.addEventListener('click',function(e){var b=e.target.closest('.js-open');if(b){e.preventDefault();openM(b.getAttribute('data-title'),b.getAttribute('data-need'));}if(e.target===modal||e.target.closest('.x'))closeM();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM()});
+  // gửi form → Google Sheet + Telegram
   document.addEventListener('submit',function(e){
-    var f=e.target;if(!f.classList||!f.classList.contains('cm-form'))return;
-    e.preventDefault();e.stopImmediatePropagation();
+    var f=e.target;if(!f.classList.contains('f'))return;e.preventDefault();
     var d={};new FormData(f).forEach(function(v,k){d[k]=v});
-    var err=f.querySelector('.cm-err'),btn=f.querySelector('button[type=submit]');
-    if(!PHONE.test(String(d.phone||'').trim())){if(err)err.textContent='Số điện thoại chưa đúng, anh/chị kiểm tra lại giúp em ạ.';var p=f.querySelector('input[name=phone]');if(p)p.focus();return;}
-    if(err)err.textContent='';var lb=btn.textContent;btn.disabled=true;btn.textContent='Đang gửi…';
-    var need=[d.need,d.interest,d.need2].filter(Boolean).join(' · ');
-    var body={type:'lead',v:vid,name:d.name||'',phone:String(d.phone).trim(),need:need||(d.interest?d.interest:''),form:f.getAttribute('data-form')||'Trang chủ',page:location.href,referrer:document.referrer,utm:store.get('cm_utm')||''};
-    if(f.querySelector('select[name=need]')){body.need=[d.interest,f.querySelector('select[name=need]').value].filter(Boolean).join(' · ');}
+    var err=$('.err',f),btn=$('button[type=submit]',f);
+    if(!PHONE.test(String(d.phone||'').trim())){err.textContent='Số điện thoại chưa đúng, anh/chị kiểm tra lại giúp em ạ.';$('input[name=phone]',f).focus();return;}
+    err.textContent='';var lb=btn.textContent;btn.disabled=true;btn.textContent='Đang gửi…';
+    var body={type:'lead',v:vid,name:d.name||'',phone:String(d.phone).trim(),need:d.need||'',form:f.getAttribute('data-form')||'Trang chủ',page:location.href,referrer:document.referrer,utm:st.get('cm_utm')||''};
     fetch(GAS,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}).then(function(r){return r.json()}).then(function(res){
       if(res&&res.ok===false)throw new Error(res.error||'');
-      store.set(KEY,'1');if(window.gtag)gtag('event','generate_lead');if(window.fbq)fbq('track','Lead');
+      st.set(KEY,'1');if(window.gtag)gtag('event','generate_lead');if(window.fbq)fbq('track','Lead');
       var n=(d.name||'').replace(/[<>&"]/g,'').trim();
-      f.innerHTML='<div class="cm-done"><div class="big">🌿</div><h3>Em đã nhận thông tin'+(n?' của '+n:'')+'!</h3><p>Em sẽ gửi tài liệu qua Zalo trong ít phút. Cần gấp, anh/chị gọi <a href="tel:0904567009"><b>0904 567 009</b></a> nhé.</p></div>';
-    }).catch(function(x){btn.disabled=false;btn.textContent=lb;if(err)err.textContent=(x&&x.message)?x.message:'Gửi chưa được, anh/chị thử lại hoặc nhắn Zalo 0904 567 009 giúp em.';});
-  },true);
-  // Mời nhẹ nhàng một lần: đọc được 60% trang hoặc sắp rời trang (máy tính)
-  var nudged=false;try{nudged=!!sessionStorage.getItem('cm_nudged')}catch(e){}
-  function nudge(){if(nudged||store.get(KEY)||(modal&&!modal.hidden))return;nudged=true;try{sessionStorage.setItem('cm_nudged','1')}catch(e){}openM('Anh/chị đã xem gần hết rồi, em gửi luôn bảng giá căn đẹp nhé?','Bảng giá (mời khi đọc trang)');}
-  addEventListener('scroll',function(){var s=scrollY/Math.max(1,document.body.scrollHeight-innerHeight);if(s>.6)nudge();},{passive:true});
-  document.addEventListener('mouseout',function(e){if(!e.relatedTarget&&e.clientY<8)nudge();});
+      f.innerHTML='<div class="done"><div class="big">🌿</div><h3>Em đã nhận thông tin'+(n?' của '+n:'')+'!</h3><p>Em gửi tài liệu qua Zalo trong ít phút. Cần gấp, anh/chị gọi <a href="tel:0904567009"><b>0904 567 009</b></a> nhé.</p></div>';
+    }).catch(function(x){btn.disabled=false;btn.textContent=lb;err.textContent=(x&&x.message)?x.message:'Gửi chưa được, anh/chị thử lại hoặc nhắn Zalo 0904 567 009 giúp em.';});
+  });
+  // mời nhẹ một lần
+  var nd=false;try{nd=!!sessionStorage.getItem('cm_nudged')}catch(e){}
+  function nudge(){var r=$('#dang-ky').getBoundingClientRect();if(nd||st.get(KEY)||!modal.hidden||(r.top<innerHeight&&r.bottom>0)||document.activeElement&&document.activeElement.closest&&document.activeElement.closest('form'))return;nd=true;try{sessionStorage.setItem('cm_nudged','1')}catch(e){}openM('Anh/chị đã xem gần hết rồi, em gửi luôn bảng giá căn đẹp nhé?','Bảng giá (mời khi đọc trang)');}
+  addEventListener('scroll',function(){if(scrollY/Math.max(1,document.body.scrollHeight-innerHeight)>.65)nudge()},{passive:true});
+  document.addEventListener('mouseout',function(e){if(!e.relatedTarget&&e.clientY<8)nudge()});
 })();
 </script>
-<script src="https://casamia-balanca-img.netlify.app/assets/app.js" defer></script>
-
 </body>
 </html>
