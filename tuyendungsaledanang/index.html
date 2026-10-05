@@ -145,11 +145,17 @@ img{max-width:100%}
 .card,.proj,.panel,.faq details,.leader,.eqr,.truth{border-radius:20px!important}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important}}
 /* hero B */
-.hero-b{background:linear-gradient(90deg,#15245A 0%,rgba(21,36,90,.97) 38%,rgba(21,36,90,.35) 50%,rgba(21,36,90,0) 58%,rgba(21,36,90,.2) 66%,rgba(21,36,90,.92) 74%),url("https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/hoang-hiep-walk.jpg") 57% 0/auto 100% no-repeat #15245A!important}
+.hero-b{background:linear-gradient(90deg,#15245A 0%,#15245A 41%,rgba(21,36,90,.35) 47%,rgba(21,36,90,0) 51%,rgba(21,36,90,0) 58%,rgba(21,36,90,.85) 62%,#15245A 66%),url("https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/hoang-hiep-walk.jpg") calc(50% - 90px) 0/auto 100% no-repeat #15245A!important}
+@media(min-width:980px){.hero-b .wrap{grid-template-columns:minmax(0,560px) 1fr 380px!important;gap:28px!important}.hero-b form{grid-column:3}.hero-b{min-height:820px}}
 .hero-b:before,.hero-b:after{display:none}
+.meet{margin-top:20px;border-left:3px solid var(--orange);padding:4px 0 4px 14px;max-width:560px}
+.meet b{display:block;font-size:19px;font-weight:700;color:#fff;line-height:1.35}
+.meet b em{font-style:normal;color:#FF8A3D}
+.meet p{margin-top:6px;color:#DCE4F3;font-style:italic;font-size:15px}
+.meet span{display:block;margin-top:4px;font-size:13px;color:#FFB98F;font-weight:700}
 .quote{margin-top:16px;max-width:520px;color:#DCE4F3;font-size:16px;font-style:italic;border-left:3px solid var(--orange);padding-left:14px}
 .quote b{display:block;font-style:normal;font-size:13px;color:#FFB98F;margin-top:6px;font-weight:700}
-.hero-b h1{font-size:44px!important}
+.hero-b h1{font-size:46px!important}
 .hero-b .ladderk a{background:#fff!important;border:0!important;box-shadow:0 12px 28px rgba(5,12,40,.35)!important;color:#163056}
 .hero-b .ladderk a:before{background:linear-gradient(90deg,rgba(255,107,26,0),rgba(255,107,26,.12),rgba(255,107,26,0))}
 .hero-b .ladderk small{color:#5A6B85}
@@ -159,9 +165,10 @@ img{max-width:100%}
 @media(max-width:799px){
 .hero-b{background:linear-gradient(90deg,rgba(21,36,90,.92) 0%,rgba(21,36,90,.6) 50%,rgba(21,36,90,0) 80%),linear-gradient(180deg,rgba(21,36,90,0) 0%,rgba(21,36,90,0) 52%,#15245A 72%),url("https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/hoang-hiep-walk.jpg") 78% 0/auto 640px no-repeat #15245A!important;padding-top:28px}
 .hero-b h1{font-size:30px!important;max-width:64%}
+.hero-b h1 .kw{white-space:nowrap;letter-spacing:1.2px;font-size:12px}
 .hero-b .quote{max-width:62%;font-size:14px}
 .hero-b .badge{max-width:100%}
-.hero-b .ladderk{margin-top:120px}
+.hero-b .ladderk{margin-top:150px}
 }
 /* form */
 .form{background:#fff;color:var(--ink);border-radius:16px;border-top:6px solid var(--orange);padding:26px 22px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
@@ -315,14 +322,14 @@ img{max-width:100%}
   <div class="wrap">
     <div>
       <span class="badge"><i class="dot"></i> Đang tuyển Sale BĐS Đà Nẵng · 10/2026</span>
-      <h1 class="hb"><span class="kw">Tuyển Sale BĐS Đà Nẵng 2026</span>Gặp thẳng <em>Giám đốc</em> kinh doanh, không qua HR.</h1>
-      <p class="quote">“Tôi tìm người chịu làm thật mỗi ngày. Sản phẩm, khách và cách chốt, tôi chỉ cho bạn.”<b>Hoàng Hiệp · Giám đốc kinh doanh</b></p>
+      <h1 class="hb"><span class="kw">Tuyển Sale BĐS Đà Nẵng 2026</span>Lương <em class="nw">7–10 triệu</em><br>chỉ là mức sàn.<span class="lite">Trần của bạn bao nhiêu?</span></h1>
       <div class="kpis ladderk">
         <a href="https://www.tuyendungsaledanang.com/tuyen-sale-moi-ra-truong"><small>Mới ra trường</small><b>0<i>KN</i></b><span>Ngành nào cũng được</span></a>
         <a href="https://www.tuyendungsaledanang.com/tuyen-chuyen-gia-kinh-doanh-pro-sales-da-nang"><small>Pro Sales</small><b>7–10<i>TR</i></b><span>Lương / tháng</span></a>
         <a href="https://www.tuyendungsaledanang.com/tuyen-truong-nhom-truong-phong-kinh-doanh-bds-da-nang"><small>Trưởng phòng</small><b>10–20<i>TR</i></b><span>Lương / tháng</span></a>
         <a href="#chinh-sach"><small>Mỗi giao dịch</small><b>+10<i>TR</i></b><span>Thưởng marketing</span></a>
       </div>
+      <div class="meet"><b>Gặp thẳng <em>Giám đốc kinh doanh</em>, không qua HR.</b><p>“Tôi tìm người chịu làm thật mỗi ngày. Sản phẩm, khách và cách chốt, tôi chỉ cho bạn.”</p><span>Hoàng Hiệp · Giám đốc kinh doanh</span></div>
       <p class="hiring">Chọn vị trí của bạn:</p>
       <div class="chips">
         <a class="hot" href="https://www.tuyendungsaledanang.com/tuyen-sale-moi-ra-truong">Mới ra trường</a>
