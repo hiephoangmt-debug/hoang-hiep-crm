@@ -95,7 +95,7 @@ module.exports = {
       label: 'Vị trí & tiện ích',
       keywords: ['vị trí', 'ở đâu', 'đường', 'tiện ích', 'gần', 'trường', 'chợ', 'biển', 'bản đồ', 'clubhouse', 'hồ bơi'],
       steps: [
-        'Dạ, dự án nằm ngay rừng dừa Bảy Mẫu, ra phố cổ khoảng 10 phút, ra biển An Bàng khoảng 5 km. Ở trong yên như khu nghỉ dưỡng, cần đi đâu cũng gần.',
+        'Dạ, dự án nằm ngay rừng dừa Bảy Mẫu, ra phố cổ khoảng 10 phút, ra biển An Bàng khoảng 5 km. Trong khu yên tĩnh, cần đi đâu cũng gần.',
         'Anh/chị đang ở Đà Nẵng hay ở xa ạ? Em gửi thời gian di chuyển cụ thể cho mình.',
       ],
       browse: {
