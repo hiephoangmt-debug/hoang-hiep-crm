@@ -26,7 +26,7 @@ def snap(pts,w,L,R=40,clear=3):
         if span>=w: c=min(max(0,lo+w/2),hi-w/2); ww=w
         else: c=(lo+hi)/2; ww=max(span-1,8)
         C.append(c);Wd.append(ww)
-    C=np.convolve(np.pad(C,7,mode='edge'),np.ones(15)/15,'valid')
+    C=np.convolve(np.pad(C,15,mode='edge'),np.ones(31)/31,'valid')
     Wp=np.pad(np.array(Wd,float),8,mode='edge'); Wd=np.array([Wp[i:i+17].min() for i in range(len(Wd))])
     Wp=np.pad(Wd,6,mode='edge'); Wd=np.convolve(Wp,np.ones(13)/13,'valid')
     return out+nor*C[:,None], Wd

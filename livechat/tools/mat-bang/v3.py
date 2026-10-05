@@ -122,17 +122,26 @@ import roads3
 rm=np.zeros((H,W),np.uint8)
 from snaproads import snap
 Lb=LOTS>0
+def smooth_d(P):
+    P=[(x*S,y*S) for x,y in P]
+    if len(P)<3: return 'M'+' L'.join(f'{x:.1f} {y:.1f}' for x,y in P)
+    d=f'M{P[0][0]:.1f} {P[0][1]:.1f}'
+    for k in range(len(P)-1):
+        p0=P[max(k-1,0)];p1=P[k];p2=P[k+1];p3=P[min(k+2,len(P)-1)]
+        c1=(p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6); c2=(p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6)
+        d+=f' C{c1[0]:.1f} {c1[1]:.1f} {c2[0]:.1f} {c2[1]:.1f} {p2[0]:.1f} {p2[1]:.1f}'
+    return d
+curb=[];top=[]
 for k,(pts,wd) in roads3.R.items():
     if k=='vcc': continue
     cl,ws=snap(pts,wd,Lb)
-    for j in range(len(cl)-1):
-        cv2.line(rm,tuple(cl[j].round().astype(int)),tuple(cl[j+1].round().astype(int)),255,int(round(min(ws[j],ws[j+1]))),cv2.LINE_AA)
-rm[cv2.dilate(LOTS,np.ones((5,5),np.uint8))>0]=0
-rm=(rm>128).astype(np.uint8)*255
-np.save('lots.npy',LOTS)
-rm=cv2.morphologyEx(rm,cv2.MORPH_OPEN,np.ones((5,5),np.uint8))
-rm=cv2.GaussianBlur(rm,(0,0),2.5); rm=(rm>128).astype(np.uint8)*255
-ROAD_SVG=f'<path class="rd" d="{path(rm,1.0,300)}" fill="#ffffff" stroke="#c6e3ba" stroke-width="2.6" paint-order="stroke" fill-rule="evenodd"/>'
+    if k=='ring': cl=np.array(pts,float); ws=np.full(len(pts),wd*.8)
+    w=float(np.clip(np.percentile(ws,25),14,wd))
+    a=cv2.approxPolyDP(cl.astype(np.float32).reshape(-1,1,2),3.0,False)[:,0]
+    d=smooth_d(a)
+    curb.append(f'<path d="{d}" stroke-width="{w*S+2.4:.1f}"/>'); top.append(f'<path d="{d}" stroke-width="{w*S:.1f}"/>')
+ROAD_SVG=('<g fill="none" stroke="#b9d7ad" stroke-linecap="round" stroke-linejoin="round">'+''.join(curb)+'</g>'
+          '<g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round">'+''.join(top)+'</g>')
 vp=roads3.R['vcc'][0]
 VCC_D='M'+' L'.join(f'{x*S:.1f} {y*S:.1f}' for x,y in vp)
 for g,ps in groups.items():
