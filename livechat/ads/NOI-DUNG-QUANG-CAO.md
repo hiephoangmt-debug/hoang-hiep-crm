@@ -6,7 +6,7 @@
 
 Sửa chữ hoặc ảnh trong `ads/creatives.html`, rồi chạy `node ads/render-ads.js` để xuất lại.
 
-Thay `https://TEN-MIEN` bằng địa chỉ landing page thật. Mỗi mẫu có `utm_content` riêng, để thông báo Telegram cho biết khách đến từ mẫu nào.
+Landing page chạy ads: **https://www.casamia-balanca.com.vn/ads** (LadiPage). Mỗi mẫu có `utm_content` riêng, để thông báo Telegram cho biết khách đến từ mẫu nào.
 
 ---
 
@@ -24,7 +24,7 @@ Thay `https://TEN-MIEN` bằng địa chỉ landing page thật. Mỗi mẫu có
 - **Tiêu đề:** Chủ đầu tư thuê lại 60 triệu/tháng
 - **Mô tả:** Biệt thự giữa rừng dừa Hội An · Cọc 300 triệu
 - **Nút:** Tìm hiểu thêm
-- **Link:** `https://TEN-MIEN/landing.html?utm_source=facebook&utm_campaign=casamia-dongtien&utm_content=thue60`
+- **Link:** `https://www.casamia-balanca.com.vn/ads?utm_source=facebook&utm_campaign=casamia-dongtien&utm_content=thue60`
 
 ## Mẫu 2 – Chiết khấu 4 tỷ (`casamia-ck4ty`)
 **Lời quảng cáo:**
@@ -38,7 +38,7 @@ Thay `https://TEN-MIEN` bằng địa chỉ landing page thật. Mỗi mẫu có
 - **Tiêu đề:** Chiết khấu tới 4 tỷ – Forestside Villa
 - **Mô tả:** Kèm CĐT thuê lại 60tr/tháng × 3 năm
 - **Nút:** Nhận ưu đãi
-- **Link:** `…&utm_content=ck4ty`
+- **Link:** `https://www.casamia-balanca.com.vn/ads?utm_source=facebook&utm_campaign=casamia-dongtien&utm_content=ck4ty`
 
 ## Mẫu 3 – Chỉ 300 triệu (`casamia-coc300`)
 **Lời quảng cáo:**
@@ -53,7 +53,7 @@ Thay `https://TEN-MIEN` bằng địa chỉ landing page thật. Mỗi mẫu có
 - **Tiêu đề:** Cọc 300 triệu – vay 70%, lãi 0% 24 tháng
 - **Mô tả:** Biệt thự Casamia Balanca Hội An
 - **Nút:** Tìm hiểu thêm
-- **Link:** `…&utm_content=coc300`
+- **Link:** `https://www.casamia-balanca.com.vn/ads?utm_source=facebook&utm_campaign=casamia-dongtien&utm_content=coc300`
 
 ## Mẫu 4 – Bản đồ vị trí (`casamia-bando`)
 **Lời quảng cáo:**
@@ -66,7 +66,7 @@ Thay `https://TEN-MIEN` bằng địa chỉ landing page thật. Mỗi mẫu có
 - **Tiêu đề:** Biệt thự giữa 2 di sản thế giới
 - **Mô tả:** Rừng dừa · phố cổ · biển An Bàng
 - **Nút:** Đặt lịch / Tìm hiểu thêm
-- **Link:** `…&utm_content=bando`
+- **Link:** `https://www.casamia-balanca.com.vn/ads?utm_source=facebook&utm_campaign=casamia-dongtien&utm_content=bando`
 
 ## Mẫu 5 – Gây tò mò (`casamia-tomo`)
 **Lời quảng cáo:**
@@ -79,7 +79,7 @@ Thay `https://TEN-MIEN` bằng địa chỉ landing page thật. Mỗi mẫu có
 - **Tiêu đề:** Căn nào cho dòng tiền tốt nhất?
 - **Mô tả:** 4,4 triệu khách/năm · chỉ 363 căn
 - **Nút:** Gửi tin nhắn / Tìm hiểu thêm
-- **Link:** `…&utm_content=tomo`
+- **Link:** `https://www.casamia-balanca.com.vn/ads?utm_source=facebook&utm_campaign=casamia-dongtien&utm_content=tomo`
 
 ---
 
