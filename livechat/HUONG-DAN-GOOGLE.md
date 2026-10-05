@@ -107,11 +107,11 @@ AI được dặn:
 2. Dán nội dung `google-apps-script/AI.gs` và `google-apps-script/KienThuc.gs` vào đúng file.
 3. Dán lại `Code.gs` (hoặc `chia-nho/Phan2.gs`) bản mới, vì đã thêm phần gọi AI.
 
-**4. Triển khai lại**
+**3. Triển khai lại**
 
 Vào **Triển khai → Quản lý các bản triển khai → ✏️ → Phiên bản: Phiên bản mới → Triển khai**. URL `/exec` giữ nguyên.
 
-**4b. Gửi khoá qua Telegram** (sau khi đã triển khai lại)
+**4. Gửi khoá qua Telegram** (sau khi đã triển khai lại)
 
 Mở chat **riêng** với bot (không gửi trong nhóm) và gửi:
 ```
