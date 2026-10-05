@@ -35,6 +35,15 @@ TLIST_CSS = """
 .tlist li strong{color:#0b1f44}
 .tlist .fee{color:#d65f00;font-weight:800}
 .calc .tlist li{background:#fff}
+/* Lề đều hai bên trên điện thoại + chừa khoảng an toàn để chữ không chạm/tràn mép khung LadiPage */
+@media(max-width:700px){
+  .container{padding-left:28px!important;padding-right:28px!important}
+  .prose p,.prose li,.prose h2,.prose h3,.phero h1,.phero .intro,.tldr li,.tlist li,.box p{padding-right:6px}
+  .prose ul,.prose ol,.tldr ul{margin-left:18px;margin-right:0}
+  .page{gap:28px}
+  .btn{white-space:normal;max-width:100%;text-align:center}
+  .center .btn,.calc .btn,.inline-cta .btn{width:100%;margin:6px 0}
+}
 """
 
 

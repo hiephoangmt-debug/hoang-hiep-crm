@@ -368,6 +368,15 @@ a.bank{transition:.2s;text-decoration:none!important}a.bank:hover{border-color:v
 .tlist li strong{color:#0b1f44}
 .tlist .fee{color:#d65f00;font-weight:800}
 .calc .tlist li{background:#fff}
+/* Lề đều hai bên trên điện thoại + chừa khoảng an toàn để chữ không chạm/tràn mép khung LadiPage */
+@media(max-width:700px){
+  .container{padding-left:28px!important;padding-right:28px!important}
+  .prose p,.prose li,.prose h2,.prose h3,.phero h1,.phero .intro,.tldr li,.tlist li,.box p{padding-right:6px}
+  .prose ul,.prose ol,.tldr ul{margin-left:18px;margin-right:0}
+  .page{gap:28px}
+  .btn{white-space:normal;max-width:100%;text-align:center}
+  .center .btn,.calc .btn,.inline-cta .btn{width:100%;margin:6px 0}
+}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://www.dichvuthetindungdanang.com/"}, {"@type": "ListItem", "position": 2, "name": "Đáo hạn thẻ tín dụng Đà Nẵng", "item": "https://www.dichvuthetindungdanang.com/dao-han-the-tin-dung-da-nang"}, {"@type": "ListItem", "position": 3, "name": "Đáo hạn thẻ BIDV", "item": "https://www.dichvuthetindungdanang.com/dao-han-the-bidv-da-nang"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "name": "Đáo Hạn Thẻ Tín Dụng BIDV Tại Đà Nẵng", "serviceType": "Đáo hạn thẻ BIDV", "url": "https://www.dichvuthetindungdanang.com/dao-han-the-bidv-da-nang", "areaServed": {"@type": "City", "name": "Đà Nẵng"}, "provider": {"@id": "https://www.dichvuthetindungdanang.com/#business"}, "description": "Đáo hạn, rút tiền thẻ tín dụng BIDV tại Đà Nẵng: phí từ 1,7%, xong 15 phút, tận nơi mọi quận. Hướng dẫn xem ngày đến hạn trên BIDV SmartBanking. Zalo 0909 669 325."}</script>
