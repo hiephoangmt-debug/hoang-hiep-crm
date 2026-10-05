@@ -70,7 +70,8 @@ def example_table():
 
 def fill(s, root):
     return (s.replace("{{R}}", root).replace("{{FEE_TABLE}}", fee_table()).replace("{{EXAMPLE_TABLE}}", example_table())
-             .replace("{{FEE_MIN}}", FEE_MIN).replace("{{UPDATED}}", vn_date(UPDATED)))
+             .replace("{{FEE_MIN}}", FEE_MIN).replace("{{UPDATED}}", vn_date(UPDATED))
+             .replace("{{BANK_LINKS}}", "".join(f'<a href="{root}dao-han-the-{k}-da-nang/" class="bank">{n}</a>' for k, n, *_ in BANKS)))
 
 
 def vn_date(iso):
@@ -104,7 +105,7 @@ INLINE_CTA = (
 
 
 def side(root, slug):
-    links = [(p["slug"], p["h1"]) for p in PAGES if p["slug"] != slug][:6]
+    links = [(p["slug"], p["h1"]) for p in PAGES if p["slug"] != slug and not p.get("bank")][:6]
     li = "".join(f'<li><a href="{root}{s}/">› {t}</a></li>' for s, t in links)
     return f"""<aside class="side">
   <div class="side-card">
@@ -231,7 +232,7 @@ def build_index():
 
 
 def build_sitemap():
-    urls = [(DOMAIN, "1.0")] + [(DOMAIN + p["slug"] + "/", "0.9" if not p.get("article") else "0.7") for p in PAGES]
+    urls = [(DOMAIN, "1.0")] + [(DOMAIN + p["slug"] + "/", "0.7" if p.get("article") else ("0.8" if p.get("bank") else "0.9")) for p in PAGES]
     items = "".join(f"  <url><loc>{u}</loc><lastmod>{UPDATED}</lastmod><priority>{pr}</priority></url>\n" for u, pr in urls)
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + items + "</urlset>\n")
 
@@ -307,6 +308,9 @@ PAGES = [
 <li>Kiểm tra dư nợ đã được thanh toán trên app ngân hàng trước khi thực hiện bước tiếp theo.</li>
 <li>Nên liên hệ trước ngày đến hạn 1–3 ngày để chủ động thời gian.</li>
 </ul>
+<h2 id="theo-ngan-hang">Đáo hạn theo ngân hàng</h2>
+<p>Xem hướng dẫn riêng cho thẻ của bạn:</p>
+<div class="banks" style="justify-content:flex-start">{{BANK_LINKS}}</div>
 <p>Tìm hiểu kỹ hơn: <a href="{{R}}kien-thuc/dao-han-the-tin-dung-la-gi/">Đáo hạn thẻ tín dụng là gì? Có nên đáo hạn không?</a></p>
 """,
 },
@@ -545,6 +549,78 @@ PAGES = [
 """,
 },
 ]
+
+
+# ---------------------------------------------------------------- TRANG THEO NGÂN HÀNG
+# (slug, tên, tên đầy đủ, app ngân hàng, ghi chú riêng)
+BANKS = [
+    ("vietcombank", "Vietcombank", "Ngân hàng TMCP Ngoại thương Việt Nam", "VCB Digibank", ""),
+    ("vietinbank", "VietinBank", "Ngân hàng TMCP Công Thương Việt Nam", "VietinBank iPay",
+     'Biểu phí chính thức: <a href="https://www.vietinbank.vn/ca-nhan/cong-cu-tien-ich/bieu-phi-va-bieu-mau/bieu-phi-dich-vu-ap-dung-cho-san-pham-the-tin-dung-quoc-te-40-html" rel="nofollow noopener" target="_blank">biểu phí thẻ tín dụng quốc tế VietinBank</a>.'),
+    ("bidv", "BIDV", "Ngân hàng TMCP Đầu tư và Phát triển Việt Nam", "BIDV SmartBanking", ""),
+    ("techcombank", "Techcombank", "Ngân hàng TMCP Kỹ Thương Việt Nam", "Techcombank Mobile",
+     'Biểu phí chính thức: <a href="https://techcombank.com/content/dam/techcombank/public-site/documents/techcombank-bieu-phi-dich-vu-the-tin-dung-cho-khach-hang-thuong.pdf" rel="nofollow noopener" target="_blank">biểu phí dịch vụ thẻ tín dụng Techcombank (PDF)</a>.'),
+    ("vpbank", "VPBank", "Ngân hàng TMCP Việt Nam Thịnh Vượng", "VPBank NEO", ""),
+    ("mb-bank", "MB Bank", "Ngân hàng TMCP Quân đội", "MB Bank", ""),
+    ("acb", "ACB", "Ngân hàng TMCP Á Châu", "ACB ONE", ""),
+    ("sacombank", "Sacombank", "Ngân hàng TMCP Sài Gòn Thương Tín", "Sacombank Pay", ""),
+    ("tpbank", "TPBank", "Ngân hàng TMCP Tiên Phong", "TPBank Mobile", ""),
+    ("vib", "VIB", "Ngân hàng TMCP Quốc tế Việt Nam", "MyVIB",
+     'Ví dụ: với thẻ VIB Financial Free, phí chậm thanh toán là 6% số tiền chậm thanh toán (tối thiểu 200.000đ, tối đa 2.000.000đ) – theo <a href="https://www.vib.com.vn/vn/the-tin-dung/vib-financial-free/bieu-phi-va-dieu-kien" rel="nofollow noopener" target="_blank">biểu phí VIB</a>.'),
+]
+
+
+def bank_page(key, name, full, app, note):
+    others = "".join(f'<a href="{{{{R}}}}dao-han-the-{k}-da-nang/" class="bank">{n}</a>' for k, n, *_ in BANKS if k != key)
+    return {
+        "slug": f"dao-han-the-{key}-da-nang",
+        "parents": [("dao-han-the-tin-dung-da-nang", "Đáo hạn thẻ tín dụng Đà Nẵng")],
+        "crumb": f"Đáo hạn thẻ {name}",
+        "bank": True,
+        "title": f"Đáo Hạn Thẻ Tín Dụng {name} Tại Đà Nẵng ✔️ Phí Từ {FEE_MIN}, 15 Phút",
+        "desc": f"Đáo hạn, rút tiền thẻ tín dụng {name} tại Đà Nẵng: phí từ {FEE_MIN}, xong 15 phút, tận nơi mọi quận. Hướng dẫn xem ngày đến hạn trên {app}. Zalo 0909 669 325.",
+        "h1": f"Đáo Hạn Thẻ Tín Dụng {name} Tại Đà Nẵng",
+        "intro": f"Thẻ {name} sắp đến hạn? Hỗ trợ đáo hạn và rút tiền thẻ tín dụng {name} (Visa, Mastercard, JCB…) trong 15 phút, tại cửa hàng hoặc tận nơi khắp Đà Nẵng.",
+        "related": ["dao-han-the-tin-dung-da-nang", "bang-phi", "kien-thuc/ngay-sao-ke-va-ngay-den-han"],
+        "faqs": [
+            (f"Đáo hạn thẻ {name} mất bao lâu?", "Khoảng 15–30 phút kể từ khi bắt đầu giao dịch, tại cửa hàng hoặc tận nơi trong nội thành Đà Nẵng."),
+            (f"Phí đáo hạn thẻ {name} là bao nhiêu?", f"Từ {FEE_MIN} tùy số tiền, áp dụng chung cho thẻ {name}. Nhắn Zalo để được báo phí trọn gói."),
+            (f"Làm sao biết ngày đến hạn thẻ {name}?", f"Mở ứng dụng {app}, vào mục Thẻ → chọn thẻ tín dụng → xem sao kê, hoặc xem email/SMS sao kê hằng tháng của {name}."),
+            (f"Đáo hạn có ảnh hưởng đến thẻ {name} của tôi không?", f"Không. Dư nợ được thanh toán đúng hạn nên lịch sử tín dụng với {name} và trên CIC luôn tốt."),
+        ],
+        "body": f"""
+<p>Bạn đang dùng thẻ tín dụng <strong>{name}</strong> ({full}) và sắp đến kỳ thanh toán nhưng chưa xoay kịp tiền? Dịch vụ <strong>đáo hạn thẻ {name} tại Đà Nẵng</strong> giúp bạn thanh toán đủ dư nợ trước ngày đến hạn, tránh phí chậm thanh toán và lãi trên toàn bộ dư nợ, đồng thời có thêm một chu kỳ miễn lãi.</p>
+
+<h2 id="xem-han">Cách xem ngày đến hạn thẻ {name}</h2>
+<ol>
+<li>Mở ứng dụng <strong>{app}</strong> và đăng nhập.</li>
+<li>Vào mục <strong>Thẻ</strong>, chọn thẻ tín dụng {name} của bạn.</li>
+<li>Xem <strong>sao kê kỳ gần nhất</strong>: dư nợ sao kê, số tiền thanh toán tối thiểu và ngày đến hạn.</li>
+</ol>
+<div class="box"><p>Mẹo: đặt nhắc lịch trước ngày đến hạn 3 ngày. Nếu chưa đủ tiền, nhắn Zalo sớm để được xếp lịch ưu tiên.</p></div>
+
+<h2 id="tre-han">Nếu để thẻ {name} trễ hạn thì sao?</h2>
+<p>Như hầu hết ngân hàng, {name} sẽ thu <strong>phí chậm thanh toán</strong> và tính <strong>lãi trên toàn bộ dư nợ sao kê</strong> khi bạn không thanh toán đủ đúng hạn; trễ kéo dài có thể bị ghi nhận trên CIC. {note or f"Mức phí cụ thể xem tại biểu phí chính thức trên website {name}."}</p>
+<p>Xem ví dụ chi phí trễ hạn tại bài <a href="{{{{R}}}}kien-thuc/tra-cham-the-tin-dung-bi-phat-bao-nhieu/">Trả chậm thẻ tín dụng bị phạt bao nhiêu?</a></p>
+
+<h2 id="quy-trinh">Quy trình đáo hạn thẻ {name} tại Đà Nẵng</h2>
+<ol>
+<li>Nhắn Zalo <strong>0909 669 325</strong>: “Đáo hạn thẻ {name}, số tiền …, đến hạn ngày …”.</li>
+<li>Nhận báo phí trọn gói – đồng ý mới thực hiện.</li>
+<li>Chúng tôi thanh toán dư nợ vào thẻ {name}; bạn kiểm tra ngay trên {app}.</li>
+<li>Bạn hoàn trả bằng hạn mức vừa được khôi phục, nhận hoá đơn đầy đủ.</li>
+</ol>
+
+<h2 id="bang-phi">Phí đáo hạn, rút tiền thẻ {name}</h2>
+{{{{FEE_TABLE}}}}
+
+<h2 id="ngan-hang-khac">Hỗ trợ cả thẻ ngân hàng khác</h2>
+<div class="banks" style="justify-content:flex-start">{others}</div>
+""",
+    }
+
+
+PAGES += [bank_page(*b) for b in BANKS]
 
 
 if __name__ == "__main__":
