@@ -39,128 +39,118 @@ module.exports = {
     accentColor: process.env.ACCENT_COLOR || '#f47c20', // cam
   },
 
+  // Lời chào: nhẹ nhàng, để khách tự nhiên đọc, không hỏi dồn.
   welcome:
-    'Dạ em chào {name} 👋 Em là Hiệp – chuyên viên tư vấn dự án {project}. ' +
-    'Anh/chị đang quan tâm đến thông tin nào để em hỗ trợ mình nhanh nhất ạ?',
+    'Dạ em chào {name}. Em là Hiệp, phụ trách tư vấn dự án {project}. ' +
+    'Anh/chị cứ thong thả tham khảo, cần thông tin nào em gửi ngay ạ.',
 
-  // Câu mời chuyển Zalo (bước 4). Tin nhắn này hiển thị kèm nút "Chat Zalo".
+  // Mời Zalo (chỉ dùng 1 lần, khi khách đã hỏi tới câu thứ 2 hoặc vừa để lại số). Hiện kèm nút "Nhắn Zalo cho em".
   zaloTransfer:
-    'Dạ để em gửi {name} trọn bộ tài liệu (bảng giá, mặt bằng, chính sách, hình ảnh thực tế) cho tiện xem lại, ' +
-    'mình kết bạn Zalo {zalo} với em nhé. Em đã chuẩn bị sẵn tài liệu, {name} bấm nút bên dưới là nhận được ngay ạ 👇',
+    'Bảng giá từng căn, mặt bằng và file chính sách gốc xem trên Zalo sẽ rõ hơn nhiều. ' +
+    'Khi nào thuận tiện, {name} nhắn em qua Zalo {zalo}, em gửi riêng cho mình ạ.',
 
-  // Khách vừa để lại SĐT → ghi nhận + chuyển Zalo.
+  // Khách vừa để lại số.
   leadThanks:
-    'Dạ em đã ghi nhận thông tin của {name} rồi ạ. Em sẽ gọi lại cho mình qua số {phone} trong ít phút để tư vấn chi tiết.',
+    'Dạ em cảm ơn {name}. Em sẽ liên hệ qua số {phone} trong ít phút; ' +
+    'nếu mình đang bận, em gửi trước tài liệu để anh/chị xem lúc rảnh ạ.',
 
-  // Khách nhắn nội dung không khớp chủ đề nào, khi chưa có tư vấn viên trực tuyến.
+  // Câu hỏi ngoài các chủ đề có sẵn, khi chưa có tư vấn viên trực tuyến.
   fallback: [
-    'Dạ em ghi nhận câu hỏi của {name} rồi ạ.',
-    'Nội dung này em cần tư vấn kỹ theo đúng nhu cầu của mình để không thiếu thông tin quan trọng.',
-    '{name} cho em xin tên và số điện thoại/Zalo, em gọi lại giải đáp chi tiết ngay nhé ạ.',
+    'Dạ câu này em muốn trả lời thật chính xác cho {name}, em kiểm tra lại và phản hồi ngay tại đây ạ.',
+    'Nếu tiện, mình để lại số hoặc Zalo, em gửi kèm tài liệu để anh/chị đối chiếu cho dễ.',
   ],
 
-  // Chủ đề tư vấn. "label" = nút hỏi nhanh trên widget; "keywords" = tự nhận diện khi khách tự gõ.
-  // steps = [ghi nhận, phương án, dẫn dắt xin thông tin]. Khi khách đã có SĐT, bước 3 được thay bằng chuyển Zalo.
-  // Nội dung phương án đang viết chung – hãy bổ sung số liệu thực tế của dự án.
+  // Chủ đề tư vấn. "label" = nút hỏi nhanh; "keywords" = tự nhận diện khi khách tự gõ.
+  // steps = [trả lời (dạ ghi nhận + phương án), câu hỏi nhẹ để hiểu nhu cầu].
+  // Cách xin thông tin (tự động, không dồn ép): câu hỏi 1 → trả lời + hỏi nhẹ; câu 2 → trả lời + mời Zalo 1 lần;
+  // từ câu 3 → trả lời, và hiện form để lại số đúng 1 lần.
   intents: [
     {
-      label: '💰 Bảng giá & chính sách',
-      keywords: ['giá', 'gia', 'bao nhiêu', 'chính sách', 'chiết khấu', 'ưu đãi', 'thanh toán', 'tiền'],
+      label: 'Chính sách & giá',
+      keywords: ['giá', 'gia', 'bao nhiêu', 'chính sách', 'chiết khấu', 'ưu đãi', 'thanh toán', 'tiền', 'thuê lại', 'cam kết thuê'],
       steps: [
-        'Dạ em ghi nhận {name} đang quan tâm bảng giá và chính sách bán hàng ạ.',
-        'Chính sách đang áp dụng (CSBH từ 09/09/2026): đặt cọc 300 triệu, ngân hàng hỗ trợ vay 70% với lãi suất 0% và ân hạn gốc 24 tháng; chiết khấu tới 4 tỷ khi nhận bàn giao thô. Đặc biệt chủ đầu tư thuê lại 60 triệu/tháng (Forestside) hoặc 50 triệu/tháng (Parkhome).',
-        'Để em lọc đúng căn và tính dòng tiền phù hợp, {name} cho em hỏi ngân sách dự kiến khoảng bao nhiêu và mình mua để ở hay đầu tư ạ?',
+        'Dạ, chính sách đang áp dụng (ban hành 09/09/2026): đặt cọc 300 triệu, ngân hàng hỗ trợ 70% với lãi suất 0% và ân hạn gốc 24 tháng. Chọn bàn giao thô được chiết khấu tới 4 tỷ (Forestside) hoặc 3,5 tỷ (Parkhome); chủ đầu tư thuê lại 60 triệu/tháng (Forestside) hoặc 50 triệu/tháng (Parkhome) trong 3 năm.',
+        'Giá từng căn chênh nhau khá nhiều theo vị trí và phương án bàn giao. {name} đang nghiêng về biệt thự ven rừng dừa hay biệt thự sân vườn ạ?',
       ],
-      // Khách đọc chậm ở mục có các từ này trên trang -> chủ động hỏi câu dưới.
       browse: {
-        keywords: ["giá", "bảng giá", "giá bán", "chính sách", "thanh toán", "ưu đãi", "chiết khấu"],
+        keywords: ['giá', 'bảng giá', 'giá bán', 'chính sách', 'thanh toán', 'ưu đãi', 'chiết khấu'],
         question:
-          "Dạ em thấy anh/chị đang xem kỹ phần chính sách ạ. Căn nào được chủ đầu tư thuê lại 60 triệu/tháng và chiết khấu bao nhiêu thì tuỳ phân khu – anh/chị quan tâm Forestside hay Parkhome để em gửi bảng tính đúng căn ạ?",
+          'Nếu {name} cần, em gửi riêng bảng tính theo từng căn, đã trừ chiết khấu và chia sẵn từng đợt thanh toán, để mình xem cho dễ ạ.',
       },
     },
     {
-      label: '🏠 Mặt bằng & loại sản phẩm',
-      keywords: ['mặt bằng', 'diện tích', 'loại', 'căn', 'phòng ngủ', 'pn', 'biệt thự', 'shophouse', 'nhà phố'],
+      label: 'Mặt bằng các căn',
+      keywords: ['mặt bằng', 'diện tích', 'loại', 'căn', 'phòng ngủ', 'pn', 'biệt thự', 'shophouse', 'nhà phố', 'layout'],
       steps: [
-        'Dạ em ghi nhận {name} muốn xem mặt bằng và các loại sản phẩm ạ.',
-        'Dự án có nhiều dòng sản phẩm với diện tích và vị trí khác nhau; em có thể gợi ý 2–3 lựa chọn đúng nhu cầu kèm mặt bằng chi tiết từng căn.',
-        '{name} cho em biết mình cần khoảng mấy phòng ngủ, gia đình mấy người để em chọn mặt bằng phù hợp nhất ạ?',
+        'Dạ, dự án có 2 dòng chính: Forestside Villa ven sông, giữa rừng dừa, riêng tư và yên tĩnh; Parkhome là biệt thự sân vườn gần công viên, hợp gia đình có trẻ nhỏ và ông bà. Mỗi căn có vị trí, hướng nhìn và diện tích khác nhau.',
+        'Gia đình mình thường về mấy người, để em chọn vài căn có layout vừa vặn nhất ạ?',
       ],
-      // Khách đọc chậm ở mục có các từ này trên trang -> chủ động hỏi câu dưới.
       browse: {
-        keywords: ["mặt bằng", "sản phẩm", "loại hình", "diện tích", "thiết kế", "biệt thự", "shophouse", "nhà phố", "căn hộ"],
+        keywords: ['mặt bằng', 'sản phẩm', 'loại hình', 'diện tích', 'thiết kế', 'biệt thự', 'layout', 'căn hộ'],
         question:
-          "Dạ anh/chị đang xem mặt bằng và sản phẩm ạ? Em gửi mình mặt bằng chi tiết đúng nhu cầu nhé – gia đình mình cần khoảng mấy phòng ngủ ạ?",
+          'Mặt bằng chính thức và layout từng tầng em có bản đầy đủ. {name} quan tâm dòng nào, em gửi riêng mình tham khảo ạ.',
       },
     },
     {
-      label: '📍 Vị trí & tiện ích',
-      keywords: ['vị trí', 'ở đâu', 'đường', 'tiện ích', 'gần', 'trường', 'chợ', 'biển', 'bản đồ'],
+      label: 'Vị trí & tiện ích',
+      keywords: ['vị trí', 'ở đâu', 'đường', 'tiện ích', 'gần', 'trường', 'chợ', 'biển', 'bản đồ', 'clubhouse', 'hồ bơi'],
       steps: [
-        'Dạ em ghi nhận {name} đang tìm hiểu vị trí và tiện ích dự án ạ.',
-        'Em có sẵn bản đồ vị trí, sơ đồ kết nối và danh sách tiện ích nội khu – ngoại khu; nếu tiện, em sắp xếp đưa mình đi xem thực tế luôn.',
-        '{name} đang ở khu vực nào ạ? Em gửi lộ trình và thời gian di chuyển cụ thể cho mình nhé.',
+        'Dạ, dự án nằm giữa rừng dừa Bảy Mẫu (Cẩm Thanh), cách phố cổ khoảng 10 phút, biển An Bàng – Cửa Đại khoảng 5 km, sân bay Đà Nẵng khoảng 30 km. Trong khu có Clubhouse với hồ bơi và gym (đang hoàn thiện nội thất), có ban quản lý vận hành.',
+        '{name} đang ở Đà Nẵng hay ở xa ạ? Em gửi lộ trình và thời gian di chuyển cụ thể cho mình.',
       ],
-      // Khách đọc chậm ở mục có các từ này trên trang -> chủ động hỏi câu dưới.
       browse: {
-        keywords: ["vị trí", "tiện ích", "kết nối", "bản đồ", "liên kết vùng", "ngoại khu", "nội khu"],
+        keywords: ['vị trí', 'tiện ích', 'kết nối', 'bản đồ', 'liên kết vùng', 'ngoại khu', 'nội khu'],
         question:
-          "Dạ anh/chị đang tìm hiểu vị trí và tiện ích ạ? Anh/chị đang ở khu vực nào để em gửi lộ trình và thời gian di chuyển cụ thể cho mình nhé.",
+          'Em có bản đồ khoảng cách thực tế từ từng phân khu ra phố cổ và biển, {name} cần em gửi riêng không ạ?',
       },
     },
     {
-      label: '📜 Pháp lý & tiến độ',
-      keywords: ['pháp lý', 'sổ', 'giấy tờ', 'tiến độ', 'bàn giao', 'xây', 'chủ đầu tư', 'cđt'],
+      label: 'Pháp lý & bàn giao',
+      keywords: ['pháp lý', 'sổ', 'giấy tờ', 'tiến độ', 'bàn giao', 'xây', 'chủ đầu tư', 'cđt', 'đạt phương'],
       steps: [
-        'Dạ em ghi nhận {name} quan tâm pháp lý và tiến độ dự án – đây là điều rất nên tìm hiểu kỹ ạ.',
-        'Em có thể gửi mình hồ sơ pháp lý, hình ảnh cập nhật tiến độ thi công mới nhất và mẫu hợp đồng để mình xem trước.',
-        '{name} cho em xin số điện thoại/Zalo để em gửi bộ hồ sơ đầy đủ cho mình ạ?',
+        'Dạ, đây là phần rất nên tìm hiểu kỹ. Chủ đầu tư là Đạt Phương; em có thể gửi hồ sơ pháp lý, ảnh và video tiến độ thi công mới nhất cùng mẫu hợp đồng để anh/chị tự đối chiếu.',
+        '{name} quan tâm nhất phần sở hữu lâu dài hay thời điểm nhận nhà ạ?',
       ],
-      // Khách đọc chậm ở mục có các từ này trên trang -> chủ động hỏi câu dưới.
       browse: {
-        keywords: ["pháp lý", "tiến độ", "chủ đầu tư", "sổ hồng", "bàn giao", "giấy phép"],
+        keywords: ['pháp lý', 'tiến độ', 'chủ đầu tư', 'sổ hồng', 'bàn giao', 'giấy phép', 'minh bạch'],
         question:
-          "Dạ phần pháp lý và tiến độ rất nên tìm hiểu kỹ ạ. Em gửi anh/chị bộ hồ sơ pháp lý và hình ảnh thi công mới nhất qua Zalo nhé?",
+          'Bộ hồ sơ pháp lý và hình ảnh thi công mới nhất em có đủ, {name} muốn xem trước phần nào em gửi riêng ạ.',
       },
     },
     {
-      label: '📅 Đặt lịch tham quan',
-      keywords: ['tham quan', 'xem nhà', 'nhà mẫu', 'lịch', 'đi xem', 'gặp'],
+      label: 'Hẹn xem nhà mẫu',
+      keywords: ['tham quan', 'xem nhà', 'nhà mẫu', 'lịch', 'đi xem', 'gặp', 'đón'],
       steps: [
-        'Dạ em ghi nhận {name} muốn đi tham quan dự án ạ.',
-        'Em có thể đón mình xem nhà mẫu và thực tế dự án vào ngày trong tuần hoặc cuối tuần, em sẽ chuẩn bị sẵn bảng giá các căn còn trống.',
-        '{name} cho em xin tên, số điện thoại và thời gian thuận tiện để em giữ lịch cho mình nhé ạ.',
+        'Dạ, em đón anh/chị tại Đà Nẵng hoặc Hội An, xem nhà mẫu, Clubhouse và từng phân khu, hoàn toàn không ràng buộc. Em chuẩn bị sẵn những căn đang còn để mình xem tận nơi.',
+        '{name} thuận tiện ngày trong tuần hay cuối tuần ạ?',
       ],
-      // Khách đọc chậm ở mục có các từ này trên trang -> chủ động hỏi câu dưới.
       browse: {
-        keywords: ["tham quan", "đăng ký", "nhận thông tin", "nhà mẫu"],
+        keywords: ['tham quan', 'đăng ký', 'nhận thông tin', 'nhà mẫu', 'tận nơi'],
         question:
-          "Dạ anh/chị có muốn đi xem thực tế dự án không ạ? Em giữ lịch tham quan cuối tuần này cho mình nhé – anh/chị tiện ngày nào ạ?",
+          'Nếu {name} muốn xem thực tế, em sắp xếp đón mình vào thời gian thuận tiện, không ràng buộc gì ạ.',
       },
     },
     {
-      label: '🏦 Vay ngân hàng',
+      label: 'Phương án vay',
       keywords: ['vay', 'ngân hàng', 'lãi suất', 'trả góp', 'góp'],
       steps: [
-        'Dạ em ghi nhận {name} cần hỗ trợ phương án vay ạ.',
-        'Ngân hàng hỗ trợ vay tới 70%, lãi suất 0% và ân hạn nợ gốc trong 24 tháng. Anh/chị chỉ tự thanh toán khoảng 30% (đặt cọc 300 triệu + ký HĐMB + 1 đợt), trong khi tiền thuê chủ đầu tư trả 50–60 triệu/tháng.',
-        '{name} dự kiến vay khoảng bao nhiêu và trả trong bao lâu ạ? Em tính sẵn dòng tiền cho mình tham khảo.',
+        'Dạ, ngân hàng hỗ trợ tới 70%, lãi suất 0% và ân hạn gốc trong 24 tháng; anh/chị chủ động khoảng 30% (cọc, ký hợp đồng và 1 đợt). Không vay thì thanh toán sớm được chiết khấu thêm.',
+        'Em tính sẵn dòng tiền từng tháng theo căn cụ thể được, {name} dự kiến vay khoảng bao nhiêu ạ?',
       ],
-      // Khách đọc chậm ở mục có các từ này trên trang -> chủ động hỏi câu dưới.
       browse: {
-        keywords: ["vay", "ngân hàng", "lãi suất", "trả góp", "hỗ trợ tài chính"],
+        keywords: ['vay', 'ngân hàng', 'lãi suất', 'trả góp', 'hỗ trợ tài chính'],
         question:
-          "Dạ anh/chị có cần em lập bảng tính trả góp hàng tháng không ạ? Chỉ cần cho em số tiền dự kiến vay là em tính ngay cho mình.",
+          'Em có thể lập bảng dòng tiền theo đúng số anh/chị dự kiến vay, xem trước số tiền từng tháng cho yên tâm ạ.',
       },
     },
   ],
 
-  // Chủ động hỏi khi khách đọc chậm ở một mục trên trang (theo dõi cuộn trang).
+  // Chủ động gợi ý khi khách đọc chậm ở một mục: tối đa 1 lần, không chen ngang.
   proactive: {
     enabled: true,
-    dwellSeconds: 8, // dừng đọc ở cùng một mục bao nhiêu giây thì hỏi
-    maxPerVisit: 2, // tối đa số lần hỏi chủ động mỗi khách
-    quietSeconds: 45, // không chen ngang nếu khách/tư vấn viên vừa nhắn trong khoảng này
+    dwellSeconds: 12, // dừng đọc ở cùng một mục bao nhiêu giây thì gợi ý
+    maxPerVisit: 1, // tối đa số lần gợi ý mỗi khách
+    quietSeconds: 60, // không chen ngang nếu khách/tư vấn viên vừa nhắn trong khoảng này
   },
 
   // Mẫu câu cho tư vấn viên (bấm để chèn vào ô chat, sửa được trước khi gửi).

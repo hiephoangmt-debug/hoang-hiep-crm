@@ -66,7 +66,8 @@
   function fillTpl(tpl, lead) {
     var L = LOCAL, vars = { name: (lead && lead.name) || 'anh/chị', phone: (lead && lead.phone) || '', zalo: L.project.zalo, hotline: L.project.hotline, project: L.project.name };
     var out = String(tpl).replace(/\{(\w+)\}/g, function (m, k) { return k in vars ? vars[k] : m; });
-    return out.charAt(0).toUpperCase() + out.slice(1);
+    // Viết hoa chữ đầu câu (kể cả khi {name} = "anh/chị" đứng đầu câu giữa đoạn)
+    return out.replace(/(^|[.!?]\s+)(\p{Ll})/gu, function (m, a, c) { return a + c.toUpperCase(); });
   }
 
   function makeLocalSocket() {
@@ -180,6 +181,11 @@
     }
 
     function zaloReply(first) { reply(first.concat([L.zaloTransfer]), { action: 'zalo' }); }
+    // Khách vừa để lại số: cảm ơn; chỉ mời Zalo nếu trước đó chưa mời.
+    function leadDone() {
+      if (state.zaloOffered) return reply([L.leadThanks]);
+      state.zaloOffered = true; save(); zaloReply([L.leadThanks]);
+    }
     function findIntent(text) {
       for (var i = 0; i < L.intents.length; i++) if (L.intents[i].label === text) return L.intents[i];
       // Chọn chủ đề có nhiều từ khoá khớp nhất (vd. "vay ngân hàng bao nhiêu" → Vay, không phải Giá)
@@ -190,7 +196,17 @@
       });
       return best;
     }
-    function askLead() { setTimeout(function () { if (!state.lead.phone) fire('lead:request'); }, 5200); }
+    function askLead() { setTimeout(function () { if (!state.lead.phone) fire('lead:request'); }, 4000); }
+    // Dẫn dắt nhẹ nhàng: câu 1 → trả lời + hỏi nhu cầu; câu 2 → trả lời + mời Zalo (1 lần); từ câu 3 → trả lời + form để lại số (1 lần).
+    function answer(steps) {
+      var main = steps[0], soft = steps[1];
+      if (state.lead.phone) return reply([main]);
+      state.answered = (state.answered || 0) + 1; save();
+      if (state.answered === 1) return reply([main, soft]);
+      if (!state.zaloOffered) { state.zaloOffered = true; save(); return zaloReply([main]); }
+      reply([main]);
+      if (!state.formOffered) { state.formOffered = true; save(); askLead(); }
+    }
     function setLead(name, phone) {
       if (name) state.lead.name = String(name).trim().slice(0, 100);
       state.lead.phone = phone; save();
@@ -204,15 +220,11 @@
       if (pm && !state.lead.phone) {
         setLead('', pm[0].replace(/[\s.-]/g, ''));
         gasPost('lead', { form: 'Khung chat (gõ số)' });
-        return zaloReply([L.leadThanks]);
+        return leadDone();
       }
       var it = findIntent(text);
-      if (it) {
-        var st = it.steps;
-        if (state.lead.phone) zaloReply([st[0], st[1]]); else { reply([st[0], st[1], st[2]]); askLead(); }
-        return;
-      }
-      if (!state.lead.phone && !state.offlineNotified) { state.offlineNotified = true; save(); reply(L.fallback); askLead(); }
+      if (it) return answer(it.steps);
+      if (!state.lead.phone && !state.offlineNotified) { state.offlineNotified = true; save(); reply(L.fallback); }
     }
 
     var api = {
@@ -238,7 +250,7 @@
           setLead(data.name, ph[0].replace(/[\s.-]/g, ''));
           push({ from: 'visitor', text: '📋 Thông tin liên hệ: ' + (state.lead.name || '') + ' – ' + state.lead.phone });
           gasPost('lead', { form: 'Khung chat' });
-          zaloReply([L.leadThanks]);
+          leadDone();
         } else if (ev === 'browse') {
           var pa = L.proactive || {}, intent = L.intents[data.topic];
           if (!pa.enabled || !intent || !intent.browse || state.lead.phone) return;
@@ -340,7 +352,7 @@
 
     var unread = 0, leadShown = false, hasLead = false, rendered = {}, quickEl = null, typingTimer, lastFrom = null;
     var peek = $('.peek');
-    peek.querySelector('b').textContent = P.agentName + ' – Tư vấn viên';
+    peek.querySelector('b').textContent = P.agentName + ' · Tư vấn dự án';
     peek.onclick = function () { toggle(true); };
     peek.querySelector('.x').onclick = function (e) { e.stopPropagation(); peek.style.display = 'none'; };
 
@@ -362,7 +374,7 @@
       if (from !== lastFrom) {
         var w = document.createElement('div');
         w.className = 'who ' + from;
-        w.textContent = from === 'me' ? 'Bạn' : '💼 ' + P.agentName + ' – Tư vấn';
+        w.textContent = from === 'me' ? 'Bạn' : P.agentName + ' · Tư vấn dự án';
         body.appendChild(w);
         lastFrom = from;
       }
@@ -373,7 +385,7 @@
         var z = document.createElement('a');
         z.className = 'zalo-btn'; z.target = '_blank'; z.rel = 'noopener';
         z.href = 'https://zalo.me/' + P.zalo.replace(/\D/g, '');
-        z.textContent = 'Chat Zalo ' + P.zalo;
+        z.textContent = 'Nhắn Zalo cho em';
         el.appendChild(z);
       }
       var t = document.createElement('time'); t.textContent = fmt(m.at || Date.now());
@@ -407,10 +419,10 @@
       leadShown = true;
       var f = document.createElement('form');
       f.className = 'lead';
-      f.innerHTML = '<p>Để lại thông tin để nhận tư vấn & bảng giá</p>' +
+      f.innerHTML = '<p>Để em gửi riêng tài liệu cho anh/chị</p>' +
         '<input name="name" placeholder="Họ và tên" maxlength="100">' +
         '<input name="phone" type="tel" placeholder="Số điện thoại *" required maxlength="20">' +
-        '<span class="err"></span><button type="submit">Nhận tư vấn ngay</button>';
+        '<span class="err"></span><button type="submit">Gửi cho tôi</button>';
       f.onsubmit = function (e) {
         e.preventDefault();
         socket.emit('lead', { name: f.name.value, phone: f.phone.value });

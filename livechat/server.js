@@ -156,7 +156,8 @@ function fill(tpl, conv) {
     project: config.project.name,
   };
   const out = tpl.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m));
-  return out.charAt(0).toUpperCase() + out.slice(1);
+  // Viết hoa chữ đầu câu (kể cả khi {name} = "anh/chị" đứng đầu câu giữa đoạn)
+  return out.replace(/(^|[.!?]\s+)(\p{Ll})/gu, (m, a, c) => a + c.toUpperCase());
 }
 
 // Gửi lần lượt từng câu như người thật đang gõ. Chuỗi mới (hoặc tư vấn viên trả lời) huỷ chuỗi cũ còn dở.
@@ -195,11 +196,29 @@ function findIntent(text, byKeyword) {
   return best;
 }
 
-// Kịch bản 4 bước: ghi nhận → phương án → xin thông tin (hoặc chuyển Zalo nếu đã có SĐT).
+// Dẫn dắt nhẹ nhàng: câu 1 → trả lời + hỏi nhu cầu; câu 2 → trả lời + mời Zalo (1 lần);
+// từ câu 3 → trả lời + form để lại số (1 lần). Trả về true nếu nên hiện form.
 function replyIntent(conv, intent) {
-  const [ack, option, ask] = intent.steps;
-  if (conv.lead.phone) systemReply(conv, [ack, option, zaloStep()[0]], zaloStep()[1]);
-  else systemReply(conv, [ack, option, ask]);
+  const [main, soft] = intent.steps;
+  if (conv.lead.phone) return systemReply(conv, [main]), false;
+  const answered = (conv.answered || 0) + 1;
+  store.update(conv.id, { answered });
+  if (answered === 1) return systemReply(conv, [main, soft]), false;
+  if (!conv.zaloOffered) {
+    store.update(conv.id, { zaloOffered: true });
+    return systemReply(conv, [main, zaloStep()[0]], zaloStep()[1]), false;
+  }
+  systemReply(conv, [main]);
+  if (conv.formOffered) return false;
+  store.update(conv.id, { formOffered: true });
+  return true;
+}
+
+// Khách vừa để lại số: cảm ơn; chỉ mời Zalo nếu trước đó chưa mời.
+function leadDone(conv) {
+  if (conv.zaloOffered) return systemReply(conv, [config.leadThanks]);
+  store.update(conv.id, { zaloOffered: true });
+  systemReply(conv, [config.leadThanks, zaloStep()[0]], zaloStep()[1]);
 }
 
 function throttle(socket) {
@@ -273,7 +292,7 @@ io.on('connection', socket => {
     if (phone && !conv.lead.phone) {
       setLead(conv, { phone });
       // Khách vừa cho SĐT: ghi nhận + chuyển Zalo (khi có tư vấn viên thì để người trả lời).
-      if (!agentsOn) systemReply(conv, [config.leadThanks, zaloStep()[0]], zaloStep()[1]);
+      if (!agentsOn) leadDone(conv);
       return;
     }
 
@@ -297,7 +316,7 @@ io.on('connection', socket => {
       from: 'visitor',
       text: `📋 Thông tin liên hệ: ${conv.lead.name || ''} – ${conv.lead.phone || ''}`.trim(),
     });
-    systemReply(conv, [config.leadThanks, zaloStep()[0]], zaloStep()[1]);
+    leadDone(conv);
   });
 
   // Khách đọc chậm ở một mục trên trang → chủ động hỏi đúng mục đó.
@@ -324,18 +343,17 @@ io.on('connection', socket => {
   socket.on('typing', () => io.to('agents').emit('typing', visitorId));
 });
 
-// Kịch bản 4 bước soạn sẵn. Nút hỏi nhanh luôn trả lời tự động; khách tự gõ thì chỉ tự động khi chưa có tư vấn viên.
+// Kịch bản soạn sẵn. Nút hỏi nhanh luôn trả lời tự động; khách tự gõ thì chỉ tự động khi chưa có tư vấn viên.
 function scripted(conv, text, agentsOn, socket) {
-  const askLead = () => setTimeout(() => !store.get(conv.id)?.lead.phone && socket.emit('lead:request'), 5200);
+  const askLead = () => setTimeout(() => !store.get(conv.id)?.lead.phone && socket.emit('lead:request'), 4000);
   const intent = findIntent(text, !agentsOn);
   if (intent) {
-    replyIntent(conv, intent);
-    return askLead();
+    if (replyIntent(conv, intent)) askLead();
+    return;
   }
   if (!agentsOn && !conv.lead.phone && !conv.offlineNotified) {
     store.update(conv.id, { offlineNotified: true });
     systemReply(conv, config.fallback);
-    askLead();
   }
 }
 
