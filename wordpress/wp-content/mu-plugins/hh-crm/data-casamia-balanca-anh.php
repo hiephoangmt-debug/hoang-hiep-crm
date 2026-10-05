@@ -5,6 +5,7 @@
  * cập nhật tiện ích, điểm nổi bật, liên kết vùng, phân khu, tiến độ, bài giới thiệu.
  * Thêm 4 ảnh nội thất tham khảo (phòng khách, bếp – phòng ăn, phòng ngủ, phòng tắm).
  * Thêm 3 ảnh phân khu nhà vườn (ven sông, đường nội khu, phố thương mại về đêm).
+ * Thêm 29 ảnh đời sống (hồ bơi, pickleball, chạy bộ, đạp xe, yoga, BBQ, xe điện, nội thất) và flycam thi công.
  * Nhập dữ liệu → web tự đưa ảnh vào Thư viện: toàn cảnh làm ảnh đại diện, 3 phối cảnh vào thư viện ảnh / tiện ích.
  */
 
@@ -43,14 +44,7 @@ add_filter(
 					'plugin:img/casamia-balanca/casamia-balanca-noi-that-phong-tam.jpg | Nội thất tham khảo: phòng tắm bồn đứng view sông – Casamia Balanca | thư viện',
 				)
 			);
-			// Thông tin theo sơ đồ mặt bằng CĐT (anh Hiệp gửi 05/10/2026). Ghi đè ô còn đúng bản web đã nhập trước đó.
-			$details = function_exists( 'hh_project_enrichment' ) ? ( hh_project_enrichment()['casamia-balanca-hoi-an']['meta'] ?? array() ) : array();
-			$upd     = hh_casamia_balanca_meta();
-			$old     = array_intersect_key( $p['meta'] + $details, $upd );
-			$projects[ $i ]['fix_meta'] = array( 'hh_p_image_links' => array( $old4, $old7, $old11 ) ) + $old + ( $p['fix_meta'] ?? array() );
-			$projects[ $i ]['meta']     = array_merge( $p['meta'], $upd );
-			$projects[ $i ]['content']  = hh_casamia_balanca_content();
-			$projects[ $i ]['meta']['hh_p_image_links'] = implode(
+			$old16 = implode(
 				"\n",
 				array(
 					'plugin:img/casamia-balanca/casamia-balanca-toan-canh.jpg | Phối cảnh toàn cảnh Casamia Balanca Hội An bên sông Cổ Cò | đại diện',
@@ -69,6 +63,48 @@ add_filter(
 					'plugin:img/casamia-balanca/casamia-balanca-su-kien-khach-hang.jpg | Khách hàng tham dự sự kiện Sound of Balance – Casamia Balanca | tiến độ',
 					'plugin:img/casamia-balanca/casamia-balanca-su-kien-tu-van.jpg | Tư vấn khách hàng tại sự kiện Casamia Balanca Hội An | tiến độ',
 					'plugin:img/casamia-balanca/casamia-balanca-su-kien-tai-lieu.jpg | Khách hàng xem tài liệu dự án tại sự kiện Casamia Balanca | tiến độ',
+				)
+			);
+			// Thông tin theo sơ đồ mặt bằng CĐT (anh Hiệp gửi 05/10/2026). Ghi đè ô còn đúng bản web đã nhập trước đó.
+			$details = function_exists( 'hh_project_enrichment' ) ? ( hh_project_enrichment()['casamia-balanca-hoi-an']['meta'] ?? array() ) : array();
+			$upd     = hh_casamia_balanca_meta();
+			$old     = array_intersect_key( $p['meta'] + $details, $upd );
+			$projects[ $i ]['fix_meta'] = array( 'hh_p_image_links' => array( $old4, $old7, $old11, $old16 ) ) + $old + ( $p['fix_meta'] ?? array() );
+			$projects[ $i ]['meta']     = array_merge( $p['meta'], $upd );
+			$projects[ $i ]['content']  = hh_casamia_balanca_content();
+			// 05/10/2026 (tối): 29 ảnh đời sống – tiện ích, nội thất, flycam thi công.
+			$projects[ $i ]['meta']['hh_p_image_links'] = $old16 . "\n" . implode(
+				"\n",
+				array(
+					'plugin:img/casamia-balanca/casamia-balanca-flycam-toan-canh-thi-cong.jpg | Toàn cảnh flycam Casamia Balanca Hội An – các dãy nhà vườn đang thi công, nhìn ra sông và biển | tiến độ',
+					'plugin:img/casamia-balanca/casamia-balanca-dap-xe-quang-truong.jpg | Quảng trường hồ nước cổng chào Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-gia-dinh-truoc-nha.jpg | Gia đình trước nhà vườn phủ cây xanh – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-don-khach-biet-thu.jpg | Đón khách trước mặt tiền nhà vườn rợp hoa giấy – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-ban-cong-day-nha.jpg | Ban công nhìn ra dãy nhà mái dốc – Casamia Balanca Hội An | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-phong-khach-view-vuon.jpg | Phòng khách kính lớn nhìn ra vườn – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-phong-khach-cay-ru.jpg | Phòng khách view rèm cây rủ xanh mát – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-phong-khach-gia-dinh.jpg | Không gian phòng khách gia đình – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-phong-khach-sum-hop.jpg | Phòng khách sum họp ba thế hệ – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-bep-dao-go.jpg | Bếp đảo gỗ – không gian nấu ăn gia đình tại Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-bep-ban-an.jpg | Bếp và bàn ăn gỗ liền mạch, cửa kính view vườn – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-phong-an-view-vuon.jpg | Phòng ăn view vườn và sông – Casamia Balanca Hội An | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-goc-doc-sach.jpg | Góc đọc sách bên giếng trời xanh – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-phong-ngu-ban-cong.jpg | Phòng ngủ mở ra ban công cây xanh – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-bon-tam.jpg | Phòng tắm bồn nằm, lam gỗ đón nắng – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-ho-boi-vuon-dua.jpg | Hồ bơi bên hàng dừa và trụ hoa giấy – Casamia Balanca | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-dao-bo-thu-cung.jpg | Dạo bộ cùng thú cưng trong công viên – Casamia Balanca | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-xe-dien-noi-khu.jpg | Xe điện nội khu đưa đón cư dân – Casamia Balanca | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-xe-dien-cong-bao-ve.jpg | Xe điện nội khu qua chốt bảo vệ cổng – Casamia Balanca Hội An | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-san-pickleball.jpg | Sân pickleball nội khu – Casamia Balanca | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-pickleball-cap-doi.jpg | Chơi pickleball lúc hoàng hôn – Casamia Balanca | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-duong-chay-bo.jpg | Đường chạy bộ rợp bóng cây – Casamia Balanca | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-dap-xe-noi-khu.jpg | Đạp xe trên đường nội khu – Casamia Balanca | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-tap-the-duc-ven-ho.jpg | Khu tập thể dục ngoài trời ven hồ – Casamia Balanca | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-yoga-bai-co.jpg | Tập yoga trên bãi cỏ giữa vườn nhiệt đới – Casamia Balanca | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-thien-bai-co.jpg | Thiền giữa thiên nhiên – Casamia Balanca Hội An | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-bbq-tiec-dem.jpg | Tiệc BBQ sân vườn buổi tối – Casamia Balanca | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-bbq-san-vuon.jpg | Tiệc nướng gia đình trong sân vườn – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-bbq-ban-be.jpg | Bữa tối sân vườn cùng bạn bè – Casamia Balanca | thư viện',
 				)
 			);
 		}
