@@ -140,7 +140,7 @@ Cách biển ~2 km, 10 phút ra sân bay. Căn sân vườn riêng tầng 2–7,
   | Giỏ hàng căn trống | `https://www.sun-fours-tower.com/gio-hang` |
   | Hồ sơ pháp lý | `https://www.sun-fours-tower.com/phap-ly` |
   | Tính vốn vay 70% | `https://www.sun-fours-tower.com/bang-tinh-f2` |
-  | Hỏi đáp 56 câu | `https://www.sun-fours-tower.com/hoi-dap` |
+  | Hỏi đáp 59 câu | `https://www.sun-fours-tower.com/hoi-dap` |
 
 - **Chú thích:** Cọc 100 triệu · Miễn phí quản lý 2 năm · Techcombank bảo lãnh · Lãi suất 0% 24 tháng
 - **Cuộc gọi:** 0904 567 009 (bật trong giờ làm việc)
@@ -172,4 +172,4 @@ Các bước nếu chạy được:
    - Tạo chiến dịch trỏ về `https://www.sun-fours-tower.com/toa-f2-ads`.
    - Mô tả ngắn gọn theo các ý: căn hộ Sun Group Đà Nẵng, vay 70% lãi suất 0% 24 tháng, cách biển 2 km, pháp lý đủ điều kiện bán.
 
-**Không tốn tiền:** trang **/hoi-dap** (56 câu, có khai báo hỏi – đáp cho máy tìm kiếm) giúp ChatGPT và Google dễ trích câu trả lời về dự án khi người dùng hỏi kiểu "Sun FourS Tower có pháp lý chưa". Nhớ giữ trang này luôn xuất bản.
+**Không tốn tiền:** trang **/hoi-dap** (59 câu, có khai báo hỏi – đáp cho máy tìm kiếm) giúp ChatGPT và Google dễ trích câu trả lời về dự án khi người dùng hỏi kiểu "Sun FourS Tower có pháp lý chưa". Nhớ giữ trang này luôn xuất bản.

@@ -8,7 +8,7 @@ DESC = {
  'can-ho':'Loại căn, diện tích, sân vườn, view, tiêu chuẩn bàn giao',
  'gia':'Giá niêm yết, chiết khấu 19%, cách tính giá sau chiết khấu',
  'thanh-toan':'Tiến độ thanh toán, vay 70%, hỗ trợ lãi suất 24 tháng',
- 'ban-giao':'Ngày nhận nhà, phí quản lý, cấp sổ hồng',
+ 'ban-giao':'Ngày nhận nhà, bảo hành, phí quản lý, cấp sổ hồng',
  'dau-tu':'Cho thuê, chọn căn đầu tư, so sánh',
  'thu-tuc':'Giữ căn, đặt cọc, giấy tờ, người tư vấn',
 }

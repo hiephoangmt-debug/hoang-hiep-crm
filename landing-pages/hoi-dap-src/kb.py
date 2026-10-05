@@ -11,7 +11,7 @@ CATS = [
  ('can-ho', 'Căn hộ & thiết kế', '📐'),
  ('gia', 'Giá & chiết khấu', '💰'),
  ('thanh-toan', 'Thanh toán & vay', '🏦'),
- ('ban-giao', 'Bàn giao & vận hành', '🔑'),
+ ('ban-giao', 'Bàn giao, bảo hành & vận hành', '🔑'),
  ('dau-tu', 'Đầu tư & cho thuê', '📈'),
  ('thu-tuc', 'Thủ tục mua & giữ căn', '📝'),
 ]
@@ -97,7 +97,7 @@ KB = [
  ['can bao lanh','co can bao lanh','da vay','vay roi','vay va bao lanh','vay thi can bao lanh','khac gi vay','vay co can bao lanh']),
 ('bao-lanh','bl-kiem-tra','Làm sao kiểm tra bảo lãnh là thật?',
  'Đối chiếu 3 thứ: (1) <b>văn bản cam kết của Techcombank</b> ngày 26/09/2026, thỏa thuận số MMD20265226177/TTCBLN/FOURS TOWER; (2) <b>VB 17239/SXD-QLN</b> của Sở Xây dựng yêu cầu thực hiện bảo lãnh; (3) <b>thư bảo lãnh cấp cho chính căn của anh/chị</b> – ghi đúng tên, mã căn, số hợp đồng; anh/chị có thể liên hệ Techcombank để xác thực. Cần bản scan văn bản cam kết, chuyên viên gửi qua Zalo.',
- ['kiem tra bao lanh','bao lanh co that','bao lanh that','bao lanh gia','xac thuc','xac minh','that khong','tin duoc khong']),
+ ['kiem tra bao lanh','bao lanh co that','bao lanh that','bao lanh gia','xac thuc','xac minh','co that khong','tin duoc khong']),
 
 # ---------- CĂN HỘ ----------
 ('can-ho','loai-can','Tòa F2 có những loại căn nào, diện tích bao nhiêu?',
@@ -169,6 +169,15 @@ KB = [
 ('ban-giao','khi-nao','Khi nào nhận nhà?',
  'Tòa F2: thanh toán đủ 70% là <b>nhận nhà sử dụng dự kiến 31/05/2028</b> (chính sách Sun Early Key), sau khi dự án nghiệm thu đưa vào sử dụng. Tòa F1, F5 dự kiến 31/03/2028.',
  ['nhan nha','khi nao','bao gio','ban giao','bao lau nua','nam nao','2028','vao o']),
+('ban-giao','bh-thoi-han','Căn hộ được bảo hành bao lâu?',
+ 'Theo <b>Luật Nhà ở</b>, nhà chung cư được bảo hành <b>tối thiểu 60 tháng (5 năm)</b> kể từ khi hoàn thành xây dựng, nghiệm thu đưa vào sử dụng. Trang thiết bị gắn với căn hộ (thiết bị điện, cửa, khóa…) bảo hành theo <b>thời hạn của nhà sản xuất</b>. Thời hạn và cách thức bảo hành cụ thể ghi trong <b>hợp đồng mua bán theo mẫu</b> đã đăng ký với Sở Công Thương (1738/TB-SCT).',
+ ['bao hanh','bao hanh bao lau','thoi han bao hanh','bao hanh may nam','bao hanh 5 nam','bao hanh bao nhieu nam','bao hanh thiet bi']),
+('ban-giao','bh-pham-vi','Bảo hành những hạng mục nào, trường hợp nào không được bảo hành?',
+ 'Bảo hành gồm sửa chữa, khắc phục hư hỏng <b>kết cấu</b> (khung, cột, dầm, sàn, tường, trần, mái), các phần <b>ốp, lát, trát</b>, <b>hệ thống điện, cấp nước, thoát nước</b>, và các trường hợp <b>nghiêng, lún, nứt, thấm</b> theo quy định và hợp đồng. Thường <b>không</b> thuộc bảo hành: hư hỏng do người dùng gây ra hoặc tự ý cải tạo, nội thất và thiết bị khách tự lắp thêm. Phạm vi chính xác theo điều khoản bảo hành trong HĐMB.',
+ ['bao hanh nhung gi','hang muc bao hanh','bao hanh gom','pham vi bao hanh','khong duoc bao hanh','tham','tham dot','nut','lun','nghieng','hu hong','dot nuoc']),
+('ban-giao','bh-cach','Căn hộ có hư hỏng thì báo bảo hành thế nào?',
+ 'Báo cho <b>Ban quản lý tòa nhà</b> hoặc bộ phận chăm sóc khách hàng của chủ đầu tư theo kênh ghi trong hợp đồng và biên bản bàn giao; ghi lại hình ảnh, thời điểm phát sinh để được xử lý nhanh. Anh/chị cần hỗ trợ kết nối, chuyên viên tư vấn hỗ trợ ngay cả sau khi bàn giao.',
+ ['bao hanh the nao','bao hanh o dau','bao bao hanh','yeu cau bao hanh','sua chua','ai sua','lien he bao hanh','hu thi sao','hu thi','bao ai','hong thi']),
 ('ban-giao','phi-quan-ly','Phí quản lý bao nhiêu?',
  'Mua Tòa F2 được <b>miễn phí dịch vụ quản lý 2 năm</b> kể từ ngày nhận bàn giao chính thức. Mức phí sau đó theo quy định của ban quản lý tòa nhà tại thời điểm vận hành.',
  ['phi quan ly','phi dich vu','phi hang thang','quan ly toa nha','van hanh','ban quan ly']),
