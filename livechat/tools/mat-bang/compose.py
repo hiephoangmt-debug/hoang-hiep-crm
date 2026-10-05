@@ -25,13 +25,14 @@ def icon(code,x,y,label,dx=10,anchor='start'):
 # 2 sân pickleball
 for cx,cy in ((826,600),(856,600)):
     X,Y=P(cx,cy); o.append(f'<rect x="{X-5.5:.1f}" y="{Y-10:.1f}" width="11" height="20" rx="1.5" fill="#3f8fc4" stroke="#fff" stroke-width="1.2"/><line x1="{X-5.5:.1f}" y1="{Y:.1f}" x2="{X+5.5:.1f}" y2="{Y:.1f}" stroke="#fff" stroke-width=".8"/>')
-icon('PB',800,600,'Sân pickleball',-10,'end')
+X,Y=P(874,578); o.append(f'<g class="ic"><circle cx="{X:.0f}" cy="{Y:.0f}" r="8"/><text x="{X:.0f}" y="{Y+2.8:.1f}">PB</text></g>')
+lab(841,648,'Sân pickleball')
 # clubhouse
 # khách sạn 5*
 X,Y=P(1092,895); o.append(f'<rect x="{X-7:.1f}" y="{Y-11:.1f}" width="14" height="22" rx="2" fill="#e9eef5" stroke="#9aa9bd"/>')
 lab(1065,903,'Clubhouse','lm','end')
 icon('KS',1790,1150,'Khách sạn 6 sao Đảo Dừa',-12,'end')
-for n,(x,y),c in [('P1',(1010,585),''),('P2',(850,655),''),('P3',(1172,722),'lake'),('P4',(1330,815),'flo'),('P5',(1790,660),'')]:
+for n,(x,y),c in [('P1',(1010,585),''),('P2',(862,712),''),('P3',(1172,722),'lake'),('P4',(1330,815),'flo'),('P5',(1790,660),'')]:
     X,Y=P(x,y); o.append(f'<g class="pk {c}"><circle cx="{X:.0f}" cy="{Y:.0f}" r="12"/><text x="{X:.0f}" y="{Y+4:.0f}">{n}</text></g>')
 for n,(x,y) in [('01',(430,900)),('02',(640,455)),('03',(880,485)),('04',(1885,620)),('05',(1240,670)),('06',(1092,895)),('07',(1130,905)),('08',(905,785))]:
     X,Y=P(x,y); o.append(f'<g class="nt"><circle cx="{X:.0f}" cy="{Y:.0f}" r="9"/><text x="{X:.0f}" y="{Y+3.4:.1f}">{n}</text></g>')
