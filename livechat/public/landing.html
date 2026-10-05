@@ -51,8 +51,8 @@
 
   /* Hero */
   .hero{position:relative;color:#fff;background:var(--navy);overflow:hidden;padding:70px 0 90px}
-  .hero::before{content:"";position:absolute;inset:0;background:var(--hero-img,none) center/cover no-repeat;opacity:1}
-  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(7,29,64,.94) 0%,rgba(11,42,91,.8) 48%,rgba(11,42,91,.25) 100%)}
+  .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 60%;background-repeat:no-repeat}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(7,29,64,.93) 0%,rgba(11,42,91,.7) 46%,rgba(11,42,91,.12) 100%)}
   .hero .palms{position:absolute;right:-40px;bottom:-10px;width:520px;opacity:.12;z-index:1}
   .hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:center}
   .hero h1{font-size:clamp(32px,4.6vw,54px);font-weight:800;margin:14px 0 18px;letter-spacing:-.5px}
@@ -186,7 +186,7 @@
   .modal .x{position:absolute;top:10px;right:14px;background:none;border:0;font-size:28px;color:var(--muted);cursor:pointer;line-height:1}
   @keyframes pop{from{transform:scale(.94);opacity:0}to{transform:none;opacity:1}}
 
-  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+  .js .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
   .reveal.in{opacity:1;transform:none}
 
 
@@ -230,6 +230,7 @@
   .tl time{font-weight:800;color:var(--navy);font-size:18px;padding-top:12px;text-align:right;padding-right:8px}
   .tl>div{background:#fff;border-radius:14px;padding:16px 20px;border:1px solid var(--line)}
   .tl h3{font-size:18px;margin-bottom:4px}
+  .tl-img{width:100%;height:170px;object-fit:cover;border-radius:10px;margin-bottom:12px;display:block}
   .tl p{margin:0;color:var(--muted);font-size:15px}
   .tl.hl::before{background:var(--orange);border-color:var(--orange)}
   .tl.hl time{color:var(--orange)}
@@ -357,6 +358,17 @@
   .loves.l-live p.rent,.loves.l-rent p.live{display:none}
   .love-cta{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:26px;background:var(--navy);color:#fff;border-radius:14px;padding:18px 22px}
   .love-cta p{margin:0;font-size:14.5px;opacity:.9}
+  /* Dải ảnh cảm xúc */
+  .gallery{background:#fff;padding-top:90px}
+  .gal{display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:280px 280px;gap:14px;margin-top:28px}
+  .gal figure{margin:0;position:relative;border-radius:16px;overflow:hidden;background:var(--navy)}
+  .gal img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s ease}
+  .gal figure:hover img{transform:scale(1.06)}
+  .gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 18px 16px;color:#fff;font-size:14px;line-height:1.45;background:linear-gradient(180deg,rgba(6,26,61,0),rgba(6,26,61,.88))}
+  .gal figcaption b{display:block;font-size:18px;margin-bottom:2px}
+  .gal .g1{grid-row:1/3}
+  .gal .g4{grid-column:2/3}
+  .gal .g5{grid-column:3/4}
   /* Chính sách theo phân khu */
   .ptabs{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 20px}
   .ptabs button{font:inherit;font-weight:700;font-size:14px;border:1.5px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:999px;padding:10px 16px;cursor:pointer}
@@ -408,9 +420,11 @@
   .opts li b{display:block;color:var(--navy);font-size:14px}
 
   @media(max-width:960px){
-    .hero::after{background:linear-gradient(180deg,rgba(7,29,64,.9),rgba(11,42,91,.82))}
+    .hero::after{background:linear-gradient(180deg,rgba(7,29,64,.88),rgba(11,42,91,.78) 60%,rgba(11,42,91,.9))}
     .hero .wrap,.loc .grid,.arch .grid,.final .grid{grid-template-columns:1fr}
     .cards3,.ways,.prods,.calc,.radius,.commit,.prods.two,.loves,.gmap{grid-template-columns:1fr}
+    .gal{grid-template-columns:1fr 1fr;grid-template-rows:auto}.gal figure{height:220px}.gal .g1{grid-column:1/3;grid-row:auto;height:300px}.gal .g4,.gal .g5{grid-column:auto}
+    .gal figcaption{font-size:12.5px;padding:30px 12px 12px}.gal figcaption b{font-size:15px}
     .gmap-side{border-left:0;border-top:4px solid var(--orange)}.gmap-frame,.gmap-frame iframe{min-height:300px}
     .loves>.lv:last-child{grid-column:auto}
     .lv-wide{display:flex}.lv-wide .lv-img{min-height:200px}
@@ -441,6 +455,7 @@
     .btn{width:100%}
   }
 </style>
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
@@ -460,6 +475,7 @@
 
 <!-- HERO -->
 <section class="hero" data-chat-topic="off">
+  <div class="hero-bg" style="background-image:url('img/forestside.jpg')"></div>
   <div class="wrap">
     <div>
       <span class="eyebrow">Casamia Balanca · Hội An · Chính sách mới từ 09/2026</span>
@@ -526,6 +542,23 @@
   </div>
 </div>
 
+<!-- ẢNH: CẢM XÚC -->
+<section class="gallery" data-chat-topic="thiết kế sản phẩm">
+  <div class="wrap">
+    <span class="eyebrow">Hãy hình dung</span>
+    <h2>Không chỉ là một căn nhà, <em>là nơi cả nhà muốn quay về</em></h2>
+    <div class="gal">
+      <figure class="g1 reveal"><img src="img/terrace.jpg" alt="Sân hiên ven sông lúc hoàng hôn" loading="lazy"><figcaption><b>Hoàng hôn trên sân hiên riêng</b>Gió sông, mặt nước vàng óng và một tách trà. Khoảnh khắc mà phố thị không có.</figcaption></figure>
+      <figure class="g2 reveal"><img src="img/forestside.jpg" alt="Biệt thự Forestside ven sông" loading="lazy"><figcaption><b>Biệt thự ven sông giữa rừng dừa</b>Bước ra là mặt nước, ngẩng lên là hàng dừa.</figcaption></figure>
+      <figure class="g3 reveal"><img src="img/waterway.jpg" alt="Dãy biệt thự soi bóng mặt nước" loading="lazy"><figcaption><b>Cả dãy biệt thự soi bóng mặt nước</b>Buổi tối lên đèn, đẹp như một khu nghỉ dưỡng.</figcaption></figure>
+      <figure class="g4 reveal"><img src="img/parkhome.jpg" alt="Phố vườn Parkhome ngập hoa giấy" loading="lazy"><figcaption><b>Phố vườn ngập hoa giấy</b>Trẻ con chạy chơi, người lớn dạo bộ dưới tán cây.</figcaption></figure>
+      <figure class="g5 reveal"><img src="img/interior.jpg" alt="Phòng khách mở ra khu vườn" loading="lazy"><figcaption><b>Phòng khách mở ra khu vườn</b>Kéo cửa kính là thiên nhiên tràn vào nhà.</figcaption></figure>
+    </div>
+    <p class="src" style="color:var(--muted)">Hình ảnh phối cảnh minh hoạ.</p>
+    <div style="text-align:center;margin-top:18px"><button class="btn btn-orange js-open" data-title="Nhận trọn bộ ảnh & video thực tế" data-need="Ảnh & video dự án">📸 Nhận trọn bộ ảnh &amp; video thực tế →</button></div>
+  </div>
+</section>
+
 <!-- BẠN CÓ BIẾT -->
 <section class="know" id="bi-mat">
   <div class="wrap">
@@ -564,8 +597,8 @@
     <div class="timeline">
       <div class="tl reveal"><time>06:00</time><div><h3>Sương sớm trên rừng dừa</h3><p>Mở cửa là 7 mẫu dừa nước xanh mướt, nơi thuộc khu dự trữ sinh quyển thế giới. Cà phê trên ban công, nghe tiếng thuyền thúng gõ nước.</p></div></div>
       <div class="tl reveal"><time>09:00</time><div><h3>Phố cổ chỉ ~10 phút</h3><p>Lang thang những con phố vàng rêu đã 400 năm tuổi, ăn tô cao lầu đúng vị, rồi về nhà trước giờ nắng gắt.</p></div></div>
-      <div class="tl reveal"><time>16:00</time><div><h3>Biển An Bàng ~5 km</h3><p>Lũ trẻ chạy trên cát, người lớn ngắm hoàng hôn. Đây là bãi biển từng được bình chọn trong top đẹp của châu Á.</p></div></div>
-      <div class="tl reveal"><time>20:00</time><div><h3>Bữa tối trong căn nhà của mình</h3><p>Ba thế hệ quây quần trong khu vườn riêng: không phòng khách sạn chật chội, không giờ trả phòng.</p></div></div>
+      <div class="tl reveal"><time>17:30</time><div><img class="tl-img" src="img/terrace.jpg" alt="" loading="lazy"><h3>Hoàng hôn trên sân hiên</h3><p>Chiều đưa cả nhà ra biển An Bàng (~5 km), về kịp ngắm mặt trời lặn trên sông từ sân hiên nhà mình.</p></div></div>
+      <div class="tl reveal"><time>20:00</time><div><img class="tl-img" src="img/waterway.jpg" alt="" loading="lazy"><h3>Bữa tối trong căn nhà của mình</h3><p>Ba thế hệ quây quần trong khu vườn riêng: không phòng khách sạn chật chội, không giờ trả phòng.</p></div></div>
       <div class="tl hl reveal"><time>Còn lại</time><div><h3>Khi gia đình về thành phố…</h3><p>Chủ đầu tư thuê lại hoặc vận hành cho thuê, đón khách trong số <b>1,87 triệu lượt khách lưu trú</b> mỗi năm. <b>Tiền thuê tới 60 triệu/tháng vẫn về tài khoản của anh/chị.</b></p></div></div>
     </div>
     <div style="text-align:center;margin-top:30px"><button class="btn btn-orange js-open" data-title="Tôi muốn sở hữu một căn như thế" data-need="Mua để nghỉ dưỡng gia đình">Tôi muốn một ngày như thế →</button></div>
@@ -678,7 +711,7 @@
     </div>
     <div class="loves js-loves">
       <article class="lv lv-wide reveal">
-        <div class="lv-img" data-img="architecture"><span>Theo phối cảnh</span></div>
+        <div class="lv-img" data-img="architecture" style="background-image:url('img/terrace.jpg')"><span>Theo phối cảnh</span></div>
         <h3>🛥️ Biệt thự ven sông, sân hiên ngắm hoàng hôn</h3>
         <p class="live">Bữa tối ngoài sân hiên, ngắm hoàng hôn trên mặt nước. Không gian riêng tư cho ba thế hệ.</p>
         <p class="rent">Một tấm ảnh hoàng hôn từ sân hiên ven sông là <b>"đặc sản" giúp khách chốt đặt phòng</b> nhanh hơn, dễ đặt giá thuê cao hơn.</p>
@@ -766,7 +799,7 @@
     <h2>2 phân khu, <em>2 cách nhận dòng tiền</em></h2>
     <p class="lead-text">Diện tích, layout từng tầng và giá từng căn cập nhật theo bảng hàng. Bấm để mở khoá.</p>
     <div class="prods two">
-      <div class="prod reveal"><div class="ph" data-img="villa1"><span>Biệt thự rừng dừa</span><b class="ph-n">60tr/tháng</b></div><div class="bd">
+      <div class="prod reveal"><div class="ph" data-img="villa1" style="background-image:url('img/forestside.jpg')"><span>Biệt thự rừng dừa</span><b class="ph-n">60tr/tháng</b></div><div class="bd">
         <h3>Forestside Villa</h3><p>Biệt thự ven sông, giữa rừng dừa. Phân khu nhận mức thuê cao nhất dự án.</p>
         <ul class="opts">
           <li><b>Bàn giao thô 2026</b>chiết khấu <strong class="o">4 tỷ</strong> · CĐT thuê lại <strong class="o">60tr/tháng × 3 năm</strong></li>
@@ -775,7 +808,7 @@
         <ul class="specs"><li>Diện tích đất<b class="blur">███ m²</b></li><li>Số tầng / phòng ngủ<b class="blur">█ tầng · █ PN</b></li><li>Giá từ<b class="blur">██,█ tỷ</b></li></ul>
         <div class="fp js-open" data-title="Xem layout Forestside Villa" data-need="Layout Forestside Villa"><svg viewBox="0 0 120 70"><rect x="4" y="4" width="112" height="62"/><path d="M60 4v40M4 36h56M60 44h56M86 44v22M30 36v30"/></svg><span>🔒 Xem layout từng tầng</span></div>
         <button class="btn btn-orange js-open" data-title="Nhận giá & layout Forestside Villa" data-need="Forestside Villa – biệt thự rừng dừa">Mở khoá giá &amp; layout</button></div></div>
-      <div class="prod reveal"><div class="ph" data-img="villa2"><span>Biệt thự sân vườn</span><b class="ph-n">50tr/tháng</b></div><div class="bd">
+      <div class="prod reveal"><div class="ph" data-img="villa2" style="background-image:url('img/parkhome.jpg')"><span>Biệt thự sân vườn</span><b class="ph-n">50tr/tháng</b></div><div class="bd">
         <h3>Parkhome</h3><p>Biệt thự sân vườn ngập cây xanh, hợp gia đình nghỉ dưỡng và cho thuê dài hạn.</p>
         <ul class="opts">
           <li><b>Bàn giao thô 2026</b>chiết khấu <strong class="o">3,5 tỷ</strong>* · CĐT thuê lại <strong class="o">50tr/tháng × 3 năm</strong></li>
@@ -820,8 +853,7 @@
       <p class="quote">“Không chỉ là một căn nhà – là nơi gia đình muốn quay về mỗi kỳ nghỉ.”</p>
       <button class="btn btn-navy js-open" data-title="Nhận bộ ảnh phối cảnh & video dự án" data-need="Mua để nghỉ dưỡng gia đình">Xem bộ ảnh &amp; video dự án →</button>
     </div>
-    <div class="visual reveal" data-img="architecture">
-      <svg viewBox="0 0 400 300" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><path d="M60 200l80-60 80 60M90 200v60h100v-60M220 210l70-50 70 50M240 210v50h100v-50"/></svg>
+    <div class="visual reveal" data-img="architecture" style="background-image:url('img/terrace.jpg')">
       <div class="tag">🏡 Thiết kế nhiệt đới, xanh, mở</div>
     </div>
   </div>
@@ -940,15 +972,7 @@
 
 <script>
 // ===== Ảnh dự án: điền đường dẫn ảnh thật (ví dụ 'img/hero.jpg'). Để trống = nền navy. =====
-const IMAGES = {
-  hero: 'img/waterway.jpg',
-  location: '',
-  waterway: 'img/waterway.jpg',
-  villa1: 'img/forestside.jpg',
-  villa2: 'img/parkhome.jpg',
-  shophouse: '',
-  architecture: 'img/terrace.jpg',
-};
+const IMAGES = {}; // Ảnh đã gắn thẳng trong HTML (style="background-image:url('img/…')"). Muốn đổi ảnh: thay file trong public/img/.
 // Giá hiển thị ở đầu trang, ví dụ '8,7 tỷ'. Để trống = ẩn (chỉ điền giá chính thức đã xác nhận).
 const PRICE_FROM = '';
 // Chính sách bán hàng theo CSBH của CĐT (áp dụng từ 09/09/2026). Sửa tại đây khi có chính sách mới.

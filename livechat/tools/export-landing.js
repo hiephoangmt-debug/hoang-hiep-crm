@@ -16,11 +16,15 @@ const api = (gi >= 0 ? '' : argv[0] || '').replace(/\/$/, '');
 const pub = path.join(__dirname, '..', 'public');
 let html = fs.readFileSync(path.join(pub, 'landing.html'), 'utf8');
 
-// Nhúng ảnh dạng data URI
-html = html.replace(/'img\/([\w.-]+\.(?:jpe?g|png|webp))'/g, (m, f) => {
+// Ảnh: mặc định nhúng dạng data URI (1 file chạy mọi nơi).
+// --img-base <URL>: dùng link ảnh trên CDN (khuyên dùng cho LadiPage, trang nhẹ, LadiPage giữ được ảnh).
+const ib = process.argv.indexOf('--img-base');
+const imgBase = ib >= 0 ? String(process.argv[ib + 1] || '').replace(/\/?$/, '/') : '';
+html = html.replace(/(['"])img\/([\w.-]+\.(?:jpe?g|png|webp))\1/g, (m, q, f) => {
   if (!fs.existsSync(path.join(pub, 'img', f))) return m;
+  if (imgBase) return q + imgBase + f + q;
   const ext = path.extname(f).slice(1).replace('jpg', 'jpeg');
-  return `'data:image/${ext};base64,${fs.readFileSync(path.join(pub, 'img', f)).toString('base64')}'`;
+  return `${q}data:image/${ext};base64,${fs.readFileSync(path.join(pub, 'img', f)).toString('base64')}${q}`;
 });
 
 const { hotline, zalo } = config.project;
