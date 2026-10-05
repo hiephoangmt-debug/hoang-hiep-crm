@@ -74,7 +74,7 @@ window.sftAsk = q => {
 };
 """
 sub("\n// Mở / đóng khung chat\n", reply_fn + "\n// Mở / đóng khung chat\n")
-sub("""  'ban-giao': 'bangiao', 'hoi-dap': 'hoidap',""","""  'ban-giao': 'bangiao', 'hoi-dap': 'hoidap', 'hd-tong-quan': 'tongquan', 'hd-vi-tri': 'vitri', 'hd-phap-ly': 'phaply',
+sub("""  'ban-giao': 'bangiao', 'hoi-dap': 'hoidap',""","""  'ban-giao': 'bangiao', 'hoi-dap': 'hoidap', 'hd-tong-quan': 'tongquan', 'hd-vi-tri': 'vitri', 'hd-phap-ly': 'phaply', 'hd-bao-lanh': 'phaply',
   'hd-can-ho': 'matbang', 'hd-gia': 'gia', 'hd-thanh-toan': 'vonit', 'hd-ban-giao': 'bangiao', 'hd-thu-tuc': 'gia',""")
 open('chat-common.html','w').write(s)
 print('ok', len(js))

@@ -4,6 +4,7 @@ DESC = {
  'tong-quan':'Chủ đầu tư, quy mô, tiến độ xây dựng',
  'vi-tri':'Địa chỉ, khoảng cách tới biển, sân bay, tiện ích quanh dự án',
  'phap-ly':'Đủ điều kiện bán, sổ đỏ, bảo lãnh, hợp đồng mẫu – có số văn bản',
+ 'bao-lanh':'Ngân hàng nào bảo lãnh, bảo lãnh những gì, khi nào nhận thư bảo lãnh',
  'can-ho':'Loại căn, diện tích, sân vườn, view, tiêu chuẩn bàn giao',
  'gia':'Giá niêm yết, chiết khấu 19%, cách tính giá sau chiết khấu',
  'thanh-toan':'Tiến độ thanh toán, vay 70%, hỗ trợ lãi suất 24 tháng',
@@ -40,7 +41,7 @@ for c,nm,ic in CATS:
 '''
 doc_cards=''.join(f'''
       <article class="doc" id="vb-{k}"><span class="doc-ic" aria-hidden="true">📄</span><div><h3>{html.escape(n)}</h3><p class="meta">{html.escape(org)}{(" · "+d) if d else ""}</p><p>{html.escape(x)}</p></div></article>''' for k,(n,org,d,x) in DOCS.items())
-hot=['Có sổ đỏ không?','Vay được bao nhiêu?','Chiết khấu bao nhiêu?','Khi nào nhận nhà?','Cách biển bao xa?']
+hot=['Có sổ đỏ không?','Bảo lãnh ngân hàng là gì?','Vay được bao nhiêu?','Chiết khấu bao nhiêu?','Khi nào nhận nhà?']
 main=f'''<main id="main" class="ph hd">
 <section class="hd-hero">
   <div class="container">
