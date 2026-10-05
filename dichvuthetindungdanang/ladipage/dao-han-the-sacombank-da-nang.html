@@ -311,7 +311,7 @@ footer a:hover{color:#fff}
 .prose figure{margin:22px 0;background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:18px}
 .prose figcaption{font-size:.85rem;color:var(--muted);text-align:center;margin-top:8px}
 .tbl{width:100%;overflow-x:auto;margin:16px 0 20px;border-radius:14px;border:1px solid var(--line)}
-.tbl table{width:100%;border-collapse:collapse;min-width:460px;font-size:.96rem}
+.tbl table{width:100%;border-collapse:collapse;font-size:.96rem}
 .tbl th{background:var(--navy);color:#fff;text-align:left;padding:12px 14px;font-weight:700}
 .tbl td{padding:12px 14px;border-top:1px solid var(--line)}
 .tbl tr:nth-child(even) td{background:#f8fafd}
@@ -353,6 +353,12 @@ a.bank{transition:.2s;text-decoration:none!important}a.bank:hover{border-color:v
 .facts dt{font-weight:700;color:var(--navy);background:var(--bg)}
 .facts dt:first-of-type,.facts dd:first-of-type{border-top:0}
 @media(max-width:560px){.facts{grid-template-columns:1fr}.facts dd{border-top:0;padding-top:0;background:var(--bg)}}
+/* Bảng vừa màn hình điện thoại (không cần cuộn ngang – LadiPage bỏ overflow) */
+@media(max-width:560px){
+  .tbl table{table-layout:fixed;font-size:.84rem}
+  .tbl th,.tbl td{padding:10px 8px;word-wrap:break-word;overflow-wrap:anywhere;vertical-align:top}
+  .tbl th:first-child,.tbl td:first-child{width:38%}
+}
 
 .calc .tbl{background:#fff;color:#0f1b33}
 .reveal{opacity:1;transform:none}
