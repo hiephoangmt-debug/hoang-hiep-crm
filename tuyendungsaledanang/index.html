@@ -47,7 +47,7 @@ img{max-width:100%}
 .top .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px}
 .brand{font-weight:900;font-size:18px;color:var(--navy);line-height:1.1;letter-spacing:.3px}
 .brand span{color:var(--orange)}
-@media(max-width:420px){.brand{font-size:15px}.call{font-size:14px;padding:8px 12px}}
+@media(max-width:420px){.hide-sm{display:none}.brand{font-size:15px}.call{font-size:14px;padding:8px 12px}}
 .brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:1.8px;font-weight:700;margin-top:2px}
 .call{font-weight:800;text-decoration:none;background:var(--orange);color:#fff;border-radius:999px;padding:9px 16px;font-size:15px;white-space:nowrap}
 
@@ -60,7 +60,7 @@ img{max-width:100%}
 .hero h1{font-size:32px;line-height:1.12;font-weight:900;margin-top:18px;letter-spacing:-.3px}
 .hero h1 em{font-style:normal;color:var(--orange)}
 .nw{white-space:nowrap}
-@media(min-width:800px){.hero h1{font-size:48px}}
+@media(min-width:800px){.hero h1{font-size:46px}}
 .hero .sub{font-size:18px;color:#D6DFEF;margin-top:18px;max-width:610px}
 .hero .sub b{color:#fff}
 .ticks{list-style:none;padding:0;margin:22px 0 0}
@@ -248,7 +248,7 @@ img{max-width:100%}
 <header class="top">
   <div class="wrap">
     <div class="brand">TUYỂN SALE <span>ĐÀ NẴNG</span></div>
-    <a class="call" href="tel:0904567009">📞 Hiệp · 0904 567 009</a>
+    <a class="call" href="tel:0904567009">📞 <span class="hide-sm">Hiệp · </span>0904 567 009</a>
   </div>
 </header>
 
@@ -256,7 +256,7 @@ img{max-width:100%}
   <div class="wrap">
     <div>
       <span class="badge"><i class="dot"></i> Đang tuyển 5 vị trí · Sale BĐS Đà Nẵng · 10/2026</span>
-      <h1>Lương <em class="nw">7–10 triệu</em> chỉ là sàn.<br>Trần của bạn là bao nhiêu?</h1>
+      <h1>Lương <em class="nw">7–10 triệu</em><br>chỉ là mức sàn.<br>Trần của bạn bao nhiêu?</h1>
       <p class="sub">Lương tháng của <b>Pro Sales</b> là sàn. Phía trên không ai đặt trần: <b>hoa hồng</b>, <b>thưởng marketing đến 10 triệu/giao dịch</b>, thưởng nóng.</p>
       <div class="kpis">
         <div><b>7–10TR</b><span>Lương Pro Sales</span></div>
