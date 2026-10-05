@@ -189,6 +189,8 @@
   .mbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;box-shadow:0 -6px 20px rgba(0,0,0,.12);padding:8px;gap:8px}
   .mbar a,.mbar button{flex:1;padding:12px 6px;border-radius:10px;font:inherit;font-weight:700;font-size:14px;text-align:center;text-decoration:none;border:0;cursor:pointer}
   .mbar .c1{background:var(--soft);color:var(--navy)}
+  .mbar .c4{background:#fff;color:var(--navy);border:1.5px solid var(--navy)!important}
+  .mbar a,.mbar button{min-width:0;white-space:nowrap}
   .mbar .c2{background:var(--navy);color:#fff}
   .mbar .c3{background:var(--orange);color:#fff;flex:1.4}
 
@@ -535,7 +537,7 @@
     .gal figcaption{font-size:12.5px;padding:30px 12px 12px}.gal figcaption b{font-size:15px}
     .gmap-side{border-left:0;border-top:4px solid var(--orange)}.gmap-frame,.gmap-frame iframe{min-height:300px}
     .loves>.lv:last-child{grid-column:auto}
-    .lv-wide{display:flex}.lv-wide .lv-img{min-height:200px}
+    .lv-wide{display:flex;align-items:stretch}.lv-wide .lv-img{min-height:220px;height:220px;width:100%}
     .cm>b{font-size:46px}.pbody .pol b{font-size:32px}
     .pol-grid{grid-template-columns:1fr 1fr}
     .hot-spot span{font-size:11px;padding:4px 7px}
@@ -1064,6 +1066,7 @@
 <div class="mbar">
   <a class="c1 js-tel" href="#">Gọi</a>
   <a class="c2 js-zalo" href="#" target="_blank" rel="noopener">Zalo</a>
+  <button class="c4 js-chat" type="button">Chat</button>
   <button class="c3 js-open" data-title="Nhận bảng giá & bảng tính dòng tiền" data-need="">Nhận bảng giá</button>
 </div>
 
@@ -1146,7 +1149,7 @@ const API_BASE = '';
     $$('.js-zalo').forEach(el => (el.href = 'https://zalo.me/' + P.zalo.replace(/\D/g, '')));
   }
   applyContact(FALLBACK_CONTACT);
-  if (!PREVIEW) fetch(API_BASE + '/api/config').then(r => r.json()).then(c => applyContact(c.project)).catch(() => {});
+  if (!PREVIEW && !GAS_URL) fetch(API_BASE + '/api/config').then(r => r.json()).then(c => applyContact(c.project)).catch(() => {});
 
   // Đo lượt bấm Gọi / Zalo cho quảng cáo
   document.addEventListener('click', e => {
@@ -1191,7 +1194,10 @@ const API_BASE = '';
   $('.x', modal).onclick = closeModal;
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-  $$('.js-chat').forEach(b => b.addEventListener('click', () => window.CasamiaChat && window.CasamiaChat.open()));
+  $$('.js-chat').forEach(b => b.addEventListener('click', () => {
+    if (window.CasamiaChat && window.CasamiaChat.open) return window.CasamiaChat.open();
+    window.open('https://zalo.me/' + String(P.zalo || '').replace(/\D/g, ''), '_blank'); // khung chat chưa tải được → chuyển Zalo
+  }));
 
   // Popup giữ chân: rê chuột ra khỏi trang (máy tính) hoặc đọc 70% trang (điện thoại) – chỉ 1 lần
   let nudged = false;
