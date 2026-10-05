@@ -67,7 +67,7 @@ var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan', 'tu_ngay', 'b_tt_ngay', 'a_ck_ng
 // Kiểu tiền với C.Trâm. "Ứng trước"/"Hoàn tiền" làm giảm nợ; "Mình trả lại"/"Nợ cũ" làm tăng nợ;
 // "Điều chỉnh số dư" nhập được số âm (âm = tăng nợ).
 // Đổi mỗi lần cập nhật code – hiện cạnh ngày trên đầu app để biết đã triển khai bản mới chưa.
-var APP_VERSION = 'v04.11';
+var APP_VERSION = 'v04.11b';
 
 var PAYMENT_TYPES = ['Ứng trước', 'Hoàn tiền', 'Mình trả lại', 'Nợ cũ', 'Điều chỉnh số dư'];
 
@@ -748,7 +748,7 @@ function parseNoteLine_(line, ngay) {
       if (np) { nPeople = Number(np[1] || np[2]) || 1; rest2 = (rest2.slice(0, np.index) + rest2.slice(np.index + np[0].length)).trim(); }
       var bits2 = rest2.split(/\s+-\s+/), ten2 = bits2.shift().trim(), extra2 = bits2.join(' - ');
       var laiT = noteThousand_(laiRaw);
-      return { kind: 'trip', ngay: ngay, loai: loaiT, ten: ten2 || '(khách lẻ)', so_nguoi: nPeople, phi: Math.round(laiT / nPeople), lai: Math.round(laiT / nPeople) * nPeople,
+      return { kind: 'trip', ngay: ngay, loai: loaiT, ten: ten2 || '(khách lẻ)', so_nguoi: nPeople, phi: Math.round(laiT / nPeople), lai: laiT,
         ghi_chu: (extra2 ? extra2 + ' · ' : '') + 'Dán sổ: ' + line };
     }
     var loaiK = 'Khác', dl = desc.toLowerCase();
@@ -908,7 +908,7 @@ function apiPasteNotes_(p) {
           saved.tx++;
         } else if (it.kind === 'trip') {
           apiSaveTrip_({ ngay: it.ngay, ten: it.ten, ngay_thu: it.ngay, ghi_chu: it.ghi_chu,
-            chi_tiet: [{ loai: it.loai, so_nguoi: it.so_nguoi, phi: it.phi }] });
+            chi_tiet: [{ loai: it.loai, so_nguoi: it.so_nguoi, lai: it.lai }] });
           saved.trip = (saved.trip || 0) + 1;
         } else if (it.kind === 'pay') {
           apiSavePayment_({ ngay: it.ngay, loai: it.loai, so_tien: it.so_tien, ghi_chu: it.ghi_chu });
@@ -1375,10 +1375,12 @@ function tripCalc_(x) {
   var items = x.chi_tiet;
   if (typeof items === 'string') { try { items = JSON.parse(items || '[]'); } catch (e) { items = []; } }
   items = (items || []).map(function (it) {
-    var n = Math.max(1, Math.round(parseNum_(it.so_nguoi) || 1)), phi = Math.round(parseNum_(it.phi)), gia = Math.round(parseNum_(it.gia));
-    return { loai: TRIP_TYPES.indexOf(it.loai) >= 0 ? it.loai : (String(it.loai || '').trim() || 'Khác'), so_nguoi: n, phi: phi, gia: gia,
-      mo_ta: String(it.mo_ta || '').trim(), lai: n * phi };
-  }).filter(function (it) { return it.phi || it.gia || it.mo_ta; });
+    // Nhập theo số lượng + tổng doanh thu của dịch vụ (lai); bản cũ nhập phí mỗi người (phi) thì lai = số lượng × phí
+    var n = Math.max(1, Math.round(parseNum_(it.so_nguoi) || 1)), gia = Math.round(parseNum_(it.gia));
+    var lai = it.lai !== undefined && it.lai !== '' && it.lai !== null ? Math.round(parseNum_(it.lai)) : n * Math.round(parseNum_(it.phi));
+    return { loai: TRIP_TYPES.indexOf(it.loai) >= 0 ? it.loai : (String(it.loai || '').trim() || 'Khác'), so_nguoi: n, phi: Math.round(lai / n), gia: gia,
+      mo_ta: String(it.mo_ta || '').trim(), lai: lai };
+  }).filter(function (it) { return it.lai || it.gia || it.mo_ta; });
   x.items = items;
   x.so_nguoi = items.reduce(function (a, it) { return a + it.so_nguoi; }, 0);
   x.doanh_thu = items.reduce(function (a, it) { return a + it.lai; }, 0);
@@ -1436,7 +1438,7 @@ function apiListTrips_(p) {
 function apiSaveTrip_(x) {
   var ngay = String(x.ngay || '');
   if (!/^\d{4}-\d{2}-\d{2}$/.test(ngay)) throw new Error('Ngày không hợp lệ.');
-  if (!String(x.ten || '').trim() && !String(x.sdt || '').trim()) throw new Error('Nhập tên hoặc SĐT khách.');
+  if (!String(x.ten || '').trim()) throw new Error('Nhập họ tên khách.');
   function okDate(v) { v = String(v || ''); return /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : ''; }
   var calc = tripCalc_({ chi_tiet: x.chi_tiet || x.items || [] });
   if (!calc.items.length) throw new Error('Thêm ít nhất 1 dịch vụ (vé máy bay, vé tàu, khách sạn…).');
@@ -1444,7 +1446,7 @@ function apiSaveTrip_(x) {
     var c = resolveCustomer_({ khach_id: x.khach_id, ten_khach: x.ten || x.sdt, sdt: x.sdt });
     var obj = {
       ngay: ngay, khach_id: c.id, ten: c.ten, sdt: c.sdt || normalizePhone_(x.sdt) || '',
-      chi_tiet: JSON.stringify(calc.items.map(function (it) { return { loai: it.loai, so_nguoi: it.so_nguoi, phi: it.phi, gia: it.gia, mo_ta: it.mo_ta }; })),
+      chi_tiet: JSON.stringify(calc.items.map(function (it) { return { loai: it.loai, so_nguoi: it.so_nguoi, lai: it.lai, gia: it.gia, mo_ta: it.mo_ta }; })),
       ngay_di: okDate(x.ngay_di), ngay_thu: x.huy ? '' : okDate(x.ngay_thu), huy: x.huy ? 'x' : '',
       ghi_chu: String(x.ghi_chu || '').trim(), cap_nhat: nowStr_()
     };

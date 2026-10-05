@@ -994,13 +994,13 @@ test('✈️ Vé & KS: one booking with flight + hotel, revenue = people × fee 
   const { call, fake } = fresh();
   fake.setToday('2026-10-05');
   const v = call('saveTrip', { ngay: '2026-10-05', ten: 'Chị Lan', sdt: '0905 123 456', ngay_di: '2026-10-20',
-    chi_tiet: [{ loai: 'Vé máy bay', so_nguoi: 3, phi: 50000, gia: 1500000, mo_ta: 'DAD-SGN' }] });
+    chi_tiet: [{ loai: 'Vé máy bay', so_nguoi: 3, lai: 150000, gia: 1500000, mo_ta: 'DAD-SGN' }] });
   assert.strictEqual(v.doanh_thu, 150000);
   assert.strictEqual(v.tong_tien, 4500000);
   assert.strictEqual(v.trang_thai, 'Chưa thu');
   assert.strictEqual(v.sdt, '0905123456');
   // thêm khách sạn sau, đã thu tiền
-  const items = v.items.concat([{ loai: 'Khách sạn', so_nguoi: 2, phi: 100000, mo_ta: '2 đêm' }]);
+  const items = v.items.concat([{ loai: 'Khách sạn', so_nguoi: 2, lai: 200000, mo_ta: '2 đêm' }]);
   const v2 = call('saveTrip', Object.assign({}, v, { chi_tiet: items, ngay_thu: '2026-10-05' }));
   assert.strictEqual(v2.doanh_thu, 350000);
   assert.strictEqual(v2.so_nguoi, 5);
@@ -1013,8 +1013,12 @@ test('✈️ Vé & KS: one booking with flight + hotel, revenue = people × fee 
   const d = call('dashboard');
   assert.strictEqual(d.money.thang_nay.dv_lai, 350000);
   assert.throws(() => call('saveTrip', { ngay: '2026-10-05', ten: 'X', chi_tiet: [] }), /ít nhất 1 dịch vụ/);
+  assert.throws(() => call('saveTrip', { ngay: '2026-10-05', ten: '', sdt: '0905000000', chi_tiet: [{ loai: 'Vé tàu', lai: 10000 }] }), /họ tên/);
+  // bản cũ lưu theo phí mỗi người vẫn đọc đúng
+  const old = call('saveTrip', { ngay: '2026-10-05', ten: 'Y', chi_tiet: [{ loai: 'Vé tàu', so_nguoi: 2, phi: 30000 }] });
+  assert.strictEqual(old.doanh_thu, 60000);
   call('deleteTrip', { id: v.id });
-  assert.strictEqual(call('listTrips', { mode: 'all' }).rows.length, 0);
+  assert.strictEqual(call('listTrips', { mode: 'all' }).rows.length, 1);
 });
 
 test('pasting earlier months: history before closing, December notes pasted in January, saving in rounds', () => {
