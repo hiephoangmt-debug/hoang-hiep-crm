@@ -2,8 +2,8 @@ S=.45
 def P(x,y): return x*S,y*S
 body=open('v3.txt').read(); vcc=open('vcc.txt').read()
 o=[]
-o.append('<rect x="0" y="0" width="920" height="720" fill="#f4f6f3"/>')
-o.append('<path d="M858 0 H920 V720 H880 C905 640 915 560 905 470 C895 380 880 300 868 210 C860 140 858 70 858 0Z" fill="#d6ebf5"/>')
+o.append('<rect x="0" y="0" width="920" height="828" fill="#f4f6f3"/>')
+o.append('<path d="M858 0 H920 V828 H870 C905 640 915 560 905 470 C895 380 880 300 868 210 C860 140 858 70 858 0Z" fill="#d6ebf5"/>')
 # đại lộ Võ Chí Công
 o.append(f'<path id="vcc" d="{vcc}" fill="none" stroke="#c9d1dc" stroke-width="37" stroke-linecap="butt" stroke-linejoin="round"/>')
 o.append(f'<path d="{vcc}" fill="none" stroke="#eef1f5" stroke-width="34" stroke-linejoin="round"/>')
@@ -27,7 +27,22 @@ for n,(x,y) in [('01',(430,900)),('02',(640,455)),('03',(880,485)),('04',(1885,6
     X,Y=P(x,y); o.append(f'<g class="nt"><circle cx="{X:.0f}" cy="{Y:.0f}" r="9"/><text x="{X:.0f}" y="{Y+3.4:.1f}">{n}</text></g>')
 o.append('<text transform="translate(892 250) rotate(80)" class="water">SÔNG CỔ CÒ</text>')
 o.append('<g transform="translate(840 70)"><circle r="18" fill="#fff" stroke="#c9d6ea"/><path d="M0 -14 L5 4 L0 0 L-5 4Z" fill="#0b2a5b"/><text y="-22" class="nb">B</text></g>')
-svg='<svg viewBox="0 0 920 720" aria-label="Sơ đồ phân khu Casamia Balanca, vẽ lại theo mặt bằng chủ đầu tư">\n'+'\n'.join(o)+'\n</svg>'
+AMEN=[('P1','Công viên Wellness','g'),('P2','Sport Park','g'),('P3','Grand Central Park · hồ vô cực','l'),('P4','Floral Park','f'),('P5','Nipa Park · rừng dừa','g'),
+ ('01','Cổng chào hoa giấy','n'),('02','Trung tâm thương mại','n'),('03','Trường mầm non quốc tế','n'),('04','Bungalow','n'),('05','Bể bơi vô cực','n'),('06','Khách sạn 5*','n'),('07','Sky bar','n'),('08','Trung tâm hội nghị','n')]
+bx,by,bw,bh=222,726,680,96
+L=[f'<g class="sp-legend"><rect x="{bx}" y="{by}" width="{bw}" height="{bh}" rx="10" fill="#fff" stroke="#dfe6ee"/>',
+   f'<text x="{bx+14}" y="{by+16}" class="lg-h">TIỆN ÍCH NỘI KHU</text>']
+cols=[AMEN[0:5],AMEN[5:9],AMEN[9:13]]
+for ci,col in enumerate(cols):
+    for ri,(n,t,k) in enumerate(col):
+        x=bx+14+ci*225; y=by+35+ri*13.4; cx=x+6
+        if k=='n': L.append(f'<g class="nt"><circle cx="{cx}" cy="{y-3:.1f}" r="6.4"/><text x="{cx}" y="{y-0.8:.1f}" style="font-size:7px">{n}</text></g>')
+        else:
+            cls={'g':'','l':'lake','f':'flo'}[k]
+            L.append(f'<g class="pk {cls}"><circle cx="{cx}" cy="{y-3:.1f}" r="6.4" style="stroke-width:1.5"/><text x="{cx}" y="{y-0.6:.1f}" style="font-size:7px">{n}</text></g>')
+        L.append(f'<text x="{x+17}" y="{y:.1f}" class="lg-t">{t}</text>')
+L.append('</g>'); o.append(''.join(L))
+svg='<svg viewBox="0 0 920 828" aria-label="Sơ đồ phân khu Casamia Balanca, vẽ lại theo mặt bằng chủ đầu tư">\n'+'\n'.join(o)+'\n</svg>'
 open('plan2.svg','w').write(svg)
 css='''<style>body{margin:0;background:#fff}svg{width:1000px;display:block}
 svg .pk circle{fill:#fff;stroke:#5fa35a;stroke-width:2.5}svg .pk.lake circle{stroke:#2aa3b5}svg .pk.flo circle{stroke:#e46aa0}
@@ -38,6 +53,6 @@ svg .dir{font:800 13px sans-serif;fill:#0b2a5b}
 svg .road{font:800 11px sans-serif;fill:#0b2a5b;letter-spacing:2px}
 svg .water{font:800 13px sans-serif;fill:#2c6e98;letter-spacing:2px}
 svg .nb{font:800 11px sans-serif;text-anchor:middle;fill:#0b2a5b}
-svg .lm{font:700 10.5px sans-serif;fill:#33433a;paint-order:stroke;stroke:#fff;stroke-width:3px}</style>'''
+svg .lg-h{font:800 10.5px sans-serif;fill:#0b2a5b;letter-spacing:1.5px}svg .lg-t{font:600 10.2px sans-serif;fill:#33433a}svg .lm{font:700 10.5px sans-serif;fill:#33433a;paint-order:stroke;stroke:#fff;stroke-width:3px}</style>'''
 open('p2.html','w').write('<!doctype html><meta charset="utf-8">'+css+svg)
 print(len(svg)//1024,'KB')
