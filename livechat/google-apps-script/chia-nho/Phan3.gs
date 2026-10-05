@@ -38,6 +38,7 @@ function handleTelegram_(u) {
     tg_('sendMessage', { chat_id: chatId, text: '✅ Đã kết nối chat Casamia Balanca qua Google. Thông báo khách mới sẽ gửi về đây.' });
     return;
   }
+  if (/^\/(ai|aikey)(@\w+)?(\s|$)/i.test(msg.text.trim()) && typeof aiCommand_ === 'function') { aiCommand_(chatId, msg); return; }
   const v = msg.reply_to_message ? mapGet_(chatId + ':' + msg.reply_to_message.message_id) : '';
   if (!v) {
     tg_('sendMessage', { chat_id: chatId, text: '↩️ Hãy bấm "Reply" vào tin thông báo của khách để trả lời đúng người.', reply_to_message_id: msg.message_id });

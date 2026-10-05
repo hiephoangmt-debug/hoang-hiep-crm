@@ -6,7 +6,7 @@ Chat thời gian thực giữa khách xem website dự án và tư vấn viên. 
 - **Trang tư vấn viên** (`/agent.html`): danh sách hội thoại theo thời gian thực, số tin chưa đọc, âm báo và thông báo trình duyệt, trạng thái (Mới / Đã liên hệ / Đã đóng), ghi chú khách hàng, nút gọi/Zalo, xuất lead ra CSV.
 - **Tự nhận số điện thoại** trong tin nhắn của khách và lưu vào thông tin lead.
 - **Thông báo Telegram**: báo khách mới / có SĐT, trả lời khách ngay trong Telegram.
-- **Chat AI thông minh** (tuỳ chọn, Claude): trả lời câu khách tự gõ theo kiến thức dự án (`ai/kien-thuc.md`) và cách nói 4 bước; bật bằng `ANTHROPIC_API_KEY`. Lỗi/chưa bật thì dùng kịch bản soạn sẵn. Xem Bước 7 trong `HUONG-DAN-GOOGLE.md`.
+- **Chat AI thông minh** (tuỳ chọn, Claude): trả lời câu khách tự gõ theo kiến thức dự án (`ai/kien-thuc.md`) và cách nói 4 bước; bật bằng `ANTHROPIC_API_KEY` (bản Google: nhắn riêng cho bot `/aikey sk-ant-...`; `/ai`, `/ai tat`, `/ai bat`). Lỗi/chưa bật thì dùng kịch bản soạn sẵn. Xem Bước 7 trong `HUONG-DAN-GOOGLE.md`.
 - **Webhook lead** (tuỳ chọn): đẩy lead mới sang Google Sheet / LadiPage / n8n...
 
 ## Kịch bản phản hồi 4 bước

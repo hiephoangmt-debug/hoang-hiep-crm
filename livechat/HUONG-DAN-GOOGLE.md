@@ -107,19 +107,26 @@ AI được dặn:
 2. Dán nội dung `google-apps-script/AI.gs` và `google-apps-script/KienThuc.gs` vào đúng file.
 3. Dán lại `Code.gs` (hoặc `chia-nho/Phan2.gs`) bản mới, vì đã thêm phần gọi AI.
 
-**3. Cất khoá vào nơi bí mật**
-
-Bấm ⚙️ **Cài đặt dự án** → kéo xuống **Thuộc tính tập lệnh** → **Thêm thuộc tính**:
-- Tên: `ANTHROPIC_API_KEY`
-- Giá trị: khoá `sk-ant-...`
-
-Sau đó bấm **Lưu**.
-
-⚠️ **Không dán khoá vào code, không gửi khoá qua chat hay GitHub.** Lộ khoá thì vào platform.claude.com → **Settings → API keys** xoá khoá đó và tạo khoá mới.
-
 **4. Triển khai lại**
 
 Vào **Triển khai → Quản lý các bản triển khai → ✏️ → Phiên bản: Phiên bản mới → Triển khai**. URL `/exec` giữ nguyên.
+
+**4b. Gửi khoá qua Telegram** (sau khi đã triển khai lại)
+
+Mở chat **riêng** với bot (không gửi trong nhóm) và gửi:
+```
+/aikey sk-ant-...
+```
+Bot kiểm tra khoá, lưu vào nơi bí mật của Apps Script, **tự xoá tin chứa khoá**, rồi báo *"✅ Đã lưu khoá …abcd, chat AI đã BẬT"*.
+
+Các lệnh khác (dùng được cả trong nhóm):
+- `/ai`: xem trạng thái và số câu AI đã trả lời hôm nay.
+- `/ai tat`: tắt AI, khung chat dùng kịch bản soạn sẵn.
+- `/ai bat`: bật lại.
+
+Cách khác, không qua Telegram: ⚙️ **Cài đặt dự án → Thuộc tính tập lệnh → Thêm thuộc tính** `ANTHROPIC_API_KEY` = khoá.
+
+⚠️ Không dán khoá vào code hay gửi lên GitHub. Lộ khoá thì vào platform.claude.com → **Settings → API keys** xoá khoá đó và tạo khoá mới.
 
 **5. Xuất lại landing**
 
