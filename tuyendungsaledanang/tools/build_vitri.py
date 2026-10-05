@@ -5,7 +5,7 @@ main = open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()
 IMG = 'https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/tuyen-dung-sale-da-nang/tuyendungsaledanang/img/'
 SITE = 'https://www.tuyendungsaledanang.com'
 URL = {'nv': SITE + '/tuyen-nhan-vien-kinh-doanh-bds-da-nang', 'cv': SITE + '/tuyen-chuyen-vien-kinh-doanh-bds-da-nang',
-       'pro': SITE + '/tuyen-chuyen-gia-kinh-doanh-pro-sales-da-nang', 'tn': SITE + '/tuyen-truong-nhom-truong-phong-kinh-doanh-bds-da-nang'}
+       'pro': SITE + '/tuyen-chuyen-gia-kinh-doanh-pro-sales-da-nang', 'tn': SITE + '/tuyen-truong-nhom-truong-phong-kinh-doanh-bds-da-nang', 'sv': SITE + '/tuyen-sale-moi-ra-truong'}
 
 head = main[:main.index('</head>')]
 header = main[main.index('<header class="top">'):main.index('</header>') + 9]
@@ -30,7 +30,7 @@ def opts(items):
     return '<option value="" disabled selected>-- Chọn --</option>' + ''.join(f'<option>{o}</option>' for o in items)
 
 def chips(cur):
-    lst = [('nv', 'Nhân viên KD'), ('cv', 'Chuyên viên KD'), ('pro', 'Pro Sales'), ('tn', 'Trưởng nhóm'), ('tn', 'Trưởng phòng')]
+    lst = ([('sv', 'Mới ra trường')] if cur == 'sv' else []) + [('nv', 'Nhân viên KD'), ('cv', 'Chuyên viên KD'), ('pro', 'Pro Sales'), ('tn', 'Trưởng nhóm'), ('tn', 'Trưởng phòng')]
     hot = ' class="hot"'
     return '\n'.join('        <a%s href="%s">%s</a>' % (hot if k == cur else '', URL[k], t) for k, t in lst)
 
@@ -150,7 +150,7 @@ def page(p):
     final = sections['ung-tuyen']
     if p.get('position'):
         final = final.replace('      <button class="btn full" type="submit">Gửi hồ sơ ứng tuyển →</button>', hidden + '      <button class="btn full" type="submit">Gửi hồ sơ ứng tuyển →</button>')
-    order = [hero, sections['su-that'] if p.get('su_that') else '', roles, policy,
+    order = [hero, sections['su-that'] if p.get('su_that') else '', roles, p.get('extra', ''), policy,
              sections['moi-ra-truong'] if p.get('grad') else '', sections['du-an'], journey,
              sections['timeline'] if p.get('timeline') else '', sections['team'], sections['leader'], final, faq]
     body = '<body>\n\n' + header + '\n\n' + '\n\n'.join(x for x in order if x) + '\n\n' + footer + '\n\n' + sticky
@@ -239,6 +239,48 @@ PAGES = {
   faq=[('Chưa từng quản lý có ứng tuyển Trưởng nhóm được không?', 'Có thể, nếu bạn có kết quả Sale tốt và muốn dẫn đội. Chúng tôi trao đổi 1:1 để tìm lộ trình phù hợp.'), ('Đội của tôi lấy khách từ đâu?', 'Marketing đầu tổng mạnh, phân bổ lead cho toàn đội, kèm ngân sách marketing hỗ trợ đến 100%.'), ('Thu nhập của quản lý thế nào?', 'Chế độ cho cấp quản lý được trao đổi trực tiếp, tương xứng với quy mô và kết quả của đội.'), ('Thông tin ứng tuyển có được bảo mật?', 'Có. Mọi trao đổi đều 1:1 và bảo mật tuyệt đối.')] + COMMON_FAQ_END,
   su_that=True),
 }
+COMPARE = """<section class="sec dark" id="so-sanh">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Hai con đường sau khi ra trường</span>
+      <h2 class="h2">Lương cứng <em>hay thu nhập theo kết quả?</em></h2>
+      <p class="lead">Không có con đường nào sai. Chỉ có con đường hợp với bạn hơn.</p>
+    </div>
+    <div class="grid2">
+      <div class="panel p1">
+        <span class="eyebrow">Con đường quen thuộc</span>
+        <h2>Công việc lương cứng</h2>
+        <ul><li>Thu nhập cố định mỗi tháng</li><li>Tăng lương chủ yếu theo thâm niên</li><li>Làm tốt hơn chưa chắc nhận nhiều hơn</li><li>Ổn định, ít áp lực doanh số</li></ul>
+      </div>
+      <div class="panel p2" style="border:3px solid var(--orange)">
+        <span class="eyebrow">Con đường bạn có thể chọn</span>
+        <h2>Sale BĐS <em>tại đây</em></h2>
+        <ul><li>Lương + hoa hồng + thưởng marketing đến 10tr/giao dịch</li><li>03 tháng xét lương & cấp bậc, không chờ cả năm</li><li>Làm tốt hơn là nhận nhiều hơn, lên Pro Sales 7–10 triệu/tháng</li><li>Có áp lực, nhưng có lead sẵn và người kèm</li></ul>
+        <a class="btn full" href="#dang-ky">Tôi chọn con đường này →</a>
+      </div>
+    </div>
+  </div>
+</section>
+"""
+PAGES['moi-ra-truong'] = dict(key='sv', position='Sale mới ra trường', crumb='Tuyển Sale mới ra trường',
+  title='Tuyển Sale Mới Ra Trường Đà Nẵng 2026 – Không Cần Kinh Nghiệm | Tuyển Sale Đà Nẵng',
+  desc='Tuyển sinh viên mới ra trường làm Sale BĐS tại Đà Nẵng. Ngành nào cũng được, không cần kinh nghiệm. Đào tạo từ con số 0, có lead sẵn, có người kèm, HĐLĐ & BHXH, 03 tháng xét lương.',
+  badge='Tuyển Sale mới ra trường · Đà Nẵng 2026',
+  h1='Mới ra trường?<br>Chọn nghề <em>không đóng khung thu nhập.</em>',
+  sub='Ngành nào cũng được, không cần kinh nghiệm. Đào tạo từ con số 0, có lead sẵn, có người kèm.',
+  kpis=[('0', 'Năm kinh nghiệm'), ('100%', 'Hỗ trợ marketing'), ('03', 'Tháng xét lương'), ('7–10TR', 'Lương Pro Sales')],
+  cta='Tôi mới ra trường, ứng tuyển →', form_h='Ứng tuyển Sale mới ra trường', form_note='Không cần CV đẹp. <b>Hoàng Hiệp</b> gọi lại nói chuyện 15 phút.', form_btn='Giữ chỗ phỏng vấn →',
+  selects=[('grad', 'graduation', 'Bạn tốt nghiệp năm nào?', ['2026', '2025', '2024 trở về trước', 'Sắp tốt nghiệp']), ('major', 'major', 'Ngành học của bạn', ['Kinh tế / Quản trị kinh doanh', 'Marketing / Truyền thông', 'Ngôn ngữ / Du lịch', 'Kỹ thuật / CNTT', 'Ngành khác'])],
+  role_eyebrow='Dành riêng cho tân cử nhân', role_h2='Lý lịch trống? <em>Không sao.</em>',
+  panels=[dict(eyebrow='Bạn nhận được', h='Không cần biết trước. <em>Chỉ cần học nhanh.</em>', btn='Tôi muốn bắt đầu →', lists=[('', ['Không yêu cầu kinh nghiệm, ngành học nào cũng được', 'Đào tạo từ con số 0: sản phẩm, pháp lý, tìm khách, chốt', 'Có người kèm trong giao dịch đầu tiên', 'Lead được phân bổ, không tự bỏ tiền chạy quảng cáo', 'HĐLĐ, BHYT, BHXH đầy đủ'])]),
+          dict(eyebrow='Bạn hợp nếu', h='Bạn có 3 thứ này, <em>phần còn lại chúng tôi dạy.</em>', btn='Giữ chỗ phỏng vấn →', lists=[('', ['Thích nói chuyện, không ngại gặp người lạ', 'Muốn thu nhập theo năng lực, không theo thâm niên', 'Chịu khó: gọi điện, đi dự án, học sản phẩm mỗi ngày'])])],
+  extra=COMPARE,
+  pol_eyebrow='Chính sách dành cho bạn', pol_h2='Con số rõ ràng, <em>không hứa suông</em>', tower=True,
+  cards=[('100%', 'Marketing hỗ trợ đến 100%', 'Giải ngân ngay khi đề xuất, không bỏ tiền túi chạy quảng cáo.'), ('LEAD', 'Có khách ngay từ đầu', 'Marketing đầu tổng phân lead cho cả đội, kể cả người mới.'), ('10TR', 'Thưởng marketing đến 10tr/GD', 'Cộng hoa hồng và thưởng nóng mỗi giao dịch.'), ('03', 'Tháng xét lương & cấp bậc', 'Thăng tiến bằng kết quả, không bằng thâm niên.'), ('7–10TR', 'Lên Pro Sales', 'Pro Sales lương 7–10 triệu/tháng, cộng hoa hồng và thưởng.'), ('HĐLĐ', 'Hợp đồng & bảo hiểm', 'BHYT, BHXH đầy đủ ngay từ đầu.')],
+  steps_h2='12 tháng đầu sau khi <em>cầm bằng</em>',
+  steps=[('Tháng 1', 'Học & ra trận', 'Nắm sản phẩm, đi dự án, nhận lead, có người kèm từng cuộc gọi.'), ('Tháng 2–3', 'Giao dịch đầu tay', 'Chốt deal đầu tiên, nhận hoa hồng cộng thưởng marketing đến 10tr.'), ('Tháng 3', 'Xét lương & cấp bậc', 'Kết quả tốt thì tăng lương, lên cấp.'), ('Tháng 4–12', 'Pro Sales / Trưởng nhóm', 'Pro Sales lương 7–10 triệu/tháng, hoặc dẫn dắt đội của riêng bạn.')],
+  faq=[('Không học ngành kinh tế có làm được không?', 'Được. Ngành nào cũng được, kiến thức sản phẩm và kỹ năng bán hàng đều được đào tạo từ đầu.'), ('Sắp tốt nghiệp, chưa có bằng có ứng tuyển được không?', 'Bạn cứ để lại thông tin. Hoàng Hiệp sẽ gọi lại trao đổi trực tiếp về thời gian bắt đầu phù hợp.'), ('Người mới có khách để tư vấn không?', 'Có. Marketing phân bổ lead cho toàn đội và hỗ trợ chi phí marketing đến 100%.'), ('Thu nhập gồm những gì?', 'Lương, hoa hồng, thưởng marketing đến 10tr/giao dịch và thưởng nóng. Chi tiết trao đổi khi tư vấn 1:1.'), ('Nghề Sale có áp lực không?', 'Có. Có ngày gọi nhiều mà chưa có khách. Nhưng bạn có lead sẵn, có người kèm và không phải đi một mình.')] + COMMON_FAQ_END,
+  su_that=True, timeline=True)
 os.makedirs(os.path.join(ROOT, 'vi-tri'), exist_ok=True)
 for name, p in PAGES.items():
     html = page(p)
