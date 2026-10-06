@@ -18,6 +18,13 @@ SITE = {
     "phone": "0909669325",
     "phone_text": "0909 669 325",
     "email": "Km.camvan@gmail.com",
+    "brand": "VT – Vân Trần",
+    "street": "Đường Nguyễn Thị Minh Khai",
+    "address": "Đường Nguyễn Thị Minh Khai, Đà Nẵng",
+    "maps": "https://www.google.com/maps/search/?api=1&query=Nguy%E1%BB%85n+Th%E1%BB%8B+Minh+Khai+%C4%90%C3%A0+N%E1%BA%B5ng",
+    # Ảnh chính (đã có trên LadiPage, dùng cho ảnh chia sẻ + dữ liệu Google)
+    "image": "https://static.ladipage.net/5f03d62c83e96d333758e1a6/dich-vu-the-tin-dung-da-nang-20250607094115-lh3ye.png",
+    "image_alt": "Dịch vụ thẻ tín dụng Đà Nẵng – rút tiền, đáo hạn, mở thẻ nhanh",
 }
 
 # ===== BẢNG PHÍ – SỬA GIÁ Ở ĐÂY =====
@@ -42,10 +49,12 @@ def business_schema():
     """Thực thể doanh nghiệp dùng chung – giúp Google/ChatGPT nhận diện một thương hiệu nhất quán."""
     return {
         "@context": "https://schema.org", "@type": "FinancialService", "@id": BUSINESS_ID,
-        "name": SITE["name"], "url": DOMAIN, "image": DOMAIN + "og-image.png", "logo": DOMAIN + "og-image.png",
+        "name": SITE["name"], "url": DOMAIN, "image": SITE["image"], "logo": SITE["image"],
+        "alternateName": [SITE["brand"], "Dịch vụ rút tiền thẻ tín dụng Đà Nẵng", "Đáo hạn thẻ tín dụng Đà Nẵng"],
+        "hasMap": SITE["maps"], "sameAs": ["https://zalo.me/" + SITE["phone"], "https://www.the-tin-dung-da-nang.com/"],
         "description": f"Dịch vụ đáo hạn thẻ tín dụng, rút tiền thẻ tín dụng và tư vấn mở thẻ tại Đà Nẵng. Phí từ {FEE_MIN}, xử lý khoảng 15 phút, hỗ trợ tận nơi.",
         "telephone": "+84909669325", "email": SITE["email"], "priceRange": f"Phí từ {FEE_MIN}",
-        "address": {"@type": "PostalAddress", "addressLocality": "Đà Nẵng", "addressRegion": "Đà Nẵng", "addressCountry": "VN"},
+        "address": {"@type": "PostalAddress", "streetAddress": SITE["street"], "addressLocality": "Đà Nẵng", "addressRegion": "Đà Nẵng", "addressCountry": "VN"},
         "areaServed": [{"@type": "Place", "name": a + ", Đà Nẵng"} for a in AREA_LIST],
         "openingHoursSpecification": [{"@type": "OpeningHoursSpecification",
             "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
@@ -133,7 +142,8 @@ def example_table():
 def fill(s, root):
     return (s.replace("{{R}}", root).replace("{{FEE_TABLE}}", fee_table()).replace("{{EXAMPLE_TABLE}}", example_table())
              .replace("{{FEE_MIN}}", FEE_MIN).replace("{{UPDATED}}", vn_date(UPDATED))
-             .replace("{{FEE_MIN_RUT}}", FEE_MIN_RUT).replace("{{AREAS}}", ", ".join(AREA_LIST)).replace("{{HOURS}}", HOURS)
+             .replace("{{FEE_MIN_RUT}}", FEE_MIN_RUT).replace("{{ADDRESS}}", SITE["address"]).replace("{{MAPS}}", SITE["maps"].replace("&", "&amp;"))
+             .replace("{{IMG}}", SITE["image"]).replace("{{IMG_ALT}}", SITE["image_alt"]).replace("{{AREAS}}", ", ".join(AREA_LIST)).replace("{{HOURS}}", HOURS)
              .replace("{{BANK_LINKS}}", "".join(f'<a href="{root}dao-han-the-{k}-da-nang/" class="bank">{n}</a>' for k, n, *_ in BANKS)))
 
 
@@ -200,7 +210,7 @@ def head_common(title, desc, url, root, og_type="website"):
 <meta property="og:title" content="{html.escape(title)}">
 <meta property="og:description" content="{html.escape(desc)}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{DOMAIN}og-image.png">
+<meta property="og:image" content="{SITE['image']}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1f44'/%3E%3Crect x='10' y='18' width='44' height='28' rx='5' fill='%23ff7a00'/%3E%3Crect x='10' y='24' width='44' height='6' fill='%230b1f44'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -228,7 +238,7 @@ def build_page(p):
         {"@context": "https://schema.org", "@type": "Article" if p.get("article") else "Service",
          **({"headline": p["h1"], "datePublished": p.get("published", UPDATED), "dateModified": UPDATED,
              "author": {"@id": BUSINESS_ID}, "publisher": {"@id": BUSINESS_ID}, "inLanguage": "vi-VN",
-             "mainEntityOfPage": url, "image": DOMAIN + "og-image.png"}
+             "mainEntityOfPage": url, "image": SITE["image"]}
             if p.get("article") else
             {"name": p["h1"], "serviceType": p["crumb"], "url": url, "areaServed": {"@type": "City", "name": "Đà Nẵng"},
              "provider": {"@id": BUSINESS_ID}}),
@@ -492,7 +502,8 @@ PAGES = [
 "h1": "Giới Thiệu & Liên Hệ – Dịch Vụ Thẻ Tín Dụng Đà Nẵng",
 "intro": "Chúng tôi hỗ trợ người dùng thẻ tín dụng tại Đà Nẵng thanh toán đúng hạn, nhận tiền nhanh và dùng thẻ an toàn – minh bạch phí, có hoá đơn, thẻ không rời tay khách.",
 "tldr": [
-    "Tên: Dịch Vụ Thẻ Tín Dụng Đà Nẵng – website dichvuthetindungdanang.com.",
+    "Tên: Dịch Vụ Thẻ Tín Dụng Đà Nẵng (VT – Vân Trần) – website dichvuthetindungdanang.com.",
+    "Địa chỉ: " + SITE["address"] + " (gọi trước khi đến).",
     "Liên hệ: Zalo/điện thoại <strong>0909 669 325</strong>, email Km.camvan@gmail.com.",
     "Giờ làm việc: " + HOURS + ".",
     "Khu vực: " + ", ".join(AREA_LIST) + ".",
@@ -519,6 +530,7 @@ PAGES = [
 <div class="tbl"><table><tbody>
 <tr><td><strong>Điện thoại / Zalo</strong></td><td>0909 669 325</td></tr>
 <tr><td><strong>Email</strong></td><td>Km.camvan@gmail.com</td></tr>
+<tr><td><strong>Địa chỉ</strong></td><td><a href="{{MAPS}}" target="_blank" rel="noopener">{{ADDRESS}}</a> (gọi trước khi đến)</td></tr>
 <tr><td><strong>Website</strong></td><td>www.dichvuthetindungdanang.com</td></tr>
 <tr><td><strong>Giờ làm việc</strong></td><td>{{HOURS}}</td></tr>
 <tr><td><strong>Khu vực phục vụ</strong></td><td>{{AREAS}}</td></tr>
@@ -796,11 +808,14 @@ def build_llms():
 ## Thông tin chính
 
 - Website: {DOMAIN}
+- Thương hiệu: {SITE['brand']}
+- Địa chỉ: {SITE['address']}
 - Điện thoại / Zalo: 0909 669 325
 - Email: {SITE['email']}
 - Giờ làm việc: {HOURS}
 - Khu vực phục vụ (tận nơi): {", ".join(AREA_LIST)}
 - Thẻ hỗ trợ: Visa, Mastercard, JCB, Amex, Napas của hầu hết ngân hàng Việt Nam
+- Rút tiền ví trả sau: MoMo Ví Trả Sau, SPayLater (Shopee), Kredivo, Home PayLater (phí báo trước)
 - Cần chuẩn bị: thẻ tín dụng chính chủ + CCCD
 - Cam kết: báo phí trước, không phí ẩn, thẻ không rời tay khách, không hỏi OTP/CVV, có hoá đơn
 
