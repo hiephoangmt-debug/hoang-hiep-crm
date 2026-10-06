@@ -420,7 +420,12 @@ function hh_import_news() {
 			$id   = $post->ID;
 			$hash = get_post_meta( $id, '_hh_news_hash', true );
 			if ( $hash && md5( $post->post_content ) === $hash && md5( $content ) !== $hash ) {
-				wp_update_post( array( 'ID' => $id, 'post_content' => $content ) );
+				$upd = array( 'ID' => $id, 'post_content' => $content );
+				if ( in_array( $post->post_title, (array) ( $n['old_title'] ?? array() ), true ) ) {
+					$upd['post_title']   = $n['title']; // Tiêu đề, tóm tắt cũ do web tạo (chưa sửa tay) → đổi theo bản mới.
+					$upd['post_excerpt'] = $n['excerpt'];
+				}
+				wp_update_post( $upd );
 				update_post_meta( $id, '_hh_news_hash', md5( get_post_field( 'post_content', $id ) ) );
 			} elseif ( ! $hash && false === strpos( $post->post_content, 'key-points' ) && false !== strpos( $post->post_content, 'Nguồn tổng hợp' ) ) {
 				// Bài bản đầu (chưa có mã băm) và chưa bị sửa phần cấu trúc: nâng cấp lên bản có điểm chính, hỏi đáp.

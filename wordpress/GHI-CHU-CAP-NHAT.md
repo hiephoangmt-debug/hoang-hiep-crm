@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 06/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.12.4** + plugin Hoàng Hiệp CRM **2.17.6**)
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.12.4** + plugin Hoàng Hiệp CRM **2.17.7**)
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -31,7 +31,7 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 ### Bước 5 – Xoá bộ nhớ đệm và kiểm tra
 1. Thanh đen trên cùng → rê chuột vào **LiteSpeed Cache** → **Purge All** (hoặc menu trái LiteSpeed Cache → Toolbox → Purge All).
 2. Mở web, bấm **Ctrl + Shift + R** (điện thoại: tắt hẳn tab, mở lại).
-3. Kiểm tra phiên bản: **Plugin → Plugin đã cài**: Hoàng Hiệp CRM **2.17.6** · **Giao diện**: Hoàng Hiệp **2.12.4**.
+3. Kiểm tra phiên bản: **Plugin → Plugin đã cài**: Hoàng Hiệp CRM **2.17.7** · **Giao diện**: Hoàng Hiệp **2.12.4**.
 4. Xem kết quả:
    - **Tin tức** → nút **Nhịp sống Đà Nẵng** → bài bãi tắm Sơn Thủy.
    - **Casamia Balanca Hội An**: ảnh mới ở mục Tiện ích, Hình ảnh, Tiến độ – web đưa ảnh vào dần trong 15–20 phút; chưa đủ thì đợi thêm rồi Purge All lần nữa.
@@ -69,7 +69,7 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 - Bài *Pháp lý Casamia Balanca*: cập nhật bảng pháp lý, ảnh sổ, hỏi đáp, mô tả Google.
 
 ### Tin tức – chuyên mục mới "Nhịp sống Đà Nẵng"
-- Bài đầu tiên: *Chuẩn bị đầu tư công viên, câu lạc bộ thể thao biển và bãi tắm Sơn Thủy* (phường Ngũ Hành Sơn), có ảnh phối cảnh (ghi nguồn Danang 35K Feet), điểm chính, SEO. Đăng ngày 06/10/2026.
+- Bài đầu tiên: *Bãi tắm Sơn Thủy: Đà Nẵng chuẩn bị đầu tư công viên và câu lạc bộ thể thao biển* (~1.000 chữ): bảng thông tin chính, phối cảnh, các bước chuẩn bị đầu tư, ý nghĩa với cư dân – du lịch, tác động bất động sản Ngũ Hành Sơn, 4 câu hỏi đáp, liên kết dự án khu vực; ảnh phối cảnh (nguồn Danang 35K Feet). Đăng 06/10/2026.
 - Chuyên mục tự hiện thành nút lọc trên trang Tin tức: `/category/nhip-song-da-nang/`.
 
 ### Vinhomes Hải Vân Bay
