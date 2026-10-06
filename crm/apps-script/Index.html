@@ -389,6 +389,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         <button class="btn btn--ghost btn--sm" data-act="new-customer">+ Khách</button>
       </div>
       <div id="cust-wrap">
+        <div id="cust-dups"></div>
         <div class="filters">
           <input type="search" id="cust-q" placeholder="Tìm tên, SĐT…">
           <select id="cust-status"><option value="">Mọi trạng thái</option></select>
@@ -909,7 +910,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       S.boot = b;
       $('#login').classList.add('hidden');
       $('#app').classList.remove('hidden');
-      var UI_VERSION = 'v04.11d';
+      var UI_VERSION = 'v04.11e';
       $('#today-label').textContent = dmy(b.today) + ' · ' + UI_VERSION + (b.version === UI_VERSION ? '' : ' ⚠ Mã.gs chưa cập nhật');
       fillSelect($('[name=dich_vu]'), b.services);
       fillSelect($('#tx-service'), b.services, true);
@@ -1146,7 +1147,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
     updateTxForm();
   });
   txForm.addEventListener('change', updateTxForm);
-  function normName(v) { return String(v || '').trim().toLowerCase().replace(/\s+/g, ' '); }
+  function normName(v) { return String(v || '').replace(/[\u200B-\u200F\u202A-\u202E\u2060-\u2064\uFEFF\u00AD]/g, '').trim().toLowerCase().replace(/\s+/g, ' '); }
   function phoneNorm(v) {
     var d = String(v || '').replace(/[^\d+]/g, '');
     if (d.indexOf('+84') === 0) d = '0' + d.slice(3); else if (d.indexOf('84') === 0 && d.length === 11) d = '0' + d.slice(2);
@@ -2084,7 +2085,32 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   });
 
   /* ---------- Khách hàng ---------- */
+  function renderDups(groups) {
+    S.dups = groups || [];
+    $('#cust-dups').innerHTML = S.dups.length ? '<div class="advice" style="margin-bottom:10px"><b>⚠ Có ' + S.dups.length + ' khách bị tách thành nhiều hồ sơ</b> (cùng tên hoặc cùng SĐT). Bấm <b>Gộp</b> để dồn giao dịch, thẻ, ảnh, vé… về 1 hồ sơ.' +
+      S.dups.map(function (g, i) {
+        return '<div class="mcard__row" style="margin-top:6px"><span><b>' + esc(g.ten) + '</b> × ' + g.khach.length + ' <small class="muted">(' +
+          g.khach.map(function (c) { return (c.sdt || 'chưa có SĐT') + ' · ' + c.so_gd + ' GD'; }).join(' | ') + ')</small>' +
+          (g.khac_sdt ? ' <small class="neg">khác SĐT – kiểm tra đúng 1 người</small>' : '') + '</span>' +
+          '<button type="button" class="btn btn--sm" data-merge="' + i + '">Gộp thành 1</button></div>';
+      }).join('') + '</div>' : '';
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-merge]');
+    if (!b) return;
+    var g = S.dups[Number(b.dataset.merge)];
+    if (!g) return;
+    var msg = 'Gộp ' + g.khach.length + ' hồ sơ "' + g.ten + '" thành 1?\n' + g.khach.map(function (c) { return '• ' + c.ten + ' – ' + (c.sdt || 'chưa có SĐT') + ' – ' + c.so_gd + ' GD'; }).join('\n') +
+      (g.khac_sdt ? '\n\n⚠ Các hồ sơ có SĐT khác nhau – chỉ gộp nếu đúng là 1 người (SĐT thứ 2 sẽ lưu vào SĐT 2).' : '');
+    if (!confirm(msg)) return;
+    b.disabled = true;
+    call('mergeCustomers', { keep: g.keep, ids: g.khach.map(function (c) { return c.id; }) }).then(function (r) {
+      toast('Đã gộp thành 1 khách' + (r.gop_the ? ' · gộp ' + r.gop_the + ' thẻ trùng' : ''));
+      reboot().then(loadCustomers);
+    }).catch(function (err) { b.disabled = false; fail(err); });
+  });
   function loadCustomers() {
+    call('duplicateCustomers').then(renderDups).catch(function () {});
     Promise.all([call('listCustomers'), call('listLeads')]).then(function (r) {
       S.customers = r[0]; S.leads = r[1];
       var srcs = {};

@@ -67,7 +67,7 @@ var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan', 'tu_ngay', 'b_tt_ngay', 'a_ck_ng
 // Kiểu tiền với C.Trâm. "Ứng trước"/"Hoàn tiền" làm giảm nợ; "Mình trả lại"/"Nợ cũ" làm tăng nợ;
 // "Điều chỉnh số dư" nhập được số âm (âm = tăng nợ).
 // Đổi mỗi lần cập nhật code – hiện cạnh ngày trên đầu app để biết đã triển khai bản mới chưa.
-var APP_VERSION = 'v04.11d';
+var APP_VERSION = 'v04.11e';
 
 var PAYMENT_TYPES = ['Ứng trước', 'Hoàn tiền', 'Mình trả lại', 'Nợ cũ', 'Điều chỉnh số dư'];
 
@@ -303,6 +303,8 @@ function api(token, action, payload) {
     exportCongNo: apiExportCongNo_,
     listCards: function (p) { return cardsOf_(p.khach_id); },
     holdCard: apiHoldCard_,
+    duplicateCustomers: apiDuplicateCustomers_,
+    mergeCustomers: apiMergeCustomers_,
     heldCards: apiHeldCards_,
     cardHistory: apiCardHistory_,
     customerDocs: function (p) {
@@ -445,11 +447,95 @@ function apiListCustomers_() {
   });
 }
 
+/** Nhóm khách trùng: cùng tên (bỏ ký tự ẩn, hoa/thường, khoảng trắng) hoặc cùng SĐT. */
+function apiDuplicateCustomers_() {
+  var all = readAll_('KhachHang'), nTx = {};
+  readAll_('GiaoDich').forEach(function (t) { nTx[t.khach_id] = (nTx[t.khach_id] || 0) + 1; });
+  var parent = {};
+  function find(x) { while (parent[x] !== x) x = parent[x] = parent[parent[x]]; return x; }
+  function join(a, b) { a = find(a); b = find(b); if (a !== b) parent[b] = a; }
+  var byName = {}, byPhone = {};
+  all.forEach(function (c) {
+    parent[c.id] = c.id;
+    var k = normName_(c.ten);
+    if (k) { if (byName[k]) join(byName[k], c.id); else byName[k] = c.id; }
+    [c.sdt, c.sdt2].forEach(function (p) { if (p) { if (byPhone[p]) join(byPhone[p], c.id); else byPhone[p] = c.id; } });
+  });
+  var groups = {};
+  all.forEach(function (c) { var r = find(c.id); (groups[r] = groups[r] || []).push({ id: c.id, ten: c.ten, sdt: c.sdt, sdt2: c.sdt2 || '', so_gd: nTx[c.id] || 0, tao_luc: c.tao_luc }); });
+  return Object.keys(groups).map(function (k) {
+    var g = groups[k].sort(function (a, b) { return (b.sdt ? 1 : 0) - (a.sdt ? 1 : 0) || b.so_gd - a.so_gd || String(a.tao_luc).localeCompare(String(b.tao_luc)); });
+    var phones = {}; g.forEach(function (c) { if (c.sdt) phones[c.sdt] = 1; });
+    return { ten: g[0].ten, keep: g[0].id, khach: g, khac_sdt: Object.keys(phones).length > 1 };
+  }).filter(function (g) { return g.khach.length > 1; });
+}
+
+/** Gộp nhiều khách thành 1: chuyển giao dịch, thẻ, ảnh, giữ thẻ, hoá đơn, vé, nhắc lịch sang khách giữ lại. */
+function apiMergeCustomers_(p) {
+  var keep = String(p.keep || ''), ids = (p.ids || []).map(String).filter(function (x) { return x && x !== keep; });
+  if (!keep || !ids.length) throw new Error('Chọn khách cần gộp.');
+  return withLock_(function () {
+    var all = readAll_('KhachHang');
+    var k = all.filter(function (c) { return c.id === keep; })[0];
+    if (!k) throw new Error('Không tìm thấy khách giữ lại.');
+    var others = all.filter(function (c) { return ids.indexOf(c.id) >= 0; });
+    var map = {}; others.forEach(function (c) { map[c.id] = keep; });
+    // SĐT: giữ SĐT chính, SĐT khác của khách bị gộp đưa vào SĐT 2
+    var upd = { ten: cleanText_(k.ten), cap_nhat: nowStr_() };
+    var phones = [k.sdt, k.sdt2].filter(String);
+    others.forEach(function (c) { [c.sdt, c.sdt2].forEach(function (x) { if (x && phones.indexOf(x) < 0) phones.push(x); }); });
+    upd.sdt = phones[0] || ''; upd.sdt2 = phones[1] || '';
+    var notes = [k.ghi_chu].concat(others.map(function (c) { return c.ghi_chu; })).filter(String);
+    if (notes.length) upd.ghi_chu = notes.join(' · ');
+    function remap(sheetName, field, fn) {
+      var sh = sheet_(sheetName), last = sh.getLastRow();
+      if (last < 2) return 0;
+      var col = SHEETS[sheetName].indexOf(field) + 1;
+      var rg = sh.getRange(2, col, last - 1, 1), vals = rg.getValues(), n = 0;
+      vals.forEach(function (r) { var v = fn(String(r[0])); if (v !== null && v !== String(r[0])) { r[0] = v; n++; } });
+      if (n) rg.setValues(vals);
+      return n;
+    }
+    function byId(v) { return map[v] ? map[v] : null; }
+    var moved = 0;
+    [['GiaoDich', 'khach_id'], ['TheKhach', 'khach_id'], ['TaiLieu', 'khach_id'], ['GiuThe', 'khach_id'], ['HoaDon', 'a_khach_id'],
+      ['HoaDon', 'b_khach_id'], ['DatVe', 'khach_id'], ['LienHe', 'khach_id']].forEach(function (x) {
+      try { moved += remap(x[0], x[1], byId); } catch (e) {}
+    });
+    try { remap('NhacLich', 'key', function (v) { var i = v.indexOf('|'); return i > 0 && map[v.slice(0, i)] ? keep + v.slice(i) : null; }); } catch (e) {}
+    // Thẻ trùng tên (VD 2 thẻ "Cake") của cùng khách → gộp thành 1, giữ thông tin đầy đủ nhất
+    var cards = readAll_('TheKhach').filter(function (c) { return c.khach_id === keep; }), byCard = {}, cardMap = {};
+    cards.forEach(function (c) {
+      var key = normName_(c.ten_the) + '|' + (c.so_cuoi || '');
+      var m = byCard[key];
+      if (!m) { byCard[key] = c; return; }
+      var fill = {};
+      ['ngan_hang', 'so_cuoi', 'han_muc', 'ngay_sao_ke', 'ngay_dao', 'ghi_chu', 'chu_the', 'loai_the', 'giu_the', 'ngay_giu', 'ngay_tra'].forEach(function (f) {
+        if (!m[f] && c[f]) { fill[f] = c[f]; m[f] = c[f]; }
+      });
+      if (c.giu_the === 'Mình giữ' && m.giu_the !== 'Mình giữ') { fill.giu_the = 'Mình giữ'; fill.ngay_giu = c.ngay_giu; m.giu_the = 'Mình giữ'; }
+      if (Object.keys(fill).length) updateObj_('TheKhach', m.id, fill);
+      cardMap[c.id] = m.id;
+    });
+    if (Object.keys(cardMap).length) {
+      ['GiuThe', 'TaiLieu'].forEach(function (sn) { try { remap(sn, 'the_id', function (v) { return cardMap[v] || null; }); } catch (e) {} });
+      Object.keys(cardMap).forEach(function (id) { deleteObj_('TheKhach', id); });
+    }
+    // tên/SĐT trên giao dịch theo khách giữ lại
+    updateWhere_('GiaoDich', function (t) { return t.khach_id === keep; }, { ten_khach: upd.ten, sdt: upd.sdt });
+    updateObj_('KhachHang', keep, upd);
+    others.forEach(function (c) { deleteObj_('KhachHang', c.id); });
+    audit_('Khách hàng', 'Gộp', keep, '', 'Gộp ' + (others.length + 1) + ' khách "' + upd.ten + '"',
+      others.map(function (c) { return c.ten + (c.sdt ? ' ' + c.sdt : ''); }).join('; '), upd.ten + ' ' + upd.sdt);
+    return { keep: keep, gop: others.length, chuyen: moved, gop_the: Object.keys(cardMap).length, sdt: upd.sdt, sdt2: upd.sdt2 };
+  });
+}
+
 function apiSaveCustomer_(c) {
   return withLock_(function () {
     var now = nowStr_();
     var fields = {
-      ten: String(c.ten || '').trim(), sdt: normalizePhone_(c.sdt), sdt2: normalizePhone_(c.sdt2), nguon: String(c.nguon || 'Nhập tay'),
+      ten: cleanText_(c.ten), sdt: normalizePhone_(c.sdt), sdt2: normalizePhone_(c.sdt2), nguon: String(c.nguon || 'Nhập tay'),
       trang_thai: CUSTOMER_STATUSES.indexOf(c.trang_thai) >= 0 ? c.trang_thai : 'Mới',
       ghi_chu: String(c.ghi_chu || ''), cap_nhat: now
     };
@@ -557,7 +643,7 @@ function buildTransaction_(t) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(ngayHoan)) ngayHoan = addDays_(ngay, 1);
   if (ngayHoan < ngay) throw new Error('Ngày hoàn tiền không được trước ngày giao dịch.');
   return {
-    ngay: ngay, dich_vu: dichVu, the: String(t.the || '').trim(), ngay_dao: ngayDao, ngay_sao_ke: ngaySaoKe,
+    ngay: ngay, dich_vu: dichVu, the: cleanText_(t.the), ngay_dao: ngayDao, ngay_sao_ke: ngaySaoKe,
     khach_id: customer.id, ten_khach: customer.ten, sdt: customer.sdt,
     so_tien: soTien, may: String(t.may || '').trim(), phi_khach: phiKhach, phi_may: round2_(phiMay),
     phi_may_text: String(t.phi_may_text || phiMay), tien_phi: tienPhi, chi_phi: chiPhi,
@@ -577,7 +663,7 @@ function resolveCustomer_(t) {
     updateObj_('KhachHang', c.id, upd);
     return Object.assign(c, upd);
   }
-  var ten = String(t.ten_khach || '').trim();
+  var ten = cleanText_(t.ten_khach);
   if (!ten) throw new Error('Thiếu tên khách.');
   c = { id: newId_(), ten: ten, sdt: normalizePhone_(t.sdt), nguon: 'Nhập tay', trang_thai: 'Khách quen',
     ghi_chu: '', tao_luc: now, cap_nhat: now };
@@ -2347,7 +2433,10 @@ function normalizePhone_(v) {
   return s;
 }
 
-function normName_(s) { return String(s || '').trim().toLowerCase().replace(/\s+/g, ' '); }
+// Ký tự ẩn hay dính khi copy từ điện thoại (làm "Nhung NT" thành 2 khách khác nhau)
+var INVISIBLE_RE = /[\u200B-\u200F\u202A-\u202E\u2060-\u2064\uFEFF\u00AD]/g;
+function cleanText_(s) { s = String(s == null ? '' : s).replace(INVISIBLE_RE, ''); try { s = s.normalize('NFC'); } catch (e) {} return s.replace(/\s+/g, ' ').trim(); }
+function normName_(s) { return cleanText_(s).toLowerCase(); }
 
 function parseNum_(s) { return typeof s === 'number' ? s : Number(String(s || '').replace(',', '.').replace('%', '').trim()) || 0; }
 

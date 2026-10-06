@@ -1061,6 +1061,36 @@ test('any line mentioning vé máy bay / vé tàu / khách sạn goes to ✈️ 
   assert.strictEqual(items.filter((i) => i.kind === 'pay').length, 1);
 });
 
+test('same customer split into 3 (hidden characters from the phone) → found and merged into 1', () => {
+  const { call, gas, fake } = fresh();
+  fake.setToday('2026-10-06');
+  const base = { dich_vu: 'Đáo hạn', so_tien: 10000000, phi_khach: 1.9, phi_may_text: '1.3' };
+  // bản cũ: tên có ký tự ẩn → tạo khách riêng
+  gas.appendObj_('KhachHang', { id: 'k1', ten: 'Nhung NT', sdt: '', nguon: 'Nhập tay', trang_thai: 'Khách quen', tao_luc: '2026-09-01 08:00' });
+  gas.appendObj_('KhachHang', { id: 'k2', ten: 'Nhung NT‎', sdt: '0795544441', nguon: 'Nhập tay', trang_thai: 'Khách quen', tao_luc: '2026-09-02 08:00' });
+  gas.appendObj_('KhachHang', { id: 'k3', ten: 'Nhung  nt ', sdt: '', nguon: 'Nhập tay', trang_thai: 'Khách quen', tao_luc: '2026-09-03 08:00' });
+  call('saveTransaction', Object.assign({ ngay: '2026-10-01', the: 'KL', khach_id: 'k1', ten_khach: 'Nhung NT' }, base));
+  call('saveTransaction', Object.assign({ ngay: '2026-10-01', the: 'TCB', khach_id: 'k2', ten_khach: 'Nhung NT' }, base));
+  call('saveTransaction', Object.assign({ ngay: '2026-10-02', the: 'Cake', khach_id: 'k2', ten_khach: 'Nhung NT' }, base));
+  call('saveTransaction', Object.assign({ ngay: '2026-10-03', the: 'Cake', khach_id: 'k3', ten_khach: 'Nhung NT' }, base));
+  // từ giờ: tên có ký tự ẩn vẫn nhận đúng khách cũ
+  const t = call('saveTransaction', Object.assign({ ngay: '2026-10-04', the: 'VP', ten_khach: '‎Nhung NT' }, base));
+  assert.ok(['k1', 'k2', 'k3'].indexOf(t.khach_id) >= 0, 'no 4th customer');
+  const d = call('duplicateCustomers');
+  assert.strictEqual(d.length, 1);
+  assert.strictEqual(d[0].khach.length, 3);
+  assert.strictEqual(d[0].keep, 'k2', 'keep the one with a phone number');
+  const r = call('mergeCustomers', { keep: d[0].keep, ids: d[0].khach.map((c) => c.id) });
+  assert.strictEqual(r.gop, 2);
+  assert.strictEqual(r.gop_the, 1, 'two "Cake" cards → one');
+  const cs = call('listCustomers');
+  assert.strictEqual(cs.length, 1);
+  assert.strictEqual(cs[0].sdt, '0795544441');
+  assert.strictEqual(call('listTransactions', {}).filter((x) => x.khach_id === 'k2').length, 5);
+  assert.strictEqual(call('listCards', { khach_id: 'k2' }).length, 4);
+  assert.strictEqual(call('duplicateCustomers').length, 0);
+});
+
 test('pasting earlier months: history before closing, December notes pasted in January, saving in rounds', () => {
   const { call, fake } = fresh();
   fake.setToday('2027-01-05');
