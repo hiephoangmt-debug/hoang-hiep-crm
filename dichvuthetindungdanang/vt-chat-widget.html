@@ -32,17 +32,21 @@
   }, true);
 
   /* 2. Giao diện */
-  var css = '#vtw{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:2147483000;font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#0f1b33}'
+  var css = '#vtw{position:fixed;right:14px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:2147483000;font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#0f1b33}'
   + '#vtw *{box-sizing:border-box}'
-  + '#vtw .vt-fab{width:60px;height:60px;border-radius:50%;border:0;background:#ff7a00;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.25);cursor:pointer;display:grid;place-items:center;position:relative}'
-  + '#vtw .vt-fab:before{content:"";position:absolute;inset:0;border-radius:50%;border:3px solid #ff7a00;animation:vtring 1.8s infinite}'
-  + '@keyframes vtring{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.6);opacity:0}}'
-  + '@media (prefers-reduced-motion:reduce){#vtw .vt-fab:before{animation:none}}'
-  + '#vtw .vt-acts{display:flex;flex-direction:column;gap:10px;align-items:flex-end;margin-bottom:10px}'
-  + '#vtw .vt-act{display:flex;align-items:center;gap:8px;text-decoration:none;color:#fff;font-weight:700;border:0;cursor:pointer;padding:10px 14px;border-radius:24px;box-shadow:0 6px 18px rgba(0,0,0,.2);font:inherit;font-weight:700}'
-  + '#vtw .vt-call{background:#1bb35a}#vtw .vt-zalo{background:#0068ff}#vtw .vt-chatb{background:#0b1f44}'
-  + '#vtw .vt-tip{position:absolute;right:70px;bottom:10px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 8px 24px rgba(0,0,0,.18);white-space:nowrap;font-weight:600}'
-  + '#vtw .vt-box{position:fixed;right:16px;bottom:calc(88px + env(safe-area-inset-bottom,0px));width:min(360px,calc(100vw - 32px));max-height:min(560px,calc(100vh - 120px));background:#fff;border-radius:18px;box-shadow:0 18px 50px rgba(0,0,0,.3);display:flex;flex-direction:column;overflow:hidden}'
+  + '#vtw .vt-acts{display:flex;flex-direction:column;gap:12px;align-items:flex-end}'
+  + '#vtw .vt-act{position:relative;display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;border:0;cursor:pointer;text-decoration:none;color:#fff;box-shadow:0 6px 18px rgba(0,0,0,.25);animation:vtin .5s ease-out both}'
+  + '#vtw .vt-act:nth-child(1){animation-delay:.1s}#vtw .vt-act:nth-child(2){animation-delay:.25s}#vtw .vt-act:nth-child(3){animation-delay:.4s}'
+  + '#vtw .vt-act:before{content:"";position:absolute;inset:0;border-radius:50%;border:3px solid currentColor;opacity:.6;animation:vtring 1.8s infinite}'
+  + '#vtw .vt-zalo{background:#0068ff;color:#0068ff}#vtw .vt-call{background:#1bb35a;color:#1bb35a}#vtw .vt-chatb{background:#ff7a00;color:#ff7a00}'
+  + '#vtw .vt-act svg{width:28px;height:28px;fill:#fff}'
+  + '#vtw .vt-lb{position:absolute;right:66px;white-space:nowrap;background:#0b1f44;color:#fff;font-size:13px;font-weight:700;padding:6px 10px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.2);pointer-events:none;opacity:0;transform:translateX(8px);transition:.2s}'
+  + '#vtw .vt-act:hover .vt-lb,#vtw .vt-act:focus-visible .vt-lb{opacity:1;transform:none}'
+  + '@keyframes vtin{from{transform:translateX(90px);opacity:0}to{transform:none;opacity:1}}'
+  + '@keyframes vtring{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.55);opacity:0}}'
+  + '@media (prefers-reduced-motion:reduce){#vtw .vt-act,#vtw .vt-act:before{animation:none}}'
+  + '#vtw .vt-tip{position:absolute;right:66px;bottom:8px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 8px 24px rgba(0,0,0,.18);white-space:nowrap;font-weight:600;cursor:pointer;animation:vtin .4s ease-out both}'
+  + '#vtw .vt-box{position:fixed;right:84px;bottom:calc(18px + env(safe-area-inset-bottom,0px));width:min(360px,calc(100vw - 32px));max-height:min(560px,calc(100vh - 60px));background:#fff;border-radius:18px;box-shadow:0 18px 50px rgba(0,0,0,.3);display:flex;flex-direction:column;overflow:hidden}'
   + '#vtw .vt-head{background:#0b1f44;color:#fff;padding:12px 14px;display:flex;gap:10px;align-items:center}'
   + '#vtw .vt-av{width:38px;height:38px;border-radius:50%;background:#ff7a00;display:grid;place-items:center;font-weight:800}'
   + '#vtw .vt-head b{display:block}#vtw .vt-head small{opacity:.8}#vtw .vt-x{margin-left:auto;background:none;border:0;color:#fff;font-size:22px;cursor:pointer}'
@@ -55,18 +59,22 @@
   + '#vtw .vt-in input{flex:1;min-width:0;border:1px solid #d5dceb;border-radius:10px;padding:10px;font:inherit}'
   + '#vtw .vt-in button{border:0;background:#ff7a00;color:#fff;border-radius:10px;padding:0 14px;font-weight:700;cursor:pointer}'
   + '#vtw [hidden]{display:none!important}'
-  + '@media(max-width:700px){#vtw{bottom:calc(72px + env(safe-area-inset-bottom,0px))}#vtw .vt-box{bottom:calc(144px + env(safe-area-inset-bottom,0px));max-height:calc(100vh - 170px)}}';
+  + '@media(max-width:700px){#vtw{right:10px;bottom:calc(74px + env(safe-area-inset-bottom,0px))}#vtw .vt-act{width:50px;height:50px}#vtw .vt-lb{display:none}'
+  + '#vtw .vt-box{right:16px;left:16px;width:auto;bottom:calc(74px + env(safe-area-inset-bottom,0px));max-height:calc(100vh - 110px)}#vtw.open .vt-acts{display:none}}';
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+
+  var ICON_ZALO = '<svg viewBox="0 0 48 48"><path d="M24 4C12.4 4 3 12.2 3 22.3c0 5.8 3.1 11 8 14.3l-1.5 6.9 7.4-3.9c2.2.6 4.6 1 7.1 1 11.6 0 21-8.2 21-18.3S35.6 4 24 4z"/><text x="24" y="27" text-anchor="middle" font-family="Arial" font-weight="900" font-size="11" fill="#0068ff">Zalo</text></svg>';
+  var ICON_CALL = '<svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>';
+  var ICON_CHAT = '<svg viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.8 2 11.5c0 2.4 1.2 4.6 3.1 6.1L4.5 21l3.6-1.9c1.2.4 2.5.6 3.9.6 5.5 0 10-3.8 10-8.5S17.5 3 12 3zM7.5 12.8a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6zm4.5 0a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6zm4.5 0a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6z"/></svg>';
 
   var w = document.createElement('div'); w.id = 'vtw';
   w.innerHTML =
-    '<div class="vt-acts" hidden>'
-    + '<button type="button" class="vt-act vt-chatb">💬 Chat tư vấn</button>'
-    + '<a class="vt-act vt-zalo" href="' + ZALO + '" target="_blank" rel="noopener">Zalo ' + PHONE_TEXT + '</a>'
-    + '<a class="vt-act vt-call" href="tel:' + PHONE + '">📞 Gọi ' + PHONE_TEXT + '</a>'
+    '<div class="vt-acts">'
+    + '<a class="vt-act vt-zalo" href="' + ZALO + '" target="_blank" rel="noopener" aria-label="Chat Zalo ' + PHONE_TEXT + '">' + ICON_ZALO + '<span class="vt-lb">Zalo ' + PHONE_TEXT + '</span></a>'
+    + '<a class="vt-act vt-call" href="tel:' + PHONE + '" aria-label="Gọi ' + PHONE_TEXT + '">' + ICON_CALL + '<span class="vt-lb">Gọi ' + PHONE_TEXT + '</span></a>'
+    + '<button type="button" class="vt-act vt-chatb" aria-label="Chat tư vấn">' + ICON_CHAT + '<span class="vt-lb">Chat tư vấn – báo phí</span></button>'
     + '</div>'
     + '<div class="vt-tip" hidden>Cần báo phí? Chat ngay 👋</div>'
-    + '<button type="button" class="vt-fab" aria-label="Liên hệ Vân Trần"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.8 2 11.5c0 2.4 1.2 4.6 3.1 6.1L4.5 21l3.6-1.9c1.2.4 2.5.6 3.9.6 5.5 0 10-3.8 10-8.5S17.5 3 12 3z"/></svg></button>'
     + '<div class="vt-box" hidden role="dialog" aria-label="Chat tư vấn Vân Trần">'
     + '<div class="vt-head"><div class="vt-av">VT</div><div><b>Thẻ Tín Dụng Vân Trần</b><small>Thường trả lời trong 5 phút</small></div><button type="button" class="vt-x" aria-label="Đóng">×</button></div>'
     + '<div class="vt-log" aria-live="polite"></div>'
@@ -74,13 +82,29 @@
     + '</div>';
   document.body.appendChild(w);
 
-  var acts = w.querySelector('.vt-acts'), tip = w.querySelector('.vt-tip'), box = w.querySelector('.vt-box'),
+  /* Ẩn nút Gọi/Zalo nổi cũ của trang (nút nhỏ cố định) để không trùng; giữ thanh liên hệ ngang ở đáy */
+  function hideOldFloats() {
+    document.querySelectorAll('a[href^="tel:"], a[href*="zalo.me"], [data-replace-href^="tel:"], [data-replace-href*="zalo.me"]').forEach(function (a) {
+      if (w.contains(a)) return;
+      for (var el = a; el && el !== document.body; el = el.parentElement) {
+        var cs = getComputedStyle(el);
+        if (cs.position === 'fixed') {
+          var r = el.getBoundingClientRect();
+          if (r.width < window.innerWidth * 0.4 && r.left > window.innerWidth * 0.5) el.style.setProperty('display', 'none', 'important');
+          break;
+        }
+      }
+    });
+  }
+  hideOldFloats(); setTimeout(hideOldFloats, 1500); window.addEventListener('resize', hideOldFloats);
+
+  var tip = w.querySelector('.vt-tip'), box = w.querySelector('.vt-box'),
       log = w.querySelector('.vt-log'), form = w.querySelector('.vt-in'), input = form.querySelector('input');
 
-  w.querySelector('.vt-fab').addEventListener('click', function () { tip.hidden = true; acts.hidden = !acts.hidden; if (acts.hidden) box.hidden = true; });
-  w.querySelector('.vt-chatb').addEventListener('click', openChat);
-  w.querySelector('.vt-x').addEventListener('click', function () { box.hidden = true; });
-  setTimeout(function () { try { if (sessionStorage.getItem('vt-tip')) return; sessionStorage.setItem('vt-tip', 1); } catch (e) {} if (acts.hidden && box.hidden) tip.hidden = false; }, 8000);
+  function closeChat() { box.hidden = true; w.classList.remove('open'); }
+  w.querySelector('.vt-chatb').addEventListener('click', function () { box.hidden ? openChat() : closeChat(); });
+  w.querySelector('.vt-x').addEventListener('click', closeChat);
+  setTimeout(function () { try { if (sessionStorage.getItem('vt-tip')) return; sessionStorage.setItem('vt-tip', 1); } catch (e) {} if (box.hidden) { tip.hidden = false; setTimeout(function () { tip.hidden = true; }, 9000); } }, 8000);
   tip.addEventListener('click', openChat);
 
   /* 3. Chat tự động */
@@ -97,7 +121,7 @@
   function ask(placeholder, type, nextStep) { step = nextStep; setTimeout(function () { form.hidden = false; input.type = type; input.value = ''; input.placeholder = placeholder; input.focus(); }, 450); }
 
   function openChat() {
-    acts.hidden = true; tip.hidden = true; box.hidden = false;
+    tip.hidden = true; box.hidden = false; w.classList.add('open');
     if (started) return; started = true;
     bot('Chào anh/chị 👋 Em là <b>Vân Trần</b> – dịch vụ thẻ tín dụng Đà Nẵng. Anh/chị cần hỗ trợ gì ạ?', 100);
     choices(['Rút tiền thẻ tín dụng', 'Đáo hạn thẻ tín dụng', 'Rút ví trả sau', 'Xem bảng phí'], pickService);
