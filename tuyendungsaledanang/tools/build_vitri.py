@@ -43,6 +43,7 @@ GAL = re.search(r'<div class="gal">.*?</div>', TEAM, re.S).group(0)
 FIGS = re.findall(r'<figure.*?</figure>', GAL, re.S)
 TEAM_IMG = FIGS[0].replace('<figure class="big">', '<figure class="big" style="grid-column:1/-1">')
 PICS = [f.replace(' class="big"', '') for f in FIGS[1:]]
+CONTEST = re.search(r'<section class="sec" id="thi-dua">.*?</section>', main, re.S).group(0)
 MKT3 = re.search(r'<section class="sec soft" id="mkt-3-lop">.*?</section>', main, re.S).group(0)
 ENV = f"""<section class="sec navy" id="moi-truong">
   <div class="wrap">
@@ -241,7 +242,7 @@ def page(p):
 </section>
 """
     order = [hero, love, roles, sections['su-that'] if p.get('su_that') else '', p.get('extra', ''), policy,
-             MKT3, ENV, sections['du-an'], journey, day, sections['leader'], final, faq]
+             MKT3, CONTEST, ENV, sections['du-an'], journey, day, sections['leader'], final, faq]
     body = '<body>\n\n' + header + '\n\n' + '\n\n'.join(x for x in order if x) + '\n\n' + footer + '\n\n' + sticky
     html = h + '</head>\n' + body + tail
     html = html.replace('<section class="sec" id="cong-viec">', '<section class="sec" id="cong-viec">', 1)
