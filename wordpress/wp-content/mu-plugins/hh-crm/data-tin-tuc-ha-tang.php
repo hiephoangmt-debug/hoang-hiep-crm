@@ -478,11 +478,24 @@ function hh_import_news() {
 			$project = get_page_by_path( $n['project'], OBJECT, 'du-an' );
 			$meta['hh_post_project'] = $project ? $project->ID : '';
 		}
-		foreach ( array_filter( $meta, 'strlen' ) as $key => $value ) {
-			if ( '' === (string) get_post_meta( $id, $key, true ) ) {
-				update_post_meta( $id, $key, $value );
+		$auto = (array) get_post_meta( $id, '_hh_news_meta_hash', true ); // Ô do web tự điền (chưa bị sửa tay) → được cập nhật theo dữ liệu mới.
+		foreach ( (array) ( $n['old_meta'] ?? array() ) as $key => $olds ) {
+			foreach ( (array) $olds as $o ) {
+				if ( (string) get_post_meta( $id, $key, true ) === (string) $o ) {
+					$auto[ $key ] = md5( (string) $o );
+				}
 			}
 		}
+		foreach ( array_filter( $meta, 'strlen' ) as $key => $value ) {
+			$cur = (string) get_post_meta( $id, $key, true );
+			if ( '' === $cur || ( isset( $auto[ $key ] ) && md5( $cur ) === $auto[ $key ] && $cur !== $value ) ) {
+				update_post_meta( $id, $key, $value );
+				$auto[ $key ] = md5( (string) $value );
+			} elseif ( $cur === $value ) {
+				$auto[ $key ] = md5( $cur );
+			}
+		}
+		update_post_meta( $id, '_hh_news_meta_hash', $auto );
 	}
 	return $created;
 }

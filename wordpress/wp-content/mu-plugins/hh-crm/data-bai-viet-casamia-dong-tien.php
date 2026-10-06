@@ -119,7 +119,7 @@ HTML
 		'week'     => 3,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p>Casamia Balanca có nên mua? Câu trả lời phụ thuộc vào mục đích. Đây là lựa chọn hợp lý nếu bạn muốn biệt thự sinh thái ven sông, sở hữu lâu dài, gần phố cổ, với mức giá tham khảo khoảng 10 – 20 tỷ/căn. Nếu ưu tiên mặt biển, thương hiệu resort hoặc nhà đã vận hành, các dự án như Hoiana Beach Villas, Vinpearl Nam Hội An hay The Ocean Villas sẽ phù hợp hơn. Thông tin cập nhật tháng 10/2026.</p>
+<p>Casamia Balanca có nên mua? Câu trả lời phụ thuộc vào mục đích. Đây là lựa chọn hợp lý nếu bạn muốn biệt thự sinh thái ven sông, đã có sổ hồng từng lô, gần phố cổ, với mức giá tham khảo khoảng 10 – 20 tỷ/căn. Nếu ưu tiên mặt biển, thương hiệu resort hoặc nhà đã vận hành, các dự án như Hoiana Beach Villas, Vinpearl Nam Hội An hay The Ocean Villas sẽ phù hợp hơn. Thông tin cập nhật tháng 10/2026.</p>
 
 <h2>Bảng so sánh biệt thự nghỉ dưỡng Hội An – Đà Nẵng</h2>
 <table>
@@ -141,7 +141,7 @@ HTML
 <ul>
 <li>Quy mô 31,1 ha với 363 sản phẩm thấp tầng (173 biệt thự đơn lập, 116 song lập, 74 shophouse), có dòng sông trong nội khu và bến du thuyền.</li>
 <li>Nằm trong Khu dự trữ sinh quyển thế giới Cù Lao Chàm – Hội An, tiếp giáp trục Võ Chí Công nối Đà Nẵng – Hội An – Chu Lai.</li>
-<li>Sở hữu lâu dài cho người Việt; chủ đầu tư Đạt Phương đã bàn giao Casamia Hội An và Casamia Calm.</li>
+<li>Đã cấp sổ hồng các lô tháng 8/2026 (đất ở tại đô thị); chủ đầu tư Đạt Phương đã bàn giao Casamia Hội An và Casamia Calm.</li>
 <li>Mức giá vào cửa thấp hơn nhiều so với biệt thự mặt biển Ngũ Hành Sơn.</li>
 </ul>
 <h3>Điểm cần cân nhắc</h3>
@@ -177,12 +177,12 @@ HTML
 			'seo_title' => 'Casamia Balanca có nên mua? So sánh biệt thự Hội An',
 			'desc'      => 'Casamia Balanca có nên mua? So sánh vị trí, sở hữu, giá với Hoiana Beach Villas, Vinpearl Nam Hội An, The Ocean Villas. Gọi Hoàng Hiệp 0904 567 009.',
 			'points'    => array(
-				'Casamia Balanca: biệt thự sinh thái ven sông, sở hữu lâu dài, giá tham khảo khoảng 10 – 20 tỷ.',
+				'Casamia Balanca: biệt thự sinh thái ven sông, đã có sổ hồng từng lô, giá tham khảo khoảng 10 – 20 tỷ.',
 				'Hoiana Beach Villas có mặt biển nhưng bàn giao dự kiến quý 1/2028; Vinpearl Nam Hội An chuyển nhượng khoảng 9 – 16 tỷ.',
 				'The Ocean Villas Đà Nẵng sát biển, giá chuyển nhượng khoảng 28,5 – 70 tỷ.',
 			),
 			'faq'       => array(
-				array( 'Casamia Balanca có nên mua không?', 'Nên cân nhắc nếu bạn cần biệt thự sinh thái ven sông, sở hữu lâu dài, gần phố cổ Hội An và nắm giữ dài hạn; nếu cần mặt biển hoặc nhà đã vận hành, hãy so sánh thêm Hoiana, Vinpearl Nam Hội An.' ),
+				array( 'Casamia Balanca có nên mua không?', 'Nên cân nhắc nếu bạn cần biệt thự sinh thái ven sông, đã có sổ hồng từng lô, gần phố cổ Hội An và nắm giữ dài hạn; nếu cần mặt biển hoặc nhà đã vận hành, hãy so sánh thêm Hoiana, Vinpearl Nam Hội An.' ),
 				array( 'Casamia Balanca khác Casamia Hội An thế nào?', 'Cùng chủ đầu tư Đạt Phương; Casamia Hội An 15,6 ha đã bàn giao từ 2020, còn Casamia Balanca 31,1 ha đang mở bán, có thêm shophouse và khách sạn.' ),
 				array( 'Biệt thự nào gần Hội An có mặt biển?', 'Hoiana Beach Villas (Duy Xuyên, khoảng 700 m bờ biển) và biệt thự Vinpearl Nam Hội An (Thăng Bình cũ).' ),
 				array( 'Giá Casamia Balanca so với biệt thự biển Đà Nẵng ra sao?', 'Casamia Balanca khoảng 10 – 20 tỷ, trong khi The Ocean Villas chuyển nhượng khoảng 28,5 – 70 tỷ (tham khảo).' ),

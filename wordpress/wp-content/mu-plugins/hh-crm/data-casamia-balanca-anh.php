@@ -100,14 +100,48 @@ add_filter(
 					'plugin:img/casamia-balanca/casamia-balanca-bbq-ban-be.jpg | Bữa tối sân vườn cùng bạn bè – Casamia Balanca | thư viện',
 				)
 			);
+			// Bản 2.17.3/2.17.4 – để ghi đè khi nhập lại.
+			$old44 = $old16 . "\n" . implode(
+				"\n",
+				array(
+					'plugin:img/casamia-balanca/casamia-balanca-flycam-toan-canh-thi-cong.jpg | Toàn cảnh flycam Casamia Balanca Hội An – các dãy nhà vườn đang thi công, nhìn ra sông và biển | tiến độ',
+					'plugin:img/casamia-balanca/casamia-balanca-dap-xe-quang-truong.jpg | Quảng trường hồ nước cổng chào Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-gia-dinh-truoc-nha.jpg | Gia đình trước nhà vườn phủ cây xanh – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-don-khach-biet-thu.jpg | Đón khách trước mặt tiền nhà vườn rợp hoa giấy – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-ban-cong-day-nha.jpg | Ban công nhìn ra dãy nhà mái dốc – Casamia Balanca Hội An | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-phong-khach-view-vuon.jpg | Phòng khách kính lớn nhìn ra vườn – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-phong-khach-cay-ru.jpg | Phòng khách view rèm cây rủ xanh mát – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-phong-khach-gia-dinh.jpg | Không gian phòng khách gia đình – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-phong-khach-sum-hop.jpg | Phòng khách sum họp ba thế hệ – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-bep-dao-go.jpg | Bếp đảo gỗ – không gian nấu ăn gia đình tại Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-bep-ban-an.jpg | Bếp và bàn ăn gỗ liền mạch, cửa kính view vườn – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-phong-an-view-vuon.jpg | Phòng ăn view vườn và sông – Casamia Balanca Hội An | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-goc-doc-sach.jpg | Góc đọc sách bên giếng trời xanh – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-phong-ngu-ban-cong.jpg | Phòng ngủ mở ra ban công cây xanh – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-ho-boi-vuon-dua.jpg | Hồ bơi bên hàng dừa và trụ hoa giấy – Casamia Balanca | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-dao-bo-thu-cung.jpg | Dạo bộ cùng thú cưng trong công viên – Casamia Balanca | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-xe-dien-noi-khu.jpg | Xe điện nội khu đưa đón cư dân – Casamia Balanca | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-xe-dien-cong-bao-ve.jpg | Xe điện nội khu qua chốt bảo vệ cổng – Casamia Balanca Hội An | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-san-pickleball.jpg | Sân pickleball nội khu – Casamia Balanca | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-pickleball-cap-doi.jpg | Chơi pickleball lúc hoàng hôn – Casamia Balanca | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-duong-chay-bo.jpg | Đường chạy bộ rợp bóng cây – Casamia Balanca | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-dap-xe-noi-khu.jpg | Đạp xe trên đường nội khu – Casamia Balanca | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-tap-the-duc-ven-ho.jpg | Khu tập thể dục ngoài trời ven hồ – Casamia Balanca | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-yoga-bai-co.jpg | Tập yoga trên bãi cỏ giữa vườn nhiệt đới – Casamia Balanca | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-thien-bai-co.jpg | Thiền giữa thiên nhiên – Casamia Balanca Hội An | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-bbq-tiec-dem.jpg | Tiệc BBQ sân vườn buổi tối – Casamia Balanca | tiện ích',
+					'plugin:img/casamia-balanca/casamia-balanca-bbq-san-vuon.jpg | Tiệc nướng gia đình trong sân vườn – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-bbq-ban-be.jpg | Bữa tối sân vườn cùng bạn bè – Casamia Balanca | thư viện',
+				)
+			);
 			// Thông tin theo sơ đồ mặt bằng CĐT (anh Hiệp gửi 05/10/2026). Ghi đè ô còn đúng bản web đã nhập trước đó.
 			$details = function_exists( 'hh_project_enrichment' ) ? ( hh_project_enrichment()['casamia-balanca-hoi-an']['meta'] ?? array() ) : array();
 			$upd     = hh_casamia_balanca_meta();
 			$old     = array_intersect_key( $p['meta'] + $details, $upd );
-			$projects[ $i ]['fix_meta'] = array( 'hh_p_image_links' => array( $old4, $old7, $old11, $old16, $old45 ) ) + $old + ( $p['fix_meta'] ?? array() );
+			$projects[ $i ]['fix_meta'] = array( 'hh_p_image_links' => array( $old4, $old7, $old11, $old16, $old45, $old44 ) ) + $old + ( $p['fix_meta'] ?? array() );
 			$projects[ $i ]['meta']     = array_merge( $p['meta'], $upd );
 			$projects[ $i ]['content']  = hh_casamia_balanca_content();
-			// 05/10/2026 (tối): 28 ảnh đời sống (bỏ ảnh bồn tắm) – tiện ích, nội thất, flycam thi công.
+			// 05/10/2026 (tối): 28 ảnh đời sống (bỏ ảnh bồn tắm) – tiện ích, nội thất, flycam thi công; 06/10: ảnh sổ hồng lô SL3.
 			$projects[ $i ]['meta']['hh_p_image_links'] = $old16 . "\n" . implode(
 				"\n",
 				array(
@@ -139,6 +173,7 @@ add_filter(
 					'plugin:img/casamia-balanca/casamia-balanca-bbq-tiec-dem.jpg | Tiệc BBQ sân vườn buổi tối – Casamia Balanca | tiện ích',
 					'plugin:img/casamia-balanca/casamia-balanca-bbq-san-vuon.jpg | Tiệc nướng gia đình trong sân vườn – Casamia Balanca | thư viện',
 					'plugin:img/casamia-balanca/casamia-balanca-bbq-ban-be.jpg | Bữa tối sân vườn cùng bạn bè – Casamia Balanca | thư viện',
+					'plugin:img/casamia-balanca/casamia-balanca-so-hong-lo-sl3.jpg | Giấy chứng nhận quyền sử dụng đất lô 16 khu SL3 – Khu đô thị Cồn Tiến (Casamia Balanca), cấp tháng 8/2026 | tiến độ',
 				)
 			);
 		}
@@ -178,11 +213,14 @@ add_action(
 function hh_casamia_balanca_meta() {
 	return array(
 		'hh_p_type'         => 'Nhà phố vườn (Park Home), biệt thự vườn (Park Villa), biệt thự ven kênh, shophouse',
-		'hh_p_highlights'   => "Khu đô thị sinh thái 31,1 ha bên sông Cổ Cò, hướng vịnh Cửa Đại – Hội An\n5 công viên chủ đề: Wellness, Sport Park, Grand Central Park, Floral Park, Nipa Park\nBể bơi tiêu chuẩn Olympic, hồ vô cực, gym & fitness, co-working, coffee & bistro trong Grand Central Park\nKhách sạn 5*, sky bar, trung tâm hội nghị, bể bơi vô cực ven sông\nBiệt thự ven kênh có hồ bơi riêng, bến thuyền trước nhà\nTrục đường Võ Chí Công – hướng sân bay Đà Nẵng và sân bay Chu Lai; pháp lý sở hữu lâu dài",
+		'hh_p_highlights'   => "Khu đô thị sinh thái 31,1 ha bên sông Cổ Cò, hướng vịnh Cửa Đại – Hội An\n5 công viên chủ đề: Wellness, Sport Park, Grand Central Park, Floral Park, Nipa Park\nBể bơi tiêu chuẩn Olympic, hồ vô cực, gym & fitness, co-working, coffee & bistro trong Grand Central Park\nKhách sạn 5*, sky bar, trung tâm hội nghị, bể bơi vô cực ven sông\nBiệt thự ven kênh có hồ bơi riêng, bến thuyền trước nhà\nTrục đường Võ Chí Công – hướng sân bay Đà Nẵng và sân bay Chu Lai\nĐã cấp sổ hồng (giấy chứng nhận) cho các lô đất ở – tháng 8/2026",
 		'hh_p_amenities_in' => "Công viên Wellness: vườn yoga, đường dạo sinh thái\nSport Park: sân bóng rổ, hệ thống sân Pickleball\nGrand Central Park: quảng trường, hồ vô cực, trạm đọc, co-working space, coffee & bistro, gym & fitness, zone game\nBể bơi tiêu chuẩn Olympic, khu vui chơi trẻ em, khu gym ngoài trời\nFloral Park: công viên hoa giấy\nNipa Park: đường dạo rừng dừa, cầu cảng, lầu vọng cảnh, tiểu cảnh check-in\nCổng chào hoa giấy\nTrung tâm thương mại\nTrường mầm non quốc tế\nBungalow ven sông\nBể bơi vô cực\nKhách sạn 5*\nSky bar\nTrung tâm hội nghị\nBến du thuyền",
 		'hh_p_connections'  => "Đường Võ Chí Công | Hướng đi sân bay Đà Nẵng và sân bay Chu Lai\nGiáp sông Cổ Cò | Bến thuyền, cầu cảng, biệt thự hướng sông\nVịnh Cửa Đại | Ra biển Cửa Đại, An Bàng\nRừng dừa Bảy Mẫu | Khu dự trữ sinh quyển Cù Lao Chàm – Hội An\nPhố cổ Hội An | Di sản văn hóa thế giới UNESCO\nCổng chào hoa giấy | Lối vào chính từ đường Võ Chí Công",
 		'hh_p_zones'        => "Park Home | Nhà phố vườn ven các công viên chủ đề | Theo bảng hàng | Liên hệ nhận bảng hàng\nPark Villa | Biệt thự vườn dọc trục đường La Riva | Theo bảng hàng | Liên hệ nhận bảng hàng\nLa Riva | Biệt thự ven kênh, hồ bơi riêng, bến thuyền (theo phối cảnh CĐT) | Theo bảng hàng | Liên hệ nhận bảng hàng\nLa Palma | Biệt thự ven sông Cổ Cò (theo phối cảnh CĐT) | Theo bảng hàng | Liên hệ nhận bảng hàng",
-		'hh_p_progress'     => "2022 | Khởi công hạ tầng\n6/2025 | Ra mắt dự án\n25/4/2026 | Sự kiện Sound of Balance gặp gỡ khách hàng tại Casamia Balanca\n2025 – 2026 | Bàn giao (dự kiến)",
+		'hh_p_progress'     => "2022 | Khởi công hạ tầng\n6/2025 | Ra mắt dự án\n25/4/2026 | Sự kiện Sound of Balance gặp gỡ khách hàng tại Casamia Balanca\n8/2026 | Sở Nông nghiệp và Môi trường Đà Nẵng cấp giấy chứng nhận quyền sử dụng đất cho các lô (VD lô 16 khu SL3, 178 m², đất ở tại đô thị)\n2025 – 2026 | Bàn giao (dự kiến)",
+		'hh_p_legal'        => 'Đã có sổ hồng từng lô – giấy chứng nhận quyền sử dụng đất cấp tháng 8/2026 (đất ở tại đô thị, sử dụng riêng)',
+		'hh_p_ownership'    => 'Đất ở tại đô thị. Sổ đứng tên chủ đầu tư ghi thời hạn đến 18/06/2069; thời hạn khi sang tên cho người mua theo quy định hiện hành – kiểm tra cùng Hoàng Hiệp trước khi ký',
+		'hh_p_address'      => 'Khu đô thị Cồn Tiến, phường Hội An Đông (xã Cẩm Thanh cũ), thành phố Đà Nẵng',
 	);
 }
 

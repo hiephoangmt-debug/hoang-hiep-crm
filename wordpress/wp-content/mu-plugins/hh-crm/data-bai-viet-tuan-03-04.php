@@ -499,7 +499,7 @@ HTML
 <ul>
 <li>Môi trường sinh thái hiếm có: rừng dừa, sông nội khu, mật độ xây dựng thấp.</li>
 <li>Gần phố cổ Hội An và biển, thuận lợi cho cả ở lẫn khai thác du lịch.</li>
-<li>Sở hữu lâu dài với người Việt Nam; chủ đầu tư đã phát triển Casamia Hội An, Casamia Calm.</li>
+<li>Đã cấp sổ hồng các lô tháng 8/2026 (đất ở tại đô thị); chủ đầu tư đã phát triển Casamia Hội An, Casamia Calm.</li>
 </ul>
 <h3>Cần cân nhắc</h3>
 <ul>
@@ -515,10 +515,10 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Casamia Balanca Hội An: tổng quan dự án 31,1 ha',
-			'desc'      => 'Casamia Balanca Hội An: khu đô thị sinh thái 31,1 ha của Đạt Phương tại Cẩm Thanh, biệt thự ven sông sở hữu lâu dài. Gọi Hoàng Hiệp 0904 567 009.',
+			'desc'      => 'Casamia Balanca Hội An: khu đô thị sinh thái 31,1 ha của Đạt Phương tại Cẩm Thanh, biệt thự ven sông, đã có sổ hồng từng lô. Gọi Hoàng Hiệp 0904 567 009.',
 			'points'    => array(
 				'Khu đô thị sinh thái 31,1 ha của Đạt Phương tại Cẩm Thanh, Hội An, giữa rừng dừa Bảy Mẫu.',
-				'Biệt thự Forestside, Riverside, Park Villa và shophouse The Boutique, sở hữu lâu dài.',
+				'Biệt thự Forestside, Riverside, Park Villa và shophouse The Boutique; đã cấp sổ hồng các lô tháng 8/2026.',
 				'Ra mắt 6/2025; kế hoạch bàn giao khoảng 100 căn trong tháng 11 – 12/2026.',
 			),
 			'faq'       => array(
@@ -579,7 +579,7 @@ HTML
 </table>
 
 <h2>So sánh với biệt thự khu vực</h2>
-<p>Trong phân khúc <a href="/loai-du-an/biet-thu/">biệt thự</a> Hội An – Nam Đà Nẵng, Casamia Balanca có lợi thế là khu đô thị sinh thái quy mô lớn, sở hữu lâu dài cho người Việt. Bạn có thể đối chiếu với <a href="/du-an/casamia-calm-hoi-an/">Casamia Calm</a> và các sản phẩm tại trang <a href="/mua-ban/biet-thu/">mua bán biệt thự</a> hoặc <a href="/khu-vuc/hoi-an/">khu vực Hội An</a>.</p>
+<p>Trong phân khúc <a href="/loai-du-an/biet-thu/">biệt thự</a> Hội An – Nam Đà Nẵng, Casamia Balanca có lợi thế là khu đô thị sinh thái quy mô lớn, đã có sổ hồng từng lô (cấp tháng 8/2026). Bạn có thể đối chiếu với <a href="/du-an/casamia-calm-hoi-an/">Casamia Calm</a> và các sản phẩm tại trang <a href="/mua-ban/biet-thu/">mua bán biệt thự</a> hoặc <a href="/khu-vuc/hoi-an/">khu vực Hội An</a>.</p>
 
 <h2>Lời khuyên của Hoàng Hiệp</h2>
 <p>Đừng chọn căn chỉ vì giá thấp nhất trong bảng hàng. Hãy so sánh đơn giá/m² đất, hướng, khoảng cách tới sông và tiện ích, sau đó tính tổng chi phí sở hữu. Nếu mua để khai thác cho thuê, đọc thêm bài <a href="/cho-thue-biet-thu-casamia-balanca-dong-tien/">dòng tiền cho thuê biệt thự Casamia Balanca</a>.</p>
@@ -787,23 +787,26 @@ HTML
 	$posts[] = array(
 		'slug'     => 'phap-ly-so-hong-casamia-balanca',
 		'title'    => 'Pháp lý Casamia Balanca: sổ hồng, tiến độ cấp giấy và điều cần kiểm tra',
-		'excerpt'  => 'Pháp lý Casamia Balanca: sở hữu lâu dài, phê duyệt giá đất, kế hoạch cấp giấy chứng nhận năm 2026 và checklist hồ sơ trước khi mua.',
+		'excerpt'  => 'Pháp lý Casamia Balanca: đã cấp sổ hồng các lô tháng 8/2026 (đất ở tại đô thị), thời hạn trên sổ và checklist hồ sơ trước khi mua.',
 		'keyword'  => 'pháp lý Casamia Balanca',
 		'project'  => 'casamia-balanca-hoi-an',
 		'week'     => 4,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p>Pháp lý Casamia Balanca: dự án được giới thiệu là sở hữu lâu dài cho người Việt Nam. Việc phê duyệt giá đất đã tháo gỡ một phần vướng mắc, tạo cơ sở để chủ đầu tư làm thủ tục cấp giấy chứng nhận (sổ) cho từng lô; tại ĐHĐCĐ ngày 25/4/2026, Đạt Phương cho biết sẽ hoàn thiện các thủ tục này trong năm 2026. Thông tin cập nhật tháng 10/2026.</p>
+<p>Pháp lý Casamia Balanca có bước tiến quan trọng: <strong>tháng 8/2026, Sở Nông nghiệp và Môi trường thành phố Đà Nẵng đã cấp giấy chứng nhận quyền sử dụng đất (sổ hồng) cho các lô tại Khu đô thị Cồn Tiến</strong>, đứng tên chủ đầu tư Công ty CP Đạt Phương Hội An. Trước đó, việc phê duyệt giá đất đã tháo gỡ vướng mắc, và tại ĐHĐCĐ ngày 25/4/2026 Đạt Phương cam kết hoàn thiện thủ tục cấp sổ trong năm 2026. Thông tin cập nhật tháng 10/2026.</p>
+
+<figure><img src="/wp-content/plugins/hoang-hiep-crm/hh-crm/img/casamia-balanca/casamia-balanca-so-hong-lo-sl3.jpg" alt="Giấy chứng nhận quyền sử dụng đất lô 16 khu SL3, Khu đô thị Cồn Tiến – Casamia Balanca Hội An" width="752" height="1082" loading="lazy"><figcaption>Giấy chứng nhận lô 16 khu SL3 (178 m², đất ở tại đô thị), cấp tháng 8/2026. Số phát hành đã được che.</figcaption></figure>
 
 <h2>Tóm tắt pháp lý Casamia Balanca</h2>
 <table>
 <thead><tr><th>Hạng mục</th><th>Tình trạng</th></tr></thead>
 <tbody>
 <tr><td>Chủ đầu tư</td><td>Tập đoàn Đạt Phương</td></tr>
-<tr><td>Tên pháp lý dự án</td><td>Khu đô thị Cồn Tiến, xã Cẩm Thanh, Hội An</td></tr>
-<tr><td>Hình thức sở hữu</td><td>Lâu dài với người Việt Nam; người nước ngoài theo quy định (một số nguồn ghi 50 năm)</td></tr>
+<tr><td>Tên pháp lý dự án</td><td>Khu đô thị Cồn Tiến, phường Hội An Đông (xã Cẩm Thanh cũ), Đà Nẵng</td></tr>
+<tr><td>Loại đất trên sổ</td><td>Đất ở tại đô thị, hình thức sử dụng riêng</td></tr>
+<tr><td>Thời hạn ghi trên sổ chủ đầu tư</td><td>Đến ngày 18/06/2069. Thời hạn khi sang tên cho người mua theo quy định pháp luật hiện hành – cần đối chiếu trên sổ sang tên</td></tr>
 <tr><td>Giá đất</td><td>Đã được phê duyệt, tháo gỡ một phần vướng mắc (theo báo chí)</td></tr>
-<tr><td>Giấy chứng nhận từng lô</td><td>Chủ đầu tư đặt mục tiêu hoàn thiện thủ tục trong năm 2026</td></tr>
+<tr><td>Giấy chứng nhận từng lô</td><td><strong>Đã cấp tháng 8/2026</strong> (VD lô 16 khu SL3, thửa 1850, tờ bản đồ 68, 178 m²)</td></tr>
 <tr><td>Bàn giao</td><td>Kế hoạch khoảng 100 căn trong tháng 11 – 12/2026</td></tr>
 </tbody>
 </table>
@@ -816,7 +819,8 @@ HTML
 <p>Báo chí cho biết việc phê duyệt giá đất là bước quan trọng giúp tháo gỡ vướng mắc tại Casamia Balanca, tạo cơ sở để chủ đầu tư hoàn thành nghĩa vụ tài chính và tiếp tục thủ tục cấp sổ.</p>
 <h3>Kế hoạch 2026 của Đạt Phương</h3>
 <p>Tại ĐHĐCĐ thường niên 2026, ban lãnh đạo Đạt Phương cho biết sẽ hoàn thiện thủ tục cấp giấy chứng nhận cho các lô đất tại Khu đô thị Cồn Tiến trong năm. Doanh nghiệp đặt mục tiêu doanh thu hơn 1.361 tỷ đồng, tập trung bán hàng Casamia Balanca và bàn giao khoảng 100 căn cuối năm.</p>
-<p>Đây là kế hoạch của doanh nghiệp, không phải cam kết thời hạn cấp sổ cho từng khách. Người mua nên yêu cầu điều khoản về thời hạn cấp sổ ghi rõ trong hợp đồng.</p>
+<h3>Tháng 8/2026: đã cấp giấy chứng nhận</h3>
+<p>Kế hoạch đã thành hiện thực: các lô được cấp giấy chứng nhận đứng tên chủ đầu tư. Bước tiếp theo là thủ tục sang tên cho người mua sau khi hoàn tất thanh toán và bàn giao. Khi mua, anh chị nên yêu cầu xem bản sao giấy chứng nhận của <strong>đúng lô mình chọn</strong> và ghi rõ thời hạn sang tên trong hợp đồng.</p>
 
 <h2>Checklist hồ sơ pháp lý khi mua</h2>
 <table>
@@ -833,7 +837,7 @@ HTML
 
 <h2>Rủi ro pháp lý và cách giảm thiểu</h2>
 <ul>
-<li><strong>Chậm cấp sổ:</strong> thủ tục phụ thuộc cơ quan nhà nước; nên có điều khoản giữ lại một phần thanh toán đến khi nhận sổ nếu thương lượng được.</li>
+<li><strong>Chậm sang tên:</strong> sổ đã cấp cho chủ đầu tư, nhưng sổ đứng tên người mua còn phụ thuộc thủ tục; nên có điều khoản thời hạn sang tên và giữ lại một phần thanh toán đến khi nhận sổ nếu thương lượng được.</li>
 <li><strong>Mua lại hợp đồng:</strong> kiểm tra văn bản chuyển nhượng hợp đồng được chủ đầu tư xác nhận.</li>
 <li><strong>Thông tin trên mạng không thống nhất:</strong> chỉ dựa vào văn bản có dấu của chủ đầu tư và cơ quan nhà nước.</li>
 </ul>
@@ -850,17 +854,21 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Pháp lý Casamia Balanca: sổ hồng và tiến độ cấp giấy',
-			'desc'      => 'Pháp lý Casamia Balanca: sở hữu lâu dài, phê duyệt giá đất, kế hoạch cấp sổ 2026, checklist hồ sơ. Gọi Hoàng Hiệp 0904 567 009 để kiểm tra.',
+			'desc'      => 'Pháp lý Casamia Balanca: đã cấp sổ hồng các lô tháng 8/2026, đất ở đô thị, thời hạn trên sổ, checklist hồ sơ. Gọi Hoàng Hiệp 0904 567 009.',
 			'points'    => array(
-				'Sở hữu lâu dài với người Việt Nam; giá đất đã được phê duyệt, tháo gỡ một phần vướng mắc.',
-				'Đạt Phương đặt mục tiêu hoàn thiện thủ tục cấp giấy chứng nhận các lô trong năm 2026.',
+				'Tháng 8/2026 đã cấp giấy chứng nhận (sổ hồng) cho các lô tại Khu đô thị Cồn Tiến, đứng tên chủ đầu tư.',
+				'Loại đất: đất ở tại đô thị; sổ chủ đầu tư ghi thời hạn đến 18/06/2069 – thời hạn khi sang tên theo quy định hiện hành.',
 				'Người mua cần kiểm tra quy hoạch 1/500, bảo lãnh ngân hàng, thời hạn cấp sổ trong hợp đồng.',
 			),
 			'faq'       => array(
-				array( 'Casamia Balanca có sổ hồng chưa?', 'Đạt Phương cho biết đang hoàn thiện thủ tục cấp giấy chứng nhận cho các lô tại Khu đô thị Cồn Tiến, mục tiêu trong năm 2026. Cần kiểm tra tình trạng từng căn khi mua.' ),
-				array( 'Casamia Balanca sở hữu bao lâu?', 'Sở hữu lâu dài với người Việt Nam; người nước ngoài theo quy định pháp luật.' ),
+				array( 'Casamia Balanca có sổ hồng chưa?', 'Có. Tháng 8/2026 Sở Nông nghiệp và Môi trường Đà Nẵng đã cấp giấy chứng nhận cho các lô tại Khu đô thị Cồn Tiến, đứng tên chủ đầu tư; người mua được sang tên sau khi hoàn tất thanh toán, bàn giao.' ),
+				array( 'Casamia Balanca sở hữu bao lâu?', 'Sổ cấp cho chủ đầu tư ghi đất ở tại đô thị, thời hạn đến 18/06/2069. Thời hạn trên sổ sang tên cho người mua theo quy định pháp luật hiện hành – nên đối chiếu cùng Hoàng Hiệp trước khi ký.' ),
 				array( 'Mua Casamia Balanca cần kiểm tra giấy tờ gì?', 'Quyết định giao đất, quy hoạch 1/500, giấy phép xây dựng, thông báo đủ điều kiện bán, bảo lãnh ngân hàng và điều khoản cấp sổ trong hợp đồng.' ),
 			),
+		),
+		'old_meta' => array(
+			'rank_math_description' => 'Pháp lý Casamia Balanca: sở hữu lâu dài, phê duyệt giá đất, kế hoạch cấp sổ 2026, checklist hồ sơ. Gọi Hoàng Hiệp 0904 567 009 để kiểm tra.',
+			'hh_post_faq'           => "Casamia Balanca có sổ hồng chưa? | Đạt Phương cho biết đang hoàn thiện thủ tục cấp giấy chứng nhận cho các lô tại Khu đô thị Cồn Tiến, mục tiêu trong năm 2026. Cần kiểm tra tình trạng từng căn khi mua.\nCasamia Balanca sở hữu bao lâu? | Sở hữu lâu dài với người Việt Nam; người nước ngoài theo quy định pháp luật.\nMua Casamia Balanca cần kiểm tra giấy tờ gì? | Quyết định giao đất, quy hoạch 1/500, giấy phép xây dựng, thông báo đủ điều kiện bán, bảo lãnh ngân hàng và điều khoản cấp sổ trong hợp đồng.",
 		),
 		'sources'  => array( 'https://tapchicongthuong.vn/tap-doan-dat-phuong--dpg-trien-vong-tai-dinh-gia-tu-viec-mo-ban-du-an-casamia-balanca-141395.htm', 'https://nguoiquansat.vn/dat-phuong-dpg-du-an-1-400-ty-duoc-thao-go-phap-ly-303803.html', 'https://www.firhouse.vn/du-an/du-an-casamia-balanca-hoi-an.html' ),
 	);
