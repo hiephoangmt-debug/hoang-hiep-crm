@@ -1,6 +1,6 @@
-# Cài đặt SEO & chia sẻ cho từng trang LadiPage
+# Cài đặt SEO & chia sẻ cho từng trang LadiPage (25 trang)
 
-Trong editor mỗi trang: **Cài đặt → SEO & Social**. Dán **Tiêu đề** và **Mô tả** bên dưới, chọn **Ảnh chia sẻ** là ảnh dịch vụ có sẵn trên LadiPage (dich-vu-the-tin-dung-da-nang-…png) hoặc file `og-image.png`, bấm Lưu rồi **Xuất bản lại**.
+Trong editor mỗi trang: **Cài đặt → SEO & Social**. Dán **Tiêu đề** và **Mô tả**, chọn **Ảnh chia sẻ** là ảnh dịch vụ có sẵn trên LadiPage (dich-vu-the-tin-dung-da-nang-…png) hoặc file `og-image.png`, Lưu rồi **Xuất bản** đúng đường dẫn ghi ở tiêu đề mục.
 
 ## /
 Editor: https://app.ladipage.com/editor/6ac3a8ecc24014001351dff5
@@ -36,6 +36,78 @@ Rút Tiền Thẻ Tín Dụng Đà Nẵng ✔️ Phí Từ 1,8%, Nhận Tiền 1
 Mô tả:
 ```
 Rút tiền thẻ tín dụng Đà Nẵng phí từ 1,8%, thấp hơn rút ATM, nhận tiền mặt hoặc chuyển khoản trong 15 phút, tận nơi mọi quận. Zalo 0909 669 325.
+```
+
+## /rut-tien-the-tin-dung-phi-thap
+Editor: https://app.ladipage.com/editor/6ac50c5894096600133df5f4
+
+Tiêu đề:
+```
+Rút Tiền Thẻ Tín Dụng Phí Thấp Đà Nẵng – Chỉ Từ 1,8%, Không Phí Ẩn
+```
+Mô tả:
+```
+Rút tiền thẻ tín dụng phí thấp tại Đà Nẵng: Visa 1,8%, JCB/Mastercard 1,9%, rẻ hơn rút ATM 3–4%. Báo phí trước, có hoá đơn. Zalo 0909 669 325.
+```
+
+## /rut-tien-the-tin-dung-tan-noi-da-nang
+Editor: https://app.ladipage.com/editor/6ac50c5994096600133df605
+
+Tiêu đề:
+```
+Rút Tiền Thẻ Tín Dụng Gần Đây, Tận Nơi Đà Nẵng – Có Mặt 20–30 Phút
+```
+Mô tả:
+```
+Rút tiền thẻ tín dụng gần đây tại Đà Nẵng: nhân viên đến tận nhà, văn phòng, cửa hàng. Phí từ 1,8%, 7h30–21h00 mỗi ngày. Gọi/Zalo 0909 669 325.
+```
+
+## /rut-tien-vi-tra-sau-da-nang
+Editor: https://app.ladipage.com/editor/6ac50c5bca092700120a25aa
+
+Tiêu đề:
+```
+Rút Tiền Ví Trả Sau Đà Nẵng – MoMo, SPayLater, Kredivo, Home PayLater
+```
+Mô tả:
+```
+Rút tiền ví trả sau tại Đà Nẵng: MoMo Ví Trả Sau, SPayLater (Shopee), Kredivo, Home PayLater. Báo phí trước, nhận tiền nhanh. Zalo 0909 669 325.
+```
+
+## /dao-han-the-tin-dung-hai-chau
+Editor: https://app.ladipage.com/editor/6ac50c5cca092700120a25f3
+
+Tiêu đề:
+```
+Đáo Hạn Thẻ Tín Dụng Hải Châu Đà Nẵng ✔️ Tận Nơi, Phí Từ 1,9%
+```
+Mô tả:
+```
+Đáo hạn, rút tiền thẻ tín dụng tại Hải Châu, Đà Nẵng: nhân viên đến tận nơi, phí từ 1,9%, 7h30–21h00 mỗi ngày. Gọi/Zalo 0909 669 325.
+```
+
+## /dao-han-the-tin-dung-thanh-khe
+Editor: https://app.ladipage.com/editor/6ac50c5e94096600133df755
+
+Tiêu đề:
+```
+Đáo Hạn Thẻ Tín Dụng Thanh Khê Đà Nẵng ✔️ Tận Nơi, Phí Từ 1,9%
+```
+Mô tả:
+```
+Đáo hạn, rút tiền thẻ tín dụng tại Thanh Khê, Đà Nẵng: nhân viên đến tận nơi, phí từ 1,9%, 7h30–21h00 mỗi ngày. Gọi/Zalo 0909 669 325.
+```
+
+## /dao-han-the-tin-dung-son-tra
+Editor: https://app.ladipage.com/editor/6ac50c5fca092700120a2631
+
+Tiêu đề:
+```
+Đáo Hạn Thẻ Tín Dụng Sơn Trà Đà Nẵng ✔️ Tận Nơi, Phí Từ 1,9%
+```
+Mô tả:
+```
+Đáo hạn, rút tiền thẻ tín dụng tại Sơn Trà, Đà Nẵng: nhân viên đến tận nơi, phí từ 1,9%, 7h30–21h00 mỗi ngày. Gọi/Zalo 0909 669 325.
 ```
 
 ## /bang-phi
