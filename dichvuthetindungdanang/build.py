@@ -21,14 +21,16 @@ SITE = {
 }
 
 # ===== BẢNG PHÍ – SỬA GIÁ Ở ĐÂY =====
-# (mức tiền, phí đáo hạn, phí rút tiền)
+# (loại thẻ, phí đáo hạn, phí rút tiền)
 FEES = [
-    ("Dưới 10 triệu", "2,0%", "2,2%"),
-    ("10 – 50 triệu", "1,8%", "2,0%"),
-    ("50 – 100 triệu", "1,7%", "1,9%"),
-    ("Trên 100 triệu", "Thoả thuận", "Thoả thuận"),
+    ("Thẻ Visa (trừ Sacombank, VPBank)", "1,9%", "1,8%"),
+    ("Thẻ JCB, Mastercard (trừ Sacombank, VPBank)", "2,0%", "1,9%"),
+    ("Thẻ Sacombank, VPBank", "2,1%", "1,9%"),
 ]
-FEE_MIN = "1,7%"
+FEE_MIN = "1,9%"        # phí đáo hạn thấp nhất
+FEE_MIN_RUT = "1,8%"    # phí rút tiền thấp nhất
+FEE_SPECIAL = FEES[2][1]  # phí đáo hạn thẻ Sacombank, VPBank
+SPECIAL_BANKS = ("sacombank", "vpbank")
 
 
 AREA_LIST = ["Hải Châu", "Thanh Khê", "Sơn Trà", "Ngũ Hành Sơn", "Liên Chiểu", "Cẩm Lệ", "Hòa Vang", "Điện Bàn"]
@@ -54,7 +56,7 @@ def business_schema():
         "makesOffer": [
             {"@type": "Offer", "url": DOMAIN + "dao-han-the-tin-dung-da-nang/", "description": f"Phí từ {FEE_MIN}",
              "itemOffered": {"@type": "Service", "name": "Đáo hạn thẻ tín dụng Đà Nẵng"}},
-            {"@type": "Offer", "url": DOMAIN + "rut-tien-the-tin-dung-da-nang/", "description": f"Phí từ {FEES[2][2]}",
+            {"@type": "Offer", "url": DOMAIN + "rut-tien-the-tin-dung-da-nang/", "description": f"Phí từ {FEE_MIN_RUT}",
              "itemOffered": {"@type": "Service", "name": "Rút tiền thẻ tín dụng Đà Nẵng"}},
             {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Tư vấn mở thẻ tín dụng"}, "description": "Miễn phí"},
         ],
@@ -108,7 +110,7 @@ def fee_table():
         f"<tr><td>{a}</td><td class=\"fee\">{b}</td><td class=\"fee\">{c}</td></tr>" for a, b, c in FEES
     )
     return (
-        '<div class="tbl"><table><thead><tr><th>Số tiền giao dịch</th><th>Phí đáo hạn</th>'
+        '<div class="tbl"><table><thead><tr><th>Loại thẻ</th><th>Phí đáo hạn</th>'
         f"<th>Phí rút tiền</th></tr></thead><tbody>{rows}</tbody></table></div>"
     )
 
@@ -119,19 +121,19 @@ def pct(s):
 
 def example_table():
     rows = ""
-    for debt, tier in ((10, 1), (30, 1), (50, 2)):
-        fee = debt * 1e6 * pct(FEES[tier][1])
+    for debt in (10, 30, 50):
+        fee = debt * 1e6 * pct(FEES[0][1])
         late = debt * 1e6 * 0.28 * 30 / 365 + max(debt * 1e6 * 0.05 * 0.05, 99000)
         f = lambda n: f"{round(n, -4):,.0f}đ".replace(",", ".")
         rows += f"<tr><td>{debt}.000.000đ</td><td class=\"fee\">{f(fee)}</td><td>≈ {f(late)} + nguy cơ nợ xấu</td></tr>"
-    return ('<div class="tbl"><table><thead><tr><th>Dư nợ</th><th>Phí đáo hạn (tham khảo)</th>'
+    return ('<div class="tbl"><table><thead><tr><th>Dư nợ</th><th>Phí đáo hạn thẻ Visa</th>'
             f"<th>Nếu trễ hạn 1 tháng*</th></tr></thead><tbody>{rows}</tbody></table></div>")
 
 
 def fill(s, root):
     return (s.replace("{{R}}", root).replace("{{FEE_TABLE}}", fee_table()).replace("{{EXAMPLE_TABLE}}", example_table())
              .replace("{{FEE_MIN}}", FEE_MIN).replace("{{UPDATED}}", vn_date(UPDATED))
-             .replace("{{FEE_MIN_RUT}}", FEES[2][2]).replace("{{AREAS}}", ", ".join(AREA_LIST)).replace("{{HOURS}}", HOURS)
+             .replace("{{FEE_MIN_RUT}}", FEE_MIN_RUT).replace("{{AREAS}}", ", ".join(AREA_LIST)).replace("{{HOURS}}", HOURS)
              .replace("{{BANK_LINKS}}", "".join(f'<a href="{root}dao-han-the-{k}-da-nang/" class="bank">{n}</a>' for k, n, *_ in BANKS)))
 
 
@@ -311,7 +313,7 @@ PAGES = [
 "slug": "dao-han-the-tin-dung-da-nang",
 "tldr": [
     "Đáo hạn thẻ tín dụng ở Đà Nẵng: liên hệ Zalo/điện thoại <strong>0909 669 325</strong>.",
-    f"Phí từ <strong>{FEE_MIN}</strong> tùy số tiền; báo phí trọn gói trước, không phí ẩn.",
+    f"Phí đáo hạn từ <strong>{FEE_MIN}</strong> tùy loại thẻ (Visa {FEES[0][1]}, JCB/Mastercard {FEES[1][1]}, Sacombank/VPBank {FEE_SPECIAL}).",
     "Thời gian xử lý khoảng <strong>15–30 phút</strong>, tại cửa hàng hoặc tận nơi.",
     "Phục vụ: " + ", ".join(AREA_LIST) + ".",
     "Giờ làm việc: " + HOURS + ". Cần mang: thẻ chính chủ + CCCD.",
@@ -324,7 +326,7 @@ PAGES = [
 "related": ["bang-phi", "kien-thuc/dao-han-the-tin-dung-la-gi", "kien-thuc/ngay-sao-ke-va-ngay-den-han"],
 "faqs": [
     ("Đáo hạn thẻ tín dụng ở Đà Nẵng mất bao lâu?", "Thông thường 15–30 phút kể từ khi bạn có mặt tại cửa hàng hoặc nhân viên đến tận nơi."),
-    ("Phí đáo hạn thẻ tín dụng là bao nhiêu?", f"Phí từ {FEE_MIN} tùy số tiền và ngân hàng. Xem chi tiết tại bảng phí hoặc nhắn Zalo để được báo phí chính xác."),
+    ("Phí đáo hạn thẻ tín dụng là bao nhiêu?", f"Phí từ {FEE_MIN} tùy loại thẻ: Visa {FEES[0][1]}, JCB/Mastercard {FEES[1][1]}, thẻ Sacombank/VPBank {FEE_SPECIAL}. Xem bảng phí hoặc nhắn Zalo để được báo phí chính xác."),
     ("Đáo hạn có ảnh hưởng điểm tín dụng (CIC) không?", "Không. Ngược lại, khoản nợ được thanh toán đúng hạn nên lịch sử tín dụng của bạn luôn tốt."),
     ("Có đáo hạn được thẻ của mọi ngân hàng không?", "Hỗ trợ thẻ Visa, Mastercard, JCB, Amex, Napas của hầu hết ngân hàng: Vietcombank, VietinBank, BIDV, Techcombank, VPBank, MB, ACB, Sacombank, TPBank, VIB, HSBC, Shinhan…"),
     ("Đến hạn hôm nay có làm kịp không?", "Kịp, nếu bạn liên hệ sớm trong ngày. Hãy nhắn Zalo ngay để được ưu tiên xếp lịch."),
@@ -360,14 +362,14 @@ PAGES = [
 <h2 id="quy-trinh">Quy trình đáo hạn thẻ tại Đà Nẵng</h2>
 <ol>
 <li><strong>Nhắn Zalo 0909 669 325:</strong> gửi tên ngân hàng, số tiền cần đáo hạn và ngày đến hạn.</li>
-<li><strong>Nhận báo phí:</strong> báo phí trọn gói, rõ ràng. Bạn đồng ý mới thực hiện.</li>
+<li><strong>Nhận báo phí:</strong> báo phí rõ ràng theo loại thẻ. Bạn đồng ý mới thực hiện.</li>
 <li><strong>Thanh toán dư nợ:</strong> chúng tôi nộp tiền vào thẻ, bạn kiểm tra trên app ngân hàng.</li>
 <li><strong>Hoàn trả:</strong> thực hiện giao dịch bằng hạn mức vừa được giải phóng, nhận hoá đơn đầy đủ.</li>
 </ol>
 <div class="box"><p><strong>Chuẩn bị:</strong> thẻ tín dụng chính chủ + CCCD. Không cần cung cấp mã OTP, CVV hay mật khẩu ngân hàng.</p></div>
 
 <h2 id="bang-phi">Phí đáo hạn thẻ tín dụng Đà Nẵng</h2>
-<p>Mức phí tham khảo, cập nhật {{UPDATED}}. Phí cố định theo số tiền, đã bao gồm công đến tận nơi trong nội thành:</p>
+<p>Phí theo loại thẻ, cập nhật {{UPDATED}}:</p>
 {{FEE_TABLE}}
 <p>Xem thêm so sánh chi phí chi tiết tại <a href="{{R}}bang-phi/">bảng phí dịch vụ thẻ tín dụng</a>.</p>
 
@@ -392,13 +394,13 @@ PAGES = [
 "slug": "rut-tien-the-tin-dung-da-nang",
 "tldr": [
     "Rút tiền thẻ tín dụng ở Đà Nẵng: Zalo/điện thoại <strong>0909 669 325</strong>.",
-    f"Phí từ <strong>{FEES[2][2]}</strong>, thấp hơn mức phí ứng tiền mặt tại ATM (thường 3–4%).",
+    f"Phí rút tiền từ <strong>{FEE_MIN_RUT}</strong> (Visa), JCB/Mastercard và thẻ Sacombank/VPBank {FEES[1][2]} – thấp hơn phí ứng tiền mặt tại ATM (thường 3–4%).",
     "Nhận tiền mặt hoặc chuyển khoản trong khoảng <strong>15 phút</strong>.",
     "Hỗ trợ tận nơi: " + ", ".join(AREA_LIST) + ".",
 ],
 "crumb": "Rút tiền thẻ tín dụng Đà Nẵng",
-"title": f"Rút Tiền Thẻ Tín Dụng Đà Nẵng ✔️ Phí Thấp, Nhận Tiền 15 Phút",
-"desc": "Rút tiền thẻ tín dụng Đà Nẵng phí thấp hơn rút ATM, nhận tiền mặt hoặc chuyển khoản trong 15 phút, tận nơi mọi quận. Zalo 0909 669 325.",
+"title": f"Rút Tiền Thẻ Tín Dụng Đà Nẵng ✔️ Phí Từ {FEE_MIN_RUT}, Nhận Tiền 15 Phút",
+"desc": f"Rút tiền thẻ tín dụng Đà Nẵng phí từ {FEE_MIN_RUT}, thấp hơn rút ATM, nhận tiền mặt hoặc chuyển khoản trong 15 phút, tận nơi mọi quận. Zalo 0909 669 325.",
 "h1": "Rút Tiền Thẻ Tín Dụng Đà Nẵng – Phí Thấp, Nhận Tiền Trong 15 Phút",
 "intro": "Cần tiền mặt gấp cho kinh doanh, viện phí, học phí? Chuyển hạn mức thẻ tín dụng thành tiền mặt nhanh chóng, phí thấp hơn rút tại ATM, có mặt tận nơi khắp Đà Nẵng.",
 "related": ["bang-phi", "dao-han-the-tin-dung-da-nang", "kien-thuc/tra-cham-the-tin-dung-bi-phat-bao-nhieu"],
@@ -413,7 +415,7 @@ PAGES = [
 
 <h2 id="so-sanh">Rút tại ATM và dùng dịch vụ: khác nhau thế nào?</h2>
 <div class="tbl"><table><thead><tr><th>Tiêu chí</th><th>Rút tại ATM/ngân hàng</th><th>Dịch vụ của chúng tôi</th></tr></thead><tbody>
-<tr><td>Phí</td><td>Khoảng 3–4% số tiền rút</td><td class="fee">Từ {{FEE_MIN}}</td></tr>
+<tr><td>Phí</td><td>Khoảng 3–4% số tiền rút</td><td class="fee">Từ {{FEE_MIN_RUT}}</td></tr>
 <tr><td>Lãi</td><td>Tính lãi ngay từ ngày rút</td><td>Theo chu kỳ thẻ</td></tr>
 <tr><td>Hạn mức</td><td>Thường giới hạn 50–70% hạn mức</td><td>Theo hạn mức khả dụng</td></tr>
 <tr><td>Thời gian</td><td>Phụ thuộc giờ làm việc</td><td>15 phút, 7h30–21h00 cả tuần</td></tr>
@@ -431,7 +433,7 @@ PAGES = [
 <h2 id="quy-trinh">Quy trình rút tiền thẻ tín dụng</h2>
 <ol>
 <li>Nhắn Zalo <strong>0909 669 325</strong>: ngân hàng, số tiền cần rút.</li>
-<li>Nhận báo phí trọn gói, đồng ý mới thực hiện.</li>
+<li>Nhận báo phí theo loại thẻ, đồng ý mới thực hiện.</li>
 <li>Thực hiện giao dịch tại cửa hàng hoặc tận nơi, thẻ không rời tay bạn.</li>
 <li>Nhận tiền mặt hoặc chuyển khoản vào tài khoản chính chủ, kèm hoá đơn.</li>
 </ol>
@@ -447,21 +449,20 @@ PAGES = [
 {
 "slug": "bang-phi",
 "tldr": [
-    f"Phí đáo hạn thẻ tín dụng Đà Nẵng: <strong>{FEES[0][1]}</strong> (dưới 10 triệu), <strong>{FEES[1][1]}</strong> (10–50 triệu), <strong>{FEES[2][1]}</strong> (50–100 triệu), trên 100 triệu thoả thuận.",
-    f"Phí rút tiền: <strong>{FEES[0][2]}</strong> / <strong>{FEES[1][2]}</strong> / <strong>{FEES[2][2]}</strong> theo cùng các mức tiền.",
-    "Phí đã gồm công đến tận nơi trong nội thành; có hoá đơn từng giao dịch.",
+    f"Phí đáo hạn thẻ tín dụng Đà Nẵng: Visa <strong>{FEES[0][1]}</strong>, JCB/Mastercard <strong>{FEES[1][1]}</strong>, thẻ Sacombank/VPBank <strong>{FEES[2][1]}</strong>.",
+    f"Phí rút tiền: Visa <strong>{FEES[0][2]}</strong>, JCB/Mastercard <strong>{FEES[1][2]}</strong>, thẻ Sacombank/VPBank <strong>{FEES[2][2]}</strong>.",
+    "Mức Visa, JCB, Mastercard áp dụng cho thẻ của các ngân hàng khác Sacombank và VPBank. Có hoá đơn từng giao dịch.",
     "Báo phí chính xác qua Zalo 0909 669 325.",
 ],
 "crumb": "Bảng phí",
-"title": f"Bảng Phí Đáo Hạn, Rút Tiền Thẻ Tín Dụng Đà Nẵng 2026 – Từ {FEE_MIN}",
-"desc": f"Bảng phí đáo hạn và rút tiền thẻ tín dụng tại Đà Nẵng cập nhật 2026, phí từ {FEE_MIN}, không phí ẩn. So sánh với phí trễ hạn và phí rút ATM.",
+"title": f"Bảng Phí Đáo Hạn, Rút Tiền Thẻ Tín Dụng Đà Nẵng 2026 – Từ {FEE_MIN_RUT}",
+"desc": f"Bảng phí đáo hạn (từ {FEE_MIN}) và rút tiền (từ {FEE_MIN_RUT}) thẻ tín dụng tại Đà Nẵng 2026 theo loại thẻ Visa, JCB, Mastercard, không phí ẩn. So sánh với phí trễ hạn và phí rút ATM.",
 "h1": "Bảng Phí Đáo Hạn & Rút Tiền Thẻ Tín Dụng Đà Nẵng 2026",
-"intro": f"Phí minh bạch từ {FEE_MIN}, báo trước khi làm, không phát sinh. So sánh nhanh để thấy vì sao đáo hạn đúng lúc giúp bạn tiết kiệm.",
+"intro": f"Phí theo loại thẻ: rút tiền từ {FEE_MIN_RUT}, đáo hạn từ {FEE_MIN}. Báo trước khi làm, không phát sinh. So sánh nhanh để thấy vì sao đáo hạn đúng lúc giúp bạn tiết kiệm.",
 "related": ["dao-han-the-tin-dung-da-nang", "rut-tien-the-tin-dung-da-nang", "kien-thuc/tra-cham-the-tin-dung-bi-phat-bao-nhieu"],
 "faqs": [
-    ("Phí đã bao gồm công đến tận nơi chưa?", "Đã bao gồm trong nội thành Đà Nẵng. Khu vực xa sẽ được báo trước khi thực hiện."),
-    ("Có phí ẩn nào không?", "Không. Bạn nhận báo phí trọn gói trước, đồng ý mới thực hiện, có hoá đơn cho từng giao dịch."),
-    ("Số tiền lớn có được giảm phí không?", "Có. Giao dịch trên 100 triệu hoặc khách hàng thường xuyên được áp dụng mức phí thoả thuận tốt hơn."),
+    ("Có phí ẩn nào không?", "Không. Bạn được báo phí trước theo loại thẻ, đồng ý mới thực hiện, có hoá đơn cho từng giao dịch."),
+    ("Vì sao thẻ Sacombank, VPBank có mức phí riêng?", f"Thẻ của hai ngân hàng này áp dụng mức riêng: đáo hạn {FEES[2][1]}, rút tiền {FEES[2][2]}. Thẻ Visa, JCB, Mastercard của các ngân hàng khác theo bảng phí chung."),
 ],
 "body": """
 <h2 id="bang-phi-chinh">Bảng phí dịch vụ (cập nhật {{UPDATED}})</h2>
@@ -487,7 +488,7 @@ PAGES = [
 "slug": "gioi-thieu",
 "crumb": "Giới thiệu & liên hệ",
 "title": "Giới Thiệu Dịch Vụ Thẻ Tín Dụng Đà Nẵng – Liên Hệ 0909 669 325",
-"desc": f"Thông tin về Dịch Vụ Thẻ Tín Dụng Đà Nẵng: dịch vụ, phí từ {FEE_MIN}, khu vực phục vụ, giờ làm việc, cam kết minh bạch và cách liên hệ.",
+"desc": f"Thông tin về Dịch Vụ Thẻ Tín Dụng Đà Nẵng: dịch vụ, phí từ {FEE_MIN_RUT}, khu vực phục vụ, giờ làm việc, cam kết minh bạch và cách liên hệ.",
 "h1": "Giới Thiệu & Liên Hệ – Dịch Vụ Thẻ Tín Dụng Đà Nẵng",
 "intro": "Chúng tôi hỗ trợ người dùng thẻ tín dụng tại Đà Nẵng thanh toán đúng hạn, nhận tiền nhanh và dùng thẻ an toàn – minh bạch phí, có hoá đơn, thẻ không rời tay khách.",
 "tldr": [
@@ -716,25 +717,27 @@ BANKS = [
 
 
 def bank_page(key, name, full, app, note):
+    dao = FEE_SPECIAL if key in SPECIAL_BANKS else FEE_MIN
+    dao_txt = f"{FEE_SPECIAL}" if key in SPECIAL_BANKS else f"{FEES[0][1]} (Visa), {FEES[1][1]} (JCB, Mastercard)"
     others = "".join(f'<a href="{{{{R}}}}dao-han-the-{k}-da-nang/" class="bank">{n}</a>' for k, n, *_ in BANKS if k != key)
     return {
         "slug": f"dao-han-the-{key}-da-nang",
         "parents": [("dao-han-the-tin-dung-da-nang", "Đáo hạn thẻ tín dụng Đà Nẵng")],
         "crumb": f"Đáo hạn thẻ {name}",
         "bank": True,
-        "title": f"Đáo Hạn Thẻ Tín Dụng {name} Tại Đà Nẵng ✔️ Phí Từ {FEE_MIN}, 15 Phút",
-        "desc": f"Đáo hạn, rút tiền thẻ tín dụng {name} tại Đà Nẵng: phí từ {FEE_MIN}, xong 15 phút, tận nơi mọi quận. Hướng dẫn xem ngày đến hạn trên {app}. Zalo 0909 669 325.",
+        "title": f"Đáo Hạn Thẻ Tín Dụng {name} Tại Đà Nẵng ✔️ Phí Từ {dao}, 15 Phút",
+        "desc": f"Đáo hạn, rút tiền thẻ tín dụng {name} tại Đà Nẵng: phí từ {dao}, xong 15 phút, tận nơi mọi quận. Hướng dẫn xem ngày đến hạn trên {app}. Zalo 0909 669 325.",
         "h1": f"Đáo Hạn Thẻ Tín Dụng {name} Tại Đà Nẵng",
         "intro": f"Thẻ {name} sắp đến hạn? Hỗ trợ đáo hạn và rút tiền thẻ tín dụng {name} (Visa, Mastercard, JCB…) trong 15 phút, tại cửa hàng hoặc tận nơi khắp Đà Nẵng.",
         "related": ["dao-han-the-tin-dung-da-nang", "bang-phi", "kien-thuc/ngay-sao-ke-va-ngay-den-han"],
         "tldr": [
             f"Đáo hạn, rút tiền thẻ tín dụng {name} tại Đà Nẵng: Zalo/điện thoại <strong>0909 669 325</strong>.",
-            f"Phí từ <strong>{FEE_MIN}</strong>, xử lý khoảng 15–30 phút, tận nơi mọi khu vực Đà Nẵng và Điện Bàn.",
+            f"Phí đáo hạn thẻ {name}: <strong>{dao_txt}</strong>. Xử lý khoảng 15–30 phút, tận nơi mọi khu vực Đà Nẵng và Điện Bàn.",
             f"Xem ngày đến hạn thẻ {name} trong ứng dụng <strong>{app}</strong> → Thẻ → Sao kê.",
         ],
         "faqs": [
             (f"Đáo hạn thẻ {name} mất bao lâu?", "Khoảng 15–30 phút kể từ khi bắt đầu giao dịch, tại cửa hàng hoặc tận nơi trong nội thành Đà Nẵng."),
-            (f"Phí đáo hạn thẻ {name} là bao nhiêu?", f"Từ {FEE_MIN} tùy số tiền, áp dụng chung cho thẻ {name}. Nhắn Zalo để được báo phí trọn gói."),
+            (f"Phí đáo hạn thẻ {name} là bao nhiêu?", f"Phí đáo hạn thẻ {name}: {dao_txt}. Nhắn Zalo để được báo phí chính xác."),
             (f"Làm sao biết ngày đến hạn thẻ {name}?", f"Mở ứng dụng {app}, vào mục Thẻ → chọn thẻ tín dụng → xem sao kê, hoặc xem email/SMS sao kê hằng tháng của {name}."),
             (f"Đáo hạn có ảnh hưởng đến thẻ {name} của tôi không?", f"Không. Dư nợ được thanh toán đúng hạn nên lịch sử tín dụng với {name} và trên CIC luôn tốt."),
         ],
@@ -756,7 +759,7 @@ def bank_page(key, name, full, app, note):
 <h2 id="quy-trinh">Quy trình đáo hạn thẻ {name} tại Đà Nẵng</h2>
 <ol>
 <li>Nhắn Zalo <strong>0909 669 325</strong>: “Đáo hạn thẻ {name}, số tiền …, đến hạn ngày …”.</li>
-<li>Nhận báo phí trọn gói – đồng ý mới thực hiện.</li>
+<li>Nhận báo phí theo loại thẻ – đồng ý mới thực hiện.</li>
 <li>Chúng tôi thanh toán dư nợ vào thẻ {name}; bạn kiểm tra ngay trên {app}.</li>
 <li>Bạn hoàn trả bằng hạn mức vừa được khôi phục, nhận hoá đơn đầy đủ.</li>
 </ol>
@@ -779,7 +782,7 @@ def strip(h):
 
 def build_llms():
     """llms.txt – bản tóm tắt cho ChatGPT, Perplexity, Claude… đọc nhanh nội dung website."""
-    fees = "\n".join(f"- {a}: đáo hạn {b.lower()}, rút tiền {c.lower()}" for a, b, c in FEES)
+    fees = "\n".join(f"- {a}: đáo hạn {b}, rút tiền {c}" for a, b, c in FEES)
     groups = [("Dịch vụ", lambda p: not p.get("article") and not p.get("bank") and p["slug"] != "kien-thuc"),
               ("Đáo hạn theo ngân hàng", lambda p: p.get("bank")),
               ("Kiến thức", lambda p: p.get("article"))]
@@ -788,7 +791,7 @@ def build_llms():
         sec += f"\n## {g}\n\n" + "".join(f"- [{q['h1']}]({DOMAIN}{q['slug']}/): {q['desc']}\n" for q in PAGES if f(q))
     out = f"""# {SITE['name']}
 
-> Dịch vụ đáo hạn thẻ tín dụng, rút tiền thẻ tín dụng và tư vấn mở thẻ tại Đà Nẵng. Phí từ {FEE_MIN}, xử lý khoảng 15–30 phút, hỗ trợ tận nơi. Liên hệ Zalo/điện thoại 0909 669 325.
+> Dịch vụ đáo hạn thẻ tín dụng, rút tiền thẻ tín dụng và tư vấn mở thẻ tại Đà Nẵng. Phí rút tiền từ {FEE_MIN_RUT}, đáo hạn từ {FEE_MIN}, xử lý khoảng 15–30 phút, hỗ trợ tận nơi. Liên hệ Zalo/điện thoại 0909 669 325.
 
 ## Thông tin chính
 
@@ -801,7 +804,7 @@ def build_llms():
 - Cần chuẩn bị: thẻ tín dụng chính chủ + CCCD
 - Cam kết: báo phí trước, không phí ẩn, thẻ không rời tay khách, không hỏi OTP/CVV, có hoá đơn
 
-## Bảng phí (cập nhật {vn_date(UPDATED)})
+## Bảng phí theo loại thẻ (cập nhật {vn_date(UPDATED)})
 
 {fees}
 {sec}"""
