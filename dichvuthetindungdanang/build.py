@@ -178,7 +178,7 @@ INLINE_CTA = (
 
 
 def side(root, slug):
-    links = [(p["slug"], p["h1"]) for p in PAGES if p["slug"] != slug and not p.get("bank")][:6]
+    links = [(p["slug"], p["h1"]) for p in PAGES if p["slug"] != slug and not p.get("bank") and not p.get("extra")][:6]
     li = "".join(f'<li><a href="{root}{s}/">› {t}</a></li>' for s, t in links)
     return f"""<aside class="side">
   <div class="side-card">
@@ -386,6 +386,8 @@ PAGES = [
 <h2 id="khu-vuc">Đáo hạn tận nơi tại các quận Đà Nẵng</h2>
 <p>Không tiện ra cửa hàng? Nhân viên sẽ đến tận nhà hoặc văn phòng của bạn tại <strong>""" + AREAS + """</strong> trong khoảng 20–30 phút. Thời gian phục vụ 7h30 – 21h00 tất cả các ngày trong tuần, kể cả cuối tuần và ngày lễ – thời điểm ngân hàng nghỉ nhưng thẻ của bạn vẫn đến hạn.</p>
 
+<p>Xem theo khu vực: <a href="{{R}}dao-han-the-tin-dung-hai-chau/">đáo hạn thẻ tín dụng Hải Châu</a> · <a href="{{R}}dao-han-the-tin-dung-thanh-khe/">Thanh Khê</a> · <a href="{{R}}dao-han-the-tin-dung-son-tra/">Sơn Trà</a>.</p>
+
 <h2 id="luu-y">Lưu ý để đáo hạn an toàn</h2>
 <ul>
 <li>Chỉ giao dịch trực tiếp, có hoá đơn; không chuyển khoản đặt cọc cho người lạ.</li>
@@ -453,6 +455,12 @@ PAGES = [
 
 <h2 id="khu-vuc">Hỗ trợ tận nơi khắp Đà Nẵng</h2>
 <p>Phục vụ tận nhà, văn phòng, cửa hàng tại <strong>""" + AREAS + """</strong>. Nhắn vị trí qua Zalo, nhân viên có mặt trong khoảng 20–30 phút.</p>
+<h2 id="xem-them">Xem thêm</h2>
+<ul>
+<li><a href="{{R}}rut-tien-the-tin-dung-phi-thap/">Rút tiền thẻ tín dụng phí thấp – so sánh chi phí</a></li>
+<li><a href="{{R}}rut-tien-the-tin-dung-tan-noi-da-nang/">Rút tiền thẻ tín dụng gần đây, tận nơi</a></li>
+<li><a href="{{R}}rut-tien-vi-tra-sau-da-nang/">Rút tiền ví trả sau Đà Nẵng</a></li>
+</ul>
 """,
 },
 # ---------------------------------------------------------------- BẢNG PHÍ
@@ -787,6 +795,210 @@ def bank_page(key, name, full, app, note):
 
 PAGES += [bank_page(*b) for b in BANKS]
 
+# ---------------------------------------------------------------- TRANG TỪ KHOÁ PHỤ
+EXTRA_PAGES = [
+{
+"slug": "rut-tien-the-tin-dung-phi-thap", "extra": True,
+"crumb": "Rút tiền thẻ tín dụng phí thấp",
+"title": f"Rút Tiền Thẻ Tín Dụng Phí Thấp Đà Nẵng – Chỉ Từ {FEE_MIN_RUT}, Không Phí Ẩn",
+"desc": f"Rút tiền thẻ tín dụng phí thấp tại Đà Nẵng: Visa {FEES[0][2]}, JCB/Mastercard {FEES[1][2]}, rẻ hơn rút ATM 3–4%. Báo phí trước, có hoá đơn. Zalo 0909 669 325.",
+"h1": f"Rút Tiền Thẻ Tín Dụng Phí Thấp Tại Đà Nẵng – Từ {FEE_MIN_RUT}",
+"intro": "So sánh chi phí thật khi rút tiền thẻ tín dụng: ATM, quầy ngân hàng hay dịch vụ. Phí công khai theo loại thẻ, báo trước khi làm, không phát sinh.",
+"related": ["rut-tien-the-tin-dung-da-nang", "bang-phi", "rut-tien-the-tin-dung-tan-noi-da-nang"],
+"tldr": [
+    f"Phí rút tiền thẻ tín dụng tại Đà Nẵng: Visa <strong>{FEES[0][2]}</strong>, JCB/Mastercard <strong>{FEES[1][2]}</strong>, thẻ Sacombank/VPBank <strong>{FEES[2][2]}</strong>.",
+    "Rút tại ATM/quầy ngân hàng thường mất phí 3–4% và bị tính lãi ngay từ ngày rút.",
+    "Báo phí trước qua Zalo 0909 669 325, không phí ẩn, có hoá đơn.",
+],
+"faqs": [
+    ("Rút tiền thẻ tín dụng ở đâu phí thấp nhất?", f"So sánh tổng chi phí: ATM thường 3–4% + lãi từ ngày rút; dịch vụ của chúng tôi từ {FEE_MIN_RUT} (thẻ Visa) và tính theo chu kỳ thẻ."),
+    ("Có phí nào khác ngoài phần trăm không?", "Không. Bạn được báo đúng mức phí theo loại thẻ trước khi làm, có hoá đơn cho từng giao dịch."),
+    ("Rút 10 triệu mất bao nhiêu phí?", f"Với thẻ Visa phí {FEES[0][2]}: khoảng 180.000đ. Thẻ JCB/Mastercard {FEES[1][2]}: khoảng 190.000đ."),
+],
+"body": """
+<p>Khi cần tiền mặt gấp, nhiều người rút ngay tại ATM mà không biết đó thường là cách <strong>đắt nhất</strong>. Bài này so sánh chi phí thật để bạn chọn cách <strong>rút tiền thẻ tín dụng phí thấp</strong> nhất tại Đà Nẵng.</p>
+
+<h2 id="so-sanh">So sánh chi phí rút 10 triệu</h2>
+<div class="tbl"><table><thead><tr><th>Cách rút</th><th>Phí</th><th>Lãi phát sinh</th></tr></thead><tbody>
+<tr><td>ATM</td><td>≈ 300.000 – 400.000đ (3–4%)</td><td>Tính ngay từ ngày rút</td></tr>
+<tr><td>Quầy ngân hàng</td><td>≈ 300.000 – 400.000đ (3–4%)</td><td>Tính ngay từ ngày rút</td></tr>
+<tr><td>Dịch vụ – thẻ Visa</td><td class="fee">≈ 180.000đ ({{FEE_MIN_RUT}})</td><td>Theo chu kỳ thẻ</td></tr>
+</tbody></table></div>
+<p style="font-size:.88rem;color:#5a6785">Mức phí ATM/ngân hàng là tham khảo phổ biến, mỗi ngân hàng có biểu phí riêng.</p>
+
+<h2 id="bang-phi">Bảng phí rút tiền theo loại thẻ</h2>
+{{FEE_TABLE}}
+
+<h2 id="meo">4 mẹo để rút tiền thẻ tín dụng rẻ hơn</h2>
+<ol>
+<li><strong>Dùng thẻ Visa</strong> nếu có – mức phí thấp nhất ({{FEE_MIN_RUT}}).</li>
+<li><strong>Rút ngay sau ngày sao kê</strong> để có thời gian trả lâu nhất, tránh lãi.</li>
+<li><strong>Không rút tại ATM</strong> nếu không thật sự cần – vừa phí cao vừa bị tính lãi ngay.</li>
+<li><strong>Hỏi phí trước</strong>: chỉ làm khi đã được báo mức phí rõ ràng.</li>
+</ol>
+<div class="box"><p>Lưu ý: phí thấp nhưng phải <strong>an toàn</strong>. Không đưa thẻ cho người lạ mang đi, không cung cấp OTP/CVV, không chuyển khoản đặt cọc.</p></div>
+<p>Xem thêm: <a href="{{R}}rut-tien-the-tin-dung-da-nang/">dịch vụ rút tiền thẻ tín dụng Đà Nẵng</a> · <a href="{{R}}rut-tien-the-tin-dung-tan-noi-da-nang/">rút tiền tận nơi</a>.</p>
+""",
+},
+{
+"slug": "rut-tien-the-tin-dung-tan-noi-da-nang", "extra": True,
+"crumb": "Rút tiền thẻ tín dụng tận nơi",
+"title": "Rút Tiền Thẻ Tín Dụng Gần Đây, Tận Nơi Đà Nẵng – Có Mặt 20–30 Phút",
+"desc": f"Rút tiền thẻ tín dụng gần đây tại Đà Nẵng: nhân viên đến tận nhà, văn phòng, cửa hàng. Phí từ {FEE_MIN_RUT}, 7h30–21h00 mỗi ngày. Gọi/Zalo 0909 669 325.",
+"h1": "Rút Tiền Thẻ Tín Dụng Gần Đây – Hỗ Trợ Tận Nơi Tại Đà Nẵng",
+"intro": "Không cần tìm điểm rút tiền thẻ tín dụng gần đây – nhắn vị trí qua Zalo, nhân viên đến tận nơi bạn ở Đà Nẵng và Điện Bàn.",
+"related": ["rut-tien-the-tin-dung-da-nang", "rut-tien-the-tin-dung-phi-thap", "dao-han-the-tin-dung-hai-chau"],
+"tldr": [
+    "Nhắn vị trí qua Zalo <strong>0909 669 325</strong>, nhân viên có mặt khoảng 20–30 phút trong nội thành.",
+    "Phục vụ: " + ", ".join(AREA_LIST) + ".",
+    "Hoặc đến cửa hàng tại " + SITE["address"] + " (gọi trước khi đến).",
+    f"Phí từ {FEE_MIN_RUT}, phục vụ " + HOURS + ".",
+],
+"faqs": [
+    ("Gần tôi có chỗ rút tiền thẻ tín dụng không?", "Bạn không cần đi tìm: nhắn vị trí qua Zalo 0909 669 325, nhân viên đến tận nơi trong khu vực Đà Nẵng và Điện Bàn."),
+    ("Rút tận nơi có mất thêm phí đi lại không?", "Bạn được báo phí rõ ràng trước khi nhân viên đến, đồng ý mới thực hiện."),
+    ("Tận nơi có an toàn không?", "Có. Giao dịch thực hiện trước mặt bạn, thẻ không rời tay, không hỏi OTP/CVV và có hoá đơn."),
+],
+"body": """
+<p>Gõ “<strong>rút tiền thẻ tín dụng gần đây</strong>” rồi phải chạy xe đi tìm? Với dịch vụ <strong>tận nơi</strong>, bạn chỉ cần ở nhà, văn phòng hay cửa hàng – chúng tôi mang thiết bị đến và hoàn tất ngay tại chỗ.</p>
+
+<h2 id="cach-dat">Đặt lịch rút tiền tận nơi trong 1 phút</h2>
+<ol>
+<li>Nhắn Zalo <strong>0909 669 325</strong>: vị trí (hoặc ghim Google Maps), ngân hàng, số tiền.</li>
+<li>Nhận báo phí và thời gian nhân viên đến.</li>
+<li>Nhân viên đến, giao dịch trước mặt bạn, thẻ không rời tay.</li>
+<li>Nhận tiền mặt hoặc chuyển khoản, kèm hoá đơn.</li>
+</ol>
+
+<h2 id="khu-vuc">Khu vực hỗ trợ tận nơi</h2>
+<ul>
+<li><a href="{{R}}dao-han-the-tin-dung-hai-chau/">Hải Châu</a> – gần cửa hàng trên đường Nguyễn Thị Minh Khai.</li>
+<li><a href="{{R}}dao-han-the-tin-dung-thanh-khe/">Thanh Khê</a></li>
+<li><a href="{{R}}dao-han-the-tin-dung-son-tra/">Sơn Trà</a></li>
+<li>Ngũ Hành Sơn, Liên Chiểu, Cẩm Lệ, Hòa Vang và Điện Bàn.</li>
+</ul>
+<div class="box navy"><p>Thời gian phục vụ: <strong>{{HOURS}}</strong>. Nên nhắn trước 30 phút vào giờ cao điểm.</p></div>
+
+<h2 id="bang-phi">Phí rút tiền theo loại thẻ</h2>
+{{FEE_TABLE}}
+<p>Xem thêm: <a href="{{R}}rut-tien-the-tin-dung-phi-thap/">cách rút tiền thẻ tín dụng phí thấp</a>.</p>
+""",
+},
+{
+"slug": "rut-tien-vi-tra-sau-da-nang", "extra": True,
+"crumb": "Rút tiền ví trả sau",
+"title": "Rút Tiền Ví Trả Sau Đà Nẵng – MoMo, SPayLater, Kredivo, Home PayLater",
+"desc": "Rút tiền ví trả sau tại Đà Nẵng: MoMo Ví Trả Sau, SPayLater (Shopee), Kredivo, Home PayLater. Báo phí trước, nhận tiền nhanh. Zalo 0909 669 325.",
+"h1": "Rút Tiền Ví Trả Sau Tại Đà Nẵng – MoMo, SPayLater, Kredivo",
+"intro": "Hỗ trợ rút tiền từ các ví trả sau phổ biến tại Đà Nẵng, báo phí trước khi làm, nhận tiền nhanh.",
+"related": ["rut-tien-the-tin-dung-da-nang", "rut-tien-the-tin-dung-tan-noi-da-nang", "bang-phi"],
+"tldr": [
+    "Hỗ trợ: <strong>MoMo Ví Trả Sau, SPayLater (Shopee), Kredivo, Home PayLater</strong> và các ví trả sau phổ biến.",
+    "Phí tuỳ ví và hạn mức – báo trước qua Zalo <strong>0909 669 325</strong>.",
+    "Cần tài khoản ví chính chủ; không cung cấp mật khẩu hay OTP cho người khác.",
+],
+"faqs": [
+    ("Rút tiền ví trả sau phí bao nhiêu?", "Phí tuỳ loại ví và hạn mức khả dụng. Nhắn Zalo 0909 669 325 để được báo phí trước khi làm."),
+    ("Ví trả sau nào rút được?", "MoMo Ví Trả Sau, SPayLater (Shopee), Kredivo, Home PayLater và các ví trả sau phổ biến khác."),
+    ("Có phải đưa mật khẩu ví không?", "Không. Bạn tự thao tác trên điện thoại của mình, chúng tôi không hỏi mật khẩu hay mã OTP."),
+],
+"body": """
+<p><strong>Ví trả sau</strong> (mua trước – trả sau) cho phép bạn dùng một hạn mức nhỏ để thanh toán. Khi cần tiền mặt, chúng tôi hỗ trợ <strong>rút tiền ví trả sau tại Đà Nẵng</strong> nhanh, phí báo trước.</p>
+
+<h2 id="vi-ho-tro">Các ví trả sau được hỗ trợ</h2>
+<ul>
+<li><strong>MoMo Ví Trả Sau</strong></li>
+<li><strong>SPayLater</strong> (Shopee)</li>
+<li><strong>Kredivo</strong></li>
+<li><strong>Home PayLater</strong> (Home Credit)</li>
+<li>Các ví trả sau phổ biến khác – nhắn Zalo để kiểm tra.</li>
+</ul>
+
+<h2 id="quy-trinh">Quy trình</h2>
+<ol>
+<li>Nhắn Zalo <strong>0909 669 325</strong>: tên ví, hạn mức khả dụng, số tiền cần rút.</li>
+<li>Nhận báo phí – đồng ý mới thực hiện.</li>
+<li>Bạn tự thao tác thanh toán trên điện thoại của mình.</li>
+<li>Nhận tiền mặt hoặc chuyển khoản, kèm hoá đơn.</li>
+</ol>
+
+<h2 id="luu-y">Lưu ý khi dùng ví trả sau</h2>
+<ul>
+<li>Ví trả sau cũng có <strong>ngày đến hạn</strong> và phí trễ hạn – hãy trả đúng hạn để không ảnh hưởng điểm tín dụng.</li>
+<li>Chỉ rút số tiền bạn chắc chắn trả được trong kỳ.</li>
+<li>Không bao giờ đưa mật khẩu, OTP ví cho người khác.</li>
+</ul>
+<p>Cần hạn mức lớn hơn? Xem <a href="{{R}}rut-tien-the-tin-dung-da-nang/">rút tiền thẻ tín dụng Đà Nẵng</a> – phí từ {{FEE_MIN_RUT}}.</p>
+""",
+},
+]
+
+# Trang đáo hạn theo khu vực: (slug, tên, mô tả khu vực, tuyến đường, địa điểm, khu vực lân cận)
+DISTRICTS = [
+    ("hai-chau", "Hải Châu", "trung tâm thành phố, cũng là nơi đặt cửa hàng của chúng tôi trên đường Nguyễn Thị Minh Khai",
+     "Nguyễn Văn Linh, Lê Duẩn, Hùng Vương, Bạch Đằng, Nguyễn Thị Minh Khai, Phan Châu Trinh, Núi Thành, 2 Tháng 9",
+     "Chợ Hàn, Chợ Cồn, đầu cầu Rồng, Công viên APEC", ["thanh-khe", "son-tra"]),
+    ("thanh-khe", "Thanh Khê", "khu dân cư đông đúc phía tây bắc trung tâm, giáp vịnh Đà Nẵng",
+     "Điện Biên Phủ, Hà Huy Tập, Hàm Nghi, Lê Độ, Nguyễn Tất Thành (ven biển)",
+     "Công viên 29/3, tuyến ven biển Nguyễn Tất Thành", ["hai-chau", "son-tra"]),
+    ("son-tra", "Sơn Trà", "phía đông sông Hàn, khu ven biển Mỹ Khê và bán đảo Sơn Trà",
+     "Ngô Quyền, Võ Nguyên Giáp, Phạm Văn Đồng, Hồ Nghinh, Trần Hưng Đạo",
+     "biển Mỹ Khê, đầu cầu Rồng phía Sơn Trà, khu Ngô Quyền", ["hai-chau", "thanh-khe"]),
+]
+
+
+def district_page(key, name, about, streets, places, near):
+    near_links = " · ".join(f'<a href="{{{{R}}}}dao-han-the-tin-dung-{k}/">{n}</a>' for k, n, *_ in DISTRICTS if k in near)
+    return {
+        "slug": f"dao-han-the-tin-dung-{key}", "extra": True, "district": True,
+        "parents": [("dao-han-the-tin-dung-da-nang", "Đáo hạn thẻ tín dụng Đà Nẵng")],
+        "crumb": f"Đáo hạn thẻ tín dụng {name}",
+        "title": f"Đáo Hạn Thẻ Tín Dụng {name} Đà Nẵng ✔️ Tận Nơi, Phí Từ {FEE_MIN}",
+        "desc": f"Đáo hạn, rút tiền thẻ tín dụng tại {name}, Đà Nẵng: nhân viên đến tận nơi, phí từ {FEE_MIN}, 7h30–21h00 mỗi ngày. Gọi/Zalo 0909 669 325.",
+        "h1": f"Đáo Hạn Thẻ Tín Dụng {name} – Tận Nơi, Nhanh 15 Phút",
+        "intro": f"Hỗ trợ đáo hạn và rút tiền thẻ tín dụng tận nơi tại {name} – {about}.",
+        "related": ["dao-han-the-tin-dung-da-nang", "bang-phi", "rut-tien-the-tin-dung-tan-noi-da-nang"],
+        "tldr": [
+            f"Đáo hạn thẻ tín dụng tại {name}: Zalo/điện thoại <strong>0909 669 325</strong>.",
+            f"Phí đáo hạn: Visa <strong>{FEES[0][1]}</strong>, JCB/Mastercard <strong>{FEES[1][1]}</strong>, thẻ Sacombank/VPBank <strong>{FEES[2][1]}</strong>.",
+            f"Hỗ trợ tận nơi các tuyến {streets.split(', ')[0]}, {streets.split(', ')[1]}… – " + HOURS + ".",
+        ],
+        "faqs": [
+            (f"Đáo hạn thẻ tín dụng ở {name} có đến tận nơi không?", f"Có. Nhắn vị trí ở {name} qua Zalo 0909 669 325, nhân viên đến tận nhà, văn phòng hoặc cửa hàng của bạn."),
+            (f"Ở {name} bao lâu thì có người đến?", "Thường khoảng 20–30 phút tuỳ thời điểm; nên nhắn trước vào giờ cao điểm."),
+            (f"Phí đáo hạn thẻ ở {name} có khác khu vực khác không?", f"Không. Phí theo loại thẻ, áp dụng chung: Visa {FEES[0][1]}, JCB/Mastercard {FEES[1][1]}, Sacombank/VPBank {FEES[2][1]}."),
+        ],
+        "body": f"""
+<p>Bạn ở <strong>{name}</strong> và thẻ tín dụng sắp đến hạn? Dịch vụ <strong>đáo hạn thẻ tín dụng {name}</strong> giúp bạn thanh toán đủ dư nợ trước ngày đến hạn, tránh phí trễ hạn và lãi trên toàn bộ dư nợ – nhân viên đến tận nơi, bạn không cần di chuyển.</p>
+
+<h2 id="khu-vuc">Khu vực {name} chúng tôi thường hỗ trợ</h2>
+<ul>
+<li><strong>Tuyến đường:</strong> {streets}…</li>
+<li><strong>Gần:</strong> {places}.</li>
+<li>Nhà riêng, văn phòng, cửa hàng, khách sạn – nhắn vị trí là được.</li>
+</ul>
+<div class="box navy"><p>Từ năm 2025, cấp quận đã được sắp xếp lại; trên trang này chúng tôi dùng tên khu vực <strong>{name}</strong> quen thuộc để bạn dễ tìm.</p></div>
+
+<h2 id="quy-trinh">Quy trình đáo hạn tận nơi tại {name}</h2>
+<ol>
+<li>Nhắn Zalo <strong>0909 669 325</strong>: vị trí ở {name}, ngân hàng, số tiền, ngày đến hạn.</li>
+<li>Nhận báo phí theo loại thẻ – đồng ý mới thực hiện.</li>
+<li>Nhân viên đến, thanh toán dư nợ vào thẻ; bạn kiểm tra trên app ngân hàng.</li>
+<li>Hoàn trả bằng hạn mức vừa khôi phục, nhận hoá đơn.</li>
+</ol>
+
+<h2 id="bang-phi">Phí đáo hạn, rút tiền thẻ tín dụng</h2>
+{{{{FEE_TABLE}}}}
+
+<h2 id="lan-can">Khu vực lân cận</h2>
+<p>Chúng tôi cũng hỗ trợ tại {near_links} và toàn bộ Đà Nẵng, Điện Bàn. Cần tiền mặt? Xem <a href="{{{{R}}}}rut-tien-the-tin-dung-tan-noi-da-nang/">rút tiền thẻ tín dụng tận nơi</a>.</p>
+""",
+    }
+
+
+EXTRA_PAGES += [district_page(*d) for d in DISTRICTS]
+PAGES += EXTRA_PAGES
+
 
 def strip(h):
     return re.sub(r"\s+", " ", re.sub("<.*?>", "", h)).strip()
@@ -795,7 +1007,8 @@ def strip(h):
 def build_llms():
     """llms.txt – bản tóm tắt cho ChatGPT, Perplexity, Claude… đọc nhanh nội dung website."""
     fees = "\n".join(f"- {a}: đáo hạn {b}, rút tiền {c}" for a, b, c in FEES)
-    groups = [("Dịch vụ", lambda p: not p.get("article") and not p.get("bank") and p["slug"] != "kien-thuc"),
+    groups = [("Dịch vụ", lambda p: not p.get("article") and not p.get("bank") and not p.get("district") and p["slug"] != "kien-thuc"),
+              ("Đáo hạn theo khu vực", lambda p: p.get("district")),
               ("Đáo hạn theo ngân hàng", lambda p: p.get("bank")),
               ("Kiến thức", lambda p: p.get("article"))]
     sec = ""
