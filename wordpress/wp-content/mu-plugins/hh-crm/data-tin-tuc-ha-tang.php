@@ -413,7 +413,7 @@ function hh_import_news() {
 		$seo     = $n['seo'] ?? ( $seo_all[ $n['slug'] ] ?? array() );
 		$cat_id  = hh_news_category( $n['category'] );
 		$week    = (int) ( $n['week'] ?? 0 );
-		$date    = $week ? hh_news_plan_date( $week, $pos[ $week ] = ( $pos[ $week ] ?? -1 ) + 1 ) : time() - $i * HOUR_IN_SECONDS;
+		$date    = ! empty( $n['date'] ) ? (int) strtotime( $n['date'] . ' ' . wp_timezone_string() ) : ( $week ? hh_news_plan_date( $week, $pos[ $week ] = ( $pos[ $week ] ?? -1 ) + 1 ) : time() - $i * HOUR_IN_SECONDS );
 		$content = hh_news_build_content( $n, $seo );
 		$post    = get_posts( array( 'name' => $n['slug'], 'post_type' => 'post', 'post_status' => array( 'publish', 'future', 'draft', 'pending', 'private' ), 'numberposts' => 1 ) )[0] ?? null;
 		if ( $post ) {
@@ -448,6 +448,25 @@ function hh_import_news() {
 		}
 		if ( $week ) {
 			update_post_meta( $id, '_hh_plan_week', $week );
+		}
+		// Ảnh đại diện đi kèm plugin ("plugin:img/…"): chỉ gắn khi bài chưa có ảnh đại diện.
+		if ( ! empty( $n['image'] ) && ! has_post_thumbnail( $id ) && function_exists( 'hh_img_link_local_path' ) ) {
+			$file = hh_img_link_local_path( hh_img_link_key( $n['image'] ) );
+			if ( $file ) {
+				require_once ABSPATH . 'wp-admin/includes/file.php';
+				require_once ABSPATH . 'wp-admin/includes/media.php';
+				require_once ABSPATH . 'wp-admin/includes/image.php';
+				$tmp = wp_tempnam( basename( $file ) );
+				if ( $tmp && copy( $file, $tmp ) ) {
+					$att = media_handle_sideload( array( 'name' => basename( $file ), 'tmp_name' => $tmp ), $id, $n['image_alt'] ?? $n['title'] );
+					if ( is_wp_error( $att ) ) {
+						wp_delete_file( $tmp );
+					} else {
+						update_post_meta( $att, '_wp_attachment_image_alt', $n['image_alt'] ?? $n['title'] );
+						set_post_thumbnail( $id, $att );
+					}
+				}
+			}
 		}
 		$meta = array(
 			'rank_math_focus_keyword' => $n['keyword'],

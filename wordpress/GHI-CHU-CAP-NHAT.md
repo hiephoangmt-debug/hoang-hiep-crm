@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 04/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.12.4** + plugin Hoàng Hiệp CRM **2.17.3**)
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.12.4** + plugin Hoàng Hiệp CRM **2.17.4**)
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt (khoảng 5 phút)
@@ -11,7 +11,7 @@
 4. **Cài đặt → Đường dẫn tĩnh** → bấm **Lưu** (để trang mới Tòa F2, phân khu Hải Vân Bay chạy được).
 5. **LiteSpeed Cache → Purge All**, rồi Ctrl + Shift + R (điện thoại: tắt hẳn tab, mở lại).
 
-**Kiểm tra sau khi cài:** Giao diện hiện 2.12.4 · Plugin hiện 2.17.3 · mở `/du-an/fours-tower-f2-thap-mai/` thấy 4 con số 19% – 25% – 15% – 70%; FourS Tower có ảnh phối cảnh hoàng hôn ở đầu trang.
+**Kiểm tra sau khi cài:** Giao diện hiện 2.12.4 · Plugin hiện 2.17.4 · mở `/du-an/fours-tower-f2-thap-mai/` thấy 4 con số 19% – 25% – 15% – 70%; FourS Tower có ảnh phối cảnh hoàng hôn ở đầu trang.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
 
@@ -30,6 +30,10 @@
 ### Ảnh mới
 - **FourS Tower & Tòa F2:** 5 ảnh phối cảnh (toàn cảnh hoàng hôn làm ảnh đại diện; 4 tháp, trục đường trung tâm, về đêm hướng sông trong Hình ảnh; phố thương mại khối đế trong Tiện ích).
 - **Casamia Balanca Hội An:** 44 ảnh – tổng quan, nhà vườn, nội thất, mặt bằng, sự kiện Sound of Balance 25/04/2026, flycam thi công; tiện ích đời sống (hồ bơi, pickleball, chạy bộ, đạp xe, yoga, BBQ, xe điện nội khu); không gian sống (phòng khách, bếp, phòng ăn, phòng ngủ). Ảnh bồn tắm đã bỏ – web đã tải thì tự gỡ.
+
+### Tin tức – chuyên mục mới "Nhịp sống Đà Nẵng"
+- Bài đầu tiên: *Chuẩn bị đầu tư công viên, câu lạc bộ thể thao biển và bãi tắm Sơn Thủy* (phường Ngũ Hành Sơn), có ảnh phối cảnh (ghi nguồn Danang 35K Feet), điểm chính, SEO. Đăng ngày 06/10/2026.
+- Chuyên mục tự hiện thành nút lọc trên trang Tin tức: `/category/nhip-song-da-nang/`.
 
 ### Vinhomes Hải Vân Bay
 - Cập nhật 10/2026; 4 trang phân khu Bạch Vân, Vịnh Mây, Đảo Ngọc, Tinh Vân (giá, tiện ích, giỏ hàng 6 căn giá "Liên hệ", FAQ).
