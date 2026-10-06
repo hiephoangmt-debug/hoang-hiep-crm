@@ -1,6 +1,6 @@
-# Cài đặt SEO & chia sẻ cho từng trang LadiPage (25 trang)
+# Cài đặt SEO & chia sẻ – 25 trang trên www.the-tin-dung-da-nang.com
 
-Trong editor mỗi trang: **Cài đặt → SEO & Social**. Dán **Tiêu đề** và **Mô tả**, chọn **Ảnh chia sẻ** là ảnh dịch vụ có sẵn trên LadiPage (dich-vu-the-tin-dung-da-nang-…png) hoặc file `og-image.png`, Lưu rồi **Xuất bản** đúng đường dẫn ghi ở tiêu đề mục.
+Trong editor mỗi trang: **Cài đặt → SEO & Social**. Dán **Tiêu đề** và **Mô tả**, chọn **Ảnh chia sẻ** là ảnh dịch vụ có sẵn trên LadiPage (dich-vu-the-tin-dung-da-nang-…png) hoặc file `og-image.png`, Lưu rồi **Xuất bản** lên tên miền **www.the-tin-dung-da-nang.com** đúng đường dẫn ghi ở tiêu đề mục.
 
 ## /
 Editor: https://app.ladipage.com/editor/6ac3a8ecc24014001351dff5

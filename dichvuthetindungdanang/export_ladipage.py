@@ -3,7 +3,7 @@
 
 Cách dùng:  python3 build.py && python3 export_ladipage.py
 Kết quả: ladipage/<duong-dan>.html – mỗi file là 1 landing page, xuất bản trên LadiPage
-tại https://www.dichvuthetindungdanang.com/<duong-dan> (trang chủ: index.html -> "/").
+tại build.DOMAIN + <duong-dan> (hiện là the-tin-dung-da-nang.com) (trang chủ: index.html -> "/").
 - CSS inline, icon inline, không JS (LadiPage không chạy JS tự viết)
 - Link nội bộ trỏ tới URL thật trên tên miền (đường dẫn phẳng, không dấu "/" cuối)
 - Trang chủ: form báo phí -> form thu lead; công cụ tính -> bảng ví dụ tĩnh
@@ -116,7 +116,7 @@ def convert(s, slug):
     s = re.sub(r'<dl class="facts">.*?</dl>', facts_to_list, s, flags=re.S)
 
     # Link "#..." tới trang khác: LadiPage không nhảy được tới mục -> trỏ thẳng trang đó
-    s = re.sub(r'href="(https://www\.dichvuthetindungdanang\.com/[^"#]*)#[^"]*"', r'href="\1"', s)
+    s = re.sub(r'href="(' + re.escape(DOMAIN) + r'[^"#]*)#[^"]*"', r'href="\1"', s)
     s = re.sub(r'\s*<li><a href="[^"]*">Câu hỏi thường gặp</a></li>', "", s)
 
     # Mục lục: LadiPage bỏ id của tiêu đề nên link "#..." không nhảy -> bỏ mục lục

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tạo toàn bộ trang HTML tĩnh cho dichvuthetindungdanang.com.
+"""Tạo toàn bộ trang HTML tĩnh cho the-tin-dung-da-nang.com.
 
 Cách dùng:  python3 build.py
 - Sửa giá ở FEES, thông tin liên hệ ở SITE.
@@ -10,7 +10,8 @@ Kết quả ghi đè index.html, các thư mục trang con và sitemap.xml.
 import html, json, os, re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DOMAIN = "https://www.dichvuthetindungdanang.com/"
+DOMAIN = "https://www.the-tin-dung-da-nang.com/"
+SISTER = "https://www.dichvuthetindungdanang.com/"  # web cũ (trang đang xếp hạng), liên kết qua lại
 UPDATED = "2026-10-05"  # ngày cập nhật hiển thị + dateModified
 
 SITE = {
@@ -51,7 +52,7 @@ def business_schema():
         "@context": "https://schema.org", "@type": "FinancialService", "@id": BUSINESS_ID,
         "name": SITE["name"], "url": DOMAIN, "image": SITE["image"], "logo": SITE["image"],
         "alternateName": [SITE["brand"], "Dịch vụ rút tiền thẻ tín dụng Đà Nẵng", "Đáo hạn thẻ tín dụng Đà Nẵng"],
-        "hasMap": SITE["maps"], "sameAs": ["https://zalo.me/" + SITE["phone"], "https://www.the-tin-dung-da-nang.com/"],
+        "hasMap": SITE["maps"], "sameAs": ["https://zalo.me/" + SITE["phone"], SISTER],
         "description": f"Dịch vụ đáo hạn thẻ tín dụng, rút tiền thẻ tín dụng và tư vấn mở thẻ tại Đà Nẵng. Phí từ {FEE_MIN}, xử lý khoảng 15 phút, hỗ trợ tận nơi.",
         "telephone": "+84909669325", "email": SITE["email"], "priceRange": f"Phí từ {FEE_MIN}",
         "address": {"@type": "PostalAddress", "streetAddress": SITE["street"], "addressLocality": "Đà Nẵng", "addressRegion": "Đà Nẵng", "addressCountry": "VN"},
@@ -510,7 +511,7 @@ PAGES = [
 "h1": "Giới Thiệu & Liên Hệ – Dịch Vụ Thẻ Tín Dụng Đà Nẵng",
 "intro": "Chúng tôi hỗ trợ người dùng thẻ tín dụng tại Đà Nẵng thanh toán đúng hạn, nhận tiền nhanh và dùng thẻ an toàn – minh bạch phí, có hoá đơn, thẻ không rời tay khách.",
 "tldr": [
-    "Tên: Dịch Vụ Thẻ Tín Dụng Đà Nẵng (VT – Vân Trần) – website dichvuthetindungdanang.com.",
+    "Tên: Dịch Vụ Thẻ Tín Dụng Đà Nẵng (VT – Vân Trần) – website the-tin-dung-da-nang.com.",
     "Địa chỉ: " + SITE["address"] + " (gọi trước khi đến).",
     "Liên hệ: Zalo/điện thoại <strong>0909 669 325</strong>, email Km.camvan@gmail.com.",
     "Giờ làm việc: " + HOURS + ".",
@@ -539,7 +540,7 @@ PAGES = [
 <tr><td><strong>Điện thoại / Zalo</strong></td><td>0909 669 325</td></tr>
 <tr><td><strong>Email</strong></td><td>Km.camvan@gmail.com</td></tr>
 <tr><td><strong>Địa chỉ</strong></td><td><a href="{{MAPS}}" target="_blank" rel="noopener">{{ADDRESS}}</a> (gọi trước khi đến)</td></tr>
-<tr><td><strong>Website</strong></td><td>www.dichvuthetindungdanang.com</td></tr>
+<tr><td><strong>Website</strong></td><td>www.the-tin-dung-da-nang.com · <a href="https://www.dichvuthetindungdanang.com/" target="_blank" rel="noopener">www.dichvuthetindungdanang.com</a></td></tr>
 <tr><td><strong>Giờ làm việc</strong></td><td>{{HOURS}}</td></tr>
 <tr><td><strong>Khu vực phục vụ</strong></td><td>{{AREAS}}</td></tr>
 </tbody></table></div>

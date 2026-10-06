@@ -32,4 +32,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://www.dichvuthetindungdanang.com/sitemap.xml
+Sitemap: https://www.the-tin-dung-da-nang.com/sitemap.xml
