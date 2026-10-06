@@ -159,7 +159,7 @@ Giải thích dễ hiểu đáo hạn thẻ tín dụng là gì, cách hoạt đ
 ```
 
 ## /ngay-sao-ke-va-ngay-den-han
-Editor: https://app.ladipage.com/editor/6ac3abb6c24014001351ffbc
+Editor: https://app.ladipage.com/editor/6ac519b3ca092700120ae95f
 
 Tiêu đề:
 ```
