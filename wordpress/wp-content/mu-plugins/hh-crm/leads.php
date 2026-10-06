@@ -215,6 +215,11 @@ function hh_handle_lead() {
 	if ( $ref_id && ! in_array( get_post_type( $ref_id ), array( 'bat-dong-san', 'du-an' ), true ) ) {
 		$ref_id = 0;
 	}
+	$src = function_exists( 'hh_src_from_request' ) ? hh_src_from_request() : array();
+	if ( ! $ref_id && ! empty( $src['url'] ) ) {
+		$ref_id = hh_src_post_id( $src['url'] ); // Form không ghi dự án: lấy theo trang khách đang xem.
+	}
+	$spam = function_exists( 'hh_is_real_phone' ) && ! hh_is_real_phone( $phone );
 
 	$lead_id = wp_insert_post(
 		array(
@@ -228,17 +233,23 @@ function hh_handle_lead() {
 	if ( $lead_id && ! is_wp_error( $lead_id ) ) {
 		update_post_meta( $lead_id, 'hh_phone', $phone );
 		update_post_meta( $lead_id, 'hh_need', $need );
-		update_post_meta( $lead_id, 'hh_lead_status', 'moi' );
+		update_post_meta( $lead_id, 'hh_lead_status', $spam ? 'huy' : 'moi' );
 		if ( $ref_id ) {
 			update_post_meta( $lead_id, 'hh_property_id', $ref_id );
 		}
+		if ( $src ) {
+			hh_src_save( $lead_id, $src );
+		}
+		if ( $spam ) {
+			update_post_meta( $lead_id, 'hh_spam', 1 ); // Số không phải Việt Nam (thường là bot): lưu lại, không báo.
+			$go( 'ok' );
+		}
 
 		$body = "Khách hàng mới từ website:\n\nHọ tên: {$name}\nĐiện thoại: {$phone}\nNhu cầu: {$need}\n";
-		if ( $ref_id ) {
-			$body .= 'Quan tâm: ' . get_the_title( $ref_id ) . ' – ' . get_permalink( $ref_id ) . "\n";
-		}
+		$body .= $src ? hh_src_lines( $src, $ref_id ) : ( $ref_id ? 'Quan tâm: ' . get_the_title( $ref_id ) . ' – ' . get_permalink( $ref_id ) . "\n" : '' );
 		$body .= "\nLời nhắn:\n{$message}\n\nXem trong quản trị: " . admin_url( 'post.php?post=' . $lead_id . '&action=edit' );
-		hh_lead_mail( '[Website] Khách hàng mới: ' . $name . ' – ' . $phone, $body );
+		$where = $ref_id ? get_the_title( $ref_id ) : ( ! empty( $src['title'] ) ? trim( preg_replace( '/\s*[–|-]\s*Hoàng Hiệp.*$/u', '', $src['title'] ) ) : '' );
+		hh_lead_mail( '[Website] Khách mới' . ( $where ? ' – ' . $where : '' ) . ': ' . $name . ' – ' . $phone, $body );
 	}
 
 	$go( 'ok' );

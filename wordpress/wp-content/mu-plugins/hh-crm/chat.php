@@ -131,6 +131,7 @@ function hh_chat_handle() {
 	if ( $page && ! in_array( get_post_type( $page ), array( 'du-an', 'bat-dong-san' ), true ) ) {
 		$page = 0;
 	}
+	$src = function_exists( 'hh_src_from_request' ) ? hh_src_from_request() : array();
 	$raw  = json_decode( (string) wp_unslash( $_POST['messages'] ?? '[]' ), true ); // phpcs:ignore WordPress.Security.NonceVerification
 	$msgs = array();
 	foreach ( array_slice( is_array( $raw ) ? $raw : array(), -14 ) as $m ) {
@@ -154,7 +155,7 @@ function hh_chat_handle() {
 	$phone    = hh_chat_find_phone( $last );
 	$new_lead = false;
 	if ( $phone && ! $lead_id ) {
-		$lead_id  = hh_chat_save_lead( $phone, $msgs, $page );
+		$lead_id  = hh_chat_save_lead( $phone, $msgs, $page, $src );
 		$new_lead = (bool) $lead_id;
 		if ( $lead_id ) {
 			set_transient( 'hh_chat_lead_' . $conv, $lead_id, DAY_IN_SECONDS );
@@ -164,7 +165,7 @@ function hh_chat_handle() {
 	// Báo Telegram khi khách bắt đầu chat (1 lần mỗi cuộc chat), chưa cần số điện thoại.
 	if ( ! $lead_id && function_exists( 'hh_tg_send' ) && '0' !== (string) hh_chat_opt( 'tg_start', '1' ) && ! get_transient( 'hh_chat_tg_' . $conv ) ) {
 		set_transient( 'hh_chat_tg_' . $conv, 1, DAY_IN_SECONDS );
-		hh_tg_send( "💬 Khách đang chat trên web (chưa để số)\n" . ( $page ? 'Đang xem: ' . get_the_title( $page ) . ' – ' . get_permalink( $page ) . "\n" : '' ) . 'Khách hỏi: ' . $last . "\n\nKhi khách để lại số, tin nhắn có số điện thoại sẽ về đây." );
+		hh_tg_send( '💬 Khách đang chat' . ( $page ? ' – ' . get_the_title( $page ) : '' ) . " (chưa để số)\n" . ( function_exists( 'hh_src_lines' ) ? hh_src_lines( $src, $page ) : ( $page ? 'Đang xem: ' . get_the_title( $page ) . ' – ' . get_permalink( $page ) . "\n" : '' ) ) . 'Khách hỏi: ' . $last . "\n\nKhi khách để lại số, tin nhắn có số điện thoại sẽ về đây." );
 	}
 
 	$reply = '';
@@ -203,7 +204,7 @@ function hh_chat_transcript( $msgs ) {
 	return implode( "\n\n", $lines );
 }
 
-function hh_chat_save_lead( $phone, $msgs, $page ) {
+function hh_chat_save_lead( $phone, $msgs, $page, $src = array() ) {
 	$lead_id = wp_insert_post(
 		array(
 			'post_type'    => 'khach-hang',
@@ -221,13 +222,18 @@ function hh_chat_save_lead( $phone, $msgs, $page ) {
 	if ( $page ) {
 		update_post_meta( $lead_id, 'hh_property_id', $page );
 	}
+	if ( $src && function_exists( 'hh_src_save' ) ) {
+		hh_src_save( $lead_id, $src );
+	}
 	$body = "📞 Điện thoại / Zalo: {$phone}\n";
-	if ( $page ) {
+	if ( $src && function_exists( 'hh_src_lines' ) ) {
+		$body .= hh_src_lines( $src, $page );
+	} elseif ( $page ) {
 		$body .= '🏢 Đang xem: ' . get_the_title( $page ) . "\n" . get_permalink( $page ) . "\n";
 	}
 	$body .= "\n━━━━━━ NỘI DUNG CHAT ━━━━━━\n\n" . hh_chat_transcript( $msgs ) . "\n\n━━━━━━━━━━━━━━━━━━━━\nXem trong quản trị: " . admin_url( 'post.php?post=' . $lead_id . '&action=edit' );
 	if ( function_exists( 'hh_lead_mail' ) ) {
-		hh_lead_mail( 'KHÁCH MỚI qua chat web – ' . $phone, $body );
+		hh_lead_mail( 'KHÁCH MỚI qua chat web' . ( $page ? ' – ' . get_the_title( $page ) : '' ) . ' – ' . $phone, $body );
 	}
 	return (int) $lead_id;
 }

@@ -142,6 +142,8 @@
 		body.append( 'conv', state.conv );
 		body.append( 'page', C.page || 0 );
 		body.append( 'messages', JSON.stringify( state.msgs.slice( -14 ) ) );
+		var src = window.HH_SRC || {};
+		[ 'url', 'title', 'first', 'ref' ].forEach( function ( k ) { body.append( 'src_' + k, String( src[ k ] || '' ).slice( 0, 500 ) ); } );
 		fetch( C.ajax, { method: 'POST', body: body, credentials: 'same-origin' } )
 			.then( function ( r ) { return r.json(); } )
 			.then( function ( r ) {

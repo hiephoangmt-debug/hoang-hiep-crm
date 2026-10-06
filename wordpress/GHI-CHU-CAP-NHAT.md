@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 06/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.12.4** + plugin Hoàng Hiệp CRM **2.17.5**)
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.12.4** + plugin Hoàng Hiệp CRM **2.17.6**)
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -31,7 +31,7 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 ### Bước 5 – Xoá bộ nhớ đệm và kiểm tra
 1. Thanh đen trên cùng → rê chuột vào **LiteSpeed Cache** → **Purge All** (hoặc menu trái LiteSpeed Cache → Toolbox → Purge All).
 2. Mở web, bấm **Ctrl + Shift + R** (điện thoại: tắt hẳn tab, mở lại).
-3. Kiểm tra phiên bản: **Plugin → Plugin đã cài**: Hoàng Hiệp CRM **2.17.5** · **Giao diện**: Hoàng Hiệp **2.12.4**.
+3. Kiểm tra phiên bản: **Plugin → Plugin đã cài**: Hoàng Hiệp CRM **2.17.6** · **Giao diện**: Hoàng Hiệp **2.12.4**.
 4. Xem kết quả:
    - **Tin tức** → nút **Nhịp sống Đà Nẵng** → bài bãi tắm Sơn Thủy.
    - **Casamia Balanca Hội An**: ảnh mới ở mục Tiện ích, Hình ảnh, Tiến độ – web đưa ảnh vào dần trong 15–20 phút; chưa đủ thì đợi thêm rồi Purge All lần nữa.
@@ -56,6 +56,12 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 ### Ảnh mới
 - **FourS Tower & Tòa F2:** 5 ảnh phối cảnh (toàn cảnh hoàng hôn làm ảnh đại diện; 4 tháp, trục đường trung tâm, về đêm hướng sông trong Hình ảnh; phố thương mại khối đế trong Tiện ích).
 - **Casamia Balanca Hội An:** 44 ảnh – tổng quan, nhà vườn, nội thất, mặt bằng, sự kiện Sound of Balance 25/04/2026, flycam thi công; tiện ích đời sống (hồ bơi, pickleball, chạy bộ, đạp xe, yoga, BBQ, xe điện nội khu); không gian sống (phòng khách, bếp, phòng ăn, phòng ngủ). Ảnh bồn tắm đã bỏ – web đã tải thì tự gỡ.
+
+### Biết khách đến từ dự án nào, nguồn nào (Telegram / email)
+- Tiêu đề tin báo có tên dự án: *[Website] Khách mới – Casamia Balanca Hội An: Tên – SĐT*; chat: *KHÁCH MỚI qua chat web – FourS Tower – SĐT*.
+- Nội dung thêm: 🏢 Dự án / tin khách đang xem · 📍 Trang khách để lại số (nếu không phải trang dự án) · 🔎 Vào web từ (Quảng cáo Google / Google tìm kiếm / Facebook / Zalo / Cốc Cốc / trực tiếp, kèm tên chiến dịch nếu link quảng cáo có utm_campaign) · 🚪 Trang vào đầu tiên.
+- Trong **Khách hàng** → mở từng khách: khung **Nguồn khách**.
+- Lọc spam: số không phải số Việt Nam (VD 83656469774) → vẫn lưu, trạng thái *Không tiềm năng*, **không báo** Telegram/email. Số nước ngoài thật cần nhập có dấu + (VD +1…).
 
 ### Casamia Balanca – pháp lý theo sổ hồng (06/10/2026)
 - Theo giấy chứng nhận lô 16 khu SL3 (cấp 8/2026): **đã có sổ hồng từng lô**, đất ở tại đô thị; sổ đứng tên chủ đầu tư ghi thời hạn đến 18/06/2069.
