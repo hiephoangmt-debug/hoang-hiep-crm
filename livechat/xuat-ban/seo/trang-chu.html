@@ -337,6 +337,15 @@ html:not([data-kv=hn]) .kv-hn,html:not([data-kv=dn]) .kv-dn,html[data-kv] .kv-de
 .lbx button{position:absolute;background:rgba(255,255,255,.12);border:0;color:#fff;font-size:30px;width:52px;height:52px;border-radius:50%;cursor:pointer}
 .lbx .lx{top:16px;right:16px}.lbx .lp{left:16px;top:50%}.lbx .ln{right:16px;top:50%}
 .realg .rf{cursor:zoom-in}
+.alive{margin-top:30px;background:#0b2a5b;border-radius:20px;padding:24px;color:#fff}
+.alive h3{margin:0 0 4px;color:#fff;font-size:20px}.alive>p{margin:0 0 16px;color:#cdd7e7;font-size:15px}
+.alive-g{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.alive-g figure{margin:0;position:relative;border-radius:12px;overflow:hidden;aspect-ratio:3/4}
+.alive-g img{width:100%!important;height:100%!important;max-width:none!important;object-fit:cover;object-position:center 35%}
+.alive-g figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 10px 10px;background:linear-gradient(transparent,rgba(0,0,0,.65));font-size:13px;color:#fff}
+.alive-g figcaption b{display:block;color:#ffb27a;font-size:15px}
+.alive .btn,.alive .btn-o{margin-top:16px}
+@media(max-width:800px){.alive-g{grid-template-columns:1fr 1fr}}
 /* hiệu ứng */
 .rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s ease}
 .rv.in{opacity:1;transform:none}
@@ -401,7 +410,7 @@ if(k==='hn'||k==='dn')document.documentElement.setAttribute('data-kv',k);}catch(
     <p class="sub">10 phút ra <b>phố cổ Hội An</b>, vài phút ra <b>biển An Bàng, Cửa Đại</b>. Sông Cổ Cò được dẫn vào tận trong khu bằng kênh nội khu 20m, sát <b>rừng dừa Bảy Mẫu</b>. Khu đô thị compound cao ráo, hạ tầng đồng bộ, <b>nhà đã xây hiện hữu</b>, không phải chờ.</p></div>
     <div class="kv-hn"><span class="eye">Casamia Balanca Hội An · dành cho khách ở xa</span>
     <h1><small>Biệt thự sổ hồng lâu dài tại Hội An</small>Ở xa vẫn <em>yên tâm sở hữu.</em></h1>
-    <p class="sub">Chủ đầu tư Đạt Phương vận hành và <b>thuê lại theo chính sách</b> (căn đủ điều kiện), <b>miễn phí quản lý 2 năm</b>, 10 đêm lưu trú mỗi năm*. Một tài sản có sổ, để giữ và để lại cho con cháu.</p></div>
+    <p class="sub">Chủ đầu tư Đạt Phương vận hành và <b>thuê lại theo chính sách</b> (căn đủ điều kiện), <b>miễn phí quản lý 2 năm</b>, 10 đêm lưu trú mỗi năm*. Một tài sản có sổ, để giữ và để lại cho con cháu. Em gọi video lúc 6h sáng hoặc 5h chiều để anh/chị tự thấy khu đang sống thế nào.</p></div>
     <div class="kv-dn"><span class="eye">Casamia Balanca Hội An · khách Hội An – Đà Nẵng</span>
     <h1><small>Khu nhà ở có ban quản lý, bên sông Cổ Cò</small>Đừng tin quảng cáo. <em>Đến xem trong ngày.</em></h1>
     <p class="sub">Cổng an ninh, trường mầm non theo quy hoạch trong khu, khoảng 10 phút ra phố cổ. Mùa mưa này, mời anh/chị đến xem <b>cao độ nền và hạ tầng thực tế</b>.</p></div>
@@ -474,6 +483,7 @@ if(k==='hn'||k==='dn')document.documentElement.setAttribute('data-kv',k);}catch(
         <div><i>📜</i><b>Sổ lâu dài, để lại cho con cháu</b><p>Nhà ở thấp tầng, sổ hồng sở hữu lâu dài, đứng tên mình, truyền lại được.</p></div>
         <div><i>✅</i><b>Chủ đầu tư đã bàn giao</b><p>Đạt Phương (2002). Casamia Hội An tại Võng Nhi đã bàn giao, đang vận hành cho thuê.</p></div>
       </div>
+      <div class="alive"><h3>Ở xa, nhưng vẫn thấy khu đang sống mỗi ngày</h3><p>Không phải công trường chờ ngày bàn giao. Sáng sớm đã có người chạy bộ dưới hàng cây, chiều có tiếng bóng pickleball, tối đèn sân vườn sáng lên. Ảnh chụp thực tế tại khu.</p><div class="alive-g"><figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/7923c5afd550571591657caba3fbf9c007b7b5e4/livechat/public/img/thuc-te/chay-bo-pho-noi-khu.jpg" alt="Ảnh thực tế Casamia Balanca – Chạy bộ dưới hàng cây" loading="lazy"><figcaption><b>6:00</b>Chạy bộ dưới hàng cây</figcaption></figure><figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/7923c5afd550571591657caba3fbf9c007b7b5e4/livechat/public/img/thuc-te/cong-an-ninh-xe-dien.jpg" alt="Ảnh thực tế Casamia Balanca – Xe điện đón khách ở cổng" loading="lazy"><figcaption><b>8:00</b>Xe điện đón khách ở cổng</figcaption></figure><figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/7923c5afd550571591657caba3fbf9c007b7b5e4/livechat/public/img/thuc-te/pickleball-cung-nhau.jpg" alt="Ảnh thực tế Casamia Balanca – Pickleball buổi chiều" loading="lazy"><figcaption><b>17:00</b>Pickleball buổi chiều</figcaption></figure><figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/7923c5afd550571591657caba3fbf9c007b7b5e4/livechat/public/img/thuc-te/bbq-san-vuon.jpg" alt="Ảnh thực tế Casamia Balanca – Đèn sân vườn sáng lên" loading="lazy"><figcaption><b>19:30</b>Đèn sân vườn sáng lên</figcaption></figure></div><button class="btn btn-o js-open" data-title="Video call xem khu lúc 6h sáng hoặc 5h chiều" data-need="Video call xem nhịp sống trong khu">Video call xem khu lúc 6h sáng / 5h chiều</button></div>
       <div class="kv-faq">
         <div><b>Mua xa có quản lý được không?</b><p>Phần lớn thủ tục làm được từ xa theo hướng dẫn của CĐT (riêng công chứng hợp đồng thường cần có mặt hoặc ủy quyền); em gửi tiến độ, ảnh, video từng giai đoạn.</p></div>
         <div><b>CĐT có trả tiền thuê không?</b><p>Theo hợp đồng thuê ký trực tiếp với CĐT. Em gửi mẫu hợp đồng để đọc kỹ trước khi quyết.</p></div>
@@ -654,7 +664,7 @@ if(k==='hn'||k==='dn')document.documentElement.setAttribute('data-kv',k);}catch(
 
 <section class="sec" id="song-khoe" style="background:var(--soft)">
   <div class="wrap">
-    <div class="center"><span class="real-tag rv">ẢNH THỰC TẾ · ĐANG SỬ DỤNG</span><h2 class="rv">Sáng chạy bộ, chiều pickleball, <em>ngay trước cửa nhà</em></h2><p class="lead rv">Công viên, đường chạy, sân pickleball và gym ngoài trời trong khu đã đưa vào sử dụng.</p></div>
+    <div class="center"><span class="real-tag rv">ẢNH THỰC TẾ · ĐANG SỬ DỤNG</span><h2 class="rv">Một khu đô thị <em>đang sống</em>, không phải đang chờ</h2><p class="lead rv">Không phải khu đô thị “ma” chờ người về. Công viên, đường chạy, sân pickleball, gym ngoài trời đã đưa vào sử dụng; sáng có người chạy bộ, chiều có tiếng bóng, cuối tuần có gia đình dắt cún dạo hồ. Ảnh chụp thực tế tại khu.</p></div>
     <div class="realg life rv">
       <figure class="rf rf-w"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/cab9dd1a9fa4ac3f36cb886b0ed2081b3ba6e2e7/livechat/public/img/thuc-te/dap-xe-cong-casamia-balanca.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Đạp xe quanh quảng trường cổng chính" loading="lazy" decoding="async"><figcaption>Đạp xe quanh quảng trường cổng chính</figcaption></figure>
       <figure class="rf rf-t"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/cab9dd1a9fa4ac3f36cb886b0ed2081b3ba6e2e7/livechat/public/img/thuc-te/chay-bo-pho-noi-khu.jpg" alt="Ảnh thực tế Casamia Balanca Hội An – Chạy bộ dưới hàng cây nội khu" loading="lazy" decoding="async"><figcaption>Chạy bộ dưới hàng cây nội khu</figcaption></figure>
