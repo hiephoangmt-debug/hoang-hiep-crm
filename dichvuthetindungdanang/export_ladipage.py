@@ -78,7 +78,7 @@ def convert(s, slug):
     # CSS inline + marker LadiPage
     s = re.sub(r'<link rel="stylesheet" href="[./]*assets/site.css">',
                lambda m: '<meta name="ladipage-rules" content="v2">\n<style>\n' + CSS +
-               "\n.reveal{opacity:1;transform:none}\n" + TLIST_CSS + "</style>", s)
+               "\n.reveal{opacity:1;transform:none}\nheader.nav{position:relative!important;backdrop-filter:none}\n.navlinks a{display:inline-block;padding:6px 2px}\n" + TLIST_CSS + "</style>", s)
     s = re.sub(r'<script src="[./]*assets/site.js"></script>', "", s)
 
     # Icon: thay <use href="#id"> bằng nội dung symbol (LadiPage không giữ sprite)
@@ -91,6 +91,9 @@ def convert(s, slug):
     # Logo 1 dòng (LadiPage phóng to chữ nhỏ -> tràn dòng trên mobile)
     s = s.replace("<span>Thẻ Tín Dụng Vân Trần<small>ĐÀ NẴNG · RÚT TIỀN · ĐÁO HẠN</small></span>",
                   '<span style="white-space:nowrap">Thẻ Tín Dụng Vân Trần</span>')
+
+    # Menu: tránh LadiPage tự chuyển thành "menu nhiều cấp" (mất link) -> div + link thường
+    s = s.replace('<nav class="menu" aria-label="Menu chính">', '<div class="menu navlinks">').replace('</nav>\n    <a href="#" class="btn btn-zalo" data-zalo>', '</div>\n    <a href="#" class="btn btn-zalo" data-zalo>')
 
     # Zalo / gọi điện cố định
     s = re.sub(r'href="#"([^>]*?)data-zalo', rf'href="{ZALO}" target="_blank" rel="noopener"\1data-zalo', s)
