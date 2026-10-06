@@ -15,7 +15,8 @@ SISTER = "https://www.dichvuthetindungdanang.com/"  # web cũ (trang đang xếp
 UPDATED = "2026-10-05"  # ngày cập nhật hiển thị + dateModified
 
 SITE = {
-    "name": "Dịch Vụ Thẻ Tín Dụng Đà Nẵng",
+    "name": "Dịch Vụ Thẻ Tín Dụng Đà Nẵng – Vân Trần",
+    "short": "Thẻ Tín Dụng Vân Trần",
     "phone": "0909669325",
     "phone_text": "0909 669 325",
     "email": "Km.camvan@gmail.com",
@@ -51,7 +52,7 @@ def business_schema():
     return {
         "@context": "https://schema.org", "@type": "FinancialService", "@id": BUSINESS_ID,
         "name": SITE["name"], "url": DOMAIN, "image": SITE["image"], "logo": SITE["image"],
-        "alternateName": [SITE["brand"], "Dịch vụ rút tiền thẻ tín dụng Đà Nẵng", "Đáo hạn thẻ tín dụng Đà Nẵng"],
+        "alternateName": [SITE["brand"], "Vân Trần", "Thẻ Tín Dụng Vân Trần", "Dịch vụ rút tiền thẻ tín dụng Đà Nẵng", "Đáo hạn thẻ tín dụng Đà Nẵng"],
         "hasMap": SITE["maps"], "sameAs": ["https://zalo.me/" + SITE["phone"], SISTER],
         "description": f"Dịch vụ đáo hạn thẻ tín dụng, rút tiền thẻ tín dụng và tư vấn mở thẻ tại Đà Nẵng. Phí từ {FEE_MIN}, xử lý khoảng 15 phút, hỗ trợ tận nơi.",
         "telephone": "+84909669325", "email": SITE["email"], "priceRange": f"Phí từ {FEE_MIN}",
@@ -301,7 +302,7 @@ def build_index():
         f'<div class="c"><h3>{q["h1"]}</h3><p>{short(q["desc"], 110)}</p></div></a>'
         for q in PAGES if q.get("article"))[:6000]
     body = fill(read("src/pages/index.body.html"), root).replace("{{POSTS}}", blog)
-    website = {"@context": "https://schema.org", "@type": "WebSite", "@id": DOMAIN + "#website", "url": DOMAIN,
+    website = {"@context": "https://schema.org", "@type": "WebSite", "@id": DOMAIN + "#website", "url": DOMAIN, "alternateName": ["Vân Trần", "Thẻ Tín Dụng Vân Trần"],
                "name": SITE["name"], "inLanguage": "vi-VN", "publisher": {"@id": BUSINESS_ID}}
     head = fill(read("src/index.head.html"), root).replace("{{BUSINESS_LD}}", jsonld(business_schema()) + "\n" + jsonld(website))
     out = (head + '<link rel="stylesheet" href="assets/site.css">\n</head>\n<body>\n'
@@ -475,7 +476,7 @@ PAGES = [
 ],
 "crumb": "Bảng phí",
 "title": f"Bảng Phí Đáo Hạn, Rút Tiền Thẻ Tín Dụng Đà Nẵng 2026 – Từ {FEE_MIN_RUT}",
-"desc": f"Bảng phí đáo hạn (từ {FEE_MIN}) và rút tiền (từ {FEE_MIN_RUT}) thẻ tín dụng tại Đà Nẵng 2026 theo loại thẻ Visa, JCB, Mastercard, không phí ẩn. So sánh với phí trễ hạn và phí rút ATM.",
+"desc": f"Bảng phí đáo hạn (từ {FEE_MIN}) và rút tiền (từ {FEE_MIN_RUT}) thẻ tín dụng tại Đà Nẵng 2026 theo loại thẻ, không phí ẩn. So sánh với phí trễ hạn và phí rút ATM.",
 "h1": "Bảng Phí Đáo Hạn & Rút Tiền Thẻ Tín Dụng Đà Nẵng 2026",
 "intro": f"Phí theo loại thẻ: rút tiền từ {FEE_MIN_RUT}, đáo hạn từ {FEE_MIN}. Báo trước khi làm, không phát sinh. So sánh nhanh để thấy vì sao đáo hạn đúng lúc giúp bạn tiết kiệm.",
 "related": ["dao-han-the-tin-dung-da-nang", "rut-tien-the-tin-dung-da-nang", "kien-thuc/tra-cham-the-tin-dung-bi-phat-bao-nhieu"],
@@ -519,6 +520,9 @@ PAGES = [
 ],
 "related": ["dao-han-the-tin-dung-da-nang", "rut-tien-the-tin-dung-da-nang", "bang-phi"],
 "body": """
+<h2 id="thuong-hieu">Về thương hiệu Vân Trần (VT)</h2>
+<p><strong>Vân Trần (VT)</strong> là thương hiệu của Dịch Vụ Thẻ Tín Dụng Đà Nẵng, hỗ trợ chủ thẻ tại Đà Nẵng và Điện Bàn rút tiền, đáo hạn thẻ tín dụng minh bạch: báo phí trước, thẻ không rời tay khách, có hoá đơn cho từng giao dịch. Website chính thức: the-tin-dung-da-nang.com và dichvuthetindungdanang.com, liên hệ duy nhất qua <strong>0909 669 325</strong>.</p>
+
 <h2 id="dich-vu">Chúng tôi làm gì?</h2>
 <ul>
 <li><a href="{{R}}dao-han-the-tin-dung-da-nang/">Đáo hạn thẻ tín dụng</a>: thanh toán dư nợ đúng hạn giúp khách, tránh phí phạt và nợ xấu.</li>
@@ -747,7 +751,7 @@ def bank_page(key, name, full, app, note):
         "crumb": f"Đáo hạn thẻ {name}",
         "bank": True,
         "title": f"Đáo Hạn Thẻ Tín Dụng {name} Tại Đà Nẵng ✔️ Phí Từ {dao}, 15 Phút",
-        "desc": f"Đáo hạn, rút tiền thẻ tín dụng {name} tại Đà Nẵng: phí từ {dao}, xong 15 phút, tận nơi mọi quận. Hướng dẫn xem ngày đến hạn trên {app}. Zalo 0909 669 325.",
+        "desc": f"Đáo hạn, rút tiền thẻ tín dụng {name} tại Đà Nẵng: phí từ {dao}, xong 15 phút, tận nơi mọi quận. Zalo 0909 669 325.",
         "h1": f"Đáo Hạn Thẻ Tín Dụng {name} Tại Đà Nẵng",
         "intro": f"Thẻ {name} sắp đến hạn? Hỗ trợ đáo hạn và rút tiền thẻ tín dụng {name} (Visa, Mastercard, JCB…) trong 15 phút, tại cửa hàng hoặc tận nơi khắp Đà Nẵng.",
         "related": ["dao-han-the-tin-dung-da-nang", "bang-phi", "kien-thuc/ngay-sao-ke-va-ngay-den-han"],

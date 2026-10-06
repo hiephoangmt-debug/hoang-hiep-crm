@@ -89,8 +89,8 @@ def convert(s, slug):
                lambda m: f'<svg{m.group(1)} {symbols[m.group(2)][0]}>{symbols[m.group(2)][1]}</svg>', s)
 
     # Logo 1 dòng (LadiPage phóng to chữ nhỏ -> tràn dòng trên mobile)
-    s = s.replace("<span>Thẻ Tín Dụng Đà Nẵng<small>ĐÁO HẠN · RÚT TIỀN · MỞ THẺ</small></span>",
-                  '<span style="white-space:nowrap">Thẻ Tín Dụng Đà Nẵng</span>')
+    s = s.replace("<span>Thẻ Tín Dụng Vân Trần<small>ĐÀ NẴNG · RÚT TIỀN · ĐÁO HẠN</small></span>",
+                  '<span style="white-space:nowrap">Thẻ Tín Dụng Vân Trần</span>')
 
     # Zalo / gọi điện cố định
     s = re.sub(r'href="#"([^>]*?)data-zalo', rf'href="{ZALO}" target="_blank" rel="noopener"\1data-zalo', s)
