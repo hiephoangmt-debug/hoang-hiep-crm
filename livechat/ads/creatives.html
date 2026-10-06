@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Ảnh quảng cáo Casamia Balanca</title>
+<!--
+  Mẫu ảnh quảng cáo. Mỗi khối .ad là 1 ảnh; khổ do class: .sq (1080x1080) hoặc .st (1080x1920).
+  Xuất ảnh: node ads/render-ads.js  →  ads/out/*.png
+-->
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+  :root{--navy:#0b2a5b;--navy-2:#061a3d;--orange:#f47c20;--orange-2:#e06a10;--white:#fff}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Be Vietnam Pro",sans-serif;background:#ccc;display:flex;flex-wrap:wrap;gap:40px;padding:40px}
+  .ad{position:relative;overflow:hidden;color:#fff;background:var(--navy);width:1080px}
+  .ad.sq{height:1080px}.ad.st{height:1920px}
+  .bg{position:absolute;inset:0;background-size:cover;background-position:center}
+  .shade{position:absolute;inset:0}
+  .in{position:absolute;inset:0;display:flex;flex-direction:column;padding:64px}
+  .st .in{padding:200px 72px 290px} /* vùng an toàn Story/Reels: chừa ~14% trên và dưới */
+  .brand{display:flex;align-items:center;gap:14px;font-weight:800;letter-spacing:6px;font-size:26px}
+  .brand i{width:46px;height:5px;background:var(--orange);display:inline-block}
+  .brand small{font-weight:700;letter-spacing:4px;color:var(--orange);font-size:22px}
+  .tag{display:inline-block;align-self:flex-start;background:var(--orange);color:#fff;font-weight:800;font-size:26px;padding:10px 22px;border-radius:999px;letter-spacing:1px}
+  h1{font-weight:800;line-height:1.08;letter-spacing:-1px}
+  .big{white-space:nowrap;font-weight:800;line-height:1;letter-spacing:-4px;color:var(--orange);text-shadow:0 6px 30px rgba(0,0,0,.35)}
+  .big small{font-size:.38em;letter-spacing:-1px}
+  .sub{font-weight:600;opacity:.97;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+  h1{text-shadow:0 2px 16px rgba(0,0,0,.35)}
+  .chips{display:flex;flex-wrap:wrap;gap:14px}
+  .chip{background:rgba(255,255,255,.96);color:var(--navy);border-radius:16px;padding:16px 22px;font-weight:700;font-size:28px;line-height:1.2;border-left:8px solid var(--orange)}
+  .chip b{display:block;color:var(--orange);font-size:40px;font-weight:800}
+  .cta{display:flex;align-items:center;justify-content:space-between;gap:20px;background:#fff;border-radius:22px;padding:18px 18px 18px 30px;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+  .cta span{color:var(--navy);font-weight:700;font-size:28px;line-height:1.25}
+  .cta span b{display:block;font-size:34px;font-weight:800}
+  .cta em{font-style:normal;background:var(--orange);color:#fff;font-weight:800;font-size:30px;padding:20px 28px;border-radius:16px;white-space:nowrap}
+  .fine{font-size:19px;opacity:.75;font-weight:500;margin-top:16px}
+  .sp{flex:1}
+  /* Khổ dọc: ảnh đặt ở dải giữa để giữ độ nét */
+  .st .bg{top:30%;bottom:28%;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 18%,#000 82%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 18%,#000 82%,transparent 100%)}
+  .st .shade{background:linear-gradient(180deg,rgba(6,26,61,.0) 0%,rgba(6,26,61,.0) 100%)!important}
+  .st{background:linear-gradient(180deg,#0b2a5b 0%,#061a3d 100%)}
+  .glow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(244,124,32,.35),rgba(244,124,32,0) 70%)}
+</style>
+</head>
+<body>
+
+<!-- ===== 1. THUÊ LẠI 60 TRIỆU/THÁNG ===== -->
+<template id="t-thue60">
+  <div class="bg" style="background-image:url(../public/img/forestside.jpg);background-position:60% 50%"></div>
+  <div class="shade" style="background:linear-gradient(180deg,rgba(6,26,61,.92) 0%,rgba(6,26,61,.55) 42%,rgba(6,26,61,.25) 60%,rgba(6,26,61,.94) 100%)"></div>
+  <div class="in">
+    <div class="brand"><i></i>CASAMIA BALANCA <small>HỘI AN</small></div>
+    <div style="height:var(--g1)"></div>
+    <h1 style="font-size:var(--h1)">Biệt thự giữa rừng dừa Hội An<br>Chủ đầu tư thuê lại</h1>
+    <div class="big" style="font-size:var(--big)">60 triệu<small>/tháng</small></div>
+    <div class="sp"></div>
+    <div class="chips">
+      <div class="chip"><b>300 triệu</b>đặt cọc giữ căn</div>
+      <div class="chip"><b>0% lãi</b>24 tháng · vay 70%</div>
+      <div class="chip"><b>4 tỷ</b>chiết khấu tối đa</div>
+    </div>
+    <div style="height:28px"></div>
+    <div class="cta"><span>Căn nào nhận 60 triệu/tháng?<b>Nhận bảng tính qua Zalo</b></span><em>Xem ngay →</em></div>
+    <div class="fine">Theo CSBH áp dụng từ 09/2026 · Hình ảnh phối cảnh minh hoạ · Hotline/Zalo 0904 567 009</div>
+  </div>
+</template>
+
+<!-- ===== 2. CHIẾT KHẤU 4 TỶ ===== -->
+<template id="t-ck4ty">
+  <div class="bg" style="background-image:url(../public/img/terrace.jpg);background-position:30% 50%"></div>
+  <div class="shade" style="background:linear-gradient(180deg,rgba(6,26,61,.9) 0%,rgba(6,26,61,.35) 45%,rgba(6,26,61,.2) 60%,rgba(6,26,61,.95) 100%)"></div>
+  <div class="in">
+    <div class="brand"><i></i>CASAMIA BALANCA <small>HỘI AN</small></div>
+    <div style="height:var(--g1)"></div>
+    <span class="tag">FORESTSIDE VILLA · BÀN GIAO 2026</span>
+    <div style="height:22px"></div>
+    <h1 style="font-size:var(--h1)">Chiết khấu tới</h1>
+    <div class="big" style="font-size:calc(var(--big) * 1.3);margin-top:20px">4 tỷ</div>
+    <div class="sub" style="font-size:var(--sub);margin-top:10px">khi chọn phương án nhận bàn giao thô</div>
+    <div class="sp"></div>
+    <div class="chips">
+      <div class="chip"><b>+ 60tr/tháng</b>CĐT thuê lại 3 năm</div>
+      <div class="chip"><b>2 năm</b>miễn phí phí quản lý</div>
+    </div>
+    <div style="height:28px"></div>
+    <div class="cta"><span>Bảng giá đã trừ chiết khấu<b>Gửi riêng qua Zalo</b></span><em>Nhận ngay →</em></div>
+    <div class="fine">Theo CSBH áp dụng từ 09/09/2026 · Hình ảnh phối cảnh minh hoạ · Hotline/Zalo 0904 567 009</div>
+  </div>
+</template>
+
+<!-- ===== 3. CHỈ 300 TRIỆU ===== -->
+<template id="t-coc300">
+  <div class="bg" style="background-image:url(../public/img/waterway.jpg)"></div>
+  <div class="shade" style="background:linear-gradient(180deg,rgba(6,26,61,.94) 0%,rgba(6,26,61,.45) 46%,rgba(6,26,61,.2) 62%,rgba(6,26,61,.95) 100%)"></div>
+  <div class="in">
+    <div class="brand"><i></i>CASAMIA BALANCA <small>HỘI AN</small></div>
+    <div style="height:var(--g1)"></div>
+    <h1 style="font-size:var(--h1)">Chỉ cần</h1>
+    <div class="big" style="font-size:var(--big)">300 triệu</div>
+    <h1 style="font-size:var(--h1);margin-top:8px">để giữ 1 căn biệt thự<br>ven sông Hội An</h1>
+    <div class="sp"></div>
+    <div class="chips">
+      <div class="chip"><b>70%</b>ngân hàng hỗ trợ vay</div>
+      <div class="chip"><b>0% lãi</b>trong 24 tháng</div>
+      <div class="chip"><b>24 tháng</b>ân hạn nợ gốc</div>
+    </div>
+    <div style="height:28px"></div>
+    <div class="cta"><span>Tiến độ thanh toán theo căn<b>Nhận qua Zalo trong 5 phút</b></span><em>Xem ngay →</em></div>
+    <div class="fine">Theo CSBH áp dụng từ 09/2026 · Hình ảnh phối cảnh minh hoạ · Hotline/Zalo 0904 567 009</div>
+  </div>
+</template>
+
+<!-- ===== 4. BẢN ĐỒ VỊ TRÍ ===== -->
+<template id="t-bando">
+  <div class="shade" style="background:linear-gradient(160deg,#0d3270,#061a3d)"></div>
+  <div class="in">
+    <div class="brand"><i></i>CASAMIA BALANCA <small>HỘI AN</small></div>
+    <div style="height:var(--g2)"></div>
+    <h1 style="font-size:var(--h1)">Mở cửa là rừng dừa.<br><span style="color:var(--orange)">Vài phút là phố cổ &amp; biển.</span></h1>
+    <div class="sp"></div>
+    <svg viewBox="0 0 940 700" style="width:100%;height:auto;display:block" font-family="Be Vietnam Pro">
+      <!-- biển -->
+      <path d="M640 0 C700 120 760 220 780 330 C800 450 760 560 700 700 H940 V0Z" fill="#1d4f9a" opacity=".55"/>
+      <text x="850" y="120" fill="#9cc2ff" font-size="24" font-weight="700" text-anchor="middle" opacity=".9">BIỂN ĐÔNG</text>
+      <!-- sông Thu Bồn -->
+      <path d="M0 470 C160 450 260 500 380 470 S560 400 760 420" stroke="#4f86d6" stroke-width="26" fill="none" stroke-linecap="round" opacity=".8"/>
+      <text x="150" y="520" fill="#9cc2ff" font-size="20" font-weight="700">sông Thu Bồn</text>
+      <!-- rừng dừa -->
+      <g fill="#2f8f5b" opacity=".85"><circle cx="560" cy="520" r="46"/><circle cx="610" cy="560" r="38"/><circle cx="520" cy="575" r="34"/></g>
+      <!-- đường -->
+      <path d="M470 420 L250 395" stroke="#f47c20" stroke-width="5" stroke-dasharray="12 10"/>
+      <path d="M470 420 L700 215" stroke="#f47c20" stroke-width="5" stroke-dasharray="12 10"/>
+      <path d="M470 420 L742 395" stroke="#f47c20" stroke-width="5" stroke-dasharray="12 10"/>
+      <path d="M470 420 L330 60" stroke="#fff" stroke-width="4" stroke-dasharray="4 12" opacity=".7"/>
+      <!-- điểm -->
+      <g><circle cx="250" cy="395" r="16" fill="#fff"/><circle cx="250" cy="395" r="7" fill="#f47c20"/>
+        <rect x="70" y="300" width="250" height="70" rx="14" fill="#fff"/><text x="195" y="330" fill="#0b2a5b" font-size="26" font-weight="800" text-anchor="middle">🏮 Phố cổ</text><text x="195" y="358" fill="#e06a10" font-size="22" font-weight="700" text-anchor="middle">~10 phút</text></g>
+      <g><circle cx="700" cy="215" r="16" fill="#fff"/><circle cx="700" cy="215" r="7" fill="#f47c20"/>
+        <rect x="520" y="120" width="260" height="70" rx="14" fill="#fff"/><text x="650" y="150" fill="#0b2a5b" font-size="26" font-weight="800" text-anchor="middle">🌊 Biển An Bàng</text><text x="650" y="178" fill="#e06a10" font-size="22" font-weight="700" text-anchor="middle">~5 km</text></g>
+      <g><circle cx="742" cy="395" r="16" fill="#fff"/><circle cx="742" cy="395" r="7" fill="#f47c20"/>
+        <rect x="720" y="300" width="200" height="70" rx="14" fill="#fff"/><text x="820" y="330" fill="#0b2a5b" font-size="24" font-weight="800" text-anchor="middle">Biển Cửa Đại</text><text x="820" y="358" fill="#e06a10" font-size="22" font-weight="700" text-anchor="middle">vài phút</text></g>
+      <g><circle cx="330" cy="60" r="16" fill="#fff"/><circle cx="330" cy="60" r="7" fill="#0b2a5b"/>
+        <rect x="360" y="24" width="290" height="70" rx="14" fill="rgba(255,255,255,.14)" stroke="#fff" stroke-opacity=".5"/><text x="505" y="54" fill="#fff" font-size="24" font-weight="800" text-anchor="middle">✈️ Sân bay Đà Nẵng</text><text x="505" y="82" fill="#ffd2ad" font-size="22" font-weight="700" text-anchor="middle">~30 km</text></g>
+      <!-- dự án -->
+      <circle cx="470" cy="420" r="70" fill="#f47c20" opacity=".25"/>
+      <circle cx="470" cy="420" r="42" fill="#f47c20"/>
+      <text x="470" y="414" fill="#fff" font-size="16" font-weight="800" text-anchor="middle" letter-spacing="1">CASAMIA</text>
+      <text x="470" y="434" fill="#fff" font-size="16" font-weight="800" text-anchor="middle" letter-spacing="1">BALANCA</text>
+      <text x="560" y="640" fill="#bfe8cf" font-size="22" font-weight="700" text-anchor="middle">🌴 Rừng dừa Bảy Mẫu</text>
+    </svg>
+    <div class="fine" style="margin-top:6px">Sơ đồ minh hoạ, khoảng cách ước tính</div>
+    <div class="sp"></div>
+    <div class="cta"><span>Biệt thự giữa 2 di sản thế giới<b>Nhận bản đồ &amp; lịch tham quan</b></span><em>Xem ngay →</em></div>
+    <div class="fine">CĐT thuê lại tới 60 triệu/tháng theo CSBH từ 09/2026 · Hotline/Zalo 0904 567 009</div>
+  </div>
+</template>
+
+<!-- ===== 5. TÒ MÒ: 4,4 TRIỆU KHÁCH – 363 CĂN ===== -->
+<template id="t-tomo">
+  <div class="bg" style="background-image:url(../public/img/parkhome.jpg);background-position:50% 30%"></div>
+  <div class="shade" style="background:linear-gradient(180deg,rgba(6,26,61,.95) 0%,rgba(6,26,61,.6) 45%,rgba(6,26,61,.25) 62%,rgba(6,26,61,.95) 100%)"></div>
+  <div class="in">
+    <div class="brand"><i></i>CASAMIA BALANCA <small>HỘI AN</small></div>
+    <div style="height:var(--g1)"></div>
+    <div class="big" style="font-size:calc(var(--big) * .8)">4,4 triệu</div>
+    <h1 style="font-size:var(--h1)">lượt khách đến Hội An mỗi năm.</h1>
+    <h1 style="font-size:var(--h1);margin-top:14px">Chỉ <span style="color:var(--orange)">363 căn</span> biệt thự<br>để họ ở lại.</h1>
+    <div class="sp"></div>
+    <div class="chips">
+      <div class="chip"><b>+18,64%</b>khách lưu trú năm 2024</div>
+      <div class="chip"><b>50–60tr</b>CĐT thuê lại mỗi tháng</div>
+    </div>
+    <div style="height:28px"></div>
+    <div class="cta"><span>Căn nào cho dòng tiền tốt nhất?<b>Hỏi ngay, trả lời trong 5 phút</b></span><em>Xem ngay →</em></div>
+    <div class="fine">Số liệu du lịch: UBND TP Hội An 2024 · CSBH từ 09/2026 · Hotline/Zalo 0904 567 009</div>
+  </div>
+</template>
+
+<div id="stage"></div>
+<script>
+  // Mỗi mẫu xuất 2 khổ: vuông (bài đăng) và dọc (Story/Reels)
+  const SIZES = {
+    sq: { '--h1': '50px', '--big': '150px', '--sub': '32px', '--g1': '40px', '--g2': '30px' },
+    st: { '--h1': '62px', '--big': '150px', '--sub': '38px', '--g1': '40px', '--g2': '40px' },
+  };
+  const stage = document.getElementById('stage');
+  document.querySelectorAll('template').forEach(t => {
+    for (const [size, vars] of Object.entries(SIZES)) {
+      const el = document.createElement('div');
+      el.className = 'ad ' + size;
+      el.id = t.id.slice(2) + '-' + size;
+      for (const [k, v] of Object.entries(vars)) el.style.setProperty(k, v);
+      el.appendChild(t.content.cloneNode(true));
+      stage.appendChild(el);
+    }
+  });
+</script>
+</body>
+</html>
