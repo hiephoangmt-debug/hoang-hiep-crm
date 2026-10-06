@@ -1,0 +1,39 @@
+<!-- Báo về CRM khi khách bấm nút Gọi / Zalo.
+     Dán nguyên đoạn này vào LadiPage: Cài đặt trang → Mã tuỳ chỉnh / Javascript (trước </body>),
+     rồi Xuất bản lại. Dùng được cho cả dichvuthetindungdanang.com và the-tin-dung-da-nang.com
+     (CRM ghi nguồn theo tên miền). -->
+<script>
+(function () {
+  var CRM_URL = 'https://script.google.com/macros/s/AKfycbzJxDXzFGBt0fZi-18p5ZIYFtMJtRSSidJWFyIL0AHC1RezxptJ2ZbAxfgFb_DColkX/exec';
+  var SEL = 'a[href^="tel:"], a[href*="zalo.me"], [data-replace-href^="tel:"], [data-replace-href*="zalo.me"]';
+  var lastPing = {};
+  function link(el) {
+    return (el.getAttribute('href') || el.getAttribute('data-replace-href') || '').toLowerCase();
+  }
+  function send(body) {
+    try {
+      var blob = new Blob([body], { type: 'text/plain;charset=utf-8' });
+      if (!(navigator.sendBeacon && navigator.sendBeacon(CRM_URL, blob))) {
+        fetch(CRM_URL, { method: 'POST', mode: 'no-cors', keepalive: true,
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: body });
+      }
+    } catch (err) {}
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest(SEL);
+    if (!a) return;
+    var href = link(a);
+    var loai = href.indexOf('tel:') === 0 ? 'goi' : 'zalo';
+    var now = Date.now();
+    if (lastPing[loai] && now - lastPing[loai] < 60000) return; // tối đa 1 lần/phút mỗi loại
+    lastPing[loai] = now;
+    var text = (a.innerText || a.getAttribute('aria-label') || '').replace(/\s+/g, ' ').trim().slice(0, 40);
+    send(JSON.stringify({
+      loai: loai,
+      source: location.hostname,
+      page: location.pathname,
+      service: 'Nút ' + (loai === 'goi' ? 'Gọi' : 'Zalo') + (text ? ' – ' + text : '')
+    }));
+  }, true);
+})();
+</script>
