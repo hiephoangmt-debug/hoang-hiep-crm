@@ -1,0 +1,142 @@
+<!-- Vân Trần – Nút Gọi/Zalo + Chat tự động + báo về CRM (thay cho đoạn crm-click-tracking cũ).
+     Dán vào LadiPage: Thiết lập trang → Mã JavaScript/CSS → Trước thẻ </body> → Xuất bản. -->
+<script>
+(function () {
+  if (window.__vtChat) return; window.__vtChat = 1;
+  var CRM_URL = 'https://script.google.com/macros/s/AKfycbzJxDXzFGBt0fZi-18p5ZIYFtMJtRSSidJWFyIL0AHC1RezxptJ2ZbAxfgFb_DColkX/exec';
+  var PHONE = '0909669325', PHONE_TEXT = '0909 669 325', ZALO = 'https://zalo.me/' + PHONE;
+  var FEES = 'Rút tiền: Visa 1,8% · JCB/Mastercard 1,9% · thẻ Sacombank, VPBank 1,9%.<br>Đáo hạn: Visa 1,9% · JCB/Mastercard 2,0% · thẻ Sacombank, VPBank 2,1%.';
+
+  function send(obj) {
+    obj.source = location.hostname; obj.page = location.pathname;
+    var body = JSON.stringify(obj);
+    try {
+      var blob = new Blob([body], { type: 'text/plain;charset=utf-8' });
+      if (!(navigator.sendBeacon && navigator.sendBeacon(CRM_URL, blob))) {
+        fetch(CRM_URL, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: body });
+      }
+    } catch (e) {}
+  }
+
+  /* 1. Báo về CRM khi bấm bất kỳ nút Gọi / Zalo nào trên trang */
+  var lastPing = {};
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href*="zalo.me"], [data-replace-href^="tel:"], [data-replace-href*="zalo.me"]');
+    if (!a) return;
+    var href = (a.getAttribute('href') || a.getAttribute('data-replace-href') || '').toLowerCase();
+    var loai = href.indexOf('tel:') === 0 ? 'goi' : 'zalo', now = Date.now();
+    if (lastPing[loai] && now - lastPing[loai] < 60000) return;
+    lastPing[loai] = now;
+    var text = (a.innerText || a.getAttribute('aria-label') || '').replace(/\s+/g, ' ').trim().slice(0, 40);
+    send({ loai: loai, service: 'Nút ' + (loai === 'goi' ? 'Gọi' : 'Zalo') + (text ? ' – ' + text : '') });
+  }, true);
+
+  /* 2. Giao diện */
+  var css = '#vtw{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:2147483000;font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#0f1b33}'
+  + '#vtw *{box-sizing:border-box}'
+  + '#vtw .vt-fab{width:60px;height:60px;border-radius:50%;border:0;background:#ff7a00;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.25);cursor:pointer;display:grid;place-items:center;position:relative}'
+  + '#vtw .vt-fab:before{content:"";position:absolute;inset:0;border-radius:50%;border:3px solid #ff7a00;animation:vtring 1.8s infinite}'
+  + '@keyframes vtring{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.6);opacity:0}}'
+  + '@media (prefers-reduced-motion:reduce){#vtw .vt-fab:before{animation:none}}'
+  + '#vtw .vt-acts{display:flex;flex-direction:column;gap:10px;align-items:flex-end;margin-bottom:10px}'
+  + '#vtw .vt-act{display:flex;align-items:center;gap:8px;text-decoration:none;color:#fff;font-weight:700;border:0;cursor:pointer;padding:10px 14px;border-radius:24px;box-shadow:0 6px 18px rgba(0,0,0,.2);font:inherit;font-weight:700}'
+  + '#vtw .vt-call{background:#1bb35a}#vtw .vt-zalo{background:#0068ff}#vtw .vt-chatb{background:#0b1f44}'
+  + '#vtw .vt-tip{position:absolute;right:70px;bottom:10px;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 8px 24px rgba(0,0,0,.18);white-space:nowrap;font-weight:600}'
+  + '#vtw .vt-box{position:fixed;right:16px;bottom:calc(88px + env(safe-area-inset-bottom,0px));width:min(360px,calc(100vw - 32px));max-height:min(560px,calc(100vh - 120px));background:#fff;border-radius:18px;box-shadow:0 18px 50px rgba(0,0,0,.3);display:flex;flex-direction:column;overflow:hidden}'
+  + '#vtw .vt-head{background:#0b1f44;color:#fff;padding:12px 14px;display:flex;gap:10px;align-items:center}'
+  + '#vtw .vt-av{width:38px;height:38px;border-radius:50%;background:#ff7a00;display:grid;place-items:center;font-weight:800}'
+  + '#vtw .vt-head b{display:block}#vtw .vt-head small{opacity:.8}#vtw .vt-x{margin-left:auto;background:none;border:0;color:#fff;font-size:22px;cursor:pointer}'
+  + '#vtw .vt-log{flex:1;overflow-y:auto;padding:12px;background:#eef2f9;display:flex;flex-direction:column;gap:8px}'
+  + '#vtw .vt-m{max-width:85%;padding:9px 12px;border-radius:14px;background:#fff;align-self:flex-start;border-bottom-left-radius:4px}'
+  + '#vtw .vt-m.me{background:#d5e6ff;align-self:flex-end;border-bottom-left-radius:14px;border-bottom-right-radius:4px}'
+  + '#vtw .vt-q{display:flex;flex-wrap:wrap;gap:6px}'
+  + '#vtw .vt-q button{border:1px solid #ff7a00;background:#fff;color:#c25400;border-radius:16px;padding:6px 11px;font:inherit;font-size:14px;cursor:pointer}'
+  + '#vtw .vt-in{display:flex;gap:6px;padding:10px;border-top:1px solid #e3e8f2;background:#fff}'
+  + '#vtw .vt-in input{flex:1;min-width:0;border:1px solid #d5dceb;border-radius:10px;padding:10px;font:inherit}'
+  + '#vtw .vt-in button{border:0;background:#ff7a00;color:#fff;border-radius:10px;padding:0 14px;font-weight:700;cursor:pointer}'
+  + '#vtw [hidden]{display:none!important}'
+  + '@media(max-width:700px){#vtw{bottom:calc(72px + env(safe-area-inset-bottom,0px))}#vtw .vt-box{bottom:calc(144px + env(safe-area-inset-bottom,0px));max-height:calc(100vh - 170px)}}';
+  var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+
+  var w = document.createElement('div'); w.id = 'vtw';
+  w.innerHTML =
+    '<div class="vt-acts" hidden>'
+    + '<button type="button" class="vt-act vt-chatb">💬 Chat tư vấn</button>'
+    + '<a class="vt-act vt-zalo" href="' + ZALO + '" target="_blank" rel="noopener">Zalo ' + PHONE_TEXT + '</a>'
+    + '<a class="vt-act vt-call" href="tel:' + PHONE + '">📞 Gọi ' + PHONE_TEXT + '</a>'
+    + '</div>'
+    + '<div class="vt-tip" hidden>Cần báo phí? Chat ngay 👋</div>'
+    + '<button type="button" class="vt-fab" aria-label="Liên hệ Vân Trần"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.8 2 11.5c0 2.4 1.2 4.6 3.1 6.1L4.5 21l3.6-1.9c1.2.4 2.5.6 3.9.6 5.5 0 10-3.8 10-8.5S17.5 3 12 3z"/></svg></button>'
+    + '<div class="vt-box" hidden role="dialog" aria-label="Chat tư vấn Vân Trần">'
+    + '<div class="vt-head"><div class="vt-av">VT</div><div><b>Thẻ Tín Dụng Vân Trần</b><small>Thường trả lời trong 5 phút</small></div><button type="button" class="vt-x" aria-label="Đóng">×</button></div>'
+    + '<div class="vt-log" aria-live="polite"></div>'
+    + '<form class="vt-in" hidden><input type="text" autocomplete="off"><button type="submit">Gửi</button></form>'
+    + '</div>';
+  document.body.appendChild(w);
+
+  var acts = w.querySelector('.vt-acts'), tip = w.querySelector('.vt-tip'), box = w.querySelector('.vt-box'),
+      log = w.querySelector('.vt-log'), form = w.querySelector('.vt-in'), input = form.querySelector('input');
+
+  w.querySelector('.vt-fab').addEventListener('click', function () { tip.hidden = true; acts.hidden = !acts.hidden; if (acts.hidden) box.hidden = true; });
+  w.querySelector('.vt-chatb').addEventListener('click', openChat);
+  w.querySelector('.vt-x').addEventListener('click', function () { box.hidden = true; });
+  setTimeout(function () { try { if (sessionStorage.getItem('vt-tip')) return; sessionStorage.setItem('vt-tip', 1); } catch (e) {} if (acts.hidden && box.hidden) tip.hidden = false; }, 8000);
+  tip.addEventListener('click', openChat);
+
+  /* 3. Chat tự động */
+  var lead = {}, step = '', started = false;
+  function say(html, me) { var m = document.createElement('div'); m.className = 'vt-m' + (me ? ' me' : ''); if (me) m.textContent = html; else m.innerHTML = html; log.appendChild(m); log.scrollTop = log.scrollHeight; }
+  function bot(html, delay) { setTimeout(function () { say(html); }, delay || 350); }
+  function choices(list, cb) {
+    setTimeout(function () {
+      var q = document.createElement('div'); q.className = 'vt-q';
+      list.forEach(function (t) { var b = document.createElement('button'); b.type = 'button'; b.textContent = t; b.onclick = function () { q.remove(); say(t, true); cb(t); }; q.appendChild(b); });
+      log.appendChild(q); log.scrollTop = log.scrollHeight;
+    }, 450);
+  }
+  function ask(placeholder, type, nextStep) { step = nextStep; setTimeout(function () { form.hidden = false; input.type = type; input.value = ''; input.placeholder = placeholder; input.focus(); }, 450); }
+
+  function openChat() {
+    acts.hidden = true; tip.hidden = true; box.hidden = false;
+    if (started) return; started = true;
+    bot('Chào anh/chị 👋 Em là <b>Vân Trần</b> – dịch vụ thẻ tín dụng Đà Nẵng. Anh/chị cần hỗ trợ gì ạ?', 100);
+    choices(['Rút tiền thẻ tín dụng', 'Đáo hạn thẻ tín dụng', 'Rút ví trả sau', 'Xem bảng phí'], pickService);
+  }
+  function pickService(t) {
+    if (t === 'Xem bảng phí') {
+      bot(FEES + '<br><small>Báo phí chính xác trước khi làm, không phát sinh.</small>');
+      bot('Anh/chị muốn làm dịch vụ nào ạ?', 900);
+      choices(['Rút tiền thẻ tín dụng', 'Đáo hạn thẻ tín dụng', 'Rút ví trả sau'], pickService);
+      return;
+    }
+    lead.service = t;
+    bot(t === 'Rút ví trả sau' ? 'Anh/chị dùng ví nào ạ?' : 'Thẻ của anh/chị thuộc ngân hàng nào ạ?');
+    choices(t === 'Rút ví trả sau' ? ['MoMo Ví Trả Sau', 'SPayLater', 'Kredivo', 'Home PayLater', 'Khác']
+      : ['Vietcombank', 'Techcombank', 'VPBank', 'Sacombank', 'BIDV', 'MB', 'VIB', 'Ngân hàng khác'], function (b) {
+      lead.bank = b;
+      bot('Dạ, anh/chị cần khoảng bao nhiêu tiền ạ?');
+      choices(['Dưới 10 triệu', '10 – 50 triệu', '50 – 100 triệu', 'Trên 100 triệu'], function (a) {
+        lead.amount = a;
+        bot('Anh/chị cho em xin <b>số điện thoại / Zalo</b> để em báo phí ngay ạ.');
+        ask('09xx xxx xxx', 'tel', 'phone');
+      });
+    });
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = input.value.trim(); if (!v) return;
+    if (step === 'phone') {
+      var p = v.replace(/[\s.\-]/g, '');
+      if (!/^(0|\+84)\d{9,10}$/.test(p)) { say(v, true); bot('Số chưa đúng, anh/chị nhập lại giúp em 10 số nhé.'); input.value = ''; return; }
+      say(v, true); lead.phone = p; form.hidden = true;
+      bot('Cho em xin tên anh/chị ạ?'); ask('Tên của anh/chị', 'text', 'name'); return;
+    }
+    if (step === 'name') {
+      say(v, true); lead.name = v; form.hidden = true; step = '';
+      send({ name: lead.name, phone: lead.phone, service: 'Chat web – ' + lead.service + ' – ' + lead.bank + ' – ' + lead.amount });
+      bot('Em đã nhận thông tin ✅ Em sẽ gọi hoặc nhắn Zalo cho anh/chị trong ít phút.');
+      bot('Cần gấp anh/chị bấm ngay:<br><a href="tel:' + PHONE + '" style="color:#1b7f3b;font-weight:700">📞 Gọi ' + PHONE_TEXT + '</a> · <a href="' + ZALO + '" target="_blank" rel="noopener" style="color:#0068ff;font-weight:700">Zalo</a>', 900);
+    }
+  });
+})();
+</script>
