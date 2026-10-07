@@ -68,6 +68,45 @@ ENV = f"""<section class="sec navy" id="moi-truong">
   </div>
 </section>
 """
+MKT_SHORT = f"""<section class="sec soft" id="mkt-3-lop">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Marketing 3 lớp</span>
+      <h2 class="h2">Bạn bán. <em>Khách, chúng tôi lo.</em></h2>
+    </div>
+    <div class="grid3">
+      <div class="card"><div class="n">50–100%</div><h3>Hỗ trợ chi phí marketing</h3><p>Không biết chạy thì được đào tạo, chưa tự tin thì có người hướng dẫn, thiếu tiền thì được hỗ trợ.</p></div>
+      <div class="card"><div class="n">DATA</div><h3>Data tổng chia mỗi ngày</h3><p>Marketing đầu tổng chạy quảng cáo, chia khách cho cả đội.</p></div>
+      <div class="card"><div class="n">10TR</div><h3>Thưởng marketing mỗi giao dịch</h3><p>Cộng thêm vào hoa hồng và thưởng nóng.</p></div>
+    </div>
+    <p class="more"><a href="{SITE}/#mkt-3-lop">Xem chi tiết Marketing 3 lớp và ảnh nhận thưởng →</a></p>
+  </div>
+</section>
+"""
+ENV_SHORT = f"""<section class="sec navy" id="moi-truong">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Môi trường làm việc</span>
+      <h2 class="h2">Không ai phải <em>đi một mình</em></h2>
+      <p class="lead">Họp đầu ngày, đào tạo liên tục, quản lý đi thị trường cùng bạn. Văn phòng 23–25 Nguyễn Phước Lan, Đà Nẵng.</p>
+    </div>
+    <div class="gal">{TEAM_IMG}{''.join(PICS[:2])}</div>
+    <p class="more light"><a href="{SITE}/#doi-ngu">Xem thêm hình ảnh đội ngũ →</a></p>
+  </div>
+</section>
+"""
+DUAN_SHORT = f"""<section class="sec" id="du-an">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Giỏ hàng</span>
+      <h2 class="h2">Bán sản phẩm <em>khách đã biết tên</em></h2>
+      <p class="lead">Sun Group, Vinhomes, Đạt Phương: thương hiệu chủ đầu tư làm một nửa việc thuyết phục.</p>
+    </div>
+    <ul class="pchips"><li>Sun FourS Tower</li><li>Casamia Balanca Hội An</li><li>Vinhomes Hải Vân Bay</li><li>Sun Galaxy Complex</li><li>Sun Symphony Residence</li><li>Sun SPANA</li></ul>
+    <p class="more"><a href="{SITE}/#du-an">Xem thông tin từng dự án →</a></p>
+  </div>
+</section>
+"""
 EXTRA_CSS = """<style>
 .reasons{display:grid;gap:12px;margin-top:20px}
 .reasons div{display:grid;grid-template-columns:52px 1fr;column-gap:14px;background:var(--soft);border-radius:14px;padding:14px 16px;align-items:start}
@@ -75,6 +114,28 @@ EXTRA_CSS = """<style>
 .reasons b{color:var(--navy);font-size:17px;line-height:1.3}
 .reasons span{color:var(--muted);font-size:15px}
 .dayphoto{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:30% center;border-radius:22px;box-shadow:0 16px 36px rgba(27,45,107,.18)}
+.more{text-align:center;margin-top:20px;font-weight:800}.more a{color:var(--orange);text-decoration:none}.more.light a{color:#FFB98F}
+.pchips{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.pchips li{background:var(--soft);border:1px solid var(--line);color:var(--navy);font-weight:800;padding:10px 16px;border-radius:999px}
+.p90{display:grid;gap:14px;margin-top:24px}
+@media(min-width:900px){.p90{grid-template-columns:repeat(4,1fr)}}
+.p90 div{background:#fff;border:1px solid var(--line);border-top:4px solid var(--orange);border-radius:14px;padding:18px}
+.p90 b{color:var(--orange);font-size:14px;font-weight:900;letter-spacing:.5px;text-transform:uppercase}
+.p90 h3{color:var(--navy);font-size:18px;margin:6px 0}
+.p90 p{color:var(--muted);font-size:15px;margin:0}
+.p90 .out{margin-top:10px;color:var(--navy);font-weight:700;font-size:14px;background:var(--soft);border-radius:10px;padding:8px 10px}
+.fitg{display:grid;gap:14px;margin-top:24px}
+@media(min-width:760px){.fitg{grid-template-columns:1fr 1fr}}
+.fitg>div{border-radius:16px;padding:20px}
+.fitg .yes{background:#fff;border:2px solid var(--orange)}
+.fitg .no{background:var(--soft);border:1px solid var(--line)}
+.fitg h3{color:var(--navy);font-size:19px;margin:0 0 10px}
+.fitg ul{margin:0;padding-left:20px}.fitg li{margin:6px 0}
+.others{display:grid;gap:12px;margin-top:22px}
+@media(min-width:760px){.others{grid-template-columns:repeat(2,1fr)}}
+.others a{display:block;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;text-decoration:none}
+.others b{color:var(--navy);font-size:17px;display:block}.others span{color:var(--muted);font-size:15px}
+.others a:after{content:"Xem vị trí →";display:block;color:var(--orange);font-weight:800;font-size:14px;margin-top:6px}
 .envgrid{display:grid;gap:12px;margin-top:28px}
 @media(min-width:760px){.envgrid{grid-template-columns:repeat(3,1fr)}}
 .envgrid div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:18px}
@@ -84,6 +145,7 @@ EXTRA_CSS = """<style>
 </style>
 """
 import json
+from vitri_uniq import UNIQ, OTHERS
 def jsonld(p):
     strip = lambda x: re.sub('<[^>]+>', '', x)
     job = {"@context": "https://schema.org", "@type": "JobPosting", "title": p['job_title'],
@@ -243,8 +305,47 @@ def page(p):
   </div>
 </section>
 """
-    order = [hero, love, roles, sections['su-that'] if p.get('su_that') else '', p.get('extra', ''), policy,
-             MKT3, CONTEST, ENV, sections['du-an'], journey, day, sections['leader'], final, faq]
+    u = p['uniq']
+    p90 = ''.join(f'<div><b>{a}</b><h3>{h}</h3><p>{d}</p><p class="out">✓ {o}</p></div>' for a, h, d, o in u['p90'])
+    plan = f'''<section class="sec soft" id="lo-trinh-90-ngay">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Lộ trình 90 ngày</span>
+      <h2 class="h2">{u['p90_h2']}</h2>
+      <p class="lead">Mỗi giai đoạn có việc cụ thể và kết quả bạn cầm được.</p>
+    </div>
+    <div class="p90">{p90}</div>
+  </div>
+</section>
+'''
+    fit = f'''<section class="sec" id="phu-hop">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Nói thẳng trước khi ứng tuyển</span>
+      <h2 class="h2">Vị trí này <em>có hợp với bạn?</em></h2>
+    </div>
+    <div class="fitg">
+      <div class="yes"><h3>✅ Bạn sẽ hợp nếu</h3>{ul(u['fit'])}</div>
+      <div class="no"><h3>⚠️ Có lẽ chưa hợp nếu</h3>{ul(u['nofit'])}</div>
+    </div>
+    <div class="cta-row"><a class="btn" href="#dang-ky">{p["cta"]}</a></div>
+  </div>
+</section>
+'''
+    oth = ''.join(f'<a href="{URL[k]}"><b>{n}</b><span>{d}</span></a>' for k, (n, d) in OTHERS.items() if k != p['key'])
+    others = f'''<section class="sec" id="vi-tri-khac">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Chưa đúng vị trí?</span>
+      <h2 class="h2">Các vị trí <em>đang tuyển khác</em></h2>
+    </div>
+    <div class="others">{oth}</div>
+    <p class="more"><a href="{SITE}/">Về trang tuyển dụng chính →</a></p>
+  </div>
+</section>
+'''
+    order = [hero, love, roles, p.get('extra', ''), plan, fit, policy,
+             MKT_SHORT, CONTEST, journey, day, ENV_SHORT, DUAN_SHORT, sections['leader'], final, faq, others]
     body = '<body>\n\n' + header + '\n\n' + '\n\n'.join(x for x in order if x) + '\n\n' + footer + '\n\n' + sticky
     html = h + '</head>\n' + body + tail
     html = html.replace('<section class="sec" id="cong-viec">', '<section class="sec" id="cong-viec">', 1)
@@ -433,6 +534,9 @@ ROLE = {
 }
 for k, v in ROLE.items():
     PAGES[k].update(v)
+for k, v in UNIQ.items():
+    PAGES[k]['uniq'] = v
+    PAGES[k]['faq'] = v['faq_more'] + PAGES[k]['faq']
 
 SEO = {'nhan-vien': ('Tuyển Nhân Viên Kinh Doanh BĐS Đà Nẵng – Không Cần Kinh Nghiệm', 'Tuyển nhân viên kinh doanh BĐS Đà Nẵng, nhận SV mới ra trường. Đào tạo từ đầu, có lead sẵn, có người kèm, HĐLĐ & BHXH. Ứng tuyển trong 30 giây.', 'Tuyển Nhân viên kinh doanh BĐS Đà Nẵng', 'Nhân viên kinh doanh bất động sản', None), 'chuyen-vien': ('Tuyển Chuyên Viên Kinh Doanh BĐS Đà Nẵng 2026', 'Tuyển chuyên viên kinh doanh BĐS Đà Nẵng: hỗ trợ marketing 100%, lead đều, thưởng marketing đến 10tr/giao dịch, 03 tháng xét lương, lên Pro Sales.', 'Tuyển Chuyên viên kinh doanh BĐS Đà Nẵng', 'Chuyên viên kinh doanh bất động sản', None), 'pro-sales': ('Tuyển Pro Sales BĐS Đà Nẵng – Lương 7–10 Triệu/Tháng', 'Tuyển Pro Sales BĐS Đà Nẵng: lương 7–10 triệu/tháng chưa tính hoa hồng, thưởng marketing đến 10tr/giao dịch, lead từ marketing. Trao đổi 1:1, bảo mật.', 'Tuyển Pro Sales BĐS Đà Nẵng', 'Chuyên gia kinh doanh bất động sản (Pro Sales)', (7000000, 10000000)), 'truong-nhom': ('Tuyển Trưởng Nhóm, Trưởng Phòng Kinh Doanh BĐS Đà Nẵng', 'Tuyển Trưởng nhóm, Trưởng phòng kinh doanh BĐS Đà Nẵng. Trưởng phòng lương 10–20 triệu/tháng, marketing đầu tổng phân lead cho cả đội. Bảo mật 1:1.', 'Tuyển quản lý KD BĐS Đà Nẵng', 'Trưởng phòng kinh doanh bất động sản', (10000000, 20000000)), 'moi-ra-truong': ('Tuyển Sale Mới Ra Trường Đà Nẵng 2026 – Không Cần Kinh Nghiệm', 'Tuyển sinh viên mới ra trường làm Sale BĐS Đà Nẵng. Ngành nào cũng được, đào tạo từ con số 0, có lead sẵn, có người kèm, 03 tháng xét lương.', 'Tuyển Sale mới ra trường Đà Nẵng', 'Nhân viên kinh doanh bất động sản (mới ra trường)', None)}
 for k, (t, d, kw, jt, sal) in SEO.items():
