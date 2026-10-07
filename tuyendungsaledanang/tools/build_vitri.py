@@ -345,7 +345,7 @@ def page(p):
 </section>
 '''
     order = [hero, love, roles, p.get('extra', ''), plan, fit, policy,
-             MKT_SHORT, CONTEST, journey, day, ENV_SHORT, DUAN_SHORT, sections['leader'], final, faq, others]
+             MKT_SHORT, CONTEST, journey, day, ENV_SHORT, DUAN_SHORT, sections['leader'], sections['cam-nang'], final, faq, others]
     body = '<body>\n\n' + header + '\n\n' + '\n\n'.join(x for x in order if x) + '\n\n' + footer + '\n\n' + sticky
     html = h + '</head>\n' + body + tail
     html = html.replace('<section class="sec" id="cong-viec">', '<section class="sec" id="cong-viec">', 1)
