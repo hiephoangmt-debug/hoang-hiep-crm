@@ -212,6 +212,14 @@ ICON = {
  "people": '<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6M15 14.5c3 0 6 2 6 5.5"/>',
  "chart": '<path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 6-6"/>',
  "layers": '<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>',
+ "book": '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/><path d="M8 7h8M8 11h6"/>',
+ "office": '<path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/><path d="M16 9h2a2 2 0 0 1 2 2v10"/><path d="M8 7h4M8 11h4M8 15h4M3 21h18"/>',
+ "spa": '<path d="M12 21c-4.5 0-8-3-8-7 3 0 6 1.5 8 4 2-2.5 5-4 8-4 0 4-3.5 7-8 7z"/><path d="M12 18c-1.8-2.2-2.5-4.6-2-7.5C10.6 7.8 12 5.5 12 5.5s1.4 2.3 2 5c.5 2.9-.2 5.3-2 7.5z"/>',
+ "golf": '<path d="M7 21V3l9 4-9 4"/><path d="M4 21h12"/><circle cx="18" cy="18" r="2"/>',
+ "phone": '<path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/>',
+ "mail": '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+ "chat": '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/>',
+ "arrow": '<path d="M5 12h14M13 6l6 6-6 6"/>',
  "key": '<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3"/>',
 }
 
@@ -358,10 +366,22 @@ PHONE_SVG = '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"
 CHAT_SVG = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></svg>'
 
 FOOTER = f'''<footer>
-  <div class="wrap">
-    <div><strong>{AGENT}</strong>Tư vấn, phân phối căn hộ – shophouse – duplex Cora Tower và bất động sản Đà Nẵng.</div>
-    <div><strong>Liên hệ</strong>Hotline/Zalo: <a href="tel:{TEL}">{TEL_TXT}</a><br>Email: <a href="mailto:{EMAIL}">{EMAIL}</a></div>
-    <div><strong>Cora Tower</strong><a href="./">Tổng quan dự án</a><br><a href="./#mat-bang">Mặt bằng A1 – A2</a><br><a href="khoi-de-shophouse.html">Shophouse khối đế</a><br><a href="penthouse.html">Duplex – Penthouse</a><br><a href="phap-ly.html">Pháp lý dự án</a><br><a href="can-ho-sun-da-nang.html">Căn hộ Sun Đà Nẵng</a></div>
+  <div class="wrap foot">
+    <div class="foot-brand">
+      <div class="wordmark"><span>HOÀNG HIỆP</span><small>Real Estate · Đà Nẵng</small></div>
+      <p>Tư vấn, phân phối căn hộ, shophouse khối đế và penthouse Cora Tower – Sun Neo City.</p>
+    </div>
+    <div class="foot-contact">
+      <span class="foot-label">Liên hệ tư vấn</span>
+      <a class="contact-row" href="tel:{TEL}"><i>{icon("phone")}</i><span><small>Hotline</small><b>{TEL_TXT}</b></span></a>
+      <a class="contact-row" href="{ZALO}" target="_blank" rel="noopener nofollow"><i>{icon("chat")}</i><span><small>Zalo</small><b>{TEL_TXT}</b></span></a>
+      <a class="contact-row" href="mailto:{EMAIL}"><i>{icon("mail")}</i><span><small>Email</small><b>{EMAIL}</b></span></a>
+    </div>
+    <nav class="foot-links" aria-label="Liên kết Cora Tower">
+      <span class="foot-label">Cora Tower</span>
+      <a href="./">Tổng quan dự án</a><a href="./#mat-bang">Mặt bằng A1 – A2</a><a href="khoi-de-shophouse.html">Shophouse khối đế</a>
+      <a href="penthouse.html">Penthouse – Duplex</a><a href="phap-ly.html">Pháp lý dự án</a><a href="can-ho-sun-da-nang.html">Căn hộ Sun Đà Nẵng</a>
+    </nav>
     <div class="legal">Website do đơn vị tư vấn độc lập xây dựng, không phải website chính thức của chủ đầu tư. Hình ảnh phối cảnh, mặt bằng mang tính minh họa; thông tin, giá bán mang tính tham khảo và theo công bố chính thức của chủ đầu tư tại từng thời điểm.</div>
   </div>
 </footer>
@@ -390,7 +410,7 @@ FOOTER = f'''<footer>
     <button type="submit" aria-label="Gửi"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 20l18-8L3 4v6l12 2-12 2z"/></svg></button>
   </form>
 </div>
-<div class="chat-teaser" hidden><button type="button" class="t-x" aria-label="Ẩn">×</button><p data-chat-open>Anh/chị cần <b>bảng giá 1PN+</b> hoặc chọn căn đẹp? Em tư vấn ngay ạ 👋</p></div>
+<div class="chat-teaser" hidden><button type="button" class="t-x" aria-label="Ẩn">×</button><p data-chat-open><small>Tư vấn trực tuyến</small><b>Nhận bảng giá &amp; giỏ hàng mới nhất</b></p></div>
 
 <script>window.CORA = {{ tel: "{TEL}", telText: "{TEL_TXT}", zalo: "{ZALO}", email: "{EMAIL}" }};</script>
 <script src="assets/main.js" defer></script>
@@ -570,12 +590,12 @@ def build_index():
       </div>
       <div class="grid g4" style="margin-top:30px">
         {card("pool", "Hồ bơi tầng 2", "Hồ bơi người lớn và hồ trẻ em, sân deck tắm nắng – có ở cả hai tòa.")}
-        {card("leaf", "Jjimjilbang &amp; Spa", "Xông hơi kiểu Hàn Quốc và spa (tòa A1), spa thư giãn (tòa A2).")}
-        {card("dumbbell", "Gym &amp; golf mô phỏng", "Phòng gym và phòng golf mô phỏng 3 làn tại tòa A2.")}
+        {card("spa", "Jjimjilbang &amp; Spa", "Xông hơi kiểu Hàn Quốc và spa (tòa A1), spa thư giãn (tòa A2).")}
+        {card("golf", "Gym &amp; golf mô phỏng", "Phòng gym và phòng golf mô phỏng 3 làn tại tòa A2.")}
         {card("kid", "Khu trẻ em", "Sân chơi trong nhà, khu vui chơi kết nối gia đình (bi-a, bàn chơi).")}
         {card("people", "Sinh hoạt cộng đồng", "Không gian sinh hoạt chung, tiệc nhỏ, gặp gỡ cư dân.")}
-        {card("layers", "Thư viện", "Thư viện – góc đọc, làm việc yên tĩnh ngay trong tòa nhà.")}
-        {card("shield", "Văn phòng BQL", "Ban quản lý, kỹ thuật, kho hồ sơ đặt tại tầng 2 – hỗ trợ cư dân nhanh.")}
+        {card("book", "Thư viện", "Thư viện – góc đọc, làm việc yên tĩnh ngay trong tòa nhà.")}
+        {card("office", "Văn phòng BQL", "Ban quản lý, kỹ thuật, kho hồ sơ đặt tại tầng 2 – hỗ trợ cư dân nhanh.")}
         {card("store", "Shophouse tầng 1", "Cafe, cửa hàng, dịch vụ ngay chân tòa tháp.")}
       </div>
       <div class="grid g2" style="margin-top:28px">

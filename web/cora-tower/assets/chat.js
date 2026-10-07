@@ -92,7 +92,7 @@
     { id: "contact", k: ["so dien thoai", "sdt", "zalo", "lien he", "goi", "hotline", "email", "tu van vien", "nguoi that"],
       a: () => `Dạ anh/chị gọi hoặc nhắn ${ZALO} – chuyên viên Hoàng Hiệp hỗ trợ trực tiếp 24/7 ạ. Hoặc để lại số ở đây, em gọi lại ngay.` },
     { id: "thanks", k: ["cam on", "thanks", "ok", "oke", "duoc roi", "tam biet", "bye"],
-      a: () => state.lead ? "Dạ em cảm ơn anh/chị! Chuyên viên sẽ liên hệ sớm ạ. Chúc anh/chị một ngày thật vui 🌿"
+      a: () => state.lead ? "Dạ em cảm ơn anh/chị! Chuyên viên sẽ liên hệ sớm ạ. Chúc anh/chị một ngày thật vui"
         : `Dạ em cảm ơn anh/chị! Khi cần bảng giá hay giữ căn, anh/chị cứ nhắn em hoặc gọi ${CALL} nhé ạ.` },
   ];
   const CHIP_ACTIONS = {
@@ -146,7 +146,7 @@
 
   function askPhone() {
     state.asked = true;
-    return `\n\n👉 Anh/chị nhập <b>SĐT/Zalo</b> ngay ô bên dưới, em gửi bảng giá + căn đẹp trong 5 phút ạ. Hoặc gọi ${CALL}.`;
+    return `\n\nAnh/chị nhập <b>SĐT/Zalo</b> ngay ô bên dưới, em gửi bảng giá + căn đẹp trong 5 phút ạ. Hoặc gọi ${CALL}.`;
   }
 
   async function captureLead(phone, raw) {
@@ -156,7 +156,7 @@
     try {
       sent = await window.submitLead?.({ name, phone, interest: state.topic || "Chat tư vấn", source: "chat", note: state.log.slice(-8).join(" | ") });
     } catch { /* ignore network errors – user still gets a call/Zalo fallback */ }
-    say(`Dạ em đã ghi nhận số <b>${esc(phone)}</b> ạ! 🎉\nChuyên viên Hoàng Hiệp sẽ gọi/Zalo cho anh/chị trong ít phút để gửi bảng giá và giỏ hàng căn đẹp.${sent ? "" : `\n\nNếu cần gấp, anh/chị nhắn trực tiếp ${ZALO} giúp em nhé.`}`,
+    say(`Dạ em đã ghi nhận số <b>${esc(phone)}</b> ạ!\nChuyên viên Hoàng Hiệp sẽ gọi/Zalo cho anh/chị trong ít phút để gửi bảng giá và giỏ hàng căn đẹp.${sent ? "" : `\n\nNếu cần gấp, anh/chị nhắn trực tiếp ${ZALO} giúp em nhé.`}`,
       ["Bảng giá", "Vị trí", "Pháp lý", "Gọi ngay"]);
   }
 
@@ -202,7 +202,7 @@
       state.started = true;
       const h = new Date().getHours();
       const hi = h < 11 ? "Chào buổi sáng" : h < 14 ? "Chào buổi trưa" : h < 18 ? "Chào buổi chiều" : "Chào buổi tối";
-      say(`${hi} anh/chị! 👋 Em là trợ lý tư vấn <b>Cora Tower</b> – 2 tòa căn hộ Sun Group (1.342 căn) tại vòng xoay 29/3, Đà Nẵng – đã đủ điều kiện bán, có bảo lãnh VietinBank.\n\nStudio chỉ từ khoảng <b>1,86 tỷ</b> sau chiết khấu, đặt cọc 100 triệu. Anh/chị muốn em hỗ trợ thông tin nào ạ?`);
+      say(`${hi} anh/chị! Em là trợ lý tư vấn <b>Cora Tower</b> – 2 tòa căn hộ Sun Group (1.342 căn) tại vòng xoay 29/3, Đà Nẵng – đã đủ điều kiện bán, có bảo lãnh VietinBank.\n\nStudio chỉ từ khoảng <b>1,86 tỷ</b> sau chiết khấu, đặt cọc 100 triệu. Anh/chị muốn em hỗ trợ thông tin nào ạ?`);
     }
     setTimeout(() => input.focus({ preventScroll: true }), 50);
   }
