@@ -432,6 +432,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
         <select id="rp-year" style="width:auto"></select>
         <select id="rp-month" style="width:auto" class="hidden"></select>
       </div>
+      <h3 id="rp-label" style="margin:4px 0 8px"></h3>
       <div class="kpis" id="rp-kpis"></div>
       <div class="card scroll-x"><table class="tbl stack" id="rp-table"></table></div>
       <p class="muted">Bấm vào một dòng để xem chi tiết từng giao dịch trong kỳ đó.</p>
@@ -910,7 +911,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       S.boot = b;
       $('#login').classList.add('hidden');
       $('#app').classList.remove('hidden');
-      var UI_VERSION = 'v04.11e';
+      var UI_VERSION = 'v04.11f';
       $('#today-label').textContent = dmy(b.today) + ' · ' + UI_VERSION + (b.version === UI_VERSION ? '' : ' ⚠ Mã.gs chưa cập nhật');
       fillSelect($('[name=dich_vu]'), b.services);
       fillSelect($('#tx-service'), b.services, true);
@@ -2259,12 +2260,13 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
   });
   ['#rp-year', '#rp-month'].forEach(function (s) { $(s).addEventListener('change', loadReport); });
   function loadReport() {
-    $('#rp-month').classList.toggle('hidden', S.rpType !== 'week' && S.rpType !== 'day');
-    $('#rp-year').classList.toggle('hidden', S.rpType === 'year');
+    $('#rp-month').classList.toggle('hidden', S.rpType === 'year');
+    $('#rp-year').classList.toggle('hidden', false);
     call('report', { type: S.rpType, year: $('#rp-year').value, month: $('#rp-month').value }).then(renderReport).catch(fail);
   }
   function renderReport(r) {
     var t = r.total;
+    $('#rp-label').innerHTML = '📊 Số liệu ' + esc(t.label || '') + ' <small class="muted">(' + dmy(t.from) + ' – ' + dmy(t.to) + ')</small>';
     $('#rp-kpis').innerHTML = kpi('Tổng tiền', short(t.so_tien)) + kpi('Phí khách', money(t.tien_phi)) + kpi('Phí máy', money(t.chi_phi)) +
       kpi('Phí của mình', money(t.loi_nhuan), t.loi_nhuan >= 0 ? 'pos' : 'neg') + kpi(rn() + ' hoàn', money(t.tien_hoan)) + kpi('Giao dịch (Đáo / Rút)', t.so_gd + ' (' + t.so_dao + ' / ' + t.so_rut + ')') +
       kpi('Khách mới / từ web', t.khach_moi + ' / ' + t.lead_web) + kpi('Bấm Zalo / Gọi trên web', t.bam_web || 0) +
@@ -2273,8 +2275,9 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
       kpi('💰 Tổng lãi (thẻ + hoá đơn)', money(t.tong_lai || 0), (t.tong_lai || 0) >= 0 ? 'pos' : 'neg');
     var max = Math.max.apply(null, r.rows.map(function (x) { return x.so_tien; }).concat([1]));
     $('#rp-table').innerHTML = '<thead><tr><th>Kỳ</th><th class="num">GD (Đáo/Rút)</th><th class="num">Số tiền</th><th class="num">Phí khách</th><th class="num">Phí máy</th><th class="num">Phí của mình</th><th class="num">' + esc(rn()) + ' hoàn</th>' + (r.type === 'day' ? '<th class="num">' + esc(rn()) + ' chuyển</th><th class="num">Còn nợ cuối ngày</th>' : '') + '<th class="num">HĐ ghép</th><th class="num">Lãi HĐ</th><th class="num">Lãi vé/KS</th><th class="num">Tổng lãi</th><th class="num">Khách mới</th><th class="num">Khách web</th><th class="num">Bấm Zalo/Gọi</th></tr></thead><tbody>' +
-      (r.type === 'day' ? r.rows.filter(function (x) { return x.so_gd || x.hd_so || x.dv_so || (x.cn && (x.cn.da_chuyen || x.cn.chot)); }) : r.rows).map(function (x) {
-        return '<tr class="click" data-from=""' + x.from + '" data-to="' + x.to + '"><td data-l="Kỳ"><b>' + esc(x.label) + '</b><div class="bar"><i style="width:' + (x.so_tien / max * 100).toFixed(1) + '%"></i></div></td>' +
+      (r.type === 'month' ? r.rows.filter(function (x) { return x.so_gd || x.hd_so || x.dv_so || x.khach_moi || (x.from >= t.from && x.to <= t.to); }) : r.type === 'day' ? r.rows.filter(function (x) { return x.so_gd || x.hd_so || x.dv_so || (x.cn && (x.cn.da_chuyen || x.cn.chot)); }) : r.rows).map(function (x) {
+        var sel = (r.type === 'month' || r.type === 'year') && x.from >= t.from && x.to <= t.to;
+        return '<tr class="click" data-from="' + x.from + '" data-to="' + x.to + '"' + (sel ? ' style="background:var(--bg);outline:2px solid #f5a623"' : '') + '><td data-l="Kỳ"><b>' + esc(x.label) + '</b><div class="bar"><i style="width:' + (x.so_tien / max * 100).toFixed(1) + '%"></i></div></td>' +
           '<td data-l="GD (Đáo/Rút)" class="num">' + x.so_gd + ' (' + x.so_dao + '/' + x.so_rut + ')</td>' +
           '<td data-l="Số tiền" class="num">' + money(x.so_tien) + '</td><td data-l="Phí khách" class="num">' + money(x.tien_phi) + '</td>' +
           '<td data-l="Phí máy" class="num">' + money(x.chi_phi) + '</td><td data-l="Phí của mình" class="num ' + (x.loi_nhuan >= 0 ? 'pos' : 'neg') + '">' + money(x.loi_nhuan) + '</td>' +
@@ -2285,7 +2288,7 @@ label.f { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: v
           '<td data-l="Lãi vé/KS" class="num pos">' + (x.dv_so ? money(x.dv_lai) + ' <small class="muted">SL ' + x.dv_nguoi + '</small>' : '—') + '</td>' +
           '<td data-l="Tổng lãi" class="num"><b class="' + ((x.tong_lai || 0) >= 0 ? 'pos' : 'neg') + '">' + money(x.tong_lai || 0) + '</b></td>' +
           '<td data-l="Khách mới" class="num">' + x.khach_moi + '</td><td data-l="Khách web" class="num">' + x.lead_web + '</td><td data-l="Bấm Zalo/Gọi" class="num">' + (x.bam_web || 0) + '</td></tr>';
-      }).join('') + '</tbody><tfoot><tr><td data-l="">Tổng</td><td data-l="GD" class="num">' + t.so_gd + '</td><td data-l="Số tiền" class="num">' + money(t.so_tien) +
+      }).join('') + '</tbody><tfoot><tr><td data-l="">Tổng ' + esc(t.label || '') + '</td><td data-l="GD" class="num">' + t.so_gd + '</td><td data-l="Số tiền" class="num">' + money(t.so_tien) +
       '</td><td data-l="Phí khách" class="num">' + money(t.tien_phi) + '</td><td data-l="Phí máy" class="num">' + money(t.chi_phi) +
       '</td><td data-l="Phí của mình" class="num">' + money(t.loi_nhuan) + '</td><td data-l="' + esc(rn()) + ' hoàn" class="num">' + money(t.tien_hoan) + '</td>' + (r.type === 'day' ? '<td data-l="' + esc(rn()) + ' chuyển" class="num">' + money(r.rows.reduce(function (a, x) { return a + (x.cn ? x.cn.da_chuyen : 0); }, 0)) + '</td><td data-l="Còn nợ cuối tháng" class="num">' + money((r.rows[r.rows.length - 1].cn || {}).so_du || 0) + '</td>' : '') + '<td data-l="HĐ ghép" class="num">' + (t.hd_so || 0) + ' · ' + short(t.hd_tien || 0) +
       '</td><td data-l="Lãi HĐ" class="num">' + money(t.hd_lai || 0) + '</td><td data-l="Lãi vé/KS" class="num">' + money(t.dv_lai || 0) + '</td><td data-l="Tổng lãi" class="num">' + money(t.tong_lai || 0) + '</td><td data-l="Khách mới" class="num">' + t.khach_moi + '</td><td data-l="Khách web" class="num">' + t.lead_web + '</td><td data-l="Bấm Zalo/Gọi" class="num">' + (t.bam_web || 0) + '</td></tr></tfoot>';

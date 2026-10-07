@@ -151,11 +151,12 @@ test('reports by week / month / year', () => {
   assert.strictEqual(m.rows.length, 12);
   assert.strictEqual(m.rows[1].so_tien, 5000000);
   assert.strictEqual(m.byMachine[0].name, 'M2');
-  assert.strictEqual(m.topCustomers.find((c) => c.name === 'A').so_gd, 2);
+  assert.strictEqual(m.topCustomers.find((c) => c.name === 'A').so_gd, 1, 'month mode: chosen month (1/2026)');
 
   const y = call('report', { type: 'year', year: 2026 });
   assert.strictEqual(JSON.stringify(y.rows.map((r) => r.label)), JSON.stringify(['Năm 2025', 'Năm 2026']));
   assert.strictEqual(y.rows[0].so_tien, 1000000);
+  assert.strictEqual(y.topCustomers.find((c) => c.name === 'A').so_gd, 2, 'year mode: chosen year');
 });
 
 test('import pasted ledger rows', () => {
@@ -1089,6 +1090,26 @@ test('same customer split into 3 (hidden characters from the phone) → found an
   assert.strictEqual(call('listTransactions', {}).filter((x) => x.khach_id === 'k2').length, 5);
   assert.strictEqual(call('listCards', { khach_id: 'k2' }).length, 4);
   assert.strictEqual(call('duplicateCustomers').length, 0);
+});
+
+test('report KPIs follow the selected period: month mode = chosen month, year mode = chosen year', () => {
+  const { call, fake } = fresh();
+  fake.setToday('2026-10-07');
+  const base = { dich_vu: 'Rút tiền', the: 'VP', ten_khach: 'Khách A', phi_khach: 2, phi_may_text: '1.5' };
+  call('saveTransaction', Object.assign({ ngay: '2026-09-10', so_tien: 10000000 }, base));
+  call('saveTransaction', Object.assign({ ngay: '2026-10-02', so_tien: 20000000 }, base));
+  call('saveTransaction', Object.assign({ ngay: '2025-12-02', so_tien: 5000000 }, base));
+  const m = call('report', { type: 'month', year: 2026, month: 10 });
+  assert.strictEqual(m.rows.length, 12);
+  assert.strictEqual(m.total.so_gd, 1);
+  assert.strictEqual(m.total.so_tien, 20000000);
+  assert.strictEqual(m.total.label, 'Tháng 10/2026');
+  const m9 = call('report', { type: 'month', year: 2026, month: 9 });
+  assert.strictEqual(m9.total.so_tien, 10000000);
+  const y = call('report', { type: 'year', year: 2026 });
+  assert.strictEqual(y.total.so_tien, 30000000, 'only the chosen year, not all years');
+  assert.strictEqual(y.total.label, 'Năm 2026');
+  assert.strictEqual(call('report', { type: 'day', year: 2026, month: 10 }).total.so_tien, 20000000);
 });
 
 test('pasting earlier months: history before closing, December notes pasted in January, saving in rounds', () => {

@@ -67,7 +67,7 @@ var DATE_COLUMNS = ['ngay', 'han', 'ngay_hoan', 'tu_ngay', 'b_tt_ngay', 'a_ck_ng
 // Kiểu tiền với C.Trâm. "Ứng trước"/"Hoàn tiền" làm giảm nợ; "Mình trả lại"/"Nợ cũ" làm tăng nợ;
 // "Điều chỉnh số dư" nhập được số âm (âm = tăng nợ).
 // Đổi mỗi lần cập nhật code – hiện cạnh ngày trên đầu app để biết đã triển khai bản mới chưa.
-var APP_VERSION = 'v04.11e';
+var APP_VERSION = 'v04.11f';
 
 var PAYMENT_TYPES = ['Ứng trước', 'Hoàn tiền', 'Mình trả lại', 'Nợ cũ', 'Điều chỉnh số dư'];
 
@@ -2202,12 +2202,18 @@ function apiReport_(p) {
     var led = ledgerDays_(periods[0].from, periods[periods.length - 1].to);
     rows.forEach(function (r) { r.cn = led[r.from]; });
   }
-  var all = { from: periods[0].from, to: periods[periods.length - 1].to };
+  // Ô tổng phía trên theo đúng mục đang chọn: Ngày/Tuần = cả tháng chọn; Tháng = tháng chọn; Năm = năm chọn.
+  var all = { from: periods[0].from, to: periods[periods.length - 1].to }, label;
+  if (type === 'month') { all = { from: ymd_(year, month, 1), to: ymd_(year, month, daysInMonth_(year, month)) }; label = 'Tháng ' + month + '/' + year; }
+  else if (type === 'year') { all = { from: year + '-01-01', to: year + '-12-31' }; label = 'Năm ' + year; }
+  else label = 'Tháng ' + month + '/' + year;
   var allTx = tx.filter(function (x) { return inRange(x.ngay, all.from, all.to); });
   var total = summarize_(allTx);
-  total.khach_moi = rows.reduce(function (a, r) { return a + r.khach_moi; }, 0);
-  total.lead_web = rows.reduce(function (a, r) { return a + r.lead_web; }, 0);
-  total.bam_web = rows.reduce(function (a, r) { return a + r.bam_web; }, 0);
+  var inAll = rows.filter(function (r) { return r.from >= all.from && r.to <= all.to; });
+  total.khach_moi = inAll.reduce(function (a, r) { return a + r.khach_moi; }, 0);
+  total.lead_web = inAll.reduce(function (a, r) { return a + r.lead_web; }, 0);
+  total.bam_web = inAll.reduce(function (a, r) { return a + r.bam_web; }, 0);
+  total.label = label; total.from = all.from; total.to = all.to;
   var allBills = bills.filter(function (b) { return inRange(b.ngay, all.from, all.to); });
   billSum(allBills, total);
   var allTrips = trips.filter(function (v) { return inRange(v.ngay, all.from, all.to); });
