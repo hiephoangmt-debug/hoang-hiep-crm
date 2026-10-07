@@ -188,7 +188,7 @@ footer .legal{grid-column:1/-1;border-top:1px solid #1f3256;padding-top:18px;fon
 .fl-25{border-left-color:#f26b1d}.fl-4{border-left-color:#2f62d8}.fl-3{border-left-color:#5cc35c}.fl-2{border-left-color:#d55fd5}.fl-1{border-left-color:#e53935}
 
 /* tabs + plans */
-.tabs{display:flex;gap:10px;justify-content:center;margin:28px 0 18px}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:28px 0 18px}
 .tabs button{font:inherit;font-weight:700;padding:10px 26px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
 .tabs button[aria-selected=true]{background:var(--brand);border-color:var(--brand);color:#fff}
 .plan{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}
@@ -206,6 +206,12 @@ footer .legal{grid-column:1/-1;border-top:1px solid #1f3256;padding-top:18px;fon
 .unit-thumb img{border-radius:16px;width:100%;height:auto}
 @media (max-width:900px){.unit-grid{grid-template-columns:1fr}}
 .legal-card{border-top:4px solid var(--brand-2)}
+
+.unit-plans{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+.unit-plans[hidden]{display:none}
+.unit-plans figure{margin:0;background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:10px}
+.unit-plans img{width:100%;height:auto;border-radius:10px}
+.unit-plans figcaption{text-align:left;color:var(--ink);font-size:.9rem;margin-top:8px}
 
 /* legal */
 .legal-list{list-style:none;padding:0;margin:0 0 22px;display:grid;gap:10px}

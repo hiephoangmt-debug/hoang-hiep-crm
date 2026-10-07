@@ -25,10 +25,39 @@ IMG = {
     "ph": ("penthouse-duplex-san-vuon-cora-tower", 1120, 756, 560, "Không gian sân vườn trên cao căn duplex penthouse Cora Tower nhìn ra thành phố Đà Nẵng"),
     "river": ("khu-do-thi-hoa-xuan-ven-song", 1280, 788, 640, "Khu đô thị Hòa Xuân ven sông, Đà Nẵng"),
     "planA1": ("mat-bang-toa-a1-tang-3a-24-cora-tower", 2000, 1414, 1000, "Mặt bằng tòa A1 Cora Tower tầng 3A–24 với 28 căn mỗi sàn"),
-    "planA2": ("mat-bang-toa-a2-tang-3a-24-cora-tower", 2000, 1414, 1000, "Mặt bằng tòa A2 Cora Tower tầng 3A–24 với 28 căn mỗi sàn"),
+    "planA2": ("mat-bang-toa-a2-tang-3a-24-cora-tower", 2000, 1415, 1000, "Mặt bằng tòa A2 Cora Tower tầng 3A–24 với 28 căn mỗi sàn"),
+    "g3A1": ("mat-bang-tang-3-san-vuon-toa-a1-cora-tower", 2000, 1059, 1000, "Mặt bằng tầng 3 căn hộ sân vườn tòa A1 Cora Tower, diện tích sân vườn từng căn"),
+    "g3A2": ("mat-bang-tang-3-san-vuon-toa-a2-cora-tower", 2000, 1415, 1000, "Mặt bằng tầng 3 căn hộ sân vườn tòa A2 Cora Tower, diện tích sân vườn từng căn"),
     "iso1pn": ("phoi-canh-3d-can-1pn-cora-tower", 1024, 1536, 512, "Phối cảnh 3D nội thất căn hộ 1PN+ Cora Tower với logia, bếp, phòng khách và phòng ngủ"),
     "int1pn": ("noi-that-can-ho-1pn-cora-tower", 1080, 1080, 540, "Phối cảnh nội thất căn hộ 1PN+ Cora Tower"),
     "unit1pn": ("mat-bang-can-a10803-1pn-cora-tower", 1076, 1521, 538, "Mặt bằng căn hộ điển hình A10803 loại 1PN+1 tòa A1 Cora Tower, kích thước 6,2 x 9,6 m"),
+    "pA10801": ("mat-bang-can-a10801-2pn-cora-tower", 900, 1272, 450, "Mặt bằng căn hộ A10801 loại 2PN tòa A1 Cora Tower, căn góc chữ L"),
+    "pA10805": ("mat-bang-can-a10805-2pn-cora-tower", 900, 1272, 450, "Mặt bằng căn hộ A10805 loại 2PN tòa A1 Cora Tower, 2 vệ sinh có bồn tắm"),
+    "pA10817": ("mat-bang-can-a10817-2pn-cora-tower", 900, 1272, 450, "Mặt bằng căn hộ A10817 loại 2PN tòa A1 Cora Tower, căn góc"),
+    "pA20827": ("mat-bang-can-a20827-2pn-cora-tower", 900, 1272, 450, "Mặt bằng căn hộ A20827 loại 2PN tòa A2 Cora Tower"),
+    "pA10828": ("mat-bang-can-a10828-1pn-cora-tower", 900, 1272, 450, "Mặt bằng căn hộ A10828 loại 1PN+1 tòa A1 Cora Tower"),
+    "pA10823": ("mat-bang-can-a10823-studio-cora-tower", 900, 1272, 450, "Mặt bằng căn hộ Studio A10823 tòa A1 Cora Tower"),
+    "amA1": ("mat-bang-tien-ich-tang-2-toa-a1-cora-tower", 1800, 1273, 900, "Mặt bằng tiện ích tầng 2 tòa A1 Cora Tower: hồ bơi, Jjimjilbang và spa, khu trẻ em, thư viện, sinh hoạt cộng đồng"),
+    "amA2": ("mat-bang-tien-ich-tang-2-toa-a2-cora-tower", 1800, 1273, 900, "Mặt bằng tiện ích tầng 2 tòa A2 Cora Tower: hồ bơi, spa, gym, golf mô phỏng, thư viện, khu trẻ em"),
+    "shA1": ("mat-bang-shophouse-tang-1-toa-a1-cora-tower", 2000, 1415, 1000, "Mặt bằng tầng 1 shophouse tòa A1 Cora Tower với mã căn và diện tích từng shop"),
+    "shA2": ("mat-bang-shophouse-tang-1-toa-a2-cora-tower", 2000, 1415, 1000, "Mặt bằng tầng 1 shophouse tòa A2 Cora Tower với mã căn và diện tích từng shop"),
+    "mtA1": ("mat-tien-shophouse-tang-1-toa-a1-cora-tower", 1590, 1125, 795, "Kích thước mặt tiền từng shophouse tầng 1 tòa A1 Cora Tower"),
+    "mtA2": ("mat-tien-shophouse-tang-1-toa-a2-cora-tower", 1590, 1125, 795, "Kích thước mặt tiền từng shophouse tầng 1 tòa A2 Cora Tower"),
+    "ph25A1": ("mat-bang-penthouse-tang-25-toa-a1-cora-tower", 2000, 1415, 1000, "Mặt bằng tầng 25 penthouse tòa A1 Cora Tower với mã căn và diện tích"),
+    "phL25A1": ("mat-bang-penthouse-tang-lung-25-toa-a1-cora-tower", 2000, 1415, 1000, "Mặt bằng tầng lửng 25 penthouse duplex tòa A1 Cora Tower"),
+    "ph25A2": ("mat-bang-penthouse-tang-25-toa-a2-cora-tower", 2000, 1415, 1000, "Mặt bằng tầng 25 penthouse tòa A2 Cora Tower với mã căn và diện tích"),
+    "phL25A2": ("mat-bang-penthouse-tang-lung-25-toa-a2-cora-tower", 2000, 1415, 1000, "Mặt bằng tầng lửng 25 penthouse duplex tòa A2 Cora Tower"),
+    "sr01": ("phoi-canh-shophouse-khoi-de-cora-tower-01", 1600, 1066, 800, "Phố shophouse khối đế Cora Tower dọc vỉa hè rợp cây"),
+    "sr02": ("phoi-canh-shophouse-khoi-de-cora-tower-02", 1600, 1066, 800, "Sảnh đón và shophouse khối đế Cora Tower"),
+    "sr03": ("phoi-canh-shophouse-khoi-de-cora-tower-03", 1600, 1066, 800, "Lối xe đón trả khách trước shophouse Cora Tower"),
+    "sr04": ("phoi-canh-shophouse-khoi-de-cora-tower-04", 1600, 1066, 800, "Mái sảnh và dãy shophouse Cora Tower"),
+    "sr05": ("phoi-canh-shophouse-khoi-de-cora-tower-05", 1600, 1066, 800, "Dãy shophouse Cora Tower và sân đón khách"),
+    "sr06": ("phoi-canh-shophouse-khoi-de-cora-tower-06", 1600, 1066, 800, "Shophouse Cora Tower mặt kính kịch trần cạnh sảnh"),
+    "sr07": ("phoi-canh-shophouse-khoi-de-cora-tower-07", 1600, 1066, 800, "Shophouse khối đế Cora Tower bo cong theo đường 29/3"),
+    "sr08": ("phoi-canh-shophouse-khoi-de-cora-tower-08", 1600, 1066, 800, "Mặt tiền shophouse Cora Tower dọc đường 29/3"),
+    "sr09": ("phoi-canh-shophouse-khoi-de-cora-tower-09", 1600, 1066, 800, "Shophouse khối đế dưới tòa tháp Cora Tower"),
+    "sr10": ("phoi-canh-shophouse-khoi-de-cora-tower-10", 1600, 1066, 800, "Góc bo cong khối đế Cora Tower và khu shophouse"),
+    "sr11": ("phoi-canh-shophouse-khoi-de-cora-tower-11", 1600, 1066, 800, "Mặt tiền shophouse Cora Tower với biển hiệu thương hiệu"),
     "night": ("phoi-canh-cora-tower-ve-dem", 1600, 930, 800, "Phối cảnh Cora Tower về đêm với khối mái màu cam phát sáng"),
     "site": ("tong-mat-bang-cora-tower-vong-xoay-29-3", 1600, 1022, 800, "Tổng mặt bằng hai tòa Cora Tower hai bên đường 29/3 cạnh vòng xoay Nguyễn Phước Lan"),
     "siteAir": ("tong-mat-bang-cora-tower-anh-flycam", 1478, 966, 739, "Tổng mặt bằng Cora Tower trên ảnh flycam thực tế: phân bố căn 3PN, 2PN, 1PN+ và Studio"),
@@ -53,10 +82,12 @@ def pic(key, sizes, eager=False, cls="", alt=None):
 
 # ----------------------------------------------------------------- shared data
 UNIT_TYPES = [
-    ("Studio", "32,0 – 32,2 m²", "36,1 m²", "Ở một mình, cho thuê ngắn hạn"),
-    ("1PN+", "52,3 – 59,6 m²", "56,7 – 63,5 m²", "Vợ chồng trẻ, đầu tư cho thuê"),
-    ("2PN", "60,6 – 73,4 m²", "66,1 – 79,4 m²", "Gia đình nhỏ, căn góc thoáng"),
-    ("3PN", "78,9 m²", "85,7 – 86,7 m²", "Gia đình đa thế hệ, số lượng rất ít"),
+    ("Studio", "32,2 – 32,3 m²", "36,0 – 36,1 m²", "Ở một mình, cho thuê ngắn hạn"),
+    ("1PN+", "52,5 – 59,6 m²", "56,5 – 63,5 m²", "Vợ chồng trẻ, đầu tư cho thuê"),
+    ("2PN", "60,6 – 71,3 m²", "66,1 – 78,0 m²", "Gia đình nhỏ, nhiều căn góc"),
+    ("2PN+1 (tòa A2)", "73,1 m²", "79,3 m²", "Gia đình 4 người, có phòng linh hoạt"),
+    ("3PN", "78,9 – 81,8 m²", "85,7 – 89,1 m²", "Gia đình đa thế hệ, mỗi sàn 1 căn"),
+    ("Sân vườn tầng 3", "theo loại căn", "+ sân vườn 10 – 151 m²", "Thích không gian xanh riêng"),
 ]
 PRICES = [
     ("Tòa A1 – 1PN+ (dãy phía Bắc)", "A10802 – A10810", "3,2 – 3,65 tỷ"),
@@ -176,7 +207,7 @@ LOGO = ('<svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rec
         '<rect x="16" y="3" width="9" height="24" rx="1.5" fill="#f26b1d"/><rect x="2" y="26" width="26" height="2.5" rx="1" fill="#0b2a5b"/></svg>')
 
 NAV = [("./", "Tổng quan", "index"), ("./#mat-bang", "Mặt bằng", ""), ("./#gia", "Bảng giá", ""),
-       ("khoi-de-shophouse.html", "Shophouse", "shop"), ("penthouse.html", "Duplex – Penthouse", "ph"), ("./#vi-tri", "Vị trí", ""), ("phap-ly.html", "Pháp lý", "legal")]
+       ("khoi-de-shophouse.html", "Shophouse", "shop"), ("penthouse.html", "Duplex – Penthouse", "ph"), ("./#tien-ich", "Tiện ích", ""), ("./#vi-tri", "Vị trí", ""), ("phap-ly.html", "Pháp lý", "legal")]
 
 
 # ----------------------------------------------------------------- head
@@ -347,14 +378,20 @@ FOOTER = f'''<footer>
 LIGHTBOX = '<div class="lightbox" role="dialog" aria-label="Xem ảnh"><button type="button" aria-label="Đóng">×</button><img alt=""></div>'
 
 
+def uplan(key, title, size):
+    return (f'<figure class="zoom reveal"><a href="{src(key)}" class="zoom-link">{pic(key, "(max-width:760px) 100vw, 360px")}'
+            f'<span class="zoom-hint">Phóng to</span></a><figcaption><b>{title}</b> · {size}</figcaption></figure>')
+
+
 def plan_tabs():
-    return f'''<div class="tabs reveal" role="tablist">
-        <button role="tab" aria-selected="true" data-tab="plan-a1">Tòa A1</button>
-        <button role="tab" aria-selected="false" data-tab="plan-a2">Tòa A2</button>
-      </div>
-      <div class="plan zoom" id="plan-a1"><a href="{src("planA1")}" class="zoom-link">{pic("planA1", "(max-width:1180px) 100vw, 1148px")}<span class="zoom-hint">Bấm để phóng to</span></a></div>
-      <div class="plan zoom" id="plan-a2" hidden><a href="{src("planA2")}" class="zoom-link">{pic("planA2", "(max-width:1180px) 100vw, 1148px")}<span class="zoom-hint">Bấm để phóng to</span></a></div>
-      <p class="note">Mặt bằng tầng 3A–24, mỗi tòa 28 căn/sàn. Diện tích ghi: thông thủy / tim tường. Thông số chính thức theo văn bản ký kết với khách hàng.</p>'''
+    tabs = [("plan-a1", "Tòa A1 · tầng 3A–24", "planA1"), ("plan-a2", "Tòa A2 · tầng 3A–24", "planA2"),
+            ("plan-g1", "Tòa A1 · tầng 3 sân vườn", "g3A1"), ("plan-g2", "Tòa A2 · tầng 3 sân vườn", "g3A2")]
+    btn = "".join(f'<button role="tab" aria-selected="{"true" if i == 0 else "false"}" data-tab="{t}">{l}</button>' for i, (t, l, _) in enumerate(tabs))
+    panes = "".join(f'<div class="plan zoom" id="{t}"{"" if i == 0 else " hidden"}><a href="{src(k)}" class="zoom-link">{pic(k, "(max-width:1180px) 100vw, 1148px")}<span class="zoom-hint">Bấm để phóng to</span></a></div>'
+                    for i, (t, _, k) in enumerate(tabs))
+    return (f'<div class="tabs reveal" role="tablist">{btn}</div>{panes}'
+            '<p class="note">Tầng 3A–24 mỗi tòa 28 căn/sàn, có mã căn và diện tích (thông thủy / tim tường). Tầng 3 là căn hộ sân vườn, ghi thêm diện tích sân vườn (DTSV). '
+            'Thông số chính thức theo văn bản ký kết với khách hàng.</p>')
 
 
 def units_table():
@@ -381,9 +418,9 @@ def build_index():
         {"@type": "ApartmentComplex", "@id": f"{D}#project", "name": "Cora Tower Đà Nẵng", "alternateName": "Sun Cora Tower",
          "description": "Tổ hợp 2 tòa tháp A1, A2 cao 25 tầng với khoảng 1.342 căn hộ: studio, 1PN+, 2PN, 3PN, căn hộ sân vườn, duplex và shophouse khối đế tại vòng xoay 29/3 – Nguyễn Phước Lan, Nam Hòa Xuân, Đà Nẵng.",
          "url": D, "numberOfAccommodationUnits": 1342,
-         "image": [f"{D}{src(k)}" for k in ("hero", "a1a2", "night", "aerial", "struct", "site", "planA1", "planA2", "unit1pn", "iso1pn")],
+         "image": [f"{D}{src(k)}" for k in ("hero", "a1a2", "night", "aerial", "struct", "site", "planA1", "planA2", "unit1pn", "iso1pn", "amA1", "amA2")],
          "address": {"@type": "PostalAddress", "streetAddress": "Vòng xoay đường 29/3 – Nguyễn Phước Lan, KĐT Nam Hòa Xuân", "addressLocality": "Đà Nẵng", "addressCountry": "VN"},
-         "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": n, "value": True} for n in ("Shophouse thương mại", "Dịch vụ – tiện ích tầng 2", "Căn hộ sân vườn", "Hầm để xe")]},
+         "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": n, "value": True} for n in ("Hồ bơi", "Jjimjilbang & Spa", "Gym", "Golf mô phỏng", "Khu trẻ em", "Thư viện", "Sinh hoạt cộng đồng", "Shophouse thương mại", "Hầm để xe")]},
         faq_ld(FAQ_INDEX),
     ]
     h = head("index", "Cora Tower Đà Nẵng – Bảng giá, mặt bằng căn hộ, shophouse, duplex | Hotline 0904 567 009",
@@ -448,8 +485,8 @@ def build_index():
     <div class="wrap">
       <div class="center reveal">
         <span class="kicker">Mặt bằng</span>
-        <h2>Mặt bằng tòa A1 – A2, tầng 3A – 24</h2>
-        <p class="sub">Mỗi tòa 28 căn/sàn, hành lang giữa, 2 lõi thang. Bấm vào mặt bằng để xem rõ từng mã căn.</p>
+        <h2>Mặt bằng tòa A1 – A2 có mã căn</h2>
+        <p class="sub">Mỗi tòa 28 căn/sàn, hành lang giữa, 2 lõi thang. Xem cả tầng 3 căn hộ sân vườn – bấm vào mặt bằng để phóng to từng mã căn.</p>
       </div>
       {plan_tabs()}
       <h3 style="margin-top:40px" class="reveal">Diện tích các loại căn</h3>
@@ -491,6 +528,41 @@ def build_index():
           {pic("int1pn", "(max-width:900px) 100vw, 380px", cls="unit-thumb")}
         </div>
       </div>
+      <h3 class="reveal center" style="margin-top:56px;font-size:1.5rem;color:var(--brand)">Mặt bằng các căn điển hình</h3>
+      <div class="tabs reveal" role="tablist">
+        <button role="tab" aria-selected="true" data-tab="u-stu">Studio</button>
+        <button role="tab" aria-selected="false" data-tab="u-1pn">1PN+</button>
+        <button role="tab" aria-selected="false" data-tab="u-2pn">2PN</button>
+      </div>
+      <div class="unit-plans" id="u-stu">{uplan("pA10823","A10823 · Studio · Tòa A1","3,8 × 9,6 m")}</div>
+      <div class="unit-plans" id="u-1pn" hidden>{uplan("unit1pn","A10803 · 1PN+1 · Tòa A1","6,2 × 9,6 m")}{uplan("pA10828","A10828 · 1PN+1 · Tòa A1","5,4 × 11,9 m")}</div>
+      <div class="unit-plans" id="u-2pn" hidden>{uplan("pA10801","A10801 · 2PN góc · Tòa A1","8,7 × 11,4 m")}{uplan("pA10805","A10805 · 2PN · 2 WC · Tòa A1","7,6 × 9,6 m")}{uplan("pA10817","A10817 · 2PN góc · Tòa A1","8,9 × 9,5 m")}{uplan("pA20827","A20827 · 2PN · Tòa A2","8,8 × 11,4 m")}</div>
+    </div>
+  </section>
+
+  <section id="tien-ich">
+    <div class="wrap">
+      <div class="center reveal">
+        <span class="kicker">Tiện ích</span>
+        <h2>Tầng 2 tiện ích riêng cho cư dân mỗi tòa</h2>
+        <p class="sub">Toàn bộ tầng 2 dành cho tiện ích nội khu – hồ bơi, spa, khu trẻ em, thư viện… chỉ cách căn hộ một chuyến thang máy.</p>
+      </div>
+      <div class="grid g4" style="margin-top:30px">
+        {card("pool", "Hồ bơi tầng 2", "Hồ bơi người lớn và hồ trẻ em, sân deck tắm nắng – có ở cả hai tòa.")}
+        {card("leaf", "Jjimjilbang &amp; Spa", "Xông hơi kiểu Hàn Quốc và spa (tòa A1), spa thư giãn (tòa A2).")}
+        {card("dumbbell", "Gym &amp; golf mô phỏng", "Phòng gym và phòng golf mô phỏng 3 làn tại tòa A2.")}
+        {card("kid", "Khu trẻ em", "Sân chơi trong nhà, khu vui chơi kết nối gia đình (bi-a, bàn chơi).")}
+        {card("people", "Sinh hoạt cộng đồng", "Không gian sinh hoạt chung, tiệc nhỏ, gặp gỡ cư dân.")}
+        {card("layers", "Thư viện", "Thư viện – góc đọc, làm việc yên tĩnh ngay trong tòa nhà.")}
+        {card("shield", "Văn phòng BQL", "Ban quản lý, kỹ thuật, kho hồ sơ đặt tại tầng 2 – hỗ trợ cư dân nhanh.")}
+        {card("store", "Shophouse tầng 1", "Cafe, cửa hàng, dịch vụ ngay chân tòa tháp.")}
+      </div>
+      <div class="tabs reveal" role="tablist" style="margin-top:36px">
+        <button role="tab" aria-selected="true" data-tab="am-a1">Tiện ích tòa A1</button>
+        <button role="tab" aria-selected="false" data-tab="am-a2">Tiện ích tòa A2</button>
+      </div>
+      <div class="plan" id="am-a1"><a href="{src("amA1")}" class="zoom-link">{pic("amA1", "(max-width:1180px) 100vw, 1148px")}<span class="zoom-hint">Bấm để phóng to</span></a></div>
+      <div class="plan" id="am-a2" hidden><a href="{src("amA2")}" class="zoom-link">{pic("amA2", "(max-width:1180px) 100vw, 1148px")}<span class="zoom-hint">Bấm để phóng to</span></a></div>
     </div>
   </section>
 
@@ -638,18 +710,18 @@ def build_shop():
     graph = [
         {"@type": "Product", "name": "Shophouse khối đế Cora Tower", "category": "Shophouse thương mại", "url": url,
          "description": "Shophouse tầng 1 khối đế Cora Tower, mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan, KĐT Nam Hòa Xuân, Đà Nẵng. Pháp lý đầy đủ, phù hợp kinh doanh và cho thuê.",
-         "image": [f"{D}{src('shop')}", f"{D}{src('a1a2')}", f"{D}{src('struct')}"], "brand": {"@type": "Brand", "name": "Cora Tower"}},
+         "image": [f"{D}{src('sr06')}", f"{D}{src('sr01')}", f"{D}{src('shop')}", f"{D}{src('a1a2')}", f"{D}{src('struct')}", f"{D}{src('shA1')}", f"{D}{src('shA2')}"], "brand": {"@type": "Brand", "name": "Cora Tower"}},
         crumbs("Shophouse khối đế", url), faq_ld(FAQ_SHOP),
     ]
     h = head("khoi-de-shophouse", "Shophouse khối đế Cora Tower Đà Nẵng – Mặt tiền vòng xoay 29/3 | 0904 567 009",
              "Shophouse khối đế Cora Tower (Sun Group) tầng 1, mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan, Hòa Xuân. Kính kịch trần, pháp lý đầy đủ, giá 4,96 – 6,04 tỷ/căn (43 – 61,5 m²). Gọi 0904 567 009.",
              "shophouse Cora Tower, khối đế Cora Tower, shophouse khối đế Đà Nẵng, shophouse Hòa Xuân, shophouse 29/3, shophouse Sun Neo City",
-             "og-shophouse.jpg", "Khối đế shophouse Cora Tower", "shop", graph)
+             "og-shophouse.jpg", "Khối đế shophouse Cora Tower", "sr06", graph)
     body = f'''{header("shop", "Nhận giỏ hàng")}
 
 <main>
   <section class="hero">
-    {pic("shop", "100vw", eager=True, cls="hero-bg")}
+    {pic("sr06", "100vw", eager=True, cls="hero-bg")}
     <div class="wrap hero-grid">
       <div>
         <nav class="breadcrumb" aria-label="breadcrumb"><a href="./">Cora Tower</a> › Shophouse khối đế</nav>
@@ -691,13 +763,43 @@ def build_shop():
               <tr><th scope="row">Vay ngân hàng</th><td>Tối đa 70%, hỗ trợ lãi suất 0% trong 24 tháng</td></tr>
               <tr><th scope="row">Pháp lý</th><td>Đất lô A2-19, A2-20 đã có GCN QSDĐ; đủ điều kiện bán theo văn bản 7117/SXD-QLN – <a href="phap-ly.html">xem hồ sơ</a></td></tr>
               <tr><th scope="row">Giá tham khảo</th><td class="price">4,96 – 6,04 tỷ/căn (đã gồm VAT &amp; phí bảo trì)</td></tr>
-              <tr><th scope="row">Diện tích</th><td>43,1 – 61,5 m² thông thủy · liên hệ {TEL_TXT} nhận giỏ hàng từng căn</td></tr>
+              <tr><th scope="row">Diện tích</th><td>Khoảng 38 – 127 m² thông thủy (42 – 138 m² tim tường), mặt tiền 3,5 – 13 m</td></tr>
+              <tr><th scope="row">Số lượng</th><td>Khoảng 33 shop tòa A1, 30 shop tòa A2 – <a href="#mat-bang-shop">xem mặt bằng</a></td></tr>
             </tbody>
           </table>
         </div>
         <p class="note">Số liệu tổng hợp, chỉ mang tính tham khảo. Giá và chính sách chính thức theo chủ đầu tư tại từng thời điểm.</p>
       </div>
       <div class="split-media reveal zoom"><a href="{src("struct")}" class="zoom-link">{pic("struct", "(max-width:900px) 100vw, 600px", alt="Cấu trúc tòa Cora Tower: tầng 1 shophouse thương mại, tầng 2 dịch vụ tiện ích")}</a></div>
+    </div>
+  </section>
+
+  <section class="alt" id="phoi-canh-shop">
+    <div class="wrap">
+      <div class="center reveal"><span class="kicker">Phối cảnh</span><h2>Phối cảnh shophouse khối đế</h2>
+        <p class="sub">Mặt kính kịch trần cao gần 7 m, biển hiệu đồng bộ, mái đón sảnh và vỉa hè rộng rợp cây – không gian kinh doanh chuẩn phố thương mại.</p></div>
+      <div class="gallery reveal">
+        {"".join(f'<a href="{src(k)}">{pic(k, "(max-width:760px) 100vw, 600px" if i == 0 else "(max-width:760px) 50vw, 300px")}</a>' for i, k in enumerate(["sr01","sr07","sr05","sr04","sr10","sr08","sr11","sr02","sr03"]))}
+      </div>
+    </div>
+  </section>
+
+  <section id="mat-bang-shop">
+    <div class="wrap">
+      <div class="center reveal">
+        <span class="kicker">Mặt bằng tầng 1</span>
+        <h2>Mặt bằng shophouse khối đế tòa A1 – A2</h2>
+        <p class="sub">Shop bao quanh khối đế, mặt chính hướng đường 29/3 và vòng xoay; sảnh cư dân, lõi thang và lối xuống hầm nằm giữa. Bấm để xem rõ mã căn, diện tích (tim tường / thông thủy) và chiều rộng mặt tiền.</p>
+      </div>
+      <div class="tabs reveal" role="tablist">
+        <button role="tab" aria-selected="true" data-tab="sh-a1">Tòa A1 · mã căn</button>
+        <button role="tab" aria-selected="false" data-tab="sh-a2">Tòa A2 · mã căn</button>
+        <button role="tab" aria-selected="false" data-tab="mt-a1">Tòa A1 · mặt tiền</button>
+        <button role="tab" aria-selected="false" data-tab="mt-a2">Tòa A2 · mặt tiền</button>
+      </div>
+      {"".join(f'<div class="plan" id="{t}"{"" if i == 0 else " hidden"}><a href="{src(k)}" class="zoom-link">{pic(k, "(max-width:1180px) 100vw, 1148px")}<span class="zoom-hint">Bấm để phóng to</span></a></div>' for i, (t, k) in enumerate([("sh-a1", "shA1"), ("sh-a2", "shA2"), ("mt-a1", "mtA1"), ("mt-a2", "mtA2")]))}
+      <p class="note">Thông số bản vẽ mang tính tương đối; thông số chính thức theo văn bản ký kết giữa chủ đầu tư và khách hàng.</p>
+      <div class="center" style="margin-top:22px"><a class="btn lg" href="#dang-ky">Nhận giỏ hàng shop còn trống</a></div>
     </div>
   </section>
 
@@ -732,7 +834,7 @@ def build_ph():
     graph = [
         {"@type": "Apartment", "name": "Duplex – Penthouse Cora Tower", "url": url, "floorLevel": "25",
          "description": "Căn hộ duplex – penthouse tầng 25 Cora Tower trong khối mái kiến trúc đặc trưng, sân vườn trên cao, tầm nhìn sông và thành phố Đà Nẵng.",
-         "image": [f"{D}{src('ph')}", f"{D}{src('hero')}", f"{D}{src('struct')}"],
+         "image": [f"{D}{src('ph')}", f"{D}{src('night')}", f"{D}{src('struct')}", f"{D}{src('ph25A1')}", f"{D}{src('phL25A1')}"],
          "containedInPlace": {"@id": f"{D}#project"},
          "address": {"@type": "PostalAddress", "streetAddress": "Vòng xoay đường 29/3 – Nguyễn Phước Lan, KĐT Nam Hòa Xuân", "addressLocality": "Đà Nẵng", "addressCountry": "VN"}},
         crumbs("Duplex – Penthouse", url), faq_ld(FAQ_PH),
@@ -781,7 +883,10 @@ def build_ph():
             <tbody>
               <tr><th scope="row">Vị trí</th><td>Tầng 25 – tòa A1 &amp; A2, Cora Tower, vòng xoay 29/3 – Nguyễn Phước Lan, Đà Nẵng</td></tr>
               <tr><th scope="row">Chiều cao tầng</th><td>~7 m – làm thêm tầng lửng thành duplex, có layout gợi ý của CĐT</td></tr>
-              <tr><th scope="row">Cách tính giá</th><td>Theo đơn nguyên 1 căn</td></tr>
+              <tr><th scope="row">Số lượng</th><td>Khoảng 24 căn mỗi tòa (A12501 – A12524, A22501 – A22524)</td></tr>
+              <tr><th scope="row">Diện tích sàn chính</th><td>51,9 – 88,6 m² thông thủy (56,3 – 94,7 m² tim tường)</td></tr>
+              <tr><th scope="row">Sau khi làm lửng</th><td>1PN → 2PN+1, 2PN → 3PN, 2PN+1 → 3PN+1 theo layout gợi ý</td></tr>
+              <tr><th scope="row">Cách tính giá</th><td>Theo đơn nguyên 1 căn – phần lửng không tính thêm</td></tr>
               <tr><th scope="row">Hoàn thiện</th><td>Trong 12 tháng từ ngày bàn giao</td></tr>
               <tr><th scope="row">Tiện ích</th><td>Sân vườn trên cao; dịch vụ – tiện ích tại tầng 2 khối đế</td></tr>
               <tr><th scope="row">Pháp lý</th><td>Đủ điều kiện bán, bảo lãnh VietinBank – <a href="phap-ly.html">xem hồ sơ</a></td></tr>
@@ -792,6 +897,25 @@ def build_ph():
         <p class="note">Thông tin tổng hợp, chỉ mang tính tham khảo. Thông số chính thức theo hồ sơ của chủ đầu tư.</p>
       </div>
       <div class="split-media reveal zoom"><a href="{src("struct")}" class="zoom-link">{pic("struct", "(max-width:900px) 100vw, 600px", alt="Cấu trúc tòa Cora Tower: tầng 25 căn hộ duplex trong khối mái")}</a></div>
+    </div>
+  </section>
+
+  <section id="mat-bang-penthouse">
+    <div class="wrap">
+      <div class="center reveal">
+        <span class="kicker">Mặt bằng tầng 25</span>
+        <h2>Mặt bằng penthouse &amp; tầng lửng gợi ý</h2>
+        <p class="sub">Tầng 25 mỗi tòa khoảng 24 căn. Với chiều cao ~7 m, căn 1PN làm thêm lửng thành 2PN+1, căn 2PN thành 3PN, căn 2PN+1 thành 3PN+1 – xem so sánh sàn chính và tầng lửng bên dưới.</p>
+      </div>
+      <div class="tabs reveal" role="tablist">
+        <button role="tab" aria-selected="true" data-tab="p-a1">A1 · tầng 25</button>
+        <button role="tab" aria-selected="false" data-tab="pl-a1">A1 · tầng lửng</button>
+        <button role="tab" aria-selected="false" data-tab="p-a2">A2 · tầng 25</button>
+        <button role="tab" aria-selected="false" data-tab="pl-a2">A2 · tầng lửng</button>
+      </div>
+      {"".join(f'<div class="plan" id="{t}"{"" if i == 0 else " hidden"}><a href="{src(k)}" class="zoom-link">{pic(k, "(max-width:1180px) 100vw, 1148px")}<span class="zoom-hint">Bấm để phóng to</span></a></div>' for i, (t, k) in enumerate([("p-a1", "ph25A1"), ("pl-a1", "phL25A1"), ("p-a2", "ph25A2"), ("pl-a2", "phL25A2")]))}
+      <p class="note">Tầng lửng là layout gợi ý của chủ đầu tư, chủ nhà tự thi công sau bàn giao và nộp phương án cho Ban quản lý. Thông số chính thức theo văn bản ký kết.</p>
+      <div class="center" style="margin-top:22px"><a class="btn lg" href="#dang-ky">Nhận giỏ hàng penthouse</a></div>
     </div>
   </section>
 
@@ -909,8 +1033,8 @@ def build_legal():
 
 
 def sitemap():
-    pages = {"": ["hero", "a1a2", "night", "aerial", "struct", "site", "siteAir", "planA1", "planA2", "unit1pn", "iso1pn", "int1pn", "cross", "land", "river"],
-             "khoi-de-shophouse.html": ["shop", "a1a2", "struct"], "penthouse.html": ["ph", "night", "struct"], "phap-ly.html": ["night"]}
+    pages = {"": ["hero", "a1a2", "night", "aerial", "struct", "site", "siteAir", "planA1", "planA2", "g3A1", "g3A2", "unit1pn", "iso1pn", "int1pn", "cross", "land", "river", "pA10801", "pA10805", "pA10817", "pA20827", "pA10828", "pA10823", "amA1", "amA2"],
+             "khoi-de-shophouse.html": ["sr06", "shop", "a1a2", "struct", "shA1", "shA2", "mtA1", "mtA2"] + [f"sr{i:02d}" for i in range(1, 12) if i != 6], "penthouse.html": ["ph", "night", "struct", "ph25A1", "phL25A1", "ph25A2", "phL25A2"], "phap-ly.html": ["night"]}
     out = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">']
     for p, imgs in pages.items():
