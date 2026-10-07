@@ -127,11 +127,12 @@ PH_TOC = [("ph-cam-xuc", "Sống trên đỉnh Cora Tower"), ("ph-7m", "Trần 7
           ("ph-gia", "Giá penthouse và chính sách"), ("ph-dau-tu", "Giá trị đầu tư của penthouse"), ("ph-ai", "Penthouse dành cho ai?")]
 PH_ARTICLE = article("Câu chuyện penthouse", "Penthouse Cora Tower: nơi bầu trời Đà Nẵng trở thành phòng khách", f'''
 <h3 id="ph-cam-xuc">Sống trên đỉnh Cora Tower</h3>
-<p>Buổi sáng, nắng đầu ngày tràn qua ô kính cao gấp đôi bình thường, đánh thức cả căn nhà. Chiều xuống, mặt trời lặn sau rặng núi phía Tây, sông Hàn đổi màu bạc rồi tím, vòng quay Sun Wheel lên đèn ở phía xa. Tối thứ Bảy mùa lễ hội, cả gia đình ngồi trên ban công tầng 25 – nơi không có tòa nhà nào chắn tầm mắt. Đó là cuộc sống mà <strong>penthouse Cora Tower</strong> mang lại: không chỉ là một căn hộ cao nhất, mà là <strong>một góc trời riêng giữa lòng Đà Nẵng</strong>.</p>
-<p>Các căn penthouse nằm trọn trong <strong>khối mái màu cam</strong> – phần kiến trúc dễ nhận ra nhất của hai tòa tháp. Từ dưới vòng xoay 29/3 nhìn lên, đó là “vương miện” của Cora Tower; từ bên trong nhìn ra, đó là khung cửa sổ lớn nhất của cả dự án.</p>
+<p>Ai từng đứng trên một tầng thật cao lúc chiều tà đều nhớ cảm giác ấy: tiếng ồn của phố xá lùi xa, gió mát hơn, và cả thành phố bỗng nhỏ lại vừa trong một khung nhìn. <strong>Penthouse Cora Tower</strong> giữ lại cảm giác đó – không phải cho một buổi chiều, mà cho mỗi ngày.</p>
+<p>Buổi sáng, nắng từ phía biển tràn qua ô kính cao gấp đôi bình thường, đánh thức cả căn nhà. Chiều xuống, mặt trời lặn sau rặng núi phía Tây, sông Hàn đổi màu bạc rồi tím, vòng quay Sun Wheel lên đèn ở phía xa. Những tối lễ hội, cả gia đình ngồi trên ban công tầng 25 – nơi không có tòa nhà nào chắn tầm mắt. Đó không chỉ là một căn hộ cao nhất, mà là <strong>một góc trời riêng giữa lòng Đà Nẵng</strong>.</p>
+<p>Các căn penthouse nằm trọn trong <strong>khối mái màu cam</strong> – phần kiến trúc dễ nhận ra nhất của hai tòa tháp. Từ vòng xoay 29/3 nhìn lên, đó là “vương miện” của Cora Tower; từ bên trong nhìn ra, đó là khung cửa sổ lớn nhất của cả dự án. Và mỗi tòa tháp chỉ có duy nhất một tầng như thế.</p>
 
 <h3 id="ph-7m">Trần 7 m: tự viết căn nhà của riêng mình</h3>
-<p>Penthouse Cora Tower có chiều cao tầng khoảng <strong>7 m</strong> – gấp đôi căn hộ thông thường. Căn được bàn giao để chủ nhân toàn quyền sáng tạo: làm phòng khách thông tầng với đèn chùm buông dài, đặt thư viện trên tầng lửng nhìn xuống, hay chia thành <strong>duplex hai tầng</strong> với phòng ngủ riêng tư phía trên. Chủ đầu tư có sẵn <strong>layout duplex gợi ý</strong>:</p>
+<p>Penthouse Cora Tower có chiều cao tầng khoảng <strong>7 m</strong> – gấp đôi căn hộ thông thường. Bạn nhận một không gian còn để ngỏ, và toàn quyền kể câu chuyện của riêng mình trong đó: làm phòng khách thông tầng với đèn chùm buông dài, đặt thư viện trên tầng lửng nhìn xuống, hay chia thành <strong>duplex hai tầng</strong> với phòng ngủ riêng tư phía trên. Chủ đầu tư có sẵn <strong>layout duplex gợi ý</strong>:</p>
 <ul>
 <li>Căn 1PN làm lửng thành <strong>2PN+1</strong>.</li>
 <li>Căn 2PN làm lửng thành <strong>3PN</strong>.</li>

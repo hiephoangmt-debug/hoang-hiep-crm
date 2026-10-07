@@ -969,7 +969,7 @@ def build_ph():
         crumbs("Duplex – Penthouse", url), faq_ld(FAQ_PH),
     ]
     h = head("penthouse", "Penthouse Cora Tower – Duplex trần 7m tầng 25, view sông Hàn | Sun Group Đà Nẵng",
-             "Căn duplex – penthouse tầng 25 Cora Tower (Sun Group) trong khối mái biểu tượng, thông tầng, sân vườn trên cao, view sông và thành phố Đà Nẵng. Số lượng giới hạn – gọi 0904 567 009.",
+             "Penthouse Cora Tower tầng 25 trong khối mái cam biểu tượng: trần cao ~7m làm được duplex, tầm nhìn sông Hàn, phố thị và biển Đà Nẵng. Mỗi tòa chỉ khoảng 24 căn – gọi 0904 567 009.",
              "penthouse Cora Tower, duplex Cora Tower, căn hộ tầng 25 Cora Tower, penthouse Đà Nẵng, penthouse Hòa Xuân, duplex Đà Nẵng",
              "og-penthouse.jpg", "Không gian sân vườn duplex penthouse Cora Tower", "rBridge", graph)
     body = f'''{header("ph", "Nhận giá duplex")}
@@ -981,9 +981,9 @@ def build_ph():
       <div>
         <nav class="breadcrumb" aria-label="breadcrumb"><a href="./">Cora Tower</a> › Duplex – Penthouse</nav>
         <span class="eyebrow">Tầng 25 · Duplex · Số lượng giới hạn</span>
-        <h1>Penthouse – Duplex Cora Tower – <em>đỉnh cao</em> sống giữa trời Đà Nẵng</h1>
-        <p class="lead">Những căn duplex ở tầng cao nhất, nằm trong khối mái kiến trúc màu cam biểu tượng – không gian thông tầng, sân vườn trên cao, tầm nhìn toàn cảnh sông và thành phố.</p>
-        <ul class="ticks"><li>Tầng cao nhất</li><li>Thông tầng</li><li>Pháp lý đầy đủ</li></ul>
+        <h1>Penthouse Cora Tower – <em>nơi bầu trời</em> trở thành phòng khách</h1>
+        <p class="lead">Có những buổi chiều, cả Đà Nẵng như chậm lại dưới chân mình. Tầng 25, trần cao gần 7 mét, khối mái cam ôm lấy ánh hoàng hôn – penthouse Cora Tower dành cho người muốn mỗi ngày đều được sống giữa trời.</p>
+        <ul class="ticks"><li>Tầng cao nhất</li><li>Trần ~7 m</li><li>Làm được duplex</li></ul>
         <div class="cta"><a class="btn ghost lg" href="tel:{TEL}">Gọi {TEL_TXT}</a></div>
       </div>
       {hero_form("Đăng ký ưu tiên duplex", "Số lượng rất giới hạn – nhận mặt bằng và giá trước khi công bố rộng rãi.", "Duplex – Penthouse", "Đăng ký ưu tiên")}
@@ -991,13 +991,26 @@ def build_ph():
   </section>
   {stats([(25, "", "25", "tầng cao nhất"), (2, "", "2", "tầng thông (duplex)"), (360, "°", "360°", "tầm nhìn thành phố"), (2, "", "2", "tòa tháp A1 &amp; A2")])}
 
+  <section class="dark day-sec">
+    <div class="wrap">
+      <div class="center reveal"><span class="kicker">Một ngày ở tầng 25</span><h2>Từ bình minh đến khi thành phố lên đèn</h2>
+        <p class="sub">Ở trên cao, thời gian trôi theo ánh sáng. Đây là một ngày bình thường của chủ nhân penthouse Cora Tower.</p></div>
+      <ol class="day">
+        <li class="reveal"><time>05:45</time><h3>Nắng đầu tiên</h3><p>Ánh bình minh từ phía biển tràn qua ô kính cao gấp đôi bình thường. Bạn pha ly cà phê, cả căn nhà sáng lên trước khi thành phố kịp thức giấc.</p></li>
+        <li class="reveal"><time>10:00</time><h3>Không gian của riêng mình</h3><p>Tầng lửng là góc làm việc yên tĩnh nhìn xuống phòng khách thông tầng. Không tiếng ồn, không ai nhìn sang – chỉ có trời xanh ngoài khung kính.</p></li>
+        <li class="reveal"><time>17:30</time><h3>Hoàng hôn sông Hàn</h3><p>Mặt trời lặn sau rặng núi phía Tây, sông đổi màu bạc rồi tím. Bọn trẻ về nhà, cả gia đình ra ban công – khoảnh khắc mà không bức ảnh nào chụp đủ.</p></li>
+        <li class="reveal"><time>20:30</time><h3>Thành phố lên đèn</h3><p>Phố xá Đà Nẵng trải dài lấp lánh dưới chân, vòng quay Sun Wheel sáng ở phía xa. Những đêm lễ hội, ban công nhà bạn là khán đài riêng.</p></li>
+      </ol>
+    </div>
+  </section>
+
   <section>
     <div class="wrap">
-      <div class="center reveal"><span class="kicker">Khác biệt</span><h2>Điểm khác biệt của duplex – penthouse Cora Tower</h2></div>
+      <div class="center reveal"><span class="kicker">Khác biệt</span><h2>Những điều chỉ có ở tầng cao nhất</h2></div>
       <div class="grid g3" style="margin-top:36px">
-        {card("ceiling", "Trần cao ~7 m", "Đủ chiều cao làm thêm tầng lửng thành duplex 2 tầng; chủ đầu tư có layout duplex gợi ý.")}
-        {card("eye", "Tầm nhìn toàn cảnh", "Tầng cao nhất tòa tháp, view sông Cẩm Lệ, trung tâm Đà Nẵng và khu Sun Neo City.")}
-        {card("crown", "Khối mái biểu tượng", "Nằm trong khối kiến trúc màu cam đặc trưng – dấu ấn nhận diện của Cora Tower.")}
+        {card("ceiling", "Khoảng trời trong nhà", "Trần cao gần 7 m – đủ cho một phòng khách thông tầng với ô kính lớn, hoặc tầng lửng riêng cho phòng ngủ, thư viện. Giá tính theo một căn, phần lửng không tính thêm.")}
+        {card("eye", "Không ai che tầm mắt", "Cora Tower đứng giữa khu đô thị thấp tầng, nên từ tầng 25 nhìn ra là sông Hàn, phố thị, rặng núi phía Tây và xa hơn là biển.")}
+        {card("crown", "Ngôi nhà ai cũng nhận ra", "Căn hộ nằm trong khối mái cam – “vương miện” của hai tòa tháp. Chỉ cần nói “nhà tôi ở trên mái cam ấy”, bạn bè sẽ biết.")}
       </div>
     </div>
   </section>
@@ -1053,14 +1066,14 @@ def build_ph():
       <div class="split-media reveal">{pic("night", "(max-width:900px) 100vw, 600px", alt="Khối mái màu cam phát sáng về đêm – nơi bố trí căn duplex tầng 25 Cora Tower")}<div class="badge">Dành cho số ít<small>ưu tiên khách đăng ký sớm</small></div></div>
       <div class="reveal">
         <span class="kicker">Chủ nhân</span>
-        <h2>Duplex – penthouse dành cho ai?</h2>
+        <h2>Dành cho những người đã đi đủ xa để biết mình muốn gì</h2>
         <ul class="check">
-          <li>Gia đình đa thế hệ cần không gian rộng, nhiều phòng</li>
-          <li>Doanh nhân muốn nơi ở kiêm không gian tiếp khách đẳng cấp</li>
-          <li>Nhà đầu tư tìm sản phẩm khan hiếm, giữ giá trị dài hạn</li>
-          <li>Người yêu thiết kế muốn tự do cải tạo theo phong cách riêng</li>
+          <li><b>Gia đình ba thế hệ</b> – ông bà có phòng riêng ở tầng dưới, con cái có góc riêng trên tầng lửng, bữa tối vẫn chung một bàn.</li>
+          <li><b>Người thành đạt</b> muốn một nơi tiếp bạn bè, đối tác mà chỉ cần bước vào là không cần giới thiệu thêm.</li>
+          <li><b>Người yêu cái đẹp</b> muốn tự tay vẽ nên ngôi nhà thông tầng của mình, không theo khuôn mẫu nào.</li>
+          <li><b>Người nghĩ dài hạn</b> – mỗi tòa tháp chỉ có một tầng mái, và tầm nhìn này không thể xây thêm.</li>
         </ul>
-        <a class="btn" href="#dang-ky">Đặt lịch tư vấn duplex</a>
+        <a class="btn" href="#dang-ky">Hẹn lịch ngắm căn penthouse</a>
       </div>
     </div>
   </section>
@@ -1069,7 +1082,7 @@ def build_ph():
 
   {faq_section("Hỏi đáp về duplex – penthouse Cora Tower", FAQ_PH, '<p class="center" style="margin-top:20px">Xem thêm: <a href="./">Tổng quan dự án Cora Tower</a> · <a href="khoi-de-shophouse.html">Shophouse khối đế Cora Tower</a></p>')}
 
-  {lead_section("Nhận mặt bằng &amp; giá duplex – penthouse", "Số lượng giới hạn – đăng ký để được ưu tiên xem căn và nhận chính sách mới nhất.", "Duplex – Penthouse", "Đăng ký ưu tiên")}
+  {lead_section("Giữ cho mình một góc trời ở tầng 25", "Mỗi tòa chỉ khoảng 24 căn penthouse. Để lại thông tin, anh Hiệp sẽ gửi mặt bằng, giá từng căn và hẹn lịch xem dự án vào giờ hoàng hôn.", "Duplex – Penthouse", "Đăng ký ưu tiên")}
 </main>
 '''
     return h + "\n<body>\n" + body + "\n" + FOOTER + "\n</body>\n</html>\n"
