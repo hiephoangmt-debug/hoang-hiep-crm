@@ -5,6 +5,9 @@
   var PHONE = '0909669325', PHONE_TEXT = '0909 669 325', ZALO = 'https://zalo.me/' + PHONE;
   var FEES = 'Rút tiền: Visa 1,8% · JCB/Mastercard 1,9% · thẻ Sacombank, VPBank 1,9%.<br>Đáo hạn: Visa 1,9% · JCB/Mastercard 2,0% · thẻ Sacombank, VPBank 2,1%.';
 
+  /* Tên trang khách đang xem, vd "/bang-phi" hoặc "trang chủ" */
+  function pageName() { var p = location.pathname.replace(/\/+$/, ''); return p ? p : 'trang chủ'; }
+
   function send(obj) {
     obj.source = location.hostname; obj.page = location.pathname;
     var body = JSON.stringify(obj);
@@ -25,8 +28,8 @@
     var loai = href.indexOf('tel:') === 0 ? 'goi' : 'zalo', now = Date.now();
     if (lastPing[loai] && now - lastPing[loai] < 60000) return;
     lastPing[loai] = now;
-    var text = (a.innerText || a.getAttribute('aria-label') || '').replace(/\s+/g, ' ').trim().slice(0, 40);
-    send({ loai: loai, service: 'Nút ' + (loai === 'goi' ? 'Gọi' : 'Zalo') + (text ? ' – ' + text : '') });
+    var text = (a.innerText || a.getAttribute('aria-label') || '').replace(/\s+/g, ' ').trim().slice(0, 25);
+    send({ loai: loai, service: 'Nút ' + (loai === 'goi' ? 'Gọi' : 'Zalo') + ' – trang ' + pageName() + (text ? ' – ' + text : '') });
   }, true);
 
   /* 2. Giao diện */
@@ -166,7 +169,8 @@
     }
     if (step === 'name') {
       say(v, true); lead.name = v; form.hidden = true; step = '';
-      send({ name: lead.name, phone: lead.phone, service: 'Chat web – ' + lead.service + ' – ' + lead.bank + ' – ' + lead.amount });
+      send({ name: lead.name, phone: lead.phone, service: 'Chat web – ' + lead.service + ' – ' + lead.bank + ' – ' + lead.amount,
+        ghi_chu: 'Từ trang: ' + location.hostname + location.pathname });
       bot('Em đã nhận thông tin ✅ Em sẽ gọi hoặc nhắn Zalo cho anh/chị trong ít phút.');
       bot('Cần gấp anh/chị bấm ngay:<br><a href="tel:' + PHONE + '" style="color:#1b7f3b;font-weight:700">📞 Gọi ' + PHONE_TEXT + '</a> · <a href="' + ZALO + '" target="_blank" rel="noopener" style="color:#0068ff;font-weight:700">Zalo</a>', 900);
     }
