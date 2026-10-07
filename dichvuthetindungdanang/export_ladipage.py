@@ -124,6 +124,10 @@ def convert(s, slug):
 
     # Mục lục: LadiPage bỏ id của tiêu đề nên link "#..." không nhảy -> bỏ mục lục
     s = re.sub(r'<nav class="toc".*?</nav>', "", s, flags=re.S)
+    # Breadcrumb: flex + nhiều phần tử con bị LadiPage xếp chồng chữ → gộp thành 1 đoạn văn thường
+    s = re.sub(r'<nav class="crumbs"[^>]*>(.*?)</nav>',
+               lambda m: '<p class="crumbs" style="display:block">' + re.sub(r'<span>(.*?)</span>', r' › \1', m.group(1)) + '</p>',
+               s, flags=re.S)
 
     # Dọn phần cần JS
     s = s.replace("<details open>", "<details>")
