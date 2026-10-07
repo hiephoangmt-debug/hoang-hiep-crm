@@ -1,0 +1,29 @@
+<!-- Cụm liên hệ nổi Gọi · Zalo · Nhắn tin – dán vào LadiPage: Thiết lập trang > Mã JavaScript/CSS > ô "Trước thẻ </body>" -->
+<style>
+.hhf,.hhf *{box-sizing:border-box;font-family:"Be Vietnam Pro",Arial,sans-serif;line-height:1.35}
+.hhf{position:fixed;right:16px;bottom:24px;z-index:2147483000;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+.hhf a{display:flex;align-items:center;gap:10px;text-decoration:none}
+.hhf-ic{position:relative;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:13px;flex:none;box-shadow:0 8px 20px rgba(21,36,90,.28);border:3px solid #fff}
+.hhf-ic svg{width:24px;height:24px;fill:#fff}
+.hhf-lb{background:#fff;color:#1B2D6B;font-weight:800;font-size:14px;padding:8px 13px;border-radius:999px;box-shadow:0 6px 16px rgba(21,36,90,.18);white-space:nowrap}
+.hhf-lb b{color:#FF6B1A}
+.hhf-call .hhf-ic{background:#FF6B1A;animation:hhfring 1.8s infinite}
+.hhf-call .hhf-ic svg{animation:hhfshake 1.8s infinite}
+.hhf-zalo .hhf-ic{background:#0068FF;font-size:14px;letter-spacing:.2px}
+.hhf-chat .hhf-ic{background:#1B2D6B}
+.hhf-chat .hhf-ic:after{content:"";position:absolute;top:2px;right:2px;width:12px;height:12px;border-radius:50%;background:#22C55E;border:2px solid #fff}
+.hhf a.hhf-tip{display:block;position:relative;width:228px;background:#fff;color:#163056;font-size:14px;line-height:1.45;padding:12px 14px;border-radius:14px 14px 4px 14px;box-shadow:0 12px 28px rgba(21,36,90,.22);border:1px solid #E3E8F1;animation:hhftip 24s 2s infinite both}
+.hhf-tip b{display:block;color:#1B2D6B;font-size:15px;margin-bottom:2px}
+.hhf-tip i{font-style:normal;color:#FF6B1A;font-weight:800}
+.hhf .hhf-lb{display:none}
+@media(min-width:900px){.hhf{bottom:28px;right:24px}.hhf .hhf-lb{display:block}.hhf-sms{display:none!important}}
+@keyframes hhfring{0%{box-shadow:0 0 0 0 rgba(255,107,26,.65),0 8px 20px rgba(21,36,90,.28)}70%{box-shadow:0 0 0 16px rgba(255,107,26,0),0 8px 20px rgba(21,36,90,.28)}100%{box-shadow:0 0 0 0 rgba(255,107,26,0),0 8px 20px rgba(21,36,90,.28)}}
+@keyframes hhfshake{0%,40%,100%{transform:rotate(0)}5%,15%,25%{transform:rotate(-16deg)}10%,20%,30%{transform:rotate(16deg)}}
+@keyframes hhftip{0%{opacity:0;transform:translateY(10px) scale(.96);visibility:hidden}3%,45%{opacity:1;transform:none;visibility:visible}50%,100%{opacity:0;transform:translateY(10px) scale(.96);visibility:hidden}}
+</style>
+<div class="hhf" id="hhf-lien-he">
+  <a class="hhf-tip" href="https://zalo.me/0904567009" target="_blank" rel="noopener"><b>Chào bạn 👋 Mình là Hiệp</b>Hỏi lương, thưởng hay lịch phỏng vấn? <i>Nhắn mình ngay nhé!</i></a>
+  <a class="hhf-chat hhf-sms" href="sms:0904567009?&amp;body=Ch%C3%A0o%20anh%20Hi%E1%BB%87p%2C%20em%20mu%E1%BB%91n%20%E1%BB%A9ng%20tuy%E1%BB%83n%20Sale%20B%C4%90S.%20Em%20t%C3%AAn%3A%20" aria-label="Nhắn tin cho anh Hiệp"><span class="hhf-lb">Nhắn tin</span><span class="hhf-ic"><svg viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.9 2 11.6c0 2.6 1.4 5 3.7 6.5L5 21.5l3.8-2.1c1 .3 2.1.4 3.2.4 5.5 0 10-3.9 10-8.6S17.5 3 12 3zm-4.5 9.9a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6zm4.5 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6zm4.5 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6z"/></svg></span></a>
+  <a class="hhf-zalo" href="https://zalo.me/0904567009" target="_blank" rel="noopener" aria-label="Chat Zalo với anh Hiệp"><span class="hhf-lb">Chat Zalo với <b>Hiệp</b></span><span class="hhf-ic">Zalo</span></a>
+  <a class="hhf-call" href="tel:0904567009" aria-label="Gọi 0904 567 009"><span class="hhf-lb">Gọi <b>0904 567 009</b></span><span class="hhf-ic"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></span></a>
+</div>
