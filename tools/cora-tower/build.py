@@ -971,12 +971,12 @@ def build_ph():
     h = head("penthouse", "Penthouse Cora Tower – Duplex trần 7m tầng 25, view sông Hàn | Sun Group Đà Nẵng",
              "Penthouse Cora Tower tầng 25 trong khối mái cam biểu tượng: trần cao ~7m làm được duplex, tầm nhìn sông Hàn, phố thị và biển Đà Nẵng. Mỗi tòa chỉ khoảng 24 căn – gọi 0904 567 009.",
              "penthouse Cora Tower, duplex Cora Tower, căn hộ tầng 25 Cora Tower, penthouse Đà Nẵng, penthouse Hòa Xuân, duplex Đà Nẵng",
-             "og-penthouse.jpg", "Không gian sân vườn duplex penthouse Cora Tower", "rBridge", graph)
+             "og-penthouse.jpg", "Ban công penthouse Cora Tower lúc hoàng hôn", "vSun", graph)
     body = f'''{header("ph", "Nhận giá duplex")}
 
 <main>
   <section class="hero">
-    {pic("rBridge", "100vw", eager=True, cls="hero-bg")}
+    {pic("vSun", "100vw", eager=True, cls="hero-bg")}
     <div class="wrap hero-grid">
       <div>
         <nav class="breadcrumb" aria-label="breadcrumb"><a href="./">Cora Tower</a> › Duplex – Penthouse</nav>
@@ -996,10 +996,10 @@ def build_ph():
       <div class="center reveal"><span class="kicker">Một ngày ở tầng 25</span><h2>Từ bình minh đến khi thành phố lên đèn</h2>
         <p class="sub">Ở trên cao, thời gian trôi theo ánh sáng. Đây là một ngày bình thường của chủ nhân penthouse Cora Tower.</p></div>
       <ol class="day">
-        <li class="reveal"><time>05:45</time><h3>Nắng đầu tiên</h3><p>Ánh bình minh từ phía biển tràn qua ô kính cao gấp đôi bình thường. Bạn pha ly cà phê, cả căn nhà sáng lên trước khi thành phố kịp thức giấc.</p></li>
-        <li class="reveal"><time>10:00</time><h3>Không gian của riêng mình</h3><p>Tầng lửng là góc làm việc yên tĩnh nhìn xuống phòng khách thông tầng. Không tiếng ồn, không ai nhìn sang – chỉ có trời xanh ngoài khung kính.</p></li>
-        <li class="reveal"><time>17:30</time><h3>Hoàng hôn sông Hàn</h3><p>Mặt trời lặn sau rặng núi phía Tây, sông đổi màu bạc rồi tím. Bọn trẻ về nhà, cả gia đình ra ban công – khoảnh khắc mà không bức ảnh nào chụp đủ.</p></li>
-        <li class="reveal"><time>20:30</time><h3>Thành phố lên đèn</h3><p>Phố xá Đà Nẵng trải dài lấp lánh dưới chân, vòng quay Sun Wheel sáng ở phía xa. Những đêm lễ hội, ban công nhà bạn là khán đài riêng.</p></li>
+        <li class="reveal"><figure>{pic("vBan", "(max-width:560px) 100vw, (max-width:960px) 50vw, 300px", alt="Ban công căn hộ Cora Tower đón nắng sớm hướng biển")}</figure><time>05:45</time><h3>Nắng đầu tiên</h3><p>Ánh bình minh từ phía biển tràn qua ô kính cao gấp đôi bình thường. Bạn pha ly cà phê, cả căn nhà sáng lên trước khi thành phố kịp thức giấc.</p></li>
+        <li class="reveal"><figure>{pic("rPool", "(max-width:560px) 100vw, (max-width:960px) 50vw, 300px", alt="Hồ bơi trong nhà kính tầng 2 Cora Tower buổi sáng")}</figure><time>09:00</time><h3>Kỳ nghỉ không cần xếp vali</h3><p>Một chuyến thang máy xuống tầng 2: vài vòng bơi trong hồ kính đầy nắng, rồi xông hơi Jjimjilbang kiểu Hàn. Trở lên nhà, tầng lửng là góc làm việc yên tĩnh nhìn ra trời xanh.</p></li>
+        <li class="reveal"><figure>{pic("vRiver", "(max-width:560px) 100vw, (max-width:960px) 50vw, 300px", alt="Ban công nhìn ra sông và biển Đà Nẵng lúc chiều")}</figure><time>17:30</time><h3>Hoàng hôn sông Hàn</h3><p>Mặt trời lặn sau rặng núi phía Tây, sông đổi màu bạc rồi tím. Bọn trẻ về nhà, cả gia đình ra ban công – khoảnh khắc mà không bức ảnh nào chụp đủ.</p></li>
+        <li class="reveal"><figure>{pic("night", "(max-width:560px) 100vw, (max-width:960px) 50vw, 300px", alt="Khối mái cam Cora Tower phát sáng khi thành phố lên đèn")}</figure><time>20:30</time><h3>Thành phố lên đèn</h3><p>Phố xá Đà Nẵng trải dài lấp lánh dưới chân, vòng quay Sun Wheel sáng ở phía xa. Những đêm lễ hội, ban công nhà bạn là khán đài riêng.</p></li>
       </ol>
     </div>
   </section>

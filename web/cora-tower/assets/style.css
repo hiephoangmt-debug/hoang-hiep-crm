@@ -283,8 +283,12 @@ section.alt .toc{background:var(--bg)}
 
 /* a day timeline */
 .day{list-style:none;margin:36px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:none}
-.day li{position:relative;padding:24px 20px 22px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12)}
-.day li::before{content:"";position:absolute;left:20px;right:20px;top:0;height:2px;background:linear-gradient(90deg,#ff7a1a,rgba(255,122,26,0))}
+.day li{position:relative;overflow:hidden;padding:0 20px 22px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12)}
+.day figure{margin:0 -20px 16px;position:relative}
+.day figure img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .6s}
+.day li:hover figure img{transform:scale(1.05)}
+.day figure::after{content:"";position:absolute;inset:auto 0 0 0;height:40%;background:linear-gradient(transparent,rgba(6,20,46,.85))}
+.day time{position:relative;margin-top:-46px;z-index:1}
 .day time{display:block;font-size:1.9rem;font-weight:800;letter-spacing:.02em;font-variant-numeric:tabular-nums;color:#ffb37f;margin-bottom:6px}
 .day h3{color:#fff;margin:0 0 6px}
 .day p{margin:0;color:#c6d2e6;font-size:.96rem;line-height:1.65}
