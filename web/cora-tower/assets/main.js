@@ -29,3 +29,52 @@ document.querySelectorAll("form.lead").forEach((form) => {
     }
   });
 });
+
+// Header shadow on scroll
+const head = document.querySelector(".site-head");
+const onScroll = () => head && head.classList.toggle("scrolled", scrollY > 10);
+addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+
+// Reveal sections + count-up numbers when they enter the viewport
+const countUp = (el) => {
+  const target = parseFloat(el.dataset.count);
+  const fmt = (n) => Math.round(n).toLocaleString("vi-VN");
+  const t0 = performance.now();
+  const tick = (t) => {
+    const p = Math.min(1, (t - t0) / 1400);
+    el.textContent = fmt(target * (1 - Math.pow(1 - p, 3))) + (el.dataset.suffix || "");
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+};
+if ("IntersectionObserver" in window) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add("in");
+      if (e.target.dataset.count) countUp(e.target);
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll(".reveal,[data-count]").forEach((el) => io.observe(el));
+} else {
+  document.querySelectorAll(".reveal").forEach((el) => el.classList.add("in"));
+}
+
+// Simple lightbox for the gallery
+const lb = document.querySelector(".lightbox");
+if (lb) {
+  const img = lb.querySelector("img");
+  document.querySelectorAll(".gallery a").forEach((a) =>
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      img.src = a.href;
+      img.alt = a.querySelector("img").alt;
+      lb.classList.add("open");
+    })
+  );
+  const close = () => lb.classList.remove("open");
+  lb.addEventListener("click", (e) => e.target !== img && close());
+  addEventListener("keydown", (e) => e.key === "Escape" && close());
+}
