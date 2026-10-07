@@ -242,6 +242,23 @@ footer a{color:var(--gold);font-weight:600}
 .calc-fig figcaption{font-size:13px;color:var(--muted);text-align:center;margin-top:8px}
 .mood{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--navy);margin:2px 0 6px}
 
+/* Ngôi nhà thứ hai: khi về – khi vắng – mua chắc khi chưa đến */
+.home2{background:#fff}
+.duo{display:grid;gap:16px;margin-top:24px}
+.duo .card .ph{aspect-ratio:16/10}
+.duo .card .when{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-d);margin-bottom:4px}
+.duo .card ul{list-style:none;display:grid;gap:7px;margin-top:8px}
+.duo .card li{position:relative;padding-left:22px;font-size:15px;color:var(--muted)}
+.duo .card li::before{content:"";position:absolute;left:0;top:8px;width:11px;height:6px;border-left:2.5px solid var(--gold-d);border-bottom:2.5px solid var(--gold-d);transform:rotate(-45deg)}
+.steps{margin-top:30px;background:var(--navy);color:#fff;border-radius:var(--r);padding:22px 18px;box-shadow:var(--shadow)}
+.steps h3{color:#fff;font-size:22px;margin-bottom:4px}
+.steps>p{opacity:.85;font-size:15px;margin-bottom:16px}
+.steps ol{list-style:none;display:grid;gap:12px;counter-reset:s;margin-bottom:18px}
+.steps li{display:flex;gap:12px;align-items:flex-start}
+.steps li::before{counter-increment:s;content:counter(s);flex:none;width:32px;height:32px;border-radius:10px;background:var(--gold);color:var(--navy-d);display:grid;place-items:center;font-weight:700}
+.steps li b{display:block;font-size:16px}
+.steps li span{font-size:14.5px;opacity:.85}
+
 @media (min-width:720px){
   section{padding:88px 0}
   .hero{align-items:center;padding:120px 0 64px}
@@ -254,6 +271,10 @@ footer a{color:var(--gold);font-weight:600}
   .calc{grid-template-columns:1.1fr .9fr;align-items:start}
   .calc-fig{position:sticky;top:60px}
   .amen{grid-template-columns:repeat(4,1fr)}
+  .duo{grid-template-columns:1fr 1fr}
+  .steps{padding:30px}
+  .steps ol{grid-template-columns:repeat(4,1fr)}
+  .steps li{flex-direction:column}
   .villa{grid-template-columns:1.1fr .9fr}
   .quote .in{padding:88px 16px}
   .plans{grid-template-columns:1fr 1fr}
@@ -361,6 +382,38 @@ footer a{color:var(--gold);font-weight:600}
   </div>
 </section>
 
+<!-- Ngôi nhà thứ hai bên biển -->
+<section class="home2" id="ngoi-nha-thu-hai">
+  <div class="container">
+    <span class="eyebrow">Ngôi nhà thứ hai bên biển</span>
+    <h2>Về là ở. Vắng là có người lo.</h2>
+    <p class="lead">Một căn hộ – hai giá trị: kỳ nghỉ của cả nhà mỗi lần về, và tài sản được vận hành khi anh/chị bận rộn.</p>
+    <div class="duo">
+      <article class="card">
+        <div class="ph" data-file="Công viên nội khu"><img src="https://fourstower.netlify.app/img/view-sun-neva-sun-riverpolis-800.jpg" alt="View Sun Neva trong đại đô thị Sun Riverpolis" loading="lazy" decoding="async"></div>
+        <div class="body"><span class="when">Khi anh/chị về nghỉ</span><h3>Bay đến là về tới nhà</h3>
+          <ul><li>Xuống máy bay, <b class="num">10 phút</b> là mở cửa nhà mình</li><li>Cất vali, <b class="num">5 phút</b> ra biển Sơn Thủy</li><li>Chiều bơi bốn mùa, tối dạo công viên ven sông</li><li>Không phải đặt khách sạn mỗi lần về</li></ul></div>
+      </article>
+      <article class="card">
+        <div class="ph" data-file="Tòa F2"><img src="https://fourstower.netlify.app/img/toa-f2-f3-sun-fours-tower-800.jpg" alt="Tòa F2 và F3 Sun FourS Tower nhìn từ đại lộ" loading="lazy" decoding="async"></div>
+        <div class="body"><span class="when">Khi anh/chị vắng nhà</span><h3>Căn hộ vẫn được chăm sóc</h3>
+          <ul><li>Ban quản lý tòa nhà vận hành, an ninh, vệ sinh</li><li>Miễn phí dịch vụ quản lý <b class="num">2 năm</b> đầu</li><li>Cho thuê ngắn hạn hoặc dài hạn khi không ở</li><li>Chuyên viên hỗ trợ kết nối đơn vị quản lý cho thuê</li></ul></div>
+      </article>
+    </div>
+    <div class="steps">
+      <h3>Mua chắc – chưa cần có mặt</h3>
+      <p>Mọi bước đều có người đồng hành, có văn bản đi kèm.</p>
+      <ol>
+        <li><div><b>Xem thực tế qua video</b><span>Gọi video Zalo: công trường, sa bàn, đường ra biển.</span></div></li>
+        <li><div><b>Nhận trọn hồ sơ</b><span>Scan pháp lý, mặt bằng, bảng tính đúng căn qua Zalo.</span></div></li>
+        <li><div><b>Giữ căn qua chuyển khoản</b><span>Cọc 100 triệu, có hợp đồng giữ chỗ rõ ràng.</span></div></li>
+        <li><div><b>Ký khi thuận tiện</b><span>Hẹn lịch ký hợp đồng mua bán theo thời gian của anh/chị.</span></div></li>
+      </ol>
+      <button class="btn btn-gold btn-block" type="button" data-open="calc" data-int="Hẹn gọi video xem dự án – Tòa F2" data-title="Hẹn gọi video xem dự án" data-sub="Chọn giờ phù hợp. Chuyên viên gọi video Zalo đi thực tế công trường, sa bàn và đường ra biển.">Hẹn gọi video xem dự án</button>
+    </div>
+  </div>
+</section>
+
 <!-- 5. Tiềm năng cho thuê -->
 <section class="rent" id="cho-thue">
   <div class="container">
@@ -461,7 +514,7 @@ footer a{color:var(--gold);font-weight:600}
         <li><span>Căn tầng 3</span><b>~54,6 m² + vườn ~69 m²</b></li>
         <li><span>3PN góc sân vườn</span><b>~87 m² + vườn ~47,6 m²</b></li>
       </ul>
-      <button class="btn btn-gold btn-block" type="button" data-open="calc">Xem căn sân vườn còn trống</button>
+      <button class="btn btn-gold btn-block" type="button" data-open="calc" data-int="Xem căn sân vườn còn trống – Tòa F2" data-title="Căn sân vườn còn trống" data-sub="Gửi qua Zalo: danh sách căn sân vườn tầng 2–7 còn trống, diện tích, giá và mặt bằng.">Xem căn sân vườn còn trống</button>
     </div>
   </div>
 </section>
@@ -581,7 +634,7 @@ footer a{color:var(--gold);font-weight:600}
       <div class="field"><label for="m-need">Nhu cầu</label><select id="m-need" name="nhu_cau"><option>Vốn ít – vay 70%</option><option>Thanh toán nhanh</option><option>Mua để cho thuê</option></select></div>
       <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
       <input type="hidden" name="loai_can" value="">
-      <button class="btn btn-gold btn-block" type="submit">Gửi bảng tính cho tôi</button>
+      <button class="btn btn-gold btn-block" type="submit">Gửi cho tôi</button>
       <p class="privacy">🔒 Thông tin chỉ dùng để tư vấn, không chia sẻ.</p>
     </form>
     <div class="thanks" role="status"><div class="ok">✓</div><h3>Cảm ơn anh/chị!</h3><p>Bảng tính và giỏ căn sẽ được gửi qua Zalo trong 15 phút (giờ hành chính).</p><a class="btn btn-navy btn-block" href="https://zalo.me/0904567009" target="_blank" rel="noopener" data-zalo>Nhắn Zalo ngay</a></div>
@@ -647,14 +700,20 @@ calc($('.types button.on'));
 
 /* Popup nhận bảng tính */
 var modal = $('#modal');
-function openModal(need) {
+var mForm = $('form', modal), mDef = {int: mForm.dataset.interest, title: $('#m-title').innerHTML, sub: $('.sub', mForm).textContent};
+function openModal(need, b) {
+  b = b || {dataset: {}};
+  mForm.dataset.interest = b.dataset.int || mDef.int;
+  $('#m-title').innerHTML = b.dataset.title || mDef.title;
+  $('.sub', mForm).textContent = b.dataset.sub || mDef.sub;
+  if (mForm.style.display === 'none') { mForm.style.display = ''; $('.thanks', modal).classList.remove('on'); var sb = $('button[type=submit]', mForm); sb.disabled = false; sb.textContent = 'Gửi cho tôi'; }
   modal.classList.add('on');
   if (need) $('#m-need').value = need;
   $('[name=loai_can]', modal).value = curType;
   setTimeout(function () { $('#m-name').focus({preventScroll: true}); }, 80);
 }
 function closeModal() { modal.classList.remove('on'); }
-$$('[data-open="calc"]').forEach(function (b) { b.addEventListener('click', function () { openModal(b.dataset.need); }); });
+$$('[data-open="calc"]').forEach(function (b) { b.addEventListener('click', function () { openModal(b.dataset.need, b); }); });
 $('.close', modal).addEventListener('click', closeModal);
 modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
 
