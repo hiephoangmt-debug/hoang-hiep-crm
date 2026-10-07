@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tạo chỉ căn – CRM Sale</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Noto+Serif+Display:wght@600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
 <style>
   :root {
@@ -82,50 +82,67 @@
   }
 
   /* ---------- Sheet (preview / export) ---------- */
-  .preview-wrap { overflow-x: auto; }
+  .preview-wrap { overflow-x: auto; min-width: 0; }
   .sheet {
+    --deep: #0e2a1f; --gold-2: #b8914a; --ivory: #f7f4ec;
     width: 794px; max-width: 100%; margin: 0 auto; background: #fff; color: var(--ink);
-    border-radius: 6px; box-shadow: 0 4px 24px rgba(0,0,0,.08); padding: 32px 36px;
+    border-radius: 6px; box-shadow: 0 6px 30px rgba(14,42,31,.10); overflow: hidden;
   }
-  @media (max-width: 860px) { .sheet { padding: 20px 16px; } }
-  .sheet .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 2px solid var(--gold); }
-  .sheet .brand { font-family: Georgia, "Times New Roman", serif; font-style: italic; color: #2e9b47; font-size: 28px; line-height: 1; }
-  .sheet .brand small { display: block; font-style: normal; font-size: 11px; letter-spacing: .3em; color: #2e9b47; margin-top: 2px; }
-  .sheet .sale { text-align: right; font-size: 13px; }
-  .sheet .sale b { font-size: 15px; color: var(--green-900); }
-  .sheet h3.title { font-size: 26px; margin: 18px 0 4px; color: var(--green-900); }
-  .sheet .sub { color: var(--muted); margin: 0 0 14px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-  .chip { background: var(--green-50); color: var(--green-900); border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 500; }
-  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
-  @media (max-width: 640px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
-  .kpi { border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
-  .kpi small { display: block; color: var(--muted); font-size: 11px; }
-  .kpi b { font-size: 18px; color: var(--green-900); }
-  .kpi.dark { background: var(--green-900); border-color: var(--green-900); }
-  .kpi.dark small { color: #cfe0d6; }
-  .kpi.dark b { color: var(--gold); }
-  .section { margin-top: 18px; }
-  .section h4 { font-size: 15px; margin: 0 0 8px; color: var(--green-900); }
-  .section h4::before { content: ""; display: inline-block; vertical-align: -2px; width: 4px; height: 16px; margin-right: 8px; background: var(--gold); border-radius: 2px; }
-  .figure { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #fafbfa; }
+  .serif { font-family: "Noto Serif Display", Georgia, "Times New Roman", serif; }
+  .hero {
+    position: relative; min-height: 330px; padding: 28px 36px 30px; color: #fff;
+    background: var(--deep) center 45% / cover no-repeat;
+    display: flex; flex-direction: column; justify-content: space-between; gap: 40px;
+  }
+  .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,42,31,.70) 0%, rgba(14,42,31,.15) 35%, rgba(14,42,31,.55) 65%, rgba(14,42,31,.96) 100%); }
+  .hero > * { position: relative; }
+  .hero .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+  .hero .logo { height: 58px; width: auto; }
+  .hero .sale { text-align: right; font-size: 13px; color: #d9e4dd; }
+  .hero .sale b { display: block; color: #fff; font-size: 15px; }
+  .hero .sale .ph { color: var(--gold); font-weight: 600; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .16em; font-size: 12px; font-weight: 600; color: var(--gold); }
+  .hero h3 { font-family: "Noto Serif Display", Georgia, serif; font-size: 54px; line-height: 1.05; margin: 6px 0 8px; font-weight: 700; text-wrap: balance; }
+  .hero .sub { color: #d9e4dd; font-size: 14px; }
+  .sheet-body { padding: 26px 36px 30px; }
+  @media (max-width: 860px) {
+    .hero { padding: 20px 18px 22px; min-height: 280px; }
+    .hero h3 { font-size: 40px; }
+    .hero .logo { height: 44px; }
+    .sheet-body { padding: 20px 16px 24px; }
+  }
+  .kpis { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin-bottom: 22px; }
+  @media (max-width: 640px) { .kpis { grid-template-columns: 1fr 1fr; } }
+  .kpi { padding: 12px 14px; border-left: 1px solid var(--line); min-width: 0; }
+  .kpi:first-child { border-left: 0; }
+  @media (max-width: 640px) { .kpi:nth-child(3) { border-left: 0; } .kpi:nth-child(n+3) { border-top: 1px solid var(--line); } }
+  .kpi small { display: block; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+  .kpi b { font-size: 19px; color: var(--deep); font-variant-numeric: tabular-nums; }
+  .kpi.price { background: var(--deep); border-color: var(--deep); }
+  .kpi.price small { color: #b9cbbf; }
+  .kpi.price b { color: var(--gold); font-family: "Noto Serif Display", Georgia, serif; font-size: 26px; }
+  .kpi.price .unit { display: block; color: #d9e4dd; font-size: 12px; }
+  .section { margin-top: 26px; }
+  .section h4 { font-family: "Noto Serif Display", Georgia, serif; font-size: 22px; font-weight: 700; margin: 2px 0 12px; color: var(--deep); text-wrap: balance; }
+  .figure { border-radius: 12px; overflow: hidden; background: var(--ivory); }
   .figure img { display: block; width: 100%; }
-  .figure .cap { font-size: 12px; color: var(--muted); padding: 6px 10px; border-top: 1px solid var(--line); background: #fff; }
+  .figure .cap { font-size: 12px; color: var(--muted); padding: 8px 12px; }
   .plan { position: relative; }
-  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: start; }
+  .two { display: grid; grid-template-columns: 1fr 1.35fr; gap: 12px; align-items: start; }
   @media (max-width: 640px) { .two { grid-template-columns: 1fr; } }
-  .loc { display: grid; grid-template-columns: 44% 1fr; gap: 12px; align-items: start; }
-  @media (max-width: 640px) { .loc { grid-template-columns: 1fr; } }
-  .why { background: var(--green-50); border-radius: 10px; padding: 12px 14px 12px 32px; margin: 0; }
-  .why li { margin: 3px 0; }
-  .spec { width: 100%; border-collapse: collapse; font-size: 13px; }
-  .spec td { padding: 6px 8px; border-bottom: 1px solid var(--line); }
+  .figure.grey { background: #dadada; }
+  .why { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .why li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; }
+  .why li::before { content: "✓"; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--deep); color: var(--gold); font-size: 12px; font-weight: 700; margin-top: 1px; }
+  .spec { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+  .spec td { padding: 9px 2px; border-bottom: 1px solid var(--line); }
   .spec td:first-child { color: var(--muted); width: 45%; }
   .spec td:last-child { font-weight: 600; text-align: right; }
-  .cta { margin-top: 18px; background: var(--green-900); color: #fff; border-radius: 10px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .cta b { font-size: 15px; }
-  .cta .phone { color: var(--gold); font-weight: 700; font-size: 16px; }
-  .disclaimer { font-size: 11px; color: var(--muted); margin-top: 12px; }
+  .cta { margin-top: 26px; background: var(--deep); color: #fff; border-radius: 12px; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .cta b { font-family: "Noto Serif Display", Georgia, serif; font-size: 20px; font-weight: 700; display: block; }
+  .cta .who { color: #b9cbbf; font-size: 13px; }
+  .cta .phone { color: var(--gold); font-weight: 700; font-size: 22px; font-variant-numeric: tabular-nums; }
+  .disclaimer { font-size: 11px; color: var(--muted); margin: 14px 0 0; }
   .hidden { display: none !important; }
 
   /* ---------- Social images ---------- */
@@ -266,59 +283,65 @@
     </div>
 
     <article class="sheet" id="sheet">
-      <div class="top">
-        <div class="brand">Four S<small>TOWER</small></div>
-        <div class="sale"><b data-o="saleTen"></b><br><span data-o="saleChucDanh"></span><br>Hotline/Zalo: <span data-o="saleSdt"></span></div>
+      <div class="hero" id="oHero">
+        <div class="top">
+          <img class="logo" src="assets/four-s/logo-white.png" alt="Four S Tower">
+          <div class="sale"><b data-o="saleTen"></b><span data-o="saleChucDanh"></span><br><span class="ph" data-o="saleSdt"></span></div>
+        </div>
+        <div>
+          <div class="eyebrow" id="oEyebrow"></div>
+          <h3>Căn <span data-o="maCan"></span></h3>
+          <div class="sub" id="oSub"></div>
+        </div>
       </div>
 
-      <h3 class="title">Chỉ căn <span data-o="maCan"></span></h3>
-      <p class="sub"><span data-o="duAn"></span> · Lập ngày <span id="oNgay"></span></p>
-      <div class="chips" id="oChips"></div>
+      <div class="sheet-body">
+        <div class="kpis">
+          <div class="kpi price"><small>Giá niêm yết</small><b id="oGia">—</b><span class="unit" id="oDonGia"></span></div>
+          <div class="kpi"><small>Thông thủy</small><b id="oTT">—</b></div>
+          <div class="kpi"><small>Công năng</small><b id="oPN">—</b></div>
+          <div class="kpi"><small>Tình trạng</small><b data-o="tinhTrang"></b></div>
+        </div>
 
-      <div class="kpis">
-        <div class="kpi dark"><small>Giá niêm yết</small><b id="oGia">—</b></div>
-        <div class="kpi"><small>Đơn giá / m² thông thủy</small><b id="oDonGia">—</b></div>
-        <div class="kpi"><small>Thông thủy</small><b id="oTT">—</b></div>
-        <div class="kpi"><small>Tình trạng</small><b data-o="tinhTrang"></b></div>
-      </div>
+        <div class="section" id="secWhy">
+          <div class="eyebrow">Điểm nổi bật</div>
+          <h4>Vì sao nên chọn căn <span data-o="maCan"></span></h4>
+          <ul class="why" id="oWhy"></ul>
+        </div>
 
-      <div class="section" id="secWhy">
-        <h4>Vì sao nên chọn căn <span data-o="maCan"></span>?</h4>
-        <ul class="why" id="oWhy"></ul>
-      </div>
-
-      <div class="section" id="secPlan">
-        <h4>Vị trí căn trên mặt bằng tầng <span data-o="tang"></span> – Tòa <span data-o="toa"></span></h4>
-        <div class="figure">
-          <div class="plan">
-            <img data-img="matBang" alt="Mặt bằng tầng">
-            <div class="marker-box hidden" id="markerOutBox"><span></span></div>
+        <div class="section" id="secPlan">
+          <div class="eyebrow" id="oPlanEyebrow"></div>
+          <h4>Vị trí căn trên mặt bằng</h4>
+          <div class="figure">
+            <div class="plan">
+              <img data-img="matBang" alt="Mặt bằng tầng">
+              <div class="marker-box hidden" id="markerOutBox"><span></span></div>
+            </div>
+            <div class="cap">Ô đỏ: vị trí căn <span data-o="maCan"></span> trên mặt bằng chủ đầu tư (minh họa).</div>
           </div>
-          <div class="cap">Ô đỏ: vị trí căn <span data-o="maCan"></span> (mặt bằng CĐT, minh họa).</div>
         </div>
-      </div>
 
-      <div class="section" id="secLayout">
-        <h4>Layout căn <span data-o="loaiCan"></span></h4>
-        <div class="two">
-          <div class="figure" data-fig="layout2d"><img data-img="layout2d" alt="Layout 2D"><div class="cap">Mặt bằng căn hộ 2D</div></div>
-          <div class="figure" data-fig="layout3d"><img data-img="layout3d" alt="Layout 3D"><div class="cap">Phối cảnh 3D căn hộ</div></div>
+        <div class="section" id="secLayout">
+          <div class="eyebrow">Layout <span data-o="loaiCan"></span></div>
+          <h4>Thiết kế căn hộ</h4>
+          <div class="two">
+            <div class="figure" data-fig="layout2d"><img data-img="layout2d" alt="Mặt bằng căn hộ 2D"></div>
+            <div class="figure grey" data-fig="layout3d"><img data-img="layout3d" alt="Phối cảnh 3D căn hộ"></div>
+          </div>
         </div>
-      </div>
 
-      <div class="section" id="secLoc">
-        <h4>Vị trí dự án & thông số</h4>
-        <div class="loc">
-          <div class="figure" data-fig="viTri"><img data-img="viTri" alt="Vị trí dự án"><div class="cap">Kết nối vùng (ảnh minh họa)</div></div>
+        <div class="section">
+          <div class="eyebrow">Thông số</div>
+          <h4>Thông tin căn hộ</h4>
           <table class="spec"><tbody id="oSpec"></tbody></table>
         </div>
-      </div>
 
-      <div class="cta">
-        <div><b>Giữ căn <span data-o="maCan"></span> & nhận phiếu tính giá chính thức</b><br><span data-o="saleTen"></span> – <span data-o="saleChucDanh"></span></div>
-        <div class="phone" data-o="saleSdt"></div>
+        <div class="cta">
+          <div><b>Giữ căn <span data-o="maCan"></span> ngay hôm nay</b><span class="who"><span data-o="saleTen"></span> · <span data-o="saleChucDanh"></span> · nhận phiếu tính giá chính thức</span></div>
+          <div class="phone" data-o="saleSdt"></div>
+        </div>
+        <p class="disclaimer">Thông tin mang tính tham khảo; diện tích, giá và tình trạng căn có thể thay đổi theo thời điểm. Hình ảnh chỉ mang tính chất minh họa. Số liệu chính thức theo hợp đồng mua bán với chủ đầu tư.</p>
       </div>
-      <p class="disclaimer">Thông tin mang tính tham khảo; diện tích, giá và tình trạng căn có thể thay đổi theo thời điểm. Hình ảnh chỉ mang tính chất minh họa. Số liệu chính thức theo hợp đồng mua bán với chủ đầu tư.</p>
     </article>
   </section>
 </main>
@@ -353,7 +376,7 @@
     // ô đỏ theo % kích thước ảnh mặt bằng
     marker: { x: 44.3, y: 19.4, w: 10.2, h: 43.2 },
     images: {},
-    social: { format: '4:5', hidePrice: false, slides: { cover: true, plan: true, layout: true, loc: true } },
+    social: { format: '4:5', hidePrice: false, slides: { cover: true, p3d: true, plan: true, p2d: true } },
     caption: '', captionEdited: false,
   };
 
@@ -365,7 +388,9 @@
       const raw = localStorage.getItem(STORE_KEY);
       if (raw) {
         const saved = JSON.parse(raw);
-        return { ...structuredClone(DEFAULTS), ...saved, social: { ...structuredClone(DEFAULTS.social), ...(saved.social || {}) } };
+        const social = { ...structuredClone(DEFAULTS.social), ...(saved.social || {}) };
+        social.slides = { ...DEFAULTS.social.slides, ...Object.fromEntries(Object.entries(social.slides || {}).filter(([k]) => k in DEFAULTS.social.slides)) };
+        return { ...structuredClone(DEFAULTS), ...saved, social };
       }
     } catch (e) { /* bỏ qua */ }
     return structuredClone(DEFAULTS);
@@ -490,18 +515,16 @@
   // ---------- render ----------
   function render() {
     $$('[data-o]').forEach(el => { el.textContent = state[el.dataset.o] || ''; });
-    $('#oNgay').textContent = new Date().toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
 
-    const chips = [
-      state.loaiCan, state.tang && `Tầng ${state.tang}`, state.toa && `Tòa ${state.toa}`,
-      state.phongNgu, state.huong && `Hướng ${state.huong}`, state.view && `View ${state.view}`,
-    ].filter(Boolean);
-    $('#oChips').innerHTML = chips.map(c => `<span class="chip">${esc(c)}</span>`).join('');
+    $('#oEyebrow').textContent = [state.loaiCan, state.tang && `Tầng ${state.tang}`, state.toa && `Tòa ${state.toa}`].filter(Boolean).join(' · ');
+    $('#oSub').textContent = [state.duAn, state.view && `View ${state.view}`].filter(Boolean).join(' · ') + ` · Lập ngày ${new Date().toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' })}`;
+    $('#oPlanEyebrow').textContent = [state.tang && `Tầng ${state.tang}`, state.toa && `Tòa ${state.toa}`].filter(Boolean).join(' · ');
 
     const gia = money(state.gia), tt = num(state.dtThongThuy);
     $('#oGia').textContent = gia ? fmtTy(gia) : 'Liên hệ';
-    $('#oDonGia').textContent = gia && tt ? (gia / tt / 1e6).toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + ' tr/m²' : '—';
+    $('#oDonGia').textContent = gia && tt ? '≈ ' + (gia / tt / 1e6).toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + ' tr/m²' : '';
     $('#oTT').textContent = tt ? tt.toLocaleString('vi-VN') + ' m²' : '—';
+    $('#oPN').textContent = state.phongNgu || state.loaiCan || '—';
 
     const why = String(state.noiBat || '').split('\n').map(s => s.trim()).filter(Boolean);
     $('#oWhy').innerHTML = why.map(s => `<li>${esc(s)}</li>`).join('');
@@ -523,7 +546,7 @@
     $$('[data-fig]').forEach(f => f.classList.toggle('hidden', !!hidden[f.dataset.fig]));
     $('#secLayout').classList.toggle('hidden', !!(hidden.layout2d && hidden.layout3d));
     $('#secLayout .two').style.gridTemplateColumns = (hidden.layout2d || hidden.layout3d) ? '1fr' : '';
-    $('#secLoc .loc').style.gridTemplateColumns = hidden.viTri ? '1fr' : '';
+    $('#oHero').style.backgroundImage = hidden.viTri ? 'none' : `url("${imgSrc('viTri')}")`;
 
     $$('.img-slot').forEach(row => {
       const k = row.dataset.key;
@@ -575,13 +598,15 @@
   // =============== ẢNH GỬI KHÁCH / ĐĂNG NHÓM ===============
   const FORMATS = { '1:1': [1080, 1080], '4:5': [1080, 1350], '9:16': [1080, 1920] };
   const SLIDES = [
-    { key: 'cover',  label: 'Ảnh bìa',        img: 'layout3d' },
-    { key: 'plan',   label: 'Mặt bằng tầng',  img: 'matBang' },
-    { key: 'layout', label: 'Layout 2D',      img: 'layout2d' },
-    { key: 'loc',    label: 'Vị trí dự án',   img: 'viTri' },
+    { key: 'cover', label: 'Ảnh bìa',         img: 'viTri' },
+    { key: 'p3d',   label: 'Phối cảnh 3D',    img: 'layout3d' },
+    { key: 'plan',  label: 'Mặt bằng tầng',   img: 'matBang' },
+    { key: 'p2d',   label: 'Mặt bằng căn 2D', img: 'layout2d' },
   ];
-  const C = { green: '#123d2c', green2: '#1f5c43', gold: '#c8a24a', ink: '#1c2420', muted: '#66706b', red: '#e3263a', soft: '#eaf3ee', bg: '#f1f3f2' };
-  const F = (w, px) => `${w} ${px}px "Be Vietnam Pro", system-ui, sans-serif`;
+  const C = { deep: '#0e2a1f', deep2: '#16402f', gold: '#cfa756', goldL: '#e8cf96', ivory: '#f7f4ec', ink: '#1a221e', muted: '#6b736e', mist: '#c5d3ca', red: '#e3263a' };
+  const SANS = (w, px) => `${w} ${px}px "Be Vietnam Pro", system-ui, sans-serif`;
+  const SERIF = (w, px) => `${w} ${px}px "Noto Serif Display", Georgia, "Times New Roman", serif`;
+  const LOGO = 'assets/four-s/logo.png', LOGO_W = 'assets/four-s/logo-white.png';
 
   const imgCache = new Map();
   function loadImg(src) {
@@ -590,7 +615,6 @@
     }
     return imgCache.get(src);
   }
-
   function wrap(ctx, text, maxW) {
     const words = String(text).split(/\s+/).filter(Boolean), lines = [];
     let line = '';
@@ -601,123 +625,194 @@
     if (line) lines.push(line);
     return lines;
   }
-  function roundRect(ctx, x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); }
-  function contain(img, x, y, w, h) {
-    const s = Math.min(w / img.width, h / img.height), dw = img.width * s, dh = img.height * s;
-    return { x: x + (w - dw) / 2, y: y + (h - dh) / 2, w: dw, h: dh };
+  function rr(ctx, x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); }
+  function fit(img, x, y, w, h, mode = 'contain', fy = 0.5) {
+    const s = (mode === 'cover' ? Math.max : Math.min)(w / img.width, h / img.height), dw = img.width * s, dh = img.height * s;
+    return { x: x + (w - dw) / 2, y: y + (h - dh) * fy, w: dw, h: dh };
   }
-
-  function priceText() {
+  function spaced(ctx, px) { if ('letterSpacing' in ctx) ctx.letterSpacing = px + 'px'; }
+  function priceInfo() {
     const gia = money(state.gia), tt = num(state.dtThongThuy);
     if (state.social.hidePrice || !gia) return null;
-    return { gia: fmtTy(gia), donGia: tt ? (gia / tt / 1e6).toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + ' tr/m²' : '' };
+    return { gia: fmtTy(gia), donGia: tt ? '≈ ' + (gia / tt / 1e6).toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + ' tr/m²' : '' };
   }
 
-  function drawFrame(ctx, W, H) {
-    const hh = 150, fh = 140;
-    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, W, H);
-    // header
-    ctx.fillStyle = C.green; ctx.fillRect(0, 0, W, hh);
-    ctx.fillStyle = C.gold; ctx.fillRect(0, hh - 6, W, 6);
-    ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
-    ctx.fillStyle = '#fff'; ctx.font = 'italic 60px Georgia, "Times New Roman", serif';
-    ctx.fillText(String(state.duAn || '').split(/[–-]/)[0].trim() || 'Four S', 50, 88);
-    ctx.font = F(500, 22); ctx.fillStyle = '#cfe0d6';
-    ctx.fillText(String(state.duAn || '').split(/[–-]/).slice(1).join('-').trim().toUpperCase(), 52, 122);
-    ctx.textAlign = 'right';
-    ctx.font = F(600, 24); ctx.fillStyle = C.gold; ctx.fillText('CHỈ CĂN', W - 50, 62);
-    ctx.font = F(700, 50); ctx.fillStyle = '#fff'; ctx.fillText(state.maCan || '', W - 50, 116);
-    // footer
-    ctx.fillStyle = C.green; ctx.fillRect(0, H - fh, W, fh);
+  // Dải chân ảnh: tên sale + hotline, dùng chung cho mọi ảnh
+  function drawFooter(ctx, W, H, onDark) {
+    const fh = 130, y0 = H - fh;
+    if (!onDark) { ctx.fillStyle = C.deep; ctx.fillRect(0, y0, W, fh); }
+    ctx.fillStyle = C.gold; ctx.fillRect(60, y0, W - 120, 2);
+    ctx.textAlign = 'left'; ctx.fillStyle = '#fff'; ctx.font = SANS(700, 34);
+    ctx.fillText(state.saleTen || '', 60, y0 + 60);
+    ctx.fillStyle = C.mist; ctx.font = SANS(400, 24);
+    ctx.fillText(state.saleChucDanh || '', 60, y0 + 98);
+    ctx.textAlign = 'right'; ctx.fillStyle = C.goldL; ctx.font = SANS(600, 20); spaced(ctx, 3);
+    ctx.fillText('HOTLINE · ZALO', W - 60, y0 + 50); spaced(ctx, 0);
+    ctx.fillStyle = C.gold; ctx.font = SANS(700, 44);
+    ctx.fillText(state.saleSdt || 'Inbox ngay', W - 60, y0 + 100);
     ctx.textAlign = 'left';
-    ctx.font = F(700, 36); ctx.fillStyle = '#fff'; ctx.fillText(state.saleTen || '', 50, H - fh + 62);
-    ctx.font = F(400, 26); ctx.fillStyle = '#cfe0d6'; ctx.fillText(state.saleChucDanh || '', 50, H - fh + 102);
-    ctx.textAlign = 'right';
-    ctx.font = F(500, 24); ctx.fillStyle = '#cfe0d6'; ctx.fillText('Hotline / Zalo', W - 50, H - fh + 54);
-    ctx.font = F(700, 44); ctx.fillStyle = C.gold; ctx.fillText(state.saleSdt || 'Inbox ngay', W - 50, H - fh + 106);
-    ctx.textAlign = 'left';
-    return { top: hh, bottom: H - fh };
+    return y0;
   }
 
-  function drawImageBox(ctx, img, x, y, w, h, bg) {
-    ctx.fillStyle = bg; ctx.fillRect(x, y, w, h);
-    const r = contain(img, x + 20, y + 20, w - 40, h - 40);
+  async function drawCover(ctx, W, H) {
+    const photo = (state.hidden || {}).viTri ? null : await loadImg(imgSrc('viTri'));
+    const logo = await loadImg(LOGO_W);
+    ctx.fillStyle = C.deep; ctx.fillRect(0, 0, W, H);
+    const pad = 60, footTop = H - 130;
+
+    // nội dung dưới cùng – tính chiều cao trước để biết chỗ phủ gradient
+    const p = priceInfo();
+    ctx.font = SANS(400, 30);
+    const viewLines = state.view ? wrap(ctx, 'View ' + state.view, W - 2 * pad).slice(0, 2) : [];
+    const blockH = 40 + 150 + viewLines.length * 42 + 30 + 120 + 30 + (p ? 150 : 110) + 30;
+    const top = footTop - blockH;
+
+    if (photo) {
+      const r = fit(photo, 0, 0, W, Math.max(top + 260, H * 0.62), 'cover', 0.35);
+      ctx.drawImage(photo, r.x, r.y, r.w, r.h);
+      let g = ctx.createLinearGradient(0, 0, 0, 260);
+      g.addColorStop(0, 'rgba(14,42,31,.85)'); g.addColorStop(1, 'rgba(14,42,31,0)');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, 260);
+      g = ctx.createLinearGradient(0, top - 280, 0, top + 40);
+      g.addColorStop(0, 'rgba(14,42,31,0)'); g.addColorStop(1, 'rgba(14,42,31,1)');
+      ctx.fillStyle = g; ctx.fillRect(0, top - 280, W, H);
+      ctx.fillStyle = C.deep; ctx.fillRect(0, top + 40, W, H);
+    }
+
+    // logo + nhãn
+    const lw = 300, lh = lw * logo.height / logo.width;
+    ctx.drawImage(logo, pad, 50, lw, lh);
+    ctx.font = SANS(700, 22); spaced(ctx, 4);
+    const tag = 'CHỈ CĂN', tw = ctx.measureText(tag).width + 44;
+    ctx.strokeStyle = C.gold; ctx.lineWidth = 2; rr(ctx, W - pad - tw, 62, tw, 54, 27); ctx.stroke();
+    ctx.fillStyle = C.gold; ctx.textAlign = 'center'; ctx.fillText(tag, W - pad - tw / 2 + 2, 98); ctx.textAlign = 'left'; spaced(ctx, 0);
+
+    let y = top + 40;
+    ctx.fillStyle = C.gold; ctx.font = SANS(600, 26); spaced(ctx, 5);
+    ctx.fillText([state.loaiCan, state.tang && `TẦNG ${state.tang}`, state.toa && `TÒA ${state.toa}`].filter(Boolean).join('  ·  ').toUpperCase(), pad, y);
+    spaced(ctx, 0);
+    y += 130;
+    ctx.fillStyle = '#fff'; ctx.font = SERIF(700, 128);
+    ctx.fillText(state.maCan || '', pad - 4, y);
+    y += 20;
+    ctx.font = SANS(400, 30); ctx.fillStyle = C.mist;
+    for (const l of viewLines) { y += 42; ctx.fillText(l, pad, y); }
+    y += 30;
+
+    // 3 ô thông số
+    const cells = [
+      ['THÔNG THỦY', num(state.dtThongThuy) ? num(state.dtThongThuy).toLocaleString('vi-VN') + ' m²' : '—'],
+      ['CÔNG NĂNG', state.phongNgu || state.loaiCan || '—'],
+      ['TÌNH TRẠNG', state.tinhTrang || '—'],
+    ];
+    const cw = (W - 2 * pad) / 3;
+    ctx.fillStyle = 'rgba(207,167,86,.45)'; ctx.fillRect(pad, y, W - 2 * pad, 1); ctx.fillRect(pad, y + 120, W - 2 * pad, 1);
+    cells.forEach(([k, v], i) => {
+      const x = pad + i * cw + (i ? 28 : 0);
+      if (i) { ctx.fillStyle = 'rgba(207,167,86,.45)'; ctx.fillRect(pad + i * cw, y + 24, 1, 72); }
+      ctx.fillStyle = C.goldL; ctx.font = SANS(600, 19); spaced(ctx, 3); ctx.fillText(k, x, y + 46); spaced(ctx, 0);
+      ctx.fillStyle = '#fff'; ctx.font = SANS(700, 34);
+      let t = v; while (ctx.measureText(t).width > cw - 36 && t.length > 3) t = t.slice(0, -2) + '…';
+      ctx.fillText(t, x, y + 92);
+    });
+    y += 120 + 30;
+
+    // giá
+    if (p) {
+      ctx.fillStyle = C.goldL; ctx.font = SANS(600, 20); spaced(ctx, 4); ctx.fillText('GIÁ NIÊM YẾT', pad, y + 30); spaced(ctx, 0);
+      ctx.fillStyle = C.gold; ctx.font = SERIF(700, 92); ctx.fillText(p.gia, pad - 2, y + 122);
+      const gw = ctx.measureText(p.gia).width;
+      ctx.fillStyle = '#fff'; ctx.font = SANS(500, 30); ctx.fillText(p.donGia, pad + gw + 26, y + 118);
+    } else {
+      ctx.fillStyle = C.gold; ctx.font = SERIF(700, 56); ctx.fillText('Inbox để nhận giá tốt', pad, y + 70);
+    }
+    drawFooter(ctx, W, H, true);
+  }
+
+  async function drawInner(ctx, W, H, slide) {
+    const img = await loadImg(imgSrc(slide.img));
+    const logo = await loadImg(LOGO);
+    const pad = 60;
+    ctx.fillStyle = C.ivory; ctx.fillRect(0, 0, W, H);
+
+    // đầu ảnh
+    const lw = 220, lh = lw * logo.height / logo.width;
+    ctx.drawImage(logo, pad, 46, lw, lh);
+    ctx.textAlign = 'right';
+    ctx.fillStyle = C.gold; ctx.font = SANS(700, 19); spaced(ctx, 4); ctx.fillText('CHỈ CĂN', W - pad, 74); spaced(ctx, 0);
+    ctx.fillStyle = C.deep; ctx.font = SERIF(700, 54); ctx.fillText(state.maCan || '', W - pad, 128);
+    ctx.textAlign = 'left';
+    ctx.fillStyle = C.gold; ctx.fillRect(pad, 46 + lh + 26, W - 2 * pad, 2);
+
+    const tt = num(state.dtThongThuy);
+    const meta = {
+      p3d:  { eyebrow: [state.loaiCan, state.phongNgu].filter(Boolean).join(' · '), title: 'Phối cảnh căn hộ', bg: '#dadada' },
+      plan: { eyebrow: [state.tang && `Tầng ${state.tang}`, state.toa && `Tòa ${state.toa}`].filter(Boolean).join(' · '), title: 'Vị trí căn trên mặt bằng', bg: '#ffffff' },
+      p2d:  { eyebrow: tt ? `Thông thủy ${tt.toLocaleString('vi-VN')} m²` : (state.loaiCan || ''), title: 'Mặt bằng căn hộ', bg: '#ffffff' },
+    }[slide.key];
+
+    let y = 46 + lh + 26 + 64;
+    ctx.fillStyle = C.gold; ctx.font = SANS(600, 22); spaced(ctx, 4); ctx.fillText(meta.eyebrow.toUpperCase(), pad, y); spaced(ctx, 0);
+    y += 64;
+    ctx.fillStyle = C.deep; ctx.font = SERIF(700, 58); ctx.fillText(meta.title, pad, y);
+    y += 40;
+
+    const footTop = H - 130;
+    const items = String(state.noiBat || '').split('\n').map(s => s.trim()).filter(Boolean);
+    let cardH = footTop - 40 - y;
+    if (slide.key === 'p3d' && items.length) {
+      const natural = (W - 2 * pad - 32) * img.height / img.width + 32;
+      cardH = Math.min(cardH * 0.7, natural);
+    }
+    // thẻ ảnh
+    ctx.save(); ctx.shadowColor = 'rgba(14,42,31,.12)'; ctx.shadowBlur = 40; ctx.shadowOffsetY = 12;
+    ctx.fillStyle = meta.bg; rr(ctx, pad, y, W - 2 * pad, cardH, 24); ctx.fill(); ctx.restore();
+    ctx.save(); rr(ctx, pad, y, W - 2 * pad, cardH, 24); ctx.clip();
+    const r = fit(img, pad + 16, y + 16, W - 2 * pad - 32, cardH - 32);
     ctx.drawImage(img, r.x, r.y, r.w, r.h);
-    return r;
+    if (slide.key === 'plan' && state.marker) {
+      const m = state.marker;
+      const mx = r.x + m.x / 100 * r.w, my = r.y + m.y / 100 * r.h, mw = m.w / 100 * r.w, mh = m.h / 100 * r.h;
+      ctx.fillStyle = 'rgba(227,38,58,.14)'; ctx.fillRect(mx, my, mw, mh);
+      ctx.lineWidth = 6; ctx.strokeStyle = C.red; ctx.strokeRect(mx, my, mw, mh);
+      const lab = markerLabel();
+      if (lab) {
+        ctx.font = SANS(700, 28); const bw = ctx.measureText(lab).width + 26;
+        ctx.fillStyle = C.red; rr(ctx, mx + mw / 2 - bw / 2, my + mh / 2 - 23, bw, 46, 23); ctx.fill();
+        ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.fillText(lab, mx + mw / 2, my + mh / 2 + 10); ctx.textAlign = 'left';
+      }
+    }
+    ctx.restore();
+    ctx.fillStyle = C.muted; ctx.font = SANS(400, 18); ctx.textAlign = 'right';
+    ctx.fillText('Hình ảnh minh họa', W - pad - 18, y + cardH - 18); ctx.textAlign = 'left';
+
+    // điểm nổi bật dưới phối cảnh 3D
+    if (slide.key === 'p3d') {
+      let yy = y + cardH + 62;
+      ctx.font = SANS(400, 29);
+      for (const it of items) {
+        const lines = wrap(ctx, it, W - 2 * pad - 52);
+        if (yy + (lines.length - 1) * 40 > footTop - 30) break;
+        ctx.fillStyle = C.deep; ctx.beginPath(); ctx.arc(pad + 15, yy - 10, 15, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = C.gold; ctx.font = SANS(700, 18); ctx.textAlign = 'center'; ctx.fillText('✓', pad + 15, yy - 3); ctx.textAlign = 'left';
+        ctx.fillStyle = C.ink; ctx.font = SANS(400, 29);
+        lines.forEach((l, i) => ctx.fillText(l, pad + 52, yy + i * 40));
+        yy += lines.length * 40 + 18;
+      }
+    }
+    drawFooter(ctx, W, H, false);
   }
 
   async function drawSlide(slide, W, H) {
     const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
     const ctx = cv.getContext('2d');
-    const img = await loadImg(imgSrc(slide.img));
-    const { top, bottom } = drawFrame(ctx, W, H);
-    const pad = 50;
-
-    if (slide.key === 'cover') {
-      const imgH = Math.round((bottom - top) * (H === W ? 0.46 : 0.52));
-      drawImageBox(ctx, img, 0, top, W, imgH, '#e4e4e4');
-      let y = top + imgH + 70;
-      ctx.fillStyle = C.ink; ctx.font = F(700, 52);
-      ctx.fillText([state.loaiCan, state.tang && `Tầng ${state.tang}`, state.toa && `Tòa ${state.toa}`].filter(Boolean).join(' · '), pad, y);
-      y += 52;
-      ctx.font = F(400, 32); ctx.fillStyle = C.muted;
-      const l2 = [state.dtThongThuy && `Thông thủy ${num(state.dtThongThuy).toLocaleString('vi-VN')} m²`, state.phongNgu].filter(Boolean).join(' · ');
-      if (l2) { ctx.fillText(l2, pad, y); y += 46; }
-      if (state.view) {
-        for (const l of wrap(ctx, 'View ' + state.view, W - 2 * pad).slice(0, 2)) { ctx.fillText(l, pad, y); y += 44; }
-      }
-      // price pill
-      y += 10;
-      const p = priceText();
-      const pillText = p ? `Giá ${p.gia}${p.donGia ? '  ·  ' + p.donGia : ''}` : 'Giá tốt – inbox để nhận báo giá';
-      ctx.font = F(700, 40);
-      const pw = Math.min(W - 2 * pad, ctx.measureText(pillText).width + 60);
-      ctx.fillStyle = C.gold; roundRect(ctx, pad, y, pw, 76, 38); ctx.fill();
-      ctx.fillStyle = '#1d1606'; ctx.fillText(pillText, pad + 30, y + 52);
-      y += 76 + 56;
-      // highlights
-      ctx.font = F(400, 30);
-      const items = String(state.noiBat || '').split('\n').map(s => s.trim()).filter(Boolean);
-      for (const it of items) {
-        const lines = wrap(ctx, it, W - 2 * pad - 44);
-        if (y + (lines.length - 1) * 42 > bottom - 30) break;
-        ctx.fillStyle = C.green2; ctx.beginPath(); ctx.arc(pad + 12, y - 10, 9, 0, Math.PI * 2); ctx.fill();
-        ctx.fillStyle = C.ink;
-        lines.forEach((l, i) => ctx.fillText(l, pad + 44, y + i * 42));
-        y += lines.length * 42 + 14;
-      }
-    } else {
-      const titles = {
-        plan: `Vị trí căn ${state.maCan || ''} trên mặt bằng tầng ${state.tang || ''}${state.toa ? ' – Tòa ' + state.toa : ''}`,
-        layout: `Layout căn ${state.loaiCan || ''}${state.phongNgu ? ' (' + state.phongNgu + ')' : ''}`,
-        loc: 'Vị trí dự án – kết nối vùng',
-      };
-      ctx.font = F(700, 38); ctx.fillStyle = C.green;
-      let y = top + 66;
-      const tl = wrap(ctx, titles[slide.key], W - 2 * pad).slice(0, 2);
-      tl.forEach((l, i) => ctx.fillText(l, pad, y + i * 48));
-      y += (tl.length - 1) * 48 + 30;
-      const r = drawImageBox(ctx, img, 0, y, W, bottom - y, slide.key === 'loc' ? '#fff' : C.bg);
-      if (slide.key === 'plan' && state.marker) {
-        const m = state.marker;
-        const mx = r.x + m.x / 100 * r.w, my = r.y + m.y / 100 * r.h, mw = m.w / 100 * r.w, mh = m.h / 100 * r.h;
-        ctx.fillStyle = 'rgba(227,38,58,.14)'; ctx.fillRect(mx, my, mw, mh);
-        ctx.lineWidth = 7; ctx.strokeStyle = C.red; ctx.strokeRect(mx, my, mw, mh);
-        const lab = markerLabel();
-        if (lab) {
-          ctx.font = F(700, 30); const lw = ctx.measureText(lab).width + 24;
-          ctx.fillStyle = C.red; roundRect(ctx, mx + mw / 2 - lw / 2, my + mh / 2 - 24, lw, 48, 8); ctx.fill();
-          ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.fillText(lab, mx + mw / 2, my + mh / 2 + 11); ctx.textAlign = 'left';
-        }
-      }
-      ctx.font = F(400, 20); ctx.fillStyle = C.muted; ctx.textAlign = 'right';
-      ctx.fillText('Hình ảnh minh họa', W - 24, bottom - 16); ctx.textAlign = 'left';
-    }
+    ctx.textBaseline = 'alphabetic';
+    if (slide.key === 'cover') await drawCover(ctx, W, H); else await drawInner(ctx, W, H, slide);
     return cv;
   }
 
   function buildCaption() {
-    const p = priceText(), tt = num(state.dtThongThuy);
+    const p = priceInfo(), tt = num(state.dtThongThuy);
     const items = String(state.noiBat || '').split('\n').map(s => s.trim()).filter(Boolean);
     const lines = [
       `🏙 CHỈ CĂN ${state.maCan || ''} – ${(state.duAn || '').toUpperCase()}`,
@@ -726,7 +821,7 @@
       tt ? `✅ Diện tích thông thủy ${tt.toLocaleString('vi-VN')} m²` : null,
       state.view ? `✅ View ${state.view}` : null,
       state.huong ? `✅ Hướng ban công ${state.huong}` : null,
-      p ? `💰 Giá niêm yết: ${p.gia}${p.donGia ? ' (~' + p.donGia + ')' : ''}` : '💰 Giá tốt – inbox để nhận bảng tính giá chi tiết',
+      p ? `💰 Giá niêm yết: ${p.gia}${p.donGia ? ' (' + p.donGia + ')' : ''}` : '💰 Giá tốt – inbox để nhận bảng tính giá chi tiết',
       items.length ? '' : null,
       ...items.map(i => `⭐ ${i}`),
       '',
@@ -745,9 +840,9 @@
     const run = ++socialRun;
     const capEl = $('#soCaption');
     if (!state.captionEdited) { state.caption = buildCaption(); capEl.value = state.caption; }
-    try { await document.fonts.load(F(700, 40)); await document.fonts.load(F(400, 30)); } catch (e) {}
+    try { await Promise.all([document.fonts.load(SANS(700, 40)), document.fonts.load(SANS(400, 30)), document.fonts.load(SERIF(700, 60))]); } catch (e) {}
     const [W, H] = FORMATS[state.social.format] || FORMATS['4:5'];
-    const list = SLIDES.filter(s => state.social.slides[s.key] && !(state.hidden || {})[s.img]);
+    const list = SLIDES.filter(s => state.social.slides[s.key] && (s.key === 'cover' || !(state.hidden || {})[s.img]));
     const out = [];
     for (const [i, s] of list.entries()) {
       try {
