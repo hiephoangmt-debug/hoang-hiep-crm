@@ -103,3 +103,22 @@ document.querySelectorAll(".gallery a, .view-grid a, a.zoom-link").forEach((a) =
 const closeLb = () => lb.classList.remove("open");
 lb.addEventListener("click", (e) => e.target !== lbImg && closeLb());
 addEventListener("keydown", (e) => e.key === "Escape" && closeLb());
+
+// Shophouse cash-flow estimator
+const cp = document.getElementById("c-price");
+if (cp) {
+  const ty = (n) => (n >= 1000 ? (n / 1000).toLocaleString("vi-VN", { maximumFractionDigits: 2 }) + " tỷ" : Math.round(n).toLocaleString("vi-VN") + " triệu");
+  const calc = () => {
+    const price = (+cp.value || 0) * 1000; // triệu
+    const loanPct = Math.min(70, Math.max(0, +document.getElementById("c-loan").value || 0)) / 100;
+    const rent = +document.getElementById("c-rent").value || 0;
+    const own = price * (1 - loanPct), yearRent = rent * 12;
+    document.getElementById("o-own").textContent = ty(own);
+    document.getElementById("o-loan").textContent = ty(price * loanPct);
+    document.getElementById("o-year").textContent = ty(yearRent);
+    document.getElementById("o-yield").textContent = price ? ((yearRent / price) * 100).toFixed(1) + "%/năm" : "–";
+    document.getElementById("o-roe").textContent = own ? ((yearRent / own) * 100).toFixed(1) + "%/năm" : "–";
+  };
+  ["c-price", "c-loan", "c-rent"].forEach((id) => document.getElementById(id).addEventListener("input", calc));
+  calc();
+}

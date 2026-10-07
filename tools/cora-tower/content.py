@@ -1,0 +1,207 @@
+"""Long-form SEO articles for the Cora Tower site (imported by build.py)."""
+
+TEL, TEL_TXT = "0904567009", "0904 567 009"
+
+
+def article(kicker, title, body, toc=None, cls="alt"):
+    nav = ""
+    if toc:
+        nav = '<nav class="toc" aria-label="Mục lục"><b>Nội dung bài viết</b><ol>' + "".join(
+            f'<li><a href="#{i}">{t}</a></li>' for i, t in toc) + "</ol></nav>"
+    return f'''<section class="{cls}" id="bai-viet">
+    <div class="wrap article">
+      <div class="center reveal"><span class="kicker">{kicker}</span><h2>{title}</h2></div>
+      {nav}
+      <div class="prose">{body}</div>
+    </div>
+  </section>'''
+
+
+CTA = (f'<p class="prose-cta">📞 Nhận bảng giá, mặt bằng và giỏ hàng mới nhất: gọi/Zalo '
+       f'<a href="tel:{TEL}"><b>{TEL_TXT}</b></a> hoặc <a href="#dang-ky">để lại thông tin</a>.</p>')
+
+# ---------------------------------------------------------------- TRANG CHỦ
+INDEX_TOC = [("ct-tong-quan", "Cora Tower là dự án gì?"), ("ct-vi-tri", "Vị trí vòng xoay 29/3 – Nguyễn Phước Lan"),
+             ("ct-thiet-ke", "Kiến trúc khối mái cam biểu tượng"), ("ct-can-ho", "Các loại căn hộ và diện tích"),
+             ("ct-gia", "Giá bán và chính sách thanh toán"), ("ct-tien-ich", "Tiện ích tầng 2 riêng từng tòa"),
+             ("ct-phap-ly", "Pháp lý Cora Tower"), ("ct-ai-nen-mua", "Ai nên mua Cora Tower?")]
+INDEX_ARTICLE = article("Cẩm nang mua căn hộ", "Cora Tower Đà Nẵng: tất cả những gì cần biết trước khi xuống tiền", f'''
+<h3 id="ct-tong-quan">Cora Tower là dự án gì?</h3>
+<p><strong>Cora Tower</strong> là tên thương mại của hai tòa căn hộ chung cư do <strong>Sun Group</strong> (Công ty CP Tập đoàn Mặt Trời) phát triển trên lô A2-19 và A2-20, thuộc Khu đô thị sinh thái ven sông Hòa Xuân – nay là <strong>Sun Neo City</strong>, phường Hòa Xuân, TP Đà Nẵng. Dự án gồm <strong>Tòa A1 (672 căn)</strong> và <strong>Tòa A2 (670 căn)</strong>, tổng <strong>1.342 căn hộ</strong>, mỗi tòa 25 tầng nổi và 2 tầng hầm, cao 97,95 m.</p>
+<p>Khác với nhiều <a href="can-ho-sun-da-nang.html">căn hộ Sun Đà Nẵng</a> khác đang mở bán, Cora Tower có đủ “bộ sưu tập” sản phẩm trong cùng một dự án: studio cho người trẻ, 1PN+ cho vợ chồng son, 2PN – 3PN cho gia đình, căn sân vườn tầng 3, <a href="penthouse.html">penthouse – duplex tầng 25</a> và <a href="khoi-de-shophouse.html">shophouse khối đế</a> tầng 1.</p>
+
+<h3 id="ct-vi-tri">Vị trí vòng xoay 29/3 – Nguyễn Phước Lan: “cửa ngõ” Nam trung tâm</h3>
+<p>Hai tòa tháp đứng đối xứng hai bên trục đường 29/3, mặt chính hướng ra vòng xoay giao Nguyễn Phước Lan – nơi chủ đầu tư đang hoàn tất thủ tục để cải tạo thành <strong>đài phun nước</strong>. Hạ tầng quanh dự án (29/3, Nguyễn Phước Lan, Đinh Văn Chấp, Hoàng Thế Thiện) đã cơ bản hoàn thành, nên cư dân dọn về là dùng được ngay.</p>
+<ul>
+<li>Qua cầu Hòa Xuân là tới MM Mega Market, đường Cách Mạng Tháng 8.</li>
+<li>Kết nối Lotte Mart, cầu Rồng, cầu Trần Thị Lý và trung tâm Hải Châu.</li>
+<li>Ra biển qua đường Hồ Xuân Hương; đi Hội An qua cầu Trung Lương; về sân bay quốc tế Đà Nẵng thuận tiện.</li>
+<li>Cầu Bùi Tá Hán đã có trong quy hoạch, đang nghiên cứu phương án thi công.</li>
+</ul>
+<p>Khu Nam trung tâm Đà Nẵng đang được định hướng thành một cực phát triển mới của thành phố đa trung tâm, với các dự án “Dòng sông ánh sáng” và tuyến du lịch đường thủy sông Cổ Cò được báo chí nhắc tới – đây là nền tảng cho giá trị dài hạn của căn hộ và shophouse tại đây.</p>
+
+<h3 id="ct-thiet-ke">Kiến trúc khối mái cam: nhận diện từ xa</h3>
+<p>Điểm dễ nhận ra nhất của Cora Tower là <strong>khối mái kiến trúc màu cam</strong> ôm trọn tầng 25 – nơi bố trí các căn penthouse. Thân tháp trắng – xám với hệ lam đứng, kính lớn đón sáng; khối đế bo cong theo vòng xoay, mặt kính kịch trần và sân vườn trên cao ở tầng 3. Căn hộ điển hình có trần cao 3,5 m, hành lang rộng 1,8 m – thông thoáng hơn mặt bằng chung của chung cư cùng phân khúc.</p>
+
+<h3 id="ct-can-ho">Các loại căn hộ Cora Tower và diện tích</h3>
+<table><thead><tr><th>Loại căn</th><th>DT thông thủy</th><th>Phù hợp</th></tr></thead><tbody>
+<tr><td>Studio</td><td>32,2 – 32,3 m²</td><td>Người trẻ, cho thuê ngắn hạn</td></tr>
+<tr><td>1PN+</td><td>52,5 – 59,6 m²</td><td>Vợ chồng trẻ, đầu tư cho thuê – dòng căn chủ lực</td></tr>
+<tr><td>2PN / 2PN+1</td><td>60,6 – 73,1 m²</td><td>Gia đình nhỏ, nhiều căn góc 2 mặt thoáng</td></tr>
+<tr><td>3PN</td><td>78,9 – 81,8 m²</td><td>Gia đình đa thế hệ – mỗi sàn mỗi tòa 1 căn</td></tr>
+<tr><td>Căn sân vườn tầng 3</td><td>+ sân vườn 10 – 151 m²</td><td>Người thích không gian xanh riêng</td></tr>
+<tr><td>Penthouse tầng 25</td><td>51,9 – 88,6 m² sàn chính, trần ~7 m</td><td>Làm duplex, sống đẳng cấp</td></tr>
+</tbody></table>
+<p>Mỗi sàn điển hình (tầng 3A–24) có 28 căn, hành lang giữa, 2 lõi thang. Xem chi tiết từng mã căn ở mục <a href="#mat-bang">mặt bằng</a>.</p>
+
+<h3 id="ct-gia">Giá bán Cora Tower và chính sách thanh toán</h3>
+<p>Căn 1PN+ tầng 15 hiện có giá dự kiến khoảng <strong>3,1 – 3,85 tỷ/căn</strong> (giá trần gồm VAT và phí bảo trì, theo chính sách bán hàng); shophouse 43 – 61,5 m² khoảng <strong>4,96 – 6,04 tỷ/căn</strong>. Chính sách nổi bật:</p>
+<ul>
+<li>Chiết khấu <strong>7%</strong> “Đặc quyền hoàn thiện nội thất”; khách không vay chiết khấu thêm <strong>5%</strong> và giãn tiến độ đến <strong>40 tháng</strong>.</li>
+<li>Ngân hàng cho vay tối đa <strong>70%</strong>, hỗ trợ lãi suất đến <strong>24 tháng</strong> (không muộn hơn 30/09/2028), miễn phí trả nợ trước hạn trong thời gian hỗ trợ.</li>
+<li><strong>Sun Early Key</strong>: thanh toán 70% là nhận nhà để sử dụng, dự kiến <strong>31/10/2027</strong>.</li>
+<li>Đặt cọc khi ký hợp đồng thực hiện nguyện vọng chỉ <strong>100 triệu</strong> (3PN 150 triệu, penthouse 300 triệu); miễn phí dịch vụ quản lý 1 năm.</li>
+<li>Ký hợp đồng thỏa thuận nguyên tắc trước để kịp chuẩn bị hồ sơ vay, sau đó ký hợp đồng mua bán.</li>
+</ul>
+<p>Giá thay đổi theo tầng, hướng và từng đợt chính sách – hãy <a href="#chinh-sach">xem chính sách</a> và <a href="#dang-ky">nhận bảng giá đầy đủ</a> để có con số chính xác.</p>
+
+<h3 id="ct-tien-ich">Tiện ích tầng 2 riêng cho cư dân từng tòa</h3>
+<p>Thay vì dồn tiện ích lên mái, Cora Tower dành trọn <strong>tầng 2</strong> mỗi tòa cho cư dân: hồ bơi trong nhà kính bốn mùa, <strong>Jjimjilbang</strong> – xông hơi kiểu Hàn Quốc và spa (tòa A1), gym và golf mô phỏng (tòa A2), khu trẻ em, thư viện, phòng sinh hoạt cộng đồng. Tầng 1 là shophouse với cafe, cửa hàng, dịch vụ ngay chân tòa nhà.</p>
+
+<h3 id="ct-phap-ly">Pháp lý Cora Tower: đủ điều kiện bán, có bảo lãnh</h3>
+<p>Đây là điểm khiến Cora Tower khác biệt: đất đã có sổ đỏ từng lô (DI 103576, DI 103577), Sở Xây dựng có văn bản <strong>7117/SXD-QLN</strong> về điều kiện đưa nhà ở hình thành trong tương lai vào kinh doanh, chủ đầu tư ký hợp đồng <strong>bảo lãnh với VietinBank</strong> và hợp đồng mẫu đã đăng ký tại Sở Công Thương. Xem và tải bản scan tại trang <a href="phap-ly.html">Pháp lý Cora Tower</a>.</p>
+
+<h3 id="ct-ai-nen-mua">Ai nên mua Cora Tower?</h3>
+<ul>
+<li><strong>Người mua để ở</strong> làm việc ở Hải Châu, Cẩm Lệ, Ngũ Hành Sơn muốn căn hộ mới, pháp lý rõ, tổng tiền vừa phải.</li>
+<li><strong>Nhà đầu tư cho thuê</strong>: studio và 1PN+ dễ khai thác nhờ cộng đồng 1.342 căn và nhu cầu thuê quanh Hòa Xuân.</li>
+<li><strong>Người tìm tài sản khan hiếm</strong>: penthouse trần 7 m và shophouse khối đế – số lượng có hạn trong cả khu đô thị.</li>
+</ul>
+{CTA}''', INDEX_TOC)
+
+# ---------------------------------------------------------------- SHOPHOUSE
+SHOP_TOC = [("sh-vi-sao", "Vì sao shophouse khối đế Cora Tower đáng tiền?"), ("sh-dep", "Một mặt tiền “biết bán hàng”"),
+            ("sh-7m", "Trần 7 m: một shop, hai tầng sử dụng"), ("sh-phap-ly", "Sở hữu lâu dài – lợi thế hiếm có"),
+            ("sh-khai-thac", "Kinh doanh gì để có dòng tiền?"), ("sh-tai-chinh", "Bài toán tài chính khi mua shophouse"),
+            ("sh-chon-can", "Kinh nghiệm chọn căn shophouse"), ("sh-rui-ro", "Những điều cần kiểm tra trước khi cọc")]
+SHOP_ARTICLE = article("Phân tích đầu tư", "Shophouse Cora Tower: vì sao đây là “mặt bằng vàng” của Nam trung tâm Đà Nẵng", f'''
+<h3 id="sh-vi-sao">Vì sao shophouse khối đế Cora Tower đáng tiền?</h3>
+<p>Một shophouse tốt cần ba thứ: <strong>người đi qua, người ở trên và pháp lý chắc</strong>. Shophouse Cora Tower có đủ cả ba. Hơn 60 căn shop (khoảng 33 căn tòa A1, 30 căn tòa A2) nằm ngay tầng 1 của hai tòa tháp <strong>1.342 căn hộ</strong>, mặt tiền ôm <strong>vòng xoay 29/3 – Nguyễn Phước Lan</strong> – trục giao thông chính của khu đô thị Nam Hòa Xuân. Sun Property giới thiệu tổng cộng khoảng 150 căn shophouse khối đế tại ba tổ hợp Cora Tower, Spana Tower và S-Light Tower – nghĩa là nguồn cung loại hình này trong cả khu đô thị rất có hạn.</p>
+
+<h3 id="sh-dep">Một mặt tiền “biết bán hàng”</h3>
+<p>Nhìn phối cảnh là thấy: khối đế bo cong theo vòng xoay, <strong>mặt kính kịch trần</strong> cao gần 7 m, biển hiệu đồng bộ trên nền gỗ cam ấm, mái sảnh lam kim loại và vỉa hè rộng rợp cây. Ban ngày, ánh sáng xuyên qua kính biến cả cửa hàng thành một khung trưng bày; về đêm, dải đèn biển hiệu nối dài theo đường cong khối đế – một “phố thương mại” đúng nghĩa ngay dưới chân nhà. Mặt tiền từng căn rộng khoảng <strong>3,5 – 13 m</strong>, nhiều căn góc hai mặt thoáng – thứ mà thương hiệu thời trang, F&amp;B, ngân hàng luôn tìm kiếm.</p>
+
+<h3 id="sh-7m">Trần 7 m: một shop, hai tầng sử dụng</h3>
+<p>Chiều cao tầng khối đế khoảng <strong>7 m</strong>, đủ để làm thêm <strong>tầng lửng</strong> – gần như nhân đôi diện tích sử dụng: tầng dưới bán hàng, tầng lửng làm kho, văn phòng, khu ngồi cafe hoặc phòng trị liệu spa. Chủ nhà tự thi công tầng lửng, miễn không ảnh hưởng kết cấu, cơ điện, kiến trúc; hồ sơ gửi Ban quản lý duyệt khoảng <strong>1–2 tuần</strong>. Có thể gộp hai căn liền kề (đập tường ngăn 10–20 cm, giữ vách chịu lực 30 cm) để làm showroom lớn.</p>
+
+<h3 id="sh-phap-ly">Sở hữu lâu dài – lợi thế hiếm có</h3>
+<p>Theo chủ đầu tư, shophouse khối đế Cora Tower có <strong>pháp lý sở hữu lâu dài</strong> như căn hộ, hình thành đơn vị ở nên <strong>đăng ký được hộ khẩu thường trú</strong> – vừa ở vừa kinh doanh. Trong khi rất nhiều shop chân đế ở Hà Nội, TP.HCM khai thác tốt nhưng chỉ sở hữu có thời hạn. Lưu ý: vì là sở hữu như căn hộ, shophouse không đăng ký giấy phép kinh doanh tại căn; cách làm phổ biến là cho thương hiệu thuê bằng hợp đồng ghi mã căn, hoặc tự kinh doanh với doanh nghiệp/hộ kinh doanh đăng ký ở địa chỉ khác và dùng shophouse làm địa điểm kinh doanh.</p>
+
+<h3 id="sh-khai-thac">Kinh doanh gì để có dòng tiền?</h3>
+<ul>
+<li><strong>Phục vụ cư dân hằng ngày</strong>: siêu thị mini, nhà thuốc, giặt là, tiệm bánh, phòng khám – khách hàng là hàng nghìn cư dân ngay phía trên.</li>
+<li><strong>F&amp;B và cafe</strong>: tận dụng trần cao làm không gian hai tầng, góc kính nhìn vòng xoay đài phun nước.</li>
+<li><strong>Thương hiệu thời trang, mỹ phẩm, showroom</strong>: mặt kính dài, biển hiệu lớn, dễ nhận diện từ đường 29/3.</li>
+<li><strong>Dịch vụ</strong>: spa, salon, trung tâm ngoại ngữ, văn phòng giao dịch ngân hàng – bảo hiểm.</li>
+</ul>
+<p>Báo chí gần đây dẫn lời một số chủ shophouse khu Nam trung tâm Đà Nẵng cho biết đang cho thuê ở mức <strong>35–100 triệu đồng/tháng</strong> tùy vị trí và diện tích. Đây là thông tin tham khảo, không phải cam kết; giá thuê thực tế phụ thuộc từng căn và thời điểm.</p>
+
+<h3 id="sh-tai-chinh">Bài toán tài chính khi mua shophouse Cora Tower</h3>
+<p>Với căn 4,96 – 6,04 tỷ, chính sách cho vay tối đa 70% và hỗ trợ lãi suất 0% trong 24 tháng giúp vốn tự có ban đầu chỉ khoảng <strong>1,5 – 1,8 tỷ</strong>. Chương trình <strong>Sun Early Key</strong> cho phép thanh toán 70% là nhận nhà, 30% còn lại trả trong 24 tháng – shop có thể đưa vào kinh doanh, tạo dòng tiền trước khi thanh toán xong. Tiến độ thanh toán kéo dài đến <strong>40 tháng</strong>, kèm chiết khấu Early Bird 3%, chiết khấu không vay 5% và quà tặng hỗ trợ hoàn thiện nội thất kinh doanh 4% (xem <a href="#chinh-sach-shop">chính sách</a>). Dùng <a href="#tinh-dong-tien">công cụ ước tính dòng tiền</a> để thử với con số của anh/chị.</p>
+
+<h3 id="sh-chon-can">Kinh nghiệm chọn căn shophouse</h3>
+<ul>
+<li><strong>Căn góc và căn mặt vòng xoay</strong>: hiển thị tốt nhất, phù hợp thương hiệu lớn – giá cao hơn nhưng dễ cho thuê.</li>
+<li><strong>Căn gần sảnh cư dân</strong>: lưu lượng cư dân qua lại hằng ngày, hợp tiện ích thiết yếu (mart, nhà thuốc, cafe).</li>
+<li><strong>Mặt tiền rộng hơn chiều sâu</strong>: dễ trưng bày; xem kích thước mặt tiền từng căn ở mục <a href="#mat-bang-shop">mặt bằng shophouse</a>.</li>
+<li><strong>Diện tích 43 – 62 m²</strong>: tổng tiền vừa phải, dễ cho thuê và dễ thanh khoản hơn căn quá lớn.</li>
+</ul>
+
+<h3 id="sh-rui-ro">Những điều cần kiểm tra trước khi cọc</h3>
+<p>Đầu tư shophouse luôn cần tỉnh táo: kiểm tra hồ sơ pháp lý (xem tại <a href="phap-ly.html">trang Pháp lý</a>), đọc kỹ hợp đồng mẫu, hỏi rõ quy định vận hành của Ban quản lý (biển hiệu, giờ hoạt động, chỗ đỗ xe), thời hạn hoàn thiện <strong>12 tháng</strong> kể từ bàn giao (quá hạn đóng phí 8% giá trị căn) và tự khảo sát giá thuê thực tế khu vực. Chuyên viên sẽ cung cấp đầy đủ tài liệu để anh/chị đối chiếu.</p>
+{CTA}''', SHOP_TOC)
+
+# ---------------------------------------------------------------- PENTHOUSE
+PH_TOC = [("ph-cam-xuc", "Sống trên đỉnh Cora Tower"), ("ph-7m", "Trần 7 m: tự viết căn nhà của riêng mình"),
+          ("ph-view", "Tầm nhìn không bị che chắn"), ("ph-layout", "Mặt bằng và cách làm duplex"),
+          ("ph-gia", "Giá penthouse và chính sách"), ("ph-dau-tu", "Giá trị đầu tư của penthouse"), ("ph-ai", "Penthouse dành cho ai?")]
+PH_ARTICLE = article("Câu chuyện penthouse", "Penthouse Cora Tower: nơi bầu trời Đà Nẵng trở thành phòng khách", f'''
+<h3 id="ph-cam-xuc">Sống trên đỉnh Cora Tower</h3>
+<p>Buổi sáng, nắng đầu ngày tràn qua ô kính cao gấp đôi bình thường, đánh thức cả căn nhà. Chiều xuống, mặt trời lặn sau rặng núi phía Tây, sông Hàn đổi màu bạc rồi tím, vòng quay Sun Wheel lên đèn ở phía xa. Tối thứ Bảy mùa lễ hội, cả gia đình ngồi trên ban công tầng 25 – nơi không có tòa nhà nào chắn tầm mắt. Đó là cuộc sống mà <strong>penthouse Cora Tower</strong> mang lại: không chỉ là một căn hộ cao nhất, mà là <strong>một góc trời riêng giữa lòng Đà Nẵng</strong>.</p>
+<p>Các căn penthouse nằm trọn trong <strong>khối mái màu cam</strong> – phần kiến trúc dễ nhận ra nhất của hai tòa tháp. Từ dưới vòng xoay 29/3 nhìn lên, đó là “vương miện” của Cora Tower; từ bên trong nhìn ra, đó là khung cửa sổ lớn nhất của cả dự án.</p>
+
+<h3 id="ph-7m">Trần 7 m: tự viết căn nhà của riêng mình</h3>
+<p>Penthouse Cora Tower có chiều cao tầng khoảng <strong>7 m</strong> – gấp đôi căn hộ thông thường. Căn được bàn giao để chủ nhân toàn quyền sáng tạo: làm phòng khách thông tầng với đèn chùm buông dài, đặt thư viện trên tầng lửng nhìn xuống, hay chia thành <strong>duplex hai tầng</strong> với phòng ngủ riêng tư phía trên. Chủ đầu tư có sẵn <strong>layout duplex gợi ý</strong>:</p>
+<ul>
+<li>Căn 1PN làm lửng thành <strong>2PN+1</strong>.</li>
+<li>Căn 2PN làm lửng thành <strong>3PN</strong>.</li>
+<li>Căn 2PN+1 làm lửng thành <strong>3PN+1</strong>.</li>
+</ul>
+<p>Nhà vệ sinh tầng 2 nên bố trí theo trục kỹ thuật; phương án thi công gửi Ban quản lý duyệt khoảng 1–2 tuần. Điều đáng giá nhất: <strong>giá penthouse tính theo đơn nguyên một căn</strong> – phần tầng lửng anh/chị tự làm không tính thêm tiền.</p>
+
+<h3 id="ph-view">Tầm nhìn không bị che chắn</h3>
+<p>Cora Tower đứng giữa khu đô thị thấp tầng nên từ tầng 25, tầm nhìn trải rộng về mọi hướng: <strong>sông Hàn và trung tâm thành phố</strong>, <strong>biển</strong> phía Đông, rặng núi phía Tây và toàn cảnh Sun Neo City xanh mướt. Báo chí giới thiệu bộ sưu tập penthouse của Sun Group tại Nam trung tâm Đà Nẵng (Cora Tower, Spana Tower, S-Light Tower) có ban công như “khán đài” ngắm pháo hoa lễ hội quốc tế Đà Nẵng – trải nghiệm mà hiếm căn nhà nào trong thành phố có được.</p>
+
+<h3 id="ph-layout">Mặt bằng penthouse và cách làm duplex</h3>
+<p>Tầng 25 mỗi tòa có khoảng <strong>24 căn</strong>, sàn chính từ <strong>51,9 đến 88,6 m²</strong> thông thủy (56,3 – 94,7 m² tim tường), gồm các loại 1PN, 1PN+1, 2PN và 2PN+1. Xem từng mã căn và tầng lửng gợi ý ở mục <a href="#mat-bang-penthouse">mặt bằng penthouse</a>. Thời hạn hoàn thiện là <strong>12 tháng</strong> kể từ ngày bàn giao.</p>
+
+<h3 id="ph-gia">Giá penthouse Cora Tower và chính sách</h3>
+<p>Giá tùy vị trí, diện tích và hướng view. Đặt cọc khi ký hợp đồng thực hiện nguyện vọng 300 triệu; chính sách cơ bản giống căn hộ điển hình: vay tối đa 70%, hỗ trợ lãi suất đến 24 tháng, Sun Early Key thanh toán 70% nhận nhà dự kiến 31/10/2027. Vì số lượng rất ít, giỏ hàng penthouse thường chỉ gửi trực tiếp – <a href="#dang-ky">đăng ký ưu tiên</a> hoặc gọi <a href="tel:{TEL}">{TEL_TXT}</a>.</p>
+
+<h3 id="ph-dau-tu">Giá trị đầu tư của penthouse</h3>
+<p>Mỗi tòa tháp chỉ có một tầng mái. Trong khi căn hộ điển hình có hàng trăm căn tương tự, penthouse luôn là <strong>nhóm sản phẩm khan hiếm nhất</strong> – yếu tố giữ giá tốt theo thời gian. Diện tích sử dụng thực tế sau khi làm lửng lớn hơn đáng kể so với giá mua, cộng với tầm nhìn không thể tái tạo, khiến penthouse vừa là nơi ở vừa là tài sản để dành.</p>
+
+<h3 id="ph-ai">Penthouse dành cho ai?</h3>
+<ul>
+<li>Gia đình đa thế hệ cần nhiều phòng nhưng vẫn muốn sống trong căn hộ có tiện ích, an ninh.</li>
+<li>Doanh nhân muốn không gian tiếp khách khác biệt, có dấu ấn riêng.</li>
+<li>Người yêu thiết kế, muốn tự tay tạo nên căn nhà thông tầng của mình.</li>
+<li>Nhà đầu tư tìm tài sản hiếm, giữ giá trị dài hạn.</li>
+</ul>
+{CTA}''', PH_TOC)
+
+# ---------------------------------------------------------------- CĂN HỘ SUN ĐÀ NẴNG
+SUN_TOC = [("sun-tong-quan", "Căn hộ Sun Group tại Đà Nẵng"), ("sun-neo-city", "Sun Neo City – khu đô thị Nam trung tâm"),
+           ("sun-so-sanh", "So sánh Cora Tower, Spana Tower, S-Light Tower"), ("sun-vi-sao-cora", "Vì sao nhiều khách chọn Cora Tower?"),
+           ("sun-gia", "Giá căn hộ Sun Đà Nẵng tại Cora Tower"), ("sun-quy-trinh", "Quy trình mua căn hộ Sun")]
+SUN_BODY = f'''
+<h3 id="sun-tong-quan">Căn hộ Sun Group tại Đà Nẵng: vì sao được quan tâm?</h3>
+<p>Sun Group (Công ty CP Tập đoàn Mặt Trời) gắn bó với Đà Nẵng qua Bà Nà Hills, Cầu Vàng, Sun World Asia Park, Sun Wheel… Những năm gần đây, tập đoàn mở rộng sang <strong>căn hộ để ở</strong> với nhiều tổ hợp tại khu Nam trung tâm thành phố. Điểm chung của <strong>căn hộ Sun Đà Nẵng</strong>: thương hiệu chủ đầu tư lớn, nằm trong khu đô thị quy hoạch đồng bộ, chính sách tài chính linh hoạt.</p>
+
+<h3 id="sun-neo-city">Sun Neo City – khu đô thị Nam trung tâm Đà Nẵng</h3>
+<p>Các tổ hợp căn hộ Cora Tower, Spana Tower, S-Light Tower đều nằm trong <strong>Sun Neo City</strong> – Khu đô thị sinh thái ven sông Hòa Xuân, bao quanh bởi sông Cẩm Lệ, sông Hàn và sông Cổ Cò. Hạ tầng đường 29/3, Nguyễn Phước Lan đã cơ bản hoàn thành; khu vực được định hướng thành một cực phát triển mới của Đà Nẵng theo mô hình đô thị đa trung tâm.</p>
+
+<h3 id="sun-so-sanh">So sánh nhanh các dự án căn hộ Sun tại Hòa Xuân</h3>
+<table><thead><tr><th></th><th>Cora Tower</th><th>Spana Tower</th><th>S-Light Tower</th></tr></thead><tbody>
+<tr><td>Vị trí</td><td>Vòng xoay 29/3 – Nguyễn Phước Lan</td><td>Nguyễn Phước Lan, ven sông Cẩm Lệ</td><td>Giao lộ Nguyễn Đình Thi – 29/3, gần sông Hàn</td></tr>
+<tr><td>Quy mô</td><td>2 tòa, 25 tầng, <strong>1.342 căn</strong> (theo công bố CĐT)</td><td>2 tòa, ~22 tầng*</td><td>2 tòa, ~22 tầng, ~792 căn*</td></tr>
+<tr><td>Sản phẩm</td><td>Studio → 3PN, sân vườn, penthouse, shophouse</td><td>Studio → duplex, shophouse*</td><td>Studio → 3PN, penthouse, shophouse*</td></tr>
+<tr><td>Pháp lý</td><td>Sổ đỏ từng lô, VB 7117/SXD-QLN, bảo lãnh VietinBank</td><td colspan="2">Theo công bố riêng của từng dự án</td></tr>
+</tbody></table>
+<p class="note">* Số liệu Spana Tower và S-Light Tower tổng hợp từ thông tin thị trường, chỉ mang tính tham khảo.</p>
+
+<h3 id="sun-vi-sao-cora">Vì sao nhiều khách chọn Cora Tower?</h3>
+<ul>
+<li><strong>Pháp lý công khai đầy đủ</strong>: sổ đỏ, văn bản đủ điều kiện bán, bảo lãnh ngân hàng, hợp đồng mẫu đã đăng ký – xem tại <a href="phap-ly.html">trang Pháp lý</a>.</li>
+<li><strong>Vị trí vòng xoay</strong> – điểm nhận diện của cả khu đô thị, hạ tầng đã xong.</li>
+<li><strong>Đủ loại sản phẩm</strong>: từ studio ~32 m² đến <a href="penthouse.html">penthouse trần 7 m</a> và <a href="khoi-de-shophouse.html">shophouse khối đế sở hữu lâu dài</a>.</li>
+<li><strong>Tiện ích riêng từng tòa</strong> ở tầng 2: hồ bơi trong nhà, Jjimjilbang, gym, golf mô phỏng, khu trẻ em, thư viện.</li>
+</ul>
+
+<h3 id="sun-gia">Giá căn hộ Sun Đà Nẵng tại Cora Tower</h3>
+<p>Căn 1PN+ tầng 15 khoảng <strong>3,1 – 3,85 tỷ</strong>, shophouse 43 – 61,5 m² khoảng <strong>4,96 – 6,04 tỷ</strong>. Vay tối đa 70%, hỗ trợ lãi suất 0% trong 24 tháng, Sun Early Key thanh toán 70% nhận nhà. Xem <a href="./#gia">bảng giá Cora Tower</a>.</p>
+
+<h3 id="sun-quy-trinh">Quy trình mua căn hộ Sun</h3>
+<ol>
+<li>Nhận giỏ hàng, mặt bằng, chọn căn theo tầng – hướng – ngân sách.</li>
+<li>Đặt chỗ, ký hợp đồng thỏa thuận nguyên tắc, chuẩn bị hồ sơ vay.</li>
+<li>Ký hợp đồng mua bán theo thông báo của chủ đầu tư, thanh toán theo tiến độ.</li>
+<li>Nhận bàn giao, hoàn thiện nội thất.</li>
+</ol>
+{CTA}'''
+SUN_FAQ = [
+    ("Căn hộ Sun Đà Nẵng nào đã đủ điều kiện bán?", "Cora Tower (lô A2-19, A2-20) có văn bản 7117/SXD-QLN ngày 05/5/2026 của Sở Xây dựng Đà Nẵng về điều kiện nhà ở hình thành trong tương lai đưa vào kinh doanh, kèm bảo lãnh VietinBank."),
+    ("Căn hộ Sun Đà Nẵng giá bao nhiêu?", "Tại Cora Tower, căn 1PN+ tầng 15 khoảng 3,1 – 3,85 tỷ/căn; giá thay đổi theo tầng, hướng và đợt chính sách."),
+    ("Mua căn hộ Sun Đà Nẵng được vay bao nhiêu?", "Ngân hàng cho vay tối đa 70% giá trị, hỗ trợ lãi suất 0% trong 24 tháng; có chương trình Sun Early Key thanh toán 70% nhận nhà."),
+    ("Sun Neo City ở đâu?", "Sun Neo City là Khu đô thị sinh thái ven sông Hòa Xuân, phường Hòa Xuân, TP Đà Nẵng – khu Nam trung tâm thành phố."),
+]

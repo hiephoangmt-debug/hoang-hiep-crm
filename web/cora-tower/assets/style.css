@@ -221,6 +221,35 @@ footer .legal{grid-column:1/-1;border-top:1px solid #1f3256;padding-top:18px;fon
 .view-grid span{position:absolute;left:12px;bottom:12px;background:rgba(6,20,46,.75);color:#fff;font-size:.82rem;font-weight:700;padding:5px 12px;border-radius:999px}
 @media (max-width:760px){.view-grid{grid-template-columns:1fr}.view-grid a,.view-grid a:nth-child(-n+2){grid-column:auto}}
 
+/* article */
+.article{max-width:880px}
+.toc{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--brand-2);border-radius:14px;padding:18px 22px;margin:26px 0}
+section.alt .toc{background:var(--bg)}
+.toc ol{margin:8px 0 0;padding-left:20px;columns:2;column-gap:28px}
+.toc li{margin:4px 0;break-inside:avoid}.toc a{text-decoration:none}
+@media (max-width:640px){.toc ol{columns:1}}
+.prose{font-size:1.04rem}
+.prose h3{font-size:1.35rem;color:var(--brand);margin:34px 0 10px;scroll-margin-top:90px}
+.prose p,.prose li{color:var(--ink)}
+.prose ul,.prose ol{padding-left:22px}.prose li{margin:6px 0}
+.prose table{margin:14px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;display:block;overflow-x:auto}
+.prose-cta{margin-top:30px;padding:18px 20px;border-radius:14px;background:color-mix(in srgb,var(--brand-2) 12%,var(--bg));font-weight:600}
+/* policy + calculator */
+.policy{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}
+.policy div{background:linear-gradient(160deg,#0b2a5b,#13366f);color:#fff;border-radius:16px;padding:22px 18px;text-align:center}
+.policy b{display:block;font-size:2.4rem;line-height:1;color:#ffb37f;margin-bottom:8px}
+.policy span{font-size:.9rem;opacity:.9}
+.policy .dim{background:var(--surface);color:var(--muted);border:1px dashed var(--line)}
+.policy .dim b{color:var(--muted)}
+@media (max-width:760px){.policy{grid-template-columns:1fr 1fr}}
+.calc{display:grid;gap:14px;margin-top:18px}
+.calc label{display:grid;gap:6px;font-weight:600}
+.calc input{font:inherit;font-size:16px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.calc-out{display:grid;gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+.calc-out div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--line);padding-bottom:8px}
+.calc-out b{color:var(--brand)}.calc-out .hl b{color:var(--brand-2);font-size:1.3rem}
+.calc-out small{color:var(--muted);font-size:.82rem}
+
 /* legal */
 .legal-list{list-style:none;padding:0;margin:0 0 22px;display:grid;gap:10px}
 .legal-list li{display:grid;grid-template-columns:22px 1fr;column-gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
@@ -241,7 +270,7 @@ footer .legal{grid-column:1/-1;border-top:1px solid #1f3256;padding-top:18px;fon
 /* floating contact (desktop) */
 .fab{position:fixed;right:18px;bottom:22px;z-index:40;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
 .fab a,.fab button{height:56px;min-width:56px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:8px;color:#fff;font:inherit;font-weight:800;text-decoration:none;border:0;cursor:pointer;box-shadow:0 10px 24px -8px rgba(0,0,0,.45);position:relative}
-.fab-call{background:var(--brand-2);padding:0 20px 0 16px;animation:ring 2.4s infinite}
+.fab-call{background:var(--brand-2);width:56px;animation:ring 2.4s infinite}
 .fab-call svg{animation:shake 2.4s infinite}
 .fab-zalo{background:#0068ff;font-size:.82rem;width:56px}
 .fab-chat{background:var(--brand);width:56px}

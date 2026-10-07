@@ -35,7 +35,7 @@
       a: () => "Dạ 3PN rộng 78,9 m² thông thủy (85,7 – 86,7 m² tim tường), mỗi tòa mỗi sàn chỉ 1 căn ở đầu hồi hướng vòng xoay – view thoáng nhất tòa. Số lượng rất ít nên thường được giữ chỗ sớm. Anh/chị để lại SĐT, em báo ngay căn 3PN còn trống ạ.",
       lead: true },
     { id: "shop", k: ["gia shophouse", "shophouse bao nhieu", "gia shop", "gia khoi de", "shophouse", "khoi de", "kinh doanh", "mat bang thuong mai", "cua hang", "buon ban", "ki ot", "kiot"],
-      a: () => "Dạ shophouse nằm tầng 1 khối đế, mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan:\n• Sở hữu lâu dài như căn hộ, đăng ký được hộ khẩu\n• Trần cao ~7 m – làm thêm tầng lửng, gấp đôi diện tích sử dụng\n• Khoảng 63 shop (A1: 33, A2: 30), diện tích 38 – 127 m², mặt tiền 3,5 – 13 m\n• Căn 43 – 61,5 m² giá khoảng 4,96 – 6,04 tỷ/căn (đã gồm VAT & phí bảo trì)\n• Vay tối đa 70%, hỗ trợ lãi suất 0% trong 24 tháng\n\nPhía trên là 1.342 căn hộ nên khách có sẵn, nhiều căn đã được cọc. Anh/chị định tự kinh doanh hay cho thuê ạ?",
+      a: () => "Dạ shophouse nằm tầng 1 khối đế, mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan:\n• Sở hữu lâu dài như căn hộ, đăng ký được hộ khẩu\n• Trần cao ~7 m – làm thêm tầng lửng, gấp đôi diện tích sử dụng\n• Khoảng 63 shop (A1: 33, A2: 30), diện tích 38 – 127 m², mặt tiền 3,5 – 13 m\n• Căn 43 – 61,5 m² giá khoảng 4,96 – 6,04 tỷ/căn (đã gồm VAT & phí bảo trì)\n• Vay tối đa 70%, HTLS 24 tháng, tiến độ thanh toán đến 40 tháng\n• Chiết khấu Early Bird 3%, không vay 5%, quà hoàn thiện nội thất kinh doanh 4%\n\nPhía trên là 1.342 căn hộ nên khách có sẵn, nhiều căn đã được cọc. Anh/chị định tự kinh doanh hay cho thuê ạ?",
       lead: true, chips: ["Tự kinh doanh", "Cho thuê", "Xem trang shophouse"] },
     { id: "ph", k: ["gia penthouse", "penthouse bao nhieu", "gia duplex", "penthouse", "duplex", "tang 25", "tang thuong", "thong tang", "cao nhat"],
       a: () => "Dạ penthouse nằm tầng 25, trong khối mái màu cam biểu tượng:\n• Trần cao ~7 m – làm thêm tầng lửng thành duplex 2 tầng, CĐT có layout gợi ý\n• Khoảng 24 căn/tòa, sàn chính 51,9 – 88,6 m²; làm lửng: 1PN → 2PN+1, 2PN → 3PN, 2PN+1 → 3PN+1\n• Giá tính theo đơn nguyên 1 căn, phần lửng tự làm không tính thêm\n• Chính sách giống căn hộ: vay 70%, hỗ trợ lãi suất 24 tháng\n\nSố lượng cực kỳ giới hạn nên em gửi thông tin trực tiếp cho khách quan tâm. Anh/chị cho em xin SĐT/Zalo nhé ạ?",
@@ -49,13 +49,13 @@
     { id: "cdt", k: ["chu dau tu", "sun group", "sungroup", "ai lam", "cdt", "mat troi", "bao nhieu can", "so can", "quy mo", "may toa", "bao nhieu tang"],
       a: () => "Dạ chủ đầu tư là Công ty CP Tập đoàn Mặt Trời (Sun Group), MST 0305016195, trụ sở 36-38 Bạch Đằng, Hải Châu, Đà Nẵng – đơn vị phát triển cả KĐT Sun Neo City. Cora Tower là tên thương mại của 2 tòa chung cư trên lô A2-19 (Tòa A1, 672 căn) và A2-20 (Tòa A2, 670 căn) ạ." },
     { id: "pay", k: ["thanh toan", "tra gop", "vay", "vay duoc", "duoc vay", "vay bao nhieu", "vay toi da", "bao nhieu phan tram", "ho tro lai suat", "ngan hang", "lai suat", "chinh sach", "uu dai", "chiet khau", "coc", "dat coc", "giu cho"],
-      a: () => "Dạ chính sách hiện tại rất nhẹ nhàng ạ:\n• Ngân hàng cho vay tối đa 70%, hỗ trợ lãi suất 0% trong 24 tháng\n• Sun Early Key: thanh toán 70% là nhận nhà, 30% còn lại trả trong 24 tháng\n• Có phương án thanh toán sớm nhận chiết khấu theo từng đợt\n• Ký HĐ thỏa thuận nguyên tắc trước để kịp chuẩn bị hồ sơ vay, sau đó ký HĐMB\n\nAnh/chị dự kiến vốn tự có khoảng bao nhiêu để em tính dòng tiền cụ thể ạ?",
+      a: () => "Dạ chính sách căn hộ hiện hành (CSƯĐ 06.1) ạ:\n• Chiết khấu 7% gói hoàn thiện nội thất\n• Không vay: chiết khấu thêm 5%, giãn tiến độ đến 40 tháng\n• Vay tối đa 70%, hỗ trợ lãi suất đến 24 tháng\n• Sun Early Key: thanh toán 70% nhận nhà, dự kiến 31/10/2027\n• Đặt cọc chỉ 100 triệu (3PN 150tr, penthouse 300tr), miễn phí quản lý 1 năm\n\nAnh/chị dự kiến vốn tự có khoảng bao nhiêu để em tính phiếu giá cụ thể ạ?",
       lead: true, chips: ["Dưới 1 tỷ", "1 – 2 tỷ", "Trên 2 tỷ"] },
     { id: "budget", k: ["duoi 1 ty", "1 - 2 ty", "1 – 2 ty", "tren 2 ty", "von"],
       a: () => "Dạ em hiểu rồi ạ. Với mức vốn này em có thể tính sẵn phương án: số tiền đợt đầu, lịch thanh toán và khoản vay (nếu cần) cho căn phù hợp. Anh/chị để lại SĐT/Zalo, em gửi bảng tính chi tiết trong ít phút nhé!",
       lead: true },
     { id: "handover", k: ["ban giao", "khi nao xong", "tien do", "bao gio", "nam nao", "xay den dau", "thi cong"],
-      a: () => "Dạ thời điểm bàn giao chính thức ghi trong hợp đồng mua bán; thông tin thị trường hiện nói dự kiến khoảng 30/07/2027, tiêu chuẩn hoàn thiện trần, tường, sàn (không gồm nội thất rời). Mốc chính thức theo hợp đồng mua bán. Em có thể cập nhật hình ảnh tiến độ thực tế qua Zalo cho anh/chị ạ.",
+      a: () => "Dạ theo chính sách bán hàng hiện hành, khách thanh toán tối thiểu 70% được nhận căn hộ để sử dụng ngay khi dự án nghiệm thu đưa vào sử dụng, dự kiến ngày 31/10/2027; tiêu chuẩn hoàn thiện trần, tường, sàn. Mốc chính thức theo hợp đồng mua bán. Em có thể cập nhật hình ảnh tiến độ qua Zalo cho anh/chị ạ.",
       lead: true },
     { id: "amen", k: ["tien ich", "ho boi", "gym", "spa", "tre em", "cong vien", "noi khu"],
       a: () => "Dạ khối đế 2 tòa gồm tầng 1 shophouse thương mại và tầng 2 dịch vụ – tiện ích; tầng 3 là căn hộ sân vườn. Cư dân còn hưởng hệ tiện ích chung của khu đô thị Sun Neo City ven sông ạ. Anh/chị ưu tiên tiện ích nào nhất để em tư vấn căn gần đó?" },
@@ -202,7 +202,7 @@
       state.started = true;
       const h = new Date().getHours();
       const hi = h < 11 ? "Chào buổi sáng" : h < 14 ? "Chào buổi trưa" : h < 18 ? "Chào buổi chiều" : "Chào buổi tối";
-      say(`${hi} anh/chị! 👋 Em là trợ lý tư vấn <b>Cora Tower</b> – 2 tòa căn hộ Sun Group (1.342 căn) tại vòng xoay 29/3, Đà Nẵng – đã đủ điều kiện bán, có bảo lãnh VietinBank.\n\nCăn 1PN+ hiện chỉ từ khoảng <b>3,1 tỷ</b>. Anh/chị muốn em hỗ trợ thông tin nào ạ?`);
+      say(`${hi} anh/chị! 👋 Em là trợ lý tư vấn <b>Cora Tower</b> – 2 tòa căn hộ Sun Group (1.342 căn) tại vòng xoay 29/3, Đà Nẵng – đã đủ điều kiện bán, có bảo lãnh VietinBank.\n\nStudio chỉ từ khoảng <b>1,86 tỷ</b> sau chiết khấu, đặt cọc 100 triệu. Anh/chị muốn em hỗ trợ thông tin nào ạ?`);
     }
     setTimeout(() => input.focus({ preventScroll: true }), 50);
   }

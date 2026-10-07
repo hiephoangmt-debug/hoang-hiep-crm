@@ -4,6 +4,10 @@ Run:  python3 tools/cora-tower/build.py
 Writes web/cora-tower/{index,khoi-de-shophouse,penthouse}.html
 """
 import json
+import sys
+
+sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent))
+from content import INDEX_ARTICLE, SHOP_ARTICLE, PH_ARTICLE, SUN_BODY, SUN_TOC, SUN_FAQ, article  # noqa: E402
 import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -130,8 +134,8 @@ FAQ_INDEX = [
     ("Pháp lý Cora Tower thế nào?", "Đất lô A2-19 (Tòa A1) và A2-20 (Tòa A2) đã có Giấy chứng nhận QSDĐ số DI 103576, DI 103577 cấp 12/4/2023. Sở Xây dựng Đà Nẵng có văn bản 7117/SXD-QLN ngày 05/5/2026 về điều kiện nhà ở hình thành trong tương lai đưa vào kinh doanh; VietinBank cam kết phát hành bảo lãnh; hợp đồng mẫu đã đăng ký tại Sở Công Thương."),
     ("Chủ đầu tư Cora Tower là công ty nào?", "Công ty Cổ phần Tập đoàn Mặt Trời (Sun Group), mã số doanh nghiệp 0305016195, trụ sở Tầng 1M, 36-38 Bạch Đằng, phường Hải Châu, TP Đà Nẵng."),
     ("Cora Tower có bao nhiêu căn hộ?", "Tổng 1.342 căn hộ: Tòa A1 (lô A2-19) 672 căn, Tòa A2 (lô A2-20) 670 căn; mỗi tòa 25 tầng nổi + tum, 2 tầng hầm, cao 97,95 m."),
-    ("Khi nào Cora Tower bàn giao?", "Thông tin thị trường ghi bàn giao dự kiến 30/07/2027, tiêu chuẩn hoàn thiện trần, tường, sàn. Mốc chính thức theo hợp đồng mua bán."),
-    ("Chính sách thanh toán, vay vốn Cora Tower thế nào?", "Ngân hàng cho vay tối đa 70% giá trị, hỗ trợ lãi suất 0% trong 24 tháng. Chương trình Sun Early Key: thanh toán 70% nhận nhà, 30% còn lại trong 24 tháng tiếp theo; có lựa chọn thanh toán sớm với ưu đãi theo từng đợt bán hàng."),
+    ("Khi nào Cora Tower bàn giao?", "Theo chính sách bán hàng CSƯĐ 06.1, khách thanh toán tối thiểu 70% được nhận căn hộ để sử dụng ngay khi dự án nghiệm thu đưa vào sử dụng, dự kiến ngày 31/10/2027; tiêu chuẩn hoàn thiện trần, tường, sàn. Mốc chính thức theo hợp đồng mua bán."),
+    ("Chính sách bán hàng Cora Tower hiện nay thế nào?", "Theo CSƯĐ 06.1 (từ 21/08/2026): chiết khấu 7% gói hoàn thiện nội thất; không vay chiết khấu thêm 5% và giãn tiến độ đến 40 tháng; vay tối đa 70%, hỗ trợ lãi suất đến 24 tháng (không muộn hơn 30/09/2028); Sun Early Key thanh toán 70% nhận nhà; thanh toán sớm được ưu đãi 8%/năm; miễn phí dịch vụ quản lý 1 năm."),
     ("Mua Cora Tower ký hợp đồng gì?", "Dự án đã đủ điều kiện ký hợp đồng mua bán (HĐMB). Khách ký hợp đồng thỏa thuận nguyên tắc (HĐTHNV) trước để có thời gian chuẩn bị tài chính, hồ sơ vay, sau đó ký HĐMB theo thông báo của chủ đầu tư."),
 ]
 FAQ_SHOP = [
@@ -279,7 +283,7 @@ def header(cur, cta):
   <div class="wrap">
     <a class="logo" href="./" aria-label="Cora Tower – Trang chủ">{LOGO}CORA <span>TOWER</span></a>
     <nav class="nav" aria-label="Điều hướng chính">{nav}</nav>
-    <a class="btn head-cta" href="tel:{TEL}">{TEL_TXT}</a>
+    <a class="btn head-cta" href="tel:{TEL}" aria-label="Gọi tư vấn">{PHONE_SVG}Gọi ngay</a>
     <a class="btn head-cta-alt" href="#dang-ky">{cta}</a>
   </div>
 </header>'''
@@ -357,13 +361,13 @@ FOOTER = f'''<footer>
   <div class="wrap">
     <div><strong>{AGENT}</strong>Tư vấn, phân phối căn hộ – shophouse – duplex Cora Tower và bất động sản Đà Nẵng.</div>
     <div><strong>Liên hệ</strong>Hotline/Zalo: <a href="tel:{TEL}">{TEL_TXT}</a><br>Email: <a href="mailto:{EMAIL}">{EMAIL}</a></div>
-    <div><strong>Cora Tower</strong><a href="./">Tổng quan dự án</a><br><a href="./#mat-bang">Mặt bằng A1 – A2</a><br><a href="khoi-de-shophouse.html">Shophouse khối đế</a><br><a href="penthouse.html">Duplex – Penthouse</a><br><a href="phap-ly.html">Pháp lý dự án</a></div>
+    <div><strong>Cora Tower</strong><a href="./">Tổng quan dự án</a><br><a href="./#mat-bang">Mặt bằng A1 – A2</a><br><a href="khoi-de-shophouse.html">Shophouse khối đế</a><br><a href="penthouse.html">Duplex – Penthouse</a><br><a href="phap-ly.html">Pháp lý dự án</a><br><a href="can-ho-sun-da-nang.html">Căn hộ Sun Đà Nẵng</a></div>
     <div class="legal">Website do đơn vị tư vấn độc lập xây dựng, không phải website chính thức của chủ đầu tư. Hình ảnh phối cảnh, mặt bằng mang tính minh họa; thông tin, giá bán mang tính tham khảo và theo công bố chính thức của chủ đầu tư tại từng thời điểm.</div>
   </div>
 </footer>
 
 <div class="fab" aria-label="Liên hệ nhanh">
-  <a class="fab-call" href="tel:{TEL}" aria-label="Gọi {TEL_TXT}">{PHONE_SVG}<span>{TEL_TXT}</span></a>
+  <a class="fab-call" href="tel:{TEL}" aria-label="Gọi tư vấn">{PHONE_SVG}</a>
   <a class="fab-zalo" href="{ZALO}" target="_blank" rel="noopener nofollow" aria-label="Chat Zalo {TEL_TXT}">Zalo</a>
   <button class="fab-chat" type="button" aria-label="Mở chat tư vấn" data-chat-open>{CHAT_SVG}<i class="dot"></i></button>
 </div>
@@ -440,7 +444,7 @@ def build_index():
          "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": n, "value": True} for n in ("Hồ bơi", "Jjimjilbang & Spa", "Gym", "Golf mô phỏng", "Khu trẻ em", "Thư viện", "Sinh hoạt cộng đồng", "Shophouse thương mại", "Hầm để xe")]},
         faq_ld(FAQ_INDEX),
     ]
-    h = head("index", "Cora Tower Đà Nẵng – Bảng giá, mặt bằng căn hộ, shophouse, duplex | Hotline 0904 567 009",
+    h = head("index", "Cora Tower Đà Nẵng – Căn hộ Sun Group vòng xoay 29/3 | Bảng giá, mặt bằng 2026",
              "Cora Tower (Sun Group) – 2 tòa A1, A2 cao 25 tầng tại vòng xoay 29/3 – Nguyễn Phước Lan, Hòa Xuân. Căn 1PN+ tầng 15 từ ~3,1 tỷ, mặt bằng 28 căn/sàn, shophouse khối đế, duplex tầng 25. Gọi 0904 567 009.",
              "Cora Tower, Sun Cora Tower, Cora Tower Đà Nẵng, giá Cora Tower, mặt bằng Cora Tower, căn hộ 1PN+ Cora Tower, shophouse Cora Tower, duplex Cora Tower, căn hộ 29/3 Hòa Xuân",
              "og-cora-tower.jpg", "Phối cảnh Cora Tower Đà Nẵng", "rTwin", graph)
@@ -587,6 +591,24 @@ def build_index():
     </div>
   </section>
 
+  <section id="chinh-sach">
+    <div class="wrap">
+      <div class="center reveal"><span class="kicker">Chính sách bán hàng</span><h2>Chính sách căn hộ Cora Tower tòa A1 – A2</h2>
+        <p class="sub">Chính sách ưu đãi CSƯĐ 06.1 áp dụng từ 21/08/2026 đến khi có chính sách mới. Ví dụ: căn studio 30,2 m² tòa A2 niêm yết khoảng 2,11 tỷ, còn khoảng 1,86 tỷ khi áp dụng chiết khấu 7% + 5% không vay*.</p></div>
+      <div class="policy reveal">
+        <div><b>7%</b><span>Chiết khấu “Đặc quyền hoàn thiện nội thất”</span></div>
+        <div><b>5%</b><span>Chiết khấu không vay</span></div>
+        <div><b>40</b><span>tháng giãn tiến độ (70% – 30%) khi không vay</span></div>
+        <div><b>70%</b><span>Sun Early Key – nhận nhà dự kiến 31/10/2027</span></div>
+        <div><b>70%</b><span>vay tối đa, hỗ trợ lãi suất đến 24 tháng</span></div>
+        <div><b>8%</b><span>/năm ưu đãi cho khoản thanh toán sớm</span></div>
+        <div><b>1</b><span>năm miễn phí dịch vụ quản lý</span></div>
+        <div><b>100tr</b><span>đặt cọc ký HĐTHNV (3PN 150tr, penthouse 300tr)</span></div>
+      </div>
+      <p class="note">* Giá đã gồm VAT và kinh phí bảo trì, tạm tính. Hỗ trợ lãi suất tính từ ngày giải ngân đầu tiên, không muộn hơn 30/09/2028; ưu đãi thanh toán sớm không áp dụng đồng thời với hỗ trợ lãi suất. Khách mua mới còn được tích điểm chương trình Sun Signature của Sun Group. Chủ đầu tư có quyền thay đổi chính sách; liên hệ để nhận phiếu tính giá từng căn.</p>
+    </div>
+  </section>
+
   <section class="alt" id="gia">
     <div class="wrap">
       <div class="center reveal">
@@ -730,6 +752,8 @@ def build_index():
     </div>
   </section>
 
+  {INDEX_ARTICLE}
+
   {faq_section("Câu hỏi thường gặp về Cora Tower", FAQ_INDEX)}
 
   {lead_section("Nhận bảng giá &amp; mặt bằng Cora Tower", "Để lại thông tin, chuyên viên gửi bảng giá các tầng, chính sách và giỏ hàng căn đẹp mới nhất qua Zalo.")}
@@ -747,7 +771,7 @@ def build_shop():
          "image": [f"{D}{src('sr06')}", f"{D}{src('sr01')}", f"{D}{src('shop')}", f"{D}{src('a1a2')}", f"{D}{src('struct')}", f"{D}{src('shA1')}", f"{D}{src('shA2')}"], "brand": {"@type": "Brand", "name": "Cora Tower"}},
         crumbs("Shophouse khối đế", url), faq_ld(FAQ_SHOP),
     ]
-    h = head("khoi-de-shophouse", "Shophouse khối đế Cora Tower Đà Nẵng – Mặt tiền vòng xoay 29/3 | 0904 567 009",
+    h = head("khoi-de-shophouse", "Shophouse Cora Tower – Shop khối đế Sun Group Đà Nẵng, sở hữu lâu dài, trần 7m",
              "Shophouse khối đế Cora Tower (Sun Group) tầng 1, mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan, Hòa Xuân. Kính kịch trần, pháp lý đầy đủ, giá 4,96 – 6,04 tỷ/căn (43 – 61,5 m²). Gọi 0904 567 009.",
              "shophouse Cora Tower, khối đế Cora Tower, shophouse khối đế Đà Nẵng, shophouse Hòa Xuân, shophouse 29/3, shophouse Sun Neo City",
              "og-shophouse.jpg", "Khối đế shophouse Cora Tower", "sr06", graph)
@@ -808,6 +832,47 @@ def build_shop():
     </div>
   </section>
 
+  <section id="chinh-sach-shop">
+    <div class="wrap">
+      <div class="center reveal"><span class="kicker">Chính sách bán hàng</span><h2>Chính sách shophouse khối đế Cora Tower</h2>
+        <p class="sub">Nhiều tầng ưu đãi cộng dồn theo phương án thanh toán – vốn ban đầu nhẹ, nhận shop sớm để kinh doanh.</p></div>
+      <div class="policy reveal">
+        <div><b>3%</b><span>Chiết khấu Early Bird</span></div>
+        <div><b>4%</b><span>Quà tặng hỗ trợ hoàn thiện nội thất kinh doanh</span></div>
+        <div><b>5%</b><span>Chiết khấu không vay</span></div>
+        <div><b>70%</b><span>Sun Early Key – thanh toán 70% nhận nhà</span></div>
+        <div><b>24</b><span>tháng hỗ trợ lãi suất (vay tối đa 70%)</span></div>
+        <div><b>40</b><span>tháng tiến độ thanh toán</span></div>
+        <div class="dim"><b>9%</b><span>Chiết khấu thanh toán sớm 95%*</span></div>
+        <div class="dim"><b>3%</b><span>Chiết khấu thanh toán sớm 70%*</span></div>
+      </div>
+      <p class="note">* Hai mức chiết khấu thanh toán sớm áp dụng chậm nhất đến 25/08/2026 theo thông báo của chủ đầu tư – liên hệ {TEL_TXT} để nhận chính sách đang áp dụng. Các ưu đãi áp dụng theo điều kiện của từng đợt bán hàng.</p>
+    </div>
+  </section>
+
+  <section class="alt" id="tinh-dong-tien">
+    <div class="wrap split">
+      <div class="reveal">
+        <span class="kicker">Công cụ</span>
+        <h2>Ước tính dòng tiền shophouse</h2>
+        <p class="sub">Nhập giá căn, tỷ lệ vay và giá thuê anh/chị khảo sát được để xem vốn tự có và tỷ suất cho thuê. Kết quả chỉ mang tính tham khảo.</p>
+        <form class="calc" onsubmit="return false">
+          <label>Giá căn (tỷ đồng)<input type="number" step="0.01" min="1" id="c-price" value="5.2"></label>
+          <label>Tỷ lệ vay (%)<input type="number" step="5" min="0" max="70" id="c-loan" value="70"></label>
+          <label>Giá thuê dự kiến (triệu/tháng)<input type="number" step="1" min="0" id="c-rent" value="35"></label>
+        </form>
+      </div>
+      <div class="calc-out reveal" aria-live="polite">
+        <div><span>Vốn tự có ban đầu</span><b id="o-own">–</b></div>
+        <div><span>Khoản vay (HTLS 0% 24 tháng)</span><b id="o-loan">–</b></div>
+        <div><span>Tiền thuê một năm</span><b id="o-year">–</b></div>
+        <div><span>Tỷ suất thuê trên giá mua</span><b id="o-yield">–</b></div>
+        <div class="hl"><span>Tỷ suất trên vốn tự có (trong thời gian HTLS)</span><b id="o-roe">–</b></div>
+        <small>Giá thuê 35 triệu/tháng là mức thấp trong khoảng 35–100 triệu/tháng mà báo chí dẫn lời một số chủ shophouse khu Nam trung tâm Đà Nẵng – không phải cam kết. Chưa tính thuế, phí quản lý và thời gian trống.</small>
+      </div>
+    </div>
+  </section>
+
   <section class="alt" id="phoi-canh-shop">
     <div class="wrap">
       <div class="center reveal"><span class="kicker">Phối cảnh</span><h2>Phối cảnh shophouse khối đế</h2>
@@ -854,6 +919,8 @@ def build_shop():
     </div>
   </section>
 
+  {SHOP_ARTICLE}
+
   {faq_section("Hỏi đáp về shophouse khối đế Cora Tower", FAQ_SHOP, '<p class="center" style="margin-top:20px">Xem thêm: <a href="./">Tổng quan dự án Cora Tower</a> · <a href="penthouse.html">Duplex – Penthouse Cora Tower</a></p>')}
 
   {lead_section("Nhận giỏ hàng shophouse khối đế", "Nhận mặt bằng, diện tích, giá từng căn và chính sách thanh toán mới nhất.", "Shophouse khối đế", "Nhận giỏ hàng")}
@@ -873,7 +940,7 @@ def build_ph():
          "address": {"@type": "PostalAddress", "streetAddress": "Vòng xoay đường 29/3 – Nguyễn Phước Lan, KĐT Nam Hòa Xuân", "addressLocality": "Đà Nẵng", "addressCountry": "VN"}},
         crumbs("Duplex – Penthouse", url), faq_ld(FAQ_PH),
     ]
-    h = head("penthouse", "Penthouse – Duplex Cora Tower Đà Nẵng tầng 25 | Hotline 0904 567 009",
+    h = head("penthouse", "Penthouse Cora Tower – Duplex trần 7m tầng 25, view sông Hàn | Sun Group Đà Nẵng",
              "Căn duplex – penthouse tầng 25 Cora Tower (Sun Group) trong khối mái biểu tượng, thông tầng, sân vườn trên cao, view sông và thành phố Đà Nẵng. Số lượng giới hạn – gọi 0904 567 009.",
              "penthouse Cora Tower, duplex Cora Tower, căn hộ tầng 25 Cora Tower, penthouse Đà Nẵng, penthouse Hòa Xuân, duplex Đà Nẵng",
              "og-penthouse.jpg", "Không gian sân vườn duplex penthouse Cora Tower", "rBridge", graph)
@@ -969,6 +1036,8 @@ def build_ph():
       </div>
     </div>
   </section>
+
+  {PH_ARTICLE}
 
   {faq_section("Hỏi đáp về duplex – penthouse Cora Tower", FAQ_PH, '<p class="center" style="margin-top:20px">Xem thêm: <a href="./">Tổng quan dự án Cora Tower</a> · <a href="khoi-de-shophouse.html">Shophouse khối đế Cora Tower</a></p>')}
 
@@ -1066,9 +1135,42 @@ def build_legal():
     return h + "\n<body>\n" + body + "\n" + FOOTER + "\n</body>\n</html>\n"
 
 
+def build_sun():
+    url = f"{D}can-ho-sun-da-nang.html"
+    graph = [{"@type": "Article", "headline": "Căn hộ Sun Đà Nẵng: so sánh Cora Tower, Spana, S-Light và kinh nghiệm chọn mua",
+              "image": [f"{D}{src('aHan')}"], "inLanguage": "vi", "dateModified": "2026-10-07",
+              "author": {"@id": f"{D}#agent"}, "publisher": {"@id": f"{D}#agent"}, "mainEntityOfPage": url},
+             crumbs("Căn hộ Sun Đà Nẵng", url), faq_ld(SUN_FAQ)]
+    h = head("can-ho-sun-da-nang", "Căn hộ Sun Đà Nẵng 2026 – So sánh Cora Tower, Spana, S-Light | Giá, pháp lý",
+             "Tổng hợp căn hộ Sun Group Đà Nẵng tại Sun Neo City Hòa Xuân: so sánh Cora Tower, Spana Tower, S-Light Tower, giá 1PN+ từ ~3,1 tỷ, vay 70%, pháp lý đủ điều kiện bán. Gọi 0904 567 009.",
+             "căn hộ Sun Đà Nẵng, căn hộ Sun Group Đà Nẵng, Sun Neo City, chung cư Sun Hòa Xuân, Cora Tower, Spana Tower, S-Light Tower",
+             "og-cora-tower.jpg", "Căn hộ Sun Group Đà Nẵng", "aHan", graph)
+    body = f"""{header("sun", "Nhận bảng giá")}
+
+<main>
+  <section class="hero hero-sm">
+    {pic("aHan", "100vw", eager=True, cls="hero-bg")}
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="breadcrumb"><a href="./">Cora Tower</a> › Căn hộ Sun Đà Nẵng</nav>
+      <span class="eyebrow">Sun Neo City · Nam trung tâm Đà Nẵng</span>
+      <h1>Căn hộ Sun Đà Nẵng 2026: <em>chọn dự án nào</em> để ở và đầu tư?</h1>
+      <p class="lead">So sánh các tổ hợp căn hộ Sun Group tại Hòa Xuân, giá bán, pháp lý và kinh nghiệm chọn căn – cập nhật tháng 10/2026.</p>
+    </div>
+  </section>
+
+  {article("Cẩm nang", "Căn hộ Sun Group Đà Nẵng: tổng quan và so sánh", SUN_BODY, SUN_TOC, cls="")}
+
+  {faq_section("Hỏi đáp về căn hộ Sun Đà Nẵng", SUN_FAQ, '<p class="center" style="margin-top:20px">Xem thêm: <a href="./">Cora Tower</a> · <a href="khoi-de-shophouse.html">Shophouse Cora Tower</a> · <a href="penthouse.html">Penthouse Cora Tower</a></p>')}
+
+  {lead_section("Nhận bảng giá căn hộ Sun Đà Nẵng", "Chuyên viên gửi bảng giá, mặt bằng và chính sách mới nhất qua Zalo trong ít phút.")}
+</main>
+"""
+    return h + "\n<body>\n" + body + "\n" + FOOTER + "\n</body>\n</html>\n"
+
+
 def sitemap():
     pages = {"": ["rTwin", "aHan", "aSea", "aRiver", "rBridge", "rAxis", "rNear", "rCorner", "rRound", "rPod", "rPool", "rJjim", "vSun", "vRiver", "vHan", "vBan", "vKdt", "hero", "a1a2", "night", "aerial", "struct", "site", "siteAir", "planA1", "planA2", "g3A1", "g3A2", "unit1pn", "iso1pn", "int1pn", "cross", "land", "river", "pA10801", "pA10805", "pA10817", "pA20827", "pA10828", "pA10823", "amA1", "amA2"],
-             "khoi-de-shophouse.html": ["sr06", "shop", "a1a2", "struct", "shA1", "shA2", "mtA1", "mtA2"] + [f"sr{i:02d}" for i in range(1, 12) if i != 6], "penthouse.html": ["rBridge", "ph", "night", "struct", "ph25A1", "phL25A1", "ph25A2", "phL25A2"], "phap-ly.html": ["night"]}
+             "khoi-de-shophouse.html": ["sr06", "shop", "a1a2", "struct", "shA1", "shA2", "mtA1", "mtA2"] + [f"sr{i:02d}" for i in range(1, 12) if i != 6], "penthouse.html": ["rBridge", "ph", "night", "struct", "ph25A1", "phL25A1", "ph25A2", "phL25A2"], "phap-ly.html": ["night"], "can-ho-sun-da-nang.html": ["aHan"]}
     out = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">']
     for p, imgs in pages.items():
@@ -1083,5 +1185,6 @@ if __name__ == "__main__":
     (SITE / "khoi-de-shophouse.html").write_text(build_shop())
     (SITE / "penthouse.html").write_text(build_ph())
     (SITE / "phap-ly.html").write_text(build_legal())
+    (SITE / "can-ho-sun-da-nang.html").write_text(build_sun())
     (SITE / "sitemap.xml").write_text(sitemap())
     print("built", SITE)
