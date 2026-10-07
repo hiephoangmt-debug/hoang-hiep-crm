@@ -16,6 +16,6 @@ CRM – Real Estate Sales Management System
 - **Báo cáo tháng**: giống mẫu Excel (Chi phí cố định / phát sinh / Tổng cộng), xuất CSV, in PDF.
 - **Cài đặt**: danh mục, khoản cố định, sao lưu/khôi phục dữ liệu (.json).
 
-File Excel mẫu dùng độc lập (có công thức thống kê): `thu-chi/Thu-Chi-Me-Van-2026.xlsx`.
+File Excel dùng độc lập (kế hoạch tháng này & tháng tới, chi phí cố định, tiền còn, khoản nợ, thống kê): `thu-chi/Thu-Chi-Ke-Hoach-Me-Van.xlsx`.
 
 Dữ liệu lưu trên trình duyệt và **đồng bộ nhiều máy qua Google Sheets** – xem [`thu-chi/HUONG-DAN-DONG-BO.md`](thu-chi/HUONG-DAN-DONG-BO.md). Đã nạp sẵn dữ liệu tháng 8/2026.
