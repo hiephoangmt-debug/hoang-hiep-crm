@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tòa F2 Sun FourS Tower – Căn hộ Sun Group bên sông, vốn từ ~725 triệu</title>
+<meta name="description" content="Căn hộ Sun Group bên sông Cổ Cò, Đà Nẵng. Vay 70%, 24 tháng không lãi không gốc, vốn ban đầu ~725 triệu cho căn 2PN. Cách biển 2 km, 10 phút từ sân bay. Nhận nhà 2028.">
+<meta name="theme-color" content="#13285A">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:title" content="Căn hộ Sun Group bên sông – vốn ban đầu chỉ ~725 triệu">
+<meta property="og:description" content="Vay 70%, 24 tháng không lãi, không gốc. Cách biển 2 km, 10 phút từ sân bay. Nhận nhà 2028.">
+<meta property="og:image" content="anh-hero.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="anh-hero.jpg" fetchpriority="high">
+<style>
+:root{
+  --navy:#13285A; --navy-d:#0B1A3D; --gold:#F2B544; --gold-d:#D99A22;
+  --bg:#F5F7FB; --ink:#16213D; --muted:#4A5675; --line:#E2E7F1; --white:#fff;
+  --r:16px; --shadow:0 18px 40px -22px rgba(19,40,90,.45);
+  --serif:'Playfair Display',Georgia,serif; --sans:'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);font-size:16px;line-height:1.6;color:var(--ink);background:var(--bg);overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+.container{width:100%;max-width:1120px;margin:0 auto;padding:0 16px}
+section{padding:56px 0}
+h1,h2,h3{font-family:var(--serif);line-height:1.2;color:var(--navy)}
+h2{font-size:clamp(26px,6.4vw,40px);margin-bottom:12px}
+h3{font-size:20px}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-d);margin-bottom:10px}
+.lead{color:var(--muted);font-size:16.5px;max-width:640px}
+.center{text-align:center}.center .lead{margin:0 auto}
+.num{font-weight:700;color:var(--navy)}
+
+/* Ảnh: khung bo góc, nền chờ + tên file khi chưa có ảnh */
+.ph{position:relative;border-radius:var(--r);overflow:hidden;background:linear-gradient(135deg,#1d3a7a,#0b1a3d)}
+.ph::before{content:attr(data-file);position:absolute;inset:0;display:grid;place-items:center;color:rgba(255,255,255,.55);font-size:13px;letter-spacing:.04em}
+.ph img{position:relative;width:100%;height:100%;object-fit:cover}
+.ph.dim::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,26,61,.05) 30%,rgba(11,26,61,.78))}
+
+/* Nút */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:12px 22px;border-radius:12px;border:0;cursor:pointer;font-weight:700;font-size:16px;text-align:center;transition:transform .15s,box-shadow .15s,background .15s}
+.btn-gold{background:var(--gold);color:var(--navy-d);box-shadow:0 10px 24px -10px rgba(242,181,68,.9)}
+.btn-gold:hover{background:#F6C565;transform:translateY(-1px)}
+.btn-line{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.6);backdrop-filter:blur(4px)}
+.btn-line:hover{background:rgba(255,255,255,.2)}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-block{width:100%}
+
+/* 1. Thanh trên cùng */
+.topbar{position:sticky;top:0;z-index:60;background:var(--navy-d);color:#fff;font-size:13.5px;text-align:center;padding:9px 12px;line-height:1.4}
+.topbar b{color:var(--gold)}
+
+/* 2. Hero */
+.hero{position:relative;min-height:calc(100svh - 38px);display:flex;align-items:flex-end;color:#fff;padding:96px 0 32px}
+.hero-bg{position:absolute;inset:0;border-radius:0}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,26,61,.25) 0%,rgba(11,26,61,.35) 40%,rgba(11,26,61,.88) 100%)}
+.hero-in{position:relative;z-index:1}
+.hero .tag{display:inline-block;font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);margin-bottom:14px}
+.hero h1{color:#fff;font-size:clamp(32px,8.6vw,58px);max-width:760px;margin-bottom:14px}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p{font-size:17px;max-width:600px;opacity:.95;margin-bottom:22px}
+.hero-cta{display:grid;gap:10px;margin-bottom:22px}
+.hero-card{background:rgba(255,255,255,.96);color:var(--ink);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow);max-width:420px}
+.hero-card .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.hero-card .row:last-of-type{border-bottom:0}
+.hero-card .row b{font-family:var(--serif);font-size:22px;color:var(--navy);white-space:nowrap}
+.hero-card .row b.ok{color:#1F8A4C}
+.hero-card small{display:block;color:var(--muted);font-size:12.5px;margin-top:4px}
+.arrow{color:var(--gold-d);font-weight:700;margin-right:6px}
+
+/* 3. Dải niềm tin */
+.trust{background:var(--navy);color:#fff;padding:18px 0}
+.trust ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+.trust li{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.4}
+.trust svg{flex:none;margin-top:2px}
+.trust b{display:block;color:var(--gold);font-weight:600}
+
+/* 4. Lý do */
+.reasons{display:grid;gap:18px;margin-top:26px}
+.card{background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.card .ph{border-radius:0;aspect-ratio:4/3}
+.card .body{padding:18px}
+.card h3{margin-bottom:6px}
+.card p{color:var(--muted);font-size:15.5px}
+.badge{position:absolute;z-index:2;top:14px;left:14px;width:40px;height:40px;border-radius:12px;background:var(--gold);color:var(--navy-d);display:grid;place-items:center;font-weight:700;font-family:var(--serif);font-size:18px}
+
+/* 5. Cho thuê */
+.rent{background:#fff}
+.tenants{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.tenant .ph{aspect-ratio:1/1}
+.tenant .ph .cap{position:absolute;z-index:2;left:12px;right:12px;bottom:12px;color:#fff}
+.tenant .cap b{display:block;font-size:15.5px;line-height:1.3}
+.tenant .cap span{font-size:12.5px;opacity:.9}
+.rent-note{margin-top:18px;border:2px dashed #C9D2E6;border-radius:var(--r);padding:16px;color:var(--muted);font-size:15px;text-align:center;background:var(--bg)}
+.rent-note b{color:var(--navy)}
+
+/* 6. Dòng tiền */
+.calc{display:grid;gap:20px;margin-top:24px}
+.calc-box{background:#fff;border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
+.types{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.types button{min-height:56px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--navy);cursor:pointer;font-weight:700;font-size:14px;line-height:1.2;padding:6px 4px}
+.types button small{display:block;font-weight:500;font-size:12px;color:var(--muted)}
+.types button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.types button.on small{color:var(--gold)}
+.kpis{display:grid;gap:10px}
+.kpi{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 14px;border-radius:12px;background:var(--bg)}
+.kpi span{color:var(--muted);font-size:14.5px}
+.kpi b{font-family:var(--serif);font-size:22px;color:var(--navy);white-space:nowrap}
+.kpi.hl{background:var(--navy);}
+.kpi.hl span{color:rgba(255,255,255,.85)}.kpi.hl b{color:var(--gold);font-size:26px}
+.note{font-size:12.5px;color:var(--muted);margin-top:10px}
+.tl{list-style:none;position:relative;margin-top:6px}
+.tl li{position:relative;padding:0 0 18px 30px}
+.tl li::before{content:"";position:absolute;left:7px;top:22px;bottom:-2px;width:2px;background:var(--line)}
+.tl li:last-child::before{display:none}
+.tl li::after{content:"";position:absolute;left:0;top:5px;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--gold)}
+.tl li.fin::after{background:var(--gold)}
+.tl b{display:block;color:var(--navy)}
+.tl span{color:var(--muted);font-size:14.5px}
+.tl em{font-style:normal;font-weight:700;color:var(--navy)}
+.calc-img{aspect-ratio:4/3}
+
+/* 7. Hai phương án */
+.plans{display:grid;gap:18px;margin-top:24px}
+.plan .ph{aspect-ratio:16/9;border-radius:0}
+.plan .big{font-family:var(--serif);font-size:30px;color:var(--navy);line-height:1.15;margin:6px 0 10px}
+.plan .big s{font-size:18px;color:var(--muted);font-family:var(--sans);margin-left:6px}
+.plan ul{list-style:none;display:grid;gap:8px;margin-bottom:16px}
+.plan li{position:relative;padding-left:24px;font-size:15px;color:var(--muted)}
+.plan li::before{content:"";position:absolute;left:0;top:8px;width:12px;height:7px;border-left:2.5px solid var(--gold-d);border-bottom:2.5px solid var(--gold-d);transform:rotate(-45deg)}
+.plan .pill{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--bg);color:var(--navy);padding:5px 10px;border-radius:999px}
+.plan.alt .pill{background:var(--gold);color:var(--navy-d)}
+
+/* 8. Gallery */
+.gallery{background:var(--navy-d)}
+.gallery h2{color:#fff}.gallery .lead{color:rgba(255,255,255,.8)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
+.grid button{border:0;padding:0;cursor:zoom-in;background:none;border-radius:var(--r)}
+.grid .ph{aspect-ratio:1/1}
+.grid button:first-child{grid-column:1/-1}.grid button:first-child .ph{aspect-ratio:16/9}
+.grid button:last-child{grid-column:1/-1}.grid button:last-child .ph{aspect-ratio:16/9}
+.grid .cap{position:absolute;z-index:2;left:12px;bottom:10px;color:#fff;font-size:13.5px;font-weight:600}
+.lb{position:fixed;inset:0;z-index:100;background:rgba(5,12,30,.94);display:none;align-items:center;justify-content:center;padding:16px}
+.lb.on{display:flex}
+.lb img{max-height:84vh;width:auto;border-radius:var(--r)}
+.lb button{position:absolute;background:rgba(255,255,255,.14);color:#fff;border:0;width:48px;height:48px;border-radius:50%;font-size:26px;cursor:pointer}
+.lb .x{top:14px;right:14px}.lb .p{left:10px;top:50%;transform:translateY(-50%)}.lb .n{right:10px;top:50%;transform:translateY(-50%)}
+.lb p{position:absolute;bottom:16px;left:0;right:0;text-align:center;color:#fff;font-size:14px}
+
+/* 9. Pháp lý */
+.legal-wrap{display:grid;gap:20px;margin-top:24px}
+.legal-img{aspect-ratio:4/3}
+.qa{background:#fff;border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
+.qa+.qa{margin-top:12px}
+.qa h3{font-size:18px;display:flex;gap:10px;align-items:flex-start;margin-bottom:8px}
+.qa h3 i{flex:none;font-style:normal;width:28px;height:28px;border-radius:8px;background:var(--gold);color:var(--navy-d);display:grid;place-items:center;font-family:var(--sans);font-size:15px;font-weight:700}
+.qa p{color:var(--muted);font-size:15px}
+.qa .doc{display:inline-block;font-size:12.5px;font-weight:600;color:var(--navy);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:3px 8px;margin:4px 4px 0 0}
+
+/* 10. Vị trí */
+.loc{background:#fff}
+.loc-img{aspect-ratio:16/10;margin-top:24px}
+.dist{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.dist div{background:var(--bg);border-radius:var(--r);padding:14px;text-align:center}
+.dist b{display:block;font-family:var(--serif);font-size:30px;color:var(--navy);line-height:1.1}
+.dist span{font-size:14px;color:var(--muted)}
+.addr{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;color:var(--muted);font-size:15px}
+.addr a{color:var(--navy);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+
+/* 11. Sự kiện + form */
+.event{background:linear-gradient(160deg,var(--navy-d),var(--navy));color:#fff}
+.event h2{color:#fff}.event .eyebrow{color:var(--gold)}
+.event-wrap{display:grid;gap:22px}
+.event-img{aspect-ratio:16/10}
+.meta{display:grid;gap:8px;margin:14px 0 18px}
+.meta div{display:flex;gap:10px;align-items:center;font-size:15.5px}
+.meta i{font-style:normal;width:34px;height:34px;flex:none;border-radius:10px;background:rgba(255,255,255,.1);display:grid;place-items:center}
+.fill{color:var(--gold);font-weight:600}
+.perks{list-style:none;display:grid;gap:8px;margin-bottom:6px}
+.perks li{position:relative;padding-left:26px;font-size:15.5px;opacity:.95}
+.perks li::before{content:"";position:absolute;left:0;top:7px;width:14px;height:8px;border-left:2.5px solid var(--gold);border-bottom:2.5px solid var(--gold);transform:rotate(-45deg)}
+.form{background:#fff;color:var(--ink);border-radius:var(--r);padding:20px;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.form h3{margin-bottom:4px}
+.form .sub{color:var(--muted);font-size:14px;margin-bottom:14px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:13.5px;font-weight:600;color:var(--navy);margin-bottom:5px}
+.field input,.field select{width:100%;min-height:50px;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font-size:16px}
+.field input:focus,.field select:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(19,40,90,.12)}
+.field.err input{border-color:#C0392B}
+.field .msg{display:none;color:#C0392B;font-size:13px;margin-top:4px}
+.field.err .msg{display:block}
+.privacy{font-size:12.5px;color:var(--muted);text-align:center;margin-top:10px}
+.thanks{display:none;text-align:center;padding:12px 4px}
+.thanks.on{display:block}
+.thanks .ok{width:58px;height:58px;border-radius:50%;background:#E8F6EE;color:#1F8A4C;display:grid;place-items:center;margin:0 auto 12px;font-size:30px}
+.thanks p{color:var(--muted);font-size:15px;margin:6px 0 16px}
+
+/* Popup nhận bảng tính */
+.modal{position:fixed;inset:0;z-index:90;background:rgba(5,12,30,.6);display:none;align-items:flex-end;justify-content:center}
+.modal.on{display:flex}
+.modal .form{width:100%;max-width:440px;border-radius:20px 20px 0 0;position:relative;animation:up .25s ease-out}
+.modal .close{position:absolute;top:8px;right:10px;width:44px;height:44px;border:0;background:none;font-size:28px;color:var(--muted);cursor:pointer}
+@keyframes up{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+
+/* 12. Footer */
+footer{background:var(--navy-d);color:rgba(255,255,255,.8);padding:32px 0 100px;font-size:14px}
+footer p+p{margin-top:8px}
+footer a{color:var(--gold);font-weight:600}
+
+/* Thanh CTA dính đáy (điện thoại) */
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:grid;grid-template-columns:1fr 1.3fr;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);box-shadow:0 -8px 24px -12px rgba(19,40,90,.4)}
+.mbar .btn{min-height:50px;font-size:15.5px}
+.mbar .zalo{background:#0068FF;color:#fff}
+
+@media (min-width:720px){
+  section{padding:88px 0}
+  .hero{align-items:center;padding:120px 0 64px}
+  .hero-in{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:end}
+  .hero-cta{display:flex;flex-wrap:wrap;margin-bottom:0}
+  .trust ul{grid-template-columns:repeat(4,1fr)}
+  .reasons{grid-template-columns:1fr 1fr}
+  .tenants{grid-template-columns:repeat(4,1fr)}
+  .calc{grid-template-columns:1.1fr .9fr;align-items:start}
+  .calc-img{aspect-ratio:3/4;position:sticky;top:60px}
+  .plans{grid-template-columns:1fr 1fr}
+  .grid{grid-template-columns:repeat(3,1fr)}
+  .grid button:last-child{grid-column:auto}.grid button:last-child .ph{aspect-ratio:1/1}
+  .grid button:first-child{grid-column:span 2;grid-row:span 2}.grid button:first-child .ph{aspect-ratio:auto;height:100%}
+  .legal-wrap{grid-template-columns:.9fr 1.1fr;align-items:start}
+  .legal-img{aspect-ratio:3/4;position:sticky;top:60px}
+  .dist{grid-template-columns:repeat(4,1fr)}
+  .event-wrap{grid-template-columns:1fr 1fr;align-items:start}
+  .modal{align-items:center}.modal .form{border-radius:20px}
+  .mbar{display:none}
+  footer{padding-bottom:40px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.modal .form{animation:none}}
+</style>
+</head>
+<body>
+
+<!-- 1. Thanh ưu đãi -->
+<div class="topbar" id="topbar">Ưu đãi chiết khấu tới <b>19%</b> kết thúc 25/10 – còn <b id="daysLeft">…</b> ngày</div>
+
+<!-- 2. Hero -->
+<header class="hero" id="top">
+  <div class="hero-bg ph" data-file="anh-hero.jpg"><img src="anh-hero.jpg" alt="Hoàng hôn trên sông Cổ Cò nhìn về Tòa F2 Sun FourS Tower, Đà Nẵng" fetchpriority="high" decoding="async"></div>
+  <div class="container hero-in">
+    <div>
+      <span class="tag">Tòa F2 · Sun FourS Tower · Đà Nẵng</span>
+      <h1>Căn hộ Sun Group bên sông – vốn ban đầu chỉ <em>~725 triệu</em></h1>
+      <p>Vay 70%, 24 tháng không lãi, không gốc. Cách biển 2 km, 10 phút từ sân bay. Nhận nhà 2028.</p>
+      <div class="hero-cta">
+        <button class="btn btn-gold" type="button" data-open="calc">Nhận bảng tính &amp; giỏ căn đẹp</button>
+        <a class="btn btn-line" href="#su-kien">Giữ chỗ sự kiện 18/10</a>
+      </div>
+    </div>
+    <div class="hero-card" aria-label="Ví dụ căn 2 phòng ngủ">
+      <div class="row"><span>Căn 2PN</span><b>~2,9 tỷ</b></div>
+      <div class="row"><span><span class="arrow">→</span>Trả đến khi nhận nhà</span><b>~725 triệu</b></div>
+      <div class="row"><span><span class="arrow">→</span>Lãi 24 tháng đầu</span><b class="ok">0 đồng</b></div>
+      <small>Vay 70% ngân hàng do chủ đầu tư chỉ định · chủ đầu tư hỗ trợ lãi suất, ân hạn gốc 24 tháng.</small>
+    </div>
+  </div>
+</header>
+
+<!-- 3. Dải niềm tin -->
+<div class="trust">
+  <div class="container">
+    <ul>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2B544" stroke-width="2.6" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg><span><b>Sun Group</b>Chủ đầu tư Bà Nà Hills, InterContinental Sun Peninsula</span></li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2B544" stroke-width="2.6" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg><span><b>Đủ điều kiện bán</b>607 căn – VB 17239/SXD-QLN</span></li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2B544" stroke-width="2.6" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg><span><b>Bảo lãnh Techcombank</b>Cho người mua</span></li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2B544" stroke-width="2.6" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg><span><b>Đã nghiệm thu móng hầm</b>Khởi công 21/07/2026</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- 4. Lý do -->
+<section id="ly-do">
+  <div class="container">
+    <span class="eyebrow">4 lý do chọn Tòa F2</span>
+    <h2>Vốn vừa phải. Vị trí đúng. View đẹp.</h2>
+    <div class="reasons">
+      <article class="card">
+        <div class="ph dim" data-file="anh-noi-that.jpg"><span class="badge">1</span><img src="anh-noi-that.jpg" alt="Nội thất căn hộ mẫu Tòa F2" loading="lazy" decoding="async"></div>
+        <div class="body"><h3>Vốn ít</h3><p>Chỉ <span class="num">25%</span> đến khi nhận nhà. Ngân hàng cho vay 70%, <span class="num">24 tháng</span> không lãi, không gốc.</p></div>
+      </article>
+      <article class="card">
+        <div class="ph dim" data-file="anh-bien.jpg"><span class="badge">2</span><img src="anh-bien.jpg" alt="Biển Sơn Thủy, cách dự án khoảng 2 km" loading="lazy" decoding="async"></div>
+        <div class="body"><h3>Tiềm năng cho thuê</h3><p>Gần biển, sân bay, FPT City, Làng Đại học. Nguồn khách thuê đa dạng quanh năm.</p></div>
+      </article>
+      <article class="card">
+        <div class="ph dim" data-file="anh-tong-the.jpg"><span class="badge">3</span><img src="anh-tong-the.jpg" alt="Phối cảnh tổng thể đại đô thị Sun Riverpolis" loading="lazy" decoding="async"></div>
+        <div class="body"><h3>Vị trí kết nối</h3><p>Lõi đại đô thị Sun Riverpolis <span class="num">~500 ha</span>. <span class="num">10 phút</span> sân bay, <span class="num">5 phút</span> AEON Mall.</p></div>
+      </article>
+      <article class="card">
+        <div class="ph dim" data-file="anh-view-song.jpg"><span class="badge">4</span><img src="anh-view-song.jpg" alt="View sông Cổ Cò từ căn hộ Tòa F2" loading="lazy" decoding="async"></div>
+        <div class="body"><h3>View đẹp</h3><p>Bên sông Cổ Cò. Công viên ven sông <span class="num">50 ha</span>. <span class="num">8 phút</span> tới điểm bắn pháo hoa DIFF.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Tiềm năng cho thuê -->
+<section class="rent" id="cho-thue">
+  <div class="container">
+    <span class="eyebrow">Tiềm năng cho thuê</span>
+    <h2>4 nhóm khách thuê quanh năm</h2>
+    <p class="lead">Mỗi nhóm có nhu cầu riêng. Căn nhỏ, gần biển, gần sân bay phục vụ được cả bốn.</p>
+    <div class="tenants">
+      <div class="tenant"><div class="ph dim" data-file="anh-bien.jpg"><img src="anh-bien.jpg" alt="Du khách nghỉ biển Đà Nẵng" loading="lazy" decoding="async"><div class="cap"><b>Du khách nghỉ biển</b><span>Biển Sơn Thủy 5 phút</span></div></div></div>
+      <div class="tenant"><div class="ph dim" data-file="anh-noi-that.jpg"><img src="anh-noi-that.jpg" alt="Căn hộ cho khách công tác" loading="lazy" decoding="async"><div class="cap"><b>Khách công tác bay đến</b><span>Sân bay 10 phút</span></div></div></div>
+      <div class="tenant"><div class="ph dim" data-file="anh-tong-the.jpg"><img src="anh-tong-the.jpg" alt="Khu đô thị gần khu công nghệ" loading="lazy" decoding="async"><div class="cap"><b>Chuyên gia, kỹ sư</b><span>Gần FPT City</span></div></div></div>
+      <div class="tenant"><div class="ph dim" data-file="anh-cong-vien.jpg"><img src="anh-cong-vien.jpg" alt="Công viên ven sông gần Làng Đại học" loading="lazy" decoding="async"><div class="cap"><b>Giảng viên, sinh viên</b><span>Làng Đại học, FPT City</span></div></div></div>
+    </div>
+    <div class="rent-note"><b>[Giá thuê tham khảo khu vực]</b><br>Nhận bảng giá thuê tham khảo qua Zalo cùng bảng tính dòng tiền.</div>
+  </div>
+</section>
+
+<!-- 6. Bài toán dòng tiền -->
+<section id="dong-tien">
+  <div class="container">
+    <span class="eyebrow">Bài toán dòng tiền</span>
+    <h2>Chọn loại căn – xem ngay vốn cần có</h2>
+    <div class="calc">
+      <div class="calc-box">
+        <div class="types" role="group" aria-label="Chọn loại căn">
+          <button type="button" data-p="1980" data-c="100">Studio<small>1,98 tỷ</small></button>
+          <button type="button" data-p="2220" data-c="100">1PN<small>2,22 tỷ</small></button>
+          <button type="button" data-p="2900" data-c="100" class="on">2PN<small>2,9 tỷ</small></button>
+          <button type="button" data-p="5910" data-c="150">3PN<small>5,91 tỷ</small></button>
+        </div>
+        <div class="kpis" aria-live="polite">
+          <div class="kpi hl"><span>Vốn tự có (25%)</span><b id="kOwn">725 triệu</b></div>
+          <div class="kpi"><span>Ngân hàng cho vay (70%)</span><b id="kLoan">2,03 tỷ</b></div>
+          <div class="kpi"><span>Lãi được hỗ trợ 24 tháng*</span><b id="kInt">~325 triệu</b></div>
+        </div>
+        <p class="note">* Ước tính = khoản vay × 8%/năm × 2 năm. Lãi suất 8%/năm là giả định để minh họa; lãi thực tế theo ngân hàng tại thời điểm vay.</p>
+        <h3 style="margin:20px 0 12px">Lịch thanh toán</h3>
+        <ol class="tl">
+          <li><b>Ngày ký</b><span>Đặt cọc <em id="tDep">100 triệu</em></span></li>
+          <li><b>Ngày 15</b><span>Bổ sung đủ 15% – thêm <em id="t15">335 triệu</em></span></li>
+          <li><b>Ngày 105</b><span>Thanh toán thêm 10% – <em id="t105">290 triệu</em></span></li>
+          <li><b>24 tháng tiếp theo</b><span>Không lãi, không gốc – ngân hàng giải ngân 70%</span></li>
+          <li class="fin"><b>31/05/2028</b><span>Nhận nhà dự kiến</span></li>
+        </ol>
+        <button class="btn btn-gold btn-block" type="button" data-open="calc">Nhận bảng tính chi tiết qua Zalo</button>
+      </div>
+      <div class="ph calc-img" data-file="anh-noi-that.jpg"><img src="anh-noi-that.jpg" alt="Không gian sống căn hộ Tòa F2" loading="lazy" decoding="async"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Hai phương án -->
+<section style="background:#fff" id="phuong-an">
+  <div class="container center">
+    <span class="eyebrow">Hai phương án</span>
+    <h2>Chọn cách thanh toán hợp với anh/chị</h2>
+  </div>
+  <div class="container plans">
+    <article class="card plan">
+      <div class="ph" data-file="anh-noi-that.jpg"><img src="anh-noi-that.jpg" alt="Căn hộ 2 phòng ngủ Tòa F2" loading="lazy" decoding="async"></div>
+      <div class="body">
+        <span class="pill">Vốn ít – vay 70%</span>
+        <p class="big">~725 triệu</p>
+        <ul>
+          <li>Căn 2PN ~2,9 tỷ: chỉ trả ~725 triệu đến khi nhận nhà</li>
+          <li>Ngân hàng cho vay 70%</li>
+          <li>24 tháng không lãi, không gốc</li>
+          <li>Miễn phí trả nợ trước hạn trong thời gian hỗ trợ</li>
+        </ul>
+        <button class="btn btn-navy btn-block" type="button" data-open="calc" data-need="Vốn ít – vay 70%">Nhận lịch vay căn của tôi</button>
+      </div>
+    </article>
+    <article class="card plan alt">
+      <div class="ph" data-file="anh-view-song.jpg"><img src="anh-view-song.jpg" alt="View sông Cổ Cò" loading="lazy" decoding="async"></div>
+      <div class="body">
+        <span class="pill">Thanh toán nhanh</span>
+        <p class="big">~2,7 tỷ <s>~2,9 tỷ</s></p>
+        <ul>
+          <li>Chiết khấu cộng dồn tới 19%</li>
+          <li>Lãi 8%/năm cho phần trả trước hạn</li>
+          <li>Chỉ áp dụng trước 25/10/2026</li>
+        </ul>
+        <button class="btn btn-gold btn-block" type="button" data-open="calc" data-need="Thanh toán nhanh">Tính số tiền tôi tiết kiệm</button>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- 8. Gallery -->
+<section class="gallery" id="hinh-anh">
+  <div class="container">
+    <span class="eyebrow">Hình ảnh dự án</span>
+    <h2>Xem Tòa F2 từ mọi góc</h2>
+    <p class="lead">Bấm vào ảnh để phóng to.</p>
+    <div class="grid" id="grid">
+      <button type="button"><div class="ph dim" data-file="anh-tong-the.jpg"><img src="anh-tong-the.jpg" alt="Phối cảnh tổng thể" loading="lazy" decoding="async"><span class="cap">Phối cảnh tổng thể</span></div></button>
+      <button type="button"><div class="ph dim" data-file="anh-view-song.jpg"><img src="anh-view-song.jpg" alt="View sông Cổ Cò" loading="lazy" decoding="async"><span class="cap">View sông Cổ Cò</span></div></button>
+      <button type="button"><div class="ph dim" data-file="anh-phao-hoa.jpg"><img src="anh-phao-hoa.jpg" alt="Pháo hoa DIFF" loading="lazy" decoding="async"><span class="cap">Pháo hoa DIFF</span></div></button>
+      <button type="button"><div class="ph dim" data-file="anh-bien.jpg"><img src="anh-bien.jpg" alt="Biển Sơn Thủy" loading="lazy" decoding="async"><span class="cap">Biển Sơn Thủy</span></div></button>
+      <button type="button"><div class="ph dim" data-file="anh-noi-that.jpg"><img src="anh-noi-that.jpg" alt="Nội thất căn hộ" loading="lazy" decoding="async"><span class="cap">Nội thất căn hộ</span></div></button>
+      <button type="button"><div class="ph dim" data-file="anh-cong-truong.jpg"><img src="anh-cong-truong.jpg" alt="Công trường Tòa F2" loading="lazy" decoding="async"><span class="cap">Công trường thực tế</span></div></button>
+    </div>
+  </div>
+</section>
+
+<!-- 9. An tâm pháp lý -->
+<section id="phap-ly">
+  <div class="container">
+    <span class="eyebrow">An tâm pháp lý</span>
+    <h2>3 câu hỏi khách hay hỏi</h2>
+    <div class="legal-wrap">
+      <div class="ph legal-img" data-file="anh-cong-truong.jpg"><img src="anh-cong-truong.jpg" alt="Công trường Tòa F2 đã nghiệm thu móng hầm" loading="lazy" decoding="async"></div>
+      <div>
+        <div class="qa"><h3><i>1</i>Chưa xem dự án?</h3><p>Gọi video Zalo đi thực tế công trường. Nhận bản scan pháp lý. Gặp trực tiếp đội dự án tại sự kiện.</p></div>
+        <div class="qa"><h3><i>2</i>Dự án chậm thì sao?</h3><p>Techcombank bảo lãnh cho người mua. Chủ đầu tư thu tối đa 70% trước bàn giao. 5% cuối nộp vào tài khoản đảm bảo cấp sổ.</p></div>
+        <div class="qa"><h3><i>3</i>Pháp lý thế nào?</h3><p>607 căn đủ điều kiện bán. Lô đất có sổ. Hợp đồng mẫu đã đăng ký Sở Công Thương. Khởi công 21/07/2026, đã nghiệm thu móng hầm.</p>
+          <span class="doc">VB 17239/SXD-QLN</span><span class="doc">GCN CP 912579</span><span class="doc">1738/TB-SCT</span></div>
+        <a class="btn btn-navy btn-block" style="margin-top:14px" href="https://zalo.me/0904567009" target="_blank" rel="noopener" data-zalo>Nhận bản scan pháp lý qua Zalo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. Vị trí -->
+<section class="loc" id="vi-tri">
+  <div class="container">
+    <span class="eyebrow">Vị trí</span>
+    <h2>Giữa sông và biển, sát sân bay</h2>
+    <div class="ph loc-img" data-file="anh-tong-the.jpg"><img src="anh-tong-the.jpg" alt="Vị trí Tòa F2 trong đại đô thị Sun Riverpolis" loading="lazy" decoding="async"></div>
+    <div class="dist">
+      <div><b>5'</b><span>Biển Sơn Thủy</span></div>
+      <div><b>10'</b><span>Sân bay Đà Nẵng</span></div>
+      <div><b>8'</b><span>Pháo hoa DIFF</span></div>
+      <div><b>5'</b><span>AEON Mall</span></div>
+    </div>
+    <p class="addr"><span>📍 Ngã tư Nguyễn Phước Lan – Minh Mạng, phường Ngũ Hành Sơn, Đà Nẵng</span><a href="https://maps.app.goo.gl/yy5cwvUcBVJZqtSF9" target="_blank" rel="noopener">Xem bản đồ ↗</a></p>
+  </div>
+</section>
+
+<!-- 11. Sự kiện + form -->
+<section class="event" id="su-kien">
+  <div class="container event-wrap">
+    <div>
+      <span class="eyebrow">Sự kiện</span>
+      <h2>Sự kiện giới thiệu Tòa F2</h2>
+      <div class="meta">
+        <div><i aria-hidden="true">📅</i><span>Chủ nhật 18/10/2026 · <span class="fill">[giờ]</span></span></div>
+        <div><i aria-hidden="true">📍</i><span class="fill">[địa điểm]</span></div>
+      </div>
+      <ul class="perks">
+        <li>Xem mặt bằng, chọn căn tại chỗ</li>
+        <li>Tính dòng tiền riêng cho căn anh/chị quan tâm</li>
+        <li>Hỏi trực tiếp đội dự án</li>
+        <li>Bốc thăm <span class="fill">[quà]</span></li>
+      </ul>
+      <div class="ph event-img" data-file="anh-phao-hoa.jpg" style="margin-top:18px"><img src="anh-phao-hoa.jpg" alt="Pháo hoa DIFF nhìn từ khu vực dự án" loading="lazy" decoding="async"></div>
+    </div>
+    <div class="form" id="eventForm">
+      <form novalidate data-interest="Giữ chỗ sự kiện 18/10 – Tòa F2">
+        <h3>Giữ chỗ sự kiện 18/10</h3>
+        <p class="sub">Số chỗ có hạn. Chuyên viên xác nhận qua Zalo.</p>
+        <div class="field"><label for="f-name">Họ tên</label><input id="f-name" name="name" autocomplete="name" placeholder="Nguyễn Văn A" required><p class="msg">Vui lòng nhập họ tên</p></div>
+        <div class="field"><label for="f-phone">SĐT Zalo</label><input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xx xxx xxx" required><p class="msg">Số điện thoại chưa đúng (10 số)</p></div>
+        <div class="field"><label for="f-need">Nhu cầu</label><select id="f-need" name="nhu_cau"><option>Vốn ít – vay 70%</option><option>Thanh toán nhanh</option><option>Mua để cho thuê</option></select></div>
+        <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
+        <button class="btn btn-gold btn-block" type="submit">Giữ chỗ ngay</button>
+        <p class="privacy">🔒 Thông tin chỉ dùng để tư vấn, không chia sẻ.</p>
+      </form>
+      <div class="thanks" role="status"><div class="ok">✓</div><h3>Cảm ơn anh/chị!</h3><p>Chuyên viên sẽ liên hệ qua Zalo trong 15 phút (giờ hành chính) để xác nhận.</p><a class="btn btn-navy btn-block" href="https://zalo.me/0904567009" target="_blank" rel="noopener" data-zalo>Nhắn Zalo ngay</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12. Footer -->
+<footer>
+  <div class="container">
+    <p>Trang thông tin do Giám đốc kinh doanh <b>Hoàng Phạm Đình Hiệp</b> cung cấp – Zalo/Hotline <a href="tel:0904567009">0904 567 009</a>.</p>
+    <p>Không phải website chính thức của chủ đầu tư. Hình ảnh mang tính minh họa; giá và chính sách theo quy định của chủ đầu tư tại thời điểm ký.</p>
+  </div>
+</footer>
+
+<!-- Thanh CTA dính đáy (điện thoại) -->
+<nav class="mbar" aria-label="Liên hệ nhanh">
+  <a class="btn zalo" href="https://zalo.me/0904567009" target="_blank" rel="noopener" data-zalo>Nhắn Zalo</a>
+  <a class="btn btn-gold" href="#su-kien">Giữ chỗ 18/10</a>
+</nav>
+
+<!-- Popup: nhận bảng tính & giỏ căn -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-title">
+  <div class="form">
+    <button class="close" type="button" aria-label="Đóng">×</button>
+    <form novalidate data-interest="Nhận bảng tính & giỏ căn đẹp – Tòa F2">
+      <h3 id="m-title">Nhận bảng tính &amp; giỏ căn đẹp</h3>
+      <p class="sub">Gửi qua Zalo: giá sau chiết khấu, lịch thanh toán theo ngày, căn view sông còn trống.</p>
+      <div class="field"><label for="m-name">Họ tên</label><input id="m-name" name="name" autocomplete="name" placeholder="Nguyễn Văn A" required><p class="msg">Vui lòng nhập họ tên</p></div>
+      <div class="field"><label for="m-phone">SĐT Zalo</label><input id="m-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xx xxx xxx" required><p class="msg">Số điện thoại chưa đúng (10 số)</p></div>
+      <div class="field"><label for="m-need">Nhu cầu</label><select id="m-need" name="nhu_cau"><option>Vốn ít – vay 70%</option><option>Thanh toán nhanh</option><option>Mua để cho thuê</option></select></div>
+      <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
+      <input type="hidden" name="loai_can" value="">
+      <button class="btn btn-gold btn-block" type="submit">Gửi bảng tính cho tôi</button>
+      <p class="privacy">🔒 Thông tin chỉ dùng để tư vấn, không chia sẻ.</p>
+    </form>
+    <div class="thanks" role="status"><div class="ok">✓</div><h3>Cảm ơn anh/chị!</h3><p>Bảng tính và giỏ căn sẽ được gửi qua Zalo trong 15 phút (giờ hành chính).</p><a class="btn btn-navy btn-block" href="https://zalo.me/0904567009" target="_blank" rel="noopener" data-zalo>Nhắn Zalo ngay</a></div>
+  </div>
+</div>
+
+<!-- Lightbox gallery -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Xem ảnh"><button class="x" type="button" aria-label="Đóng">×</button><button class="p" type="button" aria-label="Ảnh trước">‹</button><img alt=""><button class="n" type="button" aria-label="Ảnh sau">›</button><p></p></div>
+
+<script>
+(function () {
+'use strict';
+/* ===== CẤU HÌNH ===== */
+var CONFIG = {
+  fbPixelId: '',   // Dán Facebook Pixel ID (dãy số) vào đây
+  crm: 'https://script.google.com/macros/s/AKfycbzOsX6tHZmXEDAdVLZY__hrAeCVslIyG2eFpYZ2Q-lEptukacOW6r7VSvlButoyOrZY/exec?key=4ezop6bxuvicj8wykd2gl19t',
+  mail: 'https://formsubmit.co/ajax/hiephoangmt@gmail.com',
+  telegram: 'https://script.google.com/macros/s/AKfycbwvmG1HMtrQOeUXCuBJ6CHmMb4TcCZ53_n5lwPAt3-6-lG2_fIRX0q25Rv-6LPwVWXZHw/exec?key=sft-tg-4821',
+  deadline: '2026-10-25T23:59:59+07:00'
+};
+var $ = function (s, r) { return (r || document).querySelector(s); };
+var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+
+/* Facebook Pixel (chỉ chạy khi đã dán ID) */
+if (CONFIG.fbPixelId) {
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', CONFIG.fbPixelId); fbq('track', 'PageView');
+}
+var track = function (ev, p) { try { if (window.fbq) fbq('track', ev, p || {}); } catch (e) {} };
+
+/* Ảnh: tải lỗi thì ẩn ảnh, hiện tên file để biết cần thay */
+$$('.ph img').forEach(function (im) { im.addEventListener('error', function () { im.style.visibility = 'hidden'; }); });
+
+/* 1. Đếm ngược ưu đãi */
+(function () {
+  var left = Math.ceil((new Date(CONFIG.deadline).getTime() - Date.now()) / 864e5);
+  if (left > 0) $('#daysLeft').textContent = left;
+  else $('#topbar').innerHTML = 'Nhận chính sách bán hàng mới nhất Tòa F2 qua Zalo <b>0904 567 009</b>';
+})();
+
+/* 6. Bài toán dòng tiền (đơn vị: triệu đồng) */
+var fm = function (v) {
+  if (v >= 1000) return (Math.round(v / 10) / 100).toLocaleString('vi-VN', {maximumFractionDigits: 2}) + ' tỷ';
+  return Math.round(v).toLocaleString('vi-VN') + ' triệu';
+};
+var curType = '2PN';
+function calc(btn) {
+  var p = +btn.dataset.p, dep = +btn.dataset.c;
+  curType = btn.firstChild.textContent.trim() + ' ' + btn.querySelector('small').textContent;
+  $$('.types button').forEach(function (b) { b.classList.toggle('on', b === btn); });
+  $('#kOwn').textContent = fm(p * .25);
+  $('#kLoan').textContent = fm(p * .70);
+  $('#kInt').textContent = '~' + fm(p * .70 * .08 * 2);
+  $('#tDep').textContent = fm(dep);
+  $('#t15').textContent = fm(p * .15 - dep);
+  $('#t105').textContent = fm(p * .10);
+}
+$$('.types button').forEach(function (b) { b.addEventListener('click', function () { calc(b); }); });
+calc($('.types button.on'));
+
+/* Popup nhận bảng tính */
+var modal = $('#modal');
+function openModal(need) {
+  modal.classList.add('on');
+  if (need) $('#m-need').value = need;
+  $('[name=loai_can]', modal).value = curType;
+  setTimeout(function () { $('#m-name').focus({preventScroll: true}); }, 80);
+}
+function closeModal() { modal.classList.remove('on'); }
+$$('[data-open="calc"]').forEach(function (b) { b.addEventListener('click', function () { openModal(b.dataset.need); }); });
+$('.close', modal).addEventListener('click', closeModal);
+modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+
+/* 8. Lightbox gallery */
+var lb = $('#lb'), lbImg = $('img', lb), lbCap = $('p', lb), shots = $$('#grid button'), cur = 0;
+function show(i) {
+  cur = (i + shots.length) % shots.length;
+  var im = $('img', shots[cur]);
+  lbImg.src = im.currentSrc || im.src; lbImg.alt = im.alt; lbCap.textContent = im.alt;
+}
+shots.forEach(function (b, i) { b.addEventListener('click', function () { show(i); lb.classList.add('on'); }); });
+$('.x', lb).addEventListener('click', function () { lb.classList.remove('on'); });
+$('.p', lb).addEventListener('click', function () { show(cur - 1); });
+$('.n', lb).addEventListener('click', function () { show(cur + 1); });
+lb.addEventListener('click', function (e) { if (e.target === lb) lb.classList.remove('on'); });
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') { lb.classList.remove('on'); closeModal(); }
+  if (lb.classList.contains('on') && e.key === 'ArrowRight') show(cur + 1);
+  if (lb.classList.contains('on') && e.key === 'ArrowLeft') show(cur - 1);
+});
+
+/* Nhấn Zalo → sự kiện Contact */
+$$('[data-zalo]').forEach(function (a) { a.addEventListener('click', function () { track('Contact', {content_name: 'Zalo'}); }); });
+
+/* 11. Form: kiểm tra, gửi về CRM + email + Telegram, bắn Lead */
+var normPhone = function (s) {
+  var d = String(s).replace(/[^\d+]/g, '');
+  if (d.indexOf('+84') === 0) d = '0' + d.slice(3); else if (d.indexOf('84') === 0 && d.length === 11) d = '0' + d.slice(2);
+  return /^0[35789]\d{8}$/.test(d) ? d : '';
+};
+var qs = new URLSearchParams(location.search);
+$$('form[data-interest]').forEach(function (f) {
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = f.name.value.trim(), phone = normPhone(f.phone.value), ok = true;
+    f.name.parentNode.classList.toggle('err', !name); if (!name) ok = false;
+    f.phone.parentNode.classList.toggle('err', !phone); if (!phone) ok = false;
+    if (!ok) return;
+    var btn = $('button[type=submit]', f); btn.disabled = true; btn.textContent = 'Đang gửi…';
+    var data = {
+      name: name, phone: phone, nhu_cau: f.nhu_cau.value, interest: f.dataset.interest + (f.loai_can && f.loai_can.value ? ' – ' + f.loai_can.value : ''),
+      toa: 'F2', source: location.href.split('?')[0], time: new Date().toLocaleString('vi-VN')
+    };
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid'].forEach(function (k) { if (qs.get(k)) data[k] = qs.get(k); });
+    if (!f._hp.value) {
+      var mail = Object.assign({_subject: 'Lead Facebook Tòa F2: ' + name + ' - ' + phone, _template: 'table', _captcha: 'false'}, data);
+      try { fetch(CONFIG.crm, {method: 'POST', mode: 'no-cors', keepalive: true, headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify(Object.assign({project: 'Sun FourS Tower'}, data))}).catch(function () {}); } catch (er) {}
+      try { fetch(CONFIG.mail, {method: 'POST', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}, body: JSON.stringify(mail)}).catch(function () {}); } catch (er) {}
+      try { fetch(CONFIG.telegram, {method: 'POST', mode: 'no-cors', keepalive: true, headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify(data)}).catch(function () {}); } catch (er) {}
+      track('Lead', {content_name: data.interest, content_category: data.nhu_cau});
+    }
+    f.style.display = 'none';
+    $('.thanks', f.parentNode).classList.add('on');
+  });
+});
+})();
+</script>
+</body>
+</html>
