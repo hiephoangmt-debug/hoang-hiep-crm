@@ -16,7 +16,10 @@ D = "https://www.cora-tower.com/"
 TEL, TEL_TXT, TEL_INTL = "0904567009", "0904 567 009", "+84904567009"
 EMAIL = "hiephoangmt@gmail.com"
 ZALO = f"https://zalo.me/{TEL}"
-AGENT = "Hoàng Hiệp Real Estate"
+AGENT = "Hoàng Phạm Đình Hiệp – Tư vấn Cora Tower"
+AGENT_TITLE = "Hoàng Phạm Đình Hiệp – Giám đốc kinh doanh"
+UPDATED = "07/10/2026"
+MAPS = "https://www.google.com/maps/search/?api=1&query=Cora+Tower+v%C3%B2ng+xoay+29%2F3+Nguy%E1%BB%85n+Ph%C6%B0%E1%BB%9Bc+Lan+H%C3%B2a+Xu%C3%A2n+%C4%90%C3%A0+N%E1%BA%B5ng"
 
 # name: (width, height, small width, alt)
 IMG = {
@@ -274,7 +277,7 @@ def head(page, title, desc, keywords, og_img, og_alt, preload_key, graph):
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" type="image/webp" href="assets/img/{n}.webp" imagesrcset="assets/img/{n}-{s}.webp {s}w, assets/img/{n}.webp {w}w" imagesizes="100vw" fetchpriority="high">
 <link rel="stylesheet" href="assets/style.css">
 <script type="application/ld+json">
@@ -368,21 +371,26 @@ CHAT_SVG = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="
 FOOTER = f'''<footer>
   <div class="wrap foot">
     <div class="foot-brand">
-      <div class="wordmark"><span>HOÀNG HIỆP</span><small>Real Estate · Đà Nẵng</small></div>
-      <p>Tư vấn, phân phối căn hộ, shophouse khối đế và penthouse Cora Tower – Sun Neo City.</p>
+      <div class="wordmark proj"><span>Cora</span><small>Tower</small></div>
+      <p>Cora Tower – hai tòa căn hộ biểu tượng khối mái cam của Sun Group tại vòng xoay 29/3, trung tâm khu đô thị Sun Neo City Đà Nẵng.</p>
     </div>
-    <div class="foot-contact">
-      <span class="foot-label">Liên hệ tư vấn</span>
+    <div class="foot-col">
+      <span class="foot-label">Địa chỉ dự án</span>
+      <p>Vòng xoay 29/3 – Nguyễn Phước Lan,<br>phường Hòa Xuân, TP. Đà Nẵng</p>
+      <a class="map-link" href="{MAPS}" target="_blank" rel="noopener">{icon("pin")}Chỉ đường Google Maps ↗</a>
+    </div>
+    <div class="foot-col">
+      <span class="foot-label">Tư vấn &amp; bán hàng</span>
+      <p class="agent">{AGENT_TITLE}</p>
       <a class="contact-row" href="tel:{TEL}"><i>{icon("phone")}</i><span><small>Hotline</small><b>{TEL_TXT}</b></span></a>
       <a class="contact-row" href="{ZALO}" target="_blank" rel="noopener nofollow"><i>{icon("chat")}</i><span><small>Zalo</small><b>{TEL_TXT}</b></span></a>
       <a class="contact-row" href="mailto:{EMAIL}"><i>{icon("mail")}</i><span><small>Email</small><b>{EMAIL}</b></span></a>
     </div>
     <nav class="foot-links" aria-label="Liên kết Cora Tower">
-      <span class="foot-label">Cora Tower</span>
-      <a href="./">Tổng quan dự án</a><a href="./#mat-bang">Mặt bằng A1 – A2</a><a href="khoi-de-shophouse.html">Shophouse khối đế</a>
-      <a href="penthouse.html">Penthouse – Duplex</a><a href="phap-ly.html">Pháp lý dự án</a><a href="can-ho-sun-da-nang.html">Căn hộ Sun Đà Nẵng</a>
+      <a href="./">Tổng quan</a><a href="./#mat-bang">Mặt bằng</a><a href="./#gia">Bảng giá</a><a href="khoi-de-shophouse.html">Shophouse</a>
+      <a href="penthouse.html">Penthouse</a><a href="phap-ly.html">Pháp lý</a><a href="can-ho-sun-da-nang.html">Căn hộ Sun Đà Nẵng</a>
     </nav>
-    <div class="legal">Website do đơn vị tư vấn độc lập xây dựng, không phải website chính thức của chủ đầu tư. Hình ảnh phối cảnh, mặt bằng mang tính minh họa; thông tin, giá bán mang tính tham khảo và theo công bố chính thức của chủ đầu tư tại từng thời điểm.</div>
+    <div class="legal">Trang thông tin dự án do Giám đốc kinh doanh Hoàng Phạm Đình Hiệp cung cấp, không phải website chính thức của chủ đầu tư. Hình ảnh phối cảnh, mặt bằng mang tính minh họa. Thông tin, giá bán và chính sách có thể thay đổi theo quy định của chủ đầu tư tại từng thời điểm. Cập nhật lần cuối: {UPDATED}.</div>
   </div>
 </footer>
 

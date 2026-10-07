@@ -90,7 +90,7 @@
       a: () => "Dạ em sắp xếp lịch xem dự án và sa bàn cho anh/chị ngay ạ. Anh/chị cho em xin tên + SĐT và thời gian thuận tiện (sáng/chiều, ngày nào) nhé!",
       lead: true },
     { id: "contact", k: ["so dien thoai", "sdt", "zalo", "lien he", "goi", "hotline", "email", "tu van vien", "nguoi that"],
-      a: () => `Dạ anh/chị gọi hoặc nhắn ${ZALO} – chuyên viên Hoàng Hiệp hỗ trợ trực tiếp 24/7 ạ. Hoặc để lại số ở đây, em gọi lại ngay.` },
+      a: () => `Dạ anh/chị gọi hoặc nhắn ${ZALO} – anh Hiệp – Giám đốc kinh doanh hỗ trợ trực tiếp 24/7 ạ. Hoặc để lại số ở đây, em gọi lại ngay.` },
     { id: "thanks", k: ["cam on", "thanks", "ok", "oke", "duoc roi", "tam biet", "bye"],
       a: () => state.lead ? "Dạ em cảm ơn anh/chị! Chuyên viên sẽ liên hệ sớm ạ. Chúc anh/chị một ngày thật vui"
         : `Dạ em cảm ơn anh/chị! Khi cần bảng giá hay giữ căn, anh/chị cứ nhắn em hoặc gọi ${CALL} nhé ạ.` },
@@ -156,7 +156,7 @@
     try {
       sent = await window.submitLead?.({ name, phone, interest: state.topic || "Chat tư vấn", source: "chat", note: state.log.slice(-8).join(" | ") });
     } catch { /* ignore network errors – user still gets a call/Zalo fallback */ }
-    say(`Dạ em đã ghi nhận số <b>${esc(phone)}</b> ạ!\nChuyên viên Hoàng Hiệp sẽ gọi/Zalo cho anh/chị trong ít phút để gửi bảng giá và giỏ hàng căn đẹp.${sent ? "" : `\n\nNếu cần gấp, anh/chị nhắn trực tiếp ${ZALO} giúp em nhé.`}`,
+    say(`Dạ em đã ghi nhận số <b>${esc(phone)}</b> ạ!\nAnh Hiệp – Giám đốc kinh doanh sẽ gọi/Zalo cho anh/chị trong ít phút để gửi bảng giá và giỏ hàng căn đẹp.${sent ? "" : `\n\nNếu cần gấp, anh/chị nhắn trực tiếp ${ZALO} giúp em nhé.`}`,
       ["Bảng giá", "Vị trí", "Pháp lý", "Gọi ngay"]);
   }
 
