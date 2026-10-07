@@ -35,7 +35,7 @@
       a: () => "Dạ 3PN rộng 78,9 m² thông thủy (85,7 – 86,7 m² tim tường), mỗi tòa mỗi sàn chỉ 1 căn ở đầu hồi hướng vòng xoay – view thoáng nhất tòa. Số lượng rất ít nên thường được giữ chỗ sớm. Anh/chị để lại SĐT, em báo ngay căn 3PN còn trống ạ.",
       lead: true },
     { id: "shop", k: ["shophouse", "khoi de", "kinh doanh", "mat bang thuong mai", "cua hang", "buon ban", "ki ot", "kiot"],
-      a: () => "Dạ shophouse nằm tầng 1 khối đế, mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan, kính kịch trần, sở hữu lâu dài. Phía trên là khoảng 1.281 sản phẩm căn hộ nên lượng khách có sẵn. Giá tham khảo khi ra mắt từ ~78 triệu/m².\n\nAnh/chị định tự kinh doanh hay cho thuê ạ? Em gửi giỏ hàng shophouse kèm vị trí từng căn nhé.",
+      a: () => "Dạ shophouse nằm tầng 1 khối đế, mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan, kính kịch trần. Phía trên là 1.342 căn hộ của 2 tòa nên lượng khách có sẵn. Giá tham khảo khi ra mắt từ ~78 triệu/m².\n\nAnh/chị định tự kinh doanh hay cho thuê ạ? Em gửi giỏ hàng shophouse kèm vị trí từng căn nhé.",
       lead: true, chips: ["Tự kinh doanh", "Cho thuê", "Xem trang shophouse"] },
     { id: "ph", k: ["penthouse", "duplex", "tang 25", "tang thuong", "thong tang", "cao nhat"],
       a: () => "Dạ căn duplex – penthouse nằm tầng 25, trong khối mái màu cam biểu tượng của 2 tòa: thông tầng, trần cao, có sân vườn trên cao và view toàn cảnh sông, thành phố. Số lượng cực kỳ giới hạn nên em chỉ gửi thông tin trực tiếp cho khách quan tâm thật. Anh/chị cho em xin SĐT/Zalo nhé ạ?",
@@ -43,11 +43,11 @@
     { id: "loc", k: ["vi tri", "o dau", "dia chi", "duong", "cho nao", "khu nao", "29/3", "nguyen phuoc lan", "hoa xuan"],
       a: () => "Dạ Cora Tower nằm ngay vòng xoay đường 29/3 giao Nguyễn Phước Lan, trung tâm KĐT Nam Hòa Xuân (Sun Neo City). Từ đây:\n• Qua cầu Hòa Xuân tới MM Mega Market, Cách Mạng Tháng 8\n• Kết nối Lotte Mart, cầu Rồng, trung tâm Đà Nẵng\n• Ra biển qua Hồ Xuân Hương, đi Hội An qua cầu Trung Lương\n\nAnh/chị đang làm việc ở khu nào để em tính quãng đường giúp ạ?",
       chips: ["Đặt lịch xem dự án", "Pháp lý"] },
-    { id: "legal", k: ["phap ly", "so hong", "so do", "giay to", "hop dong", "an toan", "uy tin", "giay phep"],
-      a: () => "Dạ về pháp lý:\n• Chủ đầu tư Tập đoàn Sun Group\n• Sổ hồng sở hữu lâu dài (theo công bố)\n• Báo chí đưa tin dự án đã đủ điều kiện ký hợp đồng mua bán\n• Thanh toán đợt đầu không quá 30% (gồm cọc), sau theo tiến độ xây dựng\n\nEm có bộ hồ sơ pháp lý và hợp đồng mẫu, anh/chị để lại Zalo em gửi để mình xem kỹ trước nhé ạ.",
+    { id: "legal", k: ["phap ly", "so hong", "so do", "giay to", "hop dong", "an toan", "uy tin", "giay phep", "bao lanh", "bao lanh ngan hang", "ngan hang bao lanh", "du dieu kien", "the chap", "ho so"],
+      a: () => "Dạ pháp lý Cora Tower rất đầy đủ ạ:\n• Đất đã có sổ đỏ từng lô: DI 103576 (A2-19 · Tòa A1), DI 103577 (A2-20 · Tòa A2)\n• Sở Xây dựng có văn bản 7117/SXD-QLN (05/5/2026) về điều kiện đưa vào kinh doanh\n• Bảo lãnh ngân hàng VietinBank (07/5/2026)\n• Hợp đồng mẫu đã đăng ký tại Sở Công Thương\n• Không thế chấp tại thời điểm ký HĐMB\n\nAnh/chị xem và tải bản scan tại <a href=\"phap-ly.html\">trang Pháp lý</a>. Cần hợp đồng mẫu em gửi qua Zalo nhé ạ.",
       lead: true },
-    { id: "cdt", k: ["chu dau tu", "sun group", "sungroup", "ai lam", "cdt"],
-      a: () => "Dạ chủ đầu tư là Tập đoàn Sun Group – đơn vị phát triển cả khu đô thị Sun Neo City tại Nam Hòa Xuân. Dự án ra mắt ngày 29/09/2025 với 2 tòa căn hộ mang tên thương mại Cora Tower ạ." },
+    { id: "cdt", k: ["chu dau tu", "sun group", "sungroup", "ai lam", "cdt", "mat troi", "bao nhieu can", "so can", "quy mo", "may toa", "bao nhieu tang"],
+      a: () => "Dạ chủ đầu tư là Công ty CP Tập đoàn Mặt Trời (Sun Group), MST 0305016195, trụ sở 36-38 Bạch Đằng, Hải Châu, Đà Nẵng – đơn vị phát triển cả KĐT Sun Neo City. Cora Tower là tên thương mại của 2 tòa chung cư trên lô A2-19 (Tòa A1, 672 căn) và A2-20 (Tòa A2, 670 căn) ạ." },
     { id: "pay", k: ["thanh toan", "tra gop", "vay", "ngan hang", "lai suat", "chinh sach", "uu dai", "chiet khau", "coc", "dat coc", "giu cho"],
       a: () => "Dạ dự án thanh toán theo tiến độ: đợt đầu không quá 30% giá trị hợp đồng (đã gồm cọc), các đợt sau theo tiến độ xây dựng; có ngân hàng hỗ trợ vay. Chiết khấu và ưu đãi thay đổi theo từng đợt bán hàng nên em cần gửi anh/chị bảng chính sách mới nhất ạ.\n\nAnh/chị dự kiến vốn tự có khoảng bao nhiêu để em tính phương án dòng tiền hợp lý nhất?",
       lead: true, chips: ["Dưới 1 tỷ", "1 – 2 tỷ", "Trên 2 tỷ"] },
@@ -55,7 +55,7 @@
       a: () => "Dạ em hiểu rồi ạ. Với mức vốn này em có thể tính sẵn phương án: số tiền đợt đầu, lịch thanh toán và khoản vay (nếu cần) cho căn phù hợp. Anh/chị để lại SĐT/Zalo, em gửi bảng tính chi tiết trong ít phút nhé!",
       lead: true },
     { id: "handover", k: ["ban giao", "khi nao xong", "tien do", "bao gio", "nam nao", "xay den dau", "thi cong"],
-      a: () => "Dạ theo thông tin thị trường, bàn giao dự kiến 30/07/2027, tiêu chuẩn hoàn thiện trần, tường, sàn (không gồm nội thất rời). Mốc chính thức theo hợp đồng mua bán. Em có thể cập nhật hình ảnh tiến độ thực tế qua Zalo cho anh/chị ạ.",
+      a: () => "Dạ thời điểm bàn giao chính thức ghi trong hợp đồng mua bán; thông tin thị trường hiện nói dự kiến khoảng 30/07/2027, tiêu chuẩn hoàn thiện trần, tường, sàn (không gồm nội thất rời). Mốc chính thức theo hợp đồng mua bán. Em có thể cập nhật hình ảnh tiến độ thực tế qua Zalo cho anh/chị ạ.",
       lead: true },
     { id: "amen", k: ["tien ich", "ho boi", "gym", "spa", "tre em", "cong vien", "noi khu"],
       a: () => "Dạ khối đế 2 tòa gồm tầng 1 shophouse thương mại và tầng 2 dịch vụ – tiện ích; tầng 3 là căn hộ sân vườn. Cư dân còn hưởng hệ tiện ích chung của khu đô thị Sun Neo City ven sông ạ. Anh/chị ưu tiên tiện ích nào nhất để em tư vấn căn gần đó?" },
@@ -184,7 +184,7 @@
       state.started = true;
       const h = new Date().getHours();
       const hi = h < 11 ? "Chào buổi sáng" : h < 14 ? "Chào buổi trưa" : h < 18 ? "Chào buổi chiều" : "Chào buổi tối";
-      say(`${hi} anh/chị! 👋 Em là trợ lý tư vấn <b>Cora Tower</b> – 2 tòa căn hộ Sun Group tại vòng xoay 29/3, Đà Nẵng.\n\nCăn 1PN+ hiện chỉ từ khoảng <b>3,1 tỷ</b>. Anh/chị muốn em hỗ trợ thông tin nào ạ?`);
+      say(`${hi} anh/chị! 👋 Em là trợ lý tư vấn <b>Cora Tower</b> – 2 tòa căn hộ Sun Group (1.342 căn) tại vòng xoay 29/3, Đà Nẵng – đã đủ điều kiện bán, có bảo lãnh VietinBank.\n\nCăn 1PN+ hiện chỉ từ khoảng <b>3,1 tỷ</b>. Anh/chị muốn em hỗ trợ thông tin nào ạ?`);
     }
     setTimeout(() => input.focus({ preventScroll: true }), 50);
   }

@@ -76,23 +76,66 @@ CONNECT = [
 ]
 FAQ_INDEX = [
     ("Cora Tower ở đâu?", "Tại vòng xoay đường 29/3 giao Nguyễn Phước Lan, trung tâm khu đô thị Nam Hòa Xuân (Sun Neo City), Đà Nẵng."),
-    ("Chủ đầu tư Cora Tower là ai?", "Dự án do Sun Group phát triển."),
-    ("Cora Tower có những loại căn nào?", "Studio 32–32,2 m², 1PN+ 52,3–59,6 m², 2PN 60,6–73,4 m², 3PN 78,9 m² (diện tích thông thủy), căn hộ sân vườn tầng 3, duplex tầng 25 và shophouse tầng 1."),
+        ("Cora Tower có những loại căn nào?", "Studio 32–32,2 m², 1PN+ 52,3–59,6 m², 2PN 60,6–73,4 m², 3PN 78,9 m² (diện tích thông thủy), căn hộ sân vườn tầng 3, duplex tầng 25 và shophouse tầng 1."),
     ("Mỗi sàn Cora Tower có bao nhiêu căn?", "Theo mặt bằng tầng 3A–24, mỗi tòa A1, A2 có 28 căn/sàn."),
     ("Giá căn 1PN+ Cora Tower bao nhiêu?", "Thông tin thị trường cho căn 1PN+ tầng 15 khoảng 3,1–3,85 tỷ/căn (giá trần gồm VAT, phí bảo trì, theo chính sách bán hàng). Giá chính thức theo công bố của chủ đầu tư."),
-    ("Pháp lý Cora Tower thế nào?", "Theo thông tin công bố, căn hộ có sổ hồng sở hữu lâu dài; báo chí đưa tin dự án đã đủ điều kiện ký hợp đồng mua bán. Khách hàng nên kiểm tra hồ sơ pháp lý cụ thể khi giao dịch."),
+    ("Pháp lý Cora Tower thế nào?", "Đất lô A2-19 (Tòa A1) và A2-20 (Tòa A2) đã có Giấy chứng nhận QSDĐ số DI 103576, DI 103577 cấp 12/4/2023. Sở Xây dựng Đà Nẵng có văn bản 7117/SXD-QLN ngày 05/5/2026 về điều kiện nhà ở hình thành trong tương lai đưa vào kinh doanh; VietinBank cam kết phát hành bảo lãnh; hợp đồng mẫu đã đăng ký tại Sở Công Thương."),
+    ("Chủ đầu tư Cora Tower là công ty nào?", "Công ty Cổ phần Tập đoàn Mặt Trời (Sun Group), mã số doanh nghiệp 0305016195, trụ sở Tầng 1M, 36-38 Bạch Đằng, phường Hải Châu, TP Đà Nẵng."),
+    ("Cora Tower có bao nhiêu căn hộ?", "Tổng 1.342 căn hộ: Tòa A1 (lô A2-19) 672 căn, Tòa A2 (lô A2-20) 670 căn; mỗi tòa 25 tầng nổi + tum, 2 tầng hầm, cao 97,95 m."),
     ("Khi nào Cora Tower bàn giao?", "Thông tin thị trường ghi bàn giao dự kiến 30/07/2027, tiêu chuẩn hoàn thiện trần, tường, sàn. Mốc chính thức theo hợp đồng mua bán."),
     ("Thanh toán mua Cora Tower thế nào?", "Với nhà ở hình thành trong tương lai, lần thanh toán đầu không quá 30% giá trị hợp đồng (gồm cả tiền đặt cọc), các đợt sau theo tiến độ xây dựng. Chính sách chiết khấu, hỗ trợ vay theo từng đợt bán hàng."),
 ]
 FAQ_SHOP = [
     ("Shophouse Cora Tower nằm ở tầng nào?", "Shophouse thương mại nằm ở tầng 1 khối đế, hướng ra vòng xoay 29/3 – Nguyễn Phước Lan; tầng 2 là dịch vụ – tiện ích."),
-    ("Shophouse Cora Tower có sở hữu lâu dài không?", "Theo thông tin công bố khi ra mắt, shophouse khối đế được sở hữu lâu dài. Khách hàng nên kiểm tra hợp đồng và hồ sơ pháp lý cụ thể."),
+    ("Pháp lý shophouse Cora Tower thế nào?", "Shophouse thuộc hai tòa nhà trên lô A2-19, A2-20 đã có Giấy chứng nhận QSDĐ; thời hạn và hình thức sở hữu từng sản phẩm theo hợp đồng mua bán. Xem đầy đủ hồ sơ tại trang Pháp lý Cora Tower."),
     ("Shophouse khối đế phù hợp kinh doanh gì?", "Showroom, cafe, nhà hàng, thời trang, mỹ phẩm, văn phòng giao dịch, phòng khám và các dịch vụ phục vụ cư dân hai tòa tháp."),
 ]
 FAQ_PH = [
     ("Penthouse Cora Tower ở tầng mấy?", "Căn hộ duplex/penthouse nằm ở tầng 25 – tầng cao nhất, trong khối mái kiến trúc màu cam đặc trưng."),
     ("Penthouse Cora Tower có gì đặc biệt?", "Thiết kế duplex thông tầng, trần cao (khoảng 6m theo thông tin công bố), có không gian sân vườn trên cao và tầm nhìn toàn cảnh sông, thành phố."),
     ("Giá penthouse Cora Tower bao nhiêu?", "Giá tùy vị trí, diện tích và hướng view. Vui lòng liên hệ 0904 567 009 để nhận bảng giá cập nhật."),
+]
+
+DEVELOPER = {"name": "Công ty Cổ phần Tập đoàn Mặt Trời", "short": "Sun Group", "tax": "0305016195",
+             "addr": "Tầng 1M, 36-38 Bạch Đằng, phường Hải Châu, TP Đà Nẵng", "tel": "0236 3890999",
+             "rep": "Ông Đặng Minh Trường – Tổng Giám đốc"}
+PLAN_ROWS = [  # (chỉ tiêu, đơn vị, A1 = lô A2-19, A2 = lô A2-20)
+    ("Diện tích khu đất", "m²", "4.580", "4.536"),
+    ("Diện tích xây dựng công trình", "m²", "3.067,8", "3.039,0"),
+    ("Diện tích cây xanh", "m²", "936,5", "907,7"),
+    ("Mật độ xây dựng", "%", "67", "67"),
+    ("Tổng diện tích sàn xây dựng", "m²", "61.660,7", "61.758"),
+    ("Diện tích tiện ích cư dân", "m²", "2.439,0", "2.424,0"),
+    ("Diện tích đỗ xe (2 tầng hầm)", "m²", "8.842,8", "8.891,7"),
+    ("Hệ số sử dụng đất", "lần", "10,7", "10,8"),
+    ("Số tầng nổi / tầng hầm", "tầng", "25 + tum / 2", "25 + tum / 2"),
+    ("Chiều cao công trình", "m", "97,95", "97,95"),
+    ("Tổng số căn hộ", "căn", "672", "670"),
+    ("Tổng diện tích sử dụng căn hộ", "m²", "36.817,7", "37.023,8"),
+    ("Diện tích sinh hoạt cộng đồng", "m²", "540", "541"),
+]
+LEGAL_DOCS = [  # (nhóm, tiêu đề, mô tả, file pdf hoặc None)
+    ("Đầu tư", "Giấy chứng nhận đầu tư số 32121000048", "UBND TP Đà Nẵng chứng nhận lần đầu ngày 28/5/2010 – Dự án Khu đô thị sinh thái ven sông Hòa Xuân.", "gcn-dau-tu-32121000048-kdt-ven-song-hoa-xuan.pdf"),
+    ("Đầu tư", "Quyết định 206/QĐ-UBND ngày 13/01/2026", "UBND TP Đà Nẵng chấp thuận chủ trương đầu tư điều chỉnh dự án Khu đô thị sinh thái ven sông Hòa Xuân.", "qd-206-ubnd-2026-chu-truong-dau-tu-dieu-chinh.pdf"),
+    ("Quyền sử dụng đất", "Sổ đỏ lô A2-19 (Tòa A1) – số DI 103576", "Giấy chứng nhận QSDĐ, quyền sở hữu nhà ở và tài sản gắn liền với đất, số vào sổ CT 68097, Sở TN&MT Đà Nẵng cấp ngày 12/4/2023.", "so-do-lo-a2-19-toa-a1-cora-tower.pdf"),
+    ("Quyền sử dụng đất", "Sổ đỏ lô A2-20 (Tòa A2) – số DI 103577", "Giấy chứng nhận QSDĐ, quyền sở hữu nhà ở và tài sản gắn liền với đất, số vào sổ CT 68098, Sở TN&MT Đà Nẵng cấp ngày 12/4/2023.", "so-do-lo-a2-20-toa-a2-cora-tower.pdf"),
+    ("Quy hoạch", "Quyết định 2451/QĐ-UBND ngày 07/11/2023", "UBND TP Đà Nẵng phê duyệt đồ án quy hoạch phân khu Ven sông Hàn và bờ Đông tỷ lệ 1/2000.", None),
+    ("Quy hoạch", "Quyết định 365/QĐ-UBND ngày 11/3/2026", "UBND phường Hòa Xuân phê duyệt điều chỉnh quy hoạch chi tiết 1/500 dự án Khu đô thị sinh thái ven sông Hòa Xuân.", "qd-365-ubnd-2026-dieu-chinh-qhct-1-500.pdf"),
+    ("Thiết kế – xây dựng", "Công văn 6979/SXD-CPXD ngày 29/4/2026", "Sở Xây dựng thông báo kết quả thẩm định Báo cáo nghiên cứu khả thi dự án Tòa căn hộ chung cư lô A2-19, A2-20.", "cv-6979-sxd-2026-tham-dinh-bao-cao-kha-thi-cora-tower.pdf"),
+    ("Thiết kế – xây dựng", "Quyết định 40/QĐ/2026-SHD ngày 04/5/2026", "Chủ đầu tư phê duyệt thiết kế xây dựng triển khai sau thiết kế cơ sở công trình.", None),
+    ("Thiết kế – xây dựng", "Giấy phép xây dựng: thuộc diện miễn", "Theo điểm h khoản 2 Điều 89 Luật Xây dựng 2014 (sửa đổi bởi điểm c khoản 1 Điều 56 Luật Đường sắt 2025).", None),
+    ("Bảo lãnh ngân hàng", "Hợp đồng bảo lãnh 01/2026-HĐBL/NHCT106-SHD", "Ký giữa VietinBank – Chi nhánh TP Hà Nội và chủ đầu tư ngày 07/5/2026 cho nhà ở hình thành trong tương lai.", None),
+    ("Bảo lãnh ngân hàng", "VietinBank cam kết phát hành thư bảo lãnh", "Văn bản cam kết phát hành thư bảo lãnh nhà ở hình thành trong tương lai ngày 07/5/2026.", "vietinbank-cam-ket-phat-hanh-bao-lanh-cora-tower.pdf"),
+    ("Đủ điều kiện bán", "Văn bản 7117/SXD-QLN ngày 05/5/2026", "Sở Xây dựng TP Đà Nẵng về điều kiện nhà ở hình thành trong tương lai đưa vào kinh doanh tại Tòa căn hộ chung cư lô A2-19, A2-20.", "cv-7117-sxd-2026-du-dieu-kien-ban-cora-tower.pdf"),
+    ("Hợp đồng", "Thông báo 1737/TB-SCT ngày 09/4/2026", "Sở Công Thương thông báo hoàn thành đăng ký hợp đồng theo mẫu, điều kiện giao dịch chung.", "tb-1737-sct-2026-dang-ky-hop-dong-mau.pdf"),
+    ("Thương hiệu", "Thông báo 373-1/2025/TB-SHD ngày 27/9/2025", "Chủ đầu tư thông báo tên thương mại Cora Tower cho nhà chung cư tại lô A2-19, A2-20.", "tb-373-1-shd-2025-ten-thuong-mai-cora-tower.pdf"),
+]
+FAQ_LEGAL = [
+    ("Cora Tower đã đủ điều kiện bán chưa?", "Sở Xây dựng TP Đà Nẵng đã có văn bản 7117/SXD-QLN ngày 05/5/2026 về điều kiện nhà ở hình thành trong tương lai đưa vào kinh doanh tại Tòa căn hộ chung cư lô A2-19, A2-20 (Cora Tower)."),
+    ("Cora Tower có bảo lãnh ngân hàng không?", "Có. Chủ đầu tư ký hợp đồng bảo lãnh số 01/2026-HĐBL/NHCT106-SHD với VietinBank – Chi nhánh TP Hà Nội ngày 07/5/2026, kèm văn bản cam kết phát hành thư bảo lãnh."),
+    ("Cora Tower có giấy phép xây dựng chưa?", "Công trình thuộc đối tượng miễn giấy phép xây dựng theo điểm h khoản 2 Điều 89 Luật Xây dựng 2014 (sửa đổi bởi điểm c khoản 1 Điều 56 Luật Đường sắt 2025); thiết kế đã được Sở Xây dựng thẩm định (CV 6979/SXD-CPXD)."),
+    ("Đất dự án Cora Tower đã có sổ đỏ chưa?", "Đã có. Lô A2-19 (Tòa A1) GCN số DI 103576 và lô A2-20 (Tòa A2) GCN số DI 103577, Sở TN&MT Đà Nẵng cấp ngày 12/4/2023."),
+    ("Dự án Cora Tower có đang thế chấp không?", "Theo công bố của chủ đầu tư: không thế chấp tại thời điểm ký hợp đồng mua bán nhà ở."),
 ]
 
 ICON = {
@@ -125,7 +168,7 @@ LOGO = ('<svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rec
         '<rect x="16" y="3" width="9" height="24" rx="1.5" fill="#f26b1d"/><rect x="2" y="26" width="26" height="2.5" rx="1" fill="#0b2a5b"/></svg>')
 
 NAV = [("./", "Tổng quan", "index"), ("./#mat-bang", "Mặt bằng", ""), ("./#gia", "Bảng giá", ""),
-       ("khoi-de-shophouse.html", "Shophouse", "shop"), ("penthouse.html", "Duplex – Penthouse", "ph"), ("./#vi-tri", "Vị trí", ""), ("./#phap-ly", "Pháp lý", "")]
+       ("khoi-de-shophouse.html", "Shophouse", "shop"), ("penthouse.html", "Duplex – Penthouse", "ph"), ("./#vi-tri", "Vị trí", ""), ("phap-ly.html", "Pháp lý", "legal")]
 
 
 # ----------------------------------------------------------------- head
@@ -258,7 +301,7 @@ FOOTER = f'''<footer>
   <div class="wrap">
     <div><strong>{AGENT}</strong>Tư vấn, phân phối căn hộ – shophouse – duplex Cora Tower và bất động sản Đà Nẵng.</div>
     <div><strong>Liên hệ</strong>Hotline/Zalo: <a href="tel:{TEL}">{TEL_TXT}</a><br>Email: <a href="mailto:{EMAIL}">{EMAIL}</a></div>
-    <div><strong>Cora Tower</strong><a href="./">Tổng quan dự án</a><br><a href="./#mat-bang">Mặt bằng A1 – A2</a><br><a href="khoi-de-shophouse.html">Shophouse khối đế</a><br><a href="penthouse.html">Duplex – Penthouse</a></div>
+    <div><strong>Cora Tower</strong><a href="./">Tổng quan dự án</a><br><a href="./#mat-bang">Mặt bằng A1 – A2</a><br><a href="khoi-de-shophouse.html">Shophouse khối đế</a><br><a href="penthouse.html">Duplex – Penthouse</a><br><a href="phap-ly.html">Pháp lý dự án</a></div>
     <div class="legal">Website do đơn vị tư vấn độc lập xây dựng, không phải website chính thức của chủ đầu tư. Hình ảnh phối cảnh, mặt bằng mang tính minh họa; thông tin, giá bán mang tính tham khảo và theo công bố chính thức của chủ đầu tư tại từng thời điểm.</div>
   </div>
 </footer>
@@ -328,8 +371,8 @@ def price_table():
 def build_index():
     graph = [
         {"@type": "ApartmentComplex", "@id": f"{D}#project", "name": "Cora Tower Đà Nẵng", "alternateName": "Sun Cora Tower",
-         "description": "Tổ hợp 2 tòa tháp A1, A2 cao 25 tầng với khoảng 1.281 sản phẩm: studio, 1PN+, 2PN, 3PN, căn hộ sân vườn, duplex và shophouse khối đế tại vòng xoay 29/3 – Nguyễn Phước Lan, Nam Hòa Xuân, Đà Nẵng.",
-         "url": D, "numberOfAccommodationUnits": 1281,
+         "description": "Tổ hợp 2 tòa tháp A1, A2 cao 25 tầng với khoảng 1.342 căn hộ: studio, 1PN+, 2PN, 3PN, căn hộ sân vườn, duplex và shophouse khối đế tại vòng xoay 29/3 – Nguyễn Phước Lan, Nam Hòa Xuân, Đà Nẵng.",
+         "url": D, "numberOfAccommodationUnits": 1342,
          "image": [f"{D}{src(k)}" for k in ("hero", "a1a2", "night", "aerial", "struct", "site", "planA1", "planA2", "unit1pn", "iso1pn")],
          "address": {"@type": "PostalAddress", "streetAddress": "Vòng xoay đường 29/3 – Nguyễn Phước Lan, KĐT Nam Hòa Xuân", "addressLocality": "Đà Nẵng", "addressCountry": "VN"},
          "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": n, "value": True} for n in ("Shophouse thương mại", "Dịch vụ – tiện ích tầng 2", "Căn hộ sân vườn", "Hầm để xe")]},
@@ -349,7 +392,7 @@ def build_index():
         <span class="eyebrow">Sun Neo City · Vòng xoay 29/3 · Đà Nẵng</span>
         <h1>Cora Tower – <em>biểu tượng sống mới</em> bên sông Đà Nẵng</h1>
         <p class="lead">Hai tòa tháp A1 – A2 cao 25 tầng với khối mái kiến trúc màu cam đặc trưng, ngay vòng xoay 29/3 – Nguyễn Phước Lan. Căn hộ 1PN+ tầng 15 chỉ từ khoảng <b>3,1 tỷ</b>.</p>
-        <ul class="ticks"><li>Chủ đầu tư Sun Group</li><li>Sổ hồng lâu dài</li><li>28 căn/sàn – nhiều lựa chọn</li></ul>
+        <ul class="ticks"><li>Chủ đầu tư Sun Group</li><li>Đủ điều kiện bán – có bảo lãnh</li><li>28 căn/sàn – nhiều lựa chọn</li></ul>
         <div class="cta">
           <a class="btn lg" href="#gia">Xem bảng giá</a>
           <a class="btn ghost lg" href="tel:{TEL}">Gọi {TEL_TXT}</a>
@@ -358,7 +401,7 @@ def build_index():
       {hero_form("Nhận bảng giá &amp; giỏ hàng", "Mặt bằng, giá từng căn và chính sách bán hàng gửi qua Zalo trong 5 phút.")}
     </div>
   </section>
-  {stats([(2, "", "2", "tòa tháp A1 &amp; A2"), (25, "", "25", "tầng nổi"), (1281, "", "1.281", "sản phẩm"), (28, "", "28", "căn mỗi sàn")])}
+  {stats([(2, "", "2", "tòa tháp A1 &amp; A2"), (25, "", "25", "tầng nổi"), (1342, "", "1.342", "căn hộ"), (28, "", "28", "căn mỗi sàn")])}
 
   <section>
     <div class="wrap">
@@ -369,7 +412,7 @@ def build_index():
       </div>
       <div class="grid g4" style="margin-top:36px">
         {card("pin", "Vị trí vòng xoay", "Góc vòng xoay 29/3 – Nguyễn Phước Lan, trục giao thông chính Nam Hòa Xuân.")}
-        {card("shield", "Sun Group phát triển", "Chủ đầu tư uy tín, sổ hồng sở hữu lâu dài theo thông tin công bố.")}
+        {card("shield", "Sun Group phát triển", "Công ty CP Tập đoàn Mặt Trời. Đất đã có sổ đỏ, Sở Xây dựng xác nhận đủ điều kiện bán.")}
         {card("layers", "Đủ loại hình", "Studio, 1PN+, 2PN, 3PN, căn sân vườn, duplex tầng 25 và shophouse.")}
         {card("chart", "Giá dễ tiếp cận", "1PN+ tầng 15 khoảng 3,1–3,85 tỷ/căn – phù hợp ở thực và cho thuê.")}
       </div>
@@ -464,7 +507,7 @@ def build_index():
       <div class="reveal">
         <span class="kicker">Tầng 1 · Khối đế</span>
         <h2>Shophouse khối đế – kinh doanh ngay chân tòa tháp</h2>
-        <p class="sub">Mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan, mặt kính lớn kịch trần, sở hữu lâu dài. Lượng khách sẵn có từ cư dân hai tòa tháp và dòng người qua lại cửa ngõ phía Nam.</p>
+        <p class="sub">Mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan, mặt kính lớn kịch trần. Lượng khách sẵn có từ cư dân hai tòa tháp và dòng người qua lại cửa ngõ phía Nam.</p>
         <ul class="check">
           <li>Phù hợp cafe, F&amp;B, showroom, thời trang, spa, phòng khám</li>
           <li>Tự kinh doanh hoặc cho thuê tạo dòng tiền</li>
@@ -513,34 +556,25 @@ def build_index():
   <section class="alt" id="phap-ly">
     <div class="wrap split">
       <div class="reveal">
-        <span class="kicker">Pháp lý &amp; tiến độ</span>
-        <h2>Pháp lý minh bạch, mua an tâm</h2>
-        <div class="table-wrap">
-          <table>
-            <tbody>
-              <tr><th scope="row">Chủ đầu tư</th><td>Tập đoàn Sun Group (phát triển trong KĐT Sun Neo City)</td></tr>
-              <tr><th scope="row">Ra mắt</th><td>29/09/2025 – hai tòa căn hộ lô A1.5, A1.6 mang tên thương mại Cora Tower</td></tr>
-              <tr><th scope="row">Hợp đồng</th><td>Đã đủ điều kiện ký hợp đồng mua bán (theo báo chí)</td></tr>
-              <tr><th scope="row">Sở hữu</th><td>Sổ hồng sở hữu lâu dài (theo thông tin công bố)</td></tr>
-              <tr><th scope="row">Bàn giao</th><td>Dự kiến 30/07/2027 · hoàn thiện trần, tường, sàn</td></tr>
-              <tr><th scope="row">Thanh toán</th><td>Đợt đầu không quá 30% giá trị hợp đồng (gồm cọc), các đợt sau theo tiến độ xây dựng</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="note">Thông tin tổng hợp từ nguồn công khai, mang tính tham khảo. Khi giao dịch, chuyên viên sẽ cung cấp đầy đủ hồ sơ pháp lý và hợp đồng mẫu để anh/chị kiểm tra.</p>
+        <span class="kicker">Pháp lý</span>
+        <h2>Pháp lý đầy đủ – đã đủ điều kiện bán</h2>
+        <ul class="legal-list">
+          <li><b>Sổ đỏ từng lô</b><span>DI 103576 (A2-19 · Tòa A1), DI 103577 (A2-20 · Tòa A2), cấp 12/4/2023</span></li>
+          <li><b>Đủ điều kiện bán</b><span>Văn bản 7117/SXD-QLN ngày 05/5/2026 của Sở Xây dựng</span></li>
+          <li><b>Bảo lãnh ngân hàng</b><span>VietinBank – HĐ 01/2026-HĐBL/NHCT106-SHD ngày 07/5/2026</span></li>
+          <li><b>Hợp đồng mẫu</b><span>Đã đăng ký tại Sở Công Thương (TB 1737/TB-SCT)</span></li>
+          <li><b>Thiết kế</b><span>Sở Xây dựng thẩm định (6979/SXD-CPXD); miễn GPXD theo luật</span></li>
+          <li><b>Không thế chấp</b><span>tại thời điểm ký hợp đồng mua bán</span></li>
+        </ul>
+        <a class="btn" href="phap-ly.html">Xem &amp; tải toàn bộ hồ sơ pháp lý →</a>
       </div>
       <div class="reveal">
         <div class="card legal-card">
           <div class="icon">{icon("shield")}</div>
-          <h3>Hồ sơ anh/chị nên kiểm tra</h3>
-          <ul class="check">
-            <li>Quyết định chủ trương đầu tư dự án</li>
-            <li>Giấy phép xây dựng hai tòa</li>
-            <li>Văn bản đủ điều kiện bán nhà hình thành trong tương lai</li>
-            <li>Bảo lãnh ngân hàng cho nghĩa vụ bàn giao</li>
-            <li>Hợp đồng mua bán mẫu, tiến độ thanh toán</li>
-          </ul>
-          <a class="btn" href="#dang-ky">Nhận bộ hồ sơ pháp lý</a>
+          <h3>Chủ đầu tư</h3>
+          <p class="sub"><b>{DEVELOPER["name"]}</b> ({DEVELOPER["short"]})<br>MST: {DEVELOPER["tax"]}<br>{DEVELOPER["addr"]}</p>
+          <h3 style="margin-top:18px">Quy mô chính thức</h3>
+          <p class="sub">Tòa A1 (lô A2-19): 672 căn · Tòa A2 (lô A2-20): 670 căn<br>25 tầng nổi + tum, 2 tầng hầm, cao 97,95 m</p>
         </div>
       </div>
     </div>
@@ -595,12 +629,12 @@ def build_shop():
     url = f"{D}khoi-de-shophouse.html"
     graph = [
         {"@type": "Product", "name": "Shophouse khối đế Cora Tower", "category": "Shophouse thương mại", "url": url,
-         "description": "Shophouse tầng 1 khối đế Cora Tower, mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan, KĐT Nam Hòa Xuân, Đà Nẵng. Sở hữu lâu dài, phù hợp kinh doanh và cho thuê.",
+         "description": "Shophouse tầng 1 khối đế Cora Tower, mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan, KĐT Nam Hòa Xuân, Đà Nẵng. Pháp lý đầy đủ, phù hợp kinh doanh và cho thuê.",
          "image": [f"{D}{src('shop')}", f"{D}{src('a1a2')}", f"{D}{src('struct')}"], "brand": {"@type": "Brand", "name": "Cora Tower"}},
         crumbs("Shophouse khối đế", url), faq_ld(FAQ_SHOP),
     ]
     h = head("khoi-de-shophouse", "Shophouse khối đế Cora Tower Đà Nẵng – Mặt tiền vòng xoay 29/3 | 0904 567 009",
-             "Shophouse khối đế Cora Tower (Sun Group) tầng 1, mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan, Hòa Xuân. Kính kịch trần, sở hữu lâu dài, giá tham khảo từ ~78 triệu/m². Gọi 0904 567 009.",
+             "Shophouse khối đế Cora Tower (Sun Group) tầng 1, mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan, Hòa Xuân. Kính kịch trần, pháp lý đầy đủ, giá tham khảo từ ~78 triệu/m². Gọi 0904 567 009.",
              "shophouse Cora Tower, khối đế Cora Tower, shophouse khối đế Đà Nẵng, shophouse Hòa Xuân, shophouse 29/3, shophouse Sun Neo City",
              "og-shophouse.jpg", "Khối đế shophouse Cora Tower", "shop", graph)
     body = f'''{header("shop", "Nhận giỏ hàng")}
@@ -613,23 +647,23 @@ def build_shop():
         <nav class="breadcrumb" aria-label="breadcrumb"><a href="./">Cora Tower</a> › Shophouse khối đế</nav>
         <span class="eyebrow">Tầng 1 · Mặt tiền vòng xoay 29/3</span>
         <h1>Shophouse khối đế Cora Tower – <em>kinh doanh</em> tại tâm điểm Nam Hòa Xuân</h1>
-        <p class="lead">Mặt bằng thương mại ngay chân hai tòa tháp khoảng 1.281 sản phẩm, mặt kính kịch trần, sở hữu lâu dài – vừa kinh doanh, vừa cho thuê, vừa tích lũy tài sản.</p>
-        <ul class="ticks"><li>Sở hữu lâu dài</li><li>Khách hàng sẵn có</li><li>Góc vòng xoay</li></ul>
+        <p class="lead">Mặt bằng thương mại ngay chân hai tòa tháp 1.342 căn hộ, mặt kính kịch trần, pháp lý minh bạch – vừa kinh doanh, vừa cho thuê, vừa tích lũy tài sản.</p>
+        <ul class="ticks"><li>Pháp lý đầy đủ</li><li>Khách hàng sẵn có</li><li>Góc vòng xoay</li></ul>
         <div class="cta"><a class="btn ghost lg" href="tel:{TEL}">Gọi {TEL_TXT}</a></div>
       </div>
       {hero_form("Nhận giỏ hàng shophouse", "Diện tích, giá từng căn và chính sách thanh toán mới nhất.", "Shophouse khối đế", "Nhận giỏ hàng")}
     </div>
   </section>
-  {stats([(78, "tr", "78tr", "/m² giá tham khảo từ"), (1, "", "1", "tầng shophouse thương mại"), (1281, "", "1.281", "sản phẩm phía trên"), (2, "", "2", "tòa tháp A1 &amp; A2")])}
+  {stats([(78, "tr", "78tr", "/m² giá tham khảo từ"), (1, "", "1", "tầng shophouse thương mại"), (1342, "", "1.342", "căn hộ phía trên"), (2, "", "2", "tòa tháp A1 &amp; A2")])}
 
   <section>
     <div class="wrap">
       <div class="center reveal"><span class="kicker">Lợi thế đầu tư</span><h2>Vì sao shophouse khối đế Cora Tower đáng đầu tư?</h2></div>
       <div class="grid g4" style="margin-top:36px">
-        {card("people", "Khách hàng sẵn có", "Khoảng 1.281 sản phẩm phía trên tạo nhu cầu tiêu dùng thường xuyên ngay chân tòa nhà.")}
+        {card("people", "Khách hàng sẵn có", "1.342 căn hộ phía trên tạo nhu cầu tiêu dùng thường xuyên ngay chân tòa nhà.")}
         {card("pin", "Góc vòng xoay", "Vòng xoay 29/3 giao Nguyễn Phước Lan – cửa ngõ phía Nam, lưu lượng qua lại lớn.")}
         {card("store", "Thiết kế trưng bày", "Mặt kính kịch trần, khối đế bo cong nổi bật, hợp showroom, thời trang, F&amp;B.")}
-        {card("chart", "Dòng tiền bền vững", "Sở hữu lâu dài, tự kinh doanh hoặc cho thuê tạo thu nhập ổn định.")}
+        {card("chart", "Dòng tiền bền vững", "Tự kinh doanh hoặc cho thuê tạo thu nhập ổn định từ cư dân và khách vãng lai.")}
       </div>
     </div>
   </section>
@@ -644,7 +678,7 @@ def build_shop():
             <tbody>
               <tr><th scope="row">Vị trí</th><td>Tầng 1 khối đế tòa A1 &amp; A2 – Cora Tower, vòng xoay 29/3 – Nguyễn Phước Lan, Đà Nẵng</td></tr>
               <tr><th scope="row">Tầng 2</th><td>Dịch vụ – tiện ích, tăng lượng khách cho khối đế</td></tr>
-              <tr><th scope="row">Hình thức sở hữu</th><td>Sở hữu lâu dài (theo thông tin công bố)</td></tr>
+              <tr><th scope="row">Pháp lý</th><td>Đất lô A2-19, A2-20 đã có GCN QSDĐ; đủ điều kiện bán theo văn bản 7117/SXD-QLN – <a href="phap-ly.html">xem hồ sơ</a></td></tr>
               <tr><th scope="row">Giá tham khảo</th><td class="price">Từ ~78 triệu/m² (thời điểm ra mắt)</td></tr>
               <tr><th scope="row">Diện tích, số lượng</th><td>Liên hệ {TEL_TXT} để nhận giỏ hàng từng căn</td></tr>
             </tbody>
@@ -707,7 +741,7 @@ def build_ph():
         <span class="eyebrow">Tầng 25 · Duplex · Số lượng giới hạn</span>
         <h1>Penthouse – Duplex Cora Tower – <em>đỉnh cao</em> sống giữa trời Đà Nẵng</h1>
         <p class="lead">Những căn duplex ở tầng cao nhất, nằm trong khối mái kiến trúc màu cam biểu tượng – không gian thông tầng, sân vườn trên cao, tầm nhìn toàn cảnh sông và thành phố.</p>
-        <ul class="ticks"><li>Tầng cao nhất</li><li>Thông tầng</li><li>Sổ hồng lâu dài</li></ul>
+        <ul class="ticks"><li>Tầng cao nhất</li><li>Thông tầng</li><li>Pháp lý đầy đủ</li></ul>
         <div class="cta"><a class="btn ghost lg" href="tel:{TEL}">Gọi {TEL_TXT}</a></div>
       </div>
       {hero_form("Đăng ký ưu tiên duplex", "Số lượng rất giới hạn – nhận mặt bằng và giá trước khi công bố rộng rãi.", "Duplex – Penthouse", "Đăng ký ưu tiên")}
@@ -737,7 +771,7 @@ def build_ph():
               <tr><th scope="row">Vị trí</th><td>Tầng 25 – tòa A1 &amp; A2, Cora Tower, vòng xoay 29/3 – Nguyễn Phước Lan, Đà Nẵng</td></tr>
               <tr><th scope="row">Loại hình</th><td>Căn hộ duplex thông tầng</td></tr>
               <tr><th scope="row">Tiện ích</th><td>Sân vườn trên cao; dịch vụ – tiện ích tại tầng 2 khối đế</td></tr>
-              <tr><th scope="row">Pháp lý</th><td>Sổ hồng sở hữu lâu dài (theo thông tin công bố)</td></tr>
+              <tr><th scope="row">Pháp lý</th><td>Đủ điều kiện bán, bảo lãnh VietinBank – <a href="phap-ly.html">xem hồ sơ</a></td></tr>
               <tr><th scope="row">Diện tích, giá</th><td>Liên hệ {TEL_TXT} để nhận mặt bằng và bảng giá</td></tr>
             </tbody>
           </table>
@@ -773,9 +807,97 @@ def build_ph():
     return h + "\n<body>\n" + body + "\n" + FOOTER + "\n</body>\n</html>\n"
 
 
+def build_legal():
+    url = f"{D}phap-ly.html"
+    docs_ld = {"@type": "ItemList", "name": "Hồ sơ pháp lý dự án Cora Tower", "itemListElement": [
+        {"@type": "ListItem", "position": i + 1, "name": t, "url": f"{D}phap-ly/{f}" if f else url}
+        for i, (_, t, _d, f) in enumerate(LEGAL_DOCS)]}
+    org = {"@type": "Organization", "name": DEVELOPER["name"], "alternateName": DEVELOPER["short"], "taxID": DEVELOPER["tax"],
+           "telephone": "+842363890999", "address": {"@type": "PostalAddress", "streetAddress": DEVELOPER["addr"], "addressLocality": "Đà Nẵng", "addressCountry": "VN"}}
+    graph = [org, docs_ld, crumbs("Pháp lý", url), faq_ld(FAQ_LEGAL)]
+    h = head("phap-ly", "Pháp lý Cora Tower – Sổ đỏ, đủ điều kiện bán, bảo lãnh VietinBank | 0904 567 009",
+             "Hồ sơ pháp lý Cora Tower (Sun Group) lô A2-19, A2-20 Hòa Xuân: sổ đỏ DI 103576, DI 103577; văn bản 7117/SXD-QLN đủ điều kiện bán; bảo lãnh VietinBank; quy mô 1.342 căn. Xem và tải PDF.",
+             "pháp lý Cora Tower, sổ đỏ Cora Tower, Cora Tower đủ điều kiện bán, bảo lãnh Cora Tower, chủ đầu tư Cora Tower, Tập đoàn Mặt Trời, lô A2-19 A2-20 Hòa Xuân",
+             "og-cora-tower.jpg", "Pháp lý Cora Tower", "night", graph)
+    groups = []
+    for g in dict.fromkeys(x[0] for x in LEGAL_DOCS):
+        items = "".join(
+            f'<li class="doc"><div><b>{t}</b><span>{d}</span></div>'
+            + (f'<a class="btn doc-btn" href="phap-ly/{f}" target="_blank" rel="noopener">Xem PDF</a>' if f else '<em>Theo công bố CĐT</em>')
+            + "</li>" for gg, t, d, f in LEGAL_DOCS if gg == g)
+        groups.append(f'<div class="doc-group reveal"><h3>{g}</h3><ul>{items}</ul></div>')
+    plan_rows = "".join(f"<tr><td>{a}</td><td>{u}</td><td>{x}</td><td>{y}</td></tr>" for a, u, x, y in PLAN_ROWS)
+    body = f"""{header("legal", "Nhận hồ sơ")}
+
+<main>
+  <section class="hero hero-sm">
+    {pic("night", "100vw", eager=True, cls="hero-bg")}
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="breadcrumb"><a href="./">Cora Tower</a> › Pháp lý</nav>
+      <span class="eyebrow">Công bố thông tin dự án bất động sản</span>
+      <h1>Pháp lý Cora Tower – <em>đủ điều kiện bán</em>, có bảo lãnh ngân hàng</h1>
+      <p class="lead">Nhà chung cư tại lô A2-19 (Tòa A1) và A2-20 (Tòa A2), Dự án Khu đô thị sinh thái ven sông Hòa Xuân (Sun Neo City), phường Hòa Xuân, TP Đà Nẵng.</p>
+      <ul class="ticks"><li>Sổ đỏ từng lô</li><li>Văn bản 7117/SXD-QLN</li><li>Bảo lãnh VietinBank</li><li>Hợp đồng mẫu đã đăng ký</li></ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap split">
+      <div class="reveal">
+        <span class="kicker">Chủ đầu tư</span>
+        <h2>{DEVELOPER["name"]}</h2>
+        <div class="table-wrap"><table><tbody>
+          <tr><th scope="row">Tên thương mại</th><td>{DEVELOPER["short"]} (Sun Group Corporation)</td></tr>
+          <tr><th scope="row">Mã số doanh nghiệp</th><td>{DEVELOPER["tax"]}</td></tr>
+          <tr><th scope="row">Trụ sở</th><td>{DEVELOPER["addr"]}</td></tr>
+          <tr><th scope="row">Điện thoại</th><td>{DEVELOPER["tel"]}</td></tr>
+          <tr><th scope="row">Người đại diện</th><td>{DEVELOPER["rep"]}</td></tr>
+        </tbody></table></div>
+      </div>
+      <div class="reveal">
+        <span class="kicker">Thông tin bất động sản</span>
+        <h2>Căn hộ chung cư – hình thành trong tương lai</h2>
+        <ul class="check">
+          <li>Vị trí: lô A2-19 và A2-20, KĐT sinh thái ven sông Hòa Xuân, phường Hòa Xuân, TP Đà Nẵng</li>
+          <li>Công năng: công trình dân dụng; chất lượng theo quy chuẩn, tiêu chuẩn Nhà nước</li>
+          <li>Hạ tầng đường 29/3, Nguyễn Phước Lan, Đinh Văn Chấp, Hoàng Thế Thiện đã cơ bản hoàn thành</li>
+          <li>Không hạn chế đặc biệt về quyền sở hữu, sử dụng; không thế chấp tại thời điểm ký HĐMB</li>
+          <li>Giá bán phụ thuộc đơn giá và diện tích từng căn</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="quy-mo">
+    <div class="wrap">
+      <div class="center reveal"><span class="kicker">Quy mô</span><h2>Quy hoạch &amp; quy mô từng tòa</h2>
+        <p class="sub">Quy hoạch: dân số 1.070 người/lô, mật độ xây dựng tối đa 67%, hệ số sử dụng đất tối đa 11,5 lần, 1–25 tầng, cao tối đa 98 m.</p></div>
+      <div class="table-wrap reveal" style="margin-top:24px"><table>
+        <thead><tr><th>Chỉ tiêu</th><th>Đơn vị</th><th>Tòa A1 (lô A2-19)</th><th>Tòa A2 (lô A2-20)</th></tr></thead>
+        <tbody>{plan_rows}</tbody></table></div>
+      <p class="note">Chỉ tiêu quy hoạch, quy mô theo công bố của chủ đầu tư; có thể được điều chỉnh theo quyết định của cơ quan có thẩm quyền và kế hoạch kinh doanh tại từng thời điểm.</p>
+    </div>
+  </section>
+
+  <section id="ho-so">
+    <div class="wrap">
+      <div class="center reveal"><span class="kicker">Hồ sơ</span><h2>Hồ sơ, giấy tờ về dự án</h2>
+        <p class="sub">Bấm “Xem PDF” để mở bản scan văn bản. Hồ sơ pháp lý được chủ đầu tư cập nhật tại từng thời điểm.</p></div>
+      <div class="doc-grid">{"".join(groups)}</div>
+    </div>
+  </section>
+
+  {faq_section("Hỏi đáp pháp lý Cora Tower", FAQ_LEGAL, '<p class="center" style="margin-top:20px">Xem thêm: <a href="./">Tổng quan dự án</a> · <a href="./#gia">Bảng giá</a> · <a href="./#mat-bang">Mặt bằng</a></p>')}
+
+  {lead_section("Nhận trọn bộ hồ sơ pháp lý &amp; hợp đồng mẫu", "Chuyên viên gửi qua Zalo bộ hồ sơ pháp lý, hợp đồng mua bán mẫu và tiến độ thanh toán để anh/chị xem kỹ trước khi quyết định.", None, "Nhận hồ sơ")}
+</main>
+"""
+    return h + "\n<body>\n" + body + "\n" + FOOTER + "\n</body>\n</html>\n"
+
+
 def sitemap():
     pages = {"": ["hero", "a1a2", "night", "aerial", "struct", "site", "siteAir", "planA1", "planA2", "unit1pn", "iso1pn", "int1pn", "cross", "land", "river"],
-             "khoi-de-shophouse.html": ["shop", "a1a2", "struct"], "penthouse.html": ["ph", "hero", "struct"]}
+             "khoi-de-shophouse.html": ["shop", "a1a2", "struct"], "penthouse.html": ["ph", "night", "struct"], "phap-ly.html": ["night"]}
     out = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">']
     for p, imgs in pages.items():
@@ -789,5 +911,6 @@ if __name__ == "__main__":
     (SITE / "index.html").write_text(build_index())
     (SITE / "khoi-de-shophouse.html").write_text(build_shop())
     (SITE / "penthouse.html").write_text(build_ph())
+    (SITE / "phap-ly.html").write_text(build_legal())
     (SITE / "sitemap.xml").write_text(sitemap())
     print("built", SITE)

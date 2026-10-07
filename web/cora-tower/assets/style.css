@@ -207,6 +207,23 @@ footer .legal{grid-column:1/-1;border-top:1px solid #1f3256;padding-top:18px;fon
 @media (max-width:900px){.unit-grid{grid-template-columns:1fr}}
 .legal-card{border-top:4px solid var(--brand-2)}
 
+/* legal */
+.legal-list{list-style:none;padding:0;margin:0 0 22px;display:grid;gap:10px}
+.legal-list li{display:grid;grid-template-columns:22px 1fr;column-gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+.legal-list li::before{content:"✓";grid-row:span 2;color:#fff;background:#2e9e5b;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:.8rem;margin-top:2px}
+.legal-list b{color:var(--brand)}.legal-list span{color:var(--muted);font-size:.93rem}
+.hero.hero-sm{min-height:0;padding:80px 0 90px}
+.hero.hero-sm .wrap{max-width:var(--max)}
+.doc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(460px,1fr));gap:20px;margin-top:30px}
+.doc-group{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.doc-group h3{color:var(--brand-2);text-transform:uppercase;letter-spacing:.08em;font-size:.85rem}
+.doc-group ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.doc{display:flex;gap:14px;align-items:center;justify-content:space-between;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px}
+.doc b{display:block;color:var(--brand)}.doc span{display:block;color:var(--muted);font-size:.9rem;margin-top:2px}
+.doc em{flex:none;font-size:.8rem;color:var(--muted)}
+.doc-btn{flex:none;padding:9px 16px;font-size:.88rem}
+@media (max-width:560px){.doc{flex-direction:column;align-items:flex-start}.doc-grid{grid-template-columns:1fr}}
+
 /* floating contact (desktop) */
 .fab{position:fixed;right:18px;bottom:22px;z-index:40;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
 .fab a,.fab button{height:56px;min-width:56px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:8px;color:#fff;font:inherit;font-weight:800;text-decoration:none;border:0;cursor:pointer;box-shadow:0 10px 24px -8px rgba(0,0,0,.45);position:relative}
