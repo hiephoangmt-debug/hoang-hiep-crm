@@ -16,7 +16,7 @@ Website tĩnh, chuẩn SEO (HTML/CSS/JS thuần, không cần build). Upload to�
 
 ## Cần thay trước khi chạy thật
 1. **Hotline/Zalo**: thay `0900000000` / `0900 000 000` trong cả 3 file HTML.
-2. **Ảnh OG**: thêm `assets/og-cora-tower.jpg`, `og-shophouse.jpg`, `og-penthouse.jpg` (1200×630).
+2. **Ảnh**: `assets/img/` hiện là ảnh minh họa tự vẽ. Khi có ảnh thật (được phép sử dụng), ghi đè file cùng tên ở cả 2 cỡ và 2 định dạng (`.webp` + `.jpg`, bản gốc và bản `-600`/`-800`/`-450`), cùng 3 ảnh `assets/og-*.jpg` (1200×630).
 3. **Form nhận khách**: điền `FORM_ENDPOINT` trong `assets/main.js` (webhook CRM, Google Apps Script…). Khi để trống, form chỉ hiện thông báo cảm ơn và **không lưu** dữ liệu.
 4. **Số liệu, giá**: đối chiếu với tài liệu chính thức của chủ đầu tư và cập nhật lại nếu cần.
 5. Gửi sitemap lên Google Search Console.
