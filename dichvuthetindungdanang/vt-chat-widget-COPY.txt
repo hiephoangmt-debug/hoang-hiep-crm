@@ -1,5 +1,3 @@
-<!-- Vân Trần – Nút Gọi/Zalo + Chat tự động + báo về CRM (thay cho đoạn crm-click-tracking cũ).
-     Dán vào LadiPage: Thiết lập trang → Mã JavaScript/CSS → Trước thẻ </body> → Xuất bản. -->
 <script>
 (function () {
   if (window.__vtChat) return; window.__vtChat = 1;
@@ -61,7 +59,7 @@
   + '#vtw [hidden]{display:none!important}'
   + '@media(max-width:700px){#vtw{right:10px;bottom:calc(74px + env(safe-area-inset-bottom,0px))}#vtw .vt-act{width:50px;height:50px}#vtw .vt-lb{display:none}'
   + '#vtw .vt-box{right:16px;left:16px;width:auto;bottom:calc(74px + env(safe-area-inset-bottom,0px));max-height:calc(100vh - 110px)}#vtw.open .vt-acts{display:none}}';
-  var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+  var st = document.createElement('style'); st.textContent = css;
 
   var ICON_ZALO = '<svg viewBox="0 0 48 48"><path d="M24 4C12.4 4 3 12.2 3 22.3c0 5.8 3.1 11 8 14.3l-1.5 6.9 7.4-3.9c2.2.6 4.6 1 7.1 1 11.6 0 21-8.2 21-18.3S35.6 4 24 4z"/><text x="24" y="27" text-anchor="middle" font-family="Arial" font-weight="900" font-size="11" fill="#0068ff">Zalo</text></svg>';
   var ICON_CALL = '<svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>';
@@ -80,10 +78,21 @@
     + '<div class="vt-log" aria-live="polite"></div>'
     + '<form class="vt-in" hidden><input type="text" autocomplete="off"><button type="submit">Gửi</button></form>'
     + '</div>';
-  document.body.appendChild(w);
+  /* Gắn vào trang; tự gắn lại nếu trang (LadiPage) vẽ lại body */
+  function mount() {
+    if (!document.body) return;
+    if (!st.isConnected) (document.head || document.documentElement).appendChild(st);
+    document.querySelectorAll('#vtw').forEach(function (x) { if (x !== w) x.remove(); }); // bản sao chết
+    if (!w.isConnected) document.body.appendChild(w);
+  }
+  mount();
+  document.addEventListener('DOMContentLoaded', mount);
+  window.addEventListener('load', function () { mount(); hideOldFloats(); });
+  setInterval(mount, 1500);
 
   /* Ẩn nút Gọi/Zalo nổi cũ của trang (nút nhỏ cố định) để không trùng; giữ thanh liên hệ ngang ở đáy */
   function hideOldFloats() {
+    if (!w.isConnected || !w.offsetHeight) return; // chỉ ẩn nút cũ khi nút mới đã hiện
     document.querySelectorAll('a[href^="tel:"], a[href*="zalo.me"], [data-replace-href^="tel:"], [data-replace-href*="zalo.me"]').forEach(function (a) {
       if (w.contains(a)) return;
       for (var el = a; el && el !== document.body; el = el.parentElement) {
