@@ -83,16 +83,24 @@ FAQ_INDEX = [
     ("Chủ đầu tư Cora Tower là công ty nào?", "Công ty Cổ phần Tập đoàn Mặt Trời (Sun Group), mã số doanh nghiệp 0305016195, trụ sở Tầng 1M, 36-38 Bạch Đằng, phường Hải Châu, TP Đà Nẵng."),
     ("Cora Tower có bao nhiêu căn hộ?", "Tổng 1.342 căn hộ: Tòa A1 (lô A2-19) 672 căn, Tòa A2 (lô A2-20) 670 căn; mỗi tòa 25 tầng nổi + tum, 2 tầng hầm, cao 97,95 m."),
     ("Khi nào Cora Tower bàn giao?", "Thông tin thị trường ghi bàn giao dự kiến 30/07/2027, tiêu chuẩn hoàn thiện trần, tường, sàn. Mốc chính thức theo hợp đồng mua bán."),
-    ("Thanh toán mua Cora Tower thế nào?", "Với nhà ở hình thành trong tương lai, lần thanh toán đầu không quá 30% giá trị hợp đồng (gồm cả tiền đặt cọc), các đợt sau theo tiến độ xây dựng. Chính sách chiết khấu, hỗ trợ vay theo từng đợt bán hàng."),
+    ("Chính sách thanh toán, vay vốn Cora Tower thế nào?", "Ngân hàng cho vay tối đa 70% giá trị, hỗ trợ lãi suất 0% trong 24 tháng. Chương trình Sun Early Key: thanh toán 70% nhận nhà, 30% còn lại trong 24 tháng tiếp theo; có lựa chọn thanh toán sớm với ưu đãi theo từng đợt bán hàng."),
+    ("Mua Cora Tower ký hợp đồng gì?", "Dự án đã đủ điều kiện ký hợp đồng mua bán (HĐMB). Khách ký hợp đồng thỏa thuận nguyên tắc (HĐTHNV) trước để có thời gian chuẩn bị tài chính, hồ sơ vay, sau đó ký HĐMB theo thông báo của chủ đầu tư."),
 ]
 FAQ_SHOP = [
     ("Shophouse Cora Tower nằm ở tầng nào?", "Shophouse thương mại nằm ở tầng 1 khối đế, hướng ra vòng xoay 29/3 – Nguyễn Phước Lan; tầng 2 là dịch vụ – tiện ích."),
-    ("Pháp lý shophouse Cora Tower thế nào?", "Shophouse thuộc hai tòa nhà trên lô A2-19, A2-20 đã có Giấy chứng nhận QSDĐ; thời hạn và hình thức sở hữu từng sản phẩm theo hợp đồng mua bán. Xem đầy đủ hồ sơ tại trang Pháp lý Cora Tower."),
-    ("Shophouse khối đế phù hợp kinh doanh gì?", "Showroom, cafe, nhà hàng, thời trang, mỹ phẩm, văn phòng giao dịch, phòng khám và các dịch vụ phục vụ cư dân hai tòa tháp."),
+    ("Shophouse khối đế Cora Tower có sở hữu lâu dài không?", "Có. Theo chủ đầu tư, shophouse khối đế có pháp lý sở hữu lâu dài như căn hộ: vừa ở vừa kinh doanh được, và đăng ký được hộ khẩu thường trú."),
+    ("Shophouse cao bao nhiêu, làm tầng lửng được không?", "Chiều cao tầng khối đế lên tới khoảng 7 m nên có thể làm thêm tầng lửng. Chủ nhà tự hoàn thiện tầng lửng, miễn không ảnh hưởng kết cấu, cơ điện, kiến trúc tòa nhà; hồ sơ phương án gửi Ban quản lý duyệt trong khoảng 1–2 tuần."),
+    ("Shophouse có đăng ký giấy phép kinh doanh tại căn được không?", "Shophouse sở hữu lâu dài như căn hộ nên không đăng ký giấy phép kinh doanh tại căn. Cách làm phổ biến: cho thương hiệu thuê bằng hợp đồng thuê ghi mã căn, hoặc tự kinh doanh với doanh nghiệp/hộ kinh doanh đăng ký ở địa chỉ khác và dùng shophouse làm địa điểm kinh doanh."),
+    ("Mua shophouse Cora Tower được vay ngân hàng bao nhiêu?", "Chính sách vay tương tự căn hộ: khách đủ điều kiện được vay tối đa 70% giá trị, hỗ trợ lãi suất 0% trong 24 tháng."),
+    ("Có gộp (đập thông) 2 căn shophouse được không?", "Được với tường ngăn cách 20 cm và tường ngăn phòng 10 cm; vách chịu lực 30 cm thì không. Phương án cần Ban quản lý phê duyệt cuối cùng."),
+    ("Shophouse khối đế phù hợp kinh doanh gì?", "Showroom, cafe, nhà hàng, thời trang, mỹ phẩm, văn phòng giao dịch, phòng khám và các dịch vụ phục vụ 1.342 căn hộ phía trên."),
 ]
 FAQ_PH = [
-    ("Penthouse Cora Tower ở tầng mấy?", "Căn hộ duplex/penthouse nằm ở tầng 25 – tầng cao nhất, trong khối mái kiến trúc màu cam đặc trưng."),
-    ("Penthouse Cora Tower có gì đặc biệt?", "Thiết kế duplex thông tầng, trần cao (khoảng 6m theo thông tin công bố), có không gian sân vườn trên cao và tầm nhìn toàn cảnh sông, thành phố."),
+    ("Penthouse Cora Tower ở tầng mấy?", "Penthouse nằm ở tầng 25 – tầng cao nhất, trong khối mái kiến trúc màu cam đặc trưng."),
+    ("Penthouse Cora Tower trần cao bao nhiêu, làm duplex được không?", "Chiều cao tầng penthouse lên tới khoảng 7 m, nên khách có thể làm thêm tầng lửng thành duplex 2 tầng. Chủ đầu tư có layout duplex gợi ý; nhà vệ sinh tầng 2 nên bố trí theo trục kỹ thuật."),
+    ("Giá penthouse tính theo căn hay theo diện tích sàn?", "Giá penthouse tính theo đơn nguyên 1 căn hộ, không tính thêm phần tầng lửng khách tự làm."),
+    ("Chính sách bán hàng penthouse có giống căn hộ không?", "Cơ bản giống căn hộ điển hình (thanh toán sớm, vay 70%, hỗ trợ lãi suất 24 tháng), trừ gói hỗ trợ nội thất của căn hộ Cora."),
+    ("Thời hạn hoàn thiện penthouse là bao lâu?", "Shophouse và penthouse áp dụng thời hạn hoàn thiện 12 tháng kể từ ngày bàn giao; quá hạn, chủ nhà đóng phí 8% giá trị căn để tiếp tục hoàn thiện."),
     ("Giá penthouse Cora Tower bao nhiêu?", "Giá tùy vị trí, diện tích và hướng view. Vui lòng liên hệ 0904 567 009 để nhận bảng giá cập nhật."),
 ]
 
@@ -362,7 +370,7 @@ def price_table():
           <thead><tr><th>Căn 1PN+ tầng 15</th><th>Mã căn</th><th>Giá dự kiến / căn</th><th></th></tr></thead>
           <tbody>{rows}
             <tr><td>Studio · 2PN · 3PN</td><td>Theo tầng, hướng</td><td class="price">Liên hệ</td><td><a href="#dang-ky">Nhận giá →</a></td></tr>
-            <tr><td>Shophouse khối đế</td><td>Tầng 1</td><td class="price">Từ ~78 triệu/m²</td><td><a href="khoi-de-shophouse.html">Chi tiết →</a></td></tr>
+            <tr><td>Shophouse khối đế</td><td>Tầng 1 · 43 – 61,5 m²</td><td class="price">4,96 – 6,04 tỷ</td><td><a href="khoi-de-shophouse.html">Chi tiết →</a></td></tr>
           </tbody></table></div>
       <p class="note">Giá 1PN+ tầng 15 là thông tin thị trường (giá trần đã gồm VAT + phí bảo trì, theo chính sách bán hàng), chưa phải bảng giá chính thức. Giá các tầng khác chênh lệch theo tầng và hướng. Bảng giá, chính sách chính thức theo công bố của chủ đầu tư.</p>'''
 
@@ -502,7 +510,7 @@ def build_index():
     <div class="wrap split">
       <div class="split-media reveal">
         {pic("shop", "(max-width:900px) 100vw, 600px")}
-        <div class="badge">Từ ~78 triệu/m²<small>giá tham khảo khi ra mắt</small></div>
+        <div class="badge">4,96 – 6,04 tỷ<small>shophouse 43 – 61,5 m²</small></div>
       </div>
       <div class="reveal">
         <span class="kicker">Tầng 1 · Khối đế</span>
@@ -511,7 +519,7 @@ def build_index():
         <ul class="check">
           <li>Phù hợp cafe, F&amp;B, showroom, thời trang, spa, phòng khám</li>
           <li>Tự kinh doanh hoặc cho thuê tạo dòng tiền</li>
-          <li>Tài sản thương mại khan hiếm trong khu đô thị</li>
+          <li>Sở hữu lâu dài, trần ~7 m làm được tầng lửng</li>
         </ul>
         <a class="btn" href="khoi-de-shophouse.html">Khám phá shophouse →</a>
       </div>
@@ -529,7 +537,7 @@ def build_index():
         <h2>Duplex – Penthouse trong khối mái biểu tượng</h2>
         <p class="sub">Những căn duplex tầng cao nhất, nằm trong khối kiến trúc màu cam đặc trưng của hai tòa tháp – không gian thông tầng, sân vườn trên cao và tầm nhìn toàn cảnh sông, thành phố.</p>
         <ul class="check">
-          <li>Thiết kế duplex thông tầng, trần cao</li>
+          <li>Trần cao ~7 m, làm thêm tầng lửng thành duplex</li>
           <li>Riêng tư tuyệt đối ở tầng cao nhất</li>
           <li>Sản phẩm khan hiếm, giữ giá trị dài hạn</li>
         </ul>
@@ -634,7 +642,7 @@ def build_shop():
         crumbs("Shophouse khối đế", url), faq_ld(FAQ_SHOP),
     ]
     h = head("khoi-de-shophouse", "Shophouse khối đế Cora Tower Đà Nẵng – Mặt tiền vòng xoay 29/3 | 0904 567 009",
-             "Shophouse khối đế Cora Tower (Sun Group) tầng 1, mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan, Hòa Xuân. Kính kịch trần, pháp lý đầy đủ, giá tham khảo từ ~78 triệu/m². Gọi 0904 567 009.",
+             "Shophouse khối đế Cora Tower (Sun Group) tầng 1, mặt tiền vòng xoay 29/3 – Nguyễn Phước Lan, Hòa Xuân. Kính kịch trần, pháp lý đầy đủ, giá 4,96 – 6,04 tỷ/căn (43 – 61,5 m²). Gọi 0904 567 009.",
              "shophouse Cora Tower, khối đế Cora Tower, shophouse khối đế Đà Nẵng, shophouse Hòa Xuân, shophouse 29/3, shophouse Sun Neo City",
              "og-shophouse.jpg", "Khối đế shophouse Cora Tower", "shop", graph)
     body = f'''{header("shop", "Nhận giỏ hàng")}
@@ -648,13 +656,13 @@ def build_shop():
         <span class="eyebrow">Tầng 1 · Mặt tiền vòng xoay 29/3</span>
         <h1>Shophouse khối đế Cora Tower – <em>kinh doanh</em> tại tâm điểm Nam Hòa Xuân</h1>
         <p class="lead">Mặt bằng thương mại ngay chân hai tòa tháp 1.342 căn hộ, mặt kính kịch trần, pháp lý minh bạch – vừa kinh doanh, vừa cho thuê, vừa tích lũy tài sản.</p>
-        <ul class="ticks"><li>Pháp lý đầy đủ</li><li>Khách hàng sẵn có</li><li>Góc vòng xoay</li></ul>
+        <ul class="ticks"><li>Sở hữu lâu dài</li><li>Trần ~7 m</li><li>Khách hàng sẵn có</li><li>Góc vòng xoay</li></ul>
         <div class="cta"><a class="btn ghost lg" href="tel:{TEL}">Gọi {TEL_TXT}</a></div>
       </div>
       {hero_form("Nhận giỏ hàng shophouse", "Diện tích, giá từng căn và chính sách thanh toán mới nhất.", "Shophouse khối đế", "Nhận giỏ hàng")}
     </div>
   </section>
-  {stats([(78, "tr", "78tr", "/m² giá tham khảo từ"), (1, "", "1", "tầng shophouse thương mại"), (1342, "", "1.342", "căn hộ phía trên"), (2, "", "2", "tòa tháp A1 &amp; A2")])}
+  {stats([(4.96, " tỷ", "4,96 tỷ", "giá shophouse từ"), (1, "", "1", "tầng shophouse thương mại"), (1342, "", "1.342", "căn hộ phía trên"), (2, "", "2", "tòa tháp A1 &amp; A2")])}
 
   <section>
     <div class="wrap">
@@ -662,7 +670,7 @@ def build_shop():
       <div class="grid g4" style="margin-top:36px">
         {card("people", "Khách hàng sẵn có", "1.342 căn hộ phía trên tạo nhu cầu tiêu dùng thường xuyên ngay chân tòa nhà.")}
         {card("pin", "Góc vòng xoay", "Vòng xoay 29/3 giao Nguyễn Phước Lan – cửa ngõ phía Nam, lưu lượng qua lại lớn.")}
-        {card("store", "Thiết kế trưng bày", "Mặt kính kịch trần, khối đế bo cong nổi bật, hợp showroom, thời trang, F&amp;B.")}
+        {card("store", "Trần ~7 m, làm tầng lửng", "Mặt kính kịch trần, chiều cao tầng ~7 m làm thêm tầng lửng – gấp đôi diện tích sử dụng.")}
         {card("chart", "Dòng tiền bền vững", "Tự kinh doanh hoặc cho thuê tạo thu nhập ổn định từ cư dân và khách vãng lai.")}
       </div>
     </div>
@@ -678,9 +686,12 @@ def build_shop():
             <tbody>
               <tr><th scope="row">Vị trí</th><td>Tầng 1 khối đế tòa A1 &amp; A2 – Cora Tower, vòng xoay 29/3 – Nguyễn Phước Lan, Đà Nẵng</td></tr>
               <tr><th scope="row">Tầng 2</th><td>Dịch vụ – tiện ích, tăng lượng khách cho khối đế</td></tr>
+              <tr><th scope="row">Chiều cao tầng</th><td>~7 m – làm thêm tầng lửng (Ban quản lý duyệt 1–2 tuần)</td></tr>
+              <tr><th scope="row">Sở hữu</th><td>Lâu dài như căn hộ; đăng ký được hộ khẩu thường trú</td></tr>
+              <tr><th scope="row">Vay ngân hàng</th><td>Tối đa 70%, hỗ trợ lãi suất 0% trong 24 tháng</td></tr>
               <tr><th scope="row">Pháp lý</th><td>Đất lô A2-19, A2-20 đã có GCN QSDĐ; đủ điều kiện bán theo văn bản 7117/SXD-QLN – <a href="phap-ly.html">xem hồ sơ</a></td></tr>
-              <tr><th scope="row">Giá tham khảo</th><td class="price">Từ ~78 triệu/m² (thời điểm ra mắt)</td></tr>
-              <tr><th scope="row">Diện tích, số lượng</th><td>Liên hệ {TEL_TXT} để nhận giỏ hàng từng căn</td></tr>
+              <tr><th scope="row">Giá tham khảo</th><td class="price">4,96 – 6,04 tỷ/căn (đã gồm VAT &amp; phí bảo trì)</td></tr>
+              <tr><th scope="row">Diện tích</th><td>43,1 – 61,5 m² thông thủy · liên hệ {TEL_TXT} nhận giỏ hàng từng căn</td></tr>
             </tbody>
           </table>
         </div>
@@ -753,7 +764,7 @@ def build_ph():
     <div class="wrap">
       <div class="center reveal"><span class="kicker">Khác biệt</span><h2>Điểm khác biệt của duplex – penthouse Cora Tower</h2></div>
       <div class="grid g3" style="margin-top:36px">
-        {card("ceiling", "Thông tầng, trần cao", "Thiết kế duplex với không gian thông tầng (trần cao khoảng 6m theo thông tin công bố).")}
+        {card("ceiling", "Trần cao ~7 m", "Đủ chiều cao làm thêm tầng lửng thành duplex 2 tầng; chủ đầu tư có layout duplex gợi ý.")}
         {card("eye", "Tầm nhìn toàn cảnh", "Tầng cao nhất tòa tháp, view sông Cẩm Lệ, trung tâm Đà Nẵng và khu Sun Neo City.")}
         {card("crown", "Khối mái biểu tượng", "Nằm trong khối kiến trúc màu cam đặc trưng – dấu ấn nhận diện của Cora Tower.")}
       </div>
@@ -769,7 +780,9 @@ def build_ph():
           <table>
             <tbody>
               <tr><th scope="row">Vị trí</th><td>Tầng 25 – tòa A1 &amp; A2, Cora Tower, vòng xoay 29/3 – Nguyễn Phước Lan, Đà Nẵng</td></tr>
-              <tr><th scope="row">Loại hình</th><td>Căn hộ duplex thông tầng</td></tr>
+              <tr><th scope="row">Chiều cao tầng</th><td>~7 m – làm thêm tầng lửng thành duplex, có layout gợi ý của CĐT</td></tr>
+              <tr><th scope="row">Cách tính giá</th><td>Theo đơn nguyên 1 căn</td></tr>
+              <tr><th scope="row">Hoàn thiện</th><td>Trong 12 tháng từ ngày bàn giao</td></tr>
               <tr><th scope="row">Tiện ích</th><td>Sân vườn trên cao; dịch vụ – tiện ích tại tầng 2 khối đế</td></tr>
               <tr><th scope="row">Pháp lý</th><td>Đủ điều kiện bán, bảo lãnh VietinBank – <a href="phap-ly.html">xem hồ sơ</a></td></tr>
               <tr><th scope="row">Diện tích, giá</th><td>Liên hệ {TEL_TXT} để nhận mặt bằng và bảng giá</td></tr>

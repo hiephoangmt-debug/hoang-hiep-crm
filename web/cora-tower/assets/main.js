@@ -45,7 +45,8 @@ onScroll();
 // Reveal sections + count-up numbers when they enter the viewport
 const countUp = (el) => {
   const target = parseFloat(el.dataset.count);
-  const fmt = (n) => Math.round(n).toLocaleString("vi-VN");
+  const dec = (el.dataset.count.split(".")[1] || "").length;
+  const fmt = (n) => n.toLocaleString("vi-VN", { minimumFractionDigits: dec, maximumFractionDigits: dec });
   const t0 = performance.now();
   const tick = (t) => {
     const p = Math.min(1, (t - t0) / 1400);
