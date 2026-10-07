@@ -26,20 +26,21 @@ function teleClick_(d) {
 
 function teleSend_(text) {
   try {
-    UrlFetchApp.fetch('https://api.telegram.org/bot' + TELE_TOKEN + '/sendMessage', {
+    UrlFetchApp.fetch('https://api.telegram.org/bot' + TELE_TOKEN.trim() + '/sendMessage', {
       method: 'post', contentType: 'application/json', muteHttpExceptions: true,
-      payload: JSON.stringify({ chat_id: TELE_CHAT_ID, text: text, disable_web_page_preview: true })
+      payload: JSON.stringify({ chat_id: String(TELE_CHAT_ID).trim(), text: text, disable_web_page_preview: true })
     });
   } catch (err) {} // lỗi Telegram không làm hỏng việc lưu khách vào CRM
 }
 
 /** Chạy 1 lần (sau khi đã bấm Start / nhắn "hi" cho bot) → xem Nhật ký thực thi để lấy chat_id */
 function layChatId() {
-  var r = UrlFetchApp.fetch('https://api.telegram.org/bot' + TELE_TOKEN + '/getUpdates', { muteHttpExceptions: true });
-  var res = JSON.parse(r.getContentText()).result || [];
-  if (!res.length) { Logger.log('Chưa thấy tin nhắn – mở bot, bấm Start / gửi "hi" rồi chạy lại.'); return; }
-  res.forEach(function (u) {
-    var c = (u.message || u.channel_post || {}).chat;
+  var r = UrlFetchApp.fetch('https://api.telegram.org/bot' + TELE_TOKEN.trim() + '/getUpdates', { muteHttpExceptions: true });
+  var j = JSON.parse(r.getContentText());
+  if (!j.ok) { Logger.log('TOKEN SAI: ' + j.description + ' → dán lại token từ @BotFather'); return; }
+  if (!j.result.length) { Logger.log('Token đúng ✅ nhưng bot chưa nhận tin. Mở đúng bot của mình trên Telegram, bấm Start, gửi "hi" rồi chạy lại.'); return; }
+  j.result.forEach(function (u) {
+    var c = (u.message || u.my_chat_member || u.channel_post || {}).chat;
     if (c) Logger.log('chat_id = ' + c.id + '  (' + (c.title || c.first_name || '') + ')');
   });
 }
