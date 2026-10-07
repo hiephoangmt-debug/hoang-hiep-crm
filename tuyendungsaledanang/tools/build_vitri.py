@@ -133,9 +133,9 @@ EXTRA_CSS = """<style>
 .fitg ul{margin:0;padding-left:20px}.fitg li{margin:6px 0}
 .others{display:grid;gap:12px;margin-top:22px}
 @media(min-width:760px){.others{grid-template-columns:repeat(2,1fr)}}
-.others a{display:block;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;text-decoration:none}
-.others b{color:var(--navy);font-size:17px;display:block}.others span{color:var(--muted);font-size:15px}
-.others a:after{content:"Xem vị trí →";display:block;color:var(--orange);font-weight:800;font-size:14px;margin-top:6px}
+.others .oc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.others h3{margin:0;font-size:17px}.others h3 a{color:var(--navy);text-decoration:none}.others p{color:var(--muted);font-size:15px;margin:4px 0 0}
+.others .omore{display:inline-block;color:var(--orange);font-weight:800;font-size:14px;margin-top:6px;text-decoration:none}
 .envgrid{display:grid;gap:12px;margin-top:28px}
 @media(min-width:760px){.envgrid{grid-template-columns:repeat(3,1fr)}}
 .envgrid div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:18px}
@@ -332,7 +332,7 @@ def page(p):
   </div>
 </section>
 '''
-    oth = ''.join(f'<a href="{URL[k]}"><b>{n}</b><span>{d}</span></a>' for k, (n, d) in OTHERS.items() if k != p['key'])
+    oth = ''.join(f'<div class="oc"><h3><a href="{URL[k]}">{n}</a></h3><p>{d}</p><a class="omore" href="{URL[k]}">Xem vị trí →</a></div>' for k, (n, d) in OTHERS.items() if k != p['key'])
     others = f'''<section class="sec" id="vi-tri-khac">
   <div class="wrap">
     <div class="center">

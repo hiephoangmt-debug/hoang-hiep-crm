@@ -259,9 +259,10 @@ img{max-width:100%}
 @media(min-width:1000px){.guides{grid-template-columns:repeat(3,1fr)}.guides .gd:first-child{grid-column:span 2}}
 .gd{display:flex;flex-direction:column;gap:6px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;text-decoration:none;box-shadow:0 6px 22px rgba(10,31,68,.05)}
 .gtag{align-self:flex-start;background:rgba(255,107,26,.12);color:var(--orange);font-weight:800;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:999px}
-.gd b{color:var(--navy);font-size:18px;line-height:1.3}
+.gh{margin:0;font-size:18px;line-height:1.3}.gh a{color:var(--navy);text-decoration:none}
+.gdesc{margin:0}
 .gdesc{color:var(--muted);font-size:15px}
-.gmore{margin-top:auto;padding-top:6px;color:var(--orange);font-weight:800;font-size:14px}
+.gmore{margin-top:auto;padding-top:6px;color:var(--orange);font-weight:800;font-size:14px;text-decoration:none}
 .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:0 6px 22px rgba(10,31,68,.05)}
 .card .n{font-size:34px;font-weight:900;color:var(--orange);line-height:1}
 .card h3{font-size:19px;font-weight:800;color:var(--navy);margin-top:10px;line-height:1.3}
@@ -413,9 +414,9 @@ img{max-width:100%}
 .fitg ul{margin:0;padding-left:20px}.fitg li{margin:6px 0}
 .others{display:grid;gap:12px;margin-top:22px}
 @media(min-width:760px){.others{grid-template-columns:repeat(2,1fr)}}
-.others a{display:block;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;text-decoration:none}
-.others b{color:var(--navy);font-size:17px;display:block}.others span{color:var(--muted);font-size:15px}
-.others a:after{content:"Xem vị trí →";display:block;color:var(--orange);font-weight:800;font-size:14px;margin-top:6px}
+.others .oc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.others h3{margin:0;font-size:17px}.others h3 a{color:var(--navy);text-decoration:none}.others p{color:var(--muted);font-size:15px;margin:4px 0 0}
+.others .omore{display:inline-block;color:var(--orange);font-weight:800;font-size:14px;margin-top:6px;text-decoration:none}
 .envgrid{display:grid;gap:12px;margin-top:28px}
 @media(min-width:760px){.envgrid{grid-template-columns:repeat(3,1fr)}}
 .envgrid div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:18px}
@@ -685,7 +686,7 @@ img{max-width:100%}
       <h2 class="h2">Vào làm là được dạy. <em>Đọc thử trước ở đây.</em></h2>
       <p class="lead">Trích từ tài liệu đào tạo nội bộ: quảng cáo, chăm khách, làm nội dung.</p>
     </div>
-    <div class="guides"><a class="gd" href="https://www.tuyendungsaledanang.com/luu-y-truoc-khi-chay-quang-cao-facebook"><span class="gtag">Bài 1 · Quảng cáo</span><b>Lưu ý trước khi chạy quảng cáo Facebook</b><span class="gdesc">So sánh 4 kênh, ngân sách 1–2 triệu và 10 triệu, 3 lớp chống lead ảo.</span><span class="gmore">Đọc bài →</span></a><a class="gd" href="https://www.tuyendungsaledanang.com/chay-quang-cao-facebook-cho-nguoi-moi"><span class="gtag">Bài 2 · Quảng cáo</span><b>Chạy quảng cáo Facebook cho người mới</b><span class="gdesc">Từng bước, từng mục: chiến dịch, nhóm quảng cáo, form và 7 ngày đầu.</span><span class="gmore">Đọc bài →</span></a><a class="gd" href="https://www.tuyendungsaledanang.com/chay-google-ads-cho-nguoi-moi"><span class="gtag">Bài 3 · Quảng cáo</span><b>Chạy Google Ads cho người mới</b><span class="gdesc">Bắt khách đang tìm mua, chống click ảo, cài đặt từ khoá từng mục.</span><span class="gmore">Đọc bài →</span></a><a class="gd" href="https://www.tuyendungsaledanang.com/quay-video-ngan-ban-bds"><span class="gtag">Bài 4 · Nội dung</span><b>Quay video ngắn bán BĐS bằng điện thoại</b><span class="gdesc">Công thức 30 giây, 5 kịch bản mẫu, quay và dựng trong 7 bước.</span><span class="gmore">Đọc bài →</span></a><a class="gd" href="https://www.tuyendungsaledanang.com/cham-khach-qua-zalo"><span class="gtag">Bài 5 · Chăm khách</span><b>Chăm khách qua Zalo</b><span class="gdesc">Gọi trong 5 phút, quy trình 3 tin nhắn, lịch chăm 14 ngày.</span><span class="gmore">Đọc bài →</span></a></div>
+    <div class="guides"><div class="gd"><span class="gtag">Bài 1 · Quảng cáo</span><h3 class="gh"><a href="https://www.tuyendungsaledanang.com/luu-y-truoc-khi-chay-quang-cao-facebook">Lưu ý trước khi chạy quảng cáo Facebook</a></h3><p class="gdesc">So sánh 4 kênh, ngân sách 1–2 triệu và 10 triệu, 3 lớp chống lead ảo.</p><a class="gmore" href="https://www.tuyendungsaledanang.com/luu-y-truoc-khi-chay-quang-cao-facebook">Đọc bài →</a></div><div class="gd"><span class="gtag">Bài 2 · Quảng cáo</span><h3 class="gh"><a href="https://www.tuyendungsaledanang.com/chay-quang-cao-facebook-cho-nguoi-moi">Chạy quảng cáo Facebook cho người mới</a></h3><p class="gdesc">Từng bước, từng mục: chiến dịch, nhóm quảng cáo, form và 7 ngày đầu.</p><a class="gmore" href="https://www.tuyendungsaledanang.com/chay-quang-cao-facebook-cho-nguoi-moi">Đọc bài →</a></div><div class="gd"><span class="gtag">Bài 3 · Quảng cáo</span><h3 class="gh"><a href="https://www.tuyendungsaledanang.com/chay-google-ads-cho-nguoi-moi">Chạy Google Ads cho người mới</a></h3><p class="gdesc">Bắt khách đang tìm mua, chống click ảo, cài đặt từ khoá từng mục.</p><a class="gmore" href="https://www.tuyendungsaledanang.com/chay-google-ads-cho-nguoi-moi">Đọc bài →</a></div><div class="gd"><span class="gtag">Bài 4 · Nội dung</span><h3 class="gh"><a href="https://www.tuyendungsaledanang.com/quay-video-ngan-ban-bds">Quay video ngắn bán BĐS bằng điện thoại</a></h3><p class="gdesc">Công thức 30 giây, 5 kịch bản mẫu, quay và dựng trong 7 bước.</p><a class="gmore" href="https://www.tuyendungsaledanang.com/quay-video-ngan-ban-bds">Đọc bài →</a></div><div class="gd"><span class="gtag">Bài 5 · Chăm khách</span><h3 class="gh"><a href="https://www.tuyendungsaledanang.com/cham-khach-qua-zalo">Chăm khách qua Zalo</a></h3><p class="gdesc">Gọi trong 5 phút, quy trình 3 tin nhắn, lịch chăm 14 ngày.</p><a class="gmore" href="https://www.tuyendungsaledanang.com/cham-khach-qua-zalo">Đọc bài →</a></div></div>
   </div>
 </section>
 
@@ -756,7 +757,7 @@ img{max-width:100%}
       <span class="eyebrow">Chưa đúng vị trí?</span>
       <h2 class="h2">Các vị trí <em>đang tuyển khác</em></h2>
     </div>
-    <div class="others"><a href="https://www.tuyendungsaledanang.com/tuyen-chuyen-vien-kinh-doanh-bds-da-nang"><b>Chuyên viên kinh doanh</b><span>Đã có kinh nghiệm, cần nguồn khách đều.</span></a><a href="https://www.tuyendungsaledanang.com/tuyen-chuyen-gia-kinh-doanh-pro-sales-da-nang"><b>Pro Sales</b><span>Lương 7–10 triệu/tháng cho Sale đã có giao dịch.</span></a><a href="https://www.tuyendungsaledanang.com/tuyen-truong-nhom-truong-phong-kinh-doanh-bds-da-nang"><b>Trưởng nhóm · Trưởng phòng</b><span>Trưởng phòng lương 10–20 triệu/tháng.</span></a><a href="https://www.tuyendungsaledanang.com/tuyen-sale-moi-ra-truong"><b>Sale mới ra trường</b><span>Ngành nào cũng được, có người kèm.</span></a></div>
+    <div class="others"><div class="oc"><h3><a href="https://www.tuyendungsaledanang.com/tuyen-chuyen-vien-kinh-doanh-bds-da-nang">Chuyên viên kinh doanh</a></h3><p>Đã có kinh nghiệm, cần nguồn khách đều.</p><a class="omore" href="https://www.tuyendungsaledanang.com/tuyen-chuyen-vien-kinh-doanh-bds-da-nang">Xem vị trí →</a></div><div class="oc"><h3><a href="https://www.tuyendungsaledanang.com/tuyen-chuyen-gia-kinh-doanh-pro-sales-da-nang">Pro Sales</a></h3><p>Lương 7–10 triệu/tháng cho Sale đã có giao dịch.</p><a class="omore" href="https://www.tuyendungsaledanang.com/tuyen-chuyen-gia-kinh-doanh-pro-sales-da-nang">Xem vị trí →</a></div><div class="oc"><h3><a href="https://www.tuyendungsaledanang.com/tuyen-truong-nhom-truong-phong-kinh-doanh-bds-da-nang">Trưởng nhóm · Trưởng phòng</a></h3><p>Trưởng phòng lương 10–20 triệu/tháng.</p><a class="omore" href="https://www.tuyendungsaledanang.com/tuyen-truong-nhom-truong-phong-kinh-doanh-bds-da-nang">Xem vị trí →</a></div><div class="oc"><h3><a href="https://www.tuyendungsaledanang.com/tuyen-sale-moi-ra-truong">Sale mới ra trường</a></h3><p>Ngành nào cũng được, có người kèm.</p><a class="omore" href="https://www.tuyendungsaledanang.com/tuyen-sale-moi-ra-truong">Xem vị trí →</a></div></div>
     <p class="more"><a href="https://www.tuyendungsaledanang.com/">Về trang tuyển dụng chính →</a></p>
   </div>
 </section>
