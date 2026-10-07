@@ -357,6 +357,26 @@ img{max-width:100%}
 .copy{border-top:1px solid rgba(255,255,255,.1);margin-top:28px;padding-top:16px;font-size:13px;color:#7F8FAD}
 .sticky{position:fixed;left:0;right:0;bottom:0;display:flex;gap:8px;padding:8px;background:var(--navy3);z-index:99;box-shadow:0 -6px 20px rgba(0,0,0,.25)}
 .sticky a{flex:1;padding:13px 8px;font-size:15px;box-shadow:none}
+/* Cụm liên hệ nổi: Gọi · Zalo · Nhắn tin */
+.fab{position:fixed;right:16px;bottom:84px;z-index:120;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+.fab a{display:flex;align-items:center;gap:10px;text-decoration:none}
+.fab-ic{position:relative;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:13px;flex:none;box-shadow:0 8px 20px rgba(21,36,90,.28);border:3px solid #fff}
+.fab-ic svg{width:24px;height:24px;fill:#fff}
+.fab-lb{background:#fff;color:var(--navy);font-weight:800;font-size:14px;padding:8px 13px;border-radius:999px;box-shadow:0 6px 16px rgba(21,36,90,.18);white-space:nowrap}
+.fab-lb b{color:var(--orange)}
+.fab-call .fab-ic{background:var(--orange);animation:fabring 1.8s infinite}
+.fab-call .fab-ic svg{animation:fabshake 1.8s infinite}
+.fab-zalo .fab-ic{background:#0068FF;font-size:14px;letter-spacing:.2px}
+.fab-chat .fab-ic{background:var(--navy)}
+.fab-chat .fab-ic:after{content:"";position:absolute;top:2px;right:2px;width:12px;height:12px;border-radius:50%;background:#22C55E;border:2px solid #fff}
+.fab a.fab-tip{display:block;position:relative;width:228px;background:#fff;color:var(--ink);font-size:14px;line-height:1.45;padding:12px 14px;border-radius:14px 14px 4px 14px;box-shadow:0 12px 28px rgba(21,36,90,.22);border:1px solid var(--line);animation:fabtip 24s 2s infinite both}
+.fab-tip b{display:block;color:var(--navy);font-size:15px;margin-bottom:2px}
+.fab-tip i{font-style:normal;color:var(--orange);font-weight:800}
+.fab .fab-lb{display:none}
+@media(min-width:900px){.fab{bottom:28px;right:24px}.fab .fab-lb{display:block}.fab-sms{display:none!important}}
+@keyframes fabring{0%{box-shadow:0 0 0 0 rgba(255,107,26,.65),0 8px 20px rgba(21,36,90,.28)}70%{box-shadow:0 0 0 16px rgba(255,107,26,0),0 8px 20px rgba(21,36,90,.28)}100%{box-shadow:0 0 0 0 rgba(255,107,26,0),0 8px 20px rgba(21,36,90,.28)}}
+@keyframes fabshake{0%,40%,100%{transform:rotate(0)}5%,15%,25%{transform:rotate(-16deg)}10%,20%,30%{transform:rotate(16deg)}}
+@keyframes fabtip{0%{opacity:0;transform:translateY(10px) scale(.96);visibility:hidden}3%,45%{opacity:1;transform:none;visibility:visible}50%,100%{opacity:0;transform:translateY(10px) scale(.96);visibility:hidden}}
 @media(min-width:900px){.sticky{display:none}.foot{padding-bottom:44px}}
 </style>
 <link rel="canonical" href="https://www.tuyendungsaledanang.com/">
@@ -858,9 +878,15 @@ img{max-width:100%}
   </div>
 </footer>
 
+<div class="fab" id="lien-he-nhanh">
+  <a class="fab-tip" href="https://zalo.me/0904567009" target="_blank" rel="noopener"><b>Chào bạn 👋 Mình là Hiệp</b>Hỏi lương, thưởng hay lịch phỏng vấn? <i>Nhắn mình ngay nhé!</i></a>
+  <a class="fab-chat fab-sms" href="sms:0904567009?&amp;body=Ch%C3%A0o%20anh%20Hi%E1%BB%87p%2C%20em%20mu%E1%BB%91n%20%E1%BB%A9ng%20tuy%E1%BB%83n%20Sale%20B%C4%90S.%20Em%20t%C3%AAn%3A%20" aria-label="Nhắn tin cho anh Hiệp"><span class="fab-lb">Nhắn tin</span><span class="fab-ic"><svg viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.9 2 11.6c0 2.6 1.4 5 3.7 6.5L5 21.5l3.8-2.1c1 .3 2.1.4 3.2.4 5.5 0 10-3.9 10-8.6S17.5 3 12 3zm-4.5 9.9a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6zm4.5 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6zm4.5 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6z"/></svg></span></a>
+  <a class="fab-zalo" href="https://zalo.me/0904567009" target="_blank" rel="noopener" aria-label="Chat Zalo với anh Hiệp"><span class="fab-lb">Chat Zalo với <b>Hiệp</b></span><span class="fab-ic">Zalo</span></a>
+  <a class="fab-call" href="tel:0904567009" aria-label="Gọi 0904 567 009"><span class="fab-lb">Gọi <b>0904 567 009</b></span><span class="fab-ic"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></span></a>
+</div>
+
 <div class="sticky">
-  <a class="btn" href="#dang-ky">📝 Ứng tuyển ngay</a>
-  <a class="btn btn-navy" href="https://zalo.me/0904567009" style="border:2px solid rgba(255,255,255,.4)">💬 Zalo Hiệp</a>
+  <a class="btn" href="#dang-ky">📝 Ứng tuyển ngay, 30 giây</a>
 </div>
 
 </body>

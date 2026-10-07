@@ -26,6 +26,8 @@ for m in re.finditer(r'<section[^>]*>.*?</section>', main, re.S):
     sections[key] = blk
 footer = main[main.index('<footer class="foot">'):main.index('</footer>') + 9]
 sticky = main[main.index('<div class="sticky">'):main.index('</div>', main.index('<div class="sticky">')) + 6]
+fab = main[main.index('<div class="fab"'):main.index('<div class="sticky">')]
+sticky = fab + sticky
 tail = '\n</body>\n</html>\n'
 
 def opts(items):
