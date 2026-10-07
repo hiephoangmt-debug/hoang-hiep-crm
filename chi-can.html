@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tạo chỉ căn – CRM Sale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+<style>
+  :root {
+    --green-900: #123d2c;
+    --green-700: #1f5c43;
+    --green-50: #eaf3ee;
+    --gold: #c8a24a;
+    --gold-soft: #f6efdc;
+    --red: #e3263a;
+    --ink: #1c2420;
+    --muted: #66706b;
+    --line: #dfe5e1;
+    --bg: #f4f6f5;
+    --card: #ffffff;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 14px; line-height: 1.5;
+  }
+  header.app {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 12px 16px; background: var(--green-900); color: #fff;
+    position: sticky; top: 0; z-index: 10;
+  }
+  header.app h1 { font-size: 17px; margin: 0; font-weight: 600; }
+  header.app .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  button, .btn {
+    font: inherit; border: 1px solid var(--line); background: #fff; color: var(--ink);
+    padding: 7px 12px; border-radius: 8px; cursor: pointer; font-weight: 500;
+  }
+  button.primary { background: var(--gold); border-color: var(--gold); color: #1d1606; }
+  button.ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,.35); }
+  button:disabled { opacity: .5; cursor: wait; }
+
+  main.layout {
+    display: grid; grid-template-columns: minmax(320px, 420px) 1fr; gap: 16px;
+    padding: 16px; max-width: 1400px; margin: 0 auto;
+  }
+  @media (max-width: 900px) { main.layout { grid-template-columns: 1fr; } }
+
+  /* ---------- Form ---------- */
+  .panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; }
+  .panel + .panel { margin-top: 12px; }
+  .panel h2 { font-size: 14px; margin: 0 0 10px; color: var(--green-700); text-transform: uppercase; letter-spacing: .04em; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; }
+  .full { grid-column: 1 / -1; }
+  label { display: block; font-size: 12px; color: var(--muted); }
+  input, textarea, select {
+    width: 100%; font: inherit; color: var(--ink); margin-top: 3px;
+    border: 1px solid var(--line); border-radius: 8px; padding: 7px 9px; background: #fff;
+  }
+  textarea { min-height: 96px; resize: vertical; }
+  input:focus, textarea:focus, select:focus { outline: 2px solid var(--gold); border-color: var(--gold); }
+  .hint { font-size: 12px; color: var(--muted); margin: 6px 0 0; }
+  .img-slot { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px dashed var(--line); }
+  .img-slot:first-of-type { border-top: 0; }
+  .img-slot img { width: 64px; height: 48px; object-fit: cover; border-radius: 6px; border: 1px solid var(--line); background: var(--bg); }
+  .img-slot .meta { flex: 1; min-width: 0; }
+  .img-slot .meta b { display: block; font-size: 13px; }
+  .img-slot input[type=file] { display: none; }
+  .img-slot .row { display: flex; gap: 6px; margin-top: 4px; }
+  .img-slot .row button { padding: 3px 8px; font-size: 12px; }
+
+  /* ---------- Marker editor ---------- */
+  .marker-editor { position: relative; user-select: none; touch-action: none; cursor: crosshair; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); }
+  .marker-editor img { display: block; width: 100%; pointer-events: none; }
+  .marker-box { position: absolute; border: 3px solid var(--red); background: rgba(227,38,58,.12); pointer-events: none; }
+  .marker-box span {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+    background: var(--red); color: #fff; font-weight: 700; font-size: 12px; padding: 1px 6px; border-radius: 4px; white-space: nowrap;
+  }
+
+  /* ---------- Sheet (preview / export) ---------- */
+  .preview-wrap { overflow-x: auto; }
+  .sheet {
+    width: 794px; max-width: 100%; margin: 0 auto; background: #fff; color: var(--ink);
+    border-radius: 6px; box-shadow: 0 4px 24px rgba(0,0,0,.08); padding: 32px 36px;
+  }
+  @media (max-width: 860px) { .sheet { padding: 20px 16px; } }
+  .sheet .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 2px solid var(--gold); }
+  .sheet .brand { font-family: Georgia, "Times New Roman", serif; font-style: italic; color: #2e9b47; font-size: 28px; line-height: 1; }
+  .sheet .brand small { display: block; font-style: normal; font-size: 11px; letter-spacing: .3em; color: #2e9b47; margin-top: 2px; }
+  .sheet .sale { text-align: right; font-size: 13px; }
+  .sheet .sale b { font-size: 15px; color: var(--green-900); }
+  .sheet h3.title { font-size: 26px; margin: 18px 0 4px; color: var(--green-900); }
+  .sheet .sub { color: var(--muted); margin: 0 0 14px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .chip { background: var(--green-50); color: var(--green-900); border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 500; }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+  @media (max-width: 640px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
+  .kpi { border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
+  .kpi small { display: block; color: var(--muted); font-size: 11px; }
+  .kpi b { font-size: 18px; color: var(--green-900); }
+  .kpi.dark { background: var(--green-900); border-color: var(--green-900); }
+  .kpi.dark small { color: #cfe0d6; }
+  .kpi.dark b { color: var(--gold); }
+  .section { margin-top: 18px; }
+  .section h4 { font-size: 15px; margin: 0 0 8px; color: var(--green-900); }
+  .section h4::before { content: ""; display: inline-block; vertical-align: -2px; width: 4px; height: 16px; margin-right: 8px; background: var(--gold); border-radius: 2px; }
+  .figure { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #fafbfa; }
+  .figure img { display: block; width: 100%; }
+  .figure .cap { font-size: 12px; color: var(--muted); padding: 6px 10px; border-top: 1px solid var(--line); background: #fff; }
+  .plan { position: relative; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: start; }
+  @media (max-width: 640px) { .two { grid-template-columns: 1fr; } }
+  .loc { display: grid; grid-template-columns: 44% 1fr; gap: 12px; align-items: start; }
+  @media (max-width: 640px) { .loc { grid-template-columns: 1fr; } }
+  .why { background: var(--green-50); border-radius: 10px; padding: 12px 14px 12px 32px; margin: 0; }
+  .why li { margin: 3px 0; }
+  .spec { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .spec td { padding: 6px 8px; border-bottom: 1px solid var(--line); }
+  .spec td:first-child { color: var(--muted); width: 45%; }
+  .spec td:last-child { font-weight: 600; text-align: right; }
+  .cta { margin-top: 18px; background: var(--green-900); color: #fff; border-radius: 10px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .cta b { font-size: 15px; }
+  .cta .phone { color: var(--gold); font-weight: 700; font-size: 16px; }
+  .disclaimer { font-size: 11px; color: var(--muted); margin-top: 12px; }
+  .hidden { display: none !important; }
+
+  .toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 8px 14px; border-radius: 8px; font-size: 13px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 20; }
+  .toast.show { opacity: 1; }
+
+  @media print {
+    @page { size: A4; margin: 10mm; }
+    body { background: #fff; }
+    header.app, .editor { display: none !important; }
+    main.layout { display: block; padding: 0; }
+    .sheet { box-shadow: none; width: auto; padding: 0; }
+    .section, .figure, .kpis { break-inside: avoid; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<header class="app">
+  <h1>Tạo chỉ căn</h1>
+  <div class="actions">
+    <button class="ghost" id="btnReset" type="button">Làm mới</button>
+    <button class="ghost" id="btnPrint" type="button">In / PDF</button>
+    <button class="primary" id="btnPng" type="button">Tải ảnh PNG</button>
+  </div>
+</header>
+
+<main class="layout">
+  <!-- ================= EDITOR ================= -->
+  <section class="editor">
+    <div class="panel">
+      <h2>Thông tin căn</h2>
+      <div class="grid2">
+        <label class="full">Dự án <input data-f="duAn"></label>
+        <label>Tòa <input data-f="toa"></label>
+        <label>Tầng <input data-f="tang" inputmode="numeric"></label>
+        <label>Mã căn <input data-f="maCan"></label>
+        <label>Loại căn <input data-f="loaiCan"></label>
+        <label>Diện tích tim (m²) <input data-f="dtTim" inputmode="decimal"></label>
+        <label>Thông thủy (m²) <input data-f="dtThongThuy" inputmode="decimal"></label>
+        <label>Phòng ngủ / WC <input data-f="phongNgu"></label>
+        <label>Hướng ban công <input data-f="huong"></label>
+        <label class="full">View <input data-f="view"></label>
+        <label>Giá niêm yết (đ) <input data-f="gia" inputmode="numeric" placeholder="vd 3156000000"></label>
+        <label>Tình trạng
+          <select data-f="tinhTrang">
+            <option>Còn trống</option><option>Đang giữ chỗ</option><option>Đã cọc</option><option>Đã bán</option>
+          </select>
+        </label>
+        <label class="full">Điểm nổi bật (mỗi dòng một ý)
+          <textarea data-f="noiBat"></textarea>
+        </label>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Hình ảnh</h2>
+      <div id="imgSlots"></div>
+      <p class="hint">Ảnh tải lên được thu nhỏ trong trình duyệt, không gửi đi đâu.</p>
+    </div>
+
+    <div class="panel">
+      <h2>Khoanh vị trí căn trên mặt bằng</h2>
+      <div class="marker-editor" id="markerEditor">
+        <img id="markerImg" alt="Mặt bằng tầng">
+        <div class="marker-box hidden" id="markerEditBox"><span></span></div>
+      </div>
+      <div class="grid2" style="margin-top:8px">
+        <label>Nhãn ô đỏ <input data-f="markerLabel" placeholder="mặc định: số căn"></label>
+        <div style="display:flex;align-items:flex-end"><button type="button" id="btnClearMarker" style="width:100%">Xóa ô đỏ</button></div>
+      </div>
+      <p class="hint">Kéo chuột (hoặc kéo ngón tay) trên mặt bằng để vẽ ô đỏ quanh căn.</p>
+    </div>
+
+    <div class="panel">
+      <h2>Chuyên viên tư vấn</h2>
+      <div class="grid2">
+        <label>Họ tên <input data-f="saleTen"></label>
+        <label>Chức danh <input data-f="saleChucDanh"></label>
+        <label class="full">Hotline / Zalo <input data-f="saleSdt" inputmode="tel" placeholder="vd 0905 xxx xxx"></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PREVIEW ================= -->
+  <section class="preview-wrap">
+    <article class="sheet" id="sheet">
+      <div class="top">
+        <div class="brand">Four S<small>TOWER</small></div>
+        <div class="sale"><b data-o="saleTen"></b><br><span data-o="saleChucDanh"></span><br>Hotline/Zalo: <span data-o="saleSdt"></span></div>
+      </div>
+
+      <h3 class="title">Chỉ căn <span data-o="maCan"></span></h3>
+      <p class="sub"><span data-o="duAn"></span> · Lập ngày <span id="oNgay"></span></p>
+      <div class="chips" id="oChips"></div>
+
+      <div class="kpis">
+        <div class="kpi dark"><small>Giá niêm yết</small><b id="oGia">—</b></div>
+        <div class="kpi"><small>Đơn giá / m² thông thủy</small><b id="oDonGia">—</b></div>
+        <div class="kpi"><small>Thông thủy</small><b id="oTT">—</b></div>
+        <div class="kpi"><small>Tình trạng</small><b data-o="tinhTrang"></b></div>
+      </div>
+
+      <div class="section" id="secWhy">
+        <h4>Vì sao nên chọn căn <span data-o="maCan"></span>?</h4>
+        <ul class="why" id="oWhy"></ul>
+      </div>
+
+      <div class="section" id="secPlan">
+        <h4>Vị trí căn trên mặt bằng tầng <span data-o="tang"></span> – Tòa <span data-o="toa"></span></h4>
+        <div class="figure">
+          <div class="plan">
+            <img data-img="matBang" alt="Mặt bằng tầng">
+            <div class="marker-box hidden" id="markerOutBox"><span></span></div>
+          </div>
+          <div class="cap">Ô đỏ: vị trí căn <span data-o="maCan"></span> (mặt bằng CĐT, minh họa).</div>
+        </div>
+      </div>
+
+      <div class="section" id="secLayout">
+        <h4>Layout căn <span data-o="loaiCan"></span></h4>
+        <div class="two">
+          <div class="figure" data-fig="layout2d"><img data-img="layout2d" alt="Layout 2D"><div class="cap">Mặt bằng căn hộ 2D</div></div>
+          <div class="figure" data-fig="layout3d"><img data-img="layout3d" alt="Layout 3D"><div class="cap">Phối cảnh 3D căn hộ</div></div>
+        </div>
+      </div>
+
+      <div class="section" id="secLoc">
+        <h4>Vị trí dự án & thông số</h4>
+        <div class="loc">
+          <div class="figure" data-fig="viTri"><img data-img="viTri" alt="Vị trí dự án"><div class="cap">Kết nối vùng (ảnh minh họa)</div></div>
+          <table class="spec"><tbody id="oSpec"></tbody></table>
+        </div>
+      </div>
+
+      <div class="cta">
+        <div><b>Giữ căn <span data-o="maCan"></span> & nhận phiếu tính giá chính thức</b><br><span data-o="saleTen"></span> – <span data-o="saleChucDanh"></span></div>
+        <div class="phone" data-o="saleSdt"></div>
+      </div>
+      <p class="disclaimer">Thông tin mang tính tham khảo; diện tích, giá và tình trạng căn có thể thay đổi theo thời điểm. Hình ảnh chỉ mang tính chất minh họa. Số liệu chính thức theo hợp đồng mua bán với chủ đầu tư.</p>
+    </article>
+  </section>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(() => {
+  const STORE_KEY = 'chiCan.v1';
+  const MAX_IMG = 2000;
+
+  const IMG_SLOTS = [
+    { key: 'viTri',    label: 'Vị trí dự án',     src: 'assets/four-s/vi-tri.jpg' },
+    { key: 'matBang',  label: 'Mặt bằng tầng',    src: 'assets/four-s/mat-bang-tang-5-f2.jpg' },
+    { key: 'layout2d', label: 'Layout căn 2D',    src: 'assets/four-s/layout-1pn-plus-2d.jpg' },
+    { key: 'layout3d', label: 'Layout căn 3D',    src: 'assets/four-s/layout-1pn-plus-3d.jpg' },
+  ];
+
+  const DEFAULTS = {
+    duAn: 'Four S Tower – Đà Nẵng',
+    toa: 'F2', tang: '5', maCan: 'F2-05-30', loaiCan: '1PN+',
+    dtTim: '', dtThongThuy: '60.8', phongNgu: '2 PN · 1 WC', huong: '',
+    view: 'Sông, biển, Ngũ Hành Sơn', gia: '3156000000', tinhTrang: 'Còn trống',
+    noiBat: [
+      'Layout 1PN+ linh hoạt: phòng đa năng dùng làm phòng ngủ thứ 2',
+      'Logia rộng, view Sông, biển, Ngũ Hành Sơn',
+      'Cách bãi tắm Sơn Thủy vài phút, gần cầu Bờ Quan – đường Minh Mạng',
+      'Kích thước căn 6,3m × 11,52m, công năng vuông vức',
+    ].join('\n'),
+    markerLabel: '',
+    saleTen: 'Hiệp Hoàng', saleChucDanh: 'Chuyên viên kinh doanh', saleSdt: '',
+    // ô đỏ theo % kích thước ảnh mặt bằng
+    marker: { x: 44.3, y: 19.4, w: 10.2, h: 43.2 },
+    images: {},
+  };
+
+  let state = load();
+
+  // ---------- storage ----------
+  function load() {
+    try {
+      const raw = localStorage.getItem(STORE_KEY);
+      if (raw) return { ...structuredClone(DEFAULTS), ...JSON.parse(raw) };
+    } catch (e) { /* bỏ qua */ }
+    return structuredClone(DEFAULTS);
+  }
+  function save() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); }
+    catch (e) {
+      // Hết dung lượng (thường do ảnh lớn) – vẫn lưu phần chữ
+      try { localStorage.setItem(STORE_KEY, JSON.stringify({ ...state, images: {} })); } catch (_) {}
+    }
+  }
+
+  // ---------- helpers ----------
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const num = v => { const n = parseFloat(String(v).replace(/[^\d.,]/g, '').replace(',', '.')); return isFinite(n) ? n : 0; };
+  const money = v => Number(String(v).replace(/\D/g, '')) || 0;
+  const fmtTy = d => d >= 1e9 ? (d / 1e9).toLocaleString('vi-VN', { maximumFractionDigits: 3 }) + ' tỷ'
+                              : (d / 1e6).toLocaleString('vi-VN', { maximumFractionDigits: 0 }) + ' triệu';
+  const imgSrc = k => state.images[k] || IMG_SLOTS.find(s => s.key === k).src;
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('show'), 2200); }
+
+  function shrinkImage(file) {
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        const s = Math.min(1, MAX_IMG / Math.max(img.width, img.height));
+        const c = document.createElement('canvas');
+        c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url);
+        resolve(c.toDataURL('image/jpeg', 0.85));
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Không đọc được ảnh')); };
+      img.src = url;
+    });
+  }
+
+  // ---------- form binding ----------
+  $$('[data-f]').forEach(el => {
+    el.value = state[el.dataset.f] ?? '';
+    el.addEventListener('input', () => { state[el.dataset.f] = el.value; render(); save(); });
+  });
+
+  // ---------- image slots ----------
+  const slotsEl = $('#imgSlots');
+  IMG_SLOTS.forEach(slot => {
+    const row = document.createElement('div');
+    row.className = 'img-slot';
+    row.innerHTML = `
+      <img alt="">
+      <div class="meta"><b>${slot.label}</b>
+        <div class="row">
+          <button type="button" data-act="pick">Chọn ảnh</button>
+          <button type="button" data-act="hide"></button>
+          <button type="button" data-act="default">Ảnh mặc định</button>
+        </div>
+      </div>
+      <input type="file" accept="image/*">`;
+    const file = $('input[type=file]', row);
+    $('[data-act=pick]', row).onclick = () => file.click();
+    $('[data-act=default]', row).onclick = () => { delete state.images[slot.key]; render(); save(); };
+    $('[data-act=hide]', row).onclick = () => {
+      state.hidden = { ...(state.hidden || {}), [slot.key]: !(state.hidden || {})[slot.key] };
+      render(); save();
+    };
+    file.onchange = async () => {
+      if (!file.files[0]) return;
+      try {
+        state.images[slot.key] = await shrinkImage(file.files[0]);
+        if (slot.key === 'matBang') state.marker = null;
+        render(); save();
+      } catch (e) { toast(e.message); }
+      file.value = '';
+    };
+    row.dataset.key = slot.key;
+    slotsEl.appendChild(row);
+  });
+
+  // ---------- marker editor ----------
+  const editor = $('#markerEditor');
+  let drag = null;
+  const pct = e => {
+    const r = editor.getBoundingClientRect();
+    return { x: Math.min(100, Math.max(0, (e.clientX - r.left) / r.width * 100)),
+             y: Math.min(100, Math.max(0, (e.clientY - r.top) / r.height * 100)) };
+  };
+  editor.addEventListener('pointerdown', e => { editor.setPointerCapture(e.pointerId); drag = pct(e); });
+  editor.addEventListener('pointermove', e => {
+    if (!drag) return;
+    const p = pct(e);
+    state.marker = { x: Math.min(drag.x, p.x), y: Math.min(drag.y, p.y), w: Math.abs(p.x - drag.x), h: Math.abs(p.y - drag.y) };
+    renderMarkers();
+  });
+  const endDrag = () => {
+    if (!drag) return;
+    drag = null;
+    if (state.marker && (state.marker.w < 0.5 || state.marker.h < 0.5)) state.marker = null;
+    renderMarkers(); save();
+  };
+  editor.addEventListener('pointerup', endDrag);
+  editor.addEventListener('pointercancel', endDrag);
+  $('#btnClearMarker').onclick = () => { state.marker = null; renderMarkers(); save(); };
+
+  function markerLabel() {
+    if (state.markerLabel) return state.markerLabel;
+    const parts = String(state.maCan || '').split('-');
+    return parts[parts.length - 1] || '';
+  }
+  function renderMarkers() {
+    ['#markerEditBox', '#markerOutBox'].forEach(sel => {
+      const b = $(sel), m = state.marker;
+      b.classList.toggle('hidden', !m);
+      if (!m) return;
+      Object.assign(b.style, { left: m.x + '%', top: m.y + '%', width: m.w + '%', height: m.h + '%' });
+      $('span', b).textContent = markerLabel();
+    });
+  }
+
+  // ---------- render ----------
+  function render() {
+    $$('[data-o]').forEach(el => { el.textContent = state[el.dataset.o] || ''; });
+    $('#oNgay').textContent = new Date().toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+    const chips = [
+      state.loaiCan, state.tang && `Tầng ${state.tang}`, state.toa && `Tòa ${state.toa}`,
+      state.phongNgu, state.huong && `Hướng ${state.huong}`, state.view && `View ${state.view}`,
+    ].filter(Boolean);
+    $('#oChips').innerHTML = chips.map(c => `<span class="chip">${esc(c)}</span>`).join('');
+
+    const gia = money(state.gia), tt = num(state.dtThongThuy);
+    $('#oGia').textContent = gia ? fmtTy(gia) : 'Liên hệ';
+    $('#oDonGia').textContent = gia && tt ? (gia / tt / 1e6).toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + ' tr/m²' : '—';
+    $('#oTT').textContent = tt ? tt.toLocaleString('vi-VN') + ' m²' : '—';
+
+    const why = String(state.noiBat || '').split('\n').map(s => s.trim()).filter(Boolean);
+    $('#oWhy').innerHTML = why.map(s => `<li>${esc(s)}</li>`).join('');
+    $('#secWhy').classList.toggle('hidden', !why.length);
+
+    const spec = [
+      ['Mã căn', state.maCan], ['Tòa / Tầng', [state.toa, state.tang].filter(Boolean).join(' / ')],
+      ['Loại căn', state.loaiCan], ['Phòng ngủ / WC', state.phongNgu],
+      ['Diện tích tim', state.dtTim && `${state.dtTim} m²`], ['Diện tích thông thủy', state.dtThongThuy && `${state.dtThongThuy} m²`],
+      ['Hướng ban công', state.huong], ['View', state.view],
+      ['Giá niêm yết', gia ? gia.toLocaleString('vi-VN') + ' đ' : ''], ['Tình trạng', state.tinhTrang],
+    ].filter(([, v]) => v);
+    $('#oSpec').innerHTML = spec.map(([k, v]) => `<tr><td>${esc(k)}</td><td>${esc(v)}</td></tr>`).join('');
+
+    const hidden = state.hidden || {};
+    $$('[data-img]').forEach(img => { img.src = imgSrc(img.dataset.img); });
+    $('#markerImg').src = imgSrc('matBang');
+    $('#secPlan').classList.toggle('hidden', !!hidden.matBang);
+    $$('[data-fig]').forEach(f => f.classList.toggle('hidden', !!hidden[f.dataset.fig]));
+    $('#secLayout').classList.toggle('hidden', !!(hidden.layout2d && hidden.layout3d));
+    $('#secLayout .two').style.gridTemplateColumns = (hidden.layout2d || hidden.layout3d) ? '1fr' : '';
+    $('#secLoc .loc').style.gridTemplateColumns = hidden.viTri ? '1fr' : '';
+
+    $$('.img-slot').forEach(row => {
+      const k = row.dataset.key;
+      $('img', row).src = imgSrc(k);
+      $('[data-act=hide]', row).textContent = hidden[k] ? 'Hiện' : 'Ẩn';
+      $('[data-act=default]', row).classList.toggle('hidden', !state.images[k]);
+    });
+
+    renderMarkers();
+    document.title = `Chỉ căn ${state.maCan || ''} – CRM Sale`;
+  }
+
+  // ---------- actions ----------
+  $('#btnPrint').onclick = () => window.print();
+
+  $('#btnReset').onclick = () => {
+    if (!confirm('Xóa dữ liệu đã nhập và quay về mẫu mặc định?')) return;
+    try { localStorage.removeItem(STORE_KEY); } catch (e) {}
+    state = structuredClone(DEFAULTS);
+    $$('[data-f]').forEach(el => { el.value = state[el.dataset.f] ?? ''; });
+    render();
+  };
+
+  $('#btnPng').onclick = async () => {
+    if (!window.html2canvas) { toast('Chưa tải xong thư viện xuất ảnh, thử lại sau giây lát'); return; }
+    const btn = $('#btnPng'); btn.disabled = true; btn.textContent = 'Đang xuất…';
+    try {
+      const canvas = await html2canvas($('#sheet'), { scale: 2, backgroundColor: '#ffffff', useCORS: true });
+      const a = document.createElement('a');
+      a.download = `chi-can-${(state.maCan || 'can-ho').replace(/[^\w-]+/g, '_')}.png`;
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+      toast('Đã tải ảnh – gửi khách qua Zalo được ngay');
+    } catch (e) {
+      toast('Không xuất được ảnh: ' + e.message);
+    } finally {
+      btn.disabled = false; btn.textContent = 'Tải ảnh PNG';
+    }
+  };
+
+  render();
+})();
+</script>
+</body>
+</html>
