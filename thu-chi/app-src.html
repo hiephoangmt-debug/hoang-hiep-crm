@@ -387,9 +387,15 @@ try { SY.cfg = JSON.parse(localStorage.getItem(SYNC_KEY) || '{}'); } catch (e) {
 const injectedUrl = (document.getElementById('syncUrl')?.dataset.url || '');
 if (!SY.cfg.url && /^https:\/\//.test(injectedUrl)) SY.cfg.url = injectedUrl;
 const saveCfg = () => { try { localStorage.setItem(SYNC_KEY, JSON.stringify(SY.cfg)); } catch (e) {} };
-const syncOn = () => !!(SY.cfg.url && SY.cfg.key && SY.cfg.linked);
+// Chạy bên trong Google Apps Script → gọi máy chủ bằng google.script.run (có đăng nhập Google)
+const GAS = !!(window.google && google.script && google.script.run);
+const syncOn = () => GAS ? !!(SY.gasOk || (SY.cfg.key && SY.cfg.linked)) : !!(SY.cfg.url && SY.cfg.key && SY.cfg.linked);
+function gasCall(req) {
+  return new Promise((res, rej) => google.script.run.withSuccessHandler(res).withFailureHandler(e => rej(new Error((e && e.message) || String(e)))).apiCall(req));
+}
 
 async function api(action, payload = {}, cfg = SY.cfg) {
+  if (GAS) return gasCall({ action, key: cfg.key || '', ...payload });
   let r;
   if (action === 'load') r = await fetch(`${cfg.url}?action=load&key=${encodeURIComponent(cfg.key)}&t=${now()}`);
   else r = await fetch(cfg.url, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action, key: cfg.key, ...payload }) });
@@ -401,7 +407,8 @@ function paintSync() {
   const el = document.getElementById('syncChip'); if (!el) return;
   const t = SY.last ? new Date(SY.last).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }) : '';
   const map = { off: ['☁ Chưa đồng bộ', ''], syncing: ['⟳ Đang đồng bộ…', 'info'], ok: ['☁ Đã đồng bộ ' + t, 'done'], error: ['⚠ Lỗi đồng bộ', 'warn'], offline: ['⚠ Mất mạng – sẽ đồng bộ lại', 'warn'] };
-  const [txt, cls] = map[syncOn() ? SY.state : 'off'];
+  const [txt0, cls] = map[syncOn() ? SY.state : 'off'];
+  const txt = txt0 + (SY.email && SY.gasOk ? ' · ' + SY.email.split('@')[0] : '');
   el.textContent = txt; el.className = 'pill ' + cls; el.title = SY.msg || '';
   const st = document.getElementById('syncStatus'); if (st) st.textContent = SY.msg ? txt + ' – ' + SY.msg : txt;
 }
@@ -1467,10 +1474,13 @@ function settings() {
       <div class="card" id="syncCard">
         <h3>Đồng bộ nhiều máy (Google Sheets)</h3>
         <p class="small muted" style="margin-top:0">Kết nối với Google Sheet để dùng chung dữ liệu trên điện thoại, máy tính của cả nhà. Xem hướng dẫn trong file <b>HUONG-DAN-DONG-BO.md</b>.</p>
-        <label class="f">Địa chỉ đồng bộ (Web App URL)<input id="syUrl" value="${esc(SY.cfg.url || '')}" placeholder="https://script.google.com/macros/s/…/exec" ${injectedUrl.startsWith('https://') ? 'readonly' : ''}></label>
+ ${GAS ? `<div class="alert ${SY.gasOk ? 'ok' : 'warn'}" style="margin-bottom:8px">${SY.email
+          ? (SY.gasOk ? `✓ Đã đăng nhập Google: <b>${esc(SY.email)}</b> – tự đồng bộ, không cần mã bảo mật.` : `Tài khoản <b>${esc(SY.email)}</b> chưa được cấp quyền. Nhờ chủ Google Sheet thêm email này, hoặc nhập mã bảo mật bên dưới.`)
+          : 'Chưa nhận được email đăng nhập Google (bản triển khai đang "Thực thi với tư cách: Tôi"). Dùng mã bảo mật bên dưới, hoặc xem hướng dẫn bật đăng nhập bằng Gmail.'}</div>` : ''}
+        <label class="f" ${GAS ? 'hidden' : ''}>Địa chỉ đồng bộ (Web App URL)<input id="syUrl" value="${esc(SY.cfg.url || '')}" placeholder="https://script.google.com/macros/s/…/exec" ${injectedUrl.startsWith('https://') ? 'readonly' : ''}></label>
         <label class="f" style="margin-top:8px">Mã bảo mật<input id="syKey" type="password" value="${esc(SY.cfg.key || '')}" placeholder="lần đầu: tự đặt mã từ 6 ký tự"></label>
         <div class="actions" style="justify-content:flex-start;margin-top:10px">
-          ${syncOn() ? `<button class="btn primary" id="syNow">Đồng bộ ngay</button><button class="btn" id="syOff">Ngắt kết nối</button>` : `<button class="btn primary" id="syConnect">Kết nối</button>`}
+          ${syncOn() ? `<button class="btn primary" id="syNow">Đồng bộ ngay</button>${SY.gasOk ? '' : '<button class="btn" id="syOff">Ngắt kết nối</button>'}` : `<button class="btn primary" id="syConnect">Kết nối</button>`}
         </div>
         <p class="small" id="syncStatus"></p>
         <label class="f">Tên máy này (hiện trong nhật ký thay đổi)<input id="devName" value="${esc(deviceName())}"></label>
@@ -1713,7 +1723,7 @@ function bindView(v) {
 
 async function connectSync() {
   const cfg = { url: $('#syUrl').value.trim(), key: $('#syKey').value.trim() };
-  if (!/^https:\/\/script\.google(usercontent)?\.com\//.test(cfg.url)) { alert('Địa chỉ đồng bộ phải có dạng https://script.google.com/macros/s/…/exec'); return; }
+  if (!GAS && !/^https:\/\/script\.google(usercontent)?\.com\//.test(cfg.url)) { alert('Địa chỉ đồng bộ phải có dạng https://script.google.com/macros/s/…/exec'); return; }
   if (!cfg.key) { alert('Vui lòng nhập mã bảo mật'); return; }
   const btn = $('#syConnect'); btn.disabled = true; btn.textContent = 'Đang kết nối…';
   try {
@@ -1739,7 +1749,22 @@ $$('[data-add]').forEach(b => b.onclick = () => txDialog(null, { type: b.dataset
 
 render();
 paintSync();
-syncNow();
+(async () => {
+  if (GAS) {
+    try {
+      const w = await gasCall({ action: 'whoami' });
+      SY.email = w.email || ''; SY.gasOk = !!w.allowed;
+      if (SY.gasOk && !SY.cfg.linked) { // máy mới đăng nhập đúng email → lấy dữ liệu trên Google Sheet
+        SY.cfg.linked = true; saveCfg();
+        const r = await gasCall({ action: 'load' });
+        await syncNow(r.ok && r.data && (r.data.tx || []).length ? 'remote' : 'merge');
+        render(); return;
+      }
+    } catch (e) { SY.msg = e.message; }
+    paintSync(); if (UI.tab === 'settings') render();
+  }
+  syncNow();
+})();
 </script>
 </body>
 </html>

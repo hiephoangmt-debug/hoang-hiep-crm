@@ -5,7 +5,16 @@
  * Chỉ cần dán file này vào Code.gs của Apps Script (gắn với 1 Google Sheet) rồi
  * Triển khai → Ứng dụng web. Giao diện app được tự tải từ GitHub (APP_URL).
  * Mã bảo mật: lần Kết nối đầu tiên trong app, mã được nhập sẽ trở thành mã bảo mật.
+ *
+ * ĐĂNG NHẬP BẰNG GMAIL: triển khai với "Thực thi với tư cách: Người dùng truy cập ứng dụng web"
+ * và "Người có quyền truy cập: Bất kỳ ai có Tài khoản Google", rồi CHIA SẺ Google Sheet này
+ * (quyền Người chỉnh sửa) cho từng email trong danh sách NGUOI_DUNG bên dưới.
  */
+
+// Các email được đăng nhập (chủ Google Sheet luôn được phép). Thêm email: 'ten@gmail.com',
+const NGUOI_DUNG = [
+  'hiephoangmt@gmail.com',
+];
 
 // Địa chỉ giao diện app (file index.html trên GitHub)
 const APP_URL = 'https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/claude/quirky-knuth-tncnth/thu-chi/index.html';
@@ -62,38 +71,68 @@ function doPost(e) {
   return handle_(body.action, body);
 }
 
-function handle_(action, p) {
+/* ---------- Gọi từ app qua google.script.run (có đăng nhập Google) ---------- */
+function apiCall(req) {
+  req = req || {};
+  const email = currentEmail_();
+  const allowed = !!email && allowedEmails_().indexOf(email) >= 0;
+  if (req.action === 'whoami') return { ok: true, email: email, allowed: allowed };
+  if (allowed) return core_(req.action, req);
+  return checkKey_(req) || core_(req.action, req); // chưa đăng nhập đúng email → dùng mã bảo mật
+}
+
+function currentEmail_() {
+  try { return String(Session.getActiveUser().getEmail() || '').toLowerCase(); } catch (e) { return ''; }
+}
+function allowedEmails_() {
+  const list = NGUOI_DUNG.map(function (x) { return String(x).trim().toLowerCase(); });
+  try { const o = ss_().getOwner(); if (o) list.push(o.getEmail().toLowerCase()); } catch (e) {}
+  return list;
+}
+// Kiểm tra mã bảo mật; trả về lỗi (object) hoặc null nếu hợp lệ
+function checkKey_(p) {
   const props = PropertiesService.getScriptProperties();
   let key = props.getProperty('SYNC_KEY');
   if (!key) {
     // Lần kết nối đầu tiên: mã người dùng nhập trở thành mã bảo mật
     const k = String(p.key || '');
-    if (k.length < 6) return json_({ ok: false, error: 'Lần đầu kết nối: hãy đặt mã bảo mật từ 6 ký tự trở lên' });
+    if (k.length < 6) {
+      const email = currentEmail_();
+      return { ok: false, needAuth: true, email: email,
+        error: email ? 'Tài khoản ' + email + ' chưa được cấp quyền – nhập mã bảo mật (từ 6 ký tự) hoặc nhờ chủ Sheet thêm email' : 'Lần đầu kết nối: hãy đặt mã bảo mật từ 6 ký tự trở lên' };
+    }
     props.setProperty('SYNC_KEY', k);
     key = k;
   }
-  if (String(p.key || '') !== key) return json_({ ok: false, error: 'Sai mã bảo mật' });
+  if (String(p.key || '') !== key) return { ok: false, needAuth: true, error: 'Sai mã bảo mật' };
+  return null;
+}
 
-  if (action === 'load') return json_({ ok: true, rev: getRev_(), data: readData_() });
+function handle_(action, p) {
+  return json_(checkKey_(p) || core_(action, p));
+}
+
+function core_(action, p) {
+  if (action === 'load') return { ok: true, rev: getRev_(), data: readData_() };
 
   if (action === 'save') {
     const data = p.data;
-    if (!data || !Array.isArray(data.tx) || !Array.isArray(data.categories)) return json_({ ok: false, error: 'Dữ liệu không hợp lệ' });
+    if (!data || !Array.isArray(data.tx) || !Array.isArray(data.categories)) return { ok: false, error: 'Dữ liệu không hợp lệ' };
     const lock = LockService.getScriptLock();
     lock.waitLock(20000);
     try {
       const rev = getRev_();
       // Máy khác vừa lưu → báo xung đột để máy này tải lại và gộp dữ liệu
-      if (!p.force && Number(p.baseRev) !== rev) return json_({ ok: false, conflict: true, rev: rev });
+      if (!p.force && Number(p.baseRev) !== rev) return { ok: false, conflict: true, rev: rev };
       writeData_(data);
       setRev_(rev + 1);
       try { writeMirror_(data); } catch (err) { console.error(err); }
-      return json_({ ok: true, rev: rev + 1 });
+      return { ok: true, rev: rev + 1, by: currentEmail_() };
     } finally {
       lock.releaseLock();
     }
   }
-  return json_({ ok: false, error: 'Lệnh không hợp lệ' });
+  return { ok: false, error: 'Lệnh không hợp lệ' };
 }
 
 /* ---------- Lưu trữ ---------- */
