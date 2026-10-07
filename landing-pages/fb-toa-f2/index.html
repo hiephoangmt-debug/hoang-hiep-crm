@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Tòa F2 Sun FourS Tower – Căn hộ Sun Group bên sông, vốn từ ~725 triệu</title>
-<meta name="description" content="Căn hộ Sun Group bên sông Cổ Cò, Đà Nẵng. Vay 70%, 24 tháng không lãi không gốc, vốn ban đầu ~725 triệu cho căn 2PN. Cách biển 2 km, 10 phút từ sân bay. Nhận nhà 2028.">
+<title>Tòa F2 Sun FourS Tower – Căn hộ Sun Group bên sông, vốn từ ~700 triệu</title>
+<meta name="description" content="Căn hộ Sun Group bên sông Cổ Cò, Đà Nẵng. Vay 70%, 24 tháng không lãi không gốc, vốn ban đầu ~700 triệu cho căn 2PN 61 m². Cách biển 2 km, 10 phút từ sân bay. Nhận nhà 2028.">
 <meta name="theme-color" content="#13285A">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="vi_VN">
-<meta property="og:title" content="Căn hộ Sun Group bên sông – vốn ban đầu chỉ ~725 triệu">
+<meta property="og:title" content="Căn hộ Sun Group bên sông – vốn ban đầu chỉ ~700 triệu">
 <meta property="og:description" content="Vay 70%, 24 tháng không lãi, không gốc. Cách biển 2 km, 10 phút từ sân bay. Nhận nhà 2028.">
 <meta property="og:image" content="anh-hero.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -104,7 +104,7 @@ h3{font-size:20px}
 /* 6. Dòng tiền */
 .calc{display:grid;gap:20px;margin-top:24px}
 .calc-box{background:#fff;border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
-.types{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.types{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
 .types button{min-height:56px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--navy);cursor:pointer;font-weight:700;font-size:14px;line-height:1.2;padding:6px 4px}
 .types button small{display:block;font-weight:500;font-size:12px;color:var(--muted)}
 .types button.on{background:var(--navy);border-color:var(--navy);color:#fff}
@@ -227,6 +227,7 @@ footer a{color:var(--gold);font-weight:600}
   .trust ul{grid-template-columns:repeat(4,1fr)}
   .reasons{grid-template-columns:1fr 1fr}
   .tenants{grid-template-columns:repeat(4,1fr)}
+  .types{grid-template-columns:repeat(5,1fr)}
   .calc{grid-template-columns:1.1fr .9fr;align-items:start}
   .calc-img{aspect-ratio:3/4;position:sticky;top:60px}
   .plans{grid-template-columns:1fr 1fr}
@@ -255,7 +256,7 @@ footer a{color:var(--gold);font-weight:600}
   <div class="container hero-in">
     <div>
       <span class="tag">Tòa F2 · Sun FourS Tower · Đà Nẵng</span>
-      <h1>Căn hộ Sun Group bên sông – vốn ban đầu chỉ <em>~725 triệu</em></h1>
+      <h1>Căn hộ Sun Group bên sông – vốn ban đầu chỉ <em>~700 triệu</em></h1>
       <p>Vay 70%, 24 tháng không lãi, không gốc. Cách biển 2 km, 10 phút từ sân bay. Nhận nhà 2028.</p>
       <div class="hero-cta">
         <button class="btn btn-gold" type="button" data-open="calc">Nhận bảng tính &amp; giỏ căn đẹp</button>
@@ -263,8 +264,8 @@ footer a{color:var(--gold);font-weight:600}
       </div>
     </div>
     <div class="hero-card" aria-label="Ví dụ căn 2 phòng ngủ">
-      <div class="row"><span>Căn 2PN</span><b>~2,9 tỷ</b></div>
-      <div class="row"><span><span class="arrow">→</span>Trả đến khi nhận nhà</span><b>~725 triệu</b></div>
+      <div class="row"><span>Căn 2PN 1WC · 61 m²</span><b>~2,8 tỷ</b></div>
+      <div class="row"><span><span class="arrow">→</span>Trả đến khi nhận nhà</span><b>~700 triệu</b></div>
       <div class="row"><span><span class="arrow">→</span>Lãi 24 tháng đầu</span><b class="ok">0 đồng</b></div>
       <small>Vay 70% ngân hàng do chủ đầu tư chỉ định · chủ đầu tư hỗ trợ lãi suất, ân hạn gốc 24 tháng.</small>
     </div>
@@ -335,20 +336,21 @@ footer a{color:var(--gold);font-weight:600}
         <div class="types" role="group" aria-label="Chọn loại căn">
           <button type="button" data-p="1980" data-c="100">Studio<small>1,98 tỷ</small></button>
           <button type="button" data-p="2220" data-c="100">1PN<small>2,22 tỷ</small></button>
-          <button type="button" data-p="2900" data-c="100" class="on">2PN<small>2,9 tỷ</small></button>
+          <button type="button" data-p="2800" data-c="100" class="on">2PN 61 m²<small>2,8 tỷ</small></button>
+          <button type="button" data-p="4100" data-c="100">2PN góc<small>4,1 tỷ</small></button>
           <button type="button" data-p="5910" data-c="150">3PN<small>5,91 tỷ</small></button>
         </div>
         <div class="kpis" aria-live="polite">
-          <div class="kpi hl"><span>Vốn tự có (25%)</span><b id="kOwn">725 triệu</b></div>
-          <div class="kpi"><span>Ngân hàng cho vay (70%)</span><b id="kLoan">2,03 tỷ</b></div>
-          <div class="kpi"><span>Lãi được hỗ trợ 24 tháng*</span><b id="kInt">~325 triệu</b></div>
+          <div class="kpi hl"><span>Vốn tự có (25%)</span><b id="kOwn">700 triệu</b></div>
+          <div class="kpi"><span>Ngân hàng cho vay (70%)</span><b id="kLoan">1,96 tỷ</b></div>
+          <div class="kpi"><span>Lãi được hỗ trợ 24 tháng*</span><b id="kInt">~314 triệu</b></div>
         </div>
-        <p class="note">* Ước tính = khoản vay × 8%/năm × 2 năm. Lãi suất 8%/năm là giả định để minh họa; lãi thực tế theo ngân hàng tại thời điểm vay.</p>
+        <p class="note">Giá tham khảo, trước chiết khấu; căn 2PN 61 m² là 2PN 1WC. * Ước tính = khoản vay × 8%/năm × 2 năm. Lãi suất 8%/năm là giả định để minh họa; lãi thực tế theo ngân hàng tại thời điểm vay.</p>
         <h3 style="margin:20px 0 12px">Lịch thanh toán</h3>
         <ol class="tl">
           <li><b>Ngày ký</b><span>Đặt cọc <em id="tDep">100 triệu</em></span></li>
-          <li><b>Ngày 15</b><span>Bổ sung đủ 15% – thêm <em id="t15">335 triệu</em></span></li>
-          <li><b>Ngày 105</b><span>Thanh toán thêm 10% – <em id="t105">290 triệu</em></span></li>
+          <li><b>Ngày 15</b><span>Bổ sung đủ 15% – thêm <em id="t15">320 triệu</em></span></li>
+          <li><b>Ngày 105</b><span>Thanh toán thêm 10% – <em id="t105">280 triệu</em></span></li>
           <li><b>24 tháng tiếp theo</b><span>Không lãi, không gốc – ngân hàng giải ngân 70%</span></li>
           <li class="fin"><b>31/05/2028</b><span>Nhận nhà dự kiến</span></li>
         </ol>
@@ -367,12 +369,12 @@ footer a{color:var(--gold);font-weight:600}
   </div>
   <div class="container plans">
     <article class="card plan">
-      <div class="ph" data-file="anh-noi-that.jpg"><img src="anh-noi-that.jpg" alt="Căn hộ 2 phòng ngủ Tòa F2" loading="lazy" decoding="async"></div>
+      <div class="ph" data-file="anh-noi-that.jpg"><img src="anh-noi-that.jpg" alt="Căn hộ 2 phòng ngủ 61 m² Tòa F2" loading="lazy" decoding="async"></div>
       <div class="body">
         <span class="pill">Vốn ít – vay 70%</span>
-        <p class="big">~725 triệu</p>
+        <p class="big">~700 triệu</p>
         <ul>
-          <li>Căn 2PN ~2,9 tỷ: chỉ trả ~725 triệu đến khi nhận nhà</li>
+          <li>Căn 2PN 1WC (61 m²) ~2,8 tỷ: chỉ trả ~700 triệu đến khi nhận nhà</li>
           <li>Ngân hàng cho vay 70%</li>
           <li>24 tháng không lãi, không gốc</li>
           <li>Miễn phí trả nợ trước hạn trong thời gian hỗ trợ</li>
@@ -384,7 +386,7 @@ footer a{color:var(--gold);font-weight:600}
       <div class="ph" data-file="anh-view-song.jpg"><img src="anh-view-song.jpg" alt="View sông Cổ Cò" loading="lazy" decoding="async"></div>
       <div class="body">
         <span class="pill">Thanh toán nhanh</span>
-        <p class="big">~2,7 tỷ <s>~2,9 tỷ</s></p>
+        <p class="big">~2,4 tỷ <s>~2,8 tỷ</s></p>
         <ul>
           <li>Chiết khấu cộng dồn tới 19%</li>
           <li>Lãi 8%/năm cho phần trả trước hạn</li>
