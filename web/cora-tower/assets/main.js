@@ -92,7 +92,7 @@ if (!lb) {
   document.body.appendChild(lb);
 }
 const lbImg = lb.querySelector("img");
-document.querySelectorAll(".gallery a, a.zoom-link").forEach((a) =>
+document.querySelectorAll(".gallery a, .view-grid a, a.zoom-link").forEach((a) =>
   a.addEventListener("click", (e) => {
     e.preventDefault();
     lbImg.src = a.href;

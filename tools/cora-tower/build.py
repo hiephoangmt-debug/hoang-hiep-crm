@@ -58,6 +58,23 @@ IMG = {
     "sr09": ("phoi-canh-shophouse-khoi-de-cora-tower-09", 1600, 1066, 800, "Shophouse khối đế dưới tòa tháp Cora Tower"),
     "sr10": ("phoi-canh-shophouse-khoi-de-cora-tower-10", 1600, 1066, 800, "Góc bo cong khối đế Cora Tower và khu shophouse"),
     "sr11": ("phoi-canh-shophouse-khoi-de-cora-tower-11", 1600, 1066, 800, "Mặt tiền shophouse Cora Tower với biển hiệu thương hiệu"),
+    "vBan": ("view-bien-tu-ban-cong-cora-tower", 1600, 900, 800, "View biển từ ban công căn hộ Cora Tower"),
+    "vSun": ("view-thanh-pho-hoang-hon-cora-tower", 1600, 900, 800, "View thành phố Đà Nẵng lúc hoàng hôn từ căn hộ Cora Tower"),
+    "vHan": ("view-song-han-tu-can-ho-cora-tower", 1600, 900, 800, "View sông Hàn và trung tâm Đà Nẵng từ ban công Cora Tower"),
+    "vKdt": ("view-khu-do-thi-tu-ban-cong-cora-tower", 1600, 900, 800, "View khu đô thị Sun Neo City từ ban công Cora Tower"),
+    "rPod": ("khoi-de-thuong-mai-cora-tower", 1600, 900, 800, "Khối đế thương mại và sân vườn trên cao Cora Tower"),
+    "rAxis": ("truc-duong-giua-hai-toa-cora-tower", 1600, 900, 800, "Trục đường 29/3 giữa hai tòa Cora Tower hướng vòng xoay đài phun nước"),
+    "rTwin": ("hai-toa-cora-tower-khoi-mai-cam", 1600, 900, 800, "Hai tòa tháp Cora Tower với khối mái màu cam bên vòng xoay 29/3"),
+    "rPool": ("ho-boi-trong-nha-cora-tower", 1600, 900, 800, "Hồ bơi trong nhà tầng 2 Cora Tower"),
+    "rBridge": ("toa-thap-cora-tower-va-cau", 1600, 900, 800, "Tòa tháp Cora Tower bên vòng xoay đài phun nước, hướng cầu và biển"),
+    "rJjim": ("jjimjilbang-cora-tower", 1600, 900, 800, "Phòng xông hơi Jjimjilbang kiểu Hàn Quốc tại Cora Tower"),
+    "rRound": ("vong-xoay-dai-phun-nuoc-cora-tower", 1600, 900, 800, "Vòng xoay đài phun nước trước Cora Tower nhìn từ sân vườn trên cao"),
+    "vRiver": ("view-song-va-bien-cora-tower", 1600, 900, 800, "View sông và biển từ ban công căn hộ Cora Tower"),
+    "aSea": ("toan-canh-cora-tower-huong-bien", 1600, 900, 800, "Toàn cảnh Cora Tower giữa khu đô thị Nam Hòa Xuân hướng biển"),
+    "aRiver": ("toan-canh-cora-tower-ven-song", 1600, 900, 800, "Toàn cảnh Cora Tower bên vòng xoay và sông Cổ Cò"),
+    "aHan": ("toan-canh-cora-tower-song-han-bien", 1600, 900, 800, "Toàn cảnh Cora Tower nhìn về sông Hàn, vòng quay Sun Wheel và biển"),
+    "rNear": ("hai-toa-cora-tower-nhin-gan", 1600, 900, 800, "Hai tòa Cora Tower và khối đế thương mại nhìn gần"),
+    "rCorner": ("khoi-de-vong-xoay-cora-tower", 1600, 900, 800, "Khối đế Cora Tower bo cong bên vòng xoay với spa, cafe, phòng gym"),
     "night": ("phoi-canh-cora-tower-ve-dem", 1600, 930, 800, "Phối cảnh Cora Tower về đêm với khối mái màu cam phát sáng"),
     "site": ("tong-mat-bang-cora-tower-vong-xoay-29-3", 1600, 1022, 800, "Tổng mặt bằng hai tòa Cora Tower hai bên đường 29/3 cạnh vòng xoay Nguyễn Phước Lan"),
     "siteAir": ("tong-mat-bang-cora-tower-anh-flycam", 1478, 966, 739, "Tổng mặt bằng Cora Tower trên ảnh flycam thực tế: phân bố căn 3PN, 2PN, 1PN+ và Studio"),
@@ -418,7 +435,7 @@ def build_index():
         {"@type": "ApartmentComplex", "@id": f"{D}#project", "name": "Cora Tower Đà Nẵng", "alternateName": "Sun Cora Tower",
          "description": "Tổ hợp 2 tòa tháp A1, A2 cao 25 tầng với khoảng 1.342 căn hộ: studio, 1PN+, 2PN, 3PN, căn hộ sân vườn, duplex và shophouse khối đế tại vòng xoay 29/3 – Nguyễn Phước Lan, Nam Hòa Xuân, Đà Nẵng.",
          "url": D, "numberOfAccommodationUnits": 1342,
-         "image": [f"{D}{src(k)}" for k in ("hero", "a1a2", "night", "aerial", "struct", "site", "planA1", "planA2", "unit1pn", "iso1pn", "amA1", "amA2")],
+         "image": [f"{D}{src(k)}" for k in ("rTwin", "aHan", "aSea", "rBridge", "rPool", "rJjim", "vSun", "hero", "a1a2", "night", "aerial", "struct", "site", "planA1", "planA2", "unit1pn", "iso1pn", "amA1", "amA2")],
          "address": {"@type": "PostalAddress", "streetAddress": "Vòng xoay đường 29/3 – Nguyễn Phước Lan, KĐT Nam Hòa Xuân", "addressLocality": "Đà Nẵng", "addressCountry": "VN"},
          "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": n, "value": True} for n in ("Hồ bơi", "Jjimjilbang & Spa", "Gym", "Golf mô phỏng", "Khu trẻ em", "Thư viện", "Sinh hoạt cộng đồng", "Shophouse thương mại", "Hầm để xe")]},
         faq_ld(FAQ_INDEX),
@@ -426,12 +443,12 @@ def build_index():
     h = head("index", "Cora Tower Đà Nẵng – Bảng giá, mặt bằng căn hộ, shophouse, duplex | Hotline 0904 567 009",
              "Cora Tower (Sun Group) – 2 tòa A1, A2 cao 25 tầng tại vòng xoay 29/3 – Nguyễn Phước Lan, Hòa Xuân. Căn 1PN+ tầng 15 từ ~3,1 tỷ, mặt bằng 28 căn/sàn, shophouse khối đế, duplex tầng 25. Gọi 0904 567 009.",
              "Cora Tower, Sun Cora Tower, Cora Tower Đà Nẵng, giá Cora Tower, mặt bằng Cora Tower, căn hộ 1PN+ Cora Tower, shophouse Cora Tower, duplex Cora Tower, căn hộ 29/3 Hòa Xuân",
-             "og-cora-tower.jpg", "Phối cảnh Cora Tower Đà Nẵng", "hero", graph)
+             "og-cora-tower.jpg", "Phối cảnh Cora Tower Đà Nẵng", "rTwin", graph)
     body = f'''{header("index", "Nhận bảng giá")}
 
 <main>
   <section class="hero">
-    {pic("hero", "100vw", eager=True, cls="hero-bg")}
+    {pic("rTwin", "100vw", eager=True, cls="hero-bg")}
     <div class="wrap hero-grid">
       <div>
         <span class="eyebrow">Sun Neo City · Vòng xoay 29/3 · Đà Nẵng</span>
@@ -557,6 +574,10 @@ def build_index():
         {card("shield", "Văn phòng BQL", "Ban quản lý, kỹ thuật, kho hồ sơ đặt tại tầng 2 – hỗ trợ cư dân nhanh.")}
         {card("store", "Shophouse tầng 1", "Cafe, cửa hàng, dịch vụ ngay chân tòa tháp.")}
       </div>
+      <div class="grid g2" style="margin-top:28px">
+        <figure class="shot reveal" style="margin:0"><a href="{src("rPool")}" class="zoom-link">{pic("rPool", "(max-width:760px) 100vw, 560px")}</a><figcaption>Hồ bơi trong nhà tầng 2</figcaption></figure>
+        <figure class="shot reveal" style="margin:0"><a href="{src("rJjim")}" class="zoom-link">{pic("rJjim", "(max-width:760px) 100vw, 560px")}</a><figcaption>Jjimjilbang – xông hơi kiểu Hàn Quốc</figcaption></figure>
+      </div>
       <div class="tabs reveal" role="tablist" style="margin-top:36px">
         <button role="tab" aria-selected="true" data-tab="am-a1">Tiện ích tòa A1</button>
         <button role="tab" aria-selected="false" data-tab="am-a2">Tiện ích tòa A2</button>
@@ -581,7 +602,7 @@ def build_index():
   <section>
     <div class="wrap split">
       <div class="split-media reveal">
-        {pic("shop", "(max-width:900px) 100vw, 600px")}
+        {pic("rPod", "(max-width:900px) 100vw, 600px")}
         <div class="badge">4,96 – 6,04 tỷ<small>shophouse 43 – 61,5 m²</small></div>
       </div>
       <div class="reveal">
@@ -660,6 +681,16 @@ def build_index():
     </div>
   </section>
 
+  <section class="dark" id="view">
+    <div class="wrap">
+      <div class="center reveal"><span class="kicker">Tầm nhìn</span><h2>View từ căn hộ Cora Tower</h2>
+        <p class="sub">Đứng giữa khu đô thị thấp tầng nên tầm nhìn từ các căn rất thoáng: về sông Hàn, vòng quay Sun Wheel và trung tâm thành phố, về biển hoặc trọn khu đô thị Sun Neo City.</p></div>
+      <div class="view-grid">
+        {"".join(f'<a class="reveal" href="{src(k)}">{pic(k, "(max-width:760px) 100vw, 560px")}<span>{l}</span></a>' for k, l in [("vSun", "Thành phố lúc hoàng hôn"), ("vRiver", "Sông và biển"), ("vHan", "Sông Hàn – trung tâm"), ("vBan", "Hướng biển"), ("vKdt", "Khu đô thị xanh")])}
+      </div>
+    </div>
+  </section>
+
   <section id="hinh-anh">
     <div class="wrap">
       <div class="center reveal">
@@ -667,15 +698,18 @@ def build_index():
         <h2>Phối cảnh Cora Tower</h2>
       </div>
       <div class="gallery reveal">
-        <a href="{src("aerial")}">{pic("aerial", "(max-width:760px) 100vw, 600px")}<span>Toàn cảnh</span></a>
-        <a href="{src("a1a2")}">{pic("a1a2", "(max-width:760px) 50vw, 300px")}<span>Tòa A1 – A2</span></a>
-        <a href="{src("hero")}">{pic("hero", "(max-width:760px) 50vw, 300px")}<span>Hoàng hôn</span></a>
-        <a href="{src("shop")}">{pic("shop", "(max-width:760px) 50vw, 300px")}<span>Khối đế</span></a>
-        <a href="{src("loc")}">{pic("loc", "(max-width:760px) 50vw, 300px")}<span>Vị trí A1 – A2</span></a>
+        <a href="{src("aHan")}">{pic("aHan", "(max-width:760px) 100vw, 600px")}<span>Toàn cảnh</span></a>
+        <a href="{src("rTwin")}">{pic("rTwin", "(max-width:760px) 50vw, 300px")}<span>Khối mái cam</span></a>
+        <a href="{src("rBridge")}">{pic("rBridge", "(max-width:760px) 50vw, 300px")}<span>Bên vòng xoay</span></a>
+        <a href="{src("aSea")}">{pic("aSea", "(max-width:760px) 50vw, 300px")}<span>Hướng biển</span></a>
+        <a href="{src("rAxis")}">{pic("rAxis", "(max-width:760px) 50vw, 300px")}<span>Trục 29/3</span></a>
+        <a href="{src("rNear")}">{pic("rNear", "(max-width:760px) 50vw, 300px")}<span>Hai tòa A1 – A2</span></a>
+        <a href="{src("rCorner")}">{pic("rCorner", "(max-width:760px) 50vw, 300px")}<span>Khối đế bo cong</span></a>
+        <a href="{src("rRound")}">{pic("rRound", "(max-width:760px) 50vw, 300px")}<span>Đài phun nước</span></a>
+        <a href="{src("aRiver")}">{pic("aRiver", "(max-width:760px) 50vw, 300px")}<span>Ven sông</span></a>
         <a href="{src("night")}">{pic("night", "(max-width:760px) 50vw, 300px")}<span>Về đêm</span></a>
         <a href="{src("land")}">{pic("land", "(max-width:760px) 50vw, 300px")}<span>Khu đất thực tế</span></a>
-        <a href="{src("int1pn")}">{pic("int1pn", "(max-width:760px) 50vw, 300px")}<span>Nội thất 1PN+</span></a>
-        <a href="{src("river")}">{pic("river", "(max-width:760px) 50vw, 300px")}<span>Hòa Xuân ven sông</span></a>
+        <a href="{src("loc")}">{pic("loc", "(max-width:760px) 50vw, 300px")}<span>Vị trí</span></a>
       </div>
     </div>
   </section>
@@ -805,7 +839,7 @@ def build_shop():
 
   <section>
     <div class="wrap split rev">
-      <div class="split-media reveal">{pic("a1a2", "(max-width:900px) 100vw, 600px")}</div>
+      <div class="split-media reveal">{pic("rCorner", "(max-width:900px) 100vw, 600px")}</div>
       <div class="reveal">
         <span class="kicker">Ngành hàng</span>
         <h2>Phù hợp kinh doanh gì?</h2>
@@ -842,12 +876,12 @@ def build_ph():
     h = head("penthouse", "Penthouse – Duplex Cora Tower Đà Nẵng tầng 25 | Hotline 0904 567 009",
              "Căn duplex – penthouse tầng 25 Cora Tower (Sun Group) trong khối mái biểu tượng, thông tầng, sân vườn trên cao, view sông và thành phố Đà Nẵng. Số lượng giới hạn – gọi 0904 567 009.",
              "penthouse Cora Tower, duplex Cora Tower, căn hộ tầng 25 Cora Tower, penthouse Đà Nẵng, penthouse Hòa Xuân, duplex Đà Nẵng",
-             "og-penthouse.jpg", "Không gian sân vườn duplex penthouse Cora Tower", "ph", graph)
+             "og-penthouse.jpg", "Không gian sân vườn duplex penthouse Cora Tower", "rBridge", graph)
     body = f'''{header("ph", "Nhận giá duplex")}
 
 <main>
   <section class="hero">
-    {pic("ph", "100vw", eager=True, cls="hero-bg")}
+    {pic("rBridge", "100vw", eager=True, cls="hero-bg")}
     <div class="wrap hero-grid">
       <div>
         <nav class="breadcrumb" aria-label="breadcrumb"><a href="./">Cora Tower</a> › Duplex – Penthouse</nav>
@@ -1033,8 +1067,8 @@ def build_legal():
 
 
 def sitemap():
-    pages = {"": ["hero", "a1a2", "night", "aerial", "struct", "site", "siteAir", "planA1", "planA2", "g3A1", "g3A2", "unit1pn", "iso1pn", "int1pn", "cross", "land", "river", "pA10801", "pA10805", "pA10817", "pA20827", "pA10828", "pA10823", "amA1", "amA2"],
-             "khoi-de-shophouse.html": ["sr06", "shop", "a1a2", "struct", "shA1", "shA2", "mtA1", "mtA2"] + [f"sr{i:02d}" for i in range(1, 12) if i != 6], "penthouse.html": ["ph", "night", "struct", "ph25A1", "phL25A1", "ph25A2", "phL25A2"], "phap-ly.html": ["night"]}
+    pages = {"": ["rTwin", "aHan", "aSea", "aRiver", "rBridge", "rAxis", "rNear", "rCorner", "rRound", "rPod", "rPool", "rJjim", "vSun", "vRiver", "vHan", "vBan", "vKdt", "hero", "a1a2", "night", "aerial", "struct", "site", "siteAir", "planA1", "planA2", "g3A1", "g3A2", "unit1pn", "iso1pn", "int1pn", "cross", "land", "river", "pA10801", "pA10805", "pA10817", "pA20827", "pA10828", "pA10823", "amA1", "amA2"],
+             "khoi-de-shophouse.html": ["sr06", "shop", "a1a2", "struct", "shA1", "shA2", "mtA1", "mtA2"] + [f"sr{i:02d}" for i in range(1, 12) if i != 6], "penthouse.html": ["rBridge", "ph", "night", "struct", "ph25A1", "phL25A1", "ph25A2", "phL25A2"], "phap-ly.html": ["night"]}
     out = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">']
     for p, imgs in pages.items():

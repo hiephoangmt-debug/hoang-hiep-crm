@@ -213,6 +213,14 @@ footer .legal{grid-column:1/-1;border-top:1px solid #1f3256;padding-top:18px;fon
 .unit-plans img{width:100%;height:auto;border-radius:10px}
 .unit-plans figcaption{text-align:left;color:var(--ink);font-size:.9rem;margin-top:8px}
 
+.view-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:30px}
+.view-grid a{position:relative;display:block;overflow:hidden;border-radius:16px;grid-column:span 2}
+.view-grid a:nth-child(-n+2){grid-column:span 3}
+.view-grid img{width:100%;height:100%;aspect-ratio:16/9;object-fit:cover;transition:transform .5s}
+.view-grid a:hover img{transform:scale(1.05)}
+.view-grid span{position:absolute;left:12px;bottom:12px;background:rgba(6,20,46,.75);color:#fff;font-size:.82rem;font-weight:700;padding:5px 12px;border-radius:999px}
+@media (max-width:760px){.view-grid{grid-template-columns:1fr}.view-grid a,.view-grid a:nth-child(-n+2){grid-column:auto}}
+
 /* legal */
 .legal-list{list-style:none;padding:0;margin:0 0 22px;display:grid;gap:10px}
 .legal-list li{display:grid;grid-template-columns:22px 1fr;column-gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
