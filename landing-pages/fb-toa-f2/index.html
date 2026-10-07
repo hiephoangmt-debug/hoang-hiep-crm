@@ -10,11 +10,11 @@
 <meta property="og:locale" content="vi_VN">
 <meta property="og:title" content="Căn hộ Sun Group bên sông – vốn ban đầu chỉ ~700 triệu">
 <meta property="og:description" content="Vay 70%, 24 tháng không lãi, không gốc. Cách biển 2 km, 10 phút từ sân bay. Nhận nhà 2028.">
-<meta property="og:image" content="anh-hero.jpg">
+<meta property="og:image" content="https://fourstower.netlify.app/img/sun-fours-tower-og.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="anh-hero.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="https://fourstower.netlify.app/img/sun-fours-tower-hoang-hon-800.jpg" imagesrcset="https://fourstower.netlify.app/img/sun-fours-tower-hoang-hon-800.jpg 800w, https://fourstower.netlify.app/img/sun-fours-tower-hoang-hon.jpg 1600w" imagesizes="100vw" fetchpriority="high">
 <style>
 :root{
   --navy:#13285A; --navy-d:#0B1A3D; --gold:#F2B544; --gold-d:#D99A22;
@@ -145,7 +145,6 @@ h3{font-size:20px}
 .grid button{border:0;padding:0;cursor:zoom-in;background:none;border-radius:var(--r)}
 .grid .ph{aspect-ratio:1/1}
 .grid button:first-child{grid-column:1/-1}.grid button:first-child .ph{aspect-ratio:16/9}
-.grid button:last-child{grid-column:1/-1}.grid button:last-child .ph{aspect-ratio:16/9}
 .grid .cap{position:absolute;z-index:2;left:12px;bottom:10px;color:#fff;font-size:13.5px;font-weight:600}
 .lb{position:fixed;inset:0;z-index:100;background:rgba(5,12,30,.94);display:none;align-items:center;justify-content:center;padding:16px}
 .lb.on{display:flex}
@@ -219,6 +218,30 @@ footer a{color:var(--gold);font-weight:600}
 .mbar .btn{min-height:50px;font-size:15.5px}
 .mbar .zalo{background:#0068FF;color:#fff}
 
+/* Cảm xúc: banner trích dẫn, resort trong nhà, căn sân vườn */
+.quote{position:relative;min-height:min(78svh,560px);display:flex;align-items:flex-end;color:#fff;padding:0}
+.quote>.ph{position:absolute;inset:0;border-radius:0}
+.quote>.ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,26,61,.1) 20%,rgba(11,26,61,.85))}
+.quote .in{position:relative;z-index:2;padding:56px 16px}
+.quote h2{color:#fff;font-size:clamp(28px,7.4vw,50px);max-width:760px}
+.quote p{font-size:16.5px;max-width:560px;opacity:.94}
+.quote .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.quote .chips span{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:6px 12px;font-size:13.5px;backdrop-filter:blur(4px)}
+.amen{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
+.amen .ph{aspect-ratio:3/4}
+.villa{display:grid;gap:20px;align-items:center}
+.villa .ph{aspect-ratio:4/3}
+.villa .big{font-family:var(--serif);font-size:clamp(30px,7vw,44px);color:var(--navy);line-height:1.1;margin:4px 0 10px}
+.villa .big small{display:block;font-family:var(--sans);font-size:15px;color:var(--muted);margin-top:6px}
+.villa ul{list-style:none;display:grid;gap:6px;margin:12px 0 18px}
+.villa li{display:flex;justify-content:space-between;gap:10px;background:var(--bg);border-radius:12px;padding:10px 14px;font-size:14.5px;color:var(--muted)}
+.villa li b{color:var(--navy)}
+.calc-fig{margin:0}
+.plan-img{background:#fff;aspect-ratio:1/1}
+.plan-img img{object-fit:contain;padding:12px}
+.calc-fig figcaption{font-size:13px;color:var(--muted);text-align:center;margin-top:8px}
+.mood{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--navy);margin:2px 0 6px}
+
 @media (min-width:720px){
   section{padding:88px 0}
   .hero{align-items:center;padding:120px 0 64px}
@@ -229,10 +252,12 @@ footer a{color:var(--gold);font-weight:600}
   .tenants{grid-template-columns:repeat(4,1fr)}
   .types{grid-template-columns:repeat(5,1fr)}
   .calc{grid-template-columns:1.1fr .9fr;align-items:start}
-  .calc-img{aspect-ratio:3/4;position:sticky;top:60px}
+  .calc-fig{position:sticky;top:60px}
+  .amen{grid-template-columns:repeat(4,1fr)}
+  .villa{grid-template-columns:1.1fr .9fr}
+  .quote .in{padding:88px 16px}
   .plans{grid-template-columns:1fr 1fr}
   .grid{grid-template-columns:repeat(3,1fr)}
-  .grid button:last-child{grid-column:auto}.grid button:last-child .ph{aspect-ratio:1/1}
   .grid button:first-child{grid-column:span 2;grid-row:span 2}.grid button:first-child .ph{aspect-ratio:auto;height:100%}
   .legal-wrap{grid-template-columns:.9fr 1.1fr;align-items:start}
   .legal-img{aspect-ratio:3/4;position:sticky;top:60px}
@@ -252,7 +277,7 @@ footer a{color:var(--gold);font-weight:600}
 
 <!-- 2. Hero -->
 <header class="hero" id="top">
-  <div class="hero-bg ph" data-file="anh-hero.jpg"><img src="anh-hero.jpg" alt="Hoàng hôn trên sông Cổ Cò nhìn về Tòa F2 Sun FourS Tower, Đà Nẵng" fetchpriority="high" decoding="async"></div>
+  <div class="hero-bg ph" data-file="Sun FourS Tower lúc hoàng hôn"><img src="https://fourstower.netlify.app/img/sun-fours-tower-hoang-hon-800.jpg" srcset="https://fourstower.netlify.app/img/sun-fours-tower-hoang-hon-800.jpg 800w, https://fourstower.netlify.app/img/sun-fours-tower-hoang-hon.jpg 1600w" sizes="100vw" alt="Sun FourS Tower bên sông lúc hoàng hôn, Đà Nẵng" fetchpriority="high" decoding="async"></div>
   <div class="container hero-in">
     <div>
       <span class="tag">Tòa F2 · Sun FourS Tower · Đà Nẵng</span>
@@ -291,21 +316,47 @@ footer a{color:var(--gold);font-weight:600}
     <h2>Vốn vừa phải. Vị trí đúng. View đẹp.</h2>
     <div class="reasons">
       <article class="card">
-        <div class="ph dim" data-file="anh-noi-that.jpg"><span class="badge">1</span><img src="anh-noi-that.jpg" alt="Nội thất căn hộ mẫu Tòa F2" loading="lazy" decoding="async"></div>
+        <div class="ph dim" data-file="Tòa F2 Sun FourS Tower"><span class="badge">1</span><img src="https://fourstower.netlify.app/img/toa-f2-sun-fours-tower-800.jpg" alt="Tòa F2 Sun FourS Tower" loading="lazy" decoding="async"></div>
         <div class="body"><h3>Vốn ít</h3><p>Chỉ <span class="num">25%</span> đến khi nhận nhà. Ngân hàng cho vay 70%, <span class="num">24 tháng</span> không lãi, không gốc.</p></div>
       </article>
       <article class="card">
-        <div class="ph dim" data-file="anh-bien.jpg"><span class="badge">2</span><img src="anh-bien.jpg" alt="Biển Sơn Thủy, cách dự án khoảng 2 km" loading="lazy" decoding="async"></div>
+        <div class="ph dim" data-file="View sông Cổ Cò và biển từ căn hộ"><span class="badge">2</span><img src="https://fourstower.netlify.app/img/view-song-bien-sun-fours-tower-800.jpg" alt="View sông Cổ Cò và biển từ căn hộ" loading="lazy" decoding="async"></div>
         <div class="body"><h3>Tiềm năng cho thuê</h3><p>Gần biển, sân bay, FPT City, Làng Đại học. Nguồn khách thuê đa dạng quanh năm.</p></div>
       </article>
       <article class="card">
-        <div class="ph dim" data-file="anh-tong-the.jpg"><span class="badge">3</span><img src="anh-tong-the.jpg" alt="Phối cảnh tổng thể đại đô thị Sun Riverpolis" loading="lazy" decoding="async"></div>
+        <div class="ph dim" data-file="Tổng thể Sun FourS Tower trong đại đô thị Sun Riverpolis"><span class="badge">3</span><img src="https://fourstower.netlify.app/img/tong-the-sun-fours-tower-sun-riverpolis-800.jpg" alt="Tổng thể Sun FourS Tower trong đại đô thị Sun Riverpolis" loading="lazy" decoding="async"></div>
         <div class="body"><h3>Vị trí kết nối</h3><p>Lõi đại đô thị Sun Riverpolis <span class="num">~500 ha</span>. <span class="num">10 phút</span> sân bay, <span class="num">5 phút</span> AEON Mall.</p></div>
       </article>
       <article class="card">
-        <div class="ph dim" data-file="anh-view-song.jpg"><span class="badge">4</span><img src="anh-view-song.jpg" alt="View sông Cổ Cò từ căn hộ Tòa F2" loading="lazy" decoding="async"></div>
+        <div class="ph dim" data-file="View sông Cổ Cò từ căn hộ"><span class="badge">4</span><img src="https://fourstower.netlify.app/img/view-song-co-co-can-ho-sun-da-nang-800.jpg" alt="View sông Cổ Cò từ căn hộ" loading="lazy" decoding="async"></div>
         <div class="body"><h3>View đẹp</h3><p>Bên sông Cổ Cò. Công viên ven sông <span class="num">50 ha</span>. <span class="num">8 phút</span> tới điểm bắn pháo hoa DIFF.</p></div>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- Cảm xúc: mỗi ô cửa một khung tranh -->
+<section class="quote" aria-label="View từ căn hộ">
+  <div class="ph" data-file="View sông và biển"><img src="https://fourstower.netlify.app/img/view-song-bien-sun-fours-tower-800.jpg" srcset="https://fourstower.netlify.app/img/view-song-bien-sun-fours-tower-800.jpg 800w, https://fourstower.netlify.app/img/view-song-bien-sun-fours-tower.jpg 1600w" sizes="100vw" alt="Sông Cổ Cò và biển nhìn từ căn hộ Sun FourS Tower" loading="lazy" decoding="async"></div>
+  <div class="container in">
+    <span class="eyebrow" style="color:var(--gold)">View từ căn hộ</span>
+    <h2>Mỗi ô cửa một khung tranh – sông, biển, núi.</h2>
+    <p>Sáng mở cửa là sông Cổ Cò. Tầng cao nhìn ra biển và danh thắng Ngũ Hành Sơn. Mùa lễ hội, pháo hoa DIFF chỉ cách 8 phút.</p>
+    <div class="chips"><span>Sông Cổ Cò</span><span>Biển Sơn Thủy ~2 km</span><span>Ngũ Hành Sơn</span><span>Pháo hoa DIFF</span></div>
+  </div>
+</section>
+
+<!-- Cảm xúc: resort thu nhỏ ngay trong nhà -->
+<section id="tien-ich">
+  <div class="container">
+    <span class="eyebrow">Sống như nghỉ dưỡng</span>
+    <h2>Resort thu nhỏ ngay trong nhà</h2>
+    <p class="lead">Cả tầng 2 dành cho tiện ích. Xuống thang máy là tới hồ bơi. Miễn phí dịch vụ quản lý 2 năm đầu.</p>
+    <div class="amen">
+      <div class="tenant"><div class="ph dim" data-file="Hồ bơi bốn mùa"><img src="https://fourstower.netlify.app/img/ho-boi-4-mua-can-ho-sun-da-nang.jpg" alt="Hồ bơi bốn mùa" loading="lazy" decoding="async"><div class="cap"><b>Hồ bơi bốn mùa</b><span>Bơi quanh năm</span></div></div></div>
+      <div class="tenant"><div class="ph dim" data-file="Spa"><img src="https://fourstower.netlify.app/img/spa-sun-fours-tower.jpg" alt="Spa tầng tiện ích" loading="lazy" decoding="async"><div class="cap"><b>Spa</b><span>Thư giãn cuối ngày</span></div></div></div>
+      <div class="tenant"><div class="ph dim" data-file="Phòng yoga"><img src="https://fourstower.netlify.app/img/phong-yoga-sun-fours-tower.jpg" alt="Phòng yoga" loading="lazy" decoding="async"><div class="cap"><b>Gym · Yoga</b><span>Ngay dưới nhà</span></div></div></div>
+      <div class="tenant"><div class="ph dim" data-file="Kids Club"><img src="https://fourstower.netlify.app/img/kids-club-sun-fours-tower.jpg" alt="Kids Club" loading="lazy" decoding="async"><div class="cap"><b>Kids Club</b><span>Con chơi, bố mẹ yên tâm</span></div></div></div>
     </div>
   </div>
 </section>
@@ -317,10 +368,10 @@ footer a{color:var(--gold);font-weight:600}
     <h2>4 nhóm khách thuê quanh năm</h2>
     <p class="lead">Mỗi nhóm có nhu cầu riêng. Căn nhỏ, gần biển, gần sân bay phục vụ được cả bốn.</p>
     <div class="tenants">
-      <div class="tenant"><div class="ph dim" data-file="anh-bien.jpg"><img src="anh-bien.jpg" alt="Du khách nghỉ biển Đà Nẵng" loading="lazy" decoding="async"><div class="cap"><b>Du khách nghỉ biển</b><span>Biển Sơn Thủy 5 phút</span></div></div></div>
-      <div class="tenant"><div class="ph dim" data-file="anh-noi-that.jpg"><img src="anh-noi-that.jpg" alt="Căn hộ cho khách công tác" loading="lazy" decoding="async"><div class="cap"><b>Khách công tác bay đến</b><span>Sân bay 10 phút</span></div></div></div>
-      <div class="tenant"><div class="ph dim" data-file="anh-tong-the.jpg"><img src="anh-tong-the.jpg" alt="Khu đô thị gần khu công nghệ" loading="lazy" decoding="async"><div class="cap"><b>Chuyên gia, kỹ sư</b><span>Gần FPT City</span></div></div></div>
-      <div class="tenant"><div class="ph dim" data-file="anh-cong-vien.jpg"><img src="anh-cong-vien.jpg" alt="Công viên ven sông gần Làng Đại học" loading="lazy" decoding="async"><div class="cap"><b>Giảng viên, sinh viên</b><span>Làng Đại học, FPT City</span></div></div></div>
+      <div class="tenant"><div class="ph dim" data-file="Hồ bơi bốn mùa – nghỉ dưỡng ngay trong tòa nhà"><img src="https://fourstower.netlify.app/img/ho-boi-4-mua-can-ho-sun-da-nang.jpg" alt="Hồ bơi bốn mùa – nghỉ dưỡng ngay trong tòa nhà" loading="lazy" decoding="async"><div class="cap"><b>Du khách nghỉ biển</b><span>Biển Sơn Thủy 5 phút</span></div></div></div>
+      <div class="tenant"><div class="ph dim" data-file="Sảnh đón cao 6 m"><img src="https://fourstower.netlify.app/img/sanh-don-sun-fours-tower-800.jpg" alt="Sảnh đón cao 6 m" loading="lazy" decoding="async"><div class="cap"><b>Khách công tác bay đến</b><span>Sân bay 10 phút</span></div></div></div>
+      <div class="tenant"><div class="ph dim" data-file="Phòng gym tầng tiện ích"><img src="https://fourstower.netlify.app/img/phong-gym-sun-fours-tower.jpg" alt="Phòng gym tầng tiện ích" loading="lazy" decoding="async"><div class="cap"><b>Chuyên gia, kỹ sư</b><span>Gần FPT City</span></div></div></div>
+      <div class="tenant"><div class="ph dim" data-file="Công viên nội khu"><img src="https://fourstower.netlify.app/img/cong-vien-noi-khu-sun-fours-tower-800.jpg" alt="Công viên nội khu" loading="lazy" decoding="async"><div class="cap"><b>Giảng viên, sinh viên</b><span>Làng Đại học, FPT City</span></div></div></div>
     </div>
     <div class="rent-note"><b>[Giá thuê tham khảo khu vực]</b><br>Nhận bảng giá thuê tham khảo qua Zalo cùng bảng tính dòng tiền.</div>
   </div>
@@ -334,11 +385,11 @@ footer a{color:var(--gold);font-weight:600}
     <div class="calc">
       <div class="calc-box">
         <div class="types" role="group" aria-label="Chọn loại căn">
-          <button type="button" data-p="1980" data-c="100">Studio<small>1,98 tỷ</small></button>
-          <button type="button" data-p="2220" data-c="100">1PN<small>2,22 tỷ</small></button>
-          <button type="button" data-p="2800" data-c="100" class="on">2PN 61 m²<small>2,8 tỷ</small></button>
-          <button type="button" data-p="4100" data-c="100">2PN góc<small>4,1 tỷ</small></button>
-          <button type="button" data-p="5910" data-c="150">3PN<small>5,91 tỷ</small></button>
+          <button type="button" data-p="1980" data-c="100" data-img="toa-f2-can-studio-fours-tower.jpg" data-cap="Mặt bằng căn Studio · ~30–34 m²">Studio<small>1,98 tỷ</small></button>
+          <button type="button" data-p="2220" data-c="100" data-img="toa-f2-can-1pn-fours-tower.jpg" data-cap="Mặt bằng căn 1PN · ~42 m²">1PN<small>2,22 tỷ</small></button>
+          <button type="button" data-p="2800" data-c="100" data-img="toa-f2-can-2pn-1wc-fours-tower.jpg" data-cap="Mặt bằng căn 2PN 1WC · ~61 m²" class="on">2PN 61 m²<small>2,8 tỷ</small></button>
+          <button type="button" data-p="4100" data-c="100" data-img="toa-f2-can-2pn-2wc-goc-fours-tower.jpg" data-cap="Mặt bằng căn 2PN góc">2PN góc<small>4,1 tỷ</small></button>
+          <button type="button" data-p="5910" data-c="150" data-img="toa-f2-can-3pn-fours-tower.jpg" data-cap="Mặt bằng căn 3PN · ~85–87 m²">3PN<small>5,91 tỷ</small></button>
         </div>
         <div class="kpis" aria-live="polite">
           <div class="kpi hl"><span>Vốn tự có (25%)</span><b id="kOwn">700 triệu</b></div>
@@ -356,7 +407,7 @@ footer a{color:var(--gold);font-weight:600}
         </ol>
         <button class="btn btn-gold btn-block" type="button" data-open="calc">Nhận bảng tính chi tiết qua Zalo</button>
       </div>
-      <div class="ph calc-img" data-file="anh-noi-that.jpg"><img src="anh-noi-that.jpg" alt="Không gian sống căn hộ Tòa F2" loading="lazy" decoding="async"></div>
+      <figure class="calc-fig"><div class="ph calc-img plan-img" data-file="Mặt bằng căn hộ"><img id="calcImg" src="https://fourstower.netlify.app/img/toa-f2-can-2pn-1wc-fours-tower.jpg" alt="Mặt bằng căn 2 phòng ngủ 1 WC Tòa F2" loading="lazy" decoding="async"></div><figcaption id="calcCap">Mặt bằng căn 2PN 1WC · ~61 m² · minh họa</figcaption></figure>
     </div>
   </div>
 </section>
@@ -369,7 +420,7 @@ footer a{color:var(--gold);font-weight:600}
   </div>
   <div class="container plans">
     <article class="card plan">
-      <div class="ph" data-file="anh-noi-that.jpg"><img src="anh-noi-that.jpg" alt="Căn hộ 2 phòng ngủ 61 m² Tòa F2" loading="lazy" decoding="async"></div>
+      <div class="ph" data-file="Sun FourS Tower về đêm"><img src="https://fourstower.netlify.app/img/sun-fours-tower-ve-dem-800.jpg" alt="Sun FourS Tower về đêm" loading="lazy" decoding="async"></div>
       <div class="body">
         <span class="pill">Vốn ít – vay 70%</span>
         <p class="big">~700 triệu</p>
@@ -383,7 +434,7 @@ footer a{color:var(--gold);font-weight:600}
       </div>
     </article>
     <article class="card plan alt">
-      <div class="ph" data-file="anh-view-song.jpg"><img src="anh-view-song.jpg" alt="View sông Cổ Cò" loading="lazy" decoding="async"></div>
+      <div class="ph" data-file="View danh thắng Ngũ Hành Sơn"><img src="https://fourstower.netlify.app/img/view-ngu-hanh-son-sun-fours-tower-800.jpg" alt="View danh thắng Ngũ Hành Sơn" loading="lazy" decoding="async"></div>
       <div class="body">
         <span class="pill">Thanh toán nhanh</span>
         <p class="big">~2,4 tỷ <s>~2,8 tỷ</s></p>
@@ -398,6 +449,23 @@ footer a{color:var(--gold);font-weight:600}
   </div>
 </section>
 
+<!-- Cảm xúc: căn sân vườn -->
+<section id="san-vuon">
+  <div class="container villa">
+    <div class="ph" data-file="Căn hộ sân vườn"><img src="https://fourstower.netlify.app/img/can-ho-san-vuon-toa-f2-fours-tower-800.jpg" alt="Căn hộ sân vườn Tòa F2" loading="lazy" decoding="async"></div>
+    <div>
+      <span class="eyebrow">Dòng căn hiếm</span>
+      <p class="big">Sân vườn ~69 m²<small>“Villa giữa tầng không” – chỉ có ở tầng 2–7 Tòa F2</small></p>
+      <p class="lead">Một khoảng xanh riêng giữa lòng thành phố. Dòng căn này thường được giữ chỗ đầu tiên.</p>
+      <ul>
+        <li><span>Căn tầng 3</span><b>~54,6 m² + vườn ~69 m²</b></li>
+        <li><span>3PN góc sân vườn</span><b>~87 m² + vườn ~47,6 m²</b></li>
+      </ul>
+      <button class="btn btn-gold btn-block" type="button" data-open="calc">Xem căn sân vườn còn trống</button>
+    </div>
+  </div>
+</section>
+
 <!-- 8. Gallery -->
 <section class="gallery" id="hinh-anh">
   <div class="container">
@@ -405,12 +473,15 @@ footer a{color:var(--gold);font-weight:600}
     <h2>Xem Tòa F2 từ mọi góc</h2>
     <p class="lead">Bấm vào ảnh để phóng to.</p>
     <div class="grid" id="grid">
-      <button type="button"><div class="ph dim" data-file="anh-tong-the.jpg"><img src="anh-tong-the.jpg" alt="Phối cảnh tổng thể" loading="lazy" decoding="async"><span class="cap">Phối cảnh tổng thể</span></div></button>
-      <button type="button"><div class="ph dim" data-file="anh-view-song.jpg"><img src="anh-view-song.jpg" alt="View sông Cổ Cò" loading="lazy" decoding="async"><span class="cap">View sông Cổ Cò</span></div></button>
-      <button type="button"><div class="ph dim" data-file="anh-phao-hoa.jpg"><img src="anh-phao-hoa.jpg" alt="Pháo hoa DIFF" loading="lazy" decoding="async"><span class="cap">Pháo hoa DIFF</span></div></button>
-      <button type="button"><div class="ph dim" data-file="anh-bien.jpg"><img src="anh-bien.jpg" alt="Biển Sơn Thủy" loading="lazy" decoding="async"><span class="cap">Biển Sơn Thủy</span></div></button>
-      <button type="button"><div class="ph dim" data-file="anh-noi-that.jpg"><img src="anh-noi-that.jpg" alt="Nội thất căn hộ" loading="lazy" decoding="async"><span class="cap">Nội thất căn hộ</span></div></button>
-      <button type="button"><div class="ph dim" data-file="anh-cong-truong.jpg"><img src="anh-cong-truong.jpg" alt="Công trường Tòa F2" loading="lazy" decoding="async"><span class="cap">Công trường thực tế</span></div></button>
+      <button type="button" data-full="https://fourstower.netlify.app/img/sun-fours-tower-da-nang-phoi-canh.jpg"><div class="ph dim" data-file="Phối cảnh Sun FourS Tower"><img src="https://fourstower.netlify.app/img/sun-fours-tower-da-nang-phoi-canh-800.jpg" alt="Phối cảnh Sun FourS Tower" loading="lazy" decoding="async"><span class="cap">Phối cảnh Sun FourS Tower</span></div></button>
+      <button type="button" data-full="https://fourstower.netlify.app/img/view-song-co-co-can-ho-sun-da-nang.jpg"><div class="ph dim" data-file="View sông Cổ Cò"><img src="https://fourstower.netlify.app/img/view-song-co-co-can-ho-sun-da-nang-800.jpg" alt="View sông Cổ Cò" loading="lazy" decoding="async"><span class="cap">View sông Cổ Cò</span></div></button>
+      <button type="button" data-full="https://fourstower.netlify.app/img/view-song-bien-sun-fours-tower.jpg"><div class="ph dim" data-file="Sông và biển từ căn hộ"><img src="https://fourstower.netlify.app/img/view-song-bien-sun-fours-tower-800.jpg" alt="Sông và biển từ căn hộ" loading="lazy" decoding="async"><span class="cap">Sông và biển từ căn hộ</span></div></button>
+      <button type="button" data-full="https://fourstower.netlify.app/img/view-ngu-hanh-son-sun-fours-tower.jpg"><div class="ph dim" data-file="View Ngũ Hành Sơn"><img src="https://fourstower.netlify.app/img/view-ngu-hanh-son-sun-fours-tower-800.jpg" alt="View Ngũ Hành Sơn" loading="lazy" decoding="async"><span class="cap">View Ngũ Hành Sơn</span></div></button>
+      <button type="button" data-full="https://fourstower.netlify.app/img/sun-fours-tower-ve-dem.jpg"><div class="ph dim" data-file="Sun FourS Tower về đêm"><img src="https://fourstower.netlify.app/img/sun-fours-tower-ve-dem-800.jpg" alt="Sun FourS Tower về đêm" loading="lazy" decoding="async"><span class="cap">Sun FourS Tower về đêm</span></div></button>
+      <button type="button" data-full="https://fourstower.netlify.app/img/ho-boi-4-mua-can-ho-sun-da-nang.jpg"><div class="ph dim" data-file="Hồ bơi bốn mùa"><img src="https://fourstower.netlify.app/img/ho-boi-4-mua-can-ho-sun-da-nang.jpg" alt="Hồ bơi bốn mùa" loading="lazy" decoding="async"><span class="cap">Hồ bơi bốn mùa</span></div></button>
+      <button type="button" data-full="https://fourstower.netlify.app/img/can-ho-san-vuon-toa-f2-fours-tower.jpg"><div class="ph dim" data-file="Căn hộ sân vườn"><img src="https://fourstower.netlify.app/img/can-ho-san-vuon-toa-f2-fours-tower-800.jpg" alt="Căn hộ sân vườn" loading="lazy" decoding="async"><span class="cap">Căn hộ sân vườn</span></div></button>
+      <button type="button" data-full="https://fourstower.netlify.app/img/sanh-don-sun-fours-tower-800.jpg"><div class="ph dim" data-file="Sảnh đón cao 6 m"><img src="https://fourstower.netlify.app/img/sanh-don-sun-fours-tower-800.jpg" alt="Sảnh đón cao 6 m" loading="lazy" decoding="async"><span class="cap">Sảnh đón cao 6 m</span></div></button>
+      <button type="button" data-full="https://fourstower.netlify.app/img/toan-canh-sun-fours-tower-tren-cao.jpg"><div class="ph dim" data-file="Toàn cảnh từ trên cao"><img src="https://fourstower.netlify.app/img/toan-canh-sun-fours-tower-tren-cao-800.jpg" alt="Toàn cảnh từ trên cao" loading="lazy" decoding="async"><span class="cap">Toàn cảnh từ trên cao</span></div></button>
     </div>
   </div>
 </section>
@@ -421,7 +492,7 @@ footer a{color:var(--gold);font-weight:600}
     <span class="eyebrow">An tâm pháp lý</span>
     <h2>3 câu hỏi khách hay hỏi</h2>
     <div class="legal-wrap">
-      <div class="ph legal-img" data-file="anh-cong-truong.jpg"><img src="anh-cong-truong.jpg" alt="Công trường Tòa F2 đã nghiệm thu móng hầm" loading="lazy" decoding="async"></div>
+      <div class="ph legal-img" data-file="Phối cảnh kiến trúc Tòa F2"><img src="https://fourstower.netlify.app/img/toa-f2-fours-tower-kien-truc-800.jpg" alt="Phối cảnh kiến trúc Tòa F2" loading="lazy" decoding="async"></div>
       <div>
         <div class="qa"><h3><i>1</i>Chưa xem dự án?</h3><p>Gọi video Zalo đi thực tế công trường. Nhận bản scan pháp lý. Gặp trực tiếp đội dự án tại sự kiện.</p></div>
         <div class="qa"><h3><i>2</i>Dự án chậm thì sao?</h3><p>Techcombank bảo lãnh cho người mua. Chủ đầu tư thu tối đa 70% trước bàn giao. 5% cuối nộp vào tài khoản đảm bảo cấp sổ.</p></div>
@@ -438,7 +509,8 @@ footer a{color:var(--gold);font-weight:600}
   <div class="container">
     <span class="eyebrow">Vị trí</span>
     <h2>Giữa sông và biển, sát sân bay</h2>
-    <div class="ph loc-img" data-file="anh-tong-the.jpg"><img src="anh-tong-the.jpg" alt="Vị trí Tòa F2 trong đại đô thị Sun Riverpolis" loading="lazy" decoding="async"></div>
+    <p class="mood">Xuống máy bay, 10 phút là về tới nhà. Sáng ra biển, tối về bên sông.</p>
+    <div class="ph loc-img" data-file="Toàn cảnh Sun FourS Tower nhìn từ trên cao"><img src="https://fourstower.netlify.app/img/toan-canh-sun-fours-tower-tren-cao-800.jpg" alt="Toàn cảnh Sun FourS Tower nhìn từ trên cao" loading="lazy" decoding="async"></div>
     <div class="dist">
       <div><b>5'</b><span>Biển Sơn Thủy</span></div>
       <div><b>10'</b><span>Sân bay Đà Nẵng</span></div>
@@ -465,7 +537,7 @@ footer a{color:var(--gold);font-weight:600}
         <li>Hỏi trực tiếp đội dự án</li>
         <li>Bốc thăm <span class="fill">[quà]</span></li>
       </ul>
-      <div class="ph event-img" data-file="anh-phao-hoa.jpg" style="margin-top:18px"><img src="anh-phao-hoa.jpg" alt="Pháo hoa DIFF nhìn từ khu vực dự án" loading="lazy" decoding="async"></div>
+      <div class="ph event-img" data-file="Sun FourS Tower lung linh ánh đèn" style="margin-top:18px"><img src="https://fourstower.netlify.app/img/sun-fours-tower-anh-den-dem-800.jpg" alt="Sun FourS Tower lung linh ánh đèn" loading="lazy" decoding="async"></div>
     </div>
     <div class="form" id="eventForm">
       <form novalidate data-interest="Giữ chỗ sự kiện 18/10 – Tòa F2">
@@ -530,6 +602,7 @@ var CONFIG = {
   telegram: 'https://script.google.com/macros/s/AKfycbwvmG1HMtrQOeUXCuBJ6CHmMb4TcCZ53_n5lwPAt3-6-lG2_fIRX0q25Rv-6LPwVWXZHw/exec?key=sft-tg-4821',
   deadline: '2026-10-25T23:59:59+07:00'
 };
+var IMG = 'https://fourstower.netlify.app/img/';
 var $ = function (s, r) { return (r || document).querySelector(s); };
 var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
 
@@ -566,6 +639,8 @@ function calc(btn) {
   $('#tDep').textContent = fm(dep);
   $('#t15').textContent = fm(p * .15 - dep);
   $('#t105').textContent = fm(p * .10);
+  var ci = $('#calcImg');
+  if (ci && btn.dataset.img) { ci.style.visibility = ''; ci.src = IMG + btn.dataset.img; ci.alt = btn.dataset.cap; $('#calcCap').textContent = btn.dataset.cap + ' · minh họa'; }
 }
 $$('.types button').forEach(function (b) { b.addEventListener('click', function () { calc(b); }); });
 calc($('.types button.on'));
@@ -588,7 +663,7 @@ var lb = $('#lb'), lbImg = $('img', lb), lbCap = $('p', lb), shots = $$('#grid b
 function show(i) {
   cur = (i + shots.length) % shots.length;
   var im = $('img', shots[cur]);
-  lbImg.src = im.currentSrc || im.src; lbImg.alt = im.alt; lbCap.textContent = im.alt;
+  lbImg.src = shots[cur].dataset.full || im.currentSrc || im.src; lbImg.alt = im.alt; lbCap.textContent = im.alt;
 }
 shots.forEach(function (b, i) { b.addEventListener('click', function () { show(i); lb.classList.add('on'); }); });
 $('.x', lb).addEventListener('click', function () { lb.classList.remove('on'); });
