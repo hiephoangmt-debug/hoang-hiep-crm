@@ -39,12 +39,12 @@
 	var root = el( 'div', 'hhc' );
 	root.innerHTML =
 		'<button type="button" class="hhc__fab" aria-label="Chat với ' + esc( C.name ) + '">' +
-			( C.avatar ? '<img src="' + esc( C.avatar ) + '" alt="">' : '' ) +
+			( C.avatar ? '<img src="' + esc( C.avatar ) + '" alt="" width="44" height="44">' : '' ) +
 			'<span class="hhc__fab-text">Chat tư vấn</span><span class="hhc__dot"></span></button>' +
 		'<div class="hhc__bubble" hidden><button type="button" class="hhc__bubble-x" aria-label="Đóng">×</button><p></p><div class="hhc__bubble-chips"></div></div>' +
 		'<section class="hhc__panel" hidden role="dialog" aria-label="Chat tư vấn">' +
 			'<header class="hhc__head">' +
-				( C.avatar ? '<img src="' + esc( C.avatar ) + '" alt="">' : '' ) +
+				( C.avatar ? '<img src="' + esc( C.avatar ) + '" alt="" width="44" height="44">' : '' ) +
 				'<div><strong>' + esc( C.name ) + '</strong><span><i></i> Đang trực tuyến · trả lời trong vài phút</span></div>' +
 				'<button type="button" class="hhc__close" aria-label="Đóng chat">×</button>' +
 			'</header>' +
@@ -182,6 +182,11 @@
 			close();
 		}
 	} );
+	// Bấm nút Chat trước khi chat.js tải xong (tải chậm) → mở luôn khi sẵn sàng.
+	window.HH_CHAT_READY = true;
+	if ( window.HH_CHAT_OPEN ) {
+		open();
+	}
 	// Nút "Chat" ở nơi khác trên trang có thể mở khung chat: <a data-hh-chat>.
 	document.addEventListener( 'click', function ( e ) {
 		var t = e.target.closest && e.target.closest( '[data-hh-chat]' );

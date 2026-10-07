@@ -42,11 +42,22 @@ function hoanghiep_setup() {
 add_action( 'wp_enqueue_scripts', 'hoanghiep_assets' );
 function hoanghiep_assets() {
 	$ver = wp_get_theme()->get( 'Version' );
-	wp_enqueue_style( 'hoanghiep-fonts', 'https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap', array(), null );
+	// Font Be Vietnam Pro / Playfair Display tự host trong assets/fonts (khai báo đầu main.css) – không gọi Google Fonts.
 	// Thêm thời điểm sửa file vào phiên bản để trình duyệt / cache tải bản mới ngay sau khi cập nhật.
 	wp_enqueue_style( 'hoanghiep', get_theme_file_uri( 'assets/css/main.css' ), array(), $ver . '.' . filemtime( get_theme_file_path( 'assets/css/main.css' ) ) );
 	wp_enqueue_script( 'hoanghiep', get_theme_file_uri( 'assets/js/main.js' ), array(), $ver . '.' . filemtime( get_theme_file_path( 'assets/js/main.js' ) ), array( 'strategy' => 'defer' ) );
 }
+
+/** Tải trước font chữ chính (đoạn văn + tiêu đề) để chữ hiện ngay, không nhảy bố cục. */
+add_action(
+	'wp_head',
+	static function () {
+		foreach ( array( 'be-vietnam-pro-400-latin', 'be-vietnam-pro-400-vietnamese', 'playfair-display-700-latin' ) as $font ) {
+			printf( '<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n", esc_url( get_theme_file_uri( 'assets/fonts/' . $font . '.woff2' ) ) );
+		}
+	},
+	2
+);
 
 /**
  * Menu used until one is assigned in Giao diện → Menu.
@@ -122,6 +133,13 @@ add_filter(
 	97
 );
 
+/** Trang hub theo từ khoá: /can-ho-sun-group-da-nang/, /biet-thu-hoi-an/, /can-ho-chuyen-nhuong-da-nang/, /dat-nen-hoa-xuan/. */
+add_filter(
+	'template_include',
+	static fn( $template ) => function_exists( 'hh_hub_key' ) && hh_hub_key() ? get_theme_file_path( 'hub.php' ) : $template,
+	98
+);
+
 /** Trang tổng hợp /san-pham/shop-khoi-de/, /san-pham/penthouse/, /san-pham/duplex/. */
 add_filter(
 	'template_include',
@@ -147,6 +165,8 @@ function hoanghiep_override_builder_template( $template ) {
 		$ours = get_taxonomy_template();
 	} elseif ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) {
 		$ours = get_theme_file_path( 'bang-tinh.php' );
+	} elseif ( function_exists( 'hh_hub_key' ) && hh_hub_key() ) {
+		$ours = get_theme_file_path( 'hub.php' );
 	} elseif ( get_query_var( 'hh_sp' ) ) {
 		$ours = get_theme_file_path( 'san-pham.php' );
 	} elseif ( is_post_type_archive( array( 'du-an', 'bat-dong-san' ) ) || is_category() ) {

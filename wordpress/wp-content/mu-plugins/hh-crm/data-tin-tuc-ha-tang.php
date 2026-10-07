@@ -407,6 +407,7 @@ function hh_import_news() {
 	// Bài hạ tầng (cố định) + bài theo kế hoạch nội dung (các file data-bai-viet-*.php nạp qua filter "hh_news_posts").
 	$items = array_map( static fn( $n ) => $n + array( 'category' => 'Hạ tầng & quy hoạch' ), hh_news_dataset() );
 	$items = array_merge( $items, apply_filters( 'hh_news_posts', array() ) );
+	$items = apply_filters( 'hh_news_items', $items ); // Bản đồ từ khoá SEO (seo-tu-khoa.php).
 	$pos   = array();
 	foreach ( $items as $n ) {
 		++$i;

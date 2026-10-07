@@ -84,7 +84,7 @@ while ( have_posts() ) :
 	<?php hoanghiep_project_inline_css(); ?>
 	<section class="project-hero">
 		<?php if ( has_post_thumbnail() ) : ?>
-			<?php the_post_thumbnail( 'hh-hero', array( 'class' => 'project-hero__bg', 'alt' => '' ) ); ?>
+			<?php the_post_thumbnail( 'hh-hero', array( 'class' => 'project-hero__bg', 'alt' => '', 'loading' => 'eager', 'fetchpriority' => 'high', 'decoding' => 'async' ) ); ?>
 		<?php endif; ?>
 		<div class="container project-hero__content">
 			<div class="project-hero__main">

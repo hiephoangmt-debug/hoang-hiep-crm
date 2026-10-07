@@ -28,7 +28,7 @@ if ( ! $b || empty( $b['rows'] ) ) {
 			</tbody>
 		</table>
 	</div>
-	<p class="note">Khoảng giá tổng hợp từ tin rao và báo cáo thị trường công khai, cập nhật <?php echo esc_html( wp_date( 'm/Y' ) ); ?> – chỉ để tham khảo. Sản phẩm lớn thường giao dịch kín, không đăng công khai: liên hệ <?php echo esc_html( hoanghiep_opt( 'hh_phone' ) ); ?> để nhận danh sách thật đúng tiêu chí. Bạn có tài sản cần bán? <a href="#lien-he" data-need="Ký gửi bán / cho thuê" data-msg="Tôi muốn ký gửi bán tài sản.">Ký gửi với Hiệp</a>.</p>
+	<p class="note">Khoảng giá tổng hợp từ tin rao và báo cáo thị trường công khai – chỉ để tham khảo. Sản phẩm lớn thường giao dịch kín, không đăng công khai: liên hệ <?php echo esc_html( hoanghiep_opt( 'hh_phone' ) ); ?> để nhận danh sách thật đúng tiêu chí. Bạn có tài sản cần bán? <a href="#lien-he" data-need="Ký gửi bán / cho thuê" data-msg="Tôi muốn ký gửi bán tài sản.">Ký gửi với Hiệp</a>.</p>
 	<?php if ( ! empty( $b['sources'] ) ) : ?>
 		<details class="sources"><summary>Nguồn tham khảo</summary><ul><?php foreach ( $b['sources'] as $u ) : ?><li><a href="<?php echo esc_url( $u ); ?>" rel="nofollow noopener" target="_blank"><?php echo esc_html( wp_parse_url( $u, PHP_URL_HOST ) ); ?></a></li><?php endforeach; ?></ul></details>
 	<?php endif; ?>

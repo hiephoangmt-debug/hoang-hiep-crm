@@ -27,7 +27,7 @@ $intro    = hh_special_intro( $key );
 	<?php if ( $projects ) : ?>
 		<section class="block price-board">
 			<h2 class="block__title"><?php echo esc_html( $label ); ?> theo dự án</h2>
-			<p class="prose"><?php echo esc_html( count( $projects ) . ' dự án đang hoặc sắp mở bán có ' . hh_lcfirst( $label ) . '. Cập nhật ' . wp_date( 'm/Y' ) . '. Bấm tên dự án để xem danh sách căn, mặt bằng và chính sách.' ); ?></p>
+			<p class="prose"><?php echo esc_html( count( $projects ) . ' dự án đang hoặc sắp mở bán có ' . hh_lcfirst( $label ) . '. Cập nhật ' . wp_date( 'm/Y', hh_seo_latest_modified( array_keys( $projects ) ) ) . '. Bấm tên dự án để xem danh sách căn, mặt bằng và chính sách.' ); ?></p>
 			<div class="table-wrap">
 				<table class="data-table">
 					<thead><tr><th>Dự án</th><th>Khu vực</th><th>Tình trạng</th><th>Chủ đầu tư</th></tr></thead>

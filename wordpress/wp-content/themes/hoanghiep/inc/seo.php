@@ -10,6 +10,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/** Trang đích mua bán / cho thuê theo khu vực, loại nhà: số tin tối thiểu để Google lập chỉ mục. */
+const HH_SEO_MIN_LISTINGS = 3;
+
 function hh_seo_plugin_active() {
 	return defined( 'WPSEO_VERSION' ) || defined( 'RANK_MATH_VERSION' ) || defined( 'AIOSEO_VERSION' );
 }
@@ -73,22 +76,42 @@ function hh_seo_custom_meta( $kind ) {
 }
 
 add_filter( 'document_title_parts', 'hh_seo_title_parts' );
+/** "Page 2" → "Trang 2" trong tiêu đề trang phân trang. */
+add_filter(
+	'document_title_parts',
+	static function ( $parts ) {
+		if ( ! empty( $parts['page'] ) ) {
+			$parts['page'] = 'Trang ' . max( (int) get_query_var( 'paged' ), (int) get_query_var( 'page' ), 2 );
+		}
+		return $parts;
+	},
+	20
+);
+/** Bảng tính căn: canonical là chính nó (trang noindex – không trỏ canonical sang trang dự án). */
+add_filter( 'get_canonical_url', static fn( $url ) => function_exists( 'hh_is_units_page' ) && hh_is_units_page() ? hh_units_url( get_the_ID() ) : $url );
 function hh_seo_title_parts( $parts ) {
 	if ( hh_seo_custom_meta( 'title' ) ) {
 		return array( 'title' => hh_seo_custom_meta( 'title' ) );
 	}
+	if ( hh_seo_hub_key() ) {
+		return array( 'title' => hh_hub_pages()[ hh_seo_hub_key() ]['title'] );
+	}
 	if ( is_post_type_archive( 'bat-dong-san' ) || is_tax( 'loai-bds' ) ) {
-		$parts['title'] = hh_listing_archive_title() . ( get_query_var( 'hh_deal' ) ? ' – Cập nhật ' . wp_date( 'm/Y' ) : '' );
+		// Tháng của tin mới nhất (dữ liệu thật), không lấy ngày hôm nay.
+		$latest         = get_query_var( 'hh_deal' ) ? (int) ( hh_listing_stats()['latest'] ?? 0 ) : 0;
+		$parts['title'] = hh_listing_archive_title() . ( $latest ? ' – Cập nhật ' . wp_date( 'm/Y', $latest ) : '' );
 	} elseif ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) {
-		$parts['title'] = 'Bảng giá & bảng tính căn ' . get_the_title() . ' – cập nhật ' . wp_date( 'm/Y' );
+		$name           = function_exists( 'hh_seo_project_short_name' ) ? hh_seo_project_short_name( get_the_ID() ) : get_the_title();
+		$parts['title'] = 'Bảng tính căn ' . $name . ': chiết khấu, lịch thanh toán';
 	} elseif ( hh_seo_special_key() ) {
-		$parts['title'] = hh_special_title( hh_seo_special_key() ) . ' ' . wp_date( 'm/Y' );
+		$latest         = hh_seo_latest_modified( array_keys( hh_special_projects( hh_seo_special_key() ) ) );
+		$parts['title'] = hh_special_title( hh_seo_special_key() ) . ( $latest ? ' ' . wp_date( 'm/Y', $latest ) : '' );
 	} elseif ( is_post_type_archive( 'du-an' ) ) {
 		$parts['title'] = hh_pillar_heading() . ' – Căn hộ, biệt thự, đất nền';
 	} elseif ( is_tax( 'loai-du-an' ) ) {
 		$parts['title'] = hh_pillar_heading( get_queried_object() );
 	} elseif ( is_tax( 'khu-vuc' ) ) {
-		$parts['title'] = 'Bất động sản ' . single_term_title( '', false ) . ', Đà Nẵng';
+		$parts['title'] = 'Dự án ' . single_term_title( '', false ) . ', Đà Nẵng: căn hộ, biệt thự, đất nền';
 	} elseif ( is_singular( 'bat-dong-san' ) ) {
 		$title = get_the_title();
 		$deal  = 'thue' === hh_meta( 'hh_deal' ) ? 'Cho thuê' : 'Bán';
@@ -116,10 +139,13 @@ function hh_seo_description() {
 	}
 	if ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) {
 		$d = hh_units_data( get_the_ID() );
-		return 'Bảng giá ' . get_the_title() . ( $d ? ' (' . hh_units_summary( $d ) . ')' : '' ) . ': chọn căn hoặc nhập giá để xem giá, chiết khấu, lịch thanh toán, khoản vay chi tiết. Nhận báo giá chính thức: ' . hoanghiep_opt( 'hh_phone' ) . '.';
+		return 'Bảng tính căn ' . get_the_title() . ( $d ? ' (' . hh_units_summary( $d ) . ')' : '' ) . ': chọn căn hoặc nhập giá để xem giá sau chiết khấu, lịch thanh toán, khoản vay. Báo giá: ' . hoanghiep_opt( 'hh_phone' ) . '.';
 	}
 	if ( is_front_page() ) {
 		return hh_seo_home_description();
+	}
+	if ( hh_seo_hub_key() ) {
+		return hh_hub_pages()[ hh_seo_hub_key() ]['desc'];
 	}
 	if ( is_singular( 'du-an' ) ) {
 		$bits = array_filter(
@@ -164,14 +190,25 @@ function hh_seo_description() {
 			return wp_strip_all_tags( $desc );
 		}
 	}
+	if ( is_home() ) {
+		return 'Tin tức bất động sản Đà Nẵng: thị trường, giá căn hộ, đất nền, hạ tầng, chính sách dự án và kinh nghiệm mua bán, cho thuê do Hoàng Hiệp tổng hợp.';
+	}
+	if ( is_category() ) {
+		$cat = single_cat_title( '', false );
+		return 'Chuyên mục ' . $cat . ': tin bất động sản Đà Nẵng mới nhất về ' . hh_lcfirst( $cat ) . ' – phân tích, số liệu tham khảo và lời khuyên từ Hoàng Hiệp. Hotline ' . hoanghiep_opt( 'hh_phone' ) . '.';
+	}
+	if ( is_tax( 'khu-vuc' ) ) {
+		$name = single_term_title( '', false );
+		return 'Dự án ' . $name . ', Đà Nẵng: căn hộ, biệt thự, đất nền đang mở bán và chuyển nhượng – vị trí, giá tham khảo, pháp lý. Tư vấn: ' . hoanghiep_opt( 'hh_phone' ) . '.';
+	}
 	if ( hh_seo_special_key() ) {
 		return hh_special_intro( hh_seo_special_key() )['lead'] . ' Tư vấn: ' . hoanghiep_opt( 'hh_phone' ) . '.';
 	}
 	if ( is_tax( 'loai-du-an' ) ) {
-		return 'Danh sách dự án ' . mb_strtolower( single_term_title( '', false ) ) . ' tại Đà Nẵng: vị trí, giá bán, mặt bằng, chính sách bán hàng mới nhất. Tư vấn: ' . hoanghiep_opt( 'hh_phone' ) . '.';
+		return 'Dự án ' . mb_strtolower( single_term_title( '', false ) ) . ' Đà Nẵng: danh sách dự án, vị trí, giá bán, mặt bằng, chính sách bán hàng và tiến độ. Tư vấn miễn phí: ' . hoanghiep_opt( 'hh_phone' ) . '.';
 	}
 	if ( is_post_type_archive( 'du-an' ) ) {
-		return 'Danh sách dự án cao tầng (căn hộ, căn hộ dịch vụ, penthouse, duplex, shop khối đế) và thấp tầng (biệt thự, đất nền, shophouse) tại Đà Nẵng: vị trí, giá bán, mặt bằng, tiến độ và chính sách mới nhất. Tư vấn: ' . hoanghiep_opt( 'hh_phone' ) . '.';
+		return 'Dự án Đà Nẵng: căn hộ, căn hộ dịch vụ, biệt thự, đất nền, shophouse – vị trí, giá bán, mặt bằng, tiến độ, chính sách mới nhất. Tư vấn: ' . hoanghiep_opt( 'hh_phone' ) . '.';
 	}
 	if ( is_post_type_archive( 'bat-dong-san' ) || is_tax( 'loai-bds' ) ) {
 		$st = hh_listing_stats();
@@ -179,7 +216,7 @@ function hh_seo_description() {
 			$rent = 'thue' === get_query_var( 'hh_deal' );
 			return hh_listing_archive_title() . ': ' . $st['count'] . ' tin đang có, giá ' . hh_price_range( $st['min'], $st['max'], $rent ) . ', thông tin pháp lý rõ ràng, cập nhật ' . wp_date( 'd/m/Y', $st['latest'] ?: time() ) . '. Đặt lịch xem nhà: ' . hoanghiep_opt( 'hh_phone' ) . '.';
 		}
-		return hh_listing_archive_title() . ', cập nhật hằng ngày, thông tin pháp lý rõ ràng. Lọc theo giá, diện tích, khu vực. Liên hệ ' . hoanghiep_opt( 'hh_phone' ) . '.';
+		return hh_listing_archive_title() . ': tin chính chủ, thông tin pháp lý rõ ràng, lọc theo giá, diện tích, khu vực. Đặt lịch xem nhà: ' . hoanghiep_opt( 'hh_phone' ) . '.';
 	}
 	return get_bloginfo( 'description' );
 }
@@ -204,7 +241,40 @@ function hh_seo_image() {
 	return $fallback;
 }
 
+/** Cắt mô tả ~155 ký tự (Google hiển thị khoảng 150–160), không cắt giữa chữ. */
+function hh_seo_trim( $text, $max = 155 ) {
+	$text = trim( preg_replace( '/\s+/u', ' ', wp_strip_all_tags( (string) $text ) ) );
+	if ( mb_strlen( $text ) <= $max ) {
+		return $text;
+	}
+	$cut = mb_substr( $text, 0, $max - 1 );
+	$sp  = mb_strrpos( $cut, ' ' );
+	return rtrim( $sp > $max * 0.6 ? mb_substr( $cut, 0, $sp ) : $cut, " ,;:–-" ) . '…';
+}
+
+/** Ngày sửa gần nhất trong danh sách bài (dữ liệu thật để ghi "cập nhật", lastmod). */
+function hh_seo_latest_modified( $ids ) {
+	$max = 0;
+	foreach ( array_filter( array_map( 'intval', (array) $ids ) ) as $id ) {
+		$max = max( $max, (int) get_post_modified_time( 'U', true, $id ) );
+	}
+	return $max;
+}
+
+/** URL chuẩn của trang đang xem, có số trang (trang 2, 3… trỏ về chính nó, không về trang 1). */
 function hh_seo_url() {
+	$url   = hh_seo_base_url();
+	$paged = max( (int) get_query_var( 'paged' ), 1 );
+	if ( $paged > 1 && ! is_singular() && ! is_wp_error( $url ) ) {
+		$url = trailingslashit( $url ) . user_trailingslashit( 'page/' . $paged, 'paged' );
+	}
+	return $url;
+}
+
+function hh_seo_base_url() {
+	if ( hh_seo_hub_key() ) {
+		return hh_hub_url( hh_seo_hub_key() );
+	}
 	if ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) {
 		return hh_units_url( get_the_ID() );
 	}
@@ -236,8 +306,7 @@ function hh_seo_head() {
 	if ( hh_seo_plugin_active() || is_404() ) {
 		return;
 	}
-	$desc  = trim( preg_replace( '/\s+/u', ' ', hh_seo_description() ) ) ?: get_bloginfo( 'description' );
-	$desc  = mb_strlen( $desc ) > 300 ? mb_substr( $desc, 0, 297 ) . '…' : $desc;
+	$desc  = hh_seo_trim( hh_seo_description() ?: get_bloginfo( 'description' ) );
 	$image = hh_seo_image();
 	$url   = hh_seo_url();
 	$type  = is_singular( 'post' ) ? 'article' : 'website';
@@ -270,7 +339,9 @@ function hh_seo_head() {
 /** Trang lọc / sắp xếp / tìm kiếm hoặc danh sách rỗng: cho Google đi qua nhưng không lập chỉ mục. */
 function hh_seo_noindex_request() {
 	if ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) {
-		return isset( $_GET['can'] ) || isset( $_GET['tt'] ) || isset( $_GET['bg'] ) || isset( $_GET['gia'] ) || isset( $_GET['loai'] ) || isset( $_GET['ckf'] ) || ! hh_units_data( get_the_ID() ); // phpcs:ignore WordPress.Security.NonceVerification
+		// Bảng tính căn: công cụ tính theo từng căn, nội dung giá trùng trang dự án (trang dự án giữ từ khoá
+		// "bảng giá {Tên}") → noindex, follow; không đưa vào sitemap.
+		return true;
 	}
 	foreach ( array( 'tk', 'gia', 'dt', 'pn', 'huong', 'sx', 'tt', 'duan', 'lien-he', 'khu-vuc', 'loai-bds' ) as $var ) {
 		if ( isset( $_GET[ $var ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
@@ -280,10 +351,18 @@ function hh_seo_noindex_request() {
 	if ( hh_seo_special_key() ) {
 		return ! hh_special_projects( hh_seo_special_key() );
 	}
+	if ( hh_seo_hub_key() ) {
+		return ! hh_hub_projects( hh_seo_hub_key() ) && ! hh_hub_listings( hh_seo_hub_key() );
+	}
 	// Trang Mua bán có bảng giá thị trường (biệt thự, đất lớn, khách sạn): vẫn lập chỉ mục dù chưa có tin.
 	$landing = 'ban' === get_query_var( 'hh_deal' ) ? hh_current_deal_term() : null;
 	if ( $landing && ( 'biet-thu' === $landing->slug || ( function_exists( 'hh_market_board' ) && hh_market_board( $landing->slug ) ) ) ) {
 		return false;
+	}
+	// Trang đích tự sinh /mua-ban/{x}/, /cho-thue/{x}/: chỉ lập chỉ mục khi có từ 3 tin trở lên (tránh trang mỏng).
+	if ( get_query_var( 'hh_deal' ) && hh_current_deal_term() ) {
+		global $wp_query;
+		return (int) $wp_query->found_posts < HH_SEO_MIN_LISTINGS;
 	}
 	return ( is_post_type_archive( array( 'bat-dong-san', 'du-an' ) ) || is_tax() ) && ! have_posts();
 }
@@ -405,6 +484,8 @@ function hh_schema_breadcrumb() {
 	}
 	if ( is_singular() && ! is_front_page() ) {
 		$items[] = array( get_the_title(), get_permalink() );
+	} elseif ( hh_seo_hub_key() ) {
+		$items[] = array( hh_hub_pages()[ hh_seo_hub_key() ]['h1'], hh_seo_url() );
 	} elseif ( hh_seo_special_key() ) {
 		$items[] = array( HH_SPECIAL_PAGES[ hh_seo_special_key() ][1], hh_seo_url() );
 	} elseif ( is_tax() || is_post_type_archive( 'bat-dong-san' ) ) {
@@ -437,6 +518,24 @@ function hh_schema_images( $ids ) {
 	return array_values( array_filter( array_map( fn( $id ) => wp_get_attachment_image_url( $id, 'large' ), array_filter( $ids ) ) ) );
 }
 
+/** Giá cao nhất (đồng) đọc từ bảng giá, loại căn, vốn tự có của dự án ("3,35 tỷ", "4,8 – 5,6 tỷ", "850 triệu"). */
+function hh_schema_project_high_price( $id ) {
+	$max = 0.0;
+	foreach ( array( array( 'hh_p_price_table', 4, 2 ), array( 'hh_p_unit_types', 4, 3 ), array( 'hh_p_capital_table', 4, 1 ) ) as list( $key, $cols, $col ) ) {
+		foreach ( hh_table( $key, $cols, $id ) as $row ) {
+			$cell = str_replace( array( '.', ',' ), array( '', '.' ), (string) ( $row[ $col ] ?? '' ) );
+			if ( preg_match_all( '/(\d+(?:\.\d+)?)\s*(tỷ|ty|triệu|tr)(?!\p{L})/iu', $cell, $m, PREG_SET_ORDER ) ) {
+				foreach ( $m as $x ) {
+					$max = max( $max, (float) $x[1] * ( preg_match( '/^t[ỷy]/iu', $x[2] ) ? 1e9 : 1e6 ) );
+				}
+			} elseif ( preg_match_all( '/(\d+(?:\.\d+)?)\s*[–-]\s*(\d+(?:\.\d+)?)\s*tỷ/iu', $cell, $m ) ) {
+				$max = max( $max, (float) max( $m[2] ) * 1e9 );
+			}
+		}
+	}
+	return $max;
+}
+
 function hh_schema_project() {
 	$id     = get_the_ID();
 	$images = hh_schema_images( array_merge( array( get_post_thumbnail_id() ), hh_ids( 'hh_p_gallery' ) ) );
@@ -464,10 +563,12 @@ function hh_schema_project() {
 		'dateModified' => get_the_modified_date( 'c' ),
 	);
 	if ( hh_meta( 'hh_p_price_from' ) ) {
+		$low            = (float) hh_meta( 'hh_p_price_from' ) * 1000000;
 		$data['offers'] = array(
 			'@type'         => 'AggregateOffer',
 			'priceCurrency' => 'VND',
-			'lowPrice'      => (float) hh_meta( 'hh_p_price_from' ) * 1000000,
+			'lowPrice'      => $low,
+			'highPrice'     => max( $low, hh_schema_project_high_price( $id ) ),
 			'offerCount'    => max( 1, count( hh_table( 'hh_p_price_table', 4 ) ) ),
 			'availability'  => 'https://schema.org/InStock',
 			'seller'        => array( '@id' => home_url( '/#agent' ) ),
@@ -555,16 +656,22 @@ function hh_seo_schema() {
 			'description'     => get_bloginfo( 'description' ),
 			'inLanguage'      => 'vi-VN',
 			'publisher'       => array( '@id' => home_url( '/#agent' ) ),
-			'potentialAction' => array(
-				'@type'       => 'SearchAction',
-				'target'      => array( '@type' => 'EntryPoint', 'urlTemplate' => hh_deal_url( 'ban' ) . '?tk={search_term_string}' ),
-				'query-input' => 'required name=search_term_string',
-			),
 		);
 	}
 
 	if ( hh_seo_special_key() ) {
 		$graph[] = hh_schema_faq( hh_special_intro( hh_seo_special_key() )['faq'] );
+	}
+	if ( hh_seo_hub_key() ) {
+		$hub     = hh_hub_pages()[ hh_seo_hub_key() ];
+		$graph[] = hh_schema_faq( $hub['faq'] );
+		$list    = array();
+		foreach ( hh_hub_projects( hh_seo_hub_key() ) as $i => $pid ) {
+			$list[] = array( '@type' => 'ListItem', 'position' => $i + 1, 'url' => get_permalink( $pid ), 'name' => get_the_title( $pid ) );
+		}
+		if ( $list ) {
+			$graph[] = array( '@type' => 'ItemList', 'name' => $hub['h1'], 'itemListElement' => $list );
+		}
 	}
 	if ( is_singular( 'du-an' ) ) {
 		$graph[] = hh_schema_project();
@@ -596,7 +703,7 @@ function hh_seo_schema() {
 		);
 	}
 
-	if ( is_post_type_archive( array( 'du-an', 'bat-dong-san' ) ) || is_tax( array( 'loai-du-an', 'loai-bds', 'khu-vuc' ) ) ) {
+	if ( ! hh_seo_hub_key() && ! hh_seo_special_key() && ( is_post_type_archive( array( 'du-an', 'bat-dong-san' ) ) || is_tax( array( 'loai-du-an', 'loai-bds', 'khu-vuc' ) ) ) ) {
 		global $wp_query;
 		$list = array();
 		foreach ( $wp_query->posts as $i => $p ) {
@@ -662,7 +769,7 @@ function hh_seo_register_sitemap() {
 				$this->object_type = 'nhadat';
 			}
 			public function get_url_list( $page_num, $object_subtype = '' ) {
-				return array_map( static fn( $loc ) => array( 'loc' => $loc ), hh_seo_landing_urls() );
+				return array_map( static fn( $e ) => array_filter( array( 'loc' => $e[0], 'lastmod' => $e[1] ? gmdate( 'c', $e[1] ) : '' ) ), hh_seo_landing_entries() );
 			}
 			public function get_max_num_pages( $object_subtype = '' ) {
 				return 1;
@@ -672,37 +779,78 @@ function hh_seo_register_sitemap() {
 	wp_register_sitemap_provider( 'nhadat', new HH_Landing_Sitemap() );
 }
 
-/** URL các trang Mua bán / Cho thuê theo khu vực và loại nhà đất. */
-function hh_seo_landing_urls() {
-	$urls = array();
+/** Thời điểm sửa gần nhất của tin nhà đất theo giao dịch (và khu vực / loại nhà nếu có). */
+function hh_seo_listing_lastmod( $deal, $term = null ) {
+	$args = array(
+		'post_type'      => 'bat-dong-san',
+		'posts_per_page' => 1,
+		'orderby'        => 'modified',
+		'order'          => 'DESC',
+		'fields'         => 'ids',
+		'meta_query'     => array( array( 'key' => 'hh_deal', 'value' => $deal ) ),
+	);
+	if ( $term ) {
+		$args['tax_query'] = array( array( 'taxonomy' => $term->taxonomy, 'terms' => $term->term_id ) );
+	}
+	$ids = get_posts( $args );
+	return $ids ? (int) get_post_modified_time( 'U', true, $ids[0] ) : 0;
+}
+
+/**
+ * Sitemap riêng: [url, lastmod] các trang Mua bán / Cho thuê theo khu vực, loại nhà và trang tổng hợp /san-pham/.
+ * Chỉ gồm trang được lập chỉ mục: bỏ trang đích dưới 3 tin, bỏ bảng tính căn (noindex), không trùng URL.
+ */
+function hh_seo_landing_entries() {
+	static $cache = null;
+	if ( null !== $cache ) {
+		return $cache;
+	}
+	$out = array();
 	foreach ( array( 'ban', 'thue' ) as $deal ) {
-		$urls[] = hh_deal_url( $deal );
+		$out[ hh_deal_url( $deal ) ] = hh_seo_listing_lastmod( $deal );
 		foreach ( array( 'khu-vuc', 'loai-bds' ) as $tax ) {
-			foreach ( hh_deal_landing_terms( $deal, $tax ) as list( $term ) ) {
-				$urls[] = hh_deal_term_url( $deal, $term );
+			foreach ( hh_deal_landing_terms( $deal, $tax ) as list( $term, $n ) ) {
+				if ( $n >= HH_SEO_MIN_LISTINGS ) {
+					$out[ hh_deal_term_url( $deal, $term ) ] = hh_seo_listing_lastmod( $deal, $term );
+				}
 			}
 		}
 	}
 	foreach ( array( 'biet-thu', 'dat-nen', 'khach-san' ) as $slug ) {
 		$t = get_term_by( 'slug', $slug, 'loai-bds' );
 		if ( $t && ( 'biet-thu' === $slug || ( function_exists( 'hh_market_board' ) && hh_market_board( $slug ) ) ) ) {
-			$urls[] = hh_deal_term_url( 'ban', $t );
+			$url         = hh_deal_term_url( 'ban', $t );
+			$out[ $url ] = $out[ $url ] ?? hh_seo_listing_lastmod( 'ban', $t );
 		}
 	}
-	if ( function_exists( 'hh_units_data' ) ) {
-		foreach ( get_posts( array( 'post_type' => 'du-an', 'numberposts' => -1, 'fields' => 'ids', 'meta_key' => '_hh_units' ) ) as $pid ) { // phpcs:ignore
-			$urls[] = hh_units_url( $pid );
-		}
-	}
-	$urls = array_values( array_unique( $urls ) );
 	if ( function_exists( 'hh_special_projects' ) ) {
 		foreach ( array_keys( HH_SPECIAL_PAGES ) as $key ) {
-			if ( hh_special_projects( $key ) ) {
-				$urls[] = hh_special_url( $key );
+			$ids = array_keys( hh_special_projects( $key ) );
+			if ( $ids ) {
+				$out[ hh_special_url( $key ) ] = hh_seo_latest_modified( $ids );
 			}
 		}
 	}
-	return $urls;
+	if ( function_exists( 'hh_hub_pages' ) ) {
+		foreach ( array_keys( hh_hub_pages() ) as $key ) {
+			$out[ hh_hub_url( $key ) ] = hh_hub_lastmod( $key );
+		}
+	}
+	$list = array();
+	foreach ( $out as $url => $mod ) {
+		$list[] = array( $url, (int) $mod );
+	}
+	return $cache = $list; // phpcs:ignore Squiz.PHP.DisallowMultipleAssignments
+}
+
+/** Chỉ danh sách URL (tương thích code cũ). */
+function hh_seo_landing_urls() {
+	return array_column( hh_seo_landing_entries(), 0 );
+}
+
+/** Khóa trang hub (/can-ho-sun-group-da-nang/…) đang xem, ngược lại ''. */
+function hh_seo_hub_key() {
+	return function_exists( 'hh_hub_key' ) ? hh_hub_key() : '';
 }
 
 /** Khóa sản phẩm khi đang ở trang tổng hợp /san-pham/…/ (shop, penthouse, duplex), ngược lại ''. */
@@ -719,13 +867,18 @@ function hh_seo_fill_description( $desc ) {
 	if ( '' !== trim( (string) $desc ) || is_404() ) {
 		return $desc;
 	}
-	$auto = trim( preg_replace( '/\s+/u', ' ', hh_seo_description() ) );
-	return mb_strlen( $auto ) > 300 ? mb_substr( $auto, 0, 297 ) . '…' : $auto;
+	return hh_seo_trim( hh_seo_description() );
 }
 add_filter( 'rank_math/frontend/description', 'hh_seo_fill_description' );
 add_filter( 'wpseo_metadesc', 'hh_seo_fill_description' );
 add_filter( 'wpseo_opengraph_desc', 'hh_seo_fill_description' );
 add_filter( 'aioseo_description', 'hh_seo_fill_description' );
+
+/** Mô tả nhập tay quá dài (Google cắt ở ~155–160 ký tự): rút gọn khi xuất ra, không sửa dữ liệu đã lưu. */
+foreach ( array( 'rank_math/frontend/description', 'wpseo_metadesc', 'aioseo_description' ) as $hh_filter ) {
+	add_filter( $hh_filter, static fn( $d ) => is_string( $d ) && mb_strlen( $d ) > 160 ? hh_seo_trim( $d ) : $d, 100 );
+}
+unset( $hh_filter );
 
 /** Trang lọc / tìm kiếm: noindex cả khi plugin SEO tự xuất thẻ robots. */
 add_filter(
@@ -742,7 +895,9 @@ add_filter( 'wpseo_robots', static fn( $robots ) => hh_seo_noindex_request() ? '
 
 /** Đưa trang Mua bán – Cho thuê theo khu vực vào sitemap của plugin. */
 function hh_seo_sitemap_index_entry( $xml = '' ) {
-	return $xml . '<sitemap><loc>' . esc_url( home_url( '/nhadat-sitemap.xml' ) ) . '</loc><lastmod>' . esc_html( gmdate( 'c' ) ) . "</lastmod></sitemap>\n";
+	$mods = array_column( hh_seo_landing_entries(), 1 );
+	$last = $mods ? max( $mods ) : 0;
+	return $xml . '<sitemap><loc>' . esc_url( home_url( '/nhadat-sitemap.xml' ) ) . '</loc>' . ( $last ? '<lastmod>' . esc_html( gmdate( 'c', $last ) ) . '</lastmod>' : '' ) . "</sitemap>\n";
 }
 add_filter( 'rank_math/sitemap/index', 'hh_seo_sitemap_index_entry', 11 );
 add_filter( 'wpseo_sitemap_index', 'hh_seo_sitemap_index_entry' );
@@ -755,8 +910,8 @@ function hh_seo_landing_sitemap( $wp ) {
 	status_header( 200 );
 	header( 'Content-Type: application/xml; charset=utf-8' );
 	echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
-	foreach ( hh_seo_landing_urls() as $url ) {
-		echo '<url><loc>' . esc_url( $url ) . "</loc></url>\n";
+	foreach ( hh_seo_landing_entries() as list( $url, $mod ) ) {
+		echo '<url><loc>' . esc_url( $url ) . '</loc>' . ( $mod ? '<lastmod>' . esc_html( gmdate( 'c', $mod ) ) . '</lastmod>' : '' ) . "</url>\n";
 	}
 	echo "</urlset>\n";
 	exit;
@@ -903,7 +1058,12 @@ unset( $hh_filter );
  * ---------------------------------------------------------------------- */
 
 add_filter( 'rank_math/sitemap/exclude_post_type', static fn( $exclude, $type ) => in_array( $type, array( 'du-an', 'bat-dong-san' ), true ) ? false : $exclude, 99, 2 );
-add_filter( 'rank_math/sitemap/exclude_taxonomy', static fn( $exclude, $tax ) => in_array( $tax, array( 'loai-du-an', 'khu-vuc' ), true ) ? false : $exclude, 99, 2 );
+add_filter( 'rank_math/sitemap/exclude_taxonomy', static fn( $exclude, $tax ) => in_array( $tax, array( 'loai-du-an', 'khu-vuc' ), true ) ? false : ( 'loai-bds' === $tax ? true : $exclude ), 99, 2 );
+// /loai-nha-dat/{x}/ đã chuyển 301 sang /mua-ban/{x}/ – không đưa vào sitemap.
+add_filter( 'wp_sitemaps_taxonomies', static function ( $taxes ) {
+	unset( $taxes['loai-bds'] );
+	return $taxes;
+} );
 
 /** Đổi mọi tham chiếu {"@id": cũ} sang @id của theme. */
 function hh_seo_repoint_ids( $node, $ids, $to ) {
@@ -950,18 +1110,129 @@ add_filter(
  * ---------------------------------------------------------------------- */
 
 function hh_seo_is_listing_page() {
-	return ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) || is_post_type_archive( array( 'bat-dong-san', 'du-an' ) ) || is_tax( array( 'loai-du-an', 'khu-vuc', 'loai-bds' ) ) || hh_seo_special_key();
+	return ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) || is_post_type_archive( array( 'bat-dong-san', 'du-an' ) ) || is_tax( array( 'loai-du-an', 'khu-vuc', 'loai-bds' ) ) || hh_seo_special_key() || hh_seo_hub_key();
 }
 
 function hh_seo_listing_title() {
+	if ( hh_seo_hub_key() ) {
+		return hh_hub_pages()[ hh_seo_hub_key() ]['title']; // Đã ≤ 60 ký tự, không thêm tên web.
+	}
 	$parts = hh_seo_title_parts( array( 'title' => wp_strip_all_tags( (string) get_the_archive_title() ) ) );
-	return trim( $parts['title'] ) . ' – ' . get_bloginfo( 'name' );
+	$paged = (int) get_query_var( 'paged' );
+	return trim( $parts['title'] ) . ( $paged > 1 ? ' – Trang ' . $paged : '' ) . ' – ' . get_bloginfo( 'name' );
 }
 
 foreach ( array( 'rank_math/frontend/title', 'rank_math/opengraph/facebook/og_title', 'rank_math/opengraph/twitter/twitter_title', 'wpseo_title', 'wpseo_opengraph_title', 'aioseo_title' ) as $hh_filter ) {
 	add_filter( $hh_filter, static fn( $v ) => hh_seo_is_listing_page() ? hh_seo_listing_title() : $v, 98 );
 }
 foreach ( array( 'rank_math/frontend/description', 'rank_math/opengraph/facebook/og_description', 'rank_math/opengraph/twitter/twitter_description', 'wpseo_metadesc', 'wpseo_opengraph_desc', 'aioseo_description' ) as $hh_filter ) {
-	add_filter( $hh_filter, static fn( $v ) => hh_seo_is_listing_page() ? trim( preg_replace( '/\s+/u', ' ', hh_seo_description() ) ) : $v, 98 );
+	add_filter( $hh_filter, static fn( $v ) => hh_seo_is_listing_page() ? hh_seo_trim( hh_seo_description() ) : $v, 98 );
 }
 unset( $hh_filter );
+
+/* -------------------------------------------------------------------------
+ * URL trùng nội dung: 301 về một URL chuẩn
+ * - /nha-dat/ (mọi tin, không phân mua / thuê)            → /mua-ban/
+ * - /loai-nha-dat/{loại}/                                  → /mua-ban/{loại}/ (hoặc /cho-thue/{loại}/ nếu chỉ có tin thuê)
+ * Giữ số trang và tham số lọc (?gia=…). /khu-vuc/{x}/ chỉ còn hiện dự án (khác /mua-ban/{x}/ là tin nhà đất).
+ * ---------------------------------------------------------------------- */
+
+add_action( 'template_redirect', 'hh_seo_redirect_duplicates', 2 );
+function hh_seo_redirect_duplicates() {
+	if ( is_admin() || is_feed() || is_preview() || ! function_exists( 'hh_deal_url' ) ) {
+		return;
+	}
+	$target = '';
+	$filtered = (bool) array_intersect( array_keys( $_GET ), array( 'tk', 'gia', 'dt', 'pn', 'huong', 'sx', 'duan', 'khu-vuc', 'loai-bds' ) ); // phpcs:ignore WordPress.Security.NonceVerification
+	if ( is_post_type_archive( 'bat-dong-san' ) && ! get_query_var( 'hh_deal' ) && ! get_query_var( 'hh_term' ) && ! $filtered ) {
+		// Ô tìm kiếm "Tất cả" (/nha-dat/?tk=…) vẫn chạy, chỉ trang không lọc chuyển về /mua-ban/ (trang lọc đã noindex).
+		$target = hh_deal_url( 'ban' );
+	} elseif ( is_tax( 'loai-bds' ) ) {
+		$term = get_queried_object();
+		$deal = hh_seo_listing_lastmod( 'ban', $term ) || ! hh_seo_listing_lastmod( 'thue', $term ) ? 'ban' : 'thue';
+		$target = hh_deal_term_url( $deal, $term );
+	}
+	if ( ! $target ) {
+		return;
+	}
+	$paged = max( (int) get_query_var( 'paged' ), 1 );
+	if ( $paged > 1 ) {
+		$target = trailingslashit( $target ) . user_trailingslashit( 'page/' . $paged, 'paged' );
+	}
+	$query = (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_QUERY ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+	wp_safe_redirect( $target . ( $query ? '?' . $query : '' ), 301 );
+	exit;
+}
+
+/** Trang khu vực /khu-vuc/{x}/: chỉ dự án (tin nhà đất theo khu vực ở /mua-ban/{x}/, /cho-thue/{x}/). */
+add_action(
+	'pre_get_posts',
+	static function ( $q ) {
+		if ( ! is_admin() && $q->is_main_query() && $q->is_tax( 'khu-vuc' ) ) {
+			$q->set( 'post_type', 'du-an' );
+		}
+	},
+	20
+);
+
+/* -------------------------------------------------------------------------
+ * Canonical khi bật Rank Math / Yoast: trang dựng riêng (/mua-ban/{x}/, /cho-thue/{x}/, /san-pham/{x}/, trang 2, 3…)
+ * trỏ đúng chính nó (plugin tự tính sẽ ra /nha-dat/ hoặc trang 1).
+ * ---------------------------------------------------------------------- */
+
+function hh_seo_canonical_filter( $canonical ) {
+	if ( is_404() || ( is_singular() && ! ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) ) ) {
+		return $canonical;
+	}
+	if ( hh_seo_is_listing_page() || is_tax() || is_category() || is_home() || is_post_type_archive() ) {
+		$url = hh_seo_url();
+		return is_wp_error( $url ) || ! $url ? $canonical : $url;
+	}
+	return $canonical;
+}
+foreach ( array( 'rank_math/frontend/canonical', 'rank_math/opengraph/url', 'wpseo_canonical', 'wpseo_opengraph_url', 'aioseo_canonical_url' ) as $hh_filter ) {
+	add_filter( $hh_filter, 'hh_seo_canonical_filter', 99 );
+}
+unset( $hh_filter );
+
+/** Rank Math: phân trang của trang dựng riêng (rel prev/next) cũng theo URL đẹp. */
+add_filter( 'rank_math/frontend/disable_adjacent_rel_links', static fn( $disable ) => get_query_var( 'hh_deal' ) || get_query_var( 'hh_sp' ) ? true : $disable );
+
+/* -------------------------------------------------------------------------
+ * Rank Math schema: tác giả bài viết = Hoàng Hiệp (#person); bỏ SearchAction (Google không còn dùng).
+ * ---------------------------------------------------------------------- */
+
+add_filter( 'rank_math/json_ld/disable_search', '__return_true' );
+add_filter(
+	'rank_math/json_ld',
+	static function ( $data ) {
+		if ( ! is_array( $data ) ) {
+			return $data;
+		}
+		$person_ids = array();
+		foreach ( $data as $k => $entity ) {
+			if ( ! is_array( $entity ) ) {
+				continue;
+			}
+			unset( $data[ $k ]['potentialAction'] ); // SearchAction trên WebSite.
+			$types = (array) ( $entity['@type'] ?? array() );
+			if ( in_array( 'Person', $types, true ) && ! empty( $entity['@id'] ) && false === strpos( $entity['@id'], '#person' ) ) {
+				$person_ids[] = $entity['@id']; // Tác giả theo tài khoản WordPress (VD …/author/admin/).
+				unset( $data[ $k ] );
+			}
+		}
+		if ( ! is_singular( 'post' ) && ! $person_ids ) {
+			return $data;
+		}
+		$data = $person_ids ? hh_seo_repoint_ids( $data, $person_ids, home_url( '/#person' ) ) : $data;
+		foreach ( $data as $k => $entity ) {
+			$types = (array) ( $entity['@type'] ?? array() );
+			if ( array_intersect( $types, array( 'Article', 'BlogPosting', 'NewsArticle' ) ) ) {
+				$data[ $k ]['author'] = array( '@id' => home_url( '/#person' ) );
+			}
+		}
+		$data['hhPerson'] = hh_schema_person();
+		return $data;
+	},
+	100
+);

@@ -1,6 +1,6 @@
-# Gói cập nhật hiephoangmt.com – 06/10/2026
+# Gói cập nhật hiephoangmt.com – 07/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.12.4** + plugin Hoàng Hiệp CRM **2.17.7**)
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.0** + plugin Hoàng Hiệp CRM **2.18.0**)
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -31,7 +31,7 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 ### Bước 5 – Xoá bộ nhớ đệm và kiểm tra
 1. Thanh đen trên cùng → rê chuột vào **LiteSpeed Cache** → **Purge All** (hoặc menu trái LiteSpeed Cache → Toolbox → Purge All).
 2. Mở web, bấm **Ctrl + Shift + R** (điện thoại: tắt hẳn tab, mở lại).
-3. Kiểm tra phiên bản: **Plugin → Plugin đã cài**: Hoàng Hiệp CRM **2.17.7** · **Giao diện**: Hoàng Hiệp **2.12.4**.
+3. Kiểm tra phiên bản: **Plugin → Plugin đã cài**: Hoàng Hiệp CRM **2.18.0** · **Giao diện**: Hoàng Hiệp **2.13.0**.
 4. Xem kết quả:
    - **Tin tức** → nút **Nhịp sống Đà Nẵng** → bài bãi tắm Sơn Thủy.
    - **Casamia Balanca Hội An**: ảnh mới ở mục Tiện ích, Hình ảnh, Tiến độ – web đưa ảnh vào dần trong 15–20 phút; chưa đủ thì đợi thêm rồi Purge All lần nữa.
@@ -41,7 +41,56 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
 
-## Có gì mới
+## Có gì mới – SEO lên top Google (plugin 2.18.0, giao diện 2.13.0)
+
+Bảng từ khoá → URL đầy đủ: **`SEO-TU-KHOA.md`** (cùng thư mục này).
+
+### 1. Mỗi từ khoá chỉ 1 trang (không tự cạnh tranh nhau)
+- **Trang dự án** giữ từ khoá "giá {Tên}", "bảng giá {Tên}". Tòa / phân khu con (Capital Square Tòa 2.1, Phân khu Bạch Vân…) có từ khoá riêng, không trùng dự án mẹ.
+- **80 bài viết** đổi sang từ khoá dài đúng ý bài: *chính sách bán hàng {Tên}*, *mặt bằng {Tên}*, *có nên mua {Tên}*, *giá chuyển nhượng {Tên}*, *cho thuê {Tên}*… Tiêu đề SEO ≤ 60 ký tự, mô tả 140–155 ký tự, từ khoá đứng đầu.
+- Mỗi bài gắn dự án tự có 1 dòng liên kết **"bảng giá {Tên}"** về trang dự án (chèn sau đoạn 2).
+- Ô Rank Math anh đã tự sửa tay **giữ nguyên**; chỉ ô do web tự điền mới được thay.
+
+### 2. Tiêu đề & mô tả
+- Trang dự án tự có tiêu đề: *"{Tên}: Bảng giá, chính sách {tháng}/{năm} | Hoàng Hiệp"* (≤ 60 ký tự, tự rút gọn). Tháng/năm lấy theo **lần cập nhật dữ liệu dự án thật**, không phải ngày hôm nay.
+- Mô tả cắt gọn ~155 ký tự (trước 300). Trang Tin tức, chuyên mục, loại dự án, khu vực có mô tả riêng thay khẩu hiệu web.
+- Bỏ chữ "cập nhật {tháng này}" giả: tiêu đề Mua bán / Cho thuê ghi tháng của **tin mới nhất**; bảng giá thị trường, trang /san-pham/ ghi theo ngày sửa dữ liệu thật.
+
+### 3. Trang trùng lặp & canonical (chạy cùng Rank Math)
+- **/nha-dat/ → 301 /mua-ban/**; **/loai-nha-dat/{x}/ → 301 /mua-ban/{x}/** (hoặc /cho-thue/{x}/ nếu chỉ có tin thuê), giữ số trang.
+- **/khu-vuc/{x}/** nay chỉ hiện **dự án** trong khu vực (tin mua bán / cho thuê ở /mua-ban/{x}/, /cho-thue/{x}/) – hết trùng nội dung, có liên kết qua lại.
+- Canonical đúng cho /mua-ban/{x}/, /cho-thue/{x}/, /san-pham/{x}/, trang hub và **trang 2, 3…** (trước đây Rank Math trỏ về /nha-dat/ hoặc trang 1). Tiêu đề trang phân trang có "– Trang 2".
+- **/du-an/{slug}/bang-tinh/ → noindex, follow** và bỏ khỏi sitemap. *Lý do:* đây là công cụ tính theo từng căn, phần giá trùng trang dự án; để trang dự án độc quyền từ khoá "bảng giá {Tên}" (Google chỉ xếp 1 trang/từ khoá). "follow" vẫn giúp Google đi theo liên kết.
+- Trang /mua-ban/{x}/, /cho-thue/{x}/ **dưới 3 tin → noindex** (tự lập chỉ mục lại khi đủ 3 tin).
+
+### 4. Sitemap & schema
+- Sitemap riêng `/nhadat-sitemap.xml` có **lastmod** theo tin / dự án mới nhất, bỏ trang noindex, thêm 4 trang hub. /loai-nha-dat/ bỏ khỏi sitemap.
+- Schema dự án có **highPrice** (giá cao nhất đọc từ bảng giá, loại căn, vốn tự có).
+- Rank Math: **tác giả bài viết = Hoàng Hiệp (#person)**; bỏ **SearchAction** (Google không còn dùng).
+
+### 5. Tốc độ (Core Web Vitals)
+- Font Be Vietnam Pro + Playfair Display **tự host** trên web (không gọi Google Fonts), tải trước 3 file chính.
+- CSS in thẳng trong trang (dự án, thẻ thị trường, giỏ hàng nổi bật) **gộp vào main.css** – nhớ **Purge All** sau khi cài.
+- Ảnh có width/height; ảnh đầu trang (trang chủ, dự án, tin, bài) **fetchpriority="high"**.
+- Khung chat **tải chậm**: chỉ tải khi khách chạm / cuộn / gõ phím hoặc sau 4 giây (bấm nút Chat trước đó vẫn mở ngay).
+
+### 6. Trang hub mới (từ khoá chưa có trang)
+| Từ khoá | Trang |
+|---|---|
+| căn hộ Sun Group Đà Nẵng | /can-ho-sun-group-da-nang/ |
+| biệt thự Hội An | /biet-thu-hoi-an/ |
+| căn hộ chuyển nhượng Đà Nẵng | /can-ho-chuyen-nhuong-da-nang/ |
+| đất nền Hòa Xuân | /dat-nen-hoa-xuan/ |
+
+Mỗi trang: giới thiệu 340–370 chữ, bảng dự án tự lọc theo dữ liệu (thêm dự án mới là tự lên), tin bán mới nhất, bài liên quan, 4 hỏi đáp (có schema FAQ). Bài "giá đất nền Hòa Xuân 2026", "so sánh FourS – Spana – S-Light", "quy trình mua căn hộ chuyển nhượng" đổi từ khoá để không tranh với trang hub.
+
+### Việc anh làm tay sau khi cài (quan trọng)
+1. **Nhập / cập nhật dữ liệu** (bước 4) – bắt buộc để ghi từ khoá, tiêu đề, mô tả mới vào Rank Math.
+2. **Cài đặt → Đường dẫn tĩnh → Lưu** (để 4 trang hub chạy ngay).
+3. **LiteSpeed Cache → Purge All**.
+4. Rank Math, Search Console, gửi sitemap, Yêu cầu lập chỉ mục: xem mục **"Việc làm tay trên web thật"** cuối file.
+
+## Có gì mới (các bản trước)
 
 ### Đầu trang dự án
 - Khung form đầu trang: dòng ưu đãi + 4 con số chính (19% · 25% · 15% · 70%) + "Còn N ngày – hạn …" ngay trên ô họ tên / số điện thoại.
@@ -107,3 +156,27 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 - Kiểm tra quyền chia sẻ các link ảnh Drive Hải Vân Bay; ảnh riêng cho từng phân khu.
 - Chính sách CĐT bản chính thức tháng 10/2026 của Hải Vân Bay.
 - Nội dung thật trang Giới thiệu, địa chỉ văn phòng.
+
+## Việc làm tay trên web thật (SEO)
+
+### Rank Math (WordPress → Rank Math SEO)
+1. **Bảng điều khiển → Mô-đun**: bật *Sitemap*, *Schema (Rich Snippets)*, *Hình ảnh SEO*; tắt *Breadcrumbs* của Rank Math nếu không dùng (web đã có).
+2. **Cài đặt chung → Liên kết**: bật *Chuyển hướng đính kèm*, tắt *Xóa base danh mục* (giữ /category/ để không đổi đường dẫn).
+3. **Tiêu đề & Meta → Local SEO**: *Người hoặc tổ chức* = **Người**, Tên = **Hoàng Hiệp**, Logo/ảnh = ảnh chân dung (khớp #person của web).
+4. **Tiêu đề & Meta → Loại bài**: *Dự án* và *Nhà đất* – Rich Snippet mặc định **Không có** (web đã tự xuất schema dự án / tin, tránh trùng).
+5. **Tiêu đề & Meta → Phân loại**: *Loại nhà đất* (loai-bds) – bật **noindex** (đã 301 sang /mua-ban/…).
+6. **Sitemap → Loại bài**: bật Bài viết, Trang, Dự án, Nhà đất; **Phân loại**: bật Danh mục, Loại dự án, Khu vực; tắt Loại nhà đất, Thẻ.
+7. Không cài thêm plugin SEO khác (Yoast, AIOSEO…) song song Rank Math.
+
+### Google Search Console (search.google.com/search-console)
+1. Thêm tài sản **hiephoangmt.com** (loại *Miền*, xác minh bằng bản ghi TXT tại InterData → Quản lý DNS) hoặc *Tiền tố URL* `https://hiephoangmt.com/` (dán mã vào Rank Math → Cài đặt chung → Công cụ quản trị trang web).
+2. **Sơ đồ trang web** → gửi 2 sitemap:
+   - `https://hiephoangmt.com/sitemap_index.xml`
+   - `https://hiephoangmt.com/nhadat-sitemap.xml`
+3. **Kiểm tra URL → Yêu cầu lập chỉ mục** (mỗi ngày khoảng 10 URL) theo thứ tự:
+   1. `/can-ho-sun-group-da-nang/`, `/biet-thu-hoi-an/`, `/can-ho-chuyen-nhuong-da-nang/`, `/dat-nen-hoa-xuan/` (trang mới)
+   2. `/` , `/du-an/`, `/mua-ban/`, `/cho-thue/`
+   3. Trang dự án chính: `/du-an/fours-tower/`, `/du-an/casamia-balanca-hoi-an/`, `/du-an/vinhomes-hai-van-bay/`, `/du-an/sun-riverpolis/`, `/du-an/spana-tower/`, `/du-an/s-light-tower/`, `/du-an/cora-tower/`, `/du-an/capital-square-da-nang/`
+   4. Bài đổi từ khoá nhiều nhất: `/gia-fours-tower-2026/`, `/chinh-sach-fours-tower-thanh-toan-vay-ngan-hang/`, `/fours-tower-da-nang-tong-quan-4-thap-bon-mua/`, `/casamia-balanca-hoi-an-tong-quan-du-an/`, `/gia-biet-thu-casamia-balanca-2026/`, `/dat-nen-hoa-xuan-2026-gia-theo-khu/`, `/so-sanh-fours-tower-spana-tower-s-light-tower/`, `/mua-can-ho-chuyen-nhuong-da-nang-quy-trinh-giay-to/`, `/sun-symphony-da-nang-gia-chuyen-nhuong-cho-thue/`, `/the-meridian-da-nang-co-nen-mua/`
+4. Sau 2–4 tuần: **Hiệu suất → Truy vấn** – xem từ khoá nào lên trang 1–2 để bổ sung nội dung; **Trang** – kiểm tra "Trùng lặp, Google chọn canonical khác" phải giảm dần.
+5. **PageSpeed Insights** (pagespeed.web.dev): kiểm tra `/` và `/du-an/fours-tower/` trên di động (mục tiêu ≥ 70). Nếu LiteSpeed đang bật *Gộp CSS/JS*, *Tải chậm ảnh*: giữ bật; nếu bật *Tối ưu font Google* thì tắt (web đã tự host font).

@@ -39,8 +39,13 @@ add_action(
 		if ( ! hh_chat_enabled() || is_admin() ) {
 			return;
 		}
-		wp_enqueue_style( 'hh-chat', HH_CRM_URL . 'chat.css', array(), HH_CRM_VERSION );
-		wp_enqueue_script( 'hh-chat', HH_CRM_URL . 'chat.js', array(), HH_CRM_VERSION, true );
+		// Tải chậm: chỉ chèn chat.css + chat.js khi khách chạm / cuộn / gõ phím hoặc sau 4 giây (không chặn hiển thị trang).
+		wp_register_script( 'hh-chat', false, array(), HH_CRM_VERSION, true );
+		wp_enqueue_script( 'hh-chat' );
+		wp_add_inline_script(
+			'hh-chat',
+			'(function(){var done=false,ev=["pointerdown","touchstart","keydown","scroll"];function go(){if(done)return;done=true;ev.forEach(function(e){removeEventListener(e,go,{passive:true});});var l=document.createElement("link");l.rel="stylesheet";l.href=' . wp_json_encode( HH_CRM_URL . 'chat.css?ver=' . HH_CRM_VERSION ) . ';document.head.appendChild(l);var s=document.createElement("script");s.src=' . wp_json_encode( HH_CRM_URL . 'chat.js?ver=' . HH_CRM_VERSION ) . ';s.defer=true;document.body.appendChild(s);}ev.forEach(function(e){addEventListener(e,go,{passive:true,once:true});});setTimeout(go,4000);document.addEventListener("click",function(e){var t=e.target.closest&&e.target.closest("[data-hh-chat]");if(t&&!window.HH_CHAT_READY){e.preventDefault();window.HH_CHAT_OPEN=true;go();}},true);})();'
+		);
 		$id      = is_singular( array( 'du-an', 'bat-dong-san' ) ) ? get_queried_object_id() : 0;
 		$opt     = static fn( $k, $d = '' ) => function_exists( 'hoanghiep_opt' ) ? ( hoanghiep_opt( $k ) ?: $d ) : $d;
 		$phone   = $opt( 'hh_phone', '0904 567 009' );

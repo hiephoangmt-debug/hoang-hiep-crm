@@ -19,7 +19,8 @@ $board = new WP_Query(
 		'tax_query'      => $tax, // phpcs:ignore WordPress.DB.SlowDBQuery
 	)
 );
-$rows = array();
+$rows   = array();
+$latest = 0; // Ngày sửa gần nhất của các dự án trong bảng (ghi "cập nhật" theo dữ liệu thật).
 while ( $board->have_posts() ) {
 	$board->the_post();
 	$market = hh_project_market();
@@ -33,6 +34,7 @@ while ( $board->have_posts() ) {
 	if ( ! $price ) {
 		continue;
 	}
+	$latest = max( $latest, (int) get_post_modified_time( 'U', true ) );
 	$area   = hh_project_area();
 	$rows[] = array( get_the_title(), get_permalink(), $area ? $area->name : '', $price, $kind );
 }
@@ -45,7 +47,7 @@ $price_label = 'thue' === $deal ? 'Giá thuê tham khảo' : 'Giá tham khảo';
 ?>
 <section class="block price-board">
 	<h2 class="block__title"><?php echo esc_html( $args['title'] ); ?></h2>
-	<p class="prose"><?php echo esc_html( 'Mặt bằng giá ' . $what . ' tham khảo theo từng dự án – tổng hợp từ tin đăng trên website, bảng giá chủ đầu tư và tin rao công khai, cập nhật ' . wp_date( 'm/Y' ) . '. Bấm tên dự án để xem vị trí, tiện ích và các căn đang giao dịch.' ); ?></p>
+	<p class="prose"><?php echo esc_html( 'Mặt bằng giá ' . $what . ' tham khảo theo từng dự án – tổng hợp từ tin đăng trên website, bảng giá chủ đầu tư và tin rao công khai, cập nhật ' . wp_date( 'm/Y', $latest ?: time() ) . '. Bấm tên dự án để xem vị trí, tiện ích và các căn đang giao dịch.' ); ?></p>
 	<div class="table-wrap">
 		<table class="data-table">
 			<thead><tr><th>Dự án</th><th>Khu vực</th><th><?php echo esc_html( $price_label ); ?></th><th>Nguồn</th><th></th></tr></thead>

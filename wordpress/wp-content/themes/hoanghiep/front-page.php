@@ -23,7 +23,7 @@ $hero_image = hoanghiep_opt( 'hh_hero_image' );
 			$status = hh_option_label( hh_project_schema(), 'hh_p_status', hh_meta( 'hh_p_status' ) );
 			?>
 			<div class="hero__slide<?php echo 0 === $i ? ' is-active' : ''; ?>">
-				<?php the_post_thumbnail( 'hh-hero', array( 'class' => 'hero__bg', 'loading' => 0 === $i ? 'eager' : 'lazy', 'alt' => '' ) ); ?>
+				<?php the_post_thumbnail( 'hh-hero', array( 'class' => 'hero__bg', 'loading' => 0 === $i ? 'eager' : 'lazy', 'fetchpriority' => 0 === $i ? 'high' : 'low', 'alt' => '' ) ); ?>
 				<div class="container hero__content">
 					<p class="eyebrow eyebrow--light">Dự án nổi bật<?php echo $status ? ' · ' . esc_html( $status ) : ''; ?></p>
 					<h2 class="hero__title"><?php the_title(); ?></h2>
@@ -52,7 +52,7 @@ $hero_image = hoanghiep_opt( 'hh_hero_image' );
 	<?php else : ?>
 		<div class="hero__slide is-active">
 			<?php if ( $hero_image ) : ?>
-				<img class="hero__bg" src="<?php echo esc_url( $hero_image ); ?>" alt="">
+				<img class="hero__bg" src="<?php echo esc_url( $hero_image ); ?>" alt=""<?php echo hh_img_size_attr( $hero_image ); // phpcs:ignore ?> fetchpriority="high" decoding="async">
 			<?php endif; ?>
 			<div class="container hero__content hero__content--person">
 				<img class="hero__portrait" src="<?php echo esc_url( hoanghiep_photo( 'portrait2' ) ); ?>" alt="<?php echo esc_attr( hoanghiep_opt( 'hh_person_name' ) ); ?>" width="900" height="1350">

@@ -66,7 +66,7 @@ while ( have_posts() ) :
 						}
 						?>
 						<a class="photo-stage__item<?php echo 0 === $i ? ' photo-stage__item--main' : ''; ?><?php echo $i > 4 ? ' is-extra' : ''; ?>" href="<?php echo esc_url( $full ); ?>" data-lightbox="nha">
-							<?php echo wp_get_attachment_image( $pid, 0 === $i ? 'large' : 'hh-card', false, array( 'loading' => 0 === $i ? 'eager' : 'lazy' ) ); ?>
+							<?php echo wp_get_attachment_image( $pid, 0 === $i ? 'large' : 'hh-card', false, array( 'loading' => 0 === $i ? 'eager' : 'lazy', 'fetchpriority' => 0 === $i ? 'high' : 'auto' ) ); ?>
 							<?php if ( 4 === $i && count( $photos ) > 5 ) : ?>
 								<span class="photo-stage__more">+<?php echo count( $photos ) - 5; ?> ảnh</span>
 							<?php endif; ?>

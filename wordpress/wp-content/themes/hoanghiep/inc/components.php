@@ -312,6 +312,32 @@ function hh_news_query( $q ) {
 	}
 }
 
+/** Kích thước ảnh từ URL (ảnh thư viện hoặc file trong giao diện) → ' width="…" height="…"', '' nếu không biết. */
+function hh_img_size_attr( $url ) {
+	static $cache = array();
+	if ( isset( $cache[ $url ] ) ) {
+		return $cache[ $url ];
+	}
+	$w  = 0;
+	$h  = 0;
+	$id = attachment_url_to_postid( preg_replace( '/-\d+x\d+(?=\.\w+$)/', '', (string) $url ) );
+	if ( $id ) {
+		$meta = wp_get_attachment_metadata( $id );
+		$w    = (int) ( $meta['width'] ?? 0 );
+		$h    = (int) ( $meta['height'] ?? 0 );
+		if ( preg_match( '/-(\d+)x(\d+)\.\w+$/', (string) $url, $m ) ) {
+			list( , $w, $h ) = array_map( 'intval', $m );
+		}
+	} elseif ( 0 === strpos( (string) $url, get_theme_file_uri() ) ) {
+		$file = get_theme_file_path( substr( (string) $url, strlen( get_theme_file_uri() ) ) );
+		$size = is_file( $file ) ? @getimagesize( $file ) : false; // phpcs:ignore WordPress.PHP.NoSilencedErrors
+		if ( $size ) {
+			list( $w, $h ) = $size;
+		}
+	}
+	return $cache[ $url ] = $w && $h ? sprintf( ' width="%d" height="%d"', $w, $h ) : ''; // phpcs:ignore Squiz.PHP.DisallowMultipleAssignments
+}
+
 /** Grid of activity photos with captions (lightbox group "hoat-dong"). */
 function hh_highlights( $limit = 0, $class = 'highlights' ) {
 	$items = hoanghiep_highlights();
@@ -324,10 +350,11 @@ function hh_highlights( $limit = 0, $class = 'highlights' ) {
 	printf( '<div class="%s">', esc_attr( $class ) );
 	foreach ( $items as list( $url, $caption ) ) {
 		printf(
-			'<figure><a href="%1$s" data-lightbox="hoat-dong"><img src="%1$s" alt="%2$s" loading="lazy"></a>%3$s</figure>',
+			'<figure><a href="%1$s" data-lightbox="hoat-dong"><img src="%1$s" alt="%2$s"%4$s loading="lazy" decoding="async"></a>%3$s</figure>',
 			esc_url( $url ),
 			esc_attr( $caption ?: hoanghiep_opt( 'hh_person_name' ) ),
-			$caption ? '<figcaption>' . esc_html( $caption ) . '</figcaption>' : ''
+			$caption ? '<figcaption>' . esc_html( $caption ) . '</figcaption>' : '',
+			hh_img_size_attr( $url ) // phpcs:ignore
 		);
 	}
 	echo '</div>';
@@ -426,12 +453,7 @@ function hh_market_cards( $current = '' ) {
 	if ( ! function_exists( 'hh_deal_term_url' ) ) {
 		return;
 	}
-	// CSS đi kèm ngay trong trang: vẫn hiển thị đúng khi plugin cache / gộp CSS còn giữ bản main.css cũ.
-	static $styled = false;
-	if ( ! $styled ) {
-		$styled = true;
-		echo '<style id="hh-market-cards">.market-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}.market-card{display:flex;align-items:center;gap:12px;padding:16px;border:1px solid #e2e7ef;border-radius:16px;background:#fff;color:#14223a;box-shadow:0 10px 30px rgba(10,35,66,.08);text-decoration:none;transition:transform .2s,border-color .2s}.market-card:hover{transform:translateY(-2px);border-color:#ea580c}.market-card__icon{display:grid;place-items:center;flex:none;width:46px;height:46px;border-radius:12px;background:#0a2342;color:#ffb627}.market-card__body{display:grid;gap:2px;flex:1;min-width:0}.market-card__body strong{color:#0a2342;font-size:1rem}.market-card__body small{color:#7a869a;font-size:.84rem}.market-card>.icon--arrow{flex:none;color:#ea580c}.market-card.is-active{border-color:#0a2342;background:#0a2342}.market-card.is-active strong{color:#fff}.market-card.is-active small{color:#c4d0e0}.market-card.is-active .market-card__icon{background:#ea580c;color:#fff}.market-cards__title{margin:22px 0 10px;font-weight:700;color:#0a2342}</style>'; // phpcs:ignore
-	}
+	// CSS thẻ thị trường nằm trong main.css (bản có phiên bản theo thời điểm sửa file nên không bị cache cũ).
 	echo '<div class="market-cards">';
 	foreach ( hh_market_pages() as $slug => list( $name, $desc, $icon ) ) {
 		$term = get_term_by( 'slug', $slug, 'loai-bds' );

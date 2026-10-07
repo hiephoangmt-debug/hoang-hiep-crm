@@ -630,7 +630,7 @@ function hh_filter_queries( $q ) {
 	if ( is_admin() || ! $q->is_main_query() ) {
 		return;
 	}
-	if ( $q->get( 'hh_sp' ) ) { // Trang tổng hợp tự lấy dự án (hh_special_projects).
+	if ( $q->get( 'hh_sp' ) || $q->get( 'hh_hub' ) ) { // Trang tổng hợp / hub tự lấy dự án (hh_special_projects, hh_hub_projects).
 		$q->set( 'posts_per_page', 1 );
 		$q->set( 'no_found_rows', true );
 		return;

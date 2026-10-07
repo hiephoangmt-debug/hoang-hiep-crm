@@ -30,7 +30,7 @@ while ( have_posts() ) :
 	<div class="container layout">
 		<article class="layout__main article">
 			<?php if ( has_post_thumbnail() ) : ?>
-				<figure class="article__cover"><?php the_post_thumbnail( 'large', array( 'loading' => 'eager' ) ); ?></figure>
+				<figure class="article__cover"><?php the_post_thumbnail( 'large', array( 'loading' => 'eager', 'fetchpriority' => 'high' ) ); ?></figure>
 			<?php endif; ?>
 
 			<?php if ( has_excerpt() ) : ?>
