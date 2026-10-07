@@ -128,13 +128,30 @@
   .disclaimer { font-size: 11px; color: var(--muted); margin-top: 12px; }
   .hidden { display: none !important; }
 
+  /* ---------- Social images ---------- */
+  .gallery { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; margin: 0 auto 16px; max-width: 794px; }
+  .gallery h2 { font-size: 15px; margin: 0 0 4px; color: var(--green-900); }
+  .gallery .hint { margin: 0 0 10px; }
+  .gallery .bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .thumbs figure { margin: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--bg); }
+  .thumbs img { display: block; width: 100%; }
+  .thumbs figcaption { display: flex; justify-content: space-between; align-items: center; gap: 6px; padding: 6px 8px; font-size: 12px; background: #fff; }
+  .thumbs a { color: var(--green-700); font-weight: 600; text-decoration: none; }
+  .caption-box { margin-top: 12px; }
+  .caption-box textarea { min-height: 200px; font-size: 13px; }
+  .caption-box .bar { margin: 6px 0 0; }
+  .checks { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 6px; }
+  .checks label { display: flex; align-items: center; gap: 5px; color: var(--ink); font-size: 13px; }
+  .checks input { width: auto; margin: 0; }
+
   .toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 8px 14px; border-radius: 8px; font-size: 13px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 20; }
   .toast.show { opacity: 1; }
 
   @media print {
     @page { size: A4; margin: 10mm; }
     body { background: #fff; }
-    header.app, .editor { display: none !important; }
+    header.app, .editor, .gallery { display: none !important; }
     main.layout { display: block; padding: 0; }
     .sheet { box-shadow: none; width: auto; padding: 0; }
     .section, .figure, .kpis { break-inside: avoid; }
@@ -207,10 +224,47 @@
         <label class="full">Hotline / Zalo <input data-f="saleSdt" inputmode="tel" placeholder="vd 0905 xxx xxx"></label>
       </div>
     </div>
+
+    <div class="panel">
+      <h2>Ảnh gửi khách / đăng nhóm</h2>
+      <div class="grid2">
+        <label>Khổ ảnh
+          <select id="soFormat">
+            <option value="4:5">Dọc 4:5 – Facebook, Zalo</option>
+            <option value="1:1">Vuông 1:1</option>
+            <option value="9:16">Story 9:16</option>
+          </select>
+        </label>
+        <div class="checks" style="align-items:flex-end"><label><input type="checkbox" id="soHidePrice"> Ẩn giá (ghi "Inbox")</label></div>
+        <div class="full">
+          <label>Ảnh trong bộ</label>
+          <div class="checks" id="soSlides"></div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ================= PREVIEW ================= -->
   <section class="preview-wrap">
+    <div class="gallery">
+      <h2>Bộ ảnh gửi khách / đăng nhóm</h2>
+      <p class="hint">Ảnh tự cập nhật theo thông tin bên trái. Trên điện thoại, bấm "Chia sẻ" để gửi thẳng qua Zalo / Messenger.</p>
+      <div class="bar">
+        <button class="primary" type="button" id="soShare">Chia sẻ</button>
+        <button type="button" id="soDownload">Tải tất cả ảnh</button>
+      </div>
+      <div class="thumbs" id="soThumbs"></div>
+      <div class="caption-box">
+        <label>Caption đăng bài
+          <textarea id="soCaption"></textarea>
+        </label>
+        <div class="bar">
+          <button type="button" id="soCopy">Sao chép caption</button>
+          <button type="button" id="soRecap">Tạo lại caption</button>
+        </div>
+      </div>
+    </div>
+
     <article class="sheet" id="sheet">
       <div class="top">
         <div class="brand">Four S<small>TOWER</small></div>
@@ -299,6 +353,8 @@
     // ô đỏ theo % kích thước ảnh mặt bằng
     marker: { x: 44.3, y: 19.4, w: 10.2, h: 43.2 },
     images: {},
+    social: { format: '4:5', hidePrice: false, slides: { cover: true, plan: true, layout: true, loc: true } },
+    caption: '', captionEdited: false,
   };
 
   let state = load();
@@ -307,7 +363,10 @@
   function load() {
     try {
       const raw = localStorage.getItem(STORE_KEY);
-      if (raw) return { ...structuredClone(DEFAULTS), ...JSON.parse(raw) };
+      if (raw) {
+        const saved = JSON.parse(raw);
+        return { ...structuredClone(DEFAULTS), ...saved, social: { ...structuredClone(DEFAULTS.social), ...(saved.social || {}) } };
+      }
     } catch (e) { /* bỏ qua */ }
     return structuredClone(DEFAULTS);
   }
@@ -474,6 +533,7 @@
     });
 
     renderMarkers();
+    scheduleSocial();
     document.title = `Chỉ căn ${state.maCan || ''} – CRM Sale`;
   }
 
@@ -485,6 +545,7 @@
     try { localStorage.removeItem(STORE_KEY); } catch (e) {}
     state = structuredClone(DEFAULTS);
     $$('[data-f]').forEach(el => { el.value = state[el.dataset.f] ?? ''; });
+    syncSocialControls();
     render();
   };
 
@@ -505,6 +566,247 @@
     }
   };
 
+  // =============== ẢNH GỬI KHÁCH / ĐĂNG NHÓM ===============
+  const FORMATS = { '1:1': [1080, 1080], '4:5': [1080, 1350], '9:16': [1080, 1920] };
+  const SLIDES = [
+    { key: 'cover',  label: 'Ảnh bìa',        img: 'layout3d' },
+    { key: 'plan',   label: 'Mặt bằng tầng',  img: 'matBang' },
+    { key: 'layout', label: 'Layout 2D',      img: 'layout2d' },
+    { key: 'loc',    label: 'Vị trí dự án',   img: 'viTri' },
+  ];
+  const C = { green: '#123d2c', green2: '#1f5c43', gold: '#c8a24a', ink: '#1c2420', muted: '#66706b', red: '#e3263a', soft: '#eaf3ee', bg: '#f1f3f2' };
+  const F = (w, px) => `${w} ${px}px "Be Vietnam Pro", system-ui, sans-serif`;
+
+  const imgCache = new Map();
+  function loadImg(src) {
+    if (!imgCache.has(src)) {
+      imgCache.set(src, new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; }));
+    }
+    return imgCache.get(src);
+  }
+
+  function wrap(ctx, text, maxW) {
+    const words = String(text).split(/\s+/).filter(Boolean), lines = [];
+    let line = '';
+    for (const w of words) {
+      const t = line ? line + ' ' + w : w;
+      if (ctx.measureText(t).width > maxW && line) { lines.push(line); line = w; } else line = t;
+    }
+    if (line) lines.push(line);
+    return lines;
+  }
+  function roundRect(ctx, x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); }
+  function contain(img, x, y, w, h) {
+    const s = Math.min(w / img.width, h / img.height), dw = img.width * s, dh = img.height * s;
+    return { x: x + (w - dw) / 2, y: y + (h - dh) / 2, w: dw, h: dh };
+  }
+
+  function priceText() {
+    const gia = money(state.gia), tt = num(state.dtThongThuy);
+    if (state.social.hidePrice || !gia) return null;
+    return { gia: fmtTy(gia), donGia: tt ? (gia / tt / 1e6).toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + ' tr/m²' : '' };
+  }
+
+  function drawFrame(ctx, W, H) {
+    const hh = 150, fh = 140;
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, W, H);
+    // header
+    ctx.fillStyle = C.green; ctx.fillRect(0, 0, W, hh);
+    ctx.fillStyle = C.gold; ctx.fillRect(0, hh - 6, W, 6);
+    ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
+    ctx.fillStyle = '#fff'; ctx.font = 'italic 60px Georgia, "Times New Roman", serif';
+    ctx.fillText(String(state.duAn || '').split(/[–-]/)[0].trim() || 'Four S', 50, 88);
+    ctx.font = F(500, 22); ctx.fillStyle = '#cfe0d6';
+    ctx.fillText(String(state.duAn || '').split(/[–-]/).slice(1).join('-').trim().toUpperCase(), 52, 122);
+    ctx.textAlign = 'right';
+    ctx.font = F(600, 24); ctx.fillStyle = C.gold; ctx.fillText('CHỈ CĂN', W - 50, 62);
+    ctx.font = F(700, 50); ctx.fillStyle = '#fff'; ctx.fillText(state.maCan || '', W - 50, 116);
+    // footer
+    ctx.fillStyle = C.green; ctx.fillRect(0, H - fh, W, fh);
+    ctx.textAlign = 'left';
+    ctx.font = F(700, 36); ctx.fillStyle = '#fff'; ctx.fillText(state.saleTen || '', 50, H - fh + 62);
+    ctx.font = F(400, 26); ctx.fillStyle = '#cfe0d6'; ctx.fillText(state.saleChucDanh || '', 50, H - fh + 102);
+    ctx.textAlign = 'right';
+    ctx.font = F(500, 24); ctx.fillStyle = '#cfe0d6'; ctx.fillText('Hotline / Zalo', W - 50, H - fh + 54);
+    ctx.font = F(700, 44); ctx.fillStyle = C.gold; ctx.fillText(state.saleSdt || 'Inbox ngay', W - 50, H - fh + 106);
+    ctx.textAlign = 'left';
+    return { top: hh, bottom: H - fh };
+  }
+
+  function drawImageBox(ctx, img, x, y, w, h, bg) {
+    ctx.fillStyle = bg; ctx.fillRect(x, y, w, h);
+    const r = contain(img, x + 20, y + 20, w - 40, h - 40);
+    ctx.drawImage(img, r.x, r.y, r.w, r.h);
+    return r;
+  }
+
+  async function drawSlide(slide, W, H) {
+    const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+    const ctx = cv.getContext('2d');
+    const img = await loadImg(imgSrc(slide.img));
+    const { top, bottom } = drawFrame(ctx, W, H);
+    const pad = 50;
+
+    if (slide.key === 'cover') {
+      const imgH = Math.round((bottom - top) * (H === W ? 0.46 : 0.52));
+      drawImageBox(ctx, img, 0, top, W, imgH, '#e4e4e4');
+      let y = top + imgH + 70;
+      ctx.fillStyle = C.ink; ctx.font = F(700, 52);
+      ctx.fillText([state.loaiCan, state.tang && `Tầng ${state.tang}`, state.toa && `Tòa ${state.toa}`].filter(Boolean).join(' · '), pad, y);
+      y += 52;
+      ctx.font = F(400, 32); ctx.fillStyle = C.muted;
+      const l2 = [state.dtThongThuy && `Thông thủy ${num(state.dtThongThuy).toLocaleString('vi-VN')} m²`, state.phongNgu].filter(Boolean).join(' · ');
+      if (l2) { ctx.fillText(l2, pad, y); y += 46; }
+      if (state.view) {
+        for (const l of wrap(ctx, 'View ' + state.view, W - 2 * pad).slice(0, 2)) { ctx.fillText(l, pad, y); y += 44; }
+      }
+      // price pill
+      y += 10;
+      const p = priceText();
+      const pillText = p ? `Giá ${p.gia}${p.donGia ? '  ·  ' + p.donGia : ''}` : 'Giá tốt – inbox để nhận báo giá';
+      ctx.font = F(700, 40);
+      const pw = Math.min(W - 2 * pad, ctx.measureText(pillText).width + 60);
+      ctx.fillStyle = C.gold; roundRect(ctx, pad, y, pw, 76, 38); ctx.fill();
+      ctx.fillStyle = '#1d1606'; ctx.fillText(pillText, pad + 30, y + 52);
+      y += 76 + 56;
+      // highlights
+      ctx.font = F(400, 30);
+      const items = String(state.noiBat || '').split('\n').map(s => s.trim()).filter(Boolean);
+      for (const it of items) {
+        const lines = wrap(ctx, it, W - 2 * pad - 44);
+        if (y + (lines.length - 1) * 42 > bottom - 30) break;
+        ctx.fillStyle = C.green2; ctx.beginPath(); ctx.arc(pad + 12, y - 10, 9, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = C.ink;
+        lines.forEach((l, i) => ctx.fillText(l, pad + 44, y + i * 42));
+        y += lines.length * 42 + 14;
+      }
+    } else {
+      const titles = {
+        plan: `Vị trí căn ${state.maCan || ''} trên mặt bằng tầng ${state.tang || ''}${state.toa ? ' – Tòa ' + state.toa : ''}`,
+        layout: `Layout căn ${state.loaiCan || ''}${state.phongNgu ? ' (' + state.phongNgu + ')' : ''}`,
+        loc: 'Vị trí dự án – kết nối vùng',
+      };
+      ctx.font = F(700, 38); ctx.fillStyle = C.green;
+      let y = top + 66;
+      const tl = wrap(ctx, titles[slide.key], W - 2 * pad).slice(0, 2);
+      tl.forEach((l, i) => ctx.fillText(l, pad, y + i * 48));
+      y += (tl.length - 1) * 48 + 30;
+      const r = drawImageBox(ctx, img, 0, y, W, bottom - y, slide.key === 'loc' ? '#fff' : C.bg);
+      if (slide.key === 'plan' && state.marker) {
+        const m = state.marker;
+        const mx = r.x + m.x / 100 * r.w, my = r.y + m.y / 100 * r.h, mw = m.w / 100 * r.w, mh = m.h / 100 * r.h;
+        ctx.fillStyle = 'rgba(227,38,58,.14)'; ctx.fillRect(mx, my, mw, mh);
+        ctx.lineWidth = 7; ctx.strokeStyle = C.red; ctx.strokeRect(mx, my, mw, mh);
+        const lab = markerLabel();
+        if (lab) {
+          ctx.font = F(700, 30); const lw = ctx.measureText(lab).width + 24;
+          ctx.fillStyle = C.red; roundRect(ctx, mx + mw / 2 - lw / 2, my + mh / 2 - 24, lw, 48, 8); ctx.fill();
+          ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.fillText(lab, mx + mw / 2, my + mh / 2 + 11); ctx.textAlign = 'left';
+        }
+      }
+      ctx.font = F(400, 20); ctx.fillStyle = C.muted; ctx.textAlign = 'right';
+      ctx.fillText('Hình ảnh minh họa', W - 24, bottom - 16); ctx.textAlign = 'left';
+    }
+    return cv;
+  }
+
+  function buildCaption() {
+    const p = priceText(), tt = num(state.dtThongThuy);
+    const items = String(state.noiBat || '').split('\n').map(s => s.trim()).filter(Boolean);
+    const lines = [
+      `🏙 CHỈ CĂN ${state.maCan || ''} – ${(state.duAn || '').toUpperCase()}`,
+      '',
+      `✅ ${[state.loaiCan, state.phongNgu && '(' + state.phongNgu + ')'].filter(Boolean).join(' ')}${state.tang ? ' · Tầng ' + state.tang : ''}${state.toa ? ' · Tòa ' + state.toa : ''}`,
+      tt ? `✅ Diện tích thông thủy ${tt.toLocaleString('vi-VN')} m²` : null,
+      state.view ? `✅ View ${state.view}` : null,
+      state.huong ? `✅ Hướng ban công ${state.huong}` : null,
+      p ? `💰 Giá niêm yết: ${p.gia}${p.donGia ? ' (~' + p.donGia + ')' : ''}` : '💰 Giá tốt – inbox để nhận bảng tính giá chi tiết',
+      items.length ? '' : null,
+      ...items.map(i => `⭐ ${i}`),
+      '',
+      `📞 ${state.saleTen || ''}${state.saleChucDanh ? ' – ' + state.saleChucDanh : ''}`,
+      `📲 Hotline/Zalo: ${state.saleSdt || 'inbox trực tiếp'}`,
+      '',
+      '#FourSTower #CanHoDaNang #ChungCuDaNang #BatDongSanDaNang',
+    ];
+    return lines.filter(l => typeof l === 'string').join('\n').replace(/\n{3,}/g, '\n\n');
+  }
+
+  let socialFiles = [], socialTimer = null, socialRun = 0;
+  function scheduleSocial() { clearTimeout(socialTimer); socialTimer = setTimeout(renderSocial, 350); }
+
+  async function renderSocial() {
+    const run = ++socialRun;
+    const capEl = $('#soCaption');
+    if (!state.captionEdited) { state.caption = buildCaption(); capEl.value = state.caption; }
+    try { await document.fonts.load(F(700, 40)); await document.fonts.load(F(400, 30)); } catch (e) {}
+    const [W, H] = FORMATS[state.social.format] || FORMATS['4:5'];
+    const list = SLIDES.filter(s => state.social.slides[s.key] && !(state.hidden || {})[s.img]);
+    const out = [];
+    for (const [i, s] of list.entries()) {
+      try {
+        const cv = await drawSlide(s, W, H);
+        const blob = await new Promise(r => cv.toBlob(r, 'image/jpeg', 0.92));
+        const name = `${(state.maCan || 'can-ho').replace(/[^\w-]+/g, '_')}-${i + 1}-${s.key}.jpg`;
+        out.push({ s, blob, name, url: URL.createObjectURL(blob) });
+      } catch (e) { console.warn('Không vẽ được', s.key, e); }
+      if (run !== socialRun) { out.forEach(o => URL.revokeObjectURL(o.url)); return; }
+    }
+    socialFiles.forEach(o => URL.revokeObjectURL(o.url));
+    socialFiles = out;
+    $('#soThumbs').innerHTML = out.map(o =>
+      `<figure><img src="${o.url}" alt="${esc(o.s.label)}"><figcaption><span>${esc(o.s.label)}</span><a href="${o.url}" download="${esc(o.name)}">Tải</a></figcaption></figure>`
+    ).join('') || '<p class="hint">Chưa chọn ảnh nào trong bộ.</p>';
+  }
+
+  // controls
+  const slidesEl = $('#soSlides');
+  slidesEl.innerHTML = SLIDES.map(s => `<label><input type="checkbox" data-slide="${s.key}"> ${s.label}</label>`).join('');
+  function syncSocialControls() {
+    $('#soFormat').value = state.social.format;
+    $('#soHidePrice').checked = !!state.social.hidePrice;
+    $$('[data-slide]').forEach(c => { c.checked = !!state.social.slides[c.dataset.slide]; });
+    $('#soCaption').value = state.caption || '';
+  }
+  $('#soFormat').onchange = e => { state.social.format = e.target.value; save(); scheduleSocial(); };
+  $('#soHidePrice').onchange = e => { state.social.hidePrice = e.target.checked; save(); scheduleSocial(); };
+  slidesEl.addEventListener('change', e => {
+    const k = e.target.dataset.slide; if (!k) return;
+    state.social.slides[k] = e.target.checked; save(); scheduleSocial();
+  });
+  $('#soCaption').addEventListener('input', e => { state.caption = e.target.value; state.captionEdited = true; save(); });
+  $('#soRecap').onclick = () => { state.captionEdited = false; state.caption = buildCaption(); $('#soCaption').value = state.caption; save(); };
+  $('#soCopy').onclick = async () => {
+    const t = $('#soCaption').value;
+    try { await navigator.clipboard.writeText(t); }
+    catch (e) { const ta = $('#soCaption'); ta.select(); document.execCommand('copy'); }
+    toast('Đã sao chép caption');
+  };
+  async function downloadAll() {
+    for (const o of socialFiles) {
+      const a = document.createElement('a'); a.href = o.url; a.download = o.name; a.click();
+      await new Promise(r => setTimeout(r, 300));
+    }
+  }
+  $('#soDownload').onclick = async () => {
+    if (!socialFiles.length) { toast('Chưa có ảnh'); return; }
+    await downloadAll(); toast(`Đã tải ${socialFiles.length} ảnh`);
+  };
+  $('#soShare').onclick = async () => {
+    if (!socialFiles.length) { toast('Chưa có ảnh'); return; }
+    const files = socialFiles.map(o => new File([o.blob], o.name, { type: 'image/jpeg' }));
+    const text = $('#soCaption').value;
+    if (navigator.canShare && navigator.canShare({ files })) {
+      try { await navigator.clipboard.writeText(text); } catch (e) {}
+      try { await navigator.share({ files, text }); return; }
+      catch (e) { if (e.name === 'AbortError') return; }
+    }
+    await downloadAll();
+    try { await navigator.clipboard.writeText(text); } catch (e) {}
+    toast('Thiết bị không hỗ trợ chia sẻ trực tiếp – đã tải ảnh và sao chép caption');
+  };
+
+  syncSocialControls();
   render();
 })();
 </script>
