@@ -6,12 +6,12 @@
  * Triển khai → Ứng dụng web. Giao diện app được tự tải từ GitHub (APP_URL).
  * Mã bảo mật: lần Kết nối đầu tiên trong app, mã được nhập sẽ trở thành mã bảo mật.
  *
- * ĐĂNG NHẬP BẰNG GMAIL: triển khai với "Thực thi với tư cách: Người dùng truy cập ứng dụng web"
- * và "Người có quyền truy cập: Bất kỳ ai có Tài khoản Google", rồi CHIA SẺ Google Sheet này
- * (quyền Người chỉnh sửa) cho từng email trong danh sách NGUOI_DUNG bên dưới.
+ * ĐĂNG NHẬP BẰNG EMAIL: mỗi email trong NGUOI_DUNG đăng nhập trong app bằng email + mật khẩu riêng.
+ * Lần đăng nhập đầu tiên của email đó, mật khẩu được nhập sẽ trở thành mật khẩu của email.
+ * Triển khai: "Thực thi với tư cách: Tôi", "Người có quyền truy cập: Bất kỳ ai".
  */
 
-// Các email được đăng nhập (chủ Google Sheet luôn được phép). Thêm email: 'ten@gmail.com',
+// Các email được đăng nhập. Thêm email: 'ten@gmail.com',
 const NGUOI_DUNG = [
   'hiephoangmt@gmail.com',
 ];
@@ -89,9 +89,29 @@ function allowedEmails_() {
   try { const o = ss_().getOwner(); if (o) list.push(o.getEmail().toLowerCase()); } catch (e) {}
   return list;
 }
-// Kiểm tra mã bảo mật; trả về lỗi (object) hoặc null nếu hợp lệ
+function hash_(s) {
+  return Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, String(s), Utilities.Charset.UTF_8));
+}
+/** Quên mật khẩu của 1 email: sửa email bên dưới rồi chạy hàm này; lần đăng nhập sau sẽ đặt mật khẩu mới. */
+function xoaMatKhauEmail() {
+  const email = 'hiephoangmt@gmail.com';
+  PropertiesService.getScriptProperties().deleteProperty('PW_' + email.toLowerCase());
+  Logger.log('Đã xóa mật khẩu của ' + email);
+}
+// Kiểm tra đăng nhập (email + mật khẩu, hoặc mã bảo mật chung); trả về lỗi (object) hoặc null nếu hợp lệ
 function checkKey_(p) {
   const props = PropertiesService.getScriptProperties();
+  const email = String(p.email || '').trim().toLowerCase();
+  if (email) {
+    if (allowedEmails_().indexOf(email) < 0) return { ok: false, needAuth: true, error: 'Email ' + email + ' chưa có trong danh sách được đăng nhập' };
+    const pw = String(p.key || ''), saved = props.getProperty('PW_' + email);
+    if (!saved) {
+      if (pw.length < 6) return { ok: false, needAuth: true, error: 'Lần đầu đăng nhập: đặt mật khẩu từ 6 ký tự trở lên' };
+      props.setProperty('PW_' + email, hash_(pw));
+      return null;
+    }
+    return hash_(pw) === saved ? null : { ok: false, needAuth: true, error: 'Sai mật khẩu' };
+  }
   let key = props.getProperty('SYNC_KEY');
   if (!key) {
     // Lần kết nối đầu tiên: mã người dùng nhập trở thành mã bảo mật

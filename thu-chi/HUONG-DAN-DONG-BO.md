@@ -103,8 +103,8 @@ Ghi chú:
 
 ---
 
-## Đăng nhập bằng Gmail (không cần mã bảo mật)
-Sau khi cài, người có email trong danh sách chỉ cần đăng nhập Google là dùng được app. Email `hiephoangmt@gmail.com` đã có sẵn trong danh sách. Chủ Google Sheet luôn được phép.
+## Đăng nhập bằng email + mật khẩu
+Mỗi người có email trong danh sách sẽ đăng nhập bằng **email + mật khẩu riêng**. Email `hiephoangmt@gmail.com` đã có sẵn trong danh sách. Mã bảo mật chung vẫn dùng được như cũ.
 
 **Làm 1 lần trên máy tính, bằng tài khoản chủ Google Sheet:**
 1. **Dán code mới:** mở link code ở Bước 1 → Ctrl+A, Ctrl+C → vào Apps Script, bấm **Mã.gs** → Ctrl+A, Ctrl+V → **Ctrl+S**.
@@ -115,19 +115,15 @@ Sau khi cài, người có email trong danh sách chỉ cần đăng nhập Goog
        'email-khac@gmail.com',
      ];
      ```
-2. **Đổi cách triển khai:** Triển khai → Quản lý các bản triển khai → ✏, rồi chọn:
-   - **Thực thi với tư cách:** `Người dùng truy cập ứng dụng web`
-   - **Người có quyền truy cập:** `Bất kỳ ai có Tài khoản Google`
+2. **Triển khai:** Triển khai → Quản lý các bản triển khai → ✏, rồi chọn:
+   - **Thực thi với tư cách:** `Tôi`
+   - **Người có quyền truy cập:** `Bất kỳ ai`
    - **Phiên bản:** `Phiên bản mới` → **Triển khai**
-3. **Chia sẻ Google Sheet:** mở Google Sheet "Thu Chi Mẹ Vân" → nút **Chia sẻ** (góc trên phải) → nhập `hiephoangmt@gmail.com` → quyền **Người chỉnh sửa** → **Gửi**.
-   Ở chế độ đăng nhập Gmail, mỗi người chỉ đọc/ghi được dữ liệu khi đã được chia sẻ Sheet.
 
-**Người được thêm (ví dụ hiephoangmt@gmail.com):**
-1. Mở link app → đăng nhập Gmail nếu Google hỏi.
-2. Lần đầu Google hỏi cấp quyền: **Xem xét quyền → chọn Gmail → Nâng cao → Đi tới … (không an toàn) → Cho phép**.
-3. Góc trên hiện **☁ Đã đồng bộ · hiephoangmt** là xong. Vào Cài đặt sẽ thấy dòng "✓ Đã đăng nhập Google".
+**Người dùng (ví dụ hiephoangmt@gmail.com):**
+1. Mở link app (link `…/exec`, **không có** `/u/1/`).
+2. Bấm **☁ Chưa đồng bộ** → điền **Email đăng nhập** và **Mật khẩu** → **Kết nối**.
+   **Lần đầu:** mật khẩu vừa nhập (từ 6 ký tự) sẽ trở thành mật khẩu của email đó.
+3. Góc trên hiện **☁ Đã đồng bộ · hiephoangmt** là xong. Lần sau app tự nhớ, không phải nhập lại.
 
-**Lưu ý:**
-- Nếu trình duyệt đang đăng nhập **nhiều tài khoản Google** cùng lúc, Google đôi khi nhận nhầm tài khoản. Khi đó mở link bằng cửa sổ chỉ đăng nhập 1 tài khoản, hoặc dùng mã bảo mật.
-- Mã bảo mật vẫn dùng được, nhưng ở chế độ này người dùng mã vẫn phải được chia sẻ Sheet.
-- Nếu không đổi cách triển khai ở bước 2 (vẫn "Thực thi với tư cách: Tôi"), app vẫn chạy như cũ bằng mã bảo mật.
+**Quên mật khẩu:** vào Apps Script, sửa email trong hàm `xoaMatKhauEmail`, chọn hàm đó → **▶ Chạy**. Lần đăng nhập sau sẽ đặt mật khẩu mới.
