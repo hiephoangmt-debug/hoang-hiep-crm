@@ -20,3 +20,6 @@ CRM – Real Estate Sales Management System
 File Excel dùng độc lập (kế hoạch tháng này & tháng tới, chi phí cố định, tiền còn, khoản nợ, thống kê): `thu-chi/Thu-Chi-Ke-Hoach-Me-Van.xlsx`.
 
 Dữ liệu lưu trên trình duyệt và **đồng bộ nhiều máy qua Google Sheets** – xem [`thu-chi/HUONG-DAN-DONG-BO.md`](thu-chi/HUONG-DAN-DONG-BO.md). Đã nạp sẵn dữ liệu tháng 8/2026.
+
+### Sửa app
+Sửa `thu-chi/app-src.html`, rồi chạy `python3 thu-chi/tools/build.py` để sinh `thu-chi/index.html`. Mã JS được đóng gói base64 để Google Apps Script không làm hỏng (index.html là file tự sinh, không sửa tay).
