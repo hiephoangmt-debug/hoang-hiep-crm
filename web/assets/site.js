@@ -50,7 +50,7 @@ const LEAD_ENDPOINT = "";
       form.reset();
       if (window.dataLayer) window.dataLayer.push({ event: 'generate_lead', form: location.pathname });
     } catch (err) {
-      alert('Gửi chưa thành công, vui lòng gọi hotline 0900 000 000.');
+      alert('Gửi chưa thành công, vui lòng gọi hotline 0904 567 009.');
     } finally {
       btn.disabled = false;
     }
