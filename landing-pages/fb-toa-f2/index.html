@@ -229,7 +229,15 @@ footer a{color:var(--gold-hi);font-weight:600}
 .flinks a{color:#fff;font-weight:500;font-size:14px}
 
 /* Thanh CTA dính đáy (điện thoại) */
-.mbar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:grid;grid-template-columns:1fr 1.3fr;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);box-shadow:0 -8px 24px -12px rgba(19,40,90,.4)}
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:grid;grid-template-columns:1fr;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);box-shadow:0 -8px 24px -12px rgba(19,40,90,.4)}
+.fab{position:fixed;right:14px;bottom:150px;z-index:66;display:flex;flex-direction:column;gap:10px}
+.fab a{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:13px;box-shadow:0 10px 24px -6px rgba(11,26,61,.5);border:2px solid #fff}
+.fab .call{background:linear-gradient(135deg,var(--gold-hi),var(--gold-d));animation:ring 1.6s infinite}
+.fab .zalo{background:#0068FF}
+@keyframes ring{0%,100%{transform:rotate(0)}5%,15%{transform:rotate(-14deg)}10%,20%{transform:rotate(14deg)}25%{transform:rotate(0)}}
+@media (prefers-reduced-motion:reduce){.fab .call{animation:none}}
+@media (min-width:641px) and (max-width:719px){.fab{right:18px;bottom:232px}}
+@media (min-width:720px){.fab{right:18px;bottom:22px;gap:12px}.fab a{width:56px;height:56px}}
 .mbar .btn{min-height:50px;font-size:15.5px}
 .mbar .zalo{background:#0068FF;color:#fff}
 
@@ -832,9 +840,14 @@ document.addEventListener('click', function (e) { var a = e.target.closest && e.
   </div>
 </footer>
 
+<!-- Nút gọi & Zalo nổi bên phải -->
+<div class="fab">
+  <a href="tel:0904567009" class="call" aria-label="Gọi hotline 0904 567 009"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></a>
+  <a href="https://zalo.me/0904567009" class="zalo" target="_blank" rel="noopener" data-zalo aria-label="Nhắn Zalo 0904 567 009">Zalo</a>
+</div>
+
 <!-- Thanh CTA dính đáy (điện thoại) -->
 <nav class="mbar" aria-label="Liên hệ nhanh">
-  <a class="btn zalo" href="https://zalo.me/0904567009" target="_blank" rel="noopener" data-zalo>Nhắn Zalo</a>
   <a class="btn btn-gold" href="#su-kien">Giữ chỗ 18/10</a>
 </nav>
 
