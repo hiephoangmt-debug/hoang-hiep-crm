@@ -27,12 +27,35 @@ EXTRA_CSS = """
 .split-media,.media-stack,.split-media.zoom{position:relative!important;top:auto!important;min-height:0!important}
 .split-media>picture,.split-media>a.zoom-link,.split-media img,.media-stack img{position:static!important;inset:auto!important;height:auto!important;width:100%!important;object-fit:initial!important}
 .split{align-items:start!important}
+.toc ol{columns:auto!important}
+.cs-wrap{margin-top:24px}
+.cs-frame{overflow:hidden}
+.cs-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}
+.cs-track::-webkit-scrollbar{display:none}
+.cs-slide{flex:0 0 100%;scroll-snap-align:center}
+.cs-portrait .cs-slide{flex:0 0 min(340px,86%)}
+.cs-card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.cs-cap{margin:0;padding:12px 16px;display:flex;flex-wrap:wrap;gap:4px 12px;justify-content:space-between;align-items:baseline;color:var(--brand);font-size:1rem;border-bottom:1px solid var(--line)}
+.cs-cap span{color:var(--muted);font-size:.9rem}
+.cs-card img{display:block;width:100%;height:auto;aspect-ratio:1.414/1;object-fit:contain;background:#fff}
+.cs-portrait .cs-card img{aspect-ratio:900/1272}
+.cs-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px}
+.cs-go{width:46px;height:46px;border-radius:50%;border:0;background:var(--brand);color:#fff;font-size:20px;cursor:pointer}
+.cs-go:hover{background:var(--brand-2)}
+.cs-hint{color:var(--muted);font-size:.9rem;text-align:center}
 .plan-stack{display:grid;gap:28px;margin-top:24px}
 .plan-head{margin:32px 0 12px;color:var(--brand);font-size:1.15rem;text-align:center}
 .plan-stack h4{margin:0 0 10px;color:var(--brand);font-size:1.1rem;text-align:center}
 .plan-stack .plan,.plan-stack .unit-plans{display:block}
 .plan-stack .unit-plans{display:grid!important}
 """
+
+CAROUSEL_JS = """<script>
+document.querySelectorAll('[data-slide]').forEach(function(b){b.addEventListener('click',function(){
+  var t=document.getElementById(b.getAttribute('aria-controls'));if(!t)return;
+  t.scrollBy({left:(b.dataset.slide==='next'?1:-1)*t.clientWidth*0.9,behavior:'smooth'});
+});});
+</script>"""
 
 TAB_JS = """<script>
 document.querySelectorAll('[role="tablist"]').forEach(function(list){
@@ -102,29 +125,48 @@ def convert(name):
     s = s.replace('<select name="interest" aria-label="Sản phẩm quan tâm">',
                   '<select name="interest" aria-label="Sản phẩm quan tâm"><option value="" disabled selected>Sản phẩm quan tâm</option>')
 
-    # ---- tabs -> stacked static blocks (LadiPage mis-positions tab panels)
-    def flatten(m):
+    # ---- tabs -> LadiPage carousel (swipe + prev/next), one slide per image
+    state = {"s": s}
+    def carousel(m):
         block = m.group(0)
         labels = re.findall(r'<button role="tab" aria-selected="(?:true|false)" data-tab="([^"]+)">(.*?)</button>', block)
-        return '<div class="plan-stack-labels" data-flat="' + ",".join(f"{pid}|{lab}" for pid, lab in labels) + '"></div>'
-    s = re.sub(r'<div class="tabs reveal" role="tablist"(?: style="[^"]*")?>.*?</div>', flatten, s, flags=re.S)
-    def unhide(m):
-        meta = dict(x.split("|", 1) for x in m.group(1).split(",") if x)
-        return m.group(0).replace(m.group(0), '<div class="plan-stack-marker" data-flat="' + m.group(1) + '"></div>')
-    # wrap each panel with its heading, remove hidden
-    marks = re.findall(r'data-flat="([^"]*)"', s)
-    for mk in marks:
-        for pair in mk.split(","):
-            if "|" not in pair:
+        slides, portrait = [], False
+        for pid, lab in labels:
+            pm = re.search(r'<div class="[^"]+" id="' + re.escape(pid) + r'"(?: hidden)?>(.*?)</div>\n?', state["s"], flags=re.S)
+            if not pm:
                 continue
-            pid, lab = pair.split("|", 1)
-            s = re.sub(r'(<div class="([^"]+)" id="' + re.escape(pid) + r'")( hidden)?>',
-                       lambda m, lab=lab: f'<h4 class="plan-head">{lab}</h4>' + m.group(1) + ">", s, count=1)
-    s = re.sub(r'<div class="plan-stack-labels"[^>]*></div>', "", s)
+            state["s"] = state["s"].replace(pm.group(0), "", 1)
+            inner = pm.group(1)
+            figs = re.findall(r"<figure[^>]*>(.*?)</figure>", inner, flags=re.S) or [inner]
+            for f in figs:
+                img = re.search(r"<img [^>]*>", f).group(0)
+                img = re.sub(r'\s(class|style)="[^"]*"', "", img)
+                w, h = re.search(r'width="(\d+)"', img), re.search(r'height="(\d+)"', img)
+                if w and h and int(h.group(1)) > int(w.group(1)):
+                    portrait = True
+                cap = re.search(r"<b>(.*?)</b>(?:<span>(.*?)</span>)?", f)
+                title = cap.group(1) if cap else lab
+                sub = (cap.group(2) or "") if cap else ""
+                slides.append('<div class="cs-slide" aria-roledescription="slide"><div class="cs-card"><p class="cs-cap"><b>'
+                              + title + "</b>" + (f"<span>{sub}</span>" if sub else "") + "</p>" + img + "</div></div>")
+        cid = "cs-" + labels[0][0]
+        kind = " cs-portrait" if portrait else ""
+        nav = (f'<div class="cs-nav"><button type="button" class="cs-go" aria-controls="{cid}" data-slide="prev" aria-label="Previous">&#8592;</button>'
+               f'<span class="cs-hint">Vuốt hoặc bấm mũi tên · {len(slides)} mặt bằng</span>'
+               f'<button type="button" class="cs-go" aria-controls="{cid}" data-slide="next" aria-label="Next">&#8594;</button></div>')
+        return (f'<div class="cs-wrap{kind}"><div class="cs-frame" aria-roledescription="carousel"><div class="cs-track" id="{cid}">'
+                + "".join(slides) + "</div></div>" + nav + "</div>")
+    while True:
+        m = re.search(r'<div class="tabs reveal" role="tablist"(?: style="[^"]*")?>.*?</div>', state["s"], flags=re.S)
+        if not m:
+            break
+        rep = carousel(m)
+        state["s"] = state["s"].replace(m.group(0), rep, 1)
+    s = state["s"].replace("</body>", CAROUSEL_JS + "\n</body>")
     s = re.sub(r'\sloading="lazy"', "", s)
 
-    fab = (ROOT / "marketing" / "ladipage-nut-lien-he.html").read_text()
-    s = s.replace("</body>", fab + "\n</body>")
+    # Floating call/Zalo buttons are not exported: LadiPage turns them into static boxes.
+    # Paste marketing/ladipage-nut-lien-he.html into an HTML element in the builder instead.
     return s
 
 

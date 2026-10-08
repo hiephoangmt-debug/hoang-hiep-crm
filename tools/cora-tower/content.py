@@ -80,46 +80,77 @@ INDEX_ARTICLE = article("Cẩm nang mua căn hộ", "Cora Tower Đà Nẵng: t�
 {CTA}''', INDEX_TOC)
 
 # ---------------------------------------------------------------- SHOPHOUSE
-SHOP_TOC = [("sh-vi-sao", "Vì sao shophouse khối đế Cora Tower đáng tiền?"), ("sh-dep", "Một mặt tiền “biết bán hàng”"),
-            ("sh-7m", "Trần 7 m: một shop, hai tầng sử dụng"), ("sh-phap-ly", "Sở hữu lâu dài – lợi thế hiếm có"),
-            ("sh-khai-thac", "Kinh doanh gì để có dòng tiền?"), ("sh-tai-chinh", "Bài toán tài chính khi mua shophouse"),
-            ("sh-chon-can", "Kinh nghiệm chọn căn shophouse"), ("sh-rui-ro", "Những điều cần kiểm tra trước khi cọc")]
-SHOP_ARTICLE = article("Phân tích đầu tư", "Shophouse Cora Tower: vì sao đây là “mặt bằng vàng” của Nam trung tâm Đà Nẵng", f'''
-<h3 id="sh-vi-sao">Vì sao shophouse khối đế Cora Tower đáng tiền?</h3>
-<p>Một shophouse tốt cần ba thứ: <strong>người đi qua, người ở trên và pháp lý chắc</strong>. Shophouse Cora Tower có đủ cả ba. Hơn 60 căn shop (khoảng 33 căn tòa A1, 30 căn tòa A2) nằm ngay tầng 1 của hai tòa tháp <strong>1.342 căn hộ</strong>, mặt tiền ôm <strong>vòng xoay 29/3 – Nguyễn Phước Lan</strong> – trục giao thông chính của khu đô thị Nam Hòa Xuân. Sun Property giới thiệu tổng cộng khoảng 150 căn shophouse khối đế tại ba tổ hợp Cora Tower, Spana Tower và S-Light Tower – nghĩa là nguồn cung loại hình này trong cả khu đô thị rất có hạn.</p>
+SHOP_TOC = [("sh-buoi-sang", "Một buổi sáng ở shop của anh/chị"), ("sh-vi-sao", "Ba thứ làm nên một shophouse “đẻ ra tiền”"),
+            ("sh-dep", "Mặt tiền tự bán hàng thay chủ"), ("sh-7m", "Trần 7 m: mua một, dùng hai"),
+            ("sh-khai-thac", "Kinh doanh gì để có dòng tiền?"), ("sh-tai-chinh", "Chỉ từ 1,5 tỷ để bắt đầu"),
+            ("sh-phap-ly", "Sở hữu lâu dài – tài sản để lại cho con"), ("sh-chon-can", "Chọn căn: căn đẹp đi trước"),
+            ("sh-rui-ro", "Kiểm tra gì trước khi cọc?")]
 
-<h3 id="sh-dep">Một mặt tiền “biết bán hàng”</h3>
-<p>Nhìn phối cảnh là thấy: khối đế bo cong theo vòng xoay, <strong>mặt kính kịch trần</strong> cao gần 7 m, biển hiệu đồng bộ trên nền gỗ cam ấm, mái sảnh lam kim loại và vỉa hè rộng rợp cây. Ban ngày, ánh sáng xuyên qua kính biến cả cửa hàng thành một khung trưng bày; về đêm, dải đèn biển hiệu nối dài theo đường cong khối đế – một “phố thương mại” đúng nghĩa ngay dưới chân nhà. Mặt tiền từng căn rộng khoảng <strong>3,5 – 13 m</strong>, nhiều căn góc hai mặt thoáng – thứ mà thương hiệu thời trang, F&amp;B, ngân hàng luôn tìm kiếm.</p>
 
-<h3 id="sh-7m">Trần 7 m: một shop, hai tầng sử dụng</h3>
-<p>Chiều cao tầng khối đế khoảng <strong>7 m</strong>, đủ để làm thêm <strong>tầng lửng</strong> – gần như nhân đôi diện tích sử dụng: tầng dưới bán hàng, tầng lửng làm kho, văn phòng, khu ngồi cafe hoặc phòng trị liệu spa. Chủ nhà tự thi công tầng lửng, miễn không ảnh hưởng kết cấu, cơ điện, kiến trúc; hồ sơ gửi Ban quản lý duyệt khoảng <strong>1–2 tuần</strong>. Có thể gộp hai căn liền kề (đập tường ngăn 10–20 cm, giữ vách chịu lực 30 cm) để làm showroom lớn.</p>
+def _fig(name, alt, cap, h=1066):
+    return (f'<figure class="prose-fig"><picture><source type="image/webp" srcset="assets/img/{name}-800.webp 800w, assets/img/{name}.webp 1600w" '
+            f'sizes="(max-width:820px) 100vw, 800px"><img src="assets/img/{name}.jpg" srcset="assets/img/{name}-800.jpg 800w, assets/img/{name}.jpg 1600w" '
+            f'sizes="(max-width:820px) 100vw, 800px" width="1600" height="{h}" alt="{alt}" loading="lazy" decoding="async"></picture>'
+            f'<figcaption>{cap}</figcaption></figure>')
 
-<h3 id="sh-phap-ly">Sở hữu lâu dài – lợi thế hiếm có</h3>
-<p>Theo chủ đầu tư, shophouse khối đế Cora Tower có <strong>pháp lý sở hữu lâu dài</strong> như căn hộ, hình thành đơn vị ở nên <strong>đăng ký được hộ khẩu thường trú</strong> – vừa ở vừa kinh doanh. Trong khi rất nhiều shop chân đế ở Hà Nội, TP.HCM khai thác tốt nhưng chỉ sở hữu có thời hạn. Lưu ý: vì là sở hữu như căn hộ, shophouse không đăng ký giấy phép kinh doanh tại căn; cách làm phổ biến là cho thương hiệu thuê bằng hợp đồng ghi mã căn, hoặc tự kinh doanh với doanh nghiệp/hộ kinh doanh đăng ký ở địa chỉ khác và dùng shophouse làm địa điểm kinh doanh.</p>
+
+SHOP_ARTICLE = article("Câu chuyện đầu tư", "Shophouse Cora Tower: mặt bằng tự bán hàng, tài sản tự sinh tiền", f'''
+<h3 id="sh-buoi-sang">Một buổi sáng ở shop của anh/chị</h3>
+<p class="lead-in">6 giờ 30. Nắng sớm hắt qua lớp kính cao gần 7 m. Cư dân từ sảnh tòa tháp bước xuống, ghé mua ly cà phê, ổ bánh mì trước khi đi làm. Bên ngoài, dòng xe trên đường 29/3 chậm lại ở vòng xoay – và ai cũng nhìn thấy biển hiệu của anh/chị.</p>
+<p>Đó không phải giấc mơ xa. Đó là một ngày bình thường của <strong>shophouse khối đế Cora Tower</strong> – nơi <strong>1.342 gia đình</strong> sống ngay phía trên, và vòng xoay 29/3 – Nguyễn Phước Lan đưa người qua lại suốt cả ngày. Anh/chị không phải đi tìm khách. Khách đã ở sẵn đó.</p>
+{_fig("phoi-canh-shophouse-khoi-de-cora-tower-08", "Mặt tiền shophouse Cora Tower dọc đường 29/3", "Dãy shophouse khối đế dọc đường 29/3 – mặt kính kịch trần, vỉa hè rộng rợp cây.")}
+
+<h3 id="sh-vi-sao">Ba thứ làm nên một shophouse “đẻ ra tiền”</h3>
+<p>Người làm kinh doanh lâu năm đều biết: một mặt bằng tốt cần <strong>người đi qua, người ở trên và pháp lý chắc</strong>. Thiếu một trong ba, shop sẽ phải “gồng”. Cora Tower có đủ cả ba:</p>
+<ul class="checks">
+<li><strong>Người ở trên:</strong> hai tòa tháp 25 tầng, 1.342 căn hộ – một “khu dân cư” trọn vẹn là khách hàng mỗi ngày.</li>
+<li><strong>Người đi qua:</strong> mặt tiền ôm vòng xoay 29/3 – Nguyễn Phước Lan, trục giao thông chính của Nam Hòa Xuân, cạnh đài phun nước đang được hoàn tất thủ tục.</li>
+<li><strong>Pháp lý chắc:</strong> sở hữu lâu dài như căn hộ, do Sun Group phát triển.</li>
+</ul>
+<blockquote class="pull">Chỉ khoảng 60 căn shop tại Cora Tower – và chừng 150 căn khối đế cho cả khu đô thị. Đất có thể làm thêm, nhưng mặt tiền dưới chân 1.342 căn hộ thì không.</blockquote>
+
+<h3 id="sh-dep">Mặt tiền tự bán hàng thay chủ</h3>
+<p>Khối đế bo cong theo vòng xoay, <strong>mặt kính kịch trần</strong>, biển hiệu đồng bộ trên nền gỗ cam ấm, mái sảnh lam kim loại. Ban ngày, ánh sáng biến cả cửa hàng thành một tủ trưng bày khổng lồ; về đêm, dải đèn biển hiệu nối dài theo đường cong khối đế như một con phố thương mại thu nhỏ. Mặt tiền từng căn rộng <strong>3,5 – 13 m</strong>, nhiều căn góc hai mặt thoáng – đúng thứ các thương hiệu thời trang, F&amp;B, ngân hàng luôn săn tìm và sẵn sàng trả giá thuê cao.</p>
+{_fig("khoi-de-vong-xoay-cora-tower", "Khối đế Cora Tower bo cong bên vòng xoay với spa, cafe, phòng gym", "Góc bo cong bên vòng xoay: nơi biển hiệu được nhìn thấy từ mọi hướng.", 900)}
+
+<h3 id="sh-7m">Trần 7 m: mua một, dùng hai</h3>
+<p>Chiều cao tầng khoảng <strong>7 m</strong> cho phép làm thêm <strong>tầng lửng</strong> – gần như nhân đôi diện tích sử dụng mà không phải trả thêm tiền đất. Tầng dưới bán hàng, tầng lửng làm kho, văn phòng, khu ngồi cafe hay phòng trị liệu spa. Hồ sơ tầng lửng gửi Ban quản lý duyệt khoảng <strong>1–2 tuần</strong>. Cần không gian lớn? Có thể gộp hai căn liền kề để làm showroom.</p>
 
 <h3 id="sh-khai-thac">Kinh doanh gì để có dòng tiền?</h3>
 <ul>
-<li><strong>Phục vụ cư dân hằng ngày</strong>: siêu thị mini, nhà thuốc, giặt là, tiệm bánh, phòng khám – khách hàng là hàng nghìn cư dân ngay phía trên.</li>
-<li><strong>F&amp;B và cafe</strong>: tận dụng trần cao làm không gian hai tầng, góc kính nhìn vòng xoay đài phun nước.</li>
-<li><strong>Thương hiệu thời trang, mỹ phẩm, showroom</strong>: mặt kính dài, biển hiệu lớn, dễ nhận diện từ đường 29/3.</li>
-<li><strong>Dịch vụ</strong>: spa, salon, trung tâm ngoại ngữ, văn phòng giao dịch ngân hàng – bảo hiểm.</li>
+<li><strong>Tiện ích thiết yếu</strong> – mart, nhà thuốc, giặt là, tiệm bánh, phòng khám: khách là cư dân ngay phía trên, mua mỗi ngày.</li>
+<li><strong>Cafe, F&amp;B</strong> – không gian hai tầng, góc kính nhìn ra vòng xoay đài phun nước.</li>
+<li><strong>Thương hiệu, showroom</strong> – mặt kính dài, biển hiệu lớn, nhận diện từ xa trên đường 29/3.</li>
+<li><strong>Dịch vụ</strong> – spa, salon, trung tâm ngoại ngữ, văn phòng giao dịch.</li>
 </ul>
-<p>Báo chí gần đây dẫn lời một số chủ shophouse khu Nam trung tâm Đà Nẵng cho biết đang cho thuê ở mức <strong>35–100 triệu đồng/tháng</strong> tùy vị trí và diện tích. Đây là thông tin tham khảo, không phải cam kết; giá thuê thực tế phụ thuộc từng căn và thời điểm.</p>
+<p>Không tự kinh doanh? Cho thuê để thương hiệu khai thác. Báo chí dẫn lời một số chủ shophouse khu Nam trung tâm Đà Nẵng đang cho thuê <strong>35–100 triệu đồng/tháng</strong> tùy vị trí, diện tích (thông tin tham khảo, không phải cam kết).</p>
+<p class="prose-cta inline">Muốn biết căn nào hợp ngành hàng của mình? Gọi/Zalo <a href="tel:{TEL}"><b>{TEL_TXT}</b></a> – chuyên viên gửi ngay mặt bằng và giỏ căn còn trống.</p>
 
-<h3 id="sh-tai-chinh">Bài toán tài chính khi mua shophouse Cora Tower</h3>
-<p>Với căn 4,96 – 6,04 tỷ, chính sách cho vay tối đa 70% và hỗ trợ lãi suất 0% trong 24 tháng giúp vốn tự có ban đầu chỉ khoảng <strong>1,5 – 1,8 tỷ</strong>. Chương trình <strong>Sun Early Key</strong> cho phép thanh toán 70% là nhận nhà, 30% còn lại trả trong 24 tháng – shop có thể đưa vào kinh doanh, tạo dòng tiền trước khi thanh toán xong. Tiến độ thanh toán kéo dài đến <strong>40 tháng</strong>, kèm chiết khấu Early Bird 3%, chiết khấu không vay 5% và quà tặng hỗ trợ hoàn thiện nội thất kinh doanh 4% (xem <a href="#chinh-sach-shop">chính sách</a>). Dùng <a href="#tinh-dong-tien">công cụ ước tính dòng tiền</a> để thử với con số của anh/chị.</p>
+<h3 id="sh-tai-chinh">Chỉ từ khoảng 1,5 tỷ để bắt đầu</h3>
+<div class="num-row">
+<div><b>70%</b><span>ngân hàng cho vay</span></div>
+<div><b>0%</b><span>lãi suất 24 tháng</span></div>
+<div><b>40</b><span>tháng giãn thanh toán</span></div>
+<div><b>~1,5 tỷ</b><span>vốn tự có ban đầu</span></div>
+</div>
+<p>Với căn 4,96 – 6,04 tỷ, khoản vay tối đa 70% được hỗ trợ lãi suất 0% trong 24 tháng – vốn tự có ban đầu chỉ khoảng <strong>1,5 – 1,8 tỷ</strong>. Chương trình <strong>Sun Early Key</strong>: thanh toán 70% là nhận nhà, 30% còn lại trả trong 24 tháng – nghĩa là shop có thể <strong>mở cửa đón khách, tạo dòng tiền trước khi trả xong</strong>. Cộng thêm chiết khấu Early Bird 3%, chiết khấu không vay 5% và hỗ trợ hoàn thiện nội thất kinh doanh 4% (xem <a href="#chinh-sach-shop">chính sách</a>).</p>
 
-<h3 id="sh-chon-can">Kinh nghiệm chọn căn shophouse</h3>
+<h3 id="sh-phap-ly">Sở hữu lâu dài – tài sản để lại cho con</h3>
+<p>Nhiều shop chân đế ở Hà Nội, TP.HCM khai thác rất tốt nhưng chỉ sở hữu có thời hạn. Shophouse Cora Tower thì khác: theo chủ đầu tư, <strong>sở hữu lâu dài</strong> như căn hộ, hình thành đơn vị ở nên <strong>đăng ký được hộ khẩu thường trú</strong>. Hôm nay là cửa hàng của anh/chị, mai kia là tài sản trao lại cho thế hệ sau. (Lưu ý: shophouse không đăng ký giấy phép kinh doanh tại căn; cách làm phổ biến là cho thương hiệu thuê theo hợp đồng ghi mã căn, hoặc dùng làm địa điểm kinh doanh của doanh nghiệp/hộ kinh doanh đăng ký ở địa chỉ khác.)</p>
+{_fig("phoi-canh-cora-tower-ve-dem", "Phối cảnh Cora Tower về đêm với khối mái màu cam phát sáng", "Khi phố lên đèn, khối đế Cora Tower vẫn sáng – và vẫn bán hàng.", 930)}
+
+<h3 id="sh-chon-can">Chọn căn: căn đẹp luôn đi trước</h3>
 <ul>
-<li><strong>Căn góc và căn mặt vòng xoay</strong>: hiển thị tốt nhất, phù hợp thương hiệu lớn – giá cao hơn nhưng dễ cho thuê.</li>
-<li><strong>Căn gần sảnh cư dân</strong>: lưu lượng cư dân qua lại hằng ngày, hợp tiện ích thiết yếu (mart, nhà thuốc, cafe).</li>
-<li><strong>Mặt tiền rộng hơn chiều sâu</strong>: dễ trưng bày; xem kích thước mặt tiền từng căn ở mục <a href="#mat-bang-shop">mặt bằng shophouse</a>.</li>
-<li><strong>Diện tích 43 – 62 m²</strong>: tổng tiền vừa phải, dễ cho thuê và dễ thanh khoản hơn căn quá lớn.</li>
+<li><strong>Căn góc, căn mặt vòng xoay</strong> – hiển thị tốt nhất, thương hiệu lớn thích; thường hết đầu tiên.</li>
+<li><strong>Căn gần sảnh cư dân</strong> – lưu lượng qua lại mỗi ngày, hợp mart, nhà thuốc, cafe.</li>
+<li><strong>Mặt tiền rộng hơn chiều sâu</strong> – dễ trưng bày; xem kích thước từng căn ở <a href="#mat-bang-shop">mặt bằng shophouse</a>.</li>
+<li><strong>Diện tích 43 – 62 m²</strong> – tổng tiền vừa phải, dễ cho thuê, dễ thanh khoản.</li>
 </ul>
+<p>Với nguồn cung có hạn, mỗi đợt mở bán những căn góc và căn mặt vòng xoay thường được giữ chỗ sớm nhất. Người quyết sớm được chọn căn; người đến sau chọn phần còn lại.</p>
 
-<h3 id="sh-rui-ro">Những điều cần kiểm tra trước khi cọc</h3>
-<p>Đầu tư shophouse luôn cần tỉnh táo: kiểm tra hồ sơ pháp lý (xem tại <a href="phap-ly.html">trang Pháp lý</a>), đọc kỹ hợp đồng mẫu, hỏi rõ quy định vận hành của Ban quản lý (biển hiệu, giờ hoạt động, chỗ đỗ xe), thời hạn hoàn thiện <strong>12 tháng</strong> kể từ bàn giao (quá hạn đóng phí 8% giá trị căn) và tự khảo sát giá thuê thực tế khu vực. Chuyên viên sẽ cung cấp đầy đủ tài liệu để anh/chị đối chiếu.</p>
-{CTA}''', SHOP_TOC)
+<h3 id="sh-rui-ro">Kiểm tra gì trước khi cọc?</h3>
+<p>Đầu tư thông minh là đầu tư tỉnh táo: xem hồ sơ pháp lý tại <a href="phap-ly.html">trang Pháp lý</a>, đọc kỹ hợp đồng mẫu, hỏi rõ quy định vận hành của Ban quản lý (biển hiệu, giờ hoạt động, chỗ đỗ xe), thời hạn hoàn thiện <strong>12 tháng</strong> kể từ bàn giao (quá hạn đóng phí 8% giá trị căn) và tự khảo sát giá thuê khu vực. Chuyên viên sẽ gửi đầy đủ tài liệu để anh/chị đối chiếu – không vội, không ép.</p>
+<div class="prose-cta big"><b>Giữ một mặt tiền trước khi nó thuộc về người khác.</b><span>Nhận giỏ căn shophouse còn trống, bảng giá và bảng tính dòng tiền cho riêng căn anh/chị quan tâm.</span><p><a class="btn" href="tel:{TEL}">Gọi {TEL_TXT}</a> <a class="btn ghost" href="#dang-ky">Nhận giỏ hàng</a></p></div>''', SHOP_TOC)
 
 # ---------------------------------------------------------------- PENTHOUSE
 PH_TOC = [("ph-cam-xuc", "Sống trên đỉnh Cora Tower"), ("ph-7m", "Trần 7 m: tự viết căn nhà của riêng mình"),
