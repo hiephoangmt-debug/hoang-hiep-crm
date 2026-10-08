@@ -145,7 +145,7 @@ Mỗi khách để lại số, Telegram báo ngay kèm: tên, số, nhu cầu, h
 
 1. **Gọi trong 5–15 phút.** Gọi càng sớm, tỷ lệ khách nghe máy càng cao.
 2. Kịch bản ngắn:
-   > "Em chào anh chị, em là … bên dự án Sun FourS Tower Đà Nẵng. Anh/chị vừa đăng ký tham dự sự kiện Tòa F2 Chủ nhật 18/10 tại Accost Tây Hồ. Em xin phép xác nhận anh chị đi mấy người để em gửi thư mời ghi tên ạ?"
+   > "Em chào anh chị, em là … bên dự án Sun FourS Tower Đà Nẵng. Anh chị vừa đăng ký tham dự sự kiện Tòa F2 Chủ nhật 18/10 tại Accost Tây Hồ. Em xin phép xác nhận anh chị đi mấy người để em gửi thư mời ghi tên ạ?"
 3. **Gửi thư mời qua Zalo** ngay sau cuộc gọi (kèm giờ, địa chỉ, bản đồ).
 4. Khách chọn "Tư vấn qua video": hẹn giờ gọi video trong ngày 18/10.
 5. **Nhắc lịch:** tối 17/10 nhắn Zalo nhắc; sáng 18/10 gọi xác nhận lần cuối.
