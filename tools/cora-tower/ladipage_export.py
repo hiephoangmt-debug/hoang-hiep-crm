@@ -24,6 +24,14 @@ EXTRA_CSS = """
 .reveal{opacity:1!important;transform:none!important}
 .plan-panel>.plan{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}
 .map-cta{display:inline-flex;margin-top:18px}
+.split-media,.media-stack,.split-media.zoom{position:relative!important;top:auto!important;min-height:0!important}
+.split-media>picture,.split-media>a.zoom-link,.split-media img,.media-stack img{position:static!important;inset:auto!important;height:auto!important;width:100%!important;object-fit:initial!important}
+.split{align-items:start!important}
+.plan-stack{display:grid;gap:28px;margin-top:24px}
+.plan-head{margin:32px 0 12px;color:var(--brand);font-size:1.15rem;text-align:center}
+.plan-stack h4{margin:0 0 10px;color:var(--brand);font-size:1.1rem;text-align:center}
+.plan-stack .plan,.plan-stack .unit-plans{display:block}
+.plan-stack .unit-plans{display:grid!important}
 """
 
 TAB_JS = """<script>
@@ -94,25 +102,29 @@ def convert(name):
     s = s.replace('<select name="interest" aria-label="Sản phẩm quan tâm">',
                   '<select name="interest" aria-label="Sản phẩm quan tâm"><option value="" disabled selected>Sản phẩm quan tâm</option>')
 
-    # ---- tabs: aria-controls + role=tabpanel; panel decoration moves to child
-    s = re.sub(r'<button role="tab" aria-selected="(true|false)" data-tab="([^"]+)">',
-               r'<button type="button" role="tab" aria-selected="\1" aria-controls="\2">', s)
-    tab_ids = set(re.findall(r'aria-controls="([^"]+)"', s))
-
-    def panel(m):
-        cls, pid, hid, rest = m.group(1), m.group(2), m.group(3) or "", m.group(4)
-        if pid not in tab_ids:
-            return m.group(0)
-        if "plan" in cls.split():
-            return f'<div role="tabpanel" id="{pid}" class="plan-panel"{hid}><div class="{cls}">{rest}</div></div>'
-        return f'<div role="tabpanel" class="{cls}" id="{pid}"{hid}>{rest}</div>'
-    s = re.sub(r'<div class="([^"]+)" id="([^"]+)"( hidden)?>((?:(?!<div)(?!</div>).)*)</div>', panel, s, flags=re.S)
-    found = set(re.findall(r'<div role="tabpanel"[^>]*?id="([^"]+)"', s))
-    if tab_ids - found:
-        print("WARN tabs without panel:", tab_ids - found)
+    # ---- tabs -> stacked static blocks (LadiPage mis-positions tab panels)
+    def flatten(m):
+        block = m.group(0)
+        labels = re.findall(r'<button role="tab" aria-selected="(?:true|false)" data-tab="([^"]+)">(.*?)</button>', block)
+        return '<div class="plan-stack-labels" data-flat="' + ",".join(f"{pid}|{lab}" for pid, lab in labels) + '"></div>'
+    s = re.sub(r'<div class="tabs reveal" role="tablist"(?: style="[^"]*")?>.*?</div>', flatten, s, flags=re.S)
+    def unhide(m):
+        meta = dict(x.split("|", 1) for x in m.group(1).split(",") if x)
+        return m.group(0).replace(m.group(0), '<div class="plan-stack-marker" data-flat="' + m.group(1) + '"></div>')
+    # wrap each panel with its heading, remove hidden
+    marks = re.findall(r'data-flat="([^"]*)"', s)
+    for mk in marks:
+        for pair in mk.split(","):
+            if "|" not in pair:
+                continue
+            pid, lab = pair.split("|", 1)
+            s = re.sub(r'(<div class="([^"]+)" id="' + re.escape(pid) + r'")( hidden)?>',
+                       lambda m, lab=lab: f'<h4 class="plan-head">{lab}</h4>' + m.group(1) + ">", s, count=1)
+    s = re.sub(r'<div class="plan-stack-labels"[^>]*></div>', "", s)
+    s = re.sub(r'\sloading="lazy"', "", s)
 
     fab = (ROOT / "marketing" / "ladipage-nut-lien-he.html").read_text()
-    s = s.replace("</body>", fab + "\n" + TAB_JS + "\n</body>")
+    s = s.replace("</body>", fab + "\n</body>")
     return s
 
 
