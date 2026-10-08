@@ -46,7 +46,7 @@
   <div class="hmw-panel" id="hmwPanel" role="dialog" aria-label="Tư vấn căn hộ Hải Minh">
     <div class="hmw-head">
       <div class="hmw-ava">HM</div>
-      <div><b>Tư vấn Hải Minh Đà Nẵng</b><small>Trả lời tự động · Hotline 0904 567 009</small></div>
+      <div><b>Tư vấn Hải Minh Đà Nẵng</b><small>Trả lời tự động 24/7</small></div>
       <button class="hmw-x" id="hmwClose" aria-label="Đóng">×</button>
     </div>
     <div class="hmw-body" id="hmwBody"></div>
@@ -57,8 +57,8 @@
   </div>
 
   <div class="hmw-dock">
-    <a class="hmw-btn hmw-zalo" href="https://zalo.me/0904567009" target="_blank" rel="noopener" aria-label="Chat Zalo 0904 567 009"><span class="hmw-tip">Chat Zalo</span>Zalo</a>
-    <a class="hmw-btn hmw-call" href="tel:0904567009" aria-label="Gọi 0904 567 009"><span class="hmw-tip">Gọi 0904 567 009</span>
+    <a class="hmw-btn hmw-zalo" href="https://zalo.me/0904567009" target="_blank" rel="noopener" aria-label="Chat Zalo"><span class="hmw-tip">Chat Zalo</span>Zalo</a>
+    <a class="hmw-btn hmw-call" href="tel:0904567009" aria-label="Gọi hotline"><span class="hmw-tip">Gọi ngay</span>
       <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></a>
     <button class="hmw-btn hmw-chat" id="hmwOpen" aria-label="Mở chat tư vấn"><span class="hmw-tip">Hỏi đáp nhanh</span><span class="hmw-badge" id="hmwBadge">1</span>
       <svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2zm3 6v2h2v-2H7zm4 0v2h2v-2h-2zm4 0v2h2v-2h-2z"/></svg></button>
@@ -67,7 +67,7 @@
 
 <script>
 (function(){
-  var PHONE='0904 567 009', TEL='tel:0904567009', ZALO='https://zalo.me/0904567009';
+  var TEL='tel:0904567009', ZALO='https://zalo.me/0904567009';
   var KB=[
     {k:['gia','bang gia','bao nhieu','tien','ty','trieu'],a:'Bảng giá căn hộ Hải Minh được cập nhật theo từng đợt mở bán, chênh lệch theo tầng, hướng và view biển.\nAnh/chị để lại số điện thoại (Zalo), chuyên viên sẽ gửi bảng giá chi tiết từng căn và chính sách thanh toán đợt này.',lead:true},
     {k:['vi tri','o dau','dia chi','duong','cach bien','silver','ngu hanh son'],a:'Dự án nằm trên lô A2-1 và A2-2, trục biển Võ Nguyên Giáp – Trường Sa, phường Ngũ Hành Sơn, Đà Nẵng, đối diện Silver Shores (Hòn Ngọc Á Châu). Từ dự án đi bộ ra biển, gần phố du lịch An Thượng, Ngũ Hành Sơn và thuận đường đi Hội An.'},
@@ -76,11 +76,11 @@
     {k:['quy mo','tang','cao','bao nhieu can','so can'],a:'Hải Minh là tòa tháp 30 tầng, cao khoảng 117 m, khoảng 400 căn hộ du lịch, tổng sàn hơn 45.000 m² trên khu đất khoảng 3.720 m².'},
     {k:['ra mat','mo ban','thang 11','khi nao ban','bao gio ban','le ra mat'],a:'Dự án Hải Minh dự kiến ra mắt trong tháng 11/2026. Anh/chị đăng ký trước sẽ được ưu tiên nhận bảng giá, mặt bằng và chính sách ngay khi chủ đầu tư công bố.',lead:true},
     {k:['tien do','thi cong','ban giao','xay'],a:'Dự án đang thi công. Anh/chị có thể đặt lịch xem công trường thực tế, hoặc nhận ảnh cập nhật tiến độ qua Zalo.',lead:true},
-    {k:['phap ly','so hong','so do','giay to','so huu','thoi han'],a:'Hồ sơ pháp lý và hình thức sở hữu của từng căn sẽ được chuyên viên gửi kèm bảng giá để anh/chị xem trực tiếp. Anh/chị để lại số điện thoại hoặc gọi '+PHONE+' để được tư vấn chi tiết.',lead:true},
+    {k:['phap ly','so hong','so do','giay to','so huu','thoi han'],a:'Hồ sơ pháp lý và hình thức sở hữu của từng căn sẽ được chuyên viên gửi kèm bảng giá để anh/chị xem trực tiếp. Anh/chị để lại số điện thoại hoặc bấm Gọi ngay để được tư vấn chi tiết.',lead:true},
     {k:['cho thue','dong tien','loi nhuan','dau tu','ty suat','khai thac'],a:'Giá phòng ven biển trục Võ Nguyên Giáp phổ biến khoảng 1–3 triệu/đêm. Ví dụ minh họa với căn 3 tỷ, giá thuê 1,2 triệu/đêm, công suất 60%, chi phí 40%: thu nhập ròng khoảng 13 triệu/tháng.\n(Đây là ví dụ minh họa, không phải cam kết lợi nhuận.) Em có thể gửi bảng tính theo từng căn cho anh/chị.',lead:true},
     {k:['vay','ngan hang','thanh toan','tra gop','tien do thanh toan'],a:'Chính sách thanh toán và hỗ trợ ngân hàng thay đổi theo từng đợt. Anh/chị để lại số điện thoại, chuyên viên sẽ gửi chính sách mới nhất.',lead:true},
     {k:['condotel','chung cu','can ho du lich','loai hinh'],a:'Hải Minh là căn hộ du lịch (condotel) kết hợp thương mại dịch vụ, phù hợp nghỉ dưỡng và khai thác cho thuê du lịch.'},
-    {k:['xem','tham quan','nha mau','gap','hen'],a:'Anh/chị muốn đặt lịch xem dự án? Gọi '+PHONE+' hoặc để lại số điện thoại, chuyên viên sẽ gọi lại sắp xếp lịch.',lead:true}
+    {k:['xem','tham quan','nha mau','gap','hen'],a:'Anh/chị muốn đặt lịch xem dự án? Bấm Gọi ngay hoặc để lại số điện thoại, chuyên viên sẽ gọi lại sắp xếp lịch.',lead:true}
   ];
   var CHIPS=['Khi nào ra mắt?','Bảng giá','Vị trí','Loại căn','Dòng tiền cho thuê','Pháp lý','Đặt lịch xem'];
   var $=function(id){return document.getElementById(id)};
@@ -91,7 +91,7 @@
   function bot(t,delay){setTimeout(function(){var d=document.createElement('div');d.className='hmw-msg hmw-bot';d.textContent=t;body.appendChild(d);scroll();},delay||350);}
   function me(t){var d=document.createElement('div');d.className='hmw-msg hmw-me';d.textContent=t;body.appendChild(d);scroll();}
   function chips(delay){setTimeout(function(){var w=document.createElement('div');w.className='hmw-chips';CHIPS.forEach(function(c){var b=document.createElement('button');b.type='button';b.className='hmw-chip';b.textContent=c;b.onclick=function(){handle(c);};w.appendChild(b);});body.appendChild(w);scroll();},delay||500);}
-  function acts(delay){setTimeout(function(){var w=document.createElement('div');w.className='hmw-acts';w.innerHTML='<a class="o" href="'+TEL+'">📞 Gọi '+PHONE+'</a><a href="'+ZALO+'" target="_blank" rel="noopener">💬 Chat Zalo</a>';body.appendChild(w);scroll();},delay||600);}
+  function acts(delay){setTimeout(function(){var w=document.createElement('div');w.className='hmw-acts';w.innerHTML='<a class="o" href="'+TEL+'">📞 Gọi ngay</a><a href="'+ZALO+'" target="_blank" rel="noopener">💬 Chat Zalo</a>';body.appendChild(w);scroll();},delay||600);}
   function goForm(){var f=document.querySelector('form:not(#hmwForm)');if(f){f.scrollIntoView({behavior:'smooth',block:'center'});var i=f.querySelector('input');if(i)setTimeout(function(){i.focus();},600);}}
 
   function start(){
@@ -105,7 +105,7 @@
     var digits=text.replace(/[^\d]/g,'');
     if(/^(\+?84|0)\d{8,10}$/.test(digits.replace(/^84/,'0'))||(digits.length>=9&&digits.length<=11&&/^0/.test(digits))){
       gotPhone=true;
-      bot('Cảm ơn anh/chị! Em đã ghi nhận số '+text+'.\nĐể nhận bảng giá nhanh nhất, anh/chị vui lòng điền số này vào form "Đăng ký nhận bảng giá" trên trang, hoặc nhắn trực tiếp Zalo '+PHONE+'.');
+      bot('Cảm ơn anh/chị! Em đã ghi nhận số '+text+'.\nĐể nhận bảng giá nhanh nhất, anh/chị vui lòng điền số này vào form "Đăng ký nhận bảng giá" trên trang, hoặc bấm Chat Zalo bên dưới.');
       acts(); setTimeout(goForm,1500); return;
     }
     var n=norm(text), hit=null, best=0;
@@ -115,7 +115,7 @@
       if(hit.lead&&!gotPhone){bot('👉 Anh/chị nhập số điện thoại (Zalo) vào ô bên dưới để nhận tài liệu nhé.',900);acts(1100);}
       else chips(900);
     }else{
-      bot('Câu hỏi này em xin chuyển chuyên viên tư vấn trực tiếp để trả lời chính xác ạ. Anh/chị gọi hoặc nhắn Zalo '+PHONE+', hoặc để lại số điện thoại tại đây.');
+      bot('Câu hỏi này em xin chuyển chuyên viên tư vấn trực tiếp để trả lời chính xác ạ. Anh/chị bấm Gọi ngay / Chat Zalo bên dưới, hoặc để lại số điện thoại tại đây.');
       acts(); chips(900);
     }
   }
