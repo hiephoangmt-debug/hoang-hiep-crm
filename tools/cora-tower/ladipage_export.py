@@ -74,10 +74,18 @@ def convert(name):
     s = re.sub(r'(src|href)="assets/', lambda m: f'{m.group(1)}="{BASE}assets/', s)
     s = re.sub(r'href="phap-ly/', f'href="{BASE}phap-ly/', s)
     # links to sibling pages -> final domain
+    # live LadiPage URLs on www.cora-tower.com
+    LIVE = {"khoi-de-shophouse.html": "khoi-de-shophouse", "penthouse.html": "penthouse",
+            "phap-ly.html": "#phap-ly", "can-ho-sun-da-nang.html": ""}
     s = re.sub(r'href="\./(#[^"]*)?"', lambda m: f'href="{DOMAIN}{m.group(1) or ""}"', s)
-    for pg in ["khoi-de-shophouse.html", "penthouse.html", "phap-ly.html", "can-ho-sun-da-nang.html"]:
-        if pg != name:
-            s = s.replace(f'href="{pg}', f'href="{DOMAIN}{pg}')
+    for pg, slug in LIVE.items():
+        if pg == name:
+            continue
+        s = re.sub(r'href="' + re.escape(pg) + r'(#[^"]*)?"', lambda m, slug=slug: f'href="{DOMAIN}{slug if not slug.startswith("#") or True else ""}{(m.group(1) or "") if not slug.startswith("#") else ""}"', s)
+    # meta canonical / og:url to live URLs
+    for pg, slug in LIVE.items():
+        if not slug.startswith("#") and slug:
+            s = s.replace(f"{DOMAIN}{pg}", f"{DOMAIN}{slug}")
     s = s.replace(f'href="{name}#', 'href="#')
 
     # ---- forms: no hidden inputs / status div, select placeholder
@@ -103,7 +111,8 @@ def convert(name):
     if tab_ids - found:
         print("WARN tabs without panel:", tab_ids - found)
 
-    s = s.replace("</body>", TAB_JS + "\n</body>")
+    fab = (ROOT / "marketing" / "ladipage-nut-lien-he.html").read_text()
+    s = s.replace("</body>", fab + "\n" + TAB_JS + "\n</body>")
     return s
 
 
