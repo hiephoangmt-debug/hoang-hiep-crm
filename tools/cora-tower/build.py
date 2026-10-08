@@ -142,6 +142,7 @@ FAQ_INDEX = [
     ("Mua Cora Tower ký hợp đồng gì?", "Dự án đã đủ điều kiện ký hợp đồng mua bán (HĐMB). Khách ký hợp đồng thỏa thuận nguyên tắc (HĐTHNV) trước để có thời gian chuẩn bị tài chính, hồ sơ vay, sau đó ký HĐMB theo thông báo của chủ đầu tư."),
 ]
 FAQ_SHOP = [
+    ("Giá shophouse Cora Tower so với giá đất mặt tiền Nguyễn Phước Lan thế nào?", "Đất mặt tiền Nguyễn Phước Lan đang được rao khoảng 150 – 230 triệu/m² (lô 100 m² khoảng 15 – 23 tỷ). Shophouse Cora Tower ngay vòng xoay 29/3 – Nguyễn Phước Lan có giá khoảng 4,96 – 6,04 tỷ/căn 43 – 61,5 m², quy đổi khoảng 100 – 115 triệu/m² sàn, đã gồm VAT và phí bảo trì, vốn ban đầu chỉ khoảng 1,5 – 1,8 tỷ nhờ vay 70%. Giá đất là mức rao bán tham khảo; shophouse là sở hữu sàn trong tòa nhà."),
     ("Shophouse Cora Tower nằm ở tầng nào?", "Shophouse thương mại nằm ở tầng 1 khối đế, hướng ra vòng xoay 29/3 – Nguyễn Phước Lan; tầng 2 là dịch vụ – tiện ích."),
     ("Shophouse khối đế Cora Tower có sở hữu lâu dài không?", "Có. Theo chủ đầu tư, shophouse khối đế có pháp lý sở hữu lâu dài như căn hộ: vừa ở vừa kinh doanh được, và đăng ký được hộ khẩu thường trú."),
     ("Shophouse cao bao nhiêu, làm tầng lửng được không?", "Chiều cao tầng khối đế lên tới khoảng 7 m nên có thể làm thêm tầng lửng. Chủ nhà tự hoàn thiện tầng lửng, miễn không ảnh hưởng kết cấu, cơ điện, kiến trúc tòa nhà; hồ sơ phương án gửi Ban quản lý duyệt trong khoảng 1–2 tuần."),

@@ -81,7 +81,7 @@ INDEX_ARTICLE = article("Cẩm nang mua căn hộ", "Cora Tower Đà Nẵng: t�
 
 # ---------------------------------------------------------------- SHOPHOUSE
 SHOP_TOC = [("sh-buoi-sang", "Một buổi sáng ở shop của anh/chị"), ("sh-vi-sao", "Ba thứ làm nên một shophouse “đẻ ra tiền”"),
-            ("sh-dep", "Mặt tiền tự bán hàng thay chủ"), ("sh-7m", "Trần 7 m: mua một, dùng hai"),
+            ("sh-gia-dat", "Đất Nguyễn Phước Lan 150–230 triệu/m²"), ("sh-dep", "Mặt tiền tự bán hàng thay chủ"), ("sh-7m", "Trần 7 m: mua một, dùng hai"),
             ("sh-khai-thac", "Kinh doanh gì để có dòng tiền?"), ("sh-tai-chinh", "Chỉ từ 1,5 tỷ để bắt đầu"),
             ("sh-phap-ly", "Sở hữu lâu dài – tài sản để lại cho con"), ("sh-chon-can", "Chọn căn: căn đẹp đi trước"),
             ("sh-rui-ro", "Kiểm tra gì trước khi cọc?")]
@@ -108,6 +108,22 @@ SHOP_ARTICLE = article("Câu chuyện đầu tư", "Shophouse Cora Tower: mặt 
 <li><strong>Pháp lý chắc:</strong> sở hữu lâu dài như căn hộ, do Sun Group phát triển.</li>
 </ul>
 <blockquote class="pull">Chỉ khoảng 60 căn shop tại Cora Tower – và chừng 150 căn khối đế cho cả khu đô thị. Đất có thể làm thêm, nhưng mặt tiền dưới chân 1.342 căn hộ thì không.</blockquote>
+
+<h3 id="sh-gia-dat">Đất Nguyễn Phước Lan đã 150 – 230 triệu/m². Shophouse thì sao?</h3>
+<p>Ai từng đi xem đất Hòa Xuân đều thấy rõ: đất mặt tiền <strong>Nguyễn Phước Lan</strong> hiện được rao bán khoảng <strong>150 – 230 triệu đồng/m²</strong>. Một lô 100 m² đã là <strong>15 – 23 tỷ</strong> – chưa tính tiền xây, và vẫn phải tự đi kéo khách.</p>
+<p>Ngay tại vòng xoay 29/3 – Nguyễn Phước Lan, shophouse Cora Tower có giá chỉ khoảng <strong>4,96 – 6,04 tỷ/căn</strong> cho 43 – 61,5 m², tức khoảng <strong>100 – 115 triệu/m²</strong> (đã gồm VAT, phí bảo trì) – thấp hơn đáng kể so với đơn giá đất mặt tiền cùng tuyến đường.</p>
+<div class="table-wrap"><table>
+<thead><tr><th></th><th>Đất mặt tiền Nguyễn Phước Lan</th><th>Shophouse Cora Tower</th></tr></thead>
+<tbody>
+<tr><td>Đơn giá</td><td>150 – 230 triệu/m² đất</td><td><b>~100 – 115 triệu/m²</b></td></tr>
+<tr><td>Tổng tiền</td><td>15 – 23 tỷ (lô 100 m²)</td><td><b>4,96 – 6,04 tỷ</b></td></tr>
+<tr><td>Vốn ban đầu</td><td>Gần như toàn bộ</td><td><b>~1,5 – 1,8 tỷ</b> (vay 70%, 0% lãi 24 tháng)</td></tr>
+<tr><td>Xây dựng</td><td>Tự xây, tự xin phép</td><td><b>Nhận bàn giao</b>, trần ~7 m làm được tầng lửng</td></tr>
+<tr><td>Khách hàng</td><td>Tự kéo</td><td><b>1.342 căn hộ</b> ngay phía trên</td></tr>
+<tr><td>Vận hành</td><td>Tự lo an ninh, vệ sinh</td><td>Ban quản lý chuyên nghiệp của Sun Group</td></tr>
+</tbody></table></div>
+<p class="note">Giá đất là mức rao bán tham khảo trên thị trường, thay đổi theo vị trí lô và thời điểm. Shophouse là sở hữu sàn trong tòa nhà, không phải sở hữu riêng thửa đất.</p>
+<p>Khối đế Cora Tower hội tụ nhiều yếu tố mà một lô đất phố khó có cùng lúc: <strong>vị trí vòng xoay, khách sẵn có, mặt tiền kính kịch trần, trần cao làm tầng lửng, sở hữu lâu dài, thương hiệu Sun Group và chính sách vốn nhẹ</strong>. Cùng một tuyến đường, cùng một dòng người – nhưng số vốn bỏ ra chỉ bằng khoảng một phần ba.</p>
 
 <h3 id="sh-dep">Mặt tiền tự bán hàng thay chủ</h3>
 <p>Khối đế bo cong theo vòng xoay, <strong>mặt kính kịch trần</strong>, biển hiệu đồng bộ trên nền gỗ cam ấm, mái sảnh lam kim loại. Ban ngày, ánh sáng biến cả cửa hàng thành một tủ trưng bày khổng lồ; về đêm, dải đèn biển hiệu nối dài theo đường cong khối đế như một con phố thương mại thu nhỏ. Mặt tiền từng căn rộng <strong>3,5 – 13 m</strong>, nhiều căn góc hai mặt thoáng – đúng thứ các thương hiệu thời trang, F&amp;B, ngân hàng luôn săn tìm và sẵn sàng trả giá thuê cao.</p>

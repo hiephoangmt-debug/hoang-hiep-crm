@@ -63,11 +63,14 @@ cho thuê, thuê, việc làm, tuyển dụng, hà nội shophouse vinhomes, m�
 13. Nhận Giỏ Hàng Shop Còn Trống
 14. Gọi 0904 567 009
 15. Shophouse Hòa Xuân Đà Nẵng
+16. Rẻ Hơn Đất Nguyễn Phước Lan
+17. Chỉ ~100tr/m² – Đất 150-230tr
 
 ### Mô tả (≤ 90 ký tự)
 1. Shophouse tầng 1 Cora Tower, trần ~7m làm tầng lửng, sở hữu lâu dài. Nhận giỏ hàng ngay.
 2. Vay tối đa 70%, hỗ trợ lãi suất 24 tháng, Sun Early Key thanh toán 70% là nhận nhà.
 3. Mặt kính kịch trần ôm vòng xoay 29/3 – Nguyễn Phước Lan. Xem mặt bằng, mặt tiền từng căn.
+4. Đất Nguyễn Phước Lan 150–230tr/m². Shophouse ngay vòng xoay chỉ ~100–115tr/m².
 4. Có sổ đỏ lô đất, văn bản đủ điều kiện bán, bảo lãnh VietinBank. Tư vấn: 0904 567 009.
 
 ### Tiện ích quảng cáo
@@ -120,6 +123,20 @@ cho thuê, thuê, việc làm, tuyển dụng, hà nội shophouse vinhomes, m�
 > Shophouse Cora Tower nằm ngay vòng xoay 29/3 – Nguyễn Phước Lan, mặt tiền 3,5 – 13m, nhiều căn góc 2 mặt thoáng, trần cao làm được tầng lửng.
 > Thanh toán 70% là nhận shop để kinh doanh trước.
 > 👉 Nhắn “SHOP” để nhận mặt bằng từng căn.
+
+### Mẫu 4 – So sánh giá đất (nhà đầu tư)
+> Đất mặt tiền Nguyễn Phước Lan đang rao 150 – 230 triệu/m². Một lô 100 m² đã 15 – 23 tỷ, chưa xây, chưa có khách.
+>
+> Ngay tại vòng xoay 29/3 – Nguyễn Phước Lan, **shophouse khối đế Cora Tower** chỉ từ ~4,96 tỷ/căn (~100 – 115 triệu/m², đã gồm VAT):
+> ✔ 1.342 căn hộ phía trên – khách có sẵn mỗi ngày
+> ✔ Mặt kính kịch trần, trần ~7 m làm tầng lửng
+> ✔ Sở hữu lâu dài, thương hiệu Sun Group
+> ✔ Vốn ban đầu ~1,5 tỷ – vay 70%, 0% lãi 24 tháng
+>
+> Cùng tuyến đường, cùng dòng người – vốn chỉ bằng khoảng 1/3.
+> 📞 0904 567 009 (Zalo) – nhận giỏ căn còn trống.
+
+*Giá đất là mức rao bán tham khảo; shophouse là sở hữu sàn trong tòa nhà.*
 
 ### Lead form (Facebook)
 - Câu hỏi: Họ tên · SĐT · “Bạn quan tâm?” (Đầu tư cho thuê / Tự kinh doanh / Cả hai) · “Ngân sách?” (Dưới 5 tỷ / 5–6 tỷ / Trên 6 tỷ)
