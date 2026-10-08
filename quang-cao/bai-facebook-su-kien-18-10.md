@@ -7,7 +7,7 @@ Nguyên tắc chung cho cả 3 bài:
 - **Không** nêu vùng miền của khách. Lý do: tránh bị Facebook đánh giá là phân biệt người xem, nhất là khi quảng cáo bị xếp vào nhóm Nhà ở. Phần nhắm theo vùng, anh chọn trong cài đặt đối tượng.
 - Không hứa lợi nhuận, không nêu % cho thuê.
 
-Trước khi đăng, nhớ điền `[giờ]`, `[địa điểm]`, `[quà]`.
+Địa điểm: **Accost Tây Hồ, Hà Nội**. Giờ: bổ sung khi có thư mời chính thức.
 
 ---
 
@@ -30,8 +30,8 @@ Tòa F2 – Sun FourS Tower (Sun Group)
 🏦 Vay 70%, 24 tháng không lãi, không gốc
 🔑 Nhận nhà dự kiến 31/05/2028
 
-📅 Chủ nhật 18/10 – Sự kiện giới thiệu Tòa F2
-Xem mặt bằng, tính dòng tiền riêng, hỏi trực tiếp đội dự án, bốc thăm [quà].
+📅 Chủ nhật 18/10 – Sự kiện bán hàng Tòa F2 tại Accost Tây Hồ, Hà Nội
+Xem mặt bằng, tính dòng tiền riêng, hỏi trực tiếp đội dự án – không cần bay vào Đà Nẵng.
 Chưa sắp xếp đến được? Đăng ký tư vấn qua video ngay trong ngày sự kiện.
 
 👉 Giữ chỗ ngay – số chỗ có hạn.
@@ -59,7 +59,7 @@ Cách tính rất rõ:
 Pháp lý đầy đủ: 607 căn đủ điều kiện bán (VB 17239/SXD-QLN), Techcombank bảo lãnh, đã nghiệm thu móng hầm.
 Chiết khấu cộng dồn tới 19% – chỉ đến 25/10/2026.
 
-📅 Chủ nhật 18/10: ngồi cùng đội dự án, tính dòng tiền đúng căn anh/chị chọn.
+📅 Chủ nhật 18/10 tại Accost Tây Hồ, Hà Nội: ngồi cùng đội dự án, tính dòng tiền đúng căn anh/chị chọn.
 👉 Giữ chỗ hoặc nhận bảng tính qua Zalo.
 ```
 **Tiêu đề:** `Vốn ~700 triệu, nhà gần biển Đà Nẵng`
@@ -84,7 +84,7 @@ Mua chắc mà chưa cần có mặt:
 3️⃣ Giữ căn với cọc 100 triệu, có hợp đồng giữ chỗ
 4️⃣ Ký hợp đồng khi thuận tiện
 
-📅 Chủ nhật 18/10 – Sự kiện Tòa F2 Sun FourS Tower.
+📅 Chủ nhật 18/10 – Sự kiện Tòa F2 Sun FourS Tower tại Accost Tây Hồ, Hà Nội.
 Đến trực tiếp hoặc gặp qua video. 👉 Giữ chỗ ngay.
 ```
 **Tiêu đề:** `Ngôi nhà thứ hai bên biển Đà Nẵng`

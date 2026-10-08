@@ -1,0 +1,79 @@
+<!-- SỰ KIỆN 18/10/2026 – ACCOST TÂY HỒ, HÀ NỘI (tự ẩn sau ngày sự kiện) -->
+<style>
+.evh{background:linear-gradient(160deg,#13285a,#0b1a3a);color:#fff;padding:52px 0;border-top:1px solid rgba(255,255,255,.08)}
+.evh-card{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:26px;align-items:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,176,103,.35);border-radius:22px;padding:26px}
+.evh-tag{display:inline-flex;gap:8px;align-items:center;padding:6px 14px;border-radius:999px;background:#f47a1f;color:#fff;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.evh h2{font-family:var(--serif);font-size:clamp(26px,3.6vw,40px);line-height:1.15;margin:12px 0 8px;color:#fff}
+.evh-lead{opacity:.88;margin:0 0 14px;font-size:15.5px}
+.evh-info{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:9px}
+.evh-info li{display:flex;gap:10px;align-items:flex-start;font-size:15.5px}
+.evh-info i{font-style:normal;width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:10px;background:rgba(255,255,255,.1)}
+.evh-info span{opacity:.8;font-size:14px;display:block}
+.evh-perks{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.evh-perks li{position:relative;padding-left:24px;font-size:15px;opacity:.94}
+.evh-perks li::before{content:"";position:absolute;left:0;top:7px;width:13px;height:7px;border-left:2.5px solid #ffa04a;border-bottom:2.5px solid #ffa04a;transform:rotate(-45deg)}
+.evh-cd{display:flex;gap:8px;margin-bottom:12px}
+.evh-cd div{flex:1;text-align:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:9px 4px}
+.evh-cd b{display:block;font-family:var(--serif);font-size:28px;line-height:1;background:linear-gradient(100deg,#f47a1f 0%,#ffa04a 30%,#ffe2c2 50%,#ffa04a 70%,#f47a1f 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:evhShine 2.6s ease-in-out infinite alternate}
+@keyframes evhShine{0%{background-position:100% 0}100%{background-position:0 0}}
+.evh-cd span{font-size:12px;opacity:.8}
+.evh-form{display:grid;gap:9px;background:#fff;border-radius:16px;padding:16px;color:var(--ink)}
+.evh-form h3{font-size:16px;color:var(--green-900,#0b1a3a);margin:0}
+.evh-form input,.evh-form select{width:100%;padding:12px 14px;border:1.5px solid #e2e7f1;border-radius:11px;font:inherit;font-size:16px;color:var(--ink);background:#fff}
+.evh-form input:focus,.evh-form select:focus{outline:none;border-color:#f47a1f}
+.evh-form .btn{width:100%;justify-content:center}
+.evh-form p{margin:0;font-size:12.5px;color:#5a6275;text-align:center}
+.evh .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (max-width:860px){.evh{padding:40px 0}.evh-card{grid-template-columns:1fr;padding:18px}}
+@media (prefers-reduced-motion:reduce){.evh-cd b{animation:none}}
+</style>
+<section class="evh" id="su-kien-hn" aria-labelledby="h-evh">
+  <div class="container">
+    <div class="evh-card">
+      <div>
+        <span class="evh-tag">📅 Sự kiện sắp tới · Hà Nội</span>
+        <h2 id="h-evh">Sự kiện bán hàng Tòa F2 tại Hà Nội</h2>
+        <p class="evh-lead">Gặp trực tiếp đội dự án Sun FourS Tower mà không cần bay vào Đà Nẵng.</p>
+        <ul class="evh-info">
+          <li><i aria-hidden="true">📅</i><div><b>Chủ nhật, 18/10/2026</b><span>Giờ cụ thể gửi kèm thư mời</span></div></li>
+          <li><i aria-hidden="true">📍</i><div><b>Accost Tây Hồ</b><span>Tây Hồ, Hà Nội</span></div></li>
+        </ul>
+        <ul class="evh-perks">
+          <li>Xem mặt bằng, chọn căn view sông – biển</li>
+          <li>Tính dòng tiền riêng: vay 70%, 24 tháng không lãi, không gốc</li>
+          <li>Hỏi trực tiếp về pháp lý, tiến độ, bàn giao</li>
+        </ul>
+      </div>
+      <div>
+        <div class="evh-cd" aria-label="Thời gian còn lại đến sự kiện"><div><b id="evhD">–</b><span>ngày</span></div><div><b id="evhH">–</b><span>giờ</span></div><div><b id="evhM">–</b><span>phút</span></div></div>
+        <form class="evh-form lead-form" aria-labelledby="evh-form-title">
+          <h3 id="evh-form-title">Giữ chỗ – nhận thư mời ghi tên qua Zalo</h3>
+          <label class="sr" for="evh-name">Họ và tên</label><input id="evh-name" name="name" placeholder="Họ và tên *" autocomplete="name" required>
+          <label class="sr" for="evh-phone">Số điện thoại</label><input id="evh-phone" name="phone" type="tel" placeholder="Số điện thoại / Zalo *" autocomplete="tel" inputmode="tel" required pattern="[0-9 +.]{9,14}">
+          <label class="sr" for="evh-n">Số người tham dự</label><select id="evh-n" name="yeu_cau"><option value="Tham dự sự kiện 18/10 Hà Nội – 1 người">1 người tham dự</option><option value="Tham dự sự kiện 18/10 Hà Nội – 2 người">2 người tham dự</option><option value="Tham dự sự kiện 18/10 Hà Nội – 3–4 người">3–4 người tham dự</option></select>
+          <input type="hidden" name="interest" value="Đăng ký sự kiện Tòa F2 – CN 18/10 Accost Tây Hồ, Hà Nội"><input type="hidden" name="toa" value="F2">
+          <button class="btn btn-gold" type="submit">Giữ chỗ sự kiện 18/10 →</button>
+          <p>Số lượng chỗ có hạn · Thông tin được bảo mật</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+/* Đếm ngược tới 18/10/2026; qua hết ngày 18/10 thì tự ẩn khối này */
+(function () {
+  var s = document.getElementById('su-kien-hn'); if (!s) return;
+  var start = new Date('2026-10-18T08:00:00+07:00').getTime(), hide = new Date('2026-10-18T23:59:00+07:00').getTime();
+  function tick() {
+    var now = Date.now();
+    if (now > hide) { s.parentNode && s.parentNode.removeChild(s); return; }
+    var d = Math.max(0, start - now);
+    document.getElementById('evhD').textContent = Math.floor(d / 864e5);
+    document.getElementById('evhH').textContent = Math.floor(d % 864e5 / 36e5);
+    document.getElementById('evhM').textContent = Math.floor(d % 36e5 / 6e4);
+    if (d === 0) { var c = s.querySelector('.evh-cd'); if (c) c.innerHTML = '<div><b style="font-size:20px">Hôm nay</b><span>Hẹn gặp anh/chị tại Accost Tây Hồ</span></div>'; return; }
+    setTimeout(tick, 30000);
+  }
+  tick();
+})();
+</script>
