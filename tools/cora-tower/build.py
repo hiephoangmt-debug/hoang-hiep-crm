@@ -264,6 +264,9 @@ def head(page, title, desc, keywords, og_img, og_alt, preload_key, graph):
 <link rel="canonical" href="{url}">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="theme-color" content="#0b2a5b">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/favicon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="vi_VN">
 <meta property="og:site_name" content="Cora Tower Đà Nẵng">
