@@ -429,7 +429,7 @@ LIGHTBOX = '<div class="lightbox" role="dialog" aria-label="Xem ảnh"><button t
 
 def uplan(key, title, size):
     return (f'<figure class="zoom reveal"><a href="{src(key)}" class="zoom-link">{pic(key, "(max-width:760px) 100vw, 360px")}'
-            f'<span class="zoom-hint">Phóng to</span></a><figcaption><b>{title}</b> · {size}</figcaption></figure>')
+            f'<span class="zoom-hint">Phóng to</span></a><figcaption><b>{title}</b><span>Kích thước {size}</span></figcaption></figure>')
 
 
 def plan_tabs():
@@ -577,7 +577,7 @@ def build_index():
           {pic("int1pn", "(max-width:900px) 100vw, 380px", cls="unit-thumb")}
         </div>
       </div>
-      <h3 class="reveal center" style="margin-top:56px;font-size:1.5rem;color:var(--brand)">Mặt bằng các căn điển hình</h3>
+      <div class="center reveal" style="margin-top:64px"><span class="kicker">Căn hộ điển hình</span><h2 style="font-size:clamp(1.5rem,2.6vw,2rem)">Mặt bằng các căn điển hình</h2><p class="sub">Chọn loại căn để xem bố trí, kích thước và vị trí trên sàn. Bấm vào ảnh để phóng to.</p></div>
       <div class="tabs reveal" role="tablist">
         <button role="tab" aria-selected="true" data-tab="u-stu">Studio</button>
         <button role="tab" aria-selected="false" data-tab="u-1pn">1PN+</button>
@@ -856,7 +856,7 @@ def build_shop():
         </div>
         <p class="note">Số liệu tổng hợp, chỉ mang tính tham khảo. Giá và chính sách chính thức theo chủ đầu tư tại từng thời điểm.</p>
       </div>
-      <div class="split-media reveal zoom"><a href="{src("struct")}" class="zoom-link">{pic("struct", "(max-width:900px) 100vw, 600px", alt="Cấu trúc tòa Cora Tower: tầng 1 shophouse thương mại, tầng 2 dịch vụ tiện ích")}</a></div>
+      <div class="media-stack reveal"><div class="split-media zoom"><a href="{src("struct")}" class="zoom-link">{pic("struct", "(max-width:900px) 100vw, 600px", alt="Cấu trúc tòa Cora Tower: tầng 1 shophouse thương mại, tầng 2 dịch vụ tiện ích")}</a></div><figure class="stack-photo">{pic("sr07", "(max-width:900px) 100vw, 600px", alt="Shophouse khối đế Cora Tower mặt kính kịch trần bên vòng xoay")}<figcaption>Mặt tiền shophouse kính kịch trần, trần cao ~7 m</figcaption></figure></div>
     </div>
   </section>
 
@@ -871,10 +871,10 @@ def build_shop():
         <div><b>70%</b><span>Sun Early Key – thanh toán 70% nhận nhà</span></div>
         <div><b>24</b><span>tháng hỗ trợ lãi suất (vay tối đa 70%)</span></div>
         <div><b>40</b><span>tháng tiến độ thanh toán</span></div>
-        <div class="dim"><b>9%</b><span>Chiết khấu thanh toán sớm 95%*</span></div>
-        <div class="dim"><b>3%</b><span>Chiết khấu thanh toán sớm 70%*</span></div>
+        <div><b>8%</b><span>/năm ưu đãi cho khoản thanh toán sớm*</span></div>
+        <div><b>1</b><span>năm miễn phí dịch vụ quản lý*</span></div>
       </div>
-      <p class="note">* Hai mức chiết khấu thanh toán sớm áp dụng chậm nhất đến 25/08/2026 theo thông báo của chủ đầu tư – liên hệ {TEL_TXT} để nhận chính sách đang áp dụng. Các ưu đãi áp dụng theo điều kiện của từng đợt bán hàng.</p>
+      <p class="note">* Theo chủ đầu tư, chính sách bán hàng shophouse tương tự căn hộ (CSƯĐ 06.1); ưu đãi thanh toán sớm không áp dụng đồng thời với hỗ trợ lãi suất. Các mức chiết khấu thanh toán sớm 95%/70% theo từng đợt – liên hệ {TEL_TXT} để nhận chính sách đang áp dụng.</p>
     </div>
   </section>
 
@@ -1038,7 +1038,7 @@ def build_ph():
         </div>
         <p class="note">Thông tin tổng hợp, chỉ mang tính tham khảo. Thông số chính thức theo hồ sơ của chủ đầu tư.</p>
       </div>
-      <div class="split-media reveal zoom"><a href="{src("struct")}" class="zoom-link">{pic("struct", "(max-width:900px) 100vw, 600px", alt="Cấu trúc tòa Cora Tower: tầng 25 căn hộ duplex trong khối mái")}</a></div>
+      <div class="media-stack reveal"><div class="split-media zoom"><a href="{src("struct")}" class="zoom-link">{pic("struct", "(max-width:900px) 100vw, 600px", alt="Cấu trúc tòa Cora Tower: tầng 25 căn hộ duplex trong khối mái")}</a></div><figure class="stack-photo">{pic("ph", "(max-width:900px) 100vw, 600px", alt="Sân vườn trên cao của căn penthouse Cora Tower nhìn ra thành phố")}<figcaption>Sân vườn trên cao – không gian riêng của tầng 25</figcaption></figure></div>
     </div>
   </section>
 
