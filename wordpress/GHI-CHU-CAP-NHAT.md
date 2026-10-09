@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.2** + plugin Hoàng Hiệp CRM **2.20.2**)
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.2** + plugin Hoàng Hiệp CRM **2.20.3**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.3: cập nhật web bằng điện thoại (gói cap-nhat-nhanh.zip)
+
+- Ô **Dự án → Nhập nhanh** nhận thêm file **cap-nhat-nhanh.zip**: chép đè code plugin + giao diện lên bản đang chạy (ảnh dự án đã có giữ nguyên). Gói chỉ khoảng 1 MB → tải lên được bằng điện thoại, không cần cPanel.
+- Lần đầu vẫn phải cài bản 2.20.3 đầy đủ (Plugin → Cài mới → Tải plugin lên `hoang-hiep-crm.zip` → "Thay thế bản hiện tại", hoặc giải nén gói trọn bộ bằng File Manager). Từ lần sau chỉ cần gói cap-nhat-nhanh.zip.
+- Người đóng gói: `bash scripts/build-zip.sh` tạo thêm `dist/cap-nhat-nhanh.zip` (code + ảnh/font đổi trong 2 ngày; đổi bằng `PATCH_DAYS=7`).
 
 ## Có gì mới – plugin 2.20.2: ảnh trong gói dự án có tên tầng / chú thích tiện ích
 

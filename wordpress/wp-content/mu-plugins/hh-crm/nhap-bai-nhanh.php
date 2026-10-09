@@ -132,15 +132,26 @@ function hh_quick_post_create( $n ) {
 function hh_quick_post_page() {
 	$done  = null;
 	$proj  = null;
+	$patch = null;
 	$error = '';
 	if ( isset( $_POST['hh_quick_post'] ) && check_admin_referer( 'hh_quick_post' ) ) {
 		$raw  = wp_unslash( $_POST['hh_quick_post'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 		$file = $_FILES['hh_quick_file'] ?? null; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
-		if ( '' === trim( $raw ) && $file && UPLOAD_ERR_OK === $file['error'] && $file['size'] < 20 * MB_IN_BYTES && is_uploaded_file( $file['tmp_name'] ) ) {
+		if ( $file && in_array( $file['error'], array( UPLOAD_ERR_INI_SIZE, UPLOAD_ERR_FORM_SIZE ), true ) ) {
+			$error = 'File lớn hơn giới hạn tải lên của hosting (' . size_format( wp_max_upload_size() ) . ') – báo Hoàng Hiệp để chia nhỏ gói.';
+		} elseif ( '' === trim( $raw ) && $file && UPLOAD_ERR_OK === $file['error'] && preg_match( '/\.zip$/i', $file['name'] ) && is_uploaded_file( $file['tmp_name'] ) ) {
+			$patch = hh_quick_patch_apply( $file['tmp_name'] ); // Gói cập nhật code plugin / giao diện.
+			if ( is_wp_error( $patch ) ) {
+				$error = $patch->get_error_message();
+				$patch = null;
+			}
+			$raw = null;
+		} elseif ( '' === trim( $raw ) && $file && UPLOAD_ERR_OK === $file['error'] && $file['size'] < 20 * MB_IN_BYTES && is_uploaded_file( $file['tmp_name'] ) ) {
 			$raw = (string) file_get_contents( $file['tmp_name'] ); // phpcs:ignore WordPress.WP.AlternativeFunctions -- gói bài .txt chọn từ điện thoại/máy tính.
 		}
-		$n = hh_quick_post_decode( $raw );
-		if ( ! is_wp_error( $n ) && 'du-an' === ( $n['kind'] ?? '' ) ) {
+		$n = ( null === $raw || $error ) ? null : hh_quick_post_decode( $raw );
+		if ( null === $n ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement -- đã xử lý gói .zip / lỗi tải lên ở trên.
+		} elseif ( ! is_wp_error( $n ) && 'du-an' === ( $n['kind'] ?? '' ) ) {
 			$proj = hh_quick_project_apply( $n );
 			if ( is_wp_error( $proj ) ) {
 				$error = $proj->get_error_message();
@@ -172,6 +183,9 @@ function hh_quick_post_page() {
 				<a href="<?php echo esc_url( get_edit_post_link( $pid ) ); ?>">Mở để sửa<?php echo $pnew ? ' / Đăng' : ''; ?></a>
 			</p><p><?php echo $plist ? 'Đã thay: ' . esc_html( implode( ', ', $plist ) ) : 'Không có ô nào thay đổi (dữ liệu trong gói giống trên web).'; ?></p></div>
 		<?php endif; ?>
+		<?php if ( $patch ) : ?>
+			<div class="notice notice-success"><p><strong>Đã cập nhật:</strong> <?php echo esc_html( implode( ' · ', $patch ) ); ?>.</p><p>Tiếp theo: <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=du-an&page=hh-import-du-an' ) ); ?>">Nhập dữ liệu Đà Nẵng</a> (nếu ghi chú cập nhật yêu cầu) và LiteSpeed Cache → Purge All.</p></div>
+		<?php endif; ?>
 		<?php if ( null !== $undone ) : ?>
 			<div class="notice notice-<?php echo $undone ? 'success' : 'error'; ?>"><p><?php echo $undone ? 'Đã hoàn tác – dự án trở về như trước lần cập nhật đó.' : 'Không tìm thấy lần cập nhật để hoàn tác.'; ?></p></div>
 		<?php endif; ?>
@@ -184,11 +198,12 @@ function hh_quick_post_page() {
 		<?php endif; ?>
 		<p>Nhận <strong>gói bài tin tức</strong> (tạo bản nháp) và <strong>gói dự án</strong> (dự án mới → bản nháp; dự án đã có → chỉ thay các ô có trong gói, có nút Hoàn tác).</p>
 		<p><strong>Cách 1 (điện thoại):</strong> tải file gói bài (.txt) nhận qua Claude về máy → bấm <strong>Chọn file</strong> bên dưới → chọn file đó → <strong>Tạo bài</strong>.</p>
+		<p><strong>Cập nhật web (plugin / giao diện):</strong> chọn file <strong>cap-nhat-nhanh.zip</strong> ở ô Chọn file → bấm nút bên dưới.</p>
 		<p><strong>Cách 2 (máy tính):</strong> mở file gói bài → <strong>Ctrl+A</strong>, <strong>Ctrl+C</strong> → dán vào ô dưới → <strong>Tạo bài</strong>.</p>
 		<p>Bài được tạo ở trạng thái <strong>Bản nháp</strong>, đủ ảnh đại diện, tiêu đề/mô tả/từ khoá Rank Math, thẻ, hỏi đáp. Xem trước rồi bấm <strong>Đăng</strong>.</p>
 		<form method="post" enctype="multipart/form-data">
 			<?php wp_nonce_field( 'hh_quick_post' ); ?>
-			<p><label><strong>Chọn file gói bài:</strong> <input type="file" name="hh_quick_file" accept=".txt,text/plain"></label></p>
+			<p><label><strong>Chọn file gói bài:</strong> <input type="file" name="hh_quick_file" accept=".txt,.zip,text/plain,application/zip"></label></p>
 			<p>hoặc dán nội dung gói bài:</p>
 			<textarea name="hh_quick_post" rows="8" style="width:100%;font-family:monospace" placeholder="HHBAI1:..."></textarea>
 			<p><button class="button button-primary">Tạo bài / Cập nhật dự án</button></p>
