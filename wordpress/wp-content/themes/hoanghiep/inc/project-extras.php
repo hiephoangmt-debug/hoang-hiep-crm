@@ -154,3 +154,46 @@ function hh_px_legal_docs( $post_id = null ) {
 	}
 	return array_values( array_filter( array( hh_meta( 'hh_p_legal', $post_id ), hh_meta( 'hh_p_ownership', $post_id ) ? 'Hình thức sở hữu: ' . hh_meta( 'hh_p_ownership', $post_id ) : '' ) ) );
 }
+
+/**
+ * Hình minh họa mặt bằng (SVG tự vẽ) theo loại căn – dùng khi dự án chưa có ảnh layout thật.
+ * Chỉ mang tính minh họa số phòng, không phải layout thực tế của căn.
+ */
+function hh_px_plan_svg( $group ) {
+	$rect = static function ( $x, $y, $w, $h, $fill, $label ) {
+		$t = $label ? sprintf( '<text x="%s" y="%s" text-anchor="middle" dominant-baseline="middle">%s</text>', $x + $w / 2, $y + $h / 2, esc_html( $label ) ) : '';
+		return sprintf( '<rect x="%s" y="%s" width="%s" height="%s" fill="%s"/>', $x, $y, $w, $h, $fill ) . $t;
+	};
+	$bed   = '#f5ede5';
+	$live  = '#ffffff';
+	$wc    = '#e3eef9';
+	$plus  = '#fff1e6';
+	$out   = $rect( 10, 100, 180, 14, '#e3f3ea', 'Ban công' );
+	$beds  = array( 'Studio' => 0, '1PN' => 1, '1PN+' => 1, '2PN' => 2, '2PN+' => 2, '3PN' => 3, 'Duplex' => 3, 'Penthouse' => 3 );
+	if ( 'Shophouse' === $group ) {
+		$out  = $rect( 10, 10, 180, 70, $live, 'Không gian kinh doanh' ) . $rect( 150, 80, 40, 20, $wc, 'WC' ) . $rect( 10, 80, 140, 20, $bed, 'Kho / bếp' );
+		$out .= '<path d="M30 114h50M120 114h50" stroke="#ea580c" stroke-width="4"/>';
+	} elseif ( isset( $beds[ $group ] ) ) {
+		$n = $beds[ $group ];
+		if ( ! $n ) {
+			$out .= $rect( 10, 10, 145, 90, $live, 'Ngủ + khách + bếp' ) . $rect( 155, 10, 35, 40, $wc, 'WC' ) . $rect( 155, 50, 35, 50, $bed, 'Tủ' );
+		} else {
+			$w = ( 180 - 35 ) / $n;
+			for ( $i = 0; $i < $n; $i++ ) {
+				$out .= $rect( 10 + $w * $i, 10, $w, 50, $bed, 'PN ' . ( $i + 1 ) );
+			}
+			$out .= $rect( 155, 10, 35, 50, $wc, 'WC' );
+			if ( false !== strpos( $group, '+' ) ) {
+				$out .= $rect( 10, 60, 45, 40, $plus, 'Đa năng' ) . $rect( 55, 60, 135, 40, $live, 'Khách + bếp' );
+			} else {
+				$out .= $rect( 10, 60, 180, 40, $live, 'Phòng khách + bếp' );
+			}
+			if ( in_array( $group, array( 'Duplex', 'Penthouse' ), true ) ) {
+				$out .= '<path d="M160 66h24M160 73h24M160 80h24M160 87h24M160 94h24" stroke="#8a5a36" stroke-width="2"/>';
+			}
+		}
+	} else {
+		return '';
+	}
+	return '<svg class="ucard__plan" viewBox="0 0 200 124" role="img" aria-label="' . esc_attr( 'Hình minh họa bố trí ' . $group ) . '"><g stroke="#0b2447" stroke-width="1.5" font-size="9" font-family="sans-serif" fill="#44526a">' . str_replace( '<text', '<text stroke="none" fill="#44526a"', $out ) . '</g><rect x="10" y="10" width="180" height="104" fill="none" stroke="#0b2447" stroke-width="3.5"/></svg>';
+}

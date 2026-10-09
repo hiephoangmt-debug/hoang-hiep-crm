@@ -1323,3 +1323,24 @@ html.nav-locked, html.nav-locked body { overflow: hidden; }
 	.px-prices b { font-size: 1.2rem; }
 }
 @media (min-width: 761px) { .px-overview__img { position: sticky; top: calc(var(--header-h) + 70px); } }
+
+/* Thẻ loại căn khi chưa có ảnh layout */
+.ucards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 175px), 1fr)); gap: 14px; margin: 6px 0 18px; }
+.ucard { display: flex; flex-direction: column; gap: 10px; padding: 18px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--white); box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s, border-color .2s; }
+.ucard:hover { transform: translateY(-3px); border-color: var(--gold); box-shadow: var(--shadow-lg); }
+.ucard__badge { align-self: flex-start; padding: 8px 14px; border-radius: 10px; background: linear-gradient(140deg, var(--navy), var(--navy-3)); color: var(--gold); font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; line-height: 1; }
+.ucard__name { margin: 0; font-weight: 700; color: var(--ink); }
+.ucard__meta { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; font-size: .9rem; color: var(--text); }
+.ucard__meta li { display: flex; align-items: center; gap: 8px; }
+.ucard__meta .icon { width: 18px; height: 18px; color: var(--gold-2); }
+.ucard__price { display: flex; flex-direction: column; margin: auto 0 0; padding-top: 10px; border-top: 1px dashed var(--line); }
+.ucard__price small { font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.ucard__price b { font-size: 1.1rem; color: var(--cta-2); }
+.ucard__cta { font-size: .88rem; font-weight: 700; color: var(--gold-2); }
+@media (max-width: 560px) { .ucards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .ucard { padding: 14px; } .ucard__badge { font-size: 1.1rem; } }
+.ucard__media { position: relative; display: grid; place-items: center; min-height: 64px; margin: -18px -18px 4px; padding: 44px 14px 18px; border-radius: var(--radius-lg) var(--radius-lg) 0 0; background: linear-gradient(160deg, var(--tint), var(--gold-soft)); overflow: hidden; }
+.ucard__plan { display: block; width: 100%; max-width: 230px; height: auto; filter: drop-shadow(0 8px 14px rgba(10, 35, 66, .14)); transition: transform .3s; }
+.ucard:hover .ucard__plan { transform: scale(1.04); }
+.ucard__media .ucard__badge { position: absolute; top: 10px; left: 10px; padding: 6px 11px; font-size: 1.05rem; box-shadow: var(--shadow); }
+.ucard__hint { position: absolute; right: 10px; bottom: 6px; font-size: .66rem; color: var(--muted); font-style: italic; }
+@media (max-width: 560px) { .ucard__media { margin: -14px -14px 2px; padding: 34px 10px 16px; } .ucard__media .ucard__badge { font-size: .9rem; } }

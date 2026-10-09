@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.14.0** + plugin Hoàng Hiệp CRM **2.20.14**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.14.1** + plugin Hoàng Hiệp CRM **2.20.14**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.14.1: thẻ loại căn có hình minh họa
+
+- Mục Layout căn: dự án chưa có ảnh layout thật thì hiện thẻ từng loại căn (Studio, 1PN, 2PN, 3PN, Duplex, Penthouse, Shophouse) với **hình minh họa bố trí phòng tự vẽ** (ghi rõ "Hình minh họa"), diện tích, số phòng ngủ, giá từ (nếu có) và nút "Nhận layout & giá". Có ảnh layout thật thì vẫn hiện như cũ.
 
 ## Có gì mới – giao diện 2.14.0 + plugin 2.20.14: bố cục trang dự án mới
 
