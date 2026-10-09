@@ -1,0 +1,89 @@
+import json
+content = """<p>Đà Nẵng đang đề xuất một danh mục <strong>dự án cấp bách Đà Nẵng</strong> cần triển khai ngay trong giai đoạn 2026–2030, gồm 7 dự án được áp dụng cơ chế đặc thù để rút ngắn thủ tục. Trong đó có hai cái tên tác động trực tiếp đến bất động sản: <strong>tuyến cao tốc nội thị từ trung tâm đến Chu Lai</strong> và <strong>cải tạo cảnh quan hai bờ sông Hàn</strong>.</p>
+<p><em>Lưu ý nguồn tin: thông tin về danh mục 7 dự án được trang cộng đồng Danang 35K Feet chia sẻ ngày 9/10/2026. Đến thời điểm viết bài, Hoàng Hiệp chưa thấy văn bản chính thức hoặc báo chí công bố đầy đủ danh mục; bài sẽ được cập nhật khi có nguồn chính thức.</em></p>
+
+<!--hh-featured-->
+
+<h2>Danh mục 7 dự án cấp bách Đà Nẵng gồm những gì?</h2>
+<p>Theo thông tin được chia sẻ, 7 dự án được chia theo nguồn vốn như sau:</p>
+<table>
+<thead><tr><th>Nhóm</th><th>Số dự án</th><th>Dự án đã nêu tên</th></tr></thead>
+<tbody>
+<tr><td>Hợp tác công tư PPP (hợp đồng BT)</td><td>2</td><td>Tuyến đường cao tốc nội thị từ Trung tâm đến Chu Lai; Cải tạo cảnh quan hai bên bờ sông Hàn</td></tr>
+<tr><td>Đầu tư công</td><td>1</td><td>Chưa công bố tên</td></tr>
+<tr><td>Vốn ngoài ngân sách</td><td>4</td><td>Chưa công bố tên (dự kiến chia sẻ sau)</td></tr>
+</tbody>
+</table>
+<p>Các dự án trong danh mục được đề xuất áp dụng <strong>cơ chế đặc thù</strong> trong lựa chọn nhà đầu tư, lựa chọn nhà thầu theo quy định pháp luật, đồng thời rút ngắn thời gian làm thủ tục đầu tư để bảo đảm tiến độ.</p>
+<p>Một điểm cần hiểu đúng: một số dự án hạ tầng giao thông lớn được đề xuất gần đây (như <a href="/da-nang-de-xuat-xay-cau-moi-qua-song-han/">cầu mới qua sông Hàn</a>) không có trong danh mục này. Lý do được giải thích là dự án chưa đáp ứng tiêu chí xét duyệt, hoặc vẫn được đầu tư trong giai đoạn 2026–2030 nhưng theo trình tự thông thường, không áp dụng cơ chế đặc thù. Nói cách khác, không có tên trong danh mục cấp bách <strong>không có nghĩa là dự án bị bỏ</strong>.</p>
+
+<h2>Cao tốc nội thị trung tâm Đà Nẵng – Chu Lai: đã biết gì?</h2>
+<p>Đây là dự án được nhắc đến nhiều nhất từ đầu năm 2026. Theo các báo đã đưa tin trước đó:</p>
+<ul>
+<li><strong>Quy mô:</strong> tuyến dài gần 90 km nối trung tâm Đà Nẵng với khu đô thị phía Nam (Tam Kỳ – Chu Lai), giai đoạn đầu 4–6 làn xe, có tính đến các khu đô thị TOD dọc tuyến.</li>
+<li><strong>Hướng tuyến:</strong> một đoạn khoảng 41,8 km tận dụng, nâng cấp, mở rộng tuyến ven biển 129 (ĐT 619) hiện có.</li>
+<li><strong>Vốn ước tính:</strong> giai đoạn 1 khoảng 15.000 tỷ đồng; giai đoạn hoàn chỉnh có thể hơn 30.800 tỷ đồng (số liệu nghiên cứu, chưa phải tổng mức đầu tư được duyệt).</li>
+<li><strong>Chủ trương:</strong> kết luận của Chủ tịch UBND thành phố ngày 13/3/2026 thống nhất sự cần thiết đầu tư; dự án cần điều chỉnh quy hoạch vì chưa được cập nhật.</li>
+<li><strong>Hình thức:</strong> trước đây thành phố nghiên cứu cả đầu tư công và PPP; theo danh mục mới, dự án được xếp vào nhóm PPP (hợp đồng BT).</li>
+</ul>
+<p><strong>Ý nghĩa với bất động sản:</strong> nếu thành hiện thực, trục này rút ngắn thời gian từ trung tâm Đà Nẵng về Điện Ngọc, Hội An, Nam Hội An và xa hơn là Tam Kỳ – Chu Lai. Đất nền, biệt thự nghỉ dưỡng ven biển phía Nam và các khu đô thị dọc đường 129 là nhóm được nhắc đến nhiều nhất. Xem thêm: <a href="/duong-ven-bien-129-vo-chi-cong-bat-dong-san-ven-bien-hoi-an/">đường ven biển Võ Chí Công và bất động sản ven biển Hội An</a>.</p>
+
+<h2>Cải tạo cảnh quan hai bờ sông Hàn</h2>
+<p>Sông Hàn là "mặt tiền" của Đà Nẵng. Trước danh mục mới, thành phố đã có một số dự án cảnh quan ven sông như cải tạo bờ Đông (khu vực đường Trần Hưng Đạo) và dự án chiếu sáng "Dòng sông ánh sáng". Việc đưa <strong>cải tạo cảnh quan hai bên bờ sông Hàn</strong> vào nhóm PPP cấp bách cho thấy thành phố muốn làm đồng bộ, nhanh hơn ở trục trung tâm.</p>
+<p>Quy mô, tổng mức đầu tư và phạm vi cụ thể của dự án cảnh quan này <strong>chưa được công bố</strong>.</p>
+<p><strong>Ý nghĩa với bất động sản:</strong> không gian công cộng ven sông đẹp hơn là lợi thế trực tiếp cho căn hộ, khách sạn, nhà phố hai bờ sông Hàn – nhóm sản phẩm vốn đã có giá trị cao. Tham khảo: <a href="/can-ho-view-song-han-du-an-va-gia/">căn hộ view sông Hàn và giá tham khảo</a>, <a href="/du-an/sun-symphony-residence/">Sun Symphony Residence</a>, <a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a>, <a href="/du-an/sun-cosmo-residence/">Sun Cosmo Residence</a>.</p>
+
+<h2>Hợp đồng BT là gì, khác đầu tư công thế nào?</h2>
+<p>BT (xây dựng – chuyển giao) là một loại hợp đồng trong phương thức đối tác công tư (PPP): nhà đầu tư bỏ vốn xây công trình rồi chuyển giao cho Nhà nước, và được thanh toán theo quy định của pháp luật về PPP. Với thành phố, cách làm này giúp có công trình sớm mà không phải chờ bố trí đủ vốn ngân sách. Với người dân và người mua nhà, điều cần theo dõi là <strong>ai là nhà đầu tư, thanh toán bằng gì và tiến độ cam kết</strong> – các thông tin này sẽ rõ khi dự án được lựa chọn nhà đầu tư.</p>
+
+<h2>Cơ chế đặc thù giúp rút ngắn thời gian ra sao?</h2>
+<p>Theo thông tin được chia sẻ, các dự án trong danh mục được áp dụng cơ chế đặc thù trong lựa chọn nhà đầu tư, nhà thầu và rút ngắn thời gian thủ tục đầu tư. Thực tế, Đà Nẵng đã áp dụng cơ chế đặc thù cho nhiều dự án, đất đai theo các nghị quyết của Quốc hội (như Nghị quyết 170/2024/QH15 và 29/2026/QH16). Văn bản cụ thể áp dụng cho danh mục 7 dự án cấp bách sẽ được Hoàng Hiệp cập nhật khi có công bố chính thức.</p>
+
+<h2>Người mua bất động sản nên đọc tin này thế nào?</h2>
+<ul>
+<li><strong>Phân biệt "đề xuất" và "đã duyệt":</strong> danh mục đang ở bước đề xuất. Tiến độ thực tế phụ thuộc vào phê duyệt, lựa chọn nhà đầu tư và giải phóng mặt bằng.</li>
+<li><strong>Cẩn trọng với lời chào "đất ngay mặt tiền cao tốc":</strong> hướng tuyến cao tốc nội thị còn đang thẩm định; lô đất trong phạm vi tuyến có thể bị thu hồi. Xem cách <a href="/kiem-tra-phap-ly-quy-hoach-nha-dat-da-nang/">kiểm tra pháp lý, quy hoạch nhà đất Đà Nẵng</a>.</li>
+<li><strong>Ưu tiên tài sản có giá trị sử dụng ngay:</strong> căn hộ ven sông Hàn đã bàn giao, đất nền có sổ ở khu đã hình thành – hạ tầng mới là điểm cộng thêm.</li>
+<li><strong>Theo dõi 5 dự án chưa công bố tên:</strong> nhất là 4 dự án vốn ngoài ngân sách – thường là các dự án đô thị, thương mại có tác động trực tiếp đến thị trường.</li>
+</ul>
+<p>Xem bức tranh rộng hơn: <a href="/tin-ha-tang-da-nang-thang-10-2026/">tin hạ tầng Đà Nẵng tháng 10/2026</a>, <a href="/toan-canh-ha-tang-da-nang-2026-tac-dong-bat-dong-san/">toàn cảnh hạ tầng Đà Nẵng 2026</a>.</p>
+<p>Anh chị cần tư vấn căn hộ ven sông Hàn hoặc đất nền phía Nam theo trục hạ tầng mới, gọi/Zalo <strong>Hoàng Hiệp – 0904 567 009</strong>.</p>
+<p><em>Nguồn tham khảo: trang Danang 35K Feet (danh mục 7 dự án, 9/10/2026); thông tin nền về cao tốc nội thị và cảnh quan sông Hàn tổng hợp từ các báo dẫn bên dưới.</em></p>"""
+d = {
+ "slug": "da-nang-de-xuat-7-du-an-cap-bach-2026-2030",
+ "title": "Đà Nẵng đề xuất 7 dự án cấp bách 2026–2030: cao tốc nội thị Chu Lai, cảnh quan sông Hàn",
+ "excerpt": "Đà Nẵng đề xuất 7 dự án cấp bách cần triển khai ngay giai đoạn 2026–2030, áp dụng cơ chế đặc thù: 2 dự án PPP (cao tốc nội thị trung tâm – Chu Lai, cảnh quan hai bờ sông Hàn), 1 dự án đầu tư công, 4 dự án vốn ngoài ngân sách. Tác động đến bất động sản.",
+ "keyword": "dự án cấp bách Đà Nẵng",
+ "keywords_extra": ["cao tốc nội thị Đà Nẵng Chu Lai", "cảnh quan sông Hàn"],
+ "category": "Hạ tầng & quy hoạch",
+ "tags": ["Hạ tầng Đà Nẵng", "Bất động sản Đà Nẵng", "Quy hoạch Đà Nẵng", "Đầu tư công Đà Nẵng", "Sông Hàn", "Cao tốc nội thị Đà Nẵng Chu Lai", "Hội An"],
+ "content": content,
+ "seo": {
+  "seo_title": "Dự án cấp bách Đà Nẵng 2026–2030: 7 dự án, cơ chế đặc thù",
+  "desc": "Dự án cấp bách Đà Nẵng 2026–2030: 7 dự án áp dụng cơ chế đặc thù, gồm cao tốc nội thị trung tâm – Chu Lai, cảnh quan hai bờ sông Hàn. Tác động BĐS.",
+  "points": [
+   "Đà Nẵng đề xuất 7 dự án cấp bách triển khai ngay giai đoạn 2026–2030, áp dụng cơ chế đặc thù.",
+   "2 dự án PPP (BT): cao tốc nội thị trung tâm – Chu Lai; cải tạo cảnh quan hai bờ sông Hàn.",
+   "1 dự án đầu tư công và 4 dự án vốn ngoài ngân sách chưa công bố tên.",
+   "Thông tin danh mục từ trang Danang 35K Feet; chưa thấy văn bản chính thức công bố đầy đủ."
+  ],
+  "faq": [
+   ["7 dự án cấp bách của Đà Nẵng giai đoạn 2026–2030 gồm những dự án nào?", "Theo thông tin được chia sẻ ngày 9/10/2026: 2 dự án PPP (hợp đồng BT) là tuyến cao tốc nội thị từ trung tâm đến Chu Lai và cải tạo cảnh quan hai bên bờ sông Hàn; 1 dự án đầu tư công và 4 dự án vốn ngoài ngân sách chưa công bố tên."],
+   ["Dự án cấp bách được áp dụng cơ chế gì?", "Cơ chế đặc thù trong lựa chọn nhà đầu tư, lựa chọn nhà thầu theo quy định pháp luật và rút ngắn thời gian thực hiện thủ tục đầu tư."],
+   ["Cao tốc nội thị Đà Nẵng – Chu Lai dài bao nhiêu, vốn bao nhiêu?", "Theo các báo trước đó, tuyến dài gần 90 km, giai đoạn 1 ước khoảng 15.000 tỷ đồng, giai đoạn hoàn chỉnh có thể hơn 30.800 tỷ đồng; hướng tuyến và phân kỳ còn đang thẩm định."],
+   ["Cầu mới qua sông Hàn có trong danh mục cấp bách không?", "Không. Một số dự án giao thông mới đề xuất chưa có trong danh mục do chưa đáp ứng tiêu chí, hoặc vẫn đầu tư trong 2026–2030 nhưng không áp dụng cơ chế đặc thù."]
+  ]
+ },
+ "sources": [
+  "https://danviet.vn/da-nang-tinh-lam-cao-toc-noi-thi-gan-90-km-noi-thang-chu-lai-d1409821.html",
+  "https://www.vietnamplus.vn/da-nang-thong-nhat-xay-dung-tuyen-cao-toc-noi-thi-ket-noi-chu-lai-post1098726.vnp",
+  "https://plo.vn/chu-tich-ubnd-tp-da-nang-day-nhanh-du-an-duong-bo-cao-toc-noi-thi-noi-chu-lai-post907344.html",
+  "https://doanhnhan.baophapluat.vn/da-nang-cong-bo-350-du-an-dat-dai-duoc-ap-dung-co-che-dac-thu.html"
+ ],
+ "follow_sources": True,
+ "image": {"name": "da-nang-7-du-an-cap-bach-2026-2030", "alt": "7 dự án cấp bách Đà Nẵng 2026–2030: cao tốc nội thị Chu Lai, cảnh quan sông Hàn", "caption": "Đồ hoạ: hiephoangmt.com, tổng hợp từ thông tin được chia sẻ ngày 9/10/2026."}
+}
+json.dump(d, open('07-du-an-cap-bach.json','w'), ensure_ascii=False, indent=1)
+import re
+txt=re.sub('<[^>]+>',' ',content)
+print(len(d['seo']['seo_title']), len(d['seo']['desc']), len(txt.split()))
