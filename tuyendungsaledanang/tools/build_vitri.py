@@ -102,7 +102,7 @@ DUAN_SHORT = f"""<section class="sec" id="du-an">
       <h2 class="h2">Bán sản phẩm <em>khách đã biết tên</em></h2>
       <p class="lead">Sun Group, Vinhomes, Đạt Phương: thương hiệu chủ đầu tư làm một nửa việc thuyết phục.</p>
     </div>
-    <ul class="pchips"><li>Sun FourS Tower</li><li>Casamia Balanca Hội An</li><li>Vinhomes Hải Vân Bay</li><li>Sun Galaxy Complex</li><li>Sun Symphony Residence</li><li>Sun SPANA</li></ul>
+    <ul class="pchips"><li><a href="https://www.sun-fours-tower.com" target="_blank" rel="noopener">Sun FourS Tower →</a></li><li><a href="https://www.casamia-balanca.com.vn" target="_blank" rel="noopener">Casamia Balanca Hội An →</a></li><li><a href="https://www.giohangvinhaivanbay.com" target="_blank" rel="noopener">Vinhomes Hải Vân Bay →</a></li><li><a href="https://www.sun-galaxy-complex.com.vn" target="_blank" rel="noopener">Sun Galaxy Complex →</a></li><li><a href="https://www.symphonyresidence.vn" target="_blank" rel="noopener">Sun Symphony Residence →</a></li><li><a href="https://www.sun-spanatower.com" target="_blank" rel="noopener">Sun SPANA →</a></li></ul>
     <p class="more"><a href="{SITE}/#du-an">Xem thông tin từng dự án →</a></p>
   </div>
 </section>
@@ -115,8 +115,10 @@ EXTRA_CSS = """<style>
 .reasons span{color:var(--muted);font-size:15px}
 .dayphoto{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:30% center;border-radius:22px;box-shadow:0 16px 36px rgba(27,45,107,.18)}
 .more{text-align:center;margin-top:20px;font-weight:800}.more a{color:var(--orange);text-decoration:none}.more.light a{color:#FFB98F}
-.pchips{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.pchips li{background:var(--soft);border:1px solid var(--line);color:var(--navy);font-weight:800;padding:10px 16px;border-radius:999px}
+.pchips{list-style:none;padding:0;margin:22px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:900px}
+@media(min-width:760px){.pchips{grid-template-columns:repeat(3,1fr)}}
+.pchips li{background:var(--soft);border:1px solid var(--line);border-radius:14px;text-align:center}
+.pchips a{display:block;padding:12px 14px;color:var(--navy);font-weight:800;text-decoration:none}
 .p90{display:grid;gap:14px;margin-top:24px}
 @media(min-width:900px){.p90{grid-template-columns:repeat(4,1fr)}}
 .p90 div{background:#fff;border:1px solid var(--line);border-top:4px solid var(--orange);border-radius:14px;padding:18px}
@@ -271,7 +273,6 @@ def page(p):
     </div>
     <div class="faq">
 ''' + ''.join(f'      <details><summary>{q}</summary><p>{a}</p></details>\n' for q, a in p['faq']) + '''    </div>
-    <div class="cta-row"><a class="btn" href="#dang-ky">Ứng tuyển ngay →</a></div>
   </div>
 </section>
 '''
