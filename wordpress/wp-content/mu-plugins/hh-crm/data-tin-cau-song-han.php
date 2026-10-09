@@ -160,7 +160,8 @@ function hh_news_article_slugs() {
 add_filter(
 	'rank_math/json_ld',
 	static function ( $data ) {
-		if ( ! is_singular( 'post' ) || ! in_array( get_post_field( 'post_name', get_queried_object_id() ), hh_news_article_slugs(), true ) ) {
+		$id = get_queried_object_id();
+		if ( ! is_singular( 'post' ) || ( ! in_array( get_post_field( 'post_name', $id ), hh_news_article_slugs(), true ) && ! get_post_meta( $id, '_hh_news_article', true ) ) ) {
 			return $data;
 		}
 		foreach ( $data as $key => $node ) {

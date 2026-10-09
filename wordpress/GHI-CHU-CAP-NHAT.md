@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.2** + plugin Hoàng Hiệp CRM **2.18.7**)
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.2** + plugin Hoàng Hiệp CRM **2.19.0**)
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.19.0: Nhập bài nhanh (không cần tải zip cho mỗi bài tin)
+
+Từ nay mỗi bài tin mới: Hoàng Hiệp nhận **1 file gói bài (.txt)** → vào **Dự án → Nhập bài nhanh** → mở file, **Ctrl+A**, **Ctrl+C** → dán vào ô → **Tạo bài**.
+- Bài tạo ở **Bản nháp**, đủ ảnh đại diện (ảnh nhúng trong gói), tiêu đề/mô tả/từ khoá Rank Math, thẻ, hỏi đáp, nguồn, schema NewsArticle. Xem trước rồi **Đăng**.
+- Dán lại gói cùng bài khi bài còn là bản nháp → cập nhật bản nháp. Bài đã đăng thì không bị ghi đè.
+- Người soạn tạo gói bằng `php wordpress/scripts/dong-goi-bai.php bai.json anh.jpg > goi-bai.txt`.
 
 ## Có gì mới – plugin 2.18.7: bỏ mục chấm "Content AI" của Rank Math
 
