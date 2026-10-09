@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nhập bài nhanh</title>
+<style>
+:root{--bg:#f4efe6;--card:#fff;--ink:#222;--muted:#666;--navy:#1f3a4d;--gold:#a8743a;--wp:#2271b1;--line:#e2d8c6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15191d;--card:#1f252b;--ink:#eee;--muted:#aaa;--line:#333}}
+:root[data-theme="dark"]{--bg:#15191d;--card:#1f252b;--ink:#eee;--muted:#aaa;--line:#333}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px}
+h1{font-size:26px;margin:8px 0 4px}
+.lead{color:var(--muted);margin:0 0 20px}
+.part{background:var(--navy);color:#fff;border-radius:12px;padding:12px 16px;margin:28px 0 12px;font-weight:700}
+.part small{display:block;font-weight:400;opacity:.8}
+.step{display:grid;grid-template-columns:1fr 240px;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+@media (max-width:620px){.step{grid-template-columns:1fr}.phone{margin:0 auto}}
+.num{display:inline-block;background:var(--gold);color:#fff;border-radius:50%;width:30px;height:30px;text-align:center;line-height:30px;font-weight:700;margin-right:8px}
+.step h2{font-size:18px;margin:0 0 8px;display:flex;align-items:center}
+.step ol,.step ul{margin:6px 0;padding-left:20px}
+.tip{background:#fff6e5;color:#5a4320;border-radius:8px;padding:8px 10px;font-size:14px;margin-top:8px}
+.phone{width:220px;height:400px;border:8px solid #111;border-radius:28px;background:#fff;color:#222;overflow:hidden;font-size:12px;position:relative}
+.bar{background:#1d2327;color:#fff;padding:8px 10px;font-weight:600}
+.bar.claude{background:#f0eee6;color:#222}
+.pad{padding:10px}
+.btn{display:inline-block;background:var(--wp);color:#fff;border-radius:4px;padding:6px 10px;font-weight:600}
+.btn.gold{background:#d97757}
+.hl{outline:3px solid #e53935;outline-offset:2px;border-radius:4px}
+.menu div{padding:6px 10px;border-bottom:1px solid #eee}
+.menu .sub{padding-left:22px;color:#444}
+.file{border:1px solid #ccc;border-radius:6px;padding:8px;display:flex;gap:8px;align-items:center;margin:6px 0}
+.ico{width:26px;height:32px;background:#e8eef5;border-radius:3px;display:grid;place-items:center;font-size:10px;color:#2271b1;font-weight:700}
+.bubble{background:#f0eee6;border-radius:10px;padding:8px;margin:6px 0}
+.bubble.me{background:#d97757;color:#fff;margin-left:30px}
+.notice{border-left:4px solid #00a32a;background:#f0f6ea;padding:6px;margin:6px 0}
+.shot{height:60px;background:linear-gradient(135deg,#e44,#c22);border-radius:6px;color:#fff;font-weight:700;display:grid;place-items:center;text-align:center;font-size:10px}
+input[type=file]{font-size:11px}
+footer{color:var(--muted);font-size:14px;margin:24px 0}
+</style>
+</head>
+<body>
+<main>
+<h1>Đăng tin tức bằng điện thoại</h1>
+<p class="lead">Từ tin trên Facebook hay báo đến bài đăng chuẩn SEO trên hiephoangmt.com. Mỗi bài mất khoảng 1–2 phút. Khung có <span style="outline:3px solid #e53935;padding:0 4px">viền đỏ</span> là chỗ cần bấm.</p>
+
+<div class="part">PHẦN 0 – Cài 1 lần duy nhất (trên máy tính)<small>Đã cài gói 2.19.1 rồi thì bỏ qua, sang Phần 1.</small></div>
+<div class="step">
+<div>
+<h2><span class="num">0</span>Cài gói 2.19.1</h2>
+<ol>
+<li>Tải file <b>hoang-hiep-tron-goi.zip</b> mới nhất Claude gửi.</li>
+<li>Vào InterData → cPanel → <b>Trình quản lý tệp</b> → mở <code>public_html/wp-content</code>.</li>
+<li>Bấm <b>Tải lên</b>, chọn file zip.</li>
+<li>Bấm chuột phải vào file zip → <b>Giải nén</b> → chọn ghi đè.</li>
+<li>Vào trang quản trị → <b>Plugin</b>: dòng Hoàng Hiệp CRM ghi <b>2.19.1</b> là xong.</li>
+</ol>
+</div>
+<div class="phone"><div class="bar">Plugin</div><div class="pad"><b>Hoàng Hiệp CRM</b><br><span style="color:#666">Vô hiệu hóa</span><br><br><span class="hl">Phiên bản 2.19.1</span> | Bởi Hoàng Hiệp</div></div>
+</div>
+
+<div class="part">PHẦN 1 – Gửi tin cho Claude</div>
+<div class="step">
+<div>
+<h2><span class="num">1</span>Chụp màn hình tin</h2>
+<ul>
+<li>Thấy tin hay trên Facebook hay báo thì chụp màn hình.</li>
+<li>Bài dài: bấm <b>Xem thêm</b> rồi chụp hết, có thể chụp 3–5 tấm.</li>
+<li>Nhớ chụp cả các ảnh trong bài, ví dụ bảng danh sách dự án.</li>
+</ul>
+<div class="tip">Hoặc chép chữ: giữ ngón tay lên đoạn văn → <b>Sao chép</b> → dán vào tin nhắn gửi Claude.</div>
+</div>
+<div class="phone"><div class="bar" style="background:#1877f2">Facebook</div><div class="pad"><b>Danang 35K Feet</b><div class="shot">THÀNH PHỐ ĐÀ NẴNG ĐỀ XUẤT 07 DỰ ÁN…</div><p>Nội dung bài… <span class="hl">Xem thêm</span></p></div></div>
+</div>
+
+<div class="step">
+<div>
+<h2><span class="num">2</span>Mở phiên làm việc với Claude</h2>
+<ul>
+<li><b>Cách A:</b> mở app <b>Claude</b> → mở menu ☰ góc trái → chọn <b>Code</b> → chọn phiên <b>"Web WordPress hiephoangmt.com"</b>.</li>
+<li><b>Cách B:</b> mở Chrome/Safari, vào link:<br><code style="word-break:break-all">claude.ai/code/session_011HGb6VAzLiwbq5KWLxGuh9</code></li>
+</ul>
+<div class="tip">Lưu link vào dấu trang hoặc đưa ra màn hình chính cho lần sau: Chrome → ⋮ → <b>Thêm vào Màn hình chính</b>.</div>
+</div>
+<div class="phone"><div class="bar claude">☰ Claude</div><div class="menu"><div>Chat mới</div><div class="hl">Code</div><div class="sub">Web WordPress hiephoangmt.com</div><div class="sub">CRM quản lý đội nhóm BĐS</div></div></div>
+</div>
+
+<div class="step">
+<div>
+<h2><span class="num">3</span>Gửi ảnh cho Claude</h2>
+<ol>
+<li>Bấm nút <b>+</b> hoặc biểu tượng 📎 cạnh ô gõ chữ.</li>
+<li>Chọn các ảnh vừa chụp.</li>
+<li>Gõ: <i>"viết bài này"</i> → bấm <b>Gửi</b>.</li>
+</ol>
+<div class="tip">Claude kiểm chứng nguồn chính thức, viết bài chuẩn SEO, làm ảnh đại diện, rồi gửi lại <b>1 file .txt</b>. Thường mất 10–15 phút.</div>
+</div>
+<div class="phone"><div class="bar claude">Web WordPress hiephoangmt.com</div><div class="pad"><div class="bubble me">[3 ảnh] viết bài này</div><div class="bubble">Đã viết xong bài “07 dự án…”. File gói bài:</div><div class="file hl"><span class="ico">TXT</span>goi-bai-07-du-an.txt</div></div></div>
+</div>
+
+<div class="part">PHẦN 2 – Đưa bài lên web</div>
+<div class="step">
+<div>
+<h2><span class="num">4</span>Lưu file về điện thoại</h2>
+<ol>
+<li>Bấm vào file <b>.txt</b> Claude gửi.</li>
+<li>Chọn <b>Tải xuống</b> hoặc <b>Lưu vào Tệp</b>.</li>
+</ol>
+<div class="tip">Android: file nằm trong <b>Tệp → Tải xuống (Download)</b>. iPhone: chọn <b>Lưu vào Tệp → Trên iPhone</b>.</div>
+</div>
+<div class="phone"><div class="bar">goi-bai-07-du-an.txt</div><div class="pad"><p style="word-break:break-all;color:#888">HHBAI1:eyJzbHVnIjoi…</p><span class="btn hl">⬇ Tải xuống</span></div></div>
+</div>
+
+<div class="step">
+<div>
+<h2><span class="num">5</span>Vào trang quản trị → Nhập bài nhanh</h2>
+<ol>
+<li>Mở Chrome/Safari, vào <code>hiephoangmt.com/wp-admin</code> và đăng nhập.</li>
+<li>Bấm nút <b>☰</b> (góc trên bên trái) để mở menu.</li>
+<li>Chọn <b>Dự án</b> → <b>Nhập bài nhanh</b>.</li>
+</ol>
+</div>
+<div class="phone"><div class="bar">☰ Hoàng Hiệp</div><div class="menu"><div>Bài viết</div><div style="background:#2271b1;color:#fff">Dự án</div><div class="sub">Tất cả dự án</div><div class="sub">Nhập dữ liệu Đà Nẵng</div><div class="sub hl">Nhập bài nhanh</div><div>Khách hàng</div></div></div>
+</div>
+
+<div class="step">
+<div>
+<h2><span class="num">6</span>Chọn file → Tạo bài</h2>
+<ol>
+<li>Bấm <b>Chọn tệp</b> (Choose file).</li>
+<li>Chọn file <b>.txt</b> vừa tải trong <b>Tải xuống</b>.</li>
+<li>Bấm nút xanh <b>Tạo bài</b>, chờ vài giây.</li>
+</ol>
+<div class="tip">Không cần dán gì vào ô chữ lớn, chọn file là đủ.</div>
+</div>
+<div class="phone"><div class="bar">Nhập bài nhanh</div><div class="pad"><b>Chọn file gói bài:</b><div class="hl" style="margin:6px 0;padding:4px"><input type="file" disabled></div><p style="color:#666">hoặc dán nội dung gói bài:</p><div style="border:1px solid #ccc;height:60px;border-radius:4px"></div><p><span class="btn hl">Tạo bài</span></p></div></div>
+</div>
+
+<div class="step">
+<div>
+<h2><span class="num">7</span>Xem trước → Đăng</h2>
+<ol>
+<li>Hiện khung xanh <b>"Đã tạo bản nháp…"</b>.</li>
+<li>Bấm <b>Xem trước</b> để đọc bài như khách sẽ thấy.</li>
+<li>Thấy ổn: quay lại, bấm <b>Mở để sửa / Đăng</b> → bấm <b>Đăng</b> (góc trên bên phải) → bấm <b>Đăng</b> lần nữa để xác nhận.</li>
+</ol>
+<div class="tip">Muốn sửa câu chữ: sửa ngay trong trang soạn bài rồi mới bấm Đăng. Không đăng ngay thì bài nằm ở <b>Bài viết → Bản nháp</b>.</div>
+</div>
+<div class="phone"><div class="bar">Nhập bài nhanh</div><div class="pad"><div class="notice">Đã tạo bản nháp: <b>Đà Nẵng đề xuất 07 dự án…</b><br><span class="hl" style="color:#2271b1">Xem trước</span> · <span class="hl" style="color:#2271b1">Mở để sửa / Đăng</span></div><br><div style="text-align:right"><span class="btn hl">Đăng</span></div></div></div>
+</div>
+
+<div class="step">
+<div>
+<h2><span class="num">8</span>Xoá bộ nhớ đệm (nếu chưa thấy bài)</h2>
+<ul>
+<li>Trên thanh đen trên cùng: <b>LiteSpeed Cache → Purge All</b>.</li>
+<li>Mở <code>hiephoangmt.com/tin-tuc/</code>: bài mới nằm đầu trang.</li>
+</ul>
+</div>
+<div class="phone"><div class="bar">LiteSpeed Cache ▾</div><div class="menu"><div class="hl">Purge All</div><div>Purge All – CSS/JS</div></div></div>
+</div>
+
+<div class="part">Lỗi thường gặp</div>
+<div class="step" style="grid-template-columns:1fr">
+<ul>
+<li><b>"Gói bài không đúng / chép chưa đủ":</b> file tải bị lỗi. Tải lại file từ Claude rồi chọn lại.</li>
+<li><b>"Đã có bài đang đăng với đường dẫn…":</b> bài này đã đăng rồi, không cần làm lại.</li>
+<li><b>Không thấy mục Nhập bài nhanh:</b> chưa cài gói 2.19.1 (xem Phần 0).</li>
+<li><b>Bấm Tạo bài báo lỗi trang trắng / 403:</b> chụp màn hình gửi Claude.</li>
+</ul>
+</div>
+<footer>Hướng dẫn cho hiephoangmt.com · plugin Hoàng Hiệp CRM 2.19.1</footer>
+</main>
+</body>
+</html>
