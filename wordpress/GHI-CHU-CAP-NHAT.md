@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.2** + plugin Hoàng Hiệp CRM **2.20.3**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.2** + plugin Hoàng Hiệp CRM **2.20.4**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.4: Sun Solar có sẵn hình + chính sách trong gói
+
+- Bấm **Dự án → Nhập dữ liệu Đà Nẵng** là trang **Sun Solar Residence** tự có: chính sách CSBH04, bảng giá 34 căn, lịch thanh toán, vay vốn, ưu đãi, và 11 ảnh (đại diện, thư viện, tiện ích, mặt bằng tầng 5 / 6 / 8 – 19). Không cần chọn 3 file gói nữa.
+- Ảnh được tải ngầm vào Thư viện vài ảnh mỗi lượt – mở vài trang web hoặc chờ vài phút là đủ ảnh.
+- Đã nhập 3 file gói Sun Solar bằng Nhập nhanh trước đó thì phần ảnh tự bỏ qua (không bị trùng).
 
 ## Có gì mới – plugin 2.20.3: cập nhật web bằng điện thoại (gói cap-nhat-nhanh.zip)
 

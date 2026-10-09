@@ -2,7 +2,8 @@
 /**
  * Ảnh từ link (Google Drive hoặc link ảnh trực tiếp): dán link vào ô "Link ảnh" của dự án, máy chủ web tự tải ảnh về
  * Thư viện, gắn vào Thư viện ảnh / Ảnh tiện ích / Ảnh mặt bằng, và đặt ảnh đại diện nếu dự án chưa có.
- * Mỗi dòng: Link | Chú thích (alt) | Mục: thư viện (mặc định) / tiện ích / mặt bằng / tổng thể (sơ đồ mặt bằng tổng) / tiến độ (ảnh thực tế) / đại diện.
+ * Mỗi dòng: Link | Chú thích (alt) | Mục: thư viện (mặc định) / tiện ích / mặt bằng / tổng thể (sơ đồ mặt bằng tổng) / tiến độ (ảnh thực tế) / đại diện
+ *            | Tiêu đề ảnh (tuỳ chọn, VD tên tầng hiện trên tab mặt bằng).
  * Link Google Drive phải chia sẻ "Bất kỳ ai có đường liên kết"; link THƯ MỤC không tải được – dán link từng file.
  * Mỗi link chỉ tải một lần (ghi nhớ trong _hh_img_links).
  */
@@ -124,8 +125,9 @@ function hh_img_links_import( $post_id, $limit = 2 ) {
 			continue;
 		}
 		update_post_meta( $id, '_wp_attachment_image_alt', $alt ?: $title );
-		if ( $alt ) {
-			wp_update_post( array( 'ID' => $id, 'post_excerpt' => $alt ) );
+		if ( $alt || ! empty( $parts[3] ) ) {
+			// Cột 4 (tuỳ chọn): tiêu đề ảnh – VD tên tầng cho tab mặt bằng ("Tầng 8 – 19"), tên tiện ích.
+			wp_update_post( array_filter( array( 'ID' => $id, 'post_excerpt' => $alt, 'post_title' => sanitize_text_field( $parts[3] ?? '' ) ) ) );
 		}
 		if ( 'dai-dien' === $where || ! has_post_thumbnail( $post_id ) ) {
 			set_post_thumbnail( $post_id, $id );
