@@ -20,7 +20,10 @@ function hh_posts_cau_song_han( $posts ) {
 		'status'    => 'draft',
 		'date'      => '2026-10-09 08:00:00',
 		'image'     => 'plugin:img/tin-tuc/de-xuat-cau-moi-qua-song-han-so-do.jpg',
-		'image_alt' => 'Sơ đồ minh hoạ 5 cầu qua sông Hàn và vị trí đề xuất cầu mới, Đà Nẵng',
+		'image_alt' => 'Sơ đồ minh hoạ vị trí đề xuất cầu mới qua sông Hàn và 5 cầu hiện hữu, Đà Nẵng',
+		'keywords_extra' => array( 'hầm chui qua sông Hàn' ),
+		'follow_sources' => true,
+		'rev'       => '2026-10-09b', // Thêm mục hầm chui, ảnh trong bài, nguồn dofollow.
 		'content'   => <<<'HTML'
 <p>Đà Nẵng đang tính đến một <strong>cầu mới qua sông Hàn</strong>. Tại buổi làm việc với Bí thư Thành ủy Lê Ngọc Quang ngày 11/9/2026, Sở Xây dựng thành phố đề xuất nghiên cứu xây thêm một cây cầu nối hai bờ Hải Châu – Sơn Trà, phấn đấu khởi công trước năm 2030. Lý do được nêu là các trục giao thông Đông – Tây hiện hữu, nhất là những tuyến đi qua cầu Sông Hàn, cầu Rồng và cầu Trần Thị Lý, đang quá tải vào giờ cao điểm.</p>
 <p>Cần nói rõ ngay từ đầu: đây là <strong>đề xuất của cơ quan chuyên môn</strong>, chưa phải dự án đã được phê duyệt chủ trương đầu tư. Bài viết dưới đây tách bạch những gì đã có nguồn chính thức, những gì còn chờ công bố, và người đang quan tâm <a href="/bat-dong-san-hai-chau-2026/">bất động sản Hải Châu</a>, <a href="/bat-dong-san-son-tra-2026/">Sơn Trà</a> nên đọc thông tin này thế nào.</p>
@@ -40,6 +43,8 @@ function hh_posts_cau_song_han( $posts ) {
 </tbody>
 </table>
 
+<!--hh-featured-->
+
 <h2>Vì sao Đà Nẵng cần thêm một cây cầu qua sông Hàn?</h2>
 <p>Sông Hàn chia trung tâm Đà Nẵng thành hai nửa: bờ Tây là quận trung tâm cũ Hải Châu với khu hành chính, thương mại; bờ Đông là Sơn Trà với dải biển Mỹ Khê, khu khách sạn, căn hộ du lịch. Mọi dòng người đi làm, đi học, du khách di chuyển giữa hai bờ đều phải dồn qua các cây cầu. Theo Sở Xây dựng, giao thông Đông – Tây hiện tập trung trên 5 trục chính:</p>
 <ol>
@@ -55,10 +60,24 @@ function hh_posts_cau_song_han( $posts ) {
 <h2>Cầu mới qua sông Hàn sẽ nằm ở đâu?</h2>
 <p>Đây là câu hỏi nhiều người quan tâm nhất, nhưng hiện <strong>chưa có vị trí chính thức</strong>. Bài báo nhắc đến khu vực cuối đường Đống Đa (phường Hải Châu), nơi trước đây từng được nghiên cứu cho phương án hầm chui qua sông Hàn. Một số thông tin cần biết về lịch sử khu vực này:</p>
 <ul>
-<li><strong>Phương án hầm chui:</strong> được đưa ra từ khoảng năm 2016, dài hơn 1.300 m, nối khu vực Đống Đa – Trần Phú (Hải Châu) sang Vân Đồn – Trần Hưng Đạo (Sơn Trà). Theo báo Đại biểu Nhân dân, hầm được đưa vào quy hoạch thời kỳ 2021–2030, tầm nhìn 2050, với giai đoạn đầu tư dự kiến <strong>sau năm 2030</strong>.</li>
+<li><strong>Phương án hầm chui qua sông Hàn:</strong> từng được nghiên cứu ở chính khu vực này (xem mục bên dưới).</li>
 <li><strong>Cuộc thi ý tưởng cầu:</strong> thành phố từng tổ chức thi thiết kế cho một công trình vượt sông ở vị trí nút Đống Đa – Như Nguyệt (bờ Tây) sang Vân Đồn – Lê Văn Duyệt – Trần Hưng Đạo (bờ Đông). Các phương án dự thi có mức kinh phí ước tính khác nhau theo từng kiểu kết cấu. Đây là số liệu của cuộc thi trước đây, <strong>không phải tổng mức đầu tư của đề xuất 2026</strong>.</li>
 </ul>
 <p>Vì vậy, nếu thấy thông tin "cầu ở Đống Đa, vốn X tỷ, khởi công năm Y" lan truyền trên mạng xã hội, anh chị nên đối chiếu với văn bản của UBND, HĐND thành phố trước khi tin.</p>
+
+<h2>Hầm chui qua sông Hàn: phương án cũ khác gì cầu mới?</h2>
+<p>Trước khi có đề xuất cầu mới, Đà Nẵng đã nhiều năm nghiên cứu <strong>hầm chui qua sông Hàn</strong> để nối hai bờ ở phía Bắc trung tâm. Hai phương án hiện ở hai trạng thái rất khác nhau:</p>
+<table>
+<thead><tr><th>Tiêu chí</th><th>Hầm chui qua sông Hàn</th><th>Cầu mới qua sông Hàn</th></tr></thead>
+<tbody>
+<tr><td>Thời điểm đưa ra</td><td>Khoảng năm 2016</td><td>Sở Xây dựng đề xuất ngày 11/9/2026</td></tr>
+<tr><td>Vị trí</td><td>Đống Đa – Trần Phú (Hải Châu) sang Vân Đồn – Trần Hưng Đạo (Sơn Trà)</td><td>Chưa chốt; báo chí nhắc khu vực cuối đường Đống Đa</td></tr>
+<tr><td>Quy mô</td><td>Dài hơn 1.300 m</td><td>Chưa công bố</td></tr>
+<tr><td>Trong quy hoạch</td><td>Có, quy hoạch thời kỳ 2021–2030, tầm nhìn 2050</td><td>Mới ở mức đề xuất</td></tr>
+<tr><td>Thời gian đầu tư</td><td>Dự kiến sau năm 2030</td><td>Phấn đấu khởi công trước năm 2030</td></tr>
+</tbody>
+</table>
+<p>Hầm chui không ảnh hưởng tĩnh không cho tàu thuyền và không chắn tầm nhìn dọc sông, nhưng thường tốn kém và thi công phức tạp hơn khi đi dưới lòng sông, gần khu dân cư đông đúc. Cầu thì xây nhanh hơn nhưng phải tính chiều cao thông thuyền và cảnh quan hai bờ – nơi có cầu Sông Hàn, cầu Rồng là biểu tượng của thành phố. Hiện <strong>chưa có văn bản nào cho biết cầu mới sẽ thay thế hay tồn tại song song với phương án hầm chui qua sông Hàn</strong>; bài viết sẽ cập nhật khi thành phố công bố.</p>
 
 <h2>Liên quan gì đến kế hoạch đầu tư công trung hạn 2026–2030?</h2>
 <p>Ngày 6/10/2026, HĐND TP Đà Nẵng khóa XI khai mạc kỳ họp thứ 6 (chuyên đề) và thông qua 22 nghị quyết, trong đó có nghị quyết <strong>điều chỉnh, bổ sung kế hoạch vốn đầu tư công trung hạn giai đoạn 2026–2030</strong>. Trước đó, kế hoạch đầu tư công trung hạn 2026–2030 của thành phố được duyệt với tổng vốn ngân sách địa phương hơn 138.800 tỷ đồng (theo Báo Đầu tư).</p>
@@ -114,6 +133,7 @@ HTML,
 				array( 'Cầu mới qua sông Hàn nằm ở đâu?', 'Chưa có vị trí chính thức. Báo chí nhắc đến khu vực cuối đường Đống Đa (Hải Châu) – nơi từng nghiên cứu phương án hầm vượt sông – nhưng vị trí cụ thể sẽ do bước lập chủ trương đầu tư xác định.' ),
 				array( 'Khi nào cầu mới qua sông Hàn khởi công?', 'Sở Xây dựng đề xuất phấn đấu khởi công trước năm 2030. Đây là mục tiêu; tiến độ thực tế phụ thuộc vào phê duyệt chủ trương, bố trí vốn, thiết kế và giải phóng mặt bằng.' ),
 				array( 'Cầu mới qua sông Hàn có tổng vốn bao nhiêu?', 'Chưa có con số chính thức. Các con số đang lan truyền (như 500 tỷ hay 2.300 tỷ đồng) chưa được xác minh qua văn bản của HĐND, UBND thành phố.' ),
+				array( 'Hầm chui qua sông Hàn có còn được làm không?', 'Theo quy hoạch thời kỳ 2021–2030, tầm nhìn 2050, hầm chui qua sông Hàn (Đống Đa – Trần Phú sang Vân Đồn – Trần Hưng Đạo, dài hơn 1.300 m) dự kiến đầu tư sau năm 2030. Chưa có văn bản cho biết đề xuất cầu mới thay thế phương án hầm.' ),
 				array( 'Có nên mua đất gần vị trí dự kiến làm cầu?', 'Nên thận trọng. Vị trí chưa chốt, đất trong phạm vi nút giao có thể bị thu hồi. Hãy kiểm tra quy hoạch và chọn tài sản có giá trị sử dụng thật, coi hạ tầng là điểm cộng.' ),
 			),
 		),

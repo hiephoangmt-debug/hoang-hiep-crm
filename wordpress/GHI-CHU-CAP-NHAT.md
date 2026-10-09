@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.1** + plugin Hoàng Hiệp CRM **2.18.4**)
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.1** + plugin Hoàng Hiệp CRM **2.18.5**)
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.18.5: bài cầu sông Hàn thêm từ khoá "hầm chui qua sông Hàn", sửa lỗi Rank Math
+
+- Bài nháp **cầu mới qua sông Hàn**: thêm mục *Hầm chui qua sông Hàn: phương án cũ khác gì cầu mới?* (bảng so sánh) và câu hỏi đáp; từ khoá Rank Math = "cầu mới qua sông Hàn" (chính) + "hầm chui qua sông Hàn" (phụ).
+- Sửa 3 lỗi Rank Math: ảnh trong bài có alt chứa từ khoá; liên kết nguồn (báo, cơ quan nhà nước) không còn nofollow; Rank Math nhận mục lục tự động của giao diện.
+- Bài vẫn là **Bản nháp**. Nội dung nháp được ghi lại bản mới (bản cũ còn trong Bản sửa đổi).
 
 ## Có gì mới – plugin 2.18.4: tin mới đăng ngay, không bị "lên lịch"
 

@@ -198,3 +198,12 @@ function hh_rm_enqueue( $hook ) {
 	wp_enqueue_script( 'hh-rankmath', HH_CRM_URL . 'rankmath.js', array( 'wp-hooks' ), HH_CRM_VERSION, true );
 	wp_localize_script( 'hh-rankmath', 'hhRankMath', array( 'content' => hh_rm_project_text( get_the_ID() ) ) );
 }
+
+/** Giao diện Hoàng Hiệp tự tạo mục lục bài viết → báo cho Rank Math để không chấm lỗi "không dùng Table of Contents plugin". */
+add_filter(
+	'rank_math/researches/toc_plugins',
+	static function ( $plugins ) {
+		$plugins['hoang-hiep-crm/hoang-hiep-crm.php'] = 'Mục lục Hoàng Hiệp';
+		return $plugins;
+	}
+);

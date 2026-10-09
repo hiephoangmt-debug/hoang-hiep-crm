@@ -387,11 +387,23 @@ function hh_news_build_content( $n, $seo ) {
 			$html .= '<h3>' . esc_html( $question ) . "</h3>\n<p>" . esc_html( $answer ) . "</p>\n";
 		}
 	}
-	$links = array_map( static fn( $u ) => '<a href="' . esc_url( $u ) . '" rel="nofollow noopener" target="_blank">' . esc_html( wp_parse_url( $u, PHP_URL_HOST ) ) . '</a>', $n['sources'] ?? array() );
+	$rel   = empty( $n['follow_sources'] ) ? 'nofollow noopener' : 'noopener'; // Nguồn báo chí, cơ quan nhà nước: có thể để dofollow.
+	$links = array_map( static fn( $u ) => '<a href="' . esc_url( $u ) . '" rel="' . $rel . '" target="_blank">' . esc_html( wp_parse_url( $u, PHP_URL_HOST ) ) . '</a>', $n['sources'] ?? array() );
 	if ( ! $links ) {
 		return $html . "\n<p><em>Thông tin mang tính tham khảo, cập nhật " . esc_html( wp_date( 'm/Y' ) ) . '. Giá và chính sách thay đổi theo từng đợt – liên hệ để nhận thông tin mới nhất.</em></p>';
 	}
 	return $html . "\n<p><em>Nguồn tổng hợp: " . implode( ', ', $links ) . '. Bài viết mang tính tham khảo, thông tin dự án có thể thay đổi theo quyết định của cơ quan có thẩm quyền.</em></p>';
+}
+
+/** Chỗ đánh dấu <!--hh-featured--> trong bài → ảnh đại diện (alt chứa từ khoá) để Rank Math nhận ảnh trong nội dung. */
+function hh_news_featured_in_content( $html, $id, $n ) {
+	$thumb = get_post_thumbnail_id( $id );
+	if ( false === strpos( $html, '<!--hh-featured-->' ) || ! $thumb ) {
+		return $html;
+	}
+	$img = wp_get_attachment_image( $thumb, 'large', false, array( 'alt' => $n['image_alt'] ?? $n['title'], 'loading' => 'lazy' ) );
+	$cap = ! empty( $n['image_caption'] ) ? '<figcaption>' . esc_html( $n['image_caption'] ) . '</figcaption>' : '';
+	return str_replace( '<!--hh-featured-->', '<figure class="wp-block-image">' . $img . $cap . '</figure>', $html );
 }
 
 /**
@@ -443,6 +455,7 @@ function hh_import_news() {
 		$post    = get_posts( array( 'name' => $n['slug'], 'post_type' => 'post', 'post_status' => array( 'publish', 'future', 'draft', 'pending', 'private' ), 'numberposts' => 1 ) )[0] ?? null;
 		if ( $post ) {
 			$id   = $post->ID;
+			$content = hh_news_featured_in_content( $content, $id, $n );
 			if ( 'future' === $post->post_status && ! empty( $n['date'] ) && empty( $n['status'] ) ) {
 				// Bản trước lỡ lên lịch tin có ngày cố định (do múi giờ) → đăng ngay.
 				wp_update_post( array( 'ID' => $id, 'post_status' => 'publish', 'post_date' => wp_date( 'Y-m-d H:i:s', $date ), 'post_date_gmt' => gmdate( 'Y-m-d H:i:s', $date ) ) );
@@ -510,8 +523,16 @@ function hh_import_news() {
 				}
 			}
 		}
+		$stored = get_post_field( 'post_content', $id );
+		if ( false !== strpos( $stored, '<!--hh-featured-->' ) && has_post_thumbnail( $id ) ) {
+			$hash_ok = md5( $stored ) === get_post_meta( $id, '_hh_news_hash', true );
+			wp_update_post( array( 'ID' => $id, 'post_content' => hh_news_featured_in_content( $stored, $id, $n ) ) );
+			if ( $hash_ok ) {
+				update_post_meta( $id, '_hh_news_hash', md5( get_post_field( 'post_content', $id ) ) );
+			}
+		}
 		$meta = array(
-			'rank_math_focus_keyword' => $n['keyword'],
+			'rank_math_focus_keyword' => implode( ',', array_merge( array( $n['keyword'] ), (array) ( $n['keywords_extra'] ?? array() ) ) ),
 			'rank_math_title'         => $seo['seo_title'] ?? '',
 			'rank_math_description'   => $seo['desc'] ?? '',
 			'hh_post_faq'             => implode( "\n", array_map( static fn( $f ) => str_replace( '|', '/', $f[0] ) . ' | ' . str_replace( '|', '/', $f[1] ), $seo['faq'] ?? array() ) ),
