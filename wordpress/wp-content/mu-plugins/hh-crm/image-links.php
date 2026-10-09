@@ -253,3 +253,32 @@ add_action(
 		);
 	}
 );
+
+/** Tổng số ảnh còn chờ tải của các dự án trong hàng chờ. */
+function hh_img_links_queue_pending() {
+	$n = 0;
+	foreach ( array_filter( array_map( 'absint', (array) get_option( 'hh_img_links_queue', array() ) ) ) as $id ) {
+		$n += hh_img_links_pending( $id );
+	}
+	return $n;
+}
+
+/**
+ * Tải ngay ảnh trong hàng chờ (trang Nhập dữ liệu → nút "Tải ảnh ngay"): chạy liên tục khoảng 20 giây mỗi lượt,
+ * trang tự tải lại cho đến khi hết – không phải chờ WP-Cron (web có bộ nhớ đệm thì cron chạy rất chậm).
+ */
+function hh_img_links_run_now( $seconds = 20 ) {
+	$start = time();
+	do {
+		$queue = array_filter( array_map( 'absint', (array) get_option( 'hh_img_links_queue', array() ) ) );
+		if ( ! $queue ) {
+			break;
+		}
+		do_action( 'hh_img_links_cron' );
+	} while ( time() - $start < $seconds );
+	wp_clear_scheduled_hook( 'hh_img_links_cron' );
+	if ( get_option( 'hh_img_links_queue' ) ) {
+		wp_schedule_single_event( time() + 20, 'hh_img_links_cron' );
+	}
+	return hh_img_links_queue_pending();
+}

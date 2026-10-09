@@ -771,6 +771,13 @@ function hh_import_page() {
 			$error = $e->getMessage() . ' (' . basename( $e->getFile() ) . ':' . $e->getLine() . ')';
 		}
 	}
+	$img_left = null;
+	if ( isset( $_REQUEST['hh_img_now'] ) && function_exists( 'hh_img_links_run_now' ) && ( isset( $_POST['hh_img_now'] ) ? check_admin_referer( 'hh_import_du_an' ) : wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_n'] ?? '' ) ), 'hh_img_now' ) ) ) {
+		if ( function_exists( 'set_time_limit' ) ) {
+			@set_time_limit( 120 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
+		}
+		$img_left = hh_img_links_run_now( 20 );
+	}
 	$published = null;
 	if ( isset( $_POST['hh_publish_week'] ) && check_admin_referer( 'hh_import_du_an' ) && function_exists( 'hh_news_publish_now' ) ) {
 		$published = hh_news_publish_now( absint( $_POST['hh_publish_week'] ) );
@@ -790,6 +797,18 @@ function hh_import_page() {
 			<?php wp_nonce_field( 'hh_import_du_an' ); ?>
 			<p><button class="button button-primary" name="hh_import" value="1">Nhập / cập nhật dữ liệu</button></p>
 		</form>
+		<?php $img_wait = function_exists( 'hh_img_links_queue_pending' ) ? hh_img_links_queue_pending() : 0; ?>
+		<?php if ( null !== $img_left && $img_left ) : ?>
+			<div class="notice notice-info"><p>Đang tải ảnh dự án… còn <?php echo (int) $img_left; ?> ảnh. Trang tự tải tiếp, đừng tắt.</p></div>
+			<meta http-equiv="refresh" content="1;url=<?php echo esc_url( add_query_arg( array( 'hh_img_now' => 1, '_n' => wp_create_nonce( 'hh_img_now' ) ), admin_url( 'edit.php?post_type=du-an&page=hh-import-du-an' ) ) ); ?>">
+		<?php elseif ( null !== $img_left ) : ?>
+			<div class="notice notice-success"><p>Đã tải xong ảnh dự án. Vào LiteSpeed Cache → Purge All để thấy ảnh trên web.</p></div>
+		<?php elseif ( $img_wait ) : ?>
+			<form method="post">
+				<?php wp_nonce_field( 'hh_import_du_an' ); ?>
+				<p><strong>Còn <?php echo (int) $img_wait; ?> ảnh dự án chờ tải</strong> (mặt bằng, phối cảnh…). <button class="button button-primary" name="hh_img_now" value="1">Tải ảnh ngay</button></p>
+			</form>
+		<?php endif; ?>
 		<?php if ( null !== $published ) : ?>
 			<div class="notice notice-success"><p>Đã đăng ngay <?php echo (int) $published; ?> bài viết.</p></div>
 		<?php endif; ?>
