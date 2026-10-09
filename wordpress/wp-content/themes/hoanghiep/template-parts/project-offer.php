@@ -66,7 +66,14 @@ if ( 'discount' !== $part && function_exists( 'hoanghiep_capital_cards' ) && fal
 								<?php if ( $how ) : ?><span class="discount__how"><?php echo esc_html( $how ); ?></span><?php endif; ?>
 							</td>
 							<td class="discount__pct" data-label="Tổng chiết khấu">
-								<span class="discount__val"><b><?php echo esc_html( $pct ); ?></b>
+								<?php
+								// Hiện tổng cộng thẳng các khoản; số thực giảm trên giá niêm yết (trừ nối tiếp) ghi nhỏ bên dưới.
+								$sum  = function_exists( 'hh_px_discount_sum' ) ? hh_px_discount_sum( $how ) : 0;
+								$real = (float) str_replace( ',', '.', preg_replace( '/[^\d,.]/', '', (string) $pct ) );
+								$show = $sum > 0 && abs( $sum - $real ) > 0.05;
+								?>
+								<span class="discount__val"><b><?php echo esc_html( $show ? hh_px_pct( $sum ) : $pct ); ?></b>
+								<?php if ( $show && $real > 0 ) : ?><small class="discount__real">Thực giảm <?php echo esc_html( hh_px_pct( $real ) ); ?> giá niêm yết</small><?php endif; ?>
 								<?php if ( $due ) : ?><span class="discount__due"><?php echo hh_icon( 'clock' ); // phpcs:ignore ?> <?php echo esc_html( $due ); ?></span><?php endif; ?></span>
 							</td>
 							<td class="discount__go data-table__action">
@@ -78,7 +85,7 @@ if ( 'discount' !== $part && function_exists( 'hoanghiep_capital_cards' ) && fal
 			</table>
 		</div>
 		<div class="discount__foot">
-			<p><?php echo $live ? 'Còn <strong>' . esc_html( max( 1, (int) floor( ( $deadline - time() ) / DAY_IN_SECONDS ) ) ) . ' ngày</strong> để nhận mức chiết khấu thanh toán sớm. ' : ''; ?>Chiết khấu cộng dồn so với giá niêm yết, tính lần lượt trên giá chưa VAT – áp dụng như nhau cho mọi căn. Gửi mã căn để nhận số tiền chính xác.</p>
+			<p><?php echo $live ? 'Còn <strong>' . esc_html( max( 1, (int) floor( ( $deadline - time() ) / DAY_IN_SECONDS ) ) ) . ' ngày</strong> để nhận mức chiết khấu thanh toán sớm. ' : ''; ?>Tổng chiết khấu là tổng các khoản ưu đãi. Mỗi khoản được trừ lần lượt trên giá còn lại (chưa VAT) nên số tiền thực giảm thấp hơn một chút (dòng "Thực giảm") – áp dụng như nhau cho mọi căn. Gửi mã căn để nhận số tiền chính xác.</p>
 			<a class="btn btn--navy" href="#lien-he" data-need="Nhận bảng giá dự án" data-msg="<?php echo esc_attr( 'Tính giúp tôi phương án thanh toán có lợi nhất – ' . $title . '. Căn tôi quan tâm: ' ); ?>">Tính giúp tôi phương án có lợi nhất</a>
 		</div>
 	</div>

@@ -27,6 +27,14 @@ add_filter(
 					$projects[ $i ]['meta'][ $key ] = hh_quick_project_value( $fields[ $key ][0], $value );
 				}
 			}
+			// Ưu đãi ghi tổng chiết khấu cộng thẳng (5% + 5% + 10% = 20%) thay cho số trừ nối tiếp ~18,8% đã nhập trước.
+			$projects[ $i ]['fix_meta'] = array_merge(
+				(array) ( $projects[ $i ]['fix_meta'] ?? array() ),
+				array(
+					'hh_p_offer_title' => array( 'Chiết khấu tổng khoảng 18,8% khi thanh toán sớm 95% trước 25/10/2026' ),
+					'hh_p_offer_stats' => array( "~18,8% | Tổng chiết khấu khi thanh toán sớm 95% (trước 25/10/2026)\n70% | Vay tối đa, hỗ trợ lãi suất đến 30 tháng\n28/04/2027 | Dự kiến nhận căn sử dụng (Sun Early Key)\n3 năm | Miễn phí dịch vụ quản lý căn hộ" ),
+				)
+			);
 			$post = get_page_by_path( 'sun-solar-residence', OBJECT, 'du-an' );
 			if ( ! $post || ! get_post_meta( $post->ID, '_hh_quick_post', true ) ) {
 				$projects[ $i ]['meta']['hh_p_image_links'] = implode( "\n", $data['image_links'] );

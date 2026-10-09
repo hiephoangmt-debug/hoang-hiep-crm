@@ -90,7 +90,12 @@ function hh_px_numbers( $post_id = null ) {
 		$items[] = array( hh_px_money( $low ), 'Giá chỉ từ' );
 	}
 	$pct = array();
-	$disc = implode( ' ', array_column( hh_table( 'hh_p_discount_table', 4, $post_id ), 2 ) );
+	$disc = array();
+	foreach ( hh_table( 'hh_p_discount_table', 4, $post_id ) as $row ) {
+		$sum    = hh_px_discount_sum( $row[3] ?? '' );
+		$disc[] = $sum > 0 ? hh_px_pct( $sum ) : ( $row[2] ?? '' ); // Tổng cộng thẳng, như bảng chiết khấu.
+	}
+	$disc = implode( ' ', $disc );
 	foreach ( array( $disc, $m( 'hh_p_offer_title' ), $m( 'hh_p_policy' ) ) as $i => $t ) {
 		$re = $i ? '/(?:chiết khấu|giảm|ưu đãi|tiết kiệm)[^%\n]{0,40}?(\d{1,2}(?:[.,]\d+)?)\s?%/iu' : '/(\d{1,2}(?:[.,]\d+)?)\s?%/u';
 		if ( preg_match_all( $re, $t, $mm ) ) {
@@ -196,4 +201,26 @@ function hh_px_plan_svg( $group ) {
 		return '';
 	}
 	return '<svg class="ucard__plan" viewBox="0 0 200 124" role="img" aria-label="' . esc_attr( 'Hình minh họa bố trí ' . $group ) . '"><g stroke="#0b2447" stroke-width="1.5" font-size="9" font-family="sans-serif" fill="#44526a">' . str_replace( '<text', '<text stroke="none" fill="#44526a"', $out ) . '</g><rect x="10" y="10" width="180" height="104" fill="none" stroke="#0b2447" stroke-width="3.5"/></svg>';
+}
+
+/**
+ * Tổng chiết khấu cộng thẳng từ cột "Cách tính" ("Early Bird 3% + không vay 3% + thanh toán sớm 12%" → 18). Bỏ phần trong ngoặc.
+ * Trả 0 nếu không đọc được.
+ */
+function hh_px_discount_sum( $how ) {
+	$how = preg_replace( '/\([^)]*\)/u', '', (string) $how );
+	$sum = 0;
+	$n   = 0;
+	foreach ( preg_split( '/\s*\+\s*/u', $how ) as $part ) {
+		if ( preg_match( '/(\d+(?:[.,]\d+)?)\s*%/u', $part, $m ) ) {
+			$sum += (float) str_replace( ',', '.', $m[1] );
+			$n++;
+		}
+	}
+	return $n ? $sum : 0;
+}
+
+/** 18 → "18%", 8.5 → "8,5%". */
+function hh_px_pct( $f ) {
+	return str_replace( '.', ',', rtrim( rtrim( number_format( (float) $f, 2, '.', '' ), '0' ), '.' ) ) . '%';
 }
