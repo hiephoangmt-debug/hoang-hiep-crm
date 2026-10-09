@@ -1,3 +1,6 @@
+<?php
+$hh_t = function_exists( 'hh_lang' ) && 'vi' !== hh_lang() ? hh_lang_strings( hh_lang() ) : null;
+?>
 </main>
 <footer class="site-footer">
 	<div class="container site-footer__grid">
@@ -68,9 +71,9 @@
 </footer>
 
 <div class="contact-dock" aria-label="Liên hệ nhanh">
-	<a class="contact-dock__btn contact-dock__btn--call" href="tel:<?php echo esc_attr( hoanghiep_tel() ); ?>"><?php echo hh_icon( 'phone' ); // phpcs:ignore ?><span>Gọi ngay</span></a>
+	<a class="contact-dock__btn contact-dock__btn--call" href="tel:<?php echo esc_attr( hoanghiep_tel() ); ?>"><?php echo hh_icon( 'phone' ); // phpcs:ignore ?><span><?php echo esc_html( $hh_t ? $hh_t['dock_call'] : 'Gọi ngay' ); ?></span></a>
 	<a class="contact-dock__btn contact-dock__btn--zalo" href="https://zalo.me/<?php echo esc_attr( hoanghiep_tel( hoanghiep_opt( 'hh_zalo' ) ) ); ?>" target="_blank" rel="noopener"><b>Zalo</b><span>Chat Zalo</span></a>
-	<a class="contact-dock__btn contact-dock__btn--form" href="<?php echo esc_url( home_url( '/lien-he/' ) ); ?>" data-form-link><?php echo hh_icon( 'mail' ); // phpcs:ignore ?><span>Nhận tư vấn</span></a>
+	<a class="contact-dock__btn contact-dock__btn--form" href="<?php echo esc_url( $hh_t ? '#contact' : home_url( '/lien-he/' ) ); ?>"<?php echo $hh_t ? '' : ' data-form-link'; ?>><?php echo hh_icon( 'mail' ); // phpcs:ignore ?><span><?php echo esc_html( $hh_t ? $hh_t['dock_form'] : 'Nhận tư vấn' ); ?></span></a>
 </div>
 
 <div class="lightbox" hidden>

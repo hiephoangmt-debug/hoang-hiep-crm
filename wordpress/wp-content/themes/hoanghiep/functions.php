@@ -18,6 +18,7 @@ if ( ! defined( 'HH_CRM_VERSION' ) ) {
 require get_theme_file_path( 'inc/customizer.php' );
 require get_theme_file_path( 'inc/components.php' );
 require get_theme_file_path( 'inc/project-extras.php' );
+require get_theme_file_path( 'inc/lang-strings.php' );
 require get_theme_file_path( 'inc/content-tables.php' );
 require get_theme_file_path( 'inc/project-inline-css.php' );
 require get_theme_file_path( 'inc/seo.php' );

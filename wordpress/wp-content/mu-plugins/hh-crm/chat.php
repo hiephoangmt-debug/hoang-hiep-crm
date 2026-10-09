@@ -21,7 +21,8 @@ function hh_chat_opt( $key, $default = '' ) {
 }
 
 function hh_chat_enabled() {
-	return '0' !== (string) hh_chat_opt( 'enabled', '1' );
+	// Trang /en/, /ko/: tắt chat (giao diện chat tiếng Việt).
+	return '0' !== (string) hh_chat_opt( 'enabled', '1' ) && ! ( function_exists( 'hh_lang' ) && 'vi' !== hh_lang() );
 }
 
 /** API key: hằng HH_CLAUDE_API_KEY trong wp-config.php (an toàn hơn) hoặc ô trong trang cài đặt. */

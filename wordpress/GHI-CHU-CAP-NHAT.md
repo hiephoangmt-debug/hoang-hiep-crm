@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.14.2** + plugin Hoàng Hiệp CRM **2.20.14**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.0** + plugin Hoàng Hiệp CRM **2.20.15**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,16 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.0 + plugin 2.20.15: trang tiếng Anh /en/ và tiếng Hàn /ko/
+
+- Nút **VI · EN · KO** trên đầu mọi trang.
+  - Trang chủ → trang riêng /en/, /ko/ (viết tay, thuật ngữ BĐS chuẩn, có SEO riêng: tiêu đề, mô tả, thẻ lang, hreflang).
+  - Các trang tiếng Việt khác (dự án, tin…) → bản dịch tự động của Google (translate.goog), không tạo trang trùng lặp.
+- Nội dung /en/, /ko/: giới thiệu Hiệp, quy định người nước ngoài sở hữu nhà (Luật Nhà ở 2023: hạn mức 30% căn/tòa, 50 năm, sổ hồng đứng tên), dự án đang bán (giá từ quy ra tỷ / 억 동), dịch vụ, quy trình 6 bước, hỏi đáp, form liên hệ.
+- Khách gửi form ở /en/, /ko/ vào mục Khách hàng với nhu cầu "Khách nước ngoài (EN/KO) – …".
+- Trang /en/, /ko/ tự tạo khi cài bản này (Trang → "Da Nang Real Estate for Foreign Buyers", "다낭 부동산 – 외국인 구매 안내"). Không xoá 2 trang này.
+- Lần đầu: **Cài đặt → Đường dẫn tĩnh → Lưu** nếu /en/ báo không tìm thấy.
 
 ## Có gì mới – giao diện 2.14.2: chọn loại căn không phải cuộn tìm ảnh
 
