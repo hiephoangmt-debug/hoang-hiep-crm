@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.2** + plugin Hoàng Hiệp CRM **2.20.0**)
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.2** + plugin Hoàng Hiệp CRM **2.20.1**)
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.1: thêm Sun Solar Residence, Sun Costa Residence
+
+- Thêm 2 dự án Sun Group còn thiếu: **Sun Solar Residence** (9 Lê Duẩn, Hải Châu – 1 tòa 20 tầng, khoảng 256 căn) và **Sun Costa Residence** (Hồ Nghinh – Vương Thừa Vũ, Sơn Trà – 2 tòa 25 tầng, khoảng 640 căn, chủ yếu studio). Giá để "Liên hệ".
+- Trang **Căn hộ Sun Group Đà Nẵng** (/can-ho-sun-group-da-nang/) tự có 2 dự án mới, phần giới thiệu và hỏi đáp cập nhật.
+- Bấm **Dự án → Nhập dữ liệu Đà Nẵng** để tạo 2 dự án; sau đó thêm ảnh đại diện, bảng giá (có thể gửi qua gói Nhập nhanh).
 
 ## Có gì mới – plugin 2.20.0: Nhập nhanh cả DỰ ÁN (tạo mới + cập nhật, có Hoàn tác)
 

@@ -89,10 +89,12 @@ Bấm **Dự án → Nhập dữ liệu Đà Nẵng** để ghi vào Rank Math (
 | Shilla Monogram Quảng Nam · giá Shilla Monogram · bảng giá Shilla Monogram | /du-an/shilla-monogram-quang-nam/ | Shilla Monogram: Bảng giá, chính sách 10/2026 \| Hoàng Hiệp |
 | Spana Tower · giá Spana Tower · bảng giá Spana Tower | /du-an/spana-tower/ | Spana Tower: Bảng giá, chính sách 10/2026 \| Hoàng Hiệp |
 | Sun Cosmo Residence · giá Sun Cosmo Residence · bảng giá Sun Cosmo Residence | /du-an/sun-cosmo-residence/ | Sun Cosmo Residence: Bảng giá, chính sách 10/2026 |
+| Sun Costa Residence · giá Sun Costa Residence · bảng giá Sun Costa Residence | /du-an/sun-costa-residence/ | Sun Costa Residence: Bảng giá, chính sách 10/2026 |
 | Sun Galaxy Complex · giá Sun Galaxy Complex · bảng giá Sun Galaxy Complex | /du-an/sun-galaxy-complex/ | Sun Galaxy Complex: Bảng giá, chính sách 10/2026 |
 | Sun NeO City · giá Sun NeO City · bảng giá Sun NeO City | /du-an/sun-neo-city/ | Sun NeO City: Bảng giá, chính sách 10/2026 \| Hoàng Hiệp |
 | Sun Ponte Residence · giá Sun Ponte Residence · bảng giá Sun Ponte Residence | /du-an/sun-ponte-residence/ | Sun Ponte Residence: Bảng giá, chính sách 10/2026 |
 | Sun Riverpolis · giá Sun Riverpolis · bảng giá Sun Riverpolis | /du-an/sun-riverpolis/ | Sun Riverpolis: Bảng giá, chính sách 10/2026 \| Hoàng Hiệp |
+| Sun Solar Residence · giá Sun Solar Residence · bảng giá Sun Solar Residence | /du-an/sun-solar-residence/ | Sun Solar Residence: Bảng giá, chính sách 10/2026 |
 | Sun Symphony Residence · giá Sun Symphony Residence · bảng giá Sun Symphony Residence | /du-an/sun-symphony-residence/ | Sun Symphony Residence: Bảng giá, chính sách 10/2026 |
 | The Camellia Sơn Trà · giá The Camellia Sơn Trà · bảng giá The Camellia Sơn Trà | /du-an/the-camellia-son-tra/ | The Camellia Sơn Trà: Bảng giá, chính sách 10/2026 |
 | The Filmore Đà Nẵng · giá The Filmore · bảng giá The Filmore | /du-an/the-filmore-da-nang/ | The Filmore: Bảng giá, chính sách 10/2026 \| Hoàng Hiệp |

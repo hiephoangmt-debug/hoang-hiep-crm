@@ -318,5 +318,55 @@ function hh_dataset_sun_group_da_nang( $projects ) {
 		'sources' => array( 'https://datnenhoaxuan.com/mo-ban-riverpolis-dam-sen', 'https://kingreal.com/to-hop-sun-riverpolis-da-nang/', 'https://sungroupvn.com.vn/sun-riverpolis/' ),
 	);
 
+	/* ---------------- Trung tâm & ven biển: Sun Solar Residence, Sun Costa Residence ---------------- */
+	$projects[] = array(
+		'slug'    => 'sun-solar-residence',
+		'title'   => 'Sun Solar Residence Đà Nẵng',
+		'type'    => 'can-ho-so-huu-lau-dai',
+		'area'    => 'hai-chau',
+		'hot'     => true,
+		'excerpt' => 'Tháp căn hộ cao cấp của Sun Group trên đường Lê Duẩn, lõi trung tâm Hải Châu, cách cầu quay sông Hàn khoảng 300 m: 1 tòa 20 tầng, khoảng 256 căn hộ hướng sông Hàn.',
+		'meta'    => array(
+			'hh_p_status'     => 'dang-mo-ban',
+			'hh_p_developer'  => $sun,
+			'hh_p_type'       => 'Căn hộ cao cấp',
+			'hh_p_address'    => '9 Lê Duẩn, phường Hải Châu, Đà Nẵng – cách cầu sông Hàn khoảng 300 m',
+			'hh_p_blocks'     => '1 tòa',
+			'hh_p_floors'     => '20 tầng nổi (số tầng hầm các nguồn ghi 2 – 3)',
+			'hh_p_units'      => 'Khoảng 256 căn hộ',
+			'hh_p_highlights' => "Lõi trung tâm Hải Châu, trên trục Lê Duẩn – cách cầu sông Hàn khoảng 300 m\nTầm nhìn hướng sông Hàn, gần phố đi bộ Bạch Đằng, chợ Hàn\nSố lượng căn ít (khoảng 256 căn) – dòng căn hộ cao cấp giới hạn",
+			'hh_p_amenities_in' => "Hồ bơi bốn mùa\nGym, yoga, spa\nKhu vui chơi trẻ em\n(Theo thông tin đơn vị phân phối)",
+			'hh_p_location_desc' => 'Sun Solar Residence nằm trên đường Lê Duẩn, khu lõi trung tâm hành chính – thương mại của Đà Nẵng, cách cầu sông Hàn khoảng 300 m, đi bộ ra bờ sông Hàn, phố Bạch Đằng, chợ Hàn.',
+			'hh_p_connections' => "300 m | Cầu sông Hàn\n5 phút | Chợ Hàn, phố đi bộ Bạch Đằng\n10 phút | Sân bay quốc tế Đà Nẵng\n10 phút | Biển Mỹ Khê",
+		),
+		'sources' => array( 'https://vnexpress.net/sun-group-ra-mat-thap-can-ho-cao-cap-giua-trung-tam-da-nang-4894133.html', 'https://vnexpress.net/vi-tri-ton-gia-tri-can-ho-hang-sang-sun-solar-residence-4903111.html', 'https://dantri.com.vn/bat-dong-san/sun-solar-residence-va-vi-the-giua-tam-mach-phon-hoa-da-nang-20250617225714160.htm' ),
+	);
+	$projects[] = array(
+		'slug'    => 'sun-costa-residence',
+		'title'   => 'Sun Costa Residence Đà Nẵng',
+		'type'    => 'can-ho-dich-vu',
+		'area'    => 'son-tra',
+		'hot'     => true,
+		'excerpt' => 'Tổ hợp căn hộ cận biển Mỹ Khê của Sun Group tại nút giao Hồ Nghinh – Vương Thừa Vũ (Sơn Trà): 2 tòa 25 tầng, khoảng 640 căn, phần lớn là studio – dòng sản phẩm hướng đến ở và cho thuê du lịch.',
+		'meta'    => array(
+			'hh_p_status'     => 'dang-mo-ban',
+			'hh_p_developer'  => $sun,
+			'hh_p_type'       => 'Căn hộ thương mại dịch vụ (studio – 2 phòng ngủ)',
+			'hh_p_address'    => 'Nút giao Hồ Nghinh – Vương Thừa Vũ, phường Phước Mỹ (cũ), Sơn Trà, Đà Nẵng – cách biển Mỹ Khê khoảng 200 – 300 m',
+			'hh_p_scale'      => 'Khu đất khoảng 3.800 – 4.000 m²',
+			'hh_p_blocks'     => '2 tòa',
+			'hh_p_floors'     => '25 tầng',
+			'hh_p_units'      => 'Khoảng 640 căn (khoảng 80% là studio)',
+			'hh_p_unit_area'  => 'Khoảng 33,8 – 72 m²',
+			'hh_p_ownership'  => 'Sở hữu có thời hạn (căn hộ thương mại dịch vụ)',
+			'hh_p_start'      => '2025',
+			'hh_p_handover'   => 'Dự kiến 2027 (các nguồn ghi khác nhau – cần đối chiếu chủ đầu tư)',
+			'hh_p_highlights' => "Cách biển Mỹ Khê khoảng 200 – 300 m, khu phố du lịch sôi động Hồ Nghinh – Vương Thừa Vũ\nPhần lớn là studio diện tích nhỏ – vốn vào thấp, hợp cho thuê ngắn hạn\nSản phẩm đầu tiên trong bộ sưu tập bất động sản phiên bản giới hạn của Sun Property tại Đà Nẵng",
+			'hh_p_location_desc' => 'Sun Costa Residence nằm tại nút giao Hồ Nghinh – Vương Thừa Vũ, khu An Thượng – Phước Mỹ (Sơn Trà), cách biển Mỹ Khê vài trăm mét – khu vực tập trung khách sạn, nhà hàng và lượng khách du lịch lớn của Đà Nẵng.',
+			'hh_p_connections' => "200 – 300 m | Biển Mỹ Khê\n5 phút | Cầu Rồng, cầu sông Hàn\n10 phút | Sân bay quốc tế Đà Nẵng\n15 phút | Bán đảo Sơn Trà",
+		),
+		'sources' => array( 'https://congly.com.vn/sun-costa-residence-can-ho-can-bien-my-khe-tam-diem-du-lich-da-nang/', 'https://congly.com.vn/sun-costa-residence-to-hop-bat-dong-san-can-bien-sinh-loi-tai-da-nang/' ),
+	);
+
 	return $projects;
 }
