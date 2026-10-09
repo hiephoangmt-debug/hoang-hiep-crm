@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kho ảnh AI – Hoàng Hiệp CRM</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Hoàng Hiệp <span>CRM</span></div>
+    <nav class="tabs">
+      <button class="tab active" data-tab="library">Kho ảnh AI</button>
+      <button class="tab" data-tab="staff">Nhân viên đăng FB</button>
+      <button class="tab" data-tab="mine">Việc đăng của tôi</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Kho ảnh AI -->
+    <section id="tab-library" class="panel active">
+      <div class="card">
+        <h2>Tải ảnh AI lên &amp; giao cho tất cả nhân viên đăng FB</h2>
+        <form id="upload-form">
+          <label class="dropzone" id="dropzone">
+            <input type="file" id="file-input" name="images" accept="image/*" multiple hidden>
+            <strong>Kéo thả ảnh vào đây</strong> hoặc bấm để chọn (JPG, PNG, WEBP – tối đa 15MB/ảnh)
+            <div id="preview" class="preview"></div>
+          </label>
+          <div class="row">
+            <input name="project" placeholder="Dự án / sản phẩm (VD: Vinhomes Ocean Park)">
+          </div>
+          <textarea name="caption" rows="3" placeholder="Nội dung (caption) gợi ý để nhân viên đăng kèm ảnh"></textarea>
+          <div class="row between">
+            <label class="check"><input type="checkbox" name="distribute" checked> Giao ngay cho tất cả nhân viên đang hoạt động</label>
+            <button type="submit" class="btn primary" id="upload-btn">Tải lên</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="row between">
+          <h2>Ảnh trong kho <small id="image-count"></small></h2>
+          <button class="btn" id="distribute-all">Giao toàn bộ ảnh cho tất cả nhân viên</button>
+        </div>
+        <div id="image-grid" class="grid"></div>
+      </div>
+    </section>
+
+    <!-- Nhân viên -->
+    <section id="tab-staff" class="panel">
+      <div class="card">
+        <h2>Thêm nhân viên đăng Facebook</h2>
+        <form id="staff-form" class="row wrap">
+          <input name="name" placeholder="Họ tên *" required>
+          <input name="phone" placeholder="Số điện thoại">
+          <input name="fbUrl" placeholder="Link Facebook cá nhân">
+          <button type="submit" class="btn primary">Thêm</button>
+        </form>
+        <p class="hint">Nhân viên mới sẽ tự động nhận toàn bộ ảnh đang có trong kho.</p>
+      </div>
+      <div class="card">
+        <h2>Danh sách &amp; tiến độ đăng</h2>
+        <table class="table">
+          <thead><tr><th>Nhân viên</th><th>Facebook</th><th>Đã đăng</th><th>Hoạt động</th><th></th></tr></thead>
+          <tbody id="staff-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Việc của tôi -->
+    <section id="tab-mine" class="panel">
+      <div class="card">
+        <div class="row wrap">
+          <select id="me-select"><option value="">— Chọn tên của bạn —</option></select>
+          <select id="me-filter">
+            <option value="pending">Chưa đăng</option>
+            <option value="posted">Đã đăng</option>
+            <option value="">Tất cả</option>
+          </select>
+        </div>
+      </div>
+      <div id="my-list" class="grid"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>

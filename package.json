@@ -1,0 +1,18 @@
+{
+  "name": "hoang-hiep-crm",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CRM – Real Estate Sales Management System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "4.22.3",
+    "multer": "2.0.2"
+  }
+}
