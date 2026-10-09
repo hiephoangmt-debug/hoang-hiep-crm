@@ -11,6 +11,7 @@
     <div class="brand">Hoàng Hiệp <span>CRM</span></div>
     <nav class="tabs">
       <button class="tab active" data-tab="library">Kho ảnh AI</button>
+      <button class="tab" data-tab="template">Tạo ảnh theo mẫu</button>
       <button class="tab" data-tab="staff">Nhân viên đăng FB</button>
       <button class="tab" data-tab="mine">Việc đăng của tôi</button>
     </nav>
@@ -44,6 +45,82 @@
           <button class="btn" id="distribute-all">Giao toàn bộ ảnh cho tất cả nhân viên</button>
         </div>
         <div id="image-grid" class="grid"></div>
+      </div>
+    </section>
+
+    <!-- Tạo ảnh theo mẫu căn hộ -->
+    <section id="tab-template" class="panel">
+      <div class="tpl-layout">
+        <form id="tpl-form" class="tpl-form">
+          <div class="card">
+            <h2>1. Rổ hàng (mỗi dòng 1 căn)</h2>
+            <p class="hint">Dán thẳng từ Excel hoặc ngăn cách bằng dấu <code>|</code>. Thứ tự cột:
+              <b>Mã căn | Tòa | Loại | Tầng | Diện tích | Giá 1 | Giá 2 | Giá 3</b>. Để trống Tòa/Tầng thì tự lấy từ mã căn (VD F2-19-08).</p>
+            <textarea name="units" rows="5" placeholder="F2-19-08 | F2 | 1BR+ | 19 | 53 | 3286876036 | 3188269754 | 2805677384"></textarea>
+          </div>
+
+          <div class="card">
+            <h2>2. Ảnh dùng chung</h2>
+            <div class="file-grid">
+              <label>Phối cảnh (ảnh AI) <input type="file" accept="image/*" data-img="hero"></label>
+              <label>Logo dự án / chủ đầu tư <input type="file" accept="image/*" data-img="logo"></label>
+              <label>Layout gợi ý (3D căn) <input type="file" accept="image/*" data-img="unitLayout"></label>
+              <label>Layout tầng <input type="file" accept="image/*" data-img="floorPlan"></label>
+              <label>Ảnh dưới 1 <input type="file" accept="image/*" data-img="photo1"></label>
+              <label>Ảnh dưới 2 <input type="file" accept="image/*" data-img="photo2"></label>
+              <label>Ảnh dưới 3 <input type="file" accept="image/*" data-img="photo3"></label>
+            </div>
+            <div class="row">
+              <input name="photoLabel1" placeholder="Chữ trên ảnh 1">
+              <input name="photoLabel2" placeholder="Chữ trên ảnh 2 (VD: VIEW THỰC TẾ)">
+              <input name="photoLabel3" placeholder="Chữ trên ảnh 3">
+            </div>
+            <p class="hint">Bấm vào sơ đồ <b>Layout tầng</b> trên ảnh xem trước để đánh dấu vị trí căn (nhớ theo số căn, VD "08").</p>
+          </div>
+
+          <div class="card">
+            <h2>3. Giá &amp; chính sách</h2>
+            <div class="row">
+              <input name="priceLabel1" placeholder="Nhãn giá 1">
+              <input name="priceLabel2" placeholder="Nhãn giá 2">
+              <input name="priceLabel3" placeholder="Nhãn giá 3">
+            </div>
+            <div class="row"><input name="policyTitle" placeholder="Tên chính sách (VD: SUN EARLY KEY)"></div>
+            <div class="policy-grid">
+              <div><input name="p1Top"><input name="p1Value"><input name="p1Sub"></div>
+              <div><input name="p2Top"><input name="p2Value"><input name="p2Sub"></div>
+              <div><input name="p3Top"><input name="p3Value"><input name="p3Sub"></div>
+              <div><input name="p4Top"><input name="p4Value"><input name="p4Sub"></div>
+            </div>
+            <p class="hint">Mỗi ô: dòng trên / số lớn / dòng dưới.</p>
+            <div class="row"><input name="website" placeholder="Website chân trang"></div>
+          </div>
+
+          <div class="card">
+            <h2>4. Caption đăng Facebook</h2>
+            <div class="row"><input name="project" placeholder="Tên dự án (VD: Four S Tower)"></div>
+            <textarea name="caption" rows="7"></textarea>
+            <p class="hint">Biến dùng được: {du_an} {ma_can} {toa} {loai} {tang} {dien_tich} {nhan1} {gia1} {nhan2} {gia2} {nhan3} {gia3} {chinh_sach}</p>
+          </div>
+        </form>
+
+        <div class="tpl-preview">
+          <div class="card sticky">
+            <div class="row between">
+              <h2>Xem trước <small id="tpl-pos"></small></h2>
+              <div class="row">
+                <button type="button" class="btn sm" id="tpl-prev">‹</button>
+                <button type="button" class="btn sm" id="tpl-next">›</button>
+              </div>
+            </div>
+            <canvas id="tpl-canvas" width="1080" height="1500"></canvas>
+            <div class="row between">
+              <button type="button" class="btn" id="tpl-download">Tải ảnh căn này</button>
+              <button type="button" class="btn primary" id="tpl-publish">Tạo tất cả &amp; giao cho NV đăng FB</button>
+            </div>
+            <label class="check"><input type="checkbox" id="tpl-distribute" checked> Giao ngay cho tất cả nhân viên đang hoạt động</label>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -86,5 +163,6 @@
 
   <div id="toast" class="toast"></div>
   <script src="app.js"></script>
+  <script src="template.js"></script>
 </body>
 </html>

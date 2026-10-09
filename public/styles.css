@@ -80,7 +80,27 @@ textarea { margin-top: 10px; resize: vertical; }
 .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(80px); background: #0f1b33; color: #fff; padding: 10px 18px; border-radius: 10px; transition: transform .25s; z-index: 10; max-width: calc(100% - 32px); }
 .toast.show { transform: translateX(-50%) translateY(0); }
 
+/* Tạo ảnh theo mẫu */
+.tpl-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 440px); gap: 18px; align-items: start; }
+.tpl-preview .sticky { position: sticky; top: 12px; }
+#tpl-canvas { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--line); margin-top: 10px; cursor: crosshair; display: block; }
+.file-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.file-grid label { font-size: 13px; color: var(--muted); display: flex; flex-direction: column; gap: 4px; border: 1px solid var(--line); border-radius: 8px; padding: 8px; }
+.file-grid label.has { border-color: var(--ok); color: var(--ok); }
+.file-grid input { border: 0; padding: 0; font-size: 12px; }
+.policy-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
+.policy-grid div { display: flex; flex-direction: column; gap: 4px; }
+.policy-grid input:nth-child(2) { font-weight: 700; }
+code { background: #eef1f6; padding: 1px 5px; border-radius: 4px; }
+
+@media (max-width: 900px) {
+  .tpl-layout { grid-template-columns: 1fr; }
+  .tpl-preview { order: -1; }
+  .tpl-preview .sticky { position: static; }
+}
+
 @media (max-width: 640px) {
+  .policy-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .table thead { display: none; }
   .table tr { display: block; border-bottom: 1px solid var(--line); padding: 8px 0; }
   .table td { display: block; border: 0; padding: 4px 0; }
