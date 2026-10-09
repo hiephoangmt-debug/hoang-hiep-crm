@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.2** + plugin Hoàng Hiệp CRM **2.20.9**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.2** + plugin Hoàng Hiệp CRM **2.20.10**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.10: pháp lý Spana Tower theo Bảng công khai thông tin của CĐT
+
+- Trang Spana: chủ đầu tư (CTCP Tập đoàn Mặt Trời), lô A1-3 (S1) 4.163 m² / A1-4 (S2) 3.572 m², mật độ 72% / 71%, 22 tầng + tum, cao 85,95 m, **1.237 căn (S1 661, S2 576)**, pháp lý: đất ở đô thị, Sở Xây dựng xác nhận đủ điều kiện bán (VB 7111/SXD-QLN 05/5/2026), bảo lãnh VietinBank, không thế chấp.
+- Sửa số căn cũ "khoảng 1.281" → 1.237 ở trang Sun NeO City và các bài viết Spana (chỉ bài chưa sửa tay).
 
 ## Có gì mới – plugin 2.20.9: layout căn hộ Spana Tower
 

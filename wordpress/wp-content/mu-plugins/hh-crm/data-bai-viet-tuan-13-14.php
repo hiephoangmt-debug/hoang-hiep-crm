@@ -556,7 +556,7 @@ HTML
 <thead><tr><th>Dự án</th><th>Quy mô</th><th>Giá tham khảo</th><th>Bàn giao dự kiến</th></tr></thead>
 <tbody>
 <tr><td><a href="/du-an/cora-tower/">Cora Tower</a></td><td>616 căn/tòa, 28 căn/tầng</td><td>Khoảng 45 – 55 triệu/m², từ khoảng 1,7 tỷ</td><td>30/7/2027</td></tr>
-<tr><td><a href="/du-an/spana-tower/">Spana Tower</a></td><td>2 tòa 22 tầng, khoảng 1.281 căn</td><td>Từ khoảng 1,9 – 2,4 tỷ; HĐMB chuyển nhượng khoảng 1,9 – 4,14 tỷ</td><td>30/6/2027</td></tr>
+<tr><td><a href="/du-an/spana-tower/">Spana Tower</a></td><td>2 tòa 22 tầng, 1.237 căn</td><td>Từ khoảng 1,9 – 2,4 tỷ; HĐMB chuyển nhượng khoảng 1,9 – 4,14 tỷ</td><td>30/6/2027</td></tr>
 <tr><td><a href="/du-an/s-light-tower/">S-Light Tower</a></td><td>2 tháp 22 tầng, gần 800 căn, 33,3 – 95,1 m²</td><td>Từ khoảng 2 – 2,4 tỷ (nguồn phân phối)</td><td>Liên hệ</td></tr>
 </tbody>
 </table>
@@ -582,7 +582,7 @@ HTML
 
 <h2>Rủi ro cần lưu ý</h2>
 <ul>
-<li>Nguồn cung căn hộ Sun NeO City lớn (Spana khoảng 1.281 căn, S-Light gần 800 căn, cùng Cora Tower), có thể tạo cạnh tranh giá thuê khi bàn giao đồng loạt.</li>
+<li>Nguồn cung căn hộ Sun NeO City lớn (Spana 1.237 căn, S-Light gần 800 căn, cùng Cora Tower), có thể tạo cạnh tranh giá thuê khi bàn giao đồng loạt.</li>
 <li>Hạ tầng cầu Hòa Xuân kéo dài đến 2029 – nên tính thời gian nắm giữ đủ dài.</li>
 <li>Một số khu trũng ven sông cần xem xét yếu tố ngập khi mưa lớn.</li>
 </ul>

@@ -10,14 +10,15 @@ function hh_posts_tuan_07_08( $posts ) {
 	/* ===================== TUẦN 7 ===================== */
 	$posts[] = array(
 		'slug'     => 'spana-tower-hoa-xuan-gia-mat-bang',
+		'old_meta' => array( 'rank_math_description' => array( 'Mặt bằng Spana Tower Hòa Xuân của Sun Group: 2 tòa 22 tầng, khoảng 1.281 căn, giá tham khảo từ 1,9 tỷ, tiến độ xây dựng. Gọi Hoàng Hiệp nhận bảng giá.' ) ),
 		'title'    => 'Spana Tower Hòa Xuân: giá bán, mặt bằng và loại căn 2026',
-		'excerpt'  => 'Spana Tower là cặp tòa A1.3 – A1.4 của Sun Group ngay chân cầu Hòa Xuân, khoảng 1.281 căn. Tổng hợp giá tham khảo, mặt bằng và tiến độ.',
+		'excerpt'  => 'Spana Tower là cặp tòa A1.3 – A1.4 của Sun Group ngay chân cầu Hòa Xuân, 1.237 căn. Tổng hợp giá tham khảo, mặt bằng và tiến độ.',
 		'keyword'  => 'Spana Tower',
 		'project'  => 'spana-tower',
 		'week'     => 7,
 		'category' => 'Dự án',
 		'content'  => <<<'HTML'
-<p><strong>Spana Tower</strong> là cặp tòa căn hộ A1.3 và A1.4 của Sun Group tại khu đô thị Sun NeO City, mặt tiền Nguyễn Phước Lan, ngay chân cầu Hòa Xuân. Dự án cao 22 tầng nổi, 2 tầng hầm với khoảng 1.281 căn từ Studio đến Penthouse, giá chào bán tham khảo từ khoảng 1,9 – 2,4 tỷ cho căn Studio. Bài viết cập nhật tháng 10/2026, giúp bạn nắm nhanh giá, mặt bằng và những điểm cần kiểm tra trước khi xuống tiền.</p>
+<p><strong>Spana Tower</strong> là cặp tòa căn hộ A1.3 và A1.4 của Sun Group tại khu đô thị Sun NeO City, mặt tiền Nguyễn Phước Lan, ngay chân cầu Hòa Xuân. Dự án cao 22 tầng nổi, 2 tầng hầm với 1.237 căn từ Studio đến Penthouse, giá chào bán tham khảo từ khoảng 1,9 – 2,4 tỷ cho căn Studio. Bài viết cập nhật tháng 10/2026, giúp bạn nắm nhanh giá, mặt bằng và những điểm cần kiểm tra trước khi xuống tiền.</p>
 
 <h2>Spana Tower ở đâu trong Sun NeO City?</h2>
 <p>Sun NeO City là khu đô thị của Sun Group tại Hòa Xuân, phía Nam Đà Nẵng, cùng Sun Riverpolis tạo thành hệ sinh thái hơn 1.000 ha. Trong khu này hiện có ba tòa căn hộ đang bán: Cora Tower, Spana Tower và S-Light Tower.</p>
@@ -25,7 +26,7 @@ function hh_posts_tuan_07_08( $posts ) {
 <p>Nếu bạn muốn so sánh với hai tòa còn lại cùng khu, có thể đọc thêm bài <a href="/cora-tower-sun-neo-city/">Cora Tower – tòa căn hộ trung tâm Sun NeO City</a> và <a href="/s-light-tower-mo-ban-2026/">S-Light Tower đợt mở bán 2026</a>.</p>
 
 <h2>Quy mô và mặt bằng Spana Tower</h2>
-<p>Dự án gồm 2 tòa A1.3 và A1.4, mỗi tòa 22 tầng nổi, chung 2 tầng hầm, tổng khoảng 1.281 căn hộ sở hữu lâu dài. Tầng 1 – 2 là shophouse khối đế và tiện ích nội khu; các tầng cao có căn Penthouse.</p>
+<p>Dự án gồm 2 tòa A1.3 và A1.4, mỗi tòa 22 tầng nổi, chung 2 tầng hầm, tổng 1.237 căn hộ sở hữu lâu dài. Tầng 1 – 2 là shophouse khối đế và tiện ích nội khu; các tầng cao có căn Penthouse.</p>
 <h3>Cơ cấu loại căn</h3>
 <p>Rổ hàng gồm Studio, căn 1PN+, 2PN, 3PN, một số căn duplex và Penthouse. Diện tích theo các trang phân phối: Studio khoảng 31,6 m², 1PN khoảng 54,2 m², 2PN khoảng 70,3 m² và 3PN khoảng 104,3 m² (tham khảo, có thể khác theo từng mã căn).</p>
 <h3>Tiện ích nội khu</h3>
@@ -63,7 +64,7 @@ function hh_posts_tuan_07_08( $posts ) {
 
 <h2>Câu hỏi thường gặp về Spana Tower</h2>
 <h3>Spana Tower có mấy tòa, bao nhiêu căn?</h3>
-<p>Hai tòa A1.3 và A1.4, cao 22 tầng nổi, 2 tầng hầm, tổng khoảng 1.281 căn hộ.</p>
+<p>Hai tòa A1.3 và A1.4, cao 22 tầng nổi, 2 tầng hầm, tổng 1.237 căn hộ.</p>
 <h3>Giá Spana Tower bao nhiêu?</h3>
 <p>Tham khảo từ khoảng 1,9 – 2,4 tỷ cho Studio, khoảng 3,4 – 4,2 tỷ cho căn 2PN; giá chính thức theo bảng giá chủ đầu tư từng đợt.</p>
 
@@ -72,16 +73,16 @@ HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Spana Tower Hòa Xuân: giá bán, mặt bằng 2026',
-			'desc'      => 'Spana Tower Hòa Xuân của Sun Group: 2 tòa 22 tầng, khoảng 1.281 căn, giá tham khảo từ 1,9 tỷ. Xem mặt bằng, tiến độ và nhận bảng giá mới.',
+			'desc'      => 'Spana Tower Hòa Xuân của Sun Group: 2 tòa 22 tầng, 1.237 căn, giá tham khảo từ 1,9 tỷ. Xem mặt bằng, tiến độ và nhận bảng giá mới.',
 			'points'    => array(
-				'2 tòa A1.3 – A1.4, 22 tầng, khoảng 1.281 căn sở hữu lâu dài tại chân cầu Hòa Xuân',
+				'2 tòa A1.3 – A1.4, 22 tầng, 1.237 căn sở hữu lâu dài tại chân cầu Hòa Xuân',
 				'Giá tham khảo: Studio khoảng 1,9 – 2,4 tỷ, 2PN khoảng 3,4 – 4,2 tỷ',
 				'50 căn shophouse khối đế thuộc đợt sản phẩm giới hạn ra mắt 8/2026',
 				'Bàn giao dự kiến 30/6/2027 – cần đối chiếu hợp đồng',
 			),
 			'faq'       => array(
 				array( 'Spana Tower nằm ở đâu?', 'Mặt tiền Nguyễn Phước Lan, ngay chân cầu Hòa Xuân, trong khu đô thị Sun NeO City của Sun Group phía Nam Đà Nẵng.' ),
-				array( 'Spana Tower có bao nhiêu căn hộ?', 'Khoảng 1.281 căn thuộc 2 tòa A1.3 và A1.4, mỗi tòa 22 tầng nổi, chung 2 tầng hầm.' ),
+				array( 'Spana Tower có bao nhiêu căn hộ?', 'Gồm 1.237 căn thuộc 2 tòa A1.3 và A1.4, mỗi tòa 22 tầng nổi, chung 2 tầng hầm.' ),
 				array( 'Giá căn hộ Spana Tower bao nhiêu?', 'Tham khảo từ khoảng 1,9 – 2,4 tỷ cho Studio đến khoảng 5 – 6,5 tỷ cho căn 3PN. Giá chính thức theo bảng giá chủ đầu tư từng đợt.' ),
 				array( 'Khi nào Spana Tower bàn giao?', 'Thông tin hiện có ghi dự kiến 30/6/2027; mốc cụ thể cần đối chiếu hợp đồng mua bán.' ),
 			),
