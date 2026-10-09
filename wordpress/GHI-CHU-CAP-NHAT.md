@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.2** + plugin Hoàng Hiệp CRM **2.20.6**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.2** + plugin Hoàng Hiệp CRM **2.20.7**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.7: mặt bằng Spana Tower (Tòa S1, S2)
+
+- Trang **Spana Tower** thêm mặt bằng 5 tab: S1 – Tầng 1 (shophouse), S1 – Tầng 2 (tiện ích), S1 – Tầng 3, S1 – Tầng 3A – 21, S2 – Tầng 1 (shophouse).
+- Bảng loại căn có diện tích (Studio 31,6 m², 1PN+ 54,2 m², 2PN 62,2 – 75,1 m², 3PN 95,5 – 96,9 m² thông thủy; shophouse 46,5 – 140,4 m²), tiện ích tầng 2 (bể bơi, gym & spa, co-working, cafe, khu trẻ em). Ô anh đã tự sửa giữ nguyên.
 
 ## Có gì mới – plugin 2.20.6: ảnh phối cảnh Spana Tower
 

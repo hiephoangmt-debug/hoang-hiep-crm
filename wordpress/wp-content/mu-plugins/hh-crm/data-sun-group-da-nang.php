@@ -60,6 +60,12 @@ function hh_dataset_sun_group_da_nang( $projects ) {
 	);
 	$projects[] = array(
 		'slug'    => 'spana-tower',
+		'fix_meta' => array(
+			'hh_p_image_links'  => "plugin:img/spana-tower/spana-tower-toan-canh-ven-song-cau-hoa-xuan.jpg | Phối cảnh Spana Tower bên sông Cẩm Lệ, chân cầu Hòa Xuân, Đà Nẵng | đại diện\nplugin:img/spana-tower/spana-tower-truc-duong-chinh-2-toa.jpg | Hai tòa Spana Tower A1.3, A1.4 hai bên trục đường dẫn cầu Hòa Xuân | thư viện\nplugin:img/spana-tower/spana-tower-phoi-canh-tren-cao-ven-song.jpg | Spana Tower nhìn từ trên cao, hướng sông và cầu Hòa Xuân | thư viện\nplugin:img/spana-tower/spana-tower-2-toa-a13-a14-nhin-tu-tren-cao.jpg | Hai tòa Spana Tower và khu nhà phố Sun NeO City ven sông | thư viện\nplugin:img/spana-tower/spana-tower-hoang-hon-khoi-de-thuong-mai.jpg | Khối đế thương mại Spana Tower lúc hoàng hôn | tiện ích",
+			'hh_p_unit_types'   => "Studio | – | – | Liên hệ\nCăn 1PN+ | – | 1 | Liên hệ\nCăn 2PN | – | 2 | Liên hệ\nCăn 3PN | – | 3 | Liên hệ",
+			'hh_p_amenities_in' => "Hồ bơi\nGym & spa\nKids club\nShophouse khối đế tầng 1 – 2",
+			'hh_p_shop_desc'    => 'Tầng 1 – 2 bố trí shophouse khối đế và tiện ích nội khu.',
+		),
 		'title'   => 'Spana Tower Hòa Xuân',
 		'type'    => 'can-ho-so-huu-lau-dai',
 		'area'    => 'cam-le',
@@ -75,13 +81,13 @@ function hh_dataset_sun_group_da_nang( $projects ) {
 			'hh_p_units'       => 'Khoảng 1.281 căn hộ',
 			'hh_p_ownership'   => 'Sở hữu lâu dài',
 			'hh_p_handover'    => '30/06/2027 (dự kiến)',
-			'hh_p_unit_types'  => "Studio | – | – | Liên hệ\nCăn 1PN+ | – | 1 | Liên hệ\nCăn 2PN | – | 2 | Liên hệ\nCăn 3PN | – | 3 | Liên hệ",
-			'hh_p_shop_desc'   => 'Tầng 1 – 2 bố trí shophouse khối đế và tiện ích nội khu.',
+			'hh_p_unit_types'  => "Studio | 31,6 m² (tim tường 35,5 m²) | – | Liên hệ\nCăn 1PN+ | 54,2 m² (tim tường 58,7 m²) | 1 | Liên hệ\nCăn 2PN | 62,2 – 75,1 m² (tim tường 67,2 – 80,4 m²) | 2 | Liên hệ\nCăn 3PN | 95,5 – 96,9 m² (tim tường 102,1 – 104,4 m²) | 3 | Liên hệ\nShophouse tầng 1 | 46,5 – 140,4 m² | – | Liên hệ",
+			'hh_p_shop_desc'   => 'Tầng 1 mỗi tòa (S1, S2) bố trí khoảng 24 – 25 căn shophouse mặt đường, diện tích 46,5 – 140,4 m²; tầng 2 là tiện ích nội khu (bể bơi, gym & spa, co-working, cafe, khu trẻ em).',
 			'hh_p_penthouse_desc' => 'Có căn Penthouse trên các tầng cao – liên hệ để nhận danh sách căn.',
-			'hh_p_amenities_in' => "Hồ bơi\nGym & spa\nKids club\nShophouse khối đế tầng 1 – 2",
+			'hh_p_amenities_in' => "Bể bơi tầng 2\nGym & spa\nKhu vui chơi trẻ em\nPhòng sinh hoạt cộng đồng\nCo-working\nCafe\nShophouse khối đế tầng 1",
 			'hh_p_connections' => "Chân cầu | Cầu Hòa Xuân\n10 phút | Trung tâm thành phố, cầu Rồng\n10 phút | Sân bay quốc tế Đà Nẵng\n30 phút | Bán đảo Sơn Trà, phố cổ Hội An",
 			// Phối cảnh chủ đầu tư (anh Hiệp gửi 09/10/2026), ảnh đi kèm plugin trong img/spana-tower/.
-			'hh_p_image_links' => "plugin:img/spana-tower/spana-tower-toan-canh-ven-song-cau-hoa-xuan.jpg | Phối cảnh Spana Tower bên sông Cẩm Lệ, chân cầu Hòa Xuân, Đà Nẵng | đại diện\nplugin:img/spana-tower/spana-tower-truc-duong-chinh-2-toa.jpg | Hai tòa Spana Tower A1.3, A1.4 hai bên trục đường dẫn cầu Hòa Xuân | thư viện\nplugin:img/spana-tower/spana-tower-phoi-canh-tren-cao-ven-song.jpg | Spana Tower nhìn từ trên cao, hướng sông và cầu Hòa Xuân | thư viện\nplugin:img/spana-tower/spana-tower-2-toa-a13-a14-nhin-tu-tren-cao.jpg | Hai tòa Spana Tower và khu nhà phố Sun NeO City ven sông | thư viện\nplugin:img/spana-tower/spana-tower-hoang-hon-khoi-de-thuong-mai.jpg | Khối đế thương mại Spana Tower lúc hoàng hôn | tiện ích",
+			'hh_p_image_links' => "plugin:img/spana-tower/spana-tower-toan-canh-ven-song-cau-hoa-xuan.jpg | Phối cảnh Spana Tower bên sông Cẩm Lệ, chân cầu Hòa Xuân, Đà Nẵng | đại diện\nplugin:img/spana-tower/spana-tower-truc-duong-chinh-2-toa.jpg | Hai tòa Spana Tower A1.3, A1.4 hai bên trục đường dẫn cầu Hòa Xuân | thư viện\nplugin:img/spana-tower/spana-tower-phoi-canh-tren-cao-ven-song.jpg | Spana Tower nhìn từ trên cao, hướng sông và cầu Hòa Xuân | thư viện\nplugin:img/spana-tower/spana-tower-2-toa-a13-a14-nhin-tu-tren-cao.jpg | Hai tòa Spana Tower và khu nhà phố Sun NeO City ven sông | thư viện\nplugin:img/spana-tower/spana-tower-hoang-hon-khoi-de-thuong-mai.jpg | Khối đế thương mại Spana Tower lúc hoàng hôn | tiện ích\nplugin:img/spana-tower/spana-tower-mat-bang-s1-tang-1-shophouse.jpg | Mặt bằng S1 – Tầng 1 (shophouse) Spana Tower | mặt bằng | S1 – Tầng 1 (shophouse)\nplugin:img/spana-tower/spana-tower-mat-bang-s1-tang-2-tien-ich.jpg | Mặt bằng S1 – Tầng 2 (tiện ích) Spana Tower | mặt bằng | S1 – Tầng 2 (tiện ích)\nplugin:img/spana-tower/spana-tower-mat-bang-s1-tang-3.jpg | Mặt bằng S1 – Tầng 3 Spana Tower | mặt bằng | S1 – Tầng 3\nplugin:img/spana-tower/spana-tower-mat-bang-s1-tang-3a-21.jpg | Mặt bằng S1 – Tầng 3A – 21 Spana Tower | mặt bằng | S1 – Tầng 3A – 21\nplugin:img/spana-tower/spana-tower-mat-bang-s2-tang-1-shophouse.jpg | Mặt bằng S2 – Tầng 1 (shophouse) Spana Tower | mặt bằng | S2 – Tầng 1 (shophouse)",
 		),
 		'sources' => array( 'https://minhminhgroup.vn/sun-group-mo-ban-can-ho-hoa-xuan-spana-tower/', 'https://sunurbancityhanam.vn/sun-spana-tower/' ),
 	);
