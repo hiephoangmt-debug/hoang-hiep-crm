@@ -49,6 +49,7 @@ function hh_project_schema() {
 				'hh_p_price_from'   => array( 'type' => 'number', 'label' => 'Giá từ (triệu đồng)', 'placeholder' => 'VD: 2500 (= 2,5 tỷ)', 'half' => true, 'help' => 'Nhập số, đơn vị triệu. Để trống sẽ hiện "Đang cập nhật".' ),
 				'hh_p_price_m2'     => array( 'type' => 'text', 'label' => 'Đơn giá / m²', 'placeholder' => 'VD: 55 – 65 triệu/m²', 'half' => true ),
 				'hh_p_legal'        => array( 'type' => 'text', 'label' => 'Pháp lý', 'placeholder' => 'VD: Đã có giấy phép xây dựng, sổ hồng riêng từng căn', 'half' => true ),
+				'hh_p_legal_docs'   => array( 'type' => 'lines', 'label' => 'Hồ sơ pháp lý (mỗi dòng 1 văn bản)', 'placeholder' => "Giấy chứng nhận quyền sử dụng đất – đất ở đô thị\nVăn bản Sở Xây dựng xác nhận đủ điều kiện bán (số …, ngày …)\nBảo lãnh ngân hàng …", 'help' => 'Hiện ở mục Tổng quan → Hồ sơ pháp lý.' ),
 				'hh_p_ownership'    => array( 'type' => 'text', 'label' => 'Hình thức sở hữu', 'placeholder' => 'VD: Sở hữu lâu dài / 50 năm (căn hộ dịch vụ)', 'half' => true ),
 				'hh_p_start'        => array( 'type' => 'text', 'label' => 'Khởi công', 'placeholder' => 'VD: Quý 2/2025', 'half' => true ),
 				'hh_p_handover'     => array( 'type' => 'text', 'label' => 'Bàn giao dự kiến', 'placeholder' => 'VD: Quý 4/2027', 'half' => true ),

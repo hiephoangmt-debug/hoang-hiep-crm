@@ -1282,3 +1282,44 @@ html.nav-locked, html.nav-locked body { overflow: hidden; }
 .market-card.is-active small{color:#c4d0e0}
 .market-card.is-active .market-card__icon{background:#ea580c;color:#fff}
 .market-cards__title{margin:22px 0 10px;font-weight:700;color:#0a2342}
+
+/* ===== Trang dự án 2.14: con số nổi bật, tổng quan + phối cảnh, pháp lý, vị trí + bản đồ, thẻ giá thấp nhất ===== */
+.project-hero__kw { display: block; margin-top: 8px; font-family: var(--font-body); font-size: clamp(.95rem, 2.2vw, 1.15rem); font-weight: 600; letter-spacing: .02em; color: var(--gold); }
+.px-numbers { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 12px; margin: 4px 0 22px; padding: 0; list-style: none; }
+.px-numbers li { display: flex; flex-direction: column; gap: 4px; padding: 16px 14px; border-radius: var(--radius); background: linear-gradient(140deg, var(--navy), var(--navy-2)); color: rgba(255, 255, 255, .85); box-shadow: var(--shadow); text-align: center; }
+.px-numbers li:first-child { background: linear-gradient(140deg, var(--cta-2), var(--cta)); }
+.px-numbers b { font-family: var(--font-display); font-size: clamp(1.35rem, 3.4vw, 1.75rem); line-height: 1.15; color: var(--white); }
+.px-numbers li:not(:first-child) b { color: var(--gold); }
+.px-numbers span { font-size: .8rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.px-overview, .px-location { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 20px; align-items: start; margin: 0 0 20px; }
+.px-overview--single, .px-location--single { grid-template-columns: 1fr; }
+.px-overview__img, .px-location__img { position: relative; margin: 0; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); }
+.px-overview__img img, .px-location__img img { display: block; width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform .5s; }
+.px-overview__img a:hover img, .px-location__img a:hover img { transform: scale(1.04); }
+.px-overview__img figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 16px 12px; background: linear-gradient(0deg, rgba(10, 35, 66, .85), transparent); color: var(--white); font-size: .88rem; font-weight: 600; }
+.px-overview__specs .spec-list { grid-template-columns: 1fr; }
+.px-overview__specs .spec-list div:nth-child(n) { background: none; }
+.px-overview__specs .spec-list div:nth-child(odd) { background: var(--tint); }
+.px-location__map .map { margin-top: 0; aspect-ratio: 4 / 3; border-radius: var(--radius-lg); }
+.px-location--single .px-location__map .map { aspect-ratio: 16 / 8; }
+.px-legal { margin: 22px 0 6px; padding: 18px; border: 1px solid var(--line); border-left: 4px solid var(--ok); border-radius: var(--radius); background: var(--white); }
+.px-legal .block__sub { margin-top: 0; }
+.px-legal .check-list .icon { background: #e3f3ea; color: var(--ok); }
+.px-prices { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); gap: 12px; margin: 6px 0 10px; padding: 0; list-style: none; }
+.px-prices li { position: relative; display: flex; flex-direction: column; gap: 4px; padding: 18px 16px 14px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); box-shadow: var(--shadow); }
+.px-prices li.is-low { border: 2px solid var(--cta); background: #fff7f1; }
+.px-prices em { position: absolute; top: -11px; left: 14px; padding: 2px 10px; border-radius: 999px; background: var(--cta); color: var(--white); font-size: .72rem; font-style: normal; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.px-prices__type { font-size: .85rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.px-prices b { font-family: var(--font-display); font-size: 1.45rem; line-height: 1.2; color: var(--ink); }
+.px-prices li.is-low b { color: var(--cta-2); }
+.px-prices small { color: var(--text); font-size: .85rem; }
+.px-prices a { margin-top: auto; padding-top: 8px; font-size: .88rem; font-weight: 700; color: var(--gold-2); }
+.px-prices li.is-low a { color: var(--cta-2); }
+@media (max-width: 760px) {
+	.px-overview, .px-location { grid-template-columns: 1fr; }
+	.px-numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.px-numbers li:first-child { grid-column: 1 / -1; }
+	.px-prices { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.px-prices b { font-size: 1.2rem; }
+}
+@media (min-width: 761px) { .px-overview__img { position: sticky; top: calc(var(--header-h) + 70px); } }

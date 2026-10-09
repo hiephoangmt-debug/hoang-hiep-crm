@@ -29,14 +29,14 @@ while ( have_posts() ) :
 		'tong-quan'  => 'Tổng quan',
 		'giao-dich'  => $resale ? 'Chuyển nhượng & cho thuê' : '',
 		'vi-tri'     => 'Vị trí',
-		'lien-ket'   => 'Liên kết vùng',
 		'tien-ich'   => 'Tiện ích',
 		'mat-bang'   => 'Mặt bằng',
 		'gio-hang'   => hh_table( 'hh_p_hot_units', 5 ) ? 'Giỏ hàng' : '',
-		'san-pham'   => 'Loại sản phẩm',
-		'chinh-sach' => $resale ? 'Giá chuyển nhượng' : 'Chính sách',
+		'san-pham'   => 'Layout căn',
+		'chinh-sach' => $resale ? 'Giá chuyển nhượng' : 'Giá & chính sách',
 		'thu-cap'    => ! $resale && $has_market ? 'Chuyển nhượng & cho thuê' : '',
 		'tien-do'    => 'Tiến độ',
+		'phap-ly'    => '',
 		'thu-vien'   => ( $gallery || hh_meta( 'hh_p_video' ) ) ? 'Hình ảnh' : '',
 		'tin-tuc'    => 'Tin tức',
 		'hoi-dap'    => 'Hỏi đáp',
@@ -98,7 +98,7 @@ while ( have_posts() ) :
 			<?php hh_pill( $status, $status_key ); ?>
 			<?php if ( '1' === hh_meta( 'hh_p_sold_out' ) ) : ?><span class="pill pill--sold">Đã bán hết</span><?php endif; ?>
 			<?php foreach ( get_the_terms( $id, 'loai-du-an' ) ?: array() as $t ) : ?><?php if ( $t->parent ) : ?><a class="pill pill--type" href="<?php echo esc_url( get_term_link( $t ) ); ?>"><?php echo esc_html( $t->name ); ?></a><?php endif; ?><?php endforeach; ?>
-			<h1 class="project-hero__title"><?php the_title(); ?></h1>
+			<h1 class="project-hero__title"><?php the_title(); ?> <span class="project-hero__kw"><?php echo esc_html( $resale ? 'Giá chuyển nhượng, cho thuê ' . wp_date( 'm/Y' ) : 'Bảng giá, chính sách bán hàng ' . wp_date( 'm/Y' ) ); ?></span></h1>
 			<?php if ( hh_meta( 'hh_p_developer' ) ) : ?>
 				<p class="project-hero__dev">Chủ đầu tư: <?php echo esc_html( hh_meta( 'hh_p_developer' ) ); ?></p>
 			<?php endif; ?>
@@ -178,7 +178,15 @@ while ( have_posts() ) :
 		<div class="layout__main">
 
 			<section class="block" id="gioi-thieu">
-				<h2 class="block__title">Giới thiệu <?php echo esc_html( $title ); ?></h2>
+				<h2 class="block__title"><?php echo esc_html( $title ); ?> có gì nổi bật?</h2>
+				<?php $px_nums = hh_px_numbers( $id ); ?>
+				<?php if ( count( $px_nums ) >= 2 ) : ?>
+					<ul class="px-numbers">
+						<?php foreach ( $px_nums as list( $num, $label ) ) : ?>
+							<li><b><?php echo esc_html( $num ); ?></b><span><?php echo esc_html( $label ); ?></span></li>
+						<?php endforeach; ?>
+					</ul>
+				<?php endif; ?>
 				<?php if ( ! $resale ) : ?>
 					<?php get_template_part( 'template-parts/project-hook' ); ?>
 				<?php endif; ?>
@@ -195,15 +203,24 @@ while ( have_posts() ) :
 					</div>
 				<?php endif; ?>
 				<?php if ( hh_lines( 'hh_p_highlights' ) ) : ?>
-					<h3 class="block__sub">Điểm nổi bật</h3>
+					<h3 class="block__sub">Điểm nổi bật <?php echo esc_html( $title ); ?></h3>
 					<?php hh_check_list( hh_lines( 'hh_p_highlights' ), 'check-list check-list--boxed' ); ?>
 				<?php endif; ?>
 				<?php hh_cta_box( $ctas['gioi-thieu'] ); ?>
 			</section>
 
 			<section class="block" id="tong-quan">
-				<h2 class="block__title">Tổng quan dự án</h2>
-				<?php hh_spec_list( hh_project_specs() ); ?>
+				<h2 class="block__title">Tổng quan dự án <?php echo esc_html( $title ); ?></h2>
+				<?php $px_img = hh_px_hero_image( $id ); ?>
+				<div class="px-overview<?php echo $px_img ? '' : ' px-overview--single'; ?>">
+					<?php if ( $px_img ) : ?>
+						<figure class="px-overview__img">
+							<a href="<?php echo esc_url( wp_get_attachment_image_url( $px_img, 'full' ) ); ?>" data-lightbox="tong-quan"><?php echo wp_get_attachment_image( $px_img, 'large', false, array( 'loading' => 'lazy', 'alt' => 'Phối cảnh tổng thể ' . $title ) ); ?></a>
+							<figcaption>Phối cảnh <?php echo esc_html( $title ); ?></figcaption>
+						</figure>
+					<?php endif; ?>
+					<div class="px-overview__specs"><?php hh_spec_list( hh_project_specs() ); ?></div>
+				</div>
 				<?php $zones = hh_table( 'hh_p_zones', 4 ); ?>
 				<?php if ( $zones ) : ?>
 					<h3 class="block__sub">Các phân khu &amp; loại sản phẩm</h3>
@@ -233,6 +250,15 @@ while ( have_posts() ) :
 						?>
 					</div>
 				<?php endif; ?>
+				<?php $px_legal = hh_px_legal_docs( $id ); ?>
+				<div class="px-legal" id="phap-ly">
+					<h3 class="block__sub">Hồ sơ pháp lý <?php echo esc_html( $title ); ?></h3>
+					<?php if ( $px_legal ) : ?>
+						<?php hh_check_list( $px_legal, 'check-list check-list--boxed' ); ?>
+					<?php else : ?>
+						<?php hh_pending( 'Hồ sơ pháp lý (quyết định đầu tư, sổ đất, giấy phép, bảo lãnh ngân hàng) – liên hệ Hiệp để nhận bản đầy đủ.', 'Nhận hồ sơ pháp lý' ); ?>
+					<?php endif; ?>
+				</div>
 				<?php hh_cta_box( $ctas['tong-quan'] ); ?>
 			</section>
 
@@ -241,7 +267,7 @@ while ( have_posts() ) :
 			<?php endif; ?>
 
 			<section class="block" id="vi-tri">
-				<h2 class="block__title">Vị trí dự án</h2>
+				<h2 class="block__title">Vị trí <?php echo esc_html( $title ); ?></h2>
 				<?php if ( hh_meta( 'hh_p_address' ) ) : ?>
 					<p class="address-line"><?php echo hh_icon( 'pin' ); // phpcs:ignore ?> <strong><?php echo esc_html( hh_meta( 'hh_p_address' ) ); ?></strong></p>
 				<?php endif; ?>
@@ -251,18 +277,21 @@ while ( have_posts() ) :
 				<?php elseif ( $profile ) : ?>
 					<p class="prose"><?php echo esc_html( $title . ' thuộc khu vực ' . $profile['name'] . '. ' . $profile['desc'] ); ?></p>
 				<?php endif; ?>
-				<?php hh_gallery( hh_ids( 'hh_p_location_img' ), 'vi-tri', 'gallery-single' ); ?>
-				<?php
-				// Tìm theo tên dự án (Google Maps nhận diện tốt hơn địa chỉ chung chung) nếu chưa nhập tọa độ / địa chỉ bản đồ.
-				$map_name = trim( preg_replace( '/\s*\([^)]*\)/u', '', $title ) );
-				$map_name = false === mb_stripos( $map_name, 'Đà Nẵng' ) ? $map_name . ', Đà Nẵng' : $map_name;
-				hh_map( hh_meta( 'hh_p_map_address' ) ?: $map_name, hh_meta( 'hh_p_map_coords' ) );
-				?>
-				<?php hh_cta_box( $ctas['vi-tri'] ); ?>
-			</section>
-
-			<section class="block" id="lien-ket">
-				<h2 class="block__title">Liên kết vùng</h2>
+				<?php $px_loc = hh_px_location_image( $id ); ?>
+				<div class="px-location<?php echo $px_loc ? '' : ' px-location--single'; ?>">
+					<?php if ( $px_loc ) : ?>
+						<figure class="px-location__img"><a href="<?php echo esc_url( wp_get_attachment_image_url( $px_loc, 'full' ) ); ?>" data-lightbox="vi-tri"><?php echo wp_get_attachment_image( $px_loc, 'large', false, array( 'loading' => 'lazy', 'alt' => 'Vị trí ' . $title ) ); ?></a></figure>
+					<?php endif; ?>
+					<div class="px-location__map">
+						<?php
+						// Tìm theo tên dự án (Google Maps nhận diện tốt hơn địa chỉ chung chung) nếu chưa nhập tọa độ / địa chỉ bản đồ.
+						$map_name = trim( preg_replace( '/\s*\([^)]*\)/u', '', $title ) );
+						$map_name = false === mb_stripos( $map_name, 'Đà Nẵng' ) ? $map_name . ', Đà Nẵng' : $map_name;
+						hh_map( hh_meta( 'hh_p_map_address' ) ?: $map_name, hh_meta( 'hh_p_map_coords' ) );
+						?>
+					</div>
+				</div>
+				<h3 class="block__sub" id="lien-ket">Kết nối từ <?php echo esc_html( $title ); ?></h3>
 				<?php if ( $connections[0] ) : ?>
 					<ul class="connections">
 						<?php foreach ( $connections[0] as list( $time, $place ) ) : ?>
@@ -275,10 +304,11 @@ while ( have_posts() ) :
 				<?php else : ?>
 					<?php hh_pending( 'Sơ đồ liên kết vùng của dự án đang được cập nhật.' ); ?>
 				<?php endif; ?>
+				<?php hh_cta_box( $ctas['vi-tri'] ); ?>
 			</section>
 
 			<section class="block" id="tien-ich">
-				<h2 class="block__title">Tiện ích <?php echo esc_html( $title ); ?></h2>
+				<h2 class="block__title">Tiện ích <?php echo esc_html( $title ); ?>: nội khu &amp; ngoại khu</h2>
 				<?php $amenities = hh_lines( 'hh_p_amenities_in' ); ?>
 				<?php if ( $amenities ) : ?>
 					<p class="amenity-lead"><?php echo esc_html( implode( ' · ', array_slice( array_map( static fn( $a ) => preg_replace( '/\s*\(.*\)$/u', '', $a ), $amenities ), 0, 6 ) ) ); ?></p>
@@ -286,7 +316,7 @@ while ( have_posts() ) :
 				<?php get_template_part( 'template-parts/project-amenities', null, array( 'ids' => hh_ids( 'hh_p_amenities_img' ), 'names' => $amenities ) ); ?>
 				<div class="two-col">
 					<div>
-						<h3 class="block__sub">Nội khu</h3>
+						<h3 class="block__sub">Tiện ích nội khu</h3>
 						<?php if ( hh_lines( 'hh_p_amenities_in' ) ) : ?>
 							<?php hh_check_list( hh_lines( 'hh_p_amenities_in' ) ); ?>
 						<?php else : ?>
@@ -294,7 +324,7 @@ while ( have_posts() ) :
 						<?php endif; ?>
 					</div>
 					<div>
-						<h3 class="block__sub">Ngoại khu<?php echo $nearby[1] ? ' (khu vực xung quanh)' : ''; ?></h3>
+						<h3 class="block__sub">Tiện ích ngoại khu<?php echo $nearby[1] ? ' (khu vực xung quanh)' : ''; ?></h3>
 						<?php if ( $nearby[0] ) : ?>
 							<?php hh_check_list( $nearby[0] ); ?>
 						<?php else : ?>
@@ -306,14 +336,17 @@ while ( have_posts() ) :
 			</section>
 
 			<section class="block" id="mat-bang">
-				<h2 class="block__title">Mặt bằng</h2>
+				<h2 class="block__title">Mặt bằng <?php echo esc_html( $title ); ?></h2>
 				<?php $has_plan = hh_ids( 'hh_p_masterplan_img' ) || hh_meta( 'hh_p_design_desc' ) || hh_ids( 'hh_p_floorplans' ); ?>
-				<?php hh_gallery( hh_ids( 'hh_p_masterplan_img' ), 'mat-bang-tong', 'gallery-single' ); ?>
+				<?php if ( hh_ids( 'hh_p_masterplan_img' ) ) : ?>
+					<h3 class="block__sub">Mặt bằng tổng thể <?php echo esc_html( $title ); ?></h3>
+					<?php hh_gallery( hh_ids( 'hh_p_masterplan_img' ), 'mat-bang-tong', 'gallery-single' ); ?>
+				<?php endif; ?>
 				<?php if ( hh_meta( 'hh_p_design_desc' ) ) : ?>
 					<p class="prose"><?php echo nl2br( esc_html( hh_meta( 'hh_p_design_desc' ) ) ); ?></p>
 				<?php endif; ?>
 				<?php if ( hh_ids( 'hh_p_floorplans' ) ) : ?>
-					<h3 class="block__sub">Mặt bằng tầng <?php echo esc_html( $title ); ?></h3>
+					<h3 class="block__sub">Mặt bằng tầng, tòa, phân khu <?php echo esc_html( $title ); ?></h3>
 					<?php get_template_part( 'template-parts/project-floors', null, array( 'ids' => hh_ids( 'hh_p_floorplans' ) ) ); ?>
 				<?php endif; ?>
 				<?php if ( ! $has_plan ) : ?>
@@ -325,7 +358,7 @@ while ( have_posts() ) :
 			<?php get_template_part( 'template-parts/project-hot-units' ); ?>
 
 			<section class="block" id="san-pham">
-				<h2 class="block__title">Loại sản phẩm</h2>
+				<h2 class="block__title">Layout căn hộ &amp; loại sản phẩm <?php echo esc_html( $title ); ?></h2>
 				<?php if ( $products ) : ?>
 					<?php if ( count( $products ) > 1 ) : ?>
 						<div class="ptabs" role="tablist">
@@ -379,7 +412,23 @@ while ( have_posts() ) :
 						<?php hh_data_table( array( 'Đợt', 'Thời điểm', 'Tỷ lệ' ), $payment ); ?>
 					<?php endif; ?>
 				<?php else : ?>
-					<h2 class="block__title">Chính sách <?php echo esc_html( $title ); ?><?php echo hh_parse_vn_date( hh_meta( 'hh_p_offer_start' ) ) ? ' – <span class="block__title-em">áp dụng từ ' . esc_html( wp_date( 'd/m/Y', hh_parse_vn_date( hh_meta( 'hh_p_offer_start' ) ) ) ) . '</span>' : ''; // phpcs:ignore ?></h2>
+					<h2 class="block__title">Giá bán &amp; chính sách <?php echo esc_html( $title ); ?><?php echo hh_parse_vn_date( hh_meta( 'hh_p_offer_start' ) ) ? ' – <span class="block__title-em">áp dụng từ ' . esc_html( wp_date( 'd/m/Y', hh_parse_vn_date( hh_meta( 'hh_p_offer_start' ) ) ) ) . '</span>' : ''; // phpcs:ignore ?></h2>
+					<?php $px_from = hh_px_price_from( $id ); ?>
+					<?php if ( $px_from ) : ?>
+						<h3 class="block__sub">Giá <?php echo esc_html( $title ); ?> chỉ từ <?php echo esc_html( hh_px_money( reset( $px_from )['price'] ) ); ?></h3>
+						<ul class="px-prices">
+							<?php $px_first = true; foreach ( $px_from as $label => $row ) : ?>
+								<li class="<?php echo $px_first ? 'is-low' : ''; ?>">
+									<?php if ( $px_first ) : ?><em>Giá tốt nhất</em><?php endif; ?>
+									<span class="px-prices__type"><?php echo esc_html( $label ); ?></span>
+									<b>từ <?php echo esc_html( hh_px_money( $row['price'] ) ); ?></b>
+									<?php if ( $row['area'] ) : ?><small><?php echo esc_html( $row['area'] ); ?></small><?php endif; ?>
+									<a href="#lien-he" data-need="Nhận bảng giá dự án" data-msg="<?php echo esc_attr( 'Gửi tôi danh sách căn ' . $label . ' giá tốt nhất ' . $title . '.' ); ?>">Giữ căn này →</a>
+								</li>
+							<?php $px_first = false; endforeach; ?>
+						</ul>
+						<p class="note">Giá niêm yết tham khảo (đã gồm VAT, chưa trừ chiết khấu) – thay đổi theo tầng, hướng, đợt mở bán.</p>
+					<?php endif; ?>
 					<?php $compact = (bool) hh_table( 'hh_p_offer_stats', 2 ); ?>
 					<?php get_template_part( 'template-parts/project-offer', null, array( 'part' => $compact ? 'banner' : 'all' ) ); ?>
 					<?php if ( $compact ) : ?>
@@ -437,7 +486,7 @@ while ( have_posts() ) :
 			<?php endif; ?>
 
 			<section class="block" id="tien-do">
-				<h2 class="block__title">Cập nhật tiến độ</h2>
+				<h2 class="block__title">Tiến độ <?php echo esc_html( $title ); ?> &amp; hạ tầng xung quanh</h2>
 				<?php if ( $timeline[0] ) : ?>
 					<ol class="timeline">
 						<?php foreach ( $timeline[0] as list( $when, $what ) ) : ?>
@@ -454,7 +503,7 @@ while ( have_posts() ) :
 
 			<?php if ( isset( $sections['thu-vien'] ) ) : ?>
 				<section class="block" id="thu-vien">
-					<h2 class="block__title">Hình ảnh &amp; video</h2>
+					<h2 class="block__title">Hình ảnh &amp; video <?php echo esc_html( $title ); ?></h2>
 					<?php hh_video( hh_meta( 'hh_p_video' ) ); ?>
 					<?php hh_gallery( $gallery, 'thu-vien' ); ?>
 				</section>
@@ -478,7 +527,7 @@ while ( have_posts() ) :
 			</section>
 
 			<section class="block" id="hoi-dap">
-				<h2 class="block__title">Câu hỏi thường gặp</h2>
+				<h2 class="block__title">Hỏi đáp về <?php echo esc_html( $title ); ?></h2>
 				<div class="faq">
 					<?php foreach ( $faq as list( $q, $a ) ) : ?>
 						<details><summary><?php echo esc_html( $q ); ?></summary><p><?php echo esc_html( $a ); ?></p></details>

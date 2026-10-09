@@ -5,16 +5,16 @@
  */
 $rows   = $args['rows'] ?? array();
 $title  = get_the_title();
-$images = array_values( array_filter( hh_ids( 'hh_p_unit_layouts' ), static fn( $id ) => wp_get_attachment_image_url( $id, 'full' ) ) );
+$images = array_values( array_filter( hh_ids( 'hh_p_unit_layouts' ), static fn( $img ) => wp_get_attachment_image_url( $img, 'full' ) ) );
 if ( ! $rows ) {
 	return;
 }
 $norm  = static fn( $t ) => preg_replace( '/[^\p{L}\p{N}+]+/u', '', mb_strtolower( (string) $t ) );
 $match = array();
 foreach ( $rows as $i => $row ) {
-	foreach ( $images as $id ) {
-		if ( $norm( get_the_title( $id ) ) && ( $norm( get_the_title( $id ) ) === $norm( $row[0] ) || false !== mb_strpos( $norm( $row[0] ), $norm( get_the_title( $id ) ) ) ) ) {
-			$match[ $i ] = $id;
+	foreach ( $images as $img ) {
+		if ( $norm( get_the_title( $img ) ) && ( $norm( get_the_title( $img ) ) === $norm( $row[0] ) || false !== mb_strpos( $norm( $row[0] ), $norm( get_the_title( $img ) ) ) ) ) {
+			$match[ $i ] = $img;
 			break;
 		}
 	}

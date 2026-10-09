@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.2** + plugin Hoàng Hiệp CRM **2.20.13**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.14.0** + plugin Hoàng Hiệp CRM **2.20.14**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,16 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.14.0 + plugin 2.20.14: bố cục trang dự án mới
+
+- **H1** = tên dự án + "Bảng giá, chính sách bán hàng tháng/năm" (dự án đã bàn giao: "Giá chuyển nhượng, cho thuê"); H2/H3 từng mục đều chứa tên dự án (Tổng quan dự án …, Vị trí …, Tiện ích … nội khu & ngoại khu, Mặt bằng …, Layout căn hộ …, Giá bán & chính sách …, Hồ sơ pháp lý …).
+- **Giới thiệu:** dải con số nổi bật tự lấy từ dữ liệu – giá chỉ từ, chiết khấu tới, số căn, số tầng, quy mô, bàn giao.
+- **Tổng quan:** ảnh phối cảnh bên cạnh bảng thông tin; ngay dưới là khung **Hồ sơ pháp lý** (trường mới *Hồ sơ pháp lý – mỗi dòng 1 văn bản*; trống thì lấy dòng Pháp lý + hình thức sở hữu) rồi CTA.
+- **Vị trí:** ảnh vị trí/mặt bằng tổng thể bên cạnh bản đồ Google, gộp mục Liên kết vùng vào đây, CTA đặt lịch tham quan.
+- **Giá & chính sách:** thẻ "giá chỉ từ" theo từng loại căn (Studio, 1PN, 2PN…), thẻ rẻ nhất gắn nhãn *Giá tốt nhất*, nút *Giữ căn này*; tiếp theo banner ưu đãi có đồng hồ đếm ngược. Giá lấy từ Loại căn, Bảng giá hoặc Bảng tính căn – không có giá thì ẩn thẻ.
+- Sửa lỗi: sau mục Tiện ích/Mặt bằng, trang dự án có thể lấy nhầm ID ảnh làm ID dự án (thẻ giá, tin liên quan không hiện).
+- Spana Tower: văn bản pháp lý chuyển sang mục Hồ sơ pháp lý; Điểm nổi bật viết lại theo vị trí, quy mô, tiện ích.
 
 ## Có gì mới – plugin 2.20.13: nút "Tải ảnh ngay"
 
