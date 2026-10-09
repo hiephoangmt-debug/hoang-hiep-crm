@@ -162,7 +162,7 @@ function hoanghiep_customize( $wp_customize ) {
 		$wp_customize->add_control( $id, array( 'label' => $label, 'section' => $section, 'type' => $type ) );
 	}
 
-	foreach ( array( 'hh_person_photo' => array( 'hh_person', 'Ảnh chân dung chính (để trống = ảnh có sẵn)' ), 'hh_person_photo2' => array( 'hh_person', 'Ảnh chân dung phụ – trang Về Hiệp' ), 'hh_person_avatar' => array( 'hh_person', 'Ảnh đại diện vuông (logo, thẻ liên hệ)' ), 'hh_hero_image' => array( 'hh_hero', 'Ảnh nền banner' ) ) as $id => list( $section, $label ) ) {
+	foreach ( array( 'hh_person_photo' => array( 'hh_person', 'Ảnh chân dung chính (để trống = ảnh có sẵn)' ), 'hh_person_photo2' => array( 'hh_person', 'Ảnh chân dung banner trang chủ + trang Về Hiệp' ), 'hh_person_avatar' => array( 'hh_person', 'Ảnh đại diện vuông (logo, thẻ liên hệ)' ), 'hh_hero_image' => array( 'hh_hero', 'Ảnh nền banner' ) ) as $id => list( $section, $label ) ) {
 		$wp_customize->add_setting( $id, array( 'sanitize_callback' => 'esc_url_raw' ) );
 		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, $id, array( 'label' => $label, 'section' => $section ) ) );
 	}
