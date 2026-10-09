@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.2** + plugin Hoàng Hiệp CRM **2.20.11**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.2** + plugin Hoàng Hiệp CRM **2.20.12**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.11 – 2.20.12: hồ sơ pháp lý Spana Tower
+
+- Ô **Pháp lý** ngắn gọn: "Đủ điều kiện bán (Sở Xây dựng 05/5/2026), bảo lãnh VietinBank, không thế chấp".
+- **Điểm nổi bật** liệt kê hồ sơ: VB 7111/SXD-QLN (đủ điều kiện bán), cam kết bảo lãnh VietinBank 07/5/2026, sổ đất ở đô thị lô A1-3 / A1-4, VB 6978/SXD-CPXD (thẩm định FS), QĐ 365 (QHCT 1/500), QĐ 206 (chủ trương đầu tư), TB 1737/TB-SCT (đăng ký HĐMB mẫu).
+- Không đăng ảnh / số hiệu giấy chứng nhận, hợp đồng bảo lãnh lên web.
 
 ## Có gì mới – plugin 2.20.10: pháp lý Spana Tower theo Bảng công khai thông tin của CĐT
 
