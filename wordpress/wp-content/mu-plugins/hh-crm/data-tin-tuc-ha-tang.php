@@ -437,7 +437,7 @@ function hh_import_news() {
 			$id = wp_insert_post(
 				array(
 					'post_type'     => 'post',
-					'post_status'   => $date > time() ? 'future' : 'publish',
+					'post_status'   => $n['status'] ?? ( $date > time() ? 'future' : 'publish' ), // 'draft': bài chờ duyệt.
 					'post_name'     => $n['slug'],
 					'post_title'    => $n['title'],
 					'post_excerpt'  => $n['excerpt'],

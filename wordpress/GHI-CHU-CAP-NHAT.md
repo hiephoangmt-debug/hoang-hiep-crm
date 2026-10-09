@@ -1,6 +1,6 @@
-# Gói cập nhật hiephoangmt.com – 07/10/2026
+# Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.0** + plugin Hoàng Hiệp CRM **2.18.0**)
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.0** + plugin Hoàng Hiệp CRM **2.18.1**)
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.18.1: bài "Cầu mới qua sông Hàn" (BẢN NHÁP chờ duyệt)
+
+- Bài **Đà Nẵng đề xuất xây cầu mới qua sông Hàn, khởi công trước năm 2030** (đường dẫn `/da-nang-de-xuat-xay-cau-moi-qua-song-han/`, chuyên mục Hạ tầng & quy hoạch, từ khoá chính "cầu mới qua sông Hàn").
+- Bấm **Dự án → Nhập dữ liệu Đà Nẵng** → bài được tạo ở trạng thái **Bản nháp**, KHÔNG tự đăng. Vào **Bài viết → Bản nháp**, mở bài, bấm **Xem trước** để đọc; đồng ý thì bấm **Đăng**.
+- Đã có sẵn: tiêu đề SEO, mô tả, từ khoá Rank Math, ảnh đại diện (sơ đồ tự vẽ, không vướng bản quyền), hỏi đáp, nguồn tham khảo, schema NewsArticle.
+- Các con số "500 tỷ", "2.300 tỷ" và số nghị quyết riêng cho cây cầu **chưa xác minh được** nên bài không đưa vào như sự thật. Có văn bản chính thức thì báo Hoàng Hiệp để cập nhật.
 
 ## Có gì mới – SEO lên top Google (plugin 2.18.0, giao diện 2.13.0)
 

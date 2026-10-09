@@ -2,7 +2,7 @@
 
 Mỗi từ khoá chỉ nhắm **một** URL để trang dự án và bài viết không cạnh tranh nhau trên Google.
 Từ khoá trang dự án do `hh-crm/rankmath.php` tự điền; từ khoá bài viết, tiêu đề, mô tả ở `hh-crm/seo-tu-khoa.php`; trang hub ở `hh-crm/hub-pages.php`.
-Bấm **Dự án → Nhập dữ liệu Đà Nẵng** để ghi vào Rank Math (ô anh đã tự sửa giữ nguyên). Cập nhật: 07/10/2026.
+Bấm **Dự án → Nhập dữ liệu Đà Nẵng** để ghi vào Rank Math (ô anh đã tự sửa giữ nguyên). Cập nhật: 09/10/2026.
 
 ## 1. Trang tổng hợp (hub) – từ khoá rộng
 
@@ -124,6 +124,7 @@ Bấm **Dự án → Nhập dữ liệu Đà Nẵng** để ghi vào Rank Math (
 | nhà ga T2 sân bay Đà Nẵng | /mo-rong-nha-ga-t2-san-bay-da-nang-bat-dong-san-cho-thue/ | bảng giá Sun Galaxy Complex → /du-an/sun-galaxy-complex/ |
 | ga đường sắt tốc độ cao Đà Nẵng | /ga-duong-sat-toc-do-cao-da-nang-hoa-son-bat-dong-san-hoa-vang/ |  |
 | hợp nhất Đà Nẵng Quảng Nam | /hop-nhat-da-nang-quang-nam-bat-dong-san-vung-giap-ranh/ | bảng giá One World Regency → /du-an/one-world-regency/ |
+| cầu mới qua sông Hàn | /da-nang-de-xuat-xay-cau-moi-qua-song-han/ |  |
 | bãi tắm Sơn Thủy | /cong-vien-cau-lac-bo-the-thao-bien-bai-tam-son-thuy/ |  |
 | Hoàng Hiệp bất động sản | /du-an-hoang-hiep-bat-dong-san-dang-tu-van-2026/ |  |
 | quy trình mua căn hộ Đà Nẵng | /quy-trinh-mua-can-ho-hoang-hiep-da-nang/ |  |
