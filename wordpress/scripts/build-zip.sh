@@ -25,7 +25,7 @@ mkdir -p dist/tmp/hoang-hiep-crm
 cp packaging/hoang-hiep-crm.php dist/tmp/hoang-hiep-crm/
 (cd wp-content/mu-plugins && find hh-crm -type f \( -name '*.php' -o -name '*.js' -o -name '*.css' -o -name '*.json' -o -name '*.md' \) -exec cp --parents {} ../../dist/tmp/hoang-hiep-crm/ \;)
 (cd wp-content/themes && find hoanghiep -type f \( -name '*.php' -o -name '*.js' -o -name '*.css' -o -name '*.json' -o -name '*.txt' \) -exec cp --parents {} ../../dist/tmp/ \;)
-git log --relative --since="${PATCH_DAYS} days ago" --name-only --pretty=format: -- wp-content/mu-plugins/hh-crm wp-content/themes/hoanghiep | sort -u | while read -r f; do
+{ git log --relative --since="${PATCH_DAYS} days ago" --name-only --pretty=format: -- wp-content/mu-plugins/hh-crm wp-content/themes/hoanghiep; git ls-files --others --modified -- wp-content/mu-plugins/hh-crm wp-content/themes/hoanghiep; } | sort -u | while read -r f; do
 	[ -f "$f" ] || continue
 	case "$f" in
 		wp-content/mu-plugins/*) (cd wp-content/mu-plugins && cp --parents "${f#wp-content/mu-plugins/}" ../../dist/tmp/hoang-hiep-crm/) ;;
