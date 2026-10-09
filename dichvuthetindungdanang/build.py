@@ -22,7 +22,9 @@ SITE = {
     "email": "Km.camvan@gmail.com",
     "brand": "VT – Vân Trần",
     "street": "Đường Nguyễn Thị Minh Khai",
-    "address": "Đường Nguyễn Thị Minh Khai, Đà Nẵng",
+    "address": "Đường Nguyễn Thị Minh Khai và đường Lê Hữu Trác, Đà Nẵng",
+    "address2": "Đường Lê Hữu Trác, Đà Nẵng",
+    "maps2": "https://www.google.com/maps/search/?api=1&query=L%C3%AA+H%E1%BB%AFu+Tr%C3%A1c+%C4%90%C3%A0+N%E1%BA%B5ng",
     "maps": "https://www.google.com/maps/search/?api=1&query=Nguy%E1%BB%85n+Th%E1%BB%8B+Minh+Khai+%C4%90%C3%A0+N%E1%BA%B5ng",
     # Ảnh chính (đã có trên LadiPage, dùng cho ảnh chia sẻ + dữ liệu Google)
     "image": "https://static.ladipage.net/5f03d62c83e96d333758e1a6/dich-vu-the-tin-dung-da-nang-20250607094115-lh3ye.png",
@@ -264,7 +266,15 @@ def example_table():
             f"<th>Nếu trễ hạn 1 tháng*</th></tr></thead><tbody>{rows}</tbody></table></div>")
 
 
+def address_links():
+    """2 địa chỉ, mỗi địa chỉ 1 link Google Maps."""
+    a = '<a href="{}" target="_blank" rel="noopener">{}</a>'
+    return (a.format(SITE["maps"].replace("&", "&amp;"), "Đường Nguyễn Thị Minh Khai, Đà Nẵng") + " · "
+            + a.format(SITE["maps2"].replace("&", "&amp;"), SITE["address2"]))
+
+
 def fill(s, root):
+    s = s.replace('<a href="{{MAPS}}" target="_blank" rel="noopener">{{ADDRESS}}</a>', address_links())
     return (s.replace("{{R}}", root).replace("{{FEE_TABLE}}", fee_table()).replace("{{EXAMPLE_TABLE}}", example_table())
              .replace("{{FEE_MIN}}", FEE_MIN).replace("{{UPDATED}}", vn_date(UPDATED))
              .replace("{{FEE_MIN_RUT}}", FEE_MIN_RUT).replace("{{ADDRESS}}", SITE["address"]).replace("{{MAPS}}", SITE["maps"].replace("&", "&amp;"))
