@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 add_action(
 	'admin_menu',
 	static function () {
-		add_submenu_page( 'edit.php?post_type=du-an', 'Nhập bài nhanh', 'Nhập bài nhanh', 'manage_options', 'hh-nhap-bai-nhanh', 'hh_quick_post_page' );
+		add_submenu_page( 'edit.php?post_type=du-an', 'Nhập nhanh (bài / dự án)', 'Nhập nhanh (bài / dự án)', 'manage_options', 'hh-nhap-bai-nhanh', 'hh_quick_post_page' );
 	}
 );
 
@@ -25,10 +25,14 @@ function hh_quick_post_decode( $raw ) {
 	}
 	$json = base64_decode( substr( $raw, 7 ), true ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions
 	$n    = $json ? json_decode( $json, true ) : null;
-	if ( ! is_array( $n ) || empty( $n['slug'] ) || empty( $n['title'] ) || empty( $n['content'] ) ) {
+	$project = is_array( $n ) && 'du-an' === ( $n['kind'] ?? '' );
+	if ( ! is_array( $n ) || empty( $n['slug'] ) || ( ! $project && ( empty( $n['title'] ) || empty( $n['content'] ) ) ) ) {
 		return new WP_Error( 'format', 'Gói bài bị thiếu hoặc chép chưa đủ – chép lại toàn bộ nội dung file rồi dán.' );
 	}
 	$n['slug'] = sanitize_title( $n['slug'] );
+	if ( $project ) {
+		return $n;
+	}
 	return $n + array(
 		'excerpt'  => '',
 		'keyword'  => '',
@@ -127,6 +131,7 @@ function hh_quick_post_create( $n ) {
 
 function hh_quick_post_page() {
 	$done  = null;
+	$proj  = null;
 	$error = '';
 	if ( isset( $_POST['hh_quick_post'] ) && check_admin_referer( 'hh_quick_post' ) ) {
 		$raw  = wp_unslash( $_POST['hh_quick_post'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
@@ -135,17 +140,40 @@ function hh_quick_post_page() {
 			$raw = (string) file_get_contents( $file['tmp_name'] ); // phpcs:ignore WordPress.WP.AlternativeFunctions -- gói bài .txt chọn từ điện thoại/máy tính.
 		}
 		$n = hh_quick_post_decode( $raw );
-		$done = is_wp_error( $n ) ? $n : hh_quick_post_create( $n );
-		if ( is_wp_error( $done ) ) {
-			$error = $done->get_error_message();
-			$done  = null;
+		if ( ! is_wp_error( $n ) && 'du-an' === ( $n['kind'] ?? '' ) ) {
+			$proj = hh_quick_project_apply( $n );
+			if ( is_wp_error( $proj ) ) {
+				$error = $proj->get_error_message();
+			}
+		} else {
+			$done = is_wp_error( $n ) ? $n : hh_quick_post_create( $n );
+			if ( is_wp_error( $done ) ) {
+				$error = $done->get_error_message();
+				$done  = null;
+			}
 		}
+	}
+	$undone = null;
+	if ( isset( $_POST['hh_quick_undo'] ) && check_admin_referer( 'hh_quick_post' ) ) {
+		list( $uid, $utime ) = array_pad( explode( ':', sanitize_text_field( wp_unslash( $_POST['hh_quick_undo'] ) ) ), 2, '' );
+		$undone              = hh_quick_project_undo( absint( $uid ), $utime );
 	}
 	?>
 	<div class="wrap">
-		<h1>Nhập bài nhanh</h1>
+		<h1>Nhập nhanh (bài tin tức / dự án)</h1>
 		<?php if ( $error ) : ?>
 			<div class="notice notice-error"><p><?php echo esc_html( $error ); ?></p></div>
+		<?php endif; ?>
+		<?php if ( $proj && ! is_wp_error( $proj ) ) : ?>
+			<?php list( $pid, $pnew, $plist ) = $proj; ?>
+			<div class="notice notice-success"><p>
+				<?php echo $pnew ? 'Đã tạo dự án (bản nháp): ' : 'Đã cập nhật dự án: '; ?><strong><?php echo esc_html( get_the_title( $pid ) ); ?></strong> –
+				<a href="<?php echo esc_url( $pnew ? get_preview_post_link( $pid ) : get_permalink( $pid ) ); ?>" target="_blank">Xem trang</a> ·
+				<a href="<?php echo esc_url( get_edit_post_link( $pid ) ); ?>">Mở để sửa<?php echo $pnew ? ' / Đăng' : ''; ?></a>
+			</p><p><?php echo $plist ? 'Đã thay: ' . esc_html( implode( ', ', $plist ) ) : 'Không có ô nào thay đổi (dữ liệu trong gói giống trên web).'; ?></p></div>
+		<?php endif; ?>
+		<?php if ( null !== $undone ) : ?>
+			<div class="notice notice-<?php echo $undone ? 'success' : 'error'; ?>"><p><?php echo $undone ? 'Đã hoàn tác – dự án trở về như trước lần cập nhật đó.' : 'Không tìm thấy lần cập nhật để hoàn tác.'; ?></p></div>
 		<?php endif; ?>
 		<?php if ( $done ) : ?>
 			<div class="notice notice-success"><p>
@@ -154,6 +182,7 @@ function hh_quick_post_page() {
 				<a href="<?php echo esc_url( get_edit_post_link( $done ) ); ?>">Mở để sửa / Đăng</a>
 			</p></div>
 		<?php endif; ?>
+		<p>Nhận <strong>gói bài tin tức</strong> (tạo bản nháp) và <strong>gói dự án</strong> (dự án mới → bản nháp; dự án đã có → chỉ thay các ô có trong gói, có nút Hoàn tác).</p>
 		<p><strong>Cách 1 (điện thoại):</strong> tải file gói bài (.txt) nhận qua Claude về máy → bấm <strong>Chọn file</strong> bên dưới → chọn file đó → <strong>Tạo bài</strong>.</p>
 		<p><strong>Cách 2 (máy tính):</strong> mở file gói bài → <strong>Ctrl+A</strong>, <strong>Ctrl+C</strong> → dán vào ô dưới → <strong>Tạo bài</strong>.</p>
 		<p>Bài được tạo ở trạng thái <strong>Bản nháp</strong>, đủ ảnh đại diện, tiêu đề/mô tả/từ khoá Rank Math, thẻ, hỏi đáp. Xem trước rồi bấm <strong>Đăng</strong>.</p>
@@ -162,8 +191,25 @@ function hh_quick_post_page() {
 			<p><label><strong>Chọn file gói bài:</strong> <input type="file" name="hh_quick_file" accept=".txt,text/plain"></label></p>
 			<p>hoặc dán nội dung gói bài:</p>
 			<textarea name="hh_quick_post" rows="8" style="width:100%;font-family:monospace" placeholder="HHBAI1:..."></textarea>
-			<p><button class="button button-primary">Tạo bài</button></p>
+			<p><button class="button button-primary">Tạo bài / Cập nhật dự án</button></p>
 		</form>
+		<?php $recent = hh_quick_project_recent(); ?>
+		<?php if ( $recent ) : ?>
+			<h2>Dự án vừa cập nhật nhanh</h2>
+			<p>Cập nhật nhầm? Bấm <strong>Hoàn tác</strong> để trả các ô về giá trị trước lần cập nhật đó.</p>
+			<form method="post">
+				<?php wp_nonce_field( 'hh_quick_post' ); ?>
+				<table class="widefat striped"><tbody>
+				<?php foreach ( $recent as list( $rid, $rtime ) ) : ?>
+					<tr>
+						<td><a href="<?php echo esc_url( get_edit_post_link( $rid ) ); ?>"><?php echo esc_html( get_the_title( $rid ) ); ?></a></td>
+						<td><?php echo esc_html( wp_date( 'd/m/Y H:i', (int) $rtime ) ); ?></td>
+						<td><button class="button" name="hh_quick_undo" value="<?php echo esc_attr( $rid . ':' . $rtime ); ?>" onclick="return confirm('Hoàn tác lần cập nhật này?')">Hoàn tác</button></td>
+					</tr>
+				<?php endforeach; ?>
+				</tbody></table>
+			</form>
+		<?php endif; ?>
 	</div>
 	<?php
 }

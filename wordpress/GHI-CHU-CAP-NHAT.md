@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.2** + plugin Hoàng Hiệp CRM **2.19.1**)
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.2** + plugin Hoàng Hiệp CRM **2.20.0**)
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,14 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.0: Nhập nhanh cả DỰ ÁN (tạo mới + cập nhật, có Hoàn tác)
+
+Menu đổi tên: **Dự án → Nhập nhanh (bài / dự án)**. Cùng một ô nhận 3 loại gói:
+- **Gói bài tin tức** → tạo bản nháp (như 2.19).
+- **Gói dự án mới** (dự án chưa có trên web) → tạo **bản nháp** trang dự án: thông tin, bảng giá, chính sách, tiện ích, ảnh đại diện, thư viện ảnh, mặt bằng… Xem trước rồi Đăng.
+- **Gói cập nhật dự án** (dự án đã có) → **chỉ thay các ô có trong gói** (VD bảng giá, chính sách, ưu đãi, ảnh tiến độ); ô khác giữ nguyên. Ảnh thư viện/tiến độ được **thêm vào**, không xoá ảnh cũ.
+- Cập nhật nhầm → bảng **"Dự án vừa cập nhật nhanh"** ngay dưới ô nhập, bấm **Hoàn tác** (lưu 5 lần gần nhất mỗi dự án).
 
 ## Có gì mới – plugin 2.19.0: Nhập bài nhanh (không cần tải zip cho mỗi bài tin)
 
