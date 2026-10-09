@@ -109,7 +109,130 @@ def read(p):
         return f.read()
 
 
+HL = '<span class="hl">{}</span>'
+# Tiêu đề H2 chứa từ khoá chính của từng trang: path -> (từ khoá, {H2 cũ (chữ thuần): H2 mới (HTML)})
+H2_SEO = {
+    "index.html": ("dịch vụ thẻ tín dụng Đà Nẵng", {
+        "Bạn cần gì? Chúng tôi lo hết": "Dịch vụ thẻ tín dụng Đà Nẵng – " + HL.format("bạn cần gì, chúng tôi lo hết"),
+        "Đáo hạn thẻ tín dụng là gì?": "Đáo hạn thẻ tín dụng Đà Nẵng là gì?",
+        "Trễ hạn 1 tháng, bạn mất bao nhiêu?": "Trễ hạn thẻ tín dụng 1 tháng, bạn mất bao nhiêu?",
+        "4 bước – xong trong 15 phút": "Rút tiền, đáo hạn thẻ tín dụng: 4 bước – " + HL.format("xong trong 15 phút"),
+        "Khách hàng Đà Nẵng tin chọn vì": "Vì sao chọn dịch vụ thẻ tín dụng Đà Nẵng Vân Trần?",
+        "Có mặt khắp Đà Nẵng": "Rút tiền, đáo hạn thẻ tín dụng tận nơi khắp Đà Nẵng",
+        "Hàng nghìn khách hàng hài lòng": "Khách hàng nói gì về dịch vụ thẻ tín dụng Đà Nẵng",
+        "Dùng thẻ thông minh – không lo phí phạt": "Kiến thức thẻ tín dụng – dùng thông minh, không lo phí phạt",
+        "Giải đáp nhanh": "Câu hỏi thường gặp về dịch vụ thẻ tín dụng Đà Nẵng",
+        "Thẻ sắp đến hạn? Đừng chờ đến ngày cuối!": "Thẻ sắp đến hạn? Đáo hạn thẻ tín dụng Đà Nẵng ngay hôm nay",
+    }),
+    "bang-phi/index.html": ("phí thẻ tín dụng Đà Nẵng", {
+        "Ví dụ chi phí thực tế": "Ví dụ phí đáo hạn thẻ tín dụng thực tế",
+        "So sánh các lựa chọn khi thẻ đến hạn": "So sánh phí đáo hạn thẻ tín dụng và trả chậm",
+    }),
+    "dao-han-the-tin-dung-da-nang/index.html": ("đáo hạn thẻ tín dụng Đà Nẵng", {
+        "Vì sao nên đáo hạn thay vì để thẻ trễ hạn?": "Vì sao nên đáo hạn thẻ tín dụng thay vì để trễ hạn?",
+        "Quy trình đáo hạn thẻ tại Đà Nẵng": "Quy trình đáo hạn thẻ tín dụng tại Đà Nẵng",
+        "Đáo hạn tận nơi tại các quận Đà Nẵng": "Đáo hạn thẻ tín dụng tận nơi các quận Đà Nẵng",
+        "Lưu ý để đáo hạn an toàn": "Lưu ý để đáo hạn thẻ tín dụng an toàn",
+        "Đáo hạn theo ngân hàng": "Đáo hạn thẻ tín dụng Đà Nẵng theo ngân hàng",
+    }),
+    "kien-thuc/dao-han-the-tin-dung-la-gi/index.html": ("đáo hạn thẻ tín dụng", {
+        "Đáo hạn hoạt động như thế nào?": "Đáo hạn thẻ tín dụng hoạt động như thế nào?",
+        "Lợi ích của đáo hạn": "Lợi ích của đáo hạn thẻ tín dụng",
+        "Rủi ro cần biết": "Rủi ro khi đáo hạn thẻ tín dụng",
+        "Khi nào nên đáo hạn?": "Khi nào nên đáo hạn thẻ tín dụng?",
+    }),
+    "gioi-thieu/index.html": ("dịch vụ thẻ tín dụng Đà Nẵng", {
+        "Về thương hiệu Vân Trần (VT)": "Về Vân Trần (VT) – dịch vụ thẻ tín dụng Đà Nẵng",
+        "Chúng tôi làm gì?": "Dịch vụ thẻ tín dụng Đà Nẵng chúng tôi cung cấp",
+        "Cam kết với khách hàng": "Cam kết của dịch vụ thẻ tín dụng Vân Trần",
+        "Thông tin liên hệ": "Liên hệ dịch vụ thẻ tín dụng Đà Nẵng",
+    }),
+    "kien-thuc/index.html": ("thẻ tín dụng", {
+        "Bài viết mới nhất": "Bài viết kiến thức thẻ tín dụng mới nhất",
+    }),
+    "kien-thuc/ngay-sao-ke-va-ngay-den-han/index.html": ("ngày sao kê thẻ tín dụng", {
+        "Ngày sao kê là gì?": "Ngày sao kê thẻ tín dụng là gì?",
+        "Ngày đến hạn thanh toán là gì?": "Ngày đến hạn thanh toán thẻ tín dụng là gì?",
+        "Mẹo tận dụng thời gian miễn lãi": "Mẹo dùng ngày sao kê thẻ tín dụng để được miễn lãi lâu nhất",
+    }),
+    "rut-tien-the-tin-dung-da-nang/index.html": ("rút tiền thẻ tín dụng Đà Nẵng", {
+        "Rút tại ATM và dùng dịch vụ: khác nhau thế nào?": "Rút tiền thẻ tín dụng tại ATM và qua dịch vụ: khác nhau thế nào?",
+        "Quy trình rút tiền thẻ tín dụng": "Quy trình rút tiền thẻ tín dụng tại Đà Nẵng",
+        "Bảng phí rút tiền thẻ tín dụng": "Bảng phí rút tiền thẻ tín dụng Đà Nẵng",
+        "Hỗ trợ tận nơi khắp Đà Nẵng": "Rút tiền thẻ tín dụng tận nơi khắp Đà Nẵng",
+        "Xem thêm": "Xem thêm dịch vụ rút tiền thẻ tín dụng",
+    }),
+    "rut-tien-the-tin-dung-phi-thap/index.html": ("rút tiền thẻ tín dụng phí thấp", {
+        "So sánh chi phí rút 10 triệu": "So sánh phí rút tiền thẻ tín dụng 10 triệu",
+        "Bảng phí rút tiền theo loại thẻ": "Bảng phí rút tiền thẻ tín dụng theo loại thẻ",
+    }),
+    "rut-tien-the-tin-dung-tan-noi-da-nang/index.html": ("rút tiền thẻ tín dụng tận nơi", {
+        "Đặt lịch rút tiền tận nơi trong 1 phút": "Đặt lịch rút tiền thẻ tín dụng tận nơi trong 1 phút",
+        "Khu vực hỗ trợ tận nơi": "Khu vực rút tiền thẻ tín dụng tận nơi tại Đà Nẵng",
+        "Phí rút tiền theo loại thẻ": "Phí rút tiền thẻ tín dụng tận nơi theo loại thẻ",
+    }),
+    "rut-tien-vi-tra-sau-da-nang/index.html": ("rút tiền ví trả sau", {
+        "Các ví trả sau được hỗ trợ": "Các ví được hỗ trợ rút tiền ví trả sau tại Đà Nẵng",
+        "Quy trình": "Quy trình rút tiền ví trả sau",
+        "Lưu ý khi dùng ví trả sau": "Lưu ý khi rút tiền ví trả sau",
+    }),
+    "kien-thuc/tra-cham-the-tin-dung-bi-phat-bao-nhieu/index.html": ("trả chậm thẻ tín dụng", {
+        "Các khoản bạn phải trả khi trễ hạn": "Các khoản phạt khi trả chậm thẻ tín dụng",
+        "Ví dụ cụ thể": "Ví dụ trả chậm thẻ tín dụng bị phạt bao nhiêu",
+        "Các nhóm nợ trên CIC": "Trả chậm thẻ tín dụng và các nhóm nợ trên CIC",
+        "Cách xử lý khi sắp hoặc đã trễ hạn": "Cách xử lý khi trả chậm thẻ tín dụng",
+    }),
+}
+
+
+def h2_seo_map(p):
+    """Bảng đổi H2 cho trang p (gồm trang ngân hàng, quận) + 2 tiêu đề chung FAQ / Bài viết liên quan."""
+    slug = p.rsplit("/", 1)[0] if "/" in p else ""
+    kw, m = H2_SEO.get(p, (None, {}))
+    m = dict(m)
+    bank = re.match(r"dao-han-the-(.+)-da-nang$", slug)
+    if bank and bank.group(1) != "tin-dung":
+        name = next(b[1] for b in BANKS if b[0] == bank.group(1))
+        kw = "đáo hạn thẻ " + name
+        m.update({
+            f"Cách xem ngày đến hạn thẻ {name}": f"Cách xem ngày đến hạn để đáo hạn thẻ {name}",
+            f"Nếu để thẻ {name} trễ hạn thì sao?": f"Không đáo hạn thẻ {name} kịp thì sao?",
+            f"Phí đáo hạn, rút tiền thẻ {name}": f"Phí đáo hạn, rút tiền thẻ {name} tại Đà Nẵng",
+            "Hỗ trợ cả thẻ ngân hàng khác": "Đáo hạn thẻ tín dụng ngân hàng khác tại Đà Nẵng",
+        })
+    dist = re.match(r"dao-han-the-tin-dung-(.+)$", slug)
+    if dist and dist.group(1) not in ("da-nang", "la-gi"):
+        name = next(d[1] for d in DISTRICTS if d[0] == dist.group(1))
+        kw = "đáo hạn thẻ tín dụng " + name
+        m.update({
+            f"Khu vực {name} chúng tôi thường hỗ trợ": f"Khu vực đáo hạn thẻ tín dụng {name} tận nơi",
+            f"Quy trình đáo hạn tận nơi tại {name}": f"Quy trình đáo hạn thẻ tín dụng tận nơi tại {name}",
+            "Phí đáo hạn, rút tiền thẻ tín dụng": f"Phí đáo hạn, rút tiền thẻ tín dụng {name}",
+            "Khu vực lân cận": f"Đáo hạn thẻ tín dụng khu vực lân cận {name}",
+        })
+    if kw:
+        m.setdefault("Câu hỏi thường gặp", f"Câu hỏi thường gặp về {kw}")
+        m.setdefault("Bài viết liên quan", f"Bài viết liên quan về {kw}")
+    return m
+
+
+def apply_h2_seo(p, s):
+    m = h2_seo_map(p)
+    if not m:
+        return s
+    def h2(mt):
+        text = re.sub(r"<.*?>", "", mt.group(2)).strip()
+        if text.startswith("Bảng phí dịch vụ (cập nhật"):  # trang Bảng phí, ngày cập nhật thay đổi
+            return mt.group(1) + mt.group(2).replace("Bảng phí dịch vụ", "Bảng phí đáo hạn, rút tiền thẻ tín dụng Đà Nẵng", 1) + "</h2>"
+        return mt.group(1) + m.get(text, mt.group(2)) + "</h2>" if text in m else mt.group(0)
+    s = re.sub(r'(<h2[^>]*>)(.*?)</h2>', h2, s, flags=re.S)
+    # mục lục (TOC) dùng cùng chữ với H2
+    return re.sub(r'(<a href="#[^"]*">)([^<]*)</a>',
+                  lambda mt: mt.group(1) + re.sub(r"<.*?>", "", m.get(mt.group(2).strip(), mt.group(2))) + "</a>", s)
+
+
 def write(p, s):
+    s = apply_h2_seo(p, s)
     full = os.path.join(HERE, p)
     os.makedirs(os.path.dirname(full), exist_ok=True)
     with open(full, "w", encoding="utf-8") as f:
