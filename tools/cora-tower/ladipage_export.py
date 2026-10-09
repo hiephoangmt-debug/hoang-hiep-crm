@@ -108,6 +108,8 @@ def convert(name):
     # live LadiPage URLs on www.cora-tower.com
     LIVE = {"khoi-de-shophouse.html": "khoi-de-shophouse", "penthouse.html": "penthouse",
             "phap-ly.html": "#phap-ly", "can-ho-sun-da-nang.html": ""}
+    if name == "index.html":  # same-page anchors must stay "#id" so LadiPage scrolls instead of reloading
+        s = re.sub(r'href="\./(#[^"]+)"', r'href="\1"', s)
     s = re.sub(r'href="\./(#[^"]*)?"', lambda m: f'href="{DOMAIN}{m.group(1) or ""}"', s)
     for pg, slug in LIVE.items():
         if pg == name:
@@ -118,6 +120,8 @@ def convert(name):
         if not slug.startswith("#") and slug:
             s = s.replace(f"{DOMAIN}{pg}", f"{DOMAIN}{slug}")
     s = s.replace(f'href="{name}#', 'href="#')
+    if name == "index.html":
+        s = re.sub(r'href="' + re.escape(DOMAIN) + r'(#[^"]+)"', r'href="\1"', s)
 
     # ---- forms: no hidden inputs / status div, select placeholder
     s = re.sub(r'\s*<input type="hidden"[^>]*>', "", s)
