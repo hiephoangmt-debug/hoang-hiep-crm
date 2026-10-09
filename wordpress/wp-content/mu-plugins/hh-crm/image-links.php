@@ -2,7 +2,7 @@
 /**
  * Ảnh từ link (Google Drive hoặc link ảnh trực tiếp): dán link vào ô "Link ảnh" của dự án, máy chủ web tự tải ảnh về
  * Thư viện, gắn vào Thư viện ảnh / Ảnh tiện ích / Ảnh mặt bằng, và đặt ảnh đại diện nếu dự án chưa có.
- * Mỗi dòng: Link | Chú thích (alt) | Mục: thư viện (mặc định) / tiện ích / mặt bằng / tổng thể (sơ đồ mặt bằng tổng) / tiến độ (ảnh thực tế) / đại diện
+ * Mỗi dòng: Link | Chú thích (alt) | Mục: thư viện (mặc định) / tiện ích / mặt bằng / tổng thể (sơ đồ mặt bằng tổng) / tiến độ (ảnh thực tế) / đại diện / layout (ảnh layout loại căn)
  *            | Tiêu đề ảnh (tuỳ chọn, VD tên tầng hiện trên tab mặt bằng).
  * Link Google Drive phải chia sẻ "Bất kỳ ai có đường liên kết"; link THƯ MỤC không tải được – dán link từng file.
  * Mỗi link chỉ tải một lần (ghi nhớ trong _hh_img_links).
@@ -55,6 +55,7 @@ function hh_img_links_import( $post_id, $limit = 2 ) {
 		'thu-vien' => 'hh_p_gallery',
 		'tien-ich' => 'hh_p_amenities_img',
 		'mat-bang' => 'hh_p_floorplans',
+		'layout'   => 'hh_p_unit_layouts',
 		'tong-the' => 'hh_p_masterplan_img',
 		'tien-do'  => 'hh_p_progress_gallery',
 	);
@@ -73,7 +74,7 @@ function hh_img_links_import( $post_id, $limit = 2 ) {
 		}
 		$alt    = $parts[1] ?? '';
 		$where  = sanitize_title( remove_accents( $parts[2] ?? '' ) );
-		$where  = preg_match( '/tong-the|so-do/', $where ) ? 'tong-the' : ( preg_match( '/tien-do|thuc-te|su-kien/', $where ) ? 'tien-do' : ( preg_match( '/tien-ich/', $where ) ? 'tien-ich' : ( preg_match( '/mat-bang/', $where ) ? 'mat-bang' : ( preg_match( '/dai-dien/', $where ) ? 'dai-dien' : 'thu-vien' ) ) ) );
+		$where  = preg_match( '/tong-the|so-do/', $where ) ? 'tong-the' : ( preg_match( '/tien-do|thuc-te|su-kien/', $where ) ? 'tien-do' : ( preg_match( '/tien-ich/', $where ) ? 'tien-ich' : ( preg_match( '/layout|loai-can/', $where ) ? 'layout' : ( preg_match( '/mat-bang/', $where ) ? 'mat-bang' : ( preg_match( '/dai-dien/', $where ) ? 'dai-dien' : 'thu-vien' ) ) ) ) );
 		$source = hh_img_link_download_url( $url );
 		if ( '' === $source ) {
 			$errors[]     = 'Dòng ' . ( $n + 1 ) . ': link thư mục Drive không tải được – mở thư mục, bấm chuột phải từng ảnh → Chia sẻ → Sao chép đường liên kết.';
