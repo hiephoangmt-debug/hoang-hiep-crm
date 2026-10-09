@@ -62,8 +62,9 @@ def table_to_list(m):
         vals = [(f'<span class="fee">{cell(v)}</span>' if fee else cell(v)) for fee, v in cells]
         first = re.sub(r"</?strong>", "", vals[0])
         if heads:
-            rest = "<br>".join(f"{heads[i]}: {v}" for i, v in enumerate(vals[1:], 1))
-            items.append(f"<li><strong>{first}</strong><br>{rest}</li>")
+            # mỗi dòng 1 khối riêng: LadiPage tính sai chiều cao ô khi dùng <br> nên dòng cuối bị cắt
+            rest = "".join(f'<div>{heads[i]}: {v}</div>' for i, v in enumerate(vals[1:], 1))
+            items.append(f"<li><div><strong>{first}</strong></div>{rest}</li>")
         else:
             items.append(f"<li><strong>{first}</strong>: {' · '.join(vals[1:])}</li>")
     return '<ul class="tlist">' + "".join(items) + "</ul>"
@@ -124,13 +125,6 @@ def convert(s, slug):
 
     # Mục lục: LadiPage bỏ id của tiêu đề nên link "#..." không nhảy -> bỏ mục lục
     s = re.sub(r'<nav class="toc".*?</nav>', "", s, flags=re.S)
-    # Danh sách .tlist: mỗi dòng (<br>) thành 1 khối riêng – LadiPage tính sai chiều cao ô khi dùng <br> nên chữ dòng cuối bị cắt
-    def _split_li(m):
-        parts = [x.strip() for x in m.group(2).split("<br>")]
-        return m.group(1) + "".join('<div style="margin:0 0 4px">' + x + "</div>" for x in parts if x) + "</li>"
-    s = re.sub(r'(<ul class="tlist">.*?</ul>)',
-               lambda u: re.sub(r'(<li>)(.*?)</li>', _split_li, u.group(1), flags=re.S),
-               s, flags=re.S)
     # Breadcrumb: flex + nhiều phần tử con bị LadiPage xếp chồng chữ → gộp thành 1 đoạn văn thường
     s = re.sub(r'<nav class="crumbs"[^>]*>(.*?)</nav>',
                lambda m: '<p class="crumbs" style="display:block">' + re.sub(r'<span>(.*?)</span>', r' › \1', m.group(1)) + '</p>',
