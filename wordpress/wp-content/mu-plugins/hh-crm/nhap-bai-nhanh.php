@@ -129,7 +129,12 @@ function hh_quick_post_page() {
 	$done  = null;
 	$error = '';
 	if ( isset( $_POST['hh_quick_post'] ) && check_admin_referer( 'hh_quick_post' ) ) {
-		$n = hh_quick_post_decode( wp_unslash( $_POST['hh_quick_post'] ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+		$raw  = wp_unslash( $_POST['hh_quick_post'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+		$file = $_FILES['hh_quick_file'] ?? null; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+		if ( '' === trim( $raw ) && $file && UPLOAD_ERR_OK === $file['error'] && $file['size'] < 20 * MB_IN_BYTES && is_uploaded_file( $file['tmp_name'] ) ) {
+			$raw = (string) file_get_contents( $file['tmp_name'] ); // phpcs:ignore WordPress.WP.AlternativeFunctions -- gói bài .txt chọn từ điện thoại/máy tính.
+		}
+		$n = hh_quick_post_decode( $raw );
 		$done = is_wp_error( $n ) ? $n : hh_quick_post_create( $n );
 		if ( is_wp_error( $done ) ) {
 			$error = $done->get_error_message();
@@ -149,11 +154,14 @@ function hh_quick_post_page() {
 				<a href="<?php echo esc_url( get_edit_post_link( $done ) ); ?>">Mở để sửa / Đăng</a>
 			</p></div>
 		<?php endif; ?>
-		<p>Mở file gói bài (.txt) Hoàng Hiệp nhận qua Claude → bấm <strong>Ctrl+A</strong>, <strong>Ctrl+C</strong> → dán vào ô dưới → bấm <strong>Tạo bài</strong>.</p>
+		<p><strong>Cách 1 (điện thoại):</strong> tải file gói bài (.txt) nhận qua Claude về máy → bấm <strong>Chọn file</strong> bên dưới → chọn file đó → <strong>Tạo bài</strong>.</p>
+		<p><strong>Cách 2 (máy tính):</strong> mở file gói bài → <strong>Ctrl+A</strong>, <strong>Ctrl+C</strong> → dán vào ô dưới → <strong>Tạo bài</strong>.</p>
 		<p>Bài được tạo ở trạng thái <strong>Bản nháp</strong>, đủ ảnh đại diện, tiêu đề/mô tả/từ khoá Rank Math, thẻ, hỏi đáp. Xem trước rồi bấm <strong>Đăng</strong>.</p>
-		<form method="post">
+		<form method="post" enctype="multipart/form-data">
 			<?php wp_nonce_field( 'hh_quick_post' ); ?>
-			<textarea name="hh_quick_post" rows="12" style="width:100%;font-family:monospace" placeholder="HHBAI1:..." required></textarea>
+			<p><label><strong>Chọn file gói bài:</strong> <input type="file" name="hh_quick_file" accept=".txt,text/plain"></label></p>
+			<p>hoặc dán nội dung gói bài:</p>
+			<textarea name="hh_quick_post" rows="8" style="width:100%;font-family:monospace" placeholder="HHBAI1:..."></textarea>
 			<p><button class="button button-primary">Tạo bài</button></p>
 		</form>
 	</div>
