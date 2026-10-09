@@ -165,6 +165,9 @@ def convert_home(s):
     s = re.sub(r'<span class="status" id="status">.*?</span></span>',
                '<span class="status"><i></i><span>Trả lời Zalo trong 5 phút (7h30 – 21h00)</span></span>', s, flags=re.S)
     s = re.sub(r'<div class="tbl"><table>.*?</table></div>', table_to_list, s, flags=re.S)
+    # Link sang trang cũ dichvuthetindungdanang.com (đang ở trang 1 Google) – liên kết 2 trang với nhau
+    s = s.replace("<footer", '<div class="container" style="padding-top:24px;padding-bottom:24px"><p style="background:#f5f7fb;color:#0b1f44;padding:16px;border-radius:14px;text-align:center;line-height:1.7;margin:0">'
+                  'Thẻ Tín Dụng Vân Trần – trang giới thiệu dịch vụ: <a href="https://www.dichvuthetindungdanang.com/" style="color:#d65f00;font-weight:700;text-decoration:underline">Dịch vụ thẻ tín dụng Đà Nẵng – Vân Trần</a></p></div>\n<footer', 1)
     return s
 
 
