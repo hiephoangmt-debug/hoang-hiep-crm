@@ -75,6 +75,15 @@ function hh_quick_upload( $post_id, $img ) {
 		return 0;
 	}
 	update_post_meta( $att, '_wp_attachment_image_alt', $alt );
+	$meta = array_filter(
+		array(
+			'post_title'   => sanitize_text_field( (string) ( $img['title'] ?? '' ) ), // VD tên tầng cho ảnh mặt bằng.
+			'post_excerpt' => sanitize_text_field( (string) ( $img['caption'] ?? '' ) ), // Chú thích (tên tiện ích).
+		)
+	);
+	if ( $meta ) {
+		wp_update_post( array( 'ID' => $att ) + $meta );
+	}
 	return (int) $att;
 }
 

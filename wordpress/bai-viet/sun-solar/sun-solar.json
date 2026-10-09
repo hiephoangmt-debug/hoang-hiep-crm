@@ -1,0 +1,425 @@
+{
+ "kind": "du-an",
+ "slug": "sun-solar-residence",
+ "meta": {
+  "hh_p_status": "dang-mo-ban",
+  "hh_p_price_from": "4122",
+  "hh_p_unit_area": "Thông thủy khoảng 33 – 99 m² (Studio – 3PN)",
+  "hh_p_handover": "Nhận căn sử dụng dự kiến 28/04/2027 (Sun Early Key, đã thanh toán tối thiểu 70%); bàn giao chính thức theo tiến độ thanh toán chuẩn dự kiến 30/04/2029",
+  "hh_p_unit_types": [
+   [
+    "Studio",
+    "33 – 39,1 m²",
+    "0",
+    "4,53 – 5,86 tỷ"
+   ],
+   [
+    "Căn 1PN",
+    "41 – 43,2 m²",
+    "1",
+    "4,78 – 6,24 tỷ"
+   ],
+   [
+    "Căn 1PN+",
+    "41 – 55,2 m²",
+    "1",
+    "4,91 – 6,85 tỷ"
+   ],
+   [
+    "Căn 2PN",
+    "55,1 – 55,2 m²",
+    "2",
+    "6,73 – 10,05 tỷ"
+   ],
+   [
+    "Căn 2PN+",
+    "Khoảng 83,5 m²",
+    "2",
+    "Liên hệ"
+   ],
+   [
+    "Căn 3PN",
+    "Khoảng 99,4 m²",
+    "3",
+    "Liên hệ"
+   ]
+  ],
+  "hh_p_amenities_in": [
+   "Hồ bơi tầng cao nhìn sông Hàn",
+   "Gym & yoga (192 m²)",
+   "Spa / steam / sauna (100,8 m²)",
+   "Phòng thư giãn (167 m²)",
+   "Thư viện & kids club (188 m²)",
+   "Phòng sinh hoạt cộng đồng (133 m² và 100 m²)",
+   "(Khu tiện ích tầng 5 theo mặt bằng chủ đầu tư)"
+  ],
+  "hh_p_price_table": [
+   [
+    "L12B12B – Studio",
+    "33 m²",
+    "5,86 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1803A – Studio",
+    "39,1 m²",
+    "4,53 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1712A – 1PN",
+    "41 m²",
+    "5,94 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1812 – 1PN",
+    "41 m²",
+    "6,09 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L12A01 – 1PN",
+    "41,1 m²",
+    "4,78 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1901 – 1PN",
+    "41,1 m²",
+    "4,93 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L12B11 – 1PN",
+    "43,2 m²",
+    "6,24 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1217 – 1PN+",
+    "33,1 m²",
+    "4,12 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1812A – 1PN+",
+    "41 m²",
+    "5,97 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1912A – 1PN+",
+    "41 m²",
+    "6,00 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1818 – 1PN+",
+    "41,1 m²",
+    "4,91 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1801 – 1PN+",
+    "41,1 m²",
+    "4,91 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1611 – 1PN+",
+    "43,2 m²",
+    "6,36 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1902 – 1PN+",
+    "43,3 m²",
+    "5,36 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L12A10 – 1PN+",
+    "46,2 m²",
+    "6,47 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1510 – 1PN+",
+    "46,2 m²",
+    "6,56 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L0903 – 1PN+",
+    "46,3 m²",
+    "5,47 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1503 – 1PN+",
+    "46,3 m²",
+    "5,62 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1703 – 1PN+",
+    "46,3 m²",
+    "5,68 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L12A09 – 1PN+",
+    "46,4 m²",
+    "6,16 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1609 – 1PN+",
+    "46,4 m²",
+    "6,27 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1909 – 1PN+",
+    "46,4 m²",
+    "6,36 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L12A06 – 1PN+",
+    "46,5 m²",
+    "5,94 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L12A07 – 1PN+",
+    "46,5 m²",
+    "5,94 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1506 – 1PN+",
+    "46,5 m²",
+    "6,02 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1706 – 1PN+",
+    "46,5 m²",
+    "6,08 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1707 – 1PN+",
+    "46,5 m²",
+    "6,08 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L0716 – 1PN+",
+    "55,2 m²",
+    "6,46 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L0916 – 1PN+",
+    "55,2 m²",
+    "6,63 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1616 – 1PN+",
+    "55,2 m²",
+    "6,85 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1515 – 2PN",
+    "55,1 m²",
+    "9,87 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1915 – 2PN",
+    "55,1 m²",
+    "10,05 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L1216 – 2PN",
+    "55,2 m²",
+    "6,73 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ],
+   [
+    "L12B15 – 2PN+",
+    "55,1 m²",
+    "9,73 tỷ",
+    "Niêm yết gồm VAT & KPBT, chưa trừ chiết khấu"
+   ]
+  ],
+  "hh_p_payment": [
+   [
+    "Đợt 1 – ký HĐ thực hiện nguyện vọng",
+    "Khi ký",
+    "100 triệu (Studio/1PN/1PN+) · 200 triệu (2PN, 3PN) · 300 triệu (Duplex)"
+   ],
+   [
+    "Đợt 2",
+    "Ngày 15 kể từ ký HĐTHNV",
+    "15% (gồm đợt 1)"
+   ],
+   [
+    "Ký HĐMB",
+    "Dự kiến ngày 7 sau hạn đợt 2",
+    "–"
+   ],
+   [
+    "Đợt 3 → 6",
+    "Ngày 75, 135, 195, 285",
+    "Mỗi đợt 10%"
+   ],
+   [
+    "Đợt 7",
+    "Ngày 375",
+    "15%"
+   ],
+   [
+    "Nhận căn sử dụng (Sun Early Key)",
+    "Dự kiến 28/04/2027",
+    "Đã thanh toán tối thiểu 70%"
+   ],
+   [
+    "Đợt 8 → 12",
+    "Ngày 495, 615, 735, 855, 975",
+    "Mỗi đợt 5%"
+   ],
+   [
+    "Đợt 13 – bàn giao chính thức",
+    "Dự kiến 30/04/2029",
+    "KPBT + VAT phần 5% còn lại"
+   ],
+   [
+    "Đợt cuối – nhận sổ",
+    "Khi cấp giấy chứng nhận",
+    "5% (nộp ký quỹ khi bàn giao, CĐT trả lãi 8%/năm)"
+   ]
+  ],
+  "hh_p_offer_title": "Chiết khấu tổng khoảng 18,8% khi thanh toán sớm 95% trước 25/10/2026",
+  "hh_p_offer_note": "Theo chính sách CSBH04 (áp dụng từ 07/08/2026) và phiếu tính giá của chủ đầu tư. Chủ đầu tư có quyền thay đổi chính sách – liên hệ để nhận phiếu tính giá căn cụ thể.",
+  "hh_p_offer_stats": [
+   [
+    "~18,8%",
+    "Tổng chiết khấu khi thanh toán sớm 95% (trước 25/10/2026)"
+   ],
+   [
+    "70%",
+    "Vay tối đa, hỗ trợ lãi suất đến 30 tháng"
+   ],
+   [
+    "28/04/2027",
+    "Dự kiến nhận căn sử dụng (Sun Early Key)"
+   ],
+   [
+    "3 năm",
+    "Miễn phí dịch vụ quản lý căn hộ"
+   ]
+  ],
+  "hh_p_capital_title": "Vốn tự có ban đầu 15%, ngân hàng cho vay đến 70%",
+  "hh_p_offer_start": "07/08/2026",
+  "hh_p_offer_deadline": "25/10/2026",
+  "hh_p_discount_table": [
+   [
+    "Thanh toán sớm 95%",
+    "Trước 25/10/2026",
+    "~18,8%",
+    "Quà tặng an cư 5% + không vay 5% + TTS 10% (mốc 11% đến 25/8, 10,5% đến 25/9 đã qua)"
+   ],
+   [
+    "Thanh toán chuẩn, không vay (giãn 33 tháng)",
+    "Theo tiến độ",
+    "~9,75%",
+    "Quà tặng an cư 5% + không vay 5%"
+   ],
+   [
+    "Vay ngân hàng (hỗ trợ lãi suất)",
+    "Theo tiến độ vay",
+    "5%",
+    "Quà tặng an cư 5%"
+   ]
+  ],
+  "hh_p_policy": [
+   "Quà tặng an cư: chiết khấu 5% trên giá trị căn hộ chưa gồm VAT & KPBT",
+   "Không vay: chiết khấu thêm 5%, giãn tiến độ đến 33 tháng (giai đoạn 70% – 30%)",
+   "Sun Early Key: thanh toán tối thiểu 70% (gồm VAT) là được nhận căn để sử dụng, khai thác cho thuê – dự kiến 28/04/2027",
+   "Thanh toán sớm 95%: chiết khấu thêm 10% đến 25/10/2026 (các mốc 70%, 50% theo phiếu tính giá đã qua hạn 25/9/2026)",
+   "Thanh toán sớm hơn tiến độ bằng vốn tự có: hưởng lãi 8%/năm trên số tiền và số ngày trả trước",
+   "Miễn phí dịch vụ quản lý căn hộ 3 năm từ ngày bàn giao chính thức (không gồm điện, nước, gửi xe… của bên thứ ba)",
+   "Khoản 5% ký quỹ cấp sổ: chủ đầu tư trả lãi 8%/năm đến khi nhận giấy chứng nhận",
+   "Tích điểm hội viên Sun Signature 0,7% – 2% giá trị hợp đồng theo hạng (dùng trong hệ sinh thái Sun Group)",
+   "Chính sách thanh toán sớm không áp dụng đồng thời với gói hỗ trợ lãi suất"
+  ],
+  "hh_p_loan": "Ngân hàng theo chỉ định của chủ đầu tư, cho vay tối đa 70% giá trị căn hộ (gồm VAT). Chủ đầu tư hỗ trợ lãi suất tối đa 30 tháng kể từ lần giải ngân đầu tiên, không muộn hơn 30/11/2028; ân hạn nợ gốc theo thời gian hỗ trợ lãi suất; miễn phí trả nợ trước hạn trong thời gian hỗ trợ. Sau thời gian hỗ trợ: lãi suất cơ sở + biên độ theo ngân hàng. Tiến độ vay: đặt cọc → 15% (ngày 15) → ký HĐMB → ngân hàng giải ngân đến 70% → 10% (ngày 75) → KPBT + VAT 5% khi bàn giao → 5% khi nhận sổ.",
+  "hh_p_loan_ratio": "70",
+  "hh_p_loan_grace": "30",
+  "hh_p_loan_zero_months": "30"
+ },
+ "images": {
+  "featured": {
+   "file": "sun-solar-residence-phoi-canh-le-duan-song-han.jpg",
+   "alt": "Phối cảnh Sun Solar Residence trên đường Lê Duẩn, nhìn sông Hàn và cầu Rồng, Đà Nẵng"
+  },
+  "hh_p_gallery": [
+   {
+    "file": "sun-solar-residence-toan-canh.jpg",
+    "alt": "Sun Solar Residence – tòa căn hộ 20 tầng giữa trung tâm Hải Châu, Đà Nẵng"
+   },
+   {
+    "file": "sun-solar-residence-vi-tri.jpg",
+    "alt": "Phối cảnh tòa tháp Sun Solar Residence Đà Nẵng"
+   },
+   {
+    "file": "sun-solar-residence-mat-tien.jpg",
+    "alt": "Mặt tiền ban công xanh Sun Solar Residence"
+   },
+   {
+    "file": "sun-solar-residence-cong-dong-song.jpg",
+    "alt": "Sân vườn trên cao và trục đường Lê Duẩn – Sun Solar Residence"
+   },
+   {
+    "file": "sun-solar-residence-256-can-ho.jpg",
+    "alt": "Sun Solar Residence 256 căn hộ giữa trung tâm Đà Nẵng"
+   }
+  ],
+  "hh_p_amenities_img": [
+   {
+    "file": "sun-solar-residence-ho-boi-view-song-han.jpg",
+    "alt": "Hồ bơi tầng cao nhìn sông Hàn – Sun Solar Residence",
+    "caption": "Hồ bơi tầng cao nhìn sông Hàn"
+   },
+   {
+    "file": "sun-solar-residence-phong-gym.jpg",
+    "alt": "Phòng gym Sun Solar Residence Đà Nẵng",
+    "caption": "Gym & yoga 192 m²"
+   }
+  ],
+  "hh_p_floorplans": [
+   {
+    "file": "sun-solar-residence-mat-bang-tang-5-tien-ich.jpg",
+    "alt": "Mặt bằng tầng 5 tiện ích Sun Solar Residence",
+    "title": "Tầng 5 – Tiện ích"
+   },
+   {
+    "file": "sun-solar-residence-mat-bang-tang-6.jpg",
+    "alt": "Mặt bằng tầng 6 Sun Solar Residence",
+    "title": "Tầng 6"
+   },
+   {
+    "file": "sun-solar-residence-mat-bang-tang-8-19.jpg",
+    "alt": "Mặt bằng tầng 8 – 19 Sun Solar Residence",
+    "title": "Tầng 8 – 19"
+   }
+  ]
+ }
+}
