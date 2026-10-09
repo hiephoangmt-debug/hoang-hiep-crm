@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.1** + plugin Hoàng Hiệp CRM **2.18.5**)
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.2** + plugin Hoàng Hiệp CRM **2.18.6**)
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.18.6, giao diện 2.13.2: thẻ (tag) cho bài tin hạ tầng
+
+- Nhập dữ liệu gắn thẻ cho 13 bài tin hạ tầng, quy hoạch, nhịp sống (ví dụ: Hạ tầng Đà Nẵng, Cầu Hòa Xuân, Liên Chiểu, Sông Hàn, Hầm chui qua sông Hàn, Bảng giá đất Đà Nẵng…). Thẻ anh tự thêm được giữ nguyên.
+- Thẻ hiện cuối bài (#Hạ tầng Đà Nẵng…), bấm vào ra danh sách bài cùng chủ đề. Trang thẻ để noindex (Rank Math mặc định; giao diện cũng noindex trang thẻ dưới 3 bài) để không thành trang mỏng.
+- Danh sách thẻ: `hh-crm/the-tin-tuc.php`.
 
 ## Có gì mới – plugin 2.18.5: bài cầu sông Hàn thêm từ khoá "hầm chui qua sông Hàn", sửa lỗi Rank Math
 

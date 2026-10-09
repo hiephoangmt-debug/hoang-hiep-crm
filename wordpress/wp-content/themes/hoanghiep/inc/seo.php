@@ -364,6 +364,11 @@ function hh_seo_noindex_request() {
 		global $wp_query;
 		return (int) $wp_query->found_posts < HH_SEO_MIN_LISTINGS;
 	}
+	// Trang thẻ /tag/…/: dưới 3 bài là trang mỏng → noindex, follow.
+	if ( is_tag() ) {
+		$tag = get_queried_object();
+		return ! $tag || (int) $tag->count < 3;
+	}
 	return ( is_post_type_archive( array( 'bat-dong-san', 'du-an' ) ) || is_tax() ) && ! have_posts();
 }
 

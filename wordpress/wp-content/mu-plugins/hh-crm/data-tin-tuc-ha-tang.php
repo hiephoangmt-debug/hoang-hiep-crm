@@ -504,6 +504,9 @@ function hh_import_news() {
 		if ( $week ) {
 			update_post_meta( $id, '_hh_plan_week', $week );
 		}
+		if ( ! empty( $n['tags'] ) ) {
+			wp_set_post_tags( $id, $n['tags'], true ); // Thêm thẻ, giữ thẻ đã có.
+		}
 		// Ảnh đại diện đi kèm plugin ("plugin:img/…"): chỉ gắn khi bài chưa có ảnh đại diện.
 		if ( ! empty( $n['image'] ) && ! has_post_thumbnail( $id ) && function_exists( 'hh_img_link_local_path' ) ) {
 			$file = hh_img_link_local_path( hh_img_link_key( $n['image'] ) );
