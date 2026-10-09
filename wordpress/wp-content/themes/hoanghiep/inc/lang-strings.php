@@ -121,7 +121,7 @@ function hh_lang_strings( $code ) {
 			'soon'          => '분양 예정',
 			'from'          => '%s부터',
 			'price_ask'     => '가격 문의',
-			'handover'      => '인도',
+			'handover'      => '입주(인도)',
 			'expected'      => '예정',
 			'view_vi'       => '프로젝트 페이지(베트남어)',
 			'view_tr'       => '한국어로 보기',
@@ -182,4 +182,29 @@ function hh_lang_money( $trieu, $code ) {
 		return rtrim( rtrim( number_format( $trieu / 100, 1, '.', ',' ), '0' ), '.' ) . '억 동';
 	}
 	return $trieu >= 1000 ? 'VND ' . rtrim( rtrim( number_format( $trieu / 1000, 2, '.', ',' ), '0' ), '.' ) . ' billion' : 'VND ' . number_format( $trieu, 0, '.', ',' ) . ' million';
+}
+
+/** Tên dự án cho khách nước ngoài: bỏ phần tiếng Việt trong ngoặc, bỏ dấu ("FourS Tower (Tháp Bốn Mùa) Đà Nẵng" → "FourS Tower Da Nang"). */
+function hh_lang_name( $title ) {
+	$t = trim( preg_replace( '/\s*\([^)]*\)/u', '', (string) $title ) );
+	return trim( preg_replace( '/\s+/u', ' ', remove_accents( $t ) ) );
+}
+
+/** Ngày bàn giao theo ngôn ngữ: "31/5/2028" → "31 May 2028" / "2028년 5월 31일"; "Quý 1/2027" → "Q1 2027" / "2027년 1분기". */
+function hh_lang_date( $raw, $code ) {
+	$raw = (string) $raw;
+	if ( preg_match( '/\b(\d{1,2})\/(\d{1,2})\/(\d{4})\b/u', $raw, $m ) && checkdate( (int) $m[2], (int) $m[1], (int) $m[3] ) ) {
+		return 'ko' === $code ? sprintf( '%d년 %d월 %d일', $m[3], $m[2], $m[1] ) : sprintf( '%d %s %d', $m[1], gmdate( 'F', gmmktime( 0, 0, 0, (int) $m[2], 1 ) ), $m[3] );
+	}
+	if ( preg_match( '/quý\s*(IV|I{1,3}|\d)\s*[\/\-–]?\s*(?:năm\s*)?(\d{4})/iu', $raw, $m ) ) {
+		$q = strtr( strtoupper( $m[1] ), array( 'IV' => '4', 'III' => '3', 'II' => '2', 'I' => '1' ) );
+		return 'ko' === $code ? sprintf( '%d년 %d분기', $m[2], $q ) : sprintf( 'Q%d %d', $q, $m[2] );
+	}
+	if ( preg_match( '/\b(\d{1,2})\/(\d{4})\b/u', $raw, $m ) && (int) $m[1] >= 1 && (int) $m[1] <= 12 ) {
+		return 'ko' === $code ? sprintf( '%d년 %d월', $m[2], $m[1] ) : gmdate( 'F', gmmktime( 0, 0, 0, (int) $m[1], 1 ) ) . ' ' . $m[2];
+	}
+	if ( preg_match( '/^\s*(?:năm\s*)?(\d{4})\s*(?:\(dự kiến\))?\s*$/iu', $raw, $m ) ) {
+		return 'ko' === $code ? $m[1] . '년' : $m[1];
+	}
+	return '';
 }

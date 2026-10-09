@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.2** + plugin Hoàng Hiệp CRM **2.20.16**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.3** + plugin Hoàng Hiệp CRM **2.20.16**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.3: danh sách dự án trên /en/, /ko/ dễ đọc hơn
+
+- Tên dự án bỏ dấu, bỏ phần tiếng Việt trong ngoặc ("FourS Tower (Tháp Bốn Mùa) Đà Nẵng" → "FourS Tower Da Nang").
+- Ngày bàn giao theo kiểu từng nước: "28 April 2027" / "2027년 4월 28일"; quý: "Q1 2027" / "2027년 1분기". Tiếng Hàn dùng "입주(인도)".
+- Dự án mẹ chưa có giá thì lấy giá thấp nhất của tòa / phân khu con (VD FourS lấy từ Tòa F2).
 
 ## Có gì mới – giao diện 2.15.1 + plugin 2.20.16: bản dịch Google dùng thuật ngữ BĐS chuẩn
 

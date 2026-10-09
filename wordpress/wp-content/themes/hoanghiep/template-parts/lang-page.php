@@ -95,18 +95,26 @@ get_header();
 				}
 				$from  = function_exists( 'hh_px_price_from' ) ? hh_px_price_from( $pid ) : array();
 				$min   = $from ? reset( $from )['price'] : (float) get_post_meta( $pid, 'hh_p_price_from', true );
+				if ( $min <= 0 && function_exists( 'hh_px_price_from' ) ) {
+					// Dự án mẹ chưa có giá: lấy giá thấp nhất của các tòa / phân khu con.
+					foreach ( get_posts( array( 'post_type' => 'du-an', 'posts_per_page' => 20, 'fields' => 'ids', 'meta_key' => 'hh_p_parent', 'meta_value' => $pid ) ) as $kid ) {
+						$kf = hh_px_price_from( $kid );
+						$kp = $kf ? reset( $kf )['price'] : (float) get_post_meta( $kid, 'hh_p_price_from', true );
+						$min = $kp > 0 && ( $min <= 0 || $kp < $min ) ? $kp : $min;
+					}
+				}
 				// Bàn giao: chỉ lấy ngày / quý (bỏ phần chú thích tiếng Việt).
 				$hraw = (string) get_post_meta( $pid, 'hh_p_handover', true );
-				$hand = preg_match( '/\b\d{1,2}\/\d{1,2}\/\d{4}\b|\b\d{1,2}\/\d{4}\b/u', $hraw, $hm ) ? $hm[0] : ( preg_match( '/quý\s*(\d|I{1,3}|IV)\s*[\/\-–]?\s*(?:năm\s*)?(\d{4})/iu', $hraw, $hm ) ? 'Q' . strtr( $hm[1], array( 'IV' => '4', 'III' => '3', 'II' => '2', 'I' => '1' ) ) . '/' . $hm[2] : ( preg_match( '/^\d{4}$/', trim( $hraw ) ) ? trim( $hraw ) : '' ) );
+				$hand = hh_lang_date( $hraw, $code );
 				$soon  = 'sap-mo-ban' === get_post_meta( $pid, 'hh_p_status', true );
 				?>
 				<article class="lx-project">
 					<a class="lx-project__img" href="<?php echo esc_url( hh_translate_url( get_permalink(), $code ) ); ?>" rel="nofollow">
-						<?php the_post_thumbnail( 'hh-card', array( 'loading' => 'lazy', 'alt' => $vn( get_the_title() ) ) ); ?>
+						<?php the_post_thumbnail( 'hh-card', array( 'loading' => 'lazy', 'alt' => hh_lang_name( get_the_title() ) ) ); ?>
 						<span class="lx-project__status<?php echo $soon ? ' is-soon' : ''; ?>"><?php echo esc_html( $soon ? $t['soon'] : $t['selling'] ); ?></span>
 					</a>
 					<div class="lx-project__body">
-						<h3 class="lx-project__name"><?php the_title(); ?></h3>
+						<h3 class="lx-project__name"><?php echo esc_html( hh_lang_name( get_the_title() ) ); ?></h3>
 						<p class="lx-project__meta"><?php echo esc_html( implode( ' · ', array_filter( array( $type, $area && ! is_wp_error( $area ) ? $vn( $area[0]->name ) : '' ) ) ) ); ?></p>
 						<p class="lx-project__price"><?php echo esc_html( $min > 0 ? sprintf( $t['from'], hh_lang_money( $min, $code ) ) : $t['price_ask'] ); ?></p>
 						<?php if ( $hand ) : ?><p class="lx-project__hand"><?php echo esc_html( $t['handover'] . ': ' . $hand . ( false !== mb_stripos( $hraw, 'dự kiến' ) ? ' (' . $t['expected'] . ')' : '' ) ); ?></p><?php endif; ?>
