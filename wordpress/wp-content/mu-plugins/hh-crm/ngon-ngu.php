@@ -126,3 +126,155 @@ foreach ( array( 'rank_math/frontend/description', 'rank_math/opengraph/facebook
 }
 unset( $hh_filter );
 add_filter( 'document_title_parts', static fn( $parts ) => 'vi' === hh_lang() ? $parts : array( 'title' => hh_langs()[ hh_lang() ]['title'] ), 120 );
+
+/**
+ * Bản dịch Google (translate.goog): thay sẵn thuật ngữ bất động sản & nhãn giao diện bằng bản dịch chuẩn (đánh dấu translate="no"
+ * để Google không dịch lại), sửa nút ngôn ngữ cho đúng trang đang xem. Chạy trước khi Google dịch trang.
+ */
+function hh_lang_glossary() {
+	return array(
+		// Tình trạng, loại dự án.
+		'Sắp mở bán'               => array( 'Coming soon', '분양 예정' ),
+		'Đang mở bán'              => array( 'On sale', '분양 중' ),
+		'Đang bàn giao'            => array( 'Handover in progress', '입주 진행 중' ),
+		'Đã bàn giao'              => array( 'Handed over', '입주 완료' ),
+		'Tất cả tình trạng'        => array( 'All statuses', '전체 상태' ),
+		'Tất cả'                   => array( 'All', '전체' ),
+		'Tất cả khu vực'           => array( 'All areas', '전체 지역' ),
+		'Tổ hợp dự án'             => array( 'Mixed-use township', '복합 단지' ),
+		'Cao tầng'                 => array( 'High-rise', '고층' ),
+		'Thấp tầng'                => array( 'Low-rise', '저층' ),
+		'Căn hộ sở hữu lâu dài'    => array( 'Condominium (long-term ownership)', '아파트(영구 소유)' ),
+		'Căn hộ dịch vụ (50 năm)'  => array( 'Serviced apartment (50-year)', '서비스 아파트(50년)' ),
+		'Biệt thự nghỉ dưỡng'      => array( 'Resort villas', '리조트 빌라' ),
+		'Nhà phố – Shophouse'      => array( 'Townhouses & shophouses', '타운하우스·샵하우스' ),
+		'Đất nền'                  => array( 'Land plots', '토지(필지)' ),
+		// Menu, nút liên hệ.
+		'Trang chủ'                => array( 'Home', '홈' ),
+		'Dự án'                    => array( 'Projects', '분양 프로젝트' ),
+		'Mua bán'                  => array( 'Buy & sell', '매매' ),
+		'Cho thuê'                 => array( 'For rent', '임대' ),
+		'Tin tức'                  => array( 'News', '뉴스' ),
+		'Về Hiệp'                  => array( 'About Hiep', '히엡 소개' ),
+		'Liên hệ'                  => array( 'Contact', '문의' ),
+		'Gọi ngay'                 => array( 'Call now', '전화하기' ),
+		'Chat Zalo'                => array( 'Chat on Zalo', 'Zalo 상담' ),
+		'Nhận tư vấn'              => array( 'Get advice', '상담 신청' ),
+		'Hotline tư vấn'           => array( 'Hotline', '상담 전화' ),
+		'Tìm dự án'                => array( 'Find projects', '프로젝트 찾기' ),
+		'Nhận bảng giá'            => array( 'Get the price list', '분양가표 받기' ),
+		// Mục lục trang dự án.
+		'Giới thiệu'               => array( 'Overview', '소개' ),
+		'Tổng quan'                => array( 'Key facts', '개요' ),
+		'Vị trí'                   => array( 'Location', '입지' ),
+		'Tiện ích'                 => array( 'Amenities', '편의시설' ),
+		'Mặt bằng'                 => array( 'Floor plans', '평면도' ),
+		'Layout căn'               => array( 'Unit layouts', '세대 평면' ),
+		'Giá & chính sách'         => array( 'Prices & sales policy', '분양가·분양 정책' ),
+		'Tiến độ'                  => array( 'Construction progress', '공사 진행' ),
+		'Hình ảnh'                 => array( 'Gallery', '사진' ),
+		'Hỏi đáp'                  => array( 'FAQ', '자주 묻는 질문' ),
+		// Bảng thông tin dự án.
+		'Tên thương mại'           => array( 'Project name', '단지명' ),
+		'Chủ đầu tư'               => array( 'Developer', '시행사' ),
+		'Loại hình'                => array( 'Property type', '상품 유형' ),
+		'Quy mô'                   => array( 'Site area', '대지 규모' ),
+		'Mật độ xây dựng'          => array( 'Building density', '건폐율' ),
+		'Số tòa'                   => array( 'Buildings', '동 수' ),
+		'Số tầng'                  => array( 'Floors', '층수' ),
+		'Tổng số sản phẩm'         => array( 'Total units', '총 세대수' ),
+		'Pháp lý'                  => array( 'Legal status', '법적 상태' ),
+		'Hình thức sở hữu'         => array( 'Ownership', '소유 형태' ),
+		'Sở hữu lâu dài'           => array( 'Long-term ownership', '영구 소유' ),
+		'Bàn giao'                 => array( 'Handover', '입주(인도)' ),
+		'Tình trạng'               => array( 'Status', '분양 상태' ),
+		'Diện tích'                => array( 'Area', '면적' ),
+		'Phòng ngủ'                => array( 'Bedrooms', '침실' ),
+		'Giá tham khảo'            => array( 'Reference price', '참고 가격' ),
+		'Bảng giá'                 => array( 'Price list', '분양가표' ),
+		'Lịch thanh toán'          => array( 'Payment schedule', '납부 일정' ),
+		'Chính sách & ưu đãi'      => array( 'Sales policy & incentives', '분양 정책·혜택' ),
+		'Hỗ trợ vay ngân hàng'     => array( 'Bank loan support', '은행 대출 지원' ),
+		'Tiện ích nội khu'         => array( 'On-site amenities', '단지 내 편의시설' ),
+		'Tiện ích ngoại khu (khu vực xung quanh)' => array( 'Nearby amenities', '주변 편의시설' ),
+		'Căn hộ'                   => array( 'Apartments', '아파트' ),
+		'Shop khối đế'             => array( 'Podium shophouses', '포디움 상가' ),
+		'Ưu đãi có hạn'            => array( 'Limited-time offer', '기간 한정 혜택' ),
+		'Giá tốt nhất'             => array( 'Best price', '최저가' ),
+		'Hình minh họa'            => array( 'Illustration', '예시 이미지' ),
+		'Ngày'                     => array( 'Days', '일' ),
+		'Giờ'                      => array( 'Hours', '시간' ),
+		'Phút'                     => array( 'Min', '분' ),
+		'Giây'                     => array( 'Sec', '초' ),
+		// Ô tìm kiếm.
+		'Tên dự án, chủ đầu tư…'   => array( 'Project name, developer…', '프로젝트명, 시행사…' ),
+	);
+}
+
+add_action(
+	'wp_footer',
+	static function () {
+		if ( is_admin() ) {
+			return;
+		}
+		$map = array();
+		foreach ( hh_lang_glossary() as $vi => list( $en, $ko ) ) {
+			$map[ $vi ] = array( 'en' => $en, 'ko' => $ko );
+		}
+		?>
+<script>
+(function () {
+	var host = location.hostname;
+	if ( ! /\.translate\.goog$/.test( host ) ) { return; }
+	var tl = ( new URLSearchParams( location.search ).get( '_x_tr_tl' ) || '' ).slice( 0, 2 );
+	var map = <?php echo wp_json_encode( $map, JSON_UNESCAPED_UNICODE ); ?>;
+	var norm = function ( s ) { return s.replace( /\s+/g, ' ' ).trim(); };
+	var lock = function ( el ) { el.setAttribute( 'translate', 'no' ); el.classList.add( 'notranslate' ); };
+	if ( tl === 'en' || tl === 'ko' ) {
+		var walker = document.createTreeWalker( document.body, NodeFilter.SHOW_TEXT ), nodes = [], n;
+		while ( ( n = walker.nextNode() ) ) { nodes.push( n ); }
+		nodes.forEach( function ( node ) {
+			var key = norm( node.nodeValue ), t = map[ key ] && map[ key ][ tl ];
+			if ( ! t || ! node.parentNode || /^(SCRIPT|STYLE)$/.test( node.parentNode.nodeName ) ) { return; }
+			node.nodeValue = node.nodeValue.replace( key, t );
+			var p = node.parentNode;
+			if ( p.childNodes.length === 1 || p.nodeName === 'OPTION' ) { lock( p ); return; }
+			var span = document.createElement( 'span' );
+			lock( span );
+			p.replaceChild( span, node );
+			span.appendChild( node );
+		} );
+		document.querySelectorAll( '[placeholder]' ).forEach( function ( el ) {
+			var t = map[ norm( el.getAttribute( 'placeholder' ) ) ];
+			if ( t ) { el.setAttribute( 'placeholder', t[ tl ] ); lock( el ); }
+		} );
+	}
+	// Nút ngôn ngữ: đánh dấu ngôn ngữ đang xem, VI về trang gốc.
+	var origin = 'https://' + host.replace( /\.translate\.goog$/, '' ).replace( /--/g, '\u0000' ).replace( /-/g, '.' ).replace( /\u0000/g, '-' );
+	document.querySelectorAll( '.lang-switch__item' ).forEach( function ( el ) {
+		var code = ( el.getAttribute( 'hreflang' ) || el.textContent || '' ).trim().toLowerCase();
+		if ( el.classList.contains( 'is-active' ) ) { code = 'vi'; }
+		var a = document.createElement( code === tl ? 'span' : 'a' );
+		a.className = 'lang-switch__item' + ( code === tl ? ' is-active' : '' );
+		a.textContent = code.toUpperCase();
+		if ( code !== tl ) {
+			if ( code === 'vi' ) {
+				var q = new URLSearchParams( location.search );
+				[ '_x_tr_sl', '_x_tr_tl', '_x_tr_hl', '_x_tr_pto' ].forEach( function ( k ) { q.delete( k ); } );
+				a.href = origin + location.pathname + ( q.toString() ? '?' + q : '' );
+			} else {
+				var u = new URL( location.href );
+				u.searchParams.set( '_x_tr_tl', code );
+				u.searchParams.set( '_x_tr_hl', code );
+				a.href = u.toString();
+			}
+		}
+		lock( a );
+		el.parentNode.replaceChild( a, el );
+	} );
+})();
+</script>
+		<?php
+	},
+	1
+);

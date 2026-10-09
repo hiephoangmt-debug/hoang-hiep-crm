@@ -19,7 +19,7 @@ if ( $resale ) {
 			<span class="media-placeholder"><?php echo hh_icon( 'building' ); // phpcs:ignore ?></span>
 		<?php endif; ?>
 		<?php hh_pill( '1' === hh_meta( 'hh_p_sold_out' ) ? 'Đã bán hết' : $status, '1' === hh_meta( 'hh_p_sold_out' ) ? 'sold' : hh_meta( 'hh_p_status' ) ); ?>
-		<?php if ( hh_is_hot() ) : ?><span class="hot-badge">HOT</span><?php endif; ?>
+		<?php if ( hh_is_hot() ) : ?><span class="hot-badge notranslate" translate="no">HOT</span><?php endif; ?>
 		<?php if ( $type ) : ?>
 			<span class="project-card__type"><?php echo esc_html( hh_project_types_label() ); ?></span>
 		<?php endif; ?>

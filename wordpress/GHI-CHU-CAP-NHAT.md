@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.0** + plugin Hoàng Hiệp CRM **2.20.15**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.1** + plugin Hoàng Hiệp CRM **2.20.16**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.1 + plugin 2.20.16: bản dịch Google dùng thuật ngữ BĐS chuẩn
+
+- Khi xem trang qua bản dịch Google (EN / KO), khoảng 70 nhãn quan trọng được thay sẵn bằng bản dịch chuẩn trước khi Google dịch: tình trạng (분양 중, 분양 예정, 입주 완료…), loại dự án, menu, mục lục trang dự án, bảng thông tin (시행사 = chủ đầu tư, 총 세대수, 법적 상태…), nút liên hệ, ô tìm kiếm.
+- Nút VI · EN · KO không bị Google dịch nhầm nữa (trước đây KO thành "아니요"), hiện đúng ngôn ngữ đang xem; bấm VI về trang gốc.
+- Nhãn HOT không bị dịch thành "더운".
+- Thêm thuật ngữ: sửa hàm hh_lang_glossary() trong hh-crm/ngon-ngu.php.
 
 ## Có gì mới – giao diện 2.15.0 + plugin 2.20.15: trang tiếng Anh /en/ và tiếng Hàn /ko/
 

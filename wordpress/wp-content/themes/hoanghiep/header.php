@@ -60,7 +60,7 @@ $hh_t    = 'vi' !== $hh_lang ? hh_lang_strings( $hh_lang ) : null;
 			<span><small><?php echo esc_html( $hh_t ? $hh_t['hotline'] : 'Hotline tư vấn' ); ?></small><strong><?php echo esc_html( $hh_t ? '+84 ' . ltrim( hoanghiep_opt( 'hh_phone' ), '0' ) : hoanghiep_opt( 'hh_phone' ) ); ?></strong></span>
 		</a>
 		<?php if ( function_exists( 'hh_langs' ) ) : ?>
-			<nav class="lang-switch" aria-label="Ngôn ngữ / Language">
+			<nav class="lang-switch notranslate" translate="no" aria-label="Ngôn ngữ / Language">
 				<?php foreach ( array_merge( array( 'vi' => 'VI' ), array_combine( array_keys( hh_langs() ), array_map( 'strtoupper', array_keys( hh_langs() ) ) ) ) as $code => $label ) : ?>
 					<?php if ( $code === $hh_lang ) : ?>
 						<span class="lang-switch__item is-active" aria-current="true"><?php echo esc_html( $label ); ?></span>
