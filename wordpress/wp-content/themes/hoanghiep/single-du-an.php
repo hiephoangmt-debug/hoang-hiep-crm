@@ -100,7 +100,7 @@ while ( have_posts() ) :
 			<?php foreach ( get_the_terms( $id, 'loai-du-an' ) ?: array() as $t ) : ?><?php if ( $t->parent ) : ?><a class="pill pill--type" href="<?php echo esc_url( get_term_link( $t ) ); ?>"><?php echo esc_html( $t->name ); ?></a><?php endif; ?><?php endforeach; ?>
 			<h1 class="project-hero__title"><?php the_title(); ?> <span class="project-hero__kw"><?php echo esc_html( $resale ? 'Giá chuyển nhượng, cho thuê ' . wp_date( 'm/Y' ) : 'Bảng giá, chính sách bán hàng ' . wp_date( 'm/Y' ) ); ?></span></h1>
 			<?php if ( hh_meta( 'hh_p_developer' ) ) : ?>
-				<p class="project-hero__dev">Chủ đầu tư: <?php echo esc_html( hh_meta( 'hh_p_developer' ) ); ?></p>
+				<p class="project-hero__dev"><span>Chủ đầu tư</span>: <?php echo esc_html( hh_meta( 'hh_p_developer' ) ); ?></p>
 			<?php endif; ?>
 			<?php if ( hh_meta( 'hh_p_address' ) ) : ?>
 				<p class="project-hero__addr"><?php echo hh_icon( 'pin' ); // phpcs:ignore ?> <?php echo esc_html( hh_meta( 'hh_p_address' ) ); ?></p>

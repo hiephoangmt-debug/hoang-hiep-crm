@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.3** + plugin Hoàng Hiệp CRM **2.20.16**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.4** + plugin Hoàng Hiệp CRM **2.20.17**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,14 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.4 + plugin 2.20.17: bản dịch Google sửa địa danh, tên dự án, cụm từ BĐS trong câu
+
+- Địa danh: "cầu sông Hàn" trước bị Google dịch thành 한강대교 (cầu ở Seoul) → nay "다낭 한강교"; thêm cầu Rồng (용다리), biển Mỹ Khê (미케 비치), bán đảo Sơn Trà (선짜 반도), Bà Nà (바나힐), phố cổ Hội An, sân bay Đà Nẵng, pháo hoa DIFF…
+- Tên dự án và thương hiệu giữ nguyên chữ Latin (không còn "썬솔라 레지던스"): tên dự án bỏ dấu, Sun Group, Sun Property, VietinBank…
+- Cụm từ BĐS trong câu: chủ đầu tư (시행사), sở hữu lâu dài (영구 소유), sổ hồng (핑크북), thông thủy / tim tường (전용면적 / 공급면적), bảo lãnh ngân hàng, hợp đồng mua bán (SPA), chiết khấu, thanh toán sớm, đặt cọc…
+- Tiêu đề trang dự án: "Bảng giá, chính sách bán hàng" → 분양가표·분양 정책; "Ưu đãi & chính sách tháng" → 혜택·분양 정책.
+- Thêm cụm từ: hàm hh_lang_phrases() trong hh-crm/ngon-ngu.php.
 
 ## Có gì mới – giao diện 2.15.3: danh sách dự án trên /en/, /ko/ dễ đọc hơn
 

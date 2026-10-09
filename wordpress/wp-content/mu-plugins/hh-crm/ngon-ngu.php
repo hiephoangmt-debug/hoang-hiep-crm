@@ -211,11 +211,90 @@ function hh_lang_glossary() {
 	);
 }
 
+/**
+ * Cụm từ trong câu (thay một phần câu): địa danh, thuật ngữ BĐS. Chữ thường tự có thêm bản viết hoa chữ đầu.
+ * Lưu ý địa danh: "cầu sông Hàn" Google dịch thành 한강대교 (cầu ở Seoul) – phải ghi rõ là Đà Nẵng.
+ */
+function hh_lang_phrases() {
+	return array(
+		'Bảng giá, chính sách bán hàng' => array( 'Price list & sales policy', '분양가표·분양 정책' ),
+		'Ưu đãi & chính sách tháng'     => array( 'Offers & sales policy', '혜택·분양 정책' ),
+		'cầu quay sông Hàn'             => array( 'Han River swing bridge', '다낭 한강 회전교' ),
+		'cầu sông Hàn'                  => array( 'Han River Bridge', '다낭 한강교' ),
+		'sông Hàn'                      => array( 'Han River', '다낭 한강' ),
+		'cầu Rồng'                      => array( 'Dragon Bridge', '용다리' ),
+		'cầu Trần Thị Lý'               => array( 'Tran Thi Ly Bridge', '쩐티리 다리' ),
+		'cầu Hòa Xuân'                  => array( 'Hoa Xuan Bridge', '호아쑤언 다리' ),
+		'biển Mỹ Khê'                   => array( 'My Khe Beach', '미케 비치' ),
+		'Mỹ Khê'                        => array( 'My Khe', '미케' ),
+		'bán đảo Sơn Trà'               => array( 'Son Tra Peninsula', '선짜 반도' ),
+		'Bà Nà'                         => array( 'Ba Na Hills', '바나힐' ),
+		'phố cổ Hội An'                 => array( 'Hoi An Ancient Town', '호이안 올드타운' ),
+		'Hội An'                        => array( 'Hoi An', '호이안' ),
+		'sân bay quốc tế Đà Nẵng'       => array( 'Da Nang International Airport', '다낭 국제공항' ),
+		'sân bay Đà Nẵng'               => array( 'Da Nang Airport', '다낭 공항' ),
+		'pháo hoa DIFF'                 => array( 'DIFF fireworks festival', '다낭 국제 불꽃축제(DIFF)' ),
+		'Sun Early Key'                 => array( 'Sun Early Key', 'Sun Early Key(조기 입주 프로그램)' ),
+		'chủ đầu tư'                    => array( 'developer', '시행사' ),
+		'sở hữu lâu dài'                => array( 'long-term ownership', '영구 소유' ),
+		'căn hộ dịch vụ'                => array( 'serviced apartment', '서비스 아파트' ),
+		'sổ hồng'                       => array( 'Pink Book (ownership certificate)', '핑크북(소유권 증서)' ),
+		'thông thủy'                    => array( 'net area', '전용면적' ),
+		'tim tường'                     => array( 'gross area', '공급면적' ),
+		'bảo lãnh ngân hàng'            => array( 'bank guarantee', '은행 지급보증' ),
+		'hợp đồng mua bán'              => array( 'sale and purchase agreement (SPA)', '매매계약서(SPA)' ),
+		'thanh toán sớm'                => array( 'early payment', '조기 납부' ),
+		'chiết khấu'                    => array( 'discount', '할인' ),
+		'phiếu tính giá'                => array( 'price quotation', '세대별 가격 견적서' ),
+		'vay tối đa'                    => array( 'loan up to', '최대 대출 비율' ),
+		'hỗ trợ lãi suất'               => array( 'interest-rate support', '이자 지원' ),
+		'ân hạn nợ gốc'                 => array( 'principal grace period', '원금 상환 유예' ),
+		'đặt cọc'                       => array( 'deposit', '계약금' ),
+		'giữ chỗ'                       => array( 'booking', '예약' ),
+		'bàn giao'                      => array( 'handover', '입주(인도)' ),
+		'mở bán'                        => array( 'sales launch', '분양' ),
+		'shophouse'                     => array( 'shophouse', '샵하우스' ),
+		'penthouse'                     => array( 'penthouse', '펜트하우스' ),
+	);
+}
+
+/** Tên riêng giữ nguyên (không để Google phiên âm "Sun Solar" thành 썬솔라): tên dự án (bỏ dấu) và thương hiệu chủ đầu tư. */
+function hh_lang_brands() {
+	$out = get_transient( 'hh_lang_brands' );
+	if ( is_array( $out ) ) {
+		return $out;
+	}
+	$out = array();
+	foreach ( get_posts( array( 'post_type' => 'du-an', 'posts_per_page' => 400, 'post_status' => 'publish' ) ) as $p ) {
+		$title = trim( preg_replace( '/\s*\([^)]*\)/u', '', $p->post_title ) );
+		if ( preg_match( '/^[A-Z0-9]/', remove_accents( $title ) ) && ! preg_match( '/^(Khu|Dự án|Nhà|Căn|Đất|Biệt)/u', $title ) ) {
+			$out[ $title ] = trim( preg_replace( '/\s+/u', ' ', remove_accents( $title ) ) );
+		}
+	}
+	foreach ( array( 'Sun Group', 'Sun Property', 'Vinhomes', 'Vingroup', 'Masterise', 'Novaland', 'FPT City', 'Đất Xanh', 'Danh Khôi', 'Sun World', 'Sun NeO City', 'Accor', 'VietinBank', 'Vietcombank', 'BIDV', 'Techcombank', 'MB Bank' ) as $b ) {
+		$out[ $b ] = remove_accents( $b );
+	}
+	set_transient( 'hh_lang_brands', $out, 12 * HOUR_IN_SECONDS );
+	return $out;
+}
+add_action( 'save_post_du-an', static fn() => delete_transient( 'hh_lang_brands' ) );
+
 add_action(
 	'wp_footer',
 	static function () {
 		if ( is_admin() ) {
 			return;
+		}
+		$phr = array();
+		foreach ( hh_lang_phrases() as $vi => list( $en, $ko ) ) {
+			$phr[ $vi ] = array( 'en' => $en, 'ko' => $ko );
+			$up         = mb_strtoupper( mb_substr( $vi, 0, 1 ) ) . mb_substr( $vi, 1 );
+			if ( $up !== $vi && ! isset( $phr[ $up ] ) ) {
+				$phr[ $up ] = array( 'en' => ucfirst( $en ), 'ko' => $ko );
+			}
+		}
+		foreach ( hh_lang_brands() as $vi => $latin ) {
+			$phr[ $vi ] = array( 'en' => $latin, 'ko' => $latin );
 		}
 		$map = array();
 		foreach ( hh_lang_glossary() as $vi => list( $en, $ko ) ) {
@@ -244,6 +323,33 @@ add_action(
 			p.replaceChild( span, node );
 			span.appendChild( node );
 		} );
+		// Cụm từ trong câu: thay phần khớp bằng <span translate="no">, phần còn lại để Google dịch.
+		var phr = <?php echo wp_json_encode( $phr, JSON_UNESCAPED_UNICODE ); ?>;
+		var keys = Object.keys( phr ).sort( function ( a, b ) { return b.length - a.length; } );
+		if ( keys.length ) {
+			var re = new RegExp( '(' + keys.map( function ( k ) { return k.replace( /[.*+?^${}()|[\]\\]/g, '\\$&' ); } ).join( '|' ) + ')', 'g' );
+			var w2 = document.createTreeWalker( document.body, NodeFilter.SHOW_TEXT ), list = [], m2;
+			while ( ( m2 = w2.nextNode() ) ) { list.push( m2 ); }
+			list.forEach( function ( node ) {
+				var p = node.parentNode;
+				if ( ! p || /^(SCRIPT|STYLE|OPTION|TEXTAREA)$/.test( p.nodeName ) || p.closest( '[translate="no"]' ) ) { return; }
+				var txt = node.nodeValue;
+				re.lastIndex = 0;
+				if ( ! re.test( txt ) ) { return; }
+				re.lastIndex = 0;
+				var frag = document.createDocumentFragment(), last = 0, mm;
+				while ( ( mm = re.exec( txt ) ) ) {
+					if ( mm.index > last ) { frag.appendChild( document.createTextNode( txt.slice( last, mm.index ) ) ); }
+					var sp = document.createElement( 'span' );
+					sp.textContent = phr[ mm[0] ][ tl ];
+					lock( sp );
+					frag.appendChild( sp );
+					last = mm.index + mm[0].length;
+				}
+				if ( last < txt.length ) { frag.appendChild( document.createTextNode( txt.slice( last ) ) ); }
+				p.replaceChild( frag, node );
+			} );
+		}
 		document.querySelectorAll( '[placeholder]' ).forEach( function ( el ) {
 			var t = map[ norm( el.getAttribute( 'placeholder' ) ) ];
 			if ( t ) { el.setAttribute( 'placeholder', t[ tl ] ); lock( el ); }
