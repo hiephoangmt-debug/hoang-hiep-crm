@@ -11,6 +11,7 @@ function hh_news_dataset() {
 	return array(
 		array(
 			'slug'     => 'toan-canh-ha-tang-da-nang-2026-tac-dong-bat-dong-san',
+			'rev'      => '2026-10-09', // Quốc lộ 14D đã khởi công, thêm đường tránh Nam Hải Vân.
 			'title'    => 'Toàn cảnh hạ tầng Đà Nẵng 2026: những công trình định hình lại thị trường bất động sản',
 			'excerpt'  => 'Năm 2026 Đà Nẵng đồng loạt triển khai cảng Liên Chiểu, khu thương mại tự do, trung tâm tài chính quốc tế, cụm nút giao cầu Hòa Xuân, mở rộng sân bay và Quốc lộ 14D. Đây là bản đồ hạ tầng và khu vực bất động sản hưởng lợi.',
 			'project'  => '',
@@ -100,10 +101,11 @@ HTML,
 		),
 		array(
 			'slug'     => 'cum-nut-giao-cau-hoa-xuan-bat-dong-san-nam-da-nang',
-			'title'    => 'Cụm nút giao cầu Hòa Xuân hơn 1.378 tỷ: Hòa Xuân, Nam Hòa Xuân hưởng lợi thế nào?',
+			'title'    => 'Cầu Hòa Xuân đã khởi công: cụm nút giao, 2 hầm chui hơn 1.378 tỷ và tác động BĐS Hòa Xuân',
 			'excerpt'  => 'Cụm nút giao thông cầu Hòa Xuân hơn 1.378 tỷ đồng đã khởi công ngày 25/8/2026: thêm cầu mới phía hạ lưu, hầm chui Cách Mạng Tháng Tám và Thăng Long, thi công dự kiến 730 ngày. Tác động đến căn hộ, đất nền Hòa Xuân.',
 			'project'  => 'sun-neo-city',
 			'keyword'  => 'cầu Hòa Xuân',
+			'rev'      => '2026-10-09', // Đã khởi công 25/8/2026.
 			'old_meta' => array(
 				'rank_math_title'       => 'Cầu Hòa Xuân: cụm nút giao 1.378 tỷ và BĐS Nam Đà Nẵng',
 				'rank_math_description' => 'Cầu Hòa Xuân: cụm nút giao hơn 1.378 tỷ đồng, cầu mới 303,5 m, làm trong 2026 – 2029; tác động đến giá căn hộ, đất nền Hòa Xuân, Nam Hòa Xuân.',
@@ -439,14 +441,19 @@ function hh_import_news() {
 		if ( $post ) {
 			$id   = $post->ID;
 			$hash = get_post_meta( $id, '_hh_news_hash', true );
-			if ( $hash && md5( $post->post_content ) === $hash && md5( $content ) !== $hash ) {
+			// 'rev': bản cập nhật bắt buộc (tin có diễn biến mới) – ghi đè cả bài đã sửa tay; bản cũ vẫn còn trong mục Bản sửa đổi (Revisions).
+			$force = ! empty( $n['rev'] ) && get_post_meta( $id, '_hh_news_rev', true ) !== $n['rev'];
+			if ( $force || ( $hash && md5( $post->post_content ) === $hash && md5( $content ) !== $hash ) ) {
 				$upd = array( 'ID' => $id, 'post_content' => $content );
-				if ( in_array( $post->post_title, (array) ( $n['old_title'] ?? array() ), true ) ) {
+				if ( $force || in_array( $post->post_title, (array) ( $n['old_title'] ?? array() ), true ) ) {
 					$upd['post_title']   = $n['title']; // Tiêu đề, tóm tắt cũ do web tạo (chưa sửa tay) → đổi theo bản mới.
 					$upd['post_excerpt'] = $n['excerpt'];
 				}
 				wp_update_post( $upd );
 				update_post_meta( $id, '_hh_news_hash', md5( get_post_field( 'post_content', $id ) ) );
+				if ( ! empty( $n['rev'] ) ) {
+					update_post_meta( $id, '_hh_news_rev', $n['rev'] );
+				}
 			} elseif ( ! $hash && false === strpos( $post->post_content, 'key-points' ) && false !== strpos( $post->post_content, 'Nguồn tổng hợp' ) ) {
 				// Bài bản đầu (chưa có mã băm) và chưa bị sửa phần cấu trúc: nâng cấp lên bản có điểm chính, hỏi đáp.
 				wp_update_post( array( 'ID' => $id, 'post_content' => $content ) );
@@ -469,6 +476,9 @@ function hh_import_news() {
 				continue;
 			}
 			update_post_meta( $id, '_hh_news_hash', md5( get_post_field( 'post_content', $id ) ) );
+			if ( ! empty( $n['rev'] ) ) {
+				update_post_meta( $id, '_hh_news_rev', $n['rev'] );
+			}
 			++$created;
 		}
 		if ( $week ) {

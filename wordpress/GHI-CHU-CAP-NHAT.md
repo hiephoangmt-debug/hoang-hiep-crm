@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.1** + plugin Hoàng Hiệp CRM **2.18.2**)
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.1** + plugin Hoàng Hiệp CRM **2.18.3**)
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.18.3: ép cập nhật bài cầu Hòa Xuân, toàn cảnh hạ tầng
+
+- Bài **cầu Hòa Xuân** (đã khởi công 25/8/2026, 2 hầm chui, 730 ngày) và **toàn cảnh hạ tầng 2026** được cập nhật **kể cả khi bài đã bị sửa trên web** (bản 2.18.2 bỏ qua bài đã sửa). Bản cũ vẫn xem/khôi phục được ở **Bản sửa đổi** (Revisions) trong trang sửa bài.
+- Chỉ ép 1 lần; về sau anh sửa tay bài này thì giữ nguyên.
 
 ## Có gì mới – plugin 2.18.2: tin hạ tầng, thị trường đầu tháng 10/2026 (đăng ngay)
 
