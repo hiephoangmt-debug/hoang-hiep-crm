@@ -80,6 +80,8 @@ function hh_dataset_sun_group_da_nang( $projects ) {
 			'hh_p_penthouse_desc' => 'Có căn Penthouse trên các tầng cao – liên hệ để nhận danh sách căn.',
 			'hh_p_amenities_in' => "Hồ bơi\nGym & spa\nKids club\nShophouse khối đế tầng 1 – 2",
 			'hh_p_connections' => "Chân cầu | Cầu Hòa Xuân\n10 phút | Trung tâm thành phố, cầu Rồng\n10 phút | Sân bay quốc tế Đà Nẵng\n30 phút | Bán đảo Sơn Trà, phố cổ Hội An",
+			// Phối cảnh chủ đầu tư (anh Hiệp gửi 09/10/2026), ảnh đi kèm plugin trong img/spana-tower/.
+			'hh_p_image_links' => "plugin:img/spana-tower/spana-tower-toan-canh-ven-song-cau-hoa-xuan.jpg | Phối cảnh Spana Tower bên sông Cẩm Lệ, chân cầu Hòa Xuân, Đà Nẵng | đại diện\nplugin:img/spana-tower/spana-tower-truc-duong-chinh-2-toa.jpg | Hai tòa Spana Tower A1.3, A1.4 hai bên trục đường dẫn cầu Hòa Xuân | thư viện\nplugin:img/spana-tower/spana-tower-phoi-canh-tren-cao-ven-song.jpg | Spana Tower nhìn từ trên cao, hướng sông và cầu Hòa Xuân | thư viện\nplugin:img/spana-tower/spana-tower-2-toa-a13-a14-nhin-tu-tren-cao.jpg | Hai tòa Spana Tower và khu nhà phố Sun NeO City ven sông | thư viện\nplugin:img/spana-tower/spana-tower-hoang-hon-khoi-de-thuong-mai.jpg | Khối đế thương mại Spana Tower lúc hoàng hôn | tiện ích",
 		),
 		'sources' => array( 'https://minhminhgroup.vn/sun-group-mo-ban-can-ho-hoa-xuan-spana-tower/', 'https://sunurbancityhanam.vn/sun-spana-tower/' ),
 	);
