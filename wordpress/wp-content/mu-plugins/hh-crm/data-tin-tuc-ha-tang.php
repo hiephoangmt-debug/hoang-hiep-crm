@@ -436,10 +436,17 @@ function hh_import_news() {
 		$cat_id  = hh_news_category( $n['category'] );
 		$week    = (int) ( $n['week'] ?? 0 );
 		$date    = ! empty( $n['date'] ) ? (int) strtotime( $n['date'] . ' ' . wp_timezone_string() ) : ( $week ? hh_news_plan_date( $week, $pos[ $week ] = ( $pos[ $week ] ?? -1 ) + 1 ) : time() - $i * HOUR_IN_SECONDS );
+		if ( ! empty( $n['date'] ) && $date > time() ) {
+			$date = time() - $i; // Tin có ngày cố định: không lên lịch (múi giờ web khác giờ Việt Nam vẫn đăng ngay).
+		}
 		$content = hh_news_build_content( $n, $seo );
 		$post    = get_posts( array( 'name' => $n['slug'], 'post_type' => 'post', 'post_status' => array( 'publish', 'future', 'draft', 'pending', 'private' ), 'numberposts' => 1 ) )[0] ?? null;
 		if ( $post ) {
 			$id   = $post->ID;
+			if ( 'future' === $post->post_status && ! empty( $n['date'] ) && empty( $n['status'] ) ) {
+				// Bản trước lỡ lên lịch tin có ngày cố định (do múi giờ) → đăng ngay.
+				wp_update_post( array( 'ID' => $id, 'post_status' => 'publish', 'post_date' => wp_date( 'Y-m-d H:i:s', $date ), 'post_date_gmt' => gmdate( 'Y-m-d H:i:s', $date ) ) );
+			}
 			$hash = get_post_meta( $id, '_hh_news_hash', true );
 			// 'rev': bản cập nhật bắt buộc (tin có diễn biến mới) – ghi đè cả bài đã sửa tay; bản cũ vẫn còn trong mục Bản sửa đổi (Revisions).
 			$force = ! empty( $n['rev'] ) && get_post_meta( $id, '_hh_news_rev', true ) !== $n['rev'];

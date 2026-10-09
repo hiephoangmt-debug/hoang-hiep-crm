@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.1** + plugin Hoàng Hiệp CRM **2.18.3**)
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.1** + plugin Hoàng Hiệp CRM **2.18.4**)
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.18.4: tin mới đăng ngay, không bị "lên lịch"
+
+- Web đặt múi giờ khác giờ Việt Nam (ví dụ UTC) thì bản trước có thể biến tin mới thành **Đã lên lịch** thay vì đăng. Bản này đăng ngay, và tự đăng các tin đã lỡ lên lịch khi bấm Nhập dữ liệu.
+- Nên đặt **Cài đặt → Chung → Múi giờ: Hồ Chí Minh**.
 
 ## Có gì mới – plugin 2.18.3: ép cập nhật bài cầu Hòa Xuân, toàn cảnh hạ tầng
 
