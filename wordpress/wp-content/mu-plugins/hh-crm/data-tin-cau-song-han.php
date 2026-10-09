@@ -127,11 +127,20 @@ HTML,
 	return $posts;
 }
 
-/** Bài tin thời sự: schema NewsArticle thay cho BlogPosting mặc định của Rank Math. */
+/** Bài tin thời sự (dùng schema NewsArticle thay cho BlogPosting mặc định của Rank Math). */
+function hh_news_article_slugs() {
+	return array(
+		'da-nang-de-xuat-xay-cau-moi-qua-song-han',
+		'bang-gia-dat-da-nang-sua-doi-2026',
+		'duong-tranh-nam-hai-van-6-lan-bat-dong-san-lien-chieu',
+		'tin-ha-tang-da-nang-thang-10-2026',
+	);
+}
+
 add_filter(
 	'rank_math/json_ld',
 	static function ( $data ) {
-		if ( ! is_singular( 'post' ) || 'da-nang-de-xuat-xay-cau-moi-qua-song-han' !== get_post_field( 'post_name', get_queried_object_id() ) ) {
+		if ( ! is_singular( 'post' ) || ! in_array( get_post_field( 'post_name', get_queried_object_id() ), hh_news_article_slugs(), true ) ) {
 			return $data;
 		}
 		foreach ( $data as $key => $node ) {

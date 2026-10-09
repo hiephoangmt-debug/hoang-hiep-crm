@@ -22,10 +22,11 @@ function hh_news_dataset() {
 <ul>
 <li><strong>Cảng Liên Chiểu và Khu thương mại tự do:</strong> phần hạ tầng dùng chung của cảng đã hoàn thành, khu thương mại tự do khoảng 1.881 ha ở 7 vị trí – động lực cho phía Tây Bắc (Liên Chiểu, Hòa Vang). <a href="/cang-lien-chieu-khu-thuong-mai-tu-do-bat-dong-san-lien-chieu/">Xem chi tiết</a>.</li>
 <li><strong>Trung tâm tài chính quốc tế:</strong> khai trương ngày 9/1/2026, tổng diện tích khoảng 300 ha, có các lô đất trên đường Võ Văn Kiệt (Sơn Trà) và khu lấn biển Nguyễn Tất Thành. <a href="/trung-tam-tai-chinh-quoc-te-da-nang-tac-dong-bat-dong-san/">Xem chi tiết</a>.</li>
-<li><strong>Cụm nút giao thông cầu Hòa Xuân:</strong> tổng vốn hơn 1.378 tỷ đồng, thực hiện giai đoạn 2026 – 2029, bổ sung cầu mới phía hạ lưu. <a href="/cum-nut-giao-cau-hoa-xuan-bat-dong-san-nam-da-nang/">Xem chi tiết</a>.</li>
+<li><strong>Cụm nút giao thông cầu Hòa Xuân:</strong> tổng vốn hơn 1.378 tỷ đồng, đã khởi công ngày 25/8/2026 (thi công dự kiến 730 ngày), bổ sung cầu mới phía hạ lưu và 2 hầm chui. <a href="/cum-nut-giao-cau-hoa-xuan-bat-dong-san-nam-da-nang/">Xem chi tiết</a>.</li>
 <li><strong>Mở rộng nhà ga T2 sân bay Đà Nẵng:</strong> gần 1.500 tỷ đồng, nâng công suất nhà ga quốc tế lên 6 triệu khách/năm. <a href="/mo-rong-nha-ga-t2-san-bay-da-nang-bat-dong-san-cho-thue/">Xem chi tiết</a>.</li>
-<li><strong>Quốc lộ 14D:</strong> cải tạo, nâng cấp với tổng mức đầu tư 4.518 tỷ đồng, dự kiến khởi công từ tháng 6/2026 – kết nối cửa khẩu Nam Giang, mở trục giao thương phía Tây.</li>
-<li><strong>Cụm nút giao Lê Thanh Nghị – Cách Mạng Tháng Tám – Thăng Long</strong> (đường dẫn lên cầu Hòa Xuân) và dự án <strong>tuyến hầm qua sân bay Đà Nẵng</strong> đang hoàn thiện hồ sơ.</li>
+<li><strong>Quốc lộ 14D:</strong> cải tạo, nâng cấp dài 65,37 km với tổng mức đầu tư 4.518 tỷ đồng, đã khởi công ngày 26/6/2026 – kết nối cửa khẩu Nam Giang, mở trục giao thương phía Tây.</li>
+<li><strong>Đường tránh Nam Hải Vân 6 làn:</strong> đoạn Hòa Liên – đường ven biển nối cảng Liên Chiểu, khoảng 5,36 km, tổng mức hơn 1.951 tỷ đồng. <a href="/duong-tranh-nam-hai-van-6-lan-bat-dong-san-lien-chieu/">Xem chi tiết</a>.</li>
+<li>Dự án <strong>tuyến hầm qua sân bay Đà Nẵng</strong> đang hoàn thiện hồ sơ.</li>
 <li><strong>Đường sắt tốc độ cao Bắc – Nam:</strong> ga Đà Nẵng dự kiến đặt tại Hòa Sơn (Hòa Vang), vận hành từ năm 2035. <a href="/ga-duong-sat-toc-do-cao-da-nang-hoa-son-bat-dong-san-hoa-vang/">Xem chi tiết</a>.</li>
 <li><strong>Đường ven biển 129 (Võ Chí Công):</strong> tuyến ven biển phía Nam dài khoảng 26,5 km được mở rộng lên 6 làn. <a href="/duong-ven-bien-129-vo-chi-cong-bat-dong-san-ven-bien-hoi-an/">Xem chi tiết</a>.</li>
 </ul>
@@ -100,17 +101,35 @@ HTML,
 		array(
 			'slug'     => 'cum-nut-giao-cau-hoa-xuan-bat-dong-san-nam-da-nang',
 			'title'    => 'Cụm nút giao cầu Hòa Xuân hơn 1.378 tỷ: Hòa Xuân, Nam Hòa Xuân hưởng lợi thế nào?',
-			'excerpt'  => 'Đà Nẵng triển khai cụm nút giao thông cầu Hòa Xuân hơn 1.378 tỷ đồng, bổ sung cầu mới dài 303,5 m phía hạ lưu, thực hiện 2026 – 2029. Kết nối phía Nam được nâng cấp, tác động trực tiếp đến căn hộ, đất nền Hòa Xuân.',
+			'excerpt'  => 'Cụm nút giao thông cầu Hòa Xuân hơn 1.378 tỷ đồng đã khởi công ngày 25/8/2026: thêm cầu mới phía hạ lưu, hầm chui Cách Mạng Tháng Tám và Thăng Long, thi công dự kiến 730 ngày. Tác động đến căn hộ, đất nền Hòa Xuân.',
 			'project'  => 'sun-neo-city',
 			'keyword'  => 'cầu Hòa Xuân',
+			'old_meta' => array(
+				'rank_math_title'       => 'Cầu Hòa Xuân: cụm nút giao 1.378 tỷ và BĐS Nam Đà Nẵng',
+				'rank_math_description' => 'Cầu Hòa Xuân: cụm nút giao hơn 1.378 tỷ đồng, cầu mới 303,5 m, làm trong 2026 – 2029; tác động đến giá căn hộ, đất nền Hòa Xuân, Nam Hòa Xuân.',
+			),
 			'content'  => <<<'HTML'
 <p>Cầu Hòa Xuân là cửa ngõ nối trung tâm Đà Nẵng với khu đô thị phía Nam – nơi tập trung các dự án lớn của Sun Group như Sun NeO City, Sun Riverpolis, khu đô thị sinh thái Hòa Xuân. Lượng xe qua cầu tăng nhanh khiến khu vực thường xuyên ùn tắc giờ cao điểm.</p>
 
+<h2>Cập nhật: đã khởi công ngày 25/8/2026</h2>
+<p>Sáng 25/8/2026, TP Đà Nẵng khởi công Dự án cụm nút giao thông Lê Thanh Nghị – Cách Mạng Tháng Tám – Thăng Long – đường dẫn cầu Hòa Xuân, sớm hơn mốc tháng 10/2026 từng công bố. Lễ khởi công có Phó Thủ tướng Thường trực Phạm Gia Túc dự.</p>
+<table>
+<thead><tr><th>Hạng mục</th><th>Thông tin</th></tr></thead>
+<tbody>
+<tr><td>Ngày khởi công</td><td>25/8/2026</td></tr>
+<tr><td>Thời gian thi công dự kiến</td><td>730 ngày</td></tr>
+<tr><td>Tổng mức đầu tư</td><td>Hơn 1.378 tỷ đồng, ngân sách thành phố (một số báo nêu con số khác do khác phạm vi tính)</td></tr>
+<tr><td>Chủ đầu tư</td><td>Ban QLDA đầu tư xây dựng các công trình giao thông và nông nghiệp TP Đà Nẵng</td></tr>
+<tr><td>Nhà thầu thi công</td><td>Liên danh DACINCO, giá trúng thầu gần 1.180 tỷ đồng</td></tr>
+</tbody>
+</table>
+
 <h2>Nội dung dự án</h2>
 <ul>
-<li>Tổng mức đầu tư hơn 1.378 tỷ đồng từ ngân sách thành phố, thực hiện giai đoạn 2026 – 2029.</li>
-<li>Giữ cầu Hòa Xuân hiện hữu và xây thêm một cầu mới phía hạ lưu dài khoảng 303,5 m, rộng 14 m.</li>
-<li>Kết hợp cụm nút giao Lê Thanh Nghị – Cách Mạng Tháng Tám – Thăng Long – đường dẫn lên cầu, có thêm cầu vượt, hầm chui để tách luồng xe.</li>
+<li>Hầm chui trên đường Cách Mạng Tháng Tám và hầm chui trên đường Thăng Long.</li>
+<li>Mở rộng đường Lê Thanh Nghị.</li>
+<li>Giữ cầu Hòa Xuân hiện hữu và xây thêm một đơn nguyên cầu mới phía hạ lưu dài khoảng 303,5 m, rộng 14 m.</li>
+<li>Trước khi thi công, thành phố đã thử nghiệm phân luồng giao thông quanh khu vực chân cầu.</li>
 </ul>
 
 <h2>Tác động đến bất động sản phía Nam</h2>
@@ -122,9 +141,9 @@ HTML,
 </ul>
 
 <h2>Lưu ý</h2>
-<p>Trong thời gian thi công 2026 – 2029, giao thông quanh chân cầu có thể bị ảnh hưởng. Người mua để ở nên cân nhắc thời điểm nhận nhà, còn nhà đầu tư dài hạn có thể tận dụng giai đoạn này để chọn sản phẩm ở mức giá hợp lý trước khi hạ tầng hoàn thiện.</p>
+<p>Trong thời gian thi công (dự kiến 730 ngày kể từ 25/8/2026), giao thông quanh chân cầu bị phân luồng, có lúc ùn ứ. Người mua để ở nên cân nhắc thời điểm nhận nhà, còn nhà đầu tư dài hạn có thể tận dụng giai đoạn này để chọn sản phẩm ở mức giá hợp lý trước khi hạ tầng hoàn thiện.</p>
 HTML,
-			'sources'  => array( 'https://tuoitre.vn/da-nang-lam-them-cau-ham-chui-voi-du-an-1378-ti-tai-khu-vuc-cau-hoa-xuan-100260621154453704.htm', 'https://plo.vn/da-nang-duyet-du-an-cum-nut-giao-cau-hoa-xuan-hon-1378-ti-dong-post899700.html', 'https://viettimes.vn/da-nang-khoi-cong-cum-nut-giao-thong-cau-hoa-xuan-gan-1400-ty-dong-post204959.html' ),
+			'sources'  => array( 'https://www.sggp.org.vn/khoi-cong-cum-nut-giao-cau-hoa-xuan-go-diem-nghen-giao-thong-phia-nam-da-nang-post868701.html', 'https://tuoitre.vn/da-nang-lam-them-cau-ham-chui-voi-du-an-1378-ti-tai-khu-vuc-cau-hoa-xuan-100260621154453704.htm', 'https://plo.vn/da-nang-duyet-du-an-cum-nut-giao-cau-hoa-xuan-hon-1378-ti-dong-post899700.html', 'https://viettimes.vn/da-nang-khoi-cong-cum-nut-giao-thong-cau-hoa-xuan-gan-1400-ty-dong-post204959.html' ),
 		),
 		array(
 			'slug'     => 'duong-ven-bien-129-vo-chi-cong-bat-dong-san-ven-bien-hoi-an',
@@ -280,13 +299,13 @@ function hh_news_seo() {
 			'seo_title' => 'Cụm nút giao cầu Hòa Xuân 1.378 tỷ và BĐS Nam Đà Nẵng',
 			'desc'      => 'Cụm nút giao cầu Hòa Xuân hơn 1.378 tỷ đồng, cầu mới 303,5 m, thực hiện 2026 – 2029: tác động đến căn hộ, đất nền Hòa Xuân, Nam Hòa Xuân.',
 			'points'    => array(
-				'Tổng vốn hơn 1.378 tỷ đồng, thực hiện giai đoạn 2026 – 2029.',
-				'Giữ cầu hiện hữu, xây thêm cầu mới phía hạ lưu dài khoảng 303,5 m, rộng 14 m; thêm cầu vượt, hầm chui tách luồng xe.',
+				'Đã khởi công ngày 25/8/2026, thi công dự kiến 730 ngày; tổng vốn hơn 1.378 tỷ đồng.',
+				'Hầm chui Cách Mạng Tháng Tám, hầm chui Thăng Long, mở rộng Lê Thanh Nghị, thêm cầu mới phía hạ lưu dài khoảng 303,5 m.',
 				'Hưởng lợi: Sun NeO City (Cora, Spana, S-Light), Sun Riverpolis (FourS Tower, đất nền Đầm Sen), Cồn Dầu, Euro Village 2.',
 			),
 			'faq'       => array(
-				array( 'Dự án cụm nút giao cầu Hòa Xuân gồm những gì?', 'Giữ cầu Hòa Xuân hiện hữu, xây thêm cầu mới phía hạ lưu dài khoảng 303,5 m, rộng 14 m, kết hợp nút giao Lê Thanh Nghị – Cách Mạng Tháng Tám – Thăng Long với cầu vượt, hầm chui.' ),
-				array( 'Khi nào cụm nút giao cầu Hòa Xuân hoàn thành?', 'Dự án thực hiện giai đoạn 2026 – 2029.' ),
+				array( 'Dự án cụm nút giao cầu Hòa Xuân gồm những gì?', 'Hầm chui trên đường Cách Mạng Tháng Tám, hầm chui trên đường Thăng Long, mở rộng đường Lê Thanh Nghị và xây thêm cầu mới phía hạ lưu dài khoảng 303,5 m, rộng 14 m; cầu hiện hữu được giữ lại.' ),
+				array( 'Cầu Hòa Xuân khởi công khi nào, bao giờ xong?', 'Dự án khởi công ngày 25/8/2026, thời gian thi công dự kiến 730 ngày; kế hoạch đưa vào sử dụng trong giai đoạn đến năm 2029.' ),
 				array( 'Dự án nào ở Hòa Xuân hưởng lợi từ cầu Hòa Xuân mới?', 'Các tòa căn hộ Spana Tower, Cora Tower, S-Light Tower (Sun NeO City), FourS Tower và đất nền Đầm Sen (Sun Riverpolis), đất nền Cồn Dầu và Euro Village 2.' ),
 			),
 		),

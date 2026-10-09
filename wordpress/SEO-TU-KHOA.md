@@ -124,6 +124,9 @@ Bấm **Dự án → Nhập dữ liệu Đà Nẵng** để ghi vào Rank Math (
 | nhà ga T2 sân bay Đà Nẵng | /mo-rong-nha-ga-t2-san-bay-da-nang-bat-dong-san-cho-thue/ | bảng giá Sun Galaxy Complex → /du-an/sun-galaxy-complex/ |
 | ga đường sắt tốc độ cao Đà Nẵng | /ga-duong-sat-toc-do-cao-da-nang-hoa-son-bat-dong-san-hoa-vang/ |  |
 | hợp nhất Đà Nẵng Quảng Nam | /hop-nhat-da-nang-quang-nam-bat-dong-san-vung-giap-ranh/ | bảng giá One World Regency → /du-an/one-world-regency/ |
+| bảng giá đất Đà Nẵng | /bang-gia-dat-da-nang-sua-doi-2026/ |  |
+| đường tránh Nam Hải Vân | /duong-tranh-nam-hai-van-6-lan-bat-dong-san-lien-chieu/ |  |
+| tin hạ tầng Đà Nẵng | /tin-ha-tang-da-nang-thang-10-2026/ |  |
 | cầu mới qua sông Hàn | /da-nang-de-xuat-xay-cau-moi-qua-song-han/ |  |
 | bãi tắm Sơn Thủy | /cong-vien-cau-lac-bo-the-thao-bien-bai-tam-son-thuy/ |  |
 | Hoàng Hiệp bất động sản | /du-an-hoang-hiep-bat-dong-san-dang-tu-van-2026/ |  |

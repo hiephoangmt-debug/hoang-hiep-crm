@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.0** + plugin Hoàng Hiệp CRM **2.18.1**)
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.13.0** + plugin Hoàng Hiệp CRM **2.18.2**)
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,14 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.18.2: tin hạ tầng, thị trường đầu tháng 10/2026 (đăng ngay)
+
+Bấm **Dự án → Nhập dữ liệu Đà Nẵng** là các bài sau được tạo và **đăng ngay** (có ảnh đại diện, tiêu đề/mô tả Rank Math, hỏi đáp, nguồn):
+- **Bảng giá đất Đà Nẵng sửa đổi 2026** – `/bang-gia-dat-da-nang-sua-doi-2026/`
+- **Đường tránh Nam Hải Vân mở rộng 6 làn hơn 1.951 tỷ** – `/duong-tranh-nam-hai-van-6-lan-bat-dong-san-lien-chieu/`
+- **Tin hạ tầng Đà Nẵng tháng 10/2026** – `/tin-ha-tang-da-nang-thang-10-2026/`
+- Cập nhật bài **cầu Hòa Xuân**: đã khởi công 25/8/2026, thi công 730 ngày, nhà thầu, 2 hầm chui (chỉ cập nhật nếu anh chưa sửa tay bài này); bài **toàn cảnh hạ tầng 2026** sửa mốc Quốc lộ 14D, thêm đường tránh Nam Hải Vân.
 
 ## Có gì mới – plugin 2.18.1: bài "Cầu mới qua sông Hàn" (BẢN NHÁP chờ duyệt)
 
