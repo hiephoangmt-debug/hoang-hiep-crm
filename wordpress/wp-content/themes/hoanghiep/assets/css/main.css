@@ -1344,3 +1344,13 @@ html.nav-locked, html.nav-locked body { overflow: hidden; }
 .ucard__media .ucard__badge { position: absolute; top: 10px; left: 10px; padding: 6px 11px; font-size: 1.05rem; box-shadow: var(--shadow); }
 .ucard__hint { position: absolute; right: 10px; bottom: 6px; font-size: .66rem; color: var(--muted); font-style: italic; }
 @media (max-width: 560px) { .ucard__media { margin: -14px -14px 2px; padding: 34px 10px 16px; } .ucard__media .ucard__badge { font-size: .9rem; } }
+
+/* Loại căn: danh sách dài cuộn riêng, ảnh layout bám theo khi cuộn (máy tính) */
+@media (min-width: 641px) {
+	.units { align-items: start; }
+	.units__list { max-height: min(620px, calc(100vh - var(--header-h) - 110px)); overflow-y: auto; padding: 2px 6px 2px 2px; scrollbar-width: thin; }
+	.units__item { padding: 11px 14px; }
+	.units__item strong { font-size: 1.02rem; }
+	.units__view { position: sticky; top: calc(var(--header-h) + 70px); }
+	.units__panel img { max-height: calc(100vh - var(--header-h) - 300px); object-fit: contain; }
+}

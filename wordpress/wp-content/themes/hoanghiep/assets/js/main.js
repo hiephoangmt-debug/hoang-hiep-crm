@@ -244,6 +244,13 @@
 					i.setAttribute( 'aria-selected', i === item ? 'true' : 'false' );
 				} );
 				$$( '.units__panel', wrap ).forEach( ( p ) => p.classList.toggle( 'is-active', p.dataset.unitPanel === item.dataset.unit ) );
+				// Danh sách dài: đưa ảnh layout vào tầm nhìn, chip đang chọn vào giữa (điện thoại).
+				const view = $( '.units__view', wrap );
+				const r = view.getBoundingClientRect();
+				if ( r.top < 0 || r.top > window.innerHeight * 0.5 ) {
+					( window.innerWidth <= 640 ? wrap : view ).scrollIntoView( { behavior: 'smooth', block: 'start' } );
+				}
+				item.scrollIntoView( { behavior: 'smooth', block: 'nearest', inline: 'center' } );
 			} );
 		} );
 	} );

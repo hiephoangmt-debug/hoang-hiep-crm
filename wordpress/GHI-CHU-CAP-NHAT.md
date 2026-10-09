@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.14.1** + plugin Hoàng Hiệp CRM **2.20.14**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.14.2** + plugin Hoàng Hiệp CRM **2.20.14**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.14.2: chọn loại căn không phải cuộn tìm ảnh
+
+- Máy tính: danh sách loại căn dài thì cuộn riêng, khung ảnh layout bám theo màn hình nên bấm căn nào cũng thấy ảnh ngay bên cạnh.
+- Điện thoại: bấm loại căn thì trang tự đưa hàng chọn căn + ảnh layout vào màn hình, chip đang chọn nằm giữa.
 
 ## Có gì mới – giao diện 2.14.1: thẻ loại căn có hình minh họa
 
