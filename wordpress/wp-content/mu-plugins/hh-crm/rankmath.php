@@ -207,3 +207,13 @@ add_filter(
 		return $plugins;
 	}
 );
+
+/** Bỏ mục chấm "Sử dụng Content AI" (dịch vụ trả phí của Rank Math, không phải yếu tố xếp hạng Google). */
+add_filter(
+	'rank_math/researches/tests',
+	static function ( $tests ) {
+		unset( $tests['hasContentAI'] );
+		return $tests;
+	},
+	20
+);
