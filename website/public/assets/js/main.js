@@ -5,8 +5,8 @@ const CONFIG = {
   // Link Google Drive lấy từ data-drive của từng trang (cấu hình trong src/data.mjs)
   // URL Web App Google Apps Script (xem google-apps-script.gs). Để trống = không lưu lead.
   leadEndpoint: "",
-  hotline: "0900 000 000",
-  zalo: "0900000000",
+  hotline: "0904 567 009",
+  zalo: "0904567009",
   email: "tuvan@fpt-city.com",
   // Hạn ưu đãi thật (ISO, giờ VN). Để trống để ẩn đồng hồ đếm ngược.
   offerEndsAt: "",
@@ -194,8 +194,19 @@ const CONFIG = {
     return ok;
   }
 
+  async function getIp() {
+    try {
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 1500);
+      const r = await fetch("https://api.ipify.org?format=json", { signal: ctrl.signal });
+      clearTimeout(t);
+      return (await r.json()).ip || "";
+    } catch (e) { return ""; }
+  }
+
   async function sendLead(data) {
     if (!CONFIG.leadEndpoint) return;
+    data.ip = await getIp();
     const body = new URLSearchParams(data);
     // no-cors: Apps Script không trả header CORS, request vẫn được ghi nhận
     await fetch(CONFIG.leadEndpoint, { method: "POST", mode: "no-cors", body });
