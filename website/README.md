@@ -67,3 +67,10 @@ Upload thư mục `public/` lên hosting (Netlify, Vercel, Cloudflare Pages, cPa
 
 Số liệu tổng hợp từ báo chí và các nguồn thị trường; FPT Plaza 5 và đặc điểm từng phân khu
 là thông tin **dự kiến / tham khảo** – cập nhật trong `src/data.mjs` khi chủ đầu tư công bố.
+
+## Bộ trang LadiPage (fpt-city.com bản kéo-thả)
+
+`node src/build-ladipage.mjs` dựng 14 trang HTML tuân thủ luật LadiPage (tabs, form, FAQ) vào `ladipage/`
+cùng `manifest.json` (đường dẫn gợi ý từng trang). Nội dung lấy từ `src/data.mjs` và `src/fpt-plaza-4-units.mjs`;
+CTA/ngữ điệu chỉnh trong `HOOKS` của `src/build-ladipage.mjs`.
+Công cụ chỉ tạo/cập nhật trang; **xuất bản và gắn tên miền làm trong trình soạn thảo LadiPage**.
