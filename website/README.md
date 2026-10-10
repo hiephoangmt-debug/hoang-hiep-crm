@@ -37,7 +37,7 @@ Mỗi trang có title/description/keywords riêng, canonical, Open Graph, schema
   (WordPress: plugin *Insert Headers and Footers* / LadiPage: *Cài đặt › Mã HTML/JS trước thẻ đóng body*):
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@684f357465a7344acda91141a2bd7cf5c959d040/website/public/assets/js/hh-connect.js"
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@59eb1869a4712b340d7f07a921212698fa9898bc/website/public/assets/js/hh-connect.js"
         data-endpoint="https://script.google.com/macros/s/XXXX/exec"
         data-project="hoanghiepmt.com"
         data-buttons="true" data-hotline="0904567009" data-zalo="0904567009" defer></script>
@@ -56,7 +56,7 @@ Mỗi trang có title/description/keywords riêng, canonical, Open Graph, schema
 và điền mã căn vào ô `name="unit"`. Một dòng cho mọi trang (kể cả hoanghiepmt.com):
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@684f357465a7344acda91141a2bd7cf5c959d040/website/public/assets/js/fc-widget.js"
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@59eb1869a4712b340d7f07a921212698fa9898bc/website/public/assets/js/fc-widget.js"
         data-endpoint="LINK_/exec_CỦA_CRM" defer></script>
 ```
 
