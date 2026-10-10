@@ -77,6 +77,39 @@ const CONFIG = {
     $$(".reveal").forEach((el) => el.classList.add("in"));
   }
 
+  /* ---------- Đếm số nổi bật (181+ ha, 1.395, ~952 tr USD…) ---------- */
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const counters = $$(".stats b").map((el) => {
+    const m = el.textContent.match(/^([~]?)([\d.]+)(.*)$/);
+    if (!m || /^[–/]/.test(m[3])) return null; // bỏ qua "1–3PN", "Q2/2027", chữ
+    const target = parseInt(m[2].replace(/\./g, ""), 10);
+    if (!target || (target >= 1900 && target <= 2100 && !m[3])) return null; // bỏ qua năm
+    return { el, pre: m[1], target, post: m[3], text: el.textContent };
+  }).filter(Boolean);
+  const fmt = (n) => n.toLocaleString("vi-VN");
+  function runCounter(c) {
+    const start = performance.now();
+    const dur = 1600;
+    const step = (t) => {
+      const k = Math.min(1, (t - start) / dur);
+      const eased = 1 - Math.pow(1 - k, 3);
+      c.el.textContent = c.pre + fmt(Math.round(c.target * eased)) + c.post;
+      if (k < 1) requestAnimationFrame(step); else c.el.textContent = c.text;
+    };
+    requestAnimationFrame(step);
+  }
+  if (counters.length && !reduceMotion && "IntersectionObserver" in window) {
+    counters.forEach((c) => (c.el.textContent = c.pre + "0" + c.post));
+    const co = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        counters.filter((c) => e.target.contains(c.el)).forEach(runCounter);
+        co.unobserve(e.target);
+      });
+    }, { threshold: 0.4 });
+    $$(".stats").forEach((s) => co.observe(s));
+  }
+
   /* ---------- Popup ---------- */
   const modal = $("#lead-modal");
   const modalBody = $(".modal-body", modal);

@@ -15,7 +15,7 @@ const nav = () => `
   <header class="site-header" id="top">
     <div class="container nav">
       <a href="/" class="brand" aria-label="${site.name} – trang chủ">
-        <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="currentColor"/><path d="M11 29V15l9-5 9 5v14h-6v-8h-6v8z" fill="#f5c26b"/></svg>
+        <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="currentColor"/><path d="M11 29V15l9-5 9 5v14h-6v-8h-6v8z" fill="#ff8a1f"/></svg>
         <span><strong>FPT City</strong><small>Đà Nẵng</small></span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-controls="menu" aria-label="Mở menu"><span></span><span></span><span></span></button>
@@ -36,7 +36,7 @@ const nav = () => `
           </div>
         </div>
         <a href="/#tien-ich">Tiện ích</a>
-        <a href="#dang-ky" class="btn btn-gold btn-sm" data-open-form>Nhận bảng giá</a>
+        <a href="#dang-ky" class="btn btn-orange btn-sm" data-open-form>Nhận bảng giá</a>
       </nav>
     </div>
   </header>`;
@@ -45,18 +45,18 @@ const heroBg = () => `
       <div class="hero-bg" aria-hidden="true">
         <svg viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice">
           <defs>
-            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#06281e"/><stop offset=".6" stop-color="#0d4a37"/><stop offset="1" stop-color="#1a6b52"/></linearGradient>
-            <linearGradient id="tw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9f3ef" stop-opacity=".95"/><stop offset="1" stop-color="#9cc7b7" stop-opacity=".75"/></linearGradient>
-            <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e8a8f"/><stop offset="1" stop-color="#0b3d2e"/></linearGradient>
-            <pattern id="win" width="20" height="30" patternUnits="userSpaceOnUse"><rect width="14" height="6" x="3" y="12" fill="#0d4a37" opacity=".35"/></pattern>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a1630"/><stop offset=".6" stop-color="#16306b"/><stop offset="1" stop-color="#1f3f86"/></linearGradient>
+            <linearGradient id="tw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f7fc" stop-opacity=".95"/><stop offset="1" stop-color="#a9bbdc" stop-opacity=".75"/></linearGradient>
+            <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b5fa8"/><stop offset="1" stop-color="#0f2350"/></linearGradient>
+            <pattern id="win" width="20" height="30" patternUnits="userSpaceOnUse"><rect width="14" height="6" x="3" y="12" fill="#16306b" opacity=".35"/></pattern>
           </defs>
           <rect width="1440" height="700" fill="url(#sky)"/>
-          <circle cx="1180" cy="170" r="70" fill="#f5c26b" opacity=".85"/>
+          <circle cx="1180" cy="170" r="70" fill="#ff8a1f" opacity=".85"/>
           <g fill="url(#tw)" opacity=".35"><rect x="80" y="330" width="90" height="300"/><rect x="190" y="280" width="70" height="350"/><rect x="1240" y="310" width="100" height="320"/><rect x="1350" y="360" width="70" height="270"/></g>
           <g fill="url(#tw)"><rect x="760" y="150" width="150" height="480" rx="4"/><rect x="930" y="210" width="130" height="420" rx="4"/><rect x="620" y="250" width="120" height="380" rx="4"/></g>
           <g fill="url(#win)"><rect x="770" y="160" width="130" height="440"/><rect x="940" y="220" width="110" height="380"/><rect x="630" y="260" width="100" height="340"/></g>
           <path d="M0 610 C 240 580 480 640 720 615 S 1200 585 1440 610 V700 H0z" fill="url(#sea)"/>
-          <g fill="#2f7d5d"><circle cx="560" cy="615" r="28"/><circle cx="1110" cy="612" r="34"/><circle cx="300" cy="620" r="24"/></g>
+          <g fill="#24508f"><circle cx="560" cy="615" r="28"/><circle cx="1110" cy="612" r="34"/><circle cx="300" cy="620" r="24"/></g>
         </svg>
       </div>`;
 
@@ -67,7 +67,7 @@ const leadForm = (source, { email = false, needs = ["Mua để ở", "Đầu tư
             ${email ? `<label class="field"><span>Email (nhận link tài liệu)</span><input name="email" type="email" autocomplete="email" placeholder="ban@email.com"></label>` : ""}
             <label class="field"><span>Nhu cầu</span><select name="need">${needs.map((n) => `<option>${esc(n)}</option>`).join("")}</select></label>
             <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <button type="submit" class="btn btn-gold btn-block${dark ? " btn-lg" : ""}">${esc(button)}</button>
+            <button type="submit" class="btn btn-orange btn-block${dark ? " btn-lg" : ""}">${esc(button)}</button>
             <p class="form-note">🔒 Bảo mật thông tin · Link Google Drive hiển thị ngay sau khi gửi</p>
           </form>`;
 
@@ -80,7 +80,7 @@ const hero = ({ eyebrow, h1, lead, points, cta, formTitle, docs, badge = "Đang 
           <p class="lead">${lead}</p>
           <ul class="hero-points">${points.map((p) => `<li>${p}</li>`).join("")}</ul>
           <div class="hero-cta">
-            <a href="#dang-ky" class="btn btn-gold btn-lg" data-open-form>
+            <a href="#dang-ky" class="btn btn-orange btn-lg" data-open-form>
               <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 16l-5-5h3V4h4v7h3zm-7 2h14v2H5z"/></svg>
               ${esc(cta)}
             </a>
@@ -218,7 +218,7 @@ const finalCta = (h, p, btn) => `
     <section class="final-cta">
       <div class="container final-inner reveal">
         <div><h2>${h}</h2><p>${p}</p></div>
-        <a href="#dang-ky" class="btn btn-gold btn-lg" data-open-form>${esc(btn)}</a>
+        <a href="#dang-ky" class="btn btn-orange btn-lg" data-open-form>${esc(btn)}</a>
       </div>
     </section>`;
 
@@ -269,7 +269,7 @@ const modal = (title, needs) => `
       <div class="check">✓</div>
       <h2>Cảm ơn <span data-success-name></span>!</h2>
       <p>Tài liệu đã sẵn sàng. Chuyên viên sẽ liên hệ trong ít phút để gửi bảng giá mới nhất.</p>
-      <a class="btn btn-gold btn-lg btn-block" data-drive-link target="_blank" rel="noopener">📂 Mở thư mục Google Drive</a>
+      <a class="btn btn-orange btn-lg btn-block" data-drive-link target="_blank" rel="noopener">📂 Mở thư mục Google Drive</a>
       <p class="muted small">Bạn có thể mở lại link này bất cứ lúc nào trên trang.</p>
     </div>
   </dialog>`;
@@ -292,7 +292,7 @@ function layout({ path, title, description, keywords, project, drive, crumbs, sc
   <meta name="keywords" content="${esc(keywords)}">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="${canonical}">
-  <meta name="theme-color" content="#0b3d2e">
+  <meta name="theme-color" content="#0f2350">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="vi_VN">
   <meta property="og:site_name" content="${site.name}">
@@ -383,13 +383,13 @@ function write(path, html) {
             <span class="split-ico">🗺️</span><h3>Đất nền FPT City</h3>
             <p>Lô đất sổ đỏ trong các phân khu V1, V2, V3, V4, V5, V6 – xây nhà ở, biệt thự, nhà cho thuê.</p>
             <span class="chips">${zones.map((z) => `<em>${z.code}</em>`).join("")}</span>
-            <span class="btn btn-gold">Xem đất nền →</span>
+            <span class="btn btn-orange">Xem đất nền →</span>
           </a>
           <a class="split reveal" href="/can-ho-fpt-plaza/">
             <span class="split-ico">🏙️</span><h3>Căn hộ FPT Plaza</h3>
             <p>Từ căn đã bàn giao (Plaza 1, 2) đến dự án đang mở bán (Plaza 4) và sắp mở bán (Plaza 5).</p>
             <span class="chips">${plazas.map((p) => `<em>${p.name.replace("FPT ", "")}</em>`).join("")}</span>
-            <span class="btn btn-gold">Xem căn hộ →</span>
+            <span class="btn btn-orange">Xem căn hộ →</span>
           </a>
         </div>
       </div>
@@ -436,6 +436,7 @@ function write(path, html) {
       formTitle: "Nhận giỏ hàng đất nền FPT City",
       docs: ["🗺️ Bản đồ phân lô V1 – V6", "📄 Giỏ hàng & giá từng lô", "📑 Thông tin pháp lý", "📞 Hỗ trợ xem đất thực tế"],
       needs: zones.map((z) => "Phân khu " + z.code).concat("Chưa xác định"),
+      stats: [["181+ ha", "Quy mô FPT City"], [zones.length + "+", "Phân khu đất nền"], ["90–350 m²", "Diện tích lô phổ biến"], ["Sổ đỏ", "Pháp lý từng lô"]],
     })}
     <section id="tong-quan" class="section">
       <div class="container">
@@ -481,6 +482,7 @@ for (const z of zones) {
       formTitle: `Giỏ hàng đất ${z.code} FPT City`,
       docs: [`🗺️ Bản đồ phân lô ${z.code}`, "📄 Danh sách lô đang bán & giá", "📑 Pháp lý từng lô", "📞 Hẹn lịch xem đất"],
       needs: ["Mua để ở / xây nhà", "Đầu tư", "Xây nhà cho thuê"],
+      stats: [[z.code, "Phân khu"], ["181+ ha", "Quy mô FPT City"], ["Sổ đỏ", "Pháp lý từng lô"], ["~5'", "Đến biển Non Nước"]],
     })}
     <section id="tong-quan" class="section">
       <div class="container two-col">
@@ -533,6 +535,7 @@ for (const z of zones) {
       formTitle: "Nhận bảng giá căn hộ FPT Plaza",
       docs: ["📄 Bảng giá từng tòa", "📐 Mặt bằng & layout căn hộ", "🔄 Giỏ hàng chuyển nhượng", "🎁 Chính sách thanh toán, vay"],
       needs: plazas.map((p) => p.name).concat("Chưa xác định"),
+      stats: [[String(plazas.length), "Tòa FPT Plaza"], ["4.000+", "Căn hộ toàn chuỗi (gồm dự kiến)"], ["2", "Tòa đã bàn giao"], ["1.395", "Căn tại FPT Plaza 4"]],
     })}
     <section id="tong-quan" class="section">
       <div class="container">
@@ -587,6 +590,7 @@ for (const p of plazas) {
         ? ["🔄 Giỏ hàng căn chuyển nhượng", "📄 Giá theo tầng, hướng", "📐 Mặt bằng căn hộ", "📞 Hẹn lịch xem nhà"]
         : ["📄 Bảng giá & tiến độ thanh toán", "📐 Mặt bằng tầng & layout căn", "🎁 Chính sách ưu đãi", "🖼️ Brochure, phối cảnh, pháp lý"],
       needs,
+      stats: p.stats,
     })}
     <section id="tong-quan" class="section">
       <div class="container two-col">
@@ -612,7 +616,7 @@ for (const p of plazas) {
             ${i === 1 ? '<span class="tag">Được quan tâm nhất</span>' : ""}
             <div class="plan-img" aria-hidden="true"><svg viewBox="0 0 120 80"><rect x="4" y="4" width="112" height="72" fill="none" stroke="currentColor" stroke-width="2"/>${Array.from({ length: Math.min(i + 1, 3) }, (_, k) => `<line x1="${4 + (112 / (Math.min(i + 1, 3) + 1)) * (k + 1)}" y1="4" x2="${4 + (112 / (Math.min(i + 1, 3) + 1)) * (k + 1)}" y2="44" stroke="currentColor" stroke-width="2"/>`).join("")}<line x1="4" y1="44" x2="116" y2="44" stroke="currentColor" stroke-width="2"/></svg></div>
             <h3>Căn ${esc(type)}</h3><p class="area">${esc(area)}</p>
-            <button class="btn ${i === 1 ? "btn-gold" : "btn-outline-light"} btn-block" data-open-form>Xem layout &amp; giá ${esc(type)}</button>
+            <button class="btn ${i === 1 ? "btn-orange" : "btn-outline-light"} btn-block" data-open-form>Xem layout &amp; giá ${esc(type)}</button>
           </article>`).join("")}
         </div>
       </div>

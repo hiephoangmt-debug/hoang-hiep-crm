@@ -15,6 +15,7 @@ export const investor = "Công ty Cổ phần Đô thị FPT Đà Nẵng (FPT Ci
 export const plazas = [
   {
     slug: "fpt-plaza-1",
+    stats: [["586", "Căn hộ"], ["15", "Tầng nổi"], ["1–3PN", "Loại căn"], ["Ở ngay", "Đã bàn giao"]],
     name: "FPT Plaza 1",
     status: "resale",
     statusLabel: "Đã bàn giao · Chuyển nhượng",
@@ -39,6 +40,7 @@ export const plazas = [
   },
   {
     slug: "fpt-plaza-2",
+    stats: [["~700", "Căn hộ"], ["25", "Tầng nổi"], ["2–3PN", "Loại căn"], ["2023", "Năm bàn giao"]],
     name: "FPT Plaza 2",
     status: "resale",
     statusLabel: "Đã bàn giao · Chuyển nhượng",
@@ -63,6 +65,7 @@ export const plazas = [
   },
   {
     slug: "fpt-plaza-3",
+    stats: [["837", "Căn hộ"], ["25", "Tầng nổi"], ["2", "Tầng hầm"], ["2026", "Dự kiến hoàn thành"]],
     name: "FPT Plaza 3",
     status: "primary",
     statusLabel: "Hoàn thiện · Nhận nhà",
@@ -87,6 +90,7 @@ export const plazas = [
   },
   {
     slug: "fpt-plaza-4",
+    stats: [["1.395", "Căn hộ"], ["2.790 tỷ", "Tổng vốn đầu tư"], ["20", "Tầng nổi"], ["Q2/2027", "Dự kiến bàn giao"]],
     name: "FPT Plaza 4",
     status: "primary",
     statusLabel: "Đang mở bán",
@@ -113,6 +117,7 @@ export const plazas = [
   },
   {
     slug: "fpt-plaza-5",
+    stats: [["~830", "Căn hộ (dự kiến)"], ["~25", "Tầng nổi (dự kiến)"], ["1–3PN", "Loại căn"], ["181+ ha", "Khu đô thị FPT City"]],
     name: "FPT Plaza 5",
     status: "upcoming",
     statusLabel: "Sắp mở bán · Nhận đăng ký",
