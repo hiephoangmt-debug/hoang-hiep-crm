@@ -7,6 +7,8 @@ export const site = {
   // Link Google Drive mặc định; mỗi trang có thể ghi đè bằng `drive`.
   drive: "https://drive.google.com/drive/folders/THAY_ID_THU_MUC",
   updated: "2026-10-10",
+  // Đơn vị tư vấn – website chính
+  agent: { name: "Hoàng Hiệp", url: "https://hoanghiepmt.com/", phone: "0904 567 009" },
 };
 
 export const investor = "Công ty Cổ phần Đô thị FPT Đà Nẵng (FPT City) – thành viên Tập đoàn FPT";

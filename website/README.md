@@ -30,6 +30,24 @@ Mỗi trang có title/description/keywords riêng, canonical, Open Graph, schema
 - AI tuỳ chọn qua CRM: xem mục *Chat AI* trong `crm/README.md`. Tắt AI: `CONFIG.chatAI = false`. Tắt lời chào tự hiện: `chatTeaserSeconds: 0`.
 - Mở chat từ link bất kỳ: thêm `#chat` vào cuối URL.
 
+## Kết nối hoanghiepmt.com (hoặc website/landing page khác) với CRM
+
+- fpt-city.com đã liên kết về **hoanghiepmt.com** (menu, chân trang, schema `RealEstateAgent`) – cấu hình ở `site.agent` trong `src/data.mjs`.
+- Để khách điền form trên hoanghiepmt.com cũng vào **Hoàng Hiệp CRM**, dán đoạn sau trước `</body>` của site đó
+  (WordPress: plugin *Insert Headers and Footers* / LadiPage: *Cài đặt › Mã HTML/JS trước thẻ đóng body*):
+
+```html
+<script src="https://fpt-city.com/assets/js/hh-connect.js"
+        data-endpoint="https://script.google.com/macros/s/XXXX/exec"
+        data-project="hoanghiepmt.com"
+        data-buttons="true" data-hotline="0904567009" data-zalo="0904567009" defer></script>
+```
+
+  - Tự nhận mọi form có ô số điện thoại (Contact Form 7, LadiPage, form tự viết…), gửi bản sao về CRM, **không chặn form gốc**.
+  - Giữ utm/gclid của lượt truy cập đầu; chống gửi trùng 10 phút; bỏ qua form có `data-hh-ignore`.
+  - Gán dự án riêng cho một form: thêm `data-hh-project="FPT Plaza 4"` vào thẻ `<form>`.
+  - `data-buttons="true"`: hiện nút Gọi/Zalo cố định bên phải (bỏ đi nếu site đã có nút).
+
 ## Build & xem thử
 
 ```bash

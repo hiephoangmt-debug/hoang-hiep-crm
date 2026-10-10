@@ -37,6 +37,7 @@ const nav = () => `
           </div>
         </div>
         <a href="/#tien-ich">Tiện ích</a>
+        <a href="${site.agent.url}" target="_blank" rel="noopener" title="Website ${esc(site.agent.name)} – tư vấn bất động sản">${esc(site.agent.name)} ↗</a>
         <a href="#dang-ky" class="btn btn-orange btn-sm" data-open-form>Nhận bảng giá</a>
       </nav>
     </div>
@@ -229,6 +230,7 @@ const footer = () => `
       <div>
         <p class="brand-foot">${site.name}</p>
         <p>Trang thông tin &amp; tư vấn bất động sản khu đô thị FPT City Đà Nẵng: đất nền và căn hộ FPT Plaza.</p>
+        <p>Tư vấn &amp; phân phối: <a href="${site.agent.url}" target="_blank" rel="noopener"><b>${esc(site.agent.name)}</b> – ${esc(site.agent.url.replace(/^https?:\/\/|\/$/g, ""))}</a></p>
         <p class="disclaimer">Thông tin, hình ảnh minh họa và số liệu mang tính tham khảo, có thể thay đổi theo công bố chính thức của chủ đầu tư. Website do đơn vị tư vấn – phân phối vận hành, không phải trang chính thức của Tập đoàn FPT.</p>
       </div>
       <div>
@@ -297,7 +299,8 @@ const modal = (title, needs) => `
 function layout({ path, title, description, keywords, project, drive, crumbs, schema = [], body, modalTitle, needs }) {
   const canonical = url(path);
   const graph = [
-    { "@type": "WebSite", "@id": site.domain + "/#website", url: site.domain + "/", name: site.name, inLanguage: "vi-VN" },
+    { "@type": "WebSite", "@id": site.domain + "/#website", url: site.domain + "/", name: site.name, inLanguage: "vi-VN", publisher: { "@id": site.agent.url + "#agent" } },
+    { "@type": "RealEstateAgent", "@id": site.agent.url + "#agent", name: site.agent.name, url: site.agent.url, telephone: site.agent.phone, areaServed: "Đà Nẵng", sameAs: [site.agent.url, site.domain + "/"] },
     ...(crumbs ? [{ "@type": "BreadcrumbList", itemListElement: crumbs.map(([name, p], i) => ({ "@type": "ListItem", position: i + 1, name, item: url(p) })) }] : []),
     ...schema,
   ];
