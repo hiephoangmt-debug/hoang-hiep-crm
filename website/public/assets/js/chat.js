@@ -7,8 +7,12 @@
    ========================================================= */
 (function () {
   "use strict";
-  const $ = (s, el = document) => el.querySelector(s);
-  const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+  // Khi nhúng bằng fc-widget.js, giao diện nằm trong Shadow DOM (window.__fcRoot) để không đụng CSS của trang chủ
+  const ROOT = window.__fcRoot || document;
+  const $ = (s, el = ROOT) => el.querySelector(s);
+  const $$ = (s, el = ROOT) => [...el.querySelectorAll(s)];
+  const fixHref = (h) => (window.__fc && window.__fc.fix ? window.__fc.fix(h) : h);
+  const isExternal = (h) => { try { return new URL(h, location.href).origin !== location.origin; } catch (e) { return false; } };
   const box = $("#chatbox");
   if (!box) return;
   const fc = () => window.__fc || { CONFIG: {}, project: "", hasDrive: false, drive: "", track() {}, sendLead: async () => {}, openForm() {} };
@@ -22,12 +26,14 @@
 
   /* ---------- Chuẩn hoá tiếng Việt để so khớp ---------- */
   const norm = (s) => String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d").replace(/\s+/g, " ").trim();
-  const has = (t, words) => words.some((w) => t.includes(w));
+  // từ ngắn (≤3 ký tự: "gia", "ty", "coc"…) phải khớp nguyên từ để "gia đình" không bị hiểu là hỏi giá
+  const has = (t, words) => words.some((w) => (w.length <= 3 ? new RegExp("(^|[^a-z0-9])" + w + "([^a-z0-9]|$)").test(t) : t.includes(w)));
   const nf = (n) => String(n).replace(".", ",");
   const pad = (n) => String(n).padStart(2, "0");
 
   async function loadKb() {
     if (st.kb) return st.kb;
+    if (fc().kb) return (st.kb = fc().kb);
     try { st.kb = await (await fetch("/assets/chat-kb.json", { cache: "force-cache" })).json(); }
     catch (e) { st.kb = { projects: [], zones: [], city: {}, fp4: { floors: [], units: [], types: {} } }; }
     return st.kb;
@@ -42,7 +48,7 @@
       while ((m = re.exec(line))) {
         if (m.index > last) el.appendChild(document.createTextNode(line.slice(last, m.index)));
         if (m[1]) { const b = document.createElement("b"); b.textContent = m[1]; el.appendChild(b); }
-        else { const a = document.createElement("a"); a.textContent = m[2]; a.href = m[3]; if (m[3].startsWith("https://")) { a.target = "_blank"; a.rel = "noopener"; } el.appendChild(a); }
+        else { const a = document.createElement("a"); a.textContent = m[2]; a.href = fixHref(m[3]); if (isExternal(a.href)) { a.target = "_blank"; a.rel = "noopener"; } el.appendChild(a); }
         last = re.lastIndex;
       }
       if (last < line.length) el.appendChild(document.createTextNode(line.slice(last)));
@@ -62,7 +68,7 @@
         const el = document.createElement(a.href ? "a" : "button");
         el.textContent = a.label;
         el.className = a.primary ? "act primary" : "act";
-        if (a.href) { el.href = a.href; if (a.href.startsWith("https://")) { el.target = "_blank"; el.rel = "noopener"; } }
+        if (a.href) { el.href = fixHref(a.href); if (isExternal(el.href)) { el.target = "_blank"; el.rel = "noopener"; } }
         else { el.type = "button"; el.onclick = a.onClick; }
         wrap.appendChild(el);
       });
@@ -154,7 +160,7 @@
   }
 
   function ruleAnswer(text, kb) {
-    const t = " " + norm(text) + " ";
+    const t = " " + norm(text).replace(/\bgia (dinh|han|dung|nhap)\b/g, " ") + " "; // bỏ dấu thì "gia đình" giống "giá": loại các cụm này trước khi nhận diện ý
     const found = detectProject(t, kb);
     const target = found || st.ctx || pageContext(kb);
     if (found) st.ctx = found;
