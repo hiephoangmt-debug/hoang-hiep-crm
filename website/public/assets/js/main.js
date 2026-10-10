@@ -3,7 +3,7 @@
    ========================================================= */
 const CONFIG = {
   // Link Google Drive lấy từ data-drive của từng trang (cấu hình trong src/data.mjs)
-  // URL Web App Google Apps Script (xem google-apps-script.gs). Để trống = không lưu lead.
+  // URL Web App của Hoàng Hiệp CRM (crm/README.md, bước 6). Để trống = không lưu lead.
   leadEndpoint: "",
   hotline: "0904 567 009",
   zalo: "0904567009",

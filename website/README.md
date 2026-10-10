@@ -19,9 +19,8 @@ Mỗi trang có title/description/keywords riêng, canonical, Open Graph, schema
    có thể có link riêng: thêm `drive: "https://drive.google.com/..."` vào object tương ứng.
 2. **Hotline, Zalo, email, popup, đếm ngược**: khối `CONFIG` đầu file `public/assets/js/main.js`.
    `offerEndsAt` chỉ điền khi có hạn ưu đãi thật (để trống = ẩn đồng hồ).
-3. **Lưu khách hàng vào Google Sheet "DATA CHẠY GOOGLE"**: làm theo hướng dẫn đầu file
-   `google-apps-script.gs`, dán URL `/exec` vào `CONFIG.leadEndpoint`. Khách FPT Plaza 4 ghi vào
-   tab "FPT PLAZA 4" có sẵn; Plaza 1/2/3/5, "DAT NEN FPT CITY", "FPT CITY" tự tạo tab.
+3. **Lưu khách hàng**: cài [Hoàng Hiệp CRM](../crm/README.md) rồi dán URL `/exec` vào `CONFIG.leadEndpoint`.
+   Khách vào CRM (tab `CRM_LEADS`) và vẫn ghi vào tab dự án theo định dạng cũ.
 
 ## Build & xem thử
 
