@@ -37,7 +37,7 @@ Mỗi trang có title/description/keywords riêng, canonical, Open Graph, schema
   (WordPress: plugin *Insert Headers and Footers* / LadiPage: *Cài đặt › Mã HTML/JS trước thẻ đóng body*):
 
 ```html
-<script src="https://fpt-city.com/assets/js/hh-connect.js"
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@684f357465a7344acda91141a2bd7cf5c959d040/website/public/assets/js/hh-connect.js"
         data-endpoint="https://script.google.com/macros/s/XXXX/exec"
         data-project="hoanghiepmt.com"
         data-buttons="true" data-hotline="0904567009" data-zalo="0904567009" defer></script>
@@ -47,6 +47,23 @@ Mỗi trang có title/description/keywords riêng, canonical, Open Graph, schema
   - Giữ utm/gclid của lượt truy cập đầu; chống gửi trùng 10 phút; bỏ qua form có `data-hh-ignore`.
   - Gán dự án riêng cho một form: thêm `data-hh-project="FPT Plaza 4"` vào thẻ `<form>`.
   - `data-buttons="true"`: hiện nút Gọi/Zalo cố định bên phải (bỏ đi nếu site đã có nút).
+
+## Widget Chat · Zalo · Gọi cho LadiPage và mọi website
+
+`public/assets/js/fc-widget.js` (sinh bởi `node src/build-widget.mjs` sau `build.mjs`) tạo cụm nút ở **góc dưới bên phải**:
+💬 Chat tự động, Zalo, 📞 Gọi. Nằm trong Shadow DOM nên CSS của trang không làm hỏng; tự nhận dự án theo URL
+(`/fpt-plaza-4`, `/phan-khu-v5`…), có sẵn kho kiến thức, tra mã căn, gửi SĐT về CRM, nút "Nhận giá" cuộn tới form
+và điền mã căn vào ô `name="unit"`. Một dòng cho mọi trang (kể cả hoanghiepmt.com):
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@684f357465a7344acda91141a2bd7cf5c959d040/website/public/assets/js/fc-widget.js"
+        data-endpoint="LINK_/exec_CỦA_CRM" defer></script>
+```
+
+Tuỳ chọn: `data-hotline`, `data-zalo`, `data-project`, `data-drive`, `data-ai="false"`, `data-teaser="0"`.
+Các trang LadiPage dựng bằng `build-ladipage.mjs` đã có sẵn thẻ này (chưa có `data-endpoint`): thêm link `/exec` vào
+*Cài đặt trang › Mã tuỳ chỉnh › trước `</body>`* bằng cùng thẻ; script nạp hai lần vẫn chỉ chạy một cụm và nhận endpoint mới.
+Sau khi sửa code, build lại, commit rồi thay mã commit trong đường dẫn CDN.
 
 ## Build & xem thử
 
