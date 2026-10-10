@@ -105,11 +105,14 @@ footer a{color:#fff}
 @media (max-width:600px){section{padding:56px 0}.amen{grid-template-columns:1fr}.spec .row{grid-template-columns:1fr;gap:2px}.cta-row .btn{width:100%;text-align:center}}
 /* ---- bổ sung cho bộ dựng nhiều trang ---- */
 .topbar{background:var(--navy-900);color:#fff}
-.topbar .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px;padding:12px 0}
-.topbar .brand{font-weight:800;font-size:18px;color:#fff;text-decoration:none;margin-right:auto}
-.topbar .brand small{display:block;font-size:11px;font-weight:500;opacity:.7}
-.topbar a{color:rgba(255,255,255,.88);text-decoration:none;font-size:14px;font-weight:600}
-.topbar a.cta{background:var(--orange);color:var(--navy-900);padding:8px 16px;border-radius:999px}
+.topbar .wrap{display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
+.topbar .brand{font-weight:800;font-size:18px;color:#fff;text-decoration:none;white-space:nowrap}
+.topbar a.cta{background:var(--orange);color:var(--navy-900);padding:9px 18px;border-radius:999px;font-weight:800;font-size:14px;text-decoration:none;white-space:nowrap}
+.fnav{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,.14)}
+.fnav b{display:block;color:#fff;margin-bottom:8px}
+.fnav ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.fnav a{color:rgba(255,255,255,.8);text-decoration:none}
+@media (max-width:600px){.fnav{grid-template-columns:1fr 1fr}.topbar .brand{font-size:16px}.topbar a.cta{padding:8px 14px}}
 .crumbs{font-size:13px;opacity:.8;margin:0 0 14px}
 .crumbs a{color:#fff}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
@@ -142,12 +145,7 @@ footer a{color:#fff}
 <body>
 
 <div class="topbar"><div class="wrap">
-  <a class="brand" href="https://www.fpt-city.com/">FPT City<small>Đà Nẵng</small></a>
-  <a href="https://www.fpt-city.com/dat-nen-fpt-city">Đất nền</a>
-  <a href="https://www.fpt-city.com/can-ho-fpt-plaza">Căn hộ FPT Plaza</a>
-  <a href="https://www.fpt-city.com/fpt-plaza-4">FPT Plaza 4</a>
-  <a href="https://www.fpt-city.com/fpt-plaza-5">FPT Plaza 5</a>
-  <a href="https://hoanghiepmt.com/">Hoàng Hiệp</a>
+  <a class="brand" href="https://www.fpt-city.com/">FPT City Đà Nẵng</a>
   <a class="cta" href="#dang-ky">Nhận bảng giá</a>
 </div></div>
 
@@ -250,6 +248,11 @@ footer a{color:#fff}
 <section class="hook"><div class="wrap"><div><h2>Đừng để câu hỏi &quot;giá bao nhiêu?&quot; còn bỏ ngỏ</h2></div><a class="btn" href="#dang-ky">Đăng ký nhận giá đầu tiên</a></div></section>
 
 <footer><div class="wrap">
+  <div class="fnav">
+    <div><b>Căn hộ FPT Plaza</b><ul><li><a href="https://www.fpt-city.com/fpt-plaza-1">FPT Plaza 1</a></li><li><a href="https://www.fpt-city.com/fpt-plaza-2">FPT Plaza 2</a></li><li><a href="https://www.fpt-city.com/fpt-plaza-3">FPT Plaza 3</a></li><li><a href="https://www.fpt-city.com/fpt-plaza-4">FPT Plaza 4</a></li><li><a href="https://www.fpt-city.com/fpt-plaza-5">FPT Plaza 5</a></li><li><a href="https://www.fpt-city.com/can-ho-fpt-plaza">So sánh 5 tòa</a></li></ul></div>
+    <div><b>Đất nền FPT City</b><ul><li><a href="https://www.fpt-city.com/dat-nen-fpt-city/phan-khu-v1">Phân khu V1</a></li><li><a href="https://www.fpt-city.com/dat-nen-fpt-city/phan-khu-v2">Phân khu V2</a></li><li><a href="https://www.fpt-city.com/dat-nen-fpt-city/phan-khu-v3">Phân khu V3</a></li><li><a href="https://www.fpt-city.com/dat-nen-fpt-city/phan-khu-v4">Phân khu V4</a></li><li><a href="https://www.fpt-city.com/dat-nen-fpt-city/phan-khu-v5">Phân khu V5</a></li><li><a href="https://www.fpt-city.com/dat-nen-fpt-city/phan-khu-v6">Phân khu V6</a></li><li><a href="https://www.fpt-city.com/dat-nen-fpt-city">Tổng quan đất nền</a></li></ul></div>
+    <div><b>Liên hệ</b><ul><li><a href="tel:0904567009">0904 567 009</a></li><li><a href="https://zalo.me/0904567009">Zalo tư vấn</a></li><li><a href="https://hoanghiepmt.com/">Hoàng Hiệp</a></li><li><a href="https://www.fpt-city.com/">Trang chủ</a></li></ul></div>
+  </div>
   <p><b style="color:#fff">FPT City Đà Nẵng · Căn hộ FPT Plaza &amp; đất nền</b></p>
   <p>Tư vấn &amp; phân phối: <a href="https://hoanghiepmt.com/"><b>Hoàng Hiệp</b> – hoanghiepmt.com</a> · Hotline <a href="tel:0904567009">0904 567 009</a></p>
   <p style="font-size:12px;opacity:.65">Thông tin, hình ảnh và số liệu mang tính tham khảo, có thể thay đổi theo công bố chính thức của chủ đầu tư (Công ty Cổ phần Đô thị FPT Đà Nẵng (FPT City) – thành viên Tập đoàn FPT). Website do đơn vị tư vấn – phân phối vận hành, không phải trang chính thức của Tập đoàn FPT.</p>

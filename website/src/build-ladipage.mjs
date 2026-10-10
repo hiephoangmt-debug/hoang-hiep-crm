@@ -37,14 +37,10 @@ const HOOKS = {
 const ZONE_HOOK = (z) => ({ cta: `Xem lô phân khu ${z.code} vừa tầm giá của bạn`, ghost: "Xem đặc điểm khu", title: `Lô nào ở ${z.code} vừa ngân sách của bạn?`, btn: "Gửi tôi 3 lô phù hợp nhất", band: `Lô ${z.code} nào đang ra giá tốt? Gửi ngân sách để biết.`, bandBtn: `Nhận giỏ hàng phân khu ${z.code}`, docs: [`🗺️ Bản đồ phân lô ${z.code}`, "📄 Lô đang bán & giá", "📑 Pháp lý từng lô", "🚗 Hẹn lịch xem đất"] });
 
 /* ---------- Khối HTML dùng chung ---------- */
+// Menu rút gọn: LadiPage không co giãn menu nhiều link như trình duyệt (bị xuống dòng, đè nút) nên chỉ giữ tên + nút; link khác ở chân trang
 const nav = () => `
 <div class="topbar"><div class="wrap">
-  <a class="brand" href="${BASE}/">FPT City<small>Đà Nẵng</small></a>
-  <a href="${link("land")}">Đất nền</a>
-  <a href="${link("apt")}">Căn hộ FPT Plaza</a>
-  <a href="${link("fpt-plaza-4")}">FPT Plaza 4</a>
-  <a href="${link("fpt-plaza-5")}">FPT Plaza 5</a>
-  <a href="${site.agent.url}">${esc(site.agent.name)}</a>
+  <a class="brand" href="${BASE}/">FPT City Đà Nẵng</a>
   <a class="cta" href="#dang-ky">Nhận bảng giá</a>
 </div></div>`;
 
@@ -131,6 +127,11 @@ const gotoSec = (title, inner, eyebrow = "Khám phá thêm") => `<section><div c
 
 const footer = () => `
 <footer><div class="wrap">
+  <div class="fnav">
+    <div><b>Căn hộ FPT Plaza</b><ul>${plazas.map((p) => `<li><a href="${link(p.slug)}">${p.name}</a></li>`).join("")}<li><a href="${link("apt")}">So sánh 5 tòa</a></li></ul></div>
+    <div><b>Đất nền FPT City</b><ul>${zones.map((z) => `<li><a href="${link(z.slug)}">Phân khu ${z.code}</a></li>`).join("")}<li><a href="${link("land")}">Tổng quan đất nền</a></li></ul></div>
+    <div><b>Liên hệ</b><ul><li><a href="tel:${TEL}">${HOTLINE}</a></li><li><a href="https://zalo.me/${ZALO}">Zalo tư vấn</a></li><li><a href="${site.agent.url}">${esc(site.agent.name)}</a></li><li><a href="${BASE}/">Trang chủ</a></li></ul></div>
+  </div>
   <p><b style="color:#fff">FPT City Đà Nẵng · Căn hộ FPT Plaza &amp; đất nền</b></p>
   <p>Tư vấn &amp; phân phối: <a href="${site.agent.url}"><b>${esc(site.agent.name)}</b> – hoanghiepmt.com</a> · Hotline <a href="tel:${TEL}">${HOTLINE}</a></p>
   <p style="font-size:12px;opacity:.65">Thông tin, hình ảnh và số liệu mang tính tham khảo, có thể thay đổi theo công bố chính thức của chủ đầu tư (${esc(investor)}). Website do đơn vị tư vấn – phân phối vận hành, không phải trang chính thức của Tập đoàn FPT.</p>
