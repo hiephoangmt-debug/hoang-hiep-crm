@@ -342,6 +342,13 @@
     const ctx = st.ctx || pageContext(kb);
     const proj = ctx && ctx.name ? ctx.name : ctx && ctx.zone ? "Đất nền FPT City " + ctx.zone.code : ctx && ctx.land ? "Đất nền FPT City" : fc().project || "Website";
     const need = ("Chat: " + st.asked.slice(-3).join(" | ")).slice(0, 200);
+    // Chưa nối CRM (không có endpoint): không được báo "đã chuyển số" vì số không được lưu ở đâu cả
+    if (!(fc().CONFIG && fc().CONFIG.leadEndpoint)) {
+      st.awaitPhone = false;
+      say("bot", `Cảm ơn ${info.name || "bạn"} 🙏 Để được hỗ trợ ngay, bạn nhắn Zalo hoặc gọi hotline giúp mình nhé – chuyên viên sẽ tư vấn trực tiếp.`,
+        [{ label: "Nhắn Zalo", primary: true, href: $("[data-zalo-link]")?.href || "#" }, { label: "📞 Gọi ngay", href: $("[data-hotline-link]")?.href || "tel:" }]);
+      return;
+    }
     try { await fc().sendLead({ name: info.name || "Khách chat", phone: info.phone, need, project: proj, source: "chat" }); } catch (e) { /* vẫn cảm ơn khách */ }
     st.leadSent = true; st.awaitPhone = false; ss.set("fc_chat_lead", "1");
     const acts = fc().hasDrive ? [{ label: "📂 Mở tài liệu Google Drive", primary: true, href: fc().drive }] : [];
