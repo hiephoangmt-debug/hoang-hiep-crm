@@ -3,6 +3,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { site, investor, plazas, zones } from "./data.mjs";
+import * as fp4 from "./fpt-plaza-4-units.mjs";
 
 const OUT = join(dirname(fileURLToPath(import.meta.url)), "..", "public");
 const esc = (s = "") => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -263,6 +264,7 @@ const modal = (title, needs) => `
       <p class="eyebrow dark">Miễn phí · Gửi ngay</p>
       <h2 id="modal-title">${esc(title)}</h2>
       <p class="muted">Bảng giá · Mặt bằng · Brochure · Chính sách – qua link Google Drive.</p>
+      <p class="unit-pick" data-unit-label hidden></p>
       ${leadForm("popup", { needs, button: "Gửi tôi link tài liệu" })}
     </div>
     <div class="modal-success" hidden>
@@ -320,6 +322,66 @@ ${modal(modalTitle, needs)}
 </body>
 </html>
 `;
+}
+
+
+/* Mặt bằng tầng + tra cứu căn (dự án có dữ liệu mặt bằng) */
+const nf = (n) => String(n).replace(".", ",");
+const vn = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+function floorplanSection(p, data) {
+  const ranges = data.typeRanges();
+  const total = data.totalUnits();
+  const payload = {
+    project: p.name,
+    floors: data.floors.map((f) => ({ id: f.id, label: f.label, from: f.from, to: f.to, note: f.note,
+      img: `/assets/img/${p.slug}/mat-bang-${p.slug}-${f.img}` })),
+    units: data.unitIndex(),
+    types: data.typeOrder.map((t) => [t, data.typeLabel[t]]),
+  };
+  const f0 = payload.floors[0];
+  return `
+    <section id="mat-bang-tang" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow dark">Mặt bằng tầng</p>
+          <h2 class="title">Mặt bằng tầng ${p.name} &amp; tra cứu mã căn</h2>
+          <p>2 khối N (Bắc) và S (Nam), ${vn(total)} căn từ tầng 3 đến tầng 20. Chọn tầng để xem mặt bằng, lọc loại căn và nhận giá đúng căn bạn quan tâm.</p>
+        </div>
+        <div class="fp-tabs reveal" role="tablist" aria-label="Chọn tầng">
+          ${payload.floors.map((f, i) => `<button role="tab" aria-selected="${i === 0}" data-floor="${f.id}">${esc(f.label)}</button>`).join("")}
+        </div>
+        <div class="fp-grid">
+          <figure class="fp-figure reveal">
+            <a href="${f0.img}.webp" target="_blank" rel="noopener" data-fp-link title="Bấm để xem ảnh lớn">
+              <img src="${f0.img}-sm.webp" width="960" height="679" loading="lazy" decoding="async" alt="Mặt bằng ${esc(f0.label.toLowerCase())} ${p.name} Đà Nẵng" data-fp-img>
+              <span class="fp-zoom">🔍 Xem ảnh lớn</span>
+            </a>
+            <figcaption data-fp-note>${esc(f0.note)}</figcaption>
+          </figure>
+          <div class="fp-panel card reveal">
+            <div class="fp-controls">
+              <label class="field"><span>Tầng</span><select data-fp-level aria-label="Số tầng"></select></label>
+              <div class="field"><span>Khối</span><div class="seg" data-fp-block><button class="on" data-b="">Tất cả</button><button data-b="N">Khối N</button><button data-b="S">Khối S</button></div></div>
+            </div>
+            <div class="fp-types" data-fp-types></div>
+            <p class="fp-count" data-fp-count aria-live="polite"></p>
+            <div class="fp-list" data-fp-list></div>
+          </div>
+        </div>
+        <div class="table-wrap reveal" style="margin-top:40px">
+          <table class="compare">
+            <caption class="sr-only">Tổng hợp loại căn ${p.name}</caption>
+            <thead><tr><th>Loại căn</th><th>Diện tích</th><th>Số căn (tầng 3–20)</th><th></th></tr></thead>
+            <tbody>${data.typeOrder.filter((t) => ranges[t]).map((t) => {
+              const [a, b, n] = ranges[t];
+              return `<tr><th scope="row">${esc(data.typeLabel[t])}</th><td>${a === b ? nf(a) : nf(a) + " – " + nf(b)} m²${t.startsWith("DUP") ? " <small>(tổng 2 tầng)</small>" : ""}</td><td>${vn(n)}</td><td><a href="#dang-ky" data-open-form data-unit="${esc(p.name + " · " + data.typeLabel[t])}">Nhận giá →</a></td></tr>`;
+            }).join("")}</tbody>
+          </table>
+        </div>
+        <p class="footnote">Số liệu theo mặt bằng tầng của chủ đầu tư, chỉ để tham khảo; thông số chính thức theo hợp đồng mua bán. Tổng dự án 1.395 căn theo công bố.</p>
+      </div>
+      <script type="application/json" id="unit-data">${JSON.stringify(payload).replace(/</g, "\\u003c")}</script>
+    </section>`;
 }
 
 const faqSchema = (faq) => ({ "@type": "FAQPage", mainEntity: faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) });
@@ -600,6 +662,7 @@ for (const p of plazas) {
           <p>${esc(p.lead)} Chủ đầu tư: ${esc(investor)}.</p>
           <ul class="check-list">${p.highlights.map((h) => `<li>${esc(h)}</li>`).join("")}</ul>
           <a href="#dang-ky" class="btn btn-primary" data-open-form>${esc(p.cta)}</a>
+          ${p.progressUrl ? `<a href="${esc(p.progressUrl)}" class="btn btn-outline-dark" target="_blank" rel="noopener">📷 Xem tiến độ &amp; hình ảnh thực tế</a>` : ""}
         </div>
         ${specCard(`Thông tin ${p.name}`, [["Dự án", "Căn hộ " + p.name], ["Chủ đầu tư", "Công ty CP Đô thị FPT Đà Nẵng"], ["Vị trí", "Khu đô thị FPT City, Đà Nẵng"], ...p.specs], p.note)}
       </div>
@@ -616,11 +679,12 @@ for (const p of plazas) {
             ${i === 1 ? '<span class="tag">Được quan tâm nhất</span>' : ""}
             <div class="plan-img" aria-hidden="true"><svg viewBox="0 0 120 80"><rect x="4" y="4" width="112" height="72" fill="none" stroke="currentColor" stroke-width="2"/>${Array.from({ length: Math.min(i + 1, 3) }, (_, k) => `<line x1="${4 + (112 / (Math.min(i + 1, 3) + 1)) * (k + 1)}" y1="4" x2="${4 + (112 / (Math.min(i + 1, 3) + 1)) * (k + 1)}" y2="44" stroke="currentColor" stroke-width="2"/>`).join("")}<line x1="4" y1="44" x2="116" y2="44" stroke="currentColor" stroke-width="2"/></svg></div>
             <h3>Căn ${esc(type)}</h3><p class="area">${esc(area)}</p>
-            <button class="btn ${i === 1 ? "btn-orange" : "btn-outline-light"} btn-block" data-open-form>Xem layout &amp; giá ${esc(type)}</button>
+            <button class="btn ${i === 1 ? "btn-orange" : "btn-outline-light"} btn-block" data-open-form data-unit="${esc(p.name + " · " + type)}">Xem layout &amp; giá ${esc(type)}</button>
           </article>`).join("")}
         </div>
       </div>
     </section>
+    ${p.floorplan ? floorplanSection(p, fp4) : ""}
     ${location(`Vị trí ${p.name} – trong lõi khu đô thị FPT City`)}
     ${amenities()}
     ${ctaSection({

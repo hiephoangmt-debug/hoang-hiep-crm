@@ -31,7 +31,12 @@ const CONFIG = {
   $$("[data-email]").forEach((el) => (el.textContent = CONFIG.email));
   $$("[data-email-link]").forEach((el) => (el.href = "mailto:" + CONFIG.email));
   const project = document.body.dataset.project || "";
-  $$("[data-drive-link]").forEach((el) => (el.href = document.body.dataset.drive || "#"));
+  const drive = document.body.dataset.drive || "";
+  const hasDrive = /^https:\/\/drive\.google\.com\//.test(drive) && !/THAY_ID/.test(drive);
+  $$("[data-drive-link]").forEach((el) => {
+    if (hasDrive) el.href = drive;
+    else { el.removeAttribute("href"); el.hidden = true; }
+  });
   $$("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
 
   /* ---------- Header & menu ---------- */
@@ -118,6 +123,7 @@ const CONFIG = {
 
   function showSuccess(name) {
     $("[data-success-name]", modal).textContent = name || "bạn";
+    if (!hasDrive) $(".modal-success p", modal).textContent = "Chuyên viên sẽ gửi bảng giá, mặt bằng và tài liệu dự án qua Zalo/điện thoại trong ít phút.";
     modalBody.hidden = true;
     modalSuccess.hidden = false;
     openModal(true);
@@ -142,6 +148,7 @@ const CONFIG = {
   $$("[data-open-form]").forEach((el) =>
     el.addEventListener("click", (e) => {
       e.preventDefault();
+      setUnit(el.getAttribute("data-unit") || "");
       const interest = el.getAttribute("data-interest");
       if (interest) {
         const sel = $("select[name=need]", modal);
@@ -163,6 +170,14 @@ const CONFIG = {
   }
   function sessionFlag() { try { return sessionStorage.getItem("fc_popup"); } catch (e) { return null; } }
   function markSession() { try { sessionStorage.setItem("fc_popup", "1"); } catch (e) { /* bỏ qua */ } }
+
+  /* ---------- Căn khách chọn (từ bảng tra cứu / loại căn) ---------- */
+  let pickedUnit = "";
+  function setUnit(u) {
+    pickedUnit = u;
+    const lbl = $("[data-unit-label]", modal);
+    if (lbl) { lbl.hidden = !u; lbl.textContent = u ? "Căn quan tâm: " + u : ""; }
+  }
 
   /* ---------- Form & gửi lead ---------- */
   const params = new URLSearchParams(location.search);
@@ -225,7 +240,7 @@ const CONFIG = {
         name: form.elements.name.value.trim(),
         phone: form.elements.phone.value.replace(/[\s.-]/g, ""),
         email: form.elements.email ? form.elements.email.value.trim() : "",
-        need: form.elements.need ? form.elements.need.value : "",
+        need: [form.dataset.source === "popup" ? pickedUnit : "", form.elements.need ? form.elements.need.value : ""].filter(Boolean).join(" · "),
         project,
         source: form.dataset.source || "",
         page: location.href,
@@ -240,6 +255,7 @@ const CONFIG = {
       btn.disabled = false;
       btn.textContent = label;
       form.reset();
+      if (form.dataset.source === "popup") setUnit("");
       showSuccess(data.name);
     });
     $$("input", form).forEach((i) => i.addEventListener("input", () => setError(i)));
@@ -262,6 +278,59 @@ const CONFIG = {
     };
     tick();
     const timer = setInterval(tick, 1000);
+  }
+
+  /* ---------- Mặt bằng tầng & tra cứu căn ---------- */
+  const unitEl = $("#unit-data");
+  if (unitEl) {
+    const D = JSON.parse(unitEl.textContent);
+    const root = unitEl.closest("section");
+    const st = { floor: D.floors[0].id, level: D.floors[0].from, block: "", type: "" };
+    const nf = (n) => String(n).replace(".", ",");
+    const pad = (n) => String(n).padStart(2, "0");
+    const label = Object.fromEntries(D.types);
+    const img = $("[data-fp-img]", root), link = $("[data-fp-link]", root), note = $("[data-fp-note]", root);
+    const levelSel = $("[data-fp-level]", root);
+
+    function pickFloor(id) {
+      st.floor = id; st.type = "";
+      const f = D.floors.find((x) => x.id === id);
+      st.level = f.from;
+      $$("[data-floor]", root).forEach((b) => b.setAttribute("aria-selected", String(b.dataset.floor === id)));
+      img.src = f.img + "-sm.webp"; link.href = f.img + ".webp";
+      img.alt = "Mặt bằng " + f.label.toLowerCase() + " " + D.project + " Đà Nẵng";
+      note.textContent = f.note;
+      levelSel.innerHTML = Array.from({ length: f.to - f.from + 1 }, (_, i) => `<option value="${f.from + i}">Tầng ${f.from + i}</option>`).join("");
+      levelSel.disabled = f.from === f.to;
+      render();
+    }
+    function render() {
+      const all = D.units.filter((u) => u[0] === st.floor && (!st.block || u[1] === st.block));
+      const counts = {};
+      all.forEach((u) => (counts[u[3]] = (counts[u[3]] || 0) + 1));
+      $("[data-fp-types]", root).innerHTML = [`<button class="${st.type ? "" : "on"}" data-t="">Tất cả<b>${all.length}</b></button>`]
+        .concat(D.types.filter(([t]) => counts[t]).map(([t, l]) => `<button class="${st.type === t ? "on" : ""}" data-t="${t}">${l}<b>${counts[t]}</b></button>`)).join("");
+      $$("[data-fp-types] button", root).forEach((b) => (b.onclick = () => { st.type = b.dataset.t; render(); }));
+      const list = all.filter((u) => !st.type || u[3] === st.type)
+        .sort((a, b) => a[1].localeCompare(b[1]) || a[2].localeCompare(b[2], "vi", { numeric: true }));
+      const code = (u) => `${u[1]}-${pad(st.level)}.${u[2]}`;
+      $("[data-fp-count]", root).textContent = `${list.length} căn · ${D.floors.find((f) => f.id === st.floor).label.replace(/\s*\(.*\)/, "")}${st.block ? " · khối " + st.block : ""}`;
+      $("[data-fp-list]", root).innerHTML = list.map((u) => `<div class="fp-row"><code>${code(u)}</code><span class="ty">${label[u[3]] || u[3]}</span><span class="ar">${nf(u[4])} m²${u[3].startsWith("DUP") ? "*" : ""}</span><button type="button" data-u="${code(u)} · ${label[u[3]] || u[3]} · ${nf(u[4])} m²">Nhận giá</button></div>`).join("")
+        + (list.some((u) => u[3].startsWith("DUP")) ? '<p class="fp-count" style="padding:8px 12px">* Diện tích Duplex hiển thị theo từng tầng (19 hoặc 20).</p>' : "");
+      $$("[data-fp-list] button", root).forEach((b) => (b.onclick = () => {
+        setUnit(D.project + " · " + b.dataset.u);
+        openModal(false);
+        track("open_form", { interest: b.dataset.u });
+      }));
+    }
+    $$("[data-floor]", root).forEach((b) => (b.onclick = () => pickFloor(b.dataset.floor)));
+    $$("[data-fp-block] button", root).forEach((b) => (b.onclick = () => {
+      st.block = b.dataset.b;
+      $$("[data-fp-block] button", root).forEach((x) => x.classList.toggle("on", x === b));
+      render();
+    }));
+    levelSel.onchange = () => { st.level = +levelSel.value; render(); };
+    pickFloor(st.floor);
   }
 
   /* ---------- Tracking (GA4 / GTM / Meta Pixel nếu có) ---------- */
