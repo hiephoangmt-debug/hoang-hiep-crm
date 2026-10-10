@@ -116,3 +116,18 @@ export const totalUnits = () => {
   }
   return n;
 };
+
+/**
+ * Layout căn hộ mẫu (ảnh từ tài liệu chủ đầu tư). `units`: [khối, số căn, từ tầng, đến tầng].
+ * Ảnh: /assets/img/fpt-plaza-4/layout/layout-fpt-plaza-4-<img>.webp (+ "-sm" bản nhỏ)
+ */
+export const layouts = [
+  { img: "n-06", type: "2PN+", label: "2 phòng ngủ + 1", area: 79.03, units: [["N", "06", 3, 20]] },
+  { img: "n-11", type: "2PN", label: "2 phòng ngủ", area: 69.56, units: [["N", "11", 3, 20]] },
+  { img: "n-20", type: "2PN", label: "2 phòng ngủ", area: 69.54, units: [["N", "20", 3, 20]] },
+  { img: "n-29-n-27", type: "2PN", label: "2 phòng ngủ", area: 60.17, units: [["N", "29", 3, 16], ["N", "27", 17, 20]] },
+  { img: "s-01", type: "2PN", label: "2 phòng ngủ", area: 58.78, units: [["S", "01", 3, 20]] },
+];
+
+/** Mã hiển thị cho layout, ví dụ "N-X.29 (tầng 3–16) · N-X.27 (tầng 17–20)" */
+export const layoutCodes = (l) => l.units.map(([b, no, from, to]) => `${b}-X.${no}${l.units.length > 1 ? ` (tầng ${from}–${to})` : ""}`).join(" · ");

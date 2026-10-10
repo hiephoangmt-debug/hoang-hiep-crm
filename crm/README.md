@@ -60,6 +60,22 @@ Cập nhật code sau này: dán file mới → **Triển khai › Quản lý tr
 - `CRM_LOG` – lịch sử chăm sóc (thời gian, lead ID, hành động, nội dung).
 - Mật khẩu lưu dạng băm trong *Script Properties*, không nằm trong Sheet.
 
+## Chat AI trên website (tuỳ chọn)
+
+Website có nút **Chat tư vấn 24/7** (cụm nút bên phải). Mặc định chat trả lời tự động từ dữ liệu dự án
+(giá → xin SĐT, mặt bằng, tra mã căn FPT Plaza 4, tiến độ, vị trí, pháp lý…) và **khách gõ SĐT trong chat → vào CRM**
+(nguồn `WEB-CHAT`, nhu cầu ghi lại câu khách đã hỏi).
+
+Muốn câu hỏi ngoài kịch bản được **AI (Claude)** trả lời:
+
+1. Tạo khoá API tại <https://platform.claude.com> (có tính phí theo lượng dùng).
+2. Apps Script › **Cài đặt dự án › Thuộc tính tập lệnh** › thêm `ANTHROPIC_API_KEY` = khoá vừa tạo.
+3. **Triển khai › Quản lý triển khai › Phiên bản mới**. Website (với `chatAI: true`) tự dùng AI; bỏ khoá là tắt.
+
+AI chỉ trả lời từ kho kiến thức website sinh ra (`/assets/chat-kb.json`), không bịa giá, luôn mời khách để lại SĐT.
+Giới hạn chi phí ở đầu `Code.gs`: `CHAT_PER_SESSION` (30 tin/khách/6 giờ), `CHAT_PER_DAY` (400 tin/ngày).
+Model mặc định `CHAT_MODEL = "claude-opus-5-5"`; muốn rẻ hơn có thể đổi sang `"claude-haiku-5-5"`.
+
 ## Kiểm thử
 
 ```bash

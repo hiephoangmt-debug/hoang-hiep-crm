@@ -12,6 +12,10 @@ const CONFIG = {
   offerEndsAt: "",
   // Tự mở popup sau N giây (0 = tắt)
   popupDelaySeconds: 25,
+  // Chat: true = trả lời bằng AI (Claude) qua CRM khi đã cấu hình khoá API; false = chỉ dùng trả lời tự động
+  chatAI: true,
+  // Tự hiện lời chào chat sau N giây (0 = tắt)
+  chatTeaserSeconds: 12,
 };
 
 (function () {
@@ -165,7 +169,8 @@ const CONFIG = {
 
   if (CONFIG.popupDelaySeconds > 0 && !store.get("fc_lead") && !sessionFlag()) {
     setTimeout(() => {
-      if (!document.querySelector("dialog[open]")) { openModal(false); markSession(); }
+      const chat = document.getElementById("chatbox");
+      if (!document.querySelector("dialog[open]") && (!chat || chat.hidden)) { openModal(false); markSession(); }
     }, CONFIG.popupDelaySeconds * 1000);
   }
   function sessionFlag() { try { return sessionStorage.getItem("fc_popup"); } catch (e) { return null; } }
@@ -291,6 +296,7 @@ const CONFIG = {
     const label = Object.fromEntries(D.types);
     const img = $("[data-fp-img]", root), link = $("[data-fp-link]", root), note = $("[data-fp-note]", root);
     const levelSel = $("[data-fp-level]", root);
+    const layoutFor = (u) => (D.layouts || []).find((l) => l.units.some(([b, no, from, to]) => b === u[1] && no === u[2] && st.level >= from && st.level <= to));
 
     function pickFloor(id) {
       st.floor = id; st.type = "";
@@ -315,7 +321,7 @@ const CONFIG = {
         .sort((a, b) => a[1].localeCompare(b[1]) || a[2].localeCompare(b[2], "vi", { numeric: true }));
       const code = (u) => `${u[1]}-${pad(st.level)}.${u[2]}`;
       $("[data-fp-count]", root).textContent = `${list.length} căn · ${D.floors.find((f) => f.id === st.floor).label.replace(/\s*\(.*\)/, "")}${st.block ? " · khối " + st.block : ""}`;
-      $("[data-fp-list]", root).innerHTML = list.map((u) => `<div class="fp-row"><code>${code(u)}</code><span class="ty">${label[u[3]] || u[3]}</span><span class="ar">${nf(u[4])} m²${u[3].startsWith("DUP") ? "*" : ""}</span><button type="button" data-u="${code(u)} · ${label[u[3]] || u[3]} · ${nf(u[4])} m²">Nhận giá</button></div>`).join("")
+      $("[data-fp-list]", root).innerHTML = list.map((u) => `<div class="fp-row"><code>${code(u)}</code><span class="ty">${label[u[3]] || u[3]}</span><span class="ar">${nf(u[4])} m²${u[3].startsWith("DUP") ? "*" : ""}</span><span class="fp-acts">${layoutFor(u) ? `<a class="fp-lay" href="${layoutFor(u).img}.webp" target="_blank" rel="noopener" title="Xem layout căn">📐 Layout</a>` : ""}<button type="button" data-u="${code(u)} · ${label[u[3]] || u[3]} · ${nf(u[4])} m²">Nhận giá</button></span></div>`).join("")
         + (list.some((u) => u[3].startsWith("DUP")) ? '<p class="fp-count" style="padding:8px 12px">* Diện tích Duplex hiển thị theo từng tầng (19 hoặc 20).</p>' : "");
       $$("[data-fp-list] button", root).forEach((b) => (b.onclick = () => {
         setUnit(D.project + " · " + b.dataset.u);
@@ -332,6 +338,19 @@ const CONFIG = {
     levelSel.onchange = () => { st.level = +levelSel.value; render(); };
     pickFloor(st.floor);
   }
+
+  /* ---------- Dùng chung cho chat.js ---------- */
+  window.__fc = {
+    CONFIG, project, hasDrive, drive, track,
+    openForm: (unit) => { setUnit(unit || ""); openModal(false); },
+    sendLead: (fields) => {
+      const data = { email: "", need: "", project, page: location.href, referrer: document.referrer, time: new Date().toISOString(), ...utm, ...fields };
+      store.set("fc_lead", "1");
+      if (data.name) store.set("fc_name", data.name);
+      track("generate_lead", { form: data.source, need: data.need, project });
+      return sendLead(data);
+    },
+  };
 
   /* ---------- Tracking (GA4 / GTM / Meta Pixel nếu có) ---------- */
   function track(event, props) {

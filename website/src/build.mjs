@@ -248,13 +248,31 @@ const footer = () => `
     </div>
     <p class="copy">© <span data-year></span> fpt-city.com</p>
   </footer>
-  <div class="floating">
-    <a href="tel:" class="fab fab-call" data-hotline-link aria-label="Gọi hotline">📞</a>
-    <a href="#" class="fab fab-zalo" data-zalo-link target="_blank" rel="noopener" aria-label="Chat Zalo">Zalo</a>
+  <div class="floating" aria-label="Liên hệ nhanh">
+    <button type="button" class="fab fab-chat" data-chat-open aria-label="Chat tư vấn tự động" aria-expanded="false" aria-controls="chatbox">
+      <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.6 2 11c0 2.4 1.3 4.5 3.4 6l-.9 3.6c-.1.4.3.7.7.5L9.3 19c.9.2 1.8.3 2.7.3 5.5 0 10-3.6 10-8.1S17.5 3 12 3Zm-4 9.3a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Zm4 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Zm4 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Z"/></svg>
+      <span class="fab-badge" data-chat-badge>1</span><span class="fab-label">Chat tư vấn 24/7</span>
+    </button>
+    <a href="#" class="fab fab-zalo" data-zalo-link target="_blank" rel="noopener" aria-label="Chat Zalo">Zalo<span class="fab-label">Nhắn Zalo</span></a>
+    <a href="tel:" class="fab fab-call" data-hotline-link aria-label="Gọi hotline">📞<span class="fab-label" data-hotline></span></a>
   </div>
+  <div class="chat-teaser" data-chat-teaser hidden><button type="button" class="chat-teaser-x" aria-label="Ẩn" data-teaser-close>×</button><span data-chat-open>👋 Bạn cần bảng giá hay mặt bằng căn hộ? Hỏi mình nhé!</span></div>
+  <section class="chatbox" id="chatbox" role="dialog" aria-label="Chat tư vấn tự động" hidden>
+    <header class="chat-head">
+      <span class="chat-ava" aria-hidden="true">🤖</span>
+      <div><b>Trợ lý FPT City</b><small><i class="dot"></i>Trả lời tự động ngay lập tức</small></div>
+      <button type="button" class="chat-x" data-chat-close aria-label="Đóng chat">×</button>
+    </header>
+    <div class="chat-log" data-chat-log aria-live="polite"></div>
+    <div class="chat-chips" data-chat-chips></div>
+    <form class="chat-form" data-chat-form autocomplete="off">
+      <input name="q" maxlength="400" placeholder="Nhập câu hỏi hoặc mã căn (VD: N-12.12)…" aria-label="Nội dung chat">
+      <button type="submit" aria-label="Gửi">➤</button>
+    </form>
+    <p class="chat-note">Trợ lý tự động · Thông tin tham khảo, giá chính xác do chuyên viên gửi</p>
+  </section>
   <div class="mobile-bar">
-    <a href="tel:" data-hotline-link>📞 Gọi ngay</a>
-    <button data-open-form>📥 Nhận bảng giá</button>
+    <button data-open-form>📥 Nhận bảng giá &amp; mặt bằng</button>
   </div>`;
 
 const modal = (title, needs) => `
@@ -319,6 +337,7 @@ ${body}
 ${footer()}
 ${modal(modalTitle, needs)}
   <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/chat.js" defer></script>
 </body>
 </html>
 `;
@@ -337,6 +356,7 @@ function floorplanSection(p, data) {
       img: `/assets/img/${p.slug}/mat-bang-${p.slug}-${f.img}` })),
     units: data.unitIndex(),
     types: data.typeOrder.map((t) => [t, data.typeLabel[t]]),
+    layouts: (data.layouts || []).map((l) => ({ img: `/assets/img/${p.slug}/layout/layout-${p.slug}-${l.img}`, units: l.units, code: data.layoutCodes(l), area: l.area, label: l.label })),
   };
   const f0 = payload.floors[0];
   return `
@@ -379,6 +399,19 @@ function floorplanSection(p, data) {
           </table>
         </div>
         <p class="footnote">Số liệu theo mặt bằng tầng của chủ đầu tư, chỉ để tham khảo; thông số chính thức theo hợp đồng mua bán. Tổng dự án 1.395 căn theo công bố.</p>
+        ${payload.layouts.length ? `
+        <div class="section-head reveal" style="margin-top:64px">
+          <p class="eyebrow dark">Layout căn hộ</p>
+          <h3 class="title" style="font-size:clamp(24px,3vw,34px)">Layout căn hộ mẫu ${p.name}</h3>
+          <p>Bố trí nội thất tham khảo từng căn. Bấm để xem ảnh lớn; nhận trọn bộ layout trong tài liệu dự án.</p>
+        </div>
+        <div class="layout-grid">${payload.layouts.map((l) => `
+          <figure class="layout-card reveal">
+            <a href="${l.img}.webp" target="_blank" rel="noopener"><img src="${l.img}-sm.webp" width="520" height="735" loading="lazy" decoding="async" alt="Layout căn ${esc(l.code)} ${p.name} – ${esc(l.label)} ${nf(l.area)} m²"></a>
+            <figcaption><b>${esc(l.code)}</b><span>${esc(l.label)} · ${nf(l.area)} m²</span>
+              <button type="button" class="btn btn-orange btn-sm" data-open-form data-unit="${esc(p.name + " · " + l.code + " · " + l.label + " · " + nf(l.area) + " m²")}">Nhận giá căn này</button></figcaption>
+          </figure>`).join("")}
+        </div>` : ""}
       </div>
       <script type="application/json" id="unit-data">${JSON.stringify(payload).replace(/</g, "\\u003c")}</script>
     </section>`;
@@ -699,6 +732,26 @@ for (const p of plazas) {
     ${related("Các tòa FPT Plaza khác", plazaCards(p.slug))}
     ${finalCta(resale ? `Tìm căn ${p.name} ưng ý ngay hôm nay` : `Đừng bỏ lỡ căn hộ ${p.name} đẹp nhất`, "Một phút đăng ký – nhận ngay tài liệu qua Google Drive.", "Nhận tài liệu miễn phí")}`,
   }));
+}
+
+/* ================= KIẾN THỨC CHO CHAT ================= */
+{
+  const kb = {
+    updated: site.updated,
+    projects: plazas.map((p) => ({
+      name: p.name, url: "/" + p.slug + "/", status: p.statusLabel, lead: p.lead, specs: p.specs,
+      units: p.units, highlights: p.highlights, faq: p.faq, hasDrive: !!p.drive,
+    })),
+    zones: zones.map((z) => ({ code: z.code, url: "/dat-nen-fpt-city/" + z.slug + "/", lead: z.lead, traits: z.traits })),
+    city: {
+      name: "Khu đô thị FPT City Đà Nẵng", investor, area: "hơn 181 ha", capital: "khoảng 952 triệu USD (dự kiến)",
+      location: "Phía Nam TP. Đà Nẵng: ~5 phút tới biển Tân Trà – Non Nước, ~15–20 phút tới trung tâm, ~20 phút tới sân bay và phố cổ Hội An.",
+      amenities: "Đại học FPT & hệ thống trường FPT, FPT Complex, công viên – kênh sinh thái, hồ bơi, gym, shophouse, siêu thị.",
+    },
+    fp4: { floors: fp4.floors.map((f) => ({ id: f.id, from: f.from, to: f.to })), units: fp4.unitIndex(), types: fp4.typeLabel,
+      layouts: fp4.layouts.map((l) => ({ img: `/assets/img/fpt-plaza-4/layout/layout-fpt-plaza-4-${l.img}.webp`, units: l.units, area: l.area })) },
+  };
+  writeFileSync(join(OUT, "assets", "chat-kb.json"), JSON.stringify(kb));
 }
 
 /* ================= SITEMAP & ROBOTS ================= */

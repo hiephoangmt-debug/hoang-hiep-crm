@@ -99,4 +99,36 @@ api.changePassword(token, pw, 'matkhaumoi1'); assert.ok(api.login('matkhaumoi1')
 // chặn dò mật khẩu
 for (let i = 0; i < 5; i++) { try { api.login('x'); } catch (e) {} }
 assert.throws(() => api.login('matkhaumoi1'), /quá 5 lần/);
+
+// 8. Chat AI cho website
+{
+  const { api, props, fetches, http } = loadGas({});
+  const hist = (arr) => JSON.stringify(arr);
+  assert.equal(api.doPost({ parameter: { action: 'chat', sid: 'a1', history: hist([{ role: 'user', content: 'chào' }]) } }), JSON.stringify({ ok: false, error: 'disabled' }), 'chưa có khoá → tắt');
+  props.ANTHROPIC_API_KEY = 'sk-test';
+  const out = JSON.parse(api.doPost({ parameter: { action: 'chat', sid: 'a1', project: 'FPT Plaza 4',
+    history: hist([{ role: 'assistant', content: 'Xin chào 👋' }, { role: 'user', content: 'Giá' }, { role: 'user', content: 'bao nhiêu?' }]) } }));
+  assert.deepEqual(out, { ok: true, reply: 'Xin chào!' });
+  const call = fetches.find((f) => f.url.includes('anthropic.com'));
+  const body = JSON.parse(call.opt.payload);
+  assert.equal(body.model, 'claude-opus-5-5'); assert.equal(body.fallbacks, 'default');
+  assert.equal(call.opt.headers['anthropic-beta'], 'server-side-fallback-2026-07-01');
+  assert.equal(call.opt.headers['x-api-key'], 'sk-test');
+  assert.equal(body.output_config.effort, 'low'); assert.ok(!('thinking' in body), 'Opus 5.5: không gửi thinking');
+  assert.deepEqual(body.messages, [{ role: 'user', content: 'Giá\nbao nhiêu?' }], 'bỏ lượt assistant đầu, gộp lượt user');
+  assert.equal(body.system[0].cache_control.type, 'ephemeral');
+  assert.match(body.system[0].text, /Khách đang xem trang: FPT Plaza 4/);
+  assert.ok(!body.system[0].text.includes('"units"'), 'không gửi danh sách căn');
+  // từ chối an toàn
+  http.api.body = { content: [], stop_reason: 'refusal', stop_details: { category: 'cyber' } };
+  assert.match(JSON.parse(api.doPost({ parameter: { action: 'chat', sid: 'a1', history: hist([{ role: 'user', content: 'x' }]) } })).reply, /chuyên viên/);
+  // lỗi API
+  http.api = { status: 529, body: { error: { type: 'overloaded_error' } } };
+  assert.deepEqual(JSON.parse(api.doPost({ parameter: { action: 'chat', sid: 'a1', history: hist([{ role: 'user', content: 'x' }]) } })), { ok: false, error: 'api' });
+  // giới hạn mỗi phiên
+  http.api = { status: 200, body: { content: [{ type: 'text', text: 'ok' }], stop_reason: 'end_turn' } };
+  let last;
+  for (let i = 0; i < 35; i++) last = JSON.parse(api.doPost({ parameter: { action: 'chat', sid: 'b2', history: hist([{ role: 'user', content: 'hi' }]) } }));
+  assert.deepEqual(last, { ok: false, error: 'limit' });
+}
 console.log('ALL CRM TESTS PASSED ✔');

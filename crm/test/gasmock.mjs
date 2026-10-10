@@ -2,7 +2,7 @@
 import { readFileSync } from 'node:fs';
 import { createHash, randomUUID } from 'node:crypto';
 export function loadGas(tabs = {}) {
-  const sheets = {}; const mail = []; const events = {}; const props = {}; const cache = {};
+  const sheets = {}; const mail = []; const fetches = []; const http = { kb: '{"projects":[],"fp4":{"units":[1,2]}}', api: { status: 200, body: { content: [{ type: 'thinking', thinking: '' }, { type: 'text', text: 'Xin chào!' }], stop_reason: 'end_turn' } } }; const events = {}; const props = {}; const cache = {};
   const mkSheet = (name, rows = []) => {
     const data = rows.map(r => r.slice());
     const sh = {
@@ -35,6 +35,7 @@ export function loadGas(tabs = {}) {
     CacheService: { getScriptCache: () => ({ get: k => cache[k] ?? null, put: (k, v) => cache[k] = v, remove: k => delete cache[k] }) },
     ContentService: { createTextOutput: s => ({ setMimeType: () => s }), MimeType: { JSON: 1 } },
     MailApp: { sendEmail: (...a) => mail.push(a) },
+    UrlFetchApp: { fetch: (url, opt = {}) => { fetches.push({ url, opt }); const isApi = url.includes('anthropic.com'); const st = isApi ? http.api.status : 200; const body = isApi ? JSON.stringify(http.api.body) : http.kb; return { getResponseCode: () => st, getContentText: () => body }; } },
     Session: { getEffectiveUser: () => ({ getEmail: () => 'owner@example.com' }) },
     ScriptApp: { getService: () => ({ getUrl: () => 'https://crm' }), getProjectTriggers: () => [], deleteTrigger() {},
       newTrigger: () => { const b = { timeBased: () => b, atHour: () => b, nearMinute: () => b, everyDays: () => b, inTimezone: () => b, everyMinutes: () => b, create: () => ({}) }; return b; } },
@@ -46,5 +47,5 @@ export function loadGas(tabs = {}) {
   const src = readFileSync(new URL('../Code.gs', import.meta.url), 'utf8');
   const names = [...src.matchAll(/^function (\w+)/gm)].map(m => m[1]).concat(['advise_', 'parseLegacyRow_']);
   const fn = new Function(...Object.keys(g), src + `; return {${[...new Set(names)].join(',')}};`);
-  return { api: fn(...Object.values(g)), sheets, mail, events, props, g };
+  return { api: fn(...Object.values(g)), sheets, mail, events, props, g, fetches, http };
 }
