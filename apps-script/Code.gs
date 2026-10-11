@@ -248,7 +248,7 @@ var CRM_TABLES = {
     ['mql', 'MQL'], ['sql', 'SQL'], ['deal', 'DEAL'], ['ghiChu', 'Ghi chú'], ['nguon', 'Nguồn'], ['nguoiTao', 'Người tạo'], ['ngayTao', 'Ngày tạo']],
   ChungTu: [['id', 'ID'], ['tuan', 'Tuần (thứ 2)'], ['duAn', 'Dự án'], ['nhanSu', 'Nhân sự'], ['nenTang', 'Nền tảng'], ['loai', 'Loại'],
     ['fileId', 'File ID'], ['tenFile', 'Tên file'], ['url', 'Link'], ['nguoiTao', 'Người tạo'], ['ngayTao', 'Ngày tạo'],
-    ['hash', 'Mã nội dung (chống trùng)']],
+    ['hash', 'Mã nội dung (chống trùng)'], ['soTien', 'Số tiền hoá đơn (gồm VAT)'], ['vat', 'VAT %']],
   BaoCao: [['id', 'ID'], ['tuan', 'Tuần (thứ 2)'], ['duAn', 'Dự án'], ['trangThai', 'Trạng thái'], ['pdfUrl', 'PDF'], ['pptxUrl', 'PPTX'],
     ['tomTat', 'Tóm tắt'], ['nguoiTao', 'Người tạo'], ['ngayTao', 'Ngày tạo']],
 };
@@ -627,7 +627,8 @@ function crmCopyEvidence(id, duAn) {
   if (!src) throw new Error('Không tìm thấy chứng từ ' + id);
   var project = crmRows_('DuAn').filter(function (p) { return p.ten === duAn; })[0];
   if (!project) throw new Error('Không có dự án ' + duAn);
-  var meta = { tuan: src.tuan, duAn: duAn, nhanSu: src.nhanSu, nenTang: src.nenTang, loai: src.loai, tenFile: src.tenFile, hash: src.hash };
+  var meta = { tuan: src.tuan, duAn: duAn, nhanSu: src.nhanSu, nenTang: src.nenTang, loai: src.loai, tenFile: src.tenFile, hash: src.hash,
+    soTien: src.soTien, vat: src.vat };
   if (meta.hash) {
     var same = crmSameEvidence_(crmRows_('ChungTu'), meta);
     if (same) return same;
@@ -639,6 +640,7 @@ function crmCopyEvidence(id, duAn) {
   return crmSave('ChungTu', {
     tuan: meta.tuan, duAn: duAn, nhanSu: meta.nhanSu, nenTang: meta.nenTang, loai: meta.loai,
     fileId: file.getId(), tenFile: meta.tenFile, url: file.getUrl(), hash: meta.hash || '',
+    soTien: meta.soTien || '', vat: meta.vat != null ? meta.vat : '',
   });
 }
 
@@ -656,5 +658,6 @@ function crmUploadEvidence(meta, b64) {
   return crmSave('ChungTu', {
     tuan: meta.tuan, duAn: meta.duAn, nhanSu: meta.nhanSu, nenTang: meta.nenTang, loai: meta.loai,
     fileId: file.getId(), tenFile: meta.tenFile, url: file.getUrl(), hash: meta.hash || '',
+    soTien: meta.soTien || '', vat: meta.vat != null ? meta.vat : '',
   });
 }

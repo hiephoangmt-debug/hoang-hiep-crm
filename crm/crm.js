@@ -478,17 +478,50 @@
     const groups = new Map();
     S.SoLieu.filter((r) => r.nguon === "anh" && r.duAn === pjName && r.tuan === w).forEach((r) => {
       const key = r.nenTang + "|" + (digitsOf(r.taiKhoan) || r.nhanSu);
-      const g = groups.get(key) || { nenTang: r.nenTang, taiKhoan: r.taiKhoan || "", nhanSu: r.nhanSu || "", chiPhi: 0, lead: 0, luotXem: "", hienThi: "", tiepCan: "", luotNhap: "" };
+      const g = groups.get(key) || { nenTang: r.nenTang, taiKhoan: r.taiKhoan || "", nhanSu: r.nhanSu || "", chiPhi: 0, chiPhiPhi: 0, fee: false, lead: 0, luotXem: "", hienThi: "", tiepCan: "", luotNhap: "" };
       g.chiPhi += num(r.chiPhi);
+      g.chiPhiPhi += num(r.chiPhiPhi) || num(r.chiPhi);
+      if (num(r.chiPhiPhi) && num(r.chiPhiPhi) !== num(r.chiPhi)) g.fee = true; // đã áp hoá đơn (VAT/phí)
       g.lead += num(r.lead);
       ["luotXem", "hienThi", "tiepCan", "luotNhap"].forEach((k) => { if (r[k] !== "" && r[k] != null) g[k] = num(g[k]) + num(r[k]); });
       groups.set(key, g);
     });
     if (!groups.size) return null;
     // lead = 0 nghĩa là ảnh không có số lead: để trống ô Lead trong Sheet cho các bạn tự điền
-    const res = await gas("crmWriteSheet", pjName, w, Array.from(groups.values()).map((g) => Object.assign(g, { lead: g.lead || "" })));
+    const res = await gas("crmWriteSheet", pjName, w, Array.from(groups.values()).map((g) => {
+      const o = Object.assign({}, g, { lead: g.lead || "", chiPhiPhi: g.fee ? Math.round(g.chiPhiPhi) : "" });
+      delete o.fee;
+      return o;
+    }));
     if (res && res.source) { project(pjName).nguonSoLieu = res.source; if (!$("tab-nhap").hidden) renderEntries(); }
     return res;
+  }
+  /**
+   * Hoá đơn của một người · kênh · tuần · dự án -> cột "Chi phí (+gồm phí nền tảng)".
+   * Có % VAT trên hoá đơn: chi phí × (1 + VAT). Không có: chia tổng hoá đơn theo tỉ lệ chi phí từng dòng.
+   * Chưa có số chi phí từ ảnh: ghi thẳng tổng hoá đơn vào ô "+ gồm phí" trong Google Sheet.
+   */
+  async function applyInvoices(duAn, w, nhanSu, nenTang) {
+    const inv = S.ChungTu.filter((c) => c.loai === "hoadon" && c.duAn === duAn && c.tuan === w && c.nhanSu === nhanSu && c.nenTang === nenTang && num(c.soTien));
+    if (!inv.length) return "";
+    const total = inv.reduce((a, c) => a + num(c.soTien), 0);
+    const vats = inv.map((c) => (c.vat === "" || c.vat == null ? null : num(c.vat)));
+    const rows = S.SoLieu.filter((r) => r.nguon === "anh" && r.duAn === duAn && r.tuan === w && r.nhanSu === nhanSu && r.nenTang === nenTang);
+    const spent = rows.reduce((a, r) => a + num(r.chiPhi), 0);
+    if (rows.length && spent) {
+      const factor = vats.every((v) => v != null) && new Set(vats).size === 1 ? 1 + vats[0] / 100 : total / spent;
+      const upd = rows.map((r) => ({ id: r.id, chiPhiPhi: Math.round(num(r.chiPhi) * factor) }));
+      const saved = await gas("crmSaveMany", "SoLieu", upd);
+      saved.forEach((r) => { S.SoLieu = S.SoLieu.filter((x) => x.id !== r.id).concat(r); });
+      let note = "";
+      try { note = pushNote(await pushToSheet(duAn, w)); } catch (e) { note = " Chưa ghi được vào Google Sheet: " + e.message; }
+      return ` Chi phí (+phí) của ${nhanSu} · ${PLATFORM_LABEL[nenTang] || nenTang} = ${fmtInt(Math.round(spent * factor))} đ` +
+        (factor === total / spent ? " (theo tổng hoá đơn)" : ` (chi phí × ${B.fmtDec(factor, 2)})`) + "." + note;
+    }
+    try {
+      const res = await gas("crmWriteSheet", duAn, w, [{ nenTang, taiKhoan: soleAccount(nhanSu, nenTang), nhanSu, chiPhiPhi: total }]);
+      return ` Chưa có số chi phí đọc từ ảnh của ${nhanSu} · ${PLATFORM_LABEL[nenTang] || nenTang}: ghi tổng hoá đơn ${fmtInt(total)} đ vào ô “+ gồm phí” trong Sheet.` + pushNote(res);
+    } catch (e) { return " Chưa ghi được vào Google Sheet: " + e.message; }
   }
   const pushNote = (res) => !res ? "" : ` Google Sheet: đã điền ${res.written} ô` + (res.kept ? `, giữ nguyên ${res.kept} ô đã có số` : "") +
     (res.noRow.length ? `, hết dòng trống cho ${res.noRow.join(", ")} (thêm dòng trong tuần rồi bấm "Ghi số từ ảnh vào Google Sheet")` : "") + ".";
@@ -570,6 +603,14 @@
     return false;
   }
   const STATUS_LABEL = { "dang hoat dong": "đang chạy", "da tam dung": "đã tạm dừng", "da hoan tat": "đã hoàn tất", "dang tat": "đã tắt", "da tat": "đã tắt" };
+  /** Ô "Tổng hoá đơn (gồm VAT)" + "VAT %" dưới ảnh hoá đơn. attr = thuộc tính nhận diện (data-p / data-inv). */
+  function invoiceInputs(attr, total, vat) {
+    return `<div class="evform inv">
+      <label>Tổng hoá đơn (gồm VAT, đ)<input ${attr} data-f="inv_total" inputmode="numeric" placeholder="0" value="${total ? fmtInt(num(total)) : ""}"></label>
+      <label>VAT %<input ${attr} data-f="inv_vat" inputmode="decimal" placeholder="vd. 10" value="${vat === "" || vat == null ? "" : esc(String(vat))}"></label>
+      <small class="muted wide">Dùng để tính cột “Chi phí (+gồm phí nền tảng)”: có VAT % thì = chi phí × (1 + VAT), không có thì chia tổng hoá đơn theo chi phí.</small>
+    </div>`;
+  }
   function campaignRows(p, i) {
     const add = p.loai === "hoadon" ? "" : `<button type="button" class="link small" data-addcamp="${i}">+ Điền số tay (chiến dịch, chi tiêu, lead)</button>`;
     if (!p.campaigns || !p.campaigns.length) return add ? `<div class="camps">${add}</div>` : "";
@@ -596,7 +637,7 @@
         <figcaption><span class="fname" title="${esc(p.file.name)}">${esc(p.file.name)}</span>
           ${p.note ? `<small class="muted">${esc(p.note)}${p.text != null ? ` · <button type="button" class="link small" data-ocrtext="${i}">xem chữ đọc được</button>` : ""}</small>` : ""}
           <small class="req">Cần khoanh: ${esc(reqOf(p.nenTang, p.loai))}</small>
-          ${campaignRows(p, i)}
+          ${p.loai === "hoadon" ? invoiceInputs(`data-p="${i}"`, p.invoice ? p.invoice.total : "", p.invoice ? p.invoice.vat : "") : campaignRows(p, i)}
           <div class="row"><select data-p="${i}" data-f="nenTang">${PLATFORMS.map((x) => opt(x, PLATFORM_LABEL[x], p.nenTang)).join("")}</select>
           <select data-p="${i}" data-f="loai">${Object.entries(KINDS).map(([k, l]) => opt(k, l, p.loai)).join("")}</select></div>
           <div class="row"><select data-p="${i}" data-f="nhanSu" class="${p.nhanSu ? "" : "warn"}">${opt("", "(chọn nhân sự)", p.nhanSu)}${staff.map((x) => opt(x, x, p.nhanSu)).join("")}${newStaffOpt()}</select>
@@ -615,7 +656,10 @@
           <select data-ev="${esc(r.id)}" data-f="loai">${Object.entries(KINDS).map(([k, l]) => opt(k, l, r.loai)).join("")}</select></div>
           <div class="row"><select data-ev="${esc(r.id)}" data-f="nhanSu" class="${r.nhanSu ? "" : "warn"}">${opt("", "(chưa gán nhân sự)", r.nhanSu)}${staff.map((x) => opt(x, x, r.nhanSu)).join("")}${newStaffOpt()}</select>
           <button type="button" class="link danger" data-evdel="${esc(r.id)}">Xoá</button></div>
-          ${r.loai !== "hoadon" ? savedNumbersForm(r) : ""}
+          ${r.loai !== "hoadon" ? savedNumbersForm(r) : `<div class="evnums">
+            <button type="button" class="link small" data-invread="${esc(r.id)}">Đọc số tiền trên hoá đơn</button>
+            ${invoiceInputs(`data-inv="${esc(r.id)}"`, r.soTien, r.vat)}
+            <button type="button" class="small" data-invsave="${esc(r.id)}" style="width:100%;margin-top:4px">Lưu & tính Chi phí (+phí)</button></div>`}
         </figcaption></figure>`).join("") : `<p class="muted">Chưa có ảnh chứng từ cho tuần này.</p>`;
   }
   async function addPending(files) {
@@ -652,8 +696,10 @@
       p.campaigns = p.loai === "hoadon" ? [] : B.extractCampaigns(p.text || "").map((c) => Object.assign(c, { use: dateInWeek(c.date, w) }));
       // không đọc ra số: mở sẵn một dòng điền tay ngay dưới ảnh
       if (p.loai !== "hoadon" && !p.campaigns.length) p.campaigns = [{ manual: true, name: "", spent: 0, results: 0, resultType: "lead", use: false }];
+      p.invoice = B.extractInvoice(p.text || "") || { total: 0, vat: null };
       p.note = "Đọc: " + ([r.kind && KINDS[r.kind], r.account && "TK " + r.account,
-        p.campaigns.length && p.campaigns.length + " chiến dịch"].filter(Boolean).join(" · ") || "không nhận ra");
+        p.campaigns.length && p.loai !== "hoadon" && p.campaigns.length + " chiến dịch",
+        p.loai === "hoadon" && p.invoice.total && "tổng " + fmtInt(p.invoice.total) + " đ" + (p.invoice.vat != null ? " (VAT " + p.invoice.vat + "%)" : "")].filter(Boolean).join(" · ") || "không nhận ra");
     };
     pending.filter((p) => p.text != null && !p.note).forEach(apply);
     renderEvidence();
@@ -735,6 +781,36 @@
     toast(`Đã lưu số của ${r.tenFile} (${fmtInt(spent)} đ${lead ? ", " + lead + " lead" : ""}).` + note, "ok");
     renderEvidence();
   }
+  async function readInvoice(id) {
+    const r = S.ChungTu.find((x) => x.id === id);
+    const file = await run("Đang tải hoá đơn", () => evidenceFile(r));
+    let text = "";
+    try {
+      if (B.isPdf(file)) text = await B.pdfText(file);
+      else { toast("Đang đọc chữ trong ảnh…", "busy"); text = (await (await B.ocrWorker()).recognize(file)).data.text || ""; }
+    } catch (e) { return toast("Không đọc được hoá đơn: " + e.message, "err"); }
+    const inv = B.extractInvoice(text);
+    if (!inv) {
+      showText(`Chữ app đọc được trong ${r.tenFile}`, text, "Không tìm thấy tổng tiền – gõ “Tổng hoá đơn” và “VAT %” vào ô dưới hoá đơn rồi bấm Lưu.");
+      return;
+    }
+    const q = (k) => document.querySelector(`[data-inv="${id}"][data-f="${k}"]`);
+    q("inv_total").value = fmtInt(inv.total);
+    q("inv_vat").value = inv.vat != null ? String(inv.vat) : "";
+    toast(`Hoá đơn ${r.tenFile}: ${fmtInt(inv.total)} đ` + (inv.vat != null ? `, VAT ${inv.vat}%` : "") + (inv.period ? `, kỳ ${inv.period}` : "") + ". Kiểm tra rồi bấm “Lưu & tính Chi phí (+phí)”.", "ok");
+  }
+  async function saveInvoice(id) {
+    const r = S.ChungTu.find((x) => x.id === id);
+    if (!r.nhanSu) return toast("Chọn nhân sự cho hoá đơn này trước.", "err");
+    const q = (k) => document.querySelector(`[data-inv="${id}"][data-f="${k}"]`).value.trim();
+    const soTien = Math.round(num(q("inv_total"))), vat = q("inv_vat") === "" ? "" : num(q("inv_vat"));
+    if (!soTien) return toast("Gõ tổng tiền hoá đơn (hoặc bấm “Đọc số tiền trên hoá đơn”).", "err");
+    const saved = await run("Đang lưu", () => gas("crmSave", "ChungTu", { id, soTien, vat }));
+    Object.assign(r, saved);
+    const note = await run("Đang tính Chi phí (+phí)", () => applyInvoices(r.duAn, r.tuan, r.nhanSu, r.nenTang));
+    toast(`Đã lưu hoá đơn ${fmtInt(soTien)} đ.` + note, "ok");
+    renderEvidence();
+  }
   /** Hộp xem/chép một đoạn chữ dài (chữ đọc được từ ảnh…). */
   function showText(title, text, note) {
     let box = document.getElementById("textBox");
@@ -798,15 +874,22 @@
     await run("Đang tải ảnh lên Drive", async () => {
       for (const p of pending.slice()) {
         toast(`Đang tải lên ${++n}/${pending.length}: ${p.file.name}`, "busy");
-        const rec = await gas("crmUploadEvidence", { tuan: w, duAn: pj, nhanSu: p.nhanSu, nenTang: p.nenTang, loai: p.loai, tenFile: p.file.name, mime: p.file.type, hash: p.hash || "" },
+        const rec = await gas("crmUploadEvidence", { tuan: w, duAn: pj, nhanSu: p.nhanSu, nenTang: p.nenTang, loai: p.loai, tenFile: p.file.name, mime: p.file.type, hash: p.hash || "",
+          soTien: p.loai === "hoadon" && p.invoice ? p.invoice.total || "" : "", vat: p.loai === "hoadon" && p.invoice && p.invoice.vat != null ? p.invoice.vat : "" },
           await B.blobToB64(p.file));
         if (!S.ChungTu.some((x) => x.id === rec.id)) S.ChungTu.push(rec);
         nRows += await saveCampaignRows(p.campaigns, { tuan: w, duAn: pj, nhanSu: p.nhanSu, nenTang: p.nenTang, file: p.file.name });
       }
     });
+    const invGroups = Array.from(new Set(pending.filter((p) => p.loai === "hoadon" && p.invoice && p.invoice.total).map((p) => p.nhanSu + "|" + p.nenTang)));
     pending.forEach((p) => URL.revokeObjectURL(p.url));
     pending = [];
     let sheetNote = "", sheetErr = false;
+    for (const g of invGroups) {
+      const [ns, nt] = g.split("|");
+      toast("Đang tính chi phí (+phí) từ hoá đơn…", "busy");
+      try { sheetNote += await applyInvoices(pj, w, ns, nt); } catch (e) { sheetNote += " Chưa áp được hoá đơn: " + e.message; }
+    }
     if (nRows) {
       toast("Đang ghi số vào Google Sheet của dự án…", "busy");
       try { sheetNote = pushNote(await pushToSheet(pj, w)); }
@@ -1173,6 +1256,13 @@
         if (c.manual) { const box = t.closest(".camp").querySelector('[data-f="use"]'); if (box) box.checked = c.use; }
         return;
       }
+      if (/^inv_/.test(t.dataset.f)) {
+        const p = pending[i];
+        p.invoice = p.invoice || { total: 0, vat: null };
+        if (t.dataset.f === "inv_total") p.invoice.total = Math.round(num(t.value));
+        else p.invoice.vat = t.value.trim() === "" ? null : num(t.value);
+        return;
+      }
       pending[i][t.dataset.f] = t.value;
       if (t.tagName === "SELECT") renderEvidence();
     });
@@ -1271,6 +1361,10 @@
       renderEvidence();
     });
     $("evList").addEventListener("click", (e) => {
+      const ir = e.target.dataset.invread;
+      if (ir) readInvoice(ir).catch(() => {});
+      const is = e.target.dataset.invsave;
+      if (is) saveInvoice(is).catch(() => {});
       const id = e.target.dataset.evread;
       if (id) rereadEvidence(id).catch(() => {});
       const sv = e.target.dataset.evsave;

@@ -1005,6 +1005,32 @@
    * (Trình quản lý quảng cáo trên điện thoại, Meta Business Suite, bảng trên máy tính).
    * Trả về [{name, spent, results, resultType, date}] – để người dùng xác nhận.
    */
+  /**
+   * Hoá đơn / biên lai (Meta, Google, TikTok…): {total, vat, account, period} hoặc null.
+   * total = tổng tiền phải trả (đã gồm VAT/phí); vat = % thuế nếu in trên hoá đơn.
+   */
+  function extractInvoice(text) {
+    const MONEY = /(\d{1,3}(?:[.,]\d{3})+|\d+)\s*(?:đ|₫|vnd|d\b)/gi;
+    const lines = String(text).split(/\n+/).map((l) => l.trim()).filter(Boolean);
+    const N = lines.map(norm);
+    const amounts = (l) => Array.from(l.matchAll(MONEY)).map((m) => Math.round(toNum(m[1])));
+    let total = 0;
+    // dòng tổng có nhãn rõ ràng
+    const TOTAL = /(tong so tien da lap hoa don|tong so tien da thanh toan|tong cong bang vnd|tong cong|tong thanh toan|total amount|amount paid|grand total|total)/;
+    N.forEach((n, i) => {
+      if (total || !TOTAL.test(n) || /da nap|tra truoc bang/.test(n)) return;
+      const a = amounts(lines[i]).concat(amounts(lines[i + 1] || ""));
+      if (a.length) total = Math.max(...a);
+    });
+    const all = lines.flatMap(amounts);
+    if (all.length) total = Math.max(total, ...all.filter((v) => v <= Math.max(total, 1) * 1.0001 || !total));
+    if (!total) return null;
+    const vm = /vat[^\d%]{0,25}(\d{1,2}(?:[.,]\d)?)\s*%/.exec(N.join(" "));
+    const am = /(?:tai khoan|account id|id tai khoan|advertiser id)[^\d]{0,20}(\d[\d-]{7,}\d)/.exec(N.join(" "));
+    const pm = /(\d{1,2}\/\d{1,2}\/\d{4})\s*[-–]\s*(\d{1,2}\/\d{1,2}\/\d{4})/.exec(lines.join(" "));
+    return { total, vat: vm ? toNum(vm[1]) : null, account: am ? am[1].replace(/-/g, "") : "", period: pm ? pm[1] + " - " + pm[2] : "" };
+  }
+
   /** Màn hình Google Ads -> {name, spent, results, resultType, date, clicks, impressions} hoặc null. */
   function googleAds(lines, N, money) {
     const LBL = [["clicks", /^((lan|luot|so lan) nhap|luot click|so lan click|clicks?)\b/], ["impressions", /^((luot|so lan) hien th\w*|impressions?)(?=\s|$)/],
@@ -1796,7 +1822,7 @@
   }
 
   window.BaoCaoMkt = {
-    PLATFORMS, KINDS, fmtInt, fmtDec, IN_GAS, gas, b64ToBlob, blobToB64, ocrWorker, embeddable, isPdf, pdfText, pdfToImages, loadData, aggregate, buildReport, toNum, norm, parseDriveId, guessClass, staffNameFromAccount, classifyText, extractCampaigns, Drive };
+    PLATFORMS, KINDS, fmtInt, fmtDec, IN_GAS, gas, b64ToBlob, blobToB64, ocrWorker, embeddable, isPdf, pdfText, pdfToImages, loadData, aggregate, buildReport, toNum, norm, parseDriveId, guessClass, staffNameFromAccount, classifyText, extractCampaigns, extractInvoice, Drive };
 
   const onReady = (fn) => (document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", fn) : fn());
   onReady(() => {
