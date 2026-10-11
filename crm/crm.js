@@ -794,6 +794,26 @@
     for (const k of weeks) { const [pj, w] = k.split("|"); try { await pushToSheet(pj, w); } catch (e) { console.error(e); } } // sửa lại số trong Sheet
     toast(`Đã gộp ${dup.length} dòng số liệu trùng (cùng ảnh, cùng chi phí).`, "ok");
   }
+  /**
+   * Người · kênh có dòng số liệu chưa có ID và Danh mục chưa có tài khoản của kênh đó (vd. Google khác Facebook):
+   * đọc ID trên hoá đơn PDF của đúng người · kênh đó (không cần OCR) rồi thêm vào Danh mục và điền cho các dòng.
+   */
+  async function learnAccountsFromInvoices() {
+    const pairs = Array.from(new Set(S.SoLieu.filter((r) => r.nhanSu && !digitsOf(r.taiKhoan || "") && !soleAccount(r.nhanSu, r.nenTang || "Facebook"))
+      .map((r) => r.nhanSu + "|" + (r.nenTang || "Facebook"))));
+    let learned = 0;
+    for (const pr of pairs) {
+      const [ns, nt] = pr.split("|");
+      const invs = S.ChungTu.filter((c) => c.loai === "hoadon" && c.nhanSu === ns && c.nenTang === nt && /\.pdf$/i.test(c.tenFile || ""));
+      for (const c of invs.slice(0, 3)) {
+        try {
+          const inv = B.extractInvoice(await B.pdfText(await evidenceFile(c)));
+          if (inv && inv.account) { await rememberAccount(inv.account.length === 10 && nt === "Google" ? inv.account.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3") : inv.account, ns, nt); learned++; break; }
+        } catch (e) { console.error(e); }
+      }
+    }
+    if (learned) toast(`Đã lấy ID tài khoản từ hoá đơn cho ${learned} nhân sự · kênh và điền vào các dòng số liệu.`, "ok");
+  }
   /** Dòng số liệu chưa có ID tài khoản mà người đó chỉ có 1 tài khoản trên kênh đó -> điền ID. Trả các "dự án|tuần" có dòng từ ảnh đã đổi. */
   async function fillMissingAccounts(filter) {
     const upd = S.SoLieu.filter((r) => !digitsOf(r.taiKhoan || "") && r.nhanSu && (!filter || filter(r)))
@@ -1553,7 +1573,7 @@
     bind();
     bindWeekPicker();
     bindNewStaff();
-    fillMissingAccounts().catch((e) => console.error(e)); // dòng cũ chưa có ID mà Danh mục đã biết
+    fillMissingAccounts().then(learnAccountsFromInvoices).catch((e) => console.error(e)); // dòng cũ chưa có ID mà Danh mục đã biết
     mergeDuplicateImageRows().catch((e) => console.error(e));
     let b0 = "";
     try { b0 = localStorage.getItem("crm.brand") || ""; } catch (_) { /* bỏ qua */ }
