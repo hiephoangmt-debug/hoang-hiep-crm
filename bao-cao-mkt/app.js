@@ -474,6 +474,64 @@
     });
   }
 
+  /**
+   * Đổi logo đầu trang theo dự án (vd. Sun = TATILAND, Casamia = TATI INVEST).
+   * logos: { "TATILAND": "image8.png", "TATI INVEST": "image9.png" } – tên file ảnh logo trong mẫu.
+   * Lấy cách cắt ảnh (fillRect) + tỉ lệ của logo đích từ chính mẫu; giữ chiều cao, vị trí trái/trên.
+   */
+  function logoShapes(doc, rels, logos) {
+    const byFile = Object.fromEntries(Object.entries(logos || {}).map(([k, f]) => [f, k]));
+    return byTag(doc, "a:blip").map((blip) => {
+      const rid = blip.getAttributeNS(NS.r, "embed") || blip.getAttribute("r:embed");
+      const target = rels[rid] && rels[rid].target;
+      const name = target && byFile[target.split("/").pop()];
+      if (!name) return null;
+      let shape = blip.parentNode;
+      while (shape && !/^p:(sp|pic)$/.test(shape.nodeName)) shape = shape.parentNode;
+      return shape ? { blip, shape, name, target, fill: byTag(shape, "a:fillRect")[0], box: boxOf(shape) } : null;
+    }).filter(Boolean);
+  }
+  function collectLogoRefs(slides, logos) {
+    const refs = {};
+    for (const s of slides) {
+      for (const l of logoShapes(s.pristine || s.doc, relMap(s.pristineRels || s.relsDoc), logos)) {
+        if (refs[l.name] || !l.box || !l.box.h) continue;
+        refs[l.name] = { target: l.target, aspect: l.box.w / l.box.h,
+          fill: l.fill ? Array.from(l.fill.attributes).map((a) => [a.name, a.value]) : [] };
+      }
+    }
+    return refs;
+  }
+  function swapLogo(s, want, refs, logos) {
+    const ref = refs[want];
+    if (!ref) return;
+    const relRoot = s.relsDoc.documentElement;
+    let rid = null;
+    const relsNow = Array.from(relRoot.getElementsByTagName("Relationship"));
+    const hit = relsNow.find((r) => r.getAttribute("Target") === ref.target);
+    if (hit) rid = hit.getAttribute("Id");
+    for (const l of logoShapes(s.doc, relMap(s.relsDoc), logos)) {
+      if (l.name === want) continue;
+      if (!rid) {
+        const used = new Set(relsNow.map((r) => r.getAttribute("Id")));
+        let k = 1;
+        while (used.has("rId" + k)) k++;
+        rid = "rId" + k;
+        const rel = s.relsDoc.createElementNS(relRoot.namespaceURI, "Relationship");
+        rel.setAttribute("Id", rid);
+        rel.setAttribute("Type", IMG_REL);
+        rel.setAttribute("Target", ref.target);
+        relRoot.appendChild(rel);
+      }
+      l.blip.setAttributeNS(NS.r, "r:embed", rid);
+      if (l.fill) {
+        Array.from(l.fill.attributes).map((a) => a.name).forEach((n) => l.fill.removeAttribute(n));
+        ref.fill.forEach(([n, v]) => l.fill.setAttribute(n, v));
+      }
+      if (l.box && l.box.h) l.box.ext.setAttribute("cx", String(Math.round(l.box.h * ref.aspect)));
+    }
+  }
+
   const relsPathOf = (path) => path.replace(/([^/]+)$/, "_rels/$1.rels");
   const resolveTarget = (base, target) => {
     const parts = base.split("/").slice(0, -1);
@@ -563,6 +621,7 @@
       slides.push(s);
     }
     resolvePlatforms(slides);
+    const logoRefs = opts.logo ? collectLogoRefs(slides, opts.logos) : {};
 
     // Phân đoạn: phần tổng | khối nhân sự (nhân bản) | phần kết
     const staffList = (opts.staffList || []).filter(Boolean);
@@ -636,6 +695,7 @@
     for (const o of out) {
       const s = o.s;
       fillText(s.doc, o.ctx);
+      if (opts.logo) swapLogo(s, opts.logo, logoRefs, opts.logos);
       s.tables.forEach((t, i) => {
         t.platform = o.src.tables[i] ? o.src.tables[i].platform : t.platform;
         fillTable(t, o.ctx.data, H, accountLabel);
@@ -1497,6 +1557,7 @@
         year: $("year").value.trim() || String(new Date().getFullYear()),
         campaign: $("campaign").value.trim(), period: $("period").value.trim(), staff: list.join(", "),
         scope: $("scope").value, perSlide: parseInt($("perSlide").value, 10) || 1,
+        logo: currentPreset().logo || "", logos: CFG.logos,
         dropUnused: $("dropUnused").checked, dropEmptyImageSlides: $("dropEmpty").checked,
       });
       const name = ($("outName").value.trim() || "bao_cao_mkt") + "_" + res.week.replace(/[\/ ]/g, "") + ".pptx";

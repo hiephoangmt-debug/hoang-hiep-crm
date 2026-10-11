@@ -47,6 +47,23 @@
   table.data tr.shadow td { opacity:.55; }
   table.data td.act { text-align:right; }
   table.edit td { padding:3px 4px; }
+  .savebar { position:sticky; top:86px; z-index:4; display:flex; gap:8px; align-items:center; flex-wrap:wrap; background:var(--bg); padding:8px 0; margin-bottom:6px; }
+  .savebar .sp { flex:1; }
+  .sec-head { display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; }
+  .sec-head h3 { margin:0; letter-spacing:.03em; }
+  .grid-sec.empty { padding:10px 14px; }
+  .grid-sec .wrap { margin-top:10px; }
+  table.sheet th { white-space:normal; min-width:84px; vertical-align:bottom; text-align:center !important; line-height:1.25; }
+  table.sheet td { padding:2px 3px; }
+  table.sheet input, table.sheet select { width:100%; border-color:transparent; background:transparent; padding:5px 6px; border-radius:4px; }
+  table.sheet input:hover, table.sheet select:hover { border-color:var(--line); }
+  table.sheet input:focus, table.sheet select:focus { border-color:var(--accent); background:var(--card); outline:none; }
+  table.sheet input.n { text-align:right; font-variant-numeric:tabular-nums; min-width:96px; }
+  table.sheet input.acc { min-width:150px; } table.sheet input.txt { min-width:160px; }
+  table.sheet select { min-width:110px; }
+  table.sheet td.calc { color:var(--muted); font-variant-numeric:tabular-nums; padding-right:8px; }
+  table.sheet tr.dirty td { background:var(--accent-soft); }
+  table.sheet tr.total td { padding:6px 8px; text-align:right; font-variant-numeric:tabular-nums; }
   table.edit input, table.edit select { width:100%; min-width:120px; }
   .tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:10px; margin-bottom:14px; }
   .tile { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 14px; }
@@ -133,28 +150,15 @@
         <label>Nhân sự<select id="enStaff"></select></label>
         <button type="button" id="enImport" class="ghost small">Nhập từ Google Sheet của dự án</button>
       </div>
-      <section class="card">
-        <h3>Thêm / sửa số liệu</h3>
-        <form id="entryForm" class="grid" autocomplete="off">
-          <label>Nhân sự<select id="fStaff"></select></label>
-          <label>Kênh<select id="fPlatform"></select></label>
-          <label>ID tài khoản QC<input id="fAccount" list="accList"><datalist id="accList"></datalist></label>
-          <label class="wide">Chiến dịch<input id="fCampaign"></label>
-          <label>Chi phí thực chạy<input id="f_chiPhi" inputmode="numeric"></label>
-          <label>Gồm phí nền tảng<input id="f_chiPhiPhi" inputmode="numeric" placeholder="trống = như chi phí"></label>
-          <label>Lead<input id="f_lead" inputmode="numeric"></label>
-          <label>Hiển thị<input id="f_hienThi" inputmode="numeric"></label>
-          <label>Tiếp cận<input id="f_tiepCan" inputmode="numeric"></label>
-          <label>Lượt nhấp<input id="f_luotNhap" inputmode="numeric"></label>
-          <label>Lượt xem<input id="f_luotXem" inputmode="numeric"></label>
-          <label>MQL<input id="f_mql" inputmode="numeric"></label>
-          <label>SQL<input id="f_sql" inputmode="numeric"></label>
-          <label>DEAL<input id="f_deal" inputmode="numeric"></label>
-          <label class="wide">Ghi chú<input id="fNote"></label>
-          <div class="actions"><button id="fSave" type="submit">Thêm dòng</button><button id="fCancel" type="button" class="ghost" hidden>Huỷ</button></div>
-        </form>
-      </section>
-      <section class="card"><div class="wrap" id="enTable"></div></section>
+      <div class="savebar">
+        <span class="muted">Mỗi dòng = một tài khoản quảng cáo của một nhân sự. Gõ số rồi bấm Lưu; Frequency, CTR, CPM tự tính.</span>
+        <span class="sp"></span>
+        <button type="button" id="enDiscard" class="ghost small" hidden>Bỏ thay đổi</button>
+        <button type="button" id="enSave" disabled>Đã lưu</button>
+      </div>
+      <datalist id="accList"></datalist>
+      <div id="enTable"></div>
+
     </div>
 
     <!-- ẢNH & CHỨNG TỪ -->

@@ -129,7 +129,7 @@ function convertToPdf(b64, name, folderId) {
 var CRM_TABLES = {
   DuAn: [['id', 'ID'], ['ten', 'Tên dự án'], ['khoa', 'Tên thư mục dự án trên Drive'], ['chienDich', 'Tên chiến dịch (tiêu đề báo cáo)'],
     ['mauPptx', 'Link PPTX mẫu'], ['thuMucChungTu', 'Thư mục chứng từ'], ['thuMucBaoCao', 'Thư mục lưu báo cáo'],
-    ['nguonSoLieu', 'Google Sheet số liệu (để nhập)']],
+    ['nguonSoLieu', 'Google Sheet số liệu (để nhập)'], ['logo', 'Logo (TATILAND / TATI INVEST)']],
   NhanSu: [['id', 'ID'], ['ten', 'Tên'], ['email', 'Email'], ['trangThai', 'Trạng thái']],
   TaiKhoan: [['id', 'ID'], ['maTaiKhoan', 'ID tài khoản QC'], ['ten', 'Tên tài khoản'], ['nenTang', 'Nền tảng'], ['nhanSu', 'Nhân sự']],
   SoLieu: [['id', 'ID'], ['tuan', 'Tuần (thứ 2)'], ['duAn', 'Dự án'], ['nhanSu', 'Nhân sự'], ['nenTang', 'Nền tảng'],
@@ -148,11 +148,11 @@ var CRM_SEED = {
     { ten: 'Casamia', khoa: 'Casamia', chienDich: 'CASAMIA BALANCA HOI AN-TATI INVEST ĐỢT 1',
       mauPptx: 'https://drive.google.com/file/d/10S0gG5T_o1WOqqkvUiFdwdhauqoa9mA6/view',
       thuMucChungTu: 'https://drive.google.com/drive/folders/' + EVIDENCE_ROOT,
-      nguonSoLieu: 'https://docs.google.com/spreadsheets/d/1R_mmNKG_XA6qZrKmzuEAO79OA1Z-xe8jdg63ItufgnU/edit' },
+      nguonSoLieu: 'https://docs.google.com/spreadsheets/d/1R_mmNKG_XA6qZrKmzuEAO79OA1Z-xe8jdg63ItufgnU/edit', logo: 'TATI INVEST' },
     { ten: 'Sun', khoa: 'Sun', chienDich: 'SUN GROUP ĐÀ NẴNG - TATI INVEST',
       mauPptx: 'https://drive.google.com/file/d/10S0gG5T_o1WOqqkvUiFdwdhauqoa9mA6/view',
       thuMucChungTu: 'https://drive.google.com/drive/folders/' + EVIDENCE_ROOT,
-      nguonSoLieu: 'https://docs.google.com/spreadsheets/d/1UOgRz8-D28PSSZCIYtO0YA5A8EeHrxIP/edit' },
+      nguonSoLieu: 'https://docs.google.com/spreadsheets/d/1UOgRz8-D28PSSZCIYtO0YA5A8EeHrxIP/edit', logo: 'TATILAND' },
   ],
   NhanSu: [{ ten: 'Mỹ Linh' }, { ten: 'Phan Hạnh' }, { ten: 'Anh Tài' }, { ten: 'Ngà Ngô' }],
   TaiKhoan: [
@@ -192,6 +192,13 @@ function crmSheet_(name) {
     });
     var blank = ss.getSheetByName('Sheet1') || ss.getSheetByName('Trang tính1');
     if (blank && ss.getSheets().length > 1) ss.deleteSheet(blank);
+  } else {
+    // bảng đã có từ phiên bản trước: bổ sung tiêu đề cột mới (cột mới luôn thêm ở cuối)
+    var cols2 = CRM_TABLES[name];
+    var head = sh.getRange(1, 1, 1, cols2.length).getValues()[0];
+    if (head[cols2.length - 1] === '') {
+      sh.getRange(1, 1, 1, cols2.length).setValues([cols2.map(function (c) { return c[1]; })]);
+    }
   }
   return sh;
 }
@@ -248,6 +255,13 @@ function crmBootstrap() {
     Object.keys(CRM_SEED).forEach(function (t) {
       if (!crmRows_(t).length) crmWriteAll_(t, CRM_SEED[t].map(function (o) { return crmStamp_(JSON.parse(JSON.stringify(o))); }));
     });
+    // bổ sung logo cho dự án mẫu đã tạo ở phiên bản trước
+    var projects = crmRows_('DuAn'), changed = false;
+    projects.forEach(function (p) {
+      var seed = CRM_SEED.DuAn.filter(function (x) { return x.ten === p.ten; })[0];
+      if (seed && !p.logo && seed.logo) { p.logo = seed.logo; changed = true; }
+    });
+    if (changed) crmWriteAll_('DuAn', projects);
   });
   var out = { schema: CRM_TABLES, sheetUrl: crmBook_().getUrl(), user: crmUser_() };
   try { out.appUrl = ScriptApp.getService().getUrl(); } catch (e) { out.appUrl = ''; }

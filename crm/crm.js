@@ -7,7 +7,6 @@
   const { PLATFORMS, KINDS, fmtInt, gas } = B;
   const PLATFORM_LABEL = { Facebook: "Facebook", Tiktok: "TikTok", Zalo: "Zalo", Google: "Google" };
   const STATUSES = ["Nháp", "Đã nộp", "Đã duyệt"];
-  const NUM_FIELDS = ["chiPhi", "chiPhiPhi", "lead", "hienThi", "tiepCan", "luotNhap", "luotXem", "mql", "sql", "deal"];
 
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -91,8 +90,6 @@
     }
     fillSelect($("enStaff"), staff, $("enStaff").value, "Tất cả nhân sự");
     fillSelect($("evStaff"), staff, $("evStaff").value || staff[0]);
-    fillSelect($("fStaff"), staff, $("fStaff").value || staff[0]);
-    fillSelect($("fPlatform"), PLATFORMS.map((p) => [p, PLATFORM_LABEL[p]]), $("fPlatform").value || "Facebook");
     $("accList").innerHTML = S.TaiKhoan.map((t) => `<option value="${esc(t.maTaiKhoan)}">${esc((t.nhanSu || "") + " · " + (t.ten || t.nenTang || ""))}</option>`).join("");
   }
 
@@ -171,78 +168,166 @@
       ${barTable("Theo kênh", group(rows, "nenTang"), "Kênh")}`;
   }
 
-  // ------------------------------------------------------------ NHẬP SỐ LIỆU
-  let editingId = null;
-  function entryFilter() {
+  // ------------------------------------------------------------ NHẬP SỐ LIỆU (bảng theo mẫu báo cáo)
+  // Cột giống bảng trong file PPTX; Frequency/CTR/CPM tự tính.
+  const GRID = [
+    ["nhanSu", "Nhân sự", "staff"],
+    ["taiKhoan", "ID tài khoản", "acc"],
+    ["chiPhi", "Ngân sách thực chạy", "num"],
+    ["chiPhiPhi", "Chi phí thực chạy (+ gồm phí nền tảng)", "num"],
+    ["lead", "LEAD", "num"],
+    ["mql", "MQL (Khách hàng quan tâm)", "num"],
+    ["sql", "SQL (Khách hàng tiềm năng)", "num"],
+    ["deal", "DEAL", "num"],
+    ["hienThi", "Impressions (hiển thị)", "num"],
+    ["tiepCan", "Reach (tiếp cận)", "num"],
+    ["_freq", "Frequency (tần suất)", "calc"],
+    ["luotNhap", "Lượt nhấp", "num"],
+    ["_ctr", "CTR", "calc"],
+    ["_cpm", "CPM", "calc"],
+    ["luotXem", "Lượt xem", "num"],
+    ["chienDich", "Chiến dịch / ghi chú", "text"],
+  ];
+  const drafts = new Map(); // id -> dòng đang sửa (id "new-…" = dòng mới)
+  const isNew = (id) => String(id).startsWith("new-");
+  function calc(r, key) {
+    const imp = num(r.hienThi), reach = num(r.tiepCan), clicks = num(r.luotNhap), cost = num(r.chiPhi);
+    if (key === "_freq") return reach ? B.fmtDec(imp / reach) : "";
+    if (key === "_ctr") return imp && r.luotNhap !== "" ? B.fmtDec((clicks / imp) * 100) + "%" : "";
+    if (key === "_cpm") return imp && cost ? fmtInt((cost / imp) * 1000) : "";
+    return "";
+  }
+  const fmtCell = (v) => (v === "" || v == null ? "" : fmtInt(num(v)));
+  function gridRows() {
     const w = $("enWeek").value, pj = $("enProject").value, st = $("enStaff").value;
-    return S.SoLieu.filter((r) => r.tuan === w && r.duAn === pj && (!st || r.nhanSu === st));
+    const saved = S.SoLieu.filter((r) => r.tuan === w && r.duAn === pj && (!st || r.nhanSu === st))
+      .map((r) => drafts.get(r.id) || r);
+    const fresh = Array.from(drafts.values()).filter((r) => isNew(r.id) && r.tuan === w && r.duAn === pj);
+    return saved.concat(fresh);
   }
   function renderEntries() {
-    const rows = entryFilter().sort((a, b) => (a.nhanSu + a.nenTang).localeCompare(b.nhanSu + b.nenTang, "vi"));
-    const t = sumOf(effective(rows));
-    const head = ["Nhân sự", "Kênh", "Tài khoản QC", "Chiến dịch", "Chi phí", "Gồm phí", "Lead", "Hiển thị", "Tiếp cận", "MQL", "SQL", "DEAL", "Nguồn", ""];
-    $("enTable").innerHTML = rows.length ? `<table class="data"><thead><tr>${head.map((h) => `<th>${h}</th>`).join("")}</tr></thead><tbody>
-      ${rows.map((r) => `<tr class="${r.id === editingId ? "editing" : ""}${isShadowed(r) ? " shadow" : ""}"><td>${esc(r.nhanSu)}</td><td>${esc(PLATFORM_LABEL[r.nenTang] || r.nenTang)}</td>
-        <td>${esc(r.taiKhoan)}</td><td>${esc(r.chienDich)}</td><td>${fmtInt(num(r.chiPhi))}</td><td>${fmtInt(num(r.chiPhiPhi))}</td>
-        <td>${fmtInt(num(r.lead))}</td><td>${r.hienThi === "" ? "" : fmtInt(num(r.hienThi))}</td><td>${r.tiepCan === "" ? "" : fmtInt(num(r.tiepCan))}</td>
-        <td>${esc(r.mql)}</td><td>${esc(r.sql)}</td><td>${esc(r.deal)}</td><td class="muted">${{ sheet: "Sheet", anh: "Ảnh chụp" }[r.nguon] || "Nhập tay"}${isShadowed(r) ? '<br><small class="warn-text">không tính (đã có số sheet/nhập tay)</small>' : ""}</td>
-        <td class="act"><button type="button" class="link" data-edit="${esc(r.id)}">Sửa</button><button type="button" class="link danger" data-del="${esc(r.id)}">Xoá</button></td></tr>`).join("")}
-      <tr class="total"><td colspan="4">TỔNG (${rows.length} dòng)</td><td>${fmtInt(t.chiPhi)}</td><td>${fmtInt(t.chiPhiPhi)}</td><td>${fmtInt(t.lead)}</td><td>${fmtInt(t.hienThi)}</td><td></td>
-        <td>${fmtInt(t.mql)}</td><td>${fmtInt(t.sql)}</td><td>${fmtInt(t.deal)}</td><td colspan="2"></td></tr></tbody></table>`
-      : `<p class="muted">Chưa có số liệu cho tuần ${esc(weekLabel($("enWeek").value, true))} · ${esc($("enProject").value)}. Nhập ở form bên trên, hoặc bấm “Nhập từ Google Sheet”.</p>`;
-  }
-  function clearForm() {
-    editingId = null;
-    ["fAccount", "fCampaign", "fNote"].concat(NUM_FIELDS.map((f) => "f_" + f)).forEach((id) => ($(id).value = ""));
-    if ($("enStaff").value) $("fStaff").value = $("enStaff").value;
-    $("fSave").textContent = "Thêm dòng";
-    $("fCancel").hidden = true;
-  }
-  function editEntry(id) {
-    const r = S.SoLieu.find((x) => x.id === id);
-    if (!r) return;
-    editingId = id;
-    $("fStaff").value = r.nhanSu; $("fPlatform").value = r.nenTang || "Facebook";
-    $("fAccount").value = r.taiKhoan; $("fCampaign").value = r.chienDich; $("fNote").value = r.ghiChu;
-    NUM_FIELDS.forEach((f) => ($("f_" + f).value = r[f]));
-    $("fSave").textContent = "Lưu thay đổi";
-    $("fCancel").hidden = false;
-    renderEntries();
-    $("entryForm").scrollIntoView({ behavior: "smooth", block: "nearest" });
-  }
-  async function saveEntry(e) {
-    e.preventDefault();
-    const o = {
-      tuan: $("enWeek").value, duAn: $("enProject").value, nhanSu: $("fStaff").value, nenTang: $("fPlatform").value,
-      taiKhoan: $("fAccount").value.trim(), chienDich: $("fCampaign").value.trim(), ghiChu: $("fNote").value.trim(),
+    const rows = gridRows();
+    const staff = staffNames();
+    const cell = (r, [k, , type]) => {
+      const id = esc(r.id);
+      if (type === "staff") return `<td><select data-g="${id}" data-f="${k}">${opt("", "(chọn)", r[k])}${staff.map((x) => opt(x, x, r[k])).join("")}</select></td>`;
+      if (type === "acc") return `<td><input data-g="${id}" data-f="${k}" value="${esc(r[k])}" list="accList" class="acc"></td>`;
+      if (type === "calc") return `<td class="calc">${calc(r, k)}</td>`;
+      if (type === "text") return `<td><input data-g="${id}" data-f="${k}" value="${esc(r[k])}" class="txt"></td>`;
+      return `<td><input data-g="${id}" data-f="${k}" value="${fmtCell(r[k])}" inputmode="numeric" class="n"></td>`;
     };
-    NUM_FIELDS.forEach((f) => { const v = $("f_" + f).value.trim(); o[f] = v === "" ? "" : num(v); });
-    if (o.chiPhi === "" && o.lead === "") return toast("Nhập ít nhất chi phí hoặc lead.", "err");
-    if (o.chiPhiPhi === "") o.chiPhiPhi = o.chiPhi;
-    if (editingId) o.id = editingId; else o.nguon = "tay";
-    const saved = await run("Đang lưu", () => gas("crmSave", "SoLieu", o));
-    const i = S.SoLieu.findIndex((x) => x.id === saved.id);
-    if (i >= 0) S.SoLieu[i] = saved; else S.SoLieu.push(saved);
-    // tài khoản mới -> danh mục
-    if (o.taiKhoan && !S.TaiKhoan.some((t) => digitsOf(t.maTaiKhoan) === digitsOf(o.taiKhoan) && t.maTaiKhoan)) {
-      S.TaiKhoan.push(await gas("crmSave", "TaiKhoan", { maTaiKhoan: o.taiKhoan, nenTang: o.nenTang, nhanSu: o.nhanSu }));
+    const totalRow = (rs, label) => {
+      const t = { chiPhi: 0, chiPhiPhi: 0, lead: 0, mql: 0, sql: 0, deal: 0, hienThi: 0, tiepCan: 0, luotNhap: 0, luotXem: 0 };
+      effective(rs.filter((r) => !isNew(r.id) || drafts.has(r.id))).forEach((r) => Object.keys(t).forEach((k) => (t[k] += num(r[k]))));
+      const tr = Object.assign({}, t, { luotNhap: t.luotNhap || "" });
+      return `<tr class="total"><td colspan="2">${label}</td>${GRID.slice(2).map(([k, , type]) =>
+        `<td class="${type === "calc" ? "calc" : ""}">${type === "calc" ? calc(tr, k) : type === "text" ? "" : fmtInt(t[k])}</td>`).join("")}<td></td></tr>`;
+    };
+    const sections = PLATFORMS.map((p) => {
+      const rs = rows.filter((r) => (r.nenTang || "Facebook") === p);
+      const body = rs.map((r) => `<tr class="${drafts.has(r.id) ? "dirty" : ""}${isShadowed(r) ? " shadow" : ""}">
+          ${GRID.map((c) => cell(r, c)).join("")}
+          <td class="act">${r.nguon === "anh" ? `<small class="muted" title="${esc(r.ghiChu)}">ảnh${isShadowed(r) ? " · không tính" : ""}</small>` : ""}
+            <button type="button" class="link danger" data-gdel="${esc(r.id)}" title="Xoá dòng">✕</button></td></tr>`).join("");
+      return `<section class="card grid-sec${rs.length ? "" : " empty"}">
+        <div class="sec-head"><h3>${PLATFORM_LABEL[p].toUpperCase()}</h3>
+          <button type="button" class="ghost small" data-gadd="${p}">+ Thêm tài khoản ${PLATFORM_LABEL[p]}</button></div>
+        ${rs.length ? `<div class="wrap"><table class="data sheet"><thead><tr>${GRID.map(([, h]) => `<th>${esc(h)}</th>`).join("")}<th></th></tr></thead>
+          <tbody>${body}${rs.length > 1 ? totalRow(rs, "TỔNG " + PLATFORM_LABEL[p]) : ""}</tbody></table></div>` : ""}
+      </section>`;
+    }).join("");
+    const all = effective(rows);
+    const t = sumOf(all);
+    $("enTable").innerHTML = `
+      <div class="tiles">
+        <div class="tile"><span>Ngân sách thực chạy</span><b>${fmtInt(t.chiPhi)}</b></div>
+        <div class="tile"><span>Chi phí (+ phí nền tảng)</span><b>${fmtInt(t.chiPhiPhi)}</b></div>
+        <div class="tile"><span>LEAD</span><b>${fmtInt(t.lead)}</b></div>
+        <div class="tile"><span>MQL / SQL / DEAL</span><b>${fmtInt(t.mql)} / ${fmtInt(t.sql)} / ${fmtInt(t.deal)}</b></div>
+      </div>${sections}`;
+    const n = drafts.size;
+    $("enSave").disabled = !n;
+    $("enSave").textContent = n ? `Lưu thay đổi (${n} dòng)` : "Đã lưu";
+    $("enDiscard").hidden = !n;
+  }
+  function draftOf(id) {
+    if (!drafts.has(id)) drafts.set(id, Object.assign({}, S.SoLieu.find((x) => x.id === id)));
+    return drafts.get(id);
+  }
+  function addRow(platform) {
+    const id = "new-" + Math.random().toString(36).slice(2, 9);
+    const st = $("enStaff").value || "";
+    const acc = st ? soleAccount(st, platform) : "";
+    drafts.set(id, {
+      id, tuan: $("enWeek").value, duAn: $("enProject").value, nhanSu: st, nenTang: platform, taiKhoan: acc, chienDich: "",
+      chiPhi: "", chiPhiPhi: "", lead: "", mql: "", sql: "", deal: "", hienThi: "", tiepCan: "", luotNhap: "", luotXem: "", ghiChu: "", nguon: "tay",
+    });
+    renderEntries();
+    const el = document.querySelector(`[data-g="${id}"][data-f="${st ? "taiKhoan" : "nhanSu"}"]`);
+    if (el) el.focus();
+  }
+  function gridChange(el) {
+    const r = draftOf(el.dataset.g), f = el.dataset.f;
+    if (GRID.find((c) => c[0] === f)[2] === "num") {
+      const v = el.value.trim();
+      r[f] = v === "" ? "" : num(v);
+      if (f === "chiPhi" && (r.chiPhiPhi === "" || r.chiPhiPhi == null)) r.chiPhiPhi = r[f];
+    } else r[f] = el.value.trim();
+    if (f === "taiKhoan") {
+      const a = S.TaiKhoan.find((t) => digitsOf(t.maTaiKhoan) && digitsOf(t.maTaiKhoan) === digitsOf(r.taiKhoan));
+      if (a && a.nhanSu && !r.nhanSu) r.nhanSu = a.nhanSu;
     }
-    toast("Đã lưu.", "ok");
-    clearForm();
+    if (f === "nhanSu" && !r.taiKhoan) r.taiKhoan = soleAccount(r.nhanSu, r.nenTang);
+    renderEntries();
+  }
+  async function saveGrid() {
+    const list = Array.from(drafts.values());
+    const bad = list.filter((r) => !r.nhanSu);
+    if (bad.length) return toast("Chọn nhân sự cho mọi dòng trước khi lưu.", "err");
+    const empty = list.filter((r) => isNew(r.id) && !num(r.chiPhi) && !num(r.lead) && !num(r.hienThi));
+    empty.forEach((r) => drafts.delete(r.id));
+    const toSave = list.filter((r) => !empty.includes(r)).map((r) => {
+      const o = Object.assign({}, r);
+      if (isNew(o.id)) delete o.id;
+      if (o.chiPhiPhi === "" || o.chiPhiPhi == null) o.chiPhiPhi = o.chiPhi;
+      return o;
+    });
+    if (!toSave.length) { renderEntries(); return; }
+    const saved = await run("Đang lưu", () => gas("crmSaveMany", "SoLieu", toSave));
+    saved.forEach((r) => { S.SoLieu = S.SoLieu.filter((x) => x.id !== r.id).concat(r); });
+    // tài khoản mới -> danh mục
+    const newAcc = new Map();
+    saved.forEach((r) => {
+      if (r.taiKhoan && digitsOf(r.taiKhoan) && !S.TaiKhoan.some((t) => digitsOf(t.maTaiKhoan) === digitsOf(r.taiKhoan))) {
+        newAcc.set(digitsOf(r.taiKhoan), { maTaiKhoan: r.taiKhoan, nenTang: r.nenTang, nhanSu: r.nhanSu });
+      }
+    });
+    if (newAcc.size) S.TaiKhoan = S.TaiKhoan.concat(await gas("crmSaveMany", "TaiKhoan", Array.from(newAcc.values())));
+    drafts.clear();
+    toast(`Đã lưu ${saved.length} dòng.`, "ok");
     refreshFilters();
     renderEntries();
   }
-  async function deleteEntry(id) {
+  async function deleteRow(id) {
+    if (isNew(id)) { drafts.delete(id); renderEntries(); return; }
     const r = S.SoLieu.find((x) => x.id === id);
-    if (!r || !confirm(`Xoá dòng ${r.nhanSu} · ${fmtInt(num(r.chiPhi))} đ?`)) return;
+    if (!r || !confirm(`Xoá dòng ${r.nhanSu} · ${r.taiKhoan || ""} · ${fmtInt(num(r.chiPhi))} đ?`)) return;
     await run("Đang xoá", () => gas("crmDelete", "SoLieu", id));
     S.SoLieu = S.SoLieu.filter((x) => x.id !== id);
+    drafts.delete(id);
     toast("Đã xoá.", "ok");
     renderEntries();
+  }
+  function confirmDiscard() {
+    if (!drafts.size) return true;
+    if (!confirm(`Có ${drafts.size} dòng chưa lưu. Bỏ các thay đổi này?`)) return false;
+    drafts.clear();
+    return true;
   }
 
   /** Nhập số liệu từ Google Sheet của dự án (mẫu "BÁO CÁO NGHIỆM THU THÁNG"). */
   async function importSheet() {
+    if (!confirmDiscard()) return;
     const pj = project($("enProject").value);
     const id = B.parseDriveId(pj.nguonSoLieu);
     if (!id) return toast("Dự án chưa có link Google Sheet số liệu (tab Danh mục).", "err");
@@ -455,6 +540,7 @@
       year: String(parseIso(w).getFullYear()), campaign: pj.chienDich || "", period: "",
       images, staffList, staffOf: (acc) => accStaff.get(acc) || "",
       scope: "week", perSlide: 1, dropUnused: true, dropEmptyImageSlides: true,
+      logo: pj.logo || "", logos: (window.BAO_CAO_MKT_CONFIG || {}).logos,
     });
     const name = `Bao_cao_${pjName.replace(/\s+/g, "_")}_${weekLabel(w).replace(/[\/ ]/g, "")}.pptx`;
     const folder = B.parseDriveId(pj.thuMucBaoCao) || "";
@@ -500,6 +586,7 @@
       const cell = (t2, c, v, id) => {
         if (c === "nhanSu") return `<select data-ct="${t2}" data-id="${id}" data-f="${c}">${opt("", "(chưa gán)", v)}${staffNames().map((s) => opt(s, s, v)).join("")}</select>`;
         if (c === "nenTang") return `<select data-ct="${t2}" data-id="${id}" data-f="${c}">${PLATFORMS.map((p) => opt(p, PLATFORM_LABEL[p], v)).join("")}</select>`;
+        if (c === "logo") return `<select data-ct="${t2}" data-id="${id}" data-f="${c}">${opt("", "(theo mẫu)", v)}${Object.keys((window.BAO_CAO_MKT_CONFIG || {}).logos || {}).map((x) => opt(x, x, v)).join("")}</select>`;
         if (c === "trangThai") return `<select data-ct="${t2}" data-id="${id}" data-f="${c}">${["Đang làm", "Nghỉ"].map((s) => opt(s, s, v || "Đang làm")).join("")}</select>`;
         return `<input data-ct="${t2}" data-id="${id}" data-f="${c}" value="${esc(v)}">`;
       };
@@ -523,21 +610,30 @@
   function bind() {
     document.querySelectorAll("[data-tab]").forEach((b) => b.addEventListener("click", () => showTab(b.dataset.tab)));
     ["dbProject", "dbFrom", "dbTo"].forEach((id) => $(id).addEventListener("change", renderDashboard));
-    ["enWeek", "enProject", "enStaff"].forEach((id) => $(id).addEventListener("change", () => { clearForm(); renderEntries(); }));
+    ["enWeek", "enProject", "enStaff"].forEach((id) => {
+      const el = $(id);
+      el.addEventListener("focus", () => (el.dataset.prev = el.value));
+      el.addEventListener("change", () => {
+        if (!confirmDiscard()) { el.value = el.dataset.prev; return; }
+        el.dataset.prev = el.value;
+        renderEntries();
+      });
+    });
     ["evWeek", "evProject"].forEach((id) => $(id).addEventListener("change", renderEvidence));
     $("evStaff").addEventListener("change", () => { pending.forEach((p) => (p.nhanSu = $("evStaff").value)); renderEvidence(); });
-    $("entryForm").addEventListener("submit", saveEntry);
-    $("fCancel").addEventListener("click", () => { clearForm(); renderEntries(); });
-    $("fAccount").addEventListener("change", () => {
-      const a = S.TaiKhoan.find((t) => t.maTaiKhoan === $("fAccount").value.trim());
-      if (a) { if (a.nhanSu) $("fStaff").value = a.nhanSu; if (a.nenTang) $("fPlatform").value = a.nenTang; }
+    $("enSave").addEventListener("click", () => saveGrid().catch(() => {}));
+    $("enDiscard").addEventListener("click", () => { if (confirmDiscard()) renderEntries(); });
+    $("enTable").addEventListener("change", (e) => { if (e.target.dataset.g) gridChange(e.target); });
+    $("enTable").addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && e.target.dataset.g) { e.preventDefault(); e.target.blur(); }
     });
+    window.addEventListener("beforeunload", (e) => { if (drafts.size) { e.preventDefault(); e.returnValue = ""; } });
     $("enImport").addEventListener("click", () => importSheet().catch(() => {}));
     $("enTable").addEventListener("click", (e) => {
       const b = e.target.closest("button");
       if (!b) return;
-      if (b.dataset.edit) editEntry(b.dataset.edit);
-      if (b.dataset.del) deleteEntry(b.dataset.del).catch(() => {});
+      if (b.dataset.gadd) addRow(b.dataset.gadd);
+      if (b.dataset.gdel) deleteRow(b.dataset.gdel).catch(() => {});
     });
     $("evFiles").addEventListener("change", () => { addPending($("evFiles").files); $("evFiles").value = ""; });
     const drop = $("evDrop");
@@ -630,7 +726,6 @@
     $("rpProjectLink").href = $("reportLink").href;
     bind();
     refreshFilters();
-    clearForm();
     let tab = "tong";
     try { tab = localStorage.getItem("crm.tab") || tab; } catch (_) { /* bỏ qua */ }
     showTab(tab);

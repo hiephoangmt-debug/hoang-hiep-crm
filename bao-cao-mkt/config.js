@@ -4,6 +4,8 @@
  * presets: mỗi dự án một bộ link Drive; chọn ở đầu trang. */
 window.BAO_CAO_MKT_CONFIG = {
   googleClientId: "",
+  // Logo trong file PPTX mẫu (tên file ảnh trong mẫu) – mỗi dự án chọn một logo ở "logo"
+  logos: { "TATILAND": "image8.png", "TATI INVEST": "image9.png" },
   // ID tài khoản quảng cáo -> nhân sự (cho tài khoản không ghi tên trong sheet)
   accountStaff: {
     "1091790822198238": "Mỹ Linh",
@@ -16,6 +18,7 @@ window.BAO_CAO_MKT_CONFIG = {
       // Thư mục chứng từ chung (Nhân sự/Dự án/Tuần/ảnh); chỉ lấy ảnh nằm trong thư mục tên "Casamia"
       folders: ["https://drive.google.com/drive/folders/146YOZUIiLizOl0waxcqAPw4uzY_jvmzt"],
       projectKey: "Casamia",
+      logo: "TATI INVEST",
       campaign: "CASAMIA BALANCA HOI AN-TATI INVEST ĐỢT 1",
       period: "", // trống = theo tuần báo cáo
       outName: "bao_cao_casa",
@@ -25,6 +28,7 @@ window.BAO_CAO_MKT_CONFIG = {
       data: "https://docs.google.com/spreadsheets/d/1UOgRz8-D28PSSZCIYtO0YA5A8EeHrxIP/edit",
       folders: ["https://drive.google.com/drive/folders/146YOZUIiLizOl0waxcqAPw4uzY_jvmzt"],
       projectKey: "Sun",
+      logo: "TATILAND",
       campaign: "SUN GROUP ĐÀ NẴNG - TATI INVEST",
       period: "", // trống = theo tuần báo cáo
       outName: "bao_cao_sun",
