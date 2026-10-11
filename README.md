@@ -27,7 +27,11 @@ Mở `http://localhost:3000`, đăng nhập. Dữ liệu lưu ở `data/crm.db` 
 
 Lưu ý: bấm Zalo/Gọi trên web chỉ biết *có người bấm*, không biết tên/SĐT (trừ khi họ gửi form sau đó) – đó là giới hạn của trình duyệt.
 
+## Bản Google Sheets
+Không muốn thuê server? Xem `GOOGLE.md`: cùng tính năng theo dõi (web nào, click Zalo/gọi, đã liên hệ chưa, chiến dịch ads) chạy trên Google Sheets + Apps Script, miễn phí.
+
 ## Test
 ```bash
 node test.js
+node google/test-gas.mjs   # bản Google
 ```

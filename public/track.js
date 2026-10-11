@@ -9,6 +9,8 @@
   var key = el.getAttribute('data-key');
   if (!key) return;
   var base = new URL(el.src).origin;
+  var gas = /script\.google(usercontent)?\.com/.test(el.src); // chạy bằng Google Apps Script
+  var endpoint = gas ? el.src.split('?')[0] : null;
   var W = window, D = document;
 
   function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
@@ -34,9 +36,11 @@
     return JSON.stringify(o);
   }
   function post(path, extra) {
-    var body = payload(extra), url = base + path;
+    extra = extra || {};
+    if (gas) extra.action = path === '/api/lead' ? 'lead' : 'track';
+    var body = payload(extra), url = gas ? endpoint : base + path;
     try { if (navigator.sendBeacon && navigator.sendBeacon(url, new Blob([body], { type: 'text/plain' }))) return; } catch (e) {}
-    try { fetch(url, { method: 'POST', body: body, keepalive: true, mode: 'cors', headers: { 'Content-Type': 'text/plain' } }); } catch (e) {}
+    try { fetch(url, { method: 'POST', body: body, keepalive: true, mode: gas ? 'no-cors' : 'cors', headers: { 'Content-Type': 'text/plain' } }); } catch (e) {}
   }
 
   post('/api/track', { type: 'pageview' });
