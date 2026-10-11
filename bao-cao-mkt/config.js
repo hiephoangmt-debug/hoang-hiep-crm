@@ -29,7 +29,7 @@ window.BAO_CAO_MKT_CONFIG = {
     },
     {
       name: "Sun",
-      data: "https://docs.google.com/spreadsheets/d/1UOgRz8-D28PSSZCIYtO0YA5A8EeHrxIP/edit",
+      data: "https://docs.google.com/spreadsheets/d/1K1nmmwasaN7kRrKUrqoMPSOFoGhawIZMF2OEiYaQ2iU/edit",
       folders: ["https://drive.google.com/drive/folders/146YOZUIiLizOl0waxcqAPw4uzY_jvmzt"],
       projectKey: "Sun",
       logo: "TATILAND",

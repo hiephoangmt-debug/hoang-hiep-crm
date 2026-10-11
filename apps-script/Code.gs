@@ -264,7 +264,7 @@ var CRM_SEED = {
     { ten: 'Sun', khoa: 'Sun', chienDich: 'SUN GROUP ĐÀ NẴNG - TATI INVEST',
       mauPptx: 'https://drive.google.com/file/d/10S0gG5T_o1WOqqkvUiFdwdhauqoa9mA6/view',
       thuMucChungTu: 'https://drive.google.com/drive/folders/' + EVIDENCE_ROOT,
-      nguonSoLieu: 'https://docs.google.com/spreadsheets/d/1UOgRz8-D28PSSZCIYtO0YA5A8EeHrxIP/edit', logo: 'TATILAND' },
+      nguonSoLieu: 'https://docs.google.com/spreadsheets/d/1K1nmmwasaN7kRrKUrqoMPSOFoGhawIZMF2OEiYaQ2iU/edit', logo: 'TATILAND' },
   ],
   NhanSu: [{ ten: 'Mỹ Linh' }, { ten: 'Phan Hạnh' }, { ten: 'Anh Tài' }, { ten: 'Ngà Ngô' }],
   TaiKhoan: [
@@ -464,17 +464,47 @@ function crmLabelHasWeek_(label, isoMonday) {
  * items: [{nenTang, taiKhoan, nhanSu, chiPhi, lead, luotXem, ...}] – tổng theo tài khoản/kênh của tuần.
  * Trả {written, kept, noRow, sheetUrl}.
  */
-function crmWriteSheet(duAn, tuan, items) {
+/**
+ * File số liệu của dự án. Nếu link trong Danh mục là file Excel (.xlsx) mà cùng thư mục đã có bản
+ * Google Trang tính cùng tên (Tệp › Lưu dưới dạng Google Trang tính) thì dùng bản đó và cập nhật Danh mục.
+ * Trả {file, url, switched}.
+ */
+function crmSheetFile_(duAn) {
   var project = crmRows_('DuAn').filter(function (p) { return p.ten === duAn; })[0];
   if (!project) throw new Error('Không có dự án ' + duAn);
   var m = /\/d\/([\w-]{15,})/.exec(project.nguonSoLieu || '');
   if (!m) throw new Error('Dự án ' + duAn + ' chưa có link Google Sheet số liệu (tab Danh mục).');
   var file = DriveApp.getFileById(m[1]);
-  if (file.getMimeType() !== MimeType.GOOGLE_SHEETS) {
-    throw new Error('File số liệu của ' + duAn + ' là file Excel (.xlsx), app không ghi vào được. Mở file › Tệp › Lưu dưới dạng Google Trang tính, rồi dán link mới vào tab Danh mục.');
+  if (file.getMimeType() === MimeType.GOOGLE_SHEETS) return { file: file, url: project.nguonSoLieu, switched: false };
+  var base = file.getName().replace(/\.(xlsx|xls|csv)$/i, '');
+  var best = null;
+  var parents = file.getParents();
+  while (parents.hasNext()) {
+    var it = parents.next().getFilesByType(MimeType.GOOGLE_SHEETS);
+    while (it.hasNext()) {
+      var g = it.next();
+      if (g.getName() === base && !g.isTrashed() && (!best || g.getLastUpdated() > best.getLastUpdated())) best = g;
+    }
+  }
+  if (!best) return { file: file, url: project.nguonSoLieu, switched: false };
+  var url = 'https://docs.google.com/spreadsheets/d/' + best.getId() + '/edit';
+  crmSaveMany('DuAn', [{ id: project.id, nguonSoLieu: url }]);
+  return { file: best, url: url, switched: true };
+}
+
+/** Cho trang: link file số liệu đang dùng (đã tự chuyển sang bản Google Trang tính nếu có). */
+function crmSheetSource(duAn) {
+  var r = crmSheetFile_(duAn);
+  return { id: r.file.getId(), url: r.url, switched: r.switched, isSheet: r.file.getMimeType() === MimeType.GOOGLE_SHEETS };
+}
+
+function crmWriteSheet(duAn, tuan, items) {
+  var src = crmSheetFile_(duAn);
+  if (src.file.getMimeType() !== MimeType.GOOGLE_SHEETS) {
+    throw new Error('File số liệu của ' + duAn + ' là file Excel (.xlsx), app không ghi vào được. Mở file › Tệp › Lưu dưới dạng Google Trang tính (để cùng thư mục, giữ nguyên tên) – app tự chuyển sang bản đó.');
   }
   return crmWithLock_(function () {
-    var ss = SpreadsheetApp.openById(m[1]);
+    var ss = SpreadsheetApp.openById(src.file.getId());
     var sh = ss.getSheets()[0];
     var rng = sh.getDataRange();
     var vals = rng.getValues(), forms = rng.getFormulas(), notes = rng.getNotes();
@@ -505,7 +535,7 @@ function crmWriteSheet(duAn, tuan, items) {
       if (inWeek) rows.push(r);
     }
     if (!rows.length) throw new Error('Sheet của ' + duAn + ' không có dòng tuần chứa ngày ' + tuan + '.');
-    var res = { written: 0, kept: 0, noRow: [], sheetUrl: ss.getUrl() };
+    var res = { written: 0, kept: 0, noRow: [], sheetUrl: ss.getUrl(), source: src.switched ? src.url : '' };
     var mine = function (r, c) { return String(notes[r][c] || '').indexOf(SHEET_NOTE) === 0; };
     var free = function (r, c) { return c != null && !forms[r][c] && (vals[r][c] === '' || vals[r][c] === null || mine(r, c)); };
     var used = {};
@@ -543,11 +573,7 @@ function crmWriteSheet(duAn, tuan, items) {
  * Google gửi email báo cho người được thêm. Trả {added, already, noEmail, url}.
  */
 function crmShareSheet(duAn) {
-  var project = crmRows_('DuAn').filter(function (p) { return p.ten === duAn; })[0];
-  if (!project) throw new Error('Không có dự án ' + duAn);
-  var m = /\/d\/([\w-]{15,})/.exec(project.nguonSoLieu || '');
-  if (!m) throw new Error('Dự án ' + duAn + ' chưa có link Google Sheet số liệu (tab Danh mục).');
-  var f = DriveApp.getFileById(m[1]);
+  var f = crmSheetFile_(duAn).file;
   var have = f.getEditors().map(function (u) { return String(u.getEmail()).toLowerCase(); });
   try { have.push(String(f.getOwner().getEmail()).toLowerCase()); } catch (e) { /* file trong Drive dùng chung */ }
   var staff = crmRows_('NhanSu').filter(function (n) { return n.trangThai !== 'Nghỉ'; });

@@ -434,8 +434,9 @@
   async function importSheet() {
     if (!confirmDiscard()) return;
     const pj = project($("enProject").value);
-    const id = B.parseDriveId(pj.nguonSoLieu);
-    if (!id) return toast("Dự án chưa có link Google Sheet số liệu (tab Danh mục).", "err");
+    if (!B.parseDriveId(pj.nguonSoLieu)) return toast("Dự án chưa có link Google Sheet số liệu (tab Danh mục).", "err");
+    let id = B.parseDriveId(pj.nguonSoLieu);
+    try { const src = await gas("crmSheetSource", pj.ten); id = src.id; if (src.switched) { pj.nguonSoLieu = src.url; renderEntries(); } } catch (e) { console.error(e); }
     const year = parseIso($("enWeek").value).getFullYear();
     const r = await run("Đang đọc Google Sheet", () => gas("downloadFile", id));
     const wb = XLSX.read(Uint8Array.from(atob(r.b64), (c) => c.charCodeAt(0)), { type: "array" });
@@ -484,7 +485,9 @@
       groups.set(key, g);
     });
     if (!groups.size) return null;
-    return gas("crmWriteSheet", pjName, w, Array.from(groups.values()));
+    const res = await gas("crmWriteSheet", pjName, w, Array.from(groups.values()));
+    if (res && res.source) { project(pjName).nguonSoLieu = res.source; if (!$("tab-nhap").hidden) renderEntries(); }
+    return res;
   }
   const pushNote = (res) => !res ? "" : ` Google Sheet: đã điền ${res.written} ô` + (res.kept ? `, giữ nguyên ${res.kept} ô đã có số` : "") +
     (res.noRow.length ? `, hết dòng trống cho ${res.noRow.join(", ")} (thêm dòng trong tuần rồi bấm "Ghi số từ ảnh vào Google Sheet")` : "") + ".";
