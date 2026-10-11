@@ -632,6 +632,10 @@
     };
 
     const zip = await JSZip.loadAsync(opts.template);
+    // ảnh logo đã chỉnh (cùng tên, cùng kích thước với ảnh trong mẫu) – vd. TATILAND chữ LAND thẳng hàng với TATI
+    Object.entries(opts.logoMedia || {}).forEach(([name, b64]) => {
+      if (zip.file("ppt/media/" + name)) zip.file("ppt/media/" + name, b64, { base64: true });
+    });
     const presPath = "ppt/presentation.xml";
     const pres = parseXml(await zip.file(presPath).async("string"));
     const presRels = parseXml(await zip.file("ppt/_rels/presentation.xml.rels").async("string"));

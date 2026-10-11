@@ -1281,7 +1281,7 @@
       scope: ky === "tuan" ? "week" : "all", perSlide: 1, dropUnused: true, dropEmptyImageSlides: true,
       placeholderMissing: ky === "tuan" && $("rpKeepMissing").checked,
       maxImageSide: 1600, // ảnh chụp màn hình thu nhỏ còn ~1600px: vẫn rõ chữ, file nhẹ hơn nhiều
-      logo: pj.logo || "", logos: (window.BAO_CAO_MKT_CONFIG || {}).logos,
+      logo: pj.logo || "", logos: (window.BAO_CAO_MKT_CONFIG || {}).logos, logoMedia: window.TATI_LOGO_MEDIA,
     });
     const tag = ky === "tuan" ? weekLabel(w).replace(/[\/ ]/g, "") : ky === "thang" ? `Thang${w.slice(5, 7)}-${w.slice(0, 4)}` : "ToanChienDich";
     const name = `Bao_cao_${pjName.replace(/\s+/g, "_")}_${tag}.pptx`;
