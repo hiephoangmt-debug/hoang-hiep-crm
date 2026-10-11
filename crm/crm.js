@@ -57,6 +57,8 @@
     const rest = b.replace(/^TATI\s*/i, "");
     return `<span class="bm"><i class="t1">TA</i><i class="t2">TI</i><i class="t3">${esc(rest)}</i></span>`;
   }
+  // Trang hướng dẫn: config.guideUrl nếu có, không thì trang ?page=huongdan của chính ứng dụng
+  const guideUrl = () => ((window.BAO_CAO_MKT_CONFIG || {}).guideUrl || "").trim() || (S.appUrl ? S.appUrl + "?page=huongdan" : "#");
   function setBrand(b, quiet) {
     brand = BRANDS.includes(b) ? b : "";
     try { localStorage.setItem("crm.brand", brand); } catch (_) { /* bỏ qua */ }
@@ -66,6 +68,7 @@
     const link = S.appUrl ? S.appUrl + (brand ? "?donvi=" + slug(brand) : "") : "";
     $("brandLink").hidden = !link || !brand;
     $("brandLink").dataset.url = link;
+    $("guideLink").href = guideUrl();
     if (quiet) return;
     ["dbProject", "enProject", "evProject", "rpProject"].forEach((id) => { if (!inBrand($(id).value)) $(id).value = ""; });
     refreshFilters();
@@ -773,8 +776,9 @@
     document.querySelectorAll("[data-brand]").forEach((b) => b.addEventListener("click", () => setBrand(b.dataset.brand)));
     $("brandLink").addEventListener("click", async () => {
       const url = $("brandLink").dataset.url;
-      try { await navigator.clipboard.writeText(url); toast("Đã chép link riêng của " + brand + ": " + url, "ok"); }
-      catch (_) { prompt("Link riêng của " + brand + ":", url); }
+      const text = "Cập nhật báo cáo " + brand + ": " + url + "\nHướng dẫn: " + guideUrl();
+      try { await navigator.clipboard.writeText(text); toast("Đã chép link cập nhật báo cáo + link hướng dẫn của " + brand, "ok"); }
+      catch (_) { prompt("Link riêng của " + brand + " (kèm hướng dẫn):", text); }
     });
     document.querySelectorAll("[data-tab]").forEach((b) => b.addEventListener("click", () => showTab(b.dataset.tab)));
     ["dbProject", "dbFrom", "dbTo"].forEach((id) => $(id).addEventListener("change", renderDashboard));

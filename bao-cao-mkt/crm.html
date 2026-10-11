@@ -19,6 +19,7 @@
   .t1 { color:#e30613; } .t2 { color:#00843d; } .t3 { color:#a8782a; margin-left:3px; font-weight:600; }
   small { display:block; color:var(--muted); margin-top:4px; }
   .all { display:inline-block; margin-top:16px; color:var(--accent); }
+  a.guide { display:block; margin-top:12px; text-align:center; font-weight:600; color:var(--accent); background:var(--card); border:1px dashed var(--accent); border-radius:12px; padding:12px; text-decoration:none; }
   .warn { background:var(--card); border:1px dashed var(--accent); border-radius:12px; padding:16px; }
   code { font-size:13px; }
 </style>
@@ -32,7 +33,9 @@
 <script src="config.js"></script>
 <script>
   (function () {
-    var url = ((window.BAO_CAO_MKT_CONFIG || {}).crmUrl || "").trim();
+    var cfg = window.BAO_CAO_MKT_CONFIG || {};
+    var url = (cfg.crmUrl || "").trim();
+    var guide = (cfg.guideUrl || "").trim() || url + "?page=huongdan";
     var box = document.getElementById("go");
     if (!url) {
       box.innerHTML = '<div class="warn">Chưa cấu hình link CRM. Mở <code>config.js</code>, dán link ứng dụng web Apps Script (đuôi <code>/exec</code>) vào <code>crmUrl</code>, rồi đưa lại lên Netlify.</div>';
@@ -42,7 +45,8 @@
       '<div class="units">' +
       '<a class="unit" href="' + url + '?donvi=tatiland"><span class="bm"><span class="t1">TA</span><span class="t2">TI</span><span class="t3">LAND</span></span><small>Dự án Sun</small></a>' +
       '<a class="unit" href="' + url + '?donvi=tatiinvest"><span class="bm"><span class="t1">TA</span><span class="t2">TI</span><span class="t3">INVEST</span></span><small>Dự án Casamia</small></a>' +
-      '</div><a class="all" href="' + url + '">Quản lý: xem cả hai bên →</a>' +
+      '</div><a class="guide" href="' + guide + '" target="_blank" rel="noopener">Hướng dẫn cập nhật báo cáo (mở tab mới)</a>' +
+      '<br><a class="all" href="' + url + '">Quản lý: xem cả hai bên →</a>' +
       ' · <a class="all" href="' + url + '?page=baocao">Báo cáo từ thư mục Drive</a>';
   })();
 </script>

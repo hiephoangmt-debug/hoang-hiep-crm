@@ -5,6 +5,7 @@ Một ứng dụng web chạy bằng tài khoản Google của bạn – không 
 | Trang | Link | Dùng để |
 |---|---|---|
 | **CRM** (mặc định) | `…/exec` | Tổng quan, nhập số liệu, sale tải ảnh/chứng từ, tạo & duyệt báo cáo, danh mục |
+| **Hướng dẫn** cho sale | `…/exec?page=huongdan` | Các bước cập nhật báo cáo tuần, ảnh nghiệm thu cần chụp cho từng kênh |
 | Báo cáo từ thư mục Drive | `…/exec?page=baocao` | Tạo báo cáo trực tiếp từ Google Sheet + thư mục ảnh có sẵn |
 
 Dữ liệu CRM nằm trong Google Sheet **"CRM Báo cáo Marketing"** (tự tạo ở lần mở đầu, link ở góc trên trang):
@@ -16,13 +17,15 @@ Dữ liệu CRM nằm trong Google Sheet **"CRM Báo cáo Marketing"** (tự t�
 2. File **Code.gs**: xoá nội dung có sẵn, dán toàn bộ [`Code.gs`](Code.gs).
 3. **+ › HTML** → tên `Crm` → dán toàn bộ [`Crm.html`](Crm.html).
 4. **+ › HTML** → tên `Index` → dán toàn bộ [`Index.html`](Index.html).
+   **+ › HTML** → tên `HuongDan` → dán toàn bộ [`HuongDan.html`](HuongDan.html).
 5. 💾 Lưu → **Triển khai › Tùy chọn triển khai mới › Ứng dụng web**:
    - *Thực thi dưới dạng*: **Tôi** (dữ liệu và ảnh lưu vào Drive của bạn)
    - *Người có quyền truy cập*: **Bất kỳ ai có Tài khoản Google** (để các bạn sale dùng được) – hoặc *Chỉ mình tôi* nếu chỉ một người dùng
 6. **Triển khai** → cấp quyền (Drive, Sheets, kết nối ngoài). Google báo "chưa xác minh" → *Nâng cao › Đi tới …* (script của chính bạn).
-7. Gửi link `/exec` cho các bạn sale; mỗi người lưu vào màn hình chính điện thoại.
+7. Gửi link cho các bạn sale – nút **Chép link riêng** (cạnh TATILAND / TATI INVEST) chép sẵn 2 dòng:
+   `Cập nhật báo cáo …: …/exec?donvi=…` và `Hướng dẫn: …/exec?page=huongdan`.
 
-> Cập nhật phiên bản: dán lại 3 file → **Triển khai › Quản lý triển khai › ✏️ › Phiên bản mới**. Link giữ nguyên.
+> Cập nhật phiên bản: dán lại 4 file → **Triển khai › Quản lý triển khai › ✏️ › Phiên bản mới**. Link giữ nguyên.
 
 ## Dùng hằng tuần
 

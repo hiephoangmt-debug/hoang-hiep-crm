@@ -7,7 +7,16 @@ var PPTX_MIME = 'application/vnd.openxmlformats-officedocument.presentationml.pr
 
 /** ?page=baocao: trang tạo báo cáo từ Drive; mặc định: CRM. */
 function doGet(e) {
-  var page = (e && e.parameter && e.parameter.page) || 'crm';
+  var q = (e && e.parameter) || {};
+  var page = q.page || 'crm';
+  if (page === 'huongdan') {
+    // Trang hướng dẫn: nút "Mở CRM" trỏ về đúng link /exec của bản triển khai này
+    var html = HtmlService.createHtmlOutputFromFile('HuongDan').getContent()
+      .split('__APP_URL__').join(ScriptApp.getService().getUrl());
+    return HtmlService.createHtmlOutput(html)
+      .setTitle('Hướng dẫn cập nhật báo cáo')
+      .addMetaTag('viewport', 'width=device-width, initial-scale=1');
+  }
   var report = page === 'baocao';
   return HtmlService.createHtmlOutputFromFile(report ? 'Index' : 'Crm')
     .setTitle(report ? 'Báo cáo Marketing' : 'CRM Báo cáo Marketing')

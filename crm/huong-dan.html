@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<base target="_top">
+<title>Hướng dẫn cập nhật báo cáo</title>
+<style>
+  :root { --bg:#f5f6f8; --card:#fff; --text:#1d2330; --muted:#667085; --line:#e3e6eb; --accent:#c8102e; --ok:#127a3a; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#14161a; --card:#1d2026; --text:#e8eaee; --muted:#9aa3b2; --line:#2e333b; --accent:#ef4060; --ok:#4cc27a; } }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:20px 16px 48px; }
+  h1 { font-size:22px; margin:0 0 4px; }
+  .sub { color:var(--muted); margin:0 0 16px; }
+  .top { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+  a.btn { display:inline-block; text-decoration:none; font-weight:600; color:#fff; background:var(--accent); border-radius:8px; padding:9px 16px; }
+  a.btn.ghost { background:transparent; color:var(--accent); border:1px solid var(--accent); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:14px; }
+  h2 { font-size:17px; margin:0 0 8px; }
+  h3 { font-size:15px; margin:14px 0 4px; }
+  ol, ul { margin:6px 0; padding-left:22px; }
+  li { margin:4px 0; }
+  b.k { background:var(--bg); border:1px solid var(--line); border-radius:5px; padding:0 6px; font-weight:600; white-space:nowrap; }
+  .note { color:var(--muted); font-size:14px; }
+  .tip { border-left:3px solid var(--ok); padding:4px 10px; margin:8px 0; }
+  .warn { border-left:3px solid var(--accent); padding:4px 10px; margin:8px 0; }
+  .wrap { overflow-x:auto; }
+  table { border-collapse:collapse; width:100%; font-size:14px; }
+  th, td { border:1px solid var(--line); padding:6px 8px; text-align:left; vertical-align:top; }
+  th { background:var(--bg); }
+  code { font-size:13px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Hướng dẫn cập nhật báo cáo Marketing tuần</h1>
+  <p class="sub">Dành cho các bạn sale/marketing của TATILAND (dự án Sun) và TATI INVEST (dự án Casamia). Làm trên điện thoại hoặc máy tính, mất khoảng 5 phút mỗi tuần.</p>
+  <div class="top" id="top">
+    <a class="btn" data-app="?donvi=tatiland" href="__APP_URL__?donvi=tatiland">Mở CRM · TATILAND (Sun)</a>
+    <a class="btn" data-app="?donvi=tatiinvest" href="__APP_URL__?donvi=tatiinvest">Mở CRM · TATI INVEST (Casamia)</a>
+  </div>
+
+  <section>
+    <h2>0. Lần đầu mở link</h2>
+    <ol>
+      <li>Mở link CRM của bên mình (nút đỏ ở trên). Đăng nhập bằng <b>tài khoản Google</b> khi được hỏi.</li>
+      <li>Nếu điện thoại đăng nhập nhiều tài khoản Google mà trang báo lỗi/trắng: mở link trong <b>tab ẩn danh</b> hoặc trình duyệt khác và đăng nhập một tài khoản.</li>
+      <li>Lưu link ra màn hình chính: Safari/Chrome › <b>Chia sẻ</b> › <b>Thêm vào màn hình chính</b>.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>1. Mỗi tuần: tải ảnh nghiệm thu (sale)</h2>
+    <ol>
+      <li>Vào tab <b class="k">Ảnh &amp; chứng từ</b>.</li>
+      <li>Chọn <b>Tuần</b>, <b>Dự án</b> và <b>tên mình</b>.</li>
+      <li>Bấm chọn ảnh: chụp màn hình điện thoại, ảnh hoặc <b>PDF</b> hoá đơn đều được, chọn nhiều file một lần.</li>
+      <li>Trang tự đọc chữ trong ảnh và đoán <b>kênh</b> (Facebook / TikTok / Zalo / Google) và <b>loại</b> (Chiến dịch, QC đang chạy, Hoá đơn). Đọc sai thì chọn lại ở ô dưới ảnh.</li>
+      <li>Ảnh Trình quản lý quảng cáo: trang liệt kê các chiến dịch kèm <b>chi tiêu, lead</b>. Kiểm tra số, sửa nếu đọc sai, bỏ tick chiến dịch không thuộc tuần.</li>
+      <li>Bấm <b class="k">Tải lên Drive</b>. Ảnh được lưu vào <code>Thư mục chứng từ / Tên bạn / Dự án / Tuần</code>.</li>
+      <li>Xem <b>Bảng kiểm nghiệm thu</b>: ô đỏ "Thiếu" là ảnh còn phải bổ sung.</li>
+    </ol>
+    <p class="tip">Đã có ảnh sẵn trong thư mục Drive (đúng <code>Tên / Dự án / Tuần</code>)? Bấm <b class="k">Lấy ảnh có sẵn trên Drive</b>, không cần tải lại.</p>
+  </section>
+
+  <section>
+    <h2>2. Ảnh cần chụp cho từng kênh</h2>
+    <p class="note">Khoanh đỏ các mục dưới đây trên ảnh (theo mẫu báo cáo, slide 8–25). Kênh nào không chạy thì bỏ qua.</p>
+    <div class="wrap"><table>
+      <tr><th>Kênh</th><th>Chiến dịch (Trình quản lý QC)</th><th>QC đang chạy</th><th>Hoá đơn</th></tr>
+      <tr><td><b>Facebook</b></td><td>ID tài khoản QC · search tên chiến dịch · tổng tiền thực chạy · thời gian chạy</td><td>ID tài khoản QC · thời gian chạy · quảng cáo đang hoạt động</td><td>ID tài khoản QC · số mã tham chiếu · tổng tiền đã thanh toán (VAT) · tên chiến dịch khớp TKQC</td></tr>
+      <tr><td><b>TikTok</b></td><td>ID tài khoản QC · search tên chiến dịch · tổng tiền thực chạy · thời gian chạy</td><td>ID tài khoản QC · quảng cáo chạy</td><td>ID tài khoản QC · tổng tiền đã thanh toán (VAT) · tên chiến dịch khớp TKQC</td></tr>
+      <tr><td><b>Zalo</b></td><td>Search tên chiến dịch · tổng tiền thực chạy · thời gian chạy</td><td>ID tài khoản QC · thời gian chạy · quảng cáo đang hoạt động</td><td>Tổng tiền đã thanh toán (VAT) · tên chiến dịch khớp TKQC</td></tr>
+      <tr><td><b>Google Ads</b></td><td>ID tài khoản QC · search tên chiến dịch · tổng tiền thực chạy · thời gian chạy</td><td>(dùng chung ảnh chiến dịch)</td><td>ID tài khoản QC · số mã tham chiếu · tổng tiền thực chạy</td></tr>
+    </table></div>
+    <p class="warn">Chụp rõ <b>ID tài khoản quảng cáo</b> – hệ thống dựa vào ID để biết ảnh/hoá đơn của ai.</p>
+  </section>
+
+  <section>
+    <h2>3. Kiểm tra số liệu</h2>
+    <ol>
+      <li>Tab <b class="k">Nhập số liệu</b> › chọn tuần, dự án, tên mình.</li>
+      <li>Sửa trực tiếp trong bảng: ngân sách thực chạy, chi phí (+phí), LEAD, MQL, SQL, DEAL, hiển thị, tiếp cận, lượt nhấp…; CTR, CPM, tần suất tự tính.</li>
+      <li>Bấm <b class="k">Lưu thay đổi</b> trên thanh dưới cùng.</li>
+    </ol>
+    <p class="note">Nếu một người vừa có số nhập tay/từ Google Sheet vừa có số đọc từ ảnh, chỉ số nhập tay/Sheet được tính.</p>
+  </section>
+
+  <section>
+    <h2>4. Tạo và gửi báo cáo (quản lý)</h2>
+    <ol>
+      <li>Tab <b class="k">Báo cáo</b> › chọn tuần và dự án › <b class="k">Tạo báo cáo</b>.</li>
+      <li>Hệ thống tự lấy ảnh trên Drive, điền slide tổng (1–6) và nhân bản phần từng nhân sự; trang nào thiếu ảnh có khung đỏ "CHƯA CÓ ẢNH NGHIỆM THU".</li>
+      <li>Bấm <b class="k">Chép tin nhắn gửi nhóm</b> để lấy link PDF (ai có link đều xem được) và dán vào nhóm Zalo.</li>
+      <li>Duyệt: đổi trạng thái <b>Nháp › Đã nộp › Đã duyệt</b>.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>5. Gặp lỗi?</h2>
+    <ul>
+      <li><b>Kẹt ở "Đang tải CRM…"</b>: tải lại trang; thử tab ẩn danh; tắt chặn quảng cáo (trang cần tải mã từ cdn.jsdelivr.net).</li>
+      <li><b>Đọc chữ sai</b>: chọn lại kênh/loại/số dưới ảnh trước khi tải lên.</li>
+      <li><b>Ảnh vào nhầm người</b>: kiểm tra ID tài khoản trong tab Danh mục, hoặc đặt ảnh đúng thư mục <code>Tên / Dự án / Tuần</code>.</li>
+      <li>Vẫn không được: chụp màn hình lỗi gửi quản lý.</li>
+    </ul>
+  </section>
+</main>
+<script>
+  // Trên Apps Script, máy chủ thay __APP_URL__ bằng link /exec; mở file tĩnh thì ẩn các nút chưa có link
+  document.querySelectorAll("a[data-app]").forEach(function (a) {
+    if (a.getAttribute("href").indexOf("__APP" + "_URL__") === 0) a.hidden = true;
+  });
+</script>
+</body>
+</html>
