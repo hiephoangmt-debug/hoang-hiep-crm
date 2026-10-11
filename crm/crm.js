@@ -45,6 +45,33 @@
 
   // ------------------------------------------------------------ trạng thái
   const S = { DuAn: [], NhanSu: [], TaiKhoan: [], SoLieu: [], ChungTu: [], BaoCao: [], schema: {}, appUrl: "", sheetUrl: "", user: "" };
+  // ------------------------------------------------------------ đơn vị (2 bên: TATILAND / TATI INVEST)
+  const BRANDS = Object.keys((window.BAO_CAO_MKT_CONFIG || {}).logos || { TATILAND: 1, "TATI INVEST": 1 });
+  const slug = (b) => B.norm(b).replace(/[^a-z0-9]/g, "");
+  let brand = "";
+  const brandProjects = () => S.DuAn.filter((p) => !brand || !p.logo || p.logo === brand);
+  const brandNames = () => brandProjects().map((p) => p.ten);
+  const inBrand = (pjName) => brandNames().includes(pjName);
+  function brandMark(b) {
+    if (!b) return `<span class="bm-all">Tất cả đơn vị</span>`;
+    const rest = b.replace(/^TATI\s*/i, "");
+    return `<span class="bm"><i class="t1">TA</i><i class="t2">TI</i><i class="t3">${esc(rest)}</i></span>`;
+  }
+  function setBrand(b, quiet) {
+    brand = BRANDS.includes(b) ? b : "";
+    try { localStorage.setItem("crm.brand", brand); } catch (_) { /* bỏ qua */ }
+    document.querySelectorAll("[data-brand]").forEach((x) => x.classList.toggle("on", x.dataset.brand === brand));
+    $("brandMark").innerHTML = brandMark(brand);
+    document.title = (brand ? brand + " · " : "") + "CRM Báo cáo Marketing";
+    const link = S.appUrl ? S.appUrl + (brand ? "?donvi=" + slug(brand) : "") : "";
+    $("brandLink").hidden = !link || !brand;
+    $("brandLink").dataset.url = link;
+    if (quiet) return;
+    ["dbProject", "enProject", "evProject", "rpProject"].forEach((id) => { if (!inBrand($(id).value)) $(id).value = ""; });
+    refreshFilters();
+    showTab(document.querySelector("nav button.on") ? document.querySelector("nav button.on").dataset.tab : "tong");
+  }
+
   const staffNames = () => S.NhanSu.filter((n) => n.trangThai !== "Nghỉ").map((n) => n.ten);
   const project = (name) => S.DuAn.find((p) => p.ten === name) || {};
   const digitsOf = (s) => (String(s).match(/\d{6,}/) || [""])[0];
@@ -75,7 +102,7 @@
   }
   function refreshFilters() {
     const weeks = weekList().map((w) => [w, weekLabel(w, true)]);
-    const projects = S.DuAn.map((p) => p.ten);
+    const projects = brandNames();
     const staff = staffNames();
     // Tổng quan
     const dataWeeks = Array.from(new Set(S.SoLieu.map((r) => r.tuan))).sort();
@@ -138,7 +165,7 @@
   }
   function renderDashboard() {
     const pj = $("dbProject").value, from = $("dbFrom").value, to = $("dbTo").value;
-    const rows = effective(S.SoLieu.filter((r) => (!pj || r.duAn === pj) && r.tuan >= from && r.tuan <= to));
+    const rows = effective(S.SoLieu.filter((r) => (pj ? r.duAn === pj : inBrand(r.duAn)) && r.tuan >= from && r.tuan <= to));
     const t = sumOf(rows);
     const tiles = [
       ["Chi phí gồm phí nền tảng", fmtInt(t.chiPhiPhi) + " đ"],
@@ -547,8 +574,8 @@
     const b64 = await B.blobToB64(res.blob);
     const out = { tuan: w, duAn: pjName, trangThai: "Nháp", pdfUrl: "", pptxUrl: "",
       tomTat: `${res.slides} slide, ${res.staffCount} nhân sự, ${res.nImg} ảnh` };
-    if (fmt !== "pdf") { toast(`${pjName}: lưu PPTX…`, "busy"); out.pptxUrl = await gas("saveReport", b64, name, folder); }
-    if (fmt !== "pptx") { toast(`${pjName}: chuyển PDF…`, "busy"); out.pdfUrl = (await gas("convertToPdf", b64, name, folder)).url; }
+    if (fmt !== "pdf") { toast(`${pjName}: lưu PPTX…`, "busy"); out.pptxUrl = await gas("saveReport", b64, name, folder, true); }
+    if (fmt !== "pptx") { toast(`${pjName}: chuyển PDF…`, "busy"); out.pdfUrl = (await gas("convertToPdf", b64, name, folder, true)).url; }
     const prev = S.BaoCao.find((r) => r.duAn === pjName && r.tuan === w);
     if (prev) out.id = prev.id;
     const saved = await gas("crmSave", "BaoCao", out);
@@ -557,7 +584,7 @@
   }
   async function generateReports() {
     const w = $("rpWeek").value, fmt = $("rpFormat").value;
-    const list = $("rpProject").value ? [$("rpProject").value] : S.DuAn.map((p) => p.ten);
+    const list = $("rpProject").value ? [$("rpProject").value] : brandNames();
     const msgs = [];
     $("rpGo").disabled = true;
     try {
@@ -565,15 +592,31 @@
         try { const r = await buildOne(pj, w, fmt); msgs.push(`${pj}: ${r.tomTat}`); }
         catch (e) { console.error(e); msgs.push(`${pj}: lỗi – ${e.message}`); }
       }
-      toast("Xong. " + msgs.join(" | "), msgs.some((m) => m.includes("lỗi")) ? "err" : "ok");
+      toast("Xong. " + msgs.join(" | ") + " – bấm “Chép tin nhắn gửi nhóm” để gửi link.", msgs.some((m) => m.includes("lỗi")) ? "err" : "ok");
     } finally { $("rpGo").disabled = false; renderReports(); }
   }
+  /** Tin nhắn gửi nhóm (Zalo…): link PDF/PPTX các báo cáo của tuần. */
+  function shareText(rows) {
+    if (!rows.length) return "";
+    const w = rows[0].tuan;
+    return `📊 Báo cáo Marketing tuần ${weekLabel(w, true)}` + (brand ? ` – ${brand}` : "") + "\n" +
+      rows.map((r) => `• ${r.duAn}: ${r.pdfUrl || r.pptxUrl}`).join("\n");
+  }
+  async function copyText(text, what) {
+    try { await navigator.clipboard.writeText(text); toast("Đã chép " + what + " – dán vào Zalo/Messenger để gửi.", "ok"); }
+    catch (_) { prompt("Chép " + what + ":", text); }
+  }
+
   function renderReports() {
-    const rows = S.BaoCao.slice().sort((a, b) => String(b.tuan + b.ngayTao).localeCompare(String(a.tuan + a.ngayTao)));
+    const rows = S.BaoCao.filter((r) => inBrand(r.duAn)).sort((a, b) => String(b.tuan + b.ngayTao).localeCompare(String(a.tuan + a.ngayTao)));
+    const wk = S.BaoCao.filter((r) => inBrand(r.duAn) && r.tuan === $("rpWeek").value && (r.pdfUrl || r.pptxUrl));
+    $("rpShare").hidden = !wk.length;
+    $("rpShare").textContent = wk.length ? `Chép tin nhắn gửi nhóm (${wk.length} báo cáo tuần ${weekLabel($("rpWeek").value)})` : "";
     $("rpTable").innerHTML = rows.length ? `<table class="data"><thead><tr><th>Tuần</th><th>Dự án</th><th>Trạng thái</th><th>File</th><th>Nội dung</th><th>Người tạo</th><th>Ngày tạo</th></tr></thead><tbody>
       ${rows.map((r) => `<tr><td>${esc(weekLabel(r.tuan, true))}</td><td>${esc(r.duAn)}</td>
         <td><select data-rp="${esc(r.id)}" class="st-${STATUSES.indexOf(r.trangThai)}">${STATUSES.map((s) => opt(s, s, r.trangThai)).join("")}</select></td>
-        <td>${r.pdfUrl ? `<a href="${esc(r.pdfUrl)}" target="_blank" rel="noopener">PDF</a>` : ""} ${r.pptxUrl ? `<a href="${esc(r.pptxUrl)}" target="_blank" rel="noopener">PPTX</a>` : ""}</td>
+        <td>${r.pdfUrl ? `<a href="${esc(r.pdfUrl)}" target="_blank" rel="noopener">PDF</a>` : ""} ${r.pptxUrl ? `<a href="${esc(r.pptxUrl)}" target="_blank" rel="noopener">PPTX</a>` : ""}
+          ${r.pdfUrl || r.pptxUrl ? `<button type="button" class="link" data-copy="${esc(r.id)}">Chép link</button>` : ""}</td>
         <td>${esc(r.tomTat)}</td><td class="muted">${esc(r.nguoiTao)}</td><td class="muted">${esc(r.ngayTao)}</td></tr>`).join("")}</tbody></table>`
       : `<p class="muted">Chưa có báo cáo nào.</p>`;
   }
@@ -591,7 +634,7 @@
         return `<input data-ct="${t2}" data-id="${id}" data-f="${c}" value="${esc(v)}">`;
       };
       return `<section class="card"><h3>${title}</h3><div class="wrap"><table class="data edit"><thead><tr>${cols.map((c) => `<th>${esc(c[1])}</th>`).join("")}<th></th></tr></thead><tbody>
-        ${S[t].map((r) => `<tr>${cols.map((c) => `<td>${cell(t, c[0], r[c[0]], r.id)}</td>`).join("")}
+        ${S[t].filter((r) => t !== "DuAn" || !brand || !r.logo || r.logo === brand).map((r) => `<tr>${cols.map((c) => `<td>${cell(t, c[0], r[c[0]], r.id)}</td>`).join("")}
           <td class="act"><button type="button" class="link danger" data-ctdel="${t}" data-id="${esc(r.id)}">Xoá</button></td></tr>`).join("")}
         </tbody></table></div><button type="button" class="ghost small" data-ctadd="${t}">+ Thêm ${title.toLowerCase()}</button></section>`;
     }).join("");
@@ -608,6 +651,12 @@
 
   // ------------------------------------------------------------ khởi động
   function bind() {
+    document.querySelectorAll("[data-brand]").forEach((b) => b.addEventListener("click", () => setBrand(b.dataset.brand)));
+    $("brandLink").addEventListener("click", async () => {
+      const url = $("brandLink").dataset.url;
+      try { await navigator.clipboard.writeText(url); toast("Đã chép link riêng của " + brand + ": " + url, "ok"); }
+      catch (_) { prompt("Link riêng của " + brand + ":", url); }
+    });
     document.querySelectorAll("[data-tab]").forEach((b) => b.addEventListener("click", () => showTab(b.dataset.tab)));
     ["dbProject", "dbFrom", "dbTo"].forEach((id) => $(id).addEventListener("change", renderDashboard));
     ["enWeek", "enProject", "enStaff"].forEach((id) => {
@@ -676,6 +725,17 @@
       renderEvidence();
     });
     $("rpGo").addEventListener("click", () => generateReports());
+    $("rpWeek").addEventListener("change", renderReports);
+    $("rpShare").addEventListener("click", () => {
+      const rows = S.BaoCao.filter((r) => inBrand(r.duAn) && r.tuan === $("rpWeek").value && (r.pdfUrl || r.pptxUrl));
+      copyText(shareText(rows), "tin nhắn kèm link báo cáo");
+    });
+    $("rpTable").addEventListener("click", (e) => {
+      const id = e.target.dataset.copy;
+      if (!id) return;
+      const r = S.BaoCao.find((x) => x.id === id);
+      copyText(`📊 Báo cáo ${r.duAn} tuần ${weekLabel(r.tuan, true)}: ${r.pdfUrl || r.pptxUrl}`, "link báo cáo");
+    });
     $("rpTable").addEventListener("change", async (e) => {
       const id = e.target.dataset.rp;
       if (!id) return;
@@ -690,7 +750,7 @@
       if (!b) return;
       if (b.dataset.ctadd) {
         const t = b.dataset.ctadd;
-        S[t].push(await run("Đang thêm", () => gas("crmSave", t, t === "NhanSu" ? { ten: "Nhân sự mới", trangThai: "Đang làm" } : t === "DuAn" ? { ten: "Dự án mới" } : { nenTang: "Facebook" })));
+        S[t].push(await run("Đang thêm", () => gas("crmSave", t, t === "NhanSu" ? { ten: "Nhân sự mới", trangThai: "Đang làm" } : t === "DuAn" ? { ten: "Dự án mới", logo: brand } : { nenTang: "Facebook" })));
         toast("Đã thêm dòng mới – sửa trực tiếp trong bảng.", "ok");
         renderCatalog();
         refreshFilters();
@@ -724,7 +784,17 @@
     $("sheetLink").href = S.sheetUrl;
     $("reportLink").href = S.appUrl ? S.appUrl + "?page=baocao" : "#";
     $("rpProjectLink").href = $("reportLink").href;
+    $("brandSwitch").innerHTML = BRANDS.map((b) => `<button type="button" data-brand="${esc(b)}">${esc(b)}</button>`).join("") +
+      `<button type="button" data-brand="">Tất cả</button>`;
     bind();
+    let b0 = "";
+    try { b0 = localStorage.getItem("crm.brand") || ""; } catch (_) { /* bỏ qua */ }
+    const fromUrl = await new Promise((res) => {
+      try { google.script.url.getLocation((loc) => res((loc.parameter || {}).donvi || "")); } catch (_) { res(""); }
+      setTimeout(() => res(""), 1500);
+    });
+    if (fromUrl) b0 = BRANDS.find((b) => slug(b) === slug(fromUrl)) || b0;
+    setBrand(b0, true);
     refreshFilters();
     let tab = "tong";
     try { tab = localStorage.getItem("crm.tab") || tab; } catch (_) { /* bỏ qua */ }

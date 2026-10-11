@@ -82,18 +82,29 @@ function listTree(folderId) {
   return out;
 }
 
-/** Lưu PPTX báo cáo vào Drive (thư mục chỉ định hoặc My Drive), trả về link. */
-function saveReport(b64, name, folderId) {
+/** Bật "Bất kỳ ai có đường liên kết đều xem được" (bỏ qua nếu tổ chức chặn chia sẻ ra ngoài). */
+function shareByLink_(file) {
+  try { file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW); }
+  catch (e) {
+    try { file.setSharing(DriveApp.Access.DOMAIN_WITH_LINK, DriveApp.Permission.VIEW); } catch (e2) { /* giữ quyền mặc định */ }
+  }
+  return file;
+}
+
+/** Lưu PPTX báo cáo vào Drive (thư mục chỉ định hoặc My Drive), trả về link. share = bật xem qua link. */
+function saveReport(b64, name, folderId, share) {
   var blob = Utilities.newBlob(Utilities.base64Decode(b64), PPTX_MIME, name);
   var folder = folderId ? DriveApp.getFolderById(folderId) : DriveApp.getRootFolder();
-  return folder.createFile(blob).getUrl();
+  var file = folder.createFile(blob);
+  if (share) shareByLink_(file);
+  return file.getUrl();
 }
 
 /**
  * Chuyển PPTX báo cáo sang PDF: tải lên Drive dạng Google Slides tạm, xuất PDF, xoá bản tạm.
  * Lưu PDF vào thư mục chỉ định (hoặc My Drive). Trả về {url, b64}.
  */
-function convertToPdf(b64, name, folderId) {
+function convertToPdf(b64, name, folderId, share) {
   var boundary = 'bcmkt' + Date.now();
   var meta = JSON.stringify({ name: name.replace(/\.pptx$/i, '') + ' (tạm)', mimeType: 'application/vnd.google-apps.presentation' });
   var head = Utilities.newBlob('--' + boundary + '\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n' + meta +
@@ -116,7 +127,8 @@ function convertToPdf(b64, name, folderId) {
       .setName(name.replace(/\.pptx$/i, '') + '.pdf');
     var folder = folderId ? DriveApp.getFolderById(folderId) : DriveApp.getRootFolder();
     var file = folder.createFile(pdf);
-    return { url: file.getUrl(), b64: Utilities.base64Encode(pdf.getBytes()) };
+    if (share) shareByLink_(file);
+    return { url: file.getUrl(), b64: share ? '' : Utilities.base64Encode(pdf.getBytes()) };
   } finally {
     DriveApp.getFileById(tmpId).setTrashed(true);
   }
@@ -129,7 +141,7 @@ function convertToPdf(b64, name, folderId) {
 var CRM_TABLES = {
   DuAn: [['id', 'ID'], ['ten', 'Tên dự án'], ['khoa', 'Tên thư mục dự án trên Drive'], ['chienDich', 'Tên chiến dịch (tiêu đề báo cáo)'],
     ['mauPptx', 'Link PPTX mẫu'], ['thuMucChungTu', 'Thư mục chứng từ'], ['thuMucBaoCao', 'Thư mục lưu báo cáo'],
-    ['nguonSoLieu', 'Google Sheet số liệu (để nhập)'], ['logo', 'Logo (TATILAND / TATI INVEST)']],
+    ['nguonSoLieu', 'Google Sheet số liệu (để nhập)'], ['logo', 'Đơn vị / Logo (TATILAND / TATI INVEST)']],
   NhanSu: [['id', 'ID'], ['ten', 'Tên'], ['email', 'Email'], ['trangThai', 'Trạng thái']],
   TaiKhoan: [['id', 'ID'], ['maTaiKhoan', 'ID tài khoản QC'], ['ten', 'Tên tài khoản'], ['nenTang', 'Nền tảng'], ['nhanSu', 'Nhân sự']],
   SoLieu: [['id', 'ID'], ['tuan', 'Tuần (thứ 2)'], ['duAn', 'Dự án'], ['nhanSu', 'Nhân sự'], ['nenTang', 'Nền tảng'],

@@ -16,6 +16,13 @@
   header { position:sticky; top:0; z-index:5; background:var(--card); border-bottom:1px solid var(--line); }
   .bar { max-width:1200px; margin:0 auto; padding:10px 16px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
   .bar h1 { font-size:17px; margin:0; }
+  .brandmark { font-weight:800; font-size:20px; letter-spacing:-.02em; }
+  .bm i { font-style:normal; } .bm .t1 { color:#e30613; } .bm .t2 { color:#00843d; } .bm .t3 { color:#a8782a; margin-left:3px; font-weight:600; letter-spacing:.02em; }
+  .bm-all { font-size:14px; font-weight:700; color:var(--muted); }
+  .seg { display:inline-flex; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  .seg button { background:transparent; color:var(--muted); border-radius:0; padding:5px 12px; font-size:13px; }
+  .seg button + button { border-left:1px solid var(--line); }
+  .seg button.on { background:var(--accent); color:#fff; }
   .bar .sp { flex:1; }
   .bar a { color:var(--muted); font-size:13px; }
   nav { max-width:1200px; margin:0 auto; padding:0 16px; display:flex; gap:4px; overflow-x:auto; }
@@ -117,7 +124,10 @@
 <div id="app" hidden>
   <header>
     <div class="bar">
+      <span id="brandMark" class="brandmark"></span>
       <h1>CRM Báo cáo Marketing</h1>
+      <div id="brandSwitch" class="seg" role="group" aria-label="Đơn vị"></div>
+      <button type="button" id="brandLink" class="link small" hidden title="Chép link chỉ mở bên này">Chép link riêng</button>
       <span class="sp"></span>
       <span id="who" class="muted"></span>
       <a id="sheetLink" target="_blank" rel="noopener">Dữ liệu gốc (Google Sheet)</a>
@@ -196,7 +206,9 @@
         </div>
         <p class="hint">Dùng số liệu ở tab Nhập số liệu và ảnh ở tab Ảnh & chứng từ của tuần đã chọn; slide 1–6 là tổng, sau đó mỗi nhân sự một phần. File được lưu vào “Thư mục lưu báo cáo” của dự án (trống = My Drive). Muốn tạo từ thư mục Drive có sẵn: <a id="rpProjectLink" target="_top">trang Báo cáo từ thư mục Drive</a>.</p>
       </section>
-      <section class="card"><h3>Lịch sử báo cáo</h3><div class="wrap" id="rpTable"></div></section>
+      <section class="card"><div class="sec-head"><h3>Lịch sử báo cáo</h3><button type="button" id="rpShare" class="ghost small" hidden></button></div>
+        <p class="hint">File báo cáo được bật chia sẻ “Bất kỳ ai có đường liên kết đều xem được” – chỉ cần gửi link, các bạn mở xem/tải PDF không cần xin quyền.</p>
+        <div class="wrap" id="rpTable"></div></section>
     </div>
 
     <!-- DANH MỤC -->
