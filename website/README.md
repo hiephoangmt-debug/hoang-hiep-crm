@@ -30,16 +30,16 @@ Mỗi trang có title/description/keywords riêng, canonical, Open Graph, schema
 - AI tuỳ chọn qua CRM: xem mục *Chat AI* trong `crm/README.md`. Tắt AI: `CONFIG.chatAI = false`. Tắt lời chào tự hiện: `chatTeaserSeconds: 0`.
 - Mở chat từ link bất kỳ: thêm `#chat` vào cuối URL.
 
-## Kết nối hoanghiepmt.com (hoặc website/landing page khác) với CRM
+## Kết nối hiephoangmt.com (hoặc website/landing page khác) với CRM
 
-- fpt-city.com đã liên kết về **hoanghiepmt.com** (menu, chân trang, schema `RealEstateAgent`) – cấu hình ở `site.agent` trong `src/data.mjs`.
-- Để khách điền form trên hoanghiepmt.com cũng vào **Hoàng Hiệp CRM**, dán đoạn sau trước `</body>` của site đó
+- fpt-city.com đã liên kết về **hiephoangmt.com** (menu, chân trang, schema `RealEstateAgent`) – cấu hình ở `site.agent` trong `src/data.mjs`.
+- Để khách điền form trên hiephoangmt.com cũng vào **Hoàng Hiệp CRM**, dán đoạn sau trước `</body>` của site đó
   (WordPress: plugin *Insert Headers and Footers* / LadiPage: *Cài đặt › Mã HTML/JS trước thẻ đóng body*):
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@575c4f2444cdc28b2bfcc103c46e800c8a1446c0/website/public/assets/js/hh-connect.js"
         data-endpoint="https://script.google.com/macros/s/XXXX/exec"
-        data-project="hoanghiepmt.com"
+        data-project="hiephoangmt.com"
         data-buttons="true" data-hotline="0904567009" data-zalo="0904567009" defer></script>
 ```
 
@@ -53,7 +53,7 @@ Mỗi trang có title/description/keywords riêng, canonical, Open Graph, schema
 `public/assets/js/fc-widget.js` (sinh bởi `node src/build-widget.mjs` sau `build.mjs`) tạo cụm nút ở **góc dưới bên phải**:
 💬 Chat tự động, Zalo, 📞 Gọi. Nằm trong Shadow DOM nên CSS của trang không làm hỏng; tự nhận dự án theo URL
 (`/fpt-plaza-4`, `/phan-khu-v5`…), có sẵn kho kiến thức, tra mã căn, gửi SĐT về CRM, nút "Nhận giá" cuộn tới form
-và điền mã căn vào ô `name="unit"`. Một dòng cho mọi trang (kể cả hoanghiepmt.com):
+và điền mã căn vào ô `name="unit"`. Một dòng cho mọi trang (kể cả hiephoangmt.com):
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@575c4f2444cdc28b2bfcc103c46e800c8a1446c0/website/public/assets/js/fc-widget.js"

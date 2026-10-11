@@ -142,7 +142,7 @@ const footer = () => `
     <div><b>Liên hệ</b><ul><li><a href="tel:${TEL}">${HOTLINE}</a></li><li><a href="https://zalo.me/${ZALO}">Zalo tư vấn</a></li><li><a href="${site.agent.url}">${esc(site.agent.name)}</a></li><li><a href="${BASE}/">Trang chủ</a></li></ul></div>
   </div>
   <p><b style="color:#fff">FPT City Đà Nẵng · Căn hộ FPT Plaza &amp; đất nền</b></p>
-  <p>Tư vấn &amp; phân phối: <a href="${site.agent.url}"><b>${esc(site.agent.name)}</b> – hoanghiepmt.com</a> · Hotline <a href="tel:${TEL}">${HOTLINE}</a></p>
+  <p>Tư vấn &amp; phân phối: <a href="${site.agent.url}"><b>${esc(site.agent.name)}</b> – hiephoangmt.com</a> · Hotline <a href="tel:${TEL}">${HOTLINE}</a></p>
   <p style="font-size:12px;opacity:.65">Thông tin, hình ảnh và số liệu mang tính tham khảo, có thể thay đổi theo công bố chính thức của chủ đầu tư (${esc(investor)}). Website do đơn vị tư vấn – phân phối vận hành, không phải trang chính thức của Tập đoàn FPT.</p>
 </div></footer>
 <div class="fabs"><a class="fab fab-chat" href="https://zalo.me/${ZALO}" aria-label="Chat tư vấn">💬</a><a class="fab fab-zalo" href="https://zalo.me/${ZALO}">Zalo</a><a class="fab fab-call" href="tel:${TEL}" aria-label="Gọi ngay"><svg width="22" height="22" style="display:inline-block;vertical-align:middle" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg></a></div>`;
@@ -290,7 +290,7 @@ const contactSection = (name) => `
   <div class="grid3">
     <a class="tile" href="tel:${TEL}"><span class="pill">GỌI NGAY</span><h3>${HOTLINE}</h3><p>Hotline tư vấn đất nền &amp; căn hộ FPT Plaza.</p><span class="go">Gọi ngay →</span></a>
     <a class="tile" href="https://zalo.me/${ZALO}"><span class="pill re">ZALO</span><h3>Nhắn Zalo tư vấn</h3><p>Nhận bảng giá, mặt bằng và giỏ hàng qua Zalo.</p><span class="go">Mở Zalo →</span></a>
-    <a class="tile" href="${site.agent.url}"><span class="pill">WEBSITE</span><h3>${esc(site.agent.name)}</h3><p>Đơn vị tư vấn – phân phối. hoanghiepmt.com</p><span class="go">Xem website →</span></a>
+    <a class="tile" href="${site.agent.url}"><span class="pill">WEBSITE</span><h3>${esc(site.agent.name)}</h3><p>Đơn vị tư vấn – phân phối. hiephoangmt.com</p><span class="go">Xem website →</span></a>
   </div></div></section>`;
 const finalCta = (title, steps, formTitle, formHtml) => `
 <section id="dang-ky-cuoi" class="dark"><div class="wrap two">
@@ -522,7 +522,7 @@ ${faqSection("Câu hỏi thường gặp về FPT City Đà Nẵng", faq)}
   <div class="grid3">
     <a class="tile" href="tel:${TEL}"><span class="pill">GỌI NGAY</span><h3>${HOTLINE}</h3><p>Hotline tư vấn đất nền &amp; căn hộ FPT Plaza.</p><span class="go">Gọi ngay →</span></a>
     <a class="tile" href="https://zalo.me/${ZALO}"><span class="pill re">ZALO</span><h3>Nhắn Zalo tư vấn</h3><p>Nhận bảng giá, mặt bằng và giỏ hàng qua Zalo.</p><span class="go">Mở Zalo →</span></a>
-    <a class="tile" href="${site.agent.url}"><span class="pill">WEBSITE</span><h3>${site.agent.name}</h3><p>Đơn vị tư vấn – phân phối. hoanghiepmt.com</p><span class="go">Xem website →</span></a>
+    <a class="tile" href="${site.agent.url}"><span class="pill">WEBSITE</span><h3>${site.agent.name}</h3><p>Đơn vị tư vấn – phân phối. hiephoangmt.com</p><span class="go">Xem website →</span></a>
   </div></div></section>
 
 <section id="dang-ky-cuoi" class="dark"><div class="wrap two">

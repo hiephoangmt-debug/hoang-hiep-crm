@@ -8,7 +8,7 @@ export const site = {
   drive: "https://drive.google.com/drive/folders/THAY_ID_THU_MUC",
   updated: "2026-10-10",
   // Đơn vị tư vấn – website chính
-  agent: { name: "Hoàng Hiệp", url: "https://hoanghiepmt.com/", phone: "0904 567 009" },
+  agent: { name: "Hoàng Hiệp", url: "https://hiephoangmt.com/", phone: "0904 567 009" },
 };
 
 export const investor = "Công ty Cổ phần Đô thị FPT Đà Nẵng (FPT City) – thành viên Tập đoàn FPT";
@@ -67,7 +67,7 @@ export const plazas = [
   },
   {
     slug: "fpt-plaza-3",
-    progressUrl: "https://hoanghiepmt.com/",
+    progressUrl: "https://hiephoangmt.com/",
     stats: [["837", "Căn hộ"], ["2", "Tòa E & W"], ["25", "Tầng nổi"], ["646", "Căn 2PN"]],
     name: "FPT Plaza 3",
     status: "primary",

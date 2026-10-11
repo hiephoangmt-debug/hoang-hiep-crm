@@ -1,5 +1,5 @@
 /*!
- * hh-connect.js – nối form của bất kỳ website nào (hoanghiepmt.com, LadiPage, WordPress…) với Hoàng Hiệp CRM.
+ * hh-connect.js – nối form của bất kỳ website nào (hiephoangmt.com, LadiPage, WordPress…) với Hoàng Hiệp CRM.
  *
  * Dán trước </body>:
  *   <script src="https://fpt-city.com/assets/js/hh-connect.js"
