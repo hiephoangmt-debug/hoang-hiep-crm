@@ -397,6 +397,23 @@
     renderEntries();
   }
 
+  /** Ghi số đọc từ ảnh (nguồn "anh") của dự án + tuần vào Google Sheet số liệu của dự án: chỉ ô trống / ô app đã ghi. */
+  async function pushToSheet(pjName, w) {
+    const groups = new Map();
+    S.SoLieu.filter((r) => r.nguon === "anh" && r.duAn === pjName && r.tuan === w).forEach((r) => {
+      const key = r.nenTang + "|" + (digitsOf(r.taiKhoan) || r.nhanSu);
+      const g = groups.get(key) || { nenTang: r.nenTang, taiKhoan: r.taiKhoan || "", nhanSu: r.nhanSu || "", chiPhi: 0, lead: 0, luotXem: "" };
+      g.chiPhi += num(r.chiPhi);
+      g.lead += num(r.lead);
+      if (r.luotXem !== "" && r.luotXem != null) g.luotXem = num(g.luotXem) + num(r.luotXem);
+      groups.set(key, g);
+    });
+    if (!groups.size) return null;
+    return gas("crmWriteSheet", pjName, w, Array.from(groups.values()));
+  }
+  const pushNote = (res) => !res ? "" : ` Google Sheet: đã điền ${res.written} ô` + (res.kept ? `, giữ nguyên ${res.kept} ô đã có số` : "") +
+    (res.noRow.length ? `, hết dòng trống cho ${res.noRow.join(", ")} (thêm dòng trong tuần rồi bấm "Ghi số từ ảnh vào Google Sheet")` : "") + ".";
+
   // ------------------------------------------------------------ CHỨNG TỪ
   // Hướng dẫn nghiệm thu theo mẫu COLLECTION (slide 8–25): ảnh cần chụp cho từng kênh + các mục phải khoanh
   const REQ = {
@@ -585,7 +602,13 @@
     });
     pending.forEach((p) => URL.revokeObjectURL(p.url));
     pending = [];
-    toast(`Đã lưu ${n} chứng từ vào Drive (Nhân sự/${pj}/${weekLabel(w)})` + (nRows ? ` và ${nRows} dòng số liệu đọc từ ảnh (xem tab Nhập số liệu).` : "."), "ok");
+    let sheetNote = "", sheetErr = false;
+    if (nRows) {
+      toast("Đang ghi số vào Google Sheet của dự án…", "busy");
+      try { sheetNote = pushNote(await pushToSheet(pj, w)); }
+      catch (e) { sheetNote = " Chưa ghi được vào Google Sheet: " + e.message; sheetErr = true; }
+    }
+    toast(`Đã lưu ${n} chứng từ vào Drive (Nhân sự/${pj}/${weekLabel(w)})` + (nRows ? ` và ${nRows} dòng số liệu đọc từ ảnh (xem tab Nhập số liệu).` : ".") + sheetNote, sheetErr ? "err" : "ok");
     renderEvidence();
   }
 
@@ -866,6 +889,13 @@
     });
     window.addEventListener("beforeunload", (e) => { if (drafts.size) { e.preventDefault(); e.returnValue = ""; } });
     $("enImport").addEventListener("click", () => importSheet().catch(() => {}));
+    $("enPush").addEventListener("click", async () => {
+      const pj = $("enProject").value, w = $("enWeek").value;
+      try {
+        const res = await run("Đang ghi vào Google Sheet", () => pushToSheet(pj, w));
+        toast(res ? (pushNote(res).trim() || "Đã ghi.") : `Tuần ${weekLabel(w)} của ${pj} chưa có số đọc từ ảnh.`, res ? "ok" : "");
+      } catch (_) { /* đã báo */ }
+    });
     $("enTable").addEventListener("click", (e) => {
       const b = e.target.closest("button");
       if (!b) return;

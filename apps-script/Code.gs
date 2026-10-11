@@ -389,6 +389,110 @@ function crmDelete(name, ids) {
   });
 }
 
+// ---------------------------------------------------------------------
+// Ghi số đọc từ ảnh vào Google Sheet số liệu của dự án (mẫu "Thời gian | Facebook | Tiktok | Zalo | Google").
+// Chỉ ghi vào ô trống (không công thức) hoặc ô do chính app đã ghi trước đó (có ghi chú SHEET_NOTE).
+// ---------------------------------------------------------------------
+var SHEET_NOTE = 'Tự điền từ ảnh nghiệm thu (CRM).';
+var SHEET_PLATFORMS = ['Facebook', 'Tiktok', 'Zalo', 'Google'];
+var SHEET_METRICS = [['chi phi thuc chay (+', 'chiPhiPhi'], ['chi phi thuc chay', 'chiPhi'], ['id tai khoan', 'taiKhoan'],
+  ['lead', 'lead'], ['impressions', 'hienThi'], ['reach', 'tiepCan'], ['luot nhap', 'luotNhap'], ['luot xem', 'luotXem']];
+
+function crmPlain_(s) {
+  return String(s == null ? '' : s).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D')
+    .toLowerCase().replace(/\s+/g, ' ').trim();
+}
+function crmDigits_(s) { return (String(s || '').match(/\d{6,}/) || [''])[0]; }
+
+/** Nhãn tuần "05/10 - 11/10" có chứa ngày thứ 2 isoMonday (yyyy-mm-dd) không. */
+function crmLabelHasWeek_(label, isoMonday) {
+  var m = /^(\d{1,2})\/(\d{1,2})\s*-\s*(\d{1,2})\/(\d{1,2})/.exec(String(label || '').trim());
+  if (!m) return false;
+  var p = isoMonday.split('-').map(Number), y = p[0];
+  var t = Date.UTC(y, p[1] - 1, p[2]);
+  var a = Date.UTC(y, +m[2] - 1, +m[1]), b = Date.UTC(+m[4] < +m[2] ? y + 1 : y, +m[4] - 1, +m[3]);
+  if (a > t + 200 * 864e5) a = Date.UTC(y - 1, +m[2] - 1, +m[1]); // tuần cuối năm trước
+  return a <= t && t <= b;
+}
+
+/**
+ * items: [{nenTang, taiKhoan, nhanSu, chiPhi, lead, luotXem, ...}] – tổng theo tài khoản/kênh của tuần.
+ * Trả {written, kept, noRow, sheetUrl}.
+ */
+function crmWriteSheet(duAn, tuan, items) {
+  var project = crmRows_('DuAn').filter(function (p) { return p.ten === duAn; })[0];
+  if (!project) throw new Error('Không có dự án ' + duAn);
+  var m = /\/d\/([\w-]{15,})/.exec(project.nguonSoLieu || '');
+  if (!m) throw new Error('Dự án ' + duAn + ' chưa có link Google Sheet số liệu (tab Danh mục).');
+  var file = DriveApp.getFileById(m[1]);
+  if (file.getMimeType() !== MimeType.GOOGLE_SHEETS) {
+    throw new Error('File số liệu của ' + duAn + ' là file Excel (.xlsx), app không ghi vào được. Mở file › Tệp › Lưu dưới dạng Google Trang tính, rồi dán link mới vào tab Danh mục.');
+  }
+  return crmWithLock_(function () {
+    var ss = SpreadsheetApp.openById(m[1]);
+    var sh = ss.getSheets()[0];
+    var rng = sh.getDataRange();
+    var vals = rng.getValues(), forms = rng.getFormulas(), notes = rng.getNotes();
+    var hdr = -1;
+    for (var i = 0; i < vals.length && hdr < 0; i++) {
+      if (vals[i].filter(function (c) { return SHEET_PLATFORMS.indexOf(String(c).trim()) >= 0; }).length >= 2) hdr = i;
+    }
+    if (hdr < 0) throw new Error('Không tìm thấy dòng tiêu đề Facebook/Tiktok/Zalo/Google trong sheet của ' + duAn + '.');
+    var starts = [];
+    vals[hdr].forEach(function (c, j) { if (SHEET_PLATFORMS.indexOf(String(c).trim()) >= 0) starts.push([String(c).trim(), j]); });
+    var cols = {};
+    starts.forEach(function (st, k) {
+      var end = Math.min(k + 1 < starts.length ? starts[k + 1][1] : st[1] + 11, st[1] + 12), mm = {};
+      for (var j = st[1]; j < end; j++) {
+        var h = crmPlain_(vals[hdr + 1][j]);
+        for (var q = 0; q < SHEET_METRICS.length; q++) {
+          if (h.indexOf(SHEET_METRICS[q][0]) === 0 && !(SHEET_METRICS[q][1] in mm)) { mm[SHEET_METRICS[q][1]] = j; break; }
+        }
+      }
+      cols[st[0]] = mm;
+    });
+    // các dòng của tuần: từ dòng có nhãn tuần tới nhãn tuần kế tiếp / dòng TỔNG
+    var rows = [], inWeek = false;
+    for (var r = hdr + 2; r < vals.length; r++) {
+      var lab = String(vals[r][0] || '').trim();
+      if (crmPlain_(lab).indexOf('tong') === 0) break;
+      if (/^\d{1,2}\/\d{1,2}\s*-\s*\d{1,2}\/\d{1,2}/.test(lab)) { if (inWeek) break; inWeek = crmLabelHasWeek_(lab, tuan); }
+      if (inWeek) rows.push(r);
+    }
+    if (!rows.length) throw new Error('Sheet của ' + duAn + ' không có dòng tuần chứa ngày ' + tuan + '.');
+    var res = { written: 0, kept: 0, noRow: [], sheetUrl: ss.getUrl() };
+    var mine = function (r, c) { return String(notes[r][c] || '').indexOf(SHEET_NOTE) === 0; };
+    var free = function (r, c) { return c != null && !forms[r][c] && (vals[r][c] === '' || vals[r][c] === null || mine(r, c)); };
+    var used = {};
+    items.forEach(function (it) {
+      var plat = SHEET_PLATFORMS.filter(function (p) { return crmPlain_(p) === crmPlain_(it.nenTang); })[0];
+      var c = plat && cols[plat];
+      if (!c || c.taiKhoan == null) { res.noRow.push(it.nenTang + ' ' + (it.nhanSu || it.taiKhoan)); return; }
+      var id = crmDigits_(it.taiKhoan), name = crmPlain_(it.nhanSu);
+      var cell = function (r) { return String(vals[r][c.taiKhoan] || ''); };
+      var row = rows.filter(function (r) { return id && crmDigits_(cell(r)) === id; })[0];
+      if (row == null && !id && name) row = rows.filter(function (r) { return crmPlain_(cell(r)).indexOf(name) >= 0; })[0];
+      if (row == null) {
+        row = rows.filter(function (r) {
+          return !used[plat + r] && !cell(r).trim() && ['chiPhi', 'chiPhiPhi', 'lead'].every(function (k) { return c[k] == null || forms[r][c[k]] || vals[r][c[k]] === '' || vals[r][c[k]] === null; });
+        })[0];
+        if (row == null) { res.noRow.push(plat + ' ' + (it.nhanSu || it.taiKhoan)); return; }
+        var label = ((it.nhanSu ? it.nhanSu + ' ' : '') + (id || '')).trim();
+        if (label) { sh.getRange(row + 1, c.taiKhoan + 1).setValue(label).setNote(SHEET_NOTE); vals[row][c.taiKhoan] = label; }
+      }
+      used[plat + row] = true;
+      ['chiPhi', 'chiPhiPhi', 'lead', 'hienThi', 'tiepCan', 'luotNhap', 'luotXem'].forEach(function (k) {
+        var v = it[k];
+        if (v === '' || v == null || c[k] == null) return;
+        if (!free(row, c[k])) { res.kept++; return; }
+        sh.getRange(row + 1, c[k] + 1).setValue(Number(v)).setNote(SHEET_NOTE);
+        res.written++;
+      });
+    });
+    return res;
+  });
+}
+
 /** Nhập số liệu từ Google Sheet: thay các dòng nguồn "sheet" của dự án trong những tuần được nhập. */
 function crmImportEntries(duAn, weeks, list) {
   return crmWithLock_(function () {

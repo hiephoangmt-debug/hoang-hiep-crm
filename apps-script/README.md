@@ -34,7 +34,12 @@ Trang tự đọc chữ trong ảnh:
 - Ảnh **Trình quản lý quảng cáo** (điện thoại/máy tính) hoặc **Meta Business Suite** → loại *Chiến dịch* + danh sách chiến dịch với **số chi tiêu, lead**; chiến dịch trong tuần được tick sẵn – sửa số nếu đọc sai.
 - **Bản xem trước quảng cáo** → *QC đang chạy*; **hoá đơn** (ảnh hoặc PDF) → *Hóa đơn*, gán người theo ID tài khoản in trên hoá đơn.
 
-Bấm **Tải lên Drive**: ảnh lưu vào `Thư mục chứng từ/<Nhân sự>/<Dự án>/<tuần>/`, số chiến dịch đã tick vào bảng số liệu.
+Bấm **Tải lên Drive**: ảnh lưu vào `Thư mục chứng từ/<Nhân sự>/<Dự án>/<tuần>/`, số chiến dịch đã tick vào bảng số liệu
+và **tự điền vào Google Sheet số liệu của dự án** (link ở tab Danh mục): đúng khối tuần, đúng nhóm cột kênh, dòng có ID tài khoản
+(hoặc tên) của nhân sự, không có thì dòng trống đầu tiên của tuần. Chỉ ghi chi phí thực chạy, lead, lượt xem vào ô trống;
+ô đã có số, ô công thức giữ nguyên; ô app đã ghi có ghi chú "Tự điền từ ảnh nghiệm thu (CRM)" và được cập nhật ở lần sau.
+File phải là Google Trang tính (file .xlsx: *Tệp › Lưu dưới dạng Google Trang tính* rồi dán link mới vào Danh mục).
+Ghi lại bằng tay: tab Nhập số liệu › **Ghi số từ ảnh vào Google Sheet**.
 
 **Quản lý:**
 - **Nhập số liệu**: xem/sửa từng dòng, thêm tay (kể cả MQL/SQL/DEAL – sẽ điền vào báo cáo), hoặc **Nhập từ Google Sheet của dự án** (thay các dòng nhập từ sheet trước đó của cùng tuần). Nếu một người vừa có số từ sheet/nhập tay vừa có số đọc từ ảnh, chỉ số sheet/nhập tay được tính.
