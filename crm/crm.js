@@ -889,12 +889,17 @@
     const b64 = await B.blobToB64(res.blob);
     const out = { tuan: w, duAn: pjName, trangThai: "Nháp", pdfUrl: "", pptxUrl: "",
       tomTat: `${res.slides} slide, ${res.staffCount} nhân sự, ${res.nImg} ảnh` + (res.missing ? `, thiếu ${res.missing} ảnh nghiệm thu` : "") };
-    if (fmt !== "pdf") { toast(`${pjName}: lưu PPTX…`, "busy"); out.pptxUrl = await gas("saveReport", b64, name, folder, true); }
-    if (fmt !== "pptx") { toast(`${pjName}: chuyển PDF…`, "busy"); out.pdfUrl = (await gas("convertToPdf", b64, name, folder, true)).url; }
+    // tạo lại: ghi đè vào file cũ để link đã gửi nhóm vẫn mở được bản mới
     const prev = S.BaoCao.find((r) => r.duAn === pjName && r.tuan === w);
+    if (fmt !== "pdf") { toast(`${pjName}: lưu PPTX…`, "busy"); out.pptxUrl = await gas("saveReport", b64, name, folder, true, prev ? prev.pptxUrl : ""); }
+    if (fmt !== "pptx") { toast(`${pjName}: chuyển PDF…`, "busy"); out.pdfUrl = (await gas("convertToPdf", b64, name, folder, true, prev ? prev.pdfUrl : "")).url; }
     if (prev) out.id = prev.id;
+    out.ngayTao = nowStamp(); // lần tạo gần nhất (để biết có ảnh/số mới sau đó không)
     const saved = await gas("crmSave", "BaoCao", out);
     S.BaoCao = S.BaoCao.filter((r) => r.id !== saved.id).concat(saved);
+    // file cũ không ghi đè được (đã đổi định dạng / bị xoá…): bỏ bản cũ vào thùng rác
+    const stale = prev ? [prev.pdfUrl, prev.pptxUrl].filter((u) => u && u !== saved.pdfUrl && u !== saved.pptxUrl) : [];
+    if (stale.length) { try { await gas("crmTrashReportFiles", stale); } catch (e) { console.error(e); } }
     return saved;
   }
   async function generateReports() {
@@ -922,6 +927,12 @@
     catch (_) { prompt("Chép " + what + ":", text); }
   }
 
+  const nowStamp = () => { const d = new Date(); return `${isoOf(d)} ${pad(d.getHours())}:${pad(d.getMinutes())}`; };
+  /** Số ảnh / dòng số liệu thêm vào sau lần tạo báo cáo r. */
+  function newSince(r) {
+    const after = (x) => x.duAn === r.duAn && x.tuan === r.tuan && String(x.ngayTao) > String(r.ngayTao);
+    return { anh: S.ChungTu.filter(after).length, so: S.SoLieu.filter(after).length };
+  }
   function renderReports() {
     const rows = S.BaoCao.filter((r) => inBrand(r.duAn)).sort((a, b) => String(b.tuan + b.ngayTao).localeCompare(String(a.tuan + a.ngayTao)));
     const wk = S.BaoCao.filter((r) => inBrand(r.duAn) && r.tuan === $("rpWeek").value && (r.pdfUrl || r.pptxUrl));
@@ -932,7 +943,7 @@
         <td><select data-rp="${esc(r.id)}" class="st-${STATUSES.indexOf(r.trangThai)}">${STATUSES.map((s) => opt(s, s, r.trangThai)).join("")}</select></td>
         <td>${r.pdfUrl ? `<a href="${esc(r.pdfUrl)}" target="_blank" rel="noopener">PDF</a>` : ""} ${r.pptxUrl ? `<a href="${esc(r.pptxUrl)}" target="_blank" rel="noopener">PPTX</a>` : ""}
           ${r.pdfUrl || r.pptxUrl ? `<button type="button" class="link" data-copy="${esc(r.id)}">Chép link</button>` : ""}</td>
-        <td>${esc(r.tomTat)}</td><td class="muted">${esc(r.nguoiTao)}</td><td class="muted">${esc(r.ngayTao)}</td></tr>`).join("")}</tbody></table>`
+        <td>${esc(r.tomTat)}${(() => { const n = newSince(r); return n.anh || n.so ? `<br><b class="warn-text">Có ${[n.anh && n.anh + " ảnh", n.so && n.so + " dòng số liệu"].filter(Boolean).join(", ")} mới sau lần tạo này – chọn tuần/dự án này và bấm “Tạo báo cáo” để cập nhật.</b>` : ""; })()}</td><td class="muted">${esc(r.nguoiTao)}</td><td class="muted">${esc(r.ngayTao)}</td></tr>`).join("")}</tbody></table>`
       : `<p class="muted">Chưa có báo cáo nào.</p>`;
   }
 

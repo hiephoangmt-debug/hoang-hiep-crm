@@ -100,8 +100,47 @@ function shareByLink_(file) {
   return file;
 }
 
-/** Lưu PPTX báo cáo vào Drive (thư mục chỉ định hoặc My Drive), trả về link. share = bật xem qua link. */
-function saveReport(b64, name, folderId, share) {
+/** Tạo lại báo cáo: bỏ file PDF/PPTX cũ vào thùng rác (chỉ file báo cáo "Bao_cao_…" không còn dòng BaoCao nào dùng). */
+function crmTrashReportFiles(urls) {
+  var inUse = JSON.stringify(crmRows_('BaoCao'));
+  var n = 0;
+  [].concat(urls || []).forEach(function (u) {
+    var m = /\/d\/([\w-]{15,})/.exec(u || '');
+    if (!m || inUse.indexOf(m[1]) >= 0) return;
+    try {
+      var f = DriveApp.getFileById(m[1]);
+      if (/^Bao_cao_/.test(f.getName())) { f.setTrashed(true); n++; }
+    } catch (e) { /* đã xoá */ }
+  });
+  return n;
+}
+
+/** File báo cáo cũ (link replaceUrl) còn dùng được để ghi đè – giữ nguyên link đã gửi. */
+function reportFileToReplace_(replaceUrl) {
+  var m = /\/d\/([\w-]{15,})/.exec(replaceUrl || '');
+  if (!m) return null;
+  try {
+    var f = DriveApp.getFileById(m[1]);
+    return !f.isTrashed() && /^Bao_cao_/.test(f.getName()) ? f : null;
+  } catch (e) { return null; }
+}
+/** Ghi nội dung mới vào file Drive có sẵn (link không đổi). */
+function overwriteFile_(file, bytes, mime) {
+  var res = UrlFetchApp.fetch('https://www.googleapis.com/upload/drive/v3/files/' + file.getId() + '?uploadType=media&supportsAllDrives=true', {
+    method: 'patch', contentType: mime, payload: bytes,
+    headers: { Authorization: 'Bearer ' + ScriptApp.getOAuthToken() }, muteHttpExceptions: true,
+  });
+  return res.getResponseCode() === 200;
+}
+
+/** Lưu PPTX báo cáo vào Drive (thư mục chỉ định hoặc My Drive), trả về link. share = bật xem qua link.
+ *  replaceUrl: link file báo cáo cũ của cùng tuần/dự án – ghi đè vào đó để link đã gửi vẫn mở được bản mới. */
+function saveReport(b64, name, folderId, share, replaceUrl) {
+  var old = reportFileToReplace_(replaceUrl);
+  if (old && overwriteFile_(old, Utilities.base64Decode(b64), PPTX_MIME)) {
+    if (share) shareByLink_(old);
+    return old.getUrl();
+  }
   var blob = Utilities.newBlob(Utilities.base64Decode(b64), PPTX_MIME, name);
   var folder = folderId ? DriveApp.getFolderById(folderId) : DriveApp.getRootFolder();
   var file = folder.createFile(blob);
@@ -134,11 +173,16 @@ function pptxToSlides_(bytes, name) {
   return JSON.parse(res.getContentText()).id;
 }
 
-function convertToPdf(b64, name, folderId, share) {
+function convertToPdf(b64, name, folderId, share, replaceUrl) {
   var tmpId = pptxToSlides_(Utilities.base64Decode(b64), name);
   try {
     var pdf = exportBlob_('https://docs.google.com/presentation/d/' + tmpId + '/export/pdf')
       .setName(name.replace(/\.pptx$/i, '') + '.pdf');
+    var old = reportFileToReplace_(replaceUrl);
+    if (old && overwriteFile_(old, pdf.getBytes(), 'application/pdf')) {
+      if (share) shareByLink_(old);
+      return { url: old.getUrl(), b64: share ? '' : Utilities.base64Encode(pdf.getBytes()) };
+    }
     var folder = folderId ? DriveApp.getFolderById(folderId) : DriveApp.getRootFolder();
     var file = folder.createFile(pdf);
     if (share) shareByLink_(file);
