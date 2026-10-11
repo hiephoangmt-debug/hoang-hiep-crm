@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 09/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.5** + plugin Hoàng Hiệp CRM **2.20.18**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.6** + plugin Hoàng Hiệp CRM **2.20.18**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.6: trang /en/, /ko/ có danh sách dự án người nước ngoài được mua + bản đồ
+
+- Mục mới "Projects approved for foreign ownership" / "다낭 외국인 소유 허용 프로젝트": 9 dự án theo các đợt công bố 4 – 7 (11/2024 – 2026), tên gọi theo văn bản, chủ đầu tư, số căn tối đa cho người nước ngoài, nhãn "đang có tin rao bán".
+- Bấm "Show on map" / "지도에서 보기" ở từng dự án: bản đồ Google bên cạnh (điện thoại: phía trên) chuyển tới vị trí dự án. Dự án có tọa độ trong trang dự án thì dùng tọa độ đó.
+- Dữ liệu sửa ở hàm hh_foreign_projects() trong giao diện/inc/lang-strings.php.
 
 ## Có gì mới – giao diện 2.15.5 + plugin 2.20.18: chiết khấu hiện số cộng thẳng
 

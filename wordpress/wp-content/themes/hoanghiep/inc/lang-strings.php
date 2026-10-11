@@ -10,7 +10,7 @@ function hh_lang_strings( $code ) {
 	$s = array(
 		'en' => array(
 			'skip'          => 'Skip to content',
-			'nav'           => array( 'projects' => 'Projects', 'ownership' => 'Foreign ownership', 'services' => 'Services', 'process' => 'Buying process', 'about' => 'About', 'contact' => 'Contact' ),
+			'nav'           => array( 'ownership' => 'Foreign ownership', 'approved' => 'Approved projects', 'projects' => 'On sale', 'services' => 'Services', 'process' => 'Buying process', 'about' => 'About', 'contact' => 'Contact' ),
 			'hotline'       => 'Call / Zalo',
 			'hours'         => '8:00 am – 9:00 pm, every day',
 			'brand_tag'     => 'Da Nang real estate advisor',
@@ -92,7 +92,7 @@ function hh_lang_strings( $code ) {
 		),
 		'ko' => array(
 			'skip'          => '본문 바로가기',
-			'nav'           => array( 'projects' => '분양 프로젝트', 'ownership' => '외국인 소유', 'services' => '서비스', 'process' => '구매 절차', 'about' => '소개', 'contact' => '상담 문의' ),
+			'nav'           => array( 'ownership' => '외국인 소유', 'approved' => '허용 프로젝트', 'projects' => '분양 중', 'services' => '서비스', 'process' => '구매 절차', 'about' => '소개', 'contact' => '상담 문의' ),
 			'hotline'       => '전화 / Zalo',
 			'hours'         => '매일 오전 8시 – 오후 9시',
 			'brand_tag'     => '다낭 부동산 전문가',
@@ -207,4 +207,149 @@ function hh_lang_date( $raw, $code ) {
 		return 'ko' === $code ? $m[1] . '년' : $m[1];
 	}
 	return '';
+}
+
+/**
+ * Dự án nhà ở thương mại UBND / Sở Xây dựng Đà Nẵng công bố cho phép tổ chức, cá nhân nước ngoài sở hữu (theo Luật Nhà ở 2023),
+ * tên gọi theo văn bản công bố, số căn tối đa theo văn bản. 'selling' = thấy tin rao bán trên Batdongsan tuần 5 – 11/10/2026.
+ */
+function hh_foreign_projects() {
+	return array(
+		array(
+			'slug'    => '',
+			'en'      => 'Olalani Riverside Towers',
+			'map'     => 'Olalani Riverside Towers Đà Nẵng',
+			'ko'      => '올라라니 리버사이드 타워 (Olalani Riverside Towers)',
+			'area'    => array( 'Nai Hien Dong, Son Tra', '선짜 나이히엔동' ),
+			'dev'     => array( 'My Phuc JSC', '미푹 주식회사' ),
+			'quota'   => array( '427 apartments + 87 landed houses', '아파트 427세대 + 단독주택 87채' ),
+			'batch'   => array( 'Batch 4 · Nov 2024', '4차 · 2024년 11월' ),
+			'selling' => false,
+		),
+		array(
+			'slug'    => '',
+			'en'      => 'Apartment towers on lots B4-1 & B4-2, Han River Tourism Service Area (The Panoma)',
+			'map'     => 'The Panoma Đà Nẵng',
+			'ko'      => '다낭 한강변 관광서비스구역 B4-1·B4-2 부지 아파트 (The Panoma)',
+			'area'    => array( 'My An, Ngu Hanh Son', '응우한선 미안' ),
+			'dev'     => array( 'Cu Lao Cham Tourism Trading Investment JSC (Sun Group)', '꾸라오짬 관광무역투자 주식회사 (Sun Group)' ),
+			'quota'   => array( '203 apartments', '아파트 203세대' ),
+			'batch'   => array( 'Batch 4 · Nov 2024', '4차 · 2024년 11월' ),
+			'selling' => false,
+		),
+		array(
+			'slug'    => '',
+			'en'      => 'Hoa Quy – Dong No Riverside Urban Area',
+			'map'     => 'Khu đô thị ven sông Hòa Quý Đồng Nò Đà Nẵng',
+			'ko'      => '호아꾸이–동노 강변 도시구역',
+			'area'    => array( 'Hoa Quy, Ngu Hanh Son', '응우한선 호아꾸이' ),
+			'dev'     => array( 'Dia Cau JSC', '디아까우 주식회사' ),
+			'quota'   => array( '250 villas', '빌라 250채' ),
+			'batch'   => array( 'Batch 4 · Nov 2024', '4차 · 2024년 11월' ),
+			'selling' => false,
+		),
+		array(
+			'slug'    => 'newtown-diamond-da-nang',
+			'en'      => 'New Town Commercial & Premium Sports Service Urban Area (Newtown)',
+			'map'     => 'Newtown Diamond Đà Nẵng',
+			'ko'      => '뉴타운 상업·고급 스포츠 서비스 도시구역 (Newtown)',
+			'area'    => array( 'Hoa Hai, Ngu Hanh Son', '응우한선 호아하이' ),
+			'dev'     => array( 'New Town Development Co., Ltd.', 'New Town 개발 유한회사' ),
+			'quota'   => array( '519 apartments + 250 villas', '아파트 519세대 + 빌라 250채' ),
+			'batch'   => array( 'Batch 4 · Nov 2024', '4차 · 2024년 11월' ),
+			'selling' => true,
+		),
+		array(
+			'slug'    => 'capital-square-da-nang',
+			'en'      => 'Capital Square 2 Urban Area',
+			'map'     => 'Capital Square Đà Nẵng',
+			'ko'      => 'Capital Square 2 도시구역',
+			'area'    => array( 'An Hai Bac, Son Tra', '선짜 안하이박' ),
+			'dev'     => array( 'Mega Assets Co., Ltd.', 'Mega Assets 유한회사' ),
+			'quota'   => array( '502 of 1,681 apartments', '전체 1,681세대 중 502세대' ),
+			'batch'   => array( 'Batch 5 · Feb 2025', '5차 · 2025년 2월' ),
+			'selling' => true,
+		),
+		array(
+			'slug'    => 'capital-square-da-nang',
+			'en'      => 'Capital Square 3 Urban Area',
+			'map'     => 'Capital Square Đà Nẵng',
+			'ko'      => 'Capital Square 3 도시구역',
+			'area'    => array( 'An Hai Bac, Son Tra', '선짜 안하이박' ),
+			'dev'     => array( 'SIH Real Estate Co., Ltd.', 'SIH 부동산 유한회사' ),
+			'quota'   => array( '512 of 1,710 apartments', '전체 1,710세대 중 512세대' ),
+			'batch'   => array( 'Batch 5 · Feb 2025', '5차 · 2025년 2월' ),
+			'selling' => true,
+		),
+		array(
+			'slug'    => 'masteri-da-nang',
+			'en'      => 'Tuyen Son High-rise Apartment, Commercial Office & Housing Complex (Masteri Rivera Danang)',
+			'map'     => 'Masteri Rivera Danang',
+			'ko'      => '뚜옌선 고층 아파트·상업 오피스·주택 단지 (Masteri Rivera Danang)',
+			'area'    => array( 'Quy My St., Hoa Cuong (Hai Chau)', '하이쩌우 호아끄엉 꾸이미 거리' ),
+			'dev'     => array( 'Tuyen Son Housing Development JSC', '뚜옌선 주택개발 주식회사' ),
+			'quota'   => array( '332 of 1,112 apartments (166 per tower)', '전체 1,112세대 중 332세대 (동당 166세대)' ),
+			'batch'   => array( 'Batch 6 · Feb 2026', '6차 · 2026년 2월' ),
+			'selling' => false,
+		),
+		array(
+			'slug'    => '',
+			'en'      => 'Riverside Tower (The Royal Da Nang)',
+			'map'     => 'The Royal Đà Nẵng',
+			'ko'      => '강변 타워 (The Royal Da Nang)',
+			'area'    => array( 'Han River, Hai Chau', '하이쩌우 다낭 한강변' ),
+			'dev'     => array( 'The Royal Da Nang One Member Co., Ltd.', 'The Royal Da Nang 1인 유한회사' ),
+			'quota'   => array( 'As stated in the announcement', '공고 기준' ),
+			'batch'   => array( 'Batch 7 · 2026', '7차 · 2026년' ),
+			'selling' => false,
+		),
+		array(
+			'slug'    => 'danang-landmark',
+			'en'      => 'Da Nang Landmark Commercial Center & Apartment Complex (DaNang Landmark)',
+			'map'     => 'Danang Landmark Tower Đà Nẵng',
+			'ko'      => '다낭 랜드마크 상업센터·아파트 복합단지 (DaNang Landmark)',
+			'area'    => array( 'Han River, Hai Chau', '하이쩌우 다낭 한강변' ),
+			'dev'     => array( 'Cosmos Housing JSC', 'Cosmos Housing 주식회사' ),
+			'quota'   => array( 'As stated in the announcement', '공고 기준' ),
+			'batch'   => array( 'Batch 7 · 2026', '7차 · 2026년' ),
+			'selling' => true,
+		),
+	);
+}
+
+/** Chữ cho mục danh sách dự án người nước ngoài được mua. */
+function hh_foreign_projects_text( $code ) {
+	$t = array(
+		'en' => array(
+			'h2'      => 'Projects approved for foreign ownership in Da Nang',
+			'lead'    => 'Da Nang has published these commercial housing projects in which foreign organisations and individuals may own homes (announced in batches under the 2023 Housing Law). The quota is the maximum number of units foreigners may own in each project – not the number still available.',
+			'quota'   => 'Foreign quota',
+			'dev'     => 'Developer',
+			'selling' => 'Listings available now',
+			'check'   => 'Ask for availability',
+			'view'    => 'Project details',
+			'map'     => 'Show on map',
+			'note'    => 'Source: announcements by the Da Nang People\'s Committee and Department of Construction, as reported up to October 2026. Before paying a deposit, always confirm the remaining foreign quota with the developer.',
+		),
+		'ko' => array(
+			'h2'      => '다낭 외국인 소유 허용 프로젝트',
+			'lead'    => '다낭시가 2023년 개정 주택법에 따라 차수별로 공고한, 외국인(개인·법인)이 주택을 소유할 수 있는 상업용 주택 프로젝트입니다. 한도는 각 프로젝트에서 외국인이 소유할 수 있는 최대 세대수이며, 잔여 세대수가 아닙니다.',
+			'quota'   => '외국인 소유 한도',
+			'dev'     => '시행사',
+			'selling' => '현재 매물 있음',
+			'check'   => '잔여 세대 문의',
+			'view'    => '프로젝트 상세',
+			'map'     => '지도에서 보기',
+			'note'    => '출처: 다낭시 인민위원회·건설국 공고 (2026년 10월까지 보도 기준). 예약금 납부 전 반드시 시행사에 외국인 잔여 한도를 확인하세요.',
+		),
+	);
+	return $t[ $code ] ?? $t['en'];
+}
+
+/** Link nhúng Google Maps cho 1 dự án: ưu tiên tọa độ đã nhập ở trang dự án trên web, không có thì tìm theo tên. */
+function hh_foreign_project_map( $p, $hl = 'en' ) {
+	$pp     = ! empty( $p['slug'] ) ? get_page_by_path( $p['slug'], OBJECT, 'du-an' ) : null;
+	$coords = $pp ? trim( (string) get_post_meta( $pp->ID, 'hh_p_map_coords', true ) ) : '';
+	$q      = preg_match( '/^-?\d+(\.\d+)?\s*,\s*-?\d+(\.\d+)?$/', $coords ) ? preg_replace( '/\s+/', '', $coords ) : ( $p['map'] ?? $p['en'] );
+	return 'https://maps.google.com/maps?q=' . rawurlencode( $q ) . '&hl=' . $hl . '&z=15&output=embed';
 }

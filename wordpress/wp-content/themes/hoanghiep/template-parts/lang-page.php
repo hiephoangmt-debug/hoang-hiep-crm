@@ -76,6 +76,47 @@ get_header();
 		<p class="note"><?php echo esc_html( $t['own_note'] ); ?></p>
 	</section>
 
+	<?php $fp = hh_foreign_projects_text( $code ); ?>
+	<section class="block" id="approved">
+		<h2 class="block__title"><?php echo esc_html( $fp['h2'] ); ?></h2>
+		<p class="prose"><?php echo esc_html( $fp['lead'] ); ?></p>
+		<?php $fp_list = hh_foreign_projects(); ?>
+		<div class="lx-fp-wrap">
+		<div class="lx-fp-map">
+			<iframe id="lx-fp-map" title="<?php echo esc_attr( $fp['map'] ); ?>" src="<?php echo esc_url( hh_foreign_project_map( $fp_list[4], $code ) ); ?>" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+		</div>
+		<div class="lx-fp">
+			<?php foreach ( $fp_list as $n => $p ) : ?>
+				<?php $i = 'ko' === $code ? 1 : 0; ?>
+				<article class="lx-fp__item<?php echo $p['selling'] ? ' is-selling' : ''; ?>">
+					<p class="lx-fp__batch"><?php echo esc_html( $p['batch'][ $i ] ); ?></p>
+					<h3 class="lx-fp__name"><?php echo esc_html( $p[ $code ] ?? $p['en'] ); ?></h3>
+					<p class="lx-fp__meta"><?php echo hh_icon( 'pin' ); // phpcs:ignore ?> <?php echo esc_html( $p['area'][ $i ] ); ?></p>
+					<p class="lx-fp__meta"><?php echo esc_html( $fp['dev'] . ': ' . $p['dev'][ $i ] ); ?></p>
+					<p class="lx-fp__quota"><small><?php echo esc_html( $fp['quota'] ); ?></small><b><?php echo esc_html( $p['quota'][ $i ] ); ?></b></p>
+					<p class="lx-fp__foot">
+						<span class="lx-fp__status"><?php echo esc_html( $p['selling'] ? $fp['selling'] : $fp['check'] ); ?></span>
+						<button type="button" class="lx-fp__map-btn<?php echo 4 === $n ? ' is-active' : ''; ?>" data-map="<?php echo esc_url( hh_foreign_project_map( $p, $code ) ); ?>"><?php echo hh_icon( 'pin' ); // phpcs:ignore ?> <?php echo esc_html( $fp['map'] ); ?></button>
+						<?php $pp = $p['slug'] ? get_page_by_path( $p['slug'], OBJECT, 'du-an' ) : null; ?>
+						<?php if ( $pp ) : ?><a href="<?php echo esc_url( hh_translate_url( get_permalink( $pp ), $code ) ); ?>" rel="nofollow"><?php echo esc_html( $fp['view'] ); ?> →</a><?php endif; ?>
+					</p>
+				</article>
+			<?php endforeach; ?>
+		</div>
+		</div>
+		<script>
+		document.querySelectorAll( '.lx-fp__map-btn' ).forEach( function ( b ) {
+			b.addEventListener( 'click', function () {
+				var f = document.getElementById( 'lx-fp-map' );
+				f.src = b.dataset.map;
+				document.querySelectorAll( '.lx-fp__map-btn' ).forEach( function ( x ) { x.classList.toggle( 'is-active', x === b ); } );
+				if ( window.innerWidth < 900 ) { f.scrollIntoView( { behavior: 'smooth', block: 'center' } ); }
+			} );
+		} );
+		</script>
+		<p class="note"><?php echo esc_html( $fp['note'] ); ?></p>
+	</section>
+
 	<section class="block" id="projects">
 		<h2 class="block__title"><?php echo esc_html( $t['proj_h2'] ); ?></h2>
 		<p class="prose"><?php echo esc_html( $t['proj_lead'] ); ?></p>
