@@ -117,6 +117,8 @@
   .evbar .danger:disabled { opacity:.45; cursor:not-allowed; }
   .weekpick { position:fixed; left:50%; top:30%; transform:translateX(-50%); z-index:50; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px; box-shadow:0 8px 30px rgba(0,0,0,.25); display:flex; gap:10px; align-items:end; flex-wrap:wrap; max-width:calc(100% - 32px); }
   .weekpick[hidden] { display:none; }
+  .sheetlink { align-self:center; font-weight:600; white-space:nowrap; }
+  .sheetlink[hidden] { display:none; }
   .fname { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:600; }
   .row { display:flex; gap:4px; margin-top:4px; align-items:center; }
   .row select { flex:1; font-size:12px; padding:4px; }
@@ -135,7 +137,7 @@
 </style>
 </head>
 <body>
-<div id="loading">Đang tải CRM… <small class="muted">(giao diện v12)</small></div>
+<div id="loading">Đang tải CRM… <small class="muted">(giao diện v13)</small></div>
 <div id="diag" style="max-width:760px;margin:0 auto;padding:0 16px;color:#b42318;font-size:13px"></div>
 <script>
   // Báo lỗi ngay trên màn hình (để biết trang dừng ở đâu khi không mở được bảng điều khiển trình duyệt)
@@ -191,6 +193,8 @@
         <label>Dự án<select id="enProject"></select></label>
         <label>Nhân sự<select id="enStaff"></select></label>
         <button type="button" id="enImport" class="ghost small">Nhập từ Google Sheet của dự án</button>
+        <a id="enSheet" class="sheetlink" target="_blank" rel="noopener" title="Mở Google Sheet số liệu của dự án để kiểm tra">Mở Google Sheet của dự án ↗</a>
+        <button type="button" id="enShare" class="ghost small" title="Cho các nhân sự có email ở tab Danh mục quyền sửa Google Sheet này">Chia sẻ quyền Sheet cho nhân sự</button>
         <button type="button" id="enPush" class="ghost small" title="Ghi chi tiêu, lead đọc từ ảnh vào đúng tuần/kênh trong Google Sheet của dự án (chỉ ô trống)">Ghi số từ ảnh vào Google Sheet</button>
       </div>
       <div class="savebar">
@@ -272,8 +276,8 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@31f7edd92d3d9588a73360a742d6d4cddf6f38e8/bao-cao-mkt/config.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@31f7edd92d3d9588a73360a742d6d4cddf6f38e8/bao-cao-mkt/app.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@31f7edd92d3d9588a73360a742d6d4cddf6f38e8/crm/crm.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@3352ddad2bb3708df2a1e5d83f99344f58d0bd8b/bao-cao-mkt/config.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@3352ddad2bb3708df2a1e5d83f99344f58d0bd8b/bao-cao-mkt/app.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@3352ddad2bb3708df2a1e5d83f99344f58d0bd8b/crm/crm.js"></script>
 </body>
 </html>
