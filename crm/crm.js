@@ -56,6 +56,22 @@
     return Array.from(set).sort().reverse();
   }
   const latestDataWeek = () => S.SoLieu.map((r) => r.tuan).sort().pop() || isoOf(mondayOf(new Date()));
+  /** Tháng của tuần = tháng chứa ngày thứ 5 (tuần vắt qua 2 tháng chỉ thuộc 1 tháng). "2026-09-28" -> "2026-10" */
+  const weekMonth = (iso) => { const d = parseIso(iso); d.setDate(d.getDate() + 3); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}`; };
+  const monthLabel = (m) => `Tháng ${+m.slice(5, 7)}/${m.slice(0, 4)}`;
+  /** Kỳ báo cáo: tuần "2026-10-05", tháng "2026-10", toàn chiến dịch "all". */
+  const kyOf = (key) => (/^\d{4}-\d{2}-\d{2}$/.test(key) ? "tuan" : /^\d{4}-\d{2}$/.test(key) ? "thang" : "all");
+  function periodLabel(key, withYear) {
+    const ky = kyOf(key);
+    return ky === "tuan" ? "tuần " + weekLabel(key, withYear) : ky === "thang" ? monthLabel(key).toLowerCase() : "toàn chiến dịch";
+  }
+  /** Các tuần có số liệu của dự án thuộc kỳ. */
+  function weeksOfKey(key, pjName) {
+    const ky = kyOf(key);
+    const all = Array.from(new Set(S.SoLieu.filter((r) => r.duAn === pjName && r.tuan).map((r) => r.tuan))).sort();
+    return ky === "tuan" ? [key] : ky === "thang" ? all.filter((w) => weekMonth(w) === key) : all;
+  }
+  const inKey = (key, w, pjName) => (kyOf(key) === "tuan" ? w === key : weeksOfKey(key, pjName).includes(w));
 
   // ------------------------------------------------------------ trạng thái
   const S = { DuAn: [], NhanSu: [], TaiKhoan: [], SoLieu: [], ChungTu: [], BaoCao: [], schema: {}, appUrl: "", sheetUrl: "", user: "" };
@@ -68,8 +84,9 @@
   const inBrand = (pjName) => brandNames().includes(pjName);
   function brandMark(b) {
     if (!b) return `<span class="bm-all">Tất cả đơn vị</span>`;
-    const rest = b.replace(/^TATI\s*/i, "");
-    return `<span class="bm"><i class="t1">TA</i><i class="t2">TI</i><i class="t3">${esc(rest)}</i></span>`;
+    const L = (window.TATI_LOGOS || {})[b];
+    if (L) return `<span class="bm"><img src="${L.src}" alt="${esc(b)}" width="${L.w}" height="${L.h}"></span>`;
+    return `<span class="bm-all">${esc(b)}</span>`;
   }
   // Trang hướng dẫn: config.guideUrl nếu có, không thì trang ?page=huongdan của chính ứng dụng
   const guideUrl = () => ((window.BAO_CAO_MKT_CONFIG || {}).guideUrl || "").trim() || (S.appUrl ? S.appUrl + "?page=huongdan" : "#");
@@ -200,6 +217,9 @@
       $(p + "Week").add(new Option("Tuần khác… (chọn ngày trên lịch)", PICK_WEEK));
       fillSelect($(p + "Project"), projects, p === "rp" ? $(p + "Project").value : $(p + "Project").value || projects[0], p === "rp" ? "Tất cả dự án" : null);
     }
+    const months = Array.from(new Set(dataWeeks.map(weekMonth))).sort().reverse().map((m) => [m, monthLabel(m)]);
+    if (!months.length) months.push([weekMonth(latestDataWeek()), monthLabel(weekMonth(latestDataWeek()))]);
+    fillSelect($("rpMonth"), months, $("rpMonth").value || months[0][0]);
     fillSelect($("enStaff"), staff, $("enStaff").value, "Tất cả nhân sự");
     let me = "";
     try { me = localStorage.getItem("crm.me") || ""; } catch (_) { /* bỏ qua */ }
@@ -1180,33 +1200,63 @@
   const newWebKey = () => Array.from(crypto.getRandomValues(new Uint8Array(18)), (b) => "abcdefghijkmnpqrstuvwxyz23456789"[b % 32]).join("");
   const webUrl = (r) => (r && r.webKey && S.appUrl ? `${S.appUrl}?page=bc&k=${r.webKey}` : "");
   /** Báo cáo dạng trang web: chỉ cần số liệu + ảnh đã lưu, không dựng PPTX (rất nhanh). */
+  /** Báo cáo dạng trang web: chỉ cần số liệu + ảnh đã lưu, không dựng PPTX (rất nhanh). */
   async function buildWeb(pjName, w) {
-    const rows = effective(S.SoLieu.filter((r) => r.duAn === pjName && r.tuan === w));
-    if (!rows.length) throw new Error(`${pjName}: chưa có số liệu tuần ${weekLabel(w)}.`);
-    try { await importDriveEvidence(pjName, w); } catch (e) { console.error(e); }
-    try { await dedupeEvidence(pjName, w); } catch (e) { console.error(e); }
+    const ky = kyOf(w), wks = weeksOfKey(w, pjName);
+    const rows = effective(S.SoLieu.filter((r) => r.duAn === pjName && wks.includes(r.tuan)));
+    if (!rows.length) throw new Error(`${pjName}: chưa có số liệu ${periodLabel(w)}.`);
+    if (ky === "tuan") {
+      try { await importDriveEvidence(pjName, w); } catch (e) { console.error(e); }
+      try { await dedupeEvidence(pjName, w); } catch (e) { console.error(e); }
+    }
     const prev = S.BaoCao.find((r) => r.duAn === pjName && r.tuan === w);
-    const ev = S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w && r.nhanSu);
+    const ev = ky === "tuan" ? S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w && r.nhanSu) : [];
     const staffN = new Set(rows.map((r) => r.nhanSu).concat(ev.map((r) => r.nhanSu)).filter(Boolean)).size;
     const out = { tuan: w, duAn: pjName, trangThai: prev ? prev.trangThai : "Nháp", webKey: (prev && prev.webKey) || newWebKey(),
-      tomTat: `Trang web · ${staffN} nhân sự, ${ev.length} ảnh/chứng từ`, ngayTao: nowStamp() };
+      tomTat: `Trang web · ${staffN} nhân sự` + (ky === "tuan" ? `, ${ev.length} ảnh/chứng từ` : `, ${wks.length} tuần`), ngayTao: nowStamp() };
     if (prev) out.id = prev.id;
     const saved = await call("crmSave", "BaoCao", out);
     S.BaoCao = S.BaoCao.filter((r) => r.id !== saved.id).concat(saved);
     return saved;
   }
+  /** Gọi máy chủ, thử lại 1 lần nếu mạng chập chờn (điện thoại hay báo "NetworkError … HTTP 0"). */
+  async function gasRetry(fn, ...args) {
+    try { return await gas(fn, ...args); }
+    catch (e) {
+      if (!/network|http 0|kết nối|timed? ?out|failed to fetch/i.test(e.message || "")) throw e;
+      await new Promise((r) => setTimeout(r, 2500));
+      return gas(fn, ...args);
+    }
+  }
+  /** File lớn: gửi từng mảnh ~3 MB (mỗi mảnh thử lại được), trả về {parts} để máy chủ ghép. */
+  async function uploadData(b64, label) {
+    const CH = 3 * 1024 * 1024; // chia hết cho 4 – mỗi mảnh vẫn là base64 hợp lệ
+    if (b64.length <= CH) return b64;
+    const parts = [], n = Math.ceil(b64.length / CH);
+    for (let i = 0; i < n; i++) {
+      toast(`${label}: gửi file lên Drive ${i + 1}/${n}…`, "busy");
+      parts.push(await gasRetry("uploadPart", TOKEN, b64.slice(i * CH, (i + 1) * CH)));
+    }
+    return { parts };
+  }
   async function buildOne(pjName, w, fmt) {
     if (fmt === "web") return buildWeb(pjName, w);
+    const ky = kyOf(w), wks = weeksOfKey(w, pjName);
     const pj = project(pjName);
     const tplId = B.parseDriveId(pj.mauPptx);
     if (!tplId) throw new Error(`Dự án ${pjName} chưa có link PPTX mẫu (tab Danh mục).`);
-    const rows = effective(S.SoLieu.filter((r) => r.duAn === pjName && r.tuan <= w));
-    if (!rows.some((r) => r.tuan === w)) throw new Error(`${pjName}: chưa có số liệu tuần ${weekLabel(w)}.`);
+    const last = wks[wks.length - 1];
+    // báo cáo tuần: kèm các tuần trước để so sánh; báo cáo tháng / chiến dịch: đúng các tuần trong kỳ
+    const rows = effective(S.SoLieu.filter((r) => r.duAn === pjName && (ky === "tuan" ? r.tuan <= w : wks.includes(r.tuan))));
+    if (!last || !rows.some((r) => wks.includes(r.tuan))) throw new Error(`${pjName}: chưa có số liệu ${periodLabel(w)}.`);
     if (!tplCache[tplId]) { const t = await gas("downloadFile", tplId); tplCache[tplId] = B.b64ToBlob(t.b64, t.type); }
     const accStaff = new Map(rows.map((r) => [r.taiKhoan || r.nhanSu || "(không rõ)", r.nhanSu]));
-    try { await importDriveEvidence(pjName, w); } catch (e) { console.error(e); }
-    try { await dedupeEvidence(pjName, w); } catch (e) { console.error(e); }
-    const ev = S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w && r.nhanSu);
+    let ev = [];
+    if (ky === "tuan") {
+      try { await importDriveEvidence(pjName, w); } catch (e) { console.error(e); }
+      try { await dedupeEvidence(pjName, w); } catch (e) { console.error(e); }
+      ev = S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w && r.nhanSu);
+    }
     const images = [];
     let i = 0;
     for (const r of ev) {
@@ -1215,27 +1265,44 @@
       const files = B.isPdf(file) ? await B.pdfToImages(file, 2) : [file];
       files.forEach((x) => images.push({ file: x, platform: r.nenTang, kind: r.loai, staff: r.nhanSu }));
     }
-    const weekRows = rows.filter((r) => r.tuan === w);
+    const scopeRows = rows.filter((r) => wks.includes(r.tuan));
     const order = staffNames();
-    const staffList = Array.from(new Set(weekRows.map((r) => r.nhanSu).concat(ev.map((r) => r.nhanSu)).filter(Boolean)))
+    const staffList = Array.from(new Set(scopeRows.map((r) => r.nhanSu).concat(ev.map((r) => r.nhanSu)).filter(Boolean)))
       .sort((a, b) => (order.indexOf(a) + 1 || 99) - (order.indexOf(b) + 1 || 99));
+    const d0 = parseIso(wks[0]), d1 = parseIso(last);
+    d1.setDate(d1.getDate() + 6);
+    const span = `${pad(d0.getDate())}/${pad(d0.getMonth() + 1)}/${d0.getFullYear()} - ${pad(d1.getDate())}/${pad(d1.getMonth() + 1)}/${d1.getFullYear()}`;
     toast(`${pjName}: đang dựng báo cáo…`, "busy");
     const res = await B.buildReport({
-      template: await tplCache[tplId].arrayBuffer(), weeks: weeksForReport(rows), week: weekLabel(w),
-      year: String(parseIso(w).getFullYear()), campaign: pj.chienDich || "", period: "",
+      template: await tplCache[tplId].arrayBuffer(), weeks: weeksForReport(rows), week: weekLabel(last),
+      year: String(parseIso(last).getFullYear()), campaign: pj.chienDich || "", period: ky === "tuan" ? "" : span,
+      title: ky === "thang" ? monthLabel(w).toUpperCase() : ky === "all" ? "TỔNG CHIẾN DỊCH" : "",
       images, staffList, staffOf: (acc) => accStaff.get(acc) || "",
-      scope: "week", perSlide: 1, dropUnused: true, dropEmptyImageSlides: true, placeholderMissing: $("rpKeepMissing").checked,
+      scope: ky === "tuan" ? "week" : "all", perSlide: 1, dropUnused: true, dropEmptyImageSlides: true,
+      placeholderMissing: ky === "tuan" && $("rpKeepMissing").checked,
+      maxImageSide: 1600, // ảnh chụp màn hình thu nhỏ còn ~1600px: vẫn rõ chữ, file nhẹ hơn nhiều
       logo: pj.logo || "", logos: (window.BAO_CAO_MKT_CONFIG || {}).logos,
     });
-    const name = `Bao_cao_${pjName.replace(/\s+/g, "_")}_${weekLabel(w).replace(/[\/ ]/g, "")}.pptx`;
+    const tag = ky === "tuan" ? weekLabel(w).replace(/[\/ ]/g, "") : ky === "thang" ? `Thang${w.slice(5, 7)}-${w.slice(0, 4)}` : "ToanChienDich";
+    const name = `Bao_cao_${pjName.replace(/\s+/g, "_")}_${tag}.pptx`;
     const folder = B.parseDriveId(pj.thuMucBaoCao) || "";
+    // mỗi tháng một thư mục con; tuần vắt 2 tháng nằm ở tháng chứa ngày thứ 5
+    const sub = ky === "all" ? "Tổng chiến dịch" : "Tháng " + (ky === "thang" ? w : weekMonth(w)).split("-").reverse().join("-");
     const b64 = await B.blobToB64(res.blob);
     const out = { tuan: w, duAn: pjName, trangThai: "Nháp", pdfUrl: "", pptxUrl: "",
-      tomTat: `${res.slides} slide, ${res.staffCount} nhân sự, ${res.nImg} ảnh` + (res.missing ? `, thiếu ${res.missing} ảnh nghiệm thu` : "") };
+      tomTat: `${res.slides} slide, ${res.staffCount} nhân sự` + (ky === "tuan" ? `, ${res.nImg} ảnh` : `, ${wks.length} tuần`) +
+        (res.missing ? `, thiếu ${res.missing} ảnh nghiệm thu` : "") + ` · ${(res.blob.size / 1048576).toFixed(1)} MB` };
     // tạo lại: ghi đè vào file cũ để link đã gửi nhóm vẫn mở được bản mới
     const prev = S.BaoCao.find((r) => r.duAn === pjName && r.tuan === w);
-    if (fmt !== "pdf") { toast(`${pjName}: lưu PPTX…`, "busy"); out.pptxUrl = await gas("saveReport", b64, name, folder, true, prev ? prev.pptxUrl : "", TOKEN); }
-    if (fmt !== "pptx") { toast(`${pjName}: chuyển PDF…`, "busy"); out.pdfUrl = (await gas("convertToPdf", b64, name, folder, true, prev ? prev.pdfUrl : "", TOKEN)).url; }
+    const data = await uploadData(b64, pjName);
+    toast(`${pjName}: lưu PPTX…`, "busy");
+    out.pptxUrl = await gasRetry("saveReport", data, name, folder, true, prev ? prev.pptxUrl : "", TOKEN, sub);
+    if (fmt === "both" || fmt === "pdf") {
+      // chuyển từ file PPTX vừa lưu trên Drive – không gửi lại cả file từ máy
+      toast(`${pjName}: chuyển PDF…`, "busy");
+      try { out.pdfUrl = (await gasRetry("convertSavedToPdf", out.pptxUrl, name, folder, true, prev ? prev.pdfUrl : "", TOKEN, sub)).url; }
+      catch (e) { console.error(e); out.tomTat += " · chưa chuyển được PDF: " + e.message; }
+    }
     if (prev) out.id = prev.id;
     out.webKey = (prev && prev.webKey) || newWebKey(); // luôn có thêm bản trang web
     out.ngayTao = nowStamp(); // lần tạo gần nhất (để biết có ảnh/số mới sau đó không)
@@ -1246,8 +1313,20 @@
     if (stale.length) { try { await call("crmTrashReportFiles", stale); } catch (e) { console.error(e); } }
     return saved;
   }
+  /** Mã kỳ đang chọn ở tab Báo cáo. */
+  function rpKey() {
+    const ky = $("rpKy").value;
+    return ky === "thang" ? $("rpMonth").value : ky === "all" ? "all" : $("rpWeek").value;
+  }
+  function rpKyChanged() {
+    const ky = $("rpKy").value;
+    $("rpWeekBox").hidden = ky !== "tuan";
+    $("rpMonthBox").hidden = ky !== "thang";
+    $("rpKeepMissing").closest("label").hidden = ky !== "tuan";
+    renderReports();
+  }
   async function generateReports() {
-    const w = $("rpWeek").value, fmt = $("rpFormat").value;
+    const w = rpKey(), fmt = $("rpFormat").value;
     const list = $("rpProject").value ? [$("rpProject").value] : brandNames();
     const msgs = [];
     $("rpGo").disabled = true;
@@ -1263,7 +1342,7 @@
   function shareText(rows) {
     if (!rows.length) return "";
     const w = rows[0].tuan;
-    return `[Báo cáo] Marketing tuần ${weekLabel(w, true)}` + (brand ? ` – ${brand}` : "") + "\n" +
+    return `[Báo cáo] Marketing ${periodLabel(w, true)}` + (brand ? ` – ${brand}` : "") + "\n" +
       rows.map((r) => `• ${r.duAn}: ${webUrl(r) || r.pdfUrl || r.pptxUrl}` + (webUrl(r) && r.pdfUrl ? `\n   (PDF: ${r.pdfUrl})` : "")).join("\n");
   }
   async function copyText(text, what) {
@@ -1274,20 +1353,20 @@
   const nowStamp = () => { const d = new Date(); return `${isoOf(d)} ${pad(d.getHours())}:${pad(d.getMinutes())}`; };
   /** Số ảnh / dòng số liệu thêm vào sau lần tạo báo cáo r. */
   function newSince(r) {
-    const after = (x) => x.duAn === r.duAn && x.tuan === r.tuan && String(x.ngayTao) > String(r.ngayTao);
-    return { anh: S.ChungTu.filter(after).length, so: S.SoLieu.filter(after).length };
+    const after = (x) => x.duAn === r.duAn && inKey(r.tuan, x.tuan, r.duAn) && String(x.ngayTao) > String(r.ngayTao);
+    return { anh: kyOf(r.tuan) === "tuan" ? S.ChungTu.filter(after).length : 0, so: S.SoLieu.filter(after).length };
   }
   function renderReports() {
     const rows = S.BaoCao.filter((r) => inBrand(r.duAn)).sort((a, b) => String(b.tuan + b.ngayTao).localeCompare(String(a.tuan + a.ngayTao)));
-    const wk = S.BaoCao.filter((r) => inBrand(r.duAn) && r.tuan === $("rpWeek").value && (r.pdfUrl || r.pptxUrl || r.webKey));
+    const wk = S.BaoCao.filter((r) => inBrand(r.duAn) && r.tuan === rpKey() && (r.pdfUrl || r.pptxUrl || r.webKey));
     $("rpShare").hidden = !wk.length;
-    $("rpShare").textContent = wk.length ? `Chép tin nhắn gửi nhóm (${wk.length} báo cáo tuần ${weekLabel($("rpWeek").value)})` : "";
-    $("rpTable").innerHTML = rows.length ? `<table class="data"><thead><tr><th>Tuần</th><th>Dự án</th><th>Trạng thái</th><th>File</th><th>Nội dung</th><th>Người tạo</th><th>Ngày tạo</th></tr></thead><tbody>
-      ${rows.map((r) => `<tr><td>${esc(weekLabel(r.tuan, true))}</td><td>${esc(r.duAn)}</td>
+    $("rpShare").textContent = wk.length ? `Chép tin nhắn gửi nhóm (${wk.length} báo cáo ${periodLabel(rpKey())})` : "";
+    $("rpTable").innerHTML = rows.length ? `<table class="data"><thead><tr><th>Kỳ</th><th>Dự án</th><th>Trạng thái</th><th>File</th><th>Nội dung</th><th>Người tạo</th><th>Ngày tạo</th></tr></thead><tbody>
+      ${rows.map((r) => `<tr><td>${esc(periodLabel(r.tuan, true).replace(/^./, (c) => c.toUpperCase()))}</td><td>${esc(r.duAn)}</td>
         <td><select data-rp="${esc(r.id)}" class="st-${STATUSES.indexOf(r.trangThai)}"${isAdmin() ? "" : " disabled"}>${STATUSES.map((s) => opt(s, s, r.trangThai)).join("")}</select></td>
         <td>${webUrl(r) ? `<a href="${esc(webUrl(r))}" target="_blank" rel="noopener"><b>Web</b></a>` : ""} ${r.pdfUrl ? `<a href="${esc(r.pdfUrl)}" target="_blank" rel="noopener">PDF</a>` : ""} ${r.pptxUrl ? `<a href="${esc(r.pptxUrl)}" target="_blank" rel="noopener">PPTX</a>` : ""}
           ${r.pdfUrl || r.pptxUrl || r.webKey ? `<button type="button" class="link" data-copy="${esc(r.id)}">Chép link</button>` : ""}</td>
-        <td>${esc(r.tomTat)}${(() => { const n = newSince(r); return n.anh || n.so ? `<br><b class="warn-text">Có ${[n.anh && n.anh + " ảnh", n.so && n.so + " dòng số liệu"].filter(Boolean).join(", ")} mới sau lần tạo này – chọn tuần/dự án này và bấm “Tạo báo cáo” để cập nhật.</b>` : ""; })()}</td><td class="muted">${esc(r.nguoiTao)}</td><td class="muted">${esc(r.ngayTao)}</td></tr>`).join("")}</tbody></table>`
+        <td>${esc(r.tomTat)}${(() => { const n = newSince(r); return n.anh || n.so ? `<br><b class="warn-text">Có ${[n.anh && n.anh + " ảnh", n.so && n.so + " dòng số liệu"].filter(Boolean).join(", ")} mới sau lần tạo này – chọn kỳ/dự án này và bấm “Tạo báo cáo” để cập nhật.</b>` : ""; })()}</td><td class="muted">${esc(r.nguoiTao)}</td><td class="muted">${esc(r.ngayTao)}</td></tr>`).join("")}</tbody></table>`
       : `<p class="muted">Chưa có báo cáo nào.</p>`;
   }
 
@@ -1535,8 +1614,10 @@
     });
     $("rpGo").addEventListener("click", () => generateReports());
     $("rpWeek").addEventListener("change", renderReports);
+    $("rpMonth").addEventListener("change", renderReports);
+    $("rpKy").addEventListener("change", rpKyChanged);
     $("rpShare").addEventListener("click", () => {
-      const rows = S.BaoCao.filter((r) => inBrand(r.duAn) && r.tuan === $("rpWeek").value && (r.pdfUrl || r.pptxUrl || r.webKey));
+      const rows = S.BaoCao.filter((r) => inBrand(r.duAn) && r.tuan === rpKey() && (r.pdfUrl || r.pptxUrl || r.webKey));
       copyText(shareText(rows), "tin nhắn kèm link báo cáo");
     });
     $("rpTable").addEventListener("click", (e) => {

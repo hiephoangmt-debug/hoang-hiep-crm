@@ -17,7 +17,10 @@
   .bar { max-width:1200px; margin:0 auto; padding:10px 16px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
   .bar h1 { font-size:17px; margin:0; }
   .brandmark { font-weight:800; font-size:20px; letter-spacing:-.02em; }
-  .bm i { font-style:normal; } .bm .t1 { color:#e30613; } .bm .t2 { color:#00843d; } .bm .t3 { color:#a8782a; margin-left:3px; font-weight:600; letter-spacing:.02em; }
+  /* logo gốc: cố định chiều cao, chiều rộng tự theo tỉ lệ ảnh (không bóp méo); nền trắng để giữ đúng màu ở chế độ tối */
+  .bm { display:inline-flex; align-items:center; line-height:0; }
+  .bm img { height:18px; width:auto; max-width:none; display:block; }
+  @media (prefers-color-scheme: dark) { .bm img { background:#fff; padding:3px 6px; border-radius:5px; box-sizing:content-box; } }
   .bm-all { font-size:14px; font-weight:700; color:var(--muted); }
   .seg { display:inline-flex; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
   .seg button { background:transparent; color:var(--muted); border-radius:0; padding:5px 12px; font-size:13px; }
@@ -136,6 +139,7 @@
   .weekpick[hidden] { display:none; }
   .sheetlink { align-self:center; font-weight:600; white-space:nowrap; }
   .sheetlink[hidden] { display:none; }
+  label[hidden] { display:none !important; }
   .fname { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:600; }
   .row { display:flex; gap:4px; margin-top:4px; align-items:center; }
   .row select { flex:1; font-size:12px; padding:4px; }
@@ -154,7 +158,7 @@
 </style>
 </head>
 <body>
-<div id="loading">Đang tải CRM… <small class="muted">(giao diện v39)</small></div>
+<div id="loading">Đang tải CRM… <small class="muted">(giao diện v40)</small></div>
 <div id="diag" style="max-width:760px;margin:0 auto;padding:0 16px;color:#b42318;font-size:13px"></div>
 <script>
   // Báo lỗi ngay trên màn hình (để biết trang dừng ở đâu khi không mở được bảng điều khiển trình duyệt)
@@ -264,15 +268,17 @@
     <!-- BÁO CÁO -->
     <div class="panel" id="tab-baocao" hidden>
       <section class="card">
-        <h3>Tạo báo cáo tuần</h3>
+        <h3>Tạo báo cáo (tuần / tháng / toàn chiến dịch)</h3>
         <div class="filters">
-          <label>Tuần<select id="rpWeek"></select></label>
+          <label>Kỳ báo cáo<select id="rpKy"><option value="tuan">Theo tuần</option><option value="thang">Tổng tháng</option><option value="all">Tổng chiến dịch</option></select></label>
+          <label id="rpWeekBox">Tuần<select id="rpWeek"></select></label>
+          <label id="rpMonthBox" hidden>Tháng<select id="rpMonth"></select></label>
           <label>Dự án<select id="rpProject"></select></label>
-          <label>Xuất ra<select id="rpFormat"><option value="both">Trang web + PDF + PPTX</option><option value="web">Chỉ trang web (nhanh)</option><option value="pdf">Trang web + PDF</option><option value="pptx">Trang web + PPTX</option></select></label>
+          <label>Xuất ra<select id="rpFormat"><option value="pptx">Trang web + PPTX</option><option value="web">Chỉ trang web (nhanh)</option><option value="both">Trang web + PPTX + PDF (chậm)</option></select></label>
           <label class="row" style="flex-direction:row;gap:6px;color:var(--text)"><input type="checkbox" id="rpKeepMissing" checked> Giữ trang nghiệm thu còn thiếu ảnh (ghi “CHƯA CÓ ẢNH”)</label>
           <button type="button" id="rpGo">Tạo báo cáo</button>
         </div>
-        <p class="hint">Dùng số liệu ở tab Nhập số liệu và ảnh ở tab Ảnh & chứng từ của tuần đã chọn; slide 1–6 là tổng, sau đó mỗi nhân sự một phần. File được lưu vào “Thư mục lưu báo cáo” của dự án (trống = My Drive). Muốn tạo từ thư mục Drive có sẵn: <a id="rpProjectLink" target="_top">trang Báo cáo từ thư mục Drive</a>.</p>
+        <p class="hint">Dùng số liệu ở tab Nhập số liệu và ảnh ở tab Ảnh & chứng từ của tuần đã chọn; slide 1–6 là tổng, sau đó mỗi nhân sự một phần. File được lưu vào “Thư mục lưu báo cáo” của dự án (trống = My Drive), mỗi tháng một thư mục con “Tháng MM-YYYY”, mỗi tuần một file. <b>Tổng tháng</b> cộng các tuần thuộc tháng – tuần vắt qua 2 tháng (vd 28/09 – 04/10) tính vào tháng chứa ngày thứ 5 của tuần, nên không bị cộng 2 lần; <b>Tổng chiến dịch</b> cộng mọi tuần đã có số liệu. Báo cáo tổng chỉ gồm số liệu + biểu đồ (ảnh nghiệm thu nằm ở báo cáo từng tuần). Muốn tạo từ thư mục Drive có sẵn: <a id="rpProjectLink" target="_top">trang Báo cáo từ thư mục Drive</a>.</p>
       </section>
       <section class="card"><div class="sec-head"><h3>Lịch sử báo cáo</h3><button type="button" id="rpShare" class="ghost small" hidden></button></div>
         <p class="hint">File báo cáo được bật chia sẻ “Bất kỳ ai có đường liên kết đều xem được” – chỉ cần gửi link, các bạn mở xem/tải PDF không cần xin quyền.</p>
@@ -293,6 +299,7 @@
 </div>
 <script src="../bao-cao-mkt/vendor/jszip.min.js"></script>
 <script src="../bao-cao-mkt/vendor/xlsx.full.min.js"></script>
+<script src="logos.js"></script>
 <script src="../bao-cao-mkt/config.js"></script>
 <script src="../bao-cao-mkt/app.js"></script>
 <script src="crm.js"></script>

@@ -37,11 +37,34 @@
     t.cpl = t.lead ? t.fee / t.lead : 0; t.ctr = t.imp ? (t.click / t.imp) * 100 : 0; t.cpm = t.imp ? (t.cost / t.imp) * 1000 : 0;
     return t;
   }
-  const delta = (cur, prev, lowerBetter) => {
-    if (!prev) return `<small>tuần trước: –</small>`;
+  let PREV = "tuần trước"; // "tháng trước" ở báo cáo tháng
+  const delta = (cur, prev) => {
+    if (PREV === "") return `<small>&nbsp;</small>`;
+    if (!prev) return `<small>${PREV}: –</small>`;
     const pc = ((cur - prev) / prev) * 100, up = pc >= 0;
-    return `<small>${up ? "▲" : "▼"} ${fmt1(Math.abs(pc))}% so với tuần trước (${fmt(prev)})${lowerBetter == null ? "" : ""}</small>`;
+    return `<small>${up ? "▲" : "▼"} ${fmt1(Math.abs(pc))}% so với ${PREV} (${fmt(prev)})</small>`;
   };
+  /** Kỳ báo cáo: tuần / tháng (tuần thuộc tháng chứa ngày thứ 5) / toàn chiến dịch. */
+  function periodOf(d) {
+    const ky = d.ky || "tuan", weeks = (d.weeks && d.weeks.length ? d.weeks : [d.tuan]).slice().sort();
+    const span = `${wkLabel(weeks[0], true).split(" – ")[0]}/${parseIso(weeks[0]).getFullYear()} – ${wkLabel(weeks[weeks.length - 1], true).split(" – ")[1]}`;
+    if (ky === "thang") { const [y, m] = String(d.tuan).split("-"); return { ky, weeks, name: `Tháng ${+m}/${y}`, html: `Tháng <b>${+m}/${y}</b> (${span}, ${weeks.length} tuần)`, prev: "tháng trước" }; }
+    if (ky === "all") return { ky, weeks, name: "Toàn chiến dịch", html: `Toàn chiến dịch <b>${span}</b> (${weeks.length} tuần)`, prev: "" };
+    return { ky, weeks, name: `tuần ${wkLabel(d.tuan)}`, html: `Tuần <b>${wkLabel(d.tuan, true)}</b>`, prev: "tuần trước" };
+  }
+  /** Báo cáo nhiều tuần: gộp các dòng cùng kênh + tài khoản. */
+  function groupRows(rows) {
+    const g = new Map();
+    rows.forEach((r) => {
+      const k = (r.nenTang || "Facebook") + "|" + (r.taiKhoan || "");
+      const o = g.get(k) || { nenTang: r.nenTang || "Facebook", taiKhoan: r.taiKhoan, cd: new Set(), chiPhi: 0, chiPhiPhi: 0, lead: 0, hienThi: 0, luotNhap: 0 };
+      if (r.chienDich) o.cd.add(r.chienDich);
+      o.chiPhi += num(r.chiPhi); o.chiPhiPhi += num(r.chiPhiPhi) || num(r.chiPhi); o.lead += num(r.lead);
+      o.hienThi += num(r.hienThi); o.luotNhap += num(r.luotNhap);
+      g.set(k, o);
+    });
+    return Array.from(g.values()).map((o) => Object.assign(o, { chienDich: Array.from(o.cd).join(", ") }));
+  }
 
   // ------------------------------------------------------------ biểu đồ (SVG thuần, có chú thích khi rê/chạm)
   const tip = () => $("tip");
@@ -102,8 +125,8 @@
     const cols = points.map((p, i) => {
       const h = ((H - bottom - top) * p.value) / max, x = i * slot + (slot - bw) / 2, y = H - bottom - h;
       return `<rect x="${x}" y="${y}" width="${bw}" height="${Math.max(h, p.value ? 2 : 0)}" rx="4" fill="${color}" opacity="${p.cur ? 1 : 0.45}" data-tip="Tuần ${esc(p.label)}: ${fmt(p.value)}${unit}"></rect>
-        ${p.cur || i === n - 2 ? `<text class="val" x="${x + bw / 2}" y="${y - 6}" text-anchor="middle">${fmt(p.value)}</text>` : ""}
-        <text x="${x + bw / 2}" y="${H - 8}" text-anchor="middle">${esc(p.short)}</text>`;
+        ${(n <= 6 ? p.cur || i === n - 2 : slot >= 70 || i === n - 1) ? `<text class="val" x="${x + bw / 2}" y="${y - 6}" text-anchor="middle">${fmt(p.value)}</text>` : ""}
+        ${slot >= 44 || i % Math.ceil(44 / slot) === 0 ? `<text x="${x + bw / 2}" y="${H - 8}" text-anchor="middle">${esc(p.short)}</text>` : ""}`;
     }).join("");
     return `<div class="chart"><svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img"><line class="axis" x1="0" x2="${W}" y1="${H - bottom}" y2="${H - bottom}"></line>${cols}</svg></div>`;
   }
@@ -111,12 +134,14 @@
   // ------------------------------------------------------------ dựng trang
   function render() {
     const all = effective(D.soLieu);
-    const W = all.filter((r) => r.tuan === D.tuan);
-    const prevIso = addDays(D.tuan, -7);
-    const P = all.filter((r) => r.tuan === prevIso);
+    const per = periodOf(D), range = per.ky !== "tuan";
+    PREV = per.prev;
+    const inW = new Set(per.weeks), inP = new Set(D.prevWeeks || [addDays(D.tuan, -7)]);
+    const W = all.filter((r) => inW.has(r.tuan));
+    const P = all.filter((r) => inP.has(r.tuan));
     const t = sum(W), tp = sum(P);
     const brand = String(D.logo || "");
-    const rest = brand.replace(/^TATI\s*/i, "");
+    const logo = (window.TATI_LOGOS || {})[brand];
     const order = D.nhanSu || [];
     const ev = D.chungTu || [];
     const staff = Array.from(new Set(W.map((r) => r.nhanSu).concat(ev.map((c) => c.nhanSu)).filter(Boolean)))
@@ -125,7 +150,7 @@
 
     // nghiệm thu: mỗi người × kênh đã chạy × loại ảnh bắt buộc
     const need = [];
-    staff.forEach((s) => {
+    if (!range) staff.forEach((s) => {
       PLATS.forEach((p) => {
         const ran = W.some((r) => r.nhanSu === s && (r.nenTang || "Facebook") === p) || ev.some((c) => c.nhanSu === s && c.nenTang === p);
         if (!ran) return;
@@ -138,9 +163,9 @@
     const okN = need.filter((x) => x.got.length).length;
 
     const header = `<header class="top">
-      ${brand ? `<span class="bm"><i class="t1">TA</i><i class="t2">TI</i><i class="t3">${esc(rest)}</i></span>` : ""}
+      ${logo ? `<span class="bm"><img src="${logo.src}" alt="${esc(brand)}" width="${logo.w}" height="${logo.h}"></span>` : ""}
       <div class="title"><h1>${esc(D.chienDich || "Báo cáo Marketing")}</h1>
-        <p>Dự án <b>${esc(D.duAn)}</b> · Tuần <b>${wkLabel(D.tuan, true)}</b> · <span class="badge${D.trangThai === "Đã duyệt" ? " ok" : ""}">${esc(D.trangThai || "Nháp")}</span></p></div>
+        <p>Dự án <b>${esc(D.duAn)}</b> · ${per.html} · <span class="badge${D.trangThai === "Đã duyệt" ? " ok" : ""}">${esc(D.trangThai || "Nháp")}</span></p></div>
       <div class="actions">${D.pdfUrl ? `<a class="btn" href="${esc(D.pdfUrl)}" target="_blank" rel="noopener">Mở PDF</a>` : ""}
         <button type="button" class="btn solid" onclick="window.print()">In / Lưu PDF</button></div>
     </header>`;
@@ -150,7 +175,8 @@
       <div class="tile"><span>Ngân sách thực chạy</span><b>${fmt(t.cost)} đ</b>${delta(t.cost, tp.cost)}</div>
       <div class="tile"><span>Lead</span><b>${fmt(t.lead)}</b>${delta(t.lead, tp.lead)}</div>
       <div class="tile"><span>Chi phí / lead</span><b>${t.lead ? fmt(t.cpl) + " đ" : "–"}</b>${t.lead && tp.lead ? delta(t.cpl, tp.cpl) : "<small>&nbsp;</small>"}</div>
-      <div class="tile"><span>Nghiệm thu</span><b>${okN}/${need.length}</b><small class="${okN === need.length ? "ok-t" : "miss-t"}">${okN === need.length ? "Đủ ảnh nghiệm thu" : need.length - okN + " trang còn thiếu ảnh"}</small></div>
+      ${range ? `<div class="tile"><span>Số tuần có số liệu</span><b>${new Set(W.map((r) => r.tuan)).size}</b><small>${staff.length} nhân sự</small></div>`
+        : `<div class="tile"><span>Nghiệm thu</span><b>${okN}/${need.length}</b><small class="${okN === need.length ? "ok-t" : "miss-t"}">${okN === need.length ? "Đủ ảnh nghiệm thu" : need.length - okN + " trang còn thiếu ảnh"}</small></div>`}
     </div>`;
 
     // biểu đồ
@@ -158,9 +184,10 @@
       return { label: PLAB[p], value: s.fee, color: PCOL[p], note: `${fmt(s.lead)} lead · ${t.fee ? fmt1((s.fee / t.fee) * 100) : 0}%` }; });
     const rowsBy = {};
     staff.forEach((s) => { rowsBy[s] = {}; PLATS.forEach((p) => { rowsBy[s][p] = sum(W.filter((r) => r.nhanSu === s && (r.nenTang || "Facebook") === p)).fee; }); });
-    const weeks = Array.from(new Set(all.map((r) => r.tuan))).filter((w) => w <= D.tuan).sort().slice(-6);
-    const trendC = weeks.map((w) => ({ label: wkLabel(w), short: wkLabel(w).split(" – ")[0], value: sum(all.filter((r) => r.tuan === w)).fee, cur: w === D.tuan }));
-    const trendL = weeks.map((w) => ({ label: wkLabel(w), short: wkLabel(w).split(" – ")[0], value: sum(all.filter((r) => r.tuan === w)).lead, cur: w === D.tuan }));
+    const weeks = range ? per.weeks.filter((w) => all.some((r) => r.tuan === w))
+      : Array.from(new Set(all.map((r) => r.tuan))).filter((w) => w <= D.tuan).sort().slice(-6);
+    const trendC = weeks.map((w) => ({ label: wkLabel(w), short: wkLabel(w).split(" – ")[0], value: sum(all.filter((r) => r.tuan === w)).fee, cur: range || w === D.tuan }));
+    const trendL = weeks.map((w) => ({ label: wkLabel(w), short: wkLabel(w).split(" – ")[0], value: sum(all.filter((r) => r.tuan === w)).lead, cur: range || w === D.tuan }));
     // biểu đồ vẽ sau khi có khung (theo bề rộng thật để chữ không bị co nhỏ)
     const staffWith = staff.filter((s) => PLATS.some((p) => rowsBy[s][p]));
     const CH = {
@@ -172,8 +199,8 @@
     const charts = `<div class="grid2">
       <section class="card"><h2>Chi phí theo kênh</h2><div data-chart="plat"></div></section>
       <section class="card"><h2>Chi phí theo nhân sự</h2><div data-chart="staff"></div></section>
-      ${weeks.length > 1 ? `<section class="card"><h2>Chi phí các tuần gần đây</h2><div data-chart="cost"></div></section>
-      <section class="card"><h2>Lead các tuần gần đây</h2><div data-chart="lead"></div></section>` : ""}
+      ${weeks.length > 1 ? `<section class="card"><h2>Chi phí ${range ? "từng tuần" : "các tuần gần đây"}</h2><div data-chart="cost"></div></section>
+      <section class="card"><h2>Lead ${range ? "từng tuần" : "các tuần gần đây"}</h2><div data-chart="lead"></div></section>` : ""}
     </div>`;
 
     // bảng theo kênh
@@ -186,13 +213,13 @@
 
     // từng nhân sự
     const people = staff.map((s) => {
-      const R = W.filter((r) => r.nhanSu === s), st = sum(R);
+      const R0 = W.filter((r) => r.nhanSu === s), st = sum(R0), R = range ? groupRows(R0) : R0;
       const ps = PLATS.filter((p) => R.some((r) => (r.nenTang || "Facebook") === p) || ev.some((c) => c.nhanSu === s && c.nenTang === p));
       const rowsT = R.length ? `<div class="wrap"><table><thead><tr><th>Kênh</th><th>ID tài khoản</th><th>Chiến dịch</th><th>Chi phí</th><th>Chi phí (+phí)</th><th>Lead</th><th>Hiển thị</th><th>Nhấp</th></tr></thead><tbody>
         ${R.map((r) => `<tr><td><span class="dot" style="background:${PCOL[r.nenTang || "Facebook"]}"></span>${PLAB[r.nenTang || "Facebook"]}</td><td>${esc(r.taiKhoan || "–")}</td><td class="l">${esc(r.chienDich || "")}</td>
           <td>${fmt(num(r.chiPhi))}</td><td>${fmt(num(r.chiPhiPhi) || num(r.chiPhi))}</td><td>${fmt(num(r.lead))}</td><td>${num(r.hienThi) ? fmt(num(r.hienThi)) : "–"}</td><td>${num(r.luotNhap) ? fmt(num(r.luotNhap)) : "–"}</td></tr>`).join("")}
         </tbody></table></div>` : `<p class="muted">Chưa có số liệu.</p>`;
-      const chans = ps.map((p) => {
+      const chans = range ? "" : ps.map((p) => {
         const slots = NEED[p].map((k) => {
           const got = ev.filter((c) => c.nhanSu === s && c.nenTang === p && (c.loai === k || (k === "ads" && c.loai === "qc" && p === "Google")));
           if (!got.length) return `<figure class="shot miss"><div class="ph">CHƯA CÓ ẢNH<br>${KIND[k]}</div></figure>`;
@@ -216,7 +243,7 @@
       `<footer>Cập nhật ${esc(D.ngayTao || "")} · Số liệu: nhập tay / Google Sheet ưu tiên hơn số đọc từ ảnh. Rê chuột hoặc chạm vào thanh biểu đồ để xem số.</footer>`;
     $("state").hidden = true;
     $("report").hidden = false;
-    document.title = `${D.duAn} · tuần ${wkLabel(D.tuan)} – Báo cáo Marketing`;
+    document.title = `${D.duAn} · ${per.name} – Báo cáo Marketing`;
     const draw = () => {
       document.querySelectorAll("[data-chart]").forEach((el) => { el.innerHTML = CH[el.dataset.chart](Math.max(260, el.clientWidth)); });
       bindTips($("report"));

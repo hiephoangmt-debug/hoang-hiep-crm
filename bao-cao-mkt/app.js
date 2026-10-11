@@ -364,9 +364,11 @@
   function fillText(doc, ctx) {
     for (const body of shapeBodies(doc)) {
       const t = bodyText(body).trim();
-      if (/^TUẦN\s*\d*$/i.test(t) && ctx.weekNo) {
-        setBodyText(body, "TUẦN " + ctx.weekNo);
-        widen(body, 6 * EMU_IN, true);
+      if (/^TUẦN\s*\d*$/i.test(t) && (ctx.title || ctx.weekNo)) {
+        setBodyText(body, ctx.title || "TUẦN " + ctx.weekNo);
+        widen(body, (ctx.title ? 11 : 6) * EMU_IN, true);
+        // "THÁNG 10/2026", "TỔNG CHIẾN DỊCH": một dòng, không xuống dòng đè lên dòng ngày
+        if (ctx.title) { const bp = byTag(body, "a:bodyPr")[0]; if (bp) bp.setAttribute("wrap", "none"); }
       }
       else if (/^\.{3,}\s*\d{1,2}\.\d{4}\s*-\s*\.{3,}\s*\d{1,2}\.\d{4}$/.test(t)) setBodyText(body, ctx.weekRangeText);
       else if (t.startsWith("Thời gian triển khai:") && ctx.period) setBodyText(body, "Thời gian triển khai: " + ctx.period);
@@ -420,9 +422,25 @@
   }
 
   /** PowerPoint chỉ chắc chắn đọc PNG/JPEG: ảnh khác (webp, gif, bmp) được vẽ lại thành PNG. */
-  async function embeddable(f) {
+  let IMG_MAX = 0; // > 0: thu nhỏ ảnh (cạnh dài tối đa, px) để file PPTX nhẹ, tải lên nhanh
+  async function embeddable(f, max = IMG_MAX) {
     const type = f.type || "";
     const ext = (f.name.split(".").pop() || "").toLowerCase();
+    if (max && (f.size || 0) > 350 * 1024) {
+      try {
+        const bmp = await createImageBitmap(f);
+        const k = Math.min(1, max / Math.max(bmp.width, bmp.height));
+        const c = document.createElement("canvas");
+        c.width = Math.round(bmp.width * k);
+        c.height = Math.round(bmp.height * k);
+        const g = c.getContext("2d");
+        g.fillStyle = "#fff";
+        g.fillRect(0, 0, c.width, c.height);
+        g.drawImage(bmp, 0, 0, c.width, c.height);
+        const blob = await new Promise((res) => c.toBlob(res, "image/jpeg", 0.85));
+        if (blob && blob.size < (f.size || Infinity)) return { data: await blob.arrayBuffer(), ext: "jpeg" };
+      } catch (e) { console.warn("Không thu nhỏ được ảnh", f.name, e); }
+    }
     if (type === "image/png" || (!type && ext === "png")) return { data: await f.arrayBuffer(), ext: "png" };
     if (type === "image/jpeg" || (!type && /^jpe?g$/.test(ext))) return { data: await f.arrayBuffer(), ext: "jpeg" };
     const bmp = await createImageBitmap(f);
@@ -582,6 +600,7 @@
    * Phần từ slide "NHÂN SỰ:" tới trước "THANK YOU" được nhân bản cho từng nhân sự.
    */
   async function buildReport(opts) {
+    IMG_MAX = opts.maxImageSide || 0;
     const weeks = opts.weeks;
     const names = Object.keys(weeks);
     const active = names.filter((w) => PLATFORMS.some((p) => weeks[w][p].length));
@@ -596,7 +615,7 @@
     const d1 = scopeWeeks[0].split("-")[0].trim().replace("/", ".");
     const d2 = scopeWeeks[scopeWeeks.length - 1].split("-")[1].trim().replace("/", ".");
     const base = {
-      campaign: opts.campaign,
+      campaign: opts.campaign, title: opts.title || "",
       period: opts.period || `${d1.replace(".", "/")} - ${d2.replace(".", "/")}/${opts.year}`,
       weekNo: opts.weekNo || names.indexOf(week) - names.indexOf(active[0]) + 1,
       weekRangeText: `${d1}.${opts.year} - ${d2}.${opts.year}`,

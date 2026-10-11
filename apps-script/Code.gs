@@ -139,18 +139,48 @@ function overwriteFile_(file, bytes, mime) {
   return res.getResponseCode() === 200;
 }
 
-/** Lưu PPTX báo cáo vào Drive (thư mục chỉ định hoặc My Drive), trả về link. share = bật xem qua link.
- *  replaceUrl: link file báo cáo cũ của cùng tuần/dự án – ghi đè vào đó để link đã gửi vẫn mở được bản mới. */
-function saveReport(b64, name, folderId, share, replaceUrl, token) {
+/**
+ * File lớn gửi từng mảnh (điện thoại / mạng yếu hay lỗi "NetworkError" khi gửi cả file một lần):
+ * mỗi mảnh base64 lưu tạm thành file văn bản trên Drive, trả về ID để ghép lại ở bước lưu.
+ */
+var UPLOAD_TMP = '_bcmkt_tmp_';
+function uploadPart(token, b64) {
   crmRequireAdmin_(token);
+  var f = DriveApp.getRootFolder().createFile(Utilities.newBlob(String(b64 || ''), 'text/plain', UPLOAD_TMP + Date.now() + '.txt'));
+  return f.getId();
+}
+/** Dữ liệu gửi lên: chuỗi base64, hoặc {parts:[ID mảnh]} – ghép lại rồi bỏ các mảnh vào thùng rác. */
+function uploadBytes_(data) {
+  if (typeof data === 'string') return Utilities.base64Decode(data);
+  var b64 = (data && data.parts || []).map(function (id) {
+    var f = DriveApp.getFileById(id);
+    if (f.getName().indexOf(UPLOAD_TMP) !== 0) throw new Error('Mảnh tải lên không hợp lệ.');
+    var t = f.getBlob().getDataAsString();
+    f.setTrashed(true);
+    return t;
+  }).join('');
+  return Utilities.base64Decode(b64);
+}
+/** Thư mục lưu: thư mục báo cáo của dự án (trống = My Drive), thêm thư mục con theo tháng nếu có (tự tạo). */
+function reportFolder_(folderId, sub) {
+  var folder = folderId ? DriveApp.getFolderById(folderId) : DriveApp.getRootFolder();
+  if (!sub) return folder;
+  var it = folder.getFoldersByName(sub);
+  return it.hasNext() ? it.next() : folder.createFolder(sub);
+}
+
+/** Lưu PPTX báo cáo vào Drive (thư mục chỉ định hoặc My Drive), trả về link. share = bật xem qua link.
+ *  data: base64 hoặc {parts} (xem uploadPart). sub: thư mục con (vd "Tháng 10-2026").
+ *  replaceUrl: link file báo cáo cũ của cùng kỳ/dự án – ghi đè vào đó để link đã gửi vẫn mở được bản mới. */
+function saveReport(data, name, folderId, share, replaceUrl, token, sub) {
+  crmRequireAdmin_(token);
+  var bytes = uploadBytes_(data);
   var old = reportFileToReplace_(replaceUrl);
-  if (old && overwriteFile_(old, Utilities.base64Decode(b64), PPTX_MIME)) {
+  if (old && overwriteFile_(old, bytes, PPTX_MIME)) {
     if (share) shareByLink_(old);
     return old.getUrl();
   }
-  var blob = Utilities.newBlob(Utilities.base64Decode(b64), PPTX_MIME, name);
-  var folder = folderId ? DriveApp.getFolderById(folderId) : DriveApp.getRootFolder();
-  var file = folder.createFile(blob);
+  var file = reportFolder_(folderId, sub).createFile(Utilities.newBlob(bytes, PPTX_MIME, name));
   if (share) shareByLink_(file);
   return file.getUrl();
 }
@@ -180,9 +210,19 @@ function pptxToSlides_(bytes, name) {
   return JSON.parse(res.getContentText()).id;
 }
 
-function convertToPdf(b64, name, folderId, share, replaceUrl, token) {
+/** Chuyển PPTX đã lưu trên Drive (link pptxUrl) sang PDF – không phải gửi lại cả file từ máy. */
+function convertSavedToPdf(pptxUrl, name, folderId, share, replaceUrl, token, sub) {
   crmRequireAdmin_(token);
-  var tmpId = pptxToSlides_(Utilities.base64Decode(b64), name);
+  var m = /\/d\/([\w-]{15,})/.exec(pptxUrl || '');
+  if (!m) throw new Error('Chưa có file PPTX để chuyển PDF.');
+  return pdfFromBytes_(DriveApp.getFileById(m[1]).getBlob().getBytes(), name, folderId, share, replaceUrl, sub);
+}
+function convertToPdf(data, name, folderId, share, replaceUrl, token, sub) {
+  crmRequireAdmin_(token);
+  return pdfFromBytes_(uploadBytes_(data), name, folderId, share, replaceUrl, sub);
+}
+function pdfFromBytes_(bytes, name, folderId, share, replaceUrl, sub) {
+  var tmpId = pptxToSlides_(bytes, name);
   try {
     var pdf = exportBlob_('https://docs.google.com/presentation/d/' + tmpId + '/export/pdf')
       .setName(name.replace(/\.pptx$/i, '') + '.pdf');
@@ -191,8 +231,7 @@ function convertToPdf(b64, name, folderId, share, replaceUrl, token) {
       if (share) shareByLink_(old);
       return { url: old.getUrl(), b64: share ? '' : Utilities.base64Encode(pdf.getBytes()) };
     }
-    var folder = folderId ? DriveApp.getFolderById(folderId) : DriveApp.getRootFolder();
-    var file = folder.createFile(pdf);
+    var file = reportFolder_(folderId, sub).createFile(pdf);
     if (share) shareByLink_(file);
     return { url: file.getUrl(), b64: share ? '' : Utilities.base64Encode(pdf.getBytes()) };
   } finally {
@@ -498,17 +537,43 @@ function crmWebReport_(k) {
   if (!bc) throw new Error('Link báo cáo không đúng hoặc đã bị thay. Nhờ quản trị gửi lại link mới.');
   return bc;
 }
+/** Tháng của một tuần = tháng chứa ngày thứ 5 của tuần đó (tuần vắt qua 2 tháng chỉ tính 1 lần). "2026-09-28" -> "2026-10" */
+function crmWeekMonth_(iso) {
+  var p = String(iso).split('-').map(Number), d = new Date(p[0], p[1] - 1, p[2] + 3);
+  return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2);
+}
+/** Kỳ báo cáo theo mã: tuần "2026-10-05", tháng "2026-10", toàn chiến dịch "all". */
+function crmReportScope_(key, allWeeks) {
+  key = String(key);
+  allWeeks = allWeeks.slice().sort();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(key)) {
+    var p = key.split('-').map(Number), d = new Date(p[0], p[1] - 1, p[2] - 7);
+    var prev = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+    return { ky: 'tuan', weeks: [key], prevWeeks: [prev] };
+  }
+  if (/^\d{4}-\d{2}$/.test(key)) {
+    var y = +key.slice(0, 4), m = +key.slice(5, 7) - 1;
+    var pm = (m === 0 ? y - 1 : y) + '-' + ('0' + (m === 0 ? 12 : m)).slice(-2);
+    return { ky: 'thang', weeks: allWeeks.filter(function (w) { return crmWeekMonth_(w) === key; }),
+      prevWeeks: allWeeks.filter(function (w) { return crmWeekMonth_(w) === pm; }) };
+  }
+  return { ky: 'all', weeks: allWeeks, prevWeeks: [] };
+}
 function crmWebReport(k) {
   var bc = crmWebReport_(k);
   var pj = crmRows_('DuAn').filter(function (p) { return p.ten === bc.duAn; })[0] || {};
   var pick = function (r, keys) { var o = {}; keys.forEach(function (x) { o[x] = r[x]; }); return o; };
   var cols = ['tuan', 'nhanSu', 'nenTang', 'taiKhoan', 'chienDich', 'chiPhi', 'chiPhiPhi', 'lead', 'mql', 'sql', 'deal', 'hienThi', 'tiepCan', 'luotNhap', 'luotXem', 'nguon'];
-  var soLieu = crmRows_('SoLieu').filter(function (r) { return r.duAn === bc.duAn && String(r.tuan) <= String(bc.tuan); })
-    .map(function (r) { return pick(r, cols); });
-  var chungTu = crmRows_('ChungTu').filter(function (r) { return r.duAn === bc.duAn && String(r.tuan) === String(bc.tuan); })
+  var rows = crmRows_('SoLieu').filter(function (r) { return r.duAn === bc.duAn && r.tuan; });
+  var sc = crmReportScope_(bc.tuan, Object.keys(rows.reduce(function (o, r) { o[r.tuan] = 1; return o; }, {})));
+  var last = sc.weeks[sc.weeks.length - 1] || String(bc.tuan);
+  var soLieu = rows.filter(function (r) { return String(r.tuan) <= last; }).map(function (r) { return pick(r, cols); });
+  // ảnh nghiệm thu chỉ có ở báo cáo tuần (báo cáo tháng / toàn chiến dịch là bản tổng hợp số)
+  var chungTu = sc.ky !== 'tuan' ? [] : crmRows_('ChungTu').filter(function (r) { return r.duAn === bc.duAn && String(r.tuan) === String(bc.tuan); })
     .map(function (r) { return pick(r, ['id', 'nhanSu', 'nenTang', 'loai', 'tenFile', 'soTien', 'vat']); });
   return {
     duAn: bc.duAn, tuan: bc.tuan, trangThai: bc.trangThai, ngayTao: bc.ngayTao, pdfUrl: bc.pdfUrl, pptxUrl: bc.pptxUrl,
+    ky: sc.ky, weeks: sc.weeks, prevWeeks: sc.prevWeeks,
     chienDich: pj.chienDich || '', logo: pj.logo || '',
     nhanSu: crmRows_('NhanSu').filter(function (n) { return n.trangThai !== 'Nghỉ'; }).map(function (n) { return n.ten; }),
     soLieu: soLieu, chungTu: chungTu,
