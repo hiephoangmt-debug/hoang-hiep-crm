@@ -272,7 +272,7 @@
     });
   }
 
-  function tableLines(platformFilter, data) {
+  function tableLines(platformFilter, data, label) {
     const lines = [];
     const all = [];
     for (const p of PLATFORMS) {
@@ -284,7 +284,7 @@
         if (!byAcc.has(r.account)) byAcc.set(r.account, []);
         byAcc.get(r.account).push(r);
       });
-      byAcc.forEach((rs, acc) => lines.push([p === "Tiktok" ? "TikTok" : p, Object.assign(aggregate(rs), { account: acc })]));
+      byAcc.forEach((rs, acc) => lines.push([p === "Tiktok" ? "TikTok" : p, Object.assign(aggregate(rs), { account: label ? label(acc) : acc })]));
     }
     if (all.length && (lines.length > 1 || !platformFilter)) {
       lines.push(["TỔNG", Object.assign(aggregate(all), { account: "" })]);
@@ -292,11 +292,11 @@
     return lines;
   }
 
-  function fillTable(t, data, slideH) {
+  function fillTable(t, data, slideH, label) {
     const tbl = t.el.getElementsByTagName("a:tbl")[0];
     const trs = byTag(tbl, "a:tr");
     const header = byTag(trs[0], "a:tc").map((tc) => norm(bodyText(tc)));
-    const lines = tableLines(t.platform, data);
+    const lines = tableLines(t.platform, data, label);
     let rows = trs.slice(1);
     if (!lines.length || !rows.length) return;
     const first0 = () => byTag(rows[0], "a:tc")[0];
@@ -498,7 +498,8 @@
     const d1 = scopeWeeks[0].split("-")[0].trim().replace("/", ".");
     const d2 = scopeWeeks[scopeWeeks.length - 1].split("-")[1].trim().replace("/", ".");
     const base = {
-      campaign: opts.campaign, period: opts.period,
+      campaign: opts.campaign,
+      period: opts.period || `${d1.replace(".", "/")} - ${d2.replace(".", "/")}/${opts.year}`,
       weekNo: opts.weekNo || names.indexOf(week) - names.indexOf(active[0]) + 1,
       weekRangeText: `${d1}.${opts.year} - ${d2}.${opts.year}`,
     };
@@ -507,6 +508,11 @@
       .filter((im) => im.platform === p && im.kind === k && (staff == null || im.staff === staff))
       .map((im) => im.file);
     const perSlide = Math.max(1, opts.perSlide || 1);
+    // Tài khoản chỉ có số: ghi thêm tên nhân sự đã gán ("Mỹ Linh 1091790822198238")
+    const accountLabel = (acc) => {
+      const st = staffOf(acc);
+      return st && /^\d+$/.test(String(acc).trim()) ? `${st} ${acc}` : acc;
+    };
 
     const zip = await JSZip.loadAsync(opts.template);
     const presPath = "ppt/presentation.xml";
@@ -614,7 +620,7 @@
       fillText(s.doc, o.ctx);
       s.tables.forEach((t, i) => {
         t.platform = o.src.tables[i] ? o.src.tables[i].platform : t.platform;
-        fillTable(t, o.ctx.data, H);
+        fillTable(t, o.ctx.data, H, accountLabel);
       });
       if (o.files.length) {
         await placeImages(zip, s, o.files, state);
@@ -921,6 +927,11 @@
     const m = /^(.*\D)\s*\d{6,}\s*$/.exec(String(acc).trim());
     return m && /[^\d\s]/.test(m[1]) ? m[1].trim() : "";
   }
+  /** Nhân sự khai báo sẵn trong config.js theo ID tài khoản. */
+  function cfgStaffFor(acc) {
+    const id = (String(acc).match(/\d{10,}/) || [])[0];
+    return (id && (CFG.accountStaff || {})[id]) || "";
+  }
   function staffList() {
     return Array.from(new Set($("staff").value.split(/[,;\n]/).map((x) => x.trim()).filter(Boolean)));
   }
@@ -934,10 +945,9 @@
     const t = simple(path.concat(name).join(" "));
     const full = list.find((st) => t.includes(simple(st)));
     if (full) return full;
-    const hits = list.filter((st) => {
-      const last = norm(st).split(" ").pop();
-      return last.length >= 2 && t.includes(" " + last + " ");
-    });
+    const STOP = ["anh", "chi", "em", "thi", "van", "sun", "casa", "group", "tai khoan"];
+    const hits = list.filter((st) => norm(st).split(" ")
+      .some((w) => w.length >= 3 && !STOP.includes(w) && t.includes(" " + w + " ")));
     if (hits.length === 1) return hits[0];
     return list.length === 1 ? list[0] : "";
   }
@@ -954,7 +964,7 @@
   function syncStaffFromData() {
     const list = staffList();
     for (const acc of allAccounts().keys()) {
-      if (!accStaff[acc]) accStaff[acc] = staffNameFromAccount(acc);
+      if (!accStaff[acc]) accStaff[acc] = cfgStaffFor(acc) || staffNameFromAccount(acc);
       if (accStaff[acc] && !list.includes(accStaff[acc])) list.push(accStaff[acc]);
     }
     $("staff").value = list.join(", ");
@@ -1130,8 +1140,19 @@
 
   async function onScan() {
     $("scan").disabled = true;
-    const notes = [];
     try {
+      await scan();
+    } catch (e) {
+      console.error(e);
+      setStatus("Lỗi: " + e.message, "err");
+    } finally {
+      $("scan").disabled = false;
+    }
+  }
+
+  async function scan() {
+    const notes = [];
+    {
       await signIn();
       const tplId = parseDriveId($("templateLink").value);
       const dataId = parseDriveId($("dataLink").value);
@@ -1168,25 +1189,58 @@
         await runOcr();
       }
       setStatus("Đã quét xong. " + notes.join(" · ") + ". Kiểm tra lại phân loại ảnh rồi bấm Tạo báo cáo.", "ok");
-    } catch (e) {
-      console.error(e);
-      setStatus("Lỗi: " + e.message, "err");
-    } finally {
-      $("scan").disabled = false;
     }
   }
 
   async function onGenerate(e) {
     e.preventDefault();
+    $("go").disabled = true;
+    try {
+      await generate();
+    } catch (err) {
+      console.error(err);
+      setStatus("Lỗi: " + err.message, "err");
+    } finally {
+      $("go").disabled = false;
+    }
+  }
+
+  /** Quét + tạo báo cáo lần lượt cho mọi dự án có link số liệu, mỗi dự án ra file riêng. */
+  async function onRunAll() {
+    const presets = (CFG.presets || []).filter((p) => p.data);
+    if (!presets.length) return setStatus("Chưa có dự án nào có link số liệu trong config.js.", "err");
+    $("runAll").disabled = $("go").disabled = $("scan").disabled = true;
+    const done = [];
+    try {
+      for (const p of presets) {
+        $("preset").value = p.name;
+        applyPreset(p.name);
+        weeks = null; templateBuf = null;
+        images.forEach((im) => URL.revokeObjectURL(im.url));
+        images = [];
+        renderImages();
+        await scan();
+        const r = await generate();
+        done.push(`${p.name}: ${r.summary}`);
+      }
+      setStatus("Đã tạo báo cáo riêng cho " + presets.length + " dự án. " + done.join(" | "), "ok");
+    } catch (err) {
+      console.error(err);
+      setStatus(`Lỗi ở dự án ${$("preset").value}: ${err.message}` + (done.length ? " (đã xong: " + done.join(" | ") + ")" : ""), "err");
+    } finally {
+      $("runAll").disabled = $("go").disabled = $("scan").disabled = false;
+    }
+  }
+
+  async function generate() {
     const localTpl = $("templateFile").files[0];
     if (localTpl) templateBuf = await localTpl.arrayBuffer();
-    if (!templateBuf) return setStatus("Chưa có PPTX mẫu: dán link Drive và bấm Quét, hoặc chọn file từ máy.", "err");
-    if (!weeks) return setStatus("Chưa có số liệu: dán link Google Sheet và bấm Quét, hoặc chọn file từ máy.", "err");
+    if (!templateBuf) throw new Error("Chưa có PPTX mẫu: dán link Drive và bấm Quét, hoặc chọn file từ máy.");
+    if (!weeks) throw new Error("Chưa có số liệu: dán link Google Sheet và bấm Quét, hoặc chọn file từ máy.");
     const list = staffList();
     const imgs = images.filter((im) => im.include).map((im) => ({ file: im.file, platform: im.platform, kind: im.kind, staff: im.staff }));
     setStatus("Đang tạo báo cáo…");
-    $("go").disabled = true;
-    try {
+    {
       const res = await buildReport({
         template: templateBuf, weeks, images: imgs, staffList: list, staffOf,
         week: $("week").value, weekNo: parseInt($("weekNo").value, 10) || null,
@@ -1233,16 +1287,13 @@
           if (fmt === "pdf") download(res.blob, name);
         }
       }
-      setStatus(`Đã tạo báo cáo: ${res.slides} slide (${res.staffCount} nhân sự), chèn ${res.nImg} ảnh, bỏ ${res.dropped} slide mẫu không dùng.` + pdfErr, pdfErr ? "err" : "ok");
+      const summary = `${res.slides} slide (${res.staffCount} nhân sự), chèn ${res.nImg} ảnh, bỏ ${res.dropped} slide mẫu không dùng.`;
+      setStatus(`Đã tạo báo cáo: ${summary}` + pdfErr, pdfErr ? "err" : "ok");
       if (links.length) {
         $("status").insertAdjacentHTML("beforeend", " Đã lưu vào Drive: " +
           links.map(([l, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${l}</a>`).join(" · ") + ".");
       }
-    } catch (err) {
-      console.error(err);
-      setStatus("Lỗi: " + err.message, "err");
-    } finally {
-      $("go").disabled = false;
+      return { summary: summary + pdfErr, links };
     }
   }
 
@@ -1263,6 +1314,7 @@
 
     $("auth").addEventListener("click", () => signIn().catch((e) => setStatus(e.message, "err")));
     $("scan").addEventListener("click", onScan);
+    $("runAll").addEventListener("click", onRunAll);
     $("dataFile").addEventListener("change", async () => {
       const f = $("dataFile").files[0];
       if (!f) return;

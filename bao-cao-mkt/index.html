@@ -94,7 +94,7 @@
         <label>Số thứ tự tuần (để trống = tự tính)<input type="number" id="weekNo" min="1"></label>
         <label>Năm<input id="year"></label>
         <label>Tên chiến dịch<input id="campaign"></label>
-        <label>Thời gian triển khai<input id="period" placeholder="15/09 - 27/09/2026"></label>
+        <label>Thời gian triển khai (trống = theo tuần)<input id="period" placeholder="05/10 - 11/10/2026"></label>
         <label>Danh sách nhân sự (cách nhau dấu phẩy)<input id="staff" placeholder="Phan Hạnh, Mỹ Linh"></label>
         <label>Tên file xuất<input id="outName" value="bao_cao_mkt"></label>
         <label>Xuất ra<select id="format"><option value="both">PDF + PPTX</option><option value="pdf">PDF</option><option value="pptx">PPTX</option></select></label>
@@ -119,7 +119,10 @@
       <div class="imgs" id="images"></div>
     </section>
 
-    <button id="go" type="submit">Tạo báo cáo</button>
+    <div class="actions">
+      <button id="go" type="submit">Tạo báo cáo</button>
+      <button id="runAll" type="button" class="ghost">Tạo báo cáo tất cả dự án (mỗi dự án một file)</button>
+    </div>
     <div id="status" class="status" role="status"></div>
   </form>
 </main>
