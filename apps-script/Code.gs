@@ -556,6 +556,7 @@ function crmWriteSheet(duAn, tuan, items) {
           sh.getRange(row + 1, c.taiKhoan + 1).setValue(lb).setNote(SHEET_NOTE); vals[row][c.taiKhoan] = lb;
         }
       }
+      if (row == null && it.clear) return; // không có dòng của tài khoản này: không có gì để xoá
       if (row == null) {
         row = rows.filter(function (r) {
           return !used[plat + r] && !cell(r).trim() && ['chiPhi', 'chiPhiPhi', 'lead'].every(function (k) { return c[k] == null || forms[r][c[k]] || vals[r][c[k]] === '' || vals[r][c[k]] === null; });
@@ -565,6 +566,13 @@ function crmWriteSheet(duAn, tuan, items) {
         if (label) { sh.getRange(row + 1, c.taiKhoan + 1).setValue(label).setNote(SHEET_NOTE); vals[row][c.taiKhoan] = label; }
       }
       used[plat + row] = true;
+      if (it.clear) {
+        // xoá các ô app đã ghi cho tài khoản này (dòng số liệu từ ảnh đã bị xoá trong app)
+        ['taiKhoan', 'chiPhi', 'chiPhiPhi', 'lead', 'hienThi', 'tiepCan', 'luotNhap', 'luotXem'].forEach(function (k) {
+          if (c[k] != null && mine(row, c[k])) { sh.getRange(row + 1, c[k] + 1).setValue('').setNote(''); res.written++; }
+        });
+        return;
+      }
       ['chiPhi', 'chiPhiPhi', 'lead', 'hienThi', 'tiepCan', 'luotNhap', 'luotXem'].forEach(function (k) {
         var v = it[k];
         if (v === '' || v == null || c[k] == null) return;

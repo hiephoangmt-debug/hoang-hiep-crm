@@ -60,6 +60,9 @@
   table.data tr.editing td { background:var(--accent-soft); }
   table.data tr.shadow td { opacity:.55; }
   table.data td.act { text-align:right; }
+  table.sheet .act.lead { position:sticky; left:0; z-index:1; background:var(--card); text-align:center; white-space:nowrap; min-width:44px; padding:2px 4px; }
+  table.sheet .act.lead button { font-size:15px; padding:2px 6px; }
+  table.sheet tr.dirty .act.lead { background:var(--accent-soft, #fdecec); }
   table.edit td { padding:3px 4px; }
   .savebar { position:sticky; top:86px; z-index:4; display:flex; gap:8px; align-items:center; flex-wrap:wrap; background:var(--bg); padding:8px 0; margin-bottom:6px; }
   .savebar .sp { flex:1; }
@@ -147,7 +150,7 @@
 </style>
 </head>
 <body>
-<div id="loading">Đang tải CRM… <small class="muted">(giao diện v35)</small></div>
+<div id="loading">Đang tải CRM… <small class="muted">(giao diện v36)</small></div>
 <div id="diag" style="max-width:760px;margin:0 auto;padding:0 16px;color:#b42318;font-size:13px"></div>
 <script>
   // Báo lỗi ngay trên màn hình (để biết trang dừng ở đâu khi không mở được bảng điều khiển trình duyệt)

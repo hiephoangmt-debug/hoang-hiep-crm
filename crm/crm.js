@@ -326,19 +326,20 @@
       const t = { chiPhi: 0, chiPhiPhi: 0, lead: 0, mql: 0, sql: 0, deal: 0, hienThi: 0, tiepCan: 0, luotNhap: 0, luotXem: 0 };
       effective(rs.filter((r) => !isNew(r.id) || drafts.has(r.id))).forEach((r) => Object.keys(t).forEach((k) => (t[k] += num(r[k]))));
       const tr = Object.assign({}, t, { luotNhap: t.luotNhap || "" });
-      return `<tr class="total"><td colspan="2">${label}</td>${GRID.slice(2).map(([k, , type]) =>
-        `<td class="${type === "calc" ? "calc" : ""}">${type === "calc" ? calc(tr, k) : type === "text" ? "" : fmtInt(t[k])}</td>`).join("")}<td></td></tr>`;
+      return `<tr class="total"><td></td><td colspan="2">${label}</td>${GRID.slice(2).map(([k, , type]) =>
+        `<td class="${type === "calc" ? "calc" : ""}">${type === "calc" ? calc(tr, k) : type === "text" ? "" : fmtInt(t[k])}</td>`).join("")}</tr>`;
     };
     const sections = PLATFORMS.map((p) => {
       const rs = rows.filter((r) => (r.nenTang || "Facebook") === p);
+      // nút xoá + nguồn ở ĐẦU hàng (bảng rộng, cột cuối hay bị khuất sau thanh cuộn ngang)
       const body = rs.map((r) => `<tr class="${drafts.has(r.id) ? "dirty" : ""}${isShadowed(r) ? " shadow" : ""}">
-          ${GRID.map((c) => cell(r, c)).join("")}
-          <td class="act">${r.nguon === "anh" ? `<small class="muted" title="${esc(r.ghiChu)}">ảnh${isShadowed(r) ? " · không tính" : ""}</small>` : ""}
-            <button type="button" class="link danger" data-gdel="${esc(r.id)}" title="Xoá dòng">✕</button></td></tr>`).join("");
+          <td class="act lead"><button type="button" class="link danger" data-gdel="${esc(r.id)}" title="Xoá dòng này">✕</button>
+            ${r.nguon === "anh" ? `<small class="muted" title="${esc(r.ghiChu)}${isShadowed(r) ? " – không tính vì đã có số từ Sheet/nhập tay" : ""}">ảnh${isShadowed(r) ? "·0" : ""}</small>` : r.nguon === "sheet" ? `<small class="muted" title="Nhập từ Google Sheet">sheet</small>` : ""}</td>
+          ${GRID.map((c) => cell(r, c)).join("")}</tr>`).join("");
       return `<section class="card grid-sec${rs.length ? "" : " empty"}">
         <div class="sec-head"><h3>${PLATFORM_LABEL[p].toUpperCase()}</h3>
           <button type="button" class="ghost small" data-gadd="${p}">+ Thêm tài khoản ${PLATFORM_LABEL[p]}</button></div>
-        ${rs.length ? `<div class="wrap"><table class="data sheet"><thead><tr>${GRID.map(([, h]) => `<th>${esc(h)}</th>`).join("")}<th></th></tr></thead>
+        ${rs.length ? `<div class="wrap"><table class="data sheet"><thead><tr><th class="act lead"></th>${GRID.map(([, h]) => `<th>${esc(h)}</th>`).join("")}</tr></thead>
           <tbody>${body}${rs.length > 1 ? totalRow(rs, "TỔNG " + PLATFORM_LABEL[p]) : ""}</tbody></table></div>` : ""}
       </section>`;
     }).join("");
@@ -418,7 +419,8 @@
       for (const k of weeks) { const [pj, w] = k.split("|"); try { await pushToSheet(pj, w); } catch (e) { console.error(e); } }
     }
     drafts.clear();
-    toast(`Đã lưu ${saved.length} dòng.`, "ok");
+    const note = await syncSheetAfterChange(saved.filter((r) => r.nguon === "anh"));
+    toast(`Đã lưu ${saved.length} dòng.` + note, "ok");
     refreshFilters();
     renderEntries();
   }
@@ -429,7 +431,9 @@
     await run("Đang xoá", () => gas("crmDelete", "SoLieu", id));
     S.SoLieu = S.SoLieu.filter((x) => x.id !== id);
     drafts.delete(id);
-    toast("Đã xoá.", "ok");
+    let note = "";
+    if (r.nguon === "anh") note = await syncSheetAfterChange([r]);
+    toast("Đã xoá." + note, "ok");
     renderEntries();
   }
   function confirmDiscard() {
@@ -754,6 +758,25 @@
     // điền ngược ID cho các dòng số liệu cũ của người đó (lưu trước khi biết ID) + nhãn trong Google Sheet
     const weeks = await fillMissingAccounts((r) => r.nhanSu === nhanSu && r.nenTang === nenTang);
     for (const k of weeks) { const [pj, w] = k.split("|"); try { await pushToSheet(pj, w); } catch (e) { console.error(e); } }
+  }
+  /**
+   * Sau khi sửa/xoá dòng số liệu từ ảnh: ghi lại Google Sheet của các tuần liên quan;
+   * người · kênh không còn dòng nào thì xoá các ô app đã ghi trước đó.
+   */
+  async function syncSheetAfterChange(rows) {
+    const weeks = Array.from(new Set(rows.map((r) => r.duAn + "|" + r.tuan)));
+    let note = "";
+    for (const k of weeks) {
+      const [pj, w] = k.split("|");
+      const gone = rows.filter((r) => r.duAn === pj && r.tuan === w &&
+        !S.SoLieu.some((x) => x.nguon === "anh" && x.duAn === pj && x.tuan === w && x.nhanSu === r.nhanSu && x.nenTang === r.nenTang));
+      try {
+        if (gone.length) await gas("crmWriteSheet", pj, w, gone.map((r) => ({ nenTang: r.nenTang, taiKhoan: r.taiKhoan, nhanSu: r.nhanSu, clear: true })));
+        const res = await pushToSheet(pj, w);
+        note = res || gone.length ? " Google Sheet đã cập nhật." : "";
+      } catch (e) { note = " Chưa cập nhật được Google Sheet: " + e.message; }
+    }
+    return note;
   }
   /** Dòng số liệu trùng do cùng một ảnh (đọc được + điền tay lại cùng số): giữ một dòng, xoá phần thừa. */
   async function mergeDuplicateImageRows() {
