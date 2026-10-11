@@ -624,7 +624,7 @@
         <span class="cname" title="${esc(c.name)}">${esc(c.name)}${c.status ? ` <small class="cstatus${/tat|tam dung|hoan tat/.test(c.status) ? " off" : ""}">${esc(STATUS_LABEL[c.status] || c.status)}</small>` : ""}</span>
         <input class="cnum" data-p="${i}" data-c="${j}" data-f="spent" value="${fmtInt(c.spent)}" aria-label="Chi tiêu">
         <span class="muted">${[c.results != null ? fmtInt(c.results) + " " + (RESULT_LABEL[c.resultType] || "") : "", c.clicks != null ? fmtInt(c.clicks) + " nhấp" : "",
-          c.impressions != null ? fmtInt(c.impressions) + " hiển thị" : ""].filter(Boolean).join(" · ")}</span></label>`).join("")}
+          c.impressions != null ? fmtInt(c.impressions) + " hiển thị" : "", c.reach != null ? fmtInt(c.reach) + " tiếp cận" : ""].filter(Boolean).join(" · ")}</span></label>`).join("")}
       ${add}</div>`;
   }
   const evSel = new Set(); // ảnh đã lưu đang được tick để xoá nhiều
@@ -693,13 +693,14 @@
       if (r.kind) p.loai = r.kind;
       if (r.platform) p.nenTang = r.platform;
       if (r.staff && r.by === "id") p.nhanSu = r.staff;
-      p.campaigns = p.loai === "hoadon" ? [] : B.extractCampaigns(p.text || "").map((c) => Object.assign(c, { use: dateInWeek(c.date, w) }));
+      p.campaigns = p.loai === "hoadon" ? [] : B.extractCampaigns(p.text || "").map((c) => Object.assign(c, { use: dateInWeek(c.date, w) || (!!c.until && dateInWeek(c.until, w)) }));
       // không đọc ra số: mở sẵn một dòng điền tay ngay dưới ảnh
       if (p.loai !== "hoadon" && !p.campaigns.length) p.campaigns = [{ manual: true, name: "", spent: 0, results: 0, resultType: "lead", use: false }];
       p.invoice = B.extractInvoice(p.text || "") || { total: 0, vat: null };
       p.note = "Đọc: " + ([r.kind && KINDS[r.kind], r.account && "TK " + r.account,
         p.campaigns.length && p.loai !== "hoadon" && p.campaigns.length + " chiến dịch",
-        p.loai === "hoadon" && p.invoice.total && "tổng " + fmtInt(p.invoice.total) + " đ" + (p.invoice.vat != null ? " (VAT " + p.invoice.vat + "%)" : "")].filter(Boolean).join(" · ") || "không nhận ra");
+        p.loai === "hoadon" && p.invoice.total && "tổng " + fmtInt(p.invoice.total) + " đ" + (p.invoice.vat != null ? " (VAT " + p.invoice.vat + "%)" : ""),
+        p.loai === "hoadon" && p.invoice.ref && "số tham chiếu " + p.invoice.ref].filter(Boolean).join(" · ") || "không nhận ra");
     };
     pending.filter((p) => p.text != null && !p.note).forEach(apply);
     renderEvidence();
@@ -733,7 +734,7 @@
       return {
         id: prev ? prev.id : undefined, tuan: m.tuan, duAn: m.duAn, nhanSu: m.nhanSu, nenTang: m.nenTang,
         taiKhoan: soleAccount(m.nhanSu, m.nenTang), chienDich: c.name, chiPhi: c.spent, chiPhiPhi: c.spent,
-        lead: c.resultType === "lead" ? c.results || 0 : 0, luotXem: c.resultType === "thruplay" ? c.results || "" : "",
+        lead: c.resultType === "lead" ? c.results || 0 : 0, luotXem: c.views != null ? c.views : c.resultType === "thruplay" ? c.results || "" : "",
         mql: "", sql: "", deal: "", hienThi: opt0(c.impressions), tiepCan: opt0(c.reach), luotNhap: opt0(c.clicks),
         ghiChu: (c.manual ? "Nhập tay kèm ảnh " : "Đọc từ ảnh ") + m.file, nguon: "anh",
       };
@@ -797,7 +798,8 @@
     const q = (k) => document.querySelector(`[data-inv="${id}"][data-f="${k}"]`);
     q("inv_total").value = fmtInt(inv.total);
     q("inv_vat").value = inv.vat != null ? String(inv.vat) : "";
-    toast(`Hoá đơn ${r.tenFile}: ${fmtInt(inv.total)} đ` + (inv.vat != null ? `, VAT ${inv.vat}%` : "") + (inv.period ? `, kỳ ${inv.period}` : "") + ". Kiểm tra rồi bấm “Lưu & tính Chi phí (+phí)”.", "ok");
+    toast(`Hoá đơn ${r.tenFile}: ${fmtInt(inv.total)} đ` + (inv.vat != null ? `, VAT ${inv.vat}%` : "") + (inv.period ? `, kỳ ${inv.period}` : "") +
+      (inv.ref ? `, số tham chiếu ${inv.ref}` : "") + (inv.account ? `, TK ${inv.account}` : "") + ". Kiểm tra rồi bấm “Lưu & tính Chi phí (+phí)”.", "ok");
   }
   async function saveInvoice(id) {
     const r = S.ChungTu.find((x) => x.id === id);
@@ -841,7 +843,7 @@
       if (B.isPdf(file)) text = await B.pdfText(file);
       else { toast("Đang đọc chữ trong ảnh…", "busy"); text = (await (await B.ocrWorker()).recognize(file)).data.text || ""; }
     } catch (e) { return toast("Không đọc được ảnh: " + e.message, "err"); }
-    const camps = B.extractCampaigns(text).map((c) => Object.assign(c, { use: dateInWeek(c.date, r.tuan) }));
+    const camps = B.extractCampaigns(text).map((c) => Object.assign(c, { use: dateInWeek(c.date, r.tuan) || (!!c.until && dateInWeek(c.until, r.tuan)) }));
     if (!camps.length) {
       toast(`Không đọc ra số chi tiêu trong ${r.tenFile} – gõ số vào ô ngay dưới ảnh.`, "err");
       showText(`Chữ app đọc được trong ${r.tenFile}`, text, "Không tìm thấy số chi tiêu – gõ số vào các ô ngay dưới ảnh rồi bấm “Lưu số”. (Có thể bấm “Chép” gửi đoạn chữ này cho người cài app để chỉnh bộ đọc số.)");
@@ -851,8 +853,11 @@
     }
     const list = camps.map((c) => `${c.use ? "☑" : "☐"} ${c.name}: ${fmtInt(c.spent)} đ` + (c.clicks != null ? ` · ${fmtInt(c.clicks)} nhấp` : "") +
       (c.impressions != null ? ` · ${fmtInt(c.impressions)} hiển thị` : "") + (c.results ? ` · ${fmtInt(c.results)} ${RESULT_LABEL[c.resultType] || ""}` : "")).join("\n");
-    if (!camps.some((c) => c.use)) camps.forEach((c) => (c.use = true));
-    if (!confirm(`Số đọc từ ${r.tenFile} (${r.nhanSu} · ${PLATFORM_LABEL[r.nenTang] || r.nenTang}):\n${list}\n\nLưu vào số liệu tuần ${weekLabel(r.tuan)} và Google Sheet?`)) return;
+    const outOfWeek = !camps.some((c) => c.use);
+    if (outOfWeek) camps.forEach((c) => (c.use = true));
+    if (!confirm(`Số đọc từ ${r.tenFile} (${r.nhanSu} · ${PLATFORM_LABEL[r.nenTang] || r.nenTang}):\n${list}\n\n` +
+      (outOfWeek ? `⚠ Ngày trên ảnh không nằm trong tuần ${weekLabel(r.tuan)} – kiểm tra lại khoảng ngày đã lọc trong Trình quản lý quảng cáo.\n` : "") +
+      `Lưu vào số liệu tuần ${weekLabel(r.tuan)} và Google Sheet?`)) return;
     const n = await run("Đang lưu số liệu", async () => {
       // đọc lại = thay số cũ của ảnh này (kể cả số đọc sai lần trước), không cộng thêm
       const old = rowsOfImage(r).map((x) => x.id);

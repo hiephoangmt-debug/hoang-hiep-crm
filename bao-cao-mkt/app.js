@@ -1015,20 +1015,25 @@
     const N = lines.map(norm);
     const amounts = (l) => Array.from(l.matchAll(MONEY)).map((m) => Math.round(toNum(m[1])));
     let total = 0;
-    // dòng tổng có nhãn rõ ràng
-    const TOTAL = /(tong so tien da lap hoa don|tong so tien da thanh toan|tong cong bang vnd|tong cong|tong thanh toan|total amount|amount paid|grand total|total)/;
-    N.forEach((n, i) => {
-      if (total || !TOTAL.test(n) || /da nap|tra truoc bang/.test(n)) return;
-      const a = amounts(lines[i]).concat(amounts(lines[i + 1] || ""));
-      if (a.length) total = Math.max(...a);
-    });
+    // dòng tổng có nhãn rõ ràng – xét nhãn mạnh trước (bảng tóm tắt Meta có "Đã thanh toán" ở từng dòng giao dịch)
+    const LABELS = ["tong so tien da lap hoa don", "tong so tien da thanh toan", "tong cong bang vnd", "tong cong", "tong thanh toan",
+      "grand total", "total amount", "amount paid", "da thanh toan", "total"];
+    for (const lb of LABELS) {
+      const i = N.findIndex((n) => n.includes(lb) && !/da nap|tra truoc bang/.test(n));
+      if (i < 0) continue;
+      const a = [0, 1, 2].flatMap((k) => amounts(lines[i + k] || ""));
+      if (a.length) { total = Math.max(...a); break; }
+    }
     const all = lines.flatMap(amounts);
     if (all.length) total = Math.max(total, ...all.filter((v) => v <= Math.max(total, 1) * 1.0001 || !total));
     if (!total) return null;
-    const vm = /vat[^\d%]{0,25}(\d{1,2}(?:[.,]\d)?)\s*%/.exec(N.join(" "));
-    const am = /(?:tai khoan|account id|id tai khoan|advertiser id)[^\d]{0,20}(\d[\d-]{7,}\d)/.exec(N.join(" "));
+    const all1 = N.join(" ");
+    const vm = /(?:thue suat|vat rate|thue vat|vat)[^\d%]{0,25}(\d{1,2}(?:[.,]\d)?)\s*%/.exec(all1) || /(?:thue suat|vat rate)\s*:?\s*(\d{1,2})\b/.exec(all1);
+    const am = /(?:id tai khoan|tai khoan|account id|advertiser id|act)[^\d]{0,20}(\d[\d-]{7,}\d)/.exec(N.join(" "));
     const pm = /(\d{1,2}\/\d{1,2}\/\d{4})\s*[-–]\s*(\d{1,2}\/\d{1,2}\/\d{4})/.exec(lines.join(" "));
-    return { total, vat: vm ? toNum(vm[1]) : null, account: am ? am[1].replace(/-/g, "") : "", period: pm ? pm[1] + " - " + pm[2] : "" };
+    const rm = /so tham chieu\s*:?\s*([a-z0-9]{6,})/.exec(all1);
+    return { total, vat: vm ? toNum(vm[1]) : null, account: am ? am[1].replace(/-/g, "") : "", period: pm ? pm[1] + " - " + pm[2] : "",
+      ref: rm ? rm[1].toUpperCase() : "" };
   }
 
   /** Màn hình Google Ads -> {name, spent, results, resultType, date, clicks, impressions} hoặc null. */
@@ -1168,6 +1173,35 @@
     const C = lines.map(compact);
     const STATUS = /(dang hoat dong|da tam dung|da hoan tat|dang tat|da tat)/;
     const STATUS_C = /(danghoatdong|datamdung|dahoantat|dangtat)/;
+
+    // Trình quản lý quảng cáo trên máy tính: dòng tổng "Kết quả từ 26 chiến dịch  30.305.510 đ  1.508.714 …"
+    const fi = N.findIndex((n) => /ket qua tu \d+ (chien dich|nhom quang cao|quang cao)/.test(n));
+    if (fi >= 0) {
+      const tm = /ket qua tu (\d+) (chien dich|nhom quang cao|quang cao)/.exec(N[fi]);
+      const seg = [N[fi].slice(N[fi].indexOf(tm[0]) + tm[0].length)].concat(N.slice(fi + 1, fi + 3)).join(" ");
+      const mo = Array.from(seg.matchAll(MONEY));
+      if (mo.length) {
+        const spent = Math.round(toNum(mo[0][1]));
+        const after = seg.slice(mo[0].index + mo[0][0].length);
+        const ints = Array.from(after.matchAll(/(?:^|\s)(\d{1,3}(?:[.,]\d{3})+|\d+)(?=\s|$)/g)).map((m) => Math.round(toNum(m[1])));
+        // cột theo tiêu đề bảng nếu đọc được, không thì thứ tự mặc định: hiển thị, tiếp cận, lượt click
+        const hdr = N.slice(Math.max(0, fi - 14), fi).find((n) => /chi tieu/.test(n) && /(hien thi|tiep can|click)/.test(n)) || "";
+        const order = hdr ? ["luot hien thi", "nguoi tiep can", "luot click", "luot tuong tac", "thruplay"]
+          .map((k) => [k, hdr.indexOf(k)]).filter((x) => x[1] >= 0).sort((a, b) => a[1] - b[1]).map((x) => x[0])
+          : ["luot hien thi", "nguoi tiep can", "luot click"];
+        const v = {};
+        order.forEach((k, j) => { if (ints[j] != null) v[k] = ints[j]; });
+        const dr = /(\d{1,2})\s*thang\s*(\d{1,2})\s*,?\s*(?:\d{4})?\s*[-–—]\s*(\d{1,2})\s*thang\s*(\d{1,2})/.exec(N.join(" "));
+        const acc = /act[=.:\s]*(\d{10,})/.exec(N.join(" "));
+        return [{
+          name: `Tổng ${tm[1]} ${tm[2] === "chien dich" ? "chiến dịch" : tm[2] === "nhom quang cao" ? "nhóm quảng cáo" : "quảng cáo"}` + (acc ? ` · TK ${acc[1]}` : "") +
+            (dr ? ` (${dr[1]}/${dr[2]} – ${dr[3]}/${dr[4]})` : ""),
+          spent, results: null, resultType: "", date: dr ? `${dr[1]}/${dr[2]}` : "", until: dr ? `${dr[3]}/${dr[4]}` : "", status: "",
+          impressions: v["luot hien thi"] != null ? v["luot hien thi"] : null, reach: v["nguoi tiep can"] != null ? v["nguoi tiep can"] : null,
+          clicks: v["luot click"] != null ? v["luot click"] : null, views: v.thruplay != null ? v.thruplay : null,
+        }];
+      }
+    }
 
     // Google Ads (ads.google.com): các thẻ chỉ số "Lần nhấp / Lượt hiển thị / CPC / Chi phí" của chiến dịch đang mở
     if (/adsgooglecom|googleads|chiendichtimkiem|cpctrbinh|cpctrungbinh/.test(compact(text)) && /chi phi/.test(N.join(" "))) {
