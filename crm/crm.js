@@ -529,7 +529,8 @@
         const cells = Object.keys(KINDS).map((k) => {
           if (!REQ[p][k]) {
             const why = `${PLATFORM_LABEL[p]} không cần ảnh “${KINDS[k]}” – mẫu báo cáo chỉ có slide Chiến dịch + Hoá đơn. Ảnh quảng cáo ${PLATFORM_LABEL[p]} (nếu có) được đặt chung vào slide Chiến dịch.`;
-            return `<td class="muted" title="${esc(why)}" data-req="${esc(why)}">Không cần</td>`;
+            const got = ev.filter((r) => r.nhanSu === st && r.nenTang === p && r.loai === k).length;
+            return `<td class="muted" title="${esc(why)}" data-req="${esc(why)}">Không cần${got ? `<br><small>${got} ảnh → tính vào Chiến dịch</small>` : ""}</td>`;
           }
           const n = ev.filter((r) => r.nhanSu === st && r.nenTang === p && (r.loai === k || (k === "ads" && r.loai === "qc" && !REQ[p].qc))).length;
           if (!n) missing++;
