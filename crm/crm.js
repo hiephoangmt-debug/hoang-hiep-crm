@@ -777,7 +777,12 @@
       (c.impressions != null ? ` · ${fmtInt(c.impressions)} hiển thị` : "") + (c.results ? ` · ${fmtInt(c.results)} ${RESULT_LABEL[c.resultType] || ""}` : "")).join("\n");
     if (!camps.some((c) => c.use)) camps.forEach((c) => (c.use = true));
     if (!confirm(`Số đọc từ ${r.tenFile} (${r.nhanSu} · ${PLATFORM_LABEL[r.nenTang] || r.nenTang}):\n${list}\n\nLưu vào số liệu tuần ${weekLabel(r.tuan)} và Google Sheet?`)) return;
-    const n = await run("Đang lưu số liệu", () => saveCampaignRows(camps.filter((c) => c.use), { tuan: r.tuan, duAn: r.duAn, nhanSu: r.nhanSu, nenTang: r.nenTang, file: r.tenFile }));
+    const n = await run("Đang lưu số liệu", async () => {
+      // đọc lại = thay số cũ của ảnh này (kể cả số đọc sai lần trước), không cộng thêm
+      const old = rowsOfImage(r).map((x) => x.id);
+      if (old.length) { await gas("crmDelete", "SoLieu", old); S.SoLieu = S.SoLieu.filter((x) => !old.includes(x.id)); }
+      return saveCampaignRows(camps.filter((c) => c.use), { tuan: r.tuan, duAn: r.duAn, nhanSu: r.nhanSu, nenTang: r.nenTang, file: r.tenFile });
+    });
     let note = "";
     try { note = pushNote(await pushToSheet(r.duAn, r.tuan)); } catch (e) { note = " Chưa ghi được vào Google Sheet: " + e.message; }
     toast(`Đã lưu ${n} dòng số liệu từ ${r.tenFile}.` + note, "ok");

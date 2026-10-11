@@ -1014,21 +1014,35 @@
     N.forEach((n, i) => LBL.forEach(([k, re]) => { if (at[k] == null && re.test(n)) at[k] = i; }));
     const row = scorecardRow(lines, N, LBL);
     if (row) {
-      // Không dựa hết vào thứ tự nhãn/số (ô chữ trắng nền xanh hay bị đọc sót → lệch cột):
-      // chi phí = số tiền "đ" lớn nhất ngay dưới hàng nhãn, CPC = số tiền nhỏ nhất, lần nhấp ≈ chi phí ÷ CPC.
+      // Không tin hẳn vào thứ tự ô (ô nền xanh hay bị đọc sót) hay dòng số nhỏ "↑ 2.327.110 đ" (mũi tên hay bị
+      // đọc thành chữ số "4"/"1" dính vào số). Chi phí phải khớp lượt nhấp × CPC.
       const ms = [];
       for (let i = row.at; i < Math.min(lines.length, row.at + 5); i++) {
         if (/\/\s*ngay|ngan sach/.test(N[i])) continue;
         money(lines[i]).forEach((m) => ms.push(m.v));
       }
-      const hi = ms.length ? Math.max(...ms) : 0, lo = ms.length ? Math.min(...ms) : 0;
-      if (hi && lo && hi > lo) {
-        row.cost = hi; row.cpc = lo;
-        const est = hi / lo;
+      const cpc = ms.length > 1 ? Math.min(...ms) : row.cpc || 0;
+      const strip = (v) => { const t = String(v); return t.length > 4 ? Number(t.slice(1)) : 0; };
+      const cands = Array.from(new Set([row.cost].concat(ms, ms.map(strip)).filter((v) => v && v > cpc)));
+      let cost = 0;
+      if (row.clicks && cpc) {
+        const target = row.clicks * cpc;
+        const best = cands.sort((a, b) => Math.abs(a - target) - Math.abs(b - target))[0];
+        if (best && Math.abs(best - target) <= target * 0.15) cost = best;
+      }
+      if (!cost && row.cost && row.cost > cpc) cost = row.cost;
+      if (!cost && cands.length) {
+        // không có lượt nhấp: số tiền xuất hiện cả ở thẻ lẫn dòng nhỏ là chắc nhất, sau đó mới tới số lớn nhất
+        const twice = cands.filter((v) => ms.filter((x) => x === v).length > 1);
+        cost = twice.length ? Math.max(...twice) : Math.max(...cands.filter((v) => ms.includes(v)));
+      }
+      if (cost && cpc) {
+        row.cpc = cpc;
+        const est = cost / cpc;
         if (!(row.clicks && Math.abs(row.clicks - est) <= Math.max(1, est * 0.2))) row.clicks = Math.round(est);
-        if (row.impressions && (row.impressions < row.clicks || row.impressions === lo || row.impressions === hi)) row.impressions = null;
-      } else if (hi && hi > (row.cpc || 0)) row.cost = hi;
-      if (row.cost && row.cpc && row.cost <= row.cpc) row.cost = 0; // chi phí không thể ≤ CPC: đọc nhầm
+      }
+      row.cost = cost;
+      if (row.impressions && (row.impressions < (row.clicks || 0) || row.impressions === cpc || row.impressions === cost)) row.impressions = null;
       if (row.cost) return finishGoogle(lines, N, row);
     }
     if (at.cost == null) return null;
@@ -1082,7 +1096,8 @@
         if (toks.length < 2) continue;
         if (toks.length > found.length) toks = toks.slice(toks.length - found.length); // bỏ chữ số của thanh menu bên trái
         const val = { at: i };
-        found.forEach(([k], n) => { if (toks[n] != null) val[k] = Math.round(toNum(toks[n])); });
+        // chỉ nhận số đúng dạng (10 / 2.584 / 16.273); "153.9883" = số dính ký hiệu bị che -> bỏ
+        found.forEach(([k], n) => { if (toks[n] != null && /^\d{1,3}([.,]\d{3})*$/.test(toks[n])) val[k] = Math.round(toNum(toks[n])); });
         return val;
       }
     }
@@ -1104,7 +1119,8 @@
       name = words.slice(start, end).join(" ").trim();
       for (let k = ci - 1; !name && k >= 0 && k >= ci - 3; k--) if (lines[k].replace(/\W/g, "").length > 3) name = lines[k].trim();
       // tên nằm ngay dưới (thanh tiêu đề bị đọc đảo dòng): dòng có [Search]/[PMax]… hoặc có dấu "-"/"–"
-      if (!name && lines[ci + 1] && /^\[|[-–—|]/.test(lines[ci + 1]) && !/:/.test(lines[ci + 1])) name = lines[ci + 1].trim();
+      if (!name && lines[ci + 1] && /^\[|[-–—|]/.test(lines[ci + 1]) && !/:/.test(lines[ci + 1]) &&
+        !/thang|tuy chinh|quang cao|tong quan|ngay qua/.test(N[ci + 1])) name = lines[ci + 1].trim();
     }
     const d = N.map((n) => /thang\s*(\d{1,2})\s+(\d{1,2})\s*[-–—‒]\s*\d{1,2}/.exec(n) || /(\d{1,2})\s*thg\s*(\d{1,2})/.exec(n)).find(Boolean);
     const date = d ? (/thang/.test(d[0]) ? `${d[2]}/${d[1]}` : `${d[1]}/${d[2]}`) : "";
