@@ -383,7 +383,8 @@
       const a = S.TaiKhoan.find((t) => digitsOf(t.maTaiKhoan) && digitsOf(t.maTaiKhoan) === digitsOf(r.taiKhoan));
       if (a && a.nhanSu && !r.nhanSu) r.nhanSu = a.nhanSu;
     }
-    if (f === "nhanSu" && !r.taiKhoan) r.taiKhoan = soleAccount(r.nhanSu, r.nenTang);
+    // đổi người: ID theo tên người mới (giữ ID đang gõ nếu không thuộc người khác)
+    if (f === "nhanSu" && (!r.taiKhoan || (accountOwner(r.taiKhoan) && accountOwner(r.taiKhoan) !== r.nhanSu))) r.taiKhoan = soleAccount(r.nhanSu, r.nenTang);
     renderEntries();
   }
   async function saveGrid() {
@@ -730,10 +731,19 @@
     } catch (e) { toast("Không đọc được chữ trong ảnh: " + e.message, "err"); }
   }
   /** Tài khoản QC duy nhất của nhân sự trên kênh (để gán cho số liệu đọc từ ảnh). */
+  /**
+   * ID tài khoản mặc định của một người trên một kênh (ID đi theo tên – một tài khoản chạy nhiều chiến dịch).
+   * Nhiều tài khoản: lấy tài khoản dùng gần nhất trong số liệu, không có thì tài khoản đầu tiên trong Danh mục.
+   */
   function soleAccount(staff, platform) {
-    const accs = S.TaiKhoan.filter((t) => t.nhanSu === staff && (!t.nenTang || t.nenTang === platform));
-    return accs.length === 1 ? accs[0].maTaiKhoan : "";
+    const accs = S.TaiKhoan.filter((t) => t.nhanSu === staff && (!t.nenTang || t.nenTang === (platform || "Facebook")));
+    if (accs.length <= 1) return accs.length ? accs[0].maTaiKhoan : "";
+    const used = S.SoLieu.filter((r) => r.nhanSu === staff && (r.nenTang || "Facebook") === (platform || "Facebook") && digitsOf(r.taiKhoan || ""))
+      .sort((a, b) => String(b.tuan + b.ngayTao).localeCompare(String(a.tuan + a.ngayTao)))
+      .find((r) => accs.some((t) => digitsOf(t.maTaiKhoan) === digitsOf(r.taiKhoan)));
+    return used ? used.taiKhoan : accs[0].maTaiKhoan;
   }
+  const accountOwner = (acc) => { const a = digitsOf(acc || "") && S.TaiKhoan.find((t) => digitsOf(t.maTaiKhoan) === digitsOf(acc)); return a ? a.nhanSu : ""; };
   /** ID tài khoản mới đọc được -> thêm vào Danh mục (lần sau app tự biết ảnh/hoá đơn của ai). */
   async function rememberAccount(acc, nhanSu, nenTang) {
     const id = digitsOf(acc || "");
