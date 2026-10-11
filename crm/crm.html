@@ -102,6 +102,8 @@
   form.grid .wide { grid-column:span 2; }
   .actions { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:10px; }
   .drop { border:2px dashed var(--line); border-radius:10px; padding:18px; text-align:center; color:var(--muted); }
+  #evCheck td[data-req] { cursor:pointer; }
+  #evCheck td.muted { font-size:12px; }
   .camp.manual input.cname { flex:1; min-width:0; font-size:12px; padding:3px 5px; }
   .camp.manual .lead { width:56px; }
   .drop.over { border-color:var(--accent); background:var(--accent-soft); }
@@ -138,7 +140,7 @@
 </style>
 </head>
 <body>
-<div id="loading">Đang tải CRM… <small class="muted">(giao diện v17)</small></div>
+<div id="loading">Đang tải CRM… <small class="muted">(giao diện v18)</small></div>
 <div id="diag" style="max-width:760px;margin:0 auto;padding:0 16px;color:#b42318;font-size:13px"></div>
 <script>
   // Báo lỗi ngay trên màn hình (để biết trang dừng ở đâu khi không mở được bảng điều khiển trình duyệt)
@@ -219,7 +221,7 @@
       </div>
       <section class="card">
         <div class="sec-head"><h3>Kiểm tra nghiệm thu (theo mẫu, slide 8–25)</h3><b id="evCheckSum"></b></div>
-        <p class="hint">Mỗi kênh đã chạy cần đủ ảnh: <b>Chiến dịch</b>, <b>QC đang chạy</b>, <b>Hoá đơn</b> (Google: Chiến dịch + Hoá đơn). Rê chuột vào ô “Thiếu” để xem các mục phải khoanh.</p>
+        <p class="hint">Mỗi kênh đã chạy cần đủ ảnh: <b>Chiến dịch</b>, <b>QC đang chạy</b>, <b>Hoá đơn</b> (Google: Chiến dịch + Hoá đơn). Bấm vào ô bất kỳ để xem các mục phải khoanh; “Không cần” = mẫu báo cáo không có trang đó cho kênh này.</p>
         <div class="wrap" id="evCheck"></div>
       </section>
       <section class="card">

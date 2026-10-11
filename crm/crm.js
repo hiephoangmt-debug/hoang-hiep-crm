@@ -527,10 +527,15 @@
       const plats = PLATFORMS.filter((p) => data.some((r) => r.nhanSu === st && (r.nenTang || "Facebook") === p) || ev.some((r) => r.nhanSu === st && r.nenTang === p));
       plats.forEach((p) => {
         const cells = Object.keys(KINDS).map((k) => {
-          if (!REQ[p][k]) return `<td class="muted">–</td>`;
+          if (!REQ[p][k]) {
+            const why = `${PLATFORM_LABEL[p]} không cần ảnh “${KINDS[k]}” – mẫu báo cáo chỉ có slide Chiến dịch + Hoá đơn. Ảnh quảng cáo ${PLATFORM_LABEL[p]} (nếu có) được đặt chung vào slide Chiến dịch.`;
+            return `<td class="muted" title="${esc(why)}" data-req="${esc(why)}">Không cần</td>`;
+          }
           const n = ev.filter((r) => r.nhanSu === st && r.nenTang === p && (r.loai === k || (k === "ads" && r.loai === "qc" && !REQ[p].qc))).length;
           if (!n) missing++;
-          return n ? `<td class="ok-cell" title="${esc(REQ[p][k])}">✓ ${n}</td>` : `<td class="miss-cell" title="Cần chụp: ${esc(REQ[p][k])}">Thiếu</td>`;
+          const need = `${st} · ${PLATFORM_LABEL[p]} · ${KINDS[k]} – cần thấy rõ: ${REQ[p][k]}`;
+          return n ? `<td class="ok-cell" title="${esc(REQ[p][k])}" data-req="${esc(need)} (đã có ${n} ảnh)">✓ ${n}</td>`
+            : `<td class="miss-cell" title="Cần chụp: ${esc(REQ[p][k])}" data-req="${esc(need)}">Thiếu</td>`;
         }).join("");
         rows.push(`<tr><td>${esc(st)}</td><td>${PLATFORM_LABEL[p]}</td>${cells}</tr>`);
       });
@@ -1082,6 +1087,11 @@
           : "Không có ảnh mới trong thư mục chứng từ cho tuần/dự án này.") + (nDup ? ` Đã xoá ${nDup} ảnh trùng.` : ""), got.length || nDup ? "ok" : "");
         renderEvidence();
       } catch (_) { /* đã báo */ } finally { $("evScan").disabled = false; }
+    });
+    // chạm vào ô của bảng kiểm (điện thoại không rê chuột được): hiện yêu cầu của ô đó
+    $("evCheck").addEventListener("click", (e) => {
+      const td = e.target.closest("td[data-req]");
+      if (td) toast(td.dataset.req, "");
     });
     $("evDedupe").addEventListener("click", async () => {
       $("evDedupe").disabled = true;
