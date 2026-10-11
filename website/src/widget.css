@@ -8,12 +8,12 @@ button, input { font: inherit; }
 .fab:hover { transform: scale(1.06); }
 .fab-call { background: linear-gradient(135deg, #2fbf5b, #1e9e46); color: #fff; font-size: 22px; animation: ring 1.8s infinite; }
 .fab-zalo { background: #0068ff; color: #fff; font-size: 13px; letter-spacing: .02em; }
-.fab-chat { background: linear-gradient(135deg, var(--orange), var(--orange-600)); color: var(--navy-900); width: 62px; height: 62px; }
+.fab-chat { background: linear-gradient(135deg, var(--orange), var(--orange-600)); color: #fff; }
 .fab-chat::before { content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid var(--orange); opacity: .6; animation: halo 2s ease-out infinite; }
 .fab-badge { position: absolute; top: -2px; right: -2px; min-width: 20px; height: 20px; border-radius: 10px; background: #e4572e; color: #fff; font-size: 12px; display: grid; place-items: center; border: 2px solid #fff; }
 .fab-label { position: absolute; right: calc(100% + 10px); top: 50%; transform: translateY(-50%); background: var(--navy-900); color: #fff; font-size: 13px; font-weight: 700; padding: 6px 10px; border-radius: 8px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s; }
 .fab:hover .fab-label, .fab:focus-visible .fab-label, .fab-chat .fab-label { opacity: 1; }
-.fab-chat .fab-label { background: #fff; color: var(--navy-900); box-shadow: 0 6px 18px rgba(10,22,48,.25); }
+.fab-label { background: #fff !important; color: var(--orange-600) !important; box-shadow: 0 6px 18px rgba(10,22,48,.2); }
 .fab:focus-visible, .act:focus-visible, .chat-chips button:focus-visible, .chat-form button:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
 @keyframes ring { 0%, 50%, 100% { transform: rotate(0); } 10%, 30% { transform: rotate(-12deg); } 20%, 40% { transform: rotate(12deg); } }
 @keyframes halo { 0% { transform: scale(.9); opacity: .7; } 100% { transform: scale(1.35); opacity: 0; } }
@@ -53,7 +53,6 @@ button, input { font: inherit; }
 @media (max-width: 640px) {
   .floating { right: 8px; bottom: 10px; gap: 8px; }
   .fab { width: 50px; height: 50px; }
-  .fab-chat { width: 56px; height: 56px; }
   .fab-label { display: none; }
   .chat-teaser { right: 70px; bottom: 128px; }
   .chatbox { right: 0; left: 0; bottom: 0; width: 100%; height: min(88vh, 640px); border-radius: 20px 20px 0 0; }
