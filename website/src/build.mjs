@@ -113,6 +113,11 @@ const specCard = (title, specs, note) => `
         </div>`;
 
 const SZ = JSON.parse(readFileSync(new URL("../public/assets/img/minh-hoa/sizes.json", import.meta.url), "utf8"));
+const SZP = JSON.parse(readFileSync(new URL("../public/assets/img/phoi-canh/sizes.json", import.meta.url), "utf8"));
+const PC = { 1: ["fpt-city-phoi-canh-tong-the-1", "Phối cảnh tổng thể khu đô thị FPT City Đà Nẵng nhìn từ trên cao, sông Cổ Cò, cầu vòm và quảng trường trung tâm"], 2: ["fpt-city-phoi-canh-tong-the-2", "Phối cảnh toàn cảnh khu đô thị FPT City Đà Nẵng: hồ trung tâm, các phân khu nhà ở, sông Cổ Cò và cầu vòm"] };
+const photo = (n) => `<figure class="fp-figure reveal"><img src="/assets/img/phoi-canh/${PC[n][0]}-sm.webp" srcset="/assets/img/phoi-canh/${PC[n][0]}-sm.webp 800w, /assets/img/phoi-canh/${PC[n][0]}.webp 1600w" sizes="(max-width:700px) 100vw, 1100px" width="1600" height="${SZP[PC[n][0]]}" loading="lazy" decoding="async" alt="${esc(PC[n][1])}"><figcaption class="small" style="text-align:center;margin-top:8px">Hình ảnh minh hoạ phối cảnh tổng thể theo tài liệu giới thiệu của chủ đầu tư; thực tế có thể thay đổi.</figcaption></figure>`;
+const photoSection = (nums, title) => `
+    <section class="section"><div class="container"><div class="section-head reveal"><p class="eyebrow dark">Phối cảnh</p><h2 class="title">${esc(title)}</h2></div><div style="max-width:1100px;margin:0 auto;display:grid;gap:18px">${nums.map(photo).join("")}</div></div></section>`;
 const illus = (file, alt) => `<figure class="fp-figure illus reveal"><img src="/assets/img/minh-hoa/${file}-sm.webp" srcset="/assets/img/minh-hoa/${file}-sm.webp 600w, /assets/img/minh-hoa/${file}.webp 1200w" sizes="(max-width:700px) 100vw, 1100px" width="1200" height="${SZ[file] || 700}" loading="lazy" decoding="async" alt="${esc(alt)}"></figure>`;
 const illusSection = (file, eyebrow, title, alt) => `
     <section class="section"><div class="container"><div class="section-head reveal"><p class="eyebrow dark">${esc(eyebrow)}</p><h2 class="title">${esc(title)}</h2></div><div style="max-width:960px;margin:0 auto">${illus(file, alt)}</div></div></section>`;
@@ -499,6 +504,7 @@ function write(path, html) {
     </section>
     ${related("Chuỗi căn hộ FPT Plaza 1 – 5", plazaCards())}
     ${illusSection("chuoi-fpt-plaza", "Quy mô", "Chuỗi căn hộ FPT Plaza 1–5 trong một biểu đồ", "Biểu đồ quy mô căn hộ FPT Plaza 1, 2, 3, 4, 5 tại FPT City Đà Nẵng", 1200, 730)}
+    ${photoSection([1, 2], "Phối cảnh tổng thể khu đô thị FPT City")}
     ${location()}
     ${amenities()}
     ${ctaSection({
@@ -549,6 +555,7 @@ function write(path, html) {
       </div>
     </section>
     ${illusSection("dat-nen-phan-khu", "Phân khu", "Diện tích lô phổ biến theo phân khu V1 – V6", "Biểu đồ diện tích lô đất nền FPT City theo phân khu V1 đến V6", 1200, 771)}
+    ${photoSection([2], "Phối cảnh khu đô thị FPT City – nơi có các phân khu đất nền")}
     ${location("Đất nền FPT City – vị trí kết nối phía Nam Đà Nẵng")}
     ${ctaSection({
       heading: "Nhận bảng giá đất nền FPT City mới nhất",
@@ -601,6 +608,7 @@ for (const z of zones) {
       </div>
     </section>
     ${illusSection("dat-nen-" + z.code.toLowerCase(), "Đặc điểm khu", `Đất nền FPT City phân khu ${z.code} có gì nổi bật?`, `Đặc điểm đất nền FPT City phân khu ${z.code}`, 1200, 733)}
+    ${photoSection([z.code.length && +z.code.slice(1) % 2 ? 1 : 2], `Phối cảnh khu đô thị FPT City – vị trí phân khu ${z.code}`)}
     ${location(`Vị trí đất FPT City phân khu ${z.code}`)}
     ${ctaSection({
       heading: `Nhận bảng giá đất phân khu ${z.code}`,
@@ -660,6 +668,7 @@ for (const z of zones) {
     </section>
     ${related("Xem chi tiết từng tòa", plazaCards())}
     ${illusSection("chuoi-fpt-plaza", "Quy mô", "Chuỗi căn hộ FPT Plaza 1–5 trong một biểu đồ", "Biểu đồ quy mô căn hộ FPT Plaza 1, 2, 3, 4, 5 tại FPT City Đà Nẵng", 1200, 730)}
+    ${photoSection([1], "Phối cảnh khu đô thị FPT City – nơi có chuỗi căn hộ FPT Plaza")}
     ${location("Căn hộ FPT Plaza – vị trí kết nối phía Nam Đà Nẵng")}
     ${amenities()}
     ${ctaSection({
@@ -731,6 +740,7 @@ for (const p of plazas) {
     </section>
     ${p.floorplan ? floorplanSection(p, fp4) : ""}
     ${p.slug === "fpt-plaza-4" ? illusSection("loai-can-" + p.slug, "Loại căn", `Loại căn & diện tích ${p.name}`, `Loại căn và diện tích tham khảo ${p.name} Đà Nẵng`) : ""}
+    ${photoSection([+p.slug.slice(-1) % 2 ? 1 : 2], `Phối cảnh khu đô thị FPT City – vị trí ${p.name}`)}
     ${location(`Vị trí ${p.name} – trong lõi khu đô thị FPT City`)}
     ${amenities()}
     ${ctaSection({

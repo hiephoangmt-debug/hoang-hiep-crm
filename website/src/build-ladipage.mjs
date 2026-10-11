@@ -87,6 +87,11 @@ const head = (h) => `
 
 const SZ = JSON.parse(readFileSync(join(HERE, "..", "public", "assets", "img", "minh-hoa", "sizes.json"), "utf8"));
 const MH = `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/4f3511e5400317c7aa4d347e8d4bbef347f9f377/website/public/assets/img/minh-hoa`;
+const SZP = JSON.parse(readFileSync(join(HERE, "..", "public", "assets", "img", "phoi-canh", "sizes.json"), "utf8"));
+const PCB = `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/@@PSHA@@/website/public/assets/img/phoi-canh`;
+const PC = { 1: ["fpt-city-phoi-canh-tong-the-1", "Phối cảnh tổng thể khu đô thị FPT City Đà Nẵng nhìn từ trên cao, sông Cổ Cò, cầu vòm và quảng trường trung tâm"], 2: ["fpt-city-phoi-canh-tong-the-2", "Phối cảnh toàn cảnh khu đô thị FPT City Đà Nẵng: hồ trung tâm, các phân khu nhà ở, sông Cổ Cò và cầu vòm"] };
+const photo = (n) => `<figure style="margin:0"><img src="${PCB}/${PC[n][0]}.webp" alt="${esc(PC[n][1])}" width="1600" height="${SZP[PC[n][0]]}" loading="lazy"><figcaption class="small" style="text-align:center;margin-top:8px">Hình ảnh minh hoạ phối cảnh tổng thể theo tài liệu giới thiệu của chủ đầu tư; thực tế có thể thay đổi.</figcaption></figure>`;
+const photoSection = (nums, title) => `<section><div class="wrap">${head({ eyebrow: "Phối cảnh", title })}<div style="max-width:1100px;margin:0 auto;display:grid;gap:18px">${nums.map(photo).join("")}</div></div></section>`;
 const illus = (file, alt) => `<figure style="margin:0"><img src="${MH}/${file}.webp" alt="${esc(alt)}" width="1200" height="${SZ[file] || 700}" loading="lazy"></figure>`;
 const illusSection = (file, eyebrow, title, alt) => `<section><div class="wrap">${head({ eyebrow, title })}<div style="max-width:960px;margin:0 auto">${illus(file, alt)}</div></div></section>`;
 const distances = () => `
@@ -265,6 +270,7 @@ ${unitsSection}
 ${band(H.band, H.bandBtn)}
 <section class="tint"><div class="wrap">${head({ eyebrow: "So sánh", title: "FPT Plaza 1, 2, 3, 4, 5: khác nhau thế nào?" })}${COMPARE(p.slug)}</div></section>
 ${p.slug === "fpt-plaza-4" ? illusSection("loai-can-" + p.slug, "Loại căn", `Loại căn & diện tích ${p.name}`, `Loại căn và diện tích tham khảo ${p.name} Đà Nẵng`) : ""}
+${photoSection([+p.slug.slice(-1) % 2 ? 1 : 2], `Phối cảnh khu đô thị FPT City – vị trí ${p.name}`)}
 ${distances()}
 ${amenities()}
 ${ctaSection({
@@ -314,6 +320,7 @@ ${hero({
   </div></div></section>
 ${band(H.band, H.bandBtn)}
 ${illusSection("dat-nen-" + z.code.toLowerCase(), "Đặc điểm khu", `Đất nền FPT City phân khu ${z.code} có gì nổi bật?`, `Đặc điểm đất nền FPT City phân khu ${z.code}`, 733)}
+${photoSection([+z.code.slice(1) % 2 ? 1 : 2], `Phối cảnh khu đô thị FPT City – vị trí phân khu ${z.code}`)}
 ${distances()}
 ${amenities()}
 ${ctaSection({
@@ -355,6 +362,7 @@ ${hero({
 <div class="tbl"><table><thead><tr><th>Phân khu</th><th>Đặc điểm nổi bật</th><th></th></tr></thead><tbody>${zones.map((z) => `<tr><th scope="row">${z.code}</th><td>${esc(z.traits.slice(0, 2).join(" · "))}</td><td><a href="${link(z.slug)}">Xem →</a></td></tr>`).join("")}</tbody></table></div></div></section>
 ${band("Phân khu nào đang có lô vừa tầm giá của bạn? Gửi ngân sách để biết.", "Nhận giỏ hàng theo ngân sách")}
 ${illusSection("dat-nen-phan-khu", "Phân khu", "Diện tích lô phổ biến theo phân khu V1 – V6", "Biểu đồ diện tích lô đất nền FPT City theo phân khu V1 đến V6", 771)}
+${photoSection([2], "Phối cảnh khu đô thị FPT City – nơi có các phân khu đất nền")}
 ${distances()}
 ${amenities()}
 ${ctaSection({ title: "Nhận giỏ hàng đất nền FPT City theo tầm giá", intro: "Giá đất khác nhau theo từng lô. Đăng ký để nhận:", formTitle: "Lô nào vừa ngân sách của bạn?", formHtml: form("c", { button: "Gửi tôi 3 lô phù hợp nhất", budget: BUDGET_LAND }), steps: ["<b>3 lô gợi ý</b> vừa ngân sách bạn chọn.", "<b>Bản đồ phân lô</b> chi tiết từng phân khu.", "<b>Thông tin pháp lý</b> sổ đỏ từng lô.", "<b>Lịch xem đất</b> cùng chuyên viên."] })}
@@ -391,6 +399,7 @@ ${hero({
 ${gotoSec("Xem chi tiết từng tòa", plazaTiles(""), "Chọn tòa")}
 ${band("Một câu hỏi: ngân sách của bạn đang nằm ở tòa nào?", "Nhận 3 căn gợi ý")}
 ${illusSection("chuoi-fpt-plaza", "Quy mô", "Chuỗi căn hộ FPT Plaza 1–5 trong một biểu đồ", "Biểu đồ quy mô căn hộ FPT Plaza 1, 2, 3, 4, 5 tại FPT City Đà Nẵng", 730)}
+${photoSection([1], "Phối cảnh khu đô thị FPT City – nơi có chuỗi căn hộ FPT Plaza")}
 ${distances()}
 ${amenities()}
 ${ctaSection({ title: "Nhận bảng giá căn hộ FPT Plaza theo ngân sách", intro: "Để lại thông tin để nhận:", formTitle: "Gửi ngân sách, nhận 3 căn gợi ý", formHtml: form("c", { button: "Gửi tôi 3 căn phù hợp nhất", budget: BUDGET_APT }), steps: ["<b>3 căn gợi ý</b> theo ngân sách bạn chọn.", "<b>Bảng giá</b> FPT Plaza 3, 4 và giỏ hàng chuyển nhượng Plaza 1, 2.", "<b>Mặt bằng</b> tầng điển hình & layout căn hộ.", "<b>Thông tin FPT Plaza 5</b> ngay khi có."] })}
@@ -437,6 +446,7 @@ ${gotoSec("Chuỗi căn hộ FPT Plaza 1 – 5", plazaTiles(""), "Căn hộ")}
 ${gotoSec("Đất nền theo phân khu V1 – V6", zoneTiles(""), "Đất nền")}
 ${band("Bạn đã biết ngân sách của mình mua được gì ở FPT City chưa?", "Nhận 3 gợi ý phù hợp")}
 ${illusSection("chuoi-fpt-plaza", "Quy mô", "Chuỗi căn hộ FPT Plaza 1–5 trong một biểu đồ", "Biểu đồ quy mô căn hộ FPT Plaza 1, 2, 3, 4, 5 tại FPT City Đà Nẵng", 730)}
+${photoSection([1, 2], "Phối cảnh tổng thể khu đô thị FPT City")}
 ${distances()}
 ${amenities()}
 ${ctaSection({ title: "Nhận bảng giá FPT City: đất nền & căn hộ trong một lần", intro: "Để lại thông tin, bạn nhận được:", formTitle: "Ngân sách của bạn hợp với sản phẩm nào?", formHtml: form("c", { button: "Gửi tôi 3 gợi ý phù hợp nhất", budget: ["Dưới 2 tỷ", "2 – 4 tỷ", "4 – 6 tỷ", "6 – 10 tỷ", "Trên 10 tỷ"] }), steps: ["<b>3 gợi ý</b> theo ngân sách (đất nền hoặc căn hộ).", "<b>Bản đồ phân lô</b> V1 – V6 và giỏ hàng đất nền.", "<b>Bảng giá & mặt bằng</b> căn hộ FPT Plaza 1 – 5.", "<b>Chính sách</b> thanh toán, hỗ trợ vay ngân hàng."] })}
