@@ -43,4 +43,15 @@ assert.equal(st.all_time_uncontacted, 0);
 leads = (await call('GET', '/api/leads?status=uncontacted')).json; assert.equal(leads.length, 0);
 const d = (await call('GET', `/api/leads/${(await call('GET', '/api/leads')).json[0].id}`)).json;
 assert.ok(d.events.length >= 3 && d.logs.length === 1);
+// chiến dịch ads
+const cm = await call('POST', '/api/campaigns', { platform: 'facebook', name: 'Sale T10', utm_campaign: 'SALE' });
+assert.equal(cm.status, 200);
+assert.equal((await call('POST', '/api/campaigns', { platform: 'facebook', name: 'x', utm_campaign: 'sale' })).status, 400); // không phân biệt hoa thường
+const today = new Date(Date.now() + 7 * 36e5).toISOString().slice(0, 10);
+const imp = await call('POST', '/api/spend/import', { csv: `utm_campaign,day,spend\nsale,${today},300.000,1000,50\nnone,${today},5` });
+assert.equal(imp.json.imported, 1);
+const lid = (await call('GET', '/api/leads')).json[0].id;
+await call('PATCH', `/api/leads/${lid}`, { status: 'won', value: 3000000 });
+const rep = (await call('GET', '/api/campaigns?days=1')).json.campaigns[0];
+assert.equal(rep.spend, 300000); assert.equal(rep.leads, 1); assert.equal(rep.cpl, 300000); assert.equal(rep.revenue, 3000000); assert.equal(rep.roas, 10); assert.equal(rep.zalo, 1);
 console.log('OK – tất cả test đạt'); server.close(); fs.rmSync(dir, { recursive: true });

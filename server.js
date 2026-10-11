@@ -39,10 +39,18 @@ CREATE TABLE IF NOT EXISTS contact_logs(
   id INTEGER PRIMARY KEY, lead_id INTEGER NOT NULL, type TEXT NOT NULL, -- call | zalo | sms | note
   note TEXT DEFAULT '', created_by TEXT DEFAULT '', created_at INTEGER NOT NULL);
 CREATE INDEX IF NOT EXISTS log_lead ON contact_logs(lead_id);
+CREATE TABLE IF NOT EXISTS campaigns(
+  id INTEGER PRIMARY KEY, platform TEXT NOT NULL, name TEXT NOT NULL, utm_campaign TEXT NOT NULL UNIQUE COLLATE NOCASE,
+  budget_note TEXT DEFAULT '', status TEXT NOT NULL DEFAULT 'active', created_at INTEGER NOT NULL);
+CREATE TABLE IF NOT EXISTS ad_spend(
+  campaign_id INTEGER NOT NULL, day TEXT NOT NULL, spend REAL NOT NULL DEFAULT 0, impressions INTEGER NOT NULL DEFAULT 0, clicks INTEGER NOT NULL DEFAULT 0,
+  PRIMARY KEY(campaign_id, day));
 `);
+if (!db.prepare("SELECT 1 FROM pragma_table_info('leads') WHERE name='value'").get()) db.exec('ALTER TABLE leads ADD COLUMN value REAL NOT NULL DEFAULT 0');
 
 const now = () => Date.now();
 const STATUSES = ['new', 'contacted', 'interested', 'appointment', 'won', 'lost'];
+const PLATFORMS = ['facebook', 'google', 'tiktok', 'zalo', 'other'];
 const CHANNELS = ['zalo', 'phone', 'messenger', 'sms', 'other'];
 
 // ---------- helpers ----------
@@ -159,6 +167,40 @@ function handleLead(b, ip, ua) {
   return { code: 200, body: { ok: true, lead_id: lead.id, new: isNew } };
 }
 
+// ---------- chiến dịch ads ----------
+function campaignReport(q) {
+  const { days, since } = sinceOf(q);
+  const sinceDay = new Date(since + 7 * 3600e3).toISOString().slice(0, 10);
+  const rows = db.prepare(`
+    SELECT c.*,
+      COALESCE((SELECT SUM(spend) FROM ad_spend a WHERE a.campaign_id=c.id AND a.day>=?2),0) spend,
+      COALESCE((SELECT SUM(impressions) FROM ad_spend a WHERE a.campaign_id=c.id AND a.day>=?2),0) impressions,
+      COALESCE((SELECT SUM(clicks) FROM ad_spend a WHERE a.campaign_id=c.id AND a.day>=?2),0) ad_clicks,
+      (SELECT COUNT(DISTINCT vid) FROM events e WHERE e.type='pageview' AND e.utm_campaign=c.utm_campaign COLLATE NOCASE AND e.created_at>=?1) visitors,
+      (SELECT COUNT(*) FROM events e WHERE e.type='click' AND e.channel='zalo' AND e.utm_campaign=c.utm_campaign COLLATE NOCASE AND e.created_at>=?1) zalo,
+      (SELECT COUNT(*) FROM events e WHERE e.type='click' AND e.channel='phone' AND e.utm_campaign=c.utm_campaign COLLATE NOCASE AND e.created_at>=?1) phone,
+      (SELECT COUNT(*) FROM leads l WHERE l.utm_campaign=c.utm_campaign COLLATE NOCASE AND l.created_at>=?1) leads,
+      (SELECT COUNT(*) FROM leads l WHERE l.utm_campaign=c.utm_campaign COLLATE NOCASE AND l.created_at>=?1 AND l.contacted_at IS NULL AND l.status='new') uncontacted,
+      (SELECT COUNT(*) FROM leads l WHERE l.utm_campaign=c.utm_campaign COLLATE NOCASE AND l.created_at>=?1 AND l.status='won') won,
+      COALESCE((SELECT SUM(value) FROM leads l WHERE l.utm_campaign=c.utm_campaign COLLATE NOCASE AND l.created_at>=?1 AND l.status='won'),0) revenue
+    FROM campaigns c ORDER BY spend DESC, leads DESC`).all(since, sinceDay);
+  for (const r of rows) {
+    r.cpl = r.leads ? Math.round(r.spend / r.leads) : null;
+    r.cost_per_action = r.leads + r.zalo + r.phone ? Math.round(r.spend / (r.leads + r.zalo + r.phone)) : null;
+    r.cost_per_won = r.won ? Math.round(r.spend / r.won) : null;
+    r.roas = r.spend ? +(r.revenue / r.spend).toFixed(2) : null;
+  }
+  const unmapped = db.prepare(`SELECT COALESCE(NULLIF(utm_source,''),'?') source, utm_campaign, COUNT(*) leads FROM leads
+    WHERE created_at>=? AND utm_campaign<>'' AND utm_campaign NOT IN (SELECT utm_campaign FROM campaigns) GROUP BY source, utm_campaign ORDER BY leads DESC LIMIT 20`).all(since);
+  return { days, campaigns: rows, unmapped };
+}
+const validDay = (d) => /^\d{4}-\d{2}-\d{2}$/.test(d) && !isNaN(Date.parse(d));
+function upsertSpend(cid, day, spend, impressions, clicks) {
+  db.prepare(`INSERT INTO ad_spend(campaign_id,day,spend,impressions,clicks) VALUES(?,?,?,?,?)
+    ON CONFLICT(campaign_id,day) DO UPDATE SET spend=excluded.spend, impressions=excluded.impressions, clicks=excluded.clicks`)
+    .run(cid, day, Math.max(0, Number(spend) || 0), Math.max(0, parseInt(impressions, 10) || 0), Math.max(0, parseInt(clicks, 10) || 0));
+}
+
 // ---------- API quản trị ----------
 const dayExpr = "strftime('%Y-%m-%d', created_at/1000 + 25200, 'unixepoch')"; // UTC+7
 function sinceOf(q) { const d = Math.min(Math.max(parseInt(q.get('days') || '7', 10) || 7, 1), 365); return { days: d, since: now() - d * 864e5 }; }
@@ -250,6 +292,37 @@ async function handleAdmin(req, res, url) {
   if (m === 'GET' && p === '/api/leads') return send(res, 200, listLeads(q));
   if (m === 'GET' && p === '/api/leads.csv') return send(res, 200, leadsCsv(q), { 'Content-Type': 'text/csv; charset=utf-8', 'Content-Disposition': 'attachment; filename="khach-hang.csv"' });
   if (m === 'GET' && p === '/api/anonymous-clicks') return send(res, 200, anonymousClicks(q));
+  if (m === 'GET' && p === '/api/campaigns') return send(res, 200, campaignReport(q));
+  if (m === 'POST' && p === '/api/campaigns') {
+    const b = await readBody(req), utm = s(b.utm_campaign, 150).trim();
+    if (!s(b.name).trim() || !utm || !PLATFORMS.includes(b.platform)) return send(res, 400, { error: 'Cần nền tảng, tên và mã utm_campaign' });
+    if (db.prepare('SELECT 1 FROM campaigns WHERE utm_campaign=?').get(utm)) return send(res, 400, { error: 'Mã utm_campaign đã tồn tại' });
+    const id = db.prepare('INSERT INTO campaigns(platform,name,utm_campaign,budget_note,created_at) VALUES(?,?,?,?,?)').run(b.platform, s(b.name, 150).trim(), utm, s(b.budget_note, 200), now()).lastInsertRowid;
+    return send(res, 200, { id: Number(id) });
+  }
+  if ((mt = p.match(/^\/api\/campaigns\/(\d+)$/))) {
+    const id = Number(mt[1]);
+    if (m === 'DELETE') { db.prepare('DELETE FROM ad_spend WHERE campaign_id=?').run(id); db.prepare('DELETE FROM campaigns WHERE id=?').run(id); return send(res, 200, { ok: true }); }
+    if (m === 'PATCH') { const b = await readBody(req); if (b.status && !['active', 'paused'].includes(b.status)) return send(res, 400, { error: 'Trạng thái không hợp lệ' }); db.prepare('UPDATE campaigns SET status=COALESCE(?,status) WHERE id=?').run(b.status ?? null, id); return send(res, 200, { ok: true }); }
+  }
+  if ((mt = p.match(/^\/api\/campaigns\/(\d+)\/spend$/)) && m === 'POST') {
+    const b = await readBody(req), id = Number(mt[1]);
+    if (!db.prepare('SELECT 1 FROM campaigns WHERE id=?').get(id)) return send(res, 404, { error: 'Không tìm thấy' });
+    if (!validDay(b.day)) return send(res, 400, { error: 'Ngày không hợp lệ (YYYY-MM-DD)' });
+    upsertSpend(id, b.day, b.spend, b.impressions, b.clicks);
+    return send(res, 200, { ok: true });
+  }
+  if (m === 'POST' && p === '/api/spend/import') { // CSV: utm_campaign,ngày,chi phí[,hiển thị,click] – dán từ báo cáo FB/Google
+    const b = await readBody(req); let ok = 0; const bad = [];
+    for (const [i, line] of String(b.csv || '').split(/\r?\n/).entries()) {
+      if (!line.trim()) continue;
+      const [utm, day, spend, imp, clk] = line.split(/[,;\t]/).map((x) => x.trim());
+      const c = db.prepare('SELECT id FROM campaigns WHERE utm_campaign=?').get(utm || '');
+      if (!c || !validDay(day) || isNaN(Number(String(spend).replace(/[.,](?=\d{3}\b)/g, '')))) { if (i || validDay(day)) bad.push(i + 1); continue; }
+      upsertSpend(c.id, day, String(spend).replace(/[.,](?=\d{3}\b)/g, ''), imp, clk); ok++;
+    }
+    return send(res, 200, { imported: ok, bad_lines: bad.slice(0, 20) });
+  }
   if (m === 'GET' && p === '/api/sites') return send(res, 200, db.prepare('SELECT * FROM sites ORDER BY id').all());
   if (m === 'POST' && p === '/api/sites') {
     const b = await readBody(req);
@@ -280,8 +353,8 @@ async function handleAdmin(req, res, url) {
       const b = await readBody(req);
       if (!db.prepare('SELECT 1 FROM leads WHERE id=?').get(id)) return send(res, 404, { error: 'Không tìm thấy' });
       if (b.status !== undefined && !STATUSES.includes(b.status)) return send(res, 400, { error: 'Trạng thái không hợp lệ' });
-      db.prepare('UPDATE leads SET status=COALESCE(?,status), assignee=COALESCE(?,assignee), note=COALESCE(?,note), name=COALESCE(?,name), updated_at=? WHERE id=?')
-        .run(b.status ?? null, b.assignee == null ? null : s(b.assignee, 80), b.note == null ? null : s(b.note, 2000), b.name == null ? null : s(b.name, 120), now(), id);
+      db.prepare('UPDATE leads SET status=COALESCE(?,status), assignee=COALESCE(?,assignee), note=COALESCE(?,note), name=COALESCE(?,name), value=COALESCE(?,value), updated_at=? WHERE id=?')
+        .run(b.status ?? null, b.assignee == null ? null : s(b.assignee, 80), b.note == null ? null : s(b.note, 2000), b.name == null ? null : s(b.name, 120), b.value == null || b.value === '' ? null : Math.max(0, Number(b.value) || 0), now(), id);
       return send(res, 200, { ok: true });
     }
     if (m === 'DELETE') { db.prepare('DELETE FROM contact_logs WHERE lead_id=?').run(id); db.prepare('UPDATE events SET lead_id=NULL WHERE lead_id=?').run(id); db.prepare('UPDATE visitors SET lead_id=NULL WHERE lead_id=?').run(id); db.prepare('DELETE FROM leads WHERE id=?').run(id); return send(res, 200, { ok: true }); }

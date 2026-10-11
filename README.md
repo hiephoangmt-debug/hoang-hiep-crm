@@ -23,6 +23,8 @@ Mở `http://localhost:3000`, đăng nhập. Dữ liệu lưu ở `data/crm.db` 
 4. Trong **Khách hàng**, bấm **Zalo / Gọi** ngay trên dòng khách: mở app và tự ghi nhận “đã nhắn / đã gọi”. Khách chưa ai liên hệ hiện nhãn đỏ **⚠ Chưa liên hệ** và luôn nằm trên cùng.
 5. **Tổng quan**: số khách chưa liên hệ, thời gian phản hồi trung bình, thống kê theo website, theo ngày, theo nguồn/chiến dịch. **Click chưa có SĐT**: người bấm Zalo/Gọi nhưng chưa để lại số.
 
+6. **Chiến dịch ads** (Facebook / Google / TikTok…): khai báo chiến dịch với mã `utm_campaign`, gắn mã đó vào link quảng cáo (nút "Link" tạo sẵn mẫu, Google dùng `{creative}`/`{keyword}`, Facebook dùng `{{ad.name}}`). CRM tự gom khách, lượt bấm Zalo/Gọi theo chiến dịch. Nhập chi phí bằng nút "+ Chi phí" hoặc dán CSV từ báo cáo FB/Google → ra **CPL, giá/hành động, ROAS**. Khi chốt khách, điền "Giá trị chốt" trong hồ sơ để tính doanh thu. Khách đến từ `utm_campaign` chưa khai báo sẽ được cảnh báo.
+
 Lưu ý: bấm Zalo/Gọi trên web chỉ biết *có người bấm*, không biết tên/SĐT (trừ khi họ gửi form sau đó) – đó là giới hạn của trình duyệt.
 
 ## Test

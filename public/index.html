@@ -52,6 +52,7 @@ code,pre{background:var(--bg);border:1px solid var(--bd);border-radius:8px;paddi
   <nav id="nav">
     <button data-t="dash" class="on">Tổng quan</button>
     <button data-t="leads">Khách hàng</button>
+    <button data-t="ads">Chiến dịch ads</button>
     <button data-t="anon">Click chưa có SĐT</button>
     <button data-t="sites">Website & mã nhúng</button>
   </nav>
@@ -97,7 +98,7 @@ const touch = (l) => [
 
 async function render() {
   const m = $('#main'); m.innerHTML = '<p class="mut">Đang tải…</p>';
-  try { await ({ dash, leads, anon, sites }[tab])(m); } catch (e) { if (e.message !== '401') m.innerHTML = '<p>Lỗi tải dữ liệu</p>'; }
+  try { await ({ dash, leads, ads, anon, sites }[tab])(m); } catch (e) { if (e.message !== '401') m.innerHTML = '<p>Lỗi tải dữ liệu</p>'; }
 }
 
 async function dash(m) {
@@ -175,7 +176,7 @@ async function openLead(id) {
     <div class="row">${statusTag(l)} ${touch(l)}</div>
     <div class="row"><button class="b z" data-a="zalo">💬 Nhắn Zalo</button><button class="b g" data-a="call">📞 Gọi</button><button class="b" data-a="sms">✉️ Đã nhắn SMS</button></div>
     <div class="row"><select id="st">${Object.entries(STATUS).map(([k, v]) => `<option value="${k}" ${k === l.status ? 'selected' : ''}>${v[0]}</option>`).join('')}</select>
-      <input id="as" placeholder="Người phụ trách" value="${esc(l.assignee)}"><button class="b" id="sv">Lưu</button></div>
+      <input id="as" placeholder="Người phụ trách" value="${esc(l.assignee)}"><input id="vl" type="number" min="0" placeholder="Giá trị chốt (VNĐ)" value="${l.value || ''}" title="Điền khi chốt để tính ROAS"><button class="b" id="sv">Lưu</button></div>
     <textarea id="nt" rows="2" placeholder="Ghi chú nội bộ…">${esc(l.note)}</textarea>
     <div class="row" style="margin-top:6px"><input id="ln" placeholder="Thêm ghi chú vào lịch sử" style="flex:1"><button class="b" id="lnb">Thêm</button></div>
     <h3>Lịch sử</h3><ul class="tl">${tl.map((x) => `<li><span class="mut">${fmt(x.t)}</span> ${x.h}</li>`).join('') || '<li class="mut">Chưa có</li>'}</ul>
@@ -188,8 +189,48 @@ async function openLead(id) {
     log(a, a === 'sms' ? 'Nhắn SMS' : '');
   });
   $('#lnb').onclick = () => $('#ln').value && log('note', $('#ln').value);
-  $('#sv').onclick = async () => { await api('/leads/' + id, { method: 'PATCH', body: { status: $('#st').value, assignee: $('#as').value, note: $('#nt').value } }); dlg.close(); render(); };
+  $('#sv').onclick = async () => { await api('/leads/' + id, { method: 'PATCH', body: { status: $('#st').value, assignee: $('#as').value, note: $('#nt').value, value: $('#vl').value } }); dlg.close(); render(); };
   $('#del').onclick = async () => { if (confirm('Xoá khách này?')) { await api('/leads/' + id, { method: 'DELETE' }); dlg.close(); render(); } };
+}
+
+
+const PF = { facebook: 'Facebook', google: 'Google', tiktok: 'TikTok', zalo: 'Zalo Ads', other: 'Khác' };
+const vnd = (n) => n == null ? '–' : Math.round(n).toLocaleString('vi-VN') + 'đ';
+async function ads(m) {
+  const d = await api('/campaigns?days=' + days), cs = d.campaigns;
+  const sum = (k) => cs.reduce((a, c) => a + (c[k] || 0), 0), sp = sum('spend'), ld = sum('leads');
+  const utmHint = (c) => c.platform === 'google' ? `?utm_source=google&utm_medium=cpc&utm_campaign=${c.utm_campaign}&utm_content={creative}&utm_term={keyword}` : `?utm_source=${c.platform}&utm_medium=paid&utm_campaign=${c.utm_campaign}&utm_content={{ad.name}}`;
+  m.innerHTML = `<div class="row">${dayPicker()}</div>
+  <div class="grid">
+    <div class="kpi"><b>${vnd(sp)}</b><span>Tổng chi phí ads</span></div><div class="kpi"><b>${ld}</b><span>Khách từ ads</span></div>
+    <div class="kpi"><b>${ld ? vnd(sp / ld) : '–'}</b><span>Giá TB / khách (CPL)</span></div>
+    <div class="kpi"><b>${vnd(sum('revenue'))}</b><span>Doanh thu đã chốt</span></div>
+    <div class="kpi"><b>${sp ? (sum('revenue') / sp).toFixed(2) + 'x' : '–'}</b><span>ROAS</span></div>
+    <div class="kpi ${sum('uncontacted') ? 'alert' : ''}"><b>${sum('uncontacted')}</b><span>Khách ads chưa liên hệ</span></div></div>
+  <div class="card tw"><table><tr><th>Chiến dịch</th><th>Chi phí</th><th>Hiển thị / Click ads</th><th>Truy cập</th><th>Zalo / Gọi</th><th>Khách (SĐT)</th><th>CPL</th><th>Giá / hành động*</th><th>Chốt</th><th>Doanh thu / ROAS</th><th></th></tr>
+  ${cs.map((c) => `<tr><td><span class="tag blu">${PF[c.platform]}</span> <b>${esc(c.name)}</b>${c.status === 'paused' ? ' <span class="tag">tạm dừng</span>' : ''}<br><span class="mut">utm_campaign=${esc(c.utm_campaign)}</span></td>
+   <td>${vnd(c.spend)}</td><td>${c.impressions} / ${c.ad_clicks}</td><td>${c.visitors}</td><td>${c.zalo} / ${c.phone}</td>
+   <td><b>${c.leads}</b>${c.uncontacted ? ` <span class="tag red">${c.uncontacted} chưa LH</span>` : ''}</td><td>${vnd(c.cpl)}</td><td>${vnd(c.cost_per_action)}</td><td>${c.won}</td><td>${vnd(c.revenue)}<br><span class="mut">${c.roas == null ? '–' : c.roas + 'x'}</span></td>
+   <td style="white-space:nowrap"><button class="b" data-sp="${c.id}">+ Chi phí</button> <button class="b" data-tg="${c.id}" data-s="${c.status}">${c.status === 'active' ? 'Dừng' : 'Chạy'}</button> <button class="b" data-hint="${c.id}">Link</button> <button class="b" data-del="${c.id}">Xoá</button></td></tr>`).join('') || '<tr><td colspan="11" class="mut">Chưa có chiến dịch. Thêm bên dưới.</td></tr>'}</table>
+  <p class="mut">* Giá / hành động = chi phí / (khách để lại SĐT + lượt bấm Zalo + lượt bấm Gọi). Chi phí và hiển thị lấy từ mục "+ Chi phí" hoặc nhập CSV.</p></div>
+  ${d.unmapped.length ? `<div class="card"><b>⚠ Có khách từ chiến dịch chưa khai báo</b><div class="tw"><table><tr><th>Nguồn</th><th>utm_campaign</th><th>Khách</th><th></th></tr>${d.unmapped.map((u) => `<tr><td>${esc(u.source)}</td><td>${esc(u.utm_campaign)}</td><td>${u.leads}</td><td><button class="b" data-add="${esc(u.utm_campaign)}" data-src="${esc(u.source)}">Khai báo</button></td></tr>`).join('')}</table></div></div>` : ''}
+  <div class="card"><b>Thêm chiến dịch</b><div class="row" style="margin-top:8px"><select id="cp">${Object.entries(PF).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select>
+   <input id="cn" placeholder="Tên chiến dịch"><input id="cu" placeholder="Mã utm_campaign (vd: duan-a-t10)"><button class="b p" id="ca">Thêm</button></div>
+   <p class="mut">Gắn đúng mã này vào link quảng cáo (nút "Link" sẽ tạo mẫu) để CRM biết khách đến từ chiến dịch nào.</p></div>
+  <div class="card"><b>Nhập chi phí hàng loạt (CSV)</b><p class="mut">Mỗi dòng: <code>utm_campaign, YYYY-MM-DD, chi phí, hiển thị, click</code> — copy từ báo cáo Facebook / Google Ads (xuất theo ngày). Nhập lại cùng ngày sẽ ghi đè.</p>
+   <textarea id="csv" rows="4" placeholder="duan-a-t10,2026-10-10,350000,12000,240"></textarea><div class="row" style="margin-top:8px"><button class="b p" id="ci">Nhập</button><span id="cr" class="mut"></span></div></div>`;
+  $('#days').onchange = (e) => { days = +e.target.value; render(); };
+  $('#ca').onclick = async () => { await api('/campaigns', { method: 'POST', body: { platform: $('#cp').value, name: $('#cn').value, utm_campaign: $('#cu').value } }); render(); };
+  $('#ci').onclick = async () => { const r = await api('/spend/import', { method: 'POST', body: { csv: $('#csv').value } }); $('#cr').textContent = `Đã nhập ${r.imported} dòng` + (r.bad_lines.length ? `, lỗi dòng: ${r.bad_lines.join(', ')}` : ''); if (r.imported) setTimeout(render, 900); };
+  m.querySelectorAll('[data-add]').forEach((b) => b.onclick = () => { $('#cu').value = b.dataset.add; $('#cn').value = b.dataset.add; $('#cp').value = PF[b.dataset.src] ? b.dataset.src : 'other'; $('#cn').focus(); });
+  m.querySelectorAll('[data-sp]').forEach((b) => b.onclick = async () => {
+    const day = prompt('Ngày (YYYY-MM-DD)', new Date(Date.now() + 7 * 36e5).toISOString().slice(0, 10)); if (!day) return;
+    const spend = prompt('Chi phí ngày đó (VNĐ)'); if (spend == null) return;
+    const impressions = prompt('Số lượt hiển thị (bỏ trống nếu không có)', '0'), clicks = prompt('Số click ads (bỏ trống nếu không có)', '0');
+    await api(`/campaigns/${b.dataset.sp}/spend`, { method: 'POST', body: { day, spend, impressions, clicks } }); render(); });
+  m.querySelectorAll('[data-tg]').forEach((b) => b.onclick = async () => { await api('/campaigns/' + b.dataset.tg, { method: 'PATCH', body: { status: b.dataset.s === 'active' ? 'paused' : 'active' } }); render(); });
+  m.querySelectorAll('[data-del]').forEach((b) => b.onclick = async () => { if (confirm('Xoá chiến dịch và chi phí đã nhập? (khách vẫn giữ nguyên)')) { await api('/campaigns/' + b.dataset.del, { method: 'DELETE' }); render(); } });
+  m.querySelectorAll('[data-hint]').forEach((b) => b.onclick = () => { const c = cs.find((x) => x.id == b.dataset.hint); prompt('Thêm đoạn này vào cuối link đích của quảng cáo:', utmHint(c)); });
 }
 
 async function anon(m) {
