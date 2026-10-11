@@ -478,14 +478,15 @@
     const groups = new Map();
     S.SoLieu.filter((r) => r.nguon === "anh" && r.duAn === pjName && r.tuan === w).forEach((r) => {
       const key = r.nenTang + "|" + (digitsOf(r.taiKhoan) || r.nhanSu);
-      const g = groups.get(key) || { nenTang: r.nenTang, taiKhoan: r.taiKhoan || "", nhanSu: r.nhanSu || "", chiPhi: 0, lead: 0, luotXem: "" };
+      const g = groups.get(key) || { nenTang: r.nenTang, taiKhoan: r.taiKhoan || "", nhanSu: r.nhanSu || "", chiPhi: 0, lead: 0, luotXem: "", hienThi: "", tiepCan: "", luotNhap: "" };
       g.chiPhi += num(r.chiPhi);
       g.lead += num(r.lead);
-      if (r.luotXem !== "" && r.luotXem != null) g.luotXem = num(g.luotXem) + num(r.luotXem);
+      ["luotXem", "hienThi", "tiepCan", "luotNhap"].forEach((k) => { if (r[k] !== "" && r[k] != null) g[k] = num(g[k]) + num(r[k]); });
       groups.set(key, g);
     });
     if (!groups.size) return null;
-    const res = await gas("crmWriteSheet", pjName, w, Array.from(groups.values()));
+    // lead = 0 nghĩa là ảnh không có số lead: để trống ô Lead trong Sheet cho các bạn tự điền
+    const res = await gas("crmWriteSheet", pjName, w, Array.from(groups.values()).map((g) => Object.assign(g, { lead: g.lead || "" })));
     if (res && res.source) { project(pjName).nguonSoLieu = res.source; if (!$("tab-nhap").hidden) renderEntries(); }
     return res;
   }
@@ -581,7 +582,8 @@
       : `<label class="camp"><input type="checkbox" data-p="${i}" data-c="${j}" data-f="use"${c.use ? " checked" : ""}>
         <span class="cname" title="${esc(c.name)}">${esc(c.name)}${c.status ? ` <small class="cstatus${/tat|tam dung|hoan tat/.test(c.status) ? " off" : ""}">${esc(STATUS_LABEL[c.status] || c.status)}</small>` : ""}</span>
         <input class="cnum" data-p="${i}" data-c="${j}" data-f="spent" value="${fmtInt(c.spent)}" aria-label="Chi tiêu">
-        <span class="muted">${c.results != null ? fmtInt(c.results) + " " + (RESULT_LABEL[c.resultType] || "") : ""}</span></label>`).join("")}
+        <span class="muted">${[c.results != null ? fmtInt(c.results) + " " + (RESULT_LABEL[c.resultType] || "") : "", c.clicks != null ? fmtInt(c.clicks) + " nhấp" : "",
+          c.impressions != null ? fmtInt(c.impressions) + " hiển thị" : ""].filter(Boolean).join(" · ")}</span></label>`).join("")}
       ${add}</div>`;
   }
   const evSel = new Set(); // ảnh đã lưu đang được tick để xoá nhiều
@@ -613,6 +615,7 @@
           <select data-ev="${esc(r.id)}" data-f="loai">${Object.entries(KINDS).map(([k, l]) => opt(k, l, r.loai)).join("")}</select></div>
           <div class="row"><select data-ev="${esc(r.id)}" data-f="nhanSu" class="${r.nhanSu ? "" : "warn"}">${opt("", "(chưa gán nhân sự)", r.nhanSu)}${staff.map((x) => opt(x, x, r.nhanSu)).join("")}${newStaffOpt()}</select>
           <button type="button" class="link danger" data-evdel="${esc(r.id)}">Xoá</button></div>
+          ${r.loai !== "hoadon" ? `<button type="button" class="link small" data-evread="${esc(r.id)}">Đọc số từ ảnh này → số liệu + Sheet</button>` : ""}
         </figcaption></figure>`).join("") : `<p class="muted">Chưa có ảnh chứng từ cho tuần này.</p>`;
   }
   async function addPending(files) {
@@ -671,6 +674,48 @@
     const accs = S.TaiKhoan.filter((t) => t.nhanSu === staff && (!t.nenTang || t.nenTang === platform));
     return accs.length === 1 ? accs[0].maTaiKhoan : "";
   }
+  /** Lưu các chiến dịch đã tick (đọc từ ảnh / điền tay) thành dòng số liệu nguồn "anh". Trả số dòng đã lưu. */
+  async function saveCampaignRows(campaigns, m) {
+    const chosen = (campaigns || []).filter((c) => c.use && (c.spent || (c.manual && c.results)))
+      .map((c, k) => (c.name ? c : Object.assign({}, c, { name: "Nhập tay " + (k + 1) + " – " + m.file })));
+    if (!chosen.length) return 0;
+    const opt0 = (v) => (v != null && v !== "" ? v : "");
+    const rows = chosen.map((c) => {
+      const prev = S.SoLieu.find((x) => x.nguon === "anh" && x.tuan === m.tuan && x.duAn === m.duAn && x.nhanSu === m.nhanSu && x.chienDich === c.name);
+      return {
+        id: prev ? prev.id : undefined, tuan: m.tuan, duAn: m.duAn, nhanSu: m.nhanSu, nenTang: m.nenTang,
+        taiKhoan: soleAccount(m.nhanSu, m.nenTang), chienDich: c.name, chiPhi: c.spent, chiPhiPhi: c.spent,
+        lead: c.resultType === "lead" ? c.results || 0 : 0, luotXem: c.resultType === "thruplay" ? c.results || "" : "",
+        mql: "", sql: "", deal: "", hienThi: opt0(c.impressions), tiepCan: opt0(c.reach), luotNhap: opt0(c.clicks),
+        ghiChu: (c.manual ? "Nhập tay kèm ảnh " : "Đọc từ ảnh ") + m.file, nguon: "anh",
+      };
+    });
+    const saved = await gas("crmSaveMany", "SoLieu", rows);
+    saved.forEach((r) => { S.SoLieu = S.SoLieu.filter((x) => x.id !== r.id).concat(r); });
+    return saved.length;
+  }
+  /** Đọc lại số từ một ảnh đã lưu (ảnh tải lên trước khi app đọc được loại màn hình đó). */
+  async function rereadEvidence(id) {
+    const r = S.ChungTu.find((x) => x.id === id);
+    if (!r) return;
+    if (!r.nhanSu) return toast("Chọn nhân sự cho ảnh này trước.", "err");
+    const file = await run("Đang tải ảnh", () => evidenceFile(r));
+    let text = "";
+    try {
+      if (B.isPdf(file)) text = await B.pdfText(file);
+      else { toast("Đang đọc chữ trong ảnh…", "busy"); text = (await (await B.ocrWorker()).recognize(file)).data.text || ""; }
+    } catch (e) { return toast("Không đọc được ảnh: " + e.message, "err"); }
+    const camps = B.extractCampaigns(text).map((c) => Object.assign(c, { use: dateInWeek(c.date, r.tuan) }));
+    if (!camps.length) return toast(`Không đọc ra số chi tiêu trong ${r.tenFile}. Dùng "+ Điền số tay" khi tải ảnh hoặc nhập ở tab Nhập số liệu.`, "err");
+    const list = camps.map((c) => `${c.use ? "☑" : "☐"} ${c.name}: ${fmtInt(c.spent)} đ` + (c.clicks != null ? ` · ${fmtInt(c.clicks)} nhấp` : "") +
+      (c.impressions != null ? ` · ${fmtInt(c.impressions)} hiển thị` : "") + (c.results ? ` · ${fmtInt(c.results)} ${RESULT_LABEL[c.resultType] || ""}` : "")).join("\n");
+    if (!camps.some((c) => c.use)) camps.forEach((c) => (c.use = true));
+    if (!confirm(`Số đọc từ ${r.tenFile} (${r.nhanSu} · ${PLATFORM_LABEL[r.nenTang] || r.nenTang}):\n${list}\n\nLưu vào số liệu tuần ${weekLabel(r.tuan)} và Google Sheet?`)) return;
+    const n = await run("Đang lưu số liệu", () => saveCampaignRows(camps.filter((c) => c.use), { tuan: r.tuan, duAn: r.duAn, nhanSu: r.nhanSu, nenTang: r.nenTang, file: r.tenFile }));
+    let note = "";
+    try { note = pushNote(await pushToSheet(r.duAn, r.tuan)); } catch (e) { note = " Chưa ghi được vào Google Sheet: " + e.message; }
+    toast(`Đã lưu ${n} dòng số liệu từ ${r.tenFile}.` + note, "ok");
+  }
   async function uploadPending() {
     const w = $("evWeek").value, pj = $("evProject").value;
     const noName = pending.filter((p) => !p.nhanSu).length;
@@ -685,23 +730,7 @@
         const rec = await gas("crmUploadEvidence", { tuan: w, duAn: pj, nhanSu: p.nhanSu, nenTang: p.nenTang, loai: p.loai, tenFile: p.file.name, mime: p.file.type, hash: p.hash || "" },
           await B.blobToB64(p.file));
         if (!S.ChungTu.some((x) => x.id === rec.id)) S.ChungTu.push(rec);
-        const chosen = (p.campaigns || []).filter((c) => c.use && (c.spent || (c.manual && c.results)))
-          .map((c, k) => (c.name ? c : Object.assign({}, c, { name: "Nhập tay " + (k + 1) + " – " + p.file.name })));
-        if (chosen.length) {
-          const rows = chosen.map((c) => {
-            const prev = S.SoLieu.find((x) => x.nguon === "anh" && x.tuan === w && x.duAn === pj && x.nhanSu === p.nhanSu && x.chienDich === c.name);
-            return {
-              id: prev ? prev.id : undefined, tuan: w, duAn: pj, nhanSu: p.nhanSu, nenTang: p.nenTang,
-              taiKhoan: soleAccount(p.nhanSu, p.nenTang), chienDich: c.name, chiPhi: c.spent, chiPhiPhi: c.spent,
-              lead: c.resultType === "lead" ? c.results || 0 : 0, luotXem: c.resultType === "thruplay" ? c.results || "" : "",
-              mql: "", sql: "", deal: "", hienThi: "", tiepCan: "", luotNhap: "",
-              ghiChu: (c.manual ? "Nhập tay kèm ảnh " : "Đọc từ ảnh ") + p.file.name, nguon: "anh",
-            };
-          });
-          const saved = await gas("crmSaveMany", "SoLieu", rows);
-          saved.forEach((r) => { S.SoLieu = S.SoLieu.filter((x) => x.id !== r.id).concat(r); });
-          nRows += saved.length;
-        }
+        nRows += await saveCampaignRows(p.campaigns, { tuan: w, duAn: pj, nhanSu: p.nhanSu, nenTang: p.nenTang, file: p.file.name });
       }
     });
     pending.forEach((p) => URL.revokeObjectURL(p.url));
@@ -1167,6 +1196,10 @@
       evSel.clear();
       toast(`Đã xoá ${ids.length} ảnh.`, "ok");
       renderEvidence();
+    });
+    $("evList").addEventListener("click", (e) => {
+      const id = e.target.dataset.evread;
+      if (id) rereadEvidence(id).catch(() => {});
     });
     $("evList").addEventListener("click", async (e) => {
       const id = e.target.dataset.evdel;

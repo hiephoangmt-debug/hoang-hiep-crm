@@ -1005,6 +1005,52 @@
    * (Trình quản lý quảng cáo trên điện thoại, Meta Business Suite, bảng trên máy tính).
    * Trả về [{name, spent, results, resultType, date}] – để người dùng xác nhận.
    */
+  /** Màn hình Google Ads -> {name, spent, results, resultType, date, clicks, impressions} hoặc null. */
+  function googleAds(lines, N, money) {
+    const LBL = [["clicks", /^((lan|luot|so lan) nhap|luot click|so lan click|clicks?)\b/], ["impressions", /^((luot|so lan) hien thi|impressions?)\b/],
+      ["reach", /^((nguoi|luot|pham vi) tiep can|reach)\b/], ["cpc", /^(cpc|cpm|ctr)\b/], ["cost", /^(chi phi|tong chi phi|cost)\b/],
+      ["conv", /^(chuyen doi|luot chuyen doi|khach hang tiem nang|conversions?)\b/]];
+    const at = {};
+    N.forEach((n, i) => LBL.forEach(([k, re]) => { if (at[k] == null && re.test(n)) at[k] = i; }));
+    if (at.cost == null) return null;
+    const plain = (i) => /^\d[\d.,]*$/.test(lines[i].replace(/\s+/g, "")) ? Math.round(toNum(lines[i].replace(/\s+/g, ""))) : null;
+    const val = {};
+    // số cùng dòng với nhãn: "Lần nhấp 143", "Lượt hiển thị 2.539"
+    ["clicks", "impressions", "reach", "conv"].forEach((k) => {
+      const tail = at[k] != null && /(?:nhap|click|clicks|hien thi|impressions?|tiep can|reach|chuyen doi|tiem nang|conversions?)\s+(\d[\d.,]*)\s*$/.exec(N[at[k]]);
+      if (tail) val[k] = Math.round(toNum(tail[1]));
+    });
+    // nhãn xếp thành khối, số ở các dòng sau theo cùng thứ tự (bỏ dòng có mũi tên / tiền)
+    const order = Object.entries(at).filter(([k]) => k !== "cpc" && k !== "cost").sort((a, b) => a[1] - b[1]).map(([k]) => k).filter((k) => val[k] == null);
+    if (order.length) {
+      const lastLbl = Math.max(...Object.values(at));
+      const nums = [];
+      for (let i = lastLbl + 1; i < Math.min(lines.length, lastLbl + 14) && nums.length < order.length; i++) {
+        const v = plain(i);
+        if (v != null) nums.push(v);
+      }
+      order.forEach((k, j) => { if (nums[j] != null) val[k] = nums[j]; });
+    }
+    // chi phí: số tiền lớn nhất ngay sau nhãn "Chi phí" (bỏ dòng ngân sách /ngày)
+    let cost = 0;
+    for (let i = at.cost; i < Math.min(lines.length, at.cost + 12); i++) {
+      if (/\/\s*ngay|ngan sach/.test(N[i])) continue;
+      money(lines[i]).forEach((m) => { if (m.v > cost) cost = m.v; });
+    }
+    if (!cost) return null;
+    let name = "";
+    const ci = N.findIndex((n) => /chien dich (tim kiem|hieu suat toi da|hien thi|video|da kenh|thong minh|ung dung)/.test(n));
+    if (ci >= 0) {
+      name = lines[ci].replace(/chiến dịch (tìm kiếm|hiệu suất tối đa|hiển thị|video|đa kênh|thông minh|ứng dụng).*$/i, "").trim();
+      for (let k = ci - 1; !name && k >= 0 && k >= ci - 3; k--) if (lines[k].replace(/\W/g, "").length > 3) name = lines[k].trim();
+    }
+    const d = N.map((n) => /thang\s*(\d{1,2})\s+(\d{1,2})\s*[-–]\s*\d{1,2}/.exec(n) || /(\d{1,2})\s*thg\s*(\d{1,2})/.exec(n)).find(Boolean);
+    const date = d ? (/thang/.test(d[0]) ? `${d[2]}/${d[1]}` : `${d[1]}/${d[2]}`) : "";
+    return { name: name || (date ? "Chiến dịch " + date : "Chiến dịch"), spent: cost, results: val.conv != null ? val.conv : null, resultType: val.conv != null ? "lead" : "",
+      date, status: "", clicks: val.clicks != null ? val.clicks : null, impressions: val.impressions != null ? val.impressions : null,
+      reach: val.reach != null ? val.reach : null };
+  }
+
   function extractCampaigns(text) {
     const MONEY = /(\d{1,3}(?:[.,]\d{3})+|\d+(?:[.,]\d+)?)\s*(triệu|trieu|tr|k|n|nghìn)?\s*(?:đ|₫|vnd|d\b)/gi;
     const money = (line) => Array.from(line.matchAll(MONEY)).map((m) => {
@@ -1018,6 +1064,12 @@
     const C = lines.map(compact);
     const STATUS = /(dang hoat dong|da tam dung|da hoan tat|dang tat|da tat)/;
     const STATUS_C = /(danghoatdong|datamdung|dahoantat|dangtat)/;
+
+    // Google Ads (ads.google.com): các thẻ chỉ số "Lần nhấp / Lượt hiển thị / CPC / Chi phí" của chiến dịch đang mở
+    if (/adsgooglecom|googleads|chiendichtimkiem|cpctrbinh|cpctrungbinh/.test(compact(text)) && /chi phi/.test(N.join(" "))) {
+      const g = googleAds(lines, N, money);
+      if (g) return [g];
+    }
     const SPENT_C = /(chitieu|sotiendachi)/;
     const out = [];
     const seen = new Set();
@@ -1106,6 +1158,11 @@
       const statusLine = N.slice(Math.max(0, valLine - 4), i + 1).find((x) => STATUS.test(x));
       push({ name: name || "Chiến dịch", spent, results, resultType, date,
         status: statusLine ? (statusLine.match(STATUS) || [""])[0] : "" });
+    }
+    // màn hình khác (TikTok, Zalo, …): thẻ chỉ số "Chi phí / Hiển thị / Lượt nhấp" của chiến dịch đang mở
+    if (!out.length && /chi phi|cost/.test(N.join(" "))) {
+      const g = googleAds(lines, N, money);
+      if (g) out.push(g);
     }
     return out;
   }
