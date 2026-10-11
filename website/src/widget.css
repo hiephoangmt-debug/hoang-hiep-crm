@@ -37,7 +37,7 @@ button, input { font: inherit; }
 .bubble a { color: var(--navy-500); font-weight: 700; }
 .msg-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
 .act { border: 1px solid var(--line); background: #fff; color: var(--navy-800); border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: none; }
-.act.primary { background: var(--orange); border-color: var(--orange); color: var(--navy-900); }
+.act.primary { background: var(--orange); border-color: var(--orange); color: #fff; }
 .typing .bubble { display: flex; gap: 4px; padding: 14px; }
 .typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); animation: blink 1.2s infinite; }
 .typing i:nth-child(2) { animation-delay: .2s; } .typing i:nth-child(3) { animation-delay: .4s; }
