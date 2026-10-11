@@ -35,53 +35,11 @@ Dán vào Cài đặt trang › SEO của từng trang. Ảnh chia sẻ 1200×63
 - **Mô tả trang:** Căn hộ FPT Plaza 5 tại khu đô thị FPT City Đà Nẵng: vị trí, quy mô dự kiến, mặt bằng, tiến độ và chính sách. Đăng ký nhận bảng giá FPT Plaza 5 sớm nhất qua Google Drive.
 - **Từ khoá:** FPT Plaza 5, căn hộ FPT Plaza 5, FPT Plaza 5 Đà Nẵng, giá bán FPT Plaza 5, bảng giá FPT Plaza 5, mặt bằng FPT Plaza 5
 
-## Đất nền V1
-- **Đường dẫn:** /dat-nen-fpt-city/phan-khu-v1
-- **Tiêu đề trang:** Đất nền FPT City phân khu V1 – Lô biệt thự, lô góc giá tốt
-- **Mô tả trang:** Đất nền FPT City Đà Nẵng phân khu V1: lô biệt thự, lô góc 2 mặt tiền, diện tích lớn. Nhận giỏ hàng đất V1 FPT City và bản đồ phân lô qua Google Drive.
-- **Từ khoá:** đất FPT City V1, phân khu V1 FPT City, đất nền V1 FPT Đà Nẵng, biệt thự FPT City
-
-## Đất nền V2
-- **Đường dẫn:** /dat-nen-fpt-city/phan-khu-v2
-- **Tiêu đề trang:** Đất nền FPT City phân khu V2 – Gần Đại học FPT
-- **Mô tả trang:** Đất nền FPT City phân khu V2 gần Đại học FPT Đà Nẵng, lô ~100 m², dễ xây trọ, nhà cho thuê. Nhận giỏ hàng đất V2 FPT City qua Google Drive.
-- **Từ khoá:** đất FPT City V2, phân khu V2 FPT City, đất nền V2 FPT Đà Nẵng, đất gần đại học FPT
-
-## Đất nền V3
-- **Đường dẫn:** /dat-nen-fpt-city/phan-khu-v3
-- **Tiêu đề trang:** Đất nền FPT City phân khu V3 – Lô 100 m² khu dân cư hiện hữu
-- **Mô tả trang:** Đất nền FPT City phân khu V3: lô ~100 m² trong khu dân cư đông đúc, gần trường học, tiện ích. Nhận giỏ hàng và bản đồ phân lô V3 qua Google Drive.
-- **Từ khoá:** đất FPT City V3, phân khu V3 FPT City, đất nền V3 FPT Đà Nẵng
-
-## Đất nền V4
-- **Đường dẫn:** /dat-nen-fpt-city/phan-khu-v4
-- **Tiêu đề trang:** Đất nền FPT City phân khu V4 – Giỏ hàng cập nhật
-- **Mô tả trang:** Đất nền FPT City phân khu V4 Đà Nẵng: vị trí, đặc điểm lô, quy hoạch. Nhận giỏ hàng đất V4 FPT City và bản đồ phân lô qua Google Drive.
-- **Từ khoá:** đất FPT City V4, phân khu V4 FPT City, đất nền V4 FPT Đà Nẵng
-
-## Đất nền V5
-- **Đường dẫn:** /dat-nen-fpt-city/phan-khu-v5
-- **Tiêu đề trang:** Đất nền FPT City phân khu V5 – Lô 90–105 m² giá tốt
-- **Mô tả trang:** Tổng hợp lô đất nền FPT City phân khu V5: diện tích 90–105 m², phù hợp ở và đầu tư. Nhận giỏ hàng đất V5 FPT City cập nhật qua Google Drive.
-- **Từ khoá:** đất FPT City V5, phân khu V5 FPT City, đất nền V5 FPT Đà Nẵng, giá đất V5 FPT
-
-## Đất nền V6
-- **Đường dẫn:** /dat-nen-fpt-city/phan-khu-v6
-- **Tiêu đề trang:** Đất nền FPT City phân khu V6 – Gần FPT Complex, đường Nam Kỳ Khởi Nghĩa
-- **Mô tả trang:** Đất nền FPT City phân khu V6 gần FPT Complex, sát trục Nam Kỳ Khởi Nghĩa và kênh sinh thái. Nhận giỏ hàng đất V6 FPT City qua Google Drive.
-- **Từ khoá:** đất FPT City V6, phân khu V6 FPT City, đất nền V6 FPT Đà Nẵng, đất gần FPT Complex
-
 ## Đất nền FPT City
 - **Đường dẫn:** /dat-nen-fpt-city
 - **Tiêu đề trang:** Đất nền FPT City Đà Nẵng – Bảng giá đất phân khu V1, V2, V3, V4, V5, V6
 - **Mô tả trang:** Đất nền FPT City Đà Nẵng: bản đồ phân lô, giỏ hàng và giá đất các phân khu V1, V2, V3, V4, V5, V6. Sổ đỏ từng lô. Gửi ngân sách, nhận 3 lô phù hợp.
-- **Từ khoá:** đất nền FPT City, đất FPT Đà Nẵng, giá đất FPT City, bản đồ phân lô FPT City, đất FPT City V1, V2, V3, V4, V5, V6
-
-## Căn hộ FPT Plaza
-- **Đường dẫn:** /can-ho-fpt-plaza
-- **Tiêu đề trang:** Căn hộ FPT Plaza Đà Nẵng – So sánh FPT Plaza 1, 2, 3, 4, 5 | Bảng giá
-- **Mô tả trang:** So sánh căn hộ FPT Plaza 1, 2, 3, 4, 5 tại FPT City Đà Nẵng: quy mô, số căn, tình trạng, tiến độ. Gửi ngân sách, nhận 3 căn phù hợp kèm bảng giá.
-- **Từ khoá:** căn hộ FPT Plaza, chung cư FPT Đà Nẵng, FPT Plaza 1, FPT Plaza 2, FPT Plaza 3, FPT Plaza 4, FPT Plaza 5, giá căn hộ FPT Plaza
+- **Từ khoá:** đất nền FPT City, đất FPT Đà Nẵng, giá đất FPT City, bản đồ phân lô FPT City, đất FPT City V1, đất FPT City V2, đất FPT City V3, đất FPT City V4, đất FPT City V5, đất FPT City V6
 
 ## FPT City Đà Nẵng – Trang chủ
 - **Đường dẫn:** /

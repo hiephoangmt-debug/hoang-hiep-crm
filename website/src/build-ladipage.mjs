@@ -21,7 +21,7 @@ const nf = (n) => String(n).replace(".", ",");
 const vn = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 const pad = (n) => String(n).padStart(2, "0");
 const pathOf = (slug) => ({ home: "/", land: "/dat-nen-fpt-city", apt: "/can-ho-fpt-plaza" }[slug] || (slug.startsWith("phan-khu") ? "/dat-nen-fpt-city/" + slug : "/" + slug));
-const link = (slug) => BASE + (pathOf(slug) === "/" ? "/" : pathOf(slug));
+const link = (slug) => slug.startsWith("phan-khu") ? `${BASE}/dat-nen-fpt-city#${slug.slice(9)}` : slug === "apt" ? `${BASE}/#mat-bang` : BASE + (pathOf(slug) === "/" ? "/" : pathOf(slug));
 
 const BUDGET_APT = ["Dưới 2 tỷ", "2 – 3 tỷ", "3 – 4 tỷ", "4 – 6 tỷ", "Trên 6 tỷ"];
 const BUDGET_LAND = ["Dưới 3 tỷ", "3 – 5 tỷ", "5 – 8 tỷ", "Trên 8 tỷ"];
@@ -137,8 +137,8 @@ const gotoSec = (title, inner, eyebrow = "Khám phá thêm") => `<section><div c
 const footer = () => `
 <footer><div class="wrap">
   <div class="fnav">
-    <div><b>Căn hộ FPT Plaza</b><ul>${plazas.map((p) => `<li><a href="${link(p.slug)}">${p.name}</a></li>`).join("")}<li><a href="${link("apt")}">So sánh 5 tòa</a></li></ul></div>
-    <div><b>Đất nền FPT City</b><ul>${zones.map((z) => `<li><a href="${link(z.slug)}">Phân khu ${z.code}</a></li>`).join("")}<li><a href="${link("land")}">Tổng quan đất nền</a></li></ul></div>
+    <div><b>Căn hộ FPT Plaza</b><ul>${plazas.map((p) => `<li><a href="${link(p.slug)}">${p.name}</a></li>`).join("")}</ul></div>
+    <div><b>Đất nền FPT City</b><ul>${zones.map((z) => `<li><a href="${link(z.slug)}">Phân khu ${z.code}</a></li>`).join("")}<li><a href="${link("land")}">Đất nền FPT City</a></li></ul></div>
     <div><b>Liên hệ</b><ul><li><a href="tel:${TEL}">${HOTLINE}</a></li><li><a href="https://zalo.me/${ZALO}">Zalo tư vấn</a></li><li><a href="${site.agent.url}">${esc(site.agent.name)}</a></li><li><a href="${BASE}/">Trang chủ</a></li></ul></div>
   </div>
   <p><b style="color:#fff">FPT City Đà Nẵng · Căn hộ FPT Plaza &amp; đất nền</b></p>
@@ -253,178 +253,169 @@ const COMPARE = (except) => `<div class="tbl"><table><thead><tr><th>Dự án</th
 const pages = [];
 const add = (p) => { pages.push(p); };
 
-// --- Căn hộ FPT Plaza 1..5
+/* ---------- Khối dùng chung cho bố cục đầy đủ (7 trang) ---------- */
+const hotSection = (title, sub, cards, btn = "Nhận bảng giá mới nhất") => `
+<section id="gioi-thieu"><div class="wrap">${head({ eyebrow: "Giới thiệu", title, sub })}
+  <div class="grid3">${cards.map(([cls, pill, h, p, href, go]) => `<div class="tile">${pill ? `<span class="pill ${cls}">${esc(pill)}</span>` : ""}<h3>${esc(h)}</h3><p>${esc(p)}</p>${href ? `<a class="go" href="${href}">${esc(go)}</a>` : ""}</div>`).join("")}</div>
+  <p style="text-align:center;margin-top:24px"><a class="btn" href="#dang-ky">${esc(btn)}</a></p></div></section>`;
+const legalSection = (title, items) => `
+<section id="phap-ly"><div class="wrap">${head({ eyebrow: "Pháp lý", title, sub: "Thông tin tham khảo. Hồ sơ pháp lý từng sản phẩm được gửi kèm khi tư vấn; bạn nên đối chiếu trực tiếp với chủ đầu tư." })}
+  <div class="${(items.length + 1) % 3 ? "grid2" : "grid3"}">${items.map(([h, p]) => `<div class="tile"><h3>${esc(h)}</h3><p>${esc(p)}</p></div>`).join("")}<div class="tile"><h3>Cần hồ sơ chi tiết?</h3><p>Để lại thông tin, chuyên viên gửi bộ tài liệu pháp lý của đúng sản phẩm bạn quan tâm.</p><a class="go" href="#dang-ky">Nhận hồ sơ pháp lý →</a></div></div></div></section>`;
+const amenitySection = (name) => `
+<section id="tien-ich" class="tint"><div class="wrap">${head({ eyebrow: "Tiện ích", title: `Tiện ích nội khu & ngoại khu ${name}`, sub: "Hình minh hoạ; tiện ích cụ thể theo từng dự án." })}
+  <div class="grid2"><div><h3 style="text-align:center">Tiện ích nội khu</h3>${illus("tien-ich-noi-khu", `Tiện ích nội khu ${name}: trường học, FPT Complex, công viên, thương mại, hồ bơi`)}</div>
+  <div><h3 style="text-align:center">Tiện ích ngoại khu</h3>${illus("tien-ich-ngoai-khu", `Tiện ích ngoại khu quanh ${name}: biển Non Nước, Ngũ Hành Sơn, sân bay, Hội An`)}</div></div></div></section>`;
+const priceSection = (title, sub, cols, rows, policies) => `
+<section id="gia-chinh-sach" class="tint"><div class="wrap">${head({ eyebrow: "Giá bán & chính sách", title, sub })}
+  <div class="tbl"><table><thead><tr>${cols.map((c) => `<th>${esc(c)}</th>`).join("")}<th>Giá</th></tr></thead><tbody>${rows.map((r) => `<tr><th scope="row">${esc(r[0])}</th>${r.slice(1).map((c) => `<td>${esc(c)}</td>`).join("")}<td><a href="#dang-ky">Nhận giá →</a></td></tr>`).join("")}</tbody></table></div>
+  <div class="grid3" style="margin-top:24px">${policies.map(([h, p]) => `<div class="tile"><h3>${esc(h)}</h3><p>${esc(p)}</p></div>`).join("")}</div></div></section>`;
+const fpImg = (src, alt, w, h) => `<figure style="margin:0"><img src="${src}" alt="${esc(alt)}" width="${w}" height="${h}" loading="lazy" style="width:100%;height:240px;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:14px"></figure>`;
+const gallerySection = (title, extra = "") => `
+<section id="hinh-anh"><div class="wrap">${head({ eyebrow: "Hình ảnh", title, sub: "Hình minh hoạ theo tài liệu giới thiệu của chủ đầu tư; thực tế có thể thay đổi." })}
+  <div class="grid2">${photo(1)}${photo(2)}</div>${extra ? `<div class="grid3" style="margin-top:18px">${extra}</div>` : ""}</div></section>`;
+const NEWS = [
+  ["on", "11/2025", "FPT Plaza 4 đủ điều kiện bán nhà ở hình thành trong tương lai", "Sở Xây dựng Đà Nẵng xác nhận căn hộ FPT Plaza 4 đủ điều kiện bán.", "fpt-plaza-4"],
+  ["", "03/2025", "FPT Plaza 4 khởi công", "Dự án 1.395 căn hộ, 2 khối N & S, dự kiến bàn giao Quý II/2027.", "fpt-plaza-4"],
+  ["on", "2026 (dự kiến)", "FPT Plaza 3 chuẩn bị bàn giao", "Hai tòa The Empire & The Wealthe, bàn giao dự kiến trong năm 2026 theo chủ đầu tư.", "fpt-plaza-3"],
+  ["up", "Chờ công bố", "FPT Plaza 5 nhận đăng ký sớm", "Chủ đầu tư chưa công bố bảng giá; đăng ký để được báo ngay khi có thông tin.", "fpt-plaza-5"],
+];
+const newsSection = (title, first) => {
+  const list = NEWS.slice().sort((a, b) => (b[4] === first) - (a[4] === first));
+  return `
+<section id="tin-tuc" class="tint"><div class="wrap">${head({ eyebrow: "Tin tức", title })}
+  <div class="grid2">${list.map(([cls, d, h, p, s]) => `<a class="tile" href="${link(s)}"><span class="pill ${cls}">${esc(d)}</span><h3>${esc(h)}</h3><p>${esc(p)}</p><span class="go">Đọc thêm →</span></a>`).join("")}</div></div></section>`;
+};
+const contactSection = (name) => `
+<section id="lien-he"><div class="wrap">${head({ eyebrow: "Liên hệ", title: `Liên hệ tư vấn ${name}` })}
+  <div class="grid3">
+    <a class="tile" href="tel:${TEL}"><span class="pill">GỌI NGAY</span><h3>${HOTLINE}</h3><p>Hotline tư vấn đất nền &amp; căn hộ FPT Plaza.</p><span class="go">Gọi ngay →</span></a>
+    <a class="tile" href="https://zalo.me/${ZALO}"><span class="pill re">ZALO</span><h3>Nhắn Zalo tư vấn</h3><p>Nhận bảng giá, mặt bằng và giỏ hàng qua Zalo.</p><span class="go">Mở Zalo →</span></a>
+    <a class="tile" href="${site.agent.url}"><span class="pill">WEBSITE</span><h3>${esc(site.agent.name)}</h3><p>Đơn vị tư vấn – phân phối. hoanghiepmt.com</p><span class="go">Xem website →</span></a>
+  </div></div></section>`;
+const finalCta = (title, steps, formTitle, formHtml) => `
+<section id="dang-ky-cuoi" class="dark"><div class="wrap two">
+  <div><p class="eyebrow">Ưu đãi thông tin</p><h2 class="title">${esc(title)}</h2><p>Để lại thông tin, chuyên viên soạn sẵn cho bạn:</p>
+  <ol class="steps">${steps.map((s) => `<li>${s}</li>`).join("")}</ol></div>
+  <div class="card"><h2>${esc(formTitle)}</h2>${formHtml}</div>
+</div></section>`;
+const LEGAL = {
+  "fpt-plaza-1": [["Đã bàn giao", "FPT Plaza 1 đã hoàn thành và bàn giao, có cư dân sinh sống."], ["Giao dịch chuyển nhượng", "Mỗi căn được kiểm tra pháp lý cụ thể trước khi giao dịch; hỗ trợ thủ tục sang tên."]],
+  "fpt-plaza-2": [["Đã bàn giao năm 2023", "FPT Plaza 2 đã bàn giao, giao dịch hiện tại là chuyển nhượng."], ["Kiểm tra từng căn", "Pháp lý từng căn được kiểm tra trước khi giao dịch; hỗ trợ sang tên và phương án vay."]],
+  "fpt-plaza-3": [["Thi công từ Quý I/2024", "Hai tòa The Empire (E) và The Wealthe (W), 25 tầng nổi, 2 tầng hầm."], ["Bàn giao dự kiến 2026", "Theo công bố chính thức của chủ đầu tư; theo dõi tiến độ thi công cập nhật."]],
+  "fpt-plaza-4": [["Đủ điều kiện bán (11/2025)", "Sở Xây dựng Đà Nẵng xác nhận căn hộ FPT Plaza 4 đủ điều kiện bán nhà ở hình thành trong tương lai."], ["Khởi công 3/2025", "Dự kiến bàn giao Quý II/2027 theo chủ đầu tư."]],
+  "fpt-plaza-5": [["Chưa mở bán", "Thời điểm mở bán phụ thuộc thông báo đủ điều kiện kinh doanh của Sở Xây dựng Đà Nẵng."], ["Số liệu dự kiến", "Quy mô, số căn là dự kiến theo thông tin thị trường, sẽ cập nhật theo công bố chính thức."]],
+};
+const POLICY = {
+  resale: [["Giỏ hàng chuyển nhượng", "Giá theo tầng, hướng, nội thất; cập nhật căn đang bán."], ["Hỗ trợ pháp lý & sang tên", "Kiểm tra pháp lý từng căn và hỗ trợ thủ tục."], ["Ngân hàng hỗ trợ vay", "Điều kiện và lãi suất do ngân hàng quyết định; chuyên viên hỗ trợ ước tính trước."]],
+  primary: [["Thanh toán theo tiến độ", "Chính sách thanh toán theo từng đợt; chuyên viên gửi bản mới nhất."], ["Ngân hàng hỗ trợ vay", "Điều kiện và lãi suất do ngân hàng quyết định; chuyên viên hỗ trợ ước tính trước."], ["Chính sách theo đợt", "Ưu đãi (nếu có) thay đổi theo từng đợt mở bán của chủ đầu tư."]],
+  upcoming: [["Báo giá đầu tiên", "Nhận bảng giá ngay khi chủ đầu tư công bố."], ["Ưu tiên tư vấn chọn căn", "Tư vấn tầng, hướng phù hợp khi mở bán."], ["So sánh với FPT Plaza 4", "Tham khảo mặt bằng giá và loại căn của tòa đang mở bán."]],
+};
+const STEPS = {
+  resale: ["<b>Giỏ hàng căn đang chuyển nhượng</b>, giá theo tầng, hướng, nội thất.", "<b>3 căn gợi ý</b> theo ngân sách bạn chọn.", "<b>Hỗ trợ pháp lý</b> sang tên, phương án vay.", "<b>Lịch xem nhà</b> thực tế cùng chuyên viên."],
+  primary: ["<b>Bảng giá chi tiết</b> theo tầng, hướng, loại căn.", "<b>3 căn gợi ý</b> theo ngân sách bạn chọn.", "<b>Chính sách thanh toán</b> theo tiến độ, hỗ trợ vay ngân hàng.", "<b>Mặt bằng, layout</b> và dòng tiền dễ so sánh."],
+  upcoming: ["<b>Báo giá ngay</b> khi chủ đầu tư công bố.", "<b>Mặt bằng & loại căn</b> dự kiến để bạn so sánh sớm.", "<b>Ưu tiên tư vấn</b> tầng đẹp, hướng đẹp khi mở bán.", "<b>So sánh với FPT Plaza 4</b> để hình dung mức giá."],
+};
+
+// --- Căn hộ FPT Plaza 1..5 (bố cục đầy đủ)
 for (const p of plazas) {
   const H = HOOKS[p.slug];
   const isFp4 = p.slug === "fpt-plaza-4";
-  const fHero = form("h", { button: H.btn, budget: BUDGET_APT, extra: isFp4 ? { label: "Mã căn đang quan tâm (nếu có)", ph: "VD: N-12.12" } : null });
-  const fCta = form("c", { button: H.btn, budget: BUDGET_APT, extra: isFp4 ? { label: "Mã căn đang quan tâm (nếu có)", ph: "VD: N-12.12" } : null });
-  const unitsSection = isFp4 ? floorplanBlock(p) : `
+  const extra = isFp4 ? { label: "Mã căn đang quan tâm (nếu có)", ph: "VD: N-12.12" } : null;
+  const plans = isFp4 ? floorplanBlock(p) + illusSection("loai-can-" + p.slug, "Loại căn", `Loại căn & diện tích ${p.name}`, `Loại căn và diện tích tham khảo ${p.name} Đà Nẵng`) : `
 <section id="mat-bang" class="tint"><div class="wrap">
-  ${head({ eyebrow: "Loại căn", title: `Loại căn & diện tích ${p.name}`, sub: "Diện tích tham khảo. Layout chi tiết có trong bộ tài liệu dự án." })}
+  ${head({ eyebrow: "Mặt bằng & loại căn", title: `Loại căn hộ & diện tích ${p.name}`, sub: "Diện tích tham khảo. Mặt bằng, layout chi tiết có trong bộ tài liệu dự án." })}
   <div class="grid-auto">${p.units.map(([t, a]) => `<div class="tile"><span class="pill">${esc(t)}</span><h3>${esc(a)}</h3><p>Căn ${esc(t)} tại ${esc(p.name)}</p><a class="go" href="#dang-ky">Xem giá & layout →</a></div>`).join("")}</div>
+  <div style="max-width:860px;margin:24px auto 0">${illus("loai-can-" + p.slug, `Loại căn và diện tích tham khảo ${p.name} Đà Nẵng`)}</div>
 </div></section>`;
+  const st = p.status === "resale" ? "Chuyển nhượng" : p.status === "upcoming" ? "Sắp mở bán (dự kiến)" : "Đang bán";
   add({
     slug: p.slug, name: p.name, title: p.title, description: p.description, keywords: p.keywords, tabs: isFp4,
     body: `
 ${hero({
       slug: p.slug,
-      crumbs: `<a href="${BASE}/">Trang chủ</a> › <a href="${link("apt")}">Căn hộ FPT Plaza</a> › ${esc(p.name)}`,
+      crumbs: `<a href="${BASE}/">Trang chủ</a> › ${esc(p.name)}`,
       eyebrow: `Khu đô thị FPT City Đà Nẵng · ${esc(p.statusLabel)}`, h1: `Căn hộ <span>${p.name}</span> Đà Nẵng`, lead: esc(p.lead), points: p.highlights.slice(0, 3),
-      cta: H.cta, ghost: H.ghost, ghostHref: "#mat-bang", formTitle: H.title, docs: H.docs, formHtml: fHero, stats: p.stats,
+      cta: H.cta, ghost: H.ghost, ghostHref: "#mat-bang", formTitle: H.title, docs: H.docs, formHtml: form("h", { button: H.btn, budget: BUDGET_APT, extra }), stats: p.stats,
+      leadTitle: `${p.name} trong những con số`,
     })}
-<section id="tong-quan"><div class="wrap two">
-  <div><p class="eyebrow">Tổng quan ${esc(p.name)}</p><h2 class="title">Điểm nổi bật căn hộ ${esc(p.name)}</h2>
+${hotSection(`Có gì nổi bật ở ${p.name}?`, "Điểm khách hỏi nhiều nhất – thông tin theo chủ đầu tư, có thể thay đổi.", [
+      ...p.highlights.slice(0, 3).map((h) => ["on", "NỔI BẬT", h, `${p.name} – ${p.statusLabel}.`, "#tong-quan", "Xem tổng quan →"]),
+      ...AUDIENCE[p.status].map(([t, d]) => ["", "PHÙ HỢP", t.replace(/^\S+\s/, ""), d, "#dang-ky", "Nhận gợi ý →"]),
+    ], H.bandBtn)}
+<section id="tong-quan" class="tint"><div class="wrap two">
+  <div><p class="eyebrow">Tổng quan</p><h2 class="title">Tổng quan dự án căn hộ ${esc(p.name)}</h2>
   <p>${esc(p.lead)} Chủ đầu tư: ${esc(investor)}.</p>
   <ul class="checks">${p.highlights.map((h) => `<li>${esc(h)}</li>`).join("")}</ul>
-  <a class="btn" href="#dang-ky">${esc(H.cta)}</a>
-  ${p.progressUrl ? `<p style="margin-top:14px"><a href="${esc(p.progressUrl)}">📷 Xem tiến độ &amp; hình ảnh thực tế →</a></p>` : ""}</div>
+  ${p.progressUrl ? `<p><a href="${esc(p.progressUrl)}">📷 Xem tiến độ &amp; hình ảnh thực tế →</a></p>` : ""}</div>
   ${specCard(`Thông tin ${p.name}`, [["Dự án", "Căn hộ " + p.name], ["Chủ đầu tư", "Công ty CP Đô thị FPT Đà Nẵng"], ["Vị trí", "Khu đô thị FPT City, Đà Nẵng"], ...p.specs], p.note)}
 </div></section>
-${unitsSection}
-<section><div class="wrap">${head({ eyebrow: "Phù hợp với ai", title: `${p.name} dành cho nhu cầu nào?` })}
-  <div class="amen">${AUDIENCE[p.status].map(([t, d]) => `<div><h3>${t}</h3><p>${esc(d)}</p></div>`).join("")}</div></div></section>
-${band(H.band, H.bandBtn)}
+${legalSection(`Pháp lý ${p.name}: những điều cần biết`, [["Chủ đầu tư rõ ràng", investor + "."], ...LEGAL[p.slug]])}
+${distances()}
+${amenitySection(p.name)}
+${plans}
+${priceSection(`Bảng giá & chính sách ${p.name}`, "Giá thay đổi theo tầng, hướng, loại căn và từng đợt chính sách – nhận bảng giá cập nhật qua Zalo.", ["Loại căn", "Diện tích tham khảo", "Tình trạng"], p.units.map(([t, a]) => [t, a, st]), POLICY[p.status])}
 <section class="tint"><div class="wrap">${head({ eyebrow: "So sánh", title: "FPT Plaza 1, 2, 3, 4, 5: khác nhau thế nào?" })}${COMPARE(p.slug)}</div></section>
-${p.slug === "fpt-plaza-4" ? illusSection("loai-can-" + p.slug, "Loại căn", `Loại căn & diện tích ${p.name}`, `Loại căn và diện tích tham khảo ${p.name} Đà Nẵng`) : ""}
-${photoSection([3 - heroN(p.slug)], `Phối cảnh khu đô thị FPT City – vị trí ${p.name}`)}
-${distances()}
-${amenities()}
-${ctaSection({
-      title: p.status === "resale" ? `Giá chuyển nhượng ${p.name} hôm nay` : p.status === "upcoming" ? "Đăng ký nhận giá FPT Plaza 5 đầu tiên" : `Bảng giá ${p.name}: xem trước khi chọn căn`,
-      intro: "Để lại thông tin, bạn nhận được:", formTitle: H.title, formHtml: fCta,
-      steps: p.status === "resale"
-        ? ["<b>Giỏ hàng căn đang chuyển nhượng</b>, giá theo tầng, hướng, nội thất.", "<b>3 căn gợi ý</b> theo ngân sách bạn chọn.", "<b>Hỗ trợ pháp lý</b> sang tên, phương án vay.", "<b>Lịch xem nhà</b> thực tế cùng chuyên viên."]
-        : p.status === "upcoming"
-          ? ["<b>Báo giá ngay</b> khi chủ đầu tư công bố.", "<b>Mặt bằng & loại căn</b> dự kiến để bạn so sánh sớm.", "<b>Ưu tiên tư vấn</b> tầng đẹp, hướng đẹp khi mở bán.", "<b>So sánh với FPT Plaza 4</b> để hình dung mức giá."]
-          : ["<b>Bảng giá chi tiết</b> theo tầng, hướng, loại căn.", "<b>3 căn gợi ý</b> theo ngân sách bạn chọn.", "<b>Chính sách thanh toán</b> theo tiến độ, hỗ trợ vay ngân hàng.", "<b>Bảng tính dòng tiền cho thuê</b> để bạn tự cân nhắc."],
-    })}
+${gallerySection(`Hình ảnh phối cảnh ${p.name} & khu đô thị FPT City`, isFp4 ? fpImg(`${IMG}/mat-bang-fpt-plaza-4-tang-3-16-sm.webp`, "Mặt bằng tầng 3–16 FPT Plaza 4", 960, 679) + fpImg(`${IMG}/layout/layout-fpt-plaza-4-n-11-sm.webp`, "Layout căn 2 phòng ngủ N-X.11 FPT Plaza 4", 520, 735) + fpImg(`${IMG}/layout/layout-fpt-plaza-4-n-06-sm.webp`, "Layout căn 2 phòng ngủ + 1 N-X.06 FPT Plaza 4", 520, 735) : "")}
+${newsSection(`Tin tức & cập nhật ${p.name}`, p.slug)}
 ${faqSection(`Câu hỏi thường gặp về ${p.name}`, p.faq)}
-${gotoSec("Các tòa FPT Plaza khác", plazaTiles(p.slug))}
-${band(`Đừng để câu hỏi "giá bao nhiêu?" còn bỏ ngỏ`, H.bandBtn)}`,
+${contactSection(p.name)}
+${finalCta(p.status === "upcoming" ? "Muốn biết giá FPT Plaza 5 trước người khác?" : `Căn ${p.name} nào hợp ngân sách của bạn?`, STEPS[p.status], H.title, form("c", { button: H.btn, budget: BUDGET_APT, extra }))}`,
   });
 }
 
-// --- Đất nền từng phân khu
-for (const z of zones) {
-  const H = ZONE_HOOK(z);
-  const faq = [
-    [`Đất phân khu ${z.code} FPT City giá bao nhiêu?`, `Giá đất phân khu ${z.code} thay đổi theo vị trí lô, hướng và mặt tiền đường. Gửi ngân sách để nhận 3 lô phù hợp kèm giá cập nhật.`],
-    [`Đất ${z.code} FPT City có sổ đỏ không?`, "Các lô trong khu đô thị FPT City được cấp sổ đỏ từng lô; mỗi lô được kiểm tra pháp lý cụ thể trước khi giao dịch."],
-    [`Có thể xem đất ${z.code} thực tế không?`, "Có. Để lại số điện thoại để chuyên viên hẹn lịch dẫn xem đất."],
-    [`Lô ${z.code} phù hợp xây nhà ở hay cho thuê?`, `${z.lead} Chuyên viên sẽ tư vấn lô cụ thể theo mục đích của bạn.`],
-  ];
-  add({
-    slug: z.slug, name: "Đất nền " + z.code, title: z.title, description: z.description, keywords: z.keywords,
-    body: `
-${hero({
-      slug: z.slug,
-      crumbs: `<a href="${BASE}/">Trang chủ</a> › <a href="${link("land")}">Đất nền FPT City</a> › Phân khu ${z.code}`,
-      eyebrow: "Đất nền sổ đỏ · FPT City Đà Nẵng", h1: `Đất nền FPT City <span>phân khu ${z.code}</span>`, lead: esc(z.lead), points: z.traits.slice(0, 3),
-      cta: H.cta, ghost: H.ghost, ghostHref: "#tong-quan", formTitle: H.title, docs: H.docs, formHtml: form("h", { button: H.btn, budget: BUDGET_LAND }),
-      stats: [[z.code, "Phân khu"], ["181+ ha", "Quy mô FPT City"], ["Sổ đỏ", "Pháp lý từng lô"], ["~5'", "Đến biển Non Nước"]],
-    })}
-<section id="tong-quan"><div class="wrap two">
-  <div><p class="eyebrow">Phân khu ${z.code}</p><h2 class="title">Vì sao nhiều người chọn đất FPT City ${z.code}?</h2>
-  <ul class="checks">${z.traits.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
-  <a class="btn" href="#dang-ky">${esc(H.cta)}</a></div>
-  ${specCard(`Thông tin phân khu ${z.code}`, [["Dự án", "Khu đô thị FPT City Đà Nẵng"], ["Phân khu", z.code], ["Chủ đầu tư", "Công ty CP Đô thị FPT Đà Nẵng"], ["Loại hình", "Đất nền, nhà phố, biệt thự"], ["Pháp lý", "Sổ đỏ từng lô"], ["Giá", "Theo giỏ hàng cập nhật"]], "Đặc điểm lô mang tính tham khảo; chi tiết từng lô có trong giỏ hàng.")}
-</div></section>
-<section class="tint"><div class="wrap">${head({ eyebrow: "Bạn nên chọn lô thế nào?", title: "3 câu hỏi giúp chọn đúng lô" })}
-  <div class="amen">
-    <div><h3>1. Xây để ở hay cho thuê?</h3><p>Ở lâu dài thì ưu tiên hướng, lộ giới và vị trí yên tĩnh; cho thuê thì ưu tiên gần Đại học FPT và FPT Complex.</p></div>
-    <div><h3>2. Ngân sách bao nhiêu?</h3><p>Gửi ngân sách vào form, chuyên viên lọc sẵn lô vừa tầm giá thay vì bạn phải xem cả giỏ hàng.</p></div>
-    <div><h3>3. Cần sổ và xây ngay?</h3><p>Mỗi lô được kiểm tra pháp lý riêng; chuyên viên báo tình trạng sổ và điều kiện xây dựng từng lô.</p></div>
-  </div></div></section>
-${band(H.band, H.bandBtn)}
-${illusSection("dat-nen-" + z.code.toLowerCase(), "Đặc điểm khu", `Đất nền FPT City phân khu ${z.code} có gì nổi bật?`, `Đặc điểm đất nền FPT City phân khu ${z.code}`, 733)}
-${photoSection([3 - heroN(z.slug)], `Phối cảnh khu đô thị FPT City – vị trí phân khu ${z.code}`)}
-${distances()}
-${amenities()}
-${ctaSection({
-      title: `Nhận giỏ hàng đất phân khu ${z.code} theo tầm giá của bạn`, intro: `Giỏ hàng ${z.code} thay đổi liên tục. Đăng ký để nhận:`, formTitle: H.title, formHtml: form("c", { button: H.btn, budget: BUDGET_LAND }),
-      steps: [`<b>3 lô gợi ý</b> vừa ngân sách bạn chọn.`, `<b>Bản đồ phân lô</b> phân khu ${z.code}.`, "<b>Pháp lý</b> từng lô.", "<b>Lịch xem đất</b> thực tế cùng chuyên viên."],
-    })}
-${faqSection(`Hỏi đáp đất FPT City phân khu ${z.code}`, faq)}
-${gotoSec("Các phân khu đất nền khác", zoneTiles(z.slug))}
-${gotoSec("Căn hộ FPT Plaza trong cùng khu đô thị", plazaTiles(""), "Có thể bạn quan tâm")}
-${band(`Lô ${z.code} bạn ưng nằm ở đâu trên bản đồ?`, H.bandBtn)}`,
-  });
-}
-
-// --- Trang tổng quan: đất nền
+// --- Đất nền FPT City (gồm các phân khu V1 – V6)
 {
+  const ZA = { V1: "200 – 350+ m²", V2: "~100 m²", V3: "~100 m²", V4: "Theo giỏ hàng", V5: "90 – 105 m²", V6: "Theo giỏ hàng" };
   const faq = [
-    ["Đất nền FPT City có sổ đỏ chưa?", "Phần lớn các lô đất nền tại FPT City có sổ đỏ từng lô. Mỗi lô cần kiểm tra pháp lý cụ thể trước khi giao dịch; chuyên viên gửi kèm thông tin khi tư vấn."],
+    ["Đất nền FPT City có sổ đỏ chưa?", "Các lô đất nền tại FPT City được cấp sổ đỏ từng lô. Mỗi lô được kiểm tra pháp lý cụ thể trước khi giao dịch; chuyên viên gửi kèm thông tin khi tư vấn."],
     ["Giá đất nền FPT City bao nhiêu?", "Giá thay đổi theo phân khu, vị trí, hướng và mặt tiền đường. Gửi ngân sách để nhận giỏ hàng phù hợp, cập nhật theo từng phân khu."],
     ["Phân khu nào phù hợp xây nhà cho thuê?", "Các phân khu gần Đại học FPT và FPT Complex (như V2, V6) có nhu cầu thuê cao từ sinh viên, kỹ sư."],
+    ["Phân khu nào có lô biệt thự, lô lớn?", "Phân khu V1 có nhiều lô diện tích lớn 200 – 350+ m², lô góc 2 mặt tiền, phù hợp xây biệt thự, nhà vườn."],
+    ["Có thể xem đất thực tế không?", "Có. Để lại số điện thoại để chuyên viên hẹn lịch dẫn xem đất."],
     ["Ngoài V1–V6, FPT City còn phân khu nào?", "Khu đô thị còn các phân khu khác ngoài V1–V6. Để lại thông tin, chuyên viên gửi bản đồ phân khu và giỏ hàng đầy đủ."],
   ];
   add({
     slug: "land", name: "Đất nền FPT City", tabs: false,
     title: "Đất nền FPT City Đà Nẵng – Bảng giá đất phân khu V1, V2, V3, V4, V5, V6",
     description: "Đất nền FPT City Đà Nẵng: bản đồ phân lô, giỏ hàng và giá đất các phân khu V1, V2, V3, V4, V5, V6. Sổ đỏ từng lô. Gửi ngân sách, nhận 3 lô phù hợp.",
-    keywords: "đất nền FPT City, đất FPT Đà Nẵng, giá đất FPT City, bản đồ phân lô FPT City, đất FPT City V1, V2, V3, V4, V5, V6",
+    keywords: "đất nền FPT City, đất FPT Đà Nẵng, giá đất FPT City, bản đồ phân lô FPT City, đất FPT City V1, đất FPT City V2, đất FPT City V3, đất FPT City V4, đất FPT City V5, đất FPT City V6",
     body: `
 ${hero({
       slug: "land",
-      crumbs: `<a href="${BASE}/">Trang chủ</a> › Đất nền FPT City`, eyebrow: "Đất nền sổ đỏ · FPT City Đà Nẵng", h1: `Đất nền <span>FPT City</span> Đà Nẵng`,
+      crumbs: `<a href="${BASE}/">Trang chủ</a> › Đất nền FPT City`, eyebrow: "Đất nền sổ đỏ · FPT City Đà Nẵng", h1: `Đất nền <span>FPT City</span> Đà Nẵng – phân khu V1 đến V6`,
       lead: "Lô đất sổ đỏ trong khu đô thị công nghệ hơn 181 ha, hạ tầng hoàn thiện. Bạn nói ngân sách, chúng tôi lọc sẵn lô phù hợp trong các phân khu V1 – V6.",
-      points: ["Sổ đỏ từng lô, hạ tầng hoàn thiện", "Lô ~90 m² đến biệt thự 350+ m²", "Giỏ hàng chính chủ, cập nhật hằng tuần"],
-      cta: "Gửi ngân sách, nhận 3 lô phù hợp", ghost: "Xem các phân khu", ghostHref: "#tong-quan", formTitle: "Lô nào vừa ngân sách của bạn?",
+      points: ["Sổ đỏ từng lô, hạ tầng hoàn thiện", "Lô ~90 m² đến biệt thự 350+ m²", "Giỏ hàng cập nhật hằng tuần"],
+      cta: "Gửi ngân sách, nhận 3 lô phù hợp", ghost: "Xem các phân khu", ghostHref: "#phan-khu", formTitle: "Lô nào vừa ngân sách của bạn?",
       docs: ["🗺️ Bản đồ phân lô V1 – V6", "📄 Lô đang bán & giá từng lô", "📑 Thông tin pháp lý", "🚗 Hẹn lịch xem đất"],
-      formHtml: form("h", { button: "Gửi tôi 3 lô phù hợp nhất", budget: BUDGET_LAND }),
+      formHtml: form("h", { button: "Gửi tôi 3 lô phù hợp nhất", budget: BUDGET_LAND }), leadTitle: "Đất nền FPT City trong những con số",
       stats: [["181+ ha", "Quy mô FPT City"], ["V1 – V6", "Phân khu đất nền"], ["90–350 m²", "Diện tích lô phổ biến"], ["Sổ đỏ", "Pháp lý từng lô"]],
     })}
-<section id="tong-quan"><div class="wrap">${head({ eyebrow: "Các phân khu", title: "Đất nền FPT City theo phân khu", sub: "Mỗi phân khu có vị trí và kích thước lô khác nhau. Chọn phân khu để xem chi tiết." })}${zoneTiles("")}</div></section>
-<section class="tint"><div class="wrap">${head({ eyebrow: "So sánh nhanh", title: "Phân khu nào hợp với bạn?" })}
-<div class="tbl"><table><thead><tr><th>Phân khu</th><th>Đặc điểm nổi bật</th><th></th></tr></thead><tbody>${zones.map((z) => `<tr><th scope="row">${z.code}</th><td>${esc(z.traits.slice(0, 2).join(" · "))}</td><td><a href="${link(z.slug)}">Xem →</a></td></tr>`).join("")}</tbody></table></div></div></section>
-${band("Phân khu nào đang có lô vừa tầm giá của bạn? Gửi ngân sách để biết.", "Nhận giỏ hàng theo ngân sách")}
-${illusSection("dat-nen-phan-khu", "Phân khu", "Diện tích lô phổ biến theo phân khu V1 – V6", "Biểu đồ diện tích lô đất nền FPT City theo phân khu V1 đến V6", 771)}
-${photoSection([3 - heroN("land")], "Phối cảnh khu đô thị FPT City – nơi có các phân khu đất nền")}
+${hotSection("Có gì hot ở đất nền FPT City?", "Những điểm khách hỏi nhiều nhất.", [
+      ["on", "LÔ LỚN", "Biệt thự, lô góc ở V1", "Nhiều lô 200 – 350+ m², lô góc 2 mặt tiền đường nội khu.", "#v1", "Xem phân khu V1 →"],
+      ["on", "TỔNG TIỀN VỪA", "Lô 90 – 105 m² ở V5", "Diện tích vừa phải, tổng tiền dễ tiếp cận, giao dịch sôi động.", "#v5", "Xem phân khu V5 →"],
+      ["", "CHO THUÊ", "Gần Đại học FPT (V2)", "Nhu cầu thuê từ sinh viên, giảng viên quanh năm.", "#v2", "Xem phân khu V2 →"],
+      ["", "KỸ SƯ", "Gần FPT Complex (V6)", "Sát trục Nam Kỳ Khởi Nghĩa, khách thuê là kỹ sư công nghệ.", "#v6", "Xem phân khu V6 →"],
+      ["re", "Ở NGAY", "Dân cư hiện hữu (V3)", "Khu dân cư đã hình thành, phù hợp ở thực và kinh doanh nhỏ.", "#v3", "Xem phân khu V3 →"],
+      ["", "CẬP NHẬT", "Giỏ hàng theo tuần (V4)", "Quy hoạch đồng bộ, nhiều lựa chọn diện tích.", "#v4", "Xem phân khu V4 →"],
+    ], "Nhận giỏ hàng đất nền")}
+<section id="tong-quan" class="tint"><div class="wrap two">
+  <div><p class="eyebrow">Tổng quan</p><h2 class="title">Tổng quan đất nền FPT City Đà Nẵng</h2>
+  <p>Đất nền FPT City nằm trong khu đô thị công nghệ hơn 181 ha phía Nam Đà Nẵng, quy hoạch đồng bộ cùng Đại học FPT, FPT Complex, công viên và kênh sinh thái. Các phân khu V1 – V6 có kích thước lô và vị trí khác nhau, phù hợp xây nhà ở, biệt thự hoặc nhà cho thuê.</p>
+  <ul class="checks"><li>Sổ đỏ từng lô, hạ tầng hoàn thiện</li><li>Lô góc, lô biệt thự, lô ~100 m²</li><li>Gần Đại học FPT &amp; FPT Complex</li><li>Giỏ hàng cập nhật hằng tuần</li></ul></div>
+  ${specCard("Thông tin đất nền FPT City", [["Dự án", "Khu đô thị FPT City Đà Nẵng"], ["Chủ đầu tư", investor], ["Phân khu", "V1, V2, V3, V4, V5, V6"], ["Diện tích lô", "~90 m² đến 350+ m²"], ["Pháp lý", "Sổ đỏ từng lô"], ["Hạ tầng", "Hoàn thiện, đường nội khu rộng"]])}
+</div></section>
+${legalSection("Pháp lý đất nền FPT City: những điều cần biết", [["Chủ đầu tư rõ ràng", investor + "."], ["Sổ đỏ từng lô", "Các lô trong khu đô thị được cấp sổ đỏ từng lô."], ["Kiểm tra trước giao dịch", "Mỗi lô được kiểm tra pháp lý cụ thể trước khi giao dịch."], ["Quy hoạch đồng bộ", "Phân khu nằm trong tổng thể quy hoạch của khu đô thị FPT City."], ["Hạ tầng hoàn thiện", "Đường nội khu, điện, nước, cây xanh đã đầu tư đồng bộ."]])}
 ${distances()}
-${amenities()}
-${ctaSection({ title: "Nhận giỏ hàng đất nền FPT City theo tầm giá", intro: "Giá đất khác nhau theo từng lô. Đăng ký để nhận:", formTitle: "Lô nào vừa ngân sách của bạn?", formHtml: form("c", { button: "Gửi tôi 3 lô phù hợp nhất", budget: BUDGET_LAND }), steps: ["<b>3 lô gợi ý</b> vừa ngân sách bạn chọn.", "<b>Bản đồ phân lô</b> chi tiết từng phân khu.", "<b>Thông tin pháp lý</b> sổ đỏ từng lô.", "<b>Lịch xem đất</b> cùng chuyên viên."] })}
+${amenitySection("đất nền FPT City")}
+<section id="phan-khu"><div class="wrap">${head({ eyebrow: "Phân khu", title: "Mặt bằng phân khu đất nền FPT City V1 – V6", sub: "Mỗi phân khu có vị trí và kích thước lô khác nhau. Bản đồ phân lô chi tiết gửi qua Zalo." })}
+  <div style="max-width:860px;margin:0 auto 28px">${illus("dat-nen-phan-khu", "Biểu đồ diện tích lô đất nền FPT City theo phân khu V1 đến V6")}</div>
+  <div class="grid2">${zones.map((z) => `<div class="tile" id="${z.code.toLowerCase()}">${illus("dat-nen-" + z.code.toLowerCase(), `Đặc điểm đất nền FPT City phân khu ${z.code}`)}<h3 style="margin-top:14px">Đất nền FPT City phân khu ${z.code}</h3><p>${esc(z.lead)}</p><a class="go" href="#dang-ky">Nhận giỏ hàng ${z.code} →</a></div>`).join("")}</div></div></section>
+${priceSection("Bảng giá & chính sách đất nền FPT City", "Giá khác nhau theo phân khu, vị trí lô, hướng và mặt tiền đường – nhận giỏ hàng cập nhật qua Zalo.", ["Phân khu", "Đặc điểm", "Diện tích phổ biến"], zones.map((z) => [z.code, z.traits.slice(0, 2).join(" · "), ZA[z.code]]), [["Kiểm tra pháp lý từng lô", "Sổ đỏ và thông tin lô được kiểm tra trước khi giao dịch."], ["Ngân hàng hỗ trợ vay", "Điều kiện và lãi suất do ngân hàng quyết định; chuyên viên hỗ trợ ước tính trước."], ["Hẹn xem đất thực tế", "Chuyên viên dẫn xem lô và khu vực xung quanh."]])}
+${gallerySection("Hình ảnh phối cảnh khu đô thị FPT City")}
+${newsSection("Tin tức & cập nhật FPT City", "")}
 ${faqSection("Hỏi đáp về đất nền FPT City", faq)}
-${gotoSec("Căn hộ FPT Plaza trong cùng khu đô thị", plazaTiles(""), "Có thể bạn quan tâm")}
-${band("Lô đất ưng ý nằm ở phân khu nào? Hỏi để biết.", "Nhận giỏ hàng ngay")}`,
-  });
-}
-
-// --- Trang tổng quan: căn hộ
-{
-  const faq = [
-    ["Chuỗi căn hộ FPT Plaza gồm những tòa nào?", "FPT Plaza 1, 2 (đã bàn giao), FPT Plaza 3 (sắp bàn giao), FPT Plaza 4 (đang mở bán) và FPT Plaza 5 (sắp mở bán), đều trong khu đô thị FPT City Đà Nẵng."],
-    ["Nên mua căn hộ FPT Plaza nào?", "Cần ở ngay: chọn chuyển nhượng FPT Plaza 1, 2. Muốn nhận nhà sớm: FPT Plaza 3. Muốn thanh toán giãn theo tiến độ: FPT Plaza 4. Muốn biết giá sớm: đăng ký FPT Plaza 5."],
-    ["Giá căn hộ FPT Plaza hiện nay thế nào?", "Giá khác nhau theo tòa, tầng, hướng và đợt chính sách. Gửi ngân sách để nhận 3 căn phù hợp kèm giá cập nhật."],
-  ];
-  add({
-    slug: "apt", name: "Căn hộ FPT Plaza", tabs: false,
-    title: "Căn hộ FPT Plaza Đà Nẵng – So sánh FPT Plaza 1, 2, 3, 4, 5 | Bảng giá",
-    description: "So sánh căn hộ FPT Plaza 1, 2, 3, 4, 5 tại FPT City Đà Nẵng: quy mô, số căn, tình trạng, tiến độ. Gửi ngân sách, nhận 3 căn phù hợp kèm bảng giá.",
-    keywords: "căn hộ FPT Plaza, chung cư FPT Đà Nẵng, FPT Plaza 1, FPT Plaza 2, FPT Plaza 3, FPT Plaza 4, FPT Plaza 5, giá căn hộ FPT Plaza",
-    body: `
-${hero({
-      slug: "apt",
-      crumbs: `<a href="${BASE}/">Trang chủ</a> › Căn hộ FPT Plaza`, eyebrow: "Chuỗi căn hộ FPT City Đà Nẵng", h1: `Căn hộ <span>FPT Plaza</span> Đà Nẵng`,
-      lead: "Từ căn đã bàn giao đến dự án sắp mở bán: tòa nào hợp với bạn? Nói ngân sách, chúng tôi gợi ý 3 căn phù hợp nhất trong cả 5 tòa.",
-      points: ["5 tòa căn hộ trong cùng khu đô thị FPT City", "Căn 1PN – 3PN và căn Duplex diện tích lớn", "Sơ cấp từ chủ đầu tư & chuyển nhượng"],
-      cta: "Tòa nào hợp ngân sách của tôi?", ghost: "So sánh 5 tòa", ghostHref: "#tong-quan", formTitle: "Gửi ngân sách, nhận 3 căn gợi ý",
-      docs: ["💰 Bảng giá từng tòa", "📐 Mặt bằng & layout căn hộ", "🔄 Giỏ hàng chuyển nhượng", "🏦 Phương án vay ngân hàng"],
-      formHtml: form("h", { button: "Gửi tôi 3 căn phù hợp nhất", budget: BUDGET_APT }),
-      stats: [["5", "Tòa FPT Plaza"], ["2", "Tòa đã bàn giao"], ["1.395", "Căn tại FPT Plaza 4"], ["181+ ha", "Khu đô thị FPT City"]],
-    })}
-<section id="tong-quan"><div class="wrap">${head({ eyebrow: "So sánh", title: "So sánh nhanh FPT Plaza 1, 2, 3, 4, 5" })}${COMPARE("")}
-<p class="small" style="margin-top:10px">Số liệu tổng hợp, mang tính tham khảo; FPT Plaza 5 là số liệu dự kiến.</p></div></section>
-${gotoSec("Xem chi tiết từng tòa", plazaTiles(""), "Chọn tòa")}
-${band("Một câu hỏi: ngân sách của bạn đang nằm ở tòa nào?", "Nhận 3 căn gợi ý")}
-${illusSection("chuoi-fpt-plaza", "Quy mô", "Chuỗi căn hộ FPT Plaza 1–5 trong một biểu đồ", "Biểu đồ quy mô căn hộ FPT Plaza 1, 2, 3, 4, 5 tại FPT City Đà Nẵng", 730)}
-${photoSection([3 - heroN("apt")], "Phối cảnh khu đô thị FPT City – nơi có chuỗi căn hộ FPT Plaza")}
-${distances()}
-${amenities()}
-${ctaSection({ title: "Nhận bảng giá căn hộ FPT Plaza theo ngân sách", intro: "Để lại thông tin để nhận:", formTitle: "Gửi ngân sách, nhận 3 căn gợi ý", formHtml: form("c", { button: "Gửi tôi 3 căn phù hợp nhất", budget: BUDGET_APT }), steps: ["<b>3 căn gợi ý</b> theo ngân sách bạn chọn.", "<b>Bảng giá</b> FPT Plaza 3, 4 và giỏ hàng chuyển nhượng Plaza 1, 2.", "<b>Mặt bằng</b> tầng điển hình & layout căn hộ.", "<b>Thông tin FPT Plaza 5</b> ngay khi có."] })}
-${faqSection("Hỏi đáp về căn hộ FPT Plaza", faq)}
-${band("Đã đến lúc biết căn nào phù hợp với bạn.", "Nhận 3 căn gợi ý")}`,
+${contactSection("đất nền FPT City")}
+${finalCta("Với ngân sách của bạn, lô nào ở FPT City phù hợp nhất?", ["<b>3 lô phù hợp</b> theo ngân sách và mục đích.", "<b>Bản đồ phân lô</b> V1 – V6 và giỏ hàng mới.", "<b>Thông tin pháp lý</b> từng lô.", "<b>Lịch xem đất</b> thực tế cùng chuyên viên."], "Lô nào vừa ngân sách của bạn?", form("c", { button: "Gửi tôi 3 lô phù hợp nhất", budget: BUDGET_LAND }))}`,
   });
 }
 
