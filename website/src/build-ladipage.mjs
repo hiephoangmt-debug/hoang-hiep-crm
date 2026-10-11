@@ -181,11 +181,11 @@ const page = ({ slug, title, description, keywords, body, tabs }) => `<!doctype 
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${link(slug)}">
-<meta property="og:image" content="${RAW}/og-cover.png">
+<meta property="og:image" content="${RAW}/og/og-${slug}.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="${RAW}/og-cover.png">
+<meta name="twitter:image" content="${RAW}/og/og-${slug}.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
@@ -541,6 +541,6 @@ writeFileSync(join(OUT, "manifest.json"), JSON.stringify(manifest, null, 2) + "\
 console.log(`Đã dựng ${pages.length} trang LadiPage vào ladipage/`);
 
 // Giá trị dán vào "Cài đặt trang" của LadiPage (tiêu đề, mô tả, từ khoá, ảnh chia sẻ, favicon)
-const seoMd = [`# Cài đặt trang LadiPage (SEO)\n\nDán vào Cài đặt trang › SEO của từng trang. Ảnh chia sẻ 1200×630, favicon 96×96.\n\n- **Hình ảnh khi chia sẻ:** \`${RAW}/og-cover.png\`\n- **Favicon:** \`${RAW}/favicon-96.png\`\n`,
-  ...pages.map((p) => `## ${p.name}\n- **Đường dẫn:** ${pathOf(p.slug)}\n- **Tiêu đề trang:** ${p.title}\n- **Mô tả trang:** ${p.description}\n- **Từ khoá:** ${p.keywords}\n`)].join("\n");
+const seoMd = [`# Cài đặt trang LadiPage (SEO)\n\nDán vào Cài đặt trang › SEO của từng trang. Ảnh chia sẻ 1200×630 (riêng từng trang), favicon 96×96 dùng chung.\n\n- **Favicon (mọi trang):** \`${RAW}/favicon-96.png\`\n`,
+  ...pages.map((p) => `## ${p.name}\n- **Đường dẫn:** ${pathOf(p.slug)}\n- **Tiêu đề trang:** ${p.title}\n- **Mô tả trang:** ${p.description}\n- **Từ khoá:** ${p.keywords}\n- **Hình ảnh khi chia sẻ:** ${RAW}/og/og-${p.slug}.jpg\n`)].join("\n");
 writeFileSync(join(OUT, "SEO-SETTINGS.md"), seoMd);
