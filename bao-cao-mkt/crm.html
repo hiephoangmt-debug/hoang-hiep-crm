@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CRM Báo cáo Marketing</title>
+<style>
+  :root { --bg:#f5f6f8; --card:#fff; --text:#1d2330; --muted:#667085; --line:#e3e6eb; --accent:#c8102e; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#14161a; --card:#1d2026; --text:#e8eaee; --muted:#9aa3b2; --line:#2e333b; --accent:#ef4060; } }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; background:var(--bg); color:var(--text); font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; padding:16px; }
+  main { width:100%; max-width:560px; }
+  h1 { font-size:22px; margin:0 0 6px; }
+  p { color:var(--muted); margin:0 0 20px; }
+  .units { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
+  a.unit { display:block; text-decoration:none; color:var(--text); background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px; }
+  a.unit:hover { border-color:var(--accent); }
+  .bm { font-size:24px; font-weight:800; letter-spacing:-.02em; }
+  .t1 { color:#e30613; } .t2 { color:#00843d; } .t3 { color:#a8782a; margin-left:3px; font-weight:600; }
+  small { display:block; color:var(--muted); margin-top:4px; }
+  .all { display:inline-block; margin-top:16px; color:var(--accent); }
+  .warn { background:var(--card); border:1px dashed var(--accent); border-radius:12px; padding:16px; }
+  code { font-size:13px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>CRM Báo cáo Marketing</h1>
+  <p>Chọn bên của bạn. CRM chạy trên Google – đăng nhập bằng tài khoản Google khi được hỏi.</p>
+  <div id="go"></div>
+</main>
+<script src="config.js"></script>
+<script>
+  (function () {
+    var url = ((window.BAO_CAO_MKT_CONFIG || {}).crmUrl || "").trim();
+    var box = document.getElementById("go");
+    if (!url) {
+      box.innerHTML = '<div class="warn">Chưa cấu hình link CRM. Mở <code>config.js</code>, dán link ứng dụng web Apps Script (đuôi <code>/exec</code>) vào <code>crmUrl</code>, rồi đưa lại lên Netlify.</div>';
+      return;
+    }
+    box.innerHTML =
+      '<div class="units">' +
+      '<a class="unit" href="' + url + '?donvi=tatiland"><span class="bm"><span class="t1">TA</span><span class="t2">TI</span><span class="t3">LAND</span></span><small>Dự án Sun</small></a>' +
+      '<a class="unit" href="' + url + '?donvi=tatiinvest"><span class="bm"><span class="t1">TA</span><span class="t2">TI</span><span class="t3">INVEST</span></span><small>Dự án Casamia</small></a>' +
+      '</div><a class="all" href="' + url + '">Quản lý: xem cả hai bên →</a>' +
+      ' · <a class="all" href="' + url + '?page=baocao">Báo cáo từ thư mục Drive</a>';
+  })();
+</script>
+</body>
+</html>

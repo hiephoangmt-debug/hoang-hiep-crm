@@ -4,6 +4,8 @@
  * presets: mỗi dự án một bộ link Drive; chọn ở đầu trang. */
 window.BAO_CAO_MKT_CONFIG = {
   googleClientId: "",
+  // Link ứng dụng web Apps Script của CRM (đuôi /exec) – dùng cho trang crm.html trên Netlify
+  crmUrl: "",
   // Logo trong file PPTX mẫu (tên file ảnh trong mẫu) – mỗi dự án chọn một logo ở "logo"
   logos: { "TATILAND": "image8.png", "TATI INVEST": "image9.png" },
   // ID tài khoản quảng cáo -> nhân sự (cho tài khoản không ghi tên trong sheet)
