@@ -471,6 +471,7 @@
         <input class="cnum" data-p="${i}" data-c="${j}" data-f="spent" value="${fmtInt(c.spent)}" aria-label="Chi tiêu">
         <span class="muted">${c.results != null ? fmtInt(c.results) + " " + (RESULT_LABEL[c.resultType] || "") : ""}</span></label>`).join("")}</div>`;
   }
+  const evSel = new Set(); // ảnh đã lưu đang được tick để xoá nhiều
   function renderEvidence() {
     renderChecklist();
     const w = $("evWeek").value, pj = $("evProject").value;
@@ -489,8 +490,11 @@
     $("evUpload").hidden = !pending.length;
     const rows = S.ChungTu.filter((r) => r.tuan === w && r.duAn === pj);
     $("evCount").textContent = `${rows.length} ảnh đã lưu`;
+    Array.from(evSel).filter((id) => !rows.some((r) => r.id === id)).forEach((id) => evSel.delete(id));
+    $("evDelSel").textContent = `Xoá đã chọn (${evSel.size})`;
+    $("evDelSel").disabled = !evSel.size;
     $("evList").innerHTML = rows.length ? rows.map((r) => `
-      <figure class="img"><a href="${esc(r.url)}" target="_blank" rel="noopener"><img src="https://drive.google.com/thumbnail?id=${esc(r.fileId)}&sz=w400" alt="${esc(r.tenFile)}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'noimg',textContent:'Mở chứng từ'}))"></a>
+      <figure class="img${evSel.has(r.id) ? " sel" : ""}"><label class="pick"><input type="checkbox" data-evsel="${esc(r.id)}"${evSel.has(r.id) ? " checked" : ""}> Chọn</label><a href="${esc(r.url)}" target="_blank" rel="noopener"><img src="https://drive.google.com/thumbnail?id=${esc(r.fileId)}&sz=w400" alt="${esc(r.tenFile)}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'noimg',textContent:'Mở chứng từ'}))"></a>
         <figcaption><span class="fname" title="${esc(r.tenFile)}">${esc(r.tenFile)}</span>
           <div class="row"><select data-ev="${esc(r.id)}" data-f="nenTang">${PLATFORMS.map((x) => opt(x, PLATFORM_LABEL[x], r.nenTang)).join("")}</select>
           <select data-ev="${esc(r.id)}" data-f="loai">${Object.entries(KINDS).map(([k, l]) => opt(k, l, r.loai)).join("")}</select></div>
@@ -711,6 +715,16 @@
     return dup.length;
   }
 
+  /** Ảnh nên bỏ trong danh sách đang xem: cùng file Drive, cùng nội dung hoặc cùng tên file; giữ ảnh đã gán nhân sự / lưu sớm nhất. */
+  function dupIds(rows) {
+    const order = rows.slice().sort((a, b) => (!a.nhanSu - !b.nhanSu) || String(a.ngayTao).localeCompare(String(b.ngayTao)));
+    const seen = new Set(), dup = [];
+    order.forEach((r) => {
+      const keys = [r.fileId && "f:" + r.fileId, r.hash && "h:" + r.hash, r.tenFile && "n:" + r.nenTang + "|" + String(r.tenFile).trim().toLowerCase()].filter(Boolean);
+      if (keys.some((k) => seen.has(k))) dup.push(r.id); else keys.forEach((k) => seen.add(k));
+    });
+    return dup;
+  }
   async function buildOne(pjName, w, fmt) {
     const pj = project(pjName);
     const tplId = B.parseDriveId(pj.mauPptx);
@@ -911,6 +925,30 @@
       await run("Đang lưu", () => gas("crmSave", "ChungTu", { id, [e.target.dataset.f]: e.target.value }));
       toast("Đã lưu.", "ok");
       renderChecklist();
+    });
+    const evRows = () => S.ChungTu.filter((r) => r.tuan === $("evWeek").value && r.duAn === $("evProject").value);
+    $("evList").addEventListener("change", (e) => {
+      const id = e.target.dataset.evsel;
+      if (!id) return;
+      if (e.target.checked) evSel.add(id); else evSel.delete(id);
+      renderEvidence();
+    });
+    $("evSelAll").addEventListener("click", () => { evRows().forEach((r) => evSel.add(r.id)); renderEvidence(); });
+    $("evSelNone").addEventListener("click", () => { evSel.clear(); renderEvidence(); });
+    $("evSelDup").addEventListener("click", () => {
+      const dup = dupIds(evRows());
+      evSel.clear(); dup.forEach((id) => evSel.add(id));
+      renderEvidence();
+      toast(dup.length ? `Đã chọn ${dup.length} ảnh trùng (cùng file, cùng nội dung hoặc cùng tên). Xem lại rồi bấm "Xoá đã chọn".` : "Không có ảnh trùng.", dup.length ? "ok" : "");
+    });
+    $("evDelSel").addEventListener("click", async () => {
+      const ids = Array.from(evSel);
+      if (!ids.length || !confirm(`Xoá ${ids.length} ảnh đã chọn (file chuyển vào thùng rác Drive)?`)) return;
+      try { await run("Đang xoá", () => gas("crmDelete", "ChungTu", ids)); } catch (_) { return; }
+      S.ChungTu = S.ChungTu.filter((x) => !evSel.has(x.id));
+      evSel.clear();
+      toast(`Đã xoá ${ids.length} ảnh.`, "ok");
+      renderEvidence();
     });
     $("evList").addEventListener("click", async (e) => {
       const id = e.target.dataset.evdel;
