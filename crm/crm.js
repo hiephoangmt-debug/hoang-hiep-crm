@@ -437,7 +437,7 @@
         <figcaption><span class="fname" title="${esc(r.tenFile)}">${esc(r.tenFile)}</span>
           <div class="row"><select data-ev="${esc(r.id)}" data-f="nenTang">${PLATFORMS.map((x) => opt(x, PLATFORM_LABEL[x], r.nenTang)).join("")}</select>
           <select data-ev="${esc(r.id)}" data-f="loai">${Object.entries(KINDS).map(([k, l]) => opt(k, l, r.loai)).join("")}</select></div>
-          <div class="row"><select data-ev="${esc(r.id)}" data-f="nhanSu">${staff.map((x) => opt(x, x, r.nhanSu)).join("")}</select>
+          <div class="row"><select data-ev="${esc(r.id)}" data-f="nhanSu" class="${r.nhanSu ? "" : "warn"}">${opt("", "(chưa gán nhân sự)", r.nhanSu)}${staff.map((x) => opt(x, x, r.nhanSu)).join("")}</select>
           <button type="button" class="link danger" data-evdel="${esc(r.id)}">Xoá</button></div>
         </figcaption></figure>`).join("") : `<p class="muted">Chưa có ảnh chứng từ cho tuần này.</p>`;
   }
@@ -540,6 +540,70 @@
     });
     return weeks;
   }
+  // ------------------------------------------------------------ ảnh có sẵn trong thư mục chứng từ trên Drive
+  // Cấu trúc: Thư mục chứng từ / <Nhân sự> / <Dự án> / <tuần "3/10-9/10"> / ảnh
+  const STOPW = ["anh", "chi", "em", "thi", "van", "sun", "casa", "group", "tai khoan"];
+  const simpleWords = (x) => " " + B.norm(x).replace(/[^a-z0-9]+/g, " ").trim() + " ";
+  /** Nhân sự theo tên file trước ("ngà sun.jpg"), rồi các thư mục từ trong ra ngoài ("Phan Hạnh/Sun/…"). */
+  function staffFromPath(path, name) {
+    const list = staffNames();
+    const match = (seg) => {
+      const t = simpleWords(seg);
+      const full = list.filter((st) => t.includes(simpleWords(st)));
+      if (full.length === 1) return full[0];
+      const hits = list.filter((st) => B.norm(st).split(" ").some((x) => x.length >= 3 && !STOPW.includes(x) && t.includes(" " + x + " ")));
+      return hits.length === 1 ? hits[0] : "";
+    };
+    for (const seg of [name.replace(/\.[a-z0-9]+$/i, "")].concat(path.slice().reverse())) {
+      const st = match(seg);
+      if (st) return st;
+    }
+    return "";
+  }
+  /** Thư mục tuần ("3/10-9/10") có giao với tuần báo cáo không; không có thư mục tuần = có. */
+  function folderInWeek(path, iso) {
+    const a = parseIso(iso), b = new Date(a);
+    b.setDate(a.getDate() + 6);
+    const dn = (d, m) => m * 31 + d;
+    const A = dn(a.getDate(), a.getMonth() + 1), Z = dn(b.getDate(), b.getMonth() + 1);
+    return path.map((x) => /^\s*(\d{1,2})\/(\d{1,2})\s*-\s*(\d{1,2})\/(\d{1,2})\s*$/.exec(x)).filter(Boolean)
+      .every((m) => dn(+m[1], +m[2]) <= Z && dn(+m[3], +m[4]) >= A);
+  }
+  /** Ghi các ảnh/PDF mới trong thư mục chứng từ của dự án (tuần w) vào bảng ChungTu – đọc chữ để xếp loại, gán người. */
+  async function importDriveEvidence(pjName, w) {
+    const pj = project(pjName);
+    const root = B.parseDriveId(pj.thuMucChungTu);
+    if (!root) return [];
+    const key = B.norm(pj.khoa || pj.ten).replace(/[^a-z0-9]/g, "");
+    toast(`${pjName}: đang quét thư mục chứng từ trên Drive…`, "busy");
+    const files = (await gas("listTree", root)).filter((f) => (/^image\//.test(f.mimeType) || f.mimeType === "application/pdf") &&
+      f.path.slice(1).some((seg) => B.norm(seg).replace(/[^a-z0-9]/g, "") === key) &&
+      folderInWeek(f.path, w) && !S.ChungTu.some((c) => c.fileId === f.id));
+    if (!files.length) return [];
+    const ctx = { staffList: staffNames(), accounts: S.TaiKhoan.map((t) => ({ account: t.maTaiKhoan, staff: t.nhanSu })) };
+    let wk = null;
+    try { wk = await B.ocrWorker(); } catch (_) { /* không đọc được chữ: xếp theo tên file/thư mục */ }
+    const rows = [];
+    for (const f of files) {
+      toast(`${pjName}: đọc ảnh trên Drive ${rows.length + 1}/${files.length} – ${f.name}`, "busy");
+      let text = "";
+      try {
+        const r = await gas("downloadFile", f.id);
+        const file = new File([B.b64ToBlob(r.b64, r.type)], f.name, { type: r.type });
+        text = B.isPdf(file) ? await B.pdfText(file) : wk ? (await wk.recognize(file)).data.text || "" : "";
+      } catch (e) { console.error(e); }
+      const c = B.classifyText(text, ctx), g = B.guessClass(f.path, f.name);
+      rows.push({
+        tuan: w, duAn: pjName, nenTang: c.platform || g.platform, loai: c.kind || g.kind,
+        nhanSu: (c.staff && c.by === "id" ? c.staff : "") || staffFromPath(f.path, f.name) || c.staff || "",
+        fileId: f.id, tenFile: f.name, url: "https://drive.google.com/file/d/" + f.id + "/view",
+      });
+    }
+    const saved = await gas("crmSaveMany", "ChungTu", rows);
+    S.ChungTu = S.ChungTu.concat(saved);
+    return saved;
+  }
+
   async function buildOne(pjName, w, fmt) {
     const pj = project(pjName);
     const tplId = B.parseDriveId(pj.mauPptx);
@@ -548,7 +612,8 @@
     if (!rows.some((r) => r.tuan === w)) throw new Error(`${pjName}: chưa có số liệu tuần ${weekLabel(w)}.`);
     if (!tplCache[tplId]) { const t = await gas("downloadFile", tplId); tplCache[tplId] = B.b64ToBlob(t.b64, t.type); }
     const accStaff = new Map(rows.map((r) => [r.taiKhoan || r.nhanSu || "(không rõ)", r.nhanSu]));
-    const ev = S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w);
+    try { await importDriveEvidence(pjName, w); } catch (e) { console.error(e); }
+    const ev = S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w && r.nhanSu);
     const images = [];
     for (const r of ev) {
       toast(`${pjName}: tải ảnh ${images.length + 1}/${ev.length}…`, "busy");
@@ -708,6 +773,16 @@
       renderEvidence();
     });
     $("evUpload").addEventListener("click", () => uploadPending().catch(() => {}));
+    $("evScan").addEventListener("click", async () => {
+      $("evScan").disabled = true;
+      try {
+        const got = await run("Đang quét", () => importDriveEvidence($("evProject").value, $("evWeek").value));
+        const noStaff = got.filter((r) => !r.nhanSu).length;
+        toast(got.length ? `Đã lấy ${got.length} ảnh từ Drive` + (noStaff ? ` – ${noStaff} ảnh chưa gán nhân sự (chọn ở ô Nhân sự, ảnh chưa gán không vào báo cáo).` : ".")
+          : "Không có ảnh mới trong thư mục chứng từ cho tuần/dự án này.", got.length ? "ok" : "");
+        renderEvidence();
+      } catch (_) { /* đã báo */ } finally { $("evScan").disabled = false; }
+    });
     $("evList").addEventListener("change", async (e) => {
       const id = e.target.dataset.ev;
       if (!id) return;
@@ -768,7 +843,7 @@
 
   async function start() {
     window.__crmStarted = true;
-    $("loading").textContent = "Đang kết nối máy chủ Google… (giao diện v5)";
+    $("loading").textContent = "Đang kết nối máy chủ Google… (giao diện v7)";
     if (!B.IN_GAS) {
       $("loading").textContent = "Trang CRM cần chạy trong Google Apps Script (xem apps-script/README.md).";
       return;
