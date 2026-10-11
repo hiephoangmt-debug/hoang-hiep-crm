@@ -599,7 +599,7 @@
   function shareText(rows) {
     if (!rows.length) return "";
     const w = rows[0].tuan;
-    return `📊 Báo cáo Marketing tuần ${weekLabel(w, true)}` + (brand ? ` – ${brand}` : "") + "\n" +
+    return `[Báo cáo] Marketing tuần ${weekLabel(w, true)}` + (brand ? ` – ${brand}` : "") + "\n" +
       rows.map((r) => `• ${r.duAn}: ${r.pdfUrl || r.pptxUrl}`).join("\n");
   }
   async function copyText(text, what) {
@@ -734,7 +734,7 @@
       const id = e.target.dataset.copy;
       if (!id) return;
       const r = S.BaoCao.find((x) => x.id === id);
-      copyText(`📊 Báo cáo ${r.duAn} tuần ${weekLabel(r.tuan, true)}: ${r.pdfUrl || r.pptxUrl}`, "link báo cáo");
+      copyText(`[Báo cáo] ${r.duAn} tuần ${weekLabel(r.tuan, true)}: ${r.pdfUrl || r.pptxUrl}`, "link báo cáo");
     });
     $("rpTable").addEventListener("change", async (e) => {
       const id = e.target.dataset.rp;

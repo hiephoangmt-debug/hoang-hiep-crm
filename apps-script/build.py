@@ -36,6 +36,8 @@ def build(src: Path, out_name: str):
         # các kiểu viết thoát \r, \x.. bị Apps Script làm hỏng khi nạp trang -> dùng String.fromCharCode
         bad = re.findall(r"\\(?:r|x[0-9a-fA-F]{2})", m.group(1))
         assert not bad, out_name + ": mã JS chứa ký tự thoát " + ", ".join(sorted(set(bad)))
+        astral = sorted({c for c in m.group(1) if ord(c) > 0xFFFF})
+        assert not astral, out_name + ": mã JS chứa ký tự ngoài BMP (emoji) " + "".join(astral)
     assert "vendor/" not in html, out_name
     html = html.replace("<head>", "<head>\n" + NOTE, 1)
     out = OUT / out_name
