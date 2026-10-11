@@ -21,30 +21,30 @@ content = """<p>Tổng hợp <strong>giá nhà đất Đà Nẵng</strong> từ 
 <tr><td>Núi Thành (đất)</td><td>+6,5%</td><td>29 tin (mọi loại)</td></tr>
 </tbody>
 </table>
-<p>Theo quan sát tin rao: Cẩm Lệ giảm có thể do nhiều căn hộ mới khu Hòa Xuân (Sun NeO City: Cora, S-Light…) chào giá 45 – 57 triệu/m², thấp hơn mặt bằng chung, kéo giá rao trung bình xuống. Thanh Khê, Hải Châu tăng mạnh trùng thời điểm các dự án mới đơn giá cao ở trung tâm (TTC Plaza trên Aeon Mall, M Landmark) đăng bán nhiều.</p>
+<p>Theo quan sát tin rao: Cẩm Lệ giảm có thể do nhiều căn hộ mới khu Hòa Xuân (<a href="/du-an/sun-neo-city/">Sun NeO City</a>: Cora, S-Light…) chào giá 45 – 57 triệu/m², thấp hơn mặt bằng chung, kéo giá rao trung bình xuống. Thanh Khê, Hải Châu tăng mạnh trùng thời điểm các dự án mới đơn giá cao ở trung tâm (TTC Plaza trên Aeon Mall, M Landmark) đăng bán nhiều.</p>
 
 <h2>Giá căn hộ chung cư Đà Nẵng tuần qua</h2>
 <table>
 <thead><tr><th>Dự án / khu vực</th><th>Giá rao</th><th>Đơn giá</th></tr></thead>
 <tbody>
-<tr><td>FourS Tower (Ngũ Hành Sơn – Hòa Xuân)</td><td>1,44 – 3,63 tỷ (studio – 2PN)</td><td>39 – 60 triệu/m²</td></tr>
-<tr><td>Cora, S-Light – Sun NeO City (Hòa Xuân)</td><td>2,5 – 5 tỷ</td><td>45 – 57 triệu/m²</td></tr>
-<tr><td>Capital Square (Sơn Trà, ven sông Hàn)</td><td>3,26 – 4,8 tỷ (1 – 2PN)</td><td>54 – 74 triệu/m²</td></tr>
+<tr><td><a href="/du-an/fours-tower/">FourS Tower</a> (Ngũ Hành Sơn – Hòa Xuân), <a href="/du-an/fours-tower-f2-thap-mai/">Tòa F2</a></td><td>1,44 – 3,63 tỷ (studio – 2PN)</td><td>39 – 60 triệu/m²</td></tr>
+<tr><td><a href="/du-an/cora-tower/">Cora Tower</a>, <a href="/du-an/s-light-tower/">S-Light Tower</a>, <a href="/du-an/spana-tower/">Spana Tower</a> – Sun NeO City (Hòa Xuân)</td><td>2,5 – 5 tỷ</td><td>45 – 57 triệu/m²</td></tr>
+<tr><td><a href="/du-an/capital-square-da-nang/">Capital Square</a> (Sơn Trà, ven sông Hàn)</td><td>3,26 – 4,8 tỷ (1 – 2PN)</td><td>54 – 74 triệu/m²</td></tr>
 <tr><td>TTC Plaza (Thanh Khê, trên Aeon Mall)</td><td>2,3 – 5,6 tỷ</td><td>49 – 69 triệu/m²</td></tr>
-<tr><td>Hiyori Aqua Tower (Sơn Trà)</td><td>3,8 – 4,35 tỷ</td><td>65 – 84 triệu/m²</td></tr>
-<tr><td>Sun Symphony Residence (Sơn Trà)</td><td>5,7 – 13,3 tỷ (2 – 3PN)</td><td>67 – 129 triệu/m²</td></tr>
-<tr><td>Peninsula (Sơn Trà)</td><td>3,18 – 4,26 tỷ</td><td>55 – 65 triệu/m²</td></tr>
+<tr><td><a href="/du-an/hiyori-aqua-tower/">Hiyori Aqua Tower</a> (Sơn Trà)</td><td>3,8 – 4,35 tỷ</td><td>65 – 84 triệu/m²</td></tr>
+<tr><td><a href="/du-an/sun-symphony-residence/">Sun Symphony Residence</a> (Sơn Trà)</td><td>5,7 – 13,3 tỷ (2 – 3PN)</td><td>67 – 129 triệu/m²</td></tr>
+<tr><td><a href="/du-an/peninsula-da-nang/">Peninsula</a> (Sơn Trà)</td><td>3,18 – 4,26 tỷ</td><td>55 – 65 triệu/m²</td></tr>
 <tr><td>M Landmark (Hải Châu, ven sông Hàn)</td><td>20 – 25 tỷ (2PN, 88 m²)</td><td>225 – 282 triệu/m²</td></tr>
 <tr><td>Căn hộ chuyển nhượng cũ (Golden Bay, HAGL…)</td><td>1,2 – 4 tỷ</td><td>32 – 35 triệu/m²</td></tr>
 </tbody>
 </table>
-<p>Mặt bằng chung: căn hộ mới ven sông Hàn, ven biển phổ biến <strong>55 – 85 triệu/m²</strong>. Khu Hòa Xuân và Nam Đà Nẵng <strong>40 – 60 triệu/m²</strong>. Hạng sang ven sông Hàn trên 200 triệu/m². Chi tiết từng dự án: <a href="/du-an/fours-tower-f2-thap-mai/">FourS Tower F2</a>, <a href="/du-an/capital-square-da-nang/">Capital Square</a>, <a href="/du-an/sun-symphony-residence/">Sun Symphony</a>, <a href="/can-ho-chuyen-nhuong-da-nang/">căn hộ chuyển nhượng Đà Nẵng</a>.</p>
+<p>Mặt bằng chung: căn hộ mới ven sông Hàn, ven biển phổ biến <strong>55 – 85 triệu/m²</strong>. Khu Hòa Xuân và Nam Đà Nẵng <strong>40 – 60 triệu/m²</strong>. Hạng sang ven sông Hàn trên 200 triệu/m². Xem thêm: <a href="/can-ho-sun-group-da-nang/">căn hộ Sun Group Đà Nẵng</a>, <a href="/can-ho-chuyen-nhuong-da-nang/">căn hộ chuyển nhượng Đà Nẵng</a>.</p>
 
 <h2>Giá đất nền Đà Nẵng tuần qua</h2>
 <table>
 <thead><tr><th>Khu vực</th><th>Giá rao</th><th>Đơn giá</th></tr></thead>
 <tbody>
-<tr><td>FPT City (Ngũ Hành Sơn)</td><td>4,2 – 7,35 tỷ (lô 90 – 180 m²)</td><td>39 – 59 triệu/m²; mặt tiền Nam Kỳ Khởi Nghĩa 85 – 90 triệu/m²</td></tr>
+<tr><td><a href="/du-an/fpt-city-da-nang/">FPT City</a> (Ngũ Hành Sơn)</td><td>4,2 – 7,35 tỷ (lô 90 – 180 m²)</td><td>39 – 59 triệu/m²; mặt tiền Nam Kỳ Khởi Nghĩa 85 – 90 triệu/m²</td></tr>
 <tr><td>Hòa Xuân – Cồn Dầu (Cẩm Lệ)</td><td>5,9 – 12 tỷ (100 – 200 m²)</td><td>khoảng 59 – 60 triệu/m²</td></tr>
 <tr><td>Tân Trà (Ngũ Hành Sơn)</td><td>3,9 – 4,3 tỷ (105,5 m²)</td><td>37 – 41 triệu/m²</td></tr>
 <tr><td>Ven biển Ngũ Hành Sơn, Sơn Trà</td><td>11,9 – 25 tỷ</td><td>115 – 250 triệu/m²</td></tr>
@@ -54,7 +54,7 @@ content = """<p>Tổng hợp <strong>giá nhà đất Đà Nẵng</strong> từ 
 <tr><td>Núi Thành (KĐT Vịnh An Hòa)</td><td>1,36 – 1,8 tỷ (lô 128 – 156 m²)</td><td>khoảng 11 triệu/m²</td></tr>
 </tbody>
 </table>
-<p>Đất FPT City có nhiều tin ghi "giảm mạnh, giá tốt tháng 10" – mặt bằng lô thường quanh 40 – 47 triệu/m². Đây là vùng giá đáng theo dõi với người mua ở thực. Xem thêm: <a href="/dat-nen-hoa-xuan/">đất nền Hòa Xuân</a>, <a href="/du-an/fpt-city-da-nang/">FPT City Đà Nẵng</a>.</p>
+<p>Đất FPT City có nhiều tin ghi "giảm mạnh, giá tốt tháng 10" – mặt bằng lô thường quanh 40 – 47 triệu/m². Đây là vùng giá đáng theo dõi với người mua ở thực. Xem thêm: <a href="/dat-nen-hoa-xuan/">đất nền Hòa Xuân</a>.</p>
 
 <h2>Giá nhà mặt phố Đà Nẵng tuần qua</h2>
 <p>Mục nhà mặt phố có 834 tin đang rao và hơn 10.200 lượt xem trong 7 ngày. Trong 19 tin có giá đăng tuần qua, giá trung vị khoảng <strong>15 tỷ/căn</strong>, đơn giá trung vị khoảng <strong>114 triệu/m²</strong>:</p>
@@ -73,10 +73,10 @@ content = """<p>Tổng hợp <strong>giá nhà đất Đà Nẵng</strong> từ 
 <h2>Nhà riêng, biệt thự, shophouse</h2>
 <ul>
 <li><strong>Nhà riêng trong khu dân cư:</strong> phổ biến 4,5 – 8 tỷ. Hòa Xuân 59 – 80 triệu/m² (nhà 3 tầng 100 m² khoảng 6 – 8 tỷ). Liên Chiểu, Thanh Khê 60 – 100 triệu/m².</li>
-<li><strong>Liền kề, biệt thự Vinhomes Hải Vân Bay (Liên Chiểu):</strong> liền kề 5,4 – 6,4 tỷ, biệt thự 13 – 25 tỷ. Chủ đầu tư hỗ trợ vay 70%, miễn lãi đến 36 tháng.</li>
-<li><strong>Biệt thự ven sông Hàn (Euro Village, Sun Cosmo):</strong> 32 – 90 tỷ, 107 – 262 triệu/m².</li>
+<li><strong>Liền kề, biệt thự <a href="/du-an/vinhomes-hai-van-bay/">Vinhomes Hải Vân Bay</a> (Liên Chiểu):</strong> liền kề 5,4 – 6,4 tỷ, biệt thự 13 – 25 tỷ. Chủ đầu tư hỗ trợ vay 70%, miễn lãi đến 36 tháng.</li>
+<li><strong>Biệt thự ven sông Hàn (Euro Village, <a href="/du-an/sun-cosmo-residence/">Sun Cosmo</a>):</strong> 32 – 90 tỷ, 107 – 262 triệu/m².</li>
 <li><strong>Shophouse:</strong> trung vị khoảng 16 tỷ. Từ 4,7 – 8,7 tỷ (Liên Chiểu, Futa Kim Phát) đến trên 30 tỷ ven sông Hàn.</li>
-<li><strong>Condotel / căn hộ du lịch:</strong> 2,3 – 5,6 tỷ, 48 – 97 triệu/m² (TTC Plaza, Wyndham Soleil, Symphony). Lưu ý thời hạn sở hữu: <a href="/hai-minh-tower-truong-sa-thoi-han-dat-50-nam/">căn hộ du lịch 50 năm cần tính gì</a>.</li>
+<li><strong>Condotel / căn hộ du lịch:</strong> 2,3 – 5,6 tỷ, 48 – 97 triệu/m² (TTC Plaza, <a href="/du-an/wyndham-soleil-da-nang/">Wyndham Soleil</a>, Symphony). Lưu ý thời hạn sở hữu: <a href="/hai-minh-tower-truong-sa-thoi-han-dat-50-nam/">căn hộ du lịch 50 năm cần tính gì</a>.</li>
 </ul>
 
 <h2>Tín hiệu thị trường tuần này</h2>
@@ -102,7 +102,7 @@ n = {
  'content': content,
  'seo': {
   'seo_title': 'Giá nhà đất Đà Nẵng tuần 5 – 11/10/2026: căn hộ, đất nền',
-  'desc': 'Giá nhà đất Đà Nẵng tuần 5–11/10/2026 từ 320 tin rao: căn hộ 40–85 triệu/m², đất FPT City 39–59 triệu/m², nhà riêng 4,5–8 tỷ. Biến động theo quận.',
+  'desc': 'Giá nhà đất Đà Nẵng tuần 5–11/10/2026 từ 360 tin rao: căn hộ 40–85 triệu/m², đất FPT City 39–59 triệu/m², nhà riêng 4,5–8 tỷ. Biến động theo quận.',
  },
  'sources': ['https://batdongsan.com.vn/nha-dat-ban-da-nang', 'https://batdongsan.com.vn/ban-can-ho-chung-cu-da-nang', 'https://batdongsan.com.vn/ban-dat-da-nang'],
  'follow_sources': False,
