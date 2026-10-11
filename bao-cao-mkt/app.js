@@ -397,6 +397,28 @@
     });
   }
 
+  /** Trang nghiệm thu chưa có ảnh: bỏ ảnh demo + số chú thích, đặt khung đỏ "CHƯA CÓ ẢNH NGHIỆM THU" vào chỗ ảnh. */
+  function markMissing(s) {
+    const doc = s.doc, frame = s.frame, B0 = frame.box;
+    const maxId = byTag(doc, "p:cNvPr").reduce((m, e) => Math.max(m, parseInt(e.getAttribute("id") || "0", 10)), 0);
+    const run = (text, sz, color, bold) => `<a:r><a:rPr lang="vi-VN" sz="${sz}"${bold ? ' b="1"' : ""}><a:solidFill><a:srgbClr val="${color}"/></a:solidFill></a:rPr><a:t>${text}</a:t></a:r>`;
+    const xml =
+      `<p:sp xmlns:p="${NS.p}" xmlns:a="${NS.a}"><p:nvSpPr><p:cNvPr id="${maxId + 1}" name="Thieu anh nghiem thu"/><p:cNvSpPr/><p:nvPr/></p:nvSpPr>` +
+      `<p:spPr><a:xfrm><a:off x="${B0.x}" y="${B0.y}"/><a:ext cx="${B0.w}" cy="${B0.h}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom>` +
+      `<a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="75000"/></a:srgbClr></a:solidFill>` +
+      `<a:ln w="28575"><a:solidFill><a:srgbClr val="C8102E"/></a:solidFill><a:prstDash val="dash"/></a:ln></p:spPr>` +
+      `<p:txBody><a:bodyPr wrap="square" anchor="ctr"/><a:lstStyle/>` +
+      `<a:p><a:pPr algn="ctr"/>${run("CHƯA CÓ ẢNH NGHIỆM THU", 2800, "C8102E", true)}</a:p>` +
+      `<a:p><a:pPr algn="ctr"/>${run("Chụp màn hình theo các mục ghi chú bên cạnh rồi tải lên CRM", 1600, "595959", false)}</a:p>` +
+      `</p:txBody></p:sp>`;
+    frame.el.parentNode.insertBefore(doc.importNode(parseXml(xml).documentElement, true), frame.el);
+    frame.el.parentNode.removeChild(frame.el);
+    topShapes(doc).forEach((sh) => {
+      const badge = /^\d$/.test(sh.text) && sh.box && sh.box.w < EMU_IN;
+      if (badge || /^\*demo/i.test(norm(sh.text))) sh.el.parentNode.removeChild(sh.el);
+    });
+  }
+
   /** PowerPoint chỉ chắc chắn đọc PNG/JPEG: ảnh khác (webp, gif, bmp) được vẽ lại thành PNG. */
   async function embeddable(f) {
     const type = f.type || "";
@@ -631,15 +653,19 @@
 
     const out = []; // {src, files, clone, ctx}
     const usedOriginal = new Set();
-    const emit = (s, files, ctx) => {
+    const emit = (s, files, ctx, placeholder) => {
       const clone = usedOriginal.has(s);
       usedOriginal.add(s);
-      out.push({ src: s, files, clone, ctx });
+      out.push({ src: s, files, clone, ctx, placeholder: !!placeholder });
     };
+    // loại trang ảnh có trong mẫu theo kênh (Google không có trang "QC đang chạy" -> ảnh đó vào trang Chiến dịch)
+    const slideKinds = {};
+    slides.forEach((s) => { if (s.frame && s.platform) (slideKinds[s.platform] = slideKinds[s.platform] || new Set()).add(s.kind); });
     function plan(seq, staff, staffLabel) {
       const data = dataFor(staff);
       const ctx = Object.assign({}, base, { data, totals: totalsOf(data), staff: staffLabel });
-      const imgsOf = imgsFor(staff);
+      const raw = imgsFor(staff);
+      const imgsOf = (p, k) => raw(p, k).concat(k === "ads" && slideKinds[p] && !slideKinds[p].has("qc") ? raw(p, "qc") : []);
       const used = (p) => data[p].length > 0 || Object.keys(KINDS).some((k) => imgsOf(p, k).length);
       const usedKinds = new Set();
       for (const s of seq) {
@@ -651,7 +677,8 @@
           const files = usedKinds.has(key) ? [] : imgsOf(plat, s.kind);
           usedKinds.add(key);
           if (!files.length) {
-            if (!opts.dropEmptyImageSlides) emit(s, [], ctx);
+            if (opts.placeholderMissing) emit(s, [], ctx, true);
+            else if (!opts.dropEmptyImageSlides) emit(s, [], ctx);
             continue;
           }
           chunk(files, perSlide).forEach((fs) => emit(s, fs, ctx));
@@ -691,7 +718,7 @@
 
     // Điền nội dung
     const state = { media: 0, exts: new Set() };
-    let nImg = 0;
+    let nImg = 0, nMissing = 0;
     for (const o of out) {
       const s = o.s;
       fillText(s.doc, o.ctx);
@@ -703,6 +730,9 @@
       if (o.files.length) {
         await placeImages(zip, s, o.files, state);
         nImg += o.files.length;
+      } else if (o.placeholder && s.frame) {
+        markMissing(s);
+        nMissing++;
       }
     }
 
@@ -762,7 +792,7 @@
       mimeType: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
       compression: "DEFLATE",
     });
-    return { blob, week, nImg, slides: out.length, dropped: drop.length, staffCount: staffList.length };
+    return { blob, week, nImg, missing: nMissing, slides: out.length, dropped: drop.length, staffCount: staffList.length };
   }
 
   // ------------------------------------------------------------ Google Drive
