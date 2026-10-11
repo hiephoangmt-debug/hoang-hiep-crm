@@ -46,6 +46,19 @@ await page.waitForFunction(() => document.querySelector('#prodRows').textContent
 await page.click('.nav-btn[data-view=today]');
 await page.waitForSelector('.task .offs');
 assert.match(await page.textContent('.task .offs'), /2,5–3/);
+// Kanban + giải pháp
+await page.click('.nav-btn[data-view=pipe]');
+await page.waitForSelector('.kcol[data-st="Mới"] .kcard');
+await page.dragAndDrop('.kcol[data-st="Mới"] .kcard', '.kcol[data-st="Quan tâm"]');
+await page.waitForSelector('.kcol[data-st="Quan tâm"] .kcard');
+await page.screenshot({ path: '/tmp/crm-kan.png' });
+await page.click('.kcol[data-st="Quan tâm"] .kcard');
+await page.waitForSelector('#solChips');
+await page.click('#solChips [data-k=loan]');
+assert.match(await page.textContent('#solMsg'), /Chào|Dạ Anh/);
+await page.click('#dSol summary');
+await page.fill('#cPrice', '3'); await page.fill('#cRate', '10');
+assert.match(await page.textContent('#cRes'), /triệu\/tháng/);
 await page.screenshot({ path: '/tmp/crm-ui.png' });
 assert.deepEqual(errs, []);
 await browser.close();

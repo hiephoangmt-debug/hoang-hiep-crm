@@ -209,6 +209,22 @@ td.muted{color:var(--muted);font-size:13px}
 .offbox h3{margin:0;font-size:15px;color:var(--navy-800)}
 .task .offs{grid-column:1/-1;font-size:12.5px;color:var(--navy-700)}
 .nop{color:var(--muted);font-size:12px}
+.kan{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(230px,1fr);gap:12px;overflow-x:auto;padding-bottom:10px;align-items:start}
+.kcol{background:var(--navy-50);border-radius:14px;padding:10px;min-height:120px}
+.kcol.over{outline:2px dashed var(--orange)}
+.kcol h3{margin:0 0 8px;font-size:13px;color:var(--navy-800);display:flex;justify-content:space-between;gap:6px}
+.kcard{background:#fff;border:1px solid var(--navy-100);border-radius:10px;padding:9px 10px;margin-bottom:8px;cursor:grab;font-size:13px}
+.kcard b{color:var(--navy-800)}.kcard .s{color:var(--muted);font-size:12px}
+.score{display:inline-block;min-width:28px;text-align:center;border-radius:999px;padding:1px 7px;font-size:11px;font-weight:800;color:#fff;background:#9aa4b8}
+.score.hot{background:var(--bad)}.score.warm{background:var(--orange-600)}.score.mid{background:var(--navy-500)}
+.funnel{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.funnel .fs{background:#fff;border:1px solid var(--navy-100);border-radius:10px;padding:6px 12px;font-size:12px;color:var(--muted)}.funnel .fs b{display:block;font-size:18px;color:var(--navy-800)}
+.sol{background:var(--navy-50);border:1px solid var(--navy-100);border-radius:12px;padding:12px 14px;display:grid;gap:8px}
+.sol h3{margin:0;font-size:15px;color:var(--navy-800)}
+.sol ul{margin:0;padding-left:18px;font-size:13px;line-height:1.55}
+.sol .msg{background:#fff;border:1px solid var(--navy-100);border-radius:10px;padding:8px 10px;font-size:13px;white-space:pre-wrap}
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.calc .res{grid-column:1/-1;font-size:13px;background:#fff;border-radius:10px;padding:8px 10px;border:1px solid var(--navy-100)}
 </style>
 </head>
 <body>
@@ -231,6 +247,7 @@ td.muted{color:var(--muted);font-size:13px}
     <div class="logo"><i>HH</i> Hoàng Hiệp CRM</div>
     <button class="nav-btn" data-view="today"><span class="ico">✅</span>Việc hôm nay <span class="pill" id="todayCount" style="margin-left:auto;background:var(--orange);color:var(--navy-900)"></span></button>
     <button class="nav-btn" data-view="dash"><span class="ico">📊</span>Tổng quan</button>
+    <button class="nav-btn" data-view="pipe"><span class="ico">🧲</span>Quy trình bán</button>
     <button class="nav-btn" data-view="leads"><span class="ico">👥</span>Khách hàng</button>
     <button class="nav-btn" data-view="prods"><span class="ico">🏢</span>Sản phẩm</button>
     <a class="nav-btn" id="sheetLink" target="_blank" rel="noopener" hidden><span class="ico">📄</span>Mở Google Sheet</a>
@@ -313,6 +330,11 @@ td.muted{color:var(--muted);font-size:13px}
     </section>
 
 
+    <section id="view-pipe" hidden>
+      <div class="top"><div><h1>Quy trình bán</h1><div style="color:var(--muted);font-size:13px">Kéo thả khách giữa các cột để đổi trạng thái. Số trong ô tròn là điểm nóng (0–100).</div></div></div>
+      <div class="funnel" id="funnel"></div>
+      <div class="kan" id="kan"></div>
+    </section>
     <section id="view-prods" hidden>
       <div class="top">
         <div><h1>Sản phẩm</h1><div style="color:var(--muted);font-size:13px">Danh mục để CRM gợi ý phương án cho từng khách. Điền giá (đơn vị: tỷ đồng) để so với ngân sách khách.</div></div>
@@ -326,6 +348,7 @@ td.muted{color:var(--muted);font-size:13px}
   <nav class="bottom-nav" aria-label="Điều hướng">
     <button data-view="today"><span>✅</span>Hôm nay</button>
     <button data-view="dash"><span>📊</span>Tổng quan</button>
+    <button data-view="pipe"><span>🧲</span>Quy trình</button>
     <button data-view="leads"><span>👥</span>Khách</button>
     <button data-view="prods"><span>🏢</span>Sản phẩm</button>
     <button id="logoutBtn2"><span>↩</span>Thoát</button>
@@ -364,6 +387,7 @@ td.muted{color:var(--muted);font-size:13px}
       <label class="f" style="grid-column:1/-1">Ghi chú chăm sóc mới<textarea id="dNote" rows="3" placeholder="VD: Đã gọi, khách quan tâm căn 2PN tầng cao, hẹn gửi bảng giá…"></textarea></label>
     </div>
     <div class="offbox" id="dOffers" hidden></div>
+    <div class="sol" id="dSol"></div>
     <dl class="info" id="dInfo"></dl>
     <div><h3 style="margin:0 0 10px;font-size:15px;color:var(--navy-800)">Lịch sử chăm sóc</h3><ul class="timeline" id="dHistory"><li class="tm">Đang tải…</li></ul></div>
   </div>
@@ -493,11 +517,11 @@ async function load(){
 /* ---------- Điều hướng ---------- */
 function show(v){
   S.view=v;
-  ["today","dash","leads","prods"].forEach(x=>$("#view-"+x).hidden=x!==v);
+  ["today","dash","leads","prods","pipe"].forEach(x=>$("#view-"+x).hidden=x!==v);
   $$("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===v));
   const urgent=S.leads.filter(l=>prio(l)===1||prio(l)===2).length;
   $("#todayCount").textContent=urgent||"";$("#todayCount").hidden=!urgent;
-  if(v==="today")renderToday();if(v==="dash")renderDash();if(v==="leads")renderLeads();if(v==="prods")renderProds();
+  if(v==="today")renderToday();if(v==="dash")renderDash();if(v==="leads")renderLeads();if(v==="prods")renderProds();if(v==="pipe")renderPipe();
 }
 $$("[data-view]").forEach(b=>b.addEventListener("click",()=>show(b.dataset.view)));
 $$("[data-refresh]").forEach(b=>b.onclick=load);
@@ -566,7 +590,7 @@ function taskHTML(l){
   return `<article class="card task p${a.priority}" data-id="${esc(l.id)}">
     <div><div class="who" data-open>${esc(l.name)}<span>${esc(l.phone)}</span></div>
       <div class="ctx">${esc(l.project)} · <span class="${pillCls(l.status)}">${esc(l.status)}</span>${l.need?" · "+esc(l.need):""}${l.callback?" · ⏰ "+fmtFull(l.callback):""}</div></div>
-    <div><span class="tag ${a.priority===1?"p1":""}">${esc(a.tag)}</span></div>
+    <div><span class="${scoreCls(l)}" title="Điểm nóng">${score(l)}</span> <span class="tag ${a.priority===1?"p1":""}">${esc(a.tag)}</span></div>
     <div class="adv"><b>Gợi ý:</b> ${esc(a.action)}</div>
     ${(S.offers[l.id]||[]).length?`<div class="offs">💡 <b>Phương án:</b> ${S.offers[l.id].map(o=>esc(o.label+(o.price?" · "+o.price:""))).join(" &nbsp;|&nbsp; ")}</div>`:""}
     <div class="tools">
@@ -699,7 +723,7 @@ function openLead(id){
   const a=l.advice||{};
   $("#dAdvice").hidden=!a.action;$("#dAdvice").innerHTML=a.action?`<b>💡 ${esc(a.tag)}:</b> ${esc(a.action)}`:"";
   $("#dStatus").value=l.status;$("#dCallback").value=toLocal(l.callback);$("#dProject").value=l.project;$("#dNeed").value=l.need;
-  $("#dBudget").value=l.budget||"";renderOffers(l);
+  $("#dBudget").value=l.budget||"";renderOffers(l);renderSol(l);
   $("#dNameIn").value=l.name;$("#dPhone").value=l.phone;$("#dEmail").value=l.email;$("#dNote").value="";
   const info=[["Nguồn",l.source],["Chiến dịch",l.campaign],["Form",l.form],["Link web",/^https?:\/\//i.test(l.page)?`<a href="${esc(l.page)}" target="_blank" rel="noopener">${esc(l.page.slice(0,60))}${l.page.length>60?"…":""}</a>`:esc(l.page)],["IP",l.ip],["Ghi chú gần nhất",l.note],["Cập nhật",l.updated?fmtFull(l.updated):""]];
   $("#dInfo").innerHTML=info.filter(r=>r[1]).map(([k,v])=>`<dt>${k}</dt><dd>${k==="Link web"?v:esc(v)}</dd>`).join("");
@@ -754,6 +778,88 @@ $("#addForm").addEventListener("submit",async e=>{
     $("#addModal").close();toast("Đã thêm khách");await load();
   }catch(err){$("#addErr").textContent=err.message}finally{btn.disabled=false}
 });
+
+
+/* ---------- Điểm nóng ---------- */
+const BASE={"Mới":20,"Đang liên hệ":30,"Quan tâm":50,"Hẹn xem nhà":70,"Đặt cọc":90,"Chốt":100};
+function score(l){
+  let v=BASE[l.status]; if(v==null)return 0; if(l.status==="Chốt")return 100;
+  if(+l.count>1)v+=10; if(l.budget)v+=5; if(l.callback)v+=5; if(l.email)v+=2;
+  const d=(Date.now()-(pd(l.updated||l.created)||new Date()))/864e5;
+  if(d>14)v-=20;else if(d>7)v-=10;
+  return Math.max(1,Math.min(99,Math.round(v)));
+}
+const scoreCls=l=>{const v=score(l);return "score "+(v>=70?"hot":v>=50?"warm":v>=30?"mid":"")};
+
+/* ---------- Quy trình bán (Kanban) ---------- */
+const PIPE=["Mới","Đang liên hệ","Quan tâm","Hẹn xem nhà","Đặt cọc","Chốt"];
+function renderPipe(){
+  const by=st=>S.leads.filter(l=>l.status===st).sort((a,b)=>String(b.updated||b.created).localeCompare(String(a.updated||a.created)));
+  const cnt=PIPE.map(st=>by(st).length), total=S.leads.filter(l=>l.status!=="Data cũ"&&l.status!=="Sai số / Rác").length||1;
+  $("#funnel").innerHTML=PIPE.map((st,i)=>`<div class="fs"><b>${cnt[i]}</b>${esc(st)}${i?` · ${Math.round(cnt[i]*100/total)}%`:""}</div>`).join("")+
+    `<div class="fs"><b>${by("Data cũ").length}</b>Data cũ</div><div class="fs"><b>${by("Không nhu cầu").length}</b>Không nhu cầu</div>`;
+  $("#kan").innerHTML=PIPE.map(st=>{const list=by(st);return `<div class="kcol" data-st="${esc(st)}"><h3>${esc(st)}<span class="pill">${list.length}</span></h3>${list.slice(0,30).map(l=>`<div class="kcard" draggable="true" data-id="${esc(l.id)}"><span class="${scoreCls(l)}" style="float:right">${score(l)}</span><b>${esc(l.name)}</b><div class="s">${esc(l.project)}${l.need?" · "+esc(l.need):""}</div>${l.budget?`<div class="s">💰 ${esc(l.budget)}</div>`:""}${l.callback?`<div class="s">⏰ ${fmtFull(l.callback)}</div>`:""}</div>`).join("")}${list.length>30?`<div class="s nop">…và ${list.length-30} khách khác (xem ở Khách hàng)</div>`:""}</div>`}).join("");
+  $$("#kan .kcard").forEach(c=>{
+    c.onclick=()=>openLead(c.dataset.id);
+    c.ondragstart=e=>{e.dataTransfer.setData("text/plain",c.dataset.id)};
+  });
+  $$("#kan .kcol").forEach(col=>{
+    col.ondragover=e=>{e.preventDefault();col.classList.add("over")};
+    col.ondragleave=()=>col.classList.remove("over");
+    col.ondrop=async e=>{
+      e.preventDefault();col.classList.remove("over");
+      const l=S.leads.find(x=>x.id===e.dataTransfer.getData("text/plain"));
+      if(!l||l.status===col.dataset.st)return;
+      try{await saveLead(l,{status:col.dataset.st},"","Đã chuyển sang “"+col.dataset.st+"”")}catch(err){toast(err.message,true)}
+    };
+  });
+}
+
+/* ---------- Giải pháp: kịch bản xử lý tình huống + máy tính vay ---------- */
+const lastName=l=>String(l.name||"").trim().split(/\s+/).pop()||"anh/chị";
+const SITU=[
+ {k:"price",t:"Chê giá cao",tips:["Hỏi lại ngân sách thực tế và tổng tiền khách có thể chi – đừng giảm giá ngay.","Đưa phương án nhỏ hơn: loại căn/diện tích thấp hơn hoặc dự án khác trong tầm tiền.","Chia nhỏ tổng tiền thành số tiền cần chuẩn bị trước và trả góp mỗi tháng (dùng máy tính bên dưới).","Chỉ nêu chính sách đang có hiệu lực, kiểm tra với chủ đầu tư trước khi hứa."],
+  msg:l=>`Dạ ${lastName(l)}, em hiểu mình đang cân đối ngân sách. Anh/chị cho em biết khoảng tổng tiền mình thoải mái, em lọc giúp vài phương án sát tầm đó (có thể căn nhỏ hơn hoặc dự án khác) kèm bảng dòng tiền thanh toán để mình dễ so sánh ạ.`},
+ {k:"think",t:"Cần suy nghĩ / chưa vội",tips:["Hỏi “điều gì khiến mình còn băn khoăn nhất?” để tìm lý do thật.","Hẹn lịch gọi lại cụ thể (3–7 ngày), kèm 1 thông tin mới có giá trị (giỏ hàng, tiến độ).","Mời xem thực tế thay vì ép quyết định; không tạo áp lực giả."],
+  msg:l=>`Dạ ${lastName(l)}, mình cứ thong thả cân nhắc ạ. Em gửi trước tài liệu/mặt bằng để mình tham khảo, và em xin phép nhắn lại cho mình vào cuối tuần với thông tin cập nhật mới nhất. Nếu mình cần so sánh thêm phương án nào, cứ báo em nhé.`},
+ {k:"loan",t:"Hỏi vay ngân hàng",tips:["Hỏi tỷ lệ vốn tự có và thu nhập hằng tháng để ước tính khoản vay phù hợp.","Dùng máy tính bên dưới với lãi suất do ngân hàng báo cho khách – lãi suất thay đổi theo thời điểm và hồ sơ.","Giới thiệu khách làm việc trực tiếp với ngân hàng để có điều kiện chính thức; không cam kết hạn mức/lãi suất thay ngân hàng."],
+  msg:l=>`Dạ ${lastName(l)}, em gửi mình bảng ước tính trả góp hằng tháng theo số tiền vay và lãi suất mình dự kiến (chỉ mang tính tham khảo, điều kiện chính thức theo ngân hàng). Mình cho em biết số vốn tự có để em tính sát hơn ạ.`},
+ {k:"nocall",t:"Không nghe máy",tips:["Gọi tối đa 2 lần/ngày ở khung giờ khác nhau (11h30–13h, 19h–20h30).","Nhắn Zalo ngắn: giới thiệu bản thân + 1 lợi ích + câu hỏi dễ trả lời.","Sau 3 lần không liên lạc được trong vài ngày → chuyển “Data cũ” và hâm nóng sau."],
+  msg:l=>`Chào ${lastName(l)}, em là ${OWNER}, em vừa gọi vì mình có đăng ký nhận thông tin ${l.project||"dự án"}. Em gửi nhanh tài liệu để mình xem trước, mình tiện nghe máy giờ nào em gọi lại ạ?`},
+ {k:"compare",t:"So sánh dự án khác",tips:["Hỏi tiêu chí quan trọng nhất của khách (giá, vị trí, bàn giao, cho thuê…).","So sánh trung thực theo tiêu chí đó, nêu cả điểm yếu của sản phẩm mình bán.","Chỉ dùng số liệu có nguồn; không chê bai đối thủ."],
+  msg:l=>`Dạ ${lastName(l)}, mình đang so sánh là rất hợp lý ạ. Anh/chị cho em biết tiêu chí mình ưu tiên nhất (giá, vị trí, tiến độ bàn giao hay khả năng cho thuê), em lập bảng so sánh ngắn các phương án để mình dễ quyết định.`},
+ {k:"legal",t:"Hỏi pháp lý / uy tín",tips:["Trả lời đúng những gì có văn bản; thông tin chưa có thì nói sẽ kiểm tra lại.","Hướng dẫn khách tự tra cứu thông tin công khai của chủ đầu tư và cơ quan quản lý.","Gửi tài liệu chính thức từ chủ đầu tư thay vì diễn giải."],
+  msg:l=>`Dạ ${lastName(l)}, về pháp lý em sẽ gửi mình tài liệu chính thức của chủ đầu tư để mình đối chiếu. Phần nào em chưa chắc, em xin kiểm tra với chủ đầu tư rồi trả lời mình chính xác thay vì nói ước chừng ạ.`},
+ {k:"visit",t:"Muốn xem nhà",tips:["Chốt giờ cụ thể (2 khung giờ để khách chọn), gửi định vị và tên người đón.","Chuẩn bị 2–3 căn/lô phù hợp ngân sách và bảng dòng tiền.","Trước hẹn 1 ngày nhắn xác nhận; sau buổi xem gọi lại trong 24 giờ."],
+  msg:l=>`Dạ ${lastName(l)}, em xin hẹn mình xem thực tế vào 1 trong 2 khung: sáng ${"09:00"} hoặc chiều ${"15:00"} (mình chọn giúp em). Em sẽ gửi định vị và chuẩn bị sẵn vài phương án phù hợp nhu cầu ạ.`},
+];
+const OWNER="Hoàng Hiệp";
+let solSel="";
+function renderSol(l){
+  const box=$("#dSol");
+  box.innerHTML=`<h3>🧭 Giải pháp xử lý tình huống</h3><div class="chips" id="solChips">${SITU.map(x=>`<button type="button" class="chip ${x.k===solSel?"on":""}" data-k="${x.k}">${esc(x.t)}</button>`).join("")}</div><div id="solBody"></div>
+  <details><summary style="cursor:pointer;font-weight:700;font-size:13px">🧮 Máy tính trả góp (tham khảo)</summary><div class="calc" style="margin-top:8px">
+    <label class="f">Giá căn (tỷ)<input id="cPrice" inputmode="decimal" placeholder="2,8"></label>
+    <label class="f">Vay (% giá)<input id="cPct" inputmode="decimal" value="50"></label>
+    <label class="f">Thời hạn (năm)<input id="cYears" inputmode="decimal" value="20"></label>
+    <label class="f">Lãi suất (%/năm) – nhập theo ngân hàng<input id="cRate" inputmode="decimal" placeholder="VD: lãi ngân hàng báo"></label>
+    <div class="res" id="cRes">Nhập giá và lãi suất để tính.</div></div></details>`;
+  const top=(S.offers[l.id]||[])[0];const m=top&&String(top.price).match(/\d+(?:,\d+)?/);if(m)$("#cPrice").value=m[0];
+  const body=()=>{const x=SITU.find(y=>y.k===solSel);$("#solBody").innerHTML=x?`<ul>${x.tips.map(t=>`<li>${esc(t)}</li>`).join("")}</ul><div class="msg" id="solMsg">${esc(x.msg(l))}</div><div style="display:flex;gap:8px"><button type="button" class="btn btn-primary btn-sm" id="solCopy">Copy tin nhắn Zalo</button><a class="btn btn-sm" style="color:#0068ff" target="_blank" rel="noopener" href="https://zalo.me/${esc(l.phone)}">Mở Zalo</a></div>`:'<div class="nop">Chọn tình huống khách đang gặp để xem cách xử lý và tin nhắn mẫu.</div>';
+    const b=$("#solCopy");if(b)b.onclick=async()=>{const t=$("#solMsg").textContent;try{await navigator.clipboard.writeText(t);toast("Đã copy tin nhắn")}catch(e){prompt("Copy tin nhắn:",t)}}};
+  $$("#solChips .chip").forEach(c=>c.onclick=()=>{solSel=solSel===c.dataset.k?"":c.dataset.k;$$("#solChips .chip").forEach(z=>z.classList.toggle("on",z.dataset.k===solSel));body()});
+  body();
+  const num=id=>parseFloat(String($(id).value).replace(",","."));
+  const calc=()=>{
+    const P=num("#cPrice"),pct=num("#cPct"),y=num("#cYears"),r=num("#cRate");
+    if(!(P>0&&pct>=0&&y>0&&r>=0)){$("#cRes").textContent="Nhập giá và lãi suất để tính.";return}
+    const loan=P*pct/100,n=y*12,i=r/100/12;
+    const pmt=i===0?loan/n:loan*i/(1-Math.pow(1+i,-n));
+    const f=v=>(Math.round(v*100)/100).toLocaleString("vi-VN");
+    $("#cRes").innerHTML=`Tự có: <b>${f(P-loan)} tỷ</b> · Vay: <b>${f(loan)} tỷ</b><br>Trả góp gốc+lãi ≈ <b>${f(pmt*1000)} triệu/tháng</b> (niên kim cố định, lãi suất không đổi)<br>Tổng lãi ≈ ${f(pmt*n-loan)} tỷ. <span class="nop">Chỉ để tham khảo – điều kiện thực tế do ngân hàng quyết định.</span>`;
+  };
+  ["#cPrice","#cPct","#cYears","#cRate"].forEach(id=>$(id).oninput=calc);calc();
+}
 
 /* ---------- Sản phẩm ---------- */
 const vn=n=>String(n).replace(".",",");
