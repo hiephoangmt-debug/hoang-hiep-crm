@@ -764,8 +764,15 @@
       return out;
     },
     async tree(id) {
-      const root = await this.meta(id);
-      return this.listTree(id, [root.name]);
+      const root = await this.api("files/" + id, { fields: "id,name,parents" });
+      const prefix = [];
+      if (root.parents && root.parents[0]) {
+        try {
+          const par = await this.api("files/" + root.parents[0], { fields: "name,parents" });
+          if (par.parents && par.parents.length) prefix.push(par.name); // bỏ qua "My Drive"
+        } catch (_) { /* không có quyền xem thư mục cha */ }
+      }
+      return this.listTree(id, prefix.concat(root.name));
     },
     image(f) {
       return this.api("files/" + f.id, { alt: "media" }, "blob");
@@ -956,14 +963,41 @@
   /** Đoán nhân sự của ảnh theo tên thư mục/file: khớp cả tên, hoặc khớp tên gọi (từ cuối) duy nhất. */
   function guessStaff(path, name) {
     const list = staffList();
-    const t = simple(path.concat(name).join(" "));
-    const full = list.find((st) => t.includes(simple(st)));
-    if (full) return full;
     const STOP = ["anh", "chi", "em", "thi", "van", "sun", "casa", "group", "tai khoan"];
-    const hits = list.filter((st) => norm(st).split(" ")
-      .some((w) => w.length >= 3 && !STOP.includes(w) && t.includes(" " + w + " ")));
-    if (hits.length === 1) return hits[0];
+    const match = (seg) => {
+      const t = simple(seg);
+      const full = list.filter((st) => t.includes(simple(st)));
+      if (full.length === 1) return full[0];
+      const hits = list.filter((st) => norm(st).split(" ")
+        .some((w) => w.length >= 3 && !STOP.includes(w) && t.includes(" " + w + " ")));
+      return hits.length === 1 ? hits[0] : "";
+    };
+    // tên file trước ("ngà sun.jpg"), rồi thư mục từ trong ra ngoài ("Phan Hạnh/Sun/…")
+    for (const seg of [name.replace(/\.[a-z0-9]+$/i, "")].concat(path.slice().reverse())) {
+      const st = match(seg);
+      if (st) return st;
+    }
     return list.length === 1 ? list[0] : "";
+  }
+
+  /** Thư mục tuần "3/10-9/10" có giao với tuần báo cáo "05/10 - 11/10" không (không có thư mục tuần = có). */
+  function inReportWeek(path) {
+    const wk = $("week") && $("week").value;
+    if (!wk) return true;
+    const dayNo = (dm) => { const [d, m] = dm.split("/").map(Number); return m * 31 + d; };
+    const [a, b] = wk.split("-").map((x) => dayNo(x.trim()));
+    const segs = path.map((x) => /^\s*(\d{1,2}\/\d{1,2})\s*-\s*(\d{1,2}\/\d{1,2})\s*$/.exec(x)).filter(Boolean);
+    return segs.every((m) => dayNo(m[1]) <= b && dayNo(m[2]) >= a);
+  }
+
+  /** Ảnh thuộc dự án đang làm? (khi quét thư mục chứng từ chung: Nhân sự/Dự án/…) */
+  function inProject(path) {
+    const key = currentPreset().projectKey;
+    if (!key) return true;
+    return path.some((seg) => compact(seg).includes(compact(key)));
+  }
+  function currentPreset() {
+    return (CFG.presets || []).find((x) => x.name === $("preset").value) || {};
   }
   function allAccounts() {
     const m = new Map();
@@ -1047,8 +1081,15 @@
     $("outFolder").value = p.outputFolder || "";
   }
 
+  let sheetFolderId = null;
   function readWorkbook(buf, label) {
     workbook = XLSX.read(buf, { type: "array" });
+    // ô "Folder chứng từ" ở đầu sheet (nếu có)
+    sheetFolderId = null;
+    const ws0 = workbook.Sheets[workbook.SheetNames[0]];
+    XLSX.utils.sheet_to_json(ws0, { header: 1, defval: "" }).slice(0, 5).forEach((r) => {
+      if (/chung tu/.test(norm(r[0]))) sheetFolderId = parseDriveId(String(r[1] || "").trim()) || sheetFolderId;
+    });
     $("sheet").innerHTML = workbook.SheetNames.map((n) => `<option>${n}</option>`).join("");
     weeks = loadData(workbook, $("sheet").value);
     populateWeeks();
@@ -1112,8 +1153,9 @@
 
   function addImage(file, path) {
     const c = guessClass(path, file.name);
+    const guess = guessStaff(path, file.name);
     images.push({ file, url: URL.createObjectURL(file), name: file.name, path, platform: c.platform, kind: c.kind,
-      staff: guessStaff(path, file.name), include: true });
+      staff: guess, guess, include: inReportWeek(path) });
   }
 
   function ocrContext() {
@@ -1125,11 +1167,13 @@
     const r = classifyText(im.text, ocrContext());
     if (r.kind) im.kind = r.kind;
     if (r.platform) im.platform = r.platform;
-    if (r.staff) im.staff = r.staff;
+    // ID tài khoản in trên ảnh > tên file/thư mục > tên người đọc được trong ảnh
+    if (r.staff && (r.by === "id" || !im.guess)) im.staff = r.staff;
+    else im.staff = im.guess || im.staff;
     const parts = [];
     if (r.kind) parts.push(KINDS[r.kind]);
     if (r.account) parts.push("TK " + r.account);
-    if (r.staff) parts.push((r.by === "id" ? "theo ID: " : "theo tên: ") + r.staff);
+    if (r.staff) parts.push((r.by === "id" ? "theo ID: " : "tên trong ảnh: ") + r.staff);
     im.ocrNote = parts.length ? "Đọc ảnh: " + parts.join(" · ") : "Đọc ảnh: không nhận ra";
   }
   async function runOcr() {
@@ -1170,7 +1214,7 @@
       await signIn();
       const tplId = parseDriveId($("templateLink").value);
       const dataId = parseDriveId($("dataLink").value);
-      const folderIds = $("folders").value.split(/\s+/).map(parseDriveId).filter(Boolean);
+      let folderIds = $("folders").value.split(/\s+/).map(parseDriveId).filter(Boolean);
 
       if (tplId) {
         setStatus("Đang tải PPTX mẫu…");
@@ -1182,14 +1226,20 @@
         setStatus("Đang tải số liệu…");
         const { meta, blob } = await source().download(dataId);
         notes.push(readWorkbook(await blob.arrayBuffer(), meta.name));
+        if (sheetFolderId && !folderIds.includes(sheetFolderId)) folderIds = folderIds.concat(sheetFolderId);
       }
       if (folderIds.length) {
         images.forEach((im) => URL.revokeObjectURL(im.url));
         images = [];
         const found = [];
+        const seen = new Set();
         for (const id of folderIds) {
           setStatus("Đang quét thư mục…");
-          (await source().tree(id)).forEach((f) => IMG_MIMES.includes(f.mimeType) && found.push(f));
+          (await source().tree(id)).forEach((f) => {
+            if (!IMG_MIMES.includes(f.mimeType) || seen.has(f.id) || !inProject(f.path)) return;
+            seen.add(f.id);
+            found.push(f);
+          });
         }
         let done = 0;
         await pool(found, 4, async (f) => {
@@ -1360,7 +1410,7 @@
       renderImages();
     });
     $("staff").addEventListener("change", () => {
-      images.forEach((im) => { if (!staffList().includes(im.staff)) im.staff = guessStaff(im.path, im.name); applyOcr(im); });
+      images.forEach((im) => { im.guess = guessStaff(im.path, im.name); if (!staffList().includes(im.staff)) im.staff = im.guess; applyOcr(im); });
       renderAccounts();
       renderImages();
     });

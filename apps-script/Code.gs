@@ -55,6 +55,15 @@ function listTree(folderId) {
     throw new Error('Không mở được thư mục ' + folderId + ' – kiểm tra link và quyền truy cập.');
   }
   var out = [];
+  // Thêm tên thư mục cha (vd. tên nhân sự) vào đường dẫn để nhận diện ảnh của ai
+  var prefix = [];
+  try {
+    var parents = root.getParents();
+    if (parents.hasNext()) {
+      var par = parents.next();
+      if (par.getId() !== DriveApp.getRootFolder().getId()) prefix.push(par.getName());
+    }
+  } catch (e) { /* không có quyền xem thư mục cha */ }
   (function walk(folder, path) {
     var files = folder.getFiles();
     while (files.hasNext()) {
@@ -66,7 +75,7 @@ function listTree(folderId) {
       var s = subs.next();
       walk(s, path.concat([s.getName()]));
     }
-  })(root, [root.getName()]);
+  })(root, prefix.concat([root.getName()]));
   return out;
 }
 
