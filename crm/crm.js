@@ -107,6 +107,37 @@
   // ------------------------------------------------------------ chọn tuần bất kỳ bằng lịch
   const PICK_WEEK = "__pick";
   const WEEK_SELECTS = /^(en|ev|rp)Week$/;
+  // ------------------------------------------------------------ thêm nhân sự mới ngay tại ô chọn tên
+  const NEW_STAFF = "__newstaff";
+  const newStaffOpt = () => `<option value="${NEW_STAFF}">+ Thêm nhân sự mới…</option>`;
+  function bindNewStaff() {
+    const isStaffSel = (el) => el.tagName === "SELECT" && Array.from(el.options).some((o) => o.value === NEW_STAFF);
+    document.addEventListener("focusin", (e) => { if (isStaffSel(e.target) && e.target.value !== NEW_STAFF) e.target.dataset.keepStaff = e.target.value; }, true);
+    document.addEventListener("change", async (e) => {
+      const sel = e.target;
+      if (!isStaffSel(sel)) return;
+      if (sel.value !== NEW_STAFF) { sel.dataset.keepStaff = sel.value; return; }
+      e.stopImmediatePropagation();
+      sel.value = sel.dataset.keepStaff || "";
+      const name = (prompt("Tên nhân sự mới (ví dụ: Hoàng Hiệp):") || "").trim().replace(/\s+/g, " ");
+      if (!name) return;
+      let found = S.NhanSu.find((n) => B.norm(n.ten) === B.norm(name));
+      if (!found) {
+        try { found = await run("Đang thêm nhân sự", () => gas("crmSave", "NhanSu", { ten: name, trangThai: "Đang làm" })); }
+        catch (_) { return; }
+        S.NhanSu.push(found);
+        toast(`Đã thêm nhân sự "${found.ten}" (sửa email/trạng thái ở tab Danh mục).`, "ok");
+      } else if (found.trangThai === "Nghỉ") {
+        found.trangThai = "Đang làm";
+        try { await gas("crmSave", "NhanSu", { id: found.id, trangThai: "Đang làm" }); } catch (_) { /* bỏ qua */ }
+      }
+      refreshFilters();
+      if (!Array.from(sel.options).some((o) => o.value === found.ten)) sel.add(new Option(found.ten, found.ten), sel.options.length - 1);
+      sel.value = found.ten;
+      sel.dataset.keepStaff = found.ten;
+      sel.dispatchEvent(new Event("change", { bubbles: true }));
+    }, true);
+  }
   function bindWeekPicker() {
     const box = $("weekPick"), inp = $("weekPickDate");
     document.addEventListener("focusin", (e) => {
@@ -156,7 +187,11 @@
       fillSelect($(p + "Project"), projects, p === "rp" ? $(p + "Project").value : $(p + "Project").value || projects[0], p === "rp" ? "Tất cả dự án" : null);
     }
     fillSelect($("enStaff"), staff, $("enStaff").value, "Tất cả nhân sự");
-    fillSelect($("evStaff"), staff, $("evStaff").value || staff[0]);
+    let me = "";
+    try { me = localStorage.getItem("crm.me") || ""; } catch (_) { /* bỏ qua */ }
+    fillSelect($("evStaff"), staff, $("evStaff").value || (staff.includes(me) ? me : ""), "— Chọn tên bạn —");
+    $("evStaff").insertAdjacentHTML("beforeend", newStaffOpt());
+    $("evStaff").classList.toggle("warn", !$("evStaff").value);
     $("accList").innerHTML = S.TaiKhoan.map((t) => `<option value="${esc(t.maTaiKhoan)}">${esc((t.nhanSu || "") + " · " + (t.ten || t.nenTang || ""))}</option>`).join("");
   }
 
@@ -280,7 +315,7 @@
     const staff = staffNames();
     const cell = (r, [k, , type]) => {
       const id = esc(r.id);
-      if (type === "staff") return `<td><select data-g="${id}" data-f="${k}">${opt("", "(chọn)", r[k])}${staff.map((x) => opt(x, x, r[k])).join("")}</select></td>`;
+      if (type === "staff") return `<td><select data-g="${id}" data-f="${k}">${opt("", "(chọn)", r[k])}${staff.map((x) => opt(x, x, r[k])).join("")}${newStaffOpt()}</select></td>`;
       if (type === "acc") return `<td><input data-g="${id}" data-f="${k}" value="${esc(r[k])}" list="accList" class="acc"></td>`;
       if (type === "calc") return `<td class="calc">${calc(r, k)}</td>`;
       if (type === "text") return `<td><input data-g="${id}" data-f="${k}" value="${esc(r[k])}" class="txt"></td>`;
@@ -541,7 +576,7 @@
           ${campaignRows(p, i)}
           <div class="row"><select data-p="${i}" data-f="nenTang">${PLATFORMS.map((x) => opt(x, PLATFORM_LABEL[x], p.nenTang)).join("")}</select>
           <select data-p="${i}" data-f="loai">${Object.entries(KINDS).map(([k, l]) => opt(k, l, p.loai)).join("")}</select></div>
-          <div class="row"><select data-p="${i}" data-f="nhanSu">${staff.map((x) => opt(x, x, p.nhanSu)).join("")}</select>
+          <div class="row"><select data-p="${i}" data-f="nhanSu" class="${p.nhanSu ? "" : "warn"}">${opt("", "(chọn nhân sự)", p.nhanSu)}${staff.map((x) => opt(x, x, p.nhanSu)).join("")}${newStaffOpt()}</select>
           <button type="button" class="link danger" data-unpend="${i}">Bỏ</button></div>
         </figcaption></figure>`).join("") : "";
     $("evUpload").hidden = !pending.length;
@@ -555,7 +590,7 @@
         <figcaption><span class="fname" title="${esc(r.tenFile)}">${esc(r.tenFile)}</span>
           <div class="row"><select data-ev="${esc(r.id)}" data-f="nenTang">${PLATFORMS.map((x) => opt(x, PLATFORM_LABEL[x], r.nenTang)).join("")}</select>
           <select data-ev="${esc(r.id)}" data-f="loai">${Object.entries(KINDS).map(([k, l]) => opt(k, l, r.loai)).join("")}</select></div>
-          <div class="row"><select data-ev="${esc(r.id)}" data-f="nhanSu" class="${r.nhanSu ? "" : "warn"}">${opt("", "(chưa gán nhân sự)", r.nhanSu)}${staff.map((x) => opt(x, x, r.nhanSu)).join("")}</select>
+          <div class="row"><select data-ev="${esc(r.id)}" data-f="nhanSu" class="${r.nhanSu ? "" : "warn"}">${opt("", "(chưa gán nhân sự)", r.nhanSu)}${staff.map((x) => opt(x, x, r.nhanSu)).join("")}${newStaffOpt()}</select>
           <button type="button" class="link danger" data-evdel="${esc(r.id)}">Xoá</button></div>
         </figcaption></figure>`).join("") : `<p class="muted">Chưa có ảnh chứng từ cho tuần này.</p>`;
   }
@@ -615,6 +650,11 @@
   }
   async function uploadPending() {
     const w = $("evWeek").value, pj = $("evProject").value;
+    const noName = pending.filter((p) => !p.nhanSu).length;
+    if (noName) {
+      toast(`${noName} ảnh chưa chọn nhân sự. Chọn tên ở ô "Nhân sự" (tên chưa có thì chọn "+ Thêm nhân sự mới…").`, "err");
+      return;
+    }
     let n = 0, nRows = 0;
     await run("Đang tải ảnh lên Drive", async () => {
       for (const p of pending.slice()) {
@@ -920,7 +960,13 @@
       });
     });
     ["evWeek", "evProject"].forEach((id) => $(id).addEventListener("change", renderEvidence));
-    $("evStaff").addEventListener("change", () => { pending.forEach((p) => (p.nhanSu = $("evStaff").value)); renderEvidence(); });
+    $("evStaff").addEventListener("change", () => {
+      const me = $("evStaff").value;
+      $("evStaff").classList.toggle("warn", !me);
+      try { if (me) localStorage.setItem("crm.me", me); } catch (_) { /* bỏ qua */ }
+      pending.forEach((p) => (p.nhanSu = me));
+      renderEvidence();
+    });
     $("enSave").addEventListener("click", () => saveGrid().catch(() => {}));
     $("enDiscard").addEventListener("click", () => { if (confirmDiscard()) renderEntries(); });
     $("enTable").addEventListener("change", (e) => { if (e.target.dataset.g) gridChange(e.target); });
@@ -1113,6 +1159,7 @@
       `<button type="button" data-brand="">Tất cả</button>`;
     bind();
     bindWeekPicker();
+    bindNewStaff();
     let b0 = "";
     try { b0 = localStorage.getItem("crm.brand") || ""; } catch (_) { /* bỏ qua */ }
     const fromUrl = await new Promise((res) => {
