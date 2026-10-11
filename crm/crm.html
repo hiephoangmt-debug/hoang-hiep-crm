@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CRM Báo cáo Marketing</title>
+<style>
+  :root { --bg:#f5f6f8; --card:#fff; --text:#1d2330; --muted:#667085; --line:#e3e6eb; --accent:#c8102e; --accent-soft:#fbe7ea;
+          --bar:#c8102e; --ok:#127a3a; --err:#b42318; --warn:#b54708; --hover:#f0f2f5; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14161a; --card:#1d2026; --text:#e8eaee; --muted:#9aa3b2; --line:#2e333b; --accent:#ef4060; --accent-soft:#3a1d24;
+            --bar:#ef4060; --ok:#4cc27a; --err:#ff6b5f; --warn:#f0a35c; --hover:#262a31; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  header { position:sticky; top:0; z-index:5; background:var(--card); border-bottom:1px solid var(--line); }
+  .bar { max-width:1200px; margin:0 auto; padding:10px 16px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .bar h1 { font-size:17px; margin:0; }
+  .bar .sp { flex:1; }
+  .bar a { color:var(--muted); font-size:13px; }
+  nav { max-width:1200px; margin:0 auto; padding:0 16px; display:flex; gap:4px; overflow-x:auto; }
+  nav button { background:none; border:0; border-bottom:2px solid transparent; color:var(--muted); font:inherit; font-weight:600; padding:8px 10px; cursor:pointer; white-space:nowrap; }
+  nav button.on { color:var(--accent); border-color:var(--accent); }
+  main { max-width:1200px; margin:0 auto; padding:16px 16px 64px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px; margin-bottom:14px; min-width:0; }
+  h2 { font-size:16px; margin:0 0 10px; }
+  h3 { font-size:14px; margin:0 0 10px; }
+  .filters { display:flex; gap:10px; flex-wrap:wrap; align-items:end; margin-bottom:14px; }
+  label { display:flex; flex-direction:column; gap:3px; font-size:12px; color:var(--muted); min-width:0; }
+  input, select, textarea { font:inherit; color:var(--text); background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:6px 8px; min-width:0; }
+  button { font:inherit; font-weight:600; color:#fff; background:var(--accent); border:0; border-radius:8px; padding:8px 16px; cursor:pointer; }
+  button:disabled { opacity:.6; cursor:wait; }
+  button.ghost { background:transparent; color:var(--accent); border:1px solid var(--accent); }
+  button.small { padding:5px 10px; font-size:13px; }
+  button.link { background:none; color:var(--accent); padding:2px 6px; font-weight:500; }
+  button.link.danger { color:var(--err); }
+  .muted { color:var(--muted); }
+  .warn-text { color:var(--warn); }
+  .wrap { overflow-x:auto; }
+  table.data { border-collapse:collapse; width:100%; font-size:13px; }
+  table.data th, table.data td { border-bottom:1px solid var(--line); padding:6px 8px; text-align:right; white-space:nowrap; }
+  table.data th { color:var(--muted); font-weight:600; font-size:12px; }
+  table.data th:first-child, table.data td:first-child, table.data td:nth-child(2), table.data th:nth-child(2) { text-align:left; }
+  table.data tr:hover td { background:var(--hover); }
+  table.data tr.total td { font-weight:700; border-top:2px solid var(--line); }
+  table.data tr.editing td { background:var(--accent-soft); }
+  table.data tr.shadow td { opacity:.55; }
+  table.data td.act { text-align:right; }
+  table.edit td { padding:3px 4px; }
+  table.edit input, table.edit select { width:100%; min-width:120px; }
+  .tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:10px; margin-bottom:14px; }
+  .tile { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 14px; }
+  .tile span { display:block; color:var(--muted); font-size:12px; }
+  .tile b { font-size:22px; font-variant-numeric:tabular-nums; }
+  .two { display:grid; grid-template-columns:repeat(auto-fit,minmax(360px,1fr)); gap:14px; }
+  .two .card { margin-bottom:0; }
+  .two + .card { margin-top:14px; }
+  .cols { display:flex; align-items:flex-end; gap:6px; height:180px; padding-top:18px; border-bottom:1px solid var(--line); overflow-x:auto; }
+  .col { flex:1 0 34px; max-width:72px; height:100%; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; position:relative; }
+  .col span { width:60%; background:var(--bar); border-radius:4px 4px 0 0; min-height:2px; }
+  .col:hover span { opacity:.8; }
+  .col small { font-size:11px; color:var(--muted); font-variant-numeric:tabular-nums; }
+  .col em { position:absolute; bottom:-20px; font-style:normal; font-size:11px; color:var(--muted); }
+  .cols + * { margin-top:26px; }
+  .hbar { display:flex; align-items:center; gap:8px; min-width:200px; }
+  .hbar b { flex:0 0 92px; text-align:right; font-weight:500; font-variant-numeric:tabular-nums; }
+  .hbar i { flex:1; height:10px; }
+  .hbar span { display:block; height:100%; min-width:2px; background:var(--bar); border-radius:0 4px 4px 0; }
+  th.barcol, td.barcol { text-align:left !important; width:40%; }
+  form.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:8px; align-items:end; }
+  form.grid .wide { grid-column:span 2; }
+  .actions { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:10px; }
+  .drop { border:2px dashed var(--line); border-radius:10px; padding:18px; text-align:center; color:var(--muted); }
+  .drop.over { border-color:var(--accent); background:var(--accent-soft); }
+  .drop input { display:block; margin:8px auto 0; max-width:100%; }
+  .imgs { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:10px; margin-top:10px; }
+  .img { margin:0; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:var(--bg); min-width:0; }
+  .img img, .img .noimg { display:block; width:100%; height:150px; object-fit:cover; object-position:top; background:var(--hover); }
+  .img .noimg { display:flex; align-items:center; justify-content:center; color:var(--muted); background:var(--hover); }
+  .img figcaption { padding:6px; font-size:12px; }
+  .fname { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:600; }
+  .row { display:flex; gap:4px; margin-top:4px; align-items:center; }
+  .row select { flex:1; font-size:12px; padding:4px; }
+  .camps { margin-top:6px; border-top:1px dashed var(--line); padding-top:4px; }
+  .camp { flex-direction:row; align-items:center; gap:4px; color:var(--text); font-size:12px; }
+  .camp .cname { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .camp .cnum { width:92px; text-align:right; padding:2px 4px; font-size:12px; }
+  select.st-0 { border-color:var(--muted); } select.st-1 { border-color:var(--warn); } select.st-2 { border-color:var(--ok); }
+  .toast { position:fixed; left:50%; bottom:16px; transform:translate(-50%,120%); max-width:min(92vw,720px); background:var(--text); color:var(--card);
+           padding:10px 16px; border-radius:8px; transition:transform .2s; z-index:20; font-size:13px; }
+  .toast.show { transform:translate(-50%,0); }
+  .toast.err { background:var(--err); color:#fff; } .toast.ok { background:var(--ok); color:#fff; }
+  #loading { padding:40px 16px; text-align:center; color:var(--muted); }
+  .hint { font-size:12px; color:var(--muted); margin:6px 0 0; }
+  @media (max-width:600px) { .two { grid-template-columns:1fr; } form.grid .wide { grid-column:auto; } .tile b { font-size:18px; } }
+</style>
+</head>
+<body>
+<div id="loading">Đang tải CRM…</div>
+<div id="app" hidden>
+  <header>
+    <div class="bar">
+      <h1>CRM Báo cáo Marketing</h1>
+      <span class="sp"></span>
+      <span id="who" class="muted"></span>
+      <a id="sheetLink" target="_blank" rel="noopener">Dữ liệu gốc (Google Sheet)</a>
+      <a id="reportLink" target="_top">Báo cáo từ thư mục Drive</a>
+    </div>
+    <nav>
+      <button data-tab="tong">Tổng quan</button>
+      <button data-tab="nhap">Nhập số liệu</button>
+      <button data-tab="chungtu">Ảnh & chứng từ</button>
+      <button data-tab="baocao">Báo cáo</button>
+      <button data-tab="danhmuc">Danh mục</button>
+    </nav>
+  </header>
+  <main>
+    <!-- TỔNG QUAN -->
+    <div class="panel" id="tab-tong">
+      <div class="filters">
+        <label>Dự án<select id="dbProject"></select></label>
+        <label>Từ tuần<select id="dbFrom"></select></label>
+        <label>Đến tuần<select id="dbTo"></select></label>
+      </div>
+      <div id="dbBody"></div>
+    </div>
+
+    <!-- NHẬP SỐ LIỆU -->
+    <div class="panel" id="tab-nhap" hidden>
+      <div class="filters">
+        <label>Tuần<select id="enWeek"></select></label>
+        <label>Dự án<select id="enProject"></select></label>
+        <label>Nhân sự<select id="enStaff"></select></label>
+        <button type="button" id="enImport" class="ghost small">Nhập từ Google Sheet của dự án</button>
+      </div>
+      <section class="card">
+        <h3>Thêm / sửa số liệu</h3>
+        <form id="entryForm" class="grid" autocomplete="off">
+          <label>Nhân sự<select id="fStaff"></select></label>
+          <label>Kênh<select id="fPlatform"></select></label>
+          <label>ID tài khoản QC<input id="fAccount" list="accList"><datalist id="accList"></datalist></label>
+          <label class="wide">Chiến dịch<input id="fCampaign"></label>
+          <label>Chi phí thực chạy<input id="f_chiPhi" inputmode="numeric"></label>
+          <label>Gồm phí nền tảng<input id="f_chiPhiPhi" inputmode="numeric" placeholder="trống = như chi phí"></label>
+          <label>Lead<input id="f_lead" inputmode="numeric"></label>
+          <label>Hiển thị<input id="f_hienThi" inputmode="numeric"></label>
+          <label>Tiếp cận<input id="f_tiepCan" inputmode="numeric"></label>
+          <label>Lượt nhấp<input id="f_luotNhap" inputmode="numeric"></label>
+          <label>Lượt xem<input id="f_luotXem" inputmode="numeric"></label>
+          <label>MQL<input id="f_mql" inputmode="numeric"></label>
+          <label>SQL<input id="f_sql" inputmode="numeric"></label>
+          <label>DEAL<input id="f_deal" inputmode="numeric"></label>
+          <label class="wide">Ghi chú<input id="fNote"></label>
+          <div class="actions"><button id="fSave" type="submit">Thêm dòng</button><button id="fCancel" type="button" class="ghost" hidden>Huỷ</button></div>
+        </form>
+      </section>
+      <section class="card"><div class="wrap" id="enTable"></div></section>
+    </div>
+
+    <!-- ẢNH & CHỨNG TỪ -->
+    <div class="panel" id="tab-chungtu" hidden>
+      <div class="filters">
+        <label>Tuần<select id="evWeek"></select></label>
+        <label>Dự án<select id="evProject"></select></label>
+        <label>Nhân sự<select id="evStaff"></select></label>
+      </div>
+      <section class="card">
+        <h3>Tải ảnh chụp màn hình / chứng từ</h3>
+        <div class="drop" id="evDrop">Kéo thả ảnh chụp màn hình quảng cáo, hoá đơn (ảnh hoặc PDF) vào đây, hoặc
+          <input type="file" id="evFiles" accept="image/*,application/pdf,.pdf" multiple>
+        </div>
+        <label class="row" style="flex-direction:row;gap:6px;margin-top:8px;color:var(--text)"><input type="checkbox" id="evOcr" checked> Đọc chữ trong ảnh: tự nhận loại (chiến dịch / quảng cáo đang chạy / hoá đơn) và lấy số chi tiêu, lead của từng chiến dịch</label>
+        <p class="hint">Ảnh chụp màn hình Trình quản lý quảng cáo (điện thoại hoặc máy tính) hay Meta Business Suite sẽ được đọc ra số liệu – tick các chiến dịch thuộc tuần này, sửa số nếu đọc sai, rồi bấm Tải lên. Số đọc từ ảnh là chi tiêu chưa gồm VAT/phí; nếu cùng người đã có số từ sheet/nhập tay thì số từ ảnh không được tính.</p>
+        <div class="imgs" id="evPending"></div>
+        <div class="actions"><button type="button" id="evUpload" hidden>Tải lên Drive</button></div>
+      </section>
+      <section class="card">
+        <h3>Đã lưu <small id="evCount" class="muted"></small></h3>
+        <div class="imgs" id="evList"></div>
+      </section>
+    </div>
+
+    <!-- BÁO CÁO -->
+    <div class="panel" id="tab-baocao" hidden>
+      <section class="card">
+        <h3>Tạo báo cáo tuần</h3>
+        <div class="filters">
+          <label>Tuần<select id="rpWeek"></select></label>
+          <label>Dự án<select id="rpProject"></select></label>
+          <label>Xuất ra<select id="rpFormat"><option value="both">PDF + PPTX</option><option value="pdf">PDF</option><option value="pptx">PPTX</option></select></label>
+          <button type="button" id="rpGo">Tạo báo cáo</button>
+        </div>
+        <p class="hint">Dùng số liệu ở tab Nhập số liệu và ảnh ở tab Ảnh & chứng từ của tuần đã chọn; slide 1–6 là tổng, sau đó mỗi nhân sự một phần. File được lưu vào “Thư mục lưu báo cáo” của dự án (trống = My Drive). Muốn tạo từ thư mục Drive có sẵn: <a id="rpProjectLink" target="_top">trang Báo cáo từ thư mục Drive</a>.</p>
+      </section>
+      <section class="card"><h3>Lịch sử báo cáo</h3><div class="wrap" id="rpTable"></div></section>
+    </div>
+
+    <!-- DANH MỤC -->
+    <div class="panel" id="tab-danhmuc" hidden>
+      <p class="hint" style="margin:0 0 10px">Sửa trực tiếp trong ô, tự lưu khi rời ô. Tài khoản QC gắn với nhân sự để số liệu và hoá đơn tự về đúng người.</p>
+      <div id="ctBody"></div>
+    </div>
+  </main>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="../bao-cao-mkt/vendor/jszip.min.js"></script>
+<script src="../bao-cao-mkt/vendor/xlsx.full.min.js"></script>
+<script src="../bao-cao-mkt/config.js"></script>
+<script src="../bao-cao-mkt/app.js"></script>
+<script src="crm.js"></script>
+</body>
+</html>

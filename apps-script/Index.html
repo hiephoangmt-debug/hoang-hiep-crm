@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="vi">
 <head>
-<!-- File sinh tự động bởi apps-script/build.py – sửa trong bao-cao-mkt/ rồi chạy lại. -->
+<!-- File sinh tự động bởi apps-script/build.py – sửa trong bao-cao-mkt/ hoặc crm/ rồi chạy lại. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Báo cáo Marketing</title>
@@ -81,7 +81,7 @@
         <div class="grid" style="margin-top:8px">
           <label>PPTX mẫu<input type="file" id="templateFile" accept=".pptx"></label>
           <label>Số liệu (.xlsx)<input type="file" id="dataFile" accept=".xlsx,.xls,.csv"></label>
-          <label>Thêm ảnh<input type="file" id="imgFiles" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" multiple></label>
+          <label>Thêm ảnh<input type="file" id="imgFiles" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp,application/pdf,.pdf" multiple></label>
         </div>
       </details>
     </section>
@@ -187,7 +187,7 @@ window.BAO_CAO_MKT_CONFIG = {
     ["cpm", "cpm"],
     ["luot xem", "views"],
   ];
-  const SUM_FIELDS = ["cost", "cost_fee", "lead", "impressions", "reach", "clicks", "views"];
+  const SUM_FIELDS = ["cost", "cost_fee", "lead", "impressions", "reach", "clicks", "views", "mql", "sql", "deal"];
   const NS = {
     p: "http://schemas.openxmlformats.org/presentationml/2006/main",
     a: "http://schemas.openxmlformats.org/drawingml/2006/main",
@@ -285,6 +285,7 @@ window.BAO_CAO_MKT_CONFIG = {
     t.ctr = t.impressions ? t.clicks / t.impressions : 0;
     t.cpm = t.impressions ? (t.cost / t.impressions) * 1000 : 0;
     t.accounts = new Set(recs.map((r) => r.account).filter(Boolean)).size;
+    t.hasFunnel = recs.some((r) => r.hasFunnel);
     return t;
   }
 
@@ -435,7 +436,10 @@ window.BAO_CAO_MKT_CONFIG = {
       if (h.startsWith("ctr")) return fmtDec(r.ctr * 100) + "%";
       if (h.startsWith("cpm")) return fmtInt(r.cpm);
       if (h.startsWith("luot xem")) return fmtInt(r.views);
-      if (/^(deal|mql|sql)/.test(h)) return "-";
+      if (/^(deal|mql|sql)/.test(h)) {
+        const k = h.slice(0, 4).trim();
+        return r.hasFunnel ? fmtInt(r[k] || 0) : "-";
+      }
       return j === 0 && merged ? null : "";
     });
   }
@@ -873,7 +877,7 @@ window.BAO_CAO_MKT_CONFIG = {
   const XLSX_MIME = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
   const PPTX_MIME = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
   const FOLDER_MIME = "application/vnd.google-apps.folder";
-  const IMG_MIMES = ["image/png", "image/jpeg", "image/webp", "image/gif", "image/bmp"];
+  const IMG_MIMES = ["image/png", "image/jpeg", "image/webp", "image/gif", "image/bmp", "application/pdf"];
 
   /** Lấy ID từ link Drive/Sheets (hoặc chính ID). */
   function parseDriveId(link) {
@@ -1072,6 +1076,116 @@ window.BAO_CAO_MKT_CONFIG = {
     return res;
   }
 
+  /**
+   * Đọc số liệu chiến dịch từ chữ của ảnh chụp màn hình quảng cáo
+   * (Trình quản lý quảng cáo trên điện thoại, Meta Business Suite, bảng trên máy tính).
+   * Trả về [{name, spent, results, resultType, date}] – để người dùng xác nhận.
+   */
+  function extractCampaigns(text) {
+    const MONEY = /(\d{1,3}(?:[.,]\d{3})+|\d+(?:[.,]\d+)?)\s*(triệu|trieu|tr|k|n|nghìn)?\s*(?:đ|₫|vnd|d\b)/gi;
+    const money = (line) => Array.from(line.matchAll(MONEY)).map((m) => {
+      const unit = (m[2] || "").toLowerCase();
+      const mult = /^(triệu|trieu|tr)$/.test(unit) ? 1e6 : /^(k|n|nghìn)$/.test(unit) ? 1e3 : 1;
+      const v = mult === 1 ? toNum(m[1]) : parseFloat(m[1].replace(",", ".")) * mult;
+      return { v: Math.round(v), index: m.index, len: m[0].length };
+    });
+    const lines = String(text).split(/\n+/).map((l) => l.trim()).filter(Boolean);
+    const N = lines.map(norm);
+    const C = lines.map(compact);
+    const STATUS = /(dang hoat dong|da tam dung|da hoan tat|dang tat|da tat)/;
+    const STATUS_C = /(danghoatdong|datamdung|dahoantat|dangtat)/;
+    const SPENT_C = /(chitieu|sotiendachi)/;
+    const out = [];
+    const seen = new Set();
+    const push = (c) => { const k = c.name + "|" + c.spent; if (!seen.has(k) && c.spent) { seen.add(k); out.push(c); } };
+
+    // Meta Business Suite: "Hoạt động mới đây với quảng cáo" – mỗi khối bắt đầu bằng ngày "6 THÁNG 10"
+    if (/hoatdongmoidayvoiquangcao|quangbalai/.test(compact(text))) {
+      const starts = [];
+      N.forEach((n, i) => { if (/(\d{1,2})\s*thang\s*(\d{1,2})/.test(n)) starts.push(i); });
+      starts.forEach((st, idx) => {
+        const end = idx + 1 < starts.length ? starts[idx + 1] : lines.length;
+        const d = /(\d{1,2})\s*thang\s*(\d{1,2})/.exec(N[st]);
+        const date = `${d[1]}/${d[2]}`;
+        let spent = null, results = null, resultType = "", status = "";
+        for (let k = st; k < end; k++) {
+          if (!status && STATUS_C.test(C[k])) status = (N[k].match(STATUS) || [C[k].match(STATUS_C)[0]])[0];
+          if (spent == null && SPENT_C.test(C[k])) {
+            const ms = money(lines[k]);
+            if (ms.length) spent = ms[ms.length - 1].v;
+            else { const m = /(\d[\d.,]{3,})\s*\S?\s*$/.exec(lines[k]); if (m) spent = Math.round(toNum(m[1])); }
+          }
+          if (results == null && /(voi bai viet|thruplay|khach hang tiem nang)/.test(N[k])) {
+            const m = /(\d[\d.,]*)\s*$/.exec(N[k]);
+            if (m) results = Math.round(toNum(m[1]));
+          }
+          if (!resultType) resultType = /thruplay|luot xem video/.test(N[k]) ? "thruplay" : /khach hang tiem/.test(N[k]) ? "lead" : /tuong tac/.test(N[k]) ? "tuongtac" : "";
+        }
+        const typeName = { thruplay: "Lượt xem video", lead: "Khách hàng tiềm năng", tuongtac: "Lượt tương tác với bài viết" }[resultType] || "Quảng cáo";
+        if (spent) push({ name: `${typeName} (${date})`, spent, results, resultType, date, status });
+      });
+      return out;
+    }
+
+    for (let i = 0; i < lines.length; i++) {
+      const n = N[i];
+      if (!SPENT_C.test(C[i])) continue;
+      // số tiền cùng dòng sau nhãn (Business Suite) hoặc ở dòng trên (thẻ chiến dịch trên điện thoại)
+      let valLine = -1, spent = null, after = [];
+      const at = n.search(/(chi tieu|so tien da chi)/);
+      after = at < 0 ? [] : money(lines[i]).filter((m) => m.index >= at);
+      if (after.length) { valLine = i; spent = after[after.length - 1].v; }
+      else {
+        for (let k = i - 1; k >= Math.max(0, i - 2); k--) {
+          const ms = money(lines[k]);
+          if (ms.length) { valLine = k; spent = ms[ms.length - 1].v; break; }
+        }
+      }
+      if (spent == null || !spent) continue;
+      // kết quả: số đứng đầu dòng giá trị (vd "7 185,34Kđ 1,30 triệuđ", "1,2K 67,55đ 83,49Kđ")
+      const typeOf = (t) => /thruplay/.test(t) ? "thruplay" : /khach hang tiem/.test(t) ? "lead" : "";
+      const ctxN = N.slice(Math.max(0, i - 1), i + 3).join(" ");
+      let resultType = typeOf(N[i]) || (/khach hang tiem/.test(ctxN) ? "lead" : /thruplay/.test(ctxN) ? "thruplay"
+        : /tuong tac/.test(ctxN) ? "tuongtac" : /luot xem/.test(ctxN) ? "xem" : "");
+      let results = null;
+      if (valLine !== i && valLine >= 0) {
+        const m = /^(\d+(?:[.,]\d+)?)\s*(k)?\b(?!\s*(?:đ|₫|d\b))/i.exec(lines[valLine]);
+        if (m && !/^\d+[.,]\d{3}/.test(m[1])) results = Math.round(parseFloat(m[1].replace(",", ".")) * (m[2] ? 1000 : 1));
+      }
+      // Business Suite: "Lượt tương tác với bài viết 518" ở dòng trên
+      if (results == null) {
+        for (let k = i - 1; k >= Math.max(0, i - 3); k--) {
+          const m = /(luot tuong tac voi bai viet|luot thruplay|khach hang tiem nang)[^\d]*(\d[\d.,]*)\s*$/.exec(N[k]);
+          if (m) { results = Math.round(toNum(m[2])); if (!resultType) resultType = /thruplay/.test(m[1]) ? "thruplay" : /khach/.test(m[1]) ? "lead" : "tuongtac"; break; }
+        }
+      }
+      // tên chiến dịch: dòng ngay trên dòng trạng thái gần nhất phía trên
+      let name = "", date = "";
+      for (let k = valLine - 1; k >= Math.max(0, valLine - 5); k--) {
+        const d = /(\d{1,2})\s*thang\s*(\d{1,2})/.exec(N[k]);
+        if (d && !date) date = `${d[1]}/${d[2]}`;
+        if (STATUS.test(N[k])) {
+          let j = k - 1;
+          if (N[k].replace(STATUS, "").replace(/luot tuong tac|khach hang tiem nang|luot thruplay/g, "").trim().length > 3 && !/^\d/.test(N[k])) j = k;
+          while (j >= 0 && (/^\d{1,2}\s*thang/.test(N[j]) || /^(moi|chien dich|khach hang tiem nang moi)$/.test(N[j]) || !N[j])) {
+            const d2 = /(\d{1,2})\s*thang\s*(\d{1,2})/.exec(N[j]);
+            if (d2 && !date) date = `${d2[1]}/${d2[2]}`;
+            j--;
+          }
+          if (j >= 0 && j !== k) name = lines[j].replace(/^bài viết:\s*/i, "").replace(/["“”]/g, "").trim();
+          break;
+        }
+        if (/ket qua tu/.test(N[k])) { name = "Tổng nhóm quảng cáo"; break; }
+      }
+      if (/ket qua tu/.test(N[valLine] || "") && !name) name = "Tổng nhóm quảng cáo";
+      if (!name && date) name = "Quảng cáo " + date;
+      const statusLine = N.slice(Math.max(0, valLine - 4), i + 1).find((x) => STATUS.test(x));
+      push({ name: name || "Chiến dịch", spent, results, resultType, date,
+        status: statusLine ? (statusLine.match(STATUS) || [""])[0] : "" });
+    }
+    return out;
+  }
+
   function loadScript(src) {
     return new Promise((resolve, reject) => {
       const el = document.createElement("script");
@@ -1081,6 +1195,60 @@ window.BAO_CAO_MKT_CONFIG = {
       document.head.appendChild(el);
     });
   }
+  // ------------------------------------------------------------ PDF (pdf.js)
+  const PDFJS = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/";
+  let pdfjsP = null;
+  function pdfjs() {
+    if (!pdfjsP) {
+      pdfjsP = (window.pdfjsLib ? Promise.resolve() : loadScript(PDFJS + "pdf.min.js")).then(() => {
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + "pdf.worker.min.js";
+        return window.pdfjsLib;
+      }).catch((e) => { pdfjsP = null; throw e; });
+    }
+    return pdfjsP;
+  }
+  const isPdf = (f) => f.type === "application/pdf" || /\.pdf$/i.test(f.name || "");
+  async function openPdf(file) {
+    const lib = await pdfjs();
+    return lib.getDocument({ data: new Uint8Array(await file.arrayBuffer()) }).promise;
+  }
+  /** Chữ trong PDF (hoá đơn xuất từ Meta/Google/TikTok có lớp chữ – không cần OCR). */
+  async function pdfText(file, maxPages) {
+    const doc = await openPdf(file);
+    const out = [];
+    for (let i = 1; i <= Math.min(doc.numPages, maxPages || 3); i++) {
+      const tc = await (await doc.getPage(i)).getTextContent();
+      let line = [], lastY = null;
+      tc.items.forEach((it) => {
+        const y = Math.round(it.transform[5]);
+        if (lastY != null && Math.abs(y - lastY) > 2) { out.push(line.join(" ")); line = []; }
+        line.push(it.str);
+        lastY = y;
+      });
+      out.push(line.join(" "));
+    }
+    return out.join("\n");
+  }
+  /** Trang PDF -> ảnh PNG (để chèn vào slide). */
+  async function pdfToImages(file, maxPages) {
+    const doc = await openPdf(file);
+    const files = [];
+    for (let i = 1; i <= Math.min(doc.numPages, maxPages || 2); i++) {
+      const page = await doc.getPage(i);
+      const vp = page.getViewport({ scale: 2 });
+      const c = document.createElement("canvas");
+      c.width = vp.width;
+      c.height = vp.height;
+      const ctx2 = c.getContext("2d");
+      ctx2.fillStyle = "#fff";
+      ctx2.fillRect(0, 0, c.width, c.height);
+      await page.render({ canvasContext: ctx2, viewport: vp }).promise;
+      const blob = await new Promise((res) => c.toBlob(res, "image/png"));
+      files.push(new File([blob], file.name.replace(/\.pdf$/i, "") + (doc.numPages > 1 ? `_trang${i}` : "") + ".png", { type: "image/png" }));
+    }
+    return files;
+  }
+
   let ocrWorkerP = null;
   function ocrWorker() {
     if (!ocrWorkerP) {
@@ -1359,6 +1527,22 @@ window.BAO_CAO_MKT_CONFIG = {
     }
   }
 
+  /** Chứng từ PDF: mỗi trang thành một ảnh; chữ lấy thẳng từ PDF để phân loại. */
+  async function addPdf(file, path) {
+    try {
+      const text = await pdfText(file);
+      for (const png of await pdfToImages(file)) {
+        addImage(png, path);
+        const im = images[images.length - 1];
+        im.text = text;
+        applyOcr(im);
+      }
+    } catch (e) {
+      console.error(e);
+      setStatus("Không đọc được PDF " + file.name + ": " + e.message, "err");
+    }
+  }
+
   function sortImages() {
     const key = (x) => x.path.concat(x.name).join("/");
     images.sort((a, b) => key(a).localeCompare(key(b), "vi", { numeric: true }));
@@ -1412,7 +1596,9 @@ window.BAO_CAO_MKT_CONFIG = {
         let done = 0;
         await pool(found, 4, async (f) => {
           const blob = await source().image(f);
-          addImage(new File([blob], f.name, { type: f.mimeType }), f.path);
+          const file = new File([blob], f.name, { type: f.mimeType });
+          if (isPdf(file)) await addPdf(file, f.path);
+          else addImage(file, f.path);
           setStatus(`Đang tải ảnh ${++done}/${found.length}…`);
         });
         sortImages();
@@ -1529,9 +1715,11 @@ window.BAO_CAO_MKT_CONFIG = {
     }
   }
 
-  window.BaoCaoMkt = { loadData, aggregate, buildReport, toNum, norm, parseDriveId, guessClass, staffNameFromAccount, classifyText, Drive };
+  window.BaoCaoMkt = {
+    PLATFORMS, KINDS, fmtInt, fmtDec, IN_GAS, gas, b64ToBlob, blobToB64, ocrWorker, embeddable, isPdf, pdfText, pdfToImages, loadData, aggregate, buildReport, toNum, norm, parseDriveId, guessClass, staffNameFromAccount, classifyText, extractCampaigns, Drive };
 
   document.addEventListener("DOMContentLoaded", () => {
+    if (!$("form")) return; // trang khác (CRM) chỉ dùng phần lõi
     $("year").value = String(new Date().getFullYear());
     if (CFG.googleClientId || IN_GAS) $("clientBox").hidden = true;
     else $("clientId").value = LS.get("clientId") || "";
@@ -1553,7 +1741,10 @@ window.BAO_CAO_MKT_CONFIG = {
       try { setStatus(readWorkbook(await f.arrayBuffer(), f.name), "ok"); } catch (e) { weeks = null; setStatus(e.message, "err"); }
     });
     $("imgFiles").addEventListener("change", async () => {
-      Array.from($("imgFiles").files).forEach((f) => addImage(f, ["Từ máy"]));
+      for (const f of Array.from($("imgFiles").files)) {
+        if (isPdf(f)) await addPdf(f, ["Từ máy"]);
+        else addImage(f, ["Từ máy"]);
+      }
       $("imgFiles").value = "";
       sortImages();
       renderImages();
