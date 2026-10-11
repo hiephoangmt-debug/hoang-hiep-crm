@@ -45,7 +45,10 @@
   .chk { flex-direction:row; align-items:center; gap:6px; color:var(--text); font-size:12px; }
   .chk span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .row { display:flex; gap:4px; margin-top:4px; }
-  .row select { flex:1; font-size:12px; padding:4px; }
+  .row select { flex:1; font-size:12px; padding:4px; min-width:0; }
+  .opts { margin-top:8px; align-items:end; }
+  .opts .chk { font-size:13px; }
+  .opts .chk span { white-space:normal; }
 </style>
 </head>
 <body>
@@ -83,6 +86,7 @@
       <div class="grid">
         <label>Sheet<select id="sheet"></select></label>
         <label>Tuần báo cáo<select id="week"></select></label>
+        <label>Phạm vi số liệu<select id="scope"><option value="week">Tuần đã chọn</option><option value="all">Cộng dồn các tuần</option></select></label>
         <label>Số thứ tự tuần (để trống = tự tính)<input type="number" id="weekNo" min="1"></label>
         <label>Năm<input id="year"></label>
         <label>Tên chiến dịch<input id="campaign"></label>
@@ -96,7 +100,12 @@
 
     <section>
       <h2>3. Ảnh chứng từ <small id="imgCount" class="note">Chưa có ảnh</small></h2>
-      <p class="note">Kênh và loại được đoán theo tên file/thư mục (có chữ "tiktok", "zalo", "google", "hóa đơn"…), mặc định Facebook · Ads. Chỉnh lại nếu cần; bỏ tick để không chèn.</p>
+      <p class="note">Kênh và loại slide được đoán theo tên file/thư mục ("tiktok", "zalo", "google"; "hóa đơn", "quảng cáo"/"đang chạy"), mặc định Facebook · Chiến dịch. Ảnh thay vào khung ảnh demo của mẫu; nhiều ảnh hơn thì tự nhân bản slide. Chỉnh lại nếu cần; bỏ tick để không chèn.</p>
+      <div class="grid opts">
+        <label>Số ảnh mỗi slide<select id="perSlide"><option>1</option><option>2</option><option>4</option></select></label>
+        <label class="chk"><input type="checkbox" id="dropUnused" checked> <span>Bỏ các kênh không chạy (không số liệu, không ảnh)</span></label>
+        <label class="chk"><input type="checkbox" id="dropEmpty" checked> <span>Bỏ slide ảnh mẫu khi không có ảnh</span></label>
+      </div>
       <div class="imgs" id="images"></div>
     </section>
 
@@ -148,7 +157,7 @@ window.BAO_CAO_MKT_CONFIG = {
   "use strict";
 
   const PLATFORMS = ["Facebook", "Tiktok", "Zalo", "Google"];
-  const KINDS = { ads: "Ads", hoadon: "Hóa đơn" };
+  const KINDS = { ads: "Chiến dịch", qc: "QC đang chạy", hoadon: "Hóa đơn" };
   // từ khoá tiêu đề cột (đã bỏ dấu, viết thường) -> metric; thứ tự quan trọng
   const METRIC_KEYS = [
     ["chi phi thuc chay (+", "cost_fee"],
@@ -265,63 +274,142 @@ window.BAO_CAO_MKT_CONFIG = {
   }
 
   // ------------------------------------------------------------ XML PPTX
+  const SLIDE_CT = "application/vnd.openxmlformats-officedocument.presentationml.slide+xml";
+  const SLIDE_REL = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide";
+  const NOTES_REL = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/notesSlide";
+  const EMU_IN = 914400;
+
   const byTag = (el, tag) => Array.from(el.getElementsByTagName(tag));
   const paraText = (p) => byTag(p, "a:t").map((t) => t.textContent).join("");
   const bodyText = (body) => byTag(body, "a:p").map(paraText).join("\n");
+  const parseXml = (s) => new DOMParser().parseFromString(s, "application/xml");
+  const xmlStr = (doc) => new XMLSerializer().serializeToString(doc);
 
-  /** Thay text của txBody, giữ định dạng run đầu tiên. */
+  /** Thay text một đoạn (a:p), giữ định dạng run đầu tiên. */
+  function setParaText(p, text) {
+    const doc = p.ownerDocument;
+    const ts = byTag(p, "a:t");
+    if (ts.length) {
+      ts[0].textContent = text;
+      ts.slice(1).forEach((t) => (t.textContent = ""));
+      return;
+    }
+    const r = doc.createElementNS(NS.a, "a:r");
+    const t = doc.createElementNS(NS.a, "a:t");
+    t.textContent = text;
+    const end = byTag(p, "a:endParaRPr")[0];
+    if (end) {
+      const rpr = doc.createElementNS(NS.a, "a:rPr");
+      Array.from(end.attributes).forEach((a) => rpr.setAttribute(a.name, a.value));
+      Array.from(end.childNodes).forEach((c) => rpr.appendChild(c.cloneNode(true)));
+      r.appendChild(rpr);
+      r.appendChild(t);
+      p.insertBefore(r, end);
+    } else {
+      r.appendChild(t);
+      p.appendChild(r);
+    }
+  }
+
   function setBodyText(body, text) {
     const paras = byTag(body, "a:p");
     if (!paras.length) return;
-    const doc = body.ownerDocument;
-    paras.forEach((p, i) => {
-      const ts = byTag(p, "a:t");
-      if (i > 0) { ts.forEach((t) => (t.textContent = "")); return; }
-      if (ts.length) {
-        ts[0].textContent = text;
-        ts.slice(1).forEach((t) => (t.textContent = ""));
-      } else {
-        const r = doc.createElementNS(NS.a, "a:r");
-        const t = doc.createElementNS(NS.a, "a:t");
-        t.textContent = text;
-        r.appendChild(t);
-        const end = byTag(p, "a:endParaRPr")[0];
-        if (end) {
-          const rpr = end.cloneNode(true);
-          const newRpr = doc.createElementNS(NS.a, "a:rPr");
-          Array.from(rpr.attributes).forEach((a) => newRpr.setAttribute(a.name, a.value));
-          Array.from(rpr.childNodes).forEach((c) => newRpr.appendChild(c.cloneNode(true)));
-          r.insertBefore(newRpr, t);
-          p.insertBefore(r, end);
-        } else p.appendChild(r);
-      }
-    });
+    setParaText(paras[0], text);
+    paras.slice(1).forEach((p) => byTag(p, "a:t").forEach((t) => (t.textContent = "")));
   }
 
-  // txBody của các shape (không gồm ô bảng), theo thứ tự tài liệu
+  /** Vị trí/kích thước (EMU) của shape cấp cao nhất. */
+  function boxOf(el) {
+    const off = el.getElementsByTagName("a:off")[0], ext = el.getElementsByTagName("a:ext")[0];
+    if (!off || !ext) return null;
+    return { x: +off.getAttribute("x"), y: +off.getAttribute("y"), w: +ext.getAttribute("cx"), h: +ext.getAttribute("cy"), off, ext };
+  }
+
+  function topShapes(doc) {
+    const tree = byTag(doc, "p:spTree")[0];
+    return Array.from(tree.childNodes)
+      .filter((e) => e.nodeType === 1 && /^p:(sp|grpSp|graphicFrame|pic|cxnSp)$/.test(e.nodeName))
+      .map((el) => {
+        const blip = el.nodeName === "p:grpSp" ? null : el.getElementsByTagName("a:blip")[0];
+        return {
+          el,
+          box: boxOf(el),
+          text: el.nodeName === "p:graphicFrame" ? "" : byTag(el, "a:p").map(paraText).join("\n").trim(),
+          embed: blip ? blip.getAttributeNS(NS.r, "embed") || blip.getAttribute("r:embed") : null,
+        };
+      });
+  }
+
+  // txBody của mọi shape (kể cả trong group, không gồm ô bảng)
   const shapeBodies = (doc) => byTag(doc, "p:sp").map((sp) => byTag(sp, "p:txBody")[0]).filter(Boolean);
-  const slideText = (doc) => shapeBodies(doc).map(bodyText).join("\n");
+  const slideLines = (doc) => shapeBodies(doc).flatMap((b) => byTag(b, "a:p").map(paraText)).map(norm).filter(Boolean);
 
-  function slidePlatform(doc) {
-    const lines = slideText(doc).split("\n").map(norm);
-    for (const p of PLATFORMS) {
-      const re = new RegExp("^" + p.toLowerCase() + "( ads)?:?$");
-      if (lines.some((l) => re.test(l))) return p;
+  // ------------------------------------------------------------ phân tích mẫu
+  /** Đọc rels của slide: Id -> {type, target}. */
+  function relMap(relsDoc) {
+    const m = {};
+    Array.from(relsDoc.documentElement.getElementsByTagName("Relationship")).forEach((r) => {
+      m[r.getAttribute("Id")] = { type: r.getAttribute("Type"), target: r.getAttribute("Target") };
+    });
+    return m;
+  }
+
+  function analyzeSlide(s, slideW, slideH) {
+    const lines = slideLines(s.doc);
+    const text = lines.join("\n");
+    const rels = relMap(s.relsDoc);
+    const shapes = topShapes(s.doc);
+    const platLines = PLATFORMS.filter((p) => lines.some((l) => new RegExp("^" + p.toLowerCase() + "( ads)?:?$").test(l)));
+    // slide phân cách kênh: dòng chỉ có tên kênh (FACEBOOK / TIKTOK / ZALO / GOOGLE)
+    s.divider = PLATFORMS.find((p) => lines.includes(p.toLowerCase())) || null;
+    // tiêu đề "TIKTOK ADS:", bỏ qua slide liệt kê ngân sách (nhiều kênh)
+    s.titlePlatform = platLines.length === 1 ? platLines[0] : null;
+    s.tables = shapes.filter((sh) => sh.el.nodeName === "p:graphicFrame" && sh.el.getElementsByTagName("a:tbl")[0]);
+    s.tables.forEach((t) => {
+      // icon kênh đặt đè lên cột đầu của bảng
+      const icon = shapes.find((sh) => sh.embed && sh.box && sh.box.w < 2.5 * EMU_IN &&
+        sh.box.x >= t.box.x - EMU_IN / 2 && sh.box.x < t.box.x + t.box.w / 4 &&
+        sh.box.y >= t.box.y && sh.box.y < t.box.y + t.box.h);
+      t.icon = icon || null;
+      t.iconKey = icon && rels[icon.embed] ? rels[icon.embed].target : null;
+    });
+    s.dividerIconKey = null;
+    if (s.divider) {
+      const icon = shapes.find((sh) => sh.embed && sh.box && sh.box.w < 3 * EMU_IN && sh.box.w > EMU_IN / 2 && Math.abs(sh.box.w - sh.box.h) < EMU_IN / 4);
+      if (icon && rels[icon.embed]) s.dividerIconKey = rels[icon.embed].target;
     }
-    return null;
+    // slide ảnh chứng từ: có ảnh demo lớn + ghi chú "Lưu ý"/"Demo"
+    const frame = shapes
+      .filter((sh) => sh.embed && sh.box && sh.box.w > 3 * EMU_IN && sh.box.w * sh.box.h < 0.6 * slideW * slideH && sh.box.x >= 0 && sh.box.y >= 0)
+      .sort((a, b) => b.box.w * b.box.h - a.box.w * a.box.h)[0];
+    s.frame = frame && /luu y|demo/.test(text) && !s.tables.length ? frame : null;
+    s.kind = null;
+    if (s.frame) {
+      if (lines.some((l) => l.startsWith("hoa don")) || text.includes("ma tham chieu")) s.kind = "hoadon";
+      else if (/quang cao (dang hoat dong|chay)/.test(text)) s.kind = "qc";
+      else s.kind = "ads";
+    }
   }
 
-  function slideKind(doc) {
-    const t = norm(slideText(doc));
-    if (t.includes("hoa don")) return "hoadon";
-    if (t.includes("demo:") || t.includes("capture")) return "ads";
-    return null;
+  /** Gán kênh cho slide/bảng: tiêu đề > mục kênh hiện tại > icon trên bảng. */
+  function resolvePlatforms(slides) {
+    let section = null;
+    const iconMap = {};
+    slides.forEach((s) => {
+      if (/^thank you/.test(norm(slideLines(s.doc).join(" ")))) section = null;
+      if (s.divider) section = s.divider;
+      s.platform = s.titlePlatform || section;
+      if (s.divider && s.dividerIconKey) iconMap[s.dividerIconKey] = s.divider;
+    });
+    slides.forEach((s) => s.tables.forEach((t) => { if (s.platform && t.iconKey) iconMap[t.iconKey] = s.platform; }));
+    slides.forEach((s) => s.tables.forEach((t) => { t.platform = s.platform || (t.iconKey && iconMap[t.iconKey]) || null; }));
   }
 
-  function cellValues(header, platform, r) {
-    return header.map((h) => {
-      if (h.startsWith("nen tang")) return platform;
-      if (h.startsWith("id tai khoan")) return r.account || "";
+  // ------------------------------------------------------------ điền nội dung
+  function cellValues(header, label, r, merged) {
+    return header.map((h, j) => {
+      if (h.startsWith("nen tang")) return merged ? null : label;
+      if (h.startsWith("id tai khoan")) return r.account || (merged && label === "TỔNG" ? "TỔNG" : "");
       if (h.startsWith("chi phi thuc chay (")) return fmtInt(r.cost_fee);
       if (h.startsWith("ngan sach thuc chay")) return fmtInt(r.cost);
       if (h.startsWith("lead")) return fmtInt(r.lead);
@@ -333,23 +421,23 @@ window.BAO_CAO_MKT_CONFIG = {
       if (h.startsWith("cpm")) return fmtInt(r.cpm);
       if (h.startsWith("luot xem")) return fmtInt(r.views);
       if (/^(deal|mql|sql)/.test(h)) return "-";
-      return "";
+      return j === 0 && merged ? null : "";
     });
   }
 
-  function tableLines(platformFilter, dataByPlatform) {
+  function tableLines(platformFilter, data) {
     const lines = [];
     const all = [];
     for (const p of PLATFORMS) {
       if (platformFilter && p !== platformFilter) continue;
-      const recs = dataByPlatform[p] || [];
+      const recs = data[p] || [];
       all.push(...recs);
       const byAcc = new Map();
       recs.forEach((r) => {
         if (!byAcc.has(r.account)) byAcc.set(r.account, []);
         byAcc.get(r.account).push(r);
       });
-      byAcc.forEach((rs, acc) => lines.push([p, Object.assign(aggregate(rs), { account: acc })]));
+      byAcc.forEach((rs, acc) => lines.push([p === "Tiktok" ? "TikTok" : p, Object.assign(aggregate(rs), { account: acc })]));
     }
     if (all.length && (lines.length > 1 || !platformFilter)) {
       lines.push(["TỔNG", Object.assign(aggregate(all), { account: "" })]);
@@ -357,53 +445,94 @@ window.BAO_CAO_MKT_CONFIG = {
     return lines;
   }
 
-  function fillTable(tbl, platformFilter, weekData, totalData) {
+  function fillTable(t, data, slideH) {
+    const tbl = t.el.getElementsByTagName("a:tbl")[0];
     const trs = byTag(tbl, "a:tr");
-    if (trs.length < 1) return;
     const header = byTag(trs[0], "a:tc").map((tc) => norm(bodyText(tc)));
-    const iDeal = header.findIndex((h) => h.startsWith("deal"));
-    const iLead = header.findIndex((h) => h.startsWith("lead"));
-    const weekly = iDeal >= 0 && iLead >= 0 && iDeal < iLead; // bảng tuần: DEAL đứng trước LEAD
-    const lines = tableLines(platformFilter, weekly ? weekData : totalData);
-    if (!lines.length) return;
-    const parent = trs[0].parentNode;
-    const tmpl = trs[trs.length > 1 ? 1 : 0];
+    const lines = tableLines(t.platform, data);
     let rows = trs.slice(1);
-    while (rows.length < lines.length) {
-      const tr = tmpl.cloneNode(true);
-      parent.insertBefore(tr, rows.length ? rows[rows.length - 1].nextSibling : null);
+    if (!lines.length || !rows.length) return;
+    const first0 = () => byTag(rows[0], "a:tc")[0];
+    const merged = first0().hasAttribute("rowSpan");
+    const n = lines.length;
+    while (rows.length < n) {
+      const last = rows[rows.length - 1];
+      const tr = last.cloneNode(true);
+      const c0 = byTag(tr, "a:tc")[0];
+      if (merged && c0.hasAttribute("rowSpan")) { c0.removeAttribute("rowSpan"); c0.setAttribute("vMerge", "1"); }
+      last.parentNode.insertBefore(tr, last.nextSibling);
       rows.push(tr);
     }
+    while (rows.length > n) { const r = rows.pop(); r.parentNode.removeChild(r); }
+    if (merged) {
+      if (n > 1) first0().setAttribute("rowSpan", String(n));
+      else first0().removeAttribute("rowSpan");
+    }
     rows.forEach((tr, i) => {
-      const vals = i < lines.length ? cellValues(header, lines[i][0], lines[i][1]) : header.map(() => "");
+      const vals = cellValues(header, lines[i][0], lines[i][1], merged);
       byTag(tr, "a:tc").forEach((tc, j) => {
         const body = byTag(tc, "a:txBody")[0];
-        if (body) setBodyText(body, vals[j] || "");
+        if (body && vals[j] != null) {
+          setBodyText(body, vals[j]);
+          byTag(body, "a:rPr").forEach((rpr) => {
+            rpr.setAttribute("sz", n > 4 ? "1200" : "1400");
+            if (lines[i][0] === "TỔNG") rpr.setAttribute("b", "1");
+          });
+        }
       });
     });
-    // chiều cao khung bảng tăng theo số dòng
-    const frame = tbl.parentNode && tbl.parentNode.parentNode && tbl.parentNode.parentNode.parentNode;
-    if (frame) {
-      const ext = byTag(frame, "a:ext")[0];
-      if (ext) {
-        const h = rows.concat(trs[0]).reduce((s, tr) => s + parseInt(tr.getAttribute("h") || "0", 10), 0);
-        if (h > parseInt(ext.getAttribute("cy") || "0", 10)) ext.setAttribute("cy", String(h));
+    // chiều cao: co dòng nếu bảng tràn khỏi slide
+    const headH = +trs[0].getAttribute("h");
+    let rowH = +rows[0].getAttribute("h");
+    const maxH = slideH * 0.96 - t.box.y;
+    if (headH + n * rowH > maxH) rowH = Math.max(Math.round(0.3 * EMU_IN), Math.floor((maxH - headH) / n));
+    rows.forEach((tr) => tr.setAttribute("h", String(rowH)));
+    t.box.ext.setAttribute("cy", String(headH + n * rowH));
+    // icon kênh: căn giữa vùng các dòng dữ liệu
+    if (t.icon) {
+      const ib = t.icon.box;
+      const size = Math.min(ib.w, Math.round(n * rowH * 0.9));
+      if (size !== ib.w) {
+        ib.off.setAttribute("x", String(ib.x + Math.round((ib.w - size) / 2)));
+        ib.ext.setAttribute("cx", String(size));
+        ib.ext.setAttribute("cy", String(Math.round((ib.h * size) / ib.w)));
       }
+      const h = +ib.ext.getAttribute("cy");
+      ib.off.setAttribute("y", String(t.box.y + headH + Math.round((n * rowH - h) / 2)));
     }
+  }
+
+  /** Nới rộng shape chứa body (đủ chỗ cho chữ dài hơn mẫu); center = giữ tâm. */
+  function widen(body, minW, center) {
+    const b = boxOf(body.parentNode);
+    if (!b || b.w >= minW) return;
+    if (center) b.off.setAttribute("x", String(Math.max(0, b.x - Math.round((minW - b.w) / 2))));
+    b.ext.setAttribute("cx", String(minW));
   }
 
   function fillText(doc, ctx) {
     for (const body of shapeBodies(doc)) {
       const t = bodyText(body).trim();
-      let m;
-      if (/^TUẦN\s*\d*$/i.test(t) && ctx.weekNo) setBodyText(body, "TUẦN " + ctx.weekNo);
+      if (/^TUẦN\s*\d*$/i.test(t) && ctx.weekNo) {
+        setBodyText(body, "TUẦN " + ctx.weekNo);
+        widen(body, 6 * EMU_IN, true);
+      }
       else if (/^\.{3,}\s*\d{1,2}\.\d{4}\s*-\s*\.{3,}\s*\d{1,2}\.\d{4}$/.test(t)) setBodyText(body, ctx.weekRangeText);
       else if (t.startsWith("Thời gian triển khai:") && ctx.period) setBodyText(body, "Thời gian triển khai: " + ctx.period);
       else if (t.startsWith("REVIEW CHIẾN DỊCH") && ctx.campaign) setBodyText(body, "REVIEW CHIẾN DỊCH " + ctx.campaign);
-      else if ((m = /^(Facebook|Tiktok|Zalo|Google):$/i.exec(t))) {
-        const p = m[1][0].toUpperCase() + m[1].slice(1).toLowerCase();
-        setBodyText(body, `${p}: ${fmtInt(ctx.totals[p].cost_fee)} VNĐ (đã gồm phí nền tảng)`);
-      } else if (t.startsWith("NHÂN SỰ:") && ctx.staff) setBodyText(body, "NHÂN SỰ: " + ctx.staff);
+      else {
+        byTag(body, "a:p").forEach((p) => {
+          const pt = paraText(p).trim();
+          const m = /^(Facebook|Tiktok|Zalo|Google):\s*$/i.exec(pt);
+          if (m) {
+            const name = m[1][0].toUpperCase() + m[1].slice(1).toLowerCase();
+            setParaText(p, `${name === "Tiktok" ? "TikTok" : name}: ${fmtInt(ctx.totals[name].cost_fee)} VNĐ`);
+            widen(body, 9 * EMU_IN, false);
+          } else if (/^NHÂN SỰ:/.test(pt) && ctx.staff) {
+            setParaText(p, "NHÂN SỰ: " + ctx.staff);
+          }
+        });
+      }
     }
   }
 
@@ -417,24 +546,19 @@ window.BAO_CAO_MKT_CONFIG = {
     });
   }
 
-  async function addImages(zip, slidePath, doc, files, slideW, slideH, state) {
-    if (!files.length) return 0;
-    const relsPath = slidePath.replace("slides/", "slides/_rels/") + ".rels";
-    let relsXml = zip.file(relsPath) ? await zip.file(relsPath).async("string")
-      : '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"></Relationships>';
-    const rels = new DOMParser().parseFromString(relsXml, "application/xml");
-    const relRoot = rels.documentElement;
+  /** Thay ảnh demo bằng ảnh chứng từ (xếp lưới trong khung demo), bỏ số chú thích và dòng "*Demo". */
+  async function placeImages(zip, s, files, state) {
+    const doc = s.doc, frame = s.frame;
+    const relRoot = s.relsDoc.documentElement;
     const usedIds = new Set(Array.from(relRoot.getElementsByTagName("Relationship")).map((r) => r.getAttribute("Id")));
-    const spTree = byTag(doc, "p:spTree")[0];
     const maxId = byTag(doc, "p:cNvPr").reduce((m, e) => Math.max(m, parseInt(e.getAttribute("id") || "0", 10)), 0);
-
+    const B = frame.box;
     const n = files.length;
     const cols = n === 1 ? 1 : 2;
     const rowsN = Math.ceil(n / cols);
-    const top = Math.round(slideH * 0.3), margin = Math.round(slideW * 0.03);
-    const cw = Math.floor((slideW - margin * (cols + 1)) / cols);
-    const ch = Math.floor((Math.round(slideH * 0.92) - top - margin * (rowsN - 1)) / rowsN);
-
+    const gap = Math.round(0.15 * EMU_IN);
+    const cw = Math.floor((B.w - gap * (cols - 1)) / cols);
+    const ch = Math.floor((B.h - gap * (rowsN - 1)) / rowsN);
     for (let k = 0; k < n; k++) {
       const f = files[k];
       const ext = f.type === "image/png" ? "png" : f.type === "image/jpeg" ? "jpeg"
@@ -446,7 +570,7 @@ window.BAO_CAO_MKT_CONFIG = {
       let rid = 1;
       while (usedIds.has("rId" + rid)) rid++;
       usedIds.add("rId" + rid);
-      const rel = rels.createElementNS(relRoot.namespaceURI, "Relationship");
+      const rel = s.relsDoc.createElementNS(relRoot.namespaceURI, "Relationship");
       rel.setAttribute("Id", "rId" + rid);
       rel.setAttribute("Type", IMG_REL);
       rel.setAttribute("Target", "../media/" + mediaName);
@@ -456,89 +580,219 @@ window.BAO_CAO_MKT_CONFIG = {
       const ratio = Math.min(cw / iw, ch / ih);
       const w = Math.round(iw * ratio), h = Math.round(ih * ratio);
       const c = k % cols, r = Math.floor(k / cols);
-      const x = margin + c * (cw + margin) + Math.floor((cw - w) / 2);
-      const y = top + r * (ch + margin) + Math.floor((ch - h) / 2);
+      const x = B.x + c * (cw + gap) + Math.floor((cw - w) / 2);
+      const y = B.y + r * (ch + gap) + Math.floor((ch - h) / 2);
       const xml =
         `<p:pic xmlns:p="${NS.p}" xmlns:a="${NS.a}" xmlns:r="${NS.r}">` +
         `<p:nvPicPr><p:cNvPr id="${maxId + k + 1}" name="Anh chung tu ${k + 1}"/><p:cNvPicPr><a:picLocks noChangeAspect="1"/></p:cNvPicPr><p:nvPr/></p:nvPicPr>` +
         `<p:blipFill><a:blip r:embed="rId${rid}"/><a:stretch><a:fillRect/></a:stretch></p:blipFill>` +
         `<p:spPr><a:xfrm><a:off x="${x}" y="${y}"/><a:ext cx="${w}" cy="${h}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom>` +
         `<a:ln w="9525"><a:solidFill><a:srgbClr val="BFBFBF"/></a:solidFill></a:ln></p:spPr></p:pic>`;
-      const pic = new DOMParser().parseFromString(xml, "application/xml").documentElement;
-      spTree.appendChild(doc.importNode(pic, true));
+      frame.el.parentNode.insertBefore(doc.importNode(parseXml(xml).documentElement, true), frame.el);
     }
-    zip.file(relsPath, new XMLSerializer().serializeToString(rels));
-    return n;
+    frame.el.parentNode.removeChild(frame.el);
+    topShapes(doc).forEach((sh) => {
+      const badge = /^\d$/.test(sh.text) && sh.box && sh.box.w < EMU_IN;
+      if (badge || /^\*demo/i.test(norm(sh.text))) sh.el.parentNode.removeChild(sh.el);
+    });
   }
 
-  async function ensureContentTypes(zip, exts) {
-    const path = "[Content_Types].xml";
-    const doc = new DOMParser().parseFromString(await zip.file(path).async("string"), "application/xml");
-    const root = doc.documentElement;
+  async function ensureContentTypes(ct, exts) {
+    const root = ct.documentElement;
     const have = new Set(Array.from(root.getElementsByTagName("Default")).map((d) => d.getAttribute("Extension").toLowerCase()));
     exts.forEach((ext) => {
       if (have.has(ext)) return;
-      const d = doc.createElementNS(root.namespaceURI, "Default");
+      const d = ct.createElementNS(root.namespaceURI, "Default");
       d.setAttribute("Extension", ext);
       d.setAttribute("ContentType", "image/" + ext);
       root.insertBefore(d, root.firstChild);
     });
-    zip.file(path, new XMLSerializer().serializeToString(doc));
   }
 
-  /** Danh sách slide theo thứ tự trình chiếu. */
-  async function slidePaths(zip) {
-    const pres = new DOMParser().parseFromString(await zip.file("ppt/presentation.xml").async("string"), "application/xml");
-    const rels = new DOMParser().parseFromString(await zip.file("ppt/_rels/presentation.xml.rels").async("string"), "application/xml");
-    const target = {};
-    Array.from(rels.getElementsByTagName("Relationship")).forEach((r) => (target[r.getAttribute("Id")] = r.getAttribute("Target")));
-    const sz = byTag(pres, "p:sldSz")[0];
-    return {
-      paths: byTag(pres, "p:sldId").map((s) => "ppt/" + target[s.getAttributeNS(NS.r, "id") || s.getAttribute("r:id")].replace(/^\/?ppt\//, "")),
-      w: parseInt(sz.getAttribute("cx"), 10),
-      h: parseInt(sz.getAttribute("cy"), 10),
-    };
+  const relsPathOf = (path) => path.replace(/([^/]+)$/, "_rels/$1.rels");
+  const resolveTarget = (base, target) => {
+    const parts = base.split("/").slice(0, -1);
+    target.split("/").forEach((seg) => { if (seg === "..") parts.pop(); else if (seg !== ".") parts.push(seg); });
+    return parts.join("/");
+  };
+
+  function removePart(zip, ct, path) {
+    zip.remove(path);
+    zip.remove(relsPathOf(path));
+    Array.from(ct.documentElement.getElementsByTagName("Override"))
+      .filter((o) => o.getAttribute("PartName") === "/" + path)
+      .forEach((o) => o.parentNode.removeChild(o));
   }
 
+  function chunk(arr, size) {
+    const out = [];
+    for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
+    return out;
+  }
+
+  /** Xây dựng báo cáo từ mẫu. opts.images[platform][kind] = File[]. */
   async function buildReport(opts) {
     const weeks = opts.weeks;
     const names = Object.keys(weeks);
     const active = names.filter((w) => PLATFORMS.some((p) => weeks[w][p].length));
     if (!active.length) throw new Error("Không có dữ liệu thực chạy trong file số liệu.");
     const week = opts.week || active[active.length - 1];
-    const weekData = weeks[week];
-    const totalData = Object.fromEntries(PLATFORMS.map((p) => [p, names.flatMap((w) => weeks[w][p])]));
-    const totals = Object.fromEntries(PLATFORMS.map((p) => [p, aggregate(totalData[p])]));
-    const [d1, d2] = week.split("-").map((x) => x.trim().replace("/", "."));
+    const scopeWeeks = opts.scope === "all" ? active : [week];
+    const data = Object.fromEntries(PLATFORMS.map((p) => [p, scopeWeeks.flatMap((w) => weeks[w][p])]));
+    const totals = Object.fromEntries(PLATFORMS.map((p) => [p, aggregate(data[p])]));
+    const d1 = scopeWeeks[0].split("-")[0].trim().replace("/", ".");
+    const d2 = scopeWeeks[scopeWeeks.length - 1].split("-")[1].trim().replace("/", ".");
     const ctx = {
       totals, campaign: opts.campaign, period: opts.period, staff: opts.staff,
       weekNo: opts.weekNo || names.indexOf(week) - names.indexOf(active[0]) + 1,
       weekRangeText: `${d1}.${opts.year} - ${d2}.${opts.year}`,
     };
+    const images = opts.images || {};
+    const imgsOf = (p, k) => (images[p] && images[p][k]) || [];
+    const perSlide = Math.max(1, opts.perSlide || 1);
+    const platformUsed = (p) => data[p].length > 0 || ["ads", "qc", "hoadon"].some((k) => imgsOf(p, k).length);
 
     const zip = await JSZip.loadAsync(opts.template);
-    const { paths, w, h } = await slidePaths(zip);
+    const presPath = "ppt/presentation.xml";
+    const pres = parseXml(await zip.file(presPath).async("string"));
+    const presRels = parseXml(await zip.file("ppt/_rels/presentation.xml.rels").async("string"));
+    const ct = parseXml(await zip.file("[Content_Types].xml").async("string"));
+    const presRelMap = relMap(presRels);
+    const sz = byTag(pres, "p:sldSz")[0];
+    const W = +sz.getAttribute("cx"), H = +sz.getAttribute("cy");
+    const sldIdLst = byTag(pres, "p:sldIdLst")[0];
+    const sldIds = byTag(sldIdLst, "p:sldId");
+
+    const slides = [];
+    for (const el of sldIds) {
+      const rid = el.getAttributeNS(NS.r, "id") || el.getAttribute("r:id");
+      const path = resolveTarget(presPath, presRelMap[rid].target);
+      const relsFile = zip.file(relsPathOf(path));
+      const s = {
+        el, rid, path,
+        doc: parseXml(await zip.file(path).async("string")),
+        relsDoc: parseXml(relsFile ? await relsFile.async("string")
+          : '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"/>'),
+      };
+      analyzeSlide(s, W, H);
+      slides.push(s);
+    }
+    resolvePlatforms(slides);
+
+    // Kế hoạch: slide nào giữ, slide ảnh nào nhân bản
+    const out = []; // {src, files, clone}
+    const drop = [];
+    const usedKinds = new Set();
+    for (const s of slides) {
+      const tablePlats = s.tables.map((t) => t.platform).filter(Boolean);
+      const plat = s.platform || (tablePlats.length ? tablePlats[0] : null);
+      if (opts.dropUnused && plat && !platformUsed(plat)) { drop.push(s); continue; }
+      if (s.frame && plat) {
+        const key = plat + "/" + s.kind;
+        const files = usedKinds.has(key) ? [] : imgsOf(plat, s.kind);
+        usedKinds.add(key);
+        if (!files.length) {
+          if (opts.dropEmptyImageSlides) drop.push(s);
+          else out.push({ src: s, files: [] });
+          continue;
+        }
+        chunk(files, perSlide).forEach((fs, i) => out.push({ src: s, files: fs, clone: i > 0 }));
+        continue;
+      }
+      out.push({ src: s, files: [] });
+    }
+
+    // Nhân bản slide (từ bản gốc chưa điền)
+    let maxSlideNo = Math.max(...Object.keys(zip.files).map((f) => (/^ppt\/slides\/slide(\d+)\.xml$/.exec(f) || [0, 0])[1] | 0));
+    out.forEach((o) => {
+      if (!o.clone) { o.s = o.src; return; }
+      const path = `ppt/slides/slide${++maxSlideNo}.xml`;
+      const relsDoc = o.src.relsDoc.cloneNode(true);
+      Array.from(relsDoc.documentElement.getElementsByTagName("Relationship"))
+        .filter((r) => r.getAttribute("Type") === NOTES_REL)
+        .forEach((r) => r.parentNode.removeChild(r));
+      o.s = Object.assign({}, o.src, { el: null, rid: null, path, doc: o.src.doc.cloneNode(true), relsDoc });
+      analyzeSlide(o.s, W, H);
+      o.s.platform = o.src.platform;
+      const ov = ct.createElementNS(ct.documentElement.namespaceURI, "Override");
+      ov.setAttribute("PartName", "/" + path);
+      ov.setAttribute("ContentType", SLIDE_CT);
+      ct.documentElement.appendChild(ov);
+    });
+
+    // Điền nội dung
     const state = { media: 0, exts: new Set() };
     let nImg = 0;
-    for (const path of paths) {
-      const doc = new DOMParser().parseFromString(await zip.file(path).async("string"), "application/xml");
-      const plat = slidePlatform(doc);
-      const kind = slideKind(doc);
-      fillText(doc, ctx);
-      byTag(doc, "a:tbl").forEach((tbl) => fillTable(tbl, plat, weekData, totalData));
-      if (plat && kind) {
-        const files = (opts.images[plat] && opts.images[plat][kind]) || [];
-        nImg += await addImages(zip, path, doc, files, w, h, state);
+    for (const o of out) {
+      const s = o.s;
+      fillText(s.doc, ctx);
+      s.tables.forEach((t, i) => {
+        t.platform = o.src.tables[i] ? o.src.tables[i].platform : t.platform;
+        fillTable(t, data, H);
+      });
+      if (o.files.length) {
+        await placeImages(zip, s, o.files, state);
+        nImg += o.files.length;
       }
-      zip.file(path, new XMLSerializer().serializeToString(doc));
     }
-    if (state.exts.size) await ensureContentTypes(zip, state.exts);
+
+    // Xoá slide bị bỏ (kèm notes)
+    drop.forEach((s) => {
+      const rels = relMap(s.relsDoc);
+      Object.values(rels).filter((r) => r.type === NOTES_REL).forEach((r) => removePart(zip, ct, resolveTarget(s.path, r.target)));
+      removePart(zip, ct, s.path);
+      Array.from(presRels.documentElement.getElementsByTagName("Relationship"))
+        .filter((r) => r.getAttribute("Id") === s.rid)
+        .forEach((r) => r.parentNode.removeChild(r));
+    });
+
+    // Danh sách slide theo thứ tự mới
+    sldIds.forEach((el) => el.parentNode.removeChild(el));
+    let maxId = Math.max(...sldIds.map((e) => +e.getAttribute("id")));
+    const usedRid = new Set(Array.from(presRels.documentElement.getElementsByTagName("Relationship")).map((r) => r.getAttribute("Id")));
+    for (const o of out) {
+      const s = o.s;
+      let el = s.el;
+      if (!el) {
+        let k = 1;
+        while (usedRid.has("rId" + k)) k++;
+        usedRid.add("rId" + k);
+        const rel = presRels.createElementNS(presRels.documentElement.namespaceURI, "Relationship");
+        rel.setAttribute("Id", "rId" + k);
+        rel.setAttribute("Type", SLIDE_REL);
+        rel.setAttribute("Target", s.path.replace(/^ppt\//, ""));
+        presRels.documentElement.appendChild(rel);
+        el = pres.createElementNS(NS.p, "p:sldId");
+        el.setAttribute("id", String(++maxId));
+        el.setAttributeNS(NS.r, "r:id", "rId" + k);
+      }
+      sldIdLst.appendChild(el);
+      zip.file(s.path, xmlStr(s.doc));
+      zip.file(relsPathOf(s.path), xmlStr(s.relsDoc));
+    }
+    if (state.exts.size) await ensureContentTypes(ct, state.exts);
+    // Bỏ file media không còn slide nào dùng (ảnh demo của slide đã thay/xoá)
+    const referenced = new Set();
+    for (const f of Object.keys(zip.files).filter((f) => f.endsWith(".rels"))) {
+      const base = f.replace(/_rels\/[^/]+\.rels$/, "x");
+      const doc = parseXml(await zip.file(f).async("string"));
+      Array.from(doc.documentElement.getElementsByTagName("Relationship"))
+        .filter((r) => r.getAttribute("TargetMode") !== "External")
+        .forEach((r) => referenced.add(resolveTarget(base, r.getAttribute("Target"))));
+    }
+    Object.keys(zip.files)
+      .filter((f) => f.startsWith("ppt/media/") && !zip.files[f].dir && !referenced.has(f))
+      .forEach((f) => zip.remove(f));
+    zip.file(presPath, xmlStr(pres));
+    zip.file("ppt/_rels/presentation.xml.rels", xmlStr(presRels));
+    zip.file("[Content_Types].xml", xmlStr(ct));
+
     const blob = await zip.generateAsync({
       type: "blob",
       mimeType: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
       compression: "DEFLATE",
     });
-    return { blob, week, nImg, totals };
+    return { blob, week, nImg, totals, slides: out.length, dropped: drop.length };
   }
 
   // ------------------------------------------------------------ Google Drive
@@ -658,7 +912,8 @@ window.BAO_CAO_MKT_CONFIG = {
     else if (/zalo/.test(t)) platform = "Zalo";
     else if (/google|\bgg\b|adwords/.test(t)) platform = "Google";
     else if (/facebook|\bfb\b|meta/.test(t)) platform = "Facebook";
-    const kind = /hoa ?don|\bhd\b|invoice|bill|thanh toan|\bvat\b|receipt/.test(t) ? "hoadon" : "ads";
+    const kind = /hoa ?don|\bhd\b|invoice|bill|thanh toan|\bvat\b|receipt|tham chieu/.test(t) ? "hoadon"
+      : /quang cao|\bqc\b|dang chay|hoat dong|active/.test(t) ? "qc" : "ads";
     return { platform, kind };
   }
 
@@ -844,7 +1099,7 @@ window.BAO_CAO_MKT_CONFIG = {
     if (localTpl) templateBuf = await localTpl.arrayBuffer();
     if (!templateBuf) return setStatus("Chưa có PPTX mẫu: dán link Drive và bấm Quét, hoặc chọn file từ máy.", "err");
     if (!weeks) return setStatus("Chưa có số liệu: dán link Google Sheet và bấm Quét, hoặc chọn file từ máy.", "err");
-    const byKind = Object.fromEntries(PLATFORMS.map((p) => [p, { ads: [], hoadon: [] }]));
+    const byKind = Object.fromEntries(PLATFORMS.map((p) => [p, { ads: [], qc: [], hoadon: [] }]));
     images.filter((im) => im.include).forEach((im) => byKind[im.platform][im.kind].push(im.file));
     setStatus("Đang tạo báo cáo…");
     $("go").disabled = true;
@@ -854,6 +1109,8 @@ window.BAO_CAO_MKT_CONFIG = {
         week: $("week").value, weekNo: parseInt($("weekNo").value, 10) || null,
         year: $("year").value.trim() || String(new Date().getFullYear()),
         campaign: $("campaign").value.trim(), period: $("period").value.trim(), staff: $("staff").value.trim(),
+        scope: $("scope").value, perSlide: parseInt($("perSlide").value, 10) || 1,
+        dropUnused: $("dropUnused").checked, dropEmptyImageSlides: $("dropEmpty").checked,
       });
       const name = ($("outName").value.trim() || "bao_cao_mkt") + "_" + res.week.replace(/[\/ ]/g, "") + ".pptx";
       const a = document.createElement("a");
@@ -868,7 +1125,7 @@ window.BAO_CAO_MKT_CONFIG = {
         const url = await gas("saveReport", await blobToB64(res.blob), name, parseDriveId($("outFolder").value) || "");
         saved = ` Đã lưu vào Drive: <a href="${esc(url)}" target="_blank" rel="noopener">mở file</a>.`;
       }
-      setStatus(`Đã tạo ${name} (tuần ${res.week}, chèn ${res.nImg} ảnh).`, "ok");
+      setStatus(`Đã tạo ${name}: ${res.slides} slide, chèn ${res.nImg} ảnh, bỏ ${res.dropped} slide mẫu không dùng.`, "ok");
       if (saved) $("status").insertAdjacentHTML("beforeend", saved);
     } catch (err) {
       console.error(err);
