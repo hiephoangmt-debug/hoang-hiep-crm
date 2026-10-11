@@ -145,7 +145,7 @@ const footer = () => `
   <p>Tư vấn &amp; phân phối: <a href="${site.agent.url}"><b>${esc(site.agent.name)}</b> – hoanghiepmt.com</a> · Hotline <a href="tel:${TEL}">${HOTLINE}</a></p>
   <p style="font-size:12px;opacity:.65">Thông tin, hình ảnh và số liệu mang tính tham khảo, có thể thay đổi theo công bố chính thức của chủ đầu tư (${esc(investor)}). Website do đơn vị tư vấn – phân phối vận hành, không phải trang chính thức của Tập đoàn FPT.</p>
 </div></footer>
-<div class="fabs"><a class="fab fab-zalo" href="https://zalo.me/${ZALO}">Zalo</a><a class="fab fab-call" href="tel:${TEL}">📞</a></div>`;
+<div class="fabs"><a class="fab fab-chat" href="https://zalo.me/${ZALO}" aria-label="Chat tư vấn">💬</a><a class="fab fab-zalo" href="https://zalo.me/${ZALO}">Zalo</a><a class="fab fab-call" href="tel:${TEL}" aria-label="Gọi ngay">📞</a></div>`;
 
 const TABS_JS = `<script>
 document.querySelectorAll('[role="tablist"]').forEach(function (list) {

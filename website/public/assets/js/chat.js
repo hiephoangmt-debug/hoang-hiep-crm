@@ -269,6 +269,7 @@
   const BUD = ["Dưới 2 tỷ", "2 – 4 tỷ", "4 – 6 tỷ", "Trên 6 tỷ", "Chưa rõ"];
   const PUR = ["Mua để ở", "Đầu tư cho thuê", "Xây nhà trên đất nền"];
   const PH0 = input.placeholder;
+  let seenT = 0, lastT = 0, curK = "", since = 0; // dùng cho lời mời theo mục đang đọc
   function flowStart() {
     st.flow = { step: 1 };
     say("bot", "Chỉ 2 câu hỏi nhanh để mình gợi ý **đúng sản phẩm** cho bạn 👇\n**Ngân sách** bạn đang cân nhắc khoảng bao nhiêu?");
@@ -343,7 +344,9 @@
     if (teaser) teaser.hidden = true;
     const badge = $("[data-chat-badge]"); if (badge) badge.hidden = true;
     ss.set("fc_chat_seen", "1");
-    if (!log.children.length) {
+    const topic = st.topic; st.topic = null;
+    if (topic) { await loadKb(); typing(false); say("bot", topic.say); setChips(topic.chips); fc().track("chat_topic", { topic: topic.k }); }
+    else if (!log.children.length) {
       const kb = await loadKb();
       const ctx = pageContext(kb);
       const where = ctx && ctx.name ? `**${ctx.name}**` : ctx && ctx.zone ? `**đất nền phân khu ${ctx.zone.code}**` : "**FPT City Đà Nẵng**";
@@ -364,12 +367,55 @@
   $("[data-chat-close]", box).addEventListener("click", close);
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !box.hidden) close(); });
   form.addEventListener("submit", (e) => { e.preventDefault(); handle(input.value); });
-  if (teaser) $("[data-teaser-close]", teaser).addEventListener("click", (e) => { e.stopPropagation(); teaser.hidden = true; ss.set("fc_chat_seen", "1"); });
+  if (teaser) $("[data-teaser-close]", teaser).addEventListener("click", (e) => { e.stopPropagation(); teaser.hidden = true; st.topic = null; seenT = 99; ss.set("fc_chat_seen", "1"); });
 
   const delay = (fc().CONFIG && fc().CONFIG.chatTeaserSeconds) || 0;
   if (delay > 0 && teaser && !ss.get("fc_chat_seen")) {
     setTimeout(() => { if (box.hidden && !document.querySelector("dialog[open]")) teaser.hidden = false; }, delay * 1000);
   }
+
+  /* ---------- Hỏi khéo theo mục khách đang đọc: đọc lâu 1 mục → lời mời đúng chủ đề ---------- */
+  const TOPICS = [
+    { k: "price", re: /bang gia|gia ban|chinh sach ban|gia & chinh sach/, teaser: "Bạn đang xem giá 👀 Muốn nhận giá đúng căn/lô hợp ngân sách của bạn?",
+      say: "Mình thấy bạn đang xem phần **giá bán**. Giá thay đổi theo tầng, hướng, vị trí và từng đợt chính sách – cho mình biết ngân sách, mình gợi ý đúng sản phẩm kèm bảng giá mới nhất nhé.", chips: [FLOW_START, "Bảng giá FPT Plaza 4", "Giá đất nền", "Hỗ trợ vay ngân hàng"] },
+    { k: "legal", re: /phap ly|so do/, teaser: "Bạn quan tâm pháp lý? Mình gửi hồ sơ của đúng sản phẩm bạn chọn.",
+      say: "Bạn đang xem phần **pháp lý**. Bạn quan tâm sản phẩm nào – FPT Plaza 1–5 hay đất nền V1–V6? Mình gửi tài liệu tương ứng để bạn đối chiếu với chủ đầu tư.", chips: ["Pháp lý FPT Plaza 4", "Pháp lý sổ đỏ", "Gặp chuyên viên"] },
+    { k: "loc", re: /vi tri|nam o dau/, teaser: "Từ FPT City đến chỗ bạn làm việc mất bao lâu? Hỏi mình nhé.",
+      say: "Bạn đang xem **vị trí**. Từ FPT City: biển Non Nước ~5 phút, trung tâm Đà Nẵng ~15–20 phút, sân bay ~20 phút (tham khảo). Bạn hay di chuyển đi đâu nhất? Mình gợi ý khu/tòa hợp nhất.", chips: ["Vị trí FPT City", FLOW_START, "Gặp chuyên viên"] },
+    { k: "amen", re: /tien ich/, teaser: "Bạn ưu tiên tiện ích nào – trường học, hồ bơi hay công viên?",
+      say: "Bạn đang xem **tiện ích**. Gia đình bạn ưu tiên gì nhất: trường học cho con, hồ bơi – gym, hay công viên – không gian xanh? Mình chỉ ra tòa/khu gần tiện ích đó.", chips: ["Tiện ích FPT Plaza 4", "Trường học gần dự án", FLOW_START] },
+    { k: "plan", re: /mat bang|loai can|layout|phan khu|dien tich/, teaser: "Đang tìm căn mấy phòng ngủ? Gõ mã căn để xem diện tích ngay.",
+      say: "Bạn đang xem **mặt bằng & loại căn**. Bạn cần mấy phòng ngủ? Hoặc gõ **mã căn** (VD: N-12.12) để mình tra loại căn và diện tích ngay.", chips: ["Loại căn & diện tích", "Căn Duplex", FLOW_START] },
+    { k: "compare", re: /so sanh|khac nhau/, teaser: "Phân vân giữa các tòa? Mình so sánh giúp theo nhu cầu của bạn.",
+      say: "Bạn đang **so sánh** các dự án. Bạn ưu tiên gì: ở ngay, giá đợt đầu hay tiềm năng cho thuê? Mình gợi ý tòa phù hợp nhất.", chips: [FLOW_START, "FPT Plaza 5 khi nào mở bán?", "Khi nào bàn giao?"] },
+    { k: "hot", re: /co gi hot|tin tuc|cap nhat/, teaser: "Muốn biết sản phẩm nào đang có giỏ hàng tốt tuần này?",
+      say: "Bạn đang xem **cập nhật dự án**. Mình gửi bạn giỏ hàng mới nhất của sản phẩm bạn quan tâm nhé – bạn đang nghiêng về căn hộ hay đất nền?", chips: [FLOW_START, "Bảng giá FPT Plaza 4", "Đất nền FPT City"] },
+    { k: "faq", re: /cau hoi/, teaser: "Chưa thấy câu trả lời bạn cần? Hỏi mình ngay 👋",
+      say: "Bạn chưa thấy câu trả lời mình cần? Cứ hỏi trực tiếp – mình trả lời ngay, câu khó mình chuyển chuyên viên.", chips: [FLOW_START, "Gặp chuyên viên"] },
+  ];
+  const DWELL = 8, GAP = 25, MAXT = 3;
+  lastT = 0; curK = ""; since = 0;
+  const shown = new Set();
+  function readingTopic() {
+    const hs = Array.from(document.querySelectorAll("h2")).filter((h) => !box.contains(h));
+    let cur = null;
+    for (const h of hs) { const r = h.getBoundingClientRect(); if (r.top < innerHeight * 0.5) cur = h; else break; }
+    if (!cur) return null;
+    const t = norm(cur.textContent);
+    return TOPICS.find((x) => x.re.test(t)) || null;
+  }
+  setInterval(() => {
+    if (!box.hidden || !teaser || document.hidden) return;
+    const tp = readingTopic(), now = Date.now() / 1000;
+    if (!tp || tp.k !== curK) { curK = tp ? tp.k : ""; since = now; return; }
+    if (now - since < DWELL || shown.has(tp.k) || seenT >= MAXT || now - lastT < GAP || st.leadSent) return;
+    shown.add(tp.k); seenT++; lastT = now;
+    const span = $("[data-chat-open]", teaser); if (span) span.textContent = tp.teaser;
+    st.topic = tp; teaser.hidden = false;
+    const badge = $("[data-chat-badge]"); if (badge) badge.hidden = false;
+    fc().track("chat_nudge", { topic: tp.k });
+  }, 1000);
+
   // cho phép mở chat từ nơi khác: <a href="#chat">
   if (location.hash === "#chat") open();
 
