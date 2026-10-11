@@ -604,12 +604,14 @@
   async function addPending(files) {
     const staff = $("evStaff").value;
     const list = Array.from(files).filter((f) => /^image\//.test(f.type) || B.isPdf(f));
-    const saved = new Set(S.ChungTu.filter((r) => r.duAn === $("evProject").value && r.tuan === $("evWeek").value).map((r) => r.hash).filter(Boolean));
+    // cùng nội dung + cùng nhân sự mới là trùng: hoá đơn chung của nhiều người được lưu cho từng người
+    const have = S.ChungTu.filter((r) => r.duAn === $("evProject").value && r.tuan === $("evWeek").value && r.hash);
+    const saved = new Set(have.map((r) => r.hash + "|" + r.nhanSu).concat(staff ? [] : have.map((r) => r.hash + "|")));
     let skipped = 0;
     for (const f of list) {
       let hash = "";
       try { hash = await hashOf(f); } catch (_) { /* trình duyệt không hỗ trợ: không chống trùng */ }
-      if (hash && (saved.has(hash) || pending.some((x) => x.hash === hash))) { skipped++; continue; }
+      if (hash && (saved.has(hash + "|" + staff) || pending.some((x) => x.hash === hash && x.nhanSu === staff))) { skipped++; continue; }
       const p = { file: f, hash, url: URL.createObjectURL(f), nenTang: "Facebook", loai: B.isPdf(f) ? "hoadon" : "ads", nhanSu: staff, note: "", campaigns: [] };
       if (B.isPdf(f)) {
         try {
@@ -763,7 +765,8 @@
     let wk = null;
     try { wk = await B.ocrWorker(); } catch (_) { /* không đọc được chữ: xếp theo tên file/thư mục */ }
     const rows = [];
-    const seen = new Set(S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w).map((r) => r.hash).filter(Boolean));
+    const have = S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w && r.hash);
+    const seen = new Set(have.map((r) => r.hash + "|" + r.nhanSu)), anyHash = new Set(have.map((r) => r.hash));
     let i = 0;
     for (const f of files) {
       toast(`${pjName}: đọc ảnh trên Drive ${++i}/${files.length} – ${f.name}`, "busy");
@@ -771,14 +774,18 @@
       try {
         const file = await evidenceFile({ fileId: f.id, tenFile: f.name });
         hash = await hashOf(file);
-        if (seen.has(hash)) continue; // cùng nội dung với ảnh đã có: không lấy
-        seen.add(hash);
         text = B.isPdf(file) ? await B.pdfText(file) : wk ? (await wk.recognize(file)).data.text || "" : "";
       } catch (e) { console.error(e); }
       const c = B.classifyText(text, ctx), g = B.guessClass(f.path, f.name);
+      const nhanSu = (c.staff && c.by === "id" ? c.staff : "") || staffFromPath(f.path, f.name) || c.staff || "";
+      if (hash) {
+        // cùng nội dung với ảnh đã có của cùng người (hoặc ảnh chưa rõ người): không lấy
+        if (seen.has(hash + "|" + nhanSu) || (!nhanSu && anyHash.has(hash))) continue;
+        seen.add(hash + "|" + nhanSu); anyHash.add(hash);
+      }
       rows.push({
         tuan: w, duAn: pjName, nenTang: c.platform || g.platform, loai: c.kind || g.kind,
-        nhanSu: (c.staff && c.by === "id" ? c.staff : "") || staffFromPath(f.path, f.name) || c.staff || "",
+        nhanSu,
         fileId: f.id, tenFile: f.name, url: "https://drive.google.com/file/d/" + f.id + "/view", hash,
       });
     }
@@ -813,12 +820,7 @@
       try { r.hash = await hashOf(await evidenceFile(r)); fill.push({ id: r.id, hash: r.hash }); } catch (e) { console.error(e); }
     }
     if (fill.length) await gas("crmSaveMany", "ChungTu", fill);
-    const order = rows.slice().sort((a, b) => (!a.nhanSu - !b.nhanSu) || String(a.ngayTao).localeCompare(String(b.ngayTao)));
-    const seen = new Set(), dup = [];
-    order.forEach((r) => {
-      const keys = ["f:" + r.fileId].concat(r.hash ? ["h:" + r.hash] : []);
-      if (keys.some((k) => seen.has(k))) dup.push(r.id); else keys.forEach((k) => seen.add(k));
-    });
+    const dup = findDups(rows, false);
     if (dup.length) {
       await gas("crmDelete", "ChungTu", dup);
       S.ChungTu = S.ChungTu.filter((x) => !dup.includes(x.id));
@@ -827,12 +829,21 @@
   }
 
   /** Ảnh nên bỏ trong danh sách đang xem: cùng file Drive, cùng nội dung hoặc cùng tên file; giữ ảnh đã gán nhân sự / lưu sớm nhất. */
-  function dupIds(rows) {
+  function dupIds(rows) { return findDups(rows, true); }
+  /**
+   * Trùng = cùng file Drive, hoặc cùng nội dung (và tên file nếu byName) của CÙNG nhân sự – hoá đơn chung của
+   * nhiều người được giữ cho từng người; ảnh chưa gán nhân sự thì trùng với mọi ảnh cùng nội dung.
+   * Giữ ảnh đã gán nhân sự / lưu sớm nhất.
+   */
+  function findDups(rows, byName) {
     const order = rows.slice().sort((a, b) => (!a.nhanSu - !b.nhanSu) || String(a.ngayTao).localeCompare(String(b.ngayTao)));
-    const seen = new Set(), dup = [];
+    const seen = new Set(), anyHash = new Set(), dup = [];
     order.forEach((r) => {
-      const keys = [r.fileId && "f:" + r.fileId, r.hash && "h:" + r.hash, r.tenFile && "n:" + r.nenTang + "|" + String(r.tenFile).trim().toLowerCase()].filter(Boolean);
-      if (keys.some((k) => seen.has(k))) dup.push(r.id); else keys.forEach((k) => seen.add(k));
+      const who = r.nhanSu || "";
+      const keys = [r.fileId && "f:" + r.fileId, r.hash && "h:" + r.hash + "|" + who,
+        byName && r.tenFile && "n:" + r.nenTang + "|" + who + "|" + String(r.tenFile).trim().toLowerCase()].filter(Boolean);
+      if (keys.some((k) => seen.has(k)) || (!who && r.hash && anyHash.has(r.hash))) dup.push(r.id);
+      else { keys.forEach((k) => seen.add(k)); if (r.hash) anyHash.add(r.hash); }
     });
     return dup;
   }

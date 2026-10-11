@@ -364,7 +364,8 @@ function crmSaveMany(name, list) {
 function crmSameEvidence_(rows, o) {
   return rows.filter(function (r) {
     return (o.fileId && r.fileId === o.fileId) ||
-      (o.hash && r.hash === o.hash && r.duAn === o.duAn && String(r.tuan) === String(o.tuan));
+      (o.hash && r.hash === o.hash && r.duAn === o.duAn && String(r.tuan) === String(o.tuan) &&
+        String(r.nhanSu || '') === String(o.nhanSu || '')); // hoá đơn chung: mỗi nhân sự giữ một bản
   })[0];
 }
 
