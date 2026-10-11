@@ -155,7 +155,7 @@
 </style>
 </head>
 <body>
-<div id="loading">Đang tải CRM… <small class="muted">(giao diện v38)</small></div>
+<div id="loading">Đang tải CRM… <small class="muted">(giao diện v39)</small></div>
 <div id="diag" style="max-width:760px;margin:0 auto;padding:0 16px;color:#b42318;font-size:13px"></div>
 <script>
   // Báo lỗi ngay trên màn hình (để biết trang dừng ở đâu khi không mở được bảng điều khiển trình duyệt)
@@ -269,7 +269,7 @@
         <div class="filters">
           <label>Tuần<select id="rpWeek"></select></label>
           <label>Dự án<select id="rpProject"></select></label>
-          <label>Xuất ra<select id="rpFormat"><option value="both">PDF + PPTX</option><option value="pdf">PDF</option><option value="pptx">PPTX</option></select></label>
+          <label>Xuất ra<select id="rpFormat"><option value="both">Trang web + PDF + PPTX</option><option value="web">Chỉ trang web (nhanh)</option><option value="pdf">Trang web + PDF</option><option value="pptx">Trang web + PPTX</option></select></label>
           <label class="row" style="flex-direction:row;gap:6px;color:var(--text)"><input type="checkbox" id="rpKeepMissing" checked> Giữ trang nghiệm thu còn thiếu ảnh (ghi “CHƯA CÓ ẢNH”)</label>
           <button type="button" id="rpGo">Tạo báo cáo</button>
         </div>
@@ -294,8 +294,8 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@74b29ff6ec14cd9c6ec5a34f73c96641e11fa78f/bao-cao-mkt/config.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@74b29ff6ec14cd9c6ec5a34f73c96641e11fa78f/bao-cao-mkt/app.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@74b29ff6ec14cd9c6ec5a34f73c96641e11fa78f/crm/crm.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@3f4e0e7ba1b9b71374935987e511d07350851c3f/bao-cao-mkt/config.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@3f4e0e7ba1b9b71374935987e511d07350851c3f/bao-cao-mkt/app.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@3f4e0e7ba1b9b71374935987e511d07350851c3f/crm/crm.js"></script>
 </body>
 </html>
