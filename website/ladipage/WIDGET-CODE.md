@@ -5,7 +5,7 @@ dán đoạn mã dưới vào: Trình chỉnh sửa LadiPage › Cài đặt tra
 (hoặc kéo phần tử "HTML" vào trang và dán vào đó), rồi Lưu và Xuất bản lại.
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@bedfbe7d764e46189bd72c6efa8217772d17c636/website/public/assets/js/fc-widget.js" data-endpoint="" defer></script>
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@7d57e5d509cf2844b3b2c6e0190d2ecffe64e2f2/website/public/assets/js/fc-widget.js" data-endpoint="" defer></script>
 ```
 
 Khi có link CRM (/exec), điền vào data-endpoint="..." để chat và form lưu khách về CRM.
