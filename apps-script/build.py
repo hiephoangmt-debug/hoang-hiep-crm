@@ -5,6 +5,7 @@
 - crm/crm.html (+ config.js, app.js, crm.js)          -> apps-script/Crm.html    (trang mặc định)
 """
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -16,6 +17,12 @@ CDN = {
 NOTE = "<!-- File sinh tự động bởi apps-script/build.py – sửa trong bao-cao-mkt/ hoặc crm/ rồi chạy lại. -->"
 
 
+# --cdn <commit>: tải config.js / app.js / crm.js từ jsDelivr (GitHub công khai) thay vì nhúng vào HTML.
+# Apps Script xử lý đoạn JS nhúng dài theo cách riêng và làm hỏng nó; script tải ngoài thì không bị đụng tới.
+REPO = "hiephoangmt-debug/hoang-hiep-crm"
+CDN_SHA = sys.argv[sys.argv.index("--cdn") + 1] if "--cdn" in sys.argv else ""
+
+
 def build(src: Path, out_name: str):
     html = src.read_text(encoding="utf-8")
     html = re.sub(r'<script src="https://accounts\.google\.com/gsi/client"[^>]*></script>\n?', "", html)
@@ -25,6 +32,9 @@ def build(src: Path, out_name: str):
         name = ref.split("/")[-1]
         if name in CDN:
             return f'<script src="{CDN[name]}"></script>'
+        if CDN_SHA:
+            rel = (src.parent / ref).resolve().relative_to(ROOT).as_posix()
+            return f'<script src="https://cdn.jsdelivr.net/gh/{REPO}@{CDN_SHA}/{rel}"></script>'
         code = (src.parent / ref).resolve().read_text(encoding="utf-8")
         assert "</script" not in code, ref
         return f"<script>\n{code}</script>"

@@ -44,5 +44,9 @@ Bấm **Tải lên Drive**: ảnh lưu vào `Thư mục chứng từ/<Nhân sự
 `Crm.html` và `Index.html` được sinh từ `crm/` và `bao-cao-mkt/`:
 
 ```
-python3 apps-script/build.py
+git push                                             # đẩy mã nguồn lên GitHub trước
+python3 apps-script/build.py --cdn $(git rev-parse HEAD)
 ```
+Với `--cdn`, `Crm.html`/`Index.html` chỉ chứa giao diện và tải `config.js`, `app.js`, `crm.js` từ jsDelivr
+(repo công khai, ghim theo commit). Không nhúng mã vào HTML: Apps Script xử lý đoạn JS nhúng dài theo cách
+riêng và làm hỏng nó (SyntaxError khi nạp trang). Không có `--cdn` = bản nhúng, chỉ dùng để thử cục bộ.
