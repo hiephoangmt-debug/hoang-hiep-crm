@@ -108,7 +108,7 @@
   .evform { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-top:4px; }
   .evform input { font-size:12px; padding:4px 6px; min-width:0; }
   .evform label { font-size:11px; color:var(--muted); gap:1px; }
-  .evform label.wide { grid-column:1 / -1; }
+  .evform label.wide, .evform .wide { grid-column:1 / -1; }
   .evform button { grid-column:1 / -1; }
   .cstatus { color:var(--ok); font-weight:600; } .cstatus.off { color:var(--muted); }
   #evCheck td.muted { font-size:12px; }
@@ -148,7 +148,7 @@
 </style>
 </head>
 <body>
-<div id="loading">Đang tải CRM… <small class="muted">(giao diện v28)</small></div>
+<div id="loading">Đang tải CRM… <small class="muted">(giao diện v29)</small></div>
 <div id="diag" style="max-width:760px;margin:0 auto;padding:0 16px;color:#b42318;font-size:13px"></div>
 <script>
   // Báo lỗi ngay trên màn hình (để biết trang dừng ở đâu khi không mở được bảng điều khiển trình duyệt)
@@ -287,8 +287,8 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@a12e5260bd0105cc11fd76f9ff80a360b97de8b4/bao-cao-mkt/config.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@a12e5260bd0105cc11fd76f9ff80a360b97de8b4/bao-cao-mkt/app.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@a12e5260bd0105cc11fd76f9ff80a360b97de8b4/crm/crm.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@47df8a650144915a4b8e23a16d881290aeb1be83/bao-cao-mkt/config.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@47df8a650144915a4b8e23a16d881290aeb1be83/bao-cao-mkt/app.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@47df8a650144915a4b8e23a16d881290aeb1be83/crm/crm.js"></script>
 </body>
 </html>
