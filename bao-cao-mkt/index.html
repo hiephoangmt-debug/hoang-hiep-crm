@@ -42,6 +42,7 @@
   .img img { display:block; width:100%; height:120px; object-fit:cover; background:#000; }
   .img figcaption { padding:6px; font-size:12px; }
   .chk { flex-direction:row; align-items:center; gap:6px; color:var(--text); font-size:12px; }
+  .img .ocr { display:block; color:var(--muted); font-size:11px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-top:2px; }
   .chk span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .row { display:flex; gap:4px; margin-top:4px; }
   .row select { flex:1; font-size:12px; padding:4px; min-width:0; }
@@ -96,6 +97,7 @@
         <label>Thời gian triển khai<input id="period" placeholder="15/09 - 27/09/2026"></label>
         <label>Danh sách nhân sự (cách nhau dấu phẩy)<input id="staff" placeholder="Phan Hạnh, Mỹ Linh"></label>
         <label>Tên file xuất<input id="outName" value="bao_cao_mkt"></label>
+        <label>Xuất ra<select id="format"><option value="both">PDF + PPTX</option><option value="pdf">PDF</option><option value="pptx">PPTX</option></select></label>
         <label id="outFolderBox">Lưu vào thư mục Drive (link, trống = My Drive)<input id="outFolder"></label>
       </div>
       <div class="wrap" id="summary" style="margin-top:12px"></div>
@@ -110,13 +112,14 @@
       <p class="note">Kênh và loại slide được đoán theo tên file/thư mục ("tiktok", "zalo", "google"; "hóa đơn", "quảng cáo"/"đang chạy"), mặc định Facebook · Chiến dịch. Ảnh thay vào khung ảnh demo của mẫu; nhiều ảnh hơn thì tự nhân bản slide. Chỉnh lại nếu cần; bỏ tick để không chèn.</p>
       <div class="grid opts">
         <label>Số ảnh mỗi slide<select id="perSlide"><option>1</option><option>2</option><option>4</option></select></label>
+        <label class="chk"><input type="checkbox" id="ocr" checked> <span>Đọc chữ trong ảnh để tự phân loại (hóa đơn / quảng cáo / chiến dịch, nhân sự)</span></label>
         <label class="chk"><input type="checkbox" id="dropUnused" checked> <span>Bỏ các kênh không chạy (không số liệu, không ảnh)</span></label>
         <label class="chk"><input type="checkbox" id="dropEmpty" checked> <span>Bỏ slide ảnh mẫu khi không có ảnh</span></label>
       </div>
       <div class="imgs" id="images"></div>
     </section>
 
-    <button id="go" type="submit">Tạo báo cáo PPTX</button>
+    <button id="go" type="submit">Tạo báo cáo</button>
     <div id="status" class="status" role="status"></div>
   </form>
 </main>

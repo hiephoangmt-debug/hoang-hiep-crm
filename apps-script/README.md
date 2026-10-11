@@ -12,7 +12,8 @@ Chạy bằng chính tài khoản Google của bạn, đọc Drive trực tiếp
    - *Người có quyền truy cập*: **Chỉ mình tôi** (hoặc người trong tổ chức nếu cần)
 5. **Triển khai** → cấp quyền Drive (lần đầu Google báo "chưa xác minh": *Nâng cao › Đi tới …*).
 6. Mở link `/exec` nhận được → chọn dự án → **Quét Drive** → **Tạo báo cáo PPTX**.
-   File được tải về máy và lưu vào Drive (thư mục chỉ định, hoặc My Drive).
+   Chọn *Xuất ra*: PDF + PPTX / PDF / PPTX. File được tải về máy và lưu vào Drive (thư mục chỉ định, hoặc My Drive).
+   Nếu đã triển khai bản cũ: dán lại cả `Code.gs` (có hàm `convertToPdf` mới) và `Index.html`, rồi tạo phiên bản triển khai mới.
 
 Có thể đặt link `/exec` vào trang CRM (`/bao-cao-mkt/`) làm nút truy cập nhanh.
 

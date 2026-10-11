@@ -76,3 +76,36 @@ function saveReport(b64, name, folderId) {
   var folder = folderId ? DriveApp.getFolderById(folderId) : DriveApp.getRootFolder();
   return folder.createFile(blob).getUrl();
 }
+
+/**
+ * Chuyển PPTX báo cáo sang PDF: tải lên Drive dạng Google Slides tạm, xuất PDF, xoá bản tạm.
+ * Lưu PDF vào thư mục chỉ định (hoặc My Drive). Trả về {url, b64}.
+ */
+function convertToPdf(b64, name, folderId) {
+  var boundary = 'bcmkt' + Date.now();
+  var meta = JSON.stringify({ name: name.replace(/\.pptx$/i, '') + ' (tạm)', mimeType: 'application/vnd.google-apps.presentation' });
+  var head = Utilities.newBlob('--' + boundary + '\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n' + meta +
+    '\r\n--' + boundary + '\r\nContent-Type: ' + PPTX_MIME + '\r\n\r\n').getBytes();
+  var tail = Utilities.newBlob('\r\n--' + boundary + '--').getBytes();
+  var payload = head.concat(Utilities.base64Decode(b64)).concat(tail);
+  var res = UrlFetchApp.fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&supportsAllDrives=true', {
+    method: 'post',
+    contentType: 'multipart/related; boundary=' + boundary,
+    payload: payload,
+    headers: { Authorization: 'Bearer ' + ScriptApp.getOAuthToken() },
+    muteHttpExceptions: true,
+  });
+  if (res.getResponseCode() !== 200) {
+    throw new Error('Không chuyển được sang Google Slides (' + res.getResponseCode() + '): ' + res.getContentText().slice(0, 200));
+  }
+  var tmpId = JSON.parse(res.getContentText()).id;
+  try {
+    var pdf = exportBlob_('https://docs.google.com/presentation/d/' + tmpId + '/export/pdf')
+      .setName(name.replace(/\.pptx$/i, '') + '.pdf');
+    var folder = folderId ? DriveApp.getFolderById(folderId) : DriveApp.getRootFolder();
+    var file = folder.createFile(pdf);
+    return { url: file.getUrl(), b64: Utilities.base64Encode(pdf.getBytes()) };
+  } finally {
+    DriveApp.getFileById(tmpId).setTrashed(true);
+  }
+}

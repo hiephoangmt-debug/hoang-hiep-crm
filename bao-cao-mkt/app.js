@@ -750,6 +750,26 @@
     image(f) {
       return this.api("files/" + f.id, { alt: "media" }, "blob");
     },
+    /** PPTX -> Google Slides tạm -> PDF (giới hạn xuất của Drive API: 10 MB). */
+    async convertToPdf(blob, name) {
+      const auth = { Authorization: "Bearer " + this.token };
+      const boundary = "bcmkt" + Date.now();
+      const meta = JSON.stringify({ name: name.replace(/\.pptx$/i, "") + " (tạm)", mimeType: "application/vnd.google-apps.presentation" });
+      const body = new Blob([
+        `--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${meta}\r\n--${boundary}\r\nContent-Type: ${PPTX_MIME}\r\n\r\n`,
+        blob, `\r\n--${boundary}--`,
+      ]);
+      const up = await fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id", {
+        method: "POST", headers: Object.assign({ "Content-Type": "multipart/related; boundary=" + boundary }, auth), body,
+      });
+      if (!up.ok) throw new Error("Không chuyển được sang Google Slides (" + up.status + ")");
+      const { id } = await up.json();
+      try {
+        return { blob: await this.api(`files/${id}/export`, { mimeType: "application/pdf" }, "blob") };
+      } finally {
+        fetch("https://www.googleapis.com/drive/v3/files/" + id, { method: "DELETE", headers: auth }).catch(() => {});
+      }
+    },
   };
 
   // Chạy trong Google Apps Script (HtmlService): đọc Drive qua hàm phía server, không cần OAuth Client ID.
@@ -801,6 +821,79 @@
     const kind = /hoa ?don|\bhd\b|invoice|bill|thanh toan|\bvat\b|receipt|tham chieu/.test(t) ? "hoadon"
       : /quang cao|\bqc\b|dang chay|hoat dong|active/.test(t) ? "qc" : "ads";
     return { platform, kind };
+  }
+
+  // ------------------------------------------------------------ đọc chữ trong ảnh (OCR)
+  const TESS_URL = "https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js";
+  const compact = (s) => norm(s).replace(/[^a-z0-9]/g, "");
+  // Từ khoá (đã bỏ dấu, bỏ khoảng trắng) nhận diện loại ảnh chứng từ
+  const KIND_WORDS = {
+    hoadon: ["baocaolaphoadon", "hoadon", "invoice", "receipt", "bienlai", "dathanhtoan", "phuongthucthanhtoan",
+      "vatreg", "vatamount", "vatrate", "giaodich", "tongsotiendalap", "prepayment", "chitietgiaodich", "sothamchieu", "mathamchieu"],
+    qc: ["banxemtruoc", "cachquangcaocuabanhienthi", "vitriquangcao", "bangfeed", "facebookstories", "facebookreels",
+      "instagramstories", "instagramreels", "noidungadvantage", "sponsored", "guitinnhan", "binhluan", "chiase", "timhieuthem"],
+    ads: ["chiendich", "nhomquangcao", "sotiendachitieu", "dachitieu", "luothienthi", "nguoitiepcan", "lichchay",
+      "chiphitrenmoi", "khachhangtiemnang", "danghoatdong", "trinhquanlyquangcao", "ngansach", "ketqua",
+      "campaign", "adset", "amountspent", "diemcohoi"],
+  };
+  const PLATFORM_WORDS = {
+    Facebook: ["meta", "facebook", "instagram", "messenger"],
+    Tiktok: ["tiktok"],
+    Zalo: ["zalo"],
+    Google: ["googleads", "google"],
+  };
+  const countHits = (t, words) => words.reduce((n, w) => n + (t.split(w).length - 1), 0);
+
+  /**
+   * Phân loại ảnh theo chữ đọc được.
+   * ctx.accounts: [{account, staff}], ctx.staffList: [tên]. Trả về các trường đoán được (có thể thiếu).
+   */
+  function classifyText(text, ctx) {
+    const t = compact(text);
+    const res = {};
+    if (t.length < 15) return res;
+    const ks = Object.entries(KIND_WORDS).map(([k, ws]) => [k, countHits(t, ws)]).sort((a, b) => b[1] - a[1]);
+    // hoá đơn ưu tiên khi có tiêu đề hoá đơn rõ ràng
+    if (/baocaolaphoadon|invoice|hoadon/.test(t) && countHits(t, KIND_WORDS.hoadon) >= 2) res.kind = "hoadon";
+    else if (ks[0][1] > 0 && ks[0][1] > ks[1][1]) res.kind = ks[0][0];
+    const ps = Object.entries(PLATFORM_WORDS).map(([p, ws]) => [p, countHits(t, ws)]).sort((a, b) => b[1] - a[1]);
+    if (ps[0][1] > 0) res.platform = ps[0][0];
+    // nhân sự: ID tài khoản in trên ảnh, rồi tới tên người
+    const digits = (String(text).match(/\d{10,}/g) || []);
+    for (const a of ctx.accounts || []) {
+      const id = (String(a.account).match(/\d{10,}/) || [])[0];
+      if (!id) continue;
+      if (digits.some((d) => d === id || id.startsWith(d) || d.includes(id))) {
+        res.account = a.account;
+        if (a.staff) { res.staff = a.staff; res.by = "id"; }
+        break;
+      }
+    }
+    if (!res.staff) {
+      const hits = (ctx.staffList || []).map((st) => [st, t.split(compact(st)).length - 1]).filter((x) => x[1] > 0)
+        .sort((a, b) => b[1] - a[1]);
+      if (hits.length && (hits.length === 1 || hits[0][1] > hits[1][1])) { res.staff = hits[0][0]; res.by = "name"; }
+    }
+    return res;
+  }
+
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const el = document.createElement("script");
+      el.src = src;
+      el.onload = resolve;
+      el.onerror = () => reject(new Error("Không tải được " + src));
+      document.head.appendChild(el);
+    });
+  }
+  let ocrWorkerP = null;
+  function ocrWorker() {
+    if (!ocrWorkerP) {
+      ocrWorkerP = (window.Tesseract ? Promise.resolve() : loadScript(TESS_URL))
+        .then(() => Tesseract.createWorker(["vie", "eng"], 1))
+        .catch((e) => { ocrWorkerP = null; throw e; });
+    }
+    return ocrWorkerP;
   }
 
   async function pool(items, n, fn) {
@@ -904,7 +997,7 @@
       LS.set("clientId", id);
       google.accounts.oauth2.initTokenClient({
         client_id: id,
-        scope: "https://www.googleapis.com/auth/drive.readonly",
+        scope: "https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/drive.file",
         callback: (r) => {
           if (r.error) return reject(new Error("Đăng nhập Google thất bại: " + r.error));
           Drive.token = r.access_token;
@@ -981,6 +1074,7 @@
         <img src="${im.url}" alt="${esc(im.name)}" loading="lazy">
         <figcaption>
           <label class="chk"><input type="checkbox" data-i="${i}" data-f="include"${im.include ? " checked" : ""}> <span title="${esc(im.path.concat(im.name).join(" / "))}">${esc(im.path.concat(im.name).join(" / "))}</span></label>
+          ${im.ocrNote ? `<small class="ocr" title="${esc(im.ocrNote)}">${esc(im.ocrNote)}</small>` : ""}
           <div class="row">
             <select data-i="${i}" data-f="platform">${PLATFORMS.map((p) => `<option value="${p}"${p === im.platform ? " selected" : ""}>${p === "Tiktok" ? "TikTok" : p}</option>`).join("")}</select>
             <select data-i="${i}" data-f="kind">${Object.entries(KINDS).map(([k, l]) => `<option value="${k}"${k === im.kind ? " selected" : ""}>${l}</option>`).join("")}</select>
@@ -996,6 +1090,37 @@
     const c = guessClass(path, file.name);
     images.push({ file, url: URL.createObjectURL(file), name: file.name, path, platform: c.platform, kind: c.kind,
       staff: guessStaff(path, file.name), include: true });
+  }
+
+  function ocrContext() {
+    return { staffList: staffList(), accounts: Array.from(allAccounts().keys()).map((a) => ({ account: a, staff: staffOf(a) })) };
+  }
+  /** Áp kết quả OCR vào ảnh (chỉ ghi đè những gì đọc được). */
+  function applyOcr(im) {
+    if (im.text == null) return;
+    const r = classifyText(im.text, ocrContext());
+    if (r.kind) im.kind = r.kind;
+    if (r.platform) im.platform = r.platform;
+    if (r.staff) im.staff = r.staff;
+    const parts = [];
+    if (r.kind) parts.push(KINDS[r.kind]);
+    if (r.account) parts.push("TK " + r.account);
+    if (r.staff) parts.push((r.by === "id" ? "theo ID: " : "theo tên: ") + r.staff);
+    im.ocrNote = parts.length ? "Đọc ảnh: " + parts.join(" · ") : "Đọc ảnh: không nhận ra";
+  }
+  async function runOcr() {
+    if (!$("ocr").checked) return;
+    const todo = images.filter((im) => im.text == null);
+    if (!todo.length) return;
+    setStatus("Đang tải bộ đọc chữ (lần đầu ~15 MB)…");
+    const w = await ocrWorker();
+    let done = 0;
+    for (const im of todo) {
+      setStatus(`Đang đọc nội dung ảnh ${++done}/${todo.length}: ${im.name}`);
+      try { im.text = (await w.recognize(im.file)).data.text || ""; } catch (e) { console.error(e); im.text = ""; }
+      applyOcr(im);
+      renderImages();
+    }
   }
 
   function sortImages() {
@@ -1040,6 +1165,7 @@
         sortImages();
         renderImages();
         notes.push(`${found.length} ảnh chứng từ`);
+        await runOcr();
       }
       setStatus("Đã quét xong. " + notes.join(" · ") + ". Kiểm tra lại phân loại ảnh rồi bấm Tạo báo cáo.", "ok");
     } catch (e) {
@@ -1070,20 +1196,48 @@
         dropUnused: $("dropUnused").checked, dropEmptyImageSlides: $("dropEmpty").checked,
       });
       const name = ($("outName").value.trim() || "bao_cao_mkt") + "_" + res.week.replace(/[\/ ]/g, "") + ".pptx";
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(res.blob);
-      a.download = name;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      let saved = "";
-      if (IN_GAS) {
-        setStatus("Đang lưu vào Google Drive…");
-        const url = await gas("saveReport", await blobToB64(res.blob), name, parseDriveId($("outFolder").value) || "");
-        saved = ` Đã lưu vào Drive: <a href="${esc(url)}" target="_blank" rel="noopener">mở file</a>.`;
+      const pdfName = name.replace(/\.pptx$/, ".pdf");
+      const fmt = $("format").value; // pptx | pdf | both
+      const folder = parseDriveId($("outFolder").value) || "";
+      const links = [];
+      const download = (blob, fname) => {
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = fname;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      };
+      if (fmt !== "pdf") {
+        download(res.blob, name);
+        if (IN_GAS) {
+          setStatus("Đang lưu PPTX vào Google Drive…");
+          links.push(["PPTX", await gas("saveReport", await blobToB64(res.blob), name, folder)]);
+        }
       }
-      setStatus(`Đã tạo ${name}: ${res.slides} slide (${res.staffCount} nhân sự), chèn ${res.nImg} ảnh, bỏ ${res.dropped} slide mẫu không dùng.`, "ok");
-      if (saved) $("status").insertAdjacentHTML("beforeend", saved);
+      let pdfErr = "";
+      if (fmt !== "pptx") {
+        setStatus("Đang chuyển sang PDF qua Google Drive…");
+        try {
+          if (IN_GAS) {
+            const r = await gas("convertToPdf", await blobToB64(res.blob), name, folder);
+            download(b64ToBlob(r.b64, "application/pdf"), pdfName);
+            links.push(["PDF", r.url]);
+          } else {
+            await signIn();
+            download((await Drive.convertToPdf(res.blob, name)).blob, pdfName);
+          }
+        } catch (err) {
+          console.error(err);
+          pdfErr = " Không xuất được PDF: " + err.message + (fmt === "pdf" ? " – đã tải PPTX thay thế." : "");
+          if (fmt === "pdf") download(res.blob, name);
+        }
+      }
+      setStatus(`Đã tạo báo cáo: ${res.slides} slide (${res.staffCount} nhân sự), chèn ${res.nImg} ảnh, bỏ ${res.dropped} slide mẫu không dùng.` + pdfErr, pdfErr ? "err" : "ok");
+      if (links.length) {
+        $("status").insertAdjacentHTML("beforeend", " Đã lưu vào Drive: " +
+          links.map(([l, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${l}</a>`).join(" · ") + ".");
+      }
     } catch (err) {
       console.error(err);
       setStatus("Lỗi: " + err.message, "err");
@@ -1092,7 +1246,7 @@
     }
   }
 
-  window.BaoCaoMkt = { loadData, aggregate, buildReport, toNum, norm, parseDriveId, guessClass, staffNameFromAccount, Drive };
+  window.BaoCaoMkt = { loadData, aggregate, buildReport, toNum, norm, parseDriveId, guessClass, staffNameFromAccount, classifyText, Drive };
 
   document.addEventListener("DOMContentLoaded", () => {
     $("year").value = String(new Date().getFullYear());
@@ -1114,11 +1268,15 @@
       if (!f) return;
       try { setStatus(readWorkbook(await f.arrayBuffer(), f.name), "ok"); } catch (e) { weeks = null; setStatus(e.message, "err"); }
     });
-    $("imgFiles").addEventListener("change", () => {
+    $("imgFiles").addEventListener("change", async () => {
       Array.from($("imgFiles").files).forEach((f) => addImage(f, ["Từ máy"]));
       $("imgFiles").value = "";
       sortImages();
       renderImages();
+      try {
+        await runOcr();
+        setStatus(`Đã thêm ảnh. Kiểm tra lại phân loại rồi bấm Tạo báo cáo.`, "ok");
+      } catch (e) { setStatus("Lỗi đọc ảnh: " + e.message, "err"); }
     });
     $("images").addEventListener("change", (e) => {
       const el = e.target, i = el.dataset.i;
@@ -1131,10 +1289,12 @@
       if (acc == null) return;
       accStaff[acc] = e.target.value;
       LS.set("accStaff", JSON.stringify(accStaff));
+      images.forEach(applyOcr);
       renderAccounts();
+      renderImages();
     });
     $("staff").addEventListener("change", () => {
-      images.forEach((im) => { if (!staffList().includes(im.staff)) im.staff = guessStaff(im.path, im.name); });
+      images.forEach((im) => { if (!staffList().includes(im.staff)) im.staff = guessStaff(im.path, im.name); applyOcr(im); });
       renderAccounts();
       renderImages();
     });
