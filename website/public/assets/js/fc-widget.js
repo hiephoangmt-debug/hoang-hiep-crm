@@ -20,7 +20,7 @@
   var DRIVES = {"FPT Plaza 4":"https://drive.google.com/drive/folders/1Kd_kJYOkwz8eV5D2eYalKlrqgVymEDYB"};
   var IMG = "https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/5051b81aefcfec407044094b96b5dfc7fdd47de8/website/public/assets/img/";
   var CSS = ":host { all: initial; --navy-900:#0a1630; --navy-800:#0f2350; --navy-700:#16306b; --navy-500:#2453b3; --navy-100:#eef3fb; --orange:#ff8a1f; --orange-600:#f26a0f; --orange-700:#d4560b; --ink:#0f1b33; --muted:#5a6782; --line:#dfe5f0; font-family: \"Be Vietnam Pro\", system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif; font-size: 16px; line-height: 1.5; color: #0f1b33; }\n*, *::before, *::after { box-sizing: border-box; }\n[hidden] { display: none !important; }\na { color: inherit; }\nbutton, input { font: inherit; }\n.floating { position: fixed; right: 18px; bottom: 24px; display: grid; gap: 12px; z-index: 2147483000; justify-items: end; }\n.fab { position: relative; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; text-decoration: none; font-weight: 800; font-size: 14px; box-shadow: 0 10px 24px rgba(0,0,0,.25); border: 0; cursor: pointer; padding: 0; }\n.fab-call { background: #e4572e; color: #fff; font-size: 22px; animation: ring 1.8s infinite; }\n.fab-zalo { background: #0068ff; color: #fff; }\n.fab-chat { background: linear-gradient(135deg, var(--orange), var(--orange-600)); color: var(--navy-900); width: 62px; height: 62px; }\n.fab-chat::before { content: \"\"; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid var(--orange); opacity: .6; animation: halo 2s ease-out infinite; }\n.fab-badge { position: absolute; top: -2px; right: -2px; min-width: 20px; height: 20px; border-radius: 10px; background: #e4572e; color: #fff; font-size: 12px; display: grid; place-items: center; border: 2px solid #fff; }\n.fab-label { position: absolute; right: calc(100% + 10px); top: 50%; transform: translateY(-50%); background: var(--navy-900); color: #fff; font-size: 13px; font-weight: 700; padding: 6px 10px; border-radius: 8px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s; }\n.fab:hover .fab-label, .fab:focus-visible .fab-label { opacity: 1; }\n.fab:focus-visible, .act:focus-visible, .chat-chips button:focus-visible, .chat-form button:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }\n@keyframes ring { 0%, 50%, 100% { transform: rotate(0); } 10%, 30% { transform: rotate(-12deg); } 20%, 40% { transform: rotate(12deg); } }\n@keyframes halo { 0% { transform: scale(.9); opacity: .7; } 100% { transform: scale(1.35); opacity: 0; } }\n.chat-teaser { position: fixed; right: 92px; bottom: 150px; z-index: 2147483001; max-width: 250px; background: #fff; color: var(--ink); padding: 12px 30px 12px 14px; border-radius: 14px 14px 4px 14px; box-shadow: 0 18px 50px -20px rgba(10,22,48,.45); font-size: 14px; font-weight: 600; cursor: pointer; border: 1px solid var(--line); animation: pop .3s ease-out; }\n.chat-teaser-x { position: absolute; top: 4px; right: 6px; border: 0; background: none; font-size: 18px; color: var(--muted); cursor: pointer; line-height: 1; }\n@keyframes pop { from { transform: translateY(8px) scale(.96); opacity: 0; } to { transform: none; opacity: 1; } }\n.chatbox { position: fixed; right: 18px; bottom: 96px; z-index: 2147483002; width: min(380px, calc(100vw - 24px)); height: min(580px, calc(100vh - 120px)); background: #fff; border-radius: 20px; box-shadow: 0 30px 80px -20px rgba(10,22,48,.5); display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); animation: pop .25s ease-out; }\n.chat-head { display: flex; align-items: center; gap: 10px; padding: 14px 16px; background: linear-gradient(135deg, var(--navy-900), var(--navy-700)); color: #fff; }\n.chat-head b { display: block; font-size: 15px; }\n.chat-head small { font-size: 12px; opacity: .8; display: flex; align-items: center; gap: 6px; }\n.chat-head .dot { width: 8px; height: 8px; border-radius: 50%; background: #3ddc84; display: inline-block; }\n.chat-ava { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.12); display: grid; place-items: center; font-size: 20px; }\n.chat-x { margin-left: auto; border: 0; background: none; color: #fff; font-size: 26px; cursor: pointer; line-height: 1; }\n.chat-log { flex: 1; overflow-y: auto; padding: 16px 14px; display: flex; flex-direction: column; gap: 10px; background: var(--navy-100); }\n.msg { display: flex; flex-direction: column; max-width: 86%; }\n.msg.bot { align-self: flex-start; }\n.msg.me { align-self: flex-end; align-items: flex-end; }\n.bubble { padding: 10px 13px; border-radius: 16px; font-size: 14px; line-height: 1.5; word-wrap: break-word; }\n.msg.bot .bubble { background: #fff; border-bottom-left-radius: 4px; box-shadow: 0 2px 6px rgba(10,22,48,.06); }\n.msg.me .bubble { background: var(--navy-800); color: #fff; border-bottom-right-radius: 4px; }\n.bubble a { color: var(--navy-500); font-weight: 700; }\n.msg-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }\n.act { border: 1px solid var(--line); background: #fff; color: var(--navy-800); border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: none; }\n.act.primary { background: var(--orange); border-color: var(--orange); color: var(--navy-900); }\n.typing .bubble { display: flex; gap: 4px; padding: 14px; }\n.typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); animation: blink 1.2s infinite; }\n.typing i:nth-child(2) { animation-delay: .2s; } .typing i:nth-child(3) { animation-delay: .4s; }\n@keyframes blink { 0%, 80%, 100% { opacity: .3; } 40% { opacity: 1; } }\n.chat-chips { display: flex; gap: 6px; overflow-x: auto; padding: 8px 12px; background: #fff; border-top: 1px solid var(--line); scrollbar-width: none; }\n.chat-chips:empty { display: none; }\n.chat-chips button { flex: 0 0 auto; border: 1px solid var(--orange); background: #fff7ef; color: var(--orange-700); border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 700; cursor: pointer; }\n.chat-form { display: flex; gap: 8px; padding: 10px 12px; border-top: 1px solid var(--line); background: #fff; }\n.chat-form input { flex: 1; min-width: 0; border: 1.5px solid var(--line); border-radius: 999px; padding: 10px 14px; font-size: 16px; color: var(--ink); background: #fff; }\n.chat-form input:focus { outline: none; border-color: var(--navy-500); }\n.chat-form button { width: 42px; height: 42px; border-radius: 50%; border: 0; background: var(--navy-800); color: var(--orange); font-size: 16px; cursor: pointer; }\n.chat-note { margin: 0; padding: 0 12px 8px; font-size: 11px; color: var(--muted); text-align: center; background: #fff; }\n@media (max-width: 640px) {\n  .floating { right: 12px; bottom: 16px; gap: 10px; }\n  .fab { width: 50px; height: 50px; }\n  .fab-chat { width: 56px; height: 56px; }\n  .fab-label { display: none; }\n  .chat-teaser { right: 76px; bottom: 120px; }\n  .chatbox { right: 0; left: 0; bottom: 0; width: 100%; height: min(88vh, 640px); border-radius: 20px 20px 0 0; }\n}\n@media (prefers-reduced-motion: reduce) { .fab-call, .fab-chat::before, .chat-teaser, .chatbox, .typing i { animation: none; } }\n";
-  var HTML = "\n<div class=\"floating\" aria-label=\"Liên hệ nhanh\">\n  <button type=\"button\" class=\"fab fab-chat\" data-chat-open aria-label=\"Chat tư vấn tự động\" aria-expanded=\"false\" aria-controls=\"chatbox\">\n    <svg width=\"26\" height=\"26\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"M12 3C6.5 3 2 6.6 2 11c0 2.4 1.3 4.5 3.4 6l-.9 3.6c-.1.4.3.7.7.5L9.3 19c.9.2 1.8.3 2.7.3 5.5 0 10-3.6 10-8.1S17.5 3 12 3Zm-4 9.3a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Zm4 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Zm4 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Z\"/></svg>\n    <span class=\"fab-badge\" data-chat-badge>1</span><span class=\"fab-label\">Chat tư vấn 24/7</span>\n  </button>\n  <a href=\"#\" class=\"fab fab-zalo\" data-zalo-link target=\"_blank\" rel=\"noopener\" aria-label=\"Chat Zalo\">Zalo<span class=\"fab-label\">Nhắn Zalo</span></a>\n  <a href=\"tel:\" class=\"fab fab-call\" data-hotline-link aria-label=\"Gọi hotline\">📞<span class=\"fab-label\" data-hotline></span></a>\n</div>\n<div class=\"chat-teaser\" data-chat-teaser hidden><button type=\"button\" class=\"chat-teaser-x\" aria-label=\"Ẩn\" data-teaser-close>×</button><span data-chat-open>👋 Bạn cần bảng giá hay mặt bằng căn hộ? Hỏi mình nhé!</span></div>\n<section class=\"chatbox\" id=\"chatbox\" role=\"dialog\" aria-label=\"Chat tư vấn tự động\" hidden>\n  <header class=\"chat-head\"><span class=\"chat-ava\" aria-hidden=\"true\">🤖</span><div><b>Trợ lý FPT City</b><small><i class=\"dot\"></i>Trả lời tự động ngay lập tức</small></div><button type=\"button\" class=\"chat-x\" data-chat-close aria-label=\"Đóng chat\">×</button></header>\n  <div class=\"chat-log\" data-chat-log aria-live=\"polite\"></div>\n  <div class=\"chat-chips\" data-chat-chips></div>\n  <form class=\"chat-form\" data-chat-form autocomplete=\"off\"><input name=\"q\" maxlength=\"400\" placeholder=\"Nhập câu hỏi hoặc mã căn (VD: N-12.12)…\" aria-label=\"Nội dung chat\"><button type=\"submit\" aria-label=\"Gửi\">➤</button></form>\n  <p class=\"chat-note\">Trợ lý tự động · Thông tin tham khảo, giá chính xác do chuyên viên gửi</p>\n</section>";
+  var HTML = "\n<div class=\"floating\" aria-label=\"Liên hệ nhanh\">\n  <button type=\"button\" class=\"fab fab-chat\" data-chat-open aria-label=\"Chat tư vấn tự động\" aria-expanded=\"false\" aria-controls=\"chatbox\">\n    <svg width=\"26\" height=\"26\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"M12 3C6.5 3 2 6.6 2 11c0 2.4 1.3 4.5 3.4 6l-.9 3.6c-.1.4.3.7.7.5L9.3 19c.9.2 1.8.3 2.7.3 5.5 0 10-3.6 10-8.1S17.5 3 12 3Zm-4 9.3a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Zm4 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Zm4 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Z\"/></svg>\n    <span class=\"fab-badge\" data-chat-badge>1</span><span class=\"fab-label\">Chat tư vấn 24/7</span>\n  </button>\n  <a href=\"#\" class=\"fab fab-zalo\" data-zalo-link target=\"_blank\" rel=\"noopener\" aria-label=\"Chat Zalo\">Zalo<span class=\"fab-label\">Nhắn Zalo</span></a>\n  <a href=\"tel:\" class=\"fab fab-call\" data-hotline-link aria-label=\"Gọi hotline\">📞<span class=\"fab-label\" data-hotline></span></a>\n</div>\n<div class=\"chat-teaser\" data-chat-teaser hidden><button type=\"button\" class=\"chat-teaser-x\" aria-label=\"Ẩn\" data-teaser-close>×</button><span data-chat-open>👋 Ngân sách của bạn mua được gì ở FPT City? Chọn nhanh, mình gợi ý trong 30 giây!</span></div>\n<section class=\"chatbox\" id=\"chatbox\" role=\"dialog\" aria-label=\"Chat tư vấn tự động\" hidden>\n  <header class=\"chat-head\"><span class=\"chat-ava\" aria-hidden=\"true\">🤖</span><div><b>Trợ lý FPT City</b><small><i class=\"dot\"></i>Trả lời tự động ngay lập tức</small></div><button type=\"button\" class=\"chat-x\" data-chat-close aria-label=\"Đóng chat\">×</button></header>\n  <div class=\"chat-log\" data-chat-log aria-live=\"polite\"></div>\n  <div class=\"chat-chips\" data-chat-chips></div>\n  <form class=\"chat-form\" data-chat-form autocomplete=\"off\"><input name=\"q\" maxlength=\"400\" placeholder=\"Nhập câu hỏi hoặc mã căn (VD: N-12.12)…\" aria-label=\"Nội dung chat\"><button type=\"submit\" aria-label=\"Gửi\">➤</button></form>\n  <p class=\"chat-note\">Trợ lý tự động · Thông tin tham khảo, giá chính xác do chuyên viên gửi</p>\n</section>";
 
   function project() {
     var p = location.pathname.toLowerCase(), m;
@@ -407,7 +407,8 @@
     const kb = await loadKb();
     const ctx = st.ctx || pageContext(kb);
     const proj = ctx && ctx.name ? ctx.name : ctx && ctx.zone ? "Đất nền FPT City " + ctx.zone.code : ctx && ctx.land ? "Đất nền FPT City" : fc().project || "Website";
-    const need = ("Chat: " + st.asked.slice(-3).join(" | ")).slice(0, 200);
+    const fl = st.flow || {};
+    const need = ("Chat: " + [fl.purpose, ...st.asked.slice(-3)].filter(Boolean).join(" | ")).slice(0, 200);
     // Chưa nối CRM (không có endpoint): không được báo "đã chuyển số" vì số không được lưu ở đâu cả
     if (!(fc().CONFIG && fc().CONFIG.leadEndpoint)) {
       st.awaitPhone = false;
@@ -415,8 +416,8 @@
         [{ label: "Nhắn Zalo", primary: true, href: $("[data-zalo-link]")?.href || "#" }, { label: "📞 Gọi ngay", href: $("[data-hotline-link]")?.href || "tel:" }]);
       return;
     }
-    try { await fc().sendLead({ name: info.name || "Khách chat", phone: info.phone, need, project: proj, source: "chat" }); } catch (e) { /* vẫn cảm ơn khách */ }
-    st.leadSent = true; st.awaitPhone = false; ss.set("fc_chat_lead", "1");
+    try { await fc().sendLead({ name: info.name || "Khách chat", phone: info.phone, need, project: proj, source: "chat", budget: fl.budget && fl.budget !== "Chưa rõ" ? fl.budget : "" }); } catch (e) { /* vẫn cảm ơn khách */ }
+    st.leadSent = true; st.awaitPhone = false; ss.set("fc_chat_lead", "1"); input.placeholder = PH0;
     const acts = fc().hasDrive ? [{ label: "📂 Mở tài liệu Google Drive", primary: true, href: fc().drive }] : [];
     say("bot", `Cảm ơn ${info.name || "bạn"} 🙏 Mình đã chuyển số **${info.phone}** cho chuyên viên – bạn sẽ được gọi/nhắn Zalo trong ít phút.${fc().hasDrive ? "\nTrong lúc chờ, bạn xem tài liệu dự án tại đây:" : ""}`, acts);
   }
@@ -440,12 +441,45 @@
     return null;
   }
 
+
+  /* ---------- Luồng "Gợi ý theo ngân sách": 2 câu hỏi nhẹ rồi mới xin số (đổi thông tin hữu ích lấy số Zalo) ---------- */
+  const FLOW_START = "🎯 Gợi ý theo ngân sách";
+  const BUD = ["Dưới 2 tỷ", "2 – 4 tỷ", "4 – 6 tỷ", "Trên 6 tỷ", "Chưa rõ"];
+  const PUR = ["Mua để ở", "Đầu tư cho thuê", "Xây nhà trên đất nền"];
+  const PH0 = input.placeholder;
+  function flowStart() {
+    st.flow = { step: 1 };
+    say("bot", "Chỉ 2 câu hỏi nhanh để mình gợi ý **đúng sản phẩm** cho bạn 👇\n**Ngân sách** bạn đang cân nhắc khoảng bao nhiêu?");
+    setChips(BUD);
+  }
+  function flowRecommend(purpose) {
+    const f = st.flow; f.purpose = purpose; f.step = 3;
+    const land = /Xây nhà/.test(purpose), rent = /thuê/.test(purpose);
+    const pick = land
+      ? "Hợp nhất là **đất nền FPT City**: lô phổ biến ~90–105 m² (V5), ~100 m² (V2, V3), lô lớn 200–350 m² (V1)."
+      : rent
+        ? "Nhu cầu thuê quanh khu đô thị đến từ kỹ sư, giảng viên, sinh viên. Bạn có thể xem **FPT Plaza 1–2** (đã bàn giao, có sẵn cư dân), **FPT Plaza 3** (hoàn thiện, bàn giao dự kiến 2026) hoặc **FPT Plaza 4** (đang mở bán)."
+        : "Để ở, bạn có thể xem **FPT Plaza 1–2** (đã bàn giao, ở ngay), **FPT Plaza 3** (hoàn thiện, bàn giao dự kiến 2026) hoặc **FPT Plaza 4** (đang mở bán, dự kiến bàn giao Q2/2027).";
+    const bud = f.budget && f.budget !== "Chưa rõ" ? `Với ngân sách **${f.budget}**, chuyên viên sẽ lọc đúng căn/lô trong tầm tiền (giá thay đổi theo tầng, hướng, đợt chính sách).` : "Chuyên viên sẽ lọc theo ngân sách khi bạn cho biết.";
+    const zalo = { label: "Tôi tự nhắn Zalo", href: $("[data-zalo-link]")?.href || "#" };
+    if (st.leadSent) { say("bot", `${pick}\n${bud}`, [zalo]); setChips(["Bảng giá FPT Plaza 4", "Đất nền FPT City", "Gặp chuyên viên"]); return; }
+    st.awaitPhone = true;
+    input.placeholder = "Nhập số Zalo của bạn (VD: 0905 123 456)";
+    say("bot", `${pick}\n${bud}\n👉 Mình soạn **3 phương án đúng ngân sách + bảng giá + mặt bằng** và gửi qua Zalo cho bạn. Cho mình xin **số Zalo** (kèm tên nếu tiện) nhé – chỉ dùng để gửi tài liệu, bạn dừng bất cứ lúc nào.`, [zalo]);
+    setChips(["Gặp chuyên viên", "Bảng giá FPT Plaza 4"]);
+    input.focus();
+  }
+
   async function handle(raw) {
     const text = String(raw || "").trim().slice(0, 400);
     if (!text) return;
     say("me", text);
     input.value = "";
     const kb = await loadKb();
+
+    if (text === FLOW_START) { flowStart(); return; }
+    if (st.flow && st.flow.step === 1 && BUD.includes(text)) { st.flow.budget = text; st.flow.step = 2; say("bot", "Bạn mua với mục đích gì?"); setChips(PUR); return; }
+    if (st.flow && st.flow.step === 2 && PUR.includes(text)) { flowRecommend(text); return; }
 
     const ph = extractPhone(text);
     if (!ph) st.asked.push(text.slice(0, 80));
@@ -493,9 +527,9 @@
       const where = ctx && ctx.name ? `**${ctx.name}**` : ctx && ctx.zone ? `**đất nền phân khu ${ctx.zone.code}**` : "**FPT City Đà Nẵng**";
       say("bot", `Xin chào 👋 Mình là trợ lý tự động, hỗ trợ thông tin ${where} 24/7.\nBạn muốn xem gì? Chọn nhanh bên dưới hoặc gõ câu hỏi / mã căn (VD: **N-12.12**).`);
       const p4 = ctx && ctx.name === "FPT Plaza 4";
-      setChips(p4 ? ["Bảng giá FPT Plaza 4", "Loại căn & diện tích", "Căn Duplex", "Khi nào bàn giao?", "Vị trí dự án", "Gặp chuyên viên"]
-        : ctx && (ctx.zone || ctx.land) ? ["Giá đất nền", "Pháp lý sổ đỏ", "Vị trí", "Gặp chuyên viên"]
-          : ["Bảng giá FPT Plaza 4", "FPT Plaza 5 khi nào mở bán?", "Đất nền FPT City", "Vị trí FPT City", "Gặp chuyên viên"]);
+      setChips(p4 ? [FLOW_START, "Bảng giá FPT Plaza 4", "Loại căn & diện tích", "Căn Duplex", "Khi nào bàn giao?", "Gặp chuyên viên"]
+        : ctx && (ctx.zone || ctx.land) ? [FLOW_START, "Giá đất nền", "Pháp lý sổ đỏ", "Vị trí", "Gặp chuyên viên"]
+          : [FLOW_START, "Bảng giá FPT Plaza 4", "FPT Plaza 5 khi nào mở bán?", "Đất nền FPT City", "Vị trí FPT City", "Gặp chuyên viên"]);
     }
     setTimeout(() => input.focus(), 50);
     fc().track("chat_open", { project: fc().project });

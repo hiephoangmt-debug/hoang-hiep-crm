@@ -62,6 +62,18 @@ for (const z of zones) {
   add(`dat-nen-${z.code.toLowerCase()}`, page(`<div style="display:flex;gap:30px;align-items:center"><div style="width:170px;height:170px;border-radius:30px;background:linear-gradient(135deg,#ff8a1f,#f26a0f);color:#0a1630;display:grid;place-items:center;font-size:84px;font-weight:800">${z.code}</div><div><h1>Đất nền FPT City<br><b>phân khu ${z.code}</b></h1></div></div>${a ? `<div style="margin-top:22px"><span class="chip o">Lô phổ biến ${a[0] === a[1] ? "~" + a[0] : a[0] + "–" + a[1]} m²</span></div>` : ""}<div style="margin-top:22px">${z.traits.map((t) => `<div style="display:flex;gap:16px;align-items:center;background:rgba(255,255,255,.1);border-radius:16px;padding:16px 24px;margin-bottom:12px;font-size:32px"><span style="color:#ff8a1f;font-weight:800">✓</span>${esc(t)}</div>`).join("")}</div>${foot("Thông tin tham khảo, lô cụ thể theo giỏ hàng cập nhật")}`));
 }
 
+
+// 5. Tiện ích nội khu / ngoại khu (hình minh hoạ dạng thẻ biểu tượng)
+const cards = (items) => `<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px">${items.map(([i, t, d]) => `<div style="background:rgba(255,255,255,.1);border-radius:20px;padding:22px 24px;border-top:6px solid #ff8a1f"><div style="font-size:54px;line-height:1">${i}</div><div style="font-size:34px;font-weight:800;margin-top:10px">${esc(t)}</div><div style="font-size:26px;opacity:.85;margin-top:4px">${esc(d)}</div></div>`).join("")}</div>`;
+add("tien-ich-noi-khu", page(`<h1>Tiện ích <b>nội khu</b> FPT City</h1><p class="sub">Sống, học và làm việc trong một khu đô thị</p>${cards([
+  ["🎓", "Giáo dục liên cấp", "Hệ thống trường FPT, Đại học FPT"], ["🏢", "FPT Complex", "Tổ hợp văn phòng công nghệ"],
+  ["🌳", "Công viên & kênh sinh thái", "Cây xanh, đường dạo bộ"], ["🛒", "Thương mại – dịch vụ", "Shophouse, siêu thị, cà phê"],
+  ["🏊", "Hồ bơi & gym", "Tại các tòa FPT Plaza"], ["🛡️", "Đô thị thông minh", "Vận hành công nghệ của FPT"]])}${foot("Hình minh hoạ · tiện ích cụ thể theo từng dự án")}`));
+add("tien-ich-ngoai-khu", page(`<h1>Tiện ích <b>ngoại khu</b> quanh FPT City</h1><p class="sub">Biển, danh thắng, sân bay và phố cổ trong tầm di chuyển ngắn</p>${cards([
+  ["🏖️", "Biển Tân Trà – Non Nước", "~5 phút"], ["⛰️", "Ngũ Hành Sơn", "~10 phút"],
+  ["🏙️", "Trung tâm Đà Nẵng", "~15–20 phút"], ["✈️", "Sân bay quốc tế Đà Nẵng", "~20 phút"],
+  ["🏮", "Phố cổ Hội An", "~20 phút"], ["🌉", "Sông Cổ Cò & cầu vòm", "Cảnh quan ven sông"]])}${foot("Hình minh hoạ · thời gian di chuyển tham khảo")}`));
+
 const b = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell" });
 const pg = await b.newPage({ viewport: { width: 1200, height: 700 } });
 await pg.route("**/*", (r) => (r.request().url().startsWith("http://i.test/") ? r.fulfill({ contentType: "text/html; charset=utf-8", body: pg._html }) : r.abort())); // không tải font ngoài → dùng font hệ thống

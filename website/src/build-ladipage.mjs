@@ -85,10 +85,12 @@ ${note ? `<p class="small" style="margin-top:12px">${esc(note)}</p>` : ""}</div>
 const head = (h) => `
 <div style="text-align:center;max-width:780px;margin:0 auto 32px"><p class="eyebrow">${esc(h.eyebrow)}</p><h2 class="title">${esc(h.title)}</h2>${h.sub ? `<p style="color:var(--muted)">${h.sub}</p>` : ""}</div>`;
 
+const ASSET_SHA = "0000000000000000000000000000000000000000";
+const RAW = `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/${ASSET_SHA}/website/public/assets/img`;
 const SZ = JSON.parse(readFileSync(join(HERE, "..", "public", "assets", "img", "minh-hoa", "sizes.json"), "utf8"));
-const MH = `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/4f3511e5400317c7aa4d347e8d4bbef347f9f377/website/public/assets/img/minh-hoa`;
+const MH = `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/${ASSET_SHA}/website/public/assets/img/minh-hoa`;
 const SZP = JSON.parse(readFileSync(join(HERE, "..", "public", "assets", "img", "phoi-canh", "sizes.json"), "utf8"));
-const PCB = `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/752586208f3f6ca6b2c494b09dba7b0f34dbfdba/website/public/assets/img/phoi-canh`;
+const PCB = `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/${ASSET_SHA}/website/public/assets/img/phoi-canh`;
 const PC = { 1: ["fpt-city-phoi-canh-tong-the-1", "Phối cảnh tổng thể khu đô thị FPT City Đà Nẵng nhìn từ trên cao, sông Cổ Cò, cầu vòm và quảng trường trung tâm"], 2: ["fpt-city-phoi-canh-tong-the-2", "Phối cảnh toàn cảnh khu đô thị FPT City Đà Nẵng: hồ trung tâm, các phân khu nhà ở, sông Cổ Cò và cầu vòm"] };
 const photo = (n) => `<figure style="margin:0"><img src="${PCB}/${PC[n][0]}.webp" alt="${esc(PC[n][1])}" width="1600" height="${SZP[PC[n][0]]}" loading="lazy"><figcaption class="small" style="text-align:center;margin-top:8px">Hình ảnh minh hoạ phối cảnh tổng thể theo tài liệu giới thiệu của chủ đầu tư; thực tế có thể thay đổi.</figcaption></figure>`;
 const photoSection = (nums, title) => `<section><div class="wrap">${head({ eyebrow: "Phối cảnh", title })}<div style="max-width:1100px;margin:0 auto;display:grid;gap:18px">${nums.map(photo).join("")}</div></div></section>`;
@@ -170,6 +172,19 @@ const page = ({ slug, title, description, keywords, body, tabs }) => `<!doctype 
 <meta name="description" content="${esc(description)}">
 <meta name="keywords" content="${esc(keywords)}">
 <link rel="canonical" href="${link(slug)}">
+<link rel="icon" type="image/png" href="${RAW}/favicon-96.png">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:site_name" content="FPT City Đà Nẵng">
+<meta property="og:title" content="${esc(title)}">
+<meta property="og:description" content="${esc(description)}">
+<meta property="og:url" content="${link(slug)}">
+<meta property="og:image" content="${RAW}/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="${RAW}/og-cover.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
@@ -422,36 +437,117 @@ ${band("Đã đến lúc biết căn nào phù hợp với bạn.", "Nhận 3 c�
     description: "Khu đô thị FPT City Đà Nẵng 181 ha: đất nền phân khu V1–V6, căn hộ FPT Plaza 1, 2, 3, 4, 5. Gửi ngân sách, nhận 3 gợi ý phù hợp kèm bảng giá và mặt bằng.",
     keywords: "FPT City Đà Nẵng, đất nền FPT City, căn hộ FPT Plaza, FPT Plaza 1, FPT Plaza 2, FPT Plaza 3, FPT Plaza 4, FPT Plaza 5, đất FPT Đà Nẵng, giá đất FPT City",
     body: `
-${hero({
-      eyebrow: "Khu đô thị công nghệ phía Nam Đà Nẵng", h1: `<span>FPT City</span> Đà Nẵng`,
-      lead: "Khu đô thị hơn 181 ha của Tập đoàn FPT: Đại học FPT, FPT Complex, đất nền sổ đỏ và chuỗi căn hộ FPT Plaza. Ngân sách của bạn đang hợp với sản phẩm nào?",
-      points: ["Chủ đầu tư: Công ty CP Đô thị FPT Đà Nẵng", "Đất nền V1–V6 · Căn hộ FPT Plaza 1–5", "Giỏ hàng & giá cập nhật hằng tuần"],
-      cta: "Tìm sản phẩm hợp ngân sách của tôi", ghost: "Khám phá dự án", ghostHref: "#san-pham", formTitle: "Ngân sách của bạn hợp với sản phẩm nào?",
-      docs: ["🗺️ Bản đồ phân lô đất nền V1–V6", "💰 Bảng giá căn hộ FPT Plaza 1–5", "📐 Mặt bằng & layout căn hộ", "🏦 Chính sách, hỗ trợ vay"],
-      formHtml: form("h", { button: "Gửi tôi 3 gợi ý phù hợp nhất", budget: ["Dưới 2 tỷ", "2 – 4 tỷ", "4 – 6 tỷ", "6 – 10 tỷ", "Trên 10 tỷ"] }),
-      stats: [["181+ ha", "Quy mô khu đô thị"], ["~952 tr USD", "Tổng vốn đầu tư dự kiến"], ["5", "Tòa căn hộ FPT Plaza"], ["~5'", "Đến biển Non Nước"]],
-    })}
-<section id="tong-quan"><div class="wrap two">
-  <div><p class="eyebrow">Tổng quan</p><h2 class="title">Đô thị công nghệ FPT City: sống, học tập và làm việc trong một</h2>
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow" style="color:var(--orange)">Khu đô thị công nghệ phía Nam Đà Nẵng · Bảng giá 2026</p>
+      <h1><span>FPT City Đà Nẵng</span> – Đất nền &amp; căn hộ FPT Plaza 1, 2, 3, 4, 5</h1>
+      <p class="lead">Khu đô thị hơn 181 ha của Tập đoàn FPT: Đại học FPT, FPT Complex, đất nền phân khu V1–V6 và chuỗi căn hộ FPT Plaza. Ngân sách của bạn đang hợp với sản phẩm nào?</p>
+      <ul class="points"><li>Chủ đầu tư: Công ty CP Đô thị FPT Đà Nẵng</li><li>Đất nền V1–V6 · Căn hộ FPT Plaza 1–5</li><li>Giỏ hàng &amp; giá cập nhật hằng tuần</li></ul>
+      <div class="cta-row"><a class="btn" href="#dang-ky">Tìm sản phẩm hợp ngân sách của tôi</a><a class="btn btn-ghost" href="#gioi-thieu">Xem có gì hot</a></div>
+    </div>
+    <div>${photo(1)}</div>
+  </div>
+</header>
+
+<section id="dang-ky" class="dark"><div class="wrap two">
+  <div><p class="eyebrow">Những con số nổi bật</p><h2 class="title">FPT City trong những con số – và bảng giá bạn chưa thấy</h2>
+  <div class="stats" style="grid-template-columns:1fr 1fr;margin-top:18px">
+    <div class="stat"><b>181+ ha</b><span>Quy mô khu đô thị</span></div><div class="stat"><b>~952 tr USD</b><span>Tổng vốn đầu tư dự kiến</span></div>
+    <div class="stat"><b>5</b><span>Tòa căn hộ FPT Plaza</span></div><div class="stat"><b>V1–V6</b><span>Phân khu đất nền</span></div>
+    <div class="stat"><b>1.395</b><span>Căn hộ tại FPT Plaza 4</span></div><div class="stat"><b>~5 phút</b><span>Đến biển Non Nước</span></div>
+  </div></div>
+  <div class="card"><h2>Ngân sách của bạn hợp với sản phẩm nào?</h2>
+    <ul class="docs"><li>🗺️ Bản đồ phân lô đất nền V1–V6</li><li>💰 Bảng giá căn hộ FPT Plaza 1–5</li><li>📐 Mặt bằng &amp; layout căn hộ</li><li>🏦 Chính sách, hỗ trợ vay</li></ul>
+    ${form("h", { button: "Gửi tôi 3 gợi ý phù hợp nhất", budget: ["Dưới 2 tỷ", "2 – 4 tỷ", "4 – 6 tỷ", "6 – 10 tỷ", "Trên 10 tỷ"] })}</div>
+</div></section>
+
+<section id="gioi-thieu"><div class="wrap">${head({ eyebrow: "Giới thiệu", title: "Có gì hot ở FPT City Đà Nẵng hiện nay?", sub: "Những điểm khách đang hỏi nhiều nhất – thông tin theo công bố của chủ đầu tư, có thể thay đổi." })}
+  <div class="grid3">
+    <div class="tile"><span class="pill on">ĐANG MỞ BÁN</span><h3>FPT Plaza 4 – 1.395 căn</h3><p>Đủ điều kiện bán nhà ở hình thành trong tương lai theo xác nhận của Sở Xây dựng Đà Nẵng (11/2025). Dự kiến bàn giao Quý II/2027.</p><a class="go" href="${link("fpt-plaza-4")}">Xem FPT Plaza 4 →</a></div>
+    <div class="tile"><span class="pill on">SẮP BÀN GIAO</span><h3>FPT Plaza 3 – 837 căn</h3><p>Hai tòa The Empire &amp; The Wealthe, 25 tầng. Bàn giao dự kiến trong năm 2026 theo chủ đầu tư.</p><a class="go" href="${link("fpt-plaza-3")}">Xem FPT Plaza 3 →</a></div>
+    <div class="tile"><span class="pill up">SẮP MỞ BÁN</span><h3>FPT Plaza 5 – nhận đăng ký</h3><p>Giai đoạn tiếp theo của chuỗi FPT Plaza. Đăng ký để là người đầu tiên biết giá khi chủ đầu tư công bố.</p><a class="go" href="${link("fpt-plaza-5")}">Xem FPT Plaza 5 →</a></div>
+    <div class="tile"><span class="pill">ĐẤT NỀN</span><h3>Đất nền V1 – V6</h3><p>Lô góc, lô biệt thự, lô ~100 m² cho nhà ở và cho thuê. Giỏ hàng cập nhật hằng tuần.</p><a class="go" href="${link("land")}">Xem đất nền →</a></div>
+    <div class="tile"><span class="pill re">Ở NGAY</span><h3>FPT Plaza 1 &amp; 2</h3><p>Đã bàn giao, có cư dân sinh sống. Nhận giỏ hàng chuyển nhượng và xem căn thực tế.</p><a class="go" href="${link("fpt-plaza-1")}">Xem căn đang chuyển nhượng →</a></div>
+    <div class="tile"><span class="pill">HỆ SINH THÁI</span><h3>Đại học FPT &amp; FPT Complex</h3><p>Hàng nghìn kỹ sư, giảng viên và sinh viên ngay trong khu đô thị tạo nhu cầu ở và thuê quanh năm.</p><a class="go" href="#tong-quan">Xem tổng quan →</a></div>
+  </div>
+  <p style="text-align:center;margin-top:26px"><a class="btn" href="#dang-ky">Nhận bảng giá mới nhất</a></p></div></section>
+
+<section id="tong-quan" class="tint"><div class="wrap two">
+  <div><p class="eyebrow">Tổng quan</p><h2 class="title">Tổng quan khu đô thị FPT City Đà Nẵng</h2>
   <p><b>FPT City Đà Nẵng</b> được quy hoạch đồng bộ với khuôn viên Đại học FPT, khu công viên phần mềm, khu nhà ở, hạ tầng, cây xanh và dịch vụ công cộng. Hàng nghìn kỹ sư và sinh viên tạo nhu cầu ở và thuê lớn quanh năm.</p>
   <p>Hai dòng sản phẩm chính: <a href="${link("land")}">đất nền FPT City</a> theo phân khu V1 – V6 và chuỗi <a href="${link("apt")}">căn hộ FPT Plaza</a> từ Plaza 1 đến Plaza 5.</p></div>
-  ${specCard("Thông tin khu đô thị", [["Tên dự án", "Khu đô thị FPT City Đà Nẵng"], ["Chủ đầu tư", investor], ["Quy mô", "Hơn 181 ha"], ["Vốn đầu tư", "Khoảng 952 triệu USD (dự kiến)"], ["Vị trí", "Phía Nam TP. Đà Nẵng"], ["Sản phẩm", "Đất nền, nhà phố, biệt thự, căn hộ FPT Plaza"]])}
+  ${specCard("Thông tin khu đô thị", [["Tên dự án", "Khu đô thị FPT City Đà Nẵng"], ["Chủ đầu tư", investor], ["Quy mô", "Hơn 181 ha"], ["Vốn đầu tư", "Khoảng 952 triệu USD (dự kiến)"], ["Vị trí", "Phía Nam TP. Đà Nẵng"], ["Sản phẩm", "Đất nền, căn hộ FPT Plaza 1–5"], ["Cập nhật", "Tháng 10/2026"]])}
 </div></section>
-<section id="san-pham" class="dark"><div class="wrap"><div style="text-align:center;margin-bottom:28px"><p class="eyebrow">Sản phẩm</p><h2 class="title">Bạn đang tìm nhà để ở hay lô đất để xây?</h2></div>
-  <div class="grid2">
-    <a class="tile" href="${link("land")}"><span class="pill">V1 · V2 · V3 · V4 · V5 · V6</span><h3>Đất nền FPT City</h3><p>Lô đất sổ đỏ để xây nhà ở, biệt thự, nhà cho thuê. Gửi ngân sách, nhận 3 lô phù hợp.</p><span class="go">Xem đất nền →</span></a>
-    <a class="tile" href="${link("apt")}"><span class="pill">Plaza 1 · 2 · 3 · 4 · 5</span><h3>Căn hộ FPT Plaza</h3><p>Từ căn đã bàn giao đến dự án sắp mở bán. Tòa nào hợp với ngân sách của bạn?</p><span class="go">Xem căn hộ →</span></a>
+
+<section id="phap-ly"><div class="wrap">${head({ eyebrow: "Pháp lý", title: "Pháp lý dự án FPT City Đà Nẵng: những điều cần biết", sub: "Thông tin tham khảo. Hồ sơ pháp lý từng sản phẩm được gửi kèm khi tư vấn; bạn nên đối chiếu trực tiếp với chủ đầu tư." })}
+  <div class="grid3">
+    <div class="tile"><h3>Chủ đầu tư rõ ràng</h3><p>${esc(investor)}.</p></div>
+    <div class="tile"><h3>FPT Plaza 4 đủ điều kiện bán</h3><p>Tháng 11/2025, Sở Xây dựng Đà Nẵng xác nhận căn hộ FPT Plaza 4 đủ điều kiện bán nhà ở hình thành trong tương lai.</p></div>
+    <div class="tile"><h3>Đất nền sổ đỏ từng lô</h3><p>Các lô trong khu đô thị được cấp sổ đỏ từng lô; mỗi lô được kiểm tra pháp lý cụ thể trước khi giao dịch.</p></div>
+    <div class="tile"><h3>FPT Plaza 1 &amp; 2 đã bàn giao</h3><p>Giao dịch hiện tại là chuyển nhượng; hỗ trợ thủ tục sang tên và phương án vay.</p></div>
+    <div class="tile"><h3>FPT Plaza 3 sắp bàn giao</h3><p>Bàn giao dự kiến trong năm 2026 theo công bố chính thức của chủ đầu tư.</p></div>
+    <div class="tile"><h3>Cần hồ sơ chi tiết?</h3><p>Để lại thông tin, chuyên viên gửi bộ tài liệu pháp lý của đúng sản phẩm bạn quan tâm.</p><a class="go" href="#dang-ky">Nhận hồ sơ pháp lý →</a></div>
   </div></div></section>
-${gotoSec("Chuỗi căn hộ FPT Plaza 1 – 5", plazaTiles(""), "Căn hộ")}
-${gotoSec("Đất nền theo phân khu V1 – V6", zoneTiles(""), "Đất nền")}
-${band("Bạn đã biết ngân sách của mình mua được gì ở FPT City chưa?", "Nhận 3 gợi ý phù hợp")}
-${illusSection("chuoi-fpt-plaza", "Quy mô", "Chuỗi căn hộ FPT Plaza 1–5 trong một biểu đồ", "Biểu đồ quy mô căn hộ FPT Plaza 1, 2, 3, 4, 5 tại FPT City Đà Nẵng", 730)}
-${photoSection([1, 2], "Phối cảnh tổng thể khu đô thị FPT City")}
+
 ${distances()}
-${amenities()}
-${ctaSection({ title: "Nhận bảng giá FPT City: đất nền & căn hộ trong một lần", intro: "Để lại thông tin, bạn nhận được:", formTitle: "Ngân sách của bạn hợp với sản phẩm nào?", formHtml: form("c", { button: "Gửi tôi 3 gợi ý phù hợp nhất", budget: ["Dưới 2 tỷ", "2 – 4 tỷ", "4 – 6 tỷ", "6 – 10 tỷ", "Trên 10 tỷ"] }), steps: ["<b>3 gợi ý</b> theo ngân sách (đất nền hoặc căn hộ).", "<b>Bản đồ phân lô</b> V1 – V6 và giỏ hàng đất nền.", "<b>Bảng giá & mặt bằng</b> căn hộ FPT Plaza 1 – 5.", "<b>Chính sách</b> thanh toán, hỗ trợ vay ngân hàng."] })}
+
+<section id="tien-ich" class="tint"><div class="wrap">${head({ eyebrow: "Tiện ích", title: "Tiện ích nội khu & ngoại khu FPT City Đà Nẵng", sub: "Hình minh hoạ; tiện ích cụ thể theo từng dự án." })}
+  <div class="grid2"><div><h3 style="text-align:center">Tiện ích nội khu</h3>${illus("tien-ich-noi-khu", "Tiện ích nội khu FPT City Đà Nẵng: trường học, FPT Complex, công viên, thương mại, hồ bơi, đô thị thông minh")}</div>
+  <div><h3 style="text-align:center">Tiện ích ngoại khu</h3>${illus("tien-ich-ngoai-khu", "Tiện ích ngoại khu quanh FPT City: biển Non Nước, Ngũ Hành Sơn, sân bay, Hội An, trung tâm Đà Nẵng")}</div></div></div></section>
+
+<section id="mat-bang"><div class="wrap">${head({ eyebrow: "Mặt bằng", title: "Mặt bằng, phân khu & loại căn hộ FPT City", sub: "Chọn dự án để xem mặt bằng, loại căn và diện tích chi tiết." })}
+  <div class="grid2"><div><h3 style="text-align:center">Căn hộ FPT Plaza 1 – 5</h3>${illus("chuoi-fpt-plaza", "Biểu đồ quy mô căn hộ FPT Plaza 1, 2, 3, 4, 5 tại FPT City Đà Nẵng")}</div>
+  <div><h3 style="text-align:center">Đất nền phân khu V1 – V6</h3>${illus("dat-nen-phan-khu", "Biểu đồ diện tích lô đất nền FPT City theo phân khu V1 đến V6")}</div></div>
+  <h3 style="text-align:center;margin:34px 0 14px">Chọn tòa FPT Plaza</h3>${plazaTiles("")}
+  <h3 style="text-align:center;margin:34px 0 14px">Chọn phân khu đất nền</h3>${zoneTiles("")}</div></section>
+
+<section id="gia-chinh-sach" class="tint"><div class="wrap">${head({ eyebrow: "Giá bán & chính sách", title: "Bảng giá & chính sách bán hàng FPT City 2026", sub: "Giá thay đổi theo tầng, hướng, vị trí lô và từng đợt chính sách nên không niêm yết cố định – nhận bảng giá cập nhật qua Zalo." })}
+  <div class="tbl"><table><thead><tr><th>Sản phẩm</th><th>Tình trạng</th><th>Diện tích tham khảo</th><th>Giá</th></tr></thead><tbody>
+    <tr><th scope="row">FPT Plaza 1</th><td>Đã bàn giao · Chuyển nhượng</td><td>1PN ~46 m² · 2PN ~68 m² · 3PN ~82 m²</td><td><a href="#dang-ky">Nhận giá →</a></td></tr>
+    <tr><th scope="row">FPT Plaza 2</th><td>Đã bàn giao · Chuyển nhượng</td><td>2PN ~56–70 m² · 3PN ~75–90 m²</td><td><a href="#dang-ky">Nhận giá →</a></td></tr>
+    <tr><th scope="row">FPT Plaza 3</th><td>Hoàn thiện · Bàn giao 2026</td><td>1PN từ ~41,9 m² · 2PN ~54,6–67 m²</td><td><a href="#dang-ky">Nhận giá →</a></td></tr>
+    <tr><th scope="row">FPT Plaza 4</th><td>Đang mở bán</td><td>1PN ~45–50 m² · 2PN ~59–74 m² · Duplex đến ~269 m²</td><td><a href="#dang-ky">Nhận giá →</a></td></tr>
+    <tr><th scope="row">FPT Plaza 5</th><td>Sắp mở bán (dự kiến)</td><td>1PN ~45–50 m² · 2PN ~56–75 m²</td><td><a href="#dang-ky">Đăng ký báo giá →</a></td></tr>
+    <tr><th scope="row">Đất nền V1 – V6</th><td>Đang bán · giỏ hàng theo tuần</td><td>~90–105 m² · ~100 m² · lô lớn 200–350 m²</td><td><a href="#dang-ky">Nhận giá →</a></td></tr>
+  </tbody></table></div>
+  <div class="grid3" style="margin-top:26px">
+    <div class="tile"><h3>Thanh toán theo tiến độ</h3><p>Với căn đang bán từ chủ đầu tư, chính sách thanh toán theo từng đợt; chuyên viên gửi bản mới nhất.</p></div>
+    <div class="tile"><h3>Ngân hàng hỗ trợ vay</h3><p>Có phương án vay ngân hàng; điều kiện và lãi suất do ngân hàng quyết định, chuyên viên hỗ trợ ước tính trước.</p></div>
+    <div class="tile"><h3>Hỗ trợ chuyển nhượng</h3><p>Với FPT Plaza 1 &amp; 2: hỗ trợ kiểm tra pháp lý, thủ tục sang tên và xem căn thực tế.</p></div>
+  </div></div></section>
+
+<section id="hinh-anh"><div class="wrap">${head({ eyebrow: "Hình ảnh", title: "Hình ảnh phối cảnh & mặt bằng dự án FPT City", sub: "Hình minh hoạ theo tài liệu giới thiệu của chủ đầu tư; thực tế có thể thay đổi." })}
+  <div class="grid2">${photo(1)}${photo(2)}</div>
+  <div class="grid3" style="margin-top:18px">
+    <figure style="margin:0"><img src="${IMG}/mat-bang-fpt-plaza-4-tang-3-16-sm.webp" alt="Mặt bằng tầng 3–16 FPT Plaza 4 Đà Nẵng" width="960" height="679" loading="lazy" style="width:100%;height:240px;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:14px"></figure>
+    <figure style="margin:0"><img src="${IMG}/layout/layout-fpt-plaza-4-n-11-sm.webp" alt="Layout căn hộ 2 phòng ngủ N-X.11 FPT Plaza 4" width="520" height="735" loading="lazy" style="width:100%;height:240px;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:14px"></figure>
+    <figure style="margin:0"><img src="${IMG}/layout/layout-fpt-plaza-4-n-06-sm.webp" alt="Layout căn hộ 2 phòng ngủ + 1 N-X.06 FPT Plaza 4" width="520" height="735" loading="lazy" style="width:100%;height:240px;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:14px"></figure>
+  </div>
+  <p style="text-align:center;margin-top:22px"><a class="btn" href="${link("fpt-plaza-4")}">Xem mặt bằng 5 tầng FPT Plaza 4</a></p></div></section>
+
+<section id="tin-tuc" class="tint"><div class="wrap">${head({ eyebrow: "Tin tức", title: "Tin tức & cập nhật dự án FPT City Đà Nẵng" })}
+  <div class="grid2">
+    <a class="tile" href="${link("fpt-plaza-4")}"><span class="pill on">11/2025</span><h3>FPT Plaza 4 đủ điều kiện bán nhà ở hình thành trong tương lai</h3><p>Sở Xây dựng Đà Nẵng xác nhận căn hộ FPT Plaza 4 đủ điều kiện bán.</p><span class="go">Đọc thêm →</span></a>
+    <a class="tile" href="${link("fpt-plaza-4")}"><span class="pill">03/2025</span><h3>FPT Plaza 4 khởi công</h3><p>Dự án 1.395 căn hộ, 2 khối N &amp; S, dự kiến bàn giao Quý II/2027.</p><span class="go">Đọc thêm →</span></a>
+    <a class="tile" href="${link("fpt-plaza-3")}"><span class="pill on">2026 (dự kiến)</span><h3>FPT Plaza 3 chuẩn bị bàn giao</h3><p>Hai tòa The Empire &amp; The Wealthe, bàn giao dự kiến trong năm 2026 theo chủ đầu tư.</p><span class="go">Đọc thêm →</span></a>
+    <a class="tile" href="${link("fpt-plaza-5")}"><span class="pill up">Chờ công bố</span><h3>FPT Plaza 5 nhận đăng ký sớm</h3><p>Chủ đầu tư chưa công bố bảng giá; đăng ký để được báo ngay khi có thông tin.</p><span class="go">Đọc thêm →</span></a>
+  </div></div></section>
+
 ${faqSection("Câu hỏi thường gặp về FPT City Đà Nẵng", faq)}
-${band("Một phút để biết FPT City có gì phù hợp với bạn.", "Nhận 3 gợi ý phù hợp")}`,
+
+<section id="lien-he"><div class="wrap">${head({ eyebrow: "Liên hệ", title: "Liên hệ tư vấn FPT City Đà Nẵng" })}
+  <div class="grid3">
+    <a class="tile" href="tel:${TEL}"><span class="pill">GỌI NGAY</span><h3>${HOTLINE}</h3><p>Hotline tư vấn đất nền &amp; căn hộ FPT Plaza.</p><span class="go">Gọi ngay →</span></a>
+    <a class="tile" href="https://zalo.me/${ZALO}"><span class="pill re">ZALO</span><h3>Nhắn Zalo tư vấn</h3><p>Nhận bảng giá, mặt bằng và giỏ hàng qua Zalo.</p><span class="go">Mở Zalo →</span></a>
+    <a class="tile" href="${site.agent.url}"><span class="pill">WEBSITE</span><h3>${site.agent.name}</h3><p>Đơn vị tư vấn – phân phối. hoanghiepmt.com</p><span class="go">Xem website →</span></a>
+  </div></div></section>
+
+<section id="dang-ky-cuoi" class="dark"><div class="wrap two">
+  <div><p class="eyebrow">Ưu đãi thông tin</p><h2 class="title">Với ngân sách của bạn, FPT City có bao nhiêu lựa chọn?</h2><p>Chọn ngân sách – chuyên viên soạn sẵn cho bạn:</p>
+  <ol class="steps"><li><b>3 phương án</b> đúng tầm tiền (đất nền hoặc căn hộ).</li><li><b>Bản đồ phân lô</b> V1–V6 và <b>bảng giá</b> FPT Plaza 1–5.</li><li><b>Mặt bằng, layout</b> và dòng tiền thanh toán dễ so sánh.</li><li><b>Hỗ trợ vay</b> và lịch xem thực tế cùng chuyên viên.</li></ol></div>
+  <div class="card"><h2>Nhận 3 gợi ý phù hợp qua Zalo</h2>${form("c", { button: "Gửi tôi 3 gợi ý phù hợp nhất", budget: ["Dưới 2 tỷ", "2 – 4 tỷ", "4 – 6 tỷ", "6 – 10 tỷ", "Trên 10 tỷ"] })}</div>
+</div></section>`,
   });
 }
 
@@ -461,3 +557,8 @@ const manifest = pages.map((p) => ({ slug: p.slug, name: p.name, path: pathOf(p.
 for (const p of pages) writeFileSync(join(OUT, `${p.slug}.html`), page(p));
 writeFileSync(join(OUT, "manifest.json"), JSON.stringify(manifest, null, 2) + "\n");
 console.log(`Đã dựng ${pages.length} trang LadiPage vào ladipage/`);
+
+// Giá trị dán vào "Cài đặt trang" của LadiPage (tiêu đề, mô tả, từ khoá, ảnh chia sẻ, favicon)
+const seoMd = [`# Cài đặt trang LadiPage (SEO)\n\nDán vào Cài đặt trang › SEO của từng trang. Ảnh chia sẻ 1200×630, favicon 96×96.\n\n- **Hình ảnh khi chia sẻ:** \`${RAW}/og-cover.png\`\n- **Favicon:** \`${RAW}/favicon-96.png\`\n`,
+  ...pages.map((p) => `## ${p.name}\n- **Đường dẫn:** ${pathOf(p.slug)}\n- **Tiêu đề trang:** ${p.title}\n- **Mô tả trang:** ${p.description}\n- **Từ khoá:** ${p.keywords}\n`)].join("\n");
+writeFileSync(join(OUT, "SEO-SETTINGS.md"), seoMd);

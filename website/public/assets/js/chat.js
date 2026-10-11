@@ -229,7 +229,8 @@
     const kb = await loadKb();
     const ctx = st.ctx || pageContext(kb);
     const proj = ctx && ctx.name ? ctx.name : ctx && ctx.zone ? "Đất nền FPT City " + ctx.zone.code : ctx && ctx.land ? "Đất nền FPT City" : fc().project || "Website";
-    const need = ("Chat: " + st.asked.slice(-3).join(" | ")).slice(0, 200);
+    const fl = st.flow || {};
+    const need = ("Chat: " + [fl.purpose, ...st.asked.slice(-3)].filter(Boolean).join(" | ")).slice(0, 200);
     // Chưa nối CRM (không có endpoint): không được báo "đã chuyển số" vì số không được lưu ở đâu cả
     if (!(fc().CONFIG && fc().CONFIG.leadEndpoint)) {
       st.awaitPhone = false;
@@ -237,8 +238,8 @@
         [{ label: "Nhắn Zalo", primary: true, href: $("[data-zalo-link]")?.href || "#" }, { label: "📞 Gọi ngay", href: $("[data-hotline-link]")?.href || "tel:" }]);
       return;
     }
-    try { await fc().sendLead({ name: info.name || "Khách chat", phone: info.phone, need, project: proj, source: "chat" }); } catch (e) { /* vẫn cảm ơn khách */ }
-    st.leadSent = true; st.awaitPhone = false; ss.set("fc_chat_lead", "1");
+    try { await fc().sendLead({ name: info.name || "Khách chat", phone: info.phone, need, project: proj, source: "chat", budget: fl.budget && fl.budget !== "Chưa rõ" ? fl.budget : "" }); } catch (e) { /* vẫn cảm ơn khách */ }
+    st.leadSent = true; st.awaitPhone = false; ss.set("fc_chat_lead", "1"); input.placeholder = PH0;
     const acts = fc().hasDrive ? [{ label: "📂 Mở tài liệu Google Drive", primary: true, href: fc().drive }] : [];
     say("bot", `Cảm ơn ${info.name || "bạn"} 🙏 Mình đã chuyển số **${info.phone}** cho chuyên viên – bạn sẽ được gọi/nhắn Zalo trong ít phút.${fc().hasDrive ? "\nTrong lúc chờ, bạn xem tài liệu dự án tại đây:" : ""}`, acts);
   }
@@ -262,12 +263,45 @@
     return null;
   }
 
+
+  /* ---------- Luồng "Gợi ý theo ngân sách": 2 câu hỏi nhẹ rồi mới xin số (đổi thông tin hữu ích lấy số Zalo) ---------- */
+  const FLOW_START = "🎯 Gợi ý theo ngân sách";
+  const BUD = ["Dưới 2 tỷ", "2 – 4 tỷ", "4 – 6 tỷ", "Trên 6 tỷ", "Chưa rõ"];
+  const PUR = ["Mua để ở", "Đầu tư cho thuê", "Xây nhà trên đất nền"];
+  const PH0 = input.placeholder;
+  function flowStart() {
+    st.flow = { step: 1 };
+    say("bot", "Chỉ 2 câu hỏi nhanh để mình gợi ý **đúng sản phẩm** cho bạn 👇\n**Ngân sách** bạn đang cân nhắc khoảng bao nhiêu?");
+    setChips(BUD);
+  }
+  function flowRecommend(purpose) {
+    const f = st.flow; f.purpose = purpose; f.step = 3;
+    const land = /Xây nhà/.test(purpose), rent = /thuê/.test(purpose);
+    const pick = land
+      ? "Hợp nhất là **đất nền FPT City**: lô phổ biến ~90–105 m² (V5), ~100 m² (V2, V3), lô lớn 200–350 m² (V1)."
+      : rent
+        ? "Nhu cầu thuê quanh khu đô thị đến từ kỹ sư, giảng viên, sinh viên. Bạn có thể xem **FPT Plaza 1–2** (đã bàn giao, có sẵn cư dân), **FPT Plaza 3** (hoàn thiện, bàn giao dự kiến 2026) hoặc **FPT Plaza 4** (đang mở bán)."
+        : "Để ở, bạn có thể xem **FPT Plaza 1–2** (đã bàn giao, ở ngay), **FPT Plaza 3** (hoàn thiện, bàn giao dự kiến 2026) hoặc **FPT Plaza 4** (đang mở bán, dự kiến bàn giao Q2/2027).";
+    const bud = f.budget && f.budget !== "Chưa rõ" ? `Với ngân sách **${f.budget}**, chuyên viên sẽ lọc đúng căn/lô trong tầm tiền (giá thay đổi theo tầng, hướng, đợt chính sách).` : "Chuyên viên sẽ lọc theo ngân sách khi bạn cho biết.";
+    const zalo = { label: "Tôi tự nhắn Zalo", href: $("[data-zalo-link]")?.href || "#" };
+    if (st.leadSent) { say("bot", `${pick}\n${bud}`, [zalo]); setChips(["Bảng giá FPT Plaza 4", "Đất nền FPT City", "Gặp chuyên viên"]); return; }
+    st.awaitPhone = true;
+    input.placeholder = "Nhập số Zalo của bạn (VD: 0905 123 456)";
+    say("bot", `${pick}\n${bud}\n👉 Mình soạn **3 phương án đúng ngân sách + bảng giá + mặt bằng** và gửi qua Zalo cho bạn. Cho mình xin **số Zalo** (kèm tên nếu tiện) nhé – chỉ dùng để gửi tài liệu, bạn dừng bất cứ lúc nào.`, [zalo]);
+    setChips(["Gặp chuyên viên", "Bảng giá FPT Plaza 4"]);
+    input.focus();
+  }
+
   async function handle(raw) {
     const text = String(raw || "").trim().slice(0, 400);
     if (!text) return;
     say("me", text);
     input.value = "";
     const kb = await loadKb();
+
+    if (text === FLOW_START) { flowStart(); return; }
+    if (st.flow && st.flow.step === 1 && BUD.includes(text)) { st.flow.budget = text; st.flow.step = 2; say("bot", "Bạn mua với mục đích gì?"); setChips(PUR); return; }
+    if (st.flow && st.flow.step === 2 && PUR.includes(text)) { flowRecommend(text); return; }
 
     const ph = extractPhone(text);
     if (!ph) st.asked.push(text.slice(0, 80));
@@ -315,9 +349,9 @@
       const where = ctx && ctx.name ? `**${ctx.name}**` : ctx && ctx.zone ? `**đất nền phân khu ${ctx.zone.code}**` : "**FPT City Đà Nẵng**";
       say("bot", `Xin chào 👋 Mình là trợ lý tự động, hỗ trợ thông tin ${where} 24/7.\nBạn muốn xem gì? Chọn nhanh bên dưới hoặc gõ câu hỏi / mã căn (VD: **N-12.12**).`);
       const p4 = ctx && ctx.name === "FPT Plaza 4";
-      setChips(p4 ? ["Bảng giá FPT Plaza 4", "Loại căn & diện tích", "Căn Duplex", "Khi nào bàn giao?", "Vị trí dự án", "Gặp chuyên viên"]
-        : ctx && (ctx.zone || ctx.land) ? ["Giá đất nền", "Pháp lý sổ đỏ", "Vị trí", "Gặp chuyên viên"]
-          : ["Bảng giá FPT Plaza 4", "FPT Plaza 5 khi nào mở bán?", "Đất nền FPT City", "Vị trí FPT City", "Gặp chuyên viên"]);
+      setChips(p4 ? [FLOW_START, "Bảng giá FPT Plaza 4", "Loại căn & diện tích", "Căn Duplex", "Khi nào bàn giao?", "Gặp chuyên viên"]
+        : ctx && (ctx.zone || ctx.land) ? [FLOW_START, "Giá đất nền", "Pháp lý sổ đỏ", "Vị trí", "Gặp chuyên viên"]
+          : [FLOW_START, "Bảng giá FPT Plaza 4", "FPT Plaza 5 khi nào mở bán?", "Đất nền FPT City", "Vị trí FPT City", "Gặp chuyên viên"]);
     }
     setTimeout(() => input.focus(), 50);
     fc().track("chat_open", { project: fc().project });

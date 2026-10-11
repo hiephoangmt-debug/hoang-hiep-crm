@@ -268,7 +268,7 @@ const footer = () => `
     <a href="#" class="fab fab-zalo" data-zalo-link target="_blank" rel="noopener" aria-label="Chat Zalo">Zalo<span class="fab-label">Nhắn Zalo</span></a>
     <a href="tel:" class="fab fab-call" data-hotline-link aria-label="Gọi hotline">📞<span class="fab-label" data-hotline></span></a>
   </div>
-  <div class="chat-teaser" data-chat-teaser hidden><button type="button" class="chat-teaser-x" aria-label="Ẩn" data-teaser-close>×</button><span data-chat-open>👋 Bạn cần bảng giá hay mặt bằng căn hộ? Hỏi mình nhé!</span></div>
+  <div class="chat-teaser" data-chat-teaser hidden><button type="button" class="chat-teaser-x" aria-label="Ẩn" data-teaser-close>×</button><span data-chat-open>👋 Ngân sách của bạn mua được gì ở FPT City? Chọn nhanh, mình gợi ý trong 30 giây!</span></div>
   <section class="chatbox" id="chatbox" role="dialog" aria-label="Chat tư vấn tự động" hidden>
     <header class="chat-head">
       <span class="chat-ava" aria-hidden="true">🤖</span>
