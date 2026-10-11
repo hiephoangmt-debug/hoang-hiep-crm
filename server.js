@@ -332,7 +332,7 @@ export const server = http.createServer(async (req, res) => {
       const b = await readBody(req);
       if (safeEq(String(b.password || ''), ADMIN_PASSWORD)) {
         loginFails.delete(ip);
-        return send(res, 200, { ok: true }, { 'Set-Cookie': `crm_session=${makeSession()}; HttpOnly; SameSite=Strict; Path=/; Max-Age=604800` });
+        return send(res, 200, { ok: true }, { 'Set-Cookie': `crm_session=${makeSession()}; HttpOnly; SameSite=Strict; Path=/; Max-Age=604800${req.headers['x-forwarded-proto'] === 'https' ? '; Secure' : ''}` });
       }
       loginFails.set(ip, [f[0] + 1, f[0] ? f[1] : now()]);
       return send(res, 401, { error: 'Sai mật khẩu' });
