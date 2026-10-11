@@ -78,7 +78,8 @@
 
   const staffNames = () => S.NhanSu.filter((n) => n.trangThai !== "Nghỉ").map((n) => n.ten);
   const project = (name) => S.DuAn.find((p) => p.ten === name) || {};
-  const digitsOf = (s) => (String(s).match(/\d{6,}/) || [""])[0];
+  // ID tài khoản: dãy số dài; Google Ads viết 851-117-7492 -> 8511177492
+  const digitsOf = (s) => (String(s).replace(/(\d)[-\s](?=\d)/g, "$1").match(/\d{6,}/) || [""])[0];
   const accountStaff = (id) => { const a = S.TaiKhoan.find((t) => digitsOf(t.maTaiKhoan) === digitsOf(id) && digitsOf(id)); return a ? a.nhanSu : ""; };
 
   function toast(msg, kind) {
@@ -408,6 +409,13 @@
       }
     });
     if (newAcc.size) S.TaiKhoan = S.TaiKhoan.concat(await gas("crmSaveMany", "TaiKhoan", Array.from(newAcc.values())));
+    // gõ ID cho một dòng -> điền cho các dòng khác của cùng người · kênh còn trống ID (và nhãn trong Google Sheet)
+    const pairs = Array.from(new Set(saved.filter((r) => digitsOf(r.taiKhoan || "") && r.nhanSu).map((r) => r.nhanSu + "|" + (r.nenTang || "Facebook"))));
+    for (const pr of pairs) {
+      const [ns, nt] = pr.split("|");
+      const weeks = await fillMissingAccounts((r) => r.nhanSu === ns && (r.nenTang || "Facebook") === nt);
+      for (const k of weeks) { const [pj, w] = k.split("|"); try { await pushToSheet(pj, w); } catch (e) { console.error(e); } }
+    }
     drafts.clear();
     toast(`Đã lưu ${saved.length} dòng.`, "ok");
     refreshFilters();
@@ -728,18 +736,34 @@
   }
   /** ID tài khoản mới đọc được -> thêm vào Danh mục (lần sau app tự biết ảnh/hoá đơn của ai). */
   async function rememberAccount(acc, nhanSu, nenTang) {
-    const id = digitsOf(String(acc || "").replace(/-/g, "")) || (/^\d{3}-\d{3}-\d{4}$/.test(acc || "") ? acc.replace(/-/g, "") : "");
+    const id = digitsOf(acc || "");
     if (!id || !nhanSu) return;
-    if (!S.TaiKhoan.some((t) => digitsOf(String(t.maTaiKhoan).replace(/-/g, "")) === id)) {
+    if (!S.TaiKhoan.some((t) => digitsOf(t.maTaiKhoan) === id)) {
       try { S.TaiKhoan.push(await gas("crmSave", "TaiKhoan", { maTaiKhoan: acc, nenTang, nhanSu })); } catch (e) { console.error(e); return; }
     }
     // điền ngược ID cho các dòng số liệu cũ của người đó (lưu trước khi biết ID) + nhãn trong Google Sheet
     const weeks = await fillMissingAccounts((r) => r.nhanSu === nhanSu && r.nenTang === nenTang);
     for (const k of weeks) { const [pj, w] = k.split("|"); try { await pushToSheet(pj, w); } catch (e) { console.error(e); } }
   }
+  /** Dòng số liệu trùng do cùng một ảnh (đọc được + điền tay lại cùng số): giữ một dòng, xoá phần thừa. */
+  async function mergeDuplicateImageRows() {
+    const fileOf = (r) => String(r.ghiChu || "").replace(/^(Đọc từ ảnh|Nhập tay kèm ảnh)\s+/, "");
+    const seen = new Map(), dup = [];
+    S.SoLieu.filter((r) => r.nguon === "anh").forEach((r) => {
+      const k = [r.duAn, r.tuan, r.nhanSu, r.nenTang, fileOf(r), Math.round(num(r.chiPhi))].join("|");
+      if (seen.has(k)) dup.push(r.id); else seen.set(k, r.id);
+    });
+    if (!dup.length) return;
+    const weeks = Array.from(new Set(S.SoLieu.filter((x) => dup.includes(x.id)).map((x) => x.duAn + "|" + x.tuan)));
+    await gas("crmDelete", "SoLieu", dup);
+    S.SoLieu = S.SoLieu.filter((x) => !dup.includes(x.id));
+    if (!$("tab-nhap").hidden) renderEntries();
+    for (const k of weeks) { const [pj, w] = k.split("|"); try { await pushToSheet(pj, w); } catch (e) { console.error(e); } } // sửa lại số trong Sheet
+    toast(`Đã gộp ${dup.length} dòng số liệu trùng (cùng ảnh, cùng chi phí).`, "ok");
+  }
   /** Dòng số liệu chưa có ID tài khoản mà người đó chỉ có 1 tài khoản trên kênh đó -> điền ID. Trả các "dự án|tuần" có dòng từ ảnh đã đổi. */
   async function fillMissingAccounts(filter) {
-    const upd = S.SoLieu.filter((r) => !digitsOf(String(r.taiKhoan || "").replace(/-/g, "")) && r.nhanSu && (!filter || filter(r)))
+    const upd = S.SoLieu.filter((r) => !digitsOf(r.taiKhoan || "") && r.nhanSu && (!filter || filter(r)))
       .map((r) => ({ r, acc: soleAccount(r.nhanSu, r.nenTang || "Facebook") })).filter((x) => x.acc);
     if (!upd.length) return [];
     const saved = await gas("crmSaveMany", "SoLieu", upd.map((x) => ({ id: x.r.id, taiKhoan: x.acc })));
@@ -749,8 +773,11 @@
   }
   /** Lưu các chiến dịch đã tick (đọc từ ảnh / điền tay) thành dòng số liệu nguồn "anh". Trả số dòng đã lưu. */
   async function saveCampaignRows(campaigns, m) {
+    const seenC = new Set();
     const chosen = (campaigns || []).filter((c) => c.use && (c.spent || (c.manual && c.results)))
-      .map((c, k) => (c.name ? c : Object.assign({}, c, { name: "Nhập tay " + (k + 1) + " – " + m.file })));
+      .map((c, k) => (c.name ? c : Object.assign({}, c, { name: "Nhập tay " + (k + 1) + " – " + m.file })))
+      // cùng số chi phí với dòng khác của ảnh này (vd. vừa đọc được vừa điền tay lại) -> chỉ giữ một
+      .filter((c) => { const k = Math.round(num(c.spent)) + "|" + Math.round(num(c.results)); if (seenC.has(k)) return false; seenC.add(k); return true; });
     if (!chosen.length) return 0;
     const opt0 = (v) => (v != null && v !== "" ? v : "");
     const rows = chosen.map((c) => {
@@ -1492,6 +1519,7 @@
     bindWeekPicker();
     bindNewStaff();
     fillMissingAccounts().catch((e) => console.error(e)); // dòng cũ chưa có ID mà Danh mục đã biết
+    mergeDuplicateImageRows().catch((e) => console.error(e));
     let b0 = "";
     try { b0 = localStorage.getItem("crm.brand") || ""; } catch (_) { /* bỏ qua */ }
     const fromUrl = await new Promise((res) => {

@@ -447,7 +447,8 @@ function crmPlain_(s) {
   return String(s == null ? '' : s).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D')
     .toLowerCase().replace(/\s+/g, ' ').trim();
 }
-function crmDigits_(s) { return (String(s || '').match(/\d{6,}/) || [''])[0]; }
+// ID tài khoản: dãy số dài; Google Ads viết 851-117-7492 -> 8511177492
+function crmDigits_(s) { return (String(s || '').replace(/(\d)[-\s](?=\d)/g, '$1').match(/\d{6,}/) || [''])[0]; }
 
 /** Nhãn tuần "05/10 - 11/10" có chứa ngày thứ 2 isoMonday (yyyy-mm-dd) không. */
 function crmLabelHasWeek_(label, isoMonday) {
