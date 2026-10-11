@@ -58,3 +58,13 @@ python3 apps-script/build.py --cdn $(git rev-parse HEAD)
 Với `--cdn`, `Crm.html`/`Index.html` chỉ chứa giao diện và tải `config.js`, `app.js`, `crm.js` từ jsDelivr
 (repo công khai, ghim theo commit). Không nhúng mã vào HTML: Apps Script xử lý đoạn JS nhúng dài theo cách
 riêng và làm hỏng nó (SyntaxError khi nạp trang). Không có `--cdn` = bản nhúng, chỉ dùng để thử cục bộ.
+
+## Phân quyền
+
+- **Quản trị**: chủ ứng dụng (tài khoản Google triển khai, tự vào không cần đăng nhập) và nhân sự có *Vai trò = Quản trị*
+  ở Danh mục › Nhân sự. Quản trị thêm/sửa/xoá mọi dữ liệu, sửa Danh mục, nhập từ Sheet, tạo báo cáo, chia sẻ.
+- **Nhân viên**: đăng nhập bằng **Gmail đã khai ở Danh mục › Nhân sự** (cột Email). Chỉ thêm/sửa/xoá số liệu và
+  ảnh/chứng từ có *Nhân sự = mình*; dòng của người khác chỉ xem.
+- Máy chủ kiểm tra quyền ở mọi thao tác ghi (`crmCall`); các hàm ghi có đuôi `_` nên trình duyệt không gọi thẳng được.
+- Muốn bắt buộc **mã xác nhận gửi qua email** khi đăng nhập (chống gõ email người khác): Apps Script › Cài đặt dự án ›
+  Thuộc tính tập lệnh › thêm `CRM_LOGIN_CODE` = `on` (cần cấp thêm quyền gửi email ở lần chạy đầu).

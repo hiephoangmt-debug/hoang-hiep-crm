@@ -5,6 +5,19 @@
 
   const B = window.BaoCaoMkt;
   const { PLATFORMS, KINDS, fmtInt, gas } = B;
+
+  // ------------------------------------------------------------ đăng nhập / phân quyền
+  // Ghi dữ liệu đều qua crmCall(token, …): máy chủ kiểm tra quyền. Quản trị: sửa/xoá mọi thứ;
+  // nhân viên (tên + PIN): chỉ số liệu và chứng từ của chính mình.
+  let TOKEN = "";
+  try { TOKEN = localStorage.getItem("crm.token") || ""; } catch (_) { /* bỏ qua */ }
+  const call = (fn, ...args) => gas("crmCall", TOKEN, fn, args);
+  const isAdmin = () => !!(S.me && S.me.role === "admin");
+  const myName = () => (S.me && S.me.name) || "";
+  const canEdit = (r) => isAdmin() || (!!r && !!myName() && r.nhanSu === myName());
+  const mineOnly = (r) => isAdmin() || r.nhanSu === myName();
+  /** Tên được chọn trong các ô Nhân sự: quản trị chọn ai cũng được, nhân viên chỉ chọn mình. */
+  const editableStaff = () => (isAdmin() ? staffNames() : [myName()].filter(Boolean));
   const PLATFORM_LABEL = { Facebook: "Facebook", Tiktok: "TikTok", Zalo: "Zalo", Google: "Google" };
   const STATUSES = ["Nháp", "Đã nộp", "Đã duyệt"];
 
@@ -110,7 +123,7 @@
   const WEEK_SELECTS = /^(en|ev|rp)Week$/;
   // ------------------------------------------------------------ thêm nhân sự mới ngay tại ô chọn tên
   const NEW_STAFF = "__newstaff";
-  const newStaffOpt = () => `<option value="${NEW_STAFF}">+ Thêm nhân sự mới…</option>`;
+  const newStaffOpt = () => (isAdmin() ? `<option value="${NEW_STAFF}">+ Thêm nhân sự mới…</option>` : "");
   function bindNewStaff() {
     const isStaffSel = (el) => el.tagName === "SELECT" && Array.from(el.options).some((o) => o.value === NEW_STAFF);
     document.addEventListener("focusin", (e) => { if (isStaffSel(e.target) && e.target.value !== NEW_STAFF) e.target.dataset.keepStaff = e.target.value; }, true);
@@ -124,13 +137,13 @@
       if (!name) return;
       let found = S.NhanSu.find((n) => B.norm(n.ten) === B.norm(name));
       if (!found) {
-        try { found = await run("Đang thêm nhân sự", () => gas("crmSave", "NhanSu", { ten: name, trangThai: "Đang làm" })); }
+        try { found = await run("Đang thêm nhân sự", () => call("crmSave", "NhanSu", { ten: name, trangThai: "Đang làm" })); }
         catch (_) { return; }
         S.NhanSu.push(found);
         toast(`Đã thêm nhân sự "${found.ten}" (sửa email/trạng thái ở tab Danh mục).`, "ok");
       } else if (found.trangThai === "Nghỉ") {
         found.trangThai = "Đang làm";
-        try { await gas("crmSave", "NhanSu", { id: found.id, trangThai: "Đang làm" }); } catch (_) { /* bỏ qua */ }
+        try { await call("crmSave", "NhanSu", { id: found.id, trangThai: "Đang làm" }); } catch (_) { /* bỏ qua */ }
       }
       refreshFilters();
       if (!Array.from(sel.options).some((o) => o.value === found.ten)) sel.add(new Option(found.ten, found.ten), sel.options.length - 1);
@@ -315,12 +328,13 @@
     const rows = gridRows();
     const staff = staffNames();
     const cell = (r, [k, , type]) => {
-      const id = esc(r.id);
-      if (type === "staff") return `<td><select data-g="${id}" data-f="${k}">${opt("", "(chọn)", r[k])}${staff.map((x) => opt(x, x, r[k])).join("")}${newStaffOpt()}</select></td>`;
-      if (type === "acc") return `<td><input data-g="${id}" data-f="${k}" value="${esc(r[k])}" list="accList" class="acc"></td>`;
+      const id = esc(r.id), ro = canEdit(r) || (isNew(r.id) && drafts.has(r.id)) ? "" : " disabled title=\"Dòng của người khác – chỉ quản trị mới sửa được\"";
+      const names = ro ? [r[k]] : isAdmin() ? staff : [myName()];
+      if (type === "staff") return `<td><select data-g="${id}" data-f="${k}"${ro}>${isAdmin() || ro ? opt("", "(chọn)", r[k]) : ""}${names.filter(Boolean).map((x) => opt(x, x, r[k])).join("")}${ro ? "" : newStaffOpt()}</select></td>`;
+      if (type === "acc") return `<td><input data-g="${id}" data-f="${k}" value="${esc(r[k])}" list="accList" class="acc"${ro}></td>`;
       if (type === "calc") return `<td class="calc">${calc(r, k)}</td>`;
-      if (type === "text") return `<td><input data-g="${id}" data-f="${k}" value="${esc(r[k])}" class="txt"></td>`;
-      return `<td><input data-g="${id}" data-f="${k}" value="${fmtCell(r[k])}" inputmode="numeric" class="n"></td>`;
+      if (type === "text") return `<td><input data-g="${id}" data-f="${k}" value="${esc(r[k])}" class="txt"${ro}></td>`;
+      return `<td><input data-g="${id}" data-f="${k}" value="${fmtCell(r[k])}" inputmode="numeric" class="n"${ro}></td>`;
     };
     const totalRow = (rs, label) => {
       const t = { chiPhi: 0, chiPhiPhi: 0, lead: 0, mql: 0, sql: 0, deal: 0, hienThi: 0, tiepCan: 0, luotNhap: 0, luotXem: 0 };
@@ -333,7 +347,7 @@
       const rs = rows.filter((r) => (r.nenTang || "Facebook") === p);
       // nút xoá + nguồn ở ĐẦU hàng (bảng rộng, cột cuối hay bị khuất sau thanh cuộn ngang)
       const body = rs.map((r) => `<tr class="${drafts.has(r.id) ? "dirty" : ""}${isShadowed(r) ? " shadow" : ""}">
-          <td class="act lead"><button type="button" class="link danger" data-gdel="${esc(r.id)}" title="Xoá dòng này">✕</button>
+          <td class="act lead">${canEdit(r) || isNew(r.id) ? `<button type="button" class="link danger" data-gdel="${esc(r.id)}" title="Xoá dòng này">✕</button>` : `<span class="muted" title="Dòng của ${esc(r.nhanSu)} – chỉ quản trị mới xoá được">⊘</span>`}
             ${r.nguon === "anh" ? `<small class="muted" title="${esc(r.ghiChu)}${isShadowed(r) ? " – không tính vì đã có số từ Sheet/nhập tay" : ""}">ảnh${isShadowed(r) ? "·0" : ""}</small>` : r.nguon === "sheet" ? `<small class="muted" title="Nhập từ Google Sheet">sheet</small>` : ""}</td>
           ${GRID.map((c) => cell(r, c)).join("")}</tr>`).join("");
       return `<section class="card grid-sec${rs.length ? "" : " empty"}">
@@ -363,7 +377,7 @@
   }
   function addRow(platform) {
     const id = "new-" + Math.random().toString(36).slice(2, 9);
-    const st = $("enStaff").value || "";
+    const st = isAdmin() ? $("enStaff").value || "" : myName();
     const acc = st ? soleAccount(st, platform) : "";
     drafts.set(id, {
       id, tuan: $("enWeek").value, duAn: $("enProject").value, nhanSu: st, nenTang: platform, taiKhoan: acc, chienDich: "",
@@ -401,7 +415,7 @@
       return o;
     });
     if (!toSave.length) { renderEntries(); return; }
-    const saved = await run("Đang lưu", () => gas("crmSaveMany", "SoLieu", toSave));
+    const saved = await run("Đang lưu", () => call("crmSaveMany", "SoLieu", toSave));
     saved.forEach((r) => { S.SoLieu = S.SoLieu.filter((x) => x.id !== r.id).concat(r); });
     // tài khoản mới -> danh mục
     const newAcc = new Map();
@@ -410,7 +424,7 @@
         newAcc.set(digitsOf(r.taiKhoan), { maTaiKhoan: r.taiKhoan, nenTang: r.nenTang, nhanSu: r.nhanSu });
       }
     });
-    if (newAcc.size) S.TaiKhoan = S.TaiKhoan.concat(await gas("crmSaveMany", "TaiKhoan", Array.from(newAcc.values())));
+    if (newAcc.size) S.TaiKhoan = S.TaiKhoan.concat(await call("crmSaveMany", "TaiKhoan", Array.from(newAcc.values())));
     // gõ ID cho một dòng -> điền cho các dòng khác của cùng người · kênh còn trống ID (và nhãn trong Google Sheet)
     const pairs = Array.from(new Set(saved.filter((r) => digitsOf(r.taiKhoan || "") && r.nhanSu).map((r) => r.nhanSu + "|" + (r.nenTang || "Facebook"))));
     for (const pr of pairs) {
@@ -428,7 +442,7 @@
     if (isNew(id)) { drafts.delete(id); renderEntries(); return; }
     const r = S.SoLieu.find((x) => x.id === id);
     if (!r || !confirm(`Xoá dòng ${r.nhanSu} · ${r.taiKhoan || ""} · ${fmtInt(num(r.chiPhi))} đ?`)) return;
-    await run("Đang xoá", () => gas("crmDelete", "SoLieu", id));
+    await run("Đang xoá", () => call("crmDelete", "SoLieu", id));
     S.SoLieu = S.SoLieu.filter((x) => x.id !== id);
     drafts.delete(id);
     let note = "";
@@ -476,9 +490,9 @@
     if (!list.length) return toast("Sheet không có dòng số liệu nào.", "err");
     if (!confirm(`Nhập ${list.length} dòng (${weekIsos.map((w) => weekLabel(w)).join(", ")}) cho ${pj.ten}?\nCác dòng đã nhập từ sheet trước đó của những tuần này sẽ được thay thế; dòng nhập tay giữ nguyên.`)) return;
     await run("Đang nhập", async () => {
-      if (newStaff.size) await gas("crmSaveMany", "NhanSu", Array.from(newStaff).map((ten) => ({ ten })));
-      if (newAcc.size) await gas("crmSaveMany", "TaiKhoan", Array.from(newAcc.values()));
-      await gas("crmImportEntries", pj.ten, weekIsos, list);
+      if (newStaff.size) await call("crmSaveMany", "NhanSu", Array.from(newStaff).map((ten) => ({ ten })));
+      if (newAcc.size) await call("crmSaveMany", "TaiKhoan", Array.from(newAcc.values()));
+      await call("crmImportEntries", pj.ten, weekIsos, list);
       await reload(["NhanSu", "TaiKhoan", "SoLieu"]);
     });
     toast(`Đã nhập ${list.length} dòng.` + (list.some((x) => !x.nhanSu) ? " Có dòng chưa gán nhân sự – gán tài khoản ở tab Danh mục rồi nhập lại." : ""), "ok");
@@ -489,7 +503,7 @@
   /** Ghi số đọc từ ảnh (nguồn "anh") của dự án + tuần vào Google Sheet số liệu của dự án: chỉ ô trống / ô app đã ghi. */
   async function pushToSheet(pjName, w) {
     const groups = new Map();
-    S.SoLieu.filter((r) => r.nguon === "anh" && r.duAn === pjName && r.tuan === w).forEach((r) => {
+    S.SoLieu.filter((r) => r.nguon === "anh" && r.duAn === pjName && r.tuan === w && mineOnly(r)).forEach((r) => {
       const key = r.nenTang + "|" + (digitsOf(r.taiKhoan) || r.nhanSu);
       const g = groups.get(key) || { nenTang: r.nenTang, taiKhoan: r.taiKhoan || "", nhanSu: r.nhanSu || "", chiPhi: 0, chiPhiPhi: 0, fee: false, lead: 0, luotXem: "", hienThi: "", tiepCan: "", luotNhap: "" };
       g.chiPhi += num(r.chiPhi);
@@ -501,7 +515,7 @@
     });
     if (!groups.size) return null;
     // lead = 0 nghĩa là ảnh không có số lead: để trống ô Lead trong Sheet cho các bạn tự điền
-    const res = await gas("crmWriteSheet", pjName, w, Array.from(groups.values()).map((g) => {
+    const res = await call("crmWriteSheet", pjName, w, Array.from(groups.values()).map((g) => {
       const o = Object.assign({}, g, { lead: g.lead || "", chiPhiPhi: g.fee ? Math.round(g.chiPhiPhi) : "" });
       delete o.fee;
       return o;
@@ -524,7 +538,7 @@
     if (rows.length && spent) {
       const factor = vats.every((v) => v != null) && new Set(vats).size === 1 ? 1 + vats[0] / 100 : total / spent;
       const upd = rows.map((r) => ({ id: r.id, chiPhiPhi: Math.round(num(r.chiPhi) * factor) }));
-      const saved = await gas("crmSaveMany", "SoLieu", upd);
+      const saved = await call("crmSaveMany", "SoLieu", upd);
       saved.forEach((r) => { S.SoLieu = S.SoLieu.filter((x) => x.id !== r.id).concat(r); });
       let note = "";
       try { note = pushNote(await pushToSheet(duAn, w)); } catch (e) { note = " Chưa ghi được vào Google Sheet: " + e.message; }
@@ -532,7 +546,7 @@
         (factor === total / spent ? " (theo tổng hoá đơn)" : ` (chi phí × ${B.fmtDec(factor, 2)})`) + "." + note;
     }
     try {
-      const res = await gas("crmWriteSheet", duAn, w, [{ nenTang, taiKhoan: soleAccount(nhanSu, nenTang), nhanSu, chiPhiPhi: total }]);
+      const res = await call("crmWriteSheet", duAn, w, [{ nenTang, taiKhoan: soleAccount(nhanSu, nenTang), nhanSu, chiPhiPhi: total }]);
       return ` Chưa có số chi phí đọc từ ảnh của ${nhanSu} · ${PLATFORM_LABEL[nenTang] || nenTang}: ghi tổng hoá đơn ${fmtInt(total)} đ vào ô “+ gồm phí” trong Sheet.` + pushNote(res);
     } catch (e) { return " Chưa ghi được vào Google Sheet: " + e.message; }
   }
@@ -589,7 +603,7 @@
           // cùng người, cùng kênh, cùng loại đã có ở dự án khác trong tuần (vd. hoá đơn chung Sun + Casamia) -> lấy sang
           const other = S.ChungTu.filter((r) => r.tuan === w && r.duAn !== pj && r.nhanSu === st && r.nenTang === p && r.loai === k);
           const from = Array.from(new Set(other.map((r) => r.duAn)));
-          return `<td class="miss-cell" title="Cần chụp: ${esc(REQ[p][k])}" data-req="${esc(need)}">Thiếu${from.length
+          return `<td class="miss-cell" title="Cần chụp: ${esc(REQ[p][k])}" data-req="${esc(need)}">Thiếu${from.length && (isAdmin() || st === myName())
             ? `<br><button type="button" class="link small" data-copyev="${esc(other.map((r) => r.id).join(","))}">Lấy từ ${esc(from.join(", "))} (${other.length})</button>` : ""}</td>`;
         }).join("");
         rows.push(`<tr><td>${esc(st)}</td><td>${PLATFORM_LABEL[p]}</td>${cells}</tr>`);
@@ -654,7 +668,7 @@
           ${p.loai === "hoadon" ? invoiceInputs(`data-p="${i}"`, p.invoice ? p.invoice.total : "", p.invoice ? p.invoice.vat : "", p.account) : campaignRows(p, i)}
           <div class="row"><select data-p="${i}" data-f="nenTang">${PLATFORMS.map((x) => opt(x, PLATFORM_LABEL[x], p.nenTang)).join("")}</select>
           <select data-p="${i}" data-f="loai">${Object.entries(KINDS).map(([k, l]) => opt(k, l, p.loai)).join("")}</select></div>
-          <div class="row"><select data-p="${i}" data-f="nhanSu" class="${p.nhanSu ? "" : "warn"}">${opt("", "(chọn nhân sự)", p.nhanSu)}${staff.map((x) => opt(x, x, p.nhanSu)).join("")}${newStaffOpt()}</select>
+          <div class="row"><select data-p="${i}" data-f="nhanSu" class="${p.nhanSu ? "" : "warn"}">${isAdmin() ? opt("", "(chọn nhân sự)", p.nhanSu) : ""}${editableStaff().map((x) => opt(x, x, p.nhanSu)).join("")}${newStaffOpt()}</select>
           <button type="button" class="link danger" data-unpend="${i}">Bỏ</button></div>
         </figcaption></figure>`).join("") : "";
     $("evUpload").hidden = !pending.length;
@@ -664,17 +678,17 @@
     $("evDelSel").textContent = `Xoá đã chọn (${evSel.size})`;
     $("evDelSel").disabled = !evSel.size;
     $("evList").innerHTML = rows.length ? rows.map((r) => `
-      <figure class="img${evSel.has(r.id) ? " sel" : ""}"><label class="pick"><input type="checkbox" data-evsel="${esc(r.id)}"${evSel.has(r.id) ? " checked" : ""}> Chọn</label><a href="${esc(r.url)}" target="_blank" rel="noopener"><img src="https://drive.google.com/thumbnail?id=${esc(r.fileId)}&sz=w400" alt="${esc(r.tenFile)}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'noimg',textContent:'Mở chứng từ'}))"></a>
-        <figcaption><span class="fname" title="${esc(r.tenFile)}">${esc(r.tenFile)}</span>
+      <figure class="img${evSel.has(r.id) ? " sel" : ""}">${canEdit(r) ? `<label class="pick"><input type="checkbox" data-evsel="${esc(r.id)}"${evSel.has(r.id) ? " checked" : ""}> Chọn</label>` : `<span class="pick muted" title="Chỉ quản trị mới sửa/xoá ảnh của người khác">⊘ ${esc(r.nhanSu || "chưa gán")}</span>`}<a href="${esc(r.url)}" target="_blank" rel="noopener"><img src="https://drive.google.com/thumbnail?id=${esc(r.fileId)}&sz=w400" alt="${esc(r.tenFile)}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'noimg',textContent:'Mở chứng từ'}))"></a>
+        <figcaption><span class="fname" title="${esc(r.tenFile)}">${esc(r.tenFile)}</span><fieldset class="ro"${canEdit(r) ? "" : " disabled"}>
           <div class="row"><select data-ev="${esc(r.id)}" data-f="nenTang">${PLATFORMS.map((x) => opt(x, PLATFORM_LABEL[x], r.nenTang)).join("")}</select>
           <select data-ev="${esc(r.id)}" data-f="loai">${Object.entries(KINDS).map(([k, l]) => opt(k, l, r.loai)).join("")}</select></div>
-          <div class="row"><select data-ev="${esc(r.id)}" data-f="nhanSu" class="${r.nhanSu ? "" : "warn"}">${opt("", "(chưa gán nhân sự)", r.nhanSu)}${staff.map((x) => opt(x, x, r.nhanSu)).join("")}${newStaffOpt()}</select>
+          <div class="row"><select data-ev="${esc(r.id)}" data-f="nhanSu" class="${r.nhanSu ? "" : "warn"}">${opt("", "(chưa gán nhân sự)", r.nhanSu)}${(isAdmin() ? staff : Array.from(new Set([r.nhanSu, myName()].filter(Boolean)))).map((x) => opt(x, x, r.nhanSu)).join("")}${newStaffOpt()}</select>
           <button type="button" class="link danger" data-evdel="${esc(r.id)}">Xoá</button></div>
           ${r.loai !== "hoadon" ? savedNumbersForm(r) : `<div class="evnums">
             <button type="button" class="link small" data-invread="${esc(r.id)}">Đọc số tiền trên hoá đơn</button>
             ${invoiceInputs(`data-inv="${esc(r.id)}"`, r.soTien, r.vat, soleAccount(r.nhanSu, r.nenTang))}
             <button type="button" class="small" data-invsave="${esc(r.id)}" style="width:100%;margin-top:4px">Lưu & tính Chi phí (+phí)</button></div>`}
-        </figcaption></figure>`).join("") : `<p class="muted">Chưa có ảnh chứng từ cho tuần này.</p>`;
+        </fieldset></figcaption></figure>`).join("") : `<p class="muted">Chưa có ảnh chứng từ cho tuần này.</p>`;
   }
   async function addPending(files) {
     const staff = $("evStaff").value;
@@ -753,7 +767,7 @@
     const id = digitsOf(acc || "");
     if (!id || !nhanSu) return;
     if (!S.TaiKhoan.some((t) => digitsOf(t.maTaiKhoan) === id)) {
-      try { S.TaiKhoan.push(await gas("crmSave", "TaiKhoan", { maTaiKhoan: acc, nenTang, nhanSu })); } catch (e) { console.error(e); return; }
+      try { S.TaiKhoan.push(await call("crmSave", "TaiKhoan", { maTaiKhoan: acc, nenTang, nhanSu })); } catch (e) { console.error(e); return; }
     }
     // điền ngược ID cho các dòng số liệu cũ của người đó (lưu trước khi biết ID) + nhãn trong Google Sheet
     const weeks = await fillMissingAccounts((r) => r.nhanSu === nhanSu && r.nenTang === nenTang);
@@ -771,7 +785,7 @@
       const gone = rows.filter((r) => r.duAn === pj && r.tuan === w &&
         !S.SoLieu.some((x) => x.nguon === "anh" && x.duAn === pj && x.tuan === w && x.nhanSu === r.nhanSu && x.nenTang === r.nenTang));
       try {
-        if (gone.length) await gas("crmWriteSheet", pj, w, gone.map((r) => ({ nenTang: r.nenTang, taiKhoan: r.taiKhoan, nhanSu: r.nhanSu, clear: true })));
+        if (gone.length) await call("crmWriteSheet", pj, w, gone.map((r) => ({ nenTang: r.nenTang, taiKhoan: r.taiKhoan, nhanSu: r.nhanSu, clear: true })));
         const res = await pushToSheet(pj, w);
         note = res || gone.length ? " Google Sheet đã cập nhật." : "";
       } catch (e) { note = " Chưa cập nhật được Google Sheet: " + e.message; }
@@ -782,13 +796,13 @@
   async function mergeDuplicateImageRows() {
     const fileOf = (r) => String(r.ghiChu || "").replace(/^(Đọc từ ảnh|Nhập tay kèm ảnh)\s+/, "");
     const seen = new Map(), dup = [];
-    S.SoLieu.filter((r) => r.nguon === "anh").forEach((r) => {
+    S.SoLieu.filter((r) => r.nguon === "anh" && mineOnly(r)).forEach((r) => {
       const k = [r.duAn, r.tuan, r.nhanSu, r.nenTang, fileOf(r), Math.round(num(r.chiPhi))].join("|");
       if (seen.has(k)) dup.push(r.id); else seen.set(k, r.id);
     });
     if (!dup.length) return;
     const weeks = Array.from(new Set(S.SoLieu.filter((x) => dup.includes(x.id)).map((x) => x.duAn + "|" + x.tuan)));
-    await gas("crmDelete", "SoLieu", dup);
+    await call("crmDelete", "SoLieu", dup);
     S.SoLieu = S.SoLieu.filter((x) => !dup.includes(x.id));
     if (!$("tab-nhap").hidden) renderEntries();
     for (const k of weeks) { const [pj, w] = k.split("|"); try { await pushToSheet(pj, w); } catch (e) { console.error(e); } } // sửa lại số trong Sheet
@@ -799,7 +813,7 @@
    * đọc ID trên hoá đơn PDF của đúng người · kênh đó (không cần OCR) rồi thêm vào Danh mục và điền cho các dòng.
    */
   async function learnAccountsFromInvoices() {
-    const pairs = Array.from(new Set(S.SoLieu.filter((r) => r.nhanSu && !digitsOf(r.taiKhoan || "") && !soleAccount(r.nhanSu, r.nenTang || "Facebook"))
+    const pairs = Array.from(new Set(S.SoLieu.filter((r) => r.nhanSu && mineOnly(r) && !digitsOf(r.taiKhoan || "") && !soleAccount(r.nhanSu, r.nenTang || "Facebook"))
       .map((r) => r.nhanSu + "|" + (r.nenTang || "Facebook"))));
     let learned = 0;
     for (const pr of pairs) {
@@ -816,10 +830,10 @@
   }
   /** Dòng số liệu chưa có ID tài khoản mà người đó chỉ có 1 tài khoản trên kênh đó -> điền ID. Trả các "dự án|tuần" có dòng từ ảnh đã đổi. */
   async function fillMissingAccounts(filter) {
-    const upd = S.SoLieu.filter((r) => !digitsOf(r.taiKhoan || "") && r.nhanSu && (!filter || filter(r)))
+    const upd = S.SoLieu.filter((r) => !digitsOf(r.taiKhoan || "") && r.nhanSu && mineOnly(r) && (!filter || filter(r)))
       .map((r) => ({ r, acc: soleAccount(r.nhanSu, r.nenTang || "Facebook") })).filter((x) => x.acc);
     if (!upd.length) return [];
-    const saved = await gas("crmSaveMany", "SoLieu", upd.map((x) => ({ id: x.r.id, taiKhoan: x.acc })));
+    const saved = await call("crmSaveMany", "SoLieu", upd.map((x) => ({ id: x.r.id, taiKhoan: x.acc })));
     saved.forEach((r) => { S.SoLieu = S.SoLieu.filter((x) => x.id !== r.id).concat(r); });
     if (!$("tab-nhap").hidden) renderEntries();
     return Array.from(new Set(upd.filter((x) => x.r.nguon === "anh").map((x) => x.r.duAn + "|" + x.r.tuan)));
@@ -843,7 +857,7 @@
         ghiChu: (c.manual ? "Nhập tay kèm ảnh " : "Đọc từ ảnh ") + m.file, nguon: "anh",
       };
     });
-    const saved = await gas("crmSaveMany", "SoLieu", rows);
+    const saved = await call("crmSaveMany", "SoLieu", rows);
     saved.forEach((r) => { S.SoLieu = S.SoLieu.filter((x) => x.id !== r.id).concat(r); });
     await rememberAccount(m.account, m.nhanSu, m.nenTang);
     return saved.length;
@@ -879,7 +893,7 @@
     if (!spent && !lead) return toast("Gõ chi phí (và lead nếu có) rồi bấm Lưu.", "err");
     const old = rowsOfImage(r)[0];
     const name = g("name") || (old && old.chienDich) || "Nhập tay – " + r.tenFile;
-    if (old && old.chienDich !== name) { await gas("crmDelete", "SoLieu", old.id); S.SoLieu = S.SoLieu.filter((x) => x.id !== old.id); }
+    if (old && old.chienDich !== name) { await call("crmDelete", "SoLieu", old.id); S.SoLieu = S.SoLieu.filter((x) => x.id !== old.id); }
     const c = { manual: true, use: true, name, spent, results: lead, resultType: "lead",
       clicks: g("clicks") ? Math.round(num(g("clicks"))) : null, impressions: g("impr") ? Math.round(num(g("impr"))) : null };
     const n = await run("Đang lưu số liệu", () => saveCampaignRows([c], { tuan: r.tuan, duAn: r.duAn, nhanSu: r.nhanSu, nenTang: r.nenTang, file: r.tenFile, account: g("acc") }));
@@ -914,7 +928,7 @@
     const q = (k) => document.querySelector(`[data-inv="${id}"][data-f="${k}"]`).value.trim();
     const soTien = Math.round(num(q("inv_total"))), vat = q("inv_vat") === "" ? "" : num(q("inv_vat"));
     if (!soTien) return toast("Gõ tổng tiền hoá đơn (hoặc bấm “Đọc số tiền trên hoá đơn”).", "err");
-    const saved = await run("Đang lưu", () => gas("crmSave", "ChungTu", { id, soTien, vat }));
+    const saved = await run("Đang lưu", () => call("crmSave", "ChungTu", { id, soTien, vat }));
     Object.assign(r, saved);
     if (q("inv_acc")) await run("Đang lưu ID tài khoản", () => rememberAccount(q("inv_acc"), r.nhanSu, r.nenTang));
     const note = await run("Đang tính Chi phí (+phí)", () => applyInvoices(r.duAn, r.tuan, r.nhanSu, r.nenTang));
@@ -972,7 +986,7 @@
     const n = await run("Đang lưu số liệu", async () => {
       // đọc lại = thay số cũ của ảnh này (kể cả số đọc sai lần trước), không cộng thêm
       const old = rowsOfImage(r).map((x) => x.id);
-      if (old.length) { await gas("crmDelete", "SoLieu", old); S.SoLieu = S.SoLieu.filter((x) => !old.includes(x.id)); }
+      if (old.length) { await call("crmDelete", "SoLieu", old); S.SoLieu = S.SoLieu.filter((x) => !old.includes(x.id)); }
       const acc = B.classifyText(text, { accounts: S.TaiKhoan.map((t) => ({ account: t.maTaiKhoan, staff: t.nhanSu })), staffList: [] }).account || "";
       return saveCampaignRows(camps.filter((c) => c.use), { tuan: r.tuan, duAn: r.duAn, nhanSu: r.nhanSu, nenTang: r.nenTang, file: r.tenFile, account: acc });
     });
@@ -991,7 +1005,7 @@
     await run("Đang tải ảnh lên Drive", async () => {
       for (const p of pending.slice()) {
         toast(`Đang tải lên ${++n}/${pending.length}: ${p.file.name}`, "busy");
-        const rec = await gas("crmUploadEvidence", { tuan: w, duAn: pj, nhanSu: p.nhanSu, nenTang: p.nenTang, loai: p.loai, tenFile: p.file.name, mime: p.file.type, hash: p.hash || "",
+        const rec = await call("crmUploadEvidence", { tuan: w, duAn: pj, nhanSu: p.nhanSu, nenTang: p.nenTang, loai: p.loai, tenFile: p.file.name, mime: p.file.type, hash: p.hash || "",
           soTien: p.loai === "hoadon" && p.invoice ? p.invoice.total || "" : "", vat: p.loai === "hoadon" && p.invoice && p.invoice.vat != null ? p.invoice.vat : "" },
           await B.blobToB64(p.file));
         if (!S.ChungTu.some((x) => x.id === rec.id)) S.ChungTu.push(rec);
@@ -1105,7 +1119,7 @@
       });
     }
     if (!rows.length) return [];
-    const saved = await gas("crmSaveMany", "ChungTu", rows);
+    const saved = await call("crmSaveMany", "ChungTu", rows);
     S.ChungTu = S.ChungTu.filter((r) => !saved.some((x) => x.id === r.id)).concat(saved);
     return saved;
   }
@@ -1134,10 +1148,10 @@
       toast(`${pjName}: kiểm tra ảnh trùng ${i}/${rows.length}…`, "busy");
       try { r.hash = await hashOf(await evidenceFile(r)); fill.push({ id: r.id, hash: r.hash }); } catch (e) { console.error(e); }
     }
-    if (fill.length) await gas("crmSaveMany", "ChungTu", fill);
+    if (fill.length) await call("crmSaveMany", "ChungTu", fill);
     const dup = findDups(rows, false);
     if (dup.length) {
-      await gas("crmDelete", "ChungTu", dup);
+      await call("crmDelete", "ChungTu", dup);
       S.ChungTu = S.ChungTu.filter((x) => !dup.includes(x.id));
     }
     return dup.length;
@@ -1200,15 +1214,15 @@
       tomTat: `${res.slides} slide, ${res.staffCount} nhân sự, ${res.nImg} ảnh` + (res.missing ? `, thiếu ${res.missing} ảnh nghiệm thu` : "") };
     // tạo lại: ghi đè vào file cũ để link đã gửi nhóm vẫn mở được bản mới
     const prev = S.BaoCao.find((r) => r.duAn === pjName && r.tuan === w);
-    if (fmt !== "pdf") { toast(`${pjName}: lưu PPTX…`, "busy"); out.pptxUrl = await gas("saveReport", b64, name, folder, true, prev ? prev.pptxUrl : ""); }
-    if (fmt !== "pptx") { toast(`${pjName}: chuyển PDF…`, "busy"); out.pdfUrl = (await gas("convertToPdf", b64, name, folder, true, prev ? prev.pdfUrl : "")).url; }
+    if (fmt !== "pdf") { toast(`${pjName}: lưu PPTX…`, "busy"); out.pptxUrl = await gas("saveReport", b64, name, folder, true, prev ? prev.pptxUrl : "", TOKEN); }
+    if (fmt !== "pptx") { toast(`${pjName}: chuyển PDF…`, "busy"); out.pdfUrl = (await gas("convertToPdf", b64, name, folder, true, prev ? prev.pdfUrl : "", TOKEN)).url; }
     if (prev) out.id = prev.id;
     out.ngayTao = nowStamp(); // lần tạo gần nhất (để biết có ảnh/số mới sau đó không)
-    const saved = await gas("crmSave", "BaoCao", out);
+    const saved = await call("crmSave", "BaoCao", out);
     S.BaoCao = S.BaoCao.filter((r) => r.id !== saved.id).concat(saved);
     // file cũ không ghi đè được (đã đổi định dạng / bị xoá…): bỏ bản cũ vào thùng rác
     const stale = prev ? [prev.pdfUrl, prev.pptxUrl].filter((u) => u && u !== saved.pdfUrl && u !== saved.pptxUrl) : [];
-    if (stale.length) { try { await gas("crmTrashReportFiles", stale); } catch (e) { console.error(e); } }
+    if (stale.length) { try { await call("crmTrashReportFiles", stale); } catch (e) { console.error(e); } }
     return saved;
   }
   async function generateReports() {
@@ -1249,7 +1263,7 @@
     $("rpShare").textContent = wk.length ? `Chép tin nhắn gửi nhóm (${wk.length} báo cáo tuần ${weekLabel($("rpWeek").value)})` : "";
     $("rpTable").innerHTML = rows.length ? `<table class="data"><thead><tr><th>Tuần</th><th>Dự án</th><th>Trạng thái</th><th>File</th><th>Nội dung</th><th>Người tạo</th><th>Ngày tạo</th></tr></thead><tbody>
       ${rows.map((r) => `<tr><td>${esc(weekLabel(r.tuan, true))}</td><td>${esc(r.duAn)}</td>
-        <td><select data-rp="${esc(r.id)}" class="st-${STATUSES.indexOf(r.trangThai)}">${STATUSES.map((s) => opt(s, s, r.trangThai)).join("")}</select></td>
+        <td><select data-rp="${esc(r.id)}" class="st-${STATUSES.indexOf(r.trangThai)}"${isAdmin() ? "" : " disabled"}>${STATUSES.map((s) => opt(s, s, r.trangThai)).join("")}</select></td>
         <td>${r.pdfUrl ? `<a href="${esc(r.pdfUrl)}" target="_blank" rel="noopener">PDF</a>` : ""} ${r.pptxUrl ? `<a href="${esc(r.pptxUrl)}" target="_blank" rel="noopener">PPTX</a>` : ""}
           ${r.pdfUrl || r.pptxUrl ? `<button type="button" class="link" data-copy="${esc(r.id)}">Chép link</button>` : ""}</td>
         <td>${esc(r.tomTat)}${(() => { const n = newSince(r); return n.anh || n.so ? `<br><b class="warn-text">Có ${[n.anh && n.anh + " ảnh", n.so && n.so + " dòng số liệu"].filter(Boolean).join(", ")} mới sau lần tạo này – chọn tuần/dự án này và bấm “Tạo báo cáo” để cập nhật.</b>` : ""; })()}</td><td class="muted">${esc(r.nguoiTao)}</td><td class="muted">${esc(r.ngayTao)}</td></tr>`).join("")}</tbody></table>`
@@ -1266,6 +1280,7 @@
         if (c === "nenTang") return `<select data-ct="${t2}" data-id="${id}" data-f="${c}">${PLATFORMS.map((p) => opt(p, PLATFORM_LABEL[p], v)).join("")}</select>`;
         if (c === "logo") return `<select data-ct="${t2}" data-id="${id}" data-f="${c}">${opt("", "(theo mẫu)", v)}${Object.keys((window.BAO_CAO_MKT_CONFIG || {}).logos || {}).map((x) => opt(x, x, v)).join("")}</select>`;
         if (c === "trangThai") return `<select data-ct="${t2}" data-id="${id}" data-f="${c}">${["Đang làm", "Nghỉ"].map((s) => opt(s, s, v || "Đang làm")).join("")}</select>`;
+        if (c === "vaiTro") return `<select data-ct="${t2}" data-id="${id}" data-f="${c}">${["Nhân viên", "Quản trị"].map((s) => opt(s, s, v || "Nhân viên")).join("")}</select>`;
         return `<input data-ct="${t2}" data-id="${id}" data-f="${c}" value="${esc(v)}">`;
       };
       return `<section class="card"><h3>${title}</h3><div class="wrap"><table class="data edit"><thead><tr>${cols.map((c) => `<th>${esc(c[1])}</th>`).join("")}<th></th></tr></thead><tbody>
@@ -1279,7 +1294,7 @@
     const r = S[t].find((x) => x.id === id);
     if (!r) return;
     r[f] = el.value;
-    await run("Đang lưu", () => gas("crmSave", t, { id, [f]: el.value }));
+    await run("Đang lưu", () => call("crmSave", t, { id, [f]: el.value }));
     toast("Đã lưu.", "ok");
     refreshFilters();
   }
@@ -1324,7 +1339,7 @@
       const pj = $("enProject").value;
       if (!confirm(`Cho các nhân sự có email (tab Danh mục › Nhân sự) quyền SỬA Google Sheet số liệu của ${pj}?\nGoogle sẽ gửi email báo cho từng người.`)) return;
       try {
-        const r = await run("Đang chia sẻ", () => gas("crmShareSheet", pj));
+        const r = await run("Đang chia sẻ", () => call("crmShareSheet", pj));
         toast((r.added.length ? `Đã cho quyền sửa: ${r.added.join(", ")}.` : "Không có ai mới cần thêm quyền.") +
           (r.already ? ` ${r.already} người đã có quyền.` : "") +
           (r.noEmail.length ? ` Chưa có email: ${r.noEmail.join(", ")} – thêm email ở tab Danh mục › Nhân sự rồi bấm lại.` : ""), r.noEmail.length ? "" : "ok");
@@ -1427,7 +1442,7 @@
         btn.disabled = true;
         try {
           for (const id of ids) {
-            const rec = await run(`Đang chép ảnh sang ${pj}`, () => gas("crmCopyEvidence", id, pj));
+            const rec = await run(`Đang chép ảnh sang ${pj}`, () => call("crmCopyEvidence", id, pj));
             if (!S.ChungTu.some((x) => x.id === rec.id)) S.ChungTu.push(rec);
           }
           toast(`Đã dùng ${ids.length} ảnh cho ${pj} (bản sao lưu trong thư mục ${pj} trên Drive).`, "ok");
@@ -1451,7 +1466,7 @@
       if (!id) return;
       const r = S.ChungTu.find((x) => x.id === id);
       r[e.target.dataset.f] = e.target.value;
-      await run("Đang lưu", () => gas("crmSave", "ChungTu", { id, [e.target.dataset.f]: e.target.value }));
+      await run("Đang lưu", () => call("crmSave", "ChungTu", { id, [e.target.dataset.f]: e.target.value }));
       toast("Đã lưu.", "ok");
       renderChecklist();
     });
@@ -1473,7 +1488,7 @@
     $("evDelSel").addEventListener("click", async () => {
       const ids = Array.from(evSel);
       if (!ids.length || !confirm(`Xoá ${ids.length} ảnh đã chọn (file chuyển vào thùng rác Drive)?`)) return;
-      try { await run("Đang xoá", () => gas("crmDelete", "ChungTu", ids)); } catch (_) { return; }
+      try { await run("Đang xoá", () => call("crmDelete", "ChungTu", ids)); } catch (_) { return; }
       S.ChungTu = S.ChungTu.filter((x) => !evSel.has(x.id));
       evSel.clear();
       toast(`Đã xoá ${ids.length} ảnh.`, "ok");
@@ -1492,7 +1507,7 @@
     $("evList").addEventListener("click", async (e) => {
       const id = e.target.dataset.evdel;
       if (!id || !confirm("Xoá ảnh này (chuyển vào thùng rác Drive)?")) return;
-      await run("Đang xoá", () => gas("crmDelete", "ChungTu", id));
+      await run("Đang xoá", () => call("crmDelete", "ChungTu", id));
       S.ChungTu = S.ChungTu.filter((x) => x.id !== id);
       toast("Đã xoá.", "ok");
       renderEvidence();
@@ -1513,7 +1528,7 @@
       const id = e.target.dataset.rp;
       if (!id) return;
       S.BaoCao.find((x) => x.id === id).trangThai = e.target.value;
-      await run("Đang lưu", () => gas("crmSave", "BaoCao", { id, trangThai: e.target.value }));
+      await run("Đang lưu", () => call("crmSave", "BaoCao", { id, trangThai: e.target.value }));
       toast("Đã cập nhật trạng thái.", "ok");
       renderReports();
     });
@@ -1523,7 +1538,7 @@
       if (!b) return;
       if (b.dataset.ctadd) {
         const t = b.dataset.ctadd;
-        S[t].push(await run("Đang thêm", () => gas("crmSave", t, t === "NhanSu" ? { ten: "Nhân sự mới", trangThai: "Đang làm" } : t === "DuAn" ? { ten: "Dự án mới", logo: brand } : { nenTang: "Facebook" })));
+        S[t].push(await run("Đang thêm", () => call("crmSave", t, t === "NhanSu" ? { ten: "Nhân sự mới", trangThai: "Đang làm" } : t === "DuAn" ? { ten: "Dự án mới", logo: brand } : { nenTang: "Facebook" })));
         toast("Đã thêm dòng mới – sửa trực tiếp trong bảng.", "ok");
         renderCatalog();
         refreshFilters();
@@ -1531,7 +1546,7 @@
       if (b.dataset.ctdel) {
         const t = b.dataset.ctdel, id = b.dataset.id;
         if (!confirm("Xoá dòng này khỏi danh mục?")) return;
-        await run("Đang xoá", () => gas("crmDelete", t, id));
+        await run("Đang xoá", () => call("crmDelete", t, id));
         S[t] = S[t].filter((x) => x.id !== id);
         renderCatalog();
         refreshFilters();
@@ -1539,6 +1554,60 @@
     });
   }
 
+  /** Màn hình đăng nhập: nhập Gmail đã được quản trị khai ở Danh mục › Nhân sự (không cần mã / mật khẩu). */
+  function showLogin(msg) {
+    $("loading").hidden = false;
+    $("loading").innerHTML = `<div class="login card">
+      <h3>Đăng nhập CRM Báo cáo Marketing</h3>
+      <label>Gmail của bạn<input id="lgMail" type="email" autocomplete="email" placeholder="ten@gmail.com"></label>
+      <button type="button" id="lgSend">Đăng nhập</button>
+      <div id="lgStep2" hidden>
+        <label>Mã 6 số trong email<input id="lgCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6"></label>
+        <button type="button" id="lgGo">Xác nhận mã</button>
+      </div>
+      <p class="hint">Dùng đúng Gmail quản trị đã khai ở Danh mục › Nhân sự. Đăng nhập một lần, máy này sẽ nhớ. Mỗi người chỉ thêm/sửa/xoá được số liệu và ảnh của chính mình.</p>
+      <p class="warn-text" id="lgErr">${esc(msg || "")}</p></div>`;
+    try { $("lgMail").value = localStorage.getItem("crm.mail") || ""; } catch (_) { /* bỏ qua */ }
+    const done = (r) => {
+      TOKEN = r.token;
+      try { localStorage.setItem("crm.token", TOKEN); } catch (_) { /* bỏ qua */ }
+      location.reload();
+    };
+    $("lgSend").onclick = async () => {
+      $("lgSend").disabled = true; $("lgErr").className = "warn-text"; $("lgErr").textContent = "";
+      try {
+        const r = await gas("crmLoginEmail", $("lgMail").value);
+        try { localStorage.setItem("crm.mail", $("lgMail").value.trim()); } catch (_) { /* bỏ qua */ }
+        if (r.token) return done(r);
+        // quản trị bật xác minh bằng mã (CRM_LOGIN_CODE = on)
+        $("lgStep2").hidden = false;
+        $("lgErr").className = "ok-text";
+        $("lgErr").textContent = `Đã gửi mã cho ${r.name} – mở hộp thư ${$("lgMail").value.trim()} (xem cả mục Spam).`;
+        $("lgCode").focus();
+      } catch (e) { $("lgErr").textContent = e.message; }
+      $("lgSend").disabled = false;
+    };
+    const go = async () => {
+      $("lgGo").disabled = true;
+      try { done(await gas("crmLoginCode", $("lgMail").value, $("lgCode").value)); }
+      catch (e) { $("lgErr").className = "warn-text"; $("lgErr").textContent = e.message; $("lgGo").disabled = false; }
+    };
+    $("lgGo").onclick = go;
+    $("lgCode").onkeydown = (e) => { if (e.key === "Enter") go(); };
+    $("lgMail").onkeydown = (e) => { if (e.key === "Enter") $("lgSend").click(); };
+    $("lgMail").focus();
+  }
+  /** Ẩn/khoá các phần chỉ quản trị dùng. */
+  function applyRole() {
+    const admin = isAdmin();
+    document.querySelectorAll('[data-tab="danhmuc"], #enImport, #enShare, #enPush, #evScan, #evDedupe, #rpGo, #rpFormat, #rpKeepMissing, #sheetLink, #reportLink')
+      .forEach((el) => { const box = el.closest("label") || el; box.hidden = !admin; if (!admin) box.style.display = "none"; });
+    if (!admin) {
+      $("evStaff").innerHTML = opt(myName(), myName(), myName());
+      $("evStaff").disabled = true;
+      try { localStorage.setItem("crm.me", myName()); } catch (_) { /* bỏ qua */ }
+    }
+  }
   async function start() {
     window.__crmStarted = true;
     // giữ nhãn phiên bản "(giao diện vN)" do crm.html ghi, chỉ đổi dòng chữ
@@ -1554,9 +1623,10 @@
         "2. Trong Apps Script, mở <b>Lần thực thi</b> (biểu tượng ☰▶ bên trái) xem hàm <code>crmBootstrap</code> có báo lỗi không.";
     }, 25000);
     try {
-      const boot = await gas("crmBootstrap");
+      const boot = await gas("crmBootstrap", TOKEN);
       clearTimeout(slow);
       Object.assign(S, boot);
+      if (!isAdmin() && !myName()) { showLogin(); return; }
     } catch (e) {
       clearTimeout(slow);
       $("loading").textContent = "Không tải được dữ liệu: " + e.message;
@@ -1564,7 +1634,10 @@
     }
     $("loading").hidden = true;
     $("app").hidden = false;
-    $("who").textContent = S.user || "";
+    $("who").innerHTML = (isAdmin() ? `<b>Quản trị</b>${S.me.owner ? " · " + esc(S.user || "") : " · " + esc(myName())}` : `<b>${esc(myName())}</b> · nhân viên`) +
+      (S.me.owner ? "" : ` · <button type="button" class="link small" id="logout">Đăng xuất</button>`);
+    if ($("logout")) $("logout").onclick = () => { try { localStorage.removeItem("crm.token"); } catch (_) { /* bỏ qua */ } TOKEN = ""; location.reload(); };
+    applyRole();
     $("sheetLink").href = S.sheetUrl;
     $("reportLink").href = S.appUrl ? S.appUrl + "?page=baocao" : "#";
     $("rpProjectLink").href = $("reportLink").href;

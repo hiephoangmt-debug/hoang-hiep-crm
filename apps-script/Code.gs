@@ -101,7 +101,7 @@ function shareByLink_(file) {
 }
 
 /** Tạo lại báo cáo: bỏ file PDF/PPTX cũ vào thùng rác (chỉ file báo cáo "Bao_cao_…" không còn dòng BaoCao nào dùng). */
-function crmTrashReportFiles(urls) {
+function crmTrashReportFiles_(urls) {
   var inUse = JSON.stringify(crmRows_('BaoCao'));
   var n = 0;
   [].concat(urls || []).forEach(function (u) {
@@ -135,7 +135,8 @@ function overwriteFile_(file, bytes, mime) {
 
 /** Lưu PPTX báo cáo vào Drive (thư mục chỉ định hoặc My Drive), trả về link. share = bật xem qua link.
  *  replaceUrl: link file báo cáo cũ của cùng tuần/dự án – ghi đè vào đó để link đã gửi vẫn mở được bản mới. */
-function saveReport(b64, name, folderId, share, replaceUrl) {
+function saveReport(b64, name, folderId, share, replaceUrl, token) {
+  crmRequireAdmin_(token);
   var old = reportFileToReplace_(replaceUrl);
   if (old && overwriteFile_(old, Utilities.base64Decode(b64), PPTX_MIME)) {
     if (share) shareByLink_(old);
@@ -173,7 +174,8 @@ function pptxToSlides_(bytes, name) {
   return JSON.parse(res.getContentText()).id;
 }
 
-function convertToPdf(b64, name, folderId, share, replaceUrl) {
+function convertToPdf(b64, name, folderId, share, replaceUrl, token) {
+  crmRequireAdmin_(token);
   var tmpId = pptxToSlides_(Utilities.base64Decode(b64), name);
   try {
     var pdf = exportBlob_('https://docs.google.com/presentation/d/' + tmpId + '/export/pdf')
@@ -240,7 +242,8 @@ var CRM_TABLES = {
   DuAn: [['id', 'ID'], ['ten', 'Tên dự án'], ['khoa', 'Tên thư mục dự án trên Drive'], ['chienDich', 'Tên chiến dịch (tiêu đề báo cáo)'],
     ['mauPptx', 'Link PPTX mẫu'], ['thuMucChungTu', 'Thư mục chứng từ'], ['thuMucBaoCao', 'Thư mục lưu báo cáo'],
     ['nguonSoLieu', 'Google Sheet số liệu (để nhập)'], ['logo', 'Đơn vị / Logo (TATILAND / TATI INVEST)']],
-  NhanSu: [['id', 'ID'], ['ten', 'Tên'], ['email', 'Email'], ['trangThai', 'Trạng thái']],
+  NhanSu: [['id', 'ID'], ['ten', 'Tên'], ['email', 'Email'], ['trangThai', 'Trạng thái'],
+    ['vaiTro', 'Vai trò (Nhân viên / Quản trị)']],
   TaiKhoan: [['id', 'ID'], ['maTaiKhoan', 'ID tài khoản QC'], ['ten', 'Tên tài khoản'], ['nenTang', 'Nền tảng'], ['nhanSu', 'Nhân sự']],
   SoLieu: [['id', 'ID'], ['tuan', 'Tuần (thứ 2)'], ['duAn', 'Dự án'], ['nhanSu', 'Nhân sự'], ['nenTang', 'Nền tảng'],
     ['taiKhoan', 'ID tài khoản QC'], ['chienDich', 'Chiến dịch'], ['chiPhi', 'Chi phí thực chạy'], ['chiPhiPhi', 'Chi phí gồm phí nền tảng'],
@@ -342,7 +345,9 @@ function crmWriteAll_(name, rows) {
   }
 }
 
+var CRM_ACTOR = ''; // email người đăng nhập (ghi vào cột "Người tạo")
 function crmUser_() {
+  if (CRM_ACTOR) return CRM_ACTOR;
   try { return Session.getActiveUser().getEmail() || Session.getEffectiveUser().getEmail() || ''; } catch (e) { return ''; }
 }
 
@@ -362,7 +367,7 @@ function crmWithLock_(fn) {
 }
 
 /** Lần đầu: tạo bảng + dữ liệu mẫu; trả về mọi bảng cho giao diện. */
-function crmBootstrap() {
+function crmBootstrap(token) {
   crmWithLock_(function () {
     Object.keys(CRM_SEED).forEach(function (t) {
       if (!crmRows_(t).length) crmWriteAll_(t, CRM_SEED[t].map(function (o) { return crmStamp_(JSON.parse(JSON.stringify(o))); }));
@@ -375,18 +380,161 @@ function crmBootstrap() {
     });
     if (changed) crmWriteAll_('DuAn', projects);
   });
-  var out = { schema: CRM_TABLES, sheetUrl: crmBook_().getUrl(), user: crmUser_() };
+  var me = crmMe_(token);
+  var out = { schema: CRM_TABLES, sheetUrl: me.role === 'admin' ? crmBook_().getUrl() : '', user: crmUser_(), me: me };
   try { out.appUrl = ScriptApp.getService().getUrl(); } catch (e) { out.appUrl = ''; }
-  Object.keys(CRM_TABLES).forEach(function (t) { out[t] = crmRows_(t); });
+  Object.keys(CRM_TABLES).forEach(function (t) { out[t] = crmPublic_(t, crmRows_(t)); });
   return out;
 }
 
 function crmList(name) {
-  return crmRows_(name);
+  return crmPublic_(name, crmRows_(name));
+}
+
+// =====================================================================
+// PHÂN QUYỀN
+// - Quản trị: chủ ứng dụng (tài khoản Google triển khai) hoặc nhân sự có vai trò "Quản trị" đăng nhập bằng PIN.
+// - Nhân viên: đăng nhập bằng tên + PIN (đặt ở Danh mục › Nhân sự); chỉ thêm/sửa/xoá số liệu và chứng từ
+//   của CHÍNH MÌNH (cột Nhân sự = tên mình). Danh mục, nhập từ Sheet, báo cáo, chia sẻ: chỉ quản trị.
+// Trang chỉ gọi được crmCall(token, hàm, tham số); các hàm ghi dữ liệu đều có đuôi "_" (không gọi trực tiếp được).
+// =====================================================================
+function crmPublic_(table, rows) {
+  return rows;
+}
+
+// Đăng nhập bằng email: nhập email (đã khai ở Danh mục › Nhân sự) -> app gửi mã 6 số vào email đó -> nhập mã.
+// Chủ ứng dụng (tài khoản Google triển khai) tự là quản trị, không cần mã.
+function crmSecret_() {
+  var props = PropertiesService.getScriptProperties();
+  var k = props.getProperty('CRM_SECRET');
+  if (!k) { k = Utilities.getUuid() + Utilities.getUuid(); props.setProperty('CRM_SECRET', k); }
+  return k;
+}
+function crmSign_(email) {
+  var raw = Utilities.computeHmacSha256Signature('mail|' + email, crmSecret_());
+  return Utilities.base64EncodeWebSafe(raw).replace(/=+$/, '');
+}
+function crmIsOwner_() {
+  try {
+    var a = Session.getActiveUser().getEmail(), e = Session.getEffectiveUser().getEmail();
+    return !!a && a === e;
+  } catch (err) { return false; }
+}
+function crmStaffByEmail_(email) {
+  email = String(email || '').trim().toLowerCase();
+  if (!email) return null;
+  return crmRows_('NhanSu').filter(function (n) {
+    return n.trangThai !== 'Nghỉ' && String(n.email || '').trim().toLowerCase() === email;
+  })[0] || null;
+}
+/** Người đang dùng: {name, email, role: 'admin'|'staff'|'', owner} */
+function crmMe_(token) {
+  if (crmIsOwner_()) return { name: '', email: crmUser_(), role: 'admin', owner: true };
+  var t = String(token || ''), i = t.lastIndexOf('.');
+  if (i < 1) return { name: '', role: '' };
+  var email = '';
+  try { email = Utilities.newBlob(Utilities.base64DecodeWebSafe(t.slice(0, i))).getDataAsString(); } catch (e) { return { name: '', role: '' }; }
+  var ns = crmStaffByEmail_(email);
+  if (!ns || crmSign_(String(ns.email).trim().toLowerCase()) !== t.slice(i + 1)) return { name: '', role: '' };
+  return { name: ns.ten, email: email, role: /quan tri|quản trị|admin/i.test(String(ns.vaiTro || '')) ? 'admin' : 'staff' };
+}
+/**
+ * Đăng nhập bằng Gmail đã được quản trị khai ở Danh mục › Nhân sự – không cần mã/mật khẩu.
+ * (Muốn bắt buộc mã gửi qua email: đặt thuộc tính dự án CRM_LOGIN_CODE = on.)
+ */
+function crmLoginEmail(email) {
+  email = String(email || '').trim().toLowerCase();
+  var ns = crmStaffByEmail_(email);
+  if (!ns) throw new Error('Email ' + email + ' chưa có trong danh sách nhân sự – nhờ quản trị thêm email của bạn ở Danh mục › Nhân sự.');
+  if (PropertiesService.getScriptProperties().getProperty('CRM_LOGIN_CODE') === 'on') {
+    crmSendCode(email);
+    return { needCode: true, name: ns.ten };
+  }
+  var token = Utilities.base64EncodeWebSafe(Utilities.newBlob(email).getBytes()).replace(/=+$/, '') + '.' + crmSign_(email);
+  return { token: token, me: crmMe_(token) };
+}
+
+/** Bước 1: gửi mã đăng nhập vào email (email phải có trong Danh mục › Nhân sự). */
+function crmSendCode(email) {
+  email = String(email || '').trim().toLowerCase();
+  var ns = crmStaffByEmail_(email);
+  if (!ns) throw new Error('Email ' + email + ' chưa có trong danh sách nhân sự – nhờ quản trị thêm email của bạn ở Danh mục › Nhân sự.');
+  var cache = CacheService.getScriptCache();
+  var code = String(Math.floor(100000 + Math.random() * 900000));
+  cache.put('code:' + email, code, 600);
+  cache.remove('try:' + email);
+  MailApp.sendEmail(email, 'Mã đăng nhập CRM Báo cáo Marketing: ' + code,
+    'Chào ' + ns.ten + ',\n\nMã đăng nhập CRM Báo cáo Marketing của bạn là: ' + code + '\n(Mã có hiệu lực 10 phút.)\n\nNếu bạn không yêu cầu, hãy bỏ qua email này.');
+  return { name: ns.ten };
+}
+/** Bước 2: nhập mã -> token (lưu ở trình duyệt; đổi email / cho nghỉ là token hết hiệu lực). */
+function crmLoginCode(email, code) {
+  email = String(email || '').trim().toLowerCase();
+  var cache = CacheService.getScriptCache();
+  var tries = Number(cache.get('try:' + email) || 0);
+  if (tries >= 5) throw new Error('Nhập sai quá nhiều lần – bấm "Gửi mã" để nhận mã mới.');
+  var real = cache.get('code:' + email);
+  if (!real) throw new Error('Mã đã hết hạn – bấm "Gửi mã" để nhận mã mới.');
+  if (String(code || '').replace(/\D/g, '') !== real) { cache.put('try:' + email, String(tries + 1), 600); throw new Error('Sai mã.'); }
+  cache.remove('code:' + email);
+  var ns = crmStaffByEmail_(email);
+  if (!ns) throw new Error('Email không còn trong danh sách nhân sự.');
+  var token = Utilities.base64EncodeWebSafe(Utilities.newBlob(email).getBytes()).replace(/=+$/, '') + '.' + crmSign_(email);
+  return { token: token, me: crmMe_(token) };
+}
+
+/** Tạo báo cáo: chỉ chủ ứng dụng hoặc quản trị. */
+function crmRequireAdmin_(token) {
+  if (crmMe_(token).role !== 'admin') throw new Error('Chỉ quản trị mới tạo được báo cáo.');
+}
+
+var CRM_ADMIN_ONLY = ['crmImportEntries_', 'crmShareSheet_', 'crmTrashReportFiles_'];
+var CRM_CALLS = {
+  crmSave: crmSave_, crmSaveMany: crmSaveMany_, crmDelete: crmDelete_, crmImportEntries: crmImportEntries_,
+  crmUploadEvidence: crmUploadEvidence_, crmCopyEvidence: crmCopyEvidence_, crmWriteSheet: crmWriteSheet_,
+  crmShareSheet: crmShareSheet_, crmTrashReportFiles: crmTrashReportFiles_,
+};
+var CRM_STAFF_TABLES = ['SoLieu', 'ChungTu', 'TaiKhoan'];
+
+/** Cổng duy nhất để ghi dữ liệu: kiểm tra quyền rồi mới gọi hàm thật. */
+function crmCall(token, fn, args) {
+  var f = CRM_CALLS[fn];
+  if (!f) throw new Error('Không có thao tác ' + fn);
+  args = args || [];
+  var me = crmMe_(token);
+  if (!me.role) throw new Error('Bạn chưa đăng nhập (đăng nhập bằng email).');
+  if (me.email) CRM_ACTOR = me.email;
+  if (me.role === 'admin') return f.apply(null, args);
+  var deny = function (why) { throw new Error('Không có quyền: ' + why + ' Chỉ quản trị mới làm được.'); };
+  if (CRM_ADMIN_ONLY.indexOf(fn + '_') >= 0) deny('thao tác này dành cho quản trị.');
+  var mine = function (o, what) { if (String(o.nhanSu || '') !== me.name) deny(what + ' của "' + (o.nhanSu || 'chưa gán') + '" – bạn chỉ sửa được dữ liệu của chính mình.'); };
+  var checkRows = function (table, list) {
+    if (CRM_STAFF_TABLES.indexOf(table) < 0) deny('sửa ' + table + '.');
+    var rows = crmRows_(table), byId = {};
+    rows.forEach(function (r) { byId[r.id] = r; });
+    list.forEach(function (o) {
+      var old = o.id && byId[o.id];
+      if (old) mine(old, 'dòng');
+      if (table === 'TaiKhoan' && old) deny('sửa tài khoản đã có trong Danh mục.');
+      if (o.nhanSu !== undefined || !old) mine(o.nhanSu === undefined && old ? old : o, 'dòng');
+    });
+  };
+  if (fn === 'crmSave') checkRows(args[0], [args[1]]);
+  else if (fn === 'crmSaveMany') checkRows(args[0], args[1] || []);
+  else if (fn === 'crmDelete') {
+    if (['SoLieu', 'ChungTu'].indexOf(args[0]) < 0) deny('xoá ' + args[0] + '.');
+    var ids = [].concat(args[1]), rows = crmRows_(args[0]);
+    rows.filter(function (r) { return ids.indexOf(r.id) >= 0; }).forEach(function (r) { mine(r, 'xoá dòng'); });
+  } else if (fn === 'crmUploadEvidence') mine(args[0] || {}, 'tải chứng từ');
+  else if (fn === 'crmCopyEvidence') {
+    var src = crmRows_('ChungTu').filter(function (r) { return r.id === args[0]; })[0];
+    if (src) mine(src, 'chép chứng từ');
+  } else if (fn === 'crmWriteSheet') (args[2] || []).forEach(function (it) { mine(it, 'ghi Google Sheet'); });
+  return f.apply(null, args);
 }
 
 /** Thêm/sửa nhiều dòng (theo id). */
-function crmSaveMany(name, list) {
+function crmSaveMany_(name, list) {
   return crmWithLock_(function () {
     var rows = crmRows_(name);
     var idx = {};
@@ -413,11 +561,11 @@ function crmSameEvidence_(rows, o) {
   })[0];
 }
 
-function crmSave(name, o) {
-  return crmSaveMany(name, [o])[0];
+function crmSave_(name, o) {
+  return crmSaveMany_(name, [o])[0];
 }
 
-function crmDelete(name, ids) {
+function crmDelete_(name, ids) {
   ids = [].concat(ids);
   return crmWithLock_(function () {
     var rows = crmRows_(name);
@@ -489,7 +637,7 @@ function crmSheetFile_(duAn) {
   }
   if (!best) return { file: file, url: project.nguonSoLieu, switched: false };
   var url = 'https://docs.google.com/spreadsheets/d/' + best.getId() + '/edit';
-  crmSaveMany('DuAn', [{ id: project.id, nguonSoLieu: url }]);
+  crmSaveMany_('DuAn', [{ id: project.id, nguonSoLieu: url }]);
   return { file: best, url: url, switched: true };
 }
 
@@ -499,7 +647,7 @@ function crmSheetSource(duAn) {
   return { id: r.file.getId(), url: r.url, switched: r.switched, isSheet: r.file.getMimeType() === MimeType.GOOGLE_SHEETS };
 }
 
-function crmWriteSheet(duAn, tuan, items) {
+function crmWriteSheet_(duAn, tuan, items) {
   var src = crmSheetFile_(duAn);
   if (src.file.getMimeType() !== MimeType.GOOGLE_SHEETS) {
     throw new Error('File số liệu của ' + duAn + ' là file Excel (.xlsx), app không ghi vào được. Mở file › Tệp › Lưu dưới dạng Google Trang tính (để cùng thư mục, giữ nguyên tên) – app tự chuyển sang bản đó.');
@@ -589,7 +737,7 @@ function crmWriteSheet(duAn, tuan, items) {
  * Cho nhân sự (đang làm, có email ở tab Danh mục) quyền sửa Google Sheet số liệu của dự án.
  * Google gửi email báo cho người được thêm. Trả {added, already, noEmail, url}.
  */
-function crmShareSheet(duAn) {
+function crmShareSheet_(duAn) {
   var f = crmSheetFile_(duAn).file;
   var have = f.getEditors().map(function (u) { return String(u.getEmail()).toLowerCase(); });
   try { have.push(String(f.getOwner().getEmail()).toLowerCase()); } catch (e) { /* file trong Drive dùng chung */ }
@@ -605,7 +753,7 @@ function crmShareSheet(duAn) {
 }
 
 /** Nhập số liệu từ Google Sheet: thay các dòng nguồn "sheet" của dự án trong những tuần được nhập. */
-function crmImportEntries(duAn, weeks, list) {
+function crmImportEntries_(duAn, weeks, list) {
   return crmWithLock_(function () {
     var rows = crmRows_('SoLieu').filter(function (r) {
       return !(r.duAn === duAn && r.nguon === 'sheet' && weeks.indexOf(r.tuan) >= 0);
@@ -639,7 +787,7 @@ function crmWeekFolder_(iso) {
  * Dùng chứng từ của dự án khác cho dự án duAn (ví dụ hoá đơn chung của Sun và Casamia):
  * chép file vào <Nhân sự>/<Dự án>/<Tuần> của dự án đích và thêm dòng ChungTu. Đã có thì trả dòng cũ.
  */
-function crmCopyEvidence(id, duAn) {
+function crmCopyEvidence_(id, duAn) {
   var src = crmRows_('ChungTu').filter(function (r) { return r.id === id; })[0];
   if (!src) throw new Error('Không tìm thấy chứng từ ' + id);
   var project = crmRows_('DuAn').filter(function (p) { return p.ten === duAn; })[0];
@@ -654,14 +802,14 @@ function crmCopyEvidence(id, duAn) {
   var folder = crmSub_(crmSub_(crmSub_(DriveApp.getFolderById(rootId), meta.nhanSu || 'Chưa gán'),
     project.khoa || project.ten), crmWeekFolder_(meta.tuan));
   var file = DriveApp.getFileById(src.fileId).makeCopy(src.tenFile, folder);
-  return crmSave('ChungTu', {
+  return crmSave_('ChungTu', {
     tuan: meta.tuan, duAn: duAn, nhanSu: meta.nhanSu, nenTang: meta.nenTang, loai: meta.loai,
     fileId: file.getId(), tenFile: meta.tenFile, url: file.getUrl(), hash: meta.hash || '',
     soTien: meta.soTien || '', vat: meta.vat != null ? meta.vat : '',
   });
 }
 
-function crmUploadEvidence(meta, b64) {
+function crmUploadEvidence_(meta, b64) {
   var project = crmRows_('DuAn').filter(function (p) { return p.ten === meta.duAn; })[0];
   if (!project) throw new Error('Không có dự án ' + meta.duAn);
   if (meta.hash) {
@@ -672,7 +820,7 @@ function crmUploadEvidence(meta, b64) {
   var folder = crmSub_(crmSub_(crmSub_(DriveApp.getFolderById(rootId), meta.nhanSu || 'Chưa gán'),
     project.khoa || project.ten), crmWeekFolder_(meta.tuan));
   var file = folder.createFile(Utilities.newBlob(Utilities.base64Decode(b64), meta.mime || 'image/png', meta.tenFile));
-  return crmSave('ChungTu', {
+  return crmSave_('ChungTu', {
     tuan: meta.tuan, duAn: meta.duAn, nhanSu: meta.nhanSu, nenTang: meta.nenTang, loai: meta.loai,
     fileId: file.getId(), tenFile: meta.tenFile, url: file.getUrl(), hash: meta.hash || '',
     soTien: meta.soTien || '', vat: meta.vat != null ? meta.vat : '',
