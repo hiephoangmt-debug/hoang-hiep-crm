@@ -42,6 +42,9 @@ const PROD_COLS = ["id", "project", "kind", "name", "code", "areaMin", "areaMax"
 const PROD_HEAD = ["ID", "DỰ ÁN", "LOẠI", "TÊN / LOẠI CĂN", "MÃ", "DIỆN TÍCH TỪ (m²)", "DIỆN TÍCH ĐẾN (m²)", "GIÁ TỪ (tỷ)", "GIÁ ĐẾN (tỷ)",
   "TÌNH TRẠNG", "GHI CHÚ", "TÀI LIỆU (LINK)"];
 const PROD_STATUSES = ["Đang bán", "Chuyển nhượng", "Sắp mở bán", "Giữ chỗ", "Hết"];
+const T_CLICK = "CRM_CLICKS";
+const CLICK_HEAD = ["THỜI GIAN", "NÚT", "DỰ ÁN", "TRANG", "NGUỒN", "CHIẾN DỊCH", "TÊN KHÁCH", "SĐT", "PHIÊN"];
+const CLICK_NOTIFY_MIN = 30;      // cùng 1 khách bấm cùng nút: chỉ báo lại sau ngần này phút
 const LOG_HEAD = ["THỜI GIAN", "LEAD ID", "HÀNH ĐỘNG", "NỘI DUNG"];
 const PROJECT_TAB_HEAD = ["THỜI GIAN", "TÊN KHÁCH", "SỐ ĐIỆN THOẠI", "LOẠI CĂN", "LINK WEB",
   "NGUỒN", "UTM MEDIUM", "UTM CAMPAIGN", "UTM TERM", "GCLID/FBCLID", "IP", "FORM", "GHI CHÚ", "EMAIL"];
@@ -112,6 +115,7 @@ function withLock_(fn) {
 function doPost(e) {
   const p = (e && e.parameter) || {};
   if (p.action === "chat") return json_(chat_(p));
+  if (p.action === "click") return json_(click_(p));
   if (p.website) return json_({ ok: true }); // honeypot
   const phone = normPhone_(p.phone);
   if (!p.name || !phone) return json_({ ok: false, error: "invalid" });
@@ -132,6 +136,54 @@ function doPost(e) {
     if (WRITE_PROJECT_TAB) writeProjectTab_(lead, p);
   });
   return json_({ ok: true });
+}
+
+/** Khách bấm nút Gọi / Zalo trên website. Chỉ biết được lượt BẤM, không biết cuộc gọi/tin nhắn có thực sự diễn ra không. */
+function click_(p) {
+  const kind = p.kind === "call" ? "call" : p.kind === "zalo" ? "zalo" : "";
+  if (!kind) return { ok: false, error: "invalid" };
+  const label = kind === "call" ? "Gọi" : "Zalo";
+  const phone = normPhone_(p.phone);
+  const sid = clean_(p.sid, 40);
+  const cache = CacheService.getScriptCache();
+  const ck = "k_" + (sid || clean_(p.ip, 40) || "anon") + kind;
+  if (cache.get(ck)) return { ok: true, dup: true };
+  cache.put(ck, "1", CLICK_NOTIFY_MIN * 60);
+  const row = {
+    time: now_(), kind: label, project: clean_(p.project || "Website", 80),
+    page: /^https?:\/\//i.test(p.page || "") ? clean_(p.page, 300) : "",
+    source: clean_(p.utm_source || hostOf_(p.referrer) || "Website", 80), campaign: clean_(p.utm_campaign, 120),
+    name: clean_(p.name, 120), phone, sid,
+  };
+  withLock_(() => {
+    sheet_(T_CLICK, CLICK_HEAD).appendRow([row.time, row.kind, row.project, row.page, row.source, row.campaign, row.name, phone ? "'" + phone : "", sid]);
+    if (phone) {
+      const lead = readLeads_().rows.find((r) => r.phone === phone);
+      if (lead) { log_(lead.id, "Bấm " + label, `${row.project} · ${row.page}`); row.leadId = lead.id; row.name = row.name || lead.name; }
+    }
+  });
+  if (NOTIFY) {
+    try {
+      const who = phone ? `${row.name || "Khách"} – ${phone}${row.leadId ? " (đã có trong CRM)" : ""}` : "Khách chưa để lại thông tin";
+      MailApp.sendEmail({
+        to: NOTIFY_EMAIL || Session.getEffectiveUser().getEmail(),
+        subject: `[CRM] Khách bấm ${label} – ${row.project}${phone ? " – " + (row.name || phone) : ""}`,
+        htmlBody: `<div style="font-family:Arial,sans-serif"><p><b>${who}</b> vừa bấm nút <b>${label}</b> trên website.</p>
+          <p>Dự án: ${row.project}<br>Trang: ${row.page || "—"}<br>Nguồn: ${row.source}${row.campaign ? " / " + row.campaign : ""}</p>
+          <p style="color:#666">Hệ thống chỉ biết khách đã <b>bấm</b>, không biết cuộc gọi/tin nhắn có thực sự diễn ra. ${phone ? "Hãy chủ động gọi/nhắn Zalo lại cho khách." : "Khách chưa để lại số – nếu họ gọi tới, số sẽ hiện trong nhật ký cuộc gọi."}</p></div>`,
+      });
+    } catch (err) { console.warn("Mail:", err); }
+  }
+  return { ok: true };
+}
+
+function readClicks_(max) {
+  const sh = sheet_(T_CLICK, CLICK_HEAD), last = sh.getLastRow();
+  if (last < 2) return [];
+  const from = Math.max(2, last - (max || 30) + 1);
+  return sh.getRange(from, 1, last - from + 1, CLICK_HEAD.length).getValues()
+    .map((r) => ({ time: fmtDate_(r[0]), kind: r[1], project: r[2], page: r[3], source: r[4], campaign: r[5], name: r[6], phone: String(r[7] || "") , sid: r[8] }))
+    .reverse();
 }
 
 function hostOf_(url) {
@@ -329,7 +381,7 @@ function bootstrap(token) {
     const o = recommend_(l, products, 2);
     if (o.length) { offers[l.id] = o; n++; }
   });
-  return { leads, statuses: STATUSES, sheetUrl: ss_().getUrl(), products, offers, prodStatuses: PROD_STATUSES };
+  return { leads, statuses: STATUSES, sheetUrl: ss_().getUrl(), products, offers, prodStatuses: PROD_STATUSES, clicks: readClicks_(30) };
 }
 
 function findLead_(id) {
@@ -703,6 +755,11 @@ function dailyReport() {
   if (src.length) {
     const best = src.filter((x) => x[1] >= 3).sort((a, b) => b[2] / b[1] - a[2] / a[1])[0];
     if (best) insights.push(`Nguồn chất lượng nhất: <b>${esc(best[0])}</b> – ${Math.round(best[2] * 100 / best[1])}% khách quan tâm trở lên. Cân nhắc tăng ngân sách cho nguồn này.`);
+  }
+  const todayClicks = readClicks_(500).filter((c) => c.time.slice(0, 10) === today);
+  if (todayClicks.length) {
+    const named = todayClicks.filter((c) => c.phone).length;
+    insights.push(`📲 Hôm nay có ${todayClicks.filter((c) => c.kind === "Gọi").length} lượt bấm Gọi và ${todayClicks.filter((c) => c.kind === "Zalo").length} lượt bấm Zalo trên website${named ? " (" + named + " khách đã biết tên/SĐT – liên hệ lại)" : ""}. Lưu ý: chỉ ghi nhận lượt bấm, không biết cuộc gọi có diễn ra.`);
   }
   if (handled24.length) insights.push(slow ? `⚠️ ${slow}/${handled24.length} khách (30 ngày) vẫn ở trạng thái “Mới” sau 24 giờ – gọi trong 5 phút đầu giúp tăng tỷ lệ kết nối rõ rệt.`
     : `✅ Tất cả khách 30 ngày đều đã được xử lý trong 24 giờ.`);

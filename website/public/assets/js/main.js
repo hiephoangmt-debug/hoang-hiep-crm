@@ -255,6 +255,7 @@ const CONFIG = {
       };
       try { await sendLead(data); } catch (err) { console.warn("Không gửi được lead:", err); }
       store.set("fc_lead", "1");
+      try { if (data.phone) sessionStorage.setItem("hh_phone", data.phone); if (data.name) sessionStorage.setItem("hh_name", data.name); } catch (e) { /* bỏ qua */ }
       store.set("fc_name", data.name);
       track("generate_lead", { form: data.source, need: data.need, project });
       btn.disabled = false;
@@ -339,6 +340,30 @@ const CONFIG = {
     pickFloor(st.floor);
   }
 
+  /* Báo về CRM khi khách bấm nút Gọi (tel:) hoặc Zalo – chỉ biết lượt bấm, không biết cuộc gọi có diễn ra. */
+  (function () {
+    var ssg = function (k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } };
+    var sid = ssg("hh_sid");
+    if (!sid) { sid = Math.random().toString(36).slice(2, 12); try { sessionStorage.setItem("hh_sid", sid); } catch (e) { /* bỏ qua */ } }
+    document.addEventListener("click", function (e) {
+      try {
+        var path = e.composedPath ? e.composedPath() : [e.target], a = null, i;
+        for (i = 0; i < path.length; i++) if (path[i] && path[i].tagName === "A") { a = path[i]; break; }
+        if (!a) return;
+        var href = (a.getAttribute("href") || "").toLowerCase();
+        var kind = /^tel:/.test(href) ? "call" : /zalo\.me|zalo\.vn|^zalo:/.test(href) ? "zalo" : "";
+        var ep = CONFIG.leadEndpoint;
+        if (!kind || !ep) return;
+        var d = { action: "click", kind: kind, sid: sid, project: project, page: location.href, referrer: document.referrer, name: ssg("hh_name") || "", phone: ssg("hh_phone") || "" };
+        var u = utm; for (var k in u) if (u.hasOwnProperty(k)) d[k] = u[k];
+        var body = new URLSearchParams(d), ok = false;
+        try { ok = navigator.sendBeacon && navigator.sendBeacon(ep, body); } catch (x) { ok = false; }
+        if (!ok) { try { fetch(ep, { method: "POST", mode: "no-cors", keepalive: true, body: body }); } catch (x) { /* bỏ qua */ } }
+        if (window.dataLayer) window.dataLayer.push({ event: "click_" + kind, project: d.project });
+      } catch (err) { /* không ảnh hưởng nút */ }
+    }, true);
+  })();
+
   /* ---------- Dùng chung cho chat.js ---------- */
   window.__fc = {
     CONFIG, project, hasDrive, drive, track,
@@ -347,6 +372,7 @@ const CONFIG = {
       const data = { email: "", need: "", project, page: location.href, referrer: document.referrer, time: new Date().toISOString(), ...utm, ...fields };
       store.set("fc_lead", "1");
       if (data.name) store.set("fc_name", data.name);
+      try { if (data.phone) sessionStorage.setItem("hh_phone", data.phone); if (data.name) sessionStorage.setItem("hh_name", data.name); } catch (e) { /* bỏ qua */ }
       track("generate_lead", { form: data.source, need: data.need, project });
       return sendLead(data);
     },

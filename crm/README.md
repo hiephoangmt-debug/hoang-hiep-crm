@@ -104,3 +104,9 @@ node crm/test/crm.test.mjs
 - Khách mới (từ website hoặc nhập tay) tự được lưu vào **Danh bạ Google** với tên dạng `Tên – Dự án`, kèm SĐT, email, nhu cầu, ngân sách. Điện thoại đăng nhập cùng tài khoản Google sẽ hiện tên khi khách gọi đến.
 - Dùng dịch vụ nâng cao **People API** (đã khai báo trong `appsscript.json`); lần đầu Google sẽ xin thêm quyền Danh bạ.
 - Khách cũ: chạy hàm `syncAllContacts` trong Apps Script (150 khách/lần, chạy lại để lưu tiếp, không lưu trùng). Tắt tính năng: đặt `CONTACT_SYNC = false`.
+
+## Ở tất cả các website: bắt form, theo dõi bấm Gọi / Zalo
+
+- **Một thẻ script duy nhất** (`fc-widget.js`, hoặc `hh-connect.js` nếu không cần chat) trên mỗi website sẽ: bắt **tên + SĐT** ở mọi form (LadiPage, WordPress, form tự viết) gửi về CRM → khách tự lưu vào CRM_LEADS và Danh bạ Google; hiện nút Chat/Zalo/Gọi; báo khi khách bấm Gọi/Zalo. Nếu một trang có cả hai script thì chỉ một cái chạy (không gửi trùng).
+- **Bấm Gọi / Zalo**: mỗi lượt bấm ghi vào tab `CRM_CLICKS`, hiện ở mục "Khách bấm Gọi / Zalo gần đây" trong *Việc hôm nay*, gửi email báo ngay (cùng khách + cùng nút chỉ báo lại sau 30 phút) và ghi vào email tổng kết hằng ngày. Nếu khách trước đó đã để lại tên/SĐT trong phiên đó, email và lịch sử khách ghi rõ tên + số.
+- **Giới hạn cần biết**: website chỉ thấy khách **bấm** nút, không thể biết cuộc gọi có được thực hiện hay Zalo có được gửi hay không. Khách chưa để lại thông tin chỉ hiện là "khách ẩn danh". Muốn biết cuộc gọi thật cần xem nhật ký cuộc gọi của điện thoại/tổng đài.

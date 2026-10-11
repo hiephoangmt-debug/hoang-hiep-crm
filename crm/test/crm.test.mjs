@@ -190,4 +190,24 @@ assert.throws(() => api.login('matkhaumoi1'), /quá 5 lần/);
   assert.deepEqual(api.syncAllContacts(), { saved: 0, left: 0 }); // đã lưu rồi → bỏ qua
   console.log('contacts OK');
 }
+// ---- Theo dõi bấm Gọi / Zalo ----
+{
+  const { api, mail, g } = loadGas({});
+  api.setupCRM();
+  const pw3 = g.logs.find(l => l.includes('Mật khẩu')).match(/CRM: (\w+)/)[1];
+  const { token } = api.login(pw3);
+  api.doPost({ parameter: { name: 'Lan', phone: '0905111222', project: 'FPT Plaza 4' } });
+  const m0 = mail.length;
+  assert.deepEqual(JSON.parse(api.doPost({ parameter: { action: 'click', kind: 'call', sid: 's1', project: 'FPT Plaza 4', page: 'https://fpt-city.com/', utm_source: 'google' } })), { ok: true });
+  assert.equal(mail.length, m0 + 1); assert.match(mail[mail.length - 1][0].subject, /bấm Gọi/); assert.match(mail[mail.length - 1][0].htmlBody, /chưa để lại thông tin/);
+  assert.equal(JSON.parse(api.doPost({ parameter: { action: 'click', kind: 'call', sid: 's1' } })).dup, true, 'chống báo lặp');
+  api.doPost({ parameter: { action: 'click', kind: 'zalo', sid: 's2', name: 'Lan', phone: '905111222', project: 'FPT Plaza 4' } });
+  assert.match(mail[mail.length - 1][0].subject, /bấm Zalo.*Lan/);
+  assert.deepEqual(JSON.parse(api.doPost({ parameter: { action: 'click', kind: 'hack' } })), { ok: false, error: 'invalid' });
+  const b = api.bootstrap(token);
+  assert.equal(b.clicks.length, 2); assert.equal(b.clicks[0].kind, 'Zalo'); assert.equal(b.clicks[0].phone, '0905111222');
+  const lan = b.leads.find(l => l.phone === '0905111222');
+  assert.ok(api.getHistory(token, lan.id).some(h => h.action === 'Bấm Zalo'));
+  console.log('clicks OK');
+}
 console.log('ALL CRM TESTS PASSED ✔');

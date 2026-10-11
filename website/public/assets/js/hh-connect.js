@@ -14,7 +14,8 @@
 (function () {
   "use strict";
   var me = document.currentScript || document.querySelector("script[src*='hh-connect']");
-  if (!me) return;
+  if (!me || window.__hhCapture) return; // đã có fc-widget.js (đã tự bắt form) thì không chạy lại
+  window.__hhCapture = true;
   var cfg = {
     endpoint: me.getAttribute("data-endpoint") || "",
     project: me.getAttribute("data-project") || location.hostname.replace(/^www\./, ""),
@@ -46,7 +47,7 @@
   function label(el) {
     var lb = el.id && document.querySelector("label[for='" + el.id + "']");
     return [el.name, el.id, el.placeholder, el.getAttribute("aria-label"), lb && lb.textContent].join(" ").toLowerCase()
-      .normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d");
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d");
   }
   var RE = {
     phone: /phone|tel|mobile|sdt|so dien thoai|dien thoai|zalo/,
@@ -96,6 +97,7 @@
     var last = +(ss.get(key) || 0);
     if (Date.now() - last < 10 * 60 * 1000) return; // tránh gửi trùng khi form submit nhiều lần
     ss.set(key, String(Date.now()));
+    ss.set("hh_phone", f.phone); if (f.name) ss.set("hh_name", f.name);
     var data = {
       name: f.name || "Khách web", phone: f.phone, email: f.email, need: f.need.join(" · ").slice(0, 200),
       project: form.getAttribute("data-hh-project") || cfg.project,
@@ -106,6 +108,30 @@
     send(data);
     if (window.dataLayer) window.dataLayer.push({ event: "generate_lead", form: "hh-connect", project: data.project });
   }, true);
+
+  /* Báo về CRM khi khách bấm nút Gọi (tel:) hoặc Zalo – chỉ biết lượt bấm, không biết cuộc gọi có diễn ra. */
+  (function () {
+    var ssg = function (k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } };
+    var sid = ssg("hh_sid");
+    if (!sid) { sid = Math.random().toString(36).slice(2, 12); try { sessionStorage.setItem("hh_sid", sid); } catch (e) { /* bỏ qua */ } }
+    document.addEventListener("click", function (e) {
+      try {
+        var path = e.composedPath ? e.composedPath() : [e.target], a = null, i;
+        for (i = 0; i < path.length; i++) if (path[i] && path[i].tagName === "A") { a = path[i]; break; }
+        if (!a) return;
+        var href = (a.getAttribute("href") || "").toLowerCase();
+        var kind = /^tel:/.test(href) ? "call" : /zalo\.me|zalo\.vn|^zalo:/.test(href) ? "zalo" : "";
+        var ep = cfg.endpoint;
+        if (!kind || !ep) return;
+        var d = { action: "click", kind: kind, sid: sid, project: cfg.project, page: location.href, referrer: document.referrer, name: ssg("hh_name") || "", phone: ssg("hh_phone") || "" };
+        var u = utm; for (var k in u) if (u.hasOwnProperty(k)) d[k] = u[k];
+        var body = new URLSearchParams(d), ok = false;
+        try { ok = navigator.sendBeacon && navigator.sendBeacon(ep, body); } catch (x) { ok = false; }
+        if (!ok) { try { fetch(ep, { method: "POST", mode: "no-cors", keepalive: true, body: body }); } catch (x) { /* bỏ qua */ } }
+        if (window.dataLayer) window.dataLayer.push({ event: "click_" + kind, project: d.project });
+      } catch (err) { /* không ảnh hưởng nút */ }
+    }, true);
+  })();
 
   // Tuỳ chọn: nút Gọi / Zalo cố định bên phải
   if (cfg.buttons && (cfg.hotline || cfg.zalo)) {

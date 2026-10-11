@@ -25,7 +25,7 @@
   const st = { kb: null, history: [], awaitPhone: false, leadSent: !!ss.get("fc_chat_lead"), aiOff: false, asked: [], ctx: "" };
 
   /* ---------- Chuẩn hoá tiếng Việt để so khớp ---------- */
-  const norm = (s) => String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d").replace(/\s+/g, " ").trim();
+  const norm = (s) => String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/\s+/g, " ").trim();
   // từ ngắn (≤3 ký tự: "gia", "ty", "coc"…) phải khớp nguyên từ để "gia đình" không bị hiểu là hỏi giá
   const has = (t, words) => words.some((w) => (w.length <= 3 ? new RegExp("(^|[^a-z0-9])" + w + "([^a-z0-9]|$)").test(t) : t.includes(w)));
   const nf = (n) => String(n).replace(".", ",");

@@ -264,6 +264,7 @@ td.muted{color:var(--muted);font-size:13px}
         <div style="display:flex;gap:8px"><button class="btn btn-ghost btn-sm" data-refresh>⟳ Làm mới</button><button class="btn btn-primary btn-sm" data-add>+ Thêm khách</button></div>
       </div>
       <div class="kpis four" id="todayKpis"></div>
+      <div id="clicks"></div>
       <div class="tasks" id="tasks"></div>
     </section>
 
@@ -458,7 +459,7 @@ td.muted{color:var(--muted);font-size:13px}
 const $=(s,el=document)=>el.querySelector(s), $$=(s,el=document)=>[...el.querySelectorAll(s)];
 const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const store={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}}};
-const S={token:store.get("crm_token"),leads:[],products:[],offers:{},prodStatuses:[],statuses:[],view:"today",page:0,status:"",range:30,current:null};
+const S={token:store.get("crm_token"),leads:[],clicks:[],products:[],offers:{},prodStatuses:[],statuses:[],view:"today",page:0,status:"",range:30,current:null};
 const PAGE=50;
 
 /* ---------- Gọi server ---------- */
@@ -505,7 +506,7 @@ async function load(){
   busy(true);
   try{
     const r=await api("bootstrap",S.token);
-    Object.assign(S,{leads:r.leads,statuses:r.statuses,products:r.products||[],offers:r.offers||{},prodStatuses:r.prodStatuses||[]});
+    Object.assign(S,{leads:r.leads,statuses:r.statuses,products:r.products||[],clicks:r.clicks||[],offers:r.offers||{},prodStatuses:r.prodStatuses||[]});
     $("#login").hidden=true;$("#app").hidden=false;
     $("#meInfo").textContent=r.leads.length.toLocaleString("vi-VN")+" khách trong CRM";
     if(r.sheetUrl){$("#sheetLink").href=r.sheetUrl;$("#sheetLink").hidden=false}
@@ -574,6 +575,7 @@ function renderToday(){
     ["Khách mới hôm nay",S.leads.filter(l=>(l.created||"").slice(0,10)===today).length,"Từ 0h",""],
     ["Đã chăm sóc hôm nay",S.leads.filter(l=>(l.updated||"").slice(0,10)===today&&(l.created||"").slice(0,10)!==today).length,"Khách được cập nhật","accent"]];
   $("#todayKpis").innerHTML=kp.map(([l,v,s,c])=>`<div class="card kpi ${c}"><div class="lbl">${l}</div><div class="val">${v}</div><div class="sub">${s}</div></div>`).join("");
+  $("#clicks").innerHTML=S.clicks.length?`<section class="tgroup"><h2>📲 Khách bấm Gọi / Zalo gần đây<span class="cnt">${S.clicks.length}</span><span style="font-weight:500;color:var(--muted);font-size:12px">Chỉ biết đã bấm, không biết có gọi thật không</span></h2><div class="card" style="padding:6px 14px">${S.clicks.slice(0,8).map(c=>`<div style="padding:8px 0;border-bottom:1px solid var(--navy-100);font-size:13px"><b>${esc(c.kind)}</b> · ${fmtFull(c.time)} · ${esc(c.project)}${c.phone?` · <a href="tel:${esc(c.phone)}"><b>${esc(c.name||c.phone)}</b> ${esc(c.phone)}</a>`:' · <span class="nop">chưa để lại thông tin</span>'}<div class="nop">${esc(c.source)}${c.campaign?" / "+esc(c.campaign):""}</div></div>`).join("")}</div></section>`:"";
   let html="";
   groups.forEach(([k,title,hint])=>{
     let list=by(k);

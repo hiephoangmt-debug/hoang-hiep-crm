@@ -98,6 +98,7 @@
         setTimeout(function () { if (first) try { first.focus({ preventScroll: true }); } catch (e) { first.focus(); } }, 700);
       },
       sendLead: function (fields) {
+        if (fields && fields.phone) { ss.set("hh_phone", fields.phone); if (fields.name) ss.set("hh_name", fields.name); }
         var data = Object.assign({ email: "", need: "", project: PROJECT, page: location.href, referrer: document.referrer, time: new Date().toISOString() }, utm, fields);
         track("generate_lead", { form: data.source, need: data.need, project: data.project });
         var ep = window.__fc.CONFIG.leadEndpoint;
@@ -110,6 +111,71 @@
         });
       },
     };
+
+    /* Bắt tên + SĐT từ MỌI form trên trang (LadiPage, WordPress, form tự viết…) rồi gửi bản sao về CRM; không chặn form gốc. */
+    if (!window.__hhCapture) {
+      window.__hhCapture = true;
+      var nrm = function (v) {
+        var p = String(v || "").replace(/[^\d+]/g, "");
+        if (p.indexOf("+84") === 0) p = "0" + p.slice(3); else if (p.indexOf("84") === 0 && p.length === 11) p = "0" + p.slice(2);
+        if (/^[35789]\d{8}$/.test(p)) p = "0" + p;
+        return /^0(3|5|7|8|9)\d{8}$/.test(p) ? p : "";
+      };
+      var lbl = function (el) {
+        var lb = el.id && document.querySelector("label[for='" + el.id + "']");
+        return [el.name, el.id, el.placeholder, el.getAttribute("aria-label"), lb && lb.textContent].join(" ").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d");
+      };
+      var RP = /phone|tel|mobile|sdt|so dien thoai|dien thoai|zalo/, RE = /email|e-mail|mail/, RN = /name|ten|ho ten|fullname|ho va ten/, RS = /password|mat khau|captcha|token|nonce|website|honeypot|_wp|g-recaptcha/;
+      document.addEventListener("submit", function (e) {
+        try {
+          var form = e.target;
+          if (!form || form.tagName !== "FORM" || form.hasAttribute("data-hh-ignore")) return;
+          var hp = form.querySelector("input[name=website]:not([type=url]), input[name*=honeypot]");
+          if (hp && hp.value) return;
+          var f = { name: "", phone: "", email: "", need: [] }, fields = form.querySelectorAll("input, select, textarea"), i, j;
+          for (i = 0; i < fields.length; i++) {
+            var el = fields[i], ty = (el.type || "").toLowerCase(), v = (el.value || "").trim();
+            if (!v || /^(hidden|submit|button|file|password)$/.test(ty)) continue;
+            if ((ty === "checkbox" || ty === "radio") && !el.checked) continue;
+            var l = lbl(el);
+            if (RS.test(l)) continue;
+            if (!f.phone && (ty === "tel" || RP.test(l)) && nrm(v)) { f.phone = nrm(v); continue; }
+            if (!f.email && (ty === "email" || RE.test(l)) && v.indexOf("@") > 0) { f.email = v; continue; }
+            if (!f.name && ty !== "checkbox" && ty !== "radio" && el.tagName !== "SELECT" && el.tagName !== "TEXTAREA" && RN.test(l)) { f.name = v; continue; }
+            if (v.length <= 300) f.need.push(v);
+          }
+          if (!f.phone) for (j = 0; j < fields.length; j++) { var pp = nrm(fields[j].value); if (pp && fields[j].type !== "hidden") { f.phone = pp; var raw = fields[j].value.trim(); f.need = f.need.filter(function (x) { return x !== raw; }); break; } }
+          if (!f.phone) return;
+          var key = "hh_sent_" + f.phone;
+          if (Date.now() - (+ss.get(key) || 0) < 600000) return; // chống gửi trùng 10 phút (dùng chung với hh-connect.js)
+          ss.set(key, String(Date.now()));
+          window.__fc.sendLead({ name: f.name || "Khách web", phone: f.phone, email: f.email, need: f.need.join(" · ").slice(0, 200), source: "connect", project: form.getAttribute("data-hh-project") || PROJECT });
+        } catch (err) { /* không để lỗi ảnh hưởng form gốc */ }
+      }, true);
+    }
+    /* Báo về CRM khi khách bấm nút Gọi (tel:) hoặc Zalo – chỉ biết lượt bấm, không biết cuộc gọi có diễn ra. */
+    (function () {
+      var ssg = function (k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } };
+      var sid = ssg("hh_sid");
+      if (!sid) { sid = Math.random().toString(36).slice(2, 12); try { sessionStorage.setItem("hh_sid", sid); } catch (e) { /* bỏ qua */ } }
+      document.addEventListener("click", function (e) {
+        try {
+          var path = e.composedPath ? e.composedPath() : [e.target], a = null, i;
+          for (i = 0; i < path.length; i++) if (path[i] && path[i].tagName === "A") { a = path[i]; break; }
+          if (!a) return;
+          var href = (a.getAttribute("href") || "").toLowerCase();
+          var kind = /^tel:/.test(href) ? "call" : /zalo\.me|zalo\.vn|^zalo:/.test(href) ? "zalo" : "";
+          var ep = window.__fc.CONFIG.leadEndpoint;
+          if (!kind || !ep) return;
+          var d = { action: "click", kind: kind, sid: sid, project: PROJECT, page: location.href, referrer: document.referrer, name: ssg("hh_name") || "", phone: ssg("hh_phone") || "" };
+          var u = utm; for (var k in u) if (u.hasOwnProperty(k)) d[k] = u[k];
+          var body = new URLSearchParams(d), ok = false;
+          try { ok = navigator.sendBeacon && navigator.sendBeacon(ep, body); } catch (x) { ok = false; }
+          if (!ok) { try { fetch(ep, { method: "POST", mode: "no-cors", keepalive: true, body: body }); } catch (x) { /* bỏ qua */ } }
+          if (window.dataLayer) window.dataLayer.push({ event: "click_" + kind, project: d.project });
+        } catch (err) { /* không ảnh hưởng nút */ }
+      }, true);
+    })();
 /* =========================================================
    Chat tư vấn tự động – FPT City
    - Trả lời ngay từ kho kiến thức /assets/chat-kb.json (sinh lúc build)
@@ -137,7 +203,7 @@
   const st = { kb: null, history: [], awaitPhone: false, leadSent: !!ss.get("fc_chat_lead"), aiOff: false, asked: [], ctx: "" };
 
   /* ---------- Chuẩn hoá tiếng Việt để so khớp ---------- */
-  const norm = (s) => String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d").replace(/\s+/g, " ").trim();
+  const norm = (s) => String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/\s+/g, " ").trim();
   // từ ngắn (≤3 ký tự: "gia", "ty", "coc"…) phải khớp nguyên từ để "gia đình" không bị hiểu là hỏi giá
   const has = (t, words) => words.some((w) => (w.length <= 3 ? new RegExp("(^|[^a-z0-9])" + w + "([^a-z0-9]|$)").test(t) : t.includes(w)));
   const nf = (n) => String(n).replace(".", ",");
