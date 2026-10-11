@@ -501,8 +501,13 @@
   async function addPending(files) {
     const staff = $("evStaff").value;
     const list = Array.from(files).filter((f) => /^image\//.test(f.type) || B.isPdf(f));
+    const saved = new Set(S.ChungTu.filter((r) => r.duAn === $("evProject").value && r.tuan === $("evWeek").value).map((r) => r.hash).filter(Boolean));
+    let skipped = 0;
     for (const f of list) {
-      const p = { file: f, url: URL.createObjectURL(f), nenTang: "Facebook", loai: B.isPdf(f) ? "hoadon" : "ads", nhanSu: staff, note: "", campaigns: [] };
+      let hash = "";
+      try { hash = await hashOf(f); } catch (_) { /* trình duyệt không hỗ trợ: không chống trùng */ }
+      if (hash && (saved.has(hash) || pending.some((x) => x.hash === hash))) { skipped++; continue; }
+      const p = { file: f, hash, url: URL.createObjectURL(f), nenTang: "Facebook", loai: B.isPdf(f) ? "hoadon" : "ads", nhanSu: staff, note: "", campaigns: [] };
       if (B.isPdf(f)) {
         try {
           const pages = await B.pdfToImages(f, 1);
@@ -512,6 +517,8 @@
       }
       pending.push(p);
     }
+    const skipNote = skipped ? ` Bỏ qua ${skipped} ảnh trùng (đã chọn hoặc đã lưu cho tuần/dự án này).` : "";
+    if (skipped && skipped === list.length) { toast(skipNote.trim(), ""); return; }
     renderEvidence();
     const ctx = { staffList: staffNames(), accounts: S.TaiKhoan.map((t) => ({ account: t.maTaiKhoan, staff: t.nhanSu })) };
     const w = $("evWeek").value;
@@ -537,7 +544,7 @@
         apply(p);
         renderEvidence();
       }
-      toast("Đã đọc xong. Kiểm tra loại ảnh, nhân sự, số liệu rồi bấm Tải lên.", "ok");
+      toast("Đã đọc xong. Kiểm tra loại ảnh, nhân sự, số liệu rồi bấm Tải lên." + skipNote, "ok");
     } catch (e) { toast("Không đọc được chữ trong ảnh: " + e.message, "err"); }
   }
   /** Tài khoản QC duy nhất của nhân sự trên kênh (để gán cho số liệu đọc từ ảnh). */
@@ -551,9 +558,9 @@
     await run("Đang tải ảnh lên Drive", async () => {
       for (const p of pending.slice()) {
         toast(`Đang tải lên ${++n}/${pending.length}: ${p.file.name}`, "busy");
-        const rec = await gas("crmUploadEvidence", { tuan: w, duAn: pj, nhanSu: p.nhanSu, nenTang: p.nenTang, loai: p.loai, tenFile: p.file.name, mime: p.file.type },
+        const rec = await gas("crmUploadEvidence", { tuan: w, duAn: pj, nhanSu: p.nhanSu, nenTang: p.nenTang, loai: p.loai, tenFile: p.file.name, mime: p.file.type, hash: p.hash || "" },
           await B.blobToB64(p.file));
-        S.ChungTu.push(rec);
+        if (!S.ChungTu.some((x) => x.id === rec.id)) S.ChungTu.push(rec);
         const chosen = (p.campaigns || []).filter((c) => c.use && c.spent);
         if (chosen.length) {
           const rows = chosen.map((c) => {
@@ -641,24 +648,67 @@
     let wk = null;
     try { wk = await B.ocrWorker(); } catch (_) { /* không đọc được chữ: xếp theo tên file/thư mục */ }
     const rows = [];
+    const seen = new Set(S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w).map((r) => r.hash).filter(Boolean));
+    let i = 0;
     for (const f of files) {
-      toast(`${pjName}: đọc ảnh trên Drive ${rows.length + 1}/${files.length} – ${f.name}`, "busy");
-      let text = "";
+      toast(`${pjName}: đọc ảnh trên Drive ${++i}/${files.length} – ${f.name}`, "busy");
+      let text = "", hash = "";
       try {
-        const r = await gas("downloadFile", f.id);
-        const file = new File([B.b64ToBlob(r.b64, r.type)], f.name, { type: r.type });
+        const file = await evidenceFile({ fileId: f.id, tenFile: f.name });
+        hash = await hashOf(file);
+        if (seen.has(hash)) continue; // cùng nội dung với ảnh đã có: không lấy
+        seen.add(hash);
         text = B.isPdf(file) ? await B.pdfText(file) : wk ? (await wk.recognize(file)).data.text || "" : "";
       } catch (e) { console.error(e); }
       const c = B.classifyText(text, ctx), g = B.guessClass(f.path, f.name);
       rows.push({
         tuan: w, duAn: pjName, nenTang: c.platform || g.platform, loai: c.kind || g.kind,
         nhanSu: (c.staff && c.by === "id" ? c.staff : "") || staffFromPath(f.path, f.name) || c.staff || "",
-        fileId: f.id, tenFile: f.name, url: "https://drive.google.com/file/d/" + f.id + "/view",
+        fileId: f.id, tenFile: f.name, url: "https://drive.google.com/file/d/" + f.id + "/view", hash,
       });
     }
+    if (!rows.length) return [];
     const saved = await gas("crmSaveMany", "ChungTu", rows);
-    S.ChungTu = S.ChungTu.concat(saved);
+    S.ChungTu = S.ChungTu.filter((r) => !saved.some((x) => x.id === r.id)).concat(saved);
     return saved;
+  }
+
+  // ------------------------------------------------------------ ảnh trùng
+  const fileCache = new Map(); // fileId -> File đã tải trong phiên
+  async function hashOf(blob) {
+    const buf = await crypto.subtle.digest("SHA-256", await blob.arrayBuffer());
+    return Array.from(new Uint8Array(buf).slice(0, 12), (b) => b.toString(16).padStart(2, "0")).join("");
+  }
+  async function evidenceFile(r) {
+    if (!fileCache.has(r.fileId)) {
+      const f = await gas("downloadFile", r.fileId);
+      fileCache.set(r.fileId, new File([B.b64ToBlob(f.b64, f.type)], r.tenFile, { type: f.type }));
+    }
+    return fileCache.get(r.fileId);
+  }
+  /** Xoá ảnh trùng của một dự án + tuần (cùng file Drive hoặc cùng nội dung), giữ ảnh đã gán nhân sự / lưu sớm nhất. */
+  async function dedupeEvidence(pjName, w) {
+    const rows = S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w && r.fileId);
+    const fill = [];
+    let i = 0;
+    for (const r of rows) {
+      i++;
+      if (r.hash) continue;
+      toast(`${pjName}: kiểm tra ảnh trùng ${i}/${rows.length}…`, "busy");
+      try { r.hash = await hashOf(await evidenceFile(r)); fill.push({ id: r.id, hash: r.hash }); } catch (e) { console.error(e); }
+    }
+    if (fill.length) await gas("crmSaveMany", "ChungTu", fill);
+    const order = rows.slice().sort((a, b) => (!a.nhanSu - !b.nhanSu) || String(a.ngayTao).localeCompare(String(b.ngayTao)));
+    const seen = new Set(), dup = [];
+    order.forEach((r) => {
+      const keys = ["f:" + r.fileId].concat(r.hash ? ["h:" + r.hash] : []);
+      if (keys.some((k) => seen.has(k))) dup.push(r.id); else keys.forEach((k) => seen.add(k));
+    });
+    if (dup.length) {
+      await gas("crmDelete", "ChungTu", dup);
+      S.ChungTu = S.ChungTu.filter((x) => !dup.includes(x.id));
+    }
+    return dup.length;
   }
 
   async function buildOne(pjName, w, fmt) {
@@ -670,12 +720,13 @@
     if (!tplCache[tplId]) { const t = await gas("downloadFile", tplId); tplCache[tplId] = B.b64ToBlob(t.b64, t.type); }
     const accStaff = new Map(rows.map((r) => [r.taiKhoan || r.nhanSu || "(không rõ)", r.nhanSu]));
     try { await importDriveEvidence(pjName, w); } catch (e) { console.error(e); }
+    try { await dedupeEvidence(pjName, w); } catch (e) { console.error(e); }
     const ev = S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w && r.nhanSu);
     const images = [];
+    let i = 0;
     for (const r of ev) {
-      toast(`${pjName}: tải ảnh ${images.length + 1}/${ev.length}…`, "busy");
-      const f = await gas("downloadFile", r.fileId);
-      const file = new File([B.b64ToBlob(f.b64, f.type)], r.tenFile, { type: f.type });
+      toast(`${pjName}: tải ảnh ${++i}/${ev.length}…`, "busy");
+      const file = await evidenceFile(r);
       const files = B.isPdf(file) ? await B.pdfToImages(file, 2) : [file];
       files.forEach((x) => images.push({ file: x, platform: r.nenTang, kind: r.loai, staff: r.nhanSu }));
     }
@@ -835,12 +886,22 @@
     $("evScan").addEventListener("click", async () => {
       $("evScan").disabled = true;
       try {
-        const got = await run("Đang quét", () => importDriveEvidence($("evProject").value, $("evWeek").value));
-        const noStaff = got.filter((r) => !r.nhanSu).length;
-        toast(got.length ? `Đã lấy ${got.length} ảnh từ Drive` + (noStaff ? ` – ${noStaff} ảnh chưa gán nhân sự (chọn ở ô Nhân sự, ảnh chưa gán không vào báo cáo).` : ".")
-          : "Không có ảnh mới trong thư mục chứng từ cho tuần/dự án này.", got.length ? "ok" : "");
+        const pj = $("evProject").value, w = $("evWeek").value;
+        const got = await run("Đang quét", () => importDriveEvidence(pj, w));
+        const nDup = await run("Đang kiểm tra ảnh trùng", () => dedupeEvidence(pj, w));
+        const noStaff = got.filter((r) => !r.nhanSu && S.ChungTu.includes(r)).length;
+        toast((got.length ? `Đã lấy ${got.length} ảnh từ Drive` + (noStaff ? ` – ${noStaff} ảnh chưa gán nhân sự (chọn ở ô Nhân sự, ảnh chưa gán không vào báo cáo).` : ".")
+          : "Không có ảnh mới trong thư mục chứng từ cho tuần/dự án này.") + (nDup ? ` Đã xoá ${nDup} ảnh trùng.` : ""), got.length || nDup ? "ok" : "");
         renderEvidence();
       } catch (_) { /* đã báo */ } finally { $("evScan").disabled = false; }
+    });
+    $("evDedupe").addEventListener("click", async () => {
+      $("evDedupe").disabled = true;
+      try {
+        const n = await run("Đang kiểm tra ảnh trùng", () => dedupeEvidence($("evProject").value, $("evWeek").value));
+        toast(n ? `Đã xoá ${n} ảnh trùng (file thừa chuyển vào thùng rác Drive).` : "Không có ảnh trùng.", "ok");
+        renderEvidence();
+      } catch (_) { /* đã báo */ } finally { $("evDedupe").disabled = false; }
     });
     $("evList").addEventListener("change", async (e) => {
       const id = e.target.dataset.ev;

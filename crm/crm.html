@@ -127,7 +127,7 @@
 </style>
 </head>
 <body>
-<div id="loading">Đang tải CRM… <small class="muted">(giao diện v9)</small></div>
+<div id="loading">Đang tải CRM… <small class="muted">(giao diện v10)</small></div>
 <div id="diag" style="max-width:760px;margin:0 auto;padding:0 16px;color:#b42318;font-size:13px"></div>
 <script>
   // Báo lỗi ngay trên màn hình (để biết trang dừng ở đâu khi không mở được bảng điều khiển trình duyệt)
@@ -219,7 +219,8 @@
         <div class="actions"><button type="button" id="evUpload" hidden>Tải lên Drive</button></div>
       </section>
       <section class="card">
-        <h3>Đã lưu <small id="evCount" class="muted"></small></h3>
+        <div class="sec-head"><h3>Đã lưu <small id="evCount" class="muted"></small></h3>
+          <button type="button" id="evDedupe" class="ghost small" title="Ảnh cùng nội dung chỉ giữ một, bản thừa chuyển vào thùng rác Drive">Xoá ảnh trùng</button></div>
         <div class="imgs" id="evList"></div>
       </section>
     </div>

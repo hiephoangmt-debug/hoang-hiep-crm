@@ -128,7 +128,7 @@
 </style>
 </head>
 <body>
-<div id="loading">Đang tải CRM… <small class="muted">(giao diện v9)</small></div>
+<div id="loading">Đang tải CRM… <small class="muted">(giao diện v10)</small></div>
 <div id="diag" style="max-width:760px;margin:0 auto;padding:0 16px;color:#b42318;font-size:13px"></div>
 <script>
   // Báo lỗi ngay trên màn hình (để biết trang dừng ở đâu khi không mở được bảng điều khiển trình duyệt)
@@ -220,7 +220,8 @@
         <div class="actions"><button type="button" id="evUpload" hidden>Tải lên Drive</button></div>
       </section>
       <section class="card">
-        <h3>Đã lưu <small id="evCount" class="muted"></small></h3>
+        <div class="sec-head"><h3>Đã lưu <small id="evCount" class="muted"></small></h3>
+          <button type="button" id="evDedupe" class="ghost small" title="Ảnh cùng nội dung chỉ giữ một, bản thừa chuyển vào thùng rác Drive">Xoá ảnh trùng</button></div>
         <div class="imgs" id="evList"></div>
       </section>
     </div>
@@ -253,8 +254,2773 @@
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@dfe14e4b730d7cecfc67b0da2e4bf51fead78927/bao-cao-mkt/config.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@dfe14e4b730d7cecfc67b0da2e4bf51fead78927/bao-cao-mkt/app.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@dfe14e4b730d7cecfc67b0da2e4bf51fead78927/crm/crm.js"></script>
+<script>
+/* Cấu hình trang Báo cáo Marketing.
+ * googleClientId: OAuth Client ID (loại "Web application") tạo trong Google Cloud Console,
+ *   thêm https://crm-sale-danang.netlify.app vào "Authorized JavaScript origins". Xem README.md.
+ * presets: mỗi dự án một bộ link Drive; chọn ở đầu trang. */
+window.BAO_CAO_MKT_CONFIG = {
+  googleClientId: "",
+  // Link ứng dụng web Apps Script của CRM (đuôi /exec) – dùng cho trang crm.html trên Netlify
+  crmUrl: "",
+  // Link trang hướng dẫn (trống = trang ?page=huongdan của CRM)
+  guideUrl: "",
+  // Logo trong file PPTX mẫu (tên file ảnh trong mẫu) – mỗi dự án chọn một logo ở "logo"
+  logos: { "TATILAND": "image8.png", "TATI INVEST": "image9.png" },
+  // ID tài khoản quảng cáo -> nhân sự (cho tài khoản không ghi tên trong sheet)
+  accountStaff: {
+    "1091790822198238": "Mỹ Linh",
+  },
+  defaultTemplate: "https://drive.google.com/file/d/10S0gG5T_o1WOqqkvUiFdwdhauqoa9mA6/view",
+  presets: [
+    {
+      name: "Casa",
+      data: "https://docs.google.com/spreadsheets/d/1R_mmNKG_XA6qZrKmzuEAO79OA1Z-xe8jdg63ItufgnU/edit",
+      // Thư mục chứng từ chung (Nhân sự/Dự án/Tuần/ảnh); chỉ lấy ảnh nằm trong thư mục tên "Casamia"
+      folders: ["https://drive.google.com/drive/folders/146YOZUIiLizOl0waxcqAPw4uzY_jvmzt"],
+      projectKey: "Casamia",
+      logo: "TATI INVEST",
+      campaign: "CASAMIA BALANCA HOI AN-TATI INVEST ĐỢT 1",
+      period: "", // trống = theo tuần báo cáo
+      outName: "bao_cao_casa",
+    },
+    {
+      name: "Sun",
+      data: "https://docs.google.com/spreadsheets/d/1UOgRz8-D28PSSZCIYtO0YA5A8EeHrxIP/edit",
+      folders: ["https://drive.google.com/drive/folders/146YOZUIiLizOl0waxcqAPw4uzY_jvmzt"],
+      projectKey: "Sun",
+      logo: "TATILAND",
+      campaign: "SUN GROUP ĐÀ NẴNG - TATI INVEST",
+      period: "", // trống = theo tuần báo cáo
+      outName: "bao_cao_sun",
+    },
+    { name: "Khác (nhập link)", folders: [] },
+  ],
+};
+</script>
+<script>
+/* Báo cáo marketing tuần: điền PPTX mẫu từ file xlsx số liệu + ảnh chứng từ.
+ * Chạy hoàn toàn trên trình duyệt (JSZip + SheetJS), không gửi dữ liệu đi đâu. */
+(function () {
+  "use strict";
+
+  const PLATFORMS = ["Facebook", "Tiktok", "Zalo", "Google"];
+  const KINDS = { ads: "Chiến dịch", qc: "QC đang chạy", hoadon: "Hóa đơn" };
+  // từ khoá tiêu đề cột (đã bỏ dấu, viết thường) -> metric; thứ tự quan trọng
+  const METRIC_KEYS = [
+    ["chi phi thuc chay (+", "cost_fee"],
+    ["chi phi thuc chay", "cost"],
+    ["id tai khoan", "account"],
+    ["lead", "lead"],
+    ["impressions", "impressions"],
+    ["reach", "reach"],
+    ["frequency", "frequency"],
+    ["luot nhap", "clicks"],
+    ["ctr", "ctr"],
+    ["cpm", "cpm"],
+    ["luot xem", "views"],
+  ];
+  const SUM_FIELDS = ["cost", "cost_fee", "lead", "impressions", "reach", "clicks", "views", "mql", "sql", "deal"];
+  const NS = {
+    p: "http://schemas.openxmlformats.org/presentationml/2006/main",
+    a: "http://schemas.openxmlformats.org/drawingml/2006/main",
+    r: "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+  };
+  const IMG_REL = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image";
+
+  // ------------------------------------------------------------ tiện ích số
+  function norm(s) {
+    return String(s == null ? "" : s)
+      .replace(/đ/g, "d").replace(/Đ/g, "D")
+      .normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .replace(/\s+/g, " ").trim().toLowerCase();
+  }
+
+  /** Số kiểu VN ('1.108.866', '1,45') hoặc kiểu US ('97,231', '40,445.52') -> number. */
+  function toNum(v) {
+    if (v == null || v === "") return 0;
+    if (typeof v === "number") return v;
+    let s = String(v).trim().replace(/[\sđ%]/g, "");
+    if (!/\d/.test(s)) return 0;
+    if (s.includes(",") && s.includes(".")) {
+      const dec = s.lastIndexOf(",") > s.lastIndexOf(".") ? "," : ".";
+      s = s.split(dec === "," ? "." : ",").join("").replace(dec, ".");
+    } else if (s.includes(",") || s.includes(".")) {
+      const sep = s.includes(",") ? "," : ".";
+      const parts = s.split(sep);
+      if (parts.length > 2 || (parts.length === 2 && parts[1].length === 3 && parts[0] !== "0")) {
+        s = parts.join(""); // dấu phân cách hàng nghìn
+      } else {
+        s = parts.join(".");
+      }
+    }
+    const n = parseFloat(s);
+    return isNaN(n) ? 0 : n;
+  }
+
+  const fmtInt = (x) => Math.round(x).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  const fmtDec = (x, nd = 2) => x.toFixed(nd).replace(".", ",");
+
+  // ------------------------------------------------------------ đọc số liệu
+  function loadData(workbook, sheetName) {
+    const ws = workbook.Sheets[sheetName || workbook.SheetNames[0]];
+    const rows = XLSX.utils.sheet_to_json(ws, { header: 1, raw: true, defval: "" });
+    const hdrPlat = rows.findIndex(
+      (r) => r.filter((c) => PLATFORMS.includes(String(c).trim())).length >= 2
+    );
+    if (hdrPlat < 0) throw new Error("Không tìm thấy dòng tiêu đề Facebook/Tiktok/Zalo/Google trong sheet.");
+    const order = [];
+    rows[hdrPlat].forEach((c, j) => {
+      if (PLATFORMS.includes(String(c).trim())) order.push([String(c).trim(), j]);
+    });
+    order.sort((x, y) => x[1] - y[1]);
+    const hdr = rows[hdrPlat + 1] || [];
+    const colmap = {};
+    order.forEach(([name, start], k) => {
+      const end = Math.min(k + 1 < order.length ? order[k + 1][1] : start + 11, start + 12);
+      const m = {};
+      for (let j = start; j < end; j++) {
+        const h = norm(hdr[j]);
+        for (const [key, metric] of METRIC_KEYS) {
+          if (h.startsWith(key) && !(metric in m)) { m[metric] = j; break; }
+        }
+      }
+      colmap[name] = m;
+    });
+
+    const weeks = {};
+    let cur = null;
+    for (const r of rows.slice(hdrPlat + 2)) {
+      const label = String(r[0] || "").trim();
+      if (norm(label).startsWith("tong")) break;
+      if (/^\d{1,2}\/\d{1,2}\s*-\s*\d{1,2}\/\d{1,2}/.test(label)) {
+        cur = label.replace(/\s*-\s*/, " - ");
+        weeks[cur] = Object.fromEntries(PLATFORMS.map((p) => [p, []]));
+      }
+      if (!cur) continue;
+      for (const p of PLATFORMS) {
+        const m = colmap[p];
+        if (!m || !Object.keys(m).length) continue;
+        const get = (k) => (k in m ? r[m[k]] : "");
+        const rec = {};
+        SUM_FIELDS.forEach((k) => (rec[k] = toNum(get(k))));
+        rec.account = String(get("account") || "").trim();
+        if (rec.cost || rec.cost_fee || rec.lead || rec.impressions || rec.account) weeks[cur][p].push(rec);
+      }
+    }
+    return weeks;
+  }
+
+  function aggregate(recs) {
+    const t = {};
+    SUM_FIELDS.forEach((k) => (t[k] = recs.reduce((s, r) => s + r[k], 0)));
+    t.frequency = t.reach ? t.impressions / t.reach : 0;
+    t.ctr = t.impressions ? t.clicks / t.impressions : 0;
+    t.cpm = t.impressions ? (t.cost / t.impressions) * 1000 : 0;
+    t.accounts = new Set(recs.map((r) => r.account).filter(Boolean)).size;
+    t.hasFunnel = recs.some((r) => r.hasFunnel);
+    return t;
+  }
+
+  // ------------------------------------------------------------ XML PPTX
+  const SLIDE_CT = "application/vnd.openxmlformats-officedocument.presentationml.slide+xml";
+  const SLIDE_REL = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide";
+  const NOTES_REL = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/notesSlide";
+  const EMU_IN = 914400;
+
+  const byTag = (el, tag) => Array.from(el.getElementsByTagName(tag));
+  const paraText = (p) => byTag(p, "a:t").map((t) => t.textContent).join("");
+  const bodyText = (body) => byTag(body, "a:p").map(paraText).join("\n");
+  const parseXml = (s) => new DOMParser().parseFromString(s, "application/xml");
+  const xmlStr = (doc) => new XMLSerializer().serializeToString(doc);
+
+  /** Thay text một đoạn (a:p), giữ định dạng run đầu tiên. */
+  function setParaText(p, text) {
+    const doc = p.ownerDocument;
+    const ts = byTag(p, "a:t");
+    if (ts.length) {
+      ts[0].textContent = text;
+      ts.slice(1).forEach((t) => (t.textContent = ""));
+      return;
+    }
+    const r = doc.createElementNS(NS.a, "a:r");
+    const t = doc.createElementNS(NS.a, "a:t");
+    t.textContent = text;
+    const end = byTag(p, "a:endParaRPr")[0];
+    if (end) {
+      const rpr = doc.createElementNS(NS.a, "a:rPr");
+      Array.from(end.attributes).forEach((a) => rpr.setAttribute(a.name, a.value));
+      Array.from(end.childNodes).forEach((c) => rpr.appendChild(c.cloneNode(true)));
+      r.appendChild(rpr);
+      r.appendChild(t);
+      p.insertBefore(r, end);
+    } else {
+      r.appendChild(t);
+      p.appendChild(r);
+    }
+  }
+
+  function setBodyText(body, text) {
+    const paras = byTag(body, "a:p");
+    if (!paras.length) return;
+    setParaText(paras[0], text);
+    paras.slice(1).forEach((p) => byTag(p, "a:t").forEach((t) => (t.textContent = "")));
+  }
+
+  /** Vị trí/kích thước (EMU) của shape cấp cao nhất. */
+  function boxOf(el) {
+    const off = el.getElementsByTagName("a:off")[0], ext = el.getElementsByTagName("a:ext")[0];
+    if (!off || !ext) return null;
+    return { x: +off.getAttribute("x"), y: +off.getAttribute("y"), w: +ext.getAttribute("cx"), h: +ext.getAttribute("cy"), off, ext };
+  }
+
+  function topShapes(doc) {
+    const tree = byTag(doc, "p:spTree")[0];
+    return Array.from(tree.childNodes)
+      .filter((e) => e.nodeType === 1 && /^p:(sp|grpSp|graphicFrame|pic|cxnSp)$/.test(e.nodeName))
+      .map((el) => {
+        const blip = el.nodeName === "p:grpSp" ? null : el.getElementsByTagName("a:blip")[0];
+        return {
+          el,
+          box: boxOf(el),
+          text: el.nodeName === "p:graphicFrame" ? "" : byTag(el, "a:p").map(paraText).join("\n").trim(),
+          embed: blip ? blip.getAttributeNS(NS.r, "embed") || blip.getAttribute("r:embed") : null,
+        };
+      });
+  }
+
+  // txBody của mọi shape (kể cả trong group, không gồm ô bảng)
+  const shapeBodies = (doc) => byTag(doc, "p:sp").map((sp) => byTag(sp, "p:txBody")[0]).filter(Boolean);
+  const slideLines = (doc) => shapeBodies(doc).flatMap((b) => byTag(b, "a:p").map(paraText)).map(norm).filter(Boolean);
+
+  // ------------------------------------------------------------ phân tích mẫu
+  /** Đọc rels của slide: Id -> {type, target}. */
+  function relMap(relsDoc) {
+    const m = {};
+    Array.from(relsDoc.documentElement.getElementsByTagName("Relationship")).forEach((r) => {
+      m[r.getAttribute("Id")] = { type: r.getAttribute("Type"), target: r.getAttribute("Target") };
+    });
+    return m;
+  }
+
+  function analyzeSlide(s, slideW, slideH) {
+    const lines = slideLines(s.doc);
+    const text = lines.join("\n");
+    const rels = relMap(s.relsDoc);
+    const shapes = topShapes(s.doc);
+    const platLines = PLATFORMS.filter((p) => lines.some((l) => new RegExp("^" + p.toLowerCase() + "( ads)?:?$").test(l)));
+    // slide phân cách kênh: dòng chỉ có tên kênh (FACEBOOK / TIKTOK / ZALO / GOOGLE)
+    s.divider = PLATFORMS.find((p) => lines.includes(p.toLowerCase())) || null;
+    // tiêu đề "TIKTOK ADS:", bỏ qua slide liệt kê ngân sách (nhiều kênh)
+    s.titlePlatform = platLines.length === 1 ? platLines[0] : null;
+    s.tables = shapes.filter((sh) => sh.el.nodeName === "p:graphicFrame" && sh.el.getElementsByTagName("a:tbl")[0]);
+    s.tables.forEach((t) => {
+      // icon kênh đặt đè lên cột đầu của bảng
+      const icon = shapes.find((sh) => sh.embed && sh.box && sh.box.w < 2.5 * EMU_IN &&
+        sh.box.x >= t.box.x - EMU_IN / 2 && sh.box.x < t.box.x + t.box.w / 4 &&
+        sh.box.y >= t.box.y && sh.box.y < t.box.y + t.box.h);
+      t.icon = icon || null;
+      t.iconKey = icon && rels[icon.embed] ? rels[icon.embed].target : null;
+    });
+    s.dividerIconKey = null;
+    if (s.divider) {
+      const icon = shapes.find((sh) => sh.embed && sh.box && sh.box.w < 3 * EMU_IN && sh.box.w > EMU_IN / 2 && Math.abs(sh.box.w - sh.box.h) < EMU_IN / 4);
+      if (icon && rels[icon.embed]) s.dividerIconKey = rels[icon.embed].target;
+    }
+    // slide ảnh chứng từ: có ảnh demo lớn + ghi chú "Lưu ý"/"Demo"
+    const frame = shapes
+      .filter((sh) => sh.embed && sh.box && sh.box.w > 3 * EMU_IN && sh.box.w * sh.box.h < 0.6 * slideW * slideH && sh.box.x >= 0 && sh.box.y >= 0)
+      .sort((a, b) => b.box.w * b.box.h - a.box.w * a.box.h)[0];
+    s.frame = frame && /luu y|demo/.test(text) && !s.tables.length ? frame : null;
+    s.kind = null;
+    if (s.frame) {
+      if (lines.some((l) => l.startsWith("hoa don")) || text.includes("ma tham chieu")) s.kind = "hoadon";
+      else if (/quang cao (dang hoat dong|chay)/.test(text)) s.kind = "qc";
+      else s.kind = "ads";
+    }
+  }
+
+  /** Gán kênh cho slide/bảng: tiêu đề > mục kênh hiện tại > icon trên bảng. */
+  function resolvePlatforms(slides) {
+    let section = null;
+    const iconMap = {};
+    slides.forEach((s) => {
+      if (s.closing || slideLines(s.doc).some((l) => /^thank you/.test(l))) section = null;
+      if (s.divider) section = s.divider;
+      s.platform = s.titlePlatform || section;
+      if (s.divider && s.dividerIconKey) iconMap[s.dividerIconKey] = s.divider;
+    });
+    slides.forEach((s) => s.tables.forEach((t) => { if (s.platform && t.iconKey) iconMap[t.iconKey] = s.platform; }));
+    slides.forEach((s) => s.tables.forEach((t) => { t.platform = s.platform || (t.iconKey && iconMap[t.iconKey]) || null; }));
+  }
+
+  // ------------------------------------------------------------ điền nội dung
+  function cellValues(header, label, r, merged) {
+    return header.map((h, j) => {
+      if (h.startsWith("nen tang")) return merged ? null : label;
+      if (h.startsWith("id tai khoan")) return r.account || (merged && label === "TỔNG" ? "TỔNG" : "");
+      if (h.startsWith("chi phi thuc chay (")) return fmtInt(r.cost_fee);
+      if (h.startsWith("ngan sach thuc chay")) return fmtInt(r.cost);
+      if (h.startsWith("lead")) return fmtInt(r.lead);
+      if (h.startsWith("impressions")) return fmtInt(r.impressions);
+      if (h.startsWith("reach")) return fmtInt(r.reach);
+      if (h.startsWith("frequency")) return fmtDec(r.frequency);
+      if (h.startsWith("luot nhap")) return fmtInt(r.clicks);
+      if (h.startsWith("ctr")) return fmtDec(r.ctr * 100) + "%";
+      if (h.startsWith("cpm")) return fmtInt(r.cpm);
+      if (h.startsWith("luot xem")) return fmtInt(r.views);
+      if (/^(deal|mql|sql)/.test(h)) {
+        const k = h.slice(0, 4).trim();
+        return r.hasFunnel ? fmtInt(r[k] || 0) : "-";
+      }
+      return j === 0 && merged ? null : "";
+    });
+  }
+
+  function tableLines(platformFilter, data, label) {
+    const lines = [];
+    const all = [];
+    for (const p of PLATFORMS) {
+      if (platformFilter && p !== platformFilter) continue;
+      const recs = data[p] || [];
+      all.push(...recs);
+      const byAcc = new Map();
+      recs.forEach((r) => {
+        if (!byAcc.has(r.account)) byAcc.set(r.account, []);
+        byAcc.get(r.account).push(r);
+      });
+      byAcc.forEach((rs, acc) => lines.push([p === "Tiktok" ? "TikTok" : p, Object.assign(aggregate(rs), { account: label ? label(acc) : acc })]));
+    }
+    if (all.length && (lines.length > 1 || !platformFilter)) {
+      lines.push(["TỔNG", Object.assign(aggregate(all), { account: "" })]);
+    }
+    return lines;
+  }
+
+  function fillTable(t, data, slideH, label) {
+    const tbl = t.el.getElementsByTagName("a:tbl")[0];
+    const trs = byTag(tbl, "a:tr");
+    const header = byTag(trs[0], "a:tc").map((tc) => norm(bodyText(tc)));
+    const lines = tableLines(t.platform, data, label);
+    let rows = trs.slice(1);
+    if (!lines.length || !rows.length) return;
+    const first0 = () => byTag(rows[0], "a:tc")[0];
+    const merged = first0().hasAttribute("rowSpan");
+    const n = lines.length;
+    while (rows.length < n) {
+      const last = rows[rows.length - 1];
+      const tr = last.cloneNode(true);
+      const c0 = byTag(tr, "a:tc")[0];
+      if (merged && c0.hasAttribute("rowSpan")) { c0.removeAttribute("rowSpan"); c0.setAttribute("vMerge", "1"); }
+      last.parentNode.insertBefore(tr, last.nextSibling);
+      rows.push(tr);
+    }
+    while (rows.length > n) { const r = rows.pop(); r.parentNode.removeChild(r); }
+    if (merged) {
+      if (n > 1) first0().setAttribute("rowSpan", String(n));
+      else first0().removeAttribute("rowSpan");
+    }
+    rows.forEach((tr, i) => {
+      const vals = cellValues(header, lines[i][0], lines[i][1], merged);
+      byTag(tr, "a:tc").forEach((tc, j) => {
+        const body = byTag(tc, "a:txBody")[0];
+        if (body && vals[j] != null) {
+          setBodyText(body, vals[j]);
+          byTag(body, "a:rPr").forEach((rpr) => {
+            rpr.setAttribute("sz", n > 4 ? "1200" : "1400");
+            if (lines[i][0] === "TỔNG") rpr.setAttribute("b", "1");
+          });
+        }
+      });
+    });
+    // chiều cao: co dòng nếu bảng tràn khỏi slide
+    const headH = +trs[0].getAttribute("h");
+    let rowH = +rows[0].getAttribute("h");
+    const maxH = slideH * 0.96 - t.box.y;
+    if (headH + n * rowH > maxH) rowH = Math.max(Math.round(0.3 * EMU_IN), Math.floor((maxH - headH) / n));
+    rows.forEach((tr) => tr.setAttribute("h", String(rowH)));
+    t.box.ext.setAttribute("cy", String(headH + n * rowH));
+    // icon kênh: căn giữa vùng các dòng dữ liệu
+    if (t.icon) {
+      const ib = t.icon.box;
+      const size = Math.min(ib.w, Math.round(n * rowH * 0.9));
+      if (size !== ib.w) {
+        ib.off.setAttribute("x", String(ib.x + Math.round((ib.w - size) / 2)));
+        ib.ext.setAttribute("cx", String(size));
+        ib.ext.setAttribute("cy", String(Math.round((ib.h * size) / ib.w)));
+      }
+      const h = +ib.ext.getAttribute("cy");
+      ib.off.setAttribute("y", String(t.box.y + headH + Math.round((n * rowH - h) / 2)));
+    }
+  }
+
+  /** Nới rộng shape chứa body (đủ chỗ cho chữ dài hơn mẫu); center = giữ tâm. */
+  function widen(body, minW, center) {
+    const b = boxOf(body.parentNode);
+    if (!b || b.w >= minW) return;
+    if (center) b.off.setAttribute("x", String(Math.max(0, b.x - Math.round((minW - b.w) / 2))));
+    b.ext.setAttribute("cx", String(minW));
+  }
+
+  function fillText(doc, ctx) {
+    for (const body of shapeBodies(doc)) {
+      const t = bodyText(body).trim();
+      if (/^TUẦN\s*\d*$/i.test(t) && ctx.weekNo) {
+        setBodyText(body, "TUẦN " + ctx.weekNo);
+        widen(body, 6 * EMU_IN, true);
+      }
+      else if (/^\.{3,}\s*\d{1,2}\.\d{4}\s*-\s*\.{3,}\s*\d{1,2}\.\d{4}$/.test(t)) setBodyText(body, ctx.weekRangeText);
+      else if (t.startsWith("Thời gian triển khai:") && ctx.period) setBodyText(body, "Thời gian triển khai: " + ctx.period);
+      else if (t.startsWith("REVIEW CHIẾN DỊCH") && ctx.campaign) setBodyText(body, "REVIEW CHIẾN DỊCH " + ctx.campaign);
+      else {
+        byTag(body, "a:p").forEach((p) => {
+          const pt = paraText(p).trim();
+          const m = /^(Facebook|Tiktok|Zalo|Google):\s*$/i.exec(pt);
+          if (m) {
+            const name = m[1][0].toUpperCase() + m[1].slice(1).toLowerCase();
+            setParaText(p, `${name === "Tiktok" ? "TikTok" : name}: ${fmtInt(ctx.totals[name].cost_fee)} VNĐ`);
+            widen(body, 9 * EMU_IN, false);
+          } else if (/^NHÂN SỰ:/.test(pt) && ctx.staff) {
+            setParaText(p, "NHÂN SỰ: " + ctx.staff);
+          }
+        });
+      }
+    }
+  }
+
+  function imageSize(file) {
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => { resolve([img.naturalWidth, img.naturalHeight]); URL.revokeObjectURL(url); };
+      img.onerror = () => reject(new Error("Không đọc được ảnh " + file.name));
+      img.src = url;
+    });
+  }
+
+  /** Trang nghiệm thu chưa có ảnh: bỏ ảnh demo + số chú thích, đặt khung đỏ "CHƯA CÓ ẢNH NGHIỆM THU" vào chỗ ảnh. */
+  function markMissing(s) {
+    const doc = s.doc, frame = s.frame, B0 = frame.box;
+    const maxId = byTag(doc, "p:cNvPr").reduce((m, e) => Math.max(m, parseInt(e.getAttribute("id") || "0", 10)), 0);
+    const run = (text, sz, color, bold) => `<a:r><a:rPr lang="vi-VN" sz="${sz}"${bold ? ' b="1"' : ""}><a:solidFill><a:srgbClr val="${color}"/></a:solidFill></a:rPr><a:t>${text}</a:t></a:r>`;
+    const xml =
+      `<p:sp xmlns:p="${NS.p}" xmlns:a="${NS.a}"><p:nvSpPr><p:cNvPr id="${maxId + 1}" name="Thieu anh nghiem thu"/><p:cNvSpPr/><p:nvPr/></p:nvSpPr>` +
+      `<p:spPr><a:xfrm><a:off x="${B0.x}" y="${B0.y}"/><a:ext cx="${B0.w}" cy="${B0.h}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom>` +
+      `<a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="75000"/></a:srgbClr></a:solidFill>` +
+      `<a:ln w="28575"><a:solidFill><a:srgbClr val="C8102E"/></a:solidFill><a:prstDash val="dash"/></a:ln></p:spPr>` +
+      `<p:txBody><a:bodyPr wrap="square" anchor="ctr"/><a:lstStyle/>` +
+      `<a:p><a:pPr algn="ctr"/>${run("CHƯA CÓ ẢNH NGHIỆM THU", 2800, "C8102E", true)}</a:p>` +
+      `<a:p><a:pPr algn="ctr"/>${run("Chụp màn hình theo các mục ghi chú bên cạnh rồi tải lên CRM", 1600, "595959", false)}</a:p>` +
+      `</p:txBody></p:sp>`;
+    frame.el.parentNode.insertBefore(doc.importNode(parseXml(xml).documentElement, true), frame.el);
+    frame.el.parentNode.removeChild(frame.el);
+    topShapes(doc).forEach((sh) => {
+      const badge = /^\d$/.test(sh.text) && sh.box && sh.box.w < EMU_IN;
+      if (badge || /^\*demo/i.test(norm(sh.text))) sh.el.parentNode.removeChild(sh.el);
+    });
+  }
+
+  /** PowerPoint chỉ chắc chắn đọc PNG/JPEG: ảnh khác (webp, gif, bmp) được vẽ lại thành PNG. */
+  async function embeddable(f) {
+    const type = f.type || "";
+    const ext = (f.name.split(".").pop() || "").toLowerCase();
+    if (type === "image/png" || (!type && ext === "png")) return { data: await f.arrayBuffer(), ext: "png" };
+    if (type === "image/jpeg" || (!type && /^jpe?g$/.test(ext))) return { data: await f.arrayBuffer(), ext: "jpeg" };
+    const bmp = await createImageBitmap(f);
+    const c = document.createElement("canvas");
+    c.width = bmp.width;
+    c.height = bmp.height;
+    c.getContext("2d").drawImage(bmp, 0, 0);
+    const blob = await new Promise((res) => c.toBlob(res, "image/png"));
+    return { data: await blob.arrayBuffer(), ext: "png" };
+  }
+
+  /** Thay ảnh demo bằng ảnh chứng từ (xếp lưới trong khung demo), bỏ số chú thích và dòng "*Demo". */
+  async function placeImages(zip, s, files, state) {
+    const doc = s.doc, frame = s.frame;
+    const relRoot = s.relsDoc.documentElement;
+    const usedIds = new Set(Array.from(relRoot.getElementsByTagName("Relationship")).map((r) => r.getAttribute("Id")));
+    const maxId = byTag(doc, "p:cNvPr").reduce((m, e) => Math.max(m, parseInt(e.getAttribute("id") || "0", 10)), 0);
+    const B = frame.box;
+    const n = files.length;
+    const cols = n === 1 ? 1 : 2;
+    const rowsN = Math.ceil(n / cols);
+    const gap = Math.round(0.15 * EMU_IN);
+    const cw = Math.floor((B.w - gap * (cols - 1)) / cols);
+    const ch = Math.floor((B.h - gap * (rowsN - 1)) / rowsN);
+    for (let k = 0; k < n; k++) {
+      const f = files[k];
+      const { data, ext } = await embeddable(f);
+      state.media += 1;
+      const mediaName = `bcmkt_${state.media}.${ext}`;
+      zip.file("ppt/media/" + mediaName, data);
+      state.exts.add(ext);
+      let rid = 1;
+      while (usedIds.has("rId" + rid)) rid++;
+      usedIds.add("rId" + rid);
+      const rel = s.relsDoc.createElementNS(relRoot.namespaceURI, "Relationship");
+      rel.setAttribute("Id", "rId" + rid);
+      rel.setAttribute("Type", IMG_REL);
+      rel.setAttribute("Target", "../media/" + mediaName);
+      relRoot.appendChild(rel);
+
+      const [iw, ih] = await imageSize(f);
+      const ratio = Math.min(cw / iw, ch / ih);
+      const w = Math.round(iw * ratio), h = Math.round(ih * ratio);
+      const c = k % cols, r = Math.floor(k / cols);
+      const x = B.x + c * (cw + gap) + Math.floor((cw - w) / 2);
+      const y = B.y + r * (ch + gap) + Math.floor((ch - h) / 2);
+      const xml =
+        `<p:pic xmlns:p="${NS.p}" xmlns:a="${NS.a}" xmlns:r="${NS.r}">` +
+        `<p:nvPicPr><p:cNvPr id="${maxId + k + 1}" name="Anh chung tu ${k + 1}"/><p:cNvPicPr><a:picLocks noChangeAspect="1"/></p:cNvPicPr><p:nvPr/></p:nvPicPr>` +
+        `<p:blipFill><a:blip r:embed="rId${rid}"/><a:stretch><a:fillRect/></a:stretch></p:blipFill>` +
+        `<p:spPr><a:xfrm><a:off x="${x}" y="${y}"/><a:ext cx="${w}" cy="${h}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom>` +
+        `<a:ln w="9525"><a:solidFill><a:srgbClr val="BFBFBF"/></a:solidFill></a:ln></p:spPr></p:pic>`;
+      frame.el.parentNode.insertBefore(doc.importNode(parseXml(xml).documentElement, true), frame.el);
+    }
+    frame.el.parentNode.removeChild(frame.el);
+    topShapes(doc).forEach((sh) => {
+      const badge = /^\d$/.test(sh.text) && sh.box && sh.box.w < EMU_IN;
+      if (badge || /^\*demo/i.test(norm(sh.text))) sh.el.parentNode.removeChild(sh.el);
+    });
+  }
+
+  async function ensureContentTypes(ct, exts) {
+    const root = ct.documentElement;
+    const have = new Set(Array.from(root.getElementsByTagName("Default")).map((d) => d.getAttribute("Extension").toLowerCase()));
+    exts.forEach((ext) => {
+      if (have.has(ext)) return;
+      const d = ct.createElementNS(root.namespaceURI, "Default");
+      d.setAttribute("Extension", ext);
+      d.setAttribute("ContentType", "image/" + ext);
+      root.insertBefore(d, root.firstChild);
+    });
+  }
+
+  /**
+   * Đổi logo đầu trang theo dự án (vd. Sun = TATILAND, Casamia = TATI INVEST).
+   * logos: { "TATILAND": "image8.png", "TATI INVEST": "image9.png" } – tên file ảnh logo trong mẫu.
+   * Lấy cách cắt ảnh (fillRect) + tỉ lệ của logo đích từ chính mẫu; giữ chiều cao, vị trí trái/trên.
+   */
+  function logoShapes(doc, rels, logos) {
+    const byFile = Object.fromEntries(Object.entries(logos || {}).map(([k, f]) => [f, k]));
+    return byTag(doc, "a:blip").map((blip) => {
+      const rid = blip.getAttributeNS(NS.r, "embed") || blip.getAttribute("r:embed");
+      const target = rels[rid] && rels[rid].target;
+      const name = target && byFile[target.split("/").pop()];
+      if (!name) return null;
+      let shape = blip.parentNode;
+      while (shape && !/^p:(sp|pic)$/.test(shape.nodeName)) shape = shape.parentNode;
+      return shape ? { blip, shape, name, target, fill: byTag(shape, "a:fillRect")[0], box: boxOf(shape) } : null;
+    }).filter(Boolean);
+  }
+  function collectLogoRefs(slides, logos) {
+    const refs = {};
+    for (const s of slides) {
+      for (const l of logoShapes(s.pristine || s.doc, relMap(s.pristineRels || s.relsDoc), logos)) {
+        if (refs[l.name] || !l.box || !l.box.h) continue;
+        refs[l.name] = { target: l.target, aspect: l.box.w / l.box.h,
+          fill: l.fill ? Array.from(l.fill.attributes).map((a) => [a.name, a.value]) : [] };
+      }
+    }
+    return refs;
+  }
+  function swapLogo(s, want, refs, logos) {
+    const ref = refs[want];
+    if (!ref) return;
+    const relRoot = s.relsDoc.documentElement;
+    let rid = null;
+    const relsNow = Array.from(relRoot.getElementsByTagName("Relationship"));
+    const hit = relsNow.find((r) => r.getAttribute("Target") === ref.target);
+    if (hit) rid = hit.getAttribute("Id");
+    for (const l of logoShapes(s.doc, relMap(s.relsDoc), logos)) {
+      if (l.name === want) continue;
+      if (!rid) {
+        const used = new Set(relsNow.map((r) => r.getAttribute("Id")));
+        let k = 1;
+        while (used.has("rId" + k)) k++;
+        rid = "rId" + k;
+        const rel = s.relsDoc.createElementNS(relRoot.namespaceURI, "Relationship");
+        rel.setAttribute("Id", rid);
+        rel.setAttribute("Type", IMG_REL);
+        rel.setAttribute("Target", ref.target);
+        relRoot.appendChild(rel);
+      }
+      l.blip.setAttributeNS(NS.r, "r:embed", rid);
+      if (l.fill) {
+        Array.from(l.fill.attributes).map((a) => a.name).forEach((n) => l.fill.removeAttribute(n));
+        ref.fill.forEach(([n, v]) => l.fill.setAttribute(n, v));
+      }
+      if (l.box && l.box.h) l.box.ext.setAttribute("cx", String(Math.round(l.box.h * ref.aspect)));
+    }
+  }
+
+  const relsPathOf = (path) => path.replace(/([^/]+)$/, "_rels/$1.rels");
+  const resolveTarget = (base, target) => {
+    const parts = base.split("/").slice(0, -1);
+    target.split("/").forEach((seg) => { if (seg === "..") parts.pop(); else if (seg !== ".") parts.push(seg); });
+    return parts.join("/");
+  };
+
+  function removePart(zip, ct, path) {
+    zip.remove(path);
+    zip.remove(relsPathOf(path));
+    Array.from(ct.documentElement.getElementsByTagName("Override"))
+      .filter((o) => o.getAttribute("PartName") === "/" + path)
+      .forEach((o) => o.parentNode.removeChild(o));
+  }
+
+  function chunk(arr, size) {
+    const out = [];
+    for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
+    return out;
+  }
+
+  /**
+   * Xây dựng báo cáo từ mẫu.
+   * opts.images: [{file, platform, kind, staff}]; opts.staffList: tên nhân sự theo thứ tự;
+   * opts.staffOf(account) -> tên nhân sự của tài khoản ("" = chưa gán).
+   * Phần từ slide "NHÂN SỰ:" tới trước "THANK YOU" được nhân bản cho từng nhân sự.
+   */
+  async function buildReport(opts) {
+    const weeks = opts.weeks;
+    const names = Object.keys(weeks);
+    const active = names.filter((w) => PLATFORMS.some((p) => weeks[w][p].length));
+    if (!active.length) throw new Error("Không có dữ liệu thực chạy trong file số liệu.");
+    const week = opts.week || active[active.length - 1];
+    const scopeWeeks = opts.scope === "all" ? active : [week];
+    const allData = Object.fromEntries(PLATFORMS.map((p) => [p, scopeWeeks.flatMap((w) => weeks[w][p])]));
+    const staffOf = opts.staffOf || (() => "");
+    const dataFor = (staff) => staff == null ? allData
+      : Object.fromEntries(PLATFORMS.map((p) => [p, allData[p].filter((r) => staffOf(r.account) === staff)]));
+    const totalsOf = (data) => Object.fromEntries(PLATFORMS.map((p) => [p, aggregate(data[p])]));
+    const d1 = scopeWeeks[0].split("-")[0].trim().replace("/", ".");
+    const d2 = scopeWeeks[scopeWeeks.length - 1].split("-")[1].trim().replace("/", ".");
+    const base = {
+      campaign: opts.campaign,
+      period: opts.period || `${d1.replace(".", "/")} - ${d2.replace(".", "/")}/${opts.year}`,
+      weekNo: opts.weekNo || names.indexOf(week) - names.indexOf(active[0]) + 1,
+      weekRangeText: `${d1}.${opts.year} - ${d2}.${opts.year}`,
+    };
+    const imgList = opts.images || [];
+    const imgsFor = (staff) => (p, k) => imgList
+      .filter((im) => im.platform === p && im.kind === k && (staff == null || im.staff === staff))
+      .map((im) => im.file);
+    const perSlide = Math.max(1, opts.perSlide || 1);
+    // Tài khoản chỉ có số: ghi thêm tên nhân sự đã gán ("Mỹ Linh 1091790822198238")
+    const accountLabel = (acc) => {
+      const st = staffOf(acc);
+      return st && /^\d+$/.test(String(acc).trim()) ? `${st} ${acc}` : acc;
+    };
+
+    const zip = await JSZip.loadAsync(opts.template);
+    const presPath = "ppt/presentation.xml";
+    const pres = parseXml(await zip.file(presPath).async("string"));
+    const presRels = parseXml(await zip.file("ppt/_rels/presentation.xml.rels").async("string"));
+    const ct = parseXml(await zip.file("[Content_Types].xml").async("string"));
+    const presRelMap = relMap(presRels);
+    const sz = byTag(pres, "p:sldSz")[0];
+    const W = +sz.getAttribute("cx"), H = +sz.getAttribute("cy");
+    const sldIdLst = byTag(pres, "p:sldIdLst")[0];
+    const sldIds = byTag(sldIdLst, "p:sldId");
+
+    const slides = [];
+    for (const el of sldIds) {
+      const rid = el.getAttributeNS(NS.r, "id") || el.getAttribute("r:id");
+      const path = resolveTarget(presPath, presRelMap[rid].target);
+      const relsFile = zip.file(relsPathOf(path));
+      const s = {
+        el, rid, path,
+        doc: parseXml(await zip.file(path).async("string")),
+        relsDoc: parseXml(relsFile ? await relsFile.async("string")
+          : '<' + '?xml version="1.0" encoding="UTF-8" standalone="yes"?' + '><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"/>'),
+      };
+      s.pristine = s.doc.cloneNode(true);
+      s.pristineRels = s.relsDoc.cloneNode(true);
+      analyzeSlide(s, W, H);
+      const lines = slideLines(s.doc);
+      s.staffSlide = lines.some((l) => l.startsWith("nhan su"));
+      s.closing = lines.some((l) => /^thank you/.test(l));
+      slides.push(s);
+    }
+    resolvePlatforms(slides);
+    const logoRefs = opts.logo ? collectLogoRefs(slides, opts.logos) : {};
+
+    // Phân đoạn: phần tổng | khối nhân sự (nhân bản) | phần kết
+    const staffList = (opts.staffList || []).filter(Boolean);
+    let bStart = slides.findIndex((s) => s.staffSlide);
+    let bEnd = bStart < 0 ? -1 : slides.findIndex((s, i) => i > bStart && s.closing);
+    if (bStart >= 0 && bEnd < 0) bEnd = slides.length;
+
+    const out = []; // {src, files, clone, ctx}
+    const usedOriginal = new Set();
+    const emit = (s, files, ctx, placeholder) => {
+      const clone = usedOriginal.has(s);
+      usedOriginal.add(s);
+      out.push({ src: s, files, clone, ctx, placeholder: !!placeholder });
+    };
+    // loại trang ảnh có trong mẫu theo kênh (Google không có trang "QC đang chạy" -> ảnh đó vào trang Chiến dịch)
+    const slideKinds = {};
+    slides.forEach((s) => { if (s.frame && s.platform) (slideKinds[s.platform] = slideKinds[s.platform] || new Set()).add(s.kind); });
+    function plan(seq, staff, staffLabel) {
+      const data = dataFor(staff);
+      const ctx = Object.assign({}, base, { data, totals: totalsOf(data), staff: staffLabel });
+      const raw = imgsFor(staff);
+      const imgsOf = (p, k) => raw(p, k).concat(k === "ads" && slideKinds[p] && !slideKinds[p].has("qc") ? raw(p, "qc") : []);
+      const used = (p) => data[p].length > 0 || Object.keys(KINDS).some((k) => imgsOf(p, k).length);
+      const usedKinds = new Set();
+      for (const s of seq) {
+        const tablePlats = s.tables.map((t) => t.platform).filter(Boolean);
+        const plat = s.platform || (tablePlats.length ? tablePlats[0] : null);
+        if (opts.dropUnused && plat && !used(plat)) continue;
+        if (s.frame && plat) {
+          const key = plat + "/" + s.kind;
+          const files = usedKinds.has(key) ? [] : imgsOf(plat, s.kind);
+          usedKinds.add(key);
+          if (!files.length) {
+            if (opts.placeholderMissing) emit(s, [], ctx, true);
+            else if (!opts.dropEmptyImageSlides) emit(s, [], ctx);
+            continue;
+          }
+          chunk(files, perSlide).forEach((fs) => emit(s, fs, ctx));
+          continue;
+        }
+        emit(s, [], ctx);
+      }
+    }
+    if (bStart < 0) {
+      plan(slides, null, opts.staff || "");
+    } else {
+      plan(slides.slice(0, bStart), null, "");
+      const block = slides.slice(bStart, bEnd);
+      if (staffList.length) staffList.forEach((st) => plan(block, st, st));
+      else plan(block, null, opts.staff || "");
+      plan(slides.slice(bEnd), null, "");
+    }
+    const drop = slides.filter((s) => !usedOriginal.has(s));
+
+    // Nhân bản slide (từ bản gốc chưa điền)
+    let maxSlideNo = Math.max(...Object.keys(zip.files).map((f) => (/^ppt\/slides\/slide(\d+)\.xml$/.exec(f) || [0, 0])[1] | 0));
+    out.forEach((o) => {
+      if (!o.clone) { o.s = o.src; return; }
+      const path = `ppt/slides/slide${++maxSlideNo}.xml`;
+      const relsDoc = o.src.pristineRels.cloneNode(true);
+      Array.from(relsDoc.documentElement.getElementsByTagName("Relationship"))
+        .filter((r) => r.getAttribute("Type") === NOTES_REL)
+        .forEach((r) => r.parentNode.removeChild(r));
+      o.s = Object.assign({}, o.src, { el: null, rid: null, path, doc: o.src.pristine.cloneNode(true), relsDoc });
+      analyzeSlide(o.s, W, H);
+      o.s.platform = o.src.platform;
+      const ov = ct.createElementNS(ct.documentElement.namespaceURI, "Override");
+      ov.setAttribute("PartName", "/" + path);
+      ov.setAttribute("ContentType", SLIDE_CT);
+      ct.documentElement.appendChild(ov);
+    });
+
+    // Điền nội dung
+    const state = { media: 0, exts: new Set() };
+    let nImg = 0, nMissing = 0;
+    for (const o of out) {
+      const s = o.s;
+      fillText(s.doc, o.ctx);
+      if (opts.logo) swapLogo(s, opts.logo, logoRefs, opts.logos);
+      s.tables.forEach((t, i) => {
+        t.platform = o.src.tables[i] ? o.src.tables[i].platform : t.platform;
+        fillTable(t, o.ctx.data, H, accountLabel);
+      });
+      if (o.files.length) {
+        await placeImages(zip, s, o.files, state);
+        nImg += o.files.length;
+      } else if (o.placeholder && s.frame) {
+        markMissing(s);
+        nMissing++;
+      }
+    }
+
+    // Xoá slide bị bỏ (kèm notes)
+    drop.forEach((s) => {
+      const rels = relMap(s.relsDoc);
+      Object.values(rels).filter((r) => r.type === NOTES_REL).forEach((r) => removePart(zip, ct, resolveTarget(s.path, r.target)));
+      removePart(zip, ct, s.path);
+      Array.from(presRels.documentElement.getElementsByTagName("Relationship"))
+        .filter((r) => r.getAttribute("Id") === s.rid)
+        .forEach((r) => r.parentNode.removeChild(r));
+    });
+
+    // Danh sách slide theo thứ tự mới
+    sldIds.forEach((el) => el.parentNode.removeChild(el));
+    let maxId = Math.max(...sldIds.map((e) => +e.getAttribute("id")));
+    const usedRid = new Set(Array.from(presRels.documentElement.getElementsByTagName("Relationship")).map((r) => r.getAttribute("Id")));
+    for (const o of out) {
+      const s = o.s;
+      let el = s.el;
+      if (!el) {
+        let k = 1;
+        while (usedRid.has("rId" + k)) k++;
+        usedRid.add("rId" + k);
+        const rel = presRels.createElementNS(presRels.documentElement.namespaceURI, "Relationship");
+        rel.setAttribute("Id", "rId" + k);
+        rel.setAttribute("Type", SLIDE_REL);
+        rel.setAttribute("Target", s.path.replace(/^ppt\//, ""));
+        presRels.documentElement.appendChild(rel);
+        el = pres.createElementNS(NS.p, "p:sldId");
+        el.setAttribute("id", String(++maxId));
+        el.setAttributeNS(NS.r, "r:id", "rId" + k);
+      }
+      sldIdLst.appendChild(el);
+      zip.file(s.path, xmlStr(s.doc));
+      zip.file(relsPathOf(s.path), xmlStr(s.relsDoc));
+    }
+    if (state.exts.size) await ensureContentTypes(ct, state.exts);
+    // Bỏ file media không còn slide nào dùng (ảnh demo của slide đã thay/xoá)
+    const referenced = new Set();
+    for (const f of Object.keys(zip.files).filter((f) => f.endsWith(".rels"))) {
+      const base = f.replace(/_rels\/[^/]+\.rels$/, "x");
+      const doc = parseXml(await zip.file(f).async("string"));
+      Array.from(doc.documentElement.getElementsByTagName("Relationship"))
+        .filter((r) => r.getAttribute("TargetMode") !== "External")
+        .forEach((r) => referenced.add(resolveTarget(base, r.getAttribute("Target"))));
+    }
+    Object.keys(zip.files)
+      .filter((f) => f.startsWith("ppt/media/") && !zip.files[f].dir && !referenced.has(f))
+      .forEach((f) => zip.remove(f));
+    zip.file(presPath, xmlStr(pres));
+    zip.file("ppt/_rels/presentation.xml.rels", xmlStr(presRels));
+    zip.file("[Content_Types].xml", xmlStr(ct));
+
+    const blob = await zip.generateAsync({
+      type: "blob",
+      mimeType: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      compression: "DEFLATE",
+    });
+    return { blob, week, nImg, missing: nMissing, slides: out.length, dropped: drop.length, staffCount: staffList.length };
+  }
+
+  // ------------------------------------------------------------ Google Drive
+  const XLSX_MIME = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+  const PPTX_MIME = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+  const FOLDER_MIME = "application/vnd.google-apps.folder";
+  const IMG_MIMES = ["image/png", "image/jpeg", "image/webp", "image/gif", "image/bmp", "application/pdf"];
+
+  /** Lấy ID từ link Drive/Sheets (hoặc chính ID). */
+  function parseDriveId(link) {
+    const s = String(link || "").trim();
+    const m = /\/d\/([\w-]{15,})/.exec(s) || /\/folders\/([\w-]{15,})/.exec(s) || /[?&]id=([\w-]{15,})/.exec(s);
+    if (m) return m[1];
+    return /^[\w-]{15,}$/.test(s) ? s : null;
+  }
+
+  const Drive = {
+    token: null,
+    async api(path, params, as) {
+      const u = new URL("https://www.googleapis.com/drive/v3/" + path);
+      Object.entries(Object.assign({ supportsAllDrives: "true" }, params || {})).forEach(([k, v]) => u.searchParams.set(k, v));
+      const r = await fetch(u, { headers: { Authorization: "Bearer " + this.token } });
+      if (!r.ok) {
+        let msg = r.status + "";
+        try { msg = (await r.json()).error.message; } catch (_) { /* giữ mã lỗi */ }
+        if (r.status === 404) msg = "Không tìm thấy file hoặc tài khoản Google này không có quyền xem";
+        throw new Error(`Drive: ${msg} (${path.split("/")[1] || path})`);
+      }
+      return as === "blob" ? r.blob() : r.json();
+    },
+    meta(id) {
+      return this.api("files/" + id, { fields: "id,name,mimeType" });
+    },
+    /** Tải file; Google Sheets/Slides được xuất sang xlsx/pptx. */
+    async download(id) {
+      const meta = await this.meta(id);
+      let blob;
+      if (meta.mimeType === "application/vnd.google-apps.spreadsheet") {
+        blob = await this.api(`files/${id}/export`, { mimeType: XLSX_MIME }, "blob");
+      } else if (meta.mimeType === "application/vnd.google-apps.presentation") {
+        blob = await this.api(`files/${id}/export`, { mimeType: PPTX_MIME }, "blob");
+      } else {
+        blob = await this.api("files/" + id, { alt: "media" }, "blob");
+      }
+      return { meta, blob };
+    },
+    /** Liệt kê đệ quy mọi file trong thư mục; path = các tên thư mục cha. */
+    async listTree(id, path, out) {
+      out = out || [];
+      let pageToken = "";
+      do {
+        const res = await this.api("files", {
+          q: `'${id}' in parents and trashed = false`,
+          fields: "nextPageToken,files(id,name,mimeType)",
+          pageSize: "1000", includeItemsFromAllDrives: "true", ...(pageToken ? { pageToken } : {}),
+        });
+        for (const f of res.files) {
+          if (f.mimeType === FOLDER_MIME) await this.listTree(f.id, path.concat(f.name), out);
+          else out.push(Object.assign(f, { path }));
+        }
+        pageToken = res.nextPageToken || "";
+      } while (pageToken);
+      return out;
+    },
+    async tree(id) {
+      const root = await this.api("files/" + id, { fields: "id,name,parents" });
+      const prefix = [];
+      if (root.parents && root.parents[0]) {
+        try {
+          const par = await this.api("files/" + root.parents[0], { fields: "name,parents" });
+          if (par.parents && par.parents.length) prefix.push(par.name); // bỏ qua "My Drive"
+        } catch (_) { /* không có quyền xem thư mục cha */ }
+      }
+      return this.listTree(id, prefix.concat(root.name));
+    },
+    image(f) {
+      return this.api("files/" + f.id, { alt: "media" }, "blob");
+    },
+    /** PPTX -> Google Slides tạm -> PDF (giới hạn xuất của Drive API: 10 MB). */
+    async convertToPdf(blob, name) {
+      const auth = { Authorization: "Bearer " + this.token };
+      const boundary = "bcmkt" + Date.now();
+      const meta = JSON.stringify({ name: name.replace(/\.pptx$/i, "") + " (tạm)", mimeType: "application/vnd.google-apps.presentation" });
+      const NL = String.fromCharCode(13, 10); // CRLF (không viết dạng thoát: Apps Script làm hỏng khi nạp trang)
+      const body = new Blob([
+        "--" + boundary + NL + "Content-Type: application/json; charset=UTF-8" + NL + NL + meta + NL +
+          "--" + boundary + NL + "Content-Type: " + PPTX_MIME + NL + NL,
+        blob, NL + "--" + boundary + "--",
+      ]);
+      const up = await fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id", {
+        method: "POST", headers: Object.assign({ "Content-Type": "multipart/related; boundary=" + boundary }, auth), body,
+      });
+      if (!up.ok) throw new Error("Không chuyển được sang Google Slides (" + up.status + ")");
+      const { id } = await up.json();
+      try {
+        return { blob: await this.api(`files/${id}/export`, { mimeType: "application/pdf" }, "blob") };
+      } finally {
+        fetch("https://www.googleapis.com/drive/v3/files/" + id, { method: "DELETE", headers: auth }).catch(() => {});
+      }
+    },
+  };
+
+  // Chạy trong Google Apps Script (HtmlService): đọc Drive qua hàm phía server, không cần OAuth Client ID.
+  const IN_GAS = !!(window.google && google.script && google.script.run);
+  function gas(fn, ...args) {
+    return new Promise((resolve, reject) => {
+      google.script.run
+        .withSuccessHandler(resolve)
+        .withFailureHandler((e) => reject(new Error(e && e.message ? e.message : String(e))))[fn](...args);
+    });
+  }
+  function b64ToBlob(b64, type) {
+    const bin = atob(b64);
+    const u = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+    return new Blob([u], { type });
+  }
+  function blobToB64(blob) {
+    return new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(String(r.result).split(",")[1]);
+      r.onerror = () => reject(r.error);
+      r.readAsDataURL(blob);
+    });
+  }
+  const GasDrive = {
+    async download(id) {
+      const r = await gas("downloadFile", id);
+      return { meta: r.meta, blob: b64ToBlob(r.b64, r.type) };
+    },
+    tree(id) {
+      return gas("listTree", id);
+    },
+    async image(f) {
+      const r = await gas("downloadFile", f.id);
+      return b64ToBlob(r.b64, r.type);
+    },
+  };
+  const source = () => (IN_GAS ? GasDrive : Drive);
+
+  /** Đoán kênh + loại chứng từ từ tên thư mục/file. */
+  function guessClass(path, name) {
+    const t = norm(path.concat(name).join(" / "));
+    let platform = "Facebook";
+    if (/tik ?tok/.test(t)) platform = "Tiktok";
+    else if (/zalo/.test(t)) platform = "Zalo";
+    else if (/google|\bgg\b|adwords/.test(t)) platform = "Google";
+    else if (/facebook|\bfb\b|meta/.test(t)) platform = "Facebook";
+    const kind = /hoa ?don|\bhd\b|invoice|bill|thanh toan|\bvat\b|receipt|tham chieu/.test(t) ? "hoadon"
+      : /quang cao|\bqc\b|dang chay|hoat dong|active/.test(t) ? "qc" : "ads";
+    return { platform, kind };
+  }
+
+  // ------------------------------------------------------------ đọc chữ trong ảnh (OCR)
+  const TESS_URL = "https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js";
+  const compact = (s) => norm(s).replace(/[^a-z0-9]/g, "");
+  // Từ khoá (đã bỏ dấu, bỏ khoảng trắng) nhận diện loại ảnh chứng từ
+  const KIND_WORDS = {
+    hoadon: ["baocaolaphoadon", "hoadon", "invoice", "receipt", "bienlai", "dathanhtoan", "phuongthucthanhtoan",
+      "vatreg", "vatamount", "vatrate", "giaodich", "tongsotiendalap", "prepayment", "chitietgiaodich", "sothamchieu", "mathamchieu"],
+    qc: ["banxemtruoc", "cachquangcaocuabanhienthi", "vitriquangcao", "bangfeed", "facebookstories", "facebookreels",
+      "instagramstories", "instagramreels", "noidungadvantage", "sponsored", "guitinnhan", "binhluan", "chiase", "timhieuthem"],
+    ads: ["chiendich", "nhomquangcao", "sotiendachitieu", "dachitieu", "luothienthi", "nguoitiepcan", "lichchay",
+      "chiphitrenmoi", "khachhangtiemnang", "danghoatdong", "trinhquanlyquangcao", "ngansach", "ketqua",
+      "campaign", "adset", "amountspent", "diemcohoi"],
+  };
+  const PLATFORM_WORDS = {
+    Facebook: ["meta", "facebook", "instagram", "messenger"],
+    Tiktok: ["tiktok"],
+    Zalo: ["zalo"],
+    Google: ["googleads", "google"],
+  };
+  const countHits = (t, words) => words.reduce((n, w) => n + (t.split(w).length - 1), 0);
+
+  /**
+   * Phân loại ảnh theo chữ đọc được.
+   * ctx.accounts: [{account, staff}], ctx.staffList: [tên]. Trả về các trường đoán được (có thể thiếu).
+   */
+  function classifyText(text, ctx) {
+    const t = compact(text);
+    const res = {};
+    if (t.length < 15) return res;
+    const ks = Object.entries(KIND_WORDS).map(([k, ws]) => [k, countHits(t, ws)]).sort((a, b) => b[1] - a[1]);
+    // hoá đơn ưu tiên khi có tiêu đề hoá đơn rõ ràng
+    if (/baocaolaphoadon|invoice|hoadon/.test(t) && countHits(t, KIND_WORDS.hoadon) >= 2) res.kind = "hoadon";
+    else if (ks[0][1] > 0 && ks[0][1] > ks[1][1]) res.kind = ks[0][0];
+    const ps = Object.entries(PLATFORM_WORDS).map(([p, ws]) => [p, countHits(t, ws)]).sort((a, b) => b[1] - a[1]);
+    if (ps[0][1] > 0) res.platform = ps[0][0];
+    // nhân sự: ID tài khoản in trên ảnh, rồi tới tên người
+    const digits = (String(text).match(/\d{10,}/g) || []);
+    for (const a of ctx.accounts || []) {
+      const id = (String(a.account).match(/\d{10,}/) || [])[0];
+      if (!id) continue;
+      if (digits.some((d) => d === id || id.startsWith(d) || d.includes(id))) {
+        res.account = a.account;
+        if (a.staff) { res.staff = a.staff; res.by = "id"; }
+        break;
+      }
+    }
+    if (!res.staff) {
+      const hits = (ctx.staffList || []).map((st) => [st, t.split(compact(st)).length - 1]).filter((x) => x[1] > 0)
+        .sort((a, b) => b[1] - a[1]);
+      if (hits.length && (hits.length === 1 || hits[0][1] > hits[1][1])) { res.staff = hits[0][0]; res.by = "name"; }
+    }
+    return res;
+  }
+
+  /**
+   * Đọc số liệu chiến dịch từ chữ của ảnh chụp màn hình quảng cáo
+   * (Trình quản lý quảng cáo trên điện thoại, Meta Business Suite, bảng trên máy tính).
+   * Trả về [{name, spent, results, resultType, date}] – để người dùng xác nhận.
+   */
+  function extractCampaigns(text) {
+    const MONEY = /(\d{1,3}(?:[.,]\d{3})+|\d+(?:[.,]\d+)?)\s*(triệu|trieu|tr|k|n|nghìn)?\s*(?:đ|₫|vnd|d\b)/gi;
+    const money = (line) => Array.from(line.matchAll(MONEY)).map((m) => {
+      const unit = (m[2] || "").toLowerCase();
+      const mult = /^(triệu|trieu|tr)$/.test(unit) ? 1e6 : /^(k|n|nghìn)$/.test(unit) ? 1e3 : 1;
+      const v = mult === 1 ? toNum(m[1]) : parseFloat(m[1].replace(",", ".")) * mult;
+      return { v: Math.round(v), index: m.index, len: m[0].length };
+    });
+    const lines = String(text).split(/\n+/).map((l) => l.trim()).filter(Boolean);
+    const N = lines.map(norm);
+    const C = lines.map(compact);
+    const STATUS = /(dang hoat dong|da tam dung|da hoan tat|dang tat|da tat)/;
+    const STATUS_C = /(danghoatdong|datamdung|dahoantat|dangtat)/;
+    const SPENT_C = /(chitieu|sotiendachi)/;
+    const out = [];
+    const seen = new Set();
+    const push = (c) => { const k = c.name + "|" + c.spent; if (!seen.has(k) && c.spent) { seen.add(k); out.push(c); } };
+
+    // Meta Business Suite: "Hoạt động mới đây với quảng cáo" – mỗi khối bắt đầu bằng ngày "6 THÁNG 10"
+    if (/hoatdongmoidayvoiquangcao|quangbalai/.test(compact(text))) {
+      const starts = [];
+      N.forEach((n, i) => { if (/(\d{1,2})\s*thang\s*(\d{1,2})/.test(n)) starts.push(i); });
+      starts.forEach((st, idx) => {
+        const end = idx + 1 < starts.length ? starts[idx + 1] : lines.length;
+        const d = /(\d{1,2})\s*thang\s*(\d{1,2})/.exec(N[st]);
+        const date = `${d[1]}/${d[2]}`;
+        let spent = null, results = null, resultType = "", status = "";
+        for (let k = st; k < end; k++) {
+          if (!status && STATUS_C.test(C[k])) status = (N[k].match(STATUS) || [C[k].match(STATUS_C)[0]])[0];
+          if (spent == null && SPENT_C.test(C[k])) {
+            const ms = money(lines[k]);
+            if (ms.length) spent = ms[ms.length - 1].v;
+            else { const m = /(\d[\d.,]{3,})\s*\S?\s*$/.exec(lines[k]); if (m) spent = Math.round(toNum(m[1])); }
+          }
+          if (results == null && /(voi bai viet|thruplay|khach hang tiem nang)/.test(N[k])) {
+            const m = /(\d[\d.,]*)\s*$/.exec(N[k]);
+            if (m) results = Math.round(toNum(m[1]));
+          }
+          if (!resultType) resultType = /thruplay|luot xem video/.test(N[k]) ? "thruplay" : /khach hang tiem/.test(N[k]) ? "lead" : /tuong tac/.test(N[k]) ? "tuongtac" : "";
+        }
+        const typeName = { thruplay: "Lượt xem video", lead: "Khách hàng tiềm năng", tuongtac: "Lượt tương tác với bài viết" }[resultType] || "Quảng cáo";
+        if (spent) push({ name: `${typeName} (${date})`, spent, results, resultType, date, status });
+      });
+      return out;
+    }
+
+    for (let i = 0; i < lines.length; i++) {
+      const n = N[i];
+      if (!SPENT_C.test(C[i])) continue;
+      // số tiền cùng dòng sau nhãn (Business Suite) hoặc ở dòng trên (thẻ chiến dịch trên điện thoại)
+      let valLine = -1, spent = null, after = [];
+      const at = n.search(/(chi tieu|so tien da chi)/);
+      after = at < 0 ? [] : money(lines[i]).filter((m) => m.index >= at);
+      if (after.length) { valLine = i; spent = after[after.length - 1].v; }
+      else {
+        for (let k = i - 1; k >= Math.max(0, i - 2); k--) {
+          const ms = money(lines[k]);
+          if (ms.length) { valLine = k; spent = ms[ms.length - 1].v; break; }
+        }
+      }
+      if (spent == null || !spent) continue;
+      // kết quả: số đứng đầu dòng giá trị (vd "7 185,34Kđ 1,30 triệuđ", "1,2K 67,55đ 83,49Kđ")
+      const typeOf = (t) => /thruplay/.test(t) ? "thruplay" : /khach hang tiem/.test(t) ? "lead" : "";
+      const ctxN = N.slice(Math.max(0, i - 1), i + 3).join(" ");
+      let resultType = typeOf(N[i]) || (/khach hang tiem/.test(ctxN) ? "lead" : /thruplay/.test(ctxN) ? "thruplay"
+        : /tuong tac/.test(ctxN) ? "tuongtac" : /luot xem/.test(ctxN) ? "xem" : "");
+      let results = null;
+      if (valLine !== i && valLine >= 0) {
+        const m = /^(\d+(?:[.,]\d+)?)\s*(k)?\b(?!\s*(?:đ|₫|d\b))/i.exec(lines[valLine]);
+        if (m && !/^\d+[.,]\d{3}/.test(m[1])) results = Math.round(parseFloat(m[1].replace(",", ".")) * (m[2] ? 1000 : 1));
+      }
+      // Business Suite: "Lượt tương tác với bài viết 518" ở dòng trên
+      if (results == null) {
+        for (let k = i - 1; k >= Math.max(0, i - 3); k--) {
+          const m = /(luot tuong tac voi bai viet|luot thruplay|khach hang tiem nang)[^\d]*(\d[\d.,]*)\s*$/.exec(N[k]);
+          if (m) { results = Math.round(toNum(m[2])); if (!resultType) resultType = /thruplay/.test(m[1]) ? "thruplay" : /khach/.test(m[1]) ? "lead" : "tuongtac"; break; }
+        }
+      }
+      // tên chiến dịch: dòng ngay trên dòng trạng thái gần nhất phía trên
+      let name = "", date = "";
+      for (let k = valLine - 1; k >= Math.max(0, valLine - 5); k--) {
+        const d = /(\d{1,2})\s*thang\s*(\d{1,2})/.exec(N[k]);
+        if (d && !date) date = `${d[1]}/${d[2]}`;
+        if (STATUS.test(N[k])) {
+          let j = k - 1;
+          if (N[k].replace(STATUS, "").replace(/luot tuong tac|khach hang tiem nang|luot thruplay/g, "").trim().length > 3 && !/^\d/.test(N[k])) j = k;
+          while (j >= 0 && (/^\d{1,2}\s*thang/.test(N[j]) || /^(moi|chien dich|khach hang tiem nang moi)$/.test(N[j]) || !N[j])) {
+            const d2 = /(\d{1,2})\s*thang\s*(\d{1,2})/.exec(N[j]);
+            if (d2 && !date) date = `${d2[1]}/${d2[2]}`;
+            j--;
+          }
+          if (j >= 0 && j !== k) name = lines[j].replace(/^bài viết:\s*/i, "").replace(/["“”]/g, "").trim();
+          break;
+        }
+        if (/ket qua tu/.test(N[k])) { name = "Tổng nhóm quảng cáo"; break; }
+      }
+      if (/ket qua tu/.test(N[valLine] || "") && !name) name = "Tổng nhóm quảng cáo";
+      if (!name && date) name = "Quảng cáo " + date;
+      const statusLine = N.slice(Math.max(0, valLine - 4), i + 1).find((x) => STATUS.test(x));
+      push({ name: name || "Chiến dịch", spent, results, resultType, date,
+        status: statusLine ? (statusLine.match(STATUS) || [""])[0] : "" });
+    }
+    return out;
+  }
+
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const el = document.createElement("script");
+      el.src = src;
+      el.onload = resolve;
+      el.onerror = () => reject(new Error("Không tải được " + src));
+      document.head.appendChild(el);
+    });
+  }
+  // ------------------------------------------------------------ PDF (pdf.js)
+  const PDFJS = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/";
+  let pdfjsP = null;
+  function pdfjs() {
+    if (!pdfjsP) {
+      pdfjsP = (window.pdfjsLib ? Promise.resolve() : loadScript(PDFJS + "pdf.min.js")).then(() => {
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + "pdf.worker.min.js";
+        return window.pdfjsLib;
+      }).catch((e) => { pdfjsP = null; throw e; });
+    }
+    return pdfjsP;
+  }
+  const isPdf = (f) => f.type === "application/pdf" || /\.pdf$/i.test(f.name || "");
+  async function openPdf(file) {
+    const lib = await pdfjs();
+    return lib.getDocument({ data: new Uint8Array(await file.arrayBuffer()) }).promise;
+  }
+  /** Chữ trong PDF (hoá đơn xuất từ Meta/Google/TikTok có lớp chữ – không cần OCR). */
+  async function pdfText(file, maxPages) {
+    const doc = await openPdf(file);
+    const out = [];
+    for (let i = 1; i <= Math.min(doc.numPages, maxPages || 3); i++) {
+      const tc = await (await doc.getPage(i)).getTextContent();
+      let line = [], lastY = null;
+      tc.items.forEach((it) => {
+        const y = Math.round(it.transform[5]);
+        if (lastY != null && Math.abs(y - lastY) > 2) { out.push(line.join(" ")); line = []; }
+        line.push(it.str);
+        lastY = y;
+      });
+      out.push(line.join(" "));
+    }
+    return out.join("\n");
+  }
+  /** Trang PDF -> ảnh PNG (để chèn vào slide). */
+  async function pdfToImages(file, maxPages) {
+    const doc = await openPdf(file);
+    const files = [];
+    for (let i = 1; i <= Math.min(doc.numPages, maxPages || 2); i++) {
+      const page = await doc.getPage(i);
+      const vp = page.getViewport({ scale: 2 });
+      const c = document.createElement("canvas");
+      c.width = vp.width;
+      c.height = vp.height;
+      const ctx2 = c.getContext("2d");
+      ctx2.fillStyle = "#fff";
+      ctx2.fillRect(0, 0, c.width, c.height);
+      await page.render({ canvasContext: ctx2, viewport: vp }).promise;
+      const blob = await new Promise((res) => c.toBlob(res, "image/png"));
+      files.push(new File([blob], file.name.replace(/\.pdf$/i, "") + (doc.numPages > 1 ? `_trang${i}` : "") + ".png", { type: "image/png" }));
+    }
+    return files;
+  }
+
+  let ocrWorkerP = null;
+  function ocrWorker() {
+    if (!ocrWorkerP) {
+      ocrWorkerP = (window.Tesseract ? Promise.resolve() : loadScript(TESS_URL))
+        .then(() => Tesseract.createWorker(["vie", "eng"], 1))
+        .catch((e) => { ocrWorkerP = null; throw e; });
+    }
+    return ocrWorkerP;
+  }
+
+  async function pool(items, n, fn) {
+    let i = 0;
+    const run = async () => { while (i < items.length) { const k = i++; await fn(items[k], k); } };
+    await Promise.all(Array.from({ length: Math.min(n, items.length) }, run));
+  }
+
+  // ------------------------------------------------------------ giao diện
+  const $ = (id) => document.getElementById(id);
+  const CFG = window.BAO_CAO_MKT_CONFIG || {};
+  const LS = {
+    get(k) { try { return localStorage.getItem("bcmkt." + k); } catch (_) { return null; } },
+    set(k, v) { try { localStorage.setItem("bcmkt." + k, v); } catch (_) { /* bỏ qua */ } },
+  };
+  let workbook = null, weeks = null, templateBuf = null;
+  let images = []; // {file, url, name, path, platform, kind, staff, include}
+  let accStaff = {}; // tài khoản quảng cáo -> nhân sự
+  try { accStaff = JSON.parse(LS.get("accStaff") || "{}") || {}; } catch (_) { accStaff = {}; }
+
+  // ------------------------------------------------------------ nhân sự
+  const simple = (s) => " " + norm(s).replace(/[^a-z0-9]+/g, " ").trim() + " ";
+  /** "Phan Hạnh 391127499725110" -> "Phan Hạnh"; chỉ có số -> "". */
+  function staffNameFromAccount(acc) {
+    const m = /^(.*\D)\s*\d{6,}\s*$/.exec(String(acc).trim());
+    return m && /[^\d\s]/.test(m[1]) ? m[1].trim() : "";
+  }
+  /** Nhân sự khai báo sẵn trong config.js theo ID tài khoản. */
+  function cfgStaffFor(acc) {
+    const id = (String(acc).match(/\d{10,}/) || [])[0];
+    return (id && (CFG.accountStaff || {})[id]) || "";
+  }
+  function staffList() {
+    return Array.from(new Set($("staff").value.split(/[,;\n]/).map((x) => x.trim()).filter(Boolean)));
+  }
+  function staffOf(acc) {
+    const st = accStaff[acc];
+    return st && staffList().includes(st) ? st : "";
+  }
+  /** Đoán nhân sự của ảnh theo tên thư mục/file: khớp cả tên, hoặc khớp tên gọi (từ cuối) duy nhất. */
+  function guessStaff(path, name) {
+    const list = staffList();
+    const STOP = ["anh", "chi", "em", "thi", "van", "sun", "casa", "group", "tai khoan"];
+    const match = (seg) => {
+      const t = simple(seg);
+      const full = list.filter((st) => t.includes(simple(st)));
+      if (full.length === 1) return full[0];
+      const hits = list.filter((st) => norm(st).split(" ")
+        .some((w) => w.length >= 3 && !STOP.includes(w) && t.includes(" " + w + " ")));
+      return hits.length === 1 ? hits[0] : "";
+    };
+    // tên file trước ("ngà sun.jpg"), rồi thư mục từ trong ra ngoài ("Phan Hạnh/Sun/…")
+    for (const seg of [name.replace(/\.[a-z0-9]+$/i, "")].concat(path.slice().reverse())) {
+      const st = match(seg);
+      if (st) return st;
+    }
+    return list.length === 1 ? list[0] : "";
+  }
+
+  /** Thư mục tuần "3/10-9/10" có giao với tuần báo cáo "05/10 - 11/10" không (không có thư mục tuần = có). */
+  function inReportWeek(path) {
+    const wk = $("week") && $("week").value;
+    if (!wk) return true;
+    const dayNo = (dm) => { const [d, m] = dm.split("/").map(Number); return m * 31 + d; };
+    const [a, b] = wk.split("-").map((x) => dayNo(x.trim()));
+    const segs = path.map((x) => /^\s*(\d{1,2}\/\d{1,2})\s*-\s*(\d{1,2}\/\d{1,2})\s*$/.exec(x)).filter(Boolean);
+    return segs.every((m) => dayNo(m[1]) <= b && dayNo(m[2]) >= a);
+  }
+
+  /** Ảnh thuộc dự án đang làm? (khi quét thư mục chứng từ chung: Nhân sự/Dự án/…) */
+  function inProject(path) {
+    const key = currentPreset().projectKey;
+    if (!key) return true;
+    return path.some((seg) => compact(seg).includes(compact(key)));
+  }
+  function currentPreset() {
+    return (CFG.presets || []).find((x) => x.name === $("preset").value) || {};
+  }
+  function allAccounts() {
+    const m = new Map();
+    Object.values(weeks || {}).forEach((w) => PLATFORMS.forEach((p) => w[p].forEach((r) => {
+      if (!r.account) return;
+      if (!m.has(r.account)) m.set(r.account, new Set());
+      m.get(r.account).add(p === "Tiktok" ? "TikTok" : p);
+    })));
+    return m;
+  }
+  /** Lấy tên nhân sự từ ID tài khoản, bổ sung vào danh sách. */
+  function syncStaffFromData() {
+    const list = staffList();
+    for (const acc of allAccounts().keys()) {
+      if (!accStaff[acc]) accStaff[acc] = cfgStaffFor(acc) || staffNameFromAccount(acc);
+      if (accStaff[acc] && !list.includes(accStaff[acc])) list.push(accStaff[acc]);
+    }
+    $("staff").value = list.join(", ");
+    LS.set("accStaff", JSON.stringify(accStaff));
+    renderAccounts();
+  }
+  function renderAccounts() {
+    const accs = allAccounts();
+    const list = staffList();
+    const opts = (cur) => `<option value="">(chưa gán)</option>` +
+      list.map((st) => `<option${st === cur ? " selected" : ""}>${esc(st)}</option>`).join("");
+    $("accounts").innerHTML = accs.size
+      ? `<table><thead><tr><th>Tài khoản quảng cáo</th><th>Kênh</th><th>Nhân sự</th></tr></thead><tbody>` +
+        Array.from(accs).map(([acc, ps]) => `<tr><td>${esc(acc)}</td><td>${Array.from(ps).join(", ")}</td><td><select data-acc="${esc(acc)}">${opts(staffOf(acc))}</select></td></tr>`).join("") +
+        `</tbody></table>`
+      : "";
+    const un = Array.from(accs.keys()).filter((a) => !staffOf(a));
+    $("accWarn").textContent = un.length
+      ? `${un.length} tài khoản chưa gán nhân sự – chỉ được tính vào phần báo cáo tổng.` : "";
+  }
+
+  function setStatus(msg, kind) {
+    const el = $("status");
+    el.textContent = msg;
+    el.className = "status " + (kind || "");
+  }
+
+  function clientId() {
+    return (CFG.googleClientId || $("clientId").value || "").trim();
+  }
+
+  function signIn() {
+    return new Promise((resolve, reject) => {
+      if (IN_GAS || Drive.token) return resolve(Drive.token);
+      const id = clientId();
+      if (!id) return reject(new Error("Chưa cấu hình Google OAuth Client ID (xem README)."));
+      if (!window.google || !google.accounts || !google.accounts.oauth2) {
+        return reject(new Error("Chưa tải được thư viện đăng nhập Google, thử tải lại trang."));
+      }
+      LS.set("clientId", id);
+      google.accounts.oauth2.initTokenClient({
+        client_id: id,
+        scope: "https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/drive.file",
+        callback: (r) => {
+          if (r.error) return reject(new Error("Đăng nhập Google thất bại: " + r.error));
+          Drive.token = r.access_token;
+          $("auth").textContent = "Đã kết nối Google Drive";
+          setTimeout(() => { Drive.token = null; $("auth").textContent = "Kết nối Google Drive"; }, (r.expires_in - 60) * 1000);
+          resolve(r.access_token);
+        },
+        error_callback: (e) => reject(new Error("Đăng nhập Google bị huỷ: " + (e.type || e.message))),
+      }).requestAccessToken();
+    });
+  }
+
+  function applyPreset(name) {
+    const p = (CFG.presets || []).find((x) => x.name === name);
+    if (!p) return;
+    $("templateLink").value = p.template || CFG.defaultTemplate || "";
+    $("dataLink").value = p.data || "";
+    $("folders").value = (p.folders || []).join("\n");
+    $("campaign").value = p.campaign || "";
+    $("period").value = p.period || "";
+    $("staff").value = Array.isArray(p.staff) ? p.staff.join(", ") : p.staff || "";
+    $("outName").value = p.outName || "bao_cao_mkt";
+    $("outFolder").value = p.outputFolder || "";
+  }
+
+  let sheetFolderId = null;
+  function readWorkbook(buf, label) {
+    workbook = XLSX.read(buf, { type: "array" });
+    // ô "Folder chứng từ" ở đầu sheet (nếu có)
+    sheetFolderId = null;
+    const ws0 = workbook.Sheets[workbook.SheetNames[0]];
+    XLSX.utils.sheet_to_json(ws0, { header: 1, defval: "" }).slice(0, 5).forEach((r) => {
+      if (/chung tu/.test(norm(r[0]))) sheetFolderId = parseDriveId(String(r[1] || "").trim()) || sheetFolderId;
+    });
+    $("sheet").innerHTML = workbook.SheetNames.map((n) => `<option>${n}</option>`).join("");
+    weeks = loadData(workbook, $("sheet").value);
+    populateWeeks();
+    syncStaffFromData();
+    return `Số liệu: "${label}" (${Object.keys(weeks).length} tuần)`;
+  }
+
+  function populateWeeks() {
+    const sel = $("week");
+    sel.innerHTML = "";
+    const names = Object.keys(weeks);
+    const active = names.filter((w) => PLATFORMS.some((p) => weeks[w][p].length));
+    names.forEach((w) => {
+      const o = document.createElement("option");
+      o.value = w;
+      o.textContent = w + (active.includes(w) ? "" : " (chưa có số liệu)");
+      sel.appendChild(o);
+    });
+    if (active.length) sel.value = active[active.length - 1];
+    renderSummary();
+  }
+
+  function renderSummary() {
+    const names = Object.keys(weeks);
+    const all = Object.fromEntries(PLATFORMS.map((p) => [p, aggregate(names.flatMap((w) => weeks[w][p]))]));
+    const wk = weeks[$("week").value];
+    const rows = PLATFORMS.map((p) => {
+      const t = all[p], k = aggregate(wk[p]);
+      return `<tr><td>${p === "Tiktok" ? "TikTok" : p}</td><td>${t.accounts}</td><td>${fmtInt(k.cost_fee)}</td><td>${fmtInt(k.lead)}</td><td>${fmtInt(t.cost)}</td><td>${fmtInt(t.cost_fee)}</td><td>${fmtInt(t.lead)}</td></tr>`;
+    }).join("");
+    $("summary").innerHTML =
+      `<table><thead><tr><th>Kênh</th><th>Số TKQC</th><th>Chi phí tuần (+phí)</th><th>Lead tuần</th><th>Tổng chi phí</th><th>Tổng (+phí)</th><th>Tổng lead</th></tr></thead><tbody>${rows}</tbody></table>`;
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  }
+
+  function renderImages() {
+    const box = $("images");
+    const noStaff = images.filter((x) => x.include && !x.staff).length;
+    $("imgCount").textContent = images.length
+      ? `${images.filter((x) => x.include).length}/${images.length} ảnh được chèn` +
+        (noStaff ? ` · ${noStaff} ảnh chưa gán nhân sự (sẽ không được chèn)` : "") : "Chưa có ảnh";
+    box.innerHTML = images.map((im, i) => `
+      <figure class="img${im.include ? "" : " off"}">
+        <img src="${im.url}" alt="${esc(im.name)}" loading="lazy">
+        <figcaption>
+          <label class="chk"><input type="checkbox" data-i="${i}" data-f="include"${im.include ? " checked" : ""}> <span title="${esc(im.path.concat(im.name).join(" / "))}">${esc(im.path.concat(im.name).join(" / "))}</span></label>
+          ${im.ocrNote ? `<small class="ocr" title="${esc(im.ocrNote)}">${esc(im.ocrNote)}</small>` : ""}
+          <div class="row">
+            <select data-i="${i}" data-f="platform">${PLATFORMS.map((p) => `<option value="${p}"${p === im.platform ? " selected" : ""}>${p === "Tiktok" ? "TikTok" : p}</option>`).join("")}</select>
+            <select data-i="${i}" data-f="kind">${Object.entries(KINDS).map(([k, l]) => `<option value="${k}"${k === im.kind ? " selected" : ""}>${l}</option>`).join("")}</select>
+          </div>
+          <div class="row">
+            <select data-i="${i}" data-f="staff" class="${im.staff ? "" : "warn"}"><option value="">(chưa gán nhân sự)</option>${staffList().map((st) => `<option${st === im.staff ? " selected" : ""}>${esc(st)}</option>`).join("")}</select>
+          </div>
+        </figcaption>
+      </figure>`).join("");
+  }
+
+  function addImage(file, path) {
+    const c = guessClass(path, file.name);
+    const guess = guessStaff(path, file.name);
+    images.push({ file, url: URL.createObjectURL(file), name: file.name, path, platform: c.platform, kind: c.kind,
+      staff: guess, guess, include: inReportWeek(path) });
+  }
+
+  function ocrContext() {
+    return { staffList: staffList(), accounts: Array.from(allAccounts().keys()).map((a) => ({ account: a, staff: staffOf(a) })) };
+  }
+  /** Áp kết quả OCR vào ảnh (chỉ ghi đè những gì đọc được). */
+  function applyOcr(im) {
+    if (im.text == null) return;
+    const r = classifyText(im.text, ocrContext());
+    if (r.kind) im.kind = r.kind;
+    if (r.platform) im.platform = r.platform;
+    // ID tài khoản in trên ảnh > tên file/thư mục > tên người đọc được trong ảnh
+    if (r.staff && (r.by === "id" || !im.guess)) im.staff = r.staff;
+    else im.staff = im.guess || im.staff;
+    const parts = [];
+    if (r.kind) parts.push(KINDS[r.kind]);
+    if (r.account) parts.push("TK " + r.account);
+    if (r.staff) parts.push((r.by === "id" ? "theo ID: " : "tên trong ảnh: ") + r.staff);
+    im.ocrNote = parts.length ? "Đọc ảnh: " + parts.join(" · ") : "Đọc ảnh: không nhận ra";
+  }
+  async function runOcr() {
+    if (!$("ocr").checked) return;
+    const todo = images.filter((im) => im.text == null);
+    if (!todo.length) return;
+    setStatus("Đang tải bộ đọc chữ (lần đầu ~15 MB)…");
+    const w = await ocrWorker();
+    let done = 0;
+    for (const im of todo) {
+      setStatus(`Đang đọc nội dung ảnh ${++done}/${todo.length}: ${im.name}`);
+      try { im.text = (await w.recognize(im.file)).data.text || ""; } catch (e) { console.error(e); im.text = ""; }
+      applyOcr(im);
+      renderImages();
+    }
+  }
+
+  /** Chứng từ PDF: mỗi trang thành một ảnh; chữ lấy thẳng từ PDF để phân loại. */
+  async function addPdf(file, path) {
+    try {
+      const text = await pdfText(file);
+      for (const png of await pdfToImages(file)) {
+        addImage(png, path);
+        const im = images[images.length - 1];
+        im.text = text;
+        applyOcr(im);
+      }
+    } catch (e) {
+      console.error(e);
+      setStatus("Không đọc được PDF " + file.name + ": " + e.message, "err");
+    }
+  }
+
+  function sortImages() {
+    const key = (x) => x.path.concat(x.name).join("/");
+    images.sort((a, b) => key(a).localeCompare(key(b), "vi", { numeric: true }));
+  }
+
+  async function onScan() {
+    $("scan").disabled = true;
+    try {
+      await scan();
+    } catch (e) {
+      console.error(e);
+      setStatus("Lỗi: " + e.message, "err");
+    } finally {
+      $("scan").disabled = false;
+    }
+  }
+
+  async function scan() {
+    const notes = [];
+    {
+      await signIn();
+      const tplId = parseDriveId($("templateLink").value);
+      const dataId = parseDriveId($("dataLink").value);
+      let folderIds = $("folders").value.split(/\s+/).map(parseDriveId).filter(Boolean);
+
+      if (tplId) {
+        setStatus("Đang tải PPTX mẫu…");
+        const { meta, blob } = await source().download(tplId);
+        templateBuf = await blob.arrayBuffer();
+        notes.push(`Mẫu: "${meta.name}"`);
+      }
+      if (dataId) {
+        setStatus("Đang tải số liệu…");
+        const { meta, blob } = await source().download(dataId);
+        notes.push(readWorkbook(await blob.arrayBuffer(), meta.name));
+        if (sheetFolderId && !folderIds.includes(sheetFolderId)) folderIds = folderIds.concat(sheetFolderId);
+      }
+      if (folderIds.length) {
+        images.forEach((im) => URL.revokeObjectURL(im.url));
+        images = [];
+        const found = [];
+        const seen = new Set();
+        for (const id of folderIds) {
+          setStatus("Đang quét thư mục…");
+          (await source().tree(id)).forEach((f) => {
+            if (!IMG_MIMES.includes(f.mimeType) || seen.has(f.id) || !inProject(f.path)) return;
+            seen.add(f.id);
+            found.push(f);
+          });
+        }
+        let done = 0;
+        await pool(found, 4, async (f) => {
+          const blob = await source().image(f);
+          const file = new File([blob], f.name, { type: f.mimeType });
+          if (isPdf(file)) await addPdf(file, f.path);
+          else addImage(file, f.path);
+          setStatus(`Đang tải ảnh ${++done}/${found.length}…`);
+        });
+        sortImages();
+        renderImages();
+        notes.push(`${found.length} ảnh chứng từ`);
+        await runOcr();
+      }
+      setStatus("Đã quét xong. " + notes.join(" · ") + ". Kiểm tra lại phân loại ảnh rồi bấm Tạo báo cáo.", "ok");
+    }
+  }
+
+  async function onGenerate(e) {
+    e.preventDefault();
+    $("go").disabled = true;
+    try {
+      await generate();
+    } catch (err) {
+      console.error(err);
+      setStatus("Lỗi: " + err.message, "err");
+    } finally {
+      $("go").disabled = false;
+    }
+  }
+
+  /** Quét + tạo báo cáo lần lượt cho mọi dự án có link số liệu, mỗi dự án ra file riêng. */
+  async function onRunAll() {
+    const presets = (CFG.presets || []).filter((p) => p.data);
+    if (!presets.length) return setStatus("Chưa có dự án nào có link số liệu trong config.js.", "err");
+    $("runAll").disabled = $("go").disabled = $("scan").disabled = true;
+    const done = [];
+    try {
+      for (const p of presets) {
+        $("preset").value = p.name;
+        applyPreset(p.name);
+        weeks = null; templateBuf = null;
+        images.forEach((im) => URL.revokeObjectURL(im.url));
+        images = [];
+        renderImages();
+        await scan();
+        const r = await generate();
+        done.push(`${p.name}: ${r.summary}`);
+      }
+      setStatus("Đã tạo báo cáo riêng cho " + presets.length + " dự án. " + done.join(" | "), "ok");
+    } catch (err) {
+      console.error(err);
+      setStatus(`Lỗi ở dự án ${$("preset").value}: ${err.message}` + (done.length ? " (đã xong: " + done.join(" | ") + ")" : ""), "err");
+    } finally {
+      $("runAll").disabled = $("go").disabled = $("scan").disabled = false;
+    }
+  }
+
+  async function generate() {
+    const localTpl = $("templateFile").files[0];
+    if (localTpl) templateBuf = await localTpl.arrayBuffer();
+    if (!templateBuf) throw new Error("Chưa có PPTX mẫu: dán link Drive và bấm Quét, hoặc chọn file từ máy.");
+    if (!weeks) throw new Error("Chưa có số liệu: dán link Google Sheet và bấm Quét, hoặc chọn file từ máy.");
+    const list = staffList();
+    const imgs = images.filter((im) => im.include).map((im) => ({ file: im.file, platform: im.platform, kind: im.kind, staff: im.staff }));
+    setStatus("Đang tạo báo cáo…");
+    {
+      const res = await buildReport({
+        template: templateBuf, weeks, images: imgs, staffList: list, staffOf,
+        week: $("week").value, weekNo: parseInt($("weekNo").value, 10) || null,
+        year: $("year").value.trim() || String(new Date().getFullYear()),
+        campaign: $("campaign").value.trim(), period: $("period").value.trim(), staff: list.join(", "),
+        scope: $("scope").value, perSlide: parseInt($("perSlide").value, 10) || 1,
+        logo: currentPreset().logo || "", logos: CFG.logos,
+        dropUnused: $("dropUnused").checked, dropEmptyImageSlides: $("dropEmpty").checked,
+      });
+      const name = ($("outName").value.trim() || "bao_cao_mkt") + "_" + res.week.replace(/[\/ ]/g, "") + ".pptx";
+      const pdfName = name.replace(/\.pptx$/, ".pdf");
+      const fmt = $("format").value; // pptx | pdf | both
+      const folder = parseDriveId($("outFolder").value) || "";
+      const links = [];
+      const download = (blob, fname) => {
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = fname;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      };
+      if (fmt !== "pdf") {
+        download(res.blob, name);
+        if (IN_GAS) {
+          setStatus("Đang lưu PPTX vào Google Drive…");
+          links.push(["PPTX", await gas("saveReport", await blobToB64(res.blob), name, folder)]);
+        }
+      }
+      let pdfErr = "";
+      if (fmt !== "pptx") {
+        setStatus("Đang chuyển sang PDF qua Google Drive…");
+        try {
+          if (IN_GAS) {
+            const r = await gas("convertToPdf", await blobToB64(res.blob), name, folder);
+            download(b64ToBlob(r.b64, "application/pdf"), pdfName);
+            links.push(["PDF", r.url]);
+          } else {
+            await signIn();
+            download((await Drive.convertToPdf(res.blob, name)).blob, pdfName);
+          }
+        } catch (err) {
+          console.error(err);
+          pdfErr = " Không xuất được PDF: " + err.message + (fmt === "pdf" ? " – đã tải PPTX thay thế." : "");
+          if (fmt === "pdf") download(res.blob, name);
+        }
+      }
+      const summary = `${res.slides} slide (${res.staffCount} nhân sự), chèn ${res.nImg} ảnh, bỏ ${res.dropped} slide mẫu không dùng.`;
+      setStatus(`Đã tạo báo cáo: ${summary}` + pdfErr, pdfErr ? "err" : "ok");
+      if (links.length) {
+        $("status").insertAdjacentHTML("beforeend", " Đã lưu vào Drive: " +
+          links.map(([l, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${l}</a>`).join(" · ") + ".");
+      }
+      return { summary: summary + pdfErr, links };
+    }
+  }
+
+  window.BaoCaoMkt = {
+    PLATFORMS, KINDS, fmtInt, fmtDec, IN_GAS, gas, b64ToBlob, blobToB64, ocrWorker, embeddable, isPdf, pdfText, pdfToImages, loadData, aggregate, buildReport, toNum, norm, parseDriveId, guessClass, staffNameFromAccount, classifyText, extractCampaigns, Drive };
+
+  const onReady = (fn) => (document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", fn) : fn());
+  onReady(() => {
+    if (!$("form")) return; // trang khác (CRM) chỉ dùng phần lõi
+    $("year").value = String(new Date().getFullYear());
+    if (CFG.googleClientId || IN_GAS) $("clientBox").hidden = true;
+    else $("clientId").value = LS.get("clientId") || "";
+    if (IN_GAS) $("auth").hidden = true;
+    else $("outFolderBox").hidden = true;
+    const presetSel = $("preset");
+    presetSel.innerHTML = (CFG.presets || []).map((p) => `<option>${esc(p.name)}</option>`).join("");
+    const last = LS.get("preset");
+    if (last && (CFG.presets || []).some((p) => p.name === last)) presetSel.value = last;
+    applyPreset(presetSel.value);
+    presetSel.addEventListener("change", () => { LS.set("preset", presetSel.value); applyPreset(presetSel.value); });
+
+    $("auth").addEventListener("click", () => signIn().catch((e) => setStatus(e.message, "err")));
+    $("scan").addEventListener("click", onScan);
+    $("runAll").addEventListener("click", onRunAll);
+    $("dataFile").addEventListener("change", async () => {
+      const f = $("dataFile").files[0];
+      if (!f) return;
+      try { setStatus(readWorkbook(await f.arrayBuffer(), f.name), "ok"); } catch (e) { weeks = null; setStatus(e.message, "err"); }
+    });
+    $("imgFiles").addEventListener("change", async () => {
+      for (const f of Array.from($("imgFiles").files)) {
+        if (isPdf(f)) await addPdf(f, ["Từ máy"]);
+        else addImage(f, ["Từ máy"]);
+      }
+      $("imgFiles").value = "";
+      sortImages();
+      renderImages();
+      try {
+        await runOcr();
+        setStatus(`Đã thêm ảnh. Kiểm tra lại phân loại rồi bấm Tạo báo cáo.`, "ok");
+      } catch (e) { setStatus("Lỗi đọc ảnh: " + e.message, "err"); }
+    });
+    $("images").addEventListener("change", (e) => {
+      const el = e.target, i = el.dataset.i;
+      if (i == null) return;
+      images[i][el.dataset.f] = el.type === "checkbox" ? el.checked : el.value;
+      if (el.type === "checkbox" || el.dataset.f === "staff") renderImages();
+    });
+    $("accounts").addEventListener("change", (e) => {
+      const acc = e.target.dataset.acc;
+      if (acc == null) return;
+      accStaff[acc] = e.target.value;
+      LS.set("accStaff", JSON.stringify(accStaff));
+      images.forEach(applyOcr);
+      renderAccounts();
+      renderImages();
+    });
+    $("staff").addEventListener("change", () => {
+      images.forEach((im) => { im.guess = guessStaff(im.path, im.name); if (!staffList().includes(im.staff)) im.staff = im.guess; applyOcr(im); });
+      renderAccounts();
+      renderImages();
+    });
+    $("sheet").addEventListener("change", () => {
+      try { weeks = loadData(workbook, $("sheet").value); populateWeeks(); } catch (e) { weeks = null; setStatus(e.message, "err"); }
+    });
+    $("week").addEventListener("change", renderSummary);
+    $("form").addEventListener("submit", onGenerate);
+  });
+})();
+</script>
+<script>
+/* CRM Báo cáo Marketing – giao diện (chạy trong Google Apps Script, dữ liệu ở Google Sheet).
+ * Dùng phần lõi tạo báo cáo của bao-cao-mkt/app.js qua window.BaoCaoMkt. */
+(function () {
+  "use strict";
+
+  const B = window.BaoCaoMkt;
+  const { PLATFORMS, KINDS, fmtInt, gas } = B;
+  const PLATFORM_LABEL = { Facebook: "Facebook", Tiktok: "TikTok", Zalo: "Zalo", Google: "Google" };
+  const STATUSES = ["Nháp", "Đã nộp", "Đã duyệt"];
+
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const num = (v) => {
+    if (v === "" || v == null) return 0;
+    if (typeof v === "number") return v;
+    return B.toNum(v);
+  };
+  const opt = (v, label, cur) => `<option value="${esc(v)}"${String(v) === String(cur) ? " selected" : ""}>${esc(label == null ? v : label)}</option>`;
+
+  // ------------------------------------------------------------ tuần
+  const pad = (n) => String(n).padStart(2, "0");
+  const isoOf = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  const parseIso = (s) => { const [y, m, d] = String(s).split("-").map(Number); return new Date(y, m - 1, d); };
+  const mondayOf = (d) => { const x = new Date(d.getFullYear(), d.getMonth(), d.getDate()); x.setDate(x.getDate() - ((x.getDay() + 6) % 7)); return x; };
+  function weekLabel(iso, withYear) {
+    const a = parseIso(iso), b = new Date(a);
+    b.setDate(a.getDate() + 6);
+    return `${pad(a.getDate())}/${pad(a.getMonth() + 1)} - ${pad(b.getDate())}/${pad(b.getMonth() + 1)}` + (withYear ? `/${b.getFullYear()}` : "");
+  }
+  /** "05/10 - 11/10" + năm -> "2026-10-05" */
+  function isoFromLabel(label, year) {
+    const m = /^(\d{1,2})\/(\d{1,2})/.exec(label.trim());
+    return m ? `${year}-${pad(m[2])}-${pad(m[1])}` : null;
+  }
+  function weekList() {
+    const set = new Set();
+    let d = mondayOf(new Date());
+    d.setDate(d.getDate() + 7);
+    for (let i = 0; i < 20; i++) { set.add(isoOf(d)); d.setDate(d.getDate() - 7); }
+    S.SoLieu.forEach((r) => r.tuan && set.add(r.tuan));
+    S.ChungTu.forEach((r) => r.tuan && set.add(r.tuan));
+    return Array.from(set).sort().reverse();
+  }
+  const latestDataWeek = () => S.SoLieu.map((r) => r.tuan).sort().pop() || isoOf(mondayOf(new Date()));
+
+  // ------------------------------------------------------------ trạng thái
+  const S = { DuAn: [], NhanSu: [], TaiKhoan: [], SoLieu: [], ChungTu: [], BaoCao: [], schema: {}, appUrl: "", sheetUrl: "", user: "" };
+  // ------------------------------------------------------------ đơn vị (2 bên: TATILAND / TATI INVEST)
+  const BRANDS = Object.keys((window.BAO_CAO_MKT_CONFIG || {}).logos || { TATILAND: 1, "TATI INVEST": 1 });
+  const slug = (b) => B.norm(b).replace(/[^a-z0-9]/g, "");
+  let brand = "";
+  const brandProjects = () => S.DuAn.filter((p) => !brand || !p.logo || p.logo === brand);
+  const brandNames = () => brandProjects().map((p) => p.ten);
+  const inBrand = (pjName) => brandNames().includes(pjName);
+  function brandMark(b) {
+    if (!b) return `<span class="bm-all">Tất cả đơn vị</span>`;
+    const rest = b.replace(/^TATI\s*/i, "");
+    return `<span class="bm"><i class="t1">TA</i><i class="t2">TI</i><i class="t3">${esc(rest)}</i></span>`;
+  }
+  // Trang hướng dẫn: config.guideUrl nếu có, không thì trang ?page=huongdan của chính ứng dụng
+  const guideUrl = () => ((window.BAO_CAO_MKT_CONFIG || {}).guideUrl || "").trim() || (S.appUrl ? S.appUrl + "?page=huongdan" : "#");
+  function setBrand(b, quiet) {
+    brand = BRANDS.includes(b) ? b : "";
+    try { localStorage.setItem("crm.brand", brand); } catch (_) { /* bỏ qua */ }
+    document.querySelectorAll("[data-brand]").forEach((x) => x.classList.toggle("on", x.dataset.brand === brand));
+    $("brandMark").innerHTML = brandMark(brand);
+    document.title = (brand ? brand + " · " : "") + "CRM Báo cáo Marketing";
+    const link = S.appUrl ? S.appUrl + (brand ? "?donvi=" + slug(brand) : "") : "";
+    $("brandLink").hidden = !link || !brand;
+    $("brandLink").dataset.url = link;
+    $("guideLink").href = guideUrl();
+    if (quiet) return;
+    ["dbProject", "enProject", "evProject", "rpProject"].forEach((id) => { if (!inBrand($(id).value)) $(id).value = ""; });
+    refreshFilters();
+    showTab(document.querySelector("nav button.on") ? document.querySelector("nav button.on").dataset.tab : "tong");
+  }
+
+  const staffNames = () => S.NhanSu.filter((n) => n.trangThai !== "Nghỉ").map((n) => n.ten);
+  const project = (name) => S.DuAn.find((p) => p.ten === name) || {};
+  const digitsOf = (s) => (String(s).match(/\d{6,}/) || [""])[0];
+  const accountStaff = (id) => { const a = S.TaiKhoan.find((t) => digitsOf(t.maTaiKhoan) === digitsOf(id) && digitsOf(id)); return a ? a.nhanSu : ""; };
+
+  function toast(msg, kind) {
+    const el = $("toast");
+    el.textContent = msg;
+    el.className = "toast show " + (kind || "");
+    clearTimeout(toast.t);
+    if (kind !== "busy") toast.t = setTimeout(() => (el.className = "toast"), kind === "err" ? 8000 : 3500);
+  }
+  async function run(label, fn) {
+    toast(label + "…", "busy");
+    try { const r = await fn(); return r; } catch (e) { console.error(e); toast("Lỗi: " + e.message, "err"); throw e; }
+  }
+
+  async function reload(tables) {
+    const list = tables || ["DuAn", "NhanSu", "TaiKhoan", "SoLieu", "ChungTu", "BaoCao"];
+    const res = await Promise.all(list.map((t) => gas("crmList", t)));
+    list.forEach((t, i) => (S[t] = res[i]));
+  }
+
+  // ------------------------------------------------------------ bộ lọc dùng chung
+  function fillSelect(el, options, cur, all) {
+    el.innerHTML = (all ? opt("", all, cur) : "") + options.map((o) => (Array.isArray(o) ? opt(o[0], o[1], cur) : opt(o, o, cur))).join("");
+    if (cur != null && Array.from(el.options).some((o) => o.value === String(cur))) el.value = cur;
+  }
+  function refreshFilters() {
+    const weeks = weekList().map((w) => [w, weekLabel(w, true)]);
+    const projects = brandNames();
+    const staff = staffNames();
+    // Tổng quan
+    const dataWeeks = Array.from(new Set(S.SoLieu.map((r) => r.tuan))).sort();
+    const allW = (dataWeeks.length ? dataWeeks : [latestDataWeek()]).map((w) => [w, weekLabel(w, true)]);
+    fillSelect($("dbProject"), projects, $("dbProject").value, "Tất cả dự án");
+    fillSelect($("dbFrom"), allW, $("dbFrom").value || allW[Math.max(0, allW.length - 4)][0]);
+    fillSelect($("dbTo"), allW, $("dbTo").value || allW[allW.length - 1][0]);
+    // Nhập số liệu / Chứng từ / Báo cáo
+    for (const p of ["en", "ev", "rp"]) {
+      fillSelect($(p + "Week"), weeks, $(p + "Week").value || latestDataWeek());
+      fillSelect($(p + "Project"), projects, p === "rp" ? $(p + "Project").value : $(p + "Project").value || projects[0], p === "rp" ? "Tất cả dự án" : null);
+    }
+    fillSelect($("enStaff"), staff, $("enStaff").value, "Tất cả nhân sự");
+    fillSelect($("evStaff"), staff, $("evStaff").value || staff[0]);
+    $("accList").innerHTML = S.TaiKhoan.map((t) => `<option value="${esc(t.maTaiKhoan)}">${esc((t.nhanSu || "") + " · " + (t.ten || t.nenTang || ""))}</option>`).join("");
+  }
+
+  // ------------------------------------------------------------ tab
+  function showTab(name) {
+    document.querySelectorAll("[data-tab]").forEach((b) => b.classList.toggle("on", b.dataset.tab === name));
+    document.querySelectorAll(".panel").forEach((p) => (p.hidden = p.id !== "tab-" + name));
+    try { localStorage.setItem("crm.tab", name); } catch (_) { /* bỏ qua */ }
+    ({ tong: renderDashboard, nhap: renderEntries, chungtu: renderEvidence, baocao: renderReports, danhmuc: renderCatalog }[name] || (() => {}))();
+  }
+
+  /** Số liệu đọc từ ảnh chỉ được tính khi người đó (tuần + dự án) chưa có số từ sheet/nhập tay. */
+  function effective(rows) {
+    const solid = new Set(rows.filter((r) => r.nguon !== "anh").map((r) => r.tuan + "|" + r.duAn + "|" + r.nhanSu));
+    return rows.filter((r) => r.nguon !== "anh" || !solid.has(r.tuan + "|" + r.duAn + "|" + r.nhanSu));
+  }
+  const isShadowed = (r) => r.nguon === "anh" && S.SoLieu.some((x) => x.nguon !== "anh" && x.tuan === r.tuan && x.duAn === r.duAn && x.nhanSu === r.nhanSu);
+
+  // ------------------------------------------------------------ TỔNG QUAN
+  function sumOf(rows) {
+    const t = { chiPhi: 0, chiPhiPhi: 0, lead: 0, mql: 0, sql: 0, deal: 0, hienThi: 0 };
+    rows.forEach((r) => {
+      t.chiPhi += num(r.chiPhi);
+      t.chiPhiPhi += num(r.chiPhiPhi) || num(r.chiPhi);
+      t.lead += num(r.lead); t.mql += num(r.mql); t.sql += num(r.sql); t.deal += num(r.deal);
+      t.hienThi += num(r.hienThi);
+    });
+    t.cpl = t.lead ? t.chiPhiPhi / t.lead : 0;
+    t.accounts = new Set(rows.map((r) => r.taiKhoan).filter(Boolean)).size;
+    return t;
+  }
+  function group(rows, key) {
+    const m = new Map();
+    rows.forEach((r) => { const k = r[key] || "(chưa gán)"; if (!m.has(k)) m.set(k, []); m.get(k).push(r); });
+    return Array.from(m, ([k, rs]) => [k, sumOf(rs)]);
+  }
+  function barTable(title, rows, labelHead) {
+    const max = Math.max(1, ...rows.map(([, t]) => t.chiPhiPhi));
+    const total = rows.reduce((s, [, t]) => s + t.chiPhiPhi, 0) || 1;
+    return `<section class="card"><h3>${esc(title)}</h3><div class="wrap"><table class="data">
+      <thead><tr><th>${esc(labelHead)}</th><th class="barcol">Chi phí (gồm phí)</th><th>Lead</th><th>CPL</th><th>Tỷ trọng</th></tr></thead><tbody>
+      ${rows.map(([k, t]) => `<tr><td>${esc(PLATFORM_LABEL[k] || k)}</td>
+        <td class="barcol"><div class="hbar"><b>${fmtInt(t.chiPhiPhi)}</b><i><span style="width:${(t.chiPhiPhi / max) * 100}%"></span></i></div></td>
+        <td>${fmtInt(t.lead)}</td><td>${t.lead ? fmtInt(t.cpl) : "–"}</td><td>${Math.round((t.chiPhiPhi / total) * 100)}%</td></tr>`).join("")}
+      </tbody></table></div></section>`;
+  }
+  function renderDashboard() {
+    const pj = $("dbProject").value, from = $("dbFrom").value, to = $("dbTo").value;
+    const rows = effective(S.SoLieu.filter((r) => (pj ? r.duAn === pj : inBrand(r.duAn)) && r.tuan >= from && r.tuan <= to));
+    const t = sumOf(rows);
+    const tiles = [
+      ["Chi phí gồm phí nền tảng", fmtInt(t.chiPhiPhi) + " đ"],
+      ["Chi phí thực chạy", fmtInt(t.chiPhi) + " đ"],
+      ["Lead", fmtInt(t.lead)],
+      ["Chi phí / lead", t.lead ? fmtInt(t.cpl) + " đ" : "–"],
+      ["Tài khoản QC", fmtInt(t.accounts)],
+    ];
+    if (t.mql || t.sql || t.deal) tiles.push(["MQL / SQL / DEAL", `${fmtInt(t.mql)} / ${fmtInt(t.sql)} / ${fmtInt(t.deal)}`]);
+    // cột theo tuần
+    const byWeek = Array.from(new Set(rows.map((r) => r.tuan))).sort().map((w) => [w, sumOf(rows.filter((r) => r.tuan === w))]);
+    const maxW = Math.max(1, ...byWeek.map(([, x]) => x.chiPhiPhi));
+    const chart = byWeek.length
+      ? `<div class="cols" role="img" aria-label="Chi phí gồm phí theo tuần">${byWeek.map(([w, x]) =>
+          `<div class="col" title="${esc(weekLabel(w, true))}: ${fmtInt(x.chiPhiPhi)} đ · ${fmtInt(x.lead)} lead">
+             <small>${fmtInt(x.chiPhiPhi / 1e6 * 10) / 10 > 0 ? (x.chiPhiPhi / 1e6).toFixed(1).replace(".", ",") + " tr" : "0"}</small>
+             <span style="height:${Math.max(2, (x.chiPhiPhi / maxW) * 100)}%"></span>
+             <em>${esc(weekLabel(w).split(" - ")[0])}</em></div>`).join("")}</div>`
+      : `<p class="muted">Chưa có số liệu trong khoảng này.</p>`;
+    $("dbBody").innerHTML = `
+      <div class="tiles">${tiles.map(([k, v]) => `<div class="tile"><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join("")}</div>
+      <section class="card"><h3>Chi phí gồm phí theo tuần</h3>${chart}</section>
+      <div class="two">
+        ${barTable("Theo nhân sự", group(rows, "nhanSu").sort((a, b) => b[1].chiPhiPhi - a[1].chiPhiPhi), "Nhân sự")}
+        ${barTable("Theo dự án", group(rows, "duAn"), "Dự án")}
+      </div>
+      ${barTable("Theo kênh", group(rows, "nenTang"), "Kênh")}`;
+  }
+
+  // ------------------------------------------------------------ NHẬP SỐ LIỆU (bảng theo mẫu báo cáo)
+  // Cột giống bảng trong file PPTX; Frequency/CTR/CPM tự tính.
+  const GRID = [
+    ["nhanSu", "Nhân sự", "staff"],
+    ["taiKhoan", "ID tài khoản", "acc"],
+    ["chiPhi", "Ngân sách thực chạy", "num"],
+    ["chiPhiPhi", "Chi phí thực chạy (+ gồm phí nền tảng)", "num"],
+    ["lead", "LEAD", "num"],
+    ["mql", "MQL (Khách hàng quan tâm)", "num"],
+    ["sql", "SQL (Khách hàng tiềm năng)", "num"],
+    ["deal", "DEAL", "num"],
+    ["hienThi", "Impressions (hiển thị)", "num"],
+    ["tiepCan", "Reach (tiếp cận)", "num"],
+    ["_freq", "Frequency (tần suất)", "calc"],
+    ["luotNhap", "Lượt nhấp", "num"],
+    ["_ctr", "CTR", "calc"],
+    ["_cpm", "CPM", "calc"],
+    ["luotXem", "Lượt xem", "num"],
+    ["chienDich", "Chiến dịch / ghi chú", "text"],
+  ];
+  const drafts = new Map(); // id -> dòng đang sửa (id "new-…" = dòng mới)
+  const isNew = (id) => String(id).startsWith("new-");
+  function calc(r, key) {
+    const imp = num(r.hienThi), reach = num(r.tiepCan), clicks = num(r.luotNhap), cost = num(r.chiPhi);
+    if (key === "_freq") return reach ? B.fmtDec(imp / reach) : "";
+    if (key === "_ctr") return imp && r.luotNhap !== "" ? B.fmtDec((clicks / imp) * 100) + "%" : "";
+    if (key === "_cpm") return imp && cost ? fmtInt((cost / imp) * 1000) : "";
+    return "";
+  }
+  const fmtCell = (v) => (v === "" || v == null ? "" : fmtInt(num(v)));
+  function gridRows() {
+    const w = $("enWeek").value, pj = $("enProject").value, st = $("enStaff").value;
+    const saved = S.SoLieu.filter((r) => r.tuan === w && r.duAn === pj && (!st || r.nhanSu === st))
+      .map((r) => drafts.get(r.id) || r);
+    const fresh = Array.from(drafts.values()).filter((r) => isNew(r.id) && r.tuan === w && r.duAn === pj);
+    return saved.concat(fresh);
+  }
+  function renderEntries() {
+    const rows = gridRows();
+    const staff = staffNames();
+    const cell = (r, [k, , type]) => {
+      const id = esc(r.id);
+      if (type === "staff") return `<td><select data-g="${id}" data-f="${k}">${opt("", "(chọn)", r[k])}${staff.map((x) => opt(x, x, r[k])).join("")}</select></td>`;
+      if (type === "acc") return `<td><input data-g="${id}" data-f="${k}" value="${esc(r[k])}" list="accList" class="acc"></td>`;
+      if (type === "calc") return `<td class="calc">${calc(r, k)}</td>`;
+      if (type === "text") return `<td><input data-g="${id}" data-f="${k}" value="${esc(r[k])}" class="txt"></td>`;
+      return `<td><input data-g="${id}" data-f="${k}" value="${fmtCell(r[k])}" inputmode="numeric" class="n"></td>`;
+    };
+    const totalRow = (rs, label) => {
+      const t = { chiPhi: 0, chiPhiPhi: 0, lead: 0, mql: 0, sql: 0, deal: 0, hienThi: 0, tiepCan: 0, luotNhap: 0, luotXem: 0 };
+      effective(rs.filter((r) => !isNew(r.id) || drafts.has(r.id))).forEach((r) => Object.keys(t).forEach((k) => (t[k] += num(r[k]))));
+      const tr = Object.assign({}, t, { luotNhap: t.luotNhap || "" });
+      return `<tr class="total"><td colspan="2">${label}</td>${GRID.slice(2).map(([k, , type]) =>
+        `<td class="${type === "calc" ? "calc" : ""}">${type === "calc" ? calc(tr, k) : type === "text" ? "" : fmtInt(t[k])}</td>`).join("")}<td></td></tr>`;
+    };
+    const sections = PLATFORMS.map((p) => {
+      const rs = rows.filter((r) => (r.nenTang || "Facebook") === p);
+      const body = rs.map((r) => `<tr class="${drafts.has(r.id) ? "dirty" : ""}${isShadowed(r) ? " shadow" : ""}">
+          ${GRID.map((c) => cell(r, c)).join("")}
+          <td class="act">${r.nguon === "anh" ? `<small class="muted" title="${esc(r.ghiChu)}">ảnh${isShadowed(r) ? " · không tính" : ""}</small>` : ""}
+            <button type="button" class="link danger" data-gdel="${esc(r.id)}" title="Xoá dòng">✕</button></td></tr>`).join("");
+      return `<section class="card grid-sec${rs.length ? "" : " empty"}">
+        <div class="sec-head"><h3>${PLATFORM_LABEL[p].toUpperCase()}</h3>
+          <button type="button" class="ghost small" data-gadd="${p}">+ Thêm tài khoản ${PLATFORM_LABEL[p]}</button></div>
+        ${rs.length ? `<div class="wrap"><table class="data sheet"><thead><tr>${GRID.map(([, h]) => `<th>${esc(h)}</th>`).join("")}<th></th></tr></thead>
+          <tbody>${body}${rs.length > 1 ? totalRow(rs, "TỔNG " + PLATFORM_LABEL[p]) : ""}</tbody></table></div>` : ""}
+      </section>`;
+    }).join("");
+    const all = effective(rows);
+    const t = sumOf(all);
+    $("enTable").innerHTML = `
+      <div class="tiles">
+        <div class="tile"><span>Ngân sách thực chạy</span><b>${fmtInt(t.chiPhi)}</b></div>
+        <div class="tile"><span>Chi phí (+ phí nền tảng)</span><b>${fmtInt(t.chiPhiPhi)}</b></div>
+        <div class="tile"><span>LEAD</span><b>${fmtInt(t.lead)}</b></div>
+        <div class="tile"><span>MQL / SQL / DEAL</span><b>${fmtInt(t.mql)} / ${fmtInt(t.sql)} / ${fmtInt(t.deal)}</b></div>
+      </div>${sections}`;
+    const n = drafts.size;
+    $("enSave").disabled = !n;
+    $("enSave").textContent = n ? `Lưu thay đổi (${n} dòng)` : "Đã lưu";
+    $("enDiscard").hidden = !n;
+  }
+  function draftOf(id) {
+    if (!drafts.has(id)) drafts.set(id, Object.assign({}, S.SoLieu.find((x) => x.id === id)));
+    return drafts.get(id);
+  }
+  function addRow(platform) {
+    const id = "new-" + Math.random().toString(36).slice(2, 9);
+    const st = $("enStaff").value || "";
+    const acc = st ? soleAccount(st, platform) : "";
+    drafts.set(id, {
+      id, tuan: $("enWeek").value, duAn: $("enProject").value, nhanSu: st, nenTang: platform, taiKhoan: acc, chienDich: "",
+      chiPhi: "", chiPhiPhi: "", lead: "", mql: "", sql: "", deal: "", hienThi: "", tiepCan: "", luotNhap: "", luotXem: "", ghiChu: "", nguon: "tay",
+    });
+    renderEntries();
+    const el = document.querySelector(`[data-g="${id}"][data-f="${st ? "taiKhoan" : "nhanSu"}"]`);
+    if (el) el.focus();
+  }
+  function gridChange(el) {
+    const r = draftOf(el.dataset.g), f = el.dataset.f;
+    if (GRID.find((c) => c[0] === f)[2] === "num") {
+      const v = el.value.trim();
+      r[f] = v === "" ? "" : num(v);
+      if (f === "chiPhi" && (r.chiPhiPhi === "" || r.chiPhiPhi == null)) r.chiPhiPhi = r[f];
+    } else r[f] = el.value.trim();
+    if (f === "taiKhoan") {
+      const a = S.TaiKhoan.find((t) => digitsOf(t.maTaiKhoan) && digitsOf(t.maTaiKhoan) === digitsOf(r.taiKhoan));
+      if (a && a.nhanSu && !r.nhanSu) r.nhanSu = a.nhanSu;
+    }
+    if (f === "nhanSu" && !r.taiKhoan) r.taiKhoan = soleAccount(r.nhanSu, r.nenTang);
+    renderEntries();
+  }
+  async function saveGrid() {
+    const list = Array.from(drafts.values());
+    const bad = list.filter((r) => !r.nhanSu);
+    if (bad.length) return toast("Chọn nhân sự cho mọi dòng trước khi lưu.", "err");
+    const empty = list.filter((r) => isNew(r.id) && !num(r.chiPhi) && !num(r.lead) && !num(r.hienThi));
+    empty.forEach((r) => drafts.delete(r.id));
+    const toSave = list.filter((r) => !empty.includes(r)).map((r) => {
+      const o = Object.assign({}, r);
+      if (isNew(o.id)) delete o.id;
+      if (o.chiPhiPhi === "" || o.chiPhiPhi == null) o.chiPhiPhi = o.chiPhi;
+      return o;
+    });
+    if (!toSave.length) { renderEntries(); return; }
+    const saved = await run("Đang lưu", () => gas("crmSaveMany", "SoLieu", toSave));
+    saved.forEach((r) => { S.SoLieu = S.SoLieu.filter((x) => x.id !== r.id).concat(r); });
+    // tài khoản mới -> danh mục
+    const newAcc = new Map();
+    saved.forEach((r) => {
+      if (r.taiKhoan && digitsOf(r.taiKhoan) && !S.TaiKhoan.some((t) => digitsOf(t.maTaiKhoan) === digitsOf(r.taiKhoan))) {
+        newAcc.set(digitsOf(r.taiKhoan), { maTaiKhoan: r.taiKhoan, nenTang: r.nenTang, nhanSu: r.nhanSu });
+      }
+    });
+    if (newAcc.size) S.TaiKhoan = S.TaiKhoan.concat(await gas("crmSaveMany", "TaiKhoan", Array.from(newAcc.values())));
+    drafts.clear();
+    toast(`Đã lưu ${saved.length} dòng.`, "ok");
+    refreshFilters();
+    renderEntries();
+  }
+  async function deleteRow(id) {
+    if (isNew(id)) { drafts.delete(id); renderEntries(); return; }
+    const r = S.SoLieu.find((x) => x.id === id);
+    if (!r || !confirm(`Xoá dòng ${r.nhanSu} · ${r.taiKhoan || ""} · ${fmtInt(num(r.chiPhi))} đ?`)) return;
+    await run("Đang xoá", () => gas("crmDelete", "SoLieu", id));
+    S.SoLieu = S.SoLieu.filter((x) => x.id !== id);
+    drafts.delete(id);
+    toast("Đã xoá.", "ok");
+    renderEntries();
+  }
+  function confirmDiscard() {
+    if (!drafts.size) return true;
+    if (!confirm(`Có ${drafts.size} dòng chưa lưu. Bỏ các thay đổi này?`)) return false;
+    drafts.clear();
+    return true;
+  }
+
+  /** Nhập số liệu từ Google Sheet của dự án (mẫu "BÁO CÁO NGHIỆM THU THÁNG"). */
+  async function importSheet() {
+    if (!confirmDiscard()) return;
+    const pj = project($("enProject").value);
+    const id = B.parseDriveId(pj.nguonSoLieu);
+    if (!id) return toast("Dự án chưa có link Google Sheet số liệu (tab Danh mục).", "err");
+    const year = parseIso($("enWeek").value).getFullYear();
+    const r = await run("Đang đọc Google Sheet", () => gas("downloadFile", id));
+    const wb = XLSX.read(Uint8Array.from(atob(r.b64), (c) => c.charCodeAt(0)), { type: "array" });
+    const weeks = B.loadData(wb);
+    const list = [], weekIsos = [];
+    const known = new Set(staffNames());
+    const newStaff = new Set(), newAcc = new Map();
+    Object.entries(weeks).forEach(([label, data]) => {
+      const iso = isoFromLabel(label, year);
+      if (!iso || !PLATFORMS.some((p) => data[p].length)) return;
+      weekIsos.push(iso);
+      PLATFORMS.forEach((p) => data[p].forEach((rec) => {
+        const acc = digitsOf(rec.account) || rec.account;
+        const st = accountStaff(acc) || B.staffNameFromAccount(rec.account) || "";
+        if (st && !known.has(st)) newStaff.add(st);
+        if (digitsOf(acc) && !S.TaiKhoan.some((t) => digitsOf(t.maTaiKhoan) === digitsOf(acc))) newAcc.set(acc, { maTaiKhoan: acc, nenTang: p, nhanSu: st });
+        list.push({
+          tuan: iso, duAn: pj.ten, nhanSu: st, nenTang: p, taiKhoan: acc, chienDich: "",
+          chiPhi: rec.cost, chiPhiPhi: rec.cost_fee || rec.cost, lead: rec.lead, hienThi: rec.impressions || "", tiepCan: rec.reach || "",
+          luotNhap: rec.clicks || "", luotXem: rec.views || "", mql: "", sql: "", deal: "", ghiChu: "",
+        });
+      }));
+    });
+    if (!list.length) return toast("Sheet không có dòng số liệu nào.", "err");
+    if (!confirm(`Nhập ${list.length} dòng (${weekIsos.map((w) => weekLabel(w)).join(", ")}) cho ${pj.ten}?\nCác dòng đã nhập từ sheet trước đó của những tuần này sẽ được thay thế; dòng nhập tay giữ nguyên.`)) return;
+    await run("Đang nhập", async () => {
+      if (newStaff.size) await gas("crmSaveMany", "NhanSu", Array.from(newStaff).map((ten) => ({ ten })));
+      if (newAcc.size) await gas("crmSaveMany", "TaiKhoan", Array.from(newAcc.values()));
+      await gas("crmImportEntries", pj.ten, weekIsos, list);
+      await reload(["NhanSu", "TaiKhoan", "SoLieu"]);
+    });
+    toast(`Đã nhập ${list.length} dòng.` + (list.some((x) => !x.nhanSu) ? " Có dòng chưa gán nhân sự – gán tài khoản ở tab Danh mục rồi nhập lại." : ""), "ok");
+    refreshFilters();
+    renderEntries();
+  }
+
+  // ------------------------------------------------------------ CHỨNG TỪ
+  // Hướng dẫn nghiệm thu theo mẫu COLLECTION (slide 8–25): ảnh cần chụp cho từng kênh + các mục phải khoanh
+  const REQ = {
+    Facebook: {
+      ads: "ID tài khoản quảng cáo · Search tên chiến dịch · Tổng số tiền thực chạy · Thời gian chạy (nghiệm thu)",
+      qc: "ID tài khoản quảng cáo · Thời gian chạy · Quảng cáo đang hoạt động",
+      hoadon: "ID tài khoản quảng cáo · Số mã tham chiếu · Tổng số tiền đã thanh toán (VAT) · Hoá đơn có tên chiến dịch khớp tên trên TKQC",
+    },
+    Tiktok: {
+      ads: "ID tài khoản quảng cáo · Search tên chiến dịch · Tổng số tiền thực chạy · Thời gian chạy (nghiệm thu)",
+      qc: "ID tài khoản quảng cáo · Quảng cáo chạy",
+      hoadon: "ID tài khoản quảng cáo · Tổng số tiền đã thanh toán (VAT) · Hoá đơn có tên chiến dịch khớp tên trên TKQC",
+    },
+    Zalo: {
+      ads: "Search tên chiến dịch · Tổng số tiền thực chạy · Thời gian chạy (nghiệm thu)",
+      qc: "ID tài khoản quảng cáo · Thời gian chạy · Quảng cáo đang hoạt động",
+      hoadon: "Tổng số tiền đã thanh toán (VAT) · Hoá đơn có tên chiến dịch khớp tên trên TKQC",
+    },
+    Google: {
+      ads: "ID tài khoản quảng cáo · Search tên chiến dịch · Tổng số tiền thực chạy · Thời gian chạy",
+      hoadon: "ID tài khoản quảng cáo · Số mã tham chiếu · Tổng số tiền thực chạy",
+    },
+  };
+  const reqOf = (p, k) => (REQ[p] || {})[k === "qc" && !(REQ[p] || {}).qc ? "ads" : k] || "";
+  /** Bảng kiểm nghiệm thu: mỗi nhân sự × kênh đã chạy × loại ảnh bắt buộc -> đã có / thiếu. */
+  function renderChecklist() {
+    const w = $("evWeek").value, pj = $("evProject").value;
+    const data = effective(S.SoLieu.filter((r) => r.tuan === w && r.duAn === pj));
+    const ev = S.ChungTu.filter((r) => r.tuan === w && r.duAn === pj);
+    const staff = Array.from(new Set(data.map((r) => r.nhanSu).concat(ev.map((r) => r.nhanSu)).filter(Boolean)));
+    const order = staffNames();
+    staff.sort((a, b) => (order.indexOf(a) + 1 || 99) - (order.indexOf(b) + 1 || 99));
+    let missing = 0;
+    const rows = [];
+    staff.forEach((st) => {
+      const plats = PLATFORMS.filter((p) => data.some((r) => r.nhanSu === st && (r.nenTang || "Facebook") === p) || ev.some((r) => r.nhanSu === st && r.nenTang === p));
+      plats.forEach((p) => {
+        const cells = Object.keys(KINDS).map((k) => {
+          if (!REQ[p][k]) return `<td class="muted">–</td>`;
+          const n = ev.filter((r) => r.nhanSu === st && r.nenTang === p && (r.loai === k || (k === "ads" && r.loai === "qc" && !REQ[p].qc))).length;
+          if (!n) missing++;
+          return n ? `<td class="ok-cell" title="${esc(REQ[p][k])}">✓ ${n}</td>` : `<td class="miss-cell" title="Cần chụp: ${esc(REQ[p][k])}">Thiếu</td>`;
+        }).join("");
+        rows.push(`<tr><td>${esc(st)}</td><td>${PLATFORM_LABEL[p]}</td>${cells}</tr>`);
+      });
+    });
+    $("evCheck").innerHTML = rows.length
+      ? `<table class="data check"><thead><tr><th>Nhân sự</th><th>Kênh</th>${Object.values(KINDS).map((l) => `<th>${l}</th>`).join("")}</tr></thead><tbody>${rows.join("")}</tbody></table>`
+      : `<p class="muted">Chưa có số liệu hoặc ảnh cho tuần này.</p>`;
+    $("evCheckSum").textContent = rows.length ? (missing ? `${missing} trang nghiệm thu còn thiếu ảnh` : "Đủ ảnh nghiệm thu") : "";
+    $("evCheckSum").className = missing ? "warn-text" : "ok-text";
+  }
+
+  let pending = []; // {file, url, nenTang, loai, nhanSu, note, campaigns:[{name, spent, results, resultType, date, use}]}
+  const RESULT_LABEL = { lead: "lead", thruplay: "ThruPlay", tuongtac: "tương tác", xem: "lượt xem" };
+  /** Ngày "6/10" có nằm trong tuần (iso thứ 2) không. */
+  function dateInWeek(dm, iso) {
+    if (!dm) return true;
+    const [d, m] = dm.split("/").map(Number);
+    const a = parseIso(iso);
+    for (let i = 0; i < 7; i++) {
+      const x = new Date(a); x.setDate(a.getDate() + i);
+      if (x.getDate() === d && x.getMonth() + 1 === m) return true;
+    }
+    return false;
+  }
+  function campaignRows(p, i) {
+    if (!p.campaigns || !p.campaigns.length) return "";
+    return `<div class="camps"><b>Số liệu đọc từ ảnh</b> <small class="muted">(tick dòng thuộc tuần này)</small>
+      ${p.campaigns.map((c, j) => `<label class="camp"><input type="checkbox" data-p="${i}" data-c="${j}" data-f="use"${c.use ? " checked" : ""}>
+        <span class="cname" title="${esc(c.name)}">${esc(c.name)}</span>
+        <input class="cnum" data-p="${i}" data-c="${j}" data-f="spent" value="${fmtInt(c.spent)}" aria-label="Chi tiêu">
+        <span class="muted">${c.results != null ? fmtInt(c.results) + " " + (RESULT_LABEL[c.resultType] || "") : ""}</span></label>`).join("")}</div>`;
+  }
+  function renderEvidence() {
+    renderChecklist();
+    const w = $("evWeek").value, pj = $("evProject").value;
+    const staff = staffNames();
+    $("evPending").innerHTML = pending.length ? pending.map((p, i) => `
+      <figure class="img"><img src="${p.preview || p.url}" alt="${esc(p.file.name)}">
+        <figcaption><span class="fname" title="${esc(p.file.name)}">${esc(p.file.name)}</span>
+          ${p.note ? `<small class="muted">${esc(p.note)}</small>` : ""}
+          <small class="req">Cần khoanh: ${esc(reqOf(p.nenTang, p.loai))}</small>
+          ${campaignRows(p, i)}
+          <div class="row"><select data-p="${i}" data-f="nenTang">${PLATFORMS.map((x) => opt(x, PLATFORM_LABEL[x], p.nenTang)).join("")}</select>
+          <select data-p="${i}" data-f="loai">${Object.entries(KINDS).map(([k, l]) => opt(k, l, p.loai)).join("")}</select></div>
+          <div class="row"><select data-p="${i}" data-f="nhanSu">${staff.map((x) => opt(x, x, p.nhanSu)).join("")}</select>
+          <button type="button" class="link danger" data-unpend="${i}">Bỏ</button></div>
+        </figcaption></figure>`).join("") : "";
+    $("evUpload").hidden = !pending.length;
+    const rows = S.ChungTu.filter((r) => r.tuan === w && r.duAn === pj);
+    $("evCount").textContent = `${rows.length} ảnh đã lưu`;
+    $("evList").innerHTML = rows.length ? rows.map((r) => `
+      <figure class="img"><a href="${esc(r.url)}" target="_blank" rel="noopener"><img src="https://drive.google.com/thumbnail?id=${esc(r.fileId)}&sz=w400" alt="${esc(r.tenFile)}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'noimg',textContent:'Mở chứng từ'}))"></a>
+        <figcaption><span class="fname" title="${esc(r.tenFile)}">${esc(r.tenFile)}</span>
+          <div class="row"><select data-ev="${esc(r.id)}" data-f="nenTang">${PLATFORMS.map((x) => opt(x, PLATFORM_LABEL[x], r.nenTang)).join("")}</select>
+          <select data-ev="${esc(r.id)}" data-f="loai">${Object.entries(KINDS).map(([k, l]) => opt(k, l, r.loai)).join("")}</select></div>
+          <div class="row"><select data-ev="${esc(r.id)}" data-f="nhanSu" class="${r.nhanSu ? "" : "warn"}">${opt("", "(chưa gán nhân sự)", r.nhanSu)}${staff.map((x) => opt(x, x, r.nhanSu)).join("")}</select>
+          <button type="button" class="link danger" data-evdel="${esc(r.id)}">Xoá</button></div>
+        </figcaption></figure>`).join("") : `<p class="muted">Chưa có ảnh chứng từ cho tuần này.</p>`;
+  }
+  async function addPending(files) {
+    const staff = $("evStaff").value;
+    const list = Array.from(files).filter((f) => /^image\//.test(f.type) || B.isPdf(f));
+    const saved = new Set(S.ChungTu.filter((r) => r.duAn === $("evProject").value && r.tuan === $("evWeek").value).map((r) => r.hash).filter(Boolean));
+    let skipped = 0;
+    for (const f of list) {
+      let hash = "";
+      try { hash = await hashOf(f); } catch (_) { /* trình duyệt không hỗ trợ: không chống trùng */ }
+      if (hash && (saved.has(hash) || pending.some((x) => x.hash === hash))) { skipped++; continue; }
+      const p = { file: f, hash, url: URL.createObjectURL(f), nenTang: "Facebook", loai: B.isPdf(f) ? "hoadon" : "ads", nhanSu: staff, note: "", campaigns: [] };
+      if (B.isPdf(f)) {
+        try {
+          const pages = await B.pdfToImages(f, 1);
+          p.preview = URL.createObjectURL(pages[0]);
+          p.text = await B.pdfText(f);
+        } catch (e) { p.note = "Không đọc được PDF: " + e.message; }
+      }
+      pending.push(p);
+    }
+    const skipNote = skipped ? ` Bỏ qua ${skipped} ảnh trùng (đã chọn hoặc đã lưu cho tuần/dự án này).` : "";
+    if (skipped && skipped === list.length) { toast(skipNote.trim(), ""); return; }
+    renderEvidence();
+    const ctx = { staffList: staffNames(), accounts: S.TaiKhoan.map((t) => ({ account: t.maTaiKhoan, staff: t.nhanSu })) };
+    const w = $("evWeek").value;
+    const apply = (p) => {
+      const r = B.classifyText(p.text || "", ctx);
+      if (r.kind) p.loai = r.kind;
+      if (r.platform) p.nenTang = r.platform;
+      if (r.staff && r.by === "id") p.nhanSu = r.staff;
+      p.campaigns = p.loai === "hoadon" ? [] : B.extractCampaigns(p.text || "").map((c) => Object.assign(c, { use: dateInWeek(c.date, w) }));
+      p.note = "Đọc: " + ([r.kind && KINDS[r.kind], r.account && "TK " + r.account,
+        p.campaigns.length && p.campaigns.length + " chiến dịch"].filter(Boolean).join(" · ") || "không nhận ra");
+    };
+    pending.filter((p) => p.text != null && !p.note).forEach(apply);
+    renderEvidence();
+    if (!$("evOcr").checked) return;
+    try {
+      const todo = pending.filter((p) => p.text == null);
+      if (todo.length) toast("Đang tải bộ đọc chữ (lần đầu ~15 MB)…", "busy");
+      const wk = todo.length ? await B.ocrWorker() : null;
+      for (const p of todo) {
+        toast(`Đang đọc ảnh ${p.file.name}…`, "busy");
+        p.text = (await wk.recognize(p.file)).data.text || "";
+        apply(p);
+        renderEvidence();
+      }
+      toast("Đã đọc xong. Kiểm tra loại ảnh, nhân sự, số liệu rồi bấm Tải lên." + skipNote, "ok");
+    } catch (e) { toast("Không đọc được chữ trong ảnh: " + e.message, "err"); }
+  }
+  /** Tài khoản QC duy nhất của nhân sự trên kênh (để gán cho số liệu đọc từ ảnh). */
+  function soleAccount(staff, platform) {
+    const accs = S.TaiKhoan.filter((t) => t.nhanSu === staff && (!t.nenTang || t.nenTang === platform));
+    return accs.length === 1 ? accs[0].maTaiKhoan : "";
+  }
+  async function uploadPending() {
+    const w = $("evWeek").value, pj = $("evProject").value;
+    let n = 0, nRows = 0;
+    await run("Đang tải ảnh lên Drive", async () => {
+      for (const p of pending.slice()) {
+        toast(`Đang tải lên ${++n}/${pending.length}: ${p.file.name}`, "busy");
+        const rec = await gas("crmUploadEvidence", { tuan: w, duAn: pj, nhanSu: p.nhanSu, nenTang: p.nenTang, loai: p.loai, tenFile: p.file.name, mime: p.file.type, hash: p.hash || "" },
+          await B.blobToB64(p.file));
+        if (!S.ChungTu.some((x) => x.id === rec.id)) S.ChungTu.push(rec);
+        const chosen = (p.campaigns || []).filter((c) => c.use && c.spent);
+        if (chosen.length) {
+          const rows = chosen.map((c) => {
+            const prev = S.SoLieu.find((x) => x.nguon === "anh" && x.tuan === w && x.duAn === pj && x.nhanSu === p.nhanSu && x.chienDich === c.name);
+            return {
+              id: prev ? prev.id : undefined, tuan: w, duAn: pj, nhanSu: p.nhanSu, nenTang: p.nenTang,
+              taiKhoan: soleAccount(p.nhanSu, p.nenTang), chienDich: c.name, chiPhi: c.spent, chiPhiPhi: c.spent,
+              lead: c.resultType === "lead" ? c.results || 0 : 0, luotXem: c.resultType === "thruplay" ? c.results || "" : "",
+              mql: "", sql: "", deal: "", hienThi: "", tiepCan: "", luotNhap: "",
+              ghiChu: "Đọc từ ảnh " + p.file.name, nguon: "anh",
+            };
+          });
+          const saved = await gas("crmSaveMany", "SoLieu", rows);
+          saved.forEach((r) => { S.SoLieu = S.SoLieu.filter((x) => x.id !== r.id).concat(r); });
+          nRows += saved.length;
+        }
+      }
+    });
+    pending.forEach((p) => URL.revokeObjectURL(p.url));
+    pending = [];
+    toast(`Đã lưu ${n} chứng từ vào Drive (Nhân sự/${pj}/${weekLabel(w)})` + (nRows ? ` và ${nRows} dòng số liệu đọc từ ảnh (xem tab Nhập số liệu).` : "."), "ok");
+    renderEvidence();
+  }
+
+  // ------------------------------------------------------------ BÁO CÁO
+  const tplCache = {};
+  function weeksForReport(rows) {
+    const weeks = {};
+    Array.from(new Set(rows.map((r) => r.tuan))).sort().forEach((w) => {
+      weeks[weekLabel(w)] = Object.fromEntries(PLATFORMS.map((p) => [p, []]));
+    });
+    rows.forEach((r) => {
+      const p = PLATFORMS.includes(r.nenTang) ? r.nenTang : "Facebook";
+      const funnel = [r.mql, r.sql, r.deal].some((v) => v !== "" && v != null);
+      weeks[weekLabel(r.tuan)][p].push({
+        account: r.taiKhoan || r.nhanSu || "(không rõ)", staff: r.nhanSu,
+        cost: num(r.chiPhi), cost_fee: num(r.chiPhiPhi) || num(r.chiPhi), lead: num(r.lead),
+        impressions: num(r.hienThi), reach: num(r.tiepCan), clicks: num(r.luotNhap), views: num(r.luotXem),
+        mql: num(r.mql), sql: num(r.sql), deal: num(r.deal), hasFunnel: funnel,
+      });
+    });
+    return weeks;
+  }
+  // ------------------------------------------------------------ ảnh có sẵn trong thư mục chứng từ trên Drive
+  // Cấu trúc: Thư mục chứng từ / <Nhân sự> / <Dự án> / <tuần "3/10-9/10"> / ảnh
+  const STOPW = ["anh", "chi", "em", "thi", "van", "sun", "casa", "group", "tai khoan"];
+  const simpleWords = (x) => " " + B.norm(x).replace(/[^a-z0-9]+/g, " ").trim() + " ";
+  /** Nhân sự theo tên file trước ("ngà sun.jpg"), rồi các thư mục từ trong ra ngoài ("Phan Hạnh/Sun/…"). */
+  function staffFromPath(path, name) {
+    const list = staffNames();
+    const match = (seg) => {
+      const t = simpleWords(seg);
+      const full = list.filter((st) => t.includes(simpleWords(st)));
+      if (full.length === 1) return full[0];
+      const hits = list.filter((st) => B.norm(st).split(" ").some((x) => x.length >= 3 && !STOPW.includes(x) && t.includes(" " + x + " ")));
+      return hits.length === 1 ? hits[0] : "";
+    };
+    for (const seg of [name.replace(/\.[a-z0-9]+$/i, "")].concat(path.slice().reverse())) {
+      const st = match(seg);
+      if (st) return st;
+    }
+    return "";
+  }
+  /** Thư mục tuần ("3/10-9/10") có giao với tuần báo cáo không; không có thư mục tuần = có. */
+  function folderInWeek(path, iso) {
+    const a = parseIso(iso), b = new Date(a);
+    b.setDate(a.getDate() + 6);
+    const dn = (d, m) => m * 31 + d;
+    const A = dn(a.getDate(), a.getMonth() + 1), Z = dn(b.getDate(), b.getMonth() + 1);
+    return path.map((x) => /^\s*(\d{1,2})\/(\d{1,2})\s*-\s*(\d{1,2})\/(\d{1,2})\s*$/.exec(x)).filter(Boolean)
+      .every((m) => dn(+m[1], +m[2]) <= Z && dn(+m[3], +m[4]) >= A);
+  }
+  /** Ghi các ảnh/PDF mới trong thư mục chứng từ của dự án (tuần w) vào bảng ChungTu – đọc chữ để xếp loại, gán người. */
+  async function importDriveEvidence(pjName, w) {
+    const pj = project(pjName);
+    const root = B.parseDriveId(pj.thuMucChungTu);
+    if (!root) return [];
+    const key = B.norm(pj.khoa || pj.ten).replace(/[^a-z0-9]/g, "");
+    toast(`${pjName}: đang quét thư mục chứng từ trên Drive…`, "busy");
+    const files = (await gas("listTree", root)).filter((f) => (/^image\//.test(f.mimeType) || f.mimeType === "application/pdf") &&
+      f.path.slice(1).some((seg) => B.norm(seg).replace(/[^a-z0-9]/g, "") === key) &&
+      folderInWeek(f.path, w) && !S.ChungTu.some((c) => c.fileId === f.id));
+    if (!files.length) return [];
+    const ctx = { staffList: staffNames(), accounts: S.TaiKhoan.map((t) => ({ account: t.maTaiKhoan, staff: t.nhanSu })) };
+    let wk = null;
+    try { wk = await B.ocrWorker(); } catch (_) { /* không đọc được chữ: xếp theo tên file/thư mục */ }
+    const rows = [];
+    const seen = new Set(S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w).map((r) => r.hash).filter(Boolean));
+    let i = 0;
+    for (const f of files) {
+      toast(`${pjName}: đọc ảnh trên Drive ${++i}/${files.length} – ${f.name}`, "busy");
+      let text = "", hash = "";
+      try {
+        const file = await evidenceFile({ fileId: f.id, tenFile: f.name });
+        hash = await hashOf(file);
+        if (seen.has(hash)) continue; // cùng nội dung với ảnh đã có: không lấy
+        seen.add(hash);
+        text = B.isPdf(file) ? await B.pdfText(file) : wk ? (await wk.recognize(file)).data.text || "" : "";
+      } catch (e) { console.error(e); }
+      const c = B.classifyText(text, ctx), g = B.guessClass(f.path, f.name);
+      rows.push({
+        tuan: w, duAn: pjName, nenTang: c.platform || g.platform, loai: c.kind || g.kind,
+        nhanSu: (c.staff && c.by === "id" ? c.staff : "") || staffFromPath(f.path, f.name) || c.staff || "",
+        fileId: f.id, tenFile: f.name, url: "https://drive.google.com/file/d/" + f.id + "/view", hash,
+      });
+    }
+    if (!rows.length) return [];
+    const saved = await gas("crmSaveMany", "ChungTu", rows);
+    S.ChungTu = S.ChungTu.filter((r) => !saved.some((x) => x.id === r.id)).concat(saved);
+    return saved;
+  }
+
+  // ------------------------------------------------------------ ảnh trùng
+  const fileCache = new Map(); // fileId -> File đã tải trong phiên
+  async function hashOf(blob) {
+    const buf = await crypto.subtle.digest("SHA-256", await blob.arrayBuffer());
+    return Array.from(new Uint8Array(buf).slice(0, 12), (b) => b.toString(16).padStart(2, "0")).join("");
+  }
+  async function evidenceFile(r) {
+    if (!fileCache.has(r.fileId)) {
+      const f = await gas("downloadFile", r.fileId);
+      fileCache.set(r.fileId, new File([B.b64ToBlob(f.b64, f.type)], r.tenFile, { type: f.type }));
+    }
+    return fileCache.get(r.fileId);
+  }
+  /** Xoá ảnh trùng của một dự án + tuần (cùng file Drive hoặc cùng nội dung), giữ ảnh đã gán nhân sự / lưu sớm nhất. */
+  async function dedupeEvidence(pjName, w) {
+    const rows = S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w && r.fileId);
+    const fill = [];
+    let i = 0;
+    for (const r of rows) {
+      i++;
+      if (r.hash) continue;
+      toast(`${pjName}: kiểm tra ảnh trùng ${i}/${rows.length}…`, "busy");
+      try { r.hash = await hashOf(await evidenceFile(r)); fill.push({ id: r.id, hash: r.hash }); } catch (e) { console.error(e); }
+    }
+    if (fill.length) await gas("crmSaveMany", "ChungTu", fill);
+    const order = rows.slice().sort((a, b) => (!a.nhanSu - !b.nhanSu) || String(a.ngayTao).localeCompare(String(b.ngayTao)));
+    const seen = new Set(), dup = [];
+    order.forEach((r) => {
+      const keys = ["f:" + r.fileId].concat(r.hash ? ["h:" + r.hash] : []);
+      if (keys.some((k) => seen.has(k))) dup.push(r.id); else keys.forEach((k) => seen.add(k));
+    });
+    if (dup.length) {
+      await gas("crmDelete", "ChungTu", dup);
+      S.ChungTu = S.ChungTu.filter((x) => !dup.includes(x.id));
+    }
+    return dup.length;
+  }
+
+  async function buildOne(pjName, w, fmt) {
+    const pj = project(pjName);
+    const tplId = B.parseDriveId(pj.mauPptx);
+    if (!tplId) throw new Error(`Dự án ${pjName} chưa có link PPTX mẫu (tab Danh mục).`);
+    const rows = effective(S.SoLieu.filter((r) => r.duAn === pjName && r.tuan <= w));
+    if (!rows.some((r) => r.tuan === w)) throw new Error(`${pjName}: chưa có số liệu tuần ${weekLabel(w)}.`);
+    if (!tplCache[tplId]) { const t = await gas("downloadFile", tplId); tplCache[tplId] = B.b64ToBlob(t.b64, t.type); }
+    const accStaff = new Map(rows.map((r) => [r.taiKhoan || r.nhanSu || "(không rõ)", r.nhanSu]));
+    try { await importDriveEvidence(pjName, w); } catch (e) { console.error(e); }
+    try { await dedupeEvidence(pjName, w); } catch (e) { console.error(e); }
+    const ev = S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w && r.nhanSu);
+    const images = [];
+    let i = 0;
+    for (const r of ev) {
+      toast(`${pjName}: tải ảnh ${++i}/${ev.length}…`, "busy");
+      const file = await evidenceFile(r);
+      const files = B.isPdf(file) ? await B.pdfToImages(file, 2) : [file];
+      files.forEach((x) => images.push({ file: x, platform: r.nenTang, kind: r.loai, staff: r.nhanSu }));
+    }
+    const weekRows = rows.filter((r) => r.tuan === w);
+    const order = staffNames();
+    const staffList = Array.from(new Set(weekRows.map((r) => r.nhanSu).concat(ev.map((r) => r.nhanSu)).filter(Boolean)))
+      .sort((a, b) => (order.indexOf(a) + 1 || 99) - (order.indexOf(b) + 1 || 99));
+    toast(`${pjName}: đang dựng báo cáo…`, "busy");
+    const res = await B.buildReport({
+      template: await tplCache[tplId].arrayBuffer(), weeks: weeksForReport(rows), week: weekLabel(w),
+      year: String(parseIso(w).getFullYear()), campaign: pj.chienDich || "", period: "",
+      images, staffList, staffOf: (acc) => accStaff.get(acc) || "",
+      scope: "week", perSlide: 1, dropUnused: true, dropEmptyImageSlides: true, placeholderMissing: $("rpKeepMissing").checked,
+      logo: pj.logo || "", logos: (window.BAO_CAO_MKT_CONFIG || {}).logos,
+    });
+    const name = `Bao_cao_${pjName.replace(/\s+/g, "_")}_${weekLabel(w).replace(/[\/ ]/g, "")}.pptx`;
+    const folder = B.parseDriveId(pj.thuMucBaoCao) || "";
+    const b64 = await B.blobToB64(res.blob);
+    const out = { tuan: w, duAn: pjName, trangThai: "Nháp", pdfUrl: "", pptxUrl: "",
+      tomTat: `${res.slides} slide, ${res.staffCount} nhân sự, ${res.nImg} ảnh` + (res.missing ? `, thiếu ${res.missing} ảnh nghiệm thu` : "") };
+    if (fmt !== "pdf") { toast(`${pjName}: lưu PPTX…`, "busy"); out.pptxUrl = await gas("saveReport", b64, name, folder, true); }
+    if (fmt !== "pptx") { toast(`${pjName}: chuyển PDF…`, "busy"); out.pdfUrl = (await gas("convertToPdf", b64, name, folder, true)).url; }
+    const prev = S.BaoCao.find((r) => r.duAn === pjName && r.tuan === w);
+    if (prev) out.id = prev.id;
+    const saved = await gas("crmSave", "BaoCao", out);
+    S.BaoCao = S.BaoCao.filter((r) => r.id !== saved.id).concat(saved);
+    return saved;
+  }
+  async function generateReports() {
+    const w = $("rpWeek").value, fmt = $("rpFormat").value;
+    const list = $("rpProject").value ? [$("rpProject").value] : brandNames();
+    const msgs = [];
+    $("rpGo").disabled = true;
+    try {
+      for (const pj of list) {
+        try { const r = await buildOne(pj, w, fmt); msgs.push(`${pj}: ${r.tomTat}`); }
+        catch (e) { console.error(e); msgs.push(`${pj}: lỗi – ${e.message}`); }
+      }
+      toast("Xong. " + msgs.join(" | ") + " – bấm “Chép tin nhắn gửi nhóm” để gửi link.", msgs.some((m) => m.includes("lỗi")) ? "err" : "ok");
+    } finally { $("rpGo").disabled = false; renderReports(); }
+  }
+  /** Tin nhắn gửi nhóm (Zalo…): link PDF/PPTX các báo cáo của tuần. */
+  function shareText(rows) {
+    if (!rows.length) return "";
+    const w = rows[0].tuan;
+    return `[Báo cáo] Marketing tuần ${weekLabel(w, true)}` + (brand ? ` – ${brand}` : "") + "\n" +
+      rows.map((r) => `• ${r.duAn}: ${r.pdfUrl || r.pptxUrl}`).join("\n");
+  }
+  async function copyText(text, what) {
+    try { await navigator.clipboard.writeText(text); toast("Đã chép " + what + " – dán vào Zalo/Messenger để gửi.", "ok"); }
+    catch (_) { prompt("Chép " + what + ":", text); }
+  }
+
+  function renderReports() {
+    const rows = S.BaoCao.filter((r) => inBrand(r.duAn)).sort((a, b) => String(b.tuan + b.ngayTao).localeCompare(String(a.tuan + a.ngayTao)));
+    const wk = S.BaoCao.filter((r) => inBrand(r.duAn) && r.tuan === $("rpWeek").value && (r.pdfUrl || r.pptxUrl));
+    $("rpShare").hidden = !wk.length;
+    $("rpShare").textContent = wk.length ? `Chép tin nhắn gửi nhóm (${wk.length} báo cáo tuần ${weekLabel($("rpWeek").value)})` : "";
+    $("rpTable").innerHTML = rows.length ? `<table class="data"><thead><tr><th>Tuần</th><th>Dự án</th><th>Trạng thái</th><th>File</th><th>Nội dung</th><th>Người tạo</th><th>Ngày tạo</th></tr></thead><tbody>
+      ${rows.map((r) => `<tr><td>${esc(weekLabel(r.tuan, true))}</td><td>${esc(r.duAn)}</td>
+        <td><select data-rp="${esc(r.id)}" class="st-${STATUSES.indexOf(r.trangThai)}">${STATUSES.map((s) => opt(s, s, r.trangThai)).join("")}</select></td>
+        <td>${r.pdfUrl ? `<a href="${esc(r.pdfUrl)}" target="_blank" rel="noopener">PDF</a>` : ""} ${r.pptxUrl ? `<a href="${esc(r.pptxUrl)}" target="_blank" rel="noopener">PPTX</a>` : ""}
+          ${r.pdfUrl || r.pptxUrl ? `<button type="button" class="link" data-copy="${esc(r.id)}">Chép link</button>` : ""}</td>
+        <td>${esc(r.tomTat)}</td><td class="muted">${esc(r.nguoiTao)}</td><td class="muted">${esc(r.ngayTao)}</td></tr>`).join("")}</tbody></table>`
+      : `<p class="muted">Chưa có báo cáo nào.</p>`;
+  }
+
+  // ------------------------------------------------------------ DANH MỤC
+  const CATALOG = { DuAn: "Dự án", NhanSu: "Nhân sự", TaiKhoan: "Tài khoản quảng cáo" };
+  function renderCatalog() {
+    $("ctBody").innerHTML = Object.entries(CATALOG).map(([t, title]) => {
+      const cols = (S.schema[t] || []).filter((c) => c[0] !== "id" && c[0] !== "nguoiTao" && c[0] !== "ngayTao");
+      const cell = (t2, c, v, id) => {
+        if (c === "nhanSu") return `<select data-ct="${t2}" data-id="${id}" data-f="${c}">${opt("", "(chưa gán)", v)}${staffNames().map((s) => opt(s, s, v)).join("")}</select>`;
+        if (c === "nenTang") return `<select data-ct="${t2}" data-id="${id}" data-f="${c}">${PLATFORMS.map((p) => opt(p, PLATFORM_LABEL[p], v)).join("")}</select>`;
+        if (c === "logo") return `<select data-ct="${t2}" data-id="${id}" data-f="${c}">${opt("", "(theo mẫu)", v)}${Object.keys((window.BAO_CAO_MKT_CONFIG || {}).logos || {}).map((x) => opt(x, x, v)).join("")}</select>`;
+        if (c === "trangThai") return `<select data-ct="${t2}" data-id="${id}" data-f="${c}">${["Đang làm", "Nghỉ"].map((s) => opt(s, s, v || "Đang làm")).join("")}</select>`;
+        return `<input data-ct="${t2}" data-id="${id}" data-f="${c}" value="${esc(v)}">`;
+      };
+      return `<section class="card"><h3>${title}</h3><div class="wrap"><table class="data edit"><thead><tr>${cols.map((c) => `<th>${esc(c[1])}</th>`).join("")}<th></th></tr></thead><tbody>
+        ${S[t].filter((r) => t !== "DuAn" || !brand || !r.logo || r.logo === brand).map((r) => `<tr>${cols.map((c) => `<td>${cell(t, c[0], r[c[0]], r.id)}</td>`).join("")}
+          <td class="act"><button type="button" class="link danger" data-ctdel="${t}" data-id="${esc(r.id)}">Xoá</button></td></tr>`).join("")}
+        </tbody></table></div><button type="button" class="ghost small" data-ctadd="${t}">+ Thêm ${title.toLowerCase()}</button></section>`;
+    }).join("");
+  }
+  async function catalogChange(el) {
+    const t = el.dataset.ct, id = el.dataset.id, f = el.dataset.f;
+    const r = S[t].find((x) => x.id === id);
+    if (!r) return;
+    r[f] = el.value;
+    await run("Đang lưu", () => gas("crmSave", t, { id, [f]: el.value }));
+    toast("Đã lưu.", "ok");
+    refreshFilters();
+  }
+
+  // ------------------------------------------------------------ khởi động
+  function bind() {
+    document.querySelectorAll("[data-brand]").forEach((b) => b.addEventListener("click", () => setBrand(b.dataset.brand)));
+    $("brandLink").addEventListener("click", async () => {
+      const url = $("brandLink").dataset.url;
+      const text = "Cập nhật báo cáo " + brand + ": " + url + "\nHướng dẫn: " + guideUrl();
+      try { await navigator.clipboard.writeText(text); toast("Đã chép link cập nhật báo cáo + link hướng dẫn của " + brand, "ok"); }
+      catch (_) { prompt("Link riêng của " + brand + " (kèm hướng dẫn):", text); }
+    });
+    document.querySelectorAll("[data-tab]").forEach((b) => b.addEventListener("click", () => showTab(b.dataset.tab)));
+    ["dbProject", "dbFrom", "dbTo"].forEach((id) => $(id).addEventListener("change", renderDashboard));
+    ["enWeek", "enProject", "enStaff"].forEach((id) => {
+      const el = $(id);
+      el.addEventListener("focus", () => (el.dataset.prev = el.value));
+      el.addEventListener("change", () => {
+        if (!confirmDiscard()) { el.value = el.dataset.prev; return; }
+        el.dataset.prev = el.value;
+        renderEntries();
+      });
+    });
+    ["evWeek", "evProject"].forEach((id) => $(id).addEventListener("change", renderEvidence));
+    $("evStaff").addEventListener("change", () => { pending.forEach((p) => (p.nhanSu = $("evStaff").value)); renderEvidence(); });
+    $("enSave").addEventListener("click", () => saveGrid().catch(() => {}));
+    $("enDiscard").addEventListener("click", () => { if (confirmDiscard()) renderEntries(); });
+    $("enTable").addEventListener("change", (e) => { if (e.target.dataset.g) gridChange(e.target); });
+    $("enTable").addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && e.target.dataset.g) { e.preventDefault(); e.target.blur(); }
+    });
+    window.addEventListener("beforeunload", (e) => { if (drafts.size) { e.preventDefault(); e.returnValue = ""; } });
+    $("enImport").addEventListener("click", () => importSheet().catch(() => {}));
+    $("enTable").addEventListener("click", (e) => {
+      const b = e.target.closest("button");
+      if (!b) return;
+      if (b.dataset.gadd) addRow(b.dataset.gadd);
+      if (b.dataset.gdel) deleteRow(b.dataset.gdel).catch(() => {});
+    });
+    $("evFiles").addEventListener("change", () => { addPending($("evFiles").files); $("evFiles").value = ""; });
+    const drop = $("evDrop");
+    drop.addEventListener("dragover", (e) => { e.preventDefault(); drop.classList.add("over"); });
+    drop.addEventListener("dragleave", () => drop.classList.remove("over"));
+    drop.addEventListener("drop", (e) => { e.preventDefault(); drop.classList.remove("over"); addPending(e.dataTransfer.files); });
+    $("evPending").addEventListener("change", (e) => {
+      const t = e.target, i = t.dataset.p;
+      if (i == null) return;
+      if (t.dataset.c != null) {
+        const c = pending[i].campaigns[t.dataset.c];
+        if (t.dataset.f === "use") c.use = t.checked;
+        else c.spent = Math.round(num(t.value));
+        return;
+      }
+      pending[i][t.dataset.f] = t.value;
+      if (t.tagName === "SELECT") renderEvidence();
+    });
+    $("evPending").addEventListener("click", (e) => {
+      const i = e.target.dataset.unpend;
+      if (i == null) return;
+      URL.revokeObjectURL(pending[i].url);
+      pending.splice(i, 1);
+      renderEvidence();
+    });
+    $("evUpload").addEventListener("click", () => uploadPending().catch(() => {}));
+    $("evScan").addEventListener("click", async () => {
+      $("evScan").disabled = true;
+      try {
+        const pj = $("evProject").value, w = $("evWeek").value;
+        const got = await run("Đang quét", () => importDriveEvidence(pj, w));
+        const nDup = await run("Đang kiểm tra ảnh trùng", () => dedupeEvidence(pj, w));
+        const noStaff = got.filter((r) => !r.nhanSu && S.ChungTu.includes(r)).length;
+        toast((got.length ? `Đã lấy ${got.length} ảnh từ Drive` + (noStaff ? ` – ${noStaff} ảnh chưa gán nhân sự (chọn ở ô Nhân sự, ảnh chưa gán không vào báo cáo).` : ".")
+          : "Không có ảnh mới trong thư mục chứng từ cho tuần/dự án này.") + (nDup ? ` Đã xoá ${nDup} ảnh trùng.` : ""), got.length || nDup ? "ok" : "");
+        renderEvidence();
+      } catch (_) { /* đã báo */ } finally { $("evScan").disabled = false; }
+    });
+    $("evDedupe").addEventListener("click", async () => {
+      $("evDedupe").disabled = true;
+      try {
+        const n = await run("Đang kiểm tra ảnh trùng", () => dedupeEvidence($("evProject").value, $("evWeek").value));
+        toast(n ? `Đã xoá ${n} ảnh trùng (file thừa chuyển vào thùng rác Drive).` : "Không có ảnh trùng.", "ok");
+        renderEvidence();
+      } catch (_) { /* đã báo */ } finally { $("evDedupe").disabled = false; }
+    });
+    $("evList").addEventListener("change", async (e) => {
+      const id = e.target.dataset.ev;
+      if (!id) return;
+      const r = S.ChungTu.find((x) => x.id === id);
+      r[e.target.dataset.f] = e.target.value;
+      await run("Đang lưu", () => gas("crmSave", "ChungTu", { id, [e.target.dataset.f]: e.target.value }));
+      toast("Đã lưu.", "ok");
+      renderChecklist();
+    });
+    $("evList").addEventListener("click", async (e) => {
+      const id = e.target.dataset.evdel;
+      if (!id || !confirm("Xoá ảnh này (chuyển vào thùng rác Drive)?")) return;
+      await run("Đang xoá", () => gas("crmDelete", "ChungTu", id));
+      S.ChungTu = S.ChungTu.filter((x) => x.id !== id);
+      toast("Đã xoá.", "ok");
+      renderEvidence();
+    });
+    $("rpGo").addEventListener("click", () => generateReports());
+    $("rpWeek").addEventListener("change", renderReports);
+    $("rpShare").addEventListener("click", () => {
+      const rows = S.BaoCao.filter((r) => inBrand(r.duAn) && r.tuan === $("rpWeek").value && (r.pdfUrl || r.pptxUrl));
+      copyText(shareText(rows), "tin nhắn kèm link báo cáo");
+    });
+    $("rpTable").addEventListener("click", (e) => {
+      const id = e.target.dataset.copy;
+      if (!id) return;
+      const r = S.BaoCao.find((x) => x.id === id);
+      copyText(`[Báo cáo] ${r.duAn} tuần ${weekLabel(r.tuan, true)}: ${r.pdfUrl || r.pptxUrl}`, "link báo cáo");
+    });
+    $("rpTable").addEventListener("change", async (e) => {
+      const id = e.target.dataset.rp;
+      if (!id) return;
+      S.BaoCao.find((x) => x.id === id).trangThai = e.target.value;
+      await run("Đang lưu", () => gas("crmSave", "BaoCao", { id, trangThai: e.target.value }));
+      toast("Đã cập nhật trạng thái.", "ok");
+      renderReports();
+    });
+    $("ctBody").addEventListener("change", (e) => { if (e.target.dataset.ct) catalogChange(e.target).catch(() => {}); });
+    $("ctBody").addEventListener("click", async (e) => {
+      const b = e.target.closest("button");
+      if (!b) return;
+      if (b.dataset.ctadd) {
+        const t = b.dataset.ctadd;
+        S[t].push(await run("Đang thêm", () => gas("crmSave", t, t === "NhanSu" ? { ten: "Nhân sự mới", trangThai: "Đang làm" } : t === "DuAn" ? { ten: "Dự án mới", logo: brand } : { nenTang: "Facebook" })));
+        toast("Đã thêm dòng mới – sửa trực tiếp trong bảng.", "ok");
+        renderCatalog();
+        refreshFilters();
+      }
+      if (b.dataset.ctdel) {
+        const t = b.dataset.ctdel, id = b.dataset.id;
+        if (!confirm("Xoá dòng này khỏi danh mục?")) return;
+        await run("Đang xoá", () => gas("crmDelete", t, id));
+        S[t] = S[t].filter((x) => x.id !== id);
+        renderCatalog();
+        refreshFilters();
+      }
+    });
+  }
+
+  async function start() {
+    window.__crmStarted = true;
+    $("loading").textContent = "Đang kết nối máy chủ Google… (giao diện v8)";
+    if (!B.IN_GAS) {
+      $("loading").textContent = "Trang CRM cần chạy trong Google Apps Script (xem apps-script/README.md).";
+      return;
+    }
+    const slow = setTimeout(() => {
+      $("loading").innerHTML = "Vẫn đang tải… Nếu quá 1 phút:<br>1. Mở link trong <b>cửa sổ ẩn danh</b> và chỉ đăng nhập <b>một</b> tài khoản Google (Apps Script lỗi khi trình duyệt đăng nhập nhiều tài khoản).<br>" +
+        "2. Trong Apps Script, mở <b>Lần thực thi</b> (biểu tượng ☰▶ bên trái) xem hàm <code>crmBootstrap</code> có báo lỗi không.";
+    }, 25000);
+    try {
+      const boot = await gas("crmBootstrap");
+      clearTimeout(slow);
+      Object.assign(S, boot);
+    } catch (e) {
+      clearTimeout(slow);
+      $("loading").textContent = "Không tải được dữ liệu: " + e.message;
+      return;
+    }
+    $("loading").hidden = true;
+    $("app").hidden = false;
+    $("who").textContent = S.user || "";
+    $("sheetLink").href = S.sheetUrl;
+    $("reportLink").href = S.appUrl ? S.appUrl + "?page=baocao" : "#";
+    $("rpProjectLink").href = $("reportLink").href;
+    $("brandSwitch").innerHTML = BRANDS.map((b) => `<button type="button" data-brand="${esc(b)}">${esc(b)}</button>`).join("") +
+      `<button type="button" data-brand="">Tất cả</button>`;
+    bind();
+    let b0 = "";
+    try { b0 = localStorage.getItem("crm.brand") || ""; } catch (_) { /* bỏ qua */ }
+    const fromUrl = await new Promise((res) => {
+      try { google.script.url.getLocation((loc) => res((loc.parameter || {}).donvi || "")); } catch (_) { res(""); }
+      setTimeout(() => res(""), 1500);
+    });
+    if (fromUrl) b0 = BRANDS.find((b) => slug(b) === slug(fromUrl)) || b0;
+    setBrand(b0, true);
+    refreshFilters();
+    let tab = "tong";
+    try { tab = localStorage.getItem("crm.tab") || tab; } catch (_) { /* bỏ qua */ }
+    showTab(tab);
+  }
+
+  window.CrmBaoCao = { weekLabel, isoFromLabel, weeksForReport, S };
+  // Apps Script có thể nạp trang sau khi DOMContentLoaded đã qua -> chạy ngay nếu DOM đã sẵn sàng
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
+  else start();
+})();
+</script>
 </body>
 </html>

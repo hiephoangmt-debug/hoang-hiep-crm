@@ -158,11 +158,12 @@ var CRM_TABLES = {
     ['lead', 'Lead'], ['hienThi', 'Hiển thị'], ['tiepCan', 'Tiếp cận'], ['luotNhap', 'Lượt nhấp'], ['luotXem', 'Lượt xem'],
     ['mql', 'MQL'], ['sql', 'SQL'], ['deal', 'DEAL'], ['ghiChu', 'Ghi chú'], ['nguon', 'Nguồn'], ['nguoiTao', 'Người tạo'], ['ngayTao', 'Ngày tạo']],
   ChungTu: [['id', 'ID'], ['tuan', 'Tuần (thứ 2)'], ['duAn', 'Dự án'], ['nhanSu', 'Nhân sự'], ['nenTang', 'Nền tảng'], ['loai', 'Loại'],
-    ['fileId', 'File ID'], ['tenFile', 'Tên file'], ['url', 'Link'], ['nguoiTao', 'Người tạo'], ['ngayTao', 'Ngày tạo']],
+    ['fileId', 'File ID'], ['tenFile', 'Tên file'], ['url', 'Link'], ['nguoiTao', 'Người tạo'], ['ngayTao', 'Ngày tạo'],
+    ['hash', 'Mã nội dung (chống trùng)']],
   BaoCao: [['id', 'ID'], ['tuan', 'Tuần (thứ 2)'], ['duAn', 'Dự án'], ['trangThai', 'Trạng thái'], ['pdfUrl', 'PDF'], ['pptxUrl', 'PPTX'],
     ['tomTat', 'Tóm tắt'], ['nguoiTao', 'Người tạo'], ['ngayTao', 'Ngày tạo']],
 };
-var CRM_TEXT_COLS = ['id', 'tuan', 'taiKhoan', 'maTaiKhoan', 'fileId', 'ngayTao'];
+var CRM_TEXT_COLS = ['id', 'tuan', 'taiKhoan', 'maTaiKhoan', 'fileId', 'ngayTao', 'hash'];
 var EVIDENCE_ROOT = '146YOZUIiLizOl0waxcqAPw4uzY_jvmzt';
 var CRM_SEED = {
   DuAn: [
@@ -301,6 +302,9 @@ function crmSaveMany(name, list) {
     var idx = {};
     rows.forEach(function (r, i) { idx[r.id] = i; });
     var saved = list.map(function (o) {
+      // chứng từ: một file Drive / một nội dung ảnh chỉ lưu một lần cho mỗi dự án + tuần
+      var same = !o.id && name === 'ChungTu' && crmSameEvidence_(rows, o);
+      if (same) return same;
       crmStamp_(o);
       if (idx[o.id] !== undefined) rows[idx[o.id]] = Object.assign(rows[idx[o.id]], o);
       else { idx[o.id] = rows.length; rows.push(o); }
@@ -309,6 +313,13 @@ function crmSaveMany(name, list) {
     crmWriteAll_(name, rows);
     return saved;
   });
+}
+
+function crmSameEvidence_(rows, o) {
+  return rows.filter(function (r) {
+    return (o.fileId && r.fileId === o.fileId) ||
+      (o.hash && r.hash === o.hash && r.duAn === o.duAn && String(r.tuan) === String(o.tuan));
+  })[0];
 }
 
 function crmSave(name, o) {
@@ -321,7 +332,9 @@ function crmDelete(name, ids) {
     var rows = crmRows_(name);
     var keep = rows.filter(function (r) { return ids.indexOf(r.id) < 0; });
     if (name === 'ChungTu') {
-      rows.filter(function (r) { return ids.indexOf(r.id) >= 0 && r.fileId; }).forEach(function (r) {
+      var still = keep.map(function (r) { return r.fileId; });
+      // chỉ bỏ file vào thùng rác khi không còn dòng nào khác dùng file đó
+      rows.filter(function (r) { return ids.indexOf(r.id) >= 0 && r.fileId && still.indexOf(r.fileId) < 0; }).forEach(function (r) {
         try { DriveApp.getFileById(r.fileId).setTrashed(true); } catch (e) { /* đã xoá */ }
       });
     }
@@ -364,12 +377,16 @@ function crmWeekFolder_(iso) {
 function crmUploadEvidence(meta, b64) {
   var project = crmRows_('DuAn').filter(function (p) { return p.ten === meta.duAn; })[0];
   if (!project) throw new Error('Không có dự án ' + meta.duAn);
+  if (meta.hash) {
+    var same = crmSameEvidence_(crmRows_('ChungTu'), meta);
+    if (same) return same; // ảnh này đã lưu rồi: không tạo file trùng trên Drive
+  }
   var rootId = crmFolderId_(project.thuMucChungTu) || EVIDENCE_ROOT;
   var folder = crmSub_(crmSub_(crmSub_(DriveApp.getFolderById(rootId), meta.nhanSu || 'Chưa gán'),
     project.khoa || project.ten), crmWeekFolder_(meta.tuan));
   var file = folder.createFile(Utilities.newBlob(Utilities.base64Decode(b64), meta.mime || 'image/png', meta.tenFile));
   return crmSave('ChungTu', {
     tuan: meta.tuan, duAn: meta.duAn, nhanSu: meta.nhanSu, nenTang: meta.nenTang, loai: meta.loai,
-    fileId: file.getId(), tenFile: meta.tenFile, url: file.getUrl(),
+    fileId: file.getId(), tenFile: meta.tenFile, url: file.getUrl(), hash: meta.hash || '',
   });
 }
