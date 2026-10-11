@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CRM Hoàng Hiệp</title>
+<style>
+:root{--bg:#f5f6f8;--card:#fff;--tx:#1b1f27;--mut:#6b7280;--bd:#e5e7eb;--pri:#2563eb;--red:#dc2626;--grn:#16a34a;--amb:#d97706;--zalo:#0068ff}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1218;--card:#181c25;--tx:#e8eaf0;--mut:#8b93a5;--bd:#2a3040;--pri:#5b8cff}}
+*{box-sizing:border-box}body{margin:0;font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--tx)}
+header{display:flex;align-items:center;gap:16px;padding:10px 16px;background:var(--card);border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:5;flex-wrap:wrap}
+header h1{font-size:16px;margin:0}nav{display:flex;gap:4px;flex-wrap:wrap}
+nav button{border:0;background:none;color:var(--mut);padding:7px 12px;border-radius:8px;cursor:pointer;font:inherit}
+nav button.on{background:var(--pri);color:#fff}
+main{max-width:1200px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.kpi{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px}
+.kpi b{display:block;font-size:24px}.kpi span{color:var(--mut);font-size:12px}
+.kpi.alert{border-color:var(--red)}.kpi.alert b{color:var(--red)}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--bd);vertical-align:top}
+th{color:var(--mut);font-weight:600;font-size:12px;white-space:nowrap}tr.click{cursor:pointer}tr.click:hover{background:color-mix(in srgb,var(--pri) 8%,transparent)}
+.tw{overflow-x:auto}
+.tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:12px;background:var(--bd);white-space:nowrap}
+.tag.red{background:#fee2e2;color:#b91c1c}.tag.grn{background:#dcfce7;color:#15803d}.tag.amb{background:#fef3c7;color:#b45309}.tag.blu{background:#dbeafe;color:#1d4ed8}
+@media (prefers-color-scheme:dark){.tag.red{background:#4c1d1d;color:#fca5a5}.tag.grn{background:#14351f;color:#86efac}.tag.amb{background:#3d2e0d;color:#fcd34d}.tag.blu{background:#1b2a4d;color:#93c5fd}}
+button.b,a.b{border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:6px 10px;border-radius:8px;cursor:pointer;font:inherit;text-decoration:none;display:inline-block}
+button.p{background:var(--pri);color:#fff;border-color:var(--pri)}button.z{background:var(--zalo);color:#fff;border-color:var(--zalo)}button.g{background:var(--grn);color:#fff;border-color:var(--grn)}
+input,select,textarea{font:inherit;padding:7px 9px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx)}
+textarea{width:100%}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.mut{color:var(--mut)}.bar{display:flex;align-items:flex-end;gap:3px;height:90px}
+.bar div{flex:1;background:var(--pri);border-radius:3px 3px 0 0;min-height:2px;position:relative}
+.bar div:hover::after{content:attr(data-t);position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:#000;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap}
+dialog{border:1px solid var(--bd);border-radius:14px;padding:0;background:var(--card);color:var(--tx);width:min(720px,96vw);max-height:92vh}
+dialog::backdrop{background:#0008}.dlg{padding:16px}.dlg h2{margin:0 0 4px}
+.tl{margin:0;padding:0;list-style:none}.tl li{padding:6px 0;border-bottom:1px dashed var(--bd)}
+code,pre{background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:2px 6px;font-size:12px}pre{padding:10px;overflow:auto;white-space:pre-wrap;word-break:break-all}
+#login{max-width:320px;margin:15vh auto;text-align:center}#login input{width:100%;margin:8px 0}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<div id="login" class="card hide">
+  <h1>CRM Hoàng Hiệp</h1>
+  <input id="pw" type="password" placeholder="Mật khẩu quản trị" autofocus>
+  <button class="b p" style="width:100%" id="loginBtn">Đăng nhập</button>
+  <p id="loginErr" class="mut"></p>
+</div>
+<div id="app" class="hide">
+<header>
+  <h1>📇 CRM Hoàng Hiệp</h1>
+  <nav id="nav">
+    <button data-t="dash" class="on">Tổng quan</button>
+    <button data-t="leads">Khách hàng</button>
+    <button data-t="anon">Click chưa có SĐT</button>
+    <button data-t="sites">Website & mã nhúng</button>
+  </nav>
+  <span style="flex:1"></span><button class="b" id="logout">Thoát</button>
+</header>
+<main id="main"></main>
+</div>
+<dialog id="dlg"><div class="dlg" id="dlgBody"></div></dialog>
+
+<script>
+const $ = (s, r = document) => r.querySelector(s);
+const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const api = async (path, opt = {}) => {
+  const r = await fetch('/api' + path, { ...opt, headers: { 'Content-Type': 'application/json' }, body: opt.body ? JSON.stringify(opt.body) : undefined });
+  if (r.status === 401) { showLogin(); throw new Error('401'); }
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) { alert(j.error || 'Lỗi'); throw new Error(j.error); }
+  return j;
+};
+const STATUS = { new: ['Mới', 'blu'], contacted: ['Đã liên hệ', 'amb'], interested: ['Quan tâm', 'amb'], appointment: ['Hẹn xem', 'amb'], won: ['Chốt', 'grn'], lost: ['Mất', ''] };
+const CH = { zalo: 'Zalo', phone: 'Gọi điện', messenger: 'Messenger', sms: 'SMS', other: 'Khác' };
+const LOGT = { call: '📞 Đã gọi', zalo: '💬 Đã nhắn Zalo', sms: '✉️ Đã nhắn SMS', note: '📝 Ghi chú' };
+const fmt = (t) => t ? new Date(t).toLocaleString('vi-VN', { hour12: false, day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '';
+const ago = (t) => { const m = Math.round((Date.now() - t) / 60000); return m < 60 ? m + ' phút' : m < 1440 ? Math.round(m / 60) + ' giờ' : Math.round(m / 1440) + ' ngày'; };
+let tab = 'dash', days = 7, filt = { status: '', site: '', q: '' };
+
+function showLogin() { $('#app').classList.add('hide'); $('#login').classList.remove('hide'); }
+async function doLogin() {
+  const r = await fetch('/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: $('#pw').value }) });
+  if (r.ok) { $('#login').classList.add('hide'); $('#app').classList.remove('hide'); render(); } else $('#loginErr').textContent = (await r.json()).error;
+}
+$('#loginBtn').onclick = doLogin; $('#pw').onkeydown = (e) => e.key === 'Enter' && doLogin();
+$('#logout').onclick = async () => { await fetch('/api/logout', { method: 'POST' }); showLogin(); };
+$('#nav').onclick = (e) => { const t = e.target.dataset.t; if (!t) return; tab = t; document.querySelectorAll('#nav button').forEach((b) => b.classList.toggle('on', b.dataset.t === t)); render(); };
+
+const dayPicker = () => `<select id="days">${[1, 7, 30, 90].map((d) => `<option value="${d}" ${d === days ? 'selected' : ''}>${d === 1 ? 'Hôm nay' : d + ' ngày qua'}</option>`).join('')}</select>`;
+const statusTag = (l) => l.contacted_at == null && l.status === 'new' ? '<span class="tag red">⚠ Chưa liên hệ</span>' : `<span class="tag ${STATUS[l.status][1]}">${STATUS[l.status][0]}</span>`;
+const touch = (l) => [
+  l.clicked_zalo ? `<span class="tag blu">Bấm Zalo ×${l.clicked_zalo}</span>` : '', l.clicked_phone ? `<span class="tag blu">Bấm Gọi ×${l.clicked_phone}</span>` : '',
+  l.clicked_messenger ? `<span class="tag blu">Messenger ×${l.clicked_messenger}</span>` : '',
+  l.called ? `<span class="tag grn">Đã gọi ×${l.called}</span>` : '', l.messaged ? `<span class="tag grn">Đã nhắn ×${l.messaged}</span>` : '',
+].join(' ');
+
+async function render() {
+  const m = $('#main'); m.innerHTML = '<p class="mut">Đang tải…</p>';
+  try { await ({ dash, leads, anon, sites }[tab])(m); } catch (e) { if (e.message !== '401') m.innerHTML = '<p>Lỗi tải dữ liệu</p>'; }
+}
+
+async function dash(m) {
+  const d = await api('/stats?days=' + days), t = d.totals, c = d.contact;
+  const max = Math.max(1, ...d.daily.map((x) => x.visitors));
+  const rate = (a, b) => b ? (a / b * 100).toFixed(1) + '%' : '–';
+  m.innerHTML = `<div class="row">${dayPicker()}<span class="mut">Số liệu theo giờ Việt Nam</span></div>
+  <div class="grid">
+    <div class="kpi ${d.all_time_uncontacted ? 'alert' : ''}"><b>${d.all_time_uncontacted}</b><span>⚠ Khách chưa gọi / chưa nhắn (tất cả)</span></div>
+    <div class="kpi"><b>${t.leads}</b><span>Khách để lại SĐT</span></div>
+    <div class="kpi"><b>${t.visitors}</b><span>Người truy cập</span></div>
+    <div class="kpi"><b>${t.zalo}</b><span>Lượt bấm Zalo</span></div>
+    <div class="kpi"><b>${t.phone}</b><span>Lượt bấm Gọi điện</span></div>
+    <div class="kpi"><b>${t.messenger}</b><span>Lượt bấm Messenger</span></div>
+    <div class="kpi"><b>${d.anonymous_clickers}</b><span>Người bấm nhưng chưa có SĐT</span></div>
+    <div class="kpi"><b>${c.avg_response_min == null ? '–' : c.avg_response_min < 60 ? c.avg_response_min + ' phút' : Math.round(c.avg_response_min / 60) + ' giờ'}</b><span>Thời gian phản hồi TB</span></div>
+  </div>
+  <div class="card"><b>Người truy cập theo ngày</b><div class="bar" style="margin-top:8px">${d.daily.map((x) => `<div style="height:${x.visitors / max * 100}%" data-t="${esc(x.day)}: ${x.visitors} khách, ${x.zalo} Zalo, ${x.phone} gọi, ${x.leads} form"></div>`).join('') || '<span class="mut">Chưa có dữ liệu</span>'}</div></div>
+  <div class="card"><b>Theo website</b><div class="tw"><table><tr><th>Website</th><th>Truy cập</th><th>Bấm Zalo</th><th>Bấm Gọi</th><th>Messenger</th><th>Để lại SĐT</th><th>Tỉ lệ ra khách</th><th>Chưa liên hệ</th></tr>
+  ${d.sites.map((s) => `<tr><td><b>${esc(s.name)}</b><br><span class="mut">${esc(s.domain)}</span></td><td>${s.visitors}</td><td>${s.zalo}</td><td>${s.phone}</td><td>${s.messenger}</td><td><b>${s.leads}</b></td><td>${rate(Math.min(s.engaged, s.visitors), s.visitors)}</td><td>${s.uncontacted ? `<span class="tag red">${s.uncontacted}</span>` : '0'}</td></tr>`).join('') || '<tr><td colspan="8" class="mut">Chưa có website. Vào tab "Website & mã nhúng" để thêm.</td></tr>'}</table></div>
+  <p class="mut">Tỉ lệ ra khách = số người đã bấm Zalo/Gọi/Messenger hoặc gửi form / số người truy cập.</p></div>
+  <div class="card"><b>Nguồn quảng cáo (khách để lại SĐT)</b><div class="tw"><table><tr><th>Nguồn</th><th>Chiến dịch</th><th>Số khách</th></tr>
+  ${d.utm.map((u) => `<tr><td>${esc(u.source)}</td><td>${esc(u.campaign)}</td><td>${u.leads}</td></tr>`).join('') || '<tr><td colspan="3" class="mut">Chưa có</td></tr>'}</table></div></div>`;
+  $('#days').onchange = (e) => { days = +e.target.value; render(); };
+}
+
+async function leads(m) {
+  const sitesList = await api('/sites');
+  const qs = new URLSearchParams(Object.entries(filt).filter(([, v]) => v)).toString();
+  const rows = await api('/leads?' + qs);
+  m.innerHTML = `<div class="row">
+    <select id="fs"><option value="">Tất cả trạng thái</option><option value="uncontacted">⚠ Chưa gọi / chưa nhắn</option>${Object.entries(STATUS).map(([k, v]) => `<option value="${k}">${v[0]}</option>`).join('')}</select>
+    <select id="fw"><option value="">Tất cả website</option>${sitesList.map((s) => `<option value="${s.id}">${esc(s.name)}</option>`).join('')}</select>
+    <input id="fq" placeholder="Tìm tên / SĐT / email" value="${esc(filt.q)}">
+    <button class="b" id="add">+ Thêm khách</button><a class="b" href="/api/leads.csv?${qs}">⬇ Xuất CSV</a><span class="mut">${rows.length} khách</span></div>
+  <div class="card tw"><table><tr><th>Khách</th><th>Website / nguồn</th><th>Trạng thái</th><th>Tương tác</th><th>Đến lúc</th><th></th></tr>
+  ${rows.map((l) => `<tr class="click" data-id="${l.id}"><td><b>${esc(l.name || '(chưa có tên)')}</b><br>${esc(l.phone)}</td>
+    <td>${esc(l.site_name)}<br><span class="mut">${esc([l.utm_source, l.utm_campaign].filter(Boolean).join(' · '))}</span></td>
+    <td>${statusTag(l)}</td><td>${touch(l)}</td><td>${fmt(l.created_at)}<br><span class="mut">${ago(l.created_at)} trước</span></td>
+    <td><button class="b z" data-act="zalo" data-id="${l.id}" data-p="${esc(l.phone)}">Zalo</button> <button class="b g" data-act="call" data-id="${l.id}" data-p="${esc(l.phone)}">Gọi</button></td></tr>`).join('') || '<tr><td colspan="6" class="mut">Không có khách nào</td></tr>'}</table></div>`;
+  $('#fs').value = filt.status; $('#fw').value = filt.site;
+  $('#fs').onchange = (e) => { filt.status = e.target.value; render(); }; $('#fw').onchange = (e) => { filt.site = e.target.value; render(); };
+  $('#fq').onkeydown = (e) => { if (e.key === 'Enter') { filt.q = e.target.value; render(); } };
+  $('#add').onclick = addLead;
+  m.querySelectorAll('tr.click').forEach((tr) => tr.onclick = (e) => {
+    const b = e.target.closest('button[data-act]');
+    if (b) return quickContact(b);
+    openLead(tr.dataset.id);
+  });
+}
+
+// Bấm Gọi / Zalo ngay trên danh sách: mở app và TỰ ghi nhận "đã gọi / đã nhắn"
+async function quickContact(b) {
+  const { id, p, act } = b.dataset;
+  window.open(act === 'zalo' ? 'https://zalo.me/' + p : 'tel:' + p, act === 'zalo' ? '_blank' : '_self', 'noopener');
+  await api(`/leads/${id}/log`, { method: 'POST', body: { type: act === 'zalo' ? 'zalo' : 'call', note: 'Bấm nhanh từ danh sách' } });
+  setTimeout(render, 400);
+}
+
+async function addLead() {
+  const sitesList = await api('/sites');
+  $('#dlgBody').innerHTML = `<h2>Thêm khách</h2><div class="row"><input id="an" placeholder="Tên"><input id="ap" placeholder="Số điện thoại">
+    <select id="as">${sitesList.map((s) => `<option value="${s.id}">${esc(s.name)}</option>`).join('')}</select></div>
+    <textarea id="am" rows="2" placeholder="Nhu cầu / ghi chú"></textarea><div class="row" style="margin-top:10px"><button class="b p" id="asv">Lưu</button><button class="b" onclick="dlg.close()">Đóng</button></div>`;
+  dlg.showModal();
+  $('#asv').onclick = async () => { await api('/leads', { method: 'POST', body: { name: $('#an').value, phone: $('#ap').value, site_id: $('#as').value, message: $('#am').value } }); dlg.close(); render(); };
+}
+
+async function openLead(id) {
+  const { lead: l, events, logs } = await api('/leads/' + id);
+  const tl = [...events.map((e) => ({ t: e.created_at, h: e.type === 'click' ? `🖱 Bấm <b>${CH[e.channel] || e.channel}</b> trên ${esc(e.site_name)}` : e.type === 'form' ? `📝 Gửi form trên ${esc(e.site_name)}` : `👁 Xem trang ${esc(e.url)}` })),
+    ...logs.map((g) => ({ t: g.created_at, h: `<b>${LOGT[g.type]}</b> ${esc(g.note)}` }))].sort((a, b) => b.t - a.t);
+  $('#dlgBody').innerHTML = `<h2>${esc(l.name || '(chưa có tên)')} — ${esc(l.phone)}</h2>
+    <p class="mut">${esc(l.site_name)} · ${esc([l.utm_source, l.utm_medium, l.utm_campaign].filter(Boolean).join(' / '))} ${l.first_referrer ? '· từ ' + esc(l.first_referrer) : ''}<br>${esc(l.email)} ${l.message ? '· “' + esc(l.message) + '”' : ''} · gửi form ${l.submits} lần</p>
+    <div class="row">${statusTag(l)} ${touch(l)}</div>
+    <div class="row"><button class="b z" data-a="zalo">💬 Nhắn Zalo</button><button class="b g" data-a="call">📞 Gọi</button><button class="b" data-a="sms">✉️ Đã nhắn SMS</button></div>
+    <div class="row"><select id="st">${Object.entries(STATUS).map(([k, v]) => `<option value="${k}" ${k === l.status ? 'selected' : ''}>${v[0]}</option>`).join('')}</select>
+      <input id="as" placeholder="Người phụ trách" value="${esc(l.assignee)}"><button class="b" id="sv">Lưu</button></div>
+    <textarea id="nt" rows="2" placeholder="Ghi chú nội bộ…">${esc(l.note)}</textarea>
+    <div class="row" style="margin-top:6px"><input id="ln" placeholder="Thêm ghi chú vào lịch sử" style="flex:1"><button class="b" id="lnb">Thêm</button></div>
+    <h3>Lịch sử</h3><ul class="tl">${tl.map((x) => `<li><span class="mut">${fmt(x.t)}</span> ${x.h}</li>`).join('') || '<li class="mut">Chưa có</li>'}</ul>
+    <div class="row" style="margin-top:12px"><button class="b" onclick="dlg.close()">Đóng</button><button class="b" id="del" style="color:var(--red)">Xoá khách</button></div>`;
+  dlg.showModal();
+  const log = async (type, note) => { await api(`/leads/${id}/log`, { method: 'POST', body: { type, note } }); openLead(id); };
+  $('#dlgBody').querySelectorAll('[data-a]').forEach((b) => b.onclick = () => {
+    const a = b.dataset.a;
+    if (a === 'zalo') window.open('https://zalo.me/' + l.phone, '_blank', 'noopener'); if (a === 'call') window.open('tel:' + l.phone, '_self');
+    log(a, a === 'sms' ? 'Nhắn SMS' : '');
+  });
+  $('#lnb').onclick = () => $('#ln').value && log('note', $('#ln').value);
+  $('#sv').onclick = async () => { await api('/leads/' + id, { method: 'PATCH', body: { status: $('#st').value, assignee: $('#as').value, note: $('#nt').value } }); dlg.close(); render(); };
+  $('#del').onclick = async () => { if (confirm('Xoá khách này?')) { await api('/leads/' + id, { method: 'DELETE' }); dlg.close(); render(); } };
+}
+
+async function anon(m) {
+  const rows = await api('/anonymous-clicks?days=' + days);
+  m.innerHTML = `<div class="row">${dayPicker()}</div><div class="card"><p class="mut">Những người đã bấm Zalo / Gọi / Messenger trên website nhưng <b>chưa để lại SĐT trên form</b>. Nếu sau đó họ gửi form, lịch sử click sẽ tự gắn vào hồ sơ khách.</p>
+  <div class="tw"><table><tr><th>Lúc</th><th>Website</th><th>Kênh</th><th>Nguồn</th><th>Trang</th><th>Mã khách</th></tr>
+  ${rows.map((r) => `<tr><td>${fmt(r.created_at)}</td><td>${esc(r.site_name)}</td><td><span class="tag blu">${CH[r.channel] || esc(r.channel)}</span></td><td>${esc([r.utm_source, r.utm_campaign].filter(Boolean).join(' · '))}</td><td>${esc(r.url)}</td><td class="mut">${esc(r.vid.slice(0, 8))}</td></tr>`).join('') || '<tr><td colspan="6" class="mut">Chưa có</td></tr>'}</table></div></div>`;
+  $('#days').onchange = (e) => { days = +e.target.value; render(); };
+}
+
+async function sites(m) {
+  const list = await api('/sites'), origin = location.origin;
+  m.innerHTML = `<div class="card"><b>Thêm website</b><div class="row" style="margin-top:8px"><input id="sn" placeholder="Tên (vd: Landing dự án A)"><input id="sd" placeholder="Tên miền (vd: duan-a.com)"><button class="b p" id="sa">Thêm</button></div></div>
+  ${list.map((s) => `<div class="card"><b>${esc(s.name)}</b> <span class="mut">${esc(s.domain)}</span> <button class="b" data-del="${s.id}" style="float:right">Xoá</button>
+    <p class="mut" style="margin-bottom:4px">1) Dán vào &lt;head&gt; (hoặc "Mã tuỳ chỉnh / Custom code" của LadiPage) — tự đếm lượt xem, click Zalo/Gọi/Messenger và bắt form:</p>
+    <pre>${esc(`<script src="${origin}/track.js" data-key="${s.site_key}" async><\/script>`)}</pre>
+    <p class="mut" style="margin-bottom:4px">2) Nếu form của landing không bắt được tự động, cấu hình Webhook/“Gửi dữ liệu” của form về địa chỉ (POST, các trường name / phone / email / message):</p>
+    <pre>${esc(`${origin}/api/lead?key=${s.site_key}`)}</pre>
+    <p class="mut">3) Nút bấm không phải link thì thêm <code>data-crm-click="zalo"</code> (hoặc phone / messenger).</p></div>`).join('')}`;
+  $('#sa').onclick = async () => { if (!$('#sn').value.trim()) return; await api('/sites', { method: 'POST', body: { name: $('#sn').value, domain: $('#sd').value } }); render(); };
+  m.querySelectorAll('[data-del]').forEach((b) => b.onclick = async () => { if (confirm('Xoá website này?')) { await api('/sites/' + b.dataset.del, { method: 'DELETE' }); render(); } });
+}
+
+(async () => { try { await api('/stats?days=1'); $('#app').classList.remove('hide'); render(); } catch {} })();
+const dlg = $('#dlg');
+</script>
+</body>
+</html>

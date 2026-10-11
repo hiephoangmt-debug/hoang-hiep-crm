@@ -1,0 +1,8 @@
+{
+  "name": "hoang-hiep-crm",
+  "version": "1.0.0",
+  "description": "CRM quản lý khách hàng đổ về từ nhiều website, theo dõi click Zalo / Điện thoại / Messenger",
+  "type": "module",
+  "scripts": { "start": "node server.js", "test": "node test.js" },
+  "engines": { "node": ">=22.13" }
+}
