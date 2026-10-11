@@ -535,8 +535,12 @@
           const n = ev.filter((r) => r.nhanSu === st && r.nenTang === p && (r.loai === k || (k === "ads" && r.loai === "qc" && !REQ[p].qc))).length;
           if (!n) missing++;
           const need = `${st} · ${PLATFORM_LABEL[p]} · ${KINDS[k]} – cần thấy rõ: ${REQ[p][k]}`;
-          return n ? `<td class="ok-cell" title="${esc(REQ[p][k])}" data-req="${esc(need)} (đã có ${n} ảnh)">✓ ${n}</td>`
-            : `<td class="miss-cell" title="Cần chụp: ${esc(REQ[p][k])}" data-req="${esc(need)}">Thiếu</td>`;
+          if (n) return `<td class="ok-cell" title="${esc(REQ[p][k])}" data-req="${esc(need)} (đã có ${n} ảnh)">✓ ${n}</td>`;
+          // cùng người, cùng kênh, cùng loại đã có ở dự án khác trong tuần (vd. hoá đơn chung Sun + Casamia) -> lấy sang
+          const other = S.ChungTu.filter((r) => r.tuan === w && r.duAn !== pj && r.nhanSu === st && r.nenTang === p && r.loai === k);
+          const from = Array.from(new Set(other.map((r) => r.duAn)));
+          return `<td class="miss-cell" title="Cần chụp: ${esc(REQ[p][k])}" data-req="${esc(need)}">Thiếu${from.length
+            ? `<br><button type="button" class="link small" data-copyev="${esc(other.map((r) => r.id).join(","))}">Lấy từ ${esc(from.join(", "))} (${other.length})</button>` : ""}</td>`;
         }).join("");
         rows.push(`<tr><td>${esc(st)}</td><td>${PLATFORM_LABEL[p]}</td>${cells}</tr>`);
       });
@@ -1101,7 +1105,21 @@
       } catch (_) { /* đã báo */ } finally { $("evScan").disabled = false; }
     });
     // chạm vào ô của bảng kiểm (điện thoại không rê chuột được): hiện yêu cầu của ô đó
-    $("evCheck").addEventListener("click", (e) => {
+    $("evCheck").addEventListener("click", async (e) => {
+      const btn = e.target.closest("[data-copyev]");
+      if (btn) {
+        const ids = btn.dataset.copyev.split(","), pj = $("evProject").value;
+        btn.disabled = true;
+        try {
+          for (const id of ids) {
+            const rec = await run(`Đang chép ảnh sang ${pj}`, () => gas("crmCopyEvidence", id, pj));
+            if (!S.ChungTu.some((x) => x.id === rec.id)) S.ChungTu.push(rec);
+          }
+          toast(`Đã dùng ${ids.length} ảnh cho ${pj} (bản sao lưu trong thư mục ${pj} trên Drive).`, "ok");
+          renderEvidence();
+        } catch (_) { btn.disabled = false; }
+        return;
+      }
       const td = e.target.closest("td[data-req]");
       if (td) toast(td.dataset.req, "");
     });

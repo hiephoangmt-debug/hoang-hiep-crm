@@ -592,6 +592,30 @@ function crmWeekFolder_(iso) {
 }
 
 /** Lưu ảnh chứng từ vào Thư mục chứng từ/Nhân sự/Dự án/Tuần và ghi vào bảng ChungTu. */
+/**
+ * Dùng chứng từ của dự án khác cho dự án duAn (ví dụ hoá đơn chung của Sun và Casamia):
+ * chép file vào <Nhân sự>/<Dự án>/<Tuần> của dự án đích và thêm dòng ChungTu. Đã có thì trả dòng cũ.
+ */
+function crmCopyEvidence(id, duAn) {
+  var src = crmRows_('ChungTu').filter(function (r) { return r.id === id; })[0];
+  if (!src) throw new Error('Không tìm thấy chứng từ ' + id);
+  var project = crmRows_('DuAn').filter(function (p) { return p.ten === duAn; })[0];
+  if (!project) throw new Error('Không có dự án ' + duAn);
+  var meta = { tuan: src.tuan, duAn: duAn, nhanSu: src.nhanSu, nenTang: src.nenTang, loai: src.loai, tenFile: src.tenFile, hash: src.hash };
+  if (meta.hash) {
+    var same = crmSameEvidence_(crmRows_('ChungTu'), meta);
+    if (same) return same;
+  }
+  var rootId = crmFolderId_(project.thuMucChungTu) || EVIDENCE_ROOT;
+  var folder = crmSub_(crmSub_(crmSub_(DriveApp.getFolderById(rootId), meta.nhanSu || 'Chưa gán'),
+    project.khoa || project.ten), crmWeekFolder_(meta.tuan));
+  var file = DriveApp.getFileById(src.fileId).makeCopy(src.tenFile, folder);
+  return crmSave('ChungTu', {
+    tuan: meta.tuan, duAn: duAn, nhanSu: meta.nhanSu, nenTang: meta.nenTang, loai: meta.loai,
+    fileId: file.getId(), tenFile: meta.tenFile, url: file.getUrl(), hash: meta.hash || '',
+  });
+}
+
 function crmUploadEvidence(meta, b64) {
   var project = crmRows_('DuAn').filter(function (p) { return p.ten === meta.duAn; })[0];
   if (!project) throw new Error('Không có dự án ' + meta.duAn);
