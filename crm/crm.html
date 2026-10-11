@@ -120,7 +120,23 @@
 </style>
 </head>
 <body>
-<div id="loading">Đang tải CRM…</div>
+<div id="loading">Đang tải CRM… <small class="muted">(giao diện v3)</small></div>
+<div id="diag" style="max-width:760px;margin:0 auto;padding:0 16px;color:#b42318;font-size:13px"></div>
+<script>
+  // Báo lỗi ngay trên màn hình (để biết trang dừng ở đâu khi không mở được bảng điều khiển trình duyệt)
+  window.onerror = function (msg, src, line) {
+    var d = document.getElementById("diag");
+    if (d) d.innerHTML += "Lỗi trang: " + String(msg).replace(/</g, "&lt;") + (line ? " (dòng " + line + ")" : "") + "<br>";
+  };
+  window.addEventListener("unhandledrejection", function (e) {
+    var d = document.getElementById("diag");
+    if (d) d.innerHTML += "Lỗi: " + String((e.reason && e.reason.message) || e.reason).replace(/</g, "&lt;") + "<br>";
+  });
+  setTimeout(function () {
+    var d = document.getElementById("diag"), l = document.getElementById("loading");
+    if (d && l && !l.hidden && !window.__crmStarted) d.innerHTML += "Mã CRM chưa chạy (thư viện jszip/xlsx từ cdnjs.cloudflare.com có tải được không?).<br>";
+  }, 15000);
+</script>
 <div id="app" hidden>
   <header>
     <div class="bar">
