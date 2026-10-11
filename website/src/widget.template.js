@@ -178,5 +178,30 @@
     })();
 /*__CHAT__*/
   }
+
+  /* Vệt sáng chạy qua mọi nút nền cam trên trang (LadiPage bỏ hiệu ứng CSS khi nhập HTML nên gắn lại bằng script) */
+  function shineButtons() {
+    if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!document.getElementById("fc-shine-css")) {
+      var st = document.createElement("style"); st.id = "fc-shine-css";
+      st.textContent = ".fc-shine{overflow:hidden!important;isolation:isolate}.fc-shine::after{content:'';position:absolute;top:0;left:-60%;width:45%;height:100%;background:linear-gradient(105deg,rgba(255,255,255,0),rgba(255,255,255,.8),rgba(255,255,255,0));transform:skewX(-20deg);animation:fcshine 4.5s ease-in-out infinite;pointer-events:none;z-index:3;border-radius:inherit}@keyframes fcshine{0%{left:-60%}60%,100%{left:130%}}";
+      document.head.appendChild(st);
+    }
+    var orange = function (cs) {
+      var m = (cs.backgroundColor || "").match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?/);
+      if (m && (m[4] === undefined || +m[4] > 0.5) && +m[1] > 225 && +m[2] > 80 && +m[2] < 165 && +m[3] < 70) return true;
+      return /(255, 138, 31|242, 106, 15|#ff8a1f|#f26a0f)/i.test(cs.backgroundImage || "");
+    };
+    document.querySelectorAll("a, button, .ladi-button, [class*='button']").forEach(function (el) {
+      if (el.closest(".fc-shine") || el.closest("#fc-widget") || /background/.test(el.className)) return;
+      var r = el.getBoundingClientRect();
+      if (r.height < 28 || r.height > 110 || r.width < 60 || r.width > 760) return;
+      var bgEl = el.querySelector(".ladi-button-background") || el;
+      if (!orange(getComputedStyle(bgEl)) && !orange(getComputedStyle(el))) return;
+      if (getComputedStyle(el).position === "static") el.style.position = "relative";
+      el.classList.add("fc-shine");
+    });
+  }
+  [0, 1500, 4000].forEach(function (t) { setTimeout(function () { try { shineButtons(); } catch (e) { /* bỏ qua */ } }, t); });
   if (document.body) mount(); else document.addEventListener("DOMContentLoaded", mount);
 })();
