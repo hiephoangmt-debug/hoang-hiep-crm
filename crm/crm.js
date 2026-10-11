@@ -556,12 +556,19 @@
     return false;
   }
   function campaignRows(p, i) {
-    if (!p.campaigns || !p.campaigns.length) return "";
-    return `<div class="camps"><b>Số liệu đọc từ ảnh</b> <small class="muted">(tick dòng thuộc tuần này)</small>
-      ${p.campaigns.map((c, j) => `<label class="camp"><input type="checkbox" data-p="${i}" data-c="${j}" data-f="use"${c.use ? " checked" : ""}>
+    const add = p.loai === "hoadon" ? "" : `<button type="button" class="link small" data-addcamp="${i}">+ Điền số tay (chiến dịch, chi tiêu, lead)</button>`;
+    if (!p.campaigns || !p.campaigns.length) return add ? `<div class="camps">${add}</div>` : "";
+    return `<div class="camps"><b>Số liệu của ảnh</b> <small class="muted">(tick dòng thuộc tuần này; sửa số nếu đọc sai)</small>
+      ${p.campaigns.map((c, j) => c.manual ? `<label class="camp manual"><input type="checkbox" data-p="${i}" data-c="${j}" data-f="use"${c.use ? " checked" : ""}>
+        <input class="cname" data-p="${i}" data-c="${j}" data-f="name" value="${esc(c.name)}" placeholder="Tên chiến dịch" aria-label="Tên chiến dịch">
+        <input class="cnum" data-p="${i}" data-c="${j}" data-f="spent" value="${c.spent ? fmtInt(c.spent) : ""}" placeholder="Chi tiêu" inputmode="numeric" aria-label="Chi tiêu">
+        <input class="cnum lead" data-p="${i}" data-c="${j}" data-f="results" value="${c.results ? fmtInt(c.results) : ""}" placeholder="Lead" inputmode="numeric" aria-label="Lead">
+        <button type="button" class="link danger" data-delcamp="${i}:${j}" title="Bỏ dòng này">×</button></label>`
+      : `<label class="camp"><input type="checkbox" data-p="${i}" data-c="${j}" data-f="use"${c.use ? " checked" : ""}>
         <span class="cname" title="${esc(c.name)}">${esc(c.name)}</span>
         <input class="cnum" data-p="${i}" data-c="${j}" data-f="spent" value="${fmtInt(c.spent)}" aria-label="Chi tiêu">
-        <span class="muted">${c.results != null ? fmtInt(c.results) + " " + (RESULT_LABEL[c.resultType] || "") : ""}</span></label>`).join("")}</div>`;
+        <span class="muted">${c.results != null ? fmtInt(c.results) + " " + (RESULT_LABEL[c.resultType] || "") : ""}</span></label>`).join("")}
+      ${add}</div>`;
   }
   const evSel = new Set(); // ảnh đã lưu đang được tick để xoá nhiều
   function renderEvidence() {
@@ -662,7 +669,8 @@
         const rec = await gas("crmUploadEvidence", { tuan: w, duAn: pj, nhanSu: p.nhanSu, nenTang: p.nenTang, loai: p.loai, tenFile: p.file.name, mime: p.file.type, hash: p.hash || "" },
           await B.blobToB64(p.file));
         if (!S.ChungTu.some((x) => x.id === rec.id)) S.ChungTu.push(rec);
-        const chosen = (p.campaigns || []).filter((c) => c.use && c.spent);
+        const chosen = (p.campaigns || []).filter((c) => c.use && (c.spent || (c.manual && c.results)))
+          .map((c, k) => (c.name ? c : Object.assign({}, c, { name: "Nhập tay " + (k + 1) + " – " + p.file.name })));
         if (chosen.length) {
           const rows = chosen.map((c) => {
             const prev = S.SoLieu.find((x) => x.nguon === "anh" && x.tuan === w && x.duAn === pj && x.nhanSu === p.nhanSu && x.chienDich === c.name);
@@ -671,7 +679,7 @@
               taiKhoan: soleAccount(p.nhanSu, p.nenTang), chienDich: c.name, chiPhi: c.spent, chiPhiPhi: c.spent,
               lead: c.resultType === "lead" ? c.results || 0 : 0, luotXem: c.resultType === "thruplay" ? c.results || "" : "",
               mql: "", sql: "", deal: "", hienThi: "", tiepCan: "", luotNhap: "",
-              ghiChu: "Đọc từ ảnh " + p.file.name, nguon: "anh",
+              ghiChu: (c.manual ? "Nhập tay kèm ảnh " : "Đọc từ ảnh ") + p.file.name, nguon: "anh",
             };
           });
           const saved = await gas("crmSaveMany", "SoLieu", rows);
@@ -999,6 +1007,19 @@
       if (b.dataset.gdel) deleteRow(b.dataset.gdel).catch(() => {});
     });
     $("evFiles").addEventListener("change", () => { addPending($("evFiles").files); $("evFiles").value = ""; });
+    // dán ảnh chụp màn hình (Ctrl/Cmd + V) khi đang ở tab Ảnh & chứng từ
+    document.addEventListener("paste", (e) => {
+      if ($("tab-chungtu").hidden) return;
+      const items = Array.from((e.clipboardData && e.clipboardData.items) || []);
+      const files = items.filter((it) => it.kind === "file" && (/^image\//.test(it.type) || it.type === "application/pdf")).map((it) => it.getAsFile()).filter(Boolean);
+      if (!files.length) return;
+      e.preventDefault();
+      const stamp = new Date().toTimeString().slice(0, 8).replace(/:/g, "");
+      addPending(files.map((f, k) => {
+        const ext = f.type === "application/pdf" ? "pdf" : (f.type.split("/")[1] || "png").replace("jpeg", "jpg");
+        return new File([f], `anh-dan-${stamp}${files.length > 1 ? "-" + (k + 1) : ""}.${ext}`, { type: f.type });
+      }));
+    });
     const drop = $("evDrop");
     drop.addEventListener("dragover", (e) => { e.preventDefault(); drop.classList.add("over"); });
     drop.addEventListener("dragleave", () => drop.classList.remove("over"));
@@ -1009,13 +1030,29 @@
       if (t.dataset.c != null) {
         const c = pending[i].campaigns[t.dataset.c];
         if (t.dataset.f === "use") c.use = t.checked;
+        else if (t.dataset.f === "name") c.name = t.value.trim();
+        else if (t.dataset.f === "results") c.results = Math.round(num(t.value));
         else c.spent = Math.round(num(t.value));
+        if (c.manual && t.dataset.f !== "use") c.use = !!(c.spent || c.results);
+        if (c.manual) { const box = t.closest(".camp").querySelector('[data-f="use"]'); if (box) box.checked = c.use; }
         return;
       }
       pending[i][t.dataset.f] = t.value;
       if (t.tagName === "SELECT") renderEvidence();
     });
     $("evPending").addEventListener("click", (e) => {
+      const ai = e.target.dataset.addcamp;
+      if (ai != null) {
+        const p = pending[ai];
+        p.campaigns = p.campaigns || [];
+        p.campaigns.push({ manual: true, name: "", spent: 0, results: 0, resultType: "lead", use: false });
+        renderEvidence();
+        const els = document.querySelectorAll(`[data-p="${ai}"][data-f="name"]`);
+        if (els.length) els[els.length - 1].focus();
+        return;
+      }
+      const dc = e.target.dataset.delcamp;
+      if (dc) { const [a, b] = dc.split(":").map(Number); pending[a].campaigns.splice(b, 1); renderEvidence(); return; }
       const i = e.target.dataset.unpend;
       if (i == null) return;
       URL.revokeObjectURL(pending[i].url);
