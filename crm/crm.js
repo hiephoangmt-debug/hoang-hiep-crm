@@ -604,8 +604,9 @@
   }
   const STATUS_LABEL = { "dang hoat dong": "đang chạy", "da tam dung": "đã tạm dừng", "da hoan tat": "đã hoàn tất", "dang tat": "đã tắt", "da tat": "đã tắt" };
   /** Ô "Tổng hoá đơn (gồm VAT)" + "VAT %" dưới ảnh hoá đơn. attr = thuộc tính nhận diện (data-p / data-inv). */
-  function invoiceInputs(attr, total, vat) {
+  function invoiceInputs(attr, total, vat, acc) {
     return `<div class="evform inv">
+      <label class="wide">ID tài khoản QC trên hoá đơn<input ${attr} data-f="inv_acc" placeholder="vd. 339349009159334" value="${esc(acc || "")}"></label>
       <label>Tổng hoá đơn (gồm VAT, đ)<input ${attr} data-f="inv_total" inputmode="numeric" placeholder="0" value="${total ? fmtInt(num(total)) : ""}"></label>
       <label>VAT %<input ${attr} data-f="inv_vat" inputmode="decimal" placeholder="vd. 10" value="${vat === "" || vat == null ? "" : esc(String(vat))}"></label>
       <small class="muted wide">Dùng để tính cột “Chi phí (+gồm phí nền tảng)”: có VAT % thì = chi phí × (1 + VAT), không có thì chia tổng hoá đơn theo chi phí.</small>
@@ -637,7 +638,7 @@
         <figcaption><span class="fname" title="${esc(p.file.name)}">${esc(p.file.name)}</span>
           ${p.note ? `<small class="muted">${esc(p.note)}${p.text != null ? ` · <button type="button" class="link small" data-ocrtext="${i}">xem chữ đọc được</button>` : ""}</small>` : ""}
           <small class="req">Cần khoanh: ${esc(reqOf(p.nenTang, p.loai))}</small>
-          ${p.loai === "hoadon" ? invoiceInputs(`data-p="${i}"`, p.invoice ? p.invoice.total : "", p.invoice ? p.invoice.vat : "") : campaignRows(p, i)}
+          ${p.loai === "hoadon" ? invoiceInputs(`data-p="${i}"`, p.invoice ? p.invoice.total : "", p.invoice ? p.invoice.vat : "", p.account) : campaignRows(p, i)}
           <div class="row"><select data-p="${i}" data-f="nenTang">${PLATFORMS.map((x) => opt(x, PLATFORM_LABEL[x], p.nenTang)).join("")}</select>
           <select data-p="${i}" data-f="loai">${Object.entries(KINDS).map(([k, l]) => opt(k, l, p.loai)).join("")}</select></div>
           <div class="row"><select data-p="${i}" data-f="nhanSu" class="${p.nhanSu ? "" : "warn"}">${opt("", "(chọn nhân sự)", p.nhanSu)}${staff.map((x) => opt(x, x, p.nhanSu)).join("")}${newStaffOpt()}</select>
@@ -658,7 +659,7 @@
           <button type="button" class="link danger" data-evdel="${esc(r.id)}">Xoá</button></div>
           ${r.loai !== "hoadon" ? savedNumbersForm(r) : `<div class="evnums">
             <button type="button" class="link small" data-invread="${esc(r.id)}">Đọc số tiền trên hoá đơn</button>
-            ${invoiceInputs(`data-inv="${esc(r.id)}"`, r.soTien, r.vat)}
+            ${invoiceInputs(`data-inv="${esc(r.id)}"`, r.soTien, r.vat, soleAccount(r.nhanSu, r.nenTang))}
             <button type="button" class="small" data-invsave="${esc(r.id)}" style="width:100%;margin-top:4px">Lưu & tính Chi phí (+phí)</button></div>`}
         </figcaption></figure>`).join("") : `<p class="muted">Chưa có ảnh chứng từ cho tuần này.</p>`;
   }
@@ -728,8 +729,23 @@
   /** ID tài khoản mới đọc được -> thêm vào Danh mục (lần sau app tự biết ảnh/hoá đơn của ai). */
   async function rememberAccount(acc, nhanSu, nenTang) {
     const id = digitsOf(String(acc || "").replace(/-/g, "")) || (/^\d{3}-\d{3}-\d{4}$/.test(acc || "") ? acc.replace(/-/g, "") : "");
-    if (!id || !nhanSu || S.TaiKhoan.some((t) => digitsOf(String(t.maTaiKhoan).replace(/-/g, "")) === id)) return;
-    try { S.TaiKhoan.push(await gas("crmSave", "TaiKhoan", { maTaiKhoan: acc, nenTang, nhanSu })); } catch (e) { console.error(e); }
+    if (!id || !nhanSu) return;
+    if (!S.TaiKhoan.some((t) => digitsOf(String(t.maTaiKhoan).replace(/-/g, "")) === id)) {
+      try { S.TaiKhoan.push(await gas("crmSave", "TaiKhoan", { maTaiKhoan: acc, nenTang, nhanSu })); } catch (e) { console.error(e); return; }
+    }
+    // điền ngược ID cho các dòng số liệu cũ của người đó (lưu trước khi biết ID) + nhãn trong Google Sheet
+    const weeks = await fillMissingAccounts((r) => r.nhanSu === nhanSu && r.nenTang === nenTang);
+    for (const k of weeks) { const [pj, w] = k.split("|"); try { await pushToSheet(pj, w); } catch (e) { console.error(e); } }
+  }
+  /** Dòng số liệu chưa có ID tài khoản mà người đó chỉ có 1 tài khoản trên kênh đó -> điền ID. Trả các "dự án|tuần" có dòng từ ảnh đã đổi. */
+  async function fillMissingAccounts(filter) {
+    const upd = S.SoLieu.filter((r) => !digitsOf(String(r.taiKhoan || "").replace(/-/g, "")) && r.nhanSu && (!filter || filter(r)))
+      .map((r) => ({ r, acc: soleAccount(r.nhanSu, r.nenTang || "Facebook") })).filter((x) => x.acc);
+    if (!upd.length) return [];
+    const saved = await gas("crmSaveMany", "SoLieu", upd.map((x) => ({ id: x.r.id, taiKhoan: x.acc })));
+    saved.forEach((r) => { S.SoLieu = S.SoLieu.filter((x) => x.id !== r.id).concat(r); });
+    if (!$("tab-nhap").hidden) renderEntries();
+    return Array.from(new Set(upd.filter((x) => x.r.nguon === "anh").map((x) => x.r.duAn + "|" + x.r.tuan)));
   }
   /** Lưu các chiến dịch đã tick (đọc từ ảnh / điền tay) thành dòng số liệu nguồn "anh". Trả số dòng đã lưu. */
   async function saveCampaignRows(campaigns, m) {
@@ -808,6 +824,7 @@
     const q = (k) => document.querySelector(`[data-inv="${id}"][data-f="${k}"]`);
     q("inv_total").value = fmtInt(inv.total);
     q("inv_vat").value = inv.vat != null ? String(inv.vat) : "";
+    if (inv.account) q("inv_acc").value = inv.account;
     toast(`Hoá đơn ${r.tenFile}: ${fmtInt(inv.total)} đ` + (inv.vat != null ? `, VAT ${inv.vat}%` : "") + (inv.period ? `, kỳ ${inv.period}` : "") +
       (inv.ref ? `, số tham chiếu ${inv.ref}` : "") + (inv.account ? `, TK ${inv.account}` : "") + ". Kiểm tra rồi bấm “Lưu & tính Chi phí (+phí)”.", "ok");
   }
@@ -819,6 +836,7 @@
     if (!soTien) return toast("Gõ tổng tiền hoá đơn (hoặc bấm “Đọc số tiền trên hoá đơn”).", "err");
     const saved = await run("Đang lưu", () => gas("crmSave", "ChungTu", { id, soTien, vat }));
     Object.assign(r, saved);
+    if (q("inv_acc")) await run("Đang lưu ID tài khoản", () => rememberAccount(q("inv_acc"), r.nhanSu, r.nenTang));
     const note = await run("Đang tính Chi phí (+phí)", () => applyInvoices(r.duAn, r.tuan, r.nhanSu, r.nenTang));
     toast(`Đã lưu hoá đơn ${fmtInt(soTien)} đ.` + note, "ok");
     renderEvidence();
@@ -1277,7 +1295,8 @@
       if (/^inv_/.test(t.dataset.f)) {
         const p = pending[i];
         p.invoice = p.invoice || { total: 0, vat: null };
-        if (t.dataset.f === "inv_total") p.invoice.total = Math.round(num(t.value));
+        if (t.dataset.f === "inv_acc") p.account = t.value.trim();
+        else if (t.dataset.f === "inv_total") p.invoice.total = Math.round(num(t.value));
         else p.invoice.vat = t.value.trim() === "" ? null : num(t.value);
         return;
       }
@@ -1472,6 +1491,7 @@
     bind();
     bindWeekPicker();
     bindNewStaff();
+    fillMissingAccounts().catch((e) => console.error(e)); // dòng cũ chưa có ID mà Danh mục đã biết
     let b0 = "";
     try { b0 = localStorage.getItem("crm.brand") || ""; } catch (_) { /* bỏ qua */ }
     const fromUrl = await new Promise((res) => {
