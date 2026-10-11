@@ -17,7 +17,7 @@ const HTML = `
     <span class="fab-badge" data-chat-badge>1</span><span class="fab-label">Chat tư vấn 24/7</span>
   </button>
   <a href="#" class="fab fab-zalo" data-zalo-link target="_blank" rel="noopener" aria-label="Chat Zalo">Zalo<span class="fab-label">Nhắn Zalo</span></a>
-  <a href="tel:" class="fab fab-call" data-hotline-link aria-label="Gọi hotline">📞<span class="fab-label" data-hotline></span></a>
+  <a href="tel:" class="fab fab-call" data-hotline-link aria-label="Gọi hotline"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg></a>
 </div>
 <div class="chat-teaser" data-chat-teaser hidden><button type="button" class="chat-teaser-x" aria-label="Ẩn" data-teaser-close>×</button><span data-chat-open>👋 Ngân sách của bạn mua được gì ở FPT City? Chọn nhanh, mình gợi ý trong 30 giây!</span></div>
 <section class="chatbox" id="chatbox" role="dialog" aria-label="Chat tư vấn tự động" hidden>

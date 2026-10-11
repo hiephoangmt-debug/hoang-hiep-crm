@@ -12,7 +12,7 @@ button, input { font: inherit; }
 .fab-chat::before { content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid var(--orange); opacity: .6; animation: halo 2s ease-out infinite; }
 .fab-badge { position: absolute; top: -2px; right: -2px; min-width: 20px; height: 20px; border-radius: 10px; background: #e4572e; color: #fff; font-size: 12px; display: grid; place-items: center; border: 2px solid #fff; }
 .fab-label { position: absolute; right: calc(100% + 10px); top: 50%; transform: translateY(-50%); background: var(--navy-900); color: #fff; font-size: 13px; font-weight: 700; padding: 6px 10px; border-radius: 8px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s; }
-.fab:hover .fab-label, .fab:focus-visible .fab-label, .fab-chat .fab-label { opacity: 1; }
+.fab-label { display: none !important; }
 .fab-label { background: #fff !important; color: var(--orange-600) !important; box-shadow: 0 6px 18px rgba(10,22,48,.2); }
 .fab:focus-visible, .act:focus-visible, .chat-chips button:focus-visible, .chat-form button:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
 @keyframes ring { 0%, 50%, 100% { transform: rotate(0); } 10%, 30% { transform: rotate(-12deg); } 20%, 40% { transform: rotate(12deg); } }

@@ -145,7 +145,7 @@ const footer = () => `
   <p>Tư vấn &amp; phân phối: <a href="${site.agent.url}"><b>${esc(site.agent.name)}</b> – hoanghiepmt.com</a> · Hotline <a href="tel:${TEL}">${HOTLINE}</a></p>
   <p style="font-size:12px;opacity:.65">Thông tin, hình ảnh và số liệu mang tính tham khảo, có thể thay đổi theo công bố chính thức của chủ đầu tư (${esc(investor)}). Website do đơn vị tư vấn – phân phối vận hành, không phải trang chính thức của Tập đoàn FPT.</p>
 </div></footer>
-<div class="fabs"><a class="fab fab-chat" href="https://zalo.me/${ZALO}" aria-label="Chat tư vấn">💬</a><a class="fab fab-zalo" href="https://zalo.me/${ZALO}">Zalo</a><a class="fab fab-call" href="tel:${TEL}" aria-label="Gọi ngay">📞</a></div>`;
+<div class="fabs"><a class="fab fab-chat" href="https://zalo.me/${ZALO}" aria-label="Chat tư vấn">💬</a><a class="fab fab-zalo" href="https://zalo.me/${ZALO}">Zalo</a><a class="fab fab-call" href="tel:${TEL}" aria-label="Gọi ngay"><svg width="22" height="22" style="display:inline-block;vertical-align:middle" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg></a></div>`;
 
 const TABS_JS = `<script>
 document.querySelectorAll('[role="tablist"]').forEach(function (list) {
