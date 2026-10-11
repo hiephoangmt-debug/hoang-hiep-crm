@@ -1,5 +1,5 @@
 // Sinh các trang HTML tĩnh vào public/. Chạy: node src/build.mjs
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { site, investor, plazas, zones } from "./data.mjs";
@@ -112,9 +112,10 @@ const specCard = (title, specs, note) => `
           ${note ? `<p class="footnote">${esc(note)}</p>` : ""}
         </div>`;
 
-const illus = (file, alt, w, h) => `<figure class="fp-figure illus reveal"><img src="/assets/img/minh-hoa/${file}-sm.webp" srcset="/assets/img/minh-hoa/${file}-sm.webp 600w, /assets/img/minh-hoa/${file}.webp 1200w" sizes="(max-width:700px) 100vw, 1100px" width="${w || 1200}" height="${h || 730}" loading="lazy" decoding="async" alt="${esc(alt)}"></figure>`;
-const illusSection = (file, eyebrow, title, alt, w, h) => `
-    <section class="section"><div class="container"><div class="section-head reveal"><p class="eyebrow dark">${esc(eyebrow)}</p><h2 class="title">${esc(title)}</h2></div><div style="max-width:960px;margin:0 auto">${illus(file, alt, w, h)}</div></div></section>`;
+const SZ = JSON.parse(readFileSync(new URL("../public/assets/img/minh-hoa/sizes.json", import.meta.url), "utf8"));
+const illus = (file, alt) => `<figure class="fp-figure illus reveal"><img src="/assets/img/minh-hoa/${file}-sm.webp" srcset="/assets/img/minh-hoa/${file}-sm.webp 600w, /assets/img/minh-hoa/${file}.webp 1200w" sizes="(max-width:700px) 100vw, 1100px" width="1200" height="${SZ[file] || 700}" loading="lazy" decoding="async" alt="${esc(alt)}"></figure>`;
+const illusSection = (file, eyebrow, title, alt) => `
+    <section class="section"><div class="container"><div class="section-head reveal"><p class="eyebrow dark">${esc(eyebrow)}</p><h2 class="title">${esc(title)}</h2></div><div style="max-width:960px;margin:0 auto">${illus(file, alt)}</div></div></section>`;
 const location = (heading = "Kết nối trọn vẹn phía Nam Đà Nẵng – giữa sông, biển và trung tâm") => `
     <section id="vi-tri" class="section section-tint">
       <div class="container">
@@ -123,7 +124,7 @@ const location = (heading = "Kết nối trọn vẹn phía Nam Đà Nẵng – 
           <h2 class="title">${heading}</h2>
           <p>Khu đô thị FPT City nằm phía Nam Đà Nẵng, hạ tầng đồng bộ, kết nối nhanh về trung tâm thành phố, sân bay, dải biển Non Nước và phố cổ Hội An.</p>
         </div>
-        <div style="max-width:900px;margin:0 auto 28px">${illus("vi-tri-fpt-city", "Sơ đồ vị trí và thời gian di chuyển từ FPT City Đà Nẵng đến biển, sân bay, Hội An", 1200, 715)}</div>
+        <div style="max-width:900px;margin:0 auto 28px">${illus("vi-tri-fpt-city", "Sơ đồ vị trí và thời gian di chuyển từ FPT City Đà Nẵng đến biển, sân bay, Hội An")}</div>
         <div class="two-col align-center">
           <div class="map-wrap reveal">
             <iframe title="Bản đồ khu đô thị FPT City Đà Nẵng" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=FPT+City+Da+Nang&amp;output=embed"></iframe>
@@ -729,7 +730,7 @@ for (const p of plazas) {
       </div>
     </section>
     ${p.floorplan ? floorplanSection(p, fp4) : ""}
-    ${illusSection("loai-can-" + p.slug, "Loại căn", `Loại căn & diện tích ${p.name}`, `Loại căn và diện tích tham khảo ${p.name} Đà Nẵng`, 1200, p.slug === "fpt-plaza-4" ? 771 : 700)}
+    ${p.slug === "fpt-plaza-4" ? illusSection("loai-can-" + p.slug, "Loại căn", `Loại căn & diện tích ${p.name}`, `Loại căn và diện tích tham khảo ${p.name} Đà Nẵng`) : ""}
     ${location(`Vị trí ${p.name} – trong lõi khu đô thị FPT City`)}
     ${amenities()}
     ${ctaSection({

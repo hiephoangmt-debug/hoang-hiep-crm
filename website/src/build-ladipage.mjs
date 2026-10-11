@@ -85,20 +85,17 @@ ${note ? `<p class="small" style="margin-top:12px">${esc(note)}</p>` : ""}</div>
 const head = (h) => `
 <div style="text-align:center;max-width:780px;margin:0 auto 32px"><p class="eyebrow">${esc(h.eyebrow)}</p><h2 class="title">${esc(h.title)}</h2>${h.sub ? `<p style="color:var(--muted)">${h.sub}</p>` : ""}</div>`;
 
+const SZ = JSON.parse(readFileSync(join(HERE, "..", "public", "assets", "img", "minh-hoa", "sizes.json"), "utf8"));
 const MH = `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/c547024a8d8088b87d1349ddb42c15051f0a41c6/website/public/assets/img/minh-hoa`;
-const illus = (file, alt, h) => `<figure style="margin:0"><img src="${MH}/${file}.webp" alt="${esc(alt)}" width="1200" height="${h}" loading="lazy"></figure>`;
-const illusSection = (file, eyebrow, title, alt, h) => `<section><div class="wrap">${head({ eyebrow, title })}<div style="max-width:960px;margin:0 auto">${illus(file, alt, h)}</div></div></section>`;
+const illus = (file, alt) => `<figure style="margin:0"><img src="${MH}/${file}.webp" alt="${esc(alt)}" width="1200" height="${SZ[file] || 700}" loading="lazy"></figure>`;
+const illusSection = (file, eyebrow, title, alt) => `<section><div class="wrap">${head({ eyebrow, title })}<div style="max-width:960px;margin:0 auto">${illus(file, alt)}</div></div></section>`;
 const distances = () => `
 <section id="vi-tri" class="tint"><div class="wrap two">
   <div><p class="eyebrow">Vị trí</p><h2 class="title">Phía Nam Đà Nẵng, giữa sông, biển và trung tâm</h2>
   <p>Khu đô thị FPT City nằm phía Nam Đà Nẵng, hạ tầng đồng bộ, kết nối nhanh về trung tâm thành phố, sân bay, biển Non Nước và phố cổ Hội An.</p>
+  <p><b>Thời gian di chuyển tham khảo:</b> biển Tân Trà – Non Nước ~5 phút · Ngũ Hành Sơn ~10 phút · trung tâm Đà Nẵng ~15–20 phút · sân bay quốc tế ~20 phút · phố cổ Hội An ~20 phút. Đại học FPT và FPT Complex nằm ngay trong khu đô thị.</p>
   <a class="btn" href="https://www.google.com/maps?q=FPT+City+Da+Nang">📍 Xem bản đồ FPT City</a></div>
-  <div>${illus("vi-tri-fpt-city", "Sơ đồ vị trí và thời gian di chuyển từ FPT City Đà Nẵng đến biển, sân bay, Hội An", 715)}</div>
-  <ul class="dist">
-    <li><span>Đại học FPT &amp; FPT Complex</span><b>Trong khu đô thị</b></li><li><span>Biển Tân Trà – Non Nước</span><b>~5 phút</b></li>
-    <li><span>Danh thắng Ngũ Hành Sơn</span><b>~10 phút</b></li><li><span>Trung tâm TP. Đà Nẵng</span><b>~15–20 phút</b></li>
-    <li><span>Sân bay quốc tế Đà Nẵng</span><b>~20 phút</b></li><li><span>Phố cổ Hội An</span><b>~20 phút</b></li>
-  </ul></div></section>`;
+  <div>${illus("vi-tri-fpt-city", "Sơ đồ vị trí và thời gian di chuyển từ FPT City Đà Nẵng đến biển, sân bay, Hội An")}</div></div></section>`;
 
 const amenities = () => `
 <section><div class="wrap">${head({ eyebrow: "Tiện ích", title: "Hệ sinh thái sống, học và làm việc trong một khu đô thị" })}
@@ -267,7 +264,7 @@ ${unitsSection}
   <div class="amen">${AUDIENCE[p.status].map(([t, d]) => `<div><h3>${t}</h3><p>${esc(d)}</p></div>`).join("")}</div></div></section>
 ${band(H.band, H.bandBtn)}
 <section class="tint"><div class="wrap">${head({ eyebrow: "So sánh", title: "FPT Plaza 1, 2, 3, 4, 5: khác nhau thế nào?" })}${COMPARE(p.slug)}</div></section>
-${illusSection("loai-can-" + p.slug, "Loại căn", `Loại căn & diện tích ${p.name}`, `Loại căn và diện tích tham khảo ${p.name} Đà Nẵng`, p.slug === "fpt-plaza-4" ? 771 : 700)}
+${p.slug === "fpt-plaza-4" ? illusSection("loai-can-" + p.slug, "Loại căn", `Loại căn & diện tích ${p.name}`, `Loại căn và diện tích tham khảo ${p.name} Đà Nẵng`) : ""}
 ${distances()}
 ${amenities()}
 ${ctaSection({

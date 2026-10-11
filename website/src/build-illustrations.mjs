@@ -68,15 +68,18 @@ await pg.route("**/*", (r) => (r.request().url().startsWith("http://i.test/") ? 
 for (const j of jobs) {
   pg._html = j.html;
   await pg.goto("http://i.test/" + j.name);
-  await pg.screenshot({ path: join(TMP, j.name + ".png"), fullPage: true });
+  await (await pg.$("body")).screenshot({ path: join(TMP, j.name + ".png") });
 }
 await b.close();
 execFileSync("python3", ["-c", `
 import sys,glob,os
+sizes={}
 from PIL import Image
 for f in glob.glob(sys.argv[1]+'/*.png'):
     im=Image.open(f).convert('RGB'); n=os.path.basename(f)[:-4]
     im.save(os.path.join(sys.argv[2],n+'.webp'),quality=84,method=6)
     s=im.resize((600,round(im.height*600/im.width)),Image.LANCZOS); s.save(os.path.join(sys.argv[2],n+'-sm.webp'),quality=82,method=6)
     print(n,im.size)
+    sizes[n]=im.height
+import json; json.dump(sizes,open(os.path.join(sys.argv[2],"sizes.json"),"w"))
 `, TMP, OUT], { stdio: "inherit" });
