@@ -1007,11 +1007,24 @@
    */
   /** Màn hình Google Ads -> {name, spent, results, resultType, date, clicks, impressions} hoặc null. */
   function googleAds(lines, N, money) {
-    const LBL = [["clicks", /^((lan|luot|so lan) nhap|luot click|so lan click|clicks?)\b/], ["impressions", /^((luot|so lan) hien thi|impressions?)\b/],
+    const LBL = [["clicks", /^((lan|luot|so lan) nhap|luot click|so lan click|clicks?)\b/], ["impressions", /^((luot|so lan) hien th\w*|impressions?)(?=\s|$)/],
       ["reach", /^((nguoi|luot|pham vi) tiep can|reach)\b/], ["cpc", /^(cpc|cpm|ctr)\b/], ["cost", /^(chi phi|tong chi phi|cost)\b/],
       ["conv", /^(chuyen doi|luot chuyen doi|khach hang tiem nang|conversions?)\b/]];
     const at = {};
     N.forEach((n, i) => LBL.forEach(([k, re]) => { if (at[k] == null && re.test(n)) at[k] = i; }));
+    const row = scorecardRow(lines, N, LBL);
+    if (row) {
+      // chi phí: ưu tiên số có ký hiệu tiền (đ/₫) lớn nhất ngay dưới hàng nhãn (số trên thẻ hay bị mũi tên ❯ che mất "đ")
+      let best = 0;
+      for (let i = row.at; i < Math.min(lines.length, row.at + 5); i++) {
+        if (/\/\s*ngay|ngan sach/.test(N[i])) continue;
+        money(lines[i]).forEach((m) => { if (m.v > best) best = m.v; });
+      }
+      if (best && best > (row.cpc || 0)) row.cost = best;
+      if (row.cost && row.cpc && row.cost <= row.cpc) row.cost = 0; // chi phí không thể ≤ CPC: đọc nhầm
+      if (row.cost && row.clicks && row.cpc && Math.abs(row.cost - row.clicks * row.cpc) > row.cost * 0.2) row.cost = 0; // chi phí ≈ nhấp × CPC
+      if (row.cost) return finishGoogle(lines, N, row);
+    }
     if (at.cost == null) return null;
     const plain = (i) => /^\d[\d.,]*$/.test(lines[i].replace(/\s+/g, "")) ? Math.round(toNum(lines[i].replace(/\s+/g, ""))) : null;
     const val = {};
@@ -1038,10 +1051,51 @@
       money(lines[i]).forEach((m) => { if (m.v > cost) cost = m.v; });
     }
     if (!cost) return null;
+    val.cost = cost;
+    return finishGoogle(lines, N, val);
+  }
+
+  /**
+   * Thẻ chỉ số nằm NGANG (ảnh chụp máy tính): một dòng chứa nhiều nhãn
+   * "Lần nhấp  Lượt hiển thị  CPC Tr.bình  Chi phí", dòng số ngay sau "10  135  15.399 đ  153.988 đ".
+   */
+  function scorecardRow(lines, N, LBL) {
+    const NUM = /(?:^|[\s(])(\d{1,3}(?:[.,]\d{3})+(?:,\d+)?|\d+(?:[.,]\d+)?)(?=\s|$|[đd₫¢%])/g;
+    for (let i = 0; i < N.length; i++) {
+      const found = [];
+      LBL.forEach(([k, re]) => {
+        const m = new RegExp(re.source.replace(/^\^/, "(?:^|\\s)"), "").exec(N[i]);
+        if (m) found.push([k, m.index]);
+      });
+      if (found.length < 2 || !found.some(([k]) => k === "cost")) continue;
+      found.sort((a, b) => a[1] - b[1]);
+      for (let j = i + 1; j <= Math.min(N.length - 1, i + 3); j++) {
+        let toks = Array.from(N[j].matchAll(NUM)).map((m) => m[1]);
+        // ký hiệu ₫ hay bị đọc thành 1 chữ số ("15.399 4 153.988 3"): bỏ số lẻ 1 chữ số đứng sau số có dấu phân cách nghìn
+        toks = toks.filter((t, k) => !(k > 0 && /^\d$/.test(t) && /\d[.,]\d{3}$/.test(toks[k - 1])));
+        if (toks.length < 2) continue;
+        if (toks.length > found.length) toks = toks.slice(toks.length - found.length); // bỏ chữ số của thanh menu bên trái
+        const val = { at: i };
+        found.forEach(([k], n) => { if (toks[n] != null) val[k] = Math.round(toNum(toks[n])); });
+        return val;
+      }
+    }
+    return null;
+  }
+
+  function finishGoogle(lines, N, val) {
+    const cost = val.cost;
     let name = "";
     const ci = N.findIndex((n) => /chien dich (tim kiem|hieu suat toi da|hien thi|video|da kenh|thong minh|ung dung)/.test(n));
     if (ci >= 0) {
-      name = lines[ci].replace(/chiến dịch (tìm kiếm|hiệu suất tối đa|hiển thị|video|đa kênh|thông minh|ứng dụng).*$/i, "").trim();
+      // tên = phần chữ trước "Chiến dịch tìm kiếm/…", bỏ chữ của thanh menu bên trái dính vào đầu dòng (so theo chữ không dấu)
+      const words = lines[ci].split(/\s+/), nw = words.map(norm);
+      let end = nw.findIndex((w, k) => w === "chien" && /^dich$|^dic/.test(nw[k + 1] || "") && /^(tim|hieu|hien|video|da|thong|ung)/.test(nw[k + 2] || ""));
+      if (end < 0) end = words.length;
+      let start = 0;
+      while (start < end - 1 && ((nw[start] === "chien" && /^dic/.test(nw[start + 1])) || /^(muc|cong)$/.test(nw[start]) && /^(tieu|cu)$/.test(nw[start + 1]))) start += 2;
+      while (start < end && /^(tao|tong|quan)$/.test(nw[start])) start++;
+      name = words.slice(start, end).join(" ").trim();
       for (let k = ci - 1; !name && k >= 0 && k >= ci - 3; k--) if (lines[k].replace(/\W/g, "").length > 3) name = lines[k].trim();
     }
     const d = N.map((n) => /thang\s*(\d{1,2})\s+(\d{1,2})\s*[-–]\s*\d{1,2}/.exec(n) || /(\d{1,2})\s*thg\s*(\d{1,2})/.exec(n)).find(Boolean);
@@ -1230,11 +1284,31 @@
     return files;
   }
 
+  async function upscaleForOcr(img) {
+    try {
+      if (!(img instanceof Blob) || !/^image\//.test(img.type) || !window.createImageBitmap) return img;
+      const bmp = await createImageBitmap(img);
+      if (bmp.width >= 1800) return img;
+      const k = Math.min(2.5, 2400 / bmp.width);
+      const c = document.createElement("canvas");
+      c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
+      const g = c.getContext("2d");
+      g.imageSmoothingQuality = "high";
+      g.drawImage(bmp, 0, 0, c.width, c.height);
+      return c;
+    } catch (_) { return img; }
+  }
   let ocrWorkerP = null;
   function ocrWorker() {
     if (!ocrWorkerP) {
       ocrWorkerP = (window.Tesseract ? Promise.resolve() : loadScript(TESS_URL))
         .then(() => Tesseract.createWorker(["vie", "eng"], 1))
+        .then((w) => {
+          // ảnh nhỏ (màn hình thường, ảnh bị nén) đọc sai nhiều chữ số: phóng to trước khi đọc
+          const rec = w.recognize.bind(w);
+          w.recognize = async (img, ...rest) => rec(await upscaleForOcr(img), ...rest);
+          return w;
+        })
         .catch((e) => { ocrWorkerP = null; throw e; });
     }
     return ocrWorkerP;
