@@ -2,8 +2,8 @@
 
 Dán vào Cài đặt trang › SEO của từng trang. Ảnh chia sẻ 1200×630, favicon 96×96.
 
-- **Hình ảnh khi chia sẻ:** `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/0000000000000000000000000000000000000000/website/public/assets/img/og-cover.png`
-- **Favicon:** `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/0000000000000000000000000000000000000000/website/public/assets/img/favicon-96.png`
+- **Hình ảnh khi chia sẻ:** `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/1aa4b60869754e2848b3083899bd182e4f6da279/website/public/assets/img/og-cover.png`
+- **Favicon:** `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/1aa4b60869754e2848b3083899bd182e4f6da279/website/public/assets/img/favicon-96.png`
 
 ## FPT Plaza 1
 - **Đường dẫn:** /fpt-plaza-1
