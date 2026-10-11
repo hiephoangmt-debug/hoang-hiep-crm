@@ -112,6 +112,9 @@ const specCard = (title, specs, note) => `
           ${note ? `<p class="footnote">${esc(note)}</p>` : ""}
         </div>`;
 
+const illus = (file, alt, w, h) => `<figure class="fp-figure illus reveal"><img src="/assets/img/minh-hoa/${file}-sm.webp" srcset="/assets/img/minh-hoa/${file}-sm.webp 600w, /assets/img/minh-hoa/${file}.webp 1200w" sizes="(max-width:700px) 100vw, 1100px" width="${w || 1200}" height="${h || 730}" loading="lazy" decoding="async" alt="${esc(alt)}"></figure>`;
+const illusSection = (file, eyebrow, title, alt, w, h) => `
+    <section class="section"><div class="container"><div class="section-head reveal"><p class="eyebrow dark">${esc(eyebrow)}</p><h2 class="title">${esc(title)}</h2></div><div style="max-width:960px;margin:0 auto">${illus(file, alt, w, h)}</div></div></section>`;
 const location = (heading = "Kết nối trọn vẹn phía Nam Đà Nẵng – giữa sông, biển và trung tâm") => `
     <section id="vi-tri" class="section section-tint">
       <div class="container">
@@ -120,6 +123,7 @@ const location = (heading = "Kết nối trọn vẹn phía Nam Đà Nẵng – 
           <h2 class="title">${heading}</h2>
           <p>Khu đô thị FPT City nằm phía Nam Đà Nẵng, hạ tầng đồng bộ, kết nối nhanh về trung tâm thành phố, sân bay, dải biển Non Nước và phố cổ Hội An.</p>
         </div>
+        <div style="max-width:900px;margin:0 auto 28px">${illus("vi-tri-fpt-city", "Sơ đồ vị trí và thời gian di chuyển từ FPT City Đà Nẵng đến biển, sân bay, Hội An", 1200, 715)}</div>
         <div class="two-col align-center">
           <div class="map-wrap reveal">
             <iframe title="Bản đồ khu đô thị FPT City Đà Nẵng" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=FPT+City+Da+Nang&amp;output=embed"></iframe>
@@ -493,6 +497,7 @@ function write(path, html) {
       </div>
     </section>
     ${related("Chuỗi căn hộ FPT Plaza 1 – 5", plazaCards())}
+    ${illusSection("chuoi-fpt-plaza", "Quy mô", "Chuỗi căn hộ FPT Plaza 1–5 trong một biểu đồ", "Biểu đồ quy mô căn hộ FPT Plaza 1, 2, 3, 4, 5 tại FPT City Đà Nẵng", 1200, 730)}
     ${location()}
     ${amenities()}
     ${ctaSection({
@@ -542,6 +547,7 @@ function write(path, html) {
         ${zoneCards()}
       </div>
     </section>
+    ${illusSection("dat-nen-phan-khu", "Phân khu", "Diện tích lô phổ biến theo phân khu V1 – V6", "Biểu đồ diện tích lô đất nền FPT City theo phân khu V1 đến V6", 1200, 771)}
     ${location("Đất nền FPT City – vị trí kết nối phía Nam Đà Nẵng")}
     ${ctaSection({
       heading: "Nhận bảng giá đất nền FPT City mới nhất",
@@ -593,6 +599,7 @@ for (const z of zones) {
         ${specCard(`Thông tin phân khu ${z.code}`, [["Dự án", "Khu đô thị FPT City Đà Nẵng"], ["Phân khu", z.code], ["Chủ đầu tư", investor], ["Loại hình", "Đất nền, nhà phố, biệt thự"], ["Pháp lý", "Sổ đỏ từng lô"], ["Giá", "Theo giỏ hàng cập nhật"]], "Đặc điểm lô mang tính tham khảo; chi tiết từng lô có trong giỏ hàng.")}
       </div>
     </section>
+    ${illusSection("dat-nen-" + z.code.toLowerCase(), "Đặc điểm khu", `Đất nền FPT City phân khu ${z.code} có gì nổi bật?`, `Đặc điểm đất nền FPT City phân khu ${z.code}`, 1200, 733)}
     ${location(`Vị trí đất FPT City phân khu ${z.code}`)}
     ${ctaSection({
       heading: `Nhận bảng giá đất phân khu ${z.code}`,
@@ -651,6 +658,7 @@ for (const z of zones) {
       </div>
     </section>
     ${related("Xem chi tiết từng tòa", plazaCards())}
+    ${illusSection("chuoi-fpt-plaza", "Quy mô", "Chuỗi căn hộ FPT Plaza 1–5 trong một biểu đồ", "Biểu đồ quy mô căn hộ FPT Plaza 1, 2, 3, 4, 5 tại FPT City Đà Nẵng", 1200, 730)}
     ${location("Căn hộ FPT Plaza – vị trí kết nối phía Nam Đà Nẵng")}
     ${amenities()}
     ${ctaSection({
@@ -721,6 +729,7 @@ for (const p of plazas) {
       </div>
     </section>
     ${p.floorplan ? floorplanSection(p, fp4) : ""}
+    ${illusSection("loai-can-" + p.slug, "Loại căn", `Loại căn & diện tích ${p.name}`, `Loại căn và diện tích tham khảo ${p.name} Đà Nẵng`, 1200, p.slug === "fpt-plaza-4" ? 771 : 700)}
     ${location(`Vị trí ${p.name} – trong lõi khu đô thị FPT City`)}
     ${amenities()}
     ${ctaSection({

@@ -85,11 +85,15 @@ ${note ? `<p class="small" style="margin-top:12px">${esc(note)}</p>` : ""}</div>
 const head = (h) => `
 <div style="text-align:center;max-width:780px;margin:0 auto 32px"><p class="eyebrow">${esc(h.eyebrow)}</p><h2 class="title">${esc(h.title)}</h2>${h.sub ? `<p style="color:var(--muted)">${h.sub}</p>` : ""}</div>`;
 
+const MH = `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/@@SHA@@/website/public/assets/img/minh-hoa`;
+const illus = (file, alt, h) => `<figure style="margin:0"><img src="${MH}/${file}.webp" alt="${esc(alt)}" width="1200" height="${h}" loading="lazy"></figure>`;
+const illusSection = (file, eyebrow, title, alt, h) => `<section><div class="wrap">${head({ eyebrow, title })}<div style="max-width:960px;margin:0 auto">${illus(file, alt, h)}</div></div></section>`;
 const distances = () => `
 <section id="vi-tri" class="tint"><div class="wrap two">
   <div><p class="eyebrow">Vị trí</p><h2 class="title">Phía Nam Đà Nẵng, giữa sông, biển và trung tâm</h2>
   <p>Khu đô thị FPT City nằm phía Nam Đà Nẵng, hạ tầng đồng bộ, kết nối nhanh về trung tâm thành phố, sân bay, biển Non Nước và phố cổ Hội An.</p>
   <a class="btn" href="https://www.google.com/maps?q=FPT+City+Da+Nang">📍 Xem bản đồ FPT City</a></div>
+  <div>${illus("vi-tri-fpt-city", "Sơ đồ vị trí và thời gian di chuyển từ FPT City Đà Nẵng đến biển, sân bay, Hội An", 715)}</div>
   <ul class="dist">
     <li><span>Đại học FPT &amp; FPT Complex</span><b>Trong khu đô thị</b></li><li><span>Biển Tân Trà – Non Nước</span><b>~5 phút</b></li>
     <li><span>Danh thắng Ngũ Hành Sơn</span><b>~10 phút</b></li><li><span>Trung tâm TP. Đà Nẵng</span><b>~15–20 phút</b></li>
@@ -263,6 +267,7 @@ ${unitsSection}
   <div class="amen">${AUDIENCE[p.status].map(([t, d]) => `<div><h3>${t}</h3><p>${esc(d)}</p></div>`).join("")}</div></div></section>
 ${band(H.band, H.bandBtn)}
 <section class="tint"><div class="wrap">${head({ eyebrow: "So sánh", title: "FPT Plaza 1, 2, 3, 4, 5: khác nhau thế nào?" })}${COMPARE(p.slug)}</div></section>
+${illusSection("loai-can-" + p.slug, "Loại căn", `Loại căn & diện tích ${p.name}`, `Loại căn và diện tích tham khảo ${p.name} Đà Nẵng`, p.slug === "fpt-plaza-4" ? 771 : 700)}
 ${distances()}
 ${amenities()}
 ${ctaSection({
@@ -311,6 +316,7 @@ ${hero({
     <div><h3>3. Cần sổ và xây ngay?</h3><p>Mỗi lô được kiểm tra pháp lý riêng; chuyên viên báo tình trạng sổ và điều kiện xây dựng từng lô.</p></div>
   </div></div></section>
 ${band(H.band, H.bandBtn)}
+${illusSection("dat-nen-" + z.code.toLowerCase(), "Đặc điểm khu", `Đất nền FPT City phân khu ${z.code} có gì nổi bật?`, `Đặc điểm đất nền FPT City phân khu ${z.code}`, 733)}
 ${distances()}
 ${amenities()}
 ${ctaSection({
@@ -351,6 +357,7 @@ ${hero({
 <section class="tint"><div class="wrap">${head({ eyebrow: "So sánh nhanh", title: "Phân khu nào hợp với bạn?" })}
 <div class="tbl"><table><thead><tr><th>Phân khu</th><th>Đặc điểm nổi bật</th><th></th></tr></thead><tbody>${zones.map((z) => `<tr><th scope="row">${z.code}</th><td>${esc(z.traits.slice(0, 2).join(" · "))}</td><td><a href="${link(z.slug)}">Xem →</a></td></tr>`).join("")}</tbody></table></div></div></section>
 ${band("Phân khu nào đang có lô vừa tầm giá của bạn? Gửi ngân sách để biết.", "Nhận giỏ hàng theo ngân sách")}
+${illusSection("dat-nen-phan-khu", "Phân khu", "Diện tích lô phổ biến theo phân khu V1 – V6", "Biểu đồ diện tích lô đất nền FPT City theo phân khu V1 đến V6", 771)}
 ${distances()}
 ${amenities()}
 ${ctaSection({ title: "Nhận giỏ hàng đất nền FPT City theo tầm giá", intro: "Giá đất khác nhau theo từng lô. Đăng ký để nhận:", formTitle: "Lô nào vừa ngân sách của bạn?", formHtml: form("c", { button: "Gửi tôi 3 lô phù hợp nhất", budget: BUDGET_LAND }), steps: ["<b>3 lô gợi ý</b> vừa ngân sách bạn chọn.", "<b>Bản đồ phân lô</b> chi tiết từng phân khu.", "<b>Thông tin pháp lý</b> sổ đỏ từng lô.", "<b>Lịch xem đất</b> cùng chuyên viên."] })}
@@ -386,6 +393,7 @@ ${hero({
 <p class="small" style="margin-top:10px">Số liệu tổng hợp, mang tính tham khảo; FPT Plaza 5 là số liệu dự kiến.</p></div></section>
 ${gotoSec("Xem chi tiết từng tòa", plazaTiles(""), "Chọn tòa")}
 ${band("Một câu hỏi: ngân sách của bạn đang nằm ở tòa nào?", "Nhận 3 căn gợi ý")}
+${illusSection("chuoi-fpt-plaza", "Quy mô", "Chuỗi căn hộ FPT Plaza 1–5 trong một biểu đồ", "Biểu đồ quy mô căn hộ FPT Plaza 1, 2, 3, 4, 5 tại FPT City Đà Nẵng", 730)}
 ${distances()}
 ${amenities()}
 ${ctaSection({ title: "Nhận bảng giá căn hộ FPT Plaza theo ngân sách", intro: "Để lại thông tin để nhận:", formTitle: "Gửi ngân sách, nhận 3 căn gợi ý", formHtml: form("c", { button: "Gửi tôi 3 căn phù hợp nhất", budget: BUDGET_APT }), steps: ["<b>3 căn gợi ý</b> theo ngân sách bạn chọn.", "<b>Bảng giá</b> FPT Plaza 3, 4 và giỏ hàng chuyển nhượng Plaza 1, 2.", "<b>Mặt bằng</b> tầng điển hình & layout căn hộ.", "<b>Thông tin FPT Plaza 5</b> ngay khi có."] })}
@@ -431,6 +439,7 @@ ${hero({
 ${gotoSec("Chuỗi căn hộ FPT Plaza 1 – 5", plazaTiles(""), "Căn hộ")}
 ${gotoSec("Đất nền theo phân khu V1 – V6", zoneTiles(""), "Đất nền")}
 ${band("Bạn đã biết ngân sách của mình mua được gì ở FPT City chưa?", "Nhận 3 gợi ý phù hợp")}
+${illusSection("chuoi-fpt-plaza", "Quy mô", "Chuỗi căn hộ FPT Plaza 1–5 trong một biểu đồ", "Biểu đồ quy mô căn hộ FPT Plaza 1, 2, 3, 4, 5 tại FPT City Đà Nẵng", 730)}
 ${distances()}
 ${amenities()}
 ${ctaSection({ title: "Nhận bảng giá FPT City: đất nền & căn hộ trong một lần", intro: "Để lại thông tin, bạn nhận được:", formTitle: "Ngân sách của bạn hợp với sản phẩm nào?", formHtml: form("c", { button: "Gửi tôi 3 gợi ý phù hợp nhất", budget: ["Dưới 2 tỷ", "2 – 4 tỷ", "4 – 6 tỷ", "6 – 10 tỷ", "Trên 10 tỷ"] }), steps: ["<b>3 gợi ý</b> theo ngân sách (đất nền hoặc căn hộ).", "<b>Bản đồ phân lô</b> V1 – V6 và giỏ hàng đất nền.", "<b>Bảng giá & mặt bằng</b> căn hộ FPT Plaza 1 – 5.", "<b>Chính sách</b> thanh toán, hỗ trợ vay ngân hàng."] })}
