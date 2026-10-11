@@ -594,7 +594,7 @@
     $("evPending").innerHTML = pending.length ? pending.map((p, i) => `
       <figure class="img"><img src="${p.preview || p.url}" alt="${esc(p.file.name)}">
         <figcaption><span class="fname" title="${esc(p.file.name)}">${esc(p.file.name)}</span>
-          ${p.note ? `<small class="muted">${esc(p.note)}</small>` : ""}
+          ${p.note ? `<small class="muted">${esc(p.note)}${p.text != null ? ` · <button type="button" class="link small" data-ocrtext="${i}">xem chữ đọc được</button>` : ""}</small>` : ""}
           <small class="req">Cần khoanh: ${esc(reqOf(p.nenTang, p.loai))}</small>
           ${campaignRows(p, i)}
           <div class="row"><select data-p="${i}" data-f="nenTang">${PLATFORMS.map((x) => opt(x, PLATFORM_LABEL[x], p.nenTang)).join("")}</select>
@@ -694,6 +694,25 @@
     saved.forEach((r) => { S.SoLieu = S.SoLieu.filter((x) => x.id !== r.id).concat(r); });
     return saved.length;
   }
+  /** Hộp xem/chép một đoạn chữ dài (chữ đọc được từ ảnh…). */
+  function showText(title, text, note) {
+    let box = document.getElementById("textBox");
+    if (!box) {
+      box = document.createElement("div");
+      box.id = "textBox";
+      box.className = "weekpick";
+      box.style.cssText = "top:10%;width:min(720px,calc(100% - 32px));flex-direction:column;align-items:stretch";
+      box.innerHTML = `<b data-t></b><small class="muted" data-n></small><textarea readonly rows="14" style="width:100%;font:12px/1.4 monospace"></textarea>
+        <div class="row" style="justify-content:flex-end;gap:8px"><button type="button" class="ghost small" data-copy>Chép</button><button type="button" class="small" data-close>Đóng</button></div>`;
+      document.body.appendChild(box);
+      box.querySelector("[data-close]").onclick = () => { box.hidden = true; };
+      box.querySelector("[data-copy]").onclick = () => copyText(box.querySelector("textarea").value, "chữ đọc được");
+    }
+    box.querySelector("[data-t]").textContent = title;
+    box.querySelector("[data-n]").textContent = note || "";
+    box.querySelector("textarea").value = text || "(không đọc được chữ nào)";
+    box.hidden = false;
+  }
   /** Đọc lại số từ một ảnh đã lưu (ảnh tải lên trước khi app đọc được loại màn hình đó). */
   async function rereadEvidence(id) {
     const r = S.ChungTu.find((x) => x.id === id);
@@ -706,7 +725,11 @@
       else { toast("Đang đọc chữ trong ảnh…", "busy"); text = (await (await B.ocrWorker()).recognize(file)).data.text || ""; }
     } catch (e) { return toast("Không đọc được ảnh: " + e.message, "err"); }
     const camps = B.extractCampaigns(text).map((c) => Object.assign(c, { use: dateInWeek(c.date, r.tuan) }));
-    if (!camps.length) return toast(`Không đọc ra số chi tiêu trong ${r.tenFile}. Dùng "+ Điền số tay" khi tải ảnh hoặc nhập ở tab Nhập số liệu.`, "err");
+    if (!camps.length) {
+      toast(`Không đọc ra số chi tiêu trong ${r.tenFile}. Dùng "+ Điền số tay" khi tải ảnh hoặc nhập ở tab Nhập số liệu.`, "err");
+      showText(`Chữ app đọc được trong ${r.tenFile}`, text, "Không tìm thấy số chi tiêu. Bấm “Chép” và gửi đoạn chữ này cho người cài app để chỉnh bộ đọc số.");
+      return;
+    }
     const list = camps.map((c) => `${c.use ? "☑" : "☐"} ${c.name}: ${fmtInt(c.spent)} đ` + (c.clicks != null ? ` · ${fmtInt(c.clicks)} nhấp` : "") +
       (c.impressions != null ? ` · ${fmtInt(c.impressions)} hiển thị` : "") + (c.results ? ` · ${fmtInt(c.results)} ${RESULT_LABEL[c.resultType] || ""}` : "")).join("\n");
     if (!camps.some((c) => c.use)) camps.forEach((c) => (c.use = true));
@@ -1106,6 +1129,8 @@
       if (t.tagName === "SELECT") renderEvidence();
     });
     $("evPending").addEventListener("click", (e) => {
+      const oi = e.target.dataset.ocrtext;
+      if (oi != null) { showText(`Chữ app đọc được trong ${pending[oi].file.name}`, pending[oi].text); return; }
       const ai = e.target.dataset.addcamp;
       if (ai != null) {
         const p = pending[ai];

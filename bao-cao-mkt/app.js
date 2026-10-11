@@ -1014,15 +1014,21 @@
     N.forEach((n, i) => LBL.forEach(([k, re]) => { if (at[k] == null && re.test(n)) at[k] = i; }));
     const row = scorecardRow(lines, N, LBL);
     if (row) {
-      // chi phí: ưu tiên số có ký hiệu tiền (đ/₫) lớn nhất ngay dưới hàng nhãn (số trên thẻ hay bị mũi tên ❯ che mất "đ")
-      let best = 0;
+      // Không dựa hết vào thứ tự nhãn/số (ô chữ trắng nền xanh hay bị đọc sót → lệch cột):
+      // chi phí = số tiền "đ" lớn nhất ngay dưới hàng nhãn, CPC = số tiền nhỏ nhất, lần nhấp ≈ chi phí ÷ CPC.
+      const ms = [];
       for (let i = row.at; i < Math.min(lines.length, row.at + 5); i++) {
         if (/\/\s*ngay|ngan sach/.test(N[i])) continue;
-        money(lines[i]).forEach((m) => { if (m.v > best) best = m.v; });
+        money(lines[i]).forEach((m) => ms.push(m.v));
       }
-      if (best && best > (row.cpc || 0)) row.cost = best;
+      const hi = ms.length ? Math.max(...ms) : 0, lo = ms.length ? Math.min(...ms) : 0;
+      if (hi && lo && hi > lo) {
+        row.cost = hi; row.cpc = lo;
+        const est = hi / lo;
+        if (!(row.clicks && Math.abs(row.clicks - est) <= Math.max(1, est * 0.2))) row.clicks = Math.round(est);
+        if (row.impressions && (row.impressions < row.clicks || row.impressions === lo || row.impressions === hi)) row.impressions = null;
+      } else if (hi && hi > (row.cpc || 0)) row.cost = hi;
       if (row.cost && row.cpc && row.cost <= row.cpc) row.cost = 0; // chi phí không thể ≤ CPC: đọc nhầm
-      if (row.cost && row.clicks && row.cpc && Math.abs(row.cost - row.clicks * row.cpc) > row.cost * 0.2) row.cost = 0; // chi phí ≈ nhấp × CPC
       if (row.cost) return finishGoogle(lines, N, row);
     }
     if (at.cost == null) return null;
@@ -1097,8 +1103,10 @@
       while (start < end && /^(tao|tong|quan)$/.test(nw[start])) start++;
       name = words.slice(start, end).join(" ").trim();
       for (let k = ci - 1; !name && k >= 0 && k >= ci - 3; k--) if (lines[k].replace(/\W/g, "").length > 3) name = lines[k].trim();
+      // tên nằm ngay dưới (thanh tiêu đề bị đọc đảo dòng): dòng có [Search]/[PMax]… hoặc có dấu "-"/"–"
+      if (!name && lines[ci + 1] && /^\[|[-–—|]/.test(lines[ci + 1]) && !/:/.test(lines[ci + 1])) name = lines[ci + 1].trim();
     }
-    const d = N.map((n) => /thang\s*(\d{1,2})\s+(\d{1,2})\s*[-–]\s*\d{1,2}/.exec(n) || /(\d{1,2})\s*thg\s*(\d{1,2})/.exec(n)).find(Boolean);
+    const d = N.map((n) => /thang\s*(\d{1,2})\s+(\d{1,2})\s*[-–—‒]\s*\d{1,2}/.exec(n) || /(\d{1,2})\s*thg\s*(\d{1,2})/.exec(n)).find(Boolean);
     const date = d ? (/thang/.test(d[0]) ? `${d[2]}/${d[1]}` : `${d[1]}/${d[2]}`) : "";
     return { name: name || (date ? "Chiến dịch " + date : "Chiến dịch"), spent: cost, results: val.conv != null ? val.conv : null, resultType: val.conv != null ? "lead" : "",
       date, status: "", clicks: val.clicks != null ? val.clicks : null, impressions: val.impressions != null ? val.impressions : null,
