@@ -85,7 +85,7 @@ ${note ? `<p class="small" style="margin-top:12px">${esc(note)}</p>` : ""}</div>
 const head = (h) => `
 <div style="text-align:center;max-width:780px;margin:0 auto 32px"><p class="eyebrow">${esc(h.eyebrow)}</p><h2 class="title">${esc(h.title)}</h2>${h.sub ? `<p style="color:var(--muted)">${h.sub}</p>` : ""}</div>`;
 
-const MH = `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/@@SHA@@/website/public/assets/img/minh-hoa`;
+const MH = `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/c547024a8d8088b87d1349ddb42c15051f0a41c6/website/public/assets/img/minh-hoa`;
 const illus = (file, alt, h) => `<figure style="margin:0"><img src="${MH}/${file}.webp" alt="${esc(alt)}" width="1200" height="${h}" loading="lazy"></figure>`;
 const illusSection = (file, eyebrow, title, alt, h) => `<section><div class="wrap">${head({ eyebrow, title })}<div style="max-width:960px;margin:0 auto">${illus(file, alt, h)}</div></div></section>`;
 const distances = () => `
