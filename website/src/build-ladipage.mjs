@@ -130,8 +130,8 @@ const band = (text, btn) => `<section class="hook"><div class="wrap"><div><h2>${
 
 const tile = (href, pill, title, text, go) => `<a class="tile" href="${href}">${pill}<h3>${esc(title)}</h3><p>${esc(text)}</p><span class="go">${esc(go)} →</span></a>`;
 const plazaPill = (p) => `<span class="pill ${p.status === "upcoming" ? "up" : p.status === "resale" ? "re" : "on"}">${esc(p.statusLabel)}</span>`;
-const plazaTiles = (except) => `<div class="grid-auto">${plazas.filter((p) => p.slug !== except).map((p) => tile(link(p.slug), plazaPill(p), p.name, p.specs.slice(0, 2).map((s) => s[1]).join(" · "), "Xem " + p.name)).join("")}</div>`;
-const zoneTiles = (except) => `<div class="grid-auto">${zones.filter((z) => z.slug !== except).map((z) => tile(link(z.slug), `<span class="code">${z.code}</span>`, "Phân khu " + z.code, z.traits[0], "Xem lô " + z.code)).join("")}</div>`;
+const plazaTiles = (except) => `<div class="grid-auto n${plazas.filter((p) => p.slug !== except).length}">${plazas.filter((p) => p.slug !== except).map((p) => tile(link(p.slug), plazaPill(p), p.name, p.specs.slice(0, 2).map((s) => s[1]).join(" · "), "Xem " + p.name)).join("")}</div>`;
+const zoneTiles = (except) => `<div class="grid-auto n${zones.filter((z) => z.slug !== except).length}">${zones.filter((z) => z.slug !== except).map((z) => tile(link(z.slug), `<span class="code">${z.code}</span>`, "Phân khu " + z.code, z.traits[0], "Xem lô " + z.code)).join("")}</div>`;
 const gotoSec = (title, inner, eyebrow = "Khám phá thêm") => `<section><div class="wrap">${head({ eyebrow, title })}${inner}</div></section>`;
 
 const footer = () => `
@@ -324,7 +324,7 @@ for (const p of plazas) {
   const plans = isFp4 ? floorplanBlock(p) + illusSection("loai-can-" + p.slug, "Loại căn", `Loại căn & diện tích ${p.name}`, `Loại căn và diện tích tham khảo ${p.name} Đà Nẵng`) : `
 <section id="mat-bang" class="tint"><div class="wrap">
   ${head({ eyebrow: "Mặt bằng & loại căn", title: `Loại căn hộ & diện tích ${p.name}`, sub: "Diện tích tham khảo. Mặt bằng, layout chi tiết có trong bộ tài liệu dự án." })}
-  <div class="grid-auto">${p.units.map(([t, a]) => `<div class="tile"><span class="pill">${esc(t)}</span><h3>${esc(a)}</h3><p>Căn ${esc(t)} tại ${esc(p.name)}</p><a class="go" href="#dang-ky">Xem giá & layout →</a></div>`).join("")}</div>
+  <div class="grid-auto n${p.units.length}">${p.units.map(([t, a]) => `<div class="tile"><span class="pill">${esc(t)}</span><h3>${esc(a)}</h3><p>Căn ${esc(t)} tại ${esc(p.name)}</p><a class="go" href="#dang-ky">Xem giá & layout →</a></div>`).join("")}</div>
   <div style="max-width:860px;margin:24px auto 0">${illus("loai-can-" + p.slug, `Loại căn và diện tích tham khảo ${p.name} Đà Nẵng`)}</div>
 </div></section>`;
   const st = p.status === "resale" ? "Chuyển nhượng" : p.status === "upcoming" ? "Sắp mở bán (dự kiến)" : "Đang bán";

@@ -130,7 +130,12 @@ footer a{color:#fff}
 .crumbs a{color:#fff}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.grid-auto{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+/* ô chia đều theo số lượng: 6 → 3+3, 5 → 3+2 (căn giữa), 4 → 2+2, 2 → 2 */
+.grid-auto{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
+.grid-auto>*{flex:0 0 calc((100% - 32px)/3);box-sizing:border-box}
+.grid-auto.n2>*,.grid-auto.n4>*{flex-basis:calc((100% - 16px)/2)}
+@media (max-width:980px){.grid-auto>*{flex-basis:calc((100% - 16px)/2)}.grid-auto.n3>*{flex-basis:100%}}
+@media (max-width:600px){.grid-auto>*,.grid-auto.n2>*,.grid-auto.n4>*{flex-basis:100%}}
 .tile{display:block;background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;text-decoration:none;color:var(--ink)}
 .tile h3{font-size:19px;color:var(--navy-800);margin:6px 0}
 .tile p{margin:0 0 10px;color:var(--muted);font-size:14px}
@@ -237,7 +242,7 @@ footer a{color:#fff}
 <section id="mat-bang" class="tint"><div class="wrap">
   
 <div style="text-align:center;max-width:780px;margin:0 auto 32px"><p class="eyebrow">Mặt bằng &amp; loại căn</p><h2 class="title">Loại căn hộ &amp; diện tích FPT Plaza 3</h2><p style="color:var(--muted)">Diện tích tham khảo. Mặt bằng, layout chi tiết có trong bộ tài liệu dự án.</p></div>
-  <div class="grid-auto"><div class="tile"><span class="pill">1PN</span><h3>từ ~41,9 m²</h3><p>Căn 1PN tại FPT Plaza 3</p><a class="go" href="#dang-ky">Xem giá & layout →</a></div><div class="tile"><span class="pill">2PN</span><h3>~54,6 – 67 m²</h3><p>Căn 2PN tại FPT Plaza 3</p><a class="go" href="#dang-ky">Xem giá & layout →</a></div><div class="tile"><span class="pill">3PN</span><h3>~75 – 90 m²</h3><p>Căn 3PN tại FPT Plaza 3</p><a class="go" href="#dang-ky">Xem giá & layout →</a></div><div class="tile"><span class="pill">3PN+1</span><h3>~122,8 – 123,5 m²</h3><p>Căn 3PN+1 tại FPT Plaza 3</p><a class="go" href="#dang-ky">Xem giá & layout →</a></div></div>
+  <div class="grid-auto n4"><div class="tile"><span class="pill">1PN</span><h3>từ ~41,9 m²</h3><p>Căn 1PN tại FPT Plaza 3</p><a class="go" href="#dang-ky">Xem giá & layout →</a></div><div class="tile"><span class="pill">2PN</span><h3>~54,6 – 67 m²</h3><p>Căn 2PN tại FPT Plaza 3</p><a class="go" href="#dang-ky">Xem giá & layout →</a></div><div class="tile"><span class="pill">3PN</span><h3>~75 – 90 m²</h3><p>Căn 3PN tại FPT Plaza 3</p><a class="go" href="#dang-ky">Xem giá & layout →</a></div><div class="tile"><span class="pill">3PN+1</span><h3>~122,8 – 123,5 m²</h3><p>Căn 3PN+1 tại FPT Plaza 3</p><a class="go" href="#dang-ky">Xem giá & layout →</a></div></div>
   <div style="max-width:860px;margin:24px auto 0"><figure style="margin:0"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/a7fa3ca2810dce8090a6e56526446f4a93f7817b/website/public/assets/img/minh-hoa/loai-can-fpt-plaza-3.webp" alt="Loại căn và diện tích tham khảo FPT Plaza 3 Đà Nẵng" width="1200" height="595" loading="lazy"></figure></div>
 </div></section>
 
