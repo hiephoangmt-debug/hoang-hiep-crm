@@ -115,6 +115,8 @@
   .evbar { margin:8px 0 2px; gap:6px; flex-wrap:wrap; }
   .evbar .danger { background:var(--err); color:#fff; }
   .evbar .danger:disabled { opacity:.45; cursor:not-allowed; }
+  .weekpick { position:fixed; left:50%; top:30%; transform:translateX(-50%); z-index:50; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px; box-shadow:0 8px 30px rgba(0,0,0,.25); display:flex; gap:10px; align-items:end; flex-wrap:wrap; max-width:calc(100% - 32px); }
+  .weekpick[hidden] { display:none; }
   .fname { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:600; }
   .row { display:flex; gap:4px; margin-top:4px; align-items:center; }
   .row select { flex:1; font-size:12px; padding:4px; }
@@ -133,7 +135,7 @@
 </style>
 </head>
 <body>
-<div id="loading">Đang tải CRM… <small class="muted">(giao diện v11)</small></div>
+<div id="loading">Đang tải CRM… <small class="muted">(giao diện v12)</small></div>
 <div id="diag" style="max-width:760px;margin:0 auto;padding:0 16px;color:#b42318;font-size:13px"></div>
 <script>
   // Báo lỗi ngay trên màn hình (để biết trang dừng ở đâu khi không mở được bảng điều khiển trình duyệt)
@@ -264,10 +266,14 @@
   </main>
 </div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
+<div id="weekPick" class="weekpick" hidden>
+  <label>Chọn một ngày bất kỳ trong tuần cần báo cáo<input type="date" id="weekPickDate"></label>
+  <button type="button" id="weekPickClose" class="ghost small">Đóng</button>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@fc0fde89317d120ef619df2a51e85b3319931f36/bao-cao-mkt/config.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@fc0fde89317d120ef619df2a51e85b3319931f36/bao-cao-mkt/app.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@fc0fde89317d120ef619df2a51e85b3319931f36/crm/crm.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@ba7d9f110d689d4269a1216da5fc2f051e114c14/bao-cao-mkt/config.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@ba7d9f110d689d4269a1216da5fc2f051e114c14/bao-cao-mkt/app.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@ba7d9f110d689d4269a1216da5fc2f051e114c14/crm/crm.js"></script>
 </body>
 </html>

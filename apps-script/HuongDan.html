@@ -75,12 +75,28 @@
     <a class="btn" data-app="?donvi=tatiinvest" href="__APP_URL__?donvi=tatiinvest">Mở app · TATI INVEST (Casamia)</a>
   </div>
   <nav class="toc">
+    <a href="#viec">Việc của sale</a>
     <a href="#chup">1. Chụp nghiệm thu</a>
     <a href="#gui">2. Gửi lên app</a>
-    <a href="#so">3. Kiểm tra số liệu</a>
+    <a href="#so">3. Điền số liệu (Sheet)</a>
     <a href="#bc">4. Báo cáo (quản lý)</a>
     <a href="#loi">5. Gặp lỗi</a>
   </nav>
+
+  <!-- VIỆC CỦA SALE -->
+  <section id="viec">
+    <h2>Việc của sale mỗi tuần (làm theo thứ tự)</h2>
+    <p class="note">Hạn chót: <b>sáng thứ 2</b> cho tuần vừa chạy (thứ 2 – chủ nhật). Chỉ làm cho <b>tài khoản quảng cáo của mình</b> và <b>kênh mình có chạy</b>; kênh không chạy thì bỏ qua.</p>
+    <div class="wrap"><table>
+      <tr><th>#</th><th>Việc</th><th>Làm ở đâu</th><th>Xem mục</th></tr>
+      <tr><td>1</td><td>Chụp ảnh <b>Chiến dịch</b> (lọc đúng ngày của tuần), ảnh <b>QC đang chạy</b>, tải/chụp <b>Hoá đơn</b> – mỗi kênh đã chạy</td><td>Trình quản lý quảng cáo Facebook / TikTok / Zalo / Google</td><td><a href="#chup">1</a></td></tr>
+      <tr><td>2</td><td>Gửi tất cả ảnh + PDF hoá đơn lên app, kiểm tra Kênh · Loại · Tên, tick chiến dịch của tuần → <b>Tải lên Drive</b></td><td>App › tab Ảnh &amp; chứng từ</td><td><a href="#gui">2</a></td></tr>
+      <tr><td>3</td><td>Bảng <b>Kiểm tra nghiệm thu</b> không còn ô đỏ "Thiếu"</td><td>App › tab Ảnh &amp; chứng từ</td><td><a href="#gui">2</a></td></tr>
+      <tr><td>4</td><td>Mở Google Sheet số liệu của dự án, điền <b>các cột ghi "Sale tự điền"</b> trong bảng ở mục 3 (app đã tự điền chi phí, lead)</td><td>Google Sheet dự án (Casamia / Sun)</td><td><a href="#so">3</a></td></tr>
+      <tr><td>5</td><td>Nhắn quản lý "Đã xong nghiệm thu tuần …"</td><td>Nhóm Zalo</td><td></td></tr>
+    </table></div>
+    <p class="warn"><b>Không làm:</b> không sửa dòng/tài khoản của người khác; không xoá, chèn, gộp dòng hay cột trong Google Sheet; không gõ vào ô có công thức (Frequency, CTR, CPM) và dòng <b>TỔNG</b>; không tạo báo cáo PDF (quản lý làm).</p>
+  </section>
 
   <!-- 1. CHỤP NGHIỆM THU -->
   <section id="chup">
@@ -134,7 +150,7 @@
     <p class="note">Lần đầu: mở nút đỏ đầu trang, đăng nhập tài khoản Google. Điện thoại có nhiều tài khoản Google mà trang trắng/báo lỗi → mở bằng tab ẩn danh. Lưu ra màn hình chính: <b>Chia sẻ › Thêm vào màn hình chính</b>.</p>
 
     <div class="step"><span class="n">1</span><div>
-      Mở tab <b class="k">Ảnh &amp; chứng từ</b>, chọn <b>Tuần</b>, <b>Dự án</b> và <b>tên mình</b>.
+      Mở tab <b class="k">Ảnh &amp; chứng từ</b>, chọn <b>Tuần</b>, <b>Dự án</b> và <b>tên mình</b>. Ô Tuần có sẵn khoảng 20 tuần gần nhất; tuần cũ hơn thì chọn mục cuối <b>"Tuần khác… (chọn ngày trên lịch)"</b> rồi bấm một ngày bất kỳ trong tuần đó.
       <div class="mock"><div class="bar">
         <label>Tuần<span class="sel hl">05/10 – 11/10</span></label>
         <label>Dự án<span class="sel hl">Sun</span></label>
@@ -178,13 +194,29 @@
   </section>
 
   <section id="so">
-    <h2>3. Kiểm tra số liệu</h2>
-    <ol>
-      <li>Tab <b class="k">Nhập số liệu</b> › chọn tuần, dự án, tên mình.</li>
-      <li>Sửa trực tiếp trong bảng: ngân sách thực chạy, chi phí (+phí), LEAD, MQL, SQL, DEAL, hiển thị, tiếp cận, lượt nhấp…; CTR, CPM, tần suất tự tính.</li>
-      <li>Bấm <b class="k">Lưu thay đổi</b> trên thanh dưới cùng.</li>
-    </ol>
-    <p class="note">Nếu một người vừa có số nhập tay/từ Google Sheet vừa có số đọc từ ảnh, chỉ số nhập tay/Sheet được tính.</p>
+    <h2>3. Điền số liệu vào Google Sheet của dự án</h2>
+    <p>Mỗi dự án có 1 Google Sheet số liệu (Casamia, Sun – link do quản lý gửi, hoặc trong app › tab Danh mục). Bố cục:</p>
+    <ul>
+      <li><b>Cột A "Thời gian"</b>: mỗi tuần một khối <b>4 dòng</b>, ví dụ <code>05/10 - 11/10</code>. Điền vào đúng khối tuần đang báo cáo.</li>
+      <li><b>Mỗi kênh một nhóm 11 cột</b>: Facebook → Tiktok → Zalo → Google. Điền vào nhóm cột của kênh đã chạy.</li>
+      <li><b>Mỗi tài khoản quảng cáo một dòng</b> trong khối tuần. Dòng nào đã có ID tài khoản của bạn thì điền tiếp vào dòng đó; chưa có thì dùng dòng trống đầu tiên.</li>
+    </ul>
+    <div class="wrap"><table>
+      <tr><th>Cột</th><th>Ai điền</th><th>Lấy số ở đâu</th></tr>
+      <tr><td><b>ID tài khoản</b></td><td>App tự điền khi bạn gửi ảnh (nếu trống: gõ <code>Tên + ID</code>, ví dụ <code>Phan Hạnh 391127499725110</code>)</td><td>ID tài khoản quảng cáo (trên thanh địa chỉ, đoạn <code>act=</code>, hoặc góc trên Trình quản lý)</td></tr>
+      <tr><td><b>Chi phí thực chạy</b></td><td>App tự điền từ ảnh chiến dịch – kiểm tra lại</td><td>Cột "Số tiền đã chi tiêu" / "Chi phí" của các chiến dịch trong tuần, chưa gồm VAT/phí</td></tr>
+      <tr style="background:var(--errbg)"><td><b>Chi phí thực chạy (+gồm phí nền tảng)</b></td><td><b>Sale tự điền</b></td><td>Tổng tiền trên <b>hoá đơn</b> của tuần (đã gồm VAT/phí nền tảng)</td></tr>
+      <tr><td><b>Lead (lead thực tế nhận)</b></td><td>App tự điền từ ảnh – <b>sửa thành số lead thực tế bạn nhận</b> nếu khác</td><td>Số khách để lại thông tin thực tế trong tuần</td></tr>
+      <tr style="background:var(--errbg)"><td><b>Impressions (hiển thị)</b></td><td><b>Sale tự điền</b></td><td>Cột "Lượt hiển thị" / "Số lần hiển thị" (Impressions)</td></tr>
+      <tr style="background:var(--errbg)"><td><b>Reach (tiếp cận)</b></td><td><b>Sale tự điền</b></td><td>Cột "Người tiếp cận" / "Phạm vi tiếp cận" (Reach). Google không có thì để trống</td></tr>
+      <tr><td>Frequency (tần suất)</td><td>Tự tính – <b>không gõ</b></td><td>= Impressions ÷ Reach</td></tr>
+      <tr style="background:var(--errbg)"><td><b>Lượt nhấp</b></td><td><b>Sale tự điền</b></td><td>Cột "Lượt click vào liên kết" / "Lượt nhấp" (Clicks)</td></tr>
+      <tr><td>CTR, CPM</td><td>Tự tính – <b>không gõ</b></td><td>CTR = Lượt nhấp ÷ Hiển thị; CPM = Chi phí ÷ Hiển thị × 1000</td></tr>
+      <tr><td><b>Lượt xem</b></td><td>App tự điền nếu ảnh có số ThruPlay/lượt xem; không có thì sale điền (chiến dịch video)</td><td>Cột "Lượt phát ThruPlay" / "Lượt xem video"</td></tr>
+    </table></div>
+    <p class="note">Các dòng tô đỏ là cột <b>sale phải tự điền</b>. Cách lấy nhanh: trong Trình quản lý quảng cáo, chọn khoảng ngày của tuần, tick các chiến dịch của mình → dòng tổng ở cuối bảng có đủ Chi tiêu, Hiển thị, Tiếp cận, Lượt nhấp.</p>
+    <p class="tip">Gõ số không cần dấu chấm (ví dụ <code>1218866</code>); Sheet tự định dạng. Ô app đã điền có ghi chú "Tự điền từ ảnh nghiệm thu (CRM)" – sửa tay được, nhưng nếu sửa thì xoá ghi chú để app không ghi đè lần sau.</p>
+    <p class="note">Trong app (tab <b class="k">Nhập số liệu</b>) cũng xem và sửa được số của mình: chọn tuần, dự án, tên → sửa trong bảng → <b class="k">Lưu thay đổi</b>. Quản lý sẽ bấm "Nhập từ Google Sheet của dự án" để lấy số cuối cùng từ Sheet vào báo cáo.</p>
   </section>
 
   <section id="bc">
@@ -213,6 +245,6 @@
     if (a.getAttribute("href").indexOf("__APP" + "_URL__") === 0) a.hidden = true;
   });
 </script>
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@fc0fde89317d120ef619df2a51e85b3319931f36/crm/huong-dan.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@ba7d9f110d689d4269a1216da5fc2f051e114c14/crm/huong-dan.js"></script>
 </body>
 </html>
