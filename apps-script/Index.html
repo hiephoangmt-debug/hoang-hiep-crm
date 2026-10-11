@@ -81,7 +81,7 @@
         <div class="grid" style="margin-top:8px">
           <label>PPTX mẫu<input type="file" id="templateFile" accept=".pptx"></label>
           <label>Số liệu (.xlsx)<input type="file" id="dataFile" accept=".xlsx,.xls,.csv"></label>
-          <label>Thêm ảnh<input type="file" id="imgFiles" accept="image/png,image/jpeg" multiple></label>
+          <label>Thêm ảnh<input type="file" id="imgFiles" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" multiple></label>
         </div>
       </details>
     </section>
@@ -564,6 +564,21 @@ window.BAO_CAO_MKT_CONFIG = {
     });
   }
 
+  /** PowerPoint chỉ chắc chắn đọc PNG/JPEG: ảnh khác (webp, gif, bmp) được vẽ lại thành PNG. */
+  async function embeddable(f) {
+    const type = f.type || "";
+    const ext = (f.name.split(".").pop() || "").toLowerCase();
+    if (type === "image/png" || (!type && ext === "png")) return { data: await f.arrayBuffer(), ext: "png" };
+    if (type === "image/jpeg" || (!type && /^jpe?g$/.test(ext))) return { data: await f.arrayBuffer(), ext: "jpeg" };
+    const bmp = await createImageBitmap(f);
+    const c = document.createElement("canvas");
+    c.width = bmp.width;
+    c.height = bmp.height;
+    c.getContext("2d").drawImage(bmp, 0, 0);
+    const blob = await new Promise((res) => c.toBlob(res, "image/png"));
+    return { data: await blob.arrayBuffer(), ext: "png" };
+  }
+
   /** Thay ảnh demo bằng ảnh chứng từ (xếp lưới trong khung demo), bỏ số chú thích và dòng "*Demo". */
   async function placeImages(zip, s, files, state) {
     const doc = s.doc, frame = s.frame;
@@ -579,12 +594,11 @@ window.BAO_CAO_MKT_CONFIG = {
     const ch = Math.floor((B.h - gap * (rowsN - 1)) / rowsN);
     for (let k = 0; k < n; k++) {
       const f = files[k];
-      const ext = f.type === "image/png" ? "png" : f.type === "image/jpeg" ? "jpeg"
-        : (f.name.split(".").pop() || "png").toLowerCase().replace("jpg", "jpeg");
+      const { data, ext } = await embeddable(f);
       state.media += 1;
-      const mediaName = `bcmkt_${state.media}.${ext === "jpeg" ? "jpeg" : "png"}`;
-      zip.file("ppt/media/" + mediaName, await f.arrayBuffer());
-      state.exts.add(ext === "jpeg" ? "jpeg" : "png");
+      const mediaName = `bcmkt_${state.media}.${ext}`;
+      zip.file("ppt/media/" + mediaName, data);
+      state.exts.add(ext);
       let rid = 1;
       while (usedIds.has("rId" + rid)) rid++;
       usedIds.add("rId" + rid);
@@ -862,7 +876,7 @@ window.BAO_CAO_MKT_CONFIG = {
   const XLSX_MIME = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
   const PPTX_MIME = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
   const FOLDER_MIME = "application/vnd.google-apps.folder";
-  const IMG_MIMES = ["image/png", "image/jpeg"];
+  const IMG_MIMES = ["image/png", "image/jpeg", "image/webp", "image/gif", "image/bmp"];
 
   /** Lấy ID từ link Drive/Sheets (hoặc chính ID). */
   function parseDriveId(link) {
