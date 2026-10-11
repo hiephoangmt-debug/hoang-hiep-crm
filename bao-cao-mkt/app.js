@@ -992,6 +992,13 @@
         break;
       }
     }
+    // ID tài khoản in trên ảnh dù chưa có trong Danh mục: act=… (link Facebook), "ID tài khoản: …", Google 851-117-7492
+    if (!res.account) {
+      const n = norm(text);
+      const m = /act\s*[=.:]\s*(\d{10,})/.exec(n) || /(?:id tai khoan|tai khoan quang cao|tai khoan|account id|advertiser id|ma tai khoan)\s*[:#]?\s*(\d{3}-\d{3}-\d{4}|\d{10,})/.exec(n) ||
+        /(?:google ads|tai khoan)[^\n]{0,40}?\b(\d{3}-\d{3}-\d{4})\b/.exec(n) || /\n\s*(\d{3}-\d{3}-\d{4})\s*(?:\n|$)/.exec("\n" + n + "\n");
+      if (m) res.account = m[1];
+    }
     if (!res.staff) {
       const hits = (ctx.staffList || []).map((st) => [st, t.split(compact(st)).length - 1]).filter((x) => x[1] > 0)
         .sort((a, b) => b[1] - a[1]);

@@ -547,6 +547,14 @@ function crmWriteSheet(duAn, tuan, items) {
       var cell = function (r) { return String(vals[r][c.taiKhoan] || ''); };
       var row = rows.filter(function (r) { return id && crmDigits_(cell(r)) === id; })[0];
       if (row == null && !id && name) row = rows.filter(function (r) { return crmPlain_(cell(r)).indexOf(name) >= 0; })[0];
+      if (row == null && id && name) {
+        // dòng app đã ghi trước đó chỉ có tên (chưa biết ID): dùng lại và thêm ID vào nhãn
+        row = rows.filter(function (r) { return crmPlain_(cell(r)) === name && mine(r, c.taiKhoan); })[0];
+        if (row != null) {
+          var lb = (it.nhanSu + ' ' + id).trim();
+          sh.getRange(row + 1, c.taiKhoan + 1).setValue(lb).setNote(SHEET_NOTE); vals[row][c.taiKhoan] = lb;
+        }
+      }
       if (row == null) {
         row = rows.filter(function (r) {
           return !used[plat + r] && !cell(r).trim() && ['chiPhi', 'chiPhiPhi', 'lead'].every(function (k) { return c[k] == null || forms[r][c[k]] || vals[r][c[k]] === '' || vals[r][c[k]] === null; });

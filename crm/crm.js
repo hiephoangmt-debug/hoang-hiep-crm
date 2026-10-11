@@ -693,10 +693,12 @@
       if (r.kind) p.loai = r.kind;
       if (r.platform) p.nenTang = r.platform;
       if (r.staff && r.by === "id") p.nhanSu = r.staff;
+      p.account = r.account || "";
       p.campaigns = p.loai === "hoadon" ? [] : B.extractCampaigns(p.text || "").map((c) => Object.assign(c, { use: dateInWeek(c.date, w) || (!!c.until && dateInWeek(c.until, w)) }));
       // không đọc ra số: mở sẵn một dòng điền tay ngay dưới ảnh
       if (p.loai !== "hoadon" && !p.campaigns.length) p.campaigns = [{ manual: true, name: "", spent: 0, results: 0, resultType: "lead", use: false }];
       p.invoice = B.extractInvoice(p.text || "") || { total: 0, vat: null };
+      if (!p.account && p.invoice.account) p.account = p.invoice.account;
       p.note = "Đọc: " + ([r.kind && KINDS[r.kind], r.account && "TK " + r.account,
         p.campaigns.length && p.loai !== "hoadon" && p.campaigns.length + " chiến dịch",
         p.loai === "hoadon" && p.invoice.total && "tổng " + fmtInt(p.invoice.total) + " đ" + (p.invoice.vat != null ? " (VAT " + p.invoice.vat + "%)" : ""),
@@ -723,6 +725,12 @@
     const accs = S.TaiKhoan.filter((t) => t.nhanSu === staff && (!t.nenTang || t.nenTang === platform));
     return accs.length === 1 ? accs[0].maTaiKhoan : "";
   }
+  /** ID tài khoản mới đọc được -> thêm vào Danh mục (lần sau app tự biết ảnh/hoá đơn của ai). */
+  async function rememberAccount(acc, nhanSu, nenTang) {
+    const id = digitsOf(String(acc || "").replace(/-/g, "")) || (/^\d{3}-\d{3}-\d{4}$/.test(acc || "") ? acc.replace(/-/g, "") : "");
+    if (!id || !nhanSu || S.TaiKhoan.some((t) => digitsOf(String(t.maTaiKhoan).replace(/-/g, "")) === id)) return;
+    try { S.TaiKhoan.push(await gas("crmSave", "TaiKhoan", { maTaiKhoan: acc, nenTang, nhanSu })); } catch (e) { console.error(e); }
+  }
   /** Lưu các chiến dịch đã tick (đọc từ ảnh / điền tay) thành dòng số liệu nguồn "anh". Trả số dòng đã lưu. */
   async function saveCampaignRows(campaigns, m) {
     const chosen = (campaigns || []).filter((c) => c.use && (c.spent || (c.manual && c.results)))
@@ -733,7 +741,7 @@
       const prev = S.SoLieu.find((x) => x.nguon === "anh" && x.tuan === m.tuan && x.duAn === m.duAn && x.nhanSu === m.nhanSu && x.chienDich === c.name);
       return {
         id: prev ? prev.id : undefined, tuan: m.tuan, duAn: m.duAn, nhanSu: m.nhanSu, nenTang: m.nenTang,
-        taiKhoan: soleAccount(m.nhanSu, m.nenTang), chienDich: c.name, chiPhi: c.spent, chiPhiPhi: c.spent,
+        taiKhoan: m.account || soleAccount(m.nhanSu, m.nenTang), chienDich: c.name, chiPhi: c.spent, chiPhiPhi: c.spent,
         lead: c.resultType === "lead" ? c.results || 0 : 0, luotXem: c.views != null ? c.views : c.resultType === "thruplay" ? c.results || "" : "",
         mql: "", sql: "", deal: "", hienThi: opt0(c.impressions), tiepCan: opt0(c.reach), luotNhap: opt0(c.clicks),
         ghiChu: (c.manual ? "Nhập tay kèm ảnh " : "Đọc từ ảnh ") + m.file, nguon: "anh",
@@ -741,6 +749,7 @@
     });
     const saved = await gas("crmSaveMany", "SoLieu", rows);
     saved.forEach((r) => { S.SoLieu = S.SoLieu.filter((x) => x.id !== r.id).concat(r); });
+    await rememberAccount(m.account, m.nhanSu, m.nenTang);
     return saved.length;
   }
   /** Dòng số liệu đã lưu từ ảnh r (ghi chú "Đọc từ ảnh …"/"Nhập tay kèm ảnh …"). */
@@ -756,6 +765,7 @@
       <button type="button" class="link small" data-evread="${id}">Đọc số từ ảnh này</button>${sum}
       ${rows.length > 1 ? "" : `<div class="evform" data-evform="${id}">
         <label class="wide">Tên chiến dịch<input data-k="name" placeholder="vd. [Search] Casamia" value="${esc(one ? one.chienDich : "")}"></label>
+        <label class="wide">ID tài khoản QC<input data-k="acc" placeholder="vd. 1591738214779566 / 851-117-7492" value="${esc(one ? one.taiKhoan : soleAccount(r.nhanSu, r.nenTang))}"></label>
         <label>Chi phí (đ)<input data-k="spent" placeholder="0" inputmode="numeric" value="${one ? v(one.chiPhi) : ""}"></label>
         <label>Lead<input data-k="lead" placeholder="0" inputmode="numeric" value="${one ? v(one.lead) : ""}"></label>
         <label>Lượt nhấp<input data-k="clicks" placeholder="0" inputmode="numeric" value="${one ? v(one.luotNhap) : ""}"></label>
@@ -776,7 +786,7 @@
     if (old && old.chienDich !== name) { await gas("crmDelete", "SoLieu", old.id); S.SoLieu = S.SoLieu.filter((x) => x.id !== old.id); }
     const c = { manual: true, use: true, name, spent, results: lead, resultType: "lead",
       clicks: g("clicks") ? Math.round(num(g("clicks"))) : null, impressions: g("impr") ? Math.round(num(g("impr"))) : null };
-    const n = await run("Đang lưu số liệu", () => saveCampaignRows([c], { tuan: r.tuan, duAn: r.duAn, nhanSu: r.nhanSu, nenTang: r.nenTang, file: r.tenFile }));
+    const n = await run("Đang lưu số liệu", () => saveCampaignRows([c], { tuan: r.tuan, duAn: r.duAn, nhanSu: r.nhanSu, nenTang: r.nenTang, file: r.tenFile, account: g("acc") }));
     let note = "";
     try { note = pushNote(await pushToSheet(r.duAn, r.tuan)); } catch (e) { note = " Chưa ghi được vào Google Sheet: " + e.message; }
     toast(`Đã lưu số của ${r.tenFile} (${fmtInt(spent)} đ${lead ? ", " + lead + " lead" : ""}).` + note, "ok");
@@ -851,7 +861,8 @@
       if (inp) { inp.scrollIntoView({ block: "center" }); inp.focus(); }
       return;
     }
-    const list = camps.map((c) => `${c.use ? "☑" : "☐"} ${c.name}: ${fmtInt(c.spent)} đ` + (c.clicks != null ? ` · ${fmtInt(c.clicks)} nhấp` : "") +
+    const accRead = B.classifyText(text, { accounts: S.TaiKhoan.map((t) => ({ account: t.maTaiKhoan, staff: t.nhanSu })), staffList: [] }).account || "";
+    const list = (accRead ? `ID tài khoản: ${accRead}\n` : "ID tài khoản: (không thấy trên ảnh)\n") + camps.map((c) => `${c.use ? "☑" : "☐"} ${c.name}: ${fmtInt(c.spent)} đ` + (c.clicks != null ? ` · ${fmtInt(c.clicks)} nhấp` : "") +
       (c.impressions != null ? ` · ${fmtInt(c.impressions)} hiển thị` : "") + (c.results ? ` · ${fmtInt(c.results)} ${RESULT_LABEL[c.resultType] || ""}` : "")).join("\n");
     const outOfWeek = !camps.some((c) => c.use);
     if (outOfWeek) camps.forEach((c) => (c.use = true));
@@ -862,7 +873,8 @@
       // đọc lại = thay số cũ của ảnh này (kể cả số đọc sai lần trước), không cộng thêm
       const old = rowsOfImage(r).map((x) => x.id);
       if (old.length) { await gas("crmDelete", "SoLieu", old); S.SoLieu = S.SoLieu.filter((x) => !old.includes(x.id)); }
-      return saveCampaignRows(camps.filter((c) => c.use), { tuan: r.tuan, duAn: r.duAn, nhanSu: r.nhanSu, nenTang: r.nenTang, file: r.tenFile });
+      const acc = B.classifyText(text, { accounts: S.TaiKhoan.map((t) => ({ account: t.maTaiKhoan, staff: t.nhanSu })), staffList: [] }).account || "";
+      return saveCampaignRows(camps.filter((c) => c.use), { tuan: r.tuan, duAn: r.duAn, nhanSu: r.nhanSu, nenTang: r.nenTang, file: r.tenFile, account: acc });
     });
     let note = "";
     try { note = pushNote(await pushToSheet(r.duAn, r.tuan)); } catch (e) { note = " Chưa ghi được vào Google Sheet: " + e.message; }
@@ -883,7 +895,8 @@
           soTien: p.loai === "hoadon" && p.invoice ? p.invoice.total || "" : "", vat: p.loai === "hoadon" && p.invoice && p.invoice.vat != null ? p.invoice.vat : "" },
           await B.blobToB64(p.file));
         if (!S.ChungTu.some((x) => x.id === rec.id)) S.ChungTu.push(rec);
-        nRows += await saveCampaignRows(p.campaigns, { tuan: w, duAn: pj, nhanSu: p.nhanSu, nenTang: p.nenTang, file: p.file.name });
+        nRows += await saveCampaignRows(p.campaigns, { tuan: w, duAn: pj, nhanSu: p.nhanSu, nenTang: p.nenTang, file: p.file.name, account: p.account });
+        if (p.loai === "hoadon") await rememberAccount(p.account, p.nhanSu, p.nenTang);
       }
     });
     const invGroups = Array.from(new Set(pending.filter((p) => p.loai === "hoadon" && p.invoice && p.invoice.total).map((p) => p.nhanSu + "|" + p.nenTang)));
