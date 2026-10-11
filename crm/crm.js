@@ -32,8 +32,9 @@
     const m = /^(\d{1,2})\/(\d{1,2})/.exec(label.trim());
     return m ? `${year}-${pad(m[2])}-${pad(m[1])}` : null;
   }
+  const extraWeeks = new Set(); // tuần chọn bằng lịch ("Tuần khác…")
   function weekList() {
-    const set = new Set();
+    const set = new Set(extraWeeks);
     let d = mondayOf(new Date());
     d.setDate(d.getDate() + 7);
     for (let i = 0; i < 20; i++) { set.add(isoOf(d)); d.setDate(d.getDate() - 7); }
@@ -103,6 +104,41 @@
     el.innerHTML = (all ? opt("", all, cur) : "") + options.map((o) => (Array.isArray(o) ? opt(o[0], o[1], cur) : opt(o, o, cur))).join("");
     if (cur != null && Array.from(el.options).some((o) => o.value === String(cur))) el.value = cur;
   }
+  // ------------------------------------------------------------ chọn tuần bất kỳ bằng lịch
+  const PICK_WEEK = "__pick";
+  const WEEK_SELECTS = /^(en|ev|rp)Week$/;
+  function bindWeekPicker() {
+    const box = $("weekPick"), inp = $("weekPickDate");
+    document.addEventListener("focusin", (e) => {
+      if (WEEK_SELECTS.test(e.target.id) && e.target.value !== PICK_WEEK) e.target.dataset.keep = e.target.value;
+    }, true);
+    // chặn trước các xử lý "change" khác: chọn mục "Tuần khác…" thì mở lịch, giữ tuần cũ cho tới khi chọn ngày
+    document.addEventListener("change", (e) => {
+      const sel = e.target;
+      if (!WEEK_SELECTS.test(sel.id)) return;
+      if (sel.value !== PICK_WEEK) { sel.dataset.keep = sel.value; return; }
+      e.stopImmediatePropagation();
+      sel.value = sel.dataset.keep || latestDataWeek();
+      box.dataset.for = sel.id;
+      inp.value = sel.value;
+      box.hidden = false;
+      try { inp.showPicker(); } catch (_) { inp.focus(); }
+    }, true);
+    inp.addEventListener("change", () => {
+      if (!inp.value) return;
+      const [y, m, d] = inp.value.split("-").map(Number);
+      const w = isoOf(mondayOf(new Date(y, m - 1, d)));
+      const sel = $(box.dataset.for);
+      box.hidden = true;
+      extraWeeks.add(w);
+      const keep = { en: $("enWeek").value, ev: $("evWeek").value, rp: $("rpWeek").value };
+      refreshFilters();
+      ["en", "ev", "rp"].forEach((p) => { if ($(p + "Week").id !== sel.id) $(p + "Week").value = keep[p]; });
+      sel.value = w;
+      sel.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+    $("weekPickClose").addEventListener("click", () => { box.hidden = true; });
+  }
   function refreshFilters() {
     const weeks = weekList().map((w) => [w, weekLabel(w, true)]);
     const projects = brandNames();
@@ -116,6 +152,7 @@
     // Nhập số liệu / Chứng từ / Báo cáo
     for (const p of ["en", "ev", "rp"]) {
       fillSelect($(p + "Week"), weeks, $(p + "Week").value || latestDataWeek());
+      $(p + "Week").add(new Option("Tuần khác… (chọn ngày trên lịch)", PICK_WEEK));
       fillSelect($(p + "Project"), projects, p === "rp" ? $(p + "Project").value : $(p + "Project").value || projects[0], p === "rp" ? "Tất cả dự án" : null);
     }
     fillSelect($("enStaff"), staff, $("enStaff").value, "Tất cả nhân sự");
@@ -1059,6 +1096,7 @@
     $("brandSwitch").innerHTML = BRANDS.map((b) => `<button type="button" data-brand="${esc(b)}">${esc(b)}</button>`).join("") +
       `<button type="button" data-brand="">Tất cả</button>`;
     bind();
+    bindWeekPicker();
     let b0 = "";
     try { b0 = localStorage.getItem("crm.brand") || ""; } catch (_) { /* bỏ qua */ }
     const fromUrl = await new Promise((res) => {
