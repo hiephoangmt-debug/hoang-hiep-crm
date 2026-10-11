@@ -243,6 +243,14 @@
   document.querySelectorAll("a[data-app]").forEach(function (a) {
     if (a.getAttribute("href").indexOf("__APP" + "_URL__") === 0) a.hidden = true;
   });
+  // Link "#muc" trong trang: tự cuộn (trang chạy trong khung của Google; <base target="_top"> làm link # mở trang trắng)
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a) return;
+    e.preventDefault();
+    var el = document.getElementById(a.getAttribute("href").slice(1));
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 </script>
 <script src="huong-dan.js"></script>
 </body>
