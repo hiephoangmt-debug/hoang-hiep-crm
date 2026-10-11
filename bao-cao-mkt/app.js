@@ -243,7 +243,7 @@
     let section = null;
     const iconMap = {};
     slides.forEach((s) => {
-      if (/^thank you/.test(norm(slideLines(s.doc).join(" ")))) section = null;
+      if (s.closing || slideLines(s.doc).some((l) => /^thank you/.test(l))) section = null;
       if (s.divider) section = s.divider;
       s.platform = s.titlePlatform || section;
       if (s.divider && s.dividerIconKey) iconMap[s.dividerIconKey] = s.divider;
@@ -477,7 +477,12 @@
     return out;
   }
 
-  /** Xây dựng báo cáo từ mẫu. opts.images[platform][kind] = File[]. */
+  /**
+   * Xây dựng báo cáo từ mẫu.
+   * opts.images: [{file, platform, kind, staff}]; opts.staffList: tên nhân sự theo thứ tự;
+   * opts.staffOf(account) -> tên nhân sự của tài khoản ("" = chưa gán).
+   * Phần từ slide "NHÂN SỰ:" tới trước "THANK YOU" được nhân bản cho từng nhân sự.
+   */
   async function buildReport(opts) {
     const weeks = opts.weeks;
     const names = Object.keys(weeks);
@@ -485,19 +490,23 @@
     if (!active.length) throw new Error("Không có dữ liệu thực chạy trong file số liệu.");
     const week = opts.week || active[active.length - 1];
     const scopeWeeks = opts.scope === "all" ? active : [week];
-    const data = Object.fromEntries(PLATFORMS.map((p) => [p, scopeWeeks.flatMap((w) => weeks[w][p])]));
-    const totals = Object.fromEntries(PLATFORMS.map((p) => [p, aggregate(data[p])]));
+    const allData = Object.fromEntries(PLATFORMS.map((p) => [p, scopeWeeks.flatMap((w) => weeks[w][p])]));
+    const staffOf = opts.staffOf || (() => "");
+    const dataFor = (staff) => staff == null ? allData
+      : Object.fromEntries(PLATFORMS.map((p) => [p, allData[p].filter((r) => staffOf(r.account) === staff)]));
+    const totalsOf = (data) => Object.fromEntries(PLATFORMS.map((p) => [p, aggregate(data[p])]));
     const d1 = scopeWeeks[0].split("-")[0].trim().replace("/", ".");
     const d2 = scopeWeeks[scopeWeeks.length - 1].split("-")[1].trim().replace("/", ".");
-    const ctx = {
-      totals, campaign: opts.campaign, period: opts.period, staff: opts.staff,
+    const base = {
+      campaign: opts.campaign, period: opts.period,
       weekNo: opts.weekNo || names.indexOf(week) - names.indexOf(active[0]) + 1,
       weekRangeText: `${d1}.${opts.year} - ${d2}.${opts.year}`,
     };
-    const images = opts.images || {};
-    const imgsOf = (p, k) => (images[p] && images[p][k]) || [];
+    const imgList = opts.images || [];
+    const imgsFor = (staff) => (p, k) => imgList
+      .filter((im) => im.platform === p && im.kind === k && (staff == null || im.staff === staff))
+      .map((im) => im.file);
     const perSlide = Math.max(1, opts.perSlide || 1);
-    const platformUsed = (p) => data[p].length > 0 || ["ads", "qc", "hoadon"].some((k) => imgsOf(p, k).length);
 
     const zip = await JSZip.loadAsync(opts.template);
     const presPath = "ppt/presentation.xml";
@@ -521,44 +530,74 @@
         relsDoc: parseXml(relsFile ? await relsFile.async("string")
           : '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"/>'),
       };
+      s.pristine = s.doc.cloneNode(true);
+      s.pristineRels = s.relsDoc.cloneNode(true);
       analyzeSlide(s, W, H);
+      const lines = slideLines(s.doc);
+      s.staffSlide = lines.some((l) => l.startsWith("nhan su"));
+      s.closing = lines.some((l) => /^thank you/.test(l));
       slides.push(s);
     }
     resolvePlatforms(slides);
 
-    // Kế hoạch: slide nào giữ, slide ảnh nào nhân bản
-    const out = []; // {src, files, clone}
-    const drop = [];
-    const usedKinds = new Set();
-    for (const s of slides) {
-      const tablePlats = s.tables.map((t) => t.platform).filter(Boolean);
-      const plat = s.platform || (tablePlats.length ? tablePlats[0] : null);
-      if (opts.dropUnused && plat && !platformUsed(plat)) { drop.push(s); continue; }
-      if (s.frame && plat) {
-        const key = plat + "/" + s.kind;
-        const files = usedKinds.has(key) ? [] : imgsOf(plat, s.kind);
-        usedKinds.add(key);
-        if (!files.length) {
-          if (opts.dropEmptyImageSlides) drop.push(s);
-          else out.push({ src: s, files: [] });
+    // Phân đoạn: phần tổng | khối nhân sự (nhân bản) | phần kết
+    const staffList = (opts.staffList || []).filter(Boolean);
+    let bStart = slides.findIndex((s) => s.staffSlide);
+    let bEnd = bStart < 0 ? -1 : slides.findIndex((s, i) => i > bStart && s.closing);
+    if (bStart >= 0 && bEnd < 0) bEnd = slides.length;
+
+    const out = []; // {src, files, clone, ctx}
+    const usedOriginal = new Set();
+    const emit = (s, files, ctx) => {
+      const clone = usedOriginal.has(s);
+      usedOriginal.add(s);
+      out.push({ src: s, files, clone, ctx });
+    };
+    function plan(seq, staff, staffLabel) {
+      const data = dataFor(staff);
+      const ctx = Object.assign({}, base, { data, totals: totalsOf(data), staff: staffLabel });
+      const imgsOf = imgsFor(staff);
+      const used = (p) => data[p].length > 0 || Object.keys(KINDS).some((k) => imgsOf(p, k).length);
+      const usedKinds = new Set();
+      for (const s of seq) {
+        const tablePlats = s.tables.map((t) => t.platform).filter(Boolean);
+        const plat = s.platform || (tablePlats.length ? tablePlats[0] : null);
+        if (opts.dropUnused && plat && !used(plat)) continue;
+        if (s.frame && plat) {
+          const key = plat + "/" + s.kind;
+          const files = usedKinds.has(key) ? [] : imgsOf(plat, s.kind);
+          usedKinds.add(key);
+          if (!files.length) {
+            if (!opts.dropEmptyImageSlides) emit(s, [], ctx);
+            continue;
+          }
+          chunk(files, perSlide).forEach((fs) => emit(s, fs, ctx));
           continue;
         }
-        chunk(files, perSlide).forEach((fs, i) => out.push({ src: s, files: fs, clone: i > 0 }));
-        continue;
+        emit(s, [], ctx);
       }
-      out.push({ src: s, files: [] });
     }
+    if (bStart < 0) {
+      plan(slides, null, opts.staff || "");
+    } else {
+      plan(slides.slice(0, bStart), null, "");
+      const block = slides.slice(bStart, bEnd);
+      if (staffList.length) staffList.forEach((st) => plan(block, st, st));
+      else plan(block, null, opts.staff || "");
+      plan(slides.slice(bEnd), null, "");
+    }
+    const drop = slides.filter((s) => !usedOriginal.has(s));
 
     // Nhân bản slide (từ bản gốc chưa điền)
     let maxSlideNo = Math.max(...Object.keys(zip.files).map((f) => (/^ppt\/slides\/slide(\d+)\.xml$/.exec(f) || [0, 0])[1] | 0));
     out.forEach((o) => {
       if (!o.clone) { o.s = o.src; return; }
       const path = `ppt/slides/slide${++maxSlideNo}.xml`;
-      const relsDoc = o.src.relsDoc.cloneNode(true);
+      const relsDoc = o.src.pristineRels.cloneNode(true);
       Array.from(relsDoc.documentElement.getElementsByTagName("Relationship"))
         .filter((r) => r.getAttribute("Type") === NOTES_REL)
         .forEach((r) => r.parentNode.removeChild(r));
-      o.s = Object.assign({}, o.src, { el: null, rid: null, path, doc: o.src.doc.cloneNode(true), relsDoc });
+      o.s = Object.assign({}, o.src, { el: null, rid: null, path, doc: o.src.pristine.cloneNode(true), relsDoc });
       analyzeSlide(o.s, W, H);
       o.s.platform = o.src.platform;
       const ov = ct.createElementNS(ct.documentElement.namespaceURI, "Override");
@@ -572,10 +611,10 @@
     let nImg = 0;
     for (const o of out) {
       const s = o.s;
-      fillText(s.doc, ctx);
+      fillText(s.doc, o.ctx);
       s.tables.forEach((t, i) => {
         t.platform = o.src.tables[i] ? o.src.tables[i].platform : t.platform;
-        fillTable(t, data, H);
+        fillTable(t, o.ctx.data, H);
       });
       if (o.files.length) {
         await placeImages(zip, s, o.files, state);
@@ -639,7 +678,7 @@
       mimeType: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
       compression: "DEFLATE",
     });
-    return { blob, week, nImg, totals, slides: out.length, dropped: drop.length };
+    return { blob, week, nImg, slides: out.length, dropped: drop.length, staffCount: staffList.length };
   }
 
   // ------------------------------------------------------------ Google Drive
@@ -778,7 +817,71 @@
     set(k, v) { try { localStorage.setItem("bcmkt." + k, v); } catch (_) { /* bỏ qua */ } },
   };
   let workbook = null, weeks = null, templateBuf = null;
-  let images = []; // {file, url, name, path, platform, kind, include}
+  let images = []; // {file, url, name, path, platform, kind, staff, include}
+  let accStaff = {}; // tài khoản quảng cáo -> nhân sự
+  try { accStaff = JSON.parse(LS.get("accStaff") || "{}") || {}; } catch (_) { accStaff = {}; }
+
+  // ------------------------------------------------------------ nhân sự
+  const simple = (s) => " " + norm(s).replace(/[^a-z0-9]+/g, " ").trim() + " ";
+  /** "Phan Hạnh 391127499725110" -> "Phan Hạnh"; chỉ có số -> "". */
+  function staffNameFromAccount(acc) {
+    const m = /^(.*\D)\s*\d{6,}\s*$/.exec(String(acc).trim());
+    return m && /[^\d\s]/.test(m[1]) ? m[1].trim() : "";
+  }
+  function staffList() {
+    return Array.from(new Set($("staff").value.split(/[,;\n]/).map((x) => x.trim()).filter(Boolean)));
+  }
+  function staffOf(acc) {
+    const st = accStaff[acc];
+    return st && staffList().includes(st) ? st : "";
+  }
+  /** Đoán nhân sự của ảnh theo tên thư mục/file: khớp cả tên, hoặc khớp tên gọi (từ cuối) duy nhất. */
+  function guessStaff(path, name) {
+    const list = staffList();
+    const t = simple(path.concat(name).join(" "));
+    const full = list.find((st) => t.includes(simple(st)));
+    if (full) return full;
+    const hits = list.filter((st) => {
+      const last = norm(st).split(" ").pop();
+      return last.length >= 2 && t.includes(" " + last + " ");
+    });
+    if (hits.length === 1) return hits[0];
+    return list.length === 1 ? list[0] : "";
+  }
+  function allAccounts() {
+    const m = new Map();
+    Object.values(weeks || {}).forEach((w) => PLATFORMS.forEach((p) => w[p].forEach((r) => {
+      if (!r.account) return;
+      if (!m.has(r.account)) m.set(r.account, new Set());
+      m.get(r.account).add(p === "Tiktok" ? "TikTok" : p);
+    })));
+    return m;
+  }
+  /** Lấy tên nhân sự từ ID tài khoản, bổ sung vào danh sách. */
+  function syncStaffFromData() {
+    const list = staffList();
+    for (const acc of allAccounts().keys()) {
+      if (!accStaff[acc]) accStaff[acc] = staffNameFromAccount(acc);
+      if (accStaff[acc] && !list.includes(accStaff[acc])) list.push(accStaff[acc]);
+    }
+    $("staff").value = list.join(", ");
+    LS.set("accStaff", JSON.stringify(accStaff));
+    renderAccounts();
+  }
+  function renderAccounts() {
+    const accs = allAccounts();
+    const list = staffList();
+    const opts = (cur) => `<option value="">(chưa gán)</option>` +
+      list.map((st) => `<option${st === cur ? " selected" : ""}>${esc(st)}</option>`).join("");
+    $("accounts").innerHTML = accs.size
+      ? `<table><thead><tr><th>Tài khoản quảng cáo</th><th>Kênh</th><th>Nhân sự</th></tr></thead><tbody>` +
+        Array.from(accs).map(([acc, ps]) => `<tr><td>${esc(acc)}</td><td>${Array.from(ps).join(", ")}</td><td><select data-acc="${esc(acc)}">${opts(staffOf(acc))}</select></td></tr>`).join("") +
+        `</tbody></table>`
+      : "";
+    const un = Array.from(accs.keys()).filter((a) => !staffOf(a));
+    $("accWarn").textContent = un.length
+      ? `${un.length} tài khoản chưa gán nhân sự – chỉ được tính vào phần báo cáo tổng.` : "";
+  }
 
   function setStatus(msg, kind) {
     const el = $("status");
@@ -822,7 +925,7 @@
     $("folders").value = (p.folders || []).join("\n");
     $("campaign").value = p.campaign || "";
     $("period").value = p.period || "";
-    $("staff").value = p.staff || "";
+    $("staff").value = Array.isArray(p.staff) ? p.staff.join(", ") : p.staff || "";
     $("outName").value = p.outName || "bao_cao_mkt";
     $("outFolder").value = p.outputFolder || "";
   }
@@ -832,6 +935,7 @@
     $("sheet").innerHTML = workbook.SheetNames.map((n) => `<option>${n}</option>`).join("");
     weeks = loadData(workbook, $("sheet").value);
     populateWeeks();
+    syncStaffFromData();
     return `Số liệu: "${label}" (${Object.keys(weeks).length} tuần)`;
   }
 
@@ -868,8 +972,10 @@
 
   function renderImages() {
     const box = $("images");
+    const noStaff = images.filter((x) => x.include && !x.staff).length;
     $("imgCount").textContent = images.length
-      ? `${images.filter((x) => x.include).length}/${images.length} ảnh được chèn` : "Chưa có ảnh";
+      ? `${images.filter((x) => x.include).length}/${images.length} ảnh được chèn` +
+        (noStaff ? ` · ${noStaff} ảnh chưa gán nhân sự (sẽ không được chèn)` : "") : "Chưa có ảnh";
     box.innerHTML = images.map((im, i) => `
       <figure class="img${im.include ? "" : " off"}">
         <img src="${im.url}" alt="${esc(im.name)}" loading="lazy">
@@ -879,13 +985,17 @@
             <select data-i="${i}" data-f="platform">${PLATFORMS.map((p) => `<option value="${p}"${p === im.platform ? " selected" : ""}>${p === "Tiktok" ? "TikTok" : p}</option>`).join("")}</select>
             <select data-i="${i}" data-f="kind">${Object.entries(KINDS).map(([k, l]) => `<option value="${k}"${k === im.kind ? " selected" : ""}>${l}</option>`).join("")}</select>
           </div>
+          <div class="row">
+            <select data-i="${i}" data-f="staff" class="${im.staff ? "" : "warn"}"><option value="">(chưa gán nhân sự)</option>${staffList().map((st) => `<option${st === im.staff ? " selected" : ""}>${esc(st)}</option>`).join("")}</select>
+          </div>
         </figcaption>
       </figure>`).join("");
   }
 
   function addImage(file, path) {
     const c = guessClass(path, file.name);
-    images.push({ file, url: URL.createObjectURL(file), name: file.name, path, platform: c.platform, kind: c.kind, include: true });
+    images.push({ file, url: URL.createObjectURL(file), name: file.name, path, platform: c.platform, kind: c.kind,
+      staff: guessStaff(path, file.name), include: true });
   }
 
   function sortImages() {
@@ -946,16 +1056,16 @@
     if (localTpl) templateBuf = await localTpl.arrayBuffer();
     if (!templateBuf) return setStatus("Chưa có PPTX mẫu: dán link Drive và bấm Quét, hoặc chọn file từ máy.", "err");
     if (!weeks) return setStatus("Chưa có số liệu: dán link Google Sheet và bấm Quét, hoặc chọn file từ máy.", "err");
-    const byKind = Object.fromEntries(PLATFORMS.map((p) => [p, { ads: [], qc: [], hoadon: [] }]));
-    images.filter((im) => im.include).forEach((im) => byKind[im.platform][im.kind].push(im.file));
+    const list = staffList();
+    const imgs = images.filter((im) => im.include).map((im) => ({ file: im.file, platform: im.platform, kind: im.kind, staff: im.staff }));
     setStatus("Đang tạo báo cáo…");
     $("go").disabled = true;
     try {
       const res = await buildReport({
-        template: templateBuf, weeks, images: byKind,
+        template: templateBuf, weeks, images: imgs, staffList: list, staffOf,
         week: $("week").value, weekNo: parseInt($("weekNo").value, 10) || null,
         year: $("year").value.trim() || String(new Date().getFullYear()),
-        campaign: $("campaign").value.trim(), period: $("period").value.trim(), staff: $("staff").value.trim(),
+        campaign: $("campaign").value.trim(), period: $("period").value.trim(), staff: list.join(", "),
         scope: $("scope").value, perSlide: parseInt($("perSlide").value, 10) || 1,
         dropUnused: $("dropUnused").checked, dropEmptyImageSlides: $("dropEmpty").checked,
       });
@@ -972,7 +1082,7 @@
         const url = await gas("saveReport", await blobToB64(res.blob), name, parseDriveId($("outFolder").value) || "");
         saved = ` Đã lưu vào Drive: <a href="${esc(url)}" target="_blank" rel="noopener">mở file</a>.`;
       }
-      setStatus(`Đã tạo ${name}: ${res.slides} slide, chèn ${res.nImg} ảnh, bỏ ${res.dropped} slide mẫu không dùng.`, "ok");
+      setStatus(`Đã tạo ${name}: ${res.slides} slide (${res.staffCount} nhân sự), chèn ${res.nImg} ảnh, bỏ ${res.dropped} slide mẫu không dùng.`, "ok");
       if (saved) $("status").insertAdjacentHTML("beforeend", saved);
     } catch (err) {
       console.error(err);
@@ -982,7 +1092,7 @@
     }
   }
 
-  window.BaoCaoMkt = { loadData, aggregate, buildReport, toNum, norm, parseDriveId, guessClass, Drive };
+  window.BaoCaoMkt = { loadData, aggregate, buildReport, toNum, norm, parseDriveId, guessClass, staffNameFromAccount, Drive };
 
   document.addEventListener("DOMContentLoaded", () => {
     $("year").value = String(new Date().getFullYear());
@@ -1014,7 +1124,19 @@
       const el = e.target, i = el.dataset.i;
       if (i == null) return;
       images[i][el.dataset.f] = el.type === "checkbox" ? el.checked : el.value;
-      if (el.type === "checkbox") renderImages();
+      if (el.type === "checkbox" || el.dataset.f === "staff") renderImages();
+    });
+    $("accounts").addEventListener("change", (e) => {
+      const acc = e.target.dataset.acc;
+      if (acc == null) return;
+      accStaff[acc] = e.target.value;
+      LS.set("accStaff", JSON.stringify(accStaff));
+      renderAccounts();
+    });
+    $("staff").addEventListener("change", () => {
+      images.forEach((im) => { if (!staffList().includes(im.staff)) im.staff = guessStaff(im.path, im.name); });
+      renderAccounts();
+      renderImages();
     });
     $("sheet").addEventListener("change", () => {
       try { weeks = loadData(workbook, $("sheet").value); populateWeeks(); } catch (e) { weeks = null; setStatus(e.message, "err"); }

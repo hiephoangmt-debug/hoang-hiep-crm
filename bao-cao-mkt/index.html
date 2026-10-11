@@ -36,7 +36,7 @@
   .actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
   button.ghost { background:transparent; color:var(--accent); border:1px solid var(--accent); }
   details summary { cursor:pointer; }
-  .imgs { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:10px; margin-top:10px; }
+  .imgs { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:10px; margin-top:10px; }
   .img { margin:0; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:var(--bg); }
   .img.off { opacity:.45; }
   .img img { display:block; width:100%; height:120px; object-fit:cover; background:#000; }
@@ -46,6 +46,10 @@
   .row { display:flex; gap:4px; margin-top:4px; }
   .row select { flex:1; font-size:12px; padding:4px; min-width:0; }
   .opts { margin-top:8px; align-items:end; }
+  h3 { font-size:14px; margin:16px 0 4px; }
+  .warn-text { color:var(--err); }
+  select.warn { border-color:var(--err); }
+  #accounts select { width:100%; }
   .opts .chk { font-size:13px; }
   .opts .chk span { white-space:normal; }
 </style>
@@ -90,11 +94,15 @@
         <label>Năm<input id="year"></label>
         <label>Tên chiến dịch<input id="campaign"></label>
         <label>Thời gian triển khai<input id="period" placeholder="15/09 - 27/09/2026"></label>
-        <label>Nhân sự<input id="staff"></label>
+        <label>Danh sách nhân sự (cách nhau dấu phẩy)<input id="staff" placeholder="Phan Hạnh, Mỹ Linh"></label>
         <label>Tên file xuất<input id="outName" value="bao_cao_mkt"></label>
         <label id="outFolderBox">Lưu vào thư mục Drive (link, trống = My Drive)<input id="outFolder"></label>
       </div>
       <div class="wrap" id="summary" style="margin-top:12px"></div>
+      <h3>Tài khoản quảng cáo → nhân sự</h3>
+      <p class="note">Slide 1–6 là báo cáo tổng. Từ slide "NHÂN SỰ" trở đi được nhân bản cho từng nhân sự, mỗi người chỉ gồm tài khoản và ảnh của mình. Tên được lấy sẵn từ ID tài khoản (ví dụ "Phan Hạnh 391127…").</p>
+      <div class="wrap" id="accounts"></div>
+      <p class="note warn-text" id="accWarn"></p>
     </section>
 
     <section>

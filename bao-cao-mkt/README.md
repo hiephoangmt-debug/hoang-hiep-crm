@@ -16,6 +16,8 @@ Trang tĩnh (HTML + JS, không cần server). Dán link Drive → **Quét Drive*
 | Bảng chi tiết TikTok/Zalo/Google | tiêu đề `… ADS:` / mục kênh | như trên + Impressions, Reach, Frequency, CTR, CPM… |
 | Slide ảnh | khung ảnh demo + ghi chú "Lưu ý"; loại theo nội dung ghi chú | thay ảnh demo bằng ảnh chứng từ, bỏ số 1-2-3-4 và dòng "*Demo"; nhiều ảnh → nhân bản slide |
 
+**Theo nhân sự:** slide 1–6 là báo cáo tổng (mọi tài khoản). Từ slide có `NHÂN SỰ:` tới trước `THANK YOU!` là khối nhân sự, được nhân bản cho từng người trong "Danh sách nhân sự" và chỉ chứa tài khoản + ảnh của người đó. Tài khoản gán nhân sự theo tên trong ID (`Phan Hạnh 391127…`) hoặc chọn tay (trang nhớ lựa chọn); ảnh gán theo tên thư mục/file (`Phan Hạnh/…`, `hanh sun.jpg`). Tài khoản chưa gán chỉ được tính vào phần tổng; ảnh chưa gán không được chèn.
+
 Tuỳ chọn: phạm vi số liệu (tuần đã chọn / cộng dồn), số ảnh mỗi slide, bỏ kênh không chạy, bỏ slide ảnh mẫu khi không có ảnh.
 
 ## Cài đặt một lần: Google OAuth Client ID
