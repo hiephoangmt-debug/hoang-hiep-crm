@@ -2,7 +2,7 @@ import json
 from PIL import Image, ImageDraw, ImageFont
 slug = 'gia-nha-dat-da-nang-tuan-5-11-10-2026'
 title = 'Giá nhà đất Đà Nẵng tuần 5 – 11/10/2026: mặt bằng giá rao căn hộ, đất nền, nhà phố'
-content = """<p>Tổng hợp <strong>giá nhà đất Đà Nẵng</strong> từ khoảng 320 tin rao trên Batdongsan.com.vn đăng trong tuần 5 – 11/10/2026, chia theo loại hình và khu vực. Kèm biến động giá căn hộ theo quận trong 1 năm do chính trang này thống kê. Đây là <strong>giá chào bán</strong> (giá người bán đưa ra), thường cao hơn giá giao dịch thực tế.</p>
+content = """<p>Tổng hợp <strong>giá nhà đất Đà Nẵng</strong> từ khoảng 340 tin rao trên Batdongsan.com.vn đăng trong tuần 5 – 11/10/2026, chia theo loại hình và khu vực. Kèm biến động giá căn hộ theo quận trong 1 năm do chính trang này thống kê. Đây là <strong>giá chào bán</strong> (giá người bán đưa ra), thường cao hơn giá giao dịch thực tế.</p>
 
 <!--hh-featured-->
 
@@ -55,10 +55,23 @@ content = """<p>Tổng hợp <strong>giá nhà đất Đà Nẵng</strong> từ 
 </table>
 <p>Đất FPT City có nhiều tin ghi "giảm mạnh, giá tốt tháng 10" – mặt bằng lô thường quanh 40 – 47 triệu/m². Đây là vùng giá đáng theo dõi với người mua ở thực. Xem thêm: <a href="/dat-nen-hoa-xuan/">đất nền Hòa Xuân</a>, <a href="/du-an/fpt-city-da-nang/">FPT City Đà Nẵng</a>.</p>
 
-<h2>Nhà phố, biệt thự, shophouse</h2>
+<h2>Giá nhà mặt phố Đà Nẵng tuần qua</h2>
+<p>Mục nhà mặt phố có 834 tin đang rao và hơn 10.200 lượt xem trong 7 ngày. Trong 19 tin có giá đăng tuần qua, giá trung vị khoảng <strong>15 tỷ/căn</strong>, đơn giá trung vị khoảng <strong>114 triệu/m²</strong>:</p>
+<table>
+<thead><tr><th>Khu vực / tuyến đường</th><th>Giá rao</th><th>Đơn giá</th></tr></thead>
+<tbody>
+<tr><td>Liên Chiểu, Cẩm Lệ (Hòa Minh, Hòa Xuân, Hòa An)</td><td>5,4 – 7,85 tỷ (54 – 100 m²)</td><td>65 – 99 triệu/m²</td></tr>
+<tr><td>Thanh Khê (An Khê) và khu dân cư</td><td>8,3 – 21,6 tỷ</td><td>85 – 96 triệu/m²</td></tr>
+<tr><td>Ngũ Hành Sơn gần biển (Tôn Thất Thiệp)</td><td>12,8 tỷ (110,8 m²)</td><td>khoảng 116 triệu/m²</td></tr>
+<tr><td>Phố du lịch ven biển: An Thượng, An Trung (Sơn Trà), Khuê Mỹ Đông (Ngũ Hành Sơn) – nhiều tòa căn hộ cho thuê</td><td>13 – 26,9 tỷ (82 – 138 m²)</td><td>114 – 264 triệu/m²</td></tr>
+<tr><td>Trung tâm Hải Châu (Lê Duẩn, Nguyễn Trãi, Tiểu La)</td><td>15 – 26 tỷ (80 – 182 m²)</td><td>143 – 191 triệu/m²</td></tr>
+</tbody>
+</table>
+<p>Nhóm "tòa căn hộ dịch vụ" ở An Thượng, Khuê Mỹ Đông được rao theo dòng tiền cho thuê (ví dụ tòa 6 tầng 26,9 tỷ quảng cáo doanh thu khoảng 1,2 tỷ/năm, tức khoảng 4,5%/năm trên giá rao). Khi mua nên kiểm tra lại doanh thu thực tế và giấy phép kinh doanh lưu trú.</p>
+
+<h2>Nhà riêng, biệt thự, shophouse</h2>
 <ul>
 <li><strong>Nhà riêng trong khu dân cư:</strong> phổ biến 4,5 – 8 tỷ. Hòa Xuân 59 – 80 triệu/m² (nhà 3 tầng 100 m² khoảng 6 – 8 tỷ). Liên Chiểu, Thanh Khê 60 – 100 triệu/m².</li>
-<li><strong>Nhà mặt phố trung tâm Hải Châu:</strong> 110 – 190 triệu/m². Đáng chú ý: một nhà mặt phố Lê Duẩn 110 m² rao giảm từ 32 tỷ xuống 21 tỷ.</li>
 <li><strong>Liền kề, biệt thự Vinhomes Hải Vân Bay (Liên Chiểu):</strong> liền kề 5,4 – 6,4 tỷ, biệt thự 13 – 25 tỷ. Chủ đầu tư hỗ trợ vay 70%, miễn lãi đến 36 tháng.</li>
 <li><strong>Biệt thự ven sông Hàn (Euro Village, Sun Cosmo):</strong> 32 – 90 tỷ, 107 – 262 triệu/m².</li>
 <li><strong>Shophouse:</strong> trung vị khoảng 16 tỷ. Từ 4,7 – 8,7 tỷ (Liên Chiểu, Futa Kim Phát) đến trên 30 tỷ ven sông Hàn.</li>
@@ -76,11 +89,11 @@ content = """<p>Tổng hợp <strong>giá nhà đất Đà Nẵng</strong> từ 
 <p>Giá rao căn hộ Đà Nẵng tiếp tục đi lên ở khu trung tâm và ven sông Hàn, trong khi khu Nam (Hòa Xuân, FourS) đang là vùng giá "mềm" nhất cho người mua ở thực: căn 1 – 2PN từ khoảng 1,5 – 3,5 tỷ, ngân hàng hỗ trợ 70%. Với hàng thứ cấp, giá rao cắt lỗ chỉ là điểm bắt đầu thương lượng – nên xem giá giao dịch thực tế và pháp lý từng căn trước khi chốt.</p>
 <p>Anh chị cần bảng giá chi tiết theo dự án hoặc muốn định giá căn đang có, liên hệ Hiệp <strong>0904 567 009</strong> (Zalo).</p>
 
-<p><em>Phương pháp: tổng hợp trang kết quả đầu tiên của các mục Căn hộ, Nhà riêng, Đất, Đất nền dự án, Biệt thự liền kề, Shophouse, Condotel và từng quận trên Batdongsan.com.vn, tin đăng trong khoảng 5 – 11/10/2026. Đã bỏ tin trùng, tin "giá thỏa thuận". Số liệu là giá rao, không phải giá giao dịch, mẫu nhỏ nên chỉ để tham khảo xu hướng.</em></p>
+<p><em>Phương pháp: tổng hợp trang kết quả đầu tiên của các mục Căn hộ, Nhà riêng, Nhà mặt phố, Đất, Đất nền dự án, Biệt thự liền kề, Shophouse, Condotel và từng quận trên Batdongsan.com.vn, tin đăng trong khoảng 5 – 11/10/2026. Đã bỏ tin trùng, tin "giá thỏa thuận". Số liệu là giá rao, không phải giá giao dịch, mẫu nhỏ nên chỉ để tham khảo xu hướng.</em></p>
 """
 n = {
  'slug': slug, 'title': title,
- 'excerpt': 'Giá nhà đất Đà Nẵng tuần 5 – 11/10/2026 từ khoảng 320 tin rao trên Batdongsan: căn hộ 40 – 85 triệu/m², FPT City 39 – 59 triệu/m², nhà riêng 4,5 – 8 tỷ. Giá căn hộ Thanh Khê +37%, Hải Châu +22%, Cẩm Lệ −8% trong 1 năm.',
+ 'excerpt': 'Giá nhà đất Đà Nẵng tuần 5 – 11/10/2026 từ khoảng 340 tin rao trên Batdongsan: căn hộ 40 – 85 triệu/m², FPT City 39 – 59 triệu/m², nhà mặt phố trung vị 15 tỷ. Giá căn hộ Thanh Khê +37%, Hải Châu +22%, Cẩm Lệ −8% trong 1 năm.',
  'keyword': 'giá nhà đất Đà Nẵng',
  'keywords_extra': ['giá căn hộ Đà Nẵng tháng 10/2026', 'giá đất nền Đà Nẵng', 'giá rao bán nhà đất Đà Nẵng'],
  'category': 'Thị trường',
