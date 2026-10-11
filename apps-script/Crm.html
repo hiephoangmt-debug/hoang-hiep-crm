@@ -44,6 +44,12 @@
   button.link.danger { color:var(--err); }
   .muted { color:var(--muted); }
   .warn-text { color:var(--warn); }
+  .ok-text { color:var(--ok); }
+  table.check td, table.check th { text-align:center !important; }
+  table.check td:first-child, table.check th:first-child, table.check td:nth-child(2), table.check th:nth-child(2) { text-align:left !important; }
+  td.ok-cell { color:var(--ok); font-weight:600; }
+  td.miss-cell { color:var(--err); font-weight:600; background:var(--accent-soft); cursor:help; }
+  .img .req { display:block; color:var(--muted); font-size:11px; margin-top:3px; line-height:1.35; }
   select.warn { border-color:var(--err); color:var(--err); }
   .wrap { overflow-x:auto; }
   table.data { border-collapse:collapse; width:100%; font-size:13px; }
@@ -122,7 +128,7 @@
 </style>
 </head>
 <body>
-<div id="loading">Đang tải CRM… <small class="muted">(giao diện v7)</small></div>
+<div id="loading">Đang tải CRM… <small class="muted">(giao diện v8)</small></div>
 <div id="diag" style="max-width:760px;margin:0 auto;padding:0 16px;color:#b42318;font-size:13px"></div>
 <script>
   // Báo lỗi ngay trên màn hình (để biết trang dừng ở đâu khi không mở được bảng điều khiển trình duyệt)
@@ -198,6 +204,11 @@
         <button type="button" id="evScan" class="ghost small">Lấy ảnh có sẵn trên Drive</button>
       </div>
       <section class="card">
+        <div class="sec-head"><h3>Kiểm tra nghiệm thu (theo mẫu, slide 8–25)</h3><b id="evCheckSum"></b></div>
+        <p class="hint">Mỗi kênh đã chạy cần đủ ảnh: <b>Chiến dịch</b>, <b>QC đang chạy</b>, <b>Hoá đơn</b> (Google: Chiến dịch + Hoá đơn). Rê chuột vào ô “Thiếu” để xem các mục phải khoanh.</p>
+        <div class="wrap" id="evCheck"></div>
+      </section>
+      <section class="card">
         <h3>Tải ảnh chụp màn hình / chứng từ</h3>
         <div class="drop" id="evDrop">Kéo thả ảnh chụp màn hình quảng cáo, hoá đơn (ảnh hoặc PDF) vào đây, hoặc
           <input type="file" id="evFiles" accept="image/*,application/pdf,.pdf" multiple>
@@ -221,6 +232,7 @@
           <label>Tuần<select id="rpWeek"></select></label>
           <label>Dự án<select id="rpProject"></select></label>
           <label>Xuất ra<select id="rpFormat"><option value="both">PDF + PPTX</option><option value="pdf">PDF</option><option value="pptx">PPTX</option></select></label>
+          <label class="row" style="flex-direction:row;gap:6px;color:var(--text)"><input type="checkbox" id="rpKeepMissing" checked> Giữ trang nghiệm thu còn thiếu ảnh (ghi “CHƯA CÓ ẢNH”)</label>
           <button type="button" id="rpGo">Tạo báo cáo</button>
         </div>
         <p class="hint">Dùng số liệu ở tab Nhập số liệu và ảnh ở tab Ảnh & chứng từ của tuần đã chọn; slide 1–6 là tổng, sau đó mỗi nhân sự một phần. File được lưu vào “Thư mục lưu báo cáo” của dự án (trống = My Drive). Muốn tạo từ thư mục Drive có sẵn: <a id="rpProjectLink" target="_top">trang Báo cáo từ thư mục Drive</a>.</p>
@@ -240,8 +252,8 @@
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@811d8221d76a145accb01e3627219bba7dc6882e/bao-cao-mkt/config.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@811d8221d76a145accb01e3627219bba7dc6882e/bao-cao-mkt/app.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@811d8221d76a145accb01e3627219bba7dc6882e/crm/crm.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@b0e7cc8121dca84194449b960da6243dc52b719b/bao-cao-mkt/config.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@b0e7cc8121dca84194449b960da6243dc52b719b/bao-cao-mkt/app.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@b0e7cc8121dca84194449b960da6243dc52b719b/crm/crm.js"></script>
 </body>
 </html>
