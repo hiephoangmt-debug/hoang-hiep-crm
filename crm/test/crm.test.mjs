@@ -131,4 +131,50 @@ assert.throws(() => api.login('matkhaumoi1'), /quá 5 lần/);
   for (let i = 0; i < 35; i++) last = JSON.parse(api.doPost({ parameter: { action: 'chat', sid: 'b2', history: hist([{ role: 'user', content: 'hi' }]) } }));
   assert.deepEqual(last, { ok: false, error: 'limit' });
 }
+// ---- Sản phẩm & phương án gợi ý ----
+{
+  const { api, sheets, g } = loadGas({});
+  api.setupCRM();
+  const pw2 = g.logs.find(l => l.includes('Mật khẩu')).match(/CRM: (\w+)/)[1];
+  const { token } = api.login(pw2);
+  const prods = api.listProducts(token);
+  assert.ok(prods.length >= 20, 'có danh mục mẫu');
+  assert.ok(prods.every(p => p.price1 === '' && p.price2 === ''), 'không bịa giá');
+  api.setupCRM(); // chạy lại không nhân đôi
+  assert.equal(api.listProducts(token).length, prods.length);
+  // budget parser
+  assert.deepEqual(api.parseBudget_('3 – 4 tỷ'), [3, 4]);
+  assert.deepEqual(api.parseBudget_('Dưới 2 tỷ'), [0, 2]);
+  assert.deepEqual(api.parseBudget_('Trên 6 tỷ'), [6, Infinity]);
+  assert.equal(api.parseBudget_('không rõ'), null);
+  // khách từ web: ngân sách bóc từ form
+  api.doPost({ parameter: { name: 'Lan', phone: '0905111222', project: 'FPT Plaza 4', need: 'Căn 2PN · 2 – 3 tỷ' } });
+  let lan = api.bootstrap(token).leads.find(l => l.phone === '0905111222');
+  assert.match(lan.budget, /2 – 3 tỷ/);
+  // chưa có giá: vẫn gợi ý 2PN của FPT Plaza 4, đứng đầu
+  let off = api.getOffers(token, lan.id);
+  assert.ok(off.offers.length >= 1 && /FPT Plaza 4/.test(off.offers[0].label) && /2 ?PN/i.test(off.offers[0].label), off.offers[0] && off.offers[0].label);
+  assert.match(off.text, /Chào Lan/); assert.ok(off.offers.every(o => !o.price), 'không bịa giá trong tin nhắn');
+  // điền giá: 2PN = 2.5–3 tỷ (hợp), 2PN+ = 4–5 tỷ (vượt ngân sách) → 2PN xếp trên
+  const p2 = prods.find(p => p.project === 'FPT Plaza 4' && p.code === '2PN'), p2p = prods.find(p => p.project === 'FPT Plaza 4' && p.code === '2PN+');
+  api.saveProduct(token, { ...p2, price1: '2,5', price2: 3 }); api.saveProduct(token, { ...p2p, price1: 4, price2: 5 });
+  off = api.getOffers(token, lan.id);
+  assert.equal(off.offers[0].price, '2,5–3 tỷ'); assert.ok(off.offers[0].why.includes('trong ngân sách'));
+  assert.match(off.text, /2,5–3 tỷ/);
+  // đất nền V5
+  api.createLead(token, { name: 'Minh', phone: '0906222333', project: 'Đất nền V5', need: 'Lô 100m2', budget: 'Dưới 4 tỷ' });
+  const minh = api.bootstrap(token).leads.find(l => l.phone === '0906222333');
+  const o5 = api.getOffers(token, minh.id).offers;
+  assert.match(o5[0].label, /V5/);
+  // bootstrap kèm offers cho việc ưu tiên
+  const b = api.bootstrap(token);
+  assert.ok(b.offers[lan.id] && b.offers[minh.id] && b.products.length === prods.length);
+  // xoá sản phẩm hết → không gợi ý
+  api.saveProduct(token, { ...p2, price1: 2.5, price2: 3, status: 'Hết' });
+  assert.ok(!api.getOffers(token, lan.id).offers.some(o => o.id === p2.id));
+  assert.throws(() => api.listProducts('bad'), /SESSION_EXPIRED/);
+  // email báo cáo có phương án
+  api.dailyReport();
+  console.log('products OK');
+}
 console.log('ALL CRM TESTS PASSED ✔');

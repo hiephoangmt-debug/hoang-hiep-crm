@@ -201,6 +201,14 @@ td.muted{color:var(--muted);font-size:13px}
   .fgrid{grid-template-columns:1fr}
   .filters select{flex:1 1 45%}
 }
+.offers{display:grid;gap:8px}
+.offer{border:1px solid var(--navy-100);border-radius:12px;padding:10px 12px;background:#fff;font-size:13px}
+.offer b{color:var(--navy-800)}.offer .why{color:var(--muted);font-size:12px;margin-top:2px}
+.offer .pr{float:right;font-weight:800;color:var(--orange-600)}
+.offbox{background:#fff8f1;border:1px solid #ffd9b3;border-radius:12px;padding:12px 14px;display:grid;gap:8px}
+.offbox h3{margin:0;font-size:15px;color:var(--navy-800)}
+.task .offs{grid-column:1/-1;font-size:12.5px;color:var(--navy-700)}
+.nop{color:var(--muted);font-size:12px}
 </style>
 </head>
 <body>
@@ -224,6 +232,7 @@ td.muted{color:var(--muted);font-size:13px}
     <button class="nav-btn" data-view="today"><span class="ico">✅</span>Việc hôm nay <span class="pill" id="todayCount" style="margin-left:auto;background:var(--orange);color:var(--navy-900)"></span></button>
     <button class="nav-btn" data-view="dash"><span class="ico">📊</span>Tổng quan</button>
     <button class="nav-btn" data-view="leads"><span class="ico">👥</span>Khách hàng</button>
+    <button class="nav-btn" data-view="prods"><span class="ico">🏢</span>Sản phẩm</button>
     <a class="nav-btn" id="sheetLink" target="_blank" rel="noopener" hidden><span class="ico">📄</span>Mở Google Sheet</a>
     <button class="nav-btn" id="pwBtn"><span class="ico">🔑</span>Đổi mật khẩu</button>
     <button class="nav-btn" id="logoutBtn"><span class="ico">↩</span>Đăng xuất</button>
@@ -303,12 +312,22 @@ td.muted{color:var(--muted);font-size:13px}
       </div>
     </section>
 
-  </main>
 
+    <section id="view-prods" hidden>
+      <div class="top">
+        <div><h1>Sản phẩm</h1><div style="color:var(--muted);font-size:13px">Danh mục để CRM gợi ý phương án cho từng khách. Điền giá (đơn vị: tỷ đồng) để so với ngân sách khách.</div></div>
+        <button class="btn btn-primary" id="prodAdd">+ Thêm sản phẩm</button>
+      </div>
+      <div class="card"><div class="table-wrap"><table>
+        <thead><tr><th>Dự án</th><th>Loại / tên</th><th>Diện tích</th><th>Giá (tỷ)</th><th>Tình trạng</th><th>Tài liệu</th><th></th></tr></thead>
+        <tbody id="prodRows"></tbody></table></div></div>
+    </section>
+  </main>
   <nav class="bottom-nav" aria-label="Điều hướng">
     <button data-view="today"><span>✅</span>Hôm nay</button>
     <button data-view="dash"><span>📊</span>Tổng quan</button>
     <button data-view="leads"><span>👥</span>Khách</button>
+    <button data-view="prods"><span>🏢</span>Sản phẩm</button>
     <button id="logoutBtn2"><span>↩</span>Thoát</button>
   </nav>
 </div>
@@ -341,8 +360,10 @@ td.muted{color:var(--muted);font-size:13px}
       <label class="f">Số điện thoại<input id="dPhone" type="tel"></label>
       <label class="f" style="grid-column:1/-1">Email<input id="dEmail" type="email"></label>
       <label class="f" style="grid-column:1/-1">Nhu cầu<input id="dNeed"></label>
+      <label class="f" style="grid-column:1/-1">Ngân sách (VD: 3 – 4 tỷ, Dưới 2 tỷ)<input id="dBudget" placeholder="3 – 4 tỷ"></label>
       <label class="f" style="grid-column:1/-1">Ghi chú chăm sóc mới<textarea id="dNote" rows="3" placeholder="VD: Đã gọi, khách quan tâm căn 2PN tầng cao, hẹn gửi bảng giá…"></textarea></label>
     </div>
+    <div class="offbox" id="dOffers" hidden></div>
     <dl class="info" id="dInfo"></dl>
     <div><h3 style="margin:0 0 10px;font-size:15px;color:var(--navy-800)">Lịch sử chăm sóc</h3><ul class="timeline" id="dHistory"><li class="tm">Đang tải…</li></ul></div>
   </div>
@@ -360,13 +381,37 @@ td.muted{color:var(--muted);font-size:13px}
       <label class="f">Nguồn<input name="source" placeholder="Gọi đến, Zalo, giới thiệu…"></label>
       <label class="f">Email<input name="email" type="email"></label>
       <label class="f">Hẹn gọi lại<input name="callback" type="datetime-local"></label>
-      <label class="f" style="grid-column:1/-1">Nhu cầu<input name="need"></label>
+      <label class="f">Nhu cầu<input name="need" placeholder="Căn 2PN, lô 100m²…"></label>
+      <label class="f">Ngân sách<input name="budget" placeholder="3 – 4 tỷ"></label>
       <label class="f" style="grid-column:1/-1">Ghi chú<textarea name="note" rows="2"></textarea></label>
     </div>
     <div class="err" id="addErr"></div>
     <div style="display:flex;justify-content:flex-end;gap:8px"><button class="btn btn-ghost" type="button" data-close>Huỷ</button><button class="btn btn-primary" type="submit">Lưu khách</button></div>
   </form>
 </dialog>
+
+<!-- SẢN PHẨM -->
+<dialog class="modal" id="prodModal">
+  <form id="prodForm" method="dialog">
+    <h3 id="prodTitle">Sản phẩm</h3>
+    <div class="fgrid">
+      <label class="f">Dự án *<input name="project" list="prodProjects" placeholder="FPT Plaza 4"></label>
+      <label class="f">Loại<select name="kind"><option>Căn hộ</option><option>Duplex</option><option>Đất nền</option><option>Khác</option></select></label>
+      <label class="f">Tên / loại căn *<input name="name" placeholder="2 PN"></label>
+      <label class="f">Mã<input name="code" placeholder="2PN"></label>
+      <label class="f">Diện tích từ (m²)<input name="areaMin" inputmode="decimal"></label>
+      <label class="f">Diện tích đến (m²)<input name="areaMax" inputmode="decimal"></label>
+      <label class="f">Giá từ (tỷ)<input name="price1" inputmode="decimal" placeholder="2,5"></label>
+      <label class="f">Giá đến (tỷ)<input name="price2" inputmode="decimal" placeholder="3"></label>
+      <label class="f">Tình trạng<select name="status" id="prodStatus"></select></label>
+      <label class="f">Link tài liệu (Drive)<input name="doc" type="url" placeholder="https://drive.google.com/…"></label>
+      <label class="f" style="grid-column:1/-1">Ghi chú<input name="note"></label>
+    </div>
+    <div class="err" id="prodErr"></div>
+    <div style="display:flex;justify-content:space-between;gap:8px"><button class="btn btn-ghost" type="button" id="prodDel" style="color:var(--bad)">Xoá</button><span style="display:flex;gap:8px"><button class="btn btn-ghost" type="button" data-close>Huỷ</button><button class="btn btn-primary" type="submit">Lưu</button></span></div>
+  </form>
+</dialog>
+<datalist id="prodProjects"></datalist>
 
 <!-- ĐỔI MẬT KHẨU -->
 <dialog class="modal" id="pwModal">
@@ -389,7 +434,7 @@ td.muted{color:var(--muted);font-size:13px}
 const $=(s,el=document)=>el.querySelector(s), $$=(s,el=document)=>[...el.querySelectorAll(s)];
 const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const store={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}}};
-const S={token:store.get("crm_token"),leads:[],statuses:[],view:"today",page:0,status:"",range:30,current:null};
+const S={token:store.get("crm_token"),leads:[],products:[],offers:{},prodStatuses:[],statuses:[],view:"today",page:0,status:"",range:30,current:null};
 const PAGE=50;
 
 /* ---------- Gọi server ---------- */
@@ -436,7 +481,7 @@ async function load(){
   busy(true);
   try{
     const r=await api("bootstrap",S.token);
-    Object.assign(S,{leads:r.leads,statuses:r.statuses});
+    Object.assign(S,{leads:r.leads,statuses:r.statuses,products:r.products||[],offers:r.offers||{},prodStatuses:r.prodStatuses||[]});
     $("#login").hidden=true;$("#app").hidden=false;
     $("#meInfo").textContent=r.leads.length.toLocaleString("vi-VN")+" khách trong CRM";
     if(r.sheetUrl){$("#sheetLink").href=r.sheetUrl;$("#sheetLink").hidden=false}
@@ -448,11 +493,11 @@ async function load(){
 /* ---------- Điều hướng ---------- */
 function show(v){
   S.view=v;
-  ["today","dash","leads"].forEach(x=>$("#view-"+x).hidden=x!==v);
+  ["today","dash","leads","prods"].forEach(x=>$("#view-"+x).hidden=x!==v);
   $$("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===v));
   const urgent=S.leads.filter(l=>prio(l)===1||prio(l)===2).length;
   $("#todayCount").textContent=urgent||"";$("#todayCount").hidden=!urgent;
-  if(v==="today")renderToday();if(v==="dash")renderDash();if(v==="leads")renderLeads();
+  if(v==="today")renderToday();if(v==="dash")renderDash();if(v==="leads")renderLeads();if(v==="prods")renderProds();
 }
 $$("[data-view]").forEach(b=>b.addEventListener("click",()=>show(b.dataset.view)));
 $$("[data-refresh]").forEach(b=>b.onclick=load);
@@ -523,6 +568,7 @@ function taskHTML(l){
       <div class="ctx">${esc(l.project)} · <span class="${pillCls(l.status)}">${esc(l.status)}</span>${l.need?" · "+esc(l.need):""}${l.callback?" · ⏰ "+fmtFull(l.callback):""}</div></div>
     <div><span class="tag ${a.priority===1?"p1":""}">${esc(a.tag)}</span></div>
     <div class="adv"><b>Gợi ý:</b> ${esc(a.action)}</div>
+    ${(S.offers[l.id]||[]).length?`<div class="offs">💡 <b>Phương án:</b> ${S.offers[l.id].map(o=>esc(o.label+(o.price?" · "+o.price:""))).join(" &nbsp;|&nbsp; ")}</div>`:""}
     <div class="tools">
       <a class="btn btn-navy btn-sm" href="tel:${esc(l.phone)}">📞 Gọi</a>
       <a class="btn btn-sm" href="https://zalo.me/${esc(l.phone)}" target="_blank" rel="noopener" style="color:#0068ff">Zalo</a>
@@ -653,6 +699,7 @@ function openLead(id){
   const a=l.advice||{};
   $("#dAdvice").hidden=!a.action;$("#dAdvice").innerHTML=a.action?`<b>💡 ${esc(a.tag)}:</b> ${esc(a.action)}`:"";
   $("#dStatus").value=l.status;$("#dCallback").value=toLocal(l.callback);$("#dProject").value=l.project;$("#dNeed").value=l.need;
+  $("#dBudget").value=l.budget||"";renderOffers(l);
   $("#dNameIn").value=l.name;$("#dPhone").value=l.phone;$("#dEmail").value=l.email;$("#dNote").value="";
   const info=[["Nguồn",l.source],["Chiến dịch",l.campaign],["Form",l.form],["Link web",/^https?:\/\//i.test(l.page)?`<a href="${esc(l.page)}" target="_blank" rel="noopener">${esc(l.page.slice(0,60))}${l.page.length>60?"…":""}</a>`:esc(l.page)],["IP",l.ip],["Ghi chú gần nhất",l.note],["Cập nhật",l.updated?fmtFull(l.updated):""]];
   $("#dInfo").innerHTML=info.filter(r=>r[1]).map(([k,v])=>`<dt>${k}</dt><dd>${k==="Link web"?v:esc(v)}</dd>`).join("");
@@ -663,13 +710,28 @@ function openLead(id){
     $("#dHistory").innerHTML=h.length?h.map(x=>`<li><b>${esc(x.action)}</b><div>${esc(x.content)}</div><div class="tm">${fmtFull(x.time)}</div></li>`).join(""):'<li class="tm">Chưa có lịch sử</li>';
   }).catch(e=>$("#dHistory").innerHTML=`<li class="tm">${esc(e.message)}</li>`);
 }
+let offerText="";
+async function renderOffers(l){
+  const box=$("#dOffers");box.hidden=true;offerText="";
+  try{
+    const r=await api("getOffers",S.token,l.id);
+    if(S.current!==l)return;
+    if(!r.offers.length){box.hidden=false;box.innerHTML='<h3>💡 Phương án gợi ý</h3><div class="nop">Chưa đủ thông tin để gợi ý. Nhập dự án / nhu cầu (VD “Căn 2PN”, “lô V5”) và ngân sách, rồi lưu.</div>';return}
+    offerText=r.text;
+    box.hidden=false;
+    box.innerHTML='<h3>💡 Phương án gợi ý</h3><div class="offers">'+r.offers.map(o=>`<div class="offer">${o.price?`<span class="pr">${esc(o.price)}</span>`:'<span class="pr nop">chưa có giá</span>'}<b>${esc(o.label)}</b> <span class="pill">${esc(o.status)}</span>
+      <div class="why">${esc(o.why.join(" · "))}${o.note?" · "+esc(o.note):""}${o.doc?` · <a href="${esc(o.doc)}" target="_blank" rel="noopener">Tài liệu</a>`:""}</div></div>`).join("")+
+      '</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary btn-sm" type="button" id="offCopy">Copy tin nhắn Zalo</button><a class="btn btn-sm" style="color:#0068ff" target="_blank" rel="noopener" href="https://zalo.me/'+esc(l.phone)+'">Mở Zalo</a></div>';
+    $("#offCopy").onclick=async()=>{try{await navigator.clipboard.writeText(offerText);toast("Đã copy tin nhắn – dán vào Zalo")}catch(e){prompt("Copy tin nhắn:",offerText)}};
+  }catch(e){box.hidden=false;box.innerHTML='<h3>💡 Phương án gợi ý</h3><div class="nop">'+esc(e.message)+'</div>'}
+}
 function closeLead(){$("#scrim").hidden=true;$("#drawer").hidden=true;S.current=null}
 $("#dClose").onclick=closeLead;$("#dCancel").onclick=closeLead;$("#scrim").onclick=closeLead;
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#drawer").hidden)closeLead()});
 $$("#quickCb [data-cb]").forEach(b=>b.onclick=()=>{const d=quickDate(b.dataset.cb);$("#dCallback").value=d?toLocal(toStr(d)):""});
 $("#dSave").onclick=async()=>{
   const l=S.current;if(!l)return;
-  const patch={status:$("#dStatus").value,callback:fromLocal($("#dCallback").value),project:$("#dProject").value.trim(),need:$("#dNeed").value.trim(),
+  const patch={status:$("#dStatus").value,callback:fromLocal($("#dCallback").value),project:$("#dProject").value.trim(),need:$("#dNeed").value.trim(),budget:$("#dBudget").value.trim(),
     name:$("#dNameIn").value.trim(),phone:$("#dPhone").value.trim(),email:$("#dEmail").value.trim()};
   const btn=$("#dSave");btn.disabled=true;
   try{await saveLead(l,patch,$("#dNote").value.trim());closeLead()}
@@ -693,9 +755,38 @@ $("#addForm").addEventListener("submit",async e=>{
   }catch(err){$("#addErr").textContent=err.message}finally{btn.disabled=false}
 });
 
+/* ---------- Sản phẩm ---------- */
+const vn=n=>String(n).replace(".",",");
+const prodRange=(a,b,u)=>a===""||a==null?"—":(b===""||b==null||b===a?vn(a):vn(a)+"–"+vn(b))+(u?" "+u:"");
+function renderProds(){
+  $("#prodProjects").innerHTML=[...new Set(S.products.map(p=>p.project))].map(p=>`<option value="${esc(p)}">`).join("");
+  $("#prodStatus").innerHTML=S.prodStatuses.map(x=>`<option>${esc(x)}</option>`).join("");
+  $("#prodRows").innerHTML=S.products.map(p=>`<tr data-id="${esc(p.id)}"><td>${esc(p.project)}</td><td><b>${esc(p.name)}</b><div class="nop">${esc(p.kind)}${p.note?" · "+esc(p.note):""}</div></td>
+    <td>${prodRange(p.areaMin,p.areaMax,"m²")}</td><td>${p.price1===""?'<span class="nop">chưa có giá</span>':prodRange(p.price1,p.price2)}</td>
+    <td><span class="pill">${esc(p.status)}</span></td><td>${p.doc?`<a href="${esc(p.doc)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Mở</a>`:""}</td><td><button class="btn btn-ghost btn-sm">Sửa</button></td></tr>`).join("")||'<tr><td colspan="7" class="nop">Chưa có sản phẩm.</td></tr>';
+  $$("#prodRows tr[data-id]").forEach(tr=>tr.onclick=()=>openProd(tr.dataset.id));
+}
+let prodCur=null;
+function openProd(id){
+  prodCur=S.products.find(p=>p.id===id)||null;const f=$("#prodForm");f.reset();$("#prodErr").textContent="";
+  $("#prodTitle").textContent=prodCur?"Sửa sản phẩm":"Thêm sản phẩm";$("#prodDel").hidden=!prodCur;
+  if(prodCur)["project","kind","name","code","areaMin","areaMax","price1","price2","status","doc","note"].forEach(k=>f.elements[k].value=prodCur[k]==null?"":prodCur[k]);
+  $("#prodModal").showModal();
+}
+$("#prodAdd").onclick=()=>openProd(null);
+$("#prodForm").addEventListener("submit",async e=>{
+  e.preventDefault();const f=e.target;const btn=$("button[type=submit]",f);btn.disabled=true;
+  try{await api("saveProduct",S.token,Object.assign({id:prodCur?prodCur.id:""},Object.fromEntries(new FormData(f))));$("#prodModal").close();toast("Đã lưu sản phẩm");await load()}
+  catch(err){$("#prodErr").textContent=err.message}finally{btn.disabled=false}
+});
+$("#prodDel").onclick=async()=>{
+  if(!prodCur||!confirm("Xoá sản phẩm này?"))return;
+  try{await api("deleteProduct",S.token,prodCur.id);$("#prodModal").close();toast("Đã xoá");await load()}catch(err){$("#prodErr").textContent=err.message}
+};
+
 /* ---------- Xuất CSV ---------- */
 $("#exportBtn").onclick=()=>{
-  const cols=[["created","Ngày tạo"],["project","Dự án"],["name","Tên"],["phone","SĐT"],["email","Email"],["need","Nhu cầu"],["source","Nguồn"],["campaign","Chiến dịch"],["status","Trạng thái"],["callback","Hẹn gọi lại"],["note","Ghi chú"],["count","Số lần ĐK"]];
+  const cols=[["created","Ngày tạo"],["project","Dự án"],["name","Tên"],["phone","SĐT"],["email","Email"],["need","Nhu cầu"],["budget","Ngân sách"],["source","Nguồn"],["campaign","Chiến dịch"],["status","Trạng thái"],["callback","Hẹn gọi lại"],["note","Ghi chú"],["count","Số lần ĐK"]];
   const cell=v=>{v=String(v==null?"":v);if(/^[=+\-@]/.test(v))v="'"+v;return '"'+v.replace(/"/g,'""')+'"'};
   const csv="﻿"+cols.map(c=>c[1]).join(",")+"\n"+filtered(false).map(l=>cols.map(c=>cell(l[c[0]])).join(",")).join("\n");
   const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));a.download="khach-hang-"+dayKey(new Date())+".csv";a.click();

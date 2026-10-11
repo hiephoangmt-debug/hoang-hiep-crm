@@ -16,6 +16,7 @@ const TZ = "Asia/Ho_Chi_Minh";
 const NOTIFY = true;              // gửi email cho chủ CRM khi có khách mới từ website
 const NOTIFY_EMAIL = "";          // để trống = email tài khoản Google đã cài script
 const WRITE_PROJECT_TAB = true;   // vẫn ghi vào tab dự án theo định dạng cũ (giữ TONG_HOP/UPLOAD chạy)
+const OWNER_NAME = "Hoàng Hiệp"; // tên ký trong tin nhắn Zalo gợi ý
 const SESSION_HOURS = 12;
 const CALENDAR_SYNC = true;       // hẹn gọi lại → sự kiện Google Calendar (điện thoại báo trước 10 phút)
 const REPORT_HOURS = [7, 20];     // giờ gửi email: 7h kế hoạch ngày, 20h tổng kết (giờ VN)
@@ -29,13 +30,17 @@ const CHAT_PER_SESSION = 30;      // tối đa tin nhắn AI / phiên khách / 6
 const CHAT_PER_DAY = 400;         // tối đa tin nhắn AI / ngày (chặn lạm dụng chi phí)
 
 const STATUSES = ["Mới", "Đang liên hệ", "Quan tâm", "Hẹn xem nhà", "Đặt cọc", "Chốt", "Không nhu cầu", "Sai số / Rác", "Data cũ"];
-const SKIP_TABS = /^(CRM_|TONG_HOP|UPLOAD_)/i;
+const SKIP_TABS = /^(CRM_|SAN_PHAM|TONG_HOP|UPLOAD_)/i;
 
-const T_LEADS = "CRM_LEADS", T_LOG = "CRM_LOG";
+const T_LEADS = "CRM_LEADS", T_LOG = "CRM_LOG", T_PROD = "SAN_PHAM";
 const LEAD_COLS = ["id", "created", "project", "name", "phone", "email", "need", "source", "campaign", "page",
-  "ip", "form", "status", "callback", "note", "count", "updated", "eventId"];
+  "ip", "form", "status", "callback", "note", "count", "updated", "eventId", "budget"];
 const LEAD_HEAD = ["ID", "NGÀY TẠO", "DỰ ÁN", "TÊN KHÁCH", "SỐ ĐIỆN THOẠI", "EMAIL", "NHU CẦU", "NGUỒN", "CHIẾN DỊCH",
-  "LINK WEB", "IP", "FORM", "TRẠNG THÁI", "HẸN GỌI LẠI", "GHI CHÚ", "SỐ LẦN ĐĂNG KÝ", "CẬP NHẬT LÚC", "LỊCH (ID)"];
+  "LINK WEB", "IP", "FORM", "TRẠNG THÁI", "HẸN GỌI LẠI", "GHI CHÚ", "SỐ LẦN ĐĂNG KÝ", "CẬP NHẬT LÚC", "LỊCH (ID)", "NGÂN SÁCH"];
+const PROD_COLS = ["id", "project", "kind", "name", "code", "areaMin", "areaMax", "price1", "price2", "status", "note", "doc"];
+const PROD_HEAD = ["ID", "DỰ ÁN", "LOẠI", "TÊN / LOẠI CĂN", "MÃ", "DIỆN TÍCH TỪ (m²)", "DIỆN TÍCH ĐẾN (m²)", "GIÁ TỪ (tỷ)", "GIÁ ĐẾN (tỷ)",
+  "TÌNH TRẠNG", "GHI CHÚ", "TÀI LIỆU (LINK)"];
+const PROD_STATUSES = ["Đang bán", "Chuyển nhượng", "Sắp mở bán", "Giữ chỗ", "Hết"];
 const LOG_HEAD = ["THỜI GIAN", "LEAD ID", "HÀNH ĐỘNG", "NỘI DUNG"];
 const PROJECT_TAB_HEAD = ["THỜI GIAN", "TÊN KHÁCH", "SỐ ĐIỆN THOẠI", "LOẠI CĂN", "LINK WEB",
   "NGUỒN", "UTM MEDIUM", "UTM CAMPAIGN", "UTM TERM", "GCLID/FBCLID", "IP", "FORM", "GHI CHÚ", "EMAIL"];
@@ -68,6 +73,10 @@ function sheet_(name, head) {
     sh.appendRow(head);
     sh.setFrozenRows(1);
     sh.getRange(1, 1, 1, head.length).setFontWeight("bold").setBackground("#0f2350").setFontColor("#ffffff");
+  } else if (sh.getMaxColumns() < head.length || !sh.getRange(1, head.length).getValue()) {
+    // bản cũ thiếu cột mới (vd NGÂN SÁCH) → mở rộng và ghi tiêu đề
+    if (sh.getMaxColumns() < head.length) sh.insertColumnsAfter(sh.getMaxColumns(), head.length - sh.getMaxColumns());
+    sh.getRange(1, 1, 1, head.length).setValues([head]).setFontWeight("bold").setBackground("#0f2350").setFontColor("#ffffff");
   }
   return sh;
 }
@@ -109,8 +118,10 @@ function doPost(e) {
   const project = clean_(p.project || "Website", 80);
   const zone = project.match(/\bV\d+\b/);
   const need = [zone ? "Phân khu " + zone[0] : "", p.need].filter(String).join(" · ");
+  const bm = String(p.budget || p.need || "").match(/(?:dưới|trên|từ)?\s*\d+(?:[.,]\d+)?(?:\s*[–-]\s*\d+(?:[.,]\d+)?)?\s*tỷ/i);
   const lead = {
     created: now_(), project, name: clean_(p.name, 120), phone, email: clean_(p.email, 120), need: clean_(need, 200),
+    budget: clean_(p.budget || (bm ? bm[0].trim() : ""), 60),
     source: clean_(p.utm_source || hostOf_(p.referrer) || "Website", 80), campaign: clean_(p.utm_campaign, 120),
     page: /^https?:\/\//i.test(p.page || "") ? clean_(p.page, 500) : "", ip: clean_(p.ip, 60),
     form: clean_("WEB-" + String(p.source || "").toUpperCase(), 40),
@@ -134,6 +145,7 @@ function upsertLead_(lead, notify) {
   if (dup) {
     sh.getRange(dup._row, LEAD_COLS.indexOf("count") + 1).setValue((parseInt(dup.count, 10) || 1) + 1);
     sh.getRange(dup._row, LEAD_COLS.indexOf("updated") + 1).setValue(now_());
+    if (lead.budget && !dup.budget) sh.getRange(dup._row, LEAD_COLS.indexOf("budget") + 1).setValue(lead.budget);
     log_(dup.id, "Đăng ký lại", [lead.need, lead.page].filter(String).join(" · "));
     if (notify) notify_(Object.assign({}, dup, { need: lead.need || dup.need }), "Khách đăng ký lại");
     return dup.id;
@@ -307,7 +319,15 @@ function bootstrap(token) {
   const now = new Date();
   // rút gọn link web cho nhẹ (bản đầy đủ vẫn nằm trong Sheet)
   const leads = readLeads_().rows.map((l) => Object.assign(strip_(l), { page: l.page.slice(0, 200), advice: advise_(l, now) }));
-  return { leads, statuses: STATUSES, sheetUrl: ss_().getUrl() };
+  const products = readProducts_().rows;
+  const offers = {};
+  let n = 0;
+  leads.forEach((l) => {
+    if (n >= 80 || l.advice.priority < 1 || l.advice.priority > 2) return;
+    const o = recommend_(l, products, 2);
+    if (o.length) { offers[l.id] = o; n++; }
+  });
+  return { leads, statuses: STATUSES, sheetUrl: ss_().getUrl(), products, offers, prodStatuses: PROD_STATUSES };
 }
 
 function findLead_(id) {
@@ -317,7 +337,7 @@ function findLead_(id) {
   return { sh: t.sh, lead };
 }
 
-const EDITABLE = { name: "Tên", phone: "SĐT", email: "Email", need: "Nhu cầu", status: "Trạng thái", callback: "Hẹn gọi lại", project: "Dự án" };
+const EDITABLE = { name: "Tên", phone: "SĐT", email: "Email", need: "Nhu cầu", budget: "Ngân sách", status: "Trạng thái", callback: "Hẹn gọi lại", project: "Dự án" };
 
 function updateLead(token, id, patch, note) {
   auth_(token);
@@ -365,7 +385,7 @@ function createLead(token, data) {
   if (!data.name || !phone) throw new Error("Cần nhập tên và số điện thoại hợp lệ.");
   return withLock_(() => upsertLead_({
     created: now_(), project: clean_(data.project || "Khác", 80), name: clean_(data.name, 120), phone,
-    email: clean_(data.email, 120), need: clean_(data.need, 200), source: clean_(data.source || "Nhập tay", 80),
+    email: clean_(data.email, 120), need: clean_(data.need, 200), budget: clean_(data.budget, 60), source: clean_(data.source || "Nhập tay", 80),
     campaign: "", page: "", ip: "", form: "CRM", note: clean_(data.note, 1000),
   }, false));
 }
@@ -377,6 +397,150 @@ function deleteLead(token, id) {
     if (lead.eventId) { lead.callback = ""; syncCalendar_(lead); }
     sh.deleteRow(lead._row);
     log_(id, "Xoá khách", `${lead.name} – ${lead.phone} (${lead.project})`);
+    return true;
+  });
+}
+
+/* ======================= SẢN PHẨM & PHƯƠNG ÁN ======================= */
+// Danh mục mẫu sinh từ dữ liệu website. CỘT GIÁ ĐỂ TRỐNG – hãy tự điền giá thật trong tab SAN_PHAM (đơn vị: tỷ đồng).
+// SEED-BEGIN (do crm/tools/gen-seed.mjs sinh)
+const SEED_PRODUCTS = [["FPT Plaza 1","Căn hộ","1PN","1PN",46,"","Chuyển nhượng","",""],["FPT Plaza 1","Căn hộ","2PN","2PN",68,"","Chuyển nhượng","",""],["FPT Plaza 1","Căn hộ","3PN","3PN",82,"","Chuyển nhượng","",""],["FPT Plaza 2","Căn hộ","2PN","2PN",56,70,"Chuyển nhượng","",""],["FPT Plaza 2","Căn hộ","3PN","3PN",75,90,"Chuyển nhượng","",""],["FPT Plaza 3","Căn hộ","1PN","1PN",41.9,"","Đang bán","",""],["FPT Plaza 3","Căn hộ","2PN","2PN",54.6,67,"Đang bán","",""],["FPT Plaza 3","Căn hộ","3PN","3PN",75,90,"Đang bán","",""],["FPT Plaza 3","Căn hộ","3PN+1","3PN+1",122.8,123.5,"Đang bán","",""],["FPT Plaza 4","Căn hộ","2 PN","2PN",58.76,74.13,"Đang bán","922 căn theo mặt bằng","https://drive.google.com/drive/folders/1Kd_kJYOkwz8eV5D2eYalKlrqgVymEDYB"],["FPT Plaza 4","Căn hộ","3 PN","3PN",87.84,90.31,"Đang bán","64 căn theo mặt bằng","https://drive.google.com/drive/folders/1Kd_kJYOkwz8eV5D2eYalKlrqgVymEDYB"],["FPT Plaza 4","Căn hộ","1 PN","1PN",46.27,49.76,"Đang bán","34 căn theo mặt bằng","https://drive.google.com/drive/folders/1Kd_kJYOkwz8eV5D2eYalKlrqgVymEDYB"],["FPT Plaza 4","Căn hộ","3 PN+","3PN+",96.03,127.77,"Đang bán","52 căn theo mặt bằng","https://drive.google.com/drive/folders/1Kd_kJYOkwz8eV5D2eYalKlrqgVymEDYB"],["FPT Plaza 4","Căn hộ","1 PN+","1PN+",45.49,49.53,"Đang bán","54 căn theo mặt bằng","https://drive.google.com/drive/folders/1Kd_kJYOkwz8eV5D2eYalKlrqgVymEDYB"],["FPT Plaza 4","Căn hộ","2 PN+","2PN+",72.59,80.38,"Đang bán","198 căn theo mặt bằng","https://drive.google.com/drive/folders/1Kd_kJYOkwz8eV5D2eYalKlrqgVymEDYB"],["FPT Plaza 4","Duplex","Duplex 3 PN+","DUP-3PN+",142.53,172.86,"Đang bán","12 căn theo mặt bằng","https://drive.google.com/drive/folders/1Kd_kJYOkwz8eV5D2eYalKlrqgVymEDYB"],["FPT Plaza 4","Duplex","Duplex 4 PN+","DUP-4PN+",268.73,268.73,"Đang bán","1 căn theo mặt bằng","https://drive.google.com/drive/folders/1Kd_kJYOkwz8eV5D2eYalKlrqgVymEDYB"],["FPT Plaza 5","Căn hộ","1PN","1PN",45,50,"Sắp mở bán","Số liệu dự kiến",""],["FPT Plaza 5","Căn hộ","2PN","2PN",56,75,"Sắp mở bán","Số liệu dự kiến",""],["FPT Plaza 5","Căn hộ","3PN","3PN",78,"","Sắp mở bán","Số liệu dự kiến",""],["Đất nền V1","Đất nền","Lô phân khu V1","V1",200,350,"Đang bán","",""],["Đất nền V2","Đất nền","Lô phân khu V2","V2",100,100,"Đang bán","",""],["Đất nền V3","Đất nền","Lô phân khu V3","V3",100,100,"Đang bán","",""],["Đất nền V4","Đất nền","Lô phân khu V4","V4","","","Đang bán","",""],["Đất nền V5","Đất nền","Lô phân khu V5","V5",90,105,"Đang bán","",""],["Đất nền V6","Đất nền","Lô phân khu V6","V6","","","Đang bán","",""]];
+// SEED-END
+
+function readProducts_() {
+  const sh = sheet_(T_PROD, PROD_HEAD);
+  const last = sh.getLastRow();
+  if (last < 2) return { sh, rows: [] };
+  const rows = sh.getRange(2, 1, last - 1, PROD_COLS.length).getValues().map((r, i) => {
+    const o = { _row: i + 2 };
+    PROD_COLS.forEach((c, j) => (o[c] = r[j] == null ? "" : r[j]));
+    ["areaMin", "areaMax", "price1", "price2"].forEach((k) => (o[k] = parseNum_(o[k])));
+    return o;
+  }).filter((o) => o.id);
+  return { sh, rows };
+}
+
+/** Tạo tab SAN_PHAM và điền danh mục mẫu nếu tab đang trống (không ghi đè dữ liệu bạn đã sửa). */
+function seedProducts() {
+  const sh = sheet_(T_PROD, PROD_HEAD);
+  if (sh.getLastRow() > 1) { console.log("SAN_PHAM đã có dữ liệu – giữ nguyên."); return; }
+  const out = SEED_PRODUCTS.map((r, i) => {
+    // r: [project, kind, name, code, areaMin, areaMax, status, note, doc]
+    return ["P" + String(i + 1).padStart(3, "0"), r[0], r[1], r[2], r[3], r[4], r[5], "", "", r[6], r[7], r[8]];
+  });
+  if (out.length) sh.getRange(2, 1, out.length, PROD_COLS.length).setValues(out);
+}
+
+const norm_ = (s) => String(s == null ? "" : s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d");
+function parseNum_(v) {
+  if (typeof v === "number") return v;
+  const m = String(v == null ? "" : v).replace(/\s/g, "").match(/\d+(?:[.,]\d+)?/);
+  return m ? parseFloat(m[0].replace(",", ".")) : "";
+}
+
+/** "3 – 4 tỷ" → [3,4]; "Dưới 2 tỷ" → [0,2]; "Trên 6 tỷ" → [6,Infinity]; "4,5 tỷ" → [3.8,5.2]; không hiểu → null. */
+function parseBudget_(t) {
+  const s = norm_(t).replace(/,/g, ".");
+  const nums = (s.match(/\d+(?:\.\d+)?/g) || []).map(parseFloat);
+  if (!nums.length || !/ty/.test(s)) return null;
+  if (/duoi|toi da|<|khong qua/.test(s)) return [0, nums[0]];
+  if (/tren|tu |tro len|>/.test(s) && nums.length === 1) return [nums[0], Infinity];
+  if (nums.length >= 2) return [Math.min(nums[0], nums[1]), Math.max(nums[0], nums[1])];
+  return [nums[0] * 0.85, nums[0] * 1.15];
+}
+
+const fmtNum_ = (n) => String(Math.round(n * 100) / 100).replace(".", ",");
+const fmtArea_ = (p) => (p.areaMin === "" ? "" : p.areaMax === "" || p.areaMax === p.areaMin ? `${fmtNum_(p.areaMin)} m²` : `${fmtNum_(p.areaMin)}–${fmtNum_(p.areaMax)} m²`);
+const fmtPrice_ = (p) => (p.price1 === "" ? "" : p.price2 === "" || p.price2 === p.price1 ? `${fmtNum_(p.price1)} tỷ` : `${fmtNum_(p.price1)}–${fmtNum_(p.price2)} tỷ`);
+
+/**
+ * Chọn tối đa n sản phẩm phù hợp nhất cho 1 khách: dự án, loại (đất/căn hộ), số phòng ngủ, ngân sách, tình trạng.
+ * Chỉ dùng thông tin có thật trong danh mục; sản phẩm chưa có giá vẫn được gợi ý nhưng ghi "chưa có giá".
+ */
+function recommend_(lead, products, n) {
+  const text = norm_([lead.project, lead.need].join(" "));
+  const bud = parseBudget_(lead.budget || lead.need);
+  const wantLand = /\bdat\b|phan khu|\bv[1-9]\b/.test(text);
+  const wantApt = /can ho|plaza|\d\s*pn|phong ngu|duplex/.test(text);
+  const bed = (text.match(/(\d)\s*(?:pn|phong ngu)/) || [])[1];
+  const wantDup = /duplex/.test(text);
+  const scored = [];
+  (products || []).forEach((p) => {
+    if (p.status === "Hết") return;
+    let score = 0;
+    const why = [];
+    const pj = norm_(p.project), code = norm_(p.code);
+    const projHit = pj && text.indexOf(pj) >= 0;
+    const zoneHit = p.kind === "Đất nền" && new RegExp("\\b" + code + "\\b").test(text);
+    if (projHit || zoneHit) { score += 40; why.push("đúng dự án khách quan tâm"); }
+    else if ((p.kind === "Đất nền" && wantLand && !wantApt) || (p.kind !== "Đất nền" && wantApt && !wantLand)) { score += 8; why.push("cùng loại sản phẩm"); }
+    else if (!projHit && !zoneHit && (wantLand || wantApt)) return;
+    else if (!wantLand && !wantApt) return;
+    if (bed && p.kind !== "Đất nền") {
+      const pb = (code.match(/^(?:dup-)?(\d)pn/) || norm_(p.name).match(/(\d)\s*pn/) || [])[1];
+      if (pb === bed) { score += 30; why.push(bed + " phòng ngủ"); } else if (pb) score -= 15;
+    }
+    if (wantDup) { if (p.kind === "Duplex") { score += 25; why.push("Duplex"); } else score -= 10; }
+    else if (p.kind === "Duplex") score -= 12;
+    if (bud && p.price1 !== "") {
+      const lo = p.price1, hi = p.price2 === "" ? p.price1 : p.price2;
+      if (lo <= bud[1] && hi >= bud[0]) { score += 30; why.push("trong ngân sách"); } else { score -= 40; }
+    } else if (bud) why.push("chưa có giá để so ngân sách");
+    score += { "Đang bán": 10, "Chuyển nhượng": 8, "Sắp mở bán": 4, "Giữ chỗ": 2 }[p.status] || 0;
+    if (score > 0) scored.push({ p, score, why });
+  });
+  scored.sort((a, b) => b.score - a.score);
+  return scored.slice(0, n || 3).map(({ p, why }) => ({
+    id: p.id, label: `${p.project} – ${p.name}${fmtArea_(p) ? " (" + fmtArea_(p) + ")" : ""}`,
+    price: fmtPrice_(p), status: p.status, doc: p.doc || "", note: p.note || "", why,
+  }));
+}
+
+/** Tin nhắn Zalo gợi ý phương án – chỉ nêu thông tin có trong danh mục, không bịa giá. */
+function offerText_(lead, offers) {
+  const first = String(lead.name || "").trim().split(/\s+/).pop() || "anh/chị";
+  const lines = offers.map((o, i) => `${i + 1}. ${o.label}${o.price ? " – " + o.price : ""}${o.status ? " (" + o.status + ")" : ""}${o.doc ? "\n   Tài liệu: " + o.doc : ""}`);
+  const noPrice = offers.some((o) => !o.price);
+  return `Chào ${first}, em là ${OWNER_NAME}. Dựa trên nhu cầu ${lead.need ? "“" + lead.need + "”" : "anh/chị đã đăng ký"}, em xin gửi mình ${offers.length} phương án phù hợp:\n${lines.join("\n")}\n` +
+    `${noPrice ? "Em sẽ gửi bảng giá chi tiết mới nhất cho mình ngay. " : ""}Anh/chị tiện nghe máy lúc nào để em tư vấn thêm và hẹn xem thực tế ạ?`;
+}
+
+function getOffers(token, id) {
+  auth_(token);
+  const { lead } = findLead_(id);
+  const offers = recommend_(lead, readProducts_().rows, 3);
+  return { offers, text: offers.length ? offerText_(lead, offers) : "" };
+}
+
+function listProducts(token) { auth_(token); return readProducts_().rows; }
+
+function saveProduct(token, d) {
+  auth_(token);
+  return withLock_(() => {
+    const t = readProducts_();
+    if (!d.project || !d.name) throw new Error("Cần nhập dự án và tên / loại.");
+    if (d.status && PROD_STATUSES.indexOf(d.status) < 0) throw new Error("Tình trạng không hợp lệ.");
+    const o = {
+      id: d.id || "P" + Date.now().toString(36).toUpperCase(), project: clean_(d.project, 80), kind: clean_(d.kind || "Căn hộ", 30),
+      name: clean_(d.name, 80), code: clean_(d.code, 30), areaMin: parseNum_(d.areaMin), areaMax: parseNum_(d.areaMax),
+      price1: parseNum_(d.price1), price2: parseNum_(d.price2), status: d.status || "Đang bán", note: clean_(d.note, 300),
+      doc: /^https?:\/\//i.test(d.doc || "") ? clean_(d.doc, 500) : "",
+    };
+    const row = PROD_COLS.map((c) => o[c]);
+    const ex = t.rows.find((r) => r.id === o.id);
+    if (ex) t.sh.getRange(ex._row, 1, 1, PROD_COLS.length).setValues([row]);
+    else t.sh.appendRow(row);
+    return o;
+  });
+}
+
+function deleteProduct(token, id) {
+  auth_(token);
+  return withLock_(() => {
+    const t = readProducts_();
+    const ex = t.rows.find((r) => r.id === id);
+    if (!ex) throw new Error("Không tìm thấy sản phẩm.");
+    t.sh.deleteRow(ex._row);
     return true;
   });
 }
@@ -485,9 +649,11 @@ function dailyReport() {
 
   const esc = (s) => String(s || "").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
   const url = ScriptApp.getService().getUrl();
+  const products = readProducts_().rows;
+  const offerLine = (l) => { const o = recommend_(l, products, 2); return o.length ? `<br><span style="color:#0f2350">💡 Phương án: ${o.map((x) => esc(x.label + (x.price ? " (" + x.price + ")" : ""))).join(" · ")}</span>` : ""; };
   const row = (x) => `<tr><td style="padding:8px;border-bottom:1px solid #eee;white-space:nowrap"><b>${esc(x.l.name)}</b><br><a href="tel:${x.l.phone}">${x.l.phone}</a></td>
     <td style="padding:8px;border-bottom:1px solid #eee">${esc(x.l.project)}<br><span style="color:#888">${esc(x.l.status)}${x.l.need ? " · " + esc(x.l.need) : ""}</span></td>
-    <td style="padding:8px;border-bottom:1px solid #eee"><span style="background:#fff0e3;color:#b04a00;border-radius:10px;padding:2px 8px;font-size:12px">${esc(x.a.tag)}</span><br>${esc(x.a.action)}</td></tr>`;
+    <td style="padding:8px;border-bottom:1px solid #eee"><span style="background:#fff0e3;color:#b04a00;border-radius:10px;padding:2px 8px;font-size:12px">${esc(x.a.tag)}</span><br>${esc(x.a.action)}${offerLine(x.l)}</td></tr>`;
   const table = (title, list, color) => list.length ? `<h3 style="color:${color};margin:24px 0 8px">${title} (${list.length})</h3>
     <table style="border-collapse:collapse;width:100%;font-size:14px">${list.slice(0, 30).map(row).join("")}</table>${list.length > 30 ? `<p style="color:#888">…và ${list.length - 30} khách khác trong CRM.</p>` : ""}` : "";
   const stat = (n, label) => `<td style="padding:12px;background:#f6f8fc;border-radius:10px;text-align:center"><div style="font-size:26px;font-weight:800;color:#0f2350">${n}</div><div style="font-size:12px;color:#5a6782">${label}</div></td>`;
@@ -567,6 +733,7 @@ function installTriggers() {
 function setupCRM() {
   sheet_(T_LEADS, LEAD_HEAD);
   sheet_(T_LOG, LOG_HEAD);
+  seedProducts();
   installTriggers();
   if (props_().getProperty("pw_hash")) {
     console.log("CRM đã có mật khẩu. Muốn đặt lại, chạy hàm resetPassword.");

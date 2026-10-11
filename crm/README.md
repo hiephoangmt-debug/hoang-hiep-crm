@@ -81,3 +81,13 @@ Model mặc định `CHAT_MODEL = "claude-opus-5-5"`; muốn rẻ hơn có thể
 ```bash
 node crm/test/crm.test.mjs
 ```
+
+## Sản phẩm & phương án gợi ý
+
+- Tab **SAN_PHAM** (tạo bởi `setupCRM`, sửa được ngay trong CRM ở mục *Sản phẩm*): dự án, loại, diện tích, **giá (tỷ đồng)**, tình trạng, link tài liệu.
+  Danh mục mẫu lấy từ dữ liệu website (FPT Plaza 1–5, phân khu V1–V6) và **cột giá để trống – bạn tự điền giá thật**. CRM không bao giờ tự nghĩ ra giá.
+- Cột **NGÂN SÁCH** (S) trong CRM_LEADS: tự bóc từ form web ("3 – 4 tỷ", "Dưới 2 tỷ"…) hoặc nhập tay.
+- Mỗi khách có khối **Phương án gợi ý** (dự án + loại căn/số PN + ngân sách + tình trạng) và nút *Copy tin nhắn Zalo*;
+  việc ưu tiên cao hiện kèm phương án ngay trên thẻ và trong email 7h30/20h30.
+- Chạy `node crm/tools/gen-seed.mjs` để sinh lại danh mục mẫu từ website vào `Code.gs` (chỉ dùng khi tab SAN_PHAM còn trống).
+- Kiểm thử: `node crm/test/crm.test.mjs` và `node crm/test/ui.test.mjs`.

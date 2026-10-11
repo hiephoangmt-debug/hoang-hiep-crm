@@ -9,10 +9,11 @@ export function loadGas(tabs = {}) {
       data, getName: () => name,
       getLastRow: () => data.length, getLastColumn: () => Math.max(1, ...data.map(r => r.length)),
       appendRow: r => data.push(r.map(v => typeof v === 'string' && v.startsWith("'") ? v.slice(1) : v)),
-      setFrozenRows() {}, hideColumns() {},
+      setFrozenRows() {}, hideColumns() {}, getMaxColumns: () => 100, insertColumnsAfter() {},
       getRange: (r, c, nr = 1, nc = 1) => ({
+        getValue: () => (data[r - 1] || [])[c - 1] ?? '',
         getValues: () => Array.from({ length: nr }, (_, i) => Array.from({ length: nc }, (_, j) => (data[r - 1 + i] || [])[c - 1 + j] ?? '')),
-        setValues: vals => vals.forEach((row, i) => row.forEach((v, j) => { data[r - 1 + i] = data[r - 1 + i] || []; data[r - 1 + i][c - 1 + j] = typeof v === 'string' && v.startsWith("'") ? v.slice(1) : v; })),
+        setValues: function (vals) { vals.forEach((row, i) => row.forEach((v, j) => { data[r - 1 + i] = data[r - 1 + i] || []; data[r - 1 + i][c - 1 + j] = typeof v === 'string' && v.startsWith("'") ? v.slice(1) : v; })); return this; },
         setValue: v => { data[r - 1][c - 1] = v; },
         setFontWeight() { return this; }, setBackground() { return this; }, setFontColor() { return this; },
       }),
