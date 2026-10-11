@@ -109,6 +109,11 @@
   .img img, .img .noimg { display:block; width:100%; height:150px; object-fit:cover; object-position:top; background:var(--hover); }
   .img .noimg { display:flex; align-items:center; justify-content:center; color:var(--muted); background:var(--hover); }
   .img figcaption { padding:6px; font-size:12px; }
+  .img .pick { display:flex; flex-direction:row; justify-content:flex-start; align-items:center; gap:6px; padding:5px 8px; font-size:12px; cursor:pointer; background:var(--hover); }
+  .img.sel { outline:2px solid var(--err); }
+  .evbar { margin:8px 0 2px; gap:6px; flex-wrap:wrap; }
+  .evbar .danger { background:var(--err); color:#fff; }
+  .evbar .danger:disabled { opacity:.45; cursor:not-allowed; }
   .fname { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:600; }
   .row { display:flex; gap:4px; margin-top:4px; align-items:center; }
   .row select { flex:1; font-size:12px; padding:4px; }
@@ -221,6 +226,12 @@
       <section class="card">
         <div class="sec-head"><h3>Đã lưu <small id="evCount" class="muted"></small></h3>
           <button type="button" id="evDedupe" class="ghost small" title="Ảnh cùng nội dung chỉ giữ một, bản thừa chuyển vào thùng rác Drive">Xoá ảnh trùng</button></div>
+        <div class="row evbar">
+          <button type="button" id="evSelAll" class="ghost small">Chọn tất cả</button>
+          <button type="button" id="evSelNone" class="ghost small">Bỏ chọn</button>
+          <button type="button" id="evSelDup" class="ghost small" title="Tự tick các ảnh cùng file, cùng nội dung hoặc cùng tên, giữ lại một ảnh mỗi nhóm">Chọn ảnh trùng</button>
+          <button type="button" id="evDelSel" class="small danger" disabled>Xoá đã chọn (0)</button>
+        </div>
         <div class="imgs" id="evList"></div>
       </section>
     </div>
