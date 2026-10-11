@@ -3,7 +3,7 @@
 
 - bao-cao-mkt/index.html (+ config.js, app.js)       -> apps-script/Index.html  (?page=baocao)
 - crm/crm.html (+ config.js, app.js, crm.js)          -> apps-script/Crm.html    (trang mặc định)
-- crm/huong-dan.html                                  -> apps-script/HuongDan.html (?page=huongdan)
+- crm/huong-dan.html (+ huong-dan.js)                 -> apps-script/HuongDan.html (?page=huongdan)
 """
 import re
 import sys

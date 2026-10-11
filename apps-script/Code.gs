@@ -113,13 +113,14 @@ function saveReport(b64, name, folderId, share) {
  * Chuyển PPTX báo cáo sang PDF: tải lên Drive dạng Google Slides tạm, xuất PDF, xoá bản tạm.
  * Lưu PDF vào thư mục chỉ định (hoặc My Drive). Trả về {url, b64}.
  */
-function convertToPdf(b64, name, folderId, share) {
+/** Tải PPTX lên Drive dưới dạng Google Slides (tạm) – trả ID file Slides. */
+function pptxToSlides_(bytes, name) {
   var boundary = 'bcmkt' + Date.now();
   var meta = JSON.stringify({ name: name.replace(/\.pptx$/i, '') + ' (tạm)', mimeType: 'application/vnd.google-apps.presentation' });
   var head = Utilities.newBlob('--' + boundary + '\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n' + meta +
     '\r\n--' + boundary + '\r\nContent-Type: ' + PPTX_MIME + '\r\n\r\n').getBytes();
   var tail = Utilities.newBlob('\r\n--' + boundary + '--').getBytes();
-  var payload = head.concat(Utilities.base64Decode(b64)).concat(tail);
+  var payload = head.concat(bytes).concat(tail);
   var res = UrlFetchApp.fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&supportsAllDrives=true', {
     method: 'post',
     contentType: 'multipart/related; boundary=' + boundary,
@@ -130,7 +131,11 @@ function convertToPdf(b64, name, folderId, share) {
   if (res.getResponseCode() !== 200) {
     throw new Error('Không chuyển được sang Google Slides (' + res.getResponseCode() + '): ' + res.getContentText().slice(0, 200));
   }
-  var tmpId = JSON.parse(res.getContentText()).id;
+  return JSON.parse(res.getContentText()).id;
+}
+
+function convertToPdf(b64, name, folderId, share) {
+  var tmpId = pptxToSlides_(Utilities.base64Decode(b64), name);
   try {
     var pdf = exportBlob_('https://docs.google.com/presentation/d/' + tmpId + '/export/pdf')
       .setName(name.replace(/\.pptx$/i, '') + '.pdf');
@@ -141,6 +146,46 @@ function convertToPdf(b64, name, folderId, share) {
   } finally {
     DriveApp.getFileById(tmpId).setTrashed(true);
   }
+}
+
+/**
+ * Trang hướng dẫn: PDF của file PPTX mẫu (các slide hướng dẫn chụp nghiệm thu).
+ * Chuyển một lần rồi giữ trong Drive của bạn (không chia sẻ); mẫu đổi thì tự chuyển lại.
+ */
+function crmGuideDeck() {
+  var tplId = '';
+  try {
+    crmRows_('DuAn').some(function (p) {
+      var m = /\/d\/([\w-]{15,})/.exec(p.mauPptx || '') || /[?&]id=([\w-]{15,})/.exec(p.mauPptx || '') || /^([\w-]{15,})$/.exec(p.mauPptx || '');
+      tplId = m ? m[1] : '';
+      return !!tplId;
+    });
+  } catch (e) { /* chưa có CRM: dùng mẫu mặc định */ }
+  tplId = tplId || DEFAULT_TEMPLATE;
+  var tpl = DriveApp.getFileById(tplId);
+  var key = tplId + '|' + tpl.getLastUpdated().getTime();
+  var props = PropertiesService.getScriptProperties();
+  var cached = props.getProperty('GUIDE_PDF_ID');
+  if (cached && props.getProperty('GUIDE_PDF_KEY') === key) {
+    try {
+      var f0 = DriveApp.getFileById(cached);
+      if (!f0.isTrashed()) return { b64: Utilities.base64Encode(f0.getBlob().getBytes()), name: tpl.getName() };
+    } catch (e) { /* đã xoá: tạo lại */ }
+  }
+  var isSlides = tpl.getMimeType() === MimeType.GOOGLE_SLIDES;
+  var slidesId = isSlides ? tplId : pptxToSlides_(tpl.getBlob().getBytes(), tpl.getName());
+  var pdf;
+  try {
+    pdf = exportBlob_('https://docs.google.com/presentation/d/' + slidesId + '/export/pdf')
+      .setName('Hướng dẫn nghiệm thu (tự tạo từ mẫu – không xoá).pdf');
+  } finally {
+    if (!isSlides) DriveApp.getFileById(slidesId).setTrashed(true);
+  }
+  if (cached) { try { DriveApp.getFileById(cached).setTrashed(true); } catch (e) { /* bỏ qua */ } }
+  var file = DriveApp.getRootFolder().createFile(pdf);
+  props.setProperty('GUIDE_PDF_ID', file.getId());
+  props.setProperty('GUIDE_PDF_KEY', key);
+  return { b64: Utilities.base64Encode(pdf.getBytes()), name: tpl.getName() };
 }
 
 // =====================================================================
@@ -165,6 +210,7 @@ var CRM_TABLES = {
 };
 var CRM_TEXT_COLS = ['id', 'tuan', 'taiKhoan', 'maTaiKhoan', 'fileId', 'ngayTao', 'hash'];
 var EVIDENCE_ROOT = '146YOZUIiLizOl0waxcqAPw4uzY_jvmzt';
+var DEFAULT_TEMPLATE = '10S0gG5T_o1WOqqkvUiFdwdhauqoa9mA6';
 var CRM_SEED = {
   DuAn: [
     { ten: 'Casamia', khoa: 'Casamia', chienDich: 'CASAMIA BALANCA HOI AN-TATI INVEST ĐỢT 1',

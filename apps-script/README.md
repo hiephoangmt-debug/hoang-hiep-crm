@@ -5,7 +5,7 @@ Một ứng dụng web chạy bằng tài khoản Google của bạn – không 
 | Trang | Link | Dùng để |
 |---|---|---|
 | **CRM** (mặc định) | `…/exec` | Tổng quan, nhập số liệu, sale tải ảnh/chứng từ, tạo & duyệt báo cáo, danh mục |
-| **Hướng dẫn** cho sale | `…/exec?page=huongdan` | Các bước cập nhật báo cáo tuần, ảnh nghiệm thu cần chụp cho từng kênh |
+| **Hướng dẫn** cho sale | `…/exec?page=huongdan` | Chụp nghiệm thu (hiện đúng slide 8–25 của file PPTX mẫu, tự chuyển PDF một lần và giữ trong Drive) + gửi ảnh lên app |
 | Báo cáo từ thư mục Drive | `…/exec?page=baocao` | Tạo báo cáo trực tiếp từ Google Sheet + thư mục ảnh có sẵn |
 
 Dữ liệu CRM nằm trong Google Sheet **"CRM Báo cáo Marketing"** (tự tạo ở lần mở đầu, link ở góc trên trang):

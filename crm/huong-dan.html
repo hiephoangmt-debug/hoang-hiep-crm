@@ -6,19 +6,22 @@
 <base target="_top">
 <title>Hướng dẫn cập nhật báo cáo</title>
 <style>
-  :root { --bg:#f5f6f8; --card:#fff; --text:#1d2330; --muted:#667085; --line:#e3e6eb; --accent:#c8102e; --ok:#127a3a; }
-  @media (prefers-color-scheme: dark) { :root { --bg:#14161a; --card:#1d2026; --text:#e8eaee; --muted:#9aa3b2; --line:#2e333b; --accent:#ef4060; --ok:#4cc27a; } }
+  :root { --bg:#f5f6f8; --card:#fff; --text:#1d2330; --muted:#667085; --line:#e3e6eb; --accent:#c8102e; --ok:#127a3a; --okbg:#e7f5ec; --errbg:#fdecec; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#14161a; --card:#1d2026; --text:#e8eaee; --muted:#9aa3b2; --line:#2e333b; --accent:#ef4060; --ok:#4cc27a; --okbg:#173323; --errbg:#3a1c1c; } }
   * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
   body { margin:0; background:var(--bg); color:var(--text); font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
-  main { max-width:760px; margin:0 auto; padding:20px 16px 48px; }
+  main { max-width:900px; margin:0 auto; padding:20px 16px 48px; }
   h1 { font-size:22px; margin:0 0 4px; }
-  .sub { color:var(--muted); margin:0 0 16px; }
-  .top { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+  .sub { color:var(--muted); margin:0 0 14px; }
+  .top { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
   a.btn { display:inline-block; text-decoration:none; font-weight:600; color:#fff; background:var(--accent); border-radius:8px; padding:9px 16px; }
-  a.btn.ghost { background:transparent; color:var(--accent); border:1px solid var(--accent); }
-  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:14px; }
-  h2 { font-size:17px; margin:0 0 8px; }
-  h3 { font-size:15px; margin:14px 0 4px; }
+  nav.toc { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 16px; position:sticky; top:0; background:var(--bg); padding:8px 0; z-index:2; }
+  nav.toc a { text-decoration:none; color:var(--accent); border:1px solid var(--line); background:var(--card); border-radius:999px; padding:3px 12px; font-size:14px; }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:14px; scroll-margin-top:56px; }
+  h2 { font-size:18px; margin:0 0 8px; }
+  h3 { font-size:16px; margin:18px 0 6px; padding-top:12px; border-top:1px solid var(--line); }
+  h3:first-of-type { border-top:0; padding-top:0; }
   ol, ul { margin:6px 0; padding-left:22px; }
   li { margin:4px 0; }
   b.k { background:var(--bg); border:1px solid var(--line); border-radius:5px; padding:0 6px; font-weight:600; white-space:nowrap; }
@@ -30,54 +33,150 @@
   th, td { border:1px solid var(--line); padding:6px 8px; text-align:left; vertical-align:top; }
   th { background:var(--bg); }
   code { font-size:13px; }
+  /* slide mẫu */
+  .shots { display:grid; gap:12px; margin:8px 0; }
+  .shot { margin:0; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:var(--bg); }
+  .shot img { display:block; width:100%; height:auto; cursor:zoom-in; }
+  .shot figcaption { padding:6px 10px; font-size:14px; }
+  .shot figcaption b { color:var(--accent); }
+  .req { margin:6px 0 0; padding-left:20px; font-size:14px; }
+  #deckStatus { font-size:14px; color:var(--muted); }
+  /* mô phỏng giao diện app */
+  .mock { border:1px solid var(--line); border-radius:10px; background:var(--bg); padding:10px; margin:8px 0 4px; font-size:13px; max-width:520px; }
+  .mock .bar { display:flex; flex-wrap:wrap; gap:6px; align-items:end; }
+  .mock label { display:flex; flex-direction:column; color:var(--muted); font-size:12px; }
+  .mock .sel { border:1px solid var(--line); background:var(--card); color:var(--text); border-radius:6px; padding:3px 8px; min-width:90px; }
+  .mock .b { display:inline-block; border-radius:6px; padding:4px 10px; font-weight:600; }
+  .mock .b.red { background:var(--accent); color:#fff; }
+  .mock .b.ghost { border:1px solid var(--accent); color:var(--accent); }
+  .mock .drop { border:2px dashed var(--line); border-radius:8px; padding:14px; text-align:center; color:var(--muted); }
+  .mock .card { display:flex; gap:8px; border:1px solid var(--line); background:var(--card); border-radius:8px; padding:8px; margin-top:6px; }
+  .mock .thumb { width:64px; height:80px; border-radius:4px; background:linear-gradient(160deg,#cfd6e4,#8fa0bd); flex:none; }
+  .mock .row { display:flex; gap:6px; flex-wrap:wrap; margin-top:4px; }
+  .mock .camp { display:flex; gap:6px; align-items:center; margin-top:4px; }
+  .mock .hl { outline:2px solid var(--accent); outline-offset:2px; }
+  .mock table { font-size:12px; }
+  .mock td.ok { background:var(--okbg); color:var(--ok); font-weight:600; }
+  .mock td.miss { background:var(--errbg); color:var(--accent); font-weight:600; }
+  .step { display:flex; gap:10px; margin:14px 0; }
+  .step .n { flex:none; width:28px; height:28px; border-radius:50%; background:var(--accent); color:#fff; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .step > div { min-width:0; flex:1; }
+  #zoom { position:fixed; inset:0; background:rgba(0,0,0,.85); display:flex; align-items:center; justify-content:center; z-index:9; padding:8px; }
+  #zoom img { max-width:100%; max-height:100%; }
 </style>
 </head>
 <body>
 <main>
   <h1>Hướng dẫn cập nhật báo cáo Marketing tuần</h1>
-  <p class="sub">Dành cho các bạn sale/marketing của TATILAND (dự án Sun) và TATI INVEST (dự án Casamia). Làm trên điện thoại hoặc máy tính, mất khoảng 5 phút mỗi tuần.</p>
+  <p class="sub">Dành cho các bạn sale/marketing TATILAND (dự án Sun) và TATI INVEST (dự án Casamia). Mỗi tuần: <b>chụp ảnh nghiệm thu</b> từng kênh đã chạy → <b>gửi lên app</b> → quản lý tạo báo cáo PDF.</p>
   <div class="top" id="top">
-    <a class="btn" data-app="?donvi=tatiland" href="__APP_URL__?donvi=tatiland">Mở CRM · TATILAND (Sun)</a>
-    <a class="btn" data-app="?donvi=tatiinvest" href="__APP_URL__?donvi=tatiinvest">Mở CRM · TATI INVEST (Casamia)</a>
+    <a class="btn" data-app="?donvi=tatiland" href="__APP_URL__?donvi=tatiland">Mở app · TATILAND (Sun)</a>
+    <a class="btn" data-app="?donvi=tatiinvest" href="__APP_URL__?donvi=tatiinvest">Mở app · TATI INVEST (Casamia)</a>
   </div>
+  <nav class="toc">
+    <a href="#chup">1. Chụp nghiệm thu</a>
+    <a href="#gui">2. Gửi lên app</a>
+    <a href="#so">3. Kiểm tra số liệu</a>
+    <a href="#bc">4. Báo cáo (quản lý)</a>
+    <a href="#loi">5. Gặp lỗi</a>
+  </nav>
 
-  <section>
-    <h2>0. Lần đầu mở link</h2>
-    <ol>
-      <li>Mở link CRM của bên mình (nút đỏ ở trên). Đăng nhập bằng <b>tài khoản Google</b> khi được hỏi.</li>
-      <li>Nếu điện thoại đăng nhập nhiều tài khoản Google mà trang báo lỗi/trắng: mở link trong <b>tab ẩn danh</b> hoặc trình duyệt khác và đăng nhập một tài khoản.</li>
-      <li>Lưu link ra màn hình chính: Safari/Chrome › <b>Chia sẻ</b> › <b>Thêm vào màn hình chính</b>.</li>
-    </ol>
-  </section>
-
-  <section>
-    <h2>1. Mỗi tuần: tải ảnh nghiệm thu (sale)</h2>
-    <ol>
-      <li>Vào tab <b class="k">Ảnh &amp; chứng từ</b>.</li>
-      <li>Chọn <b>Tuần</b>, <b>Dự án</b> và <b>tên mình</b>.</li>
-      <li>Bấm chọn ảnh: chụp màn hình điện thoại, ảnh hoặc <b>PDF</b> hoá đơn đều được, chọn nhiều file một lần.</li>
-      <li>Trang tự đọc chữ trong ảnh và đoán <b>kênh</b> (Facebook / TikTok / Zalo / Google) và <b>loại</b> (Chiến dịch, QC đang chạy, Hoá đơn). Đọc sai thì chọn lại ở ô dưới ảnh.</li>
-      <li>Ảnh Trình quản lý quảng cáo: trang liệt kê các chiến dịch kèm <b>chi tiêu, lead</b>. Kiểm tra số, sửa nếu đọc sai, bỏ tick chiến dịch không thuộc tuần.</li>
-      <li>Bấm <b class="k">Tải lên Drive</b>. Ảnh được lưu vào <code>Thư mục chứng từ / Tên bạn / Dự án / Tuần</code>.</li>
-      <li>Xem <b>Bảng kiểm nghiệm thu</b>: ô đỏ "Thiếu" là ảnh còn phải bổ sung.</li>
-    </ol>
-    <p class="tip">Đã có ảnh sẵn trong thư mục Drive (đúng <code>Tên / Dự án / Tuần</code>)? Bấm <b class="k">Lấy ảnh có sẵn trên Drive</b>, không cần tải lại.</p>
-  </section>
-
-  <section>
-    <h2>2. Ảnh cần chụp cho từng kênh</h2>
-    <p class="note">Khoanh đỏ các mục dưới đây trên ảnh (theo mẫu báo cáo, slide 8–25). Kênh nào không chạy thì bỏ qua.</p>
+  <!-- 1. CHỤP NGHIỆM THU -->
+  <section id="chup">
+    <h2>1. Hướng dẫn chụp nghiệm thu</h2>
+    <p>Mỗi kênh đã chạy trong tuần cần đủ <b>3 loại ảnh</b> (Google: 2 loại):</p>
     <div class="wrap"><table>
-      <tr><th>Kênh</th><th>Chiến dịch (Trình quản lý QC)</th><th>QC đang chạy</th><th>Hoá đơn</th></tr>
-      <tr><td><b>Facebook</b></td><td>ID tài khoản QC · search tên chiến dịch · tổng tiền thực chạy · thời gian chạy</td><td>ID tài khoản QC · thời gian chạy · quảng cáo đang hoạt động</td><td>ID tài khoản QC · số mã tham chiếu · tổng tiền đã thanh toán (VAT) · tên chiến dịch khớp TKQC</td></tr>
-      <tr><td><b>TikTok</b></td><td>ID tài khoản QC · search tên chiến dịch · tổng tiền thực chạy · thời gian chạy</td><td>ID tài khoản QC · quảng cáo chạy</td><td>ID tài khoản QC · tổng tiền đã thanh toán (VAT) · tên chiến dịch khớp TKQC</td></tr>
-      <tr><td><b>Zalo</b></td><td>Search tên chiến dịch · tổng tiền thực chạy · thời gian chạy</td><td>ID tài khoản QC · thời gian chạy · quảng cáo đang hoạt động</td><td>Tổng tiền đã thanh toán (VAT) · tên chiến dịch khớp TKQC</td></tr>
-      <tr><td><b>Google Ads</b></td><td>ID tài khoản QC · search tên chiến dịch · tổng tiền thực chạy · thời gian chạy</td><td>(dùng chung ảnh chiến dịch)</td><td>ID tài khoản QC · số mã tham chiếu · tổng tiền thực chạy</td></tr>
+      <tr><th>Loại ảnh</th><th>Chụp ở đâu</th></tr>
+      <tr><td><b>Chiến dịch</b></td><td>Trình quản lý quảng cáo, tab Chiến dịch: lọc đúng <b>khoảng ngày của tuần báo cáo</b>, search tên chiến dịch, thấy dòng <b>tổng chi tiêu</b>.</td></tr>
+      <tr><td><b>QC đang chạy</b></td><td>Bản xem trước của quảng cáo đang hoạt động (mở 1 quảng cáo → Xem trước).</td></tr>
+      <tr><td><b>Hoá đơn</b></td><td>Hoá đơn / biên lai thanh toán của tài khoản (ảnh chụp hoặc file <b>PDF</b> tải về đều được).</td></tr>
     </table></div>
-    <p class="warn">Chụp rõ <b>ID tài khoản quảng cáo</b> – hệ thống dựa vào ID để biết ảnh/hoá đơn của ai.</p>
+    <p class="warn">Ảnh phải thấy rõ <b>ID tài khoản quảng cáo</b> (trên thanh địa chỉ hoặc góc trên màn hình) – app dựa vào ID để biết ảnh của ai. Chụp <b>cả màn hình</b>, không cắt mất các mục đánh số trong mẫu dưới đây. Khoanh đỏ như mẫu là tốt nhất; không khoanh cũng được nếu các mục vẫn đọc rõ.</p>
+    <p class="tip">Trên điện thoại: chụp màn hình bình thường (ứng dụng Trình quản lý quảng cáo / Meta Business Suite / TikTok Ads / Zalo Ads). Trên máy tính: Windows <b class="k">Win + Shift + S</b>, Mac <b class="k">Cmd + Shift + 4</b>.</p>
+    <p id="deckStatus">Đang tải slide mẫu từ file báo cáo mẫu…</p>
+
+    <h3 id="ch-fb">Facebook Ads</h3>
+    <div class="shots" data-ch="fb"></div>
+    <ul class="req">
+      <li><b>Chiến dịch:</b> ① ID tài khoản QC ② search tên chiến dịch ③ tổng số tiền thực chạy ④ thời gian chạy (khoảng ngày nghiệm thu)</li>
+      <li><b>QC đang chạy:</b> ① ID tài khoản QC ② thời gian chạy ③ quảng cáo đang hoạt động</li>
+      <li><b>Hoá đơn:</b> ① ID tài khoản QC ② số mã tham chiếu ③ tổng số tiền đã thanh toán (VAT) ④ hoá đơn có tên chiến dịch khớp tên trên TKQC</li>
+    </ul>
+
+    <h3 id="ch-tt">TikTok Ads</h3>
+    <div class="shots" data-ch="tt"></div>
+    <ul class="req">
+      <li><b>Chiến dịch:</b> ① ID tài khoản QC ② search tên chiến dịch ③ tổng số tiền thực chạy ④ thời gian chạy</li>
+      <li><b>QC đang chạy:</b> ① ID tài khoản QC ② quảng cáo chạy</li>
+      <li><b>Hoá đơn:</b> ① ID tài khoản QC ② tổng số tiền đã thanh toán (VAT) ③ tên chiến dịch khớp TKQC</li>
+    </ul>
+
+    <h3 id="ch-zl">Zalo Ads</h3>
+    <div class="shots" data-ch="zl"></div>
+    <ul class="req">
+      <li><b>Chiến dịch:</b> ① search tên chiến dịch ② tổng số tiền thực chạy ③ thời gian chạy</li>
+      <li><b>QC đang chạy:</b> ① ID tài khoản QC ② thời gian chạy ③ quảng cáo đang hoạt động</li>
+      <li><b>Hoá đơn (chi tiết giao dịch):</b> ① tổng số tiền đã thanh toán (VAT) ② tên chiến dịch khớp TKQC</li>
+    </ul>
+
+    <h3 id="ch-gg">Google Ads</h3>
+    <div class="shots" data-ch="gg"></div>
+    <ul class="req">
+      <li><b>Chiến dịch:</b> ① ID tài khoản QC ② search tên chiến dịch ③ tổng số tiền thực chạy ④ thời gian chạy</li>
+      <li><b>Hoá đơn:</b> ① ID tài khoản QC (Account ID) ② số mã tham chiếu (Invoice number) ③ tổng số tiền thực chạy</li>
+    </ul>
   </section>
 
-  <section>
+  <!-- 2. GỬI LÊN APP -->
+  <section id="gui">
+    <h2>2. Hướng dẫn gửi ảnh lên app</h2>
+    <p class="note">Lần đầu: mở nút đỏ đầu trang, đăng nhập tài khoản Google. Điện thoại có nhiều tài khoản Google mà trang trắng/báo lỗi → mở bằng tab ẩn danh. Lưu ra màn hình chính: <b>Chia sẻ › Thêm vào màn hình chính</b>.</p>
+
+    <div class="step"><span class="n">1</span><div>
+      Mở tab <b class="k">Ảnh &amp; chứng từ</b>, chọn <b>Tuần</b>, <b>Dự án</b> và <b>tên mình</b>.
+      <div class="mock"><div class="bar">
+        <label>Tuần<span class="sel hl">05/10 – 11/10</span></label>
+        <label>Dự án<span class="sel hl">Sun</span></label>
+        <label>Nhân sự<span class="sel hl">Phan Hạnh</span></label>
+        <span class="b ghost">Lấy ảnh có sẵn trên Drive</span>
+      </div></div>
+    </div></div>
+
+    <div class="step"><span class="n">2</span><div>
+      Bấm vào ô chọn file → chọn <b>tất cả</b> ảnh chụp màn hình và hoá đơn (ảnh hoặc PDF) của tuần. Chọn nhiều file một lần được.
+      <div class="mock"><div class="drop hl">Kéo thả ảnh chụp màn hình quảng cáo, hoá đơn (ảnh hoặc PDF) vào đây, hoặc <span class="b ghost">Chọn tệp</span></div></div>
+      <p class="note">Ảnh đã gửi rồi mà chọn lại thì app tự bỏ qua (báo "Bỏ qua … ảnh trùng").</p>
+    </div></div>
+
+    <div class="step"><span class="n">3</span><div>
+      Chờ app <b>đọc chữ trong ảnh</b> (vài giây mỗi ảnh). Dưới mỗi ảnh, kiểm tra 3 ô: <b>Kênh</b> · <b>Loại ảnh</b> · <b>Nhân sự</b>; đọc sai thì chọn lại. Dòng "Cần khoanh" nhắc các mục phải thấy trong ảnh.
+      <div class="mock"><div class="card"><span class="thumb"></span><div>
+        <b>Screenshot_2026-10-10.jpg</b><br><span class="note">Đọc: Chiến dịch · TK 3911274… · 2 chiến dịch</span>
+        <div class="row"><span class="sel hl">Facebook</span><span class="sel hl">Chiến dịch</span><span class="sel hl">Phan Hạnh</span></div>
+        <div class="camp"><input type="checkbox" checked disabled> SUN_Lead_T10 · 1.250.000 đ · 6 lead</div>
+        <div class="camp"><input type="checkbox" disabled> SUN_Video_T9 (ngoài tuần) · 300.000 đ</div>
+      </div></div></div>
+      <p class="note">Ảnh Trình quản lý quảng cáo: app lấy luôn <b>chi tiêu, lead</b> của từng chiến dịch. Chỉ tick chiến dịch thuộc tuần này, sửa số nếu đọc sai.</p>
+    </div></div>
+
+    <div class="step"><span class="n">4</span><div>
+      Bấm <b class="k">Tải lên Drive</b>. Ảnh được lưu vào <code>Thư mục chứng từ / Tên bạn / Dự án / Tuần</code>.
+      <div class="mock"><span class="b red hl">Tải lên Drive</span></div>
+    </div></div>
+
+    <div class="step"><span class="n">5</span><div>
+      Xem bảng <b>Kiểm tra nghiệm thu</b> ở đầu tab: ô <b>Thiếu</b> màu đỏ là ảnh còn phải bổ sung (chạm vào để xem mục cần khoanh). Đủ hết thì xong.
+      <div class="mock"><table>
+        <tr><th>Phan Hạnh</th><th>Chiến dịch</th><th>QC đang chạy</th><th>Hoá đơn</th></tr>
+        <tr><td>Facebook</td><td class="ok">Đủ (1)</td><td class="ok">Đủ (3)</td><td class="miss">Thiếu</td></tr>
+        <tr><td>TikTok</td><td class="ok">Đủ (1)</td><td class="miss">Thiếu</td><td class="miss">Thiếu</td></tr>
+      </table></div>
+    </div></div>
+
+    <p class="tip">Đã có sẵn ảnh trong thư mục Drive đúng <code>Tên / Dự án / Tuần</code> (ví dụ <code>Phan Hạnh / Sun / 3/10-9/10</code>)? Chỉ cần bấm <b class="k">Lấy ảnh có sẵn trên Drive</b>. Ảnh trùng được xoá bằng nút <b class="k">Xoá ảnh trùng</b> ở mục "Đã lưu".</p>
+  </section>
+
+  <section id="so">
     <h2>3. Kiểm tra số liệu</h2>
     <ol>
       <li>Tab <b class="k">Nhập số liệu</b> › chọn tuần, dự án, tên mình.</li>
@@ -87,22 +186,22 @@
     <p class="note">Nếu một người vừa có số nhập tay/từ Google Sheet vừa có số đọc từ ảnh, chỉ số nhập tay/Sheet được tính.</p>
   </section>
 
-  <section>
+  <section id="bc">
     <h2>4. Tạo và gửi báo cáo (quản lý)</h2>
     <ol>
       <li>Tab <b class="k">Báo cáo</b> › chọn tuần và dự án › <b class="k">Tạo báo cáo</b>.</li>
-      <li>Hệ thống tự lấy ảnh trên Drive, điền slide tổng (1–6) và nhân bản phần từng nhân sự; trang nào thiếu ảnh có khung đỏ "CHƯA CÓ ẢNH NGHIỆM THU".</li>
+      <li>App tự lấy ảnh trên Drive, điền slide tổng (1–6) và nhân bản phần từng nhân sự; trang thiếu ảnh có khung đỏ "CHƯA CÓ ẢNH NGHIỆM THU".</li>
       <li>Bấm <b class="k">Chép tin nhắn gửi nhóm</b> để lấy link PDF (ai có link đều xem được) và dán vào nhóm Zalo.</li>
       <li>Duyệt: đổi trạng thái <b>Nháp › Đã nộp › Đã duyệt</b>.</li>
     </ol>
   </section>
 
-  <section>
+  <section id="loi">
     <h2>5. Gặp lỗi?</h2>
     <ul>
       <li><b>Kẹt ở "Đang tải CRM…"</b>: tải lại trang; thử tab ẩn danh; tắt chặn quảng cáo (trang cần tải mã từ cdn.jsdelivr.net).</li>
-      <li><b>Đọc chữ sai</b>: chọn lại kênh/loại/số dưới ảnh trước khi tải lên.</li>
-      <li><b>Ảnh vào nhầm người</b>: kiểm tra ID tài khoản trong tab Danh mục, hoặc đặt ảnh đúng thư mục <code>Tên / Dự án / Tuần</code>.</li>
+      <li><b>Đọc chữ sai</b>: chọn lại kênh/loại/nhân sự/số dưới ảnh trước khi tải lên.</li>
+      <li><b>Ảnh vào nhầm người</b>: chọn lại ô Nhân sự ở mục "Đã lưu", hoặc nhờ quản lý thêm ID tài khoản ở tab Danh mục.</li>
       <li>Vẫn không được: chụp màn hình lỗi gửi quản lý.</li>
     </ul>
   </section>
@@ -113,5 +212,6 @@
     if (a.getAttribute("href").indexOf("__APP" + "_URL__") === 0) a.hidden = true;
   });
 </script>
+<script src="huong-dan.js"></script>
 </body>
 </html>
