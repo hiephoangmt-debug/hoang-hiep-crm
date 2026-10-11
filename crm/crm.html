@@ -158,7 +158,7 @@
 </style>
 </head>
 <body>
-<div id="loading">Đang tải CRM… <small class="muted">(giao diện v41)</small></div>
+<div id="loading">Đang tải CRM… <small class="muted">(giao diện v42)</small></div>
 <div id="diag" style="max-width:760px;margin:0 auto;padding:0 16px;color:#b42318;font-size:13px"></div>
 <script>
   // Báo lỗi ngay trên màn hình (để biết trang dừng ở đâu khi không mở được bảng điều khiển trình duyệt)
@@ -274,7 +274,8 @@
           <label id="rpWeekBox">Tuần<select id="rpWeek"></select></label>
           <label id="rpMonthBox" hidden>Tháng<select id="rpMonth"></select></label>
           <label>Dự án<select id="rpProject"></select></label>
-          <label>Xuất ra<select id="rpFormat"><option value="pptx">Trang web + PPTX</option><option value="web">Chỉ trang web (nhanh)</option><option value="both">Trang web + PPTX + PDF (chậm)</option></select></label>
+          <label>Phương án<select id="rpFormat"><option value="both">Cả 2 phương án (PA cũ + PA mới)</option><option value="pptx">PA cũ – PPTX theo mẫu</option><option value="web">PA mới – trang web (nhanh)</option></select></label>
+          <label class="row" style="flex-direction:row;gap:6px;color:var(--text)"><input type="checkbox" id="rpPdf"> Kèm PDF của PA cũ (chậm hơn)</label>
           <label class="row" style="flex-direction:row;gap:6px;color:var(--text)"><input type="checkbox" id="rpKeepMissing" checked> Giữ trang nghiệm thu còn thiếu ảnh (ghi “CHƯA CÓ ẢNH”)</label>
           <button type="button" id="rpGo">Tạo báo cáo</button>
         </div>
