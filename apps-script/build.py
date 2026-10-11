@@ -4,6 +4,7 @@
 - bao-cao-mkt/index.html (+ config.js, app.js)       -> apps-script/Index.html  (?page=baocao)
 - crm/crm.html (+ config.js, app.js, crm.js)          -> apps-script/Crm.html    (trang mặc định)
 - crm/huong-dan.html (+ huong-dan.js)                 -> apps-script/HuongDan.html (?page=huongdan)
+- crm/bao-cao-web.html (+ bao-cao-web.js)             -> apps-script/BaoCaoWeb.html (?page=bc&k=<mã báo cáo>)
 """
 import re
 import sys
@@ -59,3 +60,4 @@ def build(src: Path, out_name: str):
 build(ROOT / "bao-cao-mkt" / "index.html", "Index.html")
 build(ROOT / "crm" / "crm.html", "Crm.html")
 build(ROOT / "crm" / "huong-dan.html", "HuongDan.html")
+build(ROOT / "crm" / "bao-cao-web.html", "BaoCaoWeb.html")

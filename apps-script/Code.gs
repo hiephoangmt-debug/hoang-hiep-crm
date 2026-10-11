@@ -17,6 +17,12 @@ function doGet(e) {
       .setTitle('Hướng dẫn cập nhật báo cáo')
       .addMetaTag('viewport', 'width=device-width, initial-scale=1');
   }
+  if (page === 'bc') {
+    // Báo cáo dạng trang web (link có mã riêng của từng báo cáo, ai có link đều xem được)
+    return HtmlService.createHtmlOutputFromFile('BaoCaoWeb')
+      .setTitle('Báo cáo Marketing tuần')
+      .addMetaTag('viewport', 'width=device-width, initial-scale=1');
+  }
   var report = page === 'baocao';
   return HtmlService.createHtmlOutputFromFile(report ? 'Index' : 'Crm')
     .setTitle(report ? 'Báo cáo Marketing' : 'CRM Báo cáo Marketing')
@@ -253,7 +259,7 @@ var CRM_TABLES = {
     ['fileId', 'File ID'], ['tenFile', 'Tên file'], ['url', 'Link'], ['nguoiTao', 'Người tạo'], ['ngayTao', 'Ngày tạo'],
     ['hash', 'Mã nội dung (chống trùng)'], ['soTien', 'Số tiền hoá đơn (gồm VAT)'], ['vat', 'VAT %']],
   BaoCao: [['id', 'ID'], ['tuan', 'Tuần (thứ 2)'], ['duAn', 'Dự án'], ['trangThai', 'Trạng thái'], ['pdfUrl', 'PDF'], ['pptxUrl', 'PPTX'],
-    ['tomTat', 'Tóm tắt'], ['nguoiTao', 'Người tạo'], ['ngayTao', 'Ngày tạo']],
+    ['tomTat', 'Tóm tắt'], ['nguoiTao', 'Người tạo'], ['ngayTao', 'Ngày tạo'], ['webKey', 'Mã link báo cáo web']],
 };
 var CRM_TEXT_COLS = ['id', 'tuan', 'taiKhoan', 'maTaiKhoan', 'fileId', 'ngayTao', 'hash'];
 var EVIDENCE_ROOT = '146YOZUIiLizOl0waxcqAPw4uzY_jvmzt';
@@ -481,6 +487,40 @@ function crmLoginCode(email, code) {
   if (!ns) throw new Error('Email không còn trong danh sách nhân sự.');
   var token = Utilities.base64EncodeWebSafe(Utilities.newBlob(email).getBytes()).replace(/=+$/, '') + '.' + crmSign_(email);
   return { token: token, me: crmMe_(token) };
+}
+
+// ---------------------------------------------------------------------
+// Báo cáo web: dữ liệu + ảnh theo mã link (webKey) của báo cáo
+// ---------------------------------------------------------------------
+function crmWebReport_(k) {
+  k = String(k || '');
+  var bc = k.length >= 16 && crmRows_('BaoCao').filter(function (r) { return r.webKey === k; })[0];
+  if (!bc) throw new Error('Link báo cáo không đúng hoặc đã bị thay. Nhờ quản trị gửi lại link mới.');
+  return bc;
+}
+function crmWebReport(k) {
+  var bc = crmWebReport_(k);
+  var pj = crmRows_('DuAn').filter(function (p) { return p.ten === bc.duAn; })[0] || {};
+  var pick = function (r, keys) { var o = {}; keys.forEach(function (x) { o[x] = r[x]; }); return o; };
+  var cols = ['tuan', 'nhanSu', 'nenTang', 'taiKhoan', 'chienDich', 'chiPhi', 'chiPhiPhi', 'lead', 'mql', 'sql', 'deal', 'hienThi', 'tiepCan', 'luotNhap', 'luotXem', 'nguon'];
+  var soLieu = crmRows_('SoLieu').filter(function (r) { return r.duAn === bc.duAn && String(r.tuan) <= String(bc.tuan); })
+    .map(function (r) { return pick(r, cols); });
+  var chungTu = crmRows_('ChungTu').filter(function (r) { return r.duAn === bc.duAn && String(r.tuan) === String(bc.tuan); })
+    .map(function (r) { return pick(r, ['id', 'nhanSu', 'nenTang', 'loai', 'tenFile', 'soTien', 'vat']); });
+  return {
+    duAn: bc.duAn, tuan: bc.tuan, trangThai: bc.trangThai, ngayTao: bc.ngayTao, pdfUrl: bc.pdfUrl, pptxUrl: bc.pptxUrl,
+    chienDich: pj.chienDich || '', logo: pj.logo || '',
+    nhanSu: crmRows_('NhanSu').filter(function (n) { return n.trangThai !== 'Nghỉ'; }).map(function (n) { return n.ten; }),
+    soLieu: soLieu, chungTu: chungTu,
+  };
+}
+/** Ảnh / PDF chứng từ của báo cáo (chỉ chứng từ thuộc đúng dự án + tuần của link). */
+function crmWebImage(k, id) {
+  var bc = crmWebReport_(k);
+  var c = crmRows_('ChungTu').filter(function (r) { return r.id === id && r.duAn === bc.duAn && String(r.tuan) === String(bc.tuan); })[0];
+  if (!c) throw new Error('Không có chứng từ này trong báo cáo.');
+  var blob = DriveApp.getFileById(c.fileId).getBlob();
+  return { b64: Utilities.base64Encode(blob.getBytes()), type: blob.getContentType() };
 }
 
 /** Tạo báo cáo: chỉ chủ ứng dụng hoặc quản trị. */

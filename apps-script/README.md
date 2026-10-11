@@ -6,6 +6,7 @@ Một ứng dụng web chạy bằng tài khoản Google của bạn – không 
 |---|---|---|
 | **CRM** (mặc định) | `…/exec` | Tổng quan, nhập số liệu, sale tải ảnh/chứng từ, tạo & duyệt báo cáo, danh mục |
 | **Hướng dẫn** cho sale | `…/exec?page=huongdan` | Chụp nghiệm thu (hiện đúng slide 8–25 của file PPTX mẫu, tự chuyển PDF một lần và giữ trong Drive) + gửi ảnh lên app |
+| **Báo cáo dạng trang web** | `…/exec?page=bc&k=<mã>` | Tạo ở tab Báo cáo (Xuất ra: Trang web…), link nằm ở Lịch sử báo cáo / tin nhắn gửi nhóm |
 | Báo cáo từ thư mục Drive | `…/exec?page=baocao` | Tạo báo cáo trực tiếp từ Google Sheet + thư mục ảnh có sẵn |
 
 Dữ liệu CRM nằm trong Google Sheet **"CRM Báo cáo Marketing"** (tự tạo ở lần mở đầu, link ở góc trên trang):
@@ -15,7 +16,7 @@ Dữ liệu CRM nằm trong Google Sheet **"CRM Báo cáo Marketing"** (tự t�
 
 1. Mở https://script.google.com → **Dự án mới** → đặt tên "CRM Báo cáo Marketing".
 2. File **Code.gs**: xoá nội dung có sẵn, dán toàn bộ [`Code.gs`](Code.gs).
-3. **+ › HTML** → tên `Crm` → dán toàn bộ [`Crm.html`](Crm.html).
+3. **+ › HTML** → tên `Crm` → dán toàn bộ [`Crm.html`](Crm.html). Tương tự `BaoCaoWeb` ← [`BaoCaoWeb.html`](BaoCaoWeb.html).
 4. **+ › HTML** → tên `Index` → dán toàn bộ [`Index.html`](Index.html).
    **+ › HTML** → tên `HuongDan` → dán toàn bộ [`HuongDan.html`](HuongDan.html).
 5. 💾 Lưu → **Triển khai › Tùy chọn triển khai mới › Ứng dụng web**:

@@ -1176,7 +1176,27 @@
     });
     return dup;
   }
+  /** Mã ngẫu nhiên cho link báo cáo web (giữ nguyên khi tạo lại để link đã gửi vẫn dùng được). */
+  const newWebKey = () => Array.from(crypto.getRandomValues(new Uint8Array(18)), (b) => "abcdefghijkmnpqrstuvwxyz23456789"[b % 32]).join("");
+  const webUrl = (r) => (r && r.webKey && S.appUrl ? `${S.appUrl}?page=bc&k=${r.webKey}` : "");
+  /** Báo cáo dạng trang web: chỉ cần số liệu + ảnh đã lưu, không dựng PPTX (rất nhanh). */
+  async function buildWeb(pjName, w) {
+    const rows = effective(S.SoLieu.filter((r) => r.duAn === pjName && r.tuan === w));
+    if (!rows.length) throw new Error(`${pjName}: chưa có số liệu tuần ${weekLabel(w)}.`);
+    try { await importDriveEvidence(pjName, w); } catch (e) { console.error(e); }
+    try { await dedupeEvidence(pjName, w); } catch (e) { console.error(e); }
+    const prev = S.BaoCao.find((r) => r.duAn === pjName && r.tuan === w);
+    const ev = S.ChungTu.filter((r) => r.duAn === pjName && r.tuan === w && r.nhanSu);
+    const staffN = new Set(rows.map((r) => r.nhanSu).concat(ev.map((r) => r.nhanSu)).filter(Boolean)).size;
+    const out = { tuan: w, duAn: pjName, trangThai: prev ? prev.trangThai : "Nháp", webKey: (prev && prev.webKey) || newWebKey(),
+      tomTat: `Trang web · ${staffN} nhân sự, ${ev.length} ảnh/chứng từ`, ngayTao: nowStamp() };
+    if (prev) out.id = prev.id;
+    const saved = await call("crmSave", "BaoCao", out);
+    S.BaoCao = S.BaoCao.filter((r) => r.id !== saved.id).concat(saved);
+    return saved;
+  }
   async function buildOne(pjName, w, fmt) {
+    if (fmt === "web") return buildWeb(pjName, w);
     const pj = project(pjName);
     const tplId = B.parseDriveId(pj.mauPptx);
     if (!tplId) throw new Error(`Dự án ${pjName} chưa có link PPTX mẫu (tab Danh mục).`);
@@ -1217,6 +1237,7 @@
     if (fmt !== "pdf") { toast(`${pjName}: lưu PPTX…`, "busy"); out.pptxUrl = await gas("saveReport", b64, name, folder, true, prev ? prev.pptxUrl : "", TOKEN); }
     if (fmt !== "pptx") { toast(`${pjName}: chuyển PDF…`, "busy"); out.pdfUrl = (await gas("convertToPdf", b64, name, folder, true, prev ? prev.pdfUrl : "", TOKEN)).url; }
     if (prev) out.id = prev.id;
+    out.webKey = (prev && prev.webKey) || newWebKey(); // luôn có thêm bản trang web
     out.ngayTao = nowStamp(); // lần tạo gần nhất (để biết có ảnh/số mới sau đó không)
     const saved = await call("crmSave", "BaoCao", out);
     S.BaoCao = S.BaoCao.filter((r) => r.id !== saved.id).concat(saved);
@@ -1243,7 +1264,7 @@
     if (!rows.length) return "";
     const w = rows[0].tuan;
     return `[Báo cáo] Marketing tuần ${weekLabel(w, true)}` + (brand ? ` – ${brand}` : "") + "\n" +
-      rows.map((r) => `• ${r.duAn}: ${r.pdfUrl || r.pptxUrl}`).join("\n");
+      rows.map((r) => `• ${r.duAn}: ${webUrl(r) || r.pdfUrl || r.pptxUrl}` + (webUrl(r) && r.pdfUrl ? `\n   (PDF: ${r.pdfUrl})` : "")).join("\n");
   }
   async function copyText(text, what) {
     try { await navigator.clipboard.writeText(text); toast("Đã chép " + what + " – dán vào Zalo/Messenger để gửi.", "ok"); }
@@ -1258,14 +1279,14 @@
   }
   function renderReports() {
     const rows = S.BaoCao.filter((r) => inBrand(r.duAn)).sort((a, b) => String(b.tuan + b.ngayTao).localeCompare(String(a.tuan + a.ngayTao)));
-    const wk = S.BaoCao.filter((r) => inBrand(r.duAn) && r.tuan === $("rpWeek").value && (r.pdfUrl || r.pptxUrl));
+    const wk = S.BaoCao.filter((r) => inBrand(r.duAn) && r.tuan === $("rpWeek").value && (r.pdfUrl || r.pptxUrl || r.webKey));
     $("rpShare").hidden = !wk.length;
     $("rpShare").textContent = wk.length ? `Chép tin nhắn gửi nhóm (${wk.length} báo cáo tuần ${weekLabel($("rpWeek").value)})` : "";
     $("rpTable").innerHTML = rows.length ? `<table class="data"><thead><tr><th>Tuần</th><th>Dự án</th><th>Trạng thái</th><th>File</th><th>Nội dung</th><th>Người tạo</th><th>Ngày tạo</th></tr></thead><tbody>
       ${rows.map((r) => `<tr><td>${esc(weekLabel(r.tuan, true))}</td><td>${esc(r.duAn)}</td>
         <td><select data-rp="${esc(r.id)}" class="st-${STATUSES.indexOf(r.trangThai)}"${isAdmin() ? "" : " disabled"}>${STATUSES.map((s) => opt(s, s, r.trangThai)).join("")}</select></td>
-        <td>${r.pdfUrl ? `<a href="${esc(r.pdfUrl)}" target="_blank" rel="noopener">PDF</a>` : ""} ${r.pptxUrl ? `<a href="${esc(r.pptxUrl)}" target="_blank" rel="noopener">PPTX</a>` : ""}
-          ${r.pdfUrl || r.pptxUrl ? `<button type="button" class="link" data-copy="${esc(r.id)}">Chép link</button>` : ""}</td>
+        <td>${webUrl(r) ? `<a href="${esc(webUrl(r))}" target="_blank" rel="noopener"><b>Web</b></a>` : ""} ${r.pdfUrl ? `<a href="${esc(r.pdfUrl)}" target="_blank" rel="noopener">PDF</a>` : ""} ${r.pptxUrl ? `<a href="${esc(r.pptxUrl)}" target="_blank" rel="noopener">PPTX</a>` : ""}
+          ${r.pdfUrl || r.pptxUrl || r.webKey ? `<button type="button" class="link" data-copy="${esc(r.id)}">Chép link</button>` : ""}</td>
         <td>${esc(r.tomTat)}${(() => { const n = newSince(r); return n.anh || n.so ? `<br><b class="warn-text">Có ${[n.anh && n.anh + " ảnh", n.so && n.so + " dòng số liệu"].filter(Boolean).join(", ")} mới sau lần tạo này – chọn tuần/dự án này và bấm “Tạo báo cáo” để cập nhật.</b>` : ""; })()}</td><td class="muted">${esc(r.nguoiTao)}</td><td class="muted">${esc(r.ngayTao)}</td></tr>`).join("")}</tbody></table>`
       : `<p class="muted">Chưa có báo cáo nào.</p>`;
   }
@@ -1515,14 +1536,14 @@
     $("rpGo").addEventListener("click", () => generateReports());
     $("rpWeek").addEventListener("change", renderReports);
     $("rpShare").addEventListener("click", () => {
-      const rows = S.BaoCao.filter((r) => inBrand(r.duAn) && r.tuan === $("rpWeek").value && (r.pdfUrl || r.pptxUrl));
+      const rows = S.BaoCao.filter((r) => inBrand(r.duAn) && r.tuan === $("rpWeek").value && (r.pdfUrl || r.pptxUrl || r.webKey));
       copyText(shareText(rows), "tin nhắn kèm link báo cáo");
     });
     $("rpTable").addEventListener("click", (e) => {
       const id = e.target.dataset.copy;
       if (!id) return;
       const r = S.BaoCao.find((x) => x.id === id);
-      copyText(`[Báo cáo] ${r.duAn} tuần ${weekLabel(r.tuan, true)}: ${r.pdfUrl || r.pptxUrl}`, "link báo cáo");
+      copyText(`[Báo cáo] ${r.duAn} tuần ${weekLabel(r.tuan, true)}: ${webUrl(r) || r.pdfUrl || r.pptxUrl}`, "link báo cáo");
     });
     $("rpTable").addEventListener("change", async (e) => {
       const id = e.target.dataset.rp;
