@@ -568,17 +568,18 @@
     }
     return false;
   }
+  const STATUS_LABEL = { "dang hoat dong": "đang chạy", "da tam dung": "đã tạm dừng", "da hoan tat": "đã hoàn tất", "dang tat": "đã tắt", "da tat": "đã tắt" };
   function campaignRows(p, i) {
     const add = p.loai === "hoadon" ? "" : `<button type="button" class="link small" data-addcamp="${i}">+ Điền số tay (chiến dịch, chi tiêu, lead)</button>`;
     if (!p.campaigns || !p.campaigns.length) return add ? `<div class="camps">${add}</div>` : "";
-    return `<div class="camps"><b>Số liệu của ảnh</b> <small class="muted">(tick dòng thuộc tuần này; sửa số nếu đọc sai)</small>
+    return `<div class="camps"><b>Số liệu của ảnh</b> <small class="muted">(tick dòng có chi tiêu trong tuần này – kể cả chiến dịch đã tắt; sửa số nếu đọc sai)</small>
       ${p.campaigns.map((c, j) => c.manual ? `<label class="camp manual"><input type="checkbox" data-p="${i}" data-c="${j}" data-f="use"${c.use ? " checked" : ""}>
         <input class="cname" data-p="${i}" data-c="${j}" data-f="name" value="${esc(c.name)}" placeholder="Tên chiến dịch" aria-label="Tên chiến dịch">
         <input class="cnum" data-p="${i}" data-c="${j}" data-f="spent" value="${c.spent ? fmtInt(c.spent) : ""}" placeholder="Chi tiêu" inputmode="numeric" aria-label="Chi tiêu">
         <input class="cnum lead" data-p="${i}" data-c="${j}" data-f="results" value="${c.results ? fmtInt(c.results) : ""}" placeholder="Lead" inputmode="numeric" aria-label="Lead">
         <button type="button" class="link danger" data-delcamp="${i}:${j}" title="Bỏ dòng này">×</button></label>`
       : `<label class="camp"><input type="checkbox" data-p="${i}" data-c="${j}" data-f="use"${c.use ? " checked" : ""}>
-        <span class="cname" title="${esc(c.name)}">${esc(c.name)}</span>
+        <span class="cname" title="${esc(c.name)}">${esc(c.name)}${c.status ? ` <small class="cstatus${/tat|tam dung|hoan tat/.test(c.status) ? " off" : ""}">${esc(STATUS_LABEL[c.status] || c.status)}</small>` : ""}</span>
         <input class="cnum" data-p="${i}" data-c="${j}" data-f="spent" value="${fmtInt(c.spent)}" aria-label="Chi tiêu">
         <span class="muted">${c.results != null ? fmtInt(c.results) + " " + (RESULT_LABEL[c.resultType] || "") : ""}</span></label>`).join("")}
       ${add}</div>`;
