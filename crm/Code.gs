@@ -16,6 +16,7 @@ const TZ = "Asia/Ho_Chi_Minh";
 const NOTIFY = true;              // gửi email cho chủ CRM khi có khách mới từ website
 const NOTIFY_EMAIL = "";          // để trống = email tài khoản Google đã cài script
 const WRITE_PROJECT_TAB = true;   // vẫn ghi vào tab dự án theo định dạng cũ (giữ TONG_HOP/UPLOAD chạy)
+const CONTACT_SYNC = true;        // khách mới → tự lưu tên + SĐT vào Danh bạ Google (đồng bộ điện thoại, gọi đến hiện tên khách)
 const OWNER_NAME = "Hoàng Hiệp"; // tên ký trong tin nhắn Zalo gợi ý
 const SESSION_HOURS = 12;
 const CALENDAR_SYNC = true;       // hẹn gọi lại → sự kiện Google Calendar (điện thoại báo trước 10 phút)
@@ -156,6 +157,7 @@ function upsertLead_(lead, notify) {
   lead.updated = lead.created;
   sh.appendRow(toRow_(lead));
   log_(lead.id, "Tạo khách", [lead.form, lead.need, lead.note].filter(String).join(" · "));
+  saveContact_(lead);
   if (notify) notify_(lead, "Khách mới");
   return lead.id;
 }
@@ -595,6 +597,37 @@ function advise_(l, now) {
   }
   if (!cb && !CLOSED.test(l.status) && l.status !== "Data cũ") return { priority: 3, tag: "Chưa có lịch", action: "Đặt lịch gọi lại để không bỏ sót khách này." };
   return { priority: 0, tag: "", action: "" };
+}
+
+/** Lưu khách vào Danh bạ Google (People API) dạng "Tên – Dự án" để điện thoại hiện tên khi họ gọi. Lỗi không làm hỏng việc lưu khách. */
+function saveContact_(lead) {
+  if (!CONTACT_SYNC || !lead.phone) return false;
+  try {
+    const body = {
+      names: [{ givenName: `${lead.name} – ${lead.project}`.slice(0, 120) }],
+      phoneNumbers: [{ value: lead.phone, type: "mobile" }],
+      biographies: [{ value: ["CRM Hoàng Hiệp", lead.need, lead.budget && "Ngân sách " + lead.budget].filter(String).join(" · "), contentType: "TEXT_PLAIN" }],
+    };
+    if (lead.email) body.emailAddresses = [{ value: lead.email }];
+    People.People.createContact(body);
+    log_(lead.id, "Lưu danh bạ", `${lead.name} – ${lead.phone}`);
+    return true;
+  } catch (err) { console.warn("Danh bạ:", err); return false; }
+}
+
+/** Chạy tay: lưu vào Danh bạ các khách chưa được lưu (tối đa 150 khách/lần; chạy lại để lưu tiếp). */
+function syncAllContacts() {
+  const sh = sheet_(T_LOG, LOG_HEAD), last = sh.getLastRow();
+  const done = {};
+  if (last > 1) sh.getRange(2, 1, last - 1, 4).getValues().forEach((r) => { if (r[2] === "Lưu danh bạ") done[r[1]] = 1; });
+  let n = 0, left = 0;
+  readLeads_().rows.forEach((l) => {
+    if (done[l.id] || l.status === "Sai số / Rác") return;
+    if (n >= 150) { left++; return; }
+    if (saveContact_(l)) { n++; Utilities.sleep(250); }
+  });
+  console.log(`Đã lưu ${n} khách vào Danh bạ Google.${left ? " Còn " + left + " khách – chạy lại hàm này." : ""}`);
+  return { saved: n, left };
 }
 
 /** Tạo / cập nhật / xoá sự kiện Google Calendar theo lịch hẹn gọi lại. */

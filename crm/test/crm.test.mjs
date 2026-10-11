@@ -64,7 +64,7 @@ assert.ok(upd.eventId && events[upd.eventId], 'tạo sự kiện lịch');
 assert.equal(upd.advice.tag, 'Hẹn hôm nay');
 assert.throws(() => api.updateLead(token, web.id, { phone: '123' }), /không hợp lệ/);
 const hist = api.getHistory(token, web.id);
-assert.deepEqual(hist.map(h => h.action), ['Ghi chú', 'Cập nhật', 'Đăng ký lại', 'Tạo khách']);
+assert.deepEqual(hist.map(h => h.action), ['Ghi chú', 'Cập nhật', 'Đăng ký lại', 'Lưu danh bạ', 'Tạo khách']);
 upd = api.updateLead(token, web.id, { callback: '' });
 assert.equal(upd.eventId, ''); assert.equal(Object.keys(events).length, 0, 'xoá lịch → xoá sự kiện');
 
@@ -176,5 +176,18 @@ assert.throws(() => api.login('matkhaumoi1'), /quá 5 lần/);
   // email báo cáo có phương án
   api.dailyReport();
   console.log('products OK');
+}
+// ---- Lưu danh bạ ----
+{
+  const { api, contacts, g } = loadGas({});
+  api.setupCRM();
+  api.doPost({ parameter: { name: 'Lan Anh', phone: '905111222', project: 'FPT Plaza 4', email: 'a@b.vn', need: 'Căn 2PN' } });
+  assert.equal(contacts.length, 1);
+  assert.equal(contacts[0].names[0].givenName, 'Lan Anh – FPT Plaza 4');
+  assert.equal(contacts[0].phoneNumbers[0].value, '0905111222');
+  api.doPost({ parameter: { name: 'Lan Anh', phone: '0905111222', project: 'FPT Plaza 4' } }); // đăng ký lại: không tạo trùng
+  assert.equal(contacts.length, 1);
+  assert.deepEqual(api.syncAllContacts(), { saved: 0, left: 0 }); // đã lưu rồi → bỏ qua
+  console.log('contacts OK');
 }
 console.log('ALL CRM TESTS PASSED ✔');

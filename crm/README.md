@@ -98,3 +98,9 @@ node crm/test/crm.test.mjs
 - **Điểm nóng 0–100**: theo trạng thái, đăng ký lại, có ngân sách/lịch hẹn, và trừ điểm khi lâu không chăm sóc.
 - **Giải pháp xử lý tình huống** trong hồ sơ khách: chê giá cao, cần suy nghĩ, hỏi vay, không nghe máy, so sánh dự án, hỏi pháp lý, muốn xem nhà – mỗi tình huống có cách xử lý + tin nhắn Zalo mẫu (điền sẵn tên khách).
 - **Máy tính trả góp**: tự điền giá từ phương án gợi ý; lãi suất do bạn nhập (CRM không tự giả định lãi suất).
+
+## Lưu tên + SĐT vào Danh bạ Google
+
+- Khách mới (từ website hoặc nhập tay) tự được lưu vào **Danh bạ Google** với tên dạng `Tên – Dự án`, kèm SĐT, email, nhu cầu, ngân sách. Điện thoại đăng nhập cùng tài khoản Google sẽ hiện tên khi khách gọi đến.
+- Dùng dịch vụ nâng cao **People API** (đã khai báo trong `appsscript.json`); lần đầu Google sẽ xin thêm quyền Danh bạ.
+- Khách cũ: chạy hàm `syncAllContacts` trong Apps Script (150 khách/lần, chạy lại để lưu tiếp, không lưu trùng). Tắt tính năng: đặt `CONTACT_SYNC = false`.
