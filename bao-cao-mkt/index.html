@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Báo cáo Marketing</title>
+<style>
+  :root { --bg:#f5f6f8; --card:#fff; --text:#1d2330; --muted:#667085; --line:#e3e6eb; --accent:#c8102e; --ok:#127a3a; --err:#b42318; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14161a; --card:#1d2026; --text:#e8eaee; --muted:#9aa3b2; --line:#2e333b; --accent:#ef4060; --ok:#4cc27a; --err:#ff6b5f; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  main { max-width:960px; margin:0 auto; padding:24px 16px 48px; }
+  h1 { font-size:22px; margin:0 0 4px; }
+  .sub { color:var(--muted); margin:0 0 20px; }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; margin-bottom:16px; }
+  h2 { font-size:16px; margin:0 0 12px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
+  label { display:flex; flex-direction:column; gap:4px; font-size:13px; color:var(--muted); }
+  input, select { font:inherit; color:var(--text); background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:7px 9px; min-width:0; }
+  .slot { border:1px dashed var(--line); border-radius:8px; padding:10px; }
+  .slot span { color:var(--text); font-weight:600; }
+  .slot small { color:var(--muted); }
+  .wrap { overflow-x:auto; }
+  table { border-collapse:collapse; width:100%; font-size:13px; }
+  th, td { border:1px solid var(--line); padding:6px 8px; text-align:right; white-space:nowrap; }
+  th:first-child, td:first-child { text-align:left; }
+  th { background:var(--bg); }
+  button { font:inherit; font-weight:600; color:#fff; background:var(--accent); border:0; border-radius:8px; padding:10px 20px; cursor:pointer; }
+  button:disabled { opacity:.6; cursor:wait; }
+  .status { margin-top:10px; min-height:1.5em; }
+  .status.ok { color:var(--ok); } .status.err { color:var(--err); }
+  .note { color:var(--muted); font-size:13px; margin:8px 0 0; font-weight:400; }
+  textarea { font:inherit; font-size:13px; color:var(--text); background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:7px 9px; resize:vertical; }
+  .actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+  button.ghost { background:transparent; color:var(--accent); border:1px solid var(--accent); }
+  details summary { cursor:pointer; }
+  .imgs { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:10px; margin-top:10px; }
+  .img { margin:0; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:var(--bg); }
+  .img.off { opacity:.45; }
+  .img img { display:block; width:100%; height:120px; object-fit:cover; background:#000; }
+  .img figcaption { padding:6px; font-size:12px; }
+  .chk { flex-direction:row; align-items:center; gap:6px; color:var(--text); font-size:12px; }
+  .chk span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .row { display:flex; gap:4px; margin-top:4px; }
+  .row select { flex:1; font-size:12px; padding:4px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Báo cáo Marketing tuần</h1>
+  <p class="sub">Dán link Google Drive, trang tự quét số liệu và ảnh chứng từ rồi điền vào PPTX mẫu. Xử lý ngay trên trình duyệt, không qua máy chủ trung gian.</p>
+
+  <form id="form">
+    <section>
+      <h2>1. Link Google Drive</h2>
+      <div class="grid">
+        <label>Dự án<select id="preset"></select></label>
+        <label id="clientBox">Google OAuth Client ID<input id="clientId" placeholder="xxxx.apps.googleusercontent.com"></label>
+      </div>
+      <div class="grid" style="margin-top:12px">
+        <label>PPTX mẫu (link Drive)<input id="templateLink"></label>
+        <label>Số liệu (link Google Sheet / xlsx)<input id="dataLink"></label>
+      </div>
+      <label style="margin-top:12px">Thư mục ảnh chứng từ (mỗi dòng một link, quét cả thư mục con)<textarea id="folders" rows="3"></textarea></label>
+      <div class="actions">
+        <button type="button" id="auth" class="ghost">Kết nối Google Drive</button>
+        <button type="button" id="scan">Quét Drive</button>
+      </div>
+      <details class="note"><summary>Hoặc chọn file từ máy</summary>
+        <div class="grid" style="margin-top:8px">
+          <label>PPTX mẫu<input type="file" id="templateFile" accept=".pptx"></label>
+          <label>Số liệu (.xlsx)<input type="file" id="dataFile" accept=".xlsx,.xls,.csv"></label>
+          <label>Thêm ảnh<input type="file" id="imgFiles" accept="image/png,image/jpeg" multiple></label>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <h2>2. Thông tin báo cáo</h2>
+      <div class="grid">
+        <label>Sheet<select id="sheet"></select></label>
+        <label>Tuần báo cáo<select id="week"></select></label>
+        <label>Số thứ tự tuần (để trống = tự tính)<input type="number" id="weekNo" min="1"></label>
+        <label>Năm<input id="year"></label>
+        <label>Tên chiến dịch<input id="campaign"></label>
+        <label>Thời gian triển khai<input id="period" placeholder="15/09 - 27/09/2026"></label>
+        <label>Nhân sự<input id="staff"></label>
+        <label>Tên file xuất<input id="outName" value="bao_cao_mkt"></label>
+      </div>
+      <div class="wrap" id="summary" style="margin-top:12px"></div>
+    </section>
+
+    <section>
+      <h2>3. Ảnh chứng từ <small id="imgCount" class="note">Chưa có ảnh</small></h2>
+      <p class="note">Kênh và loại được đoán theo tên file/thư mục (có chữ "tiktok", "zalo", "google", "hóa đơn"…), mặc định Facebook · Ads. Chỉnh lại nếu cần; bỏ tick để không chèn.</p>
+      <div class="imgs" id="images"></div>
+    </section>
+
+    <button id="go" type="submit">Tạo báo cáo PPTX</button>
+    <div id="status" class="status" role="status"></div>
+  </form>
+</main>
+<script src="vendor/jszip.min.js"></script>
+<script src="vendor/xlsx.full.min.js"></script>
+<script src="https://accounts.google.com/gsi/client" async></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
