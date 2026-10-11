@@ -32,7 +32,10 @@ def build(src: Path, out_name: str):
     html = re.sub(r'<script src="([^"]+)"></script>', inline, html)
     # Apps Script coi "<?" … "?>" là scriptlet và cắt bỏ khi nạp trang -> cấm trong mã nhúng
     for m in re.finditer(r"<script>(.*?)</script>", html, re.S):
-        assert "<?" not in m.group(1) and "?>" not in m.group(1), out_name + ': mã JS chứa "<?" hoặc "?>" (dùng \\x3c / \\x3e)'
+        assert "<?" not in m.group(1) and "?>" not in m.group(1), out_name + ': mã JS chứa "<?" hoặc "?>"'
+        # các kiểu viết thoát \r, \x.. bị Apps Script làm hỏng khi nạp trang -> dùng String.fromCharCode
+        bad = re.findall(r"\\(?:r|x[0-9a-fA-F]{2})", m.group(1))
+        assert not bad, out_name + ": mã JS chứa ký tự thoát " + ", ".join(sorted(set(bad)))
     assert "vendor/" not in html, out_name
     html = html.replace("<head>", "<head>\n" + NOTE, 1)
     out = OUT / out_name

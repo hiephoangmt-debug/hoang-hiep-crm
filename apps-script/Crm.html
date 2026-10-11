@@ -121,7 +121,7 @@
 </style>
 </head>
 <body>
-<div id="loading">Đang tải CRM… <small class="muted">(giao diện v4)</small></div>
+<div id="loading">Đang tải CRM… <small class="muted">(giao diện v5)</small></div>
 <div id="diag" style="max-width:760px;margin:0 auto;padding:0 16px;color:#b42318;font-size:13px"></div>
 <script>
   // Báo lỗi ngay trên màn hình (để biết trang dừng ở đâu khi không mở được bảng điều khiển trình duyệt)
@@ -893,7 +893,7 @@ window.BAO_CAO_MKT_CONFIG = {
         el, rid, path,
         doc: parseXml(await zip.file(path).async("string")),
         relsDoc: parseXml(relsFile ? await relsFile.async("string")
-          : '\x3c?xml version="1.0" encoding="UTF-8" standalone="yes"?\x3e<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"/>'),
+          : '<' + '?xml version="1.0" encoding="UTF-8" standalone="yes"?' + '><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"/>'),
       };
       s.pristine = s.doc.cloneNode(true);
       s.pristineRels = s.relsDoc.cloneNode(true);
@@ -1129,9 +1129,11 @@ window.BAO_CAO_MKT_CONFIG = {
       const auth = { Authorization: "Bearer " + this.token };
       const boundary = "bcmkt" + Date.now();
       const meta = JSON.stringify({ name: name.replace(/\.pptx$/i, "") + " (tạm)", mimeType: "application/vnd.google-apps.presentation" });
+      const NL = String.fromCharCode(13, 10); // CRLF (không viết dạng thoát: Apps Script làm hỏng khi nạp trang)
       const body = new Blob([
-        `--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${meta}\r\n--${boundary}\r\nContent-Type: ${PPTX_MIME}\r\n\r\n`,
-        blob, `\r\n--${boundary}--`,
+        "--" + boundary + NL + "Content-Type: application/json; charset=UTF-8" + NL + NL + meta + NL +
+          "--" + boundary + NL + "Content-Type: " + PPTX_MIME + NL + NL,
+        blob, NL + "--" + boundary + "--",
       ]);
       const up = await fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id", {
         method: "POST", headers: Object.assign({ "Content-Type": "multipart/related; boundary=" + boundary }, auth), body,
@@ -2729,7 +2731,7 @@ window.BAO_CAO_MKT_CONFIG = {
 
   async function start() {
     window.__crmStarted = true;
-    $("loading").textContent = "Đang kết nối máy chủ Google… (giao diện v4)";
+    $("loading").textContent = "Đang kết nối máy chủ Google… (giao diện v5)";
     if (!B.IN_GAS) {
       $("loading").textContent = "Trang CRM cần chạy trong Google Apps Script (xem apps-script/README.md).";
       return;
