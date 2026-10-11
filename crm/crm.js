@@ -1082,7 +1082,10 @@
 
   async function start() {
     window.__crmStarted = true;
-    $("loading").textContent = "Đang kết nối máy chủ Google… (giao diện v8)";
+    // giữ nhãn phiên bản "(giao diện vN)" do crm.html ghi, chỉ đổi dòng chữ
+    const ver = $("loading").querySelector("small");
+    $("loading").textContent = "Đang kết nối máy chủ Google… ";
+    if (ver) $("loading").appendChild(ver);
     if (!B.IN_GAS) {
       $("loading").textContent = "Trang CRM cần chạy trong Google Apps Script (xem apps-script/README.md).";
       return;
