@@ -273,6 +273,9 @@
     return saved.concat(fresh);
   }
   function renderEntries() {
+    const src = project($("enProject").value).nguonSoLieu || "";
+    $("enSheet").hidden = !src;
+    $("enSheet").href = src || "#";
     const rows = gridRows();
     const staff = staffNames();
     const cell = (r, [k, , type]) => {
@@ -926,6 +929,16 @@
     });
     window.addEventListener("beforeunload", (e) => { if (drafts.size) { e.preventDefault(); e.returnValue = ""; } });
     $("enImport").addEventListener("click", () => importSheet().catch(() => {}));
+    $("enShare").addEventListener("click", async () => {
+      const pj = $("enProject").value;
+      if (!confirm(`Cho các nhân sự có email (tab Danh mục › Nhân sự) quyền SỬA Google Sheet số liệu của ${pj}?\nGoogle sẽ gửi email báo cho từng người.`)) return;
+      try {
+        const r = await run("Đang chia sẻ", () => gas("crmShareSheet", pj));
+        toast((r.added.length ? `Đã cho quyền sửa: ${r.added.join(", ")}.` : "Không có ai mới cần thêm quyền.") +
+          (r.already ? ` ${r.already} người đã có quyền.` : "") +
+          (r.noEmail.length ? ` Chưa có email: ${r.noEmail.join(", ")} – thêm email ở tab Danh mục › Nhân sự rồi bấm lại.` : ""), r.noEmail.length ? "" : "ok");
+      } catch (_) { /* đã báo */ }
+    });
     $("enPush").addEventListener("click", async () => {
       const pj = $("enProject").value, w = $("enWeek").value;
       try {

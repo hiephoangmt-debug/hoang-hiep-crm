@@ -493,6 +493,29 @@ function crmWriteSheet(duAn, tuan, items) {
   });
 }
 
+/**
+ * Cho nhân sự (đang làm, có email ở tab Danh mục) quyền sửa Google Sheet số liệu của dự án.
+ * Google gửi email báo cho người được thêm. Trả {added, already, noEmail, url}.
+ */
+function crmShareSheet(duAn) {
+  var project = crmRows_('DuAn').filter(function (p) { return p.ten === duAn; })[0];
+  if (!project) throw new Error('Không có dự án ' + duAn);
+  var m = /\/d\/([\w-]{15,})/.exec(project.nguonSoLieu || '');
+  if (!m) throw new Error('Dự án ' + duAn + ' chưa có link Google Sheet số liệu (tab Danh mục).');
+  var f = DriveApp.getFileById(m[1]);
+  var have = f.getEditors().map(function (u) { return String(u.getEmail()).toLowerCase(); });
+  try { have.push(String(f.getOwner().getEmail()).toLowerCase()); } catch (e) { /* file trong Drive dùng chung */ }
+  var staff = crmRows_('NhanSu').filter(function (n) { return n.trangThai !== 'Nghỉ'; });
+  var withMail = staff.filter(function (n) { return /@/.test(n.email || ''); });
+  var emails = withMail.map(function (n) { return String(n.email).trim().toLowerCase(); });
+  var add = emails.filter(function (e, i) { return emails.indexOf(e) === i && have.indexOf(e) < 0; });
+  if (add.length) f.addEditors(add);
+  return {
+    added: add, already: emails.length - add.length, url: f.getUrl(),
+    noEmail: staff.filter(function (n) { return withMail.indexOf(n) < 0; }).map(function (n) { return n.ten; }),
+  };
+}
+
 /** Nhập số liệu từ Google Sheet: thay các dòng nguồn "sheet" của dự án trong những tuần được nhập. */
 function crmImportEntries(duAn, weeks, list) {
   return crmWithLock_(function () {
