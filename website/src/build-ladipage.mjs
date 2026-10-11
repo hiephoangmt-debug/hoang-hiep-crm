@@ -88,7 +88,7 @@ const head = (h) => `
 const SZ = JSON.parse(readFileSync(join(HERE, "..", "public", "assets", "img", "minh-hoa", "sizes.json"), "utf8"));
 const MH = `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/4f3511e5400317c7aa4d347e8d4bbef347f9f377/website/public/assets/img/minh-hoa`;
 const SZP = JSON.parse(readFileSync(join(HERE, "..", "public", "assets", "img", "phoi-canh", "sizes.json"), "utf8"));
-const PCB = `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/@@PSHA@@/website/public/assets/img/phoi-canh`;
+const PCB = `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/752586208f3f6ca6b2c494b09dba7b0f34dbfdba/website/public/assets/img/phoi-canh`;
 const PC = { 1: ["fpt-city-phoi-canh-tong-the-1", "Phối cảnh tổng thể khu đô thị FPT City Đà Nẵng nhìn từ trên cao, sông Cổ Cò, cầu vòm và quảng trường trung tâm"], 2: ["fpt-city-phoi-canh-tong-the-2", "Phối cảnh toàn cảnh khu đô thị FPT City Đà Nẵng: hồ trung tâm, các phân khu nhà ở, sông Cổ Cò và cầu vòm"] };
 const photo = (n) => `<figure style="margin:0"><img src="${PCB}/${PC[n][0]}.webp" alt="${esc(PC[n][1])}" width="1600" height="${SZP[PC[n][0]]}" loading="lazy"><figcaption class="small" style="text-align:center;margin-top:8px">Hình ảnh minh hoạ phối cảnh tổng thể theo tài liệu giới thiệu của chủ đầu tư; thực tế có thể thay đổi.</figcaption></figure>`;
 const photoSection = (nums, title) => `<section><div class="wrap">${head({ eyebrow: "Phối cảnh", title })}<div style="max-width:1100px;margin:0 auto;display:grid;gap:18px">${nums.map(photo).join("")}</div></div></section>`;
