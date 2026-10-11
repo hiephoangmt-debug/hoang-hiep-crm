@@ -459,7 +459,52 @@
       } while (pageToken);
       return out;
     },
+    async tree(id) {
+      const root = await this.meta(id);
+      return this.listTree(id, [root.name]);
+    },
+    image(f) {
+      return this.api("files/" + f.id, { alt: "media" }, "blob");
+    },
   };
+
+  // Chạy trong Google Apps Script (HtmlService): đọc Drive qua hàm phía server, không cần OAuth Client ID.
+  const IN_GAS = !!(window.google && google.script && google.script.run);
+  function gas(fn, ...args) {
+    return new Promise((resolve, reject) => {
+      google.script.run
+        .withSuccessHandler(resolve)
+        .withFailureHandler((e) => reject(new Error(e && e.message ? e.message : String(e))))[fn](...args);
+    });
+  }
+  function b64ToBlob(b64, type) {
+    const bin = atob(b64);
+    const u = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+    return new Blob([u], { type });
+  }
+  function blobToB64(blob) {
+    return new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(String(r.result).split(",")[1]);
+      r.onerror = () => reject(r.error);
+      r.readAsDataURL(blob);
+    });
+  }
+  const GasDrive = {
+    async download(id) {
+      const r = await gas("downloadFile", id);
+      return { meta: r.meta, blob: b64ToBlob(r.b64, r.type) };
+    },
+    tree(id) {
+      return gas("listTree", id);
+    },
+    async image(f) {
+      const r = await gas("downloadFile", f.id);
+      return b64ToBlob(r.b64, r.type);
+    },
+  };
+  const source = () => (IN_GAS ? GasDrive : Drive);
 
   /** Đoán kênh + loại chứng từ từ tên thư mục/file. */
   function guessClass(path, name) {
@@ -501,7 +546,7 @@
 
   function signIn() {
     return new Promise((resolve, reject) => {
-      if (Drive.token) return resolve(Drive.token);
+      if (IN_GAS || Drive.token) return resolve(Drive.token);
       const id = clientId();
       if (!id) return reject(new Error("Chưa cấu hình Google OAuth Client ID (xem README)."));
       if (!window.google || !google.accounts || !google.accounts.oauth2) {
@@ -533,6 +578,7 @@
     $("period").value = p.period || "";
     $("staff").value = p.staff || "";
     $("outName").value = p.outName || "bao_cao_mkt";
+    $("outFolder").value = p.outputFolder || "";
   }
 
   function readWorkbook(buf, label) {
@@ -612,13 +658,13 @@
 
       if (tplId) {
         setStatus("Đang tải PPTX mẫu…");
-        const { meta, blob } = await Drive.download(tplId);
+        const { meta, blob } = await source().download(tplId);
         templateBuf = await blob.arrayBuffer();
         notes.push(`Mẫu: "${meta.name}"`);
       }
       if (dataId) {
         setStatus("Đang tải số liệu…");
-        const { meta, blob } = await Drive.download(dataId);
+        const { meta, blob } = await source().download(dataId);
         notes.push(readWorkbook(await blob.arrayBuffer(), meta.name));
       }
       if (folderIds.length) {
@@ -627,12 +673,11 @@
         const found = [];
         for (const id of folderIds) {
           setStatus("Đang quét thư mục…");
-          const root = await Drive.meta(id);
-          (await Drive.listTree(id, [root.name])).forEach((f) => IMG_MIMES.includes(f.mimeType) && found.push(f));
+          (await source().tree(id)).forEach((f) => IMG_MIMES.includes(f.mimeType) && found.push(f));
         }
         let done = 0;
         await pool(found, 4, async (f) => {
-          const blob = await Drive.api("files/" + f.id, { alt: "media" }, "blob");
+          const blob = await source().image(f);
           addImage(new File([blob], f.name, { type: f.mimeType }), f.path);
           setStatus(`Đang tải ảnh ${++done}/${found.length}…`);
         });
@@ -673,7 +718,14 @@
       document.body.appendChild(a);
       a.click();
       a.remove();
+      let saved = "";
+      if (IN_GAS) {
+        setStatus("Đang lưu vào Google Drive…");
+        const url = await gas("saveReport", await blobToB64(res.blob), name, parseDriveId($("outFolder").value) || "");
+        saved = ` Đã lưu vào Drive: <a href="${esc(url)}" target="_blank" rel="noopener">mở file</a>.`;
+      }
       setStatus(`Đã tạo ${name} (tuần ${res.week}, chèn ${res.nImg} ảnh).`, "ok");
+      if (saved) $("status").insertAdjacentHTML("beforeend", saved);
     } catch (err) {
       console.error(err);
       setStatus("Lỗi: " + err.message, "err");
@@ -686,8 +738,10 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     $("year").value = String(new Date().getFullYear());
-    if (CFG.googleClientId) $("clientBox").hidden = true;
+    if (CFG.googleClientId || IN_GAS) $("clientBox").hidden = true;
     else $("clientId").value = LS.get("clientId") || "";
+    if (IN_GAS) $("auth").hidden = true;
+    else $("outFolderBox").hidden = true;
     const presetSel = $("preset");
     presetSel.innerHTML = (CFG.presets || []).map((p) => `<option>${esc(p.name)}</option>`).join("");
     const last = LS.get("preset");
