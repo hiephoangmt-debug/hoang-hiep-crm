@@ -615,7 +615,7 @@
           <select data-ev="${esc(r.id)}" data-f="loai">${Object.entries(KINDS).map(([k, l]) => opt(k, l, r.loai)).join("")}</select></div>
           <div class="row"><select data-ev="${esc(r.id)}" data-f="nhanSu" class="${r.nhanSu ? "" : "warn"}">${opt("", "(chưa gán nhân sự)", r.nhanSu)}${staff.map((x) => opt(x, x, r.nhanSu)).join("")}${newStaffOpt()}</select>
           <button type="button" class="link danger" data-evdel="${esc(r.id)}">Xoá</button></div>
-          ${r.loai !== "hoadon" ? `<button type="button" class="link small" data-evread="${esc(r.id)}">Đọc số từ ảnh này → số liệu + Sheet</button>` : ""}
+          ${r.loai !== "hoadon" ? savedNumbersForm(r) : ""}
         </figcaption></figure>`).join("") : `<p class="muted">Chưa có ảnh chứng từ cho tuần này.</p>`;
   }
   async function addPending(files) {
@@ -650,6 +650,8 @@
       if (r.platform) p.nenTang = r.platform;
       if (r.staff && r.by === "id") p.nhanSu = r.staff;
       p.campaigns = p.loai === "hoadon" ? [] : B.extractCampaigns(p.text || "").map((c) => Object.assign(c, { use: dateInWeek(c.date, w) }));
+      // không đọc ra số: mở sẵn một dòng điền tay ngay dưới ảnh
+      if (p.loai !== "hoadon" && !p.campaigns.length) p.campaigns = [{ manual: true, name: "", spent: 0, results: 0, resultType: "lead", use: false }];
       p.note = "Đọc: " + ([r.kind && KINDS[r.kind], r.account && "TK " + r.account,
         p.campaigns.length && p.campaigns.length + " chiến dịch"].filter(Boolean).join(" · ") || "không nhận ra");
     };
@@ -694,6 +696,45 @@
     saved.forEach((r) => { S.SoLieu = S.SoLieu.filter((x) => x.id !== r.id).concat(r); });
     return saved.length;
   }
+  /** Dòng số liệu đã lưu từ ảnh r (ghi chú "Đọc từ ảnh …"/"Nhập tay kèm ảnh …"). */
+  const rowsOfImage = (r) => S.SoLieu.filter((x) => x.nguon === "anh" && x.tuan === r.tuan && x.duAn === r.duAn && x.nhanSu === r.nhanSu &&
+    x.nenTang === r.nenTang && String(x.ghiChu || "").endsWith(" " + r.tenFile));
+  /** Ô nhập số ngay dưới ảnh đã lưu: tự đọc (nút) hoặc gõ tay khi ảnh khó đọc. */
+  function savedNumbersForm(r) {
+    const rows = rowsOfImage(r);
+    const one = rows.length === 1 ? rows[0] : null, id = esc(r.id);
+    const v = (x) => (x !== "" && x != null && num(x) ? fmtInt(num(x)) : "");
+    const sum = rows.length > 1 ? `<small class="muted">Đã có ${rows.length} dòng số từ ảnh này: ${fmtInt(rows.reduce((a, x) => a + num(x.chiPhi), 0))} đ – sửa ở tab Nhập số liệu.</small>` : "";
+    return `<div class="evnums">
+      <button type="button" class="link small" data-evread="${id}">Đọc số từ ảnh này</button>${sum}
+      ${rows.length > 1 ? "" : `<div class="evform" data-evform="${id}">
+        <label class="wide">Tên chiến dịch<input data-k="name" placeholder="vd. [Search] Casamia" value="${esc(one ? one.chienDich : "")}"></label>
+        <label>Chi phí (đ)<input data-k="spent" placeholder="0" inputmode="numeric" value="${one ? v(one.chiPhi) : ""}"></label>
+        <label>Lead<input data-k="lead" placeholder="0" inputmode="numeric" value="${one ? v(one.lead) : ""}"></label>
+        <label>Lượt nhấp<input data-k="clicks" placeholder="0" inputmode="numeric" value="${one ? v(one.luotNhap) : ""}"></label>
+        <label>Hiển thị<input data-k="impr" placeholder="0" inputmode="numeric" value="${one ? v(one.hienThi) : ""}"></label>
+        <button type="button" class="small" data-evsave="${id}">${one ? "Lưu sửa" : "Lưu số"}</button>
+      </div>`}</div>`;
+  }
+  async function saveImageNumbers(id) {
+    const r = S.ChungTu.find((x) => x.id === id);
+    const f = document.querySelector(`[data-evform="${id}"]`);
+    if (!r || !f) return;
+    if (!r.nhanSu) return toast("Chọn nhân sự cho ảnh này trước.", "err");
+    const g = (k) => f.querySelector(`[data-k="${k}"]`).value.trim();
+    const spent = Math.round(num(g("spent"))), lead = Math.round(num(g("lead")));
+    if (!spent && !lead) return toast("Gõ chi phí (và lead nếu có) rồi bấm Lưu.", "err");
+    const old = rowsOfImage(r)[0];
+    const name = g("name") || (old && old.chienDich) || "Nhập tay – " + r.tenFile;
+    if (old && old.chienDich !== name) { await gas("crmDelete", "SoLieu", old.id); S.SoLieu = S.SoLieu.filter((x) => x.id !== old.id); }
+    const c = { manual: true, use: true, name, spent, results: lead, resultType: "lead",
+      clicks: g("clicks") ? Math.round(num(g("clicks"))) : null, impressions: g("impr") ? Math.round(num(g("impr"))) : null };
+    const n = await run("Đang lưu số liệu", () => saveCampaignRows([c], { tuan: r.tuan, duAn: r.duAn, nhanSu: r.nhanSu, nenTang: r.nenTang, file: r.tenFile }));
+    let note = "";
+    try { note = pushNote(await pushToSheet(r.duAn, r.tuan)); } catch (e) { note = " Chưa ghi được vào Google Sheet: " + e.message; }
+    toast(`Đã lưu số của ${r.tenFile} (${fmtInt(spent)} đ${lead ? ", " + lead + " lead" : ""}).` + note, "ok");
+    renderEvidence();
+  }
   /** Hộp xem/chép một đoạn chữ dài (chữ đọc được từ ảnh…). */
   function showText(title, text, note) {
     let box = document.getElementById("textBox");
@@ -726,8 +767,10 @@
     } catch (e) { return toast("Không đọc được ảnh: " + e.message, "err"); }
     const camps = B.extractCampaigns(text).map((c) => Object.assign(c, { use: dateInWeek(c.date, r.tuan) }));
     if (!camps.length) {
-      toast(`Không đọc ra số chi tiêu trong ${r.tenFile}. Dùng "+ Điền số tay" khi tải ảnh hoặc nhập ở tab Nhập số liệu.`, "err");
-      showText(`Chữ app đọc được trong ${r.tenFile}`, text, "Không tìm thấy số chi tiêu. Bấm “Chép” và gửi đoạn chữ này cho người cài app để chỉnh bộ đọc số.");
+      toast(`Không đọc ra số chi tiêu trong ${r.tenFile} – gõ số vào ô ngay dưới ảnh.`, "err");
+      showText(`Chữ app đọc được trong ${r.tenFile}`, text, "Không tìm thấy số chi tiêu – gõ số vào các ô ngay dưới ảnh rồi bấm “Lưu số”. (Có thể bấm “Chép” gửi đoạn chữ này cho người cài app để chỉnh bộ đọc số.)");
+      const inp = document.querySelector(`[data-evform="${r.id}"] [data-k="spent"]`);
+      if (inp) { inp.scrollIntoView({ block: "center" }); inp.focus(); }
       return;
     }
     const list = camps.map((c) => `${c.use ? "☑" : "☐"} ${c.name}: ${fmtInt(c.spent)} đ` + (c.clicks != null ? ` · ${fmtInt(c.clicks)} nhấp` : "") +
@@ -1225,6 +1268,8 @@
     $("evList").addEventListener("click", (e) => {
       const id = e.target.dataset.evread;
       if (id) rereadEvidence(id).catch(() => {});
+      const sv = e.target.dataset.evsave;
+      if (sv) saveImageNumbers(sv).catch(() => {});
     });
     $("evList").addEventListener("click", async (e) => {
       const id = e.target.dataset.evdel;
