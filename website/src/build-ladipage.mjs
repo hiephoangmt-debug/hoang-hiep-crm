@@ -13,7 +13,7 @@ const CSS = readFileSync(join(HERE, "ladipage.css"), "utf8");
 const BASE = "https://www.fpt-city.com";
 const IMG = "https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/5051b81aefcfec407044094b96b5dfc7fdd47de8/website/public/assets/img/fpt-plaza-4";
 // Widget Chat/Zalo/Gọi: nạp từ CDN theo mã commit cố định (fpt-city.com sẽ chạy trên LadiPage nên không còn /assets)
-const WIDGET_SHA = "59eb1869a4712b340d7f07a921212698fa9898bc";
+const WIDGET_SHA = "575c4f2444cdc28b2bfcc103c46e800c8a1446c0";
 const WIDGET_URL = `https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@${WIDGET_SHA}/website/public/assets/js/fc-widget.js`;
 const HOTLINE = site.agent.phone, TEL = HOTLINE.replace(/\s/g, ""), ZALO = TEL;
 const esc = (s = "") => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
