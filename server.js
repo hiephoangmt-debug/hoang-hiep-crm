@@ -428,7 +428,7 @@ export const server = http.createServer(async (req, res) => {
 });
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  server.listen(PORT, () => {
+  server.listen(PORT, process.env.HOST || '0.0.0.0', () => {
     console.log(`CRM chạy tại http://localhost:${PORT}`);
     if (!process.env.ADMIN_PASSWORD) console.warn('⚠ Đang dùng mật khẩu mặc định "admin123" – hãy đặt ADMIN_PASSWORD!');
   });

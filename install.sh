@@ -35,7 +35,7 @@ else git clone -q -b "$BRANCH" "$REPO" "$DIR"; fi
 
 if [ "$UPDATE" = 0 ]; then
   PORT=3000; [ -n "$DOMAIN" ] && HOSTBIND=127.0.0.1 || HOSTBIND=0.0.0.0
-  umask 077; printf 'PORT=%s\nADMIN_PASSWORD=%s\nDATA_DIR=/var/lib/crm\n' "$PORT" "$PASS" > "$ENVFILE"; umask 022
+  umask 077; printf 'PORT=%s\nHOST=%s\nADMIN_PASSWORD=%s\nDATA_DIR=/var/lib/crm\n' "$PORT" "$HOSTBIND" "$PASS" > "$ENVFILE"; umask 022
   cat > /etc/systemd/system/crm.service <<UNIT
 [Unit]
 Description=CRM Hoang Hiep
@@ -57,7 +57,6 @@ UNIT
     apt-get install -y caddy >/dev/null
     printf '%s {\n    reverse_proxy 127.0.0.1:%s\n}\n' "$DOMAIN" "$PORT" > /etc/caddy/Caddyfile
     systemctl reload caddy || systemctl restart caddy
-    # server chỉ nghe nội bộ khi có Caddy phía trước
     command -v ufw >/dev/null && ufw allow 80,443/tcp >/dev/null || true
   else
     command -v ufw >/dev/null && ufw allow 3000/tcp >/dev/null || true
