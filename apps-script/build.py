@@ -30,6 +30,9 @@ def build(src: Path, out_name: str):
         return f"<script>\n{code}</script>"
 
     html = re.sub(r'<script src="([^"]+)"></script>', inline, html)
+    # Apps Script coi "<?" … "?>" là scriptlet và cắt bỏ khi nạp trang -> cấm trong mã nhúng
+    for m in re.finditer(r"<script>(.*?)</script>", html, re.S):
+        assert "<?" not in m.group(1) and "?>" not in m.group(1), out_name + ': mã JS chứa "<?" hoặc "?>" (dùng \\x3c / \\x3e)'
     assert "vendor/" not in html, out_name
     html = html.replace("<head>", "<head>\n" + NOTE, 1)
     out = OUT / out_name

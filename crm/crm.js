@@ -768,7 +768,7 @@
 
   async function start() {
     window.__crmStarted = true;
-    $("loading").textContent = "Đang kết nối máy chủ Google… (giao diện v3)";
+    $("loading").textContent = "Đang kết nối máy chủ Google… (giao diện v4)";
     if (!B.IN_GAS) {
       $("loading").textContent = "Trang CRM cần chạy trong Google Apps Script (xem apps-script/README.md).";
       return;

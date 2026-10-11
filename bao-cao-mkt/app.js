@@ -610,7 +610,7 @@
         el, rid, path,
         doc: parseXml(await zip.file(path).async("string")),
         relsDoc: parseXml(relsFile ? await relsFile.async("string")
-          : '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"/>'),
+          : '\x3c?xml version="1.0" encoding="UTF-8" standalone="yes"?\x3e<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"/>'),
       };
       s.pristine = s.doc.cloneNode(true);
       s.pristineRels = s.relsDoc.cloneNode(true);
