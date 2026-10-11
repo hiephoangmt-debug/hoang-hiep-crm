@@ -1144,6 +1144,10 @@
 
   function finishGoogle(lines, N, val) {
     const cost = val.cost;
+    // Google rút gọn số lớn: "2,69 Tr đ", "2,9 N", "16,1 N đ" -> chỉ là số gần đúng
+    const rounded = /\d[.,]\d{1,2}\s*(tr|n|k)\b/.test(N.join(" "));
+    // màn hình "Tổng quan" của cả tài khoản (không mở một chiến dịch cụ thể)
+    const overview = !N.some((n) => /chien dich (tim kiem|hieu suat toi da|hien thi|video|da kenh|thong minh|ung dung)/.test(n));
     let name = "";
     const ci = N.findIndex((n) => /chien dich (tim kiem|hieu suat toi da|hien thi|video|da kenh|thong minh|ung dung)/.test(n));
     if (ci >= 0) {
@@ -1164,7 +1168,7 @@
     const date = d ? (/thang/.test(d[0]) ? `${d[2]}/${d[1]}` : `${d[1]}/${d[2]}`) : "";
     return { name: name || (date ? "Chiến dịch " + date : "Chiến dịch"), spent: cost, results: val.conv != null ? val.conv : null, resultType: val.conv != null ? "lead" : "",
       date, status: "", clicks: val.clicks != null ? val.clicks : null, impressions: val.impressions != null ? val.impressions : null,
-      reach: val.reach != null ? val.reach : null };
+      reach: val.reach != null ? val.reach : null, rounded, overview };
   }
 
   function extractCampaigns(text) {

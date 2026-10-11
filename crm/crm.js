@@ -631,7 +631,7 @@
         <input class="cnum lead" data-p="${i}" data-c="${j}" data-f="results" value="${c.results ? fmtInt(c.results) : ""}" placeholder="Lead" inputmode="numeric" aria-label="Lead">
         <button type="button" class="link danger" data-delcamp="${i}:${j}" title="Bỏ dòng này">×</button></label>`
       : `<label class="camp"><input type="checkbox" data-p="${i}" data-c="${j}" data-f="use"${c.use ? " checked" : ""}>
-        <span class="cname" title="${esc(c.name)}">${esc(c.name)}${c.status ? ` <small class="cstatus${/tat|tam dung|hoan tat/.test(c.status) ? " off" : ""}">${esc(STATUS_LABEL[c.status] || c.status)}</small>` : ""}</span>
+        <span class="cname" title="${esc(c.name)}">${c.rounded || c.overview ? `<small class="cstatus off" title="Số trên ảnh bị Google làm tròn hoặc là tổng cả tài khoản – kiểm tra trước khi tick">⚠ ${c.rounded ? "số làm tròn" : ""}${c.rounded && c.overview ? ", " : ""}${c.overview ? "tổng cả tài khoản" : ""}</small> ` : ""}${esc(c.name)}${c.status ? ` <small class="cstatus${/tat|tam dung|hoan tat/.test(c.status) ? " off" : ""}">${esc(STATUS_LABEL[c.status] || c.status)}</small>` : ""}</span>
         <input class="cnum" data-p="${i}" data-c="${j}" data-f="spent" value="${fmtInt(c.spent)}" aria-label="Chi tiêu">
         <span class="muted">${[c.results != null ? fmtInt(c.results) + " " + (RESULT_LABEL[c.resultType] || "") : "", c.clicks != null ? fmtInt(c.clicks) + " nhấp" : "",
           c.impressions != null ? fmtInt(c.impressions) + " hiển thị" : "", c.reach != null ? fmtInt(c.reach) + " tiếp cận" : ""].filter(Boolean).join(" · ")}</span></label>`).join("")}
@@ -704,7 +704,7 @@
       if (r.platform) p.nenTang = r.platform;
       if (r.staff && r.by === "id") p.nhanSu = r.staff;
       p.account = r.account || "";
-      p.campaigns = p.loai === "hoadon" ? [] : B.extractCampaigns(p.text || "").map((c) => Object.assign(c, { use: dateInWeek(c.date, w) || (!!c.until && dateInWeek(c.until, w)) }));
+      p.campaigns = p.loai === "hoadon" ? [] : B.extractCampaigns(p.text || "").map((c) => Object.assign(c, { use: !c.rounded && !c.overview && (dateInWeek(c.date, w) || (!!c.until && dateInWeek(c.until, w))) }));
       // không đọc ra số: mở sẵn một dòng điền tay ngay dưới ảnh
       if (p.loai !== "hoadon" && !p.campaigns.length) p.campaigns = [{ manual: true, name: "", spent: 0, results: 0, resultType: "lead", use: false }];
       p.invoice = B.extractInvoice(p.text || "") || { total: 0, vat: null };
@@ -923,6 +923,8 @@
     if (outOfWeek) camps.forEach((c) => (c.use = true));
     if (!confirm(`Số đọc từ ${r.tenFile} (${r.nhanSu} · ${PLATFORM_LABEL[r.nenTang] || r.nenTang}):\n${list}\n\n` +
       (outOfWeek ? `⚠ Ngày trên ảnh không nằm trong tuần ${weekLabel(r.tuan)} – kiểm tra lại khoảng ngày đã lọc trong Trình quản lý quảng cáo.\n` : "") +
+      (camps.some((c) => c.rounded) ? "⚠ Số trên ảnh đã bị làm tròn (Tr = triệu, N = nghìn) – chỉ là số gần đúng. Nên chụp màn hình có số đầy đủ.\n" : "") +
+      (camps.some((c) => c.overview) ? "⚠ Đây là màn hình TỔNG QUAN cả tài khoản (gồm mọi chiến dịch, có thể cả dự án khác) – nếu đã lưu số từng chiến dịch thì bấm Huỷ để không cộng hai lần.\n" : "") +
       `Lưu vào số liệu tuần ${weekLabel(r.tuan)} và Google Sheet?`)) return;
     const n = await run("Đang lưu số liệu", async () => {
       // đọc lại = thay số cũ của ảnh này (kể cả số đọc sai lần trước), không cộng thêm
