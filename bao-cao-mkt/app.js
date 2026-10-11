@@ -1611,7 +1611,8 @@
   window.BaoCaoMkt = {
     PLATFORMS, KINDS, fmtInt, fmtDec, IN_GAS, gas, b64ToBlob, blobToB64, ocrWorker, embeddable, isPdf, pdfText, pdfToImages, loadData, aggregate, buildReport, toNum, norm, parseDriveId, guessClass, staffNameFromAccount, classifyText, extractCampaigns, Drive };
 
-  document.addEventListener("DOMContentLoaded", () => {
+  const onReady = (fn) => (document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", fn) : fn());
+  onReady(() => {
     if (!$("form")) return; // trang khác (CRM) chỉ dùng phần lõi
     $("year").value = String(new Date().getFullYear());
     if (CFG.googleClientId || IN_GAS) $("clientBox").hidden = true;

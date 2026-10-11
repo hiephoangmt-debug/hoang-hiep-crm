@@ -771,10 +771,16 @@
       $("loading").textContent = "Trang CRM cần chạy trong Google Apps Script (xem apps-script/README.md).";
       return;
     }
+    const slow = setTimeout(() => {
+      $("loading").innerHTML = "Vẫn đang tải… Nếu quá 1 phút:<br>1. Mở link trong <b>cửa sổ ẩn danh</b> và chỉ đăng nhập <b>một</b> tài khoản Google (Apps Script lỗi khi trình duyệt đăng nhập nhiều tài khoản).<br>" +
+        "2. Trong Apps Script, mở <b>Lần thực thi</b> (biểu tượng ☰▶ bên trái) xem hàm <code>crmBootstrap</code> có báo lỗi không.";
+    }, 25000);
     try {
       const boot = await gas("crmBootstrap");
+      clearTimeout(slow);
       Object.assign(S, boot);
     } catch (e) {
+      clearTimeout(slow);
       $("loading").textContent = "Không tải được dữ liệu: " + e.message;
       return;
     }
@@ -802,5 +808,7 @@
   }
 
   window.CrmBaoCao = { weekLabel, isoFromLabel, weeksForReport, S };
-  document.addEventListener("DOMContentLoaded", start);
+  // Apps Script có thể nạp trang sau khi DOMContentLoaded đã qua -> chạy ngay nếu DOM đã sẵn sàng
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
+  else start();
 })();
