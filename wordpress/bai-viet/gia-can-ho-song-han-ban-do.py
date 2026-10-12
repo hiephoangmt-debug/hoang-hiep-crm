@@ -33,7 +33,7 @@ best = np.zeros(cls.shape, np.float32); out = cls.copy()
 for k in (0, 1, 2):
     sc = ndimage.uniform_filter((cls == k).astype(np.float32), 5); m = sc > best; out[m] = k; best[m] = sc[m]
 cls = out
-PAL = np.array([(178, 220, 240), (243, 238, 229), (255, 255, 255)], np.uint8)
+PAL = np.array([(64, 132, 186), (27, 49, 74), (52, 80, 110)], np.uint8)  # nước, đất, đường – tông navy
 base = Image.fromarray(PAL[cls])
 
 # vùng cắt quanh sông Hàn
@@ -52,43 +52,43 @@ P = [('Hòa Bình Green', 35, 40, 'Đ', 650, 98), ('The Peninsula', 68, 80, 'Đ'
      ('The Filmore', 174, 212, 'T', 610, 1522)]
 P.sort(key=lambda p: -p[2])
 def tier(v):
-    return '#2e7d4f' if v < 60 else '#b7791f' if v < 100 else '#c2410c' if v < 150 else '#b91c1c'
+    return '#22c55e' if v < 60 else '#f5b301' if v < 100 else '#fb7a2c' if v < 150 else '#ef4444'
 
 W, H = 1080, 1350
-im = Image.new('RGB', (W, H), '#fbf8f3'); d = ImageDraw.Draw(im)
-d.rectangle([0, 0, W, 150], fill='#1f3a50')
+im = Image.new('RGB', (W, H), '#0f2236'); d = ImageDraw.Draw(im)
+d.rectangle([0, 0, W, 150], fill='#0b1a2a'); d.rectangle([0, 148, W, 152], fill='#e8b04a')
 d.text((36, 24), 'GIÁ CĂN HỘ VEN SÔNG HÀN · 10/2026', font=F(24, True), fill='#e8b04a')
 d.text((36, 60), 'Bản đồ 21 dự án hai bờ sông Hàn', font=F(40, True), fill='white')
 d.text((36, 112), 'Giá rao tham khảo, triệu đồng/m² · số = hạng giá', font=F(19), fill='#c9d6e3')
 MX, MY = 20, 172
-im.paste(mapimg, (MX, MY)); d.rounded_rectangle([MX, MY, MX + MW, MY + MH], 14, outline='#d9cfc2', width=3)
+im.paste(mapimg, (MX, MY)); d.rounded_rectangle([MX, MY, MX + MW, MY + MH], 14, outline='#e8b04a', width=3)
 T = lambda x, y: (MX + (x - CX0) * s, MY + (y - CY0) * s)
 for name, x, y, ox, oy in (('Cầu Thuận Phước', 514, 190, 0, 18), ('Cầu Sông Hàn', 725, 962, 30, -26), ('Cầu Rồng', 754, 1336, 0, 18), ('Cầu Trần Thị Lý', 826, 1702, -20, -26)):
     px, py = T(x, y)
-    d.rectangle([px - 34, py - 4, px + 34, py + 4], fill='#6b6b6b')
+    d.rectangle([px - 34, py - 4, px + 34, py + 4], fill='#c9d6e3')
     w = d.textlength(name, font=F(14, True)); lx, ly2 = px + ox, py + oy
-    d.rounded_rectangle([lx - w / 2 - 6, ly2 - 10, lx + w / 2 + 6, ly2 + 10], 5, fill='#1f3a50')
-    d.text((lx, ly2), name, font=F(14, True), fill='white', anchor='mm')
-px, py = T(560, 150); d.text((px, py), 'Sông Hàn', font=F(18, True), fill='#2b6f99', anchor='mm')
-px, py = T(340, 700); d.text((px, py), 'HẢI CHÂU', font=F(16, True), fill='#9a8c7a', anchor='mm')
-px, py = T(1020, 820); d.text((px, py), 'SƠN TRÀ', font=F(16, True), fill='#9a8c7a', anchor='mm')
+    d.rounded_rectangle([lx - w / 2 - 6, ly2 - 10, lx + w / 2 + 6, ly2 + 10], 5, fill='#e8b04a')
+    d.text((lx, ly2), name, font=F(14, True), fill='#0b1a2a', anchor='mm')
+px, py = T(560, 150); d.text((px, py), 'Sông Hàn', font=F(18, True), fill='#d6ecff', anchor='mm')
+px, py = T(340, 700); d.text((px, py), 'HẢI CHÂU', font=F(16, True), fill='#8fa9c4', anchor='mm')
+px, py = T(1020, 820); d.text((px, py), 'SƠN TRÀ', font=F(16, True), fill='#8fa9c4', anchor='mm')
 for i, (name, a, b, bank, x, y) in enumerate(P, 1):
     px, py = T(x, y)
-    d.ellipse([px - 15, py - 15, px + 15, py + 15], fill=tier(b), outline='white', width=3)
-    d.text((px, py), str(i), font=F(14, True), fill='white', anchor='mm')
+    d.ellipse([px - 15, py - 15, px + 15, py + 15], fill=tier(b), outline='#0b1a2a', width=3)
+    d.text((px, py), str(i), font=F(14, True), fill='#0b1a2a', anchor='mm')
 # bảng xếp hạng
 TX = MX + MW + 26; ty = 176
-d.text((TX, ty), 'Xếp hạng giá', font=F(24, True), fill='#1f3a50'); ty += 40
+d.text((TX, ty), 'Xếp hạng giá', font=F(24, True), fill='#e8b04a'); ty += 40
 for i, (name, a, b, bank, x, y) in enumerate(P, 1):
     yy = ty + (i - 1) * 46
-    d.rounded_rectangle([TX, yy, W - 24, yy + 40], 8, fill='white')
-    d.ellipse([TX + 8, yy + 6, TX + 36, yy + 34], fill=tier(b)); d.text((TX + 22, yy + 20), str(i), font=F(14, True), fill='white', anchor='mm')
-    d.text((TX + 46, yy + 20), name, font=F(17, True), fill='#1f3a50', anchor='lm')
+    d.rounded_rectangle([TX, yy, W - 24, yy + 40], 8, fill='#1b3550')
+    d.ellipse([TX + 8, yy + 6, TX + 36, yy + 34], fill=tier(b)); d.text((TX + 22, yy + 20), str(i), font=F(14, True), fill='#0b1a2a', anchor='mm')
+    d.text((TX + 46, yy + 20), name, font=F(17, True), fill='white', anchor='lm')
     d.text((W - 34, yy + 20), f'{a} – {b}', font=F(17, True), fill=tier(b), anchor='rm')
 ly = MY + MH + 16
 x = 36
 for lab, v in (('Dưới 60', 50), ('60 – 100', 80), ('100 – 150', 120), ('Trên 150', 200)):
-    d.ellipse([x, ly, x + 22, ly + 22], fill=tier(v)); d.text((x + 30, ly + 11), lab, font=F(19), fill='#333', anchor='lm'); x += 30 + d.textlength(lab, font=F(19)) + 30
-d.text((36, H - 20), 'Số liệu giá rao: Biggee.vn (không phải giá giao dịch). Đồ hoạ: Hoàng Hiệp · hiephoangmt.com · 0904 567 009', font=F(15), fill='#6b5a48', anchor='lm')
+    d.ellipse([x, ly, x + 22, ly + 22], fill=tier(v)); d.text((x + 30, ly + 11), lab, font=F(19), fill='#e6eef6', anchor='lm'); x += 30 + d.textlength(lab, font=F(19)) + 30
+d.text((36, H - 20), 'Số liệu giá rao: Biggee.vn (không phải giá giao dịch). Đồ hoạ: Hoàng Hiệp · hiephoangmt.com · 0904 567 009', font=F(15), fill='#8fa9c4', anchor='lm')
 out = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'gia-can-ho-song-han-10-2026-zalo.jpg')
 im.save(out, quality=90); print(out, MW)
