@@ -91,6 +91,8 @@ HTML
 		'keyword'  => 'căn hộ view sông Hàn',
 		'project'  => '',
 		'week'     => 5,
+		'image'    => 'plugin:img/tin-tuc/gia-can-ho-song-han-10-2026.jpg', // Ảnh đại diện: xếp hạng giá rao 21 dự án hai bờ sông Hàn (số liệu Biggee.vn).
+		'image_alt' => 'Giá căn hộ view sông Hàn 10/2026: xếp hạng giá rao 21 dự án hai bờ sông Hàn Đà Nẵng',
 		'category' => 'Thị trường',
 		'content'  => <<<'HTML'
 <p>Căn hộ view sông Hàn hiện có ở cả hai bờ: bờ Đông (Sơn Trà, Ngũ Hành Sơn) với các dự án của Sun Group, Peninsula, Capital Square, The Legend và bờ Tây (Hải Châu) với The Filmore, Danang Landmark, M Riverside, The Meridian. Giá tham khảo phổ biến khoảng 50 – 128 triệu/m² tùy dự án, tầng và hướng nhìn. Thông tin được Hoàng Hiệp cập nhật tháng 10/2026.</p>
