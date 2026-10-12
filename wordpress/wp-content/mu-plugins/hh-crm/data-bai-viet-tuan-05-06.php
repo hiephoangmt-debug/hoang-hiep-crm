@@ -86,7 +86,7 @@ HTML
 
 	$posts[] = array(
 		'slug'     => 'can-ho-view-song-han-du-an-va-gia',
-		'rev'      => '2026-10-12', // Thêm bảng giá 21 dự án + bản đồ (bản cũ còn trong Bản sửa đổi).
+		'rev'      => '2026-10-12b', // Thêm bảng giá 21 dự án + bản đồ (bản cũ còn trong Bản sửa đổi).
 		'repub'    => true,
 		'title'    => 'Căn hộ view sông Hàn: bảng giá 21 dự án hai bờ tháng 10/2026',
 		'excerpt'  => 'Căn hộ view sông Hàn tháng 10/2026: bảng giá rao 21 dự án hai bờ Sơn Trà, Hải Châu từ 35 – 40 đến 208 – 228 triệu/m², bản đồ vị trí, giá theo loại căn và tình trạng bàn giao.',
@@ -100,7 +100,7 @@ HTML
 <p>Căn hộ view sông Hàn hiện có ở cả hai bờ: bờ Đông (Sơn Trà, Ngũ Hành Sơn) với các dự án của Sun Group, Peninsula, Capital Square, The Legend và bờ Tây (Hải Châu) với The Filmore, Danang Landmark, M Riverside, The Meridian. Giá rao tháng 10/2026 của 21 dự án hai bờ dao động khoảng 35 – 228 triệu/m², phổ biến 65 – 125 triệu/m² tùy dự án, tầng và hướng nhìn. Thông tin được Hoàng Hiệp cập nhật tháng 10/2026.</p>
 
 <h2>Bảng giá căn hộ view sông Hàn 10/2026: 21 dự án hai bờ</h2>
-<figure><img src="/wp-content/plugins/hoang-hiep-crm/hh-crm/img/tin-tuc/gia-can-ho-song-han-10-2026-ban-do.jpg" alt="Bản đồ giá căn hộ view sông Hàn 10/2026: 21 dự án hai bờ sông Hàn Đà Nẵng" width="1080" height="1350" loading="lazy"><figcaption>Bản đồ vị trí và giá rao 21 dự án căn hộ hai bờ sông Hàn. Số liệu giá rao: Biggee.vn; đồ hoạ: hiephoangmt.com.</figcaption></figure>
+<figure><img src="/wp-content/plugins/hoang-hiep-crm/hh-crm/img/tin-tuc/gia-can-ho-song-han-10-2026-ban-do.jpg" alt="Bản đồ giá căn hộ view sông Hàn 10/2026: 21 dự án hai bờ sông Hàn Đà Nẵng" width="1080" height="1610" loading="lazy"><figcaption>Bản đồ vị trí và giá rao 21 dự án căn hộ hai bờ sông Hàn. Số liệu giá rao: Biggee.vn; đồ hoạ: hiephoangmt.com.</figcaption></figure>
 <p>Giá căn hộ view sông Hàn tháng 10/2026 chênh nhau tới khoảng 5 lần: từ 35 – 40 triệu/m² ở các chung cư cũ phía cầu Thuận Phước đến 208 – 228 triệu/m² ở dự án hạng sang sát cầu Sông Hàn. Bảng xếp hạng theo giá rao trung bình mỗi m² (cao → thấp):</p>
 <table>
 <thead><tr><th>#</th><th>Dự án</th><th>Bờ sông</th><th>Giá rao</th></tr></thead>

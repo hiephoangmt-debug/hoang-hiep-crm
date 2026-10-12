@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.10** + plugin Hoàng Hiệp CRM **2.20.32**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.10** + plugin Hoàng Hiệp CRM **2.20.33**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -41,7 +41,9 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
 
-## Có gì mới – plugin 2.20.32: bảng giá 21 dự án căn hộ view sông Hàn
+## Có gì mới – plugin 2.20.33, 2.20.32: bảng giá 21 dự án căn hộ view sông Hàn
+
+- 2.20.33: bản đồ trong bài ghi tên + giá từng dự án ngay trên bản đồ (khung nhãn có đường nối về vị trí), nền navy.
 
 - Bài "Căn hộ view sông Hàn" thêm mục bảng giá rao 21 dự án hai bờ (xếp hạng cao → thấp, link sang 9 trang dự án có trên web) và bản đồ vị trí – giá (nền navy). Tiêu đề, mô tả, hỏi đáp cập nhật theo; bài lên đầu Tin tức. Số liệu giá rao: Biggee.vn.
 

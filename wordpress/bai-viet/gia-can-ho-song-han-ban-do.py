@@ -36,75 +36,66 @@ cls = out
 PAL = np.array([(64, 132, 186), (27, 49, 74), (52, 80, 110)], np.uint8)  # nước, đất, đường – tông navy
 base = Image.fromarray(PAL[cls])
 
-# vùng cắt quanh sông Hàn
-CX0, CY0, CX1, CY1 = 230, 30, 1110, 1770
-mapimg = base.crop((CX0, CY0, CX1, CY1))
-MH = 1080; s = MH / (CY1 - CY0); MW = round((CX1 - CX0) * s)
-mapimg = mapimg.resize((MW, MH), Image.LANCZOS)
-
-P = [('Hòa Bình Green', 35, 40, 'Đ', 650, 98), ('The Peninsula', 68, 80, 'Đ', 742, 348), ('Blue House', 42, 44, 'Đ', 788, 276),
-     ('Vicoland', 44, 46, 'Đ', 841, 399), ('Sun Symphony', 100, 124, 'Đ', 769, 475), ('Azura', 85, 95, 'Đ', 836, 997),
-     ('Capital Square', 90, 98, 'Đ', 843, 1045), ('The Legend City', 132, 145, 'Đ', 928, 1313), ('Sun Ponte', 99, 116, 'Đ', 860, 1441),
-     ('The Monarchy', 69, 72, 'Đ', 930, 1531), ('Sun Cosmo', 86, 106, 'Đ', 1014, 1672),
-     ('Blooming Tower', 39, 41, 'T', 355, 345), ('SAM Towers', 81, 88, 'T', 538, 468), ('F.Home', 65, 66, 'T', 515, 690),
-     ('Đà Nẵng Plaza', 54, 57, 'T', 590, 718), ('La Paz Tower', 58, 67, 'T', 511, 835), ('M Landmark', 208, 228, 'T', 646, 965),
-     ('Sun Solar', 112, 122, 'T', 578, 992), ('Indochina Riverside', 72, 85, 'T', 651, 1036), ('Landmark Tower', 118, 128, 'T', 614, 1469),
-     ('The Filmore', 174, 212, 'T', 610, 1522)]
-P.sort(key=lambda p: -p[2])
+# Bố cục như ảnh mẫu: cả bản đồ, mỗi dự án một nhãn tên + giá, đường nối về vị trí.
 def tier(v):
     return '#22c55e' if v < 60 else '#f5b301' if v < 100 else '#fb7a2c' if v < 150 else '#ef4444'
-
-W, H = 1080, 1350
-im = Image.new('RGB', (W, H), '#0f2236'); d = ImageDraw.Draw(im)
-d.rectangle([0, 0, W, 150], fill='#0b1a2a'); d.rectangle([0, 148, W, 152], fill='#e8b04a')
-d.text((36, 24), 'GIÁ CĂN HỘ VEN SÔNG HÀN · 10/2026', font=F(24, True), fill='#e8b04a')
-d.text((36, 60), 'Bản đồ 21 dự án hai bờ sông Hàn', font=F(40, True), fill='white')
-d.text((36, 112), 'Giá rao tham khảo, triệu đồng/m² · ghim số = hạng giá', font=F(19), fill='#c9d6e3')
-MX, MY = 20, 172
-im.paste(mapimg, (MX, MY)); d.rounded_rectangle([MX, MY, MX + MW, MY + MH], 14, outline='#e8b04a', width=3)
-T = lambda x, y: (MX + (x - CX0) * s, MY + (y - CY0) * s)
-for name, x, y, ox, oy in (('Cầu Thuận Phước', 514, 190, 0, 18), ('Cầu Sông Hàn', 725, 962, 30, -26), ('Cầu Rồng', 754, 1336, 0, 18), ('Cầu Trần Thị Lý', 826, 1702, -20, -26)):
+SC = 0.75; TOP, BOT = 150, 110
+W = round(base.width * SC); MH = round(base.height * SC); H = TOP + MH + BOT
+im = Image.new('RGB', (W, H), '#0f2236'); im.paste(base.resize((W, MH), Image.LANCZOS), (0, TOP)); d = ImageDraw.Draw(im)
+T = lambda x, y: (x * SC, TOP + y * SC)
+# (tên, giá thấp, giá cao, vị trí dự án x, y, ô nhãn x0, y0, x1, y1 – toạ độ ảnh gốc 1440×1800)
+P = [('Hòa Bình Green', 35, 40, 650, 98, 690, 56, 944, 132), ('The Peninsula', 68, 80, 742, 348, 708, 165, 935, 240),
+     ('Blue House', 42, 44, 788, 276, 880, 280, 1096, 356), ('Chung cư Vicoland', 44, 46, 841, 399, 891, 393, 1189, 468),
+     ('Sun Symphony Residence', 100, 124, 769, 475, 814, 529, 1213, 604), ('Azura Đà Nẵng', 85, 95, 836, 997, 827, 842, 1062, 916),
+     ('Capital Square', 90, 98, 843, 1045, 908, 1020, 1141, 1096), ('The Legend City', 132, 145, 928, 1313, 977, 1266, 1234, 1342),
+     ('Sun Ponte Residence', 99, 116, 860, 1441, 930, 1382, 1260, 1458), ('The Monarchy', 69, 72, 930, 1531, 1001, 1503, 1227, 1578),
+     ('Sun Cosmo Residence', 86, 106, 1014, 1672, 1060, 1649, 1408, 1724),
+     ('Blooming Tower', 39, 41, 355, 345, 24, 309, 282, 384), ('SAM Towers', 81, 88, 538, 468, 254, 438, 470, 513),
+     ('F.Home Apartment', 65, 66, 515, 690, 244, 556, 532, 632), ('Đà Nẵng Plaza', 54, 57, 590, 718, 227, 696, 457, 772),
+     ('La Paz Tower', 58, 67, 511, 835, 234, 811, 449, 886), ('M Landmark Residence', 208, 228, 646, 965, 92, 937, 450, 1013),
+     ('Sun Solar', 112, 122, 578, 992, 285, 1067, 532, 1143), ('Indochina Riverside Towers', 72, 85, 651, 1036, 138, 1202, 560, 1278),
+     ('Landmark Tower', 118, 128, 614, 1469, 272, 1426, 535, 1501), ('The Filmore Da Nang', 174, 212, 610, 1522, 239, 1587, 563, 1663)]
+# cầu
+for name, x, y, ox, oy in (('Cầu Thuận Phước', 514, 190, -10, -34), ('Cầu Sông Hàn', 725, 962, -100, -40), ('Cầu Rồng', 754, 1336, 0, -34), ('Cầu Trần Thị Lý', 826, 1702, 0, 34)):
     px, py = T(x, y)
-    d.rectangle([px - 34, py - 4, px + 34, py + 4], fill='#c9d6e3')
-    w = d.textlength(name, font=F(14, True)); lx, ly2 = px + ox, py + oy
-    d.rounded_rectangle([lx - w / 2 - 6, ly2 - 10, lx + w / 2 + 6, ly2 + 10], 5, fill='#e8b04a')
-    d.text((lx, ly2), name, font=F(14, True), fill='#0b1a2a', anchor='mm')
-px, py = T(560, 150); d.text((px, py), 'Sông Hàn', font=F(18, True), fill='#d6ecff', anchor='mm')
-px, py = T(340, 700); d.text((px, py), 'HẢI CHÂU', font=F(16, True), fill='#8fa9c4', anchor='mm')
-px, py = T(1020, 820); d.text((px, py), 'SƠN TRÀ', font=F(16, True), fill='#8fa9c4', anchor='mm')
-# nhãn giá cạnh ghim: bờ Tây ghi bên trái, bờ Đông bên phải; vài ghim sát nhau dời lên / xuống
-NUDGE = {'M Landmark': (0, -26), 'Sun Solar': (0, 0), 'Indochina Riverside': (0, 22), 'Azura': (0, -20), 'Capital Square': (0, 14),
-         'F.Home': (0, -14), 'Đà Nẵng Plaza': (0, 14), 'Landmark Tower': (0, -8), 'The Filmore': (0, 10), 'Sun Cosmo': (0, -30)}
-for i, (name, a, b, bank, x, y) in enumerate(P, 1):
+    d.rectangle([px - 44, py - 5, px + 44, py + 5], fill='#c9d6e3')
+    f = F(19, True); w = d.textlength(name, font=f); lx, ly = px + ox, py + oy
+    d.rounded_rectangle([lx - w / 2 - 9, ly - 14, lx + w / 2 + 9, ly + 14], 7, fill='#e8b04a')
+    d.text((lx, ly), name, font=f, fill='#0b1a2a', anchor='mm')
+# nhãn dự án: thẻ navy viền màu giá, đường nối về chấm vị trí
+cards = []
+for name, a, b, x, y, x0, y0, x1, y1 in P:
+    fn, fp = F(19, True), F(21, True)
+    price = f'{a} – {b} triệu/m²'
+    w = max(d.textlength(name, font=fn), d.textlength(price, font=fp)) + 34
+    cx, cy = (x0 + x1) / 2 * SC, TOP + (y0 + y1) / 2 * SC
+    bx0 = min(max(cx - w / 2, 10), W - 10 - w); by0 = cy - 30
+    cards.append((name, price, a, b, x, y, bx0, by0, bx0 + w, by0 + 60))
+for name, price, a, b, x, y, bx0, by0, bx1, by1 in cards:
     px, py = T(x, y)
-    txt = f'{a}–{b}'; f = F(14, True); w = d.textlength(txt, font=f) + 14
-    dx, dy = NUDGE.get(name, (0, 0)); ly2 = py + dy
-    left = (bank == 'T') != (name in ('Blooming Tower', 'Sun Cosmo'))  # 2 ghim sát mép khung: đổi bên
-    if left:
-        lx1 = px - 19; lx0 = lx1 - w
-    else:
-        lx0 = px + 19; lx1 = lx0 + w
-    if dy:
-        d.line([px, py, (lx1 if left else lx0), ly2], fill=tier(b), width=2)
-    d.rounded_rectangle([lx0, ly2 - 11, lx1, ly2 + 11], 6, fill='#0b1a2a', outline=tier(b), width=2)
-    d.text(((lx0 + lx1) / 2, ly2), txt, font=f, fill=tier(b), anchor='mm')
-for i, (name, a, b, bank, x, y) in enumerate(P, 1):
+    ex = min(max(px, bx0), bx1); ey = by0 + 30 if not (bx0 <= px <= bx1) else (by0 if py < by0 else by1)
+    d.line([px, py, ex, ey], fill=tier(b), width=3)
+for name, price, a, b, x, y, bx0, by0, bx1, by1 in cards:
+    d.rounded_rectangle([bx0, by0, bx1, by1], 10, fill='#0b1a2a', outline=tier(b), width=3)
+    d.text((bx0 + 16, by0 + 17), name, font=F(19, True), fill='white', anchor='lm')
+    d.text((bx0 + 16, by0 + 43), price, font=F(21, True), fill=tier(b), anchor='lm')
+for name, price, a, b, x, y, *_ in cards:
     px, py = T(x, y)
-    d.ellipse([px - 15, py - 15, px + 15, py + 15], fill=tier(b), outline='#0b1a2a', width=3)
-    d.text((px, py), str(i), font=F(14, True), fill='#0b1a2a', anchor='mm')
-# bảng xếp hạng
-TX = MX + MW + 26; ty = 176
-d.text((TX, ty), 'Xếp hạng giá', font=F(24, True), fill='#e8b04a'); ty += 40
-for i, (name, a, b, bank, x, y) in enumerate(P, 1):
-    yy = ty + (i - 1) * 46
-    d.rounded_rectangle([TX, yy, W - 24, yy + 40], 8, fill='#1b3550')
-    d.ellipse([TX + 8, yy + 6, TX + 36, yy + 34], fill=tier(b)); d.text((TX + 22, yy + 20), str(i), font=F(14, True), fill='#0b1a2a', anchor='mm')
-    d.text((TX + 46, yy + 20), name, font=F(17, True), fill='white', anchor='lm')
-    d.text((W - 34, yy + 20), f'{a} – {b}', font=F(17, True), fill=tier(b), anchor='rm')
-ly = MY + MH + 16
-x = 36
+    d.ellipse([px - 10, py - 10, px + 10, py + 10], fill=tier(b), outline='#0b1a2a', width=3)
+px, py = T(120, 1545); d.text((px, py), 'HẢI CHÂU', font=F(22, True), fill='#8fa9c4', anchor='mm')
+px, py = T(1250, 1200); d.text((px, py), 'SƠN TRÀ', font=F(22, True), fill='#8fa9c4', anchor='mm')
+px, py = T(740, 1150); d.text((px, py), 'Sông Hàn', font=F(22, True), fill='#d6ecff', anchor='mm')
+# tiêu đề, logo chữ, chú thích, nguồn
+d.rectangle([0, 0, W, TOP], fill='#0b1a2a'); d.rectangle([0, TOP - 4, W, TOP], fill='#e8b04a')
+d.text((32, 22), 'GIÁ CĂN HỘ VEN SÔNG HÀN · 10/2026', font=F(24, True), fill='#e8b04a')
+d.text((32, 58), '21 dự án hai bờ sông Hàn', font=F(40, True), fill='white')
+d.text((32, 110), 'Giá rao tham khảo, triệu đồng/m²', font=F(19), fill='#c9d6e3')
+d.rounded_rectangle([W - 300, 30, W - 28, 118], 12, outline='#e8b04a', width=2)
+d.text((W - 164, 62), 'hiephoangmt.com', font=F(24, True), fill='white', anchor='mm')
+d.text((W - 164, 94), 'Hoàng Hiệp · 0904 567 009', font=F(17), fill='#e8b04a', anchor='mm')
+ly = TOP + MH + 20; x = 32
 for lab, v in (('Dưới 60', 50), ('60 – 100', 80), ('100 – 150', 120), ('Trên 150', 200)):
-    d.ellipse([x, ly, x + 22, ly + 22], fill=tier(v)); d.text((x + 30, ly + 11), lab, font=F(19), fill='#e6eef6', anchor='lm'); x += 30 + d.textlength(lab, font=F(19)) + 30
-d.text((36, H - 20), 'Số liệu giá rao: Biggee.vn (không phải giá giao dịch). Đồ hoạ: Hoàng Hiệp · hiephoangmt.com · 0904 567 009', font=F(15), fill='#8fa9c4', anchor='lm')
+    d.ellipse([x, ly, x + 24, ly + 24], fill=tier(v)); d.text((x + 34, ly + 12), lab, font=F(20), fill='#e6eef6', anchor='lm'); x += 34 + d.textlength(lab, font=F(20)) + 34
+d.text((32, H - 30), 'Số liệu giá rao: Biggee.vn (không phải giá giao dịch). Đồ hoạ: Hoàng Hiệp · hiephoangmt.com', font=F(16), fill='#8fa9c4', anchor='lm')
 out = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'gia-can-ho-song-han-10-2026-zalo.jpg')
-im.save(out, quality=90); print(out, MW)
+im.save(out, quality=90); print(out, im.size)
