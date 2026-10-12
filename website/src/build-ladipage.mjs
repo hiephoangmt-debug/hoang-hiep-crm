@@ -28,9 +28,9 @@ const BUDGET_LAND = ["Dưới 3 tỷ", "3 – 5 tỷ", "5 – 8 tỷ", "Trên 8 
 
 /* ---------- Lời kêu gọi hành động (gợi tò mò, trung thực: không đếm ngược giả, không "chỉ còn X căn") ---------- */
 const HOOKS = {
-  "fpt-plaza-1": { cta: "Xem giỏ hàng chuyển nhượng hôm nay", ghost: "Xem loại căn", title: "Căn nào vừa tầm ngân sách của bạn?", btn: "Gửi tôi 3 căn phù hợp nhất", band: "Căn FPT Plaza 1 bạn đang ngắm, giá thực tế là bao nhiêu?", bandBtn: "Hỏi giá căn bạn quan tâm", docs: ["🔄 Giỏ hàng căn đang chuyển nhượng", "💰 Giá theo tầng, hướng, nội thất", "📐 Mặt bằng căn hộ", "🏠 Lịch xem nhà thực tế"] },
-  "fpt-plaza-2": { cta: "Xem căn tầng cao đang chuyển nhượng", ghost: "Xem loại căn", title: "Căn 2PN – 3PN nào hợp với gia đình bạn?", btn: "Gửi tôi 3 căn phù hợp nhất", band: "Nhìn thấy sông và biển từ căn nào? Hỏi mã căn để biết.", bandBtn: "Nhận giỏ hàng FPT Plaza 2", docs: ["🔄 Giỏ hàng căn đang chuyển nhượng", "💰 Giá theo tầng & hướng", "📐 Mặt bằng 2PN – 3PN", "🏠 Lịch xem nhà thực tế"] },
-  "fpt-plaza-3": { cta: "Xem lịch bàn giao & giá FPT Plaza 3", ghost: "Xem loại căn", title: "Sắp nhận nhà: căn nào còn hợp với bạn?", btn: "Gửi tôi bảng giá & lịch bàn giao", band: "Sắp bàn giao rồi, bạn đã biết căn nào phù hợp chưa?", bandBtn: "Nhận bảng giá FPT Plaza 3", docs: ["📅 Lịch bàn giao cập nhật", "💰 Bảng giá & chính sách", "📐 Mặt bằng tòa E & W", "🏦 Phương án vay ngân hàng"] },
+  "fpt-plaza-1": { cta: "Xem giỏ hàng chuyển nhượng hôm nay", ghost: "Xem loại căn", title: "Căn nào vừa tầm ngân sách của bạn?", btn: "Gửi nhu cầu cho tôi", band: "Căn FPT Plaza 1 bạn đang ngắm, giá thực tế là bao nhiêu?", bandBtn: "Hỏi giá căn bạn quan tâm", docs: ["🔄 Giỏ hàng căn đang bán & cho thuê", "💰 Giá theo tầng, hướng, nội thất", "📝 Ký gửi bán / cho thuê căn của bạn", "🏦 Hỗ trợ vay & thủ tục sang tên"] },
+  "fpt-plaza-2": { cta: "Xem căn tầng cao đang chuyển nhượng", ghost: "Xem loại căn", title: "Căn 2PN – 3PN nào hợp với gia đình bạn?", btn: "Gửi nhu cầu cho tôi", band: "Nhìn thấy sông và biển từ căn nào? Hỏi mã căn để biết.", bandBtn: "Nhận giỏ hàng FPT Plaza 2", docs: ["🔄 Giỏ hàng căn đang bán & cho thuê", "💰 Giá theo tầng, hướng, nội thất", "📝 Ký gửi bán / cho thuê căn của bạn", "🏦 Hỗ trợ vay & thủ tục sang tên"] },
+  "fpt-plaza-3": { cta: "Xem căn FPT Plaza 3 đang bán, cho thuê", ghost: "Xem loại căn", title: "Bạn muốn mua, thuê hay ký gửi căn FPT Plaza 3?", btn: "Gửi nhu cầu cho tôi", band: "Căn FPT Plaza 3 đã có sổ – bạn đang tìm mua, thuê hay muốn bán?", bandBtn: "Gửi nhu cầu ngay", docs: ["🔄 Giỏ hàng căn đang bán & cho thuê", "💰 Giá theo tầng, hướng, nội thất", "📝 Ký gửi bán / cho thuê căn của bạn", "🏦 Hỗ trợ vay & thủ tục sang tên"] },
   "fpt-plaza-4": { cta: "Xem căn hợp ngân sách – nhận 3 gợi ý", ghost: "Xem mặt bằng 5 tầng", title: "Căn nào hợp ngân sách của bạn?", btn: "Gửi tôi 3 căn phù hợp nhất", band: "Bạn đang ngắm căn nào? Gõ mã căn, nhận giá đúng căn đó.", bandBtn: "Hỏi giá theo mã căn", docs: ["💰 Bảng giá theo tầng, hướng", "📐 Mặt bằng 5 tầng & layout căn", "🎁 Chính sách thanh toán, vay", "🧮 Bảng tính dòng tiền cho thuê"] },
   "fpt-plaza-5": { cta: "Là người đầu tiên biết giá FPT Plaza 5", ghost: "Xem thông tin dự kiến", title: "Báo tôi ngay khi FPT Plaza 5 có giá", btn: "Đăng ký nhận giá đầu tiên", band: "FPT Plaza 5 chưa công bố giá. Bạn muốn biết trước người khác?", bandBtn: "Đăng ký nhận giá đầu tiên", docs: ["🔔 Báo giá ngay khi có thông tin", "📐 Mặt bằng & loại căn dự kiến", "🆚 So sánh với FPT Plaza 4", "🎯 Ưu tiên chọn căn đẹp"] },
 };
@@ -44,12 +44,14 @@ const nav = () => `
   <a class="cta" href="#dang-ky">Nhận bảng giá</a>
 </div></div>`;
 
-const form = (id, { button, budget, extra, hidden }) => `
+const form = (id, { button, budget, extra, hidden, intent }) => `
 <form>
   <label for="${id}-name">Họ và tên</label>
   <input id="${id}-name" name="name" type="text" placeholder="Nguyễn Văn A">
   <label for="${id}-phone">Số điện thoại / Zalo</label>
   <input id="${id}-phone" name="phone" type="tel" placeholder="09xx xxx xxx">
+  ${intent ? `<label for="${id}-need">Bạn muốn</label>
+  <select id="${id}-need" name="need"><option value="" disabled selected>Chọn nhu cầu</option><option>Mua căn hộ</option><option>Thuê căn hộ</option><option>Bán căn hộ (ký gửi)</option><option>Cho thuê căn hộ (ký gửi)</option></select>` : ""}
   ${budget ? `<label for="${id}-budget">Ngân sách dự kiến</label>
   <select id="${id}-budget" name="budget"><option value="" disabled selected>Chọn mức ngân sách</option>${budget.map((b) => `<option>${esc(b)}</option>`).join("")}</select>` : ""}
   ${extra ? `<label for="${id}-code">${esc(extra.label)}</label><input id="${id}-code" name="unit" type="text" placeholder="${esc(extra.ph)}">` : ""}
@@ -282,7 +284,7 @@ const gallerySection = (title, extra = "") => `
 const NEWS = [
   ["on", "11/2025", "FPT Plaza 4 đủ điều kiện bán nhà ở hình thành trong tương lai", "Sở Xây dựng Đà Nẵng xác nhận căn hộ FPT Plaza 4 đủ điều kiện bán.", "fpt-plaza-4"],
   ["", "03/2025", "FPT Plaza 4 khởi công", "Dự án 1.395 căn hộ, 2 khối N & S, dự kiến bàn giao Quý IV/2027.", "fpt-plaza-4"],
-  ["on", "2026 (dự kiến)", "FPT Plaza 3 chuẩn bị bàn giao", "Hai tòa The Empire & The Wealthe, bàn giao dự kiến trong năm 2026 theo chủ đầu tư.", "fpt-plaza-3"],
+  ["on", "Đã có sổ", "FPT Plaza 3 đã bàn giao, vận hành và cấp sổ", "Hai tòa The Empire & The Wealthe – nhận ký gửi mua bán, cho thuê căn hộ.", "fpt-plaza-3"],
   ["up", "Chờ công bố", "FPT Plaza 5 nhận đăng ký sớm", "Chủ đầu tư chưa công bố bảng giá; đăng ký để được báo ngay khi có thông tin.", "fpt-plaza-5"],
 ];
 const newsSection = (title, first) => {
@@ -307,15 +309,20 @@ const finalCta = (title, steps, formTitle, formHtml) => `
 const LEGAL = {
   "fpt-plaza-1": [["Đã bàn giao", "FPT Plaza 1 đã hoàn thành và bàn giao, có cư dân sinh sống."], ["Giao dịch chuyển nhượng", "Mỗi căn được kiểm tra pháp lý cụ thể trước khi giao dịch; hỗ trợ thủ tục sang tên."]],
   "fpt-plaza-2": [["Đã bàn giao năm 2023", "FPT Plaza 2 đã bàn giao, giao dịch hiện tại là chuyển nhượng."], ["Kiểm tra từng căn", "Pháp lý từng căn được kiểm tra trước khi giao dịch; hỗ trợ sang tên và phương án vay."]],
-  "fpt-plaza-3": [["Thi công từ Quý I/2024", "Hai tòa The Empire (E) và The Wealthe (W), 25 tầng nổi, 2 tầng hầm."], ["Bàn giao dự kiến 2026", "Theo công bố chính thức của chủ đầu tư; theo dõi tiến độ thi công cập nhật."]],
+  "fpt-plaza-3": [["Đã bàn giao, đang vận hành", "Hai tòa The Empire (E) và The Wealthe (W) đã bàn giao và đi vào vận hành."], ["Đã cấp sổ", "Căn hộ đã được cấp sổ cho khách hàng; mỗi căn được kiểm tra pháp lý trước khi giao dịch."]],
   "fpt-plaza-4": [["Đủ điều kiện bán (11/2025)", "Sở Xây dựng Đà Nẵng xác nhận căn hộ FPT Plaza 4 đủ điều kiện bán nhà ở hình thành trong tương lai."], ["Khởi công 3/2025", "Dự kiến bàn giao Quý IV/2027 theo chủ đầu tư."]],
   "fpt-plaza-5": [["Chưa mở bán", "Thời điểm mở bán phụ thuộc thông báo đủ điều kiện kinh doanh của Sở Xây dựng Đà Nẵng."], ["Số liệu dự kiến", "Quy mô, số căn là dự kiến theo thông tin thị trường, sẽ cập nhật theo công bố chính thức."]],
 };
 const POLICY = {
-  resale: [["Giỏ hàng chuyển nhượng", "Giá theo tầng, hướng, nội thất; cập nhật căn đang bán."], ["Hỗ trợ pháp lý & sang tên", "Kiểm tra pháp lý từng căn và hỗ trợ thủ tục."], ["Ngân hàng hỗ trợ vay", "Điều kiện và lãi suất do ngân hàng quyết định; chuyên viên hỗ trợ ước tính trước."]],
+  resale: [["Mua & thuê", "Giỏ hàng căn đang bán, đang cho thuê – giá theo tầng, hướng, nội thất."], ["Ký gửi bán / cho thuê", "Chủ nhà gửi thông tin căn: tư vấn giá, đăng tin, dẫn khách xem căn."], ["Pháp lý & vay", "Kiểm tra pháp lý, hỗ trợ sang tên; phương án vay ngân hàng cho người mua."]],
   primary: [["Thanh toán theo tiến độ", "Chính sách thanh toán theo từng đợt; chuyên viên gửi bản mới nhất."], ["Ngân hàng hỗ trợ vay", "Điều kiện và lãi suất do ngân hàng quyết định; chuyên viên hỗ trợ ước tính trước."], ["Chính sách theo đợt", "Ưu đãi (nếu có) thay đổi theo từng đợt mở bán của chủ đầu tư."]],
   upcoming: [["Báo giá đầu tiên", "Nhận bảng giá ngay khi chủ đầu tư công bố."], ["Ưu tiên tư vấn chọn căn", "Tư vấn tầng, hướng phù hợp khi mở bán."], ["So sánh với FPT Plaza 4", "Tham khảo mặt bằng giá và loại căn của tòa đang mở bán."]],
 };
+const KYGUI = (name) => `<section id="ky-gui" class="dark"><div class="wrap">${head({ eyebrow: "Mua bán · cho thuê · ký gửi", title: `Mua, thuê hoặc ký gửi căn hộ ${name}` })}
+  <div class="grid2">
+    <div class="card"><h3>🏠 Bạn là chủ nhà – muốn bán hoặc cho thuê</h3><ul class="checks"><li>Gửi thông tin căn: tòa, tầng, loại căn, giá mong muốn</li><li>Tư vấn giá sát thị trường</li><li>Đăng tin, lọc khách, dẫn xem căn</li><li>Hỗ trợ hợp đồng, sang tên, bàn giao</li></ul><a class="btn" href="#dang-ky">Ký gửi căn của tôi</a></div>
+    <div class="card"><h3>🔑 Bạn muốn mua hoặc thuê</h3><ul class="checks"><li>Danh sách căn đang bán, đang cho thuê</li><li>Lọc theo số phòng ngủ, tầng, hướng, ngân sách</li><li>Xem căn thực tế cùng chuyên viên</li><li>Hỗ trợ vay và thủ tục cho người mua</li></ul><a class="btn" href="#dang-ky">Nhận danh sách căn</a></div>
+  </div></div></section>`;
 const FP4_POLICY = [["Ngân hàng hỗ trợ (dự kiến)", "TPBank, VietinBank, MB, Vietcombank, Public Bank."], ["VietinBank: vay đến 75%", "Tối đa 75% giá trị HĐMB, thời hạn đến 25 năm, ân hạn gốc đến 24 tháng (thông báo 25/11/2025); lãi suất theo quy định ngân hàng."], ["Bàn giao hoàn thiện", "Căn thường hoàn thiện nội thất liền tường; căn thông tầng & duplex bàn giao thô."]];
 const FP4_LINKS = `<section class="tint"><div class="wrap">${head({ eyebrow: "Kết nối", title: "Từ FPT Plaza 4 đi đâu, mất bao lâu?", sub: "Theo tài liệu giới thiệu của chủ đầu tư; thời gian tham khảo." })}
   <div class="grid3">
@@ -324,7 +331,7 @@ const FP4_LINKS = `<section class="tint"><div class="wrap">${head({ eyebrow: "K�
     <div class="tile"><span class="pill up">15 – 20 PHÚT</span><h3>Trung tâm & sân bay</h3><p>Trung tâm hành chính TP. Đà Nẵng, chợ Hàn, sân bay quốc tế Đà Nẵng, Lotte Mart, Cung thể thao Tuyên Sơn, phố cổ Hội An.</p></div>
   </div></div></section>`;
 const STEPS = {
-  resale: ["<b>Giỏ hàng căn đang chuyển nhượng</b>, giá theo tầng, hướng, nội thất.", "<b>3 căn gợi ý</b> theo ngân sách bạn chọn.", "<b>Hỗ trợ pháp lý</b> sang tên, phương án vay.", "<b>Lịch xem nhà</b> thực tế cùng chuyên viên."],
+  resale: ["<b>Muốn mua / thuê:</b> giỏ hàng căn đang bán, cho thuê hợp ngân sách.", "<b>Muốn bán / cho thuê:</b> tư vấn giá, đăng tin, dẫn khách xem căn.", "<b>Pháp lý & vay:</b> kiểm tra giấy tờ, sang tên, phương án vay.", "<b>Lịch xem nhà</b> thực tế cùng chuyên viên."],
   primary: ["<b>Bảng giá chi tiết</b> theo tầng, hướng, loại căn.", "<b>3 căn gợi ý</b> theo ngân sách bạn chọn.", "<b>Chính sách thanh toán</b> theo tiến độ, hỗ trợ vay ngân hàng.", "<b>Mặt bằng, layout</b> và dòng tiền dễ so sánh."],
   upcoming: ["<b>Báo giá ngay</b> khi chủ đầu tư công bố.", "<b>Mặt bằng & loại căn</b> dự kiến để bạn so sánh sớm.", "<b>Ưu tiên tư vấn</b> tầng đẹp, hướng đẹp khi mở bán.", "<b>So sánh với FPT Plaza 4</b> để hình dung mức giá."],
 };
@@ -348,7 +355,7 @@ ${hero({
       slug: p.slug, bg: isFp4 ? FP4PC(1) : p.slug === "fpt-plaza-5" ? FP5PC : "",
       crumbs: `<a href="${BASE}/">Trang chủ</a> › ${esc(p.name)}`,
       eyebrow: `Khu đô thị FPT City Đà Nẵng · ${esc(p.statusLabel)}`, h1: `Căn hộ <span>${p.name}</span> Đà Nẵng`, lead: esc(p.lead), points: p.highlights.slice(0, 3),
-      cta: H.cta, ghost: H.ghost, ghostHref: "#mat-bang", formTitle: H.title, docs: H.docs, formHtml: form("h", { button: H.btn, budget: BUDGET_APT, extra }), stats: p.stats,
+      cta: H.cta, ghost: H.ghost, ghostHref: "#mat-bang", formTitle: H.title, docs: H.docs, formHtml: form("h", { button: H.btn, budget: BUDGET_APT, extra, intent: p.status === "resale" }), stats: p.stats,
       leadTitle: `${p.name} trong những con số`,
     })}
 ${hotSection(`Có gì nổi bật ở ${p.name}?`, "Điểm khách hỏi nhiều nhất – thông tin theo chủ đầu tư, có thể thay đổi.", [
@@ -362,6 +369,7 @@ ${hotSection(`Có gì nổi bật ở ${p.name}?`, "Điểm khách hỏi nhiều
   ${p.progressUrl ? `<p><a href="${esc(p.progressUrl)}">📷 Xem tiến độ &amp; hình ảnh thực tế →</a></p>` : ""}</div>
   ${specCard(`Thông tin ${p.name}`, [["Dự án", "Căn hộ " + p.name], ["Chủ đầu tư", "Công ty CP Đô thị FPT Đà Nẵng"], ["Vị trí", "Khu đô thị FPT City, Đà Nẵng"], ...p.specs], p.note)}
 </div></section>
+${p.status === "resale" ? KYGUI(p.name) : ""}
 ${legalSection(`Pháp lý ${p.name}: những điều cần biết`, [["Chủ đầu tư rõ ràng", investor + "."], ...LEGAL[p.slug]])}
 ${distances()}
 ${amenitySection(p.name)}
@@ -372,7 +380,7 @@ ${isFp4 ? `<section id="hinh-anh"><div class="wrap">${head({ eyebrow: "Hình ả
 ${newsSection(`Tin tức & cập nhật ${p.name}`, p.slug)}
 ${faqSection(`Câu hỏi thường gặp về ${p.name}`, p.faq)}
 ${contactSection(p.name)}
-${finalCta(p.status === "upcoming" ? "Muốn biết giá FPT Plaza 5 trước người khác?" : `Căn ${p.name} nào hợp ngân sách của bạn?`, STEPS[p.status], H.title, form("c", { button: H.btn, budget: BUDGET_APT, extra }))}`,
+${finalCta(p.status === "upcoming" ? "Muốn biết giá FPT Plaza 5 trước người khác?" : `Căn ${p.name} nào hợp ngân sách của bạn?`, STEPS[p.status], H.title, form("c", { button: H.btn, budget: BUDGET_APT, extra, intent: p.status === "resale" }))}`,
   });
 }
 
@@ -460,10 +468,10 @@ ${hero({
 <section id="gioi-thieu"><div class="wrap">${head({ eyebrow: "Giới thiệu", title: "Có gì hot ở FPT City Đà Nẵng hiện nay?", sub: "Những điểm khách đang hỏi nhiều nhất – thông tin theo công bố của chủ đầu tư, có thể thay đổi." })}
   <div class="grid3">
     <div class="tile"><span class="pill on">ĐANG MỞ BÁN</span><h3>FPT Plaza 4 – 1.395 căn</h3><p>Đủ điều kiện bán nhà ở hình thành trong tương lai theo xác nhận của Sở Xây dựng Đà Nẵng (11/2025). Dự kiến bàn giao Quý IV/2027.</p><a class="go" href="${link("fpt-plaza-4")}">Xem FPT Plaza 4 →</a></div>
-    <div class="tile"><span class="pill on">SẮP BÀN GIAO</span><h3>FPT Plaza 3 – 837 căn</h3><p>Hai tòa The Empire &amp; The Wealthe, 25 tầng. Bàn giao dự kiến trong năm 2026 theo chủ đầu tư.</p><a class="go" href="${link("fpt-plaza-3")}">Xem FPT Plaza 3 →</a></div>
+    <div class="tile"><span class="pill on">ĐÃ CÓ SỔ</span><h3>FPT Plaza 3 – 837 căn</h3><p>Hai tòa The Empire &amp; The Wealthe, 25 tầng – đã bàn giao, vận hành và cấp sổ. Mua bán, cho thuê, ký gửi.</p><a class="go" href="${link("fpt-plaza-3")}">Xem FPT Plaza 3 →</a></div>
     <div class="tile"><span class="pill up">SẮP MỞ BÁN</span><h3>FPT Plaza 5 – nhận đăng ký</h3><p>Giai đoạn tiếp theo của chuỗi FPT Plaza. Đăng ký để là người đầu tiên biết giá khi chủ đầu tư công bố.</p><a class="go" href="${link("fpt-plaza-5")}">Xem FPT Plaza 5 →</a></div>
     <div class="tile"><span class="pill">ĐẤT NỀN</span><h3>Đất nền V1 – V6</h3><p>Lô góc, lô biệt thự, lô ~100 m² cho nhà ở và cho thuê. Giỏ hàng cập nhật hằng tuần.</p><a class="go" href="${link("land")}">Xem đất nền →</a></div>
-    <div class="tile"><span class="pill re">Ở NGAY</span><h3>FPT Plaza 1 &amp; 2</h3><p>Đã bàn giao, có cư dân sinh sống. Nhận giỏ hàng chuyển nhượng và xem căn thực tế.</p><a class="go" href="${link("fpt-plaza-1")}">Xem căn đang chuyển nhượng →</a></div>
+    <div class="tile"><span class="pill re">KÝ GỬI</span><h3>Mua bán · cho thuê FPT Plaza 1, 2, 3</h3><p>Chủ nhà muốn bán, cho thuê – gửi căn cho mình. Khách muốn mua, thuê – nhận danh sách căn phù hợp.</p><a class="go" href="#dang-ky">Gửi nhu cầu →</a></div>
     <div class="tile"><span class="pill">HỆ SINH THÁI</span><h3>Đại học FPT &amp; FPT Complex</h3><p>Hàng nghìn kỹ sư, giảng viên và sinh viên ngay trong khu đô thị tạo nhu cầu ở và thuê quanh năm.</p><a class="go" href="#tong-quan">Xem tổng quan →</a></div>
   </div>
   <p style="text-align:center;margin-top:26px"><a class="btn" href="#dang-ky">Nhận bảng giá mới nhất</a></p></div></section>
@@ -481,7 +489,7 @@ ${hero({
     <div class="tile"><h3>FPT Plaza 4 đủ điều kiện bán</h3><p>Tháng 11/2025, Sở Xây dựng Đà Nẵng xác nhận căn hộ FPT Plaza 4 đủ điều kiện bán nhà ở hình thành trong tương lai.</p></div>
     <div class="tile"><h3>Đất nền sổ đỏ từng lô</h3><p>Các lô trong khu đô thị được cấp sổ đỏ từng lô; mỗi lô được kiểm tra pháp lý cụ thể trước khi giao dịch.</p></div>
     <div class="tile"><h3>FPT Plaza 1 &amp; 2 đã bàn giao</h3><p>Giao dịch hiện tại là chuyển nhượng; hỗ trợ thủ tục sang tên và phương án vay.</p></div>
-    <div class="tile"><h3>FPT Plaza 3 sắp bàn giao</h3><p>Bàn giao dự kiến trong năm 2026 theo công bố chính thức của chủ đầu tư.</p></div>
+    <div class="tile"><h3>FPT Plaza 3 đã có sổ</h3><p>Đã bàn giao, đi vào vận hành và cấp sổ cho khách hàng.</p></div>
     <div class="tile"><h3>Cần hồ sơ chi tiết?</h3><p>Để lại thông tin, chuyên viên gửi bộ tài liệu pháp lý của đúng sản phẩm bạn quan tâm.</p><a class="go" href="#dang-ky">Nhận hồ sơ pháp lý →</a></div>
   </div></div></section>
 
@@ -499,9 +507,9 @@ ${distances()}
 
 <section id="gia-chinh-sach" class="tint"><div class="wrap">${head({ eyebrow: "Giá bán & chính sách", title: "Bảng giá & chính sách bán hàng FPT City 2026", sub: "Giá thay đổi theo tầng, hướng, vị trí lô và từng đợt chính sách nên không niêm yết cố định – nhận bảng giá cập nhật qua Zalo." })}
   <div class="tbl"><table><thead><tr><th>Sản phẩm</th><th>Tình trạng</th><th>Diện tích tham khảo</th><th>Giá</th></tr></thead><tbody>
-    <tr><th scope="row">FPT Plaza 1</th><td>Đã bàn giao · Chuyển nhượng</td><td>1PN ~46 m² · 2PN ~68 m² · 3PN ~82 m²</td><td><a href="#dang-ky">Nhận giá →</a></td></tr>
-    <tr><th scope="row">FPT Plaza 2</th><td>Đã bàn giao · Chuyển nhượng</td><td>2PN ~56–70 m² · 3PN ~75–90 m²</td><td><a href="#dang-ky">Nhận giá →</a></td></tr>
-    <tr><th scope="row">FPT Plaza 3</th><td>Hoàn thiện · Bàn giao 2026</td><td>1PN từ ~41,9 m² · 2PN ~54,6–67 m²</td><td><a href="#dang-ky">Nhận giá →</a></td></tr>
+    <tr><th scope="row">FPT Plaza 1</th><td>Đã bàn giao · Mua bán, cho thuê</td><td>1PN ~46 m² · 2PN ~68 m² · 3PN ~82 m²</td><td><a href="#dang-ky">Nhận giá →</a></td></tr>
+    <tr><th scope="row">FPT Plaza 2</th><td>Đã bàn giao · Mua bán, cho thuê</td><td>2PN ~56–70 m² · 3PN ~75–90 m²</td><td><a href="#dang-ky">Nhận giá →</a></td></tr>
+    <tr><th scope="row">FPT Plaza 3</th><td>Đã bàn giao · Có sổ · Mua bán, cho thuê</td><td>1PN từ ~41,9 m² · 2PN ~54,6–67 m²</td><td><a href="#dang-ky">Nhận giá →</a></td></tr>
     <tr><th scope="row">FPT Plaza 4</th><td>Đang mở bán</td><td>1PN ~45–50 m² · 2PN ~59–74 m² · Duplex đến ~269 m²</td><td><a href="#dang-ky">Nhận giá →</a></td></tr>
     <tr><th scope="row">FPT Plaza 5</th><td>Sắp mở bán (dự kiến)</td><td>1PN ~45–50 m² · 2PN ~56–75 m²</td><td><a href="#dang-ky">Đăng ký báo giá →</a></td></tr>
     <tr><th scope="row">Đất nền V1 – V6</th><td>Đang bán · giỏ hàng theo tuần</td><td>~90–105 m² · ~100 m² · lô lớn 200–350 m²</td><td><a href="#dang-ky">Nhận giá →</a></td></tr>
@@ -521,7 +529,7 @@ ${distances()}
   <div class="grid2">
     <a class="tile" href="${link("fpt-plaza-4")}"><span class="pill on">11/2025</span><h3>FPT Plaza 4 đủ điều kiện bán nhà ở hình thành trong tương lai</h3><p>Sở Xây dựng Đà Nẵng xác nhận căn hộ FPT Plaza 4 đủ điều kiện bán.</p><span class="go">Đọc thêm →</span></a>
     <a class="tile" href="${link("fpt-plaza-4")}"><span class="pill">03/2025</span><h3>FPT Plaza 4 khởi công</h3><p>Dự án 1.395 căn hộ, 2 khối N &amp; S, dự kiến bàn giao Quý IV/2027.</p><span class="go">Đọc thêm →</span></a>
-    <a class="tile" href="${link("fpt-plaza-3")}"><span class="pill on">2026 (dự kiến)</span><h3>FPT Plaza 3 chuẩn bị bàn giao</h3><p>Hai tòa The Empire &amp; The Wealthe, bàn giao dự kiến trong năm 2026 theo chủ đầu tư.</p><span class="go">Đọc thêm →</span></a>
+    <a class="tile" href="${link("fpt-plaza-3")}"><span class="pill on">Đã có sổ</span><h3>FPT Plaza 3 đã bàn giao, vận hành và cấp sổ</h3><p>Hai tòa The Empire &amp; The Wealthe – nhận ký gửi mua bán, cho thuê căn hộ.</p><span class="go">Đọc thêm →</span></a>
     <a class="tile" href="${link("fpt-plaza-5")}"><span class="pill up">Chờ công bố</span><h3>FPT Plaza 5 nhận đăng ký sớm</h3><p>Chủ đầu tư chưa công bố bảng giá; đăng ký để được báo ngay khi có thông tin.</p><span class="go">Đọc thêm →</span></a>
   </div></div></section>
 

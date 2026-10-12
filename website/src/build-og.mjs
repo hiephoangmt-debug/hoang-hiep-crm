@@ -12,9 +12,9 @@ const { chromium } = req("playwright");
 const PAGES = [
   ["home", 1, "FPT City Đà Nẵng", "Đất nền V1–V6 & căn hộ FPT Plaza 1–5", "Bảng giá 2026 · 181+ ha"],
   ["land", 2, "Đất nền FPT City", "Phân khu V1 · V2 · V3 · V4 · V5 · V6", "Sổ đỏ từng lô · Lô 90–350 m²"],
-  ["fpt-plaza-1", 2, "FPT Plaza 1", "Căn hộ đã bàn giao · Chuyển nhượng", "586 căn · 15 tầng"],
-  ["fpt-plaza-2", 1, "FPT Plaza 2", "Căn hộ 2–3PN · Chuyển nhượng", "~700 căn · 25 tầng"],
-  ["fpt-plaza-3", 2, "FPT Plaza 3", "The Empire & The Wealthe", "837 căn · Bàn giao dự kiến 2026"],
+  ["fpt-plaza-1", 2, "FPT Plaza 1", "Mua bán · cho thuê · ký gửi", "586 căn · Đã bàn giao"],
+  ["fpt-plaza-2", 1, "FPT Plaza 2", "Mua bán · cho thuê · ký gửi", "~700 căn · Đã bàn giao"],
+  ["fpt-plaza-3", 2, "FPT Plaza 3", "Đã có sổ · Mua bán, cho thuê", "The Empire & The Wealthe · 837 căn"],
   ["fpt-plaza-4", "fpt-plaza-4/phoi-canh/phoi-canh-fpt-plaza-4-1.webp", "FPT Plaza 4", "Mặt bằng, bảng giá căn hộ mới nhất", "1.395 căn · Đang mở bán"],
   ["fpt-plaza-5", "fpt-plaza-5/phoi-canh/phoi-canh-fpt-plaza-5-1.webp", "FPT Plaza 5", "Sắp mở bán · Nhận đăng ký sớm", "Biết giá trước người khác"],
 ];

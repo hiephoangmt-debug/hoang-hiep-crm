@@ -31,7 +31,7 @@ const add = (name, html) => jobs.push({ name, html });
 const FP = [
   ["FPT Plaza 1", 586, "586 căn · 15 tầng", "Đã bàn giao", "alt"],
   ["FPT Plaza 2", 700, "~700 căn · 25 tầng", "Bàn giao 2023", "alt"],
-  ["FPT Plaza 3", 837, "837 căn · 25 tầng", "Bàn giao 2026", ""],
+  ["FPT Plaza 3", 837, "837 căn · 25 tầng", "Đã có sổ", "alt"],
   ["FPT Plaza 4", 1395, "1.395 căn · 20 tầng", "Đang mở bán", ""],
   ["FPT Plaza 5", 830, "~830 căn* · ~25 tầng*", "Sắp mở bán", ""],
 ];

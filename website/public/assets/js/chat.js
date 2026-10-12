@@ -267,7 +267,7 @@
   /* ---------- Luồng "Gợi ý theo ngân sách": 2 câu hỏi nhẹ rồi mới xin số (đổi thông tin hữu ích lấy số Zalo) ---------- */
   const FLOW_START = "🎯 Gợi ý theo ngân sách";
   const BUD = ["Dưới 2 tỷ", "2 – 4 tỷ", "4 – 6 tỷ", "Trên 6 tỷ", "Chưa rõ"];
-  const PUR = ["Mua để ở", "Đầu tư cho thuê", "Xây nhà trên đất nền"];
+  const PUR = ["Mua để ở", "Đầu tư cho thuê", "Xây nhà trên đất nền", "Thuê căn hộ", "Bán / cho thuê căn của tôi"];
   const PH0 = input.placeholder;
   let seenT = 0, lastT = 0, curK = "", since = 0; // dùng cho lời mời theo mục đang đọc
   function flowStart() {
@@ -277,18 +277,22 @@
   }
   function flowRecommend(purpose) {
     const f = st.flow; f.purpose = purpose; f.step = 3;
-    const land = /Xây nhà/.test(purpose), rent = /thuê/.test(purpose);
-    const pick = land
+    const land = /Xây nhà/.test(purpose), rent = /Đầu tư/.test(purpose), owner = /của tôi/.test(purpose), tenant = /^Thuê/.test(purpose);
+    const pick = owner
+      ? "Mình nhận **ký gửi bán / cho thuê** căn FPT Plaza 1, 2, 3 (và các dự án FPT City): tư vấn giá sát thị trường, đăng tin, lọc khách và dẫn xem căn."
+      : tenant
+        ? "Mình có danh sách căn **đang cho thuê** tại FPT Plaza 1, 2, 3 – lọc theo số phòng ngủ, ngân sách thuê và thời gian dọn vào."
+        : land
       ? "Hợp nhất là **đất nền FPT City**: lô phổ biến ~90–105 m² (V5), ~100 m² (V2, V3), lô lớn 200–350 m² (V1)."
       : rent
-        ? "Nhu cầu thuê quanh khu đô thị đến từ kỹ sư, giảng viên, sinh viên. Bạn có thể xem **FPT Plaza 1–2** (đã bàn giao, có sẵn cư dân), **FPT Plaza 3** (hoàn thiện, bàn giao dự kiến 2026) hoặc **FPT Plaza 4** (đang mở bán)."
-        : "Để ở, bạn có thể xem **FPT Plaza 1–2** (đã bàn giao, ở ngay), **FPT Plaza 3** (hoàn thiện, bàn giao dự kiến 2026) hoặc **FPT Plaza 4** (đang mở bán, dự kiến bàn giao Q4/2027).";
-    const bud = f.budget && f.budget !== "Chưa rõ" ? `Với ngân sách **${f.budget}**, chuyên viên sẽ lọc đúng căn/lô trong tầm tiền (giá thay đổi theo tầng, hướng, đợt chính sách).` : "Chuyên viên sẽ lọc theo ngân sách khi bạn cho biết.";
+        ? "Nhu cầu thuê quanh khu đô thị đến từ kỹ sư, giảng viên, sinh viên. Bạn có thể xem **FPT Plaza 1–2** (đã bàn giao, có sẵn cư dân), **FPT Plaza 3** (đã bàn giao, có sổ) hoặc **FPT Plaza 4** (đang mở bán)."
+        : "Để ở, bạn có thể xem **FPT Plaza 1–2** (đã bàn giao, ở ngay), **FPT Plaza 3** (đã bàn giao, có sổ) hoặc **FPT Plaza 4** (đang mở bán, dự kiến bàn giao Q4/2027).";
+    const bud = owner ? "Bạn gửi giúp mình tòa, tầng, loại căn và giá mong muốn nhé." : f.budget && f.budget !== "Chưa rõ" ? `Với ngân sách **${f.budget}**, chuyên viên sẽ lọc đúng căn/lô trong tầm tiền (giá thay đổi theo tầng, hướng, đợt chính sách).` : "Chuyên viên sẽ lọc theo ngân sách khi bạn cho biết.";
     const zalo = { label: "Tôi tự nhắn Zalo", href: $("[data-zalo-link]")?.href || "#" };
     if (st.leadSent) { say("bot", `${pick}\n${bud}`, [zalo]); setChips(["Bảng giá FPT Plaza 4", "Đất nền FPT City", "Gặp chuyên viên"]); return; }
     st.awaitPhone = true;
     input.placeholder = "Nhập số Zalo của bạn (VD: 0905 123 456)";
-    say("bot", `${pick}\n${bud}\n👉 Mình soạn **3 phương án đúng ngân sách + bảng giá + mặt bằng** và gửi qua Zalo cho bạn. Cho mình xin **số Zalo** (kèm tên nếu tiện) nhé – chỉ dùng để gửi tài liệu, bạn dừng bất cứ lúc nào.`, [zalo]);
+    say("bot", `${pick}\n${bud}\n👉 ${owner ? "Mình gọi lại để tư vấn giá và nhận ký gửi căn của bạn." : "Mình soạn **3 phương án đúng ngân sách + bảng giá + mặt bằng** và gửi qua Zalo cho bạn."} Cho mình xin **số Zalo** (kèm tên nếu tiện) nhé – chỉ dùng để gửi tài liệu, bạn dừng bất cứ lúc nào.`, [zalo]);
     setChips(["Gặp chuyên viên", "Bảng giá FPT Plaza 4"]);
     input.focus();
   }

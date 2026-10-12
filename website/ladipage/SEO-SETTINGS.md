@@ -20,9 +20,9 @@ Dán vào Cài đặt trang › SEO của từng trang. Ảnh chia sẻ 1200×63
 
 ## FPT Plaza 3
 - **Đường dẫn:** /fpt-plaza-3
-- **Tiêu đề trang:** FPT Plaza 3 Đà Nẵng – Tiến độ, mặt bằng & giá căn hộ FPT Plaza 3
-- **Mô tả trang:** Căn hộ FPT Plaza 3 Đà Nẵng: 2 tòa The Empire & The Wealthe, 837 căn, bàn giao dự kiến 2026. Xem tiến độ, mặt bằng và nhận bảng giá FPT Plaza 3.
-- **Từ khoá:** FPT Plaza 3, căn hộ FPT Plaza 3, giá FPT Plaza 3, tiến độ FPT Plaza 3, bàn giao FPT Plaza 3, The Empire FPT Plaza 3, The Wealthe, chung cư FPT Plaza 3 Đà Nẵng
+- **Tiêu đề trang:** FPT Plaza 3 Đà Nẵng – Mua bán, cho thuê căn hộ FPT Plaza 3 đã có sổ
+- **Mô tả trang:** Căn hộ FPT Plaza 3 Đà Nẵng đã bàn giao, vận hành và có sổ. Nhận giỏ hàng mua bán, cho thuê; chủ nhà ký gửi bán hoặc cho thuê căn FPT Plaza 3.
+- **Từ khoá:** FPT Plaza 3, căn hộ FPT Plaza 3, mua bán FPT Plaza 3, cho thuê FPT Plaza 3, giá FPT Plaza 3, ký gửi FPT Plaza 3, The Empire FPT Plaza 3, The Wealthe, chung cư FPT Plaza 3 Đà Nẵng
 - **Hình ảnh khi chia sẻ:** https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/83968294cba29b8bac9d3239dcb3e583d4581f06/website/public/assets/img/og/og-fpt-plaza-3.jpg
 
 ## FPT Plaza 4
