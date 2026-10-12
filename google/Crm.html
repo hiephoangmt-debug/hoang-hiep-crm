@@ -648,6 +648,7 @@ function importLeads() {
   };
 }
 
+function clickState(c) { return c.alert ? 'todo' : 'done'; }
 function clicks() {
   var all = D.clicks.filter(function (c) { return inG(c.site); });
   var since = F.cd === 'all' ? 0 : Date.now() - Number(F.cd) * 86400000;
