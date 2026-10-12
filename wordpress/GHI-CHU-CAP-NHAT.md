@@ -48,7 +48,7 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 - **Hóm hỉnh:** khách đùa ("em có người yêu chưa", "đắt quá trời", "bot à") → đáp dí dỏm, lịch sự, rồi khéo đưa về nhu cầu nhà đất. Hỏi về Đà Nẵng (đường, khách sạn, ăn uống, du lịch) cũng trả lời ngắn gọn.
 - **Chưa có API key (chế độ kịch bản):** cũng biết đùa lại, tra giá đất / khách sạn theo tên đường trong bảng giá, và trả lời giá + link khi khách gõ tên một dự án bất kỳ.
 - Câu cần tra web mất lâu → khung chat hiện "Em đang tra cứu số liệu mới nhất…".
-- Chi phí (khi có API key, mô hình Opus 5.5): phần kiến thức được lưu đệm 1 giờ nên mỗi câu trả lời chỉ tốn vài trăm đồng; mỗi lần tra web Anthropic tính thêm khoảng 250 đồng. Giới hạn lượt / ngày vẫn như cũ.
+- Chi phí ước tính (có API key, mô hình Opus 5.5): mỗi câu trả lời khoảng 500 – 1.000 đồng; phần kiến thức (khoảng 30.000 token) lưu đệm 1 giờ, mỗi giờ có khách chat tốn thêm khoảng 6.000 đồng để nạp lại; mỗi lần tra web thêm khoảng 250 đồng. Muốn rẻ hơn: chọn Sonnet 5.5 (khoảng một nửa) hoặc tắt "Tra cứu web". Giới hạn lượt / ngày vẫn như cũ.
 
 ## Có gì mới – plugin 2.20.20, giao diện 2.15.8: trang dự án Sunneva Island
 
