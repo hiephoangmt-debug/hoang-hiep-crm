@@ -46,6 +46,13 @@ Không có thư mục Next.js, Supabase, migration hay bảng PostgreSQL nào tr
 - AI phân tích khách: đọc hồ sơ, lịch sử chăm sóc, lịch sử xem dự án; có nút Sao chép, Tạo công việc (xác nhận), Đánh dấu đã thực hiện. Không tự gửi tin.
 - Việc hôm nay: thêm nhóm "đã xem dự án nhưng chưa theo dõi".
 
+## 3c. Giao diện điện thoại (ui-14)
+
+- Danh sách gọn: tên, số điện thoại, nút Gọi / Zalo, ngày phát sinh, dự án, trạng thái, tương tác gần nhất. Chạm vào khách mở trang chi tiết riêng, có nút "‹ Danh sách".
+- Trang chi tiết: tổng quan (liên hệ, nguồn, ngày phát sinh, nhu cầu, tài chính, dự án quan tâm, lịch hẹn tiếp theo, phản hồi gần nhất), đặt lịch nhắc việc, thêm tương tác chăm sóc (lưu thành dòng mới trong tab Nhật ký, không giới hạn), ghi nhận xem dự án, chỉnh sửa thông tin.
+- Quay lại danh sách giữ nguyên từ khoá tìm, bộ lọc, trang và vị trí cuộn; tương tác gần nhất trên danh sách cập nhật ngay sau khi thêm.
+- Giao diện máy tính giữ nguyên.
+
 Chưa làm: nhiều cơ hội độc lập cho một khách, upload file .xlsx trực tiếp (hiện dán từ Excel), nhắc việc nền tự động, phân quyền theo người dùng.
 
 ## 4. Chưa làm, cần quyết định hoặc cấu hình
