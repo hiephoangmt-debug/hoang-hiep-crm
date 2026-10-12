@@ -16,7 +16,7 @@ const PAGES = [
   ["fpt-plaza-2", 1, "FPT Plaza 2", "Căn hộ 2–3PN · Chuyển nhượng", "~700 căn · 25 tầng"],
   ["fpt-plaza-3", 2, "FPT Plaza 3", "The Empire & The Wealthe", "837 căn · Bàn giao dự kiến 2026"],
   ["fpt-plaza-4", "fpt-plaza-4/phoi-canh/phoi-canh-fpt-plaza-4-1.webp", "FPT Plaza 4", "Mặt bằng, bảng giá căn hộ mới nhất", "1.395 căn · Đang mở bán"],
-  ["fpt-plaza-5", 2, "FPT Plaza 5", "Sắp mở bán · Nhận đăng ký sớm", "Biết giá trước người khác"],
+  ["fpt-plaza-5", "fpt-plaza-5/phoi-canh/phoi-canh-fpt-plaza-5-1.webp", "FPT Plaza 5", "Sắp mở bán · Nhận đăng ký sớm", "Biết giá trước người khác"],
 ];
 const b = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell" });
 const p = await b.newPage({ viewport: { width: 1200, height: 630 } });
