@@ -20,11 +20,16 @@ function doGet(e) {
   return json_({ ok: true, service: 'CRM Hoàng Hiệp' });
 }
 
-// Người đang mở có email Google xác định và đang chạy bằng chính quyền của họ -> chỉ khi họ có quyền với file Sheet.
+// Giao diện chỉ dành cho người dùng đăng nhập Google chạy bằng chính quyền của họ:
+// (1) email người mở trùng người chạy, hoặc (2) người chạy KHÔNG phải chủ file nhưng đọc được file Sheet.
+// Bản triển khai "Tôi" (nhận dữ liệu từ website) luôn chạy bằng chủ file nên khách lạ không bao giờ qua được.
 function isUiUser_() {
   try {
     var a = Session.getActiveUser().getEmail(), e = Session.getEffectiveUser().getEmail();
-    return !!a && a === e;
+    if (a && a === e) return true;
+    if (!e) return false;
+    var o = ss_().getOwner();
+    return !!o && o.getEmail() !== e;
   } catch (x) { return false; }
 }
 function requireUi_() {

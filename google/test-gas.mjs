@@ -34,11 +34,11 @@ const sheets = {
 sheets.Website.appendRow(['Landing A', 'a.com', 'testkey12345']);
 const out = (o) => ({ setMimeType() { return { body: o }; } });
 const ctx = vm.createContext({
-  SpreadsheetApp: { getActiveSpreadsheet: () => ({ getSheetByName: (n) => sheets[n] }), getUi: () => ({}) },
+  SpreadsheetApp: { getActiveSpreadsheet: () => ({ getSheetByName: (n) => sheets[n], getOwner: () => ({ getEmail: () => 'owner@gmail.com' }) }), getUi: () => ({}) },
   CacheService: { getScriptCache: () => ({ get: () => null, put() {} }) },
   LockService: { getScriptLock: () => ({ waitLock() {}, releaseLock() {} }) },
   ContentService: { createTextOutput: (b) => ({ body: b, setMimeType(m) { this.mime = m; return this; } }), MimeType: { JSON: 'json', JAVASCRIPT: 'js' } },
-  Session: { getActiveUser: () => ({ getEmail: () => globalThis.__active ?? '' }), getEffectiveUser: () => ({ getEmail: () => 'owner@gmail.com' }) },
+  Session: { getActiveUser: () => ({ getEmail: () => globalThis.__active ?? '' }), getEffectiveUser: () => ({ getEmail: () => globalThis.__eff ?? 'owner@gmail.com' }) },
   HtmlService: { createHtmlOutputFromFile: (n) => ({ file: n, setTitle() { return this; }, addMetaTag() { return this; } }) },
   ScriptApp: { getService: () => ({ getUrl: () => 'https://script.google.com/macros/s/X/exec' }) },
   console,
@@ -97,6 +97,10 @@ assert.equal(ctx.doGet({ parameter: {} }).file, 'Crm');
 // khác chủ chạy (ví dụ bản triển khai "Tôi") -> không lộ giao diện
 globalThis.__active = 'khach@gmail.com';
 assert.equal(ctx.doGet({ parameter: {} }).file, undefined);
+// bản "Người dùng truy cập": người chạy là nhân viên (không phải chủ) dù email người mở trống -> vẫn vào được
+globalThis.__active = ''; globalThis.__eff = 'staff@gmail.com';
+assert.equal(ctx.doGet({ parameter: {} }).file, 'Crm');
+globalThis.__eff = undefined;
 globalThis.__active = 'owner@gmail.com';
 const L = ctx.crmLoad();
 assert.equal(L.user, 'owner@gmail.com'); assert.equal(L.leads.length, 2);
