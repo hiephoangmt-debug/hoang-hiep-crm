@@ -103,6 +103,12 @@ function hh_dataset_nam_hoi_an_city_2026( $projects ) {
 			}
 		}
 		$fix['hh_p_status'][] = 'dang-mo-ban';
+		// Ảnh chủ đầu tư anh Hiệp gửi 13/10/2026 (đã che logo, số điện thoại đơn vị phân phối) thay sơ đồ minh hoạ.
+		$nhac_imgs = "plugin:img/vinh-an-hoa/nam-hoi-an-city-phoi-canh-tren-cao.jpg | Phối cảnh Nam Hội An City nhìn từ trên cao bên sông Thu Bồn, chân cầu Cửa Đại | đại diện\n"
+			. "plugin:img/vinh-an-hoa/nam-hoi-an-city-phoi-canh-chu-thich.jpg | Phối cảnh Nam Hội An City: khách sạn 5 sao cao tầng, khách sạn 4 sao Fivitel, khách sạn thấp tầng, bến du thuyền, thương mại ven sông | thư viện\n"
+			. "plugin:img/vinh-an-hoa/nam-hoi-an-city-mat-bang-phan-lo.jpg | Mặt bằng phân lô Nam Hội An City: lô thương mại ven sông Thu Bồn, nhà phố CL1 – CL12, công viên, clubhouse | tổng thể\n"
+			. "plugin:img/vinh-an-hoa/nam-hoi-an-city-thong-tin.jpg | Nam Hội An City – thông tin và giá tham khảo | thư viện";
+		$fix['hh_p_image_links'] = array( "plugin:img/vinh-an-hoa/nam-hoi-an-city.jpg | Sơ đồ minh hoạ Nam Hội An City chân cầu Cửa Đại | đại diện\nplugin:img/vinh-an-hoa/nam-hoi-an-city-thong-tin.jpg | Nam Hội An City – thông tin và giá tham khảo | thư viện" );
 		$p['fix_excerpt'] = $p['excerpt'];
 		$p['excerpt']     = 'Nhà phố 3 tầng kiến trúc phố cổ chân cầu Cửa Đại (Khu đô thị Nồi Rang, 19,34 ha) của FVG, cách phố cổ Hội An 5 km; giá chuyển nhượng khoảng 35 – 62 triệu/m² (tin rao 2025 – 2026).';
 		$p['fix_meta']    = $fix;
@@ -117,7 +123,8 @@ function hh_dataset_nam_hoi_an_city_2026( $projects ) {
 				'hh_p_resale_note'   => 'Khoảng giá tổng hợp từ tin rao chuyển nhượng công khai 2025 – 2026, chỉ để tham khảo – không phải giá giao dịch. Nhà sát sông, đã hoàn thiện nội thất, đang cho thuê có giá cao hơn nhà xây thô.',
 				'hh_p_rent_price'    => 'Nhà 3 tầng 100 m² khoảng 25 triệu/tháng (tham khảo một tin cho thuê)',
 				'hh_p_progress'      => "10/2017 | Phê duyệt quy hoạch 1/500 Khu đô thị Nồi Rang (14,41 ha)\n10/7/2020 | Tỉnh Quảng Nam chấp thuận chuyển nhượng dự án cho Công ty CP Đầu tư Chu Lai Hội An (FVG)\n4/2025 | Duyệt tuyến xe buýt Hội An – Mỹ Sơn – Đông Giang, điểm đầu tại Nam Hội An City\n3/9/2025 | Khởi công khách sạn Fivitel (12 tầng, 240 phòng) và resort Fivires (140 phòng)\nCuối 2026 | Dự kiến hoàn thành Fivitel, Fivires",
-				'hh_p_image_links'   => "plugin:img/vinh-an-hoa/nam-hoi-an-city.jpg | Sơ đồ minh hoạ Nam Hội An City chân cầu Cửa Đại | đại diện\nplugin:img/vinh-an-hoa/nam-hoi-an-city-thong-tin.jpg | Nam Hội An City – thông tin và giá tham khảo | thư viện",
+				'hh_p_image_links'   => $nhac_imgs,
+				'hh_p_design_desc'   => 'Theo mặt bằng phân lô, dự án trải dọc bờ Nam sông Thu Bồn: dãy lô thương mại dịch vụ ven sông (TM4-1 đến TM4-4) xen các ô cây xanh, bến du thuyền ở đầu dự án; phía trong là các block nhà phố liền kề CL1 – CL12 trên các tuyến Trường Giang 1 – 10 (lòng đường 7,5 m và 10,5 m, vỉa hè 4 – 5 m); công viên trung tâm và khu thương mại TM3 ở giữa; khu clubhouse hồ bơi và khu thể thao (sân tennis, sân bóng, bãi đỗ xe) ở phía Đông; dãy lô cuối giáp khu dân cư hiện hữu có các công viên xen giữa. Phối cảnh chủ đầu tư thể hiện khách sạn 5 sao cao tầng, khách sạn 4 sao Fivitel, khu khách sạn thấp tầng, bến du thuyền và dãy thương mại ven sông.',
 				'hh_p_faq'           => "Nam Hội An City thuộc Đà Nẵng hay Quảng Nam? | Từ 1/7/2025 dự án thuộc xã Duy Nghĩa, TP. Đà Nẵng (trước là huyện Duy Xuyên, Quảng Nam).\nTên pháp lý của Nam Hội An City là gì? | Khu đô thị Nồi Rang. Dự án do Đạt Phương làm chủ đầu tư ban đầu, được tỉnh Quảng Nam chấp thuận chuyển nhượng cho Công ty CP Đầu tư Chu Lai Hội An (FVG) ngày 10/7/2020.\nGiá nhà Nam Hội An City bao nhiêu? | Tin rao 2025 – 2026: nhà 3 tầng 100 m² khoảng 3,4 – 4,2 tỷ, có căn tới 6,2 tỷ; tương đương khoảng 35 – 62 triệu/m² (tham khảo).\nNam Hội An City có những gì đang xây? | Khách sạn 4 sao Fivitel (240 phòng) và resort 5 sao Fivires (140 phòng), tổng gần 750 tỷ, khởi công 3/9/2025, dự kiến xong cuối 2026.",
 			)
 		);
@@ -148,6 +155,11 @@ function hh_dataset_nam_hoi_an_city_2026( $projects ) {
 <h2>Lưu ý khi mua</h2>
 <p>Khu vực bờ sông Thu Bồn phía Duy Nghĩa từng sạt lở mạnh mùa mưa bão 2025; TP. Đà Nẵng đã duyệt dự án kè khẩn cấp hơn 498 tỷ đồng. Nên xem vị trí căn so với bờ sông, kiểm tra sổ và hiện trạng hoàn thiện (nhiều căn bàn giao xây thô bên trong) trước khi xuống tiền.</p>
 <p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> để nhận danh sách căn chuyển nhượng, cho thuê đang có thật.</p>';
+		$old_content  = $p['content'];
+		$p['content'] = str_replace( '<h2>Khách sạn Fivitel và resort Fivires</h2>', '<h2>Mặt bằng phân lô</h2>
+<p>Dự án trải dọc bờ Nam sông Thu Bồn: hàng đầu là dãy lô <strong>thương mại dịch vụ ven sông</strong> xen các ô cây xanh và <strong>bến du thuyền</strong>; phía trong là các block nhà phố liền kề trên các tuyến Trường Giang 1 – 10 (lòng đường 7,5 – 10,5 m); giữa dự án có công viên trung tâm, phía Đông là clubhouse hồ bơi và khu thể thao (sân tennis, sân bóng). Xem mặt bằng và phối cảnh tại mục Mặt bằng, Hình ảnh.</p>
+<h2>Khách sạn Fivitel và resort Fivires</h2>', $old_content );
+		$p['fix_content'] = array( $old_content );
 		$p['sources'] = array_values( array_unique( array_merge( $p['sources'] ?? array(), array(
 			'https://cafeland.vn/quy-hoach/chuyen-nhuong-du-an-khu-do-thi-noi-rang-nam-hoi-an-city-88925.html',
 			'https://nhandan.vn/da-nang-khoi-cong-du-an-tai-cua-ngo-cung-duong-di-san-van-hoa-post905663.html',
