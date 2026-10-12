@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-7', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-9', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -70,15 +70,38 @@ function crmLoad(k) {
     return { row: start + i, at: iso_(r[0]), vid: String(r[1] || ''), site: String(r[2] || ''), channel: String(r[3] || ''), url: String(r[4] || ''),
       source: String(r[5] || ''), campaign: String(r[6] || ''), leftPhone: r[7] === 'Có', checked: r[8] === true, note: String(r[9] || ''), alert: String(r[10] || '') };
   }).filter(function (c) { return c.at; }).reverse();
+  out.sales = salesList_();
   var ov = ss.getSheetByName('Tổng quan');
   out.kpis = ov.getRange(7, 1, 9, 2).getDisplayValues().filter(function (r) { return r[0]; });
   out.siteStats = ov.getRange(17, 1, 16, 8).getDisplayValues().filter(function (r, i) { return i === 0 || r[0]; });
   var ws = ss.getSheetByName(S_SITES), wn = ws.getLastRow();
-  out.sites = (wn > 1 ? ws.getRange(2, 1, wn - 1, 4).getValues() : []).filter(function (r) { return r[0]; })
-    .map(function (r) { return { name: String(r[0]), domain: String(r[1]), key: String(r[2]), snippet: String(r[3] || '') }; });
+  out.sites = (wn > 1 ? ws.getRange(2, 1, wn - 1, 5).getValues() : []).filter(function (r) { return r[0]; })
+    .map(function (r) { return { name: String(r[0]), domain: String(r[1]), key: String(r[2]), snippet: String(r[3] || ''), group: String(r[4] || '') }; });
   var cp = ss.getSheetByName('Chiến dịch');
   out.campaigns = cp.getRange(1, 1, 31, 13).getDisplayValues().filter(function (r, i) { return i === 0 || r[2]; });
   return out;
+}
+
+// Danh sách sale để giao khách: tab "Sale" (cột A = tên). Tự tạo khi thêm sale đầu tiên.
+function salesList_() {
+  try {
+    var sh = ss_().getSheetByName('Sale');
+    if (!sh) return [];
+    var n = sh.getLastRow();
+    if (n < 2) return [];
+    return sh.getRange(2, 1, n - 1, 1).getValues().map(function (r) { return String(r[0] || '').trim(); }).filter(Boolean);
+  } catch (e) { return []; }
+}
+function crmAddSale(k, name) {
+  requireUi_(k);
+  name = String(name || '').trim().slice(0, 80);
+  if (!name) throw new Error('Chưa nhập tên sale');
+  return withLock_(function () {
+    var ss = ss_(), sh = ss.getSheetByName('Sale');
+    if (!sh) { sh = ss.insertSheet('Sale'); sh.getRange(1, 1, 1, 2).setValues([['Tên sale', 'Ghi chú']]); }
+    if (salesList_().indexOf(name) < 0) sh.appendRow([str_(name, 80), '']);
+    return salesList_();
+  });
 }
 
 function findLead_(phone) {

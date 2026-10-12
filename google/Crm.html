@@ -58,6 +58,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold2);border-co
 .tag{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:500;background:#EDF0F6;color:#3A4663;white-space:nowrap}
 .tag.red{background:var(--redsoft);color:var(--red);font-weight:600}.tag.blu{background:#E8EEF9;color:var(--navy7)}.tag.grn{background:var(--greensoft);color:var(--green)}.tag.amb{background:var(--goldsoft);color:#8A5A00}
 .lead{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+.chips{gap:6px}.chip{border:1px solid var(--line);background:var(--card);color:var(--navy8);font:inherit;padding:5px 12px;border-radius:99px;cursor:pointer}.chip.on{background:var(--navy8);color:#fff;border-color:var(--navy8)}.chip .n{opacity:.7;margin-left:4px}.meta{display:flex;flex-wrap:wrap;gap:4px 16px;color:var(--ink)}.note{margin-top:4px;color:var(--mut)}
+.step{color:var(--navy7);font-weight:600;margin-top:4px}.assign{margin-top:6px}.assign select{max-width:220px}
 .lead.todo{border-left:4px solid var(--red)}
 .lead h3{margin:0;font-size:15.5px;font-weight:650;color:var(--navy9)}.acts{display:flex;gap:6px;flex-wrap:wrap}
 table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
@@ -68,6 +70,11 @@ code,pre{background:#F3F5FA;border:1px solid var(--line);border-radius:10px;font
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--navy9);border:1px solid rgba(255,255,255,.2);color:#fff;padding:9px 16px;border-radius:12px;display:none;z-index:20;box-shadow:0 10px 30px rgba(11,31,61,.4)}
 #diag{color:var(--red);padding:8px 16px;position:relative;z-index:2}
 .waves{position:absolute;left:0;right:0;bottom:0;height:70px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24' fill='none' stroke='rgba(11,31,61,.55)' stroke-width='1.3' stroke-linecap='round'%3E%3Cpath d='M0 12 q25 -8 50 0 t50 0 q25 -8 50 0 t50 0 q25 -8 50 0 t50 0 q25 -8 50 0 t50 0'/%3E%3C/svg%3E") 0 4px/400px 24px repeat-x,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24' fill='none' stroke='rgba(217,164,65,.7)' stroke-width='1.1' stroke-linecap='round'%3E%3Cpath d='M0 12 q25 -6 50 0 t50 0 q25 -6 50 0 t50 0 q25 -6 50 0 t50 0 q25 -6 50 0 t50 0'/%3E%3C/svg%3E") 0 22px/320px 24px repeat-x,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24' fill='none' stroke='rgba(11,31,61,.45)' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M0 12 q25 -9 50 0 t50 0 q25 -9 50 0 t50 0 q25 -9 50 0 t50 0 q25 -9 50 0 t50 0'/%3E%3C/svg%3E") 0 40px/480px 24px repeat-x;opacity:.16;animation:flow2 22s linear infinite}
+.gbar{position:relative;z-index:1;display:flex;gap:8px;padding:10px 16px 0;max-width:1180px;margin:0 auto;flex-wrap:wrap}
+.gbar button{border:1px solid var(--line);background:var(--card);color:var(--navy8);font:inherit;font-weight:600;padding:6px 16px;border-radius:99px;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.gbar button:hover{border-color:var(--gold)}
+.gbar button.on{background:var(--navy8);color:#fff;border-color:var(--navy8)}
+.gbar .n{font-weight:500;opacity:.75;margin-left:6px}
 </style>
 </head>
 <body>
@@ -85,6 +92,7 @@ code,pre{background:#F3F5FA;border:1px solid var(--line);border-radius:10px;font
   </nav>
 </header>
 <div class="skyline" aria-hidden="true"></div>
+<div class="gbar" id="gbar"></div>
 <div id="diag"></div>
 <main id="main"><p class="mut">Đang tải…</p></main>
 <dialog id="dlg"><div class="dlg" id="dlgBody"></div></dialog>
@@ -92,7 +100,8 @@ code,pre{background:#F3F5FA;border:1px solid var(--line);border-radius:10px;font
 
 <script>
 window.onerror = function (m, s, l) { var d = document.getElementById('diag'); if (d) d.textContent = 'Lỗi trang: ' + m + (l ? ' (dòng ' + l + ')' : ''); };
-var KEY = /*__KEY__*/'', D = null, tab = 'home', F = { status: 'todo', site: '', q: '', clicks: 'todo' };
+var KEY = /*__KEY__*/'', D = null, tab = 'home', F = { status: 'todo', site: '', q: '', clicks: 'todo', src: '', as: '', sort: 'new' }, G = '';
+try { G = localStorage.getItem('crm_group') || ''; } catch (e) {}
 var STATUS = ['Mới', 'Đã liên hệ', 'Quan tâm', 'Hẹn xem', 'Chốt', 'Mất'];
 var CH = { zalo: 'Zalo', phone: 'Gọi điện', messenger: 'Messenger', sms: 'SMS', other: 'Khác' };
 function $(s, r) { return (r || document).querySelector(s); }
@@ -110,6 +119,19 @@ function fmt(iso) { if (!iso) return ''; var d = new Date(iso); return d.toLocal
 function ago(iso) { var m = Math.round((Date.now() - new Date(iso).getTime()) / 60000); return m < 1 ? 'vừa xong' : m < 60 ? m + ' phút trước' : m < 1440 ? Math.round(m / 60) + ' giờ trước' : Math.round(m / 1440) + ' ngày trước'; }
 function vnd(n) { return Math.round(n || 0).toLocaleString('vi-VN') + 'đ'; }
 var todo = function (l) { return !l.called && !l.messaged && l.status === 'Mới'; };
+var GROUPS = ['BĐS', 'Vân'];
+function gOf(name) { var s = D && D.sites.filter(function (x) { return x.name === name; })[0]; return s ? String(s.group || '') : ''; }
+function inG(name) { return !G || gOf(name) === G; }
+function num(v) { return Number(String(v).replace(/[^\d]/g, '')) || 0; }
+function gbar() {
+  if (!D) return;
+  var n = {}, all = D.leads.filter(todo).length;
+  GROUPS.forEach(function (g) { n[g] = D.leads.filter(function (l) { return todo(l) && gOf(l.site) === g; }).length; });
+  $('#gbar').innerHTML = [''].concat(GROUPS).map(function (g) {
+    var k = g ? n[g] : all;
+    return '<button data-g="' + esc(g) + '" class="' + (G === g ? 'on' : '') + '">' + (g || 'Tất cả') + (k ? '<span class="n">' + k + ' chưa liên hệ</span>' : '') + '</button>';
+  }).join('');
+}
 
 function ensureKey() {
   if (KEY) return Promise.resolve();
@@ -119,48 +141,114 @@ function load() {
   return ensureKey().then(function () { return run('crmLoad'); }).then(function (d) { D = d; $('#who').textContent = d.user; badges(); render(); }).catch(function (e) { $('#main').innerHTML = '<div class="card">Không tải được dữ liệu: ' + esc(e.message) + '<br><span class="mut">[khoá: ' + (KEY ? 'có' : 'trống') + '] Nếu khoá trống: dán lại cả Mã.gs và Crm.html mới nhất rồi mở menu CRM → Mở giao diện CRM. Mở bằng link web thì dùng menu CRM → Link vào CRM.</span></div>'; });
 }
 function badges() {
-  var a = D.leads.filter(todo).length, b = D.clicks.filter(function (c) { return c.alert; }).length;
+  gbar();
+  var a = D.leads.filter(function (l) { return todo(l) && isBds(l.site); }).length, b = D.clicks.filter(function (c) { return c.alert && inG(c.site); }).length;
   $('#dLeads').textContent = a; $('#dLeads').hidden = !a; $('#dClicks').textContent = b; $('#dClicks').hidden = !b;
 }
 $('#nav').onclick = function (e) { var t = e.target.dataset.t; if (!t) return; tab = t; document.querySelectorAll('#nav button').forEach(function (b) { b.classList.toggle('on', b.dataset.t === t); }); render(); };
 $('#reload').onclick = load;
+$('#gbar').onclick = function (e) { var b = e.target.closest('button'); if (!b) return; G = b.dataset.g; try { localStorage.setItem('crm_group', G); } catch (x) {} badges(); render(); };
 
-function render() { if (!D) return; ({ home: home, leads: leads, clicks: clicks, camp: camp, sites: sites }[tab])(); }
+function render() { if (!D) return; $('#gbar').style.display = tab === 'leads' ? 'none' : ''; ({ home: home, leads: leads, clicks: clicks, camp: camp, sites: sites }[tab])(); }
 
 function home() {
+  if (G) return homeGroup();
   var k = D.kpis.slice(1).map(function (r, i) { var red = (i === 0 || i === 8) && Number(String(r[1]).replace(/\D/g, '')) > 0; return '<div class="kpi ' + (red ? 'alert' : '') + '"><b>' + esc(r[1]) + '</b><span>' + esc(r[0]) + '</span></div>'; }).join('');
   var st = D.siteStats, rows = st.slice(1).map(function (r) { return '<tr>' + r.map(function (c, i) { return '<td>' + (i === 0 ? '<b>' + esc(c) + '</b>' : esc(c)) + '</td>'; }).join('') + '</tr>'; }).join('');
   $('#main').innerHTML = '<p class="mut small">Khoảng thời gian chỉnh ở ô "Số ngày gần đây" trong tab Tổng quan của file Sheet.</p><div class="grid">' + k + '</div>' +
     '<div class="card tw"><b>Theo website</b><table><tr>' + st[0].map(function (h) { return '<th>' + esc(h) + '</th>'; }).join('') + '</tr>' + (rows || '<tr><td class="mut">Chưa có dữ liệu</td></tr>') + '</table></div>';
 }
 
+function homeGroup() {
+  var st = D.siteStats, rows = st.slice(1).filter(function (r) { return inG(r[0]); });
+  var sum = function (i) { return rows.reduce(function (a, r) { return a + num(r[i]); }, 0); };
+  var todoN = D.leads.filter(function (l) { return todo(l) && inG(l.site); }).length;
+  var clickTodo = D.clicks.filter(function (c) { return c.alert && inG(c.site); }).length;
+  var cards = [[todoN, 'Khách chưa gọi, chưa nhắn', 1], [sum(5), 'Khách để lại SĐT trong kỳ', 0], [sum(1), 'Người truy cập', 0], [sum(2), 'Lượt bấm Zalo', 0], [sum(3), 'Lượt bấm Gọi điện', 0], [sum(4), 'Lượt bấm Messenger', 0], [clickTodo, 'Lượt bấm chưa xử lý', 1]];
+  var k = cards.map(function (x) { return '<div class="kpi ' + (x[2] && x[0] > 0 ? 'alert' : '') + '"><b>' + x[0] + '</b><span>' + esc(x[1]) + '</span></div>'; }).join('');
+  var body = rows.map(function (r) { return '<tr>' + r.map(function (c, i) { return '<td>' + (i === 0 ? '<b>' + esc(c) + '</b>' : esc(c)) + '</td>'; }).join('') + '</tr>'; }).join('');
+  $('#main').innerHTML = '<p class="mut small">Nhóm ' + esc(G) + ': khoảng thời gian chỉnh ở ô "Số ngày gần đây" trong tab Tổng quan của file Sheet.</p><div class="grid">' + k + '</div>' +
+    '<div class="card tw"><b>Theo website (' + esc(G) + ')</b><table><tr>' + st[0].map(function (h) { return '<th>' + esc(h) + '</th>'; }).join('') + '</tr>' + (body || '<tr><td class="mut">Chưa có website trong nhóm này. Điền cột E (Nhóm) ở tab Website.</td></tr>') + '</table></div>';
+}
+
+function saleNames(extra) { var a = (D.sales || []).slice(); (extra || []).forEach(function (s) { if (a.indexOf(s) < 0) a.push(s); }); return a; }
+function nextStep(l) {
+  if (todo(l)) return 'Việc cần làm: gọi hoặc nhắn Zalo cho khách ngay.';
+  if (!l.assignee && l.status !== 'Chốt' && l.status !== 'Mất') return 'Việc cần làm: chọn sale phụ trách cho khách này.';
+  if (l.status === 'Đã liên hệ') return 'Việc cần làm: hỏi nhu cầu, rồi đổi trạng thái sang Quan tâm hoặc Mất.';
+  if (l.status === 'Quan tâm') return 'Việc cần làm: hẹn khách đi xem nhà.';
+  if (l.status === 'Hẹn xem') return 'Việc cần làm: nhắc lịch hẹn, sau buổi xem cập nhật Chốt hoặc Mất.';
+  return '';
+}
+function isBds(name) { var g = gOf(name); return !g || g === 'BĐS'; }
+function mins(a, b) { return Math.round((new Date(b).getTime() - new Date(a).getTime()) / 60000); }
+function dur(m) { return m < 1 ? 'dưới 1 phút' : m < 60 ? m + ' phút' : m < 1440 ? Math.round(m / 60 * 10) / 10 + ' giờ' : Math.round(m / 1440 * 10) / 10 + ' ngày'; }
 function leads() {
-  var sites = D.sites.map(function (s) { return s.name; });
-  var list = D.leads.filter(function (l) {
+  var all = D.leads.filter(function (l) { return isBds(l.site); });
+  var sites = D.sites.filter(function (s) { return isBds(s.name); }).map(function (s) { return s.name; });
+  var srcs = [], ass = [];
+  all.forEach(function (l) { if (l.source && srcs.indexOf(l.source) < 0) srcs.push(l.source); if (l.assignee && ass.indexOf(l.assignee) < 0) ass.push(l.assignee); });
+  var list = all.filter(function (l) {
     if (F.status === 'todo' && !todo(l)) return false;
     if (STATUS.indexOf(F.status) >= 0 && l.status !== F.status) return false;
     if (F.site && l.site !== F.site) return false;
-    if (F.q) { var q = F.q.toLowerCase(); if ((l.name + ' ' + l.phone + ' ' + l.email).toLowerCase().indexOf(q) < 0) return false; }
+    if (F.src && l.source !== F.src) return false;
+    if (F.as && (F.as === '__none' ? l.assignee : l.assignee !== F.as)) return false;
+    if (F.q) { var q = F.q.toLowerCase(); if ((l.name + ' ' + l.phone + ' ' + l.email + ' ' + l.note + ' ' + l.campaign).toLowerCase().indexOf(q) < 0) return false; }
     return true;
   });
-  $('#main').innerHTML = '<div class="row"><select id="fs"><option value="all">Tất cả trạng thái</option><option value="todo">Chưa gọi, chưa nhắn</option>' + STATUS.map(function (s) { return '<option>' + s + '</option>'; }).join('') + '</select>' +
-    '<select id="fw"><option value="">Tất cả website</option>' + sites.map(function (s) { return '<option>' + esc(s) + '</option>'; }).join('') + '</select>' +
-    '<input id="fq" placeholder="Tìm tên / SĐT / email" value="' + esc(F.q) + '"><span class="mut">' + list.length + ' khách</span></div>' +
+  list.sort(function (x, y) {
+    if (F.sort === 'old') return new Date(x.at) - new Date(y.at);
+    if (F.sort === 'val') return (y.value || 0) - (x.value || 0);
+    if (F.sort === 'wait') return (todo(y) - todo(x)) || (new Date(x.at) - new Date(y.at));
+    return new Date(y.at) - new Date(x.at);
+  });
+  var cnt = function (f) { return all.filter(f).length; };
+  var resp = all.filter(function (l) { return l.contactedAt; }).map(function (l) { return mins(l.at, l.contactedAt); }).filter(function (m) { return m >= 0; });
+  var avg = resp.length ? Math.round(resp.reduce(function (p, q) { return p + q; }, 0) / resp.length) : null;
+  var won = all.filter(function (l) { return l.status === 'Chốt'; });
+  var total = won.reduce(function (p, l) { return p + (l.value || 0); }, 0);
+  var kp = [[all.length, 'Tổng khách BĐS', 0], [cnt(todo), 'Chưa gọi, chưa nhắn', 1], [cnt(function (l) { return !todo(l); }), 'Đã liên hệ', 0],
+    [cnt(function (l) { return l.status === 'Quan tâm' || l.status === 'Hẹn xem'; }), 'Quan tâm / Hẹn xem', 0], [won.length, 'Đã chốt', 0], [total ? (total >= 1e9 ? Math.round(total / 1e8) / 10 + ' tỷ' : total >= 1e6 ? Math.round(total / 1e5) / 10 + ' triệu' : vnd(total)) : '-', 'Giá trị đã chốt', 0],
+    [avg === null ? '-' : dur(avg), 'Phản hồi trung bình', 0]];
+  var chips = [['all', 'Tất cả', all.length], ['todo', 'Chưa liên hệ', cnt(todo)]].concat(STATUS.map(function (s) { return [s, s, cnt(function (l) { return l.status === s; })]; }));
+  var opt = function (arr, first) { return '<option value="">' + first + '</option>' + arr.map(function (s) { return '<option>' + esc(s) + '</option>'; }).join(''); };
+  $('#main').innerHTML = '<div class="grid">' + kp.map(function (x) { return '<div class="kpi ' + (x[2] && x[0] > 0 ? 'alert' : '') + '"><b>' + esc(x[0]) + '</b><span>' + x[1] + '</span></div>'; }).join('') + '</div>' +
+    '<div class="row chips">' + chips.map(function (x) { return '<button class="chip ' + (F.status === x[0] ? 'on' : '') + '" data-chip="' + esc(x[0]) + '">' + x[1] + ' <span class="n">' + x[2] + '</span></button>'; }).join('') + '</div>' +
+    '<div class="row"><select id="fw">' + opt(sites, 'Tất cả dự án / website') + '</select><select id="fo">' + opt(srcs, 'Tất cả nguồn') + '</select>' +
+    '<select id="fa"><option value="">Tất cả sale</option><option value="__none">Chưa giao cho sale nào</option>' + saleNames(ass).map(function (s) { return '<option>' + esc(s) + '</option>'; }).join('') + '</select><button class="btn" id="addsale">+ Thêm sale</button>' +
+    '<select id="fr"><option value="new">Mới nhất trước</option><option value="old">Cũ nhất trước</option><option value="wait">Chờ lâu nhất trước</option><option value="val">Giá trị cao trước</option></select>' +
+    '<input id="fq" placeholder="Tìm tên, SĐT, email, ghi chú" value="' + esc(F.q) + '"><span class="mut">' + list.length + ' khách</span></div>' +
     (list.map(function (l) { return leadCard(l); }).join('') || '<div class="card mut">Không có khách nào.</div>');
-  $('#fs').value = F.status; $('#fw').value = F.site;
-  $('#fs').onchange = function (e) { F.status = e.target.value; leads(); };
+  $('#fw').value = F.site; $('#fo').value = F.src; $('#fa').value = F.as; $('#fr').value = F.sort;
+  document.querySelectorAll('[data-chip]').forEach(function (b) { b.onclick = function () { F.status = b.dataset.chip; leads(); }; });
   $('#fw').onchange = function (e) { F.site = e.target.value; leads(); };
+  $('#fo').onchange = function (e) { F.src = e.target.value; leads(); };
+  $('#fa').onchange = function (e) { F.as = e.target.value; leads(); };
+  $('#fr').onchange = function (e) { F.sort = e.target.value; leads(); };
   $('#fq').onkeydown = function (e) { if (e.key === 'Enter') { F.q = e.target.value; leads(); } };
+  $('#addsale').onclick = function () {
+    var n = window.prompt('Tên sale cần thêm (ví dụ: Nguyễn Văn A)'); if (!n) return;
+    run('crmAddSale', n).then(function (r) { D.sales = r; toast('Đã thêm sale'); leads(); }).catch(fail);
+  };
+  document.querySelectorAll('[data-as]').forEach(function (s) { s.onchange = function () {
+    var l = D.leads.filter(function (x) { return x.phone === s.dataset.as; })[0], v = s.value;
+    run('crmUpdateLead', s.dataset.as, { assignee: v }).then(function () { l.assignee = v; toast(v ? 'Đã chuyển cho ' + v : 'Đã bỏ giao'); leads(); }).catch(function (e) { s.value = l.assignee || ''; fail(e); }); }; });
   document.querySelectorAll('[data-open]').forEach(function (b) { b.onclick = function () { openLead(b.dataset.open); }; });
   document.querySelectorAll('[data-act]').forEach(function (b) { b.onclick = function () { contact(b.dataset.p, b.dataset.act, b); }; });
 }
 function leadCard(l) {
-  var st = todo(l) ? '<span class="tag red">CHƯA LIÊN HỆ</span>' : '<span class="tag ' + (l.status === 'Chốt' ? 'grn' : l.status === 'Mất' ? '' : 'amb') + '">' + esc(l.status) + '</span>';
+  var wait = todo(l) ? mins(l.at, new Date().toISOString()) : 0;
+  var st = todo(l) ? '<span class="tag red">CHƯA LIÊN HỆ · chờ ' + dur(wait) + '</span>' : '<span class="tag ' + (l.status === 'Chốt' ? 'grn' : l.status === 'Mất' ? '' : 'amb') + '">' + esc(l.status) + '</span>';
   var t = (l.zaloClicks ? '<span class="tag blu">Bấm Zalo ×' + l.zaloClicks + '</span> ' : '') + (l.phoneClicks ? '<span class="tag blu">Bấm Gọi ×' + l.phoneClicks + '</span> ' : '') +
-    (l.called ? '<span class="tag grn">Đã gọi</span> ' : '') + (l.messaged ? '<span class="tag grn">Đã nhắn</span> ' : '');
+    (l.submits > 1 ? '<span class="tag amb">Gửi form ×' + l.submits + '</span> ' : '') + (l.called ? '<span class="tag grn">Đã gọi</span> ' : '') + (l.messaged ? '<span class="tag grn">Đã nhắn</span> ' : '');
+  var src = [l.source, l.campaign].filter(Boolean).join(' · ');
+  var d = [['Dự án', l.site], ['Nguồn / chiến dịch', src || 'Trực tiếp / chưa rõ'], ['Email', l.email], ['Nhận lúc', fmt(l.at) + ' (' + ago(l.at) + ')'],
+    ['Liên hệ lúc', l.contactedAt ? fmt(l.contactedAt) + ' (sau ' + dur(Math.max(0, mins(l.at, l.contactedAt))) + ')' : ''], ['Giá trị chốt', l.value ? vnd(l.value) : '']]
+    .filter(function (x) { return x[1]; }).map(function (x) { return '<span><span class="mut">' + x[0] + ':</span> ' + esc(x[1]) + '</span>'; }).join('');
   return '<div class="card lead ' + (todo(l) ? 'todo' : '') + '"><div><h3>' + esc(l.name || '(chưa có tên)') + ' · ' + esc(l.phone) + '</h3>' +
-    '<div class="mut small">' + esc(l.site) + (l.source || l.campaign ? ' · ' + esc((l.source + ' ' + l.campaign).trim()) : '') + ' · ' + esc(ago(l.at)) + '</div>' +
-    '<div style="margin-top:4px">' + st + ' ' + t + '</div>' + (l.note ? '<div class="small mut">' + esc(l.note) + '</div>' : '') + '</div>' +
+    '<div style="margin:4px 0">' + st + ' ' + t + '</div><div class="meta small">' + d + '</div>' + (nextStep(l) ? '<div class="small step">' + nextStep(l) + '</div>' : '') +
+    '<div class="small assign"><span class="mut">Chuyển cho sale:</span> <select data-as="' + esc(l.phone) + '"><option value="">Chưa giao</option>' + saleNames([l.assignee].filter(Boolean)).map(function (s) { return '<option' + (s === l.assignee ? ' selected' : '') + '>' + esc(s) + '</option>'; }).join('') + '</select></div>' + (l.note ? '<div class="small note">' + esc(l.note) + '</div>' : '') + '</div>' +
     '<div class="acts"><button class="btn z" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button><button class="btn g" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button><button class="btn" data-open="' + esc(l.phone) + '">Chi tiết</button></div></div>';
 }
 function contact(phone, act, btn) {
@@ -195,7 +283,7 @@ function openLead(phone) {
 }
 
 function clicks() {
-  var list = D.clicks.filter(function (c) { return F.clicks === 'all' || c.alert; });
+  var list = D.clicks.filter(function (c) { return inG(c.site) && (F.clicks === 'all' || c.alert); });
   $('#main').innerHTML = '<div class="card small mut">Người đã <b>bấm Zalo / Gọi / Messenger</b> trên website. Dòng đỏ là chưa để lại số điện thoại và chưa ai kiểm tra. Đối chiếu giờ bấm với tin nhắn Zalo hoặc cuộc gọi nhỡ trên điện thoại, rồi tick "Đã kiểm tra".</div>' +
     '<div class="row"><select id="fc"><option value="todo">Chưa xử lý</option><option value="all">Tất cả</option></select><span class="mut">' + list.length + ' lượt</span></div>' +
     '<div class="card tw"><table><tr><th>Lúc</th><th>Website</th><th>Kênh</th><th>Trang</th><th>Nguồn</th><th>SĐT</th><th>Đã kiểm tra</th></tr>' +
@@ -213,10 +301,10 @@ function camp() {
 }
 
 function sites() {
-  $('#main').innerHTML = D.sites.map(function (s, i) { return '<div class="card"><b>' + esc(s.name) + '</b> <span class="mut">' + esc(s.domain) + '</span> <span class="tag">mã ' + esc(s.key) + '</span>' +
+  $('#main').innerHTML = D.sites.filter(function (s) { return inG(s.name); }).map(function (s, i) { return '<div class="card"><b>' + esc(s.name) + '</b> <span class="mut">' + esc(s.domain) + '</span> <span class="tag">mã ' + esc(s.key) + '</span>' +
     '<pre>' + esc(s.snippet || '(dán URL ứng dụng web vào ô G2 của tab Website để tạo đoạn mã)') + '</pre>' + (s.snippet ? '<button class="btn" data-cp="' + i + '">Sao chép đoạn mã</button>' : '') + '</div>'; }).join('') || '<div class="card mut">Chưa có website.</div>';
   document.querySelectorAll('[data-cp]').forEach(function (b) { b.onclick = function () {
-    var s = D.sites[b.dataset.cp].snippet, ta = document.createElement('textarea'); ta.value = s; document.body.appendChild(ta); ta.select();
+    var s = D.sites.filter(function (s) { return inG(s.name); })[b.dataset.cp].snippet, ta = document.createElement('textarea'); ta.value = s; document.body.appendChild(ta); ta.select();
     try { document.execCommand('copy'); toast('Đã sao chép'); } catch (e) { toast('Không sao chép được, hãy bôi đen và copy'); } document.body.removeChild(ta); }; });
 }
 if (KEY) { load(); }  // mở trong file Sheet: khoá đã được gắn sẵn
