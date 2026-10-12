@@ -13,7 +13,7 @@ const CSS = readFileSync(join(HERE, "ladipage.css"), "utf8");
 const BASE = "https://www.fpt-city.com";
 const IMG = "https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/5051b81aefcfec407044094b96b5dfc7fdd47de8/website/public/assets/img/fpt-plaza-4";
 // Widget Chat/Zalo/Gọi: nạp từ CDN theo mã commit cố định (fpt-city.com sẽ chạy trên LadiPage nên không còn /assets)
-const WIDGET_SHA = "d63a195febb7e6a1d0a674e484955baae4c779b9";
+const WIDGET_SHA = "e3c7fdffdd320a63a51f7da742e47a4dc9a938ed";
 const WIDGET_URL = `https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@${WIDGET_SHA}/website/public/assets/js/fc-widget.js`;
 const HOTLINE = site.agent.phone, TEL = HOTLINE.replace(/\s/g, ""), ZALO = TEL;
 const esc = (s = "") => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -86,7 +86,7 @@ ${note ? `<p class="small" style="margin-top:12px">${esc(note)}</p>` : ""}</div>
 const head = (h) => `
 <div style="text-align:center;max-width:780px;margin:0 auto 32px"><p class="eyebrow">${esc(h.eyebrow)}</p><h2 class="title">${esc(h.title)}</h2>${h.sub ? `<p style="color:var(--muted)">${h.sub}</p>` : ""}</div>`;
 
-const ASSET_SHA = "d63a195febb7e6a1d0a674e484955baae4c779b9";
+const ASSET_SHA = "e3c7fdffdd320a63a51f7da742e47a4dc9a938ed";
 const RAW = `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/${ASSET_SHA}/website/public/assets/img`;
 const SZ = JSON.parse(readFileSync(join(HERE, "..", "public", "assets", "img", "minh-hoa", "sizes.json"), "utf8"));
 const MH = `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/${ASSET_SHA}/website/public/assets/img/minh-hoa`;
