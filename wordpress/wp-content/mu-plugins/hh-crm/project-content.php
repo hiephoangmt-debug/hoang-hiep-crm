@@ -64,7 +64,7 @@ function hh_area_profiles() {
 		),
 		'nui-thanh'    => array(
 			'desc'  => 'Núi Thành (Quảng Nam cũ, nay thuộc Đà Nẵng) là trung tâm Khu kinh tế mở Chu Lai, có sân bay Chu Lai, cảng Chu Lai – Trường Hải và dải biển, sông Trường Giang còn hoang sơ.',
-			'links' => array( array( '10 – 15 phút', 'Sân bay Chu Lai' ), array( '20 – 25 phút', 'Trung tâm Tam Kỳ' ), array( 'Khoảng 1 giờ', 'Phố cổ Hội An' ), array( 'Khoảng 1,5 giờ', 'Trung tâm Đà Nẵng' ) ),
+			'links' => array( array( '10 – 20 phút', 'Sân bay Chu Lai' ), array( 'Khoảng 30 phút', 'Trung tâm Tam Kỳ' ), array( 'Khoảng 1 giờ', 'Phố cổ Hội An' ), array( 'Khoảng 1,5 giờ (85 km)', 'Trung tâm Đà Nẵng' ) ),
 			'near'  => array( 'Khu kinh tế mở Chu Lai', 'Sân bay Chu Lai', 'Sông Trường Giang, biển Tam Hải' ),
 		),
 	);

@@ -35,8 +35,10 @@ def background():
     base = Image.new('RGBA', (W, H), NAVY + (255,))
     ov = Image.new('RGBA', (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(ov)
     # Sông Cổ Cò cách điệu (dải cong mờ bên phải)
-    pts = [(860 + 70 * math.sin(y / 120), y) for y in range(-20, H + 21, 3)]
-    d.line(pts, fill=(64, 132, 186, 60), width=46, joint="curve")
+    left = [(860 + 70 * math.sin(y / 120), y) for y in range(-10, H + 11, 2)]
+    d.polygon(left + [(x + 46, y) for x, y in reversed(left)], fill=(64, 132, 186, 60))
+    base = Image.alpha_composite(base, ov)
+    ov = Image.new('RGBA', (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(ov)
     for x in range(0, W, 32): d.line([x, 0, x, H], fill=(255, 255, 255, 16))
     for y in range(0, H, 32): d.line([0, y, W, y], fill=(255, 255, 255, 16))
     for k in range(5):
@@ -54,6 +56,8 @@ def cover(slug, name):
     left = [(860 + 70 * math.sin(y / 120 + ph), y) for y in range(-10, H + 11, 2)]
     right = [(x + 80 + 14 * math.sin(y / 60 + ph), y) for x, y in reversed(left)]
     d.polygon(left + right, fill=(64, 132, 186, 150))
+    base = Image.alpha_composite(base, ov)
+    ov = Image.new('RGBA', (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(ov)
     for x in range(0, W, 32): d.line([x, 0, x, H], fill=(255, 255, 255, 14))
     for y in range(0, H, 32): d.line([0, y, W, y], fill=(255, 255, 255, 14))
     # Đường quy hoạch + block lô đất
@@ -89,10 +93,21 @@ def wrap(d, text, font, maxw):
     return lines
 
 
-for slug, name, sub, facts, price in P:
+P += [
+    ('nam-hoi-an-city', 'Nam Hội An City', 'Chân cầu Cửa Đại · ven sông Thu Bồn',
+     [('Quy mô', 'khoảng 19,34 ha · FVG'), ('Sản phẩm', 'Nhà phố 3 tầng 5 × 20 m'), ('Vị trí', 'Cách phố cổ Hội An 5 km')], '35 – 62', 'NHÀ PHỐ NAM HỘI AN · ĐÀ NẴNG', 'vinh-an-hoa'),
+    ('vinh-an-hoa-city', 'Vịnh An Hòa City', 'Núi Thành · ven vịnh An Hòa',
+     [('Quy mô', '99,6 ha · khoảng 2.700 sản phẩm'), ('Lô phổ biến', '150 – 160 m²'), ('Gần', 'Sân bay Chu Lai, KKT Chu Lai')], '8 – 11', 'ĐẤT NỀN NÚI THÀNH · ĐÀ NẴNG', 'vinh-an-hoa'),
+]
+
+for row in P:
+    slug, name, sub, facts, price = row[:5]
+    head = row[5] if len(row) > 5 else 'ĐẤT NỀN ĐIỆN NGỌC · ĐÀ NẴNG'
+    out = os.path.join(OUT, '..', row[6]) if len(row) > 6 else OUT
+    os.makedirs(out, exist_ok=True)
     im = background(); d = ImageDraw.Draw(im)
     d.rectangle([0, 0, W, 8], fill=GOLD)
-    d.text((64, 56), 'ĐẤT NỀN ĐIỆN NGỌC · ĐÀ NẴNG', font=f(FB, 26), fill=GOLD)
+    d.text((64, 56), head, font=f(FB, 26), fill=GOLD)
     y = 104
     for ln in wrap(d, name, f(FB, 72), 1000):
         d.text((64, y), ln, font=f(FB, 72), fill='white'); y += 86
@@ -110,6 +125,6 @@ for slug, name, sub, facts, price in P:
     d.text((W - 64, H - 150), 'hiephoangmt.com', font=f(FB, 34), fill='white', anchor='ra')
     d.text((W - 64, H - 106), 'Hoàng Hiệp · 0904 567 009', font=f(FR, 26), fill=GOLD, anchor='ra')
     d.text((64, H - 92), '* Kiểm tra sổ bản gốc từng lô. Giá rao, không phải giá giao dịch.', font=f(FR, 20), fill=(150, 170, 195))
-    im.save(os.path.join(OUT, slug + '-thong-tin.jpg'), quality=86, optimize=True)
-    cover(slug, name).save(os.path.join(OUT, slug + '.jpg'), quality=86, optimize=True)
+    im.save(os.path.join(out, slug + '-thong-tin.jpg'), quality=86, optimize=True)
+    cover(slug, name).save(os.path.join(out, slug + '.jpg'), quality=86, optimize=True)
     print(slug)

@@ -106,6 +106,14 @@ function hh_rm_project_title( $post ) {
 			}
 		}
 	}
+	// Nhà phố – shophouse đã bàn giao: người tìm hỏi giá chuyển nhượng.
+	if ( has_term( 'shophouse', 'loai-du-an', $post ) && function_exists( 'hh_project_is_resale' ) && hh_project_is_resale( $post->ID ) ) {
+		foreach ( array( $name . ': Giá chuyển nhượng ' . $when . ' | ' . $brand, $name . ': Giá chuyển nhượng ' . $when ) as $title ) {
+			if ( mb_strlen( $title ) <= 60 ) {
+				return $title;
+			}
+		}
+	}
 	foreach ( array(
 		$name . ': Bảng giá, chính sách ' . $when . ' | ' . $brand,
 		$name . ': Bảng giá, chính sách ' . $when,

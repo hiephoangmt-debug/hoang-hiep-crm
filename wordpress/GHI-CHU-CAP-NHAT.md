@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.12** + plugin Hoàng Hiệp CRM **2.20.35**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.12** + plugin Hoàng Hiệp CRM **2.20.36**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.36: Vịnh An Hòa City (mới) + cập nhật Nam Hội An City
+- **Vịnh An Hòa City** (trang mới, khu vực mới **Núi Thành**): khu đô thị sinh thái 99,6 ha ven vịnh An Hòa – sông Trường Giang, gần sân bay Chu Lai; đất nền 150 – 160 m² giá rao 2026 khoảng 8 – 11 triệu/m², bảng biệt thự Hoa Sứ, biệt thự Nhật Bản, nhà vườn Mỹ; mục sân bay Chu Lai mở rộng.
+- **Nam Hội An City** cập nhật chi tiết: tên pháp lý Khu đô thị Nồi Rang, chủ đầu tư Chu Lai Hội An (FVG) nhận chuyển nhượng 2020, khách sạn Fivitel + resort Fivires (gần 750 tỷ) khởi công 3/9/2025, bảng giá chuyển nhượng 2025 – 2026 (35 – 62 triệu/m²), tiến độ, câu hỏi thường gặp. Chuyển sang "Đã bàn giao" (hiện mục chuyển nhượng – cho thuê). Bỏ dòng "1 tòa căn hộ 30 tầng" vì chưa có nguồn xác nhận. Ô nào anh đã tự sửa thì giữ nguyên.
+- Tiêu đề SEO tự động cho nhà phố – shophouse đã bàn giao: "{Tên}: Giá chuyển nhượng {tháng}".
+- Cài: Nhập nhanh `cap-nhat-code.zip` → **Nhập dữ liệu Đà Nẵng → Nhập / cập nhật dữ liệu** → LiteSpeed Cache → Purge All.
 
 ## Có gì mới – plugin 2.20.35, giao diện 2.15.12: 8 trang dự án đất nền Điện Ngọc
 - **8 trang dự án mới** (loại Đất nền, khu vực Điện Bàn), mỗi trang có vị trí, quy mô, bảng giá rao tham khảo 2026, lưu ý pháp lý, câu hỏi thường gặp và liên kết sang các dự án Điện Ngọc khác:
