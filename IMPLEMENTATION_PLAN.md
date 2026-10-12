@@ -35,6 +35,19 @@ Không có thư mục Next.js, Supabase, migration hay bảng PostgreSQL nào tr
 - `Sale` (mới): danh sách sale.
 - `Hoạt động`, `Lượt bấm`, `Website` (có cột E Nhóm), `Chiến dịch`: như trước.
 
+## 3b. Cập nhật đợt 2 (ui-13)
+
+- Bảng khách hàng: 23 cột (ẩn/hiện, sắp xếp, lọc kết hợp, phân trang 25 dòng); iPhone dùng thẻ gọn.
+- Hồ sơ: SĐT phụ, Zalo, tỉnh/thành, ngày sinh, nghề nghiệp, ngân sách min/max, vốn tự có, khoản vay, thời điểm mua, lý do chưa quyết định (cột AC–AO của tab Khách hàng).
+- 12 trạng thái. Đổi trạng thái tự ghi vào Nhật ký, bắt buộc có lý do khi chuyển sang Mất hoặc Tạm dừng.
+- Lịch sử chăm sóc không giới hạn (tab Nhật ký, 12 cột), số lần / lần gần nhất / kết quả gần nhất tính từ lịch sử thật.
+- Lịch sử xem dự án (tab Xem dự án): nhiều dự án, nhiều lần; gợi ý lịch chăm sóc sau khi xem, người dùng xác nhận.
+- Thêm khách thủ công có kiểm tra trùng SĐT (không tự gộp); nhập danh sách dán từ Excel có báo cáo dòng lỗi và dòng trùng.
+- AI phân tích khách: đọc hồ sơ, lịch sử chăm sóc, lịch sử xem dự án; có nút Sao chép, Tạo công việc (xác nhận), Đánh dấu đã thực hiện. Không tự gửi tin.
+- Việc hôm nay: thêm nhóm "đã xem dự án nhưng chưa theo dõi".
+
+Chưa làm: nhiều cơ hội độc lập cho một khách, upload file .xlsx trực tiếp (hiện dán từ Excel), nhắc việc nền tự động, phân quyền theo người dùng.
+
 ## 4. Chưa làm, cần quyết định hoặc cấu hình
 
 1. Chuyển sang Next.js + Supabase: cần repo nền hoặc xác nhận tạo mới, và thông tin dự án Supabase.

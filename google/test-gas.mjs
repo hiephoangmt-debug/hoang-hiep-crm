@@ -12,7 +12,8 @@ class Sheet {
   getName() { return this.name; }
   getLastRow() { return this.rows.length; }
   getMaxRows() { return 60; }
-  getMaxColumns() { return 30; }
+  getMaxColumns() { return 60; }
+  insertColumnsAfter() {}
   appendRow(r) { this.rows.push(r.slice()); }
   getRange(r, c, nr = 1, nc = 1) {
     const s = this;
@@ -110,7 +111,7 @@ assert.equal(ctx.crmKey_(), K);
 assert.throws(() => ctx.crmLoad('sai-khoa'), /Không có quyền/); assert.throws(() => ctx.crmLog('', '0988111222', 'call'), /Không có quyền/);
 assert.equal(ctx.doGet({ parameter: { k: 'sai' } }).file, undefined); assert.ok(ctx.doGet({ parameter: { k: K } }).content.includes('CRM Hoàng Hiệp') && ctx.doGet({ parameter: { k: K } }).content.includes('</html>'));
 const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
-assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-12'); assert.equal(JSON.stringify(dbg).includes(K), false);
+assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-13'); assert.equal(JSON.stringify(dbg).includes(K), false);
 const L = ctx.crmLoad(K);
 assert.equal(L.leads.length, 2);
 const l0 = L.leads.find((x) => x.phone === '0988111222');
@@ -152,11 +153,48 @@ const ret = ctx.kiemTraCRM(); assert.match(ret, /\?k=[0-9a-f]{32}/); assert.ok(g
   ctx.crmAddLog(KK, lead.phone, { type: 'Gọi điện', content: 'Khách hỏi giá', result: 'Hẹn xem', next: '2026-10-20' });
   ctx.crmAddLog(KK, lead.phone, { type: 'Loại lạ', content: '=SUM(1)' });
   const lg = ctx.crmLogs(KK, lead.phone);
-  assert.equal(lg.logs.length, 2); assert.equal(lg.logs[1].type, 'Gọi điện'); assert.equal(lg.logs[1].next, '2026-10-20');
-  assert.equal(lg.logs[0].type, 'Ghi chú'); assert.equal(lg.logs[0].content, "'=SUM(1)");
+  const man = lg.logs.filter((x) => !/^Đổi trạng thái/.test(x.content));
+  assert.equal(man.length, 2); assert.equal(man[1].type, 'Gọi điện'); assert.equal(man[1].next, '2026-10-20');
+  assert.equal(man[0].type, 'Ghi chú'); assert.equal(man[0].content, "'=SUM(1)");
   assert.ok(lg.moves.length >= 2); assert.equal(lg.moves[0].to, 'Lan Anh'); assert.equal(lg.moves[0].from, 'Minh'); assert.equal(lg.moves[1].to, 'Minh');
   assert.equal(ctx.crmLoad(KK).leads.find((x) => x.phone === lead.phone).next, '2026-10-20');
   assert.throws(() => ctx.crmAddLog('sai', lead.phone, { content: 'x' }), /Không có quyền/);
+}
+// trạng thái mới + lý do, hồ sơ cá nhân/tài chính mở rộng, tóm tắt từ lịch sử, xem dự án
+{
+  const KK = ctx.crmKey_();
+  const lead = ctx.crmLoad(KK).leads[0];
+  assert.throws(() => ctx.crmUpdateLead(KK, lead.phone, { status: 'Không có' }), /Trạng thái không hợp lệ/);
+  ctx.crmUpdateLead(KK, lead.phone, { status: 'Tạm dừng', statusReason: 'Khách đi nước ngoài', province: 'Hà Nội', phone2: '0911000111', zalo: 'Đã kết nối', dob: '1985-03-15', job: 'Kinh doanh', bmin: '2 tỷ', bmax: '3 tỷ', equity: '1 tỷ', loanAmt: '1,5 tỷ', buyTime: 'Quý 1/2027', undecided: 'Chờ bán nhà cũ' });
+  let L = ctx.crmLoad(KK).leads.find((x) => x.phone === lead.phone);
+  assert.equal(L.status, 'Tạm dừng'); assert.equal(L.province, 'Hà Nội'); assert.equal(L.dob, '1985-03-15'); assert.equal(L.budget, '2 tỷ – 3 tỷ'); assert.equal(L.bmin, '2 tỷ'); assert.equal(L.equity, '1 tỷ'); assert.equal(L.undecided, 'Chờ bán nhà cũ');
+  assert.ok(ctx.crmLogs(KK, lead.phone).logs.some((x) => /Tạm dừng.*Khách đi nước ngoài/.test(x.content)));
+  const c0 = L.careCount;
+  ctx.crmAddLog(KK, lead.phone, { type: 'Nhắn Zalo', content: 'Gửi bảng giá', result: 'Đang cân nhắc', reply: 'Để xem lại', obstacle: 'Giá cao', docs: 'Bảng giá', nextAction: 'Gọi lại thứ 6' });
+  L = ctx.crmLoad(KK).leads.find((x) => x.phone === lead.phone);
+  assert.equal(L.careCount, c0 + 1); assert.equal(L.careResult, 'Đang cân nhắc'); assert.ok(L.careAt);
+  assert.equal(L.viewCount, 0);
+  assert.throws(() => ctx.crmAddView(KK, lead.phone, { project: '', at: '2026-10-10' }), /Chưa nhập tên dự án/);
+  ctx.crmAddView(KK, lead.phone, { project: 'FourS Tower', at: '2026-10-10', form: 'Trực tiếp', interest: 'Cao', feedback: 'Thích view', obstacle: 'Giá', next: '2026-10-12' });
+  ctx.crmAddView(KK, lead.phone, { project: 'Casamia Balanca', at: '2026-10-14', form: 'Tham dự sự kiện', interest: 'Trung bình' });
+  L = ctx.crmLoad(KK).leads.find((x) => x.phone === lead.phone);
+  assert.equal(L.viewCount, 2); assert.equal(L.viewProject, 'Casamia Balanca'); assert.equal(L.viewAt, '2026-10-14');
+  const lv = ctx.crmLogs(KK, lead.phone).views; assert.equal(lv.length, 2); assert.equal(lv[1].project, 'FourS Tower'); assert.equal(lv[1].interest, 'Cao');
+  // tạo thủ công: trùng thì không tạo, không tự gộp
+  const dup = ctx.crmCreateLead(KK, { name: 'Khác tên', phone: lead.phone.replace(/^0/, '+84') });
+  assert.equal(dup.dup, true); assert.equal(dup.lead.phone, lead.phone);
+  assert.equal(ctx.crmLoad(KK).leads.find((x) => x.phone === lead.phone).name === 'Khác tên', false);
+  const n0 = ctx.crmLoad(KK).leads.length;
+  const nw = ctx.crmCreateLead(KK, { name: 'Khách mới', phone: '0977 123 456', province: 'Đà Nẵng', site: 'Tại sự kiện', source: 'sự kiện', bmax: '5 tỷ', status: 'Đang tư vấn' });
+  assert.equal(nw.added, true);
+  const L2 = ctx.crmLoad(KK).leads.find((x) => x.phone === '0977123456');
+  assert.equal(L2.province, 'Đà Nẵng'); assert.equal(L2.status, 'Đang tư vấn'); assert.equal(L2.srcType, 'Nhập thủ công'); assert.equal(L2.source, 'sự kiện'); assert.equal(ctx.crmLoad(KK).leads.length, n0 + 1);
+  assert.throws(() => ctx.crmCreateLead(KK, { name: 'x', phone: '123' }), /Số điện thoại không hợp lệ/);
+  // nhập danh sách: dòng hợp lệ, trùng, lỗi
+  const imp = ctx.crmImport(KK, [{ name: 'A', phone: '0966 000 111', province: 'Hải Phòng' }, { name: 'Trùng', phone: lead.phone }, { name: 'Lỗi', phone: 'abc' }, { name: 'B', phone: '0966000222' }]);
+  assert.equal(imp.added, 2); assert.equal(imp.dups.length, 1); assert.equal(imp.dups[0].line, 2); assert.equal(imp.errors.length, 1); assert.equal(imp.errors[0].line, 3);
+  assert.equal(ctx.crmLoad(KK).leads.length, n0 + 3);
+  assert.throws(() => ctx.crmImport('sai', []), /Không có quyền/);
 }
 // quân sư AI: cần đúng khoá truy cập, thiếu khoá API thì báo rõ, có khoá thì gọi API
 assert.throws(() => ctx.crmAsk('sai-khoa', 'xin chào'), /Không có quyền/);
@@ -166,4 +204,10 @@ assert.equal(ctx.crmAsk(ctx.crmKey_(), 'Soạn tin cho khách', ''), 'Trả lờ
 assert.equal(globalThis.__fetch.u, 'https://api.anthropic.com/v1/messages');
 assert.equal(JSON.parse(globalThis.__fetch.o.payload).messages[0].content, 'Soạn tin cho khách');
 assert.throws(() => ctx.crmAsk(ctx.crmKey_(), '  '), /Chưa nhập câu hỏi/);
+{
+  const ph = ctx.crmLoad(ctx.crmKey_()).leads.find((x) => x.province === 'Hà Nội').phone;
+  ctx.crmAsk(ctx.crmKey_(), 'Phân tích khách', ph);
+  const sys = JSON.parse(globalThis.__fetch.o.payload).system;
+  assert.ok(sys.includes('FourS Tower') && sys.includes('Giá cao') && sys.includes('Hà Nội') && sys.includes('2 tỷ'), 'AI nhận hồ sơ, lịch sử chăm sóc, lịch sử xem dự án');
+}
 console.log('OK – Code.gs đạt mọi test');

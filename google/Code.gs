@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-12', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-13', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -53,7 +53,8 @@ function iso_(d) { return d && typeof d.getTime === 'function' ? new Date(d.getT
 function phoneStr_(v) { var p = String(v == null ? '' : v); return p.length === 9 ? '0' + p : p; }
 
 // ---- Cột mở rộng của tab Khách hàng (W..AB): hẹn tiếp theo, ngân sách, mục đích, loại căn, tiềm năng, vay ----
-var LEAD_COLS = 28;
+var LEAD_COLS = 41;
+var LEAD_HEAD2 = ['SĐT phụ', 'Zalo', 'Tỉnh/thành phố', 'Ngày sinh', 'Nghề nghiệp', 'Ngân sách tối thiểu', 'Ngân sách tối đa', 'Vốn tự có', 'Khoản vay dự kiến', 'Thời điểm dự kiến mua', 'Lý do chưa quyết định', 'Loại nguồn', 'Trang phát sinh lead'];
 function ensureLeadCols_(sh) {
   try {
     var mc = sh.getMaxColumns();
@@ -61,6 +62,10 @@ function ensureLeadCols_(sh) {
     if (!sh.getRange(1, 23).getValue()) {
       sh.getRange(1, 23, 1, 6).setValues([['Hẹn tiếp theo', 'Ngân sách', 'Mục đích mua', 'Loại căn quan tâm', 'Tiềm năng (tự đánh giá)', 'Vay ngân hàng']]);
       sh.getRange(2, 23, Math.max(sh.getMaxRows() - 1, 1), 1).setNumberFormat('@');
+    }
+    if (!sh.getRange(1, 29).getValue()) {
+      sh.getRange(1, 29, 1, LEAD_HEAD2.length).setValues([LEAD_HEAD2]);
+      sh.getRange(2, 29, Math.max(sh.getMaxRows() - 1, 1), 13).setNumberFormat('@');
     }
   } catch (e) {}
 }
@@ -77,13 +82,45 @@ function ymd_(v) {
   var s = String(v == null ? '' : v).trim();
   return /^\d{4}-\d{2}-\d{2}/.test(s) ? s.slice(0, 10) : '';
 }
-// Lấy hoặc tạo tab phụ (Nhật ký, Chuyển giao...) với dòng tiêu đề
+// Lấy hoặc tạo tab phụ (Nhật ký, Chuyển giao, Xem dự án...) với dòng tiêu đề; tab cũ thiếu cột thì bổ sung.
 function tab_(name, header) {
   var ss = ss_(), sh = ss.getSheetByName(name);
-  if (!sh) { sh = ss.insertSheet(name); sh.getRange(1, 1, 1, header.length).setValues([header]); }
+  if (!sh) { sh = ss.insertSheet(name); sh.getRange(1, 1, 1, header.length).setValues([header]); return sh; }
+  try {
+    var mc = sh.getMaxColumns();
+    if (mc < header.length) sh.insertColumnsAfter(mc, header.length - mc);
+    for (var i = 0; i < header.length; i++) if (!sh.getRange(1, i + 1).getValue()) sh.getRange(1, i + 1).setValue(header[i]);
+  } catch (e) {}
   return sh;
 }
 var LOG_TYPES = ['Gọi điện', 'Nhắn Zalo', 'Gặp mặt', 'Gửi tài liệu', 'Ghi chú', 'Khác'];
+var LOG_HEAD = ['Thời gian', 'SĐT', 'Tên khách', 'Người thực hiện', 'Loại', 'Nội dung', 'Kết quả', 'Hẹn tiếp theo', 'Phản hồi của khách', 'Vướng mắc', 'Tài liệu đã gửi', 'Hành động tiếp theo'];
+var VIEW_HEAD = ['Ngày xem', 'SĐT', 'Tên khách', 'Dự án', 'Hình thức', 'Sản phẩm quan tâm', 'Người đi cùng', 'Nhận xét sau khi xem', 'Mức quan tâm', 'Ưu điểm', 'Vướng mắc / lý do chưa quyết định', 'Bước tiếp theo', 'Lịch chăm sóc sau xem', 'Người ghi'];
+var VIEW_FORMS = ['Trực tiếp', 'Tham dự sự kiện', 'Trực tuyến'];
+var MOVE_HEAD = ['Thời gian', 'SĐT', 'Tên khách', 'Từ sale', 'Sang sale', 'Trạng thái lúc chuyển', 'Lý do'];
+// Tóm tắt từ lịch sử thật: số lần chăm sóc, lần gần nhất, kết quả gần nhất, dự án đã xem
+function summaries_() {
+  var out = { care: {}, view: {} }, ss = ss_();
+  var rd = function (name, cols, fn) {
+    var sh = ss.getSheetByName(name);
+    if (!sh) return;
+    var n = sh.getLastRow();
+    if (n < 2) return;
+    var from = Math.max(2, n - 2999);
+    try { sh.getRange(from, 1, n - from + 1, cols).getValues().forEach(fn); } catch (e) {}
+  };
+  rd('Nhật ký', 7, function (r) {
+    var p = normPhone_(phoneStr_(String(r[1]).replace(/^'/, ''))); if (!p) return;
+    var c = out.care[p] || (out.care[p] = { n: 0, at: '', result: '' }), at = iso_(r[0]);
+    c.n++; if (at >= c.at) { c.at = at; c.result = String(r[6] || ''); }
+  });
+  rd('Xem dự án', 4, function (r) {
+    var p = normPhone_(phoneStr_(String(r[1]).replace(/^'/, ''))); if (!p) return;
+    var v = out.view[p] || (out.view[p] = { n: 0, at: '', project: '' }), at = ymd_(r[0]);
+    v.n++; if (at >= v.at) { v.at = at; v.project = String(r[3] || ''); }
+  });
+  return out;
+}
 
 // ---- API cho giao diện (google.script.run) ----
 function crmLoad(k) {
@@ -97,8 +134,16 @@ function crmLoad(k) {
       source: String(r[6] || ''), campaign: String(r[7] || ''), vid: String(r[8] || ''), submits: Number(r[9]) || 1,
       zaloClicks: Number(r[10]) || 0, phoneClicks: Number(r[11]) || 0, called: r[14] === true, messaged: r[15] === true,
       contactedAt: iso_(r[16]), status: String(r[18] || 'Mới'), assignee: String(r[19] || ''), value: Number(r[20]) || 0, note: String(r[21] || ''),
-      next: ymd_(r[22]), budget: String(r[23] || ''), purpose: String(r[24] || ''), product: String(r[25] || ''), heat: String(r[26] || ''), loan: String(r[27] || '') };
+      next: ymd_(r[22]), budget: String(r[23] || ''), purpose: String(r[24] || ''), product: String(r[25] || ''), heat: String(r[26] || ''), loan: String(r[27] || ''),
+      phone2: String(r[28] || ''), zalo: String(r[29] || ''), province: String(r[30] || ''), dob: ymd_(r[31]), job: String(r[32] || ''), bmin: String(r[33] || ''), bmax: String(r[34] || ''),
+      equity: String(r[35] || ''), loanAmt: String(r[36] || ''), buyTime: String(r[37] || ''), undecided: String(r[38] || ''), srcType: String(r[39] || ''), leadUrl: String(r[40] || '') };
   }).reverse();
+  var sm = summaries_();
+  out.leads.forEach(function (l) {
+    var p = normPhone_(l.phone), c = sm.care[p], v = sm.view[p];
+    l.careCount = c ? c.n : 0; l.careAt = c ? c.at : ''; l.careResult = c ? c.result : '';
+    l.viewCount = v ? v.n : 0; l.viewAt = v ? v.at : ''; l.viewProject = v ? v.project : '';
+  });
   var cs = ss.getSheetByName(S_CLICKS), cn = cs ? lastDataRow_(cs, 1) : 1, start = Math.max(2, cn - 1499);
   if (cs) ensureClickCols_(cs);
   var crow = cn > 1 ? cs.getRange(start, 1, cn - start + 1, 12).getValues() : [];
@@ -143,11 +188,38 @@ function crmAddSale(k, name) {
 // ---- Quân sư AI: hỏi Claude về cách chăm khách. Khoá API lưu trong Script Properties (menu CRM > Cài khoá quân sư).
 var ASK_MODEL = 'claude-sonnet-5-5';
 function leadContext_(phone) {
-  var f = findLead_(phone), r = f.sh.getRange(f.row, 1, 1, 22).getValues()[0];
-  return 'Khách: ' + (r[2] || '(chưa có tên)') + ', SĐT ' + phoneStr_(r[3]) + '. Dự án / website: ' + r[5] + '. Nguồn: ' + (r[6] || 'không rõ') +
-    ', chiến dịch: ' + (r[7] || 'không rõ') + '. Gửi form ' + (Number(r[9]) || 1) + ' lần, bấm Zalo ' + (Number(r[10]) || 0) + ' lần, bấm Gọi ' + (Number(r[11]) || 0) +
-    ' lần. Đã gọi: ' + (r[14] === true ? 'rồi' : 'chưa') + ', đã nhắn: ' + (r[15] === true ? 'rồi' : 'chưa') + '. Trạng thái: ' + (r[18] || 'Mới') +
-    '. Sale phụ trách: ' + (r[19] || 'chưa giao') + '. Ghi chú: ' + (r[21] || 'không có') + '.';
+  var f = findLead_(phone), sh = f.sh;
+  ensureLeadCols_(sh);
+  var r = sh.getRange(f.row, 1, 1, LEAD_COLS).getValues()[0], g = function (i) { return String(r[i] || '').trim(); };
+  var lines = ['Khách: ' + (g(2) || '(chưa có tên)') + ', SĐT ' + phoneStr_(r[3]) + (g(28) ? ', SĐT phụ ' + g(28) : '') + (g(30) ? ', ' + g(30) : '') + '. Dự án / website phát sinh: ' + g(5) +
+    '. Nguồn: ' + (g(6) || 'không rõ') + ', chiến dịch: ' + (g(7) || 'không rõ') + (g(40) ? ', trang: ' + g(40) : '') + '.',
+    'Tương tác trên web: gửi form ' + (Number(r[9]) || 1) + ' lần, bấm Zalo ' + (Number(r[10]) || 0) + ' lần, bấm Gọi ' + (Number(r[11]) || 0) + ' lần. Đã gọi: ' + (r[14] === true ? 'rồi' : 'chưa') + ', đã nhắn: ' + (r[15] === true ? 'rồi' : 'chưa') + '.',
+    'Trạng thái: ' + (g(18) || 'Mới') + '. Sale phụ trách: ' + (g(19) || 'chưa giao') + '. Hẹn tiếp theo: ' + (ymd_(r[22]) || 'chưa có') + '. Tự đánh giá tiềm năng: ' + (g(26) || 'chưa'),
+    'Nhu cầu: mục đích ' + (g(24) || 'chưa rõ') + ', loại căn ' + (g(25) || 'chưa rõ') + ', ngân sách ' + (g(33) || '?') + ' đến ' + (g(34) || '?') + ', vốn tự có ' + (g(35) || 'chưa rõ') +
+    ', vay ngân hàng ' + (g(27) || 'chưa hỏi') + (g(36) ? ' (' + g(36) + ')' : '') + ', thời điểm dự kiến mua ' + (g(37) || 'chưa rõ') + '. Lý do chưa quyết định: ' + (g(38) || 'chưa rõ') + '.',
+    'Địa phương: ' + (g(30) || 'chưa rõ') + ', nghề nghiệp: ' + (g(32) || 'chưa rõ') + '. Ghi chú chung: ' + (g(21) || 'không có') + '.'];
+  var h = crmHistory_(phone);
+  if (h.logs.length) lines.push('Lịch sử chăm sóc (mới nhất trước): ' + h.logs.slice(0, 8).map(function (x) { return ymd_(new Date(x.at)) + ' ' + x.type + ': ' + x.content + (x.result ? ' (kết quả: ' + x.result + ')' : '') + (x.reply ? ' khách phản hồi: ' + x.reply : '') + (x.obstacle ? ' vướng mắc: ' + x.obstacle : ''); }).join(' | '));
+  else lines.push('Chưa có lịch sử chăm sóc nào được ghi.');
+  if (h.views.length) lines.push('Đã xem dự án: ' + h.views.slice(0, 5).map(function (x) { return x.at + ' ' + x.project + ' (quan tâm: ' + (x.interest || '?') + '; nhận xét: ' + (x.feedback || 'không') + '; vướng mắc: ' + (x.obstacle || 'không') + ')'; }).join(' | '));
+  else lines.push('Chưa ghi nhận lần xem dự án nào.');
+  return lines.join('\n');
+}
+// Dữ liệu lịch sử dùng chung (không kiểm tra khoá): cho AI và cho giao diện
+function crmHistory_(phone) {
+  var want = normPhone_(phone), out = { logs: [], views: [] };
+  var rd = function (name, cols, map) {
+    var sh = ss_().getSheetByName(name), res = [];
+    if (!sh) return res;
+    var n = sh.getLastRow();
+    if (n < 2) return res;
+    var rows = sh.getRange(2, 1, n - 1, cols).getValues();
+    for (var i = rows.length - 1; i >= 0 && res.length < 50; i--) if (normPhone_(phoneStr_(String(rows[i][1]).replace(/^'/, ''))) === want) res.push(map(rows[i]));
+    return res;
+  };
+  out.logs = rd('Nhật ký', 12, function (r) { return { at: iso_(r[0]), type: String(r[4]), content: String(r[5]), result: String(r[6]), reply: String(r[8] || ''), obstacle: String(r[9] || '') }; });
+  out.views = rd('Xem dự án', 14, function (r) { return { at: ymd_(r[0]), project: String(r[3]), interest: String(r[8]), feedback: String(r[7]), obstacle: String(r[10]) }; });
+  return out;
 }
 function crmAsk(k, question, phone) {
   requireUi_(k);
@@ -209,32 +281,50 @@ function crmLog(k, phone, type) {
   });
 }
 
-var STATUSES = ['Mới', 'Đã liên hệ', 'Quan tâm', 'Hẹn xem', 'Chốt', 'Mất'];
+var STATUSES = ['Mới', 'Đã liên hệ', 'Đang tư vấn', 'Đang cân nhắc', 'Quan tâm', 'Hẹn xem', 'Đã xem dự án', 'Đang thương lượng', 'Booking', 'Chốt', 'Mất', 'Tạm dừng'];
+// Ghi các trường hồ sơ vào dòng khách (dùng chung cho sửa, tạo thủ công và nhập danh sách). Gọi trong withLock_.
+function applyFields_(sh, r, f) {
+  ensureLeadCols_(sh);
+  var set = function (col, v) { sh.getRange(r, col).setValue(v); };
+  if (f.name !== undefined) set(3, str_(f.name, 120));
+  if (f.email !== undefined) set(5, str_(f.email, 160));
+  if (f.status !== undefined) {
+    var oldS = String(sh.getRange(r, 19).getValue() || '');
+    if (oldS !== f.status) {
+      tab_('Nhật ký', LOG_HEAD).appendRow([new Date(), "'" + phoneStr_(sh.getRange(r, 4).getValue()), str_(sh.getRange(r, 3).getValue(), 120), String(sh.getRange(r, 20).getValue() || ''), 'Ghi chú',
+        'Đổi trạng thái: ' + (oldS || 'chưa có') + ' → ' + f.status + (f.statusReason ? '. Lý do: ' + str_(f.statusReason, 300) : ''), '', '', '', '', '', '']);
+    }
+    set(19, f.status);
+  }
+  if (f.assignee !== undefined) {
+    var oldA = String(sh.getRange(r, 20).getValue() || ''), newA = str_(f.assignee, 80);
+    if (oldA !== newA) {
+      tab_('Chuyển giao', MOVE_HEAD).appendRow([new Date(), "'" + phoneStr_(sh.getRange(r, 4).getValue()), str_(sh.getRange(r, 3).getValue(), 120), oldA, newA, String(sh.getRange(r, 19).getValue() || ''), str_(f.reason, 200)]);
+    }
+    set(20, newA);
+  }
+  if (f.value !== undefined) set(21, Math.max(0, Number(f.value) || 0));
+  if (f.note !== undefined) set(22, str_(f.note, 2000));
+  if (f.next !== undefined) set(23, f.next === '' ? '' : (ymd_(f.next) || ''));
+  if (f.bmin !== undefined || f.bmax !== undefined) {
+    var lo = f.bmin !== undefined ? str_(f.bmin, 40) : String(sh.getRange(r, 34).getValue() || ''), hi = f.bmax !== undefined ? str_(f.bmax, 40) : String(sh.getRange(r, 35).getValue() || '');
+    set(34, lo); set(35, hi);
+    set(24, lo && hi ? lo + ' – ' + hi : (lo || hi));
+  } else if (f.budget !== undefined) set(24, str_(f.budget, 80));
+  if (f.purpose !== undefined) set(25, str_(f.purpose, 40));
+  if (f.product !== undefined) set(26, str_(f.product, 120));
+  if (f.heat !== undefined) set(27, ['', 'Nóng', 'Ấm', 'Lạnh'].indexOf(f.heat) >= 0 ? f.heat : '');
+  if (f.loan !== undefined) set(28, ['', 'Có', 'Không', 'Chưa rõ'].indexOf(f.loan) >= 0 ? f.loan : '');
+  var txt = { phone2: [29, 20], zalo: [30, 200], province: [31, 60], dob: [32, 10], job: [33, 80], equity: [36, 60], loanAmt: [37, 60], buyTime: [38, 80], undecided: [39, 500], srcType: [40, 40] };
+  for (var k in txt) if (f[k] !== undefined) set(txt[k][0], k === 'dob' ? (ymd_(f[k]) || '') : str_(f[k], txt[k][1]));
+}
 function crmUpdateLead(k, phone, f) {
   requireUi_(k);
   f = f || {};
   if (f.status !== undefined && STATUSES.indexOf(f.status) < 0) throw new Error('Trạng thái không hợp lệ');
   return withLock_(function () {
-    var x = findLead_(phone), sh = x.sh, r = x.row;
-    if (f.name !== undefined) sh.getRange(r, 3).setValue(str_(f.name, 120));
-    if (f.status !== undefined) sh.getRange(r, 19).setValue(f.status);
-    if (f.assignee !== undefined) {
-      var oldA = String(sh.getRange(r, 20).getValue() || ''), newA = str_(f.assignee, 80);
-      if (oldA !== newA) {
-        tab_('Chuyển giao', ['Thời gian', 'SĐT', 'Tên khách', 'Từ sale', 'Sang sale', 'Trạng thái lúc chuyển', 'Lý do']).appendRow(
-          [new Date(), "'" + phoneStr_(sh.getRange(r, 4).getValue()), str_(sh.getRange(r, 3).getValue(), 120), oldA, newA, String(sh.getRange(r, 19).getValue() || ''), str_(f.reason, 200)]);
-      }
-      sh.getRange(r, 20).setValue(newA);
-    }
-    if (f.value !== undefined) sh.getRange(r, 21).setValue(Math.max(0, Number(f.value) || 0));
-    if (f.note !== undefined) sh.getRange(r, 22).setValue(str_(f.note, 2000));
-    ensureLeadCols_(sh);
-    if (f.next !== undefined) sh.getRange(r, 23).setValue(f.next === '' ? '' : (ymd_(f.next) || ''));
-    if (f.budget !== undefined) sh.getRange(r, 24).setValue(str_(f.budget, 80));
-    if (f.purpose !== undefined) sh.getRange(r, 25).setValue(str_(f.purpose, 40));
-    if (f.product !== undefined) sh.getRange(r, 26).setValue(str_(f.product, 120));
-    if (f.heat !== undefined) sh.getRange(r, 27).setValue(['', 'Nóng', 'Ấm', 'Lạnh'].indexOf(f.heat) >= 0 ? f.heat : '');
-    if (f.loan !== undefined) sh.getRange(r, 28).setValue(['', 'Có', 'Không', 'Chưa rõ'].indexOf(f.loan) >= 0 ? f.loan : '');
+    var x = findLead_(phone);
+    applyFields_(x.sh, x.row, f);
     return { ok: true };
   });
 }
@@ -250,28 +340,101 @@ function crmAddLog(k, phone, f) {
     var x = findLead_(phone), sh = x.sh, r = x.row;
     ensureLeadCols_(sh);
     var by = String(sh.getRange(r, 20).getValue() || '');
-    tab_('Nhật ký', ['Thời gian', 'SĐT', 'Tên khách', 'Người phụ trách', 'Loại', 'Nội dung', 'Kết quả', 'Hẹn tiếp theo']).appendRow(
-      [new Date(), "'" + phoneStr_(sh.getRange(r, 4).getValue()), str_(sh.getRange(r, 3).getValue(), 120), by, type, content, str_(f.result, 300), ymd_(f.next)]);
+    tab_('Nhật ký', LOG_HEAD).appendRow(
+      [new Date(), "'" + phoneStr_(sh.getRange(r, 4).getValue()), str_(sh.getRange(r, 3).getValue(), 120), by, type, content, str_(f.result, 300), ymd_(f.next),
+        str_(f.reply, 600), str_(f.obstacle, 600), str_(f.docs, 300), str_(f.nextAction, 300)]);
     if (f.next !== undefined) sh.getRange(r, 23).setValue(ymd_(f.next) || '');
+    return { ok: true };
+  });
+}
+
+// Lịch sử xem dự án: một khách có thể xem nhiều dự án, nhiều lần.
+function crmAddView(k, phone, f) {
+  requireUi_(k);
+  f = f || {};
+  var project = str_(f.project, 120);
+  if (!project) throw new Error('Chưa nhập tên dự án');
+  var day = ymd_(f.at);
+  if (!day) throw new Error('Chưa chọn ngày xem');
+  return withLock_(function () {
+    var x = findLead_(phone), sh = x.sh, r = x.row;
+    ensureLeadCols_(sh);
+    tab_('Xem dự án', VIEW_HEAD).appendRow([day, "'" + phoneStr_(sh.getRange(r, 4).getValue()), str_(sh.getRange(r, 3).getValue(), 120), project,
+      VIEW_FORMS.indexOf(f.form) >= 0 ? f.form : 'Trực tiếp', str_(f.product, 150), str_(f.companions, 150), str_(f.feedback, 800),
+      ['Cao', 'Trung bình', 'Thấp'].indexOf(f.interest) >= 0 ? f.interest : '', str_(f.pros, 400), str_(f.obstacle, 500), str_(f.nextStep, 300), ymd_(f.next), String(sh.getRange(r, 20).getValue() || '')]);
+    if (f.next) sh.getRange(r, 23).setValue(ymd_(f.next) || '');
     return { ok: true };
   });
 }
 
 function crmLogs(k, phone) {
   requireUi_(k);
-  var want = normPhone_(phone), out = { logs: [], moves: [] };
+  var want = normPhone_(phone), out = { logs: [], moves: [], views: [] };
   var read = function (name, cols, map) {
     var sh = ss_().getSheetByName(name);
     if (!sh) return [];
     var n = sh.getLastRow();
     if (n < 2) return [];
     var rows = sh.getRange(2, 1, n - 1, cols).getValues(), res = [];
-    for (var i = rows.length - 1; i >= 0 && res.length < 100; i--) if (normPhone_(phoneStr_(String(rows[i][1]).replace(/^'/, ''))) === want) res.push(map(rows[i]));
+    for (var i = rows.length - 1; i >= 0 && res.length < 200; i--) if (normPhone_(phoneStr_(String(rows[i][1]).replace(/^'/, ''))) === want) res.push(map(rows[i]));
     return res;
   };
-  out.logs = read('Nhật ký', 8, function (r) { return { at: iso_(r[0]), by: String(r[3]), type: String(r[4]), content: String(r[5]), result: String(r[6]), next: ymd_(r[7]) }; });
+  out.logs = read('Nhật ký', 12, function (r) { return { at: iso_(r[0]), by: String(r[3]), type: String(r[4]), content: String(r[5]), result: String(r[6]), next: ymd_(r[7]), reply: String(r[8] || ''), obstacle: String(r[9] || ''), docs: String(r[10] || ''), nextAction: String(r[11] || '') }; });
   out.moves = read('Chuyển giao', 7, function (r) { return { at: iso_(r[0]), from: String(r[3]), to: String(r[4]), status: String(r[5]), reason: String(r[6]) }; });
+  out.views = read('Xem dự án', 14, function (r) { return { at: ymd_(r[0]), project: String(r[3]), form: String(r[4]), product: String(r[5]), companions: String(r[6]), feedback: String(r[7]), interest: String(r[8]), pros: String(r[9]), obstacle: String(r[10]), nextStep: String(r[11]), next: ymd_(r[12]), by: String(r[13]) }; });
   return out;
+}
+
+// Tạo khách thủ công. Nếu SĐT đã có: không tạo, không tự gộp. Trả về hồ sơ cũ để bạn xác nhận (mergeBlank = chỉ điền ô còn trống).
+function createLead_(f) {
+  var phone = normPhone_(f.phone);
+  if (!phone) throw new Error('Số điện thoại không hợp lệ');
+  var exist = null;
+  try { exist = findLead_(phone); } catch (e) {}
+  if (exist) {
+    var rr = exist.sh.getRange(exist.row, 1, 1, 22).getValues()[0];
+    var info = { name: String(rr[2] || ''), phone: phoneStr_(rr[3]), site: String(rr[5] || ''), status: String(rr[18] || 'Mới'), assignee: String(rr[19] || '') };
+    if (f.mergeBlank === true) {
+      withLock_(function () {
+        var sh = exist.sh, r = exist.row, blank = {};
+        ensureLeadCols_(sh);
+        var cols = { name: 3, email: 5, province: 31, job: 33, phone2: 29, zalo: 30, dob: 32, bmin: 34, bmax: 35, equity: 36, loanAmt: 37, buyTime: 38, product: 26, purpose: 25, loan: 28 };
+        for (var key in cols) if (f[key] && !sh.getRange(r, cols[key]).getValue()) blank[key] = f[key];
+        applyFields_(sh, r, blank);
+      });
+      return { merged: true, lead: info };
+    }
+    return { dup: true, lead: info };
+  }
+  var site = { key: '', name: str_(f.site, 80) || 'Nhập thủ công' };
+  var b = { phone: f.phone, name: f.name, email: f.email, message: f.note, utm_source: str_(f.source, 100) || 'nhập thủ công', utm_campaign: str_(f.campaign, 150), vid: 'manual-' + Utilities.getUuid().slice(0, 8), url: str_(f.url, 300) };
+  handleLead_(b, site);
+  withLock_(function () {
+    var x = findLead_(phone), rest = {};
+    for (var key in f) if (['phone', 'name', 'email', 'note', 'site', 'source', 'campaign', 'url', 'mergeBlank'].indexOf(key) < 0) rest[key] = f[key];
+    if (f.status !== undefined && STATUSES.indexOf(f.status) < 0) delete rest.status;
+    applyFields_(x.sh, x.row, rest);
+  });
+  return { added: true, phone: phone };
+}
+function crmCreateLead(k, f) {
+  requireUi_(k);
+  return createLead_(f || {});
+}
+// Nhập danh sách dán từ Excel: mỗi dòng {name, phone, province, site, budget, source, note}. Trả báo cáo dòng lỗi và dòng trùng.
+function crmImport(k, rows) {
+  requireUi_(k);
+  rows = rows || [];
+  if (rows.length > 200) throw new Error('Tối đa 200 dòng mỗi lần nhập');
+  var rep = { added: 0, dups: [], errors: [] };
+  rows.forEach(function (r, i) {
+    var line = i + 1;
+    try {
+      var res = createLead_({ name: r.name, phone: r.phone, province: r.province, site: r.site, bmax: r.budget, source: r.source || 'nhập Excel', note: r.note });
+      if (res.dup) rep.dups.push({ line: line, phone: res.lead.phone, name: res.lead.name }); else rep.added++;
+    } catch (e) { rep.errors.push({ line: line, reason: String(e.message || e), phone: String(r.phone || '') }); }
+  });
+  return rep;
 }
 
 function crmClickDone(k, row, vid, done, note) {
@@ -428,6 +591,9 @@ function handleLead_(b, site) {
         '=IF(AND($O' + r + '<>TRUE,$P' + r + '<>TRUE),"CHƯA LIÊN HỆ","")',
         STATUS_NEW, '', '', str_(b.message, 1000)
       ]]);
+      ensureLeadCols_(sh);
+      sh.getRange(r, 40).setValue(String(b.vid || '').indexOf('manual-') === 0 ? 'Nhập thủ công' : 'Website');
+      sh.getRange(r, 41).setValue(str_(b.url, 300));
     } else {
       var c = sh.getRange(row, 10);
       c.setValue((Number(c.getValue()) || 1) + 1);
