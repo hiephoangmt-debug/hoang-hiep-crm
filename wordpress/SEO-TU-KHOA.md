@@ -148,6 +148,7 @@ Bấm **Dự án → Nhập dữ liệu Đà Nẵng** để ghi vào Rank Math (
 | shop khối đế Đà Nẵng | /shop-khoi-de-da-nang-co-nen-dau-tu/ |  |
 | biệt thự ven biển Đà Nẵng | /biet-thu-ven-bien-da-nang-hoi-an-bang-gia/ |  |
 | giá đất ven biển Đà Nẵng | /gia-dat-ven-bien-da-nang-vo-nguyen-giap-hoang-sa/ | phụ: giá đất mặt tiền biển Đà Nẵng, giá đất Võ Nguyên Giáp, giá đất Hoàng Sa, giá đất Nguyễn Tất Thành, giá đất Trường Sa |
+| tin quy hoạch Đà Nẵng | /tin-quy-hoach-xay-dung-da-nang-6-12-10-2026/ | phụ: Hoàng Văn Thái Plaza, khu công nghiệp WHA Đà Nẵng, quy hoạch đô thị Thăng Bình, nhà ở xã hội Hòa Khánh |
 | bán khách sạn Đà Nẵng | /ban-khach-san-da-nang-ven-bien-gia-cong-suat/ |  |
 | bất động sản Sơn Trà | /bat-dong-san-son-tra-2026/ |  |
 | bất động sản Hải Châu | /bat-dong-san-hai-chau-2026/ |  |
