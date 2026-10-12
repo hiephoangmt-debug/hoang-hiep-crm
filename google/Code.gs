@@ -355,3 +355,22 @@ function resetCrmLink() {
   PropertiesService.getScriptProperties().deleteProperty('CRM_KEY');
   showCrmLink();
 }
+
+// Chạy hàm này trong Apps Script (chọn kiemTraCRM > Chạy): in link CRM và kiểm tra giao diện có chạy được không.
+function kiemTraCRM() {
+  var link = crmLinkText_(), key = crmKey_();
+  Logger.log('LINK CRM: ' + link);
+  try {
+    var d = crmLoad(key);
+    Logger.log('Đọc dữ liệu OK: ' + d.leads.length + ' khách, ' + d.clicks.length + ' lượt bấm, ' + d.sites.length + ' website.');
+  } catch (e) {
+    Logger.log('LỖI khi đọc dữ liệu: ' + e.message);
+  }
+  var hasHtml = true;
+  try { HtmlService.createHtmlOutputFromFile('Crm'); } catch (e) { hasHtml = false; Logger.log('THIẾU file giao diện tên Crm: ' + e.message); }
+  if (hasHtml) Logger.log('File giao diện Crm: có.');
+  var url = '';
+  try { url = ScriptApp.getService().getUrl(); } catch (e) {}
+  Logger.log(url ? 'Chưa triển khai? URL ứng dụng web: ' + url : 'CHƯA có bản triển khai ứng dụng web (Triển khai > Tùy chọn triển khai mới > Ứng dụng web).');
+  return link;
+}

@@ -42,6 +42,7 @@ const ctx = vm.createContext({
   Session: { getActiveUser: () => ({ getEmail: () => globalThis.__active ?? '' }), getEffectiveUser: () => ({ getEmail: () => globalThis.__eff ?? 'owner@gmail.com' }) },
   HtmlService: { createHtmlOutputFromFile: (n) => ({ file: n, setTitle() { return this; }, addMetaTag() { return this; } }) },
   PropertiesService: { getScriptProperties: () => ({ getProperty: (k) => globalThis.__props?.[k] ?? null, setProperty: (k, v) => { (globalThis.__props ||= {})[k] = v; }, deleteProperty: (k) => { delete globalThis.__props?.[k]; } }) },
+  Logger: { log: (m) => (globalThis.__log ||= []).push(m) },
   Utilities: { getUuid: () => crypto.randomUUID() },
   ScriptApp: { getService: () => ({ getUrl: () => 'https://script.google.com/macros/s/X/exec' }) },
   console,
@@ -125,4 +126,6 @@ assert.notEqual(K2, K); assert.throws(() => ctx.crmLoad(K), /Không có quyền/
 // đăng nhập Google chạy bằng người dùng (không phải chủ) vẫn vào được không cần khoá
 globalThis.__active = ''; globalThis.__eff = 'staff@gmail.com';
 assert.equal(ctx.doGet({ parameter: {} }).file, 'Crm'); globalThis.__eff = undefined;
+// hàm tự kiểm tra
+const ret = ctx.kiemTraCRM(); assert.match(ret, /\?k=[0-9a-f]{32}/); assert.ok(globalThis.__log.some((m) => /Đọc dữ liệu OK/.test(m))); assert.ok(globalThis.__log.some((m) => /File giao diện Crm: có/.test(m)));
 console.log('OK – Code.gs đạt mọi test');
