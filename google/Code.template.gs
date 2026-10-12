@@ -15,7 +15,7 @@ function doGet(e) {
   // Giao diện CRM chỉ phục vụ người có link kèm khoá riêng (?k=...).
   // Khách lạ mở link không có khoá chỉ thấy dòng JSON.
   if (canUi_(e && e.parameter && e.parameter.k)) {
-    return HtmlService.createHtmlOutput(crmHtml_()).setTitle('CRM Hoàng Hiệp')
+    return HtmlService.createHtmlOutput(crmHtml_().replace(/var KEY = (?:\/\*__KEY__\*\/)?''/, function () { return 'var KEY = ' + JSON.stringify(String(e.parameter.k)); })).setTitle('CRM Hoàng Hiệp')
       .addMetaTag('viewport', 'width=device-width, initial-scale=1');
   }
   return json_({ ok: true, service: 'CRM Hoàng Hiệp' });
@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-6', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-7', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;

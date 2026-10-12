@@ -220,7 +220,8 @@ function sites() {
     try { document.execCommand('copy'); toast('Đã sao chép'); } catch (e) { toast('Không sao chép được, hãy bôi đen và copy'); } document.body.removeChild(ta); }; });
 }
 if (KEY) { load(); }  // mở trong file Sheet: khoá đã được gắn sẵn
-else { try { google.script.url.getLocation(function (loc) { var k = ((loc && loc.parameter) || {}).k || ''; if (k.constructor === Array) k = k[0]; KEY = k; load(); }); } catch (e) { load(); } }
+else { var started = false; setTimeout(function () { if (!started) { started = true; load(); } }, 3000);
+  try { google.script.url.getLocation(function (loc) { var k = ((loc && loc.parameter) || {}).k || ''; if (k.constructor === Array) k = k[0]; KEY = k; if (!started) { started = true; load(); } }); } catch (e) { if (!started) { started = true; load(); } } }
 </script>
 </body>
 </html>
