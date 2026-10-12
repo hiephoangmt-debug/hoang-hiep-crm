@@ -19,7 +19,8 @@
 
   // UTM: giữ nguồn đầu tiên (first-touch), không bị ghi đè khi khách quay lại
   var q = new URLSearchParams(location.search), utm = {};
-  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) { if (q.get(k)) utm[k] = q.get(k); });
+  // Link quảng cáo có thể mang hai bộ utm (một trong URL đích, một từ Hậu tố URL của Google Ads). Lấy giá trị cuối cùng: hậu tố luôn nằm sau.
+  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) { var a = q.getAll(k); if (a.length && a[a.length - 1]) utm[k] = a[a.length - 1]; });
   if (!utm.utm_source && q.get('gclid')) { utm.utm_source = 'google'; utm.utm_medium = 'cpc'; }
   if (!utm.utm_source && q.get('fbclid')) { utm.utm_source = 'facebook'; utm.utm_medium = 'paid'; }
   try {

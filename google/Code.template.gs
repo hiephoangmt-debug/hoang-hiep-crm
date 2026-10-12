@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-14', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-15', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
