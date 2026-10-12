@@ -376,16 +376,9 @@ function kiemTraCRM() {
   return link;
 }
 
-// Giao diện có thể là 1 file Crm, hoặc chia 4 file nhỏ CrmA..CrmD (dễ dán). Ghép lại theo thứ tự.
-function crmHtml_() {
-  var parts = ['CrmA', 'CrmB', 'CrmC', 'CrmD'], out = '';
-  try {
-    for (var i = 0; i < parts.length; i++) out += HtmlService.createHtmlOutputFromFile(parts[i]).getContent();
-    return out;
-  } catch (e) {
-    return HtmlService.createHtmlOutputFromFile('Crm').getContent();
-  }
-}
+// Giao diện CRM nằm sẵn trong file này (chuỗi CRM_HTML), nên chỉ cần dán một file duy nhất.
+var CRM_HTML = /*__CRM_HTML__*/'';
+function crmHtml_() { return CRM_HTML; }
 
 // Mở giao diện CRM ngay trong file Sheet (không cần bản triển khai, dùng quyền của người đang mở file).
 function moGiaoDienCRM() {
