@@ -123,7 +123,7 @@ function esc(v) { return String(v == null ? '' : v).replace(/[&<>"']/g, function
 function run(fn) {
   var a = Array.prototype.slice.call(arguments, 1);
   return new Promise(function (ok, ko) {
-    var r = google.script.run.withSuccessHandler(ok).withFailureHandler(function (e) { ko(new Error(e && e.message ? e.message : String(e))); });
+    var r = google.script.run.withSuccessHandler(ok).withFailureHandler(function (e) { ko(new Error(String(e && e.message ? e.message : e).replace(/^Error:\s*/, ''))); });
     r[fn].apply(r, [KEY].concat(a));
   });
 }
@@ -162,6 +162,7 @@ function badges() {
 }
 $('#nav').onclick = function (e) { var t = e.target.dataset.t; if (!t) return; V.phone = ''; tab = t; document.querySelectorAll('#nav button').forEach(function (b) { b.classList.toggle('on', b.dataset.t === t); }); render(); };
 $('#reload').onclick = load;
+$('#dlg').addEventListener('close', function () { if (D && !V.phone) render(); });
 document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('[data-zl]'); if (!a) return; e.preventDefault(); window.open('https://zalo.me/' + a.dataset.zl, '_blank', 'noopener'); });
 $('#gbar').onclick = function (e) { var b = e.target.closest('button'); if (!b) return; G = b.dataset.g; try { localStorage.setItem('crm_group', G); } catch (x) {} badges(); render(); };
 
@@ -489,21 +490,18 @@ function openLead(phone, page, keep) {
     '<div class="row" style="margin-top:8px"><button class="btn p" id="va">Ghi nhận lần xem</button></div><ul class="tl" id="vw"><li class="mut">Đang tải…</li></ul>',
     access: '<h3>Lịch sử truy cập và các lần để lại thông tin</h3><ul class="tl" id="tl"><li class="mut">Đang tải…</li></ul>'
   };
-  var html;
+  var body = pageSummary(l) + remindBox(l) +
+    '<div class="card">' + P.actions + '</div>' + '<div class="card">' + foldForm(P.care, 'lg', 'Lịch sử chăm sóc', '+ Thêm lần chăm sóc') + '</div><div class="card">' + foldForm(P.views, 'vw', 'Dự án đã xem', '+ Ghi nhận lần xem dự án') + '</div>' +
+    '<details class="card sec" id="editsec"><summary>Chỉnh sửa thông tin khách</summary>' + P.personal + P.needs + P.manage + '</details><div class="card">' + P.source + P.access + '</div>';
   if (page) {
-    html = '<div class="pgbar"><button class="btn" id="back">‹ Danh sách</button><b class="pgname">' + esc(l.name || l.phone) + '</b></div>' + pageSummary(l) + remindBox(l) +
-      '<div class="card">' + P.actions + '</div>' + '<div class="card">' + foldForm(P.care, 'lg', 'Lịch sử chăm sóc', '+ Thêm lần chăm sóc') + '</div><div class="card">' + foldForm(P.views, 'vw', 'Dự án đã xem', '+ Ghi nhận lần xem dự án') + '</div>' +
-      '<details class="card sec" id="editsec"><summary>Chỉnh sửa thông tin khách</summary>' + P.personal + P.needs + P.manage + '</details><div class="card">' + P.source + P.access + '</div>';
     V.phone = phone; window.scrollTo(0, keep || 0);
-    $('#main').innerHTML = html;
+    $('#main').innerHTML = '<div class="pgbar"><button class="btn" id="back">‹ Danh sách</button><b class="pgname">' + esc(l.name || l.phone) + '</b></div>' + body;
   } else {
-    html = P.h2 + P.actions + P.personal + P.source + P.needs + P.manage + P.care + P.views + P.access;
-    $('#dlgBody').innerHTML = html;
-
-    $('#dlg').showModal();
+    $('#dlgBody').innerHTML = '<div class="pgbar"><b class="pgname">KH' + pad(l.id) + ' · ' + esc(l.name || l.phone) + '</b><span class="sp"></span><button class="btn" id="back">Đóng</button></div>' + body;
+    if (!$('#dlg').open) $('#dlg').showModal();
   }
-  var fin = function () { if (page) openLead(phone, true, window.scrollY); else { $('#dlg').close(); render(); } };
-  if ($('#back')) $('#back').onclick = backToList;
+  var fin = function () { if (page) openLead(phone, true, window.scrollY); else openLead(phone, false); };
+  if ($('#back')) $('#back').onclick = function () { if (page) backToList(); else $('#dlg').close(); };
   if ($('#cl')) $('#cl').onclick = function () { if (page) backToList(); else $('#dlg').close(); };
   document.querySelectorAll('#main [data-a], #dlgBody [data-a]').forEach(function (b) { b.onclick = function () {
     var a = b.dataset.a; if (a === 'zalo') window.open('https://zalo.me/' + phone, '_blank', 'noopener'); if (a === 'call') window.open('tel:' + phone, '_self');
@@ -538,7 +536,7 @@ function openLead(phone, page, keep) {
         (x.pros ? '<div class="small">Ưu điểm: ' + esc(x.pros) + '</div>' : '') + (x.obstacle ? '<div class="small">Vướng mắc: ' + esc(x.obstacle) + '</div>' : '') + (x.nextStep ? '<div class="small">Bước tiếp theo: ' + esc(x.nextStep) + '</div>' : '') + (x.next ? '<div class="small mut">Chăm sóc sau xem: ' + esc(fdmy(x.next)) + '</div>' : '') + '</li>'; }).join('') || '<li class="mut">Chưa đi xem dự án nào.</li>';
     }).catch(function () { $('#lg').innerHTML = '<li class="mut">Không tải được lịch sử</li>'; $('#vw').innerHTML = ''; });
   };
-  if (page) {
+  {
     document.querySelectorAll('[data-rm]').forEach(function (b) { b.onclick = function () { $('#rmd').value = ymdNow(Number(b.dataset.rm)); }; });
     $('#rmok').onclick = function () {
       var d = $('#rmd').value; if (!d) { toast('Chọn ngày nhắc'); return; }
@@ -546,7 +544,9 @@ function openLead(phone, page, keep) {
       run('crmAddLog', phone, { type: 'Ghi chú', content: 'Nhắc việc: ' + (n || 'liên hệ lại khách'), next: d }).then(function () { l.next = d; l.careCount = (l.careCount || 0) + 1; l.careAt = new Date().toISOString(); badges(); toast('Đã đặt lịch nhắc ' + dmy(d)); fin(); }).catch(fail);
     };
     if ($('#rmclr')) $('#rmclr').onclick = function () { run('crmUpdateLead', phone, { next: '' }).then(function () { l.next = ''; badges(); toast('Đã xoá lịch'); fin(); }).catch(fail); };
-    document.querySelectorAll('#main [data-act]').forEach(function (b) { b.onclick = function () { contact(b.dataset.p, b.dataset.act, b); }; });
+    document.querySelectorAll('#main [data-act], #dlgBody [data-act]').forEach(function (b) { b.onclick = function () {
+      if (b.dataset.act === 'zalo') window.open('https://zalo.me/' + phone, '_blank', 'noopener'); else window.open('tel:' + phone, '_self');
+      run('crmLog', phone, b.dataset.act).then(function (r) { l.called = r.called; l.messaged = r.messaged; l.contactedAt = r.contactedAt; l.status = r.status; badges(); toast('Đã ghi nhận'); fin(); }).catch(fail); }; });
   }
   loadHist();
   $('#la').onclick = function () {
@@ -580,7 +580,7 @@ function openLead(phone, page, keep) {
           run('crmAddLog', phone, f).then(function () { l.next = f.next; badges(); toast('Đã tạo công việc'); bx.hidden = true; loadHist(); }).catch(fail); };
       };
       $('#aiOk').onclick = function () { run('crmAddLog', phone, { type: 'Ghi chú', content: 'Đã thực hiện theo đề xuất của quân sư' }).then(function () { toast('Đã đánh dấu'); loadHist(); }).catch(fail); };
-    }).catch(function (e) { $('#aiBtn').disabled = false; out.innerHTML = '<span class="tag red">Lỗi</span> ' + esc(e.message); });
+    }).catch(function (e) { $('#aiBtn').disabled = false; out.innerHTML = /Chưa cài khoá/.test(e.message) ? '<b>Chưa bật quân sư AI.</b> <span class="small">Cần cài khoá API một lần: mở file Sheet, menu CRM › Cài khoá quân sư (AI). Các chức năng khác vẫn dùng bình thường.</span>' : '<span class="tag red">Lỗi</span> ' + esc(e.message); });
   };
   run('crmEvents', l.vid).then(function (ev) {
     $('#tl').innerHTML = ev.map(function (e) { return '<li><span class="mut">' + esc(fmt(e.at)) + '</span> ' + (e.type === 'click' ? 'Bấm <b>' + esc(CH[e.channel] || e.channel) + '</b>' : e.type === 'form' ? '<b>Để lại thông tin</b>' + (e.source || e.campaign ? ' (' + esc((e.source + ' ' + e.campaign).trim()) + ')' : '') : 'Xem trang') + ' · <span class="mut small">' + esc(e.url) + '</span></li>'; }).join('') || '<li class="mut">Chưa có dữ liệu truy cập</li>';
