@@ -179,6 +179,7 @@ const page = ({ slug, title, description, keywords, body, tabs }) => `<!doctype 
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://script.google.com/macros/s/AKfycbyMWXl47PShn-ikZKwrFONJb9z89NOmVG6yIioyjGxo55IEbLh4yP7KiREPsxgSbxBl/exec?js=1" data-key="eC8fAVnkvL7s" async></script>
 <meta name="ladipage-rules" content="v2">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
