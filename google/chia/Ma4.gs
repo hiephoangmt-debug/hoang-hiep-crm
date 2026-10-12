@@ -67,10 +67,21 @@ function kiemTraCRM() {
     Logger.log('LỖI khi đọc dữ liệu: ' + e.message);
   }
   var hasHtml = true;
-  try { HtmlService.createHtmlOutputFromFile('Crm'); } catch (e) { hasHtml = false; Logger.log('THIẾU file giao diện tên Crm: ' + e.message); }
+  try { crmHtml_(); } catch (e) { hasHtml = false; Logger.log('THIẾU file giao diện tên Crm: ' + e.message); }
   if (hasHtml) Logger.log('File giao diện Crm: có.');
   Logger.log(crmBaseUrl_() ? 'URL ứng dụng web (ô G2): ' + crmBaseUrl_() : 'CHƯA có URL /exec ở ô G2 tab Website. Triển khai > Quản lý bản triển khai > copy URL ứng dụng web, dán vào ô G2.');
   return link;
+}
+
+// Giao diện có thể là 1 file Crm, hoặc chia 4 file nhỏ CrmA..CrmD (dễ dán). Ghép lại theo thứ tự.
+function crmHtml_() {
+  var parts = ['CrmA', 'CrmB', 'CrmC', 'CrmD'], out = '';
+  try {
+    for (var i = 0; i < parts.length; i++) out += HtmlService.createHtmlOutputFromFile(parts[i]).getContent();
+    return out;
+  } catch (e) {
+    return HtmlService.createHtmlOutputFromFile('Crm').getContent();
+  }
 }
 
 // Mở giao diện CRM ngay trong file Sheet (không cần bản triển khai, dùng quyền của người đang mở file).
@@ -78,7 +89,7 @@ function moGiaoDienCRM() {
   var props = PropertiesService.getScriptProperties(), key = crmKey_();
   if (key.length < 20) { key = Utilities.getUuid().replace(/-/g, ''); props.setProperty('CRM_KEY', key); }
   // gắn khoá vào giao diện (chịu được cả bản Crm.html cũ chưa có dấu /*__KEY__*/)
-  var html = HtmlService.createHtmlOutputFromFile('Crm').getContent()
+  var html = crmHtml_()
     .replace(/var KEY = (?:\/\*__KEY__\*\/)?''/, 'var KEY = ' + JSON.stringify(key));
   SpreadsheetApp.getUi().showModelessDialog(HtmlService.createHtmlOutput(html).setWidth(1180).setHeight(780), 'CRM Hoàng Hiệp');
 }
@@ -90,4 +101,3 @@ function crmDialogKey() {
   if (key.length < 20) { key = Utilities.getUuid().replace(/-/g, ''); props.setProperty('CRM_KEY', key); }
   return key;
 }
-

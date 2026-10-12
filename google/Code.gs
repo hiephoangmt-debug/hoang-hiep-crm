@@ -15,7 +15,7 @@ function doGet(e) {
   // Giao diện CRM chỉ phục vụ người có link kèm khoá riêng (?k=...).
   // Khách lạ mở link không có khoá chỉ thấy dòng JSON.
   if (canUi_(e && e.parameter && e.parameter.k)) {
-    return HtmlService.createHtmlOutputFromFile('Crm').setTitle('CRM Hoàng Hiệp')
+    return HtmlService.createHtmlOutput(crmHtml_()).setTitle('CRM Hoàng Hiệp')
       .addMetaTag('viewport', 'width=device-width, initial-scale=1');
   }
   return json_({ ok: true, service: 'CRM Hoàng Hiệp' });
@@ -23,9 +23,9 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-5', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-6', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
-  try { HtmlService.createHtmlOutputFromFile('Crm'); o.hasCrmHtml = true; } catch (x) {}
+  try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
 }
 
@@ -370,10 +370,21 @@ function kiemTraCRM() {
     Logger.log('LỖI khi đọc dữ liệu: ' + e.message);
   }
   var hasHtml = true;
-  try { HtmlService.createHtmlOutputFromFile('Crm'); } catch (e) { hasHtml = false; Logger.log('THIẾU file giao diện tên Crm: ' + e.message); }
+  try { crmHtml_(); } catch (e) { hasHtml = false; Logger.log('THIẾU file giao diện tên Crm: ' + e.message); }
   if (hasHtml) Logger.log('File giao diện Crm: có.');
   Logger.log(crmBaseUrl_() ? 'URL ứng dụng web (ô G2): ' + crmBaseUrl_() : 'CHƯA có URL /exec ở ô G2 tab Website. Triển khai > Quản lý bản triển khai > copy URL ứng dụng web, dán vào ô G2.');
   return link;
+}
+
+// Giao diện có thể là 1 file Crm, hoặc chia 4 file nhỏ CrmA..CrmD (dễ dán). Ghép lại theo thứ tự.
+function crmHtml_() {
+  var parts = ['CrmA', 'CrmB', 'CrmC', 'CrmD'], out = '';
+  try {
+    for (var i = 0; i < parts.length; i++) out += HtmlService.createHtmlOutputFromFile(parts[i]).getContent();
+    return out;
+  } catch (e) {
+    return HtmlService.createHtmlOutputFromFile('Crm').getContent();
+  }
 }
 
 // Mở giao diện CRM ngay trong file Sheet (không cần bản triển khai, dùng quyền của người đang mở file).
@@ -381,7 +392,7 @@ function moGiaoDienCRM() {
   var props = PropertiesService.getScriptProperties(), key = crmKey_();
   if (key.length < 20) { key = Utilities.getUuid().replace(/-/g, ''); props.setProperty('CRM_KEY', key); }
   // gắn khoá vào giao diện (chịu được cả bản Crm.html cũ chưa có dấu /*__KEY__*/)
-  var html = HtmlService.createHtmlOutputFromFile('Crm').getContent()
+  var html = crmHtml_()
     .replace(/var KEY = (?:\/\*__KEY__\*\/)?''/, 'var KEY = ' + JSON.stringify(key));
   SpreadsheetApp.getUi().showModelessDialog(HtmlService.createHtmlOutput(html).setWidth(1180).setHeight(780), 'CRM Hoàng Hiệp');
 }

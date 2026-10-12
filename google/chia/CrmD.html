@@ -1,0 +1,31 @@
+function clicks() {
+  var list = D.clicks.filter(function (c) { return F.clicks === 'all' || c.alert; });
+  $('#main').innerHTML = '<div class="card small mut">Người đã <b>bấm Zalo / Gọi / Messenger</b> trên website. Dòng đỏ là chưa để lại số điện thoại và chưa ai kiểm tra. Đối chiếu giờ bấm với tin nhắn Zalo hoặc cuộc gọi nhỡ trên điện thoại, rồi tick "Đã kiểm tra".</div>' +
+    '<div class="row"><select id="fc"><option value="todo">Chưa xử lý</option><option value="all">Tất cả</option></select><span class="mut">' + list.length + ' lượt</span></div>' +
+    '<div class="card tw"><table><tr><th>Lúc</th><th>Website</th><th>Kênh</th><th>Trang</th><th>Nguồn</th><th>SĐT</th><th>Đã kiểm tra</th></tr>' +
+    (list.map(function (c) { return '<tr><td>' + esc(fmt(c.at)) + '<br><span class="mut small">' + esc(ago(c.at)) + '</span></td><td>' + esc(c.site) + '</td><td><span class="tag blu">' + esc(CH[c.channel] || c.channel) + '</span></td><td class="small">' + esc(c.url) + '</td><td class="small">' + esc((c.source + ' ' + c.campaign).trim()) + '</td><td>' + (c.leftPhone ? '<span class="tag grn">Đã để lại</span>' : '<span class="tag red">Chưa</span>') + '</td><td><input type="checkbox" data-ck="' + c.row + '"' + (c.checked ? ' checked' : '') + '></td></tr>'; }).join('') || '<tr><td colspan="7" class="mut">Không có lượt nào.</td></tr>') + '</table></div>';
+  $('#fc').value = F.clicks; $('#fc').onchange = function (e) { F.clicks = e.target.value; clicks(); };
+  document.querySelectorAll('[data-ck]').forEach(function (b) { b.onchange = function () {
+    var c = D.clicks.filter(function (x) { return String(x.row) === b.dataset.ck; })[0];
+    run('crmClickDone', c.row, c.vid, b.checked).then(function () { c.checked = b.checked; c.alert = (!c.leftPhone && !c.checked) ? 'CHƯA XỬ LÝ' : ''; badges(); clicks(); }).catch(function (e) { b.checked = !b.checked; fail(e); }); }; });
+}
+
+function camp() {
+  var c = D.campaigns;
+  $('#main').innerHTML = '<div class="card tw"><table><tr>' + c[0].map(function (h) { return '<th>' + esc(h) + '</th>'; }).join('') + '</tr>' +
+    (c.slice(1).map(function (r) { return '<tr>' + r.map(function (x, i) { return '<td>' + (i < 3 ? '<b>' + esc(x) + '</b>' : esc(x)) + '</td>'; }).join('') + '</tr>'; }).join('') || '<tr><td class="mut">Chưa có chiến dịch. Thêm ở tab Chiến dịch của file Sheet.</td></tr>') + '</table></div><p class="mut small">Khai báo chiến dịch và nhập chi phí trong file Sheet (tab Chiến dịch, Chi phí).</p>';
+}
+
+function sites() {
+  $('#main').innerHTML = D.sites.map(function (s, i) { return '<div class="card"><b>' + esc(s.name) + '</b> <span class="mut">' + esc(s.domain) + '</span> <span class="tag">mã ' + esc(s.key) + '</span>' +
+    '<pre>' + esc(s.snippet || '(dán URL ứng dụng web vào ô G2 của tab Website để tạo đoạn mã)') + '</pre>' + (s.snippet ? '<button class="btn" data-cp="' + i + '">Sao chép đoạn mã</button>' : '') + '</div>'; }).join('') || '<div class="card mut">Chưa có website.</div>';
+  document.querySelectorAll('[data-cp]').forEach(function (b) { b.onclick = function () {
+    var s = D.sites[b.dataset.cp].snippet, ta = document.createElement('textarea'); ta.value = s; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); toast('Đã sao chép'); } catch (e) { toast('Không sao chép được, hãy bôi đen và copy'); } document.body.removeChild(ta); }; });
+}
+if (KEY) { load(); }  // mở trong file Sheet: khoá đã được gắn sẵn
+else { try { google.script.url.getLocation(function (loc) { var k = ((loc && loc.parameter) || {}).k || ''; if (k.constructor === Array) k = k[0]; KEY = k; load(); }); } catch (e) { load(); } }
+</script>
+</body>
+</html>
+

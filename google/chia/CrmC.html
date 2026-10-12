@@ -1,0 +1,67 @@
+function home() {
+  var k = D.kpis.slice(1).map(function (r, i) { var red = (i === 0 || i === 8) && Number(String(r[1]).replace(/\D/g, '')) > 0; return '<div class="kpi ' + (red ? 'alert' : '') + '"><b>' + esc(r[1]) + '</b><span>' + esc(r[0]) + '</span></div>'; }).join('');
+  var st = D.siteStats, rows = st.slice(1).map(function (r) { return '<tr>' + r.map(function (c, i) { return '<td>' + (i === 0 ? '<b>' + esc(c) + '</b>' : esc(c)) + '</td>'; }).join('') + '</tr>'; }).join('');
+  $('#main').innerHTML = '<p class="mut small">Khoảng thời gian chỉnh ở ô "Số ngày gần đây" trong tab Tổng quan của file Sheet.</p><div class="grid">' + k + '</div>' +
+    '<div class="card tw"><b>Theo website</b><table><tr>' + st[0].map(function (h) { return '<th>' + esc(h) + '</th>'; }).join('') + '</tr>' + (rows || '<tr><td class="mut">Chưa có dữ liệu</td></tr>') + '</table></div>';
+}
+
+function leads() {
+  var sites = D.sites.map(function (s) { return s.name; });
+  var list = D.leads.filter(function (l) {
+    if (F.status === 'todo' && !todo(l)) return false;
+    if (STATUS.indexOf(F.status) >= 0 && l.status !== F.status) return false;
+    if (F.site && l.site !== F.site) return false;
+    if (F.q) { var q = F.q.toLowerCase(); if ((l.name + ' ' + l.phone + ' ' + l.email).toLowerCase().indexOf(q) < 0) return false; }
+    return true;
+  });
+  $('#main').innerHTML = '<div class="row"><select id="fs"><option value="all">Tất cả trạng thái</option><option value="todo">Chưa gọi, chưa nhắn</option>' + STATUS.map(function (s) { return '<option>' + s + '</option>'; }).join('') + '</select>' +
+    '<select id="fw"><option value="">Tất cả website</option>' + sites.map(function (s) { return '<option>' + esc(s) + '</option>'; }).join('') + '</select>' +
+    '<input id="fq" placeholder="Tìm tên / SĐT / email" value="' + esc(F.q) + '"><span class="mut">' + list.length + ' khách</span></div>' +
+    (list.map(function (l) { return leadCard(l); }).join('') || '<div class="card mut">Không có khách nào.</div>');
+  $('#fs').value = F.status; $('#fw').value = F.site;
+  $('#fs').onchange = function (e) { F.status = e.target.value; leads(); };
+  $('#fw').onchange = function (e) { F.site = e.target.value; leads(); };
+  $('#fq').onkeydown = function (e) { if (e.key === 'Enter') { F.q = e.target.value; leads(); } };
+  document.querySelectorAll('[data-open]').forEach(function (b) { b.onclick = function () { openLead(b.dataset.open); }; });
+  document.querySelectorAll('[data-act]').forEach(function (b) { b.onclick = function () { contact(b.dataset.p, b.dataset.act, b); }; });
+}
+function leadCard(l) {
+  var st = todo(l) ? '<span class="tag red">CHƯA LIÊN HỆ</span>' : '<span class="tag ' + (l.status === 'Chốt' ? 'grn' : l.status === 'Mất' ? '' : 'amb') + '">' + esc(l.status) + '</span>';
+  var t = (l.zaloClicks ? '<span class="tag blu">Bấm Zalo ×' + l.zaloClicks + '</span> ' : '') + (l.phoneClicks ? '<span class="tag blu">Bấm Gọi ×' + l.phoneClicks + '</span> ' : '') +
+    (l.called ? '<span class="tag grn">Đã gọi</span> ' : '') + (l.messaged ? '<span class="tag grn">Đã nhắn</span> ' : '');
+  return '<div class="card lead ' + (todo(l) ? 'todo' : '') + '"><div><h3>' + esc(l.name || '(chưa có tên)') + ' · ' + esc(l.phone) + '</h3>' +
+    '<div class="mut small">' + esc(l.site) + (l.source || l.campaign ? ' · ' + esc((l.source + ' ' + l.campaign).trim()) : '') + ' · ' + esc(ago(l.at)) + '</div>' +
+    '<div style="margin-top:4px">' + st + ' ' + t + '</div>' + (l.note ? '<div class="small mut">' + esc(l.note) + '</div>' : '') + '</div>' +
+    '<div class="acts"><button class="btn z" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button><button class="btn g" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button><button class="btn" data-open="' + esc(l.phone) + '">Chi tiết</button></div></div>';
+}
+function contact(phone, act, btn) {
+  if (act === 'zalo') window.open('https://zalo.me/' + phone, '_blank', 'noopener'); else window.open('tel:' + phone, '_self');
+  btn.disabled = true;
+  run('crmLog', phone, act).then(function (r) {
+    var l = D.leads.filter(function (x) { return x.phone === phone; })[0];
+    if (l) { l.called = r.called; l.messaged = r.messaged; l.contactedAt = r.contactedAt; l.status = r.status; }
+    badges(); render(); toast('Đã ghi nhận ' + (act === 'call' ? 'đã gọi' : 'đã nhắn'));
+  }).catch(function (e) { btn.disabled = false; fail(e); });
+}
+function openLead(phone) {
+  var l = D.leads.filter(function (x) { return x.phone === phone; })[0]; if (!l) return;
+  $('#dlgBody').innerHTML = '<h2 style="margin:0">' + esc(l.name || '(chưa có tên)') + ' · ' + esc(l.phone) + '</h2><p class="mut small">' + esc(l.site) + ' · ' + esc(l.email) + ' · gửi form ' + l.submits + ' lần · nhận lúc ' + esc(fmt(l.at)) + '</p>' +
+    '<div class="row"><button class="btn z" data-a="zalo">Nhắn Zalo</button><button class="btn g" data-a="call">Gọi</button><button class="btn" data-a="sms">Đã nhắn SMS</button></div>' +
+    '<div class="row"><input id="nm" placeholder="Tên" value="' + esc(l.name) + '"><select id="st">' + STATUS.map(function (s) { return '<option' + (s === l.status ? ' selected' : '') + '>' + s + '</option>'; }).join('') + '</select>' +
+    '<input id="as" placeholder="Người phụ trách" value="' + esc(l.assignee) + '"><input id="vl" type="number" min="0" placeholder="Giá trị chốt (VNĐ)" value="' + (l.value || '') + '"></div>' +
+    '<textarea id="nt" rows="3" placeholder="Nhu cầu, ghi chú">' + esc(l.note) + '</textarea><div class="row" style="margin-top:8px"><button class="btn p" id="sv">Lưu</button><button class="btn" id="cl">Đóng</button></div>' +
+    '<h3>Lịch sử truy cập</h3><ul class="tl" id="tl"><li class="mut">Đang tải…</li></ul>';
+  $('#dlg').showModal();
+  $('#cl').onclick = function () { $('#dlg').close(); };
+  document.querySelectorAll('#dlgBody [data-a]').forEach(function (b) { b.onclick = function () {
+    var a = b.dataset.a; if (a === 'zalo') window.open('https://zalo.me/' + phone, '_blank', 'noopener'); if (a === 'call') window.open('tel:' + phone, '_self');
+    run('crmLog', phone, a).then(function (r) { l.called = r.called; l.messaged = r.messaged; l.contactedAt = r.contactedAt; l.status = r.status; badges(); toast('Đã ghi nhận'); $('#dlg').close(); render(); }).catch(fail); }; });
+  $('#sv').onclick = function () {
+    var f = { name: $('#nm').value, status: $('#st').value, assignee: $('#as').value, value: $('#vl').value, note: $('#nt').value };
+    run('crmUpdateLead', phone, f).then(function () { l.name = f.name; l.status = f.status; l.assignee = f.assignee; l.value = Number(f.value) || 0; l.note = f.note; badges(); $('#dlg').close(); render(); toast('Đã lưu'); }).catch(fail);
+  };
+  run('crmEvents', l.vid).then(function (ev) {
+    $('#tl').innerHTML = ev.map(function (e) { return '<li><span class="mut">' + esc(fmt(e.at)) + '</span> ' + (e.type === 'click' ? 'Bấm <b>' + esc(CH[e.channel] || e.channel) + '</b>' : e.type === 'form' ? 'Gửi form' : 'Xem trang') + ' · <span class="mut small">' + esc(e.url) + '</span></li>'; }).join('') || '<li class="mut">Chưa có</li>';
+  }).catch(function () { $('#tl').innerHTML = '<li class="mut">Không tải được</li>'; });
+}
+

@@ -43,7 +43,7 @@ const ctx = vm.createContext({
   LockService: { getScriptLock: () => ({ waitLock() {}, releaseLock() {} }) },
   ContentService: { createTextOutput: (b) => ({ body: b, setMimeType(m) { this.mime = m; return this; } }), MimeType: { JSON: 'json', JAVASCRIPT: 'js' } },
   Session: { getActiveUser: () => { throw new Error('Session không được dùng'); }, getEffectiveUser: () => { throw new Error('Session không được dùng'); } },
-  HtmlService: { createHtmlOutputFromFile: (n) => ({ file: n, setTitle() { return this; }, addMetaTag() { return this; }, getContent: () => fs.readFileSync(path.join(here, n + '.html'), 'utf8') }), createHtmlOutput: (c) => ({ content: c, setWidth() { return this; }, setHeight() { return this; } }) },
+  HtmlService: { createHtmlOutputFromFile: (n) => ({ file: n, setTitle() { return this; }, addMetaTag() { return this; }, getContent: () => fs.readFileSync(path.join(here, fs.existsSync(path.join(here, n + '.html')) ? n + '.html' : 'chia/' + n + '.html'), 'utf8') }), createHtmlOutput: (c) => ({ content: c, setTitle() { return this; }, addMetaTag() { return this; }, setWidth() { return this; }, setHeight() { return this; } }) },
   PropertiesService: { getScriptProperties: () => ({ getProperty: (k) => globalThis.__props?.[k] ?? null, setProperty: (k, v) => { (globalThis.__props ||= {})[k] = v; }, deleteProperty: (k) => { delete globalThis.__props?.[k]; } }) },
   Logger: { log: (m) => (globalThis.__log ||= []).push(m) },
   Utilities: { getUuid: () => crypto.randomUUID() },
@@ -105,9 +105,9 @@ ctx.showCrmLink();
 const link = globalThis.__alert.match(/\?k=([0-9a-f]{32})/); assert.ok(link, 'link có khoá'); const K = link[1];
 assert.equal(ctx.crmKey_(), K);
 assert.throws(() => ctx.crmLoad('sai-khoa'), /Không có quyền/); assert.throws(() => ctx.crmLog('', '0988111222', 'call'), /Không có quyền/);
-assert.equal(ctx.doGet({ parameter: { k: 'sai' } }).file, undefined); assert.equal(ctx.doGet({ parameter: { k: K } }).file, 'Crm');
+assert.equal(ctx.doGet({ parameter: { k: 'sai' } }).file, undefined); assert.ok(ctx.doGet({ parameter: { k: K } }).content.includes('CRM Hoàng Hiệp') && ctx.doGet({ parameter: { k: K } }).content.includes('</html>'));
 const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
-assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-5'); assert.equal(JSON.stringify(dbg).includes(K), false);
+assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-6'); assert.equal(JSON.stringify(dbg).includes(K), false);
 const L = ctx.crmLoad(K);
 assert.equal(L.leads.length, 2);
 const l0 = L.leads.find((x) => x.phone === '0988111222');
