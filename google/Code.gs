@@ -372,6 +372,8 @@ function kiemTraCRM() {
 function moGiaoDienCRM() {
   var props = PropertiesService.getScriptProperties(), key = crmKey_();
   if (key.length < 20) { key = Utilities.getUuid().replace(/-/g, ''); props.setProperty('CRM_KEY', key); }
-  var html = HtmlService.createHtmlOutputFromFile('Crm').getContent().replace("/*__KEY__*/''", JSON.stringify(key));
+  // gắn khoá vào giao diện (chịu được cả bản Crm.html cũ chưa có dấu /*__KEY__*/)
+  var html = HtmlService.createHtmlOutputFromFile('Crm').getContent()
+    .replace(/var KEY = (?:\/\*__KEY__\*\/)?''/, 'var KEY = ' + JSON.stringify(key));
   SpreadsheetApp.getUi().showModelessDialog(HtmlService.createHtmlOutput(html).setWidth(1180).setHeight(780), 'CRM Hoàng Hiệp');
 }
