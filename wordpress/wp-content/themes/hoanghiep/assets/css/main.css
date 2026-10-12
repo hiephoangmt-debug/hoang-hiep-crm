@@ -1459,5 +1459,8 @@ html.nav-locked, html.nav-locked body { overflow: hidden; }
 /* Nội dung bài viết, dự án, tin rao: căn đều 2 bên; tách chữ khi cần để không hở khoảng trắng lớn trên điện thoại. */
 .entry-content p, .entry-content li, .entry-content dd { text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto; }
 /* Chữ cân đều 2 bên cho đoạn văn trên trang dự án, hộp chờ cập nhật, hộp kêu gọi (độ ưu tiên thấp – chỗ nào canh giữa vẫn giữ nguyên). */
-:where(.block, .pending, .cta-box, .px-overview, .page-head) p { text-align: justify; text-justify: inter-word; }
+/* Chữ cân đều 2 bên toàn trang: đoạn văn, dòng liệt kê, nội dung bảng (độ ưu tiên thấp – chỗ nào đã canh giữa/phải vẫn giữ). */
+:where(.site-main) :where(p, li, td, .spec-list dd) { text-align: justify; text-justify: inter-word; }
+/* Thẻ nhỏ (dự án, tin rao, bài viết, ô số liệu): cột hẹp – canh trái cho khỏi hở chữ. */
+:where(.project-card, .listing-card, .post-card, .stats, .key-facts, .quick-facts, .hero-offer, .offer-stats, .connections, .check-list, .chips, .type-chips, .deal-tabs, .breadcrumb, .site-footer) :where(p, li, dd, td) { text-align: left; }
 .entry-content td, .entry-content th, .entry-content figcaption, .entry-content .key-points li { text-align: left; }
