@@ -288,7 +288,7 @@ var CRM_TABLES = {
     ['mauPptx', 'Link PPTX mẫu'], ['thuMucChungTu', 'Thư mục chứng từ'], ['thuMucBaoCao', 'Thư mục lưu báo cáo'],
     ['nguonSoLieu', 'Google Sheet số liệu (để nhập)'], ['logo', 'Đơn vị / Logo (TATILAND / TATI INVEST)']],
   NhanSu: [['id', 'ID'], ['ten', 'Tên'], ['email', 'Email'], ['trangThai', 'Trạng thái'],
-    ['vaiTro', 'Vai trò (Nhân viên / Quản trị)']],
+    ['vaiTro', 'Vai trò (Nhân viên / Quản trị)'], ['dienThoai', 'Điện thoại'], ['hoTen', 'Họ tên đầy đủ']],
   TaiKhoan: [['id', 'ID'], ['maTaiKhoan', 'ID tài khoản QC'], ['ten', 'Tên tài khoản'], ['nenTang', 'Nền tảng'], ['nhanSu', 'Nhân sự']],
   SoLieu: [['id', 'ID'], ['tuan', 'Tuần (thứ 2)'], ['duAn', 'Dự án'], ['nhanSu', 'Nhân sự'], ['nenTang', 'Nền tảng'],
     ['taiKhoan', 'ID tài khoản QC'], ['chienDich', 'Chiến dịch'], ['chiPhi', 'Chi phí thực chạy'], ['chiPhiPhi', 'Chi phí gồm phí nền tảng'],
@@ -465,11 +465,15 @@ function crmIsOwner_() {
     return !!a && a === e;
   } catch (err) { return false; }
 }
+/** Các email của một nhân sự (một người có thể khai nhiều Gmail, cách nhau bằng dấu phẩy). */
+function crmEmails_(n) {
+  return String(n.email || '').toLowerCase().split(/[\s,;|]+/).filter(function (e) { return /@/.test(e); });
+}
 function crmStaffByEmail_(email) {
   email = String(email || '').trim().toLowerCase();
   if (!email) return null;
   return crmRows_('NhanSu').filter(function (n) {
-    return n.trangThai !== 'Nghỉ' && String(n.email || '').trim().toLowerCase() === email;
+    return n.trangThai !== 'Nghỉ' && crmEmails_(n).indexOf(email) >= 0;
   })[0] || null;
 }
 /** Người đang dùng: {name, email, role: 'admin'|'staff'|'', owner} */
@@ -480,7 +484,7 @@ function crmMe_(token) {
   var email = '';
   try { email = Utilities.newBlob(Utilities.base64DecodeWebSafe(t.slice(0, i))).getDataAsString(); } catch (e) { return { name: '', role: '' }; }
   var ns = crmStaffByEmail_(email);
-  if (!ns || crmSign_(String(ns.email).trim().toLowerCase()) !== t.slice(i + 1)) return { name: '', role: '' };
+  if (!ns || crmSign_(email.trim().toLowerCase()) !== t.slice(i + 1)) return { name: '', role: '' };
   return { name: ns.ten, email: email, role: /quan tri|quản trị|admin/i.test(String(ns.vaiTro || '')) ? 'admin' : 'staff' };
 }
 /**
@@ -576,6 +580,8 @@ function crmWebReport(k) {
     ky: sc.ky, weeks: sc.weeks, prevWeeks: sc.prevWeeks,
     chienDich: pj.chienDich || '', logo: pj.logo || '',
     nhanSu: crmRows_('NhanSu').filter(function (n) { return n.trangThai !== 'Nghỉ'; }).map(function (n) { return n.ten; }),
+    // họ tên đầy đủ để hiện trong báo cáo (không đưa email / điện thoại ra link báo cáo)
+    hoTen: crmRows_('NhanSu').reduce(function (o, n) { if (n.hoTen && n.hoTen !== n.ten) o[n.ten] = n.hoTen; return o; }, {}),
     soLieu: soLieu, chungTu: chungTu,
   };
 }
@@ -847,8 +853,8 @@ function crmShareSheet_(duAn) {
   var have = f.getEditors().map(function (u) { return String(u.getEmail()).toLowerCase(); });
   try { have.push(String(f.getOwner().getEmail()).toLowerCase()); } catch (e) { /* file trong Drive dùng chung */ }
   var staff = crmRows_('NhanSu').filter(function (n) { return n.trangThai !== 'Nghỉ'; });
-  var withMail = staff.filter(function (n) { return /@/.test(n.email || ''); });
-  var emails = withMail.map(function (n) { return String(n.email).trim().toLowerCase(); });
+  var withMail = staff.filter(function (n) { return crmEmails_(n).length; });
+  var emails = [].concat.apply([], withMail.map(crmEmails_));
   var add = emails.filter(function (e, i) { return emails.indexOf(e) === i && have.indexOf(e) < 0; });
   if (add.length) f.addEditors(add);
   return {

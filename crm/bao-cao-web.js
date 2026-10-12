@@ -229,7 +229,7 @@
         return `<div class="chan"><div class="chan-h"><span class="dot" style="background:${PCOL[p]}"></span>${PLAB[p]}</div><div class="shots">${slots}</div></div>`;
       }).join("");
       return `<section class="card staff" style="border-top-color:${PCOL[ps[0] || "Facebook"]}">
-        <div class="staff-head"><h2>${esc(s)}</h2>
+        <div class="staff-head"><h2>${esc((D.hoTen || {})[s] || s)}</h2>
           <span class="kp">Chi phí (+phí) <b>${fmt(st.fee)} đ</b></span><span class="kp">Lead <b>${fmt(st.lead)}</b></span>
           <span class="kp">Chi phí/lead <b>${st.lead ? fmt(st.cpl) + " đ" : "–"}</b></span></div>
         ${rowsT}${chans}</section>`;
