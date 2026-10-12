@@ -28,13 +28,13 @@ const BUDGET_LAND = ["Dưới 3 tỷ", "3 – 5 tỷ", "5 – 8 tỷ", "Trên 8 
 
 /* ---------- Lời kêu gọi hành động (gợi tò mò, trung thực: không đếm ngược giả, không "chỉ còn X căn") ---------- */
 const HOOKS = {
-  "fpt-plaza-1": { cta: "Xem giỏ hàng chuyển nhượng hôm nay", ghost: "Xem loại căn", title: "Căn nào vừa tầm ngân sách của bạn?", btn: "Gửi nhu cầu cho tôi", band: "Căn FPT Plaza 1 bạn đang ngắm, giá thực tế là bao nhiêu?", bandBtn: "Hỏi giá căn bạn quan tâm", docs: ["🔄 Giỏ hàng căn đang bán & cho thuê", "💰 Giá theo tầng, hướng, nội thất", "📝 Ký gửi bán / cho thuê căn của bạn", "🏦 Hỗ trợ vay & thủ tục sang tên"] },
-  "fpt-plaza-2": { cta: "Xem căn tầng cao đang chuyển nhượng", ghost: "Xem loại căn", title: "Căn 2PN – 3PN nào hợp với gia đình bạn?", btn: "Gửi nhu cầu cho tôi", band: "Nhìn thấy sông và biển từ căn nào? Hỏi mã căn để biết.", bandBtn: "Nhận giỏ hàng FPT Plaza 2", docs: ["🔄 Giỏ hàng căn đang bán & cho thuê", "💰 Giá theo tầng, hướng, nội thất", "📝 Ký gửi bán / cho thuê căn của bạn", "🏦 Hỗ trợ vay & thủ tục sang tên"] },
-  "fpt-plaza-3": { cta: "Xem căn FPT Plaza 3 đang bán, cho thuê", ghost: "Xem loại căn", title: "Bạn muốn mua, thuê hay ký gửi căn FPT Plaza 3?", btn: "Gửi nhu cầu cho tôi", band: "Căn FPT Plaza 3 đã có sổ – bạn đang tìm mua, thuê hay muốn bán?", bandBtn: "Gửi nhu cầu ngay", docs: ["🔄 Giỏ hàng căn đang bán & cho thuê", "💰 Giá theo tầng, hướng, nội thất", "📝 Ký gửi bán / cho thuê căn của bạn", "🏦 Hỗ trợ vay & thủ tục sang tên"] },
-  "fpt-plaza-4": { cta: "Xem căn hợp ngân sách – nhận 3 gợi ý", ghost: "Xem mặt bằng 5 tầng", title: "Căn nào hợp ngân sách của bạn?", btn: "Gửi tôi 3 căn phù hợp nhất", band: "Bạn đang ngắm căn nào? Gõ mã căn, nhận giá đúng căn đó.", bandBtn: "Hỏi giá theo mã căn", docs: ["💰 Bảng giá theo tầng, hướng", "📐 Mặt bằng 5 tầng & layout căn", "🎁 Chính sách thanh toán, vay", "🧮 Bảng tính dòng tiền cho thuê"] },
-  "fpt-plaza-5": { cta: "Là người đầu tiên biết giá FPT Plaza 5", ghost: "Xem thông tin dự kiến", title: "Báo tôi ngay khi FPT Plaza 5 có giá", btn: "Đăng ký nhận giá đầu tiên", band: "FPT Plaza 5 chưa công bố giá. Bạn muốn biết trước người khác?", bandBtn: "Đăng ký nhận giá đầu tiên", docs: ["🔔 Báo giá ngay khi có thông tin", "📐 Mặt bằng & loại căn dự kiến", "🆚 So sánh với FPT Plaza 4", "🎯 Ưu tiên chọn căn đẹp"] },
+  "fpt-plaza-1": { cta: "Xem giỏ hàng chuyển nhượng hôm nay", ghost: "Xem loại căn", title: "Nhận danh sách căn FPT Plaza 1 hợp ngân sách – miễn phí qua Zalo", btn: "Gửi tôi danh sách căn & giá", band: "Căn FPT Plaza 1 bạn đang ngắm, giá thực tế là bao nhiêu?", bandBtn: "Hỏi giá căn bạn quan tâm", docs: ["🔄 Danh sách căn đang bán & cho thuê – kèm ảnh thực tế", "💰 Giá từng căn theo tầng, hướng, nội thất", "📝 Chủ nhà: định giá miễn phí khi ký gửi", "🏦 Người mua: ước tính khoản vay & thủ tục sang tên"] },
+  "fpt-plaza-2": { cta: "Xem căn tầng cao đang chuyển nhượng", ghost: "Xem loại căn", title: "Nhận căn 2PN – 3PN FPT Plaza 2 hợp gia đình bạn – miễn phí qua Zalo", btn: "Gửi tôi danh sách căn & giá", band: "Nhìn thấy sông và biển từ căn nào? Hỏi mã căn để biết.", bandBtn: "Nhận giỏ hàng FPT Plaza 2", docs: ["🔄 Danh sách căn đang bán & cho thuê – kèm ảnh thực tế", "💰 Giá từng căn theo tầng, hướng, nội thất", "📝 Chủ nhà: định giá miễn phí khi ký gửi", "🏦 Người mua: ước tính khoản vay & thủ tục sang tên"] },
+  "fpt-plaza-3": { cta: "Xem căn FPT Plaza 3 đang bán, cho thuê", ghost: "Xem loại căn", title: "Mua, thuê hay ký gửi căn FPT Plaza 3 đã có sổ? Nhận phương án qua Zalo", btn: "Gửi tôi phương án phù hợp", band: "Căn FPT Plaza 3 đã có sổ – bạn đang tìm mua, thuê hay muốn bán?", bandBtn: "Gửi nhu cầu ngay", docs: ["🔄 Danh sách căn đang bán & cho thuê – kèm ảnh thực tế", "💰 Giá từng căn theo tầng, hướng, nội thất", "📝 Chủ nhà: định giá miễn phí khi ký gửi", "🏦 Người mua: ước tính khoản vay & thủ tục sang tên"] },
+  "fpt-plaza-4": { cta: "Xem căn hợp ngân sách – nhận 3 gợi ý", ghost: "Xem mặt bằng 5 tầng", title: "Nhận 3 căn FPT Plaza 4 hợp ngân sách – kèm bảng giá & mặt bằng", btn: "Gửi tôi 3 căn phù hợp nhất", band: "Bạn đang ngắm căn nào? Gõ mã căn, nhận giá đúng căn đó.", bandBtn: "Hỏi giá theo mã căn", docs: ["💰 Bảng giá mới nhất theo tầng, hướng", "📐 Mặt bằng 5 tầng & layout căn", "🎁 Chính sách thanh toán, vay", "🧮 Bảng tính dòng tiền cho thuê"] },
+  "fpt-plaza-5": { cta: "Là người đầu tiên biết giá FPT Plaza 5", ghost: "Xem thông tin dự kiến", title: "Báo tôi ngay khi FPT Plaza 5 có giá", btn: "Đăng ký nhận giá đầu tiên", band: "FPT Plaza 5 chưa công bố giá. Bạn muốn biết trước người khác?", bandBtn: "Đăng ký nhận giá đầu tiên", docs: ["🔔 Nhận giá ngay khi chủ đầu tư công bố", "📐 Mặt bằng & loại căn dự kiến", "🆚 So sánh với FPT Plaza 4", "🎯 Ưu tiên chọn căn đẹp"] },
 };
-const ZONE_HOOK = (z) => ({ cta: `Xem lô phân khu ${z.code} vừa tầm giá của bạn`, ghost: "Xem đặc điểm khu", title: `Lô nào ở ${z.code} vừa ngân sách của bạn?`, btn: "Gửi tôi 3 lô phù hợp nhất", band: `Lô ${z.code} nào đang ra giá tốt? Gửi ngân sách để biết.`, bandBtn: `Nhận giỏ hàng phân khu ${z.code}`, docs: [`🗺️ Bản đồ phân lô ${z.code}`, "📄 Lô đang bán & giá", "📑 Pháp lý từng lô", "🚗 Hẹn lịch xem đất"] });
+const ZONE_HOOK = (z) => ({ cta: `Xem lô phân khu ${z.code} vừa tầm giá của bạn`, ghost: "Xem đặc điểm khu", title: `Nhận 3 lô ${z.code} vừa ngân sách – kèm bản đồ phân lô`, btn: "Gửi tôi 3 lô phù hợp nhất", band: `Lô ${z.code} nào đang ra giá tốt? Gửi ngân sách để biết.`, bandBtn: `Nhận giỏ hàng phân khu ${z.code}`, docs: [`🗺️ Bản đồ phân lô ${z.code}`, "📄 Lô đang bán & giá", "📑 Pháp lý từng lô", "🚗 Hẹn lịch xem đất"] });
 
 /* ---------- Khối HTML dùng chung ---------- */
 // Menu rút gọn: LadiPage không co giãn menu nhiều link như trình duyệt (bị xuống dòng, đè nút) nên chỉ giữ tên + nút; link khác ở chân trang
@@ -56,7 +56,8 @@ const form = (id, { button, budget, extra, hidden, intent }) => `
   <select id="${id}-budget" name="budget"><option value="" disabled selected>Chọn mức ngân sách</option>${budget.map((b) => `<option>${esc(b)}</option>`).join("")}</select>` : ""}
   ${extra ? `<label for="${id}-code">${esc(extra.label)}</label><input id="${id}-code" name="unit" type="text" placeholder="${esc(extra.ph)}">` : ""}
   <button class="btn" type="submit">${esc(button)}</button>
-  <p class="note">Hoặc gọi ngay <a href="tel:${TEL}">${HOTLINE}</a> · Chuyên viên gửi qua Zalo / điện thoại</p>
+  <p class="trust">🔒 Miễn phí · Không ràng buộc · Số của bạn chỉ dùng để gửi thông tin bạn yêu cầu, không chia sẻ cho bên khác</p>
+  <p class="note">Cần nhanh? Gọi / Zalo <a href="tel:${TEL}">${HOTLINE}</a> – ${esc(site.agent.name)} trực tiếp tư vấn</p>
 </form>`;
 
 const heroN = (slug) => (String(slug).length % 2) + 1; // ảnh nền đầu trang xen kẽ giữa 2 phối cảnh; mục "Phối cảnh" dùng ảnh còn lại
@@ -74,8 +75,10 @@ const hero = ({ slug = "home", bg, crumbs, eyebrow, h1, lead, points, cta, ghost
 </header>
 <section id="dang-ky" class="dark leadband"><div class="wrap two">
   <div><p class="eyebrow">Thông tin nhanh</p><h2 class="title">${esc(leadTitle)}</h2>
-  ${stats ? `<div class="stats">${stats.map(([b, s]) => `<div class="stat"><b>${esc(b)}</b><span>${esc(s)}</span></div>`).join("")}</div>` : `<ul class="docs" style="color:#fff">${docs.map((d) => `<li>${esc(d)}</li>`).join("")}</ul>`}</div>
+  ${stats ? `<div class="stats">${stats.map(([b, s]) => `<div class="stat"><b>${esc(b)}</b><span>${esc(s)}</span></div>`).join("")}</div>` : `<ul class="docs" style="color:#fff">${docs.map((d) => `<li>${esc(d)}</li>`).join("")}</ul>`}
+  <p class="why">Giá từng căn, giỏ hàng và chính sách thay đổi theo tuần nên không đăng cố định trên trang. Để lại số Zalo – bạn nhận <b>bản mới nhất</b>, đúng nhu cầu, không phải tự dò.</p></div>
   <div class="card"><h2>${esc(formTitle)}</h2>
+    <p class="get">Bạn sẽ nhận:</p>
     <ul class="docs">${docs.map((d) => `<li>${esc(d)}</li>`).join("")}</ul>
     ${formHtml}</div>
 </div></section>`;
@@ -302,8 +305,9 @@ const contactSection = (name) => `
   </div></div></section>`;
 const finalCta = (title, steps, formTitle, formHtml) => `
 <section id="dang-ky-cuoi" class="dark"><div class="wrap two">
-  <div><p class="eyebrow">Ưu đãi thông tin</p><h2 class="title">${esc(title)}</h2><p>Để lại thông tin, chuyên viên soạn sẵn cho bạn:</p>
-  <ol class="steps">${steps.map((s) => `<li>${s}</li>`).join("")}</ol></div>
+  <div><p class="eyebrow">Miễn phí · Không ràng buộc</p><h2 class="title">${esc(title)}</h2><p>Chỉ cần tên và số Zalo – chuyên viên soạn sẵn cho bạn:</p>
+  <ol class="steps">${steps.map((s) => `<li>${s}</li>`).join("")}</ol>
+  <p class="why">Xem xong không ưng cũng không sao: không đặt cọc, không bắt buộc mua. Bạn chỉ cần có đủ thông tin để tự quyết định.</p></div>
   <div class="card"><h2>${esc(formTitle)}</h2>${formHtml}</div>
 </div></section>`;
 const LEGAL = {
@@ -406,7 +410,7 @@ ${hero({
       crumbs: `<a href="${BASE}/">Trang chủ</a> › Đất nền FPT City`, eyebrow: "Đất nền sổ đỏ · FPT City Đà Nẵng", h1: `Đất nền <span>FPT City</span> Đà Nẵng – phân khu V1 đến V6`,
       lead: "Lô đất sổ đỏ trong khu đô thị công nghệ hơn 181 ha, hạ tầng hoàn thiện. Bạn nói ngân sách, chúng tôi lọc sẵn lô phù hợp trong các phân khu V1 – V6.",
       points: ["Sổ đỏ từng lô, hạ tầng hoàn thiện", "Lô ~90 m² đến biệt thự 350+ m²", "Giỏ hàng cập nhật hằng tuần"],
-      cta: "Gửi ngân sách, nhận 3 lô phù hợp", ghost: "Xem các phân khu", ghostHref: "#phan-khu", formTitle: "Lô nào vừa ngân sách của bạn?",
+      cta: "Gửi ngân sách, nhận 3 lô phù hợp", ghost: "Xem các phân khu", ghostHref: "#phan-khu", formTitle: "Nhận 3 lô đất nền vừa ngân sách – kèm bản đồ phân lô",
       docs: ["🗺️ Bản đồ phân lô V1 – V6", "📄 Lô đang bán & giá từng lô", "📑 Thông tin pháp lý", "🚗 Hẹn lịch xem đất"],
       formHtml: form("h", { button: "Gửi tôi 3 lô phù hợp nhất", budget: BUDGET_LAND }), leadTitle: "Đất nền FPT City trong những con số",
       stats: [["181+ ha", "Quy mô FPT City"], ["V1 – V6", "Phân khu đất nền"], ["90–350 m²", "Diện tích lô phổ biến"], ["Sổ đỏ", "Pháp lý từng lô"]],
@@ -458,8 +462,8 @@ ${hero({
       slug: "home", eyebrow: "Khu đô thị công nghệ phía Nam Đà Nẵng · Bảng giá 2026", h1: `<span>FPT City Đà Nẵng</span> – Đất nền &amp; căn hộ FPT Plaza 1, 2, 3, 4, 5`,
       lead: "Khu đô thị hơn 181 ha của Tập đoàn FPT: Đại học FPT, FPT Complex, đất nền phân khu V1–V6 và chuỗi căn hộ FPT Plaza. Ngân sách của bạn đang hợp với sản phẩm nào?",
       points: ["Chủ đầu tư: Công ty CP Đô thị FPT Đà Nẵng", "Đất nền V1–V6 · Căn hộ FPT Plaza 1–5", "Giỏ hàng & giá cập nhật hằng tuần"],
-      cta: "Tìm sản phẩm hợp ngân sách của tôi", ghost: "Xem có gì hot", ghostHref: "#gioi-thieu", formTitle: "Ngân sách của bạn hợp với sản phẩm nào?",
-      docs: ["🗺️ Bản đồ phân lô đất nền V1–V6", "💰 Bảng giá căn hộ FPT Plaza 1–5", "📐 Mặt bằng & layout căn hộ", "🏦 Chính sách, hỗ trợ vay"],
+      cta: "Tìm sản phẩm hợp ngân sách của tôi", ghost: "Xem có gì hot", ghostHref: "#gioi-thieu", formTitle: "Nhận 3 gợi ý hợp ngân sách – kèm bảng giá mới nhất",
+      docs: ["🗺️ Bản đồ phân lô đất nền V1–V6", "💰 Bảng giá căn hộ FPT Plaza 1–5", "📐 Mặt bằng & layout căn hộ", "🏦 Ước tính khoản vay & chính sách"],
       formHtml: form("h", { button: "Gửi tôi 3 gợi ý phù hợp nhất", budget: ["Dưới 2 tỷ", "2 – 4 tỷ", "4 – 6 tỷ", "6 – 10 tỷ", "Trên 10 tỷ"] }),
       leadTitle: "FPT City trong những con số – và bảng giá bạn chưa thấy",
       stats: [["181+ ha", "Quy mô khu đô thị"], ["~952 tr USD", "Tổng vốn đầu tư dự kiến"], ["5", "Tòa căn hộ FPT Plaza"], ["V1–V6", "Phân khu đất nền"], ["1.395", "Căn hộ tại FPT Plaza 4"], ["~5 phút", "Đến biển Non Nước"]],
