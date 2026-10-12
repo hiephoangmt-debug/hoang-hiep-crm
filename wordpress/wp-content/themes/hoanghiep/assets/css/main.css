@@ -842,6 +842,10 @@ img.article-head__author { object-fit: cover; border: 2px solid var(--gold); }
 
 /* Footer */
 .site-footer { background: #071a32; color: #9fb0c6; padding-top: 56px; font-size: .93rem; }
+/* Hoa văn mờ: lưới kẻ ô + sóng biển dưới chân trang */
+.site-footer { position: relative; overflow: hidden; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 32px 32px; }
+.site-footer::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='90' viewBox='0 0 600 90'%3E%3Cg fill='none' stroke='%2378beeb' stroke-width='1.6'%3E%3Cpath opacity='.22' d='M0 30 Q75 14 150 30 T300 30 T450 30 T600 30'/%3E%3Cpath opacity='.16' d='M0 50 Q75 36 150 50 T300 50 T450 50 T600 50'/%3E%3Cpath opacity='.11' d='M0 70 Q75 58 150 70 T300 70 T450 70 T600 70'/%3E%3C/g%3E%3C/svg%3E") repeat-x bottom / 600px 90px; pointer-events: none; }
+.site-footer > * { position: relative; z-index: 1; }
 .site-footer h3 { color: var(--white); font-size: 1rem; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 16px; }
 .site-footer a { color: #d2dcea; }
 .site-footer a:hover { color: var(--gold); }

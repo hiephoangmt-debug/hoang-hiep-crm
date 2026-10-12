@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.10** + plugin Hoàng Hiệp CRM **2.20.33**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.11** + plugin Hoàng Hiệp CRM **2.20.34**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.11, plugin 2.20.34: hoa văn lưới kẻ ô + sóng biển mờ
+- **Chân trang web** (nền xanh navy): thêm lưới kẻ ô rất mờ và 3 đường sóng biển mờ sát đáy. Chỉ là CSS, không ảnh hưởng tốc độ.
+- **Ảnh bản đồ giá căn hộ sông Hàn**: dải tiêu đề và dải chú thích có lưới kẻ ô mờ, dải dưới có sóng biển mờ, thêm viền vàng ngăn cách với bản đồ.
+- Cài: Nhập nhanh `cap-nhat-code.zip` → LiteSpeed Cache → Purge All. Ảnh trong bài cập nhật ngay (cùng đường dẫn), nếu trình duyệt còn ảnh cũ thì Ctrl+F5.
 
 ## Có gì mới – plugin 2.20.33, 2.20.32: bảng giá 21 dự án căn hộ view sông Hàn
 

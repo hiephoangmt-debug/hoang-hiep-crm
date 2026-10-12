@@ -85,12 +85,30 @@ for name, price, a, b, x, y, *_ in cards:
 px, py = T(120, 1545); d.text((px, py), 'HẢI CHÂU', font=F(22, True), fill='#8fa9c4', anchor='mm')
 px, py = T(1250, 1200); d.text((px, py), 'SƠN TRÀ', font=F(22, True), fill='#8fa9c4', anchor='mm')
 px, py = T(740, 1150); d.text((px, py), 'Sông Hàn', font=F(22, True), fill='#d6ecff', anchor='mm')
-# tiêu đề, logo chữ, chú thích, nguồn
-d.rectangle([0, 0, W, TOP], fill='#0b1a2a'); d.rectangle([0, TOP - 4, W, TOP], fill='#e8b04a')
+# tiêu đề, logo chữ, chú thích, nguồn – nền navy có lưới kẻ ô mờ, sóng biển mờ ở dải dưới
+import math
+def texture(y0, y1, waves=False):
+    h = y1 - y0
+    base = Image.new('RGBA', (W, h), (11, 26, 42, 255))
+    ov = Image.new('RGBA', (W, h), (0, 0, 0, 0)); ld = ImageDraw.Draw(ov)
+    for gx in range(0, W, 28):
+        ld.line([gx, 0, gx, h], fill=(255, 255, 255, 18), width=1)
+    for gy in range(0, h, 28):
+        ld.line([0, gy, W, gy], fill=(255, 255, 255, 18), width=1)
+    if waves:
+        for k in range(4):
+            amp, per, base_y, alpha = 4 + k * 2, 180 + k * 40, h - 6 - k * 10, 70 - k * 12
+            pts = [(x, base_y + amp * math.sin(2 * math.pi * (x + k * 53) / per)) for x in range(0, W + 1, 4)]
+            ld.line(pts, fill=(120, 190, 235, alpha), width=2)
+    im.paste(Image.alpha_composite(base, ov).convert('RGB'), (0, y0))
+texture(0, TOP)
+texture(TOP + MH, H, waves=True)
+d = ImageDraw.Draw(im)
+d.rectangle([0, TOP - 4, W, TOP], fill='#e8b04a'); d.rectangle([0, TOP + MH, W, TOP + MH + 3], fill='#e8b04a')
 d.text((32, 22), 'GIÁ CĂN HỘ VEN SÔNG HÀN · 10/2026', font=F(24, True), fill='#e8b04a')
 d.text((32, 58), '21 dự án hai bờ sông Hàn', font=F(40, True), fill='white')
 d.text((32, 110), 'Giá rao tham khảo, triệu đồng/m²', font=F(19), fill='#c9d6e3')
-d.rounded_rectangle([W - 300, 30, W - 28, 118], 12, outline='#e8b04a', width=2)
+d.rounded_rectangle([W - 300, 30, W - 28, 118], 12, fill='#0b1a2a', outline='#e8b04a', width=2)
 d.text((W - 164, 62), 'hiephoangmt.com', font=F(24, True), fill='white', anchor='mm')
 d.text((W - 164, 94), 'Hoàng Hiệp · 0904 567 009', font=F(17), fill='#e8b04a', anchor='mm')
 ly = TOP + MH + 20; x = 32
