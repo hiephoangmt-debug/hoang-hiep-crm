@@ -86,8 +86,10 @@ HTML
 
 	$posts[] = array(
 		'slug'     => 'can-ho-view-song-han-du-an-va-gia',
-		'title'    => 'Căn hộ view sông Hàn: các dự án đang bán và mức giá tham khảo',
-		'excerpt'  => 'Căn hộ view sông Hàn ở hai bờ Sơn Trà và Hải Châu: danh sách dự án, giá tham khảo, tình trạng bàn giao, cập nhật 10/2026.',
+		'rev'      => '2026-10-12', // Thêm bảng giá 21 dự án + bản đồ (bản cũ còn trong Bản sửa đổi).
+		'repub'    => true,
+		'title'    => 'Căn hộ view sông Hàn: bảng giá 21 dự án hai bờ tháng 10/2026',
+		'excerpt'  => 'Căn hộ view sông Hàn tháng 10/2026: bảng giá rao 21 dự án hai bờ Sơn Trà, Hải Châu từ 35 – 40 đến 208 – 228 triệu/m², bản đồ vị trí, giá theo loại căn và tình trạng bàn giao.',
 		'keyword'  => 'căn hộ view sông Hàn',
 		'project'  => '',
 		'week'     => 5,
@@ -95,13 +97,44 @@ HTML
 		'image_alt' => 'Giá căn hộ view sông Hàn 10/2026: xếp hạng giá rao 21 dự án hai bờ sông Hàn Đà Nẵng',
 		'category' => 'Thị trường',
 		'content'  => <<<'HTML'
-<p>Căn hộ view sông Hàn hiện có ở cả hai bờ: bờ Đông (Sơn Trà, Ngũ Hành Sơn) với các dự án của Sun Group, Peninsula, Capital Square, The Legend và bờ Tây (Hải Châu) với The Filmore, Danang Landmark, M Riverside, The Meridian. Giá tham khảo phổ biến khoảng 50 – 128 triệu/m² tùy dự án, tầng và hướng nhìn. Thông tin được Hoàng Hiệp cập nhật tháng 10/2026.</p>
+<p>Căn hộ view sông Hàn hiện có ở cả hai bờ: bờ Đông (Sơn Trà, Ngũ Hành Sơn) với các dự án của Sun Group, Peninsula, Capital Square, The Legend và bờ Tây (Hải Châu) với The Filmore, Danang Landmark, M Riverside, The Meridian. Giá rao tháng 10/2026 của 21 dự án hai bờ dao động khoảng 35 – 228 triệu/m², phổ biến 65 – 125 triệu/m² tùy dự án, tầng và hướng nhìn. Thông tin được Hoàng Hiệp cập nhật tháng 10/2026.</p>
+
+<h2>Bảng giá căn hộ view sông Hàn 10/2026: 21 dự án hai bờ</h2>
+<figure><img src="/wp-content/plugins/hoang-hiep-crm/hh-crm/img/tin-tuc/gia-can-ho-song-han-10-2026-ban-do.jpg" alt="Bản đồ giá căn hộ view sông Hàn 10/2026: 21 dự án hai bờ sông Hàn Đà Nẵng" width="1080" height="1350" loading="lazy"><figcaption>Bản đồ vị trí và giá rao 21 dự án căn hộ hai bờ sông Hàn. Số liệu giá rao: Biggee.vn; đồ hoạ: hiephoangmt.com.</figcaption></figure>
+<p>Giá căn hộ view sông Hàn tháng 10/2026 chênh nhau tới khoảng 5 lần: từ 35 – 40 triệu/m² ở các chung cư cũ phía cầu Thuận Phước đến 208 – 228 triệu/m² ở dự án hạng sang sát cầu Sông Hàn. Bảng xếp hạng theo giá rao trung bình mỗi m² (cao → thấp):</p>
+<table>
+<thead><tr><th>#</th><th>Dự án</th><th>Bờ sông</th><th>Giá rao</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>M Landmark Residence</td><td>Tây (Hải Châu – Thanh Khê)</td><td>208 – 228 triệu/m²</td></tr>
+<tr><td>2</td><td><a href="/du-an/the-filmore-da-nang/">The Filmore</a></td><td>Tây (Hải Châu – Thanh Khê)</td><td>174 – 212 triệu/m²</td></tr>
+<tr><td>3</td><td><a href="/du-an/the-legend-da-nang/">The Legend City</a></td><td>Đông (Sơn Trà)</td><td>132 – 145 triệu/m²</td></tr>
+<tr><td>4</td><td><a href="/du-an/danang-landmark/">Landmark Tower</a></td><td>Tây (Hải Châu – Thanh Khê)</td><td>118 – 128 triệu/m²</td></tr>
+<tr><td>5</td><td><a href="/du-an/sun-symphony-residence/">Sun Symphony Residence</a></td><td>Đông (Sơn Trà)</td><td>100 – 124 triệu/m²</td></tr>
+<tr><td>6</td><td><a href="/du-an/sun-solar-residence/">Sun Solar</a></td><td>Tây (Hải Châu – Thanh Khê)</td><td>112 – 122 triệu/m²</td></tr>
+<tr><td>7</td><td><a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a></td><td>Đông (Sơn Trà)</td><td>99 – 116 triệu/m²</td></tr>
+<tr><td>8</td><td><a href="/du-an/sun-cosmo-residence/">Sun Cosmo Residence</a></td><td>Đông (Sơn Trà)</td><td>86 – 106 triệu/m²</td></tr>
+<tr><td>9</td><td><a href="/du-an/capital-square-da-nang/">Capital Square</a></td><td>Đông (Sơn Trà)</td><td>90 – 98 triệu/m²</td></tr>
+<tr><td>10</td><td>Azura</td><td>Đông (Sơn Trà)</td><td>85 – 95 triệu/m²</td></tr>
+<tr><td>11</td><td>SAM Towers</td><td>Tây (Hải Châu – Thanh Khê)</td><td>81 – 88 triệu/m²</td></tr>
+<tr><td>12</td><td>Indochina Riverside Towers</td><td>Tây (Hải Châu – Thanh Khê)</td><td>72 – 85 triệu/m²</td></tr>
+<tr><td>13</td><td><a href="/du-an/peninsula-da-nang/">The Peninsula</a></td><td>Đông (Sơn Trà)</td><td>68 – 80 triệu/m²</td></tr>
+<tr><td>14</td><td>The Monarchy</td><td>Đông (Sơn Trà)</td><td>69 – 72 triệu/m²</td></tr>
+<tr><td>15</td><td>La Paz Tower</td><td>Tây (Hải Châu – Thanh Khê)</td><td>58 – 67 triệu/m²</td></tr>
+<tr><td>16</td><td>F.Home Apartment</td><td>Tây (Hải Châu – Thanh Khê)</td><td>65 – 66 triệu/m²</td></tr>
+<tr><td>17</td><td>Đà Nẵng Plaza</td><td>Tây (Hải Châu – Thanh Khê)</td><td>54 – 57 triệu/m²</td></tr>
+<tr><td>18</td><td>Chung cư Vicoland</td><td>Đông (Sơn Trà)</td><td>44 – 46 triệu/m²</td></tr>
+<tr><td>19</td><td>Blue House</td><td>Đông (Sơn Trà)</td><td>42 – 44 triệu/m²</td></tr>
+<tr><td>20</td><td>Blooming Tower</td><td>Tây (Hải Châu – Thanh Khê)</td><td>39 – 41 triệu/m²</td></tr>
+<tr><td>21</td><td>Hòa Bình Green</td><td>Đông (Sơn Trà)</td><td>35 – 40 triệu/m²</td></tr>
+</tbody>
+</table>
+<p>Đây là <strong>giá rao trên thị trường</strong> (số liệu Biggee.vn), chưa phải giá giao dịch; căn tầng cao, view trực diện thường ở mức trên của khoảng giá. Nhìn chung: dự án mới, hạng sang quanh cầu Sông Hàn – cầu Rồng (M Landmark, The Filmore, The Legend, Landmark Tower) trên 118 triệu/m²; nhóm Sun Group bờ Đông khoảng 86 – 124 triệu/m²; chung cư lâu năm phía Bắc (Blooming, Hòa Bình Green, Blue House, Vicoland) dưới 50 triệu/m² – lựa chọn view sông vừa túi tiền.</p>
 
 <h2>Vì sao căn hộ view sông Hàn luôn được săn đón</h2>
 <p>Sông Hàn là trục cảnh quan trung tâm của Đà Nẵng, gắn với cầu Rồng, cầu Trần Thị Lý và khu vực bắn pháo hoa quốc tế. Căn hộ nhìn ra sông vừa phục vụ ở thực, vừa dễ cho thuê với khách du lịch, chuyên gia.</p>
 <p>Quỹ đất ven sông gần như không còn mới, nên số dự án có view sông trực diện rất hạn chế. Đây là lý do giá căn view sông thường cao hơn căn cùng dự án nhưng nhìn về hướng khác.</p>
 
-<h2>Bảng căn hộ view sông Hàn và giá tham khảo</h2>
+<h2>Căn hộ view sông Hàn đang bán: giá theo loại căn, tình trạng</h2>
 <table>
 <thead><tr><th>Dự án</th><th>Bờ sông</th><th>Giá tham khảo</th><th>Tình trạng</th></tr></thead>
 <tbody>
@@ -145,14 +178,15 @@ HTML
 		'seo'      => array(
 			'seo_title' => 'Căn hộ view sông Hàn: dự án và giá tham khảo 2026',
 			'desc'      => 'Căn hộ view sông Hàn hai bờ Sơn Trà, Hải Châu: bảng dự án, giá tham khảo, tình trạng bàn giao. Gọi Hoàng Hiệp để nhận căn view đẹp.',
-			'points'    => array( '10 dự án căn hộ có view sông Hàn ở hai bờ', 'Giá tham khảo khoảng 50 – 128 triệu/m² tùy dự án, tầng, view', 'Phân biệt view trực diện, view chéo khi chọn căn' ),
+			'points'    => array( 'Bảng giá rao 21 dự án căn hộ view sông Hàn, kèm bản đồ vị trí', 'Cao nhất M Landmark 208 – 228, The Filmore 174 – 212 triệu/m²; thấp nhất Hòa Bình Green 35 – 40 triệu/m²', 'Nhóm Sun Group bờ Đông khoảng 86 – 124 triệu/m²', 'Phân biệt view trực diện, view chéo khi chọn căn' ),
 			'faq'       => array(
-				array( 'Căn hộ view sông Hàn giá bao nhiêu?', 'Tùy dự án, giá tham khảo khoảng 50 – 128 triệu/m²; studio từ khoảng 1,8 – 3,2 tỷ, căn 2PN phổ biến 4 – 8 tỷ.' ),
+				array( 'Căn hộ view sông Hàn giá bao nhiêu?', 'Giá rao tháng 10/2026 khoảng 35 – 228 triệu/m² tùy dự án, phổ biến 65 – 125 triệu/m²; studio từ khoảng 1,8 – 3,2 tỷ, căn 2PN phổ biến 4 – 8 tỷ.' ),
+				array( 'Căn hộ view sông Hàn nào giá mềm nhất?', 'Các chung cư lâu năm phía cầu Thuận Phước như Hòa Bình Green (35 – 40), Blooming Tower (39 – 41), Blue House (42 – 44), Vicoland (44 – 46 triệu/m²).' ),
 				array( 'Dự án view sông Hàn nào đã bàn giao?', 'Sun Symphony Residence, Sun Cosmo Residence và The Filmore đã và đang bàn giao, có thể nhận nhà sớm.' ),
 				array( 'Nên mua bờ Đông hay bờ Tây sông Hàn?', 'Bờ Đông nhiều lựa chọn, giá đa dạng, gần biển; bờ Tây ít căn hơn, giá cao hơn nhưng nằm ngay lõi trung tâm Hải Châu.' ),
 			),
 		),
-		'sources'  => array( 'https://batdongsan.com.vn/ban-can-ho-chung-cu-sun-symphony-residence', 'https://batdongsan.com.vn/ban-can-ho-chung-cu-the-filmore-da-nang', 'https://baodautu.vn/danang-landmark-du-dieu-kien-mo-ban-bo-sung-454-can-ho-tai-thi-truong-da-nang-d538777.html' ),
+		'sources'  => array( 'https://biggee.vn/', 'https://batdongsan.com.vn/ban-can-ho-chung-cu-sun-symphony-residence', 'https://batdongsan.com.vn/ban-can-ho-chung-cu-the-filmore-da-nang', 'https://baodautu.vn/danang-landmark-du-dieu-kien-mo-ban-bo-sung-454-can-ho-tai-thi-truong-da-nang-d538777.html' ),
 	);
 
 	$posts[] = array(
