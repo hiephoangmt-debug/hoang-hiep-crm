@@ -182,7 +182,7 @@ def main():
         files.append((flat(p["slug"]) + ".html", convert(src, p["slug"])))
     for name, s in files:
         open(os.path.join(out, name), "w", encoding="utf-8").write(s)
-        bad = s.count("<use ") + len(re.findall(r'<script(?! type="application/ld\+json")', s))
+        bad = s.count("<use ") + len(re.findall(r'<script(?! type="application/ld\+json")(?! src="https://script\.google\.com/)', s))
         print(f"{name:52s} {len(s)//1024:4d} KB{'  !! use/script: ' + str(bad) if bad else ''}")
 
 

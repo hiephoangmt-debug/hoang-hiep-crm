@@ -355,8 +355,13 @@ def head_common(title, desc, url, root, og_type="website"):
 """
 
 
+# Script theo dõi CRM (key riêng cho từng website; URL và key công khai theo thiết kế)
+CRM_SCRIPT = ('<script src="https://script.google.com/macros/s/AKfycbyMWXl47PShn-ikZKwrFONJb9z89NOmVG6yIioyjGxo55IEbLh4yP7KiREPsxgSbxBl/exec?js=1" '
+              'data-key="qmbMINV1H6RD" async></script>')  # the-tin-dung-da-nang.com
+
+
 def tail(root):
-    return fill(read("src/partials/footer.html"), root) + f'\n<script src="{root}assets/site.js"></script>\n</body>\n</html>\n'
+    return fill(read("src/partials/footer.html"), root) + f'\n<script src="{root}assets/site.js"></script>\n{CRM_SCRIPT}\n</body>\n</html>\n'
 
 
 def build_page(p):
