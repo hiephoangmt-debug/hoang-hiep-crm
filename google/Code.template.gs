@@ -11,7 +11,126 @@ function doGet(e) {
   if (e && e.parameter && e.parameter.js) {
     return ContentService.createTextOutput(TRACK_JS).setMimeType(ContentService.MimeType.JAVASCRIPT);
   }
+  // Giao diện CRM chỉ phục vụ người đã đăng nhập Google qua bản triển khai "Người dùng truy cập ứng dụng web".
+  // Bản triển khai nhận dữ liệu từ website ("Tôi" + "Bất kỳ ai") không bao giờ lộ giao diện này cho khách lạ.
+  if (isUiUser_()) {
+    return HtmlService.createHtmlOutputFromFile('Crm').setTitle('CRM Hoàng Hiệp')
+      .addMetaTag('viewport', 'width=device-width, initial-scale=1');
+  }
   return json_({ ok: true, service: 'CRM Hoàng Hiệp' });
+}
+
+// Người đang mở có email Google xác định và đang chạy bằng chính quyền của họ -> chỉ khi họ có quyền với file Sheet.
+function isUiUser_() {
+  try {
+    var a = Session.getActiveUser().getEmail(), e = Session.getEffectiveUser().getEmail();
+    return !!a && a === e;
+  } catch (x) { return false; }
+}
+function requireUi_() {
+  if (!isUiUser_()) throw new Error('Không có quyền. Mở bằng link CRM và đăng nhập Gmail đã được chia sẻ file Sheet.');
+}
+function withLock_(fn) {
+  var lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try { return fn(); } finally { lock.releaseLock(); }
+}
+function iso_(d) { return d && typeof d.getTime === 'function' ? new Date(d.getTime()).toISOString() : ''; }
+function phoneStr_(v) { var p = String(v == null ? '' : v); return p.length === 9 ? '0' + p : p; }
+
+// ---- API cho giao diện (google.script.run) ----
+function crmLoad() {
+  requireUi_();
+  var ss = ss_(), out = { user: Session.getActiveUser().getEmail(), now: new Date().toISOString() };
+  var sh = ss.getSheetByName(S_LEADS), n = sh.getLastRow();
+  var rows = n > 1 ? sh.getRange(2, 1, n - 1, 22).getValues() : [];
+  out.leads = rows.filter(function (r) { return r[3]; }).map(function (r) {
+    return { id: r[0], at: iso_(r[1]), name: String(r[2] || ''), phone: phoneStr_(r[3]), email: String(r[4] || ''), site: String(r[5] || ''),
+      source: String(r[6] || ''), campaign: String(r[7] || ''), vid: String(r[8] || ''), submits: Number(r[9]) || 1,
+      zaloClicks: Number(r[10]) || 0, phoneClicks: Number(r[11]) || 0, called: r[14] === true, messaged: r[15] === true,
+      contactedAt: iso_(r[16]), status: String(r[18] || 'Mới'), assignee: String(r[19] || ''), value: Number(r[20]) || 0, note: String(r[21] || '') };
+  }).reverse();
+  var cs = ss.getSheetByName(S_CLICKS), cn = cs ? cs.getLastRow() : 1, start = Math.max(2, cn - 1499);
+  var crow = cn > 1 ? cs.getRange(start, 1, cn - start + 1, 11).getValues() : [];
+  out.clicks = crow.map(function (r, i) {
+    return { row: start + i, at: iso_(r[0]), vid: String(r[1] || ''), site: String(r[2] || ''), channel: String(r[3] || ''), url: String(r[4] || ''),
+      source: String(r[5] || ''), campaign: String(r[6] || ''), leftPhone: r[7] === 'Có', checked: r[8] === true, note: String(r[9] || ''), alert: String(r[10] || '') };
+  }).filter(function (c) { return c.at; }).reverse();
+  var ov = ss.getSheetByName('Tổng quan');
+  out.kpis = ov.getRange(7, 1, 9, 2).getDisplayValues().filter(function (r) { return r[0]; });
+  out.siteStats = ov.getRange(17, 1, 16, 8).getDisplayValues().filter(function (r, i) { return i === 0 || r[0]; });
+  var ws = ss.getSheetByName(S_SITES), wn = ws.getLastRow();
+  out.sites = (wn > 1 ? ws.getRange(2, 1, wn - 1, 4).getValues() : []).filter(function (r) { return r[0]; })
+    .map(function (r) { return { name: String(r[0]), domain: String(r[1]), key: String(r[2]), snippet: String(r[3] || '') }; });
+  var cp = ss.getSheetByName('Chiến dịch');
+  out.campaigns = cp.getRange(1, 1, 31, 13).getDisplayValues().filter(function (r, i) { return i === 0 || r[2]; });
+  return out;
+}
+
+function findLead_(phone) {
+  var want = normPhone_(phone), sh = ss_().getSheetByName(S_LEADS), n = sh.getLastRow();
+  if (!want || n < 2) throw new Error('Không tìm thấy khách');
+  var ph = sh.getRange(2, 4, n - 1, 1).getValues();
+  for (var i = 0; i < ph.length; i++) if (normPhone_(phoneStr_(ph[i][0])) === want) return { sh: sh, row: i + 2 };
+  throw new Error('Không tìm thấy khách');
+}
+
+// Bấm Gọi / Zalo / SMS trong giao diện -> ghi "Đã gọi" / "Đã nhắn", giờ liên hệ đầu tiên, đổi trạng thái Mới -> Đã liên hệ
+function crmLog(phone, type) {
+  requireUi_();
+  if (['call', 'zalo', 'sms'].indexOf(type) < 0) throw new Error('Loại không hợp lệ');
+  return withLock_(function () {
+    var f = findLead_(phone), sh = f.sh, r = f.row, now = new Date();
+    sh.getRange(r, type === 'call' ? 15 : 16).setValue(true);
+    var q = sh.getRange(r, 17);
+    if (!q.getValue()) q.setValue(now);
+    var s = sh.getRange(r, 19);
+    if (s.getValue() === STATUS_NEW) s.setValue(STATUS_CONTACTED);
+    return { called: sh.getRange(r, 15).getValue() === true, messaged: sh.getRange(r, 16).getValue() === true,
+      contactedAt: iso_(q.getValue()), status: String(s.getValue()) };
+  });
+}
+
+var STATUSES = ['Mới', 'Đã liên hệ', 'Quan tâm', 'Hẹn xem', 'Chốt', 'Mất'];
+function crmUpdateLead(phone, f) {
+  requireUi_();
+  f = f || {};
+  if (f.status !== undefined && STATUSES.indexOf(f.status) < 0) throw new Error('Trạng thái không hợp lệ');
+  return withLock_(function () {
+    var x = findLead_(phone), sh = x.sh, r = x.row;
+    if (f.name !== undefined) sh.getRange(r, 3).setValue(str_(f.name, 120));
+    if (f.status !== undefined) sh.getRange(r, 19).setValue(f.status);
+    if (f.assignee !== undefined) sh.getRange(r, 20).setValue(str_(f.assignee, 80));
+    if (f.value !== undefined) sh.getRange(r, 21).setValue(Math.max(0, Number(f.value) || 0));
+    if (f.note !== undefined) sh.getRange(r, 22).setValue(str_(f.note, 2000));
+    return { ok: true };
+  });
+}
+
+function crmClickDone(row, vid, done, note) {
+  requireUi_();
+  return withLock_(function () {
+    var sh = ss_().getSheetByName(S_CLICKS);
+    row = Number(row);
+    if (!sh || row < 2 || String(sh.getRange(row, 2).getValue()) !== String(vid)) throw new Error('Dòng đã thay đổi, hãy tải lại');
+    sh.getRange(row, 9).setValue(done === true);
+    if (note !== undefined) sh.getRange(row, 10).setValue(str_(note, 300));
+    return { ok: true };
+  });
+}
+
+function crmEvents(vid) {
+  requireUi_();
+  vid = String(vid || '');
+  if (!vid) return [];
+  var sh = ss_().getSheetByName(S_EVENTS), n = sh.getLastRow();
+  if (n < 2) return [];
+  var rows = sh.getRange(2, 1, n - 1, 8).getValues(), out = [];
+  for (var i = rows.length - 1; i >= 0 && out.length < 100; i--) {
+    var r = rows[i];
+    if (String(r[1]) === vid) out.push({ at: iso_(r[0]), site: String(r[2]), type: String(r[3]), channel: String(r[4]), url: String(r[5]), source: String(r[6]), campaign: String(r[7]) });
+  }
+  return out;
 }
 
 function doPost(e) {

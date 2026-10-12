@@ -16,6 +16,7 @@ class Sheet {
     return {
       getValues: () => Array.from({ length: nr }, (_, i) => Array.from({ length: nc }, (_, j) => (s.rows[r - 1 + i] || [])[c - 1 + j] ?? '')),
       getValue: () => (s.rows[r - 1] || [])[c - 1] ?? '',
+      getDisplayValues: () => Array.from({ length: nr }, (_, i) => Array.from({ length: nc }, (_, j) => String((s.rows[r - 1 + i] || [])[c - 1 + j] ?? ''))),
       setValues: (v) => v.forEach((row, i) => row.forEach((x, j) => { (s.rows[r - 1 + i] ||= [])[c - 1 + j] = x; })),
       setValue: (x) => { (s.rows[r - 1] ||= [])[c - 1] = x; },
       getSheet: () => s, getColumn: () => c, getRow: () => r,
@@ -27,6 +28,8 @@ const sheets = {
   'Hoạt động': new Sheet('Hoạt động', []),
   'Website': new Sheet('Website', ['Tên', 'Domain', 'Mã']),
   'Lượt bấm': new Sheet('Lượt bấm', []),
+  'Tổng quan': new Sheet('Tổng quan', []),
+  'Chiến dịch': new Sheet('Chiến dịch', ['Nền tảng', 'Tên', 'utm']),
 };
 sheets.Website.appendRow(['Landing A', 'a.com', 'testkey12345']);
 const out = (o) => ({ setMimeType() { return { body: o }; } });
@@ -35,6 +38,8 @@ const ctx = vm.createContext({
   CacheService: { getScriptCache: () => ({ get: () => null, put() {} }) },
   LockService: { getScriptLock: () => ({ waitLock() {}, releaseLock() {} }) },
   ContentService: { createTextOutput: (b) => ({ body: b, setMimeType(m) { this.mime = m; return this; } }), MimeType: { JSON: 'json', JAVASCRIPT: 'js' } },
+  Session: { getActiveUser: () => ({ getEmail: () => globalThis.__active ?? '' }), getEffectiveUser: () => ({ getEmail: () => 'owner@gmail.com' }) },
+  HtmlService: { createHtmlOutputFromFile: (n) => ({ file: n, setTitle() { return this; }, addMetaTag() { return this; } }) },
   ScriptApp: { getService: () => ({ getUrl: () => 'https://script.google.com/macros/s/X/exec' }) },
   console,
 });
@@ -78,4 +83,39 @@ assert.equal(typeof sh.rows[1][16].getTime, 'function'); assert.equal(sh.rows[1]
 
 // doGet trả về mã theo dõi, có nhận diện Google
 const js = ctx.doGet({ parameter: { js: '1' } }); assert.equal(js.mime, 'js'); assert.match(js.body, /script\\.google/); assert.match(js.body, /action/);
+// ---- giao diện CRM (API cho Crm.html) ----
+const T = sheets['Tổng quan']; for (let i = 0; i < 16; i++) T.rows[i] = [];
+T.rows[6] = ['Khách chưa gọi, chưa nhắn', 1]; T.rows[7] = ['Khách để lại SĐT', 2]; T.rows[14] = ['Lượt bấm chưa xử lý', 1];
+T.rows[16] = ['Website', 'Truy cập']; T.rows[17] = ['Landing A', 3];
+// khách thường: không đăng nhập -> không có quyền, doGet chỉ trả JSON
+globalThis.__active = '';
+assert.throws(() => ctx.crmLoad(), /Không có quyền/); assert.throws(() => ctx.crmLog('0912345678', 'call'), /Không có quyền/);
+assert.equal(JSON.parse(ctx.doGet({ parameter: {} }).body).ok, true);
+// người dùng đăng nhập chính là chủ chạy -> có giao diện
+globalThis.__active = 'owner@gmail.com';
+assert.equal(ctx.doGet({ parameter: {} }).file, 'Crm');
+// khác chủ chạy (ví dụ bản triển khai "Tôi") -> không lộ giao diện
+globalThis.__active = 'khach@gmail.com';
+assert.equal(ctx.doGet({ parameter: {} }).file, undefined);
+globalThis.__active = 'owner@gmail.com';
+const L = ctx.crmLoad();
+assert.equal(L.user, 'owner@gmail.com'); assert.equal(L.leads.length, 2);
+const l0 = L.leads.find((x) => x.phone === '0988111222');
+assert.ok(l0 && l0.status === 'Mới' && l0.called === false && l0.site === 'Landing A');
+assert.equal(L.kpis.length, 3); assert.equal(L.sites.length, 1); assert.equal(L.clicks.length, 1);
+// bấm Gọi trong giao diện -> ghi nhận, đổi trạng thái
+const lg = ctx.crmLog('0988 111 222', 'call');
+assert.equal(lg.called, true); assert.equal(lg.status, 'Đã liên hệ'); assert.ok(lg.contactedAt);
+assert.throws(() => ctx.crmLog('0900000000', 'call'), /Không tìm thấy/); assert.throws(() => ctx.crmLog('0988111222', 'xyz'), /không hợp lệ/);
+ctx.crmUpdateLead('0988111222', { status: 'Chốt', value: 5000000, assignee: 'Hanh', note: 'xem nhà 15/10' });
+const l1 = ctx.crmLoad().leads.find((x) => x.phone === '0988111222');
+assert.deepEqual([l1.status, l1.value, l1.assignee, l1.note], ['Chốt', 5000000, 'Hanh', 'xem nhà 15/10']);
+assert.throws(() => ctx.crmUpdateLead('0988111222', { status: 'abc' }), /không hợp lệ/);
+// tick đã kiểm tra lượt bấm (sai vid -> từ chối)
+const ck0 = ctx.crmLoad().clicks[0];
+assert.throws(() => ctx.crmClickDone(ck0.row, 'sai-vid', true), /thay đổi/);
+ctx.crmClickDone(ck0.row, ck0.vid, true, 'đã xem Zalo');
+const ck1 = ctx.crmLoad().clicks[0]; assert.equal(ck1.checked, true); assert.equal(ck1.note, 'đã xem Zalo');
+// lịch sử truy cập của khách
+assert.ok(ctx.crmEvents('v1').length >= 2); assert.equal(ctx.crmEvents('').length, 0);
 console.log('OK – Code.gs đạt mọi test');
