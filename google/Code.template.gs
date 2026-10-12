@@ -11,6 +11,7 @@ function doGet(e) {
   if (e && e.parameter && e.parameter.js) {
     return ContentService.createTextOutput(TRACK_JS).setMimeType(ContentService.MimeType.JAVASCRIPT);
   }
+  if (e && e.parameter && e.parameter.debug) return json_(debugInfo_());
   // Giao diện CRM chỉ phục vụ người đã đăng nhập Google qua bản triển khai "Người dùng truy cập ứng dụng web".
   // Bản triển khai nhận dữ liệu từ website ("Tôi" + "Bất kỳ ai") không bao giờ lộ giao diện này cho khách lạ.
   if (isUiUser_()) {
@@ -18,6 +19,16 @@ function doGet(e) {
       .addMetaTag('viewport', 'width=device-width, initial-scale=1');
   }
   return json_({ ok: true, service: 'CRM Hoàng Hiệp' });
+}
+
+// ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ email hay dữ liệu)
+function debugInfo_() {
+  var o = { version: 'ui-2', ui: isUiUser_(), hasActiveEmail: false, hasEffectiveEmail: false, effectiveIsOwner: null, canOpenSheet: false, hasCrmHtml: false };
+  try { o.hasActiveEmail = !!Session.getActiveUser().getEmail(); } catch (x) {}
+  try { o.hasEffectiveEmail = !!Session.getEffectiveUser().getEmail(); } catch (x) {}
+  try { var ow = ss_().getOwner(); o.canOpenSheet = true; o.effectiveIsOwner = !!ow && ow.getEmail() === Session.getEffectiveUser().getEmail(); } catch (x) {}
+  try { HtmlService.createHtmlOutputFromFile('Crm'); o.hasCrmHtml = true; } catch (x) {}
+  return o;
 }
 
 // Giao diện chỉ dành cho người dùng đăng nhập Google chạy bằng chính quyền của họ:

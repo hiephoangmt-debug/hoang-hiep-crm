@@ -84,6 +84,9 @@ assert.equal(typeof sh.rows[1][16].getTime, 'function'); assert.equal(sh.rows[1]
 // doGet trả về mã theo dõi, có nhận diện Google
 const js = ctx.doGet({ parameter: { js: '1' } }); assert.equal(js.mime, 'js'); assert.match(js.body, /script\\.google/); assert.match(js.body, /action/);
 // ---- giao diện CRM (API cho Crm.html) ----
+globalThis.__active = ''; globalThis.__eff = undefined;
+const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
+assert.equal(dbg.ui, false); assert.equal(dbg.effectiveIsOwner, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(JSON.stringify(dbg).includes('@'), false);
 const T = sheets['Tổng quan']; for (let i = 0; i < 16; i++) T.rows[i] = [];
 T.rows[6] = ['Khách chưa gọi, chưa nhắn', 1]; T.rows[7] = ['Khách để lại SĐT', 2]; T.rows[14] = ['Lượt bấm chưa xử lý', 1];
 T.rows[16] = ['Website', 'Truy cập']; T.rows[17] = ['Landing A', 3];
