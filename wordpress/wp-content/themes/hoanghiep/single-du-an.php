@@ -216,7 +216,7 @@ while ( have_posts() ) :
 					<?php if ( $px_img ) : ?>
 						<figure class="px-overview__img">
 							<a href="<?php echo esc_url( wp_get_attachment_image_url( $px_img, 'full' ) ); ?>" data-lightbox="tong-quan"><?php echo wp_get_attachment_image( $px_img, 'large', false, array( 'loading' => 'lazy', 'alt' => 'Phối cảnh tổng thể ' . $title ) ); ?></a>
-							<figcaption>Phối cảnh <?php echo esc_html( $title ); ?></figcaption>
+							<figcaption><?php echo esc_html( get_post_meta( $px_img, '_wp_attachment_image_alt', true ) ?: 'Phối cảnh ' . $title ); ?></figcaption>
 						</figure>
 					<?php endif; ?>
 					<div class="px-overview__specs"><?php hh_spec_list( hh_project_specs() ); ?></div>

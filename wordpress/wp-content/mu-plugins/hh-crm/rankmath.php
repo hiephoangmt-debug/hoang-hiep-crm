@@ -98,6 +98,14 @@ function hh_rm_project_title( $post ) {
 	$name  = $name ?: trim( preg_replace( '/\s*\([^)]*\)/u', '', html_entity_decode( $post->post_title, ENT_QUOTES, 'UTF-8' ) ) );
 	$when  = wp_date( 'm/Y', (int) get_post_modified_time( 'U', true, $post ) );
 	$brand = function_exists( 'hoanghiep_opt' ) && hoanghiep_opt( 'hh_person_name' ) ? hoanghiep_opt( 'hh_person_name' ) : 'Hoàng Hiệp';
+	// Đất nền đã bàn giao (chỉ còn chuyển nhượng): người tìm quan tâm giá đất và sổ đỏ, không phải chính sách bán hàng.
+	if ( has_term( 'dat-nen', 'loai-du-an', $post ) && function_exists( 'hh_project_is_resale' ) && hh_project_is_resale( $post->ID ) ) {
+		foreach ( array( $name . ': Giá đất, pháp lý ' . $when . ' | ' . $brand, $name . ': Giá đất, pháp lý ' . $when, $name . ': Giá đất ' . $when ) as $title ) {
+			if ( mb_strlen( $title ) <= 60 ) {
+				return $title;
+			}
+		}
+	}
 	foreach ( array(
 		$name . ': Bảng giá, chính sách ' . $when . ' | ' . $brand,
 		$name . ': Bảng giá, chính sách ' . $when,

@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.11** + plugin Hoàng Hiệp CRM **2.20.34**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.12** + plugin Hoàng Hiệp CRM **2.20.35**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,15 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.35, giao diện 2.15.12: 8 trang dự án đất nền Điện Ngọc
+- **8 trang dự án mới** (loại Đất nền, khu vực Điện Bàn), mỗi trang có vị trí, quy mô, bảng giá rao tham khảo 2026, lưu ý pháp lý, câu hỏi thường gặp và liên kết sang các dự án Điện Ngọc khác:
+  Khu đô thị 1A 1B · Khu đô thị số 3 · Khu đô thị 7B (Coco Center House, Sentosa City) · Khu đô thị số 9 · Phố chợ Điện Ngọc · Sentosa Riverside (Peaceful Land) · GAIA City · Tropical Palm (Ngọc Dương Riverside mở rộng).
+- Ảnh đại diện là đồ hoạ tự vẽ (sơ đồ minh hoạ + thẻ thông tin nhanh), không dùng ảnh của sàn khác.
+- Giá là **giá rao tham khảo**, không phải giá giao dịch; các dự án có vướng mắc pháp lý (Sentosa Riverside chậm ra sổ, khu số 9 chậm nghiệm thu) đều ghi rõ lưu ý.
+- Tiêu đề SEO tự động cho đất nền đã bàn giao đổi thành "{Tên}: Giá đất, pháp lý {tháng}" (trước là "Bảng giá, chính sách") – chỉ đổi tiêu đề do web tự tạo, tiêu đề anh sửa tay giữ nguyên.
+- Chú thích ảnh tổng quan dự án lấy theo mô tả ảnh (alt) thay vì luôn ghi "Phối cảnh".
+- Cài: Nhập nhanh `cap-nhat-code.zip` → **Nhập dữ liệu Đà Nẵng → Nhập / cập nhật dữ liệu** (bắt buộc, để tạo 8 trang) → LiteSpeed Cache → Purge All.
 
 ## Có gì mới – giao diện 2.15.11, plugin 2.20.34: hoa văn lưới kẻ ô + sóng biển mờ
 - **Chân trang web** (nền xanh navy): thêm lưới kẻ ô rất mờ và 3 đường sóng biển mờ sát đáy. Chỉ là CSS, không ảnh hưởng tốc độ.
