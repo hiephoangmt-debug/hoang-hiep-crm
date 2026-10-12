@@ -9,7 +9,7 @@ var RATE = 1;          // Tài khoản tính bằng VNĐ: để 1. Tài khoản 
 var UTM_MAP = {};      // Tuỳ chọn: {'Tên chiến dịch trong Google Ads': 'utm-cua-chien-dich'}. Không khai báo thì tự đặt từ tên chiến dịch.
 
 function slug_(s) {
-  return String(s).toLowerCase().replace(/đ/g, 'd').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  return String(s).toLowerCase().replace(/đ/g, 'd').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
 function ymd_(d, tz) { return Utilities.formatDate(d, tz, 'yyyy-MM-dd'); }
 
