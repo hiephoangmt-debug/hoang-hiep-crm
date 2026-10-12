@@ -61,6 +61,20 @@ add_action(
 	2
 );
 
+/** Script theo dõi gửi dữ liệu về CRM (URL và data-key công khai theo thiết kế). In đúng 1 lần mỗi trang. */
+add_action(
+	'wp_head',
+	static function () {
+		static $done = false;
+		if ( $done ) {
+			return;
+		}
+		$done = true;
+		echo '<script src="https://script.google.com/macros/s/AKfycbyMWXl47PShn-ikZKwrFONJb9z89NOmVG6yIioyjGxo55IEbLh4yP7KiREPsxgSbxBl/exec?js=1" data-key="mPkoCnOIiCnl" async></script>' . "\n";
+	},
+	3
+);
+
 /**
  * Menu used until one is assigned in Giao diện → Menu.
  */
