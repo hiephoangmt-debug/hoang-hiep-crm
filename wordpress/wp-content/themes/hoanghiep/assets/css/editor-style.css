@@ -1,0 +1,8 @@
+/* Khung soạn bài (trình soạn thảo cổ điển và khối): giống trang xem – căn đều 2 bên. */
+body, .editor-styles-wrapper { font-family: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-size: 17px; line-height: 1.8; color: #2e3a4e; }
+p, li, dd, .editor-styles-wrapper p, .editor-styles-wrapper li { text-align: justify; text-justify: inter-word; hyphens: auto; }
+td, th { text-align: left; }
+table { border-collapse: collapse; width: 100%; }
+td, th { border: 1px solid #d9dee6; padding: 8px 10px; }
+th { background: #12234a; color: #fff; }
+h2, h3 { line-height: 1.35; }

@@ -1437,3 +1437,7 @@ html.nav-locked, html.nav-locked body { overflow: hidden; }
 	.lx-fp-map { order: 0; position: static; aspect-ratio: 4 / 3; }
 	.lx-fp-wrap .lx-fp { max-height: none; overflow: visible; padding-right: 0; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
 }
+
+/* Nội dung bài viết, dự án, tin rao: căn đều 2 bên; tách chữ khi cần để không hở khoảng trắng lớn trên điện thoại. */
+.entry-content p, .entry-content li, .entry-content dd { text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto; }
+.entry-content td, .entry-content th, .entry-content figcaption, .entry-content .key-points li { text-align: left; }

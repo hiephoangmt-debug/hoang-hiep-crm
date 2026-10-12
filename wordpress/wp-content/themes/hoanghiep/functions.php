@@ -202,6 +202,15 @@ function hoanghiep_old_theme_plugins_notice() {
  * Menu chính: tự thêm các trang "Bảng giá thị trường" vào dưới mục Mua bán (khi mục đó chưa có menu con),
  * để menu đã tạo sẵn trên web cũ cũng có, không cần sửa tay.
  */
+/** Khung soạn bài trong quản trị dùng cùng kiểu chữ, căn đều 2 bên như trang xem. */
+add_action(
+	'after_setup_theme',
+	static function () {
+		add_theme_support( 'editor-styles' );
+		add_editor_style( 'assets/css/editor-style.css' );
+	}
+);
+
 add_filter( 'wp_nav_menu_objects', 'hoanghiep_market_submenu', 10, 2 );
 add_filter( 'wp_nav_menu_objects', 'hoanghiep_villa_submenu', 11, 2 );
 
