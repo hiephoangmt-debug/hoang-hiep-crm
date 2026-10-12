@@ -168,7 +168,7 @@ HTML
 
 	$posts[] = array(
 		'slug'     => 'gia-dat-ven-bien-da-nang-vo-nguyen-giap-hoang-sa',
-		'rev'      => '2026-10-12b', // Cập nhật chi tiết lô nhỏ / lô lớn theo tuyến (bản cũ còn trong Bản sửa đổi).
+		'rev'      => '2026-10-12d', // Cập nhật chi tiết lô nhỏ / lô lớn theo tuyến (bản cũ còn trong Bản sửa đổi).
 		'repub'    => true, // Đưa lên đầu Tin tức, ngày đăng = ngày cập nhật.
 		'title'    => 'Giá đất ven biển Đà Nẵng 10/2026: bảng giá mặt tiền biển lô nhỏ, lô lớn theo tuyến',
 		'excerpt'  => 'Giá đất ven biển Đà Nẵng tháng 10/2026: Hoàng Sa lô nhỏ 330 – 415 triệu/m², Võ Nguyên Giáp 130 – 390 triệu/m², Nguyễn Tất Thành 47 – 180 triệu/m², Trường Sa 60 – 130 triệu/m², Lạc Long Quân 16 – 46 triệu/m² (giá rao tham khảo).',
@@ -185,8 +185,8 @@ HTML
 
 <!--hh-featured-->
 
-<h2>Bảng giá đất mặt tiền biển Đà Nẵng theo tuyến (10/2026)</h2>
-<p>"Lô nhỏ, vừa" là lô dưới khoảng 350 m² (thường ngang 5 – 15 m), hợp xây nhà ở, khách sạn mini, căn hộ dịch vụ; "lô lớn" từ khoảng 400 m² trở lên, hợp khách sạn quy mô vừa, lớn.</p>
+<h2>Bảng giá đất ven biển Đà Nẵng theo tuyến (10/2026)</h2>
+<p>Trong bảng giá đất ven biển Đà Nẵng dưới đây, "lô nhỏ, vừa" là lô dưới khoảng 350 m² (thường ngang 5 – 15 m), hợp xây nhà ở, khách sạn mini, căn hộ dịch vụ; "lô lớn" từ khoảng 400 m² trở lên, hợp khách sạn quy mô vừa, lớn.</p>
 <table>
 <thead><tr><th>Tuyến đường mặt biển</th><th>Lô nhỏ, vừa</th><th>Lô lớn</th></tr></thead>
 <tbody>
@@ -200,33 +200,34 @@ HTML
 </table>
 <p>Đây là <strong>giá chào bán</strong> trên tin rao (Batdongsan, Alonhadat, Nhatot, Homedy…), không phải giá giao dịch, thường còn biên độ thương lượng. Bảng giá đầy đủ cả trục gần biển và trung tâm (Võ Văn Kiệt, Phạm Văn Đồng, Bạch Đằng, Nguyễn Văn Linh) xem tại trang <a href="/mua-ban/dat-nen/">bảng giá đất lớn, đất xây khách sạn Đà Nẵng</a>.</p>
 
-<h2>Giá đất Hoàng Sa (Sơn Trà) – đắt nhất trục biển</h2>
+<h2>Giá đất ven biển Đà Nẵng tuyến Hoàng Sa (Sơn Trà) – đắt nhất trục biển</h2>
 <h3>Lô nhỏ, vừa 200 – 330 m²</h3>
-<p>Lô mặt biển Hoàng Sa đoạn Mân Thái – Phạm Văn Đồng ít hàng, nên đơn giá lô nhỏ còn cao hơn lô lớn. Tin rao 2026: lô 212 m² ngang 10 m khoảng 70 tỷ (≈ 330 triệu/m²), lô 213 m² khoảng 74,5 tỷ, lô 327 m² ngang 15 m khoảng 350 triệu/m²; hai lô liền kề 205 m² đối diện bãi tắm Mân Thái rao tới khoảng 415 triệu/m². Đất kiệt gần Hoàng Sa mềm hơn nhiều, khoảng 75 – 150 triệu/m².</p>
+<p>Hoàng Sa là nơi giá đất ven biển Đà Nẵng cao nhất hiện nay. Lô mặt biển đoạn Mân Thái – Phạm Văn Đồng ít hàng, nên đơn giá lô nhỏ còn cao hơn lô lớn. Tin rao 2026: lô 212 m² ngang 10 m khoảng 70 tỷ (≈ 330 triệu/m²), lô 213 m² khoảng 74,5 tỷ, lô 327 m² ngang 15 m khoảng 350 triệu/m²; hai lô liền kề 205 m² đối diện bãi tắm Mân Thái rao tới khoảng 415 triệu/m². Đất kiệt gần Hoàng Sa mềm hơn nhiều, khoảng 75 – 150 triệu/m².</p>
 <h3>Lô lớn 580 – 1.000 m²</h3>
 <p>Lô lớn khoảng 170 – 400 triệu/m²: 583 m² khoảng 326 triệu/m², 775 m² khoảng 250 triệu/m², 600 m² ngang 30 m khoảng 240 tỷ, 1.000 m² khoảng 170 tỷ. Biên độ rộng vì khác mặt tiền, lô góc, quy hoạch tầng cao và khoảng cách tới phố du lịch.</p>
 
-<h2>Giá đất Võ Nguyên Giáp – mặt biển Mỹ Khê</h2>
+<h2>Giá đất ven biển Đà Nẵng tuyến Võ Nguyên Giáp – mặt biển Mỹ Khê</h2>
 <h3>Lô nhỏ, vừa 150 – 300 m²</h3>
 <p>Lô ngang 6 m (150 – 156 m²) rao khoảng 22 – 25 tỷ, tương đương 145 – 165 triệu/m² – đủ xây khách sạn mini, căn hộ dịch vụ. Lô ngang 12 – 14 m đơn giá cao hơn hẳn: 285 m² ngang 12 m khoảng 130 triệu/m² ở đoạn Ngũ Hành Sơn, nhưng lô 280 m² ngang 14 m đoạn Sơn Trà rao tới 108 tỷ (≈ 386 triệu/m²).</p>
 <h3>Lô lớn 500 – 900 m²</h3>
-<p>Lô lớn hiếm tin rao công khai, thường giao dịch thỏa thuận. Mốc tham khảo: lô 826 m² khu An Thượng khoảng 200 triệu/m².</p>
+<p>Ở phân khúc lô lớn, giá đất ven biển Đà Nẵng trên Võ Nguyên Giáp hiếm khi được rao công khai, thường giao dịch thỏa thuận. Mốc tham khảo: lô 826 m² khu An Thượng khoảng 200 triệu/m².</p>
 <h3>Bảng giá đất nhà nước</h3>
-<p>Theo bảng giá đất áp dụng đầu năm 2026 (Nghị quyết 32/2025/NQ-HĐND), Võ Nguyên Giáp vị trí 1 khoảng 220 – 280 triệu/m² tùy đoạn (đoạn Phạm Văn Đồng – Võ Văn Kiệt khoảng 279,6 triệu/m²), chỉ sau Bạch Đằng. Từ 10/6/2026, Đà Nẵng áp dụng bảng giá mới theo Nghị quyết 28/2026/NQ-HĐND – khi tính thuế, tiền sử dụng đất cần tra lại theo đoạn cụ thể. Xem thêm <a href="/bang-gia-dat-da-nang-sua-doi-2026/">bảng giá đất Đà Nẵng sửa đổi 2026</a>.</p>
+<p>Theo bảng giá đất áp dụng đầu năm 2026 (Nghị quyết 32/2025/NQ-HĐND), Võ Nguyên Giáp vị trí 1 khoảng 220 – 280 triệu/m² tùy đoạn (đoạn Phạm Văn Đồng – Võ Văn Kiệt khoảng 279,6 triệu/m²), chỉ sau Bạch Đằng. Từ 10/6/2026, Đà Nẵng áp dụng bảng giá mới theo <a href="https://danang.gov.vn/vi/web/dng/w/quy-dinh-ve-gia-dat-va-bang-gia-cac-loai-dat-tren-dia-ban-thanh-pho" target="_blank" rel="noopener">Nghị quyết 28/2026/NQ-HĐND</a> (Cổng thông tin TP Đà Nẵng) – khi tính thuế, tiền sử dụng đất cần tra lại theo đoạn cụ thể. Xem thêm <a href="/bang-gia-dat-da-nang-sua-doi-2026/">bảng giá đất Đà Nẵng sửa đổi 2026</a>.</p>
 
-<h2>Giá đất Nguyễn Tất Thành – mặt biển Thanh Khê, Liên Chiểu</h2>
+<h2>Giá đất ven biển Đà Nẵng tuyến Nguyễn Tất Thành (Thanh Khê, Liên Chiểu)</h2>
 <h3>Đoạn Thanh Khê – Hải Châu</h3>
 <p>Quy cách phổ biến nhất là lô 125 m² (5 × 25 m), rao khoảng 13,8 – 21,5 tỷ (110 – 172 triệu/m²): lô đối diện bãi tắm Thanh Khê khoảng 15 tỷ, lô có đường sau 5 m khoảng 14,75 tỷ. Lô lớn 250 – 500 m² khoảng 80 – 180 triệu/m²: 250 m² ngang 10 m khoảng 35 tỷ, cặp lô 273 m² rao 49 tỷ, 400 m² ngang 15 m khoảng 32,9 tỷ; phía Hải Châu có lô góc 3 mặt tiền khoảng 436 m² hợp khách sạn, nhà hàng.</p>
 <h3>Đoạn nối dài Liên Chiểu</h3>
-<p>Mặt bằng giá thấp nhất trong các trục biển nội thành: lô nhỏ 100 – 120 m² khoảng 47 – 58 triệu/m² (105 m² Hòa Hiệp Nam rao 4,95 tỷ), lô lớn 375 – 900 m² khoảng 65 – 135 triệu/m². Khu vực hưởng lợi từ <a href="/cang-lien-chieu-khu-thuong-mai-tu-do-bat-dong-san-lien-chieu/">cảng Liên Chiểu</a> và đường tránh Nam Hải Vân. Lưu ý đất song song Nguyễn Tất Thành (đường Xuân Thiều, khoảng 38 triệu/m²) không phải mặt biển.</p>
+<p>Đây là nơi giá đất ven biển Đà Nẵng nội thành thấp nhất: lô nhỏ 100 – 120 m² khoảng 47 – 58 triệu/m² (105 m² Hòa Hiệp Nam rao 4,95 tỷ), lô lớn 375 – 900 m² khoảng 65 – 135 triệu/m². Khu vực hưởng lợi từ <a href="/cang-lien-chieu-khu-thuong-mai-tu-do-bat-dong-san-lien-chieu/">cảng Liên Chiểu</a> và đường tránh Nam Hải Vân. Lưu ý đất song song Nguyễn Tất Thành (đường Xuân Thiều, khoảng 38 triệu/m²) không phải mặt biển.</p>
 
-<h2>Giá đất Trường Sa (Ngũ Hành Sơn) – mềm hơn, gần resort</h2>
-<p>Lô 300 m² ngang 8 m rao khoảng 99,9 triệu/m²; lô lớn 500 – 1.000 m² khoảng 60 – 130 triệu/m² (lô góc 2 mặt tiền 500 m² rao 64,6 tỷ, lô 998 m² ngang 25 m khoảng 60 tỷ). Trường Sa gần biển Tân Trà, các resort lớn và tổ hợp <a href="/du-an/newtown-diamond-da-nang/">Newtown Diamond</a>, hợp nhà đầu tư dài hạn.</p>
+<h2>Giá đất ven biển Đà Nẵng tuyến Trường Sa (Ngũ Hành Sơn)</h2>
+<p>Trường Sa có giá đất ven biển Đà Nẵng mềm hơn trục phía Bắc: lô 300 m² ngang 8 m rao khoảng 99,9 triệu/m²; lô lớn 500 – 1.000 m² khoảng 60 – 130 triệu/m² (lô góc 2 mặt tiền 500 m² rao 64,6 tỷ, lô 998 m² ngang 25 m khoảng 60 tỷ). Trường Sa gần biển Tân Trà, các resort lớn và tổ hợp <a href="/du-an/newtown-diamond-da-nang/">Newtown Diamond</a>, hợp nhà đầu tư dài hạn.</p>
 
-<h2>Giá đất Lạc Long Quân – ven biển Điện Bàn, Hội An</h2>
-<p>Trục biển nối Đà Nẵng – Hội An có giá thấp nhất: lô 240 – 250 m² khoảng 31 – 46 triệu/m² (240 m² ngang 6 m khoảng 7,4 tỷ; 252 m² ở Cẩm An rao 11,5 tỷ), lô lớn 580 – 4.000 m² khoảng 16 – 30 triệu/m² (1.150 m² ngang 32 m khoảng 33,5 tỷ). Địa chỉ tin rao hay ghi lẫn Điện Ngọc, Điện Dương, Cẩm An – cần đối chiếu vị trí trên sổ và bản đồ quy hoạch.</p>
+<h2>Giá đất ven biển Đà Nẵng tuyến Lạc Long Quân (Điện Bàn, Hội An)</h2>
+<p>Sau hợp nhất, trục biển nối Đà Nẵng – Hội An có giá đất ven biển Đà Nẵng thấp nhất: lô 240 – 250 m² khoảng 31 – 46 triệu/m² (240 m² ngang 6 m khoảng 7,4 tỷ; 252 m² ở Cẩm An rao 11,5 tỷ), lô lớn 580 – 4.000 m² khoảng 16 – 30 triệu/m² (1.150 m² ngang 32 m khoảng 33,5 tỷ). Địa chỉ tin rao hay ghi lẫn Điện Ngọc, Điện Dương, Cẩm An – cần đối chiếu vị trí trên sổ và bản đồ quy hoạch.</p>
 
-<h2>Lô nhỏ hay lô lớn: chọn thế nào?</h2>
+<h2>Mua đất ven biển Đà Nẵng: chọn lô nhỏ hay lô lớn?</h2>
+<p>Cùng một tuyến, giá đất ven biển Đà Nẵng tính theo m² có thể chênh gấp đôi giữa lô nhỏ và lô lớn. Cách chọn theo mục đích:</p>
 <ul>
 <li><strong>Lô nhỏ ngang 5 – 6 m:</strong> vốn vào thấp hơn (khoảng 5 – 25 tỷ tùy tuyến), dễ bán lại, hợp nhà ở kết hợp kinh doanh hoặc khách sạn mini 15 – 25 phòng. Đơn giá/m² thường cao.</li>
 <li><strong>Lô ngang 10 – 15 m:</strong> được săn nhất vì đủ thiết kế khách sạn quy mô vừa; trên Hoàng Sa, Võ Nguyên Giáp đơn giá có thể vượt lô lớn.</li>
@@ -234,7 +235,7 @@ HTML
 </ul>
 <p>Muốn so sánh mua đất tự xây với mua khách sạn đang vận hành, xem bài <a href="/ban-khach-san-da-nang-ven-bien-gia-cong-suat/">giá và công suất khách sạn ven biển Đà Nẵng</a>.</p>
 
-<h2>Checklist trước khi đặt cọc đất ven biển</h2>
+<h2>Checklist trước khi đặt cọc đất ven biển Đà Nẵng</h2>
 <ul>
 <li>Xin thông tin quy hoạch: tầng cao, mật độ, khoảng lùi, chỉ giới xây dựng.</li>
 <li>Kiểm tra sổ, mục đích sử dụng đất (đất ở hay thương mại dịch vụ), thời hạn, hiện trạng thế chấp.</li>
@@ -244,26 +245,26 @@ HTML
 </ul>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Quỹ đất mặt biển nội thành Đà Nẵng gần như cố định, nên lô đẹp trên Hoàng Sa, Võ Nguyên Giáp vẫn giữ giá cao; vùng còn dư địa cho người mua ở thực và đầu tư vừa vốn là Nguyễn Tất Thành (Liên Chiểu) và trục Lạc Long Quân phía Hội An. Giá rao chỉ là điểm bắt đầu – nên xem giao dịch thật cùng đoạn và pháp lý từng lô trước khi chốt.</p>
-<p>Xem <a href="/mua-ban/dat-nen/">đất nền, đất ở đang bán tại Đà Nẵng</a> hoặc trang <a href="/khu-vuc/son-tra/">bất động sản Sơn Trà</a>. Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách lô đất ven biển đang bán thật theo ngân sách và hỗ trợ kiểm tra quy hoạch từng lô.</p>
+<p>Quỹ đất mặt biển nội thành gần như cố định, nên giá đất ven biển Đà Nẵng ở các lô đẹp trên Hoàng Sa, Võ Nguyên Giáp vẫn neo cao; vùng còn dư địa cho người mua ở thực và đầu tư vừa vốn là Nguyễn Tất Thành (Liên Chiểu) và trục Lạc Long Quân phía Hội An. Giá rao chỉ là điểm bắt đầu – nên xem giao dịch thật cùng đoạn và pháp lý từng lô trước khi chốt.</p>
+<p>Xem <a href="/mua-ban/dat-nen/">đất nền, đất ở đang bán tại Đà Nẵng</a> hoặc trang <a href="/khu-vuc/son-tra/">bất động sản Sơn Trà</a>. Cần cập nhật giá đất ven biển Đà Nẵng mới nhất, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo) để nhận danh sách lô đất ven biển đang bán thật theo ngân sách và hỗ trợ kiểm tra quy hoạch từng lô.</p>
 HTML
 		,
 		'seo'      => array(
 			'seo_title' => 'Giá đất ven biển Đà Nẵng 10/2026: mặt biển lô nhỏ, lô lớn',
 			'desc'      => 'Giá đất ven biển Đà Nẵng 10/2026: Hoàng Sa 170 – 415, Võ Nguyên Giáp 130 – 390, Nguyễn Tất Thành 47 – 180 triệu/m². Lô nhỏ, lô lớn theo tuyến.',
 			'points'    => array(
-				'Hoàng Sa đắt nhất: lô nhỏ 330 – 415 triệu/m², lô lớn 170 – 400 triệu/m² (giá rao)',
+				'Giá đất ven biển Đà Nẵng cao nhất ở Hoàng Sa: lô nhỏ 330 – 415 triệu/m², lô lớn 170 – 400 triệu/m² (giá rao)',
 				'Võ Nguyên Giáp lô nhỏ, vừa 130 – 390 triệu/m²; lô ngang 6 m khoảng 22 – 25 tỷ',
 				'Nguyễn Tất Thành: Thanh Khê 80 – 180, Liên Chiểu 47 – 135 triệu/m²; Trường Sa 60 – 130 triệu/m²',
-				'Ven biển Điện Bàn – Hội An (Lạc Long Quân) mềm nhất: 16 – 46 triệu/m²',
+				'Giá đất ven biển Đà Nẵng mềm nhất ở trục Lạc Long Quân (Điện Bàn – Hội An): 16 – 46 triệu/m²',
 			),
 			'faq'       => array(
 				array( 'Giá đất ven biển Đà Nẵng 2026 bao nhiêu?', 'Theo tin rao tháng 10/2026: Hoàng Sa 170 – 415 triệu/m², Võ Nguyên Giáp 130 – 390 triệu/m², Nguyễn Tất Thành 47 – 180 triệu/m², Trường Sa 60 – 130 triệu/m², Lạc Long Quân (Điện Bàn – Hội An) 16 – 46 triệu/m².' ),
 				array( 'Giá đất mặt tiền Võ Nguyên Giáp bao nhiêu?', 'Lô ngang 6 m (150 – 156 m²) rao khoảng 22 – 25 tỷ (145 – 165 triệu/m²); lô ngang 12 – 14 m khoảng 130 – 390 triệu/m² tùy đoạn. Bảng giá nhà nước đầu 2026 khoảng 220 – 280 triệu/m²; từ 10/6/2026 áp dụng Nghị quyết 28/2026.' ),
 				array( 'Giá đất mặt tiền Hoàng Sa Sơn Trà bao nhiêu?', 'Lô 200 – 330 m² rao khoảng 330 – 415 triệu/m² (lô 212 m² khoảng 70 tỷ); lô 580 – 1.000 m² khoảng 170 – 400 triệu/m².' ),
-				array( 'Đất mặt biển Đà Nẵng ở đâu giá mềm nhất?', 'Trong nội thành là Nguyễn Tất Thành nối dài (Liên Chiểu) khoảng 47 – 58 triệu/m² cho lô 100 – 120 m²; ven biển Điện Bàn – Hội An (Lạc Long Quân) khoảng 16 – 46 triệu/m².' ),
+				array( 'Đất mặt biển Đà Nẵng ở đâu giá mềm nhất?', 'Giá đất ven biển Đà Nẵng mềm nhất trong nội thành là Nguyễn Tất Thành nối dài (Liên Chiểu) khoảng 47 – 58 triệu/m² cho lô 100 – 120 m²; ven biển Điện Bàn – Hội An (Lạc Long Quân) khoảng 16 – 46 triệu/m².' ),
 				array( 'Nên mua lô nhỏ hay lô lớn để xây khách sạn?', 'Lô ngang 10 – 15 m (200 – 330 m²) đủ xây khách sạn quy mô vừa và dễ thanh khoản nhất; lô từ 500 m² hợp khách sạn 4 – 5 sao nhưng vốn lớn, bán lại chậm.' ),
-				array( 'Mua đất ven biển cần kiểm tra gì?', 'Quy hoạch tầng cao, mật độ, chỉ giới xây dựng; mục đích, thời hạn sử dụng đất; hiện trạng thế chấp; hiệu lực giấy phép xây dựng (nếu có).' ),
+				array( 'Mua đất ven biển Đà Nẵng cần kiểm tra gì?', 'Ngoài so sánh giá đất ven biển Đà Nẵng cùng đoạn, cần kiểm tra quy hoạch tầng cao, mật độ, chỉ giới xây dựng; mục đích, thời hạn sử dụng đất; hiện trạng thế chấp; hiệu lực giấy phép xây dựng (nếu có).' ),
 			),
 		),
 		'sources'  => array(
@@ -279,7 +280,9 @@ HTML
 			'https://alonhadat.com.vn/nha-dat/can-ban/nha-dat/duong-lac-long-quan-thi-xa-dien-ban-dp24382.html',
 			'https://batdongsan.com.vn/ban-dat-duong-lac-long-quan-520',
 			'https://luatvietnam.vn/dat-dai/nghi-quyet-28-2026-nq-hdnd-da-nang-quy-dinh-gia-dat-va-bang-gia-cac-loai-dat-437159-d2.html',
+			'https://danang.gov.vn/vi/web/dng/w/quy-dinh-ve-gia-dat-va-bang-gia-cac-loai-dat-tren-dia-ban-thanh-pho',
 		),
+		'follow_domains' => array( 'danang.gov.vn', 'luatvietnam.vn' ),
 	);
 
 	$posts[] = array(

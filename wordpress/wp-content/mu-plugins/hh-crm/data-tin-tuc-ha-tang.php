@@ -388,7 +388,16 @@ function hh_news_build_content( $n, $seo ) {
 		}
 	}
 	$rel   = empty( $n['follow_sources'] ) ? 'nofollow noopener' : 'noopener'; // Nguồn báo chí, cơ quan nhà nước: có thể để dofollow.
-	$links = array_map( static fn( $u ) => '<a href="' . esc_url( $u ) . '" rel="' . $rel . '" target="_blank">' . esc_html( wp_parse_url( $u, PHP_URL_HOST ) ) . '</a>', $n['sources'] ?? array() );
+	// 'follow_domains': nguồn chính thống (cổng thông tin nhà nước, văn bản pháp luật) để dofollow, tin rao vẫn nofollow.
+	$follow = (array) ( $n['follow_domains'] ?? array() );
+	$links  = array_map(
+		static function ( $u ) use ( $rel, $follow ) {
+			$host = (string) wp_parse_url( $u, PHP_URL_HOST );
+			$r    = array_filter( $follow, static fn( $d ) => $host === $d || str_ends_with( $host, '.' . $d ) ) ? 'noopener' : $rel;
+			return '<a href="' . esc_url( $u ) . '" rel="' . $r . '" target="_blank">' . esc_html( $host ) . '</a>';
+		},
+		$n['sources'] ?? array()
+	);
 	if ( ! $links ) {
 		return $html . "\n<p><em>Thông tin mang tính tham khảo, cập nhật " . esc_html( wp_date( 'm/Y' ) ) . '. Giá và chính sách thay đổi theo từng đợt – liên hệ để nhận thông tin mới nhất.</em></p>';
 	}

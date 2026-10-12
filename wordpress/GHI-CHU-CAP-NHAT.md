@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.9** + plugin Hoàng Hiệp CRM **2.20.29**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.9** + plugin Hoàng Hiệp CRM **2.20.30**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.30: SEO bài giá đất ven biển (Rank Math)
+
+- Mật độ từ khoá "giá đất ven biển Đà Nẵng" từ 0,23% lên khoảng 1,06% (21 lần / khoảng 1.975 chữ): từ khoá nằm trong tiêu đề các mục H2 và câu mở đầu từng tuyến, viết tự nhiên.
+- Link nguồn chính thống (Cổng thông tin TP Đà Nẵng, LuatVietnam – Nghị quyết 28/2026) để dofollow; link trang rao vặt vẫn nofollow. Bài mới có thể đặt `follow_domains` cho nguồn nhà nước.
 
 ## Có gì mới – plugin 2.20.29: bài cập nhật lên đầu Tin tức
 
