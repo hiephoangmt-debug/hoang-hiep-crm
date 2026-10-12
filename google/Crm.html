@@ -9,18 +9,27 @@
 :root{--bg:#f3f5fa;--card:#fff;--tx:#0f1c3f;--mut:#5b6785;--bd:#dfe4ef;--pri:#0b2a5b;--acc:#f28c28;--blu:#0068ff;--grn:#16a34a;--red:#dc2626;--amb:#d97706}
 @media (prefers-color-scheme:dark){:root{--bg:#0a1630;--card:#11214a;--tx:#e9edf8;--mut:#9fb0d6;--bd:#223566;--pri:#143272;--acc:#f59e3d;--blu:#5b9bff}}
 *{box-sizing:border-box}body{margin:0;font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--tx)}
-header{position:sticky;top:0;z-index:5;background:var(--pri);color:#fff;border-bottom:3px solid var(--acc);padding:8px 12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+header{position:sticky;top:0;z-index:5;color:#fff;padding:8px 12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;overflow:hidden;
+  background:radial-gradient(520px 170px at 92% -30%,rgba(242,140,40,.38),transparent 62%),radial-gradient(520px 200px at 6% 130%,rgba(90,150,255,.30),transparent 60%),linear-gradient(115deg,#061a3d 0%,#0b2a5b 48%,#14439a 100%)}
+header>*{position:relative;z-index:1}
+header::before{content:"";position:absolute;left:0;top:0;width:2px;height:2px;border-radius:50%;background:transparent;box-shadow:673px 23px #ffd9a8,1343px 10px #fff,1691px 72px #fff,758px 78px #fff,1049px 31px #fff,186px 59px #ffd9a8,153px 34px #fff,1138px 58px #fff,1168px 19px #fff,1301px 84px #cfe0ff,136px 77px #cfe0ff,822px 10px #fff,105px 75px #fff,603px 57px #fff,1117px 19px #cfe0ff,641px 75px #cfe0ff,380px 17px #cfe0ff,1179px 85px #fff,772px 16px #cfe0ff,1468px 12px #cfe0ff,132px 83px #fff,1026px 91px #cfe0ff,885px 44px #ffd9a8,1209px 62px #ffd9a8,623px 35px #fff,1441px 35px #fff,1186px 42px #cfe0ff,1023px 47px #cfe0ff,929px 40px #cfe0ff,159px 19px #cfe0ff,866px 25px #ffd9a8,321px 66px #ffd9a8,90px 89px #fff,1575px 75px #cfe0ff,1626px 44px #ffd9a8,1433px 48px #cfe0ff,1027px 78px #ffd9a8,150px 15px #ffd9a8,980px 93px #cfe0ff,143px 11px #cfe0ff,1446px 43px #cfe0ff,1193px 91px #ffd9a8,592px 95px #ffd9a8,1379px 48px #fff,955px 49px #fff,1261px 18px #ffd9a8;opacity:.55;animation:twinkle 5s ease-in-out infinite alternate;z-index:0}
+header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,#f28c28,#ffd9a0,#f28c28,#ffd9a0,#f28c28);background-size:200% 100%;animation:sheen 7s linear infinite;z-index:1}
+@keyframes twinkle{from{opacity:.25}to{opacity:.7}}
+@keyframes sheen{to{background-position:200% 0}}
+@media (prefers-reduced-motion:reduce){header::before,header::after{animation:none}}
 header .mut{color:#c7d3ee}header .btn{background:transparent;color:#fff;border-color:#ffffff55}
 header h1{font-size:16px;margin:0;color:#fff;letter-spacing:.2px}.sp{flex:1}.mut{color:var(--mut)}.small{font-size:12px}
 nav{display:flex;gap:4px;flex-wrap:wrap;width:100%}
-nav button{border:0;background:none;color:#c7d3ee;padding:7px 11px;border-radius:8px;font:inherit;cursor:pointer;position:relative}
+nav button{border:0;background:none;color:#c7d3ee;padding:7px 11px;border-radius:8px;font:inherit;cursor:pointer;position:relative;transition:background .2s,transform .2s}
 nav button:hover{background:#ffffff1a}
-nav button.on{background:var(--acc);color:#fff;font-weight:600}
+nav button.on{background:linear-gradient(135deg,#f6a03d,#f28c28);color:#fff;font-weight:600;box-shadow:0 6px 16px rgba(242,140,40,.45),inset 0 0 0 1px rgba(255,255,255,.25)}
 nav .dot{background:var(--red);color:#fff;border-radius:99px;font-size:11px;padding:0 6px;margin-left:4px}
 main{max-width:1100px;margin:0 auto;padding:12px}
 .card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px;margin-bottom:10px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:10px}
-.kpi{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px}.kpi b{display:block;font-size:22px;color:var(--pri)}
+.kpi{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px;transition:transform .2s,box-shadow .2s}
+.kpi:hover,.card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(11,42,91,.14)}
+.card{transition:transform .2s,box-shadow .2s}.kpi b{display:block;font-size:22px;color:var(--pri)}
 @media (prefers-color-scheme:dark){.kpi b{color:#fff}}.kpi span{color:var(--mut);font-size:12px}
 .kpi.alert{border-color:var(--red)}.kpi.alert b{color:var(--red)}
 button,select,input,textarea{font:inherit;color:var(--tx)}
