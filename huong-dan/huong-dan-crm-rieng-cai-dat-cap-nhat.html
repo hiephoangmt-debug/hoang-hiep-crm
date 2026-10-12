@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><title>Hướng dẫn cài đặt và cập nhật CRM riêng (Google Sheets)</title>
+<style>
+@page { size: A4; margin: 14mm 14mm 16mm; }
+*{box-sizing:border-box}
+body{font:11.5pt/1.5 "Noto Sans","DejaVu Sans",Arial,sans-serif;color:#1f2430;margin:0}
+h1{font-size:21pt;margin:0 0 4px;color:#b0172d}
+.sub{color:#5b6270;margin:0 0 14px}
+h2{font-size:14pt;margin:20px 0 8px;padding:6px 10px;background:#b0172d;color:#fff;border-radius:6px;break-after:avoid}
+h3{font-size:12pt;margin:14px 0 4px;color:#b0172d;break-after:avoid}
+p{margin:4px 0}
+ol,ul{margin:4px 0 4px 20px;padding:0} li{margin:3px 0}
+table{width:100%;border-collapse:collapse;margin:8px 0;font-size:10.5pt;break-inside:avoid}
+th,td{border:1px solid #cfd3da;padding:6px 8px;vertical-align:top;text-align:left}
+th{background:#f1f2f5}
+.box{border:1.5px solid #b0172d;border-radius:8px;padding:8px 12px;margin:10px 0;background:#fff6f7;break-inside:avoid}
+.ok{border-color:#1c7c3a;background:#f2fbf5}
+.step{display:flex;gap:10px;margin:7px 0;break-inside:avoid}
+.n{flex:none;width:26px;height:26px;border-radius:50%;background:#b0172d;color:#fff;text-align:center;font-weight:700;line-height:26px}
+.k{background:#eee;border:1px solid #ccc;border-radius:4px;padding:0 5px;font-size:10pt}
+.red{color:#b0172d;font-weight:700}
+.mock{display:flex;gap:10px;margin:8px 0;break-inside:avoid}
+.ph{flex:1;border:2px solid #444;border-radius:12px;padding:8px;background:#fafafa;font-size:9pt;min-height:150px}
+.ph b{display:block;text-align:center;margin-bottom:5px}
+.ph .row{border:1px solid #ddd;background:#fff;border-radius:4px;padding:3px 5px;margin:3px 0}
+.ph .ring{border:2px solid #e11;border-radius:4px;padding:2px 5px;margin:3px 0;background:#fff}
+.foot{margin-top:16px;color:#5b6270;font-size:9.5pt}
+</style></head><body>
+<h1>Hướng dẫn cài đặt và cập nhật CRM riêng (bản Google Sheets)</h1>
+<p class="sub">CRM quản lý khách đổ về từ các website của bạn: biết khách đến từ web nào, đã bấm Zalo hay gọi chưa, mình đã gọi hay nhắn lại chưa, và hiệu quả từng chiến dịch quảng cáo. <b>Không liên quan</b> đến CRM Báo cáo Marketing. Cài lần đầu khoảng 10 phút, cập nhật khoảng 3 phút.</p>
+
+<div class="box"><b>Cần nhớ 3 điều.</b><br>
+1. Dữ liệu nằm trong file Google Sheet <b>CRM Hoàng Hiệp</b> của tài khoản Google của bạn.<br>
+2. Mã nhận dữ liệu (Apps Script) gắn vào <b>chính file Sheet đó</b>: mở từ menu Tiện ích mở rộng trong Sheet, không tạo dự án riêng ở nơi khác.<br>
+3. Mỗi landing page chỉ cần dán <b>một đoạn &lt;script&gt;</b>. Cập nhật mã về sau không phải dán lại landing.</div>
+
+<h2>Phần 1. Chuẩn bị</h2>
+<ul>
+<li>File Google Sheet: <b>CRM Hoàng Hiệp</b> (đã tạo sẵn trong Drive của bạn). Link: docs.google.com/spreadsheets/d/1x9Phjv_inHpa3Jzl1pbDgvKSNtGznPbqjY9SGicNgIM</li>
+<li>File mã: <b>google/Code.gs</b> trong kho mã GitHub <b>hiephoangmt-debug/hoang-hiep-crm</b>, nhánh <b>claude/modest-rubin-wul27c</b>. Bấm vào file rồi bấm nút <b>Copy raw file</b> (hai tờ giấy ở góc phải khung mã).</li>
+<li>Landing page cho phép chèn mã vào phần <b>Head</b> (LadiPage: Cài đặt → Mã tuỳ chỉnh).</li>
+</ul>
+
+<h2>Phần 2. Cài lần đầu</h2>
+<div class="step"><div class="n">1</div><div><b>Đặt mã website.</b> Mở file Sheet, bấm tab <b>Website</b> ở dưới cùng. Sửa dòng ví dụ: cột A tên website, cột B tên miền, cột C <b>mã website</b> (chuỗi bất kỳ từ 8 ký tự gồm chữ và số, mỗi website một mã khác nhau, ví dụ <b>duanA2026xyz</b>). Thêm website khác thì điền tiếp các dòng bên dưới.</div></div>
+<div class="step"><div class="n">2</div><div><b>Mở Apps Script từ chính Sheet.</b> Trong file Sheet, bấm menu <b>Tiện ích mở rộng → Apps Script</b>. Một tab mới mở ra.</div></div>
+<div class="step"><div class="n">3</div><div><b>Dán mã.</b> Trong tab Apps Script, bấm file <b>Code.gs</b> ở cột trái, bấm vào ô mã, <span class="k">Ctrl+A</span> chọn hết, <span class="k">Ctrl+V</span> dán mã đã copy từ GitHub, rồi <span class="k">Ctrl+S</span> để lưu.</div></div>
+<div class="step"><div class="n">4</div><div><b>Triển khai.</b> Góc phải trên bấm <b>Triển khai → Tùy chọn triển khai mới</b> → bánh răng cạnh "Chọn loại" → <b>Ứng dụng web</b>, rồi điền:<br>
+&bull; <b>Thực thi dưới dạng</b>: <b>Tôi</b><br>
+&bull; <b>Người có quyền truy cập</b>: <b>Bất kỳ ai</b> (bắt buộc, nếu không landing không gửi được dữ liệu)<br>
+Bấm <b>Triển khai</b>.</div></div>
+<div class="step"><div class="n">5</div><div><b>Cấp quyền.</b> Bấm <b>Cấp quyền truy cập</b>, chọn tài khoản của bạn. Nếu báo "Google chưa xác minh ứng dụng này": <b>Nâng cao → Đi tới (tên dự án) → Cho phép</b>. Cảnh báo này bình thường vì mã là của chính bạn.</div></div>
+<div class="step"><div class="n">6</div><div><b>Lấy đoạn mã nhúng.</b> Quay lại tab Google Sheet, tải lại trang (<span class="k">F5</span>). Đợi vài giây, menu <b>CRM</b> xuất hiện cạnh menu Trợ giúp. Bấm <b>CRM → Xem mã nhúng cho các website</b>. Hộp thoại hiện đoạn dạng:<br><b>&lt;script src="https://script.google.com/macros/s/.../exec?js=1" data-key="mã-website" async&gt;&lt;/script&gt;</b><br>Mỗi website có một đoạn riêng. Copy đúng đoạn của website cần gắn.</div></div>
+<div class="step"><div class="n">7</div><div><b>Dán vào landing.</b> Dán đoạn đó vào phần <b>Head</b> của landing (LadiPage: Cài đặt → Mã tuỳ chỉnh → Head), lưu và <b>xuất bản lại</b>. Trang WordPress: dán vào header bằng plugin chèn mã, hoặc trước thẻ &lt;/head&gt;.</div></div>
+<div class="step"><div class="n">8</div><div><b>Thử.</b> Mở landing bằng điện thoại, bấm nút Zalo, bấm nút gọi, rồi điền form bằng số của bạn. Vào Sheet: tab <b>Hoạt động</b> có thêm dòng, tab <b>Khách hàng</b> có khách mới <b>tô đỏ</b> và ghi "CHƯA LIÊN HỆ". Thử xong xoá các dòng thử (chuột phải số dòng → Xoá hàng, không xoá dòng tiêu đề).</div></div>
+
+<h3>Dùng hằng ngày</h3>
+<ul>
+<li>Tab <b>Khách hàng</b>: dòng đỏ là khách chưa gọi, chưa nhắn. Bấm <b>Mở Zalo</b> hoặc <b>Gọi</b>, xong tick <b>Đã gọi</b> hoặc <b>Đã nhắn</b>: dòng hết đỏ, tự ghi giờ liên hệ.</li>
+<li>Tab <b>Tổng quan</b>: số khách chưa liên hệ, lượt bấm Zalo / Gọi, theo từng website. Đổi ô <b>Số ngày gần đây</b> (B3) để xem kỳ khác.</li>
+<li>Tab <b>Chiến dịch</b> và <b>Chi phí</b>: gắn mã <b>utm_campaign</b> vào link quảng cáo, dán chi phí mỗi ngày để xem giá mỗi khách và ROAS.</li>
+</ul>
+
+<h2>Phần 3. Cập nhật khi có mã mới</h2>
+<p>Khi mình báo có bản <b>Code.gs</b> mới. <b>Dữ liệu trong Sheet giữ nguyên</b>, landing page <b>không phải dán lại</b> mã nhúng, link ứng dụng web giữ nguyên.</p>
+<div class="step"><div class="n">1</div><div><b>Sao lưu cho chắc.</b> Trong file Sheet: <b>Tệp → Tạo bản sao</b>, đặt tên "CRM Hoàng Hiệp - sao lưu ngày ...".</div></div>
+<div class="step"><div class="n">2</div><div>Mở Apps Script từ chính Sheet (<b>Tiện ích mở rộng → Apps Script</b>). Mở file <b>Code.gs</b>, <span class="k">Ctrl+A</span>, dán mã mới đè lên, <span class="k">Ctrl+S</span>.</div></div>
+<div class="step"><div class="n">3</div><div>Bấm <b>Triển khai → Quản lý bản triển khai</b> → biểu tượng <b>bút chì</b> cạnh bản đang chạy → mục <b>Phiên bản</b> chọn <b>Phiên bản mới</b> → <b>Triển khai</b>. Nếu chỉ lưu mà không làm bước này, ứng dụng vẫn chạy mã cũ.</div></div>
+<div class="step"><div class="n">4</div><div>Tải lại file Sheet (<span class="k">F5</span>). Gửi thử một lượt bấm hoặc form từ landing để chắc mọi thứ vẫn ghi vào Sheet.</div></div>
+<div class="box"><b>Quay lại bản cũ:</b> Triển khai → Quản lý bản triển khai → bút chì → chọn phiên bản cũ hơn trong danh sách → Triển khai.<br>
+<b>Nếu bản mới có thêm hoặc đổi cột trong Sheet</b>, mình sẽ ghi rõ cách sửa kèm theo. Không tự xoá hay đổi tên các tab Khách hàng, Hoạt động, Website vì mã tìm theo đúng tên tab.</div>
+
+<h2>Phần 4. Gặp lỗi</h2>
+<table>
+<tr><th>Hiện tượng</th><th>Cách xử lý</th></tr>
+<tr><td>Không thấy menu CRM</td><td>Tải lại trang, đợi vài giây. Vẫn không có: vào Apps Script, chọn hàm <b>onOpen</b> ở thanh trên, bấm Chạy và cấp quyền.</td></tr>
+<tr><td>Bấm Zalo, gửi form mà Sheet không có dòng mới</td><td>Kiểm tra: (1) Bước 4 đã chọn quyền truy cập <b>Bất kỳ ai</b>; (2) mã <b>data-key</b> trong đoạn nhúng trùng đúng mã ở tab Website; (3) đã xuất bản lại landing sau khi dán mã.</td></tr>
+<tr><td>Đổi mã ở tab Website rồi mà vẫn dùng mã cũ được</td><td>Hệ thống nhớ danh sách mã khoảng 1 phút. Đợi một phút, và nhớ dán lại đoạn nhúng mới lên landing.</td></tr>
+<tr><td>Số điện thoại mất số 0 đầu</td><td>Đừng gõ tay vào cột SĐT theo kiểu khác. Nếu phải gõ, thêm dấu nháy đơn phía trước: <b>'0912345678</b>.</td></tr>
+<tr><td>Form riêng của landing không tạo khách</td><td>Cấu hình webhook (gửi dữ liệu) của form về <b>URL-ứng-dụng-web?key=MÃ_WEBSITE</b>, các trường name, phone, email, message.</td></tr>
+<tr><td>Cập nhật rồi mà vẫn như cũ</td><td>Chưa tạo <b>Phiên bản mới</b> ở Bước 3 của Phần 3.</td></tr>
+<tr><td>Vẫn không được</td><td>Chụp màn hình lỗi, kèm nội dung ô <b>Lần thực thi</b> trong Apps Script (biểu tượng ☰ bên trái), gửi mình.</td></tr>
+</table>
+
+<p class="foot"><b>Giới hạn:</b> mỗi lượt xem hoặc bấm là một lần chạy Apps Script nên bản này hợp với vài trăm đến vài nghìn lượt truy cập mỗi ngày. Mã website nằm trong mã nhúng nên ai xem trang cũng thấy: nếu bị gửi dữ liệu rác, đổi mã ở tab Website rồi dán lại đoạn nhúng mới.<br><br>
+Link ứng dụng web: ______________________________ &nbsp; Lần cập nhật gần nhất: ____ / ____ / ________</p>
+</body></html>
