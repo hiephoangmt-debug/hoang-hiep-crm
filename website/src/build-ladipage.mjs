@@ -58,8 +58,8 @@ const form = (id, { button, budget, extra, hidden }) => `
 </form>`;
 
 const heroN = (slug) => (String(slug).length % 2) + 1; // ảnh nền đầu trang xen kẽ giữa 2 phối cảnh; mục "Phối cảnh" dùng ảnh còn lại
-const hero = ({ slug = "home", crumbs, eyebrow, h1, lead, points, cta, ghost, ghostHref, formTitle, docs, formHtml, stats, leadTitle = "Con số nổi bật – và bảng giá bạn chưa thấy" }) => `
-<header class="hero hero-img" style="background-image:linear-gradient(180deg,rgba(10,22,48,.74),rgba(10,22,48,.52)),url('${PCB}/${PC[heroN(slug)][0]}.webp');background-size:cover;background-position:center">
+const hero = ({ slug = "home", bg, crumbs, eyebrow, h1, lead, points, cta, ghost, ghostHref, formTitle, docs, formHtml, stats, leadTitle = "Con số nổi bật – và bảng giá bạn chưa thấy" }) => `
+<header class="hero hero-img" style="background-image:linear-gradient(180deg,rgba(10,22,48,.74),rgba(10,22,48,.52)),url('${bg || `${PCB}/${PC[heroN(slug)][0]}.webp`}');background-size:cover;background-position:center">
   <div class="wrap hero-inner">
     ${crumbs ? `<p class="crumbs">${crumbs}</p>` : ""}
     <p class="eyebrow" style="color:var(--orange)">${eyebrow}</p>
@@ -93,6 +93,10 @@ const MH = `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/$
 const SZP = JSON.parse(readFileSync(join(HERE, "..", "public", "assets", "img", "phoi-canh", "sizes.json"), "utf8"));
 const PCB = `https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/${ASSET_SHA}/website/public/assets/img/phoi-canh`;
 const PC = { 1: ["fpt-city-phoi-canh-tong-the-1", "Phối cảnh tổng thể khu đô thị FPT City Đà Nẵng nhìn từ trên cao, sông Cổ Cò, cầu vòm và quảng trường trung tâm"], 2: ["fpt-city-phoi-canh-tong-the-2", "Phối cảnh toàn cảnh khu đô thị FPT City Đà Nẵng: hồ trung tâm, các phân khu nhà ở, sông Cổ Cò và cầu vòm"] };
+const SZ4 = JSON.parse(readFileSync(join(HERE, "..", "public", "assets", "img", "fpt-plaza-4", "phoi-canh", "sizes.json"), "utf8"));
+const FP4PC = (i) => `${RAW}/fpt-plaza-4/phoi-canh/phoi-canh-fpt-plaza-4-${i}.webp`;
+const FP4ALT = { 1: "Phối cảnh FPT Plaza 4 Đà Nẵng về đêm nhìn từ đại lộ", 2: "Phối cảnh FPT Plaza 4 ban ngày, mặt tiền và khối đế thương mại", 3: "Phối cảnh FPT Plaza 4 nhìn từ công viên ven kênh", 4: "Phối cảnh quảng trường trung tâm FPT Plaza 4 lúc hoàng hôn", 5: "Phối cảnh FPT Plaza 4 về đêm với quảng trường và cổng chào" };
+const fp4Photo = (i) => `<figure style="margin:0"><img src="${FP4PC(i)}" alt="${FP4ALT[i]}" width="1600" height="${SZ4["phoi-canh-fpt-plaza-4-" + i]}" loading="lazy" style="border-radius:14px"><figcaption class="small" style="text-align:center;margin-top:6px">Phối cảnh minh hoạ theo tài liệu chủ đầu tư</figcaption></figure>`;
 const photo = (n) => `<figure style="margin:0"><img src="${PCB}/${PC[n][0]}.webp" alt="${esc(PC[n][1])}" width="1600" height="${SZP[PC[n][0]]}" loading="lazy"><figcaption class="small" style="text-align:center;margin-top:8px">Hình ảnh minh hoạ phối cảnh tổng thể theo tài liệu giới thiệu của chủ đầu tư; thực tế có thể thay đổi.</figcaption></figure>`;
 const photoSection = (nums, title) => `<section><div class="wrap">${head({ eyebrow: "Phối cảnh", title })}<div style="max-width:1100px;margin:0 auto;display:grid;gap:18px">${nums.map(photo).join("")}</div></div></section>`;
 const illus = (file, alt) => `<figure style="margin:0"><img src="${MH}/${file}.webp" alt="${esc(alt)}" width="1200" height="${SZ[file] || 700}" loading="lazy"></figure>`;
@@ -332,7 +336,7 @@ for (const p of plazas) {
     slug: p.slug, name: p.name, title: p.title, description: p.description, keywords: p.keywords, tabs: isFp4,
     body: `
 ${hero({
-      slug: p.slug,
+      slug: p.slug, bg: isFp4 ? FP4PC(1) : "",
       crumbs: `<a href="${BASE}/">Trang chủ</a> › ${esc(p.name)}`,
       eyebrow: `Khu đô thị FPT City Đà Nẵng · ${esc(p.statusLabel)}`, h1: `Căn hộ <span>${p.name}</span> Đà Nẵng`, lead: esc(p.lead), points: p.highlights.slice(0, 3),
       cta: H.cta, ghost: H.ghost, ghostHref: "#mat-bang", formTitle: H.title, docs: H.docs, formHtml: form("h", { button: H.btn, budget: BUDGET_APT, extra }), stats: p.stats,
@@ -355,7 +359,7 @@ ${amenitySection(p.name)}
 ${plans}
 ${priceSection(`Bảng giá & chính sách ${p.name}`, "Giá thay đổi theo tầng, hướng, loại căn và từng đợt chính sách – nhận bảng giá cập nhật qua Zalo.", ["Loại căn", "Diện tích tham khảo", "Tình trạng"], p.units.map(([t, a]) => [t, a, st]), POLICY[p.status])}
 <section class="tint"><div class="wrap">${head({ eyebrow: "So sánh", title: "FPT Plaza 1, 2, 3, 4, 5: khác nhau thế nào?" })}${COMPARE(p.slug)}</div></section>
-${gallerySection(`Hình ảnh phối cảnh ${p.name} & khu đô thị FPT City`, isFp4 ? fpImg(`${IMG}/mat-bang-fpt-plaza-4-tang-3-16-sm.webp`, "Mặt bằng tầng 3–16 FPT Plaza 4", 960, 679) + fpImg(`${IMG}/layout/layout-fpt-plaza-4-n-11-sm.webp`, "Layout căn 2 phòng ngủ N-X.11 FPT Plaza 4", 520, 735) + fpImg(`${IMG}/layout/layout-fpt-plaza-4-n-06-sm.webp`, "Layout căn 2 phòng ngủ + 1 N-X.06 FPT Plaza 4", 520, 735) : "")}
+${isFp4 ? `<section id="hinh-anh"><div class="wrap">${head({ eyebrow: "Hình ảnh", title: "Hình ảnh phối cảnh dự án FPT Plaza 4", sub: "Phối cảnh minh hoạ theo tài liệu giới thiệu của chủ đầu tư; thực tế có thể thay đổi." })}<div class="grid2">${fp4Photo(2)}${fp4Photo(4)}</div><div class="grid3" style="margin-top:18px">${fp4Photo(3)}${fp4Photo(5)}${fp4Photo(1)}</div></div></section>` : gallerySection(`Hình ảnh phối cảnh ${p.name} & khu đô thị FPT City`)}
 ${newsSection(`Tin tức & cập nhật ${p.name}`, p.slug)}
 ${faqSection(`Câu hỏi thường gặp về ${p.name}`, p.faq)}
 ${contactSection(p.name)}
@@ -499,13 +503,9 @@ ${distances()}
     <div class="tile"><h3>Hỗ trợ chuyển nhượng</h3><p>Với FPT Plaza 1 &amp; 2: hỗ trợ kiểm tra pháp lý, thủ tục sang tên và xem căn thực tế.</p></div>
   </div></div></section>
 
-<section id="hinh-anh"><div class="wrap">${head({ eyebrow: "Hình ảnh", title: "Hình ảnh phối cảnh & mặt bằng dự án FPT City", sub: "Hình minh hoạ theo tài liệu giới thiệu của chủ đầu tư; thực tế có thể thay đổi." })}
+<section id="hinh-anh"><div class="wrap">${head({ eyebrow: "Hình ảnh", title: "Hình ảnh phối cảnh dự án FPT City & FPT Plaza 4", sub: "Hình minh hoạ theo tài liệu giới thiệu của chủ đầu tư; thực tế có thể thay đổi." })}
   <div class="grid2">${photo(1)}${photo(2)}</div>
-  <div class="grid3" style="margin-top:18px">
-    <figure style="margin:0"><img src="${IMG}/mat-bang-fpt-plaza-4-tang-3-16-sm.webp" alt="Mặt bằng tầng 3–16 FPT Plaza 4 Đà Nẵng" width="960" height="679" loading="lazy" style="width:100%;height:240px;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:14px"></figure>
-    <figure style="margin:0"><img src="${IMG}/layout/layout-fpt-plaza-4-n-11-sm.webp" alt="Layout căn hộ 2 phòng ngủ N-X.11 FPT Plaza 4" width="520" height="735" loading="lazy" style="width:100%;height:240px;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:14px"></figure>
-    <figure style="margin:0"><img src="${IMG}/layout/layout-fpt-plaza-4-n-06-sm.webp" alt="Layout căn hộ 2 phòng ngủ + 1 N-X.06 FPT Plaza 4" width="520" height="735" loading="lazy" style="width:100%;height:240px;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:14px"></figure>
-  </div>
+  <div class="grid3" style="margin-top:18px">${fp4Photo(1)}${fp4Photo(2)}${fp4Photo(4)}</div>
   <p style="text-align:center;margin-top:22px"><a class="btn" href="${link("fpt-plaza-4")}">Xem mặt bằng 5 tầng FPT Plaza 4</a></p></div></section>
 
 <section id="tin-tuc" class="tint"><div class="wrap">${head({ eyebrow: "Tin tức", title: "Tin tức & cập nhật dự án FPT City Đà Nẵng" })}

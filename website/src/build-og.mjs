@@ -15,13 +15,13 @@ const PAGES = [
   ["fpt-plaza-1", 2, "FPT Plaza 1", "Căn hộ đã bàn giao · Chuyển nhượng", "586 căn · 15 tầng"],
   ["fpt-plaza-2", 1, "FPT Plaza 2", "Căn hộ 2–3PN · Chuyển nhượng", "~700 căn · 25 tầng"],
   ["fpt-plaza-3", 2, "FPT Plaza 3", "The Empire & The Wealthe", "837 căn · Bàn giao dự kiến 2026"],
-  ["fpt-plaza-4", 1, "FPT Plaza 4", "Mặt bằng, bảng giá căn hộ mới nhất", "1.395 căn · Đang mở bán"],
+  ["fpt-plaza-4", "fpt-plaza-4/phoi-canh/phoi-canh-fpt-plaza-4-1.webp", "FPT Plaza 4", "Mặt bằng, bảng giá căn hộ mới nhất", "1.395 căn · Đang mở bán"],
   ["fpt-plaza-5", 2, "FPT Plaza 5", "Sắp mở bán · Nhận đăng ký sớm", "Biết giá trước người khác"],
 ];
 const b = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell" });
 const p = await b.newPage({ viewport: { width: 1200, height: 630 } });
 for (const [slug, n, h, sub, tag] of PAGES) {
-  const bg = readFileSync(join(IMG, "phoi-canh", `fpt-city-phoi-canh-tong-the-${n}.webp`)).toString("base64");
+  const bg = readFileSync(typeof n === "string" ? join(IMG, n) : join(IMG, "phoi-canh", `fpt-city-phoi-canh-tong-the-${n}.webp`)).toString("base64");
   await p.setContent(`<body style="margin:0;width:1200px;height:630px;font-family:'Be Vietnam Pro','Segoe UI',Arial,sans-serif;color:#fff;background:linear-gradient(90deg,rgba(10,22,48,.92),rgba(10,22,48,.55) 60%,rgba(10,22,48,.2)),url(data:image/webp;base64,${bg}) center/cover">
     <div style="padding:70px 64px;display:flex;flex-direction:column;height:630px;box-sizing:border-box">
       <div style="font-size:26px;font-weight:700;letter-spacing:.12em;color:#ff8a1f;text-transform:uppercase">Khu đô thị FPT City Đà Nẵng</div>
