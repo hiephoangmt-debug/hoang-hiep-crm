@@ -184,7 +184,7 @@
     if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (!document.getElementById("fc-shine-css")) {
       var st = document.createElement("style"); st.id = "fc-shine-css";
-      st.textContent = ".fc-shine{overflow:hidden!important;isolation:isolate}.fc-shine::after{content:'';position:absolute;top:0;left:-60%;width:45%;height:100%;background:linear-gradient(105deg,rgba(255,255,255,0),rgba(255,255,255,.8),rgba(255,255,255,0));transform:skewX(-20deg);animation:fcshine 4.5s ease-in-out infinite;pointer-events:none;z-index:3;border-radius:inherit}@keyframes fcshine{0%{left:-60%}60%,100%{left:130%}}";
+      st.textContent = ".fc-shine{overflow:hidden!important;isolation:isolate}.fc-shine::after{content:'';position:absolute;top:0;left:-60%;width:45%;height:100%;background:linear-gradient(105deg,rgba(255,214,170,0),rgba(255,214,170,.55),rgba(255,214,170,0));transform:skewX(-20deg);animation:fcshine 4.5s ease-in-out infinite;pointer-events:none;z-index:3;border-radius:inherit}@keyframes fcshine{0%{left:-60%}60%,100%{left:130%}}";
       document.head.appendChild(st);
     }
     var orange = function (cs) {
