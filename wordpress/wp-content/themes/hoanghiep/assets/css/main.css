@@ -882,7 +882,7 @@ img.article-head__author { object-fit: cover; border: 2px solid var(--gold); }
 }
 
 /* Contact dock: floating on desktop, bottom bar on phones */
-.contact-dock { position: fixed; left: 10px; bottom: 18px; z-index: 60; display: grid; gap: 10px; }
+.contact-dock { position: fixed; right: 20px; bottom: 88px; z-index: 60; display: grid; justify-items: end; gap: 10px; }
 .contact-dock__btn { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; color: var(--white); box-shadow: var(--shadow-lg); }
 .contact-dock__btn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .contact-dock__btn:hover { color: var(--white); transform: scale(1.06); }
@@ -890,19 +890,13 @@ img.article-head__author { object-fit: cover; border: 2px solid var(--gold); }
 .contact-dock__btn--zalo { background: var(--zalo); font-size: .8rem; }
 .contact-dock__btn--form { background: var(--cta); color: var(--white); }
 @keyframes hh-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(46, 125, 79, .5); } 50% { box-shadow: 0 0 0 12px rgba(46, 125, 79, 0); } }
-/* Màn hình máy tính: nút tròn nằm ở lề trái, nội dung luôn chừa lề đủ rộng để nút không che chữ (hai bên đều nhau). */
+/* Nút Gọi / Zalo / Tư vấn xếp dọc góc phải dưới, ngay trên nút chat. Máy tính: khung lệch trái để lề phải đủ chỗ cho cột nút. */
 @media (min-width: 701px) {
-	/* Nút tròn nằm giữa mép màn hình và lề chữ. */
-	.contact-dock { left: max(24px, calc((100vw - var(--container)) / 4 + 4px)); }
-	/* Khung lệch phải ~32px: lề trái rộng (chỗ cho nút tròn), lề phải hẹp. */
-	.container { width: auto; margin-left: max(0px, calc((100vw - var(--container)) / 2 + 32px)); margin-right: 0; padding-left: max(24px, calc(96px - max(0px, (100vw - var(--container)) / 2 + 32px))); padding-right: 16px; }
+	.container { width: auto; margin-right: max(0px, calc((100vw - var(--container)) / 2 + 32px)); margin-left: 0; padding-right: max(24px, calc(96px - max(0px, (100vw - var(--container)) / 2 + 32px))); padding-left: 16px; }
 }
 @media (max-width: 700px) {
-	body { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)); }
-	.contact-dock { left: 0; right: 0; bottom: 0; grid-template-columns: repeat(3, 1fr); gap: 0; padding-bottom: env(safe-area-inset-bottom, 0px); background: var(--white); box-shadow: 0 -4px 20px rgba(10, 35, 66, .12); }
-	.contact-dock__btn { width: auto; height: 60px; border-radius: 0; box-shadow: none; animation: none; display: flex; flex-direction: column; gap: 2px; justify-content: center; font-size: .75rem; }
-	.contact-dock__btn span { position: static; width: auto; height: auto; overflow: visible; clip: auto; font-weight: 600; }
-	.contact-dock__btn:hover { transform: none; }
+	.contact-dock { right: 14px; bottom: calc(78px + env(safe-area-inset-bottom, 0px)); gap: 8px; }
+	.contact-dock__btn { width: 46px; height: 46px; }
 }
 
 /* Lightbox */
@@ -1464,4 +1458,6 @@ html.nav-locked, html.nav-locked body { overflow: hidden; }
 
 /* Nội dung bài viết, dự án, tin rao: căn đều 2 bên; tách chữ khi cần để không hở khoảng trắng lớn trên điện thoại. */
 .entry-content p, .entry-content li, .entry-content dd { text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto; }
+/* Chữ cân đều 2 bên cho đoạn văn trên trang dự án, hộp chờ cập nhật, hộp kêu gọi (độ ưu tiên thấp – chỗ nào canh giữa vẫn giữ nguyên). */
+:where(.block, .pending, .cta-box, .px-overview, .page-head) p { text-align: justify; text-justify: inter-word; }
 .entry-content td, .entry-content th, .entry-content figcaption, .entry-content .key-points li { text-align: left; }
