@@ -110,7 +110,7 @@ assert.equal(ctx.crmKey_(), K);
 assert.throws(() => ctx.crmLoad('sai-khoa'), /Không có quyền/); assert.throws(() => ctx.crmLog('', '0988111222', 'call'), /Không có quyền/);
 assert.equal(ctx.doGet({ parameter: { k: 'sai' } }).file, undefined); assert.ok(ctx.doGet({ parameter: { k: K } }).content.includes('CRM Hoàng Hiệp') && ctx.doGet({ parameter: { k: K } }).content.includes('</html>'));
 const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
-assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-11'); assert.equal(JSON.stringify(dbg).includes(K), false);
+assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-12'); assert.equal(JSON.stringify(dbg).includes(K), false);
 const L = ctx.crmLoad(K);
 assert.equal(L.leads.length, 2);
 const l0 = L.leads.find((x) => x.phone === '0988111222');
@@ -126,7 +126,8 @@ assert.throws(() => ctx.crmUpdateLead(K, '0988111222', { status: 'abc' }), /khô
 const ck0 = ctx.crmLoad(K).clicks[0];
 assert.throws(() => ctx.crmClickDone(K, ck0.row, 'sai-vid', true), /thay đổi/);
 ctx.crmClickDone(K, ck0.row, ck0.vid, true, 'đã xem Zalo');
-const ck1 = ctx.crmLoad(K).clicks[0]; assert.equal(ck1.checked, true); assert.equal(ck1.note, 'đã xem Zalo');
+const ck1 = ctx.crmLoad(K).clicks[0]; assert.equal(ck1.checked, true); assert.equal(ck1.note, 'đã xem Zalo'); assert.ok(ck1.handledAt, 'ghi giờ xử lý');
+ctx.crmClickDone(K, ck0.row, ck0.vid, false); assert.equal(ctx.crmLoad(K).clicks[0].handledAt, ''); ctx.crmClickDone(K, ck0.row, ck0.vid, true, 'đã xem Zalo');
 assert.ok(ctx.crmEvents(K, 'v1').length >= 2); assert.equal(ctx.crmEvents(K, '').length, 0);
 // đổi link: khoá cũ hết hiệu lực
 ctx.resetCrmLink(); const K2 = globalThis.__alert.match(/\?k=([0-9a-f]{32})/)[1];

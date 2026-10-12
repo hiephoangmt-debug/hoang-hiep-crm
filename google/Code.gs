@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-11', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-12', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -64,6 +64,14 @@ function ensureLeadCols_(sh) {
     }
   } catch (e) {}
 }
+// Tab Lượt bấm: thêm cột L "Xử lý lúc" để giữ lịch sử khi một lượt bấm được đánh dấu đã kiểm tra.
+function ensureClickCols_(sh) {
+  try {
+    var mc = sh.getMaxColumns();
+    if (mc < 12) sh.insertColumnsAfter(mc, 12 - mc);
+    if (!sh.getRange(1, 12).getValue()) sh.getRange(1, 12).setValue('Xử lý lúc');
+  } catch (e) {}
+}
 function ymd_(v) {
   if (v && typeof v.getTime === 'function') return Utilities.formatDate(v, 'Asia/Ho_Chi_Minh', 'yyyy-MM-dd');
   var s = String(v == null ? '' : v).trim();
@@ -92,10 +100,11 @@ function crmLoad(k) {
       next: ymd_(r[22]), budget: String(r[23] || ''), purpose: String(r[24] || ''), product: String(r[25] || ''), heat: String(r[26] || ''), loan: String(r[27] || '') };
   }).reverse();
   var cs = ss.getSheetByName(S_CLICKS), cn = cs ? lastDataRow_(cs, 1) : 1, start = Math.max(2, cn - 1499);
-  var crow = cn > 1 ? cs.getRange(start, 1, cn - start + 1, 11).getValues() : [];
+  if (cs) ensureClickCols_(cs);
+  var crow = cn > 1 ? cs.getRange(start, 1, cn - start + 1, 12).getValues() : [];
   out.clicks = crow.map(function (r, i) {
     return { row: start + i, at: iso_(r[0]), vid: String(r[1] || ''), site: String(r[2] || ''), channel: String(r[3] || ''), url: String(r[4] || ''),
-      source: String(r[5] || ''), campaign: String(r[6] || ''), leftPhone: r[7] === 'Có', checked: r[8] === true, note: String(r[9] || ''), alert: String(r[10] || '') };
+      source: String(r[5] || ''), campaign: String(r[6] || ''), leftPhone: r[7] === 'Có', checked: r[8] === true, note: String(r[9] || ''), alert: String(r[10] || ''), handledAt: iso_(r[11]) };
   }).filter(function (c) { return c.at; }).reverse();
   out.sales = salesList_();
   var ov = ss.getSheetByName('Tổng quan');
@@ -271,7 +280,11 @@ function crmClickDone(k, row, vid, done, note) {
     var sh = ss_().getSheetByName(S_CLICKS);
     row = Number(row);
     if (!sh || row < 2 || String(sh.getRange(row, 2).getValue()) !== String(vid)) throw new Error('Dòng đã thay đổi, hãy tải lại');
+    ensureClickCols_(sh);
+    var was = sh.getRange(row, 9).getValue() === true;
     sh.getRange(row, 9).setValue(done === true);
+    if (done === true && !was) sh.getRange(row, 12).setValue(new Date());
+    if (done !== true) sh.getRange(row, 12).setValue('');
     if (note !== undefined) sh.getRange(row, 10).setValue(str_(note, 300));
     return { ok: true };
   });
