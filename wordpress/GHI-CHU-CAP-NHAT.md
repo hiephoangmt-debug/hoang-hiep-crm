@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.8** + plugin Hoàng Hiệp CRM **2.20.20**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.8** + plugin Hoàng Hiệp CRM **2.20.21**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -43,6 +43,7 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 ## Có gì mới – plugin 2.20.20, giao diện 2.15.8: trang dự án Sunneva Island
 
+- 2.20.21: thêm ảnh phối cảnh mặt tiền biệt thự (thư viện ảnh).
 - 2.20.20: thêm 2 ảnh phối cảnh biệt thự (ảnh đại diện + thư viện), vị trí cạnh cầu Minh Mạng – KĐT Nam Hòa Xuân, rút gọn ô Pháp lý / Bàn giao.
 
 - Trang mới **/du-an/sunneva-island/** – Sunneva Island (tên văn bản: Khu đô thị ven sông Hòa Quý – Đồng Nò, CTCP Địa Cầu – Sun Group): quy mô, 3 phân khu Habora / Centria / Rivera, sơ đồ mặt bằng tự vẽ, tiện ích, giá tham khảo, hỏi đáp, người nước ngoài được mua tối đa 250/390 biệt thự (đợt 4 – 11/2024).
