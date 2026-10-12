@@ -85,6 +85,16 @@ cls[gap] = 6
 img = Image.fromarray(np.array([PAL.get(i, (255, 255, 255)) for i in range(256)], np.uint8)[cls])
 W = 1600; Hh = round(Hs * W / Ws)
 img = img.resize((W, Hh), Image.LANCZOS)
+# chữ mờ tên web, xếp chéo lặp lại khắp bản đồ (dưới các nhãn)
+FW = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 30)
+tile = Image.new('RGBA', (420, 200), (0, 0, 0, 0))
+ImageDraw.Draw(tile).text((210, 100), 'hiephoangmt.com', font=FW, fill=(255, 255, 255, 95), anchor='mm', stroke_width=1, stroke_fill=(30, 50, 80, 40))
+tile = tile.rotate(22, expand=True, resample=Image.BICUBIC)
+mark = Image.new('RGBA', img.size, (0, 0, 0, 0))
+for j, y in enumerate(range(-60, Hh, 190)):
+    for x in range(-200 + (j % 2) * 210, W, 420):
+        mark.alpha_composite(tile, (x, y))
+img = Image.alpha_composite(img.convert('RGBA'), mark).convert('RGB')
 d = ImageDraw.Draw(img)
 F = lambda s, b=False: ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans%s.ttf' % ('-Bold' if b else ''), s)
 sx = W / 2000  # toạ độ dưới đây theo bản gốc rộng 2000 px
@@ -125,5 +135,5 @@ for i, t in enumerate(('Công viên ven sông, đường dạo bộ', 'Công vi�
 d.rectangle((0, 1288*sx, W, Hh), fill='white')
 d.text((20, (1288*sx + Hh)/2), 'Sơ đồ tô lại theo mặt bằng tổng thể dự án Sunneva Island (Sun Group) – để tham khảo. Hoàng Hiệp · hiephoangmt.com · 0904 567 009', font=F(19), fill='#333', anchor='lm')
 
-out = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'wp-content', 'mu-plugins', 'hh-crm', 'img', 'sunneva-island', 'sunneva-island-mat-bang-chi-tiet.jpg')
+out = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'wp-content', 'mu-plugins', 'hh-crm', 'img', 'sunneva-island', 'sunneva-island-mat-bang-hiephoangmt.jpg')
 img.save(out, quality=88); print(out, img.size)

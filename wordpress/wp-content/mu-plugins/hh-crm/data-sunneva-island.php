@@ -31,7 +31,7 @@ function hh_dataset_sunneva_island( $projects ) {
 			'hh_p_zones'         => "Phân khu Habora | Biệt thự song lập, đơn lập | Phía Tây – Bắc đảo, dãy ven sông phía Bắc, các trục Ánh Dương 3 – 17 | Theo đợt mở bán\nPhân khu Centria | Townhouse, biệt thự song lập | Trục giữa đảo, hai dãy townhouse dọc Ánh Dương 1 – 5 | Theo đợt mở bán\nPhân khu Rivera | Biệt thự song lập, đơn lập | Phía Đông đảo, mũi đảo vòng quanh công viên nội khu | Theo đợt mở bán",
 			'hh_p_design_desc'   => 'Đảo chia 3 phân khu: Habora (phía Tây – Bắc), Centria (trục giữa, có hai dãy townhouse) và Rivera (phía Đông, mũi đảo là vòng biệt thự đơn lập quanh công viên). Đường nội bộ mang tên Ánh Dương 1 – 17; vành ngoài đảo là công viên ven sông và đường dạo bộ. Hai cầu nối đảo: phía Bắc sang đường Chương D (hướng ra biển), phía Nam sang KĐT Nam Hòa Xuân.',
 			'hh_p_amenities_in'  => "Công viên ven sông, đường dạo bộ quanh đảo\nCông viên nội khu ở mũi đảo và giữa phân khu Habora\nKhu thể thao\nKhu phát triển giáo dục\nNhà sinh hoạt cộng đồng, hồ bơi\nCảnh quan tiện ích",
-			'hh_p_image_links'   => "plugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-song-lap.jpg | Phối cảnh dãy biệt thự Sunneva Island Đà Nẵng | đại diện\nplugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-goc.jpg | Phối cảnh biệt thự góc Sunneva Island | thư viện\nplugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-xanh.jpg | Phối cảnh mặt tiền biệt thự Sunneva Island phong cách Đông Dương | thư viện\nplugin:img/sunneva-island/sunneva-island-mat-bang-chi-tiet.jpg | Sơ đồ mặt bằng Sunneva Island: phân khu Habora, Centria, Rivera | tổng thể",
+			'hh_p_image_links'   => "plugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-song-lap.jpg | Phối cảnh dãy biệt thự Sunneva Island Đà Nẵng | đại diện\nplugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-goc.jpg | Phối cảnh biệt thự góc Sunneva Island | thư viện\nplugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-xanh.jpg | Phối cảnh mặt tiền biệt thự Sunneva Island phong cách Đông Dương | thư viện\nplugin:img/sunneva-island/sunneva-island-mat-bang-hiephoangmt.jpg | Sơ đồ mặt bằng Sunneva Island: phân khu Habora, Centria, Rivera | tổng thể",
 			'hh_p_villa_desc'    => 'Biệt thự đơn lập và song lập ven sông, thiết kế Indochine. Giá dưới đây là mặt bằng chào bán các đợt trước theo trang phân phối – chỉ để tham khảo, giá chuyển nhượng hiện tại tùy vị trí, view sông và diện tích đất.',
 			'hh_p_villa_table'   => "Biệt thự song lập | – | Ven sông, nội khu | Khoảng 32 – 45 tỷ (tham khảo)\nBiệt thự đơn lập | – | Ven sông, nội khu | Khoảng 35 – 60 tỷ (tham khảo)\nTownhouse | – | Nhà phố thương mại | Từ khoảng 31 tỷ (tham khảo)",
 			'hh_p_location_desc' => 'Sunneva Island nằm trên đảo Đồng Nò thuộc phường Hòa Quý (cũ), quận Ngũ Hành Sơn – khu vực sông nước phía Nam Đà Nẵng, liền kề Sun Riverpolis (khu Đầm Sen) và đối diện Sun NeO City Hòa Xuân. Cầu nối đảo sang KĐT Nam Hòa Xuân, gần cầu Minh Mạng; từ đây theo đường Minh Mạng, Nguyễn Phước Lan kết nối về trung tâm, sân bay và biển Non Nước. Từ đảo nhìn về sông Hàn với cầu Tiên Sơn, Trần Thị Lý, cầu Rồng và bán đảo Sơn Trà.',
@@ -45,7 +45,7 @@ function hh_dataset_sunneva_island( $projects ) {
 			'hh_p_legal' => 'Có trong danh sách dự án người nước ngoài được sở hữu nhà ở – đợt 4 (11/2024): tối đa 250 / 390 biệt thự. Tên trong văn bản: Khu đô thị ven sông Hòa Quý – Đồng Nò, chủ đầu tư CTCP Địa Cầu',
 			'hh_p_location_desc' => 'Sunneva Island nằm trên đảo Đồng Nò thuộc phường Hòa Quý (cũ), quận Ngũ Hành Sơn – khu vực sông nước phía Nam Đà Nẵng, liền kề Sun Riverpolis (khu Đầm Sen) và đối diện Sun NeO City Hòa Xuân. Từ đảo theo đường Minh Mạng, Nguyễn Phước Lan kết nối về trung tâm, sân bay và biển Non Nước.',
 			'hh_p_connections' => "Cầu nội đảo | KĐT Nam Hòa Xuân (phía Nam), đường Chương D (phía Bắc)\nLiền kề | Sun Riverpolis, khu Đầm Sen\n10 – 15 phút | Biển Non Nước, danh thắng Ngũ Hành Sơn\n15 phút | Trung tâm thành phố, sân bay quốc tế Đà Nẵng\n25 – 30 phút | Phố cổ Hội An",
-			'hh_p_image_links' => array( "plugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-song-lap.jpg | Phối cảnh dãy biệt thự Sunneva Island Đà Nẵng | đại diện\nplugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-goc.jpg | Phối cảnh biệt thự góc Sunneva Island | thư viện\nplugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-xanh.jpg | Phối cảnh mặt tiền biệt thự Sunneva Island phong cách Đông Dương | thư viện\nplugin:img/sunneva-island/sunneva-island-so-do-mat-bang.jpg | Sơ đồ mặt bằng Sunneva Island: phân khu Habora, Centria, Rivera | tổng thể", "plugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-song-lap.jpg | Phối cảnh dãy biệt thự Sunneva Island Đà Nẵng | đại diện\nplugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-goc.jpg | Phối cảnh biệt thự góc Sunneva Island | thư viện\nplugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-xanh.jpg | Phối cảnh mặt tiền biệt thự Sunneva Island phong cách Đông Dương | thư viện\nplugin:img/sunneva-island/sunneva-island-mat-bang-tong-the.jpg | Sơ đồ mặt bằng Sunneva Island: phân khu Habora, Centria, Rivera | tổng thể", "plugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-song-lap.jpg | Phối cảnh dãy biệt thự Sunneva Island Đà Nẵng | đại diện\nplugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-goc.jpg | Phối cảnh biệt thự góc Sunneva Island | thư viện\nplugin:img/sunneva-island/sunneva-island-mat-bang-tong-the.jpg | Sơ đồ mặt bằng Sunneva Island: phân khu Habora, Centria, Rivera | tổng thể", 'plugin:img/sunneva-island/sunneva-island-mat-bang-tong-the.jpg | Sơ đồ mặt bằng Sunneva Island: phân khu Habora, Centria, Rivera | tổng thể' ),
+			'hh_p_image_links' => array( "plugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-song-lap.jpg | Phối cảnh dãy biệt thự Sunneva Island Đà Nẵng | đại diện\nplugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-goc.jpg | Phối cảnh biệt thự góc Sunneva Island | thư viện\nplugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-xanh.jpg | Phối cảnh mặt tiền biệt thự Sunneva Island phong cách Đông Dương | thư viện\nplugin:img/sunneva-island/sunneva-island-mat-bang-chi-tiet.jpg | Sơ đồ mặt bằng Sunneva Island: phân khu Habora, Centria, Rivera | tổng thể", "plugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-song-lap.jpg | Phối cảnh dãy biệt thự Sunneva Island Đà Nẵng | đại diện\nplugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-goc.jpg | Phối cảnh biệt thự góc Sunneva Island | thư viện\nplugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-xanh.jpg | Phối cảnh mặt tiền biệt thự Sunneva Island phong cách Đông Dương | thư viện\nplugin:img/sunneva-island/sunneva-island-so-do-mat-bang.jpg | Sơ đồ mặt bằng Sunneva Island: phân khu Habora, Centria, Rivera | tổng thể", "plugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-song-lap.jpg | Phối cảnh dãy biệt thự Sunneva Island Đà Nẵng | đại diện\nplugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-goc.jpg | Phối cảnh biệt thự góc Sunneva Island | thư viện\nplugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-xanh.jpg | Phối cảnh mặt tiền biệt thự Sunneva Island phong cách Đông Dương | thư viện\nplugin:img/sunneva-island/sunneva-island-mat-bang-tong-the.jpg | Sơ đồ mặt bằng Sunneva Island: phân khu Habora, Centria, Rivera | tổng thể", "plugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-song-lap.jpg | Phối cảnh dãy biệt thự Sunneva Island Đà Nẵng | đại diện\nplugin:img/sunneva-island/sunneva-island-phoi-canh-biet-thu-goc.jpg | Phối cảnh biệt thự góc Sunneva Island | thư viện\nplugin:img/sunneva-island/sunneva-island-mat-bang-tong-the.jpg | Sơ đồ mặt bằng Sunneva Island: phân khu Habora, Centria, Rivera | tổng thể", 'plugin:img/sunneva-island/sunneva-island-mat-bang-tong-the.jpg | Sơ đồ mặt bằng Sunneva Island: phân khu Habora, Centria, Rivera | tổng thể' ),
 		),
 		'sources' => array(
 			'https://cafeland.vn/du-an/sunneva-island-khu-do-thi-sinh-thai-ven-song-tai-da-nang-3409.html',
@@ -68,12 +68,12 @@ function hh_dataset_sunneva_island( $projects ) {
 }
 
 /**
- * Sơ đồ mặt bằng tô lại theo mặt bằng tổng thể (sunneva-island-mat-bang-chi-tiet.jpg) thay các sơ đồ vẽ tay trước:
+ * Sơ đồ mặt bằng tô lại theo mặt bằng tổng thể (sunneva-island-mat-bang-hiephoangmt.jpg, có chữ mờ tên web) thay các sơ đồ trước:
  * bỏ ảnh cũ khỏi "Ảnh mặt bằng tổng thể" một lần; ảnh mới được tải ngầm như các ảnh khác.
  */
 add_action( 'admin_init', 'hh_sunneva_replace_old_plan' );
 function hh_sunneva_replace_old_plan() {
-	if ( get_option( 'hh_sunneva_plan_v3' ) ) {
+	if ( get_option( 'hh_sunneva_plan_v4' ) ) {
 		return;
 	}
 	$post = get_page_by_path( 'sunneva-island', OBJECT, 'du-an' );
@@ -82,7 +82,7 @@ function hh_sunneva_replace_old_plan() {
 	}
 	$done = (array) get_post_meta( $post->ID, '_hh_img_links', true );
 	$ids  = array_filter( array_map( 'absint', explode( ',', (string) get_post_meta( $post->ID, 'hh_p_masterplan_img', true ) ) ) );
-	foreach ( array( 'sunneva-island-mat-bang-tong-the.jpg', 'sunneva-island-so-do-mat-bang.jpg' ) as $file ) {
+	foreach ( array( 'sunneva-island-mat-bang-tong-the.jpg', 'sunneva-island-so-do-mat-bang.jpg', 'sunneva-island-mat-bang-chi-tiet.jpg' ) as $file ) {
 		$old = (int) ( $done[ 'plugin:img/sunneva-island/' . $file ] ?? 0 );
 		if ( $old ) {
 			$ids = array_diff( $ids, array( $old ) );
@@ -90,5 +90,5 @@ function hh_sunneva_replace_old_plan() {
 		}
 	}
 	update_post_meta( $post->ID, 'hh_p_masterplan_img', implode( ',', $ids ) );
-	update_option( 'hh_sunneva_plan_v3', 1, false );
+	update_option( 'hh_sunneva_plan_v4', 1, false );
 }

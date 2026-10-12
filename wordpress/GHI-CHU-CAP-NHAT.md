@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.8** + plugin Hoàng Hiệp CRM **2.20.23**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.8** + plugin Hoàng Hiệp CRM **2.20.24**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -43,6 +43,7 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 ## Có gì mới – plugin 2.20.20, giao diện 2.15.8: trang dự án Sunneva Island
 
+- 2.20.24: sơ đồ mặt bằng có chữ mờ "hiephoangmt.com" xếp chéo khắp bản đồ; sơ đồ cũ tự gỡ.
 - 2.20.23: sơ đồ mặt bằng tô lại theo từng điểm màu của mặt bằng tổng thể – đúng vị trí từng dãy lô, đường, 2 cầu, sông; bỏ chữ, logo bản gốc; sơ đồ cũ tự gỡ.
 - 2.20.22: vẽ lại sơ đồ mặt bằng theo đúng bố cục: đảo hướng Tây Bắc – Đông Nam, cầu phía Bắc (chân cầu giữa Habora và Rivera → đường Chương D, hướng biển), cầu phía Nam (góc Habora – Centria → KĐT Nam Hòa Xuân); sơ đồ cũ tự gỡ khỏi trang.
 - 2.20.21: thêm ảnh phối cảnh mặt tiền biệt thự (thư viện ảnh).
