@@ -296,6 +296,7 @@ function onEdit(e) {
 // ---- Menu CRM ----
 function onOpen() {
   SpreadsheetApp.getUi().createMenu('CRM')
+    .addItem('Mở giao diện CRM (trong file này)', 'moGiaoDienCRM')
     .addItem('Link vào CRM (giao diện web)', 'showCrmLink')
     .addItem('Đổi link CRM (huỷ link cũ)', 'resetCrmLink')
     .addItem('Xem mã nhúng cho các website', 'showEmbed')
@@ -365,4 +366,12 @@ function kiemTraCRM() {
   if (hasHtml) Logger.log('File giao diện Crm: có.');
   Logger.log(crmBaseUrl_() ? 'URL ứng dụng web (ô G2): ' + crmBaseUrl_() : 'CHƯA có URL /exec ở ô G2 tab Website. Triển khai > Quản lý bản triển khai > copy URL ứng dụng web, dán vào ô G2.');
   return link;
+}
+
+// Mở giao diện CRM ngay trong file Sheet (không cần bản triển khai, dùng quyền của người đang mở file).
+function moGiaoDienCRM() {
+  var props = PropertiesService.getScriptProperties(), key = crmKey_();
+  if (key.length < 20) { key = Utilities.getUuid().replace(/-/g, ''); props.setProperty('CRM_KEY', key); }
+  var html = HtmlService.createHtmlOutputFromFile('Crm').getContent().replace("/*__KEY__*/''", JSON.stringify(key));
+  SpreadsheetApp.getUi().showModelessDialog(HtmlService.createHtmlOutput(html).setWidth(1180).setHeight(780), 'CRM Hoàng Hiệp');
 }

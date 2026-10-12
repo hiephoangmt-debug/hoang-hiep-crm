@@ -35,12 +35,12 @@ const sheets = {
 sheets.Website.appendRow(['Landing A', 'a.com', 'testkey12345']);
 const out = (o) => ({ setMimeType() { return { body: o }; } });
 const ctx = vm.createContext({
-  SpreadsheetApp: { getActiveSpreadsheet: () => ({ getSheetByName: (n) => sheets[n], getOwner: () => ({ getEmail: () => 'owner@gmail.com' }) }), getUi: () => ({ alert(m) { globalThis.__alert = m; } }) },
+  SpreadsheetApp: { getActiveSpreadsheet: () => ({ getSheetByName: (n) => sheets[n], getOwner: () => ({ getEmail: () => 'owner@gmail.com' }) }), getUi: () => ({ alert(m) { globalThis.__alert = m; }, showModelessDialog(h, title) { globalThis.__dialog = { h, title }; } }) },
   CacheService: { getScriptCache: () => ({ get: () => null, put() {} }) },
   LockService: { getScriptLock: () => ({ waitLock() {}, releaseLock() {} }) },
   ContentService: { createTextOutput: (b) => ({ body: b, setMimeType(m) { this.mime = m; return this; } }), MimeType: { JSON: 'json', JAVASCRIPT: 'js' } },
   Session: { getActiveUser: () => { throw new Error('Session không được dùng'); }, getEffectiveUser: () => { throw new Error('Session không được dùng'); } },
-  HtmlService: { createHtmlOutputFromFile: (n) => ({ file: n, setTitle() { return this; }, addMetaTag() { return this; } }) },
+  HtmlService: { createHtmlOutputFromFile: (n) => ({ file: n, setTitle() { return this; }, addMetaTag() { return this; }, getContent: () => fs.readFileSync(path.join(here, n + '.html'), 'utf8') }), createHtmlOutput: (c) => ({ content: c, setWidth() { return this; }, setHeight() { return this; } }) },
   PropertiesService: { getScriptProperties: () => ({ getProperty: (k) => globalThis.__props?.[k] ?? null, setProperty: (k, v) => { (globalThis.__props ||= {})[k] = v; }, deleteProperty: (k) => { delete globalThis.__props?.[k]; } }) },
   Logger: { log: (m) => (globalThis.__log ||= []).push(m) },
   Utilities: { getUuid: () => crypto.randomUUID() },
@@ -123,6 +123,11 @@ assert.ok(ctx.crmEvents(K, 'v1').length >= 2); assert.equal(ctx.crmEvents(K, '')
 // đổi link: khoá cũ hết hiệu lực
 ctx.resetCrmLink(); const K2 = globalThis.__alert.match(/\?k=([0-9a-f]{32})/)[1];
 assert.notEqual(K2, K); assert.throws(() => ctx.crmLoad(K), /Không có quyền/); assert.ok(ctx.crmLoad(K2).leads.length === 2);
+// mở giao diện ngay trong file Sheet: khoá được gắn sẵn, không còn dấu hiệu thay thế
+ctx.moGiaoDienCRM();
+assert.equal(globalThis.__dialog.title, 'CRM Hoàng Hiệp');
+assert.ok(globalThis.__dialog.h.content.includes("var KEY = \"" + ctx.crmKey_() + "\""), 'khoá gắn vào giao diện');
+assert.equal(globalThis.__dialog.h.content.includes('__KEY__'), false);
 // hàm tự kiểm tra
 const ret = ctx.kiemTraCRM(); assert.match(ret, /\?k=[0-9a-f]{32}/); assert.ok(globalThis.__log.some((m) => /Đọc dữ liệu OK/.test(m))); assert.ok(globalThis.__log.some((m) => /File giao diện Crm: có/.test(m)));
 console.log('OK – Code.gs đạt mọi test');

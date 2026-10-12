@@ -20,6 +20,9 @@ Form dựng riêng không bắt được tự động: cấu hình webhook (POST
 - **Tổng quan**: số khách chưa liên hệ, người truy cập, lượt bấm Zalo / Gọi / Messenger, theo từng website. Đổi **Số ngày gần đây** (ô B3) để xem kỳ khác.
 - **Chiến dịch** và **Chi phí**: khai báo chiến dịch với mã `utm_campaign`, gắn mã đó vào link quảng cáo (Facebook: `?utm_source=facebook&utm_medium=paid&utm_campaign=MÃ`; Google: `?utm_source=google&utm_medium=cpc&utm_campaign=MÃ`). Mỗi ngày dán chi phí vào tab Chi phí (copy từ báo cáo Facebook/Google). Tab Chiến dịch tự tính giá mỗi khách, doanh thu và ROAS. Doanh thu lấy từ cột **Giá trị chốt** của khách có trạng thái **Chốt**.
 
+## Giao diện CRM mở ngay trong file Sheet (không cần triển khai)
+Dán `Code.gs` mới và file HTML `Crm` (từ `google/Crm.html`), lưu, tải lại Sheet, menu **CRM › Mở giao diện CRM (trong file này)**. Hoặc trong Apps Script chọn hàm `moGiaoDienCRM` › Chạy (Sheet phải đang mở ở tab khác). Chỉ người có quyền với file Sheet mới mở được. Ứng dụng Google Trang tính trên điện thoại không hỗ trợ menu này: dùng link web bên dưới.
+
 ## Giao diện CRM mở bằng link (tuỳ chọn)
 Ngoài file Sheet, có giao diện web riêng (`google/Crm.html`): danh sách khách, nút Zalo / Gọi tự ghi "đã liên hệ", cảnh báo lượt bấm chưa xử lý, thống kê, mã nhúng. Dữ liệu vẫn nằm trong Sheet.
 1. Apps Script: dán `google/Code.gs` mới, **+ › HTML** đặt tên `Crm`, dán `google/Crm.html`, lưu.
