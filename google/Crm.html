@@ -88,6 +88,7 @@ code,pre{background:#F3F5FA;border:1px solid var(--line);border-radius:10px;font
     <button data-t="home" class="on">Tổng quan</button>
     <button data-t="leads">Khách hàng<span class="dot" id="dLeads" hidden></span></button>
     <button data-t="clicks">Lượt bấm<span class="dot" id="dClicks" hidden></span></button>
+    <button data-t="ask">Hỏi quân sư</button>
     <button data-t="camp">Chiến dịch</button>
     <button data-t="sites">Website & mã nhúng</button>
   </nav>
@@ -151,7 +152,7 @@ $('#reload').onclick = load;
 document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('[data-zl]'); if (!a) return; e.preventDefault(); window.open('https://zalo.me/' + a.dataset.zl, '_blank', 'noopener'); });
 $('#gbar').onclick = function (e) { var b = e.target.closest('button'); if (!b) return; G = b.dataset.g; try { localStorage.setItem('crm_group', G); } catch (x) {} badges(); render(); };
 
-function render() { if (!D) return; $('#gbar').style.display = tab === 'leads' ? 'none' : ''; ({ home: home, leads: leads, clicks: clicks, camp: camp, sites: sites }[tab])(); }
+function render() { if (!D) return; $('#gbar').style.display = tab === 'leads' ? 'none' : ''; ({ home: home, leads: leads, clicks: clicks, ask: ask, camp: camp, sites: sites }[tab])(); }
 
 function home() {
   if (G) return homeGroup();
@@ -279,6 +280,7 @@ function leads() {
     var l = D.leads.filter(function (x) { return x.phone === s.dataset.as; })[0], v = s.value;
     run('crmUpdateLead', s.dataset.as, { assignee: v }).then(function () { l.assignee = v; toast(v ? 'Đã chuyển cho ' + v : 'Đã bỏ giao'); leads(); }).catch(function (e) { s.value = l.assignee || ''; fail(e); }); }; });
   document.querySelectorAll('[data-open]').forEach(function (b) { b.onclick = function () { openLead(b.dataset.open); }; });
+  document.querySelectorAll('[data-ask]').forEach(function (b) { b.onclick = function () { ASK.phone = b.dataset.ask; ASK.q = ''; ASK.a = ''; tab = 'ask'; document.querySelectorAll('#nav button').forEach(function (x) { x.classList.toggle('on', x.dataset.t === 'ask'); }); render(); }; });
   document.querySelectorAll('[data-adv]').forEach(function (b) { b.onclick = function () { advisor(b.dataset.adv); }; });
   document.querySelectorAll('[data-act]').forEach(function (b) { b.onclick = function () { contact(b.dataset.p, b.dataset.act, b); }; });
 }
@@ -295,7 +297,7 @@ function leadCard(l) {
   return '<div class="card lead ' + (todo(l) ? 'todo' : '') + '"><div><h3>' + esc(l.name || '(chưa có tên)') + ' · ' + esc(l.phone) + ' ' + zl(l.phone, l) + '</h3>' +
     '<div style="margin:4px 0">' + st + ' ' + t + '</div><div class="meta small">' + d + '</div>' + (nextStep(l) ? '<div class="small step">' + nextStep(l) + '</div>' : '') +
     '<div class="small assign"><span class="mut">Chuyển cho sale:</span> <select data-as="' + esc(l.phone) + '"><option value="">Chưa giao</option>' + saleNames([l.assignee].filter(Boolean)).map(function (s) { return '<option' + (s === l.assignee ? ' selected' : '') + '>' + esc(s) + '</option>'; }).join('') + '</select></div>' + (l.note ? '<div class="small note">' + esc(l.note) + '</div>' : '') + '</div>' +
-    '<div class="acts"><button class="btn z" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button><button class="btn g" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button><button class="btn" data-adv="' + esc(l.phone) + '">Quân sư</button><button class="btn" data-open="' + esc(l.phone) + '">Chi tiết</button></div></div>';
+    '<div class="acts"><button class="btn z" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button><button class="btn g" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button><button class="btn" data-adv="' + esc(l.phone) + '">Quân sư</button><button class="btn" data-ask="' + esc(l.phone) + '">Hỏi AI</button><button class="btn" data-open="' + esc(l.phone) + '">Chi tiết</button></div></div>';
 }
 function contact(phone, act, btn) {
   if (act === 'zalo') window.open('https://zalo.me/' + phone, '_blank', 'noopener'); else window.open('tel:' + phone, '_self');
@@ -340,6 +342,25 @@ function clicks() {
     run('crmClickDone', c.row, c.vid, b.checked).then(function () { c.checked = b.checked; c.alert = (!c.leftPhone && !c.checked) ? 'CHƯA XỬ LÝ' : ''; badges(); clicks(); }).catch(function (e) { b.checked = !b.checked; fail(e); }); }; });
 }
 
+var ASK = { phone: '', q: '', a: '', busy: false };
+function ask() {
+  var bds = D.leads.filter(function (l) { return isBds(l.site); });
+  var qs = ['Soạn tin nhắn Zalo đầu tiên cho khách này', 'Khách này nên chăm sóc thế nào trong 3 ngày tới?', 'Khách chê giá cao, tôi nên trả lời sao?', 'Khách hỏi vay ngân hàng, tôi nên nói gì?', 'Soạn tin mời khách đi xem dự án'];
+  $('#main').innerHTML = '<div class="card"><b>Hỏi quân sư</b><p class="small mut">Chọn khách (hoặc để trống), gõ câu hỏi, quân sư soạn câu trả lời và tin nhắn cho bạn. Quân sư là trí tuệ nhân tạo, bạn đọc lại trước khi gửi cho khách.</p>' +
+    '<div class="row"><select id="aw"><option value="">Không chọn khách cụ thể</option>' + bds.map(function (l) { return '<option value="' + esc(l.phone) + '">' + esc((l.name || '(chưa có tên)') + ' · ' + l.phone + ' · ' + l.site) + '</option>'; }).join('') + '</select></div>' +
+    '<div class="row chips">' + qs.map(function (x, i) { return '<button class="chip" data-q="' + i + '">' + esc(x) + '</button>'; }).join('') + '</div>' +
+    '<textarea id="aq" rows="3" placeholder="Gõ câu hỏi của bạn">' + esc(ASK.q) + '</textarea><div class="row" style="margin-top:8px"><button class="btn p" id="ago">Hỏi quân sư</button><span class="mut small" id="ast"></span></div></div>' +
+    '<div class="card" id="aout" ' + (ASK.a ? '' : 'hidden') + '><b>Quân sư trả lời</b><div style="white-space:pre-wrap;margin:8px 0" id="atext">' + esc(ASK.a) + '</div><button class="btn" id="acp">Sao chép câu trả lời</button></div>';
+  $('#aw').value = ASK.phone;
+  document.querySelectorAll('[data-q]').forEach(function (b) { b.onclick = function () { $('#aq').value = qs[b.dataset.q]; }; });
+  $('#aw').onchange = function (e) { ASK.phone = e.target.value; };
+  $('#acp').onclick = function () { copyText(ASK.a); };
+  $('#ago').onclick = function () {
+    var q = $('#aq').value.trim(); if (!q || ASK.busy) return;
+    ASK.q = q; ASK.phone = $('#aw').value; ASK.busy = true; $('#ast').textContent = 'Quân sư đang nghĩ…'; $('#ago').disabled = true;
+    run('crmAsk', q, ASK.phone).then(function (a) { ASK.a = a; ASK.busy = false; ask(); }).catch(function (e) { ASK.busy = false; $('#ago').disabled = false; $('#ast').textContent = ''; fail(e); });
+  };
+}
 function camp() {
   var c = D.campaigns;
   $('#main').innerHTML = '<div class="card tw"><table><tr>' + c[0].map(function (h) { return '<th>' + esc(h) + '</th>'; }).join('') + '</tr>' +

@@ -39,6 +39,7 @@ for (let i = 1; i < 40; i++) { (sheets['Khách hàng'].rows[i] ||= [])[14] = fal
 const out = (o) => ({ setMimeType() { return { body: o }; } });
 const ctx = vm.createContext({
   SpreadsheetApp: { getActiveSpreadsheet: () => ({ getSheetByName: (n) => sheets[n], getOwner: () => ({ getEmail: () => 'owner@gmail.com' }) }), getUi: () => ({ alert(m) { globalThis.__alert = m; }, showModelessDialog(h, title) { globalThis.__dialog = { h, title }; } }) },
+  UrlFetchApp: { fetch: (u, o) => { globalThis.__fetch = { u, o }; return { getResponseCode: () => 200, getContentText: () => JSON.stringify({ content: [{ text: 'Trả lời thử' }] }) }; } },
   CacheService: { getScriptCache: () => ({ get: () => null, put() {} }) },
   LockService: { getScriptLock: () => ({ waitLock() {}, releaseLock() {} }) },
   ContentService: { createTextOutput: (b) => ({ body: b, setMimeType(m) { this.mime = m; return this; } }), MimeType: { JSON: 'json', JAVASCRIPT: 'js' } },
@@ -107,7 +108,7 @@ assert.equal(ctx.crmKey_(), K);
 assert.throws(() => ctx.crmLoad('sai-khoa'), /Không có quyền/); assert.throws(() => ctx.crmLog('', '0988111222', 'call'), /Không có quyền/);
 assert.equal(ctx.doGet({ parameter: { k: 'sai' } }).file, undefined); assert.ok(ctx.doGet({ parameter: { k: K } }).content.includes('CRM Hoàng Hiệp') && ctx.doGet({ parameter: { k: K } }).content.includes('</html>'));
 const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
-assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-9'); assert.equal(JSON.stringify(dbg).includes(K), false);
+assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-10'); assert.equal(JSON.stringify(dbg).includes(K), false);
 const L = ctx.crmLoad(K);
 assert.equal(L.leads.length, 2);
 const l0 = L.leads.find((x) => x.phone === '0988111222');
@@ -136,4 +137,12 @@ assert.equal(globalThis.__dialog.h.content.includes('__KEY__'), false);
 assert.equal(ctx.crmDialogKey(), ctx.crmKey_());
 // hàm tự kiểm tra
 const ret = ctx.kiemTraCRM(); assert.match(ret, /\?k=[0-9a-f]{32}/); assert.ok(globalThis.__log.some((m) => /Đọc dữ liệu OK/.test(m))); assert.ok(globalThis.__log.some((m) => /File giao diện Crm: có/.test(m)));
+// quân sư AI: cần đúng khoá truy cập, thiếu khoá API thì báo rõ, có khoá thì gọi API
+assert.throws(() => ctx.crmAsk('sai-khoa', 'xin chào'), /Không có quyền/);
+assert.throws(() => ctx.crmAsk(ctx.crmKey_(), 'xin chào'), /Chưa cài khoá quân sư/);
+globalThis.__props.ANTHROPIC_KEY = 'sk-ant-' + 'x'.repeat(30);
+assert.equal(ctx.crmAsk(ctx.crmKey_(), 'Soạn tin cho khách', ''), 'Trả lời thử');
+assert.equal(globalThis.__fetch.u, 'https://api.anthropic.com/v1/messages');
+assert.equal(JSON.parse(globalThis.__fetch.o.payload).messages[0].content, 'Soạn tin cho khách');
+assert.throws(() => ctx.crmAsk(ctx.crmKey_(), '  '), /Chưa nhập câu hỏi/);
 console.log('OK – Code.gs đạt mọi test');

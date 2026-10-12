@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-9', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-10', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -102,6 +102,51 @@ function crmAddSale(k, name) {
     if (salesList_().indexOf(name) < 0) sh.appendRow([str_(name, 80), '']);
     return salesList_();
   });
+}
+
+// ---- Quân sư AI: hỏi Claude về cách chăm khách. Khoá API lưu trong Script Properties (menu CRM > Cài khoá quân sư).
+var ASK_MODEL = 'claude-sonnet-5-5';
+function leadContext_(phone) {
+  var f = findLead_(phone), r = f.sh.getRange(f.row, 1, 1, 22).getValues()[0];
+  return 'Khách: ' + (r[2] || '(chưa có tên)') + ', SĐT ' + phoneStr_(r[3]) + '. Dự án / website: ' + r[5] + '. Nguồn: ' + (r[6] || 'không rõ') +
+    ', chiến dịch: ' + (r[7] || 'không rõ') + '. Gửi form ' + (Number(r[9]) || 1) + ' lần, bấm Zalo ' + (Number(r[10]) || 0) + ' lần, bấm Gọi ' + (Number(r[11]) || 0) +
+    ' lần. Đã gọi: ' + (r[14] === true ? 'rồi' : 'chưa') + ', đã nhắn: ' + (r[15] === true ? 'rồi' : 'chưa') + '. Trạng thái: ' + (r[18] || 'Mới') +
+    '. Sale phụ trách: ' + (r[19] || 'chưa giao') + '. Ghi chú: ' + (r[21] || 'không có') + '.';
+}
+function crmAsk(k, question, phone) {
+  requireUi_(k);
+  question = String(question || '').trim().slice(0, 1500);
+  if (!question) throw new Error('Chưa nhập câu hỏi');
+  var key = PropertiesService.getScriptProperties().getProperty('ANTHROPIC_KEY') || '';
+  if (!key) throw new Error('Chưa cài khoá quân sư. Vào file Sheet, menu CRM > Cài khoá quân sư (AI), dán khoá API vào.');
+  var cache = CacheService.getScriptCache(), n = Number(cache.get('ask_n') || 0);
+  if (n >= 12) throw new Error('Hỏi hơi nhanh, đợi một phút rồi hỏi tiếp.');
+  cache.put('ask_n', String(n + 1), 60);
+  var ctx = '';
+  if (phone) { try { ctx = '\n\nThông tin khách đang hỏi: ' + leadContext_(phone); } catch (e) {} }
+  var res = UrlFetchApp.fetch('https://api.anthropic.com/v1/messages', {
+    method: 'post', contentType: 'application/json', muteHttpExceptions: true,
+    headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01' },
+    payload: JSON.stringify({
+      model: ASK_MODEL, max_tokens: 900,
+      system: 'Bạn là quân sư bán hàng bất động sản tại Đà Nẵng, tư vấn cho nhân viên sale. Trả lời bằng tiếng Việt, ngắn gọn, thực tế, dễ làm theo ngay. ' +
+        'Khi soạn tin nhắn cho khách thì viết sẵn nội dung gửi được luôn, lịch sự, không hứa hẹn sai sự thật, không bịa giá hay chính sách.' + ctx,
+      messages: [{ role: 'user', content: question }]
+    })
+  });
+  var code = res.getResponseCode(), body = {};
+  try { body = JSON.parse(res.getContentText()); } catch (e) {}
+  if (code !== 200) throw new Error('Quân sư lỗi (' + code + '): ' + ((body.error && body.error.message) || 'không rõ nguyên nhân'));
+  return (body.content || []).map(function (b) { return b.text || ''; }).join('').trim();
+}
+function caiKhoaQuanSu() {
+  var ui = SpreadsheetApp.getUi();
+  var r = ui.prompt('Cài khoá quân sư (AI)', 'Dán khoá API của Anthropic (bắt đầu bằng sk-ant-). Khoá chỉ lưu trong file này, không hiện lại.', ui.ButtonSet.OK_CANCEL);
+  if (r.getSelectedButton() !== ui.Button.OK) return;
+  var v = String(r.getResponseText() || '').trim();
+  if (!/^sk-ant-[\w-]{20,}$/.test(v)) { ui.alert('Khoá không đúng dạng. Hãy dán lại đủ cả khoá.'); return; }
+  PropertiesService.getScriptProperties().setProperty('ANTHROPIC_KEY', v);
+  ui.alert('Đã cài khoá quân sư. Vào CRM > tab "Hỏi quân sư" để dùng.');
 }
 
 function findLead_(phone) {
@@ -330,6 +375,7 @@ function onOpen() {
     .addItem('Mở giao diện CRM (trong file này)', 'moGiaoDienCRM')
     .addItem('Link vào CRM (giao diện web)', 'showCrmLink')
     .addItem('Đổi link CRM (huỷ link cũ)', 'resetCrmLink')
+    .addItem('Cài khoá quân sư (AI)', 'caiKhoaQuanSu')
     .addItem('Xem mã nhúng cho các website', 'showEmbed')
     .addItem('Tạo mã website ngẫu nhiên', 'newSiteKey')
     .addToUi();
