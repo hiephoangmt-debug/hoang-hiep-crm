@@ -279,7 +279,7 @@ const gallerySection = (title, extra = "") => `
   <div class="grid2">${photo(1)}${photo(2)}</div>${extra ? `<div class="grid3" style="margin-top:18px">${extra}</div>` : ""}</div></section>`;
 const NEWS = [
   ["on", "11/2025", "FPT Plaza 4 đủ điều kiện bán nhà ở hình thành trong tương lai", "Sở Xây dựng Đà Nẵng xác nhận căn hộ FPT Plaza 4 đủ điều kiện bán.", "fpt-plaza-4"],
-  ["", "03/2025", "FPT Plaza 4 khởi công", "Dự án 1.395 căn hộ, 2 khối N & S, dự kiến bàn giao Quý II/2027.", "fpt-plaza-4"],
+  ["", "03/2025", "FPT Plaza 4 khởi công", "Dự án 1.395 căn hộ, 2 khối N & S, dự kiến bàn giao Quý IV/2027.", "fpt-plaza-4"],
   ["on", "2026 (dự kiến)", "FPT Plaza 3 chuẩn bị bàn giao", "Hai tòa The Empire & The Wealthe, bàn giao dự kiến trong năm 2026 theo chủ đầu tư.", "fpt-plaza-3"],
   ["up", "Chờ công bố", "FPT Plaza 5 nhận đăng ký sớm", "Chủ đầu tư chưa công bố bảng giá; đăng ký để được báo ngay khi có thông tin.", "fpt-plaza-5"],
 ];
@@ -306,7 +306,7 @@ const LEGAL = {
   "fpt-plaza-1": [["Đã bàn giao", "FPT Plaza 1 đã hoàn thành và bàn giao, có cư dân sinh sống."], ["Giao dịch chuyển nhượng", "Mỗi căn được kiểm tra pháp lý cụ thể trước khi giao dịch; hỗ trợ thủ tục sang tên."]],
   "fpt-plaza-2": [["Đã bàn giao năm 2023", "FPT Plaza 2 đã bàn giao, giao dịch hiện tại là chuyển nhượng."], ["Kiểm tra từng căn", "Pháp lý từng căn được kiểm tra trước khi giao dịch; hỗ trợ sang tên và phương án vay."]],
   "fpt-plaza-3": [["Thi công từ Quý I/2024", "Hai tòa The Empire (E) và The Wealthe (W), 25 tầng nổi, 2 tầng hầm."], ["Bàn giao dự kiến 2026", "Theo công bố chính thức của chủ đầu tư; theo dõi tiến độ thi công cập nhật."]],
-  "fpt-plaza-4": [["Đủ điều kiện bán (11/2025)", "Sở Xây dựng Đà Nẵng xác nhận căn hộ FPT Plaza 4 đủ điều kiện bán nhà ở hình thành trong tương lai."], ["Khởi công 3/2025", "Dự kiến bàn giao Quý II/2027 theo chủ đầu tư."]],
+  "fpt-plaza-4": [["Đủ điều kiện bán (11/2025)", "Sở Xây dựng Đà Nẵng xác nhận căn hộ FPT Plaza 4 đủ điều kiện bán nhà ở hình thành trong tương lai."], ["Khởi công 3/2025", "Dự kiến bàn giao Quý IV/2027 theo chủ đầu tư."]],
   "fpt-plaza-5": [["Chưa mở bán", "Thời điểm mở bán phụ thuộc thông báo đủ điều kiện kinh doanh của Sở Xây dựng Đà Nẵng."], ["Số liệu dự kiến", "Quy mô, số căn là dự kiến theo thông tin thị trường, sẽ cập nhật theo công bố chính thức."]],
 };
 const POLICY = {
@@ -314,6 +314,13 @@ const POLICY = {
   primary: [["Thanh toán theo tiến độ", "Chính sách thanh toán theo từng đợt; chuyên viên gửi bản mới nhất."], ["Ngân hàng hỗ trợ vay", "Điều kiện và lãi suất do ngân hàng quyết định; chuyên viên hỗ trợ ước tính trước."], ["Chính sách theo đợt", "Ưu đãi (nếu có) thay đổi theo từng đợt mở bán của chủ đầu tư."]],
   upcoming: [["Báo giá đầu tiên", "Nhận bảng giá ngay khi chủ đầu tư công bố."], ["Ưu tiên tư vấn chọn căn", "Tư vấn tầng, hướng phù hợp khi mở bán."], ["So sánh với FPT Plaza 4", "Tham khảo mặt bằng giá và loại căn của tòa đang mở bán."]],
 };
+const FP4_POLICY = [["Ngân hàng hỗ trợ (dự kiến)", "TPBank, VietinBank, MB, Vietcombank, Public Bank."], ["VietinBank: vay đến 75%", "Tối đa 75% giá trị HĐMB, thời hạn đến 25 năm, ân hạn gốc đến 24 tháng (thông báo 25/11/2025); lãi suất theo quy định ngân hàng."], ["Bàn giao hoàn thiện", "Căn thường hoàn thiện nội thất liền tường; căn thông tầng & duplex bàn giao thô."]];
+const FP4_LINKS = `<section class="tint"><div class="wrap">${head({ eyebrow: "Kết nối", title: "Từ FPT Plaza 4 đi đâu, mất bao lâu?", sub: "Theo tài liệu giới thiệu của chủ đầu tư; thời gian tham khảo." })}
+  <div class="grid3">
+    <div class="tile"><span class="pill on">~1 PHÚT</span><h3>Ngay trong khu</h3><p>Công viên trung tâm, quảng trường, tiện ích nội khu FPT City, hệ thống giáo dục FPT Schools.</p></div>
+    <div class="tile"><span class="pill">3 – 15 PHÚT</span><h3>Giáo dục, y tế, nghỉ dưỡng</h3><p>Đại học FPT, Trường Quốc tế Singapore (SIS), Trường Quốc tế Hoa Kỳ (APU), danh thắng Ngũ Hành Sơn, chợ Non Nước, bệnh viện Ngũ Hành Sơn, bệnh viện Phụ sản – Nhi, biển Tân Trà, sân golf Montgomerie Links, Legend Danang Golf.</p></div>
+    <div class="tile"><span class="pill up">15 – 20 PHÚT</span><h3>Trung tâm & sân bay</h3><p>Trung tâm hành chính TP. Đà Nẵng, chợ Hàn, sân bay quốc tế Đà Nẵng, Lotte Mart, Cung thể thao Tuyên Sơn, phố cổ Hội An.</p></div>
+  </div></div></section>`;
 const STEPS = {
   resale: ["<b>Giỏ hàng căn đang chuyển nhượng</b>, giá theo tầng, hướng, nội thất.", "<b>3 căn gợi ý</b> theo ngân sách bạn chọn.", "<b>Hỗ trợ pháp lý</b> sang tên, phương án vay.", "<b>Lịch xem nhà</b> thực tế cùng chuyên viên."],
   primary: ["<b>Bảng giá chi tiết</b> theo tầng, hướng, loại căn.", "<b>3 căn gợi ý</b> theo ngân sách bạn chọn.", "<b>Chính sách thanh toán</b> theo tiến độ, hỗ trợ vay ngân hàng.", "<b>Mặt bằng, layout</b> và dòng tiền dễ so sánh."],
@@ -357,7 +364,7 @@ ${legalSection(`Pháp lý ${p.name}: những điều cần biết`, [["Chủ đ�
 ${distances()}
 ${amenitySection(p.name)}
 ${plans}
-${priceSection(`Bảng giá & chính sách ${p.name}`, "Giá thay đổi theo tầng, hướng, loại căn và từng đợt chính sách – nhận bảng giá cập nhật qua Zalo.", ["Loại căn", "Diện tích tham khảo", "Tình trạng"], p.units.map(([t, a]) => [t, a, st]), POLICY[p.status])}
+${priceSection(`Bảng giá & chính sách ${p.name}`, "Giá thay đổi theo tầng, hướng, loại căn và từng đợt chính sách – nhận bảng giá cập nhật qua Zalo.", ["Loại căn", "Diện tích tham khảo", "Tình trạng"], p.units.map(([t, a]) => [t, a, st]), isFp4 ? FP4_POLICY : POLICY[p.status])}${isFp4 ? FP4_LINKS : ""}
 <section class="tint"><div class="wrap">${head({ eyebrow: "So sánh", title: "FPT Plaza 1, 2, 3, 4, 5: khác nhau thế nào?" })}${COMPARE(p.slug)}</div></section>
 ${isFp4 ? `<section id="hinh-anh"><div class="wrap">${head({ eyebrow: "Hình ảnh", title: "Hình ảnh phối cảnh dự án FPT Plaza 4", sub: "Phối cảnh minh hoạ theo tài liệu giới thiệu của chủ đầu tư; thực tế có thể thay đổi." })}<div class="grid2">${fp4Photo(2)}${fp4Photo(4)}</div><div class="grid3" style="margin-top:18px">${fp4Photo(3)}${fp4Photo(5)}${fp4Photo(1)}</div></div></section>` : gallerySection(`Hình ảnh phối cảnh ${p.name} & khu đô thị FPT City`)}
 ${newsSection(`Tin tức & cập nhật ${p.name}`, p.slug)}
@@ -450,7 +457,7 @@ ${hero({
 
 <section id="gioi-thieu"><div class="wrap">${head({ eyebrow: "Giới thiệu", title: "Có gì hot ở FPT City Đà Nẵng hiện nay?", sub: "Những điểm khách đang hỏi nhiều nhất – thông tin theo công bố của chủ đầu tư, có thể thay đổi." })}
   <div class="grid3">
-    <div class="tile"><span class="pill on">ĐANG MỞ BÁN</span><h3>FPT Plaza 4 – 1.395 căn</h3><p>Đủ điều kiện bán nhà ở hình thành trong tương lai theo xác nhận của Sở Xây dựng Đà Nẵng (11/2025). Dự kiến bàn giao Quý II/2027.</p><a class="go" href="${link("fpt-plaza-4")}">Xem FPT Plaza 4 →</a></div>
+    <div class="tile"><span class="pill on">ĐANG MỞ BÁN</span><h3>FPT Plaza 4 – 1.395 căn</h3><p>Đủ điều kiện bán nhà ở hình thành trong tương lai theo xác nhận của Sở Xây dựng Đà Nẵng (11/2025). Dự kiến bàn giao Quý IV/2027.</p><a class="go" href="${link("fpt-plaza-4")}">Xem FPT Plaza 4 →</a></div>
     <div class="tile"><span class="pill on">SẮP BÀN GIAO</span><h3>FPT Plaza 3 – 837 căn</h3><p>Hai tòa The Empire &amp; The Wealthe, 25 tầng. Bàn giao dự kiến trong năm 2026 theo chủ đầu tư.</p><a class="go" href="${link("fpt-plaza-3")}">Xem FPT Plaza 3 →</a></div>
     <div class="tile"><span class="pill up">SẮP MỞ BÁN</span><h3>FPT Plaza 5 – nhận đăng ký</h3><p>Giai đoạn tiếp theo của chuỗi FPT Plaza. Đăng ký để là người đầu tiên biết giá khi chủ đầu tư công bố.</p><a class="go" href="${link("fpt-plaza-5")}">Xem FPT Plaza 5 →</a></div>
     <div class="tile"><span class="pill">ĐẤT NỀN</span><h3>Đất nền V1 – V6</h3><p>Lô góc, lô biệt thự, lô ~100 m² cho nhà ở và cho thuê. Giỏ hàng cập nhật hằng tuần.</p><a class="go" href="${link("land")}">Xem đất nền →</a></div>
@@ -511,7 +518,7 @@ ${distances()}
 <section id="tin-tuc" class="tint"><div class="wrap">${head({ eyebrow: "Tin tức", title: "Tin tức & cập nhật dự án FPT City Đà Nẵng" })}
   <div class="grid2">
     <a class="tile" href="${link("fpt-plaza-4")}"><span class="pill on">11/2025</span><h3>FPT Plaza 4 đủ điều kiện bán nhà ở hình thành trong tương lai</h3><p>Sở Xây dựng Đà Nẵng xác nhận căn hộ FPT Plaza 4 đủ điều kiện bán.</p><span class="go">Đọc thêm →</span></a>
-    <a class="tile" href="${link("fpt-plaza-4")}"><span class="pill">03/2025</span><h3>FPT Plaza 4 khởi công</h3><p>Dự án 1.395 căn hộ, 2 khối N &amp; S, dự kiến bàn giao Quý II/2027.</p><span class="go">Đọc thêm →</span></a>
+    <a class="tile" href="${link("fpt-plaza-4")}"><span class="pill">03/2025</span><h3>FPT Plaza 4 khởi công</h3><p>Dự án 1.395 căn hộ, 2 khối N &amp; S, dự kiến bàn giao Quý IV/2027.</p><span class="go">Đọc thêm →</span></a>
     <a class="tile" href="${link("fpt-plaza-3")}"><span class="pill on">2026 (dự kiến)</span><h3>FPT Plaza 3 chuẩn bị bàn giao</h3><p>Hai tòa The Empire &amp; The Wealthe, bàn giao dự kiến trong năm 2026 theo chủ đầu tư.</p><span class="go">Đọc thêm →</span></a>
     <a class="tile" href="${link("fpt-plaza-5")}"><span class="pill up">Chờ công bố</span><h3>FPT Plaza 5 nhận đăng ký sớm</h3><p>Chủ đầu tư chưa công bố bảng giá; đăng ký để được báo ngay khi có thông tin.</p><span class="go">Đọc thêm →</span></a>
   </div></div></section>

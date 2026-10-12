@@ -282,7 +282,7 @@
       ? "Hợp nhất là **đất nền FPT City**: lô phổ biến ~90–105 m² (V5), ~100 m² (V2, V3), lô lớn 200–350 m² (V1)."
       : rent
         ? "Nhu cầu thuê quanh khu đô thị đến từ kỹ sư, giảng viên, sinh viên. Bạn có thể xem **FPT Plaza 1–2** (đã bàn giao, có sẵn cư dân), **FPT Plaza 3** (hoàn thiện, bàn giao dự kiến 2026) hoặc **FPT Plaza 4** (đang mở bán)."
-        : "Để ở, bạn có thể xem **FPT Plaza 1–2** (đã bàn giao, ở ngay), **FPT Plaza 3** (hoàn thiện, bàn giao dự kiến 2026) hoặc **FPT Plaza 4** (đang mở bán, dự kiến bàn giao Q2/2027).";
+        : "Để ở, bạn có thể xem **FPT Plaza 1–2** (đã bàn giao, ở ngay), **FPT Plaza 3** (hoàn thiện, bàn giao dự kiến 2026) hoặc **FPT Plaza 4** (đang mở bán, dự kiến bàn giao Q4/2027).";
     const bud = f.budget && f.budget !== "Chưa rõ" ? `Với ngân sách **${f.budget}**, chuyên viên sẽ lọc đúng căn/lô trong tầm tiền (giá thay đổi theo tầng, hướng, đợt chính sách).` : "Chuyên viên sẽ lọc theo ngân sách khi bạn cho biết.";
     const zalo = { label: "Tôi tự nhắn Zalo", href: $("[data-zalo-link]")?.href || "#" };
     if (st.leadSent) { say("bot", `${pick}\n${bud}`, [zalo]); setChips(["Bảng giá FPT Plaza 4", "Đất nền FPT City", "Gặp chuyên viên"]); return; }
