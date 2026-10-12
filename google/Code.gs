@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-4', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-5', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { HtmlService.createHtmlOutputFromFile('Crm'); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -41,6 +41,14 @@ function withLock_(fn) {
   lock.waitLock(20000);
   try { return fn(); } finally { lock.releaseLock(); }
 }
+// Dòng cuối thật sự có dữ liệu theo một cột khoá. getLastRow() tính cả các ô tick FALSE dựng sẵn nên không dùng được.
+function lastDataRow_(sh, col) {
+  var n = sh.getMaxRows ? sh.getMaxRows() : sh.getLastRow();
+  if (n < 2) return 1;
+  var v = sh.getRange(1, col, n, 1).getValues();
+  for (var i = v.length - 1; i >= 1; i--) if (v[i][0] !== '' && v[i][0] != null) return i + 1;
+  return 1;
+}
 function iso_(d) { return d && typeof d.getTime === 'function' ? new Date(d.getTime()).toISOString() : ''; }
 function phoneStr_(v) { var p = String(v == null ? '' : v); return p.length === 9 ? '0' + p : p; }
 
@@ -48,7 +56,7 @@ function phoneStr_(v) { var p = String(v == null ? '' : v); return p.length === 
 function crmLoad(k) {
   requireUi_(k);
   var ss = ss_(), out = { user: '', now: new Date().toISOString() };
-  var sh = ss.getSheetByName(S_LEADS), n = sh.getLastRow();
+  var sh = ss.getSheetByName(S_LEADS), n = lastDataRow_(sh, 2);
   var rows = n > 1 ? sh.getRange(2, 1, n - 1, 22).getValues() : [];
   out.leads = rows.filter(function (r) { return r[3]; }).map(function (r) {
     return { id: r[0], at: iso_(r[1]), name: String(r[2] || ''), phone: phoneStr_(r[3]), email: String(r[4] || ''), site: String(r[5] || ''),
@@ -56,7 +64,7 @@ function crmLoad(k) {
       zaloClicks: Number(r[10]) || 0, phoneClicks: Number(r[11]) || 0, called: r[14] === true, messaged: r[15] === true,
       contactedAt: iso_(r[16]), status: String(r[18] || 'Mới'), assignee: String(r[19] || ''), value: Number(r[20]) || 0, note: String(r[21] || '') };
   }).reverse();
-  var cs = ss.getSheetByName(S_CLICKS), cn = cs ? cs.getLastRow() : 1, start = Math.max(2, cn - 1499);
+  var cs = ss.getSheetByName(S_CLICKS), cn = cs ? lastDataRow_(cs, 1) : 1, start = Math.max(2, cn - 1499);
   var crow = cn > 1 ? cs.getRange(start, 1, cn - start + 1, 11).getValues() : [];
   out.clicks = crow.map(function (r, i) {
     return { row: start + i, at: iso_(r[0]), vid: String(r[1] || ''), site: String(r[2] || ''), channel: String(r[3] || ''), url: String(r[4] || ''),
@@ -74,7 +82,7 @@ function crmLoad(k) {
 }
 
 function findLead_(phone) {
-  var want = normPhone_(phone), sh = ss_().getSheetByName(S_LEADS), n = sh.getLastRow();
+  var want = normPhone_(phone), sh = ss_().getSheetByName(S_LEADS), n = lastDataRow_(sh, 2);
   if (!want || n < 2) throw new Error('Không tìm thấy khách');
   var ph = sh.getRange(2, 4, n - 1, 1).getValues();
   for (var i = 0; i < ph.length; i++) if (normPhone_(phoneStr_(ph[i][0])) === want) return { sh: sh, row: i + 2 };
@@ -221,7 +229,7 @@ function logClick_(b, site, ch) {
   try {
     var sh = ss_().getSheetByName(S_CLICKS);
     if (!sh) return;
-    var r = sh.getLastRow() + 1;
+    var r = lastDataRow_(sh, 1) + 1;
     sh.getRange(r, 1, 1, 11).setValues([[
       new Date(), str_(b.vid, 64), site.name, ch, str_(b.url, 300), str_(b.utm_source, 100), str_(b.utm_campaign, 150),
       "=IF(COUNTIF('" + S_LEADS + "'!$I:$I,$B" + r + ")>0,\"Có\",\"Chưa\")",
@@ -239,7 +247,7 @@ function handleLead_(b, site) {
   var lock = LockService.getScriptLock();
   lock.waitLock(20000);
   try {
-    var sh = ss_().getSheetByName(S_LEADS), last = sh.getLastRow(), row = -1;
+    var sh = ss_().getSheetByName(S_LEADS), last = lastDataRow_(sh, 2), row = -1;
     if (last > 1) {
       var phones = sh.getRange(2, 4, last - 1, 1).getValues();
       for (var i = 0; i < phones.length; i++) {

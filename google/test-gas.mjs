@@ -11,6 +11,7 @@ class Sheet {
   constructor(name, header) { this.name = name; this.rows = [header]; }
   getName() { return this.name; }
   getLastRow() { return this.rows.length; }
+  getMaxRows() { return 60; }
   appendRow(r) { this.rows.push(r.slice()); }
   getRange(r, c, nr = 1, nc = 1) {
     const s = this;
@@ -33,6 +34,8 @@ const sheets = {
   'Chiến dịch': new Sheet('Chiến dịch', ['Nền tảng', 'Tên', 'utm']),
 };
 sheets.Website.appendRow(['Landing A', 'a.com', 'testkey12345']);
+// Ô tick đã dựng sẵn FALSE tới dòng 40 (giống file thật): getLastRow() sẽ sai, mã phải bỏ qua chúng
+for (let i = 1; i < 40; i++) { (sheets['Khách hàng'].rows[i] ||= [])[14] = false; (sheets['Lượt bấm'].rows[i] ||= [])[8] = false; }
 const out = (o) => ({ setMimeType() { return { body: o }; } });
 const ctx = vm.createContext({
   SpreadsheetApp: { getActiveSpreadsheet: () => ({ getSheetByName: (n) => sheets[n], getOwner: () => ({ getEmail: () => 'owner@gmail.com' }) }), getUi: () => ({ alert(m) { globalThis.__alert = m; }, showModelessDialog(h, title) { globalThis.__dialog = { h, title }; } }) },
@@ -54,15 +57,16 @@ assert.equal(post({ key: 'wrong', type: 'pageview' }).error, 'Mã website không
 assert.equal(post({ key: 'testkey12345', action: 'track', type: 'pageview', vid: 'v1', url: 'https://a.com', utm_source: 'facebook', utm_campaign: 'sale' }).ok, true);
 assert.equal(post({ key: 'testkey12345', action: 'track', type: 'click', channel: 'zalo', vid: 'v1' }).ok, true);
 assert.equal(sheets['Hoạt động'].rows.length, 3); // dòng tiêu đề + 2 sự kiện
+assert.equal(sheets['Lượt bấm'].rows.length, 40, 'lượt bấm ghi đè vào dòng trống đầu tiên, không ra ngoài bảng');
 assert.equal(sheets['Hoạt động'].rows[2][4], 'zalo');
 // lượt bấm đi vào tab Lượt bấm kèm công thức cảnh báo; lượt xem thì không
-assert.equal(sheets['Lượt bấm'].rows.length, 2);
 const ck = sheets['Lượt bấm'].rows[1];
 assert.equal(ck[3], 'zalo'); assert.equal(ck[8], false); assert.match(ck[7], /COUNTIF\('Khách hàng'!\$I:\$I,\$B2\)/); assert.match(ck[10], /CHƯA XỬ LÝ/);
 
 // form: tạo khách mới, SĐT giữ số 0, tên bắt đầu bằng "=" bị vô hiệu hoá
 let r = post({ key: 'testkey12345', action: 'lead', vid: 'v1', name: '=IMPORTXML("x")', phone: '+84 912 345 678', utm_source: 'facebook', utm_campaign: 'sale', message: 'cần 2PN' });
 assert.deepEqual([r.ok, r.new], [true, true]);
+assert.equal(sheets['Khách hàng'].rows.length, 40, 'khách mới nằm ở dòng 2, không ra ngoài bảng');
 const lead = sheets['Khách hàng'].rows[1];
 assert.equal(lead[3], '0912345678'); assert.equal(lead[2][0], "'"); assert.equal(lead[5], 'Landing A');
 assert.match(lead[10], /COUNTIFS\(.*\$I2,/); assert.match(lead[17], /\$O2<>TRUE/);
@@ -70,11 +74,12 @@ assert.equal(lead[18], 'Mới'); assert.equal(lead[14], false);
 
 // gửi lại cùng SĐT -> không tạo dòng mới, tăng số lần gửi
 r = post({ key: 'testkey12345', action: 'lead', phone: '0912345678', name: 'Nam', email: 'a@b.c' });
-assert.equal(r.new, false); assert.equal(sheets['Khách hàng'].rows.length, 2); assert.equal(sheets['Khách hàng'].rows[1][9], 2);
+assert.equal(r.new, false); assert.equal(sheets['Khách hàng'].rows.length, 40); assert.equal(sheets['Khách hàng'].rows[1][9], 2);
 
 // webhook form-encoded (key trong ?key=, trường trong parameter)
 r = JSON.parse(ctx.doPost({ postData: { contents: 'phone=0988111222&name=B' }, parameter: { key: 'testkey12345', phone: '0988111222', name: 'B' } }).body);
-assert.equal(r.new, true); assert.equal(sheets['Khách hàng'].rows[2][3], '0988111222'); assert.equal(sheets['Khách hàng'].rows[2][10].includes('$I3'), true);
+assert.equal(r.new, true); assert.equal(sheets['Khách hàng'].rows[2][3], '0988111222');
+assert.equal(sheets['Khách hàng'].rows.length, 40); assert.equal(sheets['Khách hàng'].rows[2][10].includes('$I3'), true);
 
 assert.equal(post({ key: 'testkey12345', action: 'lead', phone: '12' }).error, 'Số điện thoại không hợp lệ');
 assert.equal(post('not json at all').error, 'Mã website không hợp lệ');
@@ -102,7 +107,7 @@ assert.equal(ctx.crmKey_(), K);
 assert.throws(() => ctx.crmLoad('sai-khoa'), /Không có quyền/); assert.throws(() => ctx.crmLog('', '0988111222', 'call'), /Không có quyền/);
 assert.equal(ctx.doGet({ parameter: { k: 'sai' } }).file, undefined); assert.equal(ctx.doGet({ parameter: { k: K } }).file, 'Crm');
 const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
-assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-4'); assert.equal(JSON.stringify(dbg).includes(K), false);
+assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-5'); assert.equal(JSON.stringify(dbg).includes(K), false);
 const L = ctx.crmLoad(K);
 assert.equal(L.leads.length, 2);
 const l0 = L.leads.find((x) => x.phone === '0988111222');
