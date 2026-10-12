@@ -28,10 +28,12 @@
   <link rel="manifest" href="/site.webmanifest">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+  <!-- Phông chữ tự lưu trữ (nhanh hơn, không phụ thuộc Google Fonts) -->
+  <link rel="preload" href="/assets/fonts/be-vietnam-pro-vietnamese-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/playfair-display-vietnamese-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/hero-city.svg" as="image" fetchpriority="high">
   <link rel="stylesheet" href="/styles.css">
+  <script>document.documentElement.classList.add('js')</script>
 
   <!-- Dữ liệu có cấu trúc (schema.org). THAY các giá trị trong [ngoặc vuông] bằng thông tin thật. -->
   <script type="application/ld+json">
@@ -97,130 +99,208 @@
   </script>
 </head>
 <body>
+  <!-- Bộ biểu tượng dùng chung -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+      <symbol id="i-area" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></symbol>
+      <symbol id="i-bed" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M3 18V6m0 7h18v5M21 13a3 3 0 0 0-3-3h-7v3M7 10.5a1.5 1.5 0 1 1 0 .01"/></symbol>
+      <symbol id="i-bath" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M4 12h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4zM6 12V6a2 2 0 0 1 4 0M7 19l-1 2m11-2 1 2"/></symbol>
+      <symbol id="i-doc" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="m8.5 12 2.5 2.5 4.5-5"/></symbol>
+      <symbol id="i-tag" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5" fill="currentColor"/></symbol>
+      <symbol id="i-bank" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M3 9 12 4l9 5M5 10v7m4.7-7v7m4.6-7v7M19 10v7M3 20h18"/></symbol>
+      <symbol id="i-hand" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="m3 12 4-4 5 2 3-2 6 5-6 5-2-1-3 2-3-3-4-1zM9 14l2 2m1-4 3 3"/></symbol>
+      <symbol id="i-home" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M3 11 12 4l9 7M5 10v10h5v-6h4v6h5V10"/></symbol>
+      <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="m11 12 9-9m-4 4 3 3m-6 0 2 2"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M4 20V4m0 16h16M8 16l4-5 3 3 5-7"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M3 6h18v12H3zm0 0 9 7 9-7"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="M12 7v5l3 2"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path stroke="currentColor" stroke-width="2" d="m16 16 4.5 4.5"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    </defs>
+  </svg>
+
   <a class="skip-link" href="#main">Bỏ qua, tới nội dung chính</a>
 
-  <header class="site-header">
+  <header class="site-header" id="site-header">
     <div class="container header-inner">
       <a class="brand" href="/" aria-label="Hoàng Gia Minh – Trang chủ">
-        <img src="/assets/logo.svg" alt="" width="40" height="40">
-        <span>Hoàng Gia Minh</span>
+        <img src="/assets/logo.svg" alt="" width="42" height="42">
+        <span class="brand-text"><strong>Hoàng Gia Minh</strong><small>Bất động sản</small></span>
+      </a>
+      <nav id="site-nav" class="site-nav" aria-label="Menu chính">
+        <ul>
+          <li><a href="#bat-dong-san">Bất động sản</a></li>
+          <li><a href="#gioi-thieu">Giới thiệu</a></li>
+          <li><a href="#dich-vu">Dịch vụ</a></li>
+          <li><a href="#quy-trinh">Quy trình</a></li>
+          <li><a href="#hoi-dap">Hỏi đáp</a></li>
+          <li class="nav-cta"><a href="#lien-he" class="btn btn-gold">Nhận tư vấn</a></li>
+        </ul>
+      </nav>
+      <a class="header-phone" href="tel:[SỐ ĐIỆN THOẠI]">
+        <span class="header-phone-icon"><svg width="18" height="18"><use href="#i-phone"/></svg></span>
+        <span><small>Hotline</small><strong>[SỐ ĐIỆN THOẠI]</strong></span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Mở menu">
         <span></span><span></span><span></span>
       </button>
-      <nav id="site-nav" class="site-nav" aria-label="Menu chính">
-        <ul>
-          <li><a href="#bat-dong-san">Bất động sản</a></li>
-          <li><a href="#dich-vu">Dịch vụ</a></li>
-          <li><a href="#quy-trinh">Quy trình</a></li>
-          <li><a href="#hoi-dap">Hỏi đáp</a></li>
-          <li><a href="#lien-he" class="btn btn-gold btn-sm">Liên hệ tư vấn</a></li>
-        </ul>
-      </nav>
     </div>
   </header>
 
   <main id="main">
-    <!-- HERO: chỉ một thẻ H1 duy nhất trên trang, chứa từ khóa chính -->
+    <!-- HERO: chỉ một thẻ H1 trên trang, chứa từ khóa chính -->
     <section class="hero" aria-labelledby="hero-title">
+      <img class="hero-bg" src="/assets/hero-city.svg" alt="" width="1600" height="900" fetchpriority="high">
       <div class="container hero-inner">
-        <div class="hero-copy">
-          <p class="eyebrow">Bất động sản Hoàng Gia Minh</p>
-          <h1 id="hero-title">Mua bán, cho thuê bất động sản <span>minh bạch &amp; an toàn</span></h1>
-          <p class="lead">Căn hộ, nhà phố, đất nền, biệt thự đã kiểm tra pháp lý. Tư vấn miễn phí, hỗ trợ vay ngân hàng và đồng hành đến khi bạn nhận sổ.</p>
-
-          <form class="search-box" action="#bat-dong-san" role="search" aria-label="Tìm bất động sản">
-            <div class="field">
-              <label for="s-type">Loại hình</label>
-              <select id="s-type" name="loai">
-                <option value="">Tất cả</option>
-                <option value="can-ho">Căn hộ chung cư</option>
-                <option value="nha-pho">Nhà phố</option>
-                <option value="dat-nen">Đất nền</option>
-                <option value="biet-thu">Biệt thự</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="s-need">Nhu cầu</label>
-              <select id="s-need" name="nhu-cau">
-                <option value="mua">Mua</option>
-                <option value="thue">Thuê</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="s-area">Khu vực</label>
-              <input id="s-area" name="khu-vuc" type="text" placeholder="Quận, huyện, dự án…">
-            </div>
-            <button class="btn btn-gold" type="submit">Tìm kiếm</button>
-          </form>
+        <p class="eyebrow">Bất động sản Hoàng Gia Minh</p>
+        <h1 id="hero-title">Mua bán, cho thuê nhà đất <em>minh bạch &amp; an&nbsp;toàn</em></h1>
+        <p class="lead">Căn hộ, nhà phố, đất nền, biệt thự đã kiểm tra pháp lý. Tư vấn miễn phí, hỗ trợ vay ngân hàng và đồng hành đến ngày bạn nhận sổ.</p>
+        <div class="hero-actions">
+          <a class="btn btn-gold btn-lg" href="#bat-dong-san">Xem bất động sản <svg width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-ghost btn-lg" href="#lien-he">Ký gửi nhà đất</a>
         </div>
-
-        <ul class="hero-points" aria-label="Cam kết">
-          <li><strong>100%</strong> tin đăng được kiểm tra pháp lý</li>
-          <li><strong>Miễn phí</strong> định giá &amp; ký gửi</li>
-          <li><strong>Hỗ trợ</strong> vay ngân hàng đến khi giải ngân</li>
-        </ul>
       </div>
     </section>
 
-    <!-- DANH SÁCH BẤT ĐỘNG SẢN: các tin bên dưới là TIN MẪU, thay bằng tin thật hoặc nạp từ CRM -->
+    <div class="container search-wrap">
+      <form class="search-box" id="search-box" action="#bat-dong-san" role="search" aria-label="Tìm bất động sản">
+        <fieldset class="search-need">
+          <legend class="sr-only">Nhu cầu</legend>
+          <label><input type="radio" name="nhu-cau" value="mua" checked><span>Mua</span></label>
+          <label><input type="radio" name="nhu-cau" value="thue"><span>Thuê</span></label>
+        </fieldset>
+        <div class="search-fields">
+          <div class="field">
+            <label for="s-type">Loại hình</label>
+            <select id="s-type" name="loai">
+              <option value="">Tất cả loại hình</option>
+              <option value="can-ho">Căn hộ chung cư</option>
+              <option value="nha-pho">Nhà phố</option>
+              <option value="dat-nen">Đất nền</option>
+              <option value="biet-thu">Biệt thự</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="s-area">Khu vực</label>
+            <input id="s-area" name="khu-vuc" type="text" placeholder="Quận, huyện, dự án…">
+          </div>
+          <div class="field">
+            <label for="s-price">Mức giá</label>
+            <select id="s-price" name="gia">
+              <option value="">Mọi mức giá</option>
+              <option>Dưới 2 tỷ</option>
+              <option>2 – 5 tỷ</option>
+              <option>5 – 10 tỷ</option>
+              <option>Trên 10 tỷ</option>
+            </select>
+          </div>
+          <button class="btn btn-green btn-search" type="submit">
+            <svg width="20" height="20" aria-hidden="true"><use href="#i-search"/></svg> Tìm kiếm
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <section class="trust" aria-label="Cam kết của Hoàng Gia Minh">
+      <ul class="container trust-list">
+        <li><span class="icon"><svg width="26" height="26"><use href="#i-shield"/></svg></span><div><strong>Pháp lý minh bạch</strong><span>Kiểm tra sổ trước khi đặt cọc</span></div></li>
+        <li><span class="icon"><svg width="26" height="26"><use href="#i-tag"/></svg></span><div><strong>Định giá miễn phí</strong><span>Sát giá thị trường</span></div></li>
+        <li><span class="icon"><svg width="26" height="26"><use href="#i-bank"/></svg></span><div><strong>Hỗ trợ vay vốn</strong><span>Đến khi giải ngân</span></div></li>
+        <li><span class="icon"><svg width="26" height="26"><use href="#i-hand"/></svg></span><div><strong>Đồng hành trọn gói</strong><span>Từ xem nhà đến nhận sổ</span></div></li>
+      </ul>
+    </section>
+
+    <!-- DANH SÁCH: 4 tin dưới đây là TIN MẪU, thay bằng tin thật hoặc nạp từ CRM -->
     <section id="bat-dong-san" class="section" aria-labelledby="listings-title">
       <div class="container">
-        <header class="section-head">
-          <h2 id="listings-title">Bất động sản nổi bật</h2>
-          <p>Tin đăng được cập nhật hằng ngày, thông tin pháp lý rõ ràng.</p>
+        <header class="section-head section-head-split reveal">
+          <div>
+            <p class="kicker">Tin đăng chọn lọc</p>
+            <h2 id="listings-title">Bất động sản nổi bật</h2>
+          </div>
+          <div class="filter-tabs" role="group" aria-label="Lọc theo loại hình">
+            <button type="button" aria-pressed="true" data-filter="all">Tất cả</button>
+            <button type="button" aria-pressed="false" data-filter="can-ho">Căn hộ</button>
+            <button type="button" aria-pressed="false" data-filter="nha-pho">Nhà phố</button>
+            <button type="button" aria-pressed="false" data-filter="dat-nen">Đất nền</button>
+            <button type="button" aria-pressed="false" data-filter="biet-thu">Biệt thự</button>
+          </div>
         </header>
 
-        <div class="filter-tabs" role="group" aria-label="Lọc theo loại hình">
-          <button type="button" aria-pressed="true" data-filter="all">Tất cả</button>
-          <button type="button" aria-pressed="false" data-filter="can-ho">Căn hộ</button>
-          <button type="button" aria-pressed="false" data-filter="nha-pho">Nhà phố</button>
-          <button type="button" aria-pressed="false" data-filter="dat-nen">Đất nền</button>
-          <button type="button" aria-pressed="false" data-filter="biet-thu">Biệt thự</button>
-        </div>
-
         <ul class="cards" id="listing-grid">
-          <li class="card" data-type="can-ho">
+          <li class="card reveal" data-type="can-ho">
             <article>
-              <div class="card-media media-1" role="img" aria-label="Ảnh minh họa căn hộ chung cư"><span class="tag">Bán</span></div>
+              <a class="card-media" href="#lien-he" tabindex="-1" aria-hidden="true">
+                <img src="/assets/listing-apartment.svg" alt="" width="800" height="600" loading="lazy" decoding="async">
+                <span class="badge">Đang bán</span><span class="badge badge-type">Căn hộ</span>
+              </a>
               <div class="card-body">
-                <h3><a href="#lien-he">Căn hộ 2 phòng ngủ, view hồ, nội thất cơ bản</a></h3>
-                <p class="loc">[Dự án], [Quận/Huyện]</p>
-                <ul class="specs"><li>68 m²</li><li>2 PN</li><li>2 WC</li><li>Sổ hồng</li></ul>
-                <p class="price">Liên hệ</p>
+                <h3><a href="#lien-he">Căn hộ 2 phòng ngủ view hồ, nội thất cơ bản</a></h3>
+                <p class="loc"><svg width="16" height="16" aria-hidden="true"><use href="#i-pin"/></svg>[Dự án], [Quận/Huyện]</p>
+                <ul class="specs">
+                  <li><svg width="16" height="16" aria-hidden="true"><use href="#i-area"/></svg>68 m²</li>
+                  <li><svg width="16" height="16" aria-hidden="true"><use href="#i-bed"/></svg>2 PN</li>
+                  <li><svg width="16" height="16" aria-hidden="true"><use href="#i-bath"/></svg>2 WC</li>
+                </ul>
+                <div class="card-foot"><p class="price">Liên hệ</p><span class="legal"><svg width="14" height="14" aria-hidden="true"><use href="#i-doc"/></svg>Sổ hồng</span></div>
               </div>
             </article>
           </li>
-          <li class="card" data-type="nha-pho">
+          <li class="card reveal" data-type="nha-pho">
             <article>
-              <div class="card-media media-2" role="img" aria-label="Ảnh minh họa nhà phố"><span class="tag">Bán</span></div>
+              <a class="card-media" href="#lien-he" tabindex="-1" aria-hidden="true">
+                <img src="/assets/listing-townhouse.svg" alt="" width="800" height="600" loading="lazy" decoding="async">
+                <span class="badge">Đang bán</span><span class="badge badge-type">Nhà phố</span>
+              </a>
               <div class="card-body">
                 <h3><a href="#lien-he">Nhà phố 4 tầng mặt tiền, tiện kinh doanh</a></h3>
-                <p class="loc">[Đường], [Quận/Huyện]</p>
-                <ul class="specs"><li>80 m²</li><li>4 tầng</li><li>Mặt tiền 5 m</li><li>Sổ đỏ</li></ul>
-                <p class="price">Liên hệ</p>
+                <p class="loc"><svg width="16" height="16" aria-hidden="true"><use href="#i-pin"/></svg>[Đường], [Quận/Huyện]</p>
+                <ul class="specs">
+                  <li><svg width="16" height="16" aria-hidden="true"><use href="#i-area"/></svg>80 m²</li>
+                  <li><svg width="16" height="16" aria-hidden="true"><use href="#i-bed"/></svg>4 PN</li>
+                  <li><svg width="16" height="16" aria-hidden="true"><use href="#i-bath"/></svg>4 WC</li>
+                </ul>
+                <div class="card-foot"><p class="price">Liên hệ</p><span class="legal"><svg width="14" height="14" aria-hidden="true"><use href="#i-doc"/></svg>Sổ đỏ</span></div>
               </div>
             </article>
           </li>
-          <li class="card" data-type="dat-nen">
+          <li class="card reveal" data-type="dat-nen">
             <article>
-              <div class="card-media media-3" role="img" aria-label="Ảnh minh họa đất nền"><span class="tag">Bán</span></div>
+              <a class="card-media" href="#lien-he" tabindex="-1" aria-hidden="true">
+                <img src="/assets/listing-land.svg" alt="" width="800" height="600" loading="lazy" decoding="async">
+                <span class="badge">Đang bán</span><span class="badge badge-type">Đất nền</span>
+              </a>
               <div class="card-body">
-                <h3><a href="#lien-he">Đất nền thổ cư, đường ô tô, gần trường học</a></h3>
-                <p class="loc">[Khu vực], [Tỉnh/Thành]</p>
-                <ul class="specs"><li>100 m²</li><li>Ngang 5 m</li><li>Thổ cư 100%</li><li>Sổ riêng</li></ul>
-                <p class="price">Liên hệ</p>
+                <h3><a href="#lien-he">Đất nền thổ cư đường ô tô, gần trường học</a></h3>
+                <p class="loc"><svg width="16" height="16" aria-hidden="true"><use href="#i-pin"/></svg>[Khu vực], [Tỉnh/Thành]</p>
+                <ul class="specs">
+                  <li><svg width="16" height="16" aria-hidden="true"><use href="#i-area"/></svg>100 m²</li>
+                  <li>Ngang 5 m</li>
+                  <li>Thổ cư 100%</li>
+                </ul>
+                <div class="card-foot"><p class="price">Liên hệ</p><span class="legal"><svg width="14" height="14" aria-hidden="true"><use href="#i-doc"/></svg>Sổ riêng</span></div>
               </div>
             </article>
           </li>
-          <li class="card" data-type="biet-thu">
+          <li class="card reveal" data-type="biet-thu">
             <article>
-              <div class="card-media media-4" role="img" aria-label="Ảnh minh họa biệt thự"><span class="tag tag-rent">Cho thuê</span></div>
+              <a class="card-media" href="#lien-he" tabindex="-1" aria-hidden="true">
+                <img src="/assets/listing-villa.svg" alt="" width="800" height="600" loading="lazy" decoding="async">
+                <span class="badge badge-rent">Cho thuê</span><span class="badge badge-type">Biệt thự</span>
+              </a>
               <div class="card-body">
-                <h3><a href="#lien-he">Biệt thự sân vườn, khu compound an ninh</a></h3>
-                <p class="loc">[Khu đô thị], [Quận/Huyện]</p>
-                <ul class="specs"><li>250 m²</li><li>5 PN</li><li>Sân vườn</li><li>Hồ bơi</li></ul>
-                <p class="price">Liên hệ</p>
+                <h3><a href="#lien-he">Biệt thự sân vườn có hồ bơi, khu an ninh</a></h3>
+                <p class="loc"><svg width="16" height="16" aria-hidden="true"><use href="#i-pin"/></svg>[Khu đô thị], [Quận/Huyện]</p>
+                <ul class="specs">
+                  <li><svg width="16" height="16" aria-hidden="true"><use href="#i-area"/></svg>250 m²</li>
+                  <li><svg width="16" height="16" aria-hidden="true"><use href="#i-bed"/></svg>5 PN</li>
+                  <li><svg width="16" height="16" aria-hidden="true"><use href="#i-bath"/></svg>5 WC</li>
+                </ul>
+                <div class="card-foot"><p class="price">Liên hệ</p><span class="legal"><svg width="14" height="14" aria-hidden="true"><use href="#i-doc"/></svg>Sổ hồng</span></div>
               </div>
             </article>
           </li>
@@ -228,64 +308,75 @@
       </div>
     </section>
 
-    <section id="dich-vu" class="section section-alt" aria-labelledby="services-title">
+    <section id="gioi-thieu" class="section section-cream" aria-labelledby="about-title">
+      <div class="container about">
+        <div class="about-media reveal">
+          <img src="/assets/about-keys.svg" alt="Minh họa trao chìa khóa nhà cho khách hàng" width="800" height="600" loading="lazy" decoding="async">
+          <div class="about-badge">
+            <svg width="28" height="28" aria-hidden="true"><use href="#i-key"/></svg>
+            <p><strong>Tư vấn 1:1</strong>Một chuyên viên theo bạn suốt giao dịch</p>
+          </div>
+        </div>
+        <div class="about-copy reveal">
+          <p class="kicker">Vì sao chọn Hoàng Gia Minh</p>
+          <h2 id="about-title">An tâm từ lúc xem nhà đến ngày cầm sổ</h2>
+          <p>Mua nhà là quyết định lớn. Hoàng Gia Minh chỉ giới thiệu bất động sản đã xác minh chủ sở hữu và pháp lý, báo giá rõ ràng, không phí ẩn.</p>
+          <ul class="checklist">
+            <li><svg width="20" height="20" aria-hidden="true"><use href="#i-check"/></svg>Kiểm tra sổ, quy hoạch, thế chấp trước khi đặt cọc</li>
+            <li><svg width="20" height="20" aria-hidden="true"><use href="#i-check"/></svg>Phí môi giới thỏa thuận rõ trong hợp đồng</li>
+            <li><svg width="20" height="20" aria-hidden="true"><use href="#i-check"/></svg>Hỗ trợ thủ tục công chứng, sang tên, vay vốn</li>
+            <li><svg width="20" height="20" aria-hidden="true"><use href="#i-check"/></svg>Chăm sóc sau giao dịch: cho thuê lại, bán lại</li>
+          </ul>
+          <a class="btn btn-green btn-lg" href="#lien-he">Đặt lịch tư vấn miễn phí</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="dich-vu" class="section section-dark" aria-labelledby="services-title">
       <div class="container">
-        <header class="section-head">
+        <header class="section-head reveal">
+          <p class="kicker">Dịch vụ</p>
           <h2 id="services-title">Dịch vụ bất động sản trọn gói</h2>
           <p>Một đầu mối cho mọi nhu cầu mua, bán, thuê và đầu tư nhà đất.</p>
         </header>
         <ul class="services">
-          <li>
-            <h3>Mua bán nhà đất</h3>
-            <p>Tìm đúng bất động sản theo ngân sách, đàm phán giá và hỗ trợ thủ tục công chứng, sang tên.</p>
-          </li>
-          <li>
-            <h3>Cho thuê &amp; quản lý</h3>
-            <p>Cho thuê căn hộ, nhà phố, mặt bằng kinh doanh; quản lý hợp đồng và thu tiền thuê định kỳ.</p>
-          </li>
-          <li>
-            <h3>Ký gửi bất động sản</h3>
-            <p>Định giá miễn phí, chụp ảnh chuyên nghiệp và quảng bá đa kênh để bán nhanh, đúng giá.</p>
-          </li>
-          <li>
-            <h3>Tư vấn pháp lý</h3>
-            <p>Kiểm tra sổ, quy hoạch, thế chấp, tranh chấp trước khi đặt cọc để giao dịch an toàn.</p>
-          </li>
-          <li>
-            <h3>Hỗ trợ vay ngân hàng</h3>
-            <p>So sánh lãi suất, chuẩn bị hồ sơ và theo dõi đến khi giải ngân.</p>
-          </li>
-          <li>
-            <h3>Tư vấn đầu tư</h3>
-            <p>Phân tích vị trí, tiềm năng tăng giá và dòng tiền cho thuê trước khi xuống tiền.</p>
-          </li>
+          <li class="reveal"><span class="icon"><svg width="28" height="28" aria-hidden="true"><use href="#i-home"/></svg></span><h3>Mua bán nhà đất</h3><p>Tìm đúng bất động sản theo ngân sách, đàm phán giá và hỗ trợ công chứng, sang tên.</p></li>
+          <li class="reveal"><span class="icon"><svg width="28" height="28" aria-hidden="true"><use href="#i-key"/></svg></span><h3>Cho thuê &amp; quản lý</h3><p>Cho thuê căn hộ, nhà phố, mặt bằng; quản lý hợp đồng và thu tiền thuê định kỳ.</p></li>
+          <li class="reveal"><span class="icon"><svg width="28" height="28" aria-hidden="true"><use href="#i-tag"/></svg></span><h3>Ký gửi bất động sản</h3><p>Định giá miễn phí, chụp ảnh chuyên nghiệp, quảng bá đa kênh để bán nhanh, đúng giá.</p></li>
+          <li class="reveal"><span class="icon"><svg width="28" height="28" aria-hidden="true"><use href="#i-doc"/></svg></span><h3>Tư vấn pháp lý</h3><p>Kiểm tra sổ, quy hoạch, thế chấp, tranh chấp trước khi đặt cọc để giao dịch an toàn.</p></li>
+          <li class="reveal"><span class="icon"><svg width="28" height="28" aria-hidden="true"><use href="#i-bank"/></svg></span><h3>Hỗ trợ vay ngân hàng</h3><p>So sánh lãi suất, chuẩn bị hồ sơ và theo dõi đến khi giải ngân.</p></li>
+          <li class="reveal"><span class="icon"><svg width="28" height="28" aria-hidden="true"><use href="#i-chart"/></svg></span><h3>Tư vấn đầu tư</h3><p>Phân tích vị trí, tiềm năng tăng giá và dòng tiền cho thuê trước khi xuống tiền.</p></li>
         </ul>
       </div>
     </section>
 
     <section id="quy-trinh" class="section" aria-labelledby="process-title">
       <div class="container">
-        <header class="section-head">
-          <h2 id="process-title">Quy trình giao dịch 4 bước</h2>
-          <p>Rõ ràng từng bước, khách hàng nắm được tiến độ mọi lúc.</p>
+        <header class="section-head reveal">
+          <p class="kicker">Quy trình</p>
+          <h2 id="process-title">Giao dịch rõ ràng trong 4 bước</h2>
+          <p>Bạn nắm được tiến độ ở mọi thời điểm.</p>
         </header>
         <ol class="steps">
-          <li><h3>Tiếp nhận nhu cầu</h3><p>Lắng nghe nhu cầu, ngân sách và khu vực mong muốn.</p></li>
-          <li><h3>Đề xuất &amp; dẫn xem</h3><p>Chọn lọc bất động sản phù hợp và sắp xếp lịch xem thực tế.</p></li>
-          <li><h3>Kiểm tra pháp lý</h3><p>Xác minh giấy tờ, quy hoạch, thỏa thuận giá và điều khoản cọc.</p></li>
-          <li><h3>Công chứng &amp; bàn giao</h3><p>Hoàn tất hợp đồng, sang tên và bàn giao bất động sản.</p></li>
+          <li class="reveal"><h3>Tiếp nhận nhu cầu</h3><p>Lắng nghe nhu cầu, ngân sách và khu vực mong muốn.</p></li>
+          <li class="reveal"><h3>Đề xuất &amp; dẫn xem</h3><p>Chọn lọc bất động sản phù hợp, sắp lịch xem thực tế.</p></li>
+          <li class="reveal"><h3>Kiểm tra pháp lý</h3><p>Xác minh giấy tờ, quy hoạch, thỏa thuận giá và điều khoản cọc.</p></li>
+          <li class="reveal"><h3>Công chứng &amp; bàn giao</h3><p>Hoàn tất hợp đồng, sang tên và bàn giao bất động sản.</p></li>
         </ol>
       </div>
     </section>
 
-    <section id="hoi-dap" class="section section-alt" aria-labelledby="faq-title">
-      <div class="container narrow">
-        <header class="section-head">
+    <section id="hoi-dap" class="section section-cream" aria-labelledby="faq-title">
+      <div class="container faq-wrap">
+        <div class="faq-intro reveal">
+          <p class="kicker">Hỏi đáp</p>
           <h2 id="faq-title">Câu hỏi thường gặp</h2>
-        </header>
+          <p>Chưa thấy câu trả lời bạn cần? Gọi ngay để được chuyên viên giải đáp.</p>
+          <a class="btn btn-green" href="tel:[SỐ ĐIỆN THOẠI]"><svg width="18" height="18" aria-hidden="true"><use href="#i-phone"/></svg> Gọi [SỐ ĐIỆN THOẠI]</a>
+        </div>
         <!-- Nội dung phải khớp với FAQPage trong JSON-LD ở <head> -->
-        <div class="faq">
-          <details>
+        <div class="faq reveal">
+          <details open>
             <summary>Ký gửi nhà đất tại Hoàng Gia Minh có mất phí không?</summary>
             <p>Ký gửi và định giá ban đầu hoàn toàn miễn phí. Phí môi giới chỉ phát sinh khi giao dịch thành công và được thỏa thuận rõ ràng trong hợp đồng.</p>
           </details>
@@ -306,72 +397,99 @@
     </section>
 
     <section id="lien-he" class="section contact" aria-labelledby="contact-title">
-      <div class="container contact-inner">
-        <div class="contact-copy">
-          <h2 id="contact-title">Nhận tư vấn miễn phí</h2>
-          <p>Để lại thông tin, chuyên viên Hoàng Gia Minh sẽ gọi lại trong giờ làm việc.</p>
-          <address>
-            <p><strong>Hotline:</strong> <a href="tel:[SỐ ĐIỆN THOẠI]">[SỐ ĐIỆN THOẠI]</a></p>
-            <p><strong>Email:</strong> <a href="mailto:[EMAIL]">[EMAIL]</a></p>
-            <p><strong>Văn phòng:</strong> [SỐ NHÀ, ĐƯỜNG], [QUẬN/HUYỆN], [TỈNH/THÀNH PHỐ]</p>
-            <p><strong>Giờ làm việc:</strong> 8:00 – 20:00, Thứ Hai – Chủ Nhật</p>
-          </address>
-        </div>
+      <div class="container">
+        <div class="contact-card reveal">
+          <div class="contact-copy">
+            <p class="kicker">Liên hệ</p>
+            <h2 id="contact-title">Nhận tư vấn miễn phí</h2>
+            <p>Để lại thông tin, chuyên viên Hoàng Gia Minh sẽ gọi lại trong giờ làm việc.</p>
+            <address>
+              <p><span class="icon"><svg width="20" height="20" aria-hidden="true"><use href="#i-phone"/></svg></span><span><small>Hotline</small><a href="tel:[SỐ ĐIỆN THOẠI]">[SỐ ĐIỆN THOẠI]</a></span></p>
+              <p><span class="icon"><svg width="20" height="20" aria-hidden="true"><use href="#i-mail"/></svg></span><span><small>Email</small><a href="mailto:[EMAIL]">[EMAIL]</a></span></p>
+              <p><span class="icon"><svg width="20" height="20" aria-hidden="true"><use href="#i-pin"/></svg></span><span><small>Văn phòng</small>[SỐ NHÀ, ĐƯỜNG], [QUẬN/HUYỆN], [TỈNH/THÀNH PHỐ]</span></p>
+              <p><span class="icon"><svg width="20" height="20" aria-hidden="true"><use href="#i-clock"/></svg></span><span><small>Giờ làm việc</small>8:00 – 20:00, Thứ Hai – Chủ Nhật</span></p>
+            </address>
+          </div>
 
-        <!-- Gắn action vào LadiPage/Google Form/CRM của bạn. Hiện form chỉ xác nhận ở phía trình duyệt. -->
-        <form class="lead-form" id="lead-form" action="#" method="post" novalidate>
-          <div class="field">
-            <label for="f-name">Họ và tên</label>
-            <input id="f-name" name="name" type="text" autocomplete="name" required>
-          </div>
-          <div class="field">
-            <label for="f-phone">Số điện thoại</label>
-            <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" pattern="0[0-9]{9}" required>
-          </div>
-          <div class="field">
-            <label for="f-need">Nhu cầu</label>
-            <select id="f-need" name="need">
-              <option>Mua bất động sản</option>
-              <option>Bán / ký gửi</option>
-              <option>Thuê</option>
-              <option>Cho thuê</option>
-              <option>Tư vấn pháp lý / vay vốn</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="f-msg">Ghi chú</label>
-            <textarea id="f-msg" name="message" rows="3" placeholder="Khu vực, ngân sách, diện tích mong muốn…"></textarea>
-          </div>
-          <button class="btn btn-gold btn-block" type="submit">Gửi yêu cầu</button>
-          <p class="form-status" role="status" aria-live="polite"></p>
-        </form>
+          <!-- Gắn action vào LadiPage / Google Form / CRM. Hiện form chỉ xác nhận ở phía trình duyệt. -->
+          <form class="lead-form" id="lead-form" action="#" method="post" novalidate>
+            <div class="form-row">
+              <div class="field">
+                <label for="f-name">Họ và tên</label>
+                <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Nguyễn Văn A" required>
+              </div>
+              <div class="field">
+                <label for="f-phone">Số điện thoại</label>
+                <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="09xx xxx xxx" required>
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-need">Bạn cần</label>
+              <select id="f-need" name="need">
+                <option>Mua bất động sản</option>
+                <option>Bán / ký gửi</option>
+                <option>Thuê</option>
+                <option>Cho thuê</option>
+                <option>Tư vấn pháp lý / vay vốn</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-msg">Ghi chú</label>
+              <textarea id="f-msg" name="message" rows="3" placeholder="Khu vực, ngân sách, diện tích mong muốn…"></textarea>
+            </div>
+            <button class="btn btn-gold btn-lg btn-block" type="submit">Gửi yêu cầu tư vấn</button>
+            <p class="form-note">Thông tin của bạn được bảo mật và chỉ dùng để liên hệ tư vấn.</p>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-inner">
-      <div>
-        <a class="brand brand-light" href="/">
-          <img src="/assets/logo.svg" alt="" width="36" height="36" loading="lazy">
-          <span>Hoàng Gia Minh</span>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <img src="/assets/logo.svg" alt="" width="42" height="42" loading="lazy">
+          <span class="brand-text"><strong>Hoàng Gia Minh</strong><small>Bất động sản</small></span>
         </a>
         <p>Mua bán, cho thuê, ký gửi bất động sản minh bạch và an toàn.</p>
       </div>
-      <nav aria-label="Liên kết chân trang">
+      <nav aria-label="Khám phá">
+        <h2>Khám phá</h2>
         <ul>
           <li><a href="#bat-dong-san">Bất động sản</a></li>
-          <li><a href="#dich-vu">Dịch vụ</a></li>
+          <li><a href="#gioi-thieu">Giới thiệu</a></li>
+          <li><a href="#quy-trinh">Quy trình</a></li>
           <li><a href="#hoi-dap">Hỏi đáp</a></li>
-          <li><a href="#lien-he">Liên hệ</a></li>
         </ul>
       </nav>
+      <nav aria-label="Dịch vụ">
+        <h2>Dịch vụ</h2>
+        <ul>
+          <li><a href="#dich-vu">Mua bán nhà đất</a></li>
+          <li><a href="#dich-vu">Cho thuê &amp; quản lý</a></li>
+          <li><a href="#dich-vu">Ký gửi bất động sản</a></li>
+          <li><a href="#dich-vu">Hỗ trợ vay ngân hàng</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2>Liên hệ</h2>
+        <ul class="footer-contact">
+          <li><a href="tel:[SỐ ĐIỆN THOẠI]">[SỐ ĐIỆN THOẠI]</a></li>
+          <li><a href="mailto:[EMAIL]">[EMAIL]</a></li>
+          <li>[SỐ NHÀ, ĐƯỜNG], [QUẬN/HUYỆN], [TỈNH/THÀNH PHỐ]</li>
+        </ul>
+      </div>
     </div>
-    <p class="container copyright">© <span id="year">2026</span> Hoàng Gia Minh. Bảo lưu mọi quyền.</p>
+    <div class="container footer-bottom">
+      <p>© <span id="year">2026</span> Hoàng Gia Minh. Bảo lưu mọi quyền.</p>
+      <a href="#main">Lên đầu trang ↑</a>
+    </div>
   </footer>
 
   <a class="call-fab" href="tel:[SỐ ĐIỆN THOẠI]" aria-label="Gọi hotline Hoàng Gia Minh">
-    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+    <svg width="24" height="24" aria-hidden="true"><use href="#i-phone"/></svg>
   </a>
 
   <script src="/main.js" defer></script>
