@@ -258,6 +258,7 @@ def head(page, title, desc, keywords, og_img, og_alt, preload_key, graph):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script src="https://script.google.com/macros/s/AKfycbyMWXl47PShn-ikZKwrFONJb9z89NOmVG6yIioyjGxo55IEbLh4yP7KiREPsxgSbxBl/exec?js=1" data-key="qe7ChJbeycDf" async></script>
 <script>document.documentElement.classList.add('js')</script>
 <title>{title}</title>
 <meta name="description" content="{desc}">
