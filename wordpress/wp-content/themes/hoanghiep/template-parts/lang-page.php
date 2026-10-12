@@ -114,6 +114,7 @@ get_header();
 			} );
 		} );
 		</script>
+		<p class="note"><strong><?php echo esc_html( $fp['warn'] ); ?></strong></p>
 		<p class="note"><?php echo esc_html( $fp['note'] ); ?></p>
 	</section>
 
