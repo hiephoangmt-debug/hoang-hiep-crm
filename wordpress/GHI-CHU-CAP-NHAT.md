@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.17** + plugin Hoàng Hiệp CRM **2.20.37**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.17** + plugin Hoàng Hiệp CRM **2.20.38**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.38: FPT Plaza 3 – phối cảnh và mặt bằng tầng
+- **3 ảnh phối cảnh** (toàn cảnh từ trên cao làm ảnh đại diện nếu trang chưa có ảnh, mặt tiền, góc thấp) và **10 mặt bằng**: Tầng 1, 2, 4, 5 – 12A, 12B, 14 – 17, 18 – 24, 25, Hầm 1, Hầm 2 – mỗi tầng một tab, bấm để phóng to xem mã căn.
+- Điền thêm (ô còn trống): bảng loại căn đọc từ bản vẽ (1PN 42 m², 1PN+1 47 – 51 m², 2PN 55 – 69 m², 2PN+1 73 – 76 m², 3PN 72 – 80 m², 3PN+1 81 – 124 m², căn 2 tầng 88 – 148 m², ki-ốt TMDV 56 – 201 m²), mô tả thiết kế (4 mặt đường, 2 sảnh W – E, 35 – 36 căn/sàn, không có tầng 13).
+- Cài: Nhập nhanh `cap-nhat-code.zip` → **Nhập dữ liệu Đà Nẵng → Nhập / cập nhật dữ liệu** (để tải ảnh) → LiteSpeed Cache → Purge All.
 
 ## Có gì mới – giao diện 2.15.17
 - **Chữ cân đều 2 bên trên toàn trang**: đoạn văn, dòng liệt kê, nội dung bảng thông tin dự án và bảng trong bài. Riêng các thẻ nhỏ cột hẹp (thẻ dự án, tin rao, ô số liệu, chân trang) vẫn canh trái để chữ không bị giãn hở.
