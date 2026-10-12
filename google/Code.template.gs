@@ -377,3 +377,11 @@ function moGiaoDienCRM() {
     .replace(/var KEY = (?:\/\*__KEY__\*\/)?''/, 'var KEY = ' + JSON.stringify(key));
   SpreadsheetApp.getUi().showModelessDialog(HtmlService.createHtmlOutput(html).setWidth(1180).setHeight(780), 'CRM Hoàng Hiệp');
 }
+
+// Giao diện mở trong file Sheet gọi hàm này để lấy khoá nếu chưa được gắn sẵn. Chỉ trang giao diện mới gọi được
+// (google.script.run), mà trang chỉ được phục vụ cho người có khoá hoặc đang mở file Sheet.
+function crmDialogKey() {
+  var props = PropertiesService.getScriptProperties(), key = crmKey_();
+  if (key.length < 20) { key = Utilities.getUuid().replace(/-/g, ''); props.setProperty('CRM_KEY', key); }
+  return key;
+}

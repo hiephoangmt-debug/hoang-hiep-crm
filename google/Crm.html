@@ -79,8 +79,12 @@ function ago(iso) { var m = Math.round((Date.now() - new Date(iso).getTime()) / 
 function vnd(n) { return Math.round(n || 0).toLocaleString('vi-VN') + 'đ'; }
 var todo = function (l) { return !l.called && !l.messaged && l.status === 'Mới'; };
 
+function ensureKey() {
+  if (KEY) return Promise.resolve();
+  return new Promise(function (ok) { google.script.run.withSuccessHandler(function (k) { KEY = k || ''; ok(); }).withFailureHandler(function () { ok(); }).crmDialogKey(); });
+}
 function load() {
-  return run('crmLoad').then(function (d) { D = d; $('#who').textContent = d.user; badges(); render(); }).catch(function (e) { $('#main').innerHTML = '<div class="card">Không tải được dữ liệu: ' + esc(e.message) + '<br><span class="mut">[khoá: ' + (KEY ? 'có' : 'trống') + '] Nếu khoá trống: dán lại cả Mã.gs và Crm.html mới nhất rồi mở menu CRM → Mở giao diện CRM. Mở bằng link web thì dùng menu CRM → Link vào CRM.</span></div>'; });
+  return ensureKey().then(function () { return run('crmLoad'); }).then(function (d) { D = d; $('#who').textContent = d.user; badges(); render(); }).catch(function (e) { $('#main').innerHTML = '<div class="card">Không tải được dữ liệu: ' + esc(e.message) + '<br><span class="mut">[khoá: ' + (KEY ? 'có' : 'trống') + '] Nếu khoá trống: dán lại cả Mã.gs và Crm.html mới nhất rồi mở menu CRM → Mở giao diện CRM. Mở bằng link web thì dùng menu CRM → Link vào CRM.</span></div>'; });
 }
 function badges() {
   var a = D.leads.filter(todo).length, b = D.clicks.filter(function (c) { return c.alert; }).length;

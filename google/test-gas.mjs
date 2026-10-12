@@ -128,6 +128,7 @@ ctx.moGiaoDienCRM();
 assert.equal(globalThis.__dialog.title, 'CRM Hoàng Hiệp');
 assert.ok(globalThis.__dialog.h.content.includes("var KEY = \"" + ctx.crmKey_() + "\""), 'khoá gắn vào giao diện');
 assert.equal(globalThis.__dialog.h.content.includes('__KEY__'), false);
+assert.equal(ctx.crmDialogKey(), ctx.crmKey_());
 // hàm tự kiểm tra
 const ret = ctx.kiemTraCRM(); assert.match(ret, /\?k=[0-9a-f]{32}/); assert.ok(globalThis.__log.some((m) => /Đọc dữ liệu OK/.test(m))); assert.ok(globalThis.__log.some((m) => /File giao diện Crm: có/.test(m)));
 console.log('OK – Code.gs đạt mọi test');
