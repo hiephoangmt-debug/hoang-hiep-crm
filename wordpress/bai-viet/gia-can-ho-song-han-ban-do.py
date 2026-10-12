@@ -59,7 +59,7 @@ im = Image.new('RGB', (W, H), '#0f2236'); d = ImageDraw.Draw(im)
 d.rectangle([0, 0, W, 150], fill='#0b1a2a'); d.rectangle([0, 148, W, 152], fill='#e8b04a')
 d.text((36, 24), 'GIÁ CĂN HỘ VEN SÔNG HÀN · 10/2026', font=F(24, True), fill='#e8b04a')
 d.text((36, 60), 'Bản đồ 21 dự án hai bờ sông Hàn', font=F(40, True), fill='white')
-d.text((36, 112), 'Giá rao tham khảo, triệu đồng/m² · số = hạng giá', font=F(19), fill='#c9d6e3')
+d.text((36, 112), 'Giá rao tham khảo, triệu đồng/m² · ghim số = hạng giá', font=F(19), fill='#c9d6e3')
 MX, MY = 20, 172
 im.paste(mapimg, (MX, MY)); d.rounded_rectangle([MX, MY, MX + MW, MY + MH], 14, outline='#e8b04a', width=3)
 T = lambda x, y: (MX + (x - CX0) * s, MY + (y - CY0) * s)
@@ -72,6 +72,22 @@ for name, x, y, ox, oy in (('Cầu Thuận Phước', 514, 190, 0, 18), ('Cầu 
 px, py = T(560, 150); d.text((px, py), 'Sông Hàn', font=F(18, True), fill='#d6ecff', anchor='mm')
 px, py = T(340, 700); d.text((px, py), 'HẢI CHÂU', font=F(16, True), fill='#8fa9c4', anchor='mm')
 px, py = T(1020, 820); d.text((px, py), 'SƠN TRÀ', font=F(16, True), fill='#8fa9c4', anchor='mm')
+# nhãn giá cạnh ghim: bờ Tây ghi bên trái, bờ Đông bên phải; vài ghim sát nhau dời lên / xuống
+NUDGE = {'M Landmark': (0, -26), 'Sun Solar': (0, 0), 'Indochina Riverside': (0, 22), 'Azura': (0, -20), 'Capital Square': (0, 14),
+         'F.Home': (0, -14), 'Đà Nẵng Plaza': (0, 14), 'Landmark Tower': (0, -8), 'The Filmore': (0, 10), 'Sun Cosmo': (0, -30)}
+for i, (name, a, b, bank, x, y) in enumerate(P, 1):
+    px, py = T(x, y)
+    txt = f'{a}–{b}'; f = F(14, True); w = d.textlength(txt, font=f) + 14
+    dx, dy = NUDGE.get(name, (0, 0)); ly2 = py + dy
+    left = (bank == 'T') != (name in ('Blooming Tower', 'Sun Cosmo'))  # 2 ghim sát mép khung: đổi bên
+    if left:
+        lx1 = px - 19; lx0 = lx1 - w
+    else:
+        lx0 = px + 19; lx1 = lx0 + w
+    if dy:
+        d.line([px, py, (lx1 if left else lx0), ly2], fill=tier(b), width=2)
+    d.rounded_rectangle([lx0, ly2 - 11, lx1, ly2 + 11], 6, fill='#0b1a2a', outline=tier(b), width=2)
+    d.text(((lx0 + lx1) / 2, ly2), txt, font=f, fill=tier(b), anchor='mm')
 for i, (name, a, b, bank, x, y) in enumerate(P, 1):
     px, py = T(x, y)
     d.ellipse([px - 15, py - 15, px + 15, py + 15], fill=tier(b), outline='#0b1a2a', width=3)
