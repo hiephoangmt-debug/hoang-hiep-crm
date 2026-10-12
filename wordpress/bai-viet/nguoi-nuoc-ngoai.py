@@ -38,7 +38,7 @@ content = f"""<p>Người nước ngoài được mua căn hộ ở những dự
 <tbody>
 <tr><td>4 · 11/2024</td><td>{L('sun-symphony-residence','Sun Symphony Residence')} (Olalani Riverside Towers)</td><td>Nại Hiên Đông, Sơn Trà · CTCP Mỹ Phúc (Sun Group)</td><td>427 căn hộ + 87 nhà ở riêng lẻ</td><td>{X('sun-symphony-residence')} · {M('Sun Symphony Residence Đà Nẵng')}</td></tr>
 <tr><td>4 · 11/2024</td><td>{L('sun-cosmo-residence','Sun Cosmo Residence')} – The Panoma (Tòa chung cư khu đất B4-1, B4-2, Khu dịch vụ du lịch ven sông Hàn)</td><td>Mỹ An, Ngũ Hành Sơn · CTCP TM Du lịch Đầu tư Cù Lao Chàm (Sun Group)</td><td>203 căn hộ (trên 679 căn)</td><td>{X('sun-cosmo-residence')} · {M('Sun Cosmo Residence Đà Nẵng')}</td></tr>
-<tr><td>4 · 11/2024</td><td>Sunneva Island (Khu đô thị ven sông Hòa Quý – Đồng Nò)</td><td>Hòa Quý, Ngũ Hành Sơn · CTCP Địa Cầu</td><td>250 biệt thự (trên 390 căn)</td><td>{M('Sunneva Island Đà Nẵng')}</td></tr>
+<tr><td>4 · 11/2024</td><td>{L('sunneva-island','Sunneva Island')} (Khu đô thị ven sông Hòa Quý – Đồng Nò)</td><td>Đảo Đồng Nò, Hòa Quý, Ngũ Hành Sơn · CTCP Địa Cầu (Sun Group)</td><td>250 biệt thự (trên 390 căn)</td><td>{X('sunneva-island')} · {M('Sunneva Island Đà Nẵng')}</td></tr>
 <tr><td>4 · 11/2024</td><td>{L('newtown-diamond-da-nang','Newtown')} (Khu đô thị thương mại và dịch vụ thể thao cao cấp New Town)</td><td>Hòa Hải, Ngũ Hành Sơn · Công ty TNHH Phát triển New Town</td><td>519 căn hộ + 250 biệt thự</td><td>{X('newtown-diamond-da-nang')} · {M('Newtown Diamond Đà Nẵng')}</td></tr>
 <tr><td>5 · 2/2025</td><td>{L('capital-square-da-nang','Capital Square')} 2 (Khu đô thị Capital Square 2)</td><td>Ngô Quyền, An Hải · Công ty TNHH Mega Assets</td><td>502 căn (trên 1.681 căn)</td><td>{X('capital-square-da-nang')} · {M('Capital Square Đà Nẵng')}</td></tr>
 <tr><td>5 · 2/2025</td><td>Capital Square 3 (Khu đô thị Capital Square 3)</td><td>Ngô Quyền, An Hải · Công ty TNHH Bất động sản SIH</td><td>512 căn (trên 1.710 căn)</td><td>{X('capital-square-da-nang')} · {M('Capital Square Đà Nẵng')}</td></tr>
@@ -88,7 +88,7 @@ content = f"""<p>Người nước ngoài được mua căn hộ ở những dự
 </ol>
 
 <h2>Nhận định của Hoàng Hiệp</h2>
-<p>Theo luật mới, Đà Nẵng mở room cho người nước ngoài chủ yếu ở các dự án ven sông Hàn (Sun Symphony, Sun Cosmo, Capital Square, Masteri Rivera, The Royal, Danang Landmark) và ven biển Ngũ Hành Sơn (Newtown, Sunneva Island). Đáng chú ý, 3 dự án của Sun Group nằm trong danh sách đợt 4. Room 30% mỗi tòa có giới hạn: căn đẹp, tầng cao view sông thường được khách nước ngoài chọn trước. Nếu anh chị có bạn bè, đối tác nước ngoài muốn mua, nên kiểm tra room và chọn căn sớm – và tránh các dự án không được phép như Vinhomes Hải Vân Bay.</p>
+<p>Theo luật mới, Đà Nẵng mở room cho người nước ngoài chủ yếu ở các dự án ven sông Hàn (Sun Symphony, Sun Cosmo, Capital Square, Masteri Rivera, The Royal, Danang Landmark) và ven biển Ngũ Hành Sơn (Newtown) cùng khu ven sông phía Nam (Sunneva Island). Đáng chú ý, 3 dự án của Sun Group nằm trong danh sách đợt 4. Room 30% mỗi tòa có giới hạn: căn đẹp, tầng cao view sông thường được khách nước ngoài chọn trước. Nếu anh chị có bạn bè, đối tác nước ngoài muốn mua, nên kiểm tra room và chọn căn sớm – và tránh các dự án không được phép như Vinhomes Hải Vân Bay.</p>
 <p>Hiệp hỗ trợ khách nước ngoài bằng tiếng Anh và tiếng Hàn: <a href="/en/">trang tiếng Anh</a> · <a href="/ko/">한국어 페이지</a>. Liên hệ <strong>0904 567 009</strong> (Zalo).</p>
 """
 n = {
