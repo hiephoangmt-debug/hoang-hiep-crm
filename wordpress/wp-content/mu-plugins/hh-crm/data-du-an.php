@@ -748,6 +748,7 @@ function hh_import_projects() {
 	if ( function_exists( 'hh_villa_split' ) ) {
 		hh_villa_split();
 	}
+	delete_transient( 'hh_chat_kb' ); // Chat AI đọc lại giá mới.
 	$news     = function_exists( 'hh_import_news' ) ? hh_import_news() : 0;
 	$listings = function_exists( 'hh_import_listings' ) ? hh_import_listings() : 0;
 	return array( $created, $updated, $news, $listings );

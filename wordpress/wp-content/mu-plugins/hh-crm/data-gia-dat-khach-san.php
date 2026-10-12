@@ -9,27 +9,45 @@ defined( 'ABSPATH' ) || exit;
 add_filter( 'hh_market_boards', 'hh_board_dat_khach_san' );
 function hh_board_dat_khach_san( $boards ) {
 	$boards['dat-lon'] = array(
-		'title'   => 'Giá đất lớn, đất xây khách sạn Đà Nẵng theo tuyến đường',
-		'intro'   => 'Khoảng giá chào bán tổng hợp từ tin rao năm 2026 cho các lô đất diện tích lớn, lô góc, mặt tiền phù hợp xây khách sạn, căn hộ dịch vụ. Giá thực tế phụ thuộc mặt tiền, hình dáng lô, quy hoạch tầng cao và pháp lý; cần thẩm định từng lô trước khi giao dịch.',
+		'title'   => 'Giá đất ven biển, đất lớn xây khách sạn Đà Nẵng theo tuyến đường',
+		'intro'   => 'Khoảng giá chào bán tổng hợp từ tin rao tháng 10/2026, tách lô nhỏ – vừa (dưới khoảng 350 m²) và lô lớn trên từng trục biển, cùng các trục gần biển, trung tâm phù hợp xây khách sạn, căn hộ dịch vụ. Giá thực tế phụ thuộc mặt tiền, hình dáng lô, quy hoạch tầng cao và pháp lý; cần thẩm định từng lô trước khi giao dịch.',
 		'columns' => array( 'Khu vực / tuyến đường', 'Diện tích phổ biến', 'Giá tham khảo', 'Ghi chú' ),
 		'rows'    => array(
 			array(
-				'Võ Nguyên Giáp (Sơn Trà – Ngũ Hành Sơn)',
-				'280 – 900 m²',
-				'Khoảng 150 – 400 triệu/m²; lô 280 m² ngang 14 m rao khoảng 108 tỷ',
-				'Mặt biển Mỹ Khê, quy hoạch cao tầng. Bảng giá nhà nước 2026 khoảng 220 – 280 triệu/m² tùy đoạn; tin rao An Thượng 826 m² khoảng 200 triệu/m².',
+				'Hoàng Sa (Sơn Trà) – lô nhỏ, vừa',
+				'200 – 330 m² (ngang 10 – 15 m)',
+				'Khoảng 330 – 415 triệu/m²; 212 m² ngang 10 m rao 70 tỷ, 213 m² rao 74,5 tỷ, 327 m² ngang 15 m khoảng 350 triệu/m²',
+				'Mặt biển Mân Thái – Phạm Văn Đồng, lô nhỏ khan hàng nên đơn giá cao hơn lô lớn. Đất kiệt gần Hoàng Sa khoảng 75 – 150 triệu/m².',
 			),
 			array(
-				'Hoàng Sa (Sơn Trà)',
-				'600 – 1.000 m²',
-				'Khoảng 170 – 450 triệu/m²; lô 1.000 m² khoảng 170 tỷ, lô 600 m² ngang 30 m khoảng 240 tỷ',
-				'Mặt biển, quy hoạch xây cao tầng; phù hợp khách sạn, căn hộ dịch vụ cao cấp.',
+				'Hoàng Sa (Sơn Trà) – lô lớn',
+				'580 – 1.000 m²',
+				'Khoảng 170 – 400 triệu/m²; 583 m² khoảng 326 triệu/m², 775 m² khoảng 250 triệu/m², 600 m² ngang 30 m khoảng 240 tỷ, 1.000 m² khoảng 170 tỷ',
+				'Quy hoạch cao tầng, phù hợp khách sạn, căn hộ dịch vụ cao cấp; biên độ rộng do mặt tiền, lô góc, khoảng cách tới phố du lịch.',
 			),
 			array(
-				'Trường Sa (Ngũ Hành Sơn)',
+				'Võ Nguyên Giáp (Sơn Trà – Ngũ Hành Sơn) – lô nhỏ, vừa',
+				'150 – 300 m²',
+				'Khoảng 130 – 390 triệu/m²; lô ngang 6 m (150 – 156 m²) khoảng 22 – 25 tỷ (≈ 145 – 165 triệu/m²); 285 m² ngang 12 m khoảng 130 triệu/m²; 280 m² ngang 14 m rao 108 tỷ',
+				'Mặt biển Mỹ Khê – Non Nước; lô ngang 6 m chỉ hợp khách sạn mini, lô ngang từ 12 – 14 m đơn giá cao hơn hẳn.',
+			),
+			array(
+				'Võ Nguyên Giáp (Sơn Trà – Ngũ Hành Sơn) – lô lớn',
+				'500 – 900 m²',
+				'Khoảng 200 triệu/m² (lô 826 m² khu An Thượng); lô lớn ít tin rao, giá thỏa thuận',
+				'Bảng giá đất nhà nước đầu 2026 (Nghị quyết 32/2025) khoảng 220 – 280 triệu/m² tùy đoạn; từ 10/6/2026 áp dụng Nghị quyết 28/2026 – cần tra lại theo đoạn.',
+			),
+			array(
+				'Trường Sa (Ngũ Hành Sơn) – lô nhỏ, vừa',
+				'Khoảng 300 m²',
+				'Khoảng 100 triệu/m²; 300 m² ngang 8 m rao 99,9 triệu/m²',
+				'Gần biển Tân Trà, resort và Newtown; giá mềm hơn Võ Nguyên Giáp phía Bắc.',
+			),
+			array(
+				'Trường Sa (Ngũ Hành Sơn) – lô lớn',
 				'500 – 1.000 m²',
-				'Khoảng 60 – 130 triệu/m²; lô góc 500 m² khoảng 65 tỷ, lô 998 m² ngang 25 m khoảng 60 tỷ',
-				'Gần biển Tân Trà, giá mềm hơn trục Võ Nguyên Giáp phía bắc.',
+				'Khoảng 60 – 130 triệu/m²; lô góc 2 mặt tiền 500 m² rao 64,6 tỷ, 998 m² ngang 25 m khoảng 60 tỷ',
+				'Quỹ đất resort, khách sạn nghỉ dưỡng; phù hợp đầu tư dài hạn.',
 			),
 			array(
 				'Võ Văn Kiệt (Sơn Trà)',
@@ -56,10 +74,28 @@ function hh_board_dat_khach_san( $boards ) {
 				'Trục thương mại trung tâm nối sân bay – cầu Rồng; phù hợp văn phòng, khách sạn thành phố.',
 			),
 			array(
-				'Nguyễn Tất Thành (Liên Chiểu)',
+				'Nguyễn Tất Thành (Thanh Khê – Hải Châu) – lô nhỏ',
+				'Khoảng 125 m² (5 × 25 m)',
+				'Khoảng 110 – 172 triệu/m²; lô 125 m² rao 13,8 – 21,5 tỷ, đối diện bãi tắm Thanh Khê khoảng 15 tỷ, lô có đường sau 5 m khoảng 14,75 tỷ',
+				'Mặt biển Thanh Khê – Xuân Hà, đường 6 làn, vỉa hè rộng; lô 125 m² là quy cách phổ biến nhất.',
+			),
+			array(
+				'Nguyễn Tất Thành (Thanh Khê – Hải Châu) – lô lớn',
+				'250 – 500 m²',
+				'Khoảng 80 – 180 triệu/m²; 250 m² ngang 10 m khoảng 35 tỷ, cặp lô 273 m² rao 49 tỷ, 400 m² ngang 15 m khoảng 32,9 tỷ',
+				'Có lô góc 3 mặt tiền khoảng 436 m² phía Hải Châu; phù hợp khách sạn, nhà hàng. Tin lô 500 m² ghi giá chưa nhất quán (25,5 – 50 tỷ).',
+			),
+			array(
+				'Nguyễn Tất Thành nối dài (Liên Chiểu) – lô nhỏ',
+				'100 – 120 m²',
+				'Khoảng 47 – 58 triệu/m²; 105 m² Hòa Hiệp Nam rao 4,95 tỷ; lô sát biển đường Dũng Sĩ Thanh Khê khoảng 57,5 triệu/m²',
+				'Mặt bằng giá thấp nhất trong các trục biển nội thành; hưởng lợi cảng Liên Chiểu, đường tránh Nam Hải Vân.',
+			),
+			array(
+				'Nguyễn Tất Thành (Liên Chiểu) – lô lớn',
 				'375 – 900 m²',
-				'Khoảng 65 – 135 triệu/m²; 375 m² khoảng 30 tỷ, 897 m² ngang 35 m khoảng 72 triệu/m², 479 m² mặt biển khoảng 65 tỷ',
-				'Mặt biển Nguyễn Tất Thành, mặt bằng giá thấp hơn nhiều so với Sơn Trà, Ngũ Hành Sơn.',
+				'Khoảng 65 – 135 triệu/m²; 375 m² khoảng 30 tỷ, 479 m² mặt biển khoảng 65 tỷ, 897 m² ngang 35 m khoảng 72 triệu/m²',
+				'Đất song song Nguyễn Tất Thành (đường Xuân Thiều) khoảng 38 triệu/m² – không phải mặt biển.',
 			),
 			array(
 				'Võ Chí Công (Ngũ Hành Sơn – Cẩm Lệ)',
@@ -74,10 +110,16 @@ function hh_board_dat_khach_san( $boards ) {
 				'Mặt sông, đô thị sinh thái; ít lô ≥ 300 m² trên tin rao, cần khảo sát thêm.',
 			),
 			array(
-				'Lạc Long Quân (Điện Bàn ven biển)',
-				'1.000 – 4.000 m²',
-				'Khoảng 16 – 30 triệu/m²; lô 1.150 m² ngang 32 m khoảng 33,5 tỷ',
-				'Ven biển gần resort Nam Hải; phù hợp quỹ đất resort, villa nghỉ dưỡng.',
+				'Lạc Long Quân (Điện Bàn – Hội An) – lô nhỏ, vừa',
+				'240 – 250 m²',
+				'Khoảng 31 – 46 triệu/m²; 240 m² ngang 6 m khoảng 7,4 tỷ, 252 m² (13 × 16 m) Cẩm An rao 11,5 tỷ',
+				'Trục biển Đà Nẵng – Hội An; địa chỉ tin rao hay lẫn Điện Ngọc, Điện Dương, Cẩm An – cần đối chiếu vị trí trên sổ.',
+			),
+			array(
+				'Lạc Long Quân (Điện Bàn – Hội An) – lô lớn',
+				'580 – 4.000 m²',
+				'Khoảng 16 – 30 triệu/m²; 580 m² khoảng 26 triệu/m², 1.150 m² ngang 32 m khoảng 33,5 tỷ',
+				'Ven biển gần resort Nam Hải, Hà My; phù hợp quỹ đất resort, villa nghỉ dưỡng.',
 			),
 		),
 		'sources' => array(
@@ -89,6 +131,14 @@ function hh_board_dat_khach_san( $boards ) {
 			'https://nhadat.cafeland.vn/can-ban-lo-dat-1408m2-mat-tien-duong-bach-dang-view-truc-dien-song-han-da-nang-2032530.html',
 			'https://www.nhatot.com/tags/mua-ban-dat-duong-nguyen-tat-thanh-da-nang',
 			'https://alonhadat.com.vn/nha-dat/can-ban/dat-tho-cu-dat-o/duong-lac-long-quan-thi-xa-dien-ban-dp24382.html',
+			'https://alonhadat.com.vn/nha-dat/can-ban/nha-dat/duong-hoang-sa-quan-son-tra-dp2774.html',
+			'https://www.nhatot.com/tags/ban-dat-mat-tien-duong-hoang-sa-da-nang',
+			'https://homedy.com/ban-dat-duong-vo-nguyen-giap-quan-ngu-hanh-son-da-nang',
+			'https://alonhadat.com.vn/nha-dat/can-ban/nha-dat/duong-truong-sa-quan-ngu-hanh-son-dp2959.html',
+			'https://batdongsan.com.vn/ban-dat-duong-nguyen-tat-thanh-50',
+			'https://alonhadat.com.vn/nha-dat/can-ban/dat-tho-cu-dat-o/duong-nguyen-tat-thanh-quan-thanh-khe-dp2705.html',
+			'https://homedy.com/ban-dat-quan-lien-chieu-da-nang/mat-tien-duong-nguyen-tat-thanh-noi-dai-vi-tri-rat-dep-es3151085',
+			'https://batdongsan.com.vn/ban-dat-duong-lac-long-quan-520',
 		),
 	);
 	$boards['khach-san'] = array(

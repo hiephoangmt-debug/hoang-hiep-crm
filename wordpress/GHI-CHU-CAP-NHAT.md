@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.9** + plugin Hoàng Hiệp CRM **2.20.27**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.9** + plugin Hoàng Hiệp CRM **2.20.28**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,14 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.28: giá đất ven biển Đà Nẵng chi tiết lô nhỏ, lô lớn
+
+- **Bảng giá đất ven biển, đất lớn xây khách sạn** (trang Mua bán → Đất nền): mỗi trục biển tách 2 dòng **lô nhỏ, vừa** (dưới khoảng 350 m²) và **lô lớn**, kèm tin rao ví dụ: Hoàng Sa, Võ Nguyên Giáp, Trường Sa, Nguyễn Tất Thành (Thanh Khê – Hải Châu và Liên Chiểu), Lạc Long Quân (Điện Bàn – Hội An). Giá rao tháng 10/2026.
+- **Bài "Giá đất ven biển Đà Nẵng"** (/gia-dat-ven-bien-da-nang-vo-nguyen-giap-hoang-sa/) viết lại chi tiết: bảng tổng hợp, từng tuyến lô nhỏ / lô lớn, bảng giá nhà nước (Nghị quyết 32/2025 → 28/2026), chọn lô nhỏ hay lô lớn, checklist, 6 câu hỏi đáp; ảnh biểu đồ giá; từ khoá chính "giá đất ven biển Đà Nẵng" + 5 từ khoá phụ (giá đất mặt tiền biển Đà Nẵng, giá đất Võ Nguyên Giáp, Hoàng Sa, Nguyễn Tất Thành, Trường Sa). Bài đã đăng được cập nhật đè (bản cũ còn trong Bản sửa đổi).
+- 2 bài liên quan (khách sạn ven biển, bất động sản Liên Chiểu) sửa số cho khớp.
+- Chat: hỏi giá đất theo tên đường trả cả lô nhỏ và lô lớn; sau mỗi lần nhập dữ liệu chat đọc lại giá mới ngay.
+- Sau khi cài: **Dự án → Nhập dữ liệu Đà Nẵng → Nhập / cập nhật dữ liệu**, rồi LiteSpeed Cache → Purge All.
 
 ## Có gì mới – plugin 2.20.27, giao diện 2.15.9: mục "Biệt thự sở hữu lâu dài"
 

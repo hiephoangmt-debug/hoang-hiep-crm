@@ -640,7 +640,8 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 	// Hỏi giá đất / khách sạn theo tuyến đường, khu vực (bảng giá thị trường trên web).
 	$road = hh_chat_board_lookup( $t );
 	if ( $road ) {
-		return $ack . $lc( $road ) . ( $ask ?: ' Anh/chị đang tìm lô diện tích khoảng bao nhiêu, để xây khách sạn hay đầu tư giữ tài sản ạ?' );
+		$q = 0 === strpos( $road, 'Khách sạn' ) ? ' Anh/chị tìm khách sạn khoảng bao nhiêu phòng, tầm vốn bao nhiêu ạ?' : ' Anh/chị đang tìm lô diện tích khoảng bao nhiêu, để xây khách sạn hay đầu tư giữ tài sản ạ?';
+		return $ack . $lc( $road ) . ( $ask ?: $q );
 	}
 	// Khách nhắc tên một dự án khác trên web (ở bất kỳ trang nào) → giá tham khảo + link.
 	$other = hh_chat_project_lookup( $t );
@@ -761,22 +762,28 @@ function hh_chat_project_lookup( $t ) {
 	return $best;
 }
 
-/** Tra bảng giá thị trường theo tuyến đường / khu vực có trong câu hỏi (VD "đất Võ Nguyên Giáp bao nhiêu"). */
+/**
+ * Tra bảng giá thị trường theo tuyến đường có trong câu hỏi (VD "đất Võ Nguyên Giáp bao nhiêu").
+ * Tên đường = phần đầu cột 1 (trước "(" hoặc " – "); một tuyến có cả lô nhỏ và lô lớn thì trả cả hai.
+ */
 function hh_chat_board_lookup( $t ) {
+	$hits = array();
 	foreach ( (array) apply_filters( 'hh_market_boards', array() ) as $key => $b ) {
 		foreach ( (array) ( $b['rows'] ?? array() ) as $r ) {
-			$r     = array_values( (array) $r );
-			$names = preg_split( '/\s*[,\/–-]\s*|\s*\(/u', (string) ( $r[0] ?? '' ) );
-			foreach ( $names as $n ) {
-				$n = trim( mb_strtolower( remove_accents( rtrim( $n, ')' ) ) ) );
-				if ( mb_strlen( $n ) >= 6 && false !== strpos( $t, $n ) ) {
-					$is_hotel = 'khach-san' === $key;
-					return ( $is_hotel ? 'Khách sạn ' : 'Đất ' ) . $r[0] . ': ' . ( $r[2] ?? '' ) . ( ! empty( $r[1] ) ? ' (diện tích phổ biến ' . $r[1] . ')' : '' ) . '. Đây là giá rao tham khảo 2026, thực tế còn tùy mặt tiền, pháp lý từng lô.';
-				}
+			$r    = array_values( (array) $r );
+			$road = trim( preg_split( '/\s*\(|\s+–\s+/u', (string) ( $r[0] ?? '' ) )[0] );
+			$n    = mb_strtolower( remove_accents( $road ) );
+			if ( mb_strlen( $n ) >= 6 && false !== strpos( $t, $n ) ) {
+				$kind   = 'khach-san' === $key ? 'Khách sạn ' : 'Đất ';
+				$hits[] = $kind . $r[0] . ( ! empty( $r[1] ) ? ' (' . $r[1] . ')' : '' ) . ': ' . ( $r[2] ?? '' );
 			}
 		}
 	}
-	return '';
+	if ( ! $hits ) {
+		return '';
+	}
+	$note = "\nĐây là giá rao tham khảo 10/2026, thực tế còn tùy mặt tiền, pháp lý từng lô.";
+	return 1 === count( $hits ) ? $hits[0] . '.' . $note : "Giá rao tham khảo 10/2026:\n• " . implode( "\n• ", array_slice( $hits, 0, 3 ) ) . "\nThực tế còn tùy mặt tiền, pháp lý từng lô.";
 }
 
 /* -------------------------------------------------------------------------
