@@ -12,6 +12,7 @@ class Sheet {
   getName() { return this.name; }
   getLastRow() { return this.rows.length; }
   getMaxRows() { return 60; }
+  getMaxColumns() { return 30; }
   appendRow(r) { this.rows.push(r.slice()); }
   getRange(r, c, nr = 1, nc = 1) {
     const s = this;
@@ -21,6 +22,7 @@ class Sheet {
       getDisplayValues: () => Array.from({ length: nr }, (_, i) => Array.from({ length: nc }, (_, j) => String((s.rows[r - 1 + i] || [])[c - 1 + j] ?? ''))),
       setValues: (v) => v.forEach((row, i) => row.forEach((x, j) => { (s.rows[r - 1 + i] ||= [])[c - 1 + j] = x; })),
       setValue: (x) => { (s.rows[r - 1] ||= [])[c - 1] = x; },
+      setNumberFormat() {},
       getSheet: () => s, getColumn: () => c, getRow: () => r,
     };
   }
@@ -38,7 +40,7 @@ sheets.Website.appendRow(['Landing A', 'a.com', 'testkey12345']);
 for (let i = 1; i < 40; i++) { (sheets['Khách hàng'].rows[i] ||= [])[14] = false; (sheets['Lượt bấm'].rows[i] ||= [])[8] = false; }
 const out = (o) => ({ setMimeType() { return { body: o }; } });
 const ctx = vm.createContext({
-  SpreadsheetApp: { getActiveSpreadsheet: () => ({ getSheetByName: (n) => sheets[n], getOwner: () => ({ getEmail: () => 'owner@gmail.com' }) }), getUi: () => ({ alert(m) { globalThis.__alert = m; }, showModelessDialog(h, title) { globalThis.__dialog = { h, title }; } }) },
+  SpreadsheetApp: { getActiveSpreadsheet: () => ({ getSheetByName: (n) => sheets[n], insertSheet: (n) => (sheets[n] = new Sheet(n, [])), getOwner: () => ({ getEmail: () => 'owner@gmail.com' }) }), getUi: () => ({ alert(m) { globalThis.__alert = m; }, showModelessDialog(h, title) { globalThis.__dialog = { h, title }; } }) },
   UrlFetchApp: { fetch: (u, o) => { globalThis.__fetch = { u, o }; return { getResponseCode: () => 200, getContentText: () => JSON.stringify({ content: [{ text: 'Trả lời thử' }] }) }; } },
   CacheService: { getScriptCache: () => ({ get: () => null, put() {} }) },
   LockService: { getScriptLock: () => ({ waitLock() {}, releaseLock() {} }) },
@@ -47,7 +49,7 @@ const ctx = vm.createContext({
   HtmlService: { createHtmlOutputFromFile: (n) => ({ file: n, setTitle() { return this; }, addMetaTag() { return this; }, getContent: () => fs.readFileSync(path.join(here, fs.existsSync(path.join(here, n + '.html')) ? n + '.html' : 'chia/' + n + '.html'), 'utf8') }), createHtmlOutput: (c) => ({ content: c, setTitle() { return this; }, addMetaTag() { return this; }, setWidth() { return this; }, setHeight() { return this; } }) },
   PropertiesService: { getScriptProperties: () => ({ getProperty: (k) => globalThis.__props?.[k] ?? null, setProperty: (k, v) => { (globalThis.__props ||= {})[k] = v; }, deleteProperty: (k) => { delete globalThis.__props?.[k]; } }) },
   Logger: { log: (m) => (globalThis.__log ||= []).push(m) },
-  Utilities: { getUuid: () => crypto.randomUUID() },
+  Utilities: { getUuid: () => crypto.randomUUID(), formatDate: (d) => new Date(d.getTime() + 7 * 3600e3).toISOString().slice(0, 10) },
   ScriptApp: { getService: () => ({ getUrl: () => 'https://script.google.com/macros/s/X/exec' }) },
   console,
 });
@@ -108,7 +110,7 @@ assert.equal(ctx.crmKey_(), K);
 assert.throws(() => ctx.crmLoad('sai-khoa'), /Không có quyền/); assert.throws(() => ctx.crmLog('', '0988111222', 'call'), /Không có quyền/);
 assert.equal(ctx.doGet({ parameter: { k: 'sai' } }).file, undefined); assert.ok(ctx.doGet({ parameter: { k: K } }).content.includes('CRM Hoàng Hiệp') && ctx.doGet({ parameter: { k: K } }).content.includes('</html>'));
 const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
-assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-10'); assert.equal(JSON.stringify(dbg).includes(K), false);
+assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-11'); assert.equal(JSON.stringify(dbg).includes(K), false);
 const L = ctx.crmLoad(K);
 assert.equal(L.leads.length, 2);
 const l0 = L.leads.find((x) => x.phone === '0988111222');
@@ -137,6 +139,24 @@ assert.equal(globalThis.__dialog.h.content.includes('__KEY__'), false);
 assert.equal(ctx.crmDialogKey(), ctx.crmKey_());
 // hàm tự kiểm tra
 const ret = ctx.kiemTraCRM(); assert.match(ret, /\?k=[0-9a-f]{32}/); assert.ok(globalThis.__log.some((m) => /Đọc dữ liệu OK/.test(m))); assert.ok(globalThis.__log.some((m) => /File giao diện Crm: có/.test(m)));
+// hồ sơ mở rộng, nhật ký chăm sóc, lịch sử chuyển giao
+{
+  const KK = ctx.crmKey_();
+  const lead = ctx.crmLoad(KK).leads[0];
+  ctx.crmUpdateLead(KK, lead.phone, { next: '2026-10-15', budget: '2,5 tỷ', purpose: 'Đầu tư', product: '2PN FourS Tower', heat: 'Nóng', loan: 'Có', assignee: 'Minh', reason: 'Giao sale mới' });
+  ctx.crmUpdateLead(KK, lead.phone, { assignee: 'Lan Anh', reason: 'Minh nghỉ' });
+  const l2 = ctx.crmLoad(KK).leads.find((x) => x.phone === lead.phone);
+  assert.equal(l2.next, '2026-10-15'); assert.equal(l2.budget, '2,5 tỷ'); assert.equal(l2.heat, 'Nóng'); assert.equal(l2.loan, 'Có'); assert.equal(l2.assignee, 'Lan Anh');
+  assert.throws(() => ctx.crmAddLog(KK, lead.phone, { type: 'Gọi điện' }), /Chưa nhập nội dung/);
+  ctx.crmAddLog(KK, lead.phone, { type: 'Gọi điện', content: 'Khách hỏi giá', result: 'Hẹn xem', next: '2026-10-20' });
+  ctx.crmAddLog(KK, lead.phone, { type: 'Loại lạ', content: '=SUM(1)' });
+  const lg = ctx.crmLogs(KK, lead.phone);
+  assert.equal(lg.logs.length, 2); assert.equal(lg.logs[1].type, 'Gọi điện'); assert.equal(lg.logs[1].next, '2026-10-20');
+  assert.equal(lg.logs[0].type, 'Ghi chú'); assert.equal(lg.logs[0].content, "'=SUM(1)");
+  assert.ok(lg.moves.length >= 2); assert.equal(lg.moves[0].to, 'Lan Anh'); assert.equal(lg.moves[0].from, 'Minh'); assert.equal(lg.moves[1].to, 'Minh');
+  assert.equal(ctx.crmLoad(KK).leads.find((x) => x.phone === lead.phone).next, '2026-10-20');
+  assert.throws(() => ctx.crmAddLog('sai', lead.phone, { content: 'x' }), /Không có quyền/);
+}
 // quân sư AI: cần đúng khoá truy cập, thiếu khoá API thì báo rõ, có khoá thì gọi API
 assert.throws(() => ctx.crmAsk('sai-khoa', 'xin chào'), /Không có quyền/);
 assert.throws(() => ctx.crmAsk(ctx.crmKey_(), 'xin chào'), /Chưa cài khoá quân sư/);

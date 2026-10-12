@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-10', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-11', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -52,17 +52,44 @@ function lastDataRow_(sh, col) {
 function iso_(d) { return d && typeof d.getTime === 'function' ? new Date(d.getTime()).toISOString() : ''; }
 function phoneStr_(v) { var p = String(v == null ? '' : v); return p.length === 9 ? '0' + p : p; }
 
+// ---- Cột mở rộng của tab Khách hàng (W..AB): hẹn tiếp theo, ngân sách, mục đích, loại căn, tiềm năng, vay ----
+var LEAD_COLS = 28;
+function ensureLeadCols_(sh) {
+  try {
+    var mc = sh.getMaxColumns();
+    if (mc < LEAD_COLS) sh.insertColumnsAfter(mc, LEAD_COLS - mc);
+    if (!sh.getRange(1, 23).getValue()) {
+      sh.getRange(1, 23, 1, 6).setValues([['Hẹn tiếp theo', 'Ngân sách', 'Mục đích mua', 'Loại căn quan tâm', 'Tiềm năng (tự đánh giá)', 'Vay ngân hàng']]);
+      sh.getRange(2, 23, Math.max(sh.getMaxRows() - 1, 1), 1).setNumberFormat('@');
+    }
+  } catch (e) {}
+}
+function ymd_(v) {
+  if (v && typeof v.getTime === 'function') return Utilities.formatDate(v, 'Asia/Ho_Chi_Minh', 'yyyy-MM-dd');
+  var s = String(v == null ? '' : v).trim();
+  return /^\d{4}-\d{2}-\d{2}/.test(s) ? s.slice(0, 10) : '';
+}
+// Lấy hoặc tạo tab phụ (Nhật ký, Chuyển giao...) với dòng tiêu đề
+function tab_(name, header) {
+  var ss = ss_(), sh = ss.getSheetByName(name);
+  if (!sh) { sh = ss.insertSheet(name); sh.getRange(1, 1, 1, header.length).setValues([header]); }
+  return sh;
+}
+var LOG_TYPES = ['Gọi điện', 'Nhắn Zalo', 'Gặp mặt', 'Gửi tài liệu', 'Ghi chú', 'Khác'];
+
 // ---- API cho giao diện (google.script.run) ----
 function crmLoad(k) {
   requireUi_(k);
   var ss = ss_(), out = { user: '', now: new Date().toISOString() };
   var sh = ss.getSheetByName(S_LEADS), n = lastDataRow_(sh, 2);
-  var rows = n > 1 ? sh.getRange(2, 1, n - 1, 22).getValues() : [];
+  ensureLeadCols_(sh);
+  var rows = n > 1 ? sh.getRange(2, 1, n - 1, LEAD_COLS).getValues() : [];
   out.leads = rows.filter(function (r) { return r[3]; }).map(function (r) {
     return { id: r[0], at: iso_(r[1]), name: String(r[2] || ''), phone: phoneStr_(r[3]), email: String(r[4] || ''), site: String(r[5] || ''),
       source: String(r[6] || ''), campaign: String(r[7] || ''), vid: String(r[8] || ''), submits: Number(r[9]) || 1,
       zaloClicks: Number(r[10]) || 0, phoneClicks: Number(r[11]) || 0, called: r[14] === true, messaged: r[15] === true,
-      contactedAt: iso_(r[16]), status: String(r[18] || 'Mới'), assignee: String(r[19] || ''), value: Number(r[20]) || 0, note: String(r[21] || '') };
+      contactedAt: iso_(r[16]), status: String(r[18] || 'Mới'), assignee: String(r[19] || ''), value: Number(r[20]) || 0, note: String(r[21] || ''),
+      next: ymd_(r[22]), budget: String(r[23] || ''), purpose: String(r[24] || ''), product: String(r[25] || ''), heat: String(r[26] || ''), loan: String(r[27] || '') };
   }).reverse();
   var cs = ss.getSheetByName(S_CLICKS), cn = cs ? lastDataRow_(cs, 1) : 1, start = Math.max(2, cn - 1499);
   var crow = cn > 1 ? cs.getRange(start, 1, cn - start + 1, 11).getValues() : [];
@@ -182,11 +209,60 @@ function crmUpdateLead(k, phone, f) {
     var x = findLead_(phone), sh = x.sh, r = x.row;
     if (f.name !== undefined) sh.getRange(r, 3).setValue(str_(f.name, 120));
     if (f.status !== undefined) sh.getRange(r, 19).setValue(f.status);
-    if (f.assignee !== undefined) sh.getRange(r, 20).setValue(str_(f.assignee, 80));
+    if (f.assignee !== undefined) {
+      var oldA = String(sh.getRange(r, 20).getValue() || ''), newA = str_(f.assignee, 80);
+      if (oldA !== newA) {
+        tab_('Chuyển giao', ['Thời gian', 'SĐT', 'Tên khách', 'Từ sale', 'Sang sale', 'Trạng thái lúc chuyển', 'Lý do']).appendRow(
+          [new Date(), "'" + phoneStr_(sh.getRange(r, 4).getValue()), str_(sh.getRange(r, 3).getValue(), 120), oldA, newA, String(sh.getRange(r, 19).getValue() || ''), str_(f.reason, 200)]);
+      }
+      sh.getRange(r, 20).setValue(newA);
+    }
     if (f.value !== undefined) sh.getRange(r, 21).setValue(Math.max(0, Number(f.value) || 0));
     if (f.note !== undefined) sh.getRange(r, 22).setValue(str_(f.note, 2000));
+    ensureLeadCols_(sh);
+    if (f.next !== undefined) sh.getRange(r, 23).setValue(f.next === '' ? '' : (ymd_(f.next) || ''));
+    if (f.budget !== undefined) sh.getRange(r, 24).setValue(str_(f.budget, 80));
+    if (f.purpose !== undefined) sh.getRange(r, 25).setValue(str_(f.purpose, 40));
+    if (f.product !== undefined) sh.getRange(r, 26).setValue(str_(f.product, 120));
+    if (f.heat !== undefined) sh.getRange(r, 27).setValue(['', 'Nóng', 'Ấm', 'Lạnh'].indexOf(f.heat) >= 0 ? f.heat : '');
+    if (f.loan !== undefined) sh.getRange(r, 28).setValue(['', 'Có', 'Không', 'Chưa rõ'].indexOf(f.loan) >= 0 ? f.loan : '');
     return { ok: true };
   });
+}
+
+// Nhật ký chăm sóc: mỗi lần gọi / nhắn / gặp / gửi tài liệu là một dòng, không bao giờ bị ghi đè.
+function crmAddLog(k, phone, f) {
+  requireUi_(k);
+  f = f || {};
+  var type = LOG_TYPES.indexOf(f.type) >= 0 ? f.type : 'Ghi chú';
+  var content = str_(f.content, 1500);
+  if (!content && !f.result) throw new Error('Chưa nhập nội dung');
+  return withLock_(function () {
+    var x = findLead_(phone), sh = x.sh, r = x.row;
+    ensureLeadCols_(sh);
+    var by = String(sh.getRange(r, 20).getValue() || '');
+    tab_('Nhật ký', ['Thời gian', 'SĐT', 'Tên khách', 'Người phụ trách', 'Loại', 'Nội dung', 'Kết quả', 'Hẹn tiếp theo']).appendRow(
+      [new Date(), "'" + phoneStr_(sh.getRange(r, 4).getValue()), str_(sh.getRange(r, 3).getValue(), 120), by, type, content, str_(f.result, 300), ymd_(f.next)]);
+    if (f.next !== undefined) sh.getRange(r, 23).setValue(ymd_(f.next) || '');
+    return { ok: true };
+  });
+}
+
+function crmLogs(k, phone) {
+  requireUi_(k);
+  var want = normPhone_(phone), out = { logs: [], moves: [] };
+  var read = function (name, cols, map) {
+    var sh = ss_().getSheetByName(name);
+    if (!sh) return [];
+    var n = sh.getLastRow();
+    if (n < 2) return [];
+    var rows = sh.getRange(2, 1, n - 1, cols).getValues(), res = [];
+    for (var i = rows.length - 1; i >= 0 && res.length < 100; i--) if (normPhone_(phoneStr_(String(rows[i][1]).replace(/^'/, ''))) === want) res.push(map(rows[i]));
+    return res;
+  };
+  out.logs = read('Nhật ký', 8, function (r) { return { at: iso_(r[0]), by: String(r[3]), type: String(r[4]), content: String(r[5]), result: String(r[6]), next: ymd_(r[7]) }; });
+  out.moves = read('Chuyển giao', 7, function (r) { return { at: iso_(r[0]), from: String(r[3]), to: String(r[4]), status: String(r[5]), reason: String(r[6]) }; });
+  return out;
 }
 
 function crmClickDone(k, row, vid, done, note) {
