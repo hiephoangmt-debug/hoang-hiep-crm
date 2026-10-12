@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><title>Hướng dẫn cài đặt và cập nhật CRM riêng (bản server)</title>
+<style>
+@page { size: A4; margin: 14mm 14mm 16mm; }
+*{box-sizing:border-box}
+body{font:11.5pt/1.5 "Noto Sans","DejaVu Sans",Arial,sans-serif;color:#1f2430;margin:0}
+h1{font-size:21pt;margin:0 0 4px;color:#b0172d}
+.sub{color:#5b6270;margin:0 0 14px}
+h2{font-size:14pt;margin:20px 0 8px;padding:6px 10px;background:#b0172d;color:#fff;border-radius:6px;break-after:avoid}
+h3{font-size:12pt;margin:14px 0 4px;color:#b0172d;break-after:avoid}
+p{margin:4px 0}
+ol,ul{margin:4px 0 4px 20px;padding:0} li{margin:3px 0}
+table{width:100%;border-collapse:collapse;margin:8px 0;font-size:10.5pt;break-inside:avoid}
+th,td{border:1px solid #cfd3da;padding:6px 8px;vertical-align:top;text-align:left}
+th{background:#f1f2f5}
+.box{border:1.5px solid #b0172d;border-radius:8px;padding:8px 12px;margin:10px 0;background:#fff6f7;break-inside:avoid}
+.ok{border-color:#1c7c3a;background:#f2fbf5}
+.step{display:flex;gap:10px;margin:7px 0;break-inside:avoid}
+.n{flex:none;width:26px;height:26px;border-radius:50%;background:#b0172d;color:#fff;text-align:center;font-weight:700;line-height:26px}
+.k{background:#eee;border:1px solid #ccc;border-radius:4px;padding:0 5px;font-size:10pt}
+.red{color:#b0172d;font-weight:700}
+.mock{display:flex;gap:10px;margin:8px 0;break-inside:avoid}
+.ph{flex:1;border:2px solid #444;border-radius:12px;padding:8px;background:#fafafa;font-size:9pt;min-height:150px}
+.ph b{display:block;text-align:center;margin-bottom:5px}
+.ph .row{border:1px solid #ddd;background:#fff;border-radius:4px;padding:3px 5px;margin:3px 0}
+.ph .ring{border:2px solid #e11;border-radius:4px;padding:2px 5px;margin:3px 0;background:#fff}
+.foot{margin-top:16px;color:#5b6270;font-size:9.5pt}
+pre{background:#1f2430;color:#e8eaf0;border-radius:6px;padding:8px 10px;font:9.5pt/1.45 "DejaVu Sans Mono",Consolas,monospace;white-space:pre-wrap;word-break:break-all;margin:6px 0;break-inside:avoid}
+code{background:#eee;border-radius:3px;padding:0 4px;font:10pt "DejaVu Sans Mono",monospace}
+</style></head><body>
+<h1>Hướng dẫn cài đặt và cập nhật CRM riêng (bản server)</h1>
+<p class="sub">CRM quản lý khách đổ về từ các website của bạn, chạy trên máy chủ (VPS) riêng: biết web nào đổ về, khách bấm Zalo hay gọi chưa, mình đã liên hệ chưa, hiệu quả chiến dịch quảng cáo. <b>Không liên quan</b> đến CRM Báo cáo Marketing. Cài lần đầu khoảng 15 phút, cập nhật khoảng 2 phút.</p>
+
+<div class="box"><b>Cần nhớ 3 điều.</b><br>
+1. Cài và cập nhật đều chỉ bằng <b>một lệnh duy nhất</b> dán vào VPS. Lệnh tự cài Node, tải mã, chạy kiểm thử, tạo dịch vụ chạy nền và HTTPS.<br>
+2. Dữ liệu nằm ở <b>/var/lib/crm/crm.db</b> trên VPS. Cập nhật không làm mất dữ liệu. Mỗi đêm lúc 3 giờ có một bản sao lưu tự động.<br>
+3. Landing page chỉ cần dán <b>một đoạn &lt;script&gt;</b> lấy từ tab "Website &amp; mã nhúng" của CRM.</div>
+
+<h2>Phần 1. Chuẩn bị</h2>
+<table>
+<tr><th>Cần có</th><th>Chi tiết</th></tr>
+<tr><td>VPS</td><td>Hệ điều hành <b>Ubuntu 24.04</b> (hoặc 22.04), gói rẻ nhất 1 CPU / 1GB RAM là đủ. Mua xong bạn nhận <b>địa chỉ IP</b> và <b>mật khẩu root</b>.</td></tr>
+<tr><td>Tên miền cho CRM</td><td>Ví dụ <b>crm.tenmiencuaban.com</b>. Vào trang quản lý tên miền, mục DNS, thêm bản ghi <b>A</b>: tên <b>crm</b>, giá trị là IP của VPS. Đợi 5 đến 30 phút, kiểm tra bằng <code>ping crm.tenmiencuaban.com</code> thấy đúng IP là được. Có tên miền và HTTPS thì landing chạy HTTPS mới gửi được dữ liệu về.</td></tr>
+<tr><td>Kho mã</td><td>Lệnh cài tải mã từ GitHub <b>hiephoangmt-debug/hoang-hiep-crm</b>. Kho phải để <b>công khai (public)</b> thì lệnh mới tải được.</td></tr>
+</table>
+
+<h2>Phần 2. Cài lần đầu</h2>
+<div class="step"><div class="n">1</div><div><b>Vào VPS.</b> Windows: mở PowerShell. Mac: mở Terminal. Gõ (thay <b>IP_VPS</b> bằng IP thật), trả lời <b>yes</b>, rồi nhập mật khẩu root (gõ mật khẩu sẽ không hiện ký tự, bình thường):
+<pre>ssh root@IP_VPS</pre></div></div>
+<div class="step"><div class="n">2</div><div><b>Dán lệnh cài</b> (một dòng duy nhất):
+<pre>bash &lt;(curl -fsSL https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/claude/modest-rubin-wul27c/install.sh)</pre></div></div>
+<div class="step"><div class="n">3</div><div><b>Trả lời 2 câu hỏi:</b><br>
+&bull; <b>Tên miền</b>: gõ <b>crm.tenmiencuaban.com</b>. Bỏ trống thì CRM chạy bằng <b>http://IP:3000</b>, không có HTTPS, chỉ để thử.<br>
+&bull; <b>Mật khẩu đăng nhập CRM</b>: tự đặt, hoặc bỏ trống để hệ thống tự tạo và in ra.</div></div>
+<div class="step"><div class="n">4</div><div><b>Đợi script chạy.</b> Nó cài Node 22, tải mã, chạy kiểm thử, tạo dịch vụ chạy nền, cài Caddy (HTTPS tự động), mở firewall và đặt lịch sao lưu. Cuối cùng hiện <b>XONG</b> kèm địa chỉ và mật khẩu. <b>Lưu lại mật khẩu.</b> Nếu báo kiểm thử không đạt hoặc lỗi, chụp màn hình gửi mình.</div></div>
+<div class="step"><div class="n">5</div><div><b>Đăng nhập.</b> Mở địa chỉ vừa in ra trên trình duyệt, nhập mật khẩu.</div></div>
+<div class="step"><div class="n">6</div><div><b>Thêm website.</b> Vào tab <b>Website &amp; mã nhúng</b>, nhập tên và tên miền của landing, bấm <b>Thêm</b>, copy đoạn <b>&lt;script ...&gt;</b> hiện ra. Mỗi website một đoạn riêng.</div></div>
+<div class="step"><div class="n">7</div><div><b>Dán vào landing.</b> Dán đoạn đó vào phần <b>Head</b> (LadiPage: Cài đặt → Mã tuỳ chỉnh → Head), lưu và <b>xuất bản lại</b>. WordPress: dán vào header bằng plugin chèn mã hoặc trước thẻ &lt;/head&gt;.</div></div>
+<div class="step"><div class="n">8</div><div><b>Thử.</b> Mở landing bằng điện thoại, bấm Zalo, bấm gọi, điền form bằng số của bạn. Trong CRM: tab <b>Tổng quan</b> tăng số liệu, tab <b>Khách hàng</b> có khách mới nhãn đỏ <b>Chưa liên hệ</b>. Bấm nút <b>Zalo</b> hoặc <b>Gọi</b> trên dòng khách thì nhãn đổi thành đã liên hệ.</div></div>
+
+<div class="box ok"><b>Dùng hằng ngày.</b> Tab <b>Khách hàng</b>: khách chưa ai liên hệ nằm trên cùng. Tab <b>Chiến dịch ads</b>: khai báo chiến dịch với mã <b>utm_campaign</b> (nút <b>Link</b> tạo sẵn đoạn gắn vào link quảng cáo), nhập chi phí bằng nút <b>+ Chi phí</b> hoặc dán CSV, xem giá mỗi khách và ROAS. Điền <b>Giá trị chốt</b> trong hồ sơ khách khi chốt để tính doanh thu.</div>
+
+<h2>Phần 3. Cập nhật khi có bản mới</h2>
+<p>Làm khi mình báo có bản mới. <b>Dữ liệu giữ nguyên</b>, mật khẩu, tên miền và cấu hình giữ nguyên, landing <b>không phải dán lại</b> mã nhúng.</p>
+<div class="step"><div class="n">1</div><div>Vào VPS: <pre>ssh root@IP_VPS</pre></div></div>
+<div class="step"><div class="n">2</div><div>Chạy lại <b>đúng lệnh cài</b> ở Phần 2, Bước 2. Script nhận ra đã cài rồi nên <b>không hỏi gì</b>, chỉ tải mã mới, chạy kiểm thử và khởi động lại dịch vụ.</div></div>
+<div class="step"><div class="n">3</div><div>Thấy chữ <b>XONG</b> là hoàn tất. Mở CRM, nhấn <span class="k">Ctrl+F5</span> để tải lại giao diện mới.</div></div>
+<div class="box"><b>Lưu ý.</b> Mỗi lần cập nhật, script ghi đè các file mã trong <code>/opt/crm</code> bằng bản mới nhất trên GitHub. Đừng sửa tay file trong thư mục đó. Dữ liệu ở <code>/var/lib/crm</code> không bị đụng tới. Nếu mình có đổi nhánh GitHub, mình sẽ gửi lệnh mới.</div>
+
+<h2>Phần 4. Sao lưu, khôi phục và việc thường gặp</h2>
+<table>
+<tr><th>Việc cần làm</th><th>Lệnh hoặc cách làm trên VPS</th></tr>
+<tr><td>Sao lưu tự động</td><td>Mỗi đêm 3 giờ, lưu 7 bản xoay vòng ở <code>/var/lib/crm/backup-1.db</code> đến <code>backup-7.db</code>. Thỉnh thoảng nên tải một bản về máy bạn (WinSCP, FileZilla hoặc lệnh <code>scp</code>).</td></tr>
+<tr><td>Sao lưu thủ công ngay</td><td><pre>sqlite3 /var/lib/crm/crm.db ".backup /root/crm-sao-luu.db"</pre></td></tr>
+<tr><td>Khôi phục từ bản sao lưu</td><td><pre>systemctl stop crm
+cp /root/crm-sao-luu.db /var/lib/crm/crm.db
+chown www-data:www-data /var/lib/crm/crm.db
+systemctl start crm</pre></td></tr>
+<tr><td>Quên mật khẩu</td><td><pre>grep ADMIN_PASSWORD /etc/crm.env</pre></td></tr>
+<tr><td>Đổi mật khẩu</td><td>Sửa dòng <code>ADMIN_PASSWORD=</code> trong <code>/etc/crm.env</code> (lệnh <code>nano /etc/crm.env</code>, lưu bằng Ctrl+O, thoát Ctrl+X), rồi <code>systemctl restart crm</code>.</td></tr>
+<tr><td>Đổi tên miền</td><td>Trỏ DNS tên miền mới về IP VPS, sửa tên miền trong <code>/etc/caddy/Caddyfile</code>, chạy <code>systemctl reload caddy</code>. Các đoạn nhúng trên landing phải <b>dán lại</b> theo địa chỉ mới.</td></tr>
+<tr><td>Xem trạng thái, xem lỗi</td><td><pre>systemctl status crm
+journalctl -u crm -n 50</pre></td></tr>
+</table>
+
+<h2>Phần 5. Gặp lỗi</h2>
+<table>
+<tr><th>Hiện tượng</th><th>Cách xử lý</th></tr>
+<tr><td>Lệnh cài báo lỗi tải file (404 hoặc không tải được)</td><td>Kho GitHub đang riêng tư hoặc sai tên nhánh. Đặt kho ở chế độ công khai, hoặc báo mình.</td></tr>
+<tr><td>Không vào được trang</td><td>Kiểm tra DNS đã trỏ đúng IP (<code>ping tên-miền</code>), chạy <code>systemctl status caddy</code> và <code>systemctl status crm</code>, đảm bảo cổng 80 và 443 mở.</td></tr>
+<tr><td>Landing bấm xong mà CRM không có số liệu</td><td>Mã nhúng chưa dán đúng hoặc chưa xuất bản lại landing. Trang landing chạy HTTPS thì CRM cũng phải có HTTPS (tên miền thật), địa chỉ http không nhận được.</td></tr>
+<tr><td>Form riêng không tạo khách</td><td>Cấu hình webhook (gửi dữ liệu) của form về <code>https://tên-miền-crm/api/lead?key=MÃ_WEBSITE</code>, các trường name, phone, email, message. Mã website xem ở tab Website &amp; mã nhúng.</td></tr>
+<tr><td>Cập nhật xong vẫn thấy giao diện cũ</td><td>Nhấn Ctrl+F5, hoặc mở tab ẩn danh.</td></tr>
+<tr><td>Vẫn không được</td><td>Gõ <code>journalctl -u crm -n 50</code>, chụp kết quả gửi mình.</td></tr>
+</table>
+
+<p class="foot"><b>Giới hạn:</b> CRM chưa có nhiều người dùng với phân quyền riêng, chỉ một mật khẩu quản trị. Hãy đặt mật khẩu mạnh và không chia sẻ rộng.<br><br>
+Địa chỉ CRM: ______________________________ &nbsp; IP VPS: ______________________ &nbsp; Lần cập nhật gần nhất: ____ / ____ / ________</p>
+</body></html>
