@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.8** + plugin Hoàng Hiệp CRM **2.20.26**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.9** + plugin Hoàng Hiệp CRM **2.20.27**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,15 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.27, giao diện 2.15.9: mục "Biệt thự sở hữu lâu dài"
+
+- Menu **Dự án → Thấp tầng** có thêm **Biệt thự sở hữu lâu dài** (đứng đầu, trước Biệt thự nghỉ dưỡng, Đất nền, Nhà phố – Shophouse). Menu đã tạo trên web tự có mục này, không cần sửa tay.
+- Tự chuyển một lần:
+  - Biệt thự khu đô thị, sổ lâu dài → chỉ ở mục mới: Sunneva Island, Newtown Legend, Euro Village 2, KĐT sinh thái Hòa Xuân, Sun Riverpolis, Đất nền Đầm Sen, Vinhomes Hải Vân Bay Khu 1 – 3, Casamia Calm.
+  - Biệt thự resort có sổ lâu dài → ở cả hai mục: Vinpearl Nam Hội An, Vinpearl Resort & Spa Đà Nẵng, Vinpearl Luxury Đà Nẵng, Hoiana Shores, Vinhomes Hải Vân Bay.
+  - Sau lần chuyển này bạn tự gắn lại loại cho dự án nào thì web giữ nguyên.
+- Trang /en/, /ko/: "Freehold villas" / "영구 소유 빌라". Chat lọc biệt thự gồm cả 2 loại.
 
 ## Có gì mới – plugin 2.20.26: nhắc nhập dự án mới
 

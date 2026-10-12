@@ -44,7 +44,7 @@ function hh_lang_strings( $code ) {
 			'view_vi'       => 'Project page (Vietnamese)',
 			'view_tr'       => 'Read in English',
 			'all_projects'  => 'All projects (Vietnamese)',
-			'types'         => array( 'can-ho-so-huu-lau-dai' => 'Condominium', 'can-ho-dich-vu' => 'Serviced apartment (50-year)', 'biet-thu' => 'Resort villas', 'shophouse' => 'Townhouses & shophouses', 'dat-nen' => 'Land plots', 'thap-tang' => 'Low-rise', 'cao-tang' => 'High-rise', 'to-hop' => 'Mixed-use township' ),
+			'types'         => array( 'can-ho-so-huu-lau-dai' => 'Condominium', 'can-ho-dich-vu' => 'Serviced apartment (50-year)', 'biet-thu-lau-dai' => 'Freehold villas', 'biet-thu' => 'Resort villas', 'shophouse' => 'Townhouses & shophouses', 'dat-nen' => 'Land plots', 'thap-tang' => 'Low-rise', 'cao-tang' => 'High-rise', 'to-hop' => 'Mixed-use township' ),
 			'svc_h2'        => 'How Hiep helps you',
 			'svc'           => array(
 				array( 'New projects (off-plan)', 'Primary price lists, sales policies, payment schedules and early-payment discounts from developers – compared side by side.' ),
@@ -126,7 +126,7 @@ function hh_lang_strings( $code ) {
 			'view_vi'       => '프로젝트 페이지(베트남어)',
 			'view_tr'       => '한국어로 보기',
 			'all_projects'  => '전체 프로젝트(베트남어)',
-			'types'         => array( 'can-ho-so-huu-lau-dai' => '아파트', 'can-ho-dich-vu' => '서비스 아파트(50년)', 'biet-thu' => '리조트 빌라', 'shophouse' => '타운하우스·샵하우스', 'dat-nen' => '토지(필지)', 'thap-tang' => '저층 주거', 'cao-tang' => '고층', 'to-hop' => '복합 단지' ),
+			'types'         => array( 'can-ho-so-huu-lau-dai' => '아파트', 'can-ho-dich-vu' => '서비스 아파트(50년)', 'biet-thu-lau-dai' => '영구 소유 빌라', 'biet-thu' => '리조트 빌라', 'shophouse' => '타운하우스·샵하우스', 'dat-nen' => '토지(필지)', 'thap-tang' => '저층 주거', 'cao-tang' => '고층', 'to-hop' => '복합 단지' ),
 			'svc_h2'        => '히엡이 도와드리는 일',
 			'svc'           => array(
 				array( '신규 분양', '개발사 분양가표, 분양 정책, 분할 납부 일정, 조기 납부 할인을 한눈에 비교해 드립니다.' ),

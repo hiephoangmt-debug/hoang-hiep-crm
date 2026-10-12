@@ -487,6 +487,7 @@ function hh_pillar_heading( $term = null ) {
 		'can-ho-so-huu-lau-dai' => 'Căn hộ sở hữu lâu dài Đà Nẵng ' . $year,
 		'can-ho-dich-vu'        => 'Căn hộ dịch vụ, condotel Đà Nẵng ' . $year,
 		'thap-tang'             => 'Biệt thự, nhà phố, đất nền Đà Nẵng ' . $year,
+		'biet-thu-lau-dai'      => 'Biệt thự sở hữu lâu dài Đà Nẵng ' . $year,
 		'biet-thu'              => 'Biệt thự nghỉ dưỡng Đà Nẵng – Hội An ' . $year,
 		'dat-nen'               => 'Dự án đất nền Đà Nẵng ' . $year,
 		'shophouse'             => 'Nhà phố, shophouse Đà Nẵng ' . $year,

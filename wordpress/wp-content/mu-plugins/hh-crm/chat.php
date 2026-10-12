@@ -566,7 +566,7 @@ function hh_chat_options( $need, $budget = 0, $exclude = 0, $rooms = '' ) {
 		}
 		return $rows;
 	}
-	$tax = array( 'can-ho' => array( 'can-ho-so-huu-lau-dai', 'can-ho-dich-vu' ), 'biet-thu' => array( 'biet-thu' ), 'dat-nen' => array( 'dat-nen' ), 'shophouse' => array( 'shophouse' ) )[ $need ] ?? array();
+	$tax = array( 'can-ho' => array( 'can-ho-so-huu-lau-dai', 'can-ho-dich-vu' ), 'biet-thu' => array( 'biet-thu', 'biet-thu-lau-dai' ), 'dat-nen' => array( 'dat-nen' ), 'shophouse' => array( 'shophouse' ) )[ $need ] ?? array();
 	$args = array( 'post_type' => 'du-an', 'numberposts' => 40, 'post__not_in' => array( (int) $exclude ), 'meta_key' => 'hh_p_featured', 'orderby' => array( 'meta_value' => 'DESC', 'date' => 'DESC' ) );
 	if ( $tax ) {
 		$args['tax_query'] = array( array( 'taxonomy' => 'loai-du-an', 'field' => 'slug', 'terms' => $tax ) );

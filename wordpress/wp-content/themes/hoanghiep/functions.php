@@ -80,6 +80,7 @@ function hoanghiep_fallback_menu( $args = array() ) {
 				array( 'Căn hộ dịch vụ (50 năm)', $type_link( 'can-ho-dich-vu', $projects ) ),
 			) ),
 			array( 'Thấp tầng', $type_link( 'thap-tang', $projects ), array(
+				array( 'Biệt thự sở hữu lâu dài', $type_link( 'biet-thu-lau-dai', $projects ) ),
 				array( 'Biệt thự nghỉ dưỡng', $type_link( 'biet-thu', $projects ) ),
 				array( 'Đất nền', $type_link( 'dat-nen', $projects ) ),
 				array( 'Nhà phố – Shophouse', $type_link( 'shophouse', $projects ) ),
@@ -202,6 +203,49 @@ function hoanghiep_old_theme_plugins_notice() {
  * để menu đã tạo sẵn trên web cũ cũng có, không cần sửa tay.
  */
 add_filter( 'wp_nav_menu_objects', 'hoanghiep_market_submenu', 10, 2 );
+add_filter( 'wp_nav_menu_objects', 'hoanghiep_villa_submenu', 11, 2 );
+
+/**
+ * Menu chính đã tạo trên web: tự chèn "Biệt thự sở hữu lâu dài" vào mục Thấp tầng (trước "Biệt thự nghỉ dưỡng")
+ * nếu menu chưa có link này – không cần sửa menu tay.
+ */
+function hoanghiep_villa_submenu( $items, $args ) {
+	$term = get_term_by( 'slug', 'biet-thu-lau-dai', 'loai-du-an' );
+	$low  = get_term_by( 'slug', 'thap-tang', 'loai-du-an' );
+	if ( 'primary' !== ( $args->theme_location ?? '' ) || ! $term || ! $low ) {
+		return $items;
+	}
+	$url    = untrailingslashit( get_term_link( $term ) );
+	$parent = null;
+	foreach ( $items as $item ) {
+		if ( untrailingslashit( $item->url ) === $url ) {
+			return $items; // Đã có trong menu.
+		}
+		if ( untrailingslashit( $item->url ) === untrailingslashit( get_term_link( $low ) ) ) {
+			$parent = $item;
+		}
+	}
+	if ( ! $parent ) {
+		return $items;
+	}
+	$child                   = clone $parent;
+	$child->ID               = -2001;
+	$child->db_id            = $child->ID;
+	$child->menu_item_parent = (string) $parent->ID;
+	$child->title            = $term->name;
+	$child->url              = get_term_link( $term );
+	$child->classes          = array( 'menu-item' );
+	$child->current          = is_tax( 'loai-du-an', 'biet-thu-lau-dai' );
+	// Chèn ngay sau mục Thấp tầng (đứng đầu nhóm con).
+	$out = array();
+	foreach ( $items as $item ) {
+		$out[] = $item;
+		if ( $item === $parent ) {
+			$out[] = $child;
+		}
+	}
+	return $out;
+}
 function hoanghiep_market_submenu( $items, $args ) {
 	if ( 'primary' !== ( $args->theme_location ?? '' ) || ! function_exists( 'hh_deal_url' ) || ! function_exists( 'hh_market_pages' ) ) {
 		return $items;

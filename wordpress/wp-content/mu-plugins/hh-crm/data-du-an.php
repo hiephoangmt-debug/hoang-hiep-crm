@@ -745,6 +745,9 @@ function hh_import_projects() {
 		}
 	}
 	delete_transient( 'hh_import_missing_' . HH_CRM_VERSION );
+	if ( function_exists( 'hh_villa_split' ) ) {
+		hh_villa_split();
+	}
 	$news     = function_exists( 'hh_import_news' ) ? hh_import_news() : 0;
 	$listings = function_exists( 'hh_import_listings' ) ? hh_import_listings() : 0;
 	return array( $created, $updated, $news, $listings );

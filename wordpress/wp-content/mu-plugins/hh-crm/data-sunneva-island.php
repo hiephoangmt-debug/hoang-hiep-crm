@@ -12,7 +12,7 @@ function hh_dataset_sunneva_island( $projects ) {
 	$projects[] = array(
 		'slug'    => 'sunneva-island',
 		'title'   => 'Sunneva Island Đà Nẵng',
-		'type'    => array( 'biet-thu', 'shophouse' ),
+		'type'    => array( 'biet-thu-lau-dai', 'shophouse' ),
 		'area'    => 'ngu-hanh-son',
 		'hot'     => true,
 		'excerpt' => 'Khu biệt thự đảo Đồng Nò của Sun Group (tên văn bản: Khu đô thị ven sông Hòa Quý – Đồng Nò, CTCP Địa Cầu): khoảng 26 ha, khoảng 390 biệt thự và townhouse kiến trúc Indochine, bốn mặt giáp sông; người nước ngoài được sở hữu tối đa 250 biệt thự.',

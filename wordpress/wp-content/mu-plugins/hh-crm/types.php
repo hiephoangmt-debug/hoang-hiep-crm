@@ -120,6 +120,7 @@ function hh_default_terms() {
 				'can-ho-dich-vu'  => 'Căn hộ dịch vụ (50 năm)',
 			) ),
 			'thap-tang' => array( 'Thấp tầng', array(
+				'biet-thu-lau-dai' => 'Biệt thự sở hữu lâu dài',
 				'biet-thu'  => 'Biệt thự nghỉ dưỡng',
 				'dat-nen'   => 'Đất nền',
 				'shophouse' => 'Nhà phố – Shophouse',
@@ -156,7 +157,7 @@ function hh_default_terms() {
 
 add_action( 'init', 'hh_seed_terms', 20 );
 function hh_seed_terms() {
-	if ( wp_installing() || '7' === get_option( 'hh_terms_seeded' ) ) {
+	if ( wp_installing() || '8' === get_option( 'hh_terms_seeded' ) ) {
 		return;
 	}
 	// Đổi tên cũ "Shophouse" → "Nhà phố – Shophouse".
@@ -187,8 +188,44 @@ function hh_seed_terms() {
 			}
 		}
 	}
-	update_option( 'hh_terms_seeded', '7' );
+	update_option( 'hh_terms_seeded', '8' );
 }
+
+/**
+ * Biệt thự trên đất ở đô thị, sổ lâu dài (khu đô thị, không phải resort) → "Biệt thự sở hữu lâu dài", bỏ khỏi "Biệt thự nghỉ dưỡng".
+ * Biệt thự resort có sổ lâu dài → nằm ở cả hai mục. Chạy một lần khi cài và sau mỗi lần nhập dữ liệu (dự án mới tạo).
+ */
+function hh_villa_split() {
+	$urban  = array( 'sunneva-island', 'newtown-legend', 'euro-village-2', 'kdt-sinh-thai-hoa-xuan', 'dat-nen-dam-sen-sun-riverpolis', 'sun-riverpolis', 'vinhomes-hai-van-bay-bach-van', 'vinhomes-hai-van-bay-vinh-may', 'vinhomes-hai-van-bay-dao-ngoc', 'casamia-calm-hoi-an' );
+	$resort = array( 'vinhomes-hai-van-bay', 'vinpearl-nam-hoi-an-villa', 'vinpearl-resort-spa-da-nang-villa', 'vinpearl-luxury-da-nang-villa', 'hoiana-shores-golf-villas' );
+	$long   = get_term_by( 'slug', 'biet-thu-lau-dai', 'loai-du-an' );
+	$resortt = get_term_by( 'slug', 'biet-thu', 'loai-du-an' );
+	if ( ! $long ) {
+		return;
+	}
+	$done = (array) get_option( 'hh_villa_split', array() );
+	foreach ( array_merge( $urban, $resort ) as $slug ) {
+		$post = get_page_by_path( $slug, OBJECT, 'du-an' );
+		if ( ! $post || in_array( $slug, $done, true ) ) {
+			continue;
+		}
+		wp_set_object_terms( $post->ID, (int) $long->term_id, 'loai-du-an', true );
+		if ( $resortt && in_array( $slug, $urban, true ) ) {
+			wp_remove_object_terms( $post->ID, (int) $resortt->term_id, 'loai-du-an' );
+		}
+		$done[] = $slug; // Mỗi dự án chỉ chuyển 1 lần – sau đó bạn tự gắn lại thế nào cũng giữ nguyên.
+	}
+	update_option( 'hh_villa_split', $done, false );
+}
+add_action(
+	'init',
+	static function () {
+		if ( '8' === get_option( 'hh_terms_seeded' ) && ! get_option( 'hh_villa_split' ) ) {
+			hh_villa_split();
+		}
+	},
+	30
+);
 
 /** Most specific "Loại dự án" of a project (child term preferred). */
 function hh_project_type( $post_id = null ) {

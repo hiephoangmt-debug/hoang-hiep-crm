@@ -11,6 +11,8 @@ $base     = $term ? get_term_link( $term ) : get_post_type_archive_link( 'du-an'
 $title    = hh_pillar_heading( $term );
 $group    = $term ? ( $term->parent ? get_term( $term->parent, 'loai-du-an' ) : $term ) : null;
 $subtypes = $group ? get_terms( array( 'taxonomy' => 'loai-du-an', 'hide_empty' => false, 'parent' => $group->term_id, 'orderby' => 'term_id' ) ) : array();
+// "Biệt thự sở hữu lâu dài" (thêm sau) đứng đầu nhóm Thấp tầng như trên menu.
+usort( $subtypes, static fn( $a, $b ) => ( 'biet-thu-lau-dai' === $b->slug ) <=> ( 'biet-thu-lau-dai' === $a->slug ) ?: $a->term_id <=> $b->term_id );
 ?>
 <div class="page-head">
 	<div class="container">

@@ -185,7 +185,7 @@ function hh_project_products( $post_id = null ) {
 		'shop'      => array( 'Shop khối đế', hh_special_columns( 'shop' ), $has( array( 'shop khối đế', 'khối đế' ) ), array( 'shop', 'khối đế' ) ),
 		'penthouse' => array( 'Penthouse', hh_special_columns( 'penthouse' ), $has( 'penthouse' ), array( 'penthouse' ) ),
 		'duplex'    => array( 'Duplex', hh_special_columns( 'duplex' ), $has( 'duplex' ), array( 'duplex' ) ),
-		'villa'     => array( 'Biệt thự / Villa', hh_special_columns( 'villa' ), in_array( 'biet-thu', $terms, true ) || $has_low( array( 'biệt thự', 'villa' ) ), array( 'biệt thự', 'villa' ) ),
+		'villa'     => array( 'Biệt thự / Villa', hh_special_columns( 'villa' ), array_intersect( $terms, array( 'biet-thu', 'biet-thu-lau-dai' ) ) || $has_low( array( 'biệt thự', 'villa' ) ), array( 'biệt thự', 'villa' ) ),
 		'nha-pho'   => array( 'Nhà phố – Shophouse', hh_special_columns( 'nha-pho' ), in_array( 'shophouse', $terms, true ) || $has_low( array( 'nhà phố', 'shophouse', 'liền kề' ) ), array( 'nhà phố', 'shophouse', 'liền kề' ) ),
 		'dat-nen'   => array( 'Block đất nền', hh_special_columns( 'dat-nen' ), in_array( 'dat-nen', $terms, true ) || $has( 'đất nền' ), array( 'đất nền', 'lô đất' ) ),
 	);
