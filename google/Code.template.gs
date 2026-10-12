@@ -3,7 +3,7 @@
  * Dán toàn bộ file này vào Extensions > Apps Script của file "CRM Hoàng Hiệp", rồi Deploy > Web app.
  * File này được sinh từ google/Code.template.gs bằng `node google/build.mjs` – đừng sửa tay trong Code.gs.
  */
-var S_LEADS = 'Khách hàng', S_EVENTS = 'Hoạt động', S_SITES = 'Website';
+var S_LEADS = 'Khách hàng', S_EVENTS = 'Hoạt động', S_SITES = 'Website', S_CLICKS = 'Lượt bấm';
 var STATUS_NEW = 'Mới', STATUS_CONTACTED = 'Đã liên hệ';
 var TRACK_JS = /*__TRACK_JS__*/'';
 
@@ -84,7 +84,28 @@ function handleTrack_(b, site) {
   if (!type) return { error: 'type không hợp lệ' };
   var ch = ['zalo', 'phone', 'messenger', 'sms'].indexOf(b.channel) >= 0 ? b.channel : 'other';
   logEvent_(b, site, type, type === 'click' ? ch : '');
+  if (type === 'click') { try { logClick_(b, site, ch); } catch (e) { /* thiếu tab Lượt bấm: vẫn giữ sự kiện ở tab Hoạt động */ } }
   return { ok: true };
+}
+
+// Mỗi lượt bấm Zalo/Gọi/Messenger là một dòng ở tab "Lượt bấm": đỏ "CHƯA XỬ LÝ" cho tới khi khách để lại SĐT
+// (tự nhận ra qua mã người truy cập) hoặc bạn tick "Đã kiểm tra / liên hệ".
+function logClick_(b, site, ch) {
+  var lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try {
+    var sh = ss_().getSheetByName(S_CLICKS);
+    if (!sh) return;
+    var r = sh.getLastRow() + 1;
+    sh.getRange(r, 1, 1, 11).setValues([[
+      new Date(), str_(b.vid, 64), site.name, ch, str_(b.url, 300), str_(b.utm_source, 100), str_(b.utm_campaign, 150),
+      "=IF(COUNTIF('" + S_LEADS + "'!$I:$I,$B" + r + ")>0,\"Có\",\"Chưa\")",
+      false, '',
+      '=IF(AND($H' + r + '="Chưa",$I' + r + '<>TRUE),"CHƯA XỬ LÝ","")'
+    ]]);
+  } finally {
+    lock.releaseLock();
+  }
 }
 
 function handleLead_(b, site) {

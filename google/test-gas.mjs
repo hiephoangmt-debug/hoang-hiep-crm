@@ -26,6 +26,7 @@ const sheets = {
   'Khách hàng': new Sheet('Khách hàng', []),
   'Hoạt động': new Sheet('Hoạt động', []),
   'Website': new Sheet('Website', ['Tên', 'Domain', 'Mã']),
+  'Lượt bấm': new Sheet('Lượt bấm', []),
 };
 sheets.Website.appendRow(['Landing A', 'a.com', 'testkey12345']);
 const out = (o) => ({ setMimeType() { return { body: o }; } });
@@ -45,6 +46,10 @@ assert.equal(post({ key: 'testkey12345', action: 'track', type: 'pageview', vid:
 assert.equal(post({ key: 'testkey12345', action: 'track', type: 'click', channel: 'zalo', vid: 'v1' }).ok, true);
 assert.equal(sheets['Hoạt động'].rows.length, 3); // dòng tiêu đề + 2 sự kiện
 assert.equal(sheets['Hoạt động'].rows[2][4], 'zalo');
+// lượt bấm đi vào tab Lượt bấm kèm công thức cảnh báo; lượt xem thì không
+assert.equal(sheets['Lượt bấm'].rows.length, 2);
+const ck = sheets['Lượt bấm'].rows[1];
+assert.equal(ck[3], 'zalo'); assert.equal(ck[8], false); assert.match(ck[7], /COUNTIF\('Khách hàng'!\$I:\$I,\$B2\)/); assert.match(ck[10], /CHƯA XỬ LÝ/);
 
 // form: tạo khách mới, SĐT giữ số 0, tên bắt đầu bằng "=" bị vô hiệu hoá
 let r = post({ key: 'testkey12345', action: 'lead', vid: 'v1', name: '=IMPORTXML("x")', phone: '+84 912 345 678', utm_source: 'facebook', utm_campaign: 'sale', message: 'cần 2PN' });

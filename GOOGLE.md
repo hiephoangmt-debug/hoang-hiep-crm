@@ -16,6 +16,7 @@ Form dựng riêng không bắt được tự động: cấu hình webhook (POST
 
 ## Dùng hằng ngày
 - **Khách hàng**: dòng đỏ là khách chưa gọi, chưa nhắn. Bấm **Mở Zalo** / **Gọi** để liên hệ, rồi tick **Đã gọi** hoặc **Đã nhắn**: dòng hết đỏ, tự ghi giờ liên hệ và chuyển trạng thái. Cột **Lượt bấm Zalo / Gọi** cho biết khách đó đã bấm gì trước khi để lại số.
+- **Lượt bấm**: mỗi lượt khách bấm Zalo, gọi, Messenger là một dòng. Khách chưa để lại số mà chưa ai kiểm tra thì dòng **đỏ** ghi "CHƯA XỬ LÝ". Dòng hết đỏ khi khách để lại số sau đó (tự nhận ra) hoặc khi bạn tick **Đã kiểm tra / liên hệ**. Đối chiếu giờ bấm với tin nhắn Zalo, cuộc gọi nhỡ trên điện thoại.
 - **Tổng quan**: số khách chưa liên hệ, người truy cập, lượt bấm Zalo / Gọi / Messenger, theo từng website. Đổi **Số ngày gần đây** (ô B3) để xem kỳ khác.
 - **Chiến dịch** và **Chi phí**: khai báo chiến dịch với mã `utm_campaign`, gắn mã đó vào link quảng cáo (Facebook: `?utm_source=facebook&utm_medium=paid&utm_campaign=MÃ`; Google: `?utm_source=google&utm_medium=cpc&utm_campaign=MÃ`). Mỗi ngày dán chi phí vào tab Chi phí (copy từ báo cáo Facebook/Google). Tab Chiến dịch tự tính giá mỗi khách, doanh thu và ROAS. Doanh thu lấy từ cột **Giá trị chốt** của khách có trạng thái **Chốt**.
 
