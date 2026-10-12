@@ -411,6 +411,13 @@ function hh_cta_box( $args ) {
 
 /** Ưu đãi đầu trang dự án: lấy từ ô "Chính sách & ưu đãi", chưa nhập thì dùng các quyền lợi chung khi đăng ký. */
 function hh_project_offer( $post_id = null ) {
+	if ( ! hh_project_offer_lines( $post_id ) && function_exists( 'hh_project_is_land' ) && hh_project_is_land( $post_id ) ) {
+		return array(
+			'Bảng giá theo vị trí lô: mặt tiền, nội khu, lô góc',
+			'Danh sách lô còn trống kèm sơ đồ phân lô, hướng, lộ giới',
+			'Kiểm tra sổ đỏ từng lô và phương án vay ngân hàng',
+		);
+	}
 	return hh_project_offer_lines( $post_id ) ?: array(
 		'Bảng giá và chính sách chiết khấu của đợt mở bán hiện tại',
 		'Danh sách căn đẹp còn trống: tầng cao, căn góc, view đẹp',

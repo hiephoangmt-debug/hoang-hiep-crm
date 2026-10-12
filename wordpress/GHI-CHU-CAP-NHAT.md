@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.17** + plugin Hoàng Hiệp CRM **2.20.38**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.18** + plugin Hoàng Hiệp CRM **2.20.39**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.39, giao diện 2.15.18: 709 lô đất nền Võ Chí Công – Sun Group
+- Đổi tên trang thành **"709 lô đất nền Võ Chí Công – Sun Group"** (chỉ khi tên trên web vẫn là tên cũ – tên anh tự sửa giữ nguyên).
+- **12 ảnh thực tế anh chụp 10/2026** (đã bỏ thông tin vị trí GPS trong ảnh, bỏ ảnh có biển số xe rõ): ảnh mặt tiền làm ảnh đại diện nếu trang chưa có, 11 ảnh vào mục Tiến độ.
+- Bài giới thiệu, hiện trạng hạ tầng 10/2026, bảng giá rao theo vị trí (mặt tiền 79 – 90 triệu/m², nội khu 44 – 59 triệu/m²), chính sách theo tin rao, 5 câu hỏi thường gặp.
+- Trang **đất nền** không còn chữ dành cho căn hộ ("tầng cao, căn góc", "nhà mẫu", "hồ bơi, gym") – đổi thành lô, mốc lô, sơ đồ phân lô, sổ đỏ.
+- Cài: Nhập nhanh `cap-nhat-code.zip` → **Nhập dữ liệu Đà Nẵng → Nhập / cập nhật dữ liệu** → LiteSpeed Cache → Purge All.
 
 ## Có gì mới – plugin 2.20.38: FPT Plaza 3 – phối cảnh và mặt bằng tầng
 - **3 ảnh phối cảnh** (toàn cảnh từ trên cao làm ảnh đại diện nếu trang chưa có ảnh, mặt tiền, góc thấp) và **10 mặt bằng**: Tầng 1, 2, 4, 5 – 12A, 12B, 14 – 17, 18 – 24, 25, Hầm 1, Hầm 2 – mỗi tầng một tab, bấm để phóng to xem mã căn.

@@ -67,6 +67,14 @@ while ( have_posts() ) :
 		'tien-do'    => array( 'icon' => 'clock', 'title' => 'Nhận ảnh tiến độ mỗi tháng qua Zalo', 'text' => 'Theo dõi công trường mà không cần đến tận nơi – Hiệp gửi ảnh, video thi công mới nhất.', 'button' => 'Đăng ký nhận tiến độ', 'need' => 'Nhận bảng giá dự án', 'msg' => $msg( 'Gửi tôi ảnh tiến độ hằng tháng' ) ),
 		'hoi-dap'    => array( 'icon' => 'phone', 'title' => 'Chưa thấy câu trả lời bạn cần?', 'text' => 'Gọi hoặc nhắn Zalo cho Hiệp – trả lời ngay trong giờ làm việc ' . hoanghiep_opt( 'hh_hours' ) . '.', 'button' => 'Gửi câu hỏi', 'need' => 'Tư vấn đầu tư', 'msg' => $msg( 'Tôi cần hỏi thêm về' ) ),
 	);
+	// Đất nền (không có căn hộ, nhà xây sẵn): đổi chữ "căn, tầng cao, nhà mẫu, hồ bơi" sang "lô, mặt tiền, sổ đỏ".
+	if ( function_exists( 'hh_project_is_land' ) && hh_project_is_land( $id ) ) {
+		$ctas['vi-tri']['text']   = 'Hẹn lịch xem vị trí lô, mốc giới, hạ tầng đường – điện – nước thực tế vào thời gian bạn rảnh, kể cả cuối tuần.';
+		$ctas['tien-ich']         = array_merge( $ctas['tien-ich'], array( 'title' => 'Nhận ảnh, video thực tế khu đất', 'text' => 'Ảnh và video mới nhất: mặt đường, vỉa hè, cây xanh, mốc lô và các công trình xung quanh – để bạn đánh giá trước khi đi xem.' ) );
+		$ctas['mat-bang']         = array_merge( $ctas['mat-bang'], array( 'title' => $resale ? 'Bạn có lô ' . $title . ' cần bán?' : 'Lô đẹp thường hết sớm nhất', 'text' => $resale ? 'Ký gửi với Hiệp: định giá miễn phí, kiểm tra sổ, đăng tin và dẫn khách xem tận nơi.' : 'Lô mặt tiền, lô góc, gần công viên được giữ chỗ trước. Để lại số điện thoại để nhận danh sách lô còn trống kèm sơ đồ phân lô.' ) );
+		$ctas['san-pham']['text'] = 'Cho Hiệp biết diện tích, mặt đường, hướng và ngân sách – Hiệp lọc 3 – 5 lô phù hợp nhất kèm giá.';
+		$ctas['tien-do']          = array_merge( $ctas['tien-do'], array( 'title' => 'Nhận ảnh hạ tầng mỗi tháng qua Zalo', 'text' => 'Theo dõi tiến độ đường, vỉa hè, điện nước và công trình xung quanh mà không cần đến tận nơi.' ) );
+	}
 
 	$key_facts = array_filter(
 		array(

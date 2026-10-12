@@ -689,6 +689,11 @@ function hh_import_projects() {
 			update_post_meta( $id, '_hh_types_cleaned', '1' );
 		}
 
+		// Đổi tên dự án (chỉ khi tên trên web vẫn là tên cũ do web nhập – tên anh tự sửa giữ nguyên).
+		if ( ! empty( $p['fix_title'] ) && in_array( get_post_field( 'post_title', $id ), (array) $p['fix_title'], true ) ) {
+			wp_update_post( array( 'ID' => $id, 'post_title' => $p['title'] ) );
+		}
+
 		// Sửa mô tả ngắn cũ đã nhập sai (chỉ khi bạn chưa tự sửa).
 		if ( ! empty( $p['fix_excerpt'] ) && $p['fix_excerpt'] === get_post_field( 'post_excerpt', $id ) ) {
 			wp_update_post( array( 'ID' => $id, 'post_excerpt' => $p['excerpt'] ) );

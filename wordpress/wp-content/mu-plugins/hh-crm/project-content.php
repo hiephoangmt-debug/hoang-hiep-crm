@@ -340,6 +340,12 @@ function hh_project_news( $post_id = null, $limit = 6 ) {
  * Thị trường thứ cấp: mua bán, chuyển nhượng, cho thuê trong dự án
  * ---------------------------------------------------------------------- */
 
+/** Dự án chỉ bán đất nền (không có căn hộ, nhà phố, biệt thự xây sẵn) – để đổi chữ "căn, tầng" sang "lô". */
+function hh_project_is_land( $post_id = null ) {
+	$types = wp_get_post_terms( $post_id ?: get_the_ID(), 'loai-du-an', array( 'fields' => 'slugs' ) );
+	return ! is_wp_error( $types ) && array( 'dat-nen' ) === array_values( array_intersect( $types, array( 'dat-nen', 'can-ho-so-huu-lau-dai', 'can-ho-dich-vu', 'shophouse', 'biet-thu', 'biet-thu-lau-dai', 'to-hop' ) ) );
+}
+
 /** Dự án đã bán hết hoặc đã bàn giao: ưu tiên hiện chuyển nhượng & cho thuê. */
 function hh_project_is_resale( $post_id = null ) {
 	$post_id = $post_id ?: get_the_ID();
