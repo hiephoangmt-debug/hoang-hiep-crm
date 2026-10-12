@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.12** + plugin Hoàng Hiệp CRM **2.20.36**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.13** + plugin Hoàng Hiệp CRM **2.20.36**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.13: gọn hơn trên điện thoại
+- **Trang Tin tức:** chuyên mục chỉ hiện mục đang có bài; trên điện thoại xếp thành 1 hàng vuốt ngang (trước dồn 6 hàng, chiếm nửa màn hình). Vào chuyên mục nào thì nút đó tự cuộn vào giữa.
+- **Trang dự án – Kết nối:** trên điện thoại gom thành 1 khung, mỗi dòng "thời gian | điểm đến" (trước mỗi mục một thẻ lớn).
+- **Chân trang trên điện thoại:** Danh mục và Khu vực chia 2 cột cạnh nhau (trước xếp dọc dài).
+- Sửa lỗi nút chuyên mục bị tô đậm sau khi chạm trên điện thoại.
+- Cài: Nhập nhanh `cap-nhat-code.zip` → LiteSpeed Cache → Purge All.
 
 ## Có gì mới – plugin 2.20.36: Vịnh An Hòa City (mới) + cập nhật Nam Hội An City
 - **Vịnh An Hòa City** (trang mới, khu vực mới **Núi Thành**): khu đô thị sinh thái 99,6 ha ven vịnh An Hòa – sông Trường Giang, gần sân bay Chu Lai; đất nền 150 – 160 m² giá rao 2026 khoảng 8 – 11 triệu/m², bảng biệt thự Hoa Sứ, biệt thự Nhật Bản, nhà vườn Mỹ; mục sân bay Chu Lai mở rộng.

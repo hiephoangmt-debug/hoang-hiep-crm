@@ -6,7 +6,7 @@ get_header();
 
 $current_cat = is_category() ? get_queried_object() : null;
 $news_url    = get_option( 'page_for_posts' ) ? get_permalink( get_option( 'page_for_posts' ) ) : home_url( '/' );
-$cats        = array_filter( get_categories( array( 'hide_empty' => false, 'orderby' => 'term_id' ) ), fn( $c ) => 'uncategorized' !== $c->slug );
+$cats        = array_filter( get_categories( array( 'hide_empty' => true, 'orderby' => 'term_id' ) ), fn( $c ) => 'uncategorized' !== $c->slug );
 $title       = $current_cat ? $current_cat->name : 'Tin tức bất động sản Đà Nẵng';
 $paged       = max( 1, (int) get_query_var( 'paged' ) );
 
@@ -25,12 +25,13 @@ $rest  = 1 === $paged ? array_slice( $posts, 5 ) : $posts;
 			<p class="page-head__lead">Thị trường, tin dự án, kinh nghiệm mua bán và pháp lý nhà đất Đà Nẵng – cập nhật bởi <?php echo esc_html( hoanghiep_opt( 'hh_person_name' ) ); ?>.</p>
 		<?php endif; ?>
 		<?php if ( $cats ) : ?>
-			<nav class="deal-tabs" aria-label="Chuyên mục">
+			<nav class="deal-tabs deal-tabs--scroll" aria-label="Chuyên mục">
 				<a class="<?php echo $current_cat ? '' : 'is-active'; ?>" href="<?php echo esc_url( $news_url ); ?>">Tất cả</a>
 				<?php foreach ( $cats as $c ) : ?>
 					<a class="<?php echo $current_cat && $current_cat->term_id === $c->term_id ? 'is-active' : ''; ?>" href="<?php echo esc_url( get_category_link( $c ) ); ?>"><?php echo esc_html( $c->name ); ?></a>
 				<?php endforeach; ?>
 			</nav>
+			<script>(function(n,a){if(n&&a){n.scrollLeft=a.offsetLeft-n.offsetLeft-16;}})(document.querySelector('.deal-tabs--scroll'),document.querySelector('.deal-tabs--scroll .is-active'));</script>
 		<?php endif; ?>
 	</div>
 </div>
