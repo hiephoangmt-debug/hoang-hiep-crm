@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><title>Hướng dẫn cài đặt và cập nhật CRM Báo cáo Marketing</title>
+<style>
+@page { size: A4; margin: 14mm 14mm 16mm; }
+*{box-sizing:border-box}
+body{font:11.5pt/1.5 "Noto Sans","DejaVu Sans",Arial,sans-serif;color:#1f2430;margin:0}
+h1{font-size:21pt;margin:0 0 4px;color:#b0172d}
+.sub{color:#5b6270;margin:0 0 14px}
+h2{font-size:14pt;margin:20px 0 8px;padding:6px 10px;background:#b0172d;color:#fff;border-radius:6px;break-after:avoid}
+h3{font-size:12pt;margin:14px 0 4px;color:#b0172d;break-after:avoid}
+p{margin:4px 0}
+ol,ul{margin:4px 0 4px 20px;padding:0} li{margin:3px 0}
+table{width:100%;border-collapse:collapse;margin:8px 0;font-size:10.5pt;break-inside:avoid}
+th,td{border:1px solid #cfd3da;padding:6px 8px;vertical-align:top;text-align:left}
+th{background:#f1f2f5}
+.box{border:1.5px solid #b0172d;border-radius:8px;padding:8px 12px;margin:10px 0;background:#fff6f7;break-inside:avoid}
+.ok{border-color:#1c7c3a;background:#f2fbf5}
+.step{display:flex;gap:10px;margin:7px 0;break-inside:avoid}
+.n{flex:none;width:26px;height:26px;border-radius:50%;background:#b0172d;color:#fff;text-align:center;font-weight:700;line-height:26px}
+.k{background:#eee;border:1px solid #ccc;border-radius:4px;padding:0 5px;font-size:10pt}
+.red{color:#b0172d;font-weight:700}
+.mock{display:flex;gap:10px;margin:8px 0;break-inside:avoid}
+.ph{flex:1;border:2px solid #444;border-radius:12px;padding:8px;background:#fafafa;font-size:9pt;min-height:150px}
+.ph b{display:block;text-align:center;margin-bottom:5px}
+.ph .row{border:1px solid #ddd;background:#fff;border-radius:4px;padding:3px 5px;margin:3px 0}
+.ph .ring{border:2px solid #e11;border-radius:4px;padding:2px 5px;margin:3px 0;background:#fff}
+.foot{margin-top:16px;color:#5b6270;font-size:9.5pt}
+</style></head><body>
+<h1>Hướng dẫn cài đặt và cập nhật CRM Báo cáo Marketing</h1>
+<p class="sub">Dành cho người quản trị (người triển khai ứng dụng). Cài lần đầu mất khoảng 15 phút, mỗi lần cập nhật khoảng 5 phút. Không cần máy chủ.</p>
+
+<div class="box"><b>Cần nhớ 3 điều.</b><br>
+1. CRM chạy bằng <b>Google Apps Script</b> dưới tài khoản Google của người triển khai, nên dữ liệu và ảnh nằm trong Drive của tài khoản đó.<br>
+2. Ứng dụng gồm <b>5 file</b>. Cài và cập nhật đều phải dán <b>đủ cả 5 file</b>, không dán lẻ từng cái.<br>
+3. Giao diện tải mã từ GitHub qua jsDelivr, nên kho mã <b>hoang-hiep-crm phải để công khai (public)</b> và máy người dùng không chặn cdn.jsdelivr.net.</div>
+
+<h2>Phần 1. Chuẩn bị</h2>
+<ul>
+<li>Một tài khoản Google dùng lâu dài (nên là tài khoản của công ty, không dùng tài khoản cá nhân dễ mất).</li>
+<li>Mở thư mục các file ứng dụng trên GitHub:<br><b>github.com/hiephoangmt-debug/hoang-hiep-crm</b> → chọn nhánh <b>claude/exciting-gates-p773yp</b> → thư mục <b>apps-script</b>.</li>
+<li>Có sẵn: link PPTX mẫu báo cáo, thư mục Drive chứng từ, thư mục Drive lưu báo cáo, Google Sheet số liệu của từng dự án, danh sách nhân sự kèm Gmail.</li>
+</ul>
+
+<h3>5 file và tên phải đặt đúng</h3>
+<table>
+<tr><th>File trên GitHub</th><th>Tạo trong Apps Script</th><th>Tên đặt</th></tr>
+<tr><td>Code.gs</td><td>Có sẵn file mã (Tập lệnh)</td><td>Code.gs</td></tr>
+<tr><td>Crm.html</td><td>Dấu <b>+</b> → HTML</td><td><b>Crm</b></td></tr>
+<tr><td>BaoCaoWeb.html</td><td>Dấu <b>+</b> → HTML</td><td><b>BaoCaoWeb</b></td></tr>
+<tr><td>Index.html</td><td>Dấu <b>+</b> → HTML</td><td><b>Index</b></td></tr>
+<tr><td>HuongDan.html</td><td>Dấu <b>+</b> → HTML</td><td><b>HuongDan</b></td></tr>
+</table>
+<p>Tên đặt đúng chữ hoa, chữ thường, <b>không gõ đuôi .html</b>. Sai tên là trang không mở được.</p>
+
+<h3>Cách lấy nội dung một file từ GitHub</h3>
+<ol><li>Bấm vào tên file trên GitHub.</li><li>Bấm nút <b>Copy raw file</b> (biểu tượng hai tờ giấy ở góc phải khung mã).</li><li>Sang Apps Script, bấm vào ô mã, <span class="k">Ctrl+A</span> chọn hết, rồi <span class="k">Ctrl+V</span> dán đè.</li></ol>
+
+<h2>Phần 2. Cài lần đầu</h2>
+<div class="step"><div class="n">1</div><div>Mở <b>script.google.com</b>, đăng nhập đúng tài khoản Google sẽ làm chủ ứng dụng. Bấm <b>Dự án mới</b>, đặt tên <b>CRM Báo cáo Marketing</b>.</div></div>
+<div class="step"><div class="n">2</div><div>File <b>Code.gs</b>: xoá hết nội dung có sẵn, dán toàn bộ <b>Code.gs</b> từ GitHub.</div></div>
+<div class="step"><div class="n">3</div><div>Bấm dấu <b>+</b> cạnh "Tệp" → <b>HTML</b>, đặt tên <b>Crm</b>, dán nội dung <b>Crm.html</b>. Làm tiếp cho <b>BaoCaoWeb</b>, <b>Index</b>, <b>HuongDan</b> theo bảng ở Phần 1.</div></div>
+<div class="step"><div class="n">4</div><div>Bấm biểu tượng đĩa mềm <b>Lưu</b> (hoặc <span class="k">Ctrl+S</span>) cho từng file.</div></div>
+<div class="step"><div class="n">5</div><div>Bấm <b>Triển khai → Tùy chọn triển khai mới</b> → bánh răng cạnh "Chọn loại" → <b>Ứng dụng web</b>, rồi điền:<br>
+&bull; <b>Thực thi dưới dạng</b>: <b>Tôi</b> (để dữ liệu và ảnh lưu vào Drive của bạn).<br>
+&bull; <b>Người có quyền truy cập</b>: <b>Bất kỳ ai có Tài khoản Google</b> (để các bạn sale dùng được). Nếu chỉ một mình bạn dùng thì chọn "Chỉ mình tôi".</div></div>
+<div class="step"><div class="n">6</div><div>Bấm <b>Triển khai</b>. Google hỏi cấp quyền (Drive, Trang tính, kết nối ngoài): bấm <b>Cấp quyền truy cập</b>, chọn tài khoản. Nếu báo "Google chưa xác minh ứng dụng này": bấm <b>Nâng cao → Đi tới (tên dự án) → Cho phép</b>. Cảnh báo này bình thường vì mã là của chính bạn.</div></div>
+<div class="step"><div class="n">7</div><div>Copy <b>URL ứng dụng web</b> (dạng <b>https://script.google.com/macros/s/.../exec</b>) và mở nó. Lần mở đầu CRM tự tạo Google Sheet <b>"CRM Báo cáo Marketing"</b> trong Drive để lưu dữ liệu (link ở góc trên trang).</div></div>
+<div class="step"><div class="n">8</div><div><b>Điền tab Danh mục</b> (người quản trị làm một lần):<br>
+&bull; <b>Dự án</b>: link PPTX mẫu, thư mục chứng từ, thư mục lưu báo cáo, Google Sheet số liệu nguồn (phải là Google Trang tính; nếu là file .xlsx thì Tệp → Lưu dưới dạng Google Trang tính rồi dán link mới).<br>
+&bull; <b>Nhân sự</b>: tên, số điện thoại, <b>Gmail</b> (mỗi người có thể khai nhiều Gmail), vai trò. Vai trò <b>Quản trị</b> thì sửa được mọi thứ, <b>Nhân viên</b> chỉ sửa số liệu và ảnh của chính mình.<br>
+&bull; <b>Tài khoản QC</b>: ID tài khoản quảng cáo gắn với từng nhân sự, để hệ thống biết ảnh và hoá đơn của ai.</div></div>
+<div class="step"><div class="n">9</div><div><b>Gửi link cho sale.</b> Trong CRM, bấm <b>Chép link riêng</b> cạnh nút TATILAND hoặc TATI INVEST: tự chép sẵn tin nhắn có link CRM và link hướng dẫn. Dán vào nhóm Zalo. Sale đăng nhập bằng đúng <b>Gmail đã khai ở Danh mục</b>.</div></div>
+
+<div class="box ok"><b>Tuỳ chọn bảo mật.</b> Muốn bắt nhập <b>mã xác nhận gửi qua email</b> khi đăng nhập (chống gõ nhầm email người khác): Apps Script → Cài đặt dự án → Thuộc tính tập lệnh → thêm <b>CRM_LOGIN_CODE</b> = <b>on</b>. Lần chạy đầu sẽ xin thêm quyền gửi email.</div>
+
+<h2>Phần 3. Cập nhật phiên bản mới</h2>
+<p>Làm khi có người báo "có bản mới" hoặc sau khi đã sửa mã trên GitHub. <b>Link CRM giữ nguyên</b>, sale không phải làm gì.</p>
+<div class="step"><div class="n">1</div><div>Mở dự án <b>CRM Báo cáo Marketing</b> trên script.google.com.</div></div>
+<div class="step"><div class="n">2</div><div>Với <b>cả 5 file</b> (Code.gs, Crm, BaoCaoWeb, Index, HuongDan): mở file, lấy nội dung mới từ GitHub (nhánh <b>claude/exciting-gates-p773yp</b>, thư mục <b>apps-script</b>), <span class="k">Ctrl+A</span> rồi <span class="k">Ctrl+V</span> dán đè. Nếu có file mới trong thư mục mà dự án chưa có, tạo thêm bằng dấu <b>+ → HTML</b> với đúng tên.</div></div>
+<div class="step"><div class="n">3</div><div>Bấm <b>Lưu</b> từng file.</div></div>
+<div class="step"><div class="n">4</div><div>Bấm <b>Triển khai → Quản lý bản triển khai</b> → biểu tượng <b>bút chì</b> cạnh bản đang chạy → mục <b>Phiên bản</b> chọn <b>Phiên bản mới</b> → <b>Triển khai</b>.</div></div>
+<div class="step"><div class="n">5</div><div>Mở link CRM và nhấn <span class="k">Ctrl+F5</span> (tải lại không dùng bộ nhớ đệm). Kiểm tra tính năng mới đã có (ví dụ tab Ảnh &amp; chứng từ có nút <b>Chọn ảnh trùng</b>).</div></div>
+
+<div class="box"><b>Quan trọng.</b> Luôn dán <b>đủ 5 file</b> trong cùng một lần cập nhật. Giao diện (Crm, Index, BaoCaoWeb) tải mã mới từ GitHub, còn Code.gs là phần xử lý dữ liệu. Nếu chỉ cập nhật một phần, giao diện có thể gọi hàm mà Code.gs cũ chưa có, và sẽ báo lỗi.<br>
+<b>Quay lại bản cũ:</b> Triển khai → Quản lý bản triển khai → bút chì → chọn phiên bản cũ hơn trong danh sách → Triển khai.</div>
+
+<h2>Phần 4. Gặp lỗi</h2>
+<table>
+<tr><th>Hiện tượng</th><th>Cách xử lý</th></tr>
+<tr><td>Kẹt ở "Đang tải CRM…" hoặc báo "Mã CRM chưa chạy"</td><td>Kho mã GitHub đang để riêng tư, hoặc mạng, tiện ích chặn quảng cáo đang chặn cdn.jsdelivr.net hoặc cdnjs.cloudflare.com. Đặt kho mã công khai, tắt tiện ích chặn, thử tab ẩn danh.</td></tr>
+<tr><td>Trang trắng hoặc lỗi khi điện thoại có nhiều tài khoản Google</td><td>Mở link trong tab ẩn danh, chỉ đăng nhập một tài khoản.</td></tr>
+<tr><td>Sale đăng nhập nhưng không sửa được</td><td>Gmail của họ chưa khai ở Danh mục → Nhân sự, hoặc dòng đó thuộc người khác. Thêm Gmail, hoặc đặt vai trò Quản trị nếu cần.</td></tr>
+<tr><td>Cập nhật rồi mà vẫn thấy bản cũ</td><td>Quên tạo <b>Phiên bản mới</b> ở bước 4, hoặc chưa nhấn Ctrl+F5. Làm lại hai việc đó.</td></tr>
+<tr><td>Báo "Không tìm thấy tệp HTML" hoặc trang con không mở</td><td>Một file HTML chưa tạo hoặc đặt sai tên (Crm, BaoCaoWeb, Index, HuongDan). Kiểm tra lại theo bảng ở Phần 1.</td></tr>
+<tr><td>Báo cần cấp quyền sau khi cập nhật</td><td>Bản mới dùng thêm quyền. Làm theo hộp thoại Google: Nâng cao → Đi tới → Cho phép, rồi triển khai lại phiên bản mới.</td></tr>
+<tr><td>Vẫn không được</td><td>Chụp màn hình lỗi, kèm nội dung ô <b>Lần thực thi</b> trong Apps Script (biểu tượng ☰ bên trái), gửi người hỗ trợ.</td></tr>
+</table>
+
+<p class="foot">Link CRM: ______________________________ &nbsp; Tài khoản Google chủ ứng dụng: ______________________________<br>Lần cập nhật gần nhất: ____ / ____ / ________ &nbsp;&nbsp; Người cập nhật: ______________________</p>
+</body></html>
