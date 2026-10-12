@@ -12,7 +12,7 @@ function doGet(e) {
     return ContentService.createTextOutput(TRACK_JS).setMimeType(ContentService.MimeType.JAVASCRIPT);
   }
   if (e && e.parameter && e.parameter.debug) return json_(debugInfo_());
-  // Giao diện CRM chỉ phục vụ người có link kèm khoá riêng (?k=...) hoặc đăng nhập Google qua bản triển khai "Người dùng truy cập".
+  // Giao diện CRM chỉ phục vụ người có link kèm khoá riêng (?k=...).
   // Khách lạ mở link không có khoá chỉ thấy dòng JSON.
   if (canUi_(e && e.parameter && e.parameter.k)) {
     return HtmlService.createHtmlOutputFromFile('Crm').setTitle('CRM Hoàng Hiệp')
@@ -21,32 +21,18 @@ function doGet(e) {
   return json_({ ok: true, service: 'CRM Hoàng Hiệp' });
 }
 
-// ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ email hay dữ liệu)
+// ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-3', ui: isUiUser_(), hasKey: crmKey_().length >= 20, hasActiveEmail: false, hasEffectiveEmail: false, effectiveIsOwner: null, canOpenSheet: false, hasCrmHtml: false };
-  try { o.hasActiveEmail = !!Session.getActiveUser().getEmail(); } catch (x) {}
-  try { o.hasEffectiveEmail = !!Session.getEffectiveUser().getEmail(); } catch (x) {}
-  try { var ow = ss_().getOwner(); o.canOpenSheet = true; o.effectiveIsOwner = !!ow && ow.getEmail() === Session.getEffectiveUser().getEmail(); } catch (x) {}
+  var o = { version: 'ui-4', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { HtmlService.createHtmlOutputFromFile('Crm'); o.hasCrmHtml = true; } catch (x) {}
   return o;
 }
 
-// Giao diện chỉ dành cho người dùng đăng nhập Google chạy bằng chính quyền của họ:
-// (1) email người mở trùng người chạy, hoặc (2) người chạy KHÔNG phải chủ file nhưng đọc được file Sheet.
-// Bản triển khai "Tôi" (nhận dữ liệu từ website) luôn chạy bằng chủ file nên khách lạ không bao giờ qua được.
-function isUiUser_() {
-  try {
-    var a = Session.getActiveUser().getEmail(), e = Session.getEffectiveUser().getEmail();
-    if (a && a === e) return true;
-    if (!e) return false;
-    var o = ss_().getOwner();
-    return !!o && o.getEmail() !== e;
-  } catch (x) { return false; }
-}
 // Link CRM có khoá riêng: <URL ứng dụng web>?k=KHOÁ. Khoá lưu trong Script Properties (menu CRM > Link vào CRM).
 function crmKey_() { return PropertiesService.getScriptProperties().getProperty('CRM_KEY') || ''; }
 function keyOk_(k) { var s = crmKey_(); return s.length >= 20 && String(k || '') === s; }
-function canUi_(k) { return keyOk_(k) || isUiUser_(); }
+function canUi_(k) { return keyOk_(k); }
 function requireUi_(k) {
   if (!canUi_(k)) throw new Error('Không có quyền. Hãy mở bằng link CRM có khoá (menu CRM > Link vào CRM trong file Sheet).');
 }
@@ -61,7 +47,7 @@ function phoneStr_(v) { var p = String(v == null ? '' : v); return p.length === 
 // ---- API cho giao diện (google.script.run) ----
 function crmLoad(k) {
   requireUi_(k);
-  var ss = ss_(), out = { user: Session.getActiveUser().getEmail(), now: new Date().toISOString() };
+  var ss = ss_(), out = { user: '', now: new Date().toISOString() };
   var sh = ss.getSheetByName(S_LEADS), n = sh.getLastRow();
   var rows = n > 1 ? sh.getRange(2, 1, n - 1, 22).getValues() : [];
   out.leads = rows.filter(function (r) { return r[3]; }).map(function (r) {
@@ -338,17 +324,25 @@ function newSiteKey() {
   SpreadsheetApp.getUi().alert('Đã tạo mã ' + k + ' ở dòng ' + r + ' của tab Website. Điền tên website vào cột A.');
 }
 
+function crmBaseUrl_() {
+  // URL ứng dụng web (kết thúc /exec) nằm ở ô G2 của tab Website; getUrl() trong trình soạn thảo chỉ trả địa chỉ thử /dev.
+  try {
+    var g = String(ss_().getSheetByName(S_SITES).getRange(2, 7).getValue() || '').trim();
+    if (/^https:\/\/script\.google\.com\/macros\/s\/[^\/?\s]+\/exec$/.test(g)) return g;
+  } catch (x) {}
+  try { var u = ScriptApp.getService().getUrl(); if (/\/exec$/.test(u)) return u; } catch (x) {}
+  return '';
+}
 function crmLinkText_() {
-  var base = '';
-  try { base = ScriptApp.getService().getUrl(); } catch (x) {}
   var props = PropertiesService.getScriptProperties(), key = crmKey_();
   if (key.length < 20) { key = Utilities.getUuid().replace(/-/g, ''); props.setProperty('CRM_KEY', key); }
+  var base = crmBaseUrl_();
   return (base || 'URL_UNG_DUNG_WEB') + '?k=' + key;
 }
 function showCrmLink() {
   var link = crmLinkText_();
   SpreadsheetApp.getUi().alert('Link vào CRM (giữ kín, ai có link là xem và sửa được khách hàng):\n\n' + link +
-    (/\/exec\?k=/.test(link) ? '' : '\n\nLưu ý: thay phần đầu bằng URL ứng dụng web (kết thúc /exec) của bạn, giữ nguyên phần ?k=...') +
+    (/\/exec\?k=/.test(link) ? '' : '\n\nChưa có URL ứng dụng web: dán URL (kết thúc /exec) vào ô G2 của tab Website rồi chạy lại menu này.') +
     '\n\nMở link này trên máy tính hoặc điện thoại. Lưu vào dấu trang để dùng hằng ngày.');
 }
 function resetCrmLink() {
@@ -369,8 +363,6 @@ function kiemTraCRM() {
   var hasHtml = true;
   try { HtmlService.createHtmlOutputFromFile('Crm'); } catch (e) { hasHtml = false; Logger.log('THIẾU file giao diện tên Crm: ' + e.message); }
   if (hasHtml) Logger.log('File giao diện Crm: có.');
-  var url = '';
-  try { url = ScriptApp.getService().getUrl(); } catch (e) {}
-  Logger.log(url ? 'Chưa triển khai? URL ứng dụng web: ' + url : 'CHƯA có bản triển khai ứng dụng web (Triển khai > Tùy chọn triển khai mới > Ứng dụng web).');
+  Logger.log(crmBaseUrl_() ? 'URL ứng dụng web (ô G2): ' + crmBaseUrl_() : 'CHƯA có URL /exec ở ô G2 tab Website. Triển khai > Quản lý bản triển khai > copy URL ứng dụng web, dán vào ô G2.');
   return link;
 }

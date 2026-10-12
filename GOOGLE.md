@@ -24,7 +24,7 @@ Form dựng riêng không bắt được tự động: cấu hình webhook (POST
 Ngoài file Sheet, có giao diện web riêng (`google/Crm.html`): danh sách khách, nút Zalo / Gọi tự ghi "đã liên hệ", cảnh báo lượt bấm chưa xử lý, thống kê, mã nhúng. Dữ liệu vẫn nằm trong Sheet.
 1. Apps Script: dán `google/Code.gs` mới, **+ › HTML** đặt tên `Crm`, dán `google/Crm.html`, lưu.
 2. **Triển khai › Quản lý bản triển khai › bút chì › Phiên bản mới › Triển khai** (dùng bản triển khai hiện có "Tôi" + "Bất kỳ ai", không cần bản thứ hai).
-3. Tải lại Sheet, menu **CRM › Link vào CRM (giao diện web)** hiện link dạng `.../exec?k=KHOÁ`. Mở link đó, lưu dấu trang. Gửi link cho người cần dùng.
+3. Dán URL ứng dụng web (kết thúc `/exec`) vào ô **G2** của tab Website. Tải lại Sheet, menu **CRM › Link vào CRM (giao diện web)** hiện link dạng `.../exec?k=KHOÁ` (hoặc chạy hàm `kiemTraCRM` trong Apps Script, link nằm ở Nhật ký thực thi). Mở link đó, lưu dấu trang. Gửi link cho người cần dùng.
 4. **Link là mật khẩu**: ai có link xem và sửa được khách hàng. Lộ link thì **CRM › Đổi link CRM (huỷ link cũ)**.
 5. Lỗi không hiện giao diện: mở `.../exec?debug=1` xem kết quả.
 

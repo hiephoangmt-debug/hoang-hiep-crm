@@ -39,7 +39,7 @@ const ctx = vm.createContext({
   CacheService: { getScriptCache: () => ({ get: () => null, put() {} }) },
   LockService: { getScriptLock: () => ({ waitLock() {}, releaseLock() {} }) },
   ContentService: { createTextOutput: (b) => ({ body: b, setMimeType(m) { this.mime = m; return this; } }), MimeType: { JSON: 'json', JAVASCRIPT: 'js' } },
-  Session: { getActiveUser: () => ({ getEmail: () => globalThis.__active ?? '' }), getEffectiveUser: () => ({ getEmail: () => globalThis.__eff ?? 'owner@gmail.com' }) },
+  Session: { getActiveUser: () => { throw new Error('Session không được dùng'); }, getEffectiveUser: () => { throw new Error('Session không được dùng'); } },
   HtmlService: { createHtmlOutputFromFile: (n) => ({ file: n, setTitle() { return this; }, addMetaTag() { return this; } }) },
   PropertiesService: { getScriptProperties: () => ({ getProperty: (k) => globalThis.__props?.[k] ?? null, setProperty: (k, v) => { (globalThis.__props ||= {})[k] = v; }, deleteProperty: (k) => { delete globalThis.__props?.[k]; } }) },
   Logger: { log: (m) => (globalThis.__log ||= []).push(m) },
@@ -91,18 +91,18 @@ const js = ctx.doGet({ parameter: { js: '1' } }); assert.equal(js.mime, 'js'); a
 const T = sheets['Tổng quan']; for (let i = 0; i < 16; i++) T.rows[i] = [];
 T.rows[6] = ['Khách chưa gọi, chưa nhắn', 1]; T.rows[7] = ['Khách để lại SĐT', 2]; T.rows[14] = ['Lượt bấm chưa xử lý', 1];
 T.rows[16] = ['Website', 'Truy cập']; T.rows[17] = ['Landing A', 3];
-globalThis.__active = ''; globalThis.__eff = undefined;
 // chưa có khoá / không có khoá: không vào được, doGet chỉ trả JSON
 assert.throws(() => ctx.crmLoad(''), /Không có quyền/);
 assert.equal(JSON.parse(ctx.doGet({ parameter: {} }).body).ok, true);
 // tạo link qua menu: ?k=KHOÁ
+sheets['Website'].getRange(2, 7).setValue('https://script.google.com/macros/s/AKfycbTEST/exec');
 ctx.showCrmLink();
 const link = globalThis.__alert.match(/\?k=([0-9a-f]{32})/); assert.ok(link, 'link có khoá'); const K = link[1];
 assert.equal(ctx.crmKey_(), K);
 assert.throws(() => ctx.crmLoad('sai-khoa'), /Không có quyền/); assert.throws(() => ctx.crmLog('', '0988111222', 'call'), /Không có quyền/);
 assert.equal(ctx.doGet({ parameter: { k: 'sai' } }).file, undefined); assert.equal(ctx.doGet({ parameter: { k: K } }).file, 'Crm');
 const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
-assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(JSON.stringify(dbg).includes(K), false); assert.equal(JSON.stringify(dbg).includes('@'), false);
+assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-4'); assert.equal(JSON.stringify(dbg).includes(K), false);
 const L = ctx.crmLoad(K);
 assert.equal(L.leads.length, 2);
 const l0 = L.leads.find((x) => x.phone === '0988111222');
@@ -123,9 +123,6 @@ assert.ok(ctx.crmEvents(K, 'v1').length >= 2); assert.equal(ctx.crmEvents(K, '')
 // đổi link: khoá cũ hết hiệu lực
 ctx.resetCrmLink(); const K2 = globalThis.__alert.match(/\?k=([0-9a-f]{32})/)[1];
 assert.notEqual(K2, K); assert.throws(() => ctx.crmLoad(K), /Không có quyền/); assert.ok(ctx.crmLoad(K2).leads.length === 2);
-// đăng nhập Google chạy bằng người dùng (không phải chủ) vẫn vào được không cần khoá
-globalThis.__active = ''; globalThis.__eff = 'staff@gmail.com';
-assert.equal(ctx.doGet({ parameter: {} }).file, 'Crm'); globalThis.__eff = undefined;
 // hàm tự kiểm tra
 const ret = ctx.kiemTraCRM(); assert.match(ret, /\?k=[0-9a-f]{32}/); assert.ok(globalThis.__log.some((m) => /Đọc dữ liệu OK/.test(m))); assert.ok(globalThis.__log.some((m) => /File giao diện Crm: có/.test(m)));
 console.log('OK – Code.gs đạt mọi test');
