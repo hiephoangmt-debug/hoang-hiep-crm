@@ -93,6 +93,7 @@ code,pre{background:#F3F5FA;border:1px solid var(--line);border-radius:10px;font
 <header>
   <h1><svg class="logo" viewBox="0 0 48 32" width="34" height="22" fill="none" stroke="#E2B35A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 26 C10 6 18 6 24 20 C30 34 38 34 44 14"/><path d="M2 28 H46"/><path d="M44 14 l4 -6 l-1 8Z" fill="#E2B35A"/></svg>CRM Hoàng Hiệp</h1><span class="sp"></span>
   <span class="mut small" id="who"></span>
+  <button class="btn" id="aitog" title="Bật hoặc tắt quân sư AI">AI: bật</button>
   <button class="btn" id="reload">Tải lại</button>
   <nav id="nav">
     <button data-t="home" class="on">Tổng quan</button>
@@ -162,6 +163,8 @@ function badges() {
 }
 $('#nav').onclick = function (e) { var t = e.target.dataset.t; if (!t) return; V.phone = ''; tab = t; document.querySelectorAll('#nav button').forEach(function (b) { b.classList.toggle('on', b.dataset.t === t); }); render(); };
 $('#reload').onclick = load;
+$('#aitog').onclick = function () { try { localStorage.setItem('crm_noai', aiOn() ? '1' : '0'); } catch (e) {} applyAi(); if (D) render(); };
+applyAi();
 $('#dlg').addEventListener('close', function () { if (D && !V.phone) render(); });
 document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('[data-zl]'); if (!a) return; e.preventDefault(); window.open('https://zalo.me/' + a.dataset.zl, '_blank', 'noopener'); });
 $('#gbar').onclick = function (e) { var b = e.target.closest('button'); if (!b) return; G = b.dataset.g; try { localStorage.setItem('crm_group', G); } catch (x) {} badges(); render(); };
@@ -397,7 +400,7 @@ function leadCard(l) {
     '<div style="margin:4px 0">' + st + ' ' + nx + ' ' + t + '</div><div class="meta small">' + d + '</div>' + (nextStep(l) ? '<div class="small step">' + nextStep(l) + '</div>' : '') +
     '<div class="small assign"><span class="mut">Chuyển cho sale:</span> <select data-as="' + esc(l.phone) + '"><option value="">Chưa giao</option>' + saleNames([l.assignee].filter(Boolean)).map(function (s) { return '<option' + (s === l.assignee ? ' selected' : '') + '>' + esc(s) + '</option>'; }).join('') + '</select></div>' +
     (l.note ? '<div class="small note">' + esc(l.note) + '</div>' : '') + '</div>' +
-    '<div class="acts"><button class="btn z" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button><button class="btn g" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button><button class="btn" data-note="' + esc(l.phone) + '">Ghi chú</button><button class="btn" data-open="' + esc(l.phone) + '">Hồ sơ</button><button class="btn" data-adv="' + esc(l.phone) + '">Quân sư</button><button class="btn" data-ask="' + esc(l.phone) + '">Hỏi AI</button></div></div>';
+    '<div class="acts"><button class="btn z" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button><button class="btn g" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button><button class="btn" data-note="' + esc(l.phone) + '">Ghi chú</button><button class="btn" data-open="' + esc(l.phone) + '">Hồ sơ</button><button class="btn" data-adv="' + esc(l.phone) + '">Quân sư</button>' + (aiOn() ? '<button class="btn" data-ask="' + esc(l.phone) + '">Hỏi AI</button>' : '') + '</div></div>';
 }
 function contact(phone, act, btn) {
   if (act === 'zalo') window.open('https://zalo.me/' + phone, '_blank', 'noopener'); else window.open('tel:' + phone, '_self');
@@ -413,6 +416,12 @@ function foldForm(h, ulId, title, label) {
   if (!m) return h;
   var rest = h.replace(m[0], '').replace(/^<h3>[^<]*<\/h3>/, '');
   return '<h3 style="margin-top:0">' + title + '</h3>' + m[0] + '<details class="sec" style="margin-top:8px"><summary>' + label + '</summary>' + rest + '</details>';
+}
+function aiOn() { try { return localStorage.getItem('crm_noai') !== '1'; } catch (e) { return true; } }
+function applyAi() {
+  var on = aiOn(); $('#aitog').textContent = on ? 'AI: bật' : 'AI: tắt';
+  var t = document.querySelector('#nav [data-t="ask"]'); if (t) t.style.display = on ? '' : 'none';
+  if (!on && tab === 'ask') { tab = 'home'; document.querySelectorAll('#nav button').forEach(function (x) { x.classList.toggle('on', x.dataset.t === 'home'); }); }
 }
 var V = { phone: '', from: 'leads', y: 0 };
 function narrow() { return window.innerWidth < 900; }
@@ -461,7 +470,7 @@ function openLead(phone, page, keep) {
   var srcLine = [l.srcType, l.source, l.campaign].filter(Boolean).join(' · ') || 'Chưa rõ';
   var P = {
     h2: '<h2 style="margin:0">KH' + pad(l.id) + ' · ' + esc(l.name || '(chưa có tên)') + ' · ' + esc(l.phone) + ' ' + zl(l.phone, l) + '</h2><p class="mut small">' + esc(l.site) + ' · ' + esc(l.email) + ' · gửi form ' + l.submits + ' lần · nhận lúc ' + esc(fmt(l.at)) + '</p>',
-    actions: '<div class="row"><button class="btn z" data-a="zalo">Nhắn Zalo</button><button class="btn g" data-a="call">Gọi</button><button class="btn" data-a="sms">Đã nhắn SMS</button><button class="btn" id="aiBtn">AI phân tích khách hàng</button></div>' +
+    actions: '<div class="row"><button class="btn z" data-a="zalo">Nhắn Zalo</button><button class="btn g" data-a="call">Gọi</button><button class="btn" data-a="sms">Đã nhắn SMS</button>' + (aiOn() ? '<button class="btn" id="aiBtn">AI phân tích khách hàng</button>' : '') + '</div>' +
     '<div id="aiOut" class="card" hidden></div>',
     personal: '<h3>Thông tin cá nhân <span class="tag">Khách cung cấp</span></h3><div class="fgrid">' +
     lab('Họ và tên', inp('nm', l.name)) + lab('SĐT phụ', inp('p2', l.phone2)) + lab('Zalo', sel('zl', ['Đã kết nối', 'Chưa xác nhận', 'Không dùng Zalo'], l.zalo, 'Chưa cập nhật')) +
@@ -564,14 +573,15 @@ function openLead(phone, page, keep) {
       if ($('#vst').checked) run('crmUpdateLead', phone, { status: 'Đã xem dự án' }).then(function () { l.status = 'Đã xem dự án'; $('#st').value = 'Đã xem dự án'; done(); }).catch(fail); else done();
     }).catch(fail);
   };
-  $('#aiBtn').onclick = function () {
-    var out = $('#aiOut'); out.hidden = false; out.innerHTML = '<span class="mut">Quân sư đang phân tích…</span>'; $('#aiBtn').disabled = true;
+  if ($('#aiBtn')) $('#aiBtn').onclick = function () {
+    var out = $('#aiOut'); out.hidden = false; out.innerHTML = '<span class="mut">Quân sư đang phân tích…</span> <button class="btn sm" id="aiX">Đóng</button>'; $('#aiX').onclick = function () { out.hidden = true; }; $('#aiBtn').disabled = true;
     var q = 'Phân tích khách hàng này và trả lời đúng 8 mục, có đánh số: 1) Tóm tắt khách hàng. 2) Mức độ tiềm năng và căn cứ. 3) Thông tin còn thiếu cần hỏi. 4) Vướng mắc chính. 5) Dự án hoặc sản phẩm phù hợp và lý do. 6) Phương án tư vấn tiếp theo. 7) Một tin nhắn mẫu để chăm sóc, viết sẵn nội dung. 8) Công việc đề xuất kèm thời gian thực hiện. Chỉ dùng dữ liệu đã cho. Không bịa giá bán, chính sách, ưu đãi, pháp lý hay tiến độ thanh toán. Thiếu dữ liệu thì nói rõ cần bổ sung gì.';
     run('crmAsk', q, phone).then(function (a) {
       $('#aiBtn').disabled = false;
-      out.innerHTML = '<b>Quân sư phân tích</b> <span class="tag">AI đề xuất, bạn kiểm tra trước khi dùng</span><div style="white-space:pre-wrap;margin:8px 0" id="aiText"></div>' +
+      out.innerHTML = '<div class="row"><b>Quân sư phân tích</b> <span class="tag">AI đề xuất, bạn kiểm tra trước khi dùng</span><span class="sp"></span><button class="btn sm" id="aiX">Tắt</button></div><div style="white-space:pre-wrap;margin:8px 0" id="aiText"></div>' +
         '<div class="row"><button class="btn" id="aiCp">Sao chép</button><button class="btn p" id="aiTk">Tạo công việc</button><button class="btn" id="aiOk">Đánh dấu đã thực hiện</button></div><div id="aiTkBox" hidden></div>';
       $('#aiText').textContent = a;
+      $('#aiX').onclick = function () { out.hidden = true; };
       $('#aiCp').onclick = function () { copyText(a); };
       $('#aiTk').onclick = function () {
         var bx = $('#aiTkBox'); bx.hidden = false;
@@ -580,7 +590,7 @@ function openLead(phone, page, keep) {
           run('crmAddLog', phone, f).then(function () { l.next = f.next; badges(); toast('Đã tạo công việc'); bx.hidden = true; loadHist(); }).catch(fail); };
       };
       $('#aiOk').onclick = function () { run('crmAddLog', phone, { type: 'Ghi chú', content: 'Đã thực hiện theo đề xuất của quân sư' }).then(function () { toast('Đã đánh dấu'); loadHist(); }).catch(fail); };
-    }).catch(function (e) { $('#aiBtn').disabled = false; out.innerHTML = /Chưa cài khoá/.test(e.message) ? '<b>Chưa bật quân sư AI.</b> <span class="small">Cần cài khoá API một lần: mở file Sheet, menu CRM › Cài khoá quân sư (AI). Các chức năng khác vẫn dùng bình thường.</span>' : '<span class="tag red">Lỗi</span> ' + esc(e.message); });
+    }).catch(function (e) { $('#aiBtn').disabled = false; out.innerHTML = '<div class="row"><b>' + (/Chưa cài khoá/.test(e.message) ? 'Chưa bật quân sư AI' : 'Quân sư gặp lỗi') + '</b><span class="sp"></span><button class="btn sm" id="aiX">Tắt</button></div><div class="small">' + (/Chưa cài khoá/.test(e.message) ? 'Cần cài khoá API một lần: mở file Sheet, menu CRM › Cài khoá quân sư (AI). Các chức năng khác vẫn dùng bình thường. Không muốn dùng AI thì bấm nút "AI: bật" trên đầu trang để tắt hẳn.' : esc(e.message)) + '</div>'; $('#aiX').onclick = function () { out.hidden = true; }; });
   };
   run('crmEvents', l.vid).then(function (ev) {
     $('#tl').innerHTML = ev.map(function (e) { return '<li><span class="mut">' + esc(fmt(e.at)) + '</span> ' + (e.type === 'click' ? 'Bấm <b>' + esc(CH[e.channel] || e.channel) + '</b>' : e.type === 'form' ? '<b>Để lại thông tin</b>' + (e.source || e.campaign ? ' (' + esc((e.source + ' ' + e.campaign).trim()) + ')' : '') : 'Xem trang') + ' · <span class="mut small">' + esc(e.url) + '</span></li>'; }).join('') || '<li class="mut">Chưa có dữ liệu truy cập</li>';
