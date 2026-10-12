@@ -168,7 +168,8 @@ HTML
 
 	$posts[] = array(
 		'slug'     => 'gia-dat-ven-bien-da-nang-vo-nguyen-giap-hoang-sa',
-		'rev'      => '2026-10-12', // Cập nhật chi tiết lô nhỏ / lô lớn theo tuyến (bản cũ còn trong Bản sửa đổi).
+		'rev'      => '2026-10-12b', // Cập nhật chi tiết lô nhỏ / lô lớn theo tuyến (bản cũ còn trong Bản sửa đổi).
+		'repub'    => true, // Đưa lên đầu Tin tức, ngày đăng = ngày cập nhật.
 		'title'    => 'Giá đất ven biển Đà Nẵng 10/2026: bảng giá mặt tiền biển lô nhỏ, lô lớn theo tuyến',
 		'excerpt'  => 'Giá đất ven biển Đà Nẵng tháng 10/2026: Hoàng Sa lô nhỏ 330 – 415 triệu/m², Võ Nguyên Giáp 130 – 390 triệu/m², Nguyễn Tất Thành 47 – 180 triệu/m², Trường Sa 60 – 130 triệu/m², Lạc Long Quân 16 – 46 triệu/m² (giá rao tham khảo).',
 		'keyword'  => 'giá đất ven biển Đà Nẵng',

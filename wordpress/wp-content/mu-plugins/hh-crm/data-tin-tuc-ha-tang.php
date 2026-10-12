@@ -469,6 +469,11 @@ function hh_import_news() {
 					$upd['post_title']   = $n['title']; // Tiêu đề, tóm tắt cũ do web tạo (chưa sửa tay) → đổi theo bản mới.
 					$upd['post_excerpt'] = $n['excerpt'];
 				}
+				if ( $force && ! empty( $n['repub'] ) && 'publish' === $post->post_status ) {
+					// 'repub': bài viết lại gần như toàn bộ → đưa lên đầu Tin tức với ngày đăng là hôm nay (giữ nguyên đường dẫn).
+					$upd['post_date']     = current_time( 'mysql' );
+					$upd['post_date_gmt'] = current_time( 'mysql', true );
+				}
 				wp_update_post( $upd );
 				update_post_meta( $id, '_hh_news_hash', md5( get_post_field( 'post_content', $id ) ) );
 				if ( ! empty( $n['rev'] ) ) {
