@@ -21,13 +21,12 @@ Form dựng riêng không bắt được tự động: cấu hình webhook (POST
 - **Chiến dịch** và **Chi phí**: khai báo chiến dịch với mã `utm_campaign`, gắn mã đó vào link quảng cáo (Facebook: `?utm_source=facebook&utm_medium=paid&utm_campaign=MÃ`; Google: `?utm_source=google&utm_medium=cpc&utm_campaign=MÃ`). Mỗi ngày dán chi phí vào tab Chi phí (copy từ báo cáo Facebook/Google). Tab Chiến dịch tự tính giá mỗi khách, doanh thu và ROAS. Doanh thu lấy từ cột **Giá trị chốt** của khách có trạng thái **Chốt**.
 
 ## Giao diện CRM mở bằng link (tuỳ chọn)
-Ngoài file Sheet, có thể dùng giao diện web riêng (`google/Crm.html`): danh sách khách, nút Zalo / Gọi tự ghi "đã liên hệ", cảnh báo lượt bấm chưa xử lý, thống kê, mã nhúng. Dữ liệu vẫn nằm trong Sheet.
+Ngoài file Sheet, có giao diện web riêng (`google/Crm.html`): danh sách khách, nút Zalo / Gọi tự ghi "đã liên hệ", cảnh báo lượt bấm chưa xử lý, thống kê, mã nhúng. Dữ liệu vẫn nằm trong Sheet.
 1. Apps Script: dán `google/Code.gs` mới, **+ › HTML** đặt tên `Crm`, dán `google/Crm.html`, lưu.
-2. **Triển khai › Tùy chọn triển khai mới › Ứng dụng web** (đây là bản triển khai THỨ HAI, link khác link nhận dữ liệu từ website):
-   - *Thực thi dưới dạng*: **Người dùng truy cập ứng dụng web**
-   - *Người có quyền truy cập*: **Bất kỳ ai có Tài khoản Google**
-3. Chia sẻ file Sheet (quyền Chỉnh sửa) cho Gmail của từng người cần dùng. Ai không được chia sẻ sẽ không xem được dữ liệu dù có link.
-4. Bản triển khai cũ (nhận dữ liệu từ website, "Tôi" + "Bất kỳ ai") cập nhật bằng **Phiên bản mới** như thường.
+2. **Triển khai › Quản lý bản triển khai › bút chì › Phiên bản mới › Triển khai** (dùng bản triển khai hiện có "Tôi" + "Bất kỳ ai", không cần bản thứ hai).
+3. Tải lại Sheet, menu **CRM › Link vào CRM (giao diện web)** hiện link dạng `.../exec?k=KHOÁ`. Mở link đó, lưu dấu trang. Gửi link cho người cần dùng.
+4. **Link là mật khẩu**: ai có link xem và sửa được khách hàng. Lộ link thì **CRM › Đổi link CRM (huỷ link cũ)**.
+5. Lỗi không hiện giao diện: mở `.../exec?debug=1` xem kết quả.
 
 ## Cập nhật mã
 Sửa `Code.gs` rồi **Triển khai > Quản lý bản triển khai > biểu tượng bút > Phiên bản mới > Triển khai**. URL giữ nguyên.

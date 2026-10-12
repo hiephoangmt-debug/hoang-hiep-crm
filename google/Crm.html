@@ -60,7 +60,7 @@ code,pre{background:var(--bg);border:1px solid var(--bd);border-radius:8px;font-
 
 <script>
 window.onerror = function (m, s, l) { var d = document.getElementById('diag'); if (d) d.textContent = 'Lỗi trang: ' + m + (l ? ' (dòng ' + l + ')' : ''); };
-var D = null, tab = 'home', F = { status: 'todo', site: '', q: '', clicks: 'todo' };
+var KEY = '', D = null, tab = 'home', F = { status: 'todo', site: '', q: '', clicks: 'todo' };
 var STATUS = ['Mới', 'Đã liên hệ', 'Quan tâm', 'Hẹn xem', 'Chốt', 'Mất'];
 var CH = { zalo: 'Zalo', phone: 'Gọi điện', messenger: 'Messenger', sms: 'SMS', other: 'Khác' };
 function $(s, r) { return (r || document).querySelector(s); }
@@ -69,7 +69,7 @@ function run(fn) {
   var a = Array.prototype.slice.call(arguments, 1);
   return new Promise(function (ok, ko) {
     var r = google.script.run.withSuccessHandler(ok).withFailureHandler(function (e) { ko(new Error(e && e.message ? e.message : String(e))); });
-    r[fn].apply(r, a);
+    r[fn].apply(r, [KEY].concat(a));
   });
 }
 function toast(m) { var t = $('#toast'); t.textContent = m; t.style.display = 'block'; clearTimeout(toast.t); toast.t = setTimeout(function () { t.style.display = 'none'; }, 2800); }
@@ -80,7 +80,7 @@ function vnd(n) { return Math.round(n || 0).toLocaleString('vi-VN') + 'đ'; }
 var todo = function (l) { return !l.called && !l.messaged && l.status === 'Mới'; };
 
 function load() {
-  return run('crmLoad').then(function (d) { D = d; $('#who').textContent = d.user; badges(); render(); }).catch(function (e) { $('#main').innerHTML = '<div class="card">Không tải được dữ liệu: ' + esc(e.message) + '<br><span class="mut">Cần mở bằng link CRM (bản triển khai "Người dùng truy cập ứng dụng web") và đăng nhập Gmail đã được chia sẻ file Sheet.</span></div>'; });
+  return run('crmLoad').then(function (d) { D = d; $('#who').textContent = d.user; badges(); render(); }).catch(function (e) { $('#main').innerHTML = '<div class="card">Không tải được dữ liệu: ' + esc(e.message) + '<br><span class="mut">Hãy mở bằng link CRM có khoá: trong file Sheet, menu CRM → Link vào CRM.</span></div>'; });
 }
 function badges() {
   var a = D.leads.filter(todo).length, b = D.clicks.filter(function (c) { return c.alert; }).length;
@@ -183,7 +183,7 @@ function sites() {
     var s = D.sites[b.dataset.cp].snippet, ta = document.createElement('textarea'); ta.value = s; document.body.appendChild(ta); ta.select();
     try { document.execCommand('copy'); toast('Đã sao chép'); } catch (e) { toast('Không sao chép được, hãy bôi đen và copy'); } document.body.removeChild(ta); }; });
 }
-load();
+try { google.script.url.getLocation(function (loc) { KEY = ((loc && loc.parameter) || {}).k || ''; if (KEY.constructor === Array) KEY = KEY[0]; load(); }); } catch (e) { load(); }
 </script>
 </body>
 </html>

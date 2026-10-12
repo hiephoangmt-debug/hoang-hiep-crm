@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
+import crypto from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -34,12 +35,14 @@ const sheets = {
 sheets.Website.appendRow(['Landing A', 'a.com', 'testkey12345']);
 const out = (o) => ({ setMimeType() { return { body: o }; } });
 const ctx = vm.createContext({
-  SpreadsheetApp: { getActiveSpreadsheet: () => ({ getSheetByName: (n) => sheets[n], getOwner: () => ({ getEmail: () => 'owner@gmail.com' }) }), getUi: () => ({}) },
+  SpreadsheetApp: { getActiveSpreadsheet: () => ({ getSheetByName: (n) => sheets[n], getOwner: () => ({ getEmail: () => 'owner@gmail.com' }) }), getUi: () => ({ alert(m) { globalThis.__alert = m; } }) },
   CacheService: { getScriptCache: () => ({ get: () => null, put() {} }) },
   LockService: { getScriptLock: () => ({ waitLock() {}, releaseLock() {} }) },
   ContentService: { createTextOutput: (b) => ({ body: b, setMimeType(m) { this.mime = m; return this; } }), MimeType: { JSON: 'json', JAVASCRIPT: 'js' } },
   Session: { getActiveUser: () => ({ getEmail: () => globalThis.__active ?? '' }), getEffectiveUser: () => ({ getEmail: () => globalThis.__eff ?? 'owner@gmail.com' }) },
   HtmlService: { createHtmlOutputFromFile: (n) => ({ file: n, setTitle() { return this; }, addMetaTag() { return this; } }) },
+  PropertiesService: { getScriptProperties: () => ({ getProperty: (k) => globalThis.__props?.[k] ?? null, setProperty: (k, v) => { (globalThis.__props ||= {})[k] = v; }, deleteProperty: (k) => { delete globalThis.__props?.[k]; } }) },
+  Utilities: { getUuid: () => crypto.randomUUID() },
   ScriptApp: { getService: () => ({ getUrl: () => 'https://script.google.com/macros/s/X/exec' }) },
   console,
 });
@@ -83,46 +86,43 @@ assert.equal(typeof sh.rows[1][16].getTime, 'function'); assert.equal(sh.rows[1]
 
 // doGet trả về mã theo dõi, có nhận diện Google
 const js = ctx.doGet({ parameter: { js: '1' } }); assert.equal(js.mime, 'js'); assert.match(js.body, /script\\.google/); assert.match(js.body, /action/);
-// ---- giao diện CRM (API cho Crm.html) ----
-globalThis.__active = ''; globalThis.__eff = undefined;
-const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
-assert.equal(dbg.ui, false); assert.equal(dbg.effectiveIsOwner, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(JSON.stringify(dbg).includes('@'), false);
+// ---- giao diện CRM (API cho Crm.html), mở bằng link có khoá ----
 const T = sheets['Tổng quan']; for (let i = 0; i < 16; i++) T.rows[i] = [];
 T.rows[6] = ['Khách chưa gọi, chưa nhắn', 1]; T.rows[7] = ['Khách để lại SĐT', 2]; T.rows[14] = ['Lượt bấm chưa xử lý', 1];
 T.rows[16] = ['Website', 'Truy cập']; T.rows[17] = ['Landing A', 3];
-// khách thường: không đăng nhập -> không có quyền, doGet chỉ trả JSON
-globalThis.__active = '';
-assert.throws(() => ctx.crmLoad(), /Không có quyền/); assert.throws(() => ctx.crmLog('0912345678', 'call'), /Không có quyền/);
+globalThis.__active = ''; globalThis.__eff = undefined;
+// chưa có khoá / không có khoá: không vào được, doGet chỉ trả JSON
+assert.throws(() => ctx.crmLoad(''), /Không có quyền/);
 assert.equal(JSON.parse(ctx.doGet({ parameter: {} }).body).ok, true);
-// người dùng đăng nhập chính là chủ chạy -> có giao diện
-globalThis.__active = 'owner@gmail.com';
-assert.equal(ctx.doGet({ parameter: {} }).file, 'Crm');
-// khác chủ chạy (ví dụ bản triển khai "Tôi") -> không lộ giao diện
-globalThis.__active = 'khach@gmail.com';
-assert.equal(ctx.doGet({ parameter: {} }).file, undefined);
-// bản "Người dùng truy cập": người chạy là nhân viên (không phải chủ) dù email người mở trống -> vẫn vào được
-globalThis.__active = ''; globalThis.__eff = 'staff@gmail.com';
-assert.equal(ctx.doGet({ parameter: {} }).file, 'Crm');
-globalThis.__eff = undefined;
-globalThis.__active = 'owner@gmail.com';
-const L = ctx.crmLoad();
-assert.equal(L.user, 'owner@gmail.com'); assert.equal(L.leads.length, 2);
+// tạo link qua menu: ?k=KHOÁ
+ctx.showCrmLink();
+const link = globalThis.__alert.match(/\?k=([0-9a-f]{32})/); assert.ok(link, 'link có khoá'); const K = link[1];
+assert.equal(ctx.crmKey_(), K);
+assert.throws(() => ctx.crmLoad('sai-khoa'), /Không có quyền/); assert.throws(() => ctx.crmLog('', '0988111222', 'call'), /Không có quyền/);
+assert.equal(ctx.doGet({ parameter: { k: 'sai' } }).file, undefined); assert.equal(ctx.doGet({ parameter: { k: K } }).file, 'Crm');
+const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
+assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(JSON.stringify(dbg).includes(K), false); assert.equal(JSON.stringify(dbg).includes('@'), false);
+const L = ctx.crmLoad(K);
+assert.equal(L.leads.length, 2);
 const l0 = L.leads.find((x) => x.phone === '0988111222');
 assert.ok(l0 && l0.status === 'Mới' && l0.called === false && l0.site === 'Landing A');
 assert.equal(L.kpis.length, 3); assert.equal(L.sites.length, 1); assert.equal(L.clicks.length, 1);
-// bấm Gọi trong giao diện -> ghi nhận, đổi trạng thái
-const lg = ctx.crmLog('0988 111 222', 'call');
+const lg = ctx.crmLog(K, '0988 111 222', 'call');
 assert.equal(lg.called, true); assert.equal(lg.status, 'Đã liên hệ'); assert.ok(lg.contactedAt);
-assert.throws(() => ctx.crmLog('0900000000', 'call'), /Không tìm thấy/); assert.throws(() => ctx.crmLog('0988111222', 'xyz'), /không hợp lệ/);
-ctx.crmUpdateLead('0988111222', { status: 'Chốt', value: 5000000, assignee: 'Hanh', note: 'xem nhà 15/10' });
-const l1 = ctx.crmLoad().leads.find((x) => x.phone === '0988111222');
+assert.throws(() => ctx.crmLog(K, '0900000000', 'call'), /Không tìm thấy/); assert.throws(() => ctx.crmLog(K, '0988111222', 'xyz'), /không hợp lệ/);
+ctx.crmUpdateLead(K, '0988111222', { status: 'Chốt', value: 5000000, assignee: 'Hanh', note: 'xem nhà 15/10' });
+const l1 = ctx.crmLoad(K).leads.find((x) => x.phone === '0988111222');
 assert.deepEqual([l1.status, l1.value, l1.assignee, l1.note], ['Chốt', 5000000, 'Hanh', 'xem nhà 15/10']);
-assert.throws(() => ctx.crmUpdateLead('0988111222', { status: 'abc' }), /không hợp lệ/);
-// tick đã kiểm tra lượt bấm (sai vid -> từ chối)
-const ck0 = ctx.crmLoad().clicks[0];
-assert.throws(() => ctx.crmClickDone(ck0.row, 'sai-vid', true), /thay đổi/);
-ctx.crmClickDone(ck0.row, ck0.vid, true, 'đã xem Zalo');
-const ck1 = ctx.crmLoad().clicks[0]; assert.equal(ck1.checked, true); assert.equal(ck1.note, 'đã xem Zalo');
-// lịch sử truy cập của khách
-assert.ok(ctx.crmEvents('v1').length >= 2); assert.equal(ctx.crmEvents('').length, 0);
+assert.throws(() => ctx.crmUpdateLead(K, '0988111222', { status: 'abc' }), /không hợp lệ/);
+const ck0 = ctx.crmLoad(K).clicks[0];
+assert.throws(() => ctx.crmClickDone(K, ck0.row, 'sai-vid', true), /thay đổi/);
+ctx.crmClickDone(K, ck0.row, ck0.vid, true, 'đã xem Zalo');
+const ck1 = ctx.crmLoad(K).clicks[0]; assert.equal(ck1.checked, true); assert.equal(ck1.note, 'đã xem Zalo');
+assert.ok(ctx.crmEvents(K, 'v1').length >= 2); assert.equal(ctx.crmEvents(K, '').length, 0);
+// đổi link: khoá cũ hết hiệu lực
+ctx.resetCrmLink(); const K2 = globalThis.__alert.match(/\?k=([0-9a-f]{32})/)[1];
+assert.notEqual(K2, K); assert.throws(() => ctx.crmLoad(K), /Không có quyền/); assert.ok(ctx.crmLoad(K2).leads.length === 2);
+// đăng nhập Google chạy bằng người dùng (không phải chủ) vẫn vào được không cần khoá
+globalThis.__active = ''; globalThis.__eff = 'staff@gmail.com';
+assert.equal(ctx.doGet({ parameter: {} }).file, 'Crm'); globalThis.__eff = undefined;
 console.log('OK – Code.gs đạt mọi test');
