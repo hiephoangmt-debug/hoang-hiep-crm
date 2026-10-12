@@ -744,9 +744,42 @@ function hh_import_projects() {
 			}
 		}
 	}
+	delete_transient( 'hh_import_missing_' . HH_CRM_VERSION );
 	$news     = function_exists( 'hh_import_news' ) ? hh_import_news() : 0;
 	$listings = function_exists( 'hh_import_listings' ) ? hh_import_listings() : 0;
 	return array( $created, $updated, $news, $listings );
+}
+
+/**
+ * Nhắc trong trang quản trị khi bản cập nhật code có dự án mới chưa được tạo trên web
+ * (VD vừa cài gói có Sunneva Island nhưng chưa bấm "Nhập / cập nhật dữ liệu").
+ */
+add_action( 'admin_notices', 'hh_import_missing_notice' );
+function hh_import_missing_notice() {
+	if ( ! current_user_can( 'manage_options' ) || ( isset( $_GET['page'] ) && 'hh-import-du-an' === $_GET['page'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+		return;
+	}
+	$key     = 'hh_import_missing_' . HH_CRM_VERSION;
+	$missing = get_transient( $key );
+	if ( false === $missing ) {
+		$missing = array();
+		foreach ( hh_project_dataset() as $p ) {
+			if ( ! get_page_by_path( $p['slug'], OBJECT, 'du-an' ) ) {
+				$missing[] = $p['title'];
+			}
+		}
+		set_transient( $key, $missing, HOUR_IN_SECONDS );
+	}
+	if ( ! $missing ) {
+		return;
+	}
+	$names = implode( ', ', array_slice( $missing, 0, 5 ) ) . ( count( $missing ) > 5 ? '…' : '' );
+	printf(
+		'<div class="notice notice-warning"><p><strong>Có %d dự án mới trong bản cập nhật chưa lên web</strong> (%s). <a class="button button-primary" href="%s">Nhập dữ liệu ngay</a></p></div>',
+		count( $missing ),
+		esc_html( $names ),
+		esc_url( admin_url( 'edit.php?post_type=du-an&page=hh-import-du-an' ) )
+	);
 }
 
 /* -------------------------------------------------------------------------
