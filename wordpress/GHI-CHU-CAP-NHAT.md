@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.8** + plugin Hoàng Hiệp CRM **2.20.24**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.8** + plugin Hoàng Hiệp CRM **2.20.25**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,15 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.25: chat tự động "hỏi gì cũng biết", biết đùa
+
+- **Kiến thức sẵn có:** chat AI đọc toàn bộ giá dự án trên web (giá bán, giá bán lại, giá thuê, vị trí, pháp lý, link), bảng giá đất lớn theo tuyến đường, giá khách sạn ven biển, 30 bài tin tức và 40 tin rao mới nhất. Tự làm mới khi đăng / sửa dự án, bài, tin rao.
+- **Tra cứu web:** khách hỏi điều web chưa có (giá đất một tuyến đường, bảng giá nhà nước, quy hoạch, khách sạn, đường đi, tin mới…) → AI tự tìm trên web, ưu tiên nguồn chính thống, nói rõ nguồn và thời điểm. Tắt / bật ở Khách hàng → Chat trên web → "Tra cứu web".
+- **Hóm hỉnh:** khách đùa ("em có người yêu chưa", "đắt quá trời", "bot à") → đáp dí dỏm, lịch sự, rồi khéo đưa về nhu cầu nhà đất. Hỏi về Đà Nẵng (đường, khách sạn, ăn uống, du lịch) cũng trả lời ngắn gọn.
+- **Chưa có API key (chế độ kịch bản):** cũng biết đùa lại, tra giá đất / khách sạn theo tên đường trong bảng giá, và trả lời giá + link khi khách gõ tên một dự án bất kỳ.
+- Câu cần tra web mất lâu → khung chat hiện "Em đang tra cứu số liệu mới nhất…".
+- Chi phí (khi có API key, mô hình Opus 5.5): phần kiến thức được lưu đệm 1 giờ nên mỗi câu trả lời chỉ tốn vài trăm đồng; mỗi lần tra web Anthropic tính thêm khoảng 250 đồng. Giới hạn lượt / ngày vẫn như cũ.
 
 ## Có gì mới – plugin 2.20.20, giao diện 2.15.8: trang dự án Sunneva Island
 

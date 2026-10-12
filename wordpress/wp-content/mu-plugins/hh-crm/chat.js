@@ -137,6 +137,13 @@
 		typing.innerHTML = '<i></i><i></i><i></i>';
 		log.appendChild( typing );
 		log.scrollTop = log.scrollHeight;
+		// Câu cần tra cứu web có thể mất 15 – 40 giây: báo khách đang tra, tránh tưởng chat bị treo.
+		var slow = setTimeout( function () {
+			var note = el( 'span', 'hhc__typing-note' );
+			note.textContent = 'Em đang tra cứu số liệu mới nhất…';
+			typing.appendChild( note );
+			log.scrollTop = log.scrollHeight;
+		}, 7000 );
 		var body = new URLSearchParams();
 		body.append( 'action', 'hh_chat' );
 		body.append( 'conv', state.conv );
@@ -157,6 +164,7 @@
 				return 'Mạng đang chậm, anh/chị nhắn lại giúp em hoặc gọi/Zalo ' + C.phone + ' nhé.';
 			} )
 			.then( function ( reply ) {
+				clearTimeout( slow );
 				typing.remove();
 				addMsg( 'assistant', reply, true );
 				busy = false;

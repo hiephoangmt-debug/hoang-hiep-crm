@@ -28,6 +28,8 @@
 .hhc__msg a { color: inherit; text-decoration: underline; }
 .hhc__typing { display: flex; gap: 4px; }
 .hhc__typing i { width: 7px; height: 7px; border-radius: 50%; background: #9aa6b8; animation: hhc-blink 1s infinite; }
+.hhc__typing { align-items: center; flex-wrap: wrap; }
+.hhc__typing-note { margin-left: 6px; font-size: 12.5px; color: #6b778a; }
 .hhc__typing i:nth-child(2) { animation-delay: .2s; } .hhc__typing i:nth-child(3) { animation-delay: .4s; }
 @keyframes hhc-blink { 0%, 100% { opacity: .3; } 50% { opacity: 1; } }
 .hhc__chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 12px; background: var(--hhc-tint); }
