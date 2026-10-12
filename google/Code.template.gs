@@ -376,9 +376,9 @@ function kiemTraCRM() {
   return link;
 }
 
-// Giao diện CRM nằm sẵn trong file này (chuỗi CRM_HTML), nên chỉ cần dán một file duy nhất.
+// Giao diện lấy từ file HTML tên Crm (hoặc nằm sẵn trong chuỗi CRM_HTML của bản gộp Code.all.gs).
 var CRM_HTML = /*__CRM_HTML__*/'';
-function crmHtml_() { return CRM_HTML; }
+function crmHtml_() { return CRM_HTML || HtmlService.createHtmlOutputFromFile('Crm').getContent(); }
 
 // Mở giao diện CRM ngay trong file Sheet (không cần bản triển khai, dùng quyền của người đang mở file).
 function moGiaoDienCRM() {
