@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.18** + plugin Hoàng Hiệp CRM **2.20.39**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.18** + plugin Hoàng Hiệp CRM **2.20.40**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.40: mặt bằng 709 lô đất nền Võ Chí Công
+- **Mặt bằng tổng thể** (bản màu: mặt tiền Võ Chí Công, liền kề nội khu, villa mặt sông Đô Toả, chung cư, nhà ở hình thành trong tương lai) làm ảnh mặt bằng tổng thể; **bản vẽ quy hoạch** thêm vào tab mặt bằng.
+- Thêm mục "Mặt bằng và phân loại sản phẩm" trong bài giới thiệu, mô tả thiết kế, tiện ích nội khu (công viên ven sông, trường học, Nhà sáng tác miền Trung – Tây Nguyên, hồ Bá Tùng, hồ Mân Quang) và ngoại khu. Bài/ô nào anh đã tự sửa thì giữ nguyên.
+- Cài: Nhập nhanh `cap-nhat-code.zip` → **Nhập dữ liệu Đà Nẵng → Nhập / cập nhật dữ liệu** → LiteSpeed Cache → Purge All.
 
 ## Có gì mới – plugin 2.20.39, giao diện 2.15.18: 709 lô đất nền Võ Chí Công – Sun Group
 - Đổi tên trang thành **"709 lô đất nền Võ Chí Công – Sun Group"** (chỉ khi tên trên web vẫn là tên cũ – tên anh tự sửa giữ nguyên).
