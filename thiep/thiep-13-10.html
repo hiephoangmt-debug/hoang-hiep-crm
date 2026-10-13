@@ -1,105 +1,125 @@
 <!doctype html><html lang="vi"><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Be+Vietnam+Pro:wght@400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Great+Vibes&family=Be+Vietnam+Pro:wght@300;500&display=swap&subset=vietnamese" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{width:1080px;height:1350px;font-family:'Be Vietnam Pro','DejaVu Sans',sans-serif;overflow:hidden}
-.card{position:relative;width:1080px;height:1350px;background:radial-gradient(ellipse at 50% 30%,#a8121c 0%,#7a0a12 55%,#4a0509 100%);color:#fff;overflow:hidden}
-.frame{position:absolute;inset:28px;border:3px solid #e8c069;border-radius:6px}
-.frame2{position:absolute;inset:40px;border:1px solid rgba(232,192,105,.55);border-radius:4px}
-.rays{position:absolute;left:50%;top:420px;width:1600px;height:1600px;transform:translate(-50%,-50%);background:repeating-conic-gradient(rgba(255,215,130,.07) 0 6deg,transparent 6deg 12deg);border-radius:50%}
-.top{position:absolute;top:95px;width:100%;text-align:center}
-.small{letter-spacing:8px;font-size:26px;color:#f3d48b;font-weight:600}
-.date{font-family:'Playfair Display',serif;font-weight:900;font-size:190px;line-height:1;margin-top:14px;background:linear-gradient(180deg,#fff3c4,#e8b84a 55%,#b9842a);-webkit-background-clip:text;color:transparent;text-shadow:0 6px 18px rgba(0,0,0,.25)}
-.title{font-family:'Playfair Display',serif;font-size:66px;font-weight:700;margin-top:6px;color:#fff6dc}
-.sub{font-size:28px;color:#f3d48b;margin-top:12px;letter-spacing:2px}
-.line{width:300px;height:2px;margin:22px auto 0;background:linear-gradient(90deg,transparent,#e8c069,transparent)}
-svg.people{position:absolute;left:0;bottom:395px;width:1080px;height:440px}
-.msg{position:absolute;bottom:120px;width:100%;text-align:center;padding:0 110px}
-.msg .to{font-family:'Playfair Display',serif;font-style:italic;font-size:40px;color:#ffe9a8;margin-bottom:14px}
-.msg p{font-size:28px;line-height:1.55;color:#fff3d6}
-.msg .sign{font-family:'Dancing Script',cursive;font-size:46px;color:#f3d48b;margin-top:14px}
-.foot{position:absolute;bottom:62px;width:100%;text-align:center;font-size:20px;letter-spacing:4px;color:#e8c069}
-.star{position:absolute;color:#ffd96b;font-size:30px}
+body{width:1080px;height:1350px;overflow:hidden;background:#06101f}
+.card{position:relative;width:1080px;height:1350px;overflow:hidden;color:#f4e3b2;
+ background:radial-gradient(ellipse 70% 45% at 50% 52%,#173a63 0%,#0c2142 45%,#06101f 100%)}
+.foil{background:linear-gradient(115deg,#9c6a1e 0%,#e9c46a 22%,#fff4c8 38%,#d9a845 52%,#f6dc8c 68%,#a8761f 85%,#e9c46a 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+svg{position:absolute;left:0;top:0}
+.top{position:absolute;top:118px;width:100%;text-align:center}
+.kicker{font-family:'Be Vietnam Pro',sans-serif;font-weight:300;font-size:22px;letter-spacing:12px;color:#d9b46a;padding-left:12px}
+.date{font-family:'Cormorant Garamond',serif;font-variant-numeric:lining-nums;font-feature-settings:'lnum' 1;font-weight:600;font-size:200px;line-height:.95;margin-top:18px;letter-spacing:4px}
+.title1{font-family:'Great Vibes',cursive;font-size:96px;line-height:1;margin-top:-6px}
+.title2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:40px;letter-spacing:16px;margin-top:10px;padding-left:16px}
+.msg{position:absolute;top:960px;width:100%;text-align:center;padding:0 140px}
+.to{font-family:'Great Vibes',cursive;font-size:56px;line-height:1.1}
+.msg p{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:31px;line-height:1.45;color:#efdcae;margin-top:14px}
+.sign{position:absolute;top:1205px;width:100%;text-align:center}
+.sign .s1{font-family:'Be Vietnam Pro',sans-serif;font-weight:300;font-size:17px;letter-spacing:6px;color:#b99556}
+.sign .s2{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:34px;letter-spacing:10px;margin-top:6px;padding-left:10px}
 </style></head><body><div class="card">
-<div class="rays"></div><div class="frame"></div><div class="frame2"></div>
-<span class="star" style="left:120px;top:160px">✦</span><span class="star" style="right:130px;top:200px;font-size:22px">✦</span>
-<span class="star" style="left:170px;top:420px;font-size:18px">✦</span><span class="star" style="right:170px;top:460px">✦</span>
-<div class="top">
- <div class="small">CHÚC MỪNG</div>
- <div class="date">13.10</div>
- <div class="title">Ngày Doanh nhân Việt Nam</div>
- <div class="sub">Bản lĩnh · Tiên phong · Thịnh vượng</div>
- <div class="line"></div>
-</div>
-<svg class="people" viewBox="0 0 1080 470">
+<svg width="1080" height="1350" viewBox="0 0 1080 1350">
  <defs>
-  <linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe9a8"/><stop offset="1" stop-color="#c8902e"/></linearGradient>
-  <linearGradient id="dg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c08a2c"/><stop offset=".5" stop-color="#ffe9a8"/><stop offset="1" stop-color="#e8b84a"/></linearGradient>
-  <radialGradient id="glow" cx=".5" cy=".6" r=".5"><stop offset="0" stop-color="#ffd27a" stop-opacity=".35"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+   <stop offset="0" stop-color="#a8761f"/><stop offset=".3" stop-color="#f6dc8c"/><stop offset=".5" stop-color="#fff4c8"/><stop offset=".7" stop-color="#d9a845"/><stop offset="1" stop-color="#9c6a1e"/>
+  </linearGradient>
+  <linearGradient id="goldH" x1="0" y1="0" x2="1" y2="0">
+   <stop offset="0" stop-color="#d9a845" stop-opacity="0"/><stop offset=".2" stop-color="#e9c46a"/><stop offset=".5" stop-color="#fff4c8"/><stop offset=".8" stop-color="#e9c46a"/><stop offset="1" stop-color="#d9a845" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="goldHU" gradientUnits="userSpaceOnUse" x1="-230" y1="0" x2="230" y2="0"><stop offset="0" stop-color="#d9a845" stop-opacity="0"/><stop offset=".45" stop-color="#fff4c8"/><stop offset=".55" stop-color="#fff4c8"/><stop offset="1" stop-color="#d9a845" stop-opacity="0"/></linearGradient>
+  <radialGradient id="halo" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#f6dc8c" stop-opacity=".22"/><stop offset="1" stop-color="#f6dc8c" stop-opacity="0"/></radialGradient>
+  <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <mask id="refl"><rect x="0" y="870" width="1080" height="90" fill="url(#fade)"/></mask>
+  <g id="corner" fill="none" stroke="url(#gold)" stroke-width="2">
+   <path d="M0 90 V0 H90"/><path d="M14 70 V14 H70"/><path d="M28 50 V28 H50"/>
+   <path d="M14 14 L44 44" stroke-width="1.5"/><rect x="40" y="40" width="10" height="10" transform="rotate(45 45 45)" fill="url(#gold)"/>
+  </g>
+  <g id="dragonBody">
+   <path id="bp" d="M95 840 Q170 690 265 790 Q335 865 420 770 Q520 650 615 770 Q690 860 770 770 Q835 700 880 735"/>
+  </g>
  </defs>
- <ellipse cx="540" cy="300" rx="460" ry="200" fill="url(#glow)"/>
- <!-- Da Nang: Cau Rong tren song Han -->
- <g opacity=".95">
-  <path d="M30 395 L1050 395" stroke="#e8c069" stroke-width="5"/>
-  <g stroke="#c08a2c" stroke-width="3" opacity=".7">
-   <line x1="120" y1="395" x2="120" y2="420"/><line x1="300" y1="395" x2="300" y2="420"/><line x1="480" y1="395" x2="480" y2="420"/>
-   <line x1="660" y1="395" x2="660" y2="420"/><line x1="840" y1="395" x2="840" y2="420"/><line x1="980" y1="395" x2="980" y2="420"/>
+
+ <!-- khung -->
+ <rect x="34" y="34" width="1012" height="1282" fill="none" stroke="url(#gold)" stroke-width="2.5"/>
+ <rect x="48" y="48" width="984" height="1254" fill="none" stroke="#d9a845" stroke-opacity=".45" stroke-width="1"/>
+ <use href="#corner" transform="translate(60 60)"/>
+ <use href="#corner" transform="translate(1020 60) scale(-1 1)"/>
+ <use href="#corner" transform="translate(60 1290) scale(1 -1)"/>
+ <use href="#corner" transform="translate(1020 1290) scale(-1 -1)"/>
+ <!-- phan cach duoi tieu de -->
+ <g transform="translate(540 610)">
+  <line x1="-230" y1="0" x2="-18" y2="0" stroke="url(#goldHU)" stroke-width="1.5"/>
+  <line x1="18" y1="0" x2="230" y2="0" stroke="url(#goldHU)" stroke-width="1.5"/>
+  <rect x="-7" y="-7" width="14" height="14" transform="rotate(45)" fill="url(#gold)"/>
+  <circle cx="-26" cy="0" r="2.5" fill="#e9c46a"/><circle cx="26" cy="0" r="2.5" fill="#e9c46a"/>
+ </g>
+
+ <!-- Đà Nẵng: Cầu Rồng trên sông Hàn -->
+ <circle cx="900" cy="700" r="120" fill="url(#halo)"/>
+ <circle cx="900" cy="700" r="62" fill="none" stroke="url(#gold)" stroke-width="1.2" opacity=".55"/>
+ <!-- skyline mo -->
+ <g fill="none" stroke="#d9a845" stroke-opacity=".28" stroke-width="1.3">
+  <path d="M120 840 V770 H150 V740 H175 V840 M190 840 V705 L205 690 L220 705 V840 M240 840 V760 H270 V840"/>
+  <path d="M640 840 V745 H668 V715 H690 V840 M708 840 V770 H740 V840 M960 840 V735 H985 V700 L998 680 L1010 700 V840"/>
+ </g>
+ <g id="bridge">
+  <!-- than rong: ong vang -->
+  <use href="#bp" fill="none" stroke="url(#gold)" stroke-width="22" stroke-linecap="round"/>
+  <use href="#bp" fill="none" stroke="#0c2142" stroke-width="15" stroke-linecap="round"/>
+  <use href="#bp" fill="none" stroke="url(#gold)" stroke-width="3" stroke-dasharray="1 9" stroke-linecap="round"/>
+  <!-- vay lung -->
+  <path d="M190 728 l8 -16 l6 14 M235 742 l10 -14 l4 16 M455 724 l8 -18 l6 16 M520 700 l6 -18 l8 16 M575 718 l10 -15 l4 16 M800 742 l8 -16 l6 14" fill="none" stroke="url(#gold)" stroke-width="2"/>
+  <!-- mat cau -->
+  <line x1="70" y1="842" x2="1010" y2="842" stroke="#e2b95c" stroke-width="3"/>
+  <line x1="70" y1="852" x2="1010" y2="852" stroke="#d9a845" stroke-opacity=".6" stroke-width="1"/>
+  <g stroke="#e2b95c" stroke-width="1.5">
+   <line x1="180" y1="852" x2="180" y2="880"/><line x1="340" y1="852" x2="340" y2="880"/><line x1="500" y1="852" x2="500" y2="880"/>
+   <line x1="660" y1="852" x2="660" y2="880"/><line x1="820" y1="852" x2="820" y2="880"/><line x1="960" y1="852" x2="960" y2="880"/>
   </g>
-  <path d="M50 380 Q140 200 250 320 Q330 410 420 280 Q520 140 620 290 Q700 400 790 280 Q850 200 905 252" fill="none" stroke="url(#dg)" stroke-width="26" stroke-linecap="round"/>
-  <path d="M50 380 Q140 200 250 320 Q330 410 420 280 Q520 140 620 290 Q700 400 790 280 Q850 200 905 252" fill="none" stroke="#fff3c4" stroke-width="3" stroke-dasharray="3 12" stroke-linecap="round" opacity=".9"/>
-  <path d="M50 380 Q140 200 250 320 Q330 410 420 280 Q520 140 620 290 Q700 400 790 280 Q850 200 905 252" fill="none" stroke="#8a5a14" stroke-width="2" transform="translate(0 11)" opacity=".5"/>
-  <!-- dau rong -->
-  <path d="M905 255 Q878 228 892 198 Q898 225 918 240 Z M915 262 Q880 262 868 240 Q892 250 920 250 Z" fill="#e8b84a"/>
-  <path d="M945 222 Q915 192 885 182 Q912 202 930 228 Z" fill="#e8b84a"/>
-  <path d="M962 218 Q945 178 912 160 Q948 182 950 222 Z" fill="#ffd27a"/>
-  <path d="M898 255 Q925 214 975 216 L1030 226 Q1042 232 1032 240 L992 245 L1026 262 Q1018 272 990 268 Q950 274 912 270 Z" fill="url(#dg)"/>
-  <path d="M992 245 L1026 262" stroke="#7a0a12" stroke-width="3"/>
-  <circle cx="972" cy="231" r="5" fill="#7a0a12"/><circle cx="973" cy="230" r="1.6" fill="#fff"/>
-  <path d="M1032 236 Q1060 255 1040 290" stroke="#ffd27a" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <path d="M1020 228 Q1050 205 1045 180" stroke="#ffd27a" stroke-width="3" fill="none" stroke-linecap="round"/>
   <!-- duoi rong -->
-  <path d="M52 378 Q25 345 38 310 Q48 345 70 355 Z M50 382 Q20 380 10 360 Q35 368 55 365 Z" fill="#e8b84a"/>
-  <!-- song Han -->
-  <g stroke="#e8c069" stroke-linecap="round" opacity=".35" fill="none" stroke-width="3">
-   <path d="M60 440 Q160 430 260 440 T460 440 T660 440 T860 440 T1040 440"/>
-   <path d="M120 462 Q220 452 320 462 T520 462 T720 462 T920 462"/>
+  <path d="M97 838 Q62 808 76 770 Q86 806 112 818 M95 842 Q58 844 44 822 Q72 832 100 830" fill="none" stroke="url(#gold)" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- dau rong -->
+  <g fill="none" stroke="url(#gold)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M872 742 Q895 700 940 698 L992 706 Q1004 711 994 719 L958 724 L990 740 Q982 750 956 746 Q920 752 884 750"/>
+   <path d="M958 724 L990 740"/>
+   <path d="M912 702 Q888 672 856 664 Q884 684 898 706"/>
+   <path d="M930 699 Q916 660 884 642 Q920 664 922 700"/>
+   <path d="M876 748 Q846 744 836 722 M874 736 Q850 718 860 692"/>
+   <path d="M994 712 Q1022 732 1008 762 M986 706 Q1012 684 1006 660"/>
   </g>
-  <text x="1030" y="440" text-anchor="end" font-family="'Playfair Display',serif" font-style="italic" font-size="26" fill="#f3d48b" opacity=".9">Đà Nẵng</text>
+  <circle cx="940" cy="712" r="4" fill="url(#gold)"/>
  </g>
- <g transform="translate(540 470) scale(.74) translate(-540 -470)">
- <g fill="url(#g)">
-  <!-- Anh 1 (trái) -->
-  <circle cx="330" cy="150" r="42"/>
-  <path d="M260 470 L268 250 Q275 205 330 198 Q385 205 392 250 L400 470 Z"/>
-  <path d="M318 205 L330 255 L342 205 Z" fill="#7a0a12"/>
-  <path d="M392 255 L440 300 L430 312 L388 285 Z"/>
-  <rect x="425" y="290" width="58" height="42" rx="4"/><rect x="443" y="282" width="22" height="10" rx="3" fill="none" stroke="url(#g)" stroke-width="5"/>
-  <!-- Chị (giữa) -->
-  <path d="M488 115 Q486 52 540 50 Q594 52 592 115 Q598 175 584 200 L560 200 L560 120 L520 120 L520 200 L496 200 Q482 175 488 115 Z" fill="#c08a2c"/>
-  <circle cx="540" cy="112" r="40"/>
-  <path d="M500 105 Q505 62 540 60 Q580 62 582 108 Q560 80 520 88 Z" fill="#c08a2c"/>
-  <path d="M470 470 L482 230 Q490 170 540 162 Q590 170 598 230 L610 470 Z"/>
-  <path d="M520 168 L540 225 L560 168 Z" fill="#7a0a12"/>
-  <path d="M482 240 L440 330 L455 338 L492 270 Z"/><path d="M598 240 L640 330 L625 338 L588 270 Z"/>
-  <!-- Anh 2 (phải) -->
-  <circle cx="750" cy="150" r="42"/>
-  <path d="M680 470 L688 250 Q695 205 750 198 Q805 205 812 250 L820 470 Z"/>
-  <path d="M738 205 L750 255 L762 205 Z" fill="#7a0a12"/>
-  <path d="M688 255 L640 210 L650 198 L695 230 Z"/>
+ <!-- phan chieu song Han -->
+ <g mask="url(#refl)" opacity=".55"><use href="#bridge" transform="translate(0 1724) scale(1 -1)"/></g>
+ <g stroke="#e2b95c" stroke-width="1" opacity=".35">
+  <line x1="160" y1="900" x2="420" y2="900"/><line x1="620" y1="908" x2="920" y2="908"/><line x1="320" y1="918" x2="760" y2="918"/>
  </g>
- <g fill="#a8121c">
-  <path d="M326 212 L334 212 L338 300 L330 312 L322 300 Z"/><path d="M746 212 L754 212 L758 300 L750 312 L742 300 Z"/>
- </g>
+ <text x="1000" y="940" text-anchor="end" font-family="Cormorant Garamond,serif" font-style="italic" font-size="22" letter-spacing="3" fill="#d9b46a" opacity=".85">Cầu Rồng · Đà Nẵng</text>
+ <!-- bui vang -->
+ <g fill="#fff4c8">
+  <circle cx="160" cy="420" r="1.6" opacity=".7"/><circle cx="230" cy="520" r="1" opacity=".6"/><circle cx="900" cy="440" r="1.8" opacity=".7"/>
+  <circle cx="840" cy="560" r="1.1" opacity=".6"/><circle cx="120" cy="640" r="1.3" opacity=".5"/><circle cx="980" cy="580" r="1" opacity=".5"/>
+  <circle cx="300" cy="660" r="1.2" opacity=".5"/><circle cx="760" cy="640" r="1.4" opacity=".6"/>
  </g>
 </svg>
-<div class="msg">
- <div class="to" id="to">Kính gửi Anh/Chị ……………</div>
- <p>Kính chúc các Anh, Chị Doanh nhân luôn dồi dào sức khỏe,<br>vững vàng bản lĩnh, thành công rực rỡ<br>và vạn sự hanh thông trên con đường kinh doanh!</p>
- <div class="sign">Trân trọng – Hoàng Hiệp</div>
+
+<div class="top">
+ <div class="kicker">KÍNH CHÚC MỪNG</div>
+ <div class="date foil">13 · 10</div>
+ <div class="title1 foil">Ngày Doanh nhân</div>
+ <div class="title2 foil">VIỆT NAM</div>
 </div>
-<div class="foot">HOÀNG HIỆP · BẤT ĐỘNG SẢN</div>
+<div class="msg">
+ <div class="to foil" id="to">Kính gửi Anh/Chị ……………</div>
+ <p>Chúc Anh/Chị luôn dồi dào sức khỏe, vững vàng bản lĩnh,<br>gặt hái nhiều thành công và thịnh vượng<br>trên hành trình kiến tạo giá trị.</p>
+</div>
+<div class="sign">
+ <div class="s1">TRÂN TRỌNG</div>
+ <div class="s2 foil">HOÀNG HIỆP</div>
+</div>
 </div>
 <script>
 const n=new URLSearchParams(location.search).get('ten');
-if(n) document.getElementById('to').textContent='Kính gửi '+n;
+if(n){document.getElementById('to').textContent='Kính gửi '+n;}
 </script></body></html>
