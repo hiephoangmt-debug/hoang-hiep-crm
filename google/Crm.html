@@ -753,7 +753,7 @@ function openLead(phone, page, keep) {
   var srcLine = [l.srcType, l.source, l.campaign].filter(Boolean).join(' · ') || 'Chưa rõ';
   var P = {
     h2: '<h2 style="margin:0">KH' + pad(l.id) + ' · ' + esc(l.name || '(chưa có tên)') + ' · ' + esc(l.phone) + ' ' + zl(l.phone, l) + '</h2><p class="mut small">' + esc(l.site) + ' · ' + esc(l.email) + ' · gửi form ' + l.submits + ' lần · nhận lúc ' + esc(fmt(l.at)) + '</p>',
-    actions: '<div class="row"><button class="btn z" data-a="zalo">Nhắn Zalo</button><button class="btn g" data-a="call">Gọi</button><button class="btn" data-a="sms">Đã nhắn SMS</button>' + (aiOn() ? '<button class="btn" id="zcBtn">Chụp Zalo gửi lên</button>' : '') + (aiOn() ? '<button class="btn" id="aiBtn">AI phân tích khách hàng</button>' : '') + '</div>' +
+    actions: '<div class="row" style="margin:6px 0"><input id="qnm" value="' + esc(l.name) + '" placeholder="Nhập tên khách" style="flex:1;min-width:140px"><button class="btn sm p" id="qnmok">Lưu tên</button></div><div class="row"><button class="btn z" data-a="zalo">Nhắn Zalo</button><button class="btn g" data-a="call">Gọi</button><button class="btn" data-a="sms">Đã nhắn SMS</button>' + (aiOn() ? '<button class="btn" id="zcBtn">Chụp Zalo gửi lên</button>' : '') + (aiOn() ? '<button class="btn" id="aiBtn">AI phân tích khách hàng</button>' : '') + '</div>' +
     '<div id="aiOut" class="card" hidden></div>',
     personal: '<h3>Thông tin cá nhân <span class="tag">Khách cung cấp</span></h3><div class="fgrid">' +
     lab('Họ và tên', inp('nm', l.name)) + lab('Link Drive / hồ sơ khách', inp('du', l.docUrl)) + lab('SĐT phụ', inp('p2', l.phone2)) + lab('Zalo', sel('zl', ['Đã kết nối', 'Chưa xác nhận', 'Không dùng Zalo'], l.zalo, 'Chưa cập nhật')) +
@@ -798,6 +798,10 @@ function openLead(phone, page, keep) {
   document.querySelectorAll('#main [data-a], #dlgBody [data-a]').forEach(function (b) { b.onclick = function () {
     var a = b.dataset.a; if (a === 'zalo') window.open('https://zalo.me/' + phone, '_blank', 'noopener'); if (a === 'call') window.open('tel:' + phone, '_self');
     run('crmLog', phone, a).then(function (r) { l.called = r.called; l.messaged = r.messaged; l.contactedAt = r.contactedAt; l.status = r.status; badges(); toast('Đã ghi nhận'); fin(); }).catch(fail); }; });
+  $('#qnmok').onclick = function () {
+    var v = $('#qnm').value.trim(); if (!v) { toast('Hãy nhập tên'); return; }
+    run('crmUpdateLead', phone, { name: v }).then(function () { l.name = v; $('#nm').value = v; toast('Đã lưu tên'); fin(); }).catch(fail);
+  };
   $('#sv').onclick = function () {
     var st = $('#st').value;
     if ((st === 'Mất' || st === 'Tạm dừng') && st !== l.status && !$('#sr').value.trim()) { toast('Hãy ghi lý do khi chuyển sang ' + st); $('#sr').focus(); return; }
@@ -1523,13 +1527,21 @@ function addLead() {
     if (um) set('#adu', um[0].replace(/[),.;]+$/, ''));
     var bm = /(\d+(?:[.,]\d+)?)\s*(?:-|đến|tới|~)\s*(\d+(?:[.,]\d+)?)\s*tỷ/i.exec(t), b1 = /(\d+(?:[.,]\d+)?)\s*tỷ/i.exec(t);
     if (bm) { set('#a1', bm[1] + ' tỷ'); set('#a2', bm[2] + ' tỷ'); } else if (b1) set('#a2', b1[1] + ' tỷ');
-    var low = t.toLowerCase(), pj = projNames().filter(function (n) { return n && low.indexOf(n.toLowerCase()) >= 0; })[0]; set('#ad', pj);
-    var first = pm && pm.index > 0 ? t.slice(0, pm.index) : t.split(/\n/)[0].replace(/https?:\/\/\S+/g, '').replace(pm ? pm[0] : '', ' ');
-    var nm = first.split(/[,;|\t]/)[0].replace(/\s+/g, ' ').trim(); if (nm && !/\d/.test(nm) && nm.length <= 60 && !$('#an').dataset.tp) $('#an').value = nm;
-    var rest = t.replace(/https?:\/\/\S+/g, '').trim(); if (rest && !$('#anote').dataset.tp) $('#anote').value = rest;
+    var low = t.toLowerCase().replace(/-/g, ' '), pj = projNames().filter(function (n) { return n && low.indexOf(n.toLowerCase()) >= 0; })[0]; set('#ad', pj);
+    var tm = /(?:^|\n)\s*(?:họ\s*)?tên\s*(?:khách)?\s*[:：]\s*([^\n·|]+)/i.exec(t), am = pm ? new RegExp(pm[0].replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*[–—:\\-]\\s*([^·|\\n]+)').exec(t) : null;
+    var lead = (tm && tm[1]) || (am && am[1]) || '', nmx = lead.replace(/mở\s*zalo/ig, '').replace(/[^\p{L}\s.'’-]/gu, ' ').replace(/\s+/g, ' ').trim();
+    if (nmx && nmx.length <= 60 && !$('#an').dataset.tp) { $('#an').value = nmx.replace(/(^|\s)(\p{L})/gu, function (m0, a, b) { return a + b.toUpperCase(); }); $('#apnote').innerHTML = ''; }
+    var ik = /quan\s*tâm\s*[:：]\s*([^\n]+)/i.exec(t), sk = /nguồn\s*[:：]\s*([^\n]+)/i.exec(t), tg = /(?:trang|url)\s*[:：]\s*(https?:\/\/\S+)/i.exec(t), dm = /(\d{1,2}):(\d{2})(?::\d{2})?\s+(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(t);
+    var ctx = {}; if (tg) ctx.url = tg[1]; if (dm) ctx.at = dm[5] + '-' + ('0' + dm[4]).slice(-2) + '-' + ('0' + dm[3]).slice(-2) + 'T' + ('0' + dm[1]).slice(-2) + ':' + dm[2] + ':00'; if (sk) ctx.campaign = sk[1].trim();
+    $('#apaste').dataset.ctx = JSON.stringify(ctx);
+    if (sk) { var so = [].slice.call($('#as2').options).filter(function (o) { return o.value && sk[1].toLowerCase().indexOf(o.value.toLowerCase()) >= 0; })[0]; if (so) $('#as2').value = so.value; }
+    var tz = /(?:^|[^a-z0-9])(f[1-5])(?![a-z0-9])/i.exec(t); if (tz && !$('#atoa').value) $('#atoa').value = tz[1].toUpperCase();
+    var first = pm && pm.index > 0 && !lead ? t.slice(0, pm.index) : t.split(/\n/)[0].replace(/https?:\/\/\S+/g, '').replace(pm ? pm[0] : '', ' ');
+    var nm = first.split(/[,;|\t]/)[0].replace(/\s+/g, ' ').trim(); if (!lead && nm && !/\d/.test(nm) && nm.length <= 60 && !$('#an').dataset.tp) $('#an').value = nm;
+    var rest = ik ? 'Quan tâm: ' + ik[1].trim() : t.replace(/https?:\/\/\S+/g, '').trim(); if (rest && !$('#anote').dataset.tp) $('#anote').value = rest;
   };
   $('#an').oninput = function () { this.dataset.tp = 1; }; $('#anote').oninput = function () { this.dataset.tp = 1; };
-  var collect = function () { return { toa: $('#atoa').value, docUrl: $('#adu').value, name: $('#an').value, phone: $('#ap').value, province: $('#av').value, district: $('#adt').value, address: $('#aad').value, site: '', project: $('#ad').value, source: $('#as2').value, purpose: $('#ao').value, bmin: $('#a1').value, bmax: $('#a2').value, status: $('#ast').value, note: $('#anote').value }; };
+  var collect = function () { return { toa: $('#atoa').value, docUrl: $('#adu').value, name: $('#an').value, phone: $('#ap').value, province: $('#av').value, district: $('#adt').value, address: $('#aad').value, site: '', project: $('#ad').value, source: $('#as2').value, purpose: $('#ao').value, bmin: $('#a1').value, bmax: $('#a2').value, status: $('#ast').value, note: $('#anote').value, url: JSON.parse($('#apaste').dataset.ctx || '{}').url || '', at: JSON.parse($('#apaste').dataset.ctx || '{}').at || '', campaign: JSON.parse($('#apaste').dataset.ctx || '{}').campaign || '' }; };
   $('#aok').onclick = function () {
     var f = collect(); if (!f.phone.trim()) { toast('Hãy nhập số điện thoại'); return; }
     $('#aok').disabled = true;
