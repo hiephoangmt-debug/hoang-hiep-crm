@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.18** + plugin Hoàng Hiệp CRM **2.20.45**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.18** + plugin Hoàng Hiệp CRM **2.20.46**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.46: chat như người thật, nói được tiếng Anh, tiếng Hàn
+- **Nhịp nhắn như người:** câu trả lời tách thành 2 – 3 tin ngắn, mỗi tin "đang gõ…" một lúc theo độ dài (không bật ra cả đoạn ngay lập tức).
+- Bớt câu khuôn mẫu: lời mở đầu thay đổi ("Dạ", "Vâng ạ", "Dạ có ạ"…), bỏ "em nhận thông tin ạ"; khách xưng "anh" / "chị" thì cả câu gọi đúng "anh" / "chị".
+- **Tiếng Anh, tiếng Hàn:** khách nhắn tiếng nào trả lời tiếng đó (tự nhận biết từng tin): chào, đùa, hỏi giá dự án (kèm giá bán lại, giá thuê, link), người nước ngoài mua nhà (30% căn mỗi tòa, sở hữu 50 năm), thuê nhà, xin số. Chat bật cả ở trang /en/, /ko/ với giao diện tiếng Anh, tiếng Hàn.
+- Chế độ AI (khi gắn khóa): viết lại hướng dẫn giọng điệu – nhắn như sale thật, câu nghiêm túc thì chuẩn chỉnh có số liệu, câu đùa thì duyên; trả lời đúng ngôn ngữ khách (Anh, Hàn, Trung, Nhật…).
+- Cài: Nhập nhanh `cap-nhat-code.zip` → LiteSpeed Cache → Purge All.
 
 ## Có gì mới – plugin 2.20.45: chat tự động đối đáp khéo, hóm hỉnh hơn
 - Chat đang chạy chế độ kịch bản (chưa gắn khóa AI): thêm nhiều kiểu câu đùa, chọc, chê, trả giá – mỗi kiểu 2 – 3 câu trả lời khác nhau, không lặp lại: bot là ai, tán tỉnh, đẹp trai/xinh, chê bot, xin giảm giá, xin nợ, hết tiền, chê đắt, nhà có ma/phong thủy, vợ chưa cho mua, cười, buồn, thời tiết, ăn gì, vàng hay đất, chào, tạm biệt.

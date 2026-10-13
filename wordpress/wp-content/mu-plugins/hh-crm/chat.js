@@ -2,6 +2,7 @@
 ( function () {
 	'use strict';
 	var C = window.HH_CHAT;
+	var T = ( C && C.ui ) || {};
 	if ( ! C ) {
 		return;
 	}
@@ -40,18 +41,18 @@
 	root.innerHTML =
 		'<button type="button" class="hhc__fab" aria-label="Chat với ' + esc( C.name ) + '">' +
 			( C.avatar ? '<img src="' + esc( C.avatar ) + '" alt="" width="44" height="44">' : '' ) +
-			'<span class="hhc__fab-text">Chat tư vấn</span><span class="hhc__dot"></span></button>' +
+			'<span class="hhc__fab-text">' + esc( T.fab || 'Chat tư vấn' ) + '</span><span class="hhc__dot"></span></button>' +
 		'<div class="hhc__bubble" hidden><button type="button" class="hhc__bubble-x" aria-label="Đóng">×</button><p></p><div class="hhc__bubble-chips"></div></div>' +
 		'<section class="hhc__panel" hidden role="dialog" aria-label="Chat tư vấn">' +
 			'<header class="hhc__head">' +
 				( C.avatar ? '<img src="' + esc( C.avatar ) + '" alt="" width="44" height="44">' : '' ) +
-				'<div><strong>' + esc( C.name ) + '</strong><span><i></i> Đang trực tuyến · trả lời trong vài phút</span></div>' +
+				'<div><strong>' + esc( C.name ) + '</strong><span><i></i> ' + esc( T.online || 'Đang trực tuyến · trả lời trong vài phút' ) + '</span></div>' +
 				'<button type="button" class="hhc__close" aria-label="Đóng chat">×</button>' +
 			'</header>' +
 			'<div class="hhc__log" aria-live="polite"></div>' +
 			'<div class="hhc__chips"></div>' +
-			'<form class="hhc__form"><input type="text" name="m" autocomplete="off" maxlength="800" placeholder="Nhập câu hỏi hoặc số Zalo…" aria-label="Tin nhắn"><button type="submit" aria-label="Gửi">➤</button></form>' +
-			'<p class="hhc__foot">Hoặc gọi/Zalo <a href="' + esc( C.zalo ) + '" target="_blank" rel="noopener">' + esc( C.phone ) + '</a></p>' +
+			'<form class="hhc__form"><input type="text" name="m" autocomplete="off" maxlength="800" placeholder="' + esc( T.placeholder || 'Nhập câu hỏi hoặc số Zalo…' ) + '" aria-label="Tin nhắn"><button type="submit" aria-label="Gửi">➤</button></form>' +
+			'<p class="hhc__foot">' + esc( T.call || 'Hoặc gọi/Zalo' ) + ' <a href="' + esc( C.zalo ) + '" target="_blank" rel="noopener">' + esc( C.phone ) + '</a></p>' +
 		'</section>';
 	document.body.appendChild( root );
 
@@ -94,7 +95,7 @@
 					input.value = '';
 					input.placeholder = 'Nhập số điện thoại/Zalo của anh/chị…';
 					input.focus();
-					addMsg( 'assistant', 'Anh/chị nhập số điện thoại/Zalo giúp em, ' + C.name + ' sẽ gửi tài liệu và gọi tư vấn trong ít phút ạ.', true );
+					addMsg( 'assistant', T.askphone || 'Anh/chị nhập số điện thoại/Zalo giúp em, ' + C.name + ' sẽ gửi tài liệu và gọi tư vấn trong ít phút ạ.', true );
 					return;
 				}
 				send( c );
@@ -108,7 +109,13 @@
 		bubble.hidden = true;
 		root.classList.add( 'is-open' );
 		if ( ! log.childElementCount ) {
-			state.msgs.forEach( function ( m ) { addMsg( m.role, m.text, false ); } );
+			state.msgs.forEach( function ( m ) {
+				( 'assistant' === m.role ? String( m.text ).split( /\n\s*\n/ ) : [ m.text ] ).forEach( function ( x ) {
+					if ( x.trim() ) {
+						addMsg( m.role, x.trim(), false );
+					}
+				} );
+			} );
 			if ( ! state.msgs.length && ! pendingNudge ) {
 				addMsg( 'assistant', C.greet, true );
 			}
@@ -133,6 +140,7 @@
 		addMsg( 'user', text, true );
 		chips.innerHTML = '';
 		busy = true;
+		var started = Date.now();
 		var typing = el( 'div', 'hhc__msg hhc__msg--assistant hhc__typing' );
 		typing.innerHTML = '<i></i><i></i><i></i>';
 		log.appendChild( typing );
@@ -140,7 +148,7 @@
 		// Câu cần tra cứu web có thể mất 15 – 40 giây: báo khách đang tra, tránh tưởng chat bị treo.
 		var slow = setTimeout( function () {
 			var note = el( 'span', 'hhc__typing-note' );
-			note.textContent = 'Em đang tra cứu số liệu mới nhất…';
+			note.textContent = T.searching || 'Em đang tra cứu số liệu mới nhất…';
 			typing.appendChild( note );
 			log.scrollTop = log.scrollHeight;
 		}, 7000 );
@@ -148,6 +156,7 @@
 		body.append( 'action', 'hh_chat' );
 		body.append( 'conv', state.conv );
 		body.append( 'page', C.page || 0 );
+		body.append( 'lang', C.lang || 'vi' );
 		body.append( 'messages', JSON.stringify( state.msgs.slice( -14 ) ) );
 		var src = window.HH_SRC || {};
 		[ 'url', 'title', 'first', 'ref' ].forEach( function ( k ) { body.append( 'src_' + k, String( src[ k ] || '' ).slice( 0, 500 ) ); } );
@@ -158,17 +167,33 @@
 				if ( d.lead ) {
 					state.lead = true;
 				}
-				return d.reply || 'Em chưa nhận được câu trả lời, anh/chị gọi/Zalo ' + C.phone + ' giúp em nhé.';
+				return d.reply || ( T.noreply ? T.noreply + C.phone : 'Em chưa nhận được câu trả lời, anh/chị gọi/Zalo ' + C.phone + ' giúp em nhé.' );
 			} )
 			.catch( function () {
-				return 'Mạng đang chậm, anh/chị nhắn lại giúp em hoặc gọi/Zalo ' + C.phone + ' nhé.';
+				return T.slow ? T.slow + C.phone : 'Mạng đang chậm, anh/chị nhắn lại giúp em hoặc gọi/Zalo ' + C.phone + ' nhé.';
 			} )
 			.then( function ( reply ) {
 				clearTimeout( slow );
-				typing.remove();
-				addMsg( 'assistant', reply, true );
-				busy = false;
-				renderChips();
+				// Nhắn như người thật: tách thành vài bong bóng ngắn (dòng trống), mỗi bong bóng "gõ" một lúc tùy độ dài.
+				var parts = String( reply ).split( /\n\s*\n/ ).map( function ( x ) { return x.trim(); } ).filter( Boolean );
+				var waited = Date.now() - started;
+				state.msgs.push( { role: 'assistant', text: reply } );
+				save();
+				( function next( i ) {
+					var delay = Math.min( 2600, 450 + parts[ i ].length * 18 ) - ( 0 === i ? waited : 0 );
+					setTimeout( function () {
+						typing.remove();
+						addMsg( 'assistant', parts[ i ], false );
+						if ( i + 1 < parts.length ) {
+							log.appendChild( typing );
+							log.scrollTop = log.scrollHeight;
+							next( i + 1 );
+						} else {
+							busy = false;
+							renderChips();
+						}
+					}, Math.max( 0, delay ) );
+				} )( 0 );
 			} );
 	}
 
