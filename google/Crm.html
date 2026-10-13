@@ -856,6 +856,13 @@ function cleanName(raw) {
   parts = parts.filter(function (w) { return !/^(\d+\s*(br|pn)|br|pn|khách|kh|cvkd|mrs|mr|ms)$/i.test(w); });
   var pad = ' ' + n.toLowerCase() + ' ';
   if (pad.indexOf(' mrs ') >= 0 || pad.indexOf(' ms ') >= 0) hon = 'chị'; else if (pad.indexOf(' mr ') >= 0 && !hon) hon = 'anh';
+  if (parts.length > 2 && SURN.indexOf(' ' + parts[0].toLowerCase() + ' ') < 0) {   // tiền tố lạ đứng trước họ (Bán đảo Trần Thị Lan): bỏ đến họ
+    for (var j = 1; j < Math.min(parts.length - 1, 4); j++) if (SURN.indexOf(' ' + parts[j].toLowerCase() + ' ') >= 0) { parts = parts.slice(j); break; }
+  }
+  if (!hon) {   // tên đệm Thị là nữ, tên đệm Văn là nam
+    var mid = parts.slice(1, -1).map(function (w) { return w.toLowerCase(); });
+    if (mid.indexOf('thị') >= 0 || mid.indexOf('thi') >= 0) hon = 'chị'; else if (mid.indexOf('văn') >= 0 || mid.indexOf('van') >= 0) hon = 'anh';
+  }
   return { hon: hon, name: parts.join(' ') };
 }
 function snName(l) { var c = cleanName(l.name); return c.name ? (c.hon || 'anh/chị') + ' ' + c.name : (c.hon || 'anh/chị'); }
