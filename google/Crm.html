@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CRM Hoàng Hiệp</title>
 <style>
-:root{--navy9:#0B1F3D;--navy8:#12305C;--navy7:#1B4585;--gold:#D9A441;--gold2:#E9C67C;--goldsoft:#FBF1DC;--bg:#F5F6FA;--card:#fff;--ink:#0F1B33;--mut:#5E6B85;--line:#E3E8F1;--red:#C62828;--redsoft:#FDECEC;--green:#1E8E4F;--greensoft:#E6F5EC;--blue:#0068FF}
+:root{--navy9:#0B1F3D;--navy8:#12305C;--navy7:#1B4585;--gold:#F28C28;--gold2:#F9B872;--goldsoft:#FFF0E0;--bg:#F7F8FC;--card:#fff;--ink:#0F1B33;--mut:#5E6B85;--line:#E3E8F1;--red:#C62828;--redsoft:#FDECEC;--green:#1E8E4F;--greensoft:#E6F5EC;--blue:#0068FF}
 *{box-sizing:border-box}
 html{background:var(--bg)}
 body{margin:0;font:14.5px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);min-height:100vh}
@@ -18,11 +18,11 @@ body{margin:0;font:14.5px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-se
 @media (prefers-reduced-motion:reduce){header::before,header::after,.waves{animation:none}}
 
 header{position:sticky;top:0;z-index:5;padding:10px 16px 0;display:flex;gap:6px 12px;align-items:center;flex-wrap:wrap;color:#fff;overflow:hidden;
-  background:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px) 0 0/30px 30px,linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px) 0 0/30px 30px,radial-gradient(520px 170px at 92% -40%,rgba(226,179,90,.26),transparent 62%),radial-gradient(420px 160px at 4% 140%,rgba(80,140,230,.22),transparent 62%),linear-gradient(135deg,var(--navy9) 0%,var(--navy8) 100%);
+  background:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px) 0 0/30px 30px,linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px) 0 0/30px 30px,radial-gradient(520px 170px at 92% -40%,rgba(242,140,40,.26),transparent 62%),radial-gradient(420px 160px at 4% 140%,rgba(80,140,230,.22),transparent 62%),linear-gradient(135deg,var(--navy9) 0%,var(--navy8) 100%);
   box-shadow:0 4px 18px rgba(11,31,61,.22)}
 header>*{position:relative;z-index:1}
 header::before{content:"";position:absolute;left:0;right:0;bottom:2px;height:30px;z-index:0;pointer-events:none;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24' fill='none' stroke='rgba(190,215,255,.50)' stroke-width='1.3' stroke-linecap='round'%3E%3Cpath d='M0 12 q25 -7 50 0 t50 0 q25 -7 50 0 t50 0 q25 -7 50 0 t50 0 q25 -7 50 0 t50 0'/%3E%3C/svg%3E") 0 2px/400px 24px repeat-x,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24' fill='none' stroke='rgba(233,198,124,.45)' stroke-width='1.1' stroke-linecap='round'%3E%3Cpath d='M0 12 q25 -5 50 0 t50 0 q25 -5 50 0 t50 0 q25 -5 50 0 t50 0 q25 -5 50 0 t50 0'/%3E%3C/svg%3E") 0 12px/300px 22px repeat-x;opacity:.55;animation:flow 18s linear infinite}
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24' fill='none' stroke='rgba(190,215,255,.50)' stroke-width='1.3' stroke-linecap='round'%3E%3Cpath d='M0 12 q25 -7 50 0 t50 0 q25 -7 50 0 t50 0 q25 -7 50 0 t50 0 q25 -7 50 0 t50 0'/%3E%3C/svg%3E") 0 2px/400px 24px repeat-x,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24' fill='none' stroke='rgba(249,184,114,.45)' stroke-width='1.1' stroke-linecap='round'%3E%3Cpath d='M0 12 q25 -5 50 0 t50 0 q25 -5 50 0 t50 0 q25 -5 50 0 t50 0 q25 -5 50 0 t50 0'/%3E%3C/svg%3E") 0 12px/300px 22px repeat-x;opacity:.55;animation:flow 18s linear infinite}
 header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold));background-size:200% 100%;animation:sheen 14s linear infinite;z-index:1}
 header h1{display:flex;align-items:center;gap:10px;margin:0;font-size:17px;font-weight:650;letter-spacing:.5px;color:#fff}
 .logo{flex:none}
@@ -48,15 +48,15 @@ main{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:20px 16p
 button,select,input,textarea{font:inherit;color:var(--ink)}
 .btn{border:1px solid var(--line);background:#fff;color:var(--navy9);font-weight:500;padding:7px 14px;border-radius:10px;cursor:pointer;transition:background .15s,box-shadow .15s,transform .15s}
 .btn:hover{background:#F1F4FA;box-shadow:0 2px 8px rgba(11,31,61,.12)}
-.btn.z{background:var(--blue);border-color:var(--blue);color:#fff}.btn.z:hover{background:#0A5BE0}
-.btn.g{background:var(--gold);border-color:var(--gold);color:var(--navy9);font-weight:600}.btn.g:hover{background:#E2B04F}
+.btn.z{background:var(--navy8);border-color:var(--navy8);color:#fff}.btn.z:hover{background:var(--navy7)}
+.btn.g{background:var(--gold);border-color:var(--gold);color:#fff;font-weight:600}.btn.g:hover{background:#E07A14}
 .btn.p{background:var(--navy9);border-color:var(--navy9);color:#fff}.btn.p:hover{background:var(--navy8)}
 .btn:disabled{opacity:.5;cursor:default;box-shadow:none}
 input,select,textarea{padding:8px 11px;border:1px solid #D2DAE8;border-radius:10px;background:#fff}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--gold2);border-color:var(--gold)}textarea{width:100%}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
 .tag{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:500;background:#EDF0F6;color:#3A4663;white-space:nowrap}
-.tag.red{background:var(--redsoft);color:var(--red);font-weight:600}.tag.blu{background:#E8EEF9;color:var(--navy7)}.tag.grn{background:var(--greensoft);color:var(--green)}.tag.amb{background:var(--goldsoft);color:#8A5A00}
+.tag.red{background:var(--redsoft);color:var(--red);font-weight:600}.tag.blu{background:#E8EEF9;color:var(--navy7)}.tag.grn{background:var(--greensoft);color:var(--green)}.tag.amb{background:var(--goldsoft);color:#A24B00}
 .lead{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
 .chips{gap:6px}.chip{border:1px solid var(--line);background:var(--card);color:var(--navy8);font:inherit;padding:5px 12px;border-radius:99px;cursor:pointer}.chip.on{background:var(--navy8);color:#fff;border-color:var(--navy8)}.chip .n{opacity:.7;margin-left:4px}.meta{display:flex;flex-wrap:wrap;gap:4px 16px;color:var(--ink)}.note{margin-top:4px;color:var(--mut)}
 .zl{display:inline-block;margin-left:6px;padding:1px 9px;border-radius:99px;background:#E8F1FF;color:var(--blue);font-size:12px;font-weight:600;text-decoration:none;vertical-align:middle}.zl.on{background:var(--blue);color:#fff}.zl:hover{filter:brightness(.95)}
@@ -64,7 +64,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold2);border-co
 .rowtodo td{background:var(--redsoft)}.cnote{width:150px}
 .ctab{min-width:900px}.ctab th.srt{cursor:pointer;white-space:nowrap}.ctab td{vertical-align:top}.nw{white-space:nowrap}.btn.sm{padding:3px 9px;font-size:12.5px}.chk{display:flex;gap:6px;align-items:center;font-size:14px}.pager{justify-content:center;margin-top:10px}
 .mrow{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;box-shadow:0 1px 2px rgba(11,31,61,.05);cursor:pointer;display:flex;flex-direction:column;gap:6px}.mrow.todo{border-left:4px solid var(--red)}
-.btn.xs{min-height:28px!important;padding:2px 11px;font-size:13px;border-radius:8px}.mph{flex-wrap:nowrap}.mph .phn{white-space:nowrap}.mph .tag{white-space:nowrap}
+.btn.xs{min-height:24px!important;padding:1px 9px;font-size:12px;border-radius:7px;line-height:1.4}.mph{flex-wrap:nowrap}.mph .phn{white-space:nowrap}.mph .tag{white-space:nowrap}
 .mbtn{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.mbtn .btn.sm{min-height:32px;padding:3px 16px}.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;border-top:1px solid var(--line);padding-top:8px}.mc{display:flex;flex-direction:column;font-size:13px;min-width:0;overflow-wrap:anywhere}.mc .b{font-weight:700;color:var(--navy9)}
 .mtop,.mph{display:flex;align-items:center;gap:8px}.mname{font-size:16.5px;color:var(--navy9);overflow-wrap:anywhere}.phn{font-size:17px;font-weight:600;letter-spacing:.2px}.sp{flex:1}
 .pgbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:8px 0;background:var(--bg)}.pgname{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -83,7 +83,7 @@ dialog::backdrop{background:rgba(11,31,61,.55);backdrop-filter:blur(3px)}.dlg{pa
 code,pre{background:#F3F5FA;border:1px solid var(--line);border-radius:10px;font-size:12px;color:var(--ink)}pre{padding:10px;overflow:auto;white-space:pre-wrap;word-break:break-all;margin:6px 0}
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--navy9);border:1px solid rgba(255,255,255,.2);color:#fff;padding:9px 16px;border-radius:12px;display:none;z-index:20;box-shadow:0 10px 30px rgba(11,31,61,.4)}
 #diag{color:var(--red);padding:8px 16px;position:relative;z-index:2}
-.waves{position:absolute;left:0;right:0;bottom:0;height:70px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24' fill='none' stroke='rgba(11,31,61,.55)' stroke-width='1.3' stroke-linecap='round'%3E%3Cpath d='M0 12 q25 -8 50 0 t50 0 q25 -8 50 0 t50 0 q25 -8 50 0 t50 0 q25 -8 50 0 t50 0'/%3E%3C/svg%3E") 0 4px/400px 24px repeat-x,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24' fill='none' stroke='rgba(217,164,65,.7)' stroke-width='1.1' stroke-linecap='round'%3E%3Cpath d='M0 12 q25 -6 50 0 t50 0 q25 -6 50 0 t50 0 q25 -6 50 0 t50 0 q25 -6 50 0 t50 0'/%3E%3C/svg%3E") 0 22px/320px 24px repeat-x,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24' fill='none' stroke='rgba(11,31,61,.45)' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M0 12 q25 -9 50 0 t50 0 q25 -9 50 0 t50 0 q25 -9 50 0 t50 0 q25 -9 50 0 t50 0'/%3E%3C/svg%3E") 0 40px/480px 24px repeat-x;opacity:.16;animation:flow2 22s linear infinite}
+.waves{position:absolute;left:0;right:0;bottom:0;height:70px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24' fill='none' stroke='rgba(11,31,61,.55)' stroke-width='1.3' stroke-linecap='round'%3E%3Cpath d='M0 12 q25 -8 50 0 t50 0 q25 -8 50 0 t50 0 q25 -8 50 0 t50 0 q25 -8 50 0 t50 0'/%3E%3C/svg%3E") 0 4px/400px 24px repeat-x,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24' fill='none' stroke='rgba(242,140,40,.7)' stroke-width='1.1' stroke-linecap='round'%3E%3Cpath d='M0 12 q25 -6 50 0 t50 0 q25 -6 50 0 t50 0 q25 -6 50 0 t50 0 q25 -6 50 0 t50 0'/%3E%3C/svg%3E") 0 22px/320px 24px repeat-x,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24' fill='none' stroke='rgba(11,31,61,.45)' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M0 12 q25 -9 50 0 t50 0 q25 -9 50 0 t50 0 q25 -9 50 0 t50 0 q25 -9 50 0 t50 0'/%3E%3C/svg%3E") 0 40px/480px 24px repeat-x;opacity:.16;animation:flow2 22s linear infinite}
 .gbar{position:relative;z-index:1;display:flex;gap:8px;padding:10px 16px 0;max-width:1180px;margin:0 auto;flex-wrap:wrap}
 .gbar button{border:1px solid var(--line);background:var(--card);color:var(--navy8);font:inherit;font-weight:600;padding:6px 16px;border-radius:99px;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
 .gbar button:hover{border-color:var(--gold)}
@@ -94,7 +94,7 @@ code,pre{background:#F3F5FA;border:1px solid var(--line);border-radius:10px;font
 <body>
 <div class="fx" aria-hidden="true"><div class="skyline"></div><div class="waves"></div></div>
 <header>
-  <h1><svg class="logo" viewBox="0 0 48 32" width="34" height="22" fill="none" stroke="#E2B35A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 26 C10 6 18 6 24 20 C30 34 38 34 44 14"/><path d="M2 28 H46"/><path d="M44 14 l4 -6 l-1 8Z" fill="#E2B35A"/></svg>CRM Hoàng Hiệp</h1><span class="sp"></span>
+  <h1><svg class="logo" viewBox="0 0 48 32" width="34" height="22" fill="none" stroke="#F28C28" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 26 C10 6 18 6 24 20 C30 34 38 34 44 14"/><path d="M2 28 H46"/><path d="M44 14 l4 -6 l-1 8Z" fill="#F28C28"/></svg>CRM Hoàng Hiệp</h1><span class="sp"></span>
   <span class="mut small" id="who"></span>
   <button class="btn" id="aitog" title="Bật hoặc tắt quân sư AI">AI: bật</button>
   <button class="btn" id="reload">Tải lại</button>
