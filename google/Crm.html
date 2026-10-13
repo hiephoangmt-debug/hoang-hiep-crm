@@ -76,6 +76,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold2);border-co
 .hb{display:grid;grid-template-columns:minmax(90px,200px) 1fr auto;gap:8px;align-items:center;margin-top:6px;font-size:13px}.hl{overflow-wrap:anywhere}.hbar{background:#EDF0F6;border-radius:6px;height:14px;overflow:hidden}.hbar i{display:block;height:100%;border-radius:6px}.hv{font-weight:600;white-space:nowrap}
 .rbar{padding:12px 14px}.rbar input[type=date]{margin-left:4px}.adv{border-left:4px solid var(--line);padding:6px 10px;margin-top:8px;background:#F7F8FC;border-radius:0 8px 8px 0;font-size:13.5px}.adv.bad{border-color:var(--red);background:var(--redsoft)}.adv.warn{border-color:var(--gold);background:var(--goldsoft)}.adv.good{border-color:var(--green);background:var(--greensoft)}.adv summary{cursor:pointer;color:var(--navy7);font-weight:600;margin-top:4px}.adv ol{margin:6px 0 2px;padding-left:18px}.guide ul,.guide ol{margin:4px 0 10px;padding-left:20px}
 .kpi b.long{font-size:20px}
+.drill{cursor:pointer}.drill:hover td{background:var(--goldsoft)}
 .step{color:var(--navy7);font-weight:600;margin-top:4px}.assign{margin-top:6px}.assign select{max-width:220px}
 .lead.todo{border-left:4px solid var(--red)}
 .lead h3{margin:0;font-size:15.5px;font-weight:650;color:var(--navy9)}.acts{display:flex;gap:6px;flex-wrap:wrap}
@@ -105,6 +106,7 @@ code,pre{background:#F3F5FA;border:1px solid var(--line);border-radius:10px;font
     <button data-t="home" class="on">Tổng quan</button>
     <button data-t="today">Việc hôm nay<span class="dot" id="dToday" hidden></span></button>
     <button data-t="leads">Khách hàng<span class="dot" id="dLeads" hidden></span></button>
+    <button data-t="stats">Thống kê</button>
     <button data-t="clicks">Lượt bấm<span class="dot" id="dClicks" hidden></span></button>
     <button data-t="ask">Hỏi quân sư</button>
     <button data-t="camp">Chiến dịch</button>
@@ -120,7 +122,7 @@ code,pre{background:#F3F5FA;border:1px solid var(--line);border-radius:10px;font
 
 <script>
 window.onerror = function (m, s, l) { var d = document.getElementById('diag'); if (d) d.textContent = 'Lỗi trang: ' + m + (l ? ' (dòng ' + l + ')' : ''); };
-var KEY = /*__KEY__*/'', D = null, tab = 'home', F = { status: 'todo', site: '', q: '', clicks: 'todo', cw: '', cch: '', cd: 'all', src: '', as: '', sort: 'new', prov: '', bud: '', when: '', sc: '', sd: 'asc', page: 1, df: '', dt: '', cf: '', ct: '' }, G = '';
+var KEY = /*__KEY__*/'', D = null, tab = 'home', F = { status: 'todo', site: '', q: '', clicks: 'todo', cw: '', cch: '', cd: 'all', src: '', as: '', sort: 'new', prov: '', bud: '', when: '', sc: '', sd: 'asc', page: 1, df: '', dt: '', cf: '', ct: '', area: '', proj: '', dim: 'area' }, G = '';
 try { G = localStorage.getItem('crm_group') || ''; } catch (e) {}
 var STATUS = ['Mới', 'Đã liên hệ', 'Đang tư vấn', 'Đang cân nhắc', 'Quan tâm', 'Hẹn xem', 'Đã xem dự án', 'Đang thương lượng', 'Booking', 'Chốt', 'Mất', 'Tạm dừng'];
 var LOG_RES = ['Không liên lạc được', 'Đã kết nối', 'Đang cân nhắc', 'Cần tư vấn thêm', 'Hẹn gặp', 'Từ chối', 'Khác'];
@@ -175,7 +177,7 @@ $('#dlg').addEventListener('close', function () { if (D && !V.phone) render(); }
 document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('[data-zl]'); if (!a) return; e.preventDefault(); window.open('https://zalo.me/' + a.dataset.zl, '_blank', 'noopener'); });
 $('#gbar').onclick = function (e) { var b = e.target.closest('button'); if (!b) return; G = b.dataset.g; try { localStorage.setItem('crm_group', G); } catch (x) {} badges(); render(); };
 
-function render() { if (!D) return; if (V.phone && narrow()) { openLead(V.phone, true, window.scrollY); return; } $('#gbar').style.display = (tab === 'leads' || tab === 'today' || tab === 'ask' || tab === 'camp') ? 'none' : ''; ({ home: home, today: today, leads: leads, clicks: clicks, ask: ask, camp: camp, sites: sites }[tab])(); }
+function render() { if (!D) return; if (V.phone && narrow()) { openLead(V.phone, true, window.scrollY); return; } $('#gbar').style.display = (tab === 'leads' || tab === 'today' || tab === 'ask' || tab === 'camp' || tab === 'stats') ? 'none' : ''; ({ home: home, today: today, leads: leads, stats: stats, clicks: clicks, ask: ask, camp: camp, sites: sites }[tab])(); }
 
 var RANGES = [['today', 'Hôm nay'], ['7', '7 ngày'], ['30', '30 ngày'], ['month', 'Tháng này'], ['lastmonth', 'Tháng trước'], ['year', 'Năm nay'], ['all', 'Tất cả'], ['custom', 'Tuỳ chọn']];
 function ymdShift(day, n) { var p = day.split('-'), d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2] + n, 12)); return d.toISOString().slice(0, 10); }
@@ -313,6 +315,7 @@ function zl(phone, l) {
 function isBds(name) { var g = gOf(name); return !g || g === 'BĐS'; }
 function mins(a, b) { return Math.round((new Date(b).getTime() - new Date(a).getTime()) / 60000); }
 function dur(m) { return m < 1 ? 'dưới 1 phút' : m < 60 ? m + ' phút' : m < 1440 ? Math.round(m / 60 * 10) / 10 + ' giờ' : Math.round(m / 1440 * 10) / 10 + ' ngày'; }
+function projNames() { var m = {}; D.leads.forEach(function (l) { if (l.project) m[l.project] = 1; if (l.viewProject) m[l.viewProject] = 1; }); D.sites.forEach(function (s) { m[s.name] = 1; }); return Object.keys(m).sort(); }
 function dayOf(iso) { if (!iso) return ''; var d = new Date(iso); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
 function countBy(list, fn) { var m = {}; list.forEach(function (x) { var k = fn(x) || 'Chưa rõ'; m[k] = (m[k] || 0) + 1; }); return Object.keys(m).map(function (k) { return { label: k, value: m[k] }; }).sort(function (a, b) { return b.value - a.value; }); }
 function dayBars(list, fn, from, to, color, label) {
@@ -371,6 +374,8 @@ function leadsFiltered() {
     if (F.site && l.site !== F.site) return false;
     if (F.src && (l.source || l.srcType) !== F.src) return false;
     if (F.prov && l.province !== F.prov) return false;
+    if (F.area && ((l.province || '') + ' ' + (l.district || '') + ' ' + (l.address || '')).toLowerCase().indexOf(F.area.toLowerCase()) < 0) return false;
+    if (F.proj && ((l.project || '') + ' ' + l.site + ' ' + (l.viewProject || '') + ' ' + (l.product || '')).toLowerCase().indexOf(F.proj.toLowerCase()) < 0) return false;
     if (F.df || F.dt) { var dd = dayOf(l.at); if (F.df && dd < F.df) return false; if (F.dt && dd > F.dt) return false; }
     if (F.as && (F.as === '__none' ? l.assignee : l.assignee !== F.as)) return false;
     if (F.when === 'late' && !(l.next && l.next < t)) return false;
@@ -426,7 +431,7 @@ function leads() {
   $('#main').innerHTML = kpiHtml +
     '<div class="row"><button class="btn p" id="addlead">+ Thêm khách</button><button class="btn" id="implead">Nhập danh sách</button>' + (wide ? '<button class="btn" id="colbtn">Cột hiển thị</button>' : '') + '</div>' +
     '<div class="row chips">' + chips.map(function (x) { return '<button class="chip ' + (F.status === x[0] ? 'on' : '') + '" data-chip="' + esc(x[0]) + '">' + x[1] + ' <span class="n">' + x[2] + '</span></button>'; }).join('') + '</div>' +
-    (wide ? '' : '<div class="row"><input id="fq" placeholder="Tìm tên, mã, SĐT, tỉnh, nguồn, dự án" value="' + esc(F.q) + '" style="flex:1"><span class="mut">' + list.length + ' khách</span></div><details class="card sec" style="padding:10px 14px"><summary>Bộ lọc và sắp xếp</summary>') + '<div class="row"><select id="fw">' + opt(sites, 'Tất cả dự án / website') + '</select><select id="fo">' + opt(srcs, 'Tất cả nguồn') + '</select><select id="fp">' + opt(provs, 'Tất cả tỉnh/thành') + '</select>' +
+    (wide ? '' : '<div class="row"><input id="fq" placeholder="Tìm tên, mã, SĐT, tỉnh, nguồn, dự án" value="' + esc(F.q) + '" style="flex:1"><span class="mut">' + list.length + ' khách</span></div><details class="card sec" style="padding:10px 14px"><summary>Bộ lọc và sắp xếp</summary>') + '<div class="row"><select id="fw">' + opt(sites, 'Tất cả dự án / website') + '</select><input id="far" list="dlarea" placeholder="Khu vực: tỉnh, quận, địa chỉ" value="' + esc(F.area) + '"><input id="fpr" list="dlproj" placeholder="Dự án" value="' + esc(F.proj) + '"><datalist id="dlarea">' + provs.map(function (p) { return '<option value="' + esc(p) + '">'; }).join('') + '</datalist><datalist id="dlproj">' + projNames().map(function (p) { return '<option value="' + esc(p) + '">'; }).join('') + '</datalist><select id="fo">' + opt(srcs, 'Tất cả nguồn') + '</select><select id="fp">' + opt(provs, 'Tất cả tỉnh/thành') + '</select>' +
     '<label class="small mut">Ngày phát sinh từ <input type="date" id="fdf" value="' + esc(F.df) + '"></label><label class="small mut">đến <input type="date" id="fdt" value="' + esc(F.dt) + '"></label>' +
     '<select id="fb"><option value="">Mọi ngân sách</option><option value="a">Dưới 2 tỷ</option><option value="b">2 đến 5 tỷ</option><option value="c">Trên 5 tỷ</option></select>' +
     '<select id="fn"><option value="">Mọi lịch tiếp theo</option><option value="late">Quá hạn</option><option value="today">Hôm nay</option><option value="none">Chưa có lịch</option></select>' +
@@ -437,6 +442,7 @@ function leads() {
     dayBars(list, function (l) { return dayOf(l.at); }, F.df, F.dt, '#F28C28', 'Khách phát sinh theo ngày') + '</details>' + body +
     '<div class="row pager"><button class="btn sm" id="pp"' + (F.page <= 1 ? ' disabled' : '') + '>‹ Trước</button><span class="mut">Trang ' + F.page + '/' + pages + '</span><button class="btn sm" id="pn"' + (F.page >= pages ? ' disabled' : '') + '>Sau ›</button></div>';
   $('#fw').value = F.site; $('#fo').value = F.src; $('#fp').value = F.prov; $('#fb').value = F.bud; $('#fn').value = F.when; $('#fa').value = F.as; $('#fr').value = F.sort;
+  ['far', 'fpr'].forEach(function (id) { var k = id === 'far' ? 'area' : 'proj'; $('#' + id).oninput = function (e) { F[k] = e.target.value; }; $('#' + id).onchange = function (e) { F[k] = e.target.value; F.page = 1; leads(); }; $('#' + id).onkeydown = function (e) { if (e.key === 'Enter') { F.page = 1; leads(); } }; });
   $('#fdf').onchange = function (e) { F.df = e.target.value; F.page = 1; leads(); }; $('#fdt').onchange = function (e) { F.dt = e.target.value; F.page = 1; leads(); };
   var rr = function (id, key) { $(id).onchange = function (e) { F[key] = e.target.value; F.page = 1; if (key === 'sort') F.sc = ''; leads(); }; };
   rr('#fw', 'site'); rr('#fo', 'src'); rr('#fp', 'prov'); rr('#fb', 'bud'); rr('#fn', 'when'); rr('#fa', 'as'); rr('#fr', 'sort');
@@ -910,6 +916,43 @@ function camp() {
       (rows || '<tr><td colspan="16" class="mut">Chưa có chiến dịch hoặc chi phí trong khoảng này. Khai báo ở tab Chiến dịch của Sheet và chạy tập lệnh chi phí.</td></tr>') + '</table></div>' +
       '<h3 style="margin:16px 0 8px">Đánh giá và đề xuất</h3>' + (advice || '<div class="card mut">Chưa có dữ liệu để đánh giá.</div>') + guide;
   });
+}
+
+var DIMS = [['area', 'Khu vực (tỉnh/thành)'], ['district', 'Quận/huyện'], ['project', 'Dự án quan tâm'], ['site', 'Website phát sinh'], ['source', 'Nguồn khách'], ['sale', 'Sale phụ trách'], ['status', 'Trạng thái'], ['budget', 'Ngân sách'], ['purpose', 'Nhu cầu mua']];
+function dimKey(d, l) {
+  var b = budgetOf(l);
+  return d === 'area' ? l.province : d === 'district' ? l.district : d === 'project' ? (l.project || 'Chưa có dự án') : d === 'site' ? l.site : d === 'source' ? (l.source || l.srcType) :
+    d === 'sale' ? (l.assignee || 'Chưa giao') : d === 'status' ? l.status : d === 'purpose' ? l.purpose : (b ? (b < 2e9 ? 'Dưới 2 tỷ' : b <= 5e9 ? '2 đến 5 tỷ' : 'Trên 5 tỷ') : '');
+}
+function stats() {
+  var all = D.leads.filter(function (l) { return isBds(l.site) && dayOf(l.at) >= R.from && dayOf(l.at) <= R.to; });
+  var groups = {};
+  all.forEach(function (l) {
+    var k = dimKey(F.dim, l) || 'Chưa rõ', g = groups[k] || (groups[k] = { k: k, n: 0, unc: 0, contacted: 0, viewed: 0, won: 0, rev: 0, hot: 0 });
+    g.n++; if (todo(l)) g.unc++; else g.contacted++; if (l.viewCount) g.viewed++; if (l.status === 'Chốt') { g.won++; g.rev += l.value || 0; } var h = heat(l); if (h && h[0] === 'Nóng') g.hot++;
+  });
+  var rows = Object.keys(groups).map(function (k) { return groups[k]; }).sort(function (a, b) { return b.n - a.n; });
+  var tot = rows.reduce(function (a, g) { a.n += g.n; a.unc += g.unc; a.contacted += g.contacted; a.viewed += g.viewed; a.won += g.won; a.rev += g.rev; a.hot += g.hot; return a; }, { n: 0, unc: 0, contacted: 0, viewed: 0, won: 0, rev: 0, hot: 0 });
+  var kp = [[tot.n, 'Khách trong kỳ'], [pct(tot.contacted, tot.n), 'Đã liên hệ'], [pct(tot.viewed, tot.n), 'Đã đi xem dự án'], [tot.hot, 'Khách nóng'], [pct(tot.won, tot.n), 'Tỉ lệ chốt'], [money(tot.rev), 'Doanh thu đã chốt']];
+  var top = rows[0], best = rows.filter(function (g) { return g.n >= 2 && g.won; }).sort(function (a, b) { return b.won / b.n - a.won / a.n; })[0];
+  $('#main').innerHTML = rangeBar() +
+    '<div class="card"><div class="row" style="margin:0"><b>Thống kê khách hàng theo</b><select id="dim">' + DIMS.map(function (d) { return '<option value="' + d[0] + '"' + (F.dim === d[0] ? ' selected' : '') + '>' + d[1] + '</option>'; }).join('') + '</select></div>' +
+    '<div class="small mut" style="margin-top:6px">' + (top ? 'Nhiều khách nhất: <b>' + esc(top.k) + '</b> (' + top.n + ' khách, ' + pct(top.n, tot.n) + ').' : 'Chưa có khách trong khoảng này.') + (best ? ' Tỉ lệ chốt cao nhất: <b>' + esc(best.k) + '</b> (' + pct(best.won, best.n) + ').' : '') + ' Bấm vào một dòng để xem danh sách khách của nhóm đó.</div></div>' +
+    '<div class="grid">' + kp.map(function (x) { return '<div class="kpi"><b' + (String(x[0]).length > 9 ? ' class="long"' : '') + '>' + esc(x[0]) + '</b><span>' + x[1] + '</span></div>'; }).join('') + '</div>' +
+    hBars('Số khách theo ' + DIMS.filter(function (d) { return d[0] === F.dim; })[0][1].toLowerCase(), rows.map(function (g) { return { label: g.k, value: g.n, color: '#12305C' }; }).slice(0, 15)) +
+    hBars('Số khách đã chốt', rows.map(function (g) { return { label: g.k, value: g.won, color: '#1E8E4F' }; }).slice(0, 15)) +
+    dayBars(all, function (l) { return dayOf(l.at); }, R.from, R.to, '#F28C28', 'Khách phát sinh theo ngày') +
+    '<div class="card tw"><table class="stt"><tr><th>Nhóm</th><th>Số khách</th><th>Tỉ lệ</th><th>Chưa liên hệ</th><th>Đã liên hệ</th><th>Đã đi xem</th><th>Khách nóng</th><th>Đã chốt</th><th>Tỉ lệ chốt</th><th>Doanh thu</th></tr>' +
+    (rows.map(function (g, i) { return '<tr class="drill" data-g="' + i + '"><td><b>' + esc(g.k) + '</b></td><td>' + g.n + '</td><td>' + pct(g.n, tot.n) + '</td><td>' + (g.unc ? '<span class="tag red">' + g.unc + '</span>' : 0) + '</td><td>' + g.contacted + '</td><td>' + g.viewed + '</td><td>' + g.hot + '</td><td>' + g.won + '</td><td>' + pct(g.won, g.n) + '</td><td>' + money(g.rev) + '</td></tr>'; }).join('') || '<tr><td colspan="10" class="mut">Chưa có khách trong khoảng ngày này.</td></tr>') +
+    '</table></div><p class="mut small">Thống kê theo ngày phát sinh khách. Chỉ tính khách bất động sản.</p>';
+  bindRange();
+  $('#dim').onchange = function (e) { F.dim = e.target.value; stats(); };
+  document.querySelectorAll('.drill').forEach(function (r) { r.onclick = function () {
+    var g = rows[r.dataset.g], v = g.k; F.status = 'all'; F.site = ''; F.src = ''; F.prov = ''; F.area = ''; F.proj = ''; F.as = ''; F.q = ''; F.bud = ''; F.df = R.from; F.dt = R.to; F.page = 1;
+    var d = F.dim;
+    if (d === 'area' && v !== 'Chưa rõ') F.prov = v; else if (d === 'district' && v !== 'Chưa rõ') F.area = v; else if (d === 'project') F.proj = v === 'Chưa có dự án' ? '' : v; else if (d === 'site') F.site = v; else if (d === 'source') F.src = v;
+    else if (d === 'sale') F.as = v === 'Chưa giao' ? '__none' : v; else if (d === 'status') F.status = v; else if (d === 'purpose' || d === 'budget') F.q = d === 'purpose' ? v : '';
+    tab = 'leads'; document.querySelectorAll('#nav button').forEach(function (x) { x.classList.toggle('on', x.dataset.t === 'leads'); }); render(); window.scrollTo(0, 0); }; });
 }
 
 function sites() {
