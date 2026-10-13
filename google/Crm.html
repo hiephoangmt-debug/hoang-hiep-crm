@@ -1542,7 +1542,12 @@ function addLead() {
         $('#dmerge').onclick = function () { f.mergeBlank = true; run('crmCreateLead', f).then(function () { toast('Đã điền thông tin còn trống'); $('#dlg').close(); load(); }).catch(fail); };
         return;
       }
-      toast('Đã thêm khách'); $('#dlg').close(); load();
+      load();
+      $('#dlgBody').innerHTML = '<div style="text-align:center;padding:18px 6px"><div style="font-size:44px;color:#1a9b4b;line-height:1">✓</div><h2 style="margin:8px 0 4px">Đã thêm xong</h2><div class="small mut">' + esc(f.name || 'Khách mới') + ' · ' + esc(f.phone) + '</div>' +
+        '<div class="row" style="justify-content:center;margin-top:14px"><button class="btn p" id="aopen">Mở hồ sơ</button><button class="btn" id="aagain">Thêm khách khác</button><button class="btn" id="aclose">Tắt</button></div></div>';
+      $('#aclose').onclick = function () { $('#dlg').close(); };
+      $('#aagain').onclick = addLead;
+      $('#aopen').onclick = function () { $('#dlg').close(); openLead(f.phone); };
     }).catch(function (e) { $('#aok').disabled = false; fail(e); });
   };
 }
