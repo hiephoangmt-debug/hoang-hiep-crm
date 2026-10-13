@@ -116,3 +116,51 @@ d.rounded_rectangle([80,by,W-80,by+78],radius=39,fill=OR)
 text(d,(W/2,by+39),'Giữ chỗ · Zalo 0904 567 009',F('bvp-800',34),WHITE,'mm')
 im.convert('RGB').save(D+'zalo/dia-diem-su-kien-18-10-sun-gallery-tay-ho-view.jpg',quality=90,optimize=True,progressive=True)
 print('ok3')
+
+# ===== Ảnh 4 & 5: Lồng ghép dự án (Đà Nẵng) + địa điểm sự kiện (Hà Nội) =====
+def rounded(img, r):
+    m=Image.new('L', img.size, 0); ImageDraw.Draw(m).rounded_rectangle([0,0,img.width-1,img.height-1], radius=r, fill=255)
+    o=Image.new('RGBA', img.size, (0,0,0,0)); o.paste(img.convert('RGBA'), (0,0), m); return o
+def card_shadow(im, box, r=26):
+    lay=Image.new('RGBA', im.size, (0,0,0,0)); ImageDraw.Draw(lay).rounded_rectangle(box, radius=r, fill=(0,0,0,150))
+    im.alpha_composite(lay.filter(ImageFilter.GaussianBlur(14)))
+def tag(d, x, y, s, f):
+    w=d.textlength(N(s), font=f); d.rounded_rectangle([x,y,x+w+28,y+40], radius=20, fill=(11,26,58)); d.text((x+14,y+20), N(s), font=f, fill=WHITE, anchor='lm')
+
+def combo(W, H, PH, name, thumb_w, thumb_h, compact=False):
+    im=Image.new('RGBA',(W,H),NAVY+(255,)); im.paste(cover(photo,W,PH,0.3),(0,0))
+    grad(im,0,180,NAVY,170,0); grad(im,PH-300,PH,NAVY,0,255)
+    d=ImageDraw.Draw(im)
+    pill(d,56,48,'THƯ MỜI · CHỦ NHẬT 18/10/2026',F('bvp-800',25),OR,WHITE,h=48)
+    tag(d,W-56-d.textlength(N('Phối cảnh dự án tại Đà Nẵng'),font=F('bvp-600',20))-28,52,'Phối cảnh dự án tại Đà Nẵng',F('bvp-600',20))
+    hs=74 if not compact else 62
+    shadow_text(im,(56,PH-hs*2-40),'Căn nhà bên biển Đà Nẵng',F('pf-700',hs),WHITE)
+    shadow_text(im,(56,PH-hs-30),'Tòa F2 – Sun FourS Tower',F('pf-700',int(hs*0.86)),ORH)
+    d=ImageDraw.Draw(im)
+    # Thẻ địa điểm: ảnh Tây Hồ View + thông tin
+    y0=PH-10; x0=56
+    th=rounded(cover(V,thumb_w,thumb_h,0.45),24)
+    card_shadow(im,[x0,y0,x0+thumb_w,y0+thumb_h]); im.alpha_composite(th,(x0,y0)); d=ImageDraw.Draw(im)
+    d.rounded_rectangle([x0,y0,x0+thumb_w,y0+thumb_h],radius=24,outline=OR,width=3)
+    tag(d,x0+14,y0+thumb_h-54,'Nơi tổ chức tại Hà Nội',F('bvp-600',19))
+    tx=x0+thumb_w+32; tw=W-56-tx
+    text(d,(tx,y0+6),'ĐỊA ĐIỂM SỰ KIỆN',F('bvp-800',22),ORH)
+    ft=fit(d,'Tây Hồ View','pf-700',58,tw)
+    text(d,(tx,y0+40),'Sun Gallery',ft,WHITE); text(d,(tx,y0+40+ft.size*1.12),'Tây Hồ View',ft,ORH)
+    yy=y0+40+ft.size*2.35
+    text(d,(tx,yy),'58 Quảng Bá, Tây Hồ, Hà Nội',fit(d,'58 Quảng Bá, Tây Hồ, Hà Nội','bvp-700',28,tw),WHITE)
+    text(d,(tx,yy+44),'Chủ nhật 18/10 · 9:00 – 11:20',fit(d,'Chủ nhật 18/10 · 9:00 – 11:20','bvp-600',25,tw),MUTE)
+    text(d,(tx,yy+82),'Teabreak · Bốc thăm may mắn',fit(d,'Teabreak · Bốc thăm may mắn','bvp-400',23,tw),MUTE)
+    # Dải 3 con số
+    sy=y0+thumb_h+28; sw=(W-112-2*16)//3
+    for i,(b,s) in enumerate([('~700 tr','vốn ban đầu căn 2PN'),('0%','lãi 24 tháng · vay 70%'),('2 km','ra biển Sơn Thủy')]):
+        glass(im,[56+i*(sw+16),sy,56+i*(sw+16)+sw,sy+110],r=18); d=ImageDraw.Draw(im)
+        text(d,(56+i*(sw+16)+sw/2,sy+40),b,F('bvp-800',40),ORH,'mm'); text(d,(56+i*(sw+16)+sw/2,sy+84),s,F('bvp-600',20),MUTE,'mm')
+    by=sy+110+26; assert by+76<=H-30, (name,by)
+    d.rounded_rectangle([56,by,W-56,by+76],radius=38,fill=OR)
+    text(d,(W/2,by+38),'Giữ chỗ · Zalo 0904 567 009',F('bvp-800',33),WHITE,'mm')
+    im.convert('RGB').save(D+'zalo/'+name,quality=90,optimize=True,progressive=True)
+
+combo(1080,1350,720,'thu-moi-du-an-va-dia-diem-18-10.jpg',390,370)
+combo(1080,1080,500,'thu-moi-du-an-va-dia-diem-18-10-vuong.jpg',330,290,compact=True)
+print('ok45')
