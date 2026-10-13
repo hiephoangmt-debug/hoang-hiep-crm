@@ -64,6 +64,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold2);border-co
 .rowtodo td{background:var(--redsoft)}.cnote{width:150px}
 .ctab{min-width:900px}.ctab th.srt{cursor:pointer;white-space:nowrap}.ctab td{vertical-align:top}.nw{white-space:nowrap}.btn.sm{padding:3px 9px;font-size:12.5px}.chk{display:flex;gap:6px;align-items:center;font-size:14px}.pager{justify-content:center;margin-top:10px}
 .mrow{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;box-shadow:0 1px 2px rgba(11,31,61,.05);cursor:pointer;display:flex;flex-direction:column;gap:6px}.mrow.todo{border-left:4px solid var(--red)}
+.mbtn{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.mbtn .btn.sm{min-height:32px;padding:3px 16px}.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;border-top:1px solid var(--line);padding-top:8px}.mc{display:flex;flex-direction:column;font-size:13px;min-width:0;overflow-wrap:anywhere}.mc .b{font-weight:700;color:var(--navy9)}
 .mtop,.mph{display:flex;align-items:center;gap:8px}.mname{font-size:16.5px;color:var(--navy9);overflow-wrap:anywhere}.phn{font-size:17px;font-weight:600;letter-spacing:.2px}.sp{flex:1}
 .pgbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:8px 0;background:var(--bg)}.pgname{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .srow{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-top:1px solid var(--line);font-size:14px}.srow>span:last-child,.srow>b{text-align:right;overflow-wrap:anywhere;min-width:0}.srow.nxt{background:var(--goldsoft);margin:8px -8px 0;padding:9px 8px;border-radius:8px;border-top:0}
@@ -444,12 +445,26 @@ function needOf(l) {
   var p = [l.purpose, l.product, l.budget].filter(Boolean).join(' · ');
   return p || (l.note ? l.note.slice(0, 80) : '');
 }
+function finOf(l) {
+  var p = [];
+  if (l.budget) p.push('Ngân sách ' + l.budget);
+  if (l.equity) p.push('Vốn ' + l.equity);
+  if (l.loan) p.push('Vay: ' + l.loan + (l.loanAmt ? ' ' + l.loanAmt : ''));
+  return p.join(' · ');
+}
 function mobRow(l) {
   var h = heat(l), st = todo(l) ? '<span class="tag red">Chưa liên hệ</span>' : '<span class="tag ' + (l.status === 'Chốt' ? 'grn' : 'amb') + '">' + esc(l.status) + '</span>';
-  var nx = l.next ? (l.next < ymdNow(0) ? ' <span class="tag red">Hẹn ' + dmy(l.next) + ' quá hạn</span>' : l.next === ymdNow(0) ? ' <span class="tag amb">Hẹn hôm nay</span>' : ' <span class="tag">Hẹn ' + dmy(l.next) + '</span>') : '';
-  return '<div class="mrow' + (todo(l) ? ' todo' : '') + '" data-open="' + esc(l.phone) + '"><div class="mtop"><b class="mname">' + esc(l.name || '(chưa có tên)') + '</b>' + (h ? ' <span class="tag ' + h[1] + '">' + h[0] + '</span>' : '') + '<span class="sp"></span><span class="mut small">' + esc(fmt(l.at)) + '</span></div>' +
-    '<div class="mph"><span class="phn">' + esc(l.phone) + '</span><span class="sp"></span><button class="btn g" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button><button class="btn z" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button></div>' +
-    '<div class="small"><b>' + esc(l.project || 'Chưa có dự án') + '</b> · ' + st + nx + '</div><div class="small need"><span class="mut">Nhu cầu:</span> ' + (needOf(l) ? esc(needOf(l)) : '<span class="mut">Chưa có nhu cầu</span>') + '</div><div class="small mut">' + esc(lastTouch(l)) + '</div></div>';
+  var nx = l.next ? (l.next < ymdNow(0) ? '<span class="tag red">Hẹn ' + dmy(l.next) + ' quá hạn</span>' : l.next === ymdNow(0) ? '<span class="tag amb">Hẹn hôm nay</span>' : '<span class="tag">Hẹn ' + dmy(l.next) + '</span>') : '';
+  var cell = function (k, v, strong) { return '<div class="mc"><span class="mut">' + k + '</span><span' + (strong ? ' class="b"' : '') + '>' + (v ? esc(v) : '<span class="mut">Chưa có</span>') + '</span></div>'; };
+  var addr = [l.address, l.district, l.province].filter(Boolean).join(', '), src = [l.source || l.srcType, l.campaign].filter(Boolean).join(' · ');
+  return '<div class="mrow' + (todo(l) ? ' todo' : '') + '" data-open="' + esc(l.phone) + '">' +
+    '<div class="mtop"><b class="mname">' + esc(l.name || '(chưa có tên)') + '</b>' + (h ? ' <span class="tag ' + h[1] + '">' + h[0] + '</span>' : '') + '<span class="sp"></span>' + st + '</div>' +
+    '<div class="phn">' + esc(l.phone) + '</div>' +
+    '<div class="mbtn"><button class="btn g sm" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button><button class="btn z sm" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button>' + nx + '</div>' +
+    '<div class="mgrid">' + cell('Ngày phát sinh', fmt(l.at)) + cell('Địa chỉ', addr) + cell('Nguồn phát sinh', src) + cell('Dự án', l.project || 'Chưa có dự án', 1) +
+    cell('Tài chính', finOf(l)) + cell('Đã giao', l.assignee || 'Chưa giao') + '</div>' +
+    '<div class="small need"><span class="mut">Nhu cầu:</span> ' + (needOf(l) ? esc([l.purpose, l.product].filter(Boolean).join(' · ') || needOf(l)) : '<span class="mut">Chưa có nhu cầu</span>') + '</div>' +
+    '<div class="small mut">' + esc(lastTouch(l)) + '</div></div>';
 }
 function pageSummary(l) {
   var row = function (k, v, cls) { return v ? '<div class="srow ' + (cls || '') + '"><span class="mut">' + k + '</span><span>' + esc(v) + '</span></div>' : ''; };
