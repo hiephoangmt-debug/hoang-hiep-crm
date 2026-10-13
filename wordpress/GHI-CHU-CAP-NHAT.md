@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.18** + plugin Hoàng Hiệp CRM **2.20.41**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.18** + plugin Hoàng Hiệp CRM **2.20.42**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,14 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.42: Đất nền Đầm Sen – Sun Riverpolis (Nam Hòa Xuân)
+- Ảnh đại diện: toàn cảnh Nam Hòa Xuân nhìn về sông Cổ Cò, Ngũ Hành Sơn, biển (nếu trang chưa có ảnh).
+- 3 mặt bằng (tab): các block mở bán khu công viên Đầm Sen (100 / 125 / 150 m²), phân khu Đầm Sen, khu phía Bắc.
+- 6 ảnh tiện ích: đường nội khu, đường chạy bộ, sân tập thể dục ven sông, giàn hoa, đường dạo.
+- Điền ô còn trống: mô tả phân khu theo block (B2-111 … B2-157), tiện ích nội khu (công viên ven sông, bến du thuyền, đồi hoa, sân bóng, nhà hàng ven sông, trường học), ngoại khu.
+- Không dùng 2 ảnh có logo, chữ chìm của đơn vị phân phối (bản đồ vệ tinh chú thích block và ảnh flycam sân bóng).
+- Cài: Nhập nhanh `cap-nhat-code.zip` → **Nhập dữ liệu Đà Nẵng → Nhập / cập nhật dữ liệu** → LiteSpeed Cache → Purge All.
 
 ## Có gì mới – plugin 2.20.41: Nam Hội An City – phối cảnh và mặt bằng phân lô
 - Ảnh đại diện đổi sang **phối cảnh thật từ trên cao** (thay sơ đồ minh hoạ), thêm phối cảnh có chú thích (khách sạn 5 sao, Fivitel 4 sao, khách sạn thấp tầng, bến du thuyền, thương mại ven sông) và **mặt bằng phân lô** làm mặt bằng tổng thể.
