@@ -404,7 +404,7 @@ var COLS = [
   { k: 'at', t: 'Ngày phát sinh', v: function (l) { return fmt(l.at); }, s: function (l) { return l.at; } },
   { k: 'src', t: 'Nguồn khách', v: function (l) { return srcText(l) || NA; } },
   { k: 'url', t: 'Trang / URL lead', v: function (l) { return l.leadUrl || NA; } },
-  { k: 'site', t: 'Dự án quan tâm', v: function (l) { return l.project || 'Chưa có dự án'; } },
+  { k: 'site', t: 'Dự án quan tâm', v: function (l) { return l.project || NA; } },
   { k: 'product', t: 'Loại căn', v: function (l) { return l.product || NA; } },
   { k: 'web', t: 'Website phát sinh', v: function (l) { return l.site; } },
   { k: 'purpose', t: 'Nhu cầu', v: function (l) { return needOf(l) || 'Chưa có nhu cầu'; } },
@@ -420,8 +420,9 @@ var COLS = [
   { k: 'next', t: 'Lịch tiếp theo', v: function (l) { return l.next ? fdmy(l.next) : 'Chưa có lịch'; }, s: function (l) { return l.next || '9999'; }, due: 1 },
   { k: 'act', t: 'Thao tác', v: null }
 ];
-var COL_DEFAULT = ['code', 'name', 'province', 'phone', 'zalo', 'src', 'site', 'purpose', 'status', 'careCount', 'careAt', 'careResult', 'viewProject', 'next', 'act'];
-function visCols() { try { var v = JSON.parse(localStorage.getItem('crm_cols') || 'null'); if (v && v.length) return v; } catch (e) {} return COL_DEFAULT; }
+var COL_OLD = ['code', 'name', 'province', 'phone', 'zalo', 'src', 'site', 'purpose', 'status', 'careCount', 'careAt', 'careResult', 'viewProject', 'next', 'act'];
+var COL_DEFAULT = ['code', 'name', 'province', 'phone', 'zalo', 'src', 'purpose', 'status', 'careCount', 'careAt', 'careResult', 'viewProject', 'next', 'act'];
+function visCols() { try { var v = JSON.parse(localStorage.getItem('crm_cols') || 'null'); if (v && v.length && JSON.stringify(v) !== JSON.stringify(COL_OLD)) return v; } catch (e) {} return COL_DEFAULT; }   // cột Dự án quan tâm đã gộp vào Nguồn khách (theo tên web dự án)
 var PAGE = 25;
 function leadsFiltered() {
   var t = ymdNow(0), all = D.leads.filter(function (l) { return isBds(l.site); });
