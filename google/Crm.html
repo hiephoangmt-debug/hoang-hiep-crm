@@ -843,19 +843,19 @@ var NAME_HON = { anh: 'anh', 'chị': 'chị', chi: 'chị', 'cô': 'cô', co: '
 function cleanName(raw) {
   var n = String(raw || '').replace(/[(（\[].*?[)）\]]/g, ' ').replace(/\s[-–|]\s/g, ' ').replace(/\s+/g, ' ').trim(), proj = {};
   projNames().forEach(function (p) { String(p).toLowerCase().split(/\s+/).forEach(function (w) { if (w.length >= 4) proj[w] = 1; }); });
-  var all = n.split(' ').filter(Boolean), hon = '', parts = all;
+  var all = n.split(' ').filter(Boolean), hon = '', parts = all, explicit = false;
   // Tên dự án đứng trước (Spana, Bán đảo, Peninsula…): nếu có A/C hoặc anh/chị/cô/chú/bác/ông/bà ở 4 từ đầu thì tên người bắt đầu từ đó
   var SURN = ' nguyễn trần lê phạm hoàng huỳnh phan vũ võ đặng bùi đỗ hồ ngô dương lý ', lead0 = all.length ? all[0].toLowerCase() : '';
   for (var i = 0; i < Math.min(all.length - 1, 4) && SURN.indexOf(' ' + lead0 + ' ') < 0; i++) {
     var w = all[i], lw = w.toLowerCase();
     if (/^[ac]$/i.test(w) || lw === 'anh' || (i === 0 && NAME_HON[lw]) || (i > 0 && NAME_HON[lw] && lw !== 'chi' && lw !== 'ba' && lw !== 'co' && lw !== 'chu' && lw !== 'bac' && lw !== 'ong')) {
-      hon = /^[ac]$/i.test(w) ? (lw === 'a' ? 'anh' : 'chị') : NAME_HON[lw]; parts = all.slice(i + 1); break;
+      hon = /^[ac]$/i.test(w) ? (lw === 'a' ? 'anh' : 'chị') : NAME_HON[lw]; parts = all.slice(i + 1); explicit = true; break;
     }
   }
   if (!hon) parts = all.filter(function (w) { return !proj[w.toLowerCase()]; });
   parts = parts.filter(function (w) { return !/^(\d+\s*(br|pn)|br|pn|khách|kh|cvkd|mrs|mr|ms)$/i.test(w); });
   var pad = ' ' + n.toLowerCase() + ' ';
-  if (pad.indexOf(' mrs ') >= 0 || pad.indexOf(' ms ') >= 0) hon = 'chị'; else if (pad.indexOf(' mr ') >= 0 && !hon) hon = 'anh';
+  if (pad.indexOf(' mrs ') >= 0 || pad.indexOf(' ms ') >= 0) { hon = 'chị'; explicit = true; } else if (pad.indexOf(' mr ') >= 0 && !hon) { hon = 'anh'; explicit = true; }
   if (parts.length > 2 && SURN.indexOf(' ' + parts[0].toLowerCase() + ' ') < 0) {   // tiền tố lạ đứng trước họ (Bán đảo Trần Thị Lan): bỏ đến họ
     for (var j = 1; j < Math.min(parts.length - 1, 4); j++) if (SURN.indexOf(' ' + parts[j].toLowerCase() + ' ') >= 0) { parts = parts.slice(j); break; }
   }
@@ -863,7 +863,14 @@ function cleanName(raw) {
     var mid = parts.slice(1, -1).map(function (w) { return w.toLowerCase(); });
     if (mid.indexOf('thị') >= 0 || mid.indexOf('thi') >= 0) hon = 'chị'; else if (mid.indexOf('văn') >= 0 || mid.indexOf('van') >= 0) hon = 'anh';
   }
-  return { hon: hon, name: parts.join(' ') };
+  // Họ tên đầy đủ thì chỉ gọi tên (chữ cuối): Nguyễn Thị Hoa -> Hoa. Tên đã có anh/chị/A/C do bạn tự đặt thì giữ nguyên như bạn gõ.
+  var nm = parts.join(' ');
+  if (!explicit && parts.length >= 2) {
+    var f0 = parts[0].toLowerCase(), l0 = parts[parts.length - 1].toLowerCase(), SURN2 = ' nguyen tran le pham hoang huynh phan vu vo dang bui do ho ngo duong ly ';
+    if (SURN.indexOf(' ' + f0 + ' ') >= 0 || SURN2.indexOf(' ' + f0 + ' ') >= 0) nm = parts[parts.length - 1];
+    else if (parts.length === 2 && (SURN.indexOf(' ' + l0 + ' ') >= 0 || SURN2.indexOf(' ' + l0 + ' ') >= 0)) nm = parts[0];
+  }
+  return { hon: hon, name: nm };
 }
 function snName(l) { var c = cleanName(l.name); return c.name ? (c.hon || 'anh/chị') + ' ' + c.name : (c.hon || 'anh/chị'); }
 function snMe() { try { return localStorage.getItem('crm_me') || ''; } catch (e) { return ''; } }
