@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-36', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-37', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -702,11 +702,49 @@ function crmCreateLead(k, f) {
   requireUi_(k);
   return createLead_(f || {});
 }
+// Nhập hàng loạt: đọc danh sách số hiện có một lần, ghi cả khối bằng một lệnh. Nhanh hơn nhiều so với từng khách một (tránh quá thời gian thực thi).
+// list: [{name, phone, email, site, source, campaign, note, product, url, budget, project, province, docUrl, at(Date)}]
+function bulkAddLeads_(list, srcType) {
+  var rep = { added: 0, dups: [], errors: [] };
+  if (!list.length) return rep;
+  return withLock_(function () {
+    var sh = ss_().getSheetByName(S_LEADS);
+    ensureLeadCols_(sh);
+    var last = lastDataRow_(sh, 2), have = {}, ph = last > 1 ? sh.getRange(2, 4, last - 1, 1).getValues() : [];
+    ph.forEach(function (r, i) { var p = normPhone_(phoneStr_(r[0])); if (p && !have[p]) have[p] = { name: '', row: i + 2 }; });
+    var out = [], now = new Date();
+    list.forEach(function (r, i) {
+      var phone = normPhone_(r.phone);
+      if (!phone) { rep.errors.push({ line: i + 1, reason: 'Số điện thoại không hợp lệ', phone: String(r.phone || '') }); return; }
+      if (have[phone]) { rep.dups.push({ line: i + 1, phone: phone, name: str_(r.name, 120) }); return; }
+      have[phone] = { name: str_(r.name, 120), row: last + 1 + out.length };
+      var rowNum = last + 1 + out.length, a = new Array(LEAD_COLS);
+      for (var c = 0; c < LEAD_COLS; c++) a[c] = '';
+      a[0] = last + out.length; a[1] = (r.at instanceof Date && !isNaN(r.at.getTime())) ? r.at : now; a[2] = str_(r.name, 120); a[3] = phone; a[4] = str_(r.email, 160); a[5] = str_(r.site, 80) || 'Nhập thủ công';
+      a[6] = str_(r.source, 100) || 'nhập thủ công'; a[7] = str_(r.campaign, 150); a[8] = ''; a[9] = 1; a[10] = 0; a[11] = 0;
+      a[12] = '=HYPERLINK("https://zalo.me/"&$D' + rowNum + ',"Mở Zalo")'; a[13] = '=HYPERLINK("tel:"&$D' + rowNum + ',"Gọi")'; a[14] = false; a[15] = false;
+      a[17] = '=IF(AND($O' + rowNum + '<>TRUE,$P' + rowNum + '<>TRUE),"CHƯA LIÊN HỆ","")'; a[18] = STATUS_NEW; a[21] = str_(r.note, 1000);
+      a[25] = str_(r.product, 150); a[30] = str_(r.province, 60); a[34] = str_(r.budget, 40); a[39] = srcType || 'Data nhập'; a[40] = str_(r.url, 300); a[41] = str_(r.project, 120);
+      a[44] = /^https?:\/\//i.test(String(r.docUrl || '').trim()) ? String(r.docUrl).trim().slice(0, 500) : '';
+      out.push(a);
+    });
+    if (out.length) {
+      var need = last + out.length - sh.getMaxRows();
+      if (need > 0) { try { sh.insertRowsAfter(sh.getMaxRows(), need + 50); } catch (e) {} }
+      var rg = sh.getRange(last + 1, 1, out.length, LEAD_COLS);
+      try { sh.getRange(last + 1, 4, out.length, 1).setNumberFormat('@'); sh.getRange(last + 1, 23, out.length, LEAD_COLS - 22).setNumberFormat('@'); } catch (e) {}
+      rg.setValues(out);
+      rep.added = out.length;
+    }
+    return rep;
+  });
+}
 // Nhập danh sách dán từ Excel: mỗi dòng {name, phone, province, site, budget, source, note}. Trả báo cáo dòng lỗi và dòng trùng.
 function crmImport(k, rows, merge) {
   requireUi_(k);
   rows = rows || [];
-  if (rows.length > 200) throw new Error('Tối đa 200 dòng mỗi lần nhập');
+  if (rows.length > 500) throw new Error('Tối đa 500 dòng mỗi lần nhập');
+  if (merge !== true) return bulkAddLeads_(rows.map(function (r) { return { name: r.name, phone: r.phone, province: r.province, site: r.site, project: r.project, budget: r.budget, source: r.source || 'nhập Excel', note: r.note, docUrl: r.docUrl }; }), 'Data nhập');
   var rep = { added: 0, dups: [], errors: [] };
   rows.forEach(function (r, i) {
     var line = i + 1;
@@ -801,17 +839,11 @@ function crmSheetTabs(k, url) {
 }
 function crmSheetImport(k, url, tab, offset, limit) {
   requireUi_(k);
-  offset = Math.max(0, Number(offset) || 0); limit = Math.min(100, Math.max(1, Number(limit) || 100));
+  offset = Math.max(0, Number(offset) || 0); limit = Math.min(300, Math.max(1, Number(limit) || 300));
   var sh = openSheet_(url).getSheetByName(String(tab || ''));
   if (!sh) throw new Error('Không thấy tab ' + tab);
-  var rows = sheetTabRows_(sh), part = rows.slice(offset, offset + limit), rep = { total: rows.length, next: offset + limit >= rows.length ? null : offset + limit, added: 0, dups: [], errors: [] };
-  part.forEach(function (r, i) {
-    try {
-      var res = createLead_({ name: r.name, phone: r.phone, email: r.email, site: r.site, source: r.source, campaign: r.campaign, note: r.note, product: r.product, url: r.url, bmax: r.budget, at: r.at ? r.at.toISOString() : '', noEvent: true, srcType: 'Data nhập' });
-      if (res.dup) rep.dups.push({ phone: res.lead.phone, name: res.lead.name }); else rep.added++;
-    } catch (e) { rep.errors.push({ line: offset + i + 1, reason: String(e.message || e) }); }
-  });
-  return rep;
+  var rows = sheetTabRows_(sh), part = rows.slice(offset, offset + limit), r2 = bulkAddLeads_(part.map(function (r) { return { name: r.name, phone: r.phone, email: r.email, site: r.site, source: r.source, campaign: r.campaign, note: r.note, product: r.product, url: r.url, budget: r.budget, at: r.at }; }), 'Data nhập');
+  return { total: rows.length, next: offset + limit >= rows.length ? null : offset + limit, added: r2.added, dups: r2.dups, errors: r2.errors.map(function (e) { return { line: offset + e.line, reason: e.reason }; }) };
 }
 
 // ---- Báo cáo theo khoảng ngày (Tổng quan, Chiến dịch) ----

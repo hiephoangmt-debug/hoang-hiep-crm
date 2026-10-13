@@ -506,10 +506,10 @@ function sheetImport(pre) {
         var step = function (ti, off) {
           if (ti >= pick.length) { $('#sip').innerHTML = '<b>Xong.</b> Thêm mới ' + tot.added + ' khách, trùng bỏ qua ' + tot.dups + ', lỗi ' + tot.errors + '.' + (errs.length ? '<br>' + errs.slice(0, 5).map(esc).join('<br>') : ''); $('#siok').disabled = false; load(); return; }
           var t = pick[ti]; $('#sip').textContent = 'Đang nhập tab ' + t.name + ' (' + (off || 0) + '/' + t.count + ')…';
-          run('crmSheetImport', url, t.name, off || 0, 100).then(function (x) {
+          run('crmSheetImport', url, t.name, off || 0, 300).then(function (x) {
             tot.added += x.added; tot.dups += x.dups.length; tot.errors += x.errors.length; x.errors.slice(0, 3).forEach(function (e) { errs.push(t.name + ' dòng ' + e.line + ': ' + e.reason); });
             if (x.next === null) step(ti + 1, 0); else step(ti, x.next);
-          }).catch(function (e) { $('#sip').innerHTML = 'Lỗi: ' + esc(e.message) + '<br>Đã thêm ' + tot.added + ' khách trước khi lỗi.'; $('#siok').disabled = false; });
+          }).catch(function (e) { $('#sip').innerHTML = 'Lỗi: ' + esc(e.message) + '<br>Đã thêm ' + tot.added + ' khách trước khi lỗi. Bấm Nhập lần nữa để làm tiếp, khách đã có sẽ tự bị bỏ qua.'; load(); $('#siok').disabled = false; });
         };
         step(0, 0);
       };
@@ -1561,7 +1561,7 @@ function impPreview() {
     var tot = { added: 0, merged: 0, dups: 0, errors: 0 }; $('#imok').disabled = true;
     var send = function (list, mg) {
       var chain = Promise.resolve();
-      for (var k = 0; k < list.length; k += 100) (function (part) { chain = chain.then(function () { $('#imp2').textContent = 'Đang nhập…'; return run('crmImport', part.map(mk), mg).then(function (r) { tot.added += r.added; tot.merged += r.merged || 0; tot.dups += r.dups.length; tot.errors += r.errors.length; }); }); })(list.slice(k, k + 100));
+      for (var k = 0; k < list.length; k += 200) (function (part) { chain = chain.then(function () { $('#imp2').textContent = 'Đang nhập…'; return run('crmImport', part.map(mk), mg).then(function (r) { tot.added += r.added; tot.merged += r.merged || 0; tot.dups += r.dups.length; tot.errors += r.errors.length; }); }); })(list.slice(k, k + 200));
       return chain;
     };
     send(news, false).then(function () { return merge && olds.length ? send(olds, true) : null; }).then(function () {
