@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-29', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-30', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -347,13 +347,13 @@ function crmScanOffer(k, text, link, img, mime) {
   requireUi_(k);
   var o = scanAi_('Bạn là quân sư bán hàng bất động sản tại Đà Nẵng. Đọc nguồn thông tin và chỉ trả về MỘT đối tượng JSON, không thêm chữ nào khác, theo mẫu: ' +
     '{"name":"tên dự án","highlights":"điểm nổi bật và chính sách, 1 đến 3 dòng ngắn, chỉ dùng thông tin có trong nguồn","priceFrom":số tỷ hoặc null,"priceTo":số tỷ hoặc null,"area":"khu vực hoặc tỉnh thành hoặc rỗng",' +
-    '"target":"mô tả ngắn nhóm khách phù hợp nhất (ngân sách, mục đích, khu vực)","event":{"isEvent":true nếu nguồn nói về một sự kiện, lễ mở bán, tham quan, hội thảo, ngược lại false,"name":"tên sự kiện","when":"thời gian ghi trong nguồn","where":"địa điểm ghi trong nguồn"},"advice":["3 đến 5 ý hướng tư vấn khi gọi hoặc nhắn khách về nội dung này, gồm câu hỏi mở và cách xử lý từ chối thường gặp"],"plan":["3 đến 6 bước kế hoạch mời theo thời gian, ví dụ gửi tin mời, nhắc trước sự kiện, gọi xác nhận, chăm sóc sau sự kiện"],"messages":[{"style":"Thân mật","text":"..."},{"style":"Nhấn ưu đãi","text":"..."},{"style":"Khan hiếm","text":"..."}],"note":"điều cần kiểm tra lại hoặc thiếu"}. ' +
+    '"target":"mô tả ngắn nhóm khách phù hợp nhất (ngân sách, mục đích, khu vực)","interest":"loại sản phẩm khách nên quan tâm, ví dụ căn hộ hoặc đất nền hoặc nhà phố, ngắn gọn","event":{"isEvent":true nếu nguồn nói về một sự kiện, lễ mở bán, tham quan, hội thảo, ngược lại false,"name":"tên sự kiện","when":"thời gian ghi trong nguồn","where":"địa điểm ghi trong nguồn"},"advice":["3 đến 5 ý hướng tư vấn khi gọi hoặc nhắn khách về nội dung này, gồm câu hỏi mở và cách xử lý từ chối thường gặp"],"plan":["3 đến 6 bước kế hoạch mời theo thời gian, ví dụ gửi tin mời, nhắc trước sự kiện, gọi xác nhận, chăm sóc sau sự kiện"],"messages":[{"style":"Thân mật","text":"..."},{"style":"Nhấn ưu đãi","text":"..."},{"style":"Khan hiếm","text":"..."}],"note":"điều cần kiểm tra lại hoặc thiếu"}. ' +
     'Nếu là sự kiện thì các bản tin là lời mời tham dự, nêu tên sự kiện, thời gian, địa điểm đúng như nguồn. Trong text dùng {ten} cho cách gọi khách và {sale} cho tên tư vấn viên. Tiếng Việt lịch sự, ngắn 3 đến 6 dòng, có lời kêu gọi hành động. Tuyệt đối không bịa giá, ưu đãi, thời hạn hay số căn không có trong nguồn; thiếu thì để rỗng và ghi vào note. Bản "Khan hiếm" chỉ nhấn khan hiếm nếu nguồn có nói.',
     'Nguồn thông tin về một dự án, chính sách hoặc quỹ căn mới của bên bán.', text, link, img, mime);
   return {
     event: { isEvent: !!(o.event && o.event.isEvent === true), name: str_(o.event && o.event.name, 120), when: str_(o.event && o.event.when, 120), where: str_(o.event && o.event.where, 160) },
     advice: (Array.isArray(o.advice) ? o.advice : []).slice(0, 6).map(function (x) { return str_(x, 300); }).filter(Boolean), plan: (Array.isArray(o.plan) ? o.plan : []).slice(0, 8).map(function (x) { return str_(x, 300); }).filter(Boolean),
-    name: str_(o.name, 120), highlights: str_(o.highlights, 600), priceFrom: scanNum_(o.priceFrom), priceTo: scanNum_(o.priceTo), area: str_(o.area, 80), target: str_(o.target, 300), note: str_(o.note, 400),
+    name: str_(o.name, 120), highlights: str_(o.highlights, 600), priceFrom: scanNum_(o.priceFrom), priceTo: scanNum_(o.priceTo), area: str_(o.area, 80), interest: str_(o.interest, 60), target: str_(o.target, 300), note: str_(o.note, 400),
     messages: (Array.isArray(o.messages) ? o.messages : []).slice(0, 4).map(function (m) { return { style: str_(m && m.style, 40), text: str_(m && m.text, 1500) }; }).filter(function (m) { return m.text; })
   };
 }

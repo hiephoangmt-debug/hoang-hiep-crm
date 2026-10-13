@@ -815,7 +815,7 @@ function openLead(phone, page, keep) {
 
 var SRC_OPTS = ['Facebook Ads', 'Google Ads', 'Website', 'Zalo', 'Điện thoại', 'Khách giới thiệu', 'Sự kiện', 'Nhập thủ công', 'Khác'];
 // ---- Gửi tin Zalo theo nhóm khách: dự án mới, chính sách mới, quỹ căn mới. Không tự gửi hàng loạt: mỗi khách bấm một lần, tránh bị Zalo khoá.
-var SN = { proj: '', prov: '', bmin: '', bmax: '', unk: false, heat: '', days: '', st: null, kind: 'Dự án mới', style: 'Thân mật', name: '', hl: '', link: '', img: '', tbl: '', body: '', edited: false, pick: {}, ev: '', evWhen: '', evWhere: '' };
+var SN = { proj: '', prov: '', bmin: '', bmax: '', unk: false, heat: '', days: '', st: null, kind: 'Dự án mới', style: 'Thân mật', name: '', hl: '', link: '', img: '', tbl: '', body: '', edited: false, pick: {}, ev: '', evWhen: '', evWhere: '', loc: '', interest: '', top: 20 };
 var SN_KINDS = {
   'Dự án mới': 'Chào {ten}, em {sale} đây ạ. Bên em vừa ra mắt dự án {du_an}.\n{noi_bat}\n{lien_ket}\nEm thấy {ten} từng quan tâm bất động sản nên xin phép gửi thông tin để {ten} tham khảo ạ.',
   'Chính sách mới': 'Chào {ten}, em {sale} đây ạ. Dự án {du_an} vừa có chính sách mới:\n{noi_bat}\n{lien_ket}\nEm xin phép gửi để {ten} cân nhắc, phù hợp với kế hoạch tài chính của mình ạ.',
@@ -842,7 +842,20 @@ function snScore(l) {
   if (b && (lo > 0 || hi > 0) && b >= (lo || 0) && (!(hi > 0) || b <= hi)) sc += 2;
   if (l.careAt && (Date.now() - new Date(l.careAt).getTime()) / 864e5 <= 14) sc += 1;
   if (l.viewCount) sc += 1;
+  if ((l.careCount || 0) >= 3) sc += 1;
+  if (SN.loc) sc += snHay(l).indexOf(SN.loc.toLowerCase()) >= 0 ? (SN.kind === 'Mời sự kiện' ? 5 : 3) : (SN.kind === 'Mời sự kiện' ? -2 : 0);   // sự kiện tổ chức tại chỗ thì khách ở xa xếp sau
+  if (SN.interest && (l.product + ' ' + l.purpose + ' ' + l.note + ' ' + (l.project || '')).toLowerCase().indexOf(SN.interest.toLowerCase()) >= 0) sc += 1;
   return sc;
+}
+function snHay(l) { return ((l.province || '') + ' ' + (l.district || '') + ' ' + (l.address || '')).toLowerCase(); }
+function snWhy(l) {
+  var w = [], h = heat(l);
+  if (SN.loc && snHay(l).indexOf(SN.loc.toLowerCase()) >= 0) w.push('Ở ' + SN.loc);
+  if (h && h[0] === 'Nóng') w.push('Khách nóng'); if (l.viewCount) w.push('Đã xem dự án'); else if (HOT_ST.indexOf(l.status) >= 0) w.push(l.status);
+  if (SN.proj && ((l.project || '') + ' ' + l.site + ' ' + (l.viewProject || '')).toLowerCase().indexOf(SN.proj.toLowerCase()) >= 0) w.push('Quan tâm ' + SN.proj);
+  if ((l.careCount || 0) >= 3) w.push('Chăm ' + l.careCount + ' lần');
+  if (l.careAt) w.push('Liên hệ gần nhất ' + ago(l.careAt));
+  return w;
 }
 function snAudience() {
   var t = ymdNow(0), st = SN.st || STATUS.filter(function (x) { return x !== 'Chốt' && x !== 'Mất' && x !== 'Tạm dừng'; });
@@ -864,13 +877,15 @@ function snList() {
   $('#sncnt').innerHTML = '<b>' + L.length + ' khách phù hợp</b>' + (L.length ? ', còn <b>' + todoN + '</b> chưa gửi tin này' : '') + '. Không gồm khách đã chốt, mất, tạm dừng hoặc không dùng Zalo.';
   document.querySelectorAll('[data-sst]').forEach(function (b) { b.classList.toggle('on', st.indexOf(b.dataset.sst) >= 0); });
   $('#snprev').innerHTML = snPrev(L[0]);
-  $('#snlist').innerHTML = L.slice(0, 150).map(function (l) {
+  var cap = SN.top > 0 ? SN.top : 150;
+  $('#snlist').innerHTML = '<div class="row" style="margin:0 0 6px"><b>' + Math.min(cap, L.length) + ' khách nên liên hệ trước</b><span class="sp"></span><label class="small mut">Hiện <select id="sntop">' + [[10, '10'], [20, '20'], [50, '50'], [0, 'Tất cả']].map(function (x) { return '<option value="' + x[0] + '"' + (+SN.top === x[0] ? ' selected' : '') + '>' + x[1] + '</option>'; }).join('') + '</select> khách</label></div>' + L.slice(0, cap).map(function (l) {
     var b = budgetOf(l), done = sent[l.phone];
     return '<div class="card snrow' + (done ? ' done' : '') + '"><div class="row" style="margin:0"><b>' + esc(l.name || '(chưa có tên)') + '</b><span class="mut small">' + esc(l.phone) + '</span><span class="sp"></span>' + (snScore(l) >= 6 ? '<span class="tag red">Nên mời trước</span>' : snScore(l) >= 3 ? '<span class="tag amb">Phù hợp</span>' : '') + (done ? '<span class="tag grn">Đã gửi ' + fdmy(done) + '</span>' : '') + '</div>' +
-      '<div class="small mut">' + [l.status, b ? 'Ngân sách ' + (b >= 1e9 ? Math.round(b / 1e8) / 10 + ' tỷ' : vnd(b)) : '', l.province, l.project || l.site, l.careAt ? 'Chăm gần nhất ' + ago(l.careAt) : 'Chưa chăm'].filter(Boolean).map(esc).join(' · ') + '</div>' +
+      '<div class="small mut">' + [l.status, b ? 'Ngân sách ' + (b >= 1e9 ? Math.round(b / 1e8) / 10 + ' tỷ' : vnd(b)) : '', l.province, l.project || l.site, l.careAt ? 'Chăm gần nhất ' + ago(l.careAt) : 'Chưa chăm'].filter(Boolean).map(esc).join(' · ') + '</div>' + (snWhy(l).length ? '<div class="small" style="margin-top:2px">Vì sao nên mời: ' + snWhy(l).map(esc).join(' · ') + '</div>' : '') +
       '<div class="row" style="margin:6px 0 0"><button class="btn z sm" data-sz="' + esc(l.phone) + '">Sao chép tin + mở Zalo</button><button class="btn sm" data-sd="' + esc(l.phone) + '">' + (done ? 'Ghi lại lần nữa' : 'Đã gửi') + '</button><button class="btn sm" data-sv="' + esc(l.phone) + '">Xem tin</button></div></div>';
   }).join('') || '<div class="card mut">Chưa có khách nào khớp bộ lọc.</div>';
-  if (L.length > 150) $('#snlist').innerHTML += '<div class="small mut">Đang hiện 150 khách đầu. Thu hẹp bộ lọc để xem đủ.</div>';
+  if (L.length > cap) $('#snlist').innerHTML += '<div class="small mut">Còn ' + (L.length - cap) + ' khách khác phù hợp. Chọn Hiện 50 hoặc Tất cả để xem thêm.</div>';
+  if ($('#sntop')) $('#sntop').onchange = function () { SN.top = +this.value; snList(); };
   var lead = function (p) { return D.leads.filter(function (x) { return x.phone === p; })[0]; };
   document.querySelectorAll('[data-sz]').forEach(function (b) { b.onclick = function () { var l = lead(b.dataset.sz); copyText(snMsg(l)); window.open('https://zalo.me/' + l.phone, '_blank', 'noopener'); }; });
   document.querySelectorAll('[data-sv]').forEach(function (b) { b.onclick = function () { var l = lead(b.dataset.sv); $('#dlgBody').innerHTML = '<h2 style="margin:0">Tin gửi ' + esc(l.name || l.phone) + '</h2><div class="card" style="white-space:pre-wrap;margin-top:8px">' + esc(snMsg(l)) + '</div><div class="row"><button class="btn p" id="svc">Sao chép</button><button class="btn" id="svx">Đóng</button></div>'; $('#dlg').showModal(); $('#svc').onclick = function () { copyText(snMsg(l)); }; $('#svx').onclick = function () { $('#dlg').close(); }; }; });
@@ -917,8 +932,10 @@ function snScanBind() {
       if (r.name) SN.name = r.name; if (r.highlights) SN.hl = r.highlights.replace(/\s*\n\s*/g, '; '); if (SQ.link.trim()) SN.link = SQ.link.trim(); var isEv = !!(r.event && r.event.isEvent);   // sự kiện thì mời rộng, chỉ xếp ưu tiên, không lọc cứng khu vực và ngân sách
       if (r.area && !isEv) SN.prov = r.area;
       if (r.priceFrom && !isEv) { SN.bmin = String(Math.round(r.priceFrom * 9) / 10); SN.bmax = r.priceTo ? String(Math.round(r.priceTo * 12) / 10) : ''; }
-      if (r.event && r.event.isEvent) { SN.kind = 'Mời sự kiện'; SN.ev = r.event.name || SN.ev; SN.evWhen = r.event.when || SN.evWhen; SN.evWhere = r.event.where || SN.evWhere; }
-      SN.edited = false; if (tab === 'send') send();
+      if (r.interest) SN.interest = r.interest.replace(/^(căn hộ).*/i, '$1');
+      if (r.messages && r.messages.length) { SN.body = r.messages[0].text.replace(/\n{3,}/g, '\n\n'); }
+      if (r.event && r.event.isEvent) { SN.loc = r.area || SN.loc; SN.kind = 'Mời sự kiện'; SN.ev = r.event.name || SN.ev; SN.evWhen = r.event.when || SN.evWhen; SN.evWhere = r.event.where || SN.evWhere; }
+      SN.edited = !!(r.messages && r.messages.length); if (tab === 'send') { send(); var tp = $('#snlist'); if (tp) setTimeout(function () { tp.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 120); }
     }).catch(function (e) { SQ.busy = false; if (tab === 'send') send(); toast(/Chưa cài khoá/.test(e.message) ? 'Chưa cài khoá quân sư AI: menu CRM, Cài khoá quân sư' : e.message); });
   };
   if ($('#sqcp')) $('#sqcp').onclick = function () { copyText('Hướng tư vấn:\n- ' + SQ.res.advice.join('\n- ') + '\n\nKế hoạch mời:\n' + SQ.res.plan.map(function (x, i) { return (i + 1) + '. ' + x; }).join('\n')); };
@@ -932,7 +949,7 @@ function send() {
     snLab('Dự án khách từng quan tâm', '<input id="sn1" list="snl" placeholder="Để trống là tất cả" value="' + esc(SN.proj) + '"><datalist id="snl">' + projNames().map(function (p) { return '<option value="' + esc(p) + '">'; }).join('') + '</datalist>') +
     snLab('Khu vực / tỉnh thành', '<input id="sn2" list="snp" value="' + esc(SN.prov) + '"><datalist id="snp">' + Object.keys(provs).map(function (p) { return '<option value="' + esc(p) + '">'; }).join('') + '</datalist>') +
     snLab('Ngân sách từ (tỷ)', '<input id="sn3" inputmode="decimal" placeholder="vd 2" value="' + esc(SN.bmin) + '">') + snLab('Ngân sách đến (tỷ)', '<input id="sn4" inputmode="decimal" placeholder="vd 4" value="' + esc(SN.bmax) + '">') +
-    snLab('Độ nóng', '<select id="sn5">' + opt(['Nóng', 'Ấm', 'Nguội'], SN.heat, 'Tất cả') + '</select>') + snLab('Chưa chăm sóc quá N ngày', '<input id="sn6" inputmode="numeric" placeholder="vd 7" value="' + esc(SN.days) + '">') + '</div>' +
+    snLab('Độ nóng', '<select id="sn5">' + opt(['Nóng', 'Ấm', 'Nguội'], SN.heat, 'Tất cả') + '</select>') + snLab('Chưa chăm sóc quá N ngày', '<input id="sn6" inputmode="numeric" placeholder="vd 7" value="' + esc(SN.days) + '">') + snLab('Ưu tiên khu vực (xếp lên đầu)', '<input id="sn8" placeholder="vd Hà Nội" value="' + esc(SN.loc) + '">') + snLab('Ưu tiên quan tâm', '<input id="sn9" placeholder="vd căn hộ" value="' + esc(SN.interest) + '">') + '</div>' +
     '<div class="row chips" style="margin-top:8px">' + STATUS.map(function (x) { return '<button class="chip" data-sst="' + esc(x) + '">' + esc(x) + '</button>'; }).join('') + '</div>' +
     '<label class="small" style="display:block;margin-top:6px"><input type="checkbox" id="sn7"' + (SN.unk ? ' checked' : '') + '> Gồm cả khách chưa ghi ngân sách (khi có lọc ngân sách)</label><div class="small" id="sncnt" style="margin-top:6px"></div></div>' +
     '<div class="card"><b>2. Soạn tin</b><div class="row chips" style="margin:8px 0">' + Object.keys(SN_KINDS).map(function (x) { return '<button class="chip' + (SN.kind === x ? ' on' : '') + '" data-sk="' + esc(x) + '">' + esc(x) + '</button>'; }).join('') + '</div><div class="fgrid">' +
@@ -944,7 +961,7 @@ function send() {
     '<div class="small mut" style="margin-top:6px">Gợi ý: dán link ảnh hoặc bảng hàng (Google Drive, website dự án) để Zalo tự hiện hình xem trước. Lời kết "Khan hiếm" chỉ dùng khi quỹ căn thật sự còn ít.</div>' +
     '<div class="card" id="snprev" style="background:#F4F7FC;margin:8px 0 0"></div></div>' +
     '<div class="card"><b>3. Gửi từng khách</b><div class="small mut" style="margin-top:4px">Gửi khoảng 30 đến 50 khách mỗi ngày, cách nhau vài phút. Gửi dồn dập hàng trăm tin một lúc dễ bị Zalo hạn chế tài khoản.</div></div><div id="snlist"></div>';
-  [['sn1', 'proj'], ['sn2', 'prov'], ['sn3', 'bmin'], ['sn4', 'bmax'], ['sn5', 'heat'], ['sn6', 'days'], ['sn7', 'unk'], ['sm1', 'name'], ['sm2', 'hl'], ['sm3', 'link'], ['sm4', 'tbl'], ['sm5', 'img'], ['sev1', 'ev'], ['sev2', 'evWhen'], ['sev3', 'evWhere']].forEach(function (p) {
+  [['sn1', 'proj'], ['sn2', 'prov'], ['sn3', 'bmin'], ['sn4', 'bmax'], ['sn5', 'heat'], ['sn6', 'days'], ['sn7', 'unk'], ['sn8', 'loc'], ['sn9', 'interest'], ['sm1', 'name'], ['sm2', 'hl'], ['sm3', 'link'], ['sm4', 'tbl'], ['sm5', 'img'], ['sev1', 'ev'], ['sev2', 'evWhen'], ['sev3', 'evWhere']].forEach(function (p) {
     var e = $('#' + p[0]); e.oninput = e.onchange = function () { SN[p[1]] = this.type === 'checkbox' ? this.checked : this.value; if (!SN.edited && (p[0].indexOf('sm') === 0 || p[0].indexOf('sev') === 0)) $('#sm7').value = snBody(); snList(); };
   });
   $('#sm6').onchange = function () { SN.style = this.value; SN.edited = false; $('#sm7').value = snBody(); snList(); };
