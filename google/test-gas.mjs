@@ -15,6 +15,7 @@ class Sheet {
   getMaxColumns() { return 60; }
   insertColumnsAfter() {}
   appendRow(r) { this.rows.push(r.slice()); }
+  deleteRow(n) { this.rows.splice(n - 1, 1); }
   getRange(r, c, nr = 1, nc = 1) {
     const s = this;
     return {
@@ -112,7 +113,7 @@ assert.equal(ctx.crmKey_(), K);
 assert.throws(() => ctx.crmLoad('sai-khoa'), /Không có quyền/); assert.throws(() => ctx.crmLog('', '0988111222', 'call'), /Không có quyền/);
 assert.equal(ctx.doGet({ parameter: { k: 'sai' } }).file, undefined); assert.ok(ctx.doGet({ parameter: { k: K } }).content.includes('CRM Hoàng Hiệp') && ctx.doGet({ parameter: { k: K } }).content.includes('</html>'));
 const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
-assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-18'); assert.equal(JSON.stringify(dbg).includes(K), false);
+assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-19'); assert.equal(JSON.stringify(dbg).includes(K), false);
 const L = ctx.crmLoad(K);
 assert.equal(L.leads.length, 2);
 const l0 = L.leads.find((x) => x.phone === '0988111222');
@@ -218,6 +219,23 @@ const ret = ctx.kiemTraCRM(); assert.match(ret, /\?k=[0-9a-f]{32}/); assert.ok(g
   const R2 = ctx.crmReport(KK, '2026-10-12', '2026-10-10'); assert.equal(R2.from, '2026-10-10');
   assert.equal(ctx.crmReport(KK, '2026-10-01', '2026-10-31').campaigns.find((c) => c.utm === 'camp-a').costPrev, 150000);
   assert.throws(() => ctx.crmReport('sai', '2026-10-10', '2026-10-12'), /Không có quyền/);
+  // Hoa hồng / lương
+  assert.throws(() => ctx.crmCommLoad('sai'), /Không có quyền/);
+  assert.equal(ctx.crmCommLoad(KK).items.length, 0);
+  assert.throws(() => ctx.crmCommSave(KK, { month: '' }), /chọn tháng/);
+  const c1 = ctx.crmCommSave(KK, { month: '2026-10', type: 'Thưởng GĐKD', unit: 'A21011; A20623', project: 'Sun FourS Tower', total: '13.670.915', prev: 6904503, now: 6766412, net: 6766412, note: '=HYPERLINK("x")' });
+  assert.equal(c1.id, 'HH001');
+  ctx.crmCommSave(KK, { month: '2026-10', type: 'Lương', net: 15872000 });
+  ctx.crmCommSave(KK, { month: '2026-09', type: 'Khong hop le', net: 1000000 });
+  let cl = ctx.crmCommLoad(KK);
+  assert.equal(cl.items.length, 3); assert.equal(cl.items[0].total, 13670915); assert.equal(cl.items[0].month, '2026-10'); assert.equal(cl.items[2].type, 'Hoa hồng NVKD');
+  assert.ok(cl.items[0].note.startsWith("'="), 'chặn công thức');
+  assert.equal(cl.mkt['2026-10'], 600000); assert.equal(cl.mkt['2026-09'], 150000);
+  ctx.crmCommSave(KK, { row: c1.row, month: '2026-10', type: 'Thưởng GĐKD', net: 7000000 });
+  assert.equal(ctx.crmCommLoad(KK).items[0].net, 7000000);
+  assert.throws(() => ctx.crmCommSave(KK, { row: 99, month: '2026-10' }), /Không tìm thấy/);
+  ctx.crmCommDelete(KK, 3); assert.equal(ctx.crmCommLoad(KK).items.length, 2);
+  assert.throws(() => ctx.crmCommDelete(KK, 1), /Không tìm thấy/);
 }
 // quân sư AI: cần đúng khoá truy cập, thiếu khoá API thì báo rõ, có khoá thì gọi API
 assert.throws(() => ctx.crmAsk('sai-khoa', 'xin chào'), /Không có quyền/);

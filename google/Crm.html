@@ -73,6 +73,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold2);border-co
 .pgbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:8px 0;background:var(--bg)}.pgname{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .srow{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-top:1px solid var(--line);font-size:14px}.srow>span:last-child,.srow>b{text-align:right;overflow-wrap:anywhere;min-width:0}.srow.nxt{background:var(--goldsoft);margin:8px -8px 0;padding:9px 8px;border-radius:8px;border-top:0}
 .bigph{margin:8px 0;color:var(--navy9)}.bigph .phn{font-size:22px;font-weight:700}.bigph{color:var(--navy9)}.btn.big{flex:1;min-height:46px;font-size:16px}details.sec>summary{cursor:pointer;font-weight:700;color:var(--navy9);padding:4px 0}
+.cmch{display:flex;gap:6px;align-items:flex-end;height:130px;margin:10px 0 6px}.cmc{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}.cmb{height:110px;width:100%;display:flex;align-items:flex-end;justify-content:center;gap:2px}.cmb i{display:block;width:42%;max-width:20px;border-radius:3px 3px 0 0;min-height:1px}.cmc span{font-size:11px;color:var(--mut)}.lgd{display:inline-block;width:10px;height:10px;border-radius:3px;margin:0 3px 0 8px;vertical-align:-1px}tr.sel td{background:#FFF3E3}.snrow.done{opacity:.7}.snrow{margin-bottom:8px}
+@media(min-width:1001px) and (max-width:1360px){nav button{padding:9px 8px 12px;font-size:13.5px}}
 @media(min-width:701px){.grid.kc{grid-template-columns:repeat(7,1fr);gap:8px}.grid.kc .kpi{padding:9px 11px}.grid.kc .kpi b{font-size:21px}.grid.kc .kpi b.long{font-size:17px}.grid.kc .kpi span{font-size:11.5px;line-height:1.3}
 .fqw{flex:0 1 340px;min-width:200px}
 .fl{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px}.fl select,.fl input,.fl .btn{width:100%;min-width:0;padding:6px 9px;font-size:13.5px}.fl label{grid-column:span 2;display:flex;align-items:center;gap:6px;white-space:nowrap}.fl label input{flex:1}.fl .btn{min-height:0}}
@@ -120,6 +122,8 @@ code,pre{background:#F3F5FA;border:1px solid var(--line);border-radius:10px;font
     <button data-t="stats">Thống kê</button>
     <button data-t="clicks">Lượt bấm<span class="dot" id="dClicks" hidden></span></button>
     <button data-t="camp">Chiến dịch</button>
+    <button data-t="send">Gửi tin</button>
+    <button data-t="comm">Hoa hồng</button>
     <button data-t="sites">Website & mã nhúng</button>
   </nav>
 </header>
@@ -199,7 +203,7 @@ $('#dlg').addEventListener('close', function () { if (D && !V.phone) render(); }
 document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('[data-zl]'); if (!a) return; e.preventDefault(); window.open('https://zalo.me/' + a.dataset.zl, '_blank', 'noopener'); });
 $('#gbar').onclick = function (e) { var b = e.target.closest('button'); if (!b) return; G = b.dataset.g; try { localStorage.setItem('crm_group', G); } catch (x) {} badges(); render(); };
 
-function render() { if (!D) return; updateMenu(); if (V.phone && narrow()) { openLead(V.phone, true, window.scrollY); return; } $('#gbar').style.display = (tab === 'leads' || tab === 'today' || tab === 'camp' || tab === 'stats') ? 'none' : ''; ({ home: home, today: today, leads: leads, stats: stats, clicks: clicks, camp: camp, sites: sites }[tab])(); }
+function render() { if (!D) return; updateMenu(); if (V.phone && narrow()) { openLead(V.phone, true, window.scrollY); return; } $('#gbar').style.display = (tab === 'leads' || tab === 'today' || tab === 'camp' || tab === 'stats' || tab === 'comm' || tab === 'send') ? 'none' : ''; ({ home: home, today: today, leads: leads, stats: stats, clicks: clicks, camp: camp, send: send, comm: comm, sites: sites }[tab])(); }
 
 var RANGES = [['today', 'Hôm nay'], ['7', '7 ngày'], ['30', '30 ngày'], ['month', 'Tháng này'], ['lastmonth', 'Tháng trước'], ['year', 'Năm nay'], ['all', 'Tất cả'], ['custom', 'Tuỳ chọn']];
 function ymdShift(day, n) { var p = day.split('-'), d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2] + n, 12)); return d.toISOString().slice(0, 10); }
@@ -605,7 +609,7 @@ function openLead(phone, page, keep) {
   var srcLine = [l.srcType, l.source, l.campaign].filter(Boolean).join(' · ') || 'Chưa rõ';
   var P = {
     h2: '<h2 style="margin:0">KH' + pad(l.id) + ' · ' + esc(l.name || '(chưa có tên)') + ' · ' + esc(l.phone) + ' ' + zl(l.phone, l) + '</h2><p class="mut small">' + esc(l.site) + ' · ' + esc(l.email) + ' · gửi form ' + l.submits + ' lần · nhận lúc ' + esc(fmt(l.at)) + '</p>',
-    actions: '<div class="row"><button class="btn z" data-a="zalo">Nhắn Zalo</button><button class="btn g" data-a="call">Gọi</button><button class="btn" data-a="sms">Đã nhắn SMS</button>' + (aiOn() ? '<button class="btn" id="aiBtn">AI phân tích khách hàng</button>' : '') + '</div>' +
+    actions: '<div class="row"><button class="btn z" data-a="zalo">Nhắn Zalo</button><button class="btn g" data-a="call">Gọi</button><button class="btn" data-a="sms">Đã nhắn SMS</button>' + (aiOn() ? '<button class="btn" id="zcBtn">Phân tích chat Zalo</button>' : '') + (aiOn() ? '<button class="btn" id="aiBtn">AI phân tích khách hàng</button>' : '') + '</div>' +
     '<div id="aiOut" class="card" hidden></div>',
     personal: '<h3>Thông tin cá nhân <span class="tag">Khách cung cấp</span></h3><div class="fgrid">' +
     lab('Họ và tên', inp('nm', l.name)) + lab('SĐT phụ', inp('p2', l.phone2)) + lab('Zalo', sel('zl', ['Đã kết nối', 'Chưa xác nhận', 'Không dùng Zalo'], l.zalo, 'Chưa cập nhật')) +
@@ -708,6 +712,7 @@ function openLead(phone, page, keep) {
       if ($('#vst').checked) run('crmUpdateLead', phone, { status: 'Đã xem dự án' }).then(function () { l.status = 'Đã xem dự án'; $('#st').value = 'Đã xem dự án'; done(); }).catch(fail); else done();
     }).catch(fail);
   };
+  if ($('#zcBtn')) $('#zcBtn').onclick = function () { zaloChat(phone); };
   if ($('#aiBtn')) $('#aiBtn').onclick = function () {
     var out = $('#aiOut'); out.hidden = false; out.innerHTML = '<span class="mut">Quân sư đang phân tích…</span> <button class="btn sm" id="aiX">Đóng</button>'; $('#aiX').onclick = function () { out.hidden = true; }; $('#aiBtn').disabled = true;
     var q = 'Phân tích khách hàng này và trả lời đúng 8 mục, có đánh số: 1) Tóm tắt khách hàng. 2) Mức độ tiềm năng và căn cứ. 3) Thông tin còn thiếu cần hỏi. 4) Vướng mắc chính. 5) Dự án hoặc sản phẩm phù hợp và lý do. 6) Phương án tư vấn tiếp theo. 7) Một tin nhắn mẫu để chăm sóc, viết sẵn nội dung. 8) Công việc đề xuất kèm thời gian thực hiện. Chỉ dùng dữ liệu đã cho. Không bịa giá bán, chính sách, ưu đãi, pháp lý hay tiến độ thanh toán. Thiếu dữ liệu thì nói rõ cần bổ sung gì.';
@@ -733,6 +738,186 @@ function openLead(phone, page, keep) {
 }
 
 var SRC_OPTS = ['Facebook Ads', 'Google Ads', 'Website', 'Zalo', 'Điện thoại', 'Khách giới thiệu', 'Sự kiện', 'Nhập thủ công', 'Khác'];
+// ---- Gửi tin Zalo theo nhóm khách: dự án mới, chính sách mới, quỹ căn mới. Không tự gửi hàng loạt: mỗi khách bấm một lần, tránh bị Zalo khoá.
+var SN = { proj: '', prov: '', bmin: '', bmax: '', unk: false, heat: '', days: '', st: null, kind: 'Dự án mới', style: 'Thân mật', name: '', hl: '', link: '', img: '', tbl: '', body: '', edited: false, pick: {} };
+var SN_KINDS = {
+  'Dự án mới': 'Chào {ten}, em {sale} đây ạ. Bên em vừa ra mắt dự án {du_an}.\n{noi_bat}\n{lien_ket}\nEm thấy {ten} từng quan tâm bất động sản nên xin phép gửi thông tin để {ten} tham khảo ạ.',
+  'Chính sách mới': 'Chào {ten}, em {sale} đây ạ. Dự án {du_an} vừa có chính sách mới:\n{noi_bat}\n{lien_ket}\nEm xin phép gửi để {ten} cân nhắc, phù hợp với kế hoạch tài chính của mình ạ.',
+  'Quỹ căn mới': 'Chào {ten}, em {sale} đây ạ. Dự án {du_an} vừa mở thêm quỹ căn mới:\n{noi_bat}\n{lien_ket}\nEm gửi {ten} xem trước, thấy căn nào hợp em báo giá và lịch xem nhà ngay ạ.',
+  'Bảng hàng': 'Chào {ten}, em {sale} đây ạ. Em gửi {ten} bảng hàng mới nhất của dự án {du_an}:\n{noi_bat}\n{lien_ket}\n{ten} cần em lọc căn theo ngân sách và hướng thì nhắn em nhé ạ.'
+};
+var SN_ENDS = { 'Thân mật': '{ten} cần em gửi chi tiết hoặc sắp xếp xem nhà thực tế, cứ nhắn em nhé ạ.', 'Nhấn ưu đãi': 'Chính sách áp dụng có thời hạn, em giữ chỗ ưu tiên cho {ten} trước nếu {ten} quan tâm ạ.', 'Khan hiếm': 'Quỹ căn đẹp còn ít, em xin phép giữ lại 1 đến 2 căn phù hợp cho {ten} trước ạ.' };
+function snBody() { return SN.edited ? SN.body : SN_KINDS[SN.kind] + '\n' + SN_ENDS[SN.style]; }
+function snName(l) { return !l.name ? 'anh/chị' : /^(anh|chị|chi|cô|co|chú|chu|bác|bac|ông|ong|bà|ba)(\s|$)/i.test(l.name.trim()) ? l.name.trim() : 'anh/chị ' + l.name.trim(); }
+function snMsg(l) {
+  var parts = []; if (SN.link) parts.push('Thông tin chi tiết: ' + SN.link); if (SN.tbl) parts.push('Bảng hàng: ' + SN.tbl); if (SN.img) parts.push('Hình ảnh: ' + SN.img);
+  return snBody().replace(/\{ten\}/g, snName(l)).replace(/\{sale\}/g, l.assignee || 'tư vấn viên').replace(/\{du_an\}/g, SN.name || l.project || l.site || 'mới')
+    .replace(/\{noi_bat\}\n?/g, SN.hl ? SN.hl + '\n' : '').replace(/\{lien_ket\}\n?/g, parts.length ? parts.join('\n') + '\n' : '').replace(/\n{3,}/g, '\n\n').trim();
+}
+function snKey() { return SN.kind + '|' + (SN.name || '') + '|' + (SN.link || SN.tbl || ''); }
+function snSent() { try { return JSON.parse(localStorage.getItem('crm_sent') || '{}'); } catch (e) { return {}; } }
+function snMark(phone) { try { var m = snSent(), k = snKey(); (m[k] = m[k] || {})[phone] = ymdNow(0); localStorage.setItem('crm_sent', JSON.stringify(m)); } catch (e) {} }
+function snAudience() {
+  var t = ymdNow(0), st = SN.st || STATUS.filter(function (x) { return x !== 'Chốt' && x !== 'Mất' && x !== 'Tạm dừng'; });
+  var lo = parseFloat(String(SN.bmin).replace(',', '.')) * 1e9, hi = parseFloat(String(SN.bmax).replace(',', '.')) * 1e9;
+  return D.leads.filter(function (l) {
+    if (!isBds(l.site) || !l.phone || l.zalo === 'Không dùng Zalo' || st.indexOf(l.status) < 0) return false;
+    if (SN.proj && ((l.project || '') + ' ' + l.site + ' ' + (l.viewProject || '')).toLowerCase().indexOf(SN.proj.toLowerCase()) < 0) return false;
+    if (SN.prov && ((l.province || '') + ' ' + (l.district || '') + ' ' + (l.address || '')).toLowerCase().indexOf(SN.prov.toLowerCase()) < 0) return false;
+    if (SN.heat) { var h = heat(l); if (!h || h[0] !== SN.heat) return false; }
+    if (lo > 0 || hi > 0) { var b = budgetOf(l); if (!b) { if (!SN.unk) return false; } else if ((lo > 0 && b < lo) || (hi > 0 && b > hi)) return false; }
+    if (SN.days) { var last = l.careAt || l.contactedAt; if (last && (new Date(t) - new Date(dayOf(last))) / 864e5 < +SN.days) return false; }
+    return true;
+  });
+}
+function snLab(t, h) { return '<label class="fld"><span class="mut small">' + t + '</span>' + h + '</label>'; }
+function snList() {
+  var L = snAudience(), sent = snSent()[snKey()] || {}, todoN = L.filter(function (l) { return !sent[l.phone]; }).length;
+  var st = SN.st || STATUS.filter(function (x) { return x !== 'Chốt' && x !== 'Mất' && x !== 'Tạm dừng'; });
+  $('#sncnt').innerHTML = '<b>' + L.length + ' khách phù hợp</b>' + (L.length ? ', còn <b>' + todoN + '</b> chưa gửi tin này' : '') + '. Không gồm khách đã chốt, mất, tạm dừng hoặc không dùng Zalo.';
+  document.querySelectorAll('[data-sst]').forEach(function (b) { b.classList.toggle('on', st.indexOf(b.dataset.sst) >= 0); });
+  $('#snprev').innerHTML = snPrev(L[0]);
+  $('#snlist').innerHTML = L.slice(0, 150).map(function (l) {
+    var b = budgetOf(l), done = sent[l.phone];
+    return '<div class="card snrow' + (done ? ' done' : '') + '"><div class="row" style="margin:0"><b>' + esc(l.name || '(chưa có tên)') + '</b><span class="mut small">' + esc(l.phone) + '</span><span class="sp"></span>' + (done ? '<span class="tag grn">Đã gửi ' + fdmy(done) + '</span>' : '') + '</div>' +
+      '<div class="small mut">' + [l.status, b ? 'Ngân sách ' + (b >= 1e9 ? Math.round(b / 1e8) / 10 + ' tỷ' : vnd(b)) : '', l.province, l.project || l.site, l.careAt ? 'Chăm gần nhất ' + ago(l.careAt) : 'Chưa chăm'].filter(Boolean).map(esc).join(' · ') + '</div>' +
+      '<div class="row" style="margin:6px 0 0"><button class="btn z sm" data-sz="' + esc(l.phone) + '">Sao chép tin + mở Zalo</button><button class="btn sm" data-sd="' + esc(l.phone) + '">' + (done ? 'Ghi lại lần nữa' : 'Đã gửi') + '</button><button class="btn sm" data-sv="' + esc(l.phone) + '">Xem tin</button></div></div>';
+  }).join('') || '<div class="card mut">Chưa có khách nào khớp bộ lọc.</div>';
+  if (L.length > 150) $('#snlist').innerHTML += '<div class="small mut">Đang hiện 150 khách đầu. Thu hẹp bộ lọc để xem đủ.</div>';
+  var lead = function (p) { return D.leads.filter(function (x) { return x.phone === p; })[0]; };
+  document.querySelectorAll('[data-sz]').forEach(function (b) { b.onclick = function () { var l = lead(b.dataset.sz); copyText(snMsg(l)); window.open('https://zalo.me/' + l.phone, '_blank', 'noopener'); }; });
+  document.querySelectorAll('[data-sv]').forEach(function (b) { b.onclick = function () { var l = lead(b.dataset.sv); $('#dlgBody').innerHTML = '<h2 style="margin:0">Tin gửi ' + esc(l.name || l.phone) + '</h2><div class="card" style="white-space:pre-wrap;margin-top:8px">' + esc(snMsg(l)) + '</div><div class="row"><button class="btn p" id="svc">Sao chép</button><button class="btn" id="svx">Đóng</button></div>'; $('#dlg').showModal(); $('#svc').onclick = function () { copyText(snMsg(l)); }; $('#svx').onclick = function () { $('#dlg').close(); }; }; });
+  document.querySelectorAll('[data-sd]').forEach(function (b) { b.onclick = function () {
+    var l = lead(b.dataset.sd); b.disabled = true;
+    run('crmAddLog', l.phone, { type: 'Nhắn Zalo', content: 'Gửi tin ' + SN.kind.toLowerCase() + (SN.name ? ': ' + SN.name : ''), result: 'Đã gửi tin nhóm' }).then(function () { snMark(l.phone); toast('Đã ghi vào lịch sử chăm sóc'); snList(); }).catch(function (e) { b.disabled = false; fail(e); });
+  }; });
+}
+function snPrev(l) { l = l || { name: 'Nguyễn Văn A', assignee: '', phone: '', site: '' }; return '<div class="small mut">Xem thử với ' + esc(l.name || 'khách đầu tiên') + ':</div><div style="white-space:pre-wrap">' + esc(snMsg(l)) + '</div>'; }
+function send() {
+  var opt = function (arr, cur, first) { return (first ? '<option value="">' + first + '</option>' : '') + arr.map(function (x) { return '<option' + (x === cur ? ' selected' : '') + '>' + esc(x) + '</option>'; }).join(''); };
+  var provs = {}; D.leads.forEach(function (l) { if (l.province) provs[l.province] = 1; });
+  $('#main').innerHTML = '<div class="card"><b>Gửi tin Zalo theo nhóm khách</b><div class="small mut" style="margin-top:4px">Có dự án mới, chính sách mới hoặc quỹ căn mới thì lọc đúng nhóm khách phù hợp, soạn tin gắn hình, link, bảng hàng, rồi gửi từng người. Mỗi khách bấm một lần: tin được sao chép sẵn, dán vào Zalo là gửi. Hệ thống ghi lại vào lịch sử chăm sóc.</div></div>' +
+    '<div class="card"><b>1. Chọn nhóm khách</b><div class="fgrid" style="margin-top:8px">' +
+    snLab('Dự án khách từng quan tâm', '<input id="sn1" list="snl" placeholder="Để trống là tất cả" value="' + esc(SN.proj) + '"><datalist id="snl">' + projNames().map(function (p) { return '<option value="' + esc(p) + '">'; }).join('') + '</datalist>') +
+    snLab('Khu vực / tỉnh thành', '<input id="sn2" list="snp" value="' + esc(SN.prov) + '"><datalist id="snp">' + Object.keys(provs).map(function (p) { return '<option value="' + esc(p) + '">'; }).join('') + '</datalist>') +
+    snLab('Ngân sách từ (tỷ)', '<input id="sn3" inputmode="decimal" placeholder="vd 2" value="' + esc(SN.bmin) + '">') + snLab('Ngân sách đến (tỷ)', '<input id="sn4" inputmode="decimal" placeholder="vd 4" value="' + esc(SN.bmax) + '">') +
+    snLab('Độ nóng', '<select id="sn5">' + opt(['Nóng', 'Ấm', 'Nguội'], SN.heat, 'Tất cả') + '</select>') + snLab('Chưa chăm sóc quá N ngày', '<input id="sn6" inputmode="numeric" placeholder="vd 7" value="' + esc(SN.days) + '">') + '</div>' +
+    '<div class="row chips" style="margin-top:8px">' + STATUS.map(function (x) { return '<button class="chip" data-sst="' + esc(x) + '">' + esc(x) + '</button>'; }).join('') + '</div>' +
+    '<label class="small" style="display:block;margin-top:6px"><input type="checkbox" id="sn7"' + (SN.unk ? ' checked' : '') + '> Gồm cả khách chưa ghi ngân sách (khi có lọc ngân sách)</label><div class="small" id="sncnt" style="margin-top:6px"></div></div>' +
+    '<div class="card"><b>2. Soạn tin</b><div class="row chips" style="margin:8px 0">' + Object.keys(SN_KINDS).map(function (x) { return '<button class="chip' + (SN.kind === x ? ' on' : '') + '" data-sk="' + esc(x) + '">' + esc(x) + '</button>'; }).join('') + '</div><div class="fgrid">' +
+    snLab('Tên dự án', '<input id="sm1" value="' + esc(SN.name) + '">') + snLab('Điểm nổi bật / chính sách / quỹ căn', '<input id="sm2" placeholder="vd Chiết khấu 5%, hỗ trợ vay 0% 18 tháng" value="' + esc(SN.hl) + '">') +
+    snLab('Link thông tin dự án', '<input id="sm3" placeholder="https://" value="' + esc(SN.link) + '">') + snLab('Link bảng hàng', '<input id="sm4" placeholder="https://" value="' + esc(SN.tbl) + '">') + snLab('Link hình ảnh', '<input id="sm5" placeholder="https://" value="' + esc(SN.img) + '">') +
+    snLab('Kiểu lời kết', '<select id="sm6">' + opt(Object.keys(SN_ENDS), SN.style) + '</select>') + '</div>' +
+    '<label class="fld" style="margin-top:8px"><span class="mut small">Nội dung, có thể sửa. Các mục {ten} {sale} {du_an} {noi_bat} {lien_ket} tự thay theo từng khách</span><textarea id="sm7" rows="6">' + esc(snBody()) + '</textarea></label>' +
+    '<div class="small mut" style="margin-top:6px">Gợi ý: dán link ảnh hoặc bảng hàng (Google Drive, website dự án) để Zalo tự hiện hình xem trước. Lời kết "Khan hiếm" chỉ dùng khi quỹ căn thật sự còn ít.</div>' +
+    '<div class="card" id="snprev" style="background:#F4F7FC;margin:8px 0 0"></div></div>' +
+    '<div class="card"><b>3. Gửi từng khách</b><div class="small mut" style="margin-top:4px">Gửi khoảng 30 đến 50 khách mỗi ngày, cách nhau vài phút. Gửi dồn dập hàng trăm tin một lúc dễ bị Zalo hạn chế tài khoản.</div></div><div id="snlist"></div>';
+  [['sn1', 'proj'], ['sn2', 'prov'], ['sn3', 'bmin'], ['sn4', 'bmax'], ['sn5', 'heat'], ['sn6', 'days'], ['sn7', 'unk'], ['sm1', 'name'], ['sm2', 'hl'], ['sm3', 'link'], ['sm4', 'tbl'], ['sm5', 'img']].forEach(function (p) {
+    var e = $('#' + p[0]); e.oninput = e.onchange = function () { SN[p[1]] = this.type === 'checkbox' ? this.checked : this.value; if (!SN.edited && p[0].indexOf('sm') === 0) $('#sm7').value = snBody(); snList(); };
+  });
+  $('#sm6').onchange = function () { SN.style = this.value; SN.edited = false; $('#sm7').value = snBody(); snList(); };
+  $('#sm7').oninput = function () { SN.body = this.value; SN.edited = true; snList(); };
+  document.querySelectorAll('[data-sk]').forEach(function (b) { b.onclick = function () { SN.kind = b.dataset.sk; SN.edited = false; document.querySelectorAll('[data-sk]').forEach(function (x) { x.classList.toggle('on', x === b); }); $('#sm7').value = snBody(); snList(); }; });
+  document.querySelectorAll('[data-sst]').forEach(function (b) { b.onclick = function () { var cur = SN.st || STATUS.filter(function (x) { return x !== 'Chốt' && x !== 'Mất' && x !== 'Tạm dừng'; }), i = cur.indexOf(b.dataset.sst); if (i >= 0) cur.splice(i, 1); else cur.push(b.dataset.sst); SN.st = cur; snList(); }; });
+  snList();
+}
+// ---- Hoa hồng, lương, chi phí marketing theo tháng (số liệu kế toán gửi, nhập tay)
+var CM = { data: null, year: '', month: '' };
+function monthLabel(m) { return 'Tháng ' + m.slice(5) + '/' + m.slice(0, 4); }
+function commLoad() { CM.data = null; render(); }
+function comm() {
+  if (!CM.data) {
+    $('#main').innerHTML = '<div class="card mut">Đang tải số liệu hoa hồng…</div>';
+    run('crmCommLoad').then(function (r) { CM.data = r; if (!CM.year) CM.year = ymdNow(0).slice(0, 4); if (tab === 'comm') comm(); }).catch(function (e) { $('#main').innerHTML = '<div class="card">Không tải được: ' + esc(e.message) + '</div>'; });
+    return;
+  }
+  var d = CM.data, years = {}; years[ymdNow(0).slice(0, 4)] = 1;
+  d.items.forEach(function (x) { years[x.month.slice(0, 4)] = 1; }); Object.keys(d.mkt).forEach(function (m) { years[m.slice(0, 4)] = 1; });
+  var yl = Object.keys(years).sort().reverse(); if (yl.indexOf(CM.year) < 0) CM.year = yl[0];
+  var rows = d.items.filter(function (x) { return x.month.slice(0, 4) === CM.year; });
+  var M = [];
+  for (var i = 1; i <= 12; i++) { var mo = CM.year + '-' + ('0' + i).slice(-2); M.push({ m: mo, hh: 0, sal: 0, mkt: d.mkt[mo] || 0 }); }
+  var units = {}, tax = 0;
+  rows.forEach(function (x) {
+    var o = M[+x.month.slice(5) - 1];
+    if (x.type === 'Lương') o.sal += x.net; else { o.hh += x.net; if (x.unit) x.unit.split(/[;,]/).forEach(function (u) { u = u.trim(); if (u) units[u] = 1; }); }
+    tax += x.taxPaid;
+  });
+  var sum = function (k) { return M.reduce(function (a, o) { return a + o[k]; }, 0); };
+  var hh = sum('hh'), sal = sum('sal'), mkt = sum('mkt'), inc = hh + sal;
+  var kp = [[money(hh), 'Hoa hồng, thưởng đã nhận'], [money(sal), 'Lương'], [money(inc), 'Tổng thu nhập'], [money(mkt), 'Chi phí marketing'], [inc || mkt ? vnd(inc - mkt) : '-', 'Thu nhập sau chi phí MKT'], [Object.keys(units).length, 'Số căn có hoa hồng'], [mkt > 0 && hh > 0 ? (Math.round(hh / mkt * 10) / 10) + ' lần' : '-', 'Hoa hồng / chi phí MKT']];
+  var max = Math.max.apply(null, M.map(function (o) { return Math.max(o.hh + o.sal, o.mkt); }).concat([1]));
+  var chart = '<div class="card"><b>Thu nhập và chi phí marketing theo tháng</b> <span class="mut small">năm ' + CM.year + '</span><div class="cmch">' + M.map(function (o) {
+    var h1 = Math.round((o.hh + o.sal) / max * 100), h2 = Math.round(o.mkt / max * 100);
+    return '<div class="cmc" title="' + monthLabel(o.m) + '&#10;Thu nhập: ' + vnd(o.hh + o.sal) + '&#10;Chi phí MKT: ' + vnd(o.mkt) + '"><div class="cmb"><i style="height:' + h1 + '%;background:var(--navy8)"></i><i style="height:' + h2 + '%;background:var(--gold)"></i></div><span>' + o.m.slice(5) + '</span></div>';
+  }).join('') + '</div><div class="small mut"><span class="lgd" style="background:var(--navy8)"></span> Thu nhập (hoa hồng + lương) <span class="lgd" style="background:var(--gold)"></span> Chi phí marketing</div></div>';
+  var mt = '<div class="card tw"><b>Tổng hợp từng tháng</b><table><tr><th>Tháng</th><th>Hoa hồng, thưởng</th><th>Lương</th><th>Tổng thu nhập</th><th>Chi phí MKT</th><th>Sau chi phí MKT</th></tr>' +
+    M.filter(function (o) { return o.hh || o.sal || o.mkt; }).map(function (o) { return '<tr class="' + (CM.month === o.m ? 'sel' : '') + '" data-cm="' + o.m + '" style="cursor:pointer"><td><b>' + monthLabel(o.m) + '</b></td><td>' + money(o.hh) + '</td><td>' + money(o.sal) + '</td><td>' + money(o.hh + o.sal) + '</td><td>' + money(o.mkt) + '</td><td><b>' + vnd(o.hh + o.sal - o.mkt) + '</b></td></tr>'; }).join('') +
+    (inc || mkt ? '<tr><td><b>Cả năm</b></td><td><b>' + money(hh) + '</b></td><td><b>' + money(sal) + '</b></td><td><b>' + money(inc) + '</b></td><td><b>' + money(mkt) + '</b></td><td><b>' + vnd(inc - mkt) + '</b></td></tr>' : '<tr><td colspan="6" class="mut">Chưa có số liệu năm này. Bấm "Thêm khoản" để nhập bảng kế toán gửi.</td></tr>') + '</table><div class="small mut">Bấm vào một tháng để chỉ xem các khoản của tháng đó. Chi phí marketing lấy tự động từ tab Chi phí.</div></div>';
+  var list = rows.filter(function (x) { return !CM.month || x.month === CM.month; }).sort(function (a, b) { return a.month < b.month ? 1 : a.month > b.month ? -1 : b.row - a.row; });
+  var det = list.map(function (x) {
+    var l = D.leads.filter(function (z) { return x.phone && z.phone === x.phone; })[0];
+    var who = (l ? esc(l.name) + ' · ' : '') + esc(x.phone);
+    return '<div class="card cmrow"><div class="row" style="margin:0"><b>' + monthLabel(x.month) + '</b><span class="tag blu">' + esc(x.type) + '</span><span class="sp"></span><b style="color:var(--navy9)">' + vnd(x.net) + '</b></div>' +
+      '<div class="small mut">' + [x.unit && 'Căn ' + esc(x.unit), x.project && esc(x.project), x.phone && who].filter(Boolean).join(' · ') + '</div>' +
+      (x.total || x.prev || x.now ? '<div class="small">Tổng hoa hồng ' + money(x.total) + ' · đã tính trước ' + money(x.prev) + ' · đợt này ' + money(x.now) + '</div>' : '') +
+      (x.taxPaid || x.taxDue ? '<div class="small mut">Thuế đã khấu trừ ' + money(x.taxPaid) + ' · còn lại ' + money(x.taxDue) + '</div>' : '') + (x.note ? '<div class="small mut">' + esc(x.note) + '</div>' : '') +
+      '<div class="row" style="margin:6px 0 0"><button class="btn sm" data-ce="' + x.row + '">Sửa</button><button class="btn sm" data-cd="' + x.row + '">Xoá</button></div></div>';
+  }).join('') || '<div class="card mut">Chưa có khoản nào' + (CM.month ? ' trong ' + monthLabel(CM.month).toLowerCase() : '') + '.</div>';
+  $('#main').innerHTML = '<div class="card"><div class="row" style="margin:0"><b>Hoa hồng, lương, chi phí marketing</b><span class="sp"></span><select id="cmy">' + yl.map(function (y) { return '<option>' + y + '</option>'; }).join('') + '</select><button class="btn p" id="cmadd">+ Thêm khoản</button></div>' +
+    '<div class="small mut" style="margin-top:6px">Nhập số liệu kế toán gửi hằng tháng (hoa hồng NVKD, thưởng TPKD/GĐKD, lương). So với chi phí quảng cáo để biết làm marketing còn lời bao nhiêu.</div></div>' +
+    '<div class="grid kc cm">' + kp.map(function (x, i) { return '<div class="kpi"><b' + (String(x[0]).length > 9 ? ' class="long"' : '') + '>' + esc(x[0]) + '</b><span>' + x[1] + '</span></div>'; }).join('') + '</div>' + chart + mt +
+    '<h3 style="margin:14px 2px 8px">Các khoản ' + (CM.month ? esc(monthLabel(CM.month).toLowerCase()) + ' <button class="btn sm" id="cmall">Xem cả năm</button>' : 'năm ' + CM.year) + '</h3>' + det;
+  $('#cmy').value = CM.year;
+  $('#cmy').onchange = function () { CM.year = this.value; CM.month = ''; comm(); };
+  $('#cmadd').onclick = function () { commForm(null); };
+  if ($('#cmall')) $('#cmall').onclick = function () { CM.month = ''; comm(); };
+  document.querySelectorAll('[data-cm]').forEach(function (r) { r.onclick = function () { CM.month = CM.month === r.dataset.cm ? '' : r.dataset.cm; comm(); }; });
+  document.querySelectorAll('[data-ce]').forEach(function (b) { b.onclick = function () { commForm(d.items.filter(function (x) { return x.row === +b.dataset.ce; })[0]); }; });
+  document.querySelectorAll('[data-cd]').forEach(function (b) { b.onclick = function () { if (!confirm('Xoá khoản này khỏi bảng hoa hồng?')) return; run('crmCommDelete', +b.dataset.cd).then(function () { toast('Đã xoá'); commLoad(); }).catch(fail); }; });
+}
+function commForm(x) {
+  x = x || { month: ymdNow(0).slice(0, 7), type: CM.data.types[0] };
+  var lab = function (t, h) { return '<label class="fld"><span class="mut small">' + t + '</span>' + h + '</label>'; };
+  var num = function (id, v) { return '<input id="' + id + '" inputmode="decimal" value="' + (v ? esc(String(v)) : '') + '">'; };
+  $('#dlgBody').innerHTML = '<h2 style="margin:0">' + (x.row ? 'Sửa khoản' : 'Thêm khoản') + ' hoa hồng / lương</h2><p class="small mut">Điền theo bảng kế toán gửi. Chỉ cần tháng, loại và số tiền thực nhận; các ô còn lại để tham khảo.</p><div class="fgrid">' +
+    lab('Tháng *', '<input type="month" id="cm1" value="' + esc(x.month) + '">') +
+    lab('Loại', '<select id="cm2">' + CM.data.types.map(function (t) { return '<option' + (t === x.type ? ' selected' : '') + '>' + esc(t) + '</option>'; }).join('') + '</select>') +
+    lab('Thực nhận (đồng) *', num('cm3', x.net)) + lab('Mã căn (nhiều căn cách nhau dấu ;)', '<input id="cm4" value="' + esc(x.unit || '') + '">') +
+    lab('Dự án', '<input id="cm5" list="cml" value="' + esc(x.project || '') + '"><datalist id="cml">' + D.sites.map(function (s) { return '<option value="' + esc(s.name) + '">'; }).join('') + '</datalist>') + lab('SĐT khách (nếu muốn gắn)', '<input id="cm6" inputmode="tel" value="' + esc(x.phone || '') + '">') + '</div>' +
+    '<details class="sec"><summary>Chi tiết theo bảng kế toán</summary><div class="fgrid">' + lab('Tổng giá bán tính hoa hồng', num('cm7', x.price)) + lab('Mức phí hoa hồng (%)', num('cm8', x.rate)) + lab('Tổng hoa hồng', num('cm9', x.total)) +
+    lab('Đã tính đợt trước', num('cm10', x.prev)) + lab('Còn lại tính đợt này', num('cm11', x.now)) + lab('Thuế TNCN đã khấu trừ', num('cm12', x.taxPaid)) + lab('Thuế TNCN còn phải khấu trừ', num('cm13', x.taxDue)) + '</div></details>' +
+    '<textarea id="cm14" rows="2" placeholder="Ghi chú">' + esc(x.note || '') + '</textarea><div class="row" style="margin-top:8px"><button class="btn p" id="cmok">Lưu</button><button class="btn" id="cmx">Huỷ</button></div>';
+  $('#dlg').showModal();
+  $('#cmx').onclick = function () { $('#dlg').close(); };
+  var n3 = !!x.net, n11 = !!x.now;
+  $('#cm3').oninput = function () { n3 = true; }; $('#cm11').oninput = function () { n11 = true; if (!n3) $('#cm3').value = this.value; };
+  var auto = function () { var t = parseFloat(String($('#cm9').value).replace(/\./g, '').replace(',', '.')), p = parseFloat(String($('#cm10').value).replace(/\./g, '').replace(',', '.')) || 0; if (!n11 && t) { $('#cm11').value = Math.max(0, t - p); if (!n3) $('#cm3').value = $('#cm11').value; } };
+  $('#cm9').oninput = auto; $('#cm10').oninput = auto;
+  $('#cmok').onclick = function () {
+    if (!$('#cm1').value) { toast('Hãy chọn tháng'); return; }
+    var f = { row: x.row || 0, month: $('#cm1').value, type: $('#cm2').value, net: $('#cm3').value, unit: $('#cm4').value, project: $('#cm5').value, phone: $('#cm6').value, price: $('#cm7').value, rate: $('#cm8').value, total: $('#cm9').value, prev: $('#cm10').value, now: $('#cm11').value, taxPaid: $('#cm12').value, taxDue: $('#cm13').value, note: $('#cm14').value };
+    $('#cmok').disabled = true;
+    run('crmCommSave', f).then(function () { toast('Đã lưu'); $('#dlg').close(); CM.month = f.month.slice(0, 4) === CM.year ? CM.month : ''; commLoad(); }).catch(function (e) { $('#cmok').disabled = false; fail(e); });
+  };
+}
+// Dán đoạn chat Zalo của khách để quân sư AI tóm tắt, rút nhu cầu, vướng mắc và gợi ý bước kế. Zalo cá nhân không có cách tự động lấy lịch sử chat.
+function zaloChat(phone) {
+  var l = D.leads.filter(function (x) { return x.phone === phone; })[0]; if (!l) return;
+  $('#dlgBody').innerHTML = '<h2 style="margin:0">Phân tích chat Zalo: ' + esc(l.name || l.phone) + '</h2><p class="small mut">Trên Zalo, mở cuộc trò chuyện với khách, bôi đen đoạn chat cần phân tích, Copy rồi dán vào ô dưới (tối đa khoảng 8.000 ký tự, nên dán phần gần nhất). Chỉ nội dung dán vào mới được gửi cho quân sư AI.</p>' +
+    '<textarea id="zct" rows="9" placeholder="Dán đoạn chat vào đây"></textarea><div class="row" style="margin-top:8px"><button class="btn p" id="zcgo">Phân tích</button><button class="btn" id="zcx">Đóng</button></div><div id="zcr"></div>';
+  $('#dlg').showModal(); $('#zcx').onclick = function () { $('#dlg').close(); };
+  $('#zcgo').onclick = function () {
+    var t = $('#zct').value.trim(); if (!t) { toast('Hãy dán đoạn chat'); return; }
+    $('#zcgo').disabled = true; $('#zcr').innerHTML = '<div class="mut" style="margin-top:8px">Quân sư đang đọc đoạn chat…</div>';
+    run('crmAsk', 'Dưới đây là đoạn chat Zalo giữa sale và khách. Hãy trả lời ngắn gọn theo 5 mục: 1) Tóm tắt cuộc trò chuyện. 2) Nhu cầu, ngân sách, mối quan tâm khách đã nói. 3) Vướng mắc hoặc lo ngại. 4) Khách đang nóng hay nguội và vì sao. 5) Bước tiếp theo tối ưu và một tin nhắn mẫu gửi được ngay. Chỉ dựa trên nội dung chat, không bịa thêm.\n\n' + t.slice(-7000), phone, 8000).then(function (r) {
+      $('#zcgo').disabled = false;
+      $('#zcr').innerHTML = '<div class="card" style="margin-top:8px;white-space:pre-wrap">' + esc(r) + '</div><div class="row"><button class="btn" id="zcsv">Lưu tóm tắt vào lịch sử chăm sóc</button><button class="btn" id="zccp">Sao chép</button></div>';
+      $('#zccp').onclick = function () { copyText(r); };
+      $('#zcsv').onclick = function () { this.disabled = true; run('crmAddLog', phone, { type: 'Ghi chú', content: ('Phân tích chat Zalo:\n' + r).slice(0, 1400) }).then(function () { toast('Đã lưu vào lịch sử'); }).catch(fail); };
+    }).catch(function (e) { $('#zcgo').disabled = false; $('#zcr').innerHTML = '<div class="card" style="margin-top:8px">' + esc(/Chưa cài khoá/.test(e.message) ? 'Chưa cài khoá quân sư AI. Vào Sheet, menu CRM, Cài khoá quân sư (AI).' : e.message) + '</div>'; });
+  };
+}
 function addLead() {
   var lab = function (t, h) { return '<label class="fld"><span class="mut small">' + t + '</span>' + h + '</label>'; };
   var sel = function (id, arr, first) { return '<select id="' + id + '"><option value="">' + first + '</option>' + arr.map(function (s) { return '<option>' + esc(s) + '</option>'; }).join('') + '</select>'; };

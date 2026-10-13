@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-18', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-19', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -186,6 +186,67 @@ function crmAddSale(k, name) {
   });
 }
 
+// ---- Hoa hồng, lương: kế toán gửi theo tháng, nhập tay vào tab "Hoa hồng". Chi phí marketing lấy từ tab "Chi phí".
+var COMM_TYPES = ['Hoa hồng NVKD', 'Thưởng TPKD', 'Thưởng GĐKD', 'Lương', 'Thưởng khác'];
+var COMM_HEAD = ['Mã', 'Tháng', 'Loại', 'Mã căn', 'Dự án', 'SĐT khách', 'Tổng giá bán', 'Mức %', 'Tổng hoa hồng', 'Đã tính đợt trước', 'Tính đợt này', 'Thực nhận', 'Thuế đã khấu trừ', 'Thuế còn lại', 'Ghi chú', 'Ngày nhập'];
+function monthStr_(v) {
+  if (v instanceof Date) return Utilities.formatDate(v, 'Asia/Ho_Chi_Minh', 'yyyy-MM').slice(0, 7);
+  var m = /^'?(\d{4})-(\d{1,2})/.exec(String(v || '').trim());
+  return m ? m[1] + '-' + ('0' + m[2]).slice(-2) : '';
+}
+function numIn_(v) {
+  var t = String(v == null ? '' : v).replace(/[^\d.,\-]/g, '');
+  if (/^-?\d{1,3}(\.\d{3})+(,\d+)?$/.test(t)) t = t.replace(/\./g, '').replace(',', '.');      // 13.670.915 hoặc 1.234,5
+  else if (/^-?\d{1,3}(,\d{3})+(\.\d+)?$/.test(t)) t = t.replace(/,/g, '');                     // 13,670,915
+  else t = t.replace(',', '.');
+  var n = Number(t); return isFinite(n) ? Math.round(n * 100) / 100 : 0;
+}
+function crmCommLoad(k) {
+  requireUi_(k);
+  var ss = ss_(), sh = tab_('Hoa hồng', COMM_HEAD), n = lastDataRow_(sh, 2);
+  var rows = n > 1 ? sh.getRange(2, 1, n - 1, COMM_HEAD.length).getValues() : [];
+  var items = [];
+  rows.forEach(function (r, i) {
+    var mo = monthStr_(r[1]); if (!mo) return;
+    items.push({ row: i + 2, id: String(r[0] || ''), month: mo, type: String(r[2] || ''), unit: String(r[3] || ''), project: String(r[4] || ''), phone: phoneStr_(r[5]),
+      price: Number(r[6]) || 0, rate: Number(r[7]) || 0, total: Number(r[8]) || 0, prev: Number(r[9]) || 0, now: Number(r[10]) || 0, net: Number(r[11]) || 0,
+      taxPaid: Number(r[12]) || 0, taxDue: Number(r[13]) || 0, note: String(r[14] || '') });
+  });
+  var mkt = {}, cp = ss.getSheetByName('Chi phí'), cn = cp ? cp.getLastRow() : 1;
+  if (cn > 1) cp.getRange(2, 1, cn - 1, 3).getValues().forEach(function (r) { var d = ymd_(r[0]); if (d) mkt[d.slice(0, 7)] = (mkt[d.slice(0, 7)] || 0) + (Number(r[2]) || 0); });
+  return { items: items, mkt: mkt, types: COMM_TYPES };
+}
+function crmCommSave(k, f) {
+  requireUi_(k); f = f || {};
+  var mo = monthStr_(f.month); if (!mo) throw new Error('Hãy chọn tháng');
+  var type = COMM_TYPES.indexOf(f.type) >= 0 ? f.type : COMM_TYPES[0];
+  var phone = f.phone ? normPhone_(f.phone) : '';
+  return withLock_(function () {
+    var sh = tab_('Hoa hồng', COMM_HEAD), row = Number(f.row) || 0, n = lastDataRow_(sh, 2);
+    var net = numIn_(f.net);
+    var vals = [mo, type, str_(f.unit, 60), str_(f.project, 120), phone ? "'" + phone : '', numIn_(f.price), numIn_(f.rate), numIn_(f.total), numIn_(f.prev), numIn_(f.now), net,
+      numIn_(f.taxPaid), numIn_(f.taxDue), str_(f.note, 500)];
+    vals[0] = "'" + mo;
+    if (row) {
+      if (row < 2 || row > n) throw new Error('Không tìm thấy dòng cần sửa');
+      sh.getRange(row, 2, 1, vals.length).setValues([vals]);
+      return { ok: true, row: row };
+    }
+    var id = 'HH' + ('000' + n).slice(-3);
+    sh.appendRow([id].concat(vals).concat([new Date()]));
+    return { ok: true, row: n + 1, id: id };
+  });
+}
+function crmCommDelete(k, row) {
+  requireUi_(k); row = Number(row) || 0;
+  return withLock_(function () {
+    var sh = tab_('Hoa hồng', COMM_HEAD), n = lastDataRow_(sh, 2);
+    if (row < 2 || row > n) throw new Error('Không tìm thấy dòng cần xoá');
+    sh.deleteRow(row);
+    return { ok: true };
+  });
+}
+
 // ---- Quân sư AI: hỏi Claude về cách chăm khách. Khoá API lưu trong Script Properties (menu CRM > Cài khoá quân sư).
 var ASK_MODEL = 'claude-sonnet-5-5';
 function leadContext_(phone) {
@@ -224,7 +285,8 @@ function crmHistory_(phone) {
 }
 function crmAsk(k, question, phone) {
   requireUi_(k);
-  question = String(question || '').trim().slice(0, 1500);
+  var cap = Math.min(Number(arguments[3]) || 1500, 8000);   // dán đoạn chat Zalo được dài hơn câu hỏi thường
+  question = String(question || '').trim().slice(0, cap);
   if (!question) throw new Error('Chưa nhập câu hỏi');
   var key = PropertiesService.getScriptProperties().getProperty('ANTHROPIC_KEY') || '';
   if (!key) throw new Error('Chưa cài khoá quân sư. Vào file Sheet, menu CRM > Cài khoá quân sư (AI), dán khoá API vào.');
@@ -237,7 +299,7 @@ function crmAsk(k, question, phone) {
     method: 'post', contentType: 'application/json', muteHttpExceptions: true,
     headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01' },
     payload: JSON.stringify({
-      model: ASK_MODEL, max_tokens: 900,
+      model: ASK_MODEL, max_tokens: cap > 1500 ? 1400 : 900,
       system: 'Bạn là quân sư bán hàng bất động sản tại Đà Nẵng, tư vấn cho nhân viên sale. Trả lời bằng tiếng Việt, ngắn gọn, thực tế, dễ làm theo ngay. ' +
         'Khi soạn tin nhắn cho khách thì viết sẵn nội dung gửi được luôn, lịch sự, không hứa hẹn sai sự thật, không bịa giá hay chính sách.' + ctx,
       messages: [{ role: 'user', content: question }]
