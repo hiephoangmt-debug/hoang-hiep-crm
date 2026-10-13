@@ -687,7 +687,19 @@ if (FB_PIXEL_ID) {
 @media (max-width:860px){.evh{padding:40px 0}.evh-card{grid-template-columns:1fr;padding:18px}}
 @media (prefers-reduced-motion:reduce){.evh-cd b{animation:none}}
 </style>
-<style>.evh-card{align-items:start}@media (min-width:861px){.evh-card>div:last-child{position:sticky;top:120px}}</style>
+<style>
+.evh-card{align-items:stretch}
+.evh-card .evh-cd{margin-top:20px}
+.evh-right{display:flex;flex-direction:column;min-width:0}
+.evh-right .evs{flex:1;display:flex;flex-direction:column}
+.evh-right .evs-box{flex:1}
+.evh-formrow{max-width:1120px;margin:16px auto 0}
+@media (min-width:861px){
+  .evh-formrow .evh-form{grid-template-columns:1fr 1fr 1fr auto;align-items:center;padding:18px 20px}
+  .evh-formrow .evh-form h3,.evh-formrow .evh-form p{grid-column:1/-1}
+  .evh-formrow .evh-form .btn{width:auto;white-space:nowrap}
+}
+</style>
 <section class="evh" id="su-kien-hn" aria-labelledby="h-evh">
   <div class="container">
     <div class="evh-card">
@@ -705,7 +717,10 @@ if (FB_PIXEL_ID) {
           <li>Hỏi trực tiếp về pháp lý, tiến độ, bàn giao</li>
           <li>Chưa sắp xếp đến được? Đăng ký tư vấn qua video ngay trong ngày</li>
         </ul>
-        <figure class="evh-venue evs" style="max-width:440px;margin:22px 0 0">
+        <div class="evh-cd" aria-label="Thời gian còn lại đến sự kiện"><div><b id="evhD">–</b><span>ngày</span></div><div><b id="evhH">–</b><span>giờ</span></div><div><b id="evhM">–</b><span>phút</span></div></div>
+      </div>
+      <div class="evh-right">
+        <figure class="evh-venue evs" style="max-width:none;margin:0">
       <style>
       .evs-box{position:relative;aspect-ratio:4/5;border-radius:18px;overflow:hidden;background:#0b1a3a;border:2px solid rgba(255,176,103,.55);box-shadow:0 30px 60px -30px rgba(0,0,0,.8);touch-action:pan-y}
       .evs-s{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:opacity .7s ease;pointer-events:none}
@@ -728,7 +743,6 @@ if (FB_PIXEL_ID) {
         <button type="button" class="evs-nav p" aria-label="Ảnh trước">‹</button><button type="button" class="evs-nav n" aria-label="Ảnh sau">›</button>
       </div>
       <div class="evs-dots"><button type="button" aria-label="Xem ảnh 1" class="on"></button><button type="button" aria-label="Xem ảnh 2"></button><button type="button" aria-label="Xem ảnh 3"></button><button type="button" aria-label="Xem ảnh 4"></button><button type="button" aria-label="Xem ảnh 5"></button></div>
-      <figcaption>Ảnh tự chuyển · vuốt hoặc bấm ‹ › để xem · bấm ảnh để phóng to</figcaption>
       <script>
       (function () {
         var f = document.currentScript.parentNode, s = f.querySelectorAll('.evs-s'), d = f.querySelectorAll('.evs-dots button'), i = 0, t = null;
@@ -747,9 +761,9 @@ if (FB_PIXEL_ID) {
       </script>
     </figure>
       </div>
-      <div>
-        <div class="evh-cd" aria-label="Thời gian còn lại đến sự kiện"><div><b id="evhD">–</b><span>ngày</span></div><div><b id="evhH">–</b><span>giờ</span></div><div><b id="evhM">–</b><span>phút</span></div></div>
-        <form class="evh-form lead-form" aria-labelledby="evh-form-title">
+    </div>
+    <div class="evh-formrow">
+      <form class="evh-form lead-form" aria-labelledby="evh-form-title">
           <h3 id="evh-form-title">Giữ chỗ – nhận thư mời ghi tên qua Zalo</h3>
           <label class="sr" for="evh-name">Họ và tên</label><input id="evh-name" name="name" placeholder="Họ và tên *" autocomplete="name" required>
           <label class="sr" for="evh-phone">Số điện thoại</label><input id="evh-phone" name="phone" type="tel" placeholder="Số điện thoại / Zalo *" autocomplete="tel" inputmode="tel" required pattern="[0-9 +.]{9,14}">
@@ -758,7 +772,6 @@ if (FB_PIXEL_ID) {
           <button class="btn btn-gold" type="submit">Giữ chỗ sự kiện 18/10 →</button>
           <p>Số lượng chỗ có hạn · Thông tin được bảo mật</p>
         </form>
-      </div>
     </div>
       
         

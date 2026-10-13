@@ -714,12 +714,15 @@ document.addEventListener('click', function (e) { var a = e.target.closest && e.
       </div>
     </div>
     <style>
-.ev-grid{display:grid;gap:22px;max-width:1120px;margin:0 auto;align-items:start}
-.ev-grid .ev-bar{grid-template-columns:1fr;margin:0}
+.ev-grid{display:grid;gap:22px;max-width:1120px;margin:0 auto;align-items:stretch}
+.ev-grid .ev-col-l,.ev-grid .ev-col-r{display:flex;flex-direction:column;gap:14px;min-width:0}
+.ev-grid .ev-col-l .evs{flex:1;display:flex;flex-direction:column}
+.ev-grid .evs-box{flex:1}
+.ev-grid .ev-bar{grid-template-columns:1fr;margin:0;flex:1;align-content:center}
 .ev-grid .ev-cd{justify-content:center}
 .ev-grid .ev-form{grid-template-columns:1fr}
-.ev-grid .ev-agenda{margin:14px 0 0}
-@media (min-width:900px){.ev-grid{grid-template-columns:minmax(0,440px) minmax(0,1fr)}.ev-grid .ev-col-r{position:sticky;top:120px}}
+.ev-grid .ev-agenda{margin:0}
+@media (min-width:900px){.ev-grid{grid-template-columns:minmax(0,420px) minmax(0,1fr)}}
 </style>
     <div class="ev-grid">
       <div class="ev-col-l">
@@ -746,7 +749,6 @@ document.addEventListener('click', function (e) { var a = e.target.closest && e.
         <button type="button" class="evs-nav p" aria-label="Ảnh trước">‹</button><button type="button" class="evs-nav n" aria-label="Ảnh sau">›</button>
       </div>
       <div class="evs-dots"><button type="button" aria-label="Xem ảnh 1" class="on"></button><button type="button" aria-label="Xem ảnh 2"></button><button type="button" aria-label="Xem ảnh 3"></button><button type="button" aria-label="Xem ảnh 4"></button><button type="button" aria-label="Xem ảnh 5"></button></div>
-      <figcaption>Ảnh tự chuyển · vuốt hoặc bấm ‹ › để xem · bấm ảnh để phóng to</figcaption>
       <script>
       (function () {
         var f = document.currentScript.parentNode, s = f.querySelectorAll('.evs-s'), d = f.querySelectorAll('.evs-dots button'), i = 0, t = null;
