@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-34', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-35', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -384,12 +384,17 @@ function crmScanZalo(k, text, img, mime) {
 function crmScanComm(k, text, img, mime) {
   requireUi_(k);
   var o = scanAi_('Bạn đọc bảng thu nhập, hoa hồng của nhân viên kinh doanh do kế toán gửi theo tháng (ảnh chụp hoặc chữ dán) và chỉ trả về MỘT đối tượng JSON, không thêm chữ nào khác: ' +
-    '{"month":"YYYY-MM của tháng nhận tiền, lấy từ chữ như nhận trong tháng 10/2026, không thấy thì rỗng","salary":số tiền Thu nhập CT từ lương nhận trong tháng hoặc null,' +
-    '"rows":[{"type":"Thưởng GĐKD hoặc Thưởng TPKD hoặc Hoa hồng NVKD hoặc Thưởng khác theo cột Chỉ tiêu tính","unit":"Mã căn, nhiều căn cách nhau dấu ;","price":"Tổng giá bán tính hoa hồng","rate":"Mức phí hoa hồng % hoặc tỷ lệ","total":"Tổng hoa hồng NVKD/Thưởng quản lý","prev":"Hoa hồng đã tính thanh toán đợt trước","now":"Hoa hồng còn lại tính thanh toán đợt này","net":"Hoa hồng còn được nhận","taxPaid":"Thuế TNCN đã khấu trừ","taxDue":"Thuế TNCN còn lại phải khấu trừ"}]}. ' +
+    '{"month":"YYYY-MM của tháng nhận tiền, lấy từ chữ như nhận trong tháng 09/2026, không thấy thì rỗng","salary":số tiền Thu nhập CT từ lương nhận trong tháng hoặc null,' +
+    '"rows":[{"type":"Hoa hồng NVKD hoặc Thưởng TPKD hoặc Thưởng GĐKD hoặc Thưởng khác","units":["mọi mã căn nhìn thấy trong dòng"],"unit":"mã căn nối bằng dấu ;","price":"Tổng giá bán hoặc Giá tính hoa hồng","rate":"tỷ lệ % nếu có","total":"tổng hoa hồng hoặc tổng thưởng của dòng, kể cả khi ghi đợt 1","prev":"đã tính thanh toán đợt trước","now":"tính thanh toán đợt này","net":"hoa hồng hoặc thưởng còn được nhận trong tháng (cột cuối cùng)","taxPaid":"Thuế TNCN đã khấu trừ","taxDue":"Thuế TNCN còn lại phải khấu trừ"}]}. ' +
+    'Quy ước: MÃ CĂN là ký hiệu gồm chữ cái và số như SL11611, A21011, S1.12.12A. Mã căn có thể nằm ở cột Mã căn, hoặc nằm giữa dòng ở ô gộp dưới các cột như Giá tính hoa hồng hay Tỷ lệ (ví dụ SL11611; SL112B01; SL12016), khi đó vẫn là mã căn, không phải giá tiền. ' +
+    'Cột "Thưởng quản lý kinh doanh" hoặc "Thưởng QL" thì type là Thưởng TPKD (là Thưởng GĐKD nếu chữ ghi giám đốc kinh doanh); cột "Hoa hồng NVKD/Đại lý" thì type là Hoa hồng NVKD. Nếu cả hai cột cùng có số thì tách thành hai mục có cùng mã căn. ' +
+    'Cột "Tiền thưởng, hoa hồng đã nhận trong tháng" là tổng cả tháng của mọi khoản, KHÔNG dùng làm net của từng dòng. Giảm trừ gia cảnh và thu nhập tính thuế bỏ qua. ' +
     'Mỗi dòng dữ liệu của bảng là một mục trong rows, các số viết bằng chữ số, không kèm đơn vị, ô trống thì để 0. Lương chỉ lấy một lần vào salary, đừng lặp lại trong rows. Tuyệt đối không bịa số.',
     'Đây là bảng hoa hồng, thu nhập kế toán gửi.', text, '', img, mime);
   var rows = (Array.isArray(o.rows) ? o.rows : []).slice(0, 20).map(function (r) {
-    return { type: COMM_TYPES.indexOf(r && r.type) >= 0 ? r.type : COMM_TYPES[0], unit: str_(r && r.unit, 60), price: numIn_(r && r.price), rate: numIn_(r && r.rate), total: numIn_(r && r.total), prev: numIn_(r && r.prev), now: numIn_(r && r.now),
+    var codes = (Array.isArray(r && r.units) ? r.units : []).map(function (u) { return String(u || '').trim(); }).filter(Boolean);
+    var unit = codes.length ? codes.join('; ') : String((r && r.unit) || '').replace(/\s*[,;]\s*/g, '; ');
+    return { type: COMM_TYPES.indexOf(r && r.type) >= 0 ? r.type : COMM_TYPES[0], unit: str_(unit, 80), price: numIn_(r && r.price), rate: numIn_(r && r.rate), total: numIn_(r && r.total), prev: numIn_(r && r.prev), now: numIn_(r && r.now),
       net: numIn_(r && r.net) || numIn_(r && r.now), taxPaid: numIn_(r && r.taxPaid), taxDue: numIn_(r && r.taxDue) };
   }).filter(function (r) { return r.net || r.total || r.unit; });
   return { month: monthStr_(o.month), salary: numIn_(o.salary), rows: rows };
@@ -419,6 +424,7 @@ function crmScanContacts(k, text, img, mime) {
     return { name: str_(c && c.name, 100), phone: normPhone_(c && c.phone), note: str_(c && c.note, 200) };
   }).filter(function (c) { return c.name || c.phone; }) };
 }
+
 // Quét kế hoạch marketing của sàn hoặc cá nhân từ thông điệp, link, ảnh: rút kênh chạy, ngân sách, tiền ứng, mốc hỗ trợ.
 function crmScanPlan(k, text, link, img, mime) {
   requireUi_(k);

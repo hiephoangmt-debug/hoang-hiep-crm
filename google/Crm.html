@@ -1210,20 +1210,27 @@ function planForm(p) {
 }
 // Chụp bảng hoa hồng kế toán gửi để tự điền: xem trước rồi lưu từng khoản, bỏ qua khoản đã có.
 // ---- Hoa hồng theo từng căn: được hưởng bao nhiêu, đã về bao nhiêu, còn lại bao nhiêu, về qua những lần nào
-function commUnits() {
+function unitCodes(u) { return String(u || '').toUpperCase().split(/[;,\s]+/).filter(Boolean); }
+// Gộp các dòng kế toán theo mã căn: dòng nào có chung mã căn thì cùng một sổ, nên đợt sau về cứ tự cộng vào đúng căn đó
+function commUnits(items) {
+  var rows = (items || CM.data.items).filter(function (x) { return x.type !== 'Lương' && x.unit; }), par = rows.map(function (_, i) { return i; }), owner = {};
+  var find = function (a) { while (par[a] !== a) { par[a] = par[par[a]]; a = par[a]; } return a; };
+  rows.forEach(function (x, i) { unitCodes(x.unit).forEach(function (c) { if (owner[c] !== undefined) par[find(i)] = find(owner[c]); else owner[c] = i; }); });
   var g = {};
-  CM.data.items.filter(function (x) { return x.type !== 'Lương' && x.unit; }).forEach(function (x) {
-    var k = x.unit.trim().toLowerCase().replace(/\s+/g, ' '), u = g[k] = g[k] || { unit: x.unit.trim(), project: '', types: {}, pays: [], expected: 0, cum: 0, sumNet: 0, hasTotal: false };
+  rows.forEach(function (x, i) {
+    var k = find(i), u = g[k] = g[k] || { codes: [], types: {}, project: '', pays: [], expected: 0, cum: 0, sumNet: 0, hasTotal: false };
+    unitCodes(x.unit).forEach(function (c) { if (u.codes.indexOf(c) < 0) u.codes.push(c); });
     u.types[x.type] = 1; if (x.project) u.project = x.project;
     if (x.total > 0) { u.hasTotal = true; u.expected = Math.max(u.expected, x.total * (x.rate > 0 && x.rate <= 100 ? x.rate / 100 : 1)); }
     if (x.prev || x.now) u.cum = Math.max(u.cum, x.prev + x.now);
     u.sumNet += x.net; u.pays.push({ month: x.month, net: x.net });
   });
   return Object.keys(g).map(function (k) {
-    var u = g[k]; u.received = Math.max(u.cum, u.sumNet); u.remain = u.hasTotal ? Math.max(0, Math.round(u.expected - u.received)) : null;
+    var u = g[k]; u.unit = u.codes.join('; '); u.received = Math.max(u.cum, u.sumNet); u.remain = u.hasTotal ? Math.max(0, Math.round(u.expected - u.received)) : null;
     u.pays.sort(function (a, b) { return a.month < b.month ? -1 : 1; }); return u;
   }).sort(function (a, b) { return (b.remain || 0) - (a.remain || 0) || (a.unit < b.unit ? -1 : 1); });
 }
+function unitFor(units, unit) { var c = unitCodes(unit); return units.filter(function (u) { return c.some(function (x) { return u.codes.indexOf(x) >= 0; }); })[0] || null; }
 function unitSection() {
   var all = commUnits(); if (!all.length) return '';
   var open = all.filter(function (u) { return u.remain > 0; }), done = all.filter(function (u) { return u.remain === 0; });
@@ -1275,8 +1282,10 @@ function commScan() {
     res = items.map(function (x) { return { x: x, dup: has(x) }; });
     $('#csr').innerHTML = '<div class="row" style="margin:8px 0"><label class="small">Tháng nhận <input type="month" id="csm" value="' + esc(r.month || ymdNow(0).slice(0, 7)) + '"></label></div>' +
       (res.length ? res.map(function (y, i) {
-        var x = y.x; return '<div class="card" style="margin:6px 0"><label class="row" style="margin:0"><input type="checkbox" data-ci="' + i + '"' + (y.dup ? '' : ' checked') + '><b>' + esc(x.type) + '</b>' + (x.unit ? '<span class="small mut">Căn ' + esc(x.unit) + '</span>' : '') + '<span class="sp"></span><b>' + vnd(x.net) + '</b>' + (y.dup ? '<span class="tag">Đã có</span>' : '') + '</label>' +
-          (x.total || x.prev || x.now ? '<div class="small mut">Tổng hoa hồng ' + money(x.total) + ' · đã tính trước ' + money(x.prev) + ' · đợt này ' + money(x.now) + (x.rate ? ' · mức ' + x.rate : '') + '</div>' : '') + '</div>';
+        var x = y.x, nu = unitCodes(x.unit).length ? unitFor(commUnits(CM.data.items.concat([x])), x.unit) : null, ou = unitCodes(x.unit).length ? unitFor(commUnits(), x.unit) : null;
+        var link = !y.dup && nu ? '<div class="small" style="color:var(--navy8)">' + (ou ? 'Cộng vào căn đã có trong sổ: đã về ' + vnd(ou.received) + ' → <b>' + vnd(nu.received) + '</b>' : 'Căn mới trong sổ: đã về <b>' + vnd(nu.received) + '</b>') + (nu.remain === null ? '' : ', còn lại ' + (ou && ou.remain !== null ? vnd(ou.remain) + ' → ' : '') + '<b>' + vnd(nu.remain) + '</b>') + '</div>' : '';
+        return '<div class="card" style="margin:6px 0"><label class="row" style="margin:0"><input type="checkbox" data-ci="' + i + '"' + (y.dup ? '' : ' checked') + '><b>' + esc(x.type) + '</b>' + (x.unit ? '<span class="small mut">Căn ' + esc(x.unit) + '</span>' : '') + '<span class="sp"></span><b>' + vnd(x.net) + '</b>' + (y.dup ? '<span class="tag">Đã có</span>' : '') + '</label>' +
+          (x.total || x.prev || x.now ? '<div class="small mut">Tổng hoa hồng ' + money(x.total) + ' · đã tính trước ' + money(x.prev) + ' · đợt này ' + money(x.now) + (x.rate ? ' · mức ' + x.rate : '') + '</div>' : '') + link + '</div>';
       }).join('') + '<div class="row"><button class="btn p" id="cssv">Lưu các khoản đã chọn</button></div>' : '<div class="card mut">Không đọc được dòng nào. Thử chụp rõ hơn hoặc dán chữ.</div>');
     if ($('#cssv')) $('#cssv').onclick = function () {
       var mo = $('#csm').value; if (!mo) { toast('Hãy chọn tháng'); return; }
