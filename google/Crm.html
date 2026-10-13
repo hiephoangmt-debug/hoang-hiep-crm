@@ -73,6 +73,9 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold2);border-co
 @media(max-width:700px){header #aitog,header #reload{padding:4px 10px;font-size:14px;min-height:34px}header #who{display:none}body{font-size:16px}main{padding-left:12px;padding-right:12px}.btn{min-height:42px}input,select,textarea{font-size:16px;max-width:100%}.fgrid{grid-template-columns:1fr}.row{gap:8px}.tl{padding-left:16px}.card{overflow-wrap:anywhere}}
 .kpis{gap:6px}.kchip{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:3px 11px;font-size:13px}.kchip.red{background:var(--redsoft);color:var(--red);border-color:#F3C4C2}
 .need{color:var(--ink)}
+.hb{display:grid;grid-template-columns:minmax(90px,200px) 1fr auto;gap:8px;align-items:center;margin-top:6px;font-size:13px}.hl{overflow-wrap:anywhere}.hbar{background:#EDF0F6;border-radius:6px;height:14px;overflow:hidden}.hbar i{display:block;height:100%;border-radius:6px}.hv{font-weight:600;white-space:nowrap}
+.rbar{padding:12px 14px}.rbar input[type=date]{margin-left:4px}.adv{border-left:4px solid var(--line);padding:6px 10px;margin-top:8px;background:#F7F8FC;border-radius:0 8px 8px 0;font-size:13.5px}.adv.bad{border-color:var(--red);background:var(--redsoft)}.adv.warn{border-color:var(--gold);background:var(--goldsoft)}.adv.good{border-color:var(--green);background:var(--greensoft)}.adv summary{cursor:pointer;color:var(--navy7);font-weight:600;margin-top:4px}.adv ol{margin:6px 0 2px;padding-left:18px}.guide ul,.guide ol{margin:4px 0 10px;padding-left:20px}
+.kpi b.long{font-size:20px}
 .step{color:var(--navy7);font-weight:600;margin-top:4px}.assign{margin-top:6px}.assign select{max-width:220px}
 .lead.todo{border-left:4px solid var(--red)}
 .lead h3{margin:0;font-size:15.5px;font-weight:650;color:var(--navy9)}.acts{display:flex;gap:6px;flex-wrap:wrap}
@@ -117,7 +120,7 @@ code,pre{background:#F3F5FA;border:1px solid var(--line);border-radius:10px;font
 
 <script>
 window.onerror = function (m, s, l) { var d = document.getElementById('diag'); if (d) d.textContent = 'Lỗi trang: ' + m + (l ? ' (dòng ' + l + ')' : ''); };
-var KEY = /*__KEY__*/'', D = null, tab = 'home', F = { status: 'todo', site: '', q: '', clicks: 'todo', cw: '', cch: '', cd: 'all', src: '', as: '', sort: 'new', prov: '', bud: '', when: '', sc: '', sd: 'asc', page: 1 }, G = '';
+var KEY = /*__KEY__*/'', D = null, tab = 'home', F = { status: 'todo', site: '', q: '', clicks: 'todo', cw: '', cch: '', cd: 'all', src: '', as: '', sort: 'new', prov: '', bud: '', when: '', sc: '', sd: 'asc', page: 1, df: '', dt: '', cf: '', ct: '' }, G = '';
 try { G = localStorage.getItem('crm_group') || ''; } catch (e) {}
 var STATUS = ['Mới', 'Đã liên hệ', 'Đang tư vấn', 'Đang cân nhắc', 'Quan tâm', 'Hẹn xem', 'Đã xem dự án', 'Đang thương lượng', 'Booking', 'Chốt', 'Mất', 'Tạm dừng'];
 var LOG_RES = ['Không liên lạc được', 'Đã kết nối', 'Đang cân nhắc', 'Cần tư vấn thêm', 'Hẹn gặp', 'Từ chối', 'Khác'];
@@ -133,7 +136,7 @@ function run(fn) {
 }
 function toast(m) { var t = $('#toast'); t.textContent = m; t.style.display = 'block'; clearTimeout(toast.t); toast.t = setTimeout(function () { t.style.display = 'none'; }, 2800); }
 function fail(e) { toast('Lỗi: ' + e.message); }
-function fmt(iso) { if (!iso) return ''; var d = new Date(iso); return d.toLocaleString('vi-VN', { hour12: false, day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }); }
+function fmt(iso) { if (!iso) return ''; var d = new Date(iso); return d.toLocaleString('vi-VN', { hour12: false, day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }); }
 function ago(iso) { var m = Math.round((Date.now() - new Date(iso).getTime()) / 60000); return m < 1 ? 'vừa xong' : m < 60 ? m + ' phút trước' : m < 1440 ? Math.round(m / 60) + ' giờ trước' : Math.round(m / 1440) + ' ngày trước'; }
 function vnd(n) { return Math.round(n || 0).toLocaleString('vi-VN') + 'đ'; }
 var todo = function (l) { return !l.called && !l.messaged && l.status === 'Mới'; };
@@ -172,26 +175,88 @@ $('#dlg').addEventListener('close', function () { if (D && !V.phone) render(); }
 document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('[data-zl]'); if (!a) return; e.preventDefault(); window.open('https://zalo.me/' + a.dataset.zl, '_blank', 'noopener'); });
 $('#gbar').onclick = function (e) { var b = e.target.closest('button'); if (!b) return; G = b.dataset.g; try { localStorage.setItem('crm_group', G); } catch (x) {} badges(); render(); };
 
-function render() { if (!D) return; if (V.phone && narrow()) { openLead(V.phone, true, window.scrollY); return; } $('#gbar').style.display = (tab === 'leads' || tab === 'today' || tab === 'ask') ? 'none' : ''; ({ home: home, today: today, leads: leads, clicks: clicks, ask: ask, camp: camp, sites: sites }[tab])(); }
+function render() { if (!D) return; if (V.phone && narrow()) { openLead(V.phone, true, window.scrollY); return; } $('#gbar').style.display = (tab === 'leads' || tab === 'today' || tab === 'ask' || tab === 'camp') ? 'none' : ''; ({ home: home, today: today, leads: leads, clicks: clicks, ask: ask, camp: camp, sites: sites }[tab])(); }
 
-function home() {
-  if (G) return homeGroup();
-  var k = D.kpis.slice(1).map(function (r, i) { var red = (i === 0 || i === 8) && Number(String(r[1]).replace(/\D/g, '')) > 0; return '<div class="kpi ' + (red ? 'alert' : '') + '"><b>' + esc(r[1]) + '</b><span>' + esc(r[0]) + '</span></div>'; }).join('');
-  var st = D.siteStats, rows = st.slice(1).map(function (r) { return '<tr>' + r.map(function (c, i) { return '<td>' + (i === 0 ? '<b>' + esc(c) + '</b>' : esc(c)) + '</td>'; }).join('') + '</tr>'; }).join('');
-  $('#main').innerHTML = '<p class="mut small">Khoảng thời gian chỉnh ở ô "Số ngày gần đây" trong tab Tổng quan của file Sheet.</p><div class="grid">' + k + '</div>' +
-    '<div class="card tw"><b>Theo website</b><table><tr>' + st[0].map(function (h) { return '<th>' + esc(h) + '</th>'; }).join('') + '</tr>' + (rows || '<tr><td class="mut">Chưa có dữ liệu</td></tr>') + '</table></div>';
+var RANGES = [['today', 'Hôm nay'], ['7', '7 ngày'], ['30', '30 ngày'], ['month', 'Tháng này'], ['lastmonth', 'Tháng trước'], ['year', 'Năm nay'], ['all', 'Tất cả'], ['custom', 'Tuỳ chọn']];
+function ymdShift(day, n) { var p = day.split('-'), d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2] + n, 12)); return d.toISOString().slice(0, 10); }
+function rangeFor(p) {
+  var t = ymdNow(0), y = t.slice(0, 4), m = t.slice(0, 7);
+  if (p === 'today') return [t, t];
+  if (p === '7') return [ymdShift(t, -6), t];
+  if (p === '30') return [ymdShift(t, -29), t];
+  if (p === 'month') return [m + '-01', t];
+  if (p === 'lastmonth') { var e = ymdShift(m + '-01', -1); return [e.slice(0, 7) + '-01', e]; }
+  if (p === 'year') return [y + '-01-01', t];
+  if (p === 'all') return ['2020-01-01', t];
+  return null;
 }
-
-function homeGroup() {
-  var st = D.siteStats, rows = st.slice(1).filter(function (r) { return inG(r[0]); });
-  var sum = function (i) { return rows.reduce(function (a, r) { return a + num(r[i]); }, 0); };
-  var todoN = D.leads.filter(function (l) { return todo(l) && inG(l.site); }).length;
-  var clickTodo = D.clicks.filter(function (c) { return c.alert && inG(c.site); }).length;
-  var cards = [[todoN, 'Khách chưa gọi, chưa nhắn', 1], [sum(5), 'Khách để lại SĐT trong kỳ', 0], [sum(1), 'Người truy cập', 0], [sum(2), 'Lượt bấm Zalo', 0], [sum(3), 'Lượt bấm Gọi điện', 0], [sum(4), 'Lượt bấm Messenger', 0], [clickTodo, 'Lượt bấm chưa xử lý', 1]];
-  var k = cards.map(function (x) { return '<div class="kpi ' + (x[2] && x[0] > 0 ? 'alert' : '') + '"><b>' + x[0] + '</b><span>' + esc(x[1]) + '</span></div>'; }).join('');
-  var body = rows.map(function (r) { return '<tr>' + r.map(function (c, i) { return '<td>' + (i === 0 ? '<b>' + esc(c) + '</b>' : esc(c)) + '</td>'; }).join('') + '</tr>'; }).join('');
-  $('#main').innerHTML = '<p class="mut small">Nhóm ' + esc(G) + ': khoảng thời gian chỉnh ở ô "Số ngày gần đây" trong tab Tổng quan của file Sheet.</p><div class="grid">' + k + '</div>' +
-    '<div class="card tw"><b>Theo website (' + esc(G) + ')</b><table><tr>' + st[0].map(function (h) { return '<th>' + esc(h) + '</th>'; }).join('') + '</tr>' + (body || '<tr><td class="mut">Chưa có website trong nhóm này. Điền cột E (Nhóm) ở tab Website.</td></tr>') + '</table></div>';
+var R = (function () { try { var v = JSON.parse(localStorage.getItem('crm_range') || 'null'); if (v && v.from && v.to) return v; } catch (e) {} var r = rangeFor('30'); return { p: '30', from: r[0], to: r[1] }; })();
+var REP = null, REPKEY = '';
+function saveRange() { try { localStorage.setItem('crm_range', JSON.stringify(R)); } catch (e) {} }
+function rangeBar() {
+  var n = Math.round((new Date(R.to) - new Date(R.from)) / 864e5) + 1, pf = ymdShift(R.from, -n), pt = ymdShift(R.from, -1);
+  return '<div class="card rbar"><div class="row chips">' + RANGES.map(function (x) { return '<button class="chip ' + (R.p === x[0] ? 'on' : '') + '" data-rp="' + x[0] + '">' + x[1] + '</button>'; }).join('') + '</div>' +
+    '<div class="row"><label class="small mut">Từ ngày <input type="date" id="rf" value="' + R.from + '"></label><label class="small mut">Đến ngày <input type="date" id="rt" value="' + R.to + '"></label><button class="btn p sm" id="rok">Xem</button></div>' +
+    '<div class="small mut">Đang xem <b>' + fdmy(R.from) + ' → ' + fdmy(R.to) + '</b> (' + n + ' ngày). Kỳ trước để so sánh: ' + fdmy(pf) + ' → ' + fdmy(pt) + '.</div></div>';
+}
+function bindRange() {
+  document.querySelectorAll('[data-rp]').forEach(function (b) { b.onclick = function () {
+    var p = b.dataset.rp, r = rangeFor(p); if (r) { R = { p: p, from: r[0], to: r[1] }; } else R.p = 'custom';
+    saveRange(); render(); }; });
+  var ok = $('#rok'); if (ok) ok.onclick = function () { var f = $('#rf').value, t = $('#rt').value; if (!f || !t) { toast('Chọn đủ ngày bắt đầu và kết thúc'); return; } if (f > t) { var x = f; f = t; t = x; } R = { p: 'custom', from: f, to: t }; saveRange(); render(); };
+}
+function withReport(draw) {
+  var key = R.from + '|' + R.to;
+  if (REP && REPKEY === key) { $('#main').innerHTML = rangeBar() + draw(REP); bindRange(); return; }
+  $('#main').innerHTML = rangeBar() + '<p class="mut">Đang tính số liệu…</p>'; bindRange();
+  run('crmReport', R.from, R.to).then(function (d) { REP = d; REPKEY = d.from + '|' + d.to; if (tab === 'home' || tab === 'camp') render(); }).catch(function (e) { $('#main').innerHTML = rangeBar() + '<div class="card">Không tính được báo cáo: ' + esc(e.message) + '</div>'; bindRange(); });
+}
+function pct(a, b) { return b > 0 ? (Math.round(a / b * 1000) / 10) + '%' : '-'; }
+function money(n) { return n ? vnd(n) : '-'; }
+function fdmyLabel(s) { return s ? fdmy(s) : '-'; }
+function miniBars(days, key, color, label, fmtV) {
+  var arr = days;
+  if (days.length > 62) {
+    var g = {}; days.forEach(function (d) { var m = d.day.slice(0, 7); g[m] = g[m] || { day: m, v: 0, leads: 0, cost: 0 }; g[m].v += d.v; g[m].leads += d.leads; g[m].cost += d.cost; });
+    arr = Object.keys(g).sort().map(function (k) { return g[k]; });
+  }
+  var max = Math.max.apply(null, arr.map(function (d) { return d[key]; }).concat([1])), W = 600, H = 90, bw = W / arr.length;
+  var bars = arr.map(function (d, i) { var h = Math.round(d[key] / max * (H - 10)); return '<rect x="' + (i * bw + 1) + '" y="' + (H - h) + '" width="' + Math.max(bw - 2, 1) + '" height="' + h + '" rx="2" fill="' + color + '"><title>' + (days.length > 62 ? d.day : fdmy(d.day)) + ': ' + (fmtV ? fmtV(d[key]) : d[key]) + '</title></rect>'; }).join('');
+  var total = arr.reduce(function (a, d) { return a + d[key]; }, 0);
+  return '<div class="card"><b>' + label + '</b> <span class="mut small">Tổng ' + (fmtV ? fmtV(total) : total) + (days.length > 62 ? ' · theo tháng' : ' · theo ngày') + '</span><svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" height="90" preserveAspectRatio="none" role="img" aria-label="' + label + '">' + bars + '</svg>' +
+    '<div class="row small mut" style="justify-content:space-between;margin:0"><span>' + (days.length > 62 ? arr[0].day : fdmy(arr[0].day)) + '</span><span>' + (days.length > 62 ? arr[arr.length - 1].day : fdmy(arr[arr.length - 1].day)) + '</span></div></div>';
+}
+function hBars(title, items, fmtV, note) {
+  items = items.filter(function (x) { return x.value > 0; });
+  var max = Math.max.apply(null, items.map(function (x) { return x.value; }).concat([1]));
+  return '<div class="card"><b>' + title + '</b>' + (note ? ' <span class="mut small">' + note + '</span>' : '') +
+    (items.map(function (x) { return '<div class="hb"><span class="hl">' + esc(x.label) + '</span><span class="hbar"><i style="width:' + Math.max(2, Math.round(x.value / max * 100)) + '%;background:' + (x.color || '#12305C') + '"></i></span><span class="hv">' + esc(fmtV ? fmtV(x.value) : x.value) + '</span></div>'; }).join('') || '<div class="mut small" style="margin-top:6px">Chưa có dữ liệu trong khoảng này.</div>') + '</div>';
+}
+function funnel(vis, touch, leads, contacted, closed) {
+  var st = [['Người truy cập', vis, '#12305C'], ['Bấm Zalo / Gọi / Messenger', touch, '#1B4585'], ['Để lại số điện thoại', leads, '#F28C28'], ['Đã liên hệ', contacted, '#F9B872'], ['Đã chốt', closed, '#1E8E4F']];
+  var max = Math.max.apply(null, st.map(function (x) { return x[1]; }).concat([1]));
+  return '<div class="card"><b>Phễu khách hàng</b> <span class="mut small">từ người truy cập đến chốt</span>' + st.map(function (x, i) {
+    var prev = i ? st[i - 1][1] : 0;
+    return '<div class="hb"><span class="hl">' + x[0] + '</span><span class="hbar"><i style="width:' + Math.max(2, Math.round(x[1] / max * 100)) + '%;background:' + x[2] + '"></i></span><span class="hv">' + x[1] + (i && prev ? ' <span class="mut">(' + pct(x[1], prev) + ')</span>' : '') + '</span></div>'; }).join('') + '</div>';
+}
+function home() {
+  withReport(function (P) {
+    var rows = P.sites.slice(); D.sites.forEach(function (s) { if (!rows.some(function (x) { return x.name === s.name; })) rows.push({ name: s.name, visitors: 0, pv: 0, zalo: 0, phone: 0, msg: 0, leads: 0, unc: 0 }); });
+    rows = rows.filter(function (x) { return inG(x.name); });
+    var sum = function (k) { return rows.reduce(function (a, x) { return a + (x[k] || 0); }, 0); };
+    var vis = G ? sum('visitors') : P.tot.visitors, leads = sum('leads'), unc = sum('unc'), cost = G ? 0 : P.tot.cost;
+    var cards = [[vis, 'Người truy cập', 0], [sum('pv'), 'Lượt xem trang', 0], [sum('zalo'), 'Bấm Zalo', 0], [sum('phone'), 'Bấm Gọi', 0], [sum('msg'), 'Bấm Messenger', 0], [leads, 'Khách để lại SĐT', 0], [unc, 'Chưa liên hệ', 1], [pct(leads, vis), 'Tỉ lệ ra khách', 0]];
+    if (!G) cards.push([money(cost), 'Chi phí quảng cáo', 0], [leads && cost ? vnd(cost / leads) : '-', 'Giá mỗi khách', 0]);
+    var k = cards.map(function (x) { return '<div class="kpi ' + (x[2] && Number(x[0]) > 0 ? 'alert' : '') + '"><b' + (String(x[0]).length > 9 ? ' class="long"' : '') + '>' + esc(x[0]) + '</b><span>' + x[1] + '</span></div>'; }).join('');
+    var tbl = rows.sort(function (a, b) { return b.visitors - a.visitors || b.leads - a.leads; }).map(function (x) { return '<tr><td><b>' + esc(x.name) + '</b></td><td>' + x.visitors + '</td><td>' + x.pv + '</td><td>' + x.zalo + '</td><td>' + x.phone + '</td><td>' + x.msg + '</td><td>' + x.leads + '</td><td>' + (x.unc ? '<span class="tag red">' + x.unc + '</span>' : 0) + '</td><td>' + pct(x.leads, x.visitors) + '</td></tr>'; }).join('');
+    return '<div class="grid">' + k + '</div>' +
+      funnel(vis, sum('zalo') + sum('phone') + sum('msg'), leads, Math.max(0, leads - unc), sum('closed')) +
+      hBars('Khách để lại số theo website', rows.map(function (x) { return { label: x.name, value: x.leads, color: '#F28C28' }; }), null) +
+      hBars('Người truy cập theo website', rows.map(function (x) { return { label: x.name, value: x.visitors }; }), null) +
+      miniBars(P.daily, 'v', '#12305C', 'Người truy cập') + miniBars(P.daily, 'leads', '#F28C28', 'Khách để lại số điện thoại') + (!G && cost ? miniBars(P.daily, 'cost', '#5E6B85', 'Chi phí quảng cáo', vnd) : '') +
+      '<div class="card tw"><b>Theo website' + (G ? ' (' + esc(G) + ')' : '') + '</b><table><tr><th>Website</th><th>Truy cập</th><th>Lượt xem</th><th>Bấm Zalo</th><th>Bấm Gọi</th><th>Bấm Messenger</th><th>Khách</th><th>Chưa liên hệ</th><th>Tỉ lệ ra khách</th></tr>' + (tbl || '<tr><td class="mut" colspan="9">Chưa có dữ liệu trong khoảng này.</td></tr>') + '</table></div>' +
+      '<p class="mut small">Người truy cập tính theo thiết bị khác nhau trong khoảng ngày đã chọn. Khách để lại SĐT tính theo ngày nhận khách.</p>';
+  });
 }
 
 function saleNames(extra) { var a = (D.sales || []).slice(); (extra || []).forEach(function (s) { if (a.indexOf(s) < 0) a.push(s); }); return a; }
@@ -248,6 +313,15 @@ function zl(phone, l) {
 function isBds(name) { var g = gOf(name); return !g || g === 'BĐS'; }
 function mins(a, b) { return Math.round((new Date(b).getTime() - new Date(a).getTime()) / 60000); }
 function dur(m) { return m < 1 ? 'dưới 1 phút' : m < 60 ? m + ' phút' : m < 1440 ? Math.round(m / 60 * 10) / 10 + ' giờ' : Math.round(m / 1440 * 10) / 10 + ' ngày'; }
+function dayOf(iso) { if (!iso) return ''; var d = new Date(iso); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+function countBy(list, fn) { var m = {}; list.forEach(function (x) { var k = fn(x) || 'Chưa rõ'; m[k] = (m[k] || 0) + 1; }); return Object.keys(m).map(function (k) { return { label: k, value: m[k] }; }).sort(function (a, b) { return b.value - a.value; }); }
+function dayBars(list, fn, from, to, color, label) {
+  var cnt = {}; list.forEach(function (x) { var d = fn(x); if (d) cnt[d] = (cnt[d] || 0) + 1; });
+  var ds = Object.keys(cnt).sort(); if (!ds.length) return '';
+  from = from || ds[0]; to = to || ds[ds.length - 1]; var days = [], d = from, g = 0;
+  while (d <= to && g++ < 3660) { days.push({ day: d, v: cnt[d] || 0, leads: cnt[d] || 0, cost: 0 }); d = ymdShift(d, 1); }
+  return miniBars(days, 'v', color, label);
+}
 function pad(n) { return ('000' + n).slice(-3); }
 function fdmy(s) { return s ? s.slice(8, 10) + '/' + s.slice(5, 7) + '/' + s.slice(0, 4) : ''; }
 function parseVnd(s) {
@@ -297,6 +371,7 @@ function leadsFiltered() {
     if (F.site && l.site !== F.site) return false;
     if (F.src && (l.source || l.srcType) !== F.src) return false;
     if (F.prov && l.province !== F.prov) return false;
+    if (F.df || F.dt) { var dd = dayOf(l.at); if (F.df && dd < F.df) return false; if (F.dt && dd > F.dt) return false; }
     if (F.as && (F.as === '__none' ? l.assignee : l.assignee !== F.as)) return false;
     if (F.when === 'late' && !(l.next && l.next < t)) return false;
     if (F.when === 'today' && l.next !== t) return false;
@@ -352,13 +427,17 @@ function leads() {
     '<div class="row"><button class="btn p" id="addlead">+ Thêm khách</button><button class="btn" id="implead">Nhập danh sách</button>' + (wide ? '<button class="btn" id="colbtn">Cột hiển thị</button>' : '') + '</div>' +
     '<div class="row chips">' + chips.map(function (x) { return '<button class="chip ' + (F.status === x[0] ? 'on' : '') + '" data-chip="' + esc(x[0]) + '">' + x[1] + ' <span class="n">' + x[2] + '</span></button>'; }).join('') + '</div>' +
     (wide ? '' : '<div class="row"><input id="fq" placeholder="Tìm tên, mã, SĐT, tỉnh, nguồn, dự án" value="' + esc(F.q) + '" style="flex:1"><span class="mut">' + list.length + ' khách</span></div><details class="card sec" style="padding:10px 14px"><summary>Bộ lọc và sắp xếp</summary>') + '<div class="row"><select id="fw">' + opt(sites, 'Tất cả dự án / website') + '</select><select id="fo">' + opt(srcs, 'Tất cả nguồn') + '</select><select id="fp">' + opt(provs, 'Tất cả tỉnh/thành') + '</select>' +
+    '<label class="small mut">Ngày phát sinh từ <input type="date" id="fdf" value="' + esc(F.df) + '"></label><label class="small mut">đến <input type="date" id="fdt" value="' + esc(F.dt) + '"></label>' +
     '<select id="fb"><option value="">Mọi ngân sách</option><option value="a">Dưới 2 tỷ</option><option value="b">2 đến 5 tỷ</option><option value="c">Trên 5 tỷ</option></select>' +
     '<select id="fn"><option value="">Mọi lịch tiếp theo</option><option value="late">Quá hạn</option><option value="today">Hôm nay</option><option value="none">Chưa có lịch</option></select>' +
     '<select id="fa"><option value="">Tất cả sale</option><option value="__none">Chưa giao cho sale nào</option>' + saleNames(ass).map(function (s) { return '<option>' + esc(s) + '</option>'; }).join('') + '</select><button class="btn" id="addsale">+ Thêm sale</button>' +
     '<select id="fr"><option value="new">Mới nhất trước</option><option value="old">Cũ nhất trước</option><option value="hot">Khách nóng trước</option><option value="wait">Chờ lâu nhất trước</option><option value="val">Giá trị cao trước</option></select>' +
-    (wide ? '<input id="fq" placeholder="Tìm tên, mã, SĐT, tỉnh, nguồn, dự án" value="' + esc(F.q) + '"><span class="mut">' + list.length + ' khách</span>' : '') + '</div>' + (wide ? '' : '</details>') + body +
+    (wide ? '<input id="fq" placeholder="Tìm tên, mã, SĐT, tỉnh, nguồn, dự án" value="' + esc(F.q) + '"><span class="mut">' + list.length + ' khách</span>' : '') + '</div>' + (wide ? '' : '</details>') + '<details class="card sec" open style="padding:10px 14px"><summary>Biểu đồ khách hàng (' + list.length + ' khách đang lọc)</summary>' +
+    hBars('Theo trạng thái', countBy(list, function (l) { return l.status; })) + hBars('Theo nguồn', countBy(list, function (l) { return l.source || l.srcType; }), null) + hBars('Theo dự án', countBy(list, function (l) { return l.project || 'Chưa có dự án'; }), null) +
+    dayBars(list, function (l) { return dayOf(l.at); }, F.df, F.dt, '#F28C28', 'Khách phát sinh theo ngày') + '</details>' + body +
     '<div class="row pager"><button class="btn sm" id="pp"' + (F.page <= 1 ? ' disabled' : '') + '>‹ Trước</button><span class="mut">Trang ' + F.page + '/' + pages + '</span><button class="btn sm" id="pn"' + (F.page >= pages ? ' disabled' : '') + '>Sau ›</button></div>';
   $('#fw').value = F.site; $('#fo').value = F.src; $('#fp').value = F.prov; $('#fb').value = F.bud; $('#fn').value = F.when; $('#fa').value = F.as; $('#fr').value = F.sort;
+  $('#fdf').onchange = function (e) { F.df = e.target.value; F.page = 1; leads(); }; $('#fdt').onchange = function (e) { F.dt = e.target.value; F.page = 1; leads(); };
   var rr = function (id, key) { $(id).onchange = function (e) { F[key] = e.target.value; F.page = 1; if (key === 'sort') F.sc = ''; leads(); }; };
   rr('#fw', 'site'); rr('#fo', 'src'); rr('#fp', 'prov'); rr('#fb', 'bud'); rr('#fn', 'when'); rr('#fa', 'as'); rr('#fr', 'sort');
   document.querySelectorAll('[data-chip]').forEach(function (b) { b.onclick = function () { F.status = b.dataset.chip; F.page = 1; leads(); }; });
@@ -675,7 +754,7 @@ function clickState(c) { return c.alert ? 'todo' : 'done'; }
 function clicks() {
   var all = D.clicks.filter(function (c) { return inG(c.site); });
   var since = F.cd === 'all' ? 0 : Date.now() - Number(F.cd) * 86400000;
-  var base = all.filter(function (c) { return (!F.cw || c.site === F.cw) && (!F.cch || c.channel === F.cch) && (!since || new Date(c.at).getTime() >= since); });
+  var base = all.filter(function (c) { return (!F.cw || c.site === F.cw) && (!F.cch || c.channel === F.cch) && (!since || new Date(c.at).getTime() >= since) && (!F.cf || dayOf(c.at) >= F.cf) && (!F.ct || dayOf(c.at) <= F.ct); });
   var n = { todo: 0, done: 0 }; base.forEach(function (c) { n[clickState(c)]++; });
   var list = base.filter(function (c) { return F.clicks === 'all' || clickState(c) === F.clicks; });
   var todayStart = new Date(); todayStart.setHours(0, 0, 0, 0);
@@ -693,7 +772,9 @@ function clicks() {
     '<div class="grid">' + kp.map(function (x) { return '<div class="kpi ' + (x[2] && x[0] > 0 ? 'alert' : '') + '"><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join('') + '</div>' +
     '<div class="row chips">' + chips.map(function (x) { return '<button class="chip ' + (F.clicks === x[0] ? 'on' : '') + '" data-cc="' + x[0] + '">' + x[1] + ' <span class="n">' + x[2] + '</span></button>'; }).join('') + '</div>' +
     '<div class="row"><select id="cw">' + opt(sites, 'Tất cả website') + '</select><select id="cch">' + opt(Object.keys(CH), 'Mọi kênh').replace(/<option>(\w+)<\/option>/g, function (m, k) { return '<option value="' + k + '">' + (CH[k] || k) + '</option>'; }) + '</select>' +
+    '<label class="small mut">Từ ngày <input type="date" id="ccf" value="' + esc(F.cf) + '"></label><label class="small mut">đến <input type="date" id="cct" value="' + esc(F.ct) + '"></label>' +
     '<select id="cd"><option value="all">Mọi thời gian</option><option value="1">Hôm nay</option><option value="7">7 ngày qua</option><option value="30">30 ngày qua</option></select><span class="mut">' + list.length + ' lượt</span></div>' +
+    '<details class="card sec" open style="padding:10px 14px"><summary>Biểu đồ lượt bấm (' + base.length + ' lượt)</summary>' + hBars('Theo kênh', countBy(base, function (c2) { return CH[c2.channel] || c2.channel; })) + hBars('Theo website', countBy(base, function (c2) { return c2.site; })) + hBars('Theo trạng thái xử lý', countBy(base, function (c2) { return clickState(c2) === 'todo' ? 'Chưa xử lý' : 'Đã xử lý'; })) + dayBars(base, function (c2) { return dayOf(c2.at); }, F.cf, F.ct, '#12305C', 'Lượt bấm theo ngày') + '</details>' +
     '<div class="card tw"><table><tr><th>Lúc</th><th>Website</th><th>Kênh</th><th>Trang</th><th>Nguồn</th><th>Trạng thái</th><th>Ghi chú</th><th>Đã xử lý</th></tr>' +
     (list.map(function (c) { return '<tr' + (c.alert ? ' class="rowtodo"' : '') + '><td>' + esc(fmt(c.at)) + '<br><span class="mut small">' + esc(ago(c.at)) + '</span></td><td>' + esc(c.site) + '</td><td><span class="tag blu">' + esc(CH[c.channel] || c.channel) + '</span></td><td class="small">' + esc(c.url) + '</td><td class="small">' + esc((c.source + ' ' + c.campaign).trim()) + '</td><td>' + status(c) + '</td><td><input class="cnote" data-cn="' + c.row + '" placeholder="Ghi chú" value="' + esc(c.note) + '"></td><td><input type="checkbox" data-ck="' + c.row + '"' + (c.checked ? ' checked' : '') + '></td></tr>'; }).join('') || '<tr><td colspan="8" class="mut">Không có lượt nào.</td></tr>') + '</table></div>';
   $('#cw').value = F.cw; $('#cch').value = F.cch; $('#cd').value = F.cd;
@@ -710,7 +791,7 @@ function clicks() {
 }
 
 function ymdNow(add) { var d = new Date(); d.setDate(d.getDate() + (add || 0)); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
-function dmy(s) { return s ? s.slice(8, 10) + '/' + s.slice(5, 7) : ''; }
+function dmy(s) { return s ? s.slice(8, 10) + '/' + s.slice(5, 7) + '/' + s.slice(0, 4) : ''; }
 function todayGroups() {
   var t = ymdNow(0), L = D.leads.filter(function (l) { return isBds(l.site) && l.status !== 'Chốt' && l.status !== 'Mất'; });
   var g = { late: [], now: [], fresh: [], viewed: [], hot: [], stale: [] };
@@ -773,10 +854,62 @@ function ask() {
     run('crmAsk', q, ASK.phone).then(function (a) { ASK.a = a; ASK.busy = false; ask(); }).catch(function (e) { ASK.busy = false; $('#ago').disabled = false; $('#ast').textContent = ''; fail(e); });
   };
 }
+function advise(c, ctx) {
+  var out = [], daysAll = c.first && c.last ? Math.round((new Date(c.last) - new Date(c.first)) / 864e5) + 1 : 0;
+  var ctr = c.imp ? c.clk / c.imp : 0, cpl = c.leads ? c.cost / c.leads : 0, add = function (lv, t, steps) { out.push({ lv: lv, t: t, steps: steps }); };
+  if (daysAll && daysAll < 3 && c.cost) add('info', 'Mới chạy ' + daysAll + ' ngày, chưa đủ dữ liệu để kết luận.', ['Chờ ít nhất 5 đến 7 ngày hoặc 30 click trước khi quyết định tăng hoặc giảm ngân sách.', 'Trong lúc chờ, chỉ kiểm tra lỗi kỹ thuật: link có UTM, trang đích mở được, mã CRM chạy.']);
+  if (c.cost >= 300000 && !c.leads) add('bad', 'Đã chi ' + vnd(c.cost) + ' mà chưa có khách để lại số.', ['Kiểm tra trang đích: mở link quảng cáo trên điện thoại, thử điền form và bấm Zalo, Gọi xem có ghi vào CRM không.', 'Vào Google Ads xem báo cáo "Cụm từ tìm kiếm", thêm từ khoá phủ định cho cụm không liên quan.', c.cost >= 1000000 ? 'Đã chi trên 1 triệu mà chưa có khách: giảm ngân sách 30 đến 50% hoặc tạm dừng, sửa xong mới chạy lại.' : 'Chi chưa lớn: giữ nguyên 2 đến 3 ngày, sửa trang đích và từ khoá rồi xem lại.']);
+  else if (c.cost && !c.leads) add('info', 'Chi ' + vnd(c.cost) + ', chưa có khách. Số tiền còn nhỏ, tiếp tục theo dõi.', []);
+  if (c.leads && ctx.avgCpl) {
+    if (cpl > ctx.avgCpl * 1.5 && c.leads >= 2) add('warn', 'Giá mỗi khách ' + vnd(cpl) + ', cao hơn trung bình (' + vnd(ctx.avgCpl) + ') hơn 50%.', ['Xem từ khoá hoặc nhóm quảng cáo tốn tiền nhưng ít khách, tạm dừng hoặc hạ giá thầu.', 'Giới hạn khu vực và khung giờ hiệu quả thấp.', 'Thêm từ khoá phủ định và dùng khớp cụm, khớp chính xác cho từ khoá chính.']);
+    else if (cpl < ctx.avgCpl * 0.7 && c.leads >= 3) add('good', 'Giá mỗi khách ' + vnd(cpl) + ', thấp hơn trung bình ' + Math.round((1 - cpl / ctx.avgCpl) * 100) + '%. Chiến dịch hiệu quả.', ['Tăng ngân sách từng bước 15 đến 20% mỗi 2 đến 3 ngày, không tăng đột ngột.', 'Sau mỗi lần tăng, theo dõi giá mỗi khách. Nếu tăng quá 30% thì quay lại mức cũ.']);
+  }
+  if (c.imp >= 500 && ctr < 0.02) add('warn', 'Tỉ lệ nhấp (CTR) thấp: ' + pct(c.clk, c.imp) + '. Quảng cáo chưa hấp dẫn hoặc từ khoá chưa sát.', ['Viết lại tiêu đề: có tên dự án, giá hoặc ưu đãi thật, vị trí.', 'Thêm tiện ích: cuộc gọi, vị trí, đoạn mô tả bổ sung.', 'Kiểm tra từ khoá quá rộng, thu hẹp về khớp cụm hoặc khớp chính xác.']);
+  if (c.clk >= 20 && c.visitors < c.clk * 0.6) add('warn', 'Google tính ' + c.clk + ' click nhưng CRM chỉ ghi ' + c.visitors + ' người truy cập (' + pct(c.visitors, c.clk) + ').', ['Kiểm tra mã CRM đã dán và xuất bản trên mọi trang đích của chiến dịch.', 'Kiểm tra link quảng cáo có UTM đúng chiến dịch (hậu tố URL cuối cùng).', 'Kiểm tra tốc độ tải trang trên 4G: nếu chậm, khách thoát trước khi mã chạy.']);
+  if (c.visitors >= 30 && c.leads / c.visitors < 0.02) add('warn', 'Truy cập nhiều nhưng ít khách để lại số: ' + pct(c.leads, c.visitors) + '.', ['Đưa nút Zalo, Gọi lên đầu trang và cố định khi cuộn trên điện thoại.', 'Rút gọn form còn tên và số điện thoại.', 'Nêu rõ ưu đãi hoặc lý do để lại số (nhận bảng giá, giỏ hàng, lịch xem nhà).']);
+  if ((c.zalo + c.phone) > 0 && c.leads === 0) add('info', 'Có ' + (c.zalo + c.phone) + ' lượt bấm Zalo / Gọi nhưng chưa có khách để lại số.', ['Vào mục Lượt bấm, đối chiếu giờ bấm với tin nhắn Zalo và cuộc gọi nhỡ trên điện thoại, rồi tick "Đã xử lý".']);
+  if (c.unc > 0) add('warn', c.unc + ' khách từ chiến dịch này chưa được liên hệ.', ['Gọi hoặc nhắn Zalo trong 5 đến 15 phút. Khách để số quảng cáo nguội rất nhanh.', 'Mở mục Việc hôm nay để xử lý theo thứ tự.']);
+  if (c.costPrev > 0 && c.cost > c.costPrev * 1.3 && c.leads < c.leadsPrev) add('bad', 'Chi tăng ' + Math.round((c.cost / c.costPrev - 1) * 100) + '% so với kỳ trước nhưng khách giảm từ ' + c.leadsPrev + ' xuống ' + c.leads + '.', ['Xem lại thay đổi gần đây: giá thầu, từ khoá, quảng cáo, trang đích.', 'Đưa ngân sách và giá thầu về mức kỳ trước để so sánh.']);
+  if (c.closed > 0) add('good', 'Có ' + c.closed + ' giao dịch chốt, doanh thu ' + vnd(c.revenue) + (c.cost ? ', hiệu quả (ROAS) ' + (Math.round(c.revenue / c.cost * 10) / 10) + 'x' : '') + '.', ['Ghi đúng giá trị chốt ở hồ sơ khách để số liệu doanh thu chính xác.']);
+  if (!out.length && (c.cost || c.pv)) add('info', 'Chưa thấy vấn đề rõ. Tiếp tục theo dõi và so sánh theo kỳ.', []);
+  return out;
+}
 function camp() {
-  var c = D.campaigns;
-  $('#main').innerHTML = '<div class="card tw"><table><tr>' + c[0].map(function (h) { return '<th>' + esc(h) + '</th>'; }).join('') + '</tr>' +
-    (c.slice(1).map(function (r) { return '<tr>' + r.map(function (x, i) { return '<td>' + (i < 3 ? '<b>' + esc(x) + '</b>' : esc(x)) + '</td>'; }).join('') + '</tr>'; }).join('') || '<tr><td class="mut">Chưa có chiến dịch. Thêm ở tab Chiến dịch của file Sheet.</td></tr>') + '</table></div><p class="mut small">Khai báo chiến dịch và nhập chi phí trong file Sheet (tab Chiến dịch, Chi phí).</p>';
+  withReport(function (P) {
+    var L = P.campaigns.filter(function (x) { return x.cost || x.visitors || x.leads || x.imp; });
+    var tot = L.reduce(function (a, x) { a.cost += x.cost; a.imp += x.imp; a.clk += x.clk; a.leads += x.leads; a.rev += x.revenue; a.vis += x.visitors; return a; }, { cost: 0, imp: 0, clk: 0, leads: 0, rev: 0, vis: 0 });
+    var wl = L.filter(function (x) { return x.leads > 0 && x.cost > 0; }), avgCpl = wl.length ? wl.reduce(function (a, x) { return a + x.cost; }, 0) / wl.reduce(function (a, x) { return a + x.leads; }, 0) : 0;
+    var kp = [[money(tot.cost), 'Chi phí quảng cáo'], [tot.imp.toLocaleString('vi-VN'), 'Hiển thị'], [tot.clk.toLocaleString('vi-VN'), 'Click quảng cáo'], [pct(tot.clk, tot.imp), 'CTR (tỉ lệ nhấp)'], [tot.clk ? vnd(tot.cost / tot.clk) : '-', 'CPC (giá mỗi click)'],
+      [tot.leads, 'Khách để lại số'], [tot.leads && tot.cost ? vnd(tot.cost / tot.leads) : '-', 'CPL (giá mỗi khách)'], [money(tot.rev), 'Doanh thu từ khách chốt'], [tot.cost && tot.rev ? (Math.round(tot.rev / tot.cost * 10) / 10) + 'x' : '-', 'ROAS']];
+    var k = kp.map(function (x) { return '<div class="kpi"><b' + (String(x[0]).length > 9 ? ' class="long"' : '') + '>' + esc(x[0]) + '</b><span>' + x[1] + '</span></div>'; }).join('');
+    var chg = function (a, b) { return b > 0 ? '<span class="tag ' + (a > b * 1.3 ? 'red' : a < b * 0.7 ? 'grn' : '') + '">' + (a >= b ? '+' : '') + Math.round((a / b - 1) * 100) + '%</span>' : '<span class="mut">-</span>'; };
+    var rows = L.map(function (x) {
+      var run = x.first ? fdmy(x.first) + ' → ' + fdmy(x.last) : '-', days = x.first ? Math.round((new Date(x.last) - new Date(x.first)) / 864e5) + 1 : 0;
+      return '<tr><td><b>' + esc(x.name) + '</b><div class="mut small">' + esc(x.utm) + (x.platform ? ' · ' + esc(x.platform) : '') + (x.declared ? '' : ' · <span class="tag amb">chưa khai báo ở tab Chiến dịch</span>') + '</div></td><td class="small nw">' + run + '<div class="mut">' + days + ' ngày · chạy ' + x.activeDays + '/' + P.days + ' ngày</div></td><td>' + money(x.cost) + '</td><td>' + chg(x.cost, x.costPrev) + '</td><td>' + x.imp.toLocaleString('vi-VN') + '</td><td>' + x.clk + '</td><td>' + pct(x.clk, x.imp) + '</td><td>' + (x.clk ? vnd(x.cost / x.clk) : '-') + '</td><td>' + x.visitors + '</td><td>' + (x.zalo + x.phone) + '</td><td><b>' + x.leads + '</b></td><td>' + chg(x.leads, x.leadsPrev) + '</td><td>' + (x.leads && x.cost ? vnd(x.cost / x.leads) : '-') + '</td><td>' + x.closed + '</td><td>' + money(x.revenue) + '</td><td>' + (x.cost && x.revenue ? (Math.round(x.revenue / x.cost * 10) / 10) + 'x' : '-') + '</td></tr>';
+    }).join('');
+    var advice = L.map(function (x) {
+      var ad = advise(x, { avgCpl: avgCpl }), worst = ad.some(function (a) { return a.lv === 'bad'; }) ? 'bad' : ad.some(function (a) { return a.lv === 'warn'; }) ? 'warn' : ad.some(function (a) { return a.lv === 'good'; }) ? 'good' : 'info';
+      var chip = { bad: ['red', 'Cần xử lý'], warn: ['amb', 'Cần xem lại'], good: ['grn', 'Tốt'], info: ['', 'Theo dõi'] }[worst];
+      return '<div class="card"><div class="row" style="margin:0"><b>' + esc(x.name) + '</b><span class="tag ' + chip[0] + '">' + chip[1] + '</span><span class="sp"></span><span class="mut small">Chi ' + money(x.cost) + ' · ' + x.leads + ' khách' + (x.leads && x.cost ? ' · ' + vnd(x.cost / x.leads) + '/khách' : '') + '</span></div>' +
+        ad.map(function (a) { return '<div class="adv ' + a.lv + '"><div>' + esc(a.t) + '</div>' + (a.steps.length ? '<details><summary>Cách làm</summary><ol>' + a.steps.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ol></details>' : '') + '</div>'; }).join('') + '</div>';
+    }).join('');
+    var best = wl.slice().sort(function (a, b) { return a.cost / a.leads - b.cost / b.leads; })[0], bad = L.filter(function (x) { return x.cost >= 300000 && !x.leads; })[0];
+    var sum = '<div class="card"><b>Tóm tắt kỳ ' + fdmy(P.from) + ' → ' + fdmy(P.to) + '</b><div class="small" style="margin-top:6px">Chi ' + money(tot.cost) + ', được ' + tot.leads + ' khách' + (tot.leads && tot.cost ? ', giá trung bình ' + vnd(tot.cost / tot.leads) + ' mỗi khách' : '') + '.' +
+      (best ? ' Chiến dịch hiệu quả nhất: <b>' + esc(best.name) + '</b> (' + vnd(best.cost / best.leads) + '/khách).' : '') + (bad ? ' Cần xem ngay: <b>' + esc(bad.name) + '</b> (chi ' + vnd(bad.cost) + ' chưa có khách).' : '') + '</div></div>';
+    var guide = '<details class="card sec"><summary>Hướng dẫn đọc số liệu và cách tối ưu</summary><div class="small guide">' +
+      '<p><b>Các chỉ số</b></p><ul><li><b>CTR</b> = click ÷ hiển thị. Search thường 3 đến 8%. Dưới 2% là quảng cáo hoặc từ khoá chưa sát.</li><li><b>CPC</b> = chi phí ÷ click. Giá mỗi lần khách bấm vào quảng cáo.</li><li><b>CPL</b> = chi phí ÷ số khách để lại số. Đây là chỉ số quan trọng nhất để so sánh chiến dịch.</li><li><b>ROAS</b> = doanh thu ÷ chi phí. Cần ghi "Giá trị chốt" ở hồ sơ khách. Trên 1x là có lãi trên doanh thu.</li><li><b>So với kỳ trước</b> = cùng độ dài ngày ngay trước kỳ đang xem.</li></ul>' +
+      '<p><b>Khi nào kết luận được</b></p><ul><li>Chờ ít nhất 5 đến 7 ngày hoặc 30 click mỗi chiến dịch. Dưới 5 khách thì chỉ là tham khảo, số lệch rất nhanh.</li><li>Đừng sửa nhiều thứ cùng lúc. Mỗi lần đổi một thứ, đợi 3 đến 5 ngày.</li></ul>' +
+      '<p><b>Tăng, giữ hay giảm ngân sách</b></p><ul><li>CPL thấp hơn trung bình và có từ 3 khách: tăng 15 đến 20% mỗi 2 đến 3 ngày.</li><li>CPL cao hơn 50%: giảm giá thầu hoặc cắt từ khoá, khung giờ kém.</li><li>Chi trên 300.000đ mà chưa có khách: kiểm tra trang đích và theo dõi, rồi mới tính chuyện chạy tiếp.</li></ul>' +
+      '<p><b>Để số liệu chính xác</b></p><ol><li>Mọi link quảng cáo đều gắn <code>utm_campaign</code> đúng tên khai báo ở tab Chiến dịch.</li><li>Mã CRM có trên mọi trang đích và đã xuất bản.</li><li>Tập lệnh chi phí Google Ads chạy hằng ngày. Chi phí Facebook nhập tay ở tab Chi phí.</li><li>Gọi khách trong 5 đến 15 phút, ghi giá trị chốt khi có giao dịch.</li></ol>' +
+      '<p><b>Thói quen hằng tuần</b></p><ol><li>Chọn "7 ngày" xem tóm tắt, chiến dịch nào "Cần xử lý" làm trước.</li><li>Đối chiếu click Google với người truy cập CRM, lệch nhiều là lỗi theo dõi.</li><li>Chuyển sang "Tháng này" so sánh với "Tháng trước" để thấy xu hướng.</li></ol></div></details>';
+    var charts = hBars('Chi phí theo chiến dịch', L.map(function (x) { return { label: x.name, value: x.cost, color: '#12305C' }; }), vnd) +
+      hBars('Khách để lại số theo chiến dịch', L.map(function (x) { return { label: x.name, value: x.leads, color: '#F28C28' }; })) +
+      hBars('Giá mỗi khách (CPL), thấp là tốt', wl.map(function (x) { return { label: x.name, value: Math.round(x.cost / x.leads), color: x.cost / x.leads > avgCpl * 1.5 ? '#C62828' : x.cost / x.leads < avgCpl * 0.7 ? '#1E8E4F' : '#5E6B85' }; }), vnd, 'xanh lá: tốt hơn trung bình, đỏ: cao hơn trung bình 50%') +
+      miniBars(P.daily, 'cost', '#5E6B85', 'Chi phí theo ngày', vnd) + miniBars(P.daily, 'leads', '#F28C28', 'Khách theo ngày');
+    return sum + '<div class="grid">' + k + '</div>' + charts + '<div class="card tw"><b>Số liệu từng chiến dịch</b><table><tr><th>Chiến dịch</th><th>Thời gian chạy</th><th>Chi phí</th><th>So kỳ trước</th><th>Hiển thị</th><th>Click QC</th><th>CTR</th><th>CPC</th><th>Truy cập</th><th>Bấm Zalo/Gọi</th><th>Khách</th><th>So kỳ trước</th><th>Giá/khách</th><th>Chốt</th><th>Doanh thu</th><th>ROAS</th></tr>' +
+      (rows || '<tr><td colspan="16" class="mut">Chưa có chiến dịch hoặc chi phí trong khoảng này. Khai báo ở tab Chiến dịch của Sheet và chạy tập lệnh chi phí.</td></tr>') + '</table></div>' +
+      '<h3 style="margin:16px 0 8px">Đánh giá và đề xuất</h3>' + (advice || '<div class="card mut">Chưa có dữ liệu để đánh giá.</div>') + guide;
+  });
 }
 
 function sites() {

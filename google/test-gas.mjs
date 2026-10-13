@@ -35,6 +35,7 @@ const sheets = {
   'Lượt bấm': new Sheet('Lượt bấm', []),
   'Tổng quan': new Sheet('Tổng quan', []),
   'Chiến dịch': new Sheet('Chiến dịch', ['Nền tảng', 'Tên', 'utm']),
+  'Chi phí': new Sheet('Chi phí', ['Ngày', 'utm', 'Chi phí', 'Hiển thị', 'Click']),
 };
 sheets.Website.appendRow(['Landing A', 'a.com', 'testkey12345']);
 // Ô tick đã dựng sẵn FALSE tới dòng 40 (giống file thật): getLastRow() sẽ sai, mã phải bỏ qua chúng
@@ -111,7 +112,7 @@ assert.equal(ctx.crmKey_(), K);
 assert.throws(() => ctx.crmLoad('sai-khoa'), /Không có quyền/); assert.throws(() => ctx.crmLog('', '0988111222', 'call'), /Không có quyền/);
 assert.equal(ctx.doGet({ parameter: { k: 'sai' } }).file, undefined); assert.ok(ctx.doGet({ parameter: { k: K } }).content.includes('CRM Hoàng Hiệp') && ctx.doGet({ parameter: { k: K } }).content.includes('</html>'));
 const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
-assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-17'); assert.equal(JSON.stringify(dbg).includes(K), false);
+assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-18'); assert.equal(JSON.stringify(dbg).includes(K), false);
 const L = ctx.crmLoad(K);
 assert.equal(L.leads.length, 2);
 const l0 = L.leads.find((x) => x.phone === '0988111222');
@@ -195,6 +196,28 @@ const ret = ctx.kiemTraCRM(); assert.match(ret, /\?k=[0-9a-f]{32}/); assert.ok(g
   assert.equal(imp.added, 2); assert.equal(imp.dups.length, 1); assert.equal(imp.dups[0].line, 2); assert.equal(imp.errors.length, 1); assert.equal(imp.errors[0].line, 3);
   assert.equal(ctx.crmLoad(KK).leads.length, n0 + 3);
   assert.throws(() => ctx.crmImport('sai', []), /Không có quyền/);
+}
+// báo cáo theo khoảng ngày
+{
+  const KK = ctx.crmKey_();
+  const day = (d) => new Date(d + 'T05:00:00Z');
+  const ev = sheets['Hoạt động'];
+  [['v1', '2026-10-10', 'pageview', 'camp-a'], ['v1', '2026-10-10', 'click', 'camp-a', 'zalo'], ['v2', '2026-10-11', 'pageview', 'camp-a'], ['v3', '2026-10-11', 'pageview', 'camp-b'], ['v4', '2026-09-30', 'pageview', 'camp-a']].forEach(([vid, d, type, utm, ch]) =>
+    ev.appendRow([day(d), vid, 'Landing A', type, ch || '', 'https://x', 'google', utm]));
+  const cp = sheets['Chi phí'];
+  [['2026-10-10', 'camp-a', 300000, 1000, 40], ['2026-10-11', 'camp-a', 200000, 800, 30], ['2026-10-11', 'camp-b', 100000, 500, 5], ['2026-09-29', 'camp-a', 150000, 400, 10]].forEach(([d, u, c, i, k2]) => cp.appendRow([day(d), u, c, i, k2]));
+  sheets['Chiến dịch'].appendRow(['Google', 'Chiến dịch A', 'camp-a']);
+  const lead = ctx.crmLoad(KK).leads[0];
+  const R = ctx.crmReport(KK, '2026-10-10', '2026-10-12');
+  assert.equal(R.from, '2026-10-10'); assert.equal(R.to, '2026-10-12'); assert.equal(R.days, 3); assert.equal(R.prev.to, '2026-10-09'); assert.equal(R.prev.from, '2026-10-07');
+  const A = R.campaigns.find((c) => c.utm === 'camp-a'), B = R.campaigns.find((c) => c.utm === 'camp-b');
+  assert.equal(A.cost, 500000); assert.equal(A.imp, 1800); assert.equal(A.clk, 70); assert.equal(A.visitors, 2); assert.equal(A.zalo, 1); assert.equal(A.name, 'Chiến dịch A'); assert.equal(A.first, '2026-09-29'); assert.equal(A.last, '2026-10-11'); assert.equal(A.activeDays, 2);
+  assert.equal(B.cost, 100000); assert.equal(B.name, 'camp-b'); assert.equal(B.visitors, 1);
+  assert.equal(R.tot.visitors, 3); assert.equal(R.tot.cost, 600000); assert.equal(R.tot.zalo, 1); assert.equal(R.daily.length, 3); assert.equal(R.daily[0].v, 1); assert.equal(R.daily[1].cost, 300000);
+  assert.equal(R.sites.find((x) => x.name === 'Landing A').visitors, 3); assert.equal(typeof R.tot.closed, 'number');
+  const R2 = ctx.crmReport(KK, '2026-10-12', '2026-10-10'); assert.equal(R2.from, '2026-10-10');
+  assert.equal(ctx.crmReport(KK, '2026-10-01', '2026-10-31').campaigns.find((c) => c.utm === 'camp-a').costPrev, 150000);
+  assert.throws(() => ctx.crmReport('sai', '2026-10-10', '2026-10-12'), /Không có quyền/);
 }
 // quân sư AI: cần đúng khoá truy cập, thiếu khoá API thì báo rõ, có khoá thì gọi API
 assert.throws(() => ctx.crmAsk('sai-khoa', 'xin chào'), /Không có quyền/);

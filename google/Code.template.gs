@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-17', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-18', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -436,6 +436,70 @@ function crmImport(k, rows) {
     } catch (e) { rep.errors.push({ line: line, reason: String(e.message || e), phone: String(r.phone || '') }); }
   });
   return rep;
+}
+
+// ---- Báo cáo theo khoảng ngày (Tổng quan, Chiến dịch) ----
+function addDays_(day, n) { var p = String(day).split('-'); return ymd_(new Date(Date.UTC(Number(p[0]), Number(p[1]) - 1, Number(p[2]) + n, 12))).slice(0, 10) || ''; }
+function daysBetween_(a, b) { var x = String(a).split('-'), y = String(b).split('-'); return Math.round((Date.UTC(+y[0], +y[1] - 1, +y[2]) - Date.UTC(+x[0], +x[1] - 1, +x[2])) / 864e5) + 1; }
+function crmReport(k, from, to) {
+  requireUi_(k);
+  var today = ymd_(new Date());
+  to = ymd_(to) || today; from = ymd_(from) || addDays_(to, -29);
+  if (from > to) { var sw = from; from = to; to = sw; }
+  var n = Math.min(daysBetween_(from, to), 3660), prevTo = addDays_(from, -1), prevFrom = addDays_(from, -n);
+  var ss = ss_(), sites = {}, camps = {}, daily = {}, all = {}, tot = { pv: 0, zalo: 0, phone: 0, msg: 0, leads: 0, unc: 0, closed: 0, cost: 0, imp: 0, clk: 0 };
+  var S = function (name) { return sites[name] || (sites[name] = { name: name, v: {}, pv: 0, zalo: 0, phone: 0, msg: 0, leads: 0, unc: 0 }); };
+  var C = function (u) { return camps[u] || (camps[u] = { utm: u, name: u, platform: '', declared: false, v: {}, pv: 0, zalo: 0, phone: 0, msg: 0, leads: 0, unc: 0, closed: 0, revenue: 0, cost: 0, imp: 0, clk: 0, costPrev: 0, leadsPrev: 0, clkPrev: 0, first: '', last: '', active: {} }); };
+  var D = function (day) { return daily[day] || (daily[day] = { v: {}, leads: 0, cost: 0 }); };
+  var inR = function (d) { return d && d >= from && d <= to; }, inP = function (d) { return d && d >= prevFrom && d <= prevTo; };
+  var evs = ss.getSheetByName(S_EVENTS), en = evs ? evs.getLastRow() : 1;
+  if (en > 1) {
+    var st = Math.max(2, en - 19999);
+    evs.getRange(st, 1, en - st + 1, 8).getValues().forEach(function (r) {
+      var day = ymd_(r[0]); if (!inR(day)) return;
+      var vid = String(r[1]), type = String(r[3]), ch = String(r[4]), utm = String(r[7] || '').trim(), s = S(String(r[2])), c = utm ? C(utm) : null;
+      if (type === 'pageview') { s.pv++; s.v[vid] = 1; all[vid] = 1; tot.pv++; D(day).v[vid] = 1; if (c) { c.pv++; c.v[vid] = 1; } }
+      else if (type === 'click') {
+        var f = ch === 'zalo' ? 'zalo' : ch === 'phone' ? 'phone' : ch === 'messenger' ? 'msg' : '';
+        if (f) { s[f]++; tot[f]++; if (c) c[f]++; }
+      }
+    });
+  }
+  var ls = ss.getSheetByName(S_LEADS), ln = ls ? lastDataRow_(ls, 2) : 1;
+  if (ln > 1) {
+    ls.getRange(2, 1, ln - 1, 22).getValues().forEach(function (r) {
+      if (!r[3]) return;
+      var day = ymd_(r[1]), utm = String(r[7] || '').trim();
+      if (inR(day)) {
+        var s = S(String(r[5])), unc = String(r[17]) === 'CHƯA LIÊN HỆ';
+        s.leads++; tot.leads++; D(day).leads++; if (unc) { s.unc++; tot.unc++; }
+        if (String(r[18]) === 'Chốt') { s.closed++; tot.closed++; }
+        if (utm) { var c = C(utm); c.leads++; if (unc) c.unc++; if (String(r[18]) === 'Chốt') { c.closed++; c.revenue += Number(r[20]) || 0; } }
+      } else if (inP(day) && utm) C(utm).leadsPrev++;
+    });
+  }
+  var cp = ss.getSheetByName('Chi phí'), cn = cp ? cp.getLastRow() : 1;
+  if (cn > 1) {
+    cp.getRange(2, 1, cn - 1, 5).getValues().forEach(function (r) {
+      var day = ymd_(r[0]), utm = String(r[1] || '').trim(); if (!day || !utm) return;
+      var cost = Number(r[2]) || 0, imp = Number(r[3]) || 0, clk = Number(r[4]) || 0, c = C(utm);
+      if (cost > 0 || imp > 0) { if (!c.first || day < c.first) c.first = day; if (day > c.last) c.last = day; }
+      if (inR(day)) { c.cost += cost; c.imp += imp; c.clk += clk; tot.cost += cost; tot.imp += imp; tot.clk += clk; D(day).cost += cost; if (cost > 0 || imp > 0) c.active[day] = 1; }
+      else if (inP(day)) { c.costPrev += cost; c.clkPrev += clk; }
+    });
+  }
+  var cd = ss.getSheetByName('Chiến dịch'), cdn = cd ? cd.getLastRow() : 1;
+  if (cdn > 1) cd.getRange(2, 1, cdn - 1, 3).getValues().forEach(function (r) { var u = String(r[2] || '').trim(); if (u) { var c = C(u); c.declared = true; c.platform = String(r[0] || ''); c.name = String(r[1] || u); } });
+  var campaigns = Object.keys(camps).map(function (u) { return camps[u]; }).filter(function (c) { return c.declared || c.cost || c.pv || c.leads || c.imp; }).map(function (c) {
+    return { utm: c.utm, name: c.name, platform: c.platform, declared: c.declared, visitors: Object.keys(c.v).length, pv: c.pv, zalo: c.zalo, phone: c.phone, msg: c.msg, leads: c.leads, unc: c.unc, closed: c.closed, revenue: c.revenue,
+      cost: c.cost, imp: c.imp, clk: c.clk, costPrev: c.costPrev, leadsPrev: c.leadsPrev, clkPrev: c.clkPrev, first: c.first, last: c.last, activeDays: Object.keys(c.active).length };
+  }).sort(function (a, b) { return b.cost - a.cost || b.leads - a.leads; });
+  var siteArr = Object.keys(sites).map(function (x) { var s = sites[x]; return { name: s.name, visitors: Object.keys(s.v).length, pv: s.pv, zalo: s.zalo, phone: s.phone, msg: s.msg, leads: s.leads, unc: s.unc, closed: s.closed }; })
+    .sort(function (a, b) { return b.visitors - a.visitors || b.leads - a.leads; });
+  var dayArr = [], d = from, guard = 0;
+  while (d <= to && guard++ < 3660) { var x = daily[d] || { v: {}, leads: 0, cost: 0 }; dayArr.push({ day: d, v: Object.keys(x.v).length, leads: x.leads, cost: x.cost }); d = addDays_(d, 1); }
+  tot.visitors = Object.keys(all).length;
+  return { from: from, to: to, days: n, prev: { from: prevFrom, to: prevTo }, tot: tot, sites: siteArr, campaigns: campaigns, daily: dayArr };
 }
 
 function crmClickDone(k, row, vid, done, note) {
