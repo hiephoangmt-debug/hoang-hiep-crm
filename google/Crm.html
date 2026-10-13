@@ -1381,6 +1381,7 @@ function importLeads() {
   $('#imsheet').onclick = function () { $('#dlg').close(); sheetImport(); };
   var show = function (rows, label) { IMP.rows = rows; $('#imst').textContent = label + ': ' + rows.length + ' dòng'; impPreview(); };
   $('#imread').onclick = function () { var t = $('#imt').value; if (!t.trim()) { toast('Hãy dán dữ liệu vào ô'); return; } show(parseTable(t), 'Đã đọc ô dán'); };
+  var tmr = null; $('#imt').oninput = function () { clearTimeout(tmr); tmr = setTimeout(function () { if ($('#imt').value.trim()) show(parseTable($('#imt').value), 'Đã đọc ô dán'); }, 300); };
   $('#imf').onchange = function () {
     var f = this.files && this.files[0]; if (!f) return; var fr = new FileReader();
     fr.onload = function () { var t = String(fr.result || ''), rows = /\.vcf$/i.test(f.name) || /BEGIN:VCARD/i.test(t) ? parseVcf(t) : parseCsv(t); show(rows, 'Đã đọc ' + f.name); };
