@@ -327,7 +327,7 @@ function copyText(s) {
 }
 function advisor(phone) {
   var l = D.leads.filter(function (x) { return x.phone === phone; })[0]; if (!l) return;
-  var ten = !l.name ? 'anh/chị' : /^(anh|chị|chi|cô|co|chú|chu|bác|bac|ông|ong|bà|ba)(\s|$)/i.test(l.name.trim()) ? l.name.trim() : 'anh/chị ' + l.name.trim(), me = l.assignee || 'tư vấn viên', h = heat(l);
+  var ten = snName(l), me = l.assignee || 'tư vấn viên', h = heat(l);
   var when = todo(l) ? 'Liên hệ ngay, trong 5 đến 15 phút. Khách mới để lại số rất dễ nguội.' :
     l.status === 'Đã liên hệ' ? 'Nhắn lại sau 1 ngày nếu khách chưa trả lời, rồi thêm 1 lần sau 3 ngày.' :
     l.status === 'Quan tâm' ? 'Chăm lại sau 2 đến 3 ngày: gửi bảng giá, hình ảnh, chính sách mới.' :
@@ -838,10 +838,24 @@ var SN_KINDS = {
 };
 var SN_ENDS = { 'Thân mật': '{ten} cần em gửi chi tiết hoặc sắp xếp xem nhà thực tế, cứ nhắn em nhé ạ.', 'Nhấn ưu đãi': 'Chính sách áp dụng có thời hạn, em giữ chỗ ưu tiên cho {ten} trước nếu {ten} quan tâm ạ.', 'Khan hiếm': 'Quỹ căn đẹp còn ít, em xin phép giữ lại 1 đến 2 căn phù hợp cho {ten} trước ạ.' };
 function snBody() { return SN.edited ? SN.body : SN_KINDS[SN.kind] + '\n' + SN_ENDS[SN.style]; }
-function snName(l) { return !l.name ? 'anh/chị' : /^(anh|chị|chi|cô|co|chú|chu|bác|bac|ông|ong|bà|ba)(\s|$)/i.test(l.name.trim()) ? l.name.trim() : 'anh/chị ' + l.name.trim(); }
+// Làm sạch tên đã lưu trong danh bạ: bỏ ghi chú trong ngoặc, tên dự án, mã căn (3Br), "A/C" đứng đầu thành anh/chị. Chỉ giữ họ tên người.
+var NAME_HON = { anh: 'anh', 'chị': 'chị', chi: 'chị', 'cô': 'cô', co: 'cô', 'chú': 'chú', chu: 'chú', 'bác': 'bác', bac: 'bác', 'ông': 'ông', ong: 'ông', 'bà': 'bà', ba: 'bà' };
+function cleanName(raw) {
+  var n = String(raw || '').replace(/[(（\[].*?[)）\]]/g, ' ').replace(/\s[-–|]\s/g, ' ').replace(/\s+/g, ' ').trim(), proj = {};
+  projNames().forEach(function (p) { String(p).toLowerCase().split(/\s+/).forEach(function (w) { if (w.length >= 4) proj[w] = 1; }); });
+  var parts = n.split(' ').filter(function (w) { return w && !proj[w.toLowerCase()] && !/^(\d+\s*(br|pn)|br|pn|khách|kh|cvkd|mrs|mr|ms)$/i.test(w); }), hon = '';
+  if (parts.length > 1 && /^[ac]$/i.test(parts[0])) { hon = parts[0].toLowerCase() === 'a' ? 'anh' : 'chị'; parts.shift(); }
+  else if (parts.length > 1 && NAME_HON[parts[0].toLowerCase()]) { hon = NAME_HON[parts[0].toLowerCase()]; parts.shift(); }
+  var pad = ' ' + n.toLowerCase() + ' ';
+  if (pad.indexOf(' mrs ') >= 0 || pad.indexOf(' ms ') >= 0) hon = 'chị'; else if (pad.indexOf(' mr ') >= 0) hon = 'anh';
+  return { hon: hon, name: parts.join(' ') };
+}
+function snName(l) { var c = cleanName(l.name); return c.name ? (c.hon || 'anh/chị') + ' ' + c.name : (c.hon || 'anh/chị'); }
+function snMe() { try { return localStorage.getItem('crm_me') || ''; } catch (e) { return ''; } }
+function snProj(l) { return SN.name || l.project || (l.site && l.site !== 'Nhập thủ công' ? l.site : '') || 'mới'; }
 function snMsg(l) {
   var parts = []; if (SN.link) parts.push('Thông tin chi tiết: ' + SN.link); if (SN.tbl) parts.push('Bảng hàng: ' + SN.tbl); if (SN.img) parts.push('Hình ảnh: ' + SN.img);
-  return snBody().replace(/\{ten\}/g, snName(l)).replace(/\{sale\}/g, l.assignee || 'tư vấn viên').replace(/\{du_an\}/g, SN.name || l.project || l.site || 'mới').replace(/\{su_kien\}/g, SN.ev || 'sự kiện của dự án').replace(/\{thoi_gian\}/g, SN.evWhen ? ' vào ' + SN.evWhen : '').replace(/\{dia_diem\}/g, SN.evWhere ? ' tại ' + SN.evWhere : '')
+  return snBody().replace(/\{ten\}/g, snName(l)).replace(/\{sale\}/g, l.assignee || snMe() || 'tư vấn viên').replace(/\{du_an\}/g, snProj(l)).replace(/\{su_kien\}/g, SN.ev || 'sự kiện của dự án').replace(/\{thoi_gian\}/g, SN.evWhen ? ' vào ' + SN.evWhen : '').replace(/\{dia_diem\}/g, SN.evWhere ? ' tại ' + SN.evWhere : '')
     .replace(/\{noi_bat\}\n?/g, SN.hl ? SN.hl + '\n' : '').replace(/\{lien_ket\}\n?/g, parts.length ? parts.join('\n') + '\n' : '').replace(/\n{3,}/g, '\n\n').trim();
 }
 function snKey() { return SN.kind + '|' + (SN.name || '') + '|' + (SN.link || SN.tbl || ''); }
@@ -969,7 +983,7 @@ function send() {
     '<div class="card"><b>2. Soạn tin</b><div class="row chips" style="margin:8px 0">' + Object.keys(SN_KINDS).map(function (x) { return '<button class="chip' + (SN.kind === x ? ' on' : '') + '" data-sk="' + esc(x) + '">' + esc(x) + '</button>'; }).join('') + '</div><div class="fgrid">' +
     snLab('Tên dự án', '<input id="sm1" value="' + esc(SN.name) + '">') + snLab('Điểm nổi bật / chính sách / quỹ căn', '<input id="sm2" placeholder="vd Chiết khấu 5%, hỗ trợ vay 0% 18 tháng" value="' + esc(SN.hl) + '">') +
     snLab('Link thông tin dự án', '<input id="sm3" placeholder="https://" value="' + esc(SN.link) + '">') + snLab('Link bảng hàng', '<input id="sm4" placeholder="https://" value="' + esc(SN.tbl) + '">') + snLab('Link hình ảnh', '<input id="sm5" placeholder="https://" value="' + esc(SN.img) + '">') +
-    snLab('Kiểu lời kết', '<select id="sm6">' + opt(Object.keys(SN_ENDS), SN.style) + '</select>') + '</div>' +
+    snLab('Tên bạn khi nhắn (xưng em)', '<input id="sm8" placeholder="vd Hiệp" value="' + esc(snMe()) + '">') + snLab('Kiểu lời kết', '<select id="sm6">' + opt(Object.keys(SN_ENDS), SN.style) + '</select>') + '</div>' +
     '<div class="fgrid" id="snev" style="margin-top:8px;display:' + (SN.kind === 'Mời sự kiện' ? 'grid' : 'none') + '">' + snLab('Tên sự kiện', '<input id="sev1" value="' + esc(SN.ev) + '">') + snLab('Thời gian', '<input id="sev2" placeholder="vd 9h sáng 20/10" value="' + esc(SN.evWhen) + '">') + snLab('Địa điểm', '<input id="sev3" value="' + esc(SN.evWhere) + '">') + '</div>' +
     '<label class="fld" style="margin-top:8px"><span class="mut small">Nội dung, có thể sửa. Các mục {ten} {sale} {du_an} {noi_bat} {lien_ket} tự thay theo từng khách</span><textarea id="sm7" rows="6">' + esc(snBody()) + '</textarea></label>' +
     '<div class="small mut" style="margin-top:6px">Gợi ý: dán link ảnh hoặc bảng hàng (Google Drive, website dự án) để Zalo tự hiện hình xem trước. Lời kết "Khan hiếm" chỉ dùng khi quỹ căn thật sự còn ít.</div>' +
@@ -978,6 +992,7 @@ function send() {
   [['sn1', 'proj'], ['sn2', 'prov'], ['sn3', 'bmin'], ['sn4', 'bmax'], ['sn5', 'heat'], ['sn6', 'days'], ['sn7', 'unk'], ['sn8', 'loc'], ['sn9', 'interest'], ['sm1', 'name'], ['sm2', 'hl'], ['sm3', 'link'], ['sm4', 'tbl'], ['sm5', 'img'], ['sev1', 'ev'], ['sev2', 'evWhen'], ['sev3', 'evWhere']].forEach(function (p) {
     var e = $('#' + p[0]); e.oninput = e.onchange = function () { SN[p[1]] = this.type === 'checkbox' ? this.checked : this.value; if (!SN.edited && (p[0].indexOf('sm') === 0 || p[0].indexOf('sev') === 0)) $('#sm7').value = snBody(); snList(); };
   });
+  $('#sm8').oninput = function () { try { localStorage.setItem('crm_me', this.value.trim()); } catch (e) {} snList(); };
   $('#sm6').onchange = function () { SN.style = this.value; SN.edited = false; $('#sm7').value = snBody(); snList(); };
   $('#sm7').oninput = function () { SN.body = this.value; SN.edited = true; snList(); };
   document.querySelectorAll('[data-sk]').forEach(function (b) { b.onclick = function () { SN.kind = b.dataset.sk; SN.edited = false; $('#snev').style.display = SN.kind === 'Mời sự kiện' ? 'grid' : 'none'; document.querySelectorAll('[data-sk]').forEach(function (x) { x.classList.toggle('on', x === b); }); $('#sm7').value = snBody(); snList(); }; });
