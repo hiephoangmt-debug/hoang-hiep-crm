@@ -437,10 +437,11 @@ var LV = (function () { try { return localStorage.getItem('crm_lv') || 'new'; } 
 var HOT_ST = ['Hẹn xem', 'Đã xem dự án', 'Đang thương lượng', 'Booking'];
 function isHot(l) { if (l.status === 'Chốt' || l.status === 'Mất' || l.status === 'Tạm dừng') return false; var h = heat(l); return !!(h && h[0] === 'Nóng') || HOT_ST.indexOf(l.status) >= 0; }
 function lvBar(nNew, nHot, nAll) {
-  return '<div class="row chips lvbar">' + [['new', 'Khách mới phát sinh', nNew + ' trong 7 ngày'], ['hot', 'Đang hot theo dự án', nHot], ['all', 'Data khách', nAll]].map(function (x) { return '<button class="chip' + (LV === x[0] ? ' on' : '') + '" data-lv="' + x[0] + '">' + x[1] + ' <span class="n">' + x[2] + '</span></button>'; }).join('') + '</div>';
+  return '<div class="row chips lvbar">' + [['new', 'Khách mới phát sinh', nNew + ' tuần này'], ['hot', 'Đang hot theo dự án', nHot], ['all', 'Data khách', nAll]].map(function (x) { return '<button class="chip' + (LV === x[0] ? ' on' : '') + '" data-lv="' + x[0] + '">' + x[1] + ' <span class="n">' + x[2] + '</span></button>'; }).join('') + '</div>';
 }
+function weekStart() { var t = ymdNow(0), p = t.split('-'), dow = new Date(+p[0], +p[1] - 1, +p[2]).getDay(); return ymdShift(t, -((dow + 6) % 7)); }   // thứ Hai của tuần này
 function lvCounts() {
-  var all = D.leads.filter(function (l) { return isBds(l.site); }), wk = ymdShift(ymdNow(0), -6);
+  var all = D.leads.filter(function (l) { return isBds(l.site); }), wk = weekStart();
   return { all: all, nNew: all.filter(function (l) { return dayOf(l.at) >= wk && !isQuiet(l); }).length, hot: all.filter(isHot) };
 }
 function bindLv() {
@@ -452,8 +453,10 @@ function leadsGroups() {
   var head = lvBar(c.nNew, hot.length, all.length) + '<div class="row"><button class="btn p" id="addlead">+ Thêm khách</button><button class="btn" id="implead">Nhập danh sách</button><button class="btn" id="sheetimp">Nhập từ link Sheet</button>' + (aiOn() ? '<button class="btn" id="zbulk">Nhập chat Zalo</button>' : '') + '</div>';
   var card = function (l) { return mobRow(l); }, body = '';
   if (LV === 'new') {
-    var list = all.filter(function (l) { return !isQuiet(l); }).sort(function (a, b) { return new Date(b.at) - new Date(a.at); }).slice(0, LVN), unc = list.filter(todo).length;
-    body = '<div class="card"><div class="row" style="margin:0"><b>Khách mới phát sinh gần nhất</b><span class="sp"></span><label class="small mut">Hiện <select id="lvn">' + [10, 20, 30, 50].map(function (n) { return '<option' + (n === LVN ? ' selected' : '') + '>' + n + '</option>'; }).join('') + '</select> khách</label></div><div class="small mut" style="margin-top:4px">Trong ' + list.length + ' khách này có <b>' + unc + '</b> khách chưa gọi, chưa nhắn.</div></div><div class="cgrid">' + (list.map(card).join('') || '<div class="card mut">Chưa có khách.</div>') + '</div>';
+    var wk = weekStart(), list = all.filter(function (l) { return !isQuiet(l) && dayOf(l.at) >= wk; }).sort(function (a, b) { return new Date(b.at) - new Date(a.at); }), unc = list.filter(todo).length;
+    var byDay = {}; list.forEach(function (l) { var d = dayOf(l.at); byDay[d] = (byDay[d] || 0) + 1; });
+    var days = Object.keys(byDay).sort().reverse().map(function (d) { return '<span class="kchip">' + fdmy(d).slice(0, 5) + ': <b>' + byDay[d] + '</b></span>'; }).join('');
+    body = '<div class="card"><b>Khách mới phát sinh tuần này</b> <span class="mut small">từ ' + fdmy(wk) + ' đến nay</span><div style="margin-top:4px"><b>' + list.length + '</b> khách mới, trong đó <b>' + unc + '</b> khách chưa gọi, chưa nhắn.</div>' + (days ? '<div class="row chips" style="margin:6px 0 0">' + days + '</div>' : '') + '</div><div class="cgrid">' + (list.map(card).join('') || '<div class="card mut">Tuần này chưa có khách mới. Khách nhập từ file hoặc Sheet nằm trong Data khách.</div>') + '</div>';
   } else {
     var g = {}; hot.forEach(function (l) { var k = l.project || l.site || 'Chưa rõ dự án'; (g[k] = g[k] || []).push(l); });
     var keys = Object.keys(g).sort(function (a, b) { return g[b].length - g[a].length; });
