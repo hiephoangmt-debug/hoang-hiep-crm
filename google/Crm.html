@@ -77,6 +77,9 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold2);border-co
 .rbar{padding:12px 14px}.rbar input[type=date]{margin-left:4px}.adv{border-left:4px solid var(--line);padding:6px 10px;margin-top:8px;background:#F7F8FC;border-radius:0 8px 8px 0;font-size:13.5px}.adv.bad{border-color:var(--red);background:var(--redsoft)}.adv.warn{border-color:var(--gold);background:var(--goldsoft)}.adv.good{border-color:var(--green);background:var(--greensoft)}.adv summary{cursor:pointer;color:var(--navy7);font-weight:600;margin-top:4px}.adv ol{margin:6px 0 2px;padding-left:18px}.guide ul,.guide ol{margin:4px 0 10px;padding-left:20px}
 .kpi b.long{font-size:20px}
 .drill{cursor:pointer}.drill:hover td{background:var(--goldsoft)}
+.fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:60;background:var(--gold);color:#fff;border:0;border-radius:99px;padding:12px 20px;font:inherit;font-weight:700;box-shadow:0 6px 18px rgba(11,31,61,.35);cursor:pointer}.fab:hover{background:#E07A14}
+.chat{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;width:min(400px,calc(100vw - 24px));max-height:min(78vh,640px);background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 40px rgba(11,31,61,.35);display:flex;flex-direction:column;overflow:hidden}.chat[hidden]{display:none}
+.chead{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--navy9);color:#fff}.cbody{padding:12px 14px;overflow:auto}.msgs{display:flex;flex-direction:column;gap:8px;max-height:300px;overflow:auto;margin-bottom:6px}.msg{padding:8px 10px;border-radius:12px;font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere}.msg.me{align-self:flex-end;background:var(--navy8);color:#fff;max-width:88%}.msg.ai{align-self:flex-start;background:#EEF1F8;max-width:94%}
 .step{color:var(--navy7);font-weight:600;margin-top:4px}.assign{margin-top:6px}.assign select{max-width:220px}
 .lead.todo{border-left:4px solid var(--red)}
 .lead h3{margin:0;font-size:15.5px;font-weight:650;color:var(--navy9)}.acts{display:flex;gap:6px;flex-wrap:wrap}
@@ -108,7 +111,6 @@ code,pre{background:#F3F5FA;border:1px solid var(--line);border-radius:10px;font
     <button data-t="leads">Khách hàng<span class="dot" id="dLeads" hidden></span></button>
     <button data-t="stats">Thống kê</button>
     <button data-t="clicks">Lượt bấm<span class="dot" id="dClicks" hidden></span></button>
-    <button data-t="ask">Hỏi quân sư</button>
     <button data-t="camp">Chiến dịch</button>
     <button data-t="sites">Website & mã nhúng</button>
   </nav>
@@ -118,6 +120,8 @@ code,pre{background:#F3F5FA;border:1px solid var(--line);border-radius:10px;font
 <div id="diag"></div>
 <main id="main"><p class="mut">Đang tải…</p></main>
 <dialog id="dlg"><div class="dlg" id="dlgBody"></div></dialog>
+<button id="fab" class="fab" aria-label="Hỏi quân sư AI">Hỏi quân sư</button>
+<section id="chat" class="chat" hidden aria-label="Hỏi quân sư"><div class="chead"><b>Hỏi quân sư</b><span class="sp"></span><button class="btn sm" id="chatx" aria-label="Đóng">Đóng</button></div><div class="cbody" id="chatBody"></div></section>
 <div id="toast"></div>
 
 <script>
@@ -177,7 +181,7 @@ $('#dlg').addEventListener('close', function () { if (D && !V.phone) render(); }
 document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('[data-zl]'); if (!a) return; e.preventDefault(); window.open('https://zalo.me/' + a.dataset.zl, '_blank', 'noopener'); });
 $('#gbar').onclick = function (e) { var b = e.target.closest('button'); if (!b) return; G = b.dataset.g; try { localStorage.setItem('crm_group', G); } catch (x) {} badges(); render(); };
 
-function render() { if (!D) return; if (V.phone && narrow()) { openLead(V.phone, true, window.scrollY); return; } $('#gbar').style.display = (tab === 'leads' || tab === 'today' || tab === 'ask' || tab === 'camp' || tab === 'stats') ? 'none' : ''; ({ home: home, today: today, leads: leads, stats: stats, clicks: clicks, ask: ask, camp: camp, sites: sites }[tab])(); }
+function render() { if (!D) return; if (V.phone && narrow()) { openLead(V.phone, true, window.scrollY); return; } $('#gbar').style.display = (tab === 'leads' || tab === 'today' || tab === 'camp' || tab === 'stats') ? 'none' : ''; ({ home: home, today: today, leads: leads, stats: stats, clicks: clicks, camp: camp, sites: sites }[tab])(); }
 
 var RANGES = [['today', 'Hôm nay'], ['7', '7 ngày'], ['30', '30 ngày'], ['month', 'Tháng này'], ['lastmonth', 'Tháng trước'], ['year', 'Năm nay'], ['all', 'Tất cả'], ['custom', 'Tuỳ chọn']];
 function ymdShift(day, n) { var p = day.split('-'), d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2] + n, 12)); return d.toISOString().slice(0, 10); }
@@ -460,7 +464,7 @@ function leads() {
     run('crmUpdateLead', s.dataset.as, { assignee: v }).then(function () { l.assignee = v; toast(v ? 'Đã chuyển cho ' + v : 'Đã bỏ giao'); leads(); }).catch(function (e) { s.value = l.assignee || ''; fail(e); }); }; });
   document.querySelectorAll('[data-open]').forEach(function (b) { b.onclick = function (e) { if (b.tagName !== 'BUTTON' && e.target.closest('button,a,select,input')) return; openLead(b.dataset.open); }; });
   document.querySelectorAll('[data-note]').forEach(function (b) { b.onclick = function () { openLead(b.dataset.note); setTimeout(function () { var x = $('#lc'); if (x) { x.scrollIntoView(); x.focus(); } }, 150); }; });
-  document.querySelectorAll('[data-ask]').forEach(function (b) { b.onclick = function () { ASK.phone = b.dataset.ask; ASK.q = ''; ASK.a = ''; tab = 'ask'; document.querySelectorAll('#nav button').forEach(function (x) { x.classList.toggle('on', x.dataset.t === 'ask'); }); render(); }; });
+  document.querySelectorAll('[data-ask]').forEach(function (b) { b.onclick = function () { openChat(b.dataset.ask); }; });
   document.querySelectorAll('[data-adv]').forEach(function (b) { b.onclick = function () { advisor(b.dataset.adv); }; });
   document.querySelectorAll('[data-act]').forEach(function (b) { b.onclick = function () { contact(b.dataset.p, b.dataset.act, b); }; });
 }
@@ -509,8 +513,8 @@ function foldForm(h, ulId, title, label) {
 function aiOn() { try { return localStorage.getItem('crm_noai') !== '1'; } catch (e) { return true; } }
 function applyAi() {
   var on = aiOn(); $('#aitog').textContent = on ? 'AI: bật' : 'AI: tắt';
-  var t = document.querySelector('#nav [data-t="ask"]'); if (t) t.style.display = on ? '' : 'none';
-  if (!on && tab === 'ask') { tab = 'home'; document.querySelectorAll('#nav button').forEach(function (x) { x.classList.toggle('on', x.dataset.t === 'home'); }); }
+  $('#fab').style.display = on && $('#chat').hidden ? '' : 'none';
+  if (!on) $('#chat').hidden = true;
 }
 var V = { phone: '', from: 'leads', y: 0 };
 function narrow() { return window.innerWidth < 900; }
@@ -839,25 +843,40 @@ function today() {
   document.querySelectorAll('[data-snooze]').forEach(function (b) { b.onclick = function () { setNext(b.dataset.p, ymdNow(Number(b.dataset.snooze))); }; });
   document.querySelectorAll('[data-set]').forEach(function (b) { b.onclick = function () { setNext(b.dataset.set, ymdNow(1)); }; });
 }
-var ASK = { phone: '', q: '', a: '', busy: false };
-function ask() {
+var ASK = { phone: '', q: '', msgs: [], busy: false };
+function openChat(phone) {
+  if (phone !== undefined) { if (phone !== ASK.phone) ASK.msgs = []; ASK.phone = phone; }
+  $('#chat').hidden = false; $('#fab').style.display = 'none'; chatRender();
+  setTimeout(function () { var q = $('#cq'); if (q) q.focus(); }, 80);
+}
+function closeChat() { $('#chat').hidden = true; if (aiOn()) $('#fab').style.display = ''; }
+function chatRender() {
+  if (!D) return;
   var bds = D.leads.filter(function (l) { return isBds(l.site); });
   var qs = ['Soạn tin nhắn Zalo đầu tiên cho khách này', 'Khách này nên chăm sóc thế nào trong 3 ngày tới?', 'Khách chê giá cao, tôi nên trả lời sao?', 'Khách hỏi vay ngân hàng, tôi nên nói gì?', 'Soạn tin mời khách đi xem dự án'];
-  $('#main').innerHTML = '<div class="card"><b>Hỏi quân sư</b><p class="small mut">Chọn khách (hoặc để trống), gõ câu hỏi, quân sư soạn câu trả lời và tin nhắn cho bạn. Quân sư là trí tuệ nhân tạo, bạn đọc lại trước khi gửi cho khách.</p>' +
-    '<div class="row"><select id="aw"><option value="">Không chọn khách cụ thể</option>' + bds.map(function (l) { return '<option value="' + esc(l.phone) + '">' + esc((l.name || '(chưa có tên)') + ' · ' + l.phone + ' · ' + l.site) + '</option>'; }).join('') + '</select></div>' +
-    '<div class="row chips">' + qs.map(function (x, i) { return '<button class="chip" data-q="' + i + '">' + esc(x) + '</button>'; }).join('') + '</div>' +
-    '<textarea id="aq" rows="3" placeholder="Gõ câu hỏi của bạn">' + esc(ASK.q) + '</textarea><div class="row" style="margin-top:8px"><button class="btn p" id="ago">Hỏi quân sư</button><span class="mut small" id="ast"></span></div></div>' +
-    '<div class="card" id="aout" ' + (ASK.a ? '' : 'hidden') + '><b>Quân sư trả lời</b><div style="white-space:pre-wrap;margin:8px 0" id="atext">' + esc(ASK.a) + '</div><button class="btn" id="acp">Sao chép câu trả lời</button></div>';
-  $('#aw').value = ASK.phone;
-  document.querySelectorAll('[data-q]').forEach(function (b) { b.onclick = function () { $('#aq').value = qs[b.dataset.q]; }; });
-  $('#aw').onchange = function (e) { ASK.phone = e.target.value; };
-  $('#acp').onclick = function () { copyText(ASK.a); };
-  $('#ago').onclick = function () {
-    var q = $('#aq').value.trim(); if (!q || ASK.busy) return;
-    ASK.q = q; ASK.phone = $('#aw').value; ASK.busy = true; $('#ast').textContent = 'Quân sư đang nghĩ…'; $('#ago').disabled = true;
-    run('crmAsk', q, ASK.phone).then(function (a) { ASK.a = a; ASK.busy = false; ask(); }).catch(function (e) { ASK.busy = false; $('#ago').disabled = false; $('#ast').textContent = ''; fail(e); });
-  };
+  var lead = bds.filter(function (l) { return l.phone === ASK.phone; })[0];
+  $('#chatBody').innerHTML = '<div class="row" style="margin:0 0 6px"><select id="cw" style="width:100%"><option value="">Không chọn khách cụ thể</option>' + bds.map(function (l) { return '<option value="' + esc(l.phone) + '">' + esc((l.name || '(chưa có tên)') + ' · ' + l.phone) + '</option>'; }).join('') + '</select></div>' +
+    '<div class="msgs" id="msgs">' + (ASK.msgs.length ? ASK.msgs.map(function (m, i) { return '<div class="msg me">' + esc(m.q) + '</div><div class="msg ai">' + (m.a === null ? '<span class="mut">Quân sư đang nghĩ…</span>' : esc(m.a)) + (m.a ? '<div><button class="btn sm" data-cp="' + i + '">Sao chép</button></div>' : '') + '</div>'; }).join('') :
+      '<div class="mut small">Chọn khách (hoặc để trống), chọn câu hỏi gợi ý hoặc tự gõ. Quân sư là trí tuệ nhân tạo, bạn đọc lại trước khi gửi cho khách.' + (lead ? ' Đang hỏi về <b>' + esc(lead.name || lead.phone) + '</b>.' : '') + '</div>') + '</div>' +
+    '<div class="row chips" style="margin:6px 0">' + qs.map(function (x, i) { return '<button class="chip" data-q="' + i + '">' + esc(x) + '</button>'; }).join('') + '</div>' +
+    '<textarea id="cq" rows="2" placeholder="Gõ câu hỏi của bạn">' + esc(ASK.q) + '</textarea><div class="row" style="margin-top:6px"><button class="btn p" id="cgo"' + (ASK.busy ? ' disabled' : '') + '>Gửi</button></div>';
+  $('#cw').value = ASK.phone;
+  $('#cw').onchange = function (e) { ASK.phone = e.target.value; ASK.msgs = []; chatRender(); };
+  document.querySelectorAll('#chatBody [data-q]').forEach(function (b) { b.onclick = function () { $('#cq').value = qs[b.dataset.q]; $('#cq').focus(); }; });
+  document.querySelectorAll('#chatBody [data-cp]').forEach(function (b) { b.onclick = function () { copyText(ASK.msgs[b.dataset.cp].a); }; });
+  $('#cq').oninput = function (e) { ASK.q = e.target.value; };
+  $('#cq').onkeydown = function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } };
+  $('#cgo').onclick = send;
+  var m = $('#msgs'); if (m) m.scrollTop = m.scrollHeight;
+  function send() {
+    var q = $('#cq').value.trim(); if (!q || ASK.busy) return;
+    var msg = { q: q, a: null }; ASK.msgs.push(msg); ASK.q = ''; ASK.busy = true; chatRender();
+    run('crmAsk', q, ASK.phone).then(function (a) { msg.a = a; ASK.busy = false; chatRender(); }).catch(function (e) { msg.a = /Chưa cài khoá/.test(e.message) ? 'Chưa bật quân sư AI. Cần cài khoá API một lần: mở file Sheet, menu CRM › Cài khoá quân sư (AI). Không dùng AI thì bấm nút "AI: bật" trên đầu trang để tắt.' : 'Lỗi: ' + e.message; ASK.busy = false; chatRender(); });
+  }
 }
+$('#fab').onclick = function () { openChat(); };
+$('#chatx').onclick = closeChat;
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !$('#chat').hidden) closeChat(); });
 function advise(c, ctx) {
   var out = [], daysAll = c.first && c.last ? Math.round((new Date(c.last) - new Date(c.first)) / 864e5) + 1 : 0;
   var ctr = c.imp ? c.clk / c.imp : 0, cpl = c.leads ? c.cost / c.leads : 0, add = function (lv, t, steps) { out.push({ lv: lv, t: t, steps: steps }); };
