@@ -843,11 +843,19 @@ var NAME_HON = { anh: 'anh', 'chị': 'chị', chi: 'chị', 'cô': 'cô', co: '
 function cleanName(raw) {
   var n = String(raw || '').replace(/[(（\[].*?[)）\]]/g, ' ').replace(/\s[-–|]\s/g, ' ').replace(/\s+/g, ' ').trim(), proj = {};
   projNames().forEach(function (p) { String(p).toLowerCase().split(/\s+/).forEach(function (w) { if (w.length >= 4) proj[w] = 1; }); });
-  var parts = n.split(' ').filter(function (w) { return w && !proj[w.toLowerCase()] && !/^(\d+\s*(br|pn)|br|pn|khách|kh|cvkd|mrs|mr|ms)$/i.test(w); }), hon = '';
-  if (parts.length > 1 && /^[ac]$/i.test(parts[0])) { hon = parts[0].toLowerCase() === 'a' ? 'anh' : 'chị'; parts.shift(); }
-  else if (parts.length > 1 && NAME_HON[parts[0].toLowerCase()]) { hon = NAME_HON[parts[0].toLowerCase()]; parts.shift(); }
+  var all = n.split(' ').filter(Boolean), hon = '', parts = all;
+  // Tên dự án đứng trước (Spana, Bán đảo, Peninsula…): nếu có A/C hoặc anh/chị/cô/chú/bác/ông/bà ở 4 từ đầu thì tên người bắt đầu từ đó
+  var SURN = ' nguyễn trần lê phạm hoàng huỳnh phan vũ võ đặng bùi đỗ hồ ngô dương lý ', lead0 = all.length ? all[0].toLowerCase() : '';
+  for (var i = 0; i < Math.min(all.length - 1, 4) && SURN.indexOf(' ' + lead0 + ' ') < 0; i++) {
+    var w = all[i], lw = w.toLowerCase();
+    if (/^[ac]$/i.test(w) || lw === 'anh' || (i === 0 && NAME_HON[lw]) || (i > 0 && NAME_HON[lw] && lw !== 'chi' && lw !== 'ba' && lw !== 'co' && lw !== 'chu' && lw !== 'bac' && lw !== 'ong')) {
+      hon = /^[ac]$/i.test(w) ? (lw === 'a' ? 'anh' : 'chị') : NAME_HON[lw]; parts = all.slice(i + 1); break;
+    }
+  }
+  if (!hon) parts = all.filter(function (w) { return !proj[w.toLowerCase()]; });
+  parts = parts.filter(function (w) { return !/^(\d+\s*(br|pn)|br|pn|khách|kh|cvkd|mrs|mr|ms)$/i.test(w); });
   var pad = ' ' + n.toLowerCase() + ' ';
-  if (pad.indexOf(' mrs ') >= 0 || pad.indexOf(' ms ') >= 0) hon = 'chị'; else if (pad.indexOf(' mr ') >= 0) hon = 'anh';
+  if (pad.indexOf(' mrs ') >= 0 || pad.indexOf(' ms ') >= 0) hon = 'chị'; else if (pad.indexOf(' mr ') >= 0 && !hon) hon = 'anh';
   return { hon: hon, name: parts.join(' ') };
 }
 function snName(l) { var c = cleanName(l.name); return c.name ? (c.hon || 'anh/chị') + ' ' + c.name : (c.hon || 'anh/chị'); }
