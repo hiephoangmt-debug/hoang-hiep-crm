@@ -114,7 +114,7 @@ assert.equal(ctx.crmKey_(), K);
 assert.throws(() => ctx.crmLoad('sai-khoa'), /Không có quyền/); assert.throws(() => ctx.crmLog('', '0988111222', 'call'), /Không có quyền/);
 assert.equal(ctx.doGet({ parameter: { k: 'sai' } }).file, undefined); assert.ok(ctx.doGet({ parameter: { k: K } }).content.includes('CRM Hoàng Hiệp') && ctx.doGet({ parameter: { k: K } }).content.includes('</html>'));
 const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
-assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-37'); assert.equal(JSON.stringify(dbg).includes(K), false);
+assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-38'); assert.equal(JSON.stringify(dbg).includes(K), false);
 const L = ctx.crmLoad(K);
 assert.equal(L.leads.length, 2);
 const l0 = L.leads.find((x) => x.phone === '0988111222');
@@ -357,4 +357,20 @@ assert.throws(() => ctx.crmAsk(ctx.crmKey_(), '  '), /Chưa nhập câu hỏi/);
   assert.equal(ctx.crmLoad(K3).leads.find((l) => l.phone === '0935777013').docUrl, '');
 }
 ctx.capQuyenDocSheet();
+// danh mục dự án và toà
+{
+  const K4 = ctx.crmKey_();
+  assert.equal(ctx.crmLoad(K4).projects.length, 0);
+  assert.throws(() => ctx.crmProjSave(K4, { name: ' ' }), /tên dự án/);
+  const pr = ctx.crmProjSave(K4, { name: 'Sun FourS Tower', aliases: ['FourS Tower', 'Sun Fours', 'FourS Tower'], toas: 'F1; F2;F3\nF5' });
+  let ps = ctx.crmLoad(K4).projects; assert.equal(ps.length, 1); assert.equal(JSON.stringify(ps[0].aliases), JSON.stringify(['FourS Tower', 'Sun Fours'])); assert.equal(JSON.stringify(ps[0].toas), JSON.stringify(['F1', 'F2', 'F3', 'F5']));
+  ctx.crmProjSave(K4, { row: pr.row, name: 'Sun FourS Tower', aliases: 'FourS Tower', toas: ['F1', 'F2'] });
+  assert.equal(JSON.stringify(ctx.crmLoad(K4).projects[0].toas), JSON.stringify(['F1', 'F2']));
+  assert.throws(() => ctx.crmProjSave(K4, { row: 99, name: 'x' }), /Không tìm thấy/);
+  ctx.crmUpdateLead(K4, '0935777013', { toa: 'F2; F3' });
+  assert.equal(ctx.crmLoad(K4).leads.find((l) => l.phone === '0935777013').toa, 'F2; F3');
+  ctx.crmProjDelete(K4, pr.row); assert.equal(ctx.crmLoad(K4).projects.length, 0);
+  assert.throws(() => ctx.crmProjDelete(K4, 1), /Không tìm thấy/);
+  assert.throws(() => ctx.crmProjSave('sai', { name: 'a' }), /Không có quyền/);
+}
 console.log('OK – Code.gs đạt mọi test');

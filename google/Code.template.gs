@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-37', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-38', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -53,8 +53,8 @@ function iso_(d) { return d && typeof d.getTime === 'function' ? new Date(d.getT
 function phoneStr_(v) { var p = String(v == null ? '' : v); return p.length === 9 ? '0' + p : p; }
 
 // ---- Cột mở rộng của tab Khách hàng (W..AB): hẹn tiếp theo, ngân sách, mục đích, loại căn, tiềm năng, vay ----
-var LEAD_COLS = 45;
-var LEAD_HEAD2 = ['SĐT phụ', 'Zalo', 'Tỉnh/thành phố', 'Ngày sinh', 'Nghề nghiệp', 'Ngân sách tối thiểu', 'Ngân sách tối đa', 'Vốn tự có', 'Khoản vay dự kiến', 'Thời điểm dự kiến mua', 'Lý do chưa quyết định', 'Loại nguồn', 'Trang phát sinh lead', 'Dự án quan tâm', 'Quận/huyện, phường/xã', 'Địa chỉ chi tiết', 'Link tài liệu (Drive)'];
+var LEAD_COLS = 46;
+var LEAD_HEAD2 = ['SĐT phụ', 'Zalo', 'Tỉnh/thành phố', 'Ngày sinh', 'Nghề nghiệp', 'Ngân sách tối thiểu', 'Ngân sách tối đa', 'Vốn tự có', 'Khoản vay dự kiến', 'Thời điểm dự kiến mua', 'Lý do chưa quyết định', 'Loại nguồn', 'Trang phát sinh lead', 'Dự án quan tâm', 'Quận/huyện, phường/xã', 'Địa chỉ chi tiết', 'Link tài liệu (Drive)', 'Toà quan tâm'];
 function ensureLeadCols_(sh) {
   try {
     var mc = sh.getMaxColumns();
@@ -64,6 +64,7 @@ function ensureLeadCols_(sh) {
       sh.getRange(2, 23, Math.max(sh.getMaxRows() - 1, 1), 1).setNumberFormat('@');
     }
     if (sh.getRange(1, 29).getValue() && !sh.getRange(1, 45).getValue()) sh.getRange(1, 45).setValue('Link tài liệu (Drive)');
+    if (sh.getRange(1, 29).getValue() && !sh.getRange(1, 46).getValue()) sh.getRange(1, 46).setValue('Toà quan tâm');
     if (sh.getRange(1, 29).getValue() && !sh.getRange(1, 42).getValue()) sh.getRange(1, 42, 1, 3).setValues([['Dự án quan tâm', 'Quận/huyện, phường/xã', 'Địa chỉ chi tiết']]);
     if (!sh.getRange(1, 29).getValue()) {
       sh.getRange(1, 29, 1, LEAD_HEAD2.length).setValues([LEAD_HEAD2]);
@@ -138,7 +139,7 @@ function crmLoad(k) {
       contactedAt: iso_(r[16]), status: String(r[18] || 'Mới'), assignee: String(r[19] || ''), value: Number(r[20]) || 0, note: String(r[21] || ''),
       next: ymd_(r[22]), budget: String(r[23] || ''), purpose: String(r[24] || ''), product: String(r[25] || ''), heat: String(r[26] || ''), loan: String(r[27] || ''),
       phone2: String(r[28] || ''), zalo: String(r[29] || ''), province: String(r[30] || ''), dob: ymd_(r[31]), job: String(r[32] || ''), bmin: String(r[33] || ''), bmax: String(r[34] || ''),
-      equity: String(r[35] || ''), loanAmt: String(r[36] || ''), buyTime: String(r[37] || ''), undecided: String(r[38] || ''), srcType: String(r[39] || ''), leadUrl: String(r[40] || ''), project: String(r[41] || ''), district: String(r[42] || ''), address: String(r[43] || ''), docUrl: String(r[44] || '') };
+      equity: String(r[35] || ''), loanAmt: String(r[36] || ''), buyTime: String(r[37] || ''), undecided: String(r[38] || ''), srcType: String(r[39] || ''), leadUrl: String(r[40] || ''), project: String(r[41] || ''), district: String(r[42] || ''), address: String(r[43] || ''), docUrl: String(r[44] || ''), toa: String(r[45] || '') };
   }).reverse();
   var sm = summaries_();
   out.leads.forEach(function (l) {
@@ -154,6 +155,7 @@ function crmLoad(k) {
       source: String(r[5] || ''), campaign: String(r[6] || ''), leftPhone: r[7] === 'Có', checked: r[8] === true, note: String(r[9] || ''), alert: String(r[10] || ''), handledAt: iso_(r[11]) };
   }).filter(function (c) { return c.at; }).reverse();
   out.sales = salesList_();
+  try { out.projects = projectsLoad_(); } catch (e) { out.projects = []; }
   var ov = ss.getSheetByName('Tổng quan');
   out.kpis = ov.getRange(7, 1, 9, 2).getDisplayValues().filter(function (r) { return r[0]; });
   out.siteStats = ov.getRange(17, 1, 16, 8).getDisplayValues().filter(function (r, i) { return i === 0 || r[0]; });
@@ -435,6 +437,36 @@ function crmSilence(k, phones) {
     return { n: done };
   });
 }
+// ---- Danh mục dự án: mỗi dự án có tên gọi khác (gộp tên trùng) và các toà (F1, F2, F3, F5…)
+var PROJ_HEAD = ['Tên dự án', 'Tên gọi khác (ngăn cách bằng ;)', 'Các toà (ngăn cách bằng ;)', 'Ghi chú'];
+function splitList_(v, max) {
+  var a = Array.isArray(v) ? v : String(v || '').split(/[;\n]/), out = [];
+  a.forEach(function (x) { x = String(x || '').trim().slice(0, 60); if (x && out.indexOf(x) < 0 && out.length < (max || 30)) out.push(x); });
+  return out;
+}
+function projectsLoad_() {
+  var sh = tab_('Dự án', PROJ_HEAD), n = lastDataRow_(sh, 1), rows = n > 1 ? sh.getRange(2, 1, n - 1, 4).getValues() : [], out = [];
+  rows.forEach(function (r, i) { if (!r[0]) return; out.push({ row: i + 2, name: String(r[0]).trim(), aliases: splitList_(r[1]), toas: splitList_(r[2]), note: String(r[3] || '') }); });
+  return out;
+}
+function crmProjSave(k, f) {
+  requireUi_(k); f = f || {};
+  var name = str_(f.name, 120).trim(); if (!name) throw new Error('Hãy nhập tên dự án');
+  return withLock_(function () {
+    var sh = tab_('Dự án', PROJ_HEAD), row = Number(f.row) || 0, n = lastDataRow_(sh, 1);
+    var vals = [name, splitList_(f.aliases).map(function (x) { return str_(x, 120); }).join('; '), splitList_(f.toas).map(function (x) { return str_(x, 60); }).join('; '), str_(f.note, 300)];
+    if (row) { if (row < 2 || row > n) throw new Error('Không tìm thấy dòng cần sửa'); sh.getRange(row, 1, 1, 4).setValues([vals]); return { ok: true, row: row }; }
+    sh.appendRow(vals); return { ok: true, row: n + 1 };
+  });
+}
+function crmProjDelete(k, row) {
+  requireUi_(k); row = Number(row) || 0;
+  return withLock_(function () {
+    var sh = tab_('Dự án', PROJ_HEAD), n = lastDataRow_(sh, 1);
+    if (row < 2 || row > n) throw new Error('Không tìm thấy dòng cần xoá');
+    sh.deleteRow(row); return { ok: true };
+  });
+}
 // Chụp danh sách liên hệ, bảng khách hoặc ảnh danh bạ: AI đọc tên và số điện thoại nhìn thấy trong ảnh (không đoán số).
 function crmScanContacts(k, text, img, mime) {
   requireUi_(k);
@@ -594,7 +626,7 @@ function applyFields_(sh, r, f) {
   if (f.product !== undefined) set(26, str_(f.product, 120));
   if (f.heat !== undefined) set(27, ['', 'Nóng', 'Ấm', 'Lạnh'].indexOf(f.heat) >= 0 ? f.heat : '');
   if (f.loan !== undefined) set(28, ['', 'Có', 'Không', 'Chưa rõ'].indexOf(f.loan) >= 0 ? f.loan : '');
-  var txt = { phone2: [29, 20], zalo: [30, 200], province: [31, 60], dob: [32, 10], job: [33, 80], equity: [36, 60], loanAmt: [37, 60], buyTime: [38, 80], undecided: [39, 500], srcType: [40, 40], project: [42, 120], district: [43, 100], address: [44, 200] };
+  var txt = { phone2: [29, 20], zalo: [30, 200], province: [31, 60], dob: [32, 10], job: [33, 80], equity: [36, 60], loanAmt: [37, 60], buyTime: [38, 80], undecided: [39, 500], srcType: [40, 40], project: [42, 120], district: [43, 100], address: [44, 200], toa: [46, 80] };
   for (var k in txt) if (f[k] !== undefined) set(txt[k][0], k === 'dob' ? (ymd_(f[k]) || '') : str_(f[k], txt[k][1]));
   if (f.docUrl !== undefined) set(45, /^https?:\/\//i.test(String(f.docUrl).trim()) ? String(f.docUrl).trim().slice(0, 500) : '');
 }
@@ -678,7 +710,7 @@ function createLead_(f) {
       withLock_(function () {
         var sh = exist.sh, r = exist.row, blank = {};
         ensureLeadCols_(sh);
-        var cols = { name: 3, email: 5, project: 42, district: 43, address: 44, province: 31, job: 33, phone2: 29, zalo: 30, dob: 32, bmin: 34, bmax: 35, equity: 36, loanAmt: 37, buyTime: 38, product: 26, purpose: 25, loan: 28 };
+        var cols = { toa: 46, name: 3, email: 5, project: 42, district: 43, address: 44, province: 31, job: 33, phone2: 29, zalo: 30, dob: 32, bmin: 34, bmax: 35, equity: 36, loanAmt: 37, buyTime: 38, product: 26, purpose: 25, loan: 28 };
         for (var key in cols) if (f[key] && !sh.getRange(r, cols[key]).getValue()) blank[key] = f[key];
         applyFields_(sh, r, blank);
       });

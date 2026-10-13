@@ -76,7 +76,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold2);border-co
 .cmch{display:flex;gap:6px;align-items:flex-end;height:130px;margin:10px 0 6px}.cmc{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}.cmb{height:110px;width:100%;display:flex;align-items:flex-end;justify-content:center;gap:2px}.cmb i{display:block;width:42%;max-width:20px;border-radius:3px 3px 0 0;min-height:1px}.cmc span{font-size:11px;color:var(--mut)}.lgd{display:inline-block;width:10px;height:10px;border-radius:3px;margin:0 3px 0 8px;vertical-align:-1px}@media(min-width:701px){.grid.kc.kcp{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}}
 .xl{border-collapse:collapse;width:100%;font-size:13.5px}.xl th,.xl td{border:1px solid #CFD8E6;padding:7px 10px;vertical-align:middle}.xl th{background:#E8EEF8;color:var(--navy9);font-weight:700;text-align:left;white-space:nowrap}.xl tbody tr:nth-child(even) td,.xl tr:nth-child(even) td{background:#F7F9FD}.xl tr.tot td{background:#FFF1DC;font-weight:700;border-top:2px solid var(--gold)}.xl tr.sel td{background:#FFF3E3}.xl td.nw{white-space:nowrap}
 tr.sel td{background:#FFF3E3}@media(min-width:701px){.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:10px;margin-bottom:12px}.cgrid>.card{margin:0}}
-.lvbar .chip{padding:6px 12px;font-weight:600}.lvbar{align-items:center}.prj{padding:8px 12px;margin-bottom:8px}.prj>summary{cursor:pointer;list-style:none;padding:2px 0}.prj>summary::-webkit-details-marker{display:none}.prj table{margin-top:6px}.lvt{table-layout:fixed;width:100%}.lvt th:nth-child(1){width:54px}.lvt th:nth-child(2){width:13%}.lvt th:nth-child(3){width:215px}.lvt th:nth-child(4){width:9%}.lvt th:nth-child(5){width:15%}.lvt th:nth-child(6){width:10%}.lvt th:nth-child(7){width:12%}.lvt th:nth-child(8){width:8%}.lvt th:nth-child(9){width:8%}.lvt th:nth-child(10){width:64px}@media(max-width:1200px){.lvt{table-layout:auto;min-width:1000px}.prj{overflow-x:auto}}.lvt td{padding:5px 9px}.lvt tr.rowtodo td{background:#FDECEC}.snrow.done{opacity:.7}.snrow{margin-bottom:8px}
+.lvbar .chip{padding:6px 12px;font-weight:600}.lvbar{align-items:center}.prj{padding:8px 12px;margin-bottom:8px}.prj>summary{cursor:pointer;list-style:none;padding:2px 0}.prj>summary::-webkit-details-marker{display:none}.prj table{margin-top:6px}.lvt{table-layout:fixed;width:100%}.lvt th:nth-child(1){width:54px}.lvt th:nth-child(2){width:12%}.lvt th:nth-child(3){width:215px}.lvt th:nth-child(4){width:8%}.lvt th:nth-child(5){width:6%}.lvt th:nth-child(6){width:14%}.lvt th:nth-child(7){width:9%}.lvt th:nth-child(8){width:11%}.lvt th:nth-child(9){width:7%}.lvt th:nth-child(10){width:8%}.lvt th:nth-child(11){width:64px}@media(max-width:1200px){.lvt{table-layout:auto;min-width:1000px}.prj{overflow-x:auto}}.lvt td{padding:5px 9px}.lvt tr.rowtodo td{background:#FDECEC}.snrow.done{opacity:.7}.snrow{margin-bottom:8px}
 @media(min-width:1001px) and (max-width:1360px){nav button{padding:9px 8px 12px;font-size:13.5px}}
 @media(min-width:701px){.grid.kc{grid-template-columns:repeat(7,1fr);gap:8px}.grid.kc .kpi{padding:9px 11px}.grid.kc .kpi b{font-size:21px}.grid.kc .kpi b.long{font-size:17px}.grid.kc .kpi span{font-size:11.5px;line-height:1.3}
 .fqw{flex:0 1 340px;min-width:200px}
@@ -360,7 +360,27 @@ function zl(phone, l) {
 function isBds(name) { var g = gOf(name); return !g || g === 'BĐS'; }
 function mins(a, b) { return Math.round((new Date(b).getTime() - new Date(a).getTime()) / 60000); }
 function dur(m) { return m < 1 ? 'dưới 1 phút' : m < 60 ? m + ' phút' : m < 1440 ? Math.round(m / 60 * 10) / 10 + ' giờ' : Math.round(m / 1440 * 10) / 10 + ' ngày'; }
-function projNames() { var m = {}; D.leads.forEach(function (l) { if (l.project) m[l.project] = 1; if (l.viewProject) m[l.viewProject] = 1; }); D.sites.forEach(function (s) { m[s.name] = 1; }); return Object.keys(m).sort(); }
+// Dự án: gộp tên gọi khác về một tên, mỗi dự án có nhiều toà (F1, F2, F3, F5…)
+function canonProj(name) {
+  var n = String(name || '').trim().toLowerCase(); if (!n) return '';
+  var ps = D.projects || [];
+  for (var i = 0; i < ps.length; i++) { if (ps[i].name.toLowerCase() === n || ps[i].aliases.some(function (a) { return a.toLowerCase() === n; })) return ps[i].name; }
+  return String(name).trim();
+}
+function projDef(name) { var c = canonProj(name).toLowerCase(); return (D.projects || []).filter(function (p) { return p.name.toLowerCase() === c; })[0] || null; }
+function projOfLead(l) { return canonProj(l.project) || canonProj(l.site && l.site !== 'Nhập thủ công' ? l.site : '') || 'Chưa rõ dự án'; }
+function toaOf(l) {
+  if (l.toa) return unitCodes(l.toa).length ? l.toa.split(/[;,]/).map(function (x) { return x.trim(); }).filter(Boolean) : [];
+  var pd = projDef(l.project || l.site); if (!pd) return [];
+  var text = (' ' + [l.campaign, l.leadUrl, l.note, l.product].join(' ') + ' ').toLowerCase();
+  return pd.toas.filter(function (t) { return new RegExp('[^a-z0-9]' + t.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '[^a-z0-9]').test(text); });
+}
+function projNames() {
+  var m = {}; (D.projects || []).forEach(function (p) { m[p.name] = 1; });
+  D.leads.forEach(function (l) { if (l.project) m[canonProj(l.project)] = 1; if (l.viewProject) m[canonProj(l.viewProject)] = 1; });
+  D.sites.forEach(function (x) { m[canonProj(x.name)] = 1; });
+  return Object.keys(m).sort();
+}
 function dayOf(iso) { if (!iso) return ''; var d = new Date(iso); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
 function countBy(list, fn) { var m = {}; list.forEach(function (x) { var k = fn(x) || 'Chưa rõ'; m[k] = (m[k] || 0) + 1; }); return Object.keys(m).map(function (k) { return { label: k, value: m[k] }; }).sort(function (a, b) { return b.value - a.value; }); }
 function dayBars(list, fn, from, to, color, label) {
@@ -429,11 +449,11 @@ function leadsFiltered() {
   var list = all.filter(function (l) {
     if (F.status === 'todo' && !todo(l)) return false;
     if (STATUS.indexOf(F.status) >= 0 && l.status !== F.status) return false;
-    if (F.site && l.site !== F.site) return false;
+    if (F.site && canonProj(l.site) !== canonProj(F.site)) return false;
     if (F.src && (l.source || l.srcType) !== F.src) return false;
     if (F.prov && l.province !== F.prov) return false;
     if (F.area && ((l.province || '') + ' ' + (l.district || '') + ' ' + (l.address || '')).toLowerCase().indexOf(F.area.toLowerCase()) < 0) return false;
-    if (F.proj && ((l.project || '') + ' ' + l.site + ' ' + (l.viewProject || '') + ' ' + (l.product || '')).toLowerCase().indexOf(F.proj.toLowerCase()) < 0) return false;
+    if (F.proj && ((l.project || '') + ' ' + projOfLead(l) + ' ' + l.site + ' ' + (l.viewProject || '') + ' ' + (l.product || '') + ' ' + toaOf(l).join(' ')).toLowerCase().indexOf(F.proj.toLowerCase()) < 0) return false;
     if (F.df || F.dt) { var dd = dayOf(l.at); if (F.df && dd < F.df) return false; if (F.dt && dd > F.dt) return false; }
     if (F.as && (F.as === '__none' ? l.assignee : l.assignee !== F.as)) return false;
     if (F.when === 'late' && !(l.next && l.next < t)) return false;
@@ -459,7 +479,7 @@ var LV = (function () { try { return localStorage.getItem('crm_lv') || 'new'; } 
 var HOT_ST = ['Hẹn xem', 'Đã xem dự án', 'Đang thương lượng', 'Booking'];
 function isHot(l) { if (l.status === 'Chốt' || l.status === 'Mất' || l.status === 'Tạm dừng') return false; var h = heat(l); return !!(h && h[0] === 'Nóng') || HOT_ST.indexOf(l.status) >= 0; }
 function lvActions() {
-  return '<span class="sp"></span><button class="btn p sm" id="addlead">+ Thêm khách</button><button class="btn sm" id="implead">Nhập danh sách</button><button class="btn sm" id="sheetimp">Nhập từ link Sheet</button>' + (aiOn() ? '<button class="btn sm" id="zbulk">Nhập chat Zalo</button>' : '');
+  return '<span class="sp"></span><button class="btn p sm" id="addlead">+ Thêm khách</button><button class="btn sm" id="implead">Nhập danh sách</button><button class="btn sm" id="sheetimp">Nhập từ link Sheet</button>' + (aiOn() ? '<button class="btn sm" id="zbulk">Nhập chat Zalo</button>' : '') + '<button class="btn sm" id="projmgr">Dự án và toà</button>';
 }
 function lvBar(nNew, nHot, nAll) {
   return '<div class="row chips lvbar">' + [['new', 'Khách mới tháng này', nNew], ['hot', 'Đang hot theo dự án', nHot], ['all', 'Data khách', nAll]].map(function (x) { return '<button class="chip' + (LV === x[0] ? ' on' : '') + '" data-lv="' + x[0] + '">' + x[1] + ' <span class="n">' + x[2] + '</span></button>'; }).join('') + lvActions() + '</div>';
@@ -473,24 +493,26 @@ function lvCounts() {
 function bindLv() {
   document.querySelectorAll('[data-lv]').forEach(function (b) { b.onclick = function () { LV = b.dataset.lv; try { localStorage.setItem('crm_lv', LV); } catch (e) {} leads(); window.scrollTo(0, 0); }; });
   if ($('#sheetimp')) $('#sheetimp').onclick = sheetImport;
+  if ($('#projmgr')) $('#projmgr').onclick = projMgr;
 }
 function leadsGroups() {
   var c = lvCounts(), all = c.all, hot = c.hot;
   var head = lvBar(c.nNew, hot.length, all.length);
   var body = '';
-  var projOf = function (l) { return l.site && l.site !== 'Nhập thủ công' ? l.site : (l.project || 'Chưa rõ dự án'); };
+  var projOf = projOfLead;
   var rowsOf = function (list) {
-    return '<table class="xl lvt"><tr><th>Ngày</th><th>Khách</th><th>Số điện thoại</th><th>Nguồn</th><th>Nhu cầu, ngân sách</th><th>Tình trạng</th><th>Chăm gần nhất</th><th>Hẹn</th><th>Sale</th><th></th></tr>' + list.map(function (l) {
+    return '<table class="xl lvt"><tr><th>Ngày</th><th>Khách</th><th>Số điện thoại</th><th>Nguồn</th><th>Toà</th><th>Nhu cầu, ngân sách</th><th>Tình trạng</th><th>Chăm gần nhất</th><th>Hẹn</th><th>Sale</th><th></th></tr>' + list.map(function (l) {
       var h = heat(l), p = srcParts(l);
-      return '<tr class="' + (todo(l) ? 'rowtodo' : '') + '" data-open="' + esc(l.phone) + '" style="cursor:pointer"><td class="nw">' + dmy(dayOf(l.at)).slice(0, 5) + '</td><td><b>' + esc(cleanName(l.name).name || l.name || '(chưa có tên)') + '</b>' + (h && h[0] === 'Nóng' ? ' <span class="tag red">Nóng</span>' : '') + (l.province ? '<div class="small mut">' + esc(l.province) + '</div>' : '') + '</td><td class="nw">' + esc(l.phone) + ' <button class="btn z xs" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button> <button class="btn g xs" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button></td><td class="small">' + esc(p.plat || '-') + '</td><td class="small">' + (esc([l.purpose, l.product, l.budget && 'Ngân sách ' + l.budget].filter(Boolean).join(' · ')) || '<span class="mut">-</span>') + '</td><td class="small">' + (todo(l) ? '<span class="tag red">Chưa liên hệ</span>' : esc(l.status)) + '</td><td class="small">' + (l.careAt ? ago(l.careAt) + (l.careResult ? '<div class="mut">' + esc(l.careResult) + '</div>' : '') : '<span class="mut">Chưa chăm</span>') + '</td><td class="small nw">' + (l.next ? (l.next < ymdNow(0) ? '<span class="tag red">' + dmy(l.next).slice(0, 5) + ' quá hạn</span>' : dmy(l.next).slice(0, 5)) : '<span class="mut">-</span>') + '</td><td class="small">' + (esc(l.assignee) || '<span class="mut">-</span>') + '</td><td class="nw"><button class="btn xs" data-open="' + esc(l.phone) + '">Hồ sơ</button></td></tr>';
+      return '<tr class="' + (todo(l) ? 'rowtodo' : '') + '" data-open="' + esc(l.phone) + '" style="cursor:pointer"><td class="nw">' + dmy(dayOf(l.at)).slice(0, 5) + '</td><td><b>' + esc(cleanName(l.name).name || l.name || '(chưa có tên)') + '</b>' + (h && h[0] === 'Nóng' ? ' <span class="tag red">Nóng</span>' : '') + (l.province ? '<div class="small mut">' + esc(l.province) + '</div>' : '') + '</td><td class="nw">' + esc(l.phone) + ' <button class="btn z xs" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button> <button class="btn g xs" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button></td><td class="small">' + esc(p.plat || '-') + '</td><td class="small nw">' + (toaOf(l).map(esc).join(', ') || '<span class="mut">-</span>') + '</td><td class="small">' + (esc([l.purpose, l.product, l.budget && 'Ngân sách ' + l.budget].filter(Boolean).join(' · ')) || '<span class="mut">-</span>') + '</td><td class="small">' + (todo(l) ? '<span class="tag red">Chưa liên hệ</span>' : esc(l.status)) + '</td><td class="small">' + (l.careAt ? ago(l.careAt) + (l.careResult ? '<div class="mut">' + esc(l.careResult) + '</div>' : '') : '<span class="mut">Chưa chăm</span>') + '</td><td class="small nw">' + (l.next ? (l.next < ymdNow(0) ? '<span class="tag red">' + dmy(l.next).slice(0, 5) + ' quá hạn</span>' : dmy(l.next).slice(0, 5)) : '<span class="mut">-</span>') + '</td><td class="small">' + (esc(l.assignee) || '<span class="mut">-</span>') + '</td><td class="nw"><button class="btn xs" data-open="' + esc(l.phone) + '">Hồ sơ</button></td></tr>';
     }).join('') + '</table>';
   };
+  var toaChips = function (a) { var c = {}; a.forEach(function (l) { toaOf(l).forEach(function (t) { c[t] = (c[t] || 0) + 1; }); }); return Object.keys(c).sort().map(function (t) { return ' <span class="tag">' + esc(t) + ': ' + c[t] + '</span>'; }).join(''); };
   var groups = function (list, openAll) {
     var g = {}; list.forEach(function (l) { var k = projOf(l); (g[k] = g[k] || []).push(l); });
     var keys = Object.keys(g).sort(function (a, b) { var ha = g[a].filter(isHot).length, hb = g[b].filter(isHot).length; return hb - ha || g[b].filter(todo).length - g[a].filter(todo).length || g[b].length - g[a].length; });
     return keys.map(function (k, idx) {
       var a = g[k].sort(function (x, y) { return new Date(y.at) - new Date(x.at); }), hc = a.filter(isHot).length, uc = a.filter(todo).length;
-      return '<details class="card prj"' + (openAll || idx < 3 ? ' open' : '') + '><summary><b>' + esc(k) + '</b> <span class="tag blu">' + a.length + ' khách</span>' + (hc ? ' <span class="tag red">' + hc + ' hot</span>' : '') + (uc ? ' <span class="tag amb">' + uc + ' chưa liên hệ</span>' : '') + ' <button class="btn xs" data-lvsend="' + esc(k) + '" style="float:right">Gửi tin nhóm này</button></summary>' + rowsOf(a) + '</details>';
+      return '<details class="card prj"' + (openAll || idx < 3 ? ' open' : '') + '><summary><b>' + esc(k) + '</b> <span class="tag blu">' + a.length + ' khách</span>' + (hc ? ' <span class="tag red">' + hc + ' hot</span>' : '') + (uc ? ' <span class="tag amb">' + uc + ' chưa liên hệ</span>' : '') + toaChips(a) + ' <button class="btn xs" data-lvsend="' + esc(k) + '" style="float:right">Gửi tin nhóm này</button></summary>' + rowsOf(a) + '</details>';
     }).join('');
   };
   if (LV === 'new') {
@@ -732,7 +754,7 @@ function openLead(phone, page, keep) {
     lab('Tỉnh/thành phố', inp('pv', l.province, 'Hà Nội, Hải Phòng, Đà Nẵng…')) + lab('Quận/huyện, phường/xã', inp('dt', l.district)) + lab('Địa chỉ chi tiết (số nhà, đường)', inp('ad2', l.address)) + lab('Ngày sinh', inp('db', l.dob, '', 'date')) + lab('Nghề nghiệp', inp('jb', l.job)) + '</div>',
     source: '<h3>Nguồn khách <span class="tag">Tự ghi nhận, không sửa</span></h3><div class="meta small"><span><span class="mut">Nguồn đầu tiên:</span> ' + esc(srcLine) + '</span><span><span class="mut">Phát sinh:</span> ' + esc(fmt(l.at)) + '</span><span><span class="mut">Website:</span> ' + esc(l.site) + '</span><span><span class="mut">Trang lead:</span> ' + esc(l.leadUrl || 'Chưa cập nhật') + '</span></div>',
     needs: '<h3>Nhu cầu và tài chính <span class="tag">Khách cung cấp</span></h3><div class="fgrid">' +
-    lab('Dự án quan tâm', '<input id="pj" list="vpl" value="' + esc(l.project) + '" placeholder="Ví dụ: Sun FourS Tower">') + lab('Mục đích mua', sel('pp', ['Ở thực', 'Đầu tư', 'Cho thuê', 'Kinh doanh'], l.purpose, 'Chưa rõ')) + lab('Loại căn', inp('pd', l.product, 'Ví dụ: 2PN, 80m2')) +
+    lab('Dự án quan tâm', '<input id="pj" list="vpl" value="' + esc(l.project) + '" placeholder="Ví dụ: Sun FourS Tower">') + lab('Toà quan tâm', '<input id="toa" list="toal" value="' + esc(l.toa || '') + '" placeholder="' + esc(toaOf(l).join('; ') || 'F1; F2…') + '"><datalist id="toal">' + ((projDef(l.project || l.site) || { toas: [] }).toas.map(function (t) { return '<option value="' + esc(t) + '">'; }).join('')) + '</datalist>') + lab('Mục đích mua', sel('pp', ['Ở thực', 'Đầu tư', 'Cho thuê', 'Kinh doanh'], l.purpose, 'Chưa rõ')) + lab('Loại căn', inp('pd', l.product, 'Ví dụ: 2PN, 80m2')) +
     lab('Ngân sách tối thiểu', inp('b1', l.bmin, 'Ví dụ: 2 tỷ')) + lab('Ngân sách tối đa', inp('b2', l.bmax, 'Ví dụ: 3 tỷ')) + lab('Vốn tự có', inp('eq', l.equity, 'Ví dụ: 1 tỷ')) +
     lab('Vay ngân hàng', sel('ln', ['Có', 'Không', 'Chưa rõ'], l.loan, 'Chưa hỏi')) + lab('Khoản vay dự kiến', inp('la', l.loanAmt)) + lab('Thời điểm dự kiến mua', inp('bt', l.buyTime, 'Ví dụ: Quý 1/2027')) + '</div>' +
     lab('Lý do chưa quyết định', '<textarea id="ud" rows="2">' + esc(l.undecided) + '</textarea>'),
@@ -774,7 +796,7 @@ function openLead(phone, page, keep) {
     var st = $('#st').value;
     if ((st === 'Mất' || st === 'Tạm dừng') && st !== l.status && !$('#sr').value.trim()) { toast('Hãy ghi lý do khi chuyển sang ' + st); $('#sr').focus(); return; }
     var f = { docUrl: $('#du').value, name: $('#nm').value, phone2: $('#p2').value, zalo: $('#zl').value, province: $('#pv').value, district: $('#dt').value, address: $('#ad2').value, dob: $('#db').value, job: $('#jb').value,
-      project: $('#pj').value, purpose: $('#pp').value, product: $('#pd').value, bmin: $('#b1').value, bmax: $('#b2').value, equity: $('#eq').value, loan: $('#ln').value, loanAmt: $('#la').value, buyTime: $('#bt').value, undecided: $('#ud').value,
+      project: $('#pj').value, toa: $('#toa').value, purpose: $('#pp').value, product: $('#pd').value, bmin: $('#b1').value, bmax: $('#b2').value, equity: $('#eq').value, loan: $('#ln').value, loanAmt: $('#la').value, buyTime: $('#bt').value, undecided: $('#ud').value,
       status: st, statusReason: $('#sr').value, assignee: $('#as').value, reason: $('#rs').value, next: $('#nx').value, heat: $('#ht').value, value: $('#vl').value, note: $('#nt').value };
     run('crmUpdateLead', phone, f).then(function () {
       ['name', 'phone2', 'zalo', 'province', 'district', 'address', 'dob', 'job', 'project', 'purpose', 'product', 'bmin', 'bmax', 'equity', 'loan', 'loanAmt', 'buyTime', 'undecided', 'status', 'assignee', 'next', 'heat', 'note'].forEach(function (k) { l[k] = f[k]; });
@@ -856,7 +878,7 @@ function openLead(phone, page, keep) {
 
 var SRC_OPTS = ['Facebook Ads', 'Google Ads', 'Website', 'Zalo', 'Điện thoại', 'Khách giới thiệu', 'Sự kiện', 'Nhập thủ công', 'Khác'];
 // ---- Gửi tin Zalo theo nhóm khách: dự án mới, chính sách mới, quỹ căn mới. Không tự gửi hàng loạt: mỗi khách bấm một lần, tránh bị Zalo khoá.
-var SN = { proj: '', prov: '', bmin: '', bmax: '', unk: false, heat: '', days: '', st: null, kind: 'Dự án mới', style: 'Thân mật', name: '', hl: '', link: '', img: '', tbl: '', body: '', edited: false, pick: {}, ev: '', evWhen: '', evWhere: '', loc: '', interest: '', top: 20 };
+var SN = { proj: '', prov: '', bmin: '', bmax: '', unk: false, heat: '', days: '', st: null, kind: 'Dự án mới', style: 'Thân mật', name: '', hl: '', link: '', img: '', tbl: '', body: '', edited: false, pick: {}, ev: '', evWhen: '', evWhere: '', loc: '', interest: '', top: 20, toa: '' };
 var SN_KINDS = {
   'Dự án mới': 'Chào {ten}, em {sale} đây ạ. Bên em vừa ra mắt dự án {du_an}.\n{noi_bat}\n{lien_ket}\nEm thấy {ten} từng quan tâm bất động sản nên xin phép gửi thông tin để {ten} tham khảo ạ.',
   'Chính sách mới': 'Chào {ten}, em {sale} đây ạ. Dự án {du_an} vừa có chính sách mới:\n{noi_bat}\n{lien_ket}\nEm xin phép gửi để {ten} cân nhắc, phù hợp với kế hoạch tài chính của mình ạ.',
@@ -915,7 +937,8 @@ function snScore(l) {
   var sc = 0, h = heat(l), b = budgetOf(l), lo = parseFloat(String(SN.bmin).replace(',', '.')) * 1e9, hi = parseFloat(String(SN.bmax).replace(',', '.')) * 1e9;
   if (h && h[0] === 'Nóng') sc += 3; else if (h && h[0] === 'Ấm') sc += 1;
   if (HOT_ST.indexOf(l.status) >= 0) sc += 2;
-  if (SN.proj && ((l.project || '') + ' ' + l.site + ' ' + (l.viewProject || '')).toLowerCase().indexOf(SN.proj.toLowerCase()) >= 0) sc += 2;
+  if (SN.proj && ((l.project || '') + ' ' + projOfLead(l) + ' ' + l.site + ' ' + (l.viewProject || '')).toLowerCase().indexOf(canonProj(SN.proj).toLowerCase()) >= 0) sc += 2;
+  if (SN.toa && toaOf(l).some(function (t) { return t.toLowerCase() === SN.toa.toLowerCase(); })) sc += 3;
   if (b && (lo > 0 || hi > 0) && b >= (lo || 0) && (!(hi > 0) || b <= hi)) sc += 2;
   if (l.careAt && (Date.now() - new Date(l.careAt).getTime()) / 864e5 <= 14) sc += 1;
   if (l.viewCount) sc += 1;
@@ -939,7 +962,7 @@ function snAudience() {
   var lo = parseFloat(String(SN.bmin).replace(',', '.')) * 1e9, hi = parseFloat(String(SN.bmax).replace(',', '.')) * 1e9;
   return D.leads.filter(function (l) {
     if (!isBds(l.site) || !l.phone || l.zalo === 'Không dùng Zalo' || st.indexOf(l.status) < 0) return false;
-    if (SN.proj && ((l.project || '') + ' ' + l.site + ' ' + (l.viewProject || '')).toLowerCase().indexOf(SN.proj.toLowerCase()) < 0) return false;
+    if (SN.proj && ((l.project || '') + ' ' + projOfLead(l) + ' ' + l.site + ' ' + (l.viewProject || '')).toLowerCase().indexOf(canonProj(SN.proj).toLowerCase()) < 0) return false;
     if (SN.prov && ((l.province || '') + ' ' + (l.district || '') + ' ' + (l.address || '')).toLowerCase().indexOf(SN.prov.toLowerCase()) < 0) return false;
     if (SN.heat) { var h = heat(l); if (!h || h[0] !== SN.heat) return false; }
     if (lo > 0 || hi > 0) { var b = budgetOf(l); if (!b) { if (!SN.unk) return false; } else if ((lo > 0 && b < lo) || (hi > 0 && b > hi)) return false; }
@@ -1027,7 +1050,7 @@ function send() {
     snLab('Dự án khách từng quan tâm', '<input id="sn1" list="snl" placeholder="Để trống là tất cả" value="' + esc(SN.proj) + '"><datalist id="snl">' + projNames().map(function (p) { return '<option value="' + esc(p) + '">'; }).join('') + '</datalist>') +
     snLab('Khu vực / tỉnh thành', '<input id="sn2" list="snp" value="' + esc(SN.prov) + '"><datalist id="snp">' + Object.keys(provs).map(function (p) { return '<option value="' + esc(p) + '">'; }).join('') + '</datalist>') +
     snLab('Ngân sách từ (tỷ)', '<input id="sn3" inputmode="decimal" placeholder="vd 2" value="' + esc(SN.bmin) + '">') + snLab('Ngân sách đến (tỷ)', '<input id="sn4" inputmode="decimal" placeholder="vd 4" value="' + esc(SN.bmax) + '">') +
-    snLab('Độ nóng', '<select id="sn5">' + opt(['Nóng', 'Ấm', 'Nguội'], SN.heat, 'Tất cả') + '</select>') + snLab('Chưa chăm sóc quá N ngày', '<input id="sn6" inputmode="numeric" placeholder="vd 7" value="' + esc(SN.days) + '">') + snLab('Ưu tiên khu vực (xếp lên đầu)', '<input id="sn8" placeholder="vd Hà Nội" value="' + esc(SN.loc) + '">') + snLab('Ưu tiên quan tâm', '<input id="sn9" placeholder="vd căn hộ" value="' + esc(SN.interest) + '">') + '</div>' +
+    snLab('Độ nóng', '<select id="sn5">' + opt(['Nóng', 'Ấm', 'Nguội'], SN.heat, 'Tất cả') + '</select>') + snLab('Chưa chăm sóc quá N ngày', '<input id="sn6" inputmode="numeric" placeholder="vd 7" value="' + esc(SN.days) + '">') + snLab('Ưu tiên khu vực (xếp lên đầu)', '<input id="sn8" placeholder="vd Hà Nội" value="' + esc(SN.loc) + '">') + snLab('Ưu tiên quan tâm', '<input id="sn9" placeholder="vd căn hộ" value="' + esc(SN.interest) + '">') + snLab('Ưu tiên toà', '<input id="sn10" placeholder="vd F2" value="' + esc(SN.toa) + '">') + '</div>' +
     '<div class="row chips" style="margin-top:8px">' + STATUS.map(function (x) { return '<button class="chip" data-sst="' + esc(x) + '">' + esc(x) + '</button>'; }).join('') + '</div>' +
     '<label class="small" style="display:block;margin-top:6px"><input type="checkbox" id="sn7"' + (SN.unk ? ' checked' : '') + '> Gồm cả khách chưa ghi ngân sách (khi có lọc ngân sách)</label><div class="small" id="sncnt" style="margin-top:6px"></div></div>' +
     '<div class="card"><b>2. Soạn tin</b><div class="row chips" style="margin:8px 0">' + Object.keys(SN_KINDS).map(function (x) { return '<button class="chip' + (SN.kind === x ? ' on' : '') + '" data-sk="' + esc(x) + '">' + esc(x) + '</button>'; }).join('') + '</div><div class="fgrid">' +
@@ -1039,7 +1062,7 @@ function send() {
     '<div class="small mut" style="margin-top:6px">Gợi ý: dán link ảnh hoặc bảng hàng (Google Drive, website dự án) để Zalo tự hiện hình xem trước. Lời kết "Khan hiếm" chỉ dùng khi quỹ căn thật sự còn ít.</div>' +
     '<div class="card" id="snprev" style="background:#F4F7FC;margin:8px 0 0"></div></div>' +
     '<div class="card"><b>3. Gửi từng khách</b><div class="small mut" style="margin-top:4px">Gửi khoảng 30 đến 50 khách mỗi ngày, cách nhau vài phút. Gửi dồn dập hàng trăm tin một lúc dễ bị Zalo hạn chế tài khoản.</div></div><div id="snlist"></div>';
-  [['sn1', 'proj'], ['sn2', 'prov'], ['sn3', 'bmin'], ['sn4', 'bmax'], ['sn5', 'heat'], ['sn6', 'days'], ['sn7', 'unk'], ['sn8', 'loc'], ['sn9', 'interest'], ['sm1', 'name'], ['sm2', 'hl'], ['sm3', 'link'], ['sm4', 'tbl'], ['sm5', 'img'], ['sev1', 'ev'], ['sev2', 'evWhen'], ['sev3', 'evWhere']].forEach(function (p) {
+  [['sn1', 'proj'], ['sn2', 'prov'], ['sn3', 'bmin'], ['sn4', 'bmax'], ['sn5', 'heat'], ['sn6', 'days'], ['sn7', 'unk'], ['sn8', 'loc'], ['sn9', 'interest'], ['sn10', 'toa'], ['sm1', 'name'], ['sm2', 'hl'], ['sm3', 'link'], ['sm4', 'tbl'], ['sm5', 'img'], ['sev1', 'ev'], ['sev2', 'evWhen'], ['sev3', 'evWhere']].forEach(function (p) {
     var e = $('#' + p[0]); e.oninput = e.onchange = function () { SN[p[1]] = this.type === 'checkbox' ? this.checked : this.value; if (!SN.edited && (p[0].indexOf('sm') === 0 || p[0].indexOf('sev') === 0)) $('#sm7').value = snBody(); snList(); };
   });
   $('#sm8').oninput = function () { try { localStorage.setItem('crm_me', this.value.trim()); } catch (e) {} snList(); };
@@ -1448,12 +1471,30 @@ function zaloBulk() {
     }).catch(function (e) { $('#zbgo').disabled = false; $('#zbr').innerHTML = '<div class="card" style="margin-top:8px">' + esc(/Chưa cài khoá/.test(e.message) ? 'Chưa cài khoá quân sư AI. Vào Sheet, menu CRM, Cài khoá quân sư (AI).' : e.message) + '</div>'; });
   };
 }
+// Quản lý dự án: tên chính, tên gọi khác (gộp tên trùng), các toà
+function projMgr() {
+  var ps = D.projects || [], known = {}; ps.forEach(function (p) { known[p.name.toLowerCase()] = 1; p.aliases.forEach(function (a) { known[a.toLowerCase()] = 1; }); });
+  var cnt = {}; D.leads.forEach(function (l) { [l.project, l.site].forEach(function (n) { n = String(n || '').trim(); if (n && n !== 'Nhập thủ công' && !known[n.toLowerCase()]) cnt[n] = (cnt[n] || 0) + 1; }); });
+  var norm = function (n) { return n.toLowerCase().replace(/^(sun|vinhomes|the)\s+/, '').replace(/\s+/g, ''); };
+  var loose = Object.keys(cnt).sort(function (a, b) { return cnt[b] - cnt[a]; });
+  $('#dlgBody').innerHTML = '<h2 style="margin:0">Dự án và toà</h2><p class="small mut">Mỗi dự án có một <b>tên chính</b>, các <b>tên gọi khác</b> (tự gộp về tên chính) và các <b>toà</b>. Ví dụ Sun FourS Tower, tên khác "FourS Tower", toà F1; F2; F3; F5.</p>' +
+    ps.map(function (p, i) { return '<div class="card" style="margin:6px 0"><div class="fgrid"><label class="fld"><span class="mut small">Tên chính</span><input data-pn="' + i + '" value="' + esc(p.name) + '"></label><label class="fld"><span class="mut small">Tên gọi khác, ngăn cách bằng dấu ;</span><input data-pa="' + i + '" value="' + esc(p.aliases.join('; ')) + '"></label><label class="fld"><span class="mut small">Các toà, ngăn cách bằng dấu ;</span><input data-pt="' + i + '" value="' + esc(p.toas.join('; ')) + '"></label></div><div class="row" style="margin:6px 0 0"><button class="btn sm p" data-ps="' + i + '">Lưu</button><button class="btn sm" data-pdel="' + i + '">Xoá</button></div></div>'; }).join('') +
+    '<div class="card" style="margin:6px 0;background:#F4F7FC"><b class="small">Thêm dự án mới</b><div class="fgrid"><label class="fld"><span class="mut small">Tên chính</span><input id="pm1" list="pmdl"></label><label class="fld"><span class="mut small">Tên gọi khác</span><input id="pm2" placeholder="FourS Tower; Sun Fours"></label><label class="fld"><span class="mut small">Các toà</span><input id="pm3" placeholder="F1; F2; F3; F5"></label></div><datalist id="pmdl">' + loose.map(function (n) { return '<option value="' + esc(n) + '">'; }).join('') + '</datalist><div class="row" style="margin:6px 0 0"><button class="btn sm p" id="pmadd">Thêm</button></div></div>' +
+    (loose.length ? '<div class="small mut" style="margin-top:8px">Tên đang dùng trong dữ liệu mà chưa nằm trong danh mục (số khách): ' + loose.map(function (n) { return '<button class="btn xs" data-pl="' + esc(n) + '">' + esc(n) + ' (' + cnt[n] + ')</button>'; }).join(' ') + '<br>Bấm một tên để điền sẵn vào ô thêm dự án.</div>' : '') +
+    '<div class="row" style="margin-top:8px"><button class="btn" id="pmx">Đóng</button></div>';
+  $('#dlg').showModal(); $('#pmx').onclick = function () { $('#dlg').close(); };
+  var after = function () { toast('Đã lưu'); run('crmLoad').then(function (d) { D.projects = d.projects || []; projMgr(); render(); }); };
+  $('#pmadd').onclick = function () { var n = $('#pm1').value.trim(); if (!n) { toast('Hãy nhập tên dự án'); return; } run('crmProjSave', { name: n, aliases: $('#pm2').value, toas: $('#pm3').value }).then(after).catch(fail); };
+  document.querySelectorAll('[data-pl]').forEach(function (b) { b.onclick = function () { $('#pm1').value = b.dataset.pl; var same = loose.filter(function (n) { return n !== b.dataset.pl && norm(n) === norm(b.dataset.pl); }); if (same.length) $('#pm2').value = same.join('; '); $('#pm3').focus(); }; });
+  document.querySelectorAll('[data-ps]').forEach(function (b) { b.onclick = function () { var i = +b.dataset.ps, p = ps[i]; run('crmProjSave', { row: p.row, name: document.querySelector('[data-pn="' + i + '"]').value, aliases: document.querySelector('[data-pa="' + i + '"]').value, toas: document.querySelector('[data-pt="' + i + '"]').value }).then(after).catch(fail); }; });
+  document.querySelectorAll('[data-pdel]').forEach(function (b) { b.onclick = function () { if (!confirm('Xoá dự án này khỏi danh mục? Khách vẫn giữ nguyên.')) return; run('crmProjDelete', ps[+b.dataset.pdel].row).then(after).catch(fail); }; });
+}
 function addLead() {
   var lab = function (t, h) { return '<label class="fld"><span class="mut small">' + t + '</span>' + h + '</label>'; };
   var sel = function (id, arr, first) { return '<select id="' + id + '"><option value="">' + first + '</option>' + arr.map(function (s) { return '<option>' + esc(s) + '</option>'; }).join('') + '</select>'; };
   $('#dlgBody').innerHTML = '<h2 style="margin:0">Thêm khách mới</h2><p class="small mut">Chỉ cần tên hoặc số điện thoại. Hệ thống kiểm tra trùng số điện thoại trước khi tạo.</p>' +
     '<label class="fld"><span class="mut small">Dán nhanh: dán một đoạn có tên, số điện thoại, ngân sách, dự án, link… hệ thống tự điền vào các ô bên dưới</span><textarea id="apaste" rows="2" placeholder="Ví dụ: Chị Hà 0912 345 678, quan tâm Spana, ngân sách 2-3 tỷ, hồ sơ https://drive.google.com/..."></textarea></label><div id="apnote"></div><div class="fgrid" style="margin-top:8px">' +
-    lab('Họ và tên', '<input id="an">') + lab('Số điện thoại *', '<input id="ap" inputmode="tel">') + lab('Tỉnh/thành phố', '<input id="av">') + lab('Quận/huyện, phường/xã', '<input id="adt">') + lab('Địa chỉ chi tiết', '<input id="aad">') + lab('Link Drive / hồ sơ khách', '<input id="adu" placeholder="https://drive.google.com/...">') + lab('Dự án quan tâm', '<input id="ad" list="adl" placeholder="Tên dự án">') +
+    lab('Họ và tên', '<input id="an">') + lab('Số điện thoại *', '<input id="ap" inputmode="tel">') + lab('Tỉnh/thành phố', '<input id="av">') + lab('Quận/huyện, phường/xã', '<input id="adt">') + lab('Địa chỉ chi tiết', '<input id="aad">') + lab('Toà quan tâm', '<input id="atoa" placeholder="F1; F2…">') + lab('Link Drive / hồ sơ khách', '<input id="adu" placeholder="https://drive.google.com/...">') + lab('Dự án quan tâm', '<input id="ad" list="adl" placeholder="Tên dự án">') +
     lab('Nguồn khách', sel('as2', SRC_OPTS, 'Chọn nguồn')) + lab('Mục đích mua', sel('ao', ['Ở thực', 'Đầu tư', 'Cho thuê', 'Kinh doanh'], 'Chưa rõ')) +
     lab('Ngân sách tối thiểu', '<input id="a1" placeholder="2 tỷ">') + lab('Ngân sách tối đa', '<input id="a2" placeholder="3 tỷ">') + lab('Trạng thái', '<select id="ast">' + STATUS.map(function (s) { return '<option>' + s + '</option>'; }).join('') + '</select>') + '</div>' +
     '<datalist id="adl">' + D.sites.map(function (s) { return '<option value="' + esc(s.name) + '">'; }).join('') + '</datalist><textarea id="anote" rows="2" placeholder="Ghi chú"></textarea><div id="adup"></div>' +
@@ -1477,7 +1518,7 @@ function addLead() {
     var rest = t.replace(/https?:\/\/\S+/g, '').trim(); if (rest && !$('#anote').dataset.tp) $('#anote').value = rest;
   };
   $('#an').oninput = function () { this.dataset.tp = 1; }; $('#anote').oninput = function () { this.dataset.tp = 1; };
-  var collect = function () { return { docUrl: $('#adu').value, name: $('#an').value, phone: $('#ap').value, province: $('#av').value, district: $('#adt').value, address: $('#aad').value, site: '', project: $('#ad').value, source: $('#as2').value, purpose: $('#ao').value, bmin: $('#a1').value, bmax: $('#a2').value, status: $('#ast').value, note: $('#anote').value }; };
+  var collect = function () { return { toa: $('#atoa').value, docUrl: $('#adu').value, name: $('#an').value, phone: $('#ap').value, province: $('#av').value, district: $('#adt').value, address: $('#aad').value, site: '', project: $('#ad').value, source: $('#as2').value, purpose: $('#ao').value, bmin: $('#a1').value, bmax: $('#a2').value, status: $('#ast').value, note: $('#anote').value }; };
   $('#aok').onclick = function () {
     var f = collect(); if (!f.phone.trim()) { toast('Hãy nhập số điện thoại'); return; }
     $('#aok').disabled = true;
