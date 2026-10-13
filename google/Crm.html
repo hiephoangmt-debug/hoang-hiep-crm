@@ -380,6 +380,18 @@ function parseVnd(s) {
 }
 function budgetOf(l) { return parseVnd(l.bmax) || parseVnd(l.bmin) || parseVnd(l.budget); }
 var NA = 'Chưa cập nhật';
+// Nguồn khách đọc được: nền tảng quảng cáo, dự án / website khách vào, tên miền, chiến dịch
+function srcParts(l) {
+  var raw = String(l.source || '').trim(), lw = raw.toLowerCase(), camp = String(l.campaign || '').trim();
+  var plat = /google|gclid|gads/.test(lw + ' ' + camp.toLowerCase()) ? 'Google Ads' : /facebook|fb|meta|instagram/.test(lw) ? 'Facebook Ads' : /zalo/.test(lw) ? 'Zalo' : /tiktok/.test(lw) ? 'TikTok Ads' : lw === 'website' ? 'Website' : raw && lw !== 'nhập thủ công' ? raw : (l.srcType && l.srcType !== 'Data nhập' ? l.srcType : '');
+  var site = D.sites.filter(function (x) { return x.name === l.site; })[0], host = site && site.domain ? site.domain : '';
+  if (!host && l.leadUrl) { var m = /^https?:\/\/([^\/?#]+)/i.exec(l.leadUrl); if (m) host = m[1].replace(/^www\./, ''); }
+  var name = l.site && l.site !== 'Nhập thủ công' ? l.site : '';
+  var cm = /^gads-(\d+)/.exec(camp); camp = cm ? 'Chiến dịch Google ' + cm[1] : camp;
+  return { plat: plat, site: name, host: host, camp: camp };
+}
+function srcText(l) { var p = srcParts(l); return [p.plat, p.site + (p.host ? ' (' + p.host + ')' : ''), p.camp].filter(function (x) { return x && x.trim(); }).join(' · '); }
+function srcHtml(l) { var p = srcParts(l); if (!p.plat && !p.site && !p.host && !p.camp) return '<span class="mut">-</span>'; return (p.plat ? '<b>' + esc(p.plat) + '</b>' : '') + (p.site ? '<br>' + esc(p.site) : '') + (p.host ? '<br><span class="mut">' + esc(p.host) + '</span>' : '') + (p.camp ? '<br><span class="mut">' + esc(p.camp) + '</span>' : ''); }
 var COLS = [
   { k: 'code', t: 'Mã', v: function (l) { return 'KH' + pad(l.id); }, s: function (l) { return Number(l.id) || 0; } },
   { k: 'name', t: 'Họ và tên', v: function (l) { return l.name || '(chưa có tên)'; }, s: function (l) { return (l.name || '').toLowerCase(); }, b: 1 },
@@ -390,7 +402,7 @@ var COLS = [
   { k: 'phone2', t: 'SĐT 2', v: function (l) { return l.phone2 || '-'; } },
   { k: 'zalo', t: 'Zalo', v: function (l) { return l.zalo || (l.zaloClicks ? 'Đã bấm Zalo' : NA); } },
   { k: 'at', t: 'Ngày phát sinh', v: function (l) { return fmt(l.at); }, s: function (l) { return l.at; } },
-  { k: 'src', t: 'Nguồn khách', v: function (l) { return [l.source || l.srcType, l.campaign].filter(Boolean).join(' · ') || NA; } },
+  { k: 'src', t: 'Nguồn khách', v: function (l) { return srcText(l) || NA; } },
   { k: 'url', t: 'Trang / URL lead', v: function (l) { return l.leadUrl || NA; } },
   { k: 'site', t: 'Dự án quan tâm', v: function (l) { return l.project || 'Chưa có dự án'; } },
   { k: 'product', t: 'Loại căn', v: function (l) { return l.product || NA; } },
@@ -545,6 +557,7 @@ function leads() {
         if (x.k === 'phone') return '<td class="nw">' + v + ' ' + zl(l.phone, l) + '</td>';
         if (x.tag) return '<td><span class="tag ' + (todo(l) ? 'red' : l.status === 'Chốt' ? 'grn' : 'amb') + '">' + (todo(l) ? 'Chưa liên hệ' : v) + '</span></td>';
         if (x.due) return '<td class="nw">' + (l.next && l.next < ymdNow(0) ? '<span class="tag red">' + v + ' · quá hạn</span>' : l.next === ymdNow(0) ? '<span class="tag amb">Hôm nay</span>' : v) + '</td>';
+        if (x.k === 'src') return '<td class="small" style="min-width:170px">' + srcHtml(l) + '</td>';
         return '<td class="small">' + v + '</td>'; }).join('') + '</tr>'; }).join('') || '<tr><td colspan="' + cols.length + '" class="mut">Không có khách nào. Bấm "+ Thêm khách" hoặc "Nhập danh sách" để thêm.</td></tr>') + '</table></div>';
   } else body = slice.map(function (l) { return mobRow(l); }).join('') || '<div class="card mut">Không có khách nào.</div>';
   var kpiHtml = wide ? '<div class="grid kc">' + kp.map(function (x) { return '<div class="kpi ' + (x[2] && x[0] > 0 ? 'alert' : '') + '"><b>' + esc(x[0]) + '</b><span>' + x[1] + '</span></div>'; }).join('') + '</div>' :
@@ -603,7 +616,7 @@ function leadCard(l) {
   var nx = l.next ? (l.next < ymdNow(0) ? '<span class="tag red">Hẹn ' + dmy(l.next) + ' quá hạn</span>' : l.next === ymdNow(0) ? '<span class="tag amb">Hẹn hôm nay</span>' : '<span class="tag">Hẹn ' + dmy(l.next) + '</span>') : '';
   var t = (l.zaloClicks ? '<span class="tag blu">Bấm Zalo ×' + l.zaloClicks + '</span> ' : '') + (l.phoneClicks ? '<span class="tag blu">Bấm Gọi ×' + l.phoneClicks + '</span> ' : '') +
     (l.submits > 1 ? '<span class="tag amb">Gửi form ×' + l.submits + '</span> ' : '') + (l.called ? '<span class="tag grn">Đã gọi</span> ' : '') + (l.messaged ? '<span class="tag grn">Đã nhắn</span> ' : '');
-  var src = [l.source || l.srcType, l.campaign].filter(Boolean).join(' · ');
+  var src = srcText(l);
   var d = [['Dự án', l.project || 'Chưa có dự án'], ['Loại căn', l.product], ['Địa chỉ', [l.address, l.district, l.province].filter(Boolean).join(', ')], ['Nhu cầu', needOf(l)], ['Nguồn / chiến dịch', src || 'Chưa rõ'], ['Chăm sóc', l.careCount ? l.careCount + ' lần, gần nhất ' + fmt(l.careAt) + (l.careResult ? ' (' + l.careResult + ')' : '') : 'Chưa chăm sóc'],
     ['Đã xem', l.viewCount ? l.viewProject + ' ' + fdmy(l.viewAt) : 'Chưa đi xem'], ['Nhận lúc', fmt(l.at) + ' (' + ago(l.at) + ')'], ['Phụ trách', l.assignee], ['Giá trị chốt', l.value ? vnd(l.value) : '']]
     .filter(function (x) { return x[1]; }).map(function (x) { return '<span><span class="mut">' + x[0] + ':</span> ' + esc(x[1]) + '</span>'; }).join('');
@@ -662,7 +675,7 @@ function mobRow(l) {
   var h = heat(l), st = todo(l) ? '<span class="tag red">Chưa liên hệ</span>' : '<span class="tag ' + (l.status === 'Chốt' ? 'grn' : 'amb') + '">' + esc(l.status) + '</span>';
   var nx = l.next ? (l.next < ymdNow(0) ? '<span class="tag red">Hẹn ' + dmy(l.next) + ' quá hạn</span>' : l.next === ymdNow(0) ? '<span class="tag amb">Hẹn hôm nay</span>' : '<span class="tag">Hẹn ' + dmy(l.next) + '</span>') : '';
   var cell = function (k, v, strong) { return '<div class="mc"><span class="mut">' + k + '</span><span' + (strong ? ' class="b"' : '') + '>' + (v ? esc(v) : '<span class="mut">Chưa có</span>') + '</span></div>'; };
-  var addr = [l.address, l.district, l.province].filter(Boolean).join(', '), src = [l.source || l.srcType, l.campaign].filter(Boolean).join(' · ');
+  var addr = [l.address, l.district, l.province].filter(Boolean).join(', '), src = srcText(l);
   return '<div class="mrow' + (todo(l) ? ' todo' : '') + '" data-open="' + esc(l.phone) + '">' +
     '<div class="mtop"><b class="mname">' + esc(l.name || '(chưa có tên)') + '</b>' + (h ? ' <span class="tag ' + h[1] + '">' + h[0] + '</span>' : '') + '<span class="sp"></span>' + st + '</div>' +
     '<div class="mph"><span class="phn">' + esc(l.phone) + '</span><button class="btn g xs" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button><button class="btn z xs" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button>' + (nx ? '<span class="sp"></span>' + nx : '') + '</div>' +
@@ -673,7 +686,7 @@ function mobRow(l) {
 }
 function pageSummary(l) {
   var row = function (k, v, cls) { return v ? '<div class="srow ' + (cls || '') + '"><span class="mut">' + k + '</span><span>' + esc(v) + '</span></div>' : ''; };
-  var h = heat(l), src = [l.srcType, l.source, l.campaign].filter(Boolean).join(' · ');
+  var h = heat(l), src = srcText(l) || [l.srcType, l.source, l.campaign].filter(Boolean).join(' · ');
   var nxt = l.next ? fdmy(l.next) + (l.next < ymdNow(0) ? ' (quá hạn)' : l.next === ymdNow(0) ? ' (hôm nay)' : '') : 'Chưa đặt lịch';
   return '<div class="card"><h2 style="margin:0">' + esc(l.name || '(chưa có tên)') + (h ? ' <span class="tag ' + h[1] + '">' + h[0] + '</span>' : '') + '</h2><div class="small mut">KH' + pad(l.id) + ' · ' + esc(l.status) + (l.assignee ? ' · sale ' + esc(l.assignee) : '') + '</div>' +
     '<div class="mph bigph"><span class="phn">' + esc(l.phone) + '</span><button class="btn g xs" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button><button class="btn z xs" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo' + (l.zaloClicks ? ' ✓' : '') + '</button></div>' +
