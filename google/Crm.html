@@ -159,7 +159,8 @@ function fail(e) { toast('Lỗi: ' + e.message); }
 function fmt(iso) { if (!iso) return ''; var d = new Date(iso); return d.toLocaleString('vi-VN', { hour12: false, day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }); }
 function ago(iso) { var m = Math.round((Date.now() - new Date(iso).getTime()) / 60000); return m < 1 ? 'vừa xong' : m < 60 ? m + ' phút trước' : m < 1440 ? Math.round(m / 60) + ' giờ trước' : Math.round(m / 1440) + ' ngày trước'; }
 function vnd(n) { return Math.round(n || 0).toLocaleString('vi-VN') + 'đ'; }
-var todo = function (l) { return !l.called && !l.messaged && l.status === 'Mới'; };
+var isQuiet = function (l) { return l.srcType === 'Data nhập'; };   // khách nhập từ file/Sheet: không nhắc gọi
+var todo = function (l) { return !l.called && !l.messaged && l.status === 'Mới' && !isQuiet(l); };
 var GROUPS = ['BĐS', 'Vân'];
 function gOf(name) { var s = D && D.sites.filter(function (x) { return x.name === name; })[0]; return s ? String(s.group || '') : ''; }
 function inG(name) { return !G || gOf(name) === G; }
@@ -440,7 +441,7 @@ function lvBar(nNew, nHot, nAll) {
 }
 function lvCounts() {
   var all = D.leads.filter(function (l) { return isBds(l.site); }), wk = ymdShift(ymdNow(0), -6);
-  return { all: all, nNew: all.filter(function (l) { return dayOf(l.at) >= wk; }).length, hot: all.filter(isHot) };
+  return { all: all, nNew: all.filter(function (l) { return dayOf(l.at) >= wk && !isQuiet(l); }).length, hot: all.filter(isHot) };
 }
 function bindLv() {
   document.querySelectorAll('[data-lv]').forEach(function (b) { b.onclick = function () { LV = b.dataset.lv; try { localStorage.setItem('crm_lv', LV); } catch (e) {} leads(); window.scrollTo(0, 0); }; });
@@ -451,7 +452,7 @@ function leadsGroups() {
   var head = lvBar(c.nNew, hot.length, all.length) + '<div class="row"><button class="btn p" id="addlead">+ Thêm khách</button><button class="btn" id="implead">Nhập danh sách</button><button class="btn" id="sheetimp">Nhập từ link Sheet</button>' + (aiOn() ? '<button class="btn" id="zbulk">Nhập chat Zalo</button>' : '') + '</div>';
   var card = function (l) { return mobRow(l); }, body = '';
   if (LV === 'new') {
-    var list = all.slice().sort(function (a, b) { return new Date(b.at) - new Date(a.at); }).slice(0, LVN), unc = list.filter(todo).length;
+    var list = all.filter(function (l) { return !isQuiet(l); }).sort(function (a, b) { return new Date(b.at) - new Date(a.at); }).slice(0, LVN), unc = list.filter(todo).length;
     body = '<div class="card"><div class="row" style="margin:0"><b>Khách mới phát sinh gần nhất</b><span class="sp"></span><label class="small mut">Hiện <select id="lvn">' + [10, 20, 30, 50].map(function (n) { return '<option' + (n === LVN ? ' selected' : '') + '>' + n + '</option>'; }).join('') + '</select> khách</label></div><div class="small mut" style="margin-top:4px">Trong ' + list.length + ' khách này có <b>' + unc + '</b> khách chưa gọi, chưa nhắn.</div></div><div class="cgrid">' + (list.map(card).join('') || '<div class="card mut">Chưa có khách.</div>') + '</div>';
   } else {
     var g = {}; hot.forEach(function (l) { var k = l.project || l.site || 'Chưa rõ dự án'; (g[k] = g[k] || []).push(l); });
@@ -1469,7 +1470,7 @@ function clicks() {
 function ymdNow(add) { var d = new Date(); d.setDate(d.getDate() + (add || 0)); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
 function dmy(s) { return s ? s.slice(8, 10) + '/' + s.slice(5, 7) + '/' + s.slice(0, 4) : ''; }
 function todayGroups() {
-  var t = ymdNow(0), L = D.leads.filter(function (l) { return isBds(l.site) && l.status !== 'Chốt' && l.status !== 'Mất'; });
+  var t = ymdNow(0), L = D.leads.filter(function (l) { return isBds(l.site) && l.status !== 'Chốt' && l.status !== 'Mất' && (!isQuiet(l) || l.next); });
   var g = { late: [], now: [], fresh: [], viewed: [], hot: [], stale: [] };
   L.forEach(function (l) {
     if (l.next && l.next < t) g.late.push(l);
@@ -1499,11 +1500,16 @@ function today() {
         '<button class="btn" data-set="' + esc(l.phone) + '">Đặt lịch ngày mai</button>') + '</div></div>';
   };
   $('#main').innerHTML = '<div class="card"><b>Việc hôm nay · ' + total + ' việc</b><p class="small mut">Danh sách tự lập từ lịch hẹn và tình trạng chăm sóc. Bấm "Xong lịch này" hoặc dời lịch thì mới đổi, hệ thống không tự đánh dấu hoàn thành.</p></div>' +
-    sec.map(function (s) { var a = g[s[0]]; return a.length ? '<h3 style="margin:14px 0 6px">' + s[1] + ' <span class="tag ' + (s[3] ? 'red' : 'amb') + '">' + a.length + '</span></h3><div class="small mut" style="margin-bottom:6px">' + s[2] + '</div>' + a.map(function (l) { return item(l, s[0]); }).join('') : ''; }).join('') +
+    sec.map(function (s) { var a = g[s[0]]; return a.length ? '<h3 style="margin:14px 0 6px">' + s[1] + ' <span class="tag ' + (s[3] ? 'red' : 'amb') + '">' + a.length + '</span>' + (s[0] === 'fresh' ? ' <button class="btn sm" id="silfresh">Bỏ nhắc nhóm này</button>' : '') + '</h3><div class="small mut" style="margin-bottom:6px">' + s[2] + '</div>' + a.map(function (l) { return item(l, s[0]); }).join('') : ''; }).join('') +
     (total ? '' : '<div class="card mut">Hôm nay chưa có việc nào. Mở một khách, đặt "Hẹn tiếp theo" để việc hiện ở đây.</div>');
   var setNext = function (phone, d) {
     var l = D.leads.filter(function (x) { return x.phone === phone; })[0];
     run('crmUpdateLead', phone, { next: d }).then(function () { l.next = d; badges(); today(); toast(d ? 'Đã đặt lịch ' + dmy(d) : 'Đã xong lịch'); }).catch(fail);
+  };
+  if ($('#silfresh')) $('#silfresh').onclick = function () {
+    var list = g.fresh.slice(); if (!confirm('Bỏ nhắc ' + list.length + ' khách này? Khách vẫn nằm trong Data khách, chỉ không hiện ở Việc hôm nay và không tính là chưa liên hệ nữa.')) return;
+    this.disabled = true;
+    run('crmSilence', list.map(function (l) { return l.phone; })).then(function () { list.forEach(function (l) { l.srcType = 'Data nhập'; }); badges(); today(); toast('Đã bỏ nhắc ' + list.length + ' khách'); }).catch(fail);
   };
   document.querySelectorAll('[data-open]').forEach(function (b) { b.onclick = function () { openLead(b.dataset.open); }; });
   document.querySelectorAll('[data-act]').forEach(function (b) { b.onclick = function () { contact(b.dataset.p, b.dataset.act, b); }; });

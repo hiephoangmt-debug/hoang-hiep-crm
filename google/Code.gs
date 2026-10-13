@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-32', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-33', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -394,6 +394,20 @@ function crmScanComm(k, text, img, mime) {
   }).filter(function (r) { return r.net || r.total || r.unit; });
   return { month: monthStr_(o.month), salary: numIn_(o.salary), rows: rows };
 }
+// Khách nhập từ file/Sheet là data cũ: không hiện trong "Việc hôm nay" và không nhắc gọi. Hàm này chuyển nhóm khách đang chờ sang data nhập.
+function crmSilence(k, phones) {
+  requireUi_(k);
+  phones = (Array.isArray(phones) ? phones : []).slice(0, 500).map(normPhone_).filter(Boolean);
+  if (!phones.length) return { n: 0 };
+  return withLock_(function () {
+    var sh = ss_().getSheetByName(S_LEADS), n = lastDataRow_(sh, 2), want = {}, done = 0;
+    ensureLeadCols_(sh);
+    phones.forEach(function (p) { want[p] = 1; });
+    var ph = n > 1 ? sh.getRange(2, 4, n - 1, 1).getValues() : [];
+    for (var i = 0; i < ph.length; i++) if (want[normPhone_(phoneStr_(ph[i][0]))]) { sh.getRange(i + 2, 40).setValue('Data nhập'); done++; }
+    return { n: done };
+  });
+}
 // Chụp danh sách liên hệ, bảng khách hoặc ảnh danh bạ: AI đọc tên và số điện thoại nhìn thấy trong ảnh (không đoán số).
 function crmScanContacts(k, text, img, mime) {
   requireUi_(k);
@@ -668,7 +682,7 @@ function crmImport(k, rows, merge) {
   rows.forEach(function (r, i) {
     var line = i + 1;
     try {
-      var res = createLead_({ name: r.name, phone: r.phone, province: r.province, site: r.site, project: r.project, bmax: r.budget, source: r.source || 'nhập Excel', note: r.note, docUrl: r.docUrl, mergeBlank: merge === true });
+      var res = createLead_({ name: r.name, phone: r.phone, province: r.province, site: r.site, project: r.project, bmax: r.budget, source: r.source || 'nhập Excel', note: r.note, docUrl: r.docUrl, srcType: 'Data nhập', mergeBlank: merge === true });
       if (res.dup) rep.dups.push({ line: line, phone: res.lead.phone, name: res.lead.name }); else if (res.merged) rep.merged = (rep.merged || 0) + 1; else rep.added++;
     } catch (e) { rep.errors.push({ line: line, reason: String(e.message || e), phone: String(r.phone || '') }); }
   });
@@ -764,7 +778,7 @@ function crmSheetImport(k, url, tab, offset, limit) {
   var rows = sheetTabRows_(sh), part = rows.slice(offset, offset + limit), rep = { total: rows.length, next: offset + limit >= rows.length ? null : offset + limit, added: 0, dups: [], errors: [] };
   part.forEach(function (r, i) {
     try {
-      var res = createLead_({ name: r.name, phone: r.phone, email: r.email, site: r.site, source: r.source, campaign: r.campaign, note: r.note, product: r.product, url: r.url, bmax: r.budget, at: r.at ? r.at.toISOString() : '', noEvent: true, srcType: 'Website' });
+      var res = createLead_({ name: r.name, phone: r.phone, email: r.email, site: r.site, source: r.source, campaign: r.campaign, note: r.note, product: r.product, url: r.url, bmax: r.budget, at: r.at ? r.at.toISOString() : '', noEvent: true, srcType: 'Data nhập' });
       if (res.dup) rep.dups.push({ phone: res.lead.phone, name: res.lead.name }); else rep.added++;
     } catch (e) { rep.errors.push({ line: offset + i + 1, reason: String(e.message || e) }); }
   });
