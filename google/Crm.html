@@ -202,7 +202,15 @@ document.addEventListener('click', function (e) { if (document.body.classList.co
 window.addEventListener('resize', function () { if (!narrow()) document.body.classList.remove('menu-open'); updateMenu(); });
 $('#aitog').onclick = function () { try { localStorage.setItem('crm_noai', aiOn() ? '1' : '0'); } catch (e) {} applyAi(); if (D) render(); };
 applyAi();
-$('#dlg').addEventListener('close', function () { if (D && !V.phone) render(); });
+var PASTE_D = null, PASTE_P = null;   // dán ảnh từ bộ nhớ tạm (Ctrl+V): hộp thoại đang mở hoặc trang Gửi tin
+$('#dlg').addEventListener('close', function () { PASTE_D = null; if (D && !V.phone) render(); });
+document.addEventListener('paste', function (e) {
+  var items = (e.clipboardData && e.clipboardData.items) || [], f = null;
+  for (var i = 0; i < items.length; i++) if (items[i].kind === 'file' && /^image\//.test(items[i].type)) { f = items[i].getAsFile(); break; }
+  if (!f) return;
+  var h = $('#dlg').open ? PASTE_D : (tab === 'send' ? PASTE_P : null);
+  if (h) { e.preventDefault(); h(f); }
+});
 document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('[data-zl]'); if (!a) return; e.preventDefault(); window.open('https://zalo.me/' + a.dataset.zl, '_blank', 'noopener'); });
 $('#gbar').onclick = function (e) { var b = e.target.closest('button'); if (!b) return; G = b.dataset.g; try { localStorage.setItem('crm_group', G); } catch (x) {} badges(); render(); };
 
@@ -906,8 +914,8 @@ function snImage(file, cb) {
   fr.onload = function () {
     var im = new Image();
     im.onload = function () {
-      var m = 1400, sc = Math.min(1, m / Math.max(im.width, im.height)), c = document.createElement('canvas'); c.width = Math.round(im.width * sc); c.height = Math.round(im.height * sc);
-      c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); cb(c.toDataURL('image/jpeg', 0.82));
+      var m = 1100, sc = Math.min(1, m / Math.max(im.width, im.height)), c = document.createElement('canvas'); c.width = Math.round(im.width * sc); c.height = Math.round(im.height * sc);
+      c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); cb(c.toDataURL('image/jpeg', 0.75));
     };
     im.onerror = function () { toast('Không đọc được ảnh này'); };
     im.src = fr.result;
@@ -918,14 +926,15 @@ function snScanHtml() {
   var r = SQ.res;
   return '<div class="card"><b>Quét nhanh: dán thông điệp, link hoặc ảnh, hệ thống tự điền và đề xuất</b><div class="small mut" style="margin:4px 0 8px">Dán nội dung chính sách, link trang dự án hoặc tải ảnh poster, bảng hàng. Quân sư AI đọc, điền sẵn bên dưới và soạn vài bản tin. Nội dung dán, link, ảnh được gửi cho quân sư AI để đọc.</div>' +
     '<textarea id="sq1" rows="3" placeholder="Dán thông điệp, chính sách, nội dung bảng hàng">' + esc(SQ.text) + '</textarea>' +
-    '<div class="row" style="margin:8px 0"><input id="sq2" placeholder="Link trang dự án hoặc bảng hàng (https://)" style="flex:1;min-width:200px" value="' + esc(SQ.link) + '"><label class="btn" style="cursor:pointer">Chọn ảnh<input id="sq3" type="file" accept="image/*" hidden></label>' + (SQ.img ? '<img src="' + SQ.img + '" alt="" style="height:44px;border-radius:6px"><a class="btn sm" download="uu-dai.jpg" href="' + SQ.img + '">Tải ảnh để gửi kèm Zalo</a><button class="btn sm" id="sqrm">Bỏ ảnh</button>' : '') + '</div>' +
-    '<div class="row" style="margin:0"><button class="btn p" id="sqgo"' + (SQ.busy ? ' disabled' : '') + '>' + (SQ.busy ? 'Đang quét…' : 'Quét và đề xuất') + '</button></div>' +
+    '<div class="row" style="margin:8px 0"><input id="sq2" placeholder="Link trang dự án hoặc bảng hàng (https://)" style="flex:1;min-width:200px" value="' + esc(SQ.link) + '"><label class="btn" style="cursor:pointer">Chọn ảnh hoặc Ctrl+V để dán<input id="sq3" type="file" accept="image/*" hidden></label>' + (SQ.img ? '<img src="' + SQ.img + '" alt="" style="height:44px;border-radius:6px"><a class="btn sm" download="uu-dai.jpg" href="' + SQ.img + '">Tải ảnh để gửi kèm Zalo</a><button class="btn sm" id="sqrm">Bỏ ảnh</button>' : '') + '</div>' +
+    '<div class="row" style="margin:0"><button class="btn p" id="sqgo"' + (SQ.busy ? ' disabled' : '') + '>' + (SQ.busy ? 'Đang quét, thường mất 10 đến 30 giây…' : 'Quét và đề xuất') + '</button></div>' +
     (r ? '<div class="card" style="background:#F4F7FC;margin:10px 0 0"><div><b>Đã điền sẵn</b>: ' + esc(r.name || 'chưa rõ tên dự án') + (r.priceFrom ? ' · giá từ ' + r.priceFrom + ' tỷ' : '') + (r.area ? ' · ' + esc(r.area) : '') + '</div>' + (r.target ? '<div class="small">Nhóm khách nên gửi: ' + esc(r.target) + '</div>' : '') + (r.note ? '<div class="small" style="color:var(--red)">Cần kiểm tra: ' + esc(r.note) + '</div>' : '') +
       (r.event && r.event.isEvent ? '<div class="small" style="margin-top:6px"><b>Sự kiện:</b> ' + esc([r.event.name, r.event.when, r.event.where].filter(Boolean).join(' · ')) + '. Danh sách khách bên dưới đã xếp <b>Nên mời trước</b> lên đầu.</div>' : '') + (r.advice && r.advice.length ? '<div class="card" style="margin:8px 0"><b class="small">Hướng tư vấn khi gọi hoặc nhắn</b><ul style="margin:4px 0 0 18px;padding:0">' + r.advice.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>' : '') + (r.plan && r.plan.length ? '<div class="card" style="margin:8px 0"><b class="small">Kế hoạch mời đề xuất</b><ol style="margin:4px 0 0 18px;padding:0">' + r.plan.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ol><button class="btn sm" id="sqcp" style="margin-top:6px">Sao chép hướng tư vấn và kế hoạch</button></div>' : '') +
       (r.messages.length ? '<div class="small mut" style="margin-top:6px">Chọn bản tin muốn dùng:</div>' + r.messages.map(function (m, i) { return '<div class="card" style="margin:6px 0"><b class="small">' + esc(m.style || 'Bản ' + (i + 1)) + '</b><div style="white-space:pre-wrap">' + esc(m.text) + '</div><button class="btn sm" data-sq="' + i + '">Dùng bản này</button></div>'; }).join('') : '') + '</div>' : '') + '</div>';
 }
 function snScanBind() {
   $('#sq1').oninput = function () { SQ.text = this.value; }; $('#sq2').oninput = function () { SQ.link = this.value; };
+  PASTE_P = function (f) { snImage(f, function (d) { SQ.img = d; SQ.mime = 'image/jpeg'; SQ.text = $('#sq1').value; SQ.link = $('#sq2').value; send(); }); };
   $('#sq3').onchange = function () { var f = this.files && this.files[0]; if (!f) return; snImage(f, function (d) { SQ.img = d; SQ.mime = 'image/jpeg'; SQ.text = $('#sq1').value; SQ.link = $('#sq2').value; send(); }); };
   if ($('#sqrm')) $('#sqrm').onclick = function () { SQ.img = ''; SQ.text = $('#sq1').value; SQ.link = $('#sq2').value; send(); };
   $('#sqgo').onclick = function () {
@@ -1137,6 +1146,7 @@ function planForm(p) {
   $('#dlg').showModal(); $('#plx').onclick = function () { $('#dlg').close(); };
   $('#plex').onclick = function () { $('#pl6').value = '10 |  | 100\n5 | 9 | 50\n0 | 4 | 0'; };
   if ($('#psgo')) {
+    PASTE_D = function (f) { snImage(f, function (d) { img = d; $('#ps4').textContent = 'Đã dán ảnh'; }); };
     $('#ps3').onchange = function () { var f = this.files && this.files[0]; if (!f) return; snImage(f, function (d) { img = d; $('#ps4').textContent = 'Đã chọn ảnh'; }); };
     $('#psgo').onclick = function () {
       var t = $('#ps1').value, l = $('#ps2').value; if (!t.trim() && !l.trim() && !img) { toast('Hãy dán nội dung, link hoặc chọn ảnh'); return; }
@@ -1167,6 +1177,7 @@ function commScan() {
   $('#dlgBody').innerHTML = '<h2 style="margin:0">Chụp bảng hoa hồng kế toán gửi</h2><p class="small mut">Chụp màn hình hoặc chụp ảnh bảng kế toán gửi (có thể chụp từng phần), chọn ảnh bên dưới, hoặc copy chữ trong file rồi dán vào ô. Hệ thống đọc từng dòng, bạn xem lại rồi lưu. Khoản nào đã có thì không bị nhập lại. Ảnh hoặc chữ được gửi cho quân sư AI đọc.</p>' +
     '<textarea id="cs1" rows="3" placeholder="Hoặc dán chữ copy từ bảng vào đây"></textarea><div class="row" style="margin-top:8px"><label class="btn" style="cursor:pointer">Chọn ảnh bảng<input id="cs2" type="file" accept="image/*" hidden></label><span class="small mut" id="cs3"></span><button class="btn p" id="csgo">Đọc bảng</button><button class="btn" id="csx">Đóng</button></div><div id="csr"></div>';
   $('#dlg').showModal(); $('#csx').onclick = function () { $('#dlg').close(); };
+  PASTE_D = function (f) { snImage(f, function (d) { img = d; $('#cs3').textContent = 'Đã dán ảnh'; }); };
   $('#cs2').onchange = function () { var f = this.files && this.files[0]; if (!f) return; snImage(f, function (d) { img = d; $('#cs3').textContent = 'Đã chọn ảnh'; }); };
   $('#csgo').onclick = function () {
     var t = $('#cs1').value.trim(); if (!t && !img) { toast('Hãy chọn ảnh hoặc dán chữ'); return; }
@@ -1223,6 +1234,7 @@ function zaloChat(phone) {
   $('#dlgBody').innerHTML = '<h2 style="margin:0">Chụp Zalo gửi lên: ' + esc(l.name || l.phone) + '</h2><p class="small mut">Trên Zalo, bôi đen đoạn chat rồi Copy và dán vào ô dưới, hoặc chụp màn hình cuộc trò chuyện và chọn ảnh. Chỉ nội dung bạn đưa vào mới được gửi cho quân sư AI.</p>' +
     '<textarea id="zct" rows="7" placeholder="Dán đoạn chat vào đây (tối đa khoảng 6.000 ký tự, nên dán phần gần nhất)"></textarea><div class="row" style="margin-top:8px"><label class="btn" style="cursor:pointer">Chọn ảnh chụp chat<input id="zci" type="file" accept="image/*" hidden></label><span class="small mut" id="zcn"></span><button class="btn p" id="zcgo">Phân tích</button><button class="btn" id="zcx">Đóng</button></div><div id="zcr"></div>';
   $('#dlg').showModal(); $('#zcx').onclick = function () { $('#dlg').close(); };
+  PASTE_D = function (f) { snImage(f, function (d) { img = d; $('#zcn').textContent = 'Đã dán ảnh'; }); };
   $('#zci').onchange = function () { var f = this.files && this.files[0]; if (!f) return; snImage(f, function (d) { img = d; $('#zcn').textContent = 'Đã chọn ảnh'; }); };
   $('#zcgo').onclick = function () {
     var t = $('#zct').value.trim(); if (!t && !img) { toast('Hãy dán đoạn chat hoặc chọn ảnh'); return; }
@@ -1250,6 +1262,7 @@ function zaloBulk() {
   $('#dlgBody').innerHTML = '<h2 style="margin:0">Nhập chat hoặc danh bạ Zalo</h2><p class="small mut">Có thể chụp màn hình danh bạ Zalo gồm tên bạn bè, người khớp khách trong CRM sẽ được đánh dấu "Zalo đã kết nối" kèm ghi chú bạn đặt trong tên. Với chat, trên Zalo máy tính, mở từng cuộc trò chuyện, bôi đen và Copy rồi dán nối tiếp vào ô dưới (ghi rõ tên người ở đầu mỗi đoạn nếu được), hoặc chọn ảnh chụp. Quân sư AI tách từng người, hệ thống chỉ lưu cho người <b>khớp khách trong CRM</b>; ai không có trong CRM thì bỏ qua. Nội dung dán được gửi cho quân sư AI đọc.</p>' +
     '<textarea id="zb1" rows="8" placeholder="Dán các cuộc chat vào đây (tối đa khoảng 20.000 ký tự)"></textarea><div class="row" style="margin-top:8px"><label class="btn" style="cursor:pointer">Chọn ảnh<input id="zb2" type="file" accept="image/*" hidden></label><span class="small mut" id="zb3"></span><button class="btn p" id="zbgo">Quét</button><button class="btn" id="zbx">Đóng</button></div><div id="zbr"></div>';
   $('#dlg').showModal(); $('#zbx').onclick = function () { $('#dlg').close(); };
+  PASTE_D = function (f) { snImage(f, function (d) { img = d; $('#zb3').textContent = 'Đã dán ảnh'; }); };
   $('#zb2').onchange = function () { var f = this.files && this.files[0]; if (!f) return; snImage(f, function (d) { img = d; $('#zb3').textContent = 'Đã chọn ảnh'; }); };
   var norm = function (n) { return String(n || '').toLowerCase().replace(/^(anh|chị|chi|cô|co|chú|chu|bác|bac|ông|ong|bà|ba)\s+/, '').replace(/\s+/g, ' ').trim(); };
   var match = function (c) {
@@ -1391,10 +1404,11 @@ function importLeads() {
     fr.onload = function () { var t = String(fr.result || ''), rows = /\.vcf$/i.test(f.name) || /BEGIN:VCARD/i.test(t) ? parseVcf(t) : parseCsv(t); show(rows, 'Đã đọc ' + f.name); };
     fr.readAsText(f);
   };
-  if ($('#imi')) $('#imi').onchange = function () {
-    var f = this.files && this.files[0]; if (!f) return; $('#imst').textContent = 'Quân sư đang đọc ảnh…';
+  var imgScan = function (f) {
+    if (!f) return; $('#imst').textContent = 'Quân sư đang đọc ảnh…';
     snImage(f, function (d) { run('crmScanContacts', '', d, 'image/jpeg').then(function (r) { show(r.contacts, 'Đã đọc ảnh'); }).catch(function (e) { $('#imst').textContent = ''; toast(/Chưa cài khoá/.test(e.message) ? 'Chưa cài khoá quân sư AI: menu CRM, Cài khoá quân sư' : e.message); }); });
   };
+  if ($('#imi')) { $('#imi').onchange = function () { imgScan(this.files && this.files[0]); }; PASTE_D = imgScan; }
 }
 // Xem trước: phân loại mới, trùng CRM, trùng trong file, không có số
 function impPreview() {

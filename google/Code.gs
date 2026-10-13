@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-33', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-34', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -334,7 +334,7 @@ function scanAi_(system, intro, text, link, img, mime, maxText) {
   var res = UrlFetchApp.fetch('https://api.anthropic.com/v1/messages', {
     method: 'post', contentType: 'application/json', muteHttpExceptions: true,
     headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01' },
-    payload: JSON.stringify({ model: ASK_MODEL, max_tokens: maxText > 6000 ? 3500 : 1800, system: system, messages: [{ role: 'user', content: content }] })
+    payload: JSON.stringify({ model: SCAN_MODEL, max_tokens: maxText > 6000 ? 3500 : 1800, system: system, messages: [{ role: 'user', content: content }] })
   });
   var code = res.getResponseCode(), body = {};
   try { body = JSON.parse(res.getContentText()); } catch (e) {}
@@ -436,6 +436,7 @@ function crmScanPlan(k, text, link, img, mime) {
 
 // ---- Quân sư AI: hỏi Claude về cách chăm khách. Khoá API lưu trong Script Properties (menu CRM > Cài khoá quân sư).
 var ASK_MODEL = 'claude-sonnet-5-5';
+var SCAN_MODEL = 'claude-haiku-5-5';   // quét ảnh, link, chat: cần nhanh và rẻ; đổi thành ASK_MODEL nếu muốn đọc kỹ hơn
 function leadContext_(phone) {
   var f = findLead_(phone), sh = f.sh;
   ensureLeadCols_(sh);
