@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.18** + plugin Hoàng Hiệp CRM **2.20.44**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.18** + plugin Hoàng Hiệp CRM **2.20.45**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.45: chat tự động đối đáp khéo, hóm hỉnh hơn
+- Chat đang chạy chế độ kịch bản (chưa gắn khóa AI): thêm nhiều kiểu câu đùa, chọc, chê, trả giá – mỗi kiểu 2 – 3 câu trả lời khác nhau, không lặp lại: bot là ai, tán tỉnh, đẹp trai/xinh, chê bot, xin giảm giá, xin nợ, hết tiền, chê đắt, nhà có ma/phong thủy, vợ chưa cho mua, cười, buồn, thời tiết, ăn gì, vàng hay đất, chào, tạm biệt.
+- Câu chen ngang không liên quan nhà đất → đáp vui thay vì hỏi máy móc "quan tâm căn hộ hay đất nền".
+- Xưng hô theo khách ("cho anh…" → gọi anh, "chị hỏi…" → gọi chị); sửa lỗi "Dạ Anh/chị" viết hoa.
+- Chế độ AI (khi gắn khóa): bổ sung hướng dẫn trả lời đúng ý câu đùa trước rồi mới nối về nhà đất.
+- Cài: Nhập nhanh `cap-nhat-code.zip` → LiteSpeed Cache → Purge All.
 
 ## Có gì mới – plugin 2.20.44: bổ sung đủ ảnh còn thiếu trên web
 - Nguyên nhân thiếu: gói 18 MB vượt giới hạn tải lên của hosting nên ảnh FPT Plaza 3, Võ Chí Công, Đầm Sen, Nam Hội An… chưa lên web.
