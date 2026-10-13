@@ -46,9 +46,9 @@ text(d,(60,PH-112),'Đà Nẵng cho cả gia đình',F('pf-700',72),ORH)
 y=PH+18
 d.rounded_rectangle([60,y,250,y+190],radius=26,fill=OR)
 text(d,(155,y+80),'18',F('bvp-800',96),WHITE,'mm'); text(d,(155,y+158),'THÁNG 10',F('bvp-800',26),WHITE,'mm')
-text(d,(285,y+22),'CHỦ NHẬT · 18/10/2026',F('bvp-800',34),WHITE)
-text(d,(285,y+78),'Accost Tây Hồ, Hà Nội',F('pf-700',50),ORH)
-text(d,(285,y+146),'Gặp đội dự án · xem mặt bằng · chọn căn',F('bvp-400',27),MUTE)
+text(d,(285,y+18),'CHỦ NHẬT · 18/10/2026 · 9:00',F('bvp-800',33),WHITE)
+text(d,(285,y+68),'Sun Gallery Tây Hồ View',F('pf-700',48),ORH)
+text(d,(285,y+136),'58 Quảng Bá, Tây Hồ, Hà Nội',F('bvp-600',29),MUTE)
 # 3 ô số
 y=PH+240; w=(W-120-2*24)//3
 for i,(b,s) in enumerate([('~700 tr','vốn ban đầu căn 2PN'),('0%','lãi suất 24 tháng'),('1h20','bay Hà Nội – Đà Nẵng')]):
@@ -65,7 +65,7 @@ W,H=1080,1080; PH=470
 im=Image.new('RGBA',(W,H),NAVY+(255,)); im.paste(cover(photo,W,PH,0.3),(0,0))
 grad(im, PH-200, PH, NAVY, 0, 255); grad(im,0,120,NAVY,120,0)
 d=ImageDraw.Draw(im)
-pill(d,60,50,'SỰ KIỆN CN 18/10 · ACCOST TÂY HỒ',F('bvp-800',25),OR,WHITE,h=48)
+pill(d,60,50,'SỰ KIỆN CN 18/10 · SUN GALLERY TÂY HỒ VIEW',F('bvp-800',25),OR,WHITE,h=48)
 text(d,(60,PH-130),'Bay một giờ hai mươi phút –',F('pf-700',60),WHITE)
 text(d,(60,PH-60),'về nhà bên biển',F('pf-700',64),ORH)
 items=[('1h20','Đi về thuận tiện','Xuống sân bay 10 phút là về tới nhà'),

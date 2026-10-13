@@ -1,7 +1,7 @@
 # Hướng dẫn chạy quảng cáo Facebook – trang "Căn nhà bên biển Đà Nẵng"
 
 **Trang đích:** https://www.sun-fours-tower.com/can-ho-bien-da-nang
-**Mục tiêu:** khách Hà Nội đăng ký giữ chỗ sự kiện **Chủ nhật 18/10 tại Accost Tây Hồ**, hoặc để lại số nhận bảng tính.
+**Mục tiêu:** khách Hà Nội đăng ký giữ chỗ sự kiện **Chủ nhật 18/10 tại Sun Gallery Tây Hồ View**, hoặc để lại số nhận bảng tính.
 **Thời gian chạy:** Thứ Hai 12/10 → 12:00 Thứ Bảy 17/10.
 **Nội dung quảng cáo:** dùng 3 bài trong file `bai-facebook-su-kien-18-10.md`.
 
@@ -145,7 +145,7 @@ Mỗi khách để lại số, Telegram báo ngay kèm: tên, số, nhu cầu, h
 
 1. **Gọi trong 5–15 phút.** Gọi càng sớm, tỷ lệ khách nghe máy càng cao.
 2. Kịch bản ngắn:
-   > "Em chào anh chị, em là … bên dự án Sun FourS Tower Đà Nẵng. Anh chị vừa đăng ký tham dự sự kiện Tòa F2 Chủ nhật 18/10 tại Accost Tây Hồ. Em xin phép xác nhận anh chị đi mấy người để em gửi thư mời ghi tên ạ?"
+   > "Em chào anh chị, em là … bên dự án Sun FourS Tower Đà Nẵng. Anh chị vừa đăng ký tham dự sự kiện Tòa F2 Chủ nhật 18/10 tại Sun Gallery Tây Hồ View. Em xin phép xác nhận anh chị đi mấy người để em gửi thư mời ghi tên ạ?"
 3. **Gửi thư mời qua Zalo** ngay sau cuộc gọi (kèm giờ, địa chỉ, bản đồ).
 4. Khách chọn "Tư vấn qua video": hẹn giờ gọi video trong ngày 18/10.
 5. **Nhắc lịch:** tối 17/10 nhắn Zalo nhắc; sáng 18/10 gọi xác nhận lần cuối.
@@ -161,7 +161,7 @@ Nhắm vào người đã vào trang nhưng chưa để lại số:
 3. Tạo thêm 1 đối tượng: sự kiện **Lead** · 30 ngày · tên `Da de lai so`.
 4. Tạo nhóm quảng cáo mới, ngân sách 200–300 nghìn/ngày, chạy 15/10 → 12:00 17/10:
    - **Bao gồm:** `Khach vao trang 30 ngay` · **Loại trừ:** `Da de lai so`.
-   - Nội dung: *"Chủ nhật này 18/10 – còn ít chỗ tại Accost Tây Hồ. Anh chị đăng ký để nhận thư mời ghi tên."* Dùng ảnh khác 3 bài đầu.
+   - Nội dung: *"Chủ nhật này 18/10 – còn ít chỗ tại Sun Gallery Tây Hồ View. Anh chị đăng ký để nhận thư mời ghi tên."* Dùng ảnh khác 3 bài đầu.
 
 ---
 

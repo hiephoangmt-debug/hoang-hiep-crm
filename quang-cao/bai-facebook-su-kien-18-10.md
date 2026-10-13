@@ -15,7 +15,7 @@ Nhấn vào 4 ý:
 - Bịa lời khách hàng.
 - Ghi "view sông Hàn".
 
-**Địa điểm:** Accost Tây Hồ, Hà Nội. **Giờ:** bổ sung khi có thư mời chính thức.
+**Địa điểm:** Sun Gallery Tây Hồ View, 58 Quảng Bá, Tây Hồ, Hà Nội. **Giờ:** 9:00 – 11:20.
 
 ---
 
@@ -40,7 +40,7 @@ Tòa F2 – Sun FourS Tower (Sun Group)
 🏦 Vay 70%, 24 tháng không lãi, không gốc
 🔑 Nhận nhà dự kiến 31/05/2028
 
-📅 Chủ nhật 18/10 – Sự kiện giới thiệu Tòa F2 tại Accost Tây Hồ, Hà Nội
+📅 Chủ nhật 18/10 – Sự kiện giới thiệu Tòa F2 tại Sun Gallery Tây Hồ View (58 Quảng Bá, Tây Hồ, Hà Nội)
 Mời anh chị cùng gia đình đến xem mặt bằng, chọn căn và trao đổi trực tiếp với đội dự án.
 
 👉 Đăng ký giữ chỗ – số chỗ có hạn.
@@ -75,7 +75,7 @@ Pháp lý rõ ràng:
 ✅ Techcombank cam kết bảo lãnh cho người mua
 ✅ Đã nghiệm thu kết cấu móng hầm
 
-📅 Chủ nhật 18/10 tại Accost Tây Hồ, Hà Nội: ngồi cùng đội dự án, tính dòng tiền đúng căn anh chị chọn.
+📅 Chủ nhật 18/10 tại Sun Gallery Tây Hồ View (58 Quảng Bá, Tây Hồ, Hà Nội): ngồi cùng đội dự án, tính dòng tiền đúng căn anh chị chọn.
 👉 Giữ chỗ hoặc nhận bảng tính qua Zalo.
 ```
 **Tiêu đề:** `Vốn ~700 triệu, căn hộ Sun Group bên biển`
@@ -105,7 +105,7 @@ Mua chắc mà chưa cần bay vào:
 3️⃣ Giữ căn với cọc 100 triệu, có hợp đồng giữ chỗ
 4️⃣ Ký hợp đồng khi thuận tiện
 
-📅 Chủ nhật 18/10 – gặp đội dự án Tòa F2 Sun FourS Tower ngay tại Accost Tây Hồ, Hà Nội.
+📅 Chủ nhật 18/10 – gặp đội dự án Tòa F2 Sun FourS Tower ngay tại Sun Gallery Tây Hồ View (58 Quảng Bá, Tây Hồ, Hà Nội).
 👉 Đăng ký giữ chỗ cho gia đình.
 ```
 **Tiêu đề:** `Ngôi nhà thứ hai bên biển Đà Nẵng`
