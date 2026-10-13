@@ -243,7 +243,7 @@ function bindRange() {
 }
 function withReport(draw) {
   var key = R.from + '|' + R.to;
-  if (REP && REPKEY === key) { $('#main').innerHTML = rangeBar() + draw(REP); bindRange(); return; }
+  if (REP && REPKEY === key) { $('#main').innerHTML = rangeBar() + draw(REP); bindRange(); if (tab === 'camp') campPlans(); return; }
   $('#main').innerHTML = rangeBar() + '<p class="mut">Đang tính số liệu…</p>'; bindRange();
   run('crmReport', R.from, R.to).then(function (d) { REP = d; REPKEY = d.from + '|' + d.to; if (tab === 'home' || tab === 'camp') render(); }).catch(function (e) { $('#main').innerHTML = rangeBar() + '<div class="card">Không tính được báo cáo: ' + esc(e.message) + '</div>'; bindRange(); });
 }
@@ -937,9 +937,9 @@ function planCalc(p) {
   var sup = Math.round(p.advance * pct / 100);
   return { sold: sold, cur: cur, pct: pct, sup: sup, refund: Math.max(0, p.advance - sup), next: next };
 }
-function planSection(year) {
-  var d = CM.data, plans = (d.plans || []).filter(function (p) { return p.month.slice(0, 4) === year && (!CM.pk || p.kind === CM.pk); }).sort(function (a, b) { return a.month < b.month ? 1 : -1; });
-  var cards = plans.map(function (p) {
+function planCards(plans, emptyMsg) {
+  var d = CM.data;
+  return plans.map(function (p) {
     var c = planCalc(p), spent = d.mkt[p.month] || 0;
     var tiers = (p.tiers || []).map(function (t) { var on = c.cur === t; return '<tr class="' + (on ? 'sel' : '') + '"><td>' + (t.to === '' ? 'Từ ' + t.from + ' căn trở lên' : t.from === t.to ? t.from + ' căn' : 'Từ ' + t.from + ' đến ' + t.to + ' căn') + '</td><td>' + (t.pct >= 100 ? 'Hỗ trợ 100%' : t.pct > 0 ? 'Hỗ trợ ' + t.pct + '%, hoàn lại ' + (100 - t.pct) + '%' : 'Hoàn lại 100%') + '</td><td>' + (on ? '<b>Đang ở mốc này</b>' : '') + '</td></tr>'; }).join('');
     return '<div class="card"><div class="row" style="margin:0"><b>' + monthLabel(p.month) + (p.project ? ' · ' + esc(p.project) : '') + '</b><span class="tag ' + (p.kind === 'Cá nhân' ? 'amb' : 'blu') + '">Kế hoạch ' + esc((p.kind || 'Của sàn').toLowerCase()) + '</span><span class="sp"></span><button class="btn sm" data-pe="' + p.row + '">Sửa</button><button class="btn sm" data-pd="' + p.row + '">Xoá</button></div>' +
@@ -947,14 +947,59 @@ function planSection(year) {
       (p.channels.length ? '<div class="small"><b>Chạy gì:</b> ' + p.channels.map(function (x) { return esc(x.name) + (x.budget ? ' ' + vnd(x.budget) : '') + (x.note ? ' (' + esc(x.note) + ')' : ''); }).join(' · ') + '</div>' : '') +
       (tiers ? '<div class="tw"><table style="margin-top:6px"><tr><th>Số căn bán được</th><th>Điều kiện hỗ trợ</th><th></th></tr>' + tiers + '</table></div>' +
         '<div style="margin-top:6px">Mốc hiện tại: <b>' + (c.cur ? (c.pct >= 100 ? 'hỗ trợ 100%' : c.pct > 0 ? 'hỗ trợ ' + c.pct + '%' : 'hoàn lại 100%') : 'chưa có mốc phù hợp') + '</b>. Được hỗ trợ <b>' + vnd(c.sup) + '</b>, phải hoàn lại <b>' + vnd(c.refund) + '</b>.' +
-        (c.next ? ' Bán thêm <b>' + (c.next.from - c.sold) + ' căn</b> nữa để lên mốc hỗ trợ ' + c.next.pct + '%.' : '') + '</div>' : '') + (p.docs && p.docs.length ? '<div class="small" style="margin-top:6px"><b>Tài liệu:</b> ' + p.docs.map(function (d) { return '<a href="' + esc(d.url) + '" target="_blank" rel="noopener">' + esc(d.title || d.url) + '</a>'; }).join(' · ') + '</div>' : '') + (p.note ? '<div class="small mut" style="margin-top:4px">' + esc(p.note) + '</div>' : '') + '</div>';
-  }).join('') || '<div class="card mut">Chưa có kế hoạch năm ' + year + '. Bấm "Thêm kế hoạch tháng" để ghi chạy gì, chi bao nhiêu, tiền ứng và các mốc hỗ trợ.</div>';
-  return '<h3 style="margin:14px 2px 8px">Kế hoạch marketing <button class="btn sm p" id="pladd">+ Thêm kế hoạch tháng</button></h3><div class="row chips">' + [['', 'Tất cả'], ['Của sàn', 'Của sàn'], ['Cá nhân', 'Của cá nhân']].map(function (x) { return '<button class="chip' + (CM.pk === x[0] ? ' on' : '') + '" data-pk="' + x[0] + '">' + x[1] + '</button>'; }).join('') + '</div>' + cards;
+        (c.next ? ' Bán thêm <b>' + (c.next.from - c.sold) + ' căn</b> nữa để lên mốc hỗ trợ ' + c.next.pct + '%.' : '') + '</div>' : '') + (p.docs && p.docs.length ? '<div class="small" style="margin-top:6px"><b>Tài liệu:</b> ' + p.docs.map(function (d) { return '<a href="' + esc(d.url) + '" target="_blank" rel="noopener">' + esc(d.title || d.url) + '</a>'; }).join(' · ') + '</div>' : '') + (p.note ? '<div class="small mut" style="margin-top:4px">' + esc(p.note) + '</div>' : '') + '<div class="small" id="pa' + p.row + '" style="margin-top:6px"></div></div>';
+  }).join('') || '<div class="card mut">' + emptyMsg + '</div>';
+}
+function planHead() {
+  return '<h3 style="margin:14px 2px 8px">Kế hoạch marketing và chi phí <button class="btn sm p" id="pladd">+ Thêm kế hoạch tháng</button></h3><div class="row chips">' + [['', 'Tất cả'], ['Của sàn', 'Của sàn'], ['Cá nhân', 'Của cá nhân']].map(function (x) { return '<button class="chip' + (CM.pk === x[0] ? ' on' : '') + '" data-pk="' + x[0] + '">' + x[1] + '</button>'; }).join('') + '</div>';
+}
+var PM = {};
+function planPlatform(name) { name = String(name).toLowerCase(); return /google|\bgg\b|youtube/.test(name) ? 'google' : /facebook|\bfb\b|meta|instagram/.test(name) ? 'facebook' : /tiktok/.test(name) ? 'tiktok' : /zalo/.test(name) ? 'zalo' : ''; }
+function planActual(plans) {
+  plans.forEach(function (p) {
+    var fill = function (rep) {
+      var el = $('#pa' + p.row); if (!el) return;
+      var by = {}; rep.campaigns.forEach(function (c) { var k = String(c.platform || '').toLowerCase(); by[k] = (by[k] || 0) + c.cost; });
+      var rows = p.channels.map(function (c) {
+        var pf = planPlatform(c.name), act = pf ? Object.keys(by).reduce(function (a, k) { return k.indexOf(pf) >= 0 ? a + by[k] : a; }, 0) : null;
+        return esc(c.name) + ': kế hoạch ' + money(c.budget) + (act === null ? '' : ', thực chi <b style="color:' + (c.budget && act > c.budget ? 'var(--red)' : 'inherit') + '">' + money(act) + '</b>' + (c.budget ? ' (' + Math.round(act / c.budget * 100) + '%)' : ''));
+      });
+      var tot = rep.tot.cost;
+      el.innerHTML = '<b>Đối chiếu chi phí thực tế tháng này:</b> tổng đã chi ' + money(tot) + (p.budget ? ' trên ngân sách ' + money(p.budget) + ' (' + Math.round(tot / p.budget * 100) + '%)' : '') + (rows.length ? '<br>' + rows.join(' · ') : '') + ' <span class="mut">· lấy tự động từ các chiến dịch bên dưới</span>';
+    };
+    if (PM[p.month]) { fill(PM[p.month]); return; }
+    var y = +p.month.slice(0, 4), m = +p.month.slice(5), last = new Date(y, m, 0).getDate();
+    run('crmReport', p.month + '-01', p.month + '-' + ('0' + last).slice(-2)).then(function (r) { PM[p.month] = r; fill(r); }).catch(function () {});
+  });
+}
+function campPlans() {
+  var host = $('#plansec'); if (!host) return;
+  if (!CM.data) {
+    host.innerHTML = '<div class="card mut">Đang tải kế hoạch marketing…</div>';
+    run('crmCommLoad').then(function (r) { CM.data = r; if (!CM.year) CM.year = ymdNow(0).slice(0, 4); if (tab === 'camp') campPlans(); }).catch(function (e) { host.innerHTML = '<div class="card">Không tải được kế hoạch: ' + esc(e.message) + '</div>'; });
+    return;
+  }
+  var a = R.from.slice(0, 7), b = R.to.slice(0, 7);
+  var plans = (CM.data.plans || []).filter(function (p) { return p.month >= a && p.month <= b && (!CM.pk || p.kind === CM.pk); }).sort(function (x, y) { return x.month < y.month ? 1 : -1; });
+  host.innerHTML = planHead() + planCards(plans, 'Chưa có kế hoạch trong khoảng thời gian này. Bấm "Thêm kế hoạch tháng" để ghi chạy gì, chi bao nhiêu, tiền ứng và các mốc hỗ trợ.');
+  planBind(); planActual(plans);
+}
+function gotoTab(t, month) {
+  if (month) { var y = +month.slice(0, 4), m = +month.slice(5), last = new Date(y, m, 0).getDate(); R = { p: 'custom', from: month + '-01', to: month + '-' + ('0' + last).slice(-2) }; saveRange(); }
+  tab = t; V.phone = ''; document.querySelectorAll('#nav button').forEach(function (x) { x.classList.toggle('on', x.dataset.t === t); }); render(); window.scrollTo(0, 0);
+}
+function planSection(year) {
+  var plans = (CM.data.plans || []).filter(function (p) { return p.month.slice(0, 4) === year; }).sort(function (a, b) { return a.month < b.month ? 1 : -1; });
+  return '<h3 style="margin:14px 2px 8px">Kế hoạch marketing</h3>' + (plans.length ? plans.map(function (p) {
+    var c = planCalc(p);
+    return '<div class="card"><div class="row" style="margin:0"><b>' + monthLabel(p.month) + (p.project ? ' · ' + esc(p.project) : '') + '</b><span class="tag ' + (p.kind === 'Cá nhân' ? 'amb' : 'blu') + '">' + esc(p.kind || 'Của sàn') + '</span><span class="sp"></span><button class="btn sm" data-pg="' + p.month + '">Mở trong Chiến dịch</button></div><div class="small">Ngân sách ' + money(p.budget) + ' · đã ứng ' + money(p.advance) + ' · chi thực tế ' + money(CM.data.mkt[p.month] || 0) + ' · bán ' + c.sold + ' căn' + (p.advance ? ' · được hỗ trợ ' + vnd(c.sup) + ', phải hoàn ' + vnd(c.refund) : '') + '</div></div>';
+  }).join('') : '<div class="card mut">Chưa có kế hoạch. Kế hoạch marketing và chi phí được quản lý trong tab Chiến dịch.</div>');
 }
 function planBind() {
   var d = CM.data;
-  $('#pladd').onclick = function () { planForm(null); };
-  document.querySelectorAll('[data-pk]').forEach(function (b) { b.onclick = function () { CM.pk = b.dataset.pk; comm(); }; });
+  if ($('#pladd')) $('#pladd').onclick = function () { planForm(null); };
+  document.querySelectorAll('[data-pk]').forEach(function (b) { b.onclick = function () { CM.pk = b.dataset.pk; render(); }; });
+  document.querySelectorAll('[data-pg]').forEach(function (b) { b.onclick = function () { gotoTab('camp', b.dataset.pg); }; });
   document.querySelectorAll('[data-pe]').forEach(function (b) { b.onclick = function () { planForm(d.plans.filter(function (x) { return x.row === +b.dataset.pe; })[0]); }; });
   document.querySelectorAll('[data-pd]').forEach(function (b) { b.onclick = function () { if (!confirm('Xoá kế hoạch này?')) return; run('crmPlanDelete', +b.dataset.pd).then(function () { toast('Đã xoá'); commLoad(); }).catch(fail); }; });
 }
@@ -1270,7 +1315,7 @@ function camp() {
       hBars('Khách để lại số theo chiến dịch', L.map(function (x) { return { label: x.name, value: x.leads, color: '#F28C28' }; })) +
       hBars('Giá mỗi khách (CPL), thấp là tốt', wl.map(function (x) { return { label: x.name, value: Math.round(x.cost / x.leads), color: x.cost / x.leads > avgCpl * 1.5 ? '#C62828' : x.cost / x.leads < avgCpl * 0.7 ? '#1E8E4F' : '#5E6B85' }; }), vnd, 'xanh lá: tốt hơn trung bình, đỏ: cao hơn trung bình 50%') +
       miniBars(P.daily, 'cost', '#5E6B85', 'Chi phí theo ngày', vnd) + miniBars(P.daily, 'leads', '#F28C28', 'Khách theo ngày');
-    return sum + '<div class="grid">' + k + '</div>' + charts + '<div class="card tw"><b>Số liệu từng chiến dịch</b><table><tr><th>Chiến dịch</th><th>Thời gian chạy</th><th>Chi phí</th><th title="So với kỳ liền trước có cùng số ngày. Kỳ trước chi rất ít thì số này sẽ rất lớn.">So kỳ trước ⓘ</th><th>Hiển thị</th><th>Click QC</th><th>CTR</th><th>CPC</th><th>Truy cập</th><th>Bấm Zalo/Gọi</th><th>Khách</th><th title="So với kỳ liền trước có cùng số ngày. Kỳ trước chi rất ít thì số này sẽ rất lớn.">So kỳ trước ⓘ</th><th>Giá/khách</th><th>Chốt</th><th>Doanh thu</th><th>ROAS</th></tr>' +
+    return sum + '<div id="plansec"></div><div class="grid">' + k + '</div>' + charts + '<div class="card tw"><b>Số liệu từng chiến dịch</b><table><tr><th>Chiến dịch</th><th>Thời gian chạy</th><th>Chi phí</th><th title="So với kỳ liền trước có cùng số ngày. Kỳ trước chi rất ít thì số này sẽ rất lớn.">So kỳ trước ⓘ</th><th>Hiển thị</th><th>Click QC</th><th>CTR</th><th>CPC</th><th>Truy cập</th><th>Bấm Zalo/Gọi</th><th>Khách</th><th title="So với kỳ liền trước có cùng số ngày. Kỳ trước chi rất ít thì số này sẽ rất lớn.">So kỳ trước ⓘ</th><th>Giá/khách</th><th>Chốt</th><th>Doanh thu</th><th>ROAS</th></tr>' +
       (rows || '<tr><td colspan="16" class="mut">Chưa có chiến dịch hoặc chi phí trong khoảng này. Khai báo ở tab Chiến dịch của Sheet và chạy tập lệnh chi phí.</td></tr>') + '</table></div>' +
       '<h3 style="margin:16px 0 8px">Đánh giá và đề xuất</h3>' + (advice || '<div class="card mut">Chưa có dữ liệu để đánh giá.</div>') + guide;
   });
