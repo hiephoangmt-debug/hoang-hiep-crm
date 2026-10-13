@@ -44,7 +44,7 @@ sheets.Website.appendRow(['Landing A', 'a.com', 'testkey12345']);
 for (let i = 1; i < 40; i++) { (sheets['Khách hàng'].rows[i] ||= [])[14] = false; (sheets['Lượt bấm'].rows[i] ||= [])[8] = false; }
 const out = (o) => ({ setMimeType() { return { body: o }; } });
 const ctx = vm.createContext({
-  SpreadsheetApp: { openById: (id) => { if (id.startsWith('BAD')) throw new Error('no'); return globalThis.__ext; }, getActiveSpreadsheet: () => ({ getSheetByName: (n) => sheets[n], insertSheet: (n) => (sheets[n] = new Sheet(n, [])), getOwner: () => ({ getEmail: () => 'owner@gmail.com' }) }), getUi: () => ({ alert(m) { globalThis.__alert = m; }, showModelessDialog(h, title) { globalThis.__dialog = { h, title }; } }) },
+  SpreadsheetApp: { openById: (id) => { if (id.startsWith('BAD')) throw new Error('no'); return globalThis.__ext; }, getActiveSpreadsheet: () => ({ getId: () => 'x', getSheetByName: (n) => sheets[n], insertSheet: (n) => (sheets[n] = new Sheet(n, [])), getOwner: () => ({ getEmail: () => 'owner@gmail.com' }) }), getUi: () => ({ alert(m) { globalThis.__alert = m; }, showModelessDialog(h, title) { globalThis.__dialog = { h, title }; } }) },
   UrlFetchApp: { fetch: (u, o) => { globalThis.__fetch = { u, o }; return { getResponseCode: () => 200, getContentText: () => JSON.stringify({ content: [{ text: 'Trả lời thử' }] }) }; } },
   CacheService: { getScriptCache: () => ({ get: () => null, put() {} }) },
   LockService: { getScriptLock: () => ({ waitLock() {}, releaseLock() {} }) },
@@ -114,7 +114,7 @@ assert.equal(ctx.crmKey_(), K);
 assert.throws(() => ctx.crmLoad('sai-khoa'), /Không có quyền/); assert.throws(() => ctx.crmLog('', '0988111222', 'call'), /Không có quyền/);
 assert.equal(ctx.doGet({ parameter: { k: 'sai' } }).file, undefined); assert.ok(ctx.doGet({ parameter: { k: K } }).content.includes('CRM Hoàng Hiệp') && ctx.doGet({ parameter: { k: K } }).content.includes('</html>'));
 const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
-assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-31'); assert.equal(JSON.stringify(dbg).includes(K), false);
+assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-32'); assert.equal(JSON.stringify(dbg).includes(K), false);
 const L = ctx.crmLoad(K);
 assert.equal(L.leads.length, 2);
 const l0 = L.leads.find((x) => x.phone === '0988111222');
@@ -317,7 +317,7 @@ assert.throws(() => ctx.crmAsk(ctx.crmKey_(), '  '), /Chưa nhập câu hỏi/);
     ['2025-09-02 09:00:00', 'Trùng My', '0935777013', '', '']
   ];
   const skip = new Sheet('TONG_HOP', []); skip.rows = [['a', 'b', 'c']];
-  globalThis.__ext = { getName: () => 'DATA CHẠY GOOGLE', getSheets: () => [tab, skip], getSheetByName: (n) => [tab, skip].find((s) => s.name === n) || null };
+  globalThis.__ext = { getId: () => 'x', getName: () => 'DATA CHẠY GOOGLE', getSheets: () => [tab, skip], getSheetByName: (n) => [tab, skip].find((s) => s.name === n) || null };
   const URL = 'https://docs.google.com/spreadsheets/d/1yvgJAi4LKDZXiWSa_sS02rlQxvhh-nO-4kJ3GmxzxOE/edit?usp=sharing';
   assert.throws(() => ctx.crmSheetTabs('sai', URL), /Không có quyền/);
   assert.throws(() => ctx.crmSheetTabs(K3, 'https://evil.com/spreadsheets/d/xxxxxxxxxxxxxxxxxxxxxxxxx'), /Google Sheet/);
@@ -342,4 +342,5 @@ assert.throws(() => ctx.crmAsk(ctx.crmKey_(), '  '), /Chưa nhập câu hỏi/);
   ctx.crmUpdateLead(K3, '0935777013', { docUrl: 'javascript:alert(1)' });
   assert.equal(ctx.crmLoad(K3).leads.find((l) => l.phone === '0935777013').docUrl, '');
 }
+ctx.capQuyenDocSheet();
 console.log('OK – Code.gs đạt mọi test');

@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-31', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-32', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -1029,11 +1029,19 @@ function onOpen() {
     .addItem('Link vào CRM (giao diện web)', 'showCrmLink')
     .addItem('Đổi link CRM (huỷ link cũ)', 'resetCrmLink')
     .addItem('Cài khoá quân sư (AI)', 'caiKhoaQuanSu')
+    .addItem('Cấp quyền đọc Google Sheet khác (để nhập khách)', 'capQuyenDocSheet')
     .addItem('Xem mã nhúng cho các website', 'showEmbed')
     .addItem('Tạo mã website ngẫu nhiên', 'newSiteKey')
     .addToUi();
 }
 
+// Chạy một lần để Google hỏi quyền mở Google Sheet khác bằng link (dùng cho nút Nhập từ link Google Sheet).
+function capQuyenDocSheet() {
+  var id = ss_().getId(), name = SpreadsheetApp.openById(id).getName();
+  var msg = 'Đã có quyền đọc Google Sheet. Thử mở file "' + name + '" thành công. Bây giờ dùng được nút Nhập từ link Google Sheet trong CRM.';
+  Logger.log(msg);
+  try { SpreadsheetApp.getUi().alert(msg); } catch (e) {}
+}
 function webAppUrl_() { return ScriptApp.getService().getUrl(); }
 
 function showEmbed() {
