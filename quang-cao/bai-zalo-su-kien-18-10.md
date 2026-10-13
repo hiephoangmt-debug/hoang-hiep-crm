@@ -9,12 +9,13 @@ Tải 2 ảnh trong thư mục `quang-cao/anh-zalo/` về điện thoại:
 | `thu-moi-su-kien-18-10-ha-noi.jpg` | 1080×1350 (dọc) | Bài 1, Tin nhắn 1 và 2 |
 | `vi-sao-gia-dinh-ha-noi-chon-da-nang.jpg` | 1080×1080 (vuông) | Bài 2, Tin nhắn 3 |
 
-## Link đăng ký
+## Cách khách đăng ký (không cần link)
 
-```
-https://www.sun-fours-tower.com/can-ho-bien-da-nang?utm_source=zalo&utm_campaign=su-kien-18-10#su-kien-hn
-```
-Link này mở thẳng vào khối giữ chỗ sự kiện 18/10. Khách đăng ký sẽ báo về Telegram, nguồn ghi **zalo**.
+Bài đăng **không gắn link** (tránh lỗi mất kết nối khi Zalo tải link). Khách đăng ký bằng cách:
+- Nhắn Zalo hoặc gọi **0904 567 009** – số đã in sẵn trên cả 2 ảnh.
+- Hoặc bình luận "ĐĂNG KÝ" dưới bài nhật ký.
+
+Khi khách nhắn, anh ghi vào CRM (hoặc điền hộ khách form trên trang) để theo dõi.
 
 Zalo không hiển thị chữ đậm, nên bài viết dùng chữ thường và biểu tượng. Anh chép nguyên văn phần trong khung.
 
@@ -40,9 +41,9 @@ Một căn nhà bên biển Đà Nẵng cho cả gia đình:
 
 Tại sự kiện, anh chị được xem mặt bằng, chọn căn hợp hướng và tính dòng tiền đúng căn mình quan tâm cùng đội dự án.
 
-Số chỗ có hạn – đăng ký để nhận thư mời ghi tên:
-👉 https://www.sun-fours-tower.com/can-ho-bien-da-nang?utm_source=zalo&utm_campaign=su-kien-18-10#su-kien-hn
-📞 Zalo/Hotline: 0904 567 009 – Hiệp
+Số chỗ có hạn – để nhận thư mời ghi tên, anh chị:
+👉 Nhắn Zalo hoặc gọi 0904 567 009 (Hiệp)
+👉 Hoặc bình luận "ĐĂNG KÝ" + số người đi, em liên hệ lại ngay
 ```
 
 ---
@@ -65,7 +66,7 @@ Tòa F2 – Sun FourS Tower:
 
 📅 Chủ nhật 18/10 – gặp đội dự án ngay tại Accost Tây Hồ, Hà Nội.
 Anh chị chưa đến được thì đăng ký tư vấn qua video trong ngày.
-👉 https://www.sun-fours-tower.com/can-ho-bien-da-nang?utm_source=zalo&utm_campaign=su-kien-18-10#su-kien-hn
+👉 Nhắn Zalo 0904 567 009 (Hiệp) để giữ chỗ hoặc hẹn giờ gọi video
 ```
 
 ---
@@ -87,8 +88,7 @@ Anh/chị sắp xếp đi được, em gửi thư mời ghi tên cho mình nhé.
 📩 Mời anh chị cùng gia đình tham dự sự kiện giới thiệu Tòa F2 – Sun FourS Tower (Sun Group, Đà Nẵng)
 📅 Chủ nhật 18/10/2026 · 📍 Accost Tây Hồ, Hà Nội
 🏖 Cách biển 2 km · ✈️ bay 1h20 · 💰 vốn ban đầu ~700 triệu · vay 70% không lãi 24 tháng
-Đăng ký nhận thư mời: https://www.sun-fours-tower.com/can-ho-bien-da-nang?utm_source=zalo&utm_campaign=su-kien-18-10#su-kien-hn
-Hoặc nhắn Zalo 0904 567 009 (Hiệp)
+Đăng ký nhận thư mời: nhắn Zalo hoặc gọi 0904 567 009 (Hiệp)
 ```
 
 ---
