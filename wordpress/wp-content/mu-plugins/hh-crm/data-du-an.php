@@ -744,6 +744,17 @@ function hh_import_projects() {
 	if ( function_exists( 'hh_img_links_queue' ) ) {
 		foreach ( hh_project_dataset() as $p ) {
 			$post = ! empty( $p['meta']['hh_p_image_links'] ) ? get_page_by_path( $p['slug'], OBJECT, 'du-an' ) : null;
+			// Ảnh đi kèm plugin từng tải lỗi (gói cập nhật trước thiếu file) mà nay file đã có → thử lại.
+			if ( $post && function_exists( 'hh_img_link_local_path' ) ) {
+				$done  = (array) get_post_meta( $post->ID, '_hh_img_links', true );
+				$retry = array_filter( $done, static fn( $v, $k ) => ! is_int( $v ) && hh_img_link_local_path( (string) $k ), ARRAY_FILTER_USE_BOTH );
+				if ( $retry ) {
+					update_post_meta( $post->ID, '_hh_img_links', array_diff_key( $done, $retry ) );
+					foreach ( array_keys( $retry ) as $k ) {
+						delete_post_meta( $post->ID, '_hh_img_fail_' . md5( $k ) );
+					}
+				}
+			}
 			if ( $post && hh_img_links_pending( $post->ID ) ) {
 				hh_img_links_queue( $post->ID );
 			}

@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.18** + plugin Hoàng Hiệp CRM **2.20.43**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.18** + plugin Hoàng Hiệp CRM **2.20.44**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.44: bổ sung đủ ảnh còn thiếu trên web
+- Nguyên nhân thiếu: gói 18 MB vượt giới hạn tải lên của hosting nên ảnh FPT Plaza 3, Võ Chí Công, Đầm Sen, Nam Hội An… chưa lên web.
+- Chia thành **7 gói nhỏ** `cap-nhat-code-1.zip` … `cap-nhat-code-7.zip` (mỗi gói ≤ 4,2 MB, gói nào cũng có đủ code mới). Cài lần lượt cả 7 gói bằng Nhập nhanh.
+- Nhập dữ liệu giờ **tự thử tải lại** ảnh từng lỗi khi file ảnh đã có.
+- Cài: Nhập nhanh 7 gói → **Nhập dữ liệu Đà Nẵng → Nhập / cập nhật dữ liệu** → chờ vài phút cho ảnh tải ngầm → LiteSpeed Cache → Purge All.
 
 ## Có gì mới – plugin 2.20.43: Fusion Resort & Villas Đà Nẵng
 - Ảnh đại diện toàn cảnh dãy biệt thự bên biển, mặt bằng loại biệt thự (1 – 6 phòng ngủ) làm mặt bằng tổng thể, 11 ảnh thư viện (hồ bơi riêng, sân vườn, cổng, mặt tiền), 2 ảnh tiện ích.
