@@ -741,7 +741,7 @@ function pageSummary(l) {
     '<div class="srow nxt"><span class="mut">Lịch hẹn tiếp theo</span><b id="nxtShow">' + esc(nxt) + '</b></div>' +
     row('Chăm sóc gần nhất', l.careAt ? fmt(l.careAt) + (l.careResult ? ' · ' + l.careResult : '') : 'Chưa chăm sóc') + '<div class="srow"><span class="mut">Phản hồi gần nhất</span><span id="lastReply" class="mut">Đang tải…</span></div>' +
     row('Số lần chăm sóc', String(l.careCount || 0)) + row('SĐT phụ', l.phone2) + row('Zalo', l.zalo) + row('Email', l.email) + row('Địa chỉ', [l.address, l.district, l.province].filter(Boolean).join(', ') || 'Chưa cập nhật') + row('Nguồn khách', src || 'Chưa rõ') + row('Ngày phát sinh', fmt(l.at) + ' (' + ago(l.at) + ')') +
-    row('Website', l.site) + row('Trang phát sinh', l.leadUrl) + (l.docUrl ? '<div class="srow"><span class="mut">Hồ sơ Drive</span><span><a href="' + esc(l.docUrl) + '" target="_blank" rel="noopener">Mở link</a></span></div>' : '') + row('Dự án quan tâm', l.project || 'Chưa có dự án') + row('Loại căn', l.product) + row('Nhu cầu', l.purpose) + row('Ngân sách', l.budget) + row('Vốn tự có', l.equity) +
+    row('Website', l.site) + row('Trang phát sinh', l.leadUrl) + (l.docUrl ? '<div class="srow"><span class="mut">Hồ sơ Drive</span><span><a href="' + esc(l.docUrl) + '" target="_blank" rel="noopener">Mở link</a></span></div>' : '') + row('Dự án quan tâm', canonProj(l.project) || 'Chưa có dự án') + row('Loại căn', l.product) + row('Nhu cầu', l.purpose) + row('Ngân sách', l.budget) + row('Vốn tự có', l.equity) +
     row('Vay ngân hàng', l.loan ? l.loan + (l.loanAmt ? ' · ' + l.loanAmt : '') : '') + row('Thời điểm mua', l.buyTime) + row('Chưa quyết định vì', l.undecided) + row('Đã xem dự án', l.viewCount ? l.viewProject + ' · ' + fdmy(l.viewAt) + (l.viewCount > 1 ? ' (+' + (l.viewCount - 1) + ' lần)' : '') : 'Chưa đi xem') + row('Ghi chú', l.note) + '</div>';
 }
 function remindBox(l) {
@@ -759,7 +759,7 @@ function openLead(phone, page, keep) {
   var srcLine = [l.srcType, l.source, l.campaign].filter(Boolean).join(' · ') || 'Chưa rõ';
   var P = {
     h2: '<h2 style="margin:0">KH' + pad(l.id) + ' · ' + esc(l.name || '(chưa có tên)') + ' · ' + esc(l.phone) + ' ' + zl(l.phone, l) + '</h2><p class="mut small">' + esc(l.site) + ' · ' + esc(l.email) + ' · gửi form ' + l.submits + ' lần · nhận lúc ' + esc(fmt(l.at)) + '</p>',
-    actions: '<div class="row" style="margin:6px 0"><input id="qnm" value="' + esc(l.name) + '" placeholder="Nhập tên khách" style="flex:1;min-width:140px"><button class="btn sm p" id="qnmok">Lưu tên</button></div><div class="row"><button class="btn z" data-a="zalo">Nhắn Zalo</button><button class="btn g" data-a="call">Gọi</button><button class="btn" data-a="sms">Đã nhắn SMS</button>' + (aiOn() ? '<button class="btn" id="zcBtn">Chụp Zalo gửi lên</button>' : '') + (aiOn() ? '<button class="btn" id="aiBtn">AI phân tích khách hàng</button>' : '') + '</div>' +
+    actions: '<div class="row" style="margin:6px 0"><input id="qnm" value="' + esc(l.name) + '" placeholder="Nhập tên khách" style="flex:1;min-width:140px"><button class="btn sm p" id="qnmok">Lưu tên</button></div><div class="row" style="margin:6px 0"><span class="mut small">Giao sale:</span><select id="qas" style="flex:1;min-width:140px"><option value="">Chưa giao</option>' + saleNames([l.assignee].filter(Boolean)).map(function (x) { return '<option' + (x === l.assignee ? ' selected' : '') + '>' + esc(x) + '</option>'; }).join('') + '</select><button class="btn sm" id="qasadd">+ Thêm sale</button></div><div class="row"><button class="btn z" data-a="zalo">Nhắn Zalo</button><button class="btn g" data-a="call">Gọi</button><button class="btn" data-a="sms">Đã nhắn SMS</button>' + (aiOn() ? '<button class="btn" id="zcBtn">Chụp Zalo gửi lên</button>' : '') + (aiOn() ? '<button class="btn" id="aiBtn">AI phân tích khách hàng</button>' : '') + '</div>' +
     '<div id="aiOut" class="card" hidden></div>',
     personal: '<h3>Thông tin cá nhân <span class="tag">Khách cung cấp</span></h3><div class="fgrid">' +
     lab('Họ và tên', inp('nm', l.name)) + lab('Link Drive / hồ sơ khách', inp('du', l.docUrl)) + lab('SĐT phụ', inp('p2', l.phone2)) + lab('Zalo', sel('zl', ['Đã kết nối', 'Chưa xác nhận', 'Không dùng Zalo'], l.zalo, 'Chưa cập nhật')) +
@@ -811,6 +811,13 @@ function openLead(phone, page, keep) {
   document.querySelectorAll('#main [data-a], #dlgBody [data-a]').forEach(function (b) { b.onclick = function () {
     var a = b.dataset.a; if (a === 'zalo') window.open('https://zalo.me/' + phone, '_blank', 'noopener'); if (a === 'call') window.open('tel:' + phone, '_self');
     run('crmLog', phone, a).then(function (r) { l.called = r.called; l.messaged = r.messaged; l.contactedAt = r.contactedAt; l.status = r.status; badges(); toast('Đã ghi nhận'); fin(); }).catch(fail); }; });
+  $('#qas').onchange = function () {
+    var v = this.value; run('crmUpdateLead', phone, { assignee: v }).then(function () { l.assignee = v; if ($('#as')) $('#as').value = v; toast(v ? 'Đã giao cho ' + v : 'Đã bỏ giao'); }).catch(fail);
+  };
+  $('#qasadd').onclick = function () {
+    var n = window.prompt('Tên sale cần thêm (ví dụ: Nguyễn Văn A)'); if (!n || !n.trim()) return; n = n.trim();
+    run('crmAddSale', n).then(function (r) { D.sales = r || D.sales; if (D.sales.indexOf(n) < 0) D.sales.push(n); return run('crmUpdateLead', phone, { assignee: n }); }).then(function () { l.assignee = n; toast('Đã giao cho ' + n); fin(); }).catch(fail);
+  };
   $('#qnmok').onclick = function () {
     var v = $('#qnm').value.trim(); if (!v) { toast('Hãy nhập tên'); return; }
     run('crmUpdateLead', phone, { name: v }).then(function () { l.name = v; $('#nm').value = v; toast('Đã lưu tên'); fin(); }).catch(fail);
