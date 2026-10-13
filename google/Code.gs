@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-15', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-16', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -53,8 +53,8 @@ function iso_(d) { return d && typeof d.getTime === 'function' ? new Date(d.getT
 function phoneStr_(v) { var p = String(v == null ? '' : v); return p.length === 9 ? '0' + p : p; }
 
 // ---- Cột mở rộng của tab Khách hàng (W..AB): hẹn tiếp theo, ngân sách, mục đích, loại căn, tiềm năng, vay ----
-var LEAD_COLS = 41;
-var LEAD_HEAD2 = ['SĐT phụ', 'Zalo', 'Tỉnh/thành phố', 'Ngày sinh', 'Nghề nghiệp', 'Ngân sách tối thiểu', 'Ngân sách tối đa', 'Vốn tự có', 'Khoản vay dự kiến', 'Thời điểm dự kiến mua', 'Lý do chưa quyết định', 'Loại nguồn', 'Trang phát sinh lead'];
+var LEAD_COLS = 42;
+var LEAD_HEAD2 = ['SĐT phụ', 'Zalo', 'Tỉnh/thành phố', 'Ngày sinh', 'Nghề nghiệp', 'Ngân sách tối thiểu', 'Ngân sách tối đa', 'Vốn tự có', 'Khoản vay dự kiến', 'Thời điểm dự kiến mua', 'Lý do chưa quyết định', 'Loại nguồn', 'Trang phát sinh lead', 'Dự án quan tâm'];
 function ensureLeadCols_(sh) {
   try {
     var mc = sh.getMaxColumns();
@@ -63,9 +63,10 @@ function ensureLeadCols_(sh) {
       sh.getRange(1, 23, 1, 6).setValues([['Hẹn tiếp theo', 'Ngân sách', 'Mục đích mua', 'Loại căn quan tâm', 'Tiềm năng (tự đánh giá)', 'Vay ngân hàng']]);
       sh.getRange(2, 23, Math.max(sh.getMaxRows() - 1, 1), 1).setNumberFormat('@');
     }
+    if (sh.getRange(1, 29).getValue() && !sh.getRange(1, 42).getValue()) sh.getRange(1, 42).setValue('Dự án quan tâm');
     if (!sh.getRange(1, 29).getValue()) {
       sh.getRange(1, 29, 1, LEAD_HEAD2.length).setValues([LEAD_HEAD2]);
-      sh.getRange(2, 29, Math.max(sh.getMaxRows() - 1, 1), 13).setNumberFormat('@');
+      sh.getRange(2, 29, Math.max(sh.getMaxRows() - 1, 1), 14).setNumberFormat('@');
     }
   } catch (e) {}
 }
@@ -136,7 +137,7 @@ function crmLoad(k) {
       contactedAt: iso_(r[16]), status: String(r[18] || 'Mới'), assignee: String(r[19] || ''), value: Number(r[20]) || 0, note: String(r[21] || ''),
       next: ymd_(r[22]), budget: String(r[23] || ''), purpose: String(r[24] || ''), product: String(r[25] || ''), heat: String(r[26] || ''), loan: String(r[27] || ''),
       phone2: String(r[28] || ''), zalo: String(r[29] || ''), province: String(r[30] || ''), dob: ymd_(r[31]), job: String(r[32] || ''), bmin: String(r[33] || ''), bmax: String(r[34] || ''),
-      equity: String(r[35] || ''), loanAmt: String(r[36] || ''), buyTime: String(r[37] || ''), undecided: String(r[38] || ''), srcType: String(r[39] || ''), leadUrl: String(r[40] || '') };
+      equity: String(r[35] || ''), loanAmt: String(r[36] || ''), buyTime: String(r[37] || ''), undecided: String(r[38] || ''), srcType: String(r[39] || ''), leadUrl: String(r[40] || ''), project: String(r[41] || '') };
   }).reverse();
   var sm = summaries_();
   out.leads.forEach(function (l) {
@@ -195,7 +196,7 @@ function leadContext_(phone) {
     '. Nguồn: ' + (g(6) || 'không rõ') + ', chiến dịch: ' + (g(7) || 'không rõ') + (g(40) ? ', trang: ' + g(40) : '') + '.',
     'Tương tác trên web: gửi form ' + (Number(r[9]) || 1) + ' lần, bấm Zalo ' + (Number(r[10]) || 0) + ' lần, bấm Gọi ' + (Number(r[11]) || 0) + ' lần. Đã gọi: ' + (r[14] === true ? 'rồi' : 'chưa') + ', đã nhắn: ' + (r[15] === true ? 'rồi' : 'chưa') + '.',
     'Trạng thái: ' + (g(18) || 'Mới') + '. Sale phụ trách: ' + (g(19) || 'chưa giao') + '. Hẹn tiếp theo: ' + (ymd_(r[22]) || 'chưa có') + '. Tự đánh giá tiềm năng: ' + (g(26) || 'chưa'),
-    'Nhu cầu: mục đích ' + (g(24) || 'chưa rõ') + ', loại căn ' + (g(25) || 'chưa rõ') + ', ngân sách ' + (g(33) || '?') + ' đến ' + (g(34) || '?') + ', vốn tự có ' + (g(35) || 'chưa rõ') +
+    'Nhu cầu: dự án quan tâm ' + (g(41) || 'chưa rõ') + ', mục đích ' + (g(24) || 'chưa rõ') + ', loại căn ' + (g(25) || 'chưa rõ') + ', ngân sách ' + (g(33) || '?') + ' đến ' + (g(34) || '?') + ', vốn tự có ' + (g(35) || 'chưa rõ') +
     ', vay ngân hàng ' + (g(27) || 'chưa hỏi') + (g(36) ? ' (' + g(36) + ')' : '') + ', thời điểm dự kiến mua ' + (g(37) || 'chưa rõ') + '. Lý do chưa quyết định: ' + (g(38) || 'chưa rõ') + '.',
     'Địa phương: ' + (g(30) || 'chưa rõ') + ', nghề nghiệp: ' + (g(32) || 'chưa rõ') + '. Ghi chú chung: ' + (g(21) || 'không có') + '.'];
   var h = crmHistory_(phone);
@@ -315,7 +316,7 @@ function applyFields_(sh, r, f) {
   if (f.product !== undefined) set(26, str_(f.product, 120));
   if (f.heat !== undefined) set(27, ['', 'Nóng', 'Ấm', 'Lạnh'].indexOf(f.heat) >= 0 ? f.heat : '');
   if (f.loan !== undefined) set(28, ['', 'Có', 'Không', 'Chưa rõ'].indexOf(f.loan) >= 0 ? f.loan : '');
-  var txt = { phone2: [29, 20], zalo: [30, 200], province: [31, 60], dob: [32, 10], job: [33, 80], equity: [36, 60], loanAmt: [37, 60], buyTime: [38, 80], undecided: [39, 500], srcType: [40, 40] };
+  var txt = { phone2: [29, 20], zalo: [30, 200], province: [31, 60], dob: [32, 10], job: [33, 80], equity: [36, 60], loanAmt: [37, 60], buyTime: [38, 80], undecided: [39, 500], srcType: [40, 40], project: [42, 120] };
   for (var k in txt) if (f[k] !== undefined) set(txt[k][0], k === 'dob' ? (ymd_(f[k]) || '') : str_(f[k], txt[k][1]));
 }
 function crmUpdateLead(k, phone, f) {
@@ -398,7 +399,7 @@ function createLead_(f) {
       withLock_(function () {
         var sh = exist.sh, r = exist.row, blank = {};
         ensureLeadCols_(sh);
-        var cols = { name: 3, email: 5, province: 31, job: 33, phone2: 29, zalo: 30, dob: 32, bmin: 34, bmax: 35, equity: 36, loanAmt: 37, buyTime: 38, product: 26, purpose: 25, loan: 28 };
+        var cols = { name: 3, email: 5, project: 42, province: 31, job: 33, phone2: 29, zalo: 30, dob: 32, bmin: 34, bmax: 35, equity: 36, loanAmt: 37, buyTime: 38, product: 26, purpose: 25, loan: 28 };
         for (var key in cols) if (f[key] && !sh.getRange(r, cols[key]).getValue()) blank[key] = f[key];
         applyFields_(sh, r, blank);
       });

@@ -111,7 +111,7 @@ assert.equal(ctx.crmKey_(), K);
 assert.throws(() => ctx.crmLoad('sai-khoa'), /Không có quyền/); assert.throws(() => ctx.crmLog('', '0988111222', 'call'), /Không có quyền/);
 assert.equal(ctx.doGet({ parameter: { k: 'sai' } }).file, undefined); assert.ok(ctx.doGet({ parameter: { k: K } }).content.includes('CRM Hoàng Hiệp') && ctx.doGet({ parameter: { k: K } }).content.includes('</html>'));
 const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
-assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-15'); assert.equal(JSON.stringify(dbg).includes(K), false);
+assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-16'); assert.equal(JSON.stringify(dbg).includes(K), false);
 const L = ctx.crmLoad(K);
 assert.equal(L.leads.length, 2);
 const l0 = L.leads.find((x) => x.phone === '0988111222');
@@ -165,9 +165,9 @@ const ret = ctx.kiemTraCRM(); assert.match(ret, /\?k=[0-9a-f]{32}/); assert.ok(g
   const KK = ctx.crmKey_();
   const lead = ctx.crmLoad(KK).leads[0];
   assert.throws(() => ctx.crmUpdateLead(KK, lead.phone, { status: 'Không có' }), /Trạng thái không hợp lệ/);
-  ctx.crmUpdateLead(KK, lead.phone, { status: 'Tạm dừng', statusReason: 'Khách đi nước ngoài', province: 'Hà Nội', phone2: '0911000111', zalo: 'Đã kết nối', dob: '1985-03-15', job: 'Kinh doanh', bmin: '2 tỷ', bmax: '3 tỷ', equity: '1 tỷ', loanAmt: '1,5 tỷ', buyTime: 'Quý 1/2027', undecided: 'Chờ bán nhà cũ' });
+  ctx.crmUpdateLead(KK, lead.phone, { status: 'Tạm dừng', statusReason: 'Khách đi nước ngoài', province: 'Hà Nội', phone2: '0911000111', zalo: 'Đã kết nối', dob: '1985-03-15', job: 'Kinh doanh', bmin: '2 tỷ', bmax: '3 tỷ', equity: '1 tỷ', loanAmt: '1,5 tỷ', buyTime: 'Quý 1/2027', undecided: 'Chờ bán nhà cũ', project: 'Sun FourS Tower', product: 'loại 80m2' });
   let L = ctx.crmLoad(KK).leads.find((x) => x.phone === lead.phone);
-  assert.equal(L.status, 'Tạm dừng'); assert.equal(L.province, 'Hà Nội'); assert.equal(L.dob, '1985-03-15'); assert.equal(L.budget, '2 tỷ – 3 tỷ'); assert.equal(L.bmin, '2 tỷ'); assert.equal(L.equity, '1 tỷ'); assert.equal(L.undecided, 'Chờ bán nhà cũ');
+  assert.equal(L.status, 'Tạm dừng'); assert.equal(L.province, 'Hà Nội'); assert.equal(L.dob, '1985-03-15'); assert.equal(L.budget, '2 tỷ – 3 tỷ'); assert.equal(L.bmin, '2 tỷ'); assert.equal(L.equity, '1 tỷ'); assert.equal(L.undecided, 'Chờ bán nhà cũ'); assert.equal(L.project, 'Sun FourS Tower'); assert.equal(L.product, 'loại 80m2');
   assert.ok(ctx.crmLogs(KK, lead.phone).logs.some((x) => /Tạm dừng.*Khách đi nước ngoài/.test(x.content)));
   const c0 = L.careCount;
   ctx.crmAddLog(KK, lead.phone, { type: 'Nhắn Zalo', content: 'Gửi bảng giá', result: 'Đang cân nhắc', reply: 'Để xem lại', obstacle: 'Giá cao', docs: 'Bảng giá', nextAction: 'Gọi lại thứ 6' });
@@ -208,6 +208,6 @@ assert.throws(() => ctx.crmAsk(ctx.crmKey_(), '  '), /Chưa nhập câu hỏi/);
   const ph = ctx.crmLoad(ctx.crmKey_()).leads.find((x) => x.province === 'Hà Nội').phone;
   ctx.crmAsk(ctx.crmKey_(), 'Phân tích khách', ph);
   const sys = JSON.parse(globalThis.__fetch.o.payload).system;
-  assert.ok(sys.includes('FourS Tower') && sys.includes('Giá cao') && sys.includes('Hà Nội') && sys.includes('2 tỷ'), 'AI nhận hồ sơ, lịch sử chăm sóc, lịch sử xem dự án');
+  assert.ok(sys.includes('FourS Tower') && sys.includes('dự án quan tâm Sun FourS Tower') && sys.includes('Giá cao') && sys.includes('Hà Nội') && sys.includes('2 tỷ'), 'AI nhận hồ sơ, lịch sử chăm sóc, lịch sử xem dự án');
 }
 console.log('OK – Code.gs đạt mọi test');
