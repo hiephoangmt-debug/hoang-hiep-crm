@@ -361,11 +361,17 @@ function isBds(name) { var g = gOf(name); return !g || g === 'BĐS'; }
 function mins(a, b) { return Math.round((new Date(b).getTime() - new Date(a).getTime()) / 60000); }
 function dur(m) { return m < 1 ? 'dưới 1 phút' : m < 60 ? m + ' phút' : m < 1440 ? Math.round(m / 60 * 10) / 10 + ' giờ' : Math.round(m / 1440 * 10) / 10 + ' ngày'; }
 // Dự án: gộp tên gọi khác về một tên, mỗi dự án có nhiều toà (F1, F2, F3, F5…)
+// Bỏ chữ Sun, Sun Group ở đầu hoặc cuối tên (Sun FourS Tower, FourS Tower Sun Group đều là FourS Tower); chỉ bỏ khi phần còn lại có từ 2 từ trở lên.
+function stripBrand(n) {
+  var w = n.split(/\s+/), brand = function (x) { return /^(sun|group|sungroup)$/i.test(x); };
+  var a = 0, b = w.length; while (a < b && brand(w[a])) a++; while (b > a && brand(w[b - 1])) b--;
+  return b - a >= 2 && (a > 0 || b < w.length) ? w.slice(a, b).join(' ') : n;
+}
 function canonProj(name) {
   var n = String(name || '').trim().toLowerCase(); if (!n) return '';
   var ps = D.projects || [];
   for (var i = 0; i < ps.length; i++) { if (ps[i].name.toLowerCase() === n || ps[i].aliases.some(function (a) { return a.toLowerCase() === n; })) return ps[i].name; }
-  return String(name).trim();
+  return stripBrand(String(name).trim());
 }
 function projDef(name) { var c = canonProj(name).toLowerCase(); return (D.projects || []).filter(function (p) { return p.name.toLowerCase() === c; })[0] || null; }
 function projOfLead(l) { return canonProj(l.project) || canonProj(l.site && l.site !== 'Nhập thủ công' ? l.site : '') || 'Chưa rõ dự án'; }
@@ -754,7 +760,7 @@ function openLead(phone, page, keep) {
     lab('Tỉnh/thành phố', inp('pv', l.province, 'Hà Nội, Hải Phòng, Đà Nẵng…')) + lab('Quận/huyện, phường/xã', inp('dt', l.district)) + lab('Địa chỉ chi tiết (số nhà, đường)', inp('ad2', l.address)) + lab('Ngày sinh', inp('db', l.dob, '', 'date')) + lab('Nghề nghiệp', inp('jb', l.job)) + '</div>',
     source: '<h3>Nguồn khách <span class="tag">Tự ghi nhận, không sửa</span></h3><div class="meta small"><span><span class="mut">Nguồn đầu tiên:</span> ' + esc(srcLine) + '</span><span><span class="mut">Phát sinh:</span> ' + esc(fmt(l.at)) + '</span><span><span class="mut">Website:</span> ' + esc(l.site) + '</span><span><span class="mut">Trang lead:</span> ' + esc(l.leadUrl || 'Chưa cập nhật') + '</span></div>',
     needs: '<h3>Nhu cầu và tài chính <span class="tag">Khách cung cấp</span></h3><div class="fgrid">' +
-    lab('Dự án quan tâm', '<input id="pj" list="vpl" value="' + esc(l.project) + '" placeholder="Ví dụ: Sun FourS Tower">') + lab('Toà quan tâm', '<input id="toa" list="toal" value="' + esc(l.toa || '') + '" placeholder="' + esc(toaOf(l).join('; ') || 'F1; F2…') + '"><datalist id="toal">' + ((projDef(l.project || l.site) || { toas: [] }).toas.map(function (t) { return '<option value="' + esc(t) + '">'; }).join('')) + '</datalist>') + lab('Mục đích mua', sel('pp', ['Ở thực', 'Đầu tư', 'Cho thuê', 'Kinh doanh'], l.purpose, 'Chưa rõ')) + lab('Loại căn', inp('pd', l.product, 'Ví dụ: 2PN, 80m2')) +
+    lab('Dự án quan tâm', '<input id="pj" list="vpl" value="' + esc(canonProj(l.project)) + '" placeholder="Ví dụ: Sun FourS Tower">') + lab('Toà quan tâm', '<input id="toa" list="toal" value="' + esc(l.toa || '') + '" placeholder="' + esc(toaOf(l).join('; ') || 'F1; F2…') + '"><datalist id="toal">' + ((projDef(l.project || l.site) || { toas: [] }).toas.map(function (t) { return '<option value="' + esc(t) + '">'; }).join('')) + '</datalist>') + lab('Mục đích mua', sel('pp', ['Ở thực', 'Đầu tư', 'Cho thuê', 'Kinh doanh'], l.purpose, 'Chưa rõ')) + lab('Loại căn', inp('pd', l.product, 'Ví dụ: 2PN, 80m2')) +
     lab('Ngân sách tối thiểu', inp('b1', l.bmin, 'Ví dụ: 2 tỷ')) + lab('Ngân sách tối đa', inp('b2', l.bmax, 'Ví dụ: 3 tỷ')) + lab('Vốn tự có', inp('eq', l.equity, 'Ví dụ: 1 tỷ')) +
     lab('Vay ngân hàng', sel('ln', ['Có', 'Không', 'Chưa rõ'], l.loan, 'Chưa hỏi')) + lab('Khoản vay dự kiến', inp('la', l.loanAmt)) + lab('Thời điểm dự kiến mua', inp('bt', l.buyTime, 'Ví dụ: Quý 1/2027')) + '</div>' +
     lab('Lý do chưa quyết định', '<textarea id="ud" rows="2">' + esc(l.undecided) + '</textarea>'),
@@ -1477,11 +1483,16 @@ function projMgr() {
   var cnt = {}; D.leads.forEach(function (l) { [l.project, l.site].forEach(function (n) { n = String(n || '').trim(); if (n && n !== 'Nhập thủ công' && !known[n.toLowerCase()]) cnt[n] = (cnt[n] || 0) + 1; }); });
   var norm = function (n) { return n.toLowerCase().replace(/^(sun|vinhomes|the)\s+/, '').replace(/\s+/g, ''); };
   var loose = Object.keys(cnt).sort(function (a, b) { return cnt[b] - cnt[a]; });
-  $('#dlgBody').innerHTML = '<h2 style="margin:0">Dự án và toà</h2><p class="small mut">Mỗi dự án có một <b>tên chính</b>, các <b>tên gọi khác</b> (tự gộp về tên chính) và các <b>toà</b>. Ví dụ Sun FourS Tower, tên khác "FourS Tower", toà F1; F2; F3; F5.</p>' +
+  $('#dlgBody').innerHTML = '<h2 style="margin:0">Dự án và toà</h2><p class="small mut">Mỗi dự án có một <b>tên chính</b>, các <b>tên gọi khác</b> (tự gộp về tên chính) và các <b>toà</b>. Ví dụ tên chính "FourS Tower", tên khác "Sun FourS Tower", toà F1; F2; F3; F5.</p>' +
     ps.map(function (p, i) { return '<div class="card" style="margin:6px 0"><div class="fgrid"><label class="fld"><span class="mut small">Tên chính</span><input data-pn="' + i + '" value="' + esc(p.name) + '"></label><label class="fld"><span class="mut small">Tên gọi khác, ngăn cách bằng dấu ;</span><input data-pa="' + i + '" value="' + esc(p.aliases.join('; ')) + '"></label><label class="fld"><span class="mut small">Các toà, ngăn cách bằng dấu ;</span><input data-pt="' + i + '" value="' + esc(p.toas.join('; ')) + '"></label></div><div class="row" style="margin:6px 0 0"><button class="btn sm p" data-ps="' + i + '">Lưu</button><button class="btn sm" data-pdel="' + i + '">Xoá</button></div></div>'; }).join('') +
     '<div class="card" style="margin:6px 0;background:#F4F7FC"><b class="small">Thêm dự án mới</b><div class="fgrid"><label class="fld"><span class="mut small">Tên chính</span><input id="pm1" list="pmdl"></label><label class="fld"><span class="mut small">Tên gọi khác</span><input id="pm2" placeholder="FourS Tower; Sun Fours"></label><label class="fld"><span class="mut small">Các toà</span><input id="pm3" placeholder="F1; F2; F3; F5"></label></div><datalist id="pmdl">' + loose.map(function (n) { return '<option value="' + esc(n) + '">'; }).join('') + '</datalist><div class="row" style="margin:6px 0 0"><button class="btn sm p" id="pmadd">Thêm</button></div></div>' +
     (loose.length ? '<div class="small mut" style="margin-top:8px">Tên đang dùng trong dữ liệu mà chưa nằm trong danh mục (số khách): ' + loose.map(function (n) { return '<button class="btn xs" data-pl="' + esc(n) + '">' + esc(n) + ' (' + cnt[n] + ')</button>'; }).join(' ') + '<br>Bấm một tên để điền sẵn vào ô thêm dự án.</div>' : '') +
     '<div class="row" style="margin-top:8px"><button class="btn" id="pmx">Đóng</button></div>';
+  var ren = {}, nRen = 0;
+  D.leads.forEach(function (l) { [l.project, l.site].forEach(function (n) { n = String(n || '').trim(); var c = canonProj(n); if (n && c !== n && !ren[n]) { ren[n] = c; } }); });
+  D.leads.forEach(function (l) { [l.project, l.site].forEach(function (n) { n = String(n || '').trim(); if (n && ren[n]) nRen++; }); });
+  if (nRen) $('#pmx').parentNode.insertAdjacentHTML('beforebegin', '<div class="card" style="background:#FFF3E3"><b class="small">Có ' + nRen + ' chỗ ghi tên dự án chưa chuẩn</b><div class="small">' + Object.keys(ren).map(function (k) { return esc(k) + ' → <b>' + esc(ren[k]) + '</b>'; }).join('<br>') + '</div><div class="row" style="margin:6px 0 0"><button class="btn sm p" id="pmren">Đổi tên chuẩn trong dữ liệu khách</button></div></div>');
+  if ($('#pmren')) $('#pmren').onclick = function () { this.disabled = true; run('crmProjRename', ren).then(function (r) { toast('Đã đổi ' + r.n + ' chỗ'); return run('crmLoad'); }).then(function (d) { D.leads = d.leads; D.projects = d.projects || []; projMgr(); render(); }).catch(fail); };
   $('#dlg').showModal(); $('#pmx').onclick = function () { $('#dlg').close(); };
   var after = function () { toast('Đã lưu'); run('crmLoad').then(function (d) { D.projects = d.projects || []; projMgr(); render(); }); };
   $('#pmadd').onclick = function () { var n = $('#pm1').value.trim(); if (!n) { toast('Hãy nhập tên dự án'); return; } run('crmProjSave', { name: n, aliases: $('#pm2').value, toas: $('#pm3').value }).then(after).catch(fail); };

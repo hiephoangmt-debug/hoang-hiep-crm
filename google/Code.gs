@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-38', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-39', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -465,6 +465,23 @@ function crmProjDelete(k, row) {
     var sh = tab_('Dự án', PROJ_HEAD), n = lastDataRow_(sh, 1);
     if (row < 2 || row > n) throw new Error('Không tìm thấy dòng cần xoá');
     sh.deleteRow(row); return { ok: true };
+  });
+}
+// Đổi tên dự án quan tâm hàng loạt trong dữ liệu khách: map = { 'Sun FourS Tower': 'FourS Tower', ... } (chỉ cột Dự án quan tâm và cột Website của khách).
+function crmProjRename(k, map) {
+  requireUi_(k); map = map || {};
+  var keys = Object.keys(map).slice(0, 200); if (!keys.length) return { n: 0 };
+  var low = {}; keys.forEach(function (a) { var to = str_(map[a], 120).trim(); if (to) low[String(a).trim().toLowerCase()] = to; });
+  return withLock_(function () {
+    var sh = ss_().getSheetByName(S_LEADS), n = lastDataRow_(sh, 2), done = 0;
+    if (n < 2) return { n: 0 };
+    ensureLeadCols_(sh);
+    [[42, 'project'], [6, 'site']].forEach(function (c) {
+      var rg = sh.getRange(2, c[0], n - 1, 1), vals = rg.getValues(), ch = false;
+      vals.forEach(function (r) { var to = low[String(r[0] || '').trim().toLowerCase()]; if (to && r[0] !== to) { r[0] = to; ch = true; done++; } });
+      if (ch) rg.setValues(vals);
+    });
+    return { n: done };
   });
 }
 // Chụp danh sách liên hệ, bảng khách hoặc ảnh danh bạ: AI đọc tên và số điện thoại nhìn thấy trong ảnh (không đoán số).
