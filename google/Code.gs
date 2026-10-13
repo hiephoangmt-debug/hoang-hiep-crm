@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-25', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-26', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -375,6 +375,20 @@ function crmScanZalo(k, text, img, mime) {
     return { kind: c && c.kind === 'contact' ? 'contact' : 'chat', label: str_(c && c.label, 150), name: str_(c && c.name, 80), phone: normPhone_(c && c.phone), summary: str_(c && c.summary, 400), need: str_(c && c.need, 300), obstacle: str_(c && c.obstacle, 300), heat: str_(c && c.heat, 20), next: str_(c && c.next, 300) };
   }).filter(function (c) { return c.name || c.phone; });
   return { conversations: cv };
+}
+// Chụp bảng hoa hồng kế toán gửi: AI đọc từng dòng, trả về các khoản để xem trước rồi lưu vào tab Hoa hồng.
+function crmScanComm(k, text, img, mime) {
+  requireUi_(k);
+  var o = scanAi_('Bạn đọc bảng thu nhập, hoa hồng của nhân viên kinh doanh do kế toán gửi theo tháng (ảnh chụp hoặc chữ dán) và chỉ trả về MỘT đối tượng JSON, không thêm chữ nào khác: ' +
+    '{"month":"YYYY-MM của tháng nhận tiền, lấy từ chữ như nhận trong tháng 10/2026, không thấy thì rỗng","salary":số tiền Thu nhập CT từ lương nhận trong tháng hoặc null,' +
+    '"rows":[{"type":"Thưởng GĐKD hoặc Thưởng TPKD hoặc Hoa hồng NVKD hoặc Thưởng khác theo cột Chỉ tiêu tính","unit":"Mã căn, nhiều căn cách nhau dấu ;","price":"Tổng giá bán tính hoa hồng","rate":"Mức phí hoa hồng % hoặc tỷ lệ","total":"Tổng hoa hồng NVKD/Thưởng quản lý","prev":"Hoa hồng đã tính thanh toán đợt trước","now":"Hoa hồng còn lại tính thanh toán đợt này","net":"Hoa hồng còn được nhận","taxPaid":"Thuế TNCN đã khấu trừ","taxDue":"Thuế TNCN còn lại phải khấu trừ"}]}. ' +
+    'Mỗi dòng dữ liệu của bảng là một mục trong rows, các số viết bằng chữ số, không kèm đơn vị, ô trống thì để 0. Lương chỉ lấy một lần vào salary, đừng lặp lại trong rows. Tuyệt đối không bịa số.',
+    'Đây là bảng hoa hồng, thu nhập kế toán gửi.', text, '', img, mime);
+  var rows = (Array.isArray(o.rows) ? o.rows : []).slice(0, 20).map(function (r) {
+    return { type: COMM_TYPES.indexOf(r && r.type) >= 0 ? r.type : COMM_TYPES[0], unit: str_(r && r.unit, 60), price: numIn_(r && r.price), rate: numIn_(r && r.rate), total: numIn_(r && r.total), prev: numIn_(r && r.prev), now: numIn_(r && r.now),
+      net: numIn_(r && r.net) || numIn_(r && r.now), taxPaid: numIn_(r && r.taxPaid), taxDue: numIn_(r && r.taxDue) };
+  }).filter(function (r) { return r.net || r.total || r.unit; });
+  return { month: monthStr_(o.month), salary: numIn_(o.salary), rows: rows };
 }
 // Quét kế hoạch marketing của sàn hoặc cá nhân từ thông điệp, link, ảnh: rút kênh chạy, ngân sách, tiền ứng, mốc hỗ trợ.
 function crmScanPlan(k, text, link, img, mime) {

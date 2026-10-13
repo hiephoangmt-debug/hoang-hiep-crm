@@ -906,13 +906,13 @@ function comm() {
       (x.taxPaid || x.taxDue ? '<div class="small mut">Thuế đã khấu trừ ' + money(x.taxPaid) + ' · còn lại ' + money(x.taxDue) + '</div>' : '') + (x.note ? '<div class="small mut">' + esc(x.note) + '</div>' : '') +
       '<div class="row" style="margin:6px 0 0"><button class="btn sm" data-ce="' + x.row + '">Sửa</button><button class="btn sm" data-cd="' + x.row + '">Xoá</button></div></div>';
   }).join('') || '<div class="card mut">Chưa có khoản nào' + (CM.month ? ' trong ' + monthLabel(CM.month).toLowerCase() : '') + '.</div>';
-  $('#main').innerHTML = '<div class="card"><div class="row" style="margin:0"><b>Hoa hồng, lương, chi phí marketing</b><span class="sp"></span><select id="cmy">' + yl.map(function (y) { return '<option>' + y + '</option>'; }).join('') + '</select><button class="btn p" id="cmadd">+ Thêm khoản</button></div>' +
+  $('#main').innerHTML = '<div class="card"><div class="row" style="margin:0"><b>Hoa hồng, lương, chi phí marketing</b><span class="sp"></span><select id="cmy">' + yl.map(function (y) { return '<option>' + y + '</option>'; }).join('') + '</select>' + (aiOn() ? '<button class="btn" id="cmscan">Chụp bảng kế toán</button>' : '') + '<button class="btn p" id="cmadd">+ Thêm khoản</button></div>' +
     '<div class="small mut" style="margin-top:6px">Nhập số liệu kế toán gửi hằng tháng (hoa hồng NVKD, thưởng TPKD/GĐKD, lương). So với chi phí quảng cáo để biết làm marketing còn lời bao nhiêu.</div></div>' +
     '<div class="grid kc cm">' + kp.map(function (x, i) { return '<div class="kpi"><b' + (String(x[0]).length > 9 ? ' class="long"' : '') + '>' + esc(x[0]) + '</b><span>' + x[1] + '</span></div>'; }).join('') + '</div>' + chart + mt + planSection(CM.year) +
     '<h3 style="margin:14px 2px 8px">Các khoản ' + (CM.month ? esc(monthLabel(CM.month).toLowerCase()) + ' <button class="btn sm" id="cmall">Xem cả năm</button>' : 'năm ' + CM.year) + '</h3>' + det;
   $('#cmy').value = CM.year; planBind();
   $('#cmy').onchange = function () { CM.year = this.value; CM.month = ''; comm(); };
-  $('#cmadd').onclick = function () { commForm(null); };
+  $('#cmadd').onclick = function () { commForm(null); }; if ($('#cmscan')) $('#cmscan').onclick = commScan;
   if ($('#cmall')) $('#cmall').onclick = function () { CM.month = ''; comm(); };
   document.querySelectorAll('[data-cm]').forEach(function (r) { r.onclick = function () { CM.month = CM.month === r.dataset.cm ? '' : r.dataset.cm; comm(); }; });
   document.querySelectorAll('[data-ce]').forEach(function (b) { b.onclick = function () { commForm(d.items.filter(function (x) { return x.row === +b.dataset.ce; })[0]); }; });
@@ -1046,6 +1046,37 @@ function planForm(p) {
       channels: lines('pl5').map(function (a) { return { name: a[0], budget: a[1], note: a[2] || '' }; }), tiers: lines('pl6').map(function (a) { return { from: a[0], to: a[1] || '', pct: a[2] }; }) };
     $('#plok').disabled = true;
     run('crmPlanSave', f).then(function () { toast('Đã lưu'); $('#dlg').close(); commLoad(); }).catch(function (e) { $('#plok').disabled = false; fail(e); });
+  };
+}
+// Chụp bảng hoa hồng kế toán gửi để tự điền: xem trước rồi lưu từng khoản, bỏ qua khoản đã có.
+function commScan() {
+  var img = '', res = null;
+  $('#dlgBody').innerHTML = '<h2 style="margin:0">Chụp bảng hoa hồng kế toán gửi</h2><p class="small mut">Chụp màn hình hoặc chụp ảnh bảng kế toán gửi (có thể chụp từng phần), chọn ảnh bên dưới, hoặc copy chữ trong file rồi dán vào ô. Hệ thống đọc từng dòng, bạn xem lại rồi lưu. Khoản nào đã có thì không bị nhập lại. Ảnh hoặc chữ được gửi cho quân sư AI đọc.</p>' +
+    '<textarea id="cs1" rows="3" placeholder="Hoặc dán chữ copy từ bảng vào đây"></textarea><div class="row" style="margin-top:8px"><label class="btn" style="cursor:pointer">Chọn ảnh bảng<input id="cs2" type="file" accept="image/*" hidden></label><span class="small mut" id="cs3"></span><button class="btn p" id="csgo">Đọc bảng</button><button class="btn" id="csx">Đóng</button></div><div id="csr"></div>';
+  $('#dlg').showModal(); $('#csx').onclick = function () { $('#dlg').close(); };
+  $('#cs2').onchange = function () { var f = this.files && this.files[0]; if (!f) return; snImage(f, function (d) { img = d; $('#cs3').textContent = 'Đã chọn ảnh'; }); };
+  $('#csgo').onclick = function () {
+    var t = $('#cs1').value.trim(); if (!t && !img) { toast('Hãy chọn ảnh hoặc dán chữ'); return; }
+    $('#csgo').disabled = true; $('#csr').innerHTML = '<div class="mut" style="margin-top:8px">Đang đọc bảng…</div>';
+    run('crmScanComm', t, img, 'image/jpeg').then(function (r) {
+      $('#csgo').disabled = false;
+      var items = r.rows.map(function (x) { x.month = r.month; return x; });
+      if (r.salary) items.push({ type: 'Lương', month: r.month, unit: '', net: r.salary, total: 0, prev: 0, now: 0, price: 0, rate: 0, taxPaid: 0, taxDue: 0, note: 'Lương nhận trong tháng' });
+      var has = function (x) { return CM.data.items.some(function (o) { return o.month === x.month && o.type === x.type && (o.unit || '') === (x.unit || '') && Math.round(o.net) === Math.round(x.net); }); };
+      res = items.map(function (x) { return { x: x, dup: has(x) }; });
+      $('#csr').innerHTML = '<div class="row" style="margin:8px 0"><label class="small">Tháng nhận <input type="month" id="csm" value="' + esc(r.month || ymdNow(0).slice(0, 7)) + '"></label></div>' +
+        (res.length ? res.map(function (y, i) {
+          var x = y.x; return '<div class="card" style="margin:6px 0"><label class="row" style="margin:0"><input type="checkbox" data-ci="' + i + '"' + (y.dup ? '' : ' checked') + '><b>' + esc(x.type) + '</b>' + (x.unit ? '<span class="small mut">Căn ' + esc(x.unit) + '</span>' : '') + '<span class="sp"></span><b>' + vnd(x.net) + '</b>' + (y.dup ? '<span class="tag">Đã có</span>' : '') + '</label>' +
+            (x.total || x.prev || x.now ? '<div class="small mut">Tổng hoa hồng ' + money(x.total) + ' · đã tính trước ' + money(x.prev) + ' · đợt này ' + money(x.now) + (x.rate ? ' · mức ' + x.rate : '') + '</div>' : '') + '</div>';
+        }).join('') + '<div class="row"><button class="btn p" id="cssv">Lưu các khoản đã chọn</button></div>' : '<div class="card mut">Không đọc được dòng nào. Thử chụp rõ hơn hoặc dán chữ.</div>');
+      if ($('#cssv')) $('#cssv').onclick = function () {
+        var mo = $('#csm').value; if (!mo) { toast('Hãy chọn tháng'); return; }
+        var pick = [].slice.call(document.querySelectorAll('[data-ci]:checked')).map(function (b) { return res[+b.dataset.ci].x; });
+        if (!pick.length) { toast('Chưa chọn khoản nào'); return; } this.disabled = true; var n = 0;
+        pick.reduce(function (p, x) { return p.then(function () { return run('crmCommSave', { month: mo, type: x.type, unit: x.unit, price: x.price, rate: x.rate, total: x.total, prev: x.prev, now: x.now, net: x.net, taxPaid: x.taxPaid, taxDue: x.taxDue, note: x.note || '' }).then(function () { n++; }); }); }, Promise.resolve())
+          .then(function () { toast('Đã lưu ' + n + ' khoản'); $('#dlg').close(); commLoad(); }).catch(function (e) { toast('Đã lưu ' + n + ' khoản, sau đó lỗi: ' + e.message); });
+      };
+    }).catch(function (e) { $('#csgo').disabled = false; $('#csr').innerHTML = '<div class="card" style="margin-top:8px">' + esc(/Chưa cài khoá/.test(e.message) ? 'Chưa cài khoá quân sư AI. Vào Sheet, menu CRM, Cài khoá quân sư (AI).' : e.message) + '</div>'; });
   };
 }
 function commForm(x) {
