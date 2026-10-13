@@ -114,7 +114,7 @@ assert.equal(ctx.crmKey_(), K);
 assert.throws(() => ctx.crmLoad('sai-khoa'), /Không có quyền/); assert.throws(() => ctx.crmLog('', '0988111222', 'call'), /Không có quyền/);
 assert.equal(ctx.doGet({ parameter: { k: 'sai' } }).file, undefined); assert.ok(ctx.doGet({ parameter: { k: K } }).content.includes('CRM Hoàng Hiệp') && ctx.doGet({ parameter: { k: K } }).content.includes('</html>'));
 const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
-assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-35'); assert.equal(JSON.stringify(dbg).includes(K), false);
+assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-36'); assert.equal(JSON.stringify(dbg).includes(K), false);
 const L = ctx.crmLoad(K);
 assert.equal(L.leads.length, 2);
 const l0 = L.leads.find((x) => x.phone === '0988111222');
@@ -298,6 +298,13 @@ assert.throws(() => ctx.crmAsk(ctx.crmKey_(), '  '), /Chưa nhập câu hỏi/);
   assert.throws(() => ctx.crmScanComm('sai', 'a'), /Không có quyền/);
   ctx.UrlFetchApp = { fetch: () => ({ getResponseCode: () => 200, getContentText: () => JSON.stringify({ content: [{ text: '{"month":"2026-09","salary":15896000,"rows":[{"type":"Thưởng TPKD","units":["SL11611","SL112B01","SL12016","SL212A15"],"total":"6.055.331","net":"4.844.265","taxPaid":"5.239.825","taxDue":"1.211.066"}]}' }] }) }) };
   const s2 = ctx.crmScanComm(K2, 'x');
+  // JSON lẫn chữ thừa và ngoặc trong chuỗi
+  ctx.UrlFetchApp = { fetch: () => ({ getResponseCode: () => 200, getContentText: () => JSON.stringify({ content: [{ text: 'Kết quả {nháp} đây:\n```json\n{"month":"2026-09","salary":null,"rows":[{"type":"Hoa hồng NVKD","units":["S11212A"],"price":"2.012.802.977","rate":2,"total":"40.256.060","prev":"20.658.214","now":"19.597.845","net":"19.597.845"},{"type":"Thưởng TPKD","units":["S22115","S11212A","S20327"],"total":"3.720.877","net":"3.720.877","note":"a } b"}]}\n```\nHết.' }] }) }) };
+  const s3 = ctx.crmScanComm(K2, 'x');
+  assert.equal(s3.rows.length, 2); assert.equal(s3.rows[0].rate, 2); assert.equal(s3.rows[0].price, 2012802977); assert.equal(s3.rows[1].unit, 'S22115; S11212A; S20327'); assert.equal(s3.rows[1].net, 3720877);
+  // lần đầu trả lời hỏng thì thử lại bằng mô hình mạnh
+  let n = 0; ctx.UrlFetchApp = { fetch: () => ({ getResponseCode: () => 200, getContentText: () => JSON.stringify({ content: [{ text: n++ === 0 ? '{"month":"2026-09","rows":[{"type"' : '{"month":"2026-09","salary":null,"rows":[]}' }] }) }) };
+  assert.equal(ctx.crmScanComm(K2, 'x').month, '2026-09'); assert.equal(n, 2);
   assert.equal(s2.month, '2026-09'); assert.equal(s2.rows[0].unit, 'SL11611; SL112B01; SL12016; SL212A15'); assert.equal(s2.rows[0].total, 6055331); assert.equal(s2.rows[0].net, 4844265); assert.equal(s2.rows[0].type, 'Thưởng TPKD');
   ctx.UrlFetchApp = { fetch: () => ({ getResponseCode: () => 200, getContentText: () => JSON.stringify({ content: [{ text: '{"conversations":[{"name":"Hoa","phone":"+84912000111","summary":"Hỏi giá","heat":"Ấm"},{"name":"","phone":""},{"name":"Nam","phone":"abc","summary":"x"},{"kind":"contact","label":"Chị Hà - Khách","name":"Cao Huy"}]}' }] }) }) };
   const sz = ctx.crmScanZalo(K2, 'Hoa: giá?');

@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-35', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-36', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -331,16 +331,37 @@ function scanAi_(system, intro, text, link, img, mime, maxText) {
   var content = [];
   if (img) content.push({ type: 'image', source: { type: 'base64', media_type: mime, data: img } });
   content.push({ type: 'text', text: intro + '\n' + (text ? '\nNội dung dán vào:\n' + text : '') + (page ? '\nNội dung trang ' + link + ':\n' + page : '') + (img ? '\n(Có kèm ảnh ở trên.)' : '') });
-  var res = UrlFetchApp.fetch('https://api.anthropic.com/v1/messages', {
-    method: 'post', contentType: 'application/json', muteHttpExceptions: true,
-    headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01' },
-    payload: JSON.stringify({ model: SCAN_MODEL, max_tokens: maxText > 6000 ? 3500 : 1800, system: system, messages: [{ role: 'user', content: content }] })
-  });
-  var code = res.getResponseCode(), body = {};
-  try { body = JSON.parse(res.getContentText()); } catch (e) {}
-  if (code !== 200) throw new Error('Quân sư lỗi (' + code + '): ' + ((body.error && body.error.message) || 'không rõ nguyên nhân'));
-  var txt = (body.content || []).map(function (b) { return b.text || ''; }).join(''), a = txt.indexOf('{'), b2 = txt.lastIndexOf('}');
-  try { return JSON.parse(txt.slice(a, b2 + 1)); } catch (e) { throw new Error('Quân sư trả lời chưa đúng dạng, hãy thử quét lại'); }
+  var models = [SCAN_MODEL, ASK_MODEL], lastErr = '';
+  for (var mi = 0; mi < models.length; mi++) {
+    var res = UrlFetchApp.fetch('https://api.anthropic.com/v1/messages', {
+      method: 'post', contentType: 'application/json', muteHttpExceptions: true,
+      headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01' },
+      payload: JSON.stringify({ model: models[mi], max_tokens: maxText > 6000 ? 4000 : 1800, system: system, messages: [{ role: 'user', content: content }] })
+    });
+    var code = res.getResponseCode(), body = {};
+    try { body = JSON.parse(res.getContentText()); } catch (e) {}
+    if (code !== 200) throw new Error('Quân sư lỗi (' + code + '): ' + ((body.error && body.error.message) || 'không rõ nguyên nhân'));
+    var txt = (body.content || []).map(function (b) { return b.text || ''; }).join(''), obj = firstJson_(txt);
+    if (obj) return obj;
+    lastErr = 'chưa đúng dạng';
+  }
+  throw new Error('Quân sư trả lời ' + lastErr + ', hãy thử quét lại hoặc chụp rõ hơn');
+}
+// Lấy đối tượng JSON đầu tiên trong câu trả lời, bỏ qua chữ thừa trước và sau; ngoặc nằm trong chuỗi không bị tính.
+function firstJson_(txt) {
+  var s = String(txt || ''), a = s.indexOf('{');
+  while (a >= 0) {
+    var depth = 0, inStr = false, esc = false;
+    for (var i = a; i < s.length; i++) {
+      var ch = s.charAt(i);
+      if (inStr) { if (esc) esc = false; else if (ch === '\\') esc = true; else if (ch === '"') inStr = false; continue; }
+      if (ch === '"') inStr = true; else if (ch === '{') depth++; else if (ch === '}' && --depth === 0) {
+        try { return JSON.parse(s.slice(a, i + 1)); } catch (e) { break; }
+      }
+    }
+    a = s.indexOf('{', a + 1);
+  }
+  return null;
 }
 function scanNum_(v) { v = parseFloat(v); return isFinite(v) && v > 0 ? v : ''; }
 function crmScanOffer(k, text, link, img, mime) {
@@ -385,12 +406,13 @@ function crmScanComm(k, text, img, mime) {
   requireUi_(k);
   var o = scanAi_('Bạn đọc bảng thu nhập, hoa hồng của nhân viên kinh doanh do kế toán gửi theo tháng (ảnh chụp hoặc chữ dán) và chỉ trả về MỘT đối tượng JSON, không thêm chữ nào khác: ' +
     '{"month":"YYYY-MM của tháng nhận tiền, lấy từ chữ như nhận trong tháng 09/2026, không thấy thì rỗng","salary":số tiền Thu nhập CT từ lương nhận trong tháng hoặc null,' +
-    '"rows":[{"type":"Hoa hồng NVKD hoặc Thưởng TPKD hoặc Thưởng GĐKD hoặc Thưởng khác","units":["mọi mã căn nhìn thấy trong dòng"],"unit":"mã căn nối bằng dấu ;","price":"Tổng giá bán hoặc Giá tính hoa hồng","rate":"tỷ lệ % nếu có","total":"tổng hoa hồng hoặc tổng thưởng của dòng, kể cả khi ghi đợt 1","prev":"đã tính thanh toán đợt trước","now":"tính thanh toán đợt này","net":"hoa hồng hoặc thưởng còn được nhận trong tháng (cột cuối cùng)","taxPaid":"Thuế TNCN đã khấu trừ","taxDue":"Thuế TNCN còn lại phải khấu trừ"}]}. ' +
+    '"rows":[{"type":"Hoa hồng NVKD hoặc Thưởng TPKD hoặc Thưởng GĐKD hoặc Thưởng khác","units":["mọi mã căn nhìn thấy trong dòng"],"unit":"mã căn nối bằng dấu ;","price":"Tổng giá bán hoặc Giá tính hoa hồng","rate":"Mức phí hoa hồng % nếu có (vd 2.0), nếu không có giá thì là tỷ lệ tính thanh toán đợt này","total":"tổng hoa hồng hoặc tổng thưởng của dòng, kể cả khi ghi đợt 1","prev":"đã tính thanh toán đợt trước","now":"tính thanh toán đợt này","net":"hoa hồng hoặc thưởng còn được nhận trong tháng (cột cuối cùng)","taxPaid":"Thuế TNCN đã khấu trừ","taxDue":"Thuế TNCN còn lại phải khấu trừ"}]}. ' +
     'Quy ước: MÃ CĂN là ký hiệu gồm chữ cái và số như SL11611, A21011, S1.12.12A. Mã căn có thể nằm ở cột Mã căn, hoặc nằm giữa dòng ở ô gộp dưới các cột như Giá tính hoa hồng hay Tỷ lệ (ví dụ SL11611; SL112B01; SL12016), khi đó vẫn là mã căn, không phải giá tiền. ' +
     'Cột "Thưởng quản lý kinh doanh" hoặc "Thưởng QL" thì type là Thưởng TPKD (là Thưởng GĐKD nếu chữ ghi giám đốc kinh doanh); cột "Hoa hồng NVKD/Đại lý" thì type là Hoa hồng NVKD. Nếu cả hai cột cùng có số thì tách thành hai mục có cùng mã căn. ' +
+    'Nếu bảng có mỗi mã căn một dòng thì mỗi dòng là một mục: price là giá tính phí, total là Tổng hoa hồng NVKD, prev là hoa hồng đã tính thanh toán các đợt trước, now là hoa hồng còn lại tính thanh toán đợt này, và net của dòng cũng là số "còn lại tính thanh toán đợt này". Dòng "Thưởng quản lý kinh doanh" có số riêng và các mã căn ghi trong ô gộp thì là một mục type Thưởng TPKD với total và net bằng số thưởng đó. Ô cuối cùng "hoa hồng, thưởng còn được nhận" nếu là ô gộp chung nhiều dòng thì là tổng sau thuế của cả tháng, KHÔNG gán cho dòng nào. ' +
     'Cột "Tiền thưởng, hoa hồng đã nhận trong tháng" là tổng cả tháng của mọi khoản, KHÔNG dùng làm net của từng dòng. Giảm trừ gia cảnh và thu nhập tính thuế bỏ qua. ' +
     'Mỗi dòng dữ liệu của bảng là một mục trong rows, các số viết bằng chữ số, không kèm đơn vị, ô trống thì để 0. Lương chỉ lấy một lần vào salary, đừng lặp lại trong rows. Tuyệt đối không bịa số.',
-    'Đây là bảng hoa hồng, thu nhập kế toán gửi.', text, '', img, mime);
+    'Đây là bảng hoa hồng, thu nhập kế toán gửi.', text, '', img, mime, 7000);
   var rows = (Array.isArray(o.rows) ? o.rows : []).slice(0, 20).map(function (r) {
     var codes = (Array.isArray(r && r.units) ? r.units : []).map(function (u) { return String(u || '').trim(); }).filter(Boolean);
     var unit = codes.length ? codes.join('; ') : String((r && r.unit) || '').replace(/\s*[,;]\s*/g, '; ');
