@@ -498,6 +498,11 @@ function lvCounts() {
   var all = D.leads.filter(function (l) { return isBds(l.site); }), wk = monthStart();
   return { all: all, nNew: all.filter(function (l) { return dayOf(l.at) >= wk && !isQuiet(l); }).length, hot: all.filter(isHot) };
 }
+function bindSale() {
+  document.querySelectorAll('[data-as]').forEach(function (s) { s.onchange = function () {
+    var l = D.leads.filter(function (x) { return x.phone === s.dataset.as; })[0], v = s.value;
+    run('crmUpdateLead', s.dataset.as, { assignee: v }).then(function () { l.assignee = v; toast(v ? 'Đã chuyển cho ' + v : 'Đã bỏ giao'); leads(); }).catch(function (e) { s.value = l.assignee || ''; fail(e); }); }; });
+}
 function bindLv() {
   document.querySelectorAll('[data-lv]').forEach(function (b) { b.onclick = function () { LV = b.dataset.lv; try { localStorage.setItem('crm_lv', LV); } catch (e) {} leads(); window.scrollTo(0, 0); }; });
   if ($('#sheetimp')) $('#sheetimp').onclick = sheetImport;
@@ -509,9 +514,9 @@ function leadsGroups() {
   var body = '';
   var projOf = projOfLead;
   var rowsOf = function (list) {
-    return '<table class="xl lvt"><tr><th>Ngày</th><th>Khách</th><th>Số điện thoại</th><th>Nguồn</th><th>Toà</th><th>Nhu cầu, ngân sách</th><th>Tình trạng</th><th>Chăm gần nhất</th><th>Hẹn</th><th>Sale</th><th></th></tr>' + list.map(function (l) {
+    return '<table class="xl lvt"><tr><th>Ngày</th><th>Khách</th><th>Số điện thoại</th><th>Nguồn</th><th>Toà</th><th>Nhu cầu, ngân sách</th><th>Tình trạng</th><th>Chăm gần nhất</th><th>Hẹn</th><th>Giao sale</th><th></th></tr>' + list.map(function (l) {
       var h = heat(l), p = srcParts(l);
-      return '<tr class="' + (todo(l) ? 'rowtodo' : '') + '" data-open="' + esc(l.phone) + '" style="cursor:pointer"><td class="nw">' + dmy(dayOf(l.at)).slice(0, 5) + '</td><td><b>' + esc(cleanName(l.name).name || l.name || '(chưa có tên)') + '</b>' + (h && h[0] === 'Nóng' ? ' <span class="tag red">Nóng</span>' : '') + (l.province ? '<div class="small mut">' + esc(l.province) + '</div>' : '') + '</td><td class="nw">' + esc(l.phone) + ' <button class="btn z xs" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button> <button class="btn g xs" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button></td><td class="small">' + esc(p.plat || '-') + '</td><td class="small nw">' + (toaOf(l).map(esc).join(', ') || '<span class="mut">-</span>') + '</td><td class="small">' + (esc([l.purpose, l.product, l.budget && 'Ngân sách ' + l.budget].filter(Boolean).join(' · ')) || '<span class="mut">-</span>') + '</td><td class="small">' + (todo(l) ? '<span class="tag red">Chưa liên hệ</span>' : esc(l.status)) + '</td><td class="small">' + (l.careAt ? ago(l.careAt) + (l.careResult ? '<div class="mut">' + esc(l.careResult) + '</div>' : '') : '<span class="mut">Chưa chăm</span>') + '</td><td class="small nw">' + (l.next ? (l.next < ymdNow(0) ? '<span class="tag red">' + dmy(l.next).slice(0, 5) + ' quá hạn</span>' : dmy(l.next).slice(0, 5)) : '<span class="mut">-</span>') + '</td><td class="small">' + (esc(l.assignee) || '<span class="mut">-</span>') + '</td><td class="nw"><button class="btn xs" data-open="' + esc(l.phone) + '">Hồ sơ</button></td></tr>';
+      return '<tr class="' + (todo(l) ? 'rowtodo' : '') + '" data-open="' + esc(l.phone) + '" style="cursor:pointer"><td class="nw">' + dmy(dayOf(l.at)).slice(0, 5) + '</td><td><b>' + esc(cleanName(l.name).name || l.name || '(chưa có tên)') + '</b>' + (h && h[0] === 'Nóng' ? ' <span class="tag red">Nóng</span>' : '') + (l.province ? '<div class="small mut">' + esc(l.province) + '</div>' : '') + '</td><td class="nw">' + esc(l.phone) + ' <button class="btn z xs" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button> <button class="btn g xs" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button></td><td class="small">' + esc(p.plat || '-') + '</td><td class="small nw">' + (toaOf(l).map(esc).join(', ') || '<span class="mut">-</span>') + '</td><td class="small">' + (esc([l.purpose, l.product, l.budget && 'Ngân sách ' + l.budget].filter(Boolean).join(' · ')) || '<span class="mut">-</span>') + '</td><td class="small">' + (todo(l) ? '<span class="tag red">Chưa liên hệ</span>' : esc(l.status)) + '</td><td class="small">' + (l.careAt ? ago(l.careAt) + (l.careResult ? '<div class="mut">' + esc(l.careResult) + '</div>' : '') : '<span class="mut">Chưa chăm</span>') + '</td><td class="small nw">' + (l.next ? (l.next < ymdNow(0) ? '<span class="tag red">' + dmy(l.next).slice(0, 5) + ' quá hạn</span>' : dmy(l.next).slice(0, 5)) : '<span class="mut">-</span>') + '</td><td class="nw">' + saleSel(l) + '</td><td class="nw"><button class="btn xs" data-open="' + esc(l.phone) + '">Hồ sơ</button></td></tr>';
     }).join('') + '</table>';
   };
   var toaChips = function (a) { var c = {}; a.forEach(function (l) { toaOf(l).forEach(function (t) { c[t] = (c[t] || 0) + 1; }); }); return Object.keys(c).sort().map(function (t) { return ' <span class="tag">' + esc(t) + ': ' + c[t] + '</span>'; }).join(''); };
@@ -531,7 +536,7 @@ function leadsGroups() {
     body = (groups(hot, true) || '<div class="card mut">Chưa có khách hot. Khách được xếp hot khi tiềm năng là Nóng hoặc đã hẹn xem, đã xem dự án, đang thương lượng, booking.</div>');
   }
   $('#main').innerHTML = head + body;
-  bindLv();
+  bindLv(); bindSale();
   $('#addlead').onclick = addLead; $('#implead').onclick = importLeads; if ($('#zbulk')) $('#zbulk').onclick = zaloBulk;
   document.querySelectorAll('[data-lvsend]').forEach(function (b) { b.onclick = function (e) { e.preventDefault(); SN.proj = b.dataset.lvsend; gotoTab('send'); }; });
   document.querySelectorAll('[data-open]').forEach(function (b) { b.onclick = function (e) { if (b.tagName !== 'BUTTON' && e.target.closest('button,a,select,input')) return; openLead(b.dataset.open); }; });
@@ -635,9 +640,7 @@ function leads() {
     var n = window.prompt('Tên sale cần thêm (ví dụ: Nguyễn Văn A)'); if (!n) return;
     run('crmAddSale', n).then(function (r) { D.sales = r; toast('Đã thêm sale'); leads(); }).catch(fail);
   };
-  document.querySelectorAll('[data-as]').forEach(function (s) { s.onchange = function () {
-    var l = D.leads.filter(function (x) { return x.phone === s.dataset.as; })[0], v = s.value;
-    run('crmUpdateLead', s.dataset.as, { assignee: v }).then(function () { l.assignee = v; toast(v ? 'Đã chuyển cho ' + v : 'Đã bỏ giao'); leads(); }).catch(function (e) { s.value = l.assignee || ''; fail(e); }); }; });
+  bindSale();
   document.querySelectorAll('[data-open]').forEach(function (b) { b.onclick = function (e) { if (b.tagName !== 'BUTTON' && e.target.closest('button,a,select,input')) return; openLead(b.dataset.open); }; });
   document.querySelectorAll('[data-note]').forEach(function (b) { b.onclick = function () { openLead(b.dataset.note); setTimeout(function () { var x = $('#lc'); if (x) { x.scrollIntoView(); x.focus(); } }, 150); }; });
   document.querySelectorAll('[data-ask]').forEach(function (b) { b.onclick = function () { openChat(b.dataset.ask); }; });
