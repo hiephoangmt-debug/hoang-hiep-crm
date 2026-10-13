@@ -125,7 +125,7 @@ code,pre{background:#F3F5FA;border:1px solid var(--line);border-radius:10px;font
     <button data-t="clicks">Lượt bấm<span class="dot" id="dClicks" hidden></span></button>
     <button data-t="camp">Chiến dịch</button>
     <button data-t="send">Gửi tin</button>
-    <button data-t="comm">Hoa hồng</button>
+    <button data-t="comm">Chi phí</button>
     <button data-t="sites">Website & mã nhúng</button>
   </nav>
 </header>
@@ -1023,7 +1023,7 @@ function send() {
   snList();
 }
 // ---- Hoa hồng, lương, chi phí marketing theo tháng (số liệu kế toán gửi, nhập tay)
-var CM = { data: null, year: '', month: '', pk: '', uf: '', view: 'month', uq: '' };
+var CM = { data: null, year: '', month: '', pk: '', uf: '', view: 'over', sub: 'month', uq: '' };
 function monthLabel(m) { return 'Tháng ' + m.slice(5) + '/' + m.slice(0, 4); }
 function commLoad() { CM.data = null; render(); }
 function comm() {
@@ -1065,16 +1065,39 @@ function comm() {
       (x.taxPaid || x.taxDue ? '<div class="small mut">Thuế đã khấu trừ ' + money(x.taxPaid) + ' · còn lại ' + money(x.taxDue) + '</div>' : '') + (x.note ? '<div class="small mut">' + esc(x.note) + '</div>' : '') +
       '<div class="row" style="margin:6px 0 0"><button class="btn sm" data-ce="' + x.row + '">Sửa</button><button class="btn sm" data-cd="' + x.row + '">Xoá</button></div></div>';
   }).join('') || '<div class="card mut">Chưa có khoản nào' + (CM.month ? ' trong ' + monthLabel(CM.month).toLowerCase() : '') + '.</div>';
-  var uAll = commUnits(), uOpen = uAll.filter(function (u) { return u.remain > 0; }).length;
-  var viewBar = '<div class="row chips lvbar">' + [['month', 'Theo tháng'], ['unit', 'Theo từng căn · ' + uAll.length + (uOpen ? ' (' + uOpen + ' còn chờ về)' : '')]].map(function (x) { return '<button class="chip' + (CM.view === x[0] ? ' on' : '') + '" data-cv="' + x[0] + '">' + x[1] + '</button>'; }).join('') + '</div>';
-  $('#main').innerHTML = '<div class="card"><div class="row" style="margin:0"><b>Hoa hồng, lương, chi phí marketing</b><span class="sp"></span><select id="cmy">' + yl.map(function (y) { return '<option>' + y + '</option>'; }).join('') + '</select>' + (aiOn() ? '<button class="btn" id="cmscan">Chụp bảng kế toán</button>' : '') + '<button class="btn p" id="cmadd">+ Thêm khoản</button></div>' +
-    '<div class="small mut" style="margin-top:6px">Nhập số liệu kế toán gửi hằng tháng (hoa hồng NVKD, thưởng TPKD/GĐKD, lương). So với chi phí quảng cáo để biết làm marketing còn lời bao nhiêu.</div></div>' +
-    viewBar + (CM.view === 'unit' ? unitSection() : ('<div class="grid kc cm">' + kp.map(function (x, i) { return '<div class="kpi"><b' + (String(x[0]).length > 9 ? ' class="long"' : '') + '>' + esc(x[0]) + '</b><span>' + x[1] + '</span></div>'; }).join('') + '</div>' + chart + mt + planSection(CM.year) +
-    '<h3 style="margin:14px 2px 8px">Các khoản ' + (CM.month ? esc(monthLabel(CM.month).toLowerCase()) + ' <button class="btn sm" id="cmall">Xem cả năm</button>' : 'năm ' + CM.year) + '</h3>' + det));
+  var uAll = commUnits(), uOpen = uAll.filter(function (u) { return u.remain > 0; }).length, V = CM.view;
+  var bar = function (arr, key, attr) { return '<div class="row chips lvbar">' + arr.map(function (x) { return '<button class="chip' + (CM[key] === x[0] ? ' on' : '') + '" ' + attr + '="' + x[0] + '">' + x[1] + '</button>'; }).join('') + '</div>'; };
+  var topBar = bar([['over', 'Tổng quan'], ['mkt', 'Chi phí marketing'], ['pay', 'Lương + hoa hồng']], 'view', 'data-cv');
+  var subBar = V === 'pay' ? bar([['month', 'Theo tháng'], ['unit', 'Theo từng căn · ' + uAll.length + (uOpen ? ' (' + uOpen + ' còn chờ về)' : '')]], 'sub', 'data-cs') : '';
+  var kpiHtml = function (arr) { return '<div class="grid kc cm">' + arr.map(function (x) { return '<div class="kpi"><b' + (String(x[0]).length > 9 ? ' class="long"' : '') + '>' + esc(x[0]) + '</b><span>' + x[1] + '</span></div>'; }).join('') + '</div>'; };
+  var body = '';
+  if (V === 'over') {
+    body = kpiHtml([kp[3], kp[2], kp[0], kp[1], kp[4], kp[6]]) + chart + mt;
+  } else if (V === 'mkt') {
+    var act = M.filter(function (o) { return o.mkt > 0; }), top = act.slice().sort(function (x, y) { return y.mkt - x.mkt; })[0];
+    var bud = {}; (d.plans || []).forEach(function (p) { bud[p.month] = (bud[p.month] || 0) + p.budget; });
+    var mmax = Math.max.apply(null, M.map(function (o) { return o.mkt; }).concat([1]));
+    body = kpiHtml([[money(mkt), 'Tổng chi phí MKT năm ' + CM.year], [act.length ? vnd(mkt / act.length) : '-', 'Trung bình mỗi tháng có chi'], [top ? vnd(top.mkt) : '-', top ? 'Tháng chi nhiều nhất: ' + monthLabel(top.m) : 'Tháng chi nhiều nhất'], [act.length, 'Số tháng có chi']]) +
+      '<div class="card"><b>Chi phí marketing theo tháng</b> <span class="mut small">năm ' + CM.year + ', lấy tự động từ tab Chi phí</span><div class="cmch">' + M.map(function (o) { return '<div class="cmc" title="' + monthLabel(o.m) + ': ' + vnd(o.mkt) + '"><div class="cmb"><i style="height:' + Math.round(o.mkt / mmax * 100) + '%;background:var(--gold);width:60%;max-width:26px"></i></div><span>' + o.m.slice(5) + '</span></div>'; }).join('') + '</div></div>' +
+      '<div class="card tw"><b>Chi phí từng tháng và ngân sách kế hoạch</b><table><tr><th>Tháng</th><th>Chi phí thực tế</th><th>Ngân sách kế hoạch</th><th>Chênh lệch</th></tr>' + (M.filter(function (o) { return o.mkt || bud[o.m]; }).map(function (o) { var df = bud[o.m] ? o.mkt - bud[o.m] : null; return '<tr><td><b>' + monthLabel(o.m) + '</b></td><td>' + money(o.mkt) + '</td><td>' + money(bud[o.m] || 0) + '</td><td>' + (df === null ? '-' : '<span class="tag ' + (df > 0 ? 'red' : 'grn') + '">' + (df > 0 ? 'vượt ' : 'dưới ') + vnd(Math.abs(df)) + '</span>') + '</td></tr>'; }).join('') || '<tr><td colspan="4" class="mut">Chưa có chi phí năm này. Chạy Google Ads Script hoặc nhập chi phí vào tab Chi phí.</td></tr>') + '</table></div>' + planSection(CM.year);
+  } else if (CM.sub === 'unit') {
+    body = unitSection();
+  } else {
+    var tx = rows.reduce(function (a, x) { return a + x.taxPaid; }, 0);
+    body = kpiHtml([[money(hh), 'Hoa hồng, thưởng đã nhận'], [money(sal), 'Lương'], [money(inc), 'Tổng lương + hoa hồng'], [Object.keys(units).length, 'Số căn có hoa hồng'], [money(tx), 'Thuế đã khấu trừ']]) +
+      '<div class="card tw"><b>Lương và hoa hồng từng tháng</b><table><tr><th>Tháng</th><th>Hoa hồng, thưởng</th><th>Lương</th><th>Tổng</th></tr>' + (M.filter(function (o) { return o.hh || o.sal; }).map(function (o) { return '<tr class="' + (CM.month === o.m ? 'sel' : '') + '" data-cm="' + o.m + '" style="cursor:pointer"><td><b>' + monthLabel(o.m) + '</b></td><td>' + money(o.hh) + '</td><td>' + money(o.sal) + '</td><td><b>' + money(o.hh + o.sal) + '</b></td></tr>'; }).join('') || '<tr><td colspan="4" class="mut">Chưa có số liệu năm này. Bấm "Chụp bảng kế toán" hoặc "Thêm khoản".</td></tr>') + (inc ? '<tr><td><b>Cả năm</b></td><td><b>' + money(hh) + '</b></td><td><b>' + money(sal) + '</b></td><td><b>' + money(inc) + '</b></td></tr>' : '') + '</table><div class="small mut">Bấm một tháng để chỉ xem các khoản của tháng đó.</div></div>' +
+      '<h3 style="margin:14px 2px 8px">Các khoản ' + (CM.month ? esc(monthLabel(CM.month).toLowerCase()) + ' <button class="btn sm" id="cmall">Xem cả năm</button>' : 'năm ' + CM.year) + '</h3>' + det;
+  }
+  var btns = (V === 'pay' ? (aiOn() ? '<button class="btn" id="cmscan">Chụp bảng kế toán</button>' : '') + '<button class="btn p" id="cmadd">+ Thêm khoản</button>' : V === 'mkt' ? '<button class="btn" id="cmcamp">Mở tab Chiến dịch</button>' : '');
+  var sub1 = V === 'over' ? 'Tổng quan chi phí marketing và lương, hoa hồng. So với chi phí quảng cáo để biết làm marketing còn lời bao nhiêu.' : V === 'mkt' ? 'Chi phí marketing thực tế theo tháng, ngân sách kế hoạch và các mốc hỗ trợ.' : 'Nhập số liệu kế toán gửi hằng tháng: hoa hồng NVKD, thưởng TPKD/GĐKD, lương. Có thể chụp bảng để tự điền.';
+  $('#main').innerHTML = '<div class="card"><div class="row" style="margin:0"><b>Chi phí: marketing, lương và hoa hồng</b><span class="sp"></span><select id="cmy">' + yl.map(function (y) { return '<option>' + y + '</option>'; }).join('') + '</select>' + btns + '</div>' +
+    '<div class="small mut" style="margin-top:6px">' + sub1 + '</div></div>' + topBar + subBar + body;
   $('#cmy').value = CM.year; planBind(); unitBind();
   document.querySelectorAll('[data-cv]').forEach(function (b) { b.onclick = function () { CM.view = b.dataset.cv; comm(); window.scrollTo(0, 0); }; });
+  document.querySelectorAll('[data-cs]').forEach(function (b) { b.onclick = function () { CM.sub = b.dataset.cs; comm(); window.scrollTo(0, 0); }; });
+  if ($('#cmcamp')) $('#cmcamp').onclick = function () { gotoTab('camp'); };
   $('#cmy').onchange = function () { CM.year = this.value; CM.month = ''; comm(); };
-  $('#cmadd').onclick = function () { commForm(null); }; if ($('#cmscan')) $('#cmscan').onclick = commScan;
+  if ($('#cmadd')) $('#cmadd').onclick = function () { commForm(null); }; if ($('#cmscan')) $('#cmscan').onclick = commScan;
   if ($('#cmall')) $('#cmall').onclick = function () { CM.month = ''; comm(); };
   document.querySelectorAll('[data-cm]').forEach(function (r) { r.onclick = function () { CM.month = CM.month === r.dataset.cm ? '' : r.dataset.cm; comm(); }; });
   document.querySelectorAll('[data-ce]').forEach(function (b) { b.onclick = function () { commForm(d.items.filter(function (x) { return x.row === +b.dataset.ce; })[0]); }; });
