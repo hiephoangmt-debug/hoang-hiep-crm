@@ -728,9 +728,45 @@ document.addEventListener('click', function (e) { var a = e.target.closest && e.
         <button class="btn btn-gold" type="submit">Giữ chỗ sự kiện 18/10 →</button>
       </form>
     </div>
-        <figure class="evh-venue" style="max-width:620px;margin:22px auto 0;border-radius:18px;overflow:hidden;border:2px solid rgba(255,176,103,.55);background:#0b1a3a;box-shadow:0 30px 60px -30px rgba(0,0,0,.8)">
-      <a href="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@921f83b1d3c3567d2f8fb333c20e10ca889272aa/landing-pages/assets/thu-moi-du-an-va-dia-diem-18-10.jpg" target="_blank" rel="noopener" aria-label="Xem ảnh lớn thư mời"><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@921f83b1d3c3567d2f8fb333c20e10ca889272aa/landing-pages/assets/thu-moi-du-an-va-dia-diem-18-10-vuong-720.jpg" srcset="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@921f83b1d3c3567d2f8fb333c20e10ca889272aa/landing-pages/assets/thu-moi-du-an-va-dia-diem-18-10-vuong-720.jpg 720w, https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@921f83b1d3c3567d2f8fb333c20e10ca889272aa/landing-pages/assets/thu-moi-du-an-va-dia-diem-18-10-vuong.jpg 1080w" sizes="(max-width:660px) 100vw, 620px" width="1080" height="1080" alt="Thư mời sự kiện Tòa F2 – Sun FourS Tower: phối cảnh dự án tại Đà Nẵng và địa điểm tổ chức Sun Gallery Tây Hồ View, 58 Quảng Bá, Tây Hồ, Hà Nội, 9:00–11:20 Chủ nhật 18/10/2026" loading="lazy" decoding="async" style="width:100%;height:auto;display:block"></a>
-      <figcaption style="padding:12px 16px;font-size:14px;line-height:1.5;color:rgba(255,255,255,.88)">📍 Căn hộ tại Đà Nẵng – sự kiện tổ chức tại <b style="color:#ffa04a">Sun Gallery Tây Hồ View</b>, 58 Quảng Bá, Tây Hồ, Hà Nội · bấm để xem ảnh lớn</figcaption>
+        <figure class="evh-venue evs" style="max-width:520px;margin:22px auto 0">
+      <style>
+      .evs-box{position:relative;aspect-ratio:4/5;border-radius:18px;overflow:hidden;background:#0b1a3a;border:2px solid rgba(255,176,103,.55);box-shadow:0 30px 60px -30px rgba(0,0,0,.8);touch-action:pan-y}
+      .evs-s{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:opacity .7s ease;pointer-events:none}
+      .evs-s.on{opacity:1;pointer-events:auto}
+      .evs-s img{width:100%;height:100%;object-fit:contain;display:block}
+      .evs-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:40px;height:40px;border-radius:50%;border:0;background:rgba(11,26,58,.7);color:#fff;font-size:22px;line-height:1;cursor:pointer}
+      .evs-nav.p{left:10px}.evs-nav.n{right:10px}
+      .evs-dots{display:flex;justify-content:center;gap:8px;margin-top:12px}
+      .evs-dots button{width:9px;height:9px;border-radius:999px;border:0;padding:0;background:rgba(255,255,255,.35);cursor:pointer;transition:width .3s,background .3s}
+      .evs-dots button.on{width:26px;background:#f47a1f}
+      .evs figcaption{text-align:center;margin-top:8px;font-size:13.5px;color:rgba(255,255,255,.8)}
+      @media (prefers-reduced-motion:reduce){.evs-s{transition:none}}
+      </style>
+      <div class="evs-box" aria-roledescription="trình chiếu" aria-label="Ảnh sự kiện 18/10">
+        <a class="evs-s on" href="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-thu-moi-du-an-va-dia-diem-18-10.jpg" target="_blank" rel="noopener" aria-label="Ảnh 1/4: Thư mời: căn hộ Tòa F2 tại Đà Nẵng, sự kiện tại Sun Gallery Tây Hồ View, Hà Nội – bấm xem ảnh lớn"><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-thu-moi-du-an-va-dia-diem-18-10-720.jpg" width="720" height="900" alt="Thư mời: căn hộ Tòa F2 tại Đà Nẵng, sự kiện tại Sun Gallery Tây Hồ View, Hà Nội" decoding="async"></a>
+        <a class="evs-s" href="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-dia-diem-su-kien-18-10-sun-gallery-tay-ho-view.jpg" target="_blank" rel="noopener" aria-label="Ảnh 2/4: Địa điểm: Sun Gallery Tây Hồ View, 58 Quảng Bá, Tây Hồ, Hà Nội – bấm xem ảnh lớn"><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-dia-diem-su-kien-18-10-sun-gallery-tay-ho-view-720.jpg" width="720" height="900" alt="Địa điểm: Sun Gallery Tây Hồ View, 58 Quảng Bá, Tây Hồ, Hà Nội" loading="lazy" decoding="async"></a>
+        <a class="evs-s" href="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-thu-moi-su-kien-18-10-ha-noi.jpg" target="_blank" rel="noopener" aria-label="Ảnh 3/4: Căn nhà bên biển Đà Nẵng cho cả gia đình – Chủ nhật 18/10/2026 – bấm xem ảnh lớn"><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-thu-moi-su-kien-18-10-ha-noi-720.jpg" width="720" height="900" alt="Căn nhà bên biển Đà Nẵng cho cả gia đình – Chủ nhật 18/10/2026" loading="lazy" decoding="async"></a>
+        <a class="evs-s" href="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-vi-sao-gia-dinh-ha-noi-chon-da-nang.jpg" target="_blank" rel="noopener" aria-label="Ảnh 4/4: Bay 1 giờ 20 phút – về nhà bên biển Đà Nẵng – bấm xem ảnh lớn"><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-vi-sao-gia-dinh-ha-noi-chon-da-nang-720.jpg" width="720" height="720" alt="Bay 1 giờ 20 phút – về nhà bên biển Đà Nẵng" loading="lazy" decoding="async"></a>
+        <button type="button" class="evs-nav p" aria-label="Ảnh trước">‹</button><button type="button" class="evs-nav n" aria-label="Ảnh sau">›</button>
+      </div>
+      <div class="evs-dots"><button type="button" aria-label="Xem ảnh 1" class="on"></button><button type="button" aria-label="Xem ảnh 2"></button><button type="button" aria-label="Xem ảnh 3"></button><button type="button" aria-label="Xem ảnh 4"></button></div>
+      <figcaption>Ảnh tự chuyển · vuốt hoặc bấm ‹ › để xem · bấm ảnh để phóng to</figcaption>
+      <script>
+      (function () {
+        var f = document.currentScript.parentNode, s = f.querySelectorAll('.evs-s'), d = f.querySelectorAll('.evs-dots button'), i = 0, t = null;
+        var go = function (k) { s[i].classList.remove('on'); d[i].classList.remove('on'); i = (k + s.length) % s.length; s[i].classList.add('on'); d[i].classList.add('on'); var im = s[i].querySelector('img'); if (im) im.loading = 'eager'; };
+        var stop = function () { if (t) clearInterval(t); t = null; };
+        var play = function () { stop(); if (!matchMedia('(prefers-reduced-motion:reduce)').matches) t = setInterval(function () { go(i + 1); }, 3500); };
+        f.querySelector('.evs-nav.p').onclick = function () { go(i - 1); play(); };
+        f.querySelector('.evs-nav.n').onclick = function () { go(i + 1); play(); };
+        d.forEach(function (b, k) { b.onclick = function () { go(k); play(); }; });
+        var box = f.querySelector('.evs-box'), x0 = null;
+        box.addEventListener('mouseenter', stop); box.addEventListener('mouseleave', play);
+        box.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, {passive: true});
+        box.addEventListener('touchend', function (e) { if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; x0 = null; if (Math.abs(dx) > 40) { go(i + (dx < 0 ? 1 : -1)); play(); } });
+        if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { es[0].isIntersecting ? play() : stop(); }).observe(box); else play();
+      })();
+      </script>
     </figure>
     <details class="ev-agenda"><summary>Xem chương trình sự kiện</summary><ul>
       <li><b>9h00</b> Đón khách &amp; teabreak</li>
