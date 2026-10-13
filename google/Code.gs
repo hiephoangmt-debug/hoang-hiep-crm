@@ -658,6 +658,16 @@ function crmUpdateLead(k, phone, f) {
   });
 }
 
+// Xoá hẳn một khách (dòng trong tab Khách hàng) để nhập lại. Nhật ký chăm sóc cũ vẫn giữ trong tab Nhật ký.
+function crmDeleteLead(k, phone) {
+  requireUi_(k);
+  return withLock_(function () {
+    var x = findLead_(phone);
+    x.sh.deleteRow(x.row);
+    return { ok: true };
+  });
+}
+
 // Nhật ký chăm sóc: mỗi lần gọi / nhắn / gặp / gửi tài liệu là một dòng, không bao giờ bị ghi đè.
 function crmAddLog(k, phone, f) {
   requireUi_(k);

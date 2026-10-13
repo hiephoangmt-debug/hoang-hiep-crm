@@ -768,7 +768,7 @@ function openLead(phone, page, keep) {
     lab('Trạng thái', '<select id="st">' + STATUS.map(function (s) { return '<option' + (s === l.status ? ' selected' : '') + '>' + s + '</option>'; }).join('') + '</select>') + lab('Lý do đổi trạng thái (nếu có)', inp('sr', '', 'Bắt buộc ghi khi chọn Mất hoặc Tạm dừng')) +
     lab('Sale phụ trách', sel('as', saleNames([l.assignee].filter(Boolean)), l.assignee, 'Chưa giao')) + lab('Lý do chuyển sale', inp('rs', '', 'Ví dụ: sale cũ nghỉ')) +
     lab('Hẹn tiếp theo', inp('nx', l.next, '', 'date')) + lab('Mức tiềm năng', sel('ht', ['Nóng', 'Ấm', 'Lạnh'], l.heat, 'Chưa đánh giá')) + lab('Giá trị chốt (VNĐ)', inp('vl', l.value || '', '', 'number')) + '</div>' +
-    '<textarea id="nt" rows="2" placeholder="Ghi chú chung">' + esc(l.note) + '</textarea><div class="row" style="margin-top:8px"><button class="btn p" id="sv">Lưu thông tin</button><button class="btn" id="cl">Đóng</button></div>',
+    '<textarea id="nt" rows="2" placeholder="Ghi chú chung">' + esc(l.note) + '</textarea><div class="row" style="margin-top:8px"><button class="btn p" id="sv">Lưu thông tin</button><button class="btn" id="cl">Đóng</button><span class="sp"></span><button class="btn" id="dellead" style="color:var(--red)">Xoá khách này</button></div>',
     care: '<h3>Lịch sử chăm sóc' + (aiOn() ? ' <button class="btn sm" id="zcBtn2">Chụp Zalo gửi lên</button>' : '') + '</h3><div class="fgrid">' + lab('Hình thức', '<select id="lt">' + ['Gọi điện', 'Nhắn Zalo', 'Gặp mặt', 'Gửi tài liệu', 'Ghi chú', 'Khác'].map(function (s) { return '<option>' + s + '</option>'; }).join('') + '</select>') +
     lab('Kết quả', sel('lq', LOG_RES, '', 'Chọn kết quả')) + lab('Tài liệu đã gửi', inp('ld', '')) + lab('Hẹn liên hệ lại', inp('ln2', '', '', 'date')) + '</div>' +
     '<textarea id="lc" rows="2" placeholder="Nội dung trao đổi"></textarea><div class="fgrid" style="margin-top:6px">' + lab('Phản hồi của khách', inp('lp', '')) + lab('Vướng mắc của khách', inp('lo', '')) + lab('Hành động tiếp theo', inp('la2', '')) + '</div>' +
@@ -794,6 +794,13 @@ function openLead(phone, page, keep) {
   }
   var fin = function () { if (page) openLead(phone, true, window.scrollY); else openLead(phone, false); };
   if ($('#back')) $('#back').onclick = function () { if (page) backToList(); else $('#dlg').close(); };
+  if ($('#dellead')) $('#dellead').onclick = function () {
+    if (!confirm('Xoá hẳn khách ' + (l.name || l.phone) + ' (' + l.phone + ') khỏi CRM? Không khôi phục được. Sau đó bạn nhập lại bằng "+ Thêm khách".')) return;
+    run('crmDeleteLead', phone).then(function () {
+      D.leads = D.leads.filter(function (x) { return x.phone !== phone; });
+      toast('Đã xoá khách, bấm "+ Thêm khách" để nhập lại'); if (page) backToList(); else { $('#dlg').close(); } badges(); render();
+    }).catch(fail);
+  };
   if ($('#cl')) $('#cl').onclick = function () { if (page) backToList(); else $('#dlg').close(); };
   document.querySelectorAll('#main [data-a], #dlgBody [data-a]').forEach(function (b) { b.onclick = function () {
     var a = b.dataset.a; if (a === 'zalo') window.open('https://zalo.me/' + phone, '_blank', 'noopener'); if (a === 'call') window.open('tel:' + phone, '_self');

@@ -127,6 +127,10 @@ ctx.crmUpdateLead(K, '0988111222', { status: 'Chốt', value: 5000000, assignee:
 const l1 = ctx.crmLoad(K).leads.find((x) => x.phone === '0988111222');
 assert.deepEqual([l1.status, l1.value, l1.assignee, l1.note], ['Chốt', 5000000, 'Hanh', 'xem nhà 15/10']);
 assert.throws(() => ctx.crmUpdateLead(K, '0988111222', { status: 'abc' }), /không hợp lệ/);
+{ const before = ctx.crmLoad(K).leads.length; ctx.crmCreateLead(K, { phone: '0977000111', name: 'Xoá thử' });
+  assert.equal(ctx.crmLoad(K).leads.length, before + 1);
+  ctx.crmDeleteLead(K, '0977000111'); assert.equal(ctx.crmLoad(K).leads.length, before);
+  assert.throws(() => ctx.crmDeleteLead(K, '0977000111'), /Không tìm thấy/); assert.throws(() => ctx.crmDeleteLead('sai', '0988111222'), /Không có quyền/); }
 const ck0 = ctx.crmLoad(K).clicks[0];
 assert.throws(() => ctx.crmClickDone(K, ck0.row, 'sai-vid', true), /thay đổi/);
 ctx.crmClickDone(K, ck0.row, ck0.vid, true, 'đã xem Zalo');
