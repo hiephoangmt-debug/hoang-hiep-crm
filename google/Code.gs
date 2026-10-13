@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-21', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-23', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -248,7 +248,8 @@ function crmCommDelete(k, row) {
 }
 
 // ---- Kế hoạch marketing tháng: chạy kênh nào, ngân sách, tiền ứng trước và các mốc hỗ trợ theo số căn bán được.
-var PLAN_HEAD = ['Mã', 'Tháng', 'Dự án', 'Kênh quảng cáo (JSON)', 'Ngân sách kế hoạch', 'Đã ứng trước', 'Mốc hỗ trợ (JSON)', 'Số căn đã bán (nhập tay)', 'Ghi chú', 'Ngày nhập'];
+var PLAN_HEAD = ['Mã', 'Tháng', 'Dự án', 'Kênh quảng cáo (JSON)', 'Ngân sách kế hoạch', 'Đã ứng trước', 'Mốc hỗ trợ (JSON)', 'Số căn đã bán (nhập tay)', 'Ghi chú', 'Ngày nhập', 'Loại kế hoạch', 'Tài liệu (JSON)'];
+var PLAN_KINDS = ['Của sàn', 'Cá nhân'];
 function jsonArr_(v) { try { var a = JSON.parse(String(v || '[]')); return Array.isArray(a) ? a : []; } catch (e) { return []; } }
 function plansLoad_() {
   var sh = tab_('Kế hoạch MKT', PLAN_HEAD), n = lastDataRow_(sh, 2);
@@ -256,7 +257,8 @@ function plansLoad_() {
   rows.forEach(function (r, i) {
     var mo = monthStr_(r[1]); if (!mo) return;
     out.push({ row: i + 2, id: String(r[0] || ''), month: mo, project: String(r[2] || ''), channels: jsonArr_(r[3]), budget: Number(r[4]) || 0, advance: Number(r[5]) || 0,
-      tiers: jsonArr_(r[6]), sold: r[7] === '' || r[7] == null ? null : Number(r[7]) || 0, note: String(r[8] || '') });
+      tiers: jsonArr_(r[6]), sold: r[7] === '' || r[7] == null ? null : Number(r[7]) || 0, note: String(r[8] || ''),
+      kind: PLAN_KINDS.indexOf(String(r[10] || '')) >= 0 ? String(r[10]) : 'Của sàn', docs: jsonArr_(r[11]) });
   });
   return out;
 }
@@ -268,6 +270,8 @@ function crmPlanSave(k, f) {
     var from = Math.max(0, Math.round(numIn_(t && t.from))), to = t && t.to !== '' && t.to != null ? Math.max(from, Math.round(numIn_(t.to))) : '';
     return { from: from, to: to, pct: Math.min(100, Math.max(0, numIn_(t && t.pct))) };
   });
+  var docs = (Array.isArray(f.docs) ? f.docs : []).slice(0, 10).map(function (d) { return { title: str_(d && d.title, 80), url: String((d && d.url) || '').trim().slice(0, 500) }; }).filter(function (d) { return /^https?:\/\//i.test(d.url); });
+  var kind = PLAN_KINDS.indexOf(f.kind) >= 0 ? f.kind : PLAN_KINDS[0];
   var budget = ch.reduce(function (a, c) { return a + c.budget; }, 0) || numIn_(f.budget);
   var sold = f.sold === '' || f.sold == null ? '' : Math.max(0, Math.round(numIn_(f.sold)));
   return withLock_(function () {
@@ -276,10 +280,11 @@ function crmPlanSave(k, f) {
     if (row) {
       if (row < 2 || row > n) throw new Error('Không tìm thấy dòng cần sửa');
       sh.getRange(row, 2, 1, vals.length).setValues([vals]);
+      sh.getRange(row, 11, 1, 2).setValues([[kind, JSON.stringify(docs)]]);
       return { ok: true, row: row };
     }
     var id = 'KH' + ('000' + n).slice(-3);
-    sh.appendRow([id].concat(vals).concat([new Date()]));
+    sh.appendRow([id].concat(vals).concat([new Date(), kind, JSON.stringify(docs)]));
     return { ok: true, row: n + 1, id: id };
   });
 }
@@ -311,8 +316,7 @@ function pageText_(u) {
   var body = h.replace(/<(script|style|noscript)[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
   return (title + '. ' + desc + '. ' + body).slice(0, 6000);
 }
-function crmScanOffer(k, text, link, img, mime) {
-  requireUi_(k);
+function scanAi_(system, intro, text, link, img, mime) {
   text = String(text || '').trim().slice(0, 6000); link = String(link || '').trim();
   img = String(img || '').replace(/^data:[^,]*,/, ''); mime = String(mime || 'image/jpeg');
   if (!text && !link && !img) throw new Error('Hãy dán thông điệp, link hoặc chọn ảnh');
@@ -325,28 +329,53 @@ function crmScanOffer(k, text, link, img, mime) {
   var page = link ? pageText_(link) : '';
   var content = [];
   if (img) content.push({ type: 'image', source: { type: 'base64', media_type: mime, data: img } });
-  content.push({ type: 'text', text: 'Nguồn thông tin về một dự án, chính sách hoặc quỹ căn mới của bên bán.\n' + (text ? '\nThông điệp sale dán vào:\n' + text : '') + (page ? '\nNội dung trang ' + link + ':\n' + page : '') + (img ? '\n(Có kèm ảnh poster/bảng hàng ở trên.)' : '') });
+  content.push({ type: 'text', text: intro + '\n' + (text ? '\nNội dung dán vào:\n' + text : '') + (page ? '\nNội dung trang ' + link + ':\n' + page : '') + (img ? '\n(Có kèm ảnh ở trên.)' : '') });
   var res = UrlFetchApp.fetch('https://api.anthropic.com/v1/messages', {
     method: 'post', contentType: 'application/json', muteHttpExceptions: true,
     headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01' },
-    payload: JSON.stringify({
-      model: ASK_MODEL, max_tokens: 1800,
-      system: 'Bạn là quân sư bán hàng bất động sản tại Đà Nẵng. Đọc nguồn thông tin và chỉ trả về MỘT đối tượng JSON, không thêm chữ nào khác, theo mẫu: ' +
-        '{"name":"tên dự án","highlights":"điểm nổi bật và chính sách, 1 đến 3 dòng ngắn, chỉ dùng thông tin có trong nguồn","priceFrom":số tỷ hoặc null,"priceTo":số tỷ hoặc null,"area":"khu vực hoặc tỉnh thành hoặc rỗng",' +
-        '"target":"mô tả ngắn nhóm khách phù hợp nhất (ngân sách, mục đích, khu vực)","messages":[{"style":"Thân mật","text":"..."},{"style":"Nhấn ưu đãi","text":"..."},{"style":"Khan hiếm","text":"..."}],"note":"điều cần kiểm tra lại hoặc thiếu"}. ' +
-        'Trong text dùng {ten} cho cách gọi khách và {sale} cho tên tư vấn viên. Tiếng Việt lịch sự, ngắn 3 đến 6 dòng, có lời kêu gọi hành động. Tuyệt đối không bịa giá, ưu đãi, thời hạn hay số căn không có trong nguồn; thiếu thì để rỗng và ghi vào note. Bản "Khan hiếm" chỉ nhấn khan hiếm nếu nguồn có nói.',
-      messages: [{ role: 'user', content: content }]
-    })
+    payload: JSON.stringify({ model: ASK_MODEL, max_tokens: 1800, system: system, messages: [{ role: 'user', content: content }] })
   });
   var code = res.getResponseCode(), body = {};
   try { body = JSON.parse(res.getContentText()); } catch (e) {}
   if (code !== 200) throw new Error('Quân sư lỗi (' + code + '): ' + ((body.error && body.error.message) || 'không rõ nguyên nhân'));
-  var txt = (body.content || []).map(function (b) { return b.text || ''; }).join(''), a = txt.indexOf('{'), b2 = txt.lastIndexOf('}'), o = {};
-  try { o = JSON.parse(txt.slice(a, b2 + 1)); } catch (e) { throw new Error('Quân sư trả lời chưa đúng dạng, hãy thử quét lại'); }
-  var nm = function (v) { v = parseFloat(v); return isFinite(v) && v > 0 ? v : ''; };
+  var txt = (body.content || []).map(function (b) { return b.text || ''; }).join(''), a = txt.indexOf('{'), b2 = txt.lastIndexOf('}');
+  try { return JSON.parse(txt.slice(a, b2 + 1)); } catch (e) { throw new Error('Quân sư trả lời chưa đúng dạng, hãy thử quét lại'); }
+}
+function scanNum_(v) { v = parseFloat(v); return isFinite(v) && v > 0 ? v : ''; }
+function crmScanOffer(k, text, link, img, mime) {
+  requireUi_(k);
+  var o = scanAi_('Bạn là quân sư bán hàng bất động sản tại Đà Nẵng. Đọc nguồn thông tin và chỉ trả về MỘT đối tượng JSON, không thêm chữ nào khác, theo mẫu: ' +
+    '{"name":"tên dự án","highlights":"điểm nổi bật và chính sách, 1 đến 3 dòng ngắn, chỉ dùng thông tin có trong nguồn","priceFrom":số tỷ hoặc null,"priceTo":số tỷ hoặc null,"area":"khu vực hoặc tỉnh thành hoặc rỗng",' +
+    '"target":"mô tả ngắn nhóm khách phù hợp nhất (ngân sách, mục đích, khu vực)","messages":[{"style":"Thân mật","text":"..."},{"style":"Nhấn ưu đãi","text":"..."},{"style":"Khan hiếm","text":"..."}],"note":"điều cần kiểm tra lại hoặc thiếu"}. ' +
+    'Trong text dùng {ten} cho cách gọi khách và {sale} cho tên tư vấn viên. Tiếng Việt lịch sự, ngắn 3 đến 6 dòng, có lời kêu gọi hành động. Tuyệt đối không bịa giá, ưu đãi, thời hạn hay số căn không có trong nguồn; thiếu thì để rỗng và ghi vào note. Bản "Khan hiếm" chỉ nhấn khan hiếm nếu nguồn có nói.',
+    'Nguồn thông tin về một dự án, chính sách hoặc quỹ căn mới của bên bán.', text, link, img, mime);
   return {
-    name: str_(o.name, 120), highlights: str_(o.highlights, 600), priceFrom: nm(o.priceFrom), priceTo: nm(o.priceTo), area: str_(o.area, 80), target: str_(o.target, 300), note: str_(o.note, 400),
+    name: str_(o.name, 120), highlights: str_(o.highlights, 600), priceFrom: scanNum_(o.priceFrom), priceTo: scanNum_(o.priceTo), area: str_(o.area, 80), target: str_(o.target, 300), note: str_(o.note, 400),
     messages: (Array.isArray(o.messages) ? o.messages : []).slice(0, 4).map(function (m) { return { style: str_(m && m.style, 40), text: str_(m && m.text, 1500) }; }).filter(function (m) { return m.text; })
+  };
+}
+// Phân tích chat Zalo của một khách từ đoạn dán hoặc ảnh chụp màn hình (Zalo cá nhân không có API chính thức để tự lấy lịch sử).
+function crmScanChat(k, phone, text, img, mime) {
+  requireUi_(k);
+  var ctx = ''; if (phone) { try { ctx = '\nThông tin khách trong CRM: ' + leadContext_(phone); } catch (e) {} }
+  var o = scanAi_('Bạn là quân sư bán hàng bất động sản. Đọc đoạn chat Zalo giữa sale và khách và chỉ trả về MỘT đối tượng JSON, không thêm chữ nào khác: ' +
+    '{"summary":"tóm tắt 2 đến 3 dòng","need":"nhu cầu, ngân sách, khu vực, loại căn khách đã nói","obstacle":"vướng mắc hoặc lo ngại","heat":"Nóng hoặc Ấm hoặc Nguội","reason":"vì sao","next":"bước tiếp theo tối ưu, cụ thể","message":"tin nhắn mẫu gửi khách được ngay"}. ' +
+    'Chỉ dựa trên nội dung chat và thông tin CRM, không bịa giá hay chính sách. Tiếng Việt, ngắn gọn.', 'Đây là đoạn chat Zalo cần phân tích.' + ctx, text, '', img, mime);
+  var s = function (v, n) { return str_(v, n); };
+  return { summary: s(o.summary, 600), need: s(o.need, 400), obstacle: s(o.obstacle, 400), heat: s(o.heat, 20), reason: s(o.reason, 300), next: s(o.next, 400), message: s(o.message, 1000) };
+}
+// Quét kế hoạch marketing của sàn hoặc cá nhân từ thông điệp, link, ảnh: rút kênh chạy, ngân sách, tiền ứng, mốc hỗ trợ.
+function crmScanPlan(k, text, link, img, mime) {
+  requireUi_(k);
+  var o = scanAi_('Bạn đọc kế hoạch marketing bất động sản (của sàn hoặc cá nhân) và chỉ trả về MỘT đối tượng JSON, không thêm chữ nào khác, theo mẫu: ' +
+    '{"project":"dự án hoặc chủ đầu tư","month":"YYYY-MM hoặc rỗng","kind":"Của sàn hoặc Cá nhân hoặc rỗng","advance":số tiền ứng trước bằng đồng hoặc null,"channels":[{"name":"kênh chạy","budget":số đồng,"note":""}],' +
+    '"tiers":[{"from":số căn tối thiểu,"to":số căn tối đa hoặc null nếu trở lên,"pct":phần trăm được hỗ trợ từ 0 đến 100}],"note":"điều kiện, thời hạn, điểm cần kiểm tra"}. ' +
+    'Quy ước tiers: pct là phần trăm tiền ứng được hỗ trợ, phần còn lại phải hoàn. "Hoàn 100%" nghĩa là pct 0; "hỗ trợ 100%" nghĩa là pct 100. Chỉ dùng số liệu có trong nguồn, thiếu thì để rỗng hoặc null, tuyệt đối không bịa.',
+    'Nguồn là kế hoạch marketing hoặc thông báo hỗ trợ chi phí quảng cáo.', text, link, img, mime);
+  return {
+    project: str_(o.project, 120), month: monthStr_(o.month), kind: PLAN_KINDS.indexOf(o.kind) >= 0 ? o.kind : '', advance: scanNum_(o.advance), note: str_(o.note, 500),
+    channels: (Array.isArray(o.channels) ? o.channels : []).slice(0, 20).map(function (c) { return { name: str_(c && c.name, 80), budget: scanNum_(c && c.budget), note: str_(c && c.note, 150) }; }).filter(function (c) { return c.name || c.budget; }),
+    tiers: (Array.isArray(o.tiers) ? o.tiers : []).slice(0, 10).map(function (x) { return { from: Math.max(0, Math.round(Number(x && x.from) || 0)), to: x && x.to != null && x.to !== '' ? Math.max(0, Math.round(Number(x.to) || 0)) : '', pct: Math.min(100, Math.max(0, Number(x && x.pct) || 0)) }; })
   };
 }
 
