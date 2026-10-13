@@ -472,11 +472,12 @@ function leadsGroups() {
   document.querySelectorAll('[data-act]').forEach(function (b) { b.onclick = function () { contact(b.dataset.p, b.dataset.act, b); }; });
 }
 // Nhập khách từ một Google Sheet khác theo link: mỗi tab là một dự án
-function sheetImport() {
-  var u0 = ''; try { u0 = localStorage.getItem('crm_sheet_url') || ''; } catch (e) {}
+function sheetImport(pre) {
+  var u0 = pre || ''; if (!u0) { try { u0 = localStorage.getItem('crm_sheet_url') || ''; } catch (e) {} }
   $('#dlgBody').innerHTML = '<h2 style="margin:0">Nhập khách từ Google Sheet</h2><p class="small mut">Dán link Google Sheet chứa khách (mỗi tab là một dự án, mỗi dòng là một khách để lại thông tin). Hệ thống đọc từng tab, lấy tên, số điện thoại, loại căn, nguồn quảng cáo và <b>giữ nguyên ngày khách để lại</b>. Số đã có trong CRM thì bỏ qua, không ghi đè. Tài khoản chạy CRM phải có quyền xem file đó.</p>' +
     '<div class="row"><input id="si1" placeholder="https://docs.google.com/spreadsheets/d/..." style="flex:1;min-width:240px" value="' + esc(u0) + '"><button class="btn p" id="sigo">Đọc Sheet</button><button class="btn" id="six">Đóng</button></div><div id="sir"></div>';
   $('#dlg').showModal(); $('#six').onclick = function () { $('#dlg').close(); };
+  if (pre) setTimeout(function () { var g = $('#sigo'); if (g) g.click(); }, 50);
   $('#sigo').onclick = function () {
     var url = $('#si1').value.trim(); if (!url) { toast('Hãy dán link Sheet'); return; }
     try { localStorage.setItem('crm_sheet_url', url); } catch (e) {}
@@ -1279,7 +1280,7 @@ function addLead() {
   var lab = function (t, h) { return '<label class="fld"><span class="mut small">' + t + '</span>' + h + '</label>'; };
   var sel = function (id, arr, first) { return '<select id="' + id + '"><option value="">' + first + '</option>' + arr.map(function (s) { return '<option>' + esc(s) + '</option>'; }).join('') + '</select>'; };
   $('#dlgBody').innerHTML = '<h2 style="margin:0">Thêm khách mới</h2><p class="small mut">Chỉ cần tên hoặc số điện thoại. Hệ thống kiểm tra trùng số điện thoại trước khi tạo.</p>' +
-    '<label class="fld"><span class="mut small">Dán nhanh: dán một đoạn có tên, số điện thoại, ngân sách, dự án, link… hệ thống tự điền vào các ô bên dưới</span><textarea id="apaste" rows="2" placeholder="Ví dụ: Chị Hà 0912 345 678, quan tâm Spana, ngân sách 2-3 tỷ, hồ sơ https://drive.google.com/..."></textarea></label><div class="fgrid" style="margin-top:8px">' +
+    '<label class="fld"><span class="mut small">Dán nhanh: dán một đoạn có tên, số điện thoại, ngân sách, dự án, link… hệ thống tự điền vào các ô bên dưới</span><textarea id="apaste" rows="2" placeholder="Ví dụ: Chị Hà 0912 345 678, quan tâm Spana, ngân sách 2-3 tỷ, hồ sơ https://drive.google.com/..."></textarea></label><div id="apnote"></div><div class="fgrid" style="margin-top:8px">' +
     lab('Họ và tên', '<input id="an">') + lab('Số điện thoại *', '<input id="ap" inputmode="tel">') + lab('Tỉnh/thành phố', '<input id="av">') + lab('Quận/huyện, phường/xã', '<input id="adt">') + lab('Địa chỉ chi tiết', '<input id="aad">') + lab('Link Drive / hồ sơ khách', '<input id="adu" placeholder="https://drive.google.com/...">') + lab('Dự án quan tâm', '<input id="ad" list="adl" placeholder="Tên dự án">') +
     lab('Nguồn khách', sel('as2', SRC_OPTS, 'Chọn nguồn')) + lab('Mục đích mua', sel('ao', ['Ở thực', 'Đầu tư', 'Cho thuê', 'Kinh doanh'], 'Chưa rõ')) +
     lab('Ngân sách tối thiểu', '<input id="a1" placeholder="2 tỷ">') + lab('Ngân sách tối đa', '<input id="a2" placeholder="3 tỷ">') + lab('Trạng thái', '<select id="ast">' + STATUS.map(function (s) { return '<option>' + s + '</option>'; }).join('') + '</select>') + '</div>' +
@@ -1292,7 +1293,10 @@ function addLead() {
     var pm = /(?:\+84|84|0)?[\s.\-]?[35789]\d(?:[\s.\-]?\d){7}/.exec(t), ph = '';
     if (pm) { ph = pm[0].replace(/[^\d]/g, ''); if (ph.indexOf('84') === 0 && ph.length === 11) ph = '0' + ph.slice(2); else if (ph.length === 9) ph = '0' + ph; }
     set('#ap', ph);
-    var um = /https?:\/\/\S+/.exec(t); if (um) set('#adu', um[0].replace(/[),.;]+$/, ''));
+    var um = /https?:\/\/\S+/.exec(t), isSheet = um && /docs\.google\.com\/spreadsheets\/d\//.test(um[0]);
+    if (isSheet) { $('#apnote').innerHTML = '<div class="card" style="background:#FFF3E3">Đây là link <b>Google Sheet chứa dữ liệu khách</b>, không phải một khách. <button class="btn sm p" id="apsheet">Nhập khách từ Sheet này</button></div>'; $('#apsheet').onclick = function () { var u = um[0].replace(/[),.;]+$/, ''); $('#dlg').close(); sheetImport(u); }; return; }
+    $('#apnote').innerHTML = '';
+    if (um) set('#adu', um[0].replace(/[),.;]+$/, ''));
     var bm = /(\d+(?:[.,]\d+)?)\s*(?:-|đến|tới|~)\s*(\d+(?:[.,]\d+)?)\s*tỷ/i.exec(t), b1 = /(\d+(?:[.,]\d+)?)\s*tỷ/i.exec(t);
     if (bm) { set('#a1', bm[1] + ' tỷ'); set('#a2', bm[2] + ' tỷ'); } else if (b1) set('#a2', b1[1] + ' tỷ');
     var low = t.toLowerCase(), pj = projNames().filter(function (n) { return n && low.indexOf(n.toLowerCase()) >= 0; })[0]; set('#ad', pj);
@@ -1318,25 +1322,104 @@ function addLead() {
     }).catch(function (e) { $('#aok').disabled = false; fail(e); });
   };
 }
+// Nhập danh sách khách: dán bảng, tải file danh bạ .vcf hoặc .csv, chụp ảnh, hoặc link Google Sheet. Có xem trước và lọc số trùng.
+var IMP = { rows: [], project: '', source: 'Nhập danh sách' };
+function normPh(p) {
+  var d = String(p == null ? '' : p).replace(/[^\d+]/g, ''); if (d.indexOf('+84') === 0) d = '0' + d.slice(3); else if (d.indexOf('84') === 0 && d.length >= 11) d = '0' + d.slice(2);
+  d = d.replace(/\D/g, ''); if (d.length === 9 && /^[35789]/.test(d)) d = '0' + d; return d.length >= 9 && d.length <= 11 ? d : '';
+}
+function splitNote(name) { var m = /^(.*?)\s*[(（](.*)[)）]\s*$/.exec(String(name || '').trim()); return m ? { name: m[1].trim(), note: m[2].trim() } : { name: String(name || '').trim(), note: '' }; }
+function parseTable(text) {
+  var lines = text.split(/\r?\n/).filter(function (x) { return x.trim(); });
+  var rows = lines.map(function (ln) { var p = ln.indexOf('\t') >= 0 ? ln.split('\t') : ln.split(/[;,]/); return { name: p[0], phone: p[1], province: p[2], site: p[3], budget: p[4], source: p[5], note: p[6] }; });
+  if (rows.length && !/\d{6}/.test(String(rows[0].phone || ''))) rows.shift();
+  return rows;
+}
+function parseVcf(text) {
+  var out = [], cards = text.replace(/\r\n?/g, '\n').replace(/\n[ \t]/g, '').match(/BEGIN:VCARD[\s\S]*?END:VCARD/gi) || [];
+  cards.forEach(function (c) {
+    var fn = (/^FN[^:\n]*:(.*)$/mi.exec(c) || [])[1], n = (/^N[^:\n]*:(.*)$/mi.exec(c) || [])[1];
+    var name = fn || (n ? n.split(';').reverse().join(' ').trim() : ''), tels = [], m, re = /^TEL[^:\n]*:(.*)$/gmi;
+    while ((m = re.exec(c))) tels.push(m[1].trim());
+    var note = (/^NOTE[^:\n]*:(.*)$/mi.exec(c) || [])[1] || '', sn = splitNote(name);
+    var ph = tels.map(normPh).filter(Boolean);
+    out.push({ name: sn.name, phone: ph[0] || '', note: [sn.note, note, ph.length > 1 ? 'Số khác: ' + ph.slice(1).join(', ') : ''].filter(Boolean).join('. ') });
+  });
+  return out;
+}
+function parseCsvRows(text) {
+  var rows = [], row = [], f = '', q = false, i, ch;
+  for (i = 0; i < text.length; i++) {
+    ch = text[i];
+    if (q) { if (ch === '"') { if (text[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += ch; }
+    else if (ch === '"') q = true; else if (ch === ',') { row.push(f); f = ''; } else if (ch === '\n') { row.push(f); rows.push(row); row = []; f = ''; } else if (ch !== '\r') f += ch;
+  }
+  if (f || row.length) { row.push(f); rows.push(row); }
+  return rows;
+}
+function parseCsv(text) {
+  var R = parseCsvRows(text.replace(/^﻿/, '')); if (!R.length) return [];
+  var h = R[0].map(function (x) { return String(x).trim().toLowerCase(); });
+  var ix = function (re) { for (var i = 0; i < h.length; i++) if (re.test(h[i])) return i; return -1; };
+  var iName = ix(/^(name|họ tên|tên)$/), iFirst = ix(/first name|^tên$/), iLast = ix(/last name|^họ$/), iPh = ix(/phone 1 - value|phone.*value|điện thoại|sđt|^phone$|mobile/), iNote = ix(/^notes?$|ghi chú/);
+  if (iPh < 0) return parseTable(text);
+  return R.slice(1).filter(function (r) { return r.join('').trim(); }).map(function (r) {
+    var nm = iName >= 0 && r[iName] ? r[iName] : [iFirst >= 0 ? r[iFirst] : '', iLast >= 0 ? r[iLast] : ''].filter(Boolean).join(' '), sn = splitNote(nm);
+    return { name: sn.name, phone: r[iPh], note: [sn.note, iNote >= 0 ? r[iNote] : ''].filter(Boolean).join('. ') };
+  });
+}
 function importLeads() {
-  $('#dlgBody').innerHTML = '<h2 style="margin:0">Nhập danh sách khách</h2><p class="small mut">Mở file Excel, chọn các ô rồi copy, dán vào ô dưới. Mỗi dòng một khách, các cột theo thứ tự: <b>Họ tên, Số điện thoại, Tỉnh/thành, Dự án, Ngân sách, Nguồn, Ghi chú</b>. Dòng đầu là tiêu đề thì để nguyên, hệ thống tự bỏ qua. Tối đa 200 dòng mỗi lần.</p>' +
-    '<textarea id="imt" rows="8" placeholder="Nguyễn Văn A&#9;0912345678&#9;Hà Nội&#9;FourS Tower&#9;3 tỷ&#9;Facebook Ads"></textarea><div id="imr"></div><div class="row" style="margin-top:8px"><button class="btn p" id="imok">Nhập</button><button class="btn" id="imx">Đóng</button></div>';
+  IMP.rows = [];
+  $('#dlgBody').innerHTML = '<h2 style="margin:0">Nhập danh sách khách</h2><p class="small mut">Chọn một cách bên dưới, hệ thống đọc rồi hiện bản xem trước. <b>Số đã có trong CRM hoặc lặp trong file được tự lọc ra</b>, bạn quyết định bỏ qua hay chỉ điền ô còn trống vào hồ sơ cũ.</p>' +
+    '<div class="row"><label class="btn" style="cursor:pointer">Tải file danh bạ .vcf hoặc .csv<input id="imf" type="file" accept=".vcf,.csv,.txt,text/vcard,text/csv" hidden></label>' + (aiOn() ? '<label class="btn" style="cursor:pointer">Chụp ảnh, chọn ảnh<input id="imi" type="file" accept="image/*" hidden></label>' : '') + '<button class="btn" id="imsheet">Nhập từ link Google Sheet</button></div>' +
+    '<label class="fld"><span class="mut small">Hoặc dán bảng từ Excel. Mỗi dòng một khách, cột: Họ tên, Số điện thoại, Tỉnh/thành, Dự án, Ngân sách, Nguồn, Ghi chú</span><textarea id="imt" rows="5" placeholder="Nguyễn Văn A&#9;0912345678&#9;Hà Nội&#9;FourS Tower&#9;3 tỷ&#9;Facebook Ads"></textarea></label>' +
+    '<div class="row" style="margin-top:6px"><button class="btn" id="imread">Đọc ô dán</button><span class="small mut" id="imst"></span></div>' +
+    '<div class="fgrid"><label class="fld"><span class="mut small">Dự án chung cho cả danh sách (để trống nếu mỗi dòng đã có)</span><input id="imp" list="imdl" value="' + esc(IMP.project) + '"><datalist id="imdl">' + projNames().map(function (p) { return '<option value="' + esc(p) + '">'; }).join('') + '</datalist></label><label class="fld"><span class="mut small">Nguồn khách</span><input id="ims" value="' + esc(IMP.source) + '"></label></div>' +
+    '<div id="imr"></div><div class="row" style="margin-top:8px"><button class="btn" id="imx">Đóng</button></div>';
   $('#dlg').showModal();
   $('#imx').onclick = function () { $('#dlg').close(); };
+  $('#imsheet').onclick = function () { $('#dlg').close(); sheetImport(); };
+  var show = function (rows, label) { IMP.rows = rows; $('#imst').textContent = label + ': ' + rows.length + ' dòng'; impPreview(); };
+  $('#imread').onclick = function () { var t = $('#imt').value; if (!t.trim()) { toast('Hãy dán dữ liệu vào ô'); return; } show(parseTable(t), 'Đã đọc ô dán'); };
+  $('#imf').onchange = function () {
+    var f = this.files && this.files[0]; if (!f) return; var fr = new FileReader();
+    fr.onload = function () { var t = String(fr.result || ''), rows = /\.vcf$/i.test(f.name) || /BEGIN:VCARD/i.test(t) ? parseVcf(t) : parseCsv(t); show(rows, 'Đã đọc ' + f.name); };
+    fr.readAsText(f);
+  };
+  if ($('#imi')) $('#imi').onchange = function () {
+    var f = this.files && this.files[0]; if (!f) return; $('#imst').textContent = 'Quân sư đang đọc ảnh…';
+    snImage(f, function (d) { run('crmScanContacts', '', d, 'image/jpeg').then(function (r) { show(r.contacts, 'Đã đọc ảnh'); }).catch(function (e) { $('#imst').textContent = ''; toast(/Chưa cài khoá/.test(e.message) ? 'Chưa cài khoá quân sư AI: menu CRM, Cài khoá quân sư' : e.message); }); });
+  };
+}
+// Xem trước: phân loại mới, trùng CRM, trùng trong file, không có số
+function impPreview() {
+  var have = {}, seen = {}; D.leads.forEach(function (l) { have[l.phone] = l; if (l.phone2) have[normPh(l.phone2)] = l; });
+  var rows = IMP.rows.map(function (r) {
+    var ph = normPh(r.phone), st = !ph ? 'bad' : have[ph] ? 'crm' : seen[ph] ? 'file' : 'new'; if (ph) seen[ph] = seen[ph] || 1;
+    return { r: r, ph: ph, st: st, old: ph && have[ph] };
+  });
+  var n = function (k) { return rows.filter(function (x) { return x.st === k; }).length; };
+  $('#imr').innerHTML = '<div class="card" style="margin-top:8px"><b>Kết quả đọc:</b> ' + n('new') + ' khách mới · <span class="tag amb">' + n('crm') + ' trùng CRM</span> · <span class="tag amb">' + n('file') + ' lặp trong file</span> · <span class="tag">' + n('bad') + ' không có số</span>' +
+    '<label class="small" style="display:block;margin-top:6px"><input type="checkbox" id="immerge"> Với số đã có trong CRM: điền các ô còn trống (dự án, ghi chú, link) vào hồ sơ cũ, không ghi đè</label></div>' +
+    '<div style="max-height:260px;overflow:auto;margin-top:6px">' + rows.map(function (x, i) {
+      var lab = { new: '<span class="tag grn">Mới</span>', crm: '<span class="tag amb">Trùng: ' + esc(x.old ? (x.old.name || x.old.phone) : '') + '</span>', file: '<span class="tag amb">Lặp trong file</span>', bad: '<span class="tag">Không có số, bỏ qua</span>' }[x.st];
+      return '<label class="card row" style="margin:4px 0;padding:8px 12px' + (x.st === 'bad' || x.st === 'file' ? ';opacity:.55' : '') + '"><input type="checkbox" data-ip="' + i + '"' + (x.st === 'new' ? ' checked' : '') + (x.st === 'bad' || x.st === 'file' ? ' disabled' : '') + '><b>' + esc(x.r.name || '(chưa có tên)') + '</b><span class="small mut">' + esc(x.ph) + '</span>' + lab + (x.r.note ? '<span class="small mut">' + esc(x.r.note) + '</span>' : '') + '</label>';
+    }).join('') + '</div><div class="row" style="margin-top:8px"><button class="btn p" id="imok"' + (n('new') + n('crm') ? '' : ' disabled') + '>Nhập các dòng đã chọn</button><span id="imp2" class="small"></span></div>';
   $('#imok').onclick = function () {
-    var lines = $('#imt').value.split(/\r?\n/).filter(function (x) { return x.trim(); });
-    var rows = lines.map(function (ln) { var p = ln.indexOf('\t') >= 0 ? ln.split('\t') : ln.split(/[;,]/); return { name: p[0], phone: p[1], province: p[2], site: p[3], budget: p[4], source: p[5], note: p[6] }; });
-    if (rows.length && !/\d{6}/.test(String(rows[0].phone || ''))) rows.shift();
-    if (!rows.length) { toast('Chưa có dòng nào để nhập'); return; }
-    $('#imok').disabled = true; $('#imr').innerHTML = '<span class="mut">Đang nhập ' + rows.length + ' dòng…</span>';
-    run('crmImport', rows).then(function (r) {
-      $('#imok').disabled = false;
-      var off = lines.length - rows.length;
-      $('#imr').innerHTML = '<div class="card"><b>Đã thêm ' + r.added + ' khách mới</b>' +
-        (r.dups.length ? '<div class="small" style="margin-top:6px"><span class="tag amb">Trùng ' + r.dups.length + ' dòng, bỏ qua, không gộp</span> ' + r.dups.map(function (d) { return 'dòng ' + (d.line + off) + ' (' + esc(d.phone) + ')'; }).join(', ') + '</div>' : '') +
-        (r.errors.length ? '<div class="small" style="margin-top:6px"><span class="tag red">Lỗi ' + r.errors.length + ' dòng</span> ' + r.errors.map(function (d) { return 'dòng ' + (d.line + off) + ': ' + esc(d.reason); }).join('; ') + '</div>' : '') + '</div>';
-      if (r.added) load();
-    }).catch(function (e) { $('#imok').disabled = false; $('#imr').innerHTML = ''; fail(e); });
+    var pick = [].slice.call(document.querySelectorAll('[data-ip]:checked')).map(function (b) { return rows[+b.dataset.ip]; });
+    if (!pick.length) { toast('Chưa chọn dòng nào'); return; }
+    IMP.project = $('#imp').value.trim(); IMP.source = $('#ims').value.trim() || 'Nhập danh sách';
+    var merge = $('#immerge').checked, news = pick.filter(function (x) { return x.st === 'new'; }), olds = pick.filter(function (x) { return x.st === 'crm'; });
+    var mk = function (x) { var r = x.r; return { name: r.name, phone: x.ph, province: r.province, site: r.site || IMP.project, project: IMP.project || r.site, budget: r.budget, source: r.source || IMP.source, note: r.note }; };
+    var tot = { added: 0, merged: 0, dups: 0, errors: 0 }; $('#imok').disabled = true;
+    var send = function (list, mg) {
+      var chain = Promise.resolve();
+      for (var k = 0; k < list.length; k += 100) (function (part) { chain = chain.then(function () { $('#imp2').textContent = 'Đang nhập…'; return run('crmImport', part.map(mk), mg).then(function (r) { tot.added += r.added; tot.merged += r.merged || 0; tot.dups += r.dups.length; tot.errors += r.errors.length; }); }); })(list.slice(k, k + 100));
+      return chain;
+    };
+    send(news, false).then(function () { return merge && olds.length ? send(olds, true) : null; }).then(function () {
+      $('#imp2').innerHTML = '<b>Xong.</b> Thêm mới ' + tot.added + ', điền vào hồ sơ cũ ' + tot.merged + ', bỏ qua trùng ' + (tot.dups + (merge ? 0 : olds.length)) + ', lỗi ' + tot.errors + '.'; $('#imok').disabled = false; load();
+    }).catch(function (e) { $('#imok').disabled = false; $('#imp2').textContent = ''; fail(e); });
   };
 }
 

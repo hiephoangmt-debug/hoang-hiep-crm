@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-30', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-31', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -394,6 +394,17 @@ function crmScanComm(k, text, img, mime) {
   }).filter(function (r) { return r.net || r.total || r.unit; });
   return { month: monthStr_(o.month), salary: numIn_(o.salary), rows: rows };
 }
+// Chụp danh sách liên hệ, bảng khách hoặc ảnh danh bạ: AI đọc tên và số điện thoại nhìn thấy trong ảnh (không đoán số).
+function crmScanContacts(k, text, img, mime) {
+  requireUi_(k);
+  var o = scanAi_('Bạn đọc ảnh chụp hoặc chữ dán có danh sách người liên hệ (danh bạ điện thoại, bảng khách, tin nhắn) và chỉ trả về MỘT đối tượng JSON, không thêm chữ nào khác: ' +
+    '{"contacts":[{"name":"tên người, bỏ phần ghi chú trong ngoặc","phone":"số điện thoại nếu nhìn thấy rõ, không thấy thì rỗng","note":"ghi chú đi kèm, ví dụ nội dung trong ngoặc, dự án, mã căn"}]}. ' +
+    'Mỗi người một mục, tối đa 60 mục. Tuyệt đối không bịa hay đoán số điện thoại; chỉ ghi số nếu có chữ số hiện rõ trong nguồn.',
+    'Đây là danh sách người liên hệ cần nhập vào CRM.', text, '', img, mime, 8000);
+  return { contacts: (Array.isArray(o.contacts) ? o.contacts : []).slice(0, 60).map(function (c) {
+    return { name: str_(c && c.name, 100), phone: normPhone_(c && c.phone), note: str_(c && c.note, 200) };
+  }).filter(function (c) { return c.name || c.phone; }) };
+}
 // Quét kế hoạch marketing của sàn hoặc cá nhân từ thông điệp, link, ảnh: rút kênh chạy, ngân sách, tiền ứng, mốc hỗ trợ.
 function crmScanPlan(k, text, link, img, mime) {
   requireUi_(k);
@@ -649,7 +660,7 @@ function crmCreateLead(k, f) {
   return createLead_(f || {});
 }
 // Nhập danh sách dán từ Excel: mỗi dòng {name, phone, province, site, budget, source, note}. Trả báo cáo dòng lỗi và dòng trùng.
-function crmImport(k, rows) {
+function crmImport(k, rows, merge) {
   requireUi_(k);
   rows = rows || [];
   if (rows.length > 200) throw new Error('Tối đa 200 dòng mỗi lần nhập');
@@ -657,8 +668,8 @@ function crmImport(k, rows) {
   rows.forEach(function (r, i) {
     var line = i + 1;
     try {
-      var res = createLead_({ name: r.name, phone: r.phone, province: r.province, site: r.site, bmax: r.budget, source: r.source || 'nhập Excel', note: r.note });
-      if (res.dup) rep.dups.push({ line: line, phone: res.lead.phone, name: res.lead.name }); else rep.added++;
+      var res = createLead_({ name: r.name, phone: r.phone, province: r.province, site: r.site, project: r.project, bmax: r.budget, source: r.source || 'nhập Excel', note: r.note, docUrl: r.docUrl, mergeBlank: merge === true });
+      if (res.dup) rep.dups.push({ line: line, phone: res.lead.phone, name: res.lead.name }); else if (res.merged) rep.merged = (rep.merged || 0) + 1; else rep.added++;
     } catch (e) { rep.errors.push({ line: line, reason: String(e.message || e), phone: String(r.phone || '') }); }
   });
   return rep;
