@@ -113,7 +113,7 @@ assert.equal(ctx.crmKey_(), K);
 assert.throws(() => ctx.crmLoad('sai-khoa'), /Không có quyền/); assert.throws(() => ctx.crmLog('', '0988111222', 'call'), /Không có quyền/);
 assert.equal(ctx.doGet({ parameter: { k: 'sai' } }).file, undefined); assert.ok(ctx.doGet({ parameter: { k: K } }).content.includes('CRM Hoàng Hiệp') && ctx.doGet({ parameter: { k: K } }).content.includes('</html>'));
 const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
-assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-19'); assert.equal(JSON.stringify(dbg).includes(K), false);
+assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-21'); assert.equal(JSON.stringify(dbg).includes(K), false);
 const L = ctx.crmLoad(K);
 assert.equal(L.leads.length, 2);
 const l0 = L.leads.find((x) => x.phone === '0988111222');
@@ -236,6 +236,18 @@ const ret = ctx.kiemTraCRM(); assert.match(ret, /\?k=[0-9a-f]{32}/); assert.ok(g
   assert.throws(() => ctx.crmCommSave(KK, { row: 99, month: '2026-10' }), /Không tìm thấy/);
   ctx.crmCommDelete(KK, 3); assert.equal(ctx.crmCommLoad(KK).items.length, 2);
   assert.throws(() => ctx.crmCommDelete(KK, 1), /Không tìm thấy/);
+  // Kế hoạch marketing
+  assert.equal(ctx.crmCommLoad(KK).plans.length, 0);
+  assert.throws(() => ctx.crmPlanSave(KK, { month: '' }), /chọn tháng/);
+  const p1 = ctx.crmPlanSave(KK, { month: '2026-10', project: 'Sun FourS Tower', advance: '30.000.000', channels: [{ name: 'Google Ads', budget: '20.000.000', note: 'Search' }, { name: 'Facebook', budget: 10000000 }, { name: '', budget: '' }], tiers: [{ from: 10, to: '', pct: 150 }, { from: 5, to: 9, pct: 50 }, { from: 0, to: 4, pct: 0 }], sold: '' });
+  assert.equal(p1.id, 'KH001');
+  let pl = ctx.crmPlanLoad ? 0 : ctx.crmCommLoad(KK).plans;
+  assert.equal(pl.length, 1); assert.equal(pl[0].budget, 30000000); assert.equal(pl[0].advance, 30000000); assert.equal(pl[0].channels.length, 2);
+  assert.equal(pl[0].tiers[0].pct, 100); assert.equal(pl[0].tiers[0].to, ''); assert.equal(pl[0].sold, null); assert.equal(pl[0].month, '2026-10');
+  ctx.crmPlanSave(KK, { row: p1.row, month: '2026-10', project: 'X', advance: 1, channels: [], tiers: [], sold: 7, budget: 5000000 });
+  pl = ctx.crmCommLoad(KK).plans; assert.equal(pl[0].sold, 7); assert.equal(pl[0].budget, 5000000);
+  assert.throws(() => ctx.crmPlanDelete(KK, 1), /Không tìm thấy/);
+  ctx.crmPlanDelete(KK, p1.row); assert.equal(ctx.crmCommLoad(KK).plans.length, 0);
 }
 // quân sư AI: cần đúng khoá truy cập, thiếu khoá API thì báo rõ, có khoá thì gọi API
 assert.throws(() => ctx.crmAsk('sai-khoa', 'xin chào'), /Không có quyền/);
@@ -250,5 +262,21 @@ assert.throws(() => ctx.crmAsk(ctx.crmKey_(), '  '), /Chưa nhập câu hỏi/);
   ctx.crmAsk(ctx.crmKey_(), 'Phân tích khách', ph);
   const sys = JSON.parse(globalThis.__fetch.o.payload).system;
   assert.ok(sys.includes('FourS Tower') && sys.includes('dự án quan tâm Sun FourS Tower') && sys.includes('Giá cao') && sys.includes('12 Trần Thái Tông, Cầu Giấy, Hà Nội') && sys.includes('2 tỷ'), 'AI nhận hồ sơ, lịch sử chăm sóc, lịch sử xem dự án');
+}
+// quét ưu đãi
+{
+  const K2 = ctx.crmKey_(), real = ctx.UrlFetchApp;
+  let calls = [];
+  ctx.UrlFetchApp = { fetch: (u, o) => { calls.push(u); return u.includes('anthropic') ? { getResponseCode: () => 200, getContentText: () => JSON.stringify({ content: [{ text: 'Đây: {"name":"FourS Tower","highlights":"Chiết khấu 5%","priceFrom":"2.5","priceTo":null,"area":"Đà Nẵng","target":"Khách 2-4 tỷ","messages":[{"style":"Thân mật","text":"Chào {ten}"},{"style":"x","text":""}],"note":""} hết.' }] }) } : { getResponseCode: () => 200, getContentText: () => '<html><title>Dự án A</title><script>x=1</script><body>Giá từ 2,5 tỷ</body></html>' }; } };
+  assert.throws(() => ctx.crmScanOffer('sai', 'a'), /Không có quyền/);
+  assert.throws(() => ctx.crmScanOffer(K2, '', '', ''), /dán thông điệp/);
+  assert.throws(() => ctx.crmScanOffer(K2, '', 'http://169.254.169.254/x'), /không hợp lệ/);
+  assert.throws(() => ctx.crmScanOffer(K2, '', 'ftp://x.vn'), /http/);
+  assert.throws(() => ctx.crmScanOffer(K2, '', '', 'AAAA', 'image/svg+xml'), /Ảnh/);
+  const r = ctx.crmScanOffer(K2, 'Chính sách mới', 'https://foursx.vn/p', 'data:image/jpeg;base64,/9j/AAAA', 'image/jpeg');
+  assert.equal(r.name, 'FourS Tower'); assert.equal(r.priceFrom, 2.5); assert.equal(r.priceTo, ''); assert.equal(r.messages.length, 1);
+  const pl = JSON.parse(globalThis.__fetch ? '{}' : '{}'); void pl;
+  assert.ok(calls[0] === 'https://foursx.vn/p' && calls[1].includes('anthropic'));
+  ctx.UrlFetchApp = real;
 }
 console.log('OK – Code.gs đạt mọi test');

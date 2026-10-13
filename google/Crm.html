@@ -73,7 +73,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold2);border-co
 .pgbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:8px 0;background:var(--bg)}.pgname{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .srow{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-top:1px solid var(--line);font-size:14px}.srow>span:last-child,.srow>b{text-align:right;overflow-wrap:anywhere;min-width:0}.srow.nxt{background:var(--goldsoft);margin:8px -8px 0;padding:9px 8px;border-radius:8px;border-top:0}
 .bigph{margin:8px 0;color:var(--navy9)}.bigph .phn{font-size:22px;font-weight:700}.bigph{color:var(--navy9)}.btn.big{flex:1;min-height:46px;font-size:16px}details.sec>summary{cursor:pointer;font-weight:700;color:var(--navy9);padding:4px 0}
-.cmch{display:flex;gap:6px;align-items:flex-end;height:130px;margin:10px 0 6px}.cmc{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}.cmb{height:110px;width:100%;display:flex;align-items:flex-end;justify-content:center;gap:2px}.cmb i{display:block;width:42%;max-width:20px;border-radius:3px 3px 0 0;min-height:1px}.cmc span{font-size:11px;color:var(--mut)}.lgd{display:inline-block;width:10px;height:10px;border-radius:3px;margin:0 3px 0 8px;vertical-align:-1px}tr.sel td{background:#FFF3E3}.snrow.done{opacity:.7}.snrow{margin-bottom:8px}
+.cmch{display:flex;gap:6px;align-items:flex-end;height:130px;margin:10px 0 6px}.cmc{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}.cmb{height:110px;width:100%;display:flex;align-items:flex-end;justify-content:center;gap:2px}.cmb i{display:block;width:42%;max-width:20px;border-radius:3px 3px 0 0;min-height:1px}.cmc span{font-size:11px;color:var(--mut)}.lgd{display:inline-block;width:10px;height:10px;border-radius:3px;margin:0 3px 0 8px;vertical-align:-1px}@media(min-width:701px){.grid.kc.kcp{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}}
+tr.sel td{background:#FFF3E3}.snrow.done{opacity:.7}.snrow{margin-bottom:8px}
 @media(min-width:1001px) and (max-width:1360px){nav button{padding:9px 8px 12px;font-size:13.5px}}
 @media(min-width:701px){.grid.kc{grid-template-columns:repeat(7,1fr);gap:8px}.grid.kc .kpi{padding:9px 11px}.grid.kc .kpi b{font-size:21px}.grid.kc .kpi b.long{font-size:17px}.grid.kc .kpi span{font-size:11.5px;line-height:1.3}
 .fqw{flex:0 1 340px;min-width:200px}
@@ -793,10 +794,50 @@ function snList() {
   }; });
 }
 function snPrev(l) { l = l || { name: 'Nguyễn Văn A', assignee: '', phone: '', site: '' }; return '<div class="small mut">Xem thử với ' + esc(l.name || 'khách đầu tiên') + ':</div><div style="white-space:pre-wrap">' + esc(snMsg(l)) + '</div>'; }
+var SQ = { text: '', link: '', img: '', mime: '', res: null, busy: false };
+function snImage(file, cb) {
+  var fr = new FileReader();
+  fr.onload = function () {
+    var im = new Image();
+    im.onload = function () {
+      var m = 1400, sc = Math.min(1, m / Math.max(im.width, im.height)), c = document.createElement('canvas'); c.width = Math.round(im.width * sc); c.height = Math.round(im.height * sc);
+      c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); cb(c.toDataURL('image/jpeg', 0.82));
+    };
+    im.onerror = function () { toast('Không đọc được ảnh này'); };
+    im.src = fr.result;
+  };
+  fr.readAsDataURL(file);
+}
+function snScanHtml() {
+  var r = SQ.res;
+  return '<div class="card"><b>Quét nhanh: dán thông điệp, link hoặc ảnh, hệ thống tự điền và đề xuất</b><div class="small mut" style="margin:4px 0 8px">Dán nội dung chính sách, link trang dự án hoặc tải ảnh poster, bảng hàng. Quân sư AI đọc, điền sẵn bên dưới và soạn vài bản tin. Nội dung dán, link, ảnh được gửi cho quân sư AI để đọc.</div>' +
+    '<textarea id="sq1" rows="3" placeholder="Dán thông điệp, chính sách, nội dung bảng hàng">' + esc(SQ.text) + '</textarea>' +
+    '<div class="row" style="margin:8px 0"><input id="sq2" placeholder="Link trang dự án hoặc bảng hàng (https://)" style="flex:1;min-width:200px" value="' + esc(SQ.link) + '"><label class="btn" style="cursor:pointer">Chọn ảnh<input id="sq3" type="file" accept="image/*" hidden></label>' + (SQ.img ? '<img src="' + SQ.img + '" alt="" style="height:44px;border-radius:6px"><a class="btn sm" download="uu-dai.jpg" href="' + SQ.img + '">Tải ảnh để gửi kèm Zalo</a><button class="btn sm" id="sqrm">Bỏ ảnh</button>' : '') + '</div>' +
+    '<div class="row" style="margin:0"><button class="btn p" id="sqgo"' + (SQ.busy ? ' disabled' : '') + '>' + (SQ.busy ? 'Đang quét…' : 'Quét và đề xuất') + '</button></div>' +
+    (r ? '<div class="card" style="background:#F4F7FC;margin:10px 0 0"><div><b>Đã điền sẵn</b>: ' + esc(r.name || 'chưa rõ tên dự án') + (r.priceFrom ? ' · giá từ ' + r.priceFrom + ' tỷ' : '') + (r.area ? ' · ' + esc(r.area) : '') + '</div>' + (r.target ? '<div class="small">Nhóm khách nên gửi: ' + esc(r.target) + '</div>' : '') + (r.note ? '<div class="small" style="color:var(--red)">Cần kiểm tra: ' + esc(r.note) + '</div>' : '') +
+      (r.messages.length ? '<div class="small mut" style="margin-top:6px">Chọn bản tin muốn dùng:</div>' + r.messages.map(function (m, i) { return '<div class="card" style="margin:6px 0"><b class="small">' + esc(m.style || 'Bản ' + (i + 1)) + '</b><div style="white-space:pre-wrap">' + esc(m.text) + '</div><button class="btn sm" data-sq="' + i + '">Dùng bản này</button></div>'; }).join('') : '') + '</div>' : '') + '</div>';
+}
+function snScanBind() {
+  $('#sq1').oninput = function () { SQ.text = this.value; }; $('#sq2').oninput = function () { SQ.link = this.value; };
+  $('#sq3').onchange = function () { var f = this.files && this.files[0]; if (!f) return; snImage(f, function (d) { SQ.img = d; SQ.mime = 'image/jpeg'; SQ.text = $('#sq1').value; SQ.link = $('#sq2').value; send(); }); };
+  if ($('#sqrm')) $('#sqrm').onclick = function () { SQ.img = ''; SQ.text = $('#sq1').value; SQ.link = $('#sq2').value; send(); };
+  $('#sqgo').onclick = function () {
+    SQ.text = $('#sq1').value; SQ.link = $('#sq2').value;
+    if (!SQ.text.trim() && !SQ.link.trim() && !SQ.img) { toast('Hãy dán nội dung, link hoặc chọn ảnh'); return; }
+    SQ.busy = true; send();
+    run('crmScanOffer', SQ.text, SQ.link, SQ.img, SQ.mime).then(function (r) {
+      SQ.busy = false; SQ.res = r;
+      if (r.name) SN.name = r.name; if (r.highlights) SN.hl = r.highlights.replace(/\s*\n\s*/g, '; '); if (SQ.link.trim()) SN.link = SQ.link.trim(); if (r.area) SN.prov = r.area;
+      if (r.priceFrom) { SN.bmin = String(Math.round(r.priceFrom * 9) / 10); SN.bmax = r.priceTo ? String(Math.round(r.priceTo * 12) / 10) : ''; }
+      SN.edited = false; if (tab === 'send') send();
+    }).catch(function (e) { SQ.busy = false; if (tab === 'send') send(); toast(/Chưa cài khoá/.test(e.message) ? 'Chưa cài khoá quân sư AI: menu CRM, Cài khoá quân sư' : e.message); });
+  };
+  document.querySelectorAll('[data-sq]').forEach(function (b) { b.onclick = function () { var m = SQ.res.messages[+b.dataset.sq]; SN.body = m.text.replace(/\n{3,}/g, '\n\n'); SN.edited = true; send(); window.scrollTo(0, document.body.scrollHeight * 0.3); toast('Đã dùng bản tin này, xem ở mục Soạn tin'); }; });
+}
 function send() {
   var opt = function (arr, cur, first) { return (first ? '<option value="">' + first + '</option>' : '') + arr.map(function (x) { return '<option' + (x === cur ? ' selected' : '') + '>' + esc(x) + '</option>'; }).join(''); };
   var provs = {}; D.leads.forEach(function (l) { if (l.province) provs[l.province] = 1; });
-  $('#main').innerHTML = '<div class="card"><b>Gửi tin Zalo theo nhóm khách</b><div class="small mut" style="margin-top:4px">Có dự án mới, chính sách mới hoặc quỹ căn mới thì lọc đúng nhóm khách phù hợp, soạn tin gắn hình, link, bảng hàng, rồi gửi từng người. Mỗi khách bấm một lần: tin được sao chép sẵn, dán vào Zalo là gửi. Hệ thống ghi lại vào lịch sử chăm sóc.</div></div>' +
+  $('#main').innerHTML = '<div class="card"><b>Gửi tin Zalo theo nhóm khách</b><div class="small mut" style="margin-top:4px">Có dự án mới, chính sách mới hoặc quỹ căn mới thì lọc đúng nhóm khách phù hợp, soạn tin gắn hình, link, bảng hàng, rồi gửi từng người. Mỗi khách bấm một lần: tin được sao chép sẵn, dán vào Zalo là gửi. Hệ thống ghi lại vào lịch sử chăm sóc.</div></div>' + (aiOn() ? snScanHtml() : '') +
     '<div class="card"><b>1. Chọn nhóm khách</b><div class="fgrid" style="margin-top:8px">' +
     snLab('Dự án khách từng quan tâm', '<input id="sn1" list="snl" placeholder="Để trống là tất cả" value="' + esc(SN.proj) + '"><datalist id="snl">' + projNames().map(function (p) { return '<option value="' + esc(p) + '">'; }).join('') + '</datalist>') +
     snLab('Khu vực / tỉnh thành', '<input id="sn2" list="snp" value="' + esc(SN.prov) + '"><datalist id="snp">' + Object.keys(provs).map(function (p) { return '<option value="' + esc(p) + '">'; }).join('') + '</datalist>') +
@@ -819,6 +860,7 @@ function send() {
   $('#sm7').oninput = function () { SN.body = this.value; SN.edited = true; snList(); };
   document.querySelectorAll('[data-sk]').forEach(function (b) { b.onclick = function () { SN.kind = b.dataset.sk; SN.edited = false; document.querySelectorAll('[data-sk]').forEach(function (x) { x.classList.toggle('on', x === b); }); $('#sm7').value = snBody(); snList(); }; });
   document.querySelectorAll('[data-sst]').forEach(function (b) { b.onclick = function () { var cur = SN.st || STATUS.filter(function (x) { return x !== 'Chốt' && x !== 'Mất' && x !== 'Tạm dừng'; }), i = cur.indexOf(b.dataset.sst); if (i >= 0) cur.splice(i, 1); else cur.push(b.dataset.sst); SN.st = cur; snList(); }; });
+  if (aiOn()) snScanBind();
   snList();
 }
 // ---- Hoa hồng, lương, chi phí marketing theo tháng (số liệu kế toán gửi, nhập tay)
@@ -866,15 +908,78 @@ function comm() {
   }).join('') || '<div class="card mut">Chưa có khoản nào' + (CM.month ? ' trong ' + monthLabel(CM.month).toLowerCase() : '') + '.</div>';
   $('#main').innerHTML = '<div class="card"><div class="row" style="margin:0"><b>Hoa hồng, lương, chi phí marketing</b><span class="sp"></span><select id="cmy">' + yl.map(function (y) { return '<option>' + y + '</option>'; }).join('') + '</select><button class="btn p" id="cmadd">+ Thêm khoản</button></div>' +
     '<div class="small mut" style="margin-top:6px">Nhập số liệu kế toán gửi hằng tháng (hoa hồng NVKD, thưởng TPKD/GĐKD, lương). So với chi phí quảng cáo để biết làm marketing còn lời bao nhiêu.</div></div>' +
-    '<div class="grid kc cm">' + kp.map(function (x, i) { return '<div class="kpi"><b' + (String(x[0]).length > 9 ? ' class="long"' : '') + '>' + esc(x[0]) + '</b><span>' + x[1] + '</span></div>'; }).join('') + '</div>' + chart + mt +
+    '<div class="grid kc cm">' + kp.map(function (x, i) { return '<div class="kpi"><b' + (String(x[0]).length > 9 ? ' class="long"' : '') + '>' + esc(x[0]) + '</b><span>' + x[1] + '</span></div>'; }).join('') + '</div>' + chart + mt + planSection(CM.year) +
     '<h3 style="margin:14px 2px 8px">Các khoản ' + (CM.month ? esc(monthLabel(CM.month).toLowerCase()) + ' <button class="btn sm" id="cmall">Xem cả năm</button>' : 'năm ' + CM.year) + '</h3>' + det;
-  $('#cmy').value = CM.year;
+  $('#cmy').value = CM.year; planBind();
   $('#cmy').onchange = function () { CM.year = this.value; CM.month = ''; comm(); };
   $('#cmadd').onclick = function () { commForm(null); };
   if ($('#cmall')) $('#cmall').onclick = function () { CM.month = ''; comm(); };
   document.querySelectorAll('[data-cm]').forEach(function (r) { r.onclick = function () { CM.month = CM.month === r.dataset.cm ? '' : r.dataset.cm; comm(); }; });
   document.querySelectorAll('[data-ce]').forEach(function (b) { b.onclick = function () { commForm(d.items.filter(function (x) { return x.row === +b.dataset.ce; })[0]); }; });
   document.querySelectorAll('[data-cd]').forEach(function (b) { b.onclick = function () { if (!confirm('Xoá khoản này khỏi bảng hoa hồng?')) return; run('crmCommDelete', +b.dataset.cd).then(function () { toast('Đã xoá'); commLoad(); }).catch(fail); }; });
+}
+// ---- Kế hoạch marketing tháng: kênh chạy, ngân sách, tiền ứng trước và mốc hỗ trợ theo số căn bán được
+function planSold(p) {
+  if (p.sold != null) return p.sold;
+  var u = {}, pj = (p.project || '').toLowerCase();
+  CM.data.items.forEach(function (x) {
+    if (x.month !== p.month || x.type === 'Lương' || !x.unit) return;
+    var xp = (x.project || '').toLowerCase(); if (pj && xp && xp.indexOf(pj) < 0 && pj.indexOf(xp) < 0) return;
+    x.unit.split(/[;,]/).forEach(function (c) { c = c.trim(); if (c) u[c] = 1; });
+  });
+  return Object.keys(u).length;
+}
+function planCalc(p) {
+  var sold = planSold(p), cur = null, next = null;
+  (p.tiers || []).forEach(function (t) { if (sold >= t.from && (t.to === '' || sold <= t.to)) cur = t; });
+  var pct = cur ? cur.pct : 0;
+  (p.tiers || []).forEach(function (t) { if (t.from > sold && t.pct > pct && (!next || t.from < next.from)) next = t; });
+  var sup = Math.round(p.advance * pct / 100);
+  return { sold: sold, cur: cur, pct: pct, sup: sup, refund: Math.max(0, p.advance - sup), next: next };
+}
+function planSection(year) {
+  var d = CM.data, plans = (d.plans || []).filter(function (p) { return p.month.slice(0, 4) === year; }).sort(function (a, b) { return a.month < b.month ? 1 : -1; });
+  var cards = plans.map(function (p) {
+    var c = planCalc(p), spent = d.mkt[p.month] || 0;
+    var tiers = (p.tiers || []).map(function (t) { var on = c.cur === t; return '<tr class="' + (on ? 'sel' : '') + '"><td>' + (t.to === '' ? 'Từ ' + t.from + ' căn trở lên' : t.from === t.to ? t.from + ' căn' : 'Từ ' + t.from + ' đến ' + t.to + ' căn') + '</td><td>' + (t.pct >= 100 ? 'Hỗ trợ 100%' : t.pct > 0 ? 'Hỗ trợ ' + t.pct + '%, hoàn lại ' + (100 - t.pct) + '%' : 'Hoàn lại 100%') + '</td><td>' + (on ? '<b>Đang ở mốc này</b>' : '') + '</td></tr>'; }).join('');
+    return '<div class="card"><div class="row" style="margin:0"><b>' + monthLabel(p.month) + (p.project ? ' · ' + esc(p.project) : '') + '</b><span class="sp"></span><button class="btn sm" data-pe="' + p.row + '">Sửa</button><button class="btn sm" data-pd="' + p.row + '">Xoá</button></div>' +
+      '<div class="grid kc kcp" style="margin:8px 0"><div class="kpi"><b class="long">' + money(p.budget) + '</b><span>Ngân sách kế hoạch</span></div><div class="kpi"><b class="long">' + money(p.advance) + '</b><span>Đã ứng trước</span></div><div class="kpi"><b class="long">' + money(spent) + '</b><span>Đã chi thực tế tháng này</span></div><div class="kpi"><b>' + c.sold + '</b><span>Căn đã bán' + (p.sold != null ? ' (nhập tay)' : ' (tự đếm)') + '</span></div></div>' +
+      (p.channels.length ? '<div class="small"><b>Chạy gì:</b> ' + p.channels.map(function (x) { return esc(x.name) + (x.budget ? ' ' + vnd(x.budget) : '') + (x.note ? ' (' + esc(x.note) + ')' : ''); }).join(' · ') + '</div>' : '') +
+      (tiers ? '<div class="tw"><table style="margin-top:6px"><tr><th>Số căn bán được</th><th>Điều kiện hỗ trợ</th><th></th></tr>' + tiers + '</table></div>' +
+        '<div style="margin-top:6px">Mốc hiện tại: <b>' + (c.cur ? (c.pct >= 100 ? 'hỗ trợ 100%' : c.pct > 0 ? 'hỗ trợ ' + c.pct + '%' : 'hoàn lại 100%') : 'chưa có mốc phù hợp') + '</b>. Được hỗ trợ <b>' + vnd(c.sup) + '</b>, phải hoàn lại <b>' + vnd(c.refund) + '</b>.' +
+        (c.next ? ' Bán thêm <b>' + (c.next.from - c.sold) + ' căn</b> nữa để lên mốc hỗ trợ ' + c.next.pct + '%.' : '') + '</div>' : '') + (p.note ? '<div class="small mut" style="margin-top:4px">' + esc(p.note) + '</div>' : '') + '</div>';
+  }).join('') || '<div class="card mut">Chưa có kế hoạch năm ' + year + '. Bấm "Thêm kế hoạch tháng" để ghi chạy gì, chi bao nhiêu, tiền ứng và các mốc hỗ trợ.</div>';
+  return '<h3 style="margin:14px 2px 8px">Kế hoạch marketing <button class="btn sm p" id="pladd">+ Thêm kế hoạch tháng</button></h3>' + cards;
+}
+function planBind() {
+  var d = CM.data;
+  $('#pladd').onclick = function () { planForm(null); };
+  document.querySelectorAll('[data-pe]').forEach(function (b) { b.onclick = function () { planForm(d.plans.filter(function (x) { return x.row === +b.dataset.pe; })[0]); }; });
+  document.querySelectorAll('[data-pd]').forEach(function (b) { b.onclick = function () { if (!confirm('Xoá kế hoạch này?')) return; run('crmPlanDelete', +b.dataset.pd).then(function () { toast('Đã xoá'); commLoad(); }).catch(fail); }; });
+}
+function planForm(p) {
+  p = p || { month: ymdNow(0).slice(0, 7), project: '', channels: [], tiers: [], advance: '', sold: null, note: '' };
+  var lab = function (t, h) { return '<label class="fld"><span class="mut small">' + t + '</span>' + h + '</label>'; };
+  var chTxt = p.channels.map(function (c) { return c.name + ' | ' + c.budget + (c.note ? ' | ' + c.note : ''); }).join('\n');
+  var tTxt = p.tiers.map(function (t) { return t.from + ' | ' + t.to + ' | ' + t.pct; }).join('\n');
+  $('#dlgBody').innerHTML = '<h2 style="margin:0">' + (p.row ? 'Sửa' : 'Thêm') + ' kế hoạch marketing tháng</h2><div class="fgrid" style="margin-top:8px">' +
+    lab('Tháng *', '<input type="month" id="pl1" value="' + esc(p.month) + '">') + lab('Dự án / chủ đầu tư', '<input id="pl2" list="pll" value="' + esc(p.project) + '"><datalist id="pll">' + projNames().map(function (x) { return '<option value="' + esc(x) + '">'; }).join('') + '</datalist>') +
+    lab('Tiền ứng trước (đồng)', '<input id="pl3" inputmode="decimal" value="' + esc(String(p.advance || '')) + '">') + lab('Số căn đã bán (để trống thì tự đếm từ bảng hoa hồng)', '<input id="pl4" inputmode="numeric" value="' + (p.sold == null ? '' : p.sold) + '">') + '</div>' +
+    lab('Chạy gì, mỗi dòng: Kênh | Số tiền | Ghi chú', '<textarea id="pl5" rows="4" placeholder="Google Ads | 20000000 | Search Tòa F2&#10;Facebook | 10000000 | Lead form">' + esc(chTxt) + '</textarea>') +
+    lab('Mốc hỗ trợ, mỗi dòng: Từ căn | Đến căn (để trống là trở lên) | % được hỗ trợ (phần còn lại phải hoàn)', '<textarea id="pl6" rows="4" placeholder="10 |  | 100&#10;5 | 9 | 50&#10;0 | 4 | 0">' + esc(tTxt) + '</textarea>') +
+    '<div class="row" style="margin:4px 0"><button class="btn sm" id="plex">Điền mẫu: từ 10 căn hỗ trợ 100%, 5 đến 9 hỗ trợ 50%, dưới 5 hoàn 100%</button></div>' +
+    '<div class="small mut">Ví dụ "5 | 9 | 50" nghĩa là bán từ 5 đến 9 căn thì được hỗ trợ 50% tiền ứng, hoàn lại 50%. "0 | 4 | 0" nghĩa là dưới 5 căn thì hoàn lại 100%. Sửa số cho đúng thoả thuận của bạn.</div>' +
+    lab('Ghi chú', '<textarea id="pl7" rows="2">' + esc(p.note) + '</textarea>') + '<div class="row" style="margin-top:8px"><button class="btn p" id="plok">Lưu</button><button class="btn" id="plx">Huỷ</button></div>';
+  $('#dlg').showModal(); $('#plx').onclick = function () { $('#dlg').close(); };
+  $('#plex').onclick = function () { $('#pl6').value = '10 |  | 100\n5 | 9 | 50\n0 | 4 | 0'; };
+  $('#plok').onclick = function () {
+    if (!$('#pl1').value) { toast('Hãy chọn tháng'); return; }
+    var lines = function (id) { return $('#' + id).value.split('\n').map(function (l) { return l.split('|').map(function (x) { return x.trim(); }); }).filter(function (a) { return a.join('') !== ''; }); };
+    var f = { row: p.row || 0, month: $('#pl1').value, project: $('#pl2').value, advance: $('#pl3').value, sold: $('#pl4').value, note: $('#pl7').value,
+      channels: lines('pl5').map(function (a) { return { name: a[0], budget: a[1], note: a[2] || '' }; }), tiers: lines('pl6').map(function (a) { return { from: a[0], to: a[1] || '', pct: a[2] }; }) };
+    $('#plok').disabled = true;
+    run('crmPlanSave', f).then(function () { toast('Đã lưu'); $('#dlg').close(); commLoad(); }).catch(function (e) { $('#plok').disabled = false; fail(e); });
+  };
 }
 function commForm(x) {
   x = x || { month: ymdNow(0).slice(0, 7), type: CM.data.types[0] };
