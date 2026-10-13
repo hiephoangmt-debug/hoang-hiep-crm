@@ -1023,7 +1023,7 @@ function send() {
   snList();
 }
 // ---- Hoa hồng, lương, chi phí marketing theo tháng (số liệu kế toán gửi, nhập tay)
-var CM = { data: null, year: '', month: '', pk: '' };
+var CM = { data: null, year: '', month: '', pk: '', uf: '' };
 function monthLabel(m) { return 'Tháng ' + m.slice(5) + '/' + m.slice(0, 4); }
 function commLoad() { CM.data = null; render(); }
 function comm() {
@@ -1067,9 +1067,9 @@ function comm() {
   }).join('') || '<div class="card mut">Chưa có khoản nào' + (CM.month ? ' trong ' + monthLabel(CM.month).toLowerCase() : '') + '.</div>';
   $('#main').innerHTML = '<div class="card"><div class="row" style="margin:0"><b>Hoa hồng, lương, chi phí marketing</b><span class="sp"></span><select id="cmy">' + yl.map(function (y) { return '<option>' + y + '</option>'; }).join('') + '</select>' + (aiOn() ? '<button class="btn" id="cmscan">Chụp bảng kế toán</button>' : '') + '<button class="btn p" id="cmadd">+ Thêm khoản</button></div>' +
     '<div class="small mut" style="margin-top:6px">Nhập số liệu kế toán gửi hằng tháng (hoa hồng NVKD, thưởng TPKD/GĐKD, lương). So với chi phí quảng cáo để biết làm marketing còn lời bao nhiêu.</div></div>' +
-    '<div class="grid kc cm">' + kp.map(function (x, i) { return '<div class="kpi"><b' + (String(x[0]).length > 9 ? ' class="long"' : '') + '>' + esc(x[0]) + '</b><span>' + x[1] + '</span></div>'; }).join('') + '</div>' + chart + mt + planSection(CM.year) +
+    '<div class="grid kc cm">' + kp.map(function (x, i) { return '<div class="kpi"><b' + (String(x[0]).length > 9 ? ' class="long"' : '') + '>' + esc(x[0]) + '</b><span>' + x[1] + '</span></div>'; }).join('') + '</div>' + chart + mt + unitSection() + planSection(CM.year) +
     '<h3 style="margin:14px 2px 8px">Các khoản ' + (CM.month ? esc(monthLabel(CM.month).toLowerCase()) + ' <button class="btn sm" id="cmall">Xem cả năm</button>' : 'năm ' + CM.year) + '</h3>' + det;
-  $('#cmy').value = CM.year; planBind();
+  $('#cmy').value = CM.year; planBind(); unitBind();
   $('#cmy').onchange = function () { CM.year = this.value; CM.month = ''; comm(); };
   $('#cmadd').onclick = function () { commForm(null); }; if ($('#cmscan')) $('#cmscan').onclick = commScan;
   if ($('#cmall')) $('#cmall').onclick = function () { CM.month = ''; comm(); };
@@ -1209,6 +1209,38 @@ function planForm(p) {
   };
 }
 // Chụp bảng hoa hồng kế toán gửi để tự điền: xem trước rồi lưu từng khoản, bỏ qua khoản đã có.
+// ---- Hoa hồng theo từng căn: được hưởng bao nhiêu, đã về bao nhiêu, còn lại bao nhiêu, về qua những lần nào
+function commUnits() {
+  var g = {};
+  CM.data.items.filter(function (x) { return x.type !== 'Lương' && x.unit; }).forEach(function (x) {
+    var k = x.unit.trim().toLowerCase().replace(/\s+/g, ' '), u = g[k] = g[k] || { unit: x.unit.trim(), project: '', types: {}, pays: [], expected: 0, cum: 0, sumNet: 0, hasTotal: false };
+    u.types[x.type] = 1; if (x.project) u.project = x.project;
+    if (x.total > 0) { u.hasTotal = true; u.expected = Math.max(u.expected, x.total * (x.rate > 0 && x.rate <= 100 ? x.rate / 100 : 1)); }
+    if (x.prev || x.now) u.cum = Math.max(u.cum, x.prev + x.now);
+    u.sumNet += x.net; u.pays.push({ month: x.month, net: x.net });
+  });
+  return Object.keys(g).map(function (k) {
+    var u = g[k]; u.received = Math.max(u.cum, u.sumNet); u.remain = u.hasTotal ? Math.max(0, Math.round(u.expected - u.received)) : null;
+    u.pays.sort(function (a, b) { return a.month < b.month ? -1 : 1; }); return u;
+  }).sort(function (a, b) { return (b.remain || 0) - (a.remain || 0) || (a.unit < b.unit ? -1 : 1); });
+}
+function unitSection() {
+  var all = commUnits(); if (!all.length) return '';
+  var open = all.filter(function (u) { return u.remain > 0; }), done = all.filter(function (u) { return u.remain === 0; });
+  var list = all.filter(function (u) { return !CM.uf || (CM.uf === 'open' ? u.remain > 0 : u.remain === 0); });
+  var sum = function (a, f) { return a.reduce(function (t, u) { return t + (f(u) || 0); }, 0); };
+  var rows = list.map(function (u) {
+    var pct = u.expected > 0 ? Math.min(100, Math.round(u.received / u.expected * 100)) : 0, st = u.remain === null ? '<span class="tag">Chưa rõ tổng</span>' : u.remain === 0 ? '<span class="tag grn">Đã về đủ</span>' : '<span class="tag amb">Còn ' + vnd(u.remain) + '</span>';
+    return '<div class="card" style="margin:6px 0"><div class="row" style="margin:0"><b>Căn ' + esc(u.unit) + '</b>' + (u.project ? '<span class="small mut">' + esc(u.project) + '</span>' : '') + '<span class="small mut">' + Object.keys(u.types).map(esc).join(', ') + '</span><span class="sp"></span>' + st + '</div>' +
+      '<div class="small" style="margin-top:4px">Được hưởng <b>' + (u.hasTotal ? vnd(u.expected) : '-') + '</b> · Đã về <b>' + vnd(u.received) + '</b> · Còn lại <b>' + (u.remain === null ? '-' : vnd(u.remain)) + '</b></div>' +
+      (u.hasTotal ? '<div style="height:6px;background:#E8EDF6;border-radius:99px;margin:6px 0 4px;overflow:hidden"><div style="height:100%;width:' + pct + '%;background:' + (u.remain === 0 ? '#1E8E4F' : 'var(--gold)') + '"></div></div>' : '') +
+      '<div class="small mut">Các lần về: ' + u.pays.map(function (p) { return 'T' + p.month.slice(5) + '/' + p.month.slice(0, 4) + ' ' + vnd(p.net); }).join(' · ') + '</div></div>';
+  }).join('') || '<div class="card mut">Không có căn nào trong nhóm này.</div>';
+  return '<h3 style="margin:14px 2px 8px">Hoa hồng theo từng căn</h3><div class="grid kc kcp" style="margin-bottom:8px"><div class="kpi"><b class="long">' + money(sum(all, function (u) { return u.received; })) + '</b><span>Đã về tất cả các căn</span></div><div class="kpi alert"><b class="long">' + money(sum(open, function (u) { return u.remain; })) + '</b><span>Còn chờ về</span></div><div class="kpi"><b>' + open.length + '</b><span>Căn chưa về đủ</span></div><div class="kpi"><b>' + done.length + '</b><span>Căn đã về đủ</span></div></div>' +
+    '<div class="row chips">' + [['', 'Tất cả ' + all.length], ['open', 'Còn chờ về ' + open.length], ['done', 'Đã về đủ ' + done.length]].map(function (x) { return '<button class="chip' + (CM.uf === x[0] ? ' on' : '') + '" data-uf="' + x[0] + '">' + x[1] + '</button>'; }).join('') + '</div>' + rows +
+    '<div class="small mut">Số được hưởng tính theo cột tổng hoa hồng kế toán gửi, nhân tỷ lệ khi bảng có ghi tỷ lệ, ví dụ thưởng TPKD 80%. Đã về lấy theo số lớn hơn giữa tổng các lần nhận trong CRM và số đã tính đến đợt gần nhất trong bảng kế toán.</div>';
+}
+function unitBind() { document.querySelectorAll('[data-uf]').forEach(function (b) { b.onclick = function () { CM.uf = b.dataset.uf; comm(); }; }); }
 function commScan() {
   var imgs = [], res = null;
   $('#dlgBody').innerHTML = '<h2 style="margin:0">Chụp bảng hoa hồng kế toán gửi</h2><p class="small mut">Chụp màn hình bảng kế toán gửi. <b>Có thể chọn hoặc dán nhiều ảnh</b> (mỗi lần Ctrl+V thêm một ảnh), hoặc copy chữ trong file rồi dán vào ô. Hệ thống đọc từng ảnh, gộp lại, bạn xem rồi lưu. Khoản nào đã có thì không bị nhập lại. Ảnh hoặc chữ được gửi cho quân sư AI đọc.</p>' +
