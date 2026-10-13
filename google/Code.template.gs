@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-23', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-24', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -316,8 +316,8 @@ function pageText_(u) {
   var body = h.replace(/<(script|style|noscript)[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
   return (title + '. ' + desc + '. ' + body).slice(0, 6000);
 }
-function scanAi_(system, intro, text, link, img, mime) {
-  text = String(text || '').trim().slice(0, 6000); link = String(link || '').trim();
+function scanAi_(system, intro, text, link, img, mime, maxText) {
+  text = String(text || '').trim().slice(0, maxText || 6000); link = String(link || '').trim();
   img = String(img || '').replace(/^data:[^,]*,/, ''); mime = String(mime || 'image/jpeg');
   if (!text && !link && !img) throw new Error('Hãy dán thông điệp, link hoặc chọn ảnh');
   if (img && (img.length > 4500000 || ['image/jpeg', 'image/png', 'image/webp', 'image/gif'].indexOf(mime) < 0)) throw new Error('Ảnh quá lớn hoặc sai định dạng (nhận JPG, PNG, WEBP)');
@@ -333,7 +333,7 @@ function scanAi_(system, intro, text, link, img, mime) {
   var res = UrlFetchApp.fetch('https://api.anthropic.com/v1/messages', {
     method: 'post', contentType: 'application/json', muteHttpExceptions: true,
     headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01' },
-    payload: JSON.stringify({ model: ASK_MODEL, max_tokens: 1800, system: system, messages: [{ role: 'user', content: content }] })
+    payload: JSON.stringify({ model: ASK_MODEL, max_tokens: maxText > 6000 ? 3500 : 1800, system: system, messages: [{ role: 'user', content: content }] })
   });
   var code = res.getResponseCode(), body = {};
   try { body = JSON.parse(res.getContentText()); } catch (e) {}
@@ -363,6 +363,18 @@ function crmScanChat(k, phone, text, img, mime) {
     'Chỉ dựa trên nội dung chat và thông tin CRM, không bịa giá hay chính sách. Tiếng Việt, ngắn gọn.', 'Đây là đoạn chat Zalo cần phân tích.' + ctx, text, '', img, mime);
   var s = function (v, n) { return str_(v, n); };
   return { summary: s(o.summary, 600), need: s(o.need, 400), obstacle: s(o.obstacle, 400), heat: s(o.heat, 20), reason: s(o.reason, 300), next: s(o.next, 400), message: s(o.message, 1000) };
+}
+// Dán nhiều cuộc chat Zalo cùng lúc (hoặc ảnh chụp danh sách chat): AI tách từng người, CRM chỉ nhận người khớp khách trong hồ sơ.
+function crmScanZalo(k, text, img, mime) {
+  requireUi_(k);
+  var o = scanAi_('Bạn đọc nội dung copy từ Zalo (có thể gồm nhiều cuộc trò chuyện với nhiều người) và chỉ trả về MỘT đối tượng JSON, không thêm chữ nào khác: ' +
+    '{"conversations":[{"name":"tên hiển thị của người đối thoại, không phải của sale","phone":"số điện thoại nếu thấy trong chat, không thì rỗng","summary":"tóm tắt 1 đến 2 dòng","need":"nhu cầu, ngân sách, khu vực, loại căn đã nói","obstacle":"vướng mắc hoặc lo ngại","heat":"Nóng hoặc Ấm hoặc Nguội","next":"bước tiếp theo nên làm"}]}. ' +
+    'Mỗi người một mục, tối đa 15 mục. Chỉ dựa trên nội dung chat, không bịa; thiếu thì để rỗng. Bỏ qua nhóm chat, tin quảng cáo, người không phải khách hàng quan tâm bất động sản.',
+    'Đây là nội dung chat Zalo của sale với nhiều người.', text, '', img, mime, 20000);
+  var cv = (Array.isArray(o.conversations) ? o.conversations : []).slice(0, 15).map(function (c) {
+    return { name: str_(c && c.name, 80), phone: normPhone_(c && c.phone), summary: str_(c && c.summary, 400), need: str_(c && c.need, 300), obstacle: str_(c && c.obstacle, 300), heat: str_(c && c.heat, 20), next: str_(c && c.next, 300) };
+  }).filter(function (c) { return c.name || c.phone; });
+  return { conversations: cv };
 }
 // Quét kế hoạch marketing của sàn hoặc cá nhân từ thông điệp, link, ảnh: rút kênh chạy, ngân sách, tiền ứng, mốc hỗ trợ.
 function crmScanPlan(k, text, link, img, mime) {
