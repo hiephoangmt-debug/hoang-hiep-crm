@@ -501,7 +501,7 @@ function lvCounts() {
 function bindSale() {
   document.querySelectorAll('[data-as]').forEach(function (s) { s.onchange = function () {
     var l = D.leads.filter(function (x) { return x.phone === s.dataset.as; })[0], v = s.value;
-    run('crmUpdateLead', s.dataset.as, { assignee: v }).then(function () { l.assignee = v; toast(v ? 'Đã chuyển cho ' + v : 'Đã bỏ giao'); leads(); }).catch(function (e) { s.value = l.assignee || ''; fail(e); }); }; });
+    run('crmUpdateLead', s.dataset.as, { assignee: v }).then(function () { l.assignee = v; badges(); toast(v ? 'Đã chuyển cho ' + v : 'Đã bỏ giao'); render(); }).catch(function (e) { s.value = l.assignee || ''; fail(e); }); }; });
 }
 function bindLv() {
   document.querySelectorAll('[data-lv]').forEach(function (b) { b.onclick = function () { LV = b.dataset.lv; try { localStorage.setItem('crm_lv', LV); } catch (e) {} leads(); window.scrollTo(0, 0); }; });
@@ -812,11 +812,11 @@ function openLead(phone, page, keep) {
     var a = b.dataset.a; if (a === 'zalo') window.open('https://zalo.me/' + phone, '_blank', 'noopener'); if (a === 'call') window.open('tel:' + phone, '_self');
     run('crmLog', phone, a).then(function (r) { l.called = r.called; l.messaged = r.messaged; l.contactedAt = r.contactedAt; l.status = r.status; badges(); toast('Đã ghi nhận'); fin(); }).catch(fail); }; });
   $('#qas').onchange = function () {
-    var v = this.value; run('crmUpdateLead', phone, { assignee: v }).then(function () { l.assignee = v; if ($('#as')) $('#as').value = v; toast(v ? 'Đã giao cho ' + v : 'Đã bỏ giao'); }).catch(fail);
+    var v = this.value; run('crmUpdateLead', phone, { assignee: v }).then(function () { l.assignee = v; badges(); if ($('#as')) $('#as').value = v; toast(v ? 'Đã giao cho ' + v : 'Đã bỏ giao'); }).catch(fail);
   };
   $('#qasadd').onclick = function () {
     var n = window.prompt('Tên sale cần thêm (ví dụ: Nguyễn Văn A)'); if (!n || !n.trim()) return; n = n.trim();
-    run('crmAddSale', n).then(function (r) { D.sales = r || D.sales; if (D.sales.indexOf(n) < 0) D.sales.push(n); return run('crmUpdateLead', phone, { assignee: n }); }).then(function () { l.assignee = n; toast('Đã giao cho ' + n); fin(); }).catch(fail);
+    run('crmAddSale', n).then(function (r) { D.sales = r || D.sales; if (D.sales.indexOf(n) < 0) D.sales.push(n); return run('crmUpdateLead', phone, { assignee: n }); }).then(function () { l.assignee = n; badges(); toast('Đã giao cho ' + n); fin(); }).catch(fail);
   };
   $('#qnmok').onclick = function () {
     var v = $('#qnm').value.trim(); if (!v) { toast('Hãy nhập tên'); return; }
