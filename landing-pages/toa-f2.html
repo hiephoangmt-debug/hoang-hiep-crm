@@ -732,22 +732,17 @@ document.addEventListener('click', function (e) { var a = e.target.closest && e.
         <span>🎁 <b>Bốc thăm may mắn</b> cho khách tham dự</span>
       </div>
     </div>
-    <a class="ev-pic" href="https://fourstower.netlify.app/img/thu-moi-su-kien-fours-tower-thap-f2-ha-noi-18-10-2026.jpg" target="_blank" rel="noopener" aria-label="Phóng to thư mời sự kiện" style="max-width:860px">
-      <img src="https://fourstower.netlify.app/img/thu-moi-su-kien-fours-tower-thap-f2-ha-noi-18-10-2026.jpg" width="1200" height="1127" alt="Thư mời sự kiện Giới thiệu dự án FourS Tower – Tháp F2 “Xuân khai Phú quý – Đón đầu tiềm năng”: 9:00 Chủ nhật 18/10/2026 tại Sun Gallery Tây Hồ View, 58 Quảng Bá, Tây Hồ, Hà Nội; chương trình 9:00–11:20" loading="lazy" decoding="async">
-      <span class="ev-zoom">🔍 Bấm để xem thư mời</span>
-    </a>
-    <div class="ev-bar">
-      <div><p class="ev-cdl">Còn lại</p><div class="ev-cd" id="evCd" aria-label="Thời gian còn lại đến sự kiện"><div><b id="evD">–</b><span>ngày</span></div><div><b id="evH">–</b><span>giờ</span></div><div><b id="evM">–</b><span>phút</span></div></div></div>
-      <form class="ev-form lead-form" aria-labelledby="ev-form-title">
-        <h3 id="ev-form-title">Giữ chỗ tham dự <small>· nhận thư mời ghi tên qua Zalo, số lượng chỗ có hạn</small></h3>
-        <label class="sr" for="ev-name">Họ và tên</label><input id="ev-name" name="name" placeholder="Họ và tên *" autocomplete="name" required>
-        <label class="sr" for="ev-phone">Số điện thoại</label><input id="ev-phone" name="phone" type="tel" placeholder="Số điện thoại / Zalo *" autocomplete="tel" inputmode="tel" required pattern="[0-9 +.]{9,14}">
-        <label class="sr" for="ev-n">Số người tham dự</label><select id="ev-n" name="yeu_cau"><option value="Tham dự sự kiện 18/10 Hà Nội – 1 người">1 người tham dự</option><option value="Tham dự sự kiện 18/10 Hà Nội – 2 người">2 người tham dự</option><option value="Tham dự sự kiện 18/10 Hà Nội – 3–4 người">3–4 người tham dự</option></select>
-        <input type="hidden" name="interest" value="Đăng ký sự kiện Tháp F2 – CN 18/10 Sun Gallery Tây Hồ View, Hà Nội"><input type="hidden" name="toa" value="F2">
-        <button class="btn btn-gold" type="submit">Giữ chỗ sự kiện 18/10 →</button>
-      </form>
-    </div>
-        <figure class="evh-venue evs" style="max-width:520px;margin:22px auto 0">
+    <style>
+.ev-grid{display:grid;gap:22px;max-width:1120px;margin:0 auto;align-items:start}
+.ev-grid .ev-bar{grid-template-columns:1fr;margin:0}
+.ev-grid .ev-cd{justify-content:center}
+.ev-grid .ev-form{grid-template-columns:1fr}
+.ev-grid .ev-agenda{margin:14px 0 0}
+@media (min-width:900px){.ev-grid{grid-template-columns:minmax(0,440px) minmax(0,1fr)}.ev-grid .ev-col-r{position:sticky;top:120px}}
+</style>
+    <div class="ev-grid">
+      <div class="ev-col-l">
+<figure class="evh-venue evs" style="max-width:none;margin:0">
       <style>
       .evs-box{position:relative;aspect-ratio:4/5;border-radius:18px;overflow:hidden;background:#0b1a3a;border:2px solid rgba(255,176,103,.55);box-shadow:0 30px 60px -30px rgba(0,0,0,.8);touch-action:pan-y}
       .evs-s{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:opacity .7s ease;pointer-events:none}
@@ -762,13 +757,14 @@ document.addEventListener('click', function (e) { var a = e.target.closest && e.
       @media (prefers-reduced-motion:reduce){.evs-s{transition:none}}
       </style>
       <div class="evs-box" aria-roledescription="trình chiếu" aria-label="Ảnh sự kiện 18/10">
-        <a class="evs-s on" href="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-thu-moi-du-an-va-dia-diem-18-10.jpg" target="_blank" rel="noopener" aria-label="Ảnh 1/4: Thư mời: căn hộ Tòa F2 tại Đà Nẵng, sự kiện tại Sun Gallery Tây Hồ View, Hà Nội – bấm xem ảnh lớn"><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-thu-moi-du-an-va-dia-diem-18-10-720.jpg" width="720" height="900" alt="Thư mời: căn hộ Tòa F2 tại Đà Nẵng, sự kiện tại Sun Gallery Tây Hồ View, Hà Nội" decoding="async"></a>
-        <a class="evs-s" href="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-dia-diem-su-kien-18-10-sun-gallery-tay-ho-view.jpg" target="_blank" rel="noopener" aria-label="Ảnh 2/4: Địa điểm: Sun Gallery Tây Hồ View, 58 Quảng Bá, Tây Hồ, Hà Nội – bấm xem ảnh lớn"><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-dia-diem-su-kien-18-10-sun-gallery-tay-ho-view-720.jpg" width="720" height="900" alt="Địa điểm: Sun Gallery Tây Hồ View, 58 Quảng Bá, Tây Hồ, Hà Nội" loading="lazy" decoding="async"></a>
-        <a class="evs-s" href="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-thu-moi-su-kien-18-10-ha-noi.jpg" target="_blank" rel="noopener" aria-label="Ảnh 3/4: Căn nhà bên biển Đà Nẵng cho cả gia đình – Chủ nhật 18/10/2026 – bấm xem ảnh lớn"><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-thu-moi-su-kien-18-10-ha-noi-720.jpg" width="720" height="900" alt="Căn nhà bên biển Đà Nẵng cho cả gia đình – Chủ nhật 18/10/2026" loading="lazy" decoding="async"></a>
-        <a class="evs-s" href="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-vi-sao-gia-dinh-ha-noi-chon-da-nang.jpg" target="_blank" rel="noopener" aria-label="Ảnh 4/4: Bay 1 giờ 20 phút – về nhà bên biển Đà Nẵng – bấm xem ảnh lớn"><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-vi-sao-gia-dinh-ha-noi-chon-da-nang-720.jpg" width="720" height="720" alt="Bay 1 giờ 20 phút – về nhà bên biển Đà Nẵng" loading="lazy" decoding="async"></a>
+        <a class="evs-s on" href="https://fourstower.netlify.app/img/thu-moi-su-kien-fours-tower-thap-f2-ha-noi-18-10-2026.jpg" target="_blank" rel="noopener" aria-label="Ảnh 1/5: Thư mời chính thức sự kiện 18/10 – bấm xem ảnh lớn"><img src="https://fourstower.netlify.app/img/thu-moi-su-kien-fours-tower-thap-f2-ha-noi-18-10-2026.jpg" width="1200" height="1127" alt="Thư mời sự kiện Giới thiệu dự án FourS Tower – Tháp F2 “Xuân khai Phú quý – Đón đầu tiềm năng”: 9:00 Chủ nhật 18/10/2026 tại Sun Gallery Tây Hồ View, 58 Quảng Bá, Tây Hồ, Hà Nội" decoding="async"></a>
+        <a class="evs-s" href="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-thu-moi-du-an-va-dia-diem-18-10.jpg" target="_blank" rel="noopener" aria-label="Ảnh 2/5: Thư mời: căn hộ Tòa F2 tại Đà Nẵng, sự kiện tại Sun Gallery Tây Hồ View, Hà Nội – bấm xem ảnh lớn"><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-thu-moi-du-an-va-dia-diem-18-10-720.jpg" width="720" height="900" alt="Thư mời: căn hộ Tòa F2 tại Đà Nẵng, sự kiện tại Sun Gallery Tây Hồ View, Hà Nội" loading="lazy" decoding="async"></a>
+        <a class="evs-s" href="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-dia-diem-su-kien-18-10-sun-gallery-tay-ho-view.jpg" target="_blank" rel="noopener" aria-label="Ảnh 3/5: Địa điểm: Sun Gallery Tây Hồ View, 58 Quảng Bá, Tây Hồ, Hà Nội – bấm xem ảnh lớn"><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-dia-diem-su-kien-18-10-sun-gallery-tay-ho-view-720.jpg" width="720" height="900" alt="Địa điểm: Sun Gallery Tây Hồ View, 58 Quảng Bá, Tây Hồ, Hà Nội" loading="lazy" decoding="async"></a>
+        <a class="evs-s" href="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-thu-moi-su-kien-18-10-ha-noi.jpg" target="_blank" rel="noopener" aria-label="Ảnh 4/5: Căn nhà bên biển Đà Nẵng cho cả gia đình – Chủ nhật 18/10/2026 – bấm xem ảnh lớn"><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-thu-moi-su-kien-18-10-ha-noi-720.jpg" width="720" height="900" alt="Căn nhà bên biển Đà Nẵng cho cả gia đình – Chủ nhật 18/10/2026" loading="lazy" decoding="async"></a>
+        <a class="evs-s" href="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-vi-sao-gia-dinh-ha-noi-chon-da-nang.jpg" target="_blank" rel="noopener" aria-label="Ảnh 5/5: Bay 1 giờ 20 phút – về nhà bên biển Đà Nẵng – bấm xem ảnh lớn"><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d6fcc33c25fa624ce86dcb95e36bc1e7298dcb55/landing-pages/assets/sl-vi-sao-gia-dinh-ha-noi-chon-da-nang-720.jpg" width="720" height="720" alt="Bay 1 giờ 20 phút – về nhà bên biển Đà Nẵng" loading="lazy" decoding="async"></a>
         <button type="button" class="evs-nav p" aria-label="Ảnh trước">‹</button><button type="button" class="evs-nav n" aria-label="Ảnh sau">›</button>
       </div>
-      <div class="evs-dots"><button type="button" aria-label="Xem ảnh 1" class="on"></button><button type="button" aria-label="Xem ảnh 2"></button><button type="button" aria-label="Xem ảnh 3"></button><button type="button" aria-label="Xem ảnh 4"></button></div>
+      <div class="evs-dots"><button type="button" aria-label="Xem ảnh 1" class="on"></button><button type="button" aria-label="Xem ảnh 2"></button><button type="button" aria-label="Xem ảnh 3"></button><button type="button" aria-label="Xem ảnh 4"></button><button type="button" aria-label="Xem ảnh 5"></button></div>
       <figcaption>Ảnh tự chuyển · vuốt hoặc bấm ‹ › để xem · bấm ảnh để phóng to</figcaption>
       <script>
       (function () {
@@ -787,7 +783,20 @@ document.addEventListener('click', function (e) { var a = e.target.closest && e.
       })();
       </script>
     </figure>
-    <details class="ev-agenda"><summary>Xem chương trình sự kiện</summary><ul>
+      </div>
+      <div class="ev-col-r">
+<div class="ev-bar">
+      <div><p class="ev-cdl">Còn lại</p><div class="ev-cd" id="evCd" aria-label="Thời gian còn lại đến sự kiện"><div><b id="evD">–</b><span>ngày</span></div><div><b id="evH">–</b><span>giờ</span></div><div><b id="evM">–</b><span>phút</span></div></div></div>
+      <form class="ev-form lead-form" aria-labelledby="ev-form-title">
+        <h3 id="ev-form-title">Giữ chỗ tham dự <small>· nhận thư mời ghi tên qua Zalo, số lượng chỗ có hạn</small></h3>
+        <label class="sr" for="ev-name">Họ và tên</label><input id="ev-name" name="name" placeholder="Họ và tên *" autocomplete="name" required>
+        <label class="sr" for="ev-phone">Số điện thoại</label><input id="ev-phone" name="phone" type="tel" placeholder="Số điện thoại / Zalo *" autocomplete="tel" inputmode="tel" required pattern="[0-9 +.]{9,14}">
+        <label class="sr" for="ev-n">Số người tham dự</label><select id="ev-n" name="yeu_cau"><option value="Tham dự sự kiện 18/10 Hà Nội – 1 người">1 người tham dự</option><option value="Tham dự sự kiện 18/10 Hà Nội – 2 người">2 người tham dự</option><option value="Tham dự sự kiện 18/10 Hà Nội – 3–4 người">3–4 người tham dự</option></select>
+        <input type="hidden" name="interest" value="Đăng ký sự kiện Tháp F2 – CN 18/10 Sun Gallery Tây Hồ View, Hà Nội"><input type="hidden" name="toa" value="F2">
+        <button class="btn btn-gold" type="submit">Giữ chỗ sự kiện 18/10 →</button>
+      </form>
+    </div>
+<details class="ev-agenda"><summary>Xem chương trình sự kiện</summary><ul>
       <li><b>9h00</b> Đón khách &amp; teabreak</li>
       <li><b>9h30</b> Khai mạc</li>
       <li><b>9h40</b> Giới thiệu về Sun Group &amp; Hành trình làm đẹp những vùng đất</li>
@@ -796,6 +805,8 @@ document.addEventListener('click', function (e) { var a = e.target.closest && e.
       <li><b>11h00</b> Bốc thăm may mắn</li>
       <li><b>11h20</b> Kết thúc chương trình</li>
     </ul></details>
+      </div>
+    </div>
   </div>
 </section>
 <script>
