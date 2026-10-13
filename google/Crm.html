@@ -1210,34 +1210,49 @@ function planForm(p) {
 }
 // Chụp bảng hoa hồng kế toán gửi để tự điền: xem trước rồi lưu từng khoản, bỏ qua khoản đã có.
 function commScan() {
-  var img = '', res = null;
-  $('#dlgBody').innerHTML = '<h2 style="margin:0">Chụp bảng hoa hồng kế toán gửi</h2><p class="small mut">Chụp màn hình hoặc chụp ảnh bảng kế toán gửi (có thể chụp từng phần), chọn ảnh bên dưới, hoặc copy chữ trong file rồi dán vào ô. Hệ thống đọc từng dòng, bạn xem lại rồi lưu. Khoản nào đã có thì không bị nhập lại. Ảnh hoặc chữ được gửi cho quân sư AI đọc.</p>' +
-    '<textarea id="cs1" rows="3" placeholder="Hoặc dán chữ copy từ bảng vào đây"></textarea><div class="row" style="margin-top:8px"><label class="btn" style="cursor:pointer">Chọn ảnh bảng<input id="cs2" type="file" accept="image/*" hidden></label><span class="small mut" id="cs3"></span><button class="btn p" id="csgo">Đọc bảng</button><button class="btn" id="csx">Đóng</button></div><div id="csr"></div>';
+  var imgs = [], res = null;
+  $('#dlgBody').innerHTML = '<h2 style="margin:0">Chụp bảng hoa hồng kế toán gửi</h2><p class="small mut">Chụp màn hình bảng kế toán gửi. <b>Có thể chọn hoặc dán nhiều ảnh</b> (mỗi lần Ctrl+V thêm một ảnh), hoặc copy chữ trong file rồi dán vào ô. Hệ thống đọc từng ảnh, gộp lại, bạn xem rồi lưu. Khoản nào đã có thì không bị nhập lại. Ảnh hoặc chữ được gửi cho quân sư AI đọc.</p>' +
+    '<textarea id="cs1" rows="3" placeholder="Hoặc dán chữ copy từ bảng vào đây"></textarea><div class="row" style="margin-top:8px"><label class="btn" style="cursor:pointer">Chọn nhiều ảnh hoặc Ctrl+V để dán<input id="cs2" type="file" accept="image/*" multiple hidden></label><button class="btn p" id="csgo">Đọc bảng</button><button class="btn" id="csx">Đóng</button></div><div class="row" id="cs3" style="margin:6px 0"></div><div id="csr"></div>';
   $('#dlg').showModal(); $('#csx').onclick = function () { $('#dlg').close(); };
-  PASTE_D = function (f) { snImage(f, function (d) { img = d; $('#cs3').textContent = 'Đã dán ảnh'; }); };
-  $('#cs2').onchange = function () { var f = this.files && this.files[0]; if (!f) return; snImage(f, function (d) { img = d; $('#cs3').textContent = 'Đã chọn ảnh'; }); };
+  var thumbs = function () {
+    $('#cs3').innerHTML = imgs.map(function (d, i) { return '<span style="position:relative"><img src="' + d + '" alt="" style="height:54px;border-radius:6px;border:1px solid var(--line)"><button class="btn xs" data-ci2="' + i + '" style="position:absolute;top:-6px;right:-6px;padding:0 6px;min-height:20px">×</button></span>'; }).join('') + (imgs.length ? '<span class="small mut">' + imgs.length + ' ảnh</span>' : '');
+    document.querySelectorAll('[data-ci2]').forEach(function (b) { b.onclick = function () { imgs.splice(+b.dataset.ci2, 1); thumbs(); }; });
+  };
+  var add = function (f) { snImage(f, function (d) { if (imgs.length >= 8) { toast('Tối đa 8 ảnh mỗi lần'); return; } imgs.push(d); thumbs(); }); };
+  PASTE_D = add;
+  $('#cs2').onchange = function () { [].slice.call(this.files || []).forEach(add); this.value = ''; };
   $('#csgo').onclick = function () {
-    var t = $('#cs1').value.trim(); if (!t && !img) { toast('Hãy chọn ảnh hoặc dán chữ'); return; }
-    $('#csgo').disabled = true; $('#csr').innerHTML = '<div class="mut" style="margin-top:8px">Đang đọc bảng…</div>';
-    run('crmScanComm', t, img, 'image/jpeg').then(function (r) {
-      $('#csgo').disabled = false;
-      var items = r.rows.map(function (x) { x.month = r.month; return x; });
-      if (r.salary) items.push({ type: 'Lương', month: r.month, unit: '', net: r.salary, total: 0, prev: 0, now: 0, price: 0, rate: 0, taxPaid: 0, taxDue: 0, note: 'Lương nhận trong tháng' });
-      var has = function (x) { return CM.data.items.some(function (o) { return o.month === x.month && o.type === x.type && (o.unit || '') === (x.unit || '') && Math.round(o.net) === Math.round(x.net); }); };
-      res = items.map(function (x) { return { x: x, dup: has(x) }; });
-      $('#csr').innerHTML = '<div class="row" style="margin:8px 0"><label class="small">Tháng nhận <input type="month" id="csm" value="' + esc(r.month || ymdNow(0).slice(0, 7)) + '"></label></div>' +
-        (res.length ? res.map(function (y, i) {
-          var x = y.x; return '<div class="card" style="margin:6px 0"><label class="row" style="margin:0"><input type="checkbox" data-ci="' + i + '"' + (y.dup ? '' : ' checked') + '><b>' + esc(x.type) + '</b>' + (x.unit ? '<span class="small mut">Căn ' + esc(x.unit) + '</span>' : '') + '<span class="sp"></span><b>' + vnd(x.net) + '</b>' + (y.dup ? '<span class="tag">Đã có</span>' : '') + '</label>' +
-            (x.total || x.prev || x.now ? '<div class="small mut">Tổng hoa hồng ' + money(x.total) + ' · đã tính trước ' + money(x.prev) + ' · đợt này ' + money(x.now) + (x.rate ? ' · mức ' + x.rate : '') + '</div>' : '') + '</div>';
-        }).join('') + '<div class="row"><button class="btn p" id="cssv">Lưu các khoản đã chọn</button></div>' : '<div class="card mut">Không đọc được dòng nào. Thử chụp rõ hơn hoặc dán chữ.</div>');
-      if ($('#cssv')) $('#cssv').onclick = function () {
-        var mo = $('#csm').value; if (!mo) { toast('Hãy chọn tháng'); return; }
-        var pick = [].slice.call(document.querySelectorAll('[data-ci]:checked')).map(function (b) { return res[+b.dataset.ci].x; });
-        if (!pick.length) { toast('Chưa chọn khoản nào'); return; } this.disabled = true; var n = 0;
-        pick.reduce(function (p, x) { return p.then(function () { return run('crmCommSave', { month: mo, type: x.type, unit: x.unit, price: x.price, rate: x.rate, total: x.total, prev: x.prev, now: x.now, net: x.net, taxPaid: x.taxPaid, taxDue: x.taxDue, note: x.note || '' }).then(function () { n++; }); }); }, Promise.resolve())
-          .then(function () { toast('Đã lưu ' + n + ' khoản'); $('#dlg').close(); commLoad(); }).catch(function (e) { toast('Đã lưu ' + n + ' khoản, sau đó lỗi: ' + e.message); });
-      };
-    }).catch(function (e) { $('#csgo').disabled = false; $('#csr').innerHTML = '<div class="card" style="margin-top:8px">' + esc(/Chưa cài khoá/.test(e.message) ? 'Chưa cài khoá quân sư AI. Vào Sheet, menu CRM, Cài khoá quân sư (AI).' : e.message) + '</div>'; });
+    var t = $('#cs1').value.trim(); if (!t && !imgs.length) { toast('Hãy chọn ảnh hoặc dán chữ'); return; }
+    $('#csgo').disabled = true;
+    var jobs = imgs.length ? imgs.map(function (d, i) { return { img: d, text: i === 0 ? t : '' }; }) : [{ img: '', text: t }], all = { month: '', salary: 0, rows: [] }, seen = {};
+    var step = function (n) {
+      if (n >= jobs.length) { $('#csgo').disabled = false; present(all); return; }
+      $('#csr').innerHTML = '<div class="mut" style="margin-top:8px">Đang đọc ' + (jobs.length > 1 ? 'ảnh ' + (n + 1) + '/' + jobs.length : 'bảng') + '…</div>';
+      run('crmScanComm', jobs[n].text, jobs[n].img, 'image/jpeg').then(function (r) {
+        if (!all.month && r.month) all.month = r.month; if (!all.salary && r.salary) all.salary = r.salary;
+        r.rows.forEach(function (x) { var key = [x.type, x.unit, Math.round(x.net)].join('|'); if (!seen[key]) { seen[key] = 1; all.rows.push(x); } });
+        step(n + 1);
+      }).catch(function (e) { $('#csgo').disabled = false; $('#csr').innerHTML = '<div class="card" style="margin-top:8px">' + esc(/Chưa cài khoá/.test(e.message) ? 'Chưa cài khoá quân sư AI. Vào Sheet, menu CRM, Cài khoá quân sư (AI).' : 'Ảnh ' + (n + 1) + ': ' + e.message) + '</div>'; });
+    };
+    step(0);
+  };
+  var present = function (r) {
+    var items = r.rows.map(function (x) { x.month = r.month; return x; });
+    if (r.salary) items.push({ type: 'Lương', month: r.month, unit: '', net: r.salary, total: 0, prev: 0, now: 0, price: 0, rate: 0, taxPaid: 0, taxDue: 0, note: 'Lương nhận trong tháng' });
+    var has = function (x) { return CM.data.items.some(function (o) { return o.month === x.month && o.type === x.type && (o.unit || '') === (x.unit || '') && Math.round(o.net) === Math.round(x.net); }); };
+    res = items.map(function (x) { return { x: x, dup: has(x) }; });
+    $('#csr').innerHTML = '<div class="row" style="margin:8px 0"><label class="small">Tháng nhận <input type="month" id="csm" value="' + esc(r.month || ymdNow(0).slice(0, 7)) + '"></label></div>' +
+      (res.length ? res.map(function (y, i) {
+        var x = y.x; return '<div class="card" style="margin:6px 0"><label class="row" style="margin:0"><input type="checkbox" data-ci="' + i + '"' + (y.dup ? '' : ' checked') + '><b>' + esc(x.type) + '</b>' + (x.unit ? '<span class="small mut">Căn ' + esc(x.unit) + '</span>' : '') + '<span class="sp"></span><b>' + vnd(x.net) + '</b>' + (y.dup ? '<span class="tag">Đã có</span>' : '') + '</label>' +
+          (x.total || x.prev || x.now ? '<div class="small mut">Tổng hoa hồng ' + money(x.total) + ' · đã tính trước ' + money(x.prev) + ' · đợt này ' + money(x.now) + (x.rate ? ' · mức ' + x.rate : '') + '</div>' : '') + '</div>';
+      }).join('') + '<div class="row"><button class="btn p" id="cssv">Lưu các khoản đã chọn</button></div>' : '<div class="card mut">Không đọc được dòng nào. Thử chụp rõ hơn hoặc dán chữ.</div>');
+    if ($('#cssv')) $('#cssv').onclick = function () {
+      var mo = $('#csm').value; if (!mo) { toast('Hãy chọn tháng'); return; }
+      var pick = [].slice.call(document.querySelectorAll('[data-ci]:checked')).map(function (b) { return res[+b.dataset.ci].x; });
+      if (!pick.length) { toast('Chưa chọn khoản nào'); return; } this.disabled = true; var n = 0;
+      pick.reduce(function (p, x) { return p.then(function () { return run('crmCommSave', { month: mo, type: x.type, unit: x.unit, price: x.price, rate: x.rate, total: x.total, prev: x.prev, now: x.now, net: x.net, taxPaid: x.taxPaid, taxDue: x.taxDue, note: x.note || '' }).then(function () { n++; }); }); }, Promise.resolve())
+        .then(function () { toast('Đã lưu ' + n + ' khoản'); $('#dlg').close(); commLoad(); }).catch(function (e) { toast('Đã lưu ' + n + ' khoản, sau đó lỗi: ' + e.message); });
+    };
   };
 }
 function commForm(x) {
