@@ -81,3 +81,38 @@ for b,t,s in items:
 text(d,(W/2,H-38),'Căn 2PN 61 m² ~2,8 tỷ · vốn ~700 triệu · Zalo 0904 567 009',F('bvp-700',27),ORH,'mm')
 im.convert('RGB').save(D+'zalo/vi-sao-gia-dinh-ha-noi-chon-da-nang.jpg',quality=88,optimize=True,progressive=True)
 print('ok')
+
+# ===== Ảnh 3: Địa điểm sự kiện (ảnh dọc khu Tây Hồ View) 4:5 =====
+def shadow_text(im, xy, s, font, fill, anchor='la', r=8, a=170):
+    lay=Image.new('RGBA', im.size, (0,0,0,0)); ImageDraw.Draw(lay).text(xy, N(s), font=font, fill=(0,0,0,a), anchor=anchor)
+    im.alpha_composite(lay.filter(ImageFilter.GaussianBlur(r))); ImageDraw.Draw(im).text(xy, N(s), font=font, fill=fill, anchor=anchor)
+def fit(d, s, name, size, maxw):
+    while d.textlength(N(s), font=F(name,size)) > maxw: size-=2
+    return F(name,size)
+V=Image.open('/root/.claude/uploads/04904dc5-f0d4-5f74-b258-32836a553812/b1476578-image.jpg').convert('RGB')
+W,H=1080,1350; PH=900
+im=Image.new('RGBA',(W,H),NAVY+(255,)); im.paste(cover(V,W,PH,0.16),(0,0))
+grad(im,0,170,NAVY,190,0); grad(im,PH-200,PH,NAVY,0,255)
+d=ImageDraw.Draw(im)
+pill(d,60,50,'THƯ MỜI · CHỦ NHẬT 18/10/2026',F('bvp-800',26),OR,WHITE,h=50)
+d=ImageDraw.Draw(im)
+# Khối thông tin
+y0=PH-40
+d.rounded_rectangle([40,y0,W-40,H-40],radius=30,fill=NAVY2,outline=OR,width=3)
+text(d,(80,y0+38),'ĐỊA ĐIỂM SỰ KIỆN GIỚI THIỆU TÒA F2 – SUN FOURS TOWER',F('bvp-800',22),ORH)
+ft=fit(d,'Sun Gallery Tây Hồ View','pf-700',66,W-160)
+text(d,(80,y0+74),'Sun Gallery ',ft,WHITE); x=80+d.textlength(N('Sun Gallery '),font=ft)
+text(d,(x,y0+74),'Tây Hồ View',ft,ORH)
+d.ellipse([80,y0+172,104,y0+196],fill=OR); d.ellipse([88,y0+180,96,y0+188],fill=NAVY2)
+text(d,(118,y0+165),'58 Quảng Bá, Tây Hồ, Hà Nội',F('bvp-700',34),WHITE)
+# 2 chip thời gian
+cy=y0+232; cw=(W-80-80-20)//2
+for k,(a,b) in enumerate([('9:00 – 11:20','Đón khách & teabreak 9:00'),('Bốc thăm','may mắn cuối chương trình')]):
+    x0=80+k*(cw+20); d.rounded_rectangle([x0,cy,x0+cw,cy+96],radius=18,fill=None,outline=(244,122,31),width=2)
+    text(d,(x0+22,cy+16),a,F('bvp-800',32),ORH); text(d,(x0+22,cy+58),b,F('bvp-400',22),MUTE)
+# CTA
+by=H-40-24-78
+d.rounded_rectangle([80,by,W-80,by+78],radius=39,fill=OR)
+text(d,(W/2,by+39),'Giữ chỗ · Zalo 0904 567 009',F('bvp-800',34),WHITE,'mm')
+im.convert('RGB').save(D+'zalo/dia-diem-su-kien-18-10-sun-gallery-tay-ho-view.jpg',quality=90,optimize=True,progressive=True)
+print('ok3')
