@@ -1419,8 +1419,10 @@ function impPreview() {
       return chain;
     };
     send(news, false).then(function () { return merge && olds.length ? send(olds, true) : null; }).then(function () {
-      $('#imp2').innerHTML = '<b>Xong.</b> Thêm mới ' + tot.added + ', điền vào hồ sơ cũ ' + tot.merged + ', bỏ qua trùng ' + (tot.dups + (merge ? 0 : olds.length)) + ', lỗi ' + tot.errors + '.'; $('#imok').disabled = false; load();
-    }).catch(function (e) { $('#imok').disabled = false; $('#imp2').textContent = ''; fail(e); });
+      var msg = 'Xong. Thêm mới ' + tot.added + ', điền vào hồ sơ cũ ' + tot.merged + ', bỏ qua trùng ' + (tot.dups + (merge ? 0 : olds.length)) + ', lỗi ' + tot.errors + '.';
+      if ($('#imp2')) $('#imp2').innerHTML = '<b>' + esc(msg) + '</b>'; if ($('#imok')) $('#imok').disabled = false;
+      toast(msg); load();   // vẫn báo và làm mới danh sách dù bạn đã đóng hộp thoại
+    }).catch(function (e) { if ($('#imok')) $('#imok').disabled = false; if ($('#imp2')) $('#imp2').textContent = ''; load(); fail(e); });
   };
 }
 
