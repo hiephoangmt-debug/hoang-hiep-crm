@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-24', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-25', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -367,12 +367,12 @@ function crmScanChat(k, phone, text, img, mime) {
 // Dán nhiều cuộc chat Zalo cùng lúc (hoặc ảnh chụp danh sách chat): AI tách từng người, CRM chỉ nhận người khớp khách trong hồ sơ.
 function crmScanZalo(k, text, img, mime) {
   requireUi_(k);
-  var o = scanAi_('Bạn đọc nội dung copy từ Zalo (có thể gồm nhiều cuộc trò chuyện với nhiều người) và chỉ trả về MỘT đối tượng JSON, không thêm chữ nào khác: ' +
-    '{"conversations":[{"name":"tên hiển thị của người đối thoại, không phải của sale","phone":"số điện thoại nếu thấy trong chat, không thì rỗng","summary":"tóm tắt 1 đến 2 dòng","need":"nhu cầu, ngân sách, khu vực, loại căn đã nói","obstacle":"vướng mắc hoặc lo ngại","heat":"Nóng hoặc Ấm hoặc Nguội","next":"bước tiếp theo nên làm"}]}. ' +
-    'Mỗi người một mục, tối đa 15 mục. Chỉ dựa trên nội dung chat, không bịa; thiếu thì để rỗng. Bỏ qua nhóm chat, tin quảng cáo, người không phải khách hàng quan tâm bất động sản.',
+  var o = scanAi_('Bạn đọc nội dung copy hoặc ảnh chụp từ Zalo (có thể là nhiều cuộc trò chuyện, hoặc danh bạ chỉ có tên và ảnh đại diện) và chỉ trả về MỘT đối tượng JSON, không thêm chữ nào khác: ' +
+    '{"conversations":[{"kind":"chat nếu có nội dung trò chuyện, contact nếu chỉ là một dòng danh bạ","label":"phần ghi chú người dùng đặt trong tên danh bạ, ví dụ trong ngoặc, không thì rỗng","name":"tên hiển thị của người đối thoại, không phải của sale","phone":"số điện thoại nếu thấy trong chat, không thì rỗng","summary":"tóm tắt 1 đến 2 dòng","need":"nhu cầu, ngân sách, khu vực, loại căn đã nói","obstacle":"vướng mắc hoặc lo ngại","heat":"Nóng hoặc Ấm hoặc Nguội","next":"bước tiếp theo nên làm"}]}. ' +
+    'Mỗi người một mục, tối đa 40 mục với danh bạ và 15 mục với chat. Với danh bạ, name là tên đã bỏ phần ghi chú trong ngoặc và bỏ tiền tố như A, Mrs, Cvkd chỉ khi chắc đó là cách gọi, không thì giữ nguyên tên hiển thị. Chỉ dựa trên nội dung chat, không bịa; thiếu thì để rỗng. Bỏ qua nhóm chat, tin quảng cáo, người không phải khách hàng quan tâm bất động sản.',
     'Đây là nội dung chat Zalo của sale với nhiều người.', text, '', img, mime, 20000);
-  var cv = (Array.isArray(o.conversations) ? o.conversations : []).slice(0, 15).map(function (c) {
-    return { name: str_(c && c.name, 80), phone: normPhone_(c && c.phone), summary: str_(c && c.summary, 400), need: str_(c && c.need, 300), obstacle: str_(c && c.obstacle, 300), heat: str_(c && c.heat, 20), next: str_(c && c.next, 300) };
+  var cv = (Array.isArray(o.conversations) ? o.conversations : []).slice(0, 40).map(function (c) {
+    return { kind: c && c.kind === 'contact' ? 'contact' : 'chat', label: str_(c && c.label, 150), name: str_(c && c.name, 80), phone: normPhone_(c && c.phone), summary: str_(c && c.summary, 400), need: str_(c && c.need, 300), obstacle: str_(c && c.obstacle, 300), heat: str_(c && c.heat, 20), next: str_(c && c.next, 300) };
   }).filter(function (c) { return c.name || c.phone; });
   return { conversations: cv };
 }
