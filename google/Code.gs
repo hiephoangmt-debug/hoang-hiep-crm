@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-39', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-40', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -683,7 +683,10 @@ function crmAddLog(k, phone, f) {
       [new Date(), "'" + phoneStr_(sh.getRange(r, 4).getValue()), str_(sh.getRange(r, 3).getValue(), 120), by, type, content, str_(f.result, 300), ymd_(f.next),
         str_(f.reply, 600), str_(f.obstacle, 600), str_(f.docs, 300), str_(f.nextAction, 300)]);
     if (f.next !== undefined) sh.getRange(r, 23).setValue(ymd_(f.next) || '');
-    return { ok: true };
+    // Có báo cáo chăm sóc thì khách không còn "Mới, chưa liên hệ".
+    var st = String(sh.getRange(r, 19).getValue() || '');
+    if ((st === STATUS_NEW || !st) && content.indexOf('Nhắc việc') !== 0) { sh.getRange(r, 19).setValue(STATUS_CONTACTED); st = STATUS_CONTACTED; }
+    return { ok: true, status: st };
   });
 }
 

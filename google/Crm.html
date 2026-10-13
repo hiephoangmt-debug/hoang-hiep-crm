@@ -161,7 +161,7 @@ function fmt(iso) { if (!iso) return ''; var d = new Date(iso); return d.toLocal
 function ago(iso) { var m = Math.round((Date.now() - new Date(iso).getTime()) / 60000); return m < 1 ? 'vừa xong' : m < 60 ? m + ' phút trước' : m < 1440 ? Math.round(m / 60) + ' giờ trước' : Math.round(m / 1440) + ' ngày trước'; }
 function vnd(n) { return Math.round(n || 0).toLocaleString('vi-VN') + 'đ'; }
 var isQuiet = function (l) { return l.srcType === 'Data nhập'; };   // khách nhập từ file/Sheet: không nhắc gọi
-var todo = function (l) { return !l.called && !l.messaged && l.status === 'Mới' && !isQuiet(l) && !l.assignee; };   // đã giao sale thì chờ sale báo cáo, không nhắc
+var todo = function (l) { return !l.called && !l.messaged && l.status === 'Mới' && !isQuiet(l) && !l.assignee && !l.careCount; };   // đã giao sale thì chờ sale báo cáo, không nhắc
 var GROUPS = ['BĐS', 'Vân'];
 function gOf(name) { var s = D && D.sites.filter(function (x) { return x.name === name; })[0]; return s ? String(s.group || '') : ''; }
 function inG(name) { return !G || gOf(name) === G; }
@@ -867,7 +867,8 @@ function openLead(phone, page, keep) {
   loadHist();
   $('#la').onclick = function () {
     var f = { type: $('#lt').value, result: $('#lq').value, content: $('#lc').value, reply: $('#lp').value, obstacle: $('#lo').value, docs: $('#ld').value, nextAction: $('#la2').value, next: $('#ln2').value || undefined };
-    run('crmAddLog', phone, f).then(function () {
+    run('crmAddLog', phone, f).then(function (r) {
+      if (r && r.status) { l.status = r.status; $('#st').value = r.status; }
       if (f.next) l.next = f.next; l.careCount = (l.careCount || 0) + 1; l.careAt = new Date().toISOString(); l.careResult = f.result || l.careResult;
       ['lc', 'lp', 'lo', 'ld', 'la2', 'ln2'].forEach(function (id) { $('#' + id).value = ''; }); $('#lq').value = ''; toast('Đã ghi lần chăm sóc'); badges(); if (page) fin(); else loadHist();
     }).catch(fail);
