@@ -161,7 +161,7 @@ function fmt(iso) { if (!iso) return ''; var d = new Date(iso); return d.toLocal
 function ago(iso) { var m = Math.round((Date.now() - new Date(iso).getTime()) / 60000); return m < 1 ? 'vừa xong' : m < 60 ? m + ' phút trước' : m < 1440 ? Math.round(m / 60) + ' giờ trước' : Math.round(m / 1440) + ' ngày trước'; }
 function vnd(n) { return Math.round(n || 0).toLocaleString('vi-VN') + 'đ'; }
 var isQuiet = function (l) { return l.srcType === 'Data nhập'; };   // khách nhập từ file/Sheet: không nhắc gọi
-var todo = function (l) { return !l.called && !l.messaged && l.status === 'Mới' && !isQuiet(l); };
+var todo = function (l) { return !l.called && !l.messaged && l.status === 'Mới' && !isQuiet(l) && !l.assignee; };   // đã giao sale thì chờ sale báo cáo, không nhắc
 var GROUPS = ['BĐS', 'Vân'];
 function gOf(name) { var s = D && D.sites.filter(function (x) { return x.name === name; })[0]; return s ? String(s.group || '') : ''; }
 function inG(name) { return !G || gOf(name) === G; }
@@ -1731,7 +1731,7 @@ function clicks() {
 function ymdNow(add) { var d = new Date(); d.setDate(d.getDate() + (add || 0)); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
 function dmy(s) { return s ? s.slice(8, 10) + '/' + s.slice(5, 7) + '/' + s.slice(0, 4) : ''; }
 function todayGroups() {
-  var t = ymdNow(0), L = D.leads.filter(function (l) { return isBds(l.site) && l.status !== 'Chốt' && l.status !== 'Mất' && (!isQuiet(l) || l.next); });
+  var t = ymdNow(0), L = D.leads.filter(function (l) { return isBds(l.site) && l.status !== 'Chốt' && l.status !== 'Mất' && !l.assignee && (!isQuiet(l) || l.next); });
   var g = { late: [], now: [], fresh: [], viewed: [], hot: [], stale: [] };
   L.forEach(function (l) {
     if (l.next && l.next < t) g.late.push(l);
@@ -1760,7 +1760,7 @@ function today() {
       (l.next ? '<button class="btn" data-done="' + esc(l.phone) + '">Xong lịch này</button><button class="btn" data-snooze="1" data-p="' + esc(l.phone) + '">Dời 1 ngày</button><button class="btn" data-snooze="3" data-p="' + esc(l.phone) + '">Dời 3 ngày</button>' :
         '<button class="btn" data-set="' + esc(l.phone) + '">Đặt lịch ngày mai</button>') + '</div></div>';
   };
-  $('#main').innerHTML = '<div class="card"><b>Việc hôm nay · ' + total + ' việc</b><p class="small mut">Danh sách tự lập từ lịch hẹn và tình trạng chăm sóc. Bấm "Xong lịch này" hoặc dời lịch thì mới đổi, hệ thống không tự đánh dấu hoàn thành.</p></div>' +
+  $('#main').innerHTML = '<div class="card"><b>Việc hôm nay · ' + total + ' việc</b><p class="small mut">Danh sách tự lập từ lịch hẹn và tình trạng chăm sóc. Đang chờ sale báo cáo: ' + D.leads.filter(function (x) { return x.assignee && isBds(x.site) && x.status !== 'Chốt' && x.status !== 'Mất'; }).length + ' khách, không nhắc ở đây. Bấm "Xong lịch này" hoặc dời lịch thì mới đổi, hệ thống không tự đánh dấu hoàn thành.</p></div>' +
     sec.map(function (s) { var a = g[s[0]]; return a.length ? '<h3 style="margin:14px 0 6px">' + s[1] + ' <span class="tag ' + (s[3] ? 'red' : 'amb') + '">' + a.length + '</span>' + (s[0] === 'fresh' ? ' <button class="btn sm" id="silfresh">Bỏ nhắc nhóm này</button>' : '') + '</h3><div class="small mut" style="margin-bottom:6px">' + s[2] + '</div>' + a.map(function (l) { return item(l, s[0]); }).join('') : ''; }).join('') +
     (total ? '' : '<div class="card mut">Hôm nay chưa có việc nào. Mở một khách, đặt "Hẹn tiếp theo" để việc hiện ở đây.</div>');
   var setNext = function (phone, d) {
