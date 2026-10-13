@@ -70,7 +70,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold2);border-co
 .pgbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:8px 0;background:var(--bg)}.pgname{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .srow{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-top:1px solid var(--line);font-size:14px}.srow>span:last-child,.srow>b{text-align:right;overflow-wrap:anywhere;min-width:0}.srow.nxt{background:var(--goldsoft);margin:8px -8px 0;padding:9px 8px;border-radius:8px;border-top:0}
 .bigph{font-size:22px;font-weight:700;margin:8px 0;color:var(--navy9)}.btn.big{flex:1;min-height:46px;font-size:16px}details.sec>summary{cursor:pointer;font-weight:700;color:var(--navy9);padding:4px 0}
-@media(max-width:700px){header #aitog,header #reload{padding:4px 10px;font-size:14px;min-height:34px}header #who{display:none}body{font-size:16px}main{padding-left:12px;padding-right:12px}.btn{min-height:42px}input,select,textarea{font-size:16px;max-width:100%}.fgrid{grid-template-columns:1fr}.row{gap:8px}.tl{padding-left:16px}.card{overflow-wrap:anywhere}}
+@media(max-width:700px){.grid{grid-template-columns:repeat(3,1fr);gap:8px}.grid .kpi{padding:9px 10px}.grid .kpi b{font-size:20px}.grid .kpi b.long{font-size:15px}.grid .kpi span{font-size:11.5px;line-height:1.3}nav{flex-wrap:nowrap;overflow-x:auto;white-space:nowrap;scrollbar-width:none;-webkit-overflow-scrolling:touch}nav::-webkit-scrollbar{display:none}nav button{flex:none;padding:9px 12px 12px}.gbar{padding:8px 12px 0;flex-wrap:nowrap;overflow-x:auto}.gbar button{padding:4px 12px;font-size:13px;flex:none}.gbar .n{display:none}.rbar select{flex:1}header #aitog,header #reload{padding:4px 10px;font-size:14px;min-height:34px}header #who{display:none}body{font-size:16px}main{padding-left:12px;padding-right:12px}.btn{min-height:42px}input,select,textarea{font-size:16px;max-width:100%}.fgrid{grid-template-columns:1fr}.row{gap:8px}.tl{padding-left:16px}.card{overflow-wrap:anywhere}}
 .kpis{gap:6px}.kchip{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:3px 11px;font-size:13px}.kchip.red{background:var(--redsoft);color:var(--red);border-color:#F3C4C2}
 .need{color:var(--ink)}
 .hb{display:grid;grid-template-columns:minmax(90px,200px) 1fr auto;gap:8px;align-items:center;margin-top:6px;font-size:13px}.hl{overflow-wrap:anywhere}.hbar{background:#EDF0F6;border-radius:6px;height:14px;overflow:hidden}.hbar i{display:block;height:100%;border-radius:6px}.hv{font-weight:600;white-space:nowrap}
@@ -200,12 +200,19 @@ var R = (function () { try { var v = JSON.parse(localStorage.getItem('crm_range'
 var REP = null, REPKEY = '';
 function saveRange() { try { localStorage.setItem('crm_range', JSON.stringify(R)); } catch (e) {} }
 function rangeBar() {
+  if (narrow()) {
+    return '<div class="card rbar"><div class="row" style="margin:0"><select id="rps">' + RANGES.map(function (x) { return '<option value="' + x[0] + '"' + (R.p === x[0] ? ' selected' : '') + '>' + x[1] + '</option>'; }).join('') + '</select></div>' +
+      '<div class="small mut" style="margin-top:6px">' + fdmy(R.from) + ' → ' + fdmy(R.to) + '</div>' +
+      (R.p === 'custom' ? '<div class="row" style="margin-top:6px"><input type="date" id="rf" value="' + R.from + '"><input type="date" id="rt" value="' + R.to + '"><button class="btn p sm" id="rok">Xem</button></div>' : '') + '</div>';
+  }
   var n = Math.round((new Date(R.to) - new Date(R.from)) / 864e5) + 1, pf = ymdShift(R.from, -n), pt = ymdShift(R.from, -1);
   return '<div class="card rbar"><div class="row chips">' + RANGES.map(function (x) { return '<button class="chip ' + (R.p === x[0] ? 'on' : '') + '" data-rp="' + x[0] + '">' + x[1] + '</button>'; }).join('') + '</div>' +
     '<div class="row"><label class="small mut">Từ ngày <input type="date" id="rf" value="' + R.from + '"></label><label class="small mut">Đến ngày <input type="date" id="rt" value="' + R.to + '"></label><button class="btn p sm" id="rok">Xem</button></div>' +
     '<div class="small mut">Đang xem <b>' + fdmy(R.from) + ' → ' + fdmy(R.to) + '</b> (' + n + ' ngày). Kỳ trước để so sánh: ' + fdmy(pf) + ' → ' + fdmy(pt) + '.</div></div>';
 }
 function bindRange() {
+  var sel = $('#rps');
+  if (sel) sel.onchange = function () { var p = sel.value, r = rangeFor(p); if (r) R = { p: p, from: r[0], to: r[1] }; else R.p = 'custom'; saveRange(); render(); };
   document.querySelectorAll('[data-rp]').forEach(function (b) { b.onclick = function () {
     var p = b.dataset.rp, r = rangeFor(p); if (r) { R = { p: p, from: r[0], to: r[1] }; } else R.p = 'custom';
     saveRange(); render(); }; });
