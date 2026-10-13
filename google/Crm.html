@@ -79,7 +79,7 @@ tr.sel td{background:#FFF3E3}@media(min-width:701px){.cgrid{display:grid;grid-te
 .lvbar .chip{padding:5px 10px;font-weight:600;font-size:13.5px}.lvbar{gap:6px}.lvbar .btn.sm{padding:5px 9px;font-size:12.5px;white-space:nowrap}.lvbar .chip{white-space:nowrap}.lvbar{align-items:center}.prj{padding:8px 12px;margin-bottom:8px}.prj>summary{cursor:pointer;list-style:none;padding:2px 0}.prj>summary::-webkit-details-marker{display:none}.prj table{margin-top:6px}.lvt{table-layout:fixed;width:100%}.lvt th:nth-child(1){width:54px}.lvt th:nth-child(2){width:12%}.lvt th:nth-child(3){width:215px}.lvt th:nth-child(4){width:8%}.lvt th:nth-child(5){width:6%}.lvt th:nth-child(6){width:14%}.lvt th:nth-child(7){width:9%}.lvt th:nth-child(8){width:11%}.lvt th:nth-child(9){width:7%}.lvt th:nth-child(10){width:8%}.lvt th:nth-child(11){width:64px}@media(max-width:1200px){.lvt{table-layout:auto;min-width:1000px}.prj{overflow-x:auto}}.lvt td{padding:5px 9px}.lvt tr.rowtodo td{background:#FDECEC}.snrow.done{opacity:.7}.snrow{margin-bottom:8px}
 @media(min-width:1001px) and (max-width:1360px){nav button{padding:9px 8px 12px;font-size:13.5px}}
 @media(min-width:701px){.grid.kc{grid-template-columns:repeat(7,1fr);gap:8px}.grid.kc .kpi{padding:9px 11px}.grid.kc .kpi b{font-size:21px}.grid.kc .kpi b.long{font-size:17px}.grid.kc .kpi span{font-size:11.5px;line-height:1.3}
-.fqw{flex:0 1 340px;min-width:200px}
+.salesel{padding:4px 8px;font-size:13px;max-width:150px}.fqw{flex:0 1 340px;min-width:200px}
 .fl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px}.fl select,.fl input,.fl .btn{flex:1 1 150px;width:auto;min-width:0;padding:6px 9px;font-size:13.5px}.fl label{flex:1 1 220px;display:flex;align-items:center;gap:6px;white-space:nowrap}.fl label input{flex:1}.fl .btn{min-height:0;flex:0 0 auto}}
 @media(max-width:700px){.pgbar{top:var(--hh,0)}.grid{grid-template-columns:repeat(3,1fr);gap:8px}.grid .kpi{padding:9px 10px}.grid .kpi b{font-size:20px}.grid .kpi b.long{font-size:15px}.grid .kpi span{font-size:11.5px;line-height:1.3}.gbar{padding:8px 12px 0;flex-wrap:nowrap;overflow-x:auto}.gbar button{padding:4px 12px;font-size:13px;flex:none}.gbar .n{display:none}.rbar select{flex:1}header #aitog,header #reload{padding:4px 10px;font-size:14px;min-height:34px}header #who{display:none}body{font-size:16px}main{padding-left:12px;padding-right:12px}.btn{min-height:42px}input,select,textarea{font-size:16px;max-width:100%}.fgrid{grid-template-columns:1fr}.row{gap:8px}.tl{padding-left:16px}.card{overflow-wrap:anywhere}}
 .kpis{gap:6px}.kchip{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:3px 11px;font-size:13px}.kchip.red{background:var(--redsoft);color:var(--red);border-color:#F3C4C2}
@@ -306,6 +306,7 @@ function home() {
   });
 }
 
+function saleSel(l) { return '<select class="salesel" data-as="' + esc(l.phone) + '"><option value="">Chưa giao</option>' + saleNames([l.assignee].filter(Boolean)).map(function (s) { return '<option' + (s === l.assignee ? ' selected' : '') + '>' + esc(s) + '</option>'; }).join('') + '</select>'; }
 function saleNames(extra) { var a = (D.sales || []).slice(); (extra || []).forEach(function (s) { if (a.indexOf(s) < 0) a.push(s); }); return a; }
 function nextStep(l) {
   if (todo(l)) return 'Việc cần làm: gọi hoặc nhắn Zalo cho khách ngay.';
@@ -444,10 +445,11 @@ var COLS = [
   { k: 'viewProject', t: 'Dự án đã xem', v: function (l) { return l.viewCount ? l.viewProject + (l.viewCount > 1 ? ' (+' + (l.viewCount - 1) + ')' : '') : 'Chưa đi xem'; } },
   { k: 'viewAt', t: 'Ngày xem gần nhất', v: function (l) { return l.viewAt ? fdmy(l.viewAt) : '-'; }, s: function (l) { return l.viewAt || ''; } },
   { k: 'next', t: 'Lịch tiếp theo', v: function (l) { return l.next ? fdmy(l.next) : 'Chưa có lịch'; }, s: function (l) { return l.next || '9999'; }, due: 1 },
+  { k: 'sale', t: 'Giao sale', v: function (l) { return l.assignee || 'Chưa giao'; }, s: function (l) { return (l.assignee || '').toLowerCase(); } },
   { k: 'act', t: 'Thao tác', v: null }
 ];
 var COL_OLD = ['code', 'name', 'province', 'phone', 'zalo', 'src', 'site', 'purpose', 'status', 'careCount', 'careAt', 'careResult', 'viewProject', 'next', 'act'];
-var COL_DEFAULT = ['code', 'name', 'province', 'phone', 'zalo', 'src', 'purpose', 'status', 'careCount', 'careAt', 'careResult', 'viewProject', 'next', 'act'];
+var COL_DEFAULT = ['code', 'name', 'province', 'phone', 'zalo', 'src', 'purpose', 'status', 'careCount', 'careAt', 'careResult', 'viewProject', 'next', 'sale', 'act'];
 function visCols() { try { var v = JSON.parse(localStorage.getItem('crm_cols') || 'null'); if (v && v.length && JSON.stringify(v) !== JSON.stringify(COL_OLD)) return v; } catch (e) {} return COL_DEFAULT; }   // cột Dự án quan tâm đã gộp vào Nguồn khách (theo tên web dự án)
 var PAGE = 25;
 function leadsFiltered() {
@@ -595,6 +597,7 @@ function leads() {
       (slice.map(function (l) { return '<tr class="' + (todo(l) ? 'rowtodo' : '') + '">' + cols.map(function (x) {
         if (x.k === 'act') return '<td class="nw"><button class="btn z sm" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button> <button class="btn g sm" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button> <button class="btn sm" data-open="' + esc(l.phone) + '">Hồ sơ</button></td>';
         var v = esc(x.v(l));
+        if (x.k === 'sale') return '<td class="nw">' + saleSel(l) + '</td>';
         if (x.k === 'name') { var h = heat(l); return '<td class="nw"><b>' + v + '</b>' + (h ? ' <span class="tag ' + h[1] + '">' + h[0] + '</span>' : '') + '</td>'; }
         if (x.k === 'phone') return '<td class="nw">' + v + ' ' + zl(l.phone, l) + '</td>';
         if (x.tag) return '<td><span class="tag ' + (todo(l) ? 'red' : l.status === 'Chốt' ? 'grn' : 'amb') + '">' + (todo(l) ? 'Chưa liên hệ' : v) + '</span></td>';
@@ -722,7 +725,7 @@ function mobRow(l) {
     '<div class="mtop"><b class="mname">' + esc(l.name || '(chưa có tên)') + '</b>' + (h ? ' <span class="tag ' + h[1] + '">' + h[0] + '</span>' : '') + '<span class="sp"></span>' + st + '</div>' +
     '<div class="mph"><span class="phn">' + esc(l.phone) + '</span><button class="btn g xs" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button><button class="btn z xs" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button>' + (nx ? '<span class="sp"></span>' + nx : '') + '</div>' +
     '<div class="mgrid">' + cell('Ngày phát sinh', fmt(l.at)) + cell('Địa chỉ', addr) + cell('Nguồn phát sinh', src) + cell('Dự án', l.project || 'Chưa có dự án', 1) +
-    cell('Tài chính', finOf(l)) + cell('Đã giao', l.assignee || 'Chưa giao') + '</div>' +
+    cell('Tài chính', finOf(l)) + '<div class="mc"><span class="mut">Giao sale</span>' + saleSel(l) + '</div></div>' +
     '<div class="small need"><span class="mut">Nhu cầu:</span> ' + (needOf(l) ? esc([l.purpose, l.product].filter(Boolean).join(' · ') || needOf(l)) : '<span class="mut">Chưa có nhu cầu</span>') + '</div>' +
     '<div class="small mut">' + esc(lastTouch(l)) + '</div></div>';
 }
