@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-26', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-29', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -53,8 +53,8 @@ function iso_(d) { return d && typeof d.getTime === 'function' ? new Date(d.getT
 function phoneStr_(v) { var p = String(v == null ? '' : v); return p.length === 9 ? '0' + p : p; }
 
 // ---- Cột mở rộng của tab Khách hàng (W..AB): hẹn tiếp theo, ngân sách, mục đích, loại căn, tiềm năng, vay ----
-var LEAD_COLS = 44;
-var LEAD_HEAD2 = ['SĐT phụ', 'Zalo', 'Tỉnh/thành phố', 'Ngày sinh', 'Nghề nghiệp', 'Ngân sách tối thiểu', 'Ngân sách tối đa', 'Vốn tự có', 'Khoản vay dự kiến', 'Thời điểm dự kiến mua', 'Lý do chưa quyết định', 'Loại nguồn', 'Trang phát sinh lead', 'Dự án quan tâm', 'Quận/huyện, phường/xã', 'Địa chỉ chi tiết'];
+var LEAD_COLS = 45;
+var LEAD_HEAD2 = ['SĐT phụ', 'Zalo', 'Tỉnh/thành phố', 'Ngày sinh', 'Nghề nghiệp', 'Ngân sách tối thiểu', 'Ngân sách tối đa', 'Vốn tự có', 'Khoản vay dự kiến', 'Thời điểm dự kiến mua', 'Lý do chưa quyết định', 'Loại nguồn', 'Trang phát sinh lead', 'Dự án quan tâm', 'Quận/huyện, phường/xã', 'Địa chỉ chi tiết', 'Link tài liệu (Drive)'];
 function ensureLeadCols_(sh) {
   try {
     var mc = sh.getMaxColumns();
@@ -63,6 +63,7 @@ function ensureLeadCols_(sh) {
       sh.getRange(1, 23, 1, 6).setValues([['Hẹn tiếp theo', 'Ngân sách', 'Mục đích mua', 'Loại căn quan tâm', 'Tiềm năng (tự đánh giá)', 'Vay ngân hàng']]);
       sh.getRange(2, 23, Math.max(sh.getMaxRows() - 1, 1), 1).setNumberFormat('@');
     }
+    if (sh.getRange(1, 29).getValue() && !sh.getRange(1, 45).getValue()) sh.getRange(1, 45).setValue('Link tài liệu (Drive)');
     if (sh.getRange(1, 29).getValue() && !sh.getRange(1, 42).getValue()) sh.getRange(1, 42, 1, 3).setValues([['Dự án quan tâm', 'Quận/huyện, phường/xã', 'Địa chỉ chi tiết']]);
     if (!sh.getRange(1, 29).getValue()) {
       sh.getRange(1, 29, 1, LEAD_HEAD2.length).setValues([LEAD_HEAD2]);
@@ -137,7 +138,7 @@ function crmLoad(k) {
       contactedAt: iso_(r[16]), status: String(r[18] || 'Mới'), assignee: String(r[19] || ''), value: Number(r[20]) || 0, note: String(r[21] || ''),
       next: ymd_(r[22]), budget: String(r[23] || ''), purpose: String(r[24] || ''), product: String(r[25] || ''), heat: String(r[26] || ''), loan: String(r[27] || ''),
       phone2: String(r[28] || ''), zalo: String(r[29] || ''), province: String(r[30] || ''), dob: ymd_(r[31]), job: String(r[32] || ''), bmin: String(r[33] || ''), bmax: String(r[34] || ''),
-      equity: String(r[35] || ''), loanAmt: String(r[36] || ''), buyTime: String(r[37] || ''), undecided: String(r[38] || ''), srcType: String(r[39] || ''), leadUrl: String(r[40] || ''), project: String(r[41] || ''), district: String(r[42] || ''), address: String(r[43] || '') };
+      equity: String(r[35] || ''), loanAmt: String(r[36] || ''), buyTime: String(r[37] || ''), undecided: String(r[38] || ''), srcType: String(r[39] || ''), leadUrl: String(r[40] || ''), project: String(r[41] || ''), district: String(r[42] || ''), address: String(r[43] || ''), docUrl: String(r[44] || '') };
   }).reverse();
   var sm = summaries_();
   out.leads.forEach(function (l) {
@@ -346,10 +347,12 @@ function crmScanOffer(k, text, link, img, mime) {
   requireUi_(k);
   var o = scanAi_('Bạn là quân sư bán hàng bất động sản tại Đà Nẵng. Đọc nguồn thông tin và chỉ trả về MỘT đối tượng JSON, không thêm chữ nào khác, theo mẫu: ' +
     '{"name":"tên dự án","highlights":"điểm nổi bật và chính sách, 1 đến 3 dòng ngắn, chỉ dùng thông tin có trong nguồn","priceFrom":số tỷ hoặc null,"priceTo":số tỷ hoặc null,"area":"khu vực hoặc tỉnh thành hoặc rỗng",' +
-    '"target":"mô tả ngắn nhóm khách phù hợp nhất (ngân sách, mục đích, khu vực)","messages":[{"style":"Thân mật","text":"..."},{"style":"Nhấn ưu đãi","text":"..."},{"style":"Khan hiếm","text":"..."}],"note":"điều cần kiểm tra lại hoặc thiếu"}. ' +
-    'Trong text dùng {ten} cho cách gọi khách và {sale} cho tên tư vấn viên. Tiếng Việt lịch sự, ngắn 3 đến 6 dòng, có lời kêu gọi hành động. Tuyệt đối không bịa giá, ưu đãi, thời hạn hay số căn không có trong nguồn; thiếu thì để rỗng và ghi vào note. Bản "Khan hiếm" chỉ nhấn khan hiếm nếu nguồn có nói.',
+    '"target":"mô tả ngắn nhóm khách phù hợp nhất (ngân sách, mục đích, khu vực)","event":{"isEvent":true nếu nguồn nói về một sự kiện, lễ mở bán, tham quan, hội thảo, ngược lại false,"name":"tên sự kiện","when":"thời gian ghi trong nguồn","where":"địa điểm ghi trong nguồn"},"advice":["3 đến 5 ý hướng tư vấn khi gọi hoặc nhắn khách về nội dung này, gồm câu hỏi mở và cách xử lý từ chối thường gặp"],"plan":["3 đến 6 bước kế hoạch mời theo thời gian, ví dụ gửi tin mời, nhắc trước sự kiện, gọi xác nhận, chăm sóc sau sự kiện"],"messages":[{"style":"Thân mật","text":"..."},{"style":"Nhấn ưu đãi","text":"..."},{"style":"Khan hiếm","text":"..."}],"note":"điều cần kiểm tra lại hoặc thiếu"}. ' +
+    'Nếu là sự kiện thì các bản tin là lời mời tham dự, nêu tên sự kiện, thời gian, địa điểm đúng như nguồn. Trong text dùng {ten} cho cách gọi khách và {sale} cho tên tư vấn viên. Tiếng Việt lịch sự, ngắn 3 đến 6 dòng, có lời kêu gọi hành động. Tuyệt đối không bịa giá, ưu đãi, thời hạn hay số căn không có trong nguồn; thiếu thì để rỗng và ghi vào note. Bản "Khan hiếm" chỉ nhấn khan hiếm nếu nguồn có nói.',
     'Nguồn thông tin về một dự án, chính sách hoặc quỹ căn mới của bên bán.', text, link, img, mime);
   return {
+    event: { isEvent: !!(o.event && o.event.isEvent === true), name: str_(o.event && o.event.name, 120), when: str_(o.event && o.event.when, 120), where: str_(o.event && o.event.where, 160) },
+    advice: (Array.isArray(o.advice) ? o.advice : []).slice(0, 6).map(function (x) { return str_(x, 300); }).filter(Boolean), plan: (Array.isArray(o.plan) ? o.plan : []).slice(0, 8).map(function (x) { return str_(x, 300); }).filter(Boolean),
     name: str_(o.name, 120), highlights: str_(o.highlights, 600), priceFrom: scanNum_(o.priceFrom), priceTo: scanNum_(o.priceTo), area: str_(o.area, 80), target: str_(o.target, 300), note: str_(o.note, 400),
     messages: (Array.isArray(o.messages) ? o.messages : []).slice(0, 4).map(function (m) { return { style: str_(m && m.style, 40), text: str_(m && m.text, 1500) }; }).filter(function (m) { return m.text; })
   };
@@ -359,10 +362,11 @@ function crmScanChat(k, phone, text, img, mime) {
   requireUi_(k);
   var ctx = ''; if (phone) { try { ctx = '\nThông tin khách trong CRM: ' + leadContext_(phone); } catch (e) {} }
   var o = scanAi_('Bạn là quân sư bán hàng bất động sản. Đọc đoạn chat Zalo giữa sale và khách và chỉ trả về MỘT đối tượng JSON, không thêm chữ nào khác: ' +
-    '{"summary":"tóm tắt 2 đến 3 dòng","need":"nhu cầu, ngân sách, khu vực, loại căn khách đã nói","obstacle":"vướng mắc hoặc lo ngại","heat":"Nóng hoặc Ấm hoặc Nguội","reason":"vì sao","next":"bước tiếp theo tối ưu, cụ thể","message":"tin nhắn mẫu gửi khách được ngay"}. ' +
-    'Chỉ dựa trên nội dung chat và thông tin CRM, không bịa giá hay chính sách. Tiếng Việt, ngắn gọn.', 'Đây là đoạn chat Zalo cần phân tích.' + ctx, text, '', img, mime);
+    '{"summary":"tóm tắt 2 đến 3 dòng","need":"nhu cầu, ngân sách, khu vực, loại căn khách đã nói","obstacle":"vướng mắc hoặc lo ngại","heat":"Nóng hoặc Ấm hoặc Nguội","reason":"vì sao","next":"bước tiếp theo tối ưu, cụ thể","followUp":"YYYY-MM-DD nếu trong chat có hẹn ngày liên hệ lại hoặc xem nhà, không thì rỗng","reply":"khách đã phản hồi gì gần nhất","message":"tin nhắn mẫu gửi khách được ngay"}. ' +
+    'Chỉ dựa trên nội dung chat và thông tin CRM, không bịa giá hay chính sách. Tiếng Việt, ngắn gọn.', 'Hôm nay là ' + ymd_(new Date()) + '. Đây là đoạn chat Zalo cần phân tích.' + ctx, text, '', img, mime);
   var s = function (v, n) { return str_(v, n); };
-  return { summary: s(o.summary, 600), need: s(o.need, 400), obstacle: s(o.obstacle, 400), heat: s(o.heat, 20), reason: s(o.reason, 300), next: s(o.next, 400), message: s(o.message, 1000) };
+  var fu = ymd_(o.followUp), today = ymd_(new Date());
+  return { summary: s(o.summary, 600), need: s(o.need, 400), obstacle: s(o.obstacle, 400), heat: s(o.heat, 20), reason: s(o.reason, 300), next: s(o.next, 400), reply: s(o.reply, 400), followUp: fu && fu >= today ? fu : '', message: s(o.message, 1000) };
 }
 // Dán nhiều cuộc chat Zalo cùng lúc (hoặc ảnh chụp danh sách chat): AI tách từng người, CRM chỉ nhận người khớp khách trong hồ sơ.
 function crmScanZalo(k, text, img, mime) {
@@ -538,6 +542,7 @@ function applyFields_(sh, r, f) {
   if (f.loan !== undefined) set(28, ['', 'Có', 'Không', 'Chưa rõ'].indexOf(f.loan) >= 0 ? f.loan : '');
   var txt = { phone2: [29, 20], zalo: [30, 200], province: [31, 60], dob: [32, 10], job: [33, 80], equity: [36, 60], loanAmt: [37, 60], buyTime: [38, 80], undecided: [39, 500], srcType: [40, 40], project: [42, 120], district: [43, 100], address: [44, 200] };
   for (var k in txt) if (f[k] !== undefined) set(txt[k][0], k === 'dob' ? (ymd_(f[k]) || '') : str_(f[k], txt[k][1]));
+  if (f.docUrl !== undefined) set(45, /^https?:\/\//i.test(String(f.docUrl).trim()) ? String(f.docUrl).trim().slice(0, 500) : '');
 }
 function crmUpdateLead(k, phone, f) {
   requireUi_(k);
@@ -628,11 +633,12 @@ function createLead_(f) {
     return { dup: true, lead: info };
   }
   var site = { key: '', name: str_(f.site, 80) || 'Nhập thủ công' };
-  var b = { phone: f.phone, name: f.name, email: f.email, message: f.note, utm_source: str_(f.source, 100) || 'nhập thủ công', utm_campaign: str_(f.campaign, 150), vid: 'manual-' + Utilities.getUuid().slice(0, 8), url: str_(f.url, 300) };
+  var b = { phone: f.phone, name: f.name, email: f.email, message: f.note, utm_source: str_(f.source, 100) || 'nhập thủ công', utm_campaign: str_(f.campaign, 150), vid: 'manual-' + Utilities.getUuid().slice(0, 8), url: str_(f.url, 300), at: f.at ? new Date(f.at) : null, noEvent: f.noEvent === true };
+  if (b.at && isNaN(b.at.getTime())) b.at = null;
   handleLead_(b, site);
   withLock_(function () {
     var x = findLead_(phone), rest = {};
-    for (var key in f) if (['phone', 'name', 'email', 'note', 'site', 'source', 'campaign', 'url', 'mergeBlank'].indexOf(key) < 0) rest[key] = f[key];
+    for (var key in f) if (['phone', 'name', 'email', 'note', 'site', 'source', 'campaign', 'url', 'mergeBlank', 'at', 'noEvent'].indexOf(key) < 0) rest[key] = f[key];
     if (f.status !== undefined && STATUSES.indexOf(f.status) < 0) delete rest.status;
     applyFields_(x.sh, x.row, rest);
   });
@@ -654,6 +660,102 @@ function crmImport(k, rows) {
       var res = createLead_({ name: r.name, phone: r.phone, province: r.province, site: r.site, bmax: r.budget, source: r.source || 'nhập Excel', note: r.note });
       if (res.dup) rep.dups.push({ line: line, phone: res.lead.phone, name: res.lead.name }); else rep.added++;
     } catch (e) { rep.errors.push({ line: line, reason: String(e.message || e), phone: String(r.phone || '') }); }
+  });
+  return rep;
+}
+
+// ---- Nhập khách từ một Google Sheet khác theo link (mỗi tab là một dự án, dòng là khách để lại thông tin) ----
+function sheetId_(url) {
+  var m = /^https:\/\/docs\.google\.com\/spreadsheets\/d\/([A-Za-z0-9_-]{20,})/.exec(String(url || '').trim());
+  if (!m) throw new Error('Link phải là Google Sheet, dạng https://docs.google.com/spreadsheets/d/...');
+  return m[1];
+}
+function toPhone_(v) {
+  var d = String(v == null ? '' : v).replace(/[^\d+]/g, '');
+  if (/^\d{9}$/.test(d) && /^[35789]/.test(d)) d = '0' + d;      // ô bị mất số 0 đầu
+  return normPhone_(d);
+}
+function toDate_(v) {
+  if (v instanceof Date) return isNaN(v.getTime()) ? null : v;
+  var s = String(v || '').trim(), m = /^(\d{4})-(\d{1,2})-(\d{1,2})(?:[ T](\d{1,2}):(\d{2})(?::(\d{2}))?)?/.exec(s);
+  if (m) return new Date(+m[1], +m[2] - 1, +m[3], +(m[4] || 0), +(m[5] || 0), +(m[6] || 0));
+  m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s+(\d{1,2}):(\d{2}))?/.exec(s);
+  return m ? new Date(+m[3], +m[2] - 1, +m[1], +(m[4] || 0), +(m[5] || 0)) : null;
+}
+function urlParams_(u) {
+  var o = {}, q = String(u || '').split('?')[1] || '';
+  q.split('#')[0].split('&').forEach(function (p) {
+    var i = p.indexOf('='); if (i < 1) return;
+    try { o[decodeURIComponent(p.slice(0, i))] = decodeURIComponent(p.slice(i + 1).replace(/\+/g, ' ')); } catch (e) {}
+  });
+  return o;
+}
+// Hai kiểu tab: có dòng tiêu đề (có cột Số điện thoại) thì ghép theo tên cột; không có thì là dòng form thô: ngày | tên | (email) | điện thoại | loại căn | link trang ...
+function parseSheetRows_(values, siteName) {
+  var out = []; if (!values || !values.length) return out;
+  var head = (values[0] || []).map(function (h) { return String(h || '').trim().toLowerCase(); });
+  var hasHead = head.some(function (h) { return /điện thoại|sđt|phone/.test(h); });
+  var idx = function (re) { for (var i = 0; i < head.length; i++) if (re.test(head[i])) return i; return -1; };
+  var m = hasHead ? { at: idx(/ngày|thời gian/), name: idx(/^(họ )?tên|tên khách/), phone: idx(/điện thoại|sđt|phone/), email: idx(/email/), site: idx(/dự án/), source: idx(/nguồn/), camp: idx(/chiến dịch/), note: idx(/ghi chú/), need: idx(/nhu cầu/), url: idx(/link|url/), bud: idx(/ngân sách/) } : null;
+  var g = function (r, i) { return i >= 0 && r[i] != null ? String(r[i]).trim() : ''; };
+  for (var i = hasHead ? 1 : 0; i < values.length; i++) {
+    var r = values[i]; if (!r || !r.join('')) continue;
+    var row;
+    if (hasHead) {
+      row = { at: toDate_(r[m.at]), name: g(r, m.name), phone: toPhone_(r[m.phone]), email: g(r, m.email), site: g(r, m.site) || siteName, source: g(r, m.source) || 'Google Sheet', campaign: g(r, m.camp), note: g(r, m.note), product: g(r, m.need), url: g(r, m.url), budget: g(r, m.bud) };
+    } else {
+      var phone = '', email = '', need = '', url = '';
+      for (var c = 2; c < Math.min(r.length, 8); c++) {
+        var v = String(r[c] == null ? '' : r[c]).trim(); if (!v) continue;
+        if (!email && v.indexOf('@') > 0) email = v;
+        else if (!phone && /^[\d\s.+\-]{9,14}$/.test(v) && toPhone_(v)) phone = toPhone_(v);
+        else if (!url && /^https?:\/\//i.test(v)) url = v;
+        else if (!need && /căn|phòng ngủ|studio|pn\b/i.test(v)) need = v;
+      }
+      var p = urlParams_(url);
+      row = { at: toDate_(r[0]), name: String(r[1] || '').trim(), phone: phone, email: email, site: siteName, product: need, url: url, budget: '', note: '',
+        source: p.utm_source || (p.gclid || p.gad_source || p.gbraid || p.wbraid ? 'google' : p.fbclid ? 'facebook' : 'website'), campaign: p.utm_campaign || (p.gad_campaignid ? 'gads-' + p.gad_campaignid : '') };
+    }
+    if (row.phone) out.push(row);
+  }
+  return out;
+}
+var SHEET_SKIP = /^(TONG_HOP|UPLOAD_.*|CRM_LOG|SAN_PHAM)$/i;
+function openSheet_(url) {
+  var id = sheetId_(url);
+  try { return SpreadsheetApp.openById(id); } catch (e) { throw new Error('Không mở được Sheet này. Hãy chắc chắn tài khoản chạy CRM có quyền xem file.'); }
+}
+function siteNameFor_(tab) {
+  var ws = ss_().getSheetByName(S_SITES), n = ws ? ws.getLastRow() : 1, want = String(tab).trim().toLowerCase();
+  if (n > 1) { var rows = ws.getRange(2, 1, n - 1, 1).getValues(); for (var i = 0; i < rows.length; i++) if (String(rows[i][0]).trim().toLowerCase() === want) return String(rows[i][0]).trim(); }
+  return String(tab).trim();
+}
+function sheetTabRows_(sh) {
+  var n = Math.min(sh.getLastRow(), 5000), c = Math.min(sh.getLastColumn(), 26);
+  if (n < 1 || c < 1) return [];
+  return parseSheetRows_(sh.getRange(1, 1, n, c).getValues(), siteNameFor_(sh.getName()));
+}
+function crmSheetTabs(k, url) {
+  requireUi_(k);
+  var ss = openSheet_(url), tabs = [];
+  ss.getSheets().forEach(function (sh) {
+    var nm = sh.getName(); if (SHEET_SKIP.test(nm)) return;
+    var rows = sheetTabRows_(sh), days = rows.map(function (r) { return r.at ? ymd_(r.at) : ''; }).filter(Boolean).sort();
+    tabs.push({ name: nm, site: siteNameFor_(nm), count: rows.length, from: days[0] || '', to: days[days.length - 1] || '' });
+  });
+  return { title: ss.getName(), tabs: tabs };
+}
+function crmSheetImport(k, url, tab, offset, limit) {
+  requireUi_(k);
+  offset = Math.max(0, Number(offset) || 0); limit = Math.min(100, Math.max(1, Number(limit) || 100));
+  var sh = openSheet_(url).getSheetByName(String(tab || ''));
+  if (!sh) throw new Error('Không thấy tab ' + tab);
+  var rows = sheetTabRows_(sh), part = rows.slice(offset, offset + limit), rep = { total: rows.length, next: offset + limit >= rows.length ? null : offset + limit, added: 0, dups: [], errors: [] };
+  part.forEach(function (r, i) {
+    try {
+      var res = createLead_({ name: r.name, phone: r.phone, email: r.email, site: r.site, source: r.source, campaign: r.campaign, note: r.note, product: r.product, url: r.url, bmax: r.budget, at: r.at ? r.at.toISOString() : '', noEvent: true, srcType: 'Website' });
+      if (res.dup) rep.dups.push({ phone: res.lead.phone, name: res.lead.name }); else rep.added++;
+    } catch (e) { rep.errors.push({ line: offset + i + 1, reason: String(e.message || e) }); }
   });
   return rep;
 }
@@ -866,7 +968,7 @@ function handleLead_(b, site) {
       row = last + 1;
       var r = row;
       sh.getRange(r, 1, 1, 22).setValues([[
-        last, new Date(), str_(b.name, 120), phone, str_(b.email, 160), site.name,
+        last, (b.at instanceof Date ? b.at : new Date()), str_(b.name, 120), phone, str_(b.email, 160), site.name,
         str_(b.utm_source, 100), str_(b.utm_campaign, 150), str_(b.vid, 64), 1,
         "=COUNTIFS('" + S_EVENTS + "'!$B:$B,$I" + r + ",'" + S_EVENTS + "'!$D:$D,\"click\",'" + S_EVENTS + "'!$E:$E,\"zalo\")",
         "=COUNTIFS('" + S_EVENTS + "'!$B:$B,$I" + r + ",'" + S_EVENTS + "'!$D:$D,\"click\",'" + S_EVENTS + "'!$E:$E,\"phone\")",
@@ -890,7 +992,7 @@ function handleLead_(b, site) {
         note.setValue((note.getValue() ? note.getValue() + ' | ' : '') + str_(b.message, 500));
       }
     }
-    logEvent_(b, site, 'form', '');
+    if (!b.noEvent) logEvent_(b, site, 'form', '');
     return { ok: true, new: isNew };
   } finally {
     lock.releaseLock();

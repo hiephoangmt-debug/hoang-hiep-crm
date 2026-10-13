@@ -12,6 +12,7 @@ class Sheet {
   getName() { return this.name; }
   getLastRow() { return this.rows.length; }
   getMaxRows() { return 60; }
+  getLastColumn() { return Math.max(1, ...this.rows.map((r) => r.length)); }
   getMaxColumns() { return 60; }
   insertColumnsAfter() {}
   appendRow(r) { this.rows.push(r.slice()); }
@@ -43,7 +44,7 @@ sheets.Website.appendRow(['Landing A', 'a.com', 'testkey12345']);
 for (let i = 1; i < 40; i++) { (sheets['Khách hàng'].rows[i] ||= [])[14] = false; (sheets['Lượt bấm'].rows[i] ||= [])[8] = false; }
 const out = (o) => ({ setMimeType() { return { body: o }; } });
 const ctx = vm.createContext({
-  SpreadsheetApp: { getActiveSpreadsheet: () => ({ getSheetByName: (n) => sheets[n], insertSheet: (n) => (sheets[n] = new Sheet(n, [])), getOwner: () => ({ getEmail: () => 'owner@gmail.com' }) }), getUi: () => ({ alert(m) { globalThis.__alert = m; }, showModelessDialog(h, title) { globalThis.__dialog = { h, title }; } }) },
+  SpreadsheetApp: { openById: (id) => { if (id.startsWith('BAD')) throw new Error('no'); return globalThis.__ext; }, getActiveSpreadsheet: () => ({ getSheetByName: (n) => sheets[n], insertSheet: (n) => (sheets[n] = new Sheet(n, [])), getOwner: () => ({ getEmail: () => 'owner@gmail.com' }) }), getUi: () => ({ alert(m) { globalThis.__alert = m; }, showModelessDialog(h, title) { globalThis.__dialog = { h, title }; } }) },
   UrlFetchApp: { fetch: (u, o) => { globalThis.__fetch = { u, o }; return { getResponseCode: () => 200, getContentText: () => JSON.stringify({ content: [{ text: 'Trả lời thử' }] }) }; } },
   CacheService: { getScriptCache: () => ({ get: () => null, put() {} }) },
   LockService: { getScriptLock: () => ({ waitLock() {}, releaseLock() {} }) },
@@ -113,7 +114,7 @@ assert.equal(ctx.crmKey_(), K);
 assert.throws(() => ctx.crmLoad('sai-khoa'), /Không có quyền/); assert.throws(() => ctx.crmLog('', '0988111222', 'call'), /Không có quyền/);
 assert.equal(ctx.doGet({ parameter: { k: 'sai' } }).file, undefined); assert.ok(ctx.doGet({ parameter: { k: K } }).content.includes('CRM Hoàng Hiệp') && ctx.doGet({ parameter: { k: K } }).content.includes('</html>'));
 const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
-assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-26'); assert.equal(JSON.stringify(dbg).includes(K), false);
+assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-29'); assert.equal(JSON.stringify(dbg).includes(K), false);
 const L = ctx.crmLoad(K);
 assert.equal(L.leads.length, 2);
 const l0 = L.leads.find((x) => x.phone === '0988111222');
@@ -267,14 +268,14 @@ assert.throws(() => ctx.crmAsk(ctx.crmKey_(), '  '), /Chưa nhập câu hỏi/);
 {
   const K2 = ctx.crmKey_(), real = ctx.UrlFetchApp;
   let calls = [];
-  ctx.UrlFetchApp = { fetch: (u, o) => { calls.push(u); return u.includes('anthropic') ? { getResponseCode: () => 200, getContentText: () => JSON.stringify({ content: [{ text: 'Đây: {"name":"FourS Tower","highlights":"Chiết khấu 5%","priceFrom":"2.5","priceTo":null,"area":"Đà Nẵng","target":"Khách 2-4 tỷ","messages":[{"style":"Thân mật","text":"Chào {ten}"},{"style":"x","text":""}],"note":""} hết.' }] }) } : { getResponseCode: () => 200, getContentText: () => '<html><title>Dự án A</title><script>x=1</script><body>Giá từ 2,5 tỷ</body></html>' }; } };
+  ctx.UrlFetchApp = { fetch: (u, o) => { calls.push(u); return u.includes('anthropic') ? { getResponseCode: () => 200, getContentText: () => JSON.stringify({ content: [{ text: 'Đây: {"name":"FourS Tower","highlights":"Chiết khấu 5%","priceFrom":"2.5","priceTo":null,"area":"Đà Nẵng","target":"Khách 2-4 tỷ","event":{"isEvent":true,"name":"Mở bán F2","when":"20/10/2026","where":"Sàn FourS"},"advice":["Hỏi nhu cầu","Xử lý giá"],"plan":["Gửi tin mời","Nhắc trước 1 ngày"],"messages":[{"style":"Thân mật","text":"Chào {ten}"},{"style":"x","text":""}],"note":""} hết.' }] }) } : { getResponseCode: () => 200, getContentText: () => '<html><title>Dự án A</title><script>x=1</script><body>Giá từ 2,5 tỷ</body></html>' }; } };
   assert.throws(() => ctx.crmScanOffer('sai', 'a'), /Không có quyền/);
   assert.throws(() => ctx.crmScanOffer(K2, '', '', ''), /dán thông điệp/);
   assert.throws(() => ctx.crmScanOffer(K2, '', 'http://169.254.169.254/x'), /không hợp lệ/);
   assert.throws(() => ctx.crmScanOffer(K2, '', 'ftp://x.vn'), /http/);
   assert.throws(() => ctx.crmScanOffer(K2, '', '', 'AAAA', 'image/svg+xml'), /Ảnh/);
   const r = ctx.crmScanOffer(K2, 'Chính sách mới', 'https://foursx.vn/p', 'data:image/jpeg;base64,/9j/AAAA', 'image/jpeg');
-  assert.equal(r.name, 'FourS Tower'); assert.equal(r.priceFrom, 2.5); assert.equal(r.priceTo, ''); assert.equal(r.messages.length, 1);
+  assert.equal(r.name, 'FourS Tower'); assert.equal(r.event.isEvent, true); assert.equal(r.event.name, 'Mở bán F2'); assert.equal(r.advice.length, 2); assert.equal(r.plan.length, 2); assert.equal(r.priceFrom, 2.5); assert.equal(r.priceTo, ''); assert.equal(r.messages.length, 1);
   const pl = JSON.parse(globalThis.__fetch ? '{}' : '{}'); void pl;
   assert.ok(calls[0] === 'https://foursx.vn/p' && calls[1].includes('anthropic'));
   ctx.UrlFetchApp = { fetch: (u) => ({ getResponseCode: () => 200, getContentText: () => JSON.stringify({ content: [{ text: '{"project":"FourS","month":"2026-10","kind":"Cá nhân","advance":30000000,"channels":[{"name":"Google Ads","budget":20000000}],"tiers":[{"from":10,"to":null,"pct":100},{"from":0,"to":4,"pct":0}],"note":"ứng 30tr"}' }] }) }) };
@@ -295,10 +296,41 @@ assert.throws(() => ctx.crmAsk(ctx.crmKey_(), '  '), /Chưa nhập câu hỏi/);
   const sz = ctx.crmScanZalo(K2, 'Hoa: giá?');
   assert.equal(sz.conversations.length, 3); assert.equal(sz.conversations[2].kind, 'contact'); assert.equal(sz.conversations[2].label, 'Chị Hà - Khách'); assert.equal(sz.conversations[0].kind, 'chat'); assert.equal(sz.conversations[0].phone, '0912000111'); assert.equal(sz.conversations[1].phone, '');
   assert.throws(() => ctx.crmScanZalo('sai', 'a'), /Không có quyền/);
-  ctx.UrlFetchApp = { fetch: () => ({ getResponseCode: () => 200, getContentText: () => JSON.stringify({ content: [{ text: '{"summary":"Khách hỏi giá","need":"2PN 3 tỷ","obstacle":"Giá cao","heat":"Ấm","reason":"hỏi vay","next":"Gửi chính sách","message":"Chào anh"}' }] }) }) };
+  ctx.UrlFetchApp = { fetch: () => ({ getResponseCode: () => 200, getContentText: () => JSON.stringify({ content: [{ text: '{"summary":"Khách hỏi giá","need":"2PN 3 tỷ","obstacle":"Giá cao","heat":"Ấm","reason":"hỏi vay","next":"Gửi chính sách","followUp":"2099-01-05","reply":"Để xem lại","message":"Chào anh"}' }] }) }) };
   const sc = ctx.crmScanChat(K2, '', 'Khách: giá bao nhiêu');
-  assert.equal(sc.heat, 'Ấm'); assert.equal(sc.message, 'Chào anh');
+  assert.equal(sc.heat, 'Ấm'); assert.equal(sc.message, 'Chào anh'); assert.equal(sc.followUp, '2099-01-05'); assert.equal(sc.reply, 'Để xem lại');
   assert.throws(() => ctx.crmScanChat('sai', '', 'a'), /Không có quyền/);
   ctx.UrlFetchApp = real;
+}
+// nhập từ Google Sheet khác
+{
+  const K3 = ctx.crmKey_();
+  const tab = new Sheet('SPANA TOWER', []);
+  tab.rows = [
+    ['2025-08-30 18:04:26', 'My nguyễn', '935777013', 'Căn studio,Căn 1 phòng ngủ', 'https://www.sun-spanatower.com/?gad_source=1&gad_campaignid=22945423918&gclid=Cj0K', '', '', '', '', '', '14.243.49.97', 'FORM15'],
+    ['2025-08-31 10:27:44', 'Dũng', 'dung@gmail.com', '905696145', 'https://www.sun-spanatower.com/?utm_source=facebook&utm_campaign=spana-fb', '', '', '', '', '', '1.1.1.1', 'FORM16'],
+    ['2025-09-01 08:00:00', 'Không số', 'x@y.z', '', '', ''],
+    ['2025-09-02 09:00:00', 'Trùng My', '0935777013', '', '']
+  ];
+  const skip = new Sheet('TONG_HOP', []); skip.rows = [['a', 'b', 'c']];
+  globalThis.__ext = { getName: () => 'DATA CHẠY GOOGLE', getSheets: () => [tab, skip], getSheetByName: (n) => [tab, skip].find((s) => s.name === n) || null };
+  const URL = 'https://docs.google.com/spreadsheets/d/1yvgJAi4LKDZXiWSa_sS02rlQxvhh-nO-4kJ3GmxzxOE/edit?usp=sharing';
+  assert.throws(() => ctx.crmSheetTabs('sai', URL), /Không có quyền/);
+  assert.throws(() => ctx.crmSheetTabs(K3, 'https://evil.com/spreadsheets/d/xxxxxxxxxxxxxxxxxxxxxxxxx'), /Google Sheet/);
+  const tb = ctx.crmSheetTabs(K3, URL);
+  assert.equal(tb.tabs.length, 1); assert.equal(tb.tabs[0].count, 3); assert.ok(tb.tabs[0].from.startsWith('2025-08'));
+  const evBefore = sheets['Hoạt động'].rows.length;
+  const im = ctx.crmSheetImport(K3, URL, 'SPANA TOWER', 0, 100);
+  assert.equal(im.total, 3); assert.equal(im.added, 2); assert.equal(im.dups.length, 1); assert.equal(im.next, null);
+  assert.equal(sheets['Hoạt động'].rows.length, evBefore, 'nhập cũ không ghi sự kiện form');
+  const L = ctx.crmLoad(K3).leads, my = L.find((l) => l.phone === '0935777013'), dg = L.find((l) => l.phone === '0905696145');
+  assert.ok(my && dg); assert.equal(my.site, 'SPANA TOWER'); assert.equal(my.source, 'google'); assert.equal(my.campaign, 'gads-22945423918'); assert.equal(my.product, 'Căn studio,Căn 1 phòng ngủ'); assert.ok(my.at.startsWith('2025-08-30'));
+  assert.equal(dg.source, 'facebook'); assert.equal(dg.campaign, 'spana-fb'); assert.equal(dg.email, 'dung@gmail.com'); assert.equal(dg.srcType, 'Website');
+  assert.throws(() => ctx.crmSheetImport(K3, URL, 'KHONG CO', 0, 10), /Không thấy tab/);
+  // link tài liệu
+  ctx.crmUpdateLead(K3, '0935777013', { docUrl: 'https://drive.google.com/x' });
+  assert.equal(ctx.crmLoad(K3).leads.find((l) => l.phone === '0935777013').docUrl, 'https://drive.google.com/x');
+  ctx.crmUpdateLead(K3, '0935777013', { docUrl: 'javascript:alert(1)' });
+  assert.equal(ctx.crmLoad(K3).leads.find((l) => l.phone === '0935777013').docUrl, '');
 }
 console.log('OK – Code.gs đạt mọi test');
