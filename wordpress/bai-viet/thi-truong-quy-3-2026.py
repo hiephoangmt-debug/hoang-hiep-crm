@@ -7,15 +7,15 @@ content = f"""<p><strong>Thị trường bất động sản Đà Nẵng quý 3/
 
 <!--hh-featured-->
 
-<h2>Bức tranh chung: Đà Nẵng hút 62% lượng quan tâm ở miền Trung</h2>
+<h2>Thị trường bất động sản Đà Nẵng quý 3/2026: hút 62% lượng quan tâm miền Trung</h2>
 <ul>
 <li>Đà Nẵng chiếm <strong>62%</strong> lượng quan tâm bất động sản bán ở miền Trung trong quý 3/2026 (quý 1/2024 là 52%) – cao nhất từ trước đến nay.</li>
 <li>Giá rao bán phổ biến khoảng <strong>81 triệu/m²</strong>, giảm so với mức 87 triệu/m² của quý 1 và quý 2/2026; giá rao thuê phổ biến khoảng <strong>25 triệu/tháng</strong> (quý 2: 30 triệu).</li>
 <li>Khảo sát môi giới cả nước: rào cản lớn nhất khiến người mua đắn đo là <strong>lãi suất vay còn cao</strong> (46%), lo ngại biến động chính sách, quy hoạch (32%) và dòng tiền hạn chế (25%).</li>
-<li>Người tìm mua bất động sản Đà Nẵng phần lớn là người địa phương (44%), tiếp theo là Hà Nội (15%) và TP.HCM cũ (13%).</li>
+<li>Người tìm mua trên thị trường bất động sản Đà Nẵng phần lớn là người địa phương (44%), tiếp theo là Hà Nội (15%) và TP.HCM cũ (13%).</li>
 </ul>
 
-<h2>Giá rao bán theo loại hình quý 3/2026</h2>
+<h2>Giá rao bán theo loại hình trên thị trường bất động sản Đà Nẵng</h2>
 <table>
 <thead><tr><th>Loại hình</th><th>Giá rao bán</th><th>So với quý 2/2026</th><th>Tỷ trọng quan tâm</th></tr></thead>
 <tbody>
@@ -26,10 +26,10 @@ content = f"""<p><strong>Thị trường bất động sản Đà Nẵng quý 3/
 <tr><td>Biệt thự</td><td>100 triệu/m²</td><td>0%</td><td>5%</td></tr>
 </tbody>
 </table>
-<p>Khi môi giới Đà Nẵng được hỏi loại hình nào tiềm năng nhất trong 6 tháng tới: <strong>chung cư 35%</strong>, nhà riêng 25%, đất nền 22%, nhà mặt phố 11%, biệt thự 7% – xu hướng ưu tiên sản phẩm ở thực tiếp tục rõ.</p>
+<p>Khi môi giới được hỏi loại hình nào của thị trường bất động sản Đà Nẵng tiềm năng nhất trong 6 tháng tới: <strong>chung cư 35%</strong>, nhà riêng 25%, đất nền 22%, nhà mặt phố 11%, biệt thự 7% – xu hướng ưu tiên sản phẩm ở thực tiếp tục rõ.</p>
 
-<h2>Chung cư Đà Nẵng: giữ giá, lợi suất cho thuê thuộc nhóm cao nhất</h2>
-<p>Giá rao bán chung cư khu Đà Nẵng cũ đi ngang quanh <strong>67 – 68 triệu/m²</strong> suốt từ quý 3/2025 (quý 1/2024 chỉ 46 triệu/m²). Lợi suất cho thuê (tiền thuê 11 tháng / giá bán) tăng lên <strong>4,5%/năm</strong> – nhờ du lịch: 9 tháng đầu 2026 Đà Nẵng cũ đón khoảng 15,8 triệu lượt khách, trong đó 7,7 triệu lượt khách quốc tế, bằng cả năm 2025.</p>
+<h2>Chung cư – điểm sáng của thị trường bất động sản Đà Nẵng</h2>
+<p>Trong thị trường bất động sản Đà Nẵng, chung cư là loại hình giữ giá tốt nhất: giá rao bán khu Đà Nẵng cũ đi ngang quanh <strong>67 – 68 triệu/m²</strong> suốt từ quý 3/2025 (quý 1/2024 chỉ 46 triệu/m²). Lợi suất cho thuê (tiền thuê 11 tháng / giá bán) tăng lên <strong>4,5%/năm</strong> – nhờ du lịch: 9 tháng đầu 2026 Đà Nẵng cũ đón khoảng 15,8 triệu lượt khách, trong đó 7,7 triệu lượt khách quốc tế, bằng cả năm 2025.</p>
 <table>
 <thead><tr><th>Thành phố</th><th>Tổng giá rao phổ biến</th><th>Giá thuê phổ biến</th><th>Tỷ suất cho thuê</th><th>Tăng giá Q3/26 so Q1/24</th></tr></thead>
 <tbody>
@@ -44,8 +44,8 @@ content = f"""<p><strong>Thị trường bất động sản Đà Nẵng quý 3/
 <p><strong>Theo khu vực:</strong> Hải Châu khoảng 85 triệu/m² (đi ngang), Sơn Trà 82 triệu/m² (-1%), Ngũ Hành Sơn 56 triệu/m² (-2%), Liên Chiểu 41 triệu/m² (+2%). Sơn Trà chiếm tới 40% lượng quan tâm chung cư, tiếp theo là Ngũ Hành Sơn 21%, Hải Châu 18%, Liên Chiểu 14%.</p>
 <p><strong>Nguồn cung mới</strong> tập trung ở Ngũ Hành Sơn và Sơn Trà, phân khúc khoảng 50 – 60 triệu/m². Các dự án nổi bật quý 3/2026 và giá rao tham khảo theo báo cáo: {P('fours-tower','FourS Tower')} khoảng 49 triệu/m², {P('fpt-plaza-4','FPT Plaza 4')} khoảng 56, {P('s-light-tower','S-Light Tower')} khoảng 57, {P('spana-tower','Spana Tower')} và {P('cora-tower','Cora Tower')} khoảng 60, {P('the-camellia-son-tra','The Camellia')} khoảng 60, Regal Complex khoảng 60, {P('peninsula-private-da-nang','Peninsula Private')} khoảng 65, {P('newtown-diamond-da-nang','Newtown Diamond')} khoảng 69, {P('capital-square-da-nang','Capital Square')} khoảng 85, {P('sun-symphony-residence','Sun Symphony')} khoảng 89, {P('wyndham-soleil-da-nang','Wyndham Soleil')} khoảng 100, The Legend City khoảng 124, {P('times-square-da-nang','Đà Nẵng Times Square')} khoảng 177 triệu/m². Xem thêm <a href="/gia-thue-can-ho-da-nang-moi-thang/">giá thuê căn hộ Đà Nẵng</a>.</p>
 
-<h2>Đất nền Đà Nẵng: điều chỉnh sau giai đoạn tăng nóng</h2>
-<p>Giá rao bán đất nền khu Đà Nẵng cũ giảm từ 84 triệu/m² (quý 2) xuống <strong>78 triệu/m²</strong> (quý 3/2026), sau khi tăng gần gấp đôi từ mức 43 triệu/m² đầu năm 2024. Khu Quảng Nam cũ vẫn nhích lên khoảng <strong>22 triệu/m²</strong>. Lượng quan tâm đất nền giảm rõ từ cuối 2025 khi lãi suất tăng – báo cáo nhận định đất nền là loại hình nhạy cảm nhất với yếu tố vĩ mô.</p>
+<h2>Đất nền: thị trường bất động sản Đà Nẵng điều chỉnh sau giai đoạn tăng nóng</h2>
+<p>Giá rao bán đất nền khu Đà Nẵng cũ giảm từ 84 triệu/m² (quý 2) xuống <strong>78 triệu/m²</strong> (quý 3/2026), sau khi tăng gần gấp đôi từ mức 43 triệu/m² đầu năm 2024. Khu Quảng Nam cũ vẫn nhích lên khoảng <strong>22 triệu/m²</strong>. Lượng quan tâm đất nền trên thị trường bất động sản Đà Nẵng giảm rõ từ cuối 2025 khi lãi suất tăng – báo cáo nhận định đất nền là loại hình nhạy cảm nhất với yếu tố vĩ mô.</p>
 <table>
 <thead><tr><th>Khu vực</th><th>Giá rao đất nền Q3/2026</th><th>So với quý 2</th></tr></thead>
 <tbody>
@@ -63,22 +63,22 @@ content = f"""<p><strong>Thị trường bất động sản Đà Nẵng quý 3/
 <p>Ngũ Hành Sơn vẫn là nơi được quan tâm nhiều nhất (26% lượng quan tâm đất nền năm 2026), tiếp theo là Liên Chiểu, Cẩm Lệ (13%), Hòa Vang, Điện Bàn, Sơn Trà (12%). Tham khảo dự án đất nền: {P('dat-nen-vo-chi-cong','709 lô đất nền Võ Chí Công')}, {P('dat-nen-dam-sen-sun-riverpolis','đất nền Đầm Sen – Sun Riverpolis')}, {P('khu-do-thi-1a-1b-dien-ngoc','khu đô thị 1A 1B Điện Ngọc')}.</p>
 
 <h2>Nhà mặt phố: tăng 29% trong gần 2 năm, ven biển dẫn đầu</h2>
-<p>Giá rao nhà mặt phố khu Đà Nẵng cũ khoảng <strong>137 triệu/m²</strong>, tăng 29% so với quý 1/2025 (106 triệu/m²) – trong khi Hà Nội tăng 22% và TP.HCM cũ giảm 6%. Mức tăng cao nhất ở <strong>Ngũ Hành Sơn (188 triệu/m², +45%)</strong> và <strong>Sơn Trà (181 triệu/m², +43%)</strong> nhờ lợi thế du lịch ven biển; Hải Châu 157 triệu/m² (+23%), Thanh Khê 124, Cẩm Lệ 84, Liên Chiểu 83 triệu/m². Hải Châu chiếm 31% lượng quan tâm nhà phố, Sơn Trà 21%. Xem thêm <a href="/gia-dat-ven-bien-da-nang-vo-nguyen-giap-hoang-sa/">giá đất ven biển Đà Nẵng</a>.</p>
+<p>Nhà mặt phố là phân khúc tăng mạnh nhất của thị trường bất động sản Đà Nẵng trong 2 năm qua: giá rao khu Đà Nẵng cũ khoảng <strong>137 triệu/m²</strong>, tăng 29% so với quý 1/2025 (106 triệu/m²) – trong khi Hà Nội tăng 22% và TP.HCM cũ giảm 6%. Mức tăng cao nhất ở <strong>Ngũ Hành Sơn (188 triệu/m², +45%)</strong> và <strong>Sơn Trà (181 triệu/m², +43%)</strong> nhờ lợi thế du lịch ven biển; Hải Châu 157 triệu/m² (+23%), Thanh Khê 124, Cẩm Lệ 84, Liên Chiểu 83 triệu/m². Hải Châu chiếm 31% lượng quan tâm nhà phố, Sơn Trà 21%. Xem thêm <a href="/gia-dat-ven-bien-da-nang-vo-nguyen-giap-hoang-sa/">giá đất ven biển Đà Nẵng</a>.</p>
 
-<h2>Nhận định cho người mua</h2>
+<h2>Nhận định thị trường bất động sản Đà Nẵng cho người mua</h2>
 <ul>
 <li><strong>Mua để ở, cho thuê:</strong> chung cư Sơn Trà, Ngũ Hành Sơn, Hải Châu giữ giá tốt và lợi suất 4,5% – nên chọn dự án pháp lý rõ, gần biển hoặc sông Hàn, ưu tiên căn dễ cho thuê (1 – 2 phòng ngủ).</li>
 <li><strong>Đất nền:</strong> giá đang điều chỉnh là lúc người có vốn nhàn rỗi thương lượng tốt hơn, nhưng tránh vay nhiều khi lãi suất còn cao; chọn lô có sổ, hạ tầng xong.</li>
 <li><strong>Nhà phố ven biển:</strong> tăng mạnh nhất nhưng giá đã cao – phù hợp người kinh doanh lưu trú, cần tính kỹ dòng tiền.</li>
 </ul>
-<p>Số liệu là <strong>giá rao bán</strong> trên Batdongsan.com.vn, không phải giá giao dịch thành công. Cần đánh giá một căn hoặc một lô cụ thể theo số liệu mới nhất, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Xem thêm <a href="/thi-truong-bat-dong-san-da-nang-2026/">thị trường bất động sản Đà Nẵng 2026</a>.</p>
+<p>Số liệu thị trường bất động sản Đà Nẵng trong bài là <strong>giá rao bán</strong> trên <a href="https://batdongsan.com.vn/">Batdongsan.com.vn</a>, không phải giá giao dịch thành công. Cần đánh giá một căn hoặc một lô cụ thể theo số liệu mới nhất, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo). Xem thêm <a href="/thi-truong-bat-dong-san-da-nang-2026/">thị trường bất động sản Đà Nẵng 2026</a>.</p>
 <p><em>Nguồn số liệu: Báo cáo "Toàn cảnh thị trường Bất động sản quý 3/2026" của Batdongsan.com.vn (PropertyGuru Group), dữ liệu tin đăng và khảo sát 530 môi giới; số liệu du lịch theo Cục Thống kê.</em></p>
 """
 n = {
  'slug': slug, 'title': title,
  'excerpt': 'Thị trường bất động sản Đà Nẵng quý 3/2026 theo báo cáo Batdongsan.com.vn: chung cư giữ giá 67 triệu/m², lợi suất thuê 4,5%; đất nền giảm 7% về 78 triệu/m²; nhà phố Ngũ Hành Sơn, Sơn Trà tăng hơn 40%.',
- 'keyword': 'thị trường bất động sản Đà Nẵng quý 3/2026',
- 'keywords_extra': ['giá chung cư Đà Nẵng', 'giá đất nền Đà Nẵng', 'giá nhà phố Đà Nẵng', 'báo cáo bất động sản quý 3/2026'],
+ 'keyword': 'thị trường bất động sản Đà Nẵng',
+ 'keywords_extra': ['thị trường bất động sản Đà Nẵng quý 3/2026', 'giá chung cư Đà Nẵng', 'giá đất nền Đà Nẵng', 'giá nhà phố Đà Nẵng', 'báo cáo bất động sản quý 3/2026'],
  'category': 'Thị trường',
  'tags': ['Thị trường bất động sản Đà Nẵng', 'Giá căn hộ Đà Nẵng', 'Đất nền Đà Nẵng', 'Nhà phố Đà Nẵng', 'Bất động sản Đà Nẵng'],
  'content': content,
@@ -100,7 +100,7 @@ n = {
  },
  'sources': ['https://batdongsan.com.vn/'],
  'follow_sources': False,
- 'follow_domains': [],
+ 'follow_domains': ['batdongsan.com.vn'],
  'image': {'name': slug, 'alt': 'Thị trường bất động sản Đà Nẵng quý 3/2026: giá chung cư, đất nền, nhà phố theo báo cáo Batdongsan.com.vn', 'caption': 'Đồ hoạ: hiephoangmt.com, số liệu Batdongsan.com.vn quý 3/2026.', 'file': slug + '.jpg'},
 }
 json.dump(n, open('thi-truong-quy-3-2026.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
