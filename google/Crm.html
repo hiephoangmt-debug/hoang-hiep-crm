@@ -486,6 +486,16 @@ function leadsFiltered() {
 var LV = (function () { try { return localStorage.getItem('crm_lv') || 'new'; } catch (e) { return 'new'; } })(), LVN = 20;
 var HOT_ST = ['Hẹn xem', 'Đã xem dự án', 'Đang thương lượng', 'Booking'];
 function isHot(l) { if (l.status === 'Chốt' || l.status === 'Mất' || l.status === 'Tạm dừng') return false; var h = heat(l); return !!(h && h[0] === 'Nóng') || HOT_ST.indexOf(l.status) >= 0; }
+var LS = '';   // lọc theo giai đoạn trong Khách mới / Đang hot
+var STAGES = [['new', 'Chưa giao', 'red', 'Khách mới, chưa giao cho sale và chưa ai liên hệ'], ['wait', 'Chờ sale báo cáo', 'amb', 'Đã giao sale, chưa có báo cáo'], ['care', 'Đang chăm', 'blu', 'Đã liên hệ hoặc có báo cáo chăm sóc'], ['view', 'Hẹn / đã xem', 'grn', 'Hẹn xem, đã xem dự án, thương lượng, booking'], ['won', 'Chốt', 'grn', 'Đã chốt giao dịch'], ['lost', 'Mất / tạm dừng', '', 'Khách đã mất hoặc tạm dừng']];
+function stageOf(l) {
+  if (l.status === 'Chốt') return 'won';
+  if (l.status === 'Mất' || l.status === 'Tạm dừng') return 'lost';
+  if (HOT_ST.indexOf(l.status) >= 0 || l.viewCount) return 'view';
+  if (l.careCount || l.called || l.messaged || l.status !== 'Mới') return 'care';
+  return l.assignee ? 'wait' : 'new';
+}
+function stageTag(l) { var k = stageOf(l), d = STAGES.filter(function (x) { return x[0] === k; })[0]; return '<span class="tag ' + d[2] + '">' + d[1] + '</span>'; }
 function lvActions() {
   return '<span class="sp"></span><button class="btn p sm" id="addlead">+ Thêm khách</button><button class="btn sm" id="implead">+ Danh sách</button><button class="btn sm" id="sheetimp">+ Link Sheet</button>' + (aiOn() ? '<button class="btn sm" id="zbulk">+ Chat Zalo</button>' : '') + '<button class="btn sm" id="projmgr">Dự án và toà</button>';
 }
@@ -504,7 +514,7 @@ function bindSale() {
     run('crmUpdateLead', s.dataset.as, { assignee: v }).then(function () { l.assignee = v; badges(); toast(v ? 'Đã chuyển cho ' + v : 'Đã bỏ giao'); render(); }).catch(function (e) { s.value = l.assignee || ''; fail(e); }); }; });
 }
 function bindLv() {
-  document.querySelectorAll('[data-lv]').forEach(function (b) { b.onclick = function () { LV = b.dataset.lv; try { localStorage.setItem('crm_lv', LV); } catch (e) {} leads(); window.scrollTo(0, 0); }; });
+  document.querySelectorAll('[data-lv]').forEach(function (b) { b.onclick = function () { LV = b.dataset.lv; LS = ''; try { localStorage.setItem('crm_lv', LV); } catch (e) {} leads(); window.scrollTo(0, 0); }; });
   if ($('#sheetimp')) $('#sheetimp').onclick = sheetImport;
   if ($('#projmgr')) $('#projmgr').onclick = projMgr;
 }
@@ -514,9 +524,9 @@ function leadsGroups() {
   var body = '';
   var projOf = projOfLead;
   var rowsOf = function (list) {
-    return '<table class="xl lvt"><tr><th>Ngày</th><th>Khách</th><th>Số điện thoại</th><th>Nguồn</th><th>Toà</th><th>Nhu cầu, ngân sách</th><th>Tình trạng</th><th>Chăm gần nhất</th><th>Hẹn</th><th>Giao sale</th><th></th></tr>' + list.map(function (l) {
-      var h = heat(l), p = srcParts(l);
-      return '<tr class="' + (todo(l) ? 'rowtodo' : '') + '" data-open="' + esc(l.phone) + '" style="cursor:pointer"><td class="nw">' + dmy(dayOf(l.at)).slice(0, 5) + '</td><td><b>' + esc(cleanName(l.name).name || l.name || '(chưa có tên)') + '</b>' + (h && h[0] === 'Nóng' ? ' <span class="tag red">Nóng</span>' : '') + (l.province ? '<div class="small mut">' + esc(l.province) + '</div>' : '') + '</td><td class="nw">' + esc(l.phone) + ' <button class="btn z xs" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button> <button class="btn g xs" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button></td><td class="small">' + esc(p.plat || '-') + '</td><td class="small nw">' + (toaOf(l).map(esc).join(', ') || '<span class="mut">-</span>') + '</td><td class="small">' + (esc([l.purpose, l.product, l.budget && 'Ngân sách ' + l.budget].filter(Boolean).join(' · ')) || '<span class="mut">-</span>') + '</td><td class="small">' + (todo(l) ? '<span class="tag red">Chưa liên hệ</span>' : esc(l.status)) + '</td><td class="small">' + (l.careAt ? ago(l.careAt) + (l.careResult ? '<div class="mut">' + esc(l.careResult) + '</div>' : '') : '<span class="mut">Chưa chăm</span>') + '</td><td class="small nw">' + (l.next ? (l.next < ymdNow(0) ? '<span class="tag red">' + dmy(l.next).slice(0, 5) + ' quá hạn</span>' : dmy(l.next).slice(0, 5)) : '<span class="mut">-</span>') + '</td><td class="nw">' + saleSel(l) + '</td><td class="nw"><button class="btn xs" data-open="' + esc(l.phone) + '">Hồ sơ</button></td></tr>';
+    return '<table class="xl lvt"><tr><th>Ngày</th><th>Khách</th><th>Số điện thoại</th><th>Nguồn</th><th>Toà</th><th>Giai đoạn</th><th>Chăm gần nhất</th><th>Hẹn</th><th>Giao sale</th><th></th></tr>' + list.map(function (l) {
+      var h = heat(l), p = srcParts(l), need = [l.purpose, l.product, l.budget && 'NS ' + l.budget].filter(Boolean).join(' · ');
+      return '<tr class="' + (stageOf(l) === 'new' ? 'rowtodo' : '') + '" data-open="' + esc(l.phone) + '" style="cursor:pointer"><td class="nw">' + dmy(dayOf(l.at)).slice(0, 5) + '</td><td><b>' + esc(cleanName(l.name).name || l.name || '(chưa có tên)') + '</b>' + (h && h[0] === 'Nóng' ? ' <span class="tag red">Nóng</span>' : '') + (l.province || need ? '<div class="small mut">' + esc([l.province, need].filter(Boolean).join(' · ')) + '</div>' : '') + '</td><td class="nw">' + esc(l.phone) + ' <button class="btn z xs" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button> <button class="btn g xs" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button></td><td class="small">' + esc(p.plat || '-') + '</td><td class="small nw">' + (toaOf(l).map(esc).join(', ') || '<span class="mut">-</span>') + '</td><td>' + stageTag(l) + (l.status !== 'Mới' && stageOf(l) !== 'won' ? '<div class="small mut">' + esc(l.status) + '</div>' : '') + '</td><td class="small">' + (l.careAt ? ago(l.careAt) + (l.careResult ? '<div class="mut">' + esc(l.careResult) + '</div>' : '') : '<span class="mut">Chưa chăm</span>') + '</td><td class="small nw">' + (l.next ? (l.next < ymdNow(0) ? '<span class="tag red">' + dmy(l.next).slice(0, 5) + ' quá hạn</span>' : dmy(l.next).slice(0, 5)) : '<span class="mut">-</span>') + '</td><td class="nw">' + saleSel(l) + '</td><td class="nw"><button class="btn xs" data-open="' + esc(l.phone) + '">Hồ sơ</button></td></tr>';
     }).join('') + '</table>';
   };
   var toaChips = function (a) { var c = {}; a.forEach(function (l) { toaOf(l).forEach(function (t) { c[t] = (c[t] || 0) + 1; }); }); return Object.keys(c).sort().map(function (t) { return ' <span class="tag">' + esc(t) + ': ' + c[t] + '</span>'; }).join(''); };
@@ -524,19 +534,21 @@ function leadsGroups() {
     var g = {}; list.forEach(function (l) { var k = projOf(l); (g[k] = g[k] || []).push(l); });
     var keys = Object.keys(g).sort(function (a, b) { var ha = g[a].filter(isHot).length, hb = g[b].filter(isHot).length; return hb - ha || g[b].filter(todo).length - g[a].filter(todo).length || g[b].length - g[a].length; });
     return keys.map(function (k, idx) {
-      var a = g[k].sort(function (x, y) { return new Date(y.at) - new Date(x.at); }), hc = a.filter(isHot).length, uc = a.filter(todo).length;
-      return '<details class="card prj"' + (openAll || idx < 3 ? ' open' : '') + '><summary><b>' + esc(k) + '</b> <span class="tag blu">' + a.length + ' khách</span>' + (hc ? ' <span class="tag red">' + hc + ' hot</span>' : '') + (uc ? ' <span class="tag amb">' + uc + ' chưa liên hệ</span>' : '') + toaChips(a) + ' <button class="btn xs" data-lvsend="' + esc(k) + '" style="float:right">Gửi tin nhóm này</button></summary>' + rowsOf(a) + '</details>';
+      var a = g[k].sort(function (x, y) { return new Date(y.at) - new Date(x.at); }), hc = a.filter(isHot).length, uc = a.filter(function (x) { return stageOf(x) === 'new'; }).length;
+      return '<details class="card prj"' + (openAll || idx < 3 ? ' open' : '') + '><summary><b>' + esc(k) + '</b> <span class="tag blu">' + a.length + ' khách</span>' + (hc ? ' <span class="tag red">' + hc + ' hot</span>' : '') + (uc ? ' <span class="tag red">' + uc + ' chưa giao</span>' : '') + toaChips(a) + ' <button class="btn xs" data-lvsend="' + esc(k) + '" style="float:right">Gửi tin nhóm này</button></summary>' + rowsOf(a) + '</details>';
     }).join('');
   };
-  if (LV === 'new') {
-    var ms = monthStart(), list = all.filter(function (l) { return !isQuiet(l) && dayOf(l.at) >= ms; }), unc = list.filter(todo).length, hotN = list.filter(isHot).length, prjN = {};
-    list.forEach(function (l) { prjN[projOf(l)] = 1; });
-    body = '<div class="card" style="padding:10px 14px"><b>Tháng ' + ms.slice(5, 7) + '/' + ms.slice(0, 4) + '</b>: <b>' + list.length + '</b> khách mới · <b>' + unc + '</b> chưa liên hệ · <b>' + hotN + '</b> hot · <b>' + Object.keys(prjN).length + '</b> dự án. <span class="small mut">Dự án nhiều khách hot, nhiều khách chưa liên hệ xếp trên.</span></div>' + (groups(list) || '<div class="card mut">Tháng này chưa có khách mới. Khách nhập từ file hoặc Sheet nằm trong Data khách.</div>');
-  } else {
-    body = (groups(hot, true) || '<div class="card mut">Chưa có khách hot. Khách được xếp hot khi tiềm năng là Nóng hoặc đã hẹn xem, đã xem dự án, đang thương lượng, booking.</div>');
-  }
+  var base, intro;
+  if (LV === 'new') { var ms = monthStart(); base = all.filter(function (l) { return !isQuiet(l) && dayOf(l.at) >= ms; }); intro = 'Khách phát sinh từ <b>' + dmy(ms) + '</b> đến nay, nhóm theo dự án. Khách nhập từ file hoặc Sheet nằm ở Data khách.'; }
+  else { base = hot; intro = 'Khách nóng hoặc đã hẹn xem, đã xem dự án, thương lượng, booking, nhóm theo dự án.'; }
+  var sc = {}; base.forEach(function (l) { var k = stageOf(l); sc[k] = (sc[k] || 0) + 1; });
+  var list2 = LS ? base.filter(function (l) { return stageOf(l) === LS; }) : base;
+  var chipsS = '<button class="chip' + (!LS ? ' on' : '') + '" data-ls="">Tất cả <span class="n">' + base.length + '</span></button>' + STAGES.filter(function (x) { return sc[x[0]]; }).map(function (x) { return '<button class="chip' + (LS === x[0] ? ' on' : '') + '" data-ls="' + x[0] + '" title="' + esc(x[3]) + '">' + x[1] + ' <span class="n">' + sc[x[0]] + '</span></button>'; }).join('');
+  body = '<div class="card" style="padding:10px 14px"><div class="small mut" style="margin-bottom:8px">' + intro + '</div><div class="row chips" style="margin:0">' + chipsS + '</div></div>' +
+    (groups(list2, !!LS) || '<div class="card mut">' + (LV === 'new' ? 'Chưa có khách nào ở mục này trong tháng.' : 'Chưa có khách hot.') + '</div>');
   $('#main').innerHTML = head + body;
   bindLv(); bindSale();
+  document.querySelectorAll('[data-ls]').forEach(function (b) { b.onclick = function () { LS = b.dataset.ls; leads(); }; });
   $('#addlead').onclick = addLead; $('#implead').onclick = importLeads; if ($('#zbulk')) $('#zbulk').onclick = zaloBulk;
   document.querySelectorAll('[data-lvsend]').forEach(function (b) { b.onclick = function (e) { e.preventDefault(); SN.proj = b.dataset.lvsend; gotoTab('send'); }; });
   document.querySelectorAll('[data-open]').forEach(function (b) { b.onclick = function (e) { if (b.tagName !== 'BUTTON' && e.target.closest('button,a,select,input')) return; openLead(b.dataset.open); }; });
