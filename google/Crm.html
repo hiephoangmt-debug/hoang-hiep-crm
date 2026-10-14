@@ -1563,6 +1563,24 @@ function projMgr() {
   document.querySelectorAll('[data-ps]').forEach(function (b) { b.onclick = function () { var i = +b.dataset.ps, p = ps[i]; run('crmProjSave', { row: p.row, name: document.querySelector('[data-pn="' + i + '"]').value, aliases: document.querySelector('[data-pa="' + i + '"]').value, toas: document.querySelector('[data-pt="' + i + '"]').value }).then(after).catch(fail); }; });
   document.querySelectorAll('[data-pdel]').forEach(function (b) { b.onclick = function () { if (!confirm('Xoá dự án này khỏi danh mục? Khách vẫn giữ nguyên.')) return; run('crmProjDelete', ps[+b.dataset.pdel].row).then(after).catch(fail); }; });
 }
+// Tin báo khách mới từ bot Telegram: dán một hoặc nhiều tin, tự tách từng khách.
+function parseTgLeads(t) {
+  var out = [], parts = String(t).split(/(?=KH[ÁA]CH\s*M[ỚO]I\s*[ĐD][ỂE]\s*L[ẠA]I\s*S[ỐO])/i).filter(function (b) { return /KH[ÁA]CH\s*M[ỚO]I/i.test(b); });
+  parts.forEach(function (b) {
+    var pm = /(\+?\d[\d\s.\-]{8,14}\d)\s*[–—-]\s*([^·|\n]+)/.exec(b) || /(\+?\d[\d\s.\-]{8,14}\d)/.exec(b); if (!pm) return;
+    var ph = normPh(pm[1]); if (!ph) return;
+    var nm = (pm[2] || '').replace(/mở\s*zalo/ig, '').replace(/[^\p{L}\s.'’-]/gu, ' ').replace(/\s+/g, ' ').trim().replace(/(^|\s)(\p{L})/gu, function (m0, a, c) { return a + c.toUpperCase(); });
+    var line = function (re) { var m = re.exec(b); return m ? m[1].replace(/\s+/g, ' ').trim() : ''; };
+    var qt = line(/quan\s*tâm\s*[:：]\s*([^\n]+)/i), yc = line(/yêu\s*cầu\s*[:：]\s*([^\n]+)/i), pa = line(/phương\s*án\s*[:：]\s*([^\n]+)/i), sk = line(/nguồn\s*[:：]\s*([^\n]+)/i);
+    var um = /https?:\/\/\S+/.exec(b), dm = /(\d{1,2}):(\d{2})(?::\d{2})?\s+(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(b);
+    var low = (b + ' ' + (um ? um[0] : '')).toLowerCase().replace(/-/g, ' '), pj = projNames().filter(function (n) { return n && low.indexOf(n.toLowerCase()) >= 0; })[0] || '';
+    var tz = /(?:tòa|toà|toa)[\s-]*(f[1-5])/i.exec(b) || /(?:^|[^a-z0-9])(f[1-5])(?![a-z0-9])/i.exec(sk + ' ' + qt + ' ' + (um ? um[0] : ''));
+    var so = SRC_OPTS.filter(function (o) { return sk.toLowerCase().indexOf(o.toLowerCase()) >= 0; })[0] || (/google/i.test(sk) ? 'Google Ads' : /facebook|fb/i.test(sk) ? 'Facebook Ads' : '');
+    out.push({ name: nm, phone: ph, note: [qt && 'Quan tâm: ' + qt, yc && 'Yêu cầu: ' + yc, pa && 'Phương án: ' + pa].filter(Boolean).join(' · '), source: so, campaign: sk, url: um ? um[0].replace(/[),.;]+$/, '') : '', project: pj, toa: tz ? tz[1].toUpperCase() : '',
+      at: dm ? dm[5] + '-' + ('0' + dm[4]).slice(-2) + '-' + ('0' + dm[3]).slice(-2) + 'T' + ('0' + dm[1]).slice(-2) + ':' + dm[2] + ':00' : '' });
+  });
+  return out;
+}
 function addLead() {
   var lab = function (t, h) { return '<label class="fld"><span class="mut small">' + t + '</span>' + h + '</label>'; };
   var sel = function (id, arr, first) { return '<select id="' + id + '"><option value="">' + first + '</option>' + arr.map(function (s) { return '<option>' + esc(s) + '</option>'; }).join('') + '</select>'; };
@@ -1577,6 +1595,20 @@ function addLead() {
   $('#ax').onclick = function () { $('#dlg').close(); };
   $('#apaste').oninput = function () {
     var t = this.value, set = function (id, v) { if (v) $(id).value = v; };
+    var tg = parseTgLeads(t);
+    if (tg.length > 1) {
+      $('#apnote').innerHTML = '<div class="card" style="background:#FFF3E3"><b>Có ' + tg.length + ' khách trong tin vừa dán</b> (báo khách mới từ Telegram)<div class="small" style="margin:6px 0">' + tg.map(function (x) { return esc((x.name || 'Chưa tên') + ' · ' + x.phone + (x.toa ? ' · ' + x.toa : '')); }).join('<br>') + '</div><button class="btn p sm" id="tgall">Thêm tất cả ' + tg.length + ' khách</button> <span class="small mut" id="tgst"></span></div>';
+      $('#tgall').onclick = function () {
+        var btn = this, i = 0, ok = 0, dup = 0; btn.disabled = true;
+        var next = function () {
+          if (i >= tg.length) { $('#tgst').textContent = ''; load(); $('#dlgBody').innerHTML = '<div style="text-align:center;padding:18px 6px"><div style="font-size:44px;color:#1a9b4b;line-height:1">✓</div><h2 style="margin:8px 0 4px">Đã thêm xong</h2><div class="small mut">Thêm mới ' + ok + ' khách' + (dup ? ' · ' + dup + ' khách đã có sẵn nên bỏ qua' : '') + '. Khách nằm ở "Khách mới tháng này".</div><div class="row" style="justify-content:center;margin-top:14px"><button class="btn p" id="aclose">Tắt</button></div></div>'; $('#aclose').onclick = function () { $('#dlg').close(); }; return; }
+          var x = tg[i++]; $('#tgst').textContent = 'Đang thêm ' + i + '/' + tg.length + '…';
+          run('crmCreateLead', { name: x.name, phone: x.phone, note: x.note, source: x.source, campaign: x.campaign, url: x.url, project: x.project, toa: x.toa, at: x.at, status: 'Mới' }).then(function (r) { if (r && r.dup) dup++; else ok++; next(); }).catch(function (e) { fail(e); btn.disabled = false; });
+        };
+        next();
+      };
+      return;
+    }
     var pm = /(?:\+84|84|0)?[\s.\-]?[35789]\d(?:[\s.\-]?\d){7}/.exec(t), ph = '';
     if (pm) { ph = pm[0].replace(/[^\d]/g, ''); if (ph.indexOf('84') === 0 && ph.length === 11) ph = '0' + ph.slice(2); else if (ph.length === 9) ph = '0' + ph; }
     set('#ap', ph);
