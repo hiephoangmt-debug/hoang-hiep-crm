@@ -899,9 +899,10 @@
     if (!seen) m.hidden = false;
   }
 
-  function loadDemo() {
-    setInfo(window.BdsDemo.INFO);
-    window.BdsDemo.makeImages(function (items) {
+  function loadDemo(key) {
+    key = typeof key === 'string' ? key : 'mau';
+    setInfo(window.BdsDemo.PRESETS[key].info);
+    window.BdsDemo.makeImages(key, function (items) {
       state.media = items;
       state.lines = [];
       state.durations = [];
@@ -928,7 +929,8 @@
     bindSettings();
     bindPlayer();
     bindHelp(seen);
-    $('btnDemo').onclick = loadDemo;
+    $('btnDemo').onclick = function () { loadDemo('mau'); };
+    $('btnDemoF2').onclick = function () { loadDemo('f2'); };
     $('btnPrev').onclick = function () { goStep(state.step - 1); };
     $('btnNext').onclick = function () { goStep(state.step + 1); };
     $('btnExport').onclick = doExport;

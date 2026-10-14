@@ -122,11 +122,84 @@
     } }
   ];
 
-  function makeImages(cb) {
+  // Ảnh minh hoạ thêm cho mẫu dự án căn hộ cao tầng
+  var EXTRA = {
+    tower: function (ctx, W, H) {
+      sky(ctx, 0, 0, W, H * 0.75, '#1f3b73', '#f2a65a');
+      // Toà tháp chính
+      sky(ctx, W * 0.38, H * 0.08, W * 0.24, H * 0.72, '#e8edf3', '#c6d0dc');
+      ctx.fillStyle = 'rgba(255,214,120,0.9)';
+      for (var r = 0; r < 20; r++) for (var c = 0; c < 4; c++) {
+        if ((r * 7 + c * 3) % 5 === 0) continue;
+        ctx.fillRect(W * 0.395 + c * W * 0.056, H * 0.1 + r * H * 0.034, W * 0.042, H * 0.022);
+      }
+      // Các toà bên cạnh
+      sky(ctx, W * 0.12, H * 0.28, W * 0.2, H * 0.52, '#d5dce6', '#aeb9c7');
+      sky(ctx, W * 0.68, H * 0.22, W * 0.2, H * 0.58, '#d5dce6', '#aeb9c7');
+      // Sông
+      sky(ctx, 0, H * 0.8, W, H * 0.2, '#2c5d8f', '#173a5e');
+      ctx.fillStyle = 'rgba(255,200,120,0.35)';
+      for (var k = 0; k < 14; k++) ctx.fillRect(W * 0.4 + ((k * 53) % 300) - 60, H * 0.82 + k * 12, 120 - k * 5, 4);
+    },
+    pool: function (ctx, W, H) {
+      sky(ctx, 0, 0, W, H * 0.45, '#8ccdf7', '#e6f5ff');
+      sky(ctx, 0, H * 0.45, W, H * 0.1, '#ece6da', '#ddd4c4');
+      sky(ctx, 0, H * 0.55, W, H * 0.45, '#2fb7d6', '#11809f');
+      ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+      ctx.lineWidth = 4;
+      for (var i = 0; i < 9; i++) {
+        ctx.beginPath();
+        for (var x = 0; x <= W; x += 40) ctx.lineTo(x, H * 0.6 + i * 45 + Math.sin(x / 70 + i) * 8);
+        ctx.stroke();
+      }
+      box(ctx, W * 0.08, H * 0.4, W * 0.12, H * 0.07, '#ffffff', 10);
+      box(ctx, W * 0.24, H * 0.4, W * 0.12, H * 0.07, '#ffffff', 10);
+      ctx.fillStyle = '#2f7a4a';
+      [0.7, 0.82, 0.93].forEach(function (x) {
+        ctx.beginPath();
+        ctx.arc(W * x, H * 0.3, W * 0.05, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillRect(W * x - 6, H * 0.3, 12, H * 0.16);
+      });
+    }
+  };
+
+  var PRESETS = {
+    mau: { info: INFO, scenes: SCENES },
+    f2: {
+      // Thông tin công khai từ báo chí và trang dự án (giá tham khảo, cần kiểm tra lại với chủ đầu tư)
+      info: {
+        loai: 'Căn hộ chung cư',
+        ten: 'F2 FourS Tower',
+        viTri: 'Sun Riverpolis, Hòa Xuân, Đà Nẵng',
+        gia: 'từ 2,4 tỷ',
+        dienTich: '58m²',
+        phongNgu: '2',
+        wc: '2',
+        huong: '',
+        phapLy: '',
+        noiBat: 'Trần cao 3,5m, không gian rộng rãi\nHồ bơi, gym, yoga, spa, kids club ngay trong toà nhà\nVài phút tới cầu Hòa Xuân và biển Sơn Thủy',
+        moiGioi: 'Hoàng Hiệp',
+        sdt: '09xx xxx xxx',
+        thuongHieu: 'Hoàng Hiệp Land'
+      },
+      scenes: [
+        { caption: 'Phối cảnh tháp F2', draw: EXTRA.tower },
+        SCENES[1],
+        SCENES[2],
+        { caption: 'Hồ bơi', draw: EXTRA.pool },
+        { caption: 'View sông', draw: SCENES[4].draw }
+      ]
+    }
+  };
+
+  function makeImages(key, cb) {
+    if (typeof key === 'function') { cb = key; key = 'mau'; }
+    var scenes = (PRESETS[key] || PRESETS.mau).scenes;
     var out = [];
     var W = 1600, H = 1100;
-    var pending = SCENES.length;
-    SCENES.forEach(function (s, i) {
+    var pending = scenes.length;
+    scenes.forEach(function (s, i) {
       var c = document.createElement('canvas');
       c.width = W;
       c.height = H;
@@ -144,5 +217,5 @@
     });
   }
 
-  window.BdsDemo = { INFO: INFO, makeImages: makeImages };
+  window.BdsDemo = { INFO: INFO, PRESETS: PRESETS, makeImages: makeImages };
 })();

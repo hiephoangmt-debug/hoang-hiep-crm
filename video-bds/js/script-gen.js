@@ -62,7 +62,7 @@
       'Phòng ngủ yên tĩnh, riêng tư và ấm cúng.',
       'Phòng ngủ thoáng mát, thiết kế tinh tế.',
       'Phòng ngủ rộng, có cửa sổ lấy sáng tốt.'] },
-    { k: ['bếp', 'bep', 'kitchen', 'ăn'], v: [
+    { k: ['bếp', 'bep', 'kitchen', 'phòng ăn'], v: [
       'Khu bếp gọn gàng, tiện nghi cho việc nấu nướng.',
       'Bếp và bàn ăn liền mạch, ấm cúng.',
       'Khu bếp hiện đại, đầy đủ công năng.'] },
@@ -74,11 +74,7 @@
       'Ban công thoáng gió, thư giãn mỗi sáng.',
       'Ban công rộng, đón gió mát cả ngày.',
       'Ban công lý tưởng để thưởng trà ngắm cảnh.'] },
-    { k: ['view', 'cảnh', 'canh', 'sông', 'song', 'biển', 'bien', 'hồ', 'ho '], v: [
-      'View đẹp, thoáng mát, không bị che chắn.',
-      'Tầm nhìn rộng mở, ngắm trọn cảnh quan.',
-      'View triệu đô, ngắm cảnh mỗi ngày.'] },
-    { k: ['mặt tiền', 'mat tien', 'ngoại thất', 'ngoai that', 'tổng thể', 'toàn cảnh', 'facade'], v: [
+    { k: ['mặt tiền', 'mat tien', 'ngoại thất', 'ngoai that', 'tổng thể', 'toàn cảnh', 'phối cảnh', 'tòa tháp', 'facade'], v: [
       'Ngoại thất bề thế, mặt tiền đẹp.',
       'Toàn cảnh căn nhà hiện đại, nổi bật.',
       'Thiết kế mặt tiền sang trọng, ấn tượng.'] },
@@ -97,7 +93,11 @@
     { k: ['đường', 'duong', 'hẻm', 'hem', 'ngõ', 'ngo', 'vị trí', 'vi tri'], v: [
       'Đường trước nhà rộng, xe hơi vào tận nơi.',
       'Vị trí thuận tiện, kết nối nhanh đến trung tâm.',
-      'Giao thông thuận lợi, an ninh tốt.'] }
+      'Giao thông thuận lợi, an ninh tốt.'] },
+    { k: ['view', 'cảnh quan', 'tầm nhìn', 'sông', 'biển', 'hồ'], v: [
+      'View đẹp, thoáng mát, không bị che chắn.',
+      'Tầm nhìn rộng mở, ngắm trọn cảnh quan.',
+      'View triệu đô, ngắm cảnh mỗi ngày.'] }
   ];
 
   // Câu dùng khi ảnh không có chú thích và đã hết điểm nổi bật
@@ -152,6 +152,15 @@
     if (info.phongNgu) parts.push(info.phongNgu + ' phòng ngủ');
     if (info.wc) parts.push(info.wc + ' WC');
     return parts.join(', ');
+  }
+
+  /** Nhóm phòng/khu vực mà câu chữ nhắc tới (-1 nếu không có). */
+  function groupOf(text) {
+    var c = (text || '').toLowerCase();
+    for (var i = 0; i < ROOMS.length; i++) {
+      for (var j = 0; j < ROOMS[i].k.length; j++) if (c.indexOf(ROOMS[i].k[j]) !== -1) return i;
+    }
+    return -1;
   }
 
   function describeCaption(caption, variant, highlight) {
@@ -210,11 +219,30 @@
       if (style === 'tiktok' && i > 0) line = line.split(',')[0].replace(/[.!]?$/, '!');
       lines.push(line);
     }
-    // Điểm nổi bật còn lại gộp vào câu cuối của phần ảnh
-    if (hi < highlights.length && lines.length > 1) {
-      var rest = highlights.slice(hi).map(lowerFirst).join(', ');
-      lines[lines.length - 1] += ' Ngoài ra: ' + rest.replace(/\.?$/, '.');
-    }
+    // Điểm nổi bật còn lại: ưu tiên ghép vào đúng cảnh có cùng chủ đề (VD: “hồ bơi…” vào cảnh Hồ bơi),
+    // không khớp thì rải đều, mỗi cảnh thêm một ý (bỏ qua cảnh tổng quan đầu tiên)
+    var left = highlights.slice(hi);
+    var end = style === 'tiktok' ? '!' : '.';
+    var replaced = {}, appended = {};
+    var rr = 0;
+    left.forEach(function (h) {
+      var sentence = upperFirst(h).replace(/[.!]?$/, end);
+      var g = groupOf(h);
+      for (var j = 1; j < captions.length && g !== -1; j++) {
+        if (!replaced[j + 1] && groupOf(captions[j]) === g) {
+          lines[j + 1] = sentence;
+          replaced[j + 1] = true;
+          return;
+        }
+      }
+      var slots = [];
+      for (var k = 2; k < lines.length; k++) if (!replaced[k] && !appended[k]) slots.push(k);
+      if (!slots.length) for (var m = 2; m < lines.length; m++) slots.push(m);
+      if (!slots.length) slots.push(lines.length - 1);
+      var at = slots[rr++ % slots.length];
+      lines[at] += ' ' + sentence;
+      appended[at] = true;
+    });
     var ctas = CTA[style];
     lines.push(fill(ctas[variant % ctas.length], d));
     return lines;
