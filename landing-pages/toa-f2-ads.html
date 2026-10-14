@@ -1518,11 +1518,27 @@ const NO = /^(không|ko|k|chưa|thôi|để sau|không cần|ko cần|no)\b/i;
 const HUMAN = /(chat ?bot|robot|người máy|máy trả lời|trả lời tự động|tự động trả lời|(nhắn|nói chuyện|chat|nhắn tin) với (máy|bot)|người thật|nhân viên thật|gặp người|gặp nhân viên|nói chuyện với người|(nói chuyện|chat|nhắn|nhắn tin|trò chuyện) với ai($|[\s,.!?])|(bạn|em|anh|chị) là ai|là người hay (là )?máy|người hay máy)/i;
 const IS_AI = /(^|[\s,.!?])(AI|A\.I|BOT|bot)($|[\s,.!?])/;
 const RUDE = /(đậu má|dau ma|đ[ịi]t|đéo|deo hieu|mẹ kiếp|me kiep|(^|[\s,.!?])(đm|dm|dmm|đcm|dcm|vcl|vl|cc|clm|vãi|vai lon)($|[\s,.!?]))/i;
+// Trò chuyện tự nhiên: câu chào, cảm ơn, chê đắt, nghi ngờ, còn cân nhắc, đang bận… trả lời mềm, đổi cách nói mỗi lần
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const hourVN = () => (new Date().getUTCHours() + 7) % 24;
+const lateNote = () => (hourVN() >= 21 || hourVN() < 7) ? ' Giờ này hơi muộn, anh Hiệp sẽ nhắn anh/chị từ 8h sáng mai ạ.' : '';
+const nudge = () => st.phone ? 'Anh/chị cần thêm gì cứ nhắn em nhé.' : pick(['Anh/chị muốn em gửi bảng tính cho căn nào ạ?', 'Anh/chị đang nghiêng về căn để ở hay để đầu tư ạ?', 'Anh/chị cần em lọc căn còn trống theo tầm tài chính không ạ?']);
+const SMALL = [
+  [/^(chào|chao|hi|hello|helo|alo|xin chào|em ơi|e ơi|ad ơi|admin ơi|bạn ơi)([\s,.!?]|$)/i, () => pick(['Dạ em chào anh/chị ạ 😊 Anh/chị đang quan tâm giá, vay hay một căn cụ thể để em gửi đúng thông tin ạ?', 'Dạ em đây ạ 👋 Anh/chị cần em hỗ trợ giá, chính sách vay hay căn còn trống ạ?'])],
+  [/(cảm ơn|cám ơn|thank|tks|thanks)/i, () => pick(['Dạ em cảm ơn anh/chị đã quan tâm ạ 🙏', 'Dạ không có gì ạ, em luôn sẵn sàng ạ 😊']) + ' ' + nudge()],
+  [/^(ok|oke|okay|okie|ừ|ừm|uh|uk|ờ|vâng|dạ|được|đc|rồi|hihi|haha|hehe|👍)[\s.!]*$/i, () => pick(['Dạ vâng ạ 😊', 'Dạ ạ.', 'Dạ em hiểu rồi ạ.']) + ' ' + nudge()],
+  [/(đắt|mắc|giá cao|cao quá|chát|hơi cao)/i, () => pick(['Dạ em hiểu ạ, nhìn tổng giá thì thấy lớn. ', 'Dạ vâng, nhiều anh chị cũng thấy vậy lúc đầu ạ. ']) + 'Nhưng vay 70% thì đến khi nhận nhà anh/chị chỉ cần khoảng <b>25%</b> (căn 2PN 61 m² ~<b>700 triệu</b>), 24 tháng đầu <b>không lãi, không gốc</b>; còn thanh toán sớm thì chiết khấu tới <b>19%</b>. Em tính thử đúng tầm tài chính của anh/chị nhé?'],
+  [/(lừa đảo|lừa|scam|uy tín không|có uy tín|tin được không|có thật không|có thật ko|an toàn không|rủi ro)/i, () => 'Dạ anh/chị cẩn thận là rất đúng ạ. Tòa F2 do <b>Sun Group</b> phát triển; Sở Xây dựng Đà Nẵng xác nhận <b>607 căn đủ điều kiện bán</b> (VB 17239/SXD-QLN), lô đất có sổ, <b>Techcombank bảo lãnh</b> cho người mua. Em gửi bản scan để anh/chị tự đối chiếu nhé.'],
+  [/(suy nghĩ thêm|cân nhắc|để xem đã|xem đã|tính sau|chưa có nhu cầu|chưa cần|chưa có tiền|chưa đủ tiền)/i, () => pick(['Dạ vâng, mua nhà thì phải cân nhắc kỹ ạ. ', 'Dạ không vội đâu ạ. ']) + 'Em gửi anh/chị <b>bảng tính + mặt bằng</b> qua Zalo để xem lúc rảnh, không làm phiền ạ.'],
+  [/(đang bận|bận rồi|lúc khác|để sau|tối nói|mai nói|nói sau)/i, () => 'Dạ không sao ạ. Anh/chị tiện giờ nào, để lại số Zalo em hẹn anh Hiệp liên hệ đúng giờ đó cho mình nhé.'],
+  [/(sao có số|spam|làm phiền|đừng gọi|không muốn bị gọi|gọi nhiều)/i, () => 'Dạ bên em chỉ liên hệ khi anh/chị chủ động để lại số, và gửi đúng thông tin anh/chị cần qua Zalo – không gọi liên tục đâu ạ.']
+];
+const smallTalk = (v, faq) => { for (let i = 0; i < SMALL.length; i++) if (SMALL[i][0].test(v) && (i > 2 || !faq)) return SMALL[i][1](); return ''; };
 function humanHandoff(v, rude) {
   st.human = (st.human || 0) + 1;
-  if (rude) bot('Dạ em xin lỗi đã làm anh/chị phiền lòng ạ 🙏');
+  if (rude) bot(pick(['Dạ em xin lỗi đã làm anh/chị phiền lòng ạ 🙏', 'Dạ em thành thật xin lỗi nếu em trả lời chưa đúng ý anh/chị ạ 🙏']));
   if (st.human === 1) bot('Em là trợ lý trả lời nhanh của anh <b>Hiệp – Giám đốc kinh doanh</b> dự án. Câu nào cần tư vấn kỹ, anh Hiệp sẽ <b>trực tiếp gọi hoặc nhắn Zalo</b> cho anh/chị ạ.');
-  bot('Anh/chị để lại <b>số Zalo</b> ở đây, hoặc nhắn thẳng Zalo/gọi <b>0904 567 009</b> – anh Hiệp trả lời trực tiếp ngay ạ.');
+  bot('Anh/chị để lại <b>số Zalo</b> ở đây, hoặc nhắn thẳng Zalo/gọi <b>0904 567 009</b> – anh Hiệp trả lời trực tiếp ạ.' + lateNote());
   st.step = 'phone';
   setInput('Nhập số điện thoại / Zalo…', true);
   choices([{t: '💬 Nhắn Zalo anh Hiệp', href: ZALO, pri: true}, {t: '📞 Gọi 0904 567 009', href: TEL}]);
@@ -1548,8 +1564,7 @@ function start() {
     thanksChoices();
     return;
   }
-  bot('Chào anh/chị 👋 Em là trợ lý của anh Hiệp – Giám đốc kinh doanh <b>Sun FourS Tower</b> Đà Nẵng.');
-  bot(topic ? topic.ask : CTX.hi);
+  bot(pick(['Chào anh/chị 👋', 'Dạ em chào anh/chị ạ 👋']) + ' Em là trợ lý của anh Hiệp – Giám đốc kinh doanh <b>Sun FourS Tower</b> Đà Nẵng. ' + (topic ? topic.ask : CTX.hi));
   const evs = EVENTS.filter(e => Date.now() < e.end);
   if (evs.length) bot('📅 Sự kiện bán hàng Tòa F2: ' + evs.map(e => '<b>' + e.when + '</b> tại <b>' + e.where + '</b>').join(' và ') + ' – anh/chị muốn tham dự thì em giữ chỗ nhé.');
   bot(topic ? 'Hoặc để em gợi ý căn, anh/chị mua để <b>ở</b> hay <b>đầu tư</b> ạ?' : 'Để em gợi ý đúng căn, anh/chị đang tìm căn để <b>ở</b> hay <b>đầu tư</b> ạ?');
@@ -1684,6 +1699,7 @@ form.addEventListener('submit', e => {
   if (p) { st.phone = p; askName(); return; }
   ping();
   if (HUMAN.test(v) || IS_AI.test(v) || RUDE.test(v)) { st.question = st.question ? st.question + ' | ' + v : v; humanHandoff(v, RUDE.test(v)); return; }
+  { const s = smallTalk(v, answerFaq(v)); if (s) { st.question = st.question ? st.question + ' | ' + v : v; bot(s); if (/bảng tính|scan|Zalo|giờ nào/.test(s) && !st.phone) { st.step = 'phone'; setInput('Nhập số điện thoại / Zalo…', true); choices([{t: '💬 Nhắn Zalo anh Hiệp', href: ZALO}, {t: 'Không cần ạ', fn: () => objection()}]); } return; } }
   if (/zalo/i.test(v) && !answerFaq(v)) { bot('Dạ anh/chị bấm nút dưới để nhắn Zalo chuyên viên, hoặc để lại số Zalo em gửi thông tin luôn ạ.'); choices([{t: 'Nhắn Zalo ngay', href: ZALO, pri: true}]); return; }
   if (st.step === 'phone' && NO.test(v)) { objection(); return; }
   if (st.step === 'phone' && v.replace(/\D/g, '').length >= 6) { bot('Số điện thoại hình như chưa đúng (cần 10 số, ví dụ 0904 567 009). Anh/chị kiểm tra lại giúp em ạ.'); return; }
@@ -1692,10 +1708,10 @@ form.addEventListener('submit', e => {
   const hit = MA_CAN.test(v) ? null : kbFind(v);
   if (hit) { reply(hit); return; }
   const a = answerFaq(v);
-  bot(a || 'Dạ câu này em cần chuyên viên kiểm tra để trả lời chính xác cho anh/chị ạ.');
+  bot(a || pick(['Dạ câu này em xin phép để anh Hiệp trả lời trực tiếp cho chính xác ạ.', 'Dạ phần này em muốn anh/chị nghe trực tiếp từ anh Hiệp cho đúng ạ.', 'Dạ câu này cần kiểm tra theo từng căn, em chuyển anh Hiệp trả lời mình ngay ạ.']));
   if (st.refused && a) return;
   st.step = 'phone';
-  bot(a ? 'Nếu anh/chị muốn xem chi tiết từng căn, em gửi qua Zalo cho dễ xem ạ – anh/chị để lại số Zalo là được.' : 'Anh/chị để lại <b>số Zalo</b>, chuyên viên trả lời và gửi tài liệu cho anh/chị trong khoảng 15 phút ạ.');
+  bot(a ? 'Nếu anh/chị muốn xem chi tiết từng căn, em gửi qua Zalo cho dễ xem ạ – anh/chị để lại số Zalo là được.' : 'Anh/chị để lại <b>số Zalo</b>, anh Hiệp trả lời và gửi tài liệu cho mình' + (lateNote() ? ' từ 8h sáng mai ạ.' : ' trong khoảng 15 phút ạ.'));
   setInput('Nhập số điện thoại / Zalo…', true);
   choices([{t: 'Nhắn Zalo chuyên viên', href: ZALO}, {t: 'Không cần ạ', fn: () => objection()}]);
 });
