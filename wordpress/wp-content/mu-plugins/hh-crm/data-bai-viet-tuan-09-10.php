@@ -287,14 +287,38 @@ HTML
 
 	$posts[] = array(
 		'slug'     => 'ban-khach-san-da-nang-ven-bien-gia-cong-suat',
-		'title'    => 'Bán khách sạn Đà Nẵng ven biển: mặt bằng giá và công suất 2026',
-		'excerpt'  => 'Bán khách sạn Đà Nẵng ven biển 2026: boutique Võ Nguyên Giáp khoảng 48 – 90 tỷ, An Thượng 28 – 125 tỷ; công suất 4 – 5 sao quý I khoảng 85 – 88%.',
+		'title'    => 'Bán khách sạn Đà Nẵng ven biển: 12 khách sạn 3 – 4 sao đang bán, giá và công suất 10/2026',
+		'rev'      => '2026-10-14a', // Thêm giỏ hàng 12 khách sạn đang chào bán.
+		'repub'    => true,
+		'excerpt'  => 'Bán khách sạn Đà Nẵng ven biển 10/2026: 12 khách sạn 3 – 4 sao Sơn Thủy, Hồ Nghinh, Phạm Văn Đồng, An Thượng, Trần Bạch Đằng giá 68 – 170 tỷ, 37 – 74 phòng, đang có doanh thu.',
 		'keyword'  => 'bán khách sạn Đà Nẵng',
 		'project'  => '',
 		'week'     => 9,
 		'category' => 'Thị trường',
 		'content'  => <<<'HTML'
 <p>Thị trường <strong>bán khách sạn Đà Nẵng</strong> ven biển năm 2026 có giá chào từ khoảng 28 – 125 tỷ cho khách sạn nhỏ ở phố An Thượng, 48 – 90 tỷ cho boutique mặt biển Võ Nguyên Giáp, đến 650 – 1.350 tỷ cho khách sạn 4 sao quy mô lớn. Công suất phòng khách sạn 4 – 5 sao quý I/2026 đạt khoảng 85 – 88%. Bài viết cập nhật tháng 10/2026.</p>
+
+<h2>Bán khách sạn Đà Nẵng: 12 khách sạn 3 – 4 sao ven biển đang chào bán (10/2026)</h2>
+<p>Danh sách khách sạn đang vận hành gần biển Mỹ Khê, Sơn Thủy do Hoàng Hiệp đang nhận chào bán, cập nhật tháng 10/2026. Doanh thu là số chủ nhà cung cấp, sẽ được đối chiếu sổ sách khi anh chị xem hồ sơ.</p>
+<table>
+<thead><tr><th>#</th><th>Vị trí</th><th>Đất</th><th>Quy mô</th><th>Doanh thu</th><th>Giá chào</th><th>Giá/m² đất</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Căn góc – biển Sơn Thủy (Ngũ Hành Sơn)</td><td>343 m², ngang 16 m</td><td>9 tầng · 45 phòng</td><td>≥ 400 triệu/tháng</td><td><strong>68 tỷ</strong></td><td>~198 triệu/m²</td></tr>
+<tr><td>2</td><td>2 mặt tiền An Tư Công Chúa (Ngũ Hành Sơn)</td><td>258 m², ngang 20 m</td><td>12 tầng · 52 phòng</td><td>> 600 triệu/tháng</td><td><strong>85 tỷ</strong></td><td>~329 triệu/m²</td></tr>
+<tr><td>3</td><td>2 mặt tiền biển Phạm Văn Đồng (Sơn Trà)</td><td>235 m², ngang 15 m</td><td>12 tầng · 60 phòng</td><td>> 600 triệu/tháng</td><td><strong>88 tỷ</strong></td><td>~374 triệu/m²</td></tr>
+<tr><td>4</td><td>Tòa căn hộ khách sạn Dương Đình Nghệ (Sơn Trà)</td><td>180 m², ngang 10 m</td><td>11 tầng · 37 phòng</td><td>Cho thuê khoán 350 triệu/tháng</td><td><strong>97 tỷ</strong></td><td>~539 triệu/m²</td></tr>
+<tr><td>5</td><td>Mặt tiền Hồ Nghinh (Sơn Trà)</td><td>200 m², ngang 10 m</td><td>12 tầng · 50 phòng</td><td>> 500 triệu/tháng</td><td><strong>115 tỷ</strong></td><td>~575 triệu/m²</td></tr>
+<tr><td>6</td><td>Mặt tiền Hồ Xuân Hương (Ngũ Hành Sơn)</td><td>381 m², ngang 9 m</td><td>10 tầng · 56 phòng</td><td>> 500 triệu/tháng</td><td><strong>115 tỷ</strong></td><td>~302 triệu/m²</td></tr>
+<tr><td>7</td><td>3 sao An Thượng 29 (phố Tây Mỹ Khê)</td><td>296 m², ngang 15 m</td><td>11 tầng · 37 phòng</td><td>> 350 triệu/tháng</td><td><strong>120 tỷ</strong></td><td>~405 triệu/m²</td></tr>
+<tr><td>8</td><td>Mặt tiền Phan Tôn (Sơn Trà)</td><td>207 m², ngang 12,5 m</td><td>12 tầng · 42 phòng</td><td>> 700 triệu/tháng</td><td><strong>125 tỷ</strong></td><td>~604 triệu/m²</td></tr>
+<tr><td>9</td><td>3 sao Hồ Nghinh (Sơn Trà)</td><td>252 m², ngang 10 m</td><td>16 tầng · 68 phòng</td><td>Đang để trống</td><td><strong>125 tỷ</strong></td><td>~496 triệu/m²</td></tr>
+<tr><td>10</td><td>3 sao Trần Bạch Đằng (Mỹ An)</td><td>162 m², ngang 9 m</td><td>12 tầng · 57 phòng</td><td>> 450 triệu/tháng</td><td><strong>130 tỷ</strong></td><td>~802 triệu/m²</td></tr>
+<tr><td>11</td><td>4 sao Phạm Văn Đồng (Sơn Trà)</td><td>345 m², ngang 14 m</td><td>16 tầng · 74 phòng</td><td>> 330 triệu/tháng</td><td><strong>160 tỷ</strong></td><td>~464 triệu/m²</td></tr>
+<tr><td>12</td><td>3 sao Võ Văn Kiệt (Sơn Trà)</td><td>268 m², ngang 13,5 m</td><td>12 tầng · 53 phòng</td><td>Cho thuê khoán 220 triệu/tháng</td><td><strong>170 tỷ</strong></td><td>~634 triệu/m²</td></tr>
+</tbody>
+</table>
+<p>So sánh nhanh theo tỷ lệ doanh thu năm trên giá bán (chưa trừ chi phí vận hành): khách sạn Sơn Thủy, An Tư Công Chúa và Phạm Văn Đồng 2 mặt tiền đạt khoảng 7 – 8,5%; Phan Tôn khoảng 6,7%; Hồ Nghinh, Hồ Xuân Hương khoảng 5%. Các tòa trên Võ Văn Kiệt, Phạm Văn Đồng 4 sao giá chủ yếu nằm ở đất mặt tiền lớn. Khách sạn Hồ Nghinh 16 tầng đang để trống phù hợp nhà đầu tư muốn tự vận hành hoặc đổi thương hiệu.</p>
+<p>Hồ sơ từng khách sạn (sổ, hoàn công, PCCC, doanh thu 12 tháng) và lịch xem trực tiếp: gọi/Zalo <strong>Hoàng Hiệp – 0904 567 009</strong>.</p>
 
 <h2>Bảng giá bán khách sạn Đà Nẵng theo khu vực</h2>
 <table>
@@ -304,12 +328,14 @@ HTML
 <tr><td>Võ Nguyên Giáp – 4 sao quy mô lớn</td><td>500 – 900 m² đất, 84 – 165 phòng</td><td>Khoảng 650 – 1.350 tỷ</td></tr>
 <tr><td>An Thượng (phố Tây Mỹ Khê)</td><td>80 – 300 m² đất, 16 – 40 phòng</td><td>Khoảng 28 – 125 tỷ</td></tr>
 <tr><td>Trần Bạch Đằng – Đỗ Bá (Mỹ An)</td><td>155 – 300 m² đất, 40 – 57 phòng</td><td>Khoảng 75 – 170 tỷ</td></tr>
-<tr><td>Hồ Nghinh (Sơn Trà)</td><td>100 – 300 m² đất, 16 – 40 phòng</td><td>Khoảng 30 – 100 tỷ</td></tr>
-<tr><td>Phạm Văn Đồng (Sơn Trà)</td><td>Khoảng 340 m² đất, 81 phòng</td><td>Khoảng 165 tỷ</td></tr>
+<tr><td>Hồ Nghinh (Sơn Trà)</td><td>100 – 300 m² đất, 16 – 68 phòng</td><td>Khoảng 30 – 125 tỷ</td></tr>
+<tr><td>Phạm Văn Đồng (Sơn Trà)</td><td>235 – 345 m² đất, 60 – 81 phòng</td><td>Khoảng 88 – 165 tỷ</td></tr>
+<tr><td>Sơn Thủy – An Tư Công Chúa – Hồ Xuân Hương (Ngũ Hành Sơn)</td><td>258 – 381 m² đất, 45 – 56 phòng</td><td>Khoảng 68 – 115 tỷ</td></tr>
+<tr><td>Phan Tôn – Dương Đình Nghệ – Võ Văn Kiệt (Sơn Trà)</td><td>180 – 270 m² đất, 37 – 53 phòng</td><td>Khoảng 97 – 170 tỷ</td></tr>
 <tr><td>Hội An – An Bàng, Tân Thành</td><td>650 – 1.600 m² đất, 20 – 39 phòng</td><td>Khoảng 50 – 91 tỷ</td></tr>
 </tbody>
 </table>
-<p>Số liệu tổng hợp từ tin rao năm 2026, giá chào thường còn biên độ thương lượng. Đây không phải danh sách căn cụ thể.</p>
+<p>Bảng khu vực tổng hợp từ tin rao năm 2026 và giỏ hàng Hoàng Hiệp đang chào bán; giá chào thường còn biên độ thương lượng.</p>
 
 <h2>Công suất phòng: con số cần đọc đúng</h2>
 <p>Theo báo cáo thị trường công khai, công suất phòng khách sạn 4 – 5 sao tại Đà Nẵng quý I/2026 đạt khoảng 85 – 88%. Một số tin rao khách sạn 52 phòng trên Võ Nguyên Giáp nêu công suất mùa cao điểm khoảng 95%.</p>
@@ -352,10 +378,12 @@ HTML
 				'Boutique mặt biển Võ Nguyên Giáp khoảng 48 – 90 tỷ; An Thượng khoảng 28 – 125 tỷ',
 				'Công suất 4 – 5 sao quý I/2026 khoảng 85 – 88% (báo cáo công khai)',
 				'Thẩm định doanh thu 12 tháng, PCCC, hoàn công trước khi xuống tiền',
+				'12 khách sạn 3 – 4 sao ven biển đang chào bán 68 – 170 tỷ, 37 – 74 phòng (10/2026)',
 			),
 			'faq'       => array(
 				array( 'Giá khách sạn ven biển Đà Nẵng bao nhiêu?', 'Tham khảo tin rao 2026: khách sạn nhỏ phố An Thượng khoảng 28 – 125 tỷ, boutique mặt biển Võ Nguyên Giáp khoảng 48 – 90 tỷ, 4 sao quy mô lớn khoảng 650 – 1.350 tỷ.' ),
 				array( 'Công suất phòng khách sạn Đà Nẵng hiện nay?', 'Khách sạn 4 – 5 sao quý I/2026 đạt khoảng 85 – 88% theo báo cáo thị trường; công suất trung bình năm thường thấp hơn mùa cao điểm.' ),
+				array( 'Khách sạn ven biển Đà Nẵng đang bán giá bao nhiêu?', 'Giỏ hàng tháng 10/2026 của Hoàng Hiệp có 12 khách sạn 3 – 4 sao từ 68 tỷ (căn góc 9 tầng 45 phòng biển Sơn Thủy) đến 170 tỷ (12 tầng 53 phòng Võ Văn Kiệt), doanh thu chủ nhà công bố khoảng 330 – 700 triệu/tháng.' ),
 				array( 'Mua khách sạn cần kiểm tra giấy tờ gì?', 'Sổ đất, giấy phép xây dựng và hoàn công, PCCC, giấy phép kinh doanh lưu trú, sổ sách doanh thu và các hợp đồng đang hiệu lực.' ),
 			),
 		),
