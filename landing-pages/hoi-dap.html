@@ -2036,6 +2036,31 @@ const FAQ = [
 const answerFaq = v => { for (const [re, fn] of FAQ) if (re.test(v)) return fn(); return ''; };
 const NO = /^(không|ko|k|chưa|thôi|để sau|không cần|ko cần|no)\b/i;
 
+// Khách khó chịu hoặc hỏi "đang nói chuyện với máy/ai": xin lỗi khéo, chuyển ngay cho anh Hiệp, báo gấp về Telegram
+const HUMAN = /(chat ?bot|robot|người máy|máy trả lời|trả lời tự động|tự động trả lời|(nhắn|nói chuyện|chat|nhắn tin) với (máy|bot)|người thật|nhân viên thật|gặp người|gặp nhân viên|nói chuyện với người|(nói chuyện|chat|nhắn|nhắn tin|trò chuyện) với ai($|[\s,.!?])|(bạn|em|anh|chị) là ai|là người hay (là )?máy|người hay máy)/i;
+const IS_AI = /(^|[\s,.!?])(AI|A\.I|BOT|bot)($|[\s,.!?])/;
+const RUDE = /(đậu má|dau ma|đ[ịi]t|đéo|deo hieu|mẹ kiếp|me kiep|(^|[\s,.!?])(đm|dm|dmm|đcm|dcm|vcl|vl|cc|clm|vãi|vai lon)($|[\s,.!?]))/i;
+function humanHandoff(v, rude) {
+  st.human = (st.human || 0) + 1;
+  if (rude) bot('Dạ em xin lỗi đã làm anh/chị phiền lòng ạ 🙏');
+  if (st.human === 1) bot('Em là trợ lý trả lời nhanh của anh <b>Hiệp – Giám đốc kinh doanh</b> dự án. Câu nào cần tư vấn kỹ, anh Hiệp sẽ <b>trực tiếp gọi hoặc nhắn Zalo</b> cho anh/chị ạ.');
+  bot('Anh/chị để lại <b>số Zalo</b> ở đây, hoặc nhắn thẳng Zalo/gọi <b>0904 567 009</b> – anh Hiệp trả lời trực tiếp ngay ạ.');
+  st.step = 'phone';
+  setInput('Nhập số điện thoại / Zalo…', true);
+  choices([{t: '💬 Nhắn Zalo anh Hiệp', href: ZALO, pri: true}, {t: '📞 Gọi 0904 567 009', href: TEL}]);
+  focusInput();
+  if (ss.get('chat_human') || ss.get('chat_done')) return;
+  ss.set('chat_human', '1');
+  queue.then(() => {
+    const data = Object.assign({
+      thong_bao: 'Khách muốn nói chuyện với người thật', yeu_cau: '⚠️ KHÁCH MUỐN NÓI CHUYỆN VỚI NGƯỜI THẬT – vào hỗ trợ ngay',
+      nhu_cau: st.goal, tai_chinh: st.budget, cau_hoi: st.question, hoi_thoai: st.log.join('\n').trim(),
+      time: new Date().toLocaleString('vi-VN'), source: location.href.split('?')[0]
+    }, srcData());
+    try { fetch(TG, {method: 'POST', mode: 'no-cors', keepalive: true, headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify(data)}).catch(() => {}); } catch (e) {}
+  });
+}
+
 function start() {
   if (st.started) return;
   st.started = true;
@@ -2045,7 +2070,7 @@ function start() {
     thanksChoices();
     return;
   }
-  bot('Chào anh/chị 👋 Em là trợ lý tư vấn <b>Sun FourS Tower</b> Đà Nẵng.');
+  bot('Chào anh/chị 👋 Em là trợ lý của anh Hiệp – Giám đốc kinh doanh <b>Sun FourS Tower</b> Đà Nẵng.');
   bot(topic ? topic.ask : CTX.hi);
   const evs = EVENTS.filter(e => Date.now() < e.end);
   if (evs.length) bot('📅 Sự kiện bán hàng Tòa F2: ' + evs.map(e => '<b>' + e.when + '</b> tại <b>' + e.where + '</b>').join(' và ') + ' – anh/chị muốn tham dự thì em giữ chỗ nhé.');
@@ -2180,6 +2205,7 @@ form.addEventListener('submit', e => {
   const p = findPhone(v);
   if (p) { st.phone = p; askName(); return; }
   ping();
+  if (HUMAN.test(v) || IS_AI.test(v) || RUDE.test(v)) { st.question = st.question ? st.question + ' | ' + v : v; humanHandoff(v, RUDE.test(v)); return; }
   if (/zalo/i.test(v) && !answerFaq(v)) { bot('Dạ anh/chị bấm nút dưới để nhắn Zalo chuyên viên, hoặc để lại số Zalo em gửi thông tin luôn ạ.'); choices([{t: 'Nhắn Zalo ngay', href: ZALO, pri: true}]); return; }
   if (st.step === 'phone' && NO.test(v)) { objection(); return; }
   if (st.step === 'phone' && v.replace(/\D/g, '').length >= 6) { bot('Số điện thoại hình như chưa đúng (cần 10 số, ví dụ 0904 567 009). Anh/chị kiểm tra lại giúp em ạ.'); return; }
