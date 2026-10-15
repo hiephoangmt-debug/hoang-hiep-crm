@@ -53,6 +53,7 @@ function renderBPanel() {
     <div class="bmoney">Đã bán + đặt cọc: <b>${vndTy(st.sold.value + st.deposit.value)} tỷ</b><br>Giá trị hàng còn trống: <b>${vndTy(st.available.value)} tỷ</b></div>
     <div class="row"><button id="bViewP">🎥 Góc phối cảnh</button><button id="bViewC">🔍 Cận cảnh tòa</button></div>
     <h4>360° thực tế</h4>
+    <button id="b360Site" class="primary">🛰 Xem tòa trên ảnh 360 khu đất</button>
     <div class="row"><button id="b360Tour">🌐 Tour 360 dự án</button><button id="b360Load" title="Ảnh 360° dạng equirectangular (tỉ lệ 2:1), ví dụ tải về từ Kuula hoặc ảnh flycam">🖼 Ghép tòa vào ảnh 360</button></div>
     ${bview?.pano ? `<div class="pano">
       <label class="slider">Xoay ảnh <input type="range" id="pHeading" min="-180" max="180" step="1" value="${bview.pano.heading}" /></label>
@@ -84,6 +85,7 @@ function renderBPanel() {
     renderBPanel();
   };
   $('#b360Tour').onclick = () => open360Tour();
+  $('#b360Site').onclick = () => bview.showSitePano(renderBPanel);
   $('#b360Load').onclick = () => $('#b360File').click();
   $('#b360File').onchange = (e) => {
     const file = e.target.files[0];

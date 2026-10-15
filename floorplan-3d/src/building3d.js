@@ -76,6 +76,9 @@ export function slotLayout(b, slot) {
 }
 const ORANGE_SLOTS = new Set(['05', '06', '07', '08', '09', '10']);
 export const AVENUE_X = -52;
+// Căn chỉnh ảnh 360 khu đất (public/pano/khu-dat-360.jpg): xoay ảnh, độ cao flycam (m), góc ống kính
+// look: điểm nhìn mặc định (về phía tòa F2 và lô F3)
+export const SITE_PANO = { heading: 90, alt: 170, fov: 70, look: [40, 0, -30] };
 
 export class BuildingView {
   constructor(container, getBuilding, onSelect, opts = {}) {
@@ -226,8 +229,9 @@ export class BuildingView {
 
   // ---------------- Ghép tòa nhà vào ảnh 360° thực tế ----------------
   /** Tải ảnh 360° (equirectangular) làm nền; camera đứng tại điểm chụp, nhìn quanh được */
-  setPano(src, onReady) {
+  setPano(src, onReady, preset) {
     if (!src) { this.pano = null; this.applyPano(); return; }
+    if (preset) this.pano = { ...preset };
     new THREE.TextureLoader().load(src, (t) => {
       t.mapping = THREE.EquirectangularReflectionMapping;
       t.colorSpace = THREE.SRGBColorSpace;
@@ -258,7 +262,7 @@ export class BuildingView {
     this.scene.backgroundRotation.set(0, THREE.MathUtils.degToRad(q.heading), 0);
     const b = THREE.MathUtils.degToRad(q.bearing);
     const cam = new THREE.Vector3(Math.sin(b) * q.dist, q.alt, Math.cos(b) * q.dist);
-    const look = new THREE.Vector3(0, 30, 0).sub(cam).normalize();
+    const look = (q.look ? new THREE.Vector3(...q.look) : new THREE.Vector3(0, 30, 0)).sub(cam).normalize();
     this.camera.position.copy(cam);
     this.camera.fov = q.fov;
     this.camera.updateProjectionMatrix();
@@ -266,6 +270,14 @@ export class BuildingView {
     this.controls.target.copy(cam).add(look.multiplyScalar(0.5));
     this.controls.minDistance = 0.1;
     this.controls.update();
+  }
+
+  /** Ảnh 360 flycam khu đất dự án: camera đặt ngay trên ngã tư Minh Mạng – Nguyễn Phước Lan */
+  showSitePano(onReady) {
+    // Ngã tư nằm ở (AVENUE_X, roadZ) → quy ra hướng/khoảng cách so với tâm F2
+    const bearing = (THREE.MathUtils.radToDeg(Math.atan2(AVENUE_X, this.roadZ)) + 360) % 360;
+    const dist = Math.hypot(AVENUE_X, this.roadZ);
+    this.setPano(`${import.meta.env.BASE_URL || './'}pano/khu-dat-360.jpg`, onReady, { ...SITE_PANO, bearing, dist });
   }
 
   /** Xem mặt bằng tầng chi tiết: chỉ tầng fi, camera nhìn xuống chếch như ảnh phối cảnh */
