@@ -16,6 +16,19 @@ const MODELS = {
 const cache = new Map();
 let loader = null;
 
+/** Mô hình nén (KHR_mesh_quantization / meshopt) lưu toạ độ dạng số nguyên chuẩn hoá – bộ render như thật
+ *  không giải được và vẽ thành mảng khổng lồ che cả căn → đổi sang số thực */
+function dequantize(geo) {
+  for (const name of Object.keys(geo.attributes)) {
+    const a = geo.attributes[name];
+    if (!a.normalized && !a.isInterleavedBufferAttribute && a.array instanceof Float32Array) continue;
+    const n = a.itemSize, out = new Float32Array(a.count * n);
+    const get = [a.getX, a.getY, a.getZ, a.getW];
+    for (let i = 0; i < a.count; i++) for (let c = 0; c < n; c++) out[i * n + c] = get[c].call(a, i);
+    geo.setAttribute(name, new THREE.BufferAttribute(out, n));
+  }
+}
+
 function load(file) {
   if (!cache.has(file)) {
     loader ||= new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
@@ -23,7 +36,7 @@ function load(file) {
       const root = g.scene;
       root.traverse((o) => {
         if (o.isLight) o.visible = false;
-        if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; }
+        if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; dequantize(o.geometry); }
       });
       const box = new THREE.Box3().setFromObject(root);
       return { root, box, size: box.getSize(new THREE.Vector3()), center: box.getCenter(new THREE.Vector3()) };

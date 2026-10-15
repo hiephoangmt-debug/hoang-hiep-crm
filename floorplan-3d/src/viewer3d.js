@@ -367,7 +367,7 @@ export class Viewer3D {
       if (this.isStudio()) { grad.topColor.set(night ? 0x1c2230 : 0xdcdcdc); grad.bottomColor.set(night ? 0x1c2230 : 0xd4d4d4); grad.update(); }
       this.scene.background = grad;
       // Nhìn từ trên: HDRI trong nhà có "trời" là trần tối → dùng trời sáng để sàn, nội thất đủ sáng
-      if (above) { grad.topColor.set(night ? 0x2a3040 : 0xffffff); grad.bottomColor.set(night ? 0x1c2230 : 0xdcdcdc); grad.update(); }
+      if (above) { grad.topColor.set(night ? 0x2a3040 : 0xffffff); grad.bottomColor.set(night ? 0x1c2230 : 0xdcdcdc); grad.update(); this._ptEnvI = this.scene.environmentIntensity; this.scene.environmentIntensity = night ? 0.6 : 2.4; }
       this.scene.environment = this.state.realistic && this.hdriEquirect && !above ? this.hdriEquirect : grad;
     } else {
       this._ptBg = { bg: this.scene.background, env: this.scene.environment };
@@ -375,6 +375,26 @@ export class Viewer3D {
     }
     this._ptCatcher = this.shadowCatcher.visible;
     this.shadowCatcher.visible = false;
+    // Bộ path tracing không hỗ trợ mặt phẳng cắt: nhìn từ trên thì hạ tường xuống đúng cao độ mặt cắt,
+    // bỏ vật nằm trên mặt cắt (đèn trần, LED hắt, thanh rèm) để ánh sáng trời lọt vào phòng như ảnh phối cảnh
+    this._ptScaled = [];
+    const cutY = this._ptSaved.cut < 0.999 ? 0.25 + this._ptSaved.cut * (this.built.height - 0.25) : null;
+    if (above && !this.isNight) {
+      // Nắng gần đỉnh đầu (lệch nhẹ) để trong phòng không bị tường che tối; tắt lại sẽ trả về theo giờ
+      const t = this.sun.target.position, d = this.sun.position.distanceTo(t);
+      this.sun.position.copy(t).add(new THREE.Vector3(0.28, 1, 0.38).normalize().multiplyScalar(d));
+    }
+    if (above && cutY) {
+      const k = cutY / this.built.height;
+      this.built.root.traverse((o) => {
+        if (o.name === 'Tường' || o.name === 'Đỉnh tường') { this._ptScaled.push([o, o.scale.y]); o.scale.y *= k; }
+      });
+      const box = new THREE.Box3();
+      this.built.root.traverse((o) => {
+        if (!o.isMesh || o.name === 'Tường' || o.name === 'Đỉnh tường') return;
+        if (o.visible && (o.name === 'LED hắt' || o.userData.lampDisc || box.setFromObject(o).min.y > cutY - 0.05)) { o.visible = false; o.userData.ptHidden = true; }
+      });
+    }
     // Bộ path tracing vẫn vẽ cả vật đang ẩn (trần, mặt cắt, khối đồ giản lược đã thay bằng mô hình thật…)
     // → tạm gỡ hẳn khỏi cảnh, gắn lại khi tắt
     this._ptDetached = [];
@@ -389,9 +409,12 @@ export class Viewer3D {
   stopRealRender() {
     if (!this.ptActive) return;
     this.ptActive = false;
-    (this._ptDetached || []).forEach(([o, parent]) => parent.add(o));
+    (this._ptDetached || []).forEach(([o, parent]) => { parent.add(o); if (o.userData.ptHidden) { o.visible = true; delete o.userData.ptHidden; } });
     this._ptDetached = null;
+    (this._ptScaled || []).forEach(([o, sy]) => (o.scale.y = sy));
+    this._ptScaled = null;
     if (this._ptBg) { this.scene.background = this._ptBg.bg; this.scene.environment = this._ptBg.env; }
+    if (this._ptEnvI != null) { this.scene.environmentIntensity = this._ptEnvI; this._ptEnvI = null; }
     if (this._ptCatcher) this.shadowCatcher.visible = true;
     this.built.root.traverse((o) => { if (o.userData.capBack) o.visible = true; });
     this.state.cut = this._ptSaved?.cut ?? 1;
@@ -534,7 +557,8 @@ export class Viewer3D {
     const target = new THREE.Vector3(b.cx, 0.3, b.cy + (preset === 'iso' ? 0.4 : 0));
     const s = b.size;
     let pos;
-    if (preset === 'top') pos = new THREE.Vector3(b.cx, s * 1.55 + 4, b.cy + 0.01);
+    // Nhìn từ trên: căn ngang (rộng > sâu) xoay cho cạnh dài nằm dọc màn hình, khớp với ảnh mặt bằng 5:6 tải về
+    if (preset === 'top') pos = b.maxX - b.minX > b.maxY - b.minY ? new THREE.Vector3(b.cx - 0.01, s * 1.55 + 4, b.cy) : new THREE.Vector3(b.cx, s * 1.55 + 4, b.cy + 0.01);
     else if (preset === 'front') pos = new THREE.Vector3(b.cx, s * 0.35 + 1.5, b.maxY + s * 1.0 + 3);
     else if (this.isoView) {
       // Góc nhìn chéo kiểu phối cảnh bán hàng: từ phía mặt tiền, lệch trái, chúc xuống
@@ -873,15 +897,22 @@ export class Viewer3D {
       this.camera.updateProjectionMatrix();
       const t0 = planMode ? new THREE.Vector3(this.built.bounds.cx, 0, this.built.bounds.cy) : this.controls.target;
       const p0 = planMode ? t0.clone().add(new THREE.Vector3(0, this.built.bounds.size * 2 + 6, 0.001)) : this.camera.position;
+      // Mặt bằng căn ngang (rộng > sâu): xoay 90° cho cạnh dài nằm dọc, căn to hơn trong khung 5:6
+      if (planMode) this.camera.up.set(this.built.bounds.maxX - this.built.bounds.minX > this.built.bounds.maxY - this.built.bounds.minY ? 1 : 0, 0, this.built.bounds.maxX - this.built.bounds.minX > this.built.bounds.maxY - this.built.bounds.minY ? 0 : -1);
+      this.camera.lookAt(t0);
       const fit = this.fitView(p0, t0, 0.9);
       this.camera.position.copy(fit.pos);
       this.camera.lookAt(fit.target);
       this.camera.updateMatrixWorld();
     }
-    const out = exportImage({ renderer: this.renderer, scene: this.scene, camera: this.camera, render, keepRatio: true, frame, ...extra, ...info });
+    // Đang render như thật không đổi được khung → cắt sát vùng có căn
+    let focus = null;
+    if (usePT) { const b = this.built.bounds; focus = []; for (const px of [b.minX, b.maxX]) for (const pz of [b.minY, b.maxY]) for (const py of [0, this.built.height]) focus.push({ x: px, y: py, z: pz }); }
+    const out = exportImage({ renderer: this.renderer, scene: this.scene, camera: this.camera, render, keepRatio: true, frame, focus, ...extra, ...info });
     if (!usePT) {
       this.renderer.setPixelRatio(saved.pr);
       this.composer.setPixelRatio(saved.pr);
+      this.camera.up.set(0, 1, 0);
       this.camera.position.copy(saved.pos);
       this.controls.target.copy(saved.target);
       this.camera.lookAt(saved.target);
