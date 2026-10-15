@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="ladipage-rules" content="v2">
 <title>Hải Minh Đà Nẵng – Mở Mắt Là Thấy Biển | Đăng Ký Ưu Tiên Trước Ra Mắt</title>
-<meta name="description" content="Căn hộ dịch vụ Hải Minh – tháp 30 tầng ngay mặt biển Võ Nguyên Giáp, góc Trường Sa. Cả hệ sinh thái biển trong một địa chỉ. Dự kiến ra mắt 11/2026 – đăng ký ưu tiên nhận bảng giá.">
+<meta name="description" content="Căn hộ khách sạn Hải Minh – tháp 30 tầng ngay mặt biển Võ Nguyên Giáp, góc Trường Sa. Vị trí giữa hệ sinh thái biển, bài toán cho thuê minh họa, dự kiến ra mắt 11/2026.">
 <link rel="canonical" href="https://www.xn--cnhdchvhiminh-prb1884ifsamh6h.com.vn/">
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -123,7 +123,60 @@ footer{background:var(--navy3);color:#A9B7CB;font-size:13.5px;padding:30px 0}
 footer b{color:#fff}
 footer a{color:var(--orange);font-weight:700;text-decoration:none}
 
+
+/* Location */
+.loc{display:grid;grid-template-columns:1.1fr 1fr;gap:26px;margin-top:22px;align-items:start}
+.story{font-size:17px;line-height:1.75}
+.story p{margin-bottom:14px}
+.times{background:var(--navy);border-radius:14px;padding:10px 22px}
+.times div{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px dashed rgba(255,255,255,.2);color:#fff;font-weight:600}
+.times div:last-child{border-bottom:0}
+.times b{color:var(--sun);white-space:nowrap}
+.times-note{font-size:12.5px;color:var(--muted);margin-top:8px}
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+.stat{background:var(--navy);border-radius:14px;padding:24px 16px;text-align:center;color:#C7D2E3}
+.stat b{display:block;font-size:42px;font-weight:900;color:var(--sun);line-height:1.1}
+.stat span{font-size:15px}
+.src{font-size:12.5px;color:var(--muted);margin-top:10px}
+.src a{color:var(--muted)}
+/* Hotel apartment */
+.why{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:22px}
+.why div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px}
+.why b{display:block;font-size:18px;color:var(--navy);margin-bottom:6px}
+/* Scenario table */
+table{width:100%;border-collapse:collapse;background:#fff;font-size:15.5px;margin-top:18px}
+th,td{border:1px solid var(--line);padding:11px 12px;text-align:center}
+th{background:var(--navy);color:#fff}
+td:first-child,th:first-child{text-align:left}
+.hl{color:var(--orange);font-weight:900}
+/* Rate */
+.rate{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:12px;align-items:center;margin-top:22px}
+.rbox{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 14px;text-align:center}
+.rbox small{display:block;font-size:12.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.rbox b{display:block;font-size:32px;font-weight:900;color:var(--navy);margin:4px 0}
+.rbox.ok b{color:#1E8E3E}
+.rbox span{font-size:14px}
+.op{font-size:30px;font-weight:900;color:var(--orange);text-align:center}
+.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.tips div{background:var(--navy);color:#C7D2E3;border-radius:12px;padding:20px}
+.tips b{display:block;color:#fff;font-size:17px;margin-bottom:6px}
+/* Now */
+.now{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+.now div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:22px;color:#D3DCEA}
+.now b{display:block;font-size:19px;color:#fff;margin-bottom:6px}
+.now .n{display:inline-block;width:38px;height:38px;border-radius:50%;background:var(--orange);color:#fff;font-weight:900;text-align:center;line-height:38px;margin-bottom:10px}
+.dark{background:var(--navy);color:#E6ECF5}
+.dark h2{color:#fff}
+
 @media (max-width:768px){
+  .loc,.stats,.why,.tips,.now{grid-template-columns:1fr}
+  .rate{grid-template-columns:1fr}
+  table{font-size:13px}
+  th,td{padding:8px 4px}
+  .op{font-size:24px}
+  .stat b{font-size:36px}
+
   .hero h1{font-size:38px}
   .hero .sub{font-size:17px}
   h2{font-size:26px}
@@ -198,18 +251,33 @@ footer a{color:var(--orange);font-weight:700;text-decoration:none}
   </div>
 </section>
 
-<!-- VALUE STACK -->
-<section class="sec light">
-  <div class="wrap center">
-    <span class="kicker">Đăng ký hôm nay</span>
-    <h2>Nhận ngay <span>trọn bộ 4 tài liệu</span> qua Zalo</h2>
-    <div class="stack">
-      <div class="gift"><div class="ic">💰</div><b>Bảng giá từng căn</b><span>Theo tầng, hướng, view biển</span></div>
-      <div class="gift"><div class="ic">🗺️</div><b>Mặt bằng tầng</b><span>5 dòng căn, vị trí căn đẹp</span></div>
-      <div class="gift"><div class="ic">📊</div><b>Bảng tính dòng tiền</b><span>Cho thuê theo đêm từng căn</span></div>
-      <div class="gift"><div class="ic">📸</div><b>Ảnh tiến độ</b><span>Công trường cập nhật định kỳ</span></div>
+<!-- VỊ TRÍ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">Vị trí</span>
+      <h2>Những khoảnh khắc đẹp của Đà Nẵng <span>đều nằm trước cửa</span></h2>
     </div>
-    <a class="btn" href="#dang-ky" style="margin-top:26px">NHẬN TRỌN BỘ TÀI LIỆU</a>
+    <div class="loc">
+      <div class="story">
+        <p>Buổi sáng, mặt trời lên ngay trên biển Mỹ Khê – Non Nước, nước trong đến mức nhìn thấy cát. Bạn đi bộ ra biển khi phố còn chưa thức dậy.</p>
+        <p>Buổi chiều, ghé quán cà phê phố An Thượng, leo Ngũ Hành Sơn ngắm toàn cảnh thành phố, hoặc lái xe nửa tiếng vào phố cổ Hội An ăn tối.</p>
+        <p>Buổi tối, cả trục Võ Nguyên Giáp – Trường Sa lên đèn: resort, nhà hàng hải sản, quán bar ven biển. <b>Hải Minh đứng ngay giữa nhịp sống đó</b> – góc Trường Sa – Nguyễn Đức Thuận, đối diện Silver Shores.</p>
+        <p>Với khách du lịch, đây là vị trí họ tìm kiếm đầu tiên khi đặt phòng. Với chủ căn, đó là lợi thế cho thuê không phải tự tạo ra.</p>
+      </div>
+      <div>
+        <div class="times">
+          <div><span>🏖️ Bãi biển Mỹ Khê – Non Nước</span><b>Đi bộ</b></div>
+          <div><span>🏨 Silver Shores (Hòn Ngọc Á Châu)</span><b>Đối diện</b></div>
+          <div><span>🍹 Phố du lịch An Thượng</span><b>≈ 5–10 phút</b></div>
+          <div><span>⛰️ Ngũ Hành Sơn, làng đá Non Nước</span><b>≈ 5–10 phút</b></div>
+          <div><span>🌉 Cầu Rồng, trung tâm thành phố</span><b>≈ 15 phút</b></div>
+          <div><span>✈️ Sân bay quốc tế Đà Nẵng</span><b>≈ 15–20 phút</b></div>
+          <div><span>🏮 Phố cổ Hội An</span><b>≈ 30 phút</b></div>
+        </div>
+        <p class="times-note">Thời gian di chuyển ước tính bằng ô tô, tùy giờ và tình trạng giao thông.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -246,6 +314,112 @@ footer a{color:var(--orange);font-weight:700;text-decoration:none}
   </div>
 </section>
 
+<!-- DU LỊCH ĐÀ NẴNG -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">Nhu cầu lưu trú</span>
+      <h2>Đà Nẵng ngày càng đông khách – <span>nhu cầu thuê căn hộ biển tăng theo</span></h2>
+      <p>Khách lưu trú tại Đà Nẵng tăng mạnh, đặc biệt khách quốc tế – nhóm thích thuê căn hộ có bếp, phòng khách cho gia đình và nhóm bạn.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>16,5 triệu</b><span>lượt khách lưu trú 11 tháng năm 2025</span></div>
+      <div class="stat"><b>+18,9%</b><span>so với cùng kỳ năm 2024</span></div>
+      <div class="stat"><b>7 triệu</b><span>lượt khách quốc tế, tăng 26,5%</span></div>
+    </div>
+    <p class="src center">Nguồn: Cục Thống kê TP Đà Nẵng, theo <a href="https://baovanhoa.vn/du-lich/du-lich-da-nang-don-165-trieu-luot-khach-sau-11-thang-185181.html">Báo Văn hóa</a>.</p>
+  </div>
+</section>
+
+<!-- CĂN HỘ KHÁCH SẠN -->
+<section class="sec light">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">Căn hộ khách sạn</span>
+      <h2>Vì sao căn hộ khách sạn mặt biển <span>dễ cho thuê</span>?</h2>
+    </div>
+    <div class="why">
+      <div><b>🍳 Khách thích "ở như nhà"</b>Gia đình, nhóm bạn, khách ở dài ngày ưu tiên căn hộ có bếp, phòng khách, nhiều phòng ngủ – điều phòng khách sạn thường không có.</div>
+      <div><b>🧑‍💼 Có đơn vị vận hành</b>Căn hộ du lịch thường do đơn vị chuyên nghiệp quản lý, đưa lên Booking, Agoda, Airbnb; chủ căn không phải tự đón khách, dọn phòng.</div>
+      <div><b>🌊 View biển = giá thuê cao hơn</b>Cùng một khu vực, phòng nhìn thẳng ra biển luôn có giá/đêm cao hơn phòng không view – căn tầng cao, view trực diện là căn được săn nhất.</div>
+      <div><b>🔑 Vừa nghỉ dưỡng, vừa có thu nhập</b>Gia đình dùng căn hộ cho kỳ nghỉ của mình, thời gian còn lại cho thuê (theo chính sách của đơn vị vận hành).</div>
+    </div>
+  </div>
+</section>
+
+<!-- DÒNG TIỀN -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">Dòng tiền cho thuê</span>
+      <h2>Nơi bạn nghỉ dưỡng – <span>cũng là nơi khách muốn thuê</span></h2>
+      <p>Giá phòng ven biển trục Võ Nguyên Giáp phổ biến khoảng 1 – 3 triệu/đêm (giá công khai trên các nền tảng đặt phòng). Bài toán minh họa với căn giá 3 tỷ, chi phí vận hành giả định 40% doanh thu:</p>
+    </div>
+    <table>
+      <tr><th>Giả định</th><th>Thận trọng</th><th>Trung bình</th><th>Tích cực</th></tr>
+      <tr><td>Giá thuê / đêm</td><td>1.000.000đ</td><td>1.200.000đ</td><td>1.500.000đ</td></tr>
+      <tr><td>Công suất phòng</td><td>50%</td><td>60%</td><td>70%</td></tr>
+      <tr><td><b>Thu nhập ròng / tháng</b></td><td class="hl">≈ 9,1 tr</td><td class="hl">≈ 13,1 tr</td><td class="hl">≈ 19,2 tr</td></tr>
+      <tr><td>Thu nhập ròng / năm</td><td>≈ 109 tr</td><td>≈ 158 tr</td><td>≈ 230 tr</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- LÃI SUẤT -->
+<section class="sec light">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">Lãi suất cao?</span>
+      <h2>Lãi suất cao – <span>để khách thuê trả giúp phần lớn tiền lãi</span></h2>
+      <p>Ví dụ minh họa: căn 3 tỷ, vay 50% (1,5 tỷ), lãi suất giả định 10%/năm, cho thuê theo kịch bản trung bình.</p>
+    </div>
+    <div class="rate">
+      <div class="rbox"><small>Thu nhập ròng cho thuê</small><b>≈ 13,1 tr</b><span>mỗi tháng</span></div>
+      <div class="op">−</div>
+      <div class="rbox"><small>Tiền lãi vay</small><b>≈ 12,5 tr</b><span>mỗi tháng</span></div>
+      <div class="op">=</div>
+      <div class="rbox ok"><small>Còn lại</small><b>≈ +0,6 tr</b><span>dòng tiền thuê gần đủ trả lãi</span></div>
+    </div>
+    <div class="tips">
+      <div><b>① Chọn căn vừa ngân sách</b>Căn 1PN 47 m² hoặc 2PN – vốn ban đầu thấp hơn, dễ cho thuê theo đêm.</div>
+      <div><b>② Tận dụng chính sách thanh toán</b>Tiến độ thanh toán, hỗ trợ vay sẽ được công bố khi ra mắt – đăng ký để nhận sớm và chuẩn bị trước.</div>
+      <div><b>③ Vay ở mức an toàn</b>Giữ tỷ lệ vay hợp lý để dòng tiền cho thuê gánh được tiền lãi trong mọi kịch bản.</div>
+    </div>
+    <p class="warn">⚠️ Tất cả con số là <b>ví dụ minh họa dựa trên giả định</b>, không phải cam kết lợi nhuận hay tư vấn tài chính. Lãi suất thực tế theo ngân hàng; giá bán, giá thuê, công suất và chi phí phụ thuộc thị trường và chính sách vận hành của dự án.</p>
+  </div>
+</section>
+
+<!-- VÌ SAO ĐĂNG KÝ SỚM -->
+<section class="sec dark">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">Đừng để lỡ</span>
+      <h2>Vì sao nên <span style="color:var(--orange)">đăng ký ngay</span>, không đợi?</h2>
+    </div>
+    <div class="now">
+      <div><span class="n">1</span><b>Căn đẹp luôn hết trước</b>Tầng cao, view biển trực diện có số lượng giới hạn theo mặt bằng – khách đăng ký trước được ưu tiên chọn trước.</div>
+      <div><span class="n">2</span><b>Có thông tin sớm, chủ động tài chính</b>Nhận bảng giá, chính sách thanh toán ngay khi công bố – đủ thời gian tính toán vốn và khoản vay.</div>
+      <div><span class="n">3</span><b>Mặt biển ngày càng hiếm</b>Quỹ đất sát biển dọc Võ Nguyên Giáp – Trường Sa gần như đã kín resort, khách sạn – dự án mặt biển mới không còn nhiều.</div>
+    </div>
+    <div class="center" style="margin-top:26px"><a class="btn" href="#dang-ky">ĐĂNG KÝ ƯU TIÊN NGAY</a></div>
+  </div>
+</section>
+
+<!-- VALUE STACK -->
+<section class="sec light">
+  <div class="wrap center">
+    <span class="kicker">Đăng ký hôm nay</span>
+    <h2>Nhận ngay <span>trọn bộ 4 tài liệu</span> qua Zalo</h2>
+    <div class="stack">
+      <div class="gift"><div class="ic">💰</div><b>Bảng giá từng căn</b><span>Theo tầng, hướng, view biển</span></div>
+      <div class="gift"><div class="ic">🗺️</div><b>Mặt bằng tầng</b><span>5 dòng căn, vị trí căn đẹp</span></div>
+      <div class="gift"><div class="ic">📊</div><b>Bảng tính dòng tiền</b><span>Cho thuê theo đêm từng căn</span></div>
+      <div class="gift"><div class="ic">📸</div><b>Ảnh tiến độ</b><span>Công trường cập nhật định kỳ</span></div>
+    </div>
+    <a class="btn" href="#dang-ky" style="margin-top:26px">NHẬN TRỌN BỘ TÀI LIỆU</a>
+  </div>
+</section>
+
 <!-- DỰ ÁN -->
 <section class="sec">
   <div class="wrap">
@@ -261,21 +435,6 @@ footer a{color:var(--orange);font-weight:700;text-decoration:none}
     </div>
     <figure class="pic"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/7301d9b5e31410fb79120292dce0e58c4d82d7d9/projects/hai-minh-da-nang/landing/images/toa-thap-can-ho-hai-minh-da-nang-30-tang.webp" alt="Tòa tháp căn hộ dịch vụ Hải Minh Đà Nẵng 30 tầng – phối cảnh dự án" width="1600" height="1233" loading="lazy"><figcaption>Phối cảnh tòa tháp 30 tầng (hình minh họa)</figcaption></figure>
     <div class="legal">📜 <b>Pháp lý:</b> theo Quyết định điều chỉnh của UBND TP Đà Nẵng, khu đất 3.720 m² (Khu Khách sạn – Condotel và dân cư Saphia) là đất thương mại, dịch vụ, Nhà nước giao đất có thu tiền sử dụng đất, <b>thời hạn 50 năm (9/2026 – 9/2076)</b>. Chủ đầu tư: Công ty TNHH Quản lý và Dịch vụ Hạ tầng kỹ thuật Miền Trung.</div>
-  </div>
-</section>
-
-<!-- DÒNG TIỀN -->
-<section class="sec light">
-  <div class="wrap">
-    <div class="center">
-      <span class="kicker">Dòng tiền cho thuê</span>
-      <h2>Nơi bạn nghỉ dưỡng – <span>cũng là nơi khách muốn thuê</span></h2>
-    </div>
-    <div class="money">
-      <div class="mbox"><small>Giá phòng ven biển Võ Nguyên Giáp</small><b>1 – 3 tr</b><span>mỗi đêm – giá công khai trên các nền tảng đặt phòng</span></div>
-      <div class="mbox"><small>Ví dụ minh họa căn 3 tỷ</small><b>≈ 13 tr</b><span>thu nhập ròng/tháng với 1,2 tr/đêm, công suất 60%, chi phí 40%</span></div>
-    </div>
-    <p class="warn">⚠️ Ví dụ minh họa dựa trên giả định, <b>không phải cam kết lợi nhuận</b>. Kết quả thực tế phụ thuộc thị trường và chính sách vận hành của dự án.</p>
   </div>
 </section>
 
@@ -321,6 +480,8 @@ footer a{color:var(--orange);font-weight:700;text-decoration:none}
     <details><summary>Khi nào Hải Minh ra mắt?</summary><p>Dự kiến trong tháng 11/2026. Khách đăng ký trước được ưu tiên nhận bảng giá, mặt bằng và chính sách ngay khi chủ đầu tư công bố.</p></details>
     <details><summary>Hải Minh nằm ở đâu?</summary><p>Góc đường Trường Sa – Nguyễn Đức Thuận, trục biển Võ Nguyên Giáp – Trường Sa, phường Ngũ Hành Sơn, Đà Nẵng, đối diện Silver Shores.</p></details>
     <details><summary>Thời hạn sử dụng đất bao lâu?</summary><p>50 năm, từ tháng 9/2026 đến tháng 9/2076, theo Quyết định điều chỉnh của UBND TP Đà Nẵng; đất thương mại, dịch vụ.</p></details>
+    <details><summary>Lãi suất đang cao, có nên mua lúc này?</summary><p>Tùy khả năng tài chính của từng khách. Với căn hộ cho thuê, nên tính dòng tiền thuê so với tiền lãi vay (xem ví dụ minh họa trên trang) và giữ tỷ lệ vay an toàn. Chuyên viên sẽ gửi bảng tính theo đúng căn và khoản vay anh/chị dự kiến.</p></details>
+    <details><summary>Căn hộ khách sạn khác chung cư thế nào?</summary><p>Hải Minh là căn hộ du lịch (condotel) trên đất thương mại, dịch vụ, phù hợp nghỉ dưỡng và khai thác cho thuê du lịch – không phải chung cư để ở thông thường. Thời hạn sử dụng đất 50 năm (9/2026 – 9/2076).</p></details>
     <details><summary>Đăng ký có mất phí không?</summary><p>Hoàn toàn miễn phí. Chuyên viên gửi tài liệu qua Zalo và tư vấn khi anh/chị cần.</p></details>
   </div>
 </section>
