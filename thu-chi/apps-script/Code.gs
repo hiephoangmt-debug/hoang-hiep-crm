@@ -133,7 +133,10 @@ function handle_(action, p) {
 }
 
 function core_(action, p) {
-  if (action === 'load') return { ok: true, rev: getRev_(), data: readData_() };
+  if (action === 'load') {
+    syncFromSheet_(); // nhận các dòng mẹ nhập/sửa thẳng trong sheet "Sổ thu chi"
+    return { ok: true, rev: getRev_(), data: readData_() };
+  }
 
   if (action === 'save') {
     const data = p.data;
@@ -141,6 +144,8 @@ function core_(action, p) {
     const lock = LockService.getScriptLock();
     lock.waitLock(20000);
     try {
+      // Có dòng mới nhập thẳng trong Google Sheet → lưu vào trước, báo app tải lại & gộp
+      if (!p.force && syncFromSheet_(true)) return { ok: false, conflict: true, rev: getRev_() };
       const rev = getRev_();
       // Máy khác vừa lưu → báo xung đột để máy này tải lại và gộp dữ liệu
       if (!p.force && Number(p.baseRev) !== rev) return { ok: false, conflict: true, rev: rev };
@@ -184,6 +189,72 @@ function writeData_(data) {
   sh.getRange(1, 1, rows.length, 1).setNumberFormat('@').setValues(rows);
 }
 
+/* ---------- Nhận dữ liệu nhập thẳng trong sheet "Sổ thu chi" ---------- */
+// Dòng có Mã (cột I) → cập nhật giao dịch đó nếu số tiền/diễn giải/ngày… đã bị sửa.
+// Dòng không có Mã → giao dịch mới (bỏ qua nếu đã có giao dịch y hệt).
+// Trả về số dòng đã nhận. Đã giữ khóa thì truyền locked = true.
+function syncFromSheet_(locked) {
+  const so = ss_().getSheetByName(SHEET_SO);
+  if (!so || so.getLastRow() < 2) return 0;
+  let lock = null;
+  if (!locked) { lock = LockService.getScriptLock(); lock.waitLock(20000); }
+  try {
+    const rows = so.getRange(2, 1, so.getLastRow() - 1, 9).getValues();
+    const data = readData_() || { v: 2, categories: [], tx: [], recurring: [], plans: [], skips: {}, budgets: { default: {}, months: {} }, deleted: {}, meta: {}, log: [] };
+    data.tx = data.tx || []; data.categories = data.categories || [];
+    const tz = ss_().getSpreadsheetTimeZone() || 'Asia/Ho_Chi_Minh';
+    const norm = function (x) { return String(x || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\u0111/g, 'd').replace(/\s+/g, ' ').trim(); };
+    const money = function (v) { if (typeof v === 'number') return Math.abs(Math.round(v)); const n = Number(String(v || '').replace(/[^0-9]/g, '')); return n || 0; };
+    const toDate = function (v) {
+      if (v instanceof Date && !isNaN(v)) return Utilities.formatDate(v, tz, 'yyyy-MM-dd');
+      const m = String(v || '').trim().match(/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{2,4})$/);
+      if (!m) return '';
+      const y = m[3].length === 2 ? '20' + m[3] : m[3];
+      return y + '-' + ('0' + m[2]).slice(-2) + '-' + ('0' + m[1]).slice(-2);
+    };
+    const catId = function (name, type) {
+      const n = norm(name);
+      const c = data.categories.filter(function (c) { return n && norm(c.name) === n; })[0];
+      if (c) return c.id;
+      const d = data.categories.filter(function (c) { return c.id === (type === 'thu' ? 'thu_khac' : 'khac'); })[0];
+      return d ? d.id : (type === 'thu' ? 'thu_khac' : 'khac');
+    };
+    const byId = {}; data.tx.forEach(function (t) { byId[t.id] = t; });
+    const key = function (t) { return t.date + '|' + t.type + '|' + t.amount + '|' + norm(t.desc); };
+    const keys = {}; data.tx.forEach(function (t) { keys[key(t)] = 1; });
+    let changed = 0, lastDate = '';
+    const now = Date.now();
+    rows.forEach(function (r, i) {
+      const desc = String(r[4] || '').trim();
+      const thu = money(r[5]), chi = money(r[6]);
+      let date = toDate(r[0]);
+      if (date) lastDate = date; else date = lastDate;
+      if (!desc || (!thu && !chi) || !date) return;
+      const type = thu ? 'thu' : 'chi';
+      const rec = { date: date, type: type, group: /co dinh/.test(norm(r[2])) ? 'co_dinh' : 'phat_sinh',
+        cat: catId(r[3], type), desc: desc, amount: thu || chi, note: String(r[7] || '') };
+      const id = String(r[8] || '').trim();
+      if (id && byId[id]) {
+        const t = byId[id];
+        const same = t.date === rec.date && t.type === rec.type && Number(t.amount) === rec.amount && t.desc === rec.desc &&
+          (t.note || '') === rec.note && t.group === rec.group && (!String(r[3] || '').trim() || t.cat === rec.cat);
+        if (!same) { Object.keys(rec).forEach(function (k) { if (k !== 'cat' || String(r[3] || '').trim()) t[k] = rec[k]; }); t.u = now; changed++; }
+        return;
+      }
+      if (keys[key(rec)]) return;
+      rec.id = 'sh' + now.toString(36) + i; rec.u = now;
+      data.tx.push(rec); keys[key(rec)] = 1; changed++;
+    });
+    if (changed) {
+      (data.log = data.log || []).push({ id: 'shl' + now.toString(36), u: now, t: now, a: 'import', dev: 'Google Sheet', desc: 'Nhập/sửa trong Google Sheet', n: changed, amount: 0 });
+      writeData_(data);
+      setRev_(getRev_() + 1);
+      try { writeMirror_(data); } catch (e) { console.error(e); }
+    }
+    return changed;
+  } finally { if (lock) lock.releaseLock(); }
+}
+
 /* ---------- Bản xem dạng bảng cho người dùng Google Sheet ---------- */
 function writeMirror_(data) {
   const cats = {};
@@ -193,19 +264,23 @@ function writeMirror_(data) {
   const so = getOrCreate_(SHEET_SO);
   const rows = tx.map(function (t) {
     const d = t.date.split('-');
-    return [new Date(Number(d[0]), Number(d[1]) - 1, Number(d[2])), t.type === 'thu' ? 'Thu' : 'Chi',
+    // 12h trưa: không lệch ngày dù múi giờ script khác múi giờ Sheet
+    return [new Date(Number(d[0]), Number(d[1]) - 1, Number(d[2]), 12), t.type === 'thu' ? 'Thu' : 'Chi',
       t.group === 'co_dinh' ? 'Cố định' : 'Phát sinh', cats[t.cat] || '', t.desc || '',
-      t.type === 'thu' ? t.amount : '', t.type === 'chi' ? t.amount : '', t.note || ''];
+      t.type === 'thu' ? t.amount : '', t.type === 'chi' ? t.amount : '', t.note || '', t.id];
   });
   so.clear();
-  so.getRange(1, 1, 1, 8).setValues([['Ngày', 'Loại', 'Nhóm', 'Danh mục', 'Diễn giải', 'Thu', 'Chi', 'Ghi chú']])
+  so.getRange(1, 1, 1, 9).setValues([['Ngày', 'Loại', 'Nhóm', 'Danh mục', 'Diễn giải', 'Thu', 'Chi', 'Ghi chú', 'Mã (không sửa)']])
     .setFontWeight('bold').setBackground('#fff36b');
+  so.getRange(1, 11).setValue('Thêm khoản mới: gõ vào dòng trống cuối bảng (Ngày, Diễn giải, Thu hoặc Chi). Sửa số tiền/diễn giải ngay trên dòng. App tự nhận khi mở/đồng bộ.')
+    .setFontStyle('italic').setFontColor('#8b4a1c');
   if (rows.length) {
-    so.getRange(2, 1, rows.length, 8).setValues(rows);
+    so.getRange(2, 1, rows.length, 9).setValues(rows);
     so.getRange(2, 1, rows.length, 1).setNumberFormat('dd/mm/yyyy');
     so.getRange(2, 6, rows.length, 2).setNumberFormat('#,##0');
   }
   so.setFrozenRows(1);
+  try { so.hideColumns(9); } catch (e) {}
 
   const byMonth = {};
   tx.forEach(function (t) {
