@@ -685,13 +685,42 @@ function occItem(o) {
 }
 
 /* ============ Tab: Sổ thu chi ============ */
-function ledger() {
+function lastImportBanner() {
+  const l = S.log.filter(x => x.a === 'import' && x.imp && S.tx.some(t => t.imp === x.imp)).sort((a, b) => b.t - a.t)[0];
+  if (!l || now() - l.t > 7 * 864e5) return '';
+  const n = S.tx.filter(t => t.imp === l.imp).length;
+  return `<div class="alert warn noprint" style="display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:16px">
+    <span>Lần nhập gần nhất: <b>${esc(l.desc)}</b> · ${n} khoản · ${new Date(l.t).toLocaleString('vi-VN')}. Nhập sai? Hoàn tác để xóa đúng các khoản của lần nhập đó.</span>
+    <button class="btn sm" data-undoimp="${l.imp}">↶ Hoàn tác lần nhập</button></div>`;
+}
+function undoImport(imp) {
+  const list = S.tx.filter(t => t.imp === imp);
+  if (!list.length) return;
+  if (!confirm(`Xóa ${list.length} khoản của lần nhập này (thu ${fmt(sum(list.filter(t => t.type === 'thu')))} · chi ${fmt(sum(list.filter(t => t.type === 'chi')))})?`)) return;
+  list.forEach(t => remove('tx', t.id));
+  S.log.push({ id: uid(), u: now(), t: now(), a: 'del', dev: deviceName(), desc: 'Hoàn tác lần nhập', n: list.length, amount: 0 });
+  save(); render(); toast(`Đã xóa ${list.length} khoản`);
+}
+function bulkDelete(rows) {
+  if (!rows.length) return;
+  const thu = sum(rows.filter(t => t.type === 'thu')), chi = sum(rows.filter(t => t.type === 'chi'));
+  if (!confirm(`Xóa ${rows.length} khoản đang hiển thị (thu ${fmt(thu)} · chi ${fmt(chi)})?\n\nKhông hoàn tác được – nên “Tải Excel” giữ lại trước nếu cần.`)) return;
+  rows.forEach(t => remove('tx', t.id));
+  S.log.push({ id: uid(), u: now(), t: now(), a: 'del', dev: deviceName(), desc: 'Xóa hàng loạt', n: rows.length, amount: 0 });
+  save(); render(); toast(`Đã xóa ${rows.length} khoản`);
+}
+function ledgerRows() {
   const f = UI.f;
   let rows = txOfMonth(UI.m);
   if (f.type) rows = rows.filter(x => x.type === f.type);
   if (f.group) rows = rows.filter(x => x.group === f.group);
   if (f.cat) rows = rows.filter(x => x.cat === f.cat);
   if (f.q) { const q = f.q.toLowerCase(); rows = rows.filter(x => (x.desc + ' ' + (x.note || '') + ' ' + cat(x.cat).name).toLowerCase().includes(q)); }
+  return rows;
+}
+function ledger() {
+  const f = UI.f;
+  const rows = ledgerRows();
   rows.sort((a, b) => a.date.localeCompare(b.date));
   const thu = sum(rows.filter(x => x.type === 'thu')), chi = sum(rows.filter(x => x.type === 'chi'));
   return `
@@ -701,7 +730,8 @@ function ledger() {
     <select id="fgroup"><option value="">Mọi loại</option><option value="co_dinh" ${f.group === 'co_dinh' ? 'selected' : ''}>Cố định</option><option value="phat_sinh" ${f.group === 'phat_sinh' ? 'selected' : ''}>Phát sinh</option></select>
     <select id="fcat"><option value="">Mọi danh mục</option>${S.categories.map(c => `<option value="${c.id}" ${f.cat === c.id ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</select>
   </div>
-  <div class="actions noprint" style="margin-bottom:8px"><button class="btn" data-import>⬆ Nhập từ Excel</button><button class="btn" data-xlsx="month">⬇ Tải Excel tháng này</button></div>
+  ${lastImportBanner()}
+  <div class="actions noprint" style="margin:8px 0"><button class="btn" data-import>⬆ Nhập từ Excel</button><button class="btn" data-xlsx="month">⬇ Tải Excel tháng này</button>${rows.length ? `<button class="btn" data-bulkdel style="color:var(--chi)">🗑 Xóa ${rows.length} khoản đang xem</button>` : ''}</div>
   <div class="card tablewrap">
     <table>
       <thead><tr><th>Ngày</th><th>Diễn giải</th><th class="hide-sm">Danh mục</th><th class="num">Thu</th><th class="num">Chi</th><th></th></tr></thead>
@@ -963,7 +993,8 @@ function historyTab() {
     <div class="card kpi"><div class="lbl">Tổng chi</div><div class="val neg">${fmt(chi)}</div></div>
     <div class="card kpi"><div class="lbl">Chênh lệch</div><div class="val ${thu - chi < 0 ? 'neg' : 'pos'}">${fmtS(thu - chi)}</div></div>
   </div>
-  <div class="actions noprint" style="margin-bottom:8px"><button class="btn" data-import>⬆ Nhập từ Excel</button><button class="btn" data-xlsx="history">⬇ Tải Excel (theo bộ lọc)</button></div>
+  ${lastImportBanner()}
+  <div class="actions noprint" style="margin:8px 0"><button class="btn" data-import>⬆ Nhập từ Excel</button><button class="btn" data-xlsx="history">⬇ Tải Excel (theo bộ lọc)</button></div>
   <div class="card tablewrap">
     <table>
       <thead><tr><th>Ngày</th><th>Diễn giải</th><th class="hide-sm">Danh mục</th><th class="num">Thu</th><th class="num">Chi</th><th></th></tr></thead>
@@ -975,7 +1006,8 @@ function historyTab() {
     <h3>Nhật ký thay đổi <span class="hint">60 thao tác gần nhất, trên mọi máy</span></h3>
     <div class="list">${logs.map(l => `<div class="item"><span class="pill ${actName[l.a]?.[1] || ''}">${actName[l.a]?.[0] || l.a}</span>
       <div class="main"><div>${esc(l.desc || '')} ${l.n ? `<span class="muted">(${l.n} khoản)</span>` : ''}</div><div class="small muted">${new Date(l.t).toLocaleString('vi-VN')} · ${esc(l.dev || '')}${l.date ? ' · ngày GD ' + ddmmyyyy(l.date) : ''}</div></div>
-      ${l.amount ? `<div class="num ${l.type === 'thu' ? 'pos' : 'neg'}">${l.prev != null && l.prev !== l.amount ? `<s class="muted small">${fmt(l.prev)}</s><br>` : ''}${fmt(l.amount)}</div>` : ''}</div>`).join('') || '<div class="empty">Chưa có thay đổi nào được ghi lại</div>'}</div>
+      ${l.amount ? `<div class="num ${l.type === 'thu' ? 'pos' : 'neg'}">${l.prev != null && l.prev !== l.amount ? `<s class="muted small">${fmt(l.prev)}</s><br>` : ''}${fmt(l.amount)}</div>` : ''}
+      ${l.imp && S.tx.some(t => t.imp === l.imp) ? `<button class="btn sm" data-undoimp="${l.imp}">↶ Hoàn tác</button>` : ''}</div>`).join('') || '<div class="empty">Chưa có thay đổi nào được ghi lại</div>'}</div>
   </div>`;
 }
 function setRange(k) {
@@ -1028,7 +1060,7 @@ function cellDate(v, defYear) {
   const s = String(v).trim();
   let m = s.match(/^(\d{4})[-\/.](\d{1,2})[-\/.](\d{1,2})/);
   if (m) return `${m[1]}-${pad(m[2])}-${pad(m[3])}`;
-  m = s.match(/^(\d{1,2})[-\/.](\d{1,2})(?:[-\/.](\d{2,4}))?$/);
+  m = s.match(/^(\d{1,2})[-\/.:](\d{1,2})(?:[-\/.:](\d{2,4}))?$/);
   if (m) { let y = m[3] ? Number(m[3]) : Number(defYear); if (y < 100) y += 2000; const d = Number(m[1]), mo = Number(m[2]); if (d >= 1 && d <= 31 && mo >= 1 && mo <= 12) return `${y}-${pad(mo)}-${pad(d)}`; }
   return '';
 }
@@ -1108,8 +1140,9 @@ function importDialog() {
       if (act === 'parse') { preview(); return false; }
       const pick = rows.filter(x => x.on);
       if (!pick.length) { alert('Chưa chọn dòng nào để nhập'); return false; }
-      pick.forEach(x => upsert('tx', { id: uid(), date: x.date, type: x.type, group: x.group, cat: x.cat, desc: x.desc, amount: x.amount, note: x.note || '', debt: x.debt }));
-      S.log.push({ id: uid(), u: now(), t: now(), a: 'import', dev: deviceName(), desc: 'Nhập từ Excel', n: pick.length, amount: 0 });
+      const imp = 'imp_' + uid();
+      pick.forEach(x => upsert('tx', { id: uid(), date: x.date, type: x.type, group: x.group, cat: x.cat, desc: x.desc, amount: x.amount, note: x.note || '', debt: x.debt, imp }));
+      S.log.push({ id: uid(), u: now(), t: now(), a: 'import', dev: deviceName(), desc: ocrGrid ? 'Nhập từ ảnh chụp' : 'Nhập từ Excel', n: pick.length, amount: 0, imp });
       save(); UI.m = monthOf(pick[0].date); $('#dlg').classList.remove('wide'); render(); toast(`Đã nhập ${pick.length} khoản`);
     });
   $('#dlg').addEventListener('close', () => $('#dlg').classList.remove('wide'), { once: true });
@@ -1252,7 +1285,7 @@ async function ocrImage(file, onProgress) {
 const ocrStrip = t => t.replace(/[|]/g, '').replace(/^[\u201E\u201C\u201D\x22\x27\u2018\u2019\x60,.\xA1!\[\](){}:;_~^*\\\/\x3C\x3E\xAB\xBB\u2014\u2013-]+/, '').replace(/[\u201E\u201C\u201D\x22\x27\u2018\u2019\x60\xA1!\[\](){}:;_~^*\\\x3C\x3E\xAB\xBB\u2014\u2013|.,]+$/, '').trim();
 // "05082026", "160822026", "5/8/2026" → "dd/mm/yyyy"
 function ocrDate(t, prefMonth) {
-  let m = t.match(/^(\d{1,2})[\/.\-](\d{1,2})(?:[\/.\-](\d{2,4}))?$/);
+  let m = t.match(/^(\d{1,2})[\/.\-:](\d{1,2})(?:[\/.\-:](\d{2,4}))?$/);
   if (m) return m[3] ? `${m[1]}/${m[2]}/${m[3]}` : `${m[1]}/${m[2]}`;
   if (!/^\d{8,9}$/.test(t)) return '';
   // "05082026" hoặc thừa 1 chữ số do OCR ("120082026") → thử bỏ từng chữ số
@@ -1293,7 +1326,8 @@ function ocrToGrid(data) {
     const m = []; // nối các mảnh số bị tách ("54,000," + "000")
     for (const w of r.ws) {
       const p = m[m.length - 1];
-      if (p && (/[.,]/.test(p.t) || /^\d{3}$/.test(w.t)) && /[\d.,]$/.test(p.t) && /^\d/.test(w.t) && w.x0 - p.x1 < hMed * 0.7 && ocrMoney(p.t + w.t) && !ocrDate(p.t)) { p.t += w.t; p.x1 = w.x1; p.xc = (p.x0 + p.x1) / 2; }
+      const lead = p && /^\d{1,3}$/.test(p.t) && /^\d{1,3}([.,]\d{3})+[.,]?$/.test(w.t); // "4" + "1.363.000"
+      if (p && (lead || /[.,]/.test(p.t) || /^\d{3}$/.test(w.t)) && /[\d.,]$/.test(p.t) && /^\d/.test(w.t) && w.x0 - p.x1 < hMed * (lead ? 1.2 : 0.7) && ocrMoney(p.t + w.t) && !ocrDate(p.t)) { p.t += w.t; p.x1 = w.x1; p.xc = (p.x0 + p.x1) / 2; }
       else m.push({ ...w });
     }
     r.ws = m;
@@ -1715,6 +1749,8 @@ function bindView(v) {
     else if (d.year) { UI.m = addMonth(UI.m, 12 * Number(d.year)); render(); }
     else if (d.range) { setRange(d.range); render(); }
     else if (d.more !== undefined) { UI.h.limit += 300; render(); }
+    else if (d.undoimp) undoImport(d.undoimp);
+    else if (d.bulkdel !== undefined) bulkDelete(ledgerRows());
     else if (d.edit) txDialog(S.tx.find(x => x.id === d.edit));
     else if (d.newplan !== undefined) planDialog();
     else if (d.editplan) planDialog(S.plans.find(p => p.id === d.editplan));
