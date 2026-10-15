@@ -186,7 +186,7 @@
         return (sc.media || []).some(function (m) { return m.isVideo && m.keepAudio && m.hasAudio; });
       })
     };
-    var tl = { items: [], covers: [], overlays: [], voices: [], sfx: [], kind: 'full', total: 0 };
+    var tl = { items: [], covers: [], overlays: [], voices: [], sfx: [], emph: [], kind: 'full', total: 0 };
     var t = 0, n = 0;
     project.scenes.forEach(function (scene, si) {
       if (only != null && only !== si) return;
@@ -248,6 +248,17 @@
       tl.overlays.push({ start: t, duration: p.D, kind: 'scene', text: p.card ? '' : scene.text,
         bigText: p.card && !(scene.bigText || []).length ? [firstSentence(scene.text, 7) || headline(scene)] : (scene.bigText || []),
         intro: withIntro, caption: scene.showTitle ? cleanTitle(scene.title) : '', words: words });
+      // Điểm nhấn: zoom vào/ra hình người nói đúng lúc từ khoá hiện lên
+      if (s.emphZoom !== false && speech.length) {
+        kineticStacks(words).forEach(function (st) {
+          if (!st.big.length) return;
+          var at = st.bigAt + (st.lead0 || 0);
+          var last = tl.emph[tl.emph.length - 1];
+          if (last && at - last.t < 1.2) return;
+          var num = /\d|tỷ|triệu/i.test(st.big.map(function (w) { return w.w; }).join(' '));
+          tl.emph.push({ t: at, kind: tl.emph.length % 3 === 2 ? 'out' : 'in', s: num ? 0.18 : 0.11 });
+        });
+      }
       if (s.sfx && s.subtitles && (s.subStyle || 'kinetic') === 'kinetic') {
         kineticStacks(words).forEach(function (st) {
           if (st.big.length) tl.sfx.push({ type: /\d|tỷ|triệu/i.test(st.big.map(function (w) { return w.w; }).join(' ')) ? 'ching' : 'slam', at: st.bigAt });

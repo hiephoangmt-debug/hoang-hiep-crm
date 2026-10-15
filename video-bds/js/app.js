@@ -1498,7 +1498,7 @@
     $('endStyleSelect').value = S.endStyle || 'pill';
     $('endStyleSelect').onchange = onSet('endStyle');
     fillSelect('moodSelect', window.BdsAudio.MOODS, state.music.mood).onchange = function (e) { state.music.mood = e.target.value; save(); };
-    [['sfxToggle', 'sfx'], ['subToggle', 'subtitles'], ['introToggle', 'introCard'], ['endToggle', 'endCard'], ['priceToggle', 'priceTag'], ['autoTrim', 'autoTrim']].forEach(function (p) {
+    [['sfxToggle', 'sfx'], ['emphToggle', 'emphZoom'], ['subToggle', 'subtitles'], ['introToggle', 'introCard'], ['endToggle', 'endCard'], ['priceToggle', 'priceTag'], ['autoTrim', 'autoTrim']].forEach(function (p) {
       $(p[0]).checked = S[p[1]] !== false;
       $(p[0]).onchange = function (e) { onSet(p[1])(e); if (p[1] === 'autoTrim') renderShoot(); };
     });

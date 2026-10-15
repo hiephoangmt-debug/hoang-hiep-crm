@@ -200,6 +200,7 @@
         // Zoom đẩy ở chỗ cắt nhảy: bật nhanh lên rồi giữ
         var z = it.zoom || 1;
         if (z > 1) z = 1 + (z - 1) * easeOut((t - it.start) / 0.12);
+        if (it.audio) z *= this.emphZoom(t);
         var lvl = this.project.settings.beauty || 'vua';
         var src = lvl !== 'off' && window.BdsBeauty ? window.BdsBeauty.get().process(it.el, lvl) : it.el;
         drawCover(ctx, src, W, H, z * (1.0 + 0.03 * e), 0, 0);
@@ -223,6 +224,22 @@
       ctx.fillRect(0, 0, W, H);
     }
     ctx.restore();
+  };
+
+  /**
+   * Zoom điểm nhấn: "vào" = giật vào nhanh, giữ, rồi trả về từ từ; "ra" = giật vào rồi lùi ra chậm.
+   */
+  Renderer.prototype.emphZoom = function (t) {
+    var list = this.timeline.emph || [], z = 1;
+    for (var i = 0; i < list.length; i++) {
+      var p = list[i], dt = t - p.t;
+      if (dt < 0 || dt > 2) continue;
+      var f;
+      if (p.kind === 'out') f = dt < 0.08 ? easeOut(dt / 0.08) : 1 - easeInOut((dt - 0.08) / 1.4);
+      else f = dt < 0.14 ? easeOut(dt / 0.14) : (dt < 0.9 ? 1 : 1 - easeInOut((dt - 0.9) / 0.7));
+      z = Math.max(z, 1 + p.s * clamp(f, 0, 1));
+    }
+    return z;
   };
 
   Renderer.prototype.drawBackground = function (t) {
