@@ -122,7 +122,7 @@ export class BuildingView {
     sun.shadow.normalBias = 0.05;
     scene.add(sun, new THREE.HemisphereLight(0xcfe6ff, 0x6b7f4f, 1.0));
 
-    const fp = rectM(PODIUM);
+    const fpp = rectM(PODIUM), fp = { x0: fpp.x0 - 3, y0: fpp.y0 - 3, x1: fpp.x1 + 3, y1: fpp.y1 + 3 };
     // Các tòa lân cận (chỉ để làm cảnh, không tương tác)
     // Cụm 4 tòa quanh ngã tư Minh Mạng (Tây) – Nguyễn Phước Lan (Nam) theo mặt bằng tổng thể
     const fp0 = rectM(PODIUM);
@@ -415,12 +415,48 @@ export class BuildingView {
       root.add(m);
       return m;
     };
-    const pod = rectM(PODIUM);
+    // Khối đế rộng hơn thân tháp ~3 m mỗi phía (mái đế = sân vườn tầng 3, theo bản vẽ tầng 3)
+    const pod0 = rectM(PODIUM), POD_OUT = 3;
+    const pod = { x0: pod0.x0 - POD_OUT, y0: pod0.y0 - POD_OUT, x1: pod0.x1 + POD_OUT, y1: pod0.y1 + POD_OUT };
     for (let i = 0; i < b.podiumFloors; i++) {
-      add(roundedPrism(pod, i * P, P - 0.45, { tl: 5, tr: 5, bl: 5, br: 5 }, 0.5), glassMat);
-      add(roundedPrism(pod, i * P + P - 0.45, 0.45, { tl: 5, tr: 5, bl: 5, br: 5 }), slabMat);
+      add(roundedPrism(pod, i * P, P - 0.45, { tl: 8, tr: 8, bl: 8, br: 8 }, 0.5), glassMat);
+      add(roundedPrism(pod, i * P + P - 0.45, 0.45, { tl: 8, tr: 8, bl: 8, br: 8 }), slabMat);
     }
     const base = b.podiumFloors * P;
+    // Mái khối đế = sân vườn riêng của các căn tầng 3: cỏ, bồn cây viền, cây bụi, hàng rào cây ngăn sân
+    {
+      const grassMat = new THREE.MeshStandardMaterial({ color: 0x6f9e48, roughness: 1 });
+      const planterMat = new THREE.MeshStandardMaterial({ color: 0xd9d3c7, roughness: 0.8 });
+      const leafMat = new THREE.MeshStandardMaterial({ color: 0x3f7a35, roughness: 0.9 });
+      const R = { tl: 8, tr: 8, bl: 8, br: 8 };
+      add(roundedPrism(pod, base, 0.06, R, 0.6), grassMat, false);
+      const e = 0.9, h = 0.55, t = 0.5;
+      const bx = (x0, x1, z0, z1, y0, hh, mat) => { const m = add(new THREE.BoxGeometry(x1 - x0, hh, z1 - z0), mat); m.position.set((x0 + x1) / 2, y0 + hh / 2, (z0 + z1) / 2); return m; };
+      // bồn cây chạy viền mép mái + kính lan can
+      bx(pod.x0 + e, pod.x1 - e, pod.y0 + e - t, pod.y0 + e, base, h, planterMat);
+      bx(pod.x0 + e, pod.x1 - e, pod.y1 - e, pod.y1 - e + t, base, h, planterMat);
+      bx(pod.x0 + e - t, pod.x0 + e, pod.y0 + e, pod.y1 - e, base, h, planterMat);
+      bx(pod.x1 - e, pod.x1 - e + t, pod.y0 + e, pod.y1 - e, base, h, planterMat);
+      const hedge = (x0, x1, z0, z1) => bx(x0, x1, z0, z1, base + h, 0.45, leafMat);
+      hedge(pod.x0 + e, pod.x1 - e, pod.y0 + e - t, pod.y0 + e); hedge(pod.x0 + e, pod.x1 - e, pod.y1 - e, pod.y1 - e + t);
+      hedge(pod.x0 + e - t, pod.x0 + e, pod.y0 + e, pod.y1 - e); hedge(pod.x1 - e, pod.x1 - e + t, pod.y0 + e, pod.y1 - e);
+      // cây bụi tròn rải đều trên sân (tránh chân tòa)
+      const ball = new THREE.SphereGeometry(0.7, 10, 8);
+      const inTower = (x, z) => SLOT_LIST.some((sl) => x > sl.rect.x0 - 0.3 && x < sl.rect.x1 + 0.3 && z > sl.rect.y0 - 0.3 && z < sl.rect.y1 + 0.3) || CORES.some((c) => { const r = rectM(c); return x > r.x0 && x < r.x1 && z > r.y0 && z < r.y1; });
+      let k = 0;
+      for (let x = pod.x0 + 2.2; x < pod.x1 - 2; x += 3.4)
+        for (let z = pod.y0 + 2.2; z < pod.y1 - 2; z += 3.4) {
+          if (inTower(x, z)) continue;
+          const nearEdge = x < pod.x0 + 4 || x > pod.x1 - 4 || z < pod.y0 + 4 || z > pod.y1 - 4;
+          if (!nearEdge && (k++ % 3)) continue;
+          const m = new THREE.Mesh(ball, leafMat);
+          const sc = 0.7 + ((x * 13 + z * 7) % 5) * 0.12;
+          m.scale.set(sc, sc * 0.8, sc);
+          m.position.set(x, base + 0.5 * sc, z);
+          m.castShadow = true;
+          root.add(m);
+        }
+    }
     const units = [];
     const visibleTop = interactive ? Math.min(this.maxFloor, floors.length) : floors.length;
     const only = interactive ? this.onlyFloor : null;

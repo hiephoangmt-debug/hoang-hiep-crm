@@ -220,3 +220,33 @@ function addFurniture(plan, spec, P) {
 }
 
 export { UNIT_SPECS };
+
+/** Căn sân vườn (tầng 3, trên mái khối đế): lấy căn gốc, thêm sân vườn phía lô gia có tường lửng, cỏ, cây, bàn ghế ngoài trời */
+export function gardenUnit(base, spec) {
+  const plan = JSON.parse(JSON.stringify(base.plan));
+  const xs = plan.walls.flatMap((w) => [w.a.x, w.b.x]), ys = plan.walls.flatMap((w) => [w.a.y, w.b.y]);
+  const bb = { x0: Math.min(...xs), y0: Math.min(...ys), x1: Math.max(...xs), y1: Math.max(...ys) };
+  const lg = plan.rooms.find((r) => /lô gia/i.test(r.name)) || plan.rooms[0];
+  const c = { x: lg.points.reduce((s, p) => s + p.x, 0) / lg.points.length, y: lg.points.reduce((s, p) => s + p.y, 0) / lg.points.length };
+  const side = Object.entries({ top: c.y - bb.y0, bottom: bb.y1 - c.y, left: c.x - bb.x0, right: bb.x1 - c.x }).sort((a, b) => a[1] - b[1])[0][0];
+  const D = spec.garden.depth || 3;
+  // Hệ toạ độ cục bộ của sân: u dọc mép mặt tiền, v hướng ra ngoài
+  const L = side === 'top' || side === 'bottom' ? bb.x1 - bb.x0 : bb.y1 - bb.y0;
+  const P = (u, v) => side === 'top' ? { x: bb.x0 + u, y: bb.y0 - v } : side === 'bottom' ? { x: bb.x0 + u, y: bb.y1 + v } : side === 'left' ? { x: bb.x0 - v, y: bb.y0 + u } : { x: bb.x1 + v, y: bb.y0 + u };
+  const wall = (a, b) => plan.walls.push({ id: uid(), a: P(...a), b: P(...b), thickness: 0.12, height: 0.95 });
+  wall([0, 0], [0, D]); wall([0, D], [L, D]); wall([L, D], [L, 0]);
+  plan.rooms.push({ id: uid(), name: 'Sân vườn', floor: 'grass', points: [P(0, 0), P(L, 0), P(L, D), P(0, D)] });
+  const rotOut = { top: 0, bottom: 180, left: 270, right: 90 }[side];
+  const add = (type, u, v, rot = 0, extra = {}) => { const p = P(u, v); plan.furniture.push({ id: uid(), type, x: +p.x.toFixed(3), y: +p.y.toFixed(3), rot, ...extra }); };
+  // Bồn cây dọc tường lửng phía ngoài và hai đầu
+  for (let u = 0.5; u < L - 0.3; u += 1.1) add('plant', u, D - 0.4, 0, { h: 0.9 + ((u * 7) % 3) * 0.25 });
+  add('plant', 0.45, D * 0.45); add('plant', L - 0.45, D * 0.45);
+  // Bàn trà ngoài trời + 2 ghế bành, thêm ghế nằm nếu sân rộng
+  const cu = L * 0.62, cv = D * 0.48;
+  add('roundTable', cu, cv, 0, { w: 0.6, d: 0.6 });
+  add('armchair', cu - 0.8, cv, (rotOut + 90) % 360, { w: 0.7, d: 0.7 });
+  add('armchair', cu + 0.8, cv, (rotOut + 270) % 360, { w: 0.7, d: 0.7 });
+  if (L > 7) add('rug', L * 0.25, cv, 0, { w: 1.8, d: 1.4 });
+  const dims = side === 'top' || side === 'bottom' ? [base.dims[0], +(base.dims[1] + D).toFixed(2)] : [+(base.dims[0] + D).toFixed(2), base.dims[1]];
+  return { ...base, id: spec.id, name: spec.name, type: spec.type, dims, garden: +(L * D).toFixed(1), plan };
+}
