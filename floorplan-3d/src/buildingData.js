@@ -71,7 +71,11 @@ export const TYPE_COLORS = { Studio: '#7fb3c8', '1PN': '#6aa0b8', '1PN+': '#b07a
 export const SLOT_LIST = SLOTS.map(([slot, x0, y0, x1, y1, tim, tt]) => ({ slot, rect: rectM([x0, y0, x1, y1]), fit: rectM(FIT_RECTS[slot] || [x0, y0, x1, y1]), tim, tt, type: unitType(tt) }));
 
 /** Mặt bằng chi tiết mặc định cho từng vị trí (theo các căn mẫu đã dựng; vị trí chưa có ảnh mặt bằng thì để trống) */
-export const DEFAULT_UNIT = { 24: '3pn', '05': '3pn', 26: '1pn-plus', '03': '1pn-plus', 19: '2pn-a', 10: '2pn-a', 27: '1pn', '02': '1pn', 20: '1pn', '09': '1pn' };
+export const DEFAULT_UNIT = {
+  24: '3pn', '05': '3pn', 26: '1pn-plus', '03': '1pn-plus', 19: '2pn-a', 10: '2pn-a', 27: '1pn', '02': '1pn', 20: '1pn', '09': '1pn',
+  25: 'studio', '03A': 'studio', 18: 'studio', 11: 'studio',
+  29: '2pn-1wc', 30: '2pn-1wc', 31: '2pn-1wc', 32: '2pn-1wc', 16: '2pn-1wc', 15: '2pn-1wc', '12B': '2pn-1wc', '12A': '2pn-1wc',
+};
 
 export const STATUS = {
   available: { name: 'Còn trống', color: '#22a06b' },

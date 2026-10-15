@@ -40,3 +40,9 @@ export function download(blob, name) {
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 2000);
 }
+
+/** Chế độ xem cho khách (link có ?khach): khoá mọi chức năng chỉnh sửa, ẩn giá / trạng thái / công cụ nội bộ */
+export const READONLY = new URLSearchParams(location.search).has('khach');
+/** Giữ ?khach khi chuyển trang */
+export const linkTo = (page) => (READONLY ? `./${page}?khach` : `./${page}`);
+if (READONLY) document.documentElement.classList.add('readonly');

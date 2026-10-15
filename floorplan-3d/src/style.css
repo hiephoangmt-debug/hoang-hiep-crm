@@ -238,3 +238,9 @@ main.mode-building .panebuilding { grid-column: 1 !important; grid-row: 1 !impor
 .tour360 iframe { flex: 1; border: 0; width: 100%; min-height: 300px; }
 .tour360 header input { width: 260px; }
 .btnlink.dark { color: var(--text); background: #fff; border-color: var(--line); }
+.towertag { color: #fff; font-weight: 800; font-size: 13px; letter-spacing: .03em; padding: 5px 12px; border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,.3); white-space: nowrap; pointer-events: none; }
+.roadtag { font-weight: 800; font-size: 11px; letter-spacing: .06em; padding: 3px 9px; border-radius: 6px; color: #fff; white-space: nowrap; pointer-events: none; }
+.roadtag.green { background: rgba(34,160,80,.9); }
+.roadtag.gold { background: rgba(214,160,40,.92); }
+.roadtag.blue { background: rgba(40,120,200,.9); }
+.readonly .internal { display: none !important; }

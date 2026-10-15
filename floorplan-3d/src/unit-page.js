@@ -2,7 +2,7 @@
 import { Viewer3D } from './viewer3d.js';
 import { STYLES, roomKind } from './styles.js';
 import { polygonArea } from './geom.js';
-import { toast } from './ui.js';
+import { toast, READONLY, linkTo } from './ui.js';
 import UNITS from './units/units.json';
 
 const $ = (s) => document.querySelector(s);
@@ -68,7 +68,7 @@ function renderInfo() {
     </div>
     <div class="kv"><div style="grid-column: span 2"><small>Tổng diện tích các phòng (đo trên bản vẽ)</small><b>${fmt(total)} m²</b></div></div>
     <p class="up-note">Hình ảnh và diện tích mang tính minh hoạ, dựng từ mặt bằng bán hàng. Thông số chính thức theo hợp đồng mua bán.</p>
-    <button id="openDesign">✏️ Mở căn này trong công cụ thiết kế</button>`;
+    ${READONLY ? '' : '<button id="openDesign">✏️ Mở căn này trong công cụ thiết kế</button>'}`;
   $$('[data-room]').forEach((b) => (b.onclick = () => {
     if (tab !== '3d') setTab('3d');
     const shot = viewer.roomShot(rooms[+b.dataset.room]);
@@ -76,7 +76,7 @@ function renderInfo() {
     viewer.updateClip();
     viewer.flyTo(shot.pos, shot.target);
   }));
-  $('#openDesign').onclick = () => {
+  if ($('#openDesign')) $('#openDesign').onclick = () => {
     try { localStorage.setItem('floorplan3d.openUnit', JSON.stringify({ layout: store.plan, info: { code: unit.name, floor: '10', slot: { type: unit.type, tt: +total.toFixed(1) } } })); } catch { return toast('Không lưu được dữ liệu để chuyển trang.'); }
     location.href = './index.html';
   };
@@ -158,3 +158,5 @@ $('#tourAgain').onclick = () => startTour();
 renderUnitList();
 const fromHash = location.hash.slice(1);
 selectUnit(UNITS.some((u) => u.id === fromHash) ? fromHash : '3pn');
+
+document.querySelectorAll('[data-link]').forEach((a) => (a.href = linkTo(a.dataset.link)));

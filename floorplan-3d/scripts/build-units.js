@@ -16,7 +16,29 @@ function nearestWall(walls, p, maxD = 0.6) {
   return best;
 }
 
+/** Căn khai báo tay (mét) – không cần nhận diện ảnh */
+function buildManual(spec) {
+  const walls = spec.walls.map((w) => ({ id: uid(), a: { x: w.a[0], y: w.a[1] }, b: { x: w.b[0], y: w.b[1] }, thickness: w.t }));
+  const openings = spec.openings.map(([wi, type, at, width, extra = {}]) => {
+    const w = walls[wi];
+    const L = wallLength(w);
+    const along = Math.abs(w.b.x - w.a.x) > Math.abs(w.b.y - w.a.y) ? (at - w.a.x) / (w.b.x - w.a.x) : (at - w.a.y) / (w.b.y - w.a.y);
+    const def = type === 'window' ? { height: 1.4, sill: 0.9 } : type === 'slide' ? { height: 2.3, sill: 0 } : { height: 2.1, sill: 0 };
+    return { id: uid(), wallId: w.id, type, t: along, width: Math.min(width, L - 0.05), ...def, ...extra };
+  });
+  const style = STYLES[spec.style];
+  const rooms = spec.rooms.map(([name, floor, pts]) => ({ id: uid(), name, floor: floor || style.floors[roomKind(name)], points: pts.map(([x, y]) => ({ x, y })) }));
+  return { walls, openings, rooms };
+}
+
 export async function buildUnit(spec, imgUrl) {
+  if (spec.manual) {
+    const { walls, openings, rooms } = buildManual(spec);
+    const plan = { version: 1, walls, openings, rooms, furniture: [], settings: { wallHeight: 2.8, wallThickness: 0.12, style: spec.style, palette: {} } };
+    addFurniture(plan, spec, ([x, y]) => ({ x, y }));
+    const area = rooms.reduce((s, r) => { let a = 0; r.points.forEach((p, i) => { const q = r.points[(i + 1) % r.points.length]; a += p.x * q.y - q.x * p.y; }); return s + Math.abs(a) / 2; }, 0);
+    return { id: spec.id, name: spec.name, type: spec.type, dims: spec.dims, area: +area.toFixed(1), mpp: 1, mppY: 1, plan };
+  }
   const img = new Image();
   img.src = imgUrl;
   await img.decode();
@@ -109,12 +131,20 @@ export async function buildUnit(spec, imgUrl) {
     r.floor = style.floors[roomKind(r.name)] || 'marble';
   }
   plan.rooms = rooms;
-  // Nội thất đúng vị trí trong ảnh
+  addFurniture(plan, spec, P);
+  const area = rooms.reduce((s, r) => {
+    let a = 0;
+    r.points.forEach((p, i) => { const q = r.points[(i + 1) % r.points.length]; a += p.x * q.y - q.x * p.y; });
+    return s + Math.abs(a) / 2;
+  }, 0);
+  return { id: spec.id, name: spec.name, type: spec.type, dims: spec.dims, area: +area.toFixed(1), mpp: det.mpp, mppY: det.mppY, plan };
+}
+
+function addFurniture(plan, spec, P) {
   for (const [type, x, y, rot = 0, opt = {}] of spec.furniture) {
     const { nightstands, ...size } = opt;
     const p = P([x, y]);
-    const item = { id: uid(), type, x: p.x, y: p.y, rot, ...size };
-    plan.furniture.push(item);
+    plan.furniture.push({ id: uid(), type, x: p.x, y: p.y, rot, ...size });
     if (nightstands) {
       const def = CATALOG_MAP[type];
       const w = size.w ?? def.w, d = size.d ?? def.d;
@@ -124,12 +154,6 @@ export async function buildUnit(spec, imgUrl) {
       }
     }
   }
-  const area = rooms.reduce((s, r) => {
-    let a = 0;
-    r.points.forEach((p, i) => { const q = r.points[(i + 1) % r.points.length]; a += p.x * q.y - q.x * p.y; });
-    return s + Math.abs(a) / 2;
-  }, 0);
-  return { id: spec.id, name: spec.name, type: spec.type, dims: spec.dims, area: +area.toFixed(1), mpp: det.mpp, mppY: det.mppY, plan };
 }
 
 export { UNIT_SPECS };

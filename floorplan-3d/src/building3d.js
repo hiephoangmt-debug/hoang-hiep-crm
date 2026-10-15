@@ -76,10 +76,14 @@ export function slotLayout(b, slot) {
 }
 const ORANGE_SLOTS = new Set(['05', '06', '07', '08', '09', '10']);
 export const AVENUE_X = -52;
+// Căn chỉnh ảnh 360 khu đất (public/pano/khu-dat-360.jpg): xoay ảnh, độ cao flycam (m), góc ống kính
+// look: điểm nhìn mặc định (về phía tòa F2 và lô F3)
+export const SITE_PANO = { heading: 90, alt: 170, fov: 70, look: [40, 0, -30] };
 
 export class BuildingView {
   constructor(container, getBuilding, onSelect, opts = {}) {
     this.light = !!opts.light;
+    this.readonly = !!opts.readonly;
     this.container = container;
     this.getBuilding = getBuilding;
     this.onSelect = onSelect;
@@ -120,11 +124,15 @@ export class BuildingView {
 
     const fp = rectM(PODIUM);
     // Các tòa lân cận (chỉ để làm cảnh, không tương tác)
+    // Cụm 4 tòa quanh ngã tư Minh Mạng (Tây) – Nguyễn Phước Lan (Nam) theo mặt bằng tổng thể
+    const fp0 = rectM(PODIUM);
+    const roadZ = fp0.y1 + 26;
     this.neighbors = [
-      { x: 2 * AVENUE_X, z: 0, mirror: true, floors: 20 },
-      { x: 2 * AVENUE_X, z: -90, mirror: true, floors: 17, rot: Math.PI },
-      { x: 0, z: -92, mirror: false, floors: 15, rot: Math.PI },
+      { name: 'TÒA F1 – TÙNG', x: 2 * AVENUE_X, z: 0, mirror: true, floors: 22, crown: 0xe8742f },
+      { name: 'TÒA F5 – CÚC', x: 2 * AVENUE_X, z: 2 * roadZ, mirror: true, floors: 22, rot: Math.PI, crown: 0xe8b52f },
+      { name: 'TÒA F3 – TRÚC', x: 0, z: 2 * roadZ, mirror: false, floors: 22, rot: Math.PI, crown: 0x3f8f3a },
     ];
+    this.roadZ = roadZ;
     this.surroundArgs = {
       footprint: { x0: fp.x0, x1: fp.x1, z0: fp.y0, z1: fp.y1 },
       avenueX: AVENUE_X,
@@ -144,11 +152,26 @@ export class BuildingView {
     scene.add(this.shadowCatcher);
     for (const n of this.neighbors) {
       const g = new THREE.Group();
-      this.buildTower(g, { ...b0, floors: n.floors, units: {} }, { interactive: false, colorBy: 'facade' });
+      this.buildTower(g, { ...b0, floors: n.floors, units: {} }, { interactive: false, colorBy: 'facade', crown: n.crown });
+      const top = b0.podiumFloors * b0.podiumHeight + residentialFloors(n.floors).length * b0.floorHeight;
+      g.add(this.towerTag(n.name, n.crown, top + 8));
       g.position.set(n.x, 0, n.z);
       g.rotation.y = n.rot || 0;
       if (n.mirror) g.scale.x = -1;
       this.neighborGroup.add(g);
+    }
+
+    // Biển tên F2 và tên đường
+    this.f2Tag = this.towerTag('TÒA F2 – MAI', 0xd9542f, b0.podiumFloors * b0.podiumHeight + residentialFloors(b0.floors).length * b0.floorHeight + 8);
+    scene.add(this.f2Tag);
+    for (const [t, x, z, cls] of [['Đ. MINH MẠNG', AVENUE_X, -60, 'road green'], ['Đ. MINH MẠNG', AVENUE_X, 150, 'road green'], ['Đ. NGUYỄN PHƯỚC LAN', 90, roadZ, 'road gold'], ['Đ. NGUYỄN PHƯỚC LAN', -200, roadZ, 'road gold'], ['SÔNG ĐÔ TỎA · BIỂN MỸ KHÊ ↑', 0, -260, 'road blue']]) {
+      const el = document.createElement('div');
+      el.className = 'roadtag ' + cls;
+      el.textContent = t;
+      const o = new CSS2DObject(el);
+      o.position.set(x, 1, z);
+      (this.roadTags ||= []).push(o);
+      scene.add(o);
     }
 
     this.camera = new THREE.PerspectiveCamera(38, 1, 0.5, 4000);
@@ -168,6 +191,17 @@ export class BuildingView {
     this.resize();
     this.rebuild();
     this.setActive(true);
+  }
+
+  /** Biển tên tòa nổi trên mái */
+  towerTag(text, color, y) {
+    const el = document.createElement('div');
+    el.className = 'towertag';
+    el.textContent = text;
+    el.style.background = '#' + new THREE.Color(color).getHexString();
+    const o = new CSS2DObject(el);
+    o.position.set(0, y, 0);
+    return o;
   }
 
   setActive(on) {
@@ -196,8 +230,9 @@ export class BuildingView {
 
   // ---------------- Ghép tòa nhà vào ảnh 360° thực tế ----------------
   /** Tải ảnh 360° (equirectangular) làm nền; camera đứng tại điểm chụp, nhìn quanh được */
-  setPano(src, onReady) {
+  setPano(src, onReady, preset) {
     if (!src) { this.pano = null; this.applyPano(); return; }
+    if (preset) this.pano = { ...preset };
     new THREE.TextureLoader().load(src, (t) => {
       t.mapping = THREE.EquirectangularReflectionMapping;
       t.colorSpace = THREE.SRGBColorSpace;
@@ -214,7 +249,9 @@ export class BuildingView {
     if (p) Object.assign(this.pano, p);
     const on = !!(this.pano && this.panoTex);
     this.surround.visible = !on;
-    this.neighborGroup.visible = !on && this.showNeighbors !== false;
+    // Ảnh 360: vẫn dựng đủ cụm 4 tòa của dự án, ẩn nhãn đường (có thể lệch so với ảnh)
+    this.neighborGroup.visible = this.showNeighbors !== false;
+    (this.roadTags || []).forEach((o) => (o.visible = !on));
     this.skyMesh.visible = !on;
     this.shadowCatcher.visible = on;
     this.scene.fog = on ? null : this.fog;
@@ -226,7 +263,7 @@ export class BuildingView {
     this.scene.backgroundRotation.set(0, THREE.MathUtils.degToRad(q.heading), 0);
     const b = THREE.MathUtils.degToRad(q.bearing);
     const cam = new THREE.Vector3(Math.sin(b) * q.dist, q.alt, Math.cos(b) * q.dist);
-    const look = new THREE.Vector3(0, 30, 0).sub(cam).normalize();
+    const look = (q.look ? new THREE.Vector3(...q.look) : new THREE.Vector3(0, 30, 0)).sub(cam).normalize();
     this.camera.position.copy(cam);
     this.camera.fov = q.fov;
     this.camera.updateProjectionMatrix();
@@ -234,6 +271,14 @@ export class BuildingView {
     this.controls.target.copy(cam).add(look.multiplyScalar(0.5));
     this.controls.minDistance = 0.1;
     this.controls.update();
+  }
+
+  /** Ảnh 360 flycam khu đất dự án: camera đặt ngay trên ngã tư Minh Mạng – Nguyễn Phước Lan */
+  showSitePano(onReady) {
+    // Ngã tư nằm ở (AVENUE_X, roadZ) → quy ra hướng/khoảng cách so với tâm F2
+    const bearing = (THREE.MathUtils.radToDeg(Math.atan2(AVENUE_X, this.roadZ)) + 360) % 360;
+    const dist = Math.hypot(AVENUE_X, this.roadZ);
+    this.setPano(`${import.meta.env.BASE_URL || './'}pano/khu-dat-360.jpg`, onReady, { ...SITE_PANO, bearing, dist });
   }
 
   /** Xem mặt bằng tầng chi tiết: chỉ tầng fi, camera nhìn xuống chếch như ảnh phối cảnh */
@@ -255,7 +300,7 @@ export class BuildingView {
   }
 
   /** Dựng một tòa vào group; interactive = có khối căn để chọn */
-  buildTower(root, b, { interactive, colorBy }) {
+  buildTower(root, b, { interactive, colorBy, crown = 0xd9542f }) {
     const floors = residentialFloors(b.floors);
     const H = b.floorHeight, P = b.podiumHeight;
     const slabMat = new THREE.MeshStandardMaterial({ color: 0xf4f1ea, roughness: 0.6 });
@@ -340,6 +385,21 @@ export class BuildingView {
           t.position.set(r.x0 + 2 + ((r.x1 - r.x0 - 4) * ((i * 37) % 100)) / 100, roofY + 1, r.y0 + 2 + ((r.y1 - r.y0 - 4) * ((i * 61) % 100)) / 100);
           t.castShadow = true;
           root.add(t);
+        }
+      }
+      // Khung pergola màu trên mái (mỗi tòa một màu như ảnh phối cảnh)
+      const crownMat = new THREE.MeshStandardMaterial({ color: crown, roughness: 0.5 });
+      for (const w of [WINGS[0], WINGS[2]]) {
+        const r = rectM(w.px);
+        const inset = 3.2;
+        const fr = { x0: r.x0 + inset, y0: r.y0 + inset, x1: r.x1 - inset, y1: Math.min(r.y1 - inset, r.y0 + 14) };
+        const bar = (x0, z0, x1, z1) => { const m = new THREE.Mesh(new THREE.BoxGeometry(Math.max(0.4, x1 - x0), 0.6, Math.max(0.4, z1 - z0)), crownMat); m.position.set((x0 + x1) / 2, roofY + 3.6, (z0 + z1) / 2); m.castShadow = true; root.add(m); };
+        bar(fr.x0, fr.y0, fr.x1, fr.y0 + 0.4); bar(fr.x0, fr.y1 - 0.4, fr.x1, fr.y1); bar(fr.x0, fr.y0, fr.x0 + 0.4, fr.y1); bar(fr.x1 - 0.4, fr.y0, fr.x1, fr.y1);
+        for (let x = fr.x0 + 1.2; x < fr.x1 - 0.6; x += 1.2) bar(x, fr.y0, x + 0.15, fr.y1);
+        for (const [x, z] of [[fr.x0, fr.y0], [fr.x1, fr.y0], [fr.x0, fr.y1], [fr.x1, fr.y1]]) {
+          const c = new THREE.Mesh(new THREE.BoxGeometry(0.4, 3.6, 0.4), crownMat);
+          c.position.set(x, roofY + 1.8, z);
+          root.add(c);
         }
       }
       // Cột khung trắng ở 4 góc mái
@@ -439,7 +499,7 @@ export class BuildingView {
       const { floor, floorIndex, slot } = m.userData;
       const u = b.units[`${floor}-${slot.slot}`] || {};
       const ar = areaOf(floor, slot);
-      t.innerHTML = `<b>${unitCode(b, floor, slot.slot)}</b> · ${slot.type}<br>${ar.tim} m² tim · ${ar.tt} m² TT<br>${STATUS[u.status || 'available'].name} · ${unitPrice(b, floorIndex, slot).toFixed(2)} tỷ`;
+      t.innerHTML = `<b>${unitCode(b, floor, slot.slot)}</b> · ${slot.type}<br>${ar.tim} m² tim · ${ar.tt} m² TT${this.readonly ? '' : `<br>${STATUS[u.status || 'available'].name} · ${unitPrice(b, floorIndex, slot).toFixed(2)} tỷ`}`;
       const r = this.container.getBoundingClientRect();
       t.style.display = 'block';
       t.style.left = e.clientX - r.left + 14 + 'px';
