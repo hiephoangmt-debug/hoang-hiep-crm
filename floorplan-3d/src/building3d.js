@@ -83,6 +83,7 @@ export const SITE_PANO = { heading: 90, alt: 170, fov: 70, look: [40, 0, -30] };
 export class BuildingView {
   constructor(container, getBuilding, onSelect, opts = {}) {
     this.light = !!opts.light;
+    this.readonly = !!opts.readonly;
     this.container = container;
     this.getBuilding = getBuilding;
     this.onSelect = onSelect;
@@ -498,7 +499,7 @@ export class BuildingView {
       const { floor, floorIndex, slot } = m.userData;
       const u = b.units[`${floor}-${slot.slot}`] || {};
       const ar = areaOf(floor, slot);
-      t.innerHTML = `<b>${unitCode(b, floor, slot.slot)}</b> · ${slot.type}<br>${ar.tim} m² tim · ${ar.tt} m² TT<br>${STATUS[u.status || 'available'].name} · ${unitPrice(b, floorIndex, slot).toFixed(2)} tỷ`;
+      t.innerHTML = `<b>${unitCode(b, floor, slot.slot)}</b> · ${slot.type}<br>${ar.tim} m² tim · ${ar.tt} m² TT${this.readonly ? '' : `<br>${STATUS[u.status || 'available'].name} · ${unitPrice(b, floorIndex, slot).toFixed(2)} tỷ`}`;
       const r = this.container.getBoundingClientRect();
       t.style.display = 'block';
       t.style.left = e.clientX - r.left + 14 + 'px';

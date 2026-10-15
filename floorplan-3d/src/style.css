@@ -243,3 +243,4 @@ main.mode-building .panebuilding { grid-column: 1 !important; grid-row: 1 !impor
 .roadtag.green { background: rgba(34,160,80,.9); }
 .roadtag.gold { background: rgba(214,160,40,.92); }
 .roadtag.blue { background: rgba(40,120,200,.9); }
+.readonly .internal { display: none !important; }
