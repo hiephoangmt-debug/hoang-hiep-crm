@@ -169,15 +169,19 @@ $('#landBtn').onclick = () => {
   viewer.setOption('landscape', on);
   $('#landBtn').classList.toggle('active', on);
 };
-$('#saveBtn').onclick = async () => {
+async function saveImage(mode) {
   const total = store.plan.rooms.reduce((s, r) => s + polygonArea(r.points), 0);
   const blob = await viewer.exportPNG({
+    mode,
+    dims: unit.dims,
     title: `${unit.name} · Tòa F2`,
     lines: [unit.type, `${fmt(unit.dims[0], 2)} × ${fmt(unit.dims[1], 2)} m`, `Tổng DT các phòng ${fmt(total)} m²`, STYLES[store.plan.settings.style]?.name || ''].filter(Boolean),
   });
-  download(blob, `${unit.id}-mat-bang-3d.png`);
-  toast('Đã tải ảnh. Mẹo: bấm ⬇ Nhìn từ trên để có ảnh mặt bằng; bấm 📸 Chụp ảnh như thật, chờ ảnh mịn rồi tải để có ảnh đẹp nhất.', 6000);
-};
+  download(blob, `${unit.id}-${mode === 'plan' ? 'mat-bang' : 'phoi-canh'}.png`);
+  toast(mode === 'plan' ? 'Đã tải ảnh mặt bằng (5:6, nhìn từ trên, kèm diện tích và dài × rộng từng phòng).' : 'Đã tải ảnh phối cảnh theo góc đang xem (5:6). Mẹo: bấm 📸 Chụp ảnh như thật, chờ ảnh mịn rồi tải để có ảnh đẹp nhất.', 6000);
+}
+$('#saveBtn').onclick = () => saveImage('plan');
+$('#saveViewBtn').onclick = () => saveImage('view');
 $('#walkBtn').onclick = () => { document.body.classList.add('walking-page'); viewer.enterWalk(); };
 $('#tourBtn').onclick = () => (viewer.tour ? viewer.stopTour() : startTour());
 $('#tourAgain').onclick = () => startTour();
