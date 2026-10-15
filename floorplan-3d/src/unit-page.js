@@ -34,9 +34,14 @@ function selectUnit(id) {
   if (!viewer) {
     viewer = new Viewer3D($('#viewer'), store);
     viewer.state.people = true;
+    viewer.state.realistic = true;
+    viewer.setRealistic(true);
     viewer.setOption('landscape', false);
     viewer.onWalkUnlock = () => { document.body.classList.remove('walking-page'); viewer.exitWalk(); };
+    viewer.onPTProgress = (n) => { $('#caption').hidden = false; $('#caption').innerHTML = `📸 Ảnh như thật<small>${Math.floor(n)} lượt – ${n < 40 ? 'đứng yên để ảnh mịn dần…' : 'xong, có thể chụp màn hình'}</small>`; };
+    viewer.onPTStop = () => { $('#photoBtn').classList.remove('active'); $('#caption').hidden = true; };
   } else {
+    if (viewer.ptActive) viewer.stopRealRender();
     viewer.stopTour?.();
     viewer.rebuild(true);
     viewer.frameAll(false);
@@ -119,11 +124,23 @@ function startTour() {
   });
 }
 
-$$('[data-tab]').forEach((b) => (b.onclick = () => setTab(b.dataset.tab)));
+$$('[data-tab]').forEach((b) => (b.onclick = () => { if (viewer.ptActive) viewer.stopRealRender(); setTab(b.dataset.tab); }));
 $('#view2d').onclick = () => $('#view2d').classList.toggle('zoom');
 $('#dayBtn').onclick = () => { viewer.setHour(15); $('#dayBtn').classList.add('active'); $('#nightBtn').classList.remove('active'); };
 $('#nightBtn').onclick = () => { viewer.setHour(20); $('#nightBtn').classList.add('active'); $('#dayBtn').classList.remove('active'); };
 $('#topBtn').onclick = () => viewer.setView('top');
+$('#realBtn').onclick = () => {
+  const on = !viewer.state.realistic;
+  viewer.setRealistic(on);
+  $('#realBtn').classList.toggle('active', on);
+};
+$('#photoBtn').onclick = () => {
+  if (viewer.ptActive) { viewer.stopRealRender(); return; }
+  $('#photoBtn').classList.add('active');
+  $('#caption').hidden = false;
+  $('#caption').innerHTML = 'Đang chuẩn bị ảnh như thật…';
+  viewer.startRealRender().catch((err) => { toast('Máy này chưa hỗ trợ chụp ảnh như thật: ' + err.message, 5000); viewer.stopRealRender(); });
+};
 $('#peopleBtn').onclick = () => {
   const on = !viewer.state.people;
   viewer.setOption('people', on);

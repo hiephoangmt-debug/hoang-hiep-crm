@@ -12,6 +12,7 @@ import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
 import { buildScene, disposeTree, SHARED } from './builder.js';
+import { upgradeFurniture, loadInteriorHDRI } from './realistic.js';
 import { getTexture } from './textures.js';
 import { closestOnSegment, rotatePoint, labelPoint, polygonArea, pointInPolygon, pointInRotRect } from './geom.js';
 import { CATALOG_MAP } from './furniture.js';
@@ -44,7 +45,7 @@ export class Viewer3D {
 
     const scene = (this.scene = new THREE.Scene());
     const pmrem = new THREE.PMREMGenerator(r);
-    scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    scene.environment = this._roomEnv = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
     scene.environmentIntensity = 0.35;
 
     this.camera = new THREE.PerspectiveCamera(40, 1, 0.05, 500);
@@ -147,6 +148,7 @@ export class Viewer3D {
     this._above = undefined;
     if (this.ptActive) this.stopRealRender();
     built.labels.forEach((l) => (l.visible = this.state.labels));
+    if (this.state.realistic) upgradeFurniture(built, [this.clipPlane]);
     this.fitShadow();
     this.applyLights();
     this.applyDoors(1);
@@ -212,7 +214,7 @@ export class Viewer3D {
     }
     this.hemi.intensity = 0.12 + 0.75 * day;
     this.hemi.color.setHex(day > 0.2 ? 0xcfe6ff : 0x34407a);
-    this.scene.environmentIntensity = 0.06 + 0.3 * day;
+    this.scene.environmentIntensity = (this.hdriEnv && this.state.realistic ? 0.55 : 0.3) * day + 0.06;
     this.renderer.toneMappingExposure = night ? 1.05 : 0.95;
     this.sky.material.uniforms.rayleigh.value = night ? 0.15 : 1.6;
     this.sky.visible = true;
@@ -234,6 +236,19 @@ export class Viewer3D {
     } else this.hemi.groundColor.setHex(0x6b7f4f);
     this.isNight = night;
     this.applyLights();
+  }
+
+  /** Bật/tắt chế độ như thật: nội thất mô hình thật + HDRI */
+  setRealistic(on) {
+    this.state.realistic = on;
+    if (on) {
+      loadInteriorHDRI(this.renderer).then(({ env, equirect }) => {
+        this.hdriEnv = env;
+        this.hdriEquirect = equirect;
+        if (this.state.realistic) { this.scene.environment = env; this.setHour(this.state.hour); }
+      }).catch((e) => console.warn('HDRI', e));
+    } else if (this._roomEnv) this.scene.environment = this._roomEnv;
+    this.rebuild();
   }
 
   isStudio() { return !this.state.landscape && !this.panoActive; }
@@ -346,12 +361,16 @@ export class Viewer3D {
       grad.bottomColor.set(night ? 0x05070f : 0xd8dde3);
       grad.update();
       this._ptBg = { bg: this.scene.background, env: this.scene.environment };
+      // Nền trắng: nền sáng trơn; ánh sáng môi trường dùng HDRI phòng nếu có
+      if (this.isStudio()) { grad.topColor.set(night ? 0x1c2230 : 0xf3f4f6); grad.bottomColor.set(night ? 0x1c2230 : 0xe9eaec); grad.update(); }
       this.scene.background = grad;
-      this.scene.environment = grad;
+      this.scene.environment = this.state.realistic && this.hdriEquirect ? this.hdriEquirect : grad;
     } else {
       this._ptBg = { bg: this.scene.background, env: this.scene.environment };
       this.scene.environment = this.extTex;
     }
+    this._ptCatcher = this.shadowCatcher.visible;
+    this.shadowCatcher.visible = false;
     this.ptActive = true;
     this.pt.setScene(this.scene, this.camera);
     this._ptCam = this.camera.matrixWorld.clone();
@@ -361,6 +380,7 @@ export class Viewer3D {
     if (!this.ptActive) return;
     this.ptActive = false;
     if (this._ptBg) { this.scene.background = this._ptBg.bg; this.scene.environment = this._ptBg.env; }
+    if (this._ptCatcher) this.shadowCatcher.visible = true;
     this.built.root.traverse((o) => { if (o.userData.capBack) o.visible = true; });
     this.state.cut = this._ptSaved?.cut ?? 1;
     this.built.labels.forEach((l) => (l.visible = this._ptSaved?.labels ?? true));
@@ -385,6 +405,8 @@ export class Viewer3D {
       for (let y = Math.min(...ys) + 0.3; y < Math.max(...ys); y += 0.3) {
         const p = { x, y };
         if (!pointInPolygon(p, pts) || edgeDist(p) < 0.35 || blocked(p, 0.45, false)) continue;
+        // Tránh đứng sát chỗ có người ngồi (ghế, sofa) để người không che khung hình
+        if (furn.some((f) => ['chair', 'sofa', 'armchair', 'officeChair'].includes(f.type) && Math.hypot(f.x - p.x, f.y - p.y) < 1.3)) continue;
         const dx = lp.x - p.x, dy = lp.y - p.y, L = Math.hypot(dx, dy) || 1;
         let clear = 0;
         for (let i = 1; i <= 14; i++) {
