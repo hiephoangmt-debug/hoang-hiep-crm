@@ -65,7 +65,26 @@ function wallPieces(w, ops, H) {
   });
 }
 
+/** Lan can lô-gia dạng lam đứng (sill thấp, cao ~1 m) */
+function buildRailing(op, w) {
+  const g = new THREE.Group();
+  const h = Math.max(1.0, op.height);
+  const n = Math.max(2, Math.round(op.width / 0.11));
+  const geo = new THREE.BoxGeometry(0.035, h, 0.07);
+  for (let i = 0; i <= n; i++) {
+    const m = shadowy(new THREE.Mesh(geo, frameMat));
+    m.position.set(-op.width / 2 + (op.width * i) / n, h / 2, 0);
+    g.add(m);
+  }
+  const top = shadowy(new THREE.Mesh(new THREE.BoxGeometry(op.width, 0.05, 0.09), frameMat));
+  top.position.set(0, h, 0);
+  g.add(top);
+  void w;
+  return g;
+}
+
 function buildWindow(op, w, H) {
+  if ((op.sill || 0) <= 0.1 && op.height <= 1.3) return buildRailing(op, w);
   const g = new THREE.Group();
   const width = op.width, h = Math.min(op.height, H - op.sill), fw = 0.055, fd = Math.min(0.09, w.thickness);
   const add = (m) => (g.add(shadowy(m)), m);

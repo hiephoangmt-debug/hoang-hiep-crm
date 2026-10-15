@@ -46,4 +46,17 @@
   .up-stage { height: 72vh; }
   .up-info { border-left: 0; border-top: 1px solid var(--line); }
 }
-.up-3d { background: #f3f4f6; }
+.up-3d { background: #dcdcdc; }
+.up-2d[hidden], .up-3d[hidden] { display: none !important; }
+/* Điện thoại / máy tính bảng dọc: thanh nút nằm dưới khung 3D, vuốt ngang, không che hình */
+@media (max-width: 1000px) {
+  .up-stage { height: auto; }
+  .up-view { display: flex; flex-direction: column; }
+  .up-3d, .up-2d { position: relative; inset: auto; height: 62vh; flex: none; }
+  .up-3d #viewer { position: absolute; inset: 0; }
+  .up-bar { position: static; padding: 8px 10px; flex-direction: column; gap: 6px; pointer-events: auto; background: var(--panel); border-bottom: 1px solid var(--line); }
+  .up-bar .chips { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; box-shadow: none; padding: 2px; background: transparent; scrollbar-width: none; }
+  .up-bar .chips::-webkit-scrollbar { display: none; }
+  .chip { flex: none; white-space: nowrap; }
+  .up-caption { font-size: 14px; padding: 8px 14px; top: 10px; }
+}

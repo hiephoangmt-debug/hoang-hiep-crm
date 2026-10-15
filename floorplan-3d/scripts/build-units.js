@@ -1,7 +1,7 @@
 // Chạy trong trình duyệt (qua scripts/build-units.mjs): dựng mặt bằng 3D các căn mẫu từ ảnh + UNIT_SPECS.
 import { detectWalls } from '../src/detect.js';
 import { detectRooms } from '../src/autorooms.js';
-import { closestOnSegment, wallLength, pointInPolygon, rotatePoint } from '../src/geom.js';
+import { closestOnSegment, wallLength, pointInPolygon, rotatePoint, pointInRotRect } from '../src/geom.js';
 import { uid } from '../src/model.js';
 import { CATALOG_MAP } from '../src/furniture.js';
 import { STYLES, roomKind } from '../src/styles.js';
@@ -140,6 +140,68 @@ export async function buildUnit(spec, imgUrl) {
   return { id: spec.id, name: spec.name, type: spec.type, dims: spec.dims, area: +area.toFixed(1), mpp: det.mpp, mppY: det.mppY, plan };
 }
 
+/** Dời đồ chắn lối cửa: dò vùng trước/sau mỗi cửa, đồ nào lấn vào thì trượt dọc theo lưng (sát tường), không được thì thu hẹp / bỏ */
+function clearDoorways(plan, unitId = '') {
+  const zones = [];
+  for (const o of plan.openings) {
+    if (o.type === 'window') continue;
+    const w = plan.walls.find((x) => x.id === o.wallId);
+    if (!w) continue;
+    const L = wallLength(w);
+    const ux = (w.b.x - w.a.x) / L, uy = (w.b.y - w.a.y) / L, nx = -uy, ny = ux;
+    const cx = w.a.x + (w.b.x - w.a.x) * o.t, cy = w.a.y + (w.b.y - w.a.y) * o.t;
+    // Phía cánh cửa mở vào (+n, hoặc -n nếu mở ra) cần chừa bằng bề rộng cánh; phía kia và cửa lùa chừa lối đi 0,5 m
+    const swing = o.swingOut ? -1 : 1;
+    for (const sd of [-1, 1]) {
+      const depth = o.type === 'door' && sd === swing ? Math.min(0.95, o.width + 0.05) : 0.5;
+      zones.push({ cx: cx + nx * sd * (w.thickness / 2 + depth / 2), cy: cy + ny * sd * (w.thickness / 2 + depth / 2), ux, uy, hw: o.width / 2 + 0.05, hd: depth / 2 });
+    }
+  }
+  const inZone = (p) => zones.some((z) => { const dx = p.x - z.cx, dy = p.y - z.cy; return Math.abs(dx * z.ux + dy * z.uy) < z.hw && Math.abs(-dx * z.uy + dy * z.ux) < z.hd; });
+  const size = (f) => ({ w: f.w ?? CATALOG_MAP[f.type]?.w ?? 1, d: f.d ?? CATALOG_MAP[f.type]?.d ?? 1 });
+  const samples = (f, x = f.x, y = f.y, w = size(f).w, d = size(f).d) => {
+    const out = [], a = (f.rot * Math.PI) / 180;
+    for (let i = 0; i <= 4; i++) for (let j = 0; j <= 4; j++) {
+      const p = rotatePoint({ x: (i / 4 - 0.5) * w * 0.96, y: (j / 4 - 0.5) * d * 0.96 }, a);
+      out.push({ x: x + p.x, y: y + p.y });
+    }
+    return out;
+  };
+  const roomOf = (p) => plan.rooms.find((r) => pointInPolygon(p, r.points));
+  const solid = plan.furniture.filter((f) => f.type !== 'rug');
+  for (const f of solid) {
+    if (!samples(f).some(inZone)) continue;
+    const room = roomOf(f);
+    const a = (f.rot * Math.PI) / 180, ax = Math.cos(a), ay = Math.sin(a);
+    const okAt = (x, y, w) => {
+      const pts = samples(f, x, y, w);
+      if (pts.some(inZone)) return false;
+      if (room && !pts.every((p) => pointInPolygon(p, room.points))) return false;
+      const z = size(f);
+      return !solid.some((g) => g !== f && samples(g).some((p) => pointInRotRect(p, x, y, w, z.d, f.rot)));
+    };
+    let done = false;
+    for (let k = 1; k <= 30 && !done; k++)
+      for (const sg of [1, -1]) {
+        const x = +(f.x + ax * sg * k * 0.1).toFixed(3), y = +(f.y + ay * sg * k * 0.1).toFixed(3);
+        if (okAt(x, y, size(f).w)) { f.x = x; f.y = y; done = true; break; }
+      }
+    for (let s = 0.9; s >= 0.55 && !done; s -= 0.05) {
+      const w = +(size(f).w * s).toFixed(2);
+      for (let k = 0; k <= 30 && !done; k++)
+        for (const sg of [1, -1]) {
+          const x = +(f.x + ax * sg * k * 0.1).toFixed(3), y = +(f.y + ay * sg * k * 0.1).toFixed(3);
+          if (okAt(x, y, w)) { f.x = x; f.y = y; f.w = w; done = true; break; }
+        }
+    }
+    // Đồ chính (giường, sofa, tủ, bếp…) không bao giờ bỏ; chỉ đồ nhỏ mới được bỏ khi không còn chỗ
+    const small = ['plant', 'chair', 'armchair', 'nightstand', 'roundTable', 'floorLamp', 'officeChair', 'coffeeTable'];
+    if (!done && small.includes(f.type)) f.removed = true;
+    console.log(`${unitId}: dời ${f.type} @${f.x.toFixed(2)},${f.y.toFixed(2)} (${done ? 'đã dời' : f.removed ? 'bỏ' : 'giữ nguyên – không còn chỗ'})`);
+  }
+  plan.furniture = plan.furniture.filter((f) => !f.removed);
+}
+
 function addFurniture(plan, spec, P) {
   for (const [type, x, y, rot = 0, opt = {}] of spec.furniture) {
     const { nightstands, ...size } = opt;
@@ -154,6 +216,7 @@ function addFurniture(plan, spec, P) {
       }
     }
   }
+  clearDoorways(plan, spec.id);
 }
 
 export { UNIT_SPECS };

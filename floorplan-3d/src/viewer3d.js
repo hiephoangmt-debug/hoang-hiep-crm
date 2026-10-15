@@ -231,7 +231,7 @@ export class Viewer3D {
     this.shadowCatcher.visible = studio;
     if (studio) {
       this.sky.visible = false;
-      this.scene.background = new THREE.Color(night ? 0x1c2230 : 0xf3f4f6);
+      this.scene.background = new THREE.Color(night ? 0x1c2230 : 0xdcdcdc);
       this.hemi.groundColor.setHex(0xe8e6e1);
     } else this.hemi.groundColor.setHex(0x6b7f4f);
     this.isNight = night;
@@ -362,7 +362,7 @@ export class Viewer3D {
       grad.update();
       this._ptBg = { bg: this.scene.background, env: this.scene.environment };
       // Nền trắng: nền sáng trơn; ánh sáng môi trường dùng HDRI phòng nếu có
-      if (this.isStudio()) { grad.topColor.set(night ? 0x1c2230 : 0xf3f4f6); grad.bottomColor.set(night ? 0x1c2230 : 0xe9eaec); grad.update(); }
+      if (this.isStudio()) { grad.topColor.set(night ? 0x1c2230 : 0xdcdcdc); grad.bottomColor.set(night ? 0x1c2230 : 0xd4d4d4); grad.update(); }
       this.scene.background = grad;
       this.scene.environment = this.state.realistic && this.hdriEquirect ? this.hdriEquirect : grad;
     } else {
