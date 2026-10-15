@@ -149,6 +149,11 @@
     if (scene.durOverride) D = scene.durOverride;
     else if (voice) D = voice.duration + 0.5;
     else if (talking) D = nat.reduce(function (a, b) { return a + b; }, 0);
+    else if (!media.length && opts.hasTalk) {
+      // Video có người nói nhưng cảnh này không có hình: rút thành thẻ chữ ngắn, không kéo dài theo lời thoại
+      D = Math.min(5, Math.max(3, (scene.bigText || []).length * 1.2 + 1.6));
+      return { D: D, shares: [], voice: null, talking: false, card: true };
+    }
     else {
       D = Math.max(readSeconds(scene.text), (scene.bigText || []).length * 1.1 + 1.8, media.length * 2.2, 2.5);
     }
@@ -175,7 +180,12 @@
   function buildFull(project, only) {
     var s = project.settings;
     PACE = s.pace || 'auto';
-    var opts = { voiceMode: project.voiceMode, autoTrim: s.autoTrim };
+    var opts = {
+      voiceMode: project.voiceMode, autoTrim: s.autoTrim,
+      hasTalk: project.voiceMode === 'clip' && project.scenes.some(function (sc) {
+        return (sc.media || []).some(function (m) { return m.isVideo && m.keepAudio && m.hasAudio; });
+      })
+    };
     var tl = { items: [], covers: [], overlays: [], voices: [], sfx: [], kind: 'full', total: 0 };
     var t = 0, n = 0;
     project.scenes.forEach(function (scene, si) {
@@ -234,7 +244,9 @@
         p.voice ? [[t + 0.15, t + 0.15 + p.voice.duration]] :
         [[t + (withIntro ? INTRO_SECONDS : 0) + 0.2, t + p.D - 0.3]];
       var words = sceneWords(scene, speech, ranges);
-      tl.overlays.push({ start: t, duration: p.D, kind: 'scene', text: scene.text, bigText: scene.bigText || [],
+      if (p.card) { words = []; }
+      tl.overlays.push({ start: t, duration: p.D, kind: 'scene', text: p.card ? '' : scene.text,
+        bigText: p.card && !(scene.bigText || []).length ? [firstSentence(scene.text, 7) || headline(scene)] : (scene.bigText || []),
         intro: withIntro, caption: scene.showTitle ? cleanTitle(scene.title) : '', words: words });
       if (s.sfx && s.subtitles && (s.subStyle || 'kinetic') === 'kinetic') {
         kineticStacks(words).forEach(function (st) {
