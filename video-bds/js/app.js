@@ -485,6 +485,7 @@
     var videos = files.filter(isVideoFile), images = files.filter(function (f) { return !isVideoFile(f); });
     var minPause = opts.minPause || parseFloat($('assemblePause').value) || 0.4;
     var useAsr = opts.asr != null ? opts.asr : $('assembleAsr').checked;
+    var fastAsr = (opts.asrMode || 'fast') === 'fast';
     var progress = opts.progress || assembleProgress;
     var clips = [], broll = [], failed = [], noAudio = [];
     $('assembleReport').innerHTML = '';
@@ -528,7 +529,7 @@
       var c2 = Promise.resolve();
       clips.forEach(function (c, i) {
         c2 = c2.then(function () {
-          return AC.transcribe(c.buf, function (msg) { progress(done / steps, 'Clip ' + (i + 1) + '/' + clips.length + ': ' + msg); })
+          return AC.transcribe(c.buf, function (msg) { progress(done / steps, 'Clip ' + (i + 1) + '/' + clips.length + ': ' + msg); }, { maxSec: fastAsr ? 25 : 0 })
             .then(function (w) { c.words = w; tick('Đã chép lời ' + c.file.name); });
         });
       });
@@ -547,7 +548,13 @@
       var dropped = [];
       if (asrOk && clips.some(function (c) { return c.words && c.words.length; })) {
         var utts = [];
-        clips.forEach(function (c) { utts = utts.concat(AC.utterances(c, 0.7)); });
+        if (fastAsr) {
+          // Nghe nhanh: mỗi clip là một khối, xếp theo lời nói ở 25 giây đầu
+          utts = clips.map(function (c) {
+            return { clip: c, segs: c.segments, start: c.segments[0][0], end: c.segments[c.segments.length - 1][1],
+              text: (c.words || []).map(function (w) { return w.w; }).join(' '), partial: true };
+          });
+        } else clips.forEach(function (c) { utts = utts.concat(AC.utterances(c, 0.7)); });
         var m = AC.matchUtterances(utts, scenes);
         perScene = m.scenes;
         dropped = m.dropped;
@@ -562,7 +569,7 @@
         var media = [];
         perScene[si].forEach(function (u) {
           var c = u.clip;
-          var span = u.sim ? AC.scriptSpan(sc.text, u.sim.from, u.sim.to) : '';
+          var span = u.sim && !u.partial ? AC.scriptSpan(sc.text, u.sim.from, u.sim.to) : '';
           var uw = span ? window.BdsTimeline.distributeWords(span, u.segs) : null;
           u.segs.forEach(function (sg) {
             var idx = segIdx++;
@@ -774,7 +781,8 @@
       if (!media.length) { report.push('<div class="warn">⚠️ Chưa có video quay hay tư liệu nào.</div>'); return false; }
       var talkSet = inp.talk;
       return assemble(media, {
-        force: true, quiet: true, asr: $('projAsr').checked && state.scenes.some(function (s2) { return s2.text; }),
+        force: true, quiet: true, asr: $('projAsrMode').value !== 'off' && state.scenes.some(function (s2) { return s2.text; }),
+        asrMode: $('projAsrMode').value,
         minPause: parseFloat($('projPause').value) || 0.25,
         roleOf: function (f) { return talkSet.indexOf(f) !== -1 ? 'talk' : 'broll'; },
         progress: function (p, label) { projProgress(0.05 + p * 0.9, label); }

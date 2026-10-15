@@ -1,5 +1,5 @@
 /* Lưu sẵn ứng dụng để mở được khi không có mạng. Đổi VERSION mỗi lần cập nhật. */
-var VERSION = 'video-bds-v7';
+var VERSION = 'video-bds-v8';
 var FILES = [
   './', './index.html', './manifest.webmanifest', './css/styles.css',
   './js/script-gen.js', './js/audio.js', './js/timeline.js', './js/autocut.js', './js/importer.js', './js/beauty.js', './js/renderer.js', './js/demo.js', './js/webm-fix.js', './js/app.js',

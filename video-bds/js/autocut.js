@@ -105,8 +105,9 @@
   }
 
   /** Lấy âm thanh 16kHz một kênh (đầu vào cho nhận dạng giọng nói). */
-  function to16k(buf) {
-    var ctx = new OfflineAudioContext(1, Math.ceil(buf.duration * 16000), 16000);
+  function to16k(buf, maxSec) {
+    var dur = maxSec ? Math.min(buf.duration, maxSec) : buf.duration;
+    var ctx = new OfflineAudioContext(1, Math.ceil(dur * 16000), 16000);
     var src = ctx.createBufferSource();
     src.buffer = buf;
     src.connect(ctx.destination);
@@ -116,32 +117,45 @@
 
   var asrPromise = null;
 
+  function loadModel(onProgress) {
+    var progress = function (p) {
+      if (onProgress && p.status === 'progress' && p.total) onProgress('Đang tải mô hình nhận dạng giọng nói… ' + Math.round(p.loaded / p.total * 100) + '%');
+    };
+    return import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.2').then(function (T) {
+      var cpu = function () {
+        return T.pipeline('automatic-speech-recognition', 'Xenova/whisper-small', { dtype: 'q8', device: 'wasm', progress_callback: progress });
+      };
+      if (!navigator.gpu) return cpu();
+      // Dùng card đồ hoạ (nhanh hơn nhiều); máy không hỗ trợ thì quay về cách thường
+      return navigator.gpu.requestAdapter().then(function (ad) {
+        if (!ad) return cpu();
+        return T.pipeline('automatic-speech-recognition', 'Xenova/whisper-small', {
+          device: 'webgpu', dtype: { encoder_model: 'fp32', decoder_model_merged: 'q4' }, progress_callback: progress
+        }).catch(cpu);
+      }).catch(cpu);
+    });
+  }
+
   /**
    * Nhận dạng giọng nói tiếng Việt ngay trên máy (Whisper). Lần đầu tải mô hình khoảng 250MB rồi lưu lại.
+   * opts.maxSec: chỉ nghe ngần ấy giây đầu (chế độ nhanh, đủ để biết clip thuộc cảnh nào).
    * Trả về danh sách chữ { w, t0, t1 } theo thời gian trong video gốc.
    */
-  function transcribe(buf, onProgress) {
+  function transcribe(buf, onProgress, opts) {
+    opts = opts || {};
     if (!asrPromise) {
-      asrPromise = import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.2').then(function (T) {
-        return T.pipeline('automatic-speech-recognition', 'Xenova/whisper-small', {
-          dtype: 'q8',
-          device: navigator.gpu ? 'webgpu' : 'wasm',
-          progress_callback: function (p) {
-            if (onProgress && p.status === 'progress' && p.total) onProgress('Đang tải mô hình nhận dạng giọng nói… ' + Math.round(p.loaded / p.total * 100) + '%');
-          }
-        });
-      });
+      asrPromise = loadModel(onProgress);
       asrPromise.catch(function () { asrPromise = null; });
     }
-    return Promise.all([asrPromise, to16k(buf)]).then(function (r) {
-      if (onProgress) onProgress('Đang nghe và chép lời (có thể mất vài phút)…');
+    var dur = opts.maxSec ? Math.min(buf.duration, opts.maxSec) : buf.duration;
+    return Promise.all([asrPromise, to16k(buf, opts.maxSec)]).then(function (r) {
+      if (onProgress) onProgress(opts.maxSec ? 'Đang nghe ' + Math.round(dur) + ' giây đầu…' : 'Đang nghe và chép lời (có thể mất vài phút)…');
       return r[0](r[1], { language: 'vietnamese', task: 'transcribe', chunk_length_s: 30, stride_length_s: 5, return_timestamps: true });
     }).then(function (out) {
       var words = [];
-      (out.chunks || [{ text: out.text, timestamp: [0, buf.duration] }]).forEach(function (c) {
+      (out.chunks || [{ text: out.text, timestamp: [0, dur] }]).forEach(function (c) {
         var a = c.timestamp[0] || 0, b = c.timestamp[1] != null ? c.timestamp[1] : a + 3;
-        var ws = window.BdsTimeline.distributeWords(c.text, [[a, b]]);
-        words = words.concat(ws);
+        words = words.concat(window.BdsTimeline.distributeWords(c.text, [[a, b]]));
       });
       return words;
     });
