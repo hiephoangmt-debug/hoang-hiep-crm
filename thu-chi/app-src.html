@@ -514,7 +514,7 @@ function occurrences(m) {
     if (!r.active || (r.start && m < r.start) || (r.end && m > r.end)) continue;
     const date = `${m}-${pad(Math.min(r.day || 1, daysIn(m)))}`;
     const key = `${m}|${r.id}`;
-    const done = S.tx.find(t => t.recId === r.id && monthOf(t.date) === m);
+    const done = S.tx.find(t => t.recId === r.id && monthOf(t.date) === m) || matchRecTx(r, m);
     out.push({ key, kind: 'rec', ref: r, date, name: r.name, type: r.type, group: r.group, cat: r.cat, amount: r.amount, note: r.note,
       status: done ? 'done' : S.skips[key] ? 'skipped' : 'pending', tx: done });
   }
@@ -525,6 +525,13 @@ function occurrences(m) {
       status: done ? 'done' : p.skipped ? 'skipped' : 'pending', tx: done });
   }
   return out.sort((a, b) => a.date.localeCompare(b.date) || (a.type === 'thu' ? -1 : 1));
+}
+// Khoản cố định đã được ghi tay / nhập Excel (không bấm "Đã chi") → tự nhận theo danh mục + tên
+function matchRecTx(r, m) {
+  const base = x => String(x || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\u0111/g, 'd')
+    .replace(/\bt\d{1,2}(,\d{1,2})*\b/g, '').replace(/\s+/g, ' ').trim();
+  const rb = base(r.name);
+  return S.tx.find(t => !t.recId && t.type === r.type && t.cat === r.cat && monthOf(t.date) === m && (() => { const tb = base(t.desc); return tb && rb && (tb.startsWith(rb) || rb.startsWith(tb)); })());
 }
 function earliestPlanMonth() {
   const ms = [...S.recurring.filter(r => r.active).map(r => r.start || today.slice(0, 7)), ...S.plans.map(p => monthOf(p.date))];
