@@ -244,3 +244,21 @@ main.mode-building .panebuilding { grid-column: 1 !important; grid-row: 1 !impor
 .roadtag.gold { background: rgba(214,160,40,.92); }
 .roadtag.blue { background: rgba(40,120,200,.9); }
 .readonly .internal { display: none !important; }
+
+.bhead { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.bbody { display: flex; flex-direction: column; gap: 10px; }
+.btoggle { display: none; white-space: nowrap; padding: 4px 10px; font-size: 12px; }
+.bpanel.collapsed .bbody { display: none; }
+@media (max-width: 700px) {
+  .btoggle { display: inline-block; }
+  .bpanel { top: auto !important; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); left: 8px !important; right: 8px !important; width: auto !important; max-height: 55% !important; padding: 10px 12px; }
+  .bpanel h3 { font-size: 13px; }
+  .bdetail { top: 8px !important; bottom: auto !important; left: 8px !important; right: 8px !important; max-height: 40% !important; }
+  .towertag { font-size: 10px; padding: 3px 8px; }
+  .roadtag { font-size: 9px; }
+}
+/* Chế độ tòa nhà: khung vừa đúng màn hình (kể cả điện thoại có thanh địa chỉ) */
+body:has(main.mode-building) { display: flex; flex-direction: column; height: 100dvh; overflow: hidden; }
+body:has(main.mode-building) > .topbar { flex: none; }
+main.mode-building { flex: 1 1 auto; height: auto !important; min-height: 0; }
+@media (max-width: 700px) { main.mode-building { height: auto !important; } }

@@ -10,6 +10,8 @@ let building;
 try { building = JSON.parse(localStorage.getItem(B_KEY) || 'null'); } catch { building = null; }
 building ||= sampleBuilding();
 let bview = null, bsel = null, H = null, bFloorIdx = 7;
+// Điện thoại: bảng điều khiển thu gọn mặc định để không che khung 3D
+let panelCollapsed = window.matchMedia('(max-width: 700px)').matches;
 const saveBuilding = () => { try { localStorage.setItem(B_KEY, JSON.stringify(building)); } catch { /* bộ nhớ đầy */ } };
 const bUnit = (key) => (building.units[key] ||= { status: 'available' });
 const vndTy = (n) => n.toLocaleString('vi-VN', { maximumFractionDigits: 2 });
@@ -49,7 +51,8 @@ function renderBPanel() {
   bFloorIdx = Math.max(0, Math.min(bFloorIdx, floors.length - 1));
   const f = bview?.filter.status;
   $('#bpanel').innerHTML = `
-    <h3>🏢 ${building.name} · ${floors.length} tầng ở · ${total} căn</h3>
+    <div class="bhead"><h3>🏢 ${building.name} · ${floors.length} tầng ở · ${total} căn</h3><button id="bToggle" class="btoggle" aria-expanded="${!panelCollapsed}">${panelCollapsed ? '▲ Mở bảng' : '▼ Thu gọn'}</button></div>
+    <div class="bbody">
     ${READONLY ? '<p class="hint">Bấm vào từng căn để xem diện tích và mặt bằng 3D.</p>' : `${building.sample ? '<div class="sample">Trạng thái và giá đang là dữ liệu mẫu để minh hoạ. Nhấp vào từng căn để cập nhật.</div>' : ''}
     <div class="bstats">${Object.entries(STATUS).map(([k, v]) => `<button data-st="${k}" class="${f && !f.has(k) ? 'off' : ''}" title="Bấm để ẩn/hiện"><small><i class="dot" style="background:${v.color}"></i>${v.name}</small><b>${st[k].n}</b></button>`).join('')}</div>
     <div class="bmoney">Đã bán + đặt cọc: <b>${vndTy(st.sold.value + st.deposit.value)} tỷ</b><br>Giá trị hàng còn trống: <b>${vndTy(st.available.value)} tỷ</b></div>`}
@@ -82,7 +85,10 @@ function renderBPanel() {
     <label class="field"><span>Số tầng ở</span><input type="number" id="bFloors" min="1" max="60" value="${building.floors}" /></label>
     <label class="field"><span>Đơn giá (tr/m² TT)</span><input type="number" id="bPrice" min="1" step="0.5" value="${building.pricePerM2}" /></label>`}
     <label class="row"><input type="checkbox" id="bLight" ${bview?.light ? 'checked' : ''} /> Chế độ nhẹ (ít cây, nhà, tắt bóng đổ – cho máy yếu, điện thoại)</label>
-    ${READONLY ? '' : '<div class="row"><button id="bCsv">⬇ Xuất bảng hàng (CSV)</button><button id="bReset" title="Tạo lại dữ liệu mẫu">↺ Dữ liệu mẫu</button></div>'}`;
+    ${READONLY ? '' : '<div class="row"><button id="bCsv">⬇ Xuất bảng hàng (CSV)</button><button id="bReset" title="Tạo lại dữ liệu mẫu">↺ Dữ liệu mẫu</button></div>'}
+    </div>`;
+  $('#bpanel').classList.toggle('collapsed', panelCollapsed);
+  $('#bToggle').onclick = () => { panelCollapsed = !panelCollapsed; renderBPanel(); };
   $$('#bpanel [data-st]').forEach((b) => (b.onclick = () => { const s = bview.filter.status; s.has(b.dataset.st) ? s.delete(b.dataset.st) : s.add(b.dataset.st); bview.rebuild(); renderBPanel(); }));
   $$('#bpanel [data-color]').forEach((b) => (b.onclick = () => { bview.colorBy = b.dataset.color; bview.rebuild(); renderBPanel(); }));
   $('#bLight').onchange = (e) => { try { localStorage.setItem(LIGHT_KEY, e.target.checked ? '1' : '0'); } catch { /* bỏ qua */ } bview.setLight(e.target.checked); };
