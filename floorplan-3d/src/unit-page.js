@@ -33,6 +33,7 @@ function selectUnit(id) {
   renderInfo();
   if (!viewer) {
     viewer = new Viewer3D($('#viewer'), store);
+    viewer.state.people = true;
     viewer.setOption('landscape', false);
     viewer.onWalkUnlock = () => { document.body.classList.remove('walking-page'); viewer.exitWalk(); };
   } else {
@@ -123,6 +124,11 @@ $('#view2d').onclick = () => $('#view2d').classList.toggle('zoom');
 $('#dayBtn').onclick = () => { viewer.setHour(15); $('#dayBtn').classList.add('active'); $('#nightBtn').classList.remove('active'); };
 $('#nightBtn').onclick = () => { viewer.setHour(20); $('#nightBtn').classList.add('active'); $('#dayBtn').classList.remove('active'); };
 $('#topBtn').onclick = () => viewer.setView('top');
+$('#peopleBtn').onclick = () => {
+  const on = !viewer.state.people;
+  viewer.setOption('people', on);
+  $('#peopleBtn').classList.toggle('active', on);
+};
 $('#landBtn').onclick = () => {
   const on = !viewer.state.landscape;
   viewer.setOption('landscape', on);

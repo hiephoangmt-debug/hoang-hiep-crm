@@ -138,7 +138,7 @@ export class Viewer3D {
       this.scene.remove(prev.root);
       disposeTree(prev.root);
     }
-    const built = buildScene(this.store.plan, { clippingPlanes: [this.clipPlane], ceiling: this.state.ceiling, landscape: this.state.landscape });
+    const built = buildScene(this.store.plan, { clippingPlanes: [this.clipPlane], ceiling: this.state.ceiling, landscape: this.state.landscape, people: this.state.people });
     // Giữ trạng thái đóng/mở cửa sau khi dựng lại
     if (prev) for (const d of built.doors) { const o = prev.doors.find((p) => p.op.id === d.op.id); if (o) { d.open = o.open; d.target = o.target; } }
     this.built = built;
@@ -253,7 +253,7 @@ export class Viewer3D {
     this.state[key] = value;
     if (key === 'cut') this.updateClip();
     if (key === 'labels') this.built.labels.forEach((l) => (l.visible = value));
-    if (key === 'ceiling' || key === 'landscape') { this.rebuild(); this.setHour(this.state.hour); }
+    if (key === 'ceiling' || key === 'landscape' || key === 'people') { this.rebuild(); this.setHour(this.state.hour); }
     if (key === 'lights') this.applyLights();
     if (key === 'ao') this.gtao.enabled = value;
     if (key === 'autoRotate') this.controls.autoRotate = value;

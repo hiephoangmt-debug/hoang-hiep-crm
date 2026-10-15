@@ -4,7 +4,7 @@ import { ask, toast, download } from './ui.js';
 
 const PLAN_KEY = 'floorplan3d.plan.v2';
 
-mountBuildingUI({
+window.__bview = mountBuildingUI({
   toast, ask, download,
   // Mặt bằng đang dựng gần nhất trong trình dựng căn hộ (cùng trình duyệt)
   getCurrentPlan: () => { try { return JSON.parse(localStorage.getItem(PLAN_KEY) || 'null'); } catch { return null; } },

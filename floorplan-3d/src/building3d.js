@@ -99,7 +99,7 @@ export class BuildingView {
     this.labels.domElement.className = 'labels-layer';
     container.appendChild(this.labels.domElement);
     const scene = (this.scene = new THREE.Scene());
-    scene.fog = new THREE.Fog(0xcbdcea, 380, 1500);
+    this.fog = scene.fog = new THREE.Fog(0xcbdcea, 380, 1500);
     scene.environment = new THREE.PMREMGenerator(r).fromScene(new RoomEnvironment(), 0.04).texture;
     scene.environmentIntensity = 0.45;
     const sky = new Sky();
@@ -108,6 +108,7 @@ export class BuildingView {
     u.turbidity.value = 3; u.rayleigh.value = 1.2; u.mieCoefficient.value = 0.003; u.mieDirectionalG.value = 0.8;
     u.sunPosition.value.setFromSphericalCoords(1, THREE.MathUtils.degToRad(42), THREE.MathUtils.degToRad(200));
     scene.add(sky);
+    this.skyMesh = sky;
     const sun = new THREE.DirectionalLight(0xfff1dc, 3.2);
     sun.position.set(-110, 190, 160);
     sun.castShadow = true;
@@ -132,13 +133,22 @@ export class BuildingView {
     this.surround = buildSurroundings({ ...this.surroundArgs, density: this.light ? 0.3 : 1 });
     scene.add(this.surround);
     const b0 = getBuilding();
+    this.neighborGroup = new THREE.Group();
+    scene.add(this.neighborGroup);
+    // Bóng đổ của tòa xuống ảnh 360 (mặt đất trong suốt chỉ nhận bóng)
+    this.shadowCatcher = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.ShadowMaterial({ opacity: 0.3 }));
+    this.shadowCatcher.rotation.x = -Math.PI / 2;
+    this.shadowCatcher.position.y = 0.02;
+    this.shadowCatcher.receiveShadow = true;
+    this.shadowCatcher.visible = false;
+    scene.add(this.shadowCatcher);
     for (const n of this.neighbors) {
       const g = new THREE.Group();
       this.buildTower(g, { ...b0, floors: n.floors, units: {} }, { interactive: false, colorBy: 'facade' });
       g.position.set(n.x, 0, n.z);
       g.rotation.y = n.rot || 0;
       if (n.mirror) g.scale.x = -1;
-      scene.add(g);
+      this.neighborGroup.add(g);
     }
 
     this.camera = new THREE.PerspectiveCamera(38, 1, 0.5, 4000);
@@ -179,8 +189,51 @@ export class BuildingView {
     this.scene.remove(this.surround);
     this.surround.traverse((o) => o.geometry?.dispose());
     this.surround = buildSurroundings({ ...this.surroundArgs, density: on ? 0.3 : 1 });
+    this.surround.visible = !this.pano;
     this.scene.add(this.surround);
     this.resize();
+  }
+
+  // ---------------- Ghép tòa nhà vào ảnh 360° thực tế ----------------
+  /** Tải ảnh 360° (equirectangular) làm nền; camera đứng tại điểm chụp, nhìn quanh được */
+  setPano(src, onReady) {
+    if (!src) { this.pano = null; this.applyPano(); return; }
+    new THREE.TextureLoader().load(src, (t) => {
+      t.mapping = THREE.EquirectangularReflectionMapping;
+      t.colorSpace = THREE.SRGBColorSpace;
+      this.panoTex?.dispose();
+      this.panoTex = t;
+      this.pano ||= { heading: 0, bearing: 200, dist: 160, alt: 60, fov: 60 };
+      this.applyPano();
+      onReady?.();
+    });
+  }
+
+  /** p: { heading: xoay ảnh (°), bearing: hướng camera quanh tòa (°), dist: khoảng cách (m), alt: độ cao (m), fov } */
+  applyPano(p) {
+    if (p) Object.assign(this.pano, p);
+    const on = !!(this.pano && this.panoTex);
+    this.surround.visible = !on;
+    this.neighborGroup.visible = !on && this.showNeighbors !== false;
+    this.skyMesh.visible = !on;
+    this.shadowCatcher.visible = on;
+    this.scene.fog = on ? null : this.fog;
+    this.scene.background = on ? this.panoTex : null;
+    this.controls.enableZoom = !on;
+    this.controls.enablePan = !on;
+    if (!on) { this.camera.fov = 38; this.camera.updateProjectionMatrix(); this.setView('perspective'); return; }
+    const q = this.pano;
+    this.scene.backgroundRotation.set(0, THREE.MathUtils.degToRad(q.heading), 0);
+    const b = THREE.MathUtils.degToRad(q.bearing);
+    const cam = new THREE.Vector3(Math.sin(b) * q.dist, q.alt, Math.cos(b) * q.dist);
+    const look = new THREE.Vector3(0, 30, 0).sub(cam).normalize();
+    this.camera.position.copy(cam);
+    this.camera.fov = q.fov;
+    this.camera.updateProjectionMatrix();
+    // Nhìn quanh tại chỗ: mục tiêu đặt sát trước camera
+    this.controls.target.copy(cam).add(look.multiplyScalar(0.5));
+    this.controls.minDistance = 0.1;
+    this.controls.update();
   }
 
   /** Xem mặt bằng tầng chi tiết: chỉ tầng fi, camera nhìn xuống chếch như ảnh phối cảnh */

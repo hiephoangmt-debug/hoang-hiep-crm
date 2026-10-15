@@ -6,6 +6,7 @@ import { wallLength, openingRange, labelPoint, polygonArea, planBounds, pointInP
 import { floorMaterial, getTexture } from './textures.js';
 import { buildFurniture3D, CATALOG_MAP, mat, setPalette } from './furniture.js';
 import { resolvePalette } from './styles.js';
+import { placePeople } from './people.js';
 
 const wallMat = new THREE.MeshStandardMaterial({ color: 0xf4efe6, roughness: 0.9, map: getTexture('plaster') });
 const capMat = new THREE.MeshBasicMaterial({ color: 0x2f3237, side: THREE.BackSide });
@@ -462,6 +463,13 @@ export function buildScene(plan, opts = {}) {
     g.userData.item = item;
     root.add(g);
     furnitureObjs.push(g);
+  }
+
+  // --- Người (tuỳ chọn) ---
+  if (opts.people) {
+    const ppl = placePeople(plan);
+    ppl.userData.noExport = true;
+    root.add(ppl);
   }
 
   // --- Cảnh quan: lối đi trước cửa chính, cây xanh xung quanh ---

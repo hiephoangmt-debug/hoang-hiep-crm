@@ -52,6 +52,16 @@ function renderBPanel() {
     <div class="bstats">${Object.entries(STATUS).map(([k, v]) => `<button data-st="${k}" class="${f && !f.has(k) ? 'off' : ''}" title="Bấm để ẩn/hiện"><small><i class="dot" style="background:${v.color}"></i>${v.name}</small><b>${st[k].n}</b></button>`).join('')}</div>
     <div class="bmoney">Đã bán + đặt cọc: <b>${vndTy(st.sold.value + st.deposit.value)} tỷ</b><br>Giá trị hàng còn trống: <b>${vndTy(st.available.value)} tỷ</b></div>
     <div class="row"><button id="bViewP">🎥 Góc phối cảnh</button><button id="bViewC">🔍 Cận cảnh tòa</button></div>
+    <h4>360° thực tế</h4>
+    <div class="row"><button id="b360Tour">🌐 Tour 360 dự án</button><button id="b360Load" title="Ảnh 360° dạng equirectangular (tỉ lệ 2:1), ví dụ tải về từ Kuula hoặc ảnh flycam">🖼 Ghép tòa vào ảnh 360</button></div>
+    ${bview?.pano ? `<div class="pano">
+      <label class="slider">Xoay ảnh <input type="range" id="pHeading" min="-180" max="180" step="1" value="${bview.pano.heading}" /></label>
+      <label class="slider">Hướng nhìn <input type="range" id="pBearing" min="0" max="360" step="1" value="${bview.pano.bearing}" /></label>
+      <label class="slider">Khoảng cách <input type="range" id="pDist" min="40" max="500" step="5" value="${bview.pano.dist}" /></label>
+      <label class="slider">Độ cao flycam <input type="range" id="pAlt" min="2" max="250" step="1" value="${bview.pano.alt}" /></label>
+      <label class="slider">Góc ống kính <input type="range" id="pFov" min="25" max="90" step="1" value="${bview.pano.fov}" /></label>
+      <button id="pClear">✕ Bỏ ảnh 360, về cảnh dựng</button></div>` : ''}
+    <input type="file" id="b360File" accept="image/*" hidden />
     <h4>Tô màu theo</h4>
     <div class="row seg">${[['status', 'Trạng thái'], ['type', 'Loại căn'], ['facade', 'Mặt đứng']].map(([k, n]) => `<button data-color="${k}" class="${(bview?.colorBy || 'facade') === k ? 'active' : ''}">${n}</button>`).join('')}</div>
     ${bview?.colorBy === 'type' ? `<div class="row">${Object.entries(TYPE_COLORS).map(([k, c]) => `<small><i class="dot" style="background:${c}"></i> ${k}</small>`).join(' ')}</div>` : ''}
@@ -73,6 +83,20 @@ function renderBPanel() {
     bview.showFloorPlan(fi);
     renderBPanel();
   };
+  $('#b360Tour').onclick = () => open360Tour();
+  $('#b360Load').onclick = () => $('#b360File').click();
+  $('#b360File').onchange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    bview.setPano(url, renderBPanel);
+    H.toast('Đã đặt ảnh 360 làm nền. Chỉnh “Xoay ảnh”, “Hướng nhìn”, “Khoảng cách”, “Độ cao” cho tòa nhà khớp với vị trí thực tế trong ảnh.', 7000);
+  };
+  for (const [id, key] of [['#pHeading', 'heading'], ['#pBearing', 'bearing'], ['#pDist', 'dist'], ['#pAlt', 'alt'], ['#pFov', 'fov']]) {
+    const el = $(id);
+    if (el) el.oninput = () => bview.applyPano({ [key]: +el.value });
+  }
+  if ($('#pClear')) $('#pClear').onclick = () => { bview.setPano(null); renderBPanel(); };
   $('#bViewP').onclick = () => bview.setView('perspective');
   $('#bViewC').onclick = () => bview.setView('close');
   $('#bType').onchange = (e) => { bview.filter.type = e.target.value || null; bview.rebuild(); };
@@ -152,3 +176,28 @@ function renderBDetail() {
   };
 }
 
+
+// ---------- Tour 360 (Kuula) ----------
+const TOUR_KEY = 'floorplan3d.tour360';
+const DEFAULT_TOUR = 'https://kuula.co/post/LTTwZ';
+function tourEmbedUrl(link) {
+  // kuula.co/post/<id> → kuula.co/share/<id> (dạng nhúng được)
+  const m = String(link).match(/kuula\.co\/(?:post|share)\/([\w-]+)/);
+  return m ? `https://kuula.co/share/${m[1]}?logo=1&info=1&fs=1&vr=0&thumbs=1` : link;
+}
+function open360Tour() {
+  let link = DEFAULT_TOUR;
+  try { link = localStorage.getItem(TOUR_KEY) || DEFAULT_TOUR; } catch { /* bỏ qua */ }
+  const wrap = document.createElement('div');
+  wrap.className = 'modal';
+  wrap.innerHTML = `<div class="sheet tour360">
+    <header><div><h2>Tour 360° dự án</h2><small>Kéo để nhìn quanh. Có thể thay bằng link tour khác.</small></div>
+      <div class="btnrow"><input type="text" id="tourLink" /><button id="tourSet">Đổi link</button><a class="btnlink dark" id="tourOpen" target="_blank" rel="noopener">↗ Mở tab mới</a><button id="tourClose">✕</button></div></header>
+    <iframe id="tourFrame" allow="xr-spatial-tracking; gyroscope; accelerometer; fullscreen" allowfullscreen></iframe></div>`;
+  document.body.appendChild(wrap);
+  const set = (l) => { wrap.querySelector('#tourLink').value = l; wrap.querySelector('#tourFrame').src = tourEmbedUrl(l); wrap.querySelector('#tourOpen').href = l; };
+  set(link);
+  wrap.querySelector('#tourSet').onclick = () => { const l = wrap.querySelector('#tourLink').value.trim(); if (!l) return; try { localStorage.setItem(TOUR_KEY, l); } catch { /* bỏ qua */ } set(l); };
+  wrap.querySelector('#tourClose').onclick = () => wrap.remove();
+  wrap.onclick = (e) => { if (e.target === wrap) wrap.remove(); };
+}
