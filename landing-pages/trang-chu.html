@@ -963,6 +963,16 @@ document.addEventListener('click', function (e) { var a = e.target.closest && e.
       <button type="button" class="t360" data-pano="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@6e65a10008451cf6850498b13aaeb381e477f5e3/landing-pages/assets/toan-canh-360-sun-fours-tower.jpg" aria-label="Xem ảnh 360 độ toàn cảnh khu đất Sun FourS Tower"><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@6e65a10008451cf6850498b13aaeb381e477f5e3/landing-pages/assets/toan-canh-360-sun-fours-tower-800.jpg" width="800" height="450" alt="Toàn cảnh 360° khu đất Sun FourS Tower: Tòa F2, sông Cổ Cò, bãi tắm Sơn Thủy, Ngũ Hành Sơn" loading="lazy" decoding="async"><span class="t360-play">▶ Bấm để xoay 360°</span></button>
     </div>
     <p class="center" style="margin-top:18px"><button type="button" class="btn btn-ghost" data-360fs>Xem 360° toàn màn hình ⛶</button></p>
+    <!-- 3D-F2 -->
+    <div class="rv" style="margin-top:44px;text-align:center">
+      <span class="eyebrow" style="color:var(--gold-light)">Mô hình 3D tòa F2</span>
+      <h3 style="color:#fff;font-size:clamp(22px,3vw,30px);margin:6px 0 8px">Xoay tòa nhà, chọn tầng – xem từng căn</h3>
+      <p style="color:rgba(255,255,255,.85);max-width:720px;margin:0 auto">Kéo để xoay, cuộn để phóng to; lọc theo loại căn, mặt đứng và tầng để hình dung vị trí, hướng view của căn anh/chị quan tâm.</p>
+    </div>
+    <div class="rv" style="margin-top:22px;border-radius:20px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.7);height:min(80vh,720px);min-height:460px;background:#0b1a3a">
+      <button type="button" class="t360" data-src="https://hiephoangmt-debug.github.io/hoang-hiep-crm/toa-nha.html?khach" aria-label="Mở mô hình 3D tòa F2 FourS Tower"><img src="https://fourstower.netlify.app/img/toa-f2-sun-fours-tower-800.jpg" width="800" height="450" alt="Mô hình 3D tòa F2 FourS Tower" loading="lazy" decoding="async"><span class="t360-play">▶ Bấm để xem tòa F2 dạng 3D</span></button>
+    </div>
+    <p class="center" style="margin-top:18px"><a href="https://hiephoangmt-debug.github.io/hoang-hiep-crm/toa-nha.html?khach" target="_blank" rel="noopener" class="btn btn-ghost">Mở mô hình 3D toàn màn hình ↗</a></p>
     <div class="mcta dark rv"><div><b>Đã thấy toàn cảnh – giờ chọn đúng căn view đẹp nhất</b><span>Căn view sông Cổ Cò, biển, pháo hoa DIFF thường hết trước. Xem ngay căn view nào còn trống.</span></div><div class="mcta-btns"><button type="button" class="btn btn-gold" data-pop data-interest="Căn view đẹp – mục 360" data-title="Căn view sông – biển nào còn trống?" data-sub="Tôi gửi danh sách căn view đẹp còn trống kèm giá sau chiết khấu qua Zalo." data-btn="Gửi danh sách cho tôi →">Xem căn view đẹp còn trống</button></div></div>
 
   </div>
@@ -2080,7 +2090,7 @@ const watch = setInterval(() => {
 })();
 </script>
 <script>
-/* Ảnh 360 toàn cảnh: chỉ tải trình xem (Pannellum) khi khách bấm */
+/* Ảnh 360 toàn cảnh (Pannellum) và mô hình 3D (iframe): chỉ tải khi khách bấm */
 (function () {
   var LIB = 'https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/', q = [], st = 0;
   function lib(cb) {
@@ -2109,7 +2119,12 @@ const watch = setInterval(() => {
       lab.textContent = old;
     });
   }
-  document.querySelectorAll('.t360').forEach(function (b) { b.addEventListener('click', function () { start(b); }); });
+  document.querySelectorAll('.t360').forEach(function (b) { b.addEventListener('click', function () {
+    if (b.dataset.pano) return start(b);
+    var f = document.createElement('iframe'); f.src = b.dataset.src; f.title = b.getAttribute('aria-label') || 'Sun FourS Tower';
+    f.allow = 'xr-spatial-tracking; gyroscope; accelerometer; fullscreen'; f.allowFullscreen = true;
+    f.style.cssText = 'border:0;width:100%;height:100%;display:block'; b.replaceWith(f);
+  }); });
   document.querySelectorAll('[data-360fs]').forEach(function (x) { x.addEventListener('click', function () {
     var sec = x.closest('section'), box = sec && sec.querySelector('.t360-box'), b = box && box.querySelector('.t360');
     if (!box) return;

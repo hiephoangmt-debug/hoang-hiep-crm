@@ -1959,7 +1959,7 @@ const watch = setInterval(() => {
 })();
 </script>
 <script>
-/* Ảnh 360 toàn cảnh: chỉ tải trình xem (Pannellum) khi khách bấm */
+/* Ảnh 360 toàn cảnh (Pannellum) và mô hình 3D (iframe): chỉ tải khi khách bấm */
 (function () {
   var LIB = 'https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/', q = [], st = 0;
   function lib(cb) {
@@ -1988,7 +1988,12 @@ const watch = setInterval(() => {
       lab.textContent = old;
     });
   }
-  document.querySelectorAll('.t360').forEach(function (b) { b.addEventListener('click', function () { start(b); }); });
+  document.querySelectorAll('.t360').forEach(function (b) { b.addEventListener('click', function () {
+    if (b.dataset.pano) return start(b);
+    var f = document.createElement('iframe'); f.src = b.dataset.src; f.title = b.getAttribute('aria-label') || 'Sun FourS Tower';
+    f.allow = 'xr-spatial-tracking; gyroscope; accelerometer; fullscreen'; f.allowFullscreen = true;
+    f.style.cssText = 'border:0;width:100%;height:100%;display:block'; b.replaceWith(f);
+  }); });
   document.querySelectorAll('[data-360fs]').forEach(function (x) { x.addEventListener('click', function () {
     var sec = x.closest('section'), box = sec && sec.querySelector('.t360-box'), b = box && box.querySelector('.t360');
     if (!box) return;
