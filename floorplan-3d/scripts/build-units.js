@@ -1,0 +1,135 @@
+// Chạy trong trình duyệt (qua scripts/build-units.mjs): dựng mặt bằng 3D các căn mẫu từ ảnh + UNIT_SPECS.
+import { detectWalls } from '../src/detect.js';
+import { detectRooms } from '../src/autorooms.js';
+import { closestOnSegment, wallLength, pointInPolygon, rotatePoint } from '../src/geom.js';
+import { uid } from '../src/model.js';
+import { CATALOG_MAP } from '../src/furniture.js';
+import { STYLES, roomKind } from '../src/styles.js';
+import { UNIT_SPECS } from './unit-specs.js';
+
+function nearestWall(walls, p, maxD = 0.6) {
+  let best = null;
+  for (const w of walls) {
+    const c = closestOnSegment(p, w.a, w.b);
+    if (c.d < maxD && (!best || c.d < best.d)) best = { w, t: c.t, d: c.d };
+  }
+  return best;
+}
+
+export async function buildUnit(spec, imgUrl) {
+  const img = new Image();
+  img.src = imgUrl;
+  await img.decode();
+  const [wM, hM] = spec.dims;
+  const det = detectWalls(img, null, { targetWidthM: wM, targetHeightM: hM });
+  const P = ([x, y]) => ({ x: +(x * det.mpp).toFixed(3), y: +(y * det.mppY).toFixed(3) });
+  let walls = det.walls, openings = det.openings;
+  const dropWall = (pt) => {
+    const n = nearestWall(walls, P(pt), 0.35);
+    if (!n) return;
+    walls = walls.filter((w) => w !== n.w);
+    openings = openings.filter((o) => o.wallId !== n.w.id);
+  };
+  (spec.remove || []).forEach(dropWall);
+  (spec.removeWalls || []).forEach(dropWall);
+  for (const [x1, y1, x2, y2] of spec.cut || []) {
+    const a = P([x1, y1]), b = P([x2, y2]);
+    const n = nearestWall(walls, { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }, 0.4);
+    if (!n) continue;
+    const w = n.w, L = wallLength(w);
+    const ta = closestOnSegment(a, w.a, w.b).t, tb = closestOnSegment(b, w.a, w.b).t;
+    const [t0, t1] = [Math.min(ta, tb), Math.max(ta, tb)];
+    const at = (t) => ({ x: w.a.x + (w.b.x - w.a.x) * t, y: w.a.y + (w.b.y - w.a.y) * t });
+    walls = walls.filter((x) => x !== w);
+    const pieces = [];
+    if (t0 * L > 0.2) pieces.push({ ...w, id: uid(), a: { ...w.a }, b: at(t0), r: [0, t0] });
+    if ((1 - t1) * L > 0.2) pieces.push({ ...w, id: uid(), a: at(t1), b: { ...w.b }, r: [t1, 1] });
+    for (const o of openings.filter((o) => o.wallId === w.id)) {
+      const piece = pieces.find((p) => o.t >= p.r[0] && o.t <= p.r[1]);
+      if (piece) { o.wallId = piece.id; o.t = (o.t - piece.r[0]) / (piece.r[1] - piece.r[0]); }
+      else openings = openings.filter((x) => x !== o);
+    }
+    pieces.forEach((p) => { delete p.r; walls.push(p); });
+  }
+  for (const [x1, y1, x2, y2] of spec.walls || []) walls.push({ id: uid(), a: P([x1, y1]), b: P([x2, y2]), thickness: 0.12 });
+  const addOn = (wall, type, width, extra = {}) => {
+    const def = type === 'window' ? { height: 1.4, sill: 0.9 } : type === 'slide' ? { height: 2.3, sill: 0 } : { height: 2.1, sill: 0 };
+    openings.push({ id: uid(), wallId: wall.id, type, t: 0.5, width: Math.min(width, wallLength(wall) - 0.05), ...def, ...extra });
+  };
+  for (const [[x1, y1, x2, y2], width, extra] of spec.extraSlides || []) { const w = { id: uid(), a: P([x1, y1]), b: P([x2, y2]), thickness: 0.12 }; walls.push(w); addOn(w, 'slide', width, extra); }
+  for (const [[x1, y1, x2, y2], width, extra] of spec.extraWindows || []) { const w = { id: uid(), a: P([x1, y1]), b: P([x2, y2]), thickness: 0.1 }; walls.push(w); addOn(w, 'window', width, extra); }
+  for (const pt of spec.removeOpenings || []) {
+    const p = P(pt);
+    let best = null, bd = 0.5;
+    for (const o of openings) {
+      const w = walls.find((x) => x.id === o.wallId);
+      if (!w) continue;
+      const c = { x: w.a.x + (w.b.x - w.a.x) * o.t, y: w.a.y + (w.b.y - w.a.y) * o.t };
+      const d = Math.hypot(c.x - p.x, c.y - p.y);
+      if (d < bd) { bd = d; best = o; }
+    }
+    if (best) openings = openings.filter((o) => o !== best);
+  }
+  // Cửa = một đoạn tường đúng bằng khe cửa (dọc 'v' / ngang 'h'); tường nhận nhầm từ cánh cửa trên đoạn đó bị khoét bỏ
+  const place = ([x, y, width, orient], type) => {
+    const c = P([x, y]);
+    const half = width / 2 + 0.06;
+    const a = orient === 'h' ? { x: c.x - half, y: c.y } : { x: c.x, y: c.y - half };
+    const b = orient === 'h' ? { x: c.x + half, y: c.y } : { x: c.x, y: c.y + half };
+    const lo = orient === 'h' ? a.x : a.y, hi = orient === 'h' ? b.x : b.y;
+    for (const w of [...walls]) {
+      const horiz = Math.abs(w.a.y - w.b.y) < 0.05, vert = Math.abs(w.a.x - w.b.x) < 0.05;
+      if (orient === 'h' ? !horiz || Math.abs(w.a.y - c.y) > 0.22 : !vert || Math.abs(w.a.x - c.x) > 0.22) continue;
+      const s0 = orient === 'h' ? Math.min(w.a.x, w.b.x) : Math.min(w.a.y, w.b.y), s1 = orient === 'h' ? Math.max(w.a.x, w.b.x) : Math.max(w.a.y, w.b.y);
+      if (s1 <= lo || s0 >= hi) continue;
+      walls = walls.filter((x) => x !== w);
+      openings = openings.filter((o) => o.wallId !== w.id);
+      const mk = (u0, u1) => (orient === 'h' ? { a: { x: u0, y: w.a.y }, b: { x: u1, y: w.a.y } } : { a: { x: w.a.x, y: u0 }, b: { x: w.a.x, y: u1 } });
+      if (lo - s0 > 0.15) walls.push({ ...w, id: uid(), ...mk(s0, lo) });
+      if (s1 - hi > 0.15) walls.push({ ...w, id: uid(), ...mk(hi, s1) });
+    }
+    const wall = { id: uid(), a, b, thickness: 0.12 };
+    walls.push(wall);
+    addOn(wall, type, width);
+  };
+  (spec.doors || []).forEach((d) => place(d, 'door'));
+  (spec.slides || []).forEach((d) => place(d, 'slide'));
+  (spec.windows || []).forEach((d) => place(d, 'window'));
+
+  const plan = { version: 1, walls, openings, rooms: [], furniture: [], settings: { wallHeight: 2.8, wallThickness: 0.12, style: spec.style, palette: {} } };
+  // Phòng + tên theo chữ trên bản vẽ
+  const rooms = detectRooms(plan, { close: spec.close ?? 0.32, outside: (spec.outside || []).map(P) });
+  const style = STYLES[spec.style];
+  for (const r of rooms) {
+    const names = spec.labels.filter(([, x, y]) => pointInPolygon(P([x, y]), r.points)).map(([n]) => n);
+    const uniq = [...new Set(names)];
+    // "Phòng khách, bếp + ăn & phòng đa năng"
+    r.name = !uniq.length ? 'Sảnh' : uniq.length === 1 ? uniq[0] : uniq.slice(0, -1).map((n, i) => (i ? n.toLowerCase() : n)).join(', ') + ' & ' + uniq.at(-1).toLowerCase();
+    r.name = spec.rename?.[r.name] || r.name;
+    r.floor = style.floors[roomKind(r.name)] || 'marble';
+  }
+  plan.rooms = rooms;
+  // Nội thất đúng vị trí trong ảnh
+  for (const [type, x, y, rot = 0, opt = {}] of spec.furniture) {
+    const { nightstands, ...size } = opt;
+    const p = P([x, y]);
+    const item = { id: uid(), type, x: p.x, y: p.y, rot, ...size };
+    plan.furniture.push(item);
+    if (nightstands) {
+      const def = CATALOG_MAP[type];
+      const w = size.w ?? def.w, d = size.d ?? def.d;
+      for (const s of [-1, 1]) {
+        const off = rotatePoint({ x: s * (w / 2 + 0.3), y: -d / 2 + 0.22 }, (rot * Math.PI) / 180);
+        plan.furniture.push({ id: uid(), type: 'nightstand', x: +(p.x + off.x).toFixed(3), y: +(p.y + off.y).toFixed(3), rot });
+      }
+    }
+  }
+  const area = rooms.reduce((s, r) => {
+    let a = 0;
+    r.points.forEach((p, i) => { const q = r.points[(i + 1) % r.points.length]; a += p.x * q.y - q.x * p.y; });
+    return s + Math.abs(a) / 2;
+  }, 0);
+  return { id: spec.id, name: spec.name, type: spec.type, dims: spec.dims, area: +area.toFixed(1), mpp: det.mpp, mppY: det.mppY, plan };
+}
+
+export { UNIT_SPECS };

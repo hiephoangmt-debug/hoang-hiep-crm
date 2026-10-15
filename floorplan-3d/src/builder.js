@@ -314,7 +314,7 @@ export function buildScene(plan, opts = {}) {
       g.position.add(new THREE.Vector3(dx * c, 0, dy * c));
       interactive.center = new THREE.Vector3(w.a.x + dx * c, 1, w.a.y + dy * c);
       root.add(g);
-      if (plan.settings.curtains !== false && op.type !== 'door' && op.height >= 0.9) {
+      if (plan.settings.curtains !== false && op.type !== 'door' && op.height >= 0.9 && !op.glass && op.sill > 0.05 || (op.type === 'slide' && plan.settings.curtains !== false)) {
         const cx = w.a.x + dx * c, cy = w.a.y + dy * c;
         const nx = -dy, ny = dx;
         const inPlus = insideAnyRoom(plan, { x: cx + nx * 0.4, y: cy + ny * 0.4 });

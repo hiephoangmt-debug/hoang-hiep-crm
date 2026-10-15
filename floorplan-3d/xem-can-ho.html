@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Căn hộ mẫu – Tòa F2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./src/style.css" />
+  <link rel="stylesheet" href="./src/unit-page.css" />
+</head>
+<body class="unitpage">
+  <header class="topbar">
+    <div class="brand"><span class="logo">⌂</span><div><b>Căn hộ mẫu · Tòa F2</b><small>Mặt bằng 2D · 3D · 4D</small></div></div>
+    <div class="actions">
+      <a class="btnlink" href="./toa-nha.html">🏢 Bảng hàng tòa nhà</a>
+      <a class="btnlink" href="./index.html" title="Công cụ thiết kế (nội bộ)">✏️ Thiết kế</a>
+    </div>
+  </header>
+  <div class="up-wrap">
+    <nav class="up-units" id="units" aria-label="Chọn loại căn"></nav>
+    <section class="up-stage">
+      <div class="up-tabs" role="tablist">
+        <button data-tab="2d" role="tab">2D · Mặt bằng</button>
+        <button data-tab="3d" role="tab" class="active">3D · Phối cảnh</button>
+        <button data-tab="4d" role="tab">4D · Tham quan</button>
+      </div>
+      <div class="up-view">
+        <div class="up-2d" id="view2d" hidden><img id="planImg" alt="Mặt bằng căn hộ" /></div>
+        <div class="up-3d" id="view3d"><div id="viewer"></div></div>
+        <div class="up-caption" id="caption" hidden></div>
+        <div class="up-progress" id="progress" hidden><i></i></div>
+        <div class="up-bar" id="bar3d">
+          <div class="chips" id="styles"></div>
+          <div class="chips">
+            <button id="dayBtn" class="chip active">☀️ Ban ngày</button>
+            <button id="nightBtn" class="chip">🌙 Buổi tối</button>
+            <button id="topBtn" class="chip">⬇ Nhìn từ trên</button>
+            <button id="walkBtn" class="chip">🚶 Đi bộ</button>
+          </div>
+        </div>
+        <div class="up-bar" id="bar4d" hidden>
+          <div class="chips"><button id="tourBtn" class="chip active">⏸ Tạm dừng</button><button id="tourAgain" class="chip">↺ Xem lại</button></div>
+        </div>
+      </div>
+    </section>
+    <aside class="up-info" id="info"></aside>
+  </div>
+  <div class="walkhint up-walkhint" id="walkhint">W A S D để đi · chuột để nhìn · <b>Esc</b> để thoát</div>
+  <div class="toast" id="toast"></div>
+  <script type="module" src="./src/unit-page.js"></script>
+</body>
+</html>

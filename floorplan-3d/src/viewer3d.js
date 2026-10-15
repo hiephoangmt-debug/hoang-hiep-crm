@@ -13,7 +13,7 @@ import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
 import { buildScene, disposeTree, SHARED } from './builder.js';
 import { getTexture } from './textures.js';
-import { closestOnSegment, rotatePoint } from './geom.js';
+import { closestOnSegment, rotatePoint, labelPoint, polygonArea, pointInPolygon, pointInRotRect } from './geom.js';
 import { CATALOG_MAP } from './furniture.js';
 
 const easeOut = (t) => 1 - Math.pow(1 - t, 3);
@@ -352,6 +352,131 @@ export class Viewer3D {
     this.onPTStop?.();
   }
 
+  // ---------------- 4D: tham quan tự động ----------------
+  /** Vị trí camera trong phòng: góc phòng ít đồ đạc nhất, nhìn về phía tâm phòng */
+  roomShot(room) {
+    const pts = room.points;
+    const lp = labelPoint(pts);
+    const furn = this.store.plan.furniture.filter((f) => f.type !== 'rug');
+    const size = (f) => ({ w: f.w ?? CATALOG_MAP[f.type]?.w ?? 1, d: f.d ?? CATALOG_MAP[f.type]?.d ?? 1, h: f.h ?? CATALOG_MAP[f.type]?.h ?? 1 });
+    const blocked = (p, margin, tallOnly) => furn.some((f) => { const z = size(f); return (!tallOnly || z.h > 1.2) && pointInRotRect(p, f.x, f.y, z.w + margin, z.d + margin, f.rot || 0); });
+    const xs = pts.map((p) => p.x), ys = pts.map((p) => p.y);
+    const edgeDist = (p) => Math.min(...pts.map((q, i) => closestOnSegment(p, q, pts[(i + 1) % pts.length]).d));
+    let best = null, bestScore = -Infinity;
+    // Dò lưới điểm trong phòng: chỗ đứng xa tâm phòng, cách tường, không vướng đồ và nhìn thoáng về tâm phòng
+    for (let x = Math.min(...xs) + 0.3; x < Math.max(...xs); x += 0.3)
+      for (let y = Math.min(...ys) + 0.3; y < Math.max(...ys); y += 0.3) {
+        const p = { x, y };
+        if (!pointInPolygon(p, pts) || edgeDist(p) < 0.35 || blocked(p, 0.45, false)) continue;
+        const dx = lp.x - p.x, dy = lp.y - p.y, L = Math.hypot(dx, dy) || 1;
+        let clear = 0;
+        for (let i = 1; i <= 14; i++) {
+          const q = { x: p.x + (dx / L) * i * 0.3, y: p.y + (dy / L) * i * 0.3 };
+          if (blocked(q, 0.15, true)) break;
+          clear++;
+        }
+        const score = clear + Math.min(L, 4) * 1.5;
+        if (score > bestScore) { bestScore = score; best = p; }
+      }
+    best ||= lp;
+    const dx = lp.x - best.x, dy = lp.y - best.y;
+    const L = Math.hypot(dx, dy) || 1;
+    return {
+      pos: new THREE.Vector3(best.x, 1.5, best.y),
+      target: new THREE.Vector3(best.x + (dx / L) * 4, 1.1, best.y + (dy / L) * 4),
+    };
+  }
+
+  /** Tham quan: toàn cảnh → bay lần lượt vào từng phòng → về toàn cảnh; giờ trong ngày trôi từ sáng tới tối */
+  playTour({ onCaption, onProgress, onDone } = {}) {
+    if (!this.built) return;
+    this.stopTour();
+    if (this.mode === 'walk') this.exitWalk();
+    const plan = this.store.plan;
+    const rooms = plan.rooms.filter((r) => polygonArea(r.points) > 2.5).sort((a, b) => polygonArea(b.points) - polygonArea(a.points));
+    const b = this.built.bounds;
+    const s = b.size;
+    const over = { pos: new THREE.Vector3(b.cx + s * 0.08, s * 1.4 + 4, b.maxY + s * 0.5 + 1), target: new THREE.Vector3(b.cx, 0.3, b.cy + 0.3), caption: 'Toàn cảnh căn hộ' };
+    const shots = [over, ...rooms.map((r) => ({ ...this.roomShot(r), caption: `${r.name} · ${polygonArea(r.points).toFixed(1).replace('.', ',')} m²` })), { ...over, caption: 'Hoàn tất tham quan' }];
+    const segs = [];
+    let prev = { pos: this.camera.position.clone(), target: this.controls.target.clone() };
+    for (let i = 0; i < shots.length; i++) {
+      const sh = shots[i];
+      segs.push({ kind: 'move', from: prev, to: sh, dur: i === 0 ? 1600 : 2600, arc: i > 0, caption: sh.caption });
+      segs.push({ kind: 'hold', at: sh, dur: i === 0 || i === shots.length - 1 ? 2200 : 3600, sweep: i > 0 && i < shots.length - 1, caption: sh.caption });
+      prev = sh;
+    }
+    const total = segs.reduce((a, x) => a + x.dur, 0);
+    this.controls.enabled = false;
+    this._tourSaved = { cut: this.state.cut, labels: this.state.labels, hour: this.state.hour, autoRotate: this.controls.autoRotate };
+    this.state.cut = 1;
+    this.updateClip();
+    this.controls.autoRotate = false;
+    if (this.anim) this.finishAnim();
+    this._tourFov = this.camera.fov;
+    this.tour = { segs, total, t0: performance.now(), onCaption, onProgress, onDone, idx: -1, H: this.built.height };
+  }
+
+  stopTour(completed = false) {
+    const t = this.tour;
+    if (!t) return;
+    this.tour = null;
+    this.controls.enabled = true;
+    this.camera.fov = this._tourFov || 40;
+    this.camera.updateProjectionMatrix();
+    const last = t.segs[t.segs.length - 1].at;
+    this.controls.target.copy(last.target);
+    if (this._tourSaved) {
+      this.state.cut = this._tourSaved.cut;
+      this.built.labels.forEach((l) => (l.visible = this._tourSaved.labels));
+      this.updateClip();
+    }
+    t.onDone?.(completed);
+  }
+
+  tickTour(now) {
+    const t = this.tour;
+    let el = now - t.t0;
+    let i = 0;
+    while (i < t.segs.length && el > t.segs[i].dur) { el -= t.segs[i].dur; i++; }
+    if (i >= t.segs.length) { this.stopTour(true); return; }
+    const seg = t.segs[i];
+    if (i !== t.idx) { t.idx = i; t.onCaption?.(seg.caption); }
+    const k = Math.min(1, el / seg.dur);
+    const e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+    const cam = this.camera;
+    let target;
+    if (seg.kind === 'move') {
+      const p0 = seg.from.pos, p1 = seg.to.pos;
+      cam.position.lerpVectors(p0, p1, e);
+      // Bay vòng qua phía trên trần khi chuyển phòng (như flycam)
+      if (seg.arc) cam.position.y += Math.sin(Math.PI * e) * (Math.max(0, t.H + 2.2 - Math.min(p0.y, p1.y)) * (Math.min(p0.y, p1.y) < t.H ? 1 : 0.3));
+      target = new THREE.Vector3().lerpVectors(seg.from.target, seg.to.target, e);
+    } else {
+      cam.position.copy(seg.at.pos);
+      target = seg.at.target.clone();
+      if (seg.sweep) {
+        const ang = Math.sin(k * Math.PI * 2) * 0.6;
+        const d = target.clone().sub(cam.position);
+        d.applyAxisAngle(new THREE.Vector3(0, 1, 0), ang);
+        target = cam.position.clone().add(d);
+      }
+    }
+    cam.lookAt(target);
+    this.controls.target.copy(target);
+    // Góc nhìn rộng khi ở trong phòng, hẹp khi nhìn toàn cảnh
+    const inside = cam.position.y < t.H;
+    const fov = THREE.MathUtils.lerp(cam.fov, inside ? 72 : 40, 0.08);
+    if (Math.abs(fov - cam.fov) > 0.05) { cam.fov = fov; cam.updateProjectionMatrix(); }
+    // Nhãn phòng chỉ hiện khi đang ở trên cao
+    const above = cam.position.y > t.H + 0.5;
+    this.built.labels.forEach((l) => (l.visible = above && this._tourSaved.labels));
+    // 4D: thời gian trôi từ 8h sáng tới 19h tối trong suốt chuyến tham quan
+    const prog = (now - t.t0) / t.total;
+    this.setHour(8 + prog * 11);
+    t.onProgress?.(prog, this.state.hour);
+  }
+
   // ---------------- Camera ----------------
   frameAll(smooth = true, preset = 'iso') {
     const b = this.built.bounds;
@@ -582,11 +707,16 @@ export class Viewer3D {
       if (t >= 1) this.fly = null;
     }
     if (this.built) this.applyDoors(1 - Math.pow(0.002, dt));
-    if (this.mode === 'walk') this.walk(dt);
+    if (this.tour) this.tickTour(now);
+    else if (this.mode === 'walk') this.walk(dt);
     else this.controls.update();
     if (this.built) {
       const above = this.camera.position.y > this.built.height;
-      if (above !== this._above) { this._above = above; this.built.root.traverse((o) => { if (o.userData.lampDisc) o.visible = !above; }); }
+      if (above !== this._above) {
+        this._above = above;
+        this.built.root.traverse((o) => { if (o.userData.lampDisc) o.visible = !above; });
+        if (!this.tour && this.mode !== 'walk') this.built.labels.forEach((l) => (l.visible = above && this.state.labels));
+      }
     }
     if (this.ptActive) {
       this.camera.updateMatrixWorld();

@@ -144,9 +144,26 @@ function closeGlassCorners(walls, openings) {
     if (best < 0) continue;
     used.add(i); used.add(best);
     const a = ends[i].p, b = ends[best].p;
-    const wall = { id: uid(), a: { ...a }, b: { ...b }, thickness: 0.12 };
-    walls.push(wall);
-    if (bd > 0.6) openings.push({ id: uid(), wallId: wall.id, type: 'window', t: 0.5, width: +(bd - 0.2).toFixed(2), height: 2.2, sill: 0.3 });
+    // Kính cong: cung 1/4 elip từ đầu tường này sang đầu tường kia, tâm là góc phía trong
+    const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
+    const c1 = { x: b.x, y: a.y }, c2 = { x: a.x, y: b.y };
+    const outer = Math.hypot(c1.x - cx, c1.y - cy) > Math.hypot(c2.x - cx, c2.y - cy) ? c1 : c2;
+    const center = outer === c1 ? c2 : c1;
+    // Chọn đầu nằm cùng hàng với góc ngoài theo trục y làm điểm bắt đầu
+    const start = Math.abs(a.y - outer.y) < Math.abs(b.y - outer.y) ? a : b;
+    const end = start === a ? b : a;
+    const ry = start.y - center.y, rx = end.x - center.x;
+    const N = bd > 1.2 ? 6 : 3;
+    let prev = { ...start };
+    for (let k = 1; k <= N; k++) {
+      const th = (k / N) * (Math.PI / 2);
+      const p = k === N ? { ...end } : { x: +(center.x + rx * Math.sin(th)).toFixed(3), y: +(center.y + ry * Math.cos(th)).toFixed(3) };
+      const wall = { id: uid(), a: prev, b: p, thickness: 0.08 };
+      walls.push(wall);
+      const len = Math.hypot(p.x - prev.x, p.y - prev.y);
+      if (len > 0.25) openings.push({ id: uid(), wallId: wall.id, type: 'window', t: 0.5, width: +(len - 0.04).toFixed(2), height: 2.45, sill: 0.15, glass: true });
+      prev = p;
+    }
   }
 }
 

@@ -6,6 +6,6 @@ export default defineConfig({
   optimizeDeps: { exclude: ['three-gpu-pathtracer', 'three-mesh-bvh'] },
   build: {
     chunkSizeWarningLimit: 1600,
-    rollupOptions: { input: { main: 'index.html', toaNha: 'toa-nha.html' } },
+    rollupOptions: { input: { main: 'index.html', toaNha: 'toa-nha.html', canHo: 'xem-can-ho.html' } },
   },
 });
