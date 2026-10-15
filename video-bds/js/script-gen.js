@@ -142,8 +142,10 @@
   function lowerFirst(s) {
     s = (s || '').trim();
     // Giữ nguyên từ viết tắt như WC, HĐMB
-    var first = s.split(/\s/)[0];
-    if (first.length > 1 && first === first.toUpperCase()) return s;
+    var w = s.split(/\s+/);
+    if (w[0].length > 1 && w[0] === w[0].toUpperCase()) return s;
+    // Tên riêng (VD: "Hải Châu", "Kids Club"): từ thứ hai cũng viết hoa thì giữ nguyên
+    if (w[1] && /^\p{Lu}/u.test(w[1])) return s;
     return s.charAt(0).toLowerCase() + s.slice(1);
   }
 
@@ -248,11 +250,191 @@
     return lines;
   }
 
+
+  /* ---------- Kịch bản nhiều cảnh (giới thiệu dự án) ---------- */
+
+  function splitList(t) {
+    return (t || '').split(/\n|;/).map(function (x) { return x.trim().replace(/^[-•*]\s*/, ''); }).filter(Boolean);
+  }
+
+  function shortPrice(gia) {
+    return (gia || '').replace(/^(giá\s*)?(chỉ\s*)?(từ\s*)?(hơn\s*)?/i, '').trim();
+  }
+
+  function city(viTri) {
+    var parts = (viTri || '').split(',').map(function (x) { return x.trim(); }).filter(Boolean);
+    return parts[parts.length - 1] || viTri || '';
+  }
+
+  function joinVi(list) {
+    if (list.length <= 1) return list.join('');
+    return list.slice(0, -1).join(', ') + ' và ' + list[list.length - 1];
+  }
+
+  /**
+   * Kịch bản giới thiệu dự án theo cảnh (hook → giải pháp → quy mô → vị trí → tiện ích → tài chính → CTA).
+   * Cảnh nào thiếu thông tin thì bỏ qua.
+   */
+  function generateProject(info) {
+    var me = info.moiGioi || 'mình';
+    var ten = info.ten || info.loai || 'dự án';
+    var gia = info.gia || '';
+    var g = shortPrice(gia);
+    var tp = city(info.viTri);
+    var loai = (info.loai || 'căn hộ').toLowerCase();
+    var chinhSach = splitList(info.chinhSach);
+    var ketNoi = splitList(info.ketNoi);
+    var tienIch = splitList(info.tienIch);
+    var quyMo = splitList(info.quyMo);
+    var noiBat = splitList(info.noiBat);
+    var scenes = [];
+
+    var hook = [];
+    hook.push(g ? 'Có ' + g + ' mà muốn sở hữu ' + loai + ' tại ' + tp + '? Nghe có vẻ khó… nhưng chưa chắc đâu!'
+      : 'Bạn đang tìm ' + loai + ' tại ' + tp + '? Khoan, đừng lướt vội!');
+    if (g) hook.push('Khoan, đừng lướt vội! Vì ' + me + ' có một phương án có thể bạn đang tìm.');
+    if (chinhSach[0]) hook.push('Đặc biệt, ' + lowerFirst(chinhSach[0]).replace(/[.!]?$/, '!'));
+    hook.push('Xem hết video, ' + me + ' sẽ nói rõ ' + (g ? g + ' có thể mua được gì' : 'mọi thông tin') + ' và bài toán tài chính được tính như thế nào nhé!');
+    scenes.push({ title: 'Cảnh 1 – Hook', text: hook.join('\n'), bigText: [],
+      shotNote: 'Quay cận mặt, nhìn thẳng camera, nói nhanh và có năng lượng. 3 giây đầu quyết định người xem có ở lại không.' });
+
+    var sol = ['Và lời giải ' + (g ? 'cho bài toán ' + g + ' ' : '') + 'chính là đây!'];
+    sol.push((info.chuDauTu ? info.chuDauTu + ' chính thức ra mắt ' : 'Giới thiệu ') + ten + (gia ? ', với mức giá chỉ ' + gia + '.' : '.'));
+    if (info.viTri) sol.push(ten + ' tọa lạc tại ' + info.viTri + '.');
+    scenes.push({ title: 'Cảnh 2 – ' + ten + ' chính là lời giải', text: sol.join('\n'),
+      bigText: [ten].concat(gia ? ['Giá ' + gia] : []),
+      shotNote: 'Phối cảnh dự án → logo chủ đầu tư → bản đồ vị trí → cận cảnh toà nhà.' });
+
+    if (quyMo.length || info.sanPham) {
+      var qm = [];
+      if (quyMo.length) qm.push(ten + ' được quy hoạch với ' + joinVi(quyMo.map(lowerFirst)) + '.');
+      if (info.sanPham) qm.push('Sản phẩm đa dạng: ' + lowerFirst(info.sanPham).replace(/[.]?$/, '.'));
+      if (info.phapLy) qm.push('Và một điểm rất đáng chú ý: ' + lowerFirst(info.phapLy) + '.');
+      scenes.push({ title: 'Cảnh 3 – Quy mô và sản phẩm', text: qm.join('\n'),
+        bigText: quyMo.slice(0, 3).concat(info.phapLy ? [info.phapLy] : []),
+        shotNote: 'Phối cảnh tổng thể, flycam toà nhà, mặt bằng căn hộ. Chữ chạy màn hình các con số quy mô.' });
+    }
+
+    if (ketNoi.length) {
+      scenes.push({ title: 'Cảnh 4 – Vị trí', text: [
+        'Nằm tại ' + (info.viTri || tp) + ', ' + ten + ' kết nối thuận tiện đến nhiều khu vực quan trọng.',
+        'Từ đây, bạn có thể dễ dàng đến ' + joinVi(ketNoi.map(lowerFirst)) + '.'
+      ].join('\n'), bigText: ketNoi.slice(0, 4),
+        shotNote: 'Google Maps → các trục đường chính → các điểm kết nối. Có thể quay màn hình điện thoại khi mở bản đồ.' });
+    }
+
+    var ti = tienIch.length ? tienIch : noiBat;
+    if (ti.length) {
+      scenes.push({ title: 'Cảnh 5 – Tiện ích', text: [
+        'Không chỉ là một nơi để ở, ' + ten + ' còn mang đến không gian sống đầy đủ tiện ích.',
+        'Từ ' + joinVi(ti.map(lowerFirst)) + ', mọi nhu cầu thư giãn, vận động và vui chơi của gia đình đều có ngay tại dự án.'
+      ].join('\n'), bigText: [],
+        shotNote: 'Chuyển cảnh nhanh: ' + ti.slice(0, 5).join(' → ') + ' → gia đình sinh hoạt.' });
+    }
+
+    if (chinhSach.length || g) {
+      var cs = ['Và đây mới là phần mà ' + me + ' nghĩ nhiều bạn sẽ quan tâm nhất.'];
+      chinhSach.forEach(function (c, i) { cs.push((i === 0 ? 'Với chính sách hiện tại, ' : 'Bên cạnh đó, ') + lowerFirst(c).replace(/[.]?$/, '.')); });
+      scenes.push({ title: 'Cảnh 6 – Bài toán tài chính', text: cs.join('\n'),
+        bigText: (g ? ['Từ ' + g] : []).concat(chinhSach.slice(0, 2)),
+        shotNote: 'Chữ lớn trên nền tối, hoặc quay cận mặt giải thích. Có thể chèn ảnh bảng tính dòng tiền.' });
+    }
+
+    var cta = [];
+    if (info.suKien) cta.push('Và đặc biệt, ' + lowerFirst(info.suKien).replace(/[.]?$/, '.'));
+    cta.push('Nếu bạn đang quan tâm ' + loai + ' tại ' + tp + (g ? ', với tài chính khoảng ' + g : '') + ', thì đây là thời điểm rất phù hợp để tìm hiểu và chọn căn.');
+    cta.push('Liên hệ ngay ' + me + (info.sdt ? ', số ' + info.sdt : '') + ', để nhận quỹ căn đẹp nha!');
+    scenes.push({ title: 'Cảnh ' + (scenes.length + 1) + ' – ' + (info.suKien ? 'Sự kiện và kêu gọi' : 'Kêu gọi liên hệ'), text: cta.join('\n'),
+      bigText: info.suKien ? [info.suKien.split(/[,.]/)[0]] : [],
+      shotNote: 'Quay cận mặt, mỉm cười, chỉ tay xuống dưới (chỗ số điện thoại sẽ hiện ở cuối video).' });
+
+    scenes.forEach(function (sc, i) { sc.title = sc.title.replace(/^Cảnh \d+/, 'Cảnh ' + (i + 1)); });
+    return scenes;
+  }
+
+  /* ---------- Nhập kịch bản từ Google Sheets / Excel ---------- */
+
+  /** Đọc bảng dạng TSV (copy từ Google Sheets) hoặc CSV, có hỗ trợ ô nhiều dòng trong dấu ngoặc kép. */
+  function parseTable(text) {
+    text = (text || '').replace(/\r\n?/g, '\n');
+    var delim = text.indexOf('\t') !== -1 ? '\t' : ',';
+    var rows = [], row = [], cell = '', q = false;
+    for (var i = 0; i < text.length; i++) {
+      var c = text[i];
+      if (q) {
+        if (c === '"') {
+          if (text[i + 1] === '"') { cell += '"'; i++; } else q = false;
+        } else cell += c;
+      } else if (c === '"' && cell === '') {
+        q = true;
+      } else if (c === delim) {
+        row.push(cell); cell = '';
+      } else if (c === '\n') {
+        row.push(cell); rows.push(row); row = []; cell = '';
+      } else cell += c;
+    }
+    if (cell || row.length) { row.push(cell); rows.push(row); }
+    return rows;
+  }
+
+  var EMOJI = /[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}\u{2B50}\u{2B06}\u{2194}-\u{21AA}]/gu;
+
+  function cleanCell(t) {
+    return (t || '').replace(EMOJI, '').replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+  }
+
+  function stripQuotes(t) {
+    return t.replace(/^["“”]+|["“”]+$/g, '').trim();
+  }
+
+  /** Chuyển bảng thành danh sách cảnh: cột A = tên cảnh, cột B = lời thoại, cột C = hình ảnh / chữ trên màn hình. */
+  function tableToScenes(rows) {
+    var scenes = [];
+    // Bỏ các cột trống ở đầu bảng
+    var skip = Infinity;
+    rows.forEach(function (r) {
+      for (var i = 0; i < r.length; i++) if (cleanCell(r[i])) { skip = Math.min(skip, i); break; }
+    });
+    if (!isFinite(skip)) return scenes;
+    rows.forEach(function (r) {
+      var cells = r.slice(skip).map(cleanCell);
+      var filled = cells.filter(Boolean);
+      if (!filled.length) return;
+      var title = cells[0] || '', text = cells[1] || '', note = cells[2] || '';
+      if (filled.length === 1 && title.length > 80) { text = title; title = ''; }
+      // Bỏ dòng tiêu đề bảng
+      if (!scenes.length && text.length < 30 && /lời|thoại|nội dung|kịch bản/i.test(text)) return;
+      var bigText = [], shotNote = '';
+      if (note) {
+        var lines = note.split('\n').map(function (x) { return x.trim(); }).filter(Boolean);
+        if (/^(text|chữ)/i.test(lines[0])) {
+          bigText = lines.slice(1).map(stripQuotes);
+          if (!bigText.length) bigText = [lines[0].replace(/^[^:]*:\s*/, '')];
+        } else {
+          shotNote = note.replace(/^(hình ảnh|cảnh quay|b-roll)\s*:\s*/i, '');
+        }
+      }
+      scenes.push({ title: title || 'Cảnh ' + (scenes.length + 1), text: stripQuotes(text), bigText: bigText, shotNote: shotNote });
+    });
+    return scenes;
+  }
+
+  /** Lấy mã bảng tính từ đường link Google Sheets. */
+  function sheetCsvUrl(link) {
+    var m = (link || '').match(/\/spreadsheets\/d\/([a-zA-Z0-9_-]+)/);
+    if (!m) return '';
+    var gid = (link.match(/[#&?]gid=(\d+)/) || [])[1];
+    return 'https://docs.google.com/spreadsheets/d/' + m[1] + '/gviz/tq?tqx=out:csv' + (gid ? '&gid=' + gid : '');
+  }
+
   /** Ước lượng thời gian đọc (giây) cho một câu tiếng Việt, khoảng 3 tiếng/giây. */
   function readSeconds(text) {
     var words = (text || '').trim().split(/\s+/).filter(Boolean).length;
     return Math.max(2.5, Math.min(9, words / 3.2 + 0.8));
   }
 
-  window.ScriptGen = { STYLES: STYLES, generate: generate, readSeconds: readSeconds };
+  window.ScriptGen = {
+    STYLES: STYLES, generate: generate, readSeconds: readSeconds,
+    generateProject: generateProject, parseTable: parseTable, tableToScenes: tableToScenes, sheetCsvUrl: sheetCsvUrl
+  };
 })();

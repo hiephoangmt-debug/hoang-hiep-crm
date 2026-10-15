@@ -3,4 +3,4 @@ CRM – Real Estate Sales Management System
 
 ## Công cụ
 
-- [`video-bds/`](video-bds/README.md): làm video bất động sản có kịch bản tự động, máy nhắc chữ thu giọng, nhạc và hiệu ứng âm thanh. Mở `video-bds/index.html` bằng Chrome để dùng.
+- [`video-bds/`](video-bds/README.md): làm video bất động sản theo cảnh: kịch bản (tự viết hoặc nhập từ Google Sheets), quay từng đoạn có chữ nhắc, tự cắt ghép, xen phối cảnh/flycam, chữ hiệu ứng, nhạc nền; xuất video đầy đủ, trailer, từng cảnh. Cài được như ứng dụng (PWA).

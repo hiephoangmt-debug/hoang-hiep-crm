@@ -7,11 +7,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap">
 <link rel="stylesheet" href="css/styles.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#E0A526">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
 </head>
 <body>
 <header class="topbar">
   <div class="brand"><span class="logo-dot"></span> Làm Video BĐS</div>
-  <button class="btn ghost small" id="btnHelp" type="button">❓ Hướng dẫn</button>
+  <div class="row nomargin"><button class="btn accent small" id="btnInstall" type="button" hidden>⬇️ Cài ứng dụng</button>
+  <button class="btn ghost small" id="btnHelp" type="button">❓ Hướng dẫn</button></div>
 </header>
 
 <nav class="stepper" id="stepper" aria-label="Các bước"></nav>
@@ -21,12 +27,14 @@
 
     <!-- BƯỚC 1 -->
     <div class="step" data-step="1">
-      <h2>Bước 1. Thông tin căn nhà</h2>
+      <h2>Bước 1. Thông tin dự án / căn nhà</h2>
       <div class="guide">
-        <b>Làm gì ở bước này?</b> Điền thông tin cơ bản. Phần mềm sẽ tự đưa giá, diện tích, số điện thoại lên video và tự viết kịch bản.
-        Chỉ cần điền những ô có dấu <span class="req">*</span>, các ô khác có thể để trống.
-        <div class="guide-actions"><button class="btn accent" id="btnDemo" type="button">✨ Chưa quen? Bấm để làm thử với dữ liệu mẫu</button>
-          <button class="btn" id="btnDemoF2" type="button">🏙️ Mẫu dự án F2 FourS Tower</button></div>
+        <b>Làm gì ở bước này?</b> Điền thông tin cơ bản. Phần mềm tự đưa giá, số điện thoại lên video và tự viết kịch bản.
+        Chỉ cần điền những ô có dấu <span class="req">*</span>.
+        <div class="guide-actions">
+          <button class="btn accent" id="btnDemoF2" type="button">🏙️ Xem mẫu: dự án F2 FourS Tower (7 cảnh)</button>
+          <button class="btn" id="btnDemo" type="button">✨ Mẫu nhanh: căn hộ từ ảnh</button>
+        </div>
       </div>
       <div class="grid">
         <label>Loại bất động sản <span class="req">*</span>
@@ -37,16 +45,16 @@
           </select>
         </label>
         <label>Tên dự án / tên căn
-          <input data-info="ten" placeholder="VD: Vinhomes Grand Park - S5.03">
+          <input data-info="ten" placeholder="VD: F2 FourS Tower">
         </label>
         <label class="full">Vị trí <span class="req">*</span>
-          <input data-info="viTri" placeholder="VD: Quận 9, TP. Thủ Đức">
+          <input data-info="viTri" placeholder="VD: Giao lộ Minh Mạng – Nguyễn Phước Lan, Hòa Xuân, Đà Nẵng">
         </label>
-        <label>Giá bán / cho thuê <span class="req">*</span>
-          <input data-info="gia" placeholder="VD: 3,2 tỷ hoặc 12 triệu/tháng">
+        <label>Giá <span class="req">*</span>
+          <input data-info="gia" placeholder="VD: từ hơn 1,6 tỷ">
         </label>
         <label>Diện tích
-          <input data-info="dienTich" placeholder="VD: 69m²">
+          <input data-info="dienTich" placeholder="VD: 58m²">
         </label>
         <label>Số phòng ngủ
           <input data-info="phongNgu" inputmode="numeric" placeholder="VD: 2">
@@ -61,16 +69,14 @@
           </select>
         </label>
         <label>Pháp lý
-          <select data-info="phapLy">
-            <option value="">(Không ghi)</option><option>Sổ hồng riêng</option><option>Sổ đỏ</option>
-            <option>Hợp đồng mua bán</option><option>Đang chờ sổ</option>
-          </select>
+          <input data-info="phapLy" list="phapLyList" placeholder="VD: Sổ hồng riêng, Sở hữu lâu dài">
+          <datalist id="phapLyList"><option>Sổ hồng riêng</option><option>Sổ đỏ</option><option>Sở hữu lâu dài</option><option>Hợp đồng mua bán</option><option>Đang chờ sổ</option></datalist>
         </label>
         <label class="full">Điểm nổi bật (mỗi dòng một ý)
-          <textarea data-info="noiBat" rows="3" placeholder="VD: Full nội thất cao cấp&#10;Gần trường học, chợ, bệnh viện&#10;Hỗ trợ vay 70%"></textarea>
+          <textarea data-info="noiBat" rows="3" placeholder="VD: Full nội thất cao cấp&#10;Gần trường học, chợ, bệnh viện"></textarea>
         </label>
         <label>Tên người môi giới <span class="req">*</span>
-          <input data-info="moiGioi" placeholder="VD: Hoàng Hiệp">
+          <input data-info="moiGioi" placeholder="VD: Dương">
         </label>
         <label>Số điện thoại / Zalo <span class="req">*</span>
           <input data-info="sdt" inputmode="tel" placeholder="VD: 0909 123 456">
@@ -82,47 +88,82 @@
           <input type="file" id="logoInput" accept="image/*">
         </label>
       </div>
+      <details class="more" id="projectMore">
+        <summary>➕ Thông tin dự án (để tự viết kịch bản nhiều cảnh)</summary>
+        <div class="grid">
+          <label>Chủ đầu tư
+            <input data-info="chuDauTu" placeholder="VD: Sun Group">
+          </label>
+          <label>Loại sản phẩm
+            <input data-info="sanPham" placeholder="VD: Studio, 1PN+, 2PN, 3PN, Penthouse">
+          </label>
+          <label>Quy mô (mỗi dòng một ý)
+            <textarea data-info="quyMo" rows="3" placeholder="20 tầng nổi&#10;2 tầng hầm&#10;Hơn 580 căn hộ"></textarea>
+          </label>
+          <label>Kết nối (mỗi dòng một ý)
+            <textarea data-info="ketNoi" rows="3" placeholder="Hải Châu 7 phút&#10;Sân bay 10 phút&#10;Biển Sơn Thủy 5 phút"></textarea>
+          </label>
+          <label>Tiện ích (mỗi dòng một ý)
+            <textarea data-info="tienIch" rows="3" placeholder="Hồ bơi&#10;Phòng gym&#10;Spa&#10;Kids Club"></textarea>
+          </label>
+          <label>Chính sách bán hàng (mỗi dòng một ý)
+            <textarea data-info="chinhSach" rows="3" placeholder="Thanh toán 25% đến khi nhận nhà&#10;Hỗ trợ lãi suất 0%"></textarea>
+          </label>
+          <label class="full">Sự kiện (nếu có)
+            <input data-info="suKien" placeholder="VD: Ngày 26/9, dự án chính thức ra mắt tại Hotel Royal Lotus Đà Nẵng">
+          </label>
+        </div>
+      </details>
     </div>
 
     <!-- BƯỚC 2 -->
     <div class="step" data-step="2">
-      <h2>Bước 2. Ảnh và clip</h2>
+      <h2>Bước 2. Kịch bản theo cảnh</h2>
       <div class="guide">
-        <b>Mẹo:</b> Chọn 4–10 ảnh hoặc clip. Ảnh <b>đầu tiên</b> làm ảnh bìa nên chọn ảnh đẹp nhất (mặt tiền hoặc phòng khách).
-        Ghi <b>tên phòng</b> dưới mỗi ảnh (VD: Phòng khách, Bếp, Ban công) để phần mềm viết kịch bản đúng hơn.
-        Dùng nút ▲ ▼ để đổi thứ tự.
+        Video được chia thành <b>các cảnh</b>. Mỗi cảnh có: <b>lời thoại</b> (để đọc hoặc nói trước camera),
+        <b>chữ lớn</b> hiện trên màn hình (mỗi dòng một ý, có hiệu ứng) và <b>gợi ý cảnh quay</b> (để bạn biết cần quay gì).
+        Chọn một cách bắt đầu bên dưới, sau đó sửa tùy ý.
       </div>
-      <label class="dropzone" id="dropzone">
-        <input type="file" id="mediaInput" accept="image/*,video/*" multiple hidden>
-        <div class="dz-icon">📷</div>
-        <div><b>Bấm để chọn ảnh / clip</b> hoặc kéo thả vào đây</div>
-        <div class="muted">Hỗ trợ JPG, PNG, MP4, MOV</div>
-      </label>
-      <datalist id="roomList">
-        <option>Mặt tiền</option><option>Phòng khách</option><option>Phòng ngủ</option><option>Phòng ngủ master</option>
-        <option>Bếp</option><option>Phòng tắm</option><option>Ban công</option><option>View</option>
-        <option>Sân vườn</option><option>Hồ bơi</option><option>Tiện ích</option><option>Đường trước nhà</option>
-      </datalist>
-      <ol class="media-list" id="mediaList"></ol>
+      <div class="starters">
+        <button class="starter" id="btnStartProject" type="button"><b>🏙️ Giới thiệu dự án</b><span>Tự viết 5–7 cảnh: hook, giải pháp, quy mô, vị trí, tiện ích, tài chính, kêu gọi</span></button>
+        <button class="starter" id="btnStartSheet" type="button"><b>📋 Nhập từ Google Sheets</b><span>Dán link hoặc copy bảng kịch bản có sẵn (cột: Cảnh, Lời thoại, Hình ảnh/Chữ)</span></button>
+        <button class="starter" id="btnStartQuick" type="button"><b>⚡ Nhanh từ ảnh</b><span>Chọn ảnh, mỗi ảnh thành một cảnh, lời thoại tự viết</span></button>
+        <input type="file" id="quickInput" accept="image/*,video/*" multiple hidden>
+      </div>
+      <div class="box" id="sheetBox" hidden>
+        <label>Link Google Sheets (bảng phải để chế độ “Bất kỳ ai có đường liên kết đều xem được”)
+          <div class="row nomargin"><input id="sheetLink" placeholder="https://docs.google.com/spreadsheets/d/..."><button class="btn accent" id="btnSheetLink" type="button">Lấy kịch bản</button></div>
+        </label>
+        <p class="muted small-text">Hoặc: mở Google Sheets, bôi đen các ô kịch bản, bấm Ctrl+C, rồi dán vào ô dưới đây.</p>
+        <textarea id="sheetPaste" rows="5" placeholder="Dán bảng kịch bản vào đây (Ctrl+V)"></textarea>
+        <div class="row"><button class="btn" id="btnSheetPaste" type="button">Nhập từ bảng đã dán</button></div>
+        <p class="muted small-text">Chữ có dòng đầu “Text …” ở cột hình ảnh sẽ thành <b>chữ lớn trên màn hình</b>; còn lại là <b>gợi ý cảnh quay</b>.</p>
+      </div>
+      <div class="row wrap" id="quickTools" hidden>
+        <label class="inline">Phong cách
+          <select id="styleSelect"></select>
+        </label>
+        <button class="btn" id="btnRegen" type="button">🔄 Viết lại lời theo tên cảnh</button>
+      </div>
+      <ol class="scene-list" id="sceneList"></ol>
+      <div class="row wrap">
+        <button class="btn" id="btnAddScene" type="button">＋ Thêm cảnh</button>
+        <button class="btn ghost" id="btnSpeak" type="button">🔊 Nghe máy đọc thử</button>
+        <span class="muted small-text">⏱ Dự kiến: <b id="totalDur">0</b> giây</span>
+      </div>
     </div>
 
     <!-- BƯỚC 3 -->
     <div class="step" data-step="3">
-      <h2>Bước 3. Kịch bản</h2>
+      <h2>Bước 3. Quay và ghép từng cảnh</h2>
       <div class="guide">
-        <b>Phần mềm đã tự viết kịch bản cho bạn.</b> Mỗi ô là lời của một cảnh. Bạn có thể sửa thoải mái, chọn phong cách khác,
-        hoặc bấm <b>“Viết kiểu khác”</b> để đổi câu. Những câu này cũng hiện làm <b>phụ đề</b> trên video.
+        Thêm <b>clip quay</b> hoặc <b>ảnh</b> cho từng cảnh, hoặc bấm <b>🎥 Quay cảnh này</b> để quay ngay bằng camera với lời thoại chạy trên màn hình.
+        Phần mềm <b>tự cắt khoảng lặng đầu và cuối</b> mỗi clip rồi <b>tự ghép</b> theo thứ tự. Clip có bật 🔊 sẽ giữ tiếng nói gốc.
+        <br><b>Mẹo dựng chuyên nghiệp:</b> cảnh nào có <b>clip nói</b> (🔊) kèm <b>ảnh phối cảnh / clip flycam</b> (tắt tiếng) thì tiếng nói chạy liên tục,
+        còn hình tự xen phối cảnh, flycam rồi quay lại người nói.
       </div>
-      <div class="row wrap">
-        <label class="inline">Phong cách
-          <select id="styleSelect"></select>
-        </label>
-        <button class="btn" id="btnRegen" type="button">🔄 Viết kiểu khác</button>
-        <button class="btn ghost" id="btnSpeak" type="button">🔊 Nghe máy đọc thử</button>
-      </div>
-      <div id="scriptNotice" class="notice" hidden></div>
-      <ol class="script-list" id="scriptList"></ol>
-      <div class="muted small-text">⏱ Tổng thời lượng: <b id="totalDur">0</b> giây. Số giây mỗi cảnh được tự tính theo độ dài câu, bạn có thể sửa.</div>
+      <label class="check"><input type="checkbox" id="autoTrim" checked> Tự cắt khoảng lặng ở đầu và cuối mỗi clip</label>
+      <ol class="shoot-list" id="shootList"></ol>
     </div>
 
     <!-- BƯỚC 4 -->
@@ -131,34 +172,30 @@
       <div class="guide">
         <b>Chọn một trong ba cách:</b>
         <ol>
-          <li><b>Thu giọng của bạn (khuyên dùng):</b> màn hình hiện chữ to như máy nhắc chữ. Đọc xong câu nào thì bấm <b>“Câu tiếp”</b> (hoặc phím cách).
-            Video sẽ tự khớp cảnh theo giọng bạn.</li>
-          <li><b>Tải file giọng đọc có sẵn</b> (MP3, M4A, WAV), ví dụ file đọc từ app AI đọc văn bản.</li>
-          <li><b>Không dùng giọng:</b> video chỉ có nhạc, hiệu ứng và phụ đề.</li>
+          <li><b>Dùng tiếng nói trong clip quay</b>: hợp khi bạn nói trước camera ở từng cảnh. Độ dài cảnh theo đúng clip.</li>
+          <li><b>Thu giọng lồng tiếng</b>: máy nhắc chữ hiện lời từng cảnh, đọc xong bấm <b>“Cảnh tiếp”</b>. Clip sẽ tự chạy vừa với giọng đọc.</li>
+          <li><b>Không giọng</b>: chỉ nhạc, chữ hiệu ứng và phụ đề.</li>
         </ol>
       </div>
       <div class="voice-options">
-        <label class="choice"><input type="radio" name="voiceMode" value="none" checked> <span>🚫 Không dùng giọng đọc</span></label>
-        <label class="choice"><input type="radio" name="voiceMode" value="record"> <span>🎙️ Thu giọng của tôi</span></label>
-        <label class="choice"><input type="radio" name="voiceMode" value="upload"> <span>📁 Tải file giọng đọc</span></label>
+        <label class="choice"><input type="radio" name="voiceMode" value="clip" checked> <span>🎬 Dùng tiếng nói trong clip quay</span></label>
+        <label class="choice"><input type="radio" name="voiceMode" value="record"> <span>🎙️ Thu giọng lồng tiếng theo máy nhắc chữ</span></label>
+        <label class="choice"><input type="radio" name="voiceMode" value="none"> <span>🚫 Không dùng giọng</span></label>
       </div>
       <div id="voiceRecordBox" class="box" hidden>
-        <p>Chuẩn bị: ngồi nơi yên tĩnh, để điện thoại hoặc micro cách miệng khoảng một gang tay. Trình duyệt sẽ hỏi quyền dùng micro, hãy bấm <b>Cho phép</b>.</p>
+        <p>Ngồi nơi yên tĩnh, micro cách miệng khoảng một gang tay. Trình duyệt sẽ hỏi quyền dùng micro, hãy bấm <b>Cho phép</b>.</p>
         <button class="btn accent" id="btnOpenPrompter" type="button">🎙️ Mở máy nhắc chữ và thu âm</button>
-      </div>
-      <div id="voiceUploadBox" class="box" hidden>
-        <input type="file" id="voiceInput" accept="audio/*">
-        <label class="check"><input type="checkbox" id="fitToVoice" checked> Tự kéo dài / rút ngắn video cho vừa giọng đọc</label>
+        <div id="voiceList" class="voice-list"></div>
       </div>
       <div id="voiceStatus" class="notice" hidden></div>
     </div>
 
     <!-- BƯỚC 5 -->
     <div class="step" data-step="5">
-      <h2>Bước 5. Nhạc, hiệu ứng và kiểu video</h2>
+      <h2>Bước 5. Hiệu ứng chữ, nhạc và kiểu video</h2>
       <div class="guide">
-        Nhạc nền được phần mềm <b>tự soạn nên không lo bản quyền</b> khi đăng TikTok, Facebook hay YouTube. Bạn cũng có thể tải nhạc riêng.
-        Có giọng đọc thì nhạc <b>tự nhỏ lại</b> cho giọng rõ. Bấm <b>▶ Xem thử</b> ở khung bên cạnh để nghe và xem.
+        Nhạc nền được phần mềm <b>tự soạn nên không lo bản quyền</b>. Có giọng nói thì nhạc <b>tự nhỏ lại</b>.
+        Bấm <b>▶ Xem thử</b> ở khung bên cạnh, chọn xem <b>Video đầy đủ</b> hoặc <b>Trailer</b>.
       </div>
       <div class="grid">
         <label>Khung hình
@@ -167,21 +204,27 @@
         <label>Màu chủ đạo
           <select id="themeSelect"></select>
         </label>
+        <label>Hiệu ứng chữ lớn
+          <select id="textFxSelect"></select>
+        </label>
         <label>Kiểu chuyển cảnh
           <select id="transitionSelect"></select>
         </label>
         <label>Nhạc nền
           <select id="moodSelect"></select>
         </label>
-        <label class="full">Hoặc dùng nhạc của bạn (không bắt buộc)
+        <label>Hoặc dùng nhạc của bạn
           <input type="file" id="musicInput" accept="audio/*">
         </label>
         <label>Âm lượng nhạc: <b id="musicVolLabel">70%</b>
           <input type="range" id="musicVol" min="0" max="100" value="70">
         </label>
         <div class="checks">
-          <label class="check"><input type="checkbox" id="sfxToggle" checked> Hiệu ứng âm thanh (whoosh, ting…)</label>
-          <label class="check"><input type="checkbox" id="subToggle" checked> Hiện phụ đề</label>
+          <label class="check"><input type="checkbox" id="sfxToggle" checked> Hiệu ứng âm thanh (whoosh, ting, pop)</label>
+          <label class="check"><input type="checkbox" id="subToggle" checked> Phụ đề từ lời thoại</label>
+          <label class="check"><input type="checkbox" id="introToggle" checked> Khung giới thiệu dự án ở đầu video</label>
+          <label class="check"><input type="checkbox" id="endToggle" checked> Khung số điện thoại ở cuối video</label>
+          <label class="check"><input type="checkbox" id="priceToggle" checked> Hiện giá ở góc màn hình</label>
         </div>
       </div>
     </div>
@@ -190,17 +233,18 @@
     <div class="step" data-step="6">
       <h2>Bước 6. Xuất video</h2>
       <div class="guide">
-        Bấm <b>Xuất video</b>. Video chạy một lượt để ghi lại, mất đúng bằng thời lượng video.
-        <b>Đừng chuyển sang tab khác hoặc thu nhỏ cửa sổ</b> trong lúc xuất. Xong sẽ có nút tải về máy.
+        Chọn các bản cần xuất. Mỗi bản chạy một lượt để ghi lại, mất đúng bằng thời lượng bản đó.
+        <b>Đừng chuyển tab hoặc thu nhỏ cửa sổ</b> trong lúc xuất.
+      </div>
+      <div class="outputs">
+        <label class="choice"><input type="checkbox" id="outFull" checked> <span><b>🎬 Video đầy đủ</b> <span class="muted" id="durFull"></span><br><small class="muted">Tất cả các cảnh, lời thoại, phụ đề</small></span></label>
+        <label class="choice"><input type="checkbox" id="outTrailer" checked> <span><b>⚡ Trailer</b> <span class="muted" id="durTrailer"></span><br><small class="muted">Cắt nhanh mỗi cảnh 1,7 giây, chữ to, nhạc sôi động, để đăng trước hoặc chạy quảng cáo</small></span></label>
+        <label class="choice"><input type="checkbox" id="outScenes"> <span><b>✂️ Từng cảnh riêng</b><br><small class="muted">Mỗi cảnh thành một video ngắn có số điện thoại ở cuối, để đăng Reels/TikTok hằng ngày</small></span></label>
       </div>
       <div id="checklist" class="checklist"></div>
       <button class="btn accent big" id="btnExport" type="button">🎬 Xuất video</button>
       <div id="exportProgress" class="progress" hidden><div class="bar"></div><span></span></div>
-      <div id="exportResult" class="result" hidden>
-        <video id="resultVideo" controls playsinline></video>
-        <a class="btn accent big" id="downloadLink" download>⬇️ Tải video về máy</a>
-        <p class="muted small-text" id="resultNote"></p>
-      </div>
+      <div id="exportResults" class="results"></div>
     </div>
 
     <div class="nav-buttons">
@@ -210,6 +254,10 @@
   </section>
 
   <aside class="preview">
+    <div class="preview-tabs" id="previewTabs">
+      <button type="button" data-kind="full" class="active">Video đầy đủ</button>
+      <button type="button" data-kind="trailer">Trailer</button>
+    </div>
     <div class="canvas-wrap"><canvas id="canvas"></canvas></div>
     <div class="player">
       <button class="btn accent" id="btnPlay" type="button">▶ Xem thử</button>
@@ -220,11 +268,11 @@
   </aside>
 </main>
 
-<!-- Máy nhắc chữ -->
+<!-- Máy nhắc chữ (thu giọng) -->
 <div class="modal" id="prompter" hidden>
   <div class="prompter">
     <div class="prompter-top">
-      <span id="pCounter">Câu 1/1</span>
+      <span id="pCounter">Cảnh 1/1</span>
       <span id="pRec" class="rec" hidden>● ĐANG THU <b id="pTime">0:00</b></span>
       <button class="btn ghost small" id="pClose" type="button">✕ Đóng</button>
     </div>
@@ -234,7 +282,7 @@
     <div class="prompter-countdown" id="pCountdown" hidden>3</div>
     <div class="prompter-actions">
       <button class="btn accent big" id="pStart" type="button">● Bắt đầu thu</button>
-      <button class="btn accent big" id="pNextBtn" type="button" hidden>Câu tiếp ▶</button>
+      <button class="btn accent big" id="pNextBtn" type="button" hidden>Cảnh tiếp ▶</button>
       <button class="btn ghost" id="pRetry" type="button" hidden>↺ Thu lại từ đầu</button>
     </div>
     <div class="prompter-review" id="pReview" hidden>
@@ -245,7 +293,33 @@
         <button class="btn accent" id="pUse" type="button">✔ Dùng bản thu này</button>
       </div>
     </div>
-    <p class="muted center small-text">Mẹo: đọc chậm, rõ ràng, mỉm cười khi đọc để giọng tươi hơn. Bấm phím cách để sang câu tiếp.</p>
+    <p class="muted center small-text">Mẹo: đọc chậm, rõ ràng, mỉm cười khi đọc để giọng tươi hơn. Bấm phím cách để sang cảnh tiếp.</p>
+  </div>
+</div>
+
+<!-- Quay bằng camera -->
+<div class="modal" id="camModal" hidden>
+  <div class="cam">
+    <div class="prompter-top">
+      <span id="camTitle">Quay cảnh</span>
+      <span id="camRec" class="rec" hidden>● ĐANG QUAY <b id="camTime">0:00</b></span>
+      <button class="btn ghost small" id="camClose" type="button">✕ Đóng</button>
+    </div>
+    <div class="cam-stage">
+      <video id="camVideo" playsinline muted autoplay></video>
+      <video id="camReview" playsinline controls hidden></video>
+      <div class="cam-prompt" id="camPrompt"><div class="cam-scroll" id="camText"></div></div>
+      <div class="cam-count" id="camCount" hidden>3</div>
+    </div>
+    <div class="row wrap cam-controls">
+      <button class="btn accent big" id="camStart" type="button">● Bắt đầu quay</button>
+      <button class="btn accent big" id="camStop" type="button" hidden>■ Dừng</button>
+      <button class="btn ghost" id="camFlip" type="button">🔄 Đổi camera</button>
+      <label class="inline cam-speed">Tốc độ chữ <input type="range" id="camSpeed" min="50" max="200" value="100"></label>
+      <button class="btn ghost" id="camRetry" type="button" hidden>↺ Quay lại</button>
+      <button class="btn accent" id="camUse" type="button" hidden>✔ Dùng đoạn này</button>
+    </div>
+    <p class="muted center small-text">Đặt điện thoại ngang tầm mắt, nhìn vào chữ gần ống kính. Chữ sẽ tự cuộn khi bắt đầu quay.</p>
   </div>
 </div>
 
@@ -253,21 +327,27 @@
 <div class="modal" id="helpModal" hidden>
   <div class="help">
     <button class="btn ghost small close" id="helpClose" type="button">✕</button>
-    <h2>Hướng dẫn làm video BĐS trong 6 bước</h2>
+    <h2>Làm video BĐS trong 6 bước</h2>
     <ol class="help-steps">
-      <li><b>Thông tin:</b> điền loại nhà, vị trí, giá, tên và số điện thoại của bạn.</li>
-      <li><b>Ảnh và clip:</b> chọn ảnh hoặc clip, ghi tên phòng cho từng ảnh, ảnh đầu tiên là ảnh bìa.</li>
-      <li><b>Kịch bản:</b> phần mềm tự viết sẵn, bạn chọn phong cách và sửa lại nếu muốn.</li>
-      <li><b>Giọng đọc:</b> bấm thu âm, đọc theo chữ hiện trên màn hình, mỗi câu xong bấm “Câu tiếp”.</li>
-      <li><b>Nhạc và hiệu ứng:</b> chọn khung (dọc cho TikTok, ngang cho YouTube), màu và nhạc, rồi bấm “Xem thử”.</li>
-      <li><b>Xuất video:</b> bấm “Xuất video”, chờ chạy xong rồi bấm “Tải về”.</li>
+      <li><b>Thông tin:</b> tên dự án, vị trí, giá, tên và số điện thoại của bạn. Mở “Thông tin dự án” để điền quy mô, tiện ích, chính sách.</li>
+      <li><b>Kịch bản:</b> tự viết kịch bản nhiều cảnh, nhập từ Google Sheets, hoặc làm nhanh từ ảnh.</li>
+      <li><b>Quay và ghép:</b> mỗi cảnh thêm clip/ảnh hoặc quay ngay bằng camera, có chữ nhắc lời. Phần mềm tự cắt và tự ghép.</li>
+      <li><b>Giọng đọc:</b> dùng tiếng nói trong clip, hoặc thu giọng lồng tiếng theo máy nhắc chữ.</li>
+      <li><b>Hiệu ứng và nhạc:</b> khung dọc/ngang, màu, hiệu ứng chữ, nhạc nền.</li>
+      <li><b>Xuất:</b> video đầy đủ, trailer, và từng cảnh riêng để đăng hằng ngày.</li>
     </ol>
     <h3>Mẹo để video ra khách</h3>
     <ul>
-      <li>Ba giây đầu quan trọng nhất: nêu ngay <b>giá và vị trí</b>. Kịch bản kiểu TikTok đã làm sẵn việc này.</li>
-      <li>Chụp ảnh ngang hoặc dọc đều được; phần mềm tự cắt cho vừa khung và thêm hiệu ứng chuyển động.</li>
-      <li>Video 20–45 giây là hợp lý cho TikTok và Reels.</li>
-      <li>Nên dùng Google Chrome hoặc Microsoft Edge bản mới để xuất video tốt nhất.</li>
+      <li>3 giây đầu nói ngay con số hấp dẫn nhất: <b>giá</b> hoặc <b>chính sách thanh toán</b>.</li>
+      <li>Mỗi cảnh quay thành một clip riêng, quay hỏng thì chỉ quay lại cảnh đó.</li>
+      <li>Trailer 15–25 giây hợp để chạy quảng cáo; video đầy đủ 1–2 phút hợp YouTube, Facebook.</li>
+      <li>Dùng Google Chrome hoặc Microsoft Edge bản mới để xuất video tốt nhất.</li>
+    </ul>
+    <h3>Cài thành ứng dụng</h3>
+    <ul>
+      <li><b>Máy tính (Chrome/Edge):</b> bấm nút <b>⬇️ Cài ứng dụng</b> trên cùng, hoặc biểu tượng cài đặt ở cuối thanh địa chỉ.</li>
+      <li><b>Android:</b> mở bằng Chrome → menu ⋮ → <b>Cài đặt ứng dụng</b> (hoặc “Thêm vào màn hình chính”).</li>
+      <li><b>iPhone/iPad:</b> mở bằng Safari → nút Chia sẻ → <b>Thêm vào MH chính</b>.</li>
     </ul>
     <button class="btn accent" id="helpOk" type="button">Đã hiểu, bắt đầu thôi!</button>
   </div>
@@ -277,6 +357,7 @@
 
 <script src="js/script-gen.js"></script>
 <script src="js/audio.js"></script>
+<script src="js/timeline.js"></script>
 <script src="js/renderer.js"></script>
 <script src="js/demo.js"></script>
 <script src="js/webm-fix.js"></script>

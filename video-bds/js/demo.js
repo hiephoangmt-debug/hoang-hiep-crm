@@ -164,42 +164,109 @@
     }
   };
 
+  // Bản đồ vị trí minh hoạ
+  EXTRA.map = function (ctx, W, H) {
+    ctx.fillStyle = '#efe9dc';
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#cfe6c4';
+    box(ctx, W * 0.05, H * 0.08, W * 0.25, H * 0.3, '#cfe6c4', 30);
+    box(ctx, W * 0.62, H * 0.6, W * 0.3, H * 0.3, '#cfe6c4', 30);
+    // Sông
+    ctx.strokeStyle = '#8cc4ee';
+    ctx.lineWidth = 90;
+    ctx.beginPath();
+    ctx.moveTo(W * 0.1, -20);
+    ctx.bezierCurveTo(W * 0.35, H * 0.4, W * 0.15, H * 0.7, W * 0.3, H + 20);
+    ctx.stroke();
+    // Đường
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 34;
+    ctx.beginPath(); ctx.moveTo(0, H * 0.55); ctx.lineTo(W, H * 0.45); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(W * 0.58, 0); ctx.lineTo(W * 0.52, H); ctx.stroke();
+    ctx.strokeStyle = '#f2c14e';
+    ctx.lineWidth = 8;
+    ctx.beginPath(); ctx.moveTo(0, H * 0.55); ctx.lineTo(W, H * 0.45); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(W * 0.58, 0); ctx.lineTo(W * 0.52, H); ctx.stroke();
+    ctx.fillStyle = '#5b5b5b';
+    ctx.font = '600 34px sans-serif';
+    ctx.fillText('Minh Mạng', W * 0.7, H * 0.43);
+    ctx.save();
+    ctx.translate(W * 0.6, H * 0.2);
+    ctx.rotate(Math.PI / 2 - 0.06);
+    ctx.fillText('Nguyễn Phước Lan', 0, 0);
+    ctx.restore();
+    // Ghim vị trí
+    var px = W * 0.552, py = H * 0.49;
+    ctx.fillStyle = '#e5312f';
+    ctx.beginPath();
+    ctx.arc(px, py - 70, 42, Math.PI, 0);
+    ctx.lineTo(px, py);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.beginPath(); ctx.arc(px, py - 70, 16, 0, Math.PI * 2); ctx.fill();
+  };
+
   var PRESETS = {
-    mau: { info: INFO, scenes: SCENES },
+    mau: { info: INFO, images: { a: SCENES[0], b: SCENES[1], c: SCENES[2], d: SCENES[3], e: SCENES[4] } },
     f2: {
-      // Thông tin công khai từ báo chí và trang dự án (giá tham khảo, cần kiểm tra lại với chủ đầu tư)
+      // Kịch bản mẫu theo bảng “C Dương” (7 cảnh). Giá và chính sách cần kiểm tra lại với chủ đầu tư.
       info: {
         loai: 'Căn hộ chung cư',
         ten: 'F2 FourS Tower',
-        viTri: 'Sun Riverpolis, Hòa Xuân, Đà Nẵng',
-        gia: 'từ 2,4 tỷ',
-        dienTich: '58m²',
-        phongNgu: '2',
-        wc: '2',
-        huong: '',
-        phapLy: '',
-        noiBat: 'Trần cao 3,5m, không gian rộng rãi\nHồ bơi, gym, yoga, spa, kids club ngay trong toà nhà\nVài phút tới cầu Hòa Xuân và biển Sơn Thủy',
-        moiGioi: 'Hoàng Hiệp',
+        viTri: 'Giao lộ Minh Mạng – Nguyễn Phước Lan, Hòa Xuân, Đà Nẵng',
+        gia: 'từ hơn 1,6 tỷ',
+        dienTich: '', phongNgu: '', wc: '', huong: '',
+        phapLy: 'Sở hữu lâu dài',
+        noiBat: '',
+        moiGioi: 'Dương',
         sdt: '09xx xxx xxx',
-        thuongHieu: 'Hoàng Hiệp Land'
+        thuongHieu: '',
+        chuDauTu: 'Sun Group',
+        sanPham: 'Studio, 1 phòng ngủ+, 2 phòng ngủ, 3 phòng ngủ, Penthouse và shop khối đế',
+        quyMo: '20 tầng nổi\n2 tầng hầm\nHơn 580 căn hộ',
+        ketNoi: 'Hải Châu 7 phút\nSân bay Đà Nẵng 10 phút\nBiển Sơn Thủy 5 phút',
+        tienIch: 'Hồ bơi\nPhòng gym\nSpa\nKid’s Club',
+        chinhSach: 'Thanh toán 25% đến khi nhận nhà\nHỗ trợ tài chính và tiến độ thanh toán theo từng giai đoạn',
+        suKien: 'Ngày 26/9, F2 FourS Tower chính thức được giới thiệu tại Hotel Royal Lotus Đà Nẵng'
       },
-      scenes: [
-        { caption: 'Phối cảnh tháp F2', draw: EXTRA.tower },
-        SCENES[1],
-        SCENES[2],
-        { caption: 'Hồ bơi', draw: EXTRA.pool },
-        { caption: 'View sông', draw: SCENES[4].draw }
+      images: { tower: { caption: 'Phối cảnh', draw: EXTRA.tower }, map: { caption: 'Vị trí', draw: EXTRA.map },
+        pool: { caption: 'Hồ bơi', draw: EXTRA.pool }, living: SCENES[1], bedroom: SCENES[2], balcony: SCENES[4] },
+      script: [
+        { title: 'Cảnh 1 – Hook', images: ['tower'], bigText: [],
+          text: 'Có 1,6 tỷ mà muốn sở hữu BĐS tại Đà Nẵng? Nghe có vẻ khó… nhưng chưa chắc đâu!\nKhoan, đừng lướt vội! Vì Dương có một phương án có thể bạn đang tìm.\nĐặc biệt, chỉ thanh toán 25% đến khi nhận nhà!\nXem hết video, Dương sẽ nói rõ 1,6 tỷ có thể mua được gì và bài toán tài chính được tính như thế nào nhé!',
+          shotNote: 'Quay cận mặt, nhìn thẳng camera, nói nhanh và có năng lượng.' },
+        { title: 'Cảnh 2 – F2 chính là lời giải', images: ['tower', 'map'], bigText: [],
+          text: 'Và lời giải cho bài toán 1,6 tỷ mà Dương vừa nói chính là đây!\nSun Group chính thức ra mắt tòa F2, thuộc tổ hợp FourS Tower, với mức giá chỉ từ hơn 1,6 tỷ đồng/căn.\nF2 tọa lạc ngay giao lộ Minh Mạng – Nguyễn Phước Lan, một trong những trục đường lớn tại khu vực Nam Đà Nẵng.',
+          shotNote: 'Phối cảnh F2 → Logo Sun Group → Bản đồ vị trí → Cận cảnh tòa F2.' },
+        { title: 'Cảnh 3 – Quy mô và sản phẩm', images: ['tower'], bigText: ['20 tầng nổi', '2 tầng hầm', '580+ căn hộ', 'Sở hữu lâu dài'],
+          text: 'F2 được quy hoạch với 20 tầng nổi và 2 tầng hầm, cung cấp hơn 580 căn hộ.\nĐặc biệt, sản phẩm khá đa dạng, từ Studio, 1 phòng ngủ+, 2 phòng ngủ, 3 phòng ngủ, đến Penthouse và shop khối đế.\nVà một điểm rất đáng chú ý: căn hộ sở hữu lâu dài.',
+          shotNote: 'Text chạy màn hình các con số quy mô trên nền phối cảnh.' },
+        { title: 'Cảnh 4 – Vị trí', images: ['map'], bigText: ['Hải Châu 7 phút', 'Sân bay 10 phút', 'Biển Sơn Thủy 5 phút'],
+          text: 'Nằm ngay giao lộ Minh Mạng – Nguyễn Phước Lan, F2 FourS Tower sở hữu khả năng kết nối thuận tiện đến nhiều khu vực quan trọng của Đà Nẵng.\nTừ đây, cư dân có thể dễ dàng kết nối về Hải Châu chỉ 7 phút, sân bay Đà Nẵng chỉ 10 phút, bãi tắm biển Sơn Thủy chỉ 5 phút.\nĐặc biệt, khu vực Hòa Xuân đang từng bước hình thành một hệ sinh thái đô thị mới với nhiều dự án, tiện ích và hạ tầng đang được phát triển.',
+          shotNote: 'Google Maps → đường Minh Mạng → Nguyễn Phước Lan → các điểm kết nối.' },
+        { title: 'Cảnh 5 – Tiện ích', images: ['pool', 'living', 'bedroom'], bigText: [],
+          text: 'Không chỉ là một căn hộ để ở, F2 FourS Tower còn hướng đến một không gian sống đầy đủ tiện ích ngay trong nội khu.\nTừ hồ bơi, phòng gym, spa đến Kid’s Club, mọi nhu cầu thư giãn, vận động và vui chơi của gia đình đều được tích hợp ngay tại dự án.',
+          shotNote: 'Chuyển cảnh nhanh: Hồ bơi → Gym → Spa → Kid’s Club → Gia đình.' },
+        { title: 'Cảnh 6 – Bài toán tài chính', images: [], bigText: ['Từ hơn 1,6 tỷ/căn', '25% đến khi nhận nhà'],
+          text: 'Và đây mới là phần mà Dương nghĩ nhiều bạn sẽ quan tâm nhất.\nVới chính sách hiện tại, khách hàng có thể thanh toán 25% đến khi nhận nhà, giúp giảm áp lực vốn ban đầu và chủ động hơn trong kế hoạch tài chính.\nBên cạnh đó là chính sách hỗ trợ tài chính và tiến độ thanh toán theo từng giai đoạn của chủ đầu tư.',
+          shotNote: 'Text lớn trên nền màu.' },
+        { title: 'Cảnh 7 – Sự kiện 26/9 và kêu gọi', images: ['balcony'], bigText: ['Ra mắt 26/9', 'Hotel Royal Lotus'],
+          text: 'Và đặc biệt, ngày 26/9 này, F2 FourS Tower sẽ chính thức được giới thiệu tại Hotel Royal Lotus Đà Nẵng.\nNếu bạn đang quan tâm một căn hộ tại Nam Đà Nẵng, với mức tài chính khoảng 1,6 tỷ, thì đây là thời điểm rất phù hợp để tìm hiểu thông tin và lựa chọn căn.\nLiên hệ ngay Dương, để nhận quỹ căn đẹp sắp đến nha.',
+          shotNote: 'Quay cận mặt, mỉm cười, chỉ tay xuống chỗ số điện thoại.' }
       ]
     }
   };
 
+  /** Vẽ ảnh minh hoạ của một mẫu; trả về { khoá: { el, url, caption } } theo đúng thứ tự. */
   function makeImages(key, cb) {
-    if (typeof key === 'function') { cb = key; key = 'mau'; }
-    var scenes = (PRESETS[key] || PRESETS.mau).scenes;
-    var out = [];
+    var defs = (PRESETS[key] || PRESETS.mau).images;
+    var keys = Object.keys(defs);
+    var out = {};
     var W = 1600, H = 1100;
-    var pending = scenes.length;
-    scenes.forEach(function (s, i) {
+    var pending = keys.length;
+    keys.forEach(function (k) {
+      var s = defs[k];
       var c = document.createElement('canvas');
       c.width = W;
       c.height = H;
@@ -210,8 +277,12 @@
       ctx.fillText('ẢNH MẪU', 40, H - 40);
       var img = new Image();
       img.onload = function () {
-        out[i] = { el: img, caption: s.caption, isVideo: false, url: img.src };
-        if (--pending === 0) cb(out);
+        out[k] = { el: img, url: img.src, caption: s.caption };
+        if (--pending === 0) {
+          var ordered = {};
+          keys.forEach(function (kk) { ordered[kk] = out[kk]; });
+          cb(ordered);
+        }
       };
       img.src = c.toDataURL('image/jpeg', 0.88);
     });

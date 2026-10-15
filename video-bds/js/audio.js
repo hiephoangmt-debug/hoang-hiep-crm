@@ -287,9 +287,57 @@
    * Lên lịch âm lượng nhạc nền: mở dần ở đầu, giảm khi có giọng đọc, tắt dần ở cuối.
    * voiceRanges: mảng [bắt đầu, kết thúc] (giây, tính từ t0).
    */
+  /** Gộp các khoảng có giọng nói chồng lên nhau. */
+  function mergeRanges(ranges) {
+    var r = (ranges || []).slice().sort(function (a, b) { return a[0] - b[0]; });
+    var out = [];
+    r.forEach(function (x) {
+      var last = out[out.length - 1];
+      if (last && x[0] <= last[1] + 0.8) last[1] = Math.max(last[1], x[1]);
+      else out.push([x[0], x[1]]);
+    });
+    return out;
+  }
+
+  /**
+   * Đưa tiếng gốc của clip video vào bộ trộn (để ghi vào video xuất ra).
+   * Mỗi thẻ video chỉ tạo nguồn âm một lần; mỗi lượt phát gắn vào một nút âm lượng mới.
+   */
+  AudioEngine.prototype.attachClip = function (video) {
+    var ctx = this.ctx;
+    if (!video._bdsSrc || video._bdsCtx !== ctx) {
+      video._bdsSrc = ctx.createMediaElementSource(video);
+      video._bdsCtx = ctx;
+    }
+    video.muted = false;
+    var g = ctx.createGain();
+    g.gain.value = 0;
+    video._bdsSrc.connect(g).connect(this.voice);
+    this.clipGains = this.clipGains || [];
+    this.clipGains.push({ video: video, gain: g });
+    video._bdsGain = g;
+  };
+
+  AudioEngine.prototype.setClipGain = function (video, v) {
+    var g = video._bdsGain;
+    if (!g || g._v === v) return;
+    g._v = v;
+    g.gain.setTargetAtTime(v, this.ctx.currentTime, 0.03);
+  };
+
+  AudioEngine.prototype.detachClips = function () {
+    (this.clipGains || []).forEach(function (c) {
+      try { c.video._bdsSrc.disconnect(c.gain); } catch (e) { /* đã ngắt */ }
+      c.gain.disconnect();
+      if (c.video._bdsGain === c.gain) c.video._bdsGain = null;
+    });
+    this.clipGains = [];
+  };
+
   AudioEngine.prototype.scheduleMusicVolume = function (t0, duration, base, voiceRanges) {
     var g = this.music.gain;
     var ducked = base * 0.28;
+    voiceRanges = mergeRanges(voiceRanges);
     g.cancelScheduledValues(0);
     g.setValueAtTime(0.0001, t0);
     g.linearRampToValueAtTime(base, t0 + 1.2);

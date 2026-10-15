@@ -1,4 +1,4 @@
-/* Vẽ từng khung hình video lên canvas: Ken Burns, chuyển cảnh, khung giá, phụ đề, intro/outro. */
+/* Vẽ từng khung hình theo dòng thời gian: cảnh quay, chuyển cảnh, chữ hiệu ứng, phụ đề, intro/outro. */
 (function () {
   'use strict';
 
@@ -83,220 +83,190 @@
     try { ctx.drawImage(m, x, y, w, h); } catch (e) { /* video chưa sẵn sàng */ }
   }
 
-  /**
-   * Dựng dòng thời gian từ dự án.
-   * project: { info, media:[{el, caption, isVideo}], lines:[], durations:[], settings }
-   */
-  function buildTimeline(project) {
-    var media = project.media;
-    var lines = project.lines;
-    var scenes = [];
-    var n = media.length;
-    for (var i = 0; i < n + 2; i++) {
-      var type = i === 0 ? 'intro' : (i === n + 1 ? 'outro' : 'media');
-      var m = type === 'intro' ? media[0] : (type === 'outro' ? media[n - 1] : media[i - 1]);
-      var dur = project.durations[i] || window.ScriptGen.readSeconds(lines[i]);
-      if (type === 'media' && m && m.isVideo && m.el.duration && !project.durationsLocked) {
-        dur = Math.max(dur, Math.min(m.el.duration, 12));
-      }
-      var seed = (i * 9301 + 49297) % 233280 / 233280;
-      var zoomIn = i % 2 === 0;
-      scenes.push({
-        type: type,
-        media: m ? m.el : null,
-        isVideo: m ? !!m.isVideo : false,
-        caption: m && type === 'media' ? m.caption : '',
-        text: lines[i] || '',
-        duration: dur,
-        kb: {
-          s0: zoomIn ? 1.0 : 1.18, s1: zoomIn ? 1.18 : 1.0,
-          x0: (seed - 0.5) * 1.2, x1: (0.5 - seed) * 1.2,
-          y0: zoomIn ? -0.3 : 0.3, y1: zoomIn ? 0.3 : -0.3
-        },
-        transition: pickTransition(project.settings.transition, i)
-      });
-    }
-    var t = 0;
-    scenes.forEach(function (s) { s.start = t; t += s.duration; });
-    return { scenes: scenes, total: t };
-  }
+  var TEXT_FX = {
+    'pop': 'Bật lên',
+    'slide': 'Trượt vào',
+    'type': 'Gõ từng chữ'
+  };
+
+  var CUT = 0.12; // chuyển nhanh giữa các đoạn quay trong cùng một cảnh
 
   function pickTransition(setting, i) {
     if (setting !== 'mix') return setting || 'fade';
     return ['zoom', 'slide', 'fade', 'slide'][i % 4];
   }
 
-  function Renderer(canvas, project) {
+  /** Chia phụ đề theo câu, mỗi đoạn tối đa 2 dòng; thời gian chia theo số chữ. */
+  function subtitleChunks(ctx, text, maxW) {
+    var sentences = (text || '').replace(/[“”"]/g, '').split(/\n+|(?<=[.!?…])\s+/).map(function (s) { return s.trim(); }).filter(Boolean);
+    var chunks = [];
+    sentences.forEach(function (s) {
+      var lines = wrapText(ctx, s, maxW);
+      for (var i = 0; i < lines.length; i += 2) chunks.push(lines.slice(i, i + 2));
+    });
+    var total = 0;
+    chunks.forEach(function (c) { c.len = c.join(' ').length + 8; total += c.len; });
+    var acc = 0;
+    chunks.forEach(function (c) { c.from = acc / total; acc += c.len; c.to = acc / total; });
+    return chunks;
+  }
+
+  function Renderer(canvas, timeline, project) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.project = project;
+    this.timeline = timeline;
     var f = FORMATS[project.settings.format] || FORMATS['9:16'];
-    canvas.width = f.w;
-    canvas.height = f.h;
+    if (canvas.width !== f.w) canvas.width = f.w;
+    if (canvas.height !== f.h) canvas.height = f.h;
     this.W = f.w;
     this.H = f.h;
-    this.unit = Math.min(f.w, f.h) / 1080; // tỉ lệ cỡ chữ
+    this.unit = Math.min(f.w, f.h) / 1080;
     this.theme = THEMES[project.settings.theme] || THEMES.vang;
-    this.timeline = buildTimeline(project);
+    this._subCache = {};
   }
 
-  Renderer.prototype.sceneAt = function (t) {
-    var sc = this.timeline.scenes;
-    for (var i = 0; i < sc.length; i++) {
-      if (t < sc[i].start + sc[i].duration) return i;
-    }
-    return sc.length - 1;
+  function findAt(list, t) {
+    for (var i = 0; i < list.length; i++) if (t < list[i].start + list[i].duration) return i;
+    return list.length - 1;
+  }
+
+  Renderer.prototype.trLen = function (next) {
+    if (!next) return 0;
+    return next.trans === 'scene' ? TR : (next.trans === 'cut' ? CUT : 0);
   };
 
-  /** Đồng bộ clip video với thời gian (chạy, dừng, tua). */
-  Renderer.prototype.syncVideos = function (t, playing) {
-    var sc = this.timeline.scenes;
-    for (var i = 0; i < sc.length; i++) {
-      var s = sc[i];
-      if (!s.isVideo || !s.media) continue;
-      var v = s.media;
-      var active = t >= s.start - TR && t < s.start + s.duration;
-      var owner = this._videoOwner(v, t);
-      if (owner !== i) continue;
-      if (active) {
-        var local = Math.max(0, t - s.start);
-        var target = v.duration ? local % v.duration : local;
-        if (!playing) {
-          if (Math.abs(v.currentTime - target) > 0.05) v.currentTime = target;
-          if (!v.paused) v.pause();
-        } else {
-          if (v.paused) {
-            v.currentTime = target;
-            var p = v.play();
-            if (p && p.catch) p.catch(function () {});
-          } else if (Math.abs(v.currentTime - target) > 0.35) {
-            v.currentTime = target;
-          }
-        }
-      } else if (!v.paused) {
-        v.pause();
+  /**
+   * Đồng bộ clip video theo thời gian. setGain(el, 0..1) bật/tắt tiếng gốc của clip.
+   */
+  Renderer.prototype.syncVideos = function (t, playing, setGain) {
+    var items = this.timeline.items.concat(this.timeline.covers || []);
+    var owners = new Map();
+    for (var i = 0; i < items.length; i++) {
+      var it = items[i];
+      if (!it.isVideo || !it.el) continue;
+      var lead = it.trans ? this.trLen(it) : 0.25;
+      var active = t >= it.start - lead && t < it.start + it.duration;
+      var cur = owners.get(it.el);
+      if (!cur || (active && !cur.active)) owners.set(it.el, { item: it, active: active });
+    }
+    owners.forEach(function (o, v) {
+      var it = o.item;
+      if (setGain) setGain(v, o.active && it.audio && t >= it.start ? (it.gain || 1) : 0);
+      if (!o.active) { if (!v.paused) v.pause(); return; }
+      var local = Math.max(0, t - it.start);
+      var target = it.srcIn + (it.srcLen > 0 ? local % it.srcLen : local);
+      if (v.duration) target = Math.min(target, v.duration - 0.05);
+      if (!playing) {
+        if (Math.abs(v.currentTime - target) > 0.05) v.currentTime = target;
+        if (!v.paused) v.pause();
+      } else if (v.paused) {
+        v.currentTime = target;
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+      } else if (Math.abs(v.currentTime - target) > 0.3) {
+        v.currentTime = target;
       }
-    }
+    });
   };
 
-  // Một clip có thể dùng cho intro/outro lẫn cảnh chính; ưu tiên cảnh đang hiển thị.
-  Renderer.prototype._videoOwner = function (v, t) {
-    var sc = this.timeline.scenes;
-    var best = -1;
-    for (var i = 0; i < sc.length; i++) {
-      if (sc[i].media !== v) continue;
-      if (t >= sc[i].start - TR && t < sc[i].start + sc[i].duration) return i;
-      if (best === -1) best = i;
-    }
-    return best;
+  Renderer.prototype.stopVideos = function () {
+    this.timeline.items.concat(this.timeline.covers || []).forEach(function (it) { if (it.isVideo && it.el && !it.el.paused) it.el.pause(); });
   };
 
-  Renderer.prototype.drawBackground = function (s, local) {
+  Renderer.prototype.drawItem = function (it, t, alpha) {
     var ctx = this.ctx, W = this.W, H = this.H;
-    var p = clamp((local + TR) / (s.duration + TR), 0, 1);
-    var e = easeInOut(p);
-    if (s.media) {
-      var scale = s.kb.s0 + (s.kb.s1 - s.kb.s0) * e;
-      var dx = s.kb.x0 + (s.kb.x1 - s.kb.x0) * e;
-      var dy = s.kb.y0 + (s.kb.y1 - s.kb.y0) * e;
-      if (s.isVideo) { scale = 1.02 + 0.04 * e; dx = 0; dy = 0; }
-      if (s.type === 'outro') {
-        ctx.save();
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    if (it.el && !it.hidden) {
+      var p = clamp((t - it.start + TR) / (it.duration + TR), 0, 1);
+      var e = easeInOut(p);
+      if (it.blur) {
         ctx.filter = 'blur(' + Math.round(18 * this.unit) + 'px)';
-        drawCover(ctx, s.media, W, H, 1.15 + 0.05 * e, 0, 0);
-        ctx.restore();
+        drawCover(ctx, it.el, W, H, 1.15 + 0.05 * e, 0, 0);
+      } else if (it.isVideo) {
+        drawCover(ctx, it.el, W, H, 1.0 + 0.04 * e, 0, 0);
       } else {
-        drawCover(ctx, s.media, W, H, scale, dx, dy);
+        var k = it.kb;
+        drawCover(ctx, it.el, W, H, k.s0 + (k.s1 - k.s0) * e, k.x0 + (k.x1 - k.x0) * e, k.y0 + (k.y1 - k.y0) * e);
       }
     } else {
+      // Cảnh chỉ có chữ: nền màu chủ đạo chuyển động nhẹ
       var g = ctx.createLinearGradient(0, 0, W, H);
       g.addColorStop(0, '#1d2433');
       g.addColorStop(1, this.theme.dark);
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, W, H);
+      var r = Math.max(W, H) * 0.6;
+      var cx = W * (0.3 + 0.4 * Math.sin(t * 0.3)), cy = H * (0.35 + 0.2 * Math.cos(t * 0.25));
+      var rg = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+      rg.addColorStop(0, hexA(this.theme.main, 0.35));
+      rg.addColorStop(1, hexA(this.theme.main, 0));
+      ctx.fillStyle = rg;
+      ctx.fillRect(0, 0, W, H);
     }
-  };
-
-  Renderer.prototype.drawScene = function (i, local, alpha) {
-    var s = this.timeline.scenes[i];
-    var ctx = this.ctx;
-    ctx.save();
-    ctx.globalAlpha = alpha;
-    this.drawBackground(s, local);
     ctx.restore();
   };
 
-  Renderer.prototype.drawOverlay = function (i, local, alpha) {
-    var s = this.timeline.scenes[i];
-    if (alpha <= 0.01) return;
-    var ctx = this.ctx;
-    ctx.save();
-    ctx.globalAlpha = alpha;
-    if (s.type === 'intro') this.drawIntro(s, local);
-    else if (s.type === 'outro') this.drawOutro(s, local);
-    else this.drawMediaOverlay(s, local);
-    ctx.restore();
+  Renderer.prototype.drawBackground = function (t) {
+    var ctx = this.ctx, W = this.W, H = this.H;
+    var items = this.timeline.items;
+    var i = findAt(items, t);
+    var it = items[i], next = items[i + 1];
+    var tr = this.trLen(next);
+    var k = tr ? (t - (it.start + it.duration - tr)) / tr : -1;
+    if (k <= 0 || !next) { this.drawItem(it, t, 1); return; }
+    var e = easeInOut(k);
+    var style = next.trans === 'scene' ? pickTransition(this.project.settings.transition, i) : 'fade';
+    if (style === 'slide') {
+      ctx.save(); ctx.translate(-W * e, 0); this.drawItem(it, t, 1); ctx.restore();
+      ctx.save(); ctx.translate(W * (1 - e), 0); this.drawItem(next, t, 1); ctx.restore();
+    } else if (style === 'zoom') {
+      ctx.save(); ctx.translate(W / 2, H / 2); ctx.scale(1 + e * 0.35, 1 + e * 0.35); ctx.translate(-W / 2, -H / 2);
+      this.drawItem(it, t, 1); ctx.restore();
+      var z = 1.25 - 0.25 * e;
+      ctx.save(); ctx.translate(W / 2, H / 2); ctx.scale(z, z); ctx.translate(-W / 2, -H / 2);
+      this.drawItem(next, t, e); ctx.restore();
+    } else {
+      this.drawItem(it, t, 1);
+      this.drawItem(next, t, e);
+    }
+    if (next.trans === 'scene') {
+      var flash = Math.max(0, 1 - Math.abs(k - 0.5) * 4) * 0.18;
+      if (flash > 0) { ctx.fillStyle = 'rgba(255,255,255,' + flash + ')'; ctx.fillRect(0, 0, W, H); }
+    }
   };
 
   Renderer.prototype.drawFrame = function (t) {
-    var ctx = this.ctx, W = this.W, H = this.H;
-    var sc = this.timeline.scenes;
+    var ctx = this.ctx;
     t = clamp(t, 0, this.timeline.total - 0.001);
-    var i = this.sceneAt(t);
-    var s = sc[i];
-    var local = t - s.start;
     ctx.fillStyle = '#000';
-    ctx.fillRect(0, 0, W, H);
-
-    var next = sc[i + 1];
-    var k = next ? (t - (s.start + s.duration - TR)) / TR : -1;
-    if (k > 0 && next) {
-      var e = easeInOut(k);
-      var nLocal = t - next.start; // âm trong lúc chuyển cảnh
-      var tr = next.transition;
-      if (tr === 'slide') {
-        ctx.save();
-        ctx.translate(-W * e, 0);
-        this.drawScene(i, local, 1);
-        ctx.restore();
-        ctx.save();
-        ctx.translate(W * (1 - e), 0);
-        this.drawScene(i + 1, nLocal, 1);
-        ctx.restore();
-      } else if (tr === 'zoom') {
-        ctx.save();
-        ctx.translate(W / 2, H / 2);
-        ctx.scale(1 + e * 0.35, 1 + e * 0.35);
-        ctx.translate(-W / 2, -H / 2);
-        this.drawScene(i, local, 1);
-        ctx.restore();
-        ctx.save();
-        ctx.translate(W / 2, H / 2);
-        var z = 1.25 - 0.25 * e;
-        ctx.scale(z, z);
-        ctx.translate(-W / 2, -H / 2);
-        this.drawScene(i + 1, nLocal, e);
-        ctx.restore();
-      } else {
-        this.drawScene(i, local, 1);
-        this.drawScene(i + 1, nLocal, e);
-      }
-      // Ánh sáng loé nhẹ giữa chuyển cảnh
-      var flash = Math.max(0, 1 - Math.abs(k - 0.5) * 4) * 0.18;
-      if (flash > 0) {
-        ctx.fillStyle = 'rgba(255,255,255,' + flash + ')';
-        ctx.fillRect(0, 0, W, H);
-      }
-      this.drawShade();
-      this.drawOverlay(i, local, 1 - clamp(k * 2, 0, 1));
-      this.drawOverlay(i + 1, nLocal + TR, clamp(k * 2 - 1, 0, 1));
-    } else {
-      this.drawScene(i, local, 1);
-      this.drawShade();
-      this.drawOverlay(i, local + (i === 0 ? 0 : TR), 1);
+    ctx.fillRect(0, 0, this.W, this.H);
+    this.drawBackground(t);
+    this.drawCovers(t);
+    this.drawShade();
+    var ovs = this.timeline.overlays;
+    for (var i = 0; i < ovs.length; i++) {
+      var o = ovs[i];
+      if (t < o.start - 0.3 || t > o.start + o.duration + 0.3) continue;
+      var local = t - o.start;
+      var a = clamp(Math.min((local + 0.3) / 0.3, (o.duration - local) / 0.3), 0, 1);
+      if (local < 0) a = 0;
+      if (a > 0.01) this.drawOverlay(o, local, a);
     }
     this.drawBrand(t);
     this.drawProgress(t);
+  };
+
+  /** Phối cảnh / flycam phủ lên clip đang nói (tiếng nói vẫn chạy). */
+  Renderer.prototype.drawCovers = function (t) {
+    var cs = this.timeline.covers || [];
+    for (var i = 0; i < cs.length; i++) {
+      var c = cs[i];
+      if (t < c.start || t > c.start + c.duration) continue;
+      var a = clamp(Math.min((t - c.start) / 0.25, (c.start + c.duration - t) / 0.25), 0, 1);
+      this.drawItem(c, t, easeInOut(a));
+    }
   };
 
   Renderer.prototype.drawShade = function () {
@@ -308,6 +278,148 @@
     g.addColorStop(1, 'rgba(0,0,0,0.7)');
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, W, H);
+  };
+
+  Renderer.prototype.drawOverlay = function (o, local, alpha) {
+    var ctx = this.ctx, u = this.unit, s = this.project.settings;
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    if (o.kind === 'end') {
+      this.drawOutro(local);
+    } else if (o.kind === 'hook') {
+      this.drawBigText(o.bigText, local, o.duration, { big: true });
+    } else {
+      var introEnd = o.intro ? window.BdsTimeline.INTRO_SECONDS : 0;
+      if (o.intro && local < introEnd + 0.3) {
+        ctx.save();
+        ctx.globalAlpha *= clamp((introEnd - local) / 0.4, 0, 1);
+        this.drawIntro(local);
+        ctx.restore();
+      } else if (s.priceTag !== false && this.timeline.kind !== 'trailer') {
+        this.drawPriceTag(1, 48 * u);
+      }
+      if (o.caption) this.drawCaption(o.caption, local);
+      var bl = local - introEnd;
+      if (o.bigText && o.bigText.length && bl > 0) {
+        this.drawBigText(o.bigText, bl, o.duration - introEnd, { fast: o.fast });
+      }
+      if (o.text && s.subtitles && local > introEnd) {
+        this.drawSubtitle(o.text, local - introEnd, o.duration - introEnd);
+      }
+    }
+    ctx.restore();
+  };
+
+  Renderer.prototype.drawCaption = function (caption, local) {
+    var ctx = this.ctx, u = this.unit;
+    var a = easeBack(local / 0.5);
+    ctx.save();
+    ctx.font = '800 ' + Math.round(44 * u) + 'px ' + FONT;
+    ctx.textBaseline = 'middle';
+    var label = caption.toUpperCase();
+    var w = ctx.measureText(label).width + 70 * u;
+    var x = -w + (48 * u + w) * a;
+    var y = this.H * (this.W > this.H ? 0.22 : 0.16);
+    roundRect(ctx, x, y, w, 84 * u, 12 * u);
+    ctx.fillStyle = 'rgba(255,255,255,0.94)';
+    ctx.fill();
+    ctx.fillStyle = this.theme.main;
+    ctx.fillRect(x, y, 12 * u, 84 * u);
+    ctx.fillStyle = '#111';
+    ctx.fillText(label, x + 38 * u, y + 44 * u);
+    ctx.restore();
+  };
+
+  /** Chữ lớn hiệu ứng: từng dòng xuất hiện lần lượt; dòng có con số được tô màu chủ đạo. */
+  Renderer.prototype.drawBigText = function (lines, local, duration, opt) {
+    opt = opt || {};
+    var ctx = this.ctx, W = this.W, H = this.H, u = this.unit;
+    var fx = this.project.settings.textFx || 'pop';
+    var maxW = W - 150 * u;
+    var size = Math.round((opt.big ? 92 : 84) * u);
+    ctx.font = '900 ' + size + 'px ' + FONT;
+    var rows = [];
+    lines.forEach(function (l) { wrapText(ctx, String(l).toUpperCase(), maxW - 70 * u).forEach(function (r, j) { rows.push({ t: r, src: l, first: j === 0 }); }); });
+    var widest = 0;
+    rows.forEach(function (r) { widest = Math.max(widest, ctx.measureText(r.t).width); });
+    if (widest > maxW - 70 * u) size = Math.floor(size * (maxW - 70 * u) / widest);
+    size = Math.max(Math.round(40 * u), size);
+    ctx.font = '900 ' + size + 'px ' + FONT;
+    var bh = size * 1.42, gap = 16 * u;
+    var totalH = rows.length * bh + (rows.length - 1) * gap;
+    var y0 = (opt.big ? H * 0.5 : H * (W > H ? 0.48 : 0.44)) - totalH / 2;
+    var step = opt.fast ? 0.18 : 0.5, delay = opt.fast ? 0.05 : 0.25;
+    var li = -1;
+    var theme = this.theme;
+    rows.forEach(function (r, i) {
+      if (r.first) li++;
+      var t0 = delay + li * step + (r.first ? 0 : 0.08);
+      var p = (local - t0) / (opt.fast ? 0.25 : 0.4);
+      if (p <= 0) return;
+      var hasNum = /\d/.test(r.src);
+      var w = ctx.measureText(r.t).width + 70 * u;
+      var x = (W - w) / 2, y = y0 + i * (bh + gap);
+      var text = r.t;
+      ctx.save();
+      if (fx === 'slide') {
+        var e = easeOut(p);
+        ctx.globalAlpha *= clamp(p * 2, 0, 1);
+        ctx.translate((1 - e) * (i % 2 ? W : -W) * 0.6, 0);
+      } else if (fx === 'type') {
+        var n = Math.floor((local - t0) * 30);
+        text = r.t.slice(0, Math.max(1, n));
+      } else {
+        var sc = easeBack(p);
+        ctx.translate(W / 2, y + bh / 2);
+        ctx.scale(sc, sc);
+        ctx.translate(-W / 2, -(y + bh / 2));
+        ctx.globalAlpha *= clamp(p * 3, 0, 1);
+      }
+      roundRect(ctx, x, y, w, bh, 16 * u);
+      ctx.fillStyle = hasNum ? theme.main : 'rgba(10,12,18,0.78)';
+      ctx.shadowColor = 'rgba(0,0,0,0.35)';
+      ctx.shadowBlur = 24 * u;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+      if (!hasNum) { ctx.fillStyle = theme.main; ctx.fillRect(x, y, 10 * u, bh); }
+      ctx.fillStyle = hasNum ? '#111' : '#fff';
+      ctx.textBaseline = 'middle';
+      ctx.textAlign = 'left';
+      ctx.fillText(text, x + 35 * u, y + bh / 2 + 3 * u);
+      ctx.restore();
+    });
+  };
+
+  Renderer.prototype.drawSubtitle = function (text, local, duration) {
+    var ctx = this.ctx, W = this.W, H = this.H, u = this.unit;
+    var size = Math.round((W > H ? 44 : 50) * u);
+    ctx.font = '700 ' + size + 'px ' + FONT;
+    var key = text + '|' + size;
+    var chunks = this._subCache[key] || (this._subCache[key] = subtitleChunks(ctx, text, W - 200 * u));
+    var p = clamp(local / Math.max(0.5, duration - 0.3), 0, 0.999);
+    var chunk = null;
+    for (var i = 0; i < chunks.length; i++) if (p >= chunks[i].from && p < chunks[i].to) { chunk = chunks[i]; break; }
+    if (!chunk) return;
+    var lh = size * 1.32;
+    var boxH = lh * chunk.length + 36 * u;
+    var widest = 0;
+    chunk.forEach(function (l) { widest = Math.max(widest, ctx.measureText(l).width); });
+    var boxW = widest + 64 * u;
+    var x = (W - boxW) / 2;
+    var y = H - boxH - (W > H ? 60 : 220) * u;
+    var since = (p - chunk.from) * duration;
+    var appear = easeOut(since / 0.25);
+    ctx.save();
+    ctx.globalAlpha *= appear;
+    ctx.translate(0, (1 - appear) * 16 * u);
+    roundRect(ctx, x, y, boxW, boxH, 18 * u);
+    ctx.fillStyle = 'rgba(0,0,0,0.62)';
+    ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    chunk.forEach(function (l, j) { ctx.fillText(l, W / 2, y + 18 * u + j * lh + 4 * u); });
+    ctx.restore();
   };
 
   Renderer.prototype.drawBrand = function (t) {
@@ -367,69 +479,7 @@
     ctx.restore();
   };
 
-  Renderer.prototype.drawSubtitle = function (text, local, duration) {
-    if (!text || !this.project.settings.subtitles) return;
-    var ctx = this.ctx, W = this.W, H = this.H, u = this.unit;
-    var size = Math.round((this.W > this.H ? 46 : 52) * u);
-    ctx.font = '700 ' + size + 'px ' + FONT;
-    var maxW = W - 140 * u;
-    var lines = wrapText(ctx, text, maxW - 60 * u);
-    // Chia phụ đề dài thành từng đoạn 2 dòng, đổi đoạn theo thời gian
-    // Tối đa 3 dòng một lúc; câu dài thì chia đều để không còn sót một chữ lẻ
-    var per = lines.length <= 3 ? 3 : Math.ceil(lines.length / Math.ceil(lines.length / 3));
-    var chunks = [];
-    for (var i = 0; i < lines.length; i += per) chunks.push(lines.slice(i, i + per));
-    var ci = Math.min(chunks.length - 1, Math.floor(clamp(local / duration, 0, 0.999) * chunks.length));
-    var chunk = chunks[ci] || [];
-    if (!chunk.length) return;
-    var lh = size * 1.32;
-    var boxH = lh * chunk.length + 40 * u;
-    var widest = 0;
-    chunk.forEach(function (l) { widest = Math.max(widest, ctx.measureText(l).width); });
-    var boxW = widest + 64 * u;
-    var x = (W - boxW) / 2;
-    var y = H - boxH - (W > H ? 70 : 230) * u;
-    var appear = easeOut(local / 0.35);
-    ctx.save();
-    ctx.globalAlpha *= appear;
-    ctx.translate(0, (1 - appear) * 20 * u);
-    roundRect(ctx, x, y, boxW, boxH, 18 * u);
-    ctx.fillStyle = 'rgba(0,0,0,0.62)';
-    ctx.fill();
-    ctx.fillStyle = '#fff';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'top';
-    chunk.forEach(function (l, j) {
-      ctx.fillText(l, W / 2, y + 20 * u + j * lh + 4 * u);
-    });
-    ctx.restore();
-  };
-
-  Renderer.prototype.drawMediaOverlay = function (s, local) {
-    var ctx = this.ctx, u = this.unit;
-    this.drawPriceTag(1, 48 * u);
-    if (s.caption) {
-      var a = easeBack(local / 0.5);
-      ctx.save();
-      ctx.font = '800 ' + Math.round(44 * u) + 'px ' + FONT;
-      ctx.textBaseline = 'middle';
-      var label = s.caption.toUpperCase();
-      var w = ctx.measureText(label).width + 70 * u;
-      var x = -w + (48 * u + w) * a;
-      var y = this.H * (this.W > this.H ? 0.22 : 0.16);
-      roundRect(ctx, x, y, w, 84 * u, 12 * u);
-      ctx.fillStyle = 'rgba(255,255,255,0.94)';
-      ctx.fill();
-      ctx.fillStyle = this.theme.main;
-      ctx.fillRect(x, y, 12 * u, 84 * u);
-      ctx.fillStyle = '#111';
-      ctx.fillText(label, x + 38 * u, y + 44 * u);
-      ctx.restore();
-    }
-    this.drawSubtitle(s.text, local, s.duration + TR);
-  };
-
-  Renderer.prototype.drawIntro = function (s, local) {
+  Renderer.prototype.drawIntro = function (local) {
     var ctx = this.ctx, W = this.W, H = this.H, u = this.unit, info = this.project.info;
     var th = this.theme;
     var land = W > H;
@@ -545,22 +595,6 @@
       sx += w + 16 * u;
     });
 
-    // Phụ đề cho câu mở đầu (nằm trên cùng để không đè nội dung)
-    if (s.text && this.project.settings.subtitles && local > 0.3) {
-      ctx.save();
-      ctx.font = '600 ' + Math.round(38 * u) + 'px ' + FONT;
-      var hl = wrapText(ctx, s.text, W - 200 * u).slice(0, 3);
-      var hh = hl.length * 50 * u + 36 * u;
-      var hy = land ? 140 * u : 170 * u;
-      ctx.globalAlpha *= easeOut((local - 0.3) / 0.4);
-      roundRect(ctx, 70 * u, hy, W - 140 * u, hh, 18 * u);
-      ctx.fillStyle = 'rgba(0,0,0,0.55)';
-      ctx.fill();
-      ctx.fillStyle = '#fff';
-      ctx.textAlign = 'center';
-      hl.forEach(function (l, j) { ctx.fillText(l, W / 2, hy + 20 * u + j * 50 * u); });
-      ctx.restore();
-    }
   };
 
   Renderer.prototype.drawPin = function (x, y, r) {
@@ -579,7 +613,7 @@
     ctx.restore();
   };
 
-  Renderer.prototype.drawOutro = function (s, local) {
+  Renderer.prototype.drawOutro = function (local) {
     var ctx = this.ctx, W = this.W, H = this.H, u = this.unit, info = this.project.info;
     var th = this.theme;
     ctx.fillStyle = hexA(th.dark, 0.72);
@@ -634,7 +668,6 @@
       ctx.fillText('Gọi điện hoặc nhắn Zalo', W / 2, cy + 430 * u);
       ctx.restore();
     }
-    if (s.text && this.project.settings.subtitles) this.drawSubtitle(s.text, local, s.duration + TR);
   };
 
   Renderer.prototype.drawPhoneIcon = function (x, y, r) {
@@ -654,7 +687,7 @@
   };
 
   window.BdsRender = {
-    FORMATS: FORMATS, THEMES: THEMES, TRANSITIONS: TRANSITIONS, TR: TR,
-    Renderer: Renderer, buildTimeline: buildTimeline
+    FORMATS: FORMATS, THEMES: THEMES, TRANSITIONS: TRANSITIONS, TEXT_FX: TEXT_FX, TR: TR,
+    Renderer: Renderer
   };
 })();

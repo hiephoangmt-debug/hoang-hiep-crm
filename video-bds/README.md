@@ -1,45 +1,65 @@
 # Làm Video BĐS
 
-Công cụ làm video bất động sản chạy ngay trên trình duyệt: **không cần cài đặt, không cần tài khoản, ảnh và giọng đọc không bị gửi lên máy chủ**.
+Công cụ làm video bất động sản chạy trên trình duyệt: **kịch bản theo cảnh, quay từng đoạn, tự cắt ghép, chữ hiệu ứng, nhạc nền, xuất video đầy đủ, trailer và từng cảnh riêng**.
+Ảnh, clip và giọng nói **không bị gửi lên máy chủ**; mọi xử lý chạy ngay trên máy.
 
-## Cách mở
+## Cách cài và mở
 
-1. Tải thư mục `video-bds` về máy.
-2. Mở file `index.html` bằng **Google Chrome** hoặc **Microsoft Edge** (bấm đúp chuột).
-3. Lần đầu mở sẽ có hướng dẫn; bấm **“✨ Làm thử với dữ liệu mẫu”** để xem ngay một video mẫu.
+### Cách 1: Dùng ngay trên máy tính (không cần mạng)
+1. Tải thư mục `video-bds` về máy (hoặc file ZIP), giải nén.
+2. Bấm đúp `index.html` để mở bằng **Google Chrome** hoặc **Microsoft Edge**.
 
-> Muốn thu giọng bằng micro trên điện thoại hoặc cho nhân viên dùng chung, hãy đưa thư mục lên web có `https`
-> (GitHub Pages, Netlify, hoặc hosting của công ty). Không cần máy chủ riêng.
+Cách này dùng được mọi tính năng trừ nút “Cài ứng dụng”. Một số máy chặn camera và micro khi mở file trực tiếp; gặp trường hợp đó thì dùng Cách 2.
+
+### Cách 2: Đưa lên web và cài như ứng dụng (khuyên dùng, dùng được cả trên điện thoại)
+1. Đưa thư mục `video-bds` lên một địa chỉ **https**, chọn một trong hai:
+   - **Netlify Drop** (dễ nhất, miễn phí): vào https://app.netlify.com/drop, kéo thả thư mục `video-bds` vào là có link.
+   - **GitHub Pages**: Settings → Pages → chọn nhánh, thư mục gốc; link có dạng `https://<tên>.github.io/<repo>/video-bds/`.
+2. Mở link và cài:
+   - **Máy tính (Chrome/Edge):** bấm nút **⬇️ Cài ứng dụng** trên cùng, hoặc biểu tượng cài đặt ở cuối thanh địa chỉ.
+   - **Android (Chrome):** menu ⋮ → **Cài đặt ứng dụng** (hoặc “Thêm vào màn hình chính”).
+   - **iPhone/iPad (Safari):** nút Chia sẻ → **Thêm vào MH chính**.
+
+Sau khi cài, ứng dụng có biểu tượng riêng và mở được cả khi mất mạng.
 
 ## 6 bước làm video
 
 | Bước | Việc cần làm |
 |---|---|
-| 1. Thông tin | Loại BĐS, vị trí, giá, diện tích, số phòng, pháp lý, điểm nổi bật, tên và số điện thoại môi giới, logo |
-| 2. Ảnh và clip | Chọn hoặc kéo thả ảnh/clip, ghi tên phòng, đổi thứ tự; ảnh đầu tiên là ảnh bìa |
-| 3. Kịch bản | **Tự viết kịch bản** theo 4 phong cách: Chuyên nghiệp, Gần gũi, TikTok, Sang trọng. Sửa từng câu, đổi kiểu câu, nghe máy đọc thử |
-| 4. Giọng đọc | **Máy nhắc chữ**: chữ to hiện trên màn hình, đọc xong câu nào thì bấm “Câu tiếp” (hoặc phím cách); video tự khớp cảnh theo giọng. Hoặc tải file giọng đọc có sẵn |
-| 5. Nhạc và hiệu ứng | Khung 9:16 / 16:9 / 1:1, màu chủ đạo, kiểu chuyển cảnh, nhạc nền tự soạn (không lo bản quyền) hoặc nhạc riêng |
-| 6. Xuất video | Bấm “Xuất video” → tải file MP4 (Chrome/Edge mới) hoặc WebM về máy |
+| 1. Thông tin | Tên dự án, vị trí, giá, tên và số điện thoại. Mở “Thông tin dự án” để điền chủ đầu tư, quy mô, kết nối, tiện ích, chính sách, sự kiện |
+| 2. Kịch bản | Ba cách bắt đầu: **Giới thiệu dự án** (tự viết 5–7 cảnh), **Nhập từ Google Sheets** (dán link hoặc copy bảng), **Nhanh từ ảnh**. Mỗi cảnh có lời thoại, chữ lớn trên màn hình, gợi ý cảnh quay |
+| 3. Quay và ghép | Mỗi cảnh thêm clip/ảnh hoặc **🎥 Quay cảnh này** bằng camera có chữ nhắc lời. Tự cắt khoảng lặng đầu/cuối, tự cân âm lượng giọng, tự ghép theo thứ tự |
+| 4. Giọng đọc | Dùng tiếng nói trong clip (mặc định), thu giọng lồng tiếng theo máy nhắc chữ, hoặc không giọng |
+| 5. Hiệu ứng và nhạc | Khung 9:16 / 16:9 / 1:1, màu, hiệu ứng chữ (bật lên, trượt vào, gõ chữ), chuyển cảnh, nhạc nền tự soạn hoặc nhạc riêng |
+| 6. Xuất video | **Video đầy đủ**, **Trailer** (cắt nhanh, chữ to, nhạc sôi động), **Từng cảnh riêng** (để đăng Reels/TikTok hằng ngày) |
 
-## Hiệu ứng có sẵn
+### Clip nói + phối cảnh/flycam
+Trong một cảnh, clip có **🔊 tiếng gốc** là **clip nói**; ảnh phối cảnh và clip flycam (tắt tiếng) là **hình phủ**.
+Phần mềm giữ **tiếng nói chạy liên tục**, mở đầu bằng người nói, xen phối cảnh/flycam ở giữa, kết thúc bằng người nói.
+Bấm **🙈 Chỉ lấy tiếng** trên clip nói để ẩn hẳn hình người nói, phối cảnh/flycam sẽ phủ kín cả cảnh.
 
-- **Hình:** zoom và lia chậm trên ảnh (Ken Burns), chuyển cảnh mờ, trượt, phóng to có loé sáng; intro hiện loại BĐS, tên dự án, vị trí, khung giá bật lên, thông số; nhãn tên phòng trượt vào; khung giá góc màn hình; phụ đề tự chia dòng; outro hiện số điện thoại lớn và “Gọi điện hoặc nhắn Zalo”; thanh tiến trình; logo hoặc thương hiệu.
-- **Âm thanh:** tiếng “boom” mở đầu, “whoosh” khi chuyển cảnh, “ting” khi hiện giá và số điện thoại, “pop” khi hiện tên phòng; 3 loại nhạc nền tự soạn (nhẹ nhàng, sôi động, sang trọng); **nhạc tự nhỏ lại khi có giọng đọc**, mở và tắt nhạc từ từ; bộ nén âm giúp âm lượng đều.
+### Nhập kịch bản từ Google Sheets
+Bảng gồm các cột: **Tên cảnh | Lời thoại | Hình ảnh / chữ trên màn hình**.
+Ô ở cột thứ ba bắt đầu bằng “Text …” (ví dụ “Text chạy màn hình:”) sẽ thành **chữ lớn hiệu ứng**, mỗi dòng một ý; còn lại là **gợi ý cảnh quay**.
+Dán link cần bảng ở chế độ “Bất kỳ ai có đường liên kết đều xem được”; hoặc bôi đen bảng, Ctrl+C rồi dán vào ô nhập.
 
 ## Cấu trúc mã
 
 ```
 video-bds/
-├── index.html         Giao diện 6 bước, máy nhắc chữ, hướng dẫn
-├── css/styles.css     Giao diện (hỗ trợ điện thoại và chế độ tối)
+├── index.html            Giao diện 6 bước, máy nhắc chữ, camera, hướng dẫn
+├── manifest.webmanifest  Thông tin cài ứng dụng (PWA)
+├── sw.js                 Lưu sẵn ứng dụng để dùng khi mất mạng
+├── icons/                Biểu tượng ứng dụng
+├── css/styles.css        Giao diện (điện thoại, chế độ tối)
 └── js/
-    ├── app.js         Điều khiển các bước, thu âm, xem thử, xuất video
-    ├── script-gen.js  Tự viết kịch bản tiếng Việt
-    ├── renderer.js    Vẽ khung hình: hiệu ứng, chữ, intro/outro
-    ├── audio.js       Nhạc nền, hiệu ứng âm thanh, giảm nhạc khi có giọng
-    ├── webm-fix.js    Ghi thời lượng vào file WebM để tua được
-    └── demo.js        Dữ liệu và ảnh mẫu
+    ├── app.js            Điều khiển các bước, quay, thu âm, xem thử, xuất video
+    ├── script-gen.js     Viết kịch bản tự động, đọc bảng Google Sheets
+    ├── timeline.js       Dựng dòng thời gian: video đầy đủ, trailer, từng cảnh, phủ phối cảnh
+    ├── renderer.js       Vẽ khung hình: chuyển cảnh, chữ hiệu ứng, phụ đề, intro/outro
+    ├── audio.js          Nhạc nền, hiệu ứng âm thanh, trộn tiếng clip, giảm nhạc khi có giọng
+    ├── webm-fix.js       Ghi thời lượng vào file WebM để tua được
+    └── demo.js           Dữ liệu mẫu (F2 FourS Tower 7 cảnh, căn hộ từ ảnh)
 ```
 
-Mọi xử lý (dựng hình, trộn âm, ghi video) chạy trong trình duyệt bằng Canvas, Web Audio và MediaRecorder; không cần thư viện ngoài.
+Dựng hình, trộn âm và ghi video dùng Canvas, Web Audio và MediaRecorder của trình duyệt; không cần thư viện ngoài.

@@ -1,26 +1,26 @@
-/* Điều khiển giao diện: các bước, ảnh, kịch bản, thu giọng, xem thử, xuất video. */
+/* Điều khiển giao diện: kịch bản theo cảnh, quay và ghép, giọng đọc, xem thử, xuất video đầy đủ / trailer / từng cảnh. */
 (function () {
   'use strict';
 
   var $ = function (id) { return document.getElementById(id); };
-  var STEPS = ['Thông tin', 'Ảnh & clip', 'Kịch bản', 'Giọng đọc', 'Nhạc & hiệu ứng', 'Xuất video'];
+  var STEPS = ['Thông tin', 'Kịch bản', 'Quay & ghép', 'Giọng đọc', 'Hiệu ứng & nhạc', 'Xuất video'];
   var REQUIRED = { loai: 'Loại BĐS', viTri: 'Vị trí', gia: 'Giá', moiGioi: 'Tên môi giới', sdt: 'Số điện thoại' };
-  var STORE_KEY = 'video-bds-v1';
+  var STORE_KEY = 'video-bds-v2';
 
   var state = {
     step: 1,
     info: {},
-    media: [],
     logo: null,
-    lines: [],
-    durations: [],
-    durationsLocked: false,
-    captionsKey: '',
+    scenes: [],
     style: 'chuyen-nghiep',
     variant: 0,
-    voice: { mode: 'none', buffer: null, url: '', fit: true, name: '' },
+    voiceMode: 'clip',
     music: { mood: 'nhe-nhang', buffer: null, name: '', vol: 70 },
-    settings: { format: '9:16', theme: 'vang', transition: 'mix', sfx: true, subtitles: true }
+    settings: {
+      format: '9:16', theme: 'vang', transition: 'mix', textFx: 'pop', sfx: true, subtitles: true,
+      introCard: true, endCard: true, priceTag: true, autoTrim: true
+    },
+    previewKind: 'full'
   };
 
   var audioCtx = null;
@@ -42,15 +42,37 @@
     return Math.floor(s / 60) + ':' + ('0' + s % 60).slice(-2);
   }
 
-  /* ---------- Lưu / đọc thông tin đã nhập ---------- */
+  function fmtSec(s) { return (Math.round(s * 10) / 10).toString().replace('.', ','); }
 
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
+  }
+
+  function newScene(o) {
+    o = o || {};
+    return {
+      title: o.title || '', text: o.text || '', bigText: o.bigText || [], shotNote: o.shotNote || '',
+      media: o.media || [], voice: null, durOverride: o.durOverride || null, showTitle: !!o.showTitle, quick: !!o.quick,
+      layout: o.layout || 'auto'
+    };
+  }
+
+  /* ---------- Lưu / đọc (chỉ chữ, không lưu ảnh/clip) ---------- */
+
+  var saveTimer = null;
   function save() {
-    try {
-      localStorage.setItem(STORE_KEY, JSON.stringify({
-        info: state.info, style: state.style, settings: state.settings,
-        mood: state.music.mood, vol: state.music.vol, helpSeen: true
-      }));
-    } catch (e) { /* trình duyệt chặn lưu trữ: bỏ qua */ }
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      try {
+        localStorage.setItem(STORE_KEY, JSON.stringify({
+          info: state.info, style: state.style, settings: state.settings, voiceMode: state.voiceMode,
+          mood: state.music.mood, vol: state.music.vol, helpSeen: true,
+          scenes: state.scenes.map(function (s) {
+            return { title: s.title, text: s.text, bigText: s.bigText, shotNote: s.shotNote, durOverride: s.durOverride, showTitle: s.showTitle, quick: s.quick, layout: s.layout };
+          })
+        }));
+      } catch (e) { /* trình duyệt chặn lưu trữ: bỏ qua */ }
+    }, 300);
   }
 
   function load() {
@@ -60,71 +82,28 @@
       state.info = d.info || {};
       state.style = d.style || state.style;
       Object.assign(state.settings, d.settings || {});
+      state.voiceMode = d.voiceMode || state.voiceMode;
       state.music.mood = d.mood || state.music.mood;
       state.music.vol = d.vol != null ? d.vol : state.music.vol;
+      state.scenes = (d.scenes || []).map(newScene);
       return !!d.helpSeen;
     } catch (e) { return false; }
   }
 
-  /* ---------- Dự án → bộ dựng hình ---------- */
-
-  function autoDurations() {
-    return state.lines.map(function (l, i) {
-      var v = state.durations[i];
-      return v ? v : window.ScriptGen.readSeconds(l);
-    });
-  }
-
-  function effectiveDurations() {
-    var d = autoDurations();
-    var v = state.voice;
-    if (v.mode === 'upload' && v.buffer && v.fit && d.length) {
-      var target = v.buffer.duration + 1.4;
-      var sum = d.reduce(function (a, b) { return a + b; }, 0);
-      d = d.map(function (x) { return x * target / sum; });
-    }
-    return d;
-  }
+  /* ---------- Dự án → dòng thời gian ---------- */
 
   function project() {
-    var locked = state.durationsLocked || (state.voice.mode === 'upload' && state.voice.buffer && state.voice.fit);
-    return {
-      info: state.info,
-      media: state.media,
-      logo: state.logo,
-      lines: state.lines.length ? state.lines : defaultLines(),
-      durations: effectiveDurations(),
-      durationsLocked: !!locked,
-      settings: state.settings
-    };
+    return { info: state.info, logo: state.logo, scenes: state.scenes, settings: state.settings, voiceMode: state.voiceMode };
   }
 
-  function defaultLines() {
-    return window.ScriptGen.generate(state.info, state.media.map(function (m) { return m.caption; }), state.style, state.variant);
+  function timeline(kind, idx) {
+    var p = project();
+    if (kind === 'trailer') return window.BdsTimeline.buildTrailer(p);
+    if (kind === 'scene') return window.BdsTimeline.buildScene(p, idx);
+    return window.BdsTimeline.buildFull(p);
   }
 
-  function captionsKey() {
-    return state.media.map(function (m) { return m.caption; }).join('|');
-  }
-
-  function regenerate(silent) {
-    var oldLen = state.lines.length;
-    state.lines = defaultLines();
-    state.captionsKey = captionsKey();
-    if (state.lines.length !== oldLen) {
-      state.durations = [];
-      if (state.voice.mode === 'record' && state.voice.buffer) {
-        state.durationsLocked = false;
-        state.voice.buffer = null;
-        state.voice.url = '';
-        if (!silent) toast('Số cảnh đã thay đổi, bạn cần thu lại giọng đọc ở Bước 4.');
-      }
-    }
-    renderScript();
-    schedulePreview();
-  }
-
-  /* ---------- Thanh bước ---------- */
+  /* ---------- Các bước ---------- */
 
   function renderStepper() {
     var nav = $('stepper');
@@ -145,32 +124,25 @@
   }
 
   function goStep(n) {
-    if (n > state.step) {
-      if (state.step <= 1 && n > 1) {
-        var miss = missingInfo();
-        if (miss.length) {
-          toast('Bạn cần điền: ' + miss.map(function (k) { return REQUIRED[k]; }).join(', '));
-          miss.forEach(function (k) {
-            var el = document.querySelector('[data-info="' + k + '"]');
-            if (el) el.style.borderColor = 'var(--danger)';
-          });
-          if (state.step !== 1) state.step = 1;
-          showStep();
-          return;
-        }
-      }
-      if (n > 2 && !state.media.length) {
-        toast('Hãy thêm ít nhất 1 ảnh hoặc clip ở Bước 2.');
-        state.step = 2;
-        showStep();
+    if (n > 1 && state.step === 1) {
+      var miss = missingInfo();
+      if (miss.length) {
+        toast('Bạn cần điền: ' + miss.map(function (k) { return REQUIRED[k]; }).join(', '));
+        miss.forEach(function (k) {
+          var el = document.querySelector('[data-info="' + k + '"]');
+          if (el) el.style.borderColor = 'var(--danger)';
+        });
         return;
       }
     }
-    state.step = Math.max(1, Math.min(STEPS.length, n));
-    if (state.step === 3) {
-      if (state.lines.length !== state.media.length + 2) regenerate(true);
-      else renderScript();
+    if (n > 2 && !state.scenes.length) {
+      toast('Hãy tạo kịch bản ở Bước 2 trước nhé.');
+      n = 2;
     }
+    state.step = Math.max(1, Math.min(STEPS.length, n));
+    if (state.step === 2) renderScenes();
+    if (state.step === 3) renderShoot();
+    if (state.step === 4) refreshVoiceUI();
     if (state.step === 6) renderChecklist();
     showStep();
   }
@@ -214,28 +186,85 @@
       el.value = state.info[el.dataset.info] || '';
       el.style.borderColor = '';
     });
+    if (info.quyMo || info.ketNoi || info.tienIch || info.chinhSach) $('projectMore').open = true;
     save();
   }
 
-  /* ---------- Bước 2: ảnh & clip ---------- */
+  /* ---------- Ảnh & clip ---------- */
 
-  function loadFile(f) {
+  /** Phân tích âm thanh clip: có tiếng không, và cắt khoảng lặng đầu/cuối. */
+  function analyzeAudio(item, blob) {
+    item.analyzing = true;
+    return blob.arrayBuffer().then(function (ab) { return getAudioCtx().decodeAudioData(ab); }).then(function (buf) {
+      var sr = buf.sampleRate, win = Math.max(1, Math.floor(sr * 0.05)), n = Math.floor(buf.length / win);
+      var chans = [];
+      for (var c = 0; c < buf.numberOfChannels; c++) chans.push(buf.getChannelData(c));
+      var rms = new Float32Array(n);
+      for (var w = 0; w < n; w++) {
+        var sum = 0;
+        for (var ci = 0; ci < chans.length; ci++) {
+          var d = chans[ci];
+          for (var j = w * win; j < (w + 1) * win; j += 4) sum += d[j] * d[j];
+        }
+        rms[w] = Math.sqrt(sum / (win / 4) / chans.length);
+      }
+      var sorted = Array.prototype.slice.call(rms).sort(function (a, b) { return a - b; });
+      var floor = sorted[Math.floor(n * 0.2)] || 0, p95 = sorted[Math.floor(n * 0.95)] || 0;
+      var dur = isFinite(item.el.duration) && item.el.duration ? item.el.duration : buf.duration;
+      item.dur = dur;
+      item.hasAudio = p95 > 0.01;
+      item.trimIn = 0;
+      item.trimOut = dur;
+      if (item.hasAudio) {
+        var thr = Math.max(0.006, floor + (p95 - floor) * 0.15);
+        var first = -1, last = -1, active = [];
+        for (var k = 0; k < n; k++) if (rms[k] >= thr) { if (first < 0) first = k; last = k; active.push(rms[k]); }
+        // Cân âm lượng giọng nói về cùng một mức (giọng nhỏ thì tăng, to thì giảm)
+        active.sort(function (x, y) { return x - y; });
+        var med = active[Math.floor(active.length / 2)] || p95;
+        item.voiceGain = Math.max(0.5, Math.min(4, 0.12 / med));
+        if (first >= 0) {
+          var a = Math.max(0, first * 0.05 - 0.2), b = Math.min(dur, (last + 1) * 0.05 + 0.35);
+          if (b - a > 0.8) { item.trimIn = a; item.trimOut = b; }
+        }
+      }
+      if (item.keepAudio == null) item.keepAudio = item.hasAudio;
+    }).catch(function () {
+      item.hasAudio = false;
+      item.keepAudio = false;
+      item.trimIn = 0;
+      item.trimOut = item.dur;
+    }).then(function () {
+      item.analyzing = false;
+      if (state.step === 3) renderShoot();
+      schedulePreview();
+    });
+  }
+
+  /** Tạo một ảnh/clip từ file (hoặc blob vừa quay). */
+  function createMedia(blob, name, opts) {
+    opts = opts || {};
     return new Promise(function (resolve) {
-      var url = URL.createObjectURL(f);
-      if (f.type.indexOf('video') === 0) {
+      var url = URL.createObjectURL(blob);
+      var type = blob.type || '';
+      if (type.indexOf('video') === 0 || /\.(mp4|mov|webm|m4v)$/i.test(name || '')) {
         var v = document.createElement('video');
         v.muted = true;
         v.playsInline = true;
         v.preload = 'auto';
-        v.crossOrigin = 'anonymous';
-        v.onloadeddata = function () { resolve({ el: v, caption: '', isVideo: true, url: url, name: f.name }); };
-        v.onerror = function () { toast('Không đọc được clip ' + f.name + '. Hãy thử file MP4.'); resolve(null); };
+        var item = { el: v, isVideo: true, url: url, name: name, keepAudio: opts.keepAudio, hasAudio: false, trimIn: 0, trimOut: 0, dur: 0 };
+        v.onloadedmetadata = function () {
+          item.dur = isFinite(v.duration) ? v.duration : (opts.duration || 4);
+          item.trimOut = item.dur;
+        };
+        v.onloadeddata = function () { resolve(item); analyzeAudio(item, blob); };
+        v.onerror = function () { toast('Không đọc được clip ' + name + '. Hãy thử file MP4.'); resolve(null); };
         v.addEventListener('seeked', schedulePreview);
         v.src = url;
-      } else if (f.type.indexOf('image') === 0) {
+      } else if (type.indexOf('image') === 0 || /\.(jpe?g|png|webp|gif|heic)$/i.test(name || '')) {
         var img = new Image();
-        img.onload = function () { resolve({ el: img, caption: '', isVideo: false, url: url, name: f.name }); };
-        img.onerror = function () { toast('Không đọc được ảnh ' + f.name + '. Hãy dùng JPG hoặc PNG.'); resolve(null); };
+        img.onload = function () { resolve({ el: img, isVideo: false, url: url, name: name }); };
+        img.onerror = function () { toast('Không đọc được ảnh ' + name + '. Hãy dùng JPG hoặc PNG.'); resolve(null); };
         img.src = url;
       } else {
         resolve(null);
@@ -243,142 +272,154 @@
     });
   }
 
-  function addFiles(files) {
+  function addFilesToScene(si, files) {
     var list = Array.prototype.slice.call(files || []);
     if (!list.length) return;
-    Promise.all(list.map(loadFile)).then(function (items) {
-      items.forEach(function (it) { if (it) state.media.push(it); });
-      renderMedia();
+    Promise.all(list.map(function (f) { return createMedia(f, f.name); })).then(function (items) {
+      items.forEach(function (it) { if (it) state.scenes[si].media.push(it); });
+      renderShoot();
       schedulePreview();
-      toast('Đã thêm ' + items.filter(Boolean).length + ' ảnh/clip. Nhớ ghi tên phòng cho từng ảnh nhé!');
+      toast('Đã thêm ' + items.filter(Boolean).length + ' ảnh/clip vào cảnh ' + (si + 1) + '.');
     });
   }
 
-  function renderMedia() {
-    var ol = $('mediaList');
+  /* ---------- Bước 2: kịch bản ---------- */
+
+  function confirmReplace() {
+    var hasMedia = state.scenes.some(function (s) { return s.media.length; });
+    return !state.scenes.length || window.confirm('Thay kịch bản hiện tại bằng kịch bản mới?' + (hasMedia ? ' Ảnh/clip đã thêm sẽ được giữ theo thứ tự cảnh.' : ''));
+  }
+
+  function setScenes(scenes, keepMedia) {
+    var old = state.scenes;
+    state.scenes = scenes.map(newScene);
+    if (keepMedia) state.scenes.forEach(function (s, i) { if (old[i] && !s.media.length) s.media = old[i].media; });
+    renderScenes();
+    save();
+    schedulePreview();
+  }
+
+  function startProject() {
+    if (!confirmReplace()) return;
+    setScenes(window.ScriptGen.generateProject(state.info), true);
+    toast('Đã viết kịch bản ' + state.scenes.length + ' cảnh. Bạn sửa lại cho đúng giọng của mình nhé!', 4000);
+  }
+
+  function importScenes(scenes) {
+    if (!scenes.length) { toast('Không đọc được cảnh nào. Kiểm tra lại bảng có cột Cảnh và Lời thoại.', 5000); return; }
+    if (!confirmReplace()) return;
+    setScenes(scenes, true);
+    $('sheetBox').hidden = true;
+    toast('Đã nhập ' + scenes.length + ' cảnh từ bảng kịch bản.', 4000);
+  }
+
+  function importFromLink() {
+    var url = window.ScriptGen.sheetCsvUrl($('sheetLink').value);
+    if (!url) { toast('Link chưa đúng. Hãy dán link dạng https://docs.google.com/spreadsheets/d/...'); return; }
+    $('btnSheetLink').disabled = true;
+    fetch(url).then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      return r.text();
+    }).then(function (csv) {
+      if (/^\s*</.test(csv)) throw new Error('private');
+      importScenes(window.ScriptGen.tableToScenes(window.ScriptGen.parseTable(csv)));
+    }).catch(function () {
+      toast('Không mở được bảng. Hãy bật chia sẻ “Bất kỳ ai có đường liên kết”, hoặc copy bảng rồi dán vào ô bên dưới.', 6000);
+    }).then(function () { $('btnSheetLink').disabled = false; });
+  }
+
+  function quickScenes(items) {
+    var captions = items.map(function (m) { return m.caption || ''; });
+    var lines = window.ScriptGen.generate(state.info, captions, state.style, state.variant);
+    var scenes = [newScene({ title: 'Mở đầu', text: lines[0], media: items.length ? [items[0]] : [], quick: true })];
+    items.forEach(function (m, i) {
+      scenes.push(newScene({ title: m.caption || '', text: lines[i + 1], media: [m], showTitle: true, quick: true }));
+    });
+    scenes.push(newScene({ title: 'Kêu gọi liên hệ', text: lines[lines.length - 1], media: items.length ? [items[items.length - 1]] : [], quick: true }));
+    return scenes;
+  }
+
+  function regenerateQuick() {
+    var mid = state.scenes.slice(1, -1);
+    var lines = window.ScriptGen.generate(state.info, mid.map(function (s) { return s.title; }), state.style, state.variant);
+    state.scenes.forEach(function (s, i) {
+      if (i === 0) s.text = lines[0];
+      else if (i === state.scenes.length - 1) s.text = lines[lines.length - 1];
+      else s.text = lines[i];
+    });
+    renderScenes();
+    save();
+    schedulePreview();
+  }
+
+  function moveScene(i, d) {
+    var j = i + d;
+    if (j < 0 || j >= state.scenes.length) return;
+    var t = state.scenes[i];
+    state.scenes[i] = state.scenes[j];
+    state.scenes[j] = t;
+  }
+
+  function renderScenes() {
+    var ol = $('sceneList');
     ol.innerHTML = '';
-    state.media.forEach(function (m, i) {
+    $('quickTools').hidden = !state.scenes.some(function (s) { return s.quick; });
+    $('styleSelect').value = state.style;
+    if (!state.scenes.length) {
+      ol.innerHTML = '<li class="empty-media">Chưa có cảnh nào. Chọn một cách bắt đầu ở trên, hoặc bấm “＋ Thêm cảnh”.</li>';
+    }
+    var tl = window.BdsTimeline.buildFull(project());
+    var durs = tl.overlays.filter(function (o) { return o.kind === 'scene'; }).map(function (o) { return o.duration; });
+    state.scenes.forEach(function (s, i) {
       var li = document.createElement('li');
-      li.className = 'media-item';
-      var thumb = m.isVideo ? '<video class="thumb" muted src="' + m.url + '"></video>' : '<img class="thumb" alt="" src="' + m.url + '">';
+      li.className = 'scene-card';
       li.innerHTML =
-        '<div class="idx">' + (i + 1) + '</div>' + thumb +
-        '<div><input list="roomList" placeholder="Tên phòng / khu vực, VD: Phòng khách" value="">' +
-        (i === 0 ? '<div class="cover-badge">★ Ảnh bìa (hiện ở đầu video)</div>' : '') +
-        (m.isVideo ? '<div class="muted small-text">🎞 Clip ' + (m.el.duration ? Math.round(m.el.duration) + ' giây' : '') + '</div>' : '') +
-        '</div>' +
-        '<div class="tools">' +
-        '<button class="btn" type="button" title="Lên trên" data-a="up">▲</button>' +
-        '<button class="btn" type="button" title="Xuống dưới" data-a="down">▼</button>' +
-        '<button class="btn" type="button" title="Xoá" data-a="del">🗑</button></div>';
-      var input = li.querySelector('input');
-      input.value = m.caption;
-      input.addEventListener('input', function () {
-        m.caption = input.value;
-        schedulePreview();
-      });
+        '<div class="scene-head"><span class="scene-no">Cảnh ' + (i + 1) + '</span>' +
+        '<input data-f="title" placeholder="Tên cảnh, VD: Hook, Vị trí, Tiện ích">' +
+        '<div class="tools"><button class="btn" type="button" data-a="up" title="Lên">▲</button>' +
+        '<button class="btn" type="button" data-a="down" title="Xuống">▼</button>' +
+        '<button class="btn" type="button" data-a="dup" title="Nhân đôi">⧉</button>' +
+        '<button class="btn" type="button" data-a="del" title="Xoá">🗑</button></div></div>' +
+        '<label>🗣 Lời thoại<textarea data-f="text" rows="4" placeholder="Lời nói trước camera hoặc lời đọc lồng tiếng"></textarea></label>' +
+        '<label>🔠 Chữ lớn trên màn hình (mỗi dòng một ý, VD: 20 TẦNG NỔI)<textarea data-f="bigText" rows="2"></textarea></label>' +
+        '<label>🎞 Gợi ý cảnh quay<textarea data-f="shotNote" rows="2" placeholder="VD: Phối cảnh → logo chủ đầu tư → bản đồ"></textarea></label>' +
+        '<div class="scene-foot">⏱ <input type="number" min="1" max="300" step="0.5" data-f="dur"> giây' +
+        '<span>· ' + s.media.length + ' ảnh/clip</span>' +
+        '<label class="check"><input type="checkbox" data-f="showTitle"> Hiện tên cảnh trên video</label></div>';
+      var get = function (f) { return li.querySelector('[data-f="' + f + '"]'); };
+      get('title').value = s.title;
+      get('text').value = s.text;
+      get('bigText').value = s.bigText.join('\n');
+      get('shotNote').value = s.shotNote;
+      get('dur').value = s.durOverride || '';
+      get('dur').placeholder = fmtSec(durs[i] || 0).replace(',', '.');
+      get('showTitle').checked = s.showTitle;
+      var changed = function () { save(); schedulePreview(); updateTotal(); };
+      get('title').oninput = function (e) { s.title = e.target.value; changed(); };
+      get('text').oninput = function (e) { s.text = e.target.value; changed(); };
+      get('bigText').oninput = function (e) { s.bigText = e.target.value.split('\n').map(function (x) { return x.trim(); }).filter(Boolean); changed(); };
+      get('shotNote').oninput = function (e) { s.shotNote = e.target.value; save(); };
+      get('dur').oninput = function (e) { var v = parseFloat(e.target.value); s.durOverride = v >= 1 ? v : null; changed(); };
+      get('showTitle').onchange = function (e) { s.showTitle = e.target.checked; changed(); };
       li.querySelectorAll('[data-a]').forEach(function (b) {
         b.onclick = function () {
           var a = b.dataset.a;
-          if (a === 'up' && i > 0) swap(i, i - 1);
-          else if (a === 'down' && i < state.media.length - 1) swap(i, i + 1);
-          else if (a === 'del') state.media.splice(i, 1);
-          renderMedia();
+          if (a === 'up') moveScene(i, -1);
+          else if (a === 'down') moveScene(i, 1);
+          else if (a === 'dup') state.scenes.splice(i + 1, 0, newScene(JSON.parse(JSON.stringify({ title: s.title, text: s.text, bigText: s.bigText, shotNote: s.shotNote }))));
+          else if (a === 'del' && window.confirm('Xoá cảnh ' + (i + 1) + '?')) state.scenes.splice(i, 1);
+          renderScenes();
+          save();
           schedulePreview();
         };
       });
       ol.appendChild(li);
     });
-  }
-
-  function swap(a, b) {
-    var t = state.media[a];
-    state.media[a] = state.media[b];
-    state.media[b] = t;
-  }
-
-  function bindMedia() {
-    var dz = $('dropzone');
-    $('mediaInput').addEventListener('change', function (e) { addFiles(e.target.files); e.target.value = ''; });
-    ['dragenter', 'dragover'].forEach(function (ev) {
-      dz.addEventListener(ev, function (e) { e.preventDefault(); dz.classList.add('over'); });
-    });
-    ['dragleave', 'drop'].forEach(function (ev) {
-      dz.addEventListener(ev, function (e) { e.preventDefault(); dz.classList.remove('over'); });
-    });
-    dz.addEventListener('drop', function (e) { addFiles(e.dataTransfer.files); });
-  }
-
-  /* ---------- Bước 3: kịch bản ---------- */
-
-  function sceneLabel(i) {
-    if (i === 0) return 'Mở đầu (ảnh bìa + giá)';
-    if (i === state.lines.length - 1) return 'Kết thúc: kêu gọi liên hệ';
-    var m = state.media[i - 1];
-    return 'Cảnh ' + i + (m && m.caption ? ': ' + m.caption : '');
-  }
-
-  function sceneThumb(i) {
-    var m = i === 0 ? state.media[0] : (i === state.lines.length - 1 ? null : state.media[i - 1]);
-    if (!m || m.isVideo) return '';
-    return '<img alt="" src="' + m.url + '">';
-  }
-
-  function renderScript() {
-    var ol = $('scriptList');
-    ol.innerHTML = '';
-    var notice = $('scriptNotice');
-    if (state.captionsKey && state.captionsKey !== captionsKey()) {
-      notice.hidden = false;
-      notice.innerHTML = 'Bạn vừa đổi tên phòng hoặc thứ tự ảnh. <button class="btn small" type="button" id="btnRefresh">Cập nhật kịch bản theo ảnh mới</button>';
-      $('btnRefresh').onclick = function () { regenerate(); notice.hidden = true; };
-    } else if (state.durationsLocked) {
-      notice.hidden = false;
-      notice.className = 'notice ok';
-      notice.textContent = '🎙️ Thời lượng từng cảnh đang khớp theo bản thu giọng của bạn. Nếu sửa câu, hãy thu lại ở Bước 4 cho khớp.';
-    } else {
-      notice.hidden = true;
-      notice.className = 'notice';
-    }
-    var autos = state.lines.map(function (l) { return window.ScriptGen.readSeconds(l); });
-    var eff = effectiveDurations();
-    state.lines.forEach(function (line, i) {
-      var li = document.createElement('li');
-      li.className = 'script-item';
-      var locked = state.durationsLocked || (state.voice.mode === 'upload' && state.voice.buffer && state.voice.fit);
-      li.innerHTML =
-        '<div class="head">' + sceneThumb(i) + '<span class="tag">' + sceneLabel(i) + '</span>' +
-        '<span class="dur">⏱ <input type="number" min="1.5" max="20" step="0.5"' + (locked ? ' disabled' : '') + '> giây</span></div>' +
-        '<textarea rows="2"></textarea>';
-      var ta = li.querySelector('textarea');
-      var du = li.querySelector('input');
-      ta.value = line;
-      du.placeholder = autos[i].toFixed(1);
-      du.value = locked ? eff[i].toFixed(1) : (state.durations[i] || '');
-      ta.addEventListener('input', function () {
-        state.lines[i] = ta.value;
-        if (!state.durations[i]) du.placeholder = window.ScriptGen.readSeconds(ta.value).toFixed(1);
-        updateTotal();
-        schedulePreview();
-      });
-      du.addEventListener('input', function () {
-        var v = parseFloat(du.value);
-        state.durations[i] = v >= 1.5 ? Math.min(20, v) : null;
-        updateTotal();
-        schedulePreview();
-      });
-      ol.appendChild(li);
-    });
-    $('styleSelect').value = state.style;
     updateTotal();
   }
 
-  function totalSeconds() {
-    try { return window.BdsRender.buildTimeline(project()).total; } catch (e) { return 0; }
-  }
-
   function updateTotal() {
-    $('totalDur').textContent = Math.round(totalSeconds());
+    try { $('totalDur').textContent = Math.round(timeline('full').total); } catch (e) { /* chưa có cảnh */ }
   }
 
   var speaking = false;
@@ -386,13 +427,11 @@
     var synth = window.speechSynthesis;
     if (!synth) { toast('Trình duyệt này không hỗ trợ đọc thử.'); return; }
     if (speaking) { synth.cancel(); speaking = false; $('btnSpeak').textContent = '🔊 Nghe máy đọc thử'; return; }
-    var voices = synth.getVoices();
-    var vi = voices.filter(function (v) { return /^vi/i.test(v.lang); })[0];
+    var vi = synth.getVoices().filter(function (v) { return /^vi/i.test(v.lang); })[0];
     if (!vi) toast('Máy chưa có giọng tiếng Việt nên giọng đọc có thể không chuẩn. Dùng Chrome hoặc Edge sẽ tốt hơn.', 4500);
-    var u = new SpeechSynthesisUtterance(state.lines.join('. '));
+    var u = new SpeechSynthesisUtterance(state.scenes.map(function (s) { return s.text; }).join('. '));
     u.lang = 'vi-VN';
     if (vi) u.voice = vi;
-    u.rate = 1;
     u.onend = u.onerror = function () { speaking = false; $('btnSpeak').textContent = '🔊 Nghe máy đọc thử'; };
     speaking = true;
     $('btnSpeak').textContent = '⏹ Dừng đọc';
@@ -408,56 +447,314 @@
       sel.appendChild(o);
     });
     sel.value = state.style;
-    sel.addEventListener('change', function () { state.style = sel.value; save(); regenerate(); });
-    $('btnRegen').onclick = function () { state.variant++; regenerate(); toast('Đã viết lại kịch bản kiểu khác.'); };
+    sel.onchange = function () { state.style = sel.value; save(); regenerateQuick(); };
+    $('btnRegen').onclick = function () { state.variant++; regenerateQuick(); toast('Đã viết lại lời thoại.'); };
+    $('btnStartProject').onclick = startProject;
+    $('btnStartSheet').onclick = function () { $('sheetBox').hidden = !$('sheetBox').hidden; };
+    $('btnSheetLink').onclick = importFromLink;
+    $('btnSheetPaste').onclick = function () {
+      importScenes(window.ScriptGen.tableToScenes(window.ScriptGen.parseTable($('sheetPaste').value)));
+    };
+    $('btnStartQuick').onclick = function () { if (confirmReplace()) $('quickInput').click(); };
+    $('quickInput').onchange = function (e) {
+      var files = Array.prototype.slice.call(e.target.files || []);
+      e.target.value = '';
+      Promise.all(files.map(function (f) { return createMedia(f, f.name); })).then(function (items) {
+        items = items.filter(Boolean);
+        setScenes(quickScenes(items), false);
+        toast('Đã tạo ' + state.scenes.length + ' cảnh. Ghi tên phòng ở ô tên cảnh rồi bấm “Viết lại lời theo tên cảnh”.', 5000);
+      });
+    };
+    $('btnAddScene').onclick = function () {
+      state.scenes.push(newScene({ title: 'Cảnh ' + (state.scenes.length + 1) }));
+      renderScenes();
+      save();
+    };
     $('btnSpeak').onclick = speakScript;
   }
 
+  /* ---------- Bước 3: quay & ghép ---------- */
+
+  function isTalk(m) { return m.isVideo && m.keepAudio && m.hasAudio; }
+
+  /** Cảnh có clip nói và có phối cảnh/flycam để phủ lên. */
+  function canCover(s) {
+    return state.voiceMode === 'clip' && s.media.some(isTalk) && s.media.some(function (m) { return !isTalk(m); });
+  }
+
+  function mediaMeta(m, scene) {
+    var role = scene && canCover(scene) && scene.layout !== 'seq' ? (isTalk(m) ? '🗣 <b>Clip nói</b> · ' : '🏙 <b>Phủ lên lời nói</b> · ') : '';
+    if (!m.isVideo) return role + '🖼 Ảnh · hiệu ứng zoom';
+    if (m.analyzing) return '🎞 Clip ' + fmtSec(m.dur || 0) + 's · đang phân tích âm thanh…';
+    var used = (m.trimOut || m.dur) - (m.trimIn || 0);
+    var cut = (m.dur || 0) - used;
+    var s = role + '🎞 Clip <b>' + fmtSec(m.dur || 0) + 's</b>';
+    if (state.settings.autoTrim && cut > 0.3) s += ' → dùng <b>' + fmtSec(used) + 's</b> (cắt ' + fmtSec(cut) + 's lặng)';
+    if (!m.hasAudio) s += ' · không có tiếng';
+    else if (m.voiceGain && Math.abs(m.voiceGain - 1) > 0.15) s += ' · giọng ' + (m.voiceGain > 1 ? 'tăng' : 'giảm') + ' ×' + fmtSec(m.voiceGain);
+    return s;
+  }
+
+  function renderShoot() {
+    var ol = $('shootList');
+    ol.innerHTML = '';
+    var tl = window.BdsTimeline.buildFull(project());
+    var durs = tl.overlays.filter(function (o) { return o.kind === 'scene'; }).map(function (o) { return o.duration; });
+    state.scenes.forEach(function (s, si) {
+      var li = document.createElement('li');
+      li.className = 'scene-card';
+      var tiles = s.media.map(function (m, mi) {
+        var thumb = m.isVideo ? '<video class="thumb" muted preload="metadata" src="' + m.url + '#t=0.5"></video>' : '<img class="thumb" alt="" src="' + m.url + '">';
+        var audioBtn = m.isVideo && m.hasAudio ?
+          '<button class="btn' + (m.keepAudio ? ' on' : '') + '" type="button" data-a="aud" data-i="' + mi + '" title="Giữ tiếng nói gốc">' + (m.keepAudio ? '🔊 Tiếng gốc' : '🔇 Tắt tiếng') + '</button>' : '';
+        var hideBtn = m.isVideo && m.hasAudio && m.keepAudio ?
+          '<button class="btn' + (m.audioOnly ? ' on' : '') + '" type="button" data-a="hide" data-i="' + mi + '" title="Chỉ lấy giọng nói, hình thay bằng phối cảnh/flycam">' + (m.audioOnly ? '🙈 Chỉ lấy tiếng' : '👁 Hiện hình') + '</button>' : '';
+        return '<div class="media-tile">' + thumb + '<div class="meta">' + mediaMeta(m, s) + '</div><div class="tile-tools">' + audioBtn + hideBtn +
+          '<button class="btn" type="button" data-a="left" data-i="' + mi + '" title="Lên trước">◀</button>' +
+          '<button class="btn" type="button" data-a="right" data-i="' + mi + '" title="Ra sau">▶</button>' +
+          '<button class="btn" type="button" data-a="del" data-i="' + mi + '" title="Xoá">🗑</button></div></div>';
+      }).join('');
+      li.innerHTML =
+        '<div class="scene-head"><span class="scene-no">Cảnh ' + (si + 1) + '</span><b>' + esc(window.BdsTimeline.cleanTitle(s.title) || '(chưa đặt tên)') + '</b>' +
+        '<span class="muted small-text" style="margin-left:auto">⏱ ' + fmtSec(durs[si] || 0) + ' giây</span></div>' +
+        (s.shotNote ? '<div class="shot-note">📋 <b>Cần quay:</b> ' + esc(s.shotNote) + '</div>' : '') +
+        (s.media.length ? '<div class="media-grid">' + tiles + '</div>' :
+          '<div class="empty-media">Chưa có ảnh/clip. ' + ((s.bigText || []).length ? 'Cảnh này sẽ hiện chữ lớn trên nền màu.' : 'Cảnh sẽ hiện phụ đề trên nền màu.') + '</div>') +
+        (canCover(s) ? '<label class="check cover-opt"><input type="checkbox" data-a="layout"' + (s.layout !== 'seq' ? ' checked' : '') +
+          '> 🎬 Xen phối cảnh/flycam lên lời nói (tiếng nói chạy liên tục, hình chuyển sang phối cảnh rồi quay lại người nói)</label>' : '') +
+        '<div class="row wrap nomargin"><label class="btn"><input type="file" accept="image/*,video/*" multiple hidden>📁 Thêm ảnh/clip</label>' +
+        '<button class="btn accent" type="button" data-a="cam">🎥 Quay cảnh này</button></div>';
+      li.querySelector('input[type=file]').onchange = function (e) { addFilesToScene(si, e.target.files); e.target.value = ''; };
+      li.querySelectorAll('[data-a]').forEach(function (b) {
+        b.onclick = function () {
+          var a = b.dataset.a, mi = +b.dataset.i, arr = s.media;
+          if (a === 'cam') { Camera.open(si); return; }
+          if (a === 'layout') { s.layout = b.checked ? 'auto' : 'seq'; save(); renderShoot(); schedulePreview(); return; }
+          if (a === 'aud') arr[mi].keepAudio = !arr[mi].keepAudio;
+          else if (a === 'hide') {
+            arr[mi].audioOnly = !arr[mi].audioOnly;
+            if (arr[mi].audioOnly && !s.media.some(function (x) { return !isTalk(x); })) toast('Thêm ảnh phối cảnh hoặc clip flycam vào cảnh này để thay cho hình người nói.', 4500);
+          }
+          else if (a === 'left' && mi > 0) arr.splice(mi - 1, 0, arr.splice(mi, 1)[0]);
+          else if (a === 'right' && mi < arr.length - 1) arr.splice(mi + 1, 0, arr.splice(mi, 1)[0]);
+          else if (a === 'del') arr.splice(mi, 1);
+          renderShoot();
+          schedulePreview();
+        };
+      });
+      ol.appendChild(li);
+    });
+  }
+
+  /* ---------- Quay bằng camera, có chữ nhắc lời ---------- */
+
+  var Camera = (function () {
+    var si = 0, stream = null, rec = null, chunks = [], facing = 'user', startAt = 0, timer = null, blob = null, recSecs = 0;
+
+    function pickMime() {
+      var types = ['video/mp4;codecs=avc1,mp4a', 'video/mp4', 'video/webm;codecs=vp9,opus', 'video/webm'];
+      for (var i = 0; i < types.length; i++) if (window.MediaRecorder && MediaRecorder.isTypeSupported(types[i])) return types[i];
+      return '';
+    }
+
+    function stopStream() {
+      if (stream) stream.getTracks().forEach(function (t) { t.stop(); });
+      stream = null;
+    }
+
+    function startPreview() {
+      stopStream();
+      return navigator.mediaDevices.getUserMedia({
+        video: { facingMode: facing, width: { ideal: 1080 }, height: { ideal: 1920 } },
+        audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }
+      }).then(function (s) {
+        stream = s;
+        var v = $('camVideo');
+        v.srcObject = s;
+        v.classList.toggle('mirror', facing === 'user');
+        v.hidden = false;
+        $('camReview').hidden = true;
+        return v.play();
+      });
+    }
+
+    function ui(mode) {
+      $('camStart').hidden = mode !== 'ready';
+      $('camFlip').hidden = mode !== 'ready';
+      $('camStop').hidden = mode !== 'rec';
+      $('camRec').hidden = mode !== 'rec';
+      $('camRetry').hidden = mode !== 'review';
+      $('camUse').hidden = mode !== 'review';
+      $('camPrompt').hidden = mode === 'review';
+    }
+
+    function resetScroll() {
+      var t = $('camText');
+      t.style.transition = 'none';
+      t.style.transform = 'translateY(0)';
+    }
+
+    function open(i) {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        toast('Trình duyệt không cho dùng camera. Hãy mở bằng Chrome qua địa chỉ https.', 5000);
+        return;
+      }
+      si = i;
+      var s = state.scenes[i];
+      $('camTitle').textContent = 'Cảnh ' + (i + 1) + ': ' + (window.BdsTimeline.cleanTitle(s.title) || '');
+      $('camText').textContent = s.text || '(Cảnh này chưa có lời thoại)';
+      resetScroll();
+      $('camModal').hidden = false;
+      ui('ready');
+      startPreview().catch(function () {
+        toast('Chưa được phép dùng camera/micro. Bấm biểu tượng 🔒 trên thanh địa chỉ để cho phép.', 5000);
+      });
+    }
+
+    function close() {
+      if (rec && rec.state !== 'inactive') { rec.onstop = null; rec.stop(); }
+      clearInterval(timer);
+      stopStream();
+      $('camModal').hidden = true;
+      $('camReview').removeAttribute('src');
+    }
+
+    function start() {
+      var n = 3, cd = $('camCount');
+      cd.hidden = false;
+      cd.textContent = n;
+      $('camStart').hidden = true;
+      var iv = setInterval(function () {
+        n--;
+        if (n > 0) { cd.textContent = n; return; }
+        clearInterval(iv);
+        cd.hidden = true;
+        begin();
+      }, 1000);
+    }
+
+    function begin() {
+      chunks = [];
+      var mime = pickMime();
+      rec = new MediaRecorder(stream, mime ? { mimeType: mime, videoBitsPerSecond: 6000000 } : undefined);
+      rec.ondataavailable = function (e) { if (e.data.size) chunks.push(e.data); };
+      rec.onstop = finished;
+      rec.start(500);
+      startAt = performance.now();
+      ui('rec');
+      timer = setInterval(function () { $('camTime').textContent = fmtTime((performance.now() - startAt) / 1000); }, 250);
+      // Cuộn chữ theo tốc độ đọc
+      var text = state.scenes[si].text || '';
+      var secs = Math.max(4, window.BdsTimeline.readSeconds(text) * 1.15) * 100 / (+$('camSpeed').value || 100);
+      var t = $('camText');
+      var dist = Math.max(0, t.scrollHeight - 200);
+      requestAnimationFrame(function () {
+        t.style.transition = 'transform ' + secs + 's linear';
+        t.style.transform = 'translateY(-' + dist + 'px)';
+      });
+    }
+
+    function stop() {
+      if (!rec || rec.state === 'inactive') return;
+      recSecs = (performance.now() - startAt) / 1000;
+      clearInterval(timer);
+      rec.stop();
+    }
+
+    function finished() {
+      var type = (rec.mimeType || 'video/webm').split(';')[0];
+      var raw = new Blob(chunks, { type: type });
+      var fix = type.indexOf('webm') !== -1 ? window.WebmFix.fixDuration(raw, recSecs) : Promise.resolve(raw);
+      fix.then(function (b) {
+        blob = b;
+        stopStream();
+        var rv = $('camReview');
+        rv.src = URL.createObjectURL(b);
+        rv.hidden = false;
+        $('camVideo').hidden = true;
+        ui('review');
+      });
+    }
+
+    function use() {
+      if (!blob) return;
+      var ext = blob.type.indexOf('mp4') !== -1 ? 'mp4' : 'webm';
+      createMedia(blob, 'canh-' + (si + 1) + '-' + Date.now() + '.' + ext, { keepAudio: true, duration: recSecs }).then(function (item) {
+        if (item) state.scenes[si].media.push(item);
+        close();
+        renderShoot();
+        schedulePreview();
+        toast('Đã thêm đoạn quay vào cảnh ' + (si + 1) + '.');
+      });
+    }
+
+    function bind() {
+      $('camStart').onclick = start;
+      $('camStop').onclick = stop;
+      $('camClose').onclick = close;
+      $('camUse').onclick = use;
+      $('camRetry').onclick = function () { blob = null; resetScroll(); ui('ready'); startPreview(); };
+      $('camFlip').onclick = function () { facing = facing === 'user' ? 'environment' : 'user'; startPreview().catch(function () {}); };
+    }
+
+    return { open: open, bind: bind };
+  })();
+
   /* ---------- Bước 4: giọng đọc ---------- */
 
-  function voiceStatus(msg) {
-    var el = $('voiceStatus');
-    el.hidden = !msg;
-    el.className = 'notice ok';
-    el.innerHTML = msg || '';
+  function sliceBuffer(buf, from, to) {
+    var ctx = getAudioCtx();
+    var a = Math.max(0, Math.floor(from * buf.sampleRate)), b = Math.min(buf.length, Math.floor(to * buf.sampleRate));
+    var out = ctx.createBuffer(buf.numberOfChannels, Math.max(1, b - a), buf.sampleRate);
+    for (var c = 0; c < buf.numberOfChannels; c++) out.copyToChannel(buf.getChannelData(c).subarray(a, b), c);
+    return out;
+  }
+
+  function bufferToWav(buf) {
+    var n = buf.length, sr = buf.sampleRate;
+    var data = buf.getChannelData(0);
+    var ab = new ArrayBuffer(44 + n * 2), dv = new DataView(ab);
+    function str(o, s) { for (var i = 0; i < s.length; i++) dv.setUint8(o + i, s.charCodeAt(i)); }
+    str(0, 'RIFF'); dv.setUint32(4, 36 + n * 2, true); str(8, 'WAVE'); str(12, 'fmt ');
+    dv.setUint32(16, 16, true); dv.setUint16(20, 1, true); dv.setUint16(22, 1, true);
+    dv.setUint32(24, sr, true); dv.setUint32(28, sr * 2, true); dv.setUint16(32, 2, true); dv.setUint16(34, 16, true);
+    str(36, 'data'); dv.setUint32(40, n * 2, true);
+    for (var i = 0; i < n; i++) dv.setInt16(44 + i * 2, Math.max(-1, Math.min(1, data[i])) * 0x7fff, true);
+    return new Blob([ab], { type: 'audio/wav' });
   }
 
   function refreshVoiceUI() {
-    var mode = state.voice.mode;
-    $('voiceRecordBox').hidden = mode !== 'record';
-    $('voiceUploadBox').hidden = mode !== 'upload';
-    if (mode === 'none') voiceStatus('');
-    else if (state.voice.buffer) {
-      voiceStatus('✔ Đã có giọng đọc (' + fmtTime(state.voice.buffer.duration) + '). Bấm <b>▶ Xem thử</b> để nghe cùng video.' +
-        (state.voice.url ? '<br><audio controls src="' + state.voice.url + '" style="width:100%;margin-top:8px"></audio>' : ''));
-    } else voiceStatus('');
+    document.querySelectorAll('input[name=voiceMode]').forEach(function (r) { r.checked = r.value === state.voiceMode; });
+    $('voiceRecordBox').hidden = state.voiceMode !== 'record';
+    var st = $('voiceStatus');
+    if (state.voiceMode === 'clip') {
+      var n = 0;
+      state.scenes.forEach(function (s) { s.media.forEach(function (m) { if (m.isVideo && m.keepAudio && m.hasAudio) n++; }); });
+      st.hidden = false;
+      st.className = 'notice' + (n ? ' ok' : '');
+      st.innerHTML = n ? '✔ Có ' + n + ' clip giữ tiếng nói gốc. Cảnh có clip nói sẽ dài đúng bằng clip (đã cắt khoảng lặng).' :
+        'Chưa có clip nào có tiếng. Hãy quay hoặc thêm clip ở Bước 3, hoặc chọn “Thu giọng lồng tiếng”.';
+    } else st.hidden = true;
+    var list = $('voiceList');
+    list.innerHTML = '';
+    state.scenes.forEach(function (s, i) {
+      if (!s.voice) return;
+      var d = document.createElement('div');
+      d.innerHTML = '<span>Cảnh ' + (i + 1) + ' · ' + fmtSec(s.voice.buffer.duration) + 's</span><audio controls src="' + s.voice.url + '"></audio>';
+      list.appendChild(d);
+    });
   }
 
   function bindVoice() {
     document.querySelectorAll('input[name=voiceMode]').forEach(function (r) {
       r.addEventListener('change', function () {
         if (!r.checked) return;
-        if (state.voice.mode !== r.value) {
-          state.voice.buffer = null;
-          state.voice.url = '';
-          state.durationsLocked = false;
-        }
-        state.voice.mode = r.value;
+        state.voiceMode = r.value;
+        save();
         refreshVoiceUI();
         schedulePreview();
       });
     });
-    $('voiceInput').addEventListener('change', function (e) {
-      var f = e.target.files[0];
-      if (!f) return;
-      f.arrayBuffer().then(function (ab) { return getAudioCtx().decodeAudioData(ab); }).then(function (buf) {
-        state.voice.buffer = buf;
-        state.voice.url = URL.createObjectURL(f);
-        refreshVoiceUI();
-        schedulePreview();
-      }).catch(function () { toast('Không đọc được file âm thanh này. Hãy thử MP3 hoặc WAV.'); });
-    });
-    $('fitToVoice').addEventListener('change', function (e) { state.voice.fit = e.target.checked; schedulePreview(); });
     $('btnOpenPrompter').onclick = Prompter.open;
   }
 
@@ -465,20 +762,19 @@
     var idx = 0, marks = [], recStart = 0, rec = null, stream = null, chunks = [], timer = null;
     var pending = null, recording = false, endAt = 0;
 
+    function label(i) { return 'Cảnh ' + (i + 1) + (state.scenes[i] && state.scenes[i].title ? ': ' + window.BdsTimeline.cleanTitle(state.scenes[i].title) : ''); }
+
     function show(i) {
-      var lines = state.lines;
-      $('pCounter').textContent = 'Câu ' + (i + 1) + '/' + lines.length;
-      $('pScene').textContent = sceneLabel(i);
-      $('pText').textContent = lines[i] || '';
-      $('pNext').textContent = lines[i + 1] ? 'Tiếp theo: ' + lines[i + 1] : '';
-      $('pNextBtn').textContent = i === lines.length - 1 ? '■ Kết thúc' : 'Câu tiếp ▶';
+      var sc = state.scenes;
+      $('pCounter').textContent = 'Cảnh ' + (i + 1) + '/' + sc.length;
+      $('pScene').textContent = label(i);
+      $('pText').textContent = (sc[i] && sc[i].text) || '';
+      $('pNext').textContent = sc[i + 1] ? 'Tiếp theo: ' + (sc[i + 1].text || '').split('\n')[0] : '';
+      $('pNextBtn').textContent = i === sc.length - 1 ? '■ Kết thúc' : 'Cảnh tiếp ▶';
     }
 
     function reset() {
-      idx = 0;
-      marks = [];
-      recording = false;
-      pending = null;
+      idx = 0; marks = []; recording = false; pending = null;
       clearInterval(timer);
       $('pStart').hidden = false;
       $('pNextBtn').hidden = true;
@@ -490,7 +786,7 @@
     }
 
     function open() {
-      if (state.lines.length !== state.media.length + 2) regenerate(true);
+      if (!state.scenes.length) { toast('Chưa có kịch bản.'); return; }
       $('prompter').hidden = false;
       reset();
     }
@@ -510,15 +806,14 @@
 
     function start() {
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        toast('Trình duyệt không cho dùng micro. Hãy mở bằng Chrome và qua địa chỉ https hoặc file trên máy.', 5000);
+        toast('Trình duyệt không cho dùng micro. Hãy mở bằng Chrome qua địa chỉ https.', 5000);
         return;
       }
       navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true } })
         .then(function (s) {
           stream = s;
           $('pStart').hidden = true;
-          var n = 3;
-          var cd = $('pCountdown');
+          var n = 3, cd = $('pCountdown');
           cd.hidden = false;
           cd.textContent = n;
           var iv = setInterval(function () {
@@ -552,7 +847,7 @@
     function next() {
       if (!recording) return;
       var now = (performance.now() - recStart) / 1000;
-      if (idx >= state.lines.length - 1) {
+      if (idx >= state.scenes.length - 1) {
         endAt = now;
         recording = false;
         clearInterval(timer);
@@ -569,37 +864,34 @@
     function finished() {
       stopStream();
       var blob = new Blob(chunks, { type: rec.mimeType || 'audio/webm' });
-      var url = URL.createObjectURL(blob);
-      $('pAudio').src = url;
+      $('pAudio').src = URL.createObjectURL(blob);
       $('pReview').hidden = false;
       $('pText').textContent = '✔ Thu xong! Nghe lại bên dưới.';
       $('pNext').textContent = '';
       blob.arrayBuffer().then(function (ab) { return getAudioCtx().decodeAudioData(ab); }).then(function (buf) {
-        var durs = marks.map(function (m, i) {
-          var end = i + 1 < marks.length ? marks[i + 1] : endAt + 0.8;
-          return Math.max(1.5, end - m);
+        pending = marks.map(function (m, i) {
+          var end = i + 1 < marks.length ? marks[i + 1] : Math.min(buf.duration, endAt + 0.3);
+          return sliceBuffer(buf, m, end);
         });
-        pending = { buffer: buf, url: url, durations: durs };
       }).catch(function () { toast('Không xử lý được bản thu, vui lòng thu lại.'); });
     }
 
     function use() {
       if (!pending) { toast('Đang xử lý bản thu, chờ một chút rồi bấm lại.'); return; }
-      state.voice.buffer = pending.buffer;
-      state.voice.url = pending.url;
-      state.durations = pending.durations;
-      state.durationsLocked = true;
+      pending.forEach(function (b, i) {
+        if (state.scenes[i]) state.scenes[i].voice = { buffer: b, url: URL.createObjectURL(bufferToWav(b)) };
+      });
       close();
       refreshVoiceUI();
       schedulePreview();
-      toast('Đã lưu giọng đọc. Video đã tự khớp theo giọng của bạn!');
+      toast('Đã lưu giọng đọc cho ' + pending.length + ' cảnh. Video tự khớp theo giọng của bạn!');
     }
 
     function bind() {
       $('pStart').onclick = start;
       $('pNextBtn').onclick = next;
       $('pRetry').onclick = function () { close(); open(); };
-      $('pRetry2').onclick = function () { reset(); };
+      $('pRetry2').onclick = reset;
       $('pUse').onclick = use;
       $('pClose').onclick = close;
       document.addEventListener('keydown', function (e) {
@@ -611,7 +903,7 @@
     return { open: open, bind: bind };
   })();
 
-  /* ---------- Bước 5: nhạc & kiểu video ---------- */
+  /* ---------- Bước 5: hiệu ứng & nhạc ---------- */
 
   function fillSelect(id, map, value, labelKey) {
     var sel = $(id);
@@ -626,20 +918,18 @@
   }
 
   function bindSettings() {
-    var R = window.BdsRender;
-    fillSelect('formatSelect', R.FORMATS, state.settings.format, 'label').addEventListener('change', function (e) {
-      state.settings.format = e.target.value; save(); schedulePreview();
+    var R = window.BdsRender, S = state.settings;
+    function onSet(key) { return function (e) { S[key] = e.target.type === 'checkbox' ? e.target.checked : e.target.value; save(); schedulePreview(); }; }
+    fillSelect('formatSelect', R.FORMATS, S.format, 'label').onchange = onSet('format');
+    fillSelect('themeSelect', R.THEMES, S.theme, 'label').onchange = onSet('theme');
+    fillSelect('transitionSelect', R.TRANSITIONS, S.transition).onchange = onSet('transition');
+    fillSelect('textFxSelect', R.TEXT_FX, S.textFx).onchange = onSet('textFx');
+    fillSelect('moodSelect', window.BdsAudio.MOODS, state.music.mood).onchange = function (e) { state.music.mood = e.target.value; save(); };
+    [['sfxToggle', 'sfx'], ['subToggle', 'subtitles'], ['introToggle', 'introCard'], ['endToggle', 'endCard'], ['priceToggle', 'priceTag'], ['autoTrim', 'autoTrim']].forEach(function (p) {
+      $(p[0]).checked = S[p[1]] !== false;
+      $(p[0]).onchange = function (e) { onSet(p[1])(e); if (p[1] === 'autoTrim') renderShoot(); };
     });
-    fillSelect('themeSelect', R.THEMES, state.settings.theme, 'label').addEventListener('change', function (e) {
-      state.settings.theme = e.target.value; save(); schedulePreview();
-    });
-    fillSelect('transitionSelect', R.TRANSITIONS, state.settings.transition).addEventListener('change', function (e) {
-      state.settings.transition = e.target.value; save(); schedulePreview();
-    });
-    fillSelect('moodSelect', window.BdsAudio.MOODS, state.music.mood).addEventListener('change', function (e) {
-      state.music.mood = e.target.value; save();
-    });
-    $('musicInput').addEventListener('change', function (e) {
+    $('musicInput').onchange = function (e) {
       var f = e.target.files[0];
       if (!f) { state.music.buffer = null; return; }
       f.arrayBuffer().then(function (ab) { return getAudioCtx().decodeAudioData(ab); }).then(function (buf) {
@@ -647,19 +937,15 @@
         state.music.name = f.name;
         toast('Đã dùng nhạc: ' + f.name);
       }).catch(function () { toast('Không đọc được file nhạc này.'); });
-    });
+    };
     var vol = $('musicVol');
     vol.value = state.music.vol;
     $('musicVolLabel').textContent = state.music.vol + '%';
-    vol.addEventListener('input', function () {
+    vol.oninput = function () {
       state.music.vol = +vol.value;
       $('musicVolLabel').textContent = vol.value + '%';
       save();
-    });
-    $('sfxToggle').checked = state.settings.sfx;
-    $('sfxToggle').addEventListener('change', function (e) { state.settings.sfx = e.target.checked; save(); });
-    $('subToggle').checked = state.settings.subtitles;
-    $('subToggle').addEventListener('change', function (e) { state.settings.subtitles = e.target.checked; save(); schedulePreview(); });
+    };
   }
 
   /* ---------- Xem trước & phát ---------- */
@@ -674,13 +960,13 @@
     requestAnimationFrame(function () {
       previewQueued = false;
       if (Player.busy()) return;
-      var r = new window.BdsRender.Renderer(canvas, project());
-      var t = Math.min(previewTime, r.timeline.total - 0.01);
+      var tl = timeline(state.previewKind);
+      var r = new window.BdsRender.Renderer(canvas, tl, project());
+      var t = Math.min(previewTime, tl.total - 0.01);
       r.syncVideos(t, false);
       r.drawFrame(t);
-      $('scrub').value = Math.round(t / r.timeline.total * 1000);
-      $('timeLabel').textContent = fmtTime(t) + ' / ' + fmtTime(r.timeline.total);
-      if (state.step === 3) updateTotal();
+      $('scrub').value = Math.round(t / tl.total * 1000);
+      $('timeLabel').textContent = fmtTime(t) + ' / ' + fmtTime(tl.total);
     });
   }
 
@@ -695,11 +981,12 @@
       running = null;
       cancelAnimationFrame(r.raf);
       r.engine.stopAll();
+      r.engine.detachClips();
       try { r.engine.out.disconnect(); } catch (e) { /* đã ngắt */ }
-      r.renderer.timeline.scenes.forEach(function (s) { if (s.isVideo && s.media) s.media.pause(); });
+      r.renderer.stopVideos();
       if (r.recorder && r.recorder.state !== 'inactive') r.recorder.stop();
+      else if (r.resolve) r.resolve(null);
       $('btnPlay').textContent = '▶ Xem thử';
-      if (r.onStop) r.onStop();
       schedulePreview();
     }
 
@@ -716,102 +1003,120 @@
       return '';
     }
 
-    function scheduleAudio(engine, renderer, t0) {
-      var total = renderer.timeline.total;
-      var scenes = renderer.timeline.scenes;
-      var TR = window.BdsRender.TR;
+    function scheduleAudio(engine, tl, t0) {
       var vol = state.music.vol / 100;
-      var voiceRanges = [];
-      if (state.voice.mode !== 'none' && state.voice.buffer) {
-        engine.playBuffer(state.voice.buffer, t0 + 0.05, engine.voice, { duration: Math.min(state.voice.buffer.duration, total) });
-        voiceRanges.push([0, state.voice.buffer.duration]);
-      }
+      var ranges = [];
+      tl.voices.forEach(function (v) {
+        engine.playBuffer(v.buffer, t0 + v.at, engine.voice);
+        ranges.push([v.at, v.at + v.buffer.duration]);
+      });
+      var attached = [];
+      tl.items.forEach(function (it) {
+        if (!it.audio) return;
+        ranges.push([it.start, it.start + it.duration]);
+        if (attached.indexOf(it.el) === -1) { attached.push(it.el); engine.attachClip(it.el); }
+      });
+      var mood = state.music.mood;
+      if (tl.kind === 'trailer' && mood !== 'none') mood = 'soi-dong';
       if (state.music.buffer) {
-        engine.playBuffer(state.music.buffer, t0, engine.music, { loop: true, duration: total });
-        engine.scheduleMusicVolume(t0, total, 0.6 * vol, voiceRanges);
-      } else if (state.music.mood !== 'none') {
-        engine.scheduleMusic(state.music.mood, t0, total);
-        engine.scheduleMusicVolume(t0, total, 1.6 * vol, voiceRanges);
+        engine.playBuffer(state.music.buffer, t0, engine.music, { loop: true, duration: tl.total });
+        engine.scheduleMusicVolume(t0, tl.total, 0.6 * vol, ranges);
+      } else if (mood !== 'none') {
+        engine.scheduleMusic(mood, t0, tl.total);
+        engine.scheduleMusicVolume(t0, tl.total, 1.6 * vol, ranges);
       }
-      if (state.settings.sfx) {
-        engine.boom(t0 + 0.05);
-        if (state.info.gia) engine.ting(t0 + 1.15);
-        scenes.forEach(function (s, i) {
-          if (i > 0) engine.whoosh(t0 + s.start - TR * 0.85, TR * 1.1);
-          if (s.type === 'media' && s.caption) engine.pop(t0 + s.start + 0.15);
-          if (s.type === 'outro' && state.info.sdt) engine.ting(t0 + s.start + 0.65, 1046.5);
-        });
-      }
-    }
-
-    function play(opts) {
-      opts = opts || {};
-      if (running) { stop(); return; }
-      if (window.speechSynthesis) window.speechSynthesis.cancel();
-      var ctx = getAudioCtx();
-      var fontReady = document.fonts && document.fonts.load ?
-        Promise.all([document.fonts.load('800 40px "Be Vietnam Pro"'), document.fonts.load('500 40px "Be Vietnam Pro"')]).catch(function () {}) :
-        Promise.resolve();
-      return Promise.all([ctx.resume(), fontReady]).then(function () {
-        var renderer = new window.BdsRender.Renderer(canvas, project());
-        var engine = new window.BdsAudio.AudioEngine(ctx);
-        engine.out.connect(ctx.destination);
-        var total = renderer.timeline.total;
-        var recorder = null, chunks = [], mime = '';
-        if (opts.record) {
-          var dest = ctx.createMediaStreamDestination();
-          engine.out.connect(dest);
-          var vstream = canvas.captureStream(30);
-          var stream = new MediaStream(vstream.getVideoTracks().concat(dest.stream.getAudioTracks()));
-          mime = pickMime();
-          recorder = new MediaRecorder(stream, mime ? { mimeType: mime, videoBitsPerSecond: 8000000, audioBitsPerSecond: 192000 } : undefined);
-          recorder.ondataavailable = function (e) { if (e.data.size) chunks.push(e.data); };
-          recorder.onstop = function () {
-            var type = recorder.mimeType || mime || 'video/webm';
-            var blob = new Blob(chunks, { type: type.split(';')[0] });
-            var ready = type.indexOf('webm') !== -1 ? window.WebmFix.fixDuration(blob, total) : Promise.resolve(blob);
-            ready.then(function (b) { if (opts.onDone) opts.onDone(b, type); });
-          };
-        }
-        var t0 = ctx.currentTime + 0.25;
-        scheduleAudio(engine, renderer, t0);
-        renderer.drawFrame(0);
-        if (recorder) recorder.start(500);
-        running = { renderer: renderer, engine: engine, recorder: recorder, raf: 0, onStop: opts.onStop };
-        $('btnPlay').textContent = opts.record ? '⏺ Đang xuất…' : '⏸ Dừng';
-        var my = running;
-        function frame() {
-          if (running !== my) return;
-          var t = ctx.currentTime - t0;
-          var tt = Math.max(0, t);
-          renderer.syncVideos(tt, true);
-          renderer.drawFrame(tt);
-          $('scrub').value = Math.round(tt / total * 1000);
-          $('timeLabel').textContent = fmtTime(tt) + ' / ' + fmtTime(total);
-          if (opts.onProgress) opts.onProgress(Math.min(1, tt / total));
-          if (t >= total + 0.15) {
-            previewTime = 2.4;
-            stop();
-            return;
-          }
-          my.raf = requestAnimationFrame(frame);
-        }
-        my.raf = requestAnimationFrame(frame);
+      tl.sfx.forEach(function (s) {
+        var at = t0 + Math.max(0, s.at);
+        if (s.type === 'whoosh') engine.whoosh(at, 0.75);
+        else if (s.type === 'ting') engine.ting(at, s.freq);
+        else if (s.type === 'pop') engine.pop(at);
+        else if (s.type === 'boom') engine.boom(at);
       });
     }
 
-    return { play: play, stop: stop, busy: busy, pickMime: pickMime };
+    /** Phát dòng thời gian; khi record = true thì ghi lại và trả về file video. */
+    function play(tl, opts) {
+      opts = opts || {};
+      if (running) { stop(); return Promise.resolve(null); }
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      var ctx = getAudioCtx();
+      var fontReady = document.fonts && document.fonts.load ?
+        Promise.all([document.fonts.load('900 40px "Be Vietnam Pro"'), document.fonts.load('700 40px "Be Vietnam Pro"')]).catch(function () {}) :
+        Promise.resolve();
+      return Promise.all([ctx.resume(), fontReady]).then(function () {
+        return new Promise(function (resolve) {
+          var renderer = new window.BdsRender.Renderer(canvas, tl, project());
+          var engine = new window.BdsAudio.AudioEngine(ctx);
+          engine.out.connect(ctx.destination);
+          var total = tl.total;
+          var recorder = null, chunks = [], mime = '';
+          if (opts.record) {
+            var dest = ctx.createMediaStreamDestination();
+            engine.out.connect(dest);
+            var vstream = canvas.captureStream(30);
+            var stream = new MediaStream(vstream.getVideoTracks().concat(dest.stream.getAudioTracks()));
+            mime = pickMime();
+            recorder = new MediaRecorder(stream, mime ? { mimeType: mime, videoBitsPerSecond: 8000000, audioBitsPerSecond: 192000 } : undefined);
+            recorder.ondataavailable = function (e) { if (e.data.size) chunks.push(e.data); };
+            recorder.onstop = function () {
+              var type = recorder.mimeType || mime || 'video/webm';
+              var blob = new Blob(chunks, { type: type.split(';')[0] });
+              var ready = type.indexOf('webm') !== -1 ? window.WebmFix.fixDuration(blob, total) : Promise.resolve(blob);
+              ready.then(function (b) { resolve({ blob: b, type: type }); });
+            };
+          }
+          var t0 = ctx.currentTime + 0.3;
+          scheduleAudio(engine, tl, t0);
+          renderer.drawFrame(0);
+          if (recorder) recorder.start(500);
+          running = { renderer: renderer, engine: engine, recorder: recorder, raf: 0, resolve: recorder ? null : resolve };
+          $('btnPlay').textContent = opts.record ? '⏺ Đang xuất…' : '⏸ Dừng';
+          var my = running;
+          var setGain = function (el, v) { engine.setClipGain(el, v); };
+          function frame() {
+            if (running !== my) return;
+            var t = ctx.currentTime - t0;
+            var tt = Math.max(0, t);
+            renderer.syncVideos(tt, true, setGain);
+            renderer.drawFrame(tt);
+            $('scrub').value = Math.round(tt / total * 1000);
+            $('timeLabel').textContent = fmtTime(tt) + ' / ' + fmtTime(total);
+            if (opts.onProgress) opts.onProgress(Math.min(1, tt / total));
+            if (t >= total + 0.15) {
+              previewTime = 2.4;
+              stop();
+              return;
+            }
+            my.raf = requestAnimationFrame(frame);
+          }
+          my.raf = requestAnimationFrame(frame);
+        });
+      });
+    }
+
+    return { play: play, stop: stop, busy: busy };
   })();
 
   function bindPlayer() {
     $('btnPlay').onclick = function () {
       if (exporting) return;
-      Player.play();
+      if (Player.busy()) { Player.stop(); return; }
+      if (!state.scenes.length) { toast('Chưa có kịch bản. Hãy tạo kịch bản ở Bước 2.'); return; }
+      Player.play(timeline(state.previewKind));
     };
     $('scrub').addEventListener('input', function (e) {
       if (Player.busy()) return;
-      previewTime = e.target.value / 1000 * totalSeconds();
+      previewTime = e.target.value / 1000 * timeline(state.previewKind).total;
       schedulePreview();
+    });
+    document.querySelectorAll('#previewTabs button').forEach(function (b) {
+      b.onclick = function () {
+        if (Player.busy()) Player.stop();
+        state.previewKind = b.dataset.kind;
+        document.querySelectorAll('#previewTabs button').forEach(function (x) { x.classList.toggle('active', x === b); });
+        previewTime = 1.2;
+        schedulePreview();
+      };
     });
   }
 
@@ -821,22 +1126,44 @@
 
   function renderChecklist() {
     var miss = missingInfo();
+    var media = 0, video = 0, empty = 0;
+    state.scenes.forEach(function (s) {
+      media += s.media.length;
+      s.media.forEach(function (m) { if (m.isVideo) video++; });
+      if (!s.media.length) empty++;
+    });
+    var voiced = state.scenes.filter(function (s) { return s.voice; }).length;
     var items = [
-      [!miss.length, miss.length ? 'Thiếu thông tin: ' + miss.map(function (k) { return REQUIRED[k]; }).join(', ') : 'Thông tin căn nhà đã đủ'],
-      [state.media.length > 0, state.media.length + ' ảnh/clip'],
-      [state.lines.length > 0, 'Kịch bản ' + state.lines.length + ' cảnh, dài khoảng ' + Math.round(totalSeconds()) + ' giây'],
-      [true, state.voice.mode !== 'none' && state.voice.buffer ? 'Có giọng đọc' : 'Không có giọng đọc (chỉ nhạc và phụ đề)'],
+      [!miss.length, miss.length ? 'Thiếu thông tin: ' + miss.map(function (k) { return REQUIRED[k]; }).join(', ') : 'Thông tin dự án đã đủ'],
+      [state.scenes.length > 0, 'Kịch bản ' + state.scenes.length + ' cảnh'],
+      [media > 0, media + ' ảnh/clip (' + video + ' clip)' + (empty ? ' · ' + empty + ' cảnh chưa có hình, sẽ hiện chữ trên nền màu' : '')],
+      [true, state.voiceMode === 'record' ? 'Giọng lồng tiếng: ' + voiced + '/' + state.scenes.length + ' cảnh' :
+        state.voiceMode === 'clip' ? 'Giọng: tiếng nói trong clip quay' : 'Không có giọng đọc'],
       [true, 'Nhạc: ' + (state.music.buffer ? state.music.name : window.BdsAudio.MOODS[state.music.mood])],
       [true, 'Khung hình: ' + window.BdsRender.FORMATS[state.settings.format].label]
     ];
-    $('checklist').innerHTML = items.map(function (it) {
-      return '<div>' + (it[0] ? '✅' : '⚠️') + ' ' + it[1] + '</div>';
-    }).join('');
+    $('checklist').innerHTML = items.map(function (it) { return '<div>' + (it[0] ? '✅' : '⚠️') + ' ' + it[1] + '</div>'; }).join('');
+    try {
+      $('durFull').textContent = '· ' + fmtTime(timeline('full').total);
+      $('durTrailer').textContent = '· ' + fmtTime(timeline('trailer').total);
+    } catch (e) { /* chưa có cảnh */ }
   }
 
   function slug(s) {
     return (s || 'video-bds').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/gi, 'd')
       .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'video-bds';
+  }
+
+  function addResult(title, res) {
+    var ext = res.type.indexOf('mp4') !== -1 ? 'mp4' : 'webm';
+    var url = URL.createObjectURL(res.blob);
+    var name = slug(state.info.ten || state.info.loai) + '-' + slug(title) + '-' + state.settings.format.replace(':', 'x') + '.' + ext;
+    var card = document.createElement('div');
+    card.className = 'result-card';
+    card.innerHTML = '<b>' + esc(title) + '</b><video controls playsinline src="' + url + '"></video>' +
+      '<a class="btn accent" download="' + name + '" href="' + url + '">⬇️ Tải về (' + ext.toUpperCase() + ', ' + (res.blob.size / 1048576).toFixed(1) + ' MB)</a>';
+    $('exportResults').appendChild(card);
+    return ext;
   }
 
   function doExport() {
@@ -845,51 +1172,48 @@
       toast('Trình duyệt này chưa hỗ trợ xuất video. Hãy dùng Google Chrome hoặc Microsoft Edge bản mới.', 5000);
       return;
     }
-    if (state.lines.length !== state.media.length + 2) regenerate(true);
+    if (!state.scenes.length) { toast('Chưa có kịch bản.'); return; }
+    var jobs = [];
+    if ($('outFull').checked) jobs.push({ title: 'Video đầy đủ', tl: function () { return timeline('full'); } });
+    if ($('outTrailer').checked) jobs.push({ title: 'Trailer', tl: function () { return timeline('trailer'); } });
+    if ($('outScenes').checked) state.scenes.forEach(function (s, i) {
+      jobs.push({ title: 'Cảnh ' + (i + 1) + ' ' + window.BdsTimeline.cleanTitle(s.title), tl: function () { return timeline('scene', i); } });
+    });
+    if (!jobs.length) { toast('Hãy chọn ít nhất một bản cần xuất.'); return; }
     if (Player.busy()) Player.stop();
     exporting = true;
     $('btnExport').disabled = true;
-    $('exportResult').hidden = true;
-    var prog = $('exportProgress');
+    $('exportResults').innerHTML = '';
+    var prog = $('exportProgress'), bar = prog.querySelector('.bar'), label = prog.querySelector('span');
     prog.hidden = false;
-    var bar = prog.querySelector('.bar');
-    var label = prog.querySelector('span');
-    bar.style.width = '0%';
-    label.textContent = 'Đang chuẩn bị…';
-    Player.play({
-      record: true,
-      onProgress: function (p) {
-        bar.style.width = Math.round(p * 100) + '%';
-        label.textContent = 'Đang xuất video… ' + Math.round(p * 100) + '% (đừng chuyển tab)';
-      },
-      onStop: function () {
-        label.textContent = 'Đang hoàn tất file…';
-      },
-      onDone: function (blob, type) {
-        exporting = false;
-        $('btnExport').disabled = false;
-        prog.hidden = true;
-        var ext = type.indexOf('mp4') !== -1 ? 'mp4' : 'webm';
-        var url = URL.createObjectURL(blob);
-        $('resultVideo').src = url;
-        var a = $('downloadLink');
-        a.href = url;
-        a.download = slug(state.info.ten || state.info.loai) + '-' + state.settings.format.replace(':', 'x') + '.' + ext;
-        $('resultNote').textContent = 'File ' + ext.toUpperCase() + ', ' + (blob.size / 1048576).toFixed(1) + ' MB. ' +
-          (ext === 'webm' ? 'Định dạng WebM đăng được lên YouTube, Facebook và TikTok (bản web). Nếu cần MP4, hãy dùng Chrome hoặc Edge bản mới nhất.' :
-            'Đăng được ngay lên TikTok, Facebook, YouTube và Zalo.');
-        $('exportResult').hidden = false;
-        toast('🎉 Xuất video xong! Bấm “Tải video về máy”.', 5000);
-      }
+    var lastExt = 'mp4';
+    var chain = Promise.resolve();
+    jobs.forEach(function (job, ji) {
+      chain = chain.then(function () {
+        bar.style.width = '0%';
+        label.textContent = 'Đang chuẩn bị ' + job.title + '…';
+        return Player.play(job.tl(), {
+          record: true,
+          onProgress: function (p) {
+            bar.style.width = Math.round(p * 100) + '%';
+            label.textContent = '(' + (ji + 1) + '/' + jobs.length + ') ' + job.title + ': ' + Math.round(p * 100) + '% · đừng chuyển tab';
+          }
+        }).then(function (res) { if (res) lastExt = addResult(job.title, res); });
+      });
+    });
+    chain.then(function () {
+      toast('🎉 Xuất xong ' + jobs.length + ' video! Bấm “Tải về” dưới mỗi video.' +
+        (lastExt === 'webm' ? ' (File WebM đăng được YouTube, Facebook, TikTok bản web.)' : ''), 6000);
     }).catch(function (e) {
+      toast('Có lỗi khi xuất video: ' + (e && e.message ? e.message : e), 6000);
+    }).then(function () {
       exporting = false;
       $('btnExport').disabled = false;
       prog.hidden = true;
-      toast('Có lỗi khi xuất video: ' + (e && e.message ? e.message : e), 6000);
     });
   }
 
-  /* ---------- Hướng dẫn & dữ liệu mẫu ---------- */
+  /* ---------- Hướng dẫn & mẫu ---------- */
 
   function bindHelp(seen) {
     var m = $('helpModal');
@@ -900,18 +1224,26 @@
   }
 
   function loadDemo(key) {
-    key = typeof key === 'string' ? key : 'mau';
-    setInfo(window.BdsDemo.PRESETS[key].info);
-    window.BdsDemo.makeImages(key, function (items) {
-      state.media = items;
-      state.lines = [];
-      state.durations = [];
-      state.durationsLocked = false;
-      renderMedia();
-      regenerate(true);
+    var preset = window.BdsDemo.PRESETS[key];
+    setInfo(preset.info);
+    window.BdsDemo.makeImages(key, function (images) {
+      if (preset.script) {
+        state.scenes = preset.script.map(function (sc) {
+          var media = (sc.images || []).map(function (k) { return { el: images[k].el, isVideo: false, url: images[k].url, name: k }; });
+          return newScene({ title: sc.title, text: sc.text, bigText: sc.bigText, shotNote: sc.shotNote, media: media });
+        });
+        state.voiceMode = 'none';
+      } else {
+        var items = Object.keys(images).map(function (k) { return { el: images[k].el, isVideo: false, url: images[k].url, name: k, caption: images[k].caption }; });
+        state.scenes = quickScenes(items);
+      }
+      state.variant = 0;
+      refreshVoiceUI();
+      renderScenes();
+      save();
       previewTime = 2.4;
       schedulePreview();
-      toast('Đã nạp dữ liệu mẫu! Bấm ▶ Xem thử, hoặc “Tiếp tục” để xem từng bước.', 4500);
+      toast('Đã nạp mẫu! Bấm ▶ Xem thử, chuyển qua lại “Video đầy đủ / Trailer”, hoặc bấm “Tiếp tục” để xem từng bước.', 5000);
     });
   }
 
@@ -922,10 +1254,10 @@
     var seen = load();
     renderStepper();
     bindInfo();
-    bindMedia();
     bindScript();
     bindVoice();
     Prompter.bind();
+    Camera.bind();
     bindSettings();
     bindPlayer();
     bindHelp(seen);
@@ -934,16 +1266,33 @@
     $('btnPrev').onclick = function () { goStep(state.step - 1); };
     $('btnNext').onclick = function () { goStep(state.step + 1); };
     $('btnExport').onclick = doExport;
+    refreshVoiceUI();
     showStep();
     schedulePreview();
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedulePreview);
+    // Cài thành ứng dụng (chỉ khi mở qua địa chỉ web https)
+    if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+      navigator.serviceWorker.register('sw.js').catch(function () {});
+    }
+    var installPrompt = null;
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault();
+      installPrompt = e;
+      $('btnInstall').hidden = false;
+    });
+    $('btnInstall').onclick = function () {
+      if (!installPrompt) return;
+      installPrompt.prompt();
+      installPrompt.userChoice.then(function () { installPrompt = null; $('btnInstall').hidden = true; });
+    };
+    window.addEventListener('appinstalled', function () { $('btnInstall').hidden = true; toast('Đã cài ứng dụng! Mở từ màn hình chính hoặc menu Start.'); });
     window.addEventListener('beforeunload', function (e) {
       if (exporting) { e.preventDefault(); e.returnValue = ''; }
     });
   }
 
   // Cho phép kiểm thử tự động truy cập trạng thái
-  window.BdsApp = { state: state, goStep: goStep, loadDemo: loadDemo, Player: Player, project: project };
+  window.BdsApp = { state: state, goStep: goStep, loadDemo: loadDemo, Player: Player, project: project, timeline: timeline, createMedia: createMedia };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
