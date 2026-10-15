@@ -28,6 +28,9 @@ strong{font-weight:600}
 .btn{display:inline-block;background:linear-gradient(135deg,#D9BE8C 0%,#B8935A 55%,#9C7A45 100%);color:#fff;font-family:"Be Vietnam Pro",Arial,sans-serif;font-weight:700;font-size:16px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;padding:20px 40px;border-radius:2px;border:0;cursor:pointer;box-shadow:0 12px 30px rgba(184,147,90,.38)}
 .micro{display:block;font-size:13px;color:var(--muted);margin-top:14px;letter-spacing:.5px}
 .cta-row{text-align:center;margin-top:44px}
+.quick{background:var(--ivory);max-width:720px;margin:6px auto 0;padding:26px 30px 30px;text-align:left}
+.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 22px}
+.quick .btn{width:100%;margin-top:22px}
 .contact{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:22px}
 .contact a{display:inline-block;min-width:170px;text-align:center;text-decoration:none;font-weight:600;font-size:14px;letter-spacing:1px;text-transform:uppercase;padding:14px 22px;border:1px solid rgba(217,190,140,.7);color:#fff}
 .contact a.call{background:#B8935A;border-color:#B8935A}
@@ -178,6 +181,8 @@ footer b{color:#fff;font-weight:500}
 footer a{color:var(--gold-l);text-decoration:none}
 
 @media (max-width:768px){
+  .quick{padding:20px 18px 22px}
+  .quick-grid{grid-template-columns:1fr}
   .contact a{min-width:0;flex:1 1 30%;padding:13px 8px;font-size:12.5px}
   .offer{font-size:12.5px}
   body{font-size:16px}
@@ -223,7 +228,15 @@ footer a{color:var(--gold-l);text-decoration:none}
     <p class="sub">Căn hộ khách sạn Hải Minh – tòa tháp 30 tầng trên trục biển Võ Nguyên Giáp, đối diện Silver Shores. Nơi mỗi ngày đều là một kỳ nghỉ, và mỗi kỳ nghỉ đều có thể mang lại thu nhập.</p>
     <div class="actions">
       <span class="offer">Đăng ký sớm · Nhận trọn bộ: bảng giá · mặt bằng · bảng tính dòng tiền</span><br>
-      <a class="btn" href="#dang-ky">Nhận bảng giá &amp; chọn căn view đẹp →</a>
+      <div class="quick">
+        <form>
+          <div class="quick-grid">
+            <div><label for="q-name">Họ và tên</label><input id="q-name" name="name" type="text" placeholder="Nguyễn Văn A" required></div>
+            <div><label for="q-phone">Điện thoại / Zalo</label><input id="q-phone" name="phone" type="tel" placeholder="09xx xxx xxx" required></div>
+          </div>
+          <button class="btn" type="submit">Nhận bảng giá &amp; chọn căn view đẹp →</button>
+        </form>
+      </div>
       <span class="micro">Chỉ 15 giây · Miễn phí · Gửi riêng qua Zalo</span>
       <div class="contact">
         <a class="call" href="tel:0904567009">Gọi ngay</a>
