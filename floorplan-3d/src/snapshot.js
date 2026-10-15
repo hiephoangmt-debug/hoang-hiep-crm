@@ -12,7 +12,7 @@ function roundRect(x, X, Y, w, h, r) {
  * keepRatio: true khi đang path tracing (không đổi độ phân giải để khỏi mất các lượt đã tích luỹ);
  * title / lines / note: chữ ở khung tên.
  */
-export function exportImage({ renderer, scene, camera, render, keepRatio = false, scale = 2, title = '', lines = [], note = '', callouts = null, plan = null, frame = null }) {
+export function exportImage({ renderer, scene, camera, render, keepRatio = false, scale = 2, title = '', lines = [], note = '', callouts = null, plan = null, frame = null, focus = null }) {
   // frame: { W, H, side, band, s } – khung ảnh cố định (vd. 5:6); người gọi đã render vào canvas cỡ (W − 2·side) × (H − band)
   let W, H, s, band, side, src = renderer.domElement;
   const p0 = renderer.getPixelRatio();
@@ -26,10 +26,27 @@ export function exportImage({ renderer, scene, camera, render, keepRatio = false
   const x = c.getContext('2d');
   x.fillStyle = '#ffffff'; x.fillRect(0, 0, c.width, c.height);
   x.fillStyle = '#dcdcdc'; x.fillRect(0, 0, c.width, H);
-  // Ảnh render: vừa khít vùng giữa (cắt bớt nếu khác tỉ lệ – khi đang path tracing không đổi được cỡ khung)
-  const sc = Math.max(W / src.width, H / src.height), dw = src.width * sc, dh = src.height * sc;
-  x.drawImage(src, side + (W - dw) / 2, (H - dh) / 2, dw, dh);
-  const crop = { ox: side + (W - dw) / 2, oy: (H - dh) / 2, sc };
+  // Ảnh render: thu trọn vào vùng giữa (khi đang path tracing không đổi được cỡ khung nên không cắt, chừa nền)
+  // focus: các điểm 3D cần giữ trong ảnh (góc căn) → chỉ lấy vùng quanh chúng rồi phóng cho vừa khung
+  let sx = 0, sy = 0, sw = src.width, sh = src.height;
+  if (focus) {
+    const q = new THREE.Vector3();
+    const pts = focus.map((p) => { q.set(p.x, p.y, p.z).project(camera); return [(q.x * 0.5 + 0.5) * src.width, (-q.y * 0.5 + 0.5) * src.height]; });
+    const x0 = Math.min(...pts.map((p) => p[0])), x1 = Math.max(...pts.map((p) => p[0])), y0 = Math.min(...pts.map((p) => p[1])), y1 = Math.max(...pts.map((p) => p[1]));
+    let w = (x1 - x0) * 1.12, h = (y1 - y0) * 1.12;
+    if (w / h < W / H) w = h * W / H; else h = w * H / W; // giữ đúng tỉ lệ vùng giữa
+    sx = (x0 + x1) / 2 - w / 2; sy = (y0 + y1) / 2 - h / 2; sw = w; sh = h;
+  }
+  const sc = Math.min(W / sw, H / sh), dw = sw * sc, dh = sh * sc;
+  if (focus) {
+    // vùng lấy có thể vượt khỏi khung render → tô trước bằng đúng màu nền ảnh render (lấy ở góc)
+    const t = document.createElement('canvas'); t.width = t.height = 1;
+    const tx = t.getContext('2d'); tx.drawImage(src, 2, 2, 1, 1, 0, 0, 1, 1);
+    const d = tx.getImageData(0, 0, 1, 1).data;
+    x.fillStyle = `rgb(${d[0]},${d[1]},${d[2]})`; x.fillRect(0, 0, c.width, H);
+  }
+  x.drawImage(src, sx, sy, sw, sh, side + (W - dw) / 2, (H - dh) / 2, dw, dh);
+  const crop = { ox: side + (W - dw) / 2 - sx * sc, oy: (H - dh) / 2 - sy * sc, sc };
   if (k !== 1) { renderer.setPixelRatio(p0); render(1); }
   const v = new THREE.Vector3();
   const toScreen = (p) => { v.set(p.x, p.y, p.z).project(camera); return { x: crop.ox + (v.x * 0.5 + 0.5) * src.width * crop.sc, y: crop.oy + (-v.y * 0.5 + 0.5) * src.height * crop.sc }; };
