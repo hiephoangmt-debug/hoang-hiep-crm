@@ -206,18 +206,46 @@
   }
 
   /** Gom đoạn nói của một clip thành từng câu (ngắt ở chỗ ngừng dài). */
+  var FILLER = /^(à|ạ|ừ|ừm|ờ|ơ|ơ|um|uh|ừa|ê|thì|là)$/;
+
+  /**
+   * Vấp rồi nói lại ngay trong một hơi ("Có 1,6 tỷ mà… Có 1,6 tỷ mà muốn sở hữu…"):
+   * tìm chỗ bắt đầu lặp lại cụm 3 chữ đầu câu, trả về vị trí bắt đầu lần nói sau cùng.
+   */
+  function restartIndex(ws) {
+    var t = ws.map(function (w) { return norm(w.w); });
+    var cut = 0;
+    for (var k = 1; k + 2 < t.length; k++) {
+      for (var j = cut; j <= Math.min(cut + 2, k - 1); j++) {
+        if (t[k] && t[k] === t[j] && t[k + 1] === t[j + 1] && t[k + 2] === t[j + 2]) { cut = k; break; }
+      }
+    }
+    return cut;
+  }
+
+  /** Gom đoạn nói của một clip thành từng câu (ngắt ở chỗ ngừng dài), bỏ phần vấp trước khi nói lại. */
   function utterances(clip, longPause) {
     var groups = groupScenes(clip.segments, { longPause: longPause || 0.7, maxScene: 30 });
     return groups.map(function (segs) {
       var a = segs[0][0], b = segs[segs.length - 1][1];
       var ws = clip.words ? wordsInRange(clip.words, a, b) : [];
-      return { clip: clip, segs: segs, start: a, end: b, text: ws.map(function (w) { return w.w; }).join(' ') };
+      var cut = restartIndex(ws), restarted = false;
+      if (cut > 0) {
+        var from = Math.max(a, ws[cut].t0 - 0.12);
+        ws = ws.slice(cut);
+        segs = segs.filter(function (sg) { return sg[1] > from; }).map(function (sg) { return [Math.max(sg[0], from), sg[1]]; });
+        a = from;
+        restarted = true;
+      }
+      var fillers = ws.filter(function (w) { return FILLER.test(norm(w.w)); }).length;
+      return { clip: clip, segs: segs, start: a, end: b, text: ws.map(function (w) { return w.w; }).join(' '), fillers: fillers, restarted: restarted };
     });
   }
 
   /**
    * Gán từng câu nói vào cảnh khớp nhất. Câu không khớp cảnh nào (nói hỏng, nói ngoài lề) bị bỏ.
-   * Nhiều lần nói cùng một ý trong một cảnh: giữ lần nói sau cùng (thường là bản quay lại tốt hơn).
+   * Nhiều lần nói cùng một ý (quay liền, nói lại nhiều lần): giữ lần nói HAY NHẤT —
+   * đủ câu nhất, đúng kịch bản nhất, ít "à, ừm" nhất; ngang nhau thì lấy lần sau.
    */
   function matchUtterances(utts, scenes) {
     var result = scenes.map(function () { return []; });
@@ -232,15 +260,29 @@
       if (bs && bs.score >= 0.3 && tokens(u.text).length >= 2) { u.sim = bs; result[best].push(u); }
       else dropped.push(u);
     });
+    var overlaps = function (u, v) {
+      var ov = Math.min(u.sim.to, v.sim.to) - Math.max(u.sim.from, v.sim.from);
+      var span = Math.max(1, Math.min(u.sim.to - u.sim.from, v.sim.to - v.sim.from));
+      return ov / span > 0.5;
+    };
+    var nUtt = Math.max(1, utts.length);
     result = result.map(function (list) {
-      // Bỏ bản nói trước nếu bị nói lại gần như y hệt sau đó
-      var keep = list.filter(function (u) {
-        return !list.some(function (v) {
-          if (v === u || v.order < u.order) return false;
-          var overlap = Math.min(u.sim.to, v.sim.to) - Math.max(u.sim.from, v.sim.from);
-          var span = Math.max(1, Math.min(u.sim.to - u.sim.from, v.sim.to - v.sim.from));
-          return overlap / span > 0.6;
-        });
+      // Gom các lần nói cùng một ý thành nhóm, mỗi nhóm giữ một lần hay nhất
+      var groups = [];
+      list.forEach(function (u) {
+        var g = groups.filter(function (gr) { return gr.some(function (v) { return overlaps(u, v); }); })[0];
+        if (g) g.push(u); else groups.push([u]);
+      });
+      var keep = groups.map(function (g) {
+        if (g.length === 1) return g[0];
+        var lo = Math.min.apply(null, g.map(function (u) { return u.sim.from; }));
+        var hi = Math.max.apply(null, g.map(function (u) { return u.sim.to; }));
+        var score = function (u) {
+          var cover = (u.sim.to - u.sim.from) / Math.max(1, hi - lo);
+          var words = Math.max(1, tokens(u.text).length);
+          return u.sim.score * 0.45 + cover * 0.4 - (u.fillers || 0) / words * 0.5 + (u.order / nUtt) * 0.08;
+        };
+        return g.slice().sort(function (x, y) { return score(y) - score(x); })[0];
       });
       list.forEach(function (u) { if (keep.indexOf(u) === -1) { u.retake = true; dropped.push(u); } });
       return keep.sort(function (x, y) { return x.sim.pos - y.sim.pos || x.order - y.order; });

@@ -616,9 +616,15 @@
       if (failed.length) lines.push('<div class="warn">⚠️ Không mở được ' + failed.length + ' video: ' + esc(failed.join(', ')) +
         '. Thường do video iPhone định dạng HEVC. Cách sửa: dùng Chrome bản mới, hoặc trên iPhone vào Cài đặt → Camera → Định dạng → chọn “Tương thích nhất” rồi quay lại.</div>');
       if (noAudio.length) lines.push('<div class="muted">🔇 Không có tiếng (dùng làm cảnh quay phủ lên): ' + esc(noAudio.filter(function (x, i) { return noAudio.indexOf(x) === i; }).join(', ')) + '. Nếu đây là clip có người nói, hãy đổi sang file MP4.</div>');
-      if (dropped.length) {
+      var restarts = 0;
+      perScene.forEach(function (l) { l.forEach(function (u) { if (u.restarted) restarts++; }); });
+      if (dropped.length || restarts) {
         var retakes = dropped.filter(function (u) { return u.retake; }).length;
-        lines.push('<div class="muted">✂️ Đã bỏ ' + dropped.length + ' đoạn nói không đúng kịch bản' + (retakes ? ' (trong đó ' + retakes + ' đoạn nói hỏng đã được quay lại)' : '') + '.</div>');
+        var parts = [];
+        if (retakes) parts.push('bỏ ' + retakes + ' lần nói trùng (giữ lần nói hay nhất)');
+        if (dropped.length - retakes) parts.push('bỏ ' + (dropped.length - retakes) + ' đoạn nói ngoài kịch bản');
+        if (restarts) parts.push('cắt ' + restarts + ' chỗ vấp đầu câu');
+        lines.push('<div class="muted">✂️ Đã ' + parts.join(', ') + '.</div>');
       }
       if (!asrOk && clips.length) lines.push('<div class="muted">ℹ️ Clip được xếp theo thứ tự tên file. Kiểm tra lại bên dưới, dùng ô “Chuyển sang cảnh” nếu cần.</div>');
       $('assembleReport').innerHTML = lines.join('');
