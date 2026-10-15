@@ -14,6 +14,7 @@ import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
 import { buildScene, disposeTree, SHARED } from './builder.js';
 import { upgradeFurniture, loadInteriorHDRI } from './realistic.js';
 import { resolvePalette } from './styles.js';
+import { exportImage } from './snapshot.js';
 import { getTexture } from './textures.js';
 import { closestOnSegment, rotatePoint, labelPoint, polygonArea, pointInPolygon, pointInRotRect } from './geom.js';
 import { CATALOG_MAP } from './furniture.js';
@@ -791,6 +792,23 @@ export class Viewer3D {
     if (this.ptActive) { this.pt.renderSample(); return this.renderer.domElement.toDataURL('image/png'); }
     if (this.state.ao || this.bloom.enabled) this.composer.render(); else this.renderer.render(this.scene, this.camera);
     return this.renderer.domElement.toDataURL('image/png');
+  }
+
+  /** Tải ảnh PNG nét cao của khung 3D; nhìn từ trên thì kèm tên + diện tích phòng */
+  exportPNG(info = {}) {
+    const above = this.camera.position.y > (this.built?.height || 2.8) + 1;
+    const showLabels = above && this.mode !== 'walk';
+    const prev = this.built.labels.map((l) => l.visible);
+    if (showLabels) this.built.labels.forEach((l) => (l.visible = true));
+    const render = () => {
+      if (this.ptActive) { this.pt.renderSample(); return; }
+      this.composer.setPixelRatio(this.renderer.getPixelRatio());
+      if (this.state.ao || this.bloom.enabled) this.composer.render(); else this.renderer.render(this.scene, this.camera);
+    };
+    this.labelRenderer.render(this.scene, this.camera);
+    const out = exportImage({ renderer: this.renderer, scene: this.scene, camera: this.camera, render, keepRatio: this.ptActive, ...info });
+    this.built.labels.forEach((l, i) => (l.visible = prev[i]));
+    return out;
   }
 
   async exportGLB() {

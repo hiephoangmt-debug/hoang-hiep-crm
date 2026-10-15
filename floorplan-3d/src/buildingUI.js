@@ -81,6 +81,7 @@ function renderBPanel() {
     <h4>Lọc loại căn</h4>
     <select id="bType"><option value="">Tất cả loại căn</option>${Object.keys(TYPE_COLORS).map((t) => `<option ${bview?.filter.type === t ? 'selected' : ''}>${t}</option>`).join('')}</select>
     <button id="bPlan" class="primary">🗺 Mặt bằng tầng chi tiết (3D)</button>
+    <button id="bSave">⬇ Tải ảnh khung 3D (PNG)</button>
     <div class="row seg"><button data-shops="1" class="${bview?.shopsMode === 1 ? 'active' : ''}">🛍️ Shop tầng 1</button><button data-shops="2" class="${bview?.shopsMode === 2 ? 'active' : ''}">🏊 Tầng 2 + hồ bơi</button></div>
     ${bview?.shopsMode ? '<button data-shops="0">↩ Hiện lại cả tòa</button>' : ''}
     <h4>Ngắm theo cao độ tầng</h4>
@@ -107,6 +108,11 @@ function renderBPanel() {
     renderBPanel();
   };
   $$('#bpanel [data-shops]').forEach((x) => (x.onclick = () => { bview.showShops(+x.dataset.shops); renderBPanel(); }));
+  $('#bSave').onclick = async () => {
+    const fl = bview.onlyFloor !== null ? `Mặt bằng tầng ${floors[bview.onlyFloor].replace(/^0/, '')}` : bview.shopsMode === 1 ? 'Shop tầng 1' : bview.shopsMode === 2 ? 'Tầng 2 – thương mại & hồ bơi' : 'Phối cảnh tòa nhà';
+    const blob = await bview.exportPNG({ title: `${building.name} · ${fl}`, lines: [`${floors.length} tầng ở`, 'Four S Tower', 'Đường Nguyễn Phước Lan – Minh Mạng'] });
+    H.download(blob, `toa-f2-${fl.toLowerCase().replace(/[^a-z0-9]+/gi, '-')}.png`);
+  };
   $('#b360Tour').onclick = () => open360Tour();
   $('#b360Site').onclick = () => bview.showSitePano(renderBPanel);
   if ($('#b360Load')) $('#b360Load').onclick = () => $('#b360File').click();
