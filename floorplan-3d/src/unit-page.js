@@ -15,7 +15,7 @@ let unit = null;
 let tab = '3d';
 let viewer = null;
 // Mặt cắt kiểu phối cảnh bán hàng: cắt tường ở 2 m, bỏ trần để nhìn rõ bố trí
-const CUT_H = 2.0;
+const CUT_H = 2.4;
 let section = true;
 function applySection() {
   const H = viewer.built?.height || 2.8;
@@ -42,7 +42,9 @@ function selectUnit(id) {
   renderInfo();
   if (!viewer) {
     viewer = new Viewer3D($('#viewer'), store);
-    viewer.state.people = true;
+    viewer.state.people = false;
+    viewer.state.labels = false;
+    viewer.isoView = { az: -38, el: 52, k: 1.2 };
     viewer.state.realistic = true;
     viewer.setRealistic(true);
     viewer.setOption('landscape', false);
@@ -151,6 +153,11 @@ $('#photoBtn').onclick = () => {
   $('#caption').hidden = false;
   $('#caption').innerHTML = 'Đang chuẩn bị ảnh như thật…';
   viewer.startRealRender().catch((err) => { toast('Máy này chưa hỗ trợ chụp ảnh như thật: ' + err.message, 5000); viewer.stopRealRender(); });
+};
+$('#labelBtn').onclick = () => {
+  const on = !viewer.state.labels;
+  viewer.setOption('labels', on);
+  $('#labelBtn').classList.toggle('active', on);
 };
 $('#peopleBtn').onclick = () => {
   const on = !viewer.state.people;

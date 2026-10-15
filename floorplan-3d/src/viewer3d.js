@@ -13,6 +13,7 @@ import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
 import { buildScene, disposeTree, SHARED } from './builder.js';
 import { upgradeFurniture, loadInteriorHDRI } from './realistic.js';
+import { resolvePalette } from './styles.js';
 import { getTexture } from './textures.js';
 import { closestOnSegment, rotatePoint, labelPoint, polygonArea, pointInPolygon, pointInRotRect } from './geom.js';
 import { CATALOG_MAP } from './furniture.js';
@@ -148,7 +149,7 @@ export class Viewer3D {
     this._above = undefined;
     if (this.ptActive) this.stopRealRender();
     built.labels.forEach((l) => (l.visible = this.state.labels));
-    if (this.state.realistic) upgradeFurniture(built, [this.clipPlane]);
+    if (this.state.realistic) upgradeFurniture(built, [this.clipPlane], resolvePalette(this.store.plan.settings));
     this.fitShadow();
     this.applyLights();
     this.applyDoors(1);
@@ -524,7 +525,13 @@ export class Viewer3D {
     let pos;
     if (preset === 'top') pos = new THREE.Vector3(b.cx, s * 1.55 + 4, b.cy + 0.01);
     else if (preset === 'front') pos = new THREE.Vector3(b.cx, s * 0.35 + 1.5, b.maxY + s * 1.0 + 3);
-    else pos = this.isStudio() ? new THREE.Vector3(b.cx + s * 0.05, s * 1.3 + 2.5, b.maxY + s * 0.32 + 1) : new THREE.Vector3(b.cx + s * 0.08, s * 1.85 + 5, b.maxY + s * 0.45 + 1.5);
+    else if (this.isoView) {
+      // Góc nhìn chéo kiểu phối cảnh bán hàng: từ phía mặt tiền, lệch trái, chúc xuống
+      const { az, el, k = 1 } = this.isoView;
+      const d = (s * 1.45 + 3.5) * k, A = THREE.MathUtils.degToRad(az), E = THREE.MathUtils.degToRad(el);
+      target.z = b.cy + s * 0.12; // dời tâm về phía mặt tiền để căn nằm cao hơn thanh công cụ
+      pos = target.clone().add(new THREE.Vector3(Math.sin(A) * Math.cos(E), Math.sin(E), Math.cos(A) * Math.cos(E)).multiplyScalar(d));
+    } else pos = this.isStudio() ? new THREE.Vector3(b.cx + s * 0.05, s * 1.3 + 2.5, b.maxY + s * 0.32 + 1) : new THREE.Vector3(b.cx + s * 0.08, s * 1.85 + 5, b.maxY + s * 0.45 + 1.5);
     this.flyTo(pos, target, smooth);
   }
 

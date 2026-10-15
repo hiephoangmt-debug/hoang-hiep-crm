@@ -42,6 +42,20 @@ function wallMatrix(w) {
   return m;
 }
 
+/** UV theo mét (ngang = dọc tường, dọc = chiều cao) để vân ốp tường không bị kéo giãn */
+function meterUV(g) {
+  const p = g.attributes.position, n = g.attributes.normal, uv = g.attributes.uv;
+  for (let i = 0; i < p.count; i++) {
+    const nx = Math.abs(n.getX(i)), ny = Math.abs(n.getY(i));
+    if (ny > 0.5) uv.setXY(i, p.getX(i), p.getZ(i));
+    else if (nx > 0.5) uv.setXY(i, p.getZ(i), p.getY(i));
+    else uv.setXY(i, p.getX(i), p.getY(i));
+  }
+  uv.needsUpdate = true;
+}
+
+const isRailing = (op) => op.type === 'window' && (op.sill || 0) <= 0.1 && op.height <= 1.3;
+
 function wallPieces(w, ops, H) {
   const L = wallLength(w);
   const t = w.thickness;
@@ -52,7 +66,8 @@ function wallPieces(w, ops, H) {
     const s = Math.max(r[0], cur), e = Math.max(r[1], s);
     if (s > cur + 1e-4) pieces.push([cur, s, 0, H]);
     const sill = Math.max(0, Math.min(op.sill || 0, H));
-    const top = Math.min(H, sill + op.height);
+    // Lan can lô gia: phía trên để trống (thoáng như phối cảnh), không xây lanh tô
+    const top = isRailing(op) ? H : Math.min(H, sill + op.height);
     if (sill > 1e-4) pieces.push([s, e, 0, sill]);
     if (top < H - 1e-4) pieces.push([s, e, top, H]);
     cur = e;
@@ -264,6 +279,8 @@ export function buildScene(plan, opts = {}) {
   const pal = resolvePalette(plan.settings);
   setPalette(pal);
   wallMat.color.set(pal.wall);
+  wallMat.map = getTexture(pal.wallTex || 'plaster');
+  wallMat.needsUpdate = true;
   capMat.color.set(pal.cap);
   topCapMat.color.set(pal.cap);
   skirtMat.color.set(pal.wall).offsetHSL(0, 0, -0.1);
@@ -320,6 +337,7 @@ export function buildScene(plan, opts = {}) {
       if (u1 - u0 < 1e-3 || y1 - y0 < 1e-3) continue;
       const g = new THREE.BoxGeometry(u1 - u0, y1 - y0, w.thickness);
       g.translate((u0 + u1) / 2, (y0 + y1) / 2, 0);
+      meterUV(g);
       g.applyMatrix4(M);
       geos.push(g);
       if (y1 >= wh - 1e-4) {
