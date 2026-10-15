@@ -1,6 +1,6 @@
 // Giao diện chế độ Tòa nhà: bảng thống kê, bộ lọc, chi tiết căn. Dùng chung cho trang chính và trang toa-nha.html.
-import { BuildingView } from './building3d.js';
-import { sampleBuilding, SLOT_LIST, STATUS, TYPE_COLORS, residentialFloors, unitCode, unitPrice } from './buildingData.js';
+import { BuildingView, slotLayout } from './building3d.js';
+import { sampleBuilding, SLOT_LIST, STATUS, TYPE_COLORS, residentialFloors, unitCode, unitPrice, areaOf } from './buildingData.js';
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => [...document.querySelectorAll(s)];
@@ -57,6 +57,7 @@ function renderBPanel() {
     ${bview?.colorBy === 'type' ? `<div class="row">${Object.entries(TYPE_COLORS).map(([k, c]) => `<small><i class="dot" style="background:${c}"></i> ${k}</small>`).join(' ')}</div>` : ''}
     <h4>Lọc loại căn</h4>
     <select id="bType"><option value="">Tất cả loại căn</option>${Object.keys(TYPE_COLORS).map((t) => `<option ${bview?.filter.type === t ? 'selected' : ''}>${t}</option>`).join('')}</select>
+    <button id="bPlan" class="primary">🗺 Mặt bằng tầng chi tiết (3D)</button>
     <h4>Xem theo tầng</h4>
     <select id="bFloor"><option value="">Cả tòa nhà</option>${floors.map((fl, i) => `<option value="${i}" ${bview?.onlyFloor === i ? 'selected' : ''}>Tầng ${fl.replace(/^0/, '')}</option>`).join('')}</select>
     <h4>Thông số tòa</h4>
@@ -67,11 +68,17 @@ function renderBPanel() {
   $$('#bpanel [data-st]').forEach((b) => (b.onclick = () => { const s = bview.filter.status; s.has(b.dataset.st) ? s.delete(b.dataset.st) : s.add(b.dataset.st); bview.rebuild(); renderBPanel(); }));
   $$('#bpanel [data-color]').forEach((b) => (b.onclick = () => { bview.colorBy = b.dataset.color; bview.rebuild(); renderBPanel(); }));
   $('#bLight').onchange = (e) => { try { localStorage.setItem(LIGHT_KEY, e.target.checked ? '1' : '0'); } catch { /* bỏ qua */ } bview.setLight(e.target.checked); };
+  $('#bPlan').onclick = () => {
+    const fi = bview.onlyFloor ?? Math.max(0, floors.indexOf('08'));
+    bview.showFloorPlan(fi);
+    renderBPanel();
+  };
   $('#bViewP').onclick = () => bview.setView('perspective');
   $('#bViewC').onclick = () => bview.setView('close');
   $('#bType').onchange = (e) => { bview.filter.type = e.target.value || null; bview.rebuild(); };
   $('#bFloor').onchange = (e) => {
-    bview.onlyFloor = e.target.value === '' ? null : +e.target.value;
+    if (e.target.value !== '') { bview.showFloorPlan(+e.target.value); return; }
+    bview.onlyFloor = null;
     bview.rebuild();
     const y = building.podiumFloors * building.podiumHeight + ((bview.onlyFloor ?? floors.length) + 0.5) * building.floorHeight;
     bview.controls.target.set(0, bview.onlyFloor === null ? 30 : y, 0);
@@ -82,7 +89,8 @@ function renderBPanel() {
     const rows = [['Mã căn', 'Tầng', 'Vị trí', 'Loại', 'DT tim (m²)', 'DT thông thủy (m²)', 'Giá (tỷ)', 'Trạng thái', 'Khách hàng', 'Ghi chú']];
     floors.forEach((fl, fi) => SLOT_LIST.forEach((sl) => {
       const u = building.units[`${fl}-${sl.slot}`] || {};
-      rows.push([unitCode(building, fl, sl.slot), fl, sl.slot, sl.type, sl.tim, sl.tt, unitPrice(building, fi, sl).toFixed(2), STATUS[u.status || 'available'].name, u.customer || '', u.note || '']);
+      const ar = areaOf(fl, sl);
+      rows.push([unitCode(building, fl, sl.slot), fl, sl.slot, sl.type, ar.tim, ar.tt, unitPrice(building, fi, sl).toFixed(2), STATUS[u.status || 'available'].name, u.customer || '', u.note || '']);
     }));
     const esc = (v) => (/[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v));
     H.download(new Blob(['\ufeff' + rows.map((r) => r.map(esc).join(',')).join('\r\n')], { type: 'text/csv;charset=utf-8' }), `bang-hang-${building.code}.csv`);
@@ -103,16 +111,18 @@ function renderBDetail() {
   const key = `${floor}-${slot.slot}`;
   const u = bUnit(key);
   const price = unitPrice(building, floorIndex, slot);
-  const hasLayout = !!building.layouts[slot.slot];
+  const ar = areaOf(floor, slot);
+  const layout = slotLayout(building, slot.slot);
+  const hasLayout = !!layout;
   el.hidden = false;
   el.innerHTML = `
     <h3>${unitCode(building, floor, slot.slot)} <button id="bdClose" title="Đóng">✕</button></h3>
     <div class="row"><span class="chip" style="background:${STATUS[u.status || 'available'].color}">${STATUS[u.status || 'available'].name}</span><small>${slot.type} · tầng ${floor.replace(/^0/, '')} · vị trí ${slot.slot}</small></div>
     <div class="kv">
-      <div><small>DT tim tường</small><b>${slot.tim} m²</b></div>
-      <div><small>DT thông thủy</small><b>${slot.tt} m²</b></div>
+      <div><small>DT tim tường</small><b>${ar.tim} m²</b></div>
+      <div><small>DT thông thủy</small><b>${ar.tt} m²</b></div>
       <div><small>Giá ${u.price ? '' : '(ước tính)'}</small><b>${vndTy(price)} tỷ</b></div>
-      <div><small>Đơn giá TT</small><b>${vndTy((price * 1000) / slot.tt)} tr/m²</b></div>
+      <div><small>Đơn giá TT</small><b>${vndTy((price * 1000) / ar.tt)} tr/m²</b></div>
     </div>
     <label class="field"><span>Trạng thái</span><select id="bdStatus">${Object.entries(STATUS).map(([k, v]) => `<option value="${k}" ${(u.status || 'available') === k ? 'selected' : ''}>${v.name}</option>`).join('')}</select></label>
     <label class="field"><span>Giá bán (tỷ)</span><input type="number" id="bdPrice" step="0.01" min="0" value="${u.price ?? ''}" placeholder="${price.toFixed(2)}" /></label>
@@ -120,7 +130,7 @@ function renderBDetail() {
     <label class="field"><span>Ghi chú</span><input type="text" id="bdNote" value="${(u.note || '').replace(/"/g, '&quot;')}" /></label>
     <button id="bdView" class="primary">🏠 Xem căn hộ 3D</button>
     <button id="bdAssign" title="Lưu mặt bằng đang mở trong trình vẽ làm mặt bằng của vị trí ${slot.slot} (áp dụng cho mọi tầng)">📌 Gán mặt bằng đang mở cho vị trí ${slot.slot}</button>
-    <p class="hint">${hasLayout ? `Vị trí ${slot.slot} đã có mặt bằng (dùng chung mọi tầng).` : `Vị trí ${slot.slot} chưa có mặt bằng. Dựng căn ở chế độ 2D (ví dụ nhận diện từ ảnh mặt bằng căn), rồi quay lại bấm “Gán”.`}</p>`;
+    <p class="hint">${building.layouts[slot.slot] ? `Vị trí ${slot.slot} dùng mặt bằng đã gán (mọi tầng).` : layout ? `Vị trí ${slot.slot} đang dùng căn mẫu “${layout.unitId}” (ghép tạm theo diện tích, cần xác nhận).` : `Vị trí ${slot.slot} chưa có mặt bằng chi tiết. Gửi ảnh mặt bằng loại căn này để dựng, hoặc dựng ở chế độ 2D rồi bấm “Gán”.`}</p>`;
   const upd = (fn) => { fn(u); building.sample = false; saveBuilding(); bview.rebuild(); renderBPanel(); };
   $('#bdClose').onclick = () => { bsel = null; bview.setSelected(null); renderBDetail(); };
   $('#bdStatus').onchange = (e) => { upd((x) => (x.status = e.target.value)); renderBDetail(); };
@@ -136,9 +146,9 @@ function renderBDetail() {
     H.toast(`Đã gán mặt bằng hiện tại cho vị trí ${slot.slot} (mọi tầng).`);
   };
   $('#bdView').onclick = () => {
-    const layout = building.layouts[slot.slot];
-    if (!layout) return H.toast(`Vị trí ${slot.slot} chưa có mặt bằng. Dựng căn ở chế độ 2D rồi bấm “Gán mặt bằng đang mở”.`, 5000);
-    H.openUnit(JSON.parse(JSON.stringify(layout)), { code: unitCode(building, floor, slot.slot), floor, slot });
+    if (!layout) return H.toast(`Vị trí ${slot.slot} chưa có mặt bằng chi tiết.`, 4000);
+    if (layout.unitId && H.openShowcase) return H.openShowcase(layout.unitId);
+    H.openUnit(JSON.parse(JSON.stringify(layout.plan)), { code: unitCode(building, floor, slot.slot), floor, slot: { ...slot, tt: ar.tt } });
   };
 }
 

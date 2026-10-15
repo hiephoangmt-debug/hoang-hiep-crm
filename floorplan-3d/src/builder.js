@@ -392,7 +392,7 @@ export function buildScene(plan, opts = {}) {
     }
     const lp = labelPoint(room.points);
     const area = polygonArea(room.points);
-    if (area > 1.5 && roomLights.length < 10) {
+    if (opts.lights !== false && area > 1.5 && roomLights.length < 10) {
       const light = new THREE.PointLight(0xffd7a1, 0, Math.max(6, Math.sqrt(area) * 2.6), 1.6);
       light.position.set(lp.x, H - 0.35, lp.y);
       root.add(light);
@@ -402,7 +402,7 @@ export function buildScene(plan, opts = {}) {
       lamp.userData.lampDisc = true;
       root.add(lamp);
     }
-    if (room.name) {
+    if (room.name && opts.labels !== false) {
       const el = document.createElement('div');
       el.className = 'label3d';
       el.innerHTML = `<b>${escapeHtml(room.name)}</b><span>${fmt(area, 1)} m²</span>`;
@@ -449,7 +449,7 @@ export function buildScene(plan, opts = {}) {
     g.rotation.y = (-(item.rot || 0) * Math.PI) / 180;
     g.name = def.name;
     g.traverse((o) => { if (o.isMesh) o.userData.furnitureId = item.id; if (o.userData.lampShade) lampShades.push(o); });
-    if (g.userData.lightPoint && lampLights.length < 6) {
+    if (opts.lights !== false && g.userData.lightPoint && lampLights.length < 6) {
       const l = new THREE.PointLight(0xffc98a, 0, 4, 2);
       l.position.copy(g.userData.lightPoint);
       g.add(l);

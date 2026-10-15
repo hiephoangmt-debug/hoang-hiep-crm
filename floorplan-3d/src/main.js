@@ -571,6 +571,7 @@ async function openBuilding() {
     const { mountBuildingUI } = await import('./buildingUI.js');
     bview = mountBuildingUI({
       toast, ask, download,
+      openShowcase: (id) => { location.href = './xem-can-ho.html#' + id; },
       getCurrentPlan: () => store.plan,
       openUnit: (layout, info) => openUnitPlan(layout, info),
     });
