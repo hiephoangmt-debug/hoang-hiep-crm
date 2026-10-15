@@ -17,7 +17,7 @@
     voiceMode: 'clip',
     music: { mood: 'nhe-nhang', buffer: null, name: '', vol: 70 },
     settings: {
-      format: '9:16', theme: 'vang', transition: 'mix', textFx: 'marker', subStyle: 'tiktok', sfx: true, subtitles: true,
+      format: '9:16', theme: 'vang', transition: 'mix', textFx: 'marker', subStyle: 'kinetic', beauty: 'vua', pace: 'auto', endStyle: 'pill', sfx: true, subtitles: true,
       introCard: true, endCard: true, priceTag: true, autoTrim: true
     },
     previewKind: 'full'
@@ -66,7 +66,7 @@
       try {
         localStorage.setItem(STORE_KEY, JSON.stringify({
           info: state.info, style: state.style, settings: state.settings, voiceMode: state.voiceMode,
-          mood: state.music.mood, vol: state.music.vol, helpSeen: true,
+          mood: state.music.mood, vol: state.music.vol, helpSeen: true, v3: true,
           scenes: state.scenes.map(function (s) {
             return { title: s.title, text: s.text, bigText: s.bigText, shotNote: s.shotNote, durOverride: s.durOverride, showTitle: s.showTitle, quick: s.quick, layout: s.layout };
           })
@@ -81,7 +81,9 @@
       if (!d) return false;
       state.info = d.info || {};
       state.style = d.style || state.style;
-      Object.assign(state.settings, d.settings || {});
+      var saved = d.settings || {};
+      if (!d.v3) { delete saved.subStyle; delete saved.transition; delete saved.textFx; } // bản cũ: dùng kiểu mới mặc định
+      Object.assign(state.settings, saved);
       state.voiceMode = d.voiceMode || state.voiceMode;
       state.music.mood = d.mood || state.music.mood;
       state.music.vol = d.vol != null ? d.vol : state.music.vol;
@@ -404,7 +406,7 @@
           return {
             el: idx % 2 && twin ? twin : base.el, isVideo: true, url: base.url, name: f.name,
             keepAudio: true, hasAudio: true, trimIn: sg[0], trimOut: sg[1], dur: dur, fixed: true,
-            voiceGain: res.voiceGain, group: group, segIndex: idx, words: window.BdsAutoCut.wordsInRange(words, sg[0], sg[1])
+            voiceGain: res.voiceGain, speed: res.speed, group: group, segIndex: idx, words: window.BdsAutoCut.wordsInRange(words, sg[0], sg[1])
           };
         });
         var sceneWords = [];
@@ -461,28 +463,31 @@
     return sp.segments.length >= 2 || (cover > 0.15 && cover < 0.97);
   }
 
-  function assemble() {
-    if (!assembleFiles.length) return;
-    if (!state.scenes.length) { toast('Hãy tạo kịch bản ở Bước 2 trước (nhập từ Google Sheets hoặc tự viết).', 5000); return; }
+  function assemble(list, opts) {
+    opts = opts || {};
+    list = list || assembleFiles;
+    if (!list.length) return Promise.resolve(false);
+    if (!state.scenes.length) { toast('Hãy tạo kịch bản ở Bước 2 trước (nhập từ Google Sheets hoặc tự viết).', 5000); return Promise.resolve(false); }
     var hasMedia = state.scenes.some(function (sc) { return sc.media.length; });
-    if (hasMedia && !window.confirm('Thay toàn bộ ảnh/clip hiện có bằng bản tự dựng?')) return;
+    if (hasMedia && !opts.force && !window.confirm('Thay toàn bộ ảnh/clip hiện có bằng bản tự dựng?')) return Promise.resolve(false);
     var AC = window.BdsAutoCut;
-    var files = assembleFiles.slice().sort(function (a, b) { return a.name.localeCompare(b.name, undefined, { numeric: true }) || a.lastModified - b.lastModified; });
+    var files = list.slice().sort(function (a, b) { return a.name.localeCompare(b.name, undefined, { numeric: true }) || a.lastModified - b.lastModified; });
     var videos = files.filter(isVideoFile), images = files.filter(function (f) { return !isVideoFile(f); });
-    var minPause = parseFloat($('assemblePause').value) || 0.4;
-    var useAsr = $('assembleAsr').checked;
+    var minPause = opts.minPause || parseFloat($('assemblePause').value) || 0.4;
+    var useAsr = opts.asr != null ? opts.asr : $('assembleAsr').checked;
+    var progress = opts.progress || assembleProgress;
     var clips = [], broll = [];
     var steps = videos.length * (useAsr ? 2 : 1) + images.length + 1, done = 0;
-    var tick = function (label) { done++; assembleProgress(Math.min(1, done / steps), label); };
+    var tick = function (label) { done++; progress(Math.min(1, done / steps), label); };
     $('btnAssemble').disabled = true;
     $('assembleReport').hidden = true;
-    assembleProgress(0, 'Bắt đầu…');
+    progress(0, 'Bắt đầu…');
 
     // 1. Đọc và quét giọng từng video
     var chain = Promise.resolve();
     videos.forEach(function (f, i) {
       chain = chain.then(function () {
-        assembleProgress(done / steps, 'Quét giọng nói clip ' + (i + 1) + '/' + videos.length + ': ' + f.name);
+        progress(done / steps, 'Quét giọng nói clip ' + (i + 1) + '/' + videos.length + ': ' + f.name);
         return createMedia(f, f.name, { skipAnalyze: true }).then(function (item) {
           if (!item) return null;
           return f.arrayBuffer().then(function (ab) { return getAudioCtx().decodeAudioData(ab); })
@@ -491,7 +496,7 @@
         }).then(function (r) {
           tick('Đã quét ' + f.name);
           if (!r) return;
-          if (looksLikeTalk(f, r.sp)) clips.push({ file: f, item: r.item, buf: r.buf, segments: r.sp.segments, voiceGain: r.sp.voiceGain, duration: r.sp.duration });
+          if (looksLikeTalk(f, r.sp)) clips.push({ file: f, item: r.item, buf: r.buf, segments: r.sp.segments, voiceGain: r.sp.voiceGain, duration: r.sp.duration, speed: r.sp.speed, rate: r.sp.rate });
           else { r.item.keepAudio = false; r.item.hasAudio = false; broll.push({ file: f, item: r.item }); }
         });
       });
@@ -508,7 +513,7 @@
       var c2 = Promise.resolve();
       clips.forEach(function (c, i) {
         c2 = c2.then(function () {
-          return AC.transcribe(c.buf, function (msg) { assembleProgress(done / steps, 'Clip ' + (i + 1) + '/' + clips.length + ': ' + msg); })
+          return AC.transcribe(c.buf, function (msg) { progress(done / steps, 'Clip ' + (i + 1) + '/' + clips.length + ': ' + msg); })
             .then(function (w) { c.words = w; tick('Đã chép lời ' + c.file.name); });
         });
       });
@@ -518,8 +523,8 @@
       });
     });
     // 3. Xếp vào cảnh và dựng
-    chain.then(function () {
-      assembleProgress(0.98, 'Đang ghép theo kịch bản…');
+    return chain.then(function () {
+      progress(0.98, 'Đang ghép theo kịch bản…');
       return Promise.all(clips.map(function (c) { return loadExtraVideo(c.item.url).then(function (tw) { c.twin = tw; }); }));
     }).then(function () {
       var scenes = state.scenes;
@@ -549,7 +554,7 @@
             media.push({
               el: idx % 2 && c.twin ? c.twin : c.item.el, isVideo: true, url: c.item.url, name: c.file.name,
               keepAudio: true, hasAudio: true, trimIn: sg[0], trimOut: sg[1], dur: c.duration, fixed: true,
-              voiceGain: c.voiceGain, group: 'clip:' + c.file.name, segIndex: idx,
+              voiceGain: c.voiceGain, speed: c.speed, group: 'clip:' + c.file.name, segIndex: idx,
               words: uw ? AC.wordsInRange(uw, sg[0], sg[1]) : null
             });
           });
@@ -570,7 +575,7 @@
         best.media.push(it);
       });
       state.voiceMode = 'clip';
-      state.settings.subStyle = state.settings.subStyle || 'tiktok';
+      state.settings.subStyle = state.settings.subStyle || 'kinetic';
       if (clips.length) { state.settings.introCard = false; $('introToggle').checked = false; }
       renderShoot();
       renderScenes();
@@ -593,13 +598,145 @@
       if (!asrOk && clips.length) lines.push('<div class="muted">ℹ️ Clip được xếp theo thứ tự tên file. Kiểm tra lại bên dưới, dùng ô “Chuyển sang cảnh” nếu cần.</div>');
       $('assembleReport').innerHTML = lines.join('');
       $('assembleReport').hidden = false;
-      toast('🤖 Đã dựng xong! Bấm ▶ Xem thử, rồi sang Bước 6 để xuất video.', 6000);
+      if (!opts.quiet) toast('🤖 Đã dựng xong! Bấm ▶ Xem thử, rồi sang Bước 6 để xuất video.', 6000);
+      return true;
     }).catch(function (e) {
       toast('Có lỗi khi tự dựng: ' + (e && e.message ? e.message : e), 6000);
-    }).then(function () {
+      return false;
+    }).then(function (ok) {
       assembleProgress(null);
       $('btnAssemble').disabled = !assembleFiles.length;
+      return ok;
     });
+  }
+
+  /* ---------- Làm video tự động từ thư mục ---------- */
+
+  var projFiles = [], projFolder = '';
+
+  function projProgress(p, label) {
+    var box = $('projProgress');
+    box.hidden = p == null;
+    if (p == null) return;
+    box.querySelector('.bar').style.width = Math.round(p * 100) + '%';
+    box.querySelector('span').textContent = label;
+  }
+
+  function setProjFiles(files, folder) {
+    projFiles = Array.prototype.slice.call(files || []);
+    projFolder = folder || (projFiles[0] && projFiles[0].webkitRelativePath ? projFiles[0].webkitRelativePath.split('/')[0] : '');
+    var c = window.BdsImporter.classify(projFiles);
+    var v = c.media.filter(isVideoFile).length;
+    $('projFiles').innerHTML = projFiles.length ?
+      (projFolder ? '📁 <b>' + esc(projFolder) + '</b>: ' : '') + (c.scripts.length ? '📝 kịch bản: <b>' + esc(c.scripts[0].name) + '</b> · ' : '⚠️ chưa thấy file kịch bản · ') +
+      v + ' video · ' + (c.media.length - v) + ' ảnh' + (c.music.length ? ' · 🎵 ' + esc(c.music[0].name) : '') : '';
+    updateProjButton();
+  }
+
+  function updateProjButton() {
+    $('btnAutoProject').disabled = !projFiles.length && !$('projLink').value.trim();
+  }
+
+  function jumpTo(n) {
+    state.step = n;
+    if (n === 3) renderShoot();
+    if (n === 6) renderChecklist();
+    showStep();
+  }
+
+  function autoProject() {
+    var I = window.BdsImporter, G = window.ScriptGen;
+    var c = I.classify(projFiles);
+    var link = $('projLink').value.trim();
+    if (state.scenes.some(function (sc) { return sc.media.length; }) && !window.confirm('Thay dự án hiện tại bằng dự án mới từ thư mục?')) return;
+    $('btnAutoProject').disabled = true;
+    $('projReport').hidden = true;
+    var report = [];
+    projProgress(0.02, 'Đang đọc kịch bản…');
+
+    // 1. Kịch bản: file trong thư mục, hoặc link
+    var tryScripts = function (i) {
+      if (i >= c.scripts.length) return link ? I.fetchLink(link).then(function (r) { r.from = 'link'; return r; }) : Promise.resolve(null);
+      return I.readScript(c.scripts[i]).then(function (r) {
+        if (r && r.scenes && r.scenes.length) { r.from = c.scripts[i].name; return r; }
+        return tryScripts(i + 1);
+      }).catch(function () { return tryScripts(i + 1); });
+    };
+    tryScripts(0).catch(function () {
+      report.push('<div class="warn">⚠️ Không mở được link kịch bản. Hãy bật chia sẻ “Bất kỳ ai có đường liên kết”, hoặc tải bảng về (Excel/CSV) rồi bỏ vào thư mục.</div>');
+      return null;
+    }).then(function (sc) {
+      var info = Object.assign({}, state.info);
+      if (sc) {
+        var found = I.extractInfo(sc.raw);
+        Object.keys(found).forEach(function (k) { if (!String(info[k] || '').trim()) info[k] = found[k]; });
+        report.push('<div>📝 Kịch bản: <b>' + esc(sc.from) + '</b>, ' + sc.scenes.length + ' cảnh</div>');
+        state.scenes = sc.scenes.map(newScene);
+      } else {
+        // Không có kịch bản: mỗi video có người nói là một cảnh
+        var vids = c.media.filter(isVideoFile);
+        state.scenes = vids.map(function (f, i) { return newScene({ title: 'Đoạn ' + (i + 1) + ': ' + f.name.replace(/\.[^.]+$/, '') }); });
+        if (!state.scenes.length) state.scenes = [newScene({ title: 'Cảnh 1' })];
+        report.push('<div class="warn">⚠️ Không thấy file kịch bản: mỗi video thành một cảnh, chưa có phụ đề. Bỏ thêm file kịch bản để có phụ đề.</div>');
+      }
+      if (!String(info.ten || '').trim() && projFolder) info.ten = projFolder;
+      setInfo(info);
+      renderScenes();
+      // 2. Nhạc nền trong thư mục
+      if (c.music.length) {
+        return c.music[0].arrayBuffer().then(function (ab) { return getAudioCtx().decodeAudioData(ab); }).then(function (buf) {
+          state.music.buffer = buf;
+          state.music.name = c.music[0].name;
+          report.push('<div>🎵 Nhạc nền: ' + esc(c.music[0].name) + '</div>');
+        }).catch(function () {});
+      }
+    }).then(function () {
+      // 3. Cắt ghép theo kịch bản
+      if (!c.media.length) { report.push('<div class="warn">⚠️ Thư mục chưa có video/ảnh nào.</div>'); return false; }
+      return assemble(c.media, {
+        force: true, quiet: true, asr: $('projAsr').checked && state.scenes.some(function (s2) { return s2.text; }),
+        minPause: parseFloat($('projPause').value) || 0.25,
+        progress: function (p, label) { projProgress(0.05 + p * 0.9, label); }
+      });
+    }).then(function (ok) {
+      projProgress(null);
+      var miss = missingInfo();
+      if (miss.length) report.push('<div class="warn">⚠️ Còn thiếu: ' + miss.map(function (k) { return REQUIRED[k]; }).join(', ') + ' (điền ở bên dưới để hiện ở cuối video).</div>');
+      $('projReport').innerHTML = report.join('') + ($('assembleReport').innerHTML || '');
+      $('projReport').hidden = false;
+      save();
+      schedulePreview();
+      if (!ok) return;
+      if ($('projExport').checked) {
+        $('outFull').checked = true;
+        $('outTrailer').checked = true;
+        $('outScenes').checked = false;
+        jumpTo(6);
+        toast('🚀 Đã dựng xong, đang xuất video. Đừng chuyển tab nhé!', 5000);
+        doExport();
+      } else {
+        jumpTo(3);
+        toast('🚀 Đã dựng xong! Kiểm tra từng cảnh, bấm ▶ Xem thử, rồi sang Bước 6 để xuất.', 6000);
+      }
+    }).catch(function (e) {
+      projProgress(null);
+      toast('Có lỗi: ' + (e && e.message ? e.message : e), 6000);
+    }).then(function () { updateProjButton(); });
+  }
+
+  function bindAutoProject() {
+    $('btnPickFolder').onclick = function (e) { e.preventDefault(); $('projFolder').click(); };
+    $('btnPickFiles').onclick = function (e) { e.preventDefault(); $('projFilesInput').click(); };
+    $('projFolder').onchange = function (e) { setProjFiles(e.target.files); e.target.value = ''; };
+    $('projFilesInput').onchange = function (e) { setProjFiles(e.target.files); e.target.value = ''; };
+    $('projLink').oninput = updateProjButton;
+    var dz = $('projDrop');
+    ['dragenter', 'dragover'].forEach(function (ev) { dz.addEventListener(ev, function (e) { e.preventDefault(); dz.classList.add('over'); }); });
+    ['dragleave', 'drop'].forEach(function (ev) { dz.addEventListener(ev, function (e) { e.preventDefault(); dz.classList.remove('over'); }); });
+    dz.addEventListener('drop', function (e) {
+      window.BdsImporter.filesFromDrop(e.dataTransfer).then(function (files) { setProjFiles(files, files.folder); });
+    });
+    $('btnAutoProject').onclick = autoProject;
   }
 
   function quickScenes(items) {
@@ -729,7 +866,7 @@
     ['dragenter', 'dragover'].forEach(function (ev) { ad.addEventListener(ev, function (e) { e.preventDefault(); ad.classList.add('over'); }); });
     ['dragleave', 'drop'].forEach(function (ev) { ad.addEventListener(ev, function (e) { e.preventDefault(); ad.classList.remove('over'); }); });
     ad.addEventListener('drop', function (e) { setAssembleFiles(e.dataTransfer.files); });
-    $('btnAssemble').onclick = assemble;
+    $('btnAssemble').onclick = function () { assemble(); };
     $('btnStartVideo').onclick = function () { $('videoInput').click(); };
     $('videoInput').onchange = pickVideo;
     $('btnAutoGo').onclick = autoBuild;
@@ -1223,8 +1360,18 @@
     fillSelect('themeSelect', R.THEMES, S.theme, 'label').onchange = onSet('theme');
     fillSelect('transitionSelect', R.TRANSITIONS, S.transition).onchange = onSet('transition');
     fillSelect('textFxSelect', R.TEXT_FX, S.textFx).onchange = onSet('textFx');
-    $('subStyleSelect').value = S.subStyle || 'tiktok';
+    $('subStyleSelect').value = S.subStyle || 'kinetic';
     $('subStyleSelect').onchange = onSet('subStyle');
+    var bsel = $('beautySelect');
+    Object.keys(window.BdsBeauty.LEVELS).forEach(function (k) {
+      var o = document.createElement('option'); o.value = k; o.textContent = window.BdsBeauty.LEVELS[k].label; bsel.appendChild(o);
+    });
+    bsel.value = S.beauty || 'vua';
+    bsel.onchange = onSet('beauty');
+    $('paceSelect').value = S.pace || 'auto';
+    $('paceSelect').onchange = onSet('pace');
+    $('endStyleSelect').value = S.endStyle || 'pill';
+    $('endStyleSelect').onchange = onSet('endStyle');
     fillSelect('moodSelect', window.BdsAudio.MOODS, state.music.mood).onchange = function (e) { state.music.mood = e.target.value; save(); };
     [['sfxToggle', 'sfx'], ['subToggle', 'subtitles'], ['introToggle', 'introCard'], ['endToggle', 'endCard'], ['priceToggle', 'priceTag'], ['autoTrim', 'autoTrim']].forEach(function (p) {
       $(p[0]).checked = S[p[1]] !== false;
@@ -1333,6 +1480,7 @@
         else if (s.type === 'pop') engine.pop(at);
         else if (s.type === 'boom') engine.boom(at);
         else if (s.type === 'swish') engine.swish(at);
+        else if (s.type === 'slam') engine.slam(at);
         else if (s.type === 'swipe') engine.swipe(at);
         else if (s.type === 'ching') engine.ching(at);
         else if (s.type === 'riser') engine.riser(at, s.dur);
@@ -1566,6 +1714,7 @@
     bindSettings();
     bindPlayer();
     bindHelp(seen);
+    bindAutoProject();
     $('btnDemo').onclick = function () { loadDemo('mau'); };
     $('btnDemoF2').onclick = function () { loadDemo('f2'); };
     $('btnPrev').onclick = function () { goStep(state.step - 1); };

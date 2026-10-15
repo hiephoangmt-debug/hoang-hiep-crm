@@ -33,6 +33,24 @@ Sau khi cài, ứng dụng có biểu tượng riêng và mở được cả khi
 | 5. Hiệu ứng và nhạc | Khung 9:16 / 16:9 / 1:1, màu, hiệu ứng chữ (bật lên, trượt vào, gõ chữ), chuyển cảnh, nhạc nền tự soạn hoặc nhạc riêng |
 | 6. Xuất video | **Video đầy đủ**, **Trailer** (cắt nhanh, chữ to, nhạc sôi động), **Từng cảnh riêng** (để đăng Reels/TikTok hằng ngày) |
 
+### 🚀 Làm video tự động từ thư mục (Bước 1, khuyên dùng)
+Bỏ **cả thư mục dự án** vào khung đầu tiên, gồm:
+- **File kịch bản**: Excel (.xlsx), Word (.docx), CSV, TXT, hoặc file chứa link Google Sheets/Docs (cũng có thể dán link).
+  Kịch bản dạng bảng: cột Tên cảnh | Lời thoại | Hình ảnh/Text. Dạng văn bản: dòng “CẢNH 1 – …” mở cảnh mới, “Hình ảnh: …”, “Text chạy màn hình:”.
+- **Các video đã quay** (chưa cần cắt), **ảnh phối cảnh / flycam**, **nhạc nền** (mp3) nếu có.
+
+Bấm **🚀 Làm video tự động**: phần mềm đọc kịch bản, tự điền giá và số điện thoại tìm thấy trong kịch bản, cắt ghép, làm đẹp, thêm chữ động, hiệu ứng, nhạc,
+rồi xuất luôn **video đầy đủ + trailer**.
+
+### Phong cách chữ động (giống video mẫu)
+Mỗi câu nói hiện thành một “tầng chữ”: chữ dẫn nhỏ hiện dần theo lời nói, **từ khoá rất to tô màu chuyển sắc** (có lúc tô bằng ảnh phối cảnh) đập vào kèm tiếng “bụp”,
+chữ nhấn in nghiêng màu đỏ. Tầng chữ đặt xen kẽ trên đầu và ngang thân người nói. Kết thúc bằng nút **LIÊN HỆ NGAY** nhỏ.
+
+### Làm đẹp và nhịp nói
+- **Làm đẹp**: sáng da, mịn da (giữ nét mắt, tóc, viền áo), làm nét, cân màu. Chọn mức Nhẹ / Vừa / Mạnh ở Bước 5.
+  Phần mềm không chỉnh được dáng mặt, nếp quần áo hay kiểu tóc (việc này cần AI tạo ảnh trên máy chủ).
+- **Nhịp nói**: tự đo tốc độ nói; nói chậm thì tăng tốc (tối đa 1,3 lần, giữ nguyên giọng), nói quá nhanh thì hãm nhẹ.
+
 ### 🤖 Tự dựng toàn bộ theo kịch bản (Bước 3)
 Chỉ cần có kịch bản (Bước 2) và bỏ **tất cả video đã quay + ảnh phối cảnh/flycam** vào khung “Tự dựng toàn bộ”:
 1. Quét giọng nói từng clip, **cắt bỏ chỗ ngập ngừng** (chọn mức cắt kỹ / vừa / nhẹ), tự cân âm lượng giọng.
@@ -75,7 +93,9 @@ video-bds/
     ├── app.js            Điều khiển các bước, quay, thu âm, xem thử, xuất video
     ├── script-gen.js     Viết kịch bản tự động, đọc bảng Google Sheets
     ├── timeline.js       Dựng dòng thời gian: video đầy đủ, trailer, từng cảnh, phủ phối cảnh, cắt nhảy, phụ đề từng chữ
-    ├── autocut.js        Quét giọng nói, cắt chỗ ngừng, nhận dạng lời nói, xếp clip vào đúng cảnh
+    ├── autocut.js        Quét giọng nói, cắt chỗ ngừng, đo nhịp nói, nhận dạng lời nói, xếp clip vào đúng cảnh
+    ├── importer.js       Đọc thư mục: kịch bản Excel/Word/CSV/TXT/link, video, ảnh, nhạc
+    ├── beauty.js         Làm đẹp video (WebGL): sáng da, mịn da, làm nét
     ├── renderer.js       Vẽ khung hình: chuyển cảnh, chữ hiệu ứng, phụ đề, intro/outro
     ├── audio.js          Nhạc nền, hiệu ứng âm thanh, trộn tiếng clip, giảm nhạc khi có giọng
     ├── webm-fix.js       Ghi thời lượng vào file WebM để tua được

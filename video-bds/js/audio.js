@@ -181,6 +181,33 @@
     src.stop(t + 0.2);
   };
 
+  /** Tiếng "đập" trầm khi từ khoá to xuất hiện. */
+  AudioEngine.prototype.slam = function (t) {
+    var ctx = this.ctx;
+    var o = this._track(ctx.createOscillator());
+    o.type = 'sine';
+    o.frequency.setValueAtTime(150, t);
+    o.frequency.exponentialRampToValueAtTime(48, t + 0.25);
+    var g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.6, t + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.4);
+    o.connect(g).connect(this.sfx);
+    o.start(t);
+    o.stop(t + 0.45);
+    var n = this._track(ctx.createBufferSource());
+    n.buffer = this.noise;
+    var bp = ctx.createBiquadFilter();
+    bp.type = 'bandpass';
+    bp.frequency.value = 2500;
+    var ng = ctx.createGain();
+    ng.gain.setValueAtTime(0.22, t);
+    ng.gain.exponentialRampToValueAtTime(0.0001, t + 0.07);
+    n.connect(bp).connect(ng).connect(this.sfx);
+    n.start(t, Math.random());
+    n.stop(t + 0.1);
+  };
+
   /** Tiếng "quẹt" khi vệt bút dạ quang chạy qua chữ. */
   AudioEngine.prototype.swipe = function (t) {
     var ctx = this.ctx;

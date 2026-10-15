@@ -16,10 +16,13 @@
   };
 
   var TRANSITIONS = {
+    'mix': 'Kết hợp nhiều kiểu (như video mẫu)',
+    'split': 'Cắt dải',
+    'spin': 'Xoay nghiêng',
+    'glitch': 'Nhiễu chấm',
     'fade': 'Mờ dần',
     'slide': 'Trượt ngang',
-    'zoom': 'Phóng to',
-    'mix': 'Kết hợp ngẫu nhiên'
+    'zoom': 'Phóng to'
   };
 
   var TR = 0.7; // thời gian chuyển cảnh (giây)
@@ -94,7 +97,7 @@
 
   function pickTransition(setting, i) {
     if (setting !== 'mix') return setting || 'fade';
-    return ['zoom', 'slide', 'fade', 'slide'][i % 4];
+    return ['split', 'zoom', 'spin', 'glitch', 'slide', 'fade'][i % 6];
   }
 
   /** Chia phụ đề theo câu, mỗi đoạn tối đa 2 dòng; thời gian chia theo số chữ. */
@@ -162,8 +165,10 @@
         if (Math.abs(v.currentTime - it.srcIn) > 0.05 && !v.seeking) v.currentTime = it.srcIn;
         return;
       }
-      var target = it.srcIn + (it.srcLen > 0 ? local % it.srcLen : local);
+      var sp = it.speed || 1;
+      var target = it.srcIn + (it.srcLen > 0 ? (local * sp) % it.srcLen : local * sp);
       if (v.duration) target = Math.min(target, v.duration - 0.05);
+      if (v.playbackRate !== sp) { v.preservesPitch = true; v.playbackRate = sp; }
       if (!playing) {
         if (Math.abs(v.currentTime - target) > 0.05) v.currentTime = target;
         if (!v.paused) v.pause();
@@ -195,7 +200,9 @@
         // Zoom đẩy ở chỗ cắt nhảy: bật nhanh lên rồi giữ
         var z = it.zoom || 1;
         if (z > 1) z = 1 + (z - 1) * easeOut((t - it.start) / 0.12);
-        drawCover(ctx, it.el, W, H, z * (1.0 + 0.03 * e), 0, 0);
+        var lvl = this.project.settings.beauty || 'vua';
+        var src = lvl !== 'off' && window.BdsBeauty ? window.BdsBeauty.get().process(it.el, lvl) : it.el;
+        drawCover(ctx, src, W, H, z * (1.0 + 0.03 * e), 0, 0);
       } else {
         var k = it.kb;
         drawCover(ctx, it.el, W, H, k.s0 + (k.s1 - k.s0) * e, k.x0 + (k.x1 - k.x0) * e, k.y0 + (k.y1 - k.y0) * e);
@@ -231,6 +238,45 @@
     if (style === 'slide') {
       ctx.save(); ctx.translate(-W * e, 0); this.drawItem(it, t, 1); ctx.restore();
       ctx.save(); ctx.translate(W * (1 - e), 0); this.drawItem(next, t, 1); ctx.restore();
+    } else if (style === 'split') {
+      // Hình mới trượt vào theo 4 dải dọc, xen kẽ trên/dưới
+      this.drawItem(it, t, 1);
+      for (var si = 0; si < 4; si++) {
+        var es = easeInOut(clamp((k - si * 0.08) / 0.76, 0, 1));
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(W * si / 4, 0, W / 4 + 1, H);
+        ctx.clip();
+        ctx.translate(0, (1 - es) * H * (si % 2 ? 1 : -1));
+        this.drawItem(next, t, 1);
+        ctx.restore();
+      }
+    } else if (style === 'spin') {
+      ctx.save(); ctx.translate(W / 2, H / 2); ctx.rotate(e * 0.18); ctx.scale(1 + e * 0.3, 1 + e * 0.3); ctx.translate(-W / 2, -H / 2);
+      this.drawItem(it, t, 1); ctx.restore();
+      ctx.save(); ctx.translate(W / 2, H / 2); ctx.rotate(-(1 - e) * 0.22); var zs = 1.3 - 0.3 * e; ctx.scale(zs, zs); ctx.translate(-W / 2, -H / 2);
+      this.drawItem(next, t, e); ctx.restore();
+    } else if (style === 'glitch') {
+      // Nhiễu: các dải ngang lệch nhau + chấm lưới ở giữa chuyển cảnh
+      this.drawItem(k < 0.5 ? it : next, t, 1);
+      var seed = Math.floor(k * 14) + 1;
+      for (var gb = 0; gb < 9; gb++) {
+        var r1 = Math.abs(Math.sin(seed * 12.9898 + gb * 78.233)) % 1, r2 = Math.abs(Math.sin(seed * 4.1414 + gb * 9.71)) % 1;
+        var by = r1 * H, bh = H * (0.02 + r2 * 0.07);
+        ctx.save(); ctx.beginPath(); ctx.rect(0, by, W, bh); ctx.clip();
+        ctx.translate((r2 - 0.5) * W * 0.18, 0);
+        this.drawItem(k < 0.5 ? next : it, t, 1);
+        ctx.restore();
+      }
+      var dots = Math.max(0, 1 - Math.abs(k - 0.5) * 3);
+      if (dots > 0) {
+        var step = 26 * this.unit;
+        ctx.fillStyle = 'rgba(0,0,0,' + (0.55 * dots) + ')';
+        for (var dy = 0; dy < H; dy += step) for (var dx = 0; dx < W; dx += step) {
+          var rr = step * 0.45 * dots * (0.4 + 0.6 * Math.abs(Math.sin(dx * 0.01 + dy * 0.013)));
+          ctx.beginPath(); ctx.arc(dx, dy, rr, 0, 6.283); ctx.fill();
+        }
+      }
     } else if (style === 'zoom') {
       ctx.save(); ctx.translate(W / 2, H / 2); ctx.scale(1 + e * 0.35, 1 + e * 0.35); ctx.translate(-W / 2, -H / 2);
       this.drawItem(it, t, 1); ctx.restore();
@@ -264,8 +310,38 @@
       if (local < 0) a = 0;
       if (a > 0.01) this.drawOverlay(o, local, a);
     }
+    if (this.timeline.pill && t >= this.timeline.pill.start) this.drawPill(t - this.timeline.pill.start);
     this.drawBrand(t);
     this.drawProgress(t);
+  };
+
+  /** Nút "LIÊN HỆ NGAY" nhỏ ở cuối video (kiểu video mẫu). */
+  Renderer.prototype.drawPill = function (local) {
+    var ctx = this.ctx, W = this.W, H = this.H, u = this.unit, info = this.project.info;
+    var a = easeBack(local / 0.45);
+    if (a <= 0) return;
+    var pulse = 1 + 0.03 * Math.sin(local * 5) * clamp(local - 0.6, 0, 1);
+    ctx.save();
+    ctx.font = '800 ' + Math.round(40 * u) + 'px ' + FONT;
+    var label = 'LIÊN HỆ NGAY';
+    var phone = info.sdt ? '  ' + info.sdt : '';
+    var w1 = ctx.measureText(label).width, w2 = phone ? ctx.measureText(phone).width : 0;
+    var pw = w1 + w2 + 90 * u, ph = 92 * u;
+    var x = W / 2, y = H - (W > H ? 130 : 330) * u;
+    ctx.translate(x, y);
+    ctx.scale(a * pulse, a * pulse);
+    roundRect(ctx, -pw / 2, -ph / 2, pw, ph, ph / 2);
+    ctx.fillStyle = 'rgba(15,18,28,0.82)';
+    ctx.fill();
+    ctx.lineWidth = 3 * u;
+    ctx.strokeStyle = 'rgba(255,255,255,0.9)';
+    ctx.stroke();
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#fff';
+    ctx.fillText(label, -pw / 2 + 45 * u, 2 * u);
+    if (phone) { ctx.fillStyle = this.theme.main; ctx.fillText(phone, -pw / 2 + 45 * u + w1, 2 * u); }
+    ctx.restore();
   };
 
   /** Phối cảnh / flycam phủ lên clip đang nói (tiếng nói vẫn chạy). */
@@ -313,7 +389,10 @@
       if (o.bigText && o.bigText.length && bl > 0) {
         this.drawBigText(o.bigText, bl, o.duration - introEnd, { fast: o.fast });
       }
-      if (s.subtitles && s.subStyle !== 'box' && o.words && o.words.length) {
+      var style = s.subStyle || 'kinetic';
+      if (s.subtitles && style === 'kinetic' && o.words && o.words.length) {
+        if (!o.intro || local > introEnd) this.drawKinetic(o.words, o.start + local);
+      } else if (s.subtitles && style !== 'box' && o.words && o.words.length) {
         if (!o.intro || local > introEnd) this.drawWordCaptions(o.words, o.start + local);
       } else if (o.text && s.subtitles && local > introEnd) {
         this.drawSubtitle(o.text, local - introEnd, o.duration - introEnd);
@@ -461,6 +540,133 @@
     words._phr = out;
     return out;
   }
+
+  // Màu chuyển sắc cho từ khoá (giống video mẫu: xanh mint, đỏ đô, xanh navy, hồng tím, vàng)
+  var KINETIC_FILLS = [['#bff3e6', '#3e9e8e'], ['#d24a5a', '#5a0f1c'], ['#6f9de8', '#132c66'], ['#f58cc0', '#7b4fd6'], ['#ffe9a6', '#d99a1e']];
+
+  /** Ảnh phối cảnh đầu tiên trong dự án (để tô vào chữ to, như chữ "BIỂN" trong video mẫu). */
+  Renderer.prototype.textureImage = function () {
+    if (this._tex !== undefined) return this._tex;
+    this._tex = null;
+    var scenes = this.project.scenes || [];
+    for (var i = 0; i < scenes.length && !this._tex; i++) {
+      (scenes[i].media || []).forEach(function (m) { if (!this._tex && !m.isVideo && m.el && m.el.naturalWidth) this._tex = m.el; }, this);
+    }
+    return this._tex;
+  };
+
+  /**
+   * Chữ động xếp tầng: chữ dẫn nhỏ hiện dần theo lời nói, từ khoá rất to tô màu chuyển sắc đập vào,
+   * chữ nhấn in nghiêng màu đỏ. Tầng chữ đặt xen kẽ trên/dưới để không che mặt người nói.
+   */
+  Renderer.prototype.drawKinetic = function (words, t) {
+    var stacks = window.BdsTimeline.kineticStacks(words);
+    var st = null;
+    for (var i = 0; i < stacks.length; i++) if (t >= stacks[i].t0 - 0.05 && t < stacks[i].t1) { st = stacks[i]; break; }
+    if (!st) return;
+    var ctx = this.ctx, W = this.W, H = this.H, u = this.unit;
+    var land = W > H;
+    var maxW = W - 120 * u;
+    var smallSize = Math.round((land ? 50 : 60) * u);
+    var smallFont = function (w) { return (w.accent ? 'italic 800 ' + Math.round(smallSize * 1.12) : '600 ' + smallSize) + 'px ' + FONT; };
+    var label = function (w) { return w.w.replace(/[“”"]/g, ''); };
+    var lineW = function (ws) {
+      var x = 0;
+      ws.forEach(function (w, j) { ctx.font = smallFont(w); x += ctx.measureText(label(w)).width + (j ? smallSize * 0.28 : 0); });
+      return x;
+    };
+    var bigText = st.big.map(label).join(' ').toUpperCase();
+    var bigSize = Math.round((land ? 150 : 190) * u);
+    ctx.font = '900 ' + bigSize + 'px ' + FONT;
+    var bigW = ctx.measureText(bigText).width;
+    if (bigW > maxW) { bigSize = Math.floor(bigSize * maxW / bigW); ctx.font = '900 ' + bigSize + 'px ' + FONT; bigW = ctx.measureText(bigText).width; }
+    var leadW = st.lead.length ? lineW(st.lead) : 0, trailW = st.trail.length ? lineW(st.trail) : 0;
+    var gap = 6 * u;
+    var hLead = st.lead.length ? smallSize * 1.25 : 0, hTrail = st.trail.length ? smallSize * 1.25 : 0, hBig = bigSize * 1.02;
+    var total = hLead + hBig + hTrail + gap * 2;
+    var cy = H * (st.idx % 2 ? (land ? 0.3 : 0.27) : (land ? 0.68 : 0.66));
+    var y = cy - total / 2;
+    var bigX = (W - bigW) / 2;
+    var fade = clamp((st.t1 - t) / 0.2, 0, 1);
+    ctx.save();
+    ctx.globalAlpha *= fade;
+    ctx.textBaseline = 'alphabetic';
+    ctx.textAlign = 'left';
+    ctx.shadowColor = 'rgba(0,0,0,0.45)';
+    ctx.shadowBlur = 14 * u;
+    ctx.shadowOffsetY = 3 * u;
+    var self = this;
+    var drawSmall = function (ws, x, baseY) {
+      ws.forEach(function (w, j) {
+        var a = clamp((t - w.t0 + 0.08) / 0.25, 0, 1);
+        ctx.font = smallFont(w);
+        var tw = ctx.measureText(label(w)).width;
+        if (a > 0) {
+          ctx.save();
+          ctx.globalAlpha *= a;
+          if (a < 1) ctx.filter = 'blur(' + ((1 - a) * 10 * u).toFixed(1) + 'px)';
+          ctx.fillStyle = w.accent ? '#ff4d5e' : '#fff';
+          ctx.fillText(label(w), x, baseY + (1 - easeOut(a)) * 14 * u);
+          ctx.restore();
+        }
+        x += tw + smallSize * 0.28;
+      });
+    };
+    // Dòng dẫn: canh trái theo mép trái của từ khoá
+    if (st.lead.length) {
+      var lx = leadW > bigW ? (W - leadW) / 2 : bigX + 8 * u;
+      drawSmall(st.lead, lx, y + smallSize);
+      y += hLead + gap;
+    }
+    // Từ khoá to: đập vào (thu nhỏ từ to xuống) + hiện từng chữ cái
+    var ba = clamp((t - st.bigAt + 0.05) / 0.28, 0, 1);
+    if (ba > 0) {
+      var by = y + bigSize * 0.88;
+      var sc = 1 + 0.35 * (1 - easeOut(ba));
+      ctx.save();
+      ctx.translate(W / 2, by - bigSize * 0.4);
+      ctx.scale(sc, sc);
+      ctx.translate(-W / 2, -(by - bigSize * 0.4));
+      ctx.globalAlpha *= clamp(ba * 2, 0, 1);
+      ctx.font = '900 ' + bigSize + 'px ' + FONT;
+      var tex = st.idx % 3 === 1 ? self.textureImage() : null;
+      var fill;
+      if (tex) {
+        var off = self._texCanvas || (self._texCanvas = document.createElement('canvas'));
+        off.width = Math.ceil(bigW); off.height = Math.ceil(bigSize * 1.1);
+        drawCover(off.getContext('2d'), tex, off.width, off.height, 1.2, 0, 0.2);
+        fill = ctx.createPattern(off, 'no-repeat');
+        if (fill.setTransform) fill.setTransform(new DOMMatrix().translate(bigX, by - bigSize * 0.92));
+      } else {
+        var pal = KINETIC_FILLS[st.idx % KINETIC_FILLS.length];
+        fill = ctx.createLinearGradient(0, by - bigSize * 0.8, 0, by);
+        fill.addColorStop(0, pal[0]);
+        fill.addColorStop(1, pal[1]);
+      }
+      ctx.fillStyle = fill;
+      // Hiện từng chữ cái
+      var chars = Array.from(bigText), cx = bigX;
+      chars.forEach(function (ch, ci) {
+        var ca = clamp((t - st.bigAt - ci * 0.025 + 0.05) / 0.12, 0, 1);
+        var cw = ctx.measureText(ch).width;
+        if (ca > 0) {
+          ctx.save();
+          ctx.globalAlpha *= ca;
+          ctx.fillText(ch, cx, by);
+          ctx.restore();
+        }
+        cx += cw;
+      });
+      ctx.restore();
+    }
+    y += hBig + gap;
+    // Dòng đuôi: canh phải theo mép phải của từ khoá
+    if (st.trail.length) {
+      var tx = trailW > bigW ? (W - trailW) / 2 : bigX + bigW - trailW - 8 * u;
+      drawSmall(st.trail, tx, y + smallSize);
+    }
+    ctx.restore();
+  };
 
   /** Phụ đề từng chữ kiểu TikTok/CapCut: chữ to viền đen, chữ đang nói đổi màu và bật lên. */
   Renderer.prototype.drawWordCaptions = function (words, t) {

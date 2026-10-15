@@ -27,6 +27,42 @@
 
     <!-- BƯỚC 1 -->
     <div class="step" data-step="1">
+      <div class="box assemble" id="autoProject">
+        <h3>🚀 Làm video tự động từ thư mục</h3>
+        <p>Bỏ <b>cả thư mục</b> gồm: <b>file kịch bản</b> (Excel, Word, CSV, TXT, hoặc file chứa link Google Sheets),
+          <b>các video đã quay</b> (chưa cần cắt), <b>ảnh phối cảnh / flycam</b>, và <b>nhạc nền</b> nếu có.
+          Phần mềm tự đọc kịch bản, cắt ghép theo kịch bản, lắp phối cảnh vào đoạn chưa quay, thêm phụ đề, hiệu ứng, nhạc và xuất video.</p>
+        <label class="dropzone" id="projDrop">
+          <div class="dz-icon">📁</div>
+          <div><b>Kéo thả cả thư mục vào đây</b></div>
+          <div class="row wrap nomargin" style="justify-content:center;margin-top:8px">
+            <button class="btn" type="button" id="btnPickFolder">📁 Chọn thư mục</button>
+            <button class="btn" type="button" id="btnPickFiles">📄 Chọn nhiều file</button>
+          </div>
+          <div class="muted small-text" id="projFiles" style="margin-top:6px"></div>
+        </label>
+        <input type="file" id="projFolder" webkitdirectory directory multiple hidden>
+        <input type="file" id="projFilesInput" multiple hidden>
+        <label style="margin-top:12px">Hoặc dán link kịch bản Google Sheets / Google Docs
+          <input id="projLink" placeholder="https://docs.google.com/spreadsheets/d/...">
+        </label>
+        <div class="grid" style="margin-top:12px">
+          <label>Mức cắt chỗ ngừng
+            <select id="projPause">
+              <option value="0.25" selected>Cắt kỹ: nhịp nhanh kiểu TikTok</option>
+              <option value="0.4">Vừa phải</option>
+              <option value="0.8">Nhẹ: chỉ bỏ khoảng lặng dài</option>
+            </select>
+          </label>
+          <div class="checks">
+            <label class="check"><input type="checkbox" id="projAsr" checked> Tự nghe lời nói để xếp clip đúng cảnh</label>
+            <label class="check"><input type="checkbox" id="projExport" checked> Xuất luôn video đầy đủ + trailer khi dựng xong</label>
+          </div>
+        </div>
+        <div class="row" style="margin-top:12px"><button class="btn accent big" id="btnAutoProject" type="button" disabled>🚀 Làm video tự động</button></div>
+        <div id="projProgress" class="progress" hidden><div class="bar"></div><span></span></div>
+        <div id="projReport" class="report" hidden></div>
+      </div>
       <h2>Bước 1. Thông tin dự án / căn nhà</h2>
       <div class="guide">
         <b>Làm gì ở bước này?</b> Điền thông tin cơ bản. Phần mềm tự đưa giá, số điện thoại lên video và tự viết kịch bản.
@@ -258,8 +294,25 @@
         </label>
         <label>Kiểu phụ đề
           <select id="subStyleSelect">
+            <option value="kinetic">Chữ động xếp tầng: từ khoá to tô màu (như video mẫu)</option>
             <option value="tiktok">Từng chữ to, chữ đang nói đổi màu (kiểu TikTok)</option>
             <option value="box">Cả câu trong khung tối</option>
+          </select>
+        </label>
+        <label>Làm đẹp người nói (sáng da, mịn da, nét hơn)
+          <select id="beautySelect"></select>
+        </label>
+        <label>Nhịp nói
+          <select id="paceSelect">
+            <option value="auto">Tự động: nói chậm thì tăng tốc, nói nhanh thì hãm lại</option>
+            <option value="fast">Nhanh kiểu TikTok</option>
+            <option value="off">Giữ nguyên tốc độ gốc</option>
+          </select>
+        </label>
+        <label>Kết thúc video
+          <select id="endStyleSelect">
+            <option value="pill">Nút “LIÊN HỆ NGAY” nhỏ (như video mẫu)</option>
+            <option value="card">Khung số điện thoại to riêng</option>
           </select>
         </label>
         <label>Kiểu chuyển cảnh
@@ -278,7 +331,7 @@
           <label class="check"><input type="checkbox" id="sfxToggle" checked> Hiệu ứng âm thanh (whoosh, ting, pop)</label>
           <label class="check"><input type="checkbox" id="subToggle" checked> Phụ đề từ lời thoại</label>
           <label class="check"><input type="checkbox" id="introToggle" checked> Khung giới thiệu dự án ở đầu video</label>
-          <label class="check"><input type="checkbox" id="endToggle" checked> Khung số điện thoại ở cuối video</label>
+          <label class="check"><input type="checkbox" id="endToggle" checked> Hiện liên hệ ở cuối video</label>
           <label class="check"><input type="checkbox" id="priceToggle" checked> Hiện giá ở góc màn hình</label>
         </div>
       </div>
@@ -413,8 +466,10 @@
 <script src="js/script-gen.js"></script>
 <script src="js/audio.js"></script>
 <script src="js/timeline.js"></script>
+<script src="js/beauty.js"></script>
 <script src="js/renderer.js"></script>
 <script src="js/autocut.js"></script>
+<script src="js/importer.js"></script>
 <script src="js/demo.js"></script>
 <script src="js/webm-fix.js"></script>
 <script src="js/app.js"></script>

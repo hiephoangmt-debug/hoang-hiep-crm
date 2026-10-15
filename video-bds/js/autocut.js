@@ -55,11 +55,35 @@
       if (last && r[0] <= last[1]) last[1] = Math.max(last[1], r[1]);
       else fin.push(r);
     });
+    // Đếm số tiếng (đỉnh âm lượng) để đo tốc độ nói
+    var peaks = 0, lastPeak = -99, speechSec = 0;
+    for (var q = 1; q < n - 1; q++) {
+      if (rms[q] >= thr) speechSec += WIN;
+      if (rms[q] > thr * 1.4 && rms[q] >= rms[q - 1] && rms[q] > rms[q + 1] && (q - lastPeak) * WIN >= 0.12) {
+        // Phải là đỉnh rõ (cao hơn vùng xung quanh)
+        var lo = Math.min(rms[Math.max(0, q - 4)], rms[Math.min(n - 1, q + 4)]);
+        if (rms[q] > lo * 1.25) { peaks++; lastPeak = q; }
+      }
+    }
     var active = [];
     for (var k = 0; k < n; k++) if (rms[k] >= thr) active.push(rms[k]);
     active.sort(function (a, b) { return a - b; });
     var med = active[Math.floor(active.length / 2)] || p95 || 0.1;
-    return { segments: fin, voiceGain: Math.max(0.5, Math.min(4, 0.12 / med)), duration: dur };
+    var rate = speechSec > 1 ? peaks / speechSec : 0; // tiếng / giây
+    return { segments: fin, voiceGain: Math.max(0.5, Math.min(4, 0.12 / med)), duration: dur, rate: rate, speed: paceFor(rate) };
+  }
+
+  /**
+   * Tốc độ phát để giọng nói đạt nhịp vừa nghe (khoảng 5 tiếng/giây kiểu video TikTok).
+   * Nói chậm thì tăng tốc (tối đa 1,3 lần, giữ nguyên cao độ giọng), nói quá nhanh thì hãm nhẹ.
+   */
+  function paceFor(rate) {
+    if (!rate) return 1;
+    var sp = 5.5 / rate;
+    // Chỉ hãm khi nói thật sự quá nhanh (trên 7 tiếng/giây); nói nhanh vừa phải là nhịp TikTok tốt
+    if (sp < 1) sp = rate > 7 ? Math.max(0.92, 6.5 / rate) : 1;
+    sp = Math.min(1.3, sp);
+    return Math.round(sp * 20) / 20;
   }
 
   /**
@@ -239,7 +263,7 @@
 
   window.BdsAutoCut = {
     scriptSpan: scriptSpan,
-    findSpeech: findSpeech, groupScenes: groupScenes, transcribe: transcribe,
+    findSpeech: findSpeech, paceFor: paceFor, groupScenes: groupScenes, transcribe: transcribe,
     wordsInRange: wordsInRange, scriptWords: scriptWords,
     norm: norm, tokens: tokens, similarity: similarity, utterances: utterances,
     matchUtterances: matchUtterances, matchBroll: matchBroll
