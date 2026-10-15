@@ -455,6 +455,7 @@ footer .disc{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);padding
 .w2-cta{margin-top:22px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--green-900);color:#fff;border-radius:14px;padding:16px 18px}
 .w2-cta b{display:block}.w2-cta span{opacity:.85;font-size:.92rem}
 @media (max-width:760px){.w2{padding:18px}.w2-grid{grid-template-columns:1fr}.w2-cta .btn{width:100%}}
+.t360-box{margin-top:36px;border-radius:20px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.7);aspect-ratio:16/9;background:#0b1a3a}@media (max-width:640px){.t360-box{aspect-ratio:4/5}}.pano360{width:100%;height:100%;background:#0b1a3a}.pano360:fullscreen{width:100vw;height:100vh}.t360-box:fullscreen{border-radius:0;width:100vw;height:100vh}.t360-hint{margin:14px auto 0;text-align:center;font-size:14px;color:rgba(255,255,255,.75)}
 </style>
 <script>document.documentElement.classList.add('js')</script>
 <style>
@@ -956,12 +957,12 @@ document.addEventListener('click', function (e) { var a = e.target.closest && e.
     <div class="center rv">
       <span class="eyebrow" style="color:var(--gold-light)">Tham quan 360°</span>
       <h2 class="title" id="h-360" style="color:#fff">Toàn cảnh 360° <em style="color:var(--gold-light)">Sun FourS Tower</em></h2>
-      <p class="lead" style="color:rgba(255,255,255,.85)">Kéo để xoay 360° và xem vị trí dự án giữa sông Cổ Cò, biển, núi Sơn Trà, Ngũ Hành Sơn và toàn khu Sun Riverpolis. Bấm biểu tượng toàn màn hình để xem rõ hơn.</p>
+      <p class="lead" style="color:rgba(255,255,255,.85)">Ảnh flycam thực tế ngay trên khu đất, có đánh dấu mặt bằng các tòa. Kéo để xoay 360° và xem vị trí dự án giữa sông Cổ Cò, biển, núi Sơn Trà, Ngũ Hành Sơn và toàn khu Sun Riverpolis. Bấm biểu tượng toàn màn hình để xem rõ hơn.</p>
     </div>
-    <div class="rv" style="margin-top:36px;border-radius:20px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.7);aspect-ratio:16/9;background:#0b1a3a">
-      <button type="button" class="t360" data-src="https://kuula.co/share/LpyGP?logo=1&amp;info=0&amp;fs=1&amp;vr=0&amp;sd=1&amp;thumbs=1" aria-label="Mở tour 360 độ toàn cảnh Sun FourS Tower"><img src="https://fourstower.netlify.app/img/toan-canh-sun-fours-tower-tren-cao-800.jpg" width="800" height="450" alt="Toàn cảnh Sun FourS Tower nhìn từ trên cao" loading="lazy" decoding="async"><span class="t360-play">▶ Bấm để xoay 360°</span></button>
+    <div class="t360-box rv">
+      <button type="button" class="t360" data-pano="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@6e65a10008451cf6850498b13aaeb381e477f5e3/landing-pages/assets/toan-canh-360-sun-fours-tower.jpg" aria-label="Xem ảnh 360 độ toàn cảnh khu đất Sun FourS Tower"><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@6e65a10008451cf6850498b13aaeb381e477f5e3/landing-pages/assets/toan-canh-360-sun-fours-tower-800.jpg" width="800" height="450" alt="Toàn cảnh 360° khu đất Sun FourS Tower: Tòa F2, sông Cổ Cò, bãi tắm Sơn Thủy, Ngũ Hành Sơn" loading="lazy" decoding="async"><span class="t360-play">▶ Bấm để xoay 360°</span></button>
     </div>
-    <p class="center" style="margin-top:18px"><a href="https://kuula.co/post/LpyGP" target="_blank" rel="noopener" class="btn btn-ghost">Mở tour 360° toàn màn hình ↗</a></p>
+    <p class="center" style="margin-top:18px"><button type="button" class="btn btn-ghost" data-360fs>Xem 360° toàn màn hình ⛶</button></p>
     <div class="mcta dark rv"><div><b>Đã thấy toàn cảnh – giờ chọn đúng căn view đẹp nhất</b><span>Căn view sông Cổ Cò, biển, pháo hoa DIFF thường hết trước. Xem ngay căn view nào còn trống.</span></div><div class="mcta-btns"><button type="button" class="btn btn-gold" data-pop data-interest="Căn view đẹp – mục 360" data-title="Căn view sông – biển nào còn trống?" data-sub="Tôi gửi danh sách căn view đẹp còn trống kèm giá sau chiết khấu qua Zalo." data-btn="Gửi danh sách cho tôi →">Xem căn view đẹp còn trống</button></div></div>
 
   </div>
@@ -1578,10 +1579,6 @@ const tryExit = () => {
 document.addEventListener('mouseout', e => { if (!e.relatedTarget && e.clientY <= 0) tryExit(); });
 })();
 </script>
-<script>
-/* Tour 360: chỉ tải Kuula khi khách bấm */
-document.querySelectorAll('.t360').forEach(function (b) { b.addEventListener('click', function () { var f = document.createElement('iframe'); f.src = b.dataset.src; f.title = 'Tour 360 độ Sun FourS Tower'; f.allow = 'xr-spatial-tracking; gyroscope; accelerometer; fullscreen'; f.allowFullscreen = true; f.style.cssText = 'border:0;width:100%;height:100%;display:block'; b.replaceWith(f); }); });
-</script>
 <style>
 /* ===== Chat tư vấn tự động: chào khách, mời để lại số Zalo ===== */
 .chat-launch{position:fixed;right:18px;bottom:160px;z-index:65;width:60px;height:60px;border-radius:50%;cursor:pointer;background:#13285a;color:#fff;border:2px solid #f47a1f;box-shadow:0 12px 28px -8px rgba(11,26,58,.55);display:grid;place-items:center;padding:0}
@@ -2080,6 +2077,47 @@ const watch = setInterval(() => {
   if (k && onPage > 10000 && scrollY > 300 && Date.now() - since > 8000) { if (tease('👋 ' + ASK[k][1], k)) clearInterval(watch); }
   else if (onPage > 60000 && tease(CTX.teaser)) clearInterval(watch);
 }, 1000);
+})();
+</script>
+<script>
+/* Ảnh 360 toàn cảnh: chỉ tải trình xem (Pannellum) khi khách bấm */
+(function () {
+  var LIB = 'https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/', q = [], st = 0;
+  function lib(cb) {
+    if (window.pannellum) return cb();
+    q.push(cb); if (st) return; st = 1;
+    var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = LIB + 'pannellum.css'; document.head.appendChild(l);
+    var s = document.createElement('script'); s.src = LIB + 'pannellum.js';
+    s.onload = function () { q.splice(0).forEach(function (f) { f(); }); };
+    s.onerror = function () { st = 0; q.splice(0).forEach(function (f) { f(1); }); };
+    document.head.appendChild(s);
+  }
+  function start(b) {
+    if (b.dataset.on) return; b.dataset.on = 1;
+    var lab = b.querySelector('.t360-play'), old = lab.textContent; lab.textContent = 'Đang tải ảnh 360°…';
+    lib(function (err) {
+      if (err) { lab.textContent = 'Mạng chậm – bấm thử lại'; delete b.dataset.on; return; }
+      var d = document.createElement('div'); d.className = 'pano360'; b.replaceWith(d);
+      var narrow = innerWidth < 700;
+      window.pannellum.viewer(d, {
+        type: 'equirectangular', panorama: b.dataset.pano, autoLoad: true,
+        yaw: 50, pitch: narrow ? -38 : -42, hfov: narrow ? 100 : 115, minHfov: 40, maxHfov: 120,
+        autoRotate: -2, autoRotateInactivityDelay: 5000, mouseZoom: false, compass: false,
+        showFullscreenCtrl: true, showZoomCtrl: !narrow, strings: { loadingLabel: 'Đang tải…' }
+      });
+      if (window.track) try { track('view_360'); } catch (e) {}
+      lab.textContent = old;
+    });
+  }
+  document.querySelectorAll('.t360').forEach(function (b) { b.addEventListener('click', function () { start(b); }); });
+  document.querySelectorAll('[data-360fs]').forEach(function (x) { x.addEventListener('click', function () {
+    var sec = x.closest('section'), box = sec && sec.querySelector('.t360-box'), b = box && box.querySelector('.t360');
+    if (!box) return;
+    var rf = box.requestFullscreen || box.webkitRequestFullscreen;
+    if (rf) try { var p = rf.call(box); if (p && p.catch) p.catch(function () {}); } catch (e) {}
+    else box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (b) start(b);
+  }); });
 })();
 </script>
 </body>

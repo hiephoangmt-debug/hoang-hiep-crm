@@ -508,6 +508,8 @@ footer nav a{color:#ffb067}
 .w2-cta{margin-top:22px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--green-900);color:#fff;border-radius:14px;padding:16px 18px}
 .w2-cta b{display:block}.w2-cta span{opacity:.85;font-size:.92rem}
 @media (max-width:760px){.w2{padding:18px}.w2-grid{grid-template-columns:1fr}.w2-cta .btn{width:100%}}
+.t360{position:relative;display:block;width:100%;height:100%;border:0;padding:0;cursor:pointer;background:#0b1a3a;overflow:hidden}.t360 img{width:100%;height:100%;object-fit:cover;opacity:.8;transition:transform .6s}.t360:hover img{transform:scale(1.04)}.t360-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:linear-gradient(135deg,#ffa04a,#f47a1f);color:#fff;font:800 17px/1 var(--sans);padding:18px 30px;border-radius:999px;white-space:nowrap;box-shadow:0 12px 30px -8px rgba(244,122,31,.75)}
+.t360-box{margin-top:36px;border-radius:20px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.7);aspect-ratio:16/9;background:#0b1a3a}@media (max-width:640px){.t360-box{aspect-ratio:4/5}}.pano360{width:100%;height:100%;background:#0b1a3a}.pano360:fullscreen{width:100vw;height:100vh}.t360-box:fullscreen{border-radius:0;width:100vw;height:100vh}.t360-hint{margin:14px auto 0;text-align:center;font-size:14px;color:rgba(255,255,255,.75)}
 </style>
 <style>
 /* ===== Phần riêng trang Facebook (cùng hệ màu trang ADS) ===== */
@@ -1205,6 +1207,22 @@ if (FB_PIXEL_ID) {
 </div>
 </div>
 </section>
+
+<!-- TOÀN CẢNH 360° -->
+<section id="tour-360" aria-labelledby="h-360" style="background:var(--green-900);color:#fff">
+  <div class="container">
+    <div class="center rv">
+      <span class="eyebrow" style="color:var(--gold-light)">Toàn cảnh 360°</span>
+      <h2 class="title" id="h-360" style="color:#fff">Đứng giữa khu đất, xoay một vòng – <em style="color:var(--gold-light)">sông, biển, núi quanh Tòa F2</em></h2>
+      <p class="lead" style="color:rgba(255,255,255,.85)">Ảnh flycam thực tế chụp ngay trên khu đất, có đánh dấu mặt bằng các tòa: Tòa F2 (Mai), sông Cổ Cò, bãi tắm Sơn Thủy, Ngũ Hành Sơn, núi Sơn Trà. Kéo để xoay, bấm ⛶ để xem toàn màn hình.</p>
+    </div>
+    <div class="t360-box rv">
+      <button type="button" class="t360" data-pano="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@6e65a10008451cf6850498b13aaeb381e477f5e3/landing-pages/assets/toan-canh-360-sun-fours-tower.jpg" aria-label="Xem ảnh 360 độ toàn cảnh khu đất Sun FourS Tower"><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@6e65a10008451cf6850498b13aaeb381e477f5e3/landing-pages/assets/toan-canh-360-sun-fours-tower-800.jpg" width="800" height="450" alt="Toàn cảnh 360° khu đất Sun FourS Tower: Tòa F2, sông Cổ Cò, bãi tắm Sơn Thủy, Ngũ Hành Sơn" loading="lazy" decoding="async"><span class="t360-play">▶ Bấm để xoay 360°</span></button>
+    </div>
+    <p class="center" style="margin-top:24px"><button type="button" class="btn btn-gold" data-pop data-interest="FB – căn view đẹp, mục 360" data-title="Căn view biển – sông nào còn trống?" data-sub="Danh sách căn view đẹp Tòa F2 còn trống, kèm mặt bằng và giá sau chiết khấu – gửi qua Zalo." data-btn="Gửi danh sách cho tôi →">Xem căn view đẹp còn trống</button></p>
+  </div>
+</section>
+
 
 <!-- PHÁP LÝ -->
 <section>
@@ -1938,6 +1956,47 @@ const watch = setInterval(() => {
   if (k && onPage > 10000 && scrollY > 300 && Date.now() - since > 8000) { if (tease('👋 ' + ASK[k][1], k)) clearInterval(watch); }
   else if (onPage > 60000 && tease(CTX.teaser)) clearInterval(watch);
 }, 1000);
+})();
+</script>
+<script>
+/* Ảnh 360 toàn cảnh: chỉ tải trình xem (Pannellum) khi khách bấm */
+(function () {
+  var LIB = 'https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/', q = [], st = 0;
+  function lib(cb) {
+    if (window.pannellum) return cb();
+    q.push(cb); if (st) return; st = 1;
+    var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = LIB + 'pannellum.css'; document.head.appendChild(l);
+    var s = document.createElement('script'); s.src = LIB + 'pannellum.js';
+    s.onload = function () { q.splice(0).forEach(function (f) { f(); }); };
+    s.onerror = function () { st = 0; q.splice(0).forEach(function (f) { f(1); }); };
+    document.head.appendChild(s);
+  }
+  function start(b) {
+    if (b.dataset.on) return; b.dataset.on = 1;
+    var lab = b.querySelector('.t360-play'), old = lab.textContent; lab.textContent = 'Đang tải ảnh 360°…';
+    lib(function (err) {
+      if (err) { lab.textContent = 'Mạng chậm – bấm thử lại'; delete b.dataset.on; return; }
+      var d = document.createElement('div'); d.className = 'pano360'; b.replaceWith(d);
+      var narrow = innerWidth < 700;
+      window.pannellum.viewer(d, {
+        type: 'equirectangular', panorama: b.dataset.pano, autoLoad: true,
+        yaw: 50, pitch: narrow ? -38 : -42, hfov: narrow ? 100 : 115, minHfov: 40, maxHfov: 120,
+        autoRotate: -2, autoRotateInactivityDelay: 5000, mouseZoom: false, compass: false,
+        showFullscreenCtrl: true, showZoomCtrl: !narrow, strings: { loadingLabel: 'Đang tải…' }
+      });
+      if (window.track) try { track('view_360'); } catch (e) {}
+      lab.textContent = old;
+    });
+  }
+  document.querySelectorAll('.t360').forEach(function (b) { b.addEventListener('click', function () { start(b); }); });
+  document.querySelectorAll('[data-360fs]').forEach(function (x) { x.addEventListener('click', function () {
+    var sec = x.closest('section'), box = sec && sec.querySelector('.t360-box'), b = box && box.querySelector('.t360');
+    if (!box) return;
+    var rf = box.requestFullscreen || box.webkitRequestFullscreen;
+    if (rf) try { var p = rf.call(box); if (p && p.catch) p.catch(function () {}); } catch (e) {}
+    else box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (b) start(b);
+  }); });
 })();
 </script>
 </body>
