@@ -1,8 +1,7 @@
+import { ask, toast, download } from './ui.js';
 import { Store, samplePlan, studioPlan, luxuryPlan, emptyPlan, FLOOR_TYPES, uid } from './model.js';
 import { STYLES, PALETTE_FIELDS, roomKind, resolvePalette } from './styles.js';
 import { MAIN_KEY } from './furniture.js';
-import { BuildingView } from './building3d.js';
-import { sampleBuilding, SLOT_LIST, STATUS, TYPE_COLORS, residentialFloors, unitCode, unitPrice } from './buildingData.js';
 import { computeEstimate, estimateCSV, vnd, DEFAULT_PRICES, STYLE_FACTOR } from './estimate.js';
 import { Editor2D } from './editor2d.js';
 import { Viewer3D } from './viewer3d.js';
@@ -18,36 +17,6 @@ const editor = new Editor2D($('#plan'), store);
 const viewer = new Viewer3D($('#viewer'), store);
 editor.active = true;
 
-/** Hộp thoại trong trang (thay cho confirm/prompt vốn bị chặn trong khung nhúng) */
-function ask(message, { input = null, inputs = null, ok = 'Đồng ý', cancel = 'Huỷ' } = {}) {
-  // inputs: [{ label, value, placeholder }] → trả về mảng giá trị; input: một ô → trả về chuỗi
-  const fields = inputs || (input !== null ? [{ label: '', value: input }] : []);
-  return new Promise((resolve) => {
-    const wrap = document.createElement('div');
-    wrap.className = 'modal';
-    wrap.innerHTML = `<form class="sheet dialog"><p></p>${fields.map((f, i) => `<label class="askfield"><span></span><input type="text" id="askInput${i}" inputmode="decimal" /></label>`).join('')}
-      <div class="btnrow"><button type="button" data-r="cancel">${cancel}</button><button type="submit" class="primary">${ok}</button></div></form>`;
-    wrap.querySelector('p').textContent = message;
-    const inps = [...wrap.querySelectorAll('input')];
-    inps.forEach((inp, i) => { inp.value = fields[i].value ?? ''; inp.placeholder = fields[i].placeholder || ''; inp.previousElementSibling.textContent = fields[i].label; });
-    const value = () => (inputs ? inps.map((x) => x.value) : inps.length ? inps[0].value : true);
-    const done = (v) => { wrap.remove(); resolve(v); };
-    wrap.querySelector('form').onsubmit = (e) => { e.preventDefault(); done(value()); };
-    wrap.querySelector('[data-r="cancel"]').onclick = () => done(fields.length ? null : false);
-    wrap.onkeydown = (e) => { if (e.key === 'Escape') done(fields.length ? null : false); };
-    document.body.appendChild(wrap);
-    (inps[0] || wrap.querySelector('[type=submit]')).focus();
-    inps[0]?.select();
-  });
-}
-
-function toast(msg, ms = 2600) {
-  const t = $('#toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(toast._t);
-  toast._t = setTimeout(() => t.classList.remove('show'), ms);
-}
 
 // ---------- Đồng bộ 2D -> 3D ----------
 let rebuildT = 0;
@@ -64,7 +33,10 @@ store.addEventListener('change', (e) => {
 // ---------- Chế độ hiển thị ----------
 function setMode(mode) {
   $('#app').className = 'mode-' + mode;
+  // Chỉ vẽ cảnh đang hiển thị để nhẹ máy
+  viewer.setActive(mode === '3d' || mode === 'split');
   if (mode === 'building') openBuilding();
+  else bview?.setActive(false);
   $$('#modes button').forEach((b) => b.classList.toggle('active', b.dataset.mode === mode));
   editor.active = mode !== '3d';
   requestAnimationFrame(() => { editor.resize(); viewer.resize(); });
@@ -390,13 +362,6 @@ $('#glb').onclick = async () => {
     toast('Xuất GLB lỗi: ' + err.message);
   }
 };
-function download(blob, name) {
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = name;
-  a.click();
-  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
-}
 
 // ---------- Ảnh nền mặt bằng ----------
 $('#bgLoad').onclick = () => $('#fileImg').click();
@@ -552,8 +517,7 @@ $('#real').onclick = () => {
   $('#ptStatus').style.display = 'block';
   $('#ptStatus').textContent = 'Đang chuẩn bị cảnh…';
   setTimeout(() => {
-    try { viewer.startRealRender(); }
-    catch (err) { console.error(err); toast('Trình duyệt không hỗ trợ render chân thực: ' + err.message, 5000); viewer.stopRealRender(); }
+    viewer.startRealRender().catch((err) => { console.error(err); toast('Trình duyệt không hỗ trợ render chân thực: ' + err.message, 5000); viewer.stopRealRender(); });
   }, 30);
 };
 viewer.onPTProgress = (n) => { $('#ptStatus').textContent = `📸 Render ánh sáng thật · ${Math.floor(n)} lượt mẫu${n < 60 ? ' (đợi ảnh mịn dần…)' : ' ✓'}`; };
@@ -600,130 +564,35 @@ $('#estReset').onclick = () => store.commit((pl) => { pl.settings.prices = {}; d
 store.addEventListener('change', (e) => { if (!$('#estimate').hidden && e.detail !== 'drag') renderEstimate(); });
 void DEFAULT_PRICES;
 
-// ---------- Tòa nhà 3D (bảng hàng trực quan) ----------
-const B_KEY = 'floorplan3d.building';
-let building;
-try { building = JSON.parse(localStorage.getItem(B_KEY) || 'null'); } catch { building = null; }
-building ||= sampleBuilding();
-let bview = null, bsel = null;
-const saveBuilding = () => { try { localStorage.setItem(B_KEY, JSON.stringify(building)); } catch { /* bộ nhớ đầy */ } };
-const bUnit = (key) => (building.units[key] ||= { status: 'available' });
-const vndTy = (n) => n.toLocaleString('vi-VN', { maximumFractionDigits: 2 });
-
-function openBuilding() {
-  if (!bview) bview = new BuildingView($('#buildingView'), () => building, (sel) => { bsel = sel; renderBDetail(); });
-  renderBPanel();
+// ---------- Tòa nhà 3D: tải riêng khi mở lần đầu cho nhẹ ----------
+let bview = null;
+async function openBuilding() {
+  if (!bview) {
+    const { mountBuildingUI } = await import('./buildingUI.js');
+    bview = mountBuildingUI({
+      toast, ask, download,
+      getCurrentPlan: () => store.plan,
+      openUnit: (layout, info) => openUnitPlan(layout, info),
+    });
+  }
+  bview.setActive(true);
 }
 
-function bStats() {
-  const floors = residentialFloors(building.floors);
-  const st = Object.fromEntries(Object.keys(STATUS).map((k) => [k, { n: 0, value: 0 }]));
-  floors.forEach((fl, fi) => SLOT_LIST.forEach((sl) => {
-    const s = building.units[`${fl}-${sl.slot}`]?.status || 'available';
-    st[s].n++;
-    st[s].value += unitPrice(building, fi, sl);
-  }));
-  return { st, total: floors.length * SLOT_LIST.length };
+/** Mở mặt bằng của một căn (từ tòa nhà) ở chế độ 3D */
+function openUnitPlan(layout, info) {
+  editor.select(null);
+  store.load(layout);
+  const fnum = parseInt(info.floor, 10) || 3;
+  if (viewState) setView({ ...viewState, floor: fnum }, 'apply');
+  setMode('3d');
+  toast(`Đang xem ${info.code} · ${info.slot.type} · ${info.slot.tt} m² thông thủy`, 4000);
 }
 
-function renderBPanel() {
-  const { st, total } = bStats();
-  const floors = residentialFloors(building.floors);
-  const f = bview?.filter.status;
-  $('#bpanel').innerHTML = `
-    <h3>🏢 ${building.name} · ${floors.length} tầng ở · ${total} căn</h3>
-    ${building.sample ? '<div class="sample">Trạng thái và giá đang là dữ liệu mẫu để minh hoạ. Nhấp vào từng căn để cập nhật.</div>' : ''}
-    <div class="bstats">${Object.entries(STATUS).map(([k, v]) => `<button data-st="${k}" class="${f && !f.has(k) ? 'off' : ''}" title="Bấm để ẩn/hiện"><small><i class="dot" style="background:${v.color}"></i>${v.name}</small><b>${st[k].n}</b></button>`).join('')}</div>
-    <div class="bmoney">Đã bán + đặt cọc: <b>${vndTy(st.sold.value + st.deposit.value)} tỷ</b><br>Giá trị hàng còn trống: <b>${vndTy(st.available.value)} tỷ</b></div>
-    <h4>Tô màu theo</h4>
-    <div class="row seg">${[['status', 'Trạng thái'], ['type', 'Loại căn'], ['facade', 'Mặt đứng']].map(([k, n]) => `<button data-color="${k}" class="${(bview?.colorBy || 'status') === k ? 'active' : ''}">${n}</button>`).join('')}</div>
-    ${(bview?.colorBy || 'status') === 'type' ? `<div class="row">${Object.entries(TYPE_COLORS).map(([k, c]) => `<small><i class="dot" style="background:${c}"></i> ${k}</small>`).join(' ')}</div>` : ''}
-    <h4>Lọc loại căn</h4>
-    <select id="bType"><option value="">Tất cả loại căn</option>${Object.keys(TYPE_COLORS).map((t) => `<option ${bview?.filter.type === t ? 'selected' : ''}>${t}</option>`).join('')}</select>
-    <h4>Xem theo tầng</h4>
-    <select id="bFloor"><option value="">Cả tòa nhà</option>${floors.map((fl, i) => `<option value="${i}" ${bview?.onlyFloor === i ? 'selected' : ''}>Tầng ${fl.replace(/^0/, '')}</option>`).join('')}</select>
-    <h4>Thông số tòa</h4>
-    <label class="field"><span>Số tầng ở</span><input type="number" id="bFloors" min="1" max="60" value="${building.floors}" /></label>
-    <label class="field"><span>Đơn giá (tr/m² TT)</span><input type="number" id="bPrice" min="1" step="0.5" value="${building.pricePerM2}" /></label>
-    <div class="row"><button id="bCsv">⬇ Xuất bảng hàng (CSV)</button><button id="bReset" title="Tạo lại dữ liệu mẫu">↺ Dữ liệu mẫu</button></div>`;
-  $$('#bpanel [data-st]').forEach((b) => (b.onclick = () => { const s = bview.filter.status; s.has(b.dataset.st) ? s.delete(b.dataset.st) : s.add(b.dataset.st); bview.rebuild(); renderBPanel(); }));
-  $$('#bpanel [data-color]').forEach((b) => (b.onclick = () => { bview.colorBy = b.dataset.color; bview.rebuild(); renderBPanel(); }));
-  $('#bType').onchange = (e) => { bview.filter.type = e.target.value || null; bview.rebuild(); };
-  $('#bFloor').onchange = (e) => {
-    bview.onlyFloor = e.target.value === '' ? null : +e.target.value;
-    bview.rebuild();
-    const y = building.podiumFloors * building.podiumHeight + ((bview.onlyFloor ?? floors.length) + 0.5) * building.floorHeight;
-    bview.controls.target.set(0, bview.onlyFloor === null ? 30 : y, 0);
-  };
-  $('#bFloors').onchange = (e) => { building.floors = Math.max(1, Math.min(60, +e.target.value || 1)); saveBuilding(); bview.rebuild(); renderBPanel(); };
-  $('#bPrice').onchange = (e) => { building.pricePerM2 = +e.target.value || building.pricePerM2; saveBuilding(); renderBPanel(); renderBDetail(); };
-  $('#bCsv').onclick = () => {
-    const rows = [['Mã căn', 'Tầng', 'Vị trí', 'Loại', 'DT tim (m²)', 'DT thông thủy (m²)', 'Giá (tỷ)', 'Trạng thái', 'Khách hàng', 'Ghi chú']];
-    floors.forEach((fl, fi) => SLOT_LIST.forEach((sl) => {
-      const u = building.units[`${fl}-${sl.slot}`] || {};
-      rows.push([unitCode(building, fl, sl.slot), fl, sl.slot, sl.type, sl.tim, sl.tt, unitPrice(building, fi, sl).toFixed(2), STATUS[u.status || 'available'].name, u.customer || '', u.note || '']);
-    }));
-    const esc = (v) => (/[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v));
-    download(new Blob(['\ufeff' + rows.map((r) => r.map(esc).join(',')).join('\r\n')], { type: 'text/csv;charset=utf-8' }), `bang-hang-${building.code}.csv`);
-  };
-  $('#bReset').onclick = async () => {
-    if (!(await ask('Tạo lại dữ liệu mẫu? Trạng thái, giá và khách hàng đã nhập sẽ bị xoá (mặt bằng đã gán vẫn giữ).', { ok: 'Tạo lại' }))) return;
-    const layouts = building.layouts;
-    building = sampleBuilding();
-    building.layouts = layouts;
-    saveBuilding(); bsel = null; renderBDetail(); bview.rebuild(); renderBPanel();
-  };
-}
-
-function renderBDetail() {
-  const el = $('#bdetail');
-  if (!bsel) { el.hidden = true; return; }
-  const { floor, floorIndex, slot } = bsel;
-  const key = `${floor}-${slot.slot}`;
-  const u = bUnit(key);
-  const price = unitPrice(building, floorIndex, slot);
-  const hasLayout = !!building.layouts[slot.slot];
-  el.hidden = false;
-  el.innerHTML = `
-    <h3>${unitCode(building, floor, slot.slot)} <button id="bdClose" title="Đóng">✕</button></h3>
-    <div class="row"><span class="chip" style="background:${STATUS[u.status || 'available'].color}">${STATUS[u.status || 'available'].name}</span><small>${slot.type} · tầng ${floor.replace(/^0/, '')} · vị trí ${slot.slot}</small></div>
-    <div class="kv">
-      <div><small>DT tim tường</small><b>${slot.tim} m²</b></div>
-      <div><small>DT thông thủy</small><b>${slot.tt} m²</b></div>
-      <div><small>Giá ${u.price ? '' : '(ước tính)'}</small><b>${vndTy(price)} tỷ</b></div>
-      <div><small>Đơn giá TT</small><b>${vndTy((price * 1000) / slot.tt)} tr/m²</b></div>
-    </div>
-    <label class="field"><span>Trạng thái</span><select id="bdStatus">${Object.entries(STATUS).map(([k, v]) => `<option value="${k}" ${(u.status || 'available') === k ? 'selected' : ''}>${v.name}</option>`).join('')}</select></label>
-    <label class="field"><span>Giá bán (tỷ)</span><input type="number" id="bdPrice" step="0.01" min="0" value="${u.price ?? ''}" placeholder="${price.toFixed(2)}" /></label>
-    <label class="field"><span>Khách hàng</span><input type="text" id="bdCustomer" value="${(u.customer || '').replace(/"/g, '&quot;')}" placeholder="Tên, SĐT" /></label>
-    <label class="field"><span>Ghi chú</span><input type="text" id="bdNote" value="${(u.note || '').replace(/"/g, '&quot;')}" /></label>
-    <button id="bdView" class="primary">🏠 Xem căn hộ 3D</button>
-    <button id="bdAssign" title="Lưu mặt bằng đang mở trong trình vẽ làm mặt bằng của vị trí ${slot.slot} (áp dụng cho mọi tầng)">📌 Gán mặt bằng đang mở cho vị trí ${slot.slot}</button>
-    <p class="hint">${hasLayout ? `Vị trí ${slot.slot} đã có mặt bằng (dùng chung mọi tầng).` : `Vị trí ${slot.slot} chưa có mặt bằng. Dựng căn ở chế độ 2D (ví dụ nhận diện từ ảnh mặt bằng căn), rồi quay lại bấm “Gán”.`}</p>`;
-  const upd = (fn) => { fn(u); building.sample = false; saveBuilding(); bview.rebuild(); renderBPanel(); };
-  $('#bdClose').onclick = () => { bsel = null; bview.setSelected(null); renderBDetail(); };
-  $('#bdStatus').onchange = (e) => { upd((x) => (x.status = e.target.value)); renderBDetail(); };
-  $('#bdPrice').onchange = (e) => { upd((x) => { const v = parseFloat(e.target.value); if (isFinite(v) && v > 0) x.price = v; else delete x.price; }); renderBDetail(); };
-  $('#bdCustomer').onchange = (e) => upd((x) => (x.customer = e.target.value.trim()));
-  $('#bdNote').onchange = (e) => upd((x) => (x.note = e.target.value.trim()));
-  $('#bdAssign').onclick = () => {
-    building.layouts[slot.slot] = JSON.parse(JSON.stringify(store.plan));
-    saveBuilding();
-    renderBDetail();
-    toast(`Đã gán mặt bằng hiện tại cho vị trí ${slot.slot} (mọi tầng).`);
-  };
-  $('#bdView').onclick = () => {
-    const layout = building.layouts[slot.slot];
-    if (!layout) return toast(`Vị trí ${slot.slot} chưa có mặt bằng. Dựng căn ở chế độ 2D rồi bấm “Gán mặt bằng đang mở”.`, 5000);
-    editor.select(null);
-    store.load(JSON.parse(JSON.stringify(layout)));
-    // View ngoài cửa: đặt theo tầng của căn để ẩn sân cỏ khi ở trên cao
-    const fnum = parseInt(floor, 10) || 3;
-    if (viewState) setView({ ...viewState, floor: fnum }, 'apply');
-    setMode('3d');
-    toast(`Đang xem ${unitCode(building, floor, slot.slot)} · ${slot.type} · ${slot.tt} m² thông thủy`, 4000);
-  };
-}
+// Mở căn được chuyển sang từ trang toa-nha.html
+try {
+  const pending = JSON.parse(localStorage.getItem('floorplan3d.openUnit') || 'null');
+  if (pending) { localStorage.removeItem('floorplan3d.openUnit'); setTimeout(() => openUnitPlan(pending.layout, pending.info), 400); }
+} catch { /* bỏ qua */ }
 
 // Lần đầu mở: phát hiệu ứng dựng nhà
 setTimeout(() => viewer.playBuild(), 300);

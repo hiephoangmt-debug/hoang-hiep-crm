@@ -5,84 +5,137 @@ import { Sky } from 'three/examples/jsm/objects/Sky.js';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 import { SLOT_LIST, CORES, PODIUM, rectM, STATUS, TYPE_COLORS, residentialFloors, unitCode, unitPrice } from './buildingData.js';
-import { getTexture } from './textures.js';
+import { buildSurroundings } from './surroundings.js';
 
-function facadeTexture() {
+/** Mặt đứng 1 ô (rộng 3 m × cao 1 tầng): khung, tường, cửa kính, lan can kính, bồn cây hoa */
+function facadeTexture(variant) {
   const c = document.createElement('canvas');
-  c.width = 256; c.height = 128;
+  c.width = 256; c.height = 256;
   const x = c.getContext('2d');
-  x.fillStyle = '#d9d3c7'; x.fillRect(0, 0, 256, 128);
-  x.fillStyle = '#2c3e50';
-  x.fillRect(18, 18, 100, 88); x.fillRect(138, 18, 100, 88);
-  const g = x.createLinearGradient(0, 18, 0, 106);
-  g.addColorStop(0, 'rgba(160,200,230,0.55)'); g.addColorStop(1, 'rgba(40,60,80,0.1)');
-  x.fillStyle = g; x.fillRect(18, 18, 100, 88); x.fillRect(138, 18, 100, 88);
-  x.fillStyle = '#f2efe8'; x.fillRect(0, 112, 256, 16);
+  const frame = variant === 'green' ? '#2f5d3a' : '#f4f2ec';
+  const wall = variant === 'orange' ? '#e8892f' : '#c9c2b5';
+  x.fillStyle = wall; x.fillRect(0, 0, 256, 256);
+  if (variant === 'orange') { x.fillStyle = '#c9c2b5'; x.fillRect(150, 0, 106, 256); }
+  // Cửa kính cao
+  const g = x.createLinearGradient(0, 30, 0, 200);
+  g.addColorStop(0, '#5c7a94'); g.addColorStop(0.5, '#2e4558'); g.addColorStop(1, '#22313f');
+  x.fillStyle = g; x.fillRect(40, 30, 100, 175);
+  x.fillStyle = 'rgba(255,255,255,0.18)'; x.fillRect(46, 34, 30, 160);
+  x.fillStyle = '#3a4048'; x.fillRect(88, 30, 4, 175);
+  x.fillStyle = g; x.fillRect(176, 60, 50, 110);
+  // Lan can kính + bồn cây
+  x.fillStyle = 'rgba(200,225,235,0.55)'; x.fillRect(0, 175, 256, 40);
+  x.fillStyle = '#3d7a31'; x.fillRect(20, 196, 140, 20);
+  for (let i = 0; i < 26; i++) { x.fillStyle = ['#e2709a', '#d9443c', '#f2a03d', '#5fa047'][i % 4]; x.beginPath(); x.arc(24 + Math.random() * 132, 196 + Math.random() * 8, 4 + Math.random() * 4, 0, 7); x.fill(); }
+  // Khung: cột đứng + dải sàn
+  x.fillStyle = frame; x.fillRect(0, 0, 14, 256); x.fillRect(0, 222, 256, 34);
   const t = new THREE.CanvasTexture(c);
   t.colorSpace = THREE.SRGBColorSpace;
+  t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  t.anisotropy = 8;
   return t;
 }
 
+/** Hình chữ nhật bo góc (toạ độ mặt bằng: x, y = trục z), đùn lên theo chiều cao */
+function roundedPrism(r, y0, h, radii = {}, inset = 0) {
+  const x0 = r.x0 + inset, x1 = r.x1 - inset, z0 = r.y0 + inset, z1 = r.y1 - inset;
+  const lim = Math.min(x1 - x0, z1 - z0) / 2;
+  const R = (k) => Math.max(0, Math.min(lim, (radii[k] || 0) - inset));
+  const tl = R('tl'), tr = R('tr'), br = R('br'), bl = R('bl');
+  const sh = new THREE.Shape();
+  const P = (x, z) => [x, -z];
+  sh.moveTo(...P(x0 + tl, z0));
+  sh.lineTo(...P(x1 - tr, z0)); if (tr) sh.quadraticCurveTo(...P(x1, z0), ...P(x1, z0 + tr));
+  sh.lineTo(...P(x1, z1 - br)); if (br) sh.quadraticCurveTo(...P(x1, z1), ...P(x1 - br, z1));
+  sh.lineTo(...P(x0 + bl, z1)); if (bl) sh.quadraticCurveTo(...P(x0, z1), ...P(x0, z1 - bl));
+  sh.lineTo(...P(x0, z0 + tl)); if (tl) sh.quadraticCurveTo(...P(x0, z0), ...P(x0 + tl, z0));
+  const geo = new THREE.ExtrudeGeometry(sh, { depth: h, bevelEnabled: false, curveSegments: 12 });
+  geo.rotateX(-Math.PI / 2);
+  geo.translate(0, y0, 0);
+  return geo;
+}
+
+// Góc bo theo mặt bằng tòa F2
+const SLOT_RADII = { 24: { tl: 4.2 }, 26: { tr: 3 }, '03': { tl: 3 }, '05': { tr: 4.2 }, 19: { bl: 4.2 }, 17: { br: 3 }, 12: { bl: 3 }, 10: { br: 4.2 } };
+const WINGS = [
+  { px: [440, 330, 820, 1140], radii: { tl: 4.2, tr: 3, bl: 4.2, br: 3 } },
+  { px: [820, 630, 1290, 1100], radii: {} },
+  { px: [1290, 330, 1670, 1140], radii: { tl: 3, tr: 4.2, bl: 3, br: 4.2 } },
+];
+const ORANGE_SLOTS = new Set(['05', '06', '07', '08', '09', '10']);
+export const AVENUE_X = -52;
+
 export class BuildingView {
-  constructor(container, getBuilding, onSelect) {
+  constructor(container, getBuilding, onSelect, opts = {}) {
+    this.light = !!opts.light;
     this.container = container;
     this.getBuilding = getBuilding;
     this.onSelect = onSelect;
-    this.colorBy = 'status';
+    this.colorBy = 'facade';
     this.maxFloor = Infinity;
     this.onlyFloor = null;
     this.filter = { status: new Set(Object.keys(STATUS)), type: null };
+    this.facadeTex = { beige: facadeTexture('beige'), orange: facadeTexture('orange'), green: facadeTexture('green') };
     const r = (this.renderer = new THREE.WebGLRenderer({ antialias: true }));
-    r.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    r.shadowMap.enabled = true;
+    r.setPixelRatio(Math.min(window.devicePixelRatio, this.light ? 1 : 2));
+    r.shadowMap.enabled = !this.light;
     r.toneMapping = THREE.ACESFilmicToneMapping;
+    r.toneMappingExposure = 1.05;
     container.appendChild(r.domElement);
     this.labels = new CSS2DRenderer();
     this.labels.domElement.className = 'labels-layer';
     container.appendChild(this.labels.domElement);
     const scene = (this.scene = new THREE.Scene());
+    scene.fog = new THREE.Fog(0xcbdcea, 380, 1500);
     scene.environment = new THREE.PMREMGenerator(r).fromScene(new RoomEnvironment(), 0.04).texture;
-    scene.environmentIntensity = 0.4;
+    scene.environmentIntensity = 0.45;
     const sky = new Sky();
-    sky.scale.setScalar(2000);
+    sky.scale.setScalar(2500);
     const u = sky.material.uniforms;
-    u.turbidity.value = 5; u.rayleigh.value = 1.4; u.mieCoefficient.value = 0.004;
-    u.sunPosition.value.setFromSphericalCoords(1, THREE.MathUtils.degToRad(50), THREE.MathUtils.degToRad(210));
+    u.turbidity.value = 3; u.rayleigh.value = 1.2; u.mieCoefficient.value = 0.003; u.mieDirectionalG.value = 0.8;
+    u.sunPosition.value.setFromSphericalCoords(1, THREE.MathUtils.degToRad(42), THREE.MathUtils.degToRad(200));
     scene.add(sky);
-    const sun = new THREE.DirectionalLight(0xfff1dc, 3);
-    sun.position.set(-90, 160, 110);
+    const sun = new THREE.DirectionalLight(0xfff1dc, 3.2);
+    sun.position.set(-110, 190, 160);
     sun.castShadow = true;
     sun.shadow.mapSize.set(4096, 4096);
-    Object.assign(sun.shadow.camera, { left: -110, right: 110, top: 110, bottom: -110, far: 500 });
-    sun.shadow.bias = -0.0005;
+    Object.assign(sun.shadow.camera, { left: -190, right: 190, top: 190, bottom: -190, far: 700 });
+    sun.shadow.bias = -0.0004;
+    sun.shadow.normalBias = 0.05;
     scene.add(sun, new THREE.HemisphereLight(0xcfe6ff, 0x6b7f4f, 1.0));
-    const gt = getTexture('grass').clone();
-    gt.needsUpdate = true;
-    gt.repeat.set(160, 160);
-    const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.MeshStandardMaterial({ map: gt }));
-    ground.rotation.x = -Math.PI / 2;
-    ground.receiveShadow = true;
-    scene.add(ground);
-    const road = new THREE.Mesh(new THREE.PlaneGeometry(16, 400), new THREE.MeshStandardMaterial({ color: 0x3a3d42, roughness: 0.9 }));
-    road.rotation.x = -Math.PI / 2;
-    road.position.set(-48, 0.02, 0);
-    road.receiveShadow = true;
-    scene.add(road);
-    const line = new THREE.Mesh(new THREE.PlaneGeometry(0.25, 400), new THREE.MeshBasicMaterial({ color: 0xf5c542 }));
-    line.rotation.x = -Math.PI / 2;
-    line.position.set(-48, 0.03, 0);
-    scene.add(line);
 
-    this.camera = new THREE.PerspectiveCamera(40, 1, 0.5, 3000);
-    this.camera.position.set(95, 85, 120);
+    const fp = rectM(PODIUM);
+    // Các tòa lân cận (chỉ để làm cảnh, không tương tác)
+    this.neighbors = [
+      { x: 2 * AVENUE_X, z: 0, mirror: true, floors: 20 },
+      { x: 2 * AVENUE_X, z: -90, mirror: true, floors: 17, rot: Math.PI },
+      { x: 0, z: -92, mirror: false, floors: 15, rot: Math.PI },
+    ];
+    this.surroundArgs = {
+      footprint: { x0: fp.x0, x1: fp.x1, z0: fp.y0, z1: fp.y1 },
+      avenueX: AVENUE_X,
+      reserved: this.neighbors.map((n) => ({ x: n.x, z: n.z, w: fp.x1 - fp.x0 + 20, d: fp.y1 - fp.y0 + 20 })),
+    };
+    this.surround = buildSurroundings({ ...this.surroundArgs, density: this.light ? 0.3 : 1 });
+    scene.add(this.surround);
+    const b0 = getBuilding();
+    for (const n of this.neighbors) {
+      const g = new THREE.Group();
+      this.buildTower(g, { ...b0, floors: n.floors, units: {} }, { interactive: false, colorBy: 'facade' });
+      g.position.set(n.x, 0, n.z);
+      g.rotation.y = n.rot || 0;
+      if (n.mirror) g.scale.x = -1;
+      scene.add(g);
+    }
+
+    this.camera = new THREE.PerspectiveCamera(38, 1, 0.5, 4000);
     this.controls = new OrbitControls(this.camera, r.domElement);
-    this.controls.target.set(0, 30, 0);
     this.controls.enableDamping = true;
-    this.controls.maxPolarAngle = Math.PI * 0.49;
+    this.controls.maxPolarAngle = Math.PI * 0.495;
     this.controls.minDistance = 15;
-    this.controls.maxDistance = 400;
+    this.controls.maxDistance = 900;
+    this.setView('perspective');
 
-    this.facadeTex = facadeTexture();
     this.raycaster = new THREE.Raycaster();
     this.tooltip = document.createElement('div');
     this.tooltip.className = 'tooltip3d';
@@ -91,99 +144,142 @@ export class BuildingView {
     new ResizeObserver(() => this.resize()).observe(container);
     this.resize();
     this.rebuild();
-    r.setAnimationLoop(() => {
+    this.setActive(true);
+  }
+
+  setActive(on) {
+    if (on === this.active) return;
+    this.active = on;
+    this.renderer.setAnimationLoop(on ? () => {
       this.controls.update();
-      r.render(scene, this.camera);
-      this.labels.render(scene, this.camera);
+      this.renderer.render(this.scene, this.camera);
+      this.labels.render(this.scene, this.camera);
+    } : null);
+  }
+
+  /** Chế độ nhẹ: ít cây/nhà, tắt bóng đổ, giảm độ phân giải */
+  setLight(on) {
+    this.light = on;
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, on ? 1 : 2));
+    this.renderer.shadowMap.enabled = !on;
+    this.scene.traverse((o) => { if (o.material) o.material.needsUpdate = true; });
+    this.scene.remove(this.surround);
+    this.surround.traverse((o) => o.geometry?.dispose());
+    this.surround = buildSurroundings({ ...this.surroundArgs, density: on ? 0.3 : 1 });
+    this.scene.add(this.surround);
+    this.resize();
+  }
+
+  /** Góc nhìn: 'perspective' = như ảnh phối cảnh (dọc đại lộ), 'close' = cận cảnh tòa */
+  setView(name) {
+    if (name === 'perspective') { this.camera.position.set(AVENUE_X + 6, 62, 260); this.controls.target.set(AVENUE_X + 10, 38, -10); }
+    else { this.camera.position.set(95, 85, 120); this.controls.target.set(0, 30, 0); }
+    this.controls.update();
+  }
+
+  /** Dựng một tòa vào group; interactive = có khối căn để chọn */
+  buildTower(root, b, { interactive, colorBy }) {
+    const floors = residentialFloors(b.floors);
+    const H = b.floorHeight, P = b.podiumHeight;
+    const slabMat = new THREE.MeshStandardMaterial({ color: 0xf4f1ea, roughness: 0.6 });
+    const coreMat = new THREE.MeshStandardMaterial({ color: 0x9aa0a8, roughness: 0.8 });
+    const glassMat = new THREE.MeshStandardMaterial({ color: 0x2f4f6b, roughness: 0.06, metalness: 0.7 });
+    const roofMat = new THREE.MeshStandardMaterial({ color: 0x5c8f3a, roughness: 1 });
+    const add = (geo, material, shadow = true) => {
+      const m = new THREE.Mesh(geo, material);
+      m.castShadow = shadow;
+      m.receiveShadow = true;
+      root.add(m);
+      return m;
+    };
+    const pod = rectM(PODIUM);
+    for (let i = 0; i < b.podiumFloors; i++) {
+      add(roundedPrism(pod, i * P, P - 0.45, { tl: 5, tr: 5, bl: 5, br: 5 }, 0.5), glassMat);
+      add(roundedPrism(pod, i * P + P - 0.45, 0.45, { tl: 5, tr: 5, bl: 5, br: 5 }), slabMat);
+    }
+    const base = b.podiumFloors * P;
+    const units = [];
+    const visibleTop = interactive ? Math.min(this.maxFloor, floors.length) : floors.length;
+    const only = interactive ? this.onlyFloor : null;
+    floors.forEach((fl, fi) => {
+      if (fi >= visibleTop || (only !== null && fi > only)) return;
+      const y = base + fi * H;
+      const ghost = only !== null && fi < only;
+      for (const c of CORES) add(roundedPrism(rectM(c), y, H - 0.3, {}, 0.05), coreMat, false);
+      for (const sl of SLOT_LIST) {
+        const st = b.units[`${fl}-${sl.slot}`]?.status || 'available';
+        const passes = !interactive || (this.filter.status.has(st) && (!this.filter.type || this.filter.type === sl.type));
+        let material;
+        if (colorBy === 'facade') {
+          const map = this.facadeTex[ORANGE_SLOTS.has(sl.slot) ? 'orange' : fi < 6 && sl.rect.x0 < 0 ? 'green' : 'beige'];
+          map.repeat.set(1 / 4.5, 1 / (H - 0.3));
+          material = new THREE.MeshStandardMaterial({ map, roughness: 0.55, transparent: ghost || !passes, opacity: ghost ? 0.15 : passes ? 1 : 0.2 });
+        } else {
+          const col = colorBy === 'type' ? TYPE_COLORS[sl.type] : STATUS[st].color;
+          material = new THREE.MeshStandardMaterial({ color: col, roughness: 0.45, transparent: !passes || ghost, opacity: ghost ? 0.12 : passes ? 1 : 0.18 });
+        }
+        const m = add(roundedPrism(sl.rect, y, H - 0.3, SLOT_RADII[sl.slot], 0.08), material);
+        if (!interactive) continue;
+        m.userData = { floor: fl, floorIndex: fi, slot: sl, key: `${fl}-${sl.slot}` };
+        units.push(m);
+        if (fi === only) {
+          const el = document.createElement('div');
+          el.className = 'unitlabel';
+          el.innerHTML = `<b>${sl.slot}</b><span>${sl.type}</span>`;
+          const lab = new CSS2DObject(el);
+          lab.position.set((sl.rect.x0 + sl.rect.x1) / 2, y + H, (sl.rect.y0 + sl.rect.y1) / 2);
+          root.add(lab);
+        }
+      }
+      // Sàn + ban công nhô 0,4 m tạo vệt trắng ngang (bỏ ở tầng đang xem riêng)
+      if (fi !== only) for (const w of WINGS) add(roundedPrism(rectM(w.px), y + H - 0.3, 0.3, w.radii, -0.4), slabMat);
+      if (interactive && (fi % 2 === 0 || fi === floors.length - 1)) {
+        const el = document.createElement('div');
+        el.className = 'floorlabel';
+        el.textContent = 'T' + fl.replace(/^0/, '');
+        const lab = new CSS2DObject(el);
+        lab.position.set(pod.x1 + 3, y + H / 2, pod.y1);
+        root.add(lab);
+      }
     });
+    // Mái: khung trắng + vườn trên mái
+    if (visibleTop >= floors.length && only === null) {
+      const roofY = base + floors.length * H;
+      const leaf = new THREE.MeshStandardMaterial({ color: 0x3f7d33, flatShading: true });
+      for (const w of [WINGS[0], WINGS[2]]) {
+        const r = rectM(w.px);
+        add(roundedPrism(r, roofY, 0.3, w.radii, 0.3), roofMat, false);
+        add(roundedPrism(r, roofY + 2.4, 0.35, w.radii, -0.4), slabMat);
+        for (let i = 0; i < 10; i++) {
+          const t = new THREE.Mesh(new THREE.IcosahedronGeometry(0.8 + (i % 3) * 0.35, 0), leaf);
+          t.position.set(r.x0 + 2 + ((r.x1 - r.x0 - 4) * ((i * 37) % 100)) / 100, roofY + 1, r.y0 + 2 + ((r.y1 - r.y0 - 4) * ((i * 61) % 100)) / 100);
+          t.castShadow = true;
+          root.add(t);
+        }
+      }
+      // Cột khung trắng ở 4 góc mái
+      for (const w of [WINGS[0], WINGS[2]]) {
+        const r = rectM(w.px);
+        for (const [x, z] of [[r.x0 + 1.5, r.y0 + 1.5], [r.x1 - 1.5, r.y0 + 1.5], [r.x0 + 1.5, r.y1 - 1.5], [r.x1 - 1.5, r.y1 - 1.5]]) {
+          const c = new THREE.Mesh(new THREE.BoxGeometry(0.35, 2.4, 0.35), slabMat);
+          c.position.set(x, roofY + 1.2, z);
+          root.add(c);
+        }
+      }
+    }
+    return units;
   }
 
   rebuild() {
     const b = this.getBuilding();
     if (this.root) {
       this.scene.remove(this.root);
-      this.root.traverse((o) => { o.geometry?.dispose(); if (o.element?.parentNode) o.element.remove(); });
+      this.root.traverse((o) => { o.geometry?.dispose(); o.material?.dispose?.(); if (o.element?.parentNode) o.element.remove(); });
     }
-    const root = (this.root = new THREE.Group());
-    this.unitMeshes = [];
-    const floors = residentialFloors(b.floors);
-    this.floors = floors;
-    const H = b.floorHeight, P = b.podiumHeight;
-    const slabMat = new THREE.MeshStandardMaterial({ color: 0xf4f1ea, roughness: 0.6 });
-    const coreMat = new THREE.MeshStandardMaterial({ color: 0x9aa0a8, roughness: 0.8 });
-    const glassMat = new THREE.MeshStandardMaterial({ color: 0x2f4f6b, roughness: 0.08, metalness: 0.6 });
-    const box = (r, y0, h, material, inset = 0) => {
-      const m = new THREE.Mesh(new THREE.BoxGeometry(r.x1 - r.x0 - inset * 2, h, r.y1 - r.y0 - inset * 2), material);
-      m.position.set((r.x0 + r.x1) / 2, y0 + h / 2, (r.y0 + r.y1) / 2);
-      m.castShadow = true;
-      m.receiveShadow = true;
-      root.add(m);
-      return m;
-    };
-    // Khối đế thương mại
-    const pod = rectM(PODIUM);
-    for (let i = 0; i < b.podiumFloors; i++) {
-      box(pod, i * P, P - 0.4, glassMat, 0.4);
-      box(pod, i * P + P - 0.4, 0.4, slabMat);
-    }
-    const base = b.podiumFloors * P;
-    const visibleTop = Math.min(this.maxFloor, floors.length);
-    const status = (fl, s) => b.units[`${fl}-${s.slot}`]?.status || 'available';
-    floors.forEach((fl, fi) => {
-      if (fi >= visibleTop) return;
-      if (this.onlyFloor !== null && fi !== this.onlyFloor && fi > this.onlyFloor) return;
-      const y = base + fi * H;
-      const ghost = this.onlyFloor !== null && fi < this.onlyFloor;
-      for (const c of CORES) box(rectM(c), y, H - 0.3, coreMat, 0.05).userData.core = true;
-      for (const s of SLOT_LIST) {
-        const st = status(fl, s);
-        const passes = this.filter.status.has(st) && (!this.filter.type || this.filter.type === s.type);
-        let material;
-        if (this.colorBy === 'facade') material = new THREE.MeshStandardMaterial({ map: this.facadeTex, roughness: 0.6 });
-        else {
-          const col = this.colorBy === 'type' ? TYPE_COLORS[s.type] : STATUS[st].color;
-          material = new THREE.MeshStandardMaterial({ color: col, roughness: 0.45, transparent: !passes || ghost, opacity: ghost ? 0.12 : passes ? 1 : 0.18 });
-        }
-        const m = box(s.rect, y, H - 0.3, material, 0.08);
-        m.userData = { floor: fl, floorIndex: fi, slot: s, key: `${fl}-${s.slot}` };
-        this.unitMeshes.push(m);
-        if (fi === this.onlyFloor) {
-          const el = document.createElement('div');
-          el.className = 'unitlabel';
-          el.innerHTML = `<b>${s.slot}</b><span>${s.type}</span>`;
-          const lab = new CSS2DObject(el);
-          lab.position.set((s.rect.x0 + s.rect.x1) / 2, y + H, (s.rect.y0 + s.rect.y1) / 2);
-          root.add(lab);
-        }
-      }
-      // Sàn tầng: viền trắng theo từng cánh (bỏ ở tầng đang xem riêng để nhìn thấy các căn)
-      if (fi !== this.onlyFloor) for (const r of [rectM([440, 330, 820, 1140]), rectM([820, 630, 1290, 1100]), rectM([1290, 330, 1670, 1140])]) box(r, y + H - 0.3, 0.3, slabMat);
-      // Nhãn tầng
-      if (fi % 2 === 0 || fi === floors.length - 1) {
-        const el = document.createElement('div');
-        el.className = 'floorlabel';
-        el.textContent = 'T' + fl.replace(/^0/, '');
-        const lab = new CSS2DObject(el);
-        lab.position.set(pod.x0 - 2.5, y + H / 2, pod.y1);
-        root.add(lab);
-      }
-    });
-    // Sân vườn mái
-    if (visibleTop >= floors.length && this.onlyFloor === null) {
-      const roofY = base + floors.length * H;
-      const green = new THREE.MeshStandardMaterial({ color: 0x5c8f3a, roughness: 1 });
-      const leaf = new THREE.MeshStandardMaterial({ color: 0x3f7d33, flatShading: true });
-      for (const r of [rectM([450, 340, 810, 1130]), rectM([1300, 340, 1660, 1130])]) {
-        box(r, roofY, 0.25, green);
-        for (let i = 0; i < 8; i++) {
-          const t = new THREE.Mesh(new THREE.IcosahedronGeometry(0.9 + (i % 3) * 0.3, 0), leaf);
-          t.position.set(r.x0 + 1.5 + ((r.x1 - r.x0 - 3) * ((i * 37) % 100)) / 100, roofY + 1.1, r.y0 + 1.5 + ((r.y1 - r.y0 - 3) * ((i * 61) % 100)) / 100);
-          t.castShadow = true;
-          root.add(t);
-        }
-      }
-    }
-    this.scene.add(root);
+    this.root = new THREE.Group();
+    this.unitMeshes = this.buildTower(this.root, b, { interactive: true, colorBy: this.colorBy });
+    this.floors = residentialFloors(b.floors);
+    this.scene.add(this.root);
     this.highlightSelected();
   }
 

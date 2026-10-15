@@ -15,7 +15,6 @@ import { buildScene, disposeTree, SHARED } from './builder.js';
 import { getTexture } from './textures.js';
 import { closestOnSegment, rotatePoint } from './geom.js';
 import { CATALOG_MAP } from './furniture.js';
-import { WebGLPathTracer, GradientEquirectTexture } from 'three-gpu-pathtracer';
 
 const easeOut = (t) => 1 - Math.pow(1 - t, 3);
 
@@ -115,7 +114,15 @@ export class Viewer3D {
     this.rebuild(false);
     this.frameAll(false);
     this.setHour(this.state.hour);
-    r.setAnimationLoop(() => this.tick());
+    this.setActive(true);
+  }
+
+  /** Dừng / chạy lại vòng vẽ (khi khung 3D bị ẩn thì không tốn GPU) */
+  setActive(on) {
+    if (on === this.active) return;
+    this.active = on;
+    this._last = performance.now();
+    this.renderer.setAnimationLoop(on ? () => this.tick() : null);
   }
 
   // ---------------- Dựng cảnh ----------------
@@ -286,8 +293,10 @@ export class Viewer3D {
   }
 
   // ---------------- Render chân thực (path tracing) ----------------
-  startRealRender() {
+  async startRealRender() {
     if (!this.built) return;
+    // Bộ path tracing khá nặng nên chỉ tải khi người dùng bấm "Render ảnh thật"
+    const { WebGLPathTracer, GradientEquirectTexture } = (this._ptLib ||= await import('three-gpu-pathtracer'));
     if (this.anim) this.finishAnim();
     this.fly = null;
     this.built.doors.forEach((d) => (d.open = d.target));

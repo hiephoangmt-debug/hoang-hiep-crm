@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tòa F2 – Bảng hàng 3D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo">⌂</span><div><b>Tòa F2</b><small>Bảng hàng 3D</small></div></div>
+    <div class="actions">
+      <a class="btnlink" href="./index.html">✏️ Trình dựng căn hộ 3D</a>
+    </div>
+  </header>
+  <main id="app" class="mode-building">
+    <section class="pane panebuilding" id="paneBuilding">
+      <div id="buildingView"></div>
+      <div class="bpanel" id="bpanel"></div>
+      <div class="bdetail" id="bdetail" hidden></div>
+    </section>
+  </main>
+  <div class="toast" id="toast"></div>
+  <script type="module" src="./src/building-page.js"></script>
+</body>
+</html>
