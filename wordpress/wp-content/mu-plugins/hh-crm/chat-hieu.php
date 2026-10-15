@@ -226,6 +226,19 @@ function hh_chat_followup( $t, $prev, $ctx ) {
 			return "Dạ ven sông Hàn thì tối nào cũng có \"view pháo hoa miễn phí\" mùa lễ hội đó $x 😄\n\nKhu trung tâm tiện đi làm, đi chơi, căn hộ ven sông cũng giữ giá tốt. " . ( $budget ? "Tầm {$fmt( $budget )} em gửi $x vài căn nhé." : "$X tính tầm tài chính khoảng bao nhiêu ạ?" );
 		}
 	}
+	// Chat vừa hỏi lịch đi xem → khách trả lời giờ, ngày.
+	if ( preg_match( '/tien ngay nao|buoi sang hay chieu|dat lich|lich (di )?xem/', $p ) ) {
+		$call = $lead ? "$name sẽ gọi $x để chốt giờ ạ." : "$X để lại số điện thoại/Zalo, $name gọi chốt giờ và gửi vị trí cho $x nhé.";
+		if ( preg_match( '/khuya|nua dem|dem|12h dem|1h sang|2h sang/', $t ) ) {
+			return "Dạ khuya thì bảo vệ với nhà mẫu đều đi ngủ hết rồi $x ơi 😄\n\nXem nhà ban ngày mới thấy rõ nắng, hướng gió, đường vào. Nếu ban ngày $x bận, $name xem được buổi tối sớm (trước 21h) hoặc gọi video dẫn $x xem trước. $call";
+		}
+		if ( preg_match( '/\b(sang|chieu|toi|trua|mai|mot|hom nay|nay|cuoi tuan|thu (2|3|4|5|6|7|hai|ba|tu|nam|sau|bay)|chu nhat|t[2-7]|\d{1,2} ?(h|gio)|ngay \d)/', $t ) ) {
+			return "Dạ được ạ, em ghi lịch cho $x 👍 $call";
+		}
+		if ( preg_match( '/^(luc nao cung duoc|tuy|gi cung duoc|khi nao cung duoc|bat ky)/', $t ) ) {
+			return "Dạ vậy để $name xếp giờ đẹp nhất, nắng nhẹ xem nhà là chuẩn 😊 $call";
+		}
+	}
 	// Đồng ý ngắn ("ok", "có", "ừ", "được", "gửi đi").
 	if ( preg_match( '/^(ok|co|u|vang|da|duoc|dong y|gui (di|em|anh|chi|minh)?|gui|xem|muon|co a|co chu|ok em|duoc em|nhat tri|chuan)\b/', $t ) && preg_match( '/khong a\?|nhe\.?$|nhe a|a\?$/', $p ) ) {
 		return $lead

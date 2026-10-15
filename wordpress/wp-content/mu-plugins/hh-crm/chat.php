@@ -867,6 +867,11 @@ function hh_chat_witty( $t, $name, $prev = '' ) {
 		'/co nen mua (bay gio|luc nay|khong)|mua (luc nao|thoi diem nao)|gia (co )?(giam|xuong) khong|sap (giam|xuong)|bong bong|sot ao|dinh (roi|chua)/' => array(
 			"Câu này mà em đoán trúng 100% thì em đã… nghỉ hưu ở Mỹ Khê rồi $x ạ 😄\n\nNói theo số liệu: quý 3/2026 chung cư Đà Nẵng đi ngang khoảng 67 triệu/m², cho thuê lãi khoảng 4,5%/năm; đất nền đang điều chỉnh khoảng 7%. Mua để ở, cho thuê thì lúc nào hợp tài chính là lúc tốt; lướt sóng ngắn hạn thì nên chậm lại. $X mua để ở hay đầu tư ạ?",
 		),
+		// Trêu "có gái không", "gái đi xem cùng" (không phải con gái, em gái).
+		'/(?<!con )(?<!em )(?<!chau )(?<!ban )(?<!vo )(?<!cho )\bgai\b(?! (minh|toi|tui|anh|chi|em|con))|chan dai|em ut (di|kem)|co em (nao )?(di|kem|tiep)|tiep vien|massage|karaoke om/' => array(
+			"Dạ \"gái\" thì giỏ hàng của em hết sạch rồi $x ơi 😄 Em chỉ còn nhà đẹp, sổ hồng và bảng giá thôi.\n\nĐi xem nhà thì $name đi cùng, nói chuyện giá cả, pháp lý \"ngọt\" không kém đâu ạ. $X muốn xem căn hộ hay đất ạ?",
+			"Dạ cái này nằm ngoài \"danh mục sản phẩm\" của em rồi $x ạ 😅\n\nCòn nhà view biển, view sông Hàn thì em có nhiều, xem xong đảm bảo \"say nắng\". $X tính đi xem khu nào ạ?",
+		),
 		// Tán tỉnh, người yêu, hẹn hò.
 		'/nguoi yeu|ban gai|ban trai|doc than|e (qua|lam)\b|lay vo|lay chong|ket hon|yeu em|thuong em|thich em|hen ho|di (cafe|ca phe|choi|an) (khong|ko|voi)|lam quen|crush/' => array(
 			"Dạ em \"độc thân vui tính\", chỉ mê mỗi… sổ hồng Đà Nẵng thôi $x ơi 😄 Mà $x đang tìm tổ ấm cho hai người hay tìm chỗ đầu tư ạ?",

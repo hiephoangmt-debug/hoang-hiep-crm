@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.19** + plugin Hoàng Hiệp CRM **2.20.51**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.19** + plugin Hoàng Hiệp CRM **2.20.52**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.52: chat hiểu giờ hẹn xem nhà, đáp khéo câu trêu
+
+- Chat vừa hỏi "tiện ngày nào, sáng hay chiều" → khách trả lời "chiều mai", "thứ 7", "8h sáng", "lúc nào cũng được"… được ghi nhận và xin số chốt lịch; khách hỏi "khuya dc ko" → đáp vui (khuya nhà mẫu đi ngủ rồi), gợi ý tối sớm trước 21h hoặc xem qua video.
+- Khách trêu "gái đi xem dc ko", "có gái xinh không"… → đáp hóm hỉnh, lịch sự rồi kéo về chuyện xem nhà (không nhầm với "con gái", "em gái").
+- Cài: Dự án → Nhập nhanh → tải `cap-nhat-code.zip` → LiteSpeed Cache → Purge All.
 
 ## Có gì mới – giao diện 2.15.19: trang máy tính cân giữa lại
 
