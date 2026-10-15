@@ -13,6 +13,7 @@ import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
 import { buildScene, disposeTree, SHARED } from './builder.js';
 import { upgradeFurniture, loadInteriorHDRI } from './realistic.js';
+import { resolvePalette } from './styles.js';
 import { getTexture } from './textures.js';
 import { closestOnSegment, rotatePoint, labelPoint, polygonArea, pointInPolygon, pointInRotRect } from './geom.js';
 import { CATALOG_MAP } from './furniture.js';
@@ -148,7 +149,7 @@ export class Viewer3D {
     this._above = undefined;
     if (this.ptActive) this.stopRealRender();
     built.labels.forEach((l) => (l.visible = this.state.labels));
-    if (this.state.realistic) upgradeFurniture(built, [this.clipPlane]);
+    if (this.state.realistic) upgradeFurniture(built, [this.clipPlane], resolvePalette(this.store.plan.settings));
     this.fitShadow();
     this.applyLights();
     this.applyDoors(1);
@@ -231,7 +232,7 @@ export class Viewer3D {
     this.shadowCatcher.visible = studio;
     if (studio) {
       this.sky.visible = false;
-      this.scene.background = new THREE.Color(night ? 0x1c2230 : 0xf3f4f6);
+      this.scene.background = new THREE.Color(night ? 0x1c2230 : 0xdcdcdc);
       this.hemi.groundColor.setHex(0xe8e6e1);
     } else this.hemi.groundColor.setHex(0x6b7f4f);
     this.isNight = night;
@@ -362,7 +363,7 @@ export class Viewer3D {
       grad.update();
       this._ptBg = { bg: this.scene.background, env: this.scene.environment };
       // Nền trắng: nền sáng trơn; ánh sáng môi trường dùng HDRI phòng nếu có
-      if (this.isStudio()) { grad.topColor.set(night ? 0x1c2230 : 0xf3f4f6); grad.bottomColor.set(night ? 0x1c2230 : 0xe9eaec); grad.update(); }
+      if (this.isStudio()) { grad.topColor.set(night ? 0x1c2230 : 0xdcdcdc); grad.bottomColor.set(night ? 0x1c2230 : 0xd4d4d4); grad.update(); }
       this.scene.background = grad;
       this.scene.environment = this.state.realistic && this.hdriEquirect ? this.hdriEquirect : grad;
     } else {
@@ -524,7 +525,13 @@ export class Viewer3D {
     let pos;
     if (preset === 'top') pos = new THREE.Vector3(b.cx, s * 1.55 + 4, b.cy + 0.01);
     else if (preset === 'front') pos = new THREE.Vector3(b.cx, s * 0.35 + 1.5, b.maxY + s * 1.0 + 3);
-    else pos = this.isStudio() ? new THREE.Vector3(b.cx + s * 0.05, s * 1.3 + 2.5, b.maxY + s * 0.32 + 1) : new THREE.Vector3(b.cx + s * 0.08, s * 1.85 + 5, b.maxY + s * 0.45 + 1.5);
+    else if (this.isoView) {
+      // Góc nhìn chéo kiểu phối cảnh bán hàng: từ phía mặt tiền, lệch trái, chúc xuống
+      const { az, el, k = 1 } = this.isoView;
+      const d = (s * 1.45 + 3.5) * k, A = THREE.MathUtils.degToRad(az), E = THREE.MathUtils.degToRad(el);
+      target.z = b.cy + s * 0.12; // dời tâm về phía mặt tiền để căn nằm cao hơn thanh công cụ
+      pos = target.clone().add(new THREE.Vector3(Math.sin(A) * Math.cos(E), Math.sin(E), Math.cos(A) * Math.cos(E)).multiplyScalar(d));
+    } else pos = this.isStudio() ? new THREE.Vector3(b.cx + s * 0.05, s * 1.3 + 2.5, b.maxY + s * 0.32 + 1) : new THREE.Vector3(b.cx + s * 0.08, s * 1.85 + 5, b.maxY + s * 0.45 + 1.5);
     this.flyTo(pos, target, smooth);
   }
 

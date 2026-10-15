@@ -14,6 +14,15 @@ const store = { plan: null, background: null, addEventListener() {}, changed() {
 let unit = null;
 let tab = '3d';
 let viewer = null;
+// Mặt cắt kiểu phối cảnh bán hàng: cắt tường ở 2 m, bỏ trần để nhìn rõ bố trí
+const CUT_H = 2.4;
+let section = true;
+function applySection() {
+  const H = viewer.built?.height || 2.8;
+  viewer.state.cut = section ? (CUT_H - 0.25) / (H - 0.25) : 1;
+  viewer.updateClip();
+  $('#cutBtn')?.classList.toggle('active', section);
+}
 
 function renderUnitList() {
   $('#units').innerHTML = UNITS.map((u) => `
@@ -33,7 +42,9 @@ function selectUnit(id) {
   renderInfo();
   if (!viewer) {
     viewer = new Viewer3D($('#viewer'), store);
-    viewer.state.people = true;
+    viewer.state.people = false;
+    viewer.state.labels = false;
+    viewer.isoView = { az: -38, el: 52, k: 1.2 };
     viewer.state.realistic = true;
     viewer.setRealistic(true);
     viewer.setOption('landscape', false);
@@ -46,6 +57,7 @@ function selectUnit(id) {
     viewer.rebuild(true);
     viewer.frameAll(false);
   }
+  applySection();
   viewer.setHour(15);
   setTab(tab);
 }
@@ -105,7 +117,7 @@ function setTab(t) {
   $('#progress').hidden = t !== '4d';
   viewer.setActive(t !== '2d');
   if (t !== '4d') viewer.stopTour();
-  if (t === '3d') { viewer.resize(); viewer.frameAll(true); }
+  if (t === '3d') { viewer.resize(); applySection(); viewer.frameAll(true); }
   if (t === '4d') startTour();
   renderStyles();
 }
@@ -128,7 +140,8 @@ $$('[data-tab]').forEach((b) => (b.onclick = () => { if (viewer.ptActive) viewer
 $('#view2d').onclick = () => $('#view2d').classList.toggle('zoom');
 $('#dayBtn').onclick = () => { viewer.setHour(15); $('#dayBtn').classList.add('active'); $('#nightBtn').classList.remove('active'); };
 $('#nightBtn').onclick = () => { viewer.setHour(20); $('#nightBtn').classList.add('active'); $('#dayBtn').classList.remove('active'); };
-$('#topBtn').onclick = () => viewer.setView('top');
+$('#topBtn').onclick = () => { applySection(); viewer.setView('top'); };
+$('#cutBtn').onclick = () => { section = !section; applySection(); viewer.frameAll(true); };
 $('#realBtn').onclick = () => {
   const on = !viewer.state.realistic;
   viewer.setRealistic(on);
@@ -140,6 +153,11 @@ $('#photoBtn').onclick = () => {
   $('#caption').hidden = false;
   $('#caption').innerHTML = 'Đang chuẩn bị ảnh như thật…';
   viewer.startRealRender().catch((err) => { toast('Máy này chưa hỗ trợ chụp ảnh như thật: ' + err.message, 5000); viewer.stopRealRender(); });
+};
+$('#labelBtn').onclick = () => {
+  const on = !viewer.state.labels;
+  viewer.setOption('labels', on);
+  $('#labelBtn').classList.toggle('active', on);
 };
 $('#peopleBtn').onclick = () => {
   const on = !viewer.state.people;

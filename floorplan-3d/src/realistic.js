@@ -8,9 +8,9 @@ import { CATALOG_MAP } from './furniture.js';
 const BASE = import.meta.env.BASE_URL || './';
 // Loại đồ → mô hình; fit: co theo 'width' (giữ tỉ lệ) hoặc 'box' (vừa khít rộng × sâu)
 const MODELS = {
-  sofa: { file: 'sofa.glb', fit: 'width' },
-  armchair: { file: 'armchair.glb', fit: 'width' },
-  chair: { file: 'chair.glb', fit: 'width' },
+  sofa: { file: 'sofa.glb', fit: 'width', tint: 'fabric' },
+  armchair: { file: 'armchair.glb', fit: 'width', tint: 'fabric2' },
+  chair: { file: 'chair.glb', fit: 'width', tint: 'fabric' },
   plant: { file: 'plant.glb', fit: 'height', h: 1.25 },
 };
 const cache = new Map();
@@ -33,7 +33,7 @@ function load(file) {
 }
 
 /** Thay nội thất khối đơn giản bằng mô hình thật (nếu có) – chạy sau khi dựng cảnh */
-export async function upgradeFurniture(built, clippingPlanes = []) {
+export async function upgradeFurniture(built, clippingPlanes = [], palette = null) {
   const jobs = [];
   for (const g of built.furniture) {
     const item = g.userData.item;
@@ -49,7 +49,14 @@ export async function upgradeFurniture(built, clippingPlanes = []) {
       else s = Math.min(w / m.size.x, (d * 1.15) / m.size.z);
       inst.scale.setScalar(s);
       inst.position.set(-m.center.x * s, -m.box.min.y * s, -m.center.z * s);
-      if (clippingPlanes.length) inst.traverse((o) => { if (o.isMesh) { o.material = o.material.clone(); o.material.clippingPlanes = clippingPlanes; } });
+      const tint = spec.tint && palette?.[spec.tint];
+      inst.traverse((o) => {
+        if (!o.isMesh || (!clippingPlanes.length && !tint)) return;
+        o.material = o.material.clone();
+        if (clippingPlanes.length) o.material.clippingPlanes = clippingPlanes;
+        // Vải bọc theo bảng màu phong cách (sofa xám, ghế bành xanh…)
+        if (tint && /fabric/i.test(o.material.name)) { o.material.color.set(tint); o.material.map = null; o.material.needsUpdate = true; }
+      });
       // Ẩn khối đơn giản, giữ đèn (nếu có)
       g.children.forEach((c) => { if (!c.isLight) c.visible = false; });
       inst.userData.realModel = true;

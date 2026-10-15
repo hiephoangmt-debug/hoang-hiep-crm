@@ -197,6 +197,21 @@ const generators = {
     }
     return { c, size: 2.5 };
   },
+  // Ốp gỗ veneer dạng tấm đứng (vân dọc, khe ron mỗi 0,6 m) – màu nhân với màu tường
+  panel: () => {
+    const [c, x] = canvas(512), r = rand(31);
+    x.fillStyle = '#ffffff'; x.fillRect(0, 0, 512, 512);
+    for (let i = 0; i < 260; i++) {
+      x.strokeStyle = `rgba(120,85,50,${0.02 + r() * 0.04})`;
+      x.lineWidth = 0.5 + r() * 2.5;
+      const px = r() * 512;
+      x.beginPath(); x.moveTo(px, 0);
+      for (let y = 0; y <= 512; y += 32) x.lineTo(px + Math.sin(y * 0.02 + i) * 2, y);
+      x.stroke();
+    }
+    for (const gx of [0, 256]) { x.fillStyle = 'rgba(60,40,25,0.35)'; x.fillRect(gx, 0, 3, 512); x.fillStyle = 'rgba(255,255,255,0.5)'; x.fillRect(gx + 3, 0, 2, 512); }
+    return { c, size: 1.2 };
+  },
   plaster: () => {
     const [c, x] = canvas(256), r = rand(17);
     x.fillStyle = '#ffffff'; x.fillRect(0, 0, 256, 256);

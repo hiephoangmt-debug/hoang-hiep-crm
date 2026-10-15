@@ -6,7 +6,7 @@
 // - labels: chữ trên bản vẽ → tên phòng; furniture: [loại, x, y, góc, {w,d}]
 export const UNIT_SPECS = [
   {
-    id: '1pn-plus', name: '1 Phòng ngủ +', type: '1PN+', image: 9, dims: [9.63, 6.545], style: 'luxury',
+    id: '1pn-plus', name: '1 Phòng ngủ +', type: '1PN+', image: 9, dims: [9.63, 6.545], style: 'warm',
     remove: [], cut: [[860, 822, 1088, 822]],
     walls: [[855, 700, 855, 826], [1090, 620, 1090, 826]],
     removeOpenings: [[975, 822]],
@@ -27,16 +27,16 @@ export const UNIT_SPECS = [
     ],
   },
   {
-    id: '1pn', name: '1 Phòng ngủ', type: '1PN', image: 10, dims: [4.65, 8.08], style: 'luxury',
+    id: '1pn', name: '1 Phòng ngủ', type: '1PN', image: 10, dims: [4.65, 8.08], style: 'warm',
     remove: [], cut: [], removeWalls: [[430, 192]],
     walls: [[705, 715, 800, 715], [845, 735, 845, 905], [560, 395, 700, 395]],
     extraWindows: [[[335, 212, 562, 212], 2.0, { sill: 0.1, height: 1.1 }]],
     extraSlides: [[[335, 395, 470, 395], 1.3]],
-    doors: [[752, 715, 0.85, 'h'], [845, 790, 0.75, 'v']], slides: [], windows: [], removeOpenings: [],
+    doors: [[752, 715, 0.85, 'h'], [845, 790, 0.75, 'v']], slides: [], windows: [], removeOpenings: [[741, 225]],
     labels: [['Lô gia', 490, 310], ['Phòng ngủ', 860, 610], ['Phòng khách', 580, 710], ['WC', 915, 865], ['Bếp + ăn', 530, 1010]],
     furniture: [
       ['washer', 600, 335, 0], ['plant', 385, 285],
-      ['sofa', 612, 560, 90, { w: 2.2 }], ['rug', 515, 560, 0, { w: 1.8, d: 2.3 }], ['roundTable', 505, 555], ['armchair', 420, 480, 300], ['tvStand', 350, 545, 270, { w: 1.6 }],
+      ['sofa', 612, 560, 90, { w: 2.2 }], ['rug', 515, 560, 0, { w: 1.8, d: 2.3 }], ['roundTable', 505, 555], ['armchair', 420, 480, 300], ['tvStand', 350, 590, 270, { w: 1.4 }],
       ['diningTable', 405, 812, 0, { w: 1.4, d: 0.8 }], ['chair', 370, 722, 0], ['chair', 440, 722, 0], ['chair', 370, 902, 180], ['chair', 440, 902, 180],
       ['kitchen', 352, 1000, 270, { w: 1.2 }], ['kitchen', 455, 1127, 180, { w: 2.1 }], ['fridge', 622, 1122, 180],
       ['bed', 905, 440, 90, { nightstands: true }], ['wardrobe', 925, 680, 180, { w: 1.9 }], ['tvStand', 722, 430, 270, { w: 1.6, d: 0.4 }], ['plant', 742, 292],
@@ -44,7 +44,7 @@ export const UNIT_SPECS = [
     ],
   },
   {
-    id: '2pn-a', name: '2 Phòng ngủ (căn góc)', type: '2PN', image: 11, dims: [8.995, 9.895], style: 'luxury',
+    id: '2pn-a', name: '2 Phòng ngủ (căn góc)', type: '2PN', image: 11, dims: [8.995, 9.895], style: 'warm',
     remove: [[350, 980], [380, 905]], cut: [], walls: [[598, 690, 598, 812], [305, 1290, 472, 1290]], removeWalls: [],
     extraWindows: [[[1072, 822, 1072, 1118], 2.7, { sill: 0.05, height: 1.05 }]],
     doors: [[598, 752, 0.85, 'v'], [712, 690, 0.7, 'h'], [495, 735, 0.7, 'v'], [390, 1290, 0.95, 'h']], slides: [[915, 965, 2.2, 'v']], windows: [], removeOpenings: [[915, 930]],
@@ -61,7 +61,7 @@ export const UNIT_SPECS = [
     ],
   },
   {
-    id: '2pn-b', name: '2 Phòng ngủ 2 WC', type: '2PN', image: 12, dims: [10.42, 8.09], style: 'luxury',
+    id: '2pn-b', name: '2 Phòng ngủ 2 WC', type: '2PN', image: 12, dims: [10.42, 8.09], style: 'warm',
     remove: [[410, 423], [660, 983], [787, 915], [600, 989], [1133, 840]], cut: [], removeWalls: [], outside: [[600, 1120]],
     walls: [[644, 600, 644, 702], [1030, 907, 1205, 907]], extraWindows: [[[176, 712, 176, 1000], 2.6, { sill: 0.05, height: 1.05 }]],
     doors: [[585, 700, 0.85, 'h'], [680, 700, 0.7, 'h'], [857, 707, 0.85, 'h'], [1036, 957, 0.75, 'v'], [935, 1002, 0.95, 'h']],
@@ -80,7 +80,7 @@ export const UNIT_SPECS = [
     ],
   },
   {
-    id: '3pn', name: '3 Phòng ngủ', type: '3PN', image: 13, dims: [11.52, 9.9], style: 'luxury',
+    id: '3pn', name: '3 Phòng ngủ', type: '3PN', image: 13, dims: [11.52, 9.9], style: 'warm',
     remove: [[600, 805]], cut: [], removeWalls: [],
     walls: [[816, 712, 905, 712], [450, 805, 490, 805], [1095, 818, 1095, 925]],
     extraWindows: [[[1212, 832, 1212, 1108], 2.5, { sill: 0.05, height: 1.05 }]],
@@ -107,14 +107,14 @@ export const UNIT_SPECS = [
 const W = (ax, ay, bx, by, t = 0.12) => ({ a: [ax, ay], b: [bx, by], t });
 UNIT_SPECS.push(
   {
-    id: 'studio', name: 'Studio', type: 'Studio', dims: [5.315, 6.82], style: 'luxury', manual: true,
+    id: 'studio', name: 'Studio', type: 'Studio', dims: [5.315, 6.82], style: 'warm', manual: true,
     walls: [
       W(0, 0, 5.315, 0, 0.2), W(5.315, 0, 5.315, 6.82, 0.2), W(5.315, 6.82, 0, 6.82, 0.2), W(0, 6.82, 0, 0, 0.2),
       W(1.7, 0, 1.7, 2.1, 0.1), W(0, 2.1, 1.7, 2.1, 0.1), W(3.65, 5.0, 5.315, 5.0), W(3.65, 5.0, 3.65, 6.82), W(2.95, 2.9, 2.95, 5.0, 0.1),
     ],
     openings: [
-      [0, 'door', 2.35, 0.9], [4, 'door', 1.45, 0.7], [6, 'slide', 0.85, 1.0],
-      [2, 'slide', 3.45, 2.6], [2, 'window', 0.85, 1.4, { sill: 0.05, height: 1.05 }],
+      [0, 'door', 2.35, 0.9], [4, 'door', 1.45, 0.7], [6, 'slide', 5.9, 1.0],
+      [2, 'slide', 1.8, 2.4], [2, 'window', 4.48, 1.5, { sill: 0.05, height: 1.05 }],
     ],
     rooms: [
       ['WC', 'darkTile', [[0, 0], [1.7, 0], [1.7, 2.1], [0, 2.1]]],
@@ -126,12 +126,12 @@ UNIT_SPECS.push(
       ['vanity', 0.36, 0.55, 270, { w: 0.6 }], ['shower', 1.2, 0.55, 0, { w: 0.8, d: 0.8 }], ['toilet', 0.4, 1.6, 270],
       ['fridge', 3.2, 0.42, 0], ['kitchen', 4.88, 1.75, 90, { w: 2.6 }], ['plant', 2.6, 2.45],
       ['sofa', 0.5, 3.2, 270, { w: 1.6, d: 0.8 }], ['roundTable', 1.35, 3.25, 0, { w: 0.6, d: 0.6 }],
-      ['bed', 1.1, 5.6, 270, { w: 1.6, nightstands: true }], ['rug', 1.4, 5.3, 0, { w: 2.0, d: 1.6 }], ['tvStand', 2.75, 5.6, 90, { w: 1.3, d: 0.35 }],
+      ['bed', 1.1, 5.0, 270, { w: 1.6, nightstands: true }], ['rug', 1.4, 5.0, 0, { w: 2.0, d: 1.6 }], ['tvStand', 2.75, 5.0, 90, { w: 1.3, d: 0.35 }],
       ['washer', 4.95, 5.6, 90], ['plant', 3.95, 6.45],
     ],
   },
   {
-    id: '2pn-1wc', name: '1 PN+ (2 PN 1 WC)', type: '1PN+', dims: [6.3, 11.52], style: 'luxury', manual: true,
+    id: '2pn-1wc', name: '1 PN+ (2 PN 1 WC)', type: '1PN+', dims: [6.3, 11.52], style: 'warm', manual: true,
     walls: [
       W(0, 0, 6.3, 0, 0.2), W(6.3, 0, 6.3, 11.52, 0.2), W(6.3, 11.52, 0, 11.52, 0.2), W(0, 11.52, 0, 0, 0.2),
       W(0, 10.0, 6.3, 10.0, 0.15), W(3.3, 2.3, 3.3, 10.0), W(3.3, 5.7, 6.3, 5.7), W(3.0, 0, 3.0, 2.3, 0.1), W(3.0, 2.3, 4.7, 2.3, 0.1), W(4.7, 0, 4.7, 2.3, 0.1),
@@ -149,9 +149,9 @@ UNIT_SPECS.push(
     ],
     furniture: [
       ['kitchen', 0.32, 1.55, 270, { w: 2.4 }], ['fridge', 0.4, 3.15, 270],
-      ['diningTable', 1.4, 4.6, 90, { w: 1.3, d: 0.85 }], ['chair', 0.95, 4.3, 270], ['chair', 0.95, 4.9, 270], ['chair', 1.85, 4.3, 90], ['chair', 1.85, 4.9, 90],
-      ['rug', 1.75, 7.6, 0, { w: 2.0, d: 2.4 }], ['sofa', 2.95, 7.6, 90, { w: 2.0, d: 0.85 }], ['roundTable', 1.75, 7.6, 0, { w: 0.7, d: 0.7 }],
-      ['armchair', 1.2, 8.9, 0, { w: 0.75, d: 0.75 }], ['tvStand', 0.28, 7.6, 270, { w: 1.6, d: 0.4 }], ['plant', 0.45, 9.55],
+      ['diningTable', 1.45, 4.7, 90, { w: 1.8, d: 0.9 }], ['chair', 0.85, 4.1, 270], ['chair', 0.85, 4.7, 270], ['chair', 0.85, 5.3, 270], ['chair', 2.05, 4.1, 90], ['chair', 2.05, 4.7, 90], ['chair', 2.05, 5.3, 90],
+      ['rug', 1.75, 8.05, 0, { w: 2.0, d: 2.4 }], ['sofa', 2.95, 8.05, 90, { w: 2.0, d: 0.85 }], ['roundTable', 1.75, 8.05, 0, { w: 0.7, d: 0.7 }],
+      ['armchair', 1.0, 6.9, 180, { w: 0.75, d: 0.75 }], ['tvStand', 0.28, 8.05, 270, { w: 1.6, d: 0.4 }], ['plant', 0.45, 9.55],
       ['toilet', 4.35, 0.4, 0], ['vanity', 3.4, 0.38, 0, { w: 0.6 }], ['shower', 4.2, 1.8, 0, { w: 0.8, d: 0.8 }],
       ['wardrobe', 5.5, 0.38, 0, { w: 1.4 }], ['bedSingle', 5.25, 3.95, 90, { w: 1.4, nightstands: true }],
       ['bed', 5.25, 7.85, 90, { w: 1.6, nightstands: true }], ['wardrobe', 3.65, 6.7, 270, { w: 1.4 }], ['plant', 6.0, 9.6],

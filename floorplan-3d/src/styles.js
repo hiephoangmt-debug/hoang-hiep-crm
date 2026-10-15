@@ -1,5 +1,11 @@
 // Các phong cách nội thất nổi tiếng: màu tường, vật liệu sàn theo loại phòng, bảng màu đồ đạc, chi tiết trang trí.
 export const STYLES = {
+  warm: {
+    name: 'Ấm áp gỗ sồi', desc: 'Như ảnh phối cảnh mẫu: tường be ốp gỗ, sàn đá trắng phòng khách, gỗ xương cá phòng ngủ, sofa xám, ghế xanh, lam chắn lô-gia',
+    wall: '#ecdfcc', cap: '#f1eee9', wallTex: 'panel',
+    floors: { bedroom: 'herringboneLight', living: 'marble', kitchen: 'marble', wet: 'tile', outdoor: 'darkTile' },
+    palette: { wood: '#c9a47c', woodDark: '#8a6a4e', fabric: '#c8c5c0', fabric2: '#2f4a7a', bedding: '#d9ccb9', accent: '#8a6a4e', cabinet: '#d8c2a2', stone: '#3a3836', metal: '#2b2b2b', curtain: '#f3eee6', drape: '#b9a891', rug1: '#d2c6b3', rug2: '#8f8170', leather: false, slats: true, led: true },
+  },
   luxury: {
     name: 'Hiện đại sang trọng', desc: 'Sàn gỗ xương cá, đá marble trắng, sofa da bò, đèn LED hắt viền',
     wall: '#efe9e1', cap: '#3a3b3e',
@@ -63,5 +69,5 @@ export function roomKind(name = '') {
 /** Bảng màu thực tế = phong cách + tuỳ chỉnh */
 export function resolvePalette(settings = {}) {
   const st = STYLES[settings.style] || STYLES.luxury;
-  return { wall: st.wall, cap: st.cap, ...st.palette, ...(settings.palette || {}) };
+  return { wall: st.wall, cap: st.cap, wallTex: st.wallTex || 'plaster', ...st.palette, ...(settings.palette || {}) };
 }
