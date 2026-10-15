@@ -84,6 +84,7 @@
     var x = (W - w) / 2 + dx * (w - W) / 2;
     var y = (H - h) / 2 + dy * (h - H) / 2;
     try { ctx.drawImage(m, x, y, w, h); } catch (e) { /* video chưa sẵn sàng */ }
+    return { x: x, y: y, w: w, h: h };
   }
 
   var TEXT_FX = {
@@ -203,10 +204,22 @@
         if (it.audio) z *= this.emphZoom(t);
         var lvl = this.project.settings.beauty || 'vua';
         var src = lvl !== 'off' && window.BdsBeauty ? window.BdsBeauty.get().process(it.el, lvl) : it.el;
-        drawCover(ctx, src, W, H, z * (1.0 + 0.03 * e), 0, 0);
+        var rect = drawCover(ctx, src, W, H, z * (1.0 + 0.03 * e), 0, 0);
+        if (it.audio && !it.hidden && alpha > 0.5) {
+          // Người đang nói: ghi lại vị trí mặt để chữ, tên bám theo
+          var S = this.project.settings, V = window.BdsVision;
+          var fb = V && (S.faceTrack !== false || S.textBehind !== false || S.pip !== false) ? V.face(it.el) : null;
+          this.talkNow = { el: it.el, src: src, rect: rect };
+          if (fb) this.faceBox = { x: rect.x + fb.x * rect.w, y: rect.y + fb.y * rect.h, w: fb.w * rect.w, h: fb.h * rect.h };
+        }
+        if (it.track) {
+          var srcT = it.srcIn + ((Math.max(0, t - it.start) * (it.speed || 1)) % Math.max(0.1, it.srcLen));
+          this.drawTrackLabel(it.track, srcT, rect, t - it.start);
+        }
       } else {
         var k = it.kb;
-        drawCover(ctx, it.el, W, H, k.s0 + (k.s1 - k.s0) * e, k.x0 + (k.x1 - k.x0) * e, k.y0 + (k.y1 - k.y0) * e);
+        var rect2 = drawCover(ctx, it.el, W, H, k.s0 + (k.s1 - k.s0) * e, k.x0 + (k.x1 - k.x0) * e, k.y0 + (k.y1 - k.y0) * e);
+        if (it.track) this.drawTrackLabel(it.track, 0, rect2, t - it.start);
       }
     } else {
       // Cảnh chỉ có chữ: nền màu chủ đạo chuyển động nhẹ
@@ -315,8 +328,11 @@
     t = clamp(t, 0, this.timeline.total - 0.001);
     ctx.fillStyle = '#000';
     ctx.fillRect(0, 0, this.W, this.H);
+    this.talkNow = null;
+    this.faceBox = null;
     this.drawBackground(t);
     this.drawCovers(t);
+    this.drawGrade(t);
     this.drawShade();
     var ovs = this.timeline.overlays;
     for (var i = 0; i < ovs.length; i++) {
@@ -327,9 +343,257 @@
       if (local < 0) a = 0;
       if (a > 0.01) this.drawOverlay(o, local, a);
     }
+    this.drawDevLogo(t);
+    var nt = this.timeline.nameTag;
+    if (nt && t >= nt.start && t < nt.end) this.drawNameTag(t - nt.start, nt.end - nt.start);
     if (this.timeline.pill && t >= this.timeline.pill.start) this.drawPill(t - this.timeline.pill.start);
     this.drawBrand(t);
+    this.drawGrain(t);
     this.drawProgress(t);
+  };
+
+  /* ---------- Lớp phủ: màu điện ảnh, viền tối, vệt sáng, lóe ống kính, hạt phim ---------- */
+
+  var GRADES = {
+    'dien-anh': { label: 'Điện ảnh (xanh bóng tối, cam vùng sáng)', fills: [['soft-light', 'rgba(0,110,125,0.22)'], ['overlay', 'rgba(255,145,60,0.10)']] },
+    'am': { label: 'Ấm sang trọng', fills: [['soft-light', 'rgba(255,165,80,0.20)'], ['screen', 'rgba(255,235,210,0.05)']] },
+    'trong': { label: 'Trong trẻo, tươi sáng', fills: [['soft-light', 'rgba(120,190,255,0.14)'], ['screen', 'rgba(255,255,255,0.06)']] },
+    'none': { label: 'Giữ màu gốc', fills: [] }
+  };
+
+  Renderer.prototype.drawGrade = function (t) {
+    var ctx = this.ctx, W = this.W, H = this.H, S = this.project.settings, u = this.unit;
+    var g = GRADES[S.grade || 'dien-anh'] || GRADES.none;
+    ctx.save();
+    g.fills.forEach(function (f) { ctx.globalCompositeOperation = f[0]; ctx.fillStyle = f[1]; ctx.fillRect(0, 0, W, H); });
+    ctx.globalCompositeOperation = 'source-over';
+    if (S.vignette !== false) {
+      var vg = ctx.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.35, W / 2, H / 2, Math.max(W, H) * 0.75);
+      vg.addColorStop(0, 'rgba(0,0,0,0)');
+      vg.addColorStop(1, 'rgba(0,0,0,0.42)');
+      ctx.fillStyle = vg;
+      ctx.fillRect(0, 0, W, H);
+    }
+    if (S.leak !== false) {
+      // Vệt sáng ấm trôi chậm, sáng bừng lên ở đầu mỗi cảnh
+      var bump = 0;
+      (this.timeline.flares || []).forEach(function (f) { var d = t - f + 0.3; if (d > 0 && d < 1.4) bump = Math.max(bump, Math.sin(Math.PI * d / 1.4)); });
+      var lx = W * (0.85 + 0.25 * Math.sin(t * 0.21)), ly = H * (0.12 + 0.1 * Math.cos(t * 0.17));
+      var lr = Math.max(W, H) * (0.45 + 0.25 * bump);
+      var lg = ctx.createRadialGradient(lx, ly, 0, lx, ly, lr);
+      lg.addColorStop(0, 'rgba(255,170,90,' + (0.18 + 0.4 * bump) + ')');
+      lg.addColorStop(0.5, 'rgba(255,90,120,' + (0.06 + 0.18 * bump) + ')');
+      lg.addColorStop(1, 'rgba(255,90,120,0)');
+      ctx.globalCompositeOperation = 'screen';
+      ctx.fillStyle = lg;
+      ctx.fillRect(0, 0, W, H);
+      // Lóe ống kính: vệt ngang + các vòng sáng lướt qua
+      (this.timeline.flares || []).forEach(function (f) {
+        var d = t - f + 0.35;
+        if (d < 0 || d > 0.8) return;
+        var a = Math.sin(Math.PI * d / 0.8), fx = W * (-0.2 + 1.4 * d / 0.8), fy = H * 0.3;
+        var sg = ctx.createLinearGradient(0, fy, W, fy);
+        sg.addColorStop(0, 'rgba(255,220,180,0)');
+        sg.addColorStop(clamp(fx / W, 0.01, 0.99), 'rgba(255,230,200,' + 0.55 * a + ')');
+        sg.addColorStop(1, 'rgba(255,220,180,0)');
+        ctx.fillStyle = sg;
+        ctx.fillRect(0, fy - 6 * u, W, 12 * u);
+        [0.4, 0.7, 1.1].forEach(function (k, i) {
+          var cx = W / 2 + (fx - W / 2) * -k, cy = H / 2 + (fy - H / 2) * -k, r = (40 + i * 30) * u;
+          var cg = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+          cg.addColorStop(0, 'rgba(255,200,150,' + 0.25 * a + ')');
+          cg.addColorStop(1, 'rgba(255,200,150,0)');
+          ctx.fillStyle = cg;
+          ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
+        });
+      });
+    }
+    ctx.restore();
+  };
+
+  var grainCanvas = null;
+  Renderer.prototype.drawGrain = function (t) {
+    if (this.project.settings.grain === false) return;
+    if (!grainCanvas) {
+      grainCanvas = document.createElement('canvas');
+      grainCanvas.width = grainCanvas.height = 256;
+      var gx = grainCanvas.getContext('2d'), img = gx.createImageData(256, 256);
+      for (var i = 0; i < img.data.length; i += 4) { var v = Math.random() * 255; img.data[i] = img.data[i + 1] = img.data[i + 2] = v; img.data[i + 3] = 255; }
+      gx.putImageData(img, 0, 0);
+    }
+    var ctx = this.ctx;
+    ctx.save();
+    ctx.globalAlpha = 0.05;
+    ctx.globalCompositeOperation = 'overlay';
+    var pat = ctx.createPattern(grainCanvas, 'repeat');
+    var f = Math.floor(t * 24);
+    if (pat.setTransform) pat.setTransform(new DOMMatrix().translate((f * 73) % 256, (f * 151) % 256).scale(this.unit * 1.5));
+    ctx.fillStyle = pat;
+    ctx.fillRect(0, 0, this.W, this.H);
+    ctx.restore();
+  };
+
+  /** Logo chủ đầu tư hiện to giữa màn hình khi người nói nhắc tới tên. */
+  Renderer.prototype.drawDevLogo = function (t) {
+    var logo = this.project.devLogo;
+    if (!logo) return;
+    var ls = this.timeline.logos || [];
+    for (var i = 0; i < ls.length; i++) {
+      var d = t - ls[i].t;
+      if (d < 0 || d > 2.2) continue;
+      var ctx = this.ctx, W = this.W, H = this.H, u = this.unit;
+      var sz = mediaSize(logo), w = Math.min(W * 0.62, 640 * u), h = w * sz.h / sz.w;
+      if (h > H * 0.22) { h = H * 0.22; w = h * sz.w / sz.h; }
+      var a = easeBack(d / 0.4), fade = clamp((2.2 - d) / 0.35, 0, 1);
+      ctx.save();
+      ctx.globalAlpha = fade;
+      ctx.translate(W / 2, H * 0.3);
+      ctx.scale(a, a);
+      ctx.shadowColor = 'rgba(255,255,255,0.75)';
+      ctx.shadowBlur = 40 * u;
+      ctx.drawImage(logo, -w / 2, -h / 2, w, h);
+      // Vệt sáng lướt qua logo
+      ctx.shadowBlur = 0;
+      var sx = -w / 2 + (w * 1.6) * clamp((d - 0.4) / 0.8, 0, 1) - w * 0.3;
+      var sg = ctx.createLinearGradient(sx - 60 * u, 0, sx + 60 * u, 0);
+      sg.addColorStop(0, 'rgba(255,255,255,0)');
+      sg.addColorStop(0.5, 'rgba(255,255,255,0.55)');
+      sg.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.globalCompositeOperation = 'source-atop';
+      ctx.fillStyle = sg;
+      ctx.fillRect(-w / 2, -h / 2, w, h);
+      ctx.restore();
+    }
+  };
+
+  /** Tên + chức danh người nói, đặt cạnh khuôn mặt (bám theo khi người đi lại). */
+  Renderer.prototype.drawNameTag = function (local, dur) {
+    var ctx = this.ctx, W = this.W, H = this.H, u = this.unit, info = this.project.info;
+    var name = (info.moiGioi || '').toUpperCase(), title = info.chucDanh || 'Chuyên viên tư vấn';
+    var a = easeOut(local / 0.35) * clamp((dur - local) / 0.3, 0, 1);
+    if (a <= 0) return;
+    ctx.save();
+    ctx.font = '800 ' + Math.round(48 * u) + 'px ' + FONT;
+    var w1 = ctx.measureText(name).width;
+    ctx.font = '500 ' + Math.round(32 * u) + 'px ' + FONT;
+    var w2 = ctx.measureText(title).width;
+    var bw = Math.max(w1, w2) + 70 * u, bh = 128 * u;
+    var x, y, fb = this.faceBox;
+    if (fb && this.project.settings.faceTrack !== false) {
+      x = fb.x + fb.w + 30 * u;
+      if (x + bw > W - 30 * u) x = fb.x - bw - 30 * u;
+      x = clamp(x, 30 * u, W - bw - 30 * u);
+      y = clamp(fb.y + fb.h * 1.2, 120 * u, H - bh - 200 * u);
+    } else { x = 50 * u; y = H * 0.62; }
+    ctx.globalAlpha *= a;
+    ctx.translate((1 - easeOut(local / 0.35)) * -40 * u, 0);
+    roundRect(ctx, x, y, bw, bh, 18 * u);
+    ctx.fillStyle = 'rgba(12,14,20,0.78)';
+    ctx.fill();
+    ctx.fillStyle = this.theme.main;
+    ctx.fillRect(x, y, 10 * u, bh);
+    ctx.fillStyle = '#fff';
+    ctx.textBaseline = 'top';
+    ctx.font = '800 ' + Math.round(48 * u) + 'px ' + FONT;
+    ctx.fillText(name, x + 36 * u, y + 18 * u);
+    ctx.fillStyle = this.theme.main;
+    ctx.font = '500 ' + Math.round(32 * u) + 'px ' + FONT;
+    ctx.fillText(title, x + 36 * u, y + 76 * u);
+    ctx.restore();
+  };
+
+  /** Chữ bám theo một điểm (toà nhà trong flycam/phối cảnh): chấm sáng + đường dẫn + nhãn. */
+  Renderer.prototype.drawTrackLabel = function (track, srcT, rect, local) {
+    var V = window.BdsVision;
+    if (!V || !track.text) return;
+    var p = V.pointAt(track, srcT);
+    var ctx = this.ctx, u = this.unit, W = this.W;
+    var x = rect.x + p.x * rect.w, y = rect.y + p.y * rect.h;
+    var a = easeOut(local / 0.45);
+    if (a <= 0) return;
+    ctx.save();
+    ctx.globalAlpha *= a;
+    var pulse = 1 + 0.3 * Math.sin(local * 6);
+    ctx.fillStyle = this.theme.main;
+    ctx.beginPath(); ctx.arc(x, y, 12 * u, 0, 6.283); ctx.fill();
+    ctx.strokeStyle = hexA(this.theme.main, 0.6);
+    ctx.lineWidth = 4 * u;
+    ctx.beginPath(); ctx.arc(x, y, 24 * u * pulse, 0, 6.283); ctx.stroke();
+    var ly = y - 170 * u * a;
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 4 * u;
+    ctx.beginPath(); ctx.moveTo(x, y - 12 * u); ctx.lineTo(x, ly); ctx.stroke();
+    ctx.font = '800 ' + Math.round(42 * u) + 'px ' + FONT;
+    var tw = ctx.measureText(track.text).width + 50 * u, th = 76 * u;
+    var bx = clamp(x - tw / 2, 20 * u, W - tw - 20 * u), by = ly - th;
+    roundRect(ctx, bx, by, tw, th, 14 * u);
+    ctx.fillStyle = 'rgba(12,14,20,0.82)';
+    ctx.fill();
+    ctx.lineWidth = 3 * u;
+    ctx.strokeStyle = this.theme.main;
+    ctx.stroke();
+    ctx.fillStyle = '#fff';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(track.text, bx + 25 * u, by + th / 2 + 2 * u);
+    ctx.restore();
+  };
+
+  /** Khung tròn người nói (PiP) khi phối cảnh đang phủ lên. */
+  Renderer.prototype.drawPip = function (base, t, a) {
+    var ctx = this.ctx, W = this.W, H = this.H, u = this.unit, el = base.el;
+    if (!el || !el.videoWidth) return;
+    var lvl = this.project.settings.beauty || 'vua';
+    var src = lvl !== 'off' && window.BdsBeauty ? window.BdsBeauty.get().process(el, lvl) : el;
+    var sz = mediaSize(src);
+    var fb = window.BdsVision ? window.BdsVision.face(el) : null;
+    var fx = fb ? fb.x + fb.w / 2 : 0.5, fy = fb ? fb.y + fb.h * 0.6 : 0.32;
+    var side = Math.min(sz.w, sz.h) * (fb ? clamp(fb.h * 3.2 * sz.h / Math.min(sz.w, sz.h), 0.3, 0.9) : 0.55);
+    var sx = clamp(fx * sz.w - side / 2, 0, sz.w - side), sy = clamp(fy * sz.h - side / 2, 0, sz.h - side);
+    var land = W > H, r = (land ? 150 : 175) * u;
+    var cx = land ? W - r - 70 * u : r + 50 * u, cy = land ? H - r - 110 * u : H * 0.75;
+    var sc = easeBack(a);
+    ctx.save();
+    ctx.globalAlpha = a;
+    ctx.translate(cx, cy);
+    ctx.scale(sc, sc);
+    ctx.shadowColor = 'rgba(0,0,0,0.5)';
+    ctx.shadowBlur = 30 * u;
+    ctx.beginPath(); ctx.arc(0, 0, r + 8 * u, 0, 6.283);
+    ctx.fillStyle = '#fff'; ctx.fill();
+    ctx.shadowBlur = 0;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(0, 0, r, 0, 6.283); ctx.clip();
+    try { ctx.drawImage(src, sx, sy, side, side, -r, -r, r * 2, r * 2); } catch (e) { /* bỏ qua */ }
+    ctx.restore();
+    ctx.lineWidth = 6 * u;
+    ctx.strokeStyle = this.theme.main;
+    ctx.beginPath(); ctx.arc(0, 0, r + 8 * u, 0, 6.283); ctx.stroke();
+    ctx.restore();
+  };
+
+  /** Vẽ lại người nói đè lên chữ to để chữ trông như nằm sau người. */
+  Renderer.prototype.drawPersonOver = function () {
+    var tn = this.talkNow, V = window.BdsVision;
+    if (!tn || !V) return;
+    var mask = V.personMask(tn.el);
+    if (!mask) return;
+    var pc = this._pc || (this._pc = document.createElement('canvas'));
+    if (pc.width !== this.W || pc.height !== this.H) { pc.width = this.W; pc.height = this.H; }
+    var px = pc.getContext('2d');
+    px.globalCompositeOperation = 'source-over';
+    px.clearRect(0, 0, pc.width, pc.height);
+    try { px.drawImage(tn.src, tn.rect.x, tn.rect.y, tn.rect.w, tn.rect.h); } catch (e) { return; }
+    px.globalCompositeOperation = 'destination-in';
+    px.drawImage(mask, tn.rect.x, tn.rect.y, tn.rect.w, tn.rect.h);
+    px.globalCompositeOperation = 'source-over';
+    var ctx = this.ctx;
+    ctx.save();
+    ctx.globalAlpha = 1;
+    ctx.shadowBlur = 0;
+    ctx.filter = 'none';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.drawImage(pc, 0, 0);
+    ctx.restore();
   };
 
   /** Nút "LIÊN HỆ NGAY" nhỏ ở cuối video (kiểu video mẫu). */
@@ -369,6 +633,10 @@
       if (t < c.start || t > c.start + c.duration) continue;
       var a = clamp(Math.min((t - c.start) / 0.25, (c.start + c.duration - t) / 0.25), 0, 1);
       this.drawItem(c, t, easeInOut(a));
+      if (this.project.settings.pip !== false) {
+        var base = this.timeline.items.filter(function (it) { return it.audio && !it.hidden && t >= it.start && t < it.start + it.duration; })[0];
+        if (base) this.drawPip(base, t, easeInOut(a));
+      }
     }
   };
 
@@ -603,7 +871,12 @@
     var gap = 6 * u;
     var hLead = st.lead.length ? smallSize * 1.25 : 0, hTrail = st.trail.length ? smallSize * 1.25 : 0, hBig = bigSize * 1.02;
     var total = hLead + hBig + hTrail + gap * 2;
-    var cy = H * (st.idx % 2 ? (land ? 0.3 : 0.27) : (land ? 0.68 : 0.66));
+    var S = this.project.settings, V = window.BdsVision;
+    var behindOk = S.textBehind !== false && V && V.ready() && this.talkNow && this.faceBox;
+    var upper = st.idx % 2 === 1;
+    // Mặt người ở nửa trên: chỉ đặt chữ trên đầu khi vẽ được "chữ nằm sau người", còn lại để dưới
+    if (upper && this.faceBox && !behindOk && S.faceTrack !== false) upper = (this.faceBox.y + this.faceBox.h / 2) > H * 0.5;
+    var cy = H * (upper ? (land ? 0.3 : 0.27) : (land ? 0.68 : 0.66));
     var y = cy - total / 2;
     var bigX = (W - bigW) / 2;
     var fade = clamp((st.t1 - t) / 0.12, 0, 1);
@@ -678,6 +951,8 @@
       });
       ctx.restore();
     }
+    // Chữ to nằm sau người nói (chỉ với tầng chữ đặt trên đầu)
+    if (upper && behindOk && ba > 0) this.drawPersonOver();
     y += hBig + gap;
     // Dòng đuôi: canh phải theo mép phải của từ khoá
     if (st.trail.length) {
@@ -1036,7 +1311,7 @@
   };
 
   window.BdsRender = {
-    FORMATS: FORMATS, THEMES: THEMES, TRANSITIONS: TRANSITIONS, TEXT_FX: TEXT_FX, TR: TR,
+    FORMATS: FORMATS, THEMES: THEMES, TRANSITIONS: TRANSITIONS, TEXT_FX: TEXT_FX, GRADES: GRADES, TR: TR,
     Renderer: Renderer
   };
 })();

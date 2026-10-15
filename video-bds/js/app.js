@@ -18,6 +18,7 @@
     music: { mood: 'dien-anh', buffer: null, name: '', vol: 45 },
     settings: {
       format: '9:16', theme: 'vang', transition: 'mix', textFx: 'marker', subStyle: 'kinetic', beauty: 'vua', pace: 'auto', endStyle: 'pill', sfx: true, subtitles: true,
+      grade: 'dien-anh', leak: true, grain: true, vignette: true, pip: true, faceTrack: true, textBehind: true, nameTag: true,
       introCard: true, endCard: true, priceTag: true, autoTrim: true
     },
     previewKind: 'full'
@@ -95,7 +96,7 @@
   /* ---------- Dự án → dòng thời gian ---------- */
 
   function project() {
-    return { info: state.info, logo: state.logo, scenes: state.scenes, settings: state.settings, voiceMode: state.voiceMode };
+    return { info: state.info, logo: state.logo, devLogo: state.devLogo, scenes: state.scenes, settings: state.settings, voiceMode: state.voiceMode };
   }
 
   function timeline(kind, idx) {
@@ -178,6 +179,13 @@
       if (!f) return;
       var img = new Image();
       img.onload = function () { state.logo = img; schedulePreview(); };
+      img.src = URL.createObjectURL(f);
+    });
+    $('devLogoInput').addEventListener('change', function (e) {
+      var f = e.target.files[0];
+      if (!f) return;
+      var img = new Image();
+      img.onload = function () { state.devLogo = img; schedulePreview(); toast('Đã thêm logo chủ đầu tư. Logo sẽ hiện khi người nói nhắc tới tên chủ đầu tư.'); };
       img.src = URL.createObjectURL(f);
     });
   }
@@ -815,6 +823,15 @@
         }).catch(function () {});
       }
     }).then(function () {
+      // Ảnh tên có chữ "logo" trong tư liệu: dùng làm logo chủ đầu tư, không đưa vào cảnh
+      var logos = inp.assets.filter(function (f) { return !isVideoFile(f) && /logo/i.test(f.name); });
+      if (logos.length) {
+        inp.assets = inp.assets.filter(function (f) { return logos.indexOf(f) === -1; });
+        var li = new Image();
+        li.onload = function () { state.devLogo = li; schedulePreview(); };
+        li.src = URL.createObjectURL(logos[0]);
+        report.push('<div>🏷 Logo chủ đầu tư: ' + esc(logos[0].name) + '</div>');
+      }
       var media = inp.talk.concat(inp.assets);
       if (!media.length) { report.push('<div class="warn">⚠️ Chưa có video quay hay tư liệu nào.</div>'); return false; }
       var talkSet = inp.talk;
@@ -1080,6 +1097,7 @@
           '<button class="btn" type="button" data-a="left" data-i="' + mi + '" title="Lên trước">◀</button>' +
           '<button class="btn" type="button" data-a="right" data-i="' + mi + '" title="Ra sau">▶</button>' +
           '<button class="btn" type="button" data-a="del" data-i="' + mi + '" title="Xoá">🗑</button>' +
+          (!isTalk(m) ? '<button class="btn' + (m.track ? ' on' : '') + '" type="button" data-a="track" data-i="' + mi + '" title="Gắn chữ bám theo điểm">🎯' + (m.track ? ' ' + esc(m.track.text) : '') + '</button>' : '') +
           (state.scenes.length > 1 ? '<select data-move="' + mi + '" title="Chuyển sang cảnh khác"><option value="">Chuyển sang cảnh…</option>' +
             state.scenes.map(function (_, k) { return k === si ? '' : '<option value="' + k + '">Cảnh ' + (k + 1) + '</option>'; }).join('') + '</select>' : '') +
           '</div></div>';
@@ -1109,6 +1127,7 @@
           var a = b.dataset.a, mi = +b.dataset.i, arr = s.media;
           if (a === 'cam') { Camera.open(si); return; }
           if (a === 'layout') { s.layout = b.checked ? 'auto' : 'seq'; save(); renderShoot(); schedulePreview(); return; }
+          if (a === 'track') { openTrack(arr[mi]); return; }
           if (a === 'aud') arr[mi].keepAudio = !arr[mi].keepAudio;
           else if (a === 'hide') {
             arr[mi].audioOnly = !arr[mi].audioOnly;
@@ -1278,6 +1297,77 @@
 
     return { open: open, bind: bind };
   })();
+
+  /* ---------- Gắn chữ bám theo điểm ---------- */
+
+  var trackMedia = null, trackPt = null;
+
+  function drawTrackFrame(src) {
+    var c = $('trackCanvas'), w = src.videoWidth || src.naturalWidth, h = src.videoHeight || src.naturalHeight;
+    c.width = Math.min(720, w);
+    c.height = Math.round(c.width * h / w);
+    var cx = c.getContext('2d');
+    cx.drawImage(src, 0, 0, c.width, c.height);
+    if (trackPt) {
+      cx.fillStyle = '#e0a526';
+      cx.strokeStyle = '#fff';
+      cx.lineWidth = 3;
+      cx.beginPath(); cx.arc(trackPt.x * c.width, trackPt.y * c.height, 10, 0, 6.283); cx.fill(); cx.stroke();
+    }
+    c._src = src;
+  }
+
+  function openTrack(m) {
+    trackMedia = m;
+    trackPt = m.track ? { x: m.track.x, y: m.track.y } : null;
+    $('trackText').value = m.track ? m.track.text : (state.info.ten || '');
+    $('trackModal').hidden = false;
+    $('trackProgress').hidden = true;
+    if (!m.isVideo) { drawTrackFrame(m.el); return; }
+    var v = document.createElement('video');
+    v.muted = true;
+    v.src = m.url;
+    v.onloadeddata = function () { v.currentTime = (m.trimIn || 0) + 0.1; };
+    v.onseeked = function () { drawTrackFrame(v); };
+  }
+
+  function bindTrack() {
+    $('trackClose').onclick = function () { $('trackModal').hidden = true; };
+    $('trackCanvas').onclick = function (e) {
+      var c = $('trackCanvas'), r = c.getBoundingClientRect();
+      trackPt = { x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height };
+      if (c._src) drawTrackFrame(c._src);
+    };
+    $('trackRemove').onclick = function () {
+      if (trackMedia) delete trackMedia.track;
+      $('trackModal').hidden = true;
+      renderShoot();
+      schedulePreview();
+    };
+    $('trackGo').onclick = function () {
+      var m = trackMedia, text = $('trackText').value.trim();
+      if (!m || !trackPt) { toast('Chạm vào hình để chọn điểm cần gắn chữ.'); return; }
+      if (!text) { toast('Nhập chữ cần hiển thị.'); return; }
+      var finish = function (pts) {
+        m.track = { text: text, x: trackPt.x, y: trackPt.y, pts: pts };
+        $('trackModal').hidden = true;
+        renderShoot();
+        schedulePreview();
+        toast('🎯 Đã gắn chữ “' + text + '”.');
+      };
+      if (!m.isVideo) { finish(null); return; }
+      var prog = $('trackProgress'), bar = prog.querySelector('.bar'), label = prog.querySelector('span');
+      prog.hidden = false;
+      $('trackGo').disabled = true;
+      var t0 = 0, t1 = Math.min(m.dur || m.el.duration || 10, 90);
+      window.BdsVision.trackPoint(m.url, t0, t1, trackPt.x, trackPt.y, function (p) {
+        bar.style.width = Math.round(p * 100) + '%';
+        label.textContent = 'Đang bám theo điểm… ' + Math.round(p * 100) + '%';
+      }).then(function (r) { finish(r.pts); }).catch(function (e) {
+        toast('Không tracking được: ' + (e && e.message ? e.message : e), 5000);
+      }).then(function () { $('trackGo').disabled = false; prog.hidden = true; });
+    };
+  }
 
   /* ---------- Bước 4: giọng đọc ---------- */
 
@@ -1503,6 +1593,7 @@
     fillSelect('themeSelect', R.THEMES, S.theme, 'label').onchange = onSet('theme');
     fillSelect('transitionSelect', R.TRANSITIONS, S.transition).onchange = onSet('transition');
     fillSelect('textFxSelect', R.TEXT_FX, S.textFx).onchange = onSet('textFx');
+    fillSelect('gradeSelect', R.GRADES, S.grade || 'dien-anh', 'label').onchange = onSet('grade');
     $('subStyleSelect').value = S.subStyle || 'kinetic';
     $('subStyleSelect').onchange = onSet('subStyle');
     var bsel = $('beautySelect');
@@ -1521,7 +1612,8 @@
     $('endStyleSelect').value = S.endStyle || 'pill';
     $('endStyleSelect').onchange = onSet('endStyle');
     fillSelect('moodSelect', window.BdsAudio.MOODS, state.music.mood).onchange = function (e) { state.music.mood = e.target.value; save(); };
-    [['sfxToggle', 'sfx'], ['emphToggle', 'emphZoom'], ['subToggle', 'subtitles'], ['introToggle', 'introCard'], ['endToggle', 'endCard'], ['priceToggle', 'priceTag'], ['autoTrim', 'autoTrim']].forEach(function (p) {
+    [['sfxToggle', 'sfx'], ['emphToggle', 'emphZoom'], ['pipToggle', 'pip'], ['faceToggle', 'faceTrack'], ['behindToggle', 'textBehind'],
+      ['nameToggle', 'nameTag'], ['leakToggle', 'leak'], ['vignetteToggle', 'vignette'], ['grainToggle', 'grain'], ['subToggle', 'subtitles'], ['introToggle', 'introCard'], ['endToggle', 'endCard'], ['priceToggle', 'priceTag'], ['autoTrim', 'autoTrim']].forEach(function (p) {
       $(p[0]).checked = S[p[1]] !== false;
       $(p[0]).onchange = function (e) { onSet(p[1])(e); if (p[1] === 'autoTrim') renderShoot(); };
     });
@@ -1644,7 +1736,10 @@
       var fontReady = document.fonts && document.fonts.load ?
         Promise.all([document.fonts.load('900 40px "Be Vietnam Pro"'), document.fonts.load('700 40px "Be Vietnam Pro"')]).catch(function () {}) :
         Promise.resolve();
-      return Promise.all([ctx.resume(), fontReady]).then(function () {
+      var S = state.settings;
+      var needVision = (S.faceTrack !== false || S.textBehind !== false || S.pip !== false) && tl.items.some(function (it) { return it.audio; });
+      var visionReady = needVision && window.BdsVision ? Promise.race([window.BdsVision.load(), new Promise(function (r) { setTimeout(r, 12000); })]) : Promise.resolve();
+      return Promise.all([ctx.resume(), fontReady, visionReady]).then(function () {
         return new Promise(function (resolve) {
           var renderer = new window.BdsRender.Renderer(canvas, tl, project());
           var engine = new window.BdsAudio.AudioEngine(ctx);
@@ -1863,6 +1958,7 @@
     bindPlayer();
     bindHelp(seen);
     bindAutoProject();
+    bindTrack();
     $('btnDemo').onclick = function () { loadDemo('mau'); };
     $('btnDemoF2').onclick = function () { loadDemo('f2'); };
     $('btnPrev').onclick = function () { goStep(state.step - 1); };

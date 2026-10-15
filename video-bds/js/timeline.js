@@ -186,7 +186,7 @@
         return (sc.media || []).some(function (m) { return m.isVideo && m.keepAudio && m.hasAudio; });
       })
     };
-    var tl = { items: [], covers: [], overlays: [], voices: [], sfx: [], emph: [], kind: 'full', total: 0 };
+    var tl = { items: [], covers: [], overlays: [], voices: [], sfx: [], emph: [], logos: [], flares: [], nameTag: null, kind: 'full', total: 0 };
     var t = 0, n = 0;
     project.scenes.forEach(function (scene, si) {
       if (only != null && only !== si) return;
@@ -221,7 +221,7 @@
           len = Math.min(len, seg);
           if (len < 0.6) return;
           tl.covers.push({ start: t + head + bi * seg + (seg - len) / 2, duration: len, el: m.el, isVideo: m.isVideo,
-            srcIn: srcIn(m, s.autoTrim), srcLen: srcLenOf(m, s.autoTrim), audio: false, kb: kenBurns(si * 7 + bi + 1) });
+            srcIn: srcIn(m, s.autoTrim), srcLen: srcLenOf(m, s.autoTrim), audio: false, kb: kenBurns(si * 7 + bi + 1), track: m.track || null });
         });
       } else {
         var tt = t;
@@ -232,7 +232,7 @@
           var it = { start: tt, duration: d, el: m.el, isVideo: m.isVideo, srcIn: srcIn(m, s.autoTrim),
             srcLen: srcLenOf(m, s.autoTrim), speed: speedOf(m), audio: p.talking && m.isVideo && m.keepAudio && m.hasAudio,
             gain: m.voiceGain || 1, hidden: !!(m.audioOnly && p.talking && m.keepAudio),
-            trans: mi === 0 ? (n ? 'scene' : 'none') : (jump ? 'jump' : 'cut'), kb: kenBurns(si * 7 + mi), zoom: m.group ? zoomOf(m) : 1 };
+            trans: mi === 0 ? (n ? 'scene' : 'none') : (jump ? 'jump' : 'cut'), kb: kenBurns(si * 7 + mi), zoom: m.group ? zoomOf(m) : 1, track: m.track || null };
           tl.items.push(it);
           if (it.audio) speech.push({ start: tt, len: d, srcIn: it.srcIn, m: m, speed: it.speed });
           if (jump && it.zoom > 1 && s.sfx) tl.sfx.push({ type: 'swish', at: tt - 0.04 });
@@ -286,6 +286,29 @@
       t += p.D;
       n++;
     });
+    // Lóe sáng ống kính ở đầu mỗi cảnh
+    tl.overlays.forEach(function (o, i) { if (o.kind === 'scene' && i > 0) tl.flares.push(o.start); });
+    // Tên + chức danh người nói: hiện ở đoạn nói đầu tiên
+    var firstTalk = tl.items.filter(function (it) { return it.audio && !it.hidden; })[0];
+    if (firstTalk && s.nameTag !== false && project.info.moiGioi) {
+      var nt0 = firstTalk.start + 0.6;
+      tl.nameTag = { start: nt0, end: Math.min(nt0 + 3.8, firstTalk.start + Math.max(firstTalk.duration, 4.4)) };
+    }
+    // Logo chủ đầu tư hiện to khi người nói nhắc tới tên (VD: "Sun Group")
+    if (project.devLogo) {
+      var name = normTxt(project.info.chuDauTu || '').split(' ').filter(Boolean);
+      tl.overlays.forEach(function (o) {
+        var ws = o.words || [];
+        for (var i = 0; name.length && i + name.length <= ws.length; i++) {
+          var ok = true;
+          for (var j = 0; j < name.length && ok; j++) ok = normTxt(ws[i + j].w) === name[j];
+          var last = tl.logos[tl.logos.length - 1];
+          if (ok && (!last || ws[i].t0 - last.t > 6)) tl.logos.push({ t: ws[i].t0 });
+        }
+      });
+      if (!tl.logos.length && tl.overlays.length) tl.logos.push({ t: (tl.overlays[0].intro ? INTRO_SECONDS : 0) + 1.2 });
+      if (s.sfx) tl.logos.forEach(function (l) { tl.sfx.push({ type: 'ting', at: l.t + 0.1, freq: 1318.5 }); });
+    }
     if (!n) {
       // Chưa có cảnh nào: hiện khung giới thiệu để xem trước thông tin
       tl.items.push({ start: 0, duration: INTRO_SECONDS + 1, el: null, isVideo: false, srcIn: 0, srcLen: 1, audio: false, trans: 'none', kb: kenBurns(0) });
@@ -350,6 +373,10 @@
     'sân vườn|view biển|mặt tiền|giao điểm|cộng đồng|đô thị|tâm điểm|cư dân|trở thành|sinh lời|cho thuê|giá trị|tăng giá|hiếm có|duy nhất|' +
     'chính sách|ưu đãi|chiết khấu|hỗ trợ|lãi suất|quỹ căn|liên hệ|nhanh tay|số lượng|giới hạn|đặc biệt|tuyệt vời|hoàn hảo|đáng sống|nghỉ dưỡng|' +
     'an cư|bàn giao|sổ hồng|sổ đỏ|bất động sản|đà nẵng|hà nội|sài gòn|hồ chí minh|blanca city|sun group|hòa xuân|nam đà nẵng').split('|');
+
+  function normTxt(t) {
+    return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/[^a-z0-9 ]+/g, ' ').trim();
+  }
 
   function bare(w) { return w.w.replace(/[.,!?…:;“”"]/g, '').toLowerCase(); }
 

@@ -161,8 +161,14 @@
         <label>Tên công ty / thương hiệu
           <input data-info="thuongHieu" placeholder="VD: Hoàng Hiệp Land">
         </label>
-        <label>Logo (không bắt buộc)
+        <label>Logo của bạn (không bắt buộc)
           <input type="file" id="logoInput" accept="image/*">
+        </label>
+        <label>Chức danh (hiện cạnh tên người nói)
+          <input data-info="chucDanh" placeholder="VD: Chuyên viên tư vấn">
+        </label>
+        <label>Logo chủ đầu tư (hiện to khi nhắc tên chủ đầu tư)
+          <input type="file" id="devLogoInput" accept="image/*">
         </label>
       </div>
       <details class="more" id="projectMore">
@@ -360,6 +366,9 @@
             <option value="card">Khung số điện thoại to riêng</option>
           </select>
         </label>
+        <label>Lớp màu
+          <select id="gradeSelect"></select>
+        </label>
         <label>Kiểu chuyển cảnh
           <select id="transitionSelect"></select>
         </label>
@@ -375,6 +384,13 @@
         <div class="checks">
           <label class="check"><input type="checkbox" id="sfxToggle" checked> Hiệu ứng âm thanh (whoosh, ting, pop)</label>
           <label class="check"><input type="checkbox" id="emphToggle" checked> Zoom vào/ra ở điểm nhấn</label>
+          <label class="check"><input type="checkbox" id="pipToggle" checked> Khung tròn người nói khi chiếu phối cảnh</label>
+          <label class="check"><input type="checkbox" id="faceToggle" checked> Chữ, tên bám theo khuôn mặt</label>
+          <label class="check"><input type="checkbox" id="behindToggle" checked> Chữ to nằm sau người nói</label>
+          <label class="check"><input type="checkbox" id="nameToggle" checked> Hiện tên + chức danh người nói</label>
+          <label class="check"><input type="checkbox" id="leakToggle" checked> Vệt sáng, lóe ống kính</label>
+          <label class="check"><input type="checkbox" id="vignetteToggle" checked> Viền tối 4 góc</label>
+          <label class="check"><input type="checkbox" id="grainToggle" checked> Hạt phim nhẹ</label>
           <label class="check"><input type="checkbox" id="subToggle" checked> Phụ đề từ lời thoại</label>
           <label class="check"><input type="checkbox" id="introToggle" checked> Khung giới thiệu dự án ở đầu video</label>
           <label class="check"><input type="checkbox" id="endToggle" checked> Hiện liên hệ ở cuối video</label>
@@ -477,6 +493,24 @@
   </div>
 </div>
 
+<!-- Gắn chữ bám theo điểm -->
+<div class="modal" id="trackModal" hidden>
+  <div class="help">
+    <button class="btn ghost small close" id="trackClose" type="button">✕</button>
+    <h3>🎯 Gắn chữ bám theo một điểm</h3>
+    <p class="muted small-text">Chạm vào điểm cần gắn chữ (VD: đỉnh toà nhà F2). Với clip flycam, phần mềm sẽ bám theo điểm đó khi máy bay di chuyển.</p>
+    <canvas id="trackCanvas" style="width:100%;border-radius:10px;cursor:crosshair;background:#000"></canvas>
+    <label style="margin-top:10px">Chữ hiển thị
+      <input id="trackText" placeholder="VD: F2 FourS Tower">
+    </label>
+    <div class="row wrap" style="margin-top:10px">
+      <button class="btn accent" id="trackGo" type="button">🎯 Gắn chữ</button>
+      <button class="btn ghost" id="trackRemove" type="button">Bỏ chữ</button>
+    </div>
+    <div id="trackProgress" class="progress" hidden><div class="bar"></div><span></span></div>
+  </div>
+</div>
+
 <!-- Hướng dẫn -->
 <div class="modal" id="helpModal" hidden>
   <div class="help">
@@ -513,6 +547,7 @@
 <script src="js/audio.js"></script>
 <script src="js/timeline.js"></script>
 <script src="js/beauty.js"></script>
+<script src="js/vision.js"></script>
 <script src="js/renderer.js"></script>
 <script src="js/autocut.js"></script>
 <script src="js/importer.js"></script>
