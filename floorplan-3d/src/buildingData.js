@@ -93,6 +93,11 @@ export const STATUS = {
 };
 
 /** Danh sách tầng ở (bỏ số 4 → 3A, 13 → 12A theo thông lệ) */
+/** Tầng có sân vườn riêng bao quanh (tầng 3A → 7) */
+export const GARDEN_FLOORS = new Set(['03A', '05', '06', '07']);
+/** Căn mẫu sân vườn tương ứng với căn gốc */
+export const GARDEN_UNIT = { '1pn-plus-b': 'sv-1pn-plus', '2pn-1wc': 'sv-2pn-1wc', '2pn-b': 'sv-2pn-2wc', '3pn': 'sv-3pn' };
+
 export function residentialFloors(top) {
   const out = [];
   for (let n = 3; out.length < top; n++) {

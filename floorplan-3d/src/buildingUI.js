@@ -1,7 +1,7 @@
 // Giao diện chế độ Tòa nhà: bảng thống kê, bộ lọc, chi tiết căn. Dùng chung cho trang chính và trang toa-nha.html.
 import { BuildingView, slotLayout } from './building3d.js';
 import { READONLY } from './ui.js';
-import { sampleBuilding, SLOT_LIST, STATUS, TYPE_COLORS, residentialFloors, unitCode, unitPrice, areaOf, PROVISIONAL } from './buildingData.js';
+import { sampleBuilding, SLOT_LIST, STATUS, TYPE_COLORS, residentialFloors, unitCode, unitPrice, areaOf, PROVISIONAL, GARDEN_FLOORS, GARDEN_UNIT } from './buildingData.js';
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => [...document.querySelectorAll(s)];
@@ -210,7 +210,7 @@ function renderBDetail() {
   };
   $('#bdView').onclick = () => {
     if (!layout) return H.toast(`Vị trí ${slot.slot} chưa có mặt bằng chi tiết.`, 4000);
-    if (layout.unitId && H.openShowcase) return H.openShowcase(layout.unitId);
+    if (layout.unitId && H.openShowcase) return H.openShowcase(GARDEN_FLOORS.has(floor) && GARDEN_UNIT[layout.unitId] || layout.unitId);
     if (READONLY) return;
     H.openUnit(JSON.parse(JSON.stringify(layout.plan)), { code: unitCode(building, floor, slot.slot), floor, slot: { ...slot, tt: ar.tt } });
   };
