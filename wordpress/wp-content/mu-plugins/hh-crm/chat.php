@@ -569,8 +569,10 @@ function hh_chat_ai_reply( $msgs, $page, $lead_phone ) {
 
 /** Ngân sách khách nêu (triệu đồng): "3 tỷ", "2,5 ty", "800 triệu". */
 function hh_chat_budget( $t ) {
-	if ( preg_match( '/(\d+(?:[.,]\d+)?)\s*(ty|ti)\b/u', $t, $m ) ) {
-		return (float) str_replace( ',', '.', $m[1] ) * 1000;
+	if ( preg_match( '/(\d+(?:[.,]\d+)?)\s*(ty|ti)\b(\s*(ruoi|\d)(?![\d.,]|\s*(pn|phong|can|lo|tang|m2|m\b|nguoi|toa)))?/u', $t, $m ) ) {
+		// "2 tỷ rưỡi" = 2,5 tỷ; "2 tỷ 5" = 2,5 tỷ.
+		$extra = empty( $m[4] ) ? 0 : ( 'ruoi' === $m[4] ? 0.5 : (int) $m[4] / 10 );
+		return ( (float) str_replace( ',', '.', $m[1] ) + $extra ) * 1000;
 	}
 	if ( preg_match( '/(\d{1,4})\s*(trieu|tr)\b/u', $t, $m ) ) {
 		return (float) $m[1];
@@ -630,8 +632,8 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 	$bots  = array_values( array_filter( $msgs, static fn( $m ) => 'assistant' === $m['role'] ) );
 	$turn  = count( $user );
 	$text  = end( $user )['text'];
-	$t     = mb_strtolower( remove_accents( $text ) );
-	$all   = mb_strtolower( remove_accents( implode( ' ', array_column( $user, 'text' ) ) ) );
+	$t     = hh_chat_norm( mb_strtolower( remove_accents( $text ) ) );
+	$all   = hh_chat_norm( mb_strtolower( remove_accents( implode( ' ', array_column( $user, 'text' ) ) ) ) );
 	$has   = static fn( ...$words ) => (bool) array_filter( $words, static fn( $w ) => false !== strpos( $t, $w ) );
 	$f     = hh_chat_project_facts( $page );
 	$title = $f['Tên'] ?? '';
@@ -651,9 +653,15 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 	}
 
 	// Nhu cầu chung (trang chủ, trang danh sách) → hỏi 1 câu, rồi đưa phương án.
-	$need = $has( 'thue' ) ? 'thue' : ( $has( 'dat nen', 'dat ' ) ? 'dat-nen' : ( $has( 'biet thu', 'villa' ) ? 'biet-thu' : ( $has( 'shophouse', 'nha pho' ) ? 'shophouse' : ( $has( 'can ho', 'chung cu', 'studio', '1pn', '2pn', '3pn' ) ? 'can-ho' : '' ) ) ) );
+	// "cho thuê" (mua để cho thuê) không phải đi thuê; "đặt lịch", "đắt" không phải đất nền.
+	$re_thue = '/(?<!cho )\bthue\b/';
+	$re_dat  = '/dat nen|lo dat|mua dat|ban dat|manh dat|\bdat o\b|\bdat (\d|mat tien|xay|du an|ven|gan|khu|tho cu|kiet|hem)/';
+	$need = preg_match( $re_thue, $t ) ? 'thue' : ( preg_match( $re_dat, $t ) ? 'dat-nen' : ( $has( 'biet thu', 'villa' ) ? 'biet-thu' : ( $has( 'shophouse', 'nha pho' ) ? 'shophouse' : ( $has( 'can ho', 'chung cu', 'studio', '1pn', '2pn', '3pn' ) ? 'can-ho' : '' ) ) ) );
+	if ( '' === $need && preg_match( $re_thue, $all ) ) {
+		$need = 'thue';
+	}
 	if ( '' === $need ) {
-		foreach ( array( 'thue' => array( 'thue' ), 'dat-nen' => array( 'dat nen' ), 'biet-thu' => array( 'biet thu' ), 'shophouse' => array( 'shophouse' ), 'can-ho' => array( 'can ho', 'chung cu' ) ) as $k => $ws ) {
+		foreach ( array( 'dat-nen' => array( 'dat nen' ), 'biet-thu' => array( 'biet thu' ), 'shophouse' => array( 'shophouse' ), 'can-ho' => array( 'can ho', 'chung cu' ) ) as $k => $ws ) {
 			foreach ( $ws as $w ) {
 				if ( false !== strpos( $all, $w ) ) {
 					$need = $k;
@@ -671,15 +679,45 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 		// Nhắn 2 tin như người: câu đùa, rồi câu hỏi nhu cầu.
 		return preg_replace( '/([😄😅😊😋🤗🌊🙏]) (?=\S)/u', "$1\n\n", $witty, 1 );
 	}
+	// Câu trả lời ngắn nối theo câu chat vừa hỏi ("để ở", "cho thuê", "gần biển", "ok", "chưa"…).
+	$follow = hh_chat_followup( $t, $prev, array( 'x' => hh_chat_address( $all ), 'name' => $name, 'budget' => $budget, 'has_lead' => $has_lead, 'need' => $need ) );
+	if ( $follow ) {
+		return $follow;
+	}
+	// Câu hỏi đáp có sẵn trên web (dự án đang xem / dự án khách nhắc tên / bài viết), hiểu theo nghĩa gần nhất.
+	$mentioned = hh_chat_project_lookup( $t );
+	$faq       = hh_chat_faq_match( $t, $page );
+	if ( $faq ) {
+		$where = (int) $faq['id'] !== (int) $page ? ' Chi tiết: ' . get_permalink( $faq['id'] ) : '';
+		$a     = rtrim( $faq['a'] );
+		return $ack . $lc( $a ) . ( preg_match( '/[.!?…]$/u', $a ) ? '' : '.' ) . $where . ( $ask ?: ' ' . ( 'post' === $faq['kind'] ? 'Anh/chị đang quan tâm khu vực nào để em gửi thêm thông tin ạ?' : 'Anh/chị muốn em gửi thêm bảng giá, mặt bằng hay ảnh thực tế ạ?' ) );
+	}
 	// Hỏi giá đất / khách sạn theo tuyến đường, khu vực (bảng giá thị trường trên web).
-	$road = hh_chat_board_lookup( $t );
+	$road = preg_match( '/gia|bao nhieu (tien|ty|trieu)|\bdat\b|\blo\b|khach san|m2|trieu|\bty\b/', $t ) && ! preg_match( '/can ho|chung cu|bao nhieu (can|lo|tang)/', $t ) ? hh_chat_board_lookup( $t ) : '';
 	if ( $road ) {
 		$q = 0 === strpos( $road, 'Khách sạn' ) ? ' Anh/chị tìm khách sạn khoảng bao nhiêu phòng, tầm vốn bao nhiêu ạ?' : ' Anh/chị đang tìm lô diện tích khoảng bao nhiêu, để xây khách sạn hay đầu tư giữ tài sản ạ?';
 		return $ack . $lc( $road ) . ( $ask ?: $q );
 	}
 	// Khách nhắc tên một dự án khác trên web (ở bất kỳ trang nào) → giá tham khảo + link.
-	$other = hh_chat_project_lookup( $t );
+	$other = $mentioned;
 	if ( $other && $other !== $page ) {
+		// Khách hỏi đúng một mục (pháp lý, vị trí, bàn giao, chủ đầu tư…) → trả lời mục đó.
+		$cu    = hh_chat_concepts( $t )[0];
+		$parts = array(
+			'phaply'   => array( 'hh_p_ownership', 'pháp lý' ),
+			'sohuu'    => array( 'hh_p_ownership', 'pháp lý, thời hạn sở hữu' ),
+			'vitri'    => array( 'hh_p_address', 'vị trí' ),
+			'bangiao'  => array( 'hh_p_handover', 'bàn giao' ),
+			'khinao'   => array( 'hh_p_handover', 'tiến độ, bàn giao' ),
+			'chudautu' => array( 'hh_p_developer', 'chủ đầu tư' ),
+			'quymo'    => array( 'hh_p_scale', 'quy mô' ),
+		);
+		foreach ( $parts as $k => $v ) {
+			$val = isset( $cu[ $k ] ) ? trim( wp_strip_all_tags( (string) get_post_meta( $other, $v[0], true ) ) ) : '';
+			if ( '' !== $val ) {
+				return $ack . $lc( mb_strtoupper( mb_substr( $v[1], 0, 1 ) ) . mb_substr( $v[1], 1 ) ) . ' ' . get_the_title( $other ) . ': ' . mb_substr( $val, 0, 260 ) . '. Chi tiết: ' . get_permalink( $other ) . ( $ask ?: ' Anh/chị muốn em gửi thêm bảng giá, mặt bằng hay ảnh thực tế ạ?' );
+			}
+		}
 		$pr  = function_exists( 'hh_project_price' ) ? hh_project_price( $other ) : '';
 		$rs  = trim( (string) get_post_meta( $other, 'hh_p_resale_price', true ) );
 		$txt = get_the_title( $other ) . ( $pr && false === strpos( $pr, 'Liên hệ' ) ? ': ' . mb_strtolower( $pr ) . ' (tham khảo)' : '' ) . ( $rs ? '. Mặt bằng bán lại: ' . mb_substr( $rs, 0, 160 ) : '' ) . '. Chi tiết: ' . get_permalink( $other );
@@ -713,6 +751,11 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 			return $ack . $lc( 'Pháp lý: ' ) . $f['Pháp lý'] . '.' . $ask;
 		}
 	}
+	// Câu hỏi chung: người nước ngoài, vay, thủ tục, thuế phí, đặt cọc, chọn khu, thị trường.
+	$gen = hh_chat_general( $t, array( 'x' => hh_chat_address( $all ), 'name' => $name ) );
+	if ( $gen ) {
+		return $gen;
+	}
 	if ( $has( 'xem nha', 'di xem', 'tham quan', 'lich', 'nha mau' ) ) {
 		return $ack . $name . ' đưa anh/chị đi xem trực tiếp, miễn phí. Anh/chị tiện ngày nào, buổi sáng hay chiều ạ?' . ( $has_lead ? '' : ' Em xin số điện thoại để xác nhận lịch nhé.' );
 	}
@@ -743,6 +786,13 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 		}
 	}
 
+	// Có tầm tiền mà chưa nói loại nhà → gợi ý luôn vài dự án hợp tầm tiền, rồi hỏi loại.
+	if ( ! $need && $budget && $budget >= 300 ) {
+		$opts = hh_chat_options( preg_match( '/cho thue|nghi duong|view bien/', $all ) ? 'can-ho' : '', $budget, $page );
+		if ( $opts && ! array_filter( $opts, static fn( $o ) => false !== mb_strpos( $prev, $o ) ) ) {
+			return $ack . $lc( 'Tầm ' ) . hh_format_price( $budget ) . ' em gợi ý trước vài dự án:' . "\n• " . implode( "\n• ", $opts ) . "\n" . ( $ask ? trim( $ask ) : 'Anh/chị nghiêng về căn hộ hay đất nền, để em lọc kỹ hơn ạ?' );
+		}
+	}
 	// Câu chen ngang không liên quan nhà đất (ngắn, không có từ khoá) → đáp vui, không hỏi máy móc.
 	if ( ! $need && ! $budget && mb_strlen( $t ) <= 60 && ! preg_match( '/\b(can ho|can|nha (o|pho|dat|rieng|mat tien)|mua nha|ban nha|thue|dat|lo|du an|gia|mua|ban|phong ngu|pn|tang|so (do|hong)|vay|von|khu|quan|phuong|duong|bien|song|biet thu|villa|shophouse|chung cu|studio|ty|trieu)\b/', $t ) ) {
 		return hh_chat_smalltalk( $t, $name, $prev );
@@ -752,7 +802,7 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 		? $ack . $lc( 'Ở ' ) . $title . ' em có đủ bảng giá, chính sách, mặt bằng và căn đang trống. Anh/chị muốn xem phần nào trước ạ?'
 		: $ack . $lc( 'Anh/chị đang quan tâm căn hộ, đất nền, biệt thự hay nhà cho thuê, khu vực nào ạ?' );
 	if ( $generic === $prev || ( $turn >= 2 && $may_ask ) ) {
-		return $ack . 'Để không làm mất thời gian của anh/chị, ' . $name . ' sẽ gửi đúng 2–3 căn hợp nhu cầu qua Zalo, kèm giá và hình thực tế. Anh/chị cho em xin số Zalo nhé, hoặc nhắn trực tiếp ' . $phone . ' ạ.';
+		return $ack . $lc( 'Để không làm mất thời gian của anh/chị, ' ) . $name . ' sẽ gửi đúng 2–3 căn hợp nhu cầu qua Zalo, kèm giá và hình thực tế. Anh/chị cho em xin số Zalo nhé, hoặc nhắn trực tiếp ' . $phone . ' ạ.';
 	}
 	return $generic;
 }
@@ -775,6 +825,7 @@ function hh_chat_address( $t ) {
  * Mỗi kiểu có vài câu, chọn ngẫu nhiên và tránh lặp đúng câu vừa trả lời.
  */
 function hh_chat_witty( $t, $name, $prev = '' ) {
+	$t  = preg_replace( '/\bphong ngu\b/', 'pn', $t );
 	$x  = hh_chat_address( $t );
 	$X  = 'anh/chị' === $x ? 'Anh/chị' : mb_convert_case( $x, MB_CASE_TITLE );
 	// Nơi khách ở (cho câu "ở xa").
@@ -783,7 +834,7 @@ function hh_chat_witty( $t, $name, $prev = '' ) {
 	foreach ( array(
 		'Sài Gòn'    => array( '/sai gon|\bsg\b|hcm|ho chi minh/', ', Sài Gòn – Đà Nẵng bay khoảng 1 tiếng 20 phút' ),
 		'Hà Nội'     => array( '/ha noi|\bhn\b|ngoai bac/', ', Hà Nội – Đà Nẵng bay khoảng 1 tiếng 20 phút, nhanh hơn kẹt xe giờ cao điểm' ),
-		'nước ngoài' => array( '/nuoc ngoai|\b(my|uc|han quoc|nhat|duc|phap|canada|singapore)\b/', '' ),
+		'nước ngoài' => array( '/nuoc ngoai|\b(my(?! (khe|an|da|son))|uc|han quoc|nhat ban|duc|phap|canada|singapore)\b/', '' ),
 	) as $c => $v ) {
 		if ( preg_match( $v[0], $t ) ) {
 			$city = $c;
@@ -798,13 +849,13 @@ function hh_chat_witty( $t, $name, $prev = '' ) {
 			"Dạ em là \"em út\" chạy bằng điện của $name thôi ạ 😄 Hỏi giá, hỏi pháp lý em trả lời liền; còn dẫn đi xem nhà thì phải $name bằng xương bằng thịt. $X cần tìm gì ạ?",
 		),
 		// Ở xa (Hà Nội, Sài Gòn, nước ngoài) – ngại đi lại xem nhà.
-		'/\bxa (qua|wa|lam|the)\b|o (tit |tan |tuot )?(ha noi|hn|sai gon|sg|tphcm|hcm|ngoai bac|nuoc ngoai|my|uc|han quoc|nhat)\b|tit (ha noi|ngoai bac|sai gon)|khong (vao|ra|bay) (duoc|dc)|khong co thoi gian (vao|ra|di)|o xa/' => array(
+		'/\bxa (qua|wa|lam|the)\b|o (tit |tan |tuot )?(ha noi|hn|sai gon|sg|tphcm|hcm|ngoai bac|nuoc ngoai|my(?! (khe|an|da|son))|uc|han quoc|nhat ban)\b|tit (ha noi|ngoai bac|sai gon)|khong (vao|ra|bay) (duoc|dc)|khong co thoi gian (vao|ra|di)|\bo xa\b(?! (trung tam|bien|san bay|cho|truong|khong))/' => array(
 			"Dạ xa mặt chứ không xa… sổ hồng đâu $x ơi 😄\n\n$name dẫn $x đi xem qua video call, gửi ảnh thực tế, sổ, hợp đồng để $x kiểm tra trước từ {$city}; ưng rồi mới cần bay vào một chuyến{$fly}. $X đang tính mua để nghỉ dưỡng, cho thuê hay để dành ạ?",
 			"Dạ xa thì mình có… Zalo video 😄 Ngày xưa mua nhà phải đi mòn dép, giờ $x ngồi nhà vẫn xem được từng góc ban công.\n\n$name quay video căn thật, gửi pháp lý, cả bảng tính cho thuê. Mua căn ven biển rồi giao bên vận hành cho thuê là cách nhiều khách ở xa đang làm. $X thích gần biển hay gần sông Hàn ạ?",
 			"Dạ $x ở {$city} mà đã để ý Đà Nẵng là có gu rồi đó 😄\n\nỞ xa thì mình làm kiểu \"online trước, bay vào sau\": em gửi bảng giá, $name quay video từng căn, kiểm tra pháp lý giúp; chọn được căn ưng rồi $x mới vào xem tận mắt. Ngân sách $x đang tính khoảng bao nhiêu ạ?",
 		),
 		// Chỉ xem cho biết, chưa có nhu cầu, để suy nghĩ thêm.
-		'/xem cho biet|tham khao thoi|chua co nhu cau|chua mua (lien|ngay|bay gio)|de (suy nghi|tinh) (them|da)|nghi them|tu tu|chua voi|nam sau (moi )?mua|cho them|doi gia (giam|xuong)/' => array(
+		'/xem cho biet|tham khao thoi|chua co nhu cau|chua mua (lien|ngay|bay gio)|de (suy nghi|tinh) (them|da)|nghi them|tu tu|chua voi|nam sau (moi )?mua|doi gia (giam|xuong)/' => array(
 			"Dạ tham khảo kỹ là đúng rồi $x, mua nhà chứ đâu phải mua rau 😄\n\nEm gửi $x bảng giá theo khu để $x theo dõi dần nhé, khi nào thấy hợp thì mình tính tiếp. $X đang để ý khu nào nhất ạ?",
 			"Dạ không vội đâu $x ạ, nhà tốt thì vẫn còn, chỉ là giá thì… không chờ ai 😄\n\nNếu $x muốn, em báo khi có căn giảm giá hay chủ cần bán gấp ở khu $x thích. $X quan tâm căn hộ hay đất ạ?",
 		),
@@ -817,7 +868,7 @@ function hh_chat_witty( $t, $name, $prev = '' ) {
 			"Câu này mà em đoán trúng 100% thì em đã… nghỉ hưu ở Mỹ Khê rồi $x ạ 😄\n\nNói theo số liệu: quý 3/2026 chung cư Đà Nẵng đi ngang khoảng 67 triệu/m², cho thuê lãi khoảng 4,5%/năm; đất nền đang điều chỉnh khoảng 7%. Mua để ở, cho thuê thì lúc nào hợp tài chính là lúc tốt; lướt sóng ngắn hạn thì nên chậm lại. $X mua để ở hay đầu tư ạ?",
 		),
 		// Tán tỉnh, người yêu, hẹn hò.
-		'/nguoi yeu|ban gai|ban trai|doc than|e (qua|lam)\b|lay vo|lay chong|ket hon|yeu em|thuong em|thich em|hen ho|di (cafe|ca phe|choi|an) (khong|ko|voi)|cho (xin )?(so|zalo) (em|ban)|lam quen|crush/' => array(
+		'/nguoi yeu|ban gai|ban trai|doc than|e (qua|lam)\b|lay vo|lay chong|ket hon|yeu em|thuong em|thich em|hen ho|di (cafe|ca phe|choi|an) (khong|ko|voi)|lam quen|crush/' => array(
 			"Dạ em \"độc thân vui tính\", chỉ mê mỗi… sổ hồng Đà Nẵng thôi $x ơi 😄 Mà $x đang tìm tổ ấm cho hai người hay tìm chỗ đầu tư ạ?",
 			"Dạ trái tim em đã trao trọn cho… bảng giá rồi $x ạ 😄 Nhưng tìm nhà cho $x và người thương thì em nhiệt tình lắm. $X thích ở gần biển hay gần sông Hàn ạ?",
 			"Hẹn hò thì em chịu, chứ hẹn đi xem nhà thì $name sẵn sàng cả cuối tuần nha $x 😄 $X muốn xem khu nào để em sắp lịch?",
@@ -828,7 +879,7 @@ function hh_chat_witty( $t, $name, $prev = '' ) {
 			"Dạ em mới \"ra đời\" năm nay nhưng thuộc giá nhà Đà Nẵng như người 10 năm trong nghề 😄 $X hỏi em thử một dự án đi ạ?",
 		),
 		// Chê bot, chọc, nghi ngờ.
-		'/\b(ngu|dot|ngoc|khung|dien|xam|dien khung|vo dung|do te|do qua|kem qua|nham nhi|noi nham|lam nham|ba hoa|noi nhieu|lai nhai|lua dao|cò dat|co dat|bip|xao|chem gio|cham hieu)\b/' => array(
+		'/\b(em|ban|may|mi|bot|chat|tro ly) (ngu|dot|ngoc|khung|dien|xam|vo dung|do te|kem|nham nhi|lam nham|ba hoa|lai nhai|cham hieu|chem gio|xao)\b|\b(ngu|dot|khung|xam|do te|nham nhi|vo dung|chem gio) (qua|the|vay|that|ghe|vl|vcl|a|ha)\b|\b(dien khung|vo dung|noi nham|lam nham|lai nhai|lua dao|bip bom|cham hieu|tra loi nhu)\b|^(ngu|dot|khung|xam|bip|xao)\b/' => array(
 			"Dạ em xin lỗi nếu trả lời chưa trúng ý $x 🙏 Em còn đang học thêm mỗi ngày. $X hỏi lại giúp em ngắn gọn – dự án hay khu vực nào – em trả lời đúng trọng tâm, hoặc gọi thẳng $name cho nhanh ạ.",
 			"Dạ $x \"phê bình\" là em ghi nhận liền, để mai mốt thông minh hơn ạ 😅 Còn giá với pháp lý thì em nói thật hết, không vẽ vời. $X đang cần tìm gì để em làm lại cho đàng hoàng ạ?",
 		),
@@ -838,22 +889,22 @@ function hh_chat_witty( $t, $name, $prev = '' ) {
 			"Dạ cho nợ thì em không dám, nhưng vay ngân hàng 70%, trả góp tới 20 – 25 năm thì em tính giúp được liền $x ạ 😄 $X có sẵn vốn tầm bao nhiêu?",
 			"Dạ \"mua chịu\" thì chủ nhà sợ lắm $x ơi 😄 Nhưng nhiều dự án cho thanh toán giãn theo tiến độ, chỉ cần 15 – 30% ban đầu. $X muốn em lọc dự án kiểu này không ạ?",
 		),
-		'/giam (cho|di|them|bot|gia di|\d)|bot (cho|di|chut|it|xiu)|re (hon|di|chut)|tang (nha|can|luon|khong)|cho khong|mien phi (khong|a|ha)|free (khong|a|ha)?$|lay gia (goc|re)|chiet khau (them|nua|di)/' => array(
+		'/giam (cho|di|them|bot|gia di|\d)|bot (cho|di|chut|it|xiu)|re (hon|di|chut)|tang luon|tang khong (a|ha|nha)|tang (em|anh|chi|minh|tui) (1 |mot )?(can|nha)|cho khong|mien phi (khong|a|ha)|free (khong|a|ha)?$|lay gia (goc|re)|chiet khau (them|nua|di)/' => array(
 			"Dạ $x trả giá dễ thương vậy, em xin ghi lại để $name \"đi đàm phán\" với chủ nhà liền 😄 Thường căn chuyển nhượng vẫn còn biên thương lượng. $X để ý căn nào, em hỏi giá tốt nhất cho $x ạ?",
 			"Dạ nếu được em giảm luôn cả… tiền thuế cho $x rồi 😄 Nói thật thì chủ đầu tư có chiết khấu thanh toán sớm, còn căn bán lại thì $name thương lượng được. $X quan tâm dự án nào ạ?",
 		),
 		// Hết tiền, nghèo, mua nổi không, trúng số.
-		'/\b(e|het) tien|ngheo|khong co tien|it tien|vo von|mua noi khong|mua sao noi|bao gio mua noi|trung (so|vietlott|xo so)|doi trung so|cong nhan|luong (thap|it)/' => array(
+		'/\b(e|het) tien|ngheo|khong co tien|it tien|vo von|mua noi khong|mua sao noi|bao gio mua noi|trung (so|vietlott|xo so)|doi trung so|luong cong nhan|lam cong nhan|luong (thap|it)/' => array(
 			"Dạ ai mua nhà lần đầu cũng thấy \"khó nổi\" $x ạ, nhưng có vay 70% và trả góp nên dễ thở hơn nhiều 😊 $X cho em biết vốn sẵn có tầm bao nhiêu, em tính thử phương án vừa sức nhé?",
 			"Dạ trong lúc chờ trúng Vietlott, mình cứ khảo giá trước cho chắc $x ạ 😄 Căn hộ Đà Nẵng có căn vốn tự có chỉ từ vài trăm triệu. $X muốn em tính thử không?",
 		),
 		// Chê đắt.
-		'/co vang|dao duoc vang|dat vang|tren troi|dat qua troi|mac qua|dat qua|cat co|chat qua|ngao gia|thoi gia|gia ao|ao qua|sot dat|bong bong/' => array(
+		'/co vang|dao duoc vang|tren troi|dat qua troi|mac qua|dat qua|cat co|chat qua|ngao gia|thoi gia|gia ao|ao qua|sot dat|bong bong/' => array(
 			"Dạ đất Đà Nẵng không có vàng nhưng có biển, sông Hàn với pháo hoa, nên giá cứ \"lấp lánh\" vậy đó $x 😄 Em vẫn có lựa chọn mềm hơn ở Hòa Xuân, Liên Chiểu, Điện Ngọc. $X dự tính tầm bao nhiêu ạ?",
 			"Dạ $x nói chuẩn, có nơi giá rao \"bay\" thật 😅 Nên em luôn ghi rõ giá rao với giá giao dịch để $x khỏi mua hớ. $X đang so sánh khu nào, em đưa mặt bằng giá thật cho ạ?",
 		),
 		// Ma, tâm linh, phong thủy.
-		'/\bco ma\b|ma (khong|ko|am)\b|nha ma|tam linh|bi am|phong thuy|huong nao (tot|hop)|hop tuoi|xem tuoi|tuoi (gi|nao) (mua|hop)|dat du\b/' => array(
+		'/\bco ma (khong|a|ha|that)\b|\bnha ma\b|\bbi ma\b|ma am\b|tam linh|bi am|phong thuy|huong nao (tot|hop)|hop tuoi|xem tuoi|tuoi (gi|nao) (mua|hop)|dat du\b/' => array(
 			"Dạ nhà $name giới thiệu chỉ có \"ma\"… ma-két-tinh thôi $x ơi 😄 Còn hướng nhà, tuổi hợp thì em gửi được cả hướng từng căn để $x xem phong thủy. $X sinh năm nào ạ?",
 			"Dạ căn nào cũng được kiểm tra lịch sử, pháp lý kỹ trước khi giới thiệu nên $x yên tâm ngủ ngon ạ 😄 $X cần hướng Đông Nam đón gió biển hay hướng nào ạ?",
 		),
@@ -862,8 +913,18 @@ function hh_chat_witty( $t, $name, $prev = '' ) {
 			"Dạ \"tay hòm chìa khóa\" duyệt là quan trọng nhất $x ạ 😄 Em gửi $x bộ ảnh, bảng giá gọn gàng để trình lên \"hội đồng gia đình\" nhé. $X để lại số Zalo giúp em?",
 			"Dạ chuẩn rồi, nhà là chuyện cả nhà 😄 $name đưa cả hai anh chị đi xem một buổi cho chắc, cuối tuần cũng được ạ. $X tiện ngày nào?",
 		),
+		// Khen.
+		'/^(hay|tuyet|good|gioi|xin|dinh|ok|duoc|chuan|pro) (qua|that|ghe|the|vay|do|ha|nha)|^(tuyet voi|qua da|qua xin|10 diem|like)$/' => array(
+			"Dạ $x khen em vui cả ngày luôn 😄\n\nVui vậy thì để em tìm luôn căn cũng \"xịn\" như vậy cho $x nhé. $X đang để ý căn hộ hay đất ạ?",
+			"Dạ em cảm ơn $x, em sẽ cố giữ \"phong độ\" 😊\n\n$X cần em xem giúp dự án nào nữa không ạ?",
+		),
+		// Hỏi han con bot như hỏi người.
+		'/\b(em|ban|ad) (an (com |gi )?chua|ngu chua|lam (gi|o dau)|co met khong|lam viec may gio|o dau)\b|\b(em|ban|ad) (khoe|vui) khong/' => array(
+			"Dạ em \"ăn\" bảng giá với tin rao thôi $x ơi, no lắm rồi 😄\n\nEm trực 24/7, còn $name thì gọi được từ 8h đến 21h. $X đang tìm gì để em giúp ạ?",
+			"Dạ em khỏe, đang ngồi canh giá nhà Đà Nẵng cho $x đây 😄\n\n$X hỏi em khu nào, dự án nào cũng được ạ.",
+		),
 		// Cười.
-		'/^(ha){2,}|^hihi|^hehe|^kaka|^keke|^lol\b|^:\)|^=\)\)|^:d\b|^ahihi|^hoho/' => array(
+		'/^(ha|hi|he|ka|ke|ho|hu){2,}|^k{2,}|^lol|^: ?\)+|^= ?\)+|^: ?d|^ahihi|^hjhj/' => array(
 			"Dạ thấy $x vui là em vui rồi 😄 $X cần em tìm căn hộ, đất nền hay nhà cho thuê ở khu nào ạ?",
 			"Dạ cười nhiều mau giàu, mau mua nhà nha $x 😄 Em giúp $x tìm gì hôm nay ạ?",
 		),
@@ -873,11 +934,11 @@ function hh_chat_witty( $t, $name, $prev = '' ) {
 			"Dạ em gửi $x một cái ôm ảo trước 🤗 Lúc nào khỏe hơn, $x muốn tìm chỗ ở mới đổi gió thì em ở đây ạ.",
 		),
 		// Thời tiết.
-		'/thoi tiet|troi (mua|nang|lanh|nong)|co bao|mua bao|ngap (khong|ko)|lu lut/' => array(
+		'/thoi tiet|troi (mua|nang|lanh|nong)|co bao (khong|chua|a|lon)\b|mua bao\b(?! hiem)|bao (lu|to|vao|do bo)\b|ngap (khong|ko|nuoc)|lu lut/' => array(
 			"Dạ thời tiết Đà Nẵng thì em chịu, nhưng nhà $name giới thiệu thì \"nắng không nóng, mưa không dột\" ạ 😄 Nếu $x lo ngập, em lọc giúp những khu nền cao, không ngập. $X tìm khu nào ạ?",
 		),
 		// Ăn chơi Đà Nẵng.
-		'/an gi|quan (an|ngon)|mi quang|banh xeo|hai san|bun cha ca|choi gi|di dau choi|cho dem|cau rong phun/' => array(
+		'/\ban gi\b|\bquan (an|ngon)\b|mi quang|banh xeo|\bhai san\b|bun cha ca|\bchoi gi\b|di dau choi|\bcho dem\b|cau rong phun/' => array(
 			"Dạ mì Quảng, bánh xèo, bún chả cá là \"đặc sản phải thử\" ở Đà Nẵng đó $x 😋 Tối thứ 7, Chủ nhật nhớ ra xem cầu Rồng phun lửa nữa. Mà $x tính ở lâu dài thì em tìm luôn căn gần mấy chỗ này nhé?",
 		),
 		// Hỏi nên mua vàng / chứng khoán hay đất.
@@ -885,7 +946,7 @@ function hh_chat_witty( $t, $name, $prev = '' ) {
 			"Dạ vàng thì cất két, chứ nhà thì vừa ở vừa cho thuê được $x ạ 😄 Mỗi kênh một khẩu vị; nếu $x thích tài sản thật, có dòng tiền, em gửi vài căn cho thuê tốt ở Đà Nẵng tham khảo nhé?",
 		),
 		// Thử chat.
-		'/^(test|thu|alo|a lo|alo alo|co ai khong|co ai ko|ai do khong)\b/' => array(
+		'/^(test|thu|alo|a lo|alo alo)( (thu|thoi|chat|cai|xem|nhe))?$|^co ai (khong|ko|o day|truc)|^ai do khong/' => array(
 			"Dạ em đây, trực 24/7 không nghỉ ạ 😄 $X cần hỏi giá dự án, đất nền hay nhà cho thuê ạ?",
 		),
 		// Chào.
@@ -904,7 +965,8 @@ function hh_chat_witty( $t, $name, $prev = '' ) {
 		),
 	);
 	foreach ( $jokes as $re => $replies ) {
-		if ( preg_match( $re, $t ) ) {
+		// Khớp trọn từ: "bàn giao" không phải "ăn gì", "có bao nhiêu" không phải "có bão".
+		if ( preg_match( '/(?<![a-z0-9])(?:' . substr( $re, 1, -1 ) . ')(?![a-z0-9])/', $t ) ) {
 			$replies = array_values( array_filter( $replies, static fn( $r ) => $r !== $prev ) ) ?: $replies;
 			return $replies[ array_rand( $replies ) ];
 		}
@@ -1091,8 +1153,13 @@ function hh_chat_board_lookup( $t ) {
 	if ( ! $hits ) {
 		return '';
 	}
+	// Khách hỏi đất thì ưu tiên dòng giá đất, hỏi khách sạn thì dòng khách sạn.
+	$want = preg_match( '/khach san/', $t ) ? 'Khách sạn ' : ( preg_match( '/\bdat\b|\blo\b/', $t ) ? 'Đất ' : '' );
+	$pick = $want ? array_values( array_filter( $hits, static fn( $h ) => 0 === strpos( $h, $want ) ) ) : array();
+	$pre  = $want && ! $pick ? 'Bảng giá trên web chưa có dòng giá ' . mb_strtolower( trim( $want ) ) . ' riêng khu này, em gửi giá gần nhất để tham khảo: ' : '';
+	$hits = $pick ?: $hits;
 	$note = "\nĐây là giá rao tham khảo 10/2026, thực tế còn tùy mặt tiền, pháp lý từng lô.";
-	return 1 === count( $hits ) ? $hits[0] . '.' . $note : "Giá rao tham khảo 10/2026:\n• " . implode( "\n• ", array_slice( $hits, 0, 3 ) ) . "\nThực tế còn tùy mặt tiền, pháp lý từng lô.";
+	return $pre . ( 1 === count( $hits ) ? $hits[0] . '.' . $note : "Giá rao tham khảo 10/2026:\n• " . implode( "\n• ", array_slice( $hits, 0, 3 ) ) . "\nThực tế còn tùy mặt tiền, pháp lý từng lô." );
 }
 
 /* -------------------------------------------------------------------------

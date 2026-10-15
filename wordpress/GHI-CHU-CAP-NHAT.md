@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.18** + plugin Hoàng Hiệp CRM **2.20.48**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.18** + plugin Hoàng Hiệp CRM **2.20.49**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,16 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.49: chat hiểu ý khách, không chỉ bắt từ khoá
+
+- **Hiểu cách gõ đời thường**: "ko", "k", "dc", "bn", "bao h", "wa", "z", "2 PN", "2 phòng ngủ", "2 tỷ rưỡi", "3 tỷ 5", gõ kéo dài chữ "quáaaa"…
+- **Hiểu câu trả lời ngắn nối theo câu hỏi trước**: chat hỏi "để ở hay đầu tư?" → khách gõ "cho thuê", "đầu tư", "để ở", "nhà 4 người muốn mua để ở"; chat hỏi "gần biển hay sông Hàn?" → "biển"; "ok", "gửi đi", "chưa cần"… đều được đáp đúng ý.
+- **Tra hàng trăm câu hỏi đáp có sẵn trên web theo nghĩa**: khách hỏi "bạch vân bao giờ giao nhà z", "đất võ chí công có sổ chưa ad", "casamia sở hữu mấy năm", "sun cosmo chủ đầu tư là ai", "the meridian nằm ở đâu" → trả lời đúng mục của đúng dự án, kèm link. Đang ở trang dự án thì hỏi trống "có sổ chưa", "bao h giao nhà" cũng hiểu.
+- **Câu hỏi chung** có câu trả lời: người nước ngoài mua nhà, lãi suất vay, thủ tục sang tên, thuế phí, đặt cọc cần lưu ý gì, nên mua khu nào, thị trường thế nào, cho thuê lãi bao nhiêu, "đẹp mà không đắt"… Không tự đặt con số; chỗ cần số thì hẹn tính theo từng căn.
+- **Sửa các lỗi bắt nhầm cũ**: "điện thoại", "diện tích", "Điện Ngọc" từng bị hiểu là chê bot; "2 phòng ngủ" bị hiểu là chửi "ngu"; "bàn giao" bị hiểu là "ăn gì"; "có bao nhiêu" bị hiểu là "có bão"; "ở Mỹ Khê" bị hiểu là "ở Mỹ"; "thu nhập" bị hiểu là gõ thử; "đất vàng" bị hiểu là chê đắt; "công nhận" bị hiểu là "lương công nhân"; "mà không" bị hiểu là hỏi nhà có ma.
+- Thêm câu đáp khi khách khen ("hay quá"), hỏi han ("em ăn cơm chưa").
+- Cài: Dự án → Nhập nhanh → tải `cap-nhat-code.zip` → LiteSpeed Cache → Purge All.
 
 ## Có gì mới – plugin 2.20.48: chat khéo hơn với khách ở xa, khách "xem cho biết"
 
