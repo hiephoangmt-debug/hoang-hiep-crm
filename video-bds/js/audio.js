@@ -3,6 +3,8 @@
   'use strict';
 
   var MOODS = {
+    'dien-anh': 'Điện ảnh: piano + dàn dây + trống (khuyên dùng)',
+    'chill': 'Chill nhẹ nhàng: piano lofi',
     'none': 'Không nhạc',
     'nhe-nhang': 'Nhẹ nhàng, ấm áp',
     'soi-dong': 'Sôi động, trẻ trung',
@@ -362,7 +364,159 @@
     n.stop(t + 0.06);
   };
 
+  /* ---------- Nhạc nền mới: piano, dàn dây, bass, trống ---------- */
+
+  /** Tiếng piano: nhiều hoạ âm tắt dần, tiếng búa nhẹ ở đầu. */
+  AudioEngine.prototype._piano = function (note, t, vol, len) {
+    var ctx = this.ctx, f = midi(note);
+    len = len || 2.2;
+    var lp = ctx.createBiquadFilter();
+    lp.type = 'lowpass';
+    lp.frequency.setValueAtTime(Math.min(9000, f * 9), t);
+    lp.frequency.exponentialRampToValueAtTime(Math.max(400, f * 2), t + len);
+    var g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.006);
+    g.gain.exponentialRampToValueAtTime(vol * 0.35, t + 0.35);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + len);
+    lp.connect(g).connect(this.musicBus);
+    [[1, 1], [2, 0.42], [3, 0.2], [4, 0.1], [5.02, 0.05]].forEach(function (h, i) {
+      var o = this._track(ctx.createOscillator());
+      o.type = i ? 'sine' : 'triangle';
+      o.frequency.value = f * h[0];
+      o.detune.value = (i % 2 ? 3 : -3);
+      var hg = ctx.createGain();
+      hg.gain.value = h[1];
+      o.connect(hg).connect(lp);
+      o.start(t);
+      o.stop(t + len + 0.05);
+    }, this);
+  };
+
+  /** Dàn dây: sóng răng cưa lệch nhẹ, lọc mềm, vào chậm ra chậm. */
+  AudioEngine.prototype._strings = function (notes, t, dur, vol) {
+    var ctx = this.ctx;
+    var lp = ctx.createBiquadFilter();
+    lp.type = 'lowpass';
+    lp.frequency.value = 1600;
+    lp.Q.value = 0.4;
+    var g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.linearRampToValueAtTime(vol, t + Math.min(1.4, dur * 0.4));
+    g.gain.setValueAtTime(vol, t + dur - 0.5);
+    g.gain.linearRampToValueAtTime(0.0001, t + dur + 0.6);
+    lp.connect(g).connect(this.musicBus);
+    this._pumpTargets = this._pumpTargets || [];
+    this._pumpTargets.push(g);
+    notes.forEach(function (n) {
+      [-9, 0, 9].forEach(function (det) {
+        var o = this._track(ctx.createOscillator());
+        o.type = 'sawtooth';
+        o.frequency.value = midi(n);
+        o.detune.value = det;
+        o.connect(lp);
+        o.start(t);
+        o.stop(t + dur + 0.7);
+      }, this);
+    }, this);
+  };
+
+  AudioEngine.prototype._bass = function (note, t, len, vol) {
+    var ctx = this.ctx;
+    var o = this._track(ctx.createOscillator());
+    o.type = 'sine';
+    o.frequency.value = midi(note);
+    var o2 = this._track(ctx.createOscillator());
+    o2.type = 'triangle';
+    o2.frequency.value = midi(note);
+    var g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.02);
+    g.gain.exponentialRampToValueAtTime(vol * 0.6, t + len * 0.6);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + len);
+    var g2 = ctx.createGain();
+    g2.gain.value = 0.25;
+    o.connect(g);
+    o2.connect(g2).connect(g);
+    g.connect(this.music);
+    o.start(t); o2.start(t);
+    o.stop(t + len + 0.05); o2.stop(t + len + 0.05);
+  };
+
+  AudioEngine.prototype._snap = function (t, vol) {
+    var ctx = this.ctx;
+    var n = this._track(ctx.createBufferSource());
+    n.buffer = this.noise;
+    var bp = ctx.createBiquadFilter();
+    bp.type = 'bandpass';
+    bp.frequency.value = 1900;
+    bp.Q.value = 0.9;
+    var g = ctx.createGain();
+    g.gain.setValueAtTime(vol, t);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.16);
+    n.connect(bp).connect(g);
+    g.connect(this.music);
+    g.connect(this.reverb);
+    n.start(t, Math.random());
+    n.stop(t + 0.18);
+  };
+
+  /** Nhạc nhún theo trống (sidechain): dàn dây nhỏ lại một chút mỗi nhịp trống. */
+  AudioEngine.prototype._pump = function (t) {
+    (this._pumpTargets || []).forEach(function (g) {
+      try {
+        var v = g.gain.value || 0.03;
+        g.gain.setTargetAtTime(v * 0.55, t, 0.01);
+        g.gain.setTargetAtTime(v, t + 0.06, 0.12);
+      } catch (e) { /* bỏ qua */ }
+    });
+  };
+
   AudioEngine.prototype.scheduleMusic = function (mood, t0, duration) {
+    if (!mood || mood === 'none') return;
+    if (mood !== 'dien-anh' && mood !== 'chill') { this.scheduleMusicBasic(mood, t0, duration); return; }
+    // Vòng hoà âm vi–IV–I–V (giọng Rê trưởng), kiểu nhạc quảng cáo BĐS
+    var prog = [[59, 62, 66], [55, 59, 62], [50, 54, 57], [57, 61, 64]]; // Bm G D A
+    var roots = [47, 43, 38, 45];
+    var cine = mood === 'dien-anh';
+    var bpm = cine ? 92 : 82;
+    var beat = 60 / bpm, bar = beat * 4, end = t0 + duration;
+    var bars = Math.ceil(duration / bar);
+    var intro = cine ? 2 : 1; // vài ô nhịp đầu chỉ có piano + dây, rồi trống vào
+    for (var b = 0; b < bars; b++) {
+      var tb = t0 + b * bar;
+      if (tb >= end) break;
+      var ch = prog[b % 4], root = roots[b % 4];
+      var len = Math.min(bar, end - tb);
+      this._strings(ch, tb, len, cine ? 0.028 : 0.018);
+      // Piano rải hợp âm: 8 nốt mỗi ô nhịp
+      var pat = cine ? [0, 1, 2, 1, 0, 2, 1, 2] : [0, 2, 1, 2, -1, 2, 1, 2];
+      for (var k = 0; k < 8; k++) {
+        var tk = tb + k * beat / 2 + (cine ? 0 : (k % 2 ? 0.03 : 0)); // chill: hơi lệch nhịp cho mềm
+        if (tk >= end - 0.2) break;
+        var idx = pat[k];
+        var note = idx < 0 ? ch[0] + 12 : ch[idx] + 12;
+        this._piano(note, tk, k === 0 ? 0.12 : 0.07, 1.8);
+      }
+      // Giai điệu nốt cao ở ô nhịp chẵn
+      if (cine && b >= intro && b % 2 === 0) this._piano(ch[2] + 24, tb + beat * 2.5, 0.06, 2.4);
+      if (b >= intro) {
+        this._bass(root, tb, beat * 1.8, 0.3);
+        this._bass(root, tb + beat * 2, beat * 1.6, 0.24);
+        for (var q = 0; q < 4; q++) {
+          var tq = tb + q * beat;
+          if (tq >= end) break;
+          if (q === 0 || q === 2 || (cine && q === 3 && b % 4 === 3)) { this._kick(tq, cine ? 0.5 : 0.35); this._pump(tq); }
+          if (q === 1 || q === 3) this._snap(tq, cine ? 0.18 : 0.12);
+          this._hat(tq + beat / 2, cine ? 0.06 : 0.04);
+        }
+      }
+    }
+    // Cuối bài: một nốt piano trầm ngân dài
+    this._piano(50, Math.max(t0, end - 2.5), 0.12, 3);
+  };
+
+  AudioEngine.prototype.scheduleMusicBasic = function (mood, t0, duration) {
     if (!mood || mood === 'none') return;
     var cfg = {
       'nhe-nhang': { bpm: 84, chords: [[60, 64, 67, 71], [57, 60, 64, 67], [53, 57, 60, 64], [55, 59, 62, 67]], drums: false, arp: 'triangle' },

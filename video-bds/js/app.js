@@ -15,7 +15,7 @@
     style: 'chuyen-nghiep',
     variant: 0,
     voiceMode: 'clip',
-    music: { mood: 'nhe-nhang', buffer: null, name: '', vol: 70 },
+    music: { mood: 'dien-anh', buffer: null, name: '', vol: 70 },
     settings: {
       format: '9:16', theme: 'vang', transition: 'mix', textFx: 'marker', subStyle: 'kinetic', beauty: 'vua', pace: 'auto', endStyle: 'pill', sfx: true, subtitles: true,
       introCard: true, endCard: true, priceTag: true, autoTrim: true
@@ -66,7 +66,7 @@
       try {
         localStorage.setItem(STORE_KEY, JSON.stringify({
           info: state.info, style: state.style, settings: state.settings, voiceMode: state.voiceMode,
-          mood: state.music.mood, vol: state.music.vol, helpSeen: true, v3: true,
+          mood: state.music.mood, vol: state.music.vol, helpSeen: true, v3: true, v4: true, v4: true,
           scenes: state.scenes.map(function (s) {
             return { title: s.title, text: s.text, bigText: s.bigText, shotNote: s.shotNote, durOverride: s.durOverride, showTitle: s.showTitle, quick: s.quick, layout: s.layout };
           })
@@ -85,7 +85,7 @@
       if (!d.v3) { delete saved.subStyle; delete saved.transition; delete saved.textFx; } // bản cũ: dùng kiểu mới mặc định
       Object.assign(state.settings, saved);
       state.voiceMode = d.voiceMode || state.voiceMode;
-      state.music.mood = d.mood || state.music.mood;
+      state.music.mood = d.v4 && d.mood ? d.mood : state.music.mood;
       state.music.vol = d.vol != null ? d.vol : state.music.vol;
       state.scenes = (d.scenes || []).map(newScene);
       return !!d.helpSeen;
@@ -359,14 +359,18 @@
     $('autoBox').scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
+  /** Mở thêm một bản của clip để tua sẵn đoạn sau (chỗ cắt không giật). Quá 8 giây thì bỏ qua, vẫn dựng được. */
   function loadExtraVideo(url) {
     return new Promise(function (resolve) {
       var v = document.createElement('video');
+      var done = false;
+      var finish = function (x) { if (!done) { done = true; resolve(x); } };
       v.muted = true;
       v.playsInline = true;
       v.preload = 'auto';
-      v.onloadeddata = function () { resolve(v); };
-      v.onerror = function () { resolve(null); };
+      v.onloadeddata = function () { finish(v); };
+      v.onerror = function () { finish(null); };
+      setTimeout(function () { finish(null); }, 8000);
       v.addEventListener('seeked', schedulePreview);
       v.src = url;
     });
@@ -540,8 +544,13 @@
     });
     // 3. Xếp vào cảnh và dựng
     return chain.then(function () {
-      progress(0.98, 'Đang ghép theo kịch bản…');
-      return Promise.all(clips.map(function (c) { return loadExtraVideo(c.item.url).then(function (tw) { c.twin = tw; }); }));
+      // Mở lần lượt từng clip (không mở cùng lúc để máy không quá tải)
+      return clips.reduce(function (p, c, i) {
+        return p.then(function () {
+          progress(0.98, 'Đang ghép theo kịch bản… (chuẩn bị clip ' + (i + 1) + '/' + clips.length + ')');
+          return loadExtraVideo(c.item.url).then(function (tw) { c.twin = tw; });
+        });
+      }, Promise.resolve());
     }).then(function () {
       var scenes = state.scenes;
       var perScene = scenes.map(function () { return []; });
@@ -1581,7 +1590,7 @@
         if (attached.indexOf(it.el) === -1) { attached.push(it.el); engine.attachClip(it.el); }
       });
       var mood = state.music.mood;
-      if (tl.kind === 'trailer' && mood !== 'none') mood = 'soi-dong';
+      if (tl.kind === 'trailer' && mood !== 'none' && mood !== 'dien-anh') mood = 'soi-dong';
       if (state.music.buffer) {
         engine.playBuffer(state.music.buffer, t0, engine.music, { loop: true, duration: tl.total });
         engine.scheduleMusicVolume(t0, tl.total, 0.6 * vol, ranges);
