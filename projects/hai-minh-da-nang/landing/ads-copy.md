@@ -84,3 +84,63 @@ Chữ trên video/ảnh (≤ 20% diện tích):
 - Ngân sách thử: 200–300k/ngày/mẫu, chạy 3–5 mẫu song song 3–4 ngày, giữ mẫu có giá/lead thấp nhất.
 - Ảnh: phối cảnh tòa tháp, phối cảnh mặt biển, ảnh công trường thực tế (tăng độ tin cậy).
 - Lead form tức thì: Họ tên, SĐT, câu hỏi "Loại căn quan tâm" (1PN/2PN/2PN+1/3PN/Dual Key).
+
+---
+
+# Bộ 2 – Hấp dẫn, nhấn "hệ sinh thái biển" (không dùng từ "đầu tiên/duy nhất/nhất" khi chưa có văn bản chứng minh – Luật Quảng cáo)
+
+## Mẫu 6 – Mở mắt là biển (ma-mau: mo-mat-la-bien)
+☀️ 5h30 sáng. Kéo rèm – biển Mỹ Khê ngay trước mặt.
+🏊 6h00 – đã xuống biển. 🥐 8h00 – cà phê view biển. 🌅 18h00 – hoàng hôn trên ban công tầng cao.
+
+Đó là một ngày bình thường ở CĂN HỘ DỊCH VỤ HẢI MINH ĐÀ NẴNG – tháp 30 tầng ngay mặt biển Võ Nguyên Giáp, đối diện Silver Shores.
+
+🌊 Biển trước nhà · Resort quanh nhà · An Thượng, Ngũ Hành Sơn, Hội An trong tầm tay
+🔥 Dự kiến ra mắt tháng 11/2026 – căn view biển trực diện luôn được chọn trước.
+
+👉 Đăng ký ưu tiên ngay để nhận bảng giá trước ngày ra mắt
+📞 Hotline/Zalo: 0904 567 009
+
+Tiêu đề: Mở mắt là thấy biển Mỹ Khê
+Mô tả: Hải Minh · 30 tầng mặt biển · Dự kiến 11/2026
+
+## Mẫu 7 – Cả hệ sinh thái biển trong một địa chỉ (ma-mau: he-sinh-thai-2)
+🌊 KHÔNG CHỈ LÀ CĂN HỘ – LÀ CẢ MỘT HỆ SINH THÁI BIỂN
+
+Trong vài phút quanh Hải Minh:
+🏖 Bãi biển Mỹ Khê – Non Nước, top bãi biển đẹp của Việt Nam
+🏨 Chuỗi resort & khách sạn cao cấp dọc Võ Nguyên Giáp – Trường Sa
+🏄 Lướt sóng, chèo SUP, golf ven biển
+🦐 Hải sản tươi, phố đêm An Thượng
+⛰ Ngũ Hành Sơn, làng đá Non Nước – thẳng đường đi Hội An
+
+📍 Góc Trường Sa – Nguyễn Đức Thuận · Tháp 30 tầng · ~400 căn hộ du lịch
+📜 Đất thương mại dịch vụ 50 năm (9/2026 – 9/2076)
+
+Nơi bạn nghỉ dưỡng – cũng là nơi khách du lịch muốn thuê. 💰
+👉 Nhận bảng giá & danh sách căn view biển: 0904 567 009
+
+Tiêu đề: Cả hệ sinh thái biển trong một địa chỉ
+Mô tả: Đăng ký ưu tiên trước ngày ra mắt 11/2026
+
+## Mẫu 8 – Đất mặt biển ngày càng hiếm (ma-mau: khan-hiem)
+⏳ Mặt tiền biển Đà Nẵng – còn bao nhiêu lô đất trống?
+
+Dọc Võ Nguyên Giáp – Trường Sa, quỹ đất sát biển gần như đã kín resort và khách sạn. Mỗi dự án căn hộ mặt biển mới đều là cơ hội không nhiều.
+
+🏙 HẢI MINH – tháp 30 tầng ngay mặt biển, đối diện Silver Shores
+🛏 1PN 47 m² đến Dual Key 101 m² – vừa nghỉ dưỡng, vừa cho thuê
+🔥 Dự kiến ra mắt tháng 11/2026
+
+👉 Khách đăng ký sớm được ưu tiên chọn tầng cao, view biển trực diện.
+📞 0904 567 009 (Zalo)
+
+Tiêu đề: Căn hộ mặt biển – cơ hội không nhiều
+Mô tả: Đăng ký ưu tiên chọn căn view biển
+
+## Mẫu 9 – Video/Reels 15 giây (ma-mau: reels-15s)
+Cảnh 1 (0–3s): Flycam biển Mỹ Khê – chữ: "BIỂN NGAY TRƯỚC NHÀ"
+Cảnh 2 (3–7s): Phối cảnh tòa tháp 30 tầng – chữ: "HẢI MINH · MẶT BIỂN VÕ NGUYÊN GIÁP"
+Cảnh 3 (7–11s): Resort, An Thượng, Ngũ Hành Sơn lướt nhanh – chữ: "CẢ HỆ SINH THÁI BIỂN QUANH BẠN"
+Cảnh 4 (11–15s): Logo + chữ: "DỰ KIẾN RA MẮT 11/2026 · ĐĂNG KÝ ƯU TIÊN · 0904 567 009"
+Caption: Mở mắt là biển, bước ra là resort 🌊 Hải Minh Đà Nẵng – dự kiến ra mắt 11/2026. Đăng ký ưu tiên 👇
