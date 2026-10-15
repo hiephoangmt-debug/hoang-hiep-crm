@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.19** + plugin Hoàng Hiệp CRM **2.20.52**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.19** + plugin Hoàng Hiệp CRM **2.20.53**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,17 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.53: chat hiểu từ viết tắt, trả lời tự nhiên hơn
+
+- **Hiểu đúng từ viết tắt**, kể cả từ nhiều nghĩa (dịch theo từ đứng cạnh):
+  - Nhắn tin: a / c / e (anh / chị / em), ko, k, dc, j, bn, bh, ntn, vk, ck (vợ / chồng), ny, mn, nt, rep, sdt, zl, ib, t7, cn…
+  - Nhà đất: cc, ch, MT, MTKD, HXH, SHR, SH, SĐ, CĐT, HĐMB, HĐ cọc, LK, BT (biệt thự), TC (thổ cư), ODT, KĐT, KDC, DT (diện tích) / ĐT (xin đt = điện thoại), CK (chiết khấu khi đi với số, % / chồng khi nói "ck mình"), TT (thanh toán / gần TT = trung tâm), LS, NH, MG, CN 90 (công nhận)…
+  - Tiền: 3t5, 3ty5 = 3,5 tỷ; 3 tỏi = 3 tỷ; 500 củ, 500tr = 500 triệu; 2 tỷ rưỡi.
+  - Địa danh: ĐN, QN, NHS, ST, HC, TK, LC, CL, HV, ĐB, HX, VNG (Võ Nguyên Giáp), VCC (Võ Chí Công), VVK, NVL, PVĐ…
+- **Câu trả lời khéo, không lặp**: hỏi nhu cầu, gợi ý căn, hẹn xem nhà, xin số Zalo, câu chưa rõ ý — mỗi chỗ có 2–3 cách nói, không nói lại câu vừa nói; "Dạ có ạ" chỉ dùng khi khách hỏi có / không.
+- Sửa: "Vân" trong "Bạch Vân" bị bỏ khi tra cứu; "giá" khớp nhầm vào "giao"; "vậy" (z) bị hiểu là "vay"; khách nói nhu cầu bị trả lời bằng câu hỏi đáp của bài tin tức.
+- Cài: Dự án → Nhập nhanh → tải `cap-nhat-code.zip` → LiteSpeed Cache → Purge All.
 
 ## Có gì mới – plugin 2.20.52: chat hiểu giờ hẹn xem nhà, đáp khéo câu trêu
 

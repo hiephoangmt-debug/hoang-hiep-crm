@@ -196,7 +196,7 @@ function hh_chat_handle() {
 		// Khách đã tự xưng "anh" / "chị" trong cuộc trò chuyện → gọi đúng, bỏ "anh/chị" chung chung.
 		$who = 'anh/chị';
 		foreach ( array_reverse( $msgs ) as $m ) {
-			if ( 'user' === $m['role'] && 'anh/chị' !== ( $w = hh_chat_address( mb_strtolower( remove_accents( $m['text'] ) ) ) ) ) {
+			if ( 'user' === $m['role'] && 'anh/chị' !== ( $w = hh_chat_address( hh_chat_norm( mb_strtolower( remove_accents( $m['text'] ) ) ) ) ) ) {
 				$who = $w;
 				break;
 			}
@@ -640,10 +640,20 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 	$prev  = $bots ? end( $bots )['text'] : '';
 
 	// Xin số tối đa 1 lần mỗi 2 lượt, không xin ở lượt đầu; lượt trước đã xin thì lượt này thôi.
-	$asked_last = (bool) preg_match( '/xin số|số zalo|số điện thoại/u', $prev );
+	$asked_last = (bool) preg_match( '/xin số|số zalo|số điện thoại|để lại số/iu', $prev );
 	$may_ask    = ! $has_lead && $turn >= 2 && ! $asked_last;
-	$ask        = $may_ask ? ( $title ? ' Anh/chị cho em xin số Zalo, em gửi bảng giá chi tiết và phiếu tính giá đúng căn anh/chị quan tâm nhé.' : ' Anh/chị cho em xin số Zalo, em gửi chi tiết từng căn kèm hình ảnh để anh/chị xem kỹ hơn nhé.' ) : '';
-	$acks       = array( 'Dạ ', 'Vâng ạ, ', 'Dạ có ạ. ', 'Dạ, ' );
+	// Chọn 1 trong vài cách nói, tránh câu vừa nói ở lượt trước.
+	$pick       = static function ( array $v ) use ( $prev ) {
+		$ok = array_values( array_filter( $v, static fn( $r ) => '' === $prev || false === mb_strpos( $prev, mb_substr( trim( $r ), 0, 28 ) ) ) );
+		return ( $ok ?: $v )[ array_rand( $ok ?: $v ) ];
+	};
+	$ask        = $may_ask ? $pick(
+		$title
+			? array( ' Anh/chị cho em xin số Zalo, em gửi bảng giá chi tiết và phiếu tính giá đúng căn anh/chị quan tâm nhé.', ' Bảng giá với phiếu tính tiền từng căn xem trên Zalo rõ hơn nhiều, anh/chị cho em xin số nhé?', ' Anh/chị để lại số Zalo, em gửi gọn đúng căn anh/chị hỏi, không gửi tràn lan làm phiền đâu ạ 😊' )
+			: array( ' Anh/chị cho em xin số Zalo, em gửi chi tiết từng căn kèm hình ảnh để anh/chị xem kỹ hơn nhé.', ' Ảnh thực tế với giá từng căn gửi qua Zalo nét hơn, anh/chị cho em xin số nhé?', ' Anh/chị để lại số Zalo, em lọc gửi 2–3 căn sát nhất, không gửi cả rổ làm rối mắt đâu ạ 😊' )
+	) : '';
+	// "Dạ có ạ" chỉ dùng khi khách hỏi có / không.
+	$acks       = preg_match( '/(khong|chua|duoc khong|co khong|a\?)\s*\??$/', $t ) ? array( 'Dạ ', 'Dạ có ạ. ', 'Dạ, ' ) : array( 'Dạ ', 'Vâng ạ, ', 'Dạ, ' );
 	$ack        = $turn >= 2 ? $acks[ array_rand( $acks ) ] : 'Dạ ';
 	// Sau "Dạ " (lượt đầu) viết thường chữ đầu của câu chung, giữ hoa cho tên dự án.
 	$lc = static fn( $txt ) => '. ' === substr( $ack, -2 ) ? $txt : mb_strtolower( mb_substr( $txt, 0, 1 ) ) . mb_substr( $txt, 1 );
@@ -757,9 +767,14 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 		return $gen;
 	}
 	if ( $has( 'xem nha', 'di xem', 'tham quan', 'lich', 'nha mau' ) ) {
-		return $ack . $name . ' đưa anh/chị đi xem trực tiếp, miễn phí. Anh/chị tiện ngày nào, buổi sáng hay chiều ạ?' . ( $has_lead ? '' : ' Em xin số điện thoại để xác nhận lịch nhé.' );
+		return $pick(
+			array(
+				$ack . $name . ' đưa anh/chị đi xem trực tiếp, miễn phí. Anh/chị tiện ngày nào, buổi sáng hay chiều ạ?' . ( $has_lead ? '' : ' Em xin số điện thoại để xác nhận lịch nhé.' ),
+				"Dạ được chứ ạ, xem tận mắt mới \"chắc cú\" 😊 $name đi cùng anh/chị, miễn phí, xem luôn 2–3 căn một buổi cho đỡ mất công. Anh/chị tiện ngày nào, buổi sáng hay chiều ạ?" . ( $has_lead ? '' : ' Anh/chị cho em xin số để chốt lịch nhé.' ),
+			)
+		);
 	}
-	if ( $has( 'zalo', 'so dien thoai', 'goi', 'lien he' ) ) {
+	if ( $has( 'zalo', 'so dien thoai', 'dien thoai', 'goi', 'lien he', 'xin so', 'sdt' ) ) {
 		return $has_lead ? $name . ' sẽ liên hệ anh/chị sớm ạ. Anh/chị cũng có thể gọi/Zalo trực tiếp ' . $phone . '.' : 'Dạ anh/chị nhập số điện thoại/Zalo ngay tại đây, hoặc gọi/Zalo trực tiếp ' . $phone . ' ạ.';
 	}
 
@@ -767,7 +782,22 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 	if ( $need ) {
 		$asked_budget = false !== mb_strpos( $prev, 'tài chính' ) || false !== mb_strpos( $prev, 'ngân sách' ) || false !== mb_strpos( $prev, 'tầm giá' );
 		if ( $turn < 2 && ! $budget && ! $asked_budget ) {
-			return 'Dạ, anh/chị tìm ' . $labels[ $need ] . ( 'thue' === $need ? ' khu vực nào và tầm giá thuê bao nhiêu mỗi tháng ạ?' : ' để ở hay đầu tư, tầm tài chính khoảng bao nhiêu ạ? Em lọc căn phù hợp cho anh/chị.' );
+			$lb = $labels[ $need ];
+			return 'thue' === $need
+				? $pick(
+					array(
+						'Dạ, anh/chị tìm thuê khu vực nào và tầm giá thuê bao nhiêu mỗi tháng ạ?',
+						'Dạ thuê thì em có cả căn gần biển lẫn trung tâm ạ 😊 Anh/chị cần khu nào, tầm bao nhiêu một tháng, ở mấy người ạ?',
+						'Dạ được ạ. Anh/chị thuê ở lâu dài hay vài tháng, tầm giá bao nhiêu một tháng để em lọc căn đúng ý ạ?',
+					)
+				)
+				: $pick(
+					array(
+						"Dạ, anh/chị tìm $lb để ở hay đầu tư, tầm tài chính khoảng bao nhiêu ạ? Em lọc căn phù hợp cho anh/chị.",
+						"Dạ $lb thì em có nhiều lựa chọn lắm 😊 Anh/chị cho em xin 2 thông tin: mua để ở hay đầu tư, và tầm tài chính khoảng bao nhiêu, em lọc ra 2–3 căn sát nhất ạ.",
+						"Dạ được ạ. Để em khỏi gửi \"cả rổ\" làm anh/chị rối mắt, anh/chị cho em biết tầm tài chính và mua để ở hay đầu tư nhé?",
+					)
+				);
 		}
 		$rooms = preg_match( '/\bstudio\b/', $t ) ? 'studio' : ( preg_match( '/\b([1-4])\s*(pn|phong ngu|phong)\b/', $t, $rm ) ? $rm[1] : '' );
 		$opts  = hh_chat_options( $need, $budget, $page, $rooms );
@@ -782,7 +812,7 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 				: 'Dạ vâng ạ. Anh/chị muốn em gửi chi tiết phương án nào trước, hay đặt lịch đi xem thực tế cả 3 trong một buổi ạ? Để lại số Zalo, ' . $name . ' sắp xếp và gọi xác nhận ngay.';
 		}
 		if ( $opts ) {
-			return $ack . $lc( 'Em gợi ý ' ) . count( $opts ) . ' phương án ' . $labels[ $need ] . ( $rooms ? ( 'studio' === $rooms ? ' studio' : ' ' . $rooms . ' phòng ngủ' ) : '' ) . ( $budget ? ' trong tầm ' . hh_format_price( $budget, 'thue' === $need && $budget < 300 ) : '' ) . ':' . "\n• " . implode( "\n• ", $opts ) . "\n" . ( $ask ? trim( $ask ) : 'Anh/chị thấy phương án nào hợp, em gửi chi tiết căn trống ạ?' );
+			return $ack . $lc( 'Em gợi ý ' ) . count( $opts ) . ' phương án ' . $labels[ $need ] . ( $rooms ? ( 'studio' === $rooms ? ' studio' : ' ' . $rooms . ' phòng ngủ' ) : '' ) . ( $budget ? ' trong tầm ' . hh_format_price( $budget, 'thue' === $need && $budget < 300 ) : '' ) . ':' . "\n• " . implode( "\n• ", $opts ) . "\n" . ( $ask ? trim( $ask ) : $pick( array( 'Anh/chị thấy phương án nào hợp, em gửi chi tiết căn trống ạ?', 'Anh/chị "ưng mắt" căn nào trước, em gửi ảnh thực tế với căn đang trống ạ?', 'Mỗi căn một "cá tính", anh/chị muốn em so sánh nhanh 3 căn này không ạ?' ) ) );
 		}
 	}
 
@@ -798,13 +828,29 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
 		return hh_chat_smalltalk( $t, $name, $prev );
 	}
 	// Không rõ ý: không lặp lại câu trước.
-	$generic = $title
-		? $ack . $lc( 'Ở ' ) . $title . ' em có đủ bảng giá, chính sách, mặt bằng và căn đang trống. Anh/chị muốn xem phần nào trước ạ?'
-		: $ack . $lc( 'Anh/chị đang quan tâm căn hộ, đất nền, biệt thự hay nhà cho thuê, khu vực nào ạ?' );
-	if ( $generic === $prev || ( $turn >= 2 && $may_ask ) ) {
-		return $ack . $lc( 'Để không làm mất thời gian của anh/chị, ' ) . $name . ' sẽ gửi đúng 2–3 căn hợp nhu cầu qua Zalo, kèm giá và hình thực tế. Anh/chị cho em xin số Zalo nhé, hoặc nhắn trực tiếp ' . $phone . ' ạ.';
+	if ( $turn >= 2 && $may_ask ) {
+		return $pick(
+			array(
+				$ack . $lc( 'Để không làm mất thời gian của anh/chị, ' ) . $name . ' sẽ gửi đúng 2–3 căn hợp nhu cầu qua Zalo, kèm giá và hình thực tế. Anh/chị cho em xin số Zalo nhé, hoặc nhắn trực tiếp ' . $phone . ' ạ.',
+				"Dạ câu này nói qua điện thoại 2 phút là rõ hơn em gõ 10 tin đó anh/chị 😊 Anh/chị để lại số, $name gọi lại liền, hoặc anh/chị gọi/Zalo $phone ạ.",
+			)
+		);
 	}
-	return $generic;
+	return $title
+		? $pick(
+			array(
+				$ack . $lc( 'Ở ' ) . $title . ' em có đủ bảng giá, chính sách, mặt bằng và căn đang trống. Anh/chị muốn xem phần nào trước ạ?',
+				'Dạ ' . $title . ' thì em "thuộc bài" lắm 😊 Anh/chị hỏi giá, chính sách, mặt bằng hay pháp lý, em trả lời liền ạ.',
+				'Dạ em chưa bắt đúng ý anh/chị lắm 😅 Anh/chị đang muốn biết giá, cách thanh toán hay vị trí của ' . $title . ' ạ?',
+			)
+		)
+		: $pick(
+			array(
+				$ack . $lc( 'Anh/chị đang quan tâm căn hộ, đất nền, biệt thự hay nhà cho thuê, khu vực nào ạ?' ),
+				'Dạ em chưa bắt đúng ý anh/chị lắm 😅 Anh/chị nói em nghe thử: tìm căn hộ, đất hay nhà thuê, khu nào, tầm bao nhiêu – em lọc liền ạ.',
+				'Dạ anh/chị cứ nói tự nhiên như nói với người quen nhé, kiểu "căn hộ gần biển tầm 3 tỷ" là em hiểu liền 😊',
+			)
+		);
 }
 
 /**

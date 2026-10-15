@@ -9,37 +9,77 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Chuẩn hoá câu khách gõ (đã viết thường, bỏ dấu): viết tắt, tiếng lóng → từ đầy đủ.
+ * Chuẩn hoá câu khách gõ (đã viết thường, bỏ dấu): viết tắt khi nhắn tin, viết tắt nhà đất, tiếng lóng → từ đầy đủ.
+ * Từ viết tắt nhiều nghĩa thì dịch theo từ đứng cạnh (VD "dt": "xin dt" = điện thoại, "dt 100m2" = diện tích).
  */
 function hh_chat_norm( $t ) {
 	$t = preg_replace( '/([a-z])\1{2,}/', '$1', (string) $t ); // quaaaa → qua
 	$t = preg_replace( '/[!?.,;:~]+/', ' $0 ', $t );
 	$t = preg_replace( '/\b([1-5])\s*(phong ngu|p\.?n|ngu)\b/', '$1pn', $t ); // "2 phòng ngủ", "2 PN" → 2pn
+	// Tiền: "3t5", "3ty5" = 3,5 tỷ; "3 tỏi" = 3 tỷ; "500 củ", "500tr" = 500 triệu.
+	$t = preg_replace( '/\b(\d+)\s*(t|ty|ti)(\d)\b/', '$1.$3 ty', $t );
+	$t = preg_replace( '/\b(\d+(?:[.,]\d+)?)\s*(toi|ty|ti)\b/', '$1 ty', $t );
+	$t = preg_replace( '/\b(\d+(?:[.,]\d+)?)\s*(cu|tr|trieu)\b/', '$1 trieu', $t );
+	// Viết tắt nhiều nghĩa: dịch theo ngữ cảnh.
+	$ctx = array(
+		'/\b(xin|cho|goi|so|nhan|qua|bang) (dt|đt)\b/'                    => '$1 dien thoai',
+		'/\b(dt|đt)\b/'                                                  => 'dien tich',
+		'/\bck\b(?=\s*(\d|bao nhieu|may|nhieu|%|them|cao|khong))/'       => 'chiet khau',
+		'/\b(ck|ox|ong x)\b/'                                            => 'chong',
+		'/\b(vk|bx|ba x)\b/'                                             => 'vo',
+		'/\b(gan|o|khu|ve|cach|ra) tt\b/'                                => '$1 trung tam',
+		'/\btt\b/'                                                       => 'thanh toan',
+		'/\bcn\b(?=\s*\d)/'                                              => 'cong nhan',
+		'/\b(can|lo|mua|ban|thue|xem|nha|\d) bt\b/'                      => '$1 biet thu',
+		'/\b(dat|lo|so) tc\b/'                                           => '$1 tho cu',
+		'/\b(gan|cach|o|ra|khu) (bien|song|cho|truong|san bay)\b/'       => '$1 $2',
+		'/\bmay h\b/'                                                    => 'may gio',
+		'/\b(mai|chieu|sang|toi) (\d{1,2})h\b/'                          => '$1 $2 gio',
+		// "a/c/e" là anh / chị / em khi đứng trước động từ hoặc sau "cho, giúp, của…".
+		'/(^|\b(?:cho|giup|bao|voi|cua|ke|goi|nhan) )a\b/'               => '$1anh',
+		'/(^|\b(?:cho|giup|bao|voi|cua|ke|goi|nhan) )c\b/'               => '$1chi',
+		'/(^|\b(?:cho|giup|bao|voi|cua|ke|goi|nhan) )e\b/'               => '$1em',
+		'/\ba (?=(muon|can|hoi|tim|dang|co|o|la|thich|xem|mua|ban|thue|di|vua|se|da|chua|nghi|thay|dinh|tinh|lay|chot|coc)\b)/' => 'anh ',
+		'/\bc (?=(muon|can|hoi|tim|dang|co|o|la|thich|xem|mua|ban|thue|di|vua|se|da|chua|nghi|thay|dinh|tinh|lay|chot|coc)\b)/' => 'chi ',
+		'/\be (?=(muon|can|hoi|tim|dang|co|o|la|thich|xem|mua|ban|thue|di|vua|se|da|chua|nghi|thay|dinh|tinh|lay|chot|coc)\b)/' => 'em ',
+	);
+	foreach ( $ctx as $re => $to ) {
+		$t = preg_replace( $re, $to, $t );
+	}
 	$map = array(
-		'ko' => 'khong', 'k' => 'khong', 'hok' => 'khong', 'hong' => 'khong', 'hem' => 'khong', 'kh' => 'khong', 'khg' => 'khong', 'kg' => 'khong', 'kô' => 'khong', 'khum' => 'khong', 'hk' => 'khong',
-		'dc' => 'duoc', 'dk' => 'duoc', 'đc' => 'duoc', 'dươc' => 'duoc',
-		'j' => 'gi', 'ji' => 'gi',
-		'bn' => 'bao nhieu', 'bnh' => 'bao nhieu', 'bnhieu' => 'bao nhieu', 'nhiu' => 'nhieu', 'baonhieu' => 'bao nhieu',
-		'ntn' => 'nhu the nao', 
-		'mk' => 'minh', 'mik' => 'minh', 'mjk' => 'minh', 'mjnh' => 'minh',
-		'wa' => 'qua', 'qa' => 'qua',
-		'z' => 'vay', 'v' => 'vay', 'vay' => 'vay', 'dzay' => 'vay', 'zay' => 'vay',
-		'r' => 'roi', 'ruj' => 'roi', 'rui' => 'roi',
-		'ti' => 'ty', 'tỉ' => 'ty',
-		'cc' => 'chung cu', 'bds' => 'bat dong san', 'bđs' => 'bat dong san',
-		'sdt' => 'so dien thoai', 'sđt' => 'so dien thoai', 'zl' => 'zalo', 'zalô' => 'zalo',
-		'dn' => 'da nang', 'đn' => 'da nang', 'danang' => 'da nang', 'tp' => 'thanh pho',
-		'nc' => 'nuoc', 'ng' => 'nguoi', 'vs' => 'voi', 'ns' => 'noi', 'nhg' => 'nhung', 'trc' => 'truoc', 'ms' => 'moi', 'lm' => 'lam', 'bt' => 'biet',
-		'thik' => 'thich', 'thjk' => 'thich', 'mun' => 'muon', 'mog' => 'mong', 'iu' => 'yeu',
-		'ak' => 'a', 'ah' => 'a', 'uk' => 'u', 'uh' => 'u', 'um' => 'u', 'uhm' => 'u', 'ừ' => 'u', 'ukm' => 'u',
-		'oke' => 'ok', 'oki' => 'ok', 'okie' => 'ok', 'okela' => 'ok', 'okay' => 'ok', 'oce' => 'ok',
-		'ib' => 'nhan tin', 'inbox' => 'nhan tin', 'pm' => 'nhan tin',
-		'tks' => 'cam on', 'thank' => 'cam on', 'thanks' => 'cam on', 'camon' => 'cam on', 'cmon' => 'cam on',
-		'cn' => 'chu nhat', 't7' => 'thu 7',
+		// Nhắn tin.
+		'ko' => 'khong', 'k' => 'khong', 'hok' => 'khong', 'hong' => 'khong', 'hem' => 'khong', 'kh' => 'khong', 'khg' => 'khong', 'kg' => 'khong', 'khum' => 'khong', 'hk' => 'khong', 'kp' => 'khong phai', 'hum' => 'khong',
+		'dc' => 'duoc', 'dk' => 'duoc', 'đc' => 'duoc', 'dcm' => 'duoc',
+		'j' => 'gi', 'ji' => 'gi', 'cj' => 'cai gi',
+		'bn' => 'bao nhieu', 'bnh' => 'bao nhieu', 'bnhieu' => 'bao nhieu', 'nhiu' => 'nhieu', 'baonhieu' => 'bao nhieu', 'bnhiu' => 'bao nhieu',
+		'bh' => 'bao gio', 'bgio' => 'bao gio', 'bjo' => 'bay gio', 'bjh' => 'bay gio', 'bayh' => 'bay gio', 'h' => 'gio',
+		'ntn' => 'nhu the nao', 'ns' => 'noi', 'nt' => 'nhan tin', 'rep' => 'tra loi', 'tl' => 'thuong luong',
+		'mk' => 'minh', 'mik' => 'minh', 'mjk' => 'minh', 'mjnh' => 'minh', 'mn' => 'moi nguoi', 'ae' => 'anh em', 'ny' => 'nguoi yeu', 'ad' => 'ad',
+		'wa' => 'qua', 'qa' => 'qua', 'z' => 'vay', 'v' => 'vay', 'dzay' => 'vay', 'zay' => 'vay', 'r' => 'roi', 'ruj' => 'roi', 'rui' => 'roi',
+		'nc' => 'nuoc', 'ng' => 'nguoi', 'vs' => 'voi', 'nhg' => 'nhung', 'trc' => 'truoc', 'ms' => 'moi', 'lm' => 'lam', 'bik' => 'biet', 'bit' => 'biet', 'kq' => 'ket qua', 'thg' => 'thang', 'cty' => 'cong ty',
+		'thik' => 'thich', 'thjk' => 'thich', 'mun' => 'muon', 'mog' => 'mong', 'iu' => 'yeu', 'hix' => 'buon qua', 'huhu' => 'buon qua',
+		'ak' => 'a', 'ah' => 'a', 'uk' => 'u', 'uh' => 'u', 'um' => 'u', 'uhm' => 'u', 'ukm' => 'u', 'ukie' => 'ok',
+		'oke' => 'ok', 'oki' => 'ok', 'okie' => 'ok', 'okela' => 'ok', 'okay' => 'ok', 'oce' => 'ok', 'okla' => 'ok',
+		'ib' => 'nhan tin', 'inbox' => 'nhan tin', 'pm' => 'nhan tin', 'fb' => 'facebook', 'zl' => 'zalo', 'sdt' => 'so dien thoai', 'sđt' => 'so dien thoai',
+		'tks' => 'cam on', 'thank' => 'cam on', 'thanks' => 'cam on', 'camon' => 'cam on', 'cmon' => 'cam on', 'thx' => 'cam on',
+		'cn' => 'chu nhat', 't7' => 'thu 7', 't2' => 'thu 2', 't3' => 'thu 3', 't4' => 'thu 4', 't5' => 'thu 5', 't6' => 'thu 6',
+		// Nhà đất.
+		'bds' => 'bat dong san', 'bđs' => 'bat dong san', 'cc' => 'chung cu', 'ch' => 'can ho', 'chcc' => 'can ho chung cu',
+		'mt' => 'mat tien', 'mtkd' => 'mat tien kinh doanh', 'mtd' => 'mat tien duong', 'hxh' => 'hem xe hoi', 
+		'shr' => 'so hong rieng', 'sh' => 'so hong', 'sd' => 'so do', 'shcc' => 'so hong chinh chu', 'pl' => 'phap ly', 'gcn' => 'giay chung nhan',
+		'cdt' => 'chu dau tu', 'cđt' => 'chu dau tu', 'hdmb' => 'hop dong mua ban', 'hđmb' => 'hop dong mua ban', 'hd' => 'hop dong', 'hđ' => 'hop dong', 'hdc' => 'hop dong coc',
+		'lk' => 'lien ke', 'sp' => 'san pham', 'tmdv' => 'thuong mai dich vu',
+		'odt' => 'dat o do thi', 'ont' => 'dat o nong thon', 'cln' => 'dat cay lau nam', 'kdt' => 'khu do thi', 'kđt' => 'khu do thi', 'kdc' => 'khu dan cu', 'kcn' => 'khu cong nghiep', 'kv' => 'khu vuc',
+		'ls' => 'lai suat', 'nh' => 'ngan hang', 'nhnn' => 'ngan hang nha nuoc', 'gn' => 'giai ngan', 'ptts' => 'phan tram',
+		'cctt' => 'chinh chu', 'chinhchu' => 'chinh chu', 'mg' => 'moi gioi', 'mgioi' => 'moi gioi', 'hh' => 'hoa hong',
+		// Địa danh Đà Nẵng – Quảng Nam.
+		'dn' => 'da nang', 'đn' => 'da nang', 'danang' => 'da nang', 'tp' => 'thanh pho', 'tpdn' => 'thanh pho da nang', 'qn' => 'quang nam', 'hcm' => 'ho chi minh', 'tphcm' => 'ho chi minh',
+		'nhs' => 'ngu hanh son', 'st' => 'son tra', 'hc' => 'hai chau', 'tk' => 'thanh khe', 'lc' => 'lien chieu', 'cl' => 'cam le', 'hv' => 'hoa vang', 'db' => 'dien ban', 'hx' => 'hoa xuan', 'fpt' => 'fpt',
+		'vng' => 'vo nguyen giap', 'vcc' => 'vo chi cong', 'vvk' => 'vo van kiet', 'nvl' => 'nguyen van linh', 'tcv' => 'tran cao van', 'bd' => 'bach dang', 'pvd' => 'pham van dong', 'nts' => 'nguyen tat thanh', 'nhđ' => 'ngu hanh son',
 		'pn' => 'pn', 'wc' => 'wc',
 	);
 	$t = preg_replace_callback(
-		'/(?<![a-z0-9])[a-zđôư0-9]+(?![a-z0-9])/u',
+		'/(?<![a-z0-9])[a-zđ0-9]+(?![a-z0-9])/u',
 		static fn( $m ) => $map[ $m[0] ] ?? $m[0],
 		$t
 	);
@@ -50,7 +90,7 @@ function hh_chat_norm( $t ) {
 function hh_chat_stop() {
 	static $s = null;
 	if ( null === $s ) {
-		$s = array_flip( explode( ' ', 'a e anh chi em minh toi tui ban oi nhe nha la co khong cua va voi thi ma cho hoi xin vay the nao gi sao duoc roi nay do kia day o dang da se can muon biet u ok di chu nua lam qua rat cac nhung mot nhieu it hay hoac neu khi ve tren duoi trong ngoai ra vao den tu bang theo nhu de ai cai con chiec ad shop ha ho nhi chua bao gio luc may nam thang ngay hien nay bay du an can ho chung cu dat nen biet thu nha pho shophouse villa nha khu do thi da nang quang nam hoi an tp thanh pho lo dat mua ban phong tang toa block huong dan thong tin tu van tim hieu cho biet ti chut xiu' ) );
+		$s = array_flip( explode( ' ', 'a e bao anh chi em minh toi tui ban oi nhe nha la co khong cua va voi thi ma cho hoi xin vay the nao gi sao duoc roi nay do kia day o dang da se can muon biet u ok di chu nua lam qua rat cac nhung mot nhieu it hay hoac neu khi ve tren duoi trong ngoai ra vao den tu bang theo nhu de ai cai con chiec ad shop ha ho nhi chua bao gio luc may nam thang ngay hien nay bay du an can ho chung cu dat nen biet thu nha pho shophouse villa nha khu do thi da nang quang nam hoi an tp thanh pho lo dat mua ban phong tang toa block ti chut xiu' ) );
 	}
 	return $s;
 }
@@ -64,7 +104,7 @@ function hh_chat_concepts( $t ) {
 		'sohuu'    => 'so huu|lau dai|\d+ nam|bao lau|thoi han|may nam|nguoi nuoc ngoai|viet kieu',
 		'gia'      => 'gia|bao nhieu tien|may ty|bao nhieu ty|\bty\b|\btrieu\b|tien|re hon|dat hon|bang gia',
 		'vitri'    => 'o dau|vi tri|dia chi|nam o|nam tren|cach|gan|duong nao|ket noi|xa (trung tam|bien|san bay)',
-		'vay'      => 'vay|ngan hang|tra gop|lai suat|thanh toan|von tu co|dong tien|ho tro lai',
+		'vay'      => 'vay (ngan hang|von|tien|bao|duoc|toi|mua|lai|may|\\d)|(co|muon|can|duoc|ho tro|goi|khoan) vay|ngan hang|tra gop|lai suat|thanh toan|von tu co|dong tien|ho tro lai',
 		'tienich'  => 'tien ich|ho boi|gym|truong hoc|benh vien|sieu thi|cong vien|an ninh',
 		'loaican'  => 'loai (can|san pham|nha)|dien tich|bao nhieu m|\bm2\b|may phong|phong ngu|\bpn\b|mat bang|thiet ke|layout|san pham gi',
 		'chudautu' => 'chu dau tu|\bcdt\b|cua ai|ai lam|tap doan|don vi (phat trien|thi cong)',
@@ -74,9 +114,10 @@ function hh_chat_concepts( $t ) {
 	);
 	$found = array();
 	foreach ( $c as $k => $re ) {
-		if ( preg_match( '/' . $re . '/', $t ) ) {
+		$re = '/(?<![a-z0-9])(?:' . $re . ')(?![a-z0-9])/'; // khớp trọn từ: "gia" không khớp "giao"
+		if ( preg_match( $re, $t ) ) {
 			$found[ $k ] = 1;
-			$t = preg_replace( '/' . $re . '/', ' ', $t );
+			$t = preg_replace( $re, ' ', $t );
 		}
 	}
 	return array( $found, $t );
@@ -86,6 +127,7 @@ function hh_chat_concepts( $t ) {
 function hh_chat_entities( $t ) {
 	$st  = hh_chat_stop();
 	$out = array();
+	$t   = preg_replace( '/\b(huong dan|thong tin|tu van|tim hieu|cho biet)\b/', ' ', $t );
 	foreach ( explode( ' ', preg_replace( '/[^a-z0-9 ]/', ' ', $t ) ) as $x ) {
 		if ( strlen( $x ) > 1 && ! isset( $st[ $x ] ) ) {
 			$out[ $x ] = 1;
@@ -153,9 +195,14 @@ function hh_chat_faq_match( $t, $page = 0 ) {
 		return null;
 	}
 	$idf  = static fn( $k ) => log( 1 + $idx['n'] / ( 1 + ( $idx['df'][ $k ] ?? 0 ) ) );
+	// Khách nói nhu cầu ("muốn mua căn hộ ở…") chứ không hỏi → không lấy câu hỏi đáp của bài viết.
+	$need_only = ! $cu && preg_match( '/\b(muon|can|dang tim|tim) (mua|thue|ban|can|nha|dat|lo)\b/', $t );
 	$best = null;
 	foreach ( $idx['rows'] as $r ) {
 		$here = (int) $page && $r['id'] === (int) $page;
+		if ( 'post' === $r['kind'] && ( ! $cu || $need_only ) ) {
+			continue;
+		}
 		if ( ! $eu && ! $here ) {
 			continue;
 		}
