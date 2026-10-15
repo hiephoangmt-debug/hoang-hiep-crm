@@ -122,7 +122,7 @@ export class BuildingView {
     sun.shadow.normalBias = 0.05;
     scene.add(sun, new THREE.HemisphereLight(0xcfe6ff, 0x6b7f4f, 1.0));
 
-    const fp = rectM(PODIUM);
+    const fpp = rectM(PODIUM), fp = { x0: fpp.x0 - 3, y0: fpp.y0 - 3, x1: fpp.x1 + 3, y1: fpp.y1 + 3 };
     // Các tòa lân cận (chỉ để làm cảnh, không tương tác)
     // Cụm 4 tòa quanh ngã tư Minh Mạng (Tây) – Nguyễn Phước Lan (Nam) theo mặt bằng tổng thể
     const fp0 = rectM(PODIUM);
@@ -415,12 +415,48 @@ export class BuildingView {
       root.add(m);
       return m;
     };
-    const pod = rectM(PODIUM);
+    // Khối đế rộng hơn thân tháp ~3 m mỗi phía (mái đế = sân vườn tầng 3, theo bản vẽ tầng 3)
+    const pod0 = rectM(PODIUM), POD_OUT = 3;
+    const pod = { x0: pod0.x0 - POD_OUT, y0: pod0.y0 - POD_OUT, x1: pod0.x1 + POD_OUT, y1: pod0.y1 + POD_OUT };
     for (let i = 0; i < b.podiumFloors; i++) {
-      add(roundedPrism(pod, i * P, P - 0.45, { tl: 5, tr: 5, bl: 5, br: 5 }, 0.5), glassMat);
-      add(roundedPrism(pod, i * P + P - 0.45, 0.45, { tl: 5, tr: 5, bl: 5, br: 5 }), slabMat);
+      add(roundedPrism(pod, i * P, P - 0.45, { tl: 8, tr: 8, bl: 8, br: 8 }, 0.5), glassMat);
+      add(roundedPrism(pod, i * P + P - 0.45, 0.45, { tl: 8, tr: 8, bl: 8, br: 8 }), slabMat);
     }
     const base = b.podiumFloors * P;
+    // Mái khối đế = sân vườn riêng của các căn tầng 3: cỏ, bồn cây viền, cây bụi, hàng rào cây ngăn sân
+    {
+      const grassMat = new THREE.MeshStandardMaterial({ color: 0x6f9e48, roughness: 1 });
+      const planterMat = new THREE.MeshStandardMaterial({ color: 0xd9d3c7, roughness: 0.8 });
+      const leafMat = new THREE.MeshStandardMaterial({ color: 0x3f7a35, roughness: 0.9 });
+      const R = { tl: 8, tr: 8, bl: 8, br: 8 };
+      add(roundedPrism(pod, base, 0.06, R, 0.6), grassMat, false);
+      const e = 0.9, h = 0.55, t = 0.5;
+      const bx = (x0, x1, z0, z1, y0, hh, mat) => { const m = add(new THREE.BoxGeometry(x1 - x0, hh, z1 - z0), mat); m.position.set((x0 + x1) / 2, y0 + hh / 2, (z0 + z1) / 2); return m; };
+      // bồn cây chạy viền mép mái + kính lan can
+      bx(pod.x0 + e, pod.x1 - e, pod.y0 + e - t, pod.y0 + e, base, h, planterMat);
+      bx(pod.x0 + e, pod.x1 - e, pod.y1 - e, pod.y1 - e + t, base, h, planterMat);
+      bx(pod.x0 + e - t, pod.x0 + e, pod.y0 + e, pod.y1 - e, base, h, planterMat);
+      bx(pod.x1 - e, pod.x1 - e + t, pod.y0 + e, pod.y1 - e, base, h, planterMat);
+      const hedge = (x0, x1, z0, z1) => bx(x0, x1, z0, z1, base + h, 0.45, leafMat);
+      hedge(pod.x0 + e, pod.x1 - e, pod.y0 + e - t, pod.y0 + e); hedge(pod.x0 + e, pod.x1 - e, pod.y1 - e, pod.y1 - e + t);
+      hedge(pod.x0 + e - t, pod.x0 + e, pod.y0 + e, pod.y1 - e); hedge(pod.x1 - e, pod.x1 - e + t, pod.y0 + e, pod.y1 - e);
+      // cây bụi tròn rải đều trên sân (tránh chân tòa)
+      const ball = new THREE.SphereGeometry(0.7, 10, 8);
+      const inTower = (x, z) => SLOT_LIST.some((sl) => x > sl.rect.x0 - 0.3 && x < sl.rect.x1 + 0.3 && z > sl.rect.y0 - 0.3 && z < sl.rect.y1 + 0.3) || CORES.some((c) => { const r = rectM(c); return x > r.x0 && x < r.x1 && z > r.y0 && z < r.y1; });
+      let k = 0;
+      for (let x = pod.x0 + 2.2; x < pod.x1 - 2; x += 3.4)
+        for (let z = pod.y0 + 2.2; z < pod.y1 - 2; z += 3.4) {
+          if (inTower(x, z)) continue;
+          const nearEdge = x < pod.x0 + 4 || x > pod.x1 - 4 || z < pod.y0 + 4 || z > pod.y1 - 4;
+          if (!nearEdge && (k++ % 3)) continue;
+          const m = new THREE.Mesh(ball, leafMat);
+          const sc = 0.7 + ((x * 13 + z * 7) % 5) * 0.12;
+          m.scale.set(sc, sc * 0.8, sc);
+          m.position.set(x, base + 0.5 * sc, z);
+          m.castShadow = true;
+          root.add(m);
+        }
+    }
     const units = [];
     const visibleTop = interactive ? Math.min(this.maxFloor, floors.length) : floors.length;
     const only = interactive ? this.onlyFloor : null;
@@ -428,7 +464,9 @@ export class BuildingView {
       if (fi >= visibleTop || (only !== null && fi > only)) return;
       const y = base + fi * H;
       const ghost = only !== null && fi < only;
-      for (const c of CORES) add(roundedPrism(rectM(c), y, H - 0.3, {}, 0.05), coreMat, false);
+      const detailFloor = interactive && fi === only && this.detail;
+      if (detailFloor) this.addCoreDetail(root, y);
+      else for (const c of CORES) add(roundedPrism(rectM(c), y, H - 0.3, {}, 0.05), coreMat, false);
       for (const sl of SLOT_LIST) {
         const st = b.units[`${fl}-${sl.slot}`]?.status || 'available';
         const passes = !interactive || (this.filter.status.has(st) && (!this.filter.type || this.filter.type === sl.type));
@@ -517,6 +555,66 @@ export class BuildingView {
   }
 
   /** Đặt căn chi tiết (tường, cửa, nội thất) vào ô căn; trả về khối chọn trong suốt để rê/nhấp */
+  /** Lõi thang ở mặt bằng tầng chi tiết – vẽ theo bản vẽ tầng 8–19 (px ảnh 2000×1414, cánh phải đối xứng):
+   *  lõi trên: thang bộ thoát hiểm + 2 thang máy + phòng kỹ thuật; lõi dưới: 2 thang máy + 2 phòng kỹ thuật */
+  addCoreDetail(root, y) {
+    const M = (c, o = {}) => new THREE.MeshStandardMaterial({ color: c, roughness: 0.7, ...o });
+    const mats = { lobby: M(0xe8e4dc), floor: M(0xd8d4cc), wall: M(0x6b6e74), shaft: M(0x2b2e33), door: M(0xc4c9d0, { roughness: 0.25, metalness: 0.8 }), fire: M(0x8a4b2f), step: M(0xcfcac0), rail: M(0x55595f) };
+    const WH = 2.6, yb = y + 0.1;
+    const MXp = (x) => 2075 - x;
+    const box = (px, y0, h, mat, mirror) => {
+      const r = rectM(mirror ? [MXp(px[2]), px[1], MXp(px[0]), px[3]] : px);
+      const m = new THREE.Mesh(new THREE.BoxGeometry(r.x1 - r.x0, h, r.y1 - r.y0), mat);
+      m.position.set((r.x0 + r.x1) / 2, y0 + h / 2, (r.y0 + r.y1) / 2);
+      m.receiveShadow = true; m.castShadow = h > 1;
+      root.add(m);
+    };
+    const tag = (text, px, pz, mirror) => {
+      const el = document.createElement('div');
+      el.className = 'unitlabel corelabel';
+      el.innerHTML = `<span>${text}</span>`;
+      const lab = new CSS2DObject(el);
+      const r = rectM([mirror ? MXp(px) : px, pz, mirror ? MXp(px) : px, pz]);
+      lab.position.set(r.x0, y + WH, r.y0);
+      root.add(lab);
+    };
+    // Hành lang: chỉ là sàn
+    for (const c of CORRIDORS) { const r = rectM(c); const m = new THREE.Mesh(new THREE.BoxGeometry(r.x1 - r.x0, 0.1, r.y1 - r.y0), mats.lobby); m.position.set((r.x0 + r.x1) / 2, y + 0.05, (r.y0 + r.y1) / 2); m.receiveShadow = true; root.add(m); }
+    const WALLS = [
+      // lõi trên
+      [657, 740, 808, 744], [804, 740, 808, 850], [657, 740, 661, 746], [657, 768, 661, 804], [657, 800, 808, 804],
+      [657, 804, 661, 850], [703, 804, 707, 850], [755, 804, 758, 846],
+      [661, 846, 685, 850], [700, 846, 717, 850], [745, 846, 766, 850], [794, 846, 804, 850],
+      // lõi dưới
+      [657, 905, 724, 909], [752, 905, 769, 909], [797, 905, 808, 909], [804, 905, 808, 970], [657, 966, 808, 970],
+      [657, 909, 661, 912], [657, 930, 661, 944], [657, 962, 661, 966], [711, 909, 715, 966], [757, 909, 760, 966], [661, 935, 711, 939],
+    ];
+    const LIFTS = [[707, 804, 755, 846], [758, 804, 804, 846], [715, 909, 757, 966], [760, 909, 804, 966]];
+    const LIFT_DOORS = [[717, 847, 745, 849], [766, 847, 794, 849], [724, 906, 752, 908], [769, 906, 797, 908]];
+    const SHAFTS = [[662, 772, 692, 799], [662, 828, 682, 845]];
+    for (const mirror of [false, true]) {
+      // sàn lõi + sảnh thang máy (hành lang rộng ra trước thang)
+      box([655, 740, 810, 970], y, 0.1, mats.floor, mirror);
+      box([655, 850, 810, 905], y + 0.005, 0.1, mats.lobby, mirror);
+      for (const w of WALLS) box(w, yb, WH, mats.wall, mirror);
+      for (const l of LIFTS) box(l, yb, 0.02, mats.shaft, mirror);
+      for (const d of LIFT_DOORS) box(d, yb, 2.1, mats.door, mirror);
+      for (const sft of SHAFTS) box(sft, yb, 0.03, mats.shaft, mirror);
+      box([657, 746, 659, 768], yb, 2.1, mats.fire, mirror); // cửa chống cháy thang bộ
+      // Thang bộ: 2 vế chạy dọc trục x, chiếu nghỉ phía trong
+      const n = 9, x0 = 735, x1 = 782, dx = (x1 - x0) / n;
+      for (let k = 0; k < n; k++) {
+        box([x0 + k * dx, 745, x0 + (k + 1) * dx, 769], yb, 0.17 * (n - k) * 0.5, mats.step, mirror);
+        box([x0 + k * dx, 774, x0 + (k + 1) * dx, 798], yb, 0.17 * (k + 1) * 0.5 + 0.77, mats.step, mirror);
+      }
+      box([782, 745, 803, 798], yb, 0.17 * n * 0.5 + 0.77, mats.step, mirror);
+      box([735, 770, 782, 773], yb, 1.9, mats.rail, mirror);
+      tag('Thang bộ', 760, 771, mirror);
+      tag('Thang máy', 756, 825, mirror);
+      tag('Thang máy', 760, 937, mirror);
+    }
+  }
+
   addDetailedUnit(root, sl, layout, y, material, fl, fi) {
     this._unitCache ||= new Map();
     const key = layout.unitId || JSON.stringify(layout.plan).length + ':' + sl.slot;

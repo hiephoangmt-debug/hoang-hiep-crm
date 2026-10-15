@@ -8,9 +8,9 @@ const page = await browser.newPage();
 page.on('console', (m) => console.log('[trình duyệt]', m.text()));
 await page.goto('http://localhost:5173/package.json', { waitUntil: 'domcontentloaded' });
 const units = await page.evaluate(async () => {
-  const { buildUnit, UNIT_SPECS } = await import('/scripts/build-units.js');
+  const { buildUnit, gardenUnit, UNIT_SPECS } = await import('/scripts/build-units.js');
   const out = [];
-  for (const s of UNIT_SPECS) out.push(await buildUnit(s, `/units/${s.id}.webp`));
+  for (const s of UNIT_SPECS) out.push(s.garden ? gardenUnit(out.find((u) => u.id === s.garden.base), s) : await buildUnit(s, `/units/${s.id}.webp`));
   return out;
 });
 fs.mkdirSync('src/units', { recursive: true });

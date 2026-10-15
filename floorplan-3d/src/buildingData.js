@@ -72,16 +72,17 @@ export const SLOT_LIST = SLOTS.map(([slot, x0, y0, x1, y1, tim, tt]) => ({ slot,
 
 /** Mặt bằng chi tiết mặc định cho từng vị trí (theo các căn mẫu đã dựng; vị trí chưa có ảnh mặt bằng thì để trống) */
 export const DEFAULT_UNIT = {
-  24: '3pn', '05': '3pn', 26: '1pn-plus', '03': '1pn-plus', 19: '2pn-a', 10: '2pn-a', 27: '1pn', '02': '1pn', 20: '1pn', '09': '1pn',
-  25: 'studio', '03A': 'studio', 18: 'studio', 11: 'studio',
+  // Theo bản vẽ từng loại căn (ô đỏ trên sơ đồ định vị của mỗi bản vẽ)
+  24: '3pn', '05': '3pn', 26: '2pn-b', '03': '2pn-b', 19: '2pn-a', 10: '2pn-a', 27: '1pn', '02': '1pn',
+  25: 'studio', '03A': 'studio', 18: 'studio', 11: 'studio', 20: 'studio-b', '09': 'studio-b',
+  23: '1pn-plus-b', 22: '1pn-plus-b', 21: '1pn-plus-b', '06': '1pn-plus-b', '07': '1pn-plus-b', '08': '1pn-plus-b',
+  17: '1pn-plus', 12: '1pn-plus',
   29: '2pn-1wc', 30: '2pn-1wc', 31: '2pn-1wc', 32: '2pn-1wc', 16: '2pn-1wc', 15: '2pn-1wc', '12B': '2pn-1wc', '12A': '2pn-1wc',
-  // Chưa có mặt bằng chi tiết riêng – ghép tạm theo loại căn trong chú thích mặt bằng tổng thể
-  // (xanh lá = 1PN+, nâu = 1PN), cần thay khi có ảnh mặt bằng đúng của từng căn
-  23: '2pn-1wc', 22: '2pn-1wc', 21: '2pn-1wc', '06': '2pn-1wc', '07': '2pn-1wc', '08': '2pn-1wc', 17: '2pn-1wc', 12: '2pn-1wc',
+  // Chưa có bản vẽ riêng (46,5 m²) – ghép tạm mặt bằng 1PN
   28: '1pn', '01': '1pn',
 };
 /** Vị trí đang ghép tạm (mặt bằng chưa đúng căn thật) */
-export const PROVISIONAL = new Set(['23', '22', '21', '06', '07', '08', '17', '12', '28', '01']);
+export const PROVISIONAL = new Set(['28', '01']);
 
 export const STATUS = {
   available: { name: 'Còn trống', color: '#22a06b' },

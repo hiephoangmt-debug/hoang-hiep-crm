@@ -105,6 +105,15 @@ function buildWindow(op, w, H) {
   const add = (m) => (g.add(shadowy(m)), m);
   const fb = (bw, bh, bd, x, y, z = 0, material = frameMat) => add(new THREE.Mesh(new THREE.BoxGeometry(bw, bh, bd), material)).position.set(x, y, z);
   const y0 = op.sill, y1 = op.sill + h;
+  if (op.glass) {
+    // Kính cong: kính liền không khung
+    const gp = new THREE.Mesh(new THREE.PlaneGeometry(width + 0.06, h), glassMat);
+    gp.position.set(0, (y0 + y1) / 2, 0);
+    gp.material.side = THREE.DoubleSide;
+    gp.renderOrder = 2;
+    g.add(gp);
+    return g;
+  }
   fb(width, fw, fd, 0, y0 + fw / 2);
   fb(width, fw, fd, 0, y1 - fw / 2);
   fb(fw, h, fd, -width / 2 + fw / 2, (y0 + y1) / 2);
@@ -335,6 +344,8 @@ export function buildScene(plan, opts = {}) {
     const M = wallMatrix(w);
     for (const [u0, u1, y0, y1] of wallPieces(w, ops, wh)) {
       if (u1 - u0 < 1e-3 || y1 - y0 < 1e-3) continue;
+      // Mảng kính cong: bỏ các trụ tường mảnh giữa các tấm kính (nhìn như khung)
+      if (ops.some((o) => o.glass) && u1 - u0 < 0.16) continue;
       const g = new THREE.BoxGeometry(u1 - u0, y1 - y0, w.thickness);
       g.translate((u0 + u1) / 2, (y0 + y1) / 2, 0);
       meterUV(g);
