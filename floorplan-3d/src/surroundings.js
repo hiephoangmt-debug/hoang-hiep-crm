@@ -73,13 +73,13 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
   ground.receiveShadow = true;
   g.add(ground);
 
-  // --- Đường: Minh Mạng (dọc trục z) và Nguyễn Phước Lan (dọc trục x) – cả hai là đại lộ 6 làn
-  // có dải phân cách 4 m, vỉa hè 5 m; cắt nhau tại ngã tư (avenueX, roadZ) ---
+  // --- Đường: Minh Mạng (dọc trục z) và Nguyễn Phước Lan (dọc trục x) – cả hai 6 làn, không có
+  // dải phân cách, giữa đường vạch vàng đôi, vỉa hè 5 m trồng cọ; cắt nhau tại ngã tư (avenueX, roadZ) ---
   const roadZ = footprint.z1 + 26;
   const HALF = 18; // nửa bề rộng đại lộ tính cả vỉa hè
   const L = 1600;
   const walkMat = new THREE.MeshStandardMaterial({ map: (() => { const t = getTexture('paving').clone(); t.needsUpdate = true; t.repeat.set(2, 500); return t; })(), roughness: 0.9 });
-  const medianMat = new THREE.MeshStandardMaterial({ color: 0x6f9a48, roughness: 1 });
+  const yellowMat = new THREE.MeshBasicMaterial({ color: 0xf2c230 });
   const lanesTex = (() => { const t = roadTexture(3); t.repeat.set(1, L / 12); return t; })();
   const laneMat = new THREE.MeshStandardMaterial({ map: lanesTex, roughness: 0.92 });
   const asphalt = new THREE.MeshStandardMaterial({ color: 0x3b3e43, roughness: 0.95 });
@@ -102,18 +102,20 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
   ];
   for (const bv of boulevards) {
     for (const sd of [-1, 1]) {
-      strip(bv.axis, bv, sd * 7.5, 11, 0, bv.axis === 'z' ? 0.03 : 0.032, laneMat, HALF);
-      strip(bv.axis, bv, sd * 15.5, 5, 0.18, 0.09, walkMat, HALF);
+      strip(bv.axis, bv, sd * 5.5, 11, 0, bv.axis === 'z' ? 0.03 : 0.032, laneMat, HALF);
+      strip(bv.axis, bv, sd * 13.5, 5, 0.18, 0.09, walkMat, HALF);
+      strip(bv.axis, bv, sd * 0.18, 0.15, 0, 0.04, yellowMat, HALF); // vạch vàng đôi
     }
-    strip(bv.axis, bv, 0, 4, 0.3, 0.15, medianMat, HALF);
     if (bv.axis === 'z') occupy(bv.at, 0, HALF * 2 + 2, L); else occupy(0, bv.at, L, HALF * 2 + 2);
   }
   // Mặt ngã tư
-  const box = new THREE.Mesh(new THREE.PlaneGeometry(HALF * 2 - 10, HALF * 2 - 10), asphalt);
-  box.rotation.x = -Math.PI / 2;
-  box.position.set(avenueX, 0.028, roadZ);
-  box.receiveShadow = true;
-  g.add(box);
+  for (const [w, d] of [[22, HALF * 2], [HALF * 2, 22]]) {
+    const box = new THREE.Mesh(new THREE.PlaneGeometry(w, d), asphalt);
+    box.rotation.x = -Math.PI / 2;
+    box.position.set(avenueX, 0.028, roadZ);
+    box.receiveShadow = true;
+    g.add(box);
+  }
   // Vạch qua đường ở 4 nhánh
   const zebra = new THREE.MeshBasicMaterial({ color: 0xf2f2f2 });
   for (const [dx, dz] of [[0, -1], [0, 1], [-1, 0], [1, 0]]) {
@@ -209,8 +211,8 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
   const step = density < 1 ? 22 : 11;
   for (let t = -780; t <= 780; t += step) {
     const nearZ = Math.abs(t - roadZ) < HALF + 3, nearX = Math.abs(t - avenueX) < HALF + 3;
-    if (!nearZ) { palms.push([avenueX, t]); if (Math.abs(t) < 300) { palms.push([avenueX - 15.5, t + 5]); palms.push([avenueX + 15.5, t + 5]); } }
-    if (!nearX) { palms.push([t, roadZ]); if (Math.abs(t) < 300) { palms.push([t + 5, roadZ - 15.5]); palms.push([t + 5, roadZ + 15.5]); } }
+    if (!nearZ && Math.abs(t) < 400) { palms.push([avenueX - 14.5, t + 5]); palms.push([avenueX + 14.5, t + 5]); }
+    if (!nearX && Math.abs(t) < 400) { palms.push([t + 5, roadZ - 14.5]); palms.push([t + 5, roadZ + 14.5]); }
   }
   const pg = palmGeometries();
   const trunkMesh = new THREE.InstancedMesh(pg.trunk, new THREE.MeshStandardMaterial({ color: 0x8a6a4a, roughness: 1 }), palms.length);
@@ -255,13 +257,13 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
   for (let z = -780; z < 780; z += 9 + r() * 30) {
     if (Math.abs(z - roadZ) < HALF) continue;
     const lane = Math.floor(r() * 6);
-    const x = lane < 3 ? avenueX - 11.2 + lane * 3.6 : avenueX + 3.8 + (lane - 3) * 3.6;
+    const x = lane < 3 ? avenueX - 9.4 + lane * 3.6 : avenueX + 2.2 + (lane - 3) * 3.6;
     cars.push([x, z, 0]);
   }
   for (let x = -780; x < 780; x += 9 + r() * 30) {
     if (Math.abs(x - avenueX) < HALF) continue;
     const lane = Math.floor(r() * 6);
-    const z = lane < 3 ? roadZ - 11.2 + lane * 3.6 : roadZ + 3.8 + (lane - 3) * 3.6;
+    const z = lane < 3 ? roadZ - 9.4 + lane * 3.6 : roadZ + 2.2 + (lane - 3) * 3.6;
     cars.push([x, z, Math.PI / 2]);
   }
   const carMesh = new THREE.InstancedMesh(new THREE.BoxGeometry(1.8, 1.4, 4.3).translate(0, 0.75, 0), new THREE.MeshStandardMaterial({ roughness: 0.3, metalness: 0.5 }), cars.length);

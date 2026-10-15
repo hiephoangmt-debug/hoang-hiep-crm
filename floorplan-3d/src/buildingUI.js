@@ -1,7 +1,7 @@
 // Giao diện chế độ Tòa nhà: bảng thống kê, bộ lọc, chi tiết căn. Dùng chung cho trang chính và trang toa-nha.html.
 import { BuildingView, slotLayout } from './building3d.js';
 import { READONLY } from './ui.js';
-import { sampleBuilding, SLOT_LIST, STATUS, TYPE_COLORS, residentialFloors, unitCode, unitPrice, areaOf } from './buildingData.js';
+import { sampleBuilding, SLOT_LIST, STATUS, TYPE_COLORS, residentialFloors, unitCode, unitPrice, areaOf, PROVISIONAL } from './buildingData.js';
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => [...document.querySelectorAll(s)];
@@ -151,13 +151,13 @@ function renderBDetail() {
       ${READONLY ? '' : `<div><small>Giá ${u.price ? '' : '(ước tính)'}</small><b>${vndTy(price)} tỷ</b></div>
       <div><small>Đơn giá TT</small><b>${vndTy((price * 1000) / ar.tt)} tr/m²</b></div>`}
     </div>
-    ${READONLY ? `<button id="bdView" class="primary" ${layout ? '' : 'disabled'}>🏠 Xem căn hộ 2D · 3D · 4D</button>${layout ? '' : '<p class="hint">Mặt bằng chi tiết của căn này đang được cập nhật.</p>'}` : `<label class="field"><span>Trạng thái</span><select id="bdStatus">${Object.entries(STATUS).map(([k, v]) => `<option value="${k}" ${(u.status || 'available') === k ? 'selected' : ''}>${v.name}</option>`).join('')}</select></label>
+    ${READONLY ? `<button id="bdView" class="primary" ${layout ? '' : 'disabled'}>🏠 Xem căn hộ 2D · 3D · 4D</button>${layout && !PROVISIONAL.has(slot.slot) ? '' : '<p class="hint">Mặt bằng chi tiết của căn này đang được cập nhật; hình 3D hiện tại chỉ mang tính minh hoạ.</p>'}` : `<label class="field"><span>Trạng thái</span><select id="bdStatus">${Object.entries(STATUS).map(([k, v]) => `<option value="${k}" ${(u.status || 'available') === k ? 'selected' : ''}>${v.name}</option>`).join('')}</select></label>
     <label class="field"><span>Giá bán (tỷ)</span><input type="number" id="bdPrice" step="0.01" min="0" value="${u.price ?? ''}" placeholder="${price.toFixed(2)}" /></label>
     <label class="field"><span>Khách hàng</span><input type="text" id="bdCustomer" value="${(u.customer || '').replace(/"/g, '&quot;')}" placeholder="Tên, SĐT" /></label>
     <label class="field"><span>Ghi chú</span><input type="text" id="bdNote" value="${(u.note || '').replace(/"/g, '&quot;')}" /></label>
     <button id="bdView" class="primary">🏠 Xem căn hộ 3D</button>
     <button id="bdAssign" title="Lưu mặt bằng đang mở trong trình vẽ làm mặt bằng của vị trí ${slot.slot} (áp dụng cho mọi tầng)">📌 Gán mặt bằng đang mở cho vị trí ${slot.slot}</button>
-    <p class="hint">${building.layouts[slot.slot] ? `Vị trí ${slot.slot} dùng mặt bằng đã gán (mọi tầng).` : layout ? `Vị trí ${slot.slot} đang dùng căn mẫu “${layout.unitId}” (ghép tạm theo diện tích, cần xác nhận).` : `Vị trí ${slot.slot} chưa có mặt bằng chi tiết. Gửi ảnh mặt bằng loại căn này để dựng, hoặc dựng ở chế độ 2D rồi bấm “Gán”.`}</p>`}`;
+    <p class="hint">${building.layouts[slot.slot] ? `Vị trí ${slot.slot} dùng mặt bằng đã gán (mọi tầng).` : layout ? `Vị trí ${slot.slot} đang dùng căn mẫu “${layout.unitId}”${PROVISIONAL.has(slot.slot) ? ' – GHÉP TẠM, chưa có mặt bằng đúng của căn này' : ' (ghép theo diện tích, cần xác nhận)'}.` : `Vị trí ${slot.slot} chưa có mặt bằng chi tiết. Gửi ảnh mặt bằng loại căn này để dựng, hoặc dựng ở chế độ 2D rồi bấm “Gán”.`}</p>`}`;
   const upd = (fn) => { fn(u); building.sample = false; saveBuilding(); bview.rebuild(); renderBPanel(); };
   $('#bdClose').onclick = () => { bsel = null; bview.setSelected(null); renderBDetail(); };
   if ($('#bdStatus')) $('#bdStatus').onchange = (e) => { upd((x) => (x.status = e.target.value)); renderBDetail(); };
