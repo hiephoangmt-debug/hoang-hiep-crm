@@ -58,6 +58,41 @@ const CX = (440 + 1635) / 2, CY = (340 + 1135) / 2;
 const toM = (x, y) => ({ x: (x - CX) * PX_TO_M, y: (y - CY) * PX_TO_M });
 export const rectM = ([x0, y0, x1, y1]) => { const a = toM(x0, y0), b = toM(x1, y1); return { x0: a.x, y0: a.y, x1: b.x, y1: b.y }; };
 
+
+// ---------------- Khối đế: shop tầng 1, thương mại + hồ bơi tầng 2 ----------------
+// Tầng 1: đo trên bản vẽ "Mặt bằng tầng 1" (ảnh thu 1600 px, khung ngoài 365,305 → 1245,925), quy về khung khối đế
+// (thân tháp mở rộng 3 m mỗi phía). [mã, x0, y0, x1, y1, tim, thông thủy]
+const F1_SRC = [365, 305, 1245, 925];
+const POD_PX = [440 - 58, 340 - 58, 1635 + 58, 1135 + 58];
+const F1 = [
+  ['21', 365, 305, 515, 395, 65.3, 60.3], ['20', 365, 395, 515, 480, 70.8, 64.8], ['22', 515, 305, 585, 480, 64.2, 58.4], ['23', 585, 305, 665, 610, 139.6, 129.7],
+  ['19', 365, 480, 585, 560, 99.5, 92.4], ['18', 365, 560, 585, 610, 56.3, 51.6], ['17', 365, 640, 535, 720, 76.2, 70.2], ['16', 365, 720, 535, 815, 86.3, 80.7],
+  ['15', 365, 815, 515, 925, 88.0, 81.5], ['12B', 515, 790, 585, 925, 52.4, 48.2], ['12A', 585, 770, 665, 925, 70.4, 64.4], ['12', 665, 720, 750, 900, 98.9, 90.4],
+  ['11', 750, 720, 860, 860, 108.3, 98.6], ['24', 665, 390, 745, 550, 71.2, 67.0], ['25', 745, 390, 825, 550, 73.0, 69.3], ['26', 665, 550, 825, 690, 91.8, 84.9],
+  ['27', 905, 560, 985, 650, 55.5, 50.7], ['01', 985, 305, 1065, 530, 103.1, 94.8], ['02', 1065, 305, 1135, 480, 64.2, 57.5], ['03', 1135, 305, 1245, 480, 103.5, 96.7],
+  ['03A', 1065, 480, 1245, 560, 70.8, 65.0], ['05', 1110, 560, 1245, 610, 57.2, 51.2], ['06', 1110, 640, 1245, 770, 89.5, 83.1], ['07', 1135, 770, 1245, 925, 88.2, 80.8],
+  ['08', 1065, 790, 1135, 925, 49.7, 45.8], ['09', 985, 770, 1065, 925, 73.4, 66.3], ['10', 890, 720, 985, 925, 102.7, 94.4],
+];
+const mapBox = (src, dst, [x0, y0, x1, y1]) => {
+  const fx = (x) => dst[0] + ((x - src[0]) / (src[2] - src[0])) * (dst[2] - dst[0]);
+  const fy = (y) => dst[1] + ((y - src[1]) / (src[3] - src[1])) * (dst[3] - dst[1]);
+  return [fx(x0), fy(y0), fx(x1), fy(y1)];
+};
+const m2 = ([x0, y0, x1, y1]) => (x1 - x0) * (y1 - y0) * PX_TO_M * PX_TO_M;
+// Tầng 2 (theo bản vẽ "Mặt bằng tầng 2", quy về toạ độ thân tháp): cánh trái + giữa là thương mại, cánh phải là căn hộ,
+// sân giữa hai cánh là sàn hồ bơi ngoài trời
+const F2 = [
+  ['TM-A', [440, 340, 628, 1135], 'shop'], ['TM-B', [810, 635, 1265, 848], 'shop'], ['TM-C', [628, 905, 1265, 1135], 'shop'],
+  ['CH', [1265, 340, 1635, 1135], 'apt'],
+];
+export const POOL_DECK = [810, 340, 1265, 635];
+export const POOL = [850, 420, 1225, 560];
+export const SHOP_FLOORS = ['01', '02'];
+export const SHOPS = [
+  ...F1.map(([k, ...r]) => { const px = mapBox(F1_SRC, POD_PX, r.slice(0, 4)); return { slot: 'S' + k, label: k, floor: '01', px, rect: rectM(px), tim: r[4], tt: r[5], type: 'Shop', shop: true }; }),
+  ...F2.map(([k, px, kind]) => ({ slot: k, label: k === 'CH' ? 'Căn hộ' : k, floor: '02', px, rect: rectM(px), tim: +m2(px).toFixed(1), tt: +(m2(px) * 0.92).toFixed(1), type: kind === 'shop' ? 'Shop' : '2PN', shop: kind === 'shop', apt: kind === 'apt' })),
+];
+
 export function unitType(tt) {
   if (tt < 35) return 'Studio';
   if (tt < 45) return '1PN';
@@ -66,7 +101,7 @@ export function unitType(tt) {
   if (tt < 75) return '2PN+';
   return '3PN';
 }
-export const TYPE_COLORS = { Studio: '#7fb3c8', '1PN': '#6aa0b8', '1PN+': '#b07a5c', '2PN': '#3d8a3d', '2PN+': '#f2b134', '3PN': '#ef6b4a' };
+export const TYPE_COLORS = { Shop: '#8e6cc9', Studio: '#7fb3c8', '1PN': '#6aa0b8', '1PN+': '#b07a5c', '2PN': '#3d8a3d', '2PN+': '#f2b134', '3PN': '#ef6b4a' };
 
 export const SLOT_LIST = SLOTS.map(([slot, x0, y0, x1, y1, tim, tt]) => ({ slot, rect: rectM([x0, y0, x1, y1]), fit: rectM(FIT_RECTS[slot] || [x0, y0, x1, y1]), tim, tt, type: unitType(tt) }));
 
@@ -121,13 +156,15 @@ export function sampleBuilding() {
       b.units[`${fl}-${s.slot}`] = { status };
     }
   });
+  for (const s of SHOPS) if (s.shop) { const x = r(); b.units[`${s.floor}-${s.slot}`] = { status: x < 0.35 ? 'sold' : x < 0.45 ? 'deposit' : 'available' }; }
   return b;
 }
 
-export function unitCode(b, floor, slot) { return `${b.code}-${floor}-${slot}`; }
+export function unitCode(b, floor, slot) { return `${b.code}-${floor}-${String(slot).replace(/^S/, '')}`; }
 
 /** Giá ước tính (tỷ đồng): đơn giá × diện tích thông thủy, tầng cao +0,6%/tầng, căn góc +4% */
 export function unitPrice(b, floorIndex, s) {
+  if (s.shop) { const u = b.units[`${s.floor}-${s.slot}`]; return u?.price || Math.round(s.tt * (s.floor === '01' ? 110 : 70)) / 1000; }
   const u = b.units[`${residentialFloors(b.floors)[floorIndex]}-${s.slot}`];
   if (u?.price) return u.price;
   const corner = ['24', '05', '19', '10'].includes(s.slot) ? 1.04 : 1;

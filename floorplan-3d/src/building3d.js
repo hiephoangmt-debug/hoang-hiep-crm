@@ -4,7 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Sky } from 'three/examples/jsm/objects/Sky.js';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
-import { SLOT_LIST, CORES, CORRIDORS, PODIUM, rectM, STATUS, TYPE_COLORS, residentialFloors, unitCode, unitPrice, areaOf, DEFAULT_UNIT, GARDEN_FLOORS } from './buildingData.js';
+import { SLOT_LIST, CORES, CORRIDORS, PODIUM, rectM, STATUS, TYPE_COLORS, residentialFloors, unitCode, unitPrice, areaOf, DEFAULT_UNIT, GARDEN_FLOORS, SHOPS, POOL, POOL_DECK } from './buildingData.js';
 import { buildScene } from './builder.js';
 import { placeUnit } from './unitPlacement.js';
 import UNITS from './units/units.json';
@@ -383,6 +383,15 @@ export class BuildingView {
   }
 
   /** Xem mặt bằng tầng chi tiết: chỉ tầng fi, camera nhìn xuống chếch như ảnh phối cảnh */
+  /** Xem riêng khối đế: ẩn các tầng ở, hiện mã shop, đưa camera về sát khối đế */
+  showShops(floor) {
+    this.shopsMode = floor || 0; // 0 = cả tòa, 1 = shop tầng 1, 2 = tầng 2 + hồ bơi
+    this.onlyFloor = null;
+    this.maxFloor = floor ? 0 : Infinity;
+    this.rebuild();
+    if (floor) { this.camera.position.set(-6, 62, 46); this.controls.target.set(0, floor === 1 ? 0 : 4, 3); this.controls.update(); }
+  }
+
   showFloorPlan(fi) {
     const b = this.getBuilding();
     this.onlyFloor = fi;
@@ -418,13 +427,10 @@ export class BuildingView {
     // Khối đế rộng hơn thân tháp ~3 m mỗi phía (mái đế = sân vườn tầng 3, theo bản vẽ tầng 3)
     const pod0 = rectM(PODIUM), POD_OUT = 3;
     const pod = { x0: pod0.x0 - POD_OUT, y0: pod0.y0 - POD_OUT, x1: pod0.x1 + POD_OUT, y1: pod0.y1 + POD_OUT };
-    for (let i = 0; i < b.podiumFloors; i++) {
-      add(roundedPrism(pod, i * P, P - 0.45, { tl: 8, tr: 8, bl: 8, br: 8 }, 0.5), glassMat);
-      add(roundedPrism(pod, i * P + P - 0.45, 0.45, { tl: 8, tr: 8, bl: 8, br: 8 }), slabMat);
-    }
-    const base = b.podiumFloors * P;
-    this.addGardenRing(root, pod, base, false);
     const units = [];
+    this.buildPodium(root, b, pod, { interactive, colorBy, add, slabMat, glassMat, units });
+    const base = b.podiumFloors * P;
+    if (!(interactive && this.shopsMode)) this.addGardenRing(root, pod, base, false);
     const visibleTop = interactive ? Math.min(this.maxFloor, floors.length) : floors.length;
     const only = interactive ? this.onlyFloor : null;
     floors.forEach((fl, fi) => {
@@ -524,6 +530,60 @@ export class BuildingView {
   }
 
   /** Đặt căn chi tiết (tường, cửa, nội thất) vào ô căn; trả về khối chọn trong suốt để rê/nhấp */
+  /** Khối đế 2 tầng: shop tầng 1 (từng ô bấm được, kính mặt tiền + băng biển hiệu), tầng 2 thương mại + căn hộ cánh phải,
+   *  sàn hồ bơi ngoài trời ở sân giữa hai cánh */
+  buildPodium(root, b, pod, { interactive, colorBy, add, slabMat, glassMat, units }) {
+    const P = b.podiumHeight, R8 = { tl: 8, tr: 8, bl: 8, br: 8 };
+    const bandMat = new THREE.MeshStandardMaterial({ color: 0x2b2f36, roughness: 0.5 });
+    const shopGlass = new THREE.MeshStandardMaterial({ color: 0xb9d7e3, roughness: 0.08, metalness: 0.55, emissive: 0xffd9a0, emissiveIntensity: 0.12 });
+    const aptMat = new THREE.MeshStandardMaterial({ color: 0xefe9df, roughness: 0.6 });
+    const innerMat = new THREE.MeshStandardMaterial({ color: 0x55606b, roughness: 0.4, metalness: 0.3 });
+    const near = (a, c) => Math.abs(a - c) < 0.6;
+    const radiiOf = (r, box) => ({ tl: near(r.x0, box.x0) && near(r.y0, box.y0) ? 8 : 0, tr: near(r.x1, box.x1) && near(r.y0, box.y0) ? 8 : 0, bl: near(r.x0, box.x0) && near(r.y1, box.y1) ? 8 : 0, br: near(r.x1, box.x1) && near(r.y1, box.y1) ? 8 : 0 });
+    const tower = rectM(PODIUM);
+    // Tầng 1: lõi (sảnh, thang, hành lang) phía trong + slab; khi xem riêng tầng shop thì lõi chỉ còn là sàn
+    const mode = interactive ? this.shopsMode || 0 : 0;
+    const floorMat = new THREE.MeshStandardMaterial({ color: 0xe8e4dc, roughness: 0.7 });
+    if (mode === 1) add(roundedPrism(pod, 0, 0.15, R8, 0.3), floorMat, false);
+    else add(roundedPrism(pod, 0, P - 0.45, R8, 1.2), innerMat);
+    if (mode !== 1) add(roundedPrism(pod, P - 0.45, 0.45, R8), slabMat);
+    // Tầng 2: lõi thân tháp + slab; sân giữa là sàn hồ bơi để trống
+    if (mode === 2) for (const w of WINGS) add(roundedPrism(rectM(w.px), P, 0.15, w.radii, 0.3), floorMat, false);
+    else if (!mode) for (const w of WINGS) add(roundedPrism(rectM(w.px), P, P - 0.45, w.radii, 1.0), innerMat);
+    if (!mode) for (const w of WINGS) add(roundedPrism(rectM(w.px), 2 * P - 0.45, 0.45, w.radii, -0.3), slabMat);
+    const deck = rectM(POOL_DECK), pool = rectM(POOL);
+    const deckMat = new THREE.MeshStandardMaterial({ color: 0xd9cbb3, roughness: 0.8 });
+    const water = new THREE.MeshStandardMaterial({ color: 0x3fb4d8, roughness: 0.05, metalness: 0.2, emissive: 0x0b4f6b, emissiveIntensity: 0.25 });
+    if (mode !== 1) {
+    add(roundedPrism(deck, P, 0.08, {}), deckMat, false);
+    add(roundedPrism(pool, P + 0.02, 0.08, { tl: 1, tr: 1, bl: 1, br: 1 }), water, false);
+    for (let k = 0; k < 6; k++) { // ghế tắm nắng
+      const x = pool.x0 + 1 + k * ((pool.x1 - pool.x0 - 2) / 5);
+      const m = add(new THREE.BoxGeometry(0.7, 0.3, 1.8), new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.6 }));
+      m.position.set(x, P + 0.25, pool.y0 - 1.6);
+    }
+    }
+    const tagEl = (txt, x, y, z) => { if (!interactive) return; const el = document.createElement('div'); el.className = 'unitlabel shoplabel'; el.innerHTML = txt; const lab = new CSS2DObject(el); lab.position.set(x, y, z); root.add(lab); this.shopLabels.push(lab); };
+    if (interactive) { this.shopLabels = []; if (mode === 2) tagEl('<span>Hồ bơi</span>', (pool.x0 + pool.x1) / 2, P + 1, (pool.y0 + pool.y1) / 2); }
+    for (const sh of SHOPS) {
+      const i = sh.floor === '01' ? 0 : 1, y0 = i * P;
+      if (mode === 1 && i === 1) continue;
+      const r = sh.rect, radii = radiiOf(r, i === 0 ? pod : tower);
+      if (sh.apt) { add(roundedPrism(r, y0, mode === 2 ? 1.6 : P - 0.45, radii, 0.08), aptMat); continue; }
+      const key = `${sh.floor}-${sh.slot}`;
+      const st = b.units[key]?.status || 'available';
+      const passes = !interactive || (this.filter.status.has(st) && (!this.filter.type || this.filter.type === 'Shop'));
+      const material = colorBy === 'facade' ? shopGlass : new THREE.MeshStandardMaterial({ color: colorBy === 'type' ? TYPE_COLORS.Shop : STATUS[st].color, roughness: 0.45, transparent: !passes, opacity: passes ? 1 : 0.2 });
+      const cut = mode === i + 1; // đang xem riêng tầng này: khối thấp, không băng biển hiệu, thấy rõ màu từng ô
+      const m = add(roundedPrism(r, y0, cut ? 1.6 : P - 1.1, radii, cut ? 0.25 : 0.1), material);
+      if (!cut) add(roundedPrism(r, y0 + P - 1.1, 0.65, radii, 0.06), bandMat);
+      if (!interactive) continue;
+      m.userData = { floor: sh.floor, floorIndex: -2 + i, slot: sh, key };
+      units.push(m);
+      if (mode === i + 1) tagEl(`<b>${sh.label}</b>`, (r.x0 + r.x1) / 2, y0 + 1.8, (r.y0 + r.y1) / 2);
+    }
+  }
+
   /** Sân vườn bao quanh tầng: sàn cỏ, bồn cây + lan can kính ở mép, cây bụi, hàng rào cây ngăn sân giữa các căn */
   addGardenRing(root, pod, y, slab) {
     const M = (c, o = {}) => new THREE.MeshStandardMaterial({ color: c, roughness: 0.9, ...o });
