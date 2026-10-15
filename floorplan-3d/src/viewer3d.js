@@ -87,6 +87,12 @@ export class Viewer3D {
     ground.receiveShadow = true;
     this.ground = ground;
     scene.add(ground);
+    // Nền trắng kiểu ảnh phối cảnh trình bày: chỉ giữ bóng đổ mềm dưới chân căn hộ
+    this.shadowCatcher = new THREE.Mesh(new THREE.PlaneGeometry(300, 300), new THREE.ShadowMaterial({ opacity: 0.16 }));
+    this.shadowCatcher.rotation.x = -Math.PI / 2;
+    this.shadowCatcher.position.y = -0.158;
+    this.shadowCatcher.receiveShadow = true;
+    scene.add(this.shadowCatcher);
 
     // Hậu kỳ
     this.composer = new EffectComposer(r);
@@ -217,9 +223,20 @@ export class Viewer3D {
       this.scene.backgroundIntensity = night ? 0.18 : 1;
       this.sky.visible = false;
     } else this.scene.backgroundIntensity = 1;
+    // Nền trắng (tắt cảnh quan): không trời, không cỏ, chỉ bóng đổ
+    const studio = this.isStudio();
+    this.ground.visible = !studio && !((this.exterior?.floor || 1) > 1);
+    this.shadowCatcher.visible = studio;
+    if (studio) {
+      this.sky.visible = false;
+      this.scene.background = new THREE.Color(night ? 0x1c2230 : 0xf3f4f6);
+      this.hemi.groundColor.setHex(0xe8e6e1);
+    } else this.hemi.groundColor.setHex(0x6b7f4f);
     this.isNight = night;
     this.applyLights();
   }
+
+  isStudio() { return !this.state.landscape && !this.panoActive; }
 
   applyLights() {
     if (!this.built) return;
@@ -236,7 +253,7 @@ export class Viewer3D {
     this.state[key] = value;
     if (key === 'cut') this.updateClip();
     if (key === 'labels') this.built.labels.forEach((l) => (l.visible = value));
-    if (key === 'ceiling' || key === 'landscape') this.rebuild();
+    if (key === 'ceiling' || key === 'landscape') { this.rebuild(); this.setHour(this.state.hour); }
     if (key === 'lights') this.applyLights();
     if (key === 'ao') this.gtao.enabled = value;
     if (key === 'autoRotate') this.controls.autoRotate = value;
@@ -259,7 +276,7 @@ export class Viewer3D {
     const ext = this.exterior;
     const high = (ext?.floor || 1) > 1;
     // Ở trên cao thì không thấy sân cỏ, cây quanh nhà
-    this.ground.visible = !high;
+    this.ground.visible = !high && !this.isStudio();
     this.built?.root.traverse((o) => { if (o.userData.landscape) o.visible = !high; });
     if (this.photoMesh) { this.scene.remove(this.photoMesh); this.photoMesh.geometry.dispose(); this.photoMesh = null; }
     this.scene.backgroundRotation.set(0, 0, 0);
@@ -485,7 +502,7 @@ export class Viewer3D {
     let pos;
     if (preset === 'top') pos = new THREE.Vector3(b.cx, s * 1.55 + 4, b.cy + 0.01);
     else if (preset === 'front') pos = new THREE.Vector3(b.cx, s * 0.35 + 1.5, b.maxY + s * 1.0 + 3);
-    else pos = new THREE.Vector3(b.cx + s * 0.08, s * 1.85 + 5, b.maxY + s * 0.45 + 1.5);
+    else pos = this.isStudio() ? new THREE.Vector3(b.cx + s * 0.05, s * 1.3 + 2.5, b.maxY + s * 0.32 + 1) : new THREE.Vector3(b.cx + s * 0.08, s * 1.85 + 5, b.maxY + s * 0.45 + 1.5);
     this.flyTo(pos, target, smooth);
   }
 

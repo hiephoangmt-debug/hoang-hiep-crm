@@ -46,3 +46,4 @@
   .up-stage { height: 72vh; }
   .up-info { border-left: 0; border-top: 1px solid var(--line); }
 }
+.up-3d { background: #f3f4f6; }
