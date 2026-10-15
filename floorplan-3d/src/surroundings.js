@@ -73,53 +73,76 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
   ground.receiveShadow = true;
   g.add(ground);
 
-  // --- Đường: đại lộ 6 làn (dọc trục z) + đường ngang trước tòa nhà ---
-  const roads = [
-    { x: avenueX - 7.5, z: 0, w: 11, d: 1600, lanes: 3, rot: 0 },
-    { x: avenueX + 7.5, z: 0, w: 11, d: 1600, lanes: 3, rot: 0 },
-    { x: 0, z: footprint.z1 + 26, w: 9, d: 1600, lanes: 2, rot: Math.PI / 2 },
-  ];
-  for (const rd of roads) {
-    const tex = roadTexture(rd.lanes);
-    tex.repeat.set(1, rd.d / 12);
-    const m = new THREE.Mesh(new THREE.PlaneGeometry(rd.w, rd.d), new THREE.MeshStandardMaterial({ map: tex, roughness: 0.92 }));
-    m.rotation.x = -Math.PI / 2;
-    m.rotation.z = rd.rot;
-    m.position.set(rd.x, 0.03 + (rd.rot ? 0.005 : 0), rd.z);
-    m.receiveShadow = true;
-    g.add(m);
-    if (rd.rot) occupy(0, rd.z, 1600, rd.w + 4); else occupy(rd.x, 0, rd.w + 4, 1600);
-  }
-  // Dải phân cách trồng cọ + vỉa hè
-  const median = new THREE.Mesh(new THREE.BoxGeometry(4, 0.3, 1600), new THREE.MeshStandardMaterial({ color: 0x6f9a48, roughness: 1 }));
-  median.position.set(avenueX, 0.15, 0);
-  median.receiveShadow = true;
-  g.add(median);
-  occupy(avenueX, 0, 4, 1600);
+  // --- Đường: Minh Mạng (dọc trục z) và Nguyễn Phước Lan (dọc trục x) – cả hai 6 làn, không có
+  // dải phân cách, giữa đường vạch vàng đôi, vỉa hè 5 m trồng cọ; cắt nhau tại ngã tư (avenueX, roadZ) ---
+  const roadZ = footprint.z1 + 26;
+  const HALF = 18; // nửa bề rộng đại lộ tính cả vỉa hè
+  const L = 1600;
   const walkMat = new THREE.MeshStandardMaterial({ map: (() => { const t = getTexture('paving').clone(); t.needsUpdate = true; t.repeat.set(2, 500); return t; })(), roughness: 0.9 });
-  for (const sx of [avenueX - 15.5, avenueX + 15.5]) {
-    const w = new THREE.Mesh(new THREE.BoxGeometry(5, 0.18, 1600), walkMat);
-    w.position.set(sx, 0.09, 0);
-    w.receiveShadow = true;
-    g.add(w);
-    occupy(sx, 0, 6, 1600);
+  const yellowMat = new THREE.MeshBasicMaterial({ color: 0xf2c230 });
+  const lanesTex = (() => { const t = roadTexture(3); t.repeat.set(1, L / 12); return t; })();
+  const laneMat = new THREE.MeshStandardMaterial({ map: lanesTex, roughness: 0.92 });
+  const asphalt = new THREE.MeshStandardMaterial({ color: 0x3b3e43, roughness: 0.95 });
+  // Dải dọc theo trục đường, bỏ trống đoạn qua ngã tư (gap)
+  const strip = (axis, center, offset, width, height, y, mat, gap) => {
+    for (const [s0, s1] of [[-L / 2, center.cross - gap], [center.cross + gap, L / 2]]) {
+      const len = s1 - s0;
+      const m = new THREE.Mesh(height ? new THREE.BoxGeometry(width, height, len) : new THREE.PlaneGeometry(width, len), mat);
+      if (!height) m.rotation.x = -Math.PI / 2;
+      const along = (s0 + s1) / 2;
+      if (axis === 'z') m.position.set(center.at + offset, y, along);
+      else { m.position.set(along, y, center.at + offset); if (height) m.rotation.y = Math.PI / 2; else m.rotation.z = Math.PI / 2; }
+      m.receiveShadow = true;
+      g.add(m);
+    }
+  };
+  const boulevards = [
+    { axis: 'z', at: avenueX, cross: roadZ, name: 'Minh Mạng' },
+    { axis: 'x', at: roadZ, cross: avenueX, name: 'Nguyễn Phước Lan' },
+  ];
+  for (const bv of boulevards) {
+    for (const sd of [-1, 1]) {
+      strip(bv.axis, bv, sd * 5.5, 11, 0, bv.axis === 'z' ? 0.03 : 0.032, laneMat, HALF);
+      strip(bv.axis, bv, sd * 13.5, 5, 0.18, 0.09, walkMat, HALF);
+      strip(bv.axis, bv, sd * 0.18, 0.15, 0, 0.04, yellowMat, HALF); // vạch vàng đôi
+    }
+    if (bv.axis === 'z') occupy(bv.at, 0, HALF * 2 + 2, L); else occupy(0, bv.at, L, HALF * 2 + 2);
   }
-  // Vạch qua đường
+  // Mặt ngã tư
+  for (const [w, d] of [[22, HALF * 2], [HALF * 2, 22]]) {
+    const box = new THREE.Mesh(new THREE.PlaneGeometry(w, d), asphalt);
+    box.rotation.x = -Math.PI / 2;
+    box.position.set(avenueX, 0.028, roadZ);
+    box.receiveShadow = true;
+    g.add(box);
+  }
+  // Góc vỉa hè ở 4 góc ngã tư (lấp chỗ hở giữa vỉa hè hai đường)
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+    const c = new THREE.Mesh(new THREE.BoxGeometry(HALF - 11, 0.18, HALF - 11), walkMat);
+    c.position.set(avenueX + sx * (11 + (HALF - 11) / 2), 0.09, roadZ + sz * (11 + (HALF - 11) / 2));
+    c.receiveShadow = true;
+    g.add(c);
+  }
+  // Vạch qua đường ở 4 nhánh: các vạch song song hướng đi bộ, xếp ngang lòng đường
   const zebra = new THREE.MeshBasicMaterial({ color: 0xf2f2f2 });
-  for (let i = 0; i < 9; i++) {
-    const s = new THREE.Mesh(new THREE.PlaneGeometry(0.6, 6), zebra);
-    s.rotation.x = -Math.PI / 2;
-    s.position.set(avenueX - 13 + i * 3.1, 0.05, footprint.z1 + 33);
-    s.rotation.z = Math.PI / 2;
-    g.add(s);
+  for (const [dx, dz] of [[0, -1], [0, 1], [-1, 0], [1, 0]]) {
+    for (let i = 0; i < 17; i++) {
+      const off = -9.6 + i * 1.2;
+      const s = new THREE.Mesh(new THREE.PlaneGeometry(0.6, 4), zebra);
+      s.rotation.x = -Math.PI / 2;
+      if (dz) s.position.set(avenueX + off, 0.05, roadZ + dz * (HALF - 3));
+      else { s.position.set(avenueX + dx * (HALF - 3), 0.05, roadZ + off); s.rotation.z = Math.PI / 2; }
+      g.add(s);
+    }
   }
 
   // --- Quảng trường & vườn trước tòa ---
-  const plaza = new THREE.Mesh(new THREE.BoxGeometry(footprint.x1 - footprint.x0 + 16, 0.15, 18), walkMat);
-  plaza.position.set((footprint.x0 + footprint.x1) / 2, 0.075, footprint.z1 + 11);
+  const apron = roadZ - HALF - footprint.z1; // khoảng sân từ chân tòa ra vỉa hè
+  const plaza = new THREE.Mesh(new THREE.BoxGeometry(footprint.x1 - footprint.x0 + 10, 0.15, apron), walkMat);
+  plaza.position.set((footprint.x0 + footprint.x1) / 2 + 3, 0.075, footprint.z1 + apron / 2);
   plaza.receiveShadow = true;
   g.add(plaza);
-  occupy(plaza.position.x, plaza.position.z, footprint.x1 - footprint.x0 + 16, 18);
+  occupy(plaza.position.x, plaza.position.z, footprint.x1 - footprint.x0 + 10, apron);
   occupy((footprint.x0 + footprint.x1) / 2, (footprint.z0 + footprint.z1) / 2, footprint.x1 - footprint.x0 + 10, footprint.z1 - footprint.z0 + 10);
 
   // --- Sông phía đông + núi xa ---
@@ -192,8 +215,12 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
 
   // --- Cây: cọ dọc đường, cây tán tròn & cây hoa trong vườn ---
   const palms = [];
-  for (let z = -780; z <= 780; z += density < 1 ? 22 : 11) { palms.push([avenueX, z]); if (Math.abs(z) < 300) { palms.push([avenueX - 18.5, z + 5]); palms.push([avenueX + 18.5, z + 5]); } }
-  for (let x = footprint.x0 - 6; x <= footprint.x1 + 6; x += 9) palms.push([x, footprint.z1 + 21]);
+  const step = density < 1 ? 22 : 11;
+  for (let t = -780; t <= 780; t += step) {
+    const nearZ = Math.abs(t - roadZ) < HALF + 3, nearX = Math.abs(t - avenueX) < HALF + 3;
+    if (!nearZ && Math.abs(t) < 400) { palms.push([avenueX - 14.5, t + 5]); palms.push([avenueX + 14.5, t + 5]); }
+    if (!nearX && Math.abs(t) < 400) { palms.push([t + 5, roadZ - 14.5]); palms.push([t + 5, roadZ + 14.5]); }
+  }
   const pg = palmGeometries();
   const trunkMesh = new THREE.InstancedMesh(pg.trunk, new THREE.MeshStandardMaterial({ color: 0x8a6a4a, roughness: 1 }), palms.length);
   const crownMesh = new THREE.InstancedMesh(pg.crown, new THREE.MeshStandardMaterial({ color: 0x3f8a36, roughness: 0.8, flatShading: true, side: THREE.DoubleSide }), palms.length);
@@ -235,14 +262,21 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
   // --- Xe trên đại lộ ---
   const cars = [];
   for (let z = -780; z < 780; z += 9 + r() * 30) {
+    if (Math.abs(z - roadZ) < HALF) continue;
     const lane = Math.floor(r() * 6);
-    const x = lane < 3 ? avenueX - 11.2 + lane * 3.6 : avenueX + 3.8 + (lane - 3) * 3.6;
-    cars.push([x, z]);
+    const x = lane < 3 ? avenueX - 9.4 + lane * 3.6 : avenueX + 2.2 + (lane - 3) * 3.6;
+    cars.push([x, z, 0]);
+  }
+  for (let x = -780; x < 780; x += 9 + r() * 30) {
+    if (Math.abs(x - avenueX) < HALF) continue;
+    const lane = Math.floor(r() * 6);
+    const z = lane < 3 ? roadZ - 9.4 + lane * 3.6 : roadZ + 2.2 + (lane - 3) * 3.6;
+    cars.push([x, z, Math.PI / 2]);
   }
   const carMesh = new THREE.InstancedMesh(new THREE.BoxGeometry(1.8, 1.4, 4.3).translate(0, 0.75, 0), new THREE.MeshStandardMaterial({ roughness: 0.3, metalness: 0.5 }), cars.length);
   const carColors = [0xffffff, 0x1d1f22, 0x9aa3ab, 0xc0392b, 0x2e5d8a, 0xd9d9d9];
-  cars.forEach(([x, z], i) => {
-    dummy.position.set(x, 0, z); dummy.rotation.set(0, 0, 0); dummy.scale.setScalar(1); dummy.updateMatrix();
+  cars.forEach(([x, z, ry], i) => {
+    dummy.position.set(x, 0, z); dummy.rotation.set(0, ry, 0); dummy.scale.setScalar(1); dummy.updateMatrix();
     carMesh.setMatrixAt(i, dummy.matrix);
     carMesh.setColorAt(i, color.setHex(carColors[i % carColors.length]));
   });
@@ -252,7 +286,7 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
   // --- Bồn hoa quảng trường ---
   const flowerMesh = new THREE.InstancedMesh(new THREE.SphereGeometry(0.5, 6, 4), new THREE.MeshStandardMaterial({ roughness: 0.9 }), 260);
   for (let i = 0; i < 260; i++) {
-    dummy.position.set(footprint.x0 - 4 + r() * (footprint.x1 - footprint.x0 + 8), 0.3, footprint.z1 + 15 + r() * 4);
+    dummy.position.set(footprint.x0 - 4 + r() * (footprint.x1 - footprint.x0 + 8), 0.3, footprint.z1 + 1.2 + r() * 2.5);
     dummy.scale.set(1 + r(), 0.6, 1 + r()); dummy.updateMatrix();
     flowerMesh.setMatrixAt(i, dummy.matrix);
     flowerMesh.setColorAt(i, color.setHex(i % 3 === 0 ? 0x4e8f3a : blooms[i % blooms.length]));

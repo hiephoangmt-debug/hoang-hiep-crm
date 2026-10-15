@@ -208,6 +208,7 @@ export class BuildingView {
     if (on === this.active) return;
     this.active = on;
     this.renderer.setAnimationLoop(on ? () => {
+      this.tickFly();
       this.controls.update();
       this.renderer.render(this.scene, this.camera);
       this.labels.render(this.scene, this.camera);
@@ -279,6 +280,106 @@ export class BuildingView {
     const bearing = (THREE.MathUtils.radToDeg(Math.atan2(AVENUE_X, this.roadZ)) + 360) % 360;
     const dist = Math.hypot(AVENUE_X, this.roadZ);
     this.setPano(`${import.meta.env.BASE_URL || './'}pano/khu-dat-360.jpg`, onReady, { ...SITE_PANO, bearing, dist });
+  }
+
+  // ---------------- Xem theo cao độ tầng ----------------
+  floorY(fi) { const b = this.getBuilding(); return b.podiumFloors * b.podiumHeight + fi * b.floorHeight; }
+
+  /** Bay camera mượt tới vị trí / điểm nhìn mới */
+  flyTo(pos, target, dur = 1100) {
+    this.fly = { t0: performance.now(), dur, p0: this.camera.position.clone(), p1: pos.clone(), q0: this.controls.target.clone(), q1: target.clone() };
+  }
+
+  tickFly() {
+    const f = this.fly;
+    if (!f) return;
+    const t = Math.min(1, (performance.now() - f.t0) / f.dur);
+    const e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    this.camera.position.lerpVectors(f.p0, f.p1, e);
+    this.controls.target.lerpVectors(f.q0, f.q1, e);
+    if (t >= 1) this.fly = null;
+  }
+
+  /** Dải sáng quanh tòa đánh dấu tầng đang chọn */
+  markFloor(fi) {
+    if (!this.floorBand) {
+      const fp = rectM(PODIUM);
+      const g = new THREE.EdgesGeometry(new THREE.BoxGeometry(fp.x1 - fp.x0 + 1.2, 3.2, fp.y1 - fp.y0 + 1.2));
+      this.floorBand = new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color: 0x38bdf8 }));
+      this.floorBand.position.set((fp.x0 + fp.x1) / 2, 0, (fp.y0 + fp.y1) / 2);
+      this.scene.add(this.floorBand);
+    }
+    this.floorBand.visible = fi !== null;
+    if (fi !== null) this.floorBand.position.y = this.floorY(fi) + 1.6;
+  }
+
+  setFov(f) { this.camera.fov = f; this.camera.updateProjectionMatrix(); }
+
+  leavePano() {
+    if (this.pano) { this.pano = null; this.applyPano(); }
+    this.controls.enableZoom = true;
+    this.controls.enablePan = true;
+  }
+
+  /** Xoay quanh tòa ở đúng cao độ tầng fi (giữ hướng nhìn hiện tại) */
+  orbitFloor(fi, smooth = true) {
+    this.leavePano();
+    this.viewMode = 'orbit';
+    this.markFloor(fi);
+    this.setFov(55);
+    this.controls.minDistance = 15;
+    this.controls.maxPolarAngle = Math.PI * 0.62;
+    const y = this.floorY(fi) + 1.6;
+    const target = new THREE.Vector3(0, y, 0);
+    const dir = this.camera.position.clone().sub(this.controls.target).setY(0);
+    if (dir.lengthSq() < 1) dir.set(0.4, 0, 1);
+    // Bán kính nhỏ hơn khoảng cách tới các tòa bên kia đường để không lọt vào tòa khác
+    dir.normalize().multiplyScalar(52);
+    const pos = target.clone().add(dir).add(new THREE.Vector3(0, 3, 0));
+    smooth ? this.flyTo(pos, target) : (this.camera.position.copy(pos), this.controls.target.copy(target));
+  }
+
+  /** Đứng ở mặt tiền tầng fi (của căn slot nếu có), nhìn ra ngoài; kéo chuột để nhìn quanh tại chỗ */
+  viewFromFloor(fi, slot = null, smooth = true) {
+    this.leavePano();
+    this.viewMode = 'look';
+    this.markFloor(null);
+    this.setFov(65);
+    const y = this.floorY(fi) + 1.6;
+    let out, at;
+    if (slot) {
+      const r = slot.fit || slot.rect;
+      const c = new THREE.Vector3((r.x0 + r.x1) / 2, 0, (r.y0 + r.y1) / 2);
+      // Hướng ra mặt tiền: cạnh ô căn xa tâm tòa nhất
+      const fp = rectM(PODIUM);
+      const d = [[c.x - fp.x0, -1, 0], [fp.x1 - c.x, 1, 0], [c.z - fp.y0, 0, -1], [fp.y1 - c.z, 0, 1]].sort((a, b) => a[0] - b[0])[0];
+      out = new THREE.Vector3(d[1], 0, d[2]);
+      at = new THREE.Vector3(d[1] ? (d[1] < 0 ? r.x0 : r.x1) : c.x, y, d[2] ? (d[2] < 0 ? r.y0 : r.y1) : c.z).add(out.clone().multiplyScalar(1.2));
+    } else {
+      // Không chọn căn: đứng ở mặt bắc cánh phải, nhìn về sông Đô Tỏa – biển
+      const fp = rectM(PODIUM);
+      const wing = rectM([1265, 340, 1635, 1135]);
+      out = new THREE.Vector3(0, 0, -1);
+      at = new THREE.Vector3((wing.x0 + wing.x1) / 2, y, fp.y0 - 1.2);
+    }
+    const target = at.clone().add(out.clone().multiplyScalar(0.6)).add(new THREE.Vector3(0, -0.12, 0));
+    this.controls.minDistance = 0.1;
+    this.controls.maxPolarAngle = Math.PI * 0.9;
+    this.controls.enableZoom = false;
+    this.controls.enablePan = false;
+    smooth ? this.flyTo(at, target, 1400) : (this.camera.position.copy(at), this.controls.target.copy(target));
+  }
+
+  /** Thoát chế độ ngắm view, về góc nhìn bình thường */
+  resetFloorView() {
+    this.viewMode = null;
+    this.markFloor(null);
+    this.setFov(38);
+    this.controls.minDistance = 15;
+    this.controls.maxPolarAngle = Math.PI * 0.495;
+    this.controls.enableZoom = true;
+    this.controls.enablePan = true;
+    this.setView('perspective');
   }
 
   /** Xem mặt bằng tầng chi tiết: chỉ tầng fi, camera nhìn xuống chếch như ảnh phối cảnh */
