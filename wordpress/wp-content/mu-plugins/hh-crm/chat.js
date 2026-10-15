@@ -41,12 +41,12 @@
 	root.innerHTML =
 		'<button type="button" class="hhc__fab" aria-label="Chat với ' + esc( C.name ) + '">' +
 			'<span class="hhc__fab-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01" stroke-width="2.6"/></svg></span>' +
-			'<span class="hhc__fab-text">' + esc( T.fab || 'Hỏi giá nhanh' ) + '</span><span class="hhc__dot"></span></button>' +
+			'<span class="hhc__fab-text">' + esc( T.fab || 'Hỏi em nhé' ) + '</span><span class="hhc__dot"></span></button>' +
 		'<div class="hhc__bubble" hidden><button type="button" class="hhc__bubble-x" aria-label="Đóng">×</button><p></p><div class="hhc__bubble-chips"></div></div>' +
 		'<section class="hhc__panel" hidden role="dialog" aria-label="Chat tư vấn">' +
 			'<header class="hhc__head">' +
-				( C.avatar ? '<img src="' + esc( C.avatar ) + '" alt="" width="44" height="44">' : '' ) +
-				'<div><strong>' + esc( C.name ) + '</strong><span><i></i> ' + esc( T.online || 'Đang trực tuyến · trả lời trong vài phút' ) + '</span></div>' +
+				'<span class="hhc__head-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01" stroke-width="2.6"/></svg></span>' +
+				'<div><strong>' + esc( T.head || 'Trợ lý của ' + C.name ) + '</strong><span><i></i> ' + esc( T.online || 'Đang trực tuyến · trả lời trong vài phút' ) + '</span></div>' +
 				'<button type="button" class="hhc__close" aria-label="Đóng chat">×</button>' +
 			'</header>' +
 			'<div class="hhc__log" aria-live="polite"></div>' +

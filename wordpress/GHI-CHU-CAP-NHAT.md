@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.18** + plugin Hoàng Hiệp CRM **2.20.50**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.18** + plugin Hoàng Hiệp CRM **2.20.51**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.51: nút "Hỏi em nhé", khung chat "Trợ lý của Hoàng Hiệp"
+
+- Nút chat đổi chữ thành **"Hỏi em nhé"** (tiếng Anh "Ask me", tiếng Hàn "물어보세요").
+- Đầu khung chat ghi **"Trợ lý của Hoàng Hiệp"**, bỏ ảnh đại diện, thay bằng biểu tượng khung chat.
+- Cài: Dự án → Nhập nhanh → tải `cap-nhat-code.zip` → LiteSpeed Cache → Purge All.
 
 ## Có gì mới – plugin 2.20.50: nút chat "Hỏi giá nhanh"
 

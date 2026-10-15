@@ -1006,7 +1006,7 @@ function hh_chat_detect_lang( $text, $page_lang = 'vi' ) {
 function hh_chat_ui( $lang, $name, $title = '' ) {
 	if ( 'en' === $lang ) {
 		return array(
-			'fab' => 'Ask for prices', 'online' => 'Online · replies in a few minutes', 'placeholder' => 'Type a question or your phone/WhatsApp…', 'call' => 'Or call/Zalo', 'close' => 'Close',
+			'fab' => 'Ask me', 'head' => $name . '\'s assistant', 'online' => 'Online · replies in a few minutes', 'placeholder' => 'Type a question or your phone/WhatsApp…', 'call' => 'Or call/Zalo', 'close' => 'Close',
 			'searching' => 'Checking the latest data…', 'noreply' => 'No reply yet – please call/Zalo ', 'slow' => 'The connection is slow, please try again or call/Zalo ', 'askphone' => 'Please leave your phone/WhatsApp/Zalo, ' . $name . ' will send details and call you shortly.',
 			'greet' => $title ? 'Hi there 👋 I\'m ' . $name . '\'s assistant. You\'re viewing ' . $title . ' – would you like prices, floor plans or payment options?' : 'Hi there 👋 I\'m ' . $name . '\'s assistant. Are you looking to buy, rent or invest in Da Nang property?',
 			'chips' => array( 'Apartments for foreigners', 'Rent an apartment', 'Price list', 'Talk to ' . $name ),
@@ -1014,7 +1014,7 @@ function hh_chat_ui( $lang, $name, $title = '' ) {
 	}
 	if ( 'ko' === $lang ) {
 		return array(
-			'fab' => '가격 문의', 'online' => '온라인 · 몇 분 내 답변', 'placeholder' => '질문 또는 연락처(카톡/잘로)를 입력하세요…', 'call' => '전화/Zalo', 'close' => '닫기',
+			'fab' => '물어보세요', 'head' => $name . ' 상담 도우미', 'online' => '온라인 · 몇 분 내 답변', 'placeholder' => '질문 또는 연락처(카톡/잘로)를 입력하세요…', 'call' => '전화/Zalo', 'close' => '닫기',
 			'searching' => '최신 자료를 확인하고 있어요…', 'noreply' => '답변을 받지 못했어요. 전화/Zalo 부탁드려요: ', 'slow' => '연결이 느립니다. 다시 보내주시거나 전화/Zalo 주세요: ', 'askphone' => '연락처(전화/카톡/Zalo)를 남겨주시면 ' . $name . '이(가) 자료를 보내드리고 곧 연락드릴게요.',
 			'greet' => $title ? '안녕하세요 👋 ' . $name . '의 상담 도우미입니다. 지금 ' . $title . '을(를) 보고 계시네요 – 가격, 평면도, 결제 조건 중 무엇이 궁금하세요?' : '안녕하세요 👋 ' . $name . '의 상담 도우미입니다. 다낭 부동산 매매, 임대, 투자 중 어떤 걸 찾고 계세요?',
 			'chips' => array( '외국인 아파트 구매', '아파트 임대', '가격표 받기', $name . '과(와) 상담' ),
