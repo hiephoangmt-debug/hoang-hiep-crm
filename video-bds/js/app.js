@@ -259,8 +259,18 @@
           item.dur = isFinite(v.duration) ? v.duration : (opts.duration || 4);
           item.trimOut = item.dur;
         };
-        v.onloadeddata = function () { resolve(item); if (!opts.skipAnalyze) analyzeAudio(item, blob); };
-        v.onerror = function () { toast('Không đọc được clip ' + name + '. Hãy thử file MP4.'); resolve(null); };
+        var settled = false;
+        var fail = function () { if (settled) return; settled = true; if (!opts.quiet) toast('Không đọc được clip ' + name + '. Hãy thử file MP4 (H.264).'); resolve(null); };
+        // Máy không giải mã được hình (VD: HEVC) thì video không có kích thước khung hình
+        v.onloadeddata = function () {
+          if (settled) return;
+          if (!v.videoWidth) { fail(); return; }
+          settled = true;
+          resolve(item);
+          if (!opts.skipAnalyze) analyzeAudio(item, blob);
+        };
+        setTimeout(fail, 30000);
+        v.onerror = fail;
         v.addEventListener('seeked', schedulePreview);
         v.src = url;
       } else if (type.indexOf('image') === 0 || /\.(jpe?g|png|webp|gif|heic)$/i.test(name || '')) {
@@ -476,7 +486,8 @@
     var minPause = opts.minPause || parseFloat($('assemblePause').value) || 0.4;
     var useAsr = opts.asr != null ? opts.asr : $('assembleAsr').checked;
     var progress = opts.progress || assembleProgress;
-    var clips = [], broll = [];
+    var clips = [], broll = [], failed = [], noAudio = [];
+    $('assembleReport').innerHTML = '';
     var steps = videos.length * (useAsr ? 2 : 1) + images.length + 1, done = 0;
     var tick = function (label) { done++; progress(Math.min(1, done / steps), label); };
     $('btnAssemble').disabled = true;
@@ -488,11 +499,11 @@
     videos.forEach(function (f, i) {
       chain = chain.then(function () {
         progress(done / steps, 'Quét giọng nói clip ' + (i + 1) + '/' + videos.length + ': ' + f.name);
-        return createMedia(f, f.name, { skipAnalyze: true }).then(function (item) {
-          if (!item) return null;
+        return createMedia(f, f.name, { skipAnalyze: true, quiet: true }).then(function (item) {
+          if (!item) { failed.push(f.name); return null; }
           return f.arrayBuffer().then(function (ab) { return getAudioCtx().decodeAudioData(ab); })
             .then(function (buf) { return { item: item, buf: buf, sp: AC.findSpeech(buf, { minPause: minPause }) }; })
-            .catch(function () { return { item: item, buf: null, sp: null }; });
+            .catch(function () { noAudio.push(f.name); return { item: item, buf: null, sp: null }; });
         }).then(function (r) {
           tick('Đã quét ' + f.name);
           if (!r) return;
@@ -591,6 +602,9 @@
         if (other) return '<div>🏙 ' + esc(t) + 'chưa có cảnh nói, dùng ' + other + ' phối cảnh/flycam + phụ đề theo kịch bản</div>';
         return '<div class="warn">⚠️ ' + esc(t) + 'chưa có hình, sẽ hiện chữ trên nền màu. Thêm ảnh phối cảnh để đẹp hơn.</div>';
       });
+      if (failed.length) lines.push('<div class="warn">⚠️ Không mở được ' + failed.length + ' video: ' + esc(failed.join(', ')) +
+        '. Thường do video iPhone định dạng HEVC. Cách sửa: dùng Chrome bản mới, hoặc trên iPhone vào Cài đặt → Camera → Định dạng → chọn “Tương thích nhất” rồi quay lại.</div>');
+      if (noAudio.length) lines.push('<div class="muted">🔇 Không có tiếng (dùng làm cảnh quay phủ lên): ' + esc(noAudio.join(', ')) + '. Nếu đây là clip có người nói, hãy đổi sang file MP4.</div>');
       if (dropped.length) {
         var retakes = dropped.filter(function (u) { return u.retake; }).length;
         lines.push('<div class="muted">✂️ Đã bỏ ' + dropped.length + ' đoạn nói không đúng kịch bản' + (retakes ? ' (trong đó ' + retakes + ' đoạn nói hỏng đã được quay lại)' : '') + '.</div>');
@@ -627,6 +641,7 @@
     projFolder = folder || (projFiles[0] && projFiles[0].webkitRelativePath ? projFiles[0].webkitRelativePath.split('/')[0] : '');
     var c = window.BdsImporter.classify(projFiles);
     var v = c.media.filter(isVideoFile).length;
+    if (c.zips.length) { $('projFiles').innerHTML = '🗜 ' + c.zips.length + ' file nén .zip (sẽ tự mở khi bấm Làm video) · ' + v + ' video · ' + (c.media.length - v) + ' ảnh'; updateProjButton(); return; }
     $('projFiles').innerHTML = projFiles.length ?
       (projFolder ? '📁 <b>' + esc(projFolder) + '</b>: ' : '') + (c.scripts.length ? '📝 kịch bản: <b>' + esc(c.scripts[0].name) + '</b> · ' : '⚠️ chưa thấy file kịch bản · ') +
       v + ' video · ' + (c.media.length - v) + ' ảnh' + (c.music.length ? ' · 🎵 ' + esc(c.music[0].name) : '') : '';
@@ -645,14 +660,36 @@
   }
 
   function autoProject() {
-    var I = window.BdsImporter, G = window.ScriptGen;
-    var c = I.classify(projFiles);
-    var link = $('projLink').value.trim();
+    var I = window.BdsImporter;
+    var linkText = $('projLink').value;
     if (state.scenes.some(function (sc) { return sc.media.length; }) && !window.confirm('Thay dự án hiện tại bằng dự án mới từ thư mục?')) return;
     $('btnAutoProject').disabled = true;
     $('projReport').hidden = true;
-    var report = [];
-    projProgress(0.02, 'Đang đọc kịch bản…');
+    $('assembleReport').innerHTML = '';
+    var key = $('driveKey').value.trim();
+    try { if (key) localStorage.setItem('video-bds-gkey', key); } catch (e) { /* bỏ qua */ }
+    var pre = [];
+    projProgress(0.01, 'Đang chuẩn bị file…');
+    I.expandZips(projFiles, function (m) { projProgress(0.01, m); }).then(function (files) {
+      return I.fromDrive(linkText, key, function (m) { projProgress(0.02, m); }).then(function (df) { return files.concat(df); }).catch(function (e) {
+        if (e.message === 'NEED_KEY') {
+          pre.push('<div class="warn">⚠️ Có link Google Drive nhưng chưa có khoá API. Mở mục “🔑 Muốn dán thẳng link thư mục Google Drive” để làm theo, hoặc tải thư mục về (.zip) rồi kéo thả vào.</div>');
+          $('driveKeyBox').open = true;
+        } else pre.push('<div class="warn">⚠️ ' + esc(e.message) + '</div>');
+        return files;
+      });
+    }).then(function (files) {
+      runProject(I.classify(files), I.findLink(linkText.split(/\s+/).filter(function (l) { return /docs\.google\.com/.test(l); }).join(' ')), pre);
+    }).catch(function (e) {
+      projProgress(null);
+      toast('Có lỗi: ' + (e && e.message ? e.message : e), 6000);
+      updateProjButton();
+    });
+  }
+
+  function runProject(c, link, report) {
+    var I = window.BdsImporter;
+    projProgress(0.03, 'Đang đọc kịch bản…');
 
     // 1. Kịch bản: file trong thư mục, hoặc link
     var tryScripts = function (i) {
@@ -662,8 +699,9 @@
         return tryScripts(i + 1);
       }).catch(function () { return tryScripts(i + 1); });
     };
-    tryScripts(0).catch(function () {
-      report.push('<div class="warn">⚠️ Không mở được link kịch bản. Hãy bật chia sẻ “Bất kỳ ai có đường liên kết”, hoặc tải bảng về (Excel/CSV) rồi bỏ vào thư mục.</div>');
+    tryScripts(0).catch(function (e) {
+      report.push('<div class="warn">⚠️ Không mở được link kịch bản: ' + esc(e && e.message ? e.message : '') +
+        ' Cách khác: trong Google Sheets chọn Tệp → Tải xuống → Microsoft Excel (.xlsx), rồi bỏ file vào thư mục.</div>');
       return null;
     }).then(function (sc) {
       var info = Object.assign({}, state.info);
@@ -730,6 +768,7 @@
     $('projFolder').onchange = function (e) { setProjFiles(e.target.files); e.target.value = ''; };
     $('projFilesInput').onchange = function (e) { setProjFiles(e.target.files); e.target.value = ''; };
     $('projLink').oninput = updateProjButton;
+    try { $('driveKey').value = localStorage.getItem('video-bds-gkey') || ''; } catch (e) { /* bỏ qua */ }
     var dz = $('projDrop');
     ['dragenter', 'dragover'].forEach(function (ev) { dz.addEventListener(ev, function (e) { e.preventDefault(); dz.classList.add('over'); }); });
     ['dragleave', 'drop'].forEach(function (ev) { dz.addEventListener(ev, function (e) { e.preventDefault(); dz.classList.remove('over'); }); });

@@ -39,6 +39,9 @@ Bỏ **cả thư mục dự án** vào khung đầu tiên, gồm:
   Kịch bản dạng bảng: cột Tên cảnh | Lời thoại | Hình ảnh/Text. Dạng văn bản: dòng “CẢNH 1 – …” mở cảnh mới, “Hình ảnh: …”, “Text chạy màn hình:”.
 - **Các video đã quay** (chưa cần cắt), **ảnh phối cảnh / flycam**, **nhạc nền** (mp3) nếu có.
 
+**Video, ảnh để trên Google Drive?** Bấm chuột phải vào thư mục trên Drive → **Tải xuống** (Google nén thành .zip) rồi kéo thả file .zip vào, không cần giải nén.
+Hoặc dán thẳng link thư mục Drive (cần tạo khoá API Google một lần, hướng dẫn ngay trong ứng dụng). Link Google Sheets/Drive phải bật chia sẻ “Bất kỳ ai có đường liên kết → Người xem”.
+
 Bấm **🚀 Làm video tự động**: phần mềm đọc kịch bản, tự điền giá và số điện thoại tìm thấy trong kịch bản, cắt ghép, làm đẹp, thêm chữ động, hiệu ứng, nhạc,
 rồi xuất luôn **video đầy đủ + trailer**.
 

@@ -43,9 +43,21 @@
         </label>
         <input type="file" id="projFolder" webkitdirectory directory multiple hidden>
         <input type="file" id="projFilesInput" multiple hidden>
-        <label style="margin-top:12px">Hoặc dán link kịch bản Google Sheets / Google Docs
-          <input id="projLink" placeholder="https://docs.google.com/spreadsheets/d/...">
+        <label style="margin-top:12px">Hoặc dán link (mỗi dòng một link): kịch bản Google Sheets / Docs, thư mục Google Drive chứa video và ảnh
+          <textarea id="projLink" rows="3" placeholder="https://docs.google.com/spreadsheets/d/...&#10;https://drive.google.com/drive/folders/..."></textarea>
         </label>
+        <p class="muted small-text">💡 Video và ảnh để trên Google Drive: bấm chuột phải vào thư mục → <b>Tải xuống</b> (Google nén thành file .zip), rồi kéo thả file .zip vào khung trên, không cần giải nén.
+          Link kịch bản Google Sheets cần bật chia sẻ <b>“Bất kỳ ai có đường liên kết → Người xem”</b>.</p>
+        <details class="more" id="driveKeyBox">
+          <summary>🔑 Muốn dán thẳng link thư mục Google Drive (không cần tải về)</summary>
+          <ol class="small-text">
+            <li>Vào <b>console.cloud.google.com</b>, đăng nhập Gmail, tạo dự án mới (tên tuỳ ý).</li>
+            <li>Vào <b>APIs &amp; Services → Library</b>, tìm <b>Google Drive API</b>, bấm <b>Enable</b>.</li>
+            <li>Vào <b>APIs &amp; Services → Credentials → Create credentials → API key</b>, sao chép khoá rồi dán vào ô dưới (chỉ làm một lần, khoá được lưu trên máy này).</li>
+            <li>Thư mục Drive phải bật chia sẻ <b>“Bất kỳ ai có đường liên kết → Người xem”</b>.</li>
+          </ol>
+          <input id="driveKey" placeholder="Dán khoá API Google (AIza...)">
+        </details>
         <div class="grid" style="margin-top:12px">
           <label>Mức cắt chỗ ngừng
             <select id="projPause">

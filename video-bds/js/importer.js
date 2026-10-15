@@ -160,12 +160,49 @@
     return m ? m[0] : '';
   }
 
+  var jsonpN = 0;
+
+  /**
+   * Đọc Google Sheets bằng JSONP (không bị trình duyệt chặn như khi tải file CSV).
+   * Bảng cần bật chia sẻ “Bất kỳ ai có đường liên kết đều xem được”.
+   */
+  function sheetRows(link) {
+    var id = (link.match(/\/spreadsheets\/d\/([a-zA-Z0-9_-]+)/) || [])[1];
+    var gid = (link.match(/[#&?]gid=(\d+)/) || [])[1];
+    if (!id) return Promise.reject(new Error('Link Google Sheets chưa đúng.'));
+    return new Promise(function (resolve, reject) {
+      var cb = '__bdsSheet' + (++jsonpN);
+      var sc = document.createElement('script');
+      var done = function () { delete window[cb]; sc.remove(); clearTimeout(timer); };
+      var timer = setTimeout(function () { done(); reject(new Error('Hết thời gian chờ Google Sheets.')); }, 20000);
+      window[cb] = function (resp) {
+        done();
+        if (!resp || resp.status !== 'ok' || !resp.table) {
+          reject(new Error('Bảng chưa bật chia sẻ “Bất kỳ ai có đường liên kết đều xem được”.'));
+          return;
+        }
+        resolve(resp.table.rows.map(function (r) {
+          return (r.c || []).map(function (c) { return c ? String(c.f != null ? c.f : (c.v != null ? c.v : '')) : ''; });
+        }));
+      };
+      sc.onerror = function () { done(); reject(new Error('Không mở được bảng. Hãy bật chia sẻ “Bất kỳ ai có đường liên kết đều xem được”.')); };
+      sc.src = 'https://docs.google.com/spreadsheets/d/' + id + '/gviz/tq?tqx=out:json;responseHandler:' + cb + '&headers=0' + (gid ? '&gid=' + gid : '');
+      document.head.appendChild(sc);
+    });
+  }
+
   /** Lấy kịch bản từ link Google Sheets / Google Docs (cần bật chia sẻ “Bất kỳ ai có đường liên kết”). */
   function fetchLink(link) {
     var G = window.ScriptGen;
     if (/\/spreadsheets\//.test(link)) {
-      return fetch(G.sheetCsvUrl(link)).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
-        .then(function (csv) { return { scenes: G.tableToScenes(G.parseTable(csv)), raw: csv }; });
+      return sheetRows(link).then(function (rows) {
+        return { scenes: G.tableToScenes(rows), raw: rows.map(function (r) { return r.join(' '); }).join('\n') };
+      }).catch(function (e) {
+        // Dự phòng: tải CSV trực tiếp
+        return fetch(G.sheetCsvUrl(link)).then(function (r) { if (!r.ok) throw e; return r.text(); })
+          .then(function (csv) { if (/^\s*</.test(csv)) throw e; return { scenes: G.tableToScenes(G.parseTable(csv)), raw: csv }; })
+          .catch(function () { throw e; });
+      });
     }
     var id = (link.match(/\/document\/d\/([a-zA-Z0-9_-]+)/) || [])[1];
     return fetch('https://docs.google.com/document/d/' + id + '/export?format=txt').then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
@@ -196,6 +233,128 @@
         return { scenes: G.tableToScenes(G.parseTable(txt)), raw: txt };
       }
       return { scenes: textToScenes(txt), raw: txt };
+    });
+  }
+
+  /* ---------- Giải nén file ZIP (VD: thư mục tải từ Google Drive) mà không đọc hết vào bộ nhớ ---------- */
+
+  function unzipFile(zipFile) {
+    var size = zipFile.size;
+    var tailLen = Math.min(size, 66000);
+    return zipFile.slice(size - tailLen).arrayBuffer().then(function (tail) {
+      var dv = new DataView(tail), eocd = -1;
+      for (var i = tail.byteLength - 22; i >= 0; i--) if (dv.getUint32(i, true) === 0x06054b50) { eocd = i; break; }
+      if (eocd < 0) throw new Error('File ZIP bị lỗi.');
+      var count = dv.getUint16(eocd + 10, true), cdSize = dv.getUint32(eocd + 12, true), cdOff = dv.getUint32(eocd + 16, true);
+      if (cdOff === 0xffffffff) throw new Error('File ZIP quá lớn (trên 4GB). Hãy tải từng phần nhỏ hơn.');
+      return zipFile.slice(cdOff, cdOff + cdSize).arrayBuffer().then(function (cd) {
+        var d = new DataView(cd), u8 = new Uint8Array(cd), off = 0, list = [];
+        for (var n = 0; n < count; n++) {
+          var flags = d.getUint16(off + 8, true);
+          var method = d.getUint16(off + 10, true), csize = d.getUint32(off + 20, true);
+          var nlen = d.getUint16(off + 28, true), xlen = d.getUint16(off + 30, true), clen = d.getUint16(off + 32, true);
+          var local = d.getUint32(off + 42, true);
+          var raw = u8.subarray(off + 46, off + 46 + nlen);
+          var name = (flags & 0x800) ? new TextDecoder().decode(raw) : new TextDecoder().decode(raw);
+          if (!/\/$/.test(name)) list.push({ name: name, method: method, csize: csize, local: local });
+          off += 46 + nlen + xlen + clen;
+        }
+        return Promise.all(list.map(function (e) {
+          return zipFile.slice(e.local, e.local + 30).arrayBuffer().then(function (h) {
+            var hv = new DataView(h);
+            var start = e.local + 30 + hv.getUint16(26, true) + hv.getUint16(28, true);
+            var part = zipFile.slice(start, start + e.csize);
+            var base = e.name.split('/').pop();
+            var type = typeOf(base);
+            if (e.method === 0) return new File([part], base, { type: type });
+            return new Response(part.stream().pipeThrough(new DecompressionStream('deflate-raw'))).blob()
+              .then(function (b) { return new File([b], base, { type: type }); });
+          });
+        }));
+      });
+    });
+  }
+
+  function typeOf(name) {
+    var ext = (name.split('.').pop() || '').toLowerCase();
+    return { mp4: 'video/mp4', mov: 'video/quicktime', m4v: 'video/mp4', webm: 'video/webm', jpg: 'image/jpeg', jpeg: 'image/jpeg',
+      png: 'image/png', webp: 'image/webp', mp3: 'audio/mpeg', m4a: 'audio/mp4', wav: 'audio/wav', csv: 'text/csv', txt: 'text/plain' }[ext] || '';
+  }
+
+  /** Thay các file .zip trong danh sách bằng các file bên trong. */
+  function expandZips(files, onProgress) {
+    var out = [], chain = Promise.resolve();
+    files.forEach(function (f) {
+      chain = chain.then(function () {
+        if (!/\.zip$/i.test(f.name)) { out.push(f); return; }
+        if (onProgress) onProgress('Đang mở file nén ' + f.name + '…');
+        return unzipFile(f).then(function (inner) { out.push.apply(out, inner.filter(function (x) { return !/^(\.|__MACOSX)/.test(x.name); })); });
+      });
+    });
+    return chain.then(function () { return out; });
+  }
+
+  /* ---------- Google Drive (cần khoá API Google, thư mục bật chia sẻ công khai) ---------- */
+
+  function driveIds(text) {
+    var out = [];
+    (text || '').split(/\s+/).forEach(function (l) {
+      var m = l.match(/drive\.google\.com\/drive\/(?:u\/\d+\/)?folders\/([a-zA-Z0-9_-]+)/);
+      if (m) { out.push({ kind: 'folder', id: m[1] }); return; }
+      m = l.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?.*id=)([a-zA-Z0-9_-]+)/);
+      if (m) out.push({ kind: 'file', id: m[1] });
+    });
+    return out;
+  }
+
+  function driveApi(path, key) {
+    return fetch('https://www.googleapis.com/drive/v3/' + path + (path.indexOf('?') === -1 ? '?' : '&') + 'key=' + encodeURIComponent(key) + '&supportsAllDrives=true')
+      .then(function (r) {
+        if (r.status === 403 || r.status === 404) throw new Error('Google Drive từ chối: hãy bật chia sẻ “Bất kỳ ai có đường liên kết” và kiểm tra khoá API.');
+        if (!r.ok) throw new Error('Google Drive lỗi ' + r.status);
+        return r;
+      });
+  }
+
+  function listFolder(id, key, out) {
+    out = out || [];
+    var q = encodeURIComponent("'" + id + "' in parents and trashed=false");
+    return driveApi('files?q=' + q + '&pageSize=1000&includeItemsFromAllDrives=true&fields=files(id,name,mimeType,size)', key)
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        var subs = [];
+        (j.files || []).forEach(function (f) {
+          if (f.mimeType === 'application/vnd.google-apps.folder') subs.push(f.id); else out.push(f);
+        });
+        return subs.reduce(function (p, sid) { return p.then(function () { return listFolder(sid, key, out); }); }, Promise.resolve()).then(function () { return out; });
+      });
+  }
+
+  /** Tải các file từ link Google Drive (thư mục hoặc từng file) thành danh sách File. */
+  function fromDrive(text, key, onProgress) {
+    var ids = driveIds(text);
+    if (!ids.length) return Promise.resolve([]);
+    if (!key) return Promise.reject(new Error('NEED_KEY'));
+    var metas = [];
+    return ids.reduce(function (p, it) {
+      return p.then(function () {
+        if (it.kind === 'folder') return listFolder(it.id, key).then(function (l) { metas = metas.concat(l); });
+        return driveApi('files/' + it.id + '?fields=id,name,mimeType,size', key).then(function (r) { return r.json(); }).then(function (m) { metas.push(m); });
+      });
+    }, Promise.resolve()).then(function () {
+      var files = [];
+      return metas.reduce(function (p, m, i) {
+        return p.then(function () {
+          var label = '(' + (i + 1) + '/' + metas.length + ') ' + m.name;
+          if (onProgress) onProgress('Đang tải từ Google Drive ' + label + (m.size ? ' · ' + Math.round(m.size / 1048576) + ' MB' : '') + '…');
+          var path, name = m.name, type = m.mimeType;
+          if (m.mimeType === 'application/vnd.google-apps.spreadsheet') { path = 'files/' + m.id + '/export?mimeType=text/csv'; name += '.csv'; type = 'text/csv'; }
+          else if (m.mimeType === 'application/vnd.google-apps.document') { path = 'files/' + m.id + '/export?mimeType=text/plain'; name += '.txt'; type = 'text/plain'; }
+          else if (/^application\/vnd\.google-apps/.test(m.mimeType)) return;
+          else path = 'files/' + m.id + '?alt=media';
+          return driveApi(path, key).then(function (r) { return r.blob(); }).then(function (b) { files.push(new File([b], name, { type: type || b.type })); });
+        });
+      }, Promise.resolve()).then(function () { return files; });
     });
   }
 
@@ -231,9 +390,10 @@
 
   /** Phân loại file trong thư mục. */
   function classify(files) {
-    var r = { scripts: [], media: [], music: [], other: [] };
+    var r = { scripts: [], media: [], music: [], other: [], zips: [] };
     files.forEach(function (f) {
       if (/^\./.test(f.name)) return;
+      if (/\.zip$/i.test(f.name)) { r.zips.push(f); return; }
       if (/^(video|image)\//.test(f.type) || /\.(mp4|mov|m4v|webm|jpe?g|png|webp|heic)$/i.test(f.name)) r.media.push(f);
       else if (/^audio\//.test(f.type) || /\.(mp3|m4a|wav|aac|ogg)$/i.test(f.name)) r.music.push(f);
       else if (SCRIPT_EXT.test(f.name)) r.scripts.push(f);
@@ -247,6 +407,7 @@
 
   window.BdsImporter = {
     readScript: readScript, textToScenes: textToScenes, extractInfo: extractInfo, fetchLink: fetchLink, findLink: findLink,
-    filesFromDrop: filesFromDrop, classify: classify, readXlsx: readXlsx, readDocx: readDocx
+    filesFromDrop: filesFromDrop, classify: classify, readXlsx: readXlsx, readDocx: readDocx,
+    sheetRows: sheetRows, unzipFile: unzipFile, expandZips: expandZips, fromDrive: fromDrive, driveIds: driveIds
   };
 })();
