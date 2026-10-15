@@ -238,6 +238,42 @@ const FLOOR_PROPS = {
 };
 const floorMats = new Map();
 export function floorMaterial(name) {
-  if (!floorMats.has(name)) floorMats.set(name, new THREE.MeshStandardMaterial({ map: getTexture(name), ...(FLOOR_PROPS[name] || {}) }));
+  if (!floorMats.has(name)) {
+    const strength = { wood: 3, oak: 3, walnut: 3, herringbone: 3, herringboneLight: 3, tile: 4, darkTile: 4, terracotta: 4, encaustic: 2, carpet: 1.5, concrete: 1.5, polished: 0.8, marble: 0.6, grass: 2 }[name] ?? 1;
+    floorMats.set(name, new THREE.MeshStandardMaterial({ map: getTexture(name), normalMap: getNormalMap(name, strength), normalScale: new THREE.Vector2(0.6, 0.6), ...(FLOOR_PROPS[name] || {}) }));
+  }
   return floorMats.get(name);
+}
+
+/** Sinh normal map từ ảnh vân (độ sáng = độ cao) để bề mặt có vân nổi khi bắt sáng */
+const normCache = new Map();
+export function getNormalMap(name, strength = 2) {
+  const key = name + strength;
+  if (normCache.has(key)) return normCache.get(key);
+  const src = getTexture(name).image;
+  const W = Math.min(512, src.width), H = Math.min(512, src.height);
+  const c = document.createElement('canvas');
+  c.width = W; c.height = H;
+  const x = c.getContext('2d');
+  x.drawImage(src, 0, 0, W, H);
+  const d = x.getImageData(0, 0, W, H).data;
+  const h = (i, j) => { const k = (((j + H) % H) * W + ((i + W) % W)) * 4; return (d[k] + d[k + 1] + d[k + 2]) / 765; };
+  const out = x.createImageData(W, H);
+  for (let j = 0; j < H; j++)
+    for (let i = 0; i < W; i++) {
+      const dx = (h(i - 1, j) - h(i + 1, j)) * strength, dy = (h(i, j - 1) - h(i, j + 1)) * strength;
+      const len = Math.hypot(dx, dy, 1);
+      const k = (j * W + i) * 4;
+      out.data[k] = ((dx / len) * 0.5 + 0.5) * 255;
+      out.data[k + 1] = ((dy / len) * 0.5 + 0.5) * 255;
+      out.data[k + 2] = (1 / len) * 255;
+      out.data[k + 3] = 255;
+    }
+  x.putImageData(out, 0, 0);
+  const t = new THREE.CanvasTexture(c);
+  const base = getTexture(name);
+  t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  t.repeat.copy(base.repeat);
+  normCache.set(key, t);
+  return t;
 }
