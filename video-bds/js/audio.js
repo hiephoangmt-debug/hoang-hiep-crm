@@ -622,7 +622,7 @@
 
   AudioEngine.prototype.scheduleMusicVolume = function (t0, duration, base, voiceRanges) {
     var g = this.music.gain;
-    var ducked = base * 0.28;
+    var ducked = base * 0.17; // có giọng nói thì nhạc hạ sâu để giọng nổi rõ
     voiceRanges = mergeRanges(voiceRanges);
     g.cancelScheduledValues(0);
     g.setValueAtTime(0.0001, t0);

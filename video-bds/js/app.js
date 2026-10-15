@@ -15,7 +15,7 @@
     style: 'chuyen-nghiep',
     variant: 0,
     voiceMode: 'clip',
-    music: { mood: 'dien-anh', buffer: null, name: '', vol: 70 },
+    music: { mood: 'dien-anh', buffer: null, name: '', vol: 45 },
     settings: {
       format: '9:16', theme: 'vang', transition: 'mix', textFx: 'marker', subStyle: 'kinetic', beauty: 'vua', pace: 'auto', endStyle: 'pill', sfx: true, subtitles: true,
       introCard: true, endCard: true, priceTag: true, autoTrim: true
@@ -66,7 +66,7 @@
       try {
         localStorage.setItem(STORE_KEY, JSON.stringify({
           info: state.info, style: state.style, settings: state.settings, voiceMode: state.voiceMode,
-          mood: state.music.mood, vol: state.music.vol, helpSeen: true, v3: true, v4: true, v4: true,
+          mood: state.music.mood, vol: state.music.vol, helpSeen: true, v3: true, v4: true, v5: true, v4: true,
           scenes: state.scenes.map(function (s) {
             return { title: s.title, text: s.text, bigText: s.bigText, shotNote: s.shotNote, durOverride: s.durOverride, showTitle: s.showTitle, quick: s.quick, layout: s.layout };
           })
@@ -86,7 +86,7 @@
       Object.assign(state.settings, saved);
       state.voiceMode = d.voiceMode || state.voiceMode;
       state.music.mood = d.v4 && d.mood ? d.mood : state.music.mood;
-      state.music.vol = d.vol != null ? d.vol : state.music.vol;
+      state.music.vol = d.v5 && d.vol != null ? d.vol : state.music.vol; // bản cũ: dùng mức nhạc mới nhỏ hơn
       state.scenes = (d.scenes || []).map(newScene);
       return !!d.helpSeen;
     } catch (e) { return false; }
@@ -1596,7 +1596,7 @@
         engine.scheduleMusicVolume(t0, tl.total, 0.6 * vol, ranges);
       } else if (mood !== 'none') {
         engine.scheduleMusic(mood, t0, tl.total);
-        engine.scheduleMusicVolume(t0, tl.total, 1.6 * vol, ranges);
+        engine.scheduleMusicVolume(t0, tl.total, 1.2 * vol, ranges);
       }
       tl.sfx.forEach(function (s) {
         var at = t0 + Math.max(0, s.at);
