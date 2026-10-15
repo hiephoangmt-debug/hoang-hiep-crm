@@ -15,6 +15,7 @@
       <button data-mode="2d">✏️ Mặt bằng 2D</button>
       <button data-mode="split" class="active">◧ Song song</button>
       <button data-mode="3d">🧊 3D</button>
+      <button data-mode="building">🏢 Tòa nhà</button>
     </nav>
     <div class="actions">
       <select id="template" title="Mẫu có sẵn">
@@ -114,6 +115,12 @@
         <b>Chế độ đi bộ</b> · W A S D / phím mũi tên để đi · Shift chạy · chuột để nhìn · E hoặc nhấp để mở cửa · <b>Esc</b> để thoát
       </div>
       <div class="help3d" id="help3d">Kéo chuột để xoay · chuột phải để dời · lăn để phóng · nhấp đúp để bay tới · nhấp vào cửa để mở</div>
+    </section>
+
+    <section class="pane panebuilding" id="paneBuilding">
+      <div id="buildingView"></div>
+      <div class="bpanel" id="bpanel"></div>
+      <div class="bdetail" id="bdetail" hidden></div>
     </section>
 
     <aside class="sidebar right" id="right">
