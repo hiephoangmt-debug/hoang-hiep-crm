@@ -16,13 +16,54 @@
 
   function naturalLen(m, autoTrim) {
     if (!m.isVideo) return IMG_SECONDS;
+    if (m.fixed) return Math.max(0.2, m.trimOut - m.trimIn); // đoạn đã cắt sẵn từ video dài
     var a = autoTrim ? (m.trimIn || 0) : 0;
     var full = m.dur || (isFinite(m.el.duration) ? m.el.duration : 0) || 4;
     var b = autoTrim && m.trimOut ? m.trimOut : full;
     return Math.max(0.5, b - a);
   }
 
-  function srcIn(m, autoTrim) { return m.isVideo && autoTrim ? (m.trimIn || 0) : 0; }
+  function srcIn(m, autoTrim) { return m.isVideo && (autoTrim || m.fixed) ? (m.trimIn || 0) : 0; }
+
+  /** Chia lời thoại thành từng chữ, rải đều theo các khoảng đang nói (chữ dài được nhiều thời gian hơn). */
+  function distributeWords(text, ranges) {
+    var ws = (text || '').replace(/[“”"]/g, '').split(/\s+/).filter(Boolean);
+    var total = 0;
+    ranges.forEach(function (r) { total += Math.max(0, r[1] - r[0]); });
+    if (!ws.length || total <= 0) return [];
+    var weights = ws.map(function (w) { return w.length + 3 + (/[.,!?…]$/.test(w) ? 4 : 0); });
+    var sum = weights.reduce(function (a, b) { return a + b; }, 0);
+    function at(pos) { // vị trí 0..total → thời điểm trên dòng thời gian
+      for (var i = 0; i < ranges.length; i++) {
+        var len = ranges[i][1] - ranges[i][0];
+        if (pos <= len || i === ranges.length - 1) return ranges[i][0] + Math.min(pos, len);
+        pos -= len;
+      }
+      return 0;
+    }
+    var acc = 0;
+    return ws.map(function (w, i) {
+      var a = acc / sum * total;
+      acc += weights[i];
+      return { w: w, t0: at(a), t1: at(acc / sum * total) };
+    });
+  }
+
+  var MONEY = /\d|tỷ|triệu|%|m²|m2/i;
+
+  /** Thời điểm từng chữ của một cảnh: lấy từ nhận dạng giọng nói nếu có, không thì rải đều lời thoại. */
+  function sceneWords(scene, speech, ranges) {
+    var have = speech.length && speech.every(function (x) { return x.m.words && x.m.words.length; });
+    if (!have) return distributeWords(scene.text, ranges);
+    var out = [];
+    speech.forEach(function (x) {
+      x.m.words.forEach(function (w) {
+        if (w.t0 < x.srcIn - 0.05 || w.t0 >= x.srcIn + x.len) return;
+        out.push({ w: w.w, t0: x.start + Math.max(0, w.t0 - x.srcIn), t1: x.start + Math.min(x.len, w.t1 - x.srcIn) });
+      });
+    });
+    return out;
+  }
 
   function kenBurns(i) {
     var seed = (i * 9301 + 49297) % 233280 / 233280;
@@ -54,6 +95,9 @@
     if (t) return t.toUpperCase();
     return firstSentence(scene.text, 7);
   }
+
+  /** Zoom đẩy xen kẽ cho các đoạn cắt nhảy của cùng một video. */
+  function zoomOf(m) { return m.segIndex % 2 ? 1.14 : 1.0; }
 
   function lastMedia(scenes) {
     for (var i = scenes.length - 1; i >= 0; i--) {
@@ -121,15 +165,20 @@
       var withIntro = s.introCard && n === 0 && only == null;
       if (withIntro && p.D < INTRO_SECONDS + 1.5 && !scene.durOverride) p.D = INTRO_SECONDS + 1.5;
       var media = scene.media || [];
+      var speech = [];
       if (!media.length) {
         tl.items.push({ start: t, duration: p.D, el: null, isVideo: false, srcIn: 0, srcLen: 1, audio: false,
           trans: n ? 'scene' : 'none', kb: kenBurns(si) });
       } else if (p.cover) {
         var tb = t;
         p.base.forEach(function (m, mi) {
-          tl.items.push({ start: tb, duration: p.baseLen[mi], el: m.el, isVideo: true, srcIn: srcIn(m, s.autoTrim),
+          var jump = mi > 0 && m.group && m.group === p.base[mi - 1].group;
+          var it = { start: tb, duration: p.baseLen[mi], el: m.el, isVideo: true, srcIn: srcIn(m, s.autoTrim),
             srcLen: p.baseLen[mi], audio: true, gain: m.voiceGain || 1, hidden: !!m.audioOnly,
-            trans: mi === 0 ? (n ? 'scene' : 'none') : 'cut', kb: kenBurns(si) });
+            trans: mi === 0 ? (n ? 'scene' : 'none') : (jump ? 'jump' : 'cut'), kb: kenBurns(si), zoom: m.group ? zoomOf(m) : 1 };
+          tl.items.push(it);
+          speech.push({ start: tb, len: p.baseLen[mi], srcIn: it.srcIn, m: m });
+          if (jump && it.zoom > 1 && s.sfx && !m.audioOnly) tl.sfx.push({ type: 'swish', at: tb - 0.04 });
           tb += p.baseLen[mi];
         });
         // Mở đầu và kết thúc cảnh bằng mặt người nói; phần giữa xen phối cảnh/flycam
@@ -150,22 +199,43 @@
         var scale = p.D / p.shares.reduce(function (a, b) { return a + b; }, 0);
         media.forEach(function (m, mi) {
           var d = p.shares[mi] * scale;
-          tl.items.push({ start: tt, duration: d, el: m.el, isVideo: m.isVideo, srcIn: srcIn(m, s.autoTrim),
+          var jump = mi > 0 && m.group && m.group === media[mi - 1].group;
+          var it = { start: tt, duration: d, el: m.el, isVideo: m.isVideo, srcIn: srcIn(m, s.autoTrim),
             srcLen: naturalLen(m, s.autoTrim), audio: p.talking && m.isVideo && m.keepAudio && m.hasAudio,
             gain: m.voiceGain || 1, hidden: !!(m.audioOnly && p.talking && m.keepAudio),
-            trans: mi === 0 ? (n ? 'scene' : 'none') : 'cut', kb: kenBurns(si * 7 + mi) });
+            trans: mi === 0 ? (n ? 'scene' : 'none') : (jump ? 'jump' : 'cut'), kb: kenBurns(si * 7 + mi), zoom: m.group ? zoomOf(m) : 1 };
+          tl.items.push(it);
+          if (it.audio) speech.push({ start: tt, len: d, srcIn: it.srcIn, m: m });
+          if (jump && it.zoom > 1 && s.sfx) tl.sfx.push({ type: 'swish', at: tt - 0.04 });
           tt += d;
         });
       }
+      // Thời điểm từng chữ cho phụ đề kiểu TikTok
+      var ranges = speech.length ? speech.map(function (x) { return [x.start, x.start + x.len]; }) :
+        p.voice ? [[t + 0.15, t + 0.15 + p.voice.duration]] :
+        [[t + (withIntro ? INTRO_SECONDS : 0) + 0.2, t + p.D - 0.3]];
+      var words = sceneWords(scene, speech, ranges);
       tl.overlays.push({ start: t, duration: p.D, kind: 'scene', text: scene.text, bigText: scene.bigText || [],
-        intro: withIntro, caption: scene.showTitle ? cleanTitle(scene.title) : '' });
+        intro: withIntro, caption: scene.showTitle ? cleanTitle(scene.title) : '', words: words });
+      if (s.sfx && s.subStyle !== 'box' && s.subtitles) {
+        var lastChing = -9;
+        words.forEach(function (w, wi) {
+          var next = words[wi + 1] ? words[wi + 1].w : '';
+          if (/\d/.test(w.w) && MONEY.test(w.w + ' ' + next) && w.t0 - lastChing > 2.5) {
+            tl.sfx.push({ type: /tỷ|triệu|đ/i.test(w.w + ' ' + next) ? 'ching' : 'pop', at: w.t0 });
+            lastChing = w.t0;
+          }
+        });
+      }
       if (p.voice) tl.voices.push({ buffer: p.voice, at: t + 0.15 });
       if (s.sfx) {
         if (n === 0) tl.sfx.push({ type: 'boom', at: 0.05 });
         if (withIntro && project.info.gia) tl.sfx.push({ type: 'ting', at: 1.15 });
         if (n > 0) tl.sfx.push({ type: 'whoosh', at: t - 0.6 });
         var bt0 = withIntro ? INTRO_SECONDS : 0;
-        (scene.bigText || []).forEach(function (_, li) { tl.sfx.push({ type: 'pop', at: t + bt0 + 0.25 + li * 0.5 }); });
+        (scene.bigText || []).forEach(function (_, li) {
+          tl.sfx.push({ type: s.textFx === 'marker' ? 'swipe' : 'pop', at: t + bt0 + 0.25 + li * 0.5 });
+        });
       }
       t += p.D;
       n++;
@@ -177,7 +247,7 @@
       t = INTRO_SECONDS + 1;
     }
     if (s.endCard && n) {
-      if (s.sfx) tl.sfx.push({ type: 'whoosh', at: t - 0.6 });
+      if (s.sfx) { tl.sfx.push({ type: 'riser', at: t - 1.6, dur: 1.5 }); tl.sfx.push({ type: 'whoosh', at: t - 0.6 }); }
       t = addEnd(tl, project, t);
     }
     tl.total = Math.max(t, 0.5);
@@ -221,7 +291,7 @@
 
   window.BdsTimeline = {
     IMG_SECONDS: IMG_SECONDS, INTRO_SECONDS: INTRO_SECONDS, END_SECONDS: END_SECONDS,
-    readSeconds: readSeconds, cleanTitle: cleanTitle, headline: headline,
+    readSeconds: readSeconds, cleanTitle: cleanTitle, headline: headline, distributeWords: distributeWords,
     buildFull: buildFull, buildTrailer: buildTrailer,
     buildScene: function (project, i) { return buildFull(project, i); }
   };

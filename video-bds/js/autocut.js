@@ -1,0 +1,247 @@
+/* Tự dựng từ một video dài: quét giọng nói, cắt bỏ khoảng ngừng (cắt nhảy), chia cảnh, tạo phụ đề. */
+(function () {
+  'use strict';
+
+  var WIN = 0.02; // độ phân giải quét âm thanh (giây)
+
+  /** Mức âm lượng theo từng khoảng 20ms (đã trộn các kênh). */
+  function envelope(buf) {
+    var sr = buf.sampleRate, win = Math.max(1, Math.floor(sr * WIN)), n = Math.floor(buf.length / win);
+    var chans = [];
+    for (var c = 0; c < buf.numberOfChannels; c++) chans.push(buf.getChannelData(c));
+    var rms = new Float32Array(n);
+    for (var w = 0; w < n; w++) {
+      var sum = 0, cnt = 0;
+      for (var ci = 0; ci < chans.length; ci++) {
+        var d = chans[ci];
+        for (var j = w * win; j < (w + 1) * win; j += 2) { sum += d[j] * d[j]; cnt++; }
+      }
+      rms[w] = Math.sqrt(sum / cnt);
+    }
+    return rms;
+  }
+
+  /**
+   * Tìm các đoạn đang nói.
+   * opts.minPause: khoảng ngừng ngắn nhất sẽ bị cắt (giây); opts.pad: giữ lại trước/sau mỗi đoạn.
+   */
+  function findSpeech(buf, opts) {
+    opts = opts || {};
+    var minPause = opts.minPause || 0.35, padIn = opts.padIn != null ? opts.padIn : 0.08, padOut = opts.padOut != null ? opts.padOut : 0.14;
+    var rms = envelope(buf), n = rms.length;
+    var sorted = Array.prototype.slice.call(rms).sort(function (a, b) { return a - b; });
+    var floor = sorted[Math.floor(n * 0.15)] || 0, p95 = sorted[Math.floor(n * 0.95)] || 0;
+    var thr = Math.max(0.005, floor + (p95 - floor) * (opts.sensitivity || 0.12));
+    var runs = [], start = -1;
+    for (var i = 0; i <= n; i++) {
+      var on = i < n && rms[i] >= thr;
+      if (on && start < 0) start = i;
+      if (!on && start >= 0) { runs.push([start * WIN, i * WIN]); start = -1; }
+    }
+    // Nối các đoạn cách nhau ít hơn khoảng ngừng tối thiểu; bỏ tiếng động quá ngắn
+    var merged = [];
+    runs.forEach(function (r) {
+      var last = merged[merged.length - 1];
+      if (last && r[0] - last[1] < minPause) last[1] = r[1];
+      else merged.push(r.slice());
+    });
+    merged = merged.filter(function (r) { return r[1] - r[0] >= 0.18; });
+    var dur = buf.duration;
+    var out = merged.map(function (r) { return [Math.max(0, r[0] - padIn), Math.min(dur, r[1] + padOut)]; });
+    // Phần đệm có thể chồng lên nhau: nối lại
+    var fin = [];
+    out.forEach(function (r) {
+      var last = fin[fin.length - 1];
+      if (last && r[0] <= last[1]) last[1] = Math.max(last[1], r[1]);
+      else fin.push(r);
+    });
+    var active = [];
+    for (var k = 0; k < n; k++) if (rms[k] >= thr) active.push(rms[k]);
+    active.sort(function (a, b) { return a - b; });
+    var med = active[Math.floor(active.length / 2)] || p95 || 0.1;
+    return { segments: fin, voiceGain: Math.max(0.5, Math.min(4, 0.12 / med)), duration: dur };
+  }
+
+  /**
+   * Gom các đoạn nói thành cảnh: tách cảnh ở chỗ ngừng dài, hoặc khi cảnh đã dài quá maxScene giây.
+   */
+  function groupScenes(segments, opts) {
+    opts = opts || {};
+    var longPause = opts.longPause || 0.9, maxScene = opts.maxScene || 14;
+    var scenes = [], cur = [], len = 0;
+    segments.forEach(function (s, i) {
+      var prev = segments[i - 1];
+      var gap = prev ? s[0] - prev[1] : 0;
+      if (cur.length && (gap >= longPause || len >= maxScene)) { scenes.push(cur); cur = []; len = 0; }
+      cur.push(s);
+      len += s[1] - s[0];
+    });
+    if (cur.length) scenes.push(cur);
+    return scenes;
+  }
+
+  /** Lấy âm thanh 16kHz một kênh (đầu vào cho nhận dạng giọng nói). */
+  function to16k(buf) {
+    var ctx = new OfflineAudioContext(1, Math.ceil(buf.duration * 16000), 16000);
+    var src = ctx.createBufferSource();
+    src.buffer = buf;
+    src.connect(ctx.destination);
+    src.start();
+    return ctx.startRendering().then(function (r) { return r.getChannelData(0); });
+  }
+
+  var asrPromise = null;
+
+  /**
+   * Nhận dạng giọng nói tiếng Việt ngay trên máy (Whisper). Lần đầu tải mô hình khoảng 250MB rồi lưu lại.
+   * Trả về danh sách chữ { w, t0, t1 } theo thời gian trong video gốc.
+   */
+  function transcribe(buf, onProgress) {
+    if (!asrPromise) {
+      asrPromise = import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.2').then(function (T) {
+        return T.pipeline('automatic-speech-recognition', 'Xenova/whisper-small', {
+          dtype: 'q8',
+          device: navigator.gpu ? 'webgpu' : 'wasm',
+          progress_callback: function (p) {
+            if (onProgress && p.status === 'progress' && p.total) onProgress('Đang tải mô hình nhận dạng giọng nói… ' + Math.round(p.loaded / p.total * 100) + '%');
+          }
+        });
+      });
+      asrPromise.catch(function () { asrPromise = null; });
+    }
+    return Promise.all([asrPromise, to16k(buf)]).then(function (r) {
+      if (onProgress) onProgress('Đang nghe và chép lời (có thể mất vài phút)…');
+      return r[0](r[1], { language: 'vietnamese', task: 'transcribe', chunk_length_s: 30, stride_length_s: 5, return_timestamps: true });
+    }).then(function (out) {
+      var words = [];
+      (out.chunks || [{ text: out.text, timestamp: [0, buf.duration] }]).forEach(function (c) {
+        var a = c.timestamp[0] || 0, b = c.timestamp[1] != null ? c.timestamp[1] : a + 3;
+        var ws = window.BdsTimeline.distributeWords(c.text, [[a, b]]);
+        words = words.concat(ws);
+      });
+      return words;
+    });
+  }
+
+  /** Gán chữ (theo thời gian video gốc) vào từng đoạn nói. */
+  function wordsInRange(words, a, b) {
+    return words.filter(function (w) { var m = (w.t0 + w.t1) / 2; return m >= a && m < b; });
+  }
+
+  /** Rải lời thoại dán sẵn theo tổng thời gian đang nói (khi không dùng nhận dạng giọng nói). */
+  function scriptWords(text, segments) {
+    return window.BdsTimeline.distributeWords(text, segments);
+  }
+
+  /* ---------- Xếp đoạn nói vào đúng cảnh theo kịch bản ---------- */
+
+  /** Chuẩn hoá chữ tiếng Việt để so sánh (bỏ dấu, chữ thường). */
+  function norm(t) {
+    return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd')
+      .replace(/[^a-z0-9%]+/g, ' ').trim();
+  }
+
+  function tokens(t) { return norm(t).split(' ').filter(Boolean); }
+
+  function bigrams(tk) {
+    var out = [];
+    for (var i = 0; i + 1 < tk.length; i++) out.push(tk[i] + ' ' + tk[i + 1]);
+    return out;
+  }
+
+  /** Mức khớp giữa lời nói (đã nhận dạng) và lời thoại một cảnh; kèm vị trí khớp trong kịch bản. */
+  function similarity(spoken, script) {
+    var a = tokens(spoken), b = tokens(script);
+    if (!a.length || !b.length) return { score: 0, pos: 0, from: 0, to: 0 };
+    var bb = bigrams(b), bIdx = {};
+    bb.forEach(function (g, i) { (bIdx[g] = bIdx[g] || []).push(i); });
+    var uni = {};
+    b.forEach(function (w) { uni[w] = 1; });
+    var ab = bigrams(a), hitB = 0, hitU = 0, pos = [];
+    ab.forEach(function (g) { if (bIdx[g]) { hitB++; pos.push(bIdx[g][0]); } });
+    a.forEach(function (w) { if (uni[w]) hitU++; });
+    var score = (ab.length ? hitB / ab.length : 0) * 0.65 + (hitU / a.length) * 0.35;
+    pos.sort(function (x, y) { return x - y; });
+    // Vùng kịch bản được nói tới (bỏ các điểm khớp lẻ ở hai đầu)
+    var lo = pos.length ? pos[Math.floor(pos.length * 0.1)] : 0, hi = pos.length ? pos[Math.ceil(pos.length * 0.9) - 1] + 1 : 0;
+    return { score: score, pos: pos.length ? pos[Math.floor(pos.length / 2)] : 0, from: lo, to: Math.min(b.length, hi + 1) };
+  }
+
+  /** Gom đoạn nói của một clip thành từng câu (ngắt ở chỗ ngừng dài). */
+  function utterances(clip, longPause) {
+    var groups = groupScenes(clip.segments, { longPause: longPause || 0.7, maxScene: 30 });
+    return groups.map(function (segs) {
+      var a = segs[0][0], b = segs[segs.length - 1][1];
+      var ws = clip.words ? wordsInRange(clip.words, a, b) : [];
+      return { clip: clip, segs: segs, start: a, end: b, text: ws.map(function (w) { return w.w; }).join(' ') };
+    });
+  }
+
+  /**
+   * Gán từng câu nói vào cảnh khớp nhất. Câu không khớp cảnh nào (nói hỏng, nói ngoài lề) bị bỏ.
+   * Nhiều lần nói cùng một ý trong một cảnh: giữ lần nói sau cùng (thường là bản quay lại tốt hơn).
+   */
+  function matchUtterances(utts, scenes) {
+    var result = scenes.map(function () { return []; });
+    var dropped = [];
+    utts.forEach(function (u, ui) {
+      u.order = ui;
+      var best = -1, bs = null;
+      scenes.forEach(function (sc, si) {
+        var sim = similarity(u.text, sc.text + ' ' + (sc.bigText || []).join(' '));
+        if (!bs || sim.score > bs.score) { bs = sim; best = si; }
+      });
+      if (bs && bs.score >= 0.3 && tokens(u.text).length >= 2) { u.sim = bs; result[best].push(u); }
+      else dropped.push(u);
+    });
+    result = result.map(function (list) {
+      // Bỏ bản nói trước nếu bị nói lại gần như y hệt sau đó
+      var keep = list.filter(function (u) {
+        return !list.some(function (v) {
+          if (v === u || v.order < u.order) return false;
+          var overlap = Math.min(u.sim.to, v.sim.to) - Math.max(u.sim.from, v.sim.from);
+          var span = Math.max(1, Math.min(u.sim.to - u.sim.from, v.sim.to - v.sim.from));
+          return overlap / span > 0.6;
+        });
+      });
+      list.forEach(function (u) { if (keep.indexOf(u) === -1) { u.retake = true; dropped.push(u); } });
+      return keep.sort(function (x, y) { return x.sim.pos - y.sim.pos || x.order - y.order; });
+    });
+    return { scenes: result, dropped: dropped };
+  }
+
+  /** Ghép ảnh/flycam vào cảnh theo tên file (VD: "ho-boi.jpg" → cảnh Tiện ích nhắc tới hồ bơi). */
+  function matchBroll(name, scenes) {
+    var tk = tokens(name.replace(/\.[a-z0-9]+$/i, '')).filter(function (w) { return w.length >= 2 && !/^(img|vid|dsc|mov|mp4|jpg|png|canh|video|clip|quay|anh|hinh|file|final|ban|cut|\d+)$/.test(w); });
+    var best = -1, bs = 0;
+    scenes.forEach(function (sc, si) {
+      var hay = ' ' + norm([sc.title, sc.text, sc.shotNote, (sc.bigText || []).join(' ')].join(' ')) + ' ';
+      var sc1 = 0;
+      tk.forEach(function (w, i) {
+        if (hay.indexOf(' ' + w + ' ') !== -1) sc1 += 1;
+        if (tk[i + 1] && hay.indexOf(' ' + w + ' ' + tk[i + 1] + ' ') !== -1) sc1 += 2;
+      });
+      if (sc1 > bs) { bs = sc1; best = si; }
+    });
+    return best;
+  }
+
+  /** Lấy các chữ gốc (giữ dấu, giữ số) của kịch bản ứng với vùng [from, to) theo chỉ số chữ đã chuẩn hoá. */
+  function scriptSpan(text, from, to) {
+    var words = (text || '').replace(/[“”"]/g, '').split(/\s+/).filter(Boolean), out = [], k = 0;
+    words.forEach(function (w) {
+      var n = tokens(w).length;
+      if (n && k + n > from && k < to) out.push(w);
+      k += n;
+    });
+    return out.join(' ');
+  }
+
+  window.BdsAutoCut = {
+    scriptSpan: scriptSpan,
+    findSpeech: findSpeech, groupScenes: groupScenes, transcribe: transcribe,
+    wordsInRange: wordsInRange, scriptWords: scriptWords,
+    norm: norm, tokens: tokens, similarity: similarity, utterances: utterances,
+    matchUtterances: matchUtterances, matchBroll: matchBroll
+  };
+})();

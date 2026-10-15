@@ -162,6 +162,111 @@
     n.stop(t + 0.7);
   };
 
+  /** Tiếng "vút" ngắn khi cắt và zoom (kiểu TikTok). */
+  AudioEngine.prototype.swish = function (t) {
+    var ctx = this.ctx;
+    var src = this._track(ctx.createBufferSource());
+    src.buffer = this.noise;
+    var hp = ctx.createBiquadFilter();
+    hp.type = 'bandpass';
+    hp.Q.value = 0.8;
+    hp.frequency.setValueAtTime(1800, t);
+    hp.frequency.exponentialRampToValueAtTime(6000, t + 0.14);
+    var g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.32, t + 0.05);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.18);
+    src.connect(hp).connect(g).connect(this.sfx);
+    src.start(t, Math.random());
+    src.stop(t + 0.2);
+  };
+
+  /** Tiếng "quẹt" khi vệt bút dạ quang chạy qua chữ. */
+  AudioEngine.prototype.swipe = function (t) {
+    var ctx = this.ctx;
+    var src = this._track(ctx.createBufferSource());
+    src.buffer = this.noise;
+    var bp = ctx.createBiquadFilter();
+    bp.type = 'bandpass';
+    bp.Q.value = 2;
+    bp.frequency.setValueAtTime(900, t);
+    bp.frequency.exponentialRampToValueAtTime(2600, t + 0.3);
+    var g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.4, t + 0.08);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.32);
+    src.connect(bp).connect(g).connect(this.sfx);
+    src.start(t, Math.random());
+    src.stop(t + 0.35);
+  };
+
+  /** Tiếng "ting ting" kiểu máy thu tiền khi nhắc tới giá. */
+  AudioEngine.prototype.ching = function (t) {
+    var ctx = this.ctx;
+    [[2093, 0], [2637, 0.09]].forEach(function (p) {
+      [1, 2.76, 5.4].forEach(function (mult, i) {
+        var o = this._track(ctx.createOscillator());
+        o.type = 'sine';
+        o.frequency.value = p[0] * mult;
+        var g = ctx.createGain();
+        var a = t + p[1];
+        g.gain.setValueAtTime(0.0001, a);
+        g.gain.exponentialRampToValueAtTime([0.22, 0.08, 0.03][i], a + 0.004);
+        g.gain.exponentialRampToValueAtTime(0.0001, a + 0.9 / mult);
+        o.connect(g).connect(this.sfx);
+        o.start(a);
+        o.stop(a + 1);
+      }, this);
+    }, this);
+    // tiếng ngăn kéo tiền
+    var n = this._track(ctx.createBufferSource());
+    n.buffer = this.noise;
+    var hp = ctx.createBiquadFilter();
+    hp.type = 'highpass';
+    hp.frequency.value = 3000;
+    var ng = ctx.createGain();
+    ng.gain.setValueAtTime(0.18, t);
+    ng.gain.exponentialRampToValueAtTime(0.0001, t + 0.06);
+    n.connect(hp).connect(ng).connect(this.sfx);
+    n.start(t, Math.random());
+    n.stop(t + 0.08);
+  };
+
+  /** Tiếng nhạc vút lên dồn dập trước khi hiện khung liên hệ. */
+  AudioEngine.prototype.riser = function (t, dur) {
+    var ctx = this.ctx;
+    dur = dur || 1.5;
+    var src = this._track(ctx.createBufferSource());
+    src.buffer = this.noise;
+    src.loop = true;
+    var bp = ctx.createBiquadFilter();
+    bp.type = 'bandpass';
+    bp.Q.value = 3;
+    bp.frequency.setValueAtTime(300, t);
+    bp.frequency.exponentialRampToValueAtTime(5000, t + dur);
+    var g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.3, t + dur * 0.95);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.05);
+    src.connect(bp).connect(g).connect(this.sfx);
+    src.start(t);
+    src.stop(t + dur + 0.1);
+    var o = this._track(ctx.createOscillator());
+    o.type = 'sawtooth';
+    o.frequency.setValueAtTime(110, t);
+    o.frequency.exponentialRampToValueAtTime(880, t + dur);
+    var lp = ctx.createBiquadFilter();
+    lp.type = 'lowpass';
+    lp.frequency.value = 1800;
+    var og = ctx.createGain();
+    og.gain.setValueAtTime(0.0001, t);
+    og.gain.exponentialRampToValueAtTime(0.06, t + dur * 0.9);
+    og.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.05);
+    o.connect(lp).connect(og).connect(this.sfx);
+    o.start(t);
+    o.stop(t + dur + 0.1);
+  };
+
   /* ---------- Nhạc nền tự tạo ---------- */
 
   AudioEngine.prototype._pad = function (notes, t, dur, vol) {

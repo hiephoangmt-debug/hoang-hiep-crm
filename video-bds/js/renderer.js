@@ -84,6 +84,7 @@
   }
 
   var TEXT_FX = {
+    'marker': 'Bút dạ quang (TikTok)',
     'pop': 'Bật lên',
     'slide': 'Trượt vào',
     'type': 'Gõ từng chữ'
@@ -141,27 +142,33 @@
    */
   Renderer.prototype.syncVideos = function (t, playing, setGain) {
     var items = this.timeline.items.concat(this.timeline.covers || []);
+    // Mỗi thẻ video: ưu tiên đoạn đang chiếu, sau đó đoạn sắp chiếu (để tua sẵn, tránh giật ở chỗ cắt)
     var owners = new Map();
     for (var i = 0; i < items.length; i++) {
       var it = items[i];
       if (!it.isVideo || !it.el) continue;
-      var lead = it.trans ? this.trLen(it) : 0.25;
-      var active = t >= it.start - lead && t < it.start + it.duration;
+      var lead = it.trans === 'jump' ? 0.6 : (it.trans ? Math.max(this.trLen(it), 0.4) : 0.4);
+      var rank = t >= it.start && t < it.start + it.duration ? 2 : (t >= it.start - lead && t < it.start ? 1 : 0);
       var cur = owners.get(it.el);
-      if (!cur || (active && !cur.active)) owners.set(it.el, { item: it, active: active });
+      if (!cur || rank > cur.rank) owners.set(it.el, { item: it, rank: rank });
     }
     owners.forEach(function (o, v) {
       var it = o.item;
-      if (setGain) setGain(v, o.active && it.audio && t >= it.start ? (it.gain || 1) : 0);
-      if (!o.active) { if (!v.paused) v.pause(); return; }
-      var local = Math.max(0, t - it.start);
+      if (setGain) setGain(v, o.rank === 2 && it.audio ? (it.gain || 1) : 0);
+      if (o.rank === 0) { if (!v.paused) v.pause(); return; }
+      var local = t - it.start;
+      if (local < 0) { // sắp chiếu: tua sẵn tới điểm đầu và đứng yên
+        if (!v.paused) v.pause();
+        if (Math.abs(v.currentTime - it.srcIn) > 0.05 && !v.seeking) v.currentTime = it.srcIn;
+        return;
+      }
       var target = it.srcIn + (it.srcLen > 0 ? local % it.srcLen : local);
       if (v.duration) target = Math.min(target, v.duration - 0.05);
       if (!playing) {
         if (Math.abs(v.currentTime - target) > 0.05) v.currentTime = target;
         if (!v.paused) v.pause();
       } else if (v.paused) {
-        v.currentTime = target;
+        if (Math.abs(v.currentTime - target) > 0.08) v.currentTime = target;
         var p = v.play();
         if (p && p.catch) p.catch(function () {});
       } else if (Math.abs(v.currentTime - target) > 0.3) {
@@ -185,7 +192,10 @@
         ctx.filter = 'blur(' + Math.round(18 * this.unit) + 'px)';
         drawCover(ctx, it.el, W, H, 1.15 + 0.05 * e, 0, 0);
       } else if (it.isVideo) {
-        drawCover(ctx, it.el, W, H, 1.0 + 0.04 * e, 0, 0);
+        // Zoom đẩy ở chỗ cắt nhảy: bật nhanh lên rồi giữ
+        var z = it.zoom || 1;
+        if (z > 1) z = 1 + (z - 1) * easeOut((t - it.start) / 0.12);
+        drawCover(ctx, it.el, W, H, z * (1.0 + 0.03 * e), 0, 0);
       } else {
         var k = it.kb;
         drawCover(ctx, it.el, W, H, k.s0 + (k.s1 - k.s0) * e, k.x0 + (k.x1 - k.x0) * e, k.y0 + (k.y1 - k.y0) * e);
@@ -303,7 +313,9 @@
       if (o.bigText && o.bigText.length && bl > 0) {
         this.drawBigText(o.bigText, bl, o.duration - introEnd, { fast: o.fast });
       }
-      if (o.text && s.subtitles && local > introEnd) {
+      if (s.subtitles && s.subStyle !== 'box' && o.words && o.words.length) {
+        if (!o.intro || local > introEnd) this.drawWordCaptions(o.words, o.start + local);
+      } else if (o.text && s.subtitles && local > introEnd) {
         this.drawSubtitle(o.text, local - introEnd, o.duration - introEnd);
       }
     }
@@ -365,6 +377,43 @@
         var e = easeOut(p);
         ctx.globalAlpha *= clamp(p * 2, 0, 1);
         ctx.translate((1 - e) * (i % 2 ? W : -W) * 0.6, 0);
+      } else if (fx === 'marker') {
+        // Vệt bút dạ quang chạy từ trái sang phải, chữ trắng viền đen đổi sang chữ đen trên nền màu
+        var mk = easeOut(p * 0.9);
+        var fs = size;
+        ctx.globalAlpha *= clamp(p * 4, 0, 1);
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = 'left';
+        ctx.font = '900 ' + fs + 'px ' + FONT;
+        var tx = x + 35 * u, ty = y + bh / 2 + 3 * u;
+        ctx.save();
+        ctx.translate(0, (1 - easeOut(p * 2)) * 18 * u);
+        ctx.beginPath();
+        ctx.moveTo(x, y + bh * 0.12);
+        ctx.lineTo(x + w * mk + 18 * u, y + bh * 0.04);
+        ctx.lineTo(x + w * mk, y + bh * 0.96);
+        ctx.lineTo(x - 8 * u, y + bh * 0.9);
+        ctx.closePath();
+        ctx.fillStyle = theme.main;
+        ctx.fill();
+        ctx.lineJoin = 'round';
+        ctx.lineWidth = fs * 0.14;
+        ctx.strokeStyle = 'rgba(0,0,0,0.85)';
+        ctx.strokeText(text, tx, ty);
+        ctx.fillStyle = '#fff';
+        ctx.fillText(text, tx, ty);
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(x - 10 * u, y, w * mk + 10 * u, bh);
+        ctx.clip();
+        ctx.fillStyle = theme.main;
+        ctx.fillRect(x - 10 * u, y, w * mk + 10 * u, bh);
+        ctx.fillStyle = '#111';
+        ctx.fillText(text, tx, ty);
+        ctx.restore();
+        ctx.restore();
+        ctx.restore();
+        return;
       } else if (fx === 'type') {
         var n = Math.floor((local - t0) * 30);
         text = r.t.slice(0, Math.max(1, n));
@@ -388,6 +437,81 @@
       ctx.fillText(text, x + 35 * u, y + bh / 2 + 3 * u);
       ctx.restore();
     });
+  };
+
+  /** Gom chữ thành từng cụm ngắn (tối đa 3 chữ) để hiện kiểu TikTok. */
+  function phrasesOf(words) {
+    if (words._phr) return words._phr;
+    var out = [], cur = [];
+    var chars = function (a) { return a.reduce(function (n, w) { return n + w.w.length + 1; }, 0); };
+    words.forEach(function (w) {
+      var last = cur[cur.length - 1];
+      if (cur.length && (cur.length >= 3 || chars(cur) + w.w.length > 16 || /[.,!?…:;]$/.test(last.w) || w.t0 - last.t1 > 0.6)) {
+        out.push(cur);
+        cur = [];
+      }
+      cur.push(w);
+    });
+    if (cur.length) out.push(cur);
+    out.forEach(function (ph, i) {
+      ph.t0 = ph[0].t0;
+      var next = out[i + 1];
+      ph.t1 = next ? Math.min(next[0].t0, ph[ph.length - 1].t1 + 0.6) : ph[ph.length - 1].t1 + 0.5;
+    });
+    words._phr = out;
+    return out;
+  }
+
+  /** Phụ đề từng chữ kiểu TikTok/CapCut: chữ to viền đen, chữ đang nói đổi màu và bật lên. */
+  Renderer.prototype.drawWordCaptions = function (words, t) {
+    var phr = phrasesOf(words);
+    var ph = null;
+    for (var i = 0; i < phr.length; i++) if (t >= phr[i].t0 - 0.05 && t < phr[i].t1) { ph = phr[i]; break; }
+    if (!ph) return;
+    var ctx = this.ctx, W = this.W, H = this.H, u = this.unit, theme = this.theme;
+    var size = Math.round((W > H ? 74 : 88) * u);
+    ctx.font = '900 ' + size + 'px ' + FONT;
+    var labels = ph.map(function (w) { return w.w.replace(/[“”"]/g, '').toUpperCase(); });
+    var space = size * 0.28;
+    var widths = labels.map(function (l) { return ctx.measureText(l).width; });
+    var total = widths.reduce(function (a, b) { return a + b; }, 0) + space * (labels.length - 1);
+    var maxW = W - 120 * u;
+    if (total > maxW) {
+      size = Math.floor(size * maxW / total);
+      ctx.font = '900 ' + size + 'px ' + FONT;
+      space = size * 0.28;
+      widths = labels.map(function (l) { return ctx.measureText(l).width; });
+      total = widths.reduce(function (a, b) { return a + b; }, 0) + space * (labels.length - 1);
+    }
+    var y = H * (W > H ? 0.8 : 0.68);
+    var enter = easeBack((t - ph.t0) / 0.16);
+    ctx.save();
+    ctx.translate(W / 2, y);
+    ctx.scale(0.75 + 0.25 * enter, 0.75 + 0.25 * enter);
+    ctx.translate(-W / 2, -y);
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'left';
+    ctx.lineJoin = 'round';
+    var x = (W - total) / 2;
+    ph.forEach(function (w, j) {
+      var next = ph[j + 1];
+      var on = t >= w.t0 && t < (next ? next.t0 : ph.t1);
+      var num = /\d/.test(w.w);
+      var pop = on ? 1 + 0.14 * (1 - clamp((t - w.t0) / 0.18, 0, 1)) : 1;
+      var cx = x + widths[j] / 2;
+      ctx.save();
+      ctx.translate(cx, y);
+      ctx.scale(pop * (on ? 1.06 : 1), pop * (on ? 1.06 : 1));
+      ctx.translate(-cx, -y);
+      ctx.lineWidth = size * 0.2;
+      ctx.strokeStyle = '#000';
+      ctx.strokeText(labels[j], x, y);
+      ctx.fillStyle = on ? theme.main : (num ? theme.main : '#fff');
+      ctx.fillText(labels[j], x, y);
+      ctx.restore();
+      x += widths[j] + space;
+    });
+    ctx.restore();
   };
 
   Renderer.prototype.drawSubtitle = function (text, local, duration) {

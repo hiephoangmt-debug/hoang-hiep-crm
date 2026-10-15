@@ -125,10 +125,34 @@
         Chọn một cách bắt đầu bên dưới, sau đó sửa tùy ý.
       </div>
       <div class="starters">
+        <button class="starter hot" id="btnStartVideo" type="button"><b>🎬 Tự dựng từ 1 video</b><span>Bỏ video đã quay (có sẵn giọng nói): tự cắt chỗ ngập ngừng, chia cảnh, thêm phụ đề từng chữ</span></button>
+        <input type="file" id="videoInput" accept="video/*" hidden>
         <button class="starter" id="btnStartProject" type="button"><b>🏙️ Giới thiệu dự án</b><span>Tự viết 5–7 cảnh: hook, giải pháp, quy mô, vị trí, tiện ích, tài chính, kêu gọi</span></button>
         <button class="starter" id="btnStartSheet" type="button"><b>📋 Nhập từ Google Sheets</b><span>Dán link hoặc copy bảng kịch bản có sẵn (cột: Cảnh, Lời thoại, Hình ảnh/Chữ)</span></button>
         <button class="starter" id="btnStartQuick" type="button"><b>⚡ Nhanh từ ảnh</b><span>Chọn ảnh, mỗi ảnh thành một cảnh, lời thoại tự viết</span></button>
         <input type="file" id="quickInput" accept="image/*,video/*" multiple hidden>
+      </div>
+      <div class="box" id="autoBox" hidden>
+        <p><b id="autoName">Video</b> <span class="muted" id="autoInfo"></span></p>
+        <div class="grid">
+          <label>Mức cắt chỗ ngừng
+            <select id="autoPause">
+              <option value="0.25">Cắt kỹ: bỏ mọi chỗ ngập ngừng (nhịp nhanh kiểu TikTok)</option>
+              <option value="0.4" selected>Vừa phải</option>
+              <option value="0.8">Nhẹ: chỉ bỏ khoảng lặng dài</option>
+            </select>
+          </label>
+          <label>Mỗi cảnh dài tối đa (giây)
+            <input type="number" id="autoMax" min="5" max="60" value="14">
+          </label>
+        </div>
+        <div class="voice-options" style="margin-top:12px">
+          <label class="choice"><input type="radio" name="autoSub" value="script" checked> <span>📝 Dán lời thoại để làm phụ đề (khớp tự động theo giọng nói)</span></label>
+          <label class="choice"><input type="radio" name="autoSub" value="asr"> <span>🤖 Tự nghe và chép lời (thử nghiệm, lần đầu tải khoảng 250MB, máy yếu sẽ chậm)</span></label>
+          <label class="choice"><input type="radio" name="autoSub" value="none"> <span>🚫 Không phụ đề</span></label>
+        </div>
+        <textarea id="autoScript" rows="4" placeholder="Dán lời thoại đã nói trong video (đúng thứ tự). Có thể bỏ trống." style="margin-top:10px"></textarea>
+        <div class="row" style="margin-top:10px"><button class="btn accent" id="btnAutoGo" type="button">✂️ Bắt đầu tự dựng</button><span class="muted small-text" id="autoStatus"></span></div>
       </div>
       <div class="box" id="sheetBox" hidden>
         <label>Link Google Sheets (bảng phải để chế độ “Bất kỳ ai có đường liên kết đều xem được”)
@@ -162,6 +186,31 @@
         <br><b>Mẹo dựng chuyên nghiệp:</b> cảnh nào có <b>clip nói</b> (🔊) kèm <b>ảnh phối cảnh / clip flycam</b> (tắt tiếng) thì tiếng nói chạy liên tục,
         còn hình tự xen phối cảnh, flycam rồi quay lại người nói.
       </div>
+      <div class="box assemble">
+        <h3>🤖 Tự dựng toàn bộ theo kịch bản</h3>
+        <p>Bỏ <b>tất cả video đã quay</b> và <b>ảnh phối cảnh / clip flycam</b> vào đây. Phần mềm tự quét giọng nói, cắt chỗ ngập ngừng,
+          xếp từng đoạn nói vào đúng cảnh trong kịch bản (bỏ đoạn nói hỏng, giữ bản quay lại), cảnh nào chưa quay thì lắp phối cảnh vào.</p>
+        <label class="dropzone" id="assembleDrop">
+          <input type="file" id="assembleInput" accept="video/*,image/*" multiple hidden>
+          <div class="dz-icon">📥</div>
+          <div><b>Bấm để chọn</b> hoặc kéo thả nhiều video và ảnh vào đây</div>
+          <div class="muted small-text" id="assembleFiles">Đặt tên ảnh theo nội dung (VD: phoi-canh.jpg, ho-boi.jpg, ban-do.png) để tự vào đúng cảnh.</div>
+        </label>
+        <div class="grid" style="margin-top:12px">
+          <label>Mức cắt chỗ ngừng
+            <select id="assemblePause">
+              <option value="0.25">Cắt kỹ: nhịp nhanh kiểu TikTok</option>
+              <option value="0.4" selected>Vừa phải</option>
+              <option value="0.8">Nhẹ: chỉ bỏ khoảng lặng dài</option>
+            </select>
+          </label>
+          <label class="check" style="align-self:end"><input type="checkbox" id="assembleAsr" checked> Tự nghe lời nói để xếp clip vào đúng cảnh (lần đầu tải mô hình khoảng 250MB)</label>
+        </div>
+        <div class="row" style="margin-top:12px"><button class="btn accent big" id="btnAssemble" type="button" disabled>🤖 Tự dựng toàn bộ</button></div>
+        <div id="assembleProgress" class="progress" hidden><div class="bar"></div><span></span></div>
+        <div id="assembleReport" class="report" hidden></div>
+      </div>
+      <h3>Hoặc thêm ảnh/clip cho từng cảnh</h3>
       <label class="check"><input type="checkbox" id="autoTrim" checked> Tự cắt khoảng lặng ở đầu và cuối mỗi clip</label>
       <ol class="shoot-list" id="shootList"></ol>
     </div>
@@ -206,6 +255,12 @@
         </label>
         <label>Hiệu ứng chữ lớn
           <select id="textFxSelect"></select>
+        </label>
+        <label>Kiểu phụ đề
+          <select id="subStyleSelect">
+            <option value="tiktok">Từng chữ to, chữ đang nói đổi màu (kiểu TikTok)</option>
+            <option value="box">Cả câu trong khung tối</option>
+          </select>
         </label>
         <label>Kiểu chuyển cảnh
           <select id="transitionSelect"></select>
@@ -359,6 +414,7 @@
 <script src="js/audio.js"></script>
 <script src="js/timeline.js"></script>
 <script src="js/renderer.js"></script>
+<script src="js/autocut.js"></script>
 <script src="js/demo.js"></script>
 <script src="js/webm-fix.js"></script>
 <script src="js/app.js"></script>

@@ -33,6 +33,25 @@ Sau khi cài, ứng dụng có biểu tượng riêng và mở được cả khi
 | 5. Hiệu ứng và nhạc | Khung 9:16 / 16:9 / 1:1, màu, hiệu ứng chữ (bật lên, trượt vào, gõ chữ), chuyển cảnh, nhạc nền tự soạn hoặc nhạc riêng |
 | 6. Xuất video | **Video đầy đủ**, **Trailer** (cắt nhanh, chữ to, nhạc sôi động), **Từng cảnh riêng** (để đăng Reels/TikTok hằng ngày) |
 
+### 🤖 Tự dựng toàn bộ theo kịch bản (Bước 3)
+Chỉ cần có kịch bản (Bước 2) và bỏ **tất cả video đã quay + ảnh phối cảnh/flycam** vào khung “Tự dựng toàn bộ”:
+1. Quét giọng nói từng clip, **cắt bỏ chỗ ngập ngừng** (chọn mức cắt kỹ / vừa / nhẹ), tự cân âm lượng giọng.
+2. **Nghe lời nói** (nhận dạng tiếng Việt ngay trên máy, lần đầu tải mô hình khoảng 250MB) để xếp từng đoạn vào **đúng cảnh** trong kịch bản,
+   bỏ đoạn nói hỏng, giữ bản quay lại. Nếu máy không chạy được phần nghe, clip được xếp theo thứ tự tên file.
+3. Ảnh/flycam tự vào cảnh theo tên file (VD: `ho-boi.jpg` vào cảnh tiện ích, `ban-do.png` vào cảnh vị trí); còn lại ưu tiên **cảnh chưa quay được**.
+4. Cảnh không có người nói thì dùng phối cảnh + phụ đề theo kịch bản; cảnh có người nói thì phối cảnh xen vào giữa lời nói.
+
+Đoạn nào xếp sai, dùng ô **“Chuyển sang cảnh…”** dưới mỗi đoạn để sửa.
+
+### 🎬 Tự dựng từ 1 video (Bước 2)
+Không có kịch bản, chỉ có một video dài: phần mềm cắt chỗ ngừng, chia cảnh, tạo phụ đề từ lời thoại dán vào (hoặc tự nghe và chép lời).
+
+### Kiểu TikTok
+- **Cắt nhảy + zoom đẩy** xen kẽ ở mỗi chỗ cắt.
+- **Phụ đề từng chữ**: chữ to viền đen, chữ đang nói đổi màu, con số luôn nổi bật.
+- **Chữ lớn bút dạ quang**: vệt màu chạy qua sau chữ.
+- **Âm thanh**: “vút” ở chỗ cắt, “ting ting” khi nhắc tới giá, “quẹt” khi chữ hiện, nhạc vút lên trước khung liên hệ.
+
 ### Clip nói + phối cảnh/flycam
 Trong một cảnh, clip có **🔊 tiếng gốc** là **clip nói**; ảnh phối cảnh và clip flycam (tắt tiếng) là **hình phủ**.
 Phần mềm giữ **tiếng nói chạy liên tục**, mở đầu bằng người nói, xen phối cảnh/flycam ở giữa, kết thúc bằng người nói.
@@ -55,7 +74,8 @@ video-bds/
 └── js/
     ├── app.js            Điều khiển các bước, quay, thu âm, xem thử, xuất video
     ├── script-gen.js     Viết kịch bản tự động, đọc bảng Google Sheets
-    ├── timeline.js       Dựng dòng thời gian: video đầy đủ, trailer, từng cảnh, phủ phối cảnh
+    ├── timeline.js       Dựng dòng thời gian: video đầy đủ, trailer, từng cảnh, phủ phối cảnh, cắt nhảy, phụ đề từng chữ
+    ├── autocut.js        Quét giọng nói, cắt chỗ ngừng, nhận dạng lời nói, xếp clip vào đúng cảnh
     ├── renderer.js       Vẽ khung hình: chuyển cảnh, chữ hiệu ứng, phụ đề, intro/outro
     ├── audio.js          Nhạc nền, hiệu ứng âm thanh, trộn tiếng clip, giảm nhạc khi có giọng
     ├── webm-fix.js       Ghi thời lượng vào file WebM để tua được

@@ -17,7 +17,7 @@
     voiceMode: 'clip',
     music: { mood: 'nhe-nhang', buffer: null, name: '', vol: 70 },
     settings: {
-      format: '9:16', theme: 'vang', transition: 'mix', textFx: 'pop', sfx: true, subtitles: true,
+      format: '9:16', theme: 'vang', transition: 'mix', textFx: 'marker', subStyle: 'tiktok', sfx: true, subtitles: true,
       introCard: true, endCard: true, priceTag: true, autoTrim: true
     },
     previewKind: 'full'
@@ -257,7 +257,7 @@
           item.dur = isFinite(v.duration) ? v.duration : (opts.duration || 4);
           item.trimOut = item.dur;
         };
-        v.onloadeddata = function () { resolve(item); analyzeAudio(item, blob); };
+        v.onloadeddata = function () { resolve(item); if (!opts.skipAnalyze) analyzeAudio(item, blob); };
         v.onerror = function () { toast('Không đọc được clip ' + name + '. Hãy thử file MP4.'); resolve(null); };
         v.addEventListener('seeked', schedulePreview);
         v.src = url;
@@ -326,6 +326,280 @@
     }).catch(function () {
       toast('Không mở được bảng. Hãy bật chia sẻ “Bất kỳ ai có đường liên kết”, hoặc copy bảng rồi dán vào ô bên dưới.', 6000);
     }).then(function () { $('btnSheetLink').disabled = false; });
+  }
+
+  /* ---------- Tự dựng từ một video dài ---------- */
+
+  var autoFile = null;
+
+  function autoStatus(t) { $('autoStatus').textContent = t || ''; }
+
+  function pickVideo(e) {
+    var f = e.target.files[0];
+    e.target.value = '';
+    if (!f) return;
+    autoFile = f;
+    $('autoName').textContent = '🎬 ' + f.name;
+    $('autoInfo').textContent = '(' + (f.size / 1048576).toFixed(0) + ' MB)';
+    $('autoBox').hidden = false;
+    $('sheetBox').hidden = true;
+    autoStatus('');
+    $('autoBox').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function loadExtraVideo(url) {
+    return new Promise(function (resolve) {
+      var v = document.createElement('video');
+      v.muted = true;
+      v.playsInline = true;
+      v.preload = 'auto';
+      v.onloadeddata = function () { resolve(v); };
+      v.onerror = function () { resolve(null); };
+      v.addEventListener('seeked', schedulePreview);
+      v.src = url;
+    });
+  }
+
+  function autoBuild() {
+    if (!autoFile) return;
+    if (!confirmReplace()) return;
+    var f = autoFile;
+    var subMode = (document.querySelector('input[name=autoSub]:checked') || {}).value || 'script';
+    var minPause = parseFloat($('autoPause').value) || 0.4;
+    var maxScene = Math.max(5, parseFloat($('autoMax').value) || 14);
+    $('btnAutoGo').disabled = true;
+    autoStatus('Đang đọc video…');
+    var base, buf, res;
+    createMedia(f, f.name, { skipAnalyze: true }).then(function (item) {
+      if (!item || !item.isVideo) throw new Error('Không đọc được video này. Hãy thử file MP4.');
+      base = item;
+      autoStatus('Đang quét giọng nói…');
+      return f.arrayBuffer().then(function (ab) { return getAudioCtx().decodeAudioData(ab); });
+    }).then(function (b) {
+      buf = b;
+      res = window.BdsAutoCut.findSpeech(buf, { minPause: minPause });
+      if (!res.segments.length) throw new Error('Không tìm thấy giọng nói trong video.');
+      // Thẻ video thứ hai để tua sẵn đoạn tiếp theo, chỗ cắt không bị giật
+      return loadExtraVideo(base.url);
+    }).then(function (twin) {
+      var words = [];
+      var text = $('autoScript').value.trim();
+      if (subMode === 'script' && text) words = window.BdsAutoCut.scriptWords(text, res.segments);
+      if (subMode === 'asr') {
+        return window.BdsAutoCut.transcribe(buf, autoStatus).then(function (w) { return [twin, w]; }).catch(function () {
+          toast('Không chạy được nhận dạng giọng nói trên máy này. Bạn có thể dán lời thoại để làm phụ đề.', 6000);
+          return [twin, []];
+        });
+      }
+      return [twin, words];
+    }).then(function (r) {
+      var twin = r[0], words = r[1];
+      var groups = window.BdsAutoCut.groupScenes(res.segments, { maxScene: maxScene });
+      var dur = base.dur || buf.duration;
+      var group = 'auto' + Date.now();
+      var k = 0;
+      var scenes = groups.map(function (segs, gi) {
+        var media = segs.map(function (sg) {
+          var idx = k++;
+          return {
+            el: idx % 2 && twin ? twin : base.el, isVideo: true, url: base.url, name: f.name,
+            keepAudio: true, hasAudio: true, trimIn: sg[0], trimOut: sg[1], dur: dur, fixed: true,
+            voiceGain: res.voiceGain, group: group, segIndex: idx, words: window.BdsAutoCut.wordsInRange(words, sg[0], sg[1])
+          };
+        });
+        var sceneWords = [];
+        media.forEach(function (m) { sceneWords = sceneWords.concat(m.words); });
+        return newScene({
+          title: 'Đoạn ' + (gi + 1), media: media,
+          text: sceneWords.map(function (w) { return w.w; }).join(' '),
+          shotNote: 'Thêm ảnh phối cảnh hoặc clip flycam vào đoạn này để xen vào lời nói (tiếng vẫn chạy liên tục).'
+        });
+      });
+      var kept = res.segments.reduce(function (a, sg) { return a + sg[1] - sg[0]; }, 0);
+      state.voiceMode = 'clip';
+      state.settings.introCard = false;
+      $('introToggle').checked = false;
+      setScenes(scenes, false);
+      refreshVoiceUI();
+      $('autoBox').hidden = true;
+      toast('✂️ Đã cắt ' + (res.segments.length - 1) + ' chỗ ngừng: ' + fmtTime(dur) + ' → ' + fmtTime(kept) + ', chia ' + scenes.length +
+        ' cảnh. Sang Bước 3 để thêm phối cảnh/flycam.', 7000);
+    }).catch(function (e) {
+      toast(e && e.message ? e.message : 'Có lỗi khi dựng video.', 6000);
+    }).then(function () {
+      $('btnAutoGo').disabled = false;
+      autoStatus('');
+    });
+  }
+
+  /* ---------- Tự dựng toàn bộ theo kịch bản (nhiều clip + ảnh phối cảnh) ---------- */
+
+  var assembleFiles = [];
+
+  function assembleProgress(p, label) {
+    var box = $('assembleProgress');
+    box.hidden = p == null;
+    if (p == null) return;
+    box.querySelector('.bar').style.width = Math.round(p * 100) + '%';
+    box.querySelector('span').textContent = label;
+  }
+
+  function setAssembleFiles(files) {
+    assembleFiles = Array.prototype.slice.call(files || []).filter(function (f) { return /^(video|image)\//.test(f.type) || /\.(mp4|mov|webm|m4v|jpe?g|png|webp)$/i.test(f.name); });
+    var v = assembleFiles.filter(function (f) { return /^video|\.(mp4|mov|webm|m4v)$/i.test(f.type || f.name); }).length;
+    $('assembleFiles').textContent = assembleFiles.length ? 'Đã chọn ' + v + ' video và ' + (assembleFiles.length - v) + ' ảnh.' : '';
+    $('btnAssemble').disabled = !assembleFiles.length;
+  }
+
+  function isVideoFile(f) { return /^video\//.test(f.type) || /\.(mp4|mov|webm|m4v)$/i.test(f.name); }
+
+  /** Clip có người nói hay chỉ là cảnh quay (flycam, phối cảnh)? */
+  function looksLikeTalk(f, sp) {
+    if (/flycam|drone|broll|b-roll|phoi.?canh|toan.?canh|canh.?quay/i.test(window.BdsAutoCut.norm(f.name).replace(/ /g, '-'))) return false;
+    if (!sp || !sp.segments.length) return false;
+    var cover = sp.segments.reduce(function (a, s2) { return a + s2[1] - s2[0]; }, 0) / sp.duration;
+    return sp.segments.length >= 2 || (cover > 0.15 && cover < 0.97);
+  }
+
+  function assemble() {
+    if (!assembleFiles.length) return;
+    if (!state.scenes.length) { toast('Hãy tạo kịch bản ở Bước 2 trước (nhập từ Google Sheets hoặc tự viết).', 5000); return; }
+    var hasMedia = state.scenes.some(function (sc) { return sc.media.length; });
+    if (hasMedia && !window.confirm('Thay toàn bộ ảnh/clip hiện có bằng bản tự dựng?')) return;
+    var AC = window.BdsAutoCut;
+    var files = assembleFiles.slice().sort(function (a, b) { return a.name.localeCompare(b.name, undefined, { numeric: true }) || a.lastModified - b.lastModified; });
+    var videos = files.filter(isVideoFile), images = files.filter(function (f) { return !isVideoFile(f); });
+    var minPause = parseFloat($('assemblePause').value) || 0.4;
+    var useAsr = $('assembleAsr').checked;
+    var clips = [], broll = [];
+    var steps = videos.length * (useAsr ? 2 : 1) + images.length + 1, done = 0;
+    var tick = function (label) { done++; assembleProgress(Math.min(1, done / steps), label); };
+    $('btnAssemble').disabled = true;
+    $('assembleReport').hidden = true;
+    assembleProgress(0, 'Bắt đầu…');
+
+    // 1. Đọc và quét giọng từng video
+    var chain = Promise.resolve();
+    videos.forEach(function (f, i) {
+      chain = chain.then(function () {
+        assembleProgress(done / steps, 'Quét giọng nói clip ' + (i + 1) + '/' + videos.length + ': ' + f.name);
+        return createMedia(f, f.name, { skipAnalyze: true }).then(function (item) {
+          if (!item) return null;
+          return f.arrayBuffer().then(function (ab) { return getAudioCtx().decodeAudioData(ab); })
+            .then(function (buf) { return { item: item, buf: buf, sp: AC.findSpeech(buf, { minPause: minPause }) }; })
+            .catch(function () { return { item: item, buf: null, sp: null }; });
+        }).then(function (r) {
+          tick('Đã quét ' + f.name);
+          if (!r) return;
+          if (looksLikeTalk(f, r.sp)) clips.push({ file: f, item: r.item, buf: r.buf, segments: r.sp.segments, voiceGain: r.sp.voiceGain, duration: r.sp.duration });
+          else { r.item.keepAudio = false; r.item.hasAudio = false; broll.push({ file: f, item: r.item }); }
+        });
+      });
+    });
+    images.forEach(function (f) {
+      chain = chain.then(function () {
+        return createMedia(f, f.name).then(function (item) { if (item) broll.push({ file: f, item: item }); tick('Đã đọc ảnh ' + f.name); });
+      });
+    });
+    // 2. Nghe và chép lời để biết đoạn nào thuộc cảnh nào
+    var asrOk = useAsr;
+    chain = chain.then(function () {
+      if (!useAsr || !clips.length) return;
+      var c2 = Promise.resolve();
+      clips.forEach(function (c, i) {
+        c2 = c2.then(function () {
+          return AC.transcribe(c.buf, function (msg) { assembleProgress(done / steps, 'Clip ' + (i + 1) + '/' + clips.length + ': ' + msg); })
+            .then(function (w) { c.words = w; tick('Đã chép lời ' + c.file.name); });
+        });
+      });
+      return c2.catch(function () {
+        asrOk = false;
+        toast('Không chạy được nhận dạng giọng nói trên máy này, các clip sẽ được xếp theo thứ tự tên file.', 6000);
+      });
+    });
+    // 3. Xếp vào cảnh và dựng
+    chain.then(function () {
+      assembleProgress(0.98, 'Đang ghép theo kịch bản…');
+      return Promise.all(clips.map(function (c) { return loadExtraVideo(c.item.url).then(function (tw) { c.twin = tw; }); }));
+    }).then(function () {
+      var scenes = state.scenes;
+      var perScene = scenes.map(function () { return []; });
+      var dropped = [];
+      if (asrOk && clips.some(function (c) { return c.words && c.words.length; })) {
+        var utts = [];
+        clips.forEach(function (c) { utts = utts.concat(AC.utterances(c, 0.7)); });
+        var m = AC.matchUtterances(utts, scenes);
+        perScene = m.scenes;
+        dropped = m.dropped;
+      } else {
+        // Không nghe được lời: clip thứ i vào cảnh thứ i (theo tên file)
+        clips.forEach(function (c, i) {
+          perScene[Math.min(i, scenes.length - 1)].push({ clip: c, segs: c.segments, start: c.segments[0][0], end: c.segments[c.segments.length - 1][1] });
+        });
+      }
+      var segIdx = 0;
+      scenes.forEach(function (sc, si) {
+        var media = [];
+        perScene[si].forEach(function (u) {
+          var c = u.clip;
+          var span = u.sim ? AC.scriptSpan(sc.text, u.sim.from, u.sim.to) : '';
+          var uw = span ? window.BdsTimeline.distributeWords(span, u.segs) : null;
+          u.segs.forEach(function (sg) {
+            var idx = segIdx++;
+            media.push({
+              el: idx % 2 && c.twin ? c.twin : c.item.el, isVideo: true, url: c.item.url, name: c.file.name,
+              keepAudio: true, hasAudio: true, trimIn: sg[0], trimOut: sg[1], dur: c.duration, fixed: true,
+              voiceGain: c.voiceGain, group: 'clip:' + c.file.name, segIndex: idx,
+              words: uw ? AC.wordsInRange(uw, sg[0], sg[1]) : null
+            });
+          });
+        });
+        sc.media = media;
+        sc.voice = null;
+        sc.durOverride = null;
+      });
+      // Ảnh phối cảnh / flycam: theo tên file, còn lại ưu tiên cảnh chưa quay được
+      var leftovers = [];
+      broll.forEach(function (b) {
+        var si = AC.matchBroll(b.file.name, scenes);
+        if (si >= 0) scenes[si].media.push(b.item); else leftovers.push(b.item);
+      });
+      var need = function (sc) { return (sc.media.some(function (m) { return m.fixed; }) ? 10 : 0) + sc.media.filter(function (m) { return !m.fixed; }).length; };
+      leftovers.forEach(function (it) {
+        var best = scenes.slice().sort(function (a, b) { return need(a) - need(b); })[0];
+        best.media.push(it);
+      });
+      state.voiceMode = 'clip';
+      state.settings.subStyle = state.settings.subStyle || 'tiktok';
+      if (clips.length) { state.settings.introCard = false; $('introToggle').checked = false; }
+      renderShoot();
+      renderScenes();
+      refreshVoiceUI();
+      schedulePreview();
+      // 4. Báo cáo
+      var lines = scenes.map(function (sc, si) {
+        var talk = sc.media.filter(function (m) { return m.fixed; });
+        var other = sc.media.length - talk.length;
+        var secs = talk.reduce(function (a, m) { return a + m.trimOut - m.trimIn; }, 0);
+        var t = 'Cảnh ' + (si + 1) + ' ' + window.BdsTimeline.cleanTitle(sc.title) + ': ';
+        if (talk.length) return '<div>✅ ' + esc(t) + talk.length + ' đoạn nói (' + fmtSec(secs) + 's)' + (other ? ' + ' + other + ' phối cảnh/flycam xen vào' : '') + '</div>';
+        if (other) return '<div>🏙 ' + esc(t) + 'chưa có cảnh nói, dùng ' + other + ' phối cảnh/flycam + phụ đề theo kịch bản</div>';
+        return '<div class="warn">⚠️ ' + esc(t) + 'chưa có hình, sẽ hiện chữ trên nền màu. Thêm ảnh phối cảnh để đẹp hơn.</div>';
+      });
+      if (dropped.length) {
+        var retakes = dropped.filter(function (u) { return u.retake; }).length;
+        lines.push('<div class="muted">✂️ Đã bỏ ' + dropped.length + ' đoạn nói không đúng kịch bản' + (retakes ? ' (trong đó ' + retakes + ' đoạn nói hỏng đã được quay lại)' : '') + '.</div>');
+      }
+      if (!asrOk && clips.length) lines.push('<div class="muted">ℹ️ Clip được xếp theo thứ tự tên file. Kiểm tra lại bên dưới, dùng ô “Chuyển sang cảnh” nếu cần.</div>');
+      $('assembleReport').innerHTML = lines.join('');
+      $('assembleReport').hidden = false;
+      toast('🤖 Đã dựng xong! Bấm ▶ Xem thử, rồi sang Bước 6 để xuất video.', 6000);
+    }).catch(function (e) {
+      toast('Có lỗi khi tự dựng: ' + (e && e.message ? e.message : e), 6000);
+    }).then(function () {
+      assembleProgress(null);
+      $('btnAssemble').disabled = !assembleFiles.length;
+    });
   }
 
   function quickScenes(items) {
@@ -450,6 +724,18 @@
     sel.onchange = function () { state.style = sel.value; save(); regenerateQuick(); };
     $('btnRegen').onclick = function () { state.variant++; regenerateQuick(); toast('Đã viết lại lời thoại.'); };
     $('btnStartProject').onclick = startProject;
+    $('assembleInput').onchange = function (e) { setAssembleFiles(e.target.files); };
+    var ad = $('assembleDrop');
+    ['dragenter', 'dragover'].forEach(function (ev) { ad.addEventListener(ev, function (e) { e.preventDefault(); ad.classList.add('over'); }); });
+    ['dragleave', 'drop'].forEach(function (ev) { ad.addEventListener(ev, function (e) { e.preventDefault(); ad.classList.remove('over'); }); });
+    ad.addEventListener('drop', function (e) { setAssembleFiles(e.dataTransfer.files); });
+    $('btnAssemble').onclick = assemble;
+    $('btnStartVideo').onclick = function () { $('videoInput').click(); };
+    $('videoInput').onchange = pickVideo;
+    $('btnAutoGo').onclick = autoBuild;
+    document.querySelectorAll('input[name=autoSub]').forEach(function (r) {
+      r.onchange = function () { $('autoScript').hidden = r.value !== 'script' || !r.checked; };
+    });
     $('btnStartSheet').onclick = function () { $('sheetBox').hidden = !$('sheetBox').hidden; };
     $('btnSheetLink').onclick = importFromLink;
     $('btnSheetPaste').onclick = function () {
@@ -485,6 +771,7 @@
   function mediaMeta(m, scene) {
     var role = scene && canCover(scene) && scene.layout !== 'seq' ? (isTalk(m) ? '🗣 <b>Clip nói</b> · ' : '🏙 <b>Phủ lên lời nói</b> · ') : '';
     if (!m.isVideo) return role + '🖼 Ảnh · hiệu ứng zoom';
+    if (m.fixed) return role + '✂️ Đoạn <b>' + fmtTime(m.trimIn) + '–' + fmtTime(m.trimOut) + '</b> (' + fmtSec(m.trimOut - m.trimIn) + 's)';
     if (m.analyzing) return '🎞 Clip ' + fmtSec(m.dur || 0) + 's · đang phân tích âm thanh…';
     var used = (m.trimOut || m.dur) - (m.trimIn || 0);
     var cut = (m.dur || 0) - used;
@@ -504,7 +791,7 @@
       var li = document.createElement('li');
       li.className = 'scene-card';
       var tiles = s.media.map(function (m, mi) {
-        var thumb = m.isVideo ? '<video class="thumb" muted preload="metadata" src="' + m.url + '#t=0.5"></video>' : '<img class="thumb" alt="" src="' + m.url + '">';
+        var thumb = m.isVideo ? '<video class="thumb" muted preload="metadata" src="' + m.url + '#t=' + ((m.trimIn || 0) + 0.3).toFixed(2) + '"></video>' : '<img class="thumb" alt="" src="' + m.url + '">';
         var audioBtn = m.isVideo && m.hasAudio ?
           '<button class="btn' + (m.keepAudio ? ' on' : '') + '" type="button" data-a="aud" data-i="' + mi + '" title="Giữ tiếng nói gốc">' + (m.keepAudio ? '🔊 Tiếng gốc' : '🔇 Tắt tiếng') + '</button>' : '';
         var hideBtn = m.isVideo && m.hasAudio && m.keepAudio ?
@@ -512,7 +799,10 @@
         return '<div class="media-tile">' + thumb + '<div class="meta">' + mediaMeta(m, s) + '</div><div class="tile-tools">' + audioBtn + hideBtn +
           '<button class="btn" type="button" data-a="left" data-i="' + mi + '" title="Lên trước">◀</button>' +
           '<button class="btn" type="button" data-a="right" data-i="' + mi + '" title="Ra sau">▶</button>' +
-          '<button class="btn" type="button" data-a="del" data-i="' + mi + '" title="Xoá">🗑</button></div></div>';
+          '<button class="btn" type="button" data-a="del" data-i="' + mi + '" title="Xoá">🗑</button>' +
+          (state.scenes.length > 1 ? '<select data-move="' + mi + '" title="Chuyển sang cảnh khác"><option value="">Chuyển sang cảnh…</option>' +
+            state.scenes.map(function (_, k) { return k === si ? '' : '<option value="' + k + '">Cảnh ' + (k + 1) + '</option>'; }).join('') + '</select>' : '') +
+          '</div></div>';
       }).join('');
       li.innerHTML =
         '<div class="scene-head"><span class="scene-no">Cảnh ' + (si + 1) + '</span><b>' + esc(window.BdsTimeline.cleanTitle(s.title) || '(chưa đặt tên)') + '</b>' +
@@ -525,6 +815,15 @@
         '<div class="row wrap nomargin"><label class="btn"><input type="file" accept="image/*,video/*" multiple hidden>📁 Thêm ảnh/clip</label>' +
         '<button class="btn accent" type="button" data-a="cam">🎥 Quay cảnh này</button></div>';
       li.querySelector('input[type=file]').onchange = function (e) { addFilesToScene(si, e.target.files); e.target.value = ''; };
+      li.querySelectorAll('select[data-move]').forEach(function (sel) {
+        sel.onchange = function () {
+          if (sel.value === '') return;
+          var it = s.media.splice(+sel.dataset.move, 1)[0];
+          state.scenes[+sel.value].media.push(it);
+          renderShoot();
+          schedulePreview();
+        };
+      });
       li.querySelectorAll('[data-a]').forEach(function (b) {
         b.onclick = function () {
           var a = b.dataset.a, mi = +b.dataset.i, arr = s.media;
@@ -924,6 +1223,8 @@
     fillSelect('themeSelect', R.THEMES, S.theme, 'label').onchange = onSet('theme');
     fillSelect('transitionSelect', R.TRANSITIONS, S.transition).onchange = onSet('transition');
     fillSelect('textFxSelect', R.TEXT_FX, S.textFx).onchange = onSet('textFx');
+    $('subStyleSelect').value = S.subStyle || 'tiktok';
+    $('subStyleSelect').onchange = onSet('subStyle');
     fillSelect('moodSelect', window.BdsAudio.MOODS, state.music.mood).onchange = function (e) { state.music.mood = e.target.value; save(); };
     [['sfxToggle', 'sfx'], ['subToggle', 'subtitles'], ['introToggle', 'introCard'], ['endToggle', 'endCard'], ['priceToggle', 'priceTag'], ['autoTrim', 'autoTrim']].forEach(function (p) {
       $(p[0]).checked = S[p[1]] !== false;
@@ -1031,6 +1332,10 @@
         else if (s.type === 'ting') engine.ting(at, s.freq);
         else if (s.type === 'pop') engine.pop(at);
         else if (s.type === 'boom') engine.boom(at);
+        else if (s.type === 'swish') engine.swish(at);
+        else if (s.type === 'swipe') engine.swipe(at);
+        else if (s.type === 'ching') engine.ching(at);
+        else if (s.type === 'riser') engine.riser(at, s.dur);
       });
     }
 
