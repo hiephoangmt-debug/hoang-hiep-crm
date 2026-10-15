@@ -1,0 +1,49 @@
+/* Trang xem căn hộ cho khách: chọn căn – xem 2D / 3D / 4D */
+.unitpage { overflow: hidden; }
+.up-wrap { height: calc(100% - 54px); display: grid; grid-template-columns: 220px 1fr 260px; background: var(--bg); }
+.up-units { overflow: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; border-right: 1px solid var(--line); background: var(--panel); }
+.up-unit { display: grid; grid-template-columns: 56px 1fr; gap: 10px; align-items: center; text-align: left; padding: 8px; border-radius: 10px; }
+.up-unit img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; background: #f1f5f9; }
+.up-unit b { display: block; font-size: 13px; }
+.up-unit small { color: var(--muted); font-variant-numeric: tabular-nums; }
+.up-stage { position: relative; display: flex; flex-direction: column; min-width: 0; }
+.up-tabs { display: flex; gap: 6px; padding: 10px 12px; background: var(--panel); border-bottom: 1px solid var(--line); }
+.up-tabs button { flex: 1; font-weight: 600; padding: 9px 10px; }
+.up-view { position: relative; flex: 1; min-height: 0; }
+.up-3d, .up-2d { position: absolute; inset: 0; }
+.up-3d #viewer { position: absolute; inset: 0; }
+.up-2d { background: #fff; display: flex; align-items: center; justify-content: center; overflow: auto; cursor: zoom-in; }
+.up-2d img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.up-2d.zoom { cursor: zoom-out; display: block; }
+.up-2d.zoom img { max-width: none; max-height: none; width: 180%; }
+.up-bar { position: absolute; left: 12px; right: 12px; bottom: 12px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: space-between; pointer-events: none; z-index: 3; }
+.up-bar[hidden] { display: none; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; pointer-events: auto; background: rgba(255,255,255,.92); padding: 6px; border-radius: 12px; box-shadow: var(--shadow); }
+.chip { border-radius: 999px; padding: 6px 12px; font-size: 12px; }
+.chip .sw { display: inline-flex; width: 26px; height: 10px; border-radius: 3px; overflow: hidden; margin-right: 6px; vertical-align: middle; }
+.chip .sw i { flex: 1; }
+.up-caption { position: absolute; left: 50%; top: 18px; transform: translateX(-50%); background: rgba(15,23,42,.82); color: #fff; padding: 10px 18px; border-radius: 12px; font-size: 16px; font-weight: 600; z-index: 4; white-space: nowrap; }
+.up-caption small { display: block; font-weight: 400; font-size: 12px; color: #cbd5e1; text-align: center; }
+.up-progress { position: absolute; left: 0; right: 0; top: 0; height: 4px; background: rgba(15,23,42,.15); z-index: 4; }
+.up-progress i { display: block; height: 100%; width: 0; background: var(--accent); }
+.up-info { overflow: auto; padding: 14px; background: var(--panel); border-left: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px; }
+.up-info h2 { margin: 0; font-size: 18px; }
+.up-info .kv { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.up-info .kv div { background: #f8fafc; border: 1px solid var(--line); border-radius: 8px; padding: 8px; }
+.up-info .kv small { display: block; color: var(--muted); font-size: 11px; }
+.up-info .kv b { font-variant-numeric: tabular-nums; }
+.up-rooms { display: flex; flex-direction: column; gap: 4px; }
+.up-rooms button { display: flex; justify-content: space-between; text-align: left; font-size: 12px; }
+.up-rooms small { color: var(--muted); font-variant-numeric: tabular-nums; }
+.up-note { font-size: 11px; color: var(--muted); line-height: 1.5; }
+.up-walkhint { position: fixed; }
+.walking-page .up-walkhint { display: block; }
+@media (max-width: 1000px) {
+  .up-wrap { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; height: auto; min-height: calc(100% - 54px); }
+  .unitpage { overflow: auto; }
+  .up-units { flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+  .up-unit { min-width: 190px; }
+  .up-stage { height: 72vh; }
+  .up-info { border-left: 0; border-top: 1px solid var(--line); }
+}
+.up-3d { background: #f3f4f6; }

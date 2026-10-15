@@ -48,6 +48,15 @@ npm run build      # bản tĩnh trong dist/ (upload lên hosting bất kỳ)
 | `src/detect.js`, `src/autorooms.js` | Nhận diện tường từ ảnh, tự tạo phòng |
 | `src/estimate.js` | Bóc tách khối lượng & dự toán |
 
+## Trang xem căn hộ cho khách (`xem-can-ho.html`)
+
+Gọn, không có công cụ thiết kế. Chọn loại căn rồi xem:
+- **2D · Mặt bằng:** ảnh mặt bằng bán hàng gốc (bấm để phóng to).
+- **3D · Phối cảnh:** căn hộ dựng sẵn với nội thất đặt đúng vị trí như ảnh 2D, vách kính cong, cửa kính lô-gia, lan can kính. Đổi phong cách, ngày/tối, nhìn từ trên, đi bộ; bấm tên phòng để bay vào phòng đó.
+- **4D · Tham quan:** camera tự bay vào từng phòng, quét nhìn quanh, có chú thích tên phòng và diện tích; nắng chuyển từ sáng tới tối, đèn tự bật.
+
+Các căn mẫu (1PN+, 1PN, 2PN căn góc, 2PN 2WC, 3PN) được dựng sẵn từ ảnh trong `public/units/` bằng `scripts/build-units.mjs` theo dữ liệu `scripts/unit-specs.js` (sửa tường/cửa, tên phòng, vị trí nội thất). Muốn thêm căn: chép ảnh vào `public/units/<mã>.webp`, thêm một mục vào `unit-specs.js`, chạy `npx vite` rồi `node scripts/build-units.mjs` để sinh lại `src/units/units.json`.
+
 ## Hai trang tách riêng
 
 - `index.html` – trình dựng căn hộ: vẽ / nhận diện mặt bằng, xem 3D, đi bộ, render, dự toán. Có thêm chế độ 🏢 Tòa nhà; phần này chỉ được tải khi mở lần đầu.

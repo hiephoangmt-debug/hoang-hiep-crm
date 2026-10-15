@@ -4,7 +4,8 @@ import { uid } from './model.js';
 
 const RES = 0.05;
 
-export function detectRooms(plan) {
+/** opts.close: độ nới tường để bịt khe cửa (m); opts.outside: các điểm chắc chắn nằm ngoài căn */
+export function detectRooms(plan, opts = {}) {
   if (!plan.walls.length) return [];
   const b = planBounds({ ...plan, rooms: [], furniture: [] });
   const pad = 0.5;
@@ -12,7 +13,7 @@ export function detectRooms(plan) {
   const W = Math.ceil((b.maxX - b.minX + 2 * pad) / RES), H = Math.ceil((b.maxY - b.minY + 2 * pad) / RES);
   if (W * H > 6e6) return [];
   // blocked = ô thuộc tường thật; closed = tường nới rộng thêm CLOSE để bịt tạm các khe cửa
-  const CLOSE = 0.45;
+  const CLOSE = opts.close ?? 0.45;
   const blocked = new Uint8Array(W * H), closed = new Uint8Array(W * H);
   for (const w of plan.walls) {
     const r = w.thickness / 2 + 0.01, R = r + CLOSE;
@@ -47,6 +48,11 @@ export function detectRooms(plan) {
   for (let k = 0; k < W * H; k++) {
     const i = k % W, j = (k - i) / W;
     if (!insideConvex({ x: x0 + (i + 0.5) * RES, y: y0 + (j + 0.5) * RES }, hull)) label[k] = -1;
+  }
+  for (const p of opts.outside || []) {
+    const i = Math.floor((p.x - x0) / RES), j = Math.floor((p.y - y0) / RES);
+    const k = j * W + i;
+    if (i >= 0 && j >= 0 && i < W && j < H && !closed[k] && !label[k]) fill(k, -1);
   }
   const rooms = [];
   let id = 1;

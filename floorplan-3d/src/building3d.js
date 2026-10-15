@@ -4,7 +4,10 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Sky } from 'three/examples/jsm/objects/Sky.js';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
-import { SLOT_LIST, CORES, PODIUM, rectM, STATUS, TYPE_COLORS, residentialFloors, unitCode, unitPrice } from './buildingData.js';
+import { SLOT_LIST, CORES, CORRIDORS, PODIUM, rectM, STATUS, TYPE_COLORS, residentialFloors, unitCode, unitPrice, areaOf, DEFAULT_UNIT } from './buildingData.js';
+import { buildScene } from './builder.js';
+import { placeUnit } from './unitPlacement.js';
+import UNITS from './units/units.json';
 import { buildSurroundings } from './surroundings.js';
 
 /** Mặt đứng 1 ô (rộng 3 m × cao 1 tầng): khung, tường, cửa kính, lan can kính, bồn cây hoa */
@@ -58,10 +61,19 @@ function roundedPrism(r, y0, h, radii = {}, inset = 0) {
 // Góc bo theo mặt bằng tòa F2
 const SLOT_RADII = { 24: { tl: 4.2 }, 26: { tr: 3 }, '03': { tl: 3 }, '05': { tr: 4.2 }, 19: { bl: 4.2 }, 17: { br: 3 }, 12: { bl: 3 }, 10: { br: 4.2 } };
 const WINGS = [
-  { px: [440, 330, 820, 1140], radii: { tl: 4.2, tr: 3, bl: 4.2, br: 3 } },
-  { px: [820, 630, 1290, 1100], radii: {} },
-  { px: [1290, 330, 1670, 1140], radii: { tl: 3, tr: 4.2, bl: 3, br: 4.2 } },
+  { px: [440, 340, 810, 1135], radii: { tl: 4.2, tr: 3, bl: 4.2, br: 3 } },
+  { px: [810, 635, 1265, 1095], radii: {} },
+  { px: [1265, 340, 1635, 1135], radii: { tl: 3, tr: 4.2, bl: 3, br: 4.2 } },
 ];
+const CORRIDORS_M = CORRIDORS.map(rectM);
+
+/** Mặt bằng chi tiết của một vị trí căn: mặt bằng người dùng gán, hoặc căn mẫu mặc định */
+export function slotLayout(b, slot) {
+  if (b.layouts?.[slot]) return { plan: b.layouts[slot], unitId: null };
+  const id = DEFAULT_UNIT[slot];
+  const u = id && UNITS.find((x) => x.id === id);
+  return u ? { plan: u.plan, unitId: id } : null;
+}
 const ORANGE_SLOTS = new Set(['05', '06', '07', '08', '09', '10']);
 export const AVENUE_X = -52;
 
@@ -74,6 +86,7 @@ export class BuildingView {
     this.colorBy = 'facade';
     this.maxFloor = Infinity;
     this.onlyFloor = null;
+    this.detail = true;
     this.filter = { status: new Set(Object.keys(STATUS)), type: null };
     this.facadeTex = { beige: facadeTexture('beige'), orange: facadeTexture('orange'), green: facadeTexture('green') };
     const r = (this.renderer = new THREE.WebGLRenderer({ antialias: true }));
@@ -86,7 +99,7 @@ export class BuildingView {
     this.labels.domElement.className = 'labels-layer';
     container.appendChild(this.labels.domElement);
     const scene = (this.scene = new THREE.Scene());
-    scene.fog = new THREE.Fog(0xcbdcea, 380, 1500);
+    this.fog = scene.fog = new THREE.Fog(0xcbdcea, 380, 1500);
     scene.environment = new THREE.PMREMGenerator(r).fromScene(new RoomEnvironment(), 0.04).texture;
     scene.environmentIntensity = 0.45;
     const sky = new Sky();
@@ -95,6 +108,7 @@ export class BuildingView {
     u.turbidity.value = 3; u.rayleigh.value = 1.2; u.mieCoefficient.value = 0.003; u.mieDirectionalG.value = 0.8;
     u.sunPosition.value.setFromSphericalCoords(1, THREE.MathUtils.degToRad(42), THREE.MathUtils.degToRad(200));
     scene.add(sky);
+    this.skyMesh = sky;
     const sun = new THREE.DirectionalLight(0xfff1dc, 3.2);
     sun.position.set(-110, 190, 160);
     sun.castShadow = true;
@@ -119,13 +133,22 @@ export class BuildingView {
     this.surround = buildSurroundings({ ...this.surroundArgs, density: this.light ? 0.3 : 1 });
     scene.add(this.surround);
     const b0 = getBuilding();
+    this.neighborGroup = new THREE.Group();
+    scene.add(this.neighborGroup);
+    // Bóng đổ của tòa xuống ảnh 360 (mặt đất trong suốt chỉ nhận bóng)
+    this.shadowCatcher = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.ShadowMaterial({ opacity: 0.3 }));
+    this.shadowCatcher.rotation.x = -Math.PI / 2;
+    this.shadowCatcher.position.y = 0.02;
+    this.shadowCatcher.receiveShadow = true;
+    this.shadowCatcher.visible = false;
+    scene.add(this.shadowCatcher);
     for (const n of this.neighbors) {
       const g = new THREE.Group();
       this.buildTower(g, { ...b0, floors: n.floors, units: {} }, { interactive: false, colorBy: 'facade' });
       g.position.set(n.x, 0, n.z);
       g.rotation.y = n.rot || 0;
       if (n.mirror) g.scale.x = -1;
-      scene.add(g);
+      this.neighborGroup.add(g);
     }
 
     this.camera = new THREE.PerspectiveCamera(38, 1, 0.5, 4000);
@@ -166,8 +189,62 @@ export class BuildingView {
     this.scene.remove(this.surround);
     this.surround.traverse((o) => o.geometry?.dispose());
     this.surround = buildSurroundings({ ...this.surroundArgs, density: on ? 0.3 : 1 });
+    this.surround.visible = !this.pano;
     this.scene.add(this.surround);
     this.resize();
+  }
+
+  // ---------------- Ghép tòa nhà vào ảnh 360° thực tế ----------------
+  /** Tải ảnh 360° (equirectangular) làm nền; camera đứng tại điểm chụp, nhìn quanh được */
+  setPano(src, onReady) {
+    if (!src) { this.pano = null; this.applyPano(); return; }
+    new THREE.TextureLoader().load(src, (t) => {
+      t.mapping = THREE.EquirectangularReflectionMapping;
+      t.colorSpace = THREE.SRGBColorSpace;
+      this.panoTex?.dispose();
+      this.panoTex = t;
+      this.pano ||= { heading: 0, bearing: 200, dist: 160, alt: 60, fov: 60 };
+      this.applyPano();
+      onReady?.();
+    });
+  }
+
+  /** p: { heading: xoay ảnh (°), bearing: hướng camera quanh tòa (°), dist: khoảng cách (m), alt: độ cao (m), fov } */
+  applyPano(p) {
+    if (p) Object.assign(this.pano, p);
+    const on = !!(this.pano && this.panoTex);
+    this.surround.visible = !on;
+    this.neighborGroup.visible = !on && this.showNeighbors !== false;
+    this.skyMesh.visible = !on;
+    this.shadowCatcher.visible = on;
+    this.scene.fog = on ? null : this.fog;
+    this.scene.background = on ? this.panoTex : null;
+    this.controls.enableZoom = !on;
+    this.controls.enablePan = !on;
+    if (!on) { this.camera.fov = 38; this.camera.updateProjectionMatrix(); this.setView('perspective'); return; }
+    const q = this.pano;
+    this.scene.backgroundRotation.set(0, THREE.MathUtils.degToRad(q.heading), 0);
+    const b = THREE.MathUtils.degToRad(q.bearing);
+    const cam = new THREE.Vector3(Math.sin(b) * q.dist, q.alt, Math.cos(b) * q.dist);
+    const look = new THREE.Vector3(0, 30, 0).sub(cam).normalize();
+    this.camera.position.copy(cam);
+    this.camera.fov = q.fov;
+    this.camera.updateProjectionMatrix();
+    // Nhìn quanh tại chỗ: mục tiêu đặt sát trước camera
+    this.controls.target.copy(cam).add(look.multiplyScalar(0.5));
+    this.controls.minDistance = 0.1;
+    this.controls.update();
+  }
+
+  /** Xem mặt bằng tầng chi tiết: chỉ tầng fi, camera nhìn xuống chếch như ảnh phối cảnh */
+  showFloorPlan(fi) {
+    const b = this.getBuilding();
+    this.onlyFloor = fi;
+    this.rebuild();
+    const y = b.podiumFloors * b.podiumHeight + fi * b.floorHeight;
+    this.camera.position.set(4, y + 78, 40);
+    this.controls.target.set(0, y, 1);
+    this.controls.update();
   }
 
   /** Góc nhìn: 'perspective' = như ảnh phối cảnh (dọc đại lộ), 'close' = cận cảnh tòa */
@@ -210,13 +287,21 @@ export class BuildingView {
         const st = b.units[`${fl}-${sl.slot}`]?.status || 'available';
         const passes = !interactive || (this.filter.status.has(st) && (!this.filter.type || this.filter.type === sl.type));
         let material;
-        if (colorBy === 'facade') {
+        // Ở mặt bằng tầng chi tiết, ô chưa có mặt bằng tô màu loại căn cho dễ đọc
+        if (colorBy === 'facade' && fi === only) {
+          material = new THREE.MeshStandardMaterial({ color: TYPE_COLORS[sl.type], roughness: 0.6 });
+        } else if (colorBy === 'facade') {
           const map = this.facadeTex[ORANGE_SLOTS.has(sl.slot) ? 'orange' : fi < 6 && sl.rect.x0 < 0 ? 'green' : 'beige'];
           map.repeat.set(1 / 4.5, 1 / (H - 0.3));
           material = new THREE.MeshStandardMaterial({ map, roughness: 0.55, transparent: ghost || !passes, opacity: ghost ? 0.15 : passes ? 1 : 0.2 });
         } else {
           const col = colorBy === 'type' ? TYPE_COLORS[sl.type] : STATUS[st].color;
           material = new THREE.MeshStandardMaterial({ color: col, roughness: 0.45, transparent: !passes || ghost, opacity: ghost ? 0.12 : passes ? 1 : 0.18 });
+        }
+        const layout = interactive && fi === only && this.detail ? slotLayout(b, sl.slot) : null;
+        if (layout) {
+          units.push(this.addDetailedUnit(root, sl, layout, y, material, fl, fi));
+          continue;
         }
         const m = add(roundedPrism(sl.rect, y, H - 0.3, SLOT_RADII[sl.slot], 0.08), material);
         if (!interactive) continue;
@@ -270,6 +355,41 @@ export class BuildingView {
     return units;
   }
 
+  /** Đặt căn chi tiết (tường, cửa, nội thất) vào ô căn; trả về khối chọn trong suốt để rê/nhấp */
+  addDetailedUnit(root, sl, layout, y, material, fl, fi) {
+    this._unitCache ||= new Map();
+    const key = layout.unitId || JSON.stringify(layout.plan).length + ':' + sl.slot;
+    let proto = this._unitCache.get(key);
+    if (!proto) {
+      proto = buildScene(layout.plan, { clippingPlanes: [], ceiling: false, landscape: false, labels: false, lights: false }).root;
+      // Bỏ dữ liệu tương tác (cửa mở được…) – có tham chiếu vòng, không sao chép được khi clone
+      proto.traverse((o) => { o.userData = {}; });
+      this._unitCache.set(key, proto);
+    }
+    const g = proto.clone(true);
+    const r = SLOT_RADII[sl.slot] || {};
+    const f = sl.fit;
+    const corner = r.tl ? { x: f.x0, y: f.y0 } : r.tr ? { x: f.x1, y: f.y0 } : r.bl ? { x: f.x0, y: f.y1 } : r.br ? { x: f.x1, y: f.y1 } : null;
+    g.matrixAutoUpdate = false;
+    g.matrix.copy(placeUnit(layout.plan, { fit: f, corner }, CORRIDORS_M, y + 0.12));
+    root.add(g);
+    // Đế màu theo trạng thái / loại căn bên dưới căn (lộ ra như viền màu)
+    const plate = new THREE.Mesh(roundedPrism(sl.fit, y, 0.12, SLOT_RADII[sl.slot], -0.05), material);
+    plate.receiveShadow = true;
+    root.add(plate);
+    // Khối chọn vô hình để rê chuột / nhấp chọn căn
+    const pick = new THREE.Mesh(roundedPrism(sl.fit, y, 2.8, SLOT_RADII[sl.slot], 0), new THREE.MeshBasicMaterial({ colorWrite: false, depthWrite: false }));
+    pick.userData = { floor: fl, floorIndex: fi, slot: sl, key: `${fl}-${sl.slot}`, plate, detailed: true };
+    root.add(pick);
+    const el = document.createElement('div');
+    el.className = 'unitlabel';
+    el.innerHTML = `<b>${sl.slot}</b><span>${sl.type}${layout.unitId || this.getBuilding().layouts?.[sl.slot] ? '' : ''}</span>`;
+    const lab = new CSS2DObject(el);
+    lab.position.set((f.x0 + f.x1) / 2, y + 3.4, (f.y0 + f.y1) / 2);
+    root.add(lab);
+    return pick;
+  }
+
   rebuild() {
     const b = this.getBuilding();
     if (this.root) {
@@ -288,8 +408,9 @@ export class BuildingView {
   highlightSelected() {
     for (const m of this.unitMeshes || []) {
       const on = m.userData.key === this.selected;
-      m.material.emissive?.setHex(on ? 0x3b82f6 : 0x000000);
-      m.material.emissiveIntensity = on ? 0.9 : 0;
+      const mat = m.userData.plate ? m.userData.plate.material : m.material;
+      mat.emissive?.setHex(on ? 0x3b82f6 : 0x000000);
+      mat.emissiveIntensity = on ? 0.9 : 0;
     }
   }
 
@@ -297,7 +418,7 @@ export class BuildingView {
     const rect = this.renderer.domElement.getBoundingClientRect();
     const v = new THREE.Vector2(((e.clientX - rect.left) / rect.width) * 2 - 1, -((e.clientY - rect.top) / rect.height) * 2 + 1);
     this.raycaster.setFromCamera(v, this.camera);
-    const hit = this.raycaster.intersectObjects(this.unitMeshes.filter((m) => !m.material.transparent || m.material.opacity > 0.5), false)[0];
+    const hit = this.raycaster.intersectObjects(this.unitMeshes.filter((m) => m.userData.detailed || !m.material.transparent || m.material.opacity > 0.5), false)[0];
     return hit?.object;
   }
 
@@ -317,7 +438,8 @@ export class BuildingView {
       const b = this.getBuilding();
       const { floor, floorIndex, slot } = m.userData;
       const u = b.units[`${floor}-${slot.slot}`] || {};
-      t.innerHTML = `<b>${unitCode(b, floor, slot.slot)}</b> · ${slot.type}<br>${slot.tim} m² tim · ${slot.tt} m² TT<br>${STATUS[u.status || 'available'].name} · ${unitPrice(b, floorIndex, slot).toFixed(2)} tỷ`;
+      const ar = areaOf(floor, slot);
+      t.innerHTML = `<b>${unitCode(b, floor, slot.slot)}</b> · ${slot.type}<br>${ar.tim} m² tim · ${ar.tt} m² TT<br>${STATUS[u.status || 'available'].name} · ${unitPrice(b, floorIndex, slot).toFixed(2)} tỷ`;
       const r = this.container.getBoundingClientRect();
       t.style.display = 'block';
       t.style.left = e.clientX - r.left + 14 + 'px';

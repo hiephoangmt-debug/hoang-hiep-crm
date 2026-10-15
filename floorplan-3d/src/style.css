@@ -232,3 +232,9 @@ input[type=color] { width: 30px; height: 24px; padding: 0; border: 1px solid var
 main.mode-building { display: grid !important; grid-template-columns: 1fr !important; grid-template-rows: 1fr !important; height: calc(100% - 54px) !important; }
 main.mode-building .panebuilding { grid-column: 1 !important; grid-row: 1 !important; height: 100%; }
 @media (max-width: 700px) { main.mode-building { height: 82vh !important; } }
+.bpanel .pano { display: flex; flex-direction: column; gap: 4px; }
+.bpanel .pano .slider { justify-content: space-between; }
+.tour360 { width: min(1200px, 100%); height: min(820px, 100%); }
+.tour360 iframe { flex: 1; border: 0; width: 100%; min-height: 300px; }
+.tour360 header input { width: 260px; }
+.btnlink.dark { color: var(--text); background: #fff; border-color: var(--line); }

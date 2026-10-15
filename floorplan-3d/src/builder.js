@@ -6,6 +6,7 @@ import { wallLength, openingRange, labelPoint, polygonArea, planBounds, pointInP
 import { floorMaterial, getTexture } from './textures.js';
 import { buildFurniture3D, CATALOG_MAP, mat, setPalette } from './furniture.js';
 import { resolvePalette } from './styles.js';
+import { placePeople } from './people.js';
 
 const wallMat = new THREE.MeshStandardMaterial({ color: 0xf4efe6, roughness: 0.9, map: getTexture('plaster') });
 const capMat = new THREE.MeshBasicMaterial({ color: 0x2f3237, side: THREE.BackSide });
@@ -257,9 +258,31 @@ export function buildScene(plan, opts = {}) {
 
   // --- Nền móng + sân ---
   const pad = 0.35;
-  const slab = shadowy(new THREE.Mesh(new THREE.BoxGeometry(b.maxX - b.minX + pad * 2, 0.16, b.maxY - b.minY + pad * 2), slabMat), false, true);
-  slab.position.set(bounds.cx, -0.08, bounds.cy);
-  root.add(slab);
+  if (opts.landscape !== false) {
+    const slab = shadowy(new THREE.Mesh(new THREE.BoxGeometry(b.maxX - b.minX + pad * 2, 0.16, b.maxY - b.minY + pad * 2), slabMat), false, true);
+    slab.position.set(bounds.cx, -0.08, bounds.cy);
+    root.add(slab);
+  } else {
+    // Nền trắng: đế sàn màu than bám đúng hình các phòng (kiểu mặt cắt phối cảnh)
+    const baseMat = new THREE.MeshStandardMaterial({ color: pal.cap, roughness: 0.85 });
+    for (const room of plan.rooms) {
+      if (room.points.length < 3) continue;
+      const sh = new THREE.Shape(room.points.map((p) => new THREE.Vector2(p.x, -p.y)));
+      const g = new THREE.ExtrudeGeometry(sh, { depth: 0.16, bevelEnabled: false });
+      g.rotateX(-Math.PI / 2);
+      g.translate(0, -0.16, 0);
+      root.add(shadowy(new THREE.Mesh(g, baseMat), true, false));
+    }
+    // Chân tường ngoài cũng có đế
+    for (const w of plan.walls) {
+      const L = wallLength(w);
+      if (L < 0.01) continue;
+      const g = new THREE.BoxGeometry(L + w.thickness, 0.16, w.thickness);
+      g.translate(L / 2, -0.08, 0);
+      g.applyMatrix4(wallMatrix(w));
+      root.add(shadowy(new THREE.Mesh(g, baseMat), true, false));
+    }
+  }
 
   // --- Tường ---
   const geos = [], capGeos = [], skirtGeos = [];
@@ -314,7 +337,7 @@ export function buildScene(plan, opts = {}) {
       g.position.add(new THREE.Vector3(dx * c, 0, dy * c));
       interactive.center = new THREE.Vector3(w.a.x + dx * c, 1, w.a.y + dy * c);
       root.add(g);
-      if (plan.settings.curtains !== false && op.type !== 'door' && op.height >= 0.9) {
+      if (plan.settings.curtains !== false && op.type !== 'door' && op.height >= 0.9 && !op.glass && op.sill > 0.05 || (op.type === 'slide' && plan.settings.curtains !== false)) {
         const cx = w.a.x + dx * c, cy = w.a.y + dy * c;
         const nx = -dy, ny = dx;
         const inPlus = insideAnyRoom(plan, { x: cx + nx * 0.4, y: cy + ny * 0.4 });
@@ -370,7 +393,7 @@ export function buildScene(plan, opts = {}) {
     }
     const lp = labelPoint(room.points);
     const area = polygonArea(room.points);
-    if (area > 1.5 && roomLights.length < 10) {
+    if (opts.lights !== false && area > 1.5 && roomLights.length < 10) {
       const light = new THREE.PointLight(0xffd7a1, 0, Math.max(6, Math.sqrt(area) * 2.6), 1.6);
       light.position.set(lp.x, H - 0.35, lp.y);
       root.add(light);
@@ -380,7 +403,7 @@ export function buildScene(plan, opts = {}) {
       lamp.userData.lampDisc = true;
       root.add(lamp);
     }
-    if (room.name) {
+    if (room.name && opts.labels !== false) {
       const el = document.createElement('div');
       el.className = 'label3d';
       el.innerHTML = `<b>${escapeHtml(room.name)}</b><span>${fmt(area, 1)} m²</span>`;
@@ -427,7 +450,7 @@ export function buildScene(plan, opts = {}) {
     g.rotation.y = (-(item.rot || 0) * Math.PI) / 180;
     g.name = def.name;
     g.traverse((o) => { if (o.isMesh) o.userData.furnitureId = item.id; if (o.userData.lampShade) lampShades.push(o); });
-    if (g.userData.lightPoint && lampLights.length < 6) {
+    if (opts.lights !== false && g.userData.lightPoint && lampLights.length < 6) {
       const l = new THREE.PointLight(0xffc98a, 0, 4, 2);
       l.position.copy(g.userData.lightPoint);
       g.add(l);
@@ -440,6 +463,13 @@ export function buildScene(plan, opts = {}) {
     g.userData.item = item;
     root.add(g);
     furnitureObjs.push(g);
+  }
+
+  // --- Người (tuỳ chọn) ---
+  if (opts.people) {
+    const ppl = placePeople(plan);
+    ppl.userData.noExport = true;
+    root.add(ppl);
   }
 
   // --- Cảnh quan: lối đi trước cửa chính, cây xanh xung quanh ---
