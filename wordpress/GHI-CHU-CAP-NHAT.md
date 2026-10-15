@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.18** + plugin Hoàng Hiệp CRM **2.20.47**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.18** + plugin Hoàng Hiệp CRM **2.20.48**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.48: chat khéo hơn với khách ở xa, khách "xem cho biết"
+
+- Khách nói **ở xa** ("Đà Nẵng xa quá mình tít Hà Nội", "anh ở Sài Gòn không vào được", "chị ở Mỹ"…): trả lời hóm hỉnh, nhắc đúng nơi khách ở, gợi ý xem nhà qua video, gửi pháp lý trước rồi mới bay vào; 3 kiểu câu, không lặp lại câu vừa nói.
+- Thêm kiểu câu cho: khách **chỉ xem cho biết / để suy nghĩ thêm**, khách **nghi môi giới ăn chênh**, khách hỏi **có nên mua bây giờ** (dẫn số liệu quý 3/2026).
+- Xưng hô đúng hơn: khách gõ "anh ở…", "chị đang…" → gọi anh / chị thay vì anh/chị.
+- Cài: Dự án → Nhập nhanh → tải `cap-nhat-code.zip` → LiteSpeed Cache → Purge All (không cần nhập lại dữ liệu).
 
 ## Có gì mới – plugin 2.20.47: giỏ hàng 12 khách sạn ven biển
 - Bài **"Bán khách sạn Đà Nẵng ven biển"** thêm mục "12 khách sạn 3 – 4 sao ven biển đang chào bán (10/2026)": bảng vị trí, đất, tầng/phòng, doanh thu, giá chào, giá/m² đất, so sánh tỷ lệ doanh thu/giá; đổi tiêu đề, mô tả, tiêu đề SEO; thêm câu hỏi thường gặp. Bài được đưa lên đầu Tin tức (nếu anh chưa sửa tay bài này).

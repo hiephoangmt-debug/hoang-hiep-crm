@@ -761,10 +761,10 @@ function hh_chat_script_reply( $msgs, $page, $has_lead, $new_lead ) {
  * Cách xưng hô theo lời khách: "cho anh…", "chị hỏi…" → anh / chị; không rõ → anh/chị.
  */
 function hh_chat_address( $t ) {
-	if ( preg_match( '/\b(cho|giup|bao|hoi|nhu|voi|cua|ke|tu van cho) anh\b|^anh (hoi|muon|can|tim|dang|co|thay|nghi)\b|\banh minh\b/', $t ) ) {
+	if ( preg_match( '/\b(cho|giup|bao|hoi|nhu|voi|cua|ke|tu van cho) anh\b|^anh (hoi|muon|can|tim|dang|co|thay|nghi|o|la|ben|vua|se|da|chua|thich)\b|\banh minh\b/', $t ) ) {
 		return 'anh';
 	}
-	if ( preg_match( '/\b(cho|giup|bao|hoi|nhu|voi|cua|ke|tu van cho) chi\b|^chi (hoi|muon|can|tim|dang|co|thay|nghi)\b/', $t ) ) {
+	if ( preg_match( '/\b(cho|giup|bao|hoi|nhu|voi|cua|ke|tu van cho) chi\b|^chi (hoi|muon|can|tim|dang|co|thay|nghi|o|la|ben|vua|se|da|chua|thich)\b/', $t ) ) {
 		return 'chị';
 	}
 	return 'anh/chị';
@@ -777,11 +777,44 @@ function hh_chat_address( $t ) {
 function hh_chat_witty( $t, $name, $prev = '' ) {
 	$x  = hh_chat_address( $t );
 	$X  = 'anh/chị' === $x ? 'Anh/chị' : mb_convert_case( $x, MB_CASE_TITLE );
+	// Nơi khách ở (cho câu "ở xa").
+	$city = 'xa';
+	$fly  = '';
+	foreach ( array(
+		'Sài Gòn'    => array( '/sai gon|\bsg\b|hcm|ho chi minh/', ', Sài Gòn – Đà Nẵng bay khoảng 1 tiếng 20 phút' ),
+		'Hà Nội'     => array( '/ha noi|\bhn\b|ngoai bac/', ', Hà Nội – Đà Nẵng bay khoảng 1 tiếng 20 phút, nhanh hơn kẹt xe giờ cao điểm' ),
+		'nước ngoài' => array( '/nuoc ngoai|\b(my|uc|han quoc|nhat|duc|phap|canada|singapore)\b/', '' ),
+	) as $c => $v ) {
+		if ( preg_match( $v[0], $t ) ) {
+			$city = $c;
+			$fly  = $v[1];
+			break;
+		}
+	}
 	$jokes = array(
 		// Hỏi bot là ai / người thật không.
 		'/\b(ban|em|may|mi) (la )?(bot|robot|nguoi may|ai|may)\b|\bchat ?bot\b|\b(ban|em|may|mi) la ai\b|nguoi that (a|ha|khong|ko|hong)\b|co phai nguoi (that|khong)|tra loi tu dong/' => array(
 			"Dạ em là trợ lý tự động của $name – không ăn, không ngủ, không đòi tăng lương, chỉ thuộc bảng giá 😄 Còn đi xem nhà, trả giá thì $name lo trực tiếp. $X đang để ý khu nào ạ?",
 			"Dạ em là \"em út\" chạy bằng điện của $name thôi ạ 😄 Hỏi giá, hỏi pháp lý em trả lời liền; còn dẫn đi xem nhà thì phải $name bằng xương bằng thịt. $X cần tìm gì ạ?",
+		),
+		// Ở xa (Hà Nội, Sài Gòn, nước ngoài) – ngại đi lại xem nhà.
+		'/\bxa (qua|wa|lam|the)\b|o (tit |tan |tuot )?(ha noi|hn|sai gon|sg|tphcm|hcm|ngoai bac|nuoc ngoai|my|uc|han quoc|nhat)\b|tit (ha noi|ngoai bac|sai gon)|khong (vao|ra|bay) (duoc|dc)|khong co thoi gian (vao|ra|di)|o xa/' => array(
+			"Dạ xa mặt chứ không xa… sổ hồng đâu $x ơi 😄\n\n$name dẫn $x đi xem qua video call, gửi ảnh thực tế, sổ, hợp đồng để $x kiểm tra trước từ {$city}; ưng rồi mới cần bay vào một chuyến{$fly}. $X đang tính mua để nghỉ dưỡng, cho thuê hay để dành ạ?",
+			"Dạ xa thì mình có… Zalo video 😄 Ngày xưa mua nhà phải đi mòn dép, giờ $x ngồi nhà vẫn xem được từng góc ban công.\n\n$name quay video căn thật, gửi pháp lý, cả bảng tính cho thuê. Mua căn ven biển rồi giao bên vận hành cho thuê là cách nhiều khách ở xa đang làm. $X thích gần biển hay gần sông Hàn ạ?",
+			"Dạ $x ở {$city} mà đã để ý Đà Nẵng là có gu rồi đó 😄\n\nỞ xa thì mình làm kiểu \"online trước, bay vào sau\": em gửi bảng giá, $name quay video từng căn, kiểm tra pháp lý giúp; chọn được căn ưng rồi $x mới vào xem tận mắt. Ngân sách $x đang tính khoảng bao nhiêu ạ?",
+		),
+		// Chỉ xem cho biết, chưa có nhu cầu, để suy nghĩ thêm.
+		'/xem cho biet|tham khao thoi|chua co nhu cau|chua mua (lien|ngay|bay gio)|de (suy nghi|tinh) (them|da)|nghi them|tu tu|chua voi|nam sau (moi )?mua|cho them|doi gia (giam|xuong)/' => array(
+			"Dạ tham khảo kỹ là đúng rồi $x, mua nhà chứ đâu phải mua rau 😄\n\nEm gửi $x bảng giá theo khu để $x theo dõi dần nhé, khi nào thấy hợp thì mình tính tiếp. $X đang để ý khu nào nhất ạ?",
+			"Dạ không vội đâu $x ạ, nhà tốt thì vẫn còn, chỉ là giá thì… không chờ ai 😄\n\nNếu $x muốn, em báo khi có căn giảm giá hay chủ cần bán gấp ở khu $x thích. $X quan tâm căn hộ hay đất ạ?",
+		),
+		// Nghi ngờ môi giới, phí, uy tín.
+		'/moi gioi|an chenh|phi (moi gioi|dich vu|hoa hong)|hoa hong|co uy tin|uy tin khong|tin (duoc|dc) khong|cam ket gi/' => array(
+			"Dạ $x hỏi thẳng em cũng nói thẳng 😊\n\n$name làm nghề hơn 15 năm ở Đà Nẵng, sống nhờ uy tín và khách cũ giới thiệu nên không dại gì \"ăn chênh\" đâu 😄 Giá trên web ghi rõ là giá tham khảo / giá rao, phí dịch vụ (nếu có) nói rõ từ đầu; giấy tờ $x được xem bản gốc, công chứng trước khi giao tiền. $X đang cân nhắc căn nào để em kiểm tra pháp lý giúp ạ?",
+		),
+		// Hỏi thời điểm mua, sợ sốt / bong bóng.
+		'/co nen mua (bay gio|luc nay|khong)|mua (luc nao|thoi diem nao)|gia (co )?(giam|xuong) khong|sap (giam|xuong)|bong bong|sot ao|dinh (roi|chua)/' => array(
+			"Câu này mà em đoán trúng 100% thì em đã… nghỉ hưu ở Mỹ Khê rồi $x ạ 😄\n\nNói theo số liệu: quý 3/2026 chung cư Đà Nẵng đi ngang khoảng 67 triệu/m², cho thuê lãi khoảng 4,5%/năm; đất nền đang điều chỉnh khoảng 7%. Mua để ở, cho thuê thì lúc nào hợp tài chính là lúc tốt; lướt sóng ngắn hạn thì nên chậm lại. $X mua để ở hay đầu tư ạ?",
 		),
 		// Tán tỉnh, người yêu, hẹn hò.
 		'/nguoi yeu|ban gai|ban trai|doc than|e (qua|lam)\b|lay vo|lay chong|ket hon|yeu em|thuong em|thich em|hen ho|di (cafe|ca phe|choi|an) (khong|ko|voi)|cho (xin )?(so|zalo) (em|ban)|lam quen|crush/' => array(
