@@ -1,7 +1,7 @@
 // Giao diện chế độ Tòa nhà: bảng thống kê, bộ lọc, chi tiết căn. Dùng chung cho trang chính và trang toa-nha.html.
 import { BuildingView, slotLayout } from './building3d.js';
 import { READONLY } from './ui.js';
-import { sampleBuilding, SLOT_LIST, STATUS, TYPE_COLORS, residentialFloors, unitCode, unitPrice, areaOf, PROVISIONAL } from './buildingData.js';
+import { sampleBuilding, SLOT_LIST, STATUS, TYPE_COLORS, residentialFloors, unitCode, unitPrice, areaOf, PROVISIONAL, GARDEN_FLOORS, GARDEN_UNIT, SHOPS } from './buildingData.js';
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => [...document.querySelectorAll(s)];
@@ -43,6 +43,12 @@ function bStats() {
     st[s].n++;
     st[s].value += unitPrice(building, fi, sl);
   }));
+  for (const sh of SHOPS) {
+    if (!sh.shop) continue;
+    const s = building.units[`${sh.floor}-${sh.slot}`]?.status || 'available';
+    st[s].n++;
+    st[s].value += unitPrice(building, 0, sh);
+  }
   return { st, total: floors.length * SLOT_LIST.length };
 }
 
@@ -75,6 +81,8 @@ function renderBPanel() {
     <h4>Lọc loại căn</h4>
     <select id="bType"><option value="">Tất cả loại căn</option>${Object.keys(TYPE_COLORS).map((t) => `<option ${bview?.filter.type === t ? 'selected' : ''}>${t}</option>`).join('')}</select>
     <button id="bPlan" class="primary">🗺 Mặt bằng tầng chi tiết (3D)</button>
+    <div class="row seg"><button data-shops="1" class="${bview?.shopsMode === 1 ? 'active' : ''}">🛍️ Shop tầng 1</button><button data-shops="2" class="${bview?.shopsMode === 2 ? 'active' : ''}">🏊 Tầng 2 + hồ bơi</button></div>
+    ${bview?.shopsMode ? '<button data-shops="0">↩ Hiện lại cả tòa</button>' : ''}
     <h4>Ngắm theo cao độ tầng</h4>
     <label class="slider">Tầng <b id="bFloorLabel">${floors[bFloorIdx].replace(/^0/, '')}</b><input type="range" id="bFloorRange" min="0" max="${floors.length - 1}" step="1" value="${bFloorIdx}" /></label>
     <div class="row seg"><button id="bOrbit" class="${bview?.viewMode === 'orbit' ? 'active' : ''}">🔄 Xoay quanh tầng</button><button id="bLook" class="${bview?.viewMode === 'look' ? 'active' : ''}">🔭 Ngắm view từ tầng</button></div>
@@ -98,6 +106,7 @@ function renderBPanel() {
     bview.showFloorPlan(fi);
     renderBPanel();
   };
+  $$('#bpanel [data-shops]').forEach((x) => (x.onclick = () => { bview.showShops(+x.dataset.shops); renderBPanel(); }));
   $('#b360Tour').onclick = () => open360Tour();
   $('#b360Site').onclick = () => bview.showSitePano(renderBPanel);
   if ($('#b360Load')) $('#b360Load').onclick = () => $('#b360File').click();
@@ -167,7 +176,7 @@ function renderBDetail() {
   const u = bUnit(key);
   const price = unitPrice(building, floorIndex, slot);
   const ar = areaOf(floor, slot);
-  const layout = slotLayout(building, slot.slot);
+  const layout = slot.shop ? null : slotLayout(building, slot.slot);
   const hasLayout = !!layout;
   el.hidden = false;
   el.innerHTML = `
@@ -187,6 +196,13 @@ function renderBDetail() {
     <button id="bdView" class="primary">🏠 Xem căn hộ 3D</button>
     <button id="bdAssign" title="Lưu mặt bằng đang mở trong trình vẽ làm mặt bằng của vị trí ${slot.slot} (áp dụng cho mọi tầng)">📌 Gán mặt bằng đang mở cho vị trí ${slot.slot}</button>
     <p class="hint">${building.layouts[slot.slot] ? `Vị trí ${slot.slot} dùng mặt bằng đã gán (mọi tầng).` : layout ? `Vị trí ${slot.slot} đang dùng căn mẫu “${layout.unitId}”${PROVISIONAL.has(slot.slot) ? ' – GHÉP TẠM, chưa có mặt bằng đúng của căn này' : ' (ghép theo diện tích, cần xác nhận)'}.` : `Vị trí ${slot.slot} chưa có mặt bằng chi tiết. Gửi ảnh mặt bằng loại căn này để dựng, hoặc dựng ở chế độ 2D rồi bấm “Gán”.`}</p>`}`;
+  if (slot.shop) {
+    // Shop khối đế: không có mặt bằng căn hộ – ẩn các nút dành cho căn hộ
+    for (const id of ['#bdLook', '#bdView', '#bdAssign']) { const x = $(id); if (x) x.hidden = true; }
+    el.querySelectorAll('p.hint').forEach((p) => p.remove());
+    el.querySelector('small').textContent = `Shop thương mại · tầng ${floor.replace(/^0/, '')} · ${slot.label}`;
+    el.insertAdjacentHTML('beforeend', `<p class="hint">Shop khối đế, mặt tiền kính, trần cao ~4,8 m. Mặt bằng trong bàn giao thô (minh hoạ).</p>`);
+  }
   const upd = (fn) => { fn(u); building.sample = false; saveBuilding(); bview.rebuild(); renderBPanel(); };
   $('#bdLook').onclick = () => {
     bFloorIdx = floorIndex;
@@ -210,7 +226,7 @@ function renderBDetail() {
   };
   $('#bdView').onclick = () => {
     if (!layout) return H.toast(`Vị trí ${slot.slot} chưa có mặt bằng chi tiết.`, 4000);
-    if (layout.unitId && H.openShowcase) return H.openShowcase(layout.unitId);
+    if (layout.unitId && H.openShowcase) return H.openShowcase(GARDEN_FLOORS.has(floor) && GARDEN_UNIT[layout.unitId] || layout.unitId);
     if (READONLY) return;
     H.openUnit(JSON.parse(JSON.stringify(layout.plan)), { code: unitCode(building, floor, slot.slot), floor, slot: { ...slot, tt: ar.tt } });
   };

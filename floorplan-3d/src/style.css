@@ -265,3 +265,5 @@ body:has(main.mode-building) { display: flex; flex-direction: column; height: 10
 body:has(main.mode-building) > .topbar { flex: none; }
 main.mode-building { flex: 1 1 auto; height: auto !important; min-height: 0; }
 @media (max-width: 700px) { main.mode-building { height: auto !important; } }
+.unitlabel.shoplabel b { display: inline-block; font-size: 11px; padding: 1px 5px; border-radius: 6px; background: rgba(60,40,100,.75); text-shadow: none; }
+.unitlabel.shoplabel span { display: inline-block; padding: 2px 7px; border-radius: 8px; background: rgba(20,110,150,.8); text-shadow: none; }
