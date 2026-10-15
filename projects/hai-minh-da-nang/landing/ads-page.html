@@ -122,10 +122,10 @@ td:first-child,th:first-child{text-align:left}
 
 /* Rate */
 .rate-sec{background:var(--sand)}
-.rate{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:18px;align-items:center;margin-top:44px}
+.rate{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
 .rbox{background:#fff;padding:30px 16px;text-align:center;border:1px solid var(--line)}
 .rbox small{display:block;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
-.rbox b{display:block;font-family:"Playfair Display",Georgia,serif;font-size:40px;font-weight:500;color:var(--ocean);margin:6px 0 2px}
+.rbox b{display:block;font-variant-numeric:lining-nums;font-family:"Playfair Display",Georgia,serif;font-size:40px;font-weight:500;color:var(--ocean);margin:6px 0 2px}
 .rbox.ok{background:var(--ocean);border-color:var(--ocean)}
 .rbox.ok b{color:var(--gold-l)}
 .rbox.ok small,.rbox.ok span{color:#C9D4DA}
@@ -385,10 +385,8 @@ footer a{color:var(--gold-l);text-decoration:none}
     </div>
     <div class="rate">
       <div class="rbox"><small>Thu nhập cho thuê</small><b>13,1 tr</b><span>mỗi tháng</span></div>
-      <div class="op">−</div>
-      <div class="rbox"><small>Lãi vay</small><b>12,5 tr</b><span>mỗi tháng</span></div>
-      <div class="op">=</div>
-      <div class="rbox ok"><small>Còn lại</small><b>+0,6 tr</b><span>dòng tiền thuê gần đủ trả lãi</span></div>
+      <div class="rbox"><small>Trừ lãi vay</small><b>− 12,5 tr</b><span>mỗi tháng</span></div>
+      <div class="rbox ok"><small>Còn lại</small><b>= +0,6 tr</b><span>dòng tiền thuê gần đủ trả lãi</span></div>
     </div>
     <div class="tips">
       <div><b>Chọn căn vừa tầm</b><span>Căn 1PN 47 m² hoặc 2PN – vốn ban đầu nhẹ hơn, dễ cho thuê theo đêm.</span></div>
