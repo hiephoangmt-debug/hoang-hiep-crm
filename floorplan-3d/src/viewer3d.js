@@ -366,13 +366,21 @@ export class Viewer3D {
       // Nền trắng: nền sáng trơn; ánh sáng môi trường dùng HDRI phòng nếu có
       if (this.isStudio()) { grad.topColor.set(night ? 0x1c2230 : 0xdcdcdc); grad.bottomColor.set(night ? 0x1c2230 : 0xd4d4d4); grad.update(); }
       this.scene.background = grad;
-      this.scene.environment = this.state.realistic && this.hdriEquirect ? this.hdriEquirect : grad;
+      // Nhìn từ trên: HDRI trong nhà có "trời" là trần tối → dùng trời sáng để sàn, nội thất đủ sáng
+      if (above) { grad.topColor.set(night ? 0x2a3040 : 0xffffff); grad.bottomColor.set(night ? 0x1c2230 : 0xdcdcdc); grad.update(); }
+      this.scene.environment = this.state.realistic && this.hdriEquirect && !above ? this.hdriEquirect : grad;
     } else {
       this._ptBg = { bg: this.scene.background, env: this.scene.environment };
       this.scene.environment = this.extTex;
     }
     this._ptCatcher = this.shadowCatcher.visible;
     this.shadowCatcher.visible = false;
+    // Bộ path tracing vẫn vẽ cả vật đang ẩn (trần, mặt cắt, khối đồ giản lược đã thay bằng mô hình thật…)
+    // → tạm gỡ hẳn khỏi cảnh, gắn lại khi tắt
+    this._ptDetached = [];
+    const hidden = [];
+    this.scene.traverse((o) => { if (o !== this.scene && !o.visible && o.parent) hidden.push(o); });
+    hidden.forEach((o) => { this._ptDetached.push([o, o.parent]); o.parent.remove(o); });
     this.ptActive = true;
     this.pt.setScene(this.scene, this.camera);
     this._ptCam = this.camera.matrixWorld.clone();
@@ -381,6 +389,8 @@ export class Viewer3D {
   stopRealRender() {
     if (!this.ptActive) return;
     this.ptActive = false;
+    (this._ptDetached || []).forEach(([o, parent]) => parent.add(o));
+    this._ptDetached = null;
     if (this._ptBg) { this.scene.background = this._ptBg.bg; this.scene.environment = this._ptBg.env; }
     if (this._ptCatcher) this.shadowCatcher.visible = true;
     this.built.root.traverse((o) => { if (o.userData.capBack) o.visible = true; });
@@ -823,12 +833,14 @@ export class Viewer3D {
   /** Tải ảnh PNG nét cao của khung 3D; nhìn từ trên thì kèm tên + diện tích phòng */
   exportPNG(info = {}) {
     // mode 'plan': ảnh mặt bằng nhìn thẳng từ trên (đọc rõ dài × rộng); 'view': giữ góc đang xem
-    const planMode = info.mode === 'plan' && !this.ptActive;
+    const planMode = info.mode === 'plan' && !(this.ptActive && this.pt.samples >= 1);
     const above = planMode || this.camera.position.y > (this.built?.height || 2.8) + 1;
     const showLabels = above && this.mode !== 'walk' && info.mode !== 'view';
     const prev = this.built.labels.map((l) => l.visible);
+    // Ảnh như thật chỉ dùng khi đã có ít nhất 1 lượt render; chưa có thì lấy ảnh 3D thường
+    const usePT = this.ptActive && this.pt.samples >= 1;
     const render = () => {
-      if (this.ptActive) { this.pt.renderSample(); return; }
+      if (usePT) { this.pt.renderSample(); return; }
       if (this.state.ao || this.bloom.enabled) this.composer.render(); else this.renderer.render(this.scene, this.camera);
     };
     this.labelRenderer.render(this.scene, this.camera);
@@ -852,7 +864,7 @@ export class Viewer3D {
     const frame = { W: FW, H: FH, side, band, s: fs };
     const rw = FW - 2 * side, rh = FH - band;
     const saved = { pos: this.camera.position.clone(), target: this.controls.target.clone(), aspect: this.camera.aspect, pr: this.renderer.getPixelRatio() };
-    if (!this.ptActive) {
+    if (!usePT) {
       this.renderer.setPixelRatio(1);
       this.renderer.setSize(rw, rh, false);
       this.composer.setPixelRatio(1);
@@ -867,7 +879,7 @@ export class Viewer3D {
       this.camera.updateMatrixWorld();
     }
     const out = exportImage({ renderer: this.renderer, scene: this.scene, camera: this.camera, render, keepRatio: true, frame, ...extra, ...info });
-    if (!this.ptActive) {
+    if (!usePT) {
       this.renderer.setPixelRatio(saved.pr);
       this.composer.setPixelRatio(saved.pr);
       this.camera.position.copy(saved.pos);
