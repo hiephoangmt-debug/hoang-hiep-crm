@@ -48,6 +48,13 @@ npm run build      # bản tĩnh trong dist/ (upload lên hosting bất kỳ)
 | `src/detect.js`, `src/autorooms.js` | Nhận diện tường từ ảnh, tự tạo phòng |
 | `src/estimate.js` | Bóc tách khối lượng & dự toán |
 
+## Hai trang tách riêng
+
+- `index.html` – trình dựng căn hộ: vẽ / nhận diện mặt bằng, xem 3D, đi bộ, render, dự toán. Có thêm chế độ 🏢 Tòa nhà; phần này chỉ được tải khi mở lần đầu.
+- `toa-nha.html` – **trang tòa nhà riêng, nhẹ hơn**: chỉ tải phần tòa nhà, không tải trình vẽ, trình xem căn hộ hay bộ render ảnh thật. Hợp để gửi khách hoặc mở trên điện thoại. Bấm “Xem căn hộ 3D” sẽ chuyển sang trang chính và mở đúng căn đó.
+
+Để nhẹ máy: chỉ cảnh đang hiển thị mới được vẽ. Bộ render path tracing chỉ tải khi bấm “📸 Render ảnh thật”. Trang tòa nhà có tuỳ chọn **Chế độ nhẹ** (ít cây/nhà, tắt bóng đổ, giảm độ phân giải), mặc định bật trên điện thoại và máy ít nhân.
+
 ## Đưa lên web (GitHub Pages)
 
 Repo đã có sẵn workflow `.github/workflows/deploy-floorplan-3d.yml`: mỗi lần thay đổi trong `floorplan-3d/` được merge vào `main`, GitHub tự build và đăng lên Pages.

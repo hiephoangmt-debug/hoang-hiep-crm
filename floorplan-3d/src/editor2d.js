@@ -598,7 +598,7 @@ export class Editor2D extends EventTarget {
     const bg = this.store.background;
     if (this.bgImage && bg) {
       ctx.globalAlpha = bg.opacity ?? 0.5;
-      ctx.drawImage(this.bgImage, bg.x, bg.y, this.bgImage.width * bg.mpp, this.bgImage.height * bg.mpp);
+      ctx.drawImage(this.bgImage, bg.x, bg.y, this.bgImage.width * bg.mpp, this.bgImage.height * (bg.mppY ?? bg.mpp));
       ctx.globalAlpha = 1;
     }
 

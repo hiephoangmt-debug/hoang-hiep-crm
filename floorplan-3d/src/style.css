@@ -45,6 +45,10 @@ main.mode-2d { grid-template-columns: 270px 1fr 0 270px; }
 main.mode-2d .pane3d { display: none; }
 main.mode-3d { grid-template-columns: 0 0 1fr 270px; }
 main.mode-3d .pane2d, main.mode-3d .left { display: none; }
+main .panebuilding { display: none; }
+main.mode-building { grid-template-columns: 1fr; }
+main.mode-building > *:not(.panebuilding) { display: none; }
+main.mode-building .panebuilding { display: block; grid-column: 1; grid-row: 1; }
 
 .sidebar { background: var(--panel); border-right: 1px solid var(--line); overflow: auto; display: flex; flex-direction: column; min-width: 0; }
 .sidebar.right { border-right: 0; border-left: 1px solid var(--line); }
@@ -189,3 +193,42 @@ input[type=color] { width: 30px; height: 24px; padding: 0; border: 1px solid var
 .dialog { padding: 18px; gap: 12px; width: min(420px, 100%); }
 .dialog p { margin: 0; line-height: 1.5; }
 .dialog .btnrow { justify-content: flex-end; margin: 0; }
+.askfield { display: grid; grid-template-columns: 90px 1fr; gap: 8px; align-items: center; }
+.askfield span { color: var(--muted); font-size: 12px; }
+
+.panebuilding { background: #cfe0ef; }
+#buildingView { position: absolute; inset: 0; }
+#buildingView canvas { display: block; }
+.floorlabel { font-size: 10px; font-weight: 600; color: #1f2937; background: rgba(255,255,255,.8); padding: 1px 5px; border-radius: 4px; }
+.bpanel { position: absolute; left: 12px; top: 12px; width: 290px; max-height: calc(100% - 24px); overflow: auto; background: rgba(255,255,255,.95); border-radius: 12px; box-shadow: var(--shadow); padding: 14px; display: flex; flex-direction: column; gap: 10px; z-index: 3; }
+.bpanel h3 { margin: 0; font-size: 15px; }
+.bpanel h4 { margin: 4px 0 0; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.bpanel .sample { font-size: 11px; color: #92400e; background: #fef3c7; border-radius: 6px; padding: 5px 8px; }
+.bstats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.bstats button { display: flex; flex-direction: column; align-items: flex-start; padding: 6px 8px; text-align: left; }
+.bstats button.off { opacity: .35; }
+.bstats b { font-size: 16px; font-variant-numeric: tabular-nums; }
+.bstats small { display: flex; align-items: center; gap: 5px; color: var(--muted); }
+.dot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; flex: none; }
+.bpanel .row { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.bpanel .seg button.active { background: var(--primary-soft); border-color: var(--primary); }
+.bpanel label.slider { color: var(--text); }
+.bmoney { font-size: 12px; color: var(--muted); }
+.bmoney b { color: var(--text); font-size: 15px; font-variant-numeric: tabular-nums; }
+.bdetail { position: absolute; right: 12px; top: 12px; width: 300px; max-height: calc(100% - 24px); overflow: auto; background: #fff; border-radius: 12px; box-shadow: var(--shadow); padding: 14px; z-index: 3; display: flex; flex-direction: column; gap: 8px; }
+.bdetail h3 { margin: 0; font-size: 17px; display: flex; justify-content: space-between; align-items: center; }
+.bdetail .chip { font-size: 11px; color: #fff; border-radius: 999px; padding: 2px 8px; }
+.bdetail .kv { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.bdetail .kv div { background: #f8fafc; border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; }
+.bdetail .kv small { color: var(--muted); display: block; font-size: 11px; }
+.bdetail .kv b { font-variant-numeric: tabular-nums; }
+@media (max-width: 700px) { .bpanel { width: auto; right: 12px; max-height: 45%; } .bdetail { left: 12px; width: auto; top: auto; bottom: 12px; max-height: 50%; } }
+.unitlabel { pointer-events: none; text-align: center; font-size: 10px; line-height: 1.15; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.7); }
+.unitlabel b { display: block; font-size: 12px; }
+.bdetail[hidden] { display: none; }
+.btnlink { color: #e2e8f0; text-decoration: none; background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 6px 10px; }
+.btnlink:hover { background: #273449; }
+/* Chế độ tòa nhà luôn chiếm trọn màn hình, kể cả màn hình hẹp */
+main.mode-building { display: grid !important; grid-template-columns: 1fr !important; grid-template-rows: 1fr !important; height: calc(100% - 54px) !important; }
+main.mode-building .panebuilding { grid-column: 1 !important; grid-row: 1 !important; height: 100%; }
+@media (max-width: 700px) { main.mode-building { height: 82vh !important; } }

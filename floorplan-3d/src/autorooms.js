@@ -11,21 +11,26 @@ export function detectRooms(plan) {
   const x0 = b.minX - pad, y0 = b.minY - pad;
   const W = Math.ceil((b.maxX - b.minX + 2 * pad) / RES), H = Math.ceil((b.maxY - b.minY + 2 * pad) / RES);
   if (W * H > 6e6) return [];
-  const blocked = new Uint8Array(W * H);
+  // blocked = ô thuộc tường thật; closed = tường nới rộng thêm CLOSE để bịt tạm các khe cửa
+  const CLOSE = 0.45;
+  const blocked = new Uint8Array(W * H), closed = new Uint8Array(W * H);
   for (const w of plan.walls) {
-    const r = w.thickness / 2 + 0.01;
-    const minI = Math.max(0, Math.floor((Math.min(w.a.x, w.b.x) - r - x0) / RES)), maxI = Math.min(W - 1, Math.ceil((Math.max(w.a.x, w.b.x) + r - x0) / RES));
-    const minJ = Math.max(0, Math.floor((Math.min(w.a.y, w.b.y) - r - y0) / RES)), maxJ = Math.min(H - 1, Math.ceil((Math.max(w.a.y, w.b.y) + r - y0) / RES));
+    const r = w.thickness / 2 + 0.01, R = r + CLOSE;
+    const minI = Math.max(0, Math.floor((Math.min(w.a.x, w.b.x) - R - x0) / RES)), maxI = Math.min(W - 1, Math.ceil((Math.max(w.a.x, w.b.x) + R - x0) / RES));
+    const minJ = Math.max(0, Math.floor((Math.min(w.a.y, w.b.y) - R - y0) / RES)), maxJ = Math.min(H - 1, Math.ceil((Math.max(w.a.y, w.b.y) + R - y0) / RES));
     for (let j = minJ; j <= maxJ; j++)
       for (let i = minI; i <= maxI; i++) {
         const p = { x: x0 + (i + 0.5) * RES, y: y0 + (j + 0.5) * RES };
+        const d = closestOnSegment(p, w.a, w.b).d;
         // Nối dài đầu tường một chút để khép kín các góc
-        if (closestOnSegment(p, w.a, w.b).d <= r + RES * 0.75) blocked[j * W + i] = 1;
+        if (d <= r + RES * 0.75) blocked[j * W + i] = 1;
+        if (d <= R) closed[j * W + i] = 1;
       }
   }
-  // Gán nhãn vùng: 0 = chưa xét, -1 = bên ngoài, >0 = phòng
+  // Gán nhãn vùng trên lưới đã bịt khe: -1 = bên ngoài, >0 = phòng
   const label = new Int32Array(W * H);
   const stack = [];
+  const nbrs = (k) => { const i = k % W, j = (k - i) / W; return [i > 0 ? k - 1 : -1, i < W - 1 ? k + 1 : -1, j > 0 ? k - W : -1, j < H - 1 ? k + W : -1]; };
   const fill = (start, id) => {
     let n = 0;
     stack.push(start);
@@ -33,22 +38,41 @@ export function detectRooms(plan) {
     while (stack.length) {
       const k = stack.pop();
       n++;
-      const i = k % W, j = (k - i) / W;
-      const nb = [i > 0 ? k - 1 : -1, i < W - 1 ? k + 1 : -1, j > 0 ? k - W : -1, j < H - 1 ? k + W : -1];
-      for (const q of nb) if (q >= 0 && !blocked[q] && !label[q]) { label[q] = id; stack.push(q); }
+      for (const q of nbrs(k)) if (q >= 0 && !closed[q] && !label[q]) { label[q] = id; stack.push(q); }
     }
     return n;
   };
-  for (let i = 0; i < W; i++) for (const j of [0, H - 1]) { const k = j * W + i; if (!blocked[k] && !label[k]) fill(k, -1); }
-  for (let j = 0; j < H; j++) for (const i of [0, W - 1]) { const k = j * W + i; if (!blocked[k] && !label[k]) fill(k, -1); }
+  // Bên ngoài căn hộ = ngoài đường bao lồi của các tường (lô-gia hở lan can kính vẫn tính là trong)
+  const hull = convexHull(plan.walls.flatMap((w) => [w.a, w.b]));
+  for (let k = 0; k < W * H; k++) {
+    const i = k % W, j = (k - i) / W;
+    if (!insideConvex({ x: x0 + (i + 0.5) * RES, y: y0 + (j + 0.5) * RES }, hull)) label[k] = -1;
+  }
   const rooms = [];
   let id = 1;
   for (let k = 0; k < W * H; k++) {
-    if (blocked[k] || label[k]) continue;
+    if (closed[k] || label[k]) continue;
     id++;
     const n = fill(k, id);
-    if (n * RES * RES < 1.0) continue;
+    let open = 0, walled = 0;
+    for (let q = 0; q < W * H; q++) {
+      if (label[q] !== id) continue;
+      for (const r of nbrs(q)) { if (r < 0 || label[r] === -1) open++; else if (closed[r]) walled++; }
+    }
+    // Quá nhỏ, hoặc hở ra ngoài đường bao quá nhiều (khoảng trống quanh căn chữ L) → không phải phòng
+    if (n * RES * RES < 0.4 || open > (open + walled) * 0.45) {
+      for (let q = 0; q < W * H; q++) if (label[q] === id) label[q] = n * RES * RES < 0.4 ? 0 : -1;
+      continue;
+    }
     rooms.push(id);
+  }
+  // Cho các vùng (kể cả bên ngoài) cùng loang lại vào phần đã bịt, dừng ở tường thật
+  let queue = [];
+  for (let k = 0; k < W * H; k++) if (label[k]) queue.push(k);
+  while (queue.length) {
+    const next = [];
+    for (const k of queue) for (const q of nbrs(k)) if (q >= 0 && !blocked[q] && !label[q]) { label[q] = label[k]; next.push(q); }
+    queue = next;
   }
   // Nở vùng vào nửa bề dày tường để phòng chạm tới tim tường
   const maxT = Math.max(...plan.walls.map((w) => w.thickness));
@@ -171,4 +195,23 @@ function dropSlivers(pts, minArea) {
     }
   }
   return out;
+}
+
+function convexHull(pts) {
+  const p = pts.map((q) => [q.x, q.y]).sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+  if (p.length < 3) return p;
+  const cross = (o, a, b) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+  const lower = [], upper = [];
+  for (const q of p) { while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], q) <= 0) lower.pop(); lower.push(q); }
+  for (const q of p.slice().reverse()) { while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], q) <= 0) upper.pop(); upper.push(q); }
+  return lower.slice(0, -1).concat(upper.slice(0, -1));
+}
+
+function insideConvex(pt, hull) {
+  if (hull.length < 3) return true;
+  for (let i = 0; i < hull.length; i++) {
+    const a = hull[i], b = hull[(i + 1) % hull.length];
+    if ((b[0] - a[0]) * (pt.y - a[1]) - (b[1] - a[1]) * (pt.x - a[0]) < -1e-9) return false;
+  }
+  return true;
 }

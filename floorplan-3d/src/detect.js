@@ -21,9 +21,20 @@ export function detectWalls(img, bg, opts = {}) {
     gray[i] = g;
     hist[g]++;
   }
-  const thr = Math.min(otsu(hist, W * H), opts.threshold ?? 150);
+  // Bản vẽ phối màu (tường tô một màu xám phẳng, sàn có vân): lấy đúng màu tường.
+  // Bản vẽ đen trắng: ngưỡng Otsu như cũ.
+  const wallTone = findWallTone(data, W * H);
   const dark = new Uint8Array(W * H);
-  for (let i = 0; i < W * H; i++) dark[i] = gray[i] < thr ? 1 : 0;
+  if (wallTone) {
+    const [wr, wg, wb] = wallTone;
+    for (let i = 0; i < W * H; i++) {
+      const r = data[i * 4], g = data[i * 4 + 1], b = data[i * 4 + 2];
+      dark[i] = Math.abs(r - wr) <= 14 && Math.abs(g - wg) <= 14 && Math.abs(b - wb) <= 14 ? 1 : 0;
+    }
+  } else {
+    const thr = Math.min(otsu(hist, W * H), opts.threshold ?? 150);
+    for (let i = 0; i < W * H; i++) dark[i] = gray[i] < thr ? 1 : 0;
+  }
 
   // Ước lượng bề dày tường = mốt của min(chiều dài vệt ngang, vệt dọc) trong số các nét dày
   const hRun = runLengths(dark, W, H, true), vRun = runLengths(dark, W, H, false);
@@ -32,7 +43,8 @@ export function detectWalls(img, bg, opts = {}) {
   let mode = 0, mv = 0;
   for (let t = 3; t < 200; t++) { const v = th[t] + (th[t - 1] || 0) * 0.5 + (th[t + 1] || 0) * 0.5; if (v > mv) { mv = v; mode = t; } }
   if (!mode) return { walls: [], openings: [], message: 'Không tìm thấy nét tường dày trong ảnh.' };
-  const k = Math.max(2, Math.round(mode * 0.6));
+  // Bản vẽ phối màu đã lọc đúng màu tường → chỉ cần bỏ nhiễu nhỏ, giữ được tường ngăn mảnh
+  const k = wallTone ? 3 : Math.max(2, Math.round(mode * 0.6));
 
   // Phép mở (co rồi giãn) với nhân k×k
   const eroded = morph(dark, W, H, k, true);
@@ -54,13 +66,88 @@ export function detectWalls(img, bg, opts = {}) {
   // Đổi pixel -> mét. Nếu chưa hiệu chỉnh tỉ lệ: giả định tường dày phổ biến 0.2m
   let mpp = bg?.mpp;
   let autoScale = false;
-  if (!bg?.calibrated) { mpp = (0.2 / mode) * f; autoScale = true; }
-  const scale = mpp / f; // mét trên mỗi pixel ảnh thu nhỏ
-  const ox = bg?.x ?? 0, oy = bg?.y ?? 0;
-  const toW = (x, y) => ({ x: +(ox + x * scale).toFixed(3), y: +(oy + y * scale).toFixed(3) });
+  let sx, sy;
+  if ((opts.targetWidthM || opts.targetHeightM) && segs.length) {
+    // Tỉ lệ theo kích thước tổng ghi trên bản vẽ (mép ngoài tường). Bản vẽ minh hoạ có thể
+    // không đúng tỉ lệ nên co giãn riêng từng chiều khi có cả hai số.
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (const sg of segs) {
+      if (sg.dir === 'h') { minX = Math.min(minX, sg.s); maxX = Math.max(maxX, sg.e); minY = Math.min(minY, sg.c - sg.t / 2); maxY = Math.max(maxY, sg.c + sg.t / 2); }
+      else { minX = Math.min(minX, sg.c - sg.t / 2); maxX = Math.max(maxX, sg.c + sg.t / 2); minY = Math.min(minY, sg.s); maxY = Math.max(maxY, sg.e); }
+    }
+    sx = opts.targetWidthM ? opts.targetWidthM / Math.max(1, maxX - minX) : null;
+    sy = opts.targetHeightM ? opts.targetHeightM / Math.max(1, maxY - minY) : null;
+    sx ??= sy; sy ??= sx;
+    mpp = sx * f;
+  } else {
+    if (!bg?.calibrated) { mpp = (0.2 / mode) * f; autoScale = true; }
+    sx = sy = mpp / f;
+  }
+  const scale = sx;
+  const ox = opts.targetWidthM || opts.targetHeightM ? 0 : bg?.x ?? 0, oy = opts.targetWidthM || opts.targetHeightM ? 0 : bg?.y ?? 0;
+  const toW = (x, y) => ({ x: +(ox + x * sx).toFixed(3), y: +(oy + y * sy).toFixed(3) });
+  void scale;
 
-  const { walls, openings } = buildWithOpenings(segs, mode, scale, toW);
-  return { walls, openings, autoScale, mpp: mpp, thicknessPx: mode / f, message: `Nhận diện ${walls.length} bức tường, ${openings.length} cửa/cửa sổ.` };
+  const built = buildWithOpenings(segs, mode, sx, sy, toW);
+  // Bỏ mảnh nhiễu: đoạn quá ngắn, hoặc ngắn mà mảnh (viền đồ đạc, mép bàn bếp…)
+  const len = (w) => Math.hypot(w.b.x - w.a.x, w.b.y - w.a.y);
+  const walls = built.walls.filter((w) => len(w) >= 0.3 && !(len(w) < 0.7 && w.thickness < 0.1));
+  const keep = new Set(walls.map((w) => w.id));
+  const openings = built.openings.filter((o) => keep.has(o.wallId));
+  closeGlassCorners(walls, openings);
+  return { walls, openings, autoScale, mpp, mppY: sy * f, thicknessPx: mode / f, message: `Nhận diện ${walls.length} bức tường, ${openings.length} cửa/cửa sổ.` };
+}
+
+/** Màu xám phẳng chiếm nhiều nhất trong các màu tối – coi là màu tô tường (null nếu không có) */
+function findWallTone(data, n) {
+  const counts = new Map();
+  for (let i = 0; i < n; i += 2) {
+    const r = data[i * 4], g = data[i * 4 + 1], b = data[i * 4 + 2];
+    if (Math.max(r, g, b) - Math.min(r, g, b) > 12) continue;
+    const l = (r + g + b) / 3;
+    if (l < 35 || l > 140) continue;
+    const key = ((r >> 2) << 12) | ((g >> 2) << 6) | (b >> 2);
+    counts.set(key, (counts.get(key) || 0) + 1);
+  }
+  let best = 0, bc = 0;
+  for (const [k, c] of counts) if (c > bc) { bc = c; best = k; }
+  if (bc < (n / 2) * 0.015) return null;
+  return [((best >> 12) & 63) * 4 + 2, ((best >> 6) & 63) * 4 + 2, (best & 63) * 4 + 2];
+}
+
+/** Đầu tường "hở" ở góc ngoài (thường là kính cong) → nối bằng vách kính để khép kín căn hộ */
+function closeGlassCorners(walls, openings) {
+  if (walls.length < 3) return;
+  const ends = [];
+  const near = (p, w) => {
+    const dx = w.b.x - w.a.x, dy = w.b.y - w.a.y, L2 = dx * dx + dy * dy || 1;
+    const t = Math.max(0, Math.min(1, ((p.x - w.a.x) * dx + (p.y - w.a.y) * dy) / L2));
+    return Math.hypot(p.x - (w.a.x + dx * t), p.y - (w.a.y + dy * t)) < w.thickness / 2 + 0.05;
+  };
+  for (const w of walls) for (const k of ['a', 'b']) {
+    const p = w[k];
+    const L = Math.hypot(w.b.x - w.a.x, w.b.y - w.a.y);
+    if (L >= 1 && w.thickness >= 0.12 && !walls.some((o) => o !== w && near(p, o))) ends.push({ p, w, horiz: Math.abs(w.a.y - w.b.y) < 1e-3 });
+  }
+  const xs = walls.flatMap((w) => [w.a.x, w.b.x]), ys = walls.flatMap((w) => [w.a.y, w.b.y]);
+  const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
+  const onEdge = (p) => Math.min(p.x - minX, maxX - p.x, p.y - minY, maxY - p.y) < 0.8;
+  const used = new Set();
+  for (let i = 0; i < ends.length; i++) {
+    if (used.has(i) || !onEdge(ends[i].p)) continue;
+    let best = -1, bd = 4.5;
+    for (let j = 0; j < ends.length; j++) {
+      if (j === i || used.has(j) || ends[j].w === ends[i].w || ends[j].horiz === ends[i].horiz || !onEdge(ends[j].p)) continue;
+      const d = Math.hypot(ends[i].p.x - ends[j].p.x, ends[i].p.y - ends[j].p.y);
+      if (d > 0.3 && d < bd) { bd = d; best = j; }
+    }
+    if (best < 0) continue;
+    used.add(i); used.add(best);
+    const a = ends[i].p, b = ends[best].p;
+    const wall = { id: uid(), a: { ...a }, b: { ...b }, thickness: 0.12 };
+    walls.push(wall);
+    if (bd > 0.6) openings.push({ id: uid(), wallId: wall.id, type: 'window', t: 0.5, width: +(bd - 0.2).toFixed(2), height: 2.2, sill: 0.3 });
+  }
 }
 
 function otsu(hist, total) {
@@ -219,10 +306,12 @@ function joinCorners(segs, tol) {
   }
 }
 
-function buildWithOpenings(segs, mode, scale, toW) {
+function buildWithOpenings(segs, mode, sx, sy, toW) {
   const walls = [], openings = [];
-  const thicknessM = (t) => Math.max(0.08, Math.min(0.4, Math.round(t * scale * 100) / 100));
   for (const dir of ['h', 'v']) {
+    // Tường ngang: dài theo x, dày theo y (và ngược lại)
+    const along = dir === 'h' ? sx : sy, across = dir === 'h' ? sy : sx;
+    const thicknessM = (t) => Math.max(0.08, Math.min(0.4, Math.round(t * across * 100) / 100));
     const list = segs.filter((s) => s.dir === dir).sort((a, b) => a.c - b.c || a.s - b.s);
     // Nhóm các đoạn thẳng hàng, xét khe hở giữa chúng
     const groups = [];
@@ -244,8 +333,8 @@ function buildWithOpenings(segs, mode, scale, toW) {
         for (let i = 0; i < run.length - 1; i++) {
           const gs = run[i].e, ge = run[i + 1].s;
           const gap = ge - gs;
-          const widthM = gap * scale;
-          const isDoor = widthM <= 1.05;
+          const widthM = gap * along;
+          const isDoor = widthM <= 1.2;
           openings.push({
             id: uid(), wallId: wall.id, type: isDoor ? 'door' : 'window',
             t: ((gs + ge) / 2 - s0) / L, width: +widthM.toFixed(2),
@@ -256,7 +345,8 @@ function buildWithOpenings(segs, mode, scale, toW) {
       for (let i = 1; i < g.length; i++) {
         const prev = run[run.length - 1], s = g[i];
         const gap = s.s - prev.e;
-        if (gap > mode * 2.2 && gap < mode * 14) run.push(s);
+        const gapM = gap * along;
+        if (gapM > 0.5 && gapM < 3.6) run.push(s);
         else { flush(); run = [s]; }
       }
       flush();

@@ -1,3 +1,4 @@
+import { ask, toast, download } from './ui.js';
 import { Store, samplePlan, studioPlan, luxuryPlan, emptyPlan, FLOOR_TYPES, uid } from './model.js';
 import { STYLES, PALETTE_FIELDS, roomKind, resolvePalette } from './styles.js';
 import { MAIN_KEY } from './furniture.js';
@@ -16,33 +17,6 @@ const editor = new Editor2D($('#plan'), store);
 const viewer = new Viewer3D($('#viewer'), store);
 editor.active = true;
 
-/** Hộp thoại trong trang (thay cho confirm/prompt vốn bị chặn trong khung nhúng) */
-function ask(message, { input = null, ok = 'Đồng ý', cancel = 'Huỷ' } = {}) {
-  return new Promise((resolve) => {
-    const wrap = document.createElement('div');
-    wrap.className = 'modal';
-    wrap.innerHTML = `<form class="sheet dialog"><p></p>${input !== null ? '<input type="text" id="askInput" inputmode="decimal" />' : ''}
-      <div class="btnrow"><button type="button" data-r="cancel">${cancel}</button><button type="submit" class="primary">${ok}</button></div></form>`;
-    wrap.querySelector('p').textContent = message;
-    const inp = wrap.querySelector('input');
-    if (inp) inp.value = input;
-    const done = (v) => { wrap.remove(); resolve(v); };
-    wrap.querySelector('form').onsubmit = (e) => { e.preventDefault(); done(inp ? inp.value : true); };
-    wrap.querySelector('[data-r="cancel"]').onclick = () => done(inp ? null : false);
-    wrap.onkeydown = (e) => { if (e.key === 'Escape') done(inp ? null : false); };
-    document.body.appendChild(wrap);
-    (inp || wrap.querySelector('[type=submit]')).focus();
-    inp?.select();
-  });
-}
-
-function toast(msg, ms = 2600) {
-  const t = $('#toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(toast._t);
-  toast._t = setTimeout(() => t.classList.remove('show'), ms);
-}
 
 // ---------- Đồng bộ 2D -> 3D ----------
 let rebuildT = 0;
@@ -59,6 +33,10 @@ store.addEventListener('change', (e) => {
 // ---------- Chế độ hiển thị ----------
 function setMode(mode) {
   $('#app').className = 'mode-' + mode;
+  // Chỉ vẽ cảnh đang hiển thị để nhẹ máy
+  viewer.setActive(mode === '3d' || mode === 'split');
+  if (mode === 'building') openBuilding();
+  else bview?.setActive(false);
   $$('#modes button').forEach((b) => b.classList.toggle('active', b.dataset.mode === mode));
   editor.active = mode !== '3d';
   requestAnimationFrame(() => { editor.resize(); viewer.resize(); });
@@ -384,13 +362,6 @@ $('#glb').onclick = async () => {
     toast('Xuất GLB lỗi: ' + err.message);
   }
 };
-function download(blob, name) {
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = name;
-  a.click();
-  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
-}
 
 // ---------- Ảnh nền mặt bằng ----------
 $('#bgLoad').onclick = () => $('#fileImg').click();
@@ -437,33 +408,58 @@ editor.addEventListener('calibrate', async (e) => {
   editor.render();
   toast(`Đã hiệu chỉnh: 1 pixel ảnh = ${(bg.mpp * 100).toFixed(2)} cm`);
 });
+/** Đọc số kích thước: "9630" (mm) hoặc "9.63" / "9,63" (m) → mét */
+const toMeters = (v) => {
+  const n = parseFloat(String(v || '').replace(/\s/g, '').replace(',', '.'));
+  if (!isFinite(n) || n <= 0) return null;
+  return n > 100 ? n / 1000 : n;
+};
+
+/** Đặt tên phòng theo diện tích và gán sàn theo phong cách hiện tại */
+function nameRooms(rooms, style) {
+  const sorted = rooms.slice().sort((a, b) => polygonArea(b.points) - polygonArea(a.points));
+  let bed = 0, wc = 0;
+  sorted.forEach((r, i) => {
+    const a = polygonArea(r.points);
+    if (i === 0 && a > 14) r.name = 'Phòng khách & bếp';
+    else if (a < 6.5) r.name = `WC ${String(++wc).padStart(2, '0')}`;
+    else r.name = `Phòng ngủ ${++bed}`;
+    r.floor = STYLES[style]?.floors[roomKind(r.name)] || r.floor;
+  });
+  return rooms;
+}
+
 $('#detect').onclick = async () => {
-  if (!editor.bgImage) return toast('Hãy tải ảnh mặt bằng trước (ảnh rõ nét, tường tô đậm cho kết quả tốt nhất).', 4000);
+  if (!editor.bgImage) return toast('Hãy tải ảnh mặt bằng căn hộ trước (ảnh rõ nét, tường tô đậm cho kết quả tốt nhất).', 4000);
+  const dims = await ask('Nhập kích thước tổng ghi trên bản vẽ (đường kích thước ngoài cùng, mm hoặc m). Bản vẽ minh hoạ thường không đúng tỉ lệ, nên nhập cả hai chiều để chính xác. Để trống nếu bản vẽ không ghi.', {
+    inputs: [{ label: 'Chiều ngang', placeholder: 'vd. 9630' }, { label: 'Chiều dọc', placeholder: 'vd. 6545' }],
+    ok: 'Nhận diện',
+  });
+  if (dims === null) return;
+  const [wM, hM] = dims.map(toMeters);
   const bg = store.background;
-  const res = detectWalls(editor.bgImage, bg);
+  const res = detectWalls(editor.bgImage, bg, { targetWidthM: wM, targetHeightM: hM });
   if (!res.walls.length) return toast(res.message || 'Không nhận diện được tường.');
-  if (res.autoScale) {
-    bg.mpp = res.mpp;
-    bg.calibrated = false;
-    editor.loadBackground();
-  }
+  if (wM || hM) Object.assign(bg, { x: 0, y: 0, mpp: res.mpp, mppY: res.mppY, calibrated: true });
+  else if (res.autoScale) { bg.mpp = res.mpp; delete bg.mppY; bg.calibrated = false; }
+  editor.loadBackground();
   editor.select(null);
   const replace = !store.plan.walls.length || (await ask(`${res.message} Thay thế bản vẽ hiện có, hay thêm vào?`, { ok: 'Thay thế', cancel: 'Thêm vào' }));
+  let roomCount = 0;
   store.commit((pl) => {
     if (replace) { pl.walls = []; pl.openings = []; pl.rooms = []; pl.furniture = []; }
     pl.walls.push(...res.walls);
     pl.openings.push(...res.openings);
-    const rooms = detectRooms(pl);
-    if (replace) pl.rooms = rooms;
+    if (replace) { pl.rooms = nameRooms(detectRooms(pl), pl.settings.style); roomCount = pl.rooms.length; }
   });
   store.save();
   editor.fit();
-  toast(res.message + (res.autoScale ? ' Tỉ lệ được ước lượng theo tường dày 20 cm – dùng 📏 Tỉ lệ để chính xác hơn.' : ''), 6000);
+  toast(`${res.message} Tạo ${roomCount} phòng. Kiểm tra lại trên ảnh nền: kéo tường, thêm tường/cửa còn thiếu, đổi tên phòng.` + (res.autoScale ? ' Tỉ lệ đang ước lượng theo tường dày 20 cm.' : ''), 8000);
 };
 $('#autoRooms').onclick = () => {
   const rooms = detectRooms(store.plan);
   if (!rooms.length) return toast('Không tìm thấy vùng tường khép kín nào.');
-  store.commit((pl) => (pl.rooms = rooms));
+  store.commit((pl) => (pl.rooms = nameRooms(rooms, pl.settings.style)));
   toast(`Đã tạo ${rooms.length} phòng. Nhấp vào từng phòng để đặt tên và chọn vật liệu sàn.`, 4000);
 };
 
@@ -521,8 +517,7 @@ $('#real').onclick = () => {
   $('#ptStatus').style.display = 'block';
   $('#ptStatus').textContent = 'Đang chuẩn bị cảnh…';
   setTimeout(() => {
-    try { viewer.startRealRender(); }
-    catch (err) { console.error(err); toast('Trình duyệt không hỗ trợ render chân thực: ' + err.message, 5000); viewer.stopRealRender(); }
+    viewer.startRealRender().catch((err) => { console.error(err); toast('Trình duyệt không hỗ trợ render chân thực: ' + err.message, 5000); viewer.stopRealRender(); });
   }, 30);
 };
 viewer.onPTProgress = (n) => { $('#ptStatus').textContent = `📸 Render ánh sáng thật · ${Math.floor(n)} lượt mẫu${n < 60 ? ' (đợi ảnh mịn dần…)' : ' ✓'}`; };
@@ -568,6 +563,36 @@ $('#estPrint').onclick = () => window.print();
 $('#estReset').onclick = () => store.commit((pl) => { pl.settings.prices = {}; delete pl.settings.styleFactor; });
 store.addEventListener('change', (e) => { if (!$('#estimate').hidden && e.detail !== 'drag') renderEstimate(); });
 void DEFAULT_PRICES;
+
+// ---------- Tòa nhà 3D: tải riêng khi mở lần đầu cho nhẹ ----------
+let bview = null;
+async function openBuilding() {
+  if (!bview) {
+    const { mountBuildingUI } = await import('./buildingUI.js');
+    bview = mountBuildingUI({
+      toast, ask, download,
+      getCurrentPlan: () => store.plan,
+      openUnit: (layout, info) => openUnitPlan(layout, info),
+    });
+  }
+  bview.setActive(true);
+}
+
+/** Mở mặt bằng của một căn (từ tòa nhà) ở chế độ 3D */
+function openUnitPlan(layout, info) {
+  editor.select(null);
+  store.load(layout);
+  const fnum = parseInt(info.floor, 10) || 3;
+  if (viewState) setView({ ...viewState, floor: fnum }, 'apply');
+  setMode('3d');
+  toast(`Đang xem ${info.code} · ${info.slot.type} · ${info.slot.tt} m² thông thủy`, 4000);
+}
+
+// Mở căn được chuyển sang từ trang toa-nha.html
+try {
+  const pending = JSON.parse(localStorage.getItem('floorplan3d.openUnit') || 'null');
+  if (pending) { localStorage.removeItem('floorplan3d.openUnit'); setTimeout(() => openUnitPlan(pending.layout, pending.info), 400); }
+} catch { /* bỏ qua */ }
 
 // Lần đầu mở: phát hiệu ứng dựng nhà
 setTimeout(() => viewer.playBuild(), 300);
