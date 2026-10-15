@@ -11,7 +11,8 @@ try { building = JSON.parse(localStorage.getItem(B_KEY) || 'null'); } catch { bu
 building ||= sampleBuilding();
 let bview = null, bsel = null, H = null, bFloorIdx = 7;
 // Điện thoại: bảng điều khiển thu gọn mặc định để không che khung 3D
-let panelCollapsed = window.matchMedia('(max-width: 700px)').matches;
+// Bảng điều khiển thu gọn sẵn để không che tòa nhà; bấm “Mở bảng” mới hiện
+let panelCollapsed = true;
 const saveBuilding = () => { try { localStorage.setItem(B_KEY, JSON.stringify(building)); } catch { /* bộ nhớ đầy */ } };
 const bUnit = (key) => (building.units[key] ||= { status: 'available' });
 const vndTy = (n) => n.toLocaleString('vi-VN', { maximumFractionDigits: 2 });

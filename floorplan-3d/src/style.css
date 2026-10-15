@@ -248,7 +248,9 @@ main.mode-building .panebuilding { grid-column: 1 !important; grid-row: 1 !impor
 
 .bhead { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .bbody { display: flex; flex-direction: column; gap: 10px; }
-.btoggle { display: none; white-space: nowrap; padding: 4px 10px; font-size: 12px; }
+.btoggle { display: inline-block; white-space: nowrap; padding: 4px 10px; font-size: 12px; }
+.bpanel.collapsed { max-height: none !important; overflow: visible; }
+.bpanel.collapsed .bhead h3 { font-size: 13px; }
 .bpanel.collapsed .bbody { display: none; }
 @media (max-width: 700px) {
   .btoggle { display: inline-block; }

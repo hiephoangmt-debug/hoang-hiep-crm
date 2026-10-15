@@ -60,3 +60,11 @@
   .chip { flex: none; white-space: nowrap; }
   .up-caption { font-size: 14px; padding: 8px 14px; top: 10px; }
 }
+
+/* Máy tính: thanh công cụ nằm dưới khung 3D, không che nội thất */
+@media (min-width: 1001px) {
+  .up-view { display: flex; flex-direction: column; }
+  .up-3d, .up-2d { position: relative; inset: auto; flex: 1; min-height: 0; }
+  .up-bar { position: static; padding: 8px 12px; pointer-events: auto; background: var(--panel); border-top: 1px solid var(--line); }
+  .up-bar .chips { box-shadow: none; background: transparent; padding: 0; }
+}
