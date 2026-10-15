@@ -530,10 +530,36 @@ export class Viewer3D {
       // Góc nhìn chéo kiểu phối cảnh bán hàng: từ phía mặt tiền, lệch trái, chúc xuống
       const { az, el, k = 1 } = this.isoView;
       const d = (s * 1.45 + 3.5) * k, A = THREE.MathUtils.degToRad(az), E = THREE.MathUtils.degToRad(el);
-      target.z = b.cy + s * 0.12; // dời tâm về phía mặt tiền để căn nằm cao hơn thanh công cụ
       pos = target.clone().add(new THREE.Vector3(Math.sin(A) * Math.cos(E), Math.sin(E), Math.cos(A) * Math.cos(E)).multiplyScalar(d));
     } else pos = this.isStudio() ? new THREE.Vector3(b.cx + s * 0.05, s * 1.3 + 2.5, b.maxY + s * 0.32 + 1) : new THREE.Vector3(b.cx + s * 0.08, s * 1.85 + 5, b.maxY + s * 0.45 + 1.5);
-    this.flyTo(pos, target, smooth);
+    const fit = this.fitView(pos, target);
+    this.flyTo(fit.pos, fit.target, smooth);
+  }
+
+  /** Giữ hướng nhìn, dời tâm + chỉnh khoảng cách để căn nằm chính giữa khung, lề đều bốn phía */
+  fitView(pos, target, margin = 0.86) {
+    const b = this.built.bounds;
+    const H = Math.min(this.built.height, this.clipPlane.constant);
+    const corners = [];
+    for (const x of [b.minX, b.maxX]) for (const y of [0, H]) for (const z of [b.minY, b.maxY]) corners.push(new THREE.Vector3(x, y, z));
+    const cam = this.camera.clone();
+    const dir = pos.clone().sub(target);
+    let dist = dir.length();
+    dir.normalize();
+    const t = target.clone(), p = new THREE.Vector3(), right = new THREE.Vector3(), up = new THREE.Vector3();
+    for (let it = 0; it < 5; it++) {
+      cam.position.copy(t).addScaledVector(dir, dist);
+      cam.lookAt(t);
+      cam.updateMatrixWorld();
+      let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+      for (const c of corners) { p.copy(c).project(cam); x0 = Math.min(x0, p.x); x1 = Math.max(x1, p.x); y0 = Math.min(y0, p.y); y1 = Math.max(y1, p.y); }
+      const halfH = Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)) * dist, halfW = halfH * cam.aspect;
+      right.setFromMatrixColumn(cam.matrixWorld, 0);
+      up.setFromMatrixColumn(cam.matrixWorld, 1);
+      t.addScaledVector(right, ((x0 + x1) / 2) * halfW).addScaledVector(up, ((y0 + y1) / 2) * halfH);
+      dist *= Math.max((x1 - x0) / 2, (y1 - y0) / 2) / margin;
+    }
+    return { pos: t.clone().addScaledVector(dir, dist), target: t };
   }
 
   flyTo(pos, target, smooth = true) {
@@ -796,17 +822,60 @@ export class Viewer3D {
 
   /** Tải ảnh PNG nét cao của khung 3D; nhìn từ trên thì kèm tên + diện tích phòng */
   exportPNG(info = {}) {
-    const above = this.camera.position.y > (this.built?.height || 2.8) + 1;
-    const showLabels = above && this.mode !== 'walk';
+    // mode 'plan': ảnh mặt bằng nhìn thẳng từ trên (đọc rõ dài × rộng); 'view': giữ góc đang xem
+    const planMode = info.mode === 'plan' && !this.ptActive;
+    const above = planMode || this.camera.position.y > (this.built?.height || 2.8) + 1;
+    const showLabels = above && this.mode !== 'walk' && info.mode !== 'view';
     const prev = this.built.labels.map((l) => l.visible);
-    if (showLabels) this.built.labels.forEach((l) => (l.visible = true));
     const render = () => {
       if (this.ptActive) { this.pt.renderSample(); return; }
-      this.composer.setPixelRatio(this.renderer.getPixelRatio());
       if (this.state.ao || this.bloom.enabled) this.composer.render(); else this.renderer.render(this.scene, this.camera);
     };
     this.labelRenderer.render(this.scene, this.camera);
-    const out = exportImage({ renderer: this.renderer, scene: this.scene, camera: this.camera, render, keepRatio: this.ptActive, ...info });
+    // Nhìn từ trên: chú thích phòng đưa ra ngoài (tên, diện tích, dài × rộng) + kích thước tổng
+    let extra = {};
+    if (showLabels) {
+      const b = this.built.bounds;
+      extra = {
+        // kích thước tổng: ưu tiên số ghi trên bản vẽ (info.dims), không có thì đo theo tường
+        plan: { w: info.dims?.[0] ?? b.maxX - b.minX, d: info.dims?.[1] ?? b.maxY - b.minY, corners: [[b.minX, b.minY], [b.maxX, b.minY], [b.maxX, b.maxY], [b.minX, b.maxY]].map(([px, pz]) => ({ x: px, y: 0, z: pz })) },
+        callouts: this.store.plan.rooms.filter((r) => r.points.length >= 3).map((r) => {
+          const xs = r.points.map((p) => p.x), ys = r.points.map((p) => p.y);
+          const lp = labelPoint(r.points);
+          return { name: r.name, area: polygonArea(r.points), w: Math.max(...xs) - Math.min(...xs), d: Math.max(...ys) - Math.min(...ys), anchor: { x: lp.x, y: 0.1, z: lp.y } };
+        }),
+      };
+      this.built.labels.forEach((l) => (l.visible = false));
+    }
+    // Khung ảnh cố định 5:6 (2000 × 2400): render riêng vùng giữa đúng tỉ lệ rồi canh căn cho vừa khung
+    const FW = 2000, FH = 2400, fs = 2.4, band = Math.round(84 * fs), side = showLabels ? Math.round(185 * fs) : 0;
+    const frame = { W: FW, H: FH, side, band, s: fs };
+    const rw = FW - 2 * side, rh = FH - band;
+    const saved = { pos: this.camera.position.clone(), target: this.controls.target.clone(), aspect: this.camera.aspect, pr: this.renderer.getPixelRatio() };
+    if (!this.ptActive) {
+      this.renderer.setPixelRatio(1);
+      this.renderer.setSize(rw, rh, false);
+      this.composer.setPixelRatio(1);
+      this.composer.setSize(rw, rh);
+      this.camera.aspect = rw / rh;
+      this.camera.updateProjectionMatrix();
+      const t0 = planMode ? new THREE.Vector3(this.built.bounds.cx, 0, this.built.bounds.cy) : this.controls.target;
+      const p0 = planMode ? t0.clone().add(new THREE.Vector3(0, this.built.bounds.size * 2 + 6, 0.001)) : this.camera.position;
+      const fit = this.fitView(p0, t0, 0.9);
+      this.camera.position.copy(fit.pos);
+      this.camera.lookAt(fit.target);
+      this.camera.updateMatrixWorld();
+    }
+    const out = exportImage({ renderer: this.renderer, scene: this.scene, camera: this.camera, render, keepRatio: true, frame, ...extra, ...info });
+    if (!this.ptActive) {
+      this.renderer.setPixelRatio(saved.pr);
+      this.composer.setPixelRatio(saved.pr);
+      this.camera.position.copy(saved.pos);
+      this.controls.target.copy(saved.target);
+      this.camera.lookAt(saved.target);
+      this.resize();
+      this.controls.update();
+    }
     this.built.labels.forEach((l, i) => (l.visible = prev[i]));
     return out;
   }
