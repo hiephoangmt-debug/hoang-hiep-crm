@@ -116,15 +116,22 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
     box.receiveShadow = true;
     g.add(box);
   }
-  // Vạch qua đường ở 4 nhánh
+  // Góc vỉa hè ở 4 góc ngã tư (lấp chỗ hở giữa vỉa hè hai đường)
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+    const c = new THREE.Mesh(new THREE.BoxGeometry(HALF - 11, 0.18, HALF - 11), walkMat);
+    c.position.set(avenueX + sx * (11 + (HALF - 11) / 2), 0.09, roadZ + sz * (11 + (HALF - 11) / 2));
+    c.receiveShadow = true;
+    g.add(c);
+  }
+  // Vạch qua đường ở 4 nhánh: các vạch song song hướng đi bộ, xếp ngang lòng đường
   const zebra = new THREE.MeshBasicMaterial({ color: 0xf2f2f2 });
   for (const [dx, dz] of [[0, -1], [0, 1], [-1, 0], [1, 0]]) {
-    for (let i = 0; i < 10; i++) {
-      const s = new THREE.Mesh(new THREE.PlaneGeometry(0.6, 5), zebra);
+    for (let i = 0; i < 17; i++) {
+      const off = -9.6 + i * 1.2;
+      const s = new THREE.Mesh(new THREE.PlaneGeometry(0.6, 4), zebra);
       s.rotation.x = -Math.PI / 2;
-      const off = -13.5 + i * 3;
-      if (dz) { s.position.set(avenueX + off, 0.05, roadZ + dz * (HALF - 2.5)); s.rotation.z = Math.PI / 2; }
-      else s.position.set(avenueX + dx * (HALF - 2.5), 0.05, roadZ + off);
+      if (dz) s.position.set(avenueX + off, 0.05, roadZ + dz * (HALF - 3));
+      else { s.position.set(avenueX + dx * (HALF - 3), 0.05, roadZ + off); s.rotation.z = Math.PI / 2; }
       g.add(s);
     }
   }
