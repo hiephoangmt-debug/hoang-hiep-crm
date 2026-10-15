@@ -1479,6 +1479,11 @@
     });
     bsel.value = S.beauty || 'vua';
     bsel.onchange = onSet('beauty');
+    var shift = $('textShift');
+    var showShift = function () { var v = +S.textShift || 0; $('textShiftLabel').textContent = (v > 0 ? 'sớm ' : v < 0 ? 'muộn ' : '') + Math.abs(v).toFixed(2).replace('.', ',') + ' giây'; };
+    shift.value = S.textShift || 0;
+    showShift();
+    shift.oninput = function () { S.textShift = +shift.value; showShift(); save(); schedulePreview(); };
     $('paceSelect').value = S.pace || 'auto';
     $('paceSelect').onchange = onSet('pace');
     $('endStyleSelect').value = S.endStyle || 'pill';

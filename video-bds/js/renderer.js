@@ -560,6 +560,8 @@
    * chữ nhấn in nghiêng màu đỏ. Tầng chữ đặt xen kẽ trên/dưới để không che mặt người nói.
    */
   Renderer.prototype.drawKinetic = function (words, t) {
+    // Thanh chỉnh "chữ hiện sớm / muộn" (giây): số dương = chữ hiện sớm hơn
+    t += (this.project.settings.textShift || 0);
     var stacks = window.BdsTimeline.kineticStacks(words);
     var st = null;
     for (var i = 0; i < stacks.length; i++) if (t >= stacks[i].t0 - 0.05 && t < stacks[i].t1) { st = stacks[i]; break; }
@@ -587,7 +589,7 @@
     var cy = H * (st.idx % 2 ? (land ? 0.3 : 0.27) : (land ? 0.68 : 0.66));
     var y = cy - total / 2;
     var bigX = (W - bigW) / 2;
-    var fade = clamp((st.t1 - t) / 0.2, 0, 1);
+    var fade = clamp((st.t1 - t) / 0.12, 0, 1);
     ctx.save();
     ctx.globalAlpha *= fade;
     ctx.textBaseline = 'alphabetic';
@@ -598,7 +600,7 @@
     var self = this;
     var drawSmall = function (ws, x, baseY) {
       ws.forEach(function (w, j) {
-        var a = clamp((t - w.t0 + 0.08) / 0.25, 0, 1);
+        var a = clamp((t - w.t0 + 0.15 + 0.05) / 0.15, 0, 1);
         ctx.font = smallFont(w);
         var tw = ctx.measureText(label(w)).width;
         if (a > 0) {
@@ -619,10 +621,10 @@
       y += hLead + gap;
     }
     // Từ khoá to: đập vào (thu nhỏ từ to xuống) + hiện từng chữ cái
-    var ba = clamp((t - st.bigAt + 0.05) / 0.28, 0, 1);
+    var ba = clamp((t - st.bigAt + 0.03) / 0.16, 0, 1);
     if (ba > 0) {
       var by = y + bigSize * 0.88;
-      var sc = 1 + 0.35 * (1 - easeOut(ba));
+      var sc = 1 + 0.25 * (1 - easeOut(ba));
       ctx.save();
       ctx.translate(W / 2, by - bigSize * 0.4);
       ctx.scale(sc, sc);
@@ -647,7 +649,7 @@
       // Hiện từng chữ cái
       var chars = Array.from(bigText), cx = bigX;
       chars.forEach(function (ch, ci) {
-        var ca = clamp((t - st.bigAt - ci * 0.025 + 0.05) / 0.12, 0, 1);
+        var ca = clamp((t - st.bigAt - ci * Math.min(0.02, 0.15 / chars.length) + 0.03) / 0.08, 0, 1);
         var cw = ctx.measureText(ch).width;
         if (ca > 0) {
           ctx.save();

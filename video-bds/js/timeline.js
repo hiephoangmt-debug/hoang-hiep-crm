@@ -372,6 +372,19 @@
       cnt += u.length;
     });
     if (cur.length) groups.push(cur);
+    // Gộp cụm quá ngắn (người nói nhanh) để mỗi tầng chữ đứng đủ lâu cho người xem kịp đọc
+    var merged = [];
+    groups.forEach(function (g) {
+      var prev = merged[merged.length - 1];
+      if (prev) {
+        var pw = [].concat.apply([], prev), gw = [].concat.apply([], g);
+        var short = pw[pw.length - 1].t1 - pw[0].t0 < 0.9;
+        var endSentence = /[.!?…]$/.test(pw[pw.length - 1].w);
+        if (short && !endSentence && pw.length + gw.length <= 8) { prev.push.apply(prev, g); return; }
+      }
+      merged.push(g.slice());
+    });
+    groups = merged;
     var out = groups.map(function (us, gi) {
       us = us.slice();
       us.forEach(function (u) { var acc = ACCENT.test(txt(u)); u.forEach(function (w) { w.accent = acc; }); });
@@ -393,11 +406,15 @@
       trail = [].concat.apply([], us.slice(bigIdx + 1)).concat(trail);
       return { lead: lead, big: big, trail: trail, idx: gi, t0: (lead[0] || big[0]).t0 };
     });
+    // Chữ hiện sớm hơn tiếng nói một chút để mắt kịp theo lời
+    var LEAD = 0.15;
+    out.forEach(function (st) { st.t0 -= LEAD; });
     out.forEach(function (st, i) {
       var all = st.lead.concat(st.big, st.trail);
       var next = out[i + 1];
-      st.bigAt = st.big.length ? st.big[0].t0 : st.t0;
-      st.t1 = next ? Math.min(next.t0, all[all.length - 1].t1 + 0.9) : all[all.length - 1].t1 + 0.8;
+      st.bigAt = (st.big.length ? st.big[0].t0 : st.t0) - LEAD;
+      st.lead0 = LEAD;
+      st.t1 = next ? Math.min(next.t0, Math.max(all[all.length - 1].t1 + 0.9, st.t0 + 1)) : all[all.length - 1].t1 + 0.8;
     });
     words._stacks = out;
     return out;
