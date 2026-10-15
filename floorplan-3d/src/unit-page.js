@@ -2,7 +2,7 @@
 import { Viewer3D } from './viewer3d.js';
 import { STYLES, roomKind } from './styles.js';
 import { polygonArea } from './geom.js';
-import { toast, READONLY, linkTo } from './ui.js';
+import { toast, READONLY, linkTo, download } from './ui.js';
 import UNITS from './units/units.json';
 
 const $ = (s) => document.querySelector(s);
@@ -49,7 +49,7 @@ function selectUnit(id) {
     viewer.setRealistic(true);
     viewer.setOption('landscape', false);
     viewer.onWalkUnlock = () => { document.body.classList.remove('walking-page'); viewer.exitWalk(); };
-    viewer.onPTProgress = (n) => { $('#caption').hidden = false; $('#caption').innerHTML = `📸 Ảnh như thật<small>${Math.floor(n)} lượt – ${n < 40 ? 'đứng yên để ảnh mịn dần…' : 'xong, có thể chụp màn hình'}</small>`; };
+    viewer.onPTProgress = (n) => { $('#caption').hidden = false; $('#caption').innerHTML = `📸 Ảnh như thật<small>${n < 1 ? 'đang dựng ánh sáng, chờ vài giây…' : `${Math.floor(n)} lượt – ${n < 40 ? 'đứng yên để ảnh mịn dần…' : 'xong, bấm ⬇ Tải ảnh'}`}</small>`; };
     viewer.onPTStop = () => { $('#photoBtn').classList.remove('active'); $('#caption').hidden = true; };
   } else {
     if (viewer.ptActive) viewer.stopRealRender();
@@ -168,6 +168,15 @@ $('#landBtn').onclick = () => {
   const on = !viewer.state.landscape;
   viewer.setOption('landscape', on);
   $('#landBtn').classList.toggle('active', on);
+};
+$('#saveBtn').onclick = async () => {
+  const total = store.plan.rooms.reduce((s, r) => s + polygonArea(r.points), 0);
+  const blob = await viewer.exportPNG({
+    title: `${unit.name} · Tòa F2`,
+    lines: [unit.type, `${fmt(unit.dims[0], 2)} × ${fmt(unit.dims[1], 2)} m`, `Tổng DT các phòng ${fmt(total)} m²`, STYLES[store.plan.settings.style]?.name || ''].filter(Boolean),
+  });
+  download(blob, `${unit.id}-mat-bang-3d.png`);
+  toast('Đã tải ảnh. Mẹo: bấm ⬇ Nhìn từ trên để có ảnh mặt bằng; bấm 📸 Chụp ảnh như thật, chờ ảnh mịn rồi tải để có ảnh đẹp nhất.', 6000);
 };
 $('#walkBtn').onclick = () => { document.body.classList.add('walking-page'); viewer.enterWalk(); };
 $('#tourBtn').onclick = () => (viewer.tour ? viewer.stopTour() : startTour());

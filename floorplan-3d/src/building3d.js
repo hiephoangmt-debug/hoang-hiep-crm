@@ -1,5 +1,6 @@
 // Tòa nhà 3D: dựng khối tòa theo tầng, mỗi căn một khối tô màu theo trạng thái / loại căn / mặt đứng.
 import * as THREE from 'three';
+import { exportImage } from './snapshot.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Sky } from 'three/examples/jsm/objects/Sky.js';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
@@ -383,6 +384,12 @@ export class BuildingView {
   }
 
   /** Xem mặt bằng tầng chi tiết: chỉ tầng fi, camera nhìn xuống chếch như ảnh phối cảnh */
+  /** Tải ảnh PNG nét cao của khung 3D tòa nhà (kèm nhãn mã căn / tên tòa đang hiện) */
+  exportPNG(info = {}) {
+    this.labels.render(this.scene, this.camera);
+    return exportImage({ renderer: this.renderer, scene: this.scene, camera: this.camera, render: () => this.renderer.render(this.scene, this.camera), ...info });
+  }
+
   /** Xem riêng khối đế: ẩn các tầng ở, hiện mã shop, đưa camera về sát khối đế */
   showShops(floor) {
     this.shopsMode = floor || 0; // 0 = cả tòa, 1 = shop tầng 1, 2 = tầng 2 + hồ bơi
