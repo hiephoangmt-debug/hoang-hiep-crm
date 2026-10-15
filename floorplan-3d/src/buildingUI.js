@@ -9,7 +9,7 @@ const B_KEY = 'floorplan3d.building';
 let building;
 try { building = JSON.parse(localStorage.getItem(B_KEY) || 'null'); } catch { building = null; }
 building ||= sampleBuilding();
-let bview = null, bsel = null, H = null;
+let bview = null, bsel = null, H = null, bFloorIdx = 7;
 const saveBuilding = () => { try { localStorage.setItem(B_KEY, JSON.stringify(building)); } catch { /* bộ nhớ đầy */ } };
 const bUnit = (key) => (building.units[key] ||= { status: 'available' });
 const vndTy = (n) => n.toLocaleString('vi-VN', { maximumFractionDigits: 2 });
@@ -46,6 +46,7 @@ function bStats() {
 function renderBPanel() {
   const { st, total } = bStats();
   const floors = residentialFloors(building.floors);
+  bFloorIdx = Math.max(0, Math.min(bFloorIdx, floors.length - 1));
   const f = bview?.filter.status;
   $('#bpanel').innerHTML = `
     <h3>🏢 ${building.name} · ${floors.length} tầng ở · ${total} căn</h3>
@@ -70,7 +71,12 @@ function renderBPanel() {
     <h4>Lọc loại căn</h4>
     <select id="bType"><option value="">Tất cả loại căn</option>${Object.keys(TYPE_COLORS).map((t) => `<option ${bview?.filter.type === t ? 'selected' : ''}>${t}</option>`).join('')}</select>
     <button id="bPlan" class="primary">🗺 Mặt bằng tầng chi tiết (3D)</button>
-    <h4>Xem theo tầng</h4>
+    <h4>Ngắm theo cao độ tầng</h4>
+    <label class="slider">Tầng <b id="bFloorLabel">${floors[bFloorIdx].replace(/^0/, '')}</b><input type="range" id="bFloorRange" min="0" max="${floors.length - 1}" step="1" value="${bFloorIdx}" /></label>
+    <div class="row seg"><button id="bOrbit" class="${bview?.viewMode === 'orbit' ? 'active' : ''}">🔄 Xoay quanh tầng</button><button id="bLook" class="${bview?.viewMode === 'look' ? 'active' : ''}">🔭 Ngắm view từ tầng</button></div>
+    ${bview?.viewMode ? '<button id="bViewReset">↩ Về toàn cảnh</button>' : ''}
+    <p class="hint">Kéo thanh để lên / xuống tầng. “Ngắm view”: đứng ở mặt tiền nhìn ra, kéo chuột để nhìn quanh.</p>
+    <h4>Mặt bằng tầng</h4>
     <select id="bFloor"><option value="">Cả tòa nhà</option>${floors.map((fl, i) => `<option value="${i}" ${bview?.onlyFloor === i ? 'selected' : ''}>Tầng ${fl.replace(/^0/, '')}</option>`).join('')}</select>
     ${READONLY ? '' : `<h4>Thông số tòa</h4>
     <label class="field"><span>Số tầng ở</span><input type="number" id="bFloors" min="1" max="60" value="${building.floors}" /></label>
@@ -103,6 +109,21 @@ function renderBPanel() {
   $('#bViewP').onclick = () => bview.setView('perspective');
   $('#bViewC').onclick = () => bview.setView('close');
   $('#bType').onchange = (e) => { bview.filter.type = e.target.value || null; bview.rebuild(); };
+  const fullTower = () => { if (bview.onlyFloor !== null) { bview.onlyFloor = null; bview.rebuild(); } };
+  const applyFloor = () => {
+    if (bview.viewMode === 'look') fullTower();
+    if (bview.viewMode === 'look') bview.viewFromFloor(bFloorIdx, bview.lookSlot);
+    else bview.orbitFloor(bFloorIdx);
+  };
+  $('#bFloorRange').oninput = (e) => {
+    bFloorIdx = +e.target.value;
+    $('#bFloorLabel').textContent = floors[bFloorIdx].replace(/^0/, '');
+    if (!bview.viewMode) bview.viewMode = 'orbit';
+    applyFloor();
+  };
+  $('#bOrbit').onclick = () => { bview.lookSlot = null; bview.orbitFloor(bFloorIdx); renderBPanel(); };
+  $('#bLook').onclick = () => { bview.lookSlot = null; fullTower(); bview.viewFromFloor(bFloorIdx); renderBPanel(); };
+  if ($('#bViewReset')) $('#bViewReset').onclick = () => { bview.resetFloorView(); renderBPanel(); };
   $('#bFloor').onchange = (e) => {
     if (e.target.value !== '') { bview.showFloorPlan(+e.target.value); return; }
     bview.onlyFloor = null;
@@ -151,6 +172,7 @@ function renderBDetail() {
       ${READONLY ? '' : `<div><small>Giá ${u.price ? '' : '(ước tính)'}</small><b>${vndTy(price)} tỷ</b></div>
       <div><small>Đơn giá TT</small><b>${vndTy((price * 1000) / ar.tt)} tr/m²</b></div>`}
     </div>
+    <button id="bdLook">🔭 Ngắm view từ căn này (tầng ${floor.replace(/^0/, '')})</button>
     ${READONLY ? `<button id="bdView" class="primary" ${layout ? '' : 'disabled'}>🏠 Xem căn hộ 2D · 3D · 4D</button>${layout && !PROVISIONAL.has(slot.slot) ? '' : '<p class="hint">Mặt bằng chi tiết của căn này đang được cập nhật; hình 3D hiện tại chỉ mang tính minh hoạ.</p>'}` : `<label class="field"><span>Trạng thái</span><select id="bdStatus">${Object.entries(STATUS).map(([k, v]) => `<option value="${k}" ${(u.status || 'available') === k ? 'selected' : ''}>${v.name}</option>`).join('')}</select></label>
     <label class="field"><span>Giá bán (tỷ)</span><input type="number" id="bdPrice" step="0.01" min="0" value="${u.price ?? ''}" placeholder="${price.toFixed(2)}" /></label>
     <label class="field"><span>Khách hàng</span><input type="text" id="bdCustomer" value="${(u.customer || '').replace(/"/g, '&quot;')}" placeholder="Tên, SĐT" /></label>
@@ -159,6 +181,13 @@ function renderBDetail() {
     <button id="bdAssign" title="Lưu mặt bằng đang mở trong trình vẽ làm mặt bằng của vị trí ${slot.slot} (áp dụng cho mọi tầng)">📌 Gán mặt bằng đang mở cho vị trí ${slot.slot}</button>
     <p class="hint">${building.layouts[slot.slot] ? `Vị trí ${slot.slot} dùng mặt bằng đã gán (mọi tầng).` : layout ? `Vị trí ${slot.slot} đang dùng căn mẫu “${layout.unitId}”${PROVISIONAL.has(slot.slot) ? ' – GHÉP TẠM, chưa có mặt bằng đúng của căn này' : ' (ghép theo diện tích, cần xác nhận)'}.` : `Vị trí ${slot.slot} chưa có mặt bằng chi tiết. Gửi ảnh mặt bằng loại căn này để dựng, hoặc dựng ở chế độ 2D rồi bấm “Gán”.`}</p>`}`;
   const upd = (fn) => { fn(u); building.sample = false; saveBuilding(); bview.rebuild(); renderBPanel(); };
+  $('#bdLook').onclick = () => {
+    bFloorIdx = floorIndex;
+    bview.lookSlot = slot;
+    if (bview.onlyFloor !== null) { bview.onlyFloor = null; bview.rebuild(); }
+    bview.viewFromFloor(floorIndex, slot);
+    renderBPanel();
+  };
   $('#bdClose').onclick = () => { bsel = null; bview.setSelected(null); renderBDetail(); };
   if ($('#bdStatus')) $('#bdStatus').onchange = (e) => { upd((x) => (x.status = e.target.value)); renderBDetail(); };
   if ($('#bdPrice')) $('#bdPrice').onchange = (e) => { upd((x) => { const v = parseFloat(e.target.value); if (isFinite(v) && v > 0) x.price = v; else delete x.price; }); renderBDetail(); };
