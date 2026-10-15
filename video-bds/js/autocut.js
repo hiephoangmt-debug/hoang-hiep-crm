@@ -257,8 +257,24 @@
         var sim = similarity(u.text, sc.text + ' ' + (sc.bigText || []).join(' '));
         if (!bs || sim.score > bs.score) { bs = sim; best = si; }
       });
-      if (bs && bs.score >= 0.3 && tokens(u.text).length >= 2) { u.sim = bs; result[best].push(u); }
-      else dropped.push(u);
+      if (bs && bs.score >= 0.3 && tokens(u.text).length >= 2) { u.sim = bs; u.scene = best; result[best].push(u); }
+      else { u._bs = bs; dropped.push(u); }
+    });
+    // Câu nghe chưa rõ (khớp kịch bản ít) nhưng đủ dài: giữ lại, gắn vào cảnh của câu đứng trước trong cùng clip
+    dropped = dropped.filter(function (u) {
+      // Giữ: câu từ 5 chữ (kể cả nói thêm ngoài kịch bản), hoặc câu 4 chữ có khớp kịch bản một phần.
+      // Bỏ: câu rất ngắn ("ok quay lại", "3 2 1"…)
+      var nTok = tokens(u.text).length;
+      if (!u._bs || !(nTok >= 5 || (nTok >= 4 && u._bs.score >= 0.12))) return true;
+      var nb = null;
+      for (var k = u.order - 1; k >= 0 && !nb; k--) if (utts[k].clip === u.clip && utts[k].sim) nb = utts[k];
+      for (var k2 = u.order + 1; k2 < utts.length && !nb; k2++) if (utts[k2].clip === u.clip && utts[k2].sim) nb = utts[k2];
+      if (!nb) return true;
+      u.sim = { score: u._bs.score, pos: nb.sim.pos + 0.01 * (u.order - nb.order), from: nb.sim.to, to: nb.sim.to };
+      u.scene = nb.scene;
+      u.loose = true;
+      result[nb.scene].push(u);
+      return false;
     });
     var overlaps = function (u, v) {
       var ov = Math.min(u.sim.to, v.sim.to) - Math.max(u.sim.from, v.sim.from);

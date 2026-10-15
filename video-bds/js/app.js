@@ -568,10 +568,28 @@
         perScene = m.scenes;
         dropped = m.dropped;
       } else {
-        // Không nghe được lời: clip thứ i vào cảnh thứ i (theo tên file)
-        clips.forEach(function (c, i) {
-          perScene[Math.min(i, scenes.length - 1)].push({ clip: c, segs: c.segments, start: c.segments[0][0], end: c.segments[c.segments.length - 1][1] });
-        });
+        var spoken = scenes.filter(function (sc) { return (sc.text || '').trim(); }).length;
+        if (clips.length >= spoken) {
+          // Mỗi clip là một cảnh: clip thứ i vào cảnh thứ i (theo tên file)
+          clips.forEach(function (c, i) {
+            perScene[Math.min(i, scenes.length - 1)].push({ clip: c, segs: c.segments, start: c.segments[0][0], end: c.segments[c.segments.length - 1][1] });
+          });
+        } else {
+          // Ít clip, nhiều cảnh (quay liền mạch): dùng HẾT lời nói, chia lần lượt theo độ dài lời thoại từng cảnh
+          var all = [];
+          clips.forEach(function (c) { all = all.concat(AC.utterances(c, 0.7)); });
+          var durOf = function (u) { return u.segs.reduce(function (a, sg) { return a + sg[1] - sg[0]; }, 0); };
+          var totalDur = all.reduce(function (a, u) { return a + durOf(u); }, 0) || 1;
+          var weights = scenes.map(function (sc) { return (sc.text || '').trim().split(/\s+/).filter(Boolean).length; });
+          var totalW = weights.reduce(function (a, b) { return a + b; }, 0) || 1;
+          var cum = 0;
+          all.forEach(function (u) {
+            var d = durOf(u), frac = (cum + d / 2) / totalDur, acc = 0, k = 0;
+            for (; k < scenes.length; k++) { acc += weights[k] / totalW; if (frac <= acc + 1e-9 && weights[k]) break; }
+            perScene[Math.min(k, scenes.length - 1)].push(u);
+            cum += d;
+          });
+        }
       }
       var segIdx = 0;
       scenes.forEach(function (sc, si) {
@@ -621,6 +639,11 @@
         if (talk.length) return '<div>✅ ' + esc(t) + talk.length + ' đoạn nói (' + fmtSec(secs) + 's)' + (other ? ' + ' + other + ' phối cảnh/flycam xen vào' : '') + '</div>';
         if (other) return '<div>🏙 ' + esc(t) + 'chưa có cảnh nói, dùng ' + other + ' phối cảnh/flycam + phụ đề theo kịch bản</div>';
         return '<div class="warn">⚠️ ' + esc(t) + 'chưa có hình, sẽ hiện chữ trên nền màu. Thêm ảnh phối cảnh để đẹp hơn.</div>';
+      });
+      clips.forEach(function (c) {
+        var total = c.segments.reduce(function (a, sg) { return a + sg[1] - sg[0]; }, 0), used = 0;
+        scenes.forEach(function (sc) { sc.media.forEach(function (m) { if (m.fixed && m.name === c.file.name) used += m.trimOut - m.trimIn; }); });
+        lines.push('<div class="muted">🎬 ' + esc(c.file.name) + ': dùng ' + fmtSec(used) + 's / ' + fmtSec(total) + 's lời nói</div>');
       });
       if (failed.length) lines.push('<div class="warn">⚠️ Không mở được ' + failed.length + ' video: ' + esc(failed.join(', ')) +
         '. Thường do video iPhone định dạng HEVC. Cách sửa: dùng Chrome bản mới, hoặc trên iPhone vào Cài đặt → Camera → Định dạng → chọn “Tương thích nhất” rồi quay lại.</div>');
