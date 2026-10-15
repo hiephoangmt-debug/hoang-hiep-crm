@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nhà 3D – Mặt bằng 2D sang 3D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo">⌂</span><div><b>Nhà 3D</b><small>Mặt bằng 2D → 3D</small></div></div>
+    <nav class="modes" id="modes">
+      <button data-mode="2d">✏️ Mặt bằng 2D</button>
+      <button data-mode="split" class="active">◧ Song song</button>
+      <button data-mode="3d">🧊 3D</button>
+    </nav>
+    <div class="actions">
+      <select id="template" title="Mẫu có sẵn">
+        <option value="">📂 Mẫu…</option>
+        <option value="luxury">Căn hộ 2PN + lô-gia (như ảnh phối cảnh)</option>
+        <option value="sample">Căn hộ 2 phòng ngủ (85 m²)</option>
+        <option value="studio">Căn studio (35 m²)</option>
+        <option value="empty">Bản vẽ trống</option>
+      </select>
+      <button id="undo" title="Hoàn tác (Ctrl+Z)">↶</button>
+      <button id="redo" title="Làm lại (Ctrl+Y)">↷</button>
+      <button id="open" title="Mở file .json">Mở</button>
+      <button id="save" title="Lưu file .json">Lưu</button>
+      <button id="estimateBtn" class="accent" title="Bóc tách khối lượng & dự toán chi phí hoàn thiện nội thất">💰 Dự toán</button>
+      <button id="shot" title="Chụp ảnh 3D">📷 Ảnh</button>
+      <button id="glb" title="Xuất mô hình GLB (dùng cho SketchUp/Blender/Web)">⬇ GLB</button>
+      <input type="file" id="fileJson" accept=".json,application/json" hidden />
+      <input type="file" id="fileView" accept="image/*" hidden />
+    </div>
+  </header>
+
+  <main id="app" class="mode-split">
+    <aside class="sidebar left" id="left">
+      <section>
+        <h3>Công cụ vẽ</h3>
+        <div class="tools" id="tools">
+          <button data-tool="select" class="active" title="Chọn / kéo (V)"><i>↖</i>Chọn</button>
+          <button data-tool="wall" title="Vẽ tường liên tiếp (W) – nhấp đúp hoặc Enter để kết thúc"><i>▭</i>Tường</button>
+          <button data-tool="room" title="Kéo để vẽ phòng chữ nhật, hoặc nhấp từng điểm để vẽ đa giác (P)"><i>⬚</i>Phòng</button>
+          <button data-tool="door" title="Đặt cửa đi lên tường (D)"><i>🚪</i>Cửa đi</button>
+          <button data-tool="window" title="Đặt cửa sổ lên tường (C)"><i>🪟</i>Cửa sổ</button>
+          <button data-tool="slide" title="Cửa kính lùa"><i>▥</i>Cửa lùa</button>
+        </div>
+        <p class="hint" id="toolHint">Nhấp để chọn, kéo để di chuyển. Kéo nền để cuộn, lăn chuột để phóng to.</p>
+      </section>
+      <section>
+        <h3>Từ ảnh mặt bằng</h3>
+        <div class="stack">
+          <button id="bgLoad" class="primary">🖼️ Tải ảnh / bản scan mặt bằng</button>
+          <div class="row2">
+            <button id="bgCalib" title="Nhấp 2 điểm trên ảnh rồi nhập khoảng cách thực">📏 Tỉ lệ</button>
+            <button id="bgMove" title="Kéo ảnh nền">✋ Dời ảnh</button>
+          </div>
+          <label class="slider">Độ mờ ảnh <input type="range" id="bgOpacity" min="0" max="1" step="0.05" value="0.5" /></label>
+          <button id="detect" class="accent">✨ Tự nhận diện tường + cửa</button>
+          <div class="row2">
+            <button id="autoRooms" title="Tự tạo phòng từ các vùng tường khép kín">🏠 Tự tạo phòng</button>
+            <button id="bgClear">🗑 Xoá ảnh</button>
+          </div>
+          <input type="file" id="fileImg" accept="image/*" hidden />
+        </div>
+      </section>
+      <section class="grow">
+        <h3>Nội thất <small>(nhấp rồi đặt; giữ Shift để đặt nhiều)</small></h3>
+        <input type="search" id="furnSearch" placeholder="Tìm đồ nội thất…" />
+        <div id="catalog"></div>
+      </section>
+    </aside>
+
+    <section class="pane pane2d" id="pane2d">
+      <canvas id="plan"></canvas>
+      <div class="zoombar">
+        <button id="zoomIn">＋</button><button id="zoomOut">－</button><button id="zoomFit" title="Vừa khung">⤢</button>
+        <label title="Hiện kích thước"><input type="checkbox" id="dims" checked /> Kích thước</label>
+      </div>
+    </section>
+
+    <section class="pane pane3d" id="pane3d">
+      <div id="viewer"></div>
+      <div class="vbar top">
+        <div class="group">
+          <button data-view="iso" title="Góc nhìn toàn cảnh">🏠 Toàn cảnh</button>
+          <button data-view="top" title="Nhìn từ trên xuống">⬇ Trên xuống</button>
+          <button data-view="front" title="Nhìn mặt tiền">🏛 Mặt tiền</button>
+          <button id="walk" class="accent" title="Đi bộ trong nhà góc nhìn thứ nhất">🚶 Đi bộ trong nhà</button>
+          <button id="replay" title="Phát lại hiệu ứng dựng nhà">▶ Dựng hình</button>
+          <button id="real" class="primary" title="Render path tracing: ánh sáng, phản xạ, bóng đổ như ảnh chụp thật. Đứng yên camera để ảnh mịn dần.">📸 Render ảnh thật</button>
+        </div>
+      </div>
+      <div class="vbar bottom">
+        <label class="slider wide" title="Thời gian trong ngày – nắng và bóng đổ thay đổi theo giờ">☀️ <span id="hourLabel">15:00</span>
+          <input type="range" id="hour" min="5" max="22" step="0.25" value="15" /></label>
+        <label class="slider" title="Hạ chiều cao tường để nhìn vào trong (kiểu nhà búp bê)">✂️ Cắt tường
+          <input type="range" id="cut" min="0" max="1" step="0.01" value="1" /></label>
+        <div class="toggles">
+          <label><input type="checkbox" id="optLabels" checked /> Tên phòng</label>
+          <label><input type="checkbox" id="optCeiling" checked /> Trần</label>
+          <label><input type="checkbox" id="optLand" checked /> Cảnh quan</label>
+          <label><input type="checkbox" id="optAO" checked /> Đổ bóng mềm (AO)</label>
+          <label><input type="checkbox" id="optRotate" /> Tự xoay</label>
+          <label>💡 <select id="optLights"><option value="auto">Đèn: tự động</option><option value="on">Đèn: bật</option><option value="off">Đèn: tắt</option></select></label>
+          <button id="doors" title="Mở/đóng tất cả cửa">🚪 Mở tất cả cửa</button>
+        </div>
+      </div>
+      <div class="ptstatus" id="ptStatus"></div>
+      <div class="walkhint" id="walkhint">
+        <b>Chế độ đi bộ</b> · W A S D / phím mũi tên để đi · Shift chạy · chuột để nhìn · E hoặc nhấp để mở cửa · <b>Esc</b> để thoát
+      </div>
+      <div class="help3d" id="help3d">Kéo chuột để xoay · chuột phải để dời · lăn để phóng · nhấp đúp để bay tới · nhấp vào cửa để mở</div>
+    </section>
+
+    <aside class="sidebar right" id="right">
+      <section id="props"></section>
+    </aside>
+  </main>
+  <div class="modal" id="estimate" hidden>
+    <div class="sheet">
+      <header>
+        <div><h2>Bóc tách khối lượng &amp; dự toán chi phí</h2><small id="estSub"></small></div>
+        <div class="btnrow">
+          <button id="estCsv">⬇ Xuất Excel (CSV)</button>
+          <button id="estPrint">🖨 In / PDF</button>
+          <button id="estReset" title="Khôi phục toàn bộ đơn giá mặc định">↺ Đơn giá gốc</button>
+          <button id="estClose">✕</button>
+        </div>
+      </header>
+      <div class="estopts" id="estOpts"></div>
+      <div class="esttable" id="estBody"></div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
