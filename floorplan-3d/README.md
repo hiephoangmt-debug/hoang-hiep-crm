@@ -47,3 +47,14 @@ npm run build      # bản tĩnh trong dist/ (upload lên hosting bất kỳ)
 | `src/textures.js` | Vân vật liệu sinh bằng canvas |
 | `src/detect.js`, `src/autorooms.js` | Nhận diện tường từ ảnh, tự tạo phòng |
 | `src/estimate.js` | Bóc tách khối lượng & dự toán |
+
+## Đưa lên web (GitHub Pages)
+
+Repo đã có sẵn workflow `.github/workflows/deploy-floorplan-3d.yml`: mỗi lần thay đổi trong `floorplan-3d/` được merge vào `main`, GitHub tự build và đăng lên Pages.
+
+1. Vào repo trên GitHub → **Settings** → **Pages**.
+2. Mục **Build and deployment → Source** chọn **GitHub Actions**.
+3. Merge workflow vào `main` (hoặc vào tab **Actions** → *Deploy Nhà 3D lên GitHub Pages* → **Run workflow**).
+4. Chờ 1–2 phút, địa chỉ trang hiện ở **Settings → Pages** và trong lần chạy workflow, dạng `https://<tài-khoản>.github.io/<tên-repo>/`.
+
+Lưu ý: repo riêng tư chỉ dùng được Pages với gói GitHub Pro/Team/Enterprise; với gói miễn phí cần để repo công khai, hoặc đưa thư mục `dist/` lên Netlify / Vercel / Cloudflare Pages (kéo thả thư mục `dist` sau khi chạy `npm run build`).

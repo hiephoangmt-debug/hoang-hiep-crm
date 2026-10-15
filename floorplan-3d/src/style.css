@@ -185,3 +185,7 @@ input[type=color] { width: 30px; height: 24px; padding: 0; border: 1px solid var
   .modal header .btnrow { display: none; }
   .esttable { overflow: visible; }
 }
+
+.dialog { padding: 18px; gap: 12px; width: min(420px, 100%); }
+.dialog p { margin: 0; line-height: 1.5; }
+.dialog .btnrow { justify-content: flex-end; margin: 0; }

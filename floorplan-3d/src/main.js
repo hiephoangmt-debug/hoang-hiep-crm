@@ -16,6 +16,26 @@ const editor = new Editor2D($('#plan'), store);
 const viewer = new Viewer3D($('#viewer'), store);
 editor.active = true;
 
+/** Hộp thoại trong trang (thay cho confirm/prompt vốn bị chặn trong khung nhúng) */
+function ask(message, { input = null, ok = 'Đồng ý', cancel = 'Huỷ' } = {}) {
+  return new Promise((resolve) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'modal';
+    wrap.innerHTML = `<form class="sheet dialog"><p></p>${input !== null ? '<input type="text" id="askInput" inputmode="decimal" />' : ''}
+      <div class="btnrow"><button type="button" data-r="cancel">${cancel}</button><button type="submit" class="primary">${ok}</button></div></form>`;
+    wrap.querySelector('p').textContent = message;
+    const inp = wrap.querySelector('input');
+    if (inp) inp.value = input;
+    const done = (v) => { wrap.remove(); resolve(v); };
+    wrap.querySelector('form').onsubmit = (e) => { e.preventDefault(); done(inp ? inp.value : true); };
+    wrap.querySelector('[data-r="cancel"]').onclick = () => done(inp ? null : false);
+    wrap.onkeydown = (e) => { if (e.key === 'Escape') done(inp ? null : false); };
+    document.body.appendChild(wrap);
+    (inp || wrap.querySelector('[type=submit]')).focus();
+    inp?.select();
+  });
+}
+
 function toast(msg, ms = 2600) {
   const t = $('#toast');
   t.textContent = msg;
@@ -322,11 +342,11 @@ renderProps();
 // ---------- Thanh công cụ trên ----------
 $('#undo').onclick = () => { store.undo(); editor.validateSelection(); };
 $('#redo').onclick = () => { store.redo(); editor.validateSelection(); };
-$('#template').onchange = (e) => {
+$('#template').onchange = async (e) => {
   const v = e.target.value;
   e.target.value = '';
   if (!v) return;
-  if (store.plan.walls.length && !confirm('Thay bản vẽ hiện tại bằng mẫu? (Có thể hoàn tác bằng Ctrl+Z)')) return;
+  if (store.plan.walls.length && !(await ask('Thay bản vẽ hiện tại bằng mẫu? Có thể hoàn tác bằng Ctrl+Z.', { ok: 'Thay bằng mẫu' }))) return;
   editor.select(null);
   store.load(v === 'luxury' ? luxuryPlan() : v === 'sample' ? samplePlan() : v === 'studio' ? studioPlan() : emptyPlan());
   if (v === 'empty') { editor.setTool('room'); toast('Kéo chuột để vẽ phòng đầu tiên, hoặc tải ảnh mặt bằng để tự nhận diện.'); }
@@ -399,10 +419,10 @@ $('#bgOpacity').onchange = () => store.save();
 $('#bgCalib').onclick = () => { if (!store.background) return toast('Hãy tải ảnh mặt bằng trước.'); editor.setTool('calibrate'); };
 $('#bgMove').onclick = () => { if (!store.background) return toast('Hãy tải ảnh mặt bằng trước.'); editor.setTool('movebg'); };
 $('#bgClear').onclick = () => { store.background = null; editor.loadBackground(); store.save(); };
-editor.addEventListener('calibrate', (e) => {
+editor.addEventListener('calibrate', async (e) => {
   const [p1, p2] = e.detail;
   const measured = Math.hypot(p2.x - p1.x, p2.y - p1.y);
-  const ans = prompt(`Đoạn vừa chọn dài ${measured.toFixed(2)} m theo tỉ lệ hiện tại.\nNhập chiều dài THỰC (mét):`, measured.toFixed(2));
+  const ans = await ask(`Đoạn vừa chọn dài ${measured.toFixed(2)} m theo tỉ lệ hiện tại. Nhập chiều dài thực (mét):`, { input: measured.toFixed(2), ok: 'Áp dụng tỉ lệ' });
   const real = parseFloat(String(ans).replace(',', '.'));
   if (!ans || !isFinite(real) || real <= 0) { editor.setTool('select'); return; }
   const bg = store.background;
@@ -417,7 +437,7 @@ editor.addEventListener('calibrate', (e) => {
   editor.render();
   toast(`Đã hiệu chỉnh: 1 pixel ảnh = ${(bg.mpp * 100).toFixed(2)} cm`);
 });
-$('#detect').onclick = () => {
+$('#detect').onclick = async () => {
   if (!editor.bgImage) return toast('Hãy tải ảnh mặt bằng trước (ảnh rõ nét, tường tô đậm cho kết quả tốt nhất).', 4000);
   const bg = store.background;
   const res = detectWalls(editor.bgImage, bg);
@@ -428,7 +448,7 @@ $('#detect').onclick = () => {
     editor.loadBackground();
   }
   editor.select(null);
-  const replace = !store.plan.walls.length || confirm(`${res.message}\nThay thế các tường hiện có? (Huỷ = thêm vào)`);
+  const replace = !store.plan.walls.length || (await ask(`${res.message} Thay thế bản vẽ hiện có, hay thêm vào?`, { ok: 'Thay thế', cancel: 'Thêm vào' }));
   store.commit((pl) => {
     if (replace) { pl.walls = []; pl.openings = []; pl.rooms = []; pl.furniture = []; }
     pl.walls.push(...res.walls);
