@@ -33,17 +33,17 @@ Sau khi cài, ứng dụng có biểu tượng riêng và mở được cả khi
 | 5. Hiệu ứng và nhạc | Khung 9:16 / 16:9 / 1:1, màu, hiệu ứng chữ (bật lên, trượt vào, gõ chữ), chuyển cảnh, nhạc nền tự soạn hoặc nhạc riêng |
 | 6. Xuất video | **Video đầy đủ**, **Trailer** (cắt nhanh, chữ to, nhạc sôi động), **Từng cảnh riêng** (để đăng Reels/TikTok hằng ngày) |
 
-### 🚀 Làm video tự động từ thư mục (Bước 1, khuyên dùng)
-Bỏ **cả thư mục dự án** vào khung đầu tiên, gồm:
-- **File kịch bản**: Excel (.xlsx), Word (.docx), CSV, TXT, hoặc file chứa link Google Sheets/Docs (cũng có thể dán link).
-  Kịch bản dạng bảng: cột Tên cảnh | Lời thoại | Hình ảnh/Text. Dạng văn bản: dòng “CẢNH 1 – …” mở cảnh mới, “Hình ảnh: …”, “Text chạy màn hình:”.
-- **Các video đã quay** (chưa cần cắt), **ảnh phối cảnh / flycam**, **nhạc nền** (mp3) nếu có.
+### 🚀 Làm video tự động (Bước 1, khuyên dùng)
+Khung đầu tiên có 3 phần:
+1. **🎬 Video quay (người nói)**: các clip sau buổi quay, chưa cần cắt. Kéo thả file, thư mục, file .zip, hoặc dán link thư mục Google Drive.
+2. **🏙 Tư liệu dự án**: ảnh phối cảnh, flycam, video dự án, logo, nhạc nền. Kéo thả hoặc dán link thư mục Google Drive dự án.
+3. **📝 Kịch bản quay**: dán link Google Sheets/Docs, dán nội dung kịch bản (copy từ Sheets, Word, Zalo), hoặc chọn file Excel/Word/TXT.
 
-**Video, ảnh để trên Google Drive?** Bấm chuột phải vào thư mục trên Drive → **Tải xuống** (Google nén thành .zip) rồi kéo thả file .zip vào, không cần giải nén.
-Hoặc dán thẳng link thư mục Drive (cần tạo khoá API Google một lần, hướng dẫn ngay trong ứng dụng). Link Google Sheets/Drive phải bật chia sẻ “Bất kỳ ai có đường liên kết → Người xem”.
+Bấm **🚀 Làm video tự động**: phần mềm cắt ghép video quay theo kịch bản, lắp tư liệu dự án vào đoạn chưa quay,
+thêm chữ động, hiệu ứng, nhạc, rồi xuất luôn **video đầy đủ + trailer**.
 
-Bấm **🚀 Làm video tự động**: phần mềm đọc kịch bản, tự điền giá và số điện thoại tìm thấy trong kịch bản, cắt ghép, làm đẹp, thêm chữ động, hiệu ứng, nhạc,
-rồi xuất luôn **video đầy đủ + trailer**.
+**Tư liệu trên Google Drive?** Chuột phải vào thư mục trên Drive → **Tải xuống** (Google nén thành .zip) rồi kéo thả file .zip vào, không cần giải nén.
+Hoặc dán thẳng link thư mục Drive (cần khoá API Google, hướng dẫn trong mục 🔑). Link phải bật chia sẻ “Bất kỳ ai có đường liên kết → Người xem”.
 
 ### Phong cách chữ động (giống video mẫu)
 Mỗi câu nói hiện thành một “tầng chữ”: chữ dẫn nhỏ hiện dần theo lời nói, **từ khoá rất to tô màu chuyển sắc** (có lúc tô bằng ảnh phối cảnh) đập vào kèm tiếng “bụp”,

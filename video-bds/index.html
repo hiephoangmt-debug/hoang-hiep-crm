@@ -28,26 +28,49 @@
     <!-- BƯỚC 1 -->
     <div class="step" data-step="1">
       <div class="box assemble" id="autoProject">
-        <h3>🚀 Làm video tự động từ thư mục</h3>
-        <p>Bỏ <b>cả thư mục</b> gồm: <b>file kịch bản</b> (Excel, Word, CSV, TXT, hoặc file chứa link Google Sheets),
-          <b>các video đã quay</b> (chưa cần cắt), <b>ảnh phối cảnh / flycam</b>, và <b>nhạc nền</b> nếu có.
-          Phần mềm tự đọc kịch bản, cắt ghép theo kịch bản, lắp phối cảnh vào đoạn chưa quay, thêm phụ đề, hiệu ứng, nhạc và xuất video.</p>
-        <label class="dropzone" id="projDrop">
-          <div class="dz-icon">📁</div>
-          <div><b>Kéo thả cả thư mục vào đây</b></div>
-          <div class="row wrap nomargin" style="justify-content:center;margin-top:8px">
-            <button class="btn" type="button" id="btnPickFolder">📁 Chọn thư mục</button>
-            <button class="btn" type="button" id="btnPickFiles">📄 Chọn nhiều file</button>
+        <h3>🚀 Làm video tự động</h3>
+        <p class="muted small-text">Đưa vào 3 phần dưới đây rồi bấm nút. Phần mềm tự cắt ghép video quay theo kịch bản, lắp tư liệu dự án vào đoạn chưa quay, thêm chữ, hiệu ứng, nhạc và xuất video.</p>
+
+        <div class="src-block">
+          <div class="src-head"><span class="src-no">1</span><b>🎬 Video quay (người nói)</b> <span class="muted small-text">các clip sau buổi quay, chưa cần cắt</span></div>
+          <div class="dropzone small-dz" id="talkDrop">
+            <div><b>Kéo thả video quay vào đây</b> (file, thư mục hoặc file .zip)</div>
+            <div class="row wrap nomargin dz-btns">
+              <button class="btn small" type="button" data-pick="talk-folder">📁 Chọn thư mục</button>
+              <button class="btn small" type="button" data-pick="talk-files">📄 Chọn file</button>
+            </div>
+            <div class="muted small-text" id="talkInfo"></div>
           </div>
-          <div class="muted small-text" id="projFiles" style="margin-top:6px"></div>
-        </label>
-        <input type="file" id="projFolder" webkitdirectory directory multiple hidden>
-        <input type="file" id="projFilesInput" multiple hidden>
-        <label style="margin-top:12px">Hoặc dán link (mỗi dòng một link): kịch bản Google Sheets / Docs, thư mục Google Drive chứa video và ảnh
-          <textarea id="projLink" rows="3" placeholder="https://docs.google.com/spreadsheets/d/...&#10;https://drive.google.com/drive/folders/..."></textarea>
-        </label>
-        <p class="muted small-text">💡 Video và ảnh để trên Google Drive: bấm chuột phải vào thư mục → <b>Tải xuống</b> (Google nén thành file .zip), rồi kéo thả file .zip vào khung trên, không cần giải nén.
-          Link kịch bản Google Sheets cần bật chia sẻ <b>“Bất kỳ ai có đường liên kết → Người xem”</b>.</p>
+          <input class="link-input" id="talkLink" placeholder="Hoặc dán link thư mục Google Drive chứa video quay">
+        </div>
+
+        <div class="src-block">
+          <div class="src-head"><span class="src-no">2</span><b>🏙 Tư liệu dự án</b> <span class="muted small-text">ảnh phối cảnh, flycam, video dự án, logo, nhạc nền</span></div>
+          <div class="dropzone small-dz" id="assetDrop">
+            <div><b>Kéo thả hình ảnh, video dự án vào đây</b> (file, thư mục hoặc file .zip)</div>
+            <div class="row wrap nomargin dz-btns">
+              <button class="btn small" type="button" data-pick="asset-folder">📁 Chọn thư mục</button>
+              <button class="btn small" type="button" data-pick="asset-files">📄 Chọn file</button>
+            </div>
+            <div class="muted small-text" id="assetInfo"></div>
+          </div>
+          <input class="link-input" id="assetLink" placeholder="Hoặc dán link thư mục Google Drive dự án (hình ảnh, video)">
+        </div>
+
+        <div class="src-block">
+          <div class="src-head"><span class="src-no">3</span><b>📝 Kịch bản quay</b> <span class="muted small-text">dán nội dung, dán link, hoặc chọn file</span></div>
+          <textarea id="scriptText" rows="5" placeholder="Dán link Google Sheets / Google Docs kịch bản,&#10;hoặc copy nội dung kịch bản (từ Sheets, Word, Zalo…) rồi dán vào đây."></textarea>
+          <div class="row wrap nomargin" style="margin-top:8px">
+            <button class="btn small" type="button" id="btnScriptFile">📄 Chọn file kịch bản (Excel, Word, TXT)</button>
+            <span class="muted small-text" id="scriptInfo"></span>
+          </div>
+          <input type="file" id="scriptFileInput" accept=".xlsx,.docx,.csv,.tsv,.txt,.md" hidden>
+        </div>
+
+        <input type="file" id="pickFolderInput" webkitdirectory directory multiple hidden>
+        <input type="file" id="pickFilesInput" multiple hidden>
+        <p class="muted small-text">💡 Tư liệu trên Google Drive: chuột phải vào thư mục → <b>Tải xuống</b> (Google nén thành .zip) rồi kéo thả file .zip vào, không cần giải nén.
+          Link Google Sheets / Drive cần bật chia sẻ <b>“Bất kỳ ai có đường liên kết → Người xem”</b>.</p>
         <details class="more" id="driveKeyBox">
           <summary>🔑 Muốn dán thẳng link thư mục Google Drive (không cần tải về)</summary>
           <ol class="small-text">

@@ -507,7 +507,11 @@
         }).then(function (r) {
           tick('Đã quét ' + f.name);
           if (!r) return;
-          if (looksLikeTalk(f, r.sp)) clips.push({ file: f, item: r.item, buf: r.buf, segments: r.sp.segments, voiceGain: r.sp.voiceGain, duration: r.sp.duration, speed: r.sp.speed, rate: r.sp.rate });
+          var role = opts.roleOf ? opts.roleOf(f) : null;
+          var talkClip = role === 'talk' ? !!(r.sp && r.sp.segments.length) : (role === 'broll' ? false : looksLikeTalk(f, r.sp));
+          if (role === 'talk' && !talkClip) noAudio.push(f.name);
+          if (role === 'broll') noAudio = noAudio.filter(function (n) { return n !== f.name; }); // tư liệu không cần tiếng
+          if (talkClip) clips.push({ file: f, item: r.item, buf: r.buf, segments: r.sp.segments, voiceGain: r.sp.voiceGain, duration: r.sp.duration, speed: r.sp.speed, rate: r.sp.rate });
           else { r.item.keepAudio = false; r.item.hasAudio = false; broll.push({ file: f, item: r.item }); }
         });
       });
@@ -604,7 +608,7 @@
       });
       if (failed.length) lines.push('<div class="warn">⚠️ Không mở được ' + failed.length + ' video: ' + esc(failed.join(', ')) +
         '. Thường do video iPhone định dạng HEVC. Cách sửa: dùng Chrome bản mới, hoặc trên iPhone vào Cài đặt → Camera → Định dạng → chọn “Tương thích nhất” rồi quay lại.</div>');
-      if (noAudio.length) lines.push('<div class="muted">🔇 Không có tiếng (dùng làm cảnh quay phủ lên): ' + esc(noAudio.join(', ')) + '. Nếu đây là clip có người nói, hãy đổi sang file MP4.</div>');
+      if (noAudio.length) lines.push('<div class="muted">🔇 Không có tiếng (dùng làm cảnh quay phủ lên): ' + esc(noAudio.filter(function (x, i) { return noAudio.indexOf(x) === i; }).join(', ')) + '. Nếu đây là clip có người nói, hãy đổi sang file MP4.</div>');
       if (dropped.length) {
         var retakes = dropped.filter(function (u) { return u.retake; }).length;
         lines.push('<div class="muted">✂️ Đã bỏ ' + dropped.length + ' đoạn nói không đúng kịch bản' + (retakes ? ' (trong đó ' + retakes + ' đoạn nói hỏng đã được quay lại)' : '') + '.</div>');
@@ -626,7 +630,7 @@
 
   /* ---------- Làm video tự động từ thư mục ---------- */
 
-  var projFiles = [], projFolder = '';
+  var src = { talk: [], asset: [], scriptFile: null, folder: '' };
 
   function projProgress(p, label) {
     var box = $('projProgress');
@@ -636,20 +640,28 @@
     box.querySelector('span').textContent = label;
   }
 
-  function setProjFiles(files, folder) {
-    projFiles = Array.prototype.slice.call(files || []);
-    projFolder = folder || (projFiles[0] && projFiles[0].webkitRelativePath ? projFiles[0].webkitRelativePath.split('/')[0] : '');
-    var c = window.BdsImporter.classify(projFiles);
+  function describeFiles(files) {
+    var c = window.BdsImporter.classify(files);
     var v = c.media.filter(isVideoFile).length;
-    if (c.zips.length) { $('projFiles').innerHTML = '🗜 ' + c.zips.length + ' file nén .zip (sẽ tự mở khi bấm Làm video) · ' + v + ' video · ' + (c.media.length - v) + ' ảnh'; updateProjButton(); return; }
-    $('projFiles').innerHTML = projFiles.length ?
-      (projFolder ? '📁 <b>' + esc(projFolder) + '</b>: ' : '') + (c.scripts.length ? '📝 kịch bản: <b>' + esc(c.scripts[0].name) + '</b> · ' : '⚠️ chưa thấy file kịch bản · ') +
-      v + ' video · ' + (c.media.length - v) + ' ảnh' + (c.music.length ? ' · 🎵 ' + esc(c.music[0].name) : '') : '';
+    var parts = [];
+    if (c.zips.length) parts.push('🗜 ' + c.zips.length + ' file .zip (tự mở khi bấm làm video)');
+    if (v) parts.push(v + ' video');
+    if (c.media.length - v) parts.push((c.media.length - v) + ' ảnh');
+    if (c.music.length) parts.push('🎵 ' + esc(c.music[0].name));
+    if (c.scripts.length) parts.push('📝 ' + esc(c.scripts[0].name));
+    return parts.length ? '✔ ' + parts.join(' · ') : '';
+  }
+
+  function setSource(kind, files, folder) {
+    files = Array.prototype.slice.call(files || []);
+    src[kind] = files;
+    if (kind === 'talk') src.folder = folder || (files[0] && files[0].webkitRelativePath ? files[0].webkitRelativePath.split('/')[0] : '');
+    $(kind + 'Info').innerHTML = (folder ? '📁 <b>' + esc(folder) + '</b>: ' : '') + describeFiles(files);
     updateProjButton();
   }
 
   function updateProjButton() {
-    $('btnAutoProject').disabled = !projFiles.length && !$('projLink').value.trim();
+    $('btnAutoProject').disabled = !src.talk.length && !src.asset.length && !$('talkLink').value.trim() && !$('assetLink').value.trim();
   }
 
   function jumpTo(n) {
@@ -659,10 +671,24 @@
     showStep();
   }
 
+  /** Mở .zip và tải link Drive của một phần (video quay hoặc tư liệu). */
+  function gather(files, link, key, label, pre) {
+    var I = window.BdsImporter;
+    return I.expandZips(files, function (m) { projProgress(0.01, m); }).then(function (list) {
+      if (!link.trim()) return list;
+      return I.fromDrive(link, key, function (m) { projProgress(0.02, label + ': ' + m); }).then(function (df) { return list.concat(df); }).catch(function (e) {
+        if (e.message === 'NEED_KEY') {
+          pre.push('<div class="warn">⚠️ ' + label + ': có link Google Drive nhưng chưa có khoá API. Mở mục “🔑” để làm theo, hoặc tải thư mục về (.zip) rồi kéo thả vào.</div>');
+          $('driveKeyBox').open = true;
+        } else pre.push('<div class="warn">⚠️ ' + label + ': ' + esc(e.message) + '</div>');
+        return list;
+      });
+    });
+  }
+
   function autoProject() {
     var I = window.BdsImporter;
-    var linkText = $('projLink').value;
-    if (state.scenes.some(function (sc) { return sc.media.length; }) && !window.confirm('Thay dự án hiện tại bằng dự án mới từ thư mục?')) return;
+    if (state.scenes.some(function (sc) { return sc.media.length; }) && !window.confirm('Thay dự án hiện tại bằng dự án mới?')) return;
     $('btnAutoProject').disabled = true;
     $('projReport').hidden = true;
     $('assembleReport').innerHTML = '';
@@ -670,16 +696,20 @@
     try { if (key) localStorage.setItem('video-bds-gkey', key); } catch (e) { /* bỏ qua */ }
     var pre = [];
     projProgress(0.01, 'Đang chuẩn bị file…');
-    I.expandZips(projFiles, function (m) { projProgress(0.01, m); }).then(function (files) {
-      return I.fromDrive(linkText, key, function (m) { projProgress(0.02, m); }).then(function (df) { return files.concat(df); }).catch(function (e) {
-        if (e.message === 'NEED_KEY') {
-          pre.push('<div class="warn">⚠️ Có link Google Drive nhưng chưa có khoá API. Mở mục “🔑 Muốn dán thẳng link thư mục Google Drive” để làm theo, hoặc tải thư mục về (.zip) rồi kéo thả vào.</div>');
-          $('driveKeyBox').open = true;
-        } else pre.push('<div class="warn">⚠️ ' + esc(e.message) + '</div>');
-        return files;
-      });
-    }).then(function (files) {
-      runProject(I.classify(files), I.findLink(linkText.split(/\s+/).filter(function (l) { return /docs\.google\.com/.test(l); }).join(' ')), pre);
+    var talk, asset;
+    gather(src.talk, $('talkLink').value, key, 'Video quay', pre).then(function (t) {
+      talk = t;
+      return gather(src.asset, $('assetLink').value, key, 'Tư liệu dự án', pre);
+    }).then(function (a2) {
+      asset = a2;
+      var ct = I.classify(talk), ca = I.classify(asset);
+      var talkVids = ct.media.filter(isVideoFile);
+      // Ảnh lỡ bỏ vào phần video quay thì chuyển sang tư liệu
+      var assets = ca.media.concat(ct.media.filter(function (f) { return !isVideoFile(f); }));
+      runProject({
+        talk: talkVids, assets: assets, music: ca.music.concat(ct.music),
+        scripts: ct.scripts.concat(ca.scripts), scriptFile: src.scriptFile, scriptText: $('scriptText').value
+      }, pre);
     }).catch(function (e) {
       projProgress(null);
       toast('Có lỗi: ' + (e && e.message ? e.message : e), 6000);
@@ -687,21 +717,34 @@
     });
   }
 
-  function runProject(c, link, report) {
+  /** Kịch bản: file đã chọn → nội dung/link dán vào → file kịch bản nằm trong thư mục. */
+  function readScriptSources(inp) {
+    var I = window.BdsImporter, G = window.ScriptGen;
+    var tryFiles = function (list, i) {
+      if (i >= list.length) return Promise.resolve(null);
+      return I.readScript(list[i]).then(function (r) {
+        if (r && r.scenes && r.scenes.length) { r.from = list[i].name; return r; }
+        return tryFiles(list, i + 1);
+      }).catch(function () { return tryFiles(list, i + 1); });
+    };
+    var fromText = function () {
+      var t = (inp.scriptText || '').trim();
+      if (!t) return Promise.resolve(null);
+      var link = I.findLink(t);
+      if (link && t.replace(link, '').trim().length < 40) return I.fetchLink(link).then(function (r) { r.from = 'link Google'; return r; });
+      var sc = t.indexOf('\t') !== -1 ? G.tableToScenes(G.parseTable(t)) : I.textToScenes(t);
+      return Promise.resolve(sc.length ? { scenes: sc, raw: t, from: 'nội dung đã dán' } : null);
+    };
+    return tryFiles(inp.scriptFile ? [inp.scriptFile] : [], 0).then(function (r) { return r || fromText(); })
+      .then(function (r) { return r || tryFiles(inp.scripts, 0); });
+  }
+
+  function runProject(inp, report) {
     var I = window.BdsImporter;
     projProgress(0.03, 'Đang đọc kịch bản…');
-
-    // 1. Kịch bản: file trong thư mục, hoặc link
-    var tryScripts = function (i) {
-      if (i >= c.scripts.length) return link ? I.fetchLink(link).then(function (r) { r.from = 'link'; return r; }) : Promise.resolve(null);
-      return I.readScript(c.scripts[i]).then(function (r) {
-        if (r && r.scenes && r.scenes.length) { r.from = c.scripts[i].name; return r; }
-        return tryScripts(i + 1);
-      }).catch(function () { return tryScripts(i + 1); });
-    };
-    tryScripts(0).catch(function (e) {
+    readScriptSources(inp).catch(function (e) {
       report.push('<div class="warn">⚠️ Không mở được link kịch bản: ' + esc(e && e.message ? e.message : '') +
-        ' Cách khác: trong Google Sheets chọn Tệp → Tải xuống → Microsoft Excel (.xlsx), rồi bỏ file vào thư mục.</div>');
+        ' Cách khác: mở kịch bản, bôi đen và copy (Ctrl+C) rồi dán vào ô Kịch bản quay.</div>');
       return null;
     }).then(function (sc) {
       var info = Object.assign({}, state.info);
@@ -711,29 +754,29 @@
         report.push('<div>📝 Kịch bản: <b>' + esc(sc.from) + '</b>, ' + sc.scenes.length + ' cảnh</div>');
         state.scenes = sc.scenes.map(newScene);
       } else {
-        // Không có kịch bản: mỗi video có người nói là một cảnh
-        var vids = c.media.filter(isVideoFile);
-        state.scenes = vids.map(function (f, i) { return newScene({ title: 'Đoạn ' + (i + 1) + ': ' + f.name.replace(/\.[^.]+$/, '') }); });
+        // Không có kịch bản: mỗi video quay là một cảnh
+        state.scenes = inp.talk.map(function (f, i) { return newScene({ title: 'Đoạn ' + (i + 1) + ': ' + f.name.replace(/\.[^.]+$/, '') }); });
         if (!state.scenes.length) state.scenes = [newScene({ title: 'Cảnh 1' })];
-        report.push('<div class="warn">⚠️ Không thấy file kịch bản: mỗi video thành một cảnh, chưa có phụ đề. Bỏ thêm file kịch bản để có phụ đề.</div>');
+        report.push('<div class="warn">⚠️ Chưa có kịch bản: mỗi video quay thành một cảnh, chưa có chữ theo lời nói. Thêm kịch bản ở phần 3 để có chữ.</div>');
       }
-      if (!String(info.ten || '').trim() && projFolder) info.ten = projFolder;
+      if (!String(info.ten || '').trim() && src.folder) info.ten = src.folder;
       setInfo(info);
       renderScenes();
-      // 2. Nhạc nền trong thư mục
-      if (c.music.length) {
-        return c.music[0].arrayBuffer().then(function (ab) { return getAudioCtx().decodeAudioData(ab); }).then(function (buf) {
+      report.push('<div>🎬 ' + inp.talk.length + ' video quay · 🏙 ' + inp.assets.length + ' tư liệu dự án' + (inp.music.length ? ' · 🎵 ' + esc(inp.music[0].name) : '') + '</div>');
+      if (inp.music.length) {
+        return inp.music[0].arrayBuffer().then(function (ab) { return getAudioCtx().decodeAudioData(ab); }).then(function (buf) {
           state.music.buffer = buf;
-          state.music.name = c.music[0].name;
-          report.push('<div>🎵 Nhạc nền: ' + esc(c.music[0].name) + '</div>');
+          state.music.name = inp.music[0].name;
         }).catch(function () {});
       }
     }).then(function () {
-      // 3. Cắt ghép theo kịch bản
-      if (!c.media.length) { report.push('<div class="warn">⚠️ Thư mục chưa có video/ảnh nào.</div>'); return false; }
-      return assemble(c.media, {
+      var media = inp.talk.concat(inp.assets);
+      if (!media.length) { report.push('<div class="warn">⚠️ Chưa có video quay hay tư liệu nào.</div>'); return false; }
+      var talkSet = inp.talk;
+      return assemble(media, {
         force: true, quiet: true, asr: $('projAsr').checked && state.scenes.some(function (s2) { return s2.text; }),
         minPause: parseFloat($('projPause').value) || 0.25,
+        roleOf: function (f) { return talkSet.indexOf(f) !== -1 ? 'talk' : 'broll'; },
         progress: function (p, label) { projProgress(0.05 + p * 0.9, label); }
       });
     }).then(function (ok) {
@@ -763,18 +806,33 @@
   }
 
   function bindAutoProject() {
-    $('btnPickFolder').onclick = function (e) { e.preventDefault(); $('projFolder').click(); };
-    $('btnPickFiles').onclick = function (e) { e.preventDefault(); $('projFilesInput').click(); };
-    $('projFolder').onchange = function (e) { setProjFiles(e.target.files); e.target.value = ''; };
-    $('projFilesInput').onchange = function (e) { setProjFiles(e.target.files); e.target.value = ''; };
-    $('projLink').oninput = updateProjButton;
-    try { $('driveKey').value = localStorage.getItem('video-bds-gkey') || ''; } catch (e) { /* bỏ qua */ }
-    var dz = $('projDrop');
-    ['dragenter', 'dragover'].forEach(function (ev) { dz.addEventListener(ev, function (e) { e.preventDefault(); dz.classList.add('over'); }); });
-    ['dragleave', 'drop'].forEach(function (ev) { dz.addEventListener(ev, function (e) { e.preventDefault(); dz.classList.remove('over'); }); });
-    dz.addEventListener('drop', function (e) {
-      window.BdsImporter.filesFromDrop(e.dataTransfer).then(function (files) { setProjFiles(files, files.folder); });
+    var pickKind = 'talk';
+    document.querySelectorAll('[data-pick]').forEach(function (b) {
+      b.onclick = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var parts = b.dataset.pick.split('-');
+        pickKind = parts[0];
+        $(parts[1] === 'folder' ? 'pickFolderInput' : 'pickFilesInput').click();
+      };
     });
+    $('pickFolderInput').onchange = function (e) { setSource(pickKind, e.target.files); e.target.value = ''; };
+    $('pickFilesInput').onchange = function (e) { setSource(pickKind, e.target.files); e.target.value = ''; };
+    ['talk', 'asset'].forEach(function (kind) {
+      var dz = $(kind + 'Drop');
+      ['dragenter', 'dragover'].forEach(function (ev) { dz.addEventListener(ev, function (e) { e.preventDefault(); dz.classList.add('over'); }); });
+      ['dragleave', 'drop'].forEach(function (ev) { dz.addEventListener(ev, function (e) { e.preventDefault(); dz.classList.remove('over'); }); });
+      dz.addEventListener('drop', function (e) {
+        window.BdsImporter.filesFromDrop(e.dataTransfer).then(function (files) { setSource(kind, files, files.folder); });
+      });
+      $(kind + 'Link').oninput = updateProjButton;
+    });
+    $('btnScriptFile').onclick = function () { $('scriptFileInput').click(); };
+    $('scriptFileInput').onchange = function (e) {
+      src.scriptFile = e.target.files[0] || null;
+      $('scriptInfo').textContent = src.scriptFile ? '✔ ' + src.scriptFile.name : '';
+    };
+    try { $('driveKey').value = localStorage.getItem('video-bds-gkey') || ''; } catch (e) { /* bỏ qua */ }
     $('btnAutoProject').onclick = autoProject;
   }
 
