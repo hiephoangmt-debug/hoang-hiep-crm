@@ -56,6 +56,7 @@ p{margin:0 0 14px}
 .dark h2 span{color:inherit}
 .sandbg{background:var(--sand)}
 .sand2{background:var(--sand2)}
+.sec+.sec{border-top:1px solid var(--line)}
 .center{text-align:center}
 .kicker{display:inline-block;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
 .dark .kicker{color:var(--soft)}
@@ -141,6 +142,40 @@ input:focus,select:focus{outline:2px solid var(--cta2);border-color:var(--cta2)}
 .ov-wait ul{margin:6px 0 0;padding-left:18px;font-size:14.5px;color:var(--ink)}
 @media (max-width:899px){.ov{grid-template-columns:1fr}.ov-why{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.spec{font-size:14px}.spec th,.spec td{padding:9px 10px}.ov-nums b{font-size:16px}.ov-why{grid-template-columns:1fr}}
+.c4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px}
+.c4>div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
+.dark .c4>div{background:var(--night2);border-color:#2A4A70}
+.c4 i{display:block;font-style:normal;font-size:12.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--cta1);margin-bottom:6px}
+.dark .c4 i{color:var(--soft)}
+.c4 b{display:block;font-size:17px;color:var(--night);line-height:1.35;margin-bottom:6px}
+.dark .c4 b{color:#fff}
+.c4 p{margin:0;font-size:14.5px;color:var(--muted)}
+.dark .c4 p{color:#C9D6E3}
+.c4 em{display:block;font-style:normal;font-size:24px;font-weight:800;color:var(--night);margin-bottom:2px}
+.src{font-size:12.5px;color:var(--muted);margin-top:12px}
+.dark .src{color:var(--soft)}
+.year{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:24px}
+.year div{border-radius:14px;padding:14px 12px;background:#fff;border:1px solid var(--line)}
+.year div.me{background:var(--night);border-color:var(--night);color:#fff}
+.year small{display:block;font-weight:800;font-size:13px;letter-spacing:1px;color:var(--cta1)}
+.year div.me small{color:#FFB37A}
+.year b{display:block;font-size:15.5px;line-height:1.35;margin:4px 0;color:var(--night)}
+.year div.me b{color:#fff}
+.year span{font-size:13.5px;color:var(--muted)}
+.year div.me span{color:#C9D6E3}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;font-size:14px}
+.legend span:before{content:"";display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;background:#fff;border:1px solid var(--line)}
+.legend span.me:before{background:var(--night);border-color:var(--night)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px;counter-reset:st}
+.steps div{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;padding:46px 16px 16px}
+.steps div:before{counter-increment:st;content:counter(st);position:absolute;top:14px;left:16px;width:26px;height:26px;border-radius:50%;background:var(--night);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+.steps b{display:block;color:var(--night);margin-bottom:4px}
+.steps p{margin:0;font-size:14.5px;color:var(--muted)}
+.perks{display:grid;grid-template-columns:repeat(3,1fr);gap:10px 24px;margin:22px 0 0;padding:0;list-style:none}
+.perks li{padding-left:28px;position:relative;font-weight:600;color:var(--night)}
+.perks li:before{content:"✓";position:absolute;left:0;top:0;color:var(--cta1);font-weight:800}
+@media (max-width:899px){.c4,.steps{grid-template-columns:1fr 1fr}.year{grid-template-columns:repeat(3,1fr)}.perks{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.c4,.steps,.perks{grid-template-columns:1fr}.year{grid-template-columns:1fr 1fr}}
 .loc{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;margin-top:26px}
 .map{background:#fff;border-radius:16px;padding:12px;border:1px solid var(--line)}
 .dist div{display:flex;justify-content:space-between;gap:10px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);font-weight:500}
@@ -425,6 +460,22 @@ footer a{color:#fff;text-decoration:underline;text-decoration:none;font-weight:6
   </div>
 </section>
 
+<!-- 4b. TẦM NHÌN -->
+<section class="sec sand2" id="tam-nhin">
+  <div class="wrap">
+    <span class="kicker">Tầm nhìn từ tòa tháp ~117 m</span>
+    <h2>Mở rèm hướng nào – <span>cũng là một bức tranh Đà Nẵng</span></h2>
+    <p class="lead">Ở tầng cao, bạn không chỉ thấy biển trước mặt mà thấy cả dải bờ biển đẹp nhất thành phố.</p>
+    <div class="c4">
+      <div><i>Hướng Đông</i><b>Biển Mỹ Khê – Non Nước</b><p>Bình minh nhô lên từ mặt biển, cát trắng trải dài, thuyền thúng ra khơi lúc sáng sớm.</p></div>
+      <div><i>Hướng Bắc</i><b>Bán đảo Sơn Trà</b><p>Dải núi xanh ôm vịnh; tối đến, đèn dọc bờ biển và chân bán đảo lấp lánh.</p></div>
+      <div><i>Hướng Nam</i><b>Ngũ Hành Sơn – Non Nước</b><p>Năm ngọn núi đá vôi gần kề, chuỗi resort dọc biển kéo dài về phía Hội An.</p></div>
+      <div><i>Hướng Tây</i><b>Thành phố &amp; hoàng hôn</b><p>Đô thị, sông Hàn và dãy núi phía tây – nơi mặt trời lặn mỗi chiều.</p></div>
+    </div>
+    <p class="src">Mô tả theo vị trí địa lý; tầm nhìn thực tế phụ thuộc tầng, hướng căn và công trình xung quanh.</p>
+  </div>
+</section>
+
 <!-- 5. KHỐI GIA ĐÌNH -->
 <section class="sec sandbg" id="gia-dinh">
   <div class="wrap">
@@ -459,6 +510,40 @@ footer a{color:#fff;text-decoration:underline;text-decoration:none;font-weight:6
     </div>
     <p class="note center" style="margin-top:12px">* Lịch sử dụng của chủ căn theo chính sách của đơn vị vận hành, công bố khi dự án ra mắt.</p>
     <div class="center" style="margin-top:22px"><a class="btn auto" href="#dang-ky" data-need="Nhà nghỉ dưỡng cho gia đình">NHẬN BẢNG GIÁ CĂN CHO GIA ĐÌNH</a></div>
+  </div>
+</section>
+
+<!-- 5b. MỘT NĂM CỦA CHỦ CĂN -->
+<section class="sec sand2" id="mot-nam">
+  <div class="wrap">
+    <span class="kicker">Một năm của chủ căn – ví dụ minh họa</span>
+    <h2>Bạn đến khi muốn nghỉ, <span>căn hộ đón khách khi bạn vắng</span></h2>
+    <div class="year">
+      <div class="me"><small>THÁNG 1–2</small><b>Tết bên biển</b><span>Cả nhà sum họp, giao thừa ngắm biển từ ban công.</span></div>
+      <div><small>THÁNG 3–4</small><b>Mùa khách quốc tế</b><span>Trời đẹp, khô ráo – khách Hàn, Âu, Úc đông.</span></div>
+      <div class="me"><small>THÁNG 5–7</small><b>Một tuần hè cho con</b><span>Mùa biển, mùa lễ hội pháo hoa quốc tế bên sông Hàn.</span></div>
+      <div><small>THÁNG 6–8</small><b>Cao điểm du lịch hè</b><span>Gia đình trong nước, nhóm bạn đặt phòng kín lịch.</span></div>
+      <div><small>THÁNG 9–10</small><b>Khách công tác, hội nghị</b><span>Lưu trú dài ngày, sự kiện doanh nghiệp.</span></div>
+      <div class="me"><small>THÁNG 11–12</small><b>Kỳ nghỉ cuối năm</b><span>Trốn lạnh miền Bắc, Giáng sinh – năm mới bên biển.</span></div>
+    </div>
+    <div class="legend"><span class="me">Bạn và gia đình tự nghỉ</span><span>Giao đơn vị vận hành cho thuê</span></div>
+    <p class="disclaim" style="margin-top:14px">Lịch minh họa, không phải cam kết. Số đêm chủ căn được tự ở, cơ chế cho thuê và chia doanh thu theo hợp đồng vận hành do chủ đầu tư công bố khi ra mắt. Lễ hội pháo hoa quốc tế Đà Nẵng (DIFF) 2026 diễn ra 30/5–11/7/2026.</p>
+  </div>
+</section>
+
+<!-- 5c. VÌ SAO ĐÀ NẴNG -->
+<section class="sec dark" id="vi-sao">
+  <div class="wrap">
+    <span class="kicker">Vì sao Đà Nẵng – vì sao lúc này</span>
+    <h2>Thành phố biển đang có <span>những cú hích lớn nhất từ trước tới nay</span></h2>
+    <div class="c4">
+      <div><i>6/2025</i><b>Khu thương mại tự do Đà Nẵng</b><p>Thủ tướng quyết định thành lập (QĐ 1142/QĐ-TTg), quy mô khoảng 1.881 ha, theo cơ chế đặc thù của Nghị quyết 136/2024/QH15.</p></div>
+      <div><i>6/2025</i><b>Trung tâm tài chính quốc tế</b><p>Quốc hội ban hành Nghị quyết 222/2025/QH15; Đà Nẵng là một trong hai thành phố đặt Trung tâm tài chính quốc tế Việt Nam.</p></div>
+      <div><i>11 tháng 2025</i><b>16,5 triệu lượt khách lưu trú</b><p>Tăng 18,9% so với cùng kỳ; khách quốc tế khoảng 7 triệu lượt, tăng 26,5%.</p></div>
+      <div><i>Hằng năm</i><b>Thành phố lễ hội &amp; sự kiện</b><p>Lễ hội pháo hoa quốc tế, giải thể thao biển, hội nghị quốc tế – kéo khách đến quanh năm.</p></div>
+    </div>
+    <p class="lead" style="margin-top:22px;color:#DCE6F0">Nhiều doanh nghiệp, chuyên gia và khách quốc tế đến Đà Nẵng hơn đồng nghĩa nhu cầu chỗ ở tiện nghi sát biển được kỳ vọng tăng – trong khi quỹ đất mặt biển trục Võ Nguyên Giáp – Trường Sa gần như đã kín.</p>
+    <p class="src">Nguồn: Quyết định 1142/QĐ-TTg ngày 13/6/2025; Nghị quyết 222/2025/QH15 ngày 27/6/2025; Cục Thống kê TP Đà Nẵng (số liệu 11 tháng 2025). Thông tin vĩ mô mang tính tham khảo, không phải cam kết về giá hay lợi nhuận.</p>
   </div>
 </section>
 
@@ -532,6 +617,29 @@ footer a{color:#fff;text-decoration:underline;text-decoration:none;font-weight:6
   </div>
 </section>
 
+<!-- 8b. ĐĂNG KÝ SỚM NHẬN GÌ -->
+<section class="sec sandbg" id="quy-trinh">
+  <div class="wrap">
+    <span class="kicker">Đăng ký sớm – nhận gì?</span>
+    <h2>Bốn bước để chọn được căn <span>đúng ý trước ngày ra mắt</span></h2>
+    <div class="steps">
+      <div><b>Để lại tên &amp; số Zalo</b><p>Mất 15 giây, không mất phí, không đặt cọc.</p></div>
+      <div><b>Nhận hồ sơ dự án</b><p>Thông tin pháp lý, phối cảnh, mặt bằng 5 dòng căn, ảnh và video thực tế khu đất.</p></div>
+      <div><b>Tư vấn riêng cho bạn</b><p>Bảng tính dòng tiền cho đúng căn bạn quan tâm; hẹn xem vị trí thực tế tại Đà Nẵng.</p></div>
+      <div><b>Chọn căn khi mở bán</b><p>Nhận bảng giá ngay khi chủ đầu tư công bố, chọn tầng – hướng theo chính sách bán hàng.</p></div>
+    </div>
+    <ul class="perks">
+      <li>Hồ sơ dự án gửi riêng qua Zalo</li>
+      <li>Ảnh, video thực địa vị trí dự án</li>
+      <li>Bảng tính dòng tiền theo căn</li>
+      <li>Giải đáp pháp lý căn hộ du lịch rõ ràng</li>
+      <li>Hỗ trợ đưa đón xem vị trí tại Đà Nẵng</li>
+      <li>Bảng giá ngay khi chủ đầu tư công bố</li>
+    </ul>
+    <div class="center" style="margin-top:24px"><a class="btn auto" href="#dang-ky" data-need="Chọn căn đẹp đợt đầu">TÔI MUỐN NHẬN HỒ SƠ DỰ ÁN</a></div>
+  </div>
+</section>
+
 <!-- 9. PHÁP LÝ & MINH BẠCH -->
 <section class="sec sand2" id="phap-ly">
   <div class="wrap">
@@ -559,6 +667,10 @@ footer a{color:#fff;text-decoration:underline;text-decoration:none;font-weight:6
     <details><summary>Ai vận hành, chia doanh thu thế nào?</summary><p>Đơn vị vận hành và cơ chế chia doanh thu sẽ được chủ đầu tư công bố khi dự án ra mắt. Anh/chị đăng ký, chúng tôi gửi ngay khi có văn bản.</p></details>
     <details><summary>Chủ đầu tư là ai?</summary><p>Công ty TNHH Quản lý và Dịch vụ Hạ tầng Kỹ thuật Miền Trung. Tháng 10/2026, UBND TP Đà Nẵng đã ban hành quyết định điều chỉnh thời hạn sử dụng đất của dự án cho doanh nghiệp này. Thông tin pháp lý của dự án được ghi tại mục Pháp lý &amp; minh bạch phía trên.</p></details>
     <details><summary>Tôi ở xa, có cần tự quản lý không?</summary><p>Với mô hình căn hộ du lịch, việc cho thuê thường do đơn vị vận hành đảm nhận, chủ căn theo dõi từ xa. Mô hình cụ thể của Hải Minh sẽ được công bố khi ra mắt. Anh/chị ở Hà Nội hay tỉnh khác vẫn được tư vấn và xem tài liệu qua Zalo.</p></details>
+    <details><summary>Căn hộ du lịch có được cấp giấy chứng nhận không?</summary><p>Việc cấp giấy chứng nhận cho căn hộ du lịch trên đất thương mại dịch vụ thực hiện theo quy định pháp luật tại thời điểm cấp và hồ sơ của dự án. Chúng tôi không hứa trước điều này; khi chủ đầu tư công bố hồ sơ pháp lý và hợp đồng mẫu, anh/chị sẽ nhận đầy đủ để tự đánh giá hoặc nhờ luật sư xem.</p></details>
+    <details><summary>Chủ căn được tự ở bao nhiêu đêm mỗi năm?</summary><p>Số đêm tự ở, cách đặt lịch và chia doanh thu nằm trong hợp đồng vận hành do chủ đầu tư công bố khi ra mắt. Đăng ký để nhận văn bản này sớm nhất.</p></details>
+    <details><summary>Có hỗ trợ vay ngân hàng không?</summary><p>Ngân hàng đồng hành, tỷ lệ cho vay và ưu đãi lãi suất (nếu có) theo chính sách bán hàng công bố khi mở bán. Chúng tôi sẽ gửi phương án thanh toán cụ thể cho căn anh/chị quan tâm.</p></details>
+    <details><summary>Tôi muốn xem vị trí thực tế thì sao?</summary><p>Nhắn Zalo 0904 567 009 để hẹn lịch. Chuyên viên dẫn anh/chị xem khu đất, trục biển Võ Nguyên Giáp – Trường Sa và các dự án lân cận.</p></details>
     <details><summary>Đăng ký có mất phí không?</summary><p>Miễn phí. Chúng tôi không thu tiền giữ chỗ hay đặt cọc ở giai đoạn này, vì dự án chưa ra mắt.</p></details>
   </div>
 </section>
