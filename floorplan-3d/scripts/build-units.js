@@ -321,6 +321,7 @@ export function gardenUnit(base, spec) {
   }
   if (D >= 2.0) add('shrubBed', L - 0.36, (D - 0.7) / 2, (rotU + 90) % 360, { w: D - 1.0, d: 0.5 });
   add('palm', roundStart ? RR + 0.5 : 0.6, D - 0.55, 0, { h: D < 1.8 ? 2.4 : 3.0 });
+  if (spec.garden.laundry) add('washer', L - 0.55, 0.45, (rotOut + 180) % 360); // ô giặt phơi góc sân như bản vẽ
   let dw = 0;
   if (D >= 2.3) {
     dw = Math.min(2.9, L * 0.45); const dd = D - 1.05;

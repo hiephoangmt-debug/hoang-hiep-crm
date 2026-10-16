@@ -107,6 +107,34 @@ export const UNIT_SPECS = [
 const W = (ax, ay, bx, by, t = 0.12) => ({ a: [ax, ay], b: [bx, by], t });
 UNIT_SPECS.push(
   {
+    // Căn 12 / 17 (bản vẽ F2-05-12, ~6,2 × 9,0 m, chữ nhật): WC + bếp phía hành lang, cửa vào cạnh phải,
+    // bên trái phòng đa năng rồi phòng ngủ, bên phải ăn + khách thông nhau, 2 cửa kính ra sân vườn phía trước
+    id: '1pn-plus-c', name: '1 PN+ (căn 12, 17)', type: '1PN+', dims: [6.2, 9.0], style: 'warm', manual: true,
+    walls: [
+      W(0, 0, 6.2, 0, 0.2), W(6.2, 0, 6.2, 9.0, 0.2), W(6.2, 9.0, 0, 9.0, 0.2), W(0, 9.0, 0, 0, 0.2),
+      W(0, 1.5, 3.0, 1.5), W(3.0, 0, 3.0, 1.5), W(0, 3.75, 3.0, 3.75), W(3.0, 3.75, 3.0, 9.0),
+    ],
+    openings: [
+      [1, 'door', 1.15, 0.95], [4, 'door', 2.4, 0.7], [7, 'door', 4.25, 0.8],
+      [2, 'slide', 1.75, 1.6], [2, 'slide', 4.05, 1.7], [3, 'window', 6.0, 1.2, { sill: 0.9, height: 1.4 }],
+    ],
+    rooms: [
+      ['WC', 'tile', [[0, 0], [3.0, 0], [3.0, 1.5], [0, 1.5]]],
+      ['Phòng đa năng', 'herringboneLight', [[0, 1.5], [3.0, 1.5], [3.0, 3.75], [0, 3.75]]],
+      ['Phòng ngủ', 'herringboneLight', [[0, 3.75], [3.0, 3.75], [3.0, 9.0], [0, 9.0]]],
+      ['Phòng khách & bếp + ăn', 'marble', [[3.0, 0], [6.2, 0], [6.2, 9.0], [3.0, 9.0]]],
+    ],
+    furniture: [
+      ['shower', 0.5, 0.6, 0, { w: 0.8, d: 0.9 }], ['toilet', 1.6, 0.36, 0], ['vanity', 2.45, 0.32, 0, { w: 0.7 }],
+      ['kitchen', 3.8, 0.32, 0, { w: 1.5 }], ['fridge', 4.95, 0.4, 0],
+      ['sofa', 0.5, 2.6, 270, { w: 1.7, d: 0.8 }], ['plant', 2.6, 1.9],
+      ['wardrobe', 1.1, 4.05, 0, { w: 1.8, d: 0.55 }], ['bed', 1.15, 6.4, 270, { w: 1.6, nightstands: true }], ['plant', 2.65, 8.6],
+      ['diningTable', 5.2, 3.9, 90, { w: 1.2, d: 0.75 }], ['chair', 4.7, 3.6, 270], ['chair', 4.7, 4.2, 270], ['chair', 5.7, 3.6, 90], ['chair', 5.7, 4.2, 90],
+      ['tvStand', 3.28, 7.0, 270, { w: 1.5, d: 0.4 }], ['rug', 4.65, 7.0, 0, { w: 1.8, d: 2.2 }], ['roundTable', 4.6, 7.0, 0, { w: 0.7, d: 0.7 }],
+      ['sofa', 5.75, 7.0, 90, { w: 2.0, d: 0.85 }], ['plant', 5.8, 8.6],
+    ],
+  },
+  {
     // Bản vẽ STUDIO 5315×6820: lô gia góc trái trên, ngủ + khách liền nhau, bếp dọc tường trái, WC dưới phải
     id: 'studio', name: 'Studio', type: 'Studio', dims: [5.315, 6.82], style: 'warm', manual: true,
     walls: [
@@ -230,7 +258,7 @@ UNIT_SPECS.push(
   { id: 'sv-studio', name: 'Sân vườn · Studio', type: 'Studio', garden: { base: 'studio', area: 8.0 } },
   { id: 'sv-studio-b', name: 'Sân vườn · Studio dài', type: 'Studio', garden: { base: 'studio-b', area: 9.8 } },
   { id: 'sv-1pn', name: 'Sân vườn · 1 PN', type: '1PN', garden: { base: '1pn', area: 5.0 } },
-  { id: 'sv-1pn-plus-l', name: 'Sân vườn · 1 PN+ (9,6 m)', type: '1PN+', garden: { base: '1pn-plus', area: 15.9, round: 'start' } },
+  { id: 'sv-1pn-plus-l', name: 'Sân vườn · 1 PN+ (căn 12, 17)', type: '1PN+', garden: { base: '1pn-plus-c', area: 15.9, round: 'start', laundry: true, side: 'bottom' } },
   { id: 'sv-2pn-a', name: 'Sân vườn · 2 PN góc', type: '2PN', garden: { base: '2pn-a', area: 20.0 } },
   { id: 'sv-3pn', name: 'Sân vườn · 3 PN', type: '3PN', garden: { base: '3pn', area: 47.6, wrap: 'top' } },
 );
