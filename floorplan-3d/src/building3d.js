@@ -164,7 +164,7 @@ export class BuildingView {
     // Biển tên F2 và tên đường
     this.f2Tag = this.towerTag('TÒA F2 – MAI', 0xd9542f, b0.podiumFloors * b0.podiumHeight + residentialFloors(b0.floors).length * b0.floorHeight + 8);
     scene.add(this.f2Tag);
-    for (const [t, x, z, cls] of [['Đ. MINH MẠNG', AVENUE_X, -60, 'road green'], ['Đ. MINH MẠNG', AVENUE_X, 150, 'road green'], ['Đ. QUẢNG NAM', 90, roadZ, 'road gold'], ['Đ. NGUYỄN PHƯỚC LAN', -200, roadZ, 'road gold'], ['CẦU BÔ QUAN', AVENUE_X, -357, 'road green'], ['SÔNG ĐÔ TỎA', 120, -357, 'road blue'], ['BIỂN SƠN THỦY · MỸ KHÊ', 0, -700, 'road blue'], ['NÚI SƠN TRÀ', -820, -880, 'road green'], ['NGŨ HÀNH SƠN', 320, -575, 'road green']]) {
+    for (const [t, x, z, cls] of [['Đ. MINH MẠNG', AVENUE_X, -60, 'road green'], ['Đ. MINH MẠNG', AVENUE_X, 150, 'road green'], ['Đ. QUẢNG NAM', 90, roadZ, 'road gold'], ['Đ. NGUYỄN PHƯỚC LAN', -200, roadZ, 'road gold'], ['CẦU BÔ QUAN', AVENUE_X, -357, 'road green'], ['SÔNG ĐÔ TỎA', 120, -357, 'road blue'], ['BIỂN SƠN THỦY · MỸ KHÊ', 0, -700, 'road blue'], ['NÚI SƠN TRÀ', -820, -880, 'road green'], ['NGŨ HÀNH SƠN', 320, -575, 'road green'], ['CẦU TRUNG LƯƠNG', -705, roadZ, 'road green'], ['CẦU HÒA XUÂN', -705, roadZ + 520, 'road green'], ['TRUNG TÂM ĐÀ NẴNG', -1000, -320, 'road blue']]) {
       const el = document.createElement('div');
       el.className = 'roadtag ' + cls;
       el.textContent = t;
