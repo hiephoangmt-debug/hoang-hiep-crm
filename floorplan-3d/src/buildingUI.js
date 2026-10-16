@@ -1,7 +1,7 @@
 // Giao diện chế độ Tòa nhà: bảng thống kê, bộ lọc, chi tiết căn. Dùng chung cho trang chính và trang toa-nha.html.
 import { BuildingView, slotLayout } from './building3d.js';
 import { READONLY } from './ui.js';
-import { sampleBuilding, SLOT_LIST, STATUS, TYPE_COLORS, residentialFloors, unitCode, unitPrice, areaOf, PROVISIONAL, GARDEN_FLOORS, GARDEN_UNIT, SHOPS } from './buildingData.js';
+import { sampleBuilding, SLOT_LIST, STATUS, TYPE_COLORS, residentialFloors, unitCode, unitPrice, areaOf, PROVISIONAL, GARDEN_FLOORS, GARDEN_UNIT, SHOPS, gardenOf } from './buildingData.js';
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => [...document.querySelectorAll(s)];
@@ -44,7 +44,7 @@ function bStats() {
     st[s].value += unitPrice(building, fi, sl);
   }));
   for (const sh of SHOPS) {
-    if (!sh.shop) continue;
+    if (!sh.shop && !sh.apt) continue;
     const s = building.units[`${sh.floor}-${sh.slot}`]?.status || 'available';
     st[s].n++;
     st[s].value += unitPrice(building, 0, sh);
@@ -191,6 +191,7 @@ function renderBDetail() {
     <div class="kv">
       <div><small>DT tim tường</small><b>${ar.tim} m²</b></div>
       <div><small>DT thông thủy</small><b>${ar.tt} m²</b></div>
+      ${gardenOf(floor, slot.slot) ? `<div style="grid-column: span 2"><small>🌳 Sân vườn (tim / thông thủy)</small><b>${gardenOf(floor, slot.slot).tim} / ${gardenOf(floor, slot.slot).tt} m²</b></div>` : ''}
       ${READONLY ? '' : `<div><small>Giá ${u.price ? '' : '(ước tính)'}</small><b>${vndTy(price)} tỷ</b></div>
       <div><small>Đơn giá TT</small><b>${vndTy((price * 1000) / ar.tt)} tr/m²</b></div>`}
     </div>
@@ -202,6 +203,7 @@ function renderBDetail() {
     <button id="bdView" class="primary">🏠 Xem căn hộ 3D</button>
     <button id="bdAssign" title="Lưu mặt bằng đang mở trong trình vẽ làm mặt bằng của vị trí ${slot.slot} (áp dụng cho mọi tầng)">📌 Gán mặt bằng đang mở cho vị trí ${slot.slot}</button>
     <p class="hint">${building.layouts[slot.slot] ? `Vị trí ${slot.slot} dùng mặt bằng đã gán (mọi tầng).` : layout ? `Vị trí ${slot.slot} đang dùng căn mẫu “${layout.unitId}”${PROVISIONAL.has(slot.slot) ? ' – GHÉP TẠM, chưa có mặt bằng đúng của căn này' : ' (ghép theo diện tích, cần xác nhận)'}.` : `Vị trí ${slot.slot} chưa có mặt bằng chi tiết. Gửi ảnh mặt bằng loại căn này để dựng, hoặc dựng ở chế độ 2D rồi bấm “Gán”.`}</p>`}`;
+  if (slot.apt) { const x = $('#bdLook'); if (x) x.hidden = true; }
   if (slot.shop) {
     // Shop khối đế: không có mặt bằng căn hộ – ẩn các nút dành cho căn hộ
     for (const id of ['#bdLook', '#bdView', '#bdAssign']) { const x = $(id); if (x) x.hidden = true; }
@@ -232,7 +234,7 @@ function renderBDetail() {
   };
   $('#bdView').onclick = () => {
     if (!layout) return H.toast(`Vị trí ${slot.slot} chưa có mặt bằng chi tiết.`, 4000);
-    if (layout.unitId && H.openShowcase) return H.openShowcase(GARDEN_FLOORS.has(floor) && GARDEN_UNIT[layout.unitId] || layout.unitId);
+    if (layout.unitId && H.openShowcase) return H.openShowcase(gardenOf(floor, slot.slot) && GARDEN_UNIT[layout.unitId] || layout.unitId);
     if (READONLY) return;
     H.openUnit(JSON.parse(JSON.stringify(layout.plan)), { code: unitCode(building, floor, slot.slot), floor, slot: { ...slot, tt: ar.tt } });
   };
