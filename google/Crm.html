@@ -1628,7 +1628,7 @@ function addLead() {
       $('#tgall').onclick = function () {
         var btn = this, i = 0, ok = 0, dup = 0; btn.disabled = true;
         var next = function () {
-          if (i >= tg.length) { $('#tgst').textContent = ''; load(); $('#dlgBody').innerHTML = '<div style="text-align:center;padding:18px 6px"><div style="font-size:44px;color:#1a9b4b;line-height:1">✓</div><h2 style="margin:8px 0 4px">Đã thêm xong</h2><div class="small mut">Thêm mới ' + ok + ' khách' + (dup ? ' · ' + dup + ' khách đã có sẵn nên bỏ qua' : '') + '. Khách nằm ở "Khách mới tháng này".</div><div class="row" style="justify-content:center;margin-top:14px"><button class="btn p" id="aclose">Tắt</button></div></div>'; $('#aclose').onclick = function () { $('#dlg').close(); }; return; }
+          if (i >= tg.length) { $('#tgst').textContent = ''; load(); $('#dlgBody').innerHTML = '<div style="text-align:center;padding:18px 6px"><div style="font-size:44px;color:#1a9b4b;line-height:1">✓</div><h2 style="margin:8px 0 4px">Đã thêm xong</h2><div class="small mut">Thêm mới ' + ok + ' khách' + (dup ? ' · cập nhật ' + dup + ' khách đã có theo giờ phát sinh trong tin' : '') + '. Khách nằm ở "Khách mới tháng này", xếp theo giờ để lại.</div><div class="row" style="justify-content:center;margin-top:14px"><button class="btn p" id="aclose">Tắt</button></div></div>'; $('#aclose').onclick = function () { $('#dlg').close(); }; return; }
           var x = tg[i++]; $('#tgst').textContent = 'Đang thêm ' + i + '/' + tg.length + '…';
           run('crmCreateLead', { name: x.name, phone: x.phone, note: x.note, source: x.source, campaign: x.campaign, url: x.url, project: x.project, toa: x.toa, at: x.at, status: 'Mới' }).then(function (r) {
             if (!(r && r.dup)) { ok++; return next(); }
