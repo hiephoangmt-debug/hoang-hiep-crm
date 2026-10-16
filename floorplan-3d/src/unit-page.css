@@ -86,3 +86,5 @@
 /* Ảnh mặt bằng 2D luôn thu trọn trong khung (trước bị tràn xuống dưới với ảnh dọc) */
 .up-2d img { width: 100%; height: 100%; max-width: none; max-height: none; object-fit: contain; display: block; }
 .up-2d.zoom img { width: 180%; height: auto; }
+
+.up-unit .up-codes { display: block; color: #c8812a; font-weight: 600; margin-top: 2px; }

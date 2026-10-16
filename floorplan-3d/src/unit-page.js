@@ -5,6 +5,24 @@ import { polygonArea } from './geom.js';
 import { toast, READONLY, linkTo, download, isStaleChunkError, reloadForUpdate } from './ui.js';
 import UNITS from './units/units.json';
 import { AD_FOOTER } from './adcopy.js';
+import { DEFAULT_UNIT, GARDEN_UNIT, gardenOf } from './buildingData.js';
+
+/** Mã căn (vị trí trên mặt bằng tầng) dùng mẫu này – để dễ nhận diện */
+function codesOf(id) {
+  const base = Object.entries(GARDEN_UNIT).find(([, sv]) => sv === id)?.[0];
+  const slots = Object.entries(DEFAULT_UNIT).filter(([, u]) => u === (base || id)).map(([k]) => k);
+  if (!slots.length) return '';
+  if (!base) return `Căn ${slots.join(' · ')}`;
+  // căn sân vườn: chỉ các căn có sân theo bảng, ghi tầng có sân
+  const FL = ['03', '03A', '05', '06', '07'], groups = {};
+  for (const k of slots) {
+    const fl = FL.filter((f) => gardenOf(f, k));
+    if (!fl.length) continue;
+    const label = fl.length === 1 ? `tầng ${fl[0].replace(/^0/, '')}` : `tầng ${fl[0].replace(/^0/, '')}–${fl[fl.length - 1].replace(/^0/, '')}`;
+    (groups[label] ||= []).push(k);
+  }
+  return 'Căn ' + Object.entries(groups).map(([lb, ks]) => `${ks.join(' · ')} (${lb})`).join(' · ');
+}
 
 // Diện tích pháp lý theo bảng chủ đầu tư (căn đại diện của từng loại): [tim, thông thủy, sân vườn tim, sân vườn thông thủy]
 const OFFICIAL = {
@@ -38,7 +56,7 @@ function renderUnitList() {
   $('#units').innerHTML = UNITS.map((u) => `
     <button class="up-unit" data-unit="${u.id}">
       <img src="./units/${u.id}.webp" alt="" loading="lazy" />
-      <span><b>${u.name}</b><small>${u.type} · ${fmt(u.dims[0], 2)} × ${fmt(u.dims[1], 2)} m</small></span>
+      <span><b>${u.name}</b><small>${u.type} · ${fmt(u.dims[0], 2)} × ${fmt(u.dims[1], 2)} m</small>${codesOf(u.id) ? `<small class="up-codes">${codesOf(u.id)}</small>` : ''}</span>
     </button>`).join('');
   $$('[data-unit]').forEach((b) => (b.onclick = () => selectUnit(b.dataset.unit)));
 }
@@ -84,6 +102,7 @@ function renderInfo() {
     <h2>${unit.name}</h2>
     <div class="kv">
       <div><small>Loại căn</small><b>${unit.type}</b></div>
+      ${codesOf(unit.id) ? `<div style="grid-column: span 2"><small>Mã căn (vị trí trên mặt bằng tầng)</small><b>${codesOf(unit.id).replace('Căn ', '')}</b></div>` : ''}
       <div><small>Kích thước</small><b>${fmt(unit.dims[0], 2)} × ${fmt(unit.dims[1], 2)} m</b></div>
       <div><small>Phòng ngủ</small><b>${beds}</b></div>
       <div><small>WC</small><b>${wcs}</b></div>

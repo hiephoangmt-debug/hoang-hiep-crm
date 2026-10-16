@@ -263,7 +263,7 @@ export function gardenUnit(base, spec) {
       const rp2 = plan.rooms.filter((r) => Math.min(...r.points.map(dp)) < 0.5).flatMap((r) => r.points).map((q) => (hz ? q.x : q.y));
       L2b = Math.max(...rp2) - Math.min(...rp2) + 0.2;
     }
-    const area = (d) => L * d + (spec.garden.wrap ? (L2b + d) * d - (1 - Math.PI / 4) * d * d : 0);
+    const area = (d) => L * d + (spec.garden.wrap ? (L2b + d) * d - (1 - Math.PI / 4) * d * d : 0) - (spec.garden.round ? (1 - Math.PI / 4) * Math.min(d, 3) ** 2 : 0);
     let lo = 0.8, hi = 4.5;
     for (let i = 0; i < 40; i++) { const m = (lo + hi) / 2; if (area(m) > spec.garden.area) hi = m; else lo = m; }
     D = +lo.toFixed(2);
@@ -289,10 +289,20 @@ export function gardenUnit(base, spec) {
   const wall = (a, b) => plan.walls.push({ id: uid(), a: P(...a), b: P(...b), thickness: 0.12, height: 0.95 });
   const wrap = spec.garden.wrap; // mặt thứ hai sân ôm quanh (vd. căn góc 3PN: dọc dãy phòng ngủ + mặt lô gia)
   const cornerAtStart = wrap === 'top' || wrap === 'left';
-  if (!(wrap && cornerAtStart)) wall([0, 0], [0, D]);
-  wall([0, D], [L, D]);
-  if (!(wrap && !cornerAtStart)) wall([L, D], [L, 0]);
-  plan.rooms.push({ id: uid(), name: 'Sân vườn', floor: 'grass', points: [P(0, 0), P(L, 0), P(L, D), P(0, D)] });
+  // Góc căn bo cong (góc kính bo của toà) → bo tròn góc ngoài của sân cùng phía
+  const near = (u) => plan.rooms.some((rm) => rm.points.some((q) => Math.hypot(q.x - P(u, 0).x, q.y - P(u, 0).y) < 0.6));
+  // bo góc ngoài của sân theo bản vẽ: phía mép sàn lùi vào khu căn giữa (vd. căn 12 bo trái, căn 17 bo phải)
+  const roundStart = !wrap && spec.garden.round === 'start', roundEnd = !wrap && spec.garden.round === 'end';
+  void near;
+  const RR = Math.min(D, 3), NA = 8;
+  const arcPts = (start) => { const out = []; for (let i = 0; i <= NA; i++) { const t = (i / NA) * Math.PI / 2; out.push(start ? [RR - RR * Math.sin(t), D - RR + RR * Math.cos(t)] : [L - RR + RR * Math.sin(t), D - RR + RR * Math.cos(t)]); } return out; };
+  if (!(wrap && cornerAtStart)) wall([0, 0], [0, roundStart ? D - RR : D]);
+  wall([roundStart ? RR : 0, D], [roundEnd ? L - RR : L, D]);
+  if (!(wrap && !cornerAtStart)) wall([L, roundEnd ? D - RR : D], [L, 0]);
+  const aS = roundStart ? arcPts(true) : null, aE = roundEnd ? arcPts(false) : null;
+  for (const a of [aS, aE]) if (a) for (let i = 0; i < NA; i++) wall(a[i], a[i + 1]);
+  const gp = [[0, 0], [L, 0], ...(aE ? aE.slice().reverse() : [[L, D]]), ...(aS ? aS.slice().reverse().map((q) => q).reverse() : [[0, D]])];
+  plan.rooms.push({ id: uid(), name: 'Sân vườn', floor: 'grass', points: (aS ? [[0, 0], [L, 0], ...(aE ? aE.slice().reverse() : [[L, D]]), ...aS] : gp).map((q) => P(...q)) });
   const rotOut = { top: 0, bottom: 180, left: 270, right: 90 }[side];
   const add = (type, u, v, rot = 0, extra = {}) => { const p = P(u, v); plan.furniture.push({ id: uid(), type, x: +p.x.toFixed(3), y: +p.y.toFixed(3), rot, ...extra }); };
   const rotU = side === 'top' || side === 'bottom' ? 0 : 90; // xoay để cạnh dài của đồ chạy dọc mép sân
@@ -300,10 +310,17 @@ export function gardenUnit(base, spec) {
   // sàn gỗ có 2 ghế nằm + dù che, lối đá bước trên cỏ từ cửa nhà ra sàn gỗ
   // sân hẹp: luống cây mỏng hơn, bỏ sàn gỗ / ghế nằm cho khỏi chật
   const bedD = D < 1.6 ? 0.4 : 0.6;
-  add('shrubBed', L / 2, D - bedD / 2 - 0.1, rotU, { w: L - 0.3, d: bedD });
-  if (D >= 1.6) add('pebbles', L / 2, D - bedD - 0.22, rotU, { w: L - 1.2, d: 0.24 });
+  const sb0 = roundStart ? RR : 0.15, sb1 = roundEnd ? L - RR : L - 0.15;
+  add('shrubBed', (sb0 + sb1) / 2, D - bedD / 2 - 0.1, rotU, { w: sb1 - sb0, d: bedD });
+  if (D >= 1.6) add('pebbles', (sb0 + sb1) / 2, D - bedD - 0.22, rotU, { w: sb1 - sb0 - 0.9, d: 0.24 });
+  // luống cây chạy theo cung bo
+  for (const [on, st] of [[roundStart, true], [roundEnd, false]]) if (on) for (let i = 0; i < 5; i++) {
+    const t = ((i + 0.5) / 5) * Math.PI / 2, rr = RR - bedD / 2 - 0.1;
+    const u = st ? RR - rr * Math.sin(t) : L - RR + rr * Math.sin(t), v = D - RR + rr * Math.cos(t);
+    add('shrubBed', u, v, (rotU + (st ? -1 : 1) * (t * 180) / Math.PI + 360) % 360, { w: (Math.PI / 2 * rr) / 5 + 0.06, d: bedD });
+  }
   if (D >= 2.0) add('shrubBed', L - 0.36, (D - 0.7) / 2, (rotU + 90) % 360, { w: D - 1.0, d: 0.5 });
-  add('palm', 0.6, D - 0.55, 0, { h: D < 1.8 ? 2.4 : 3.0 });
+  add('palm', roundStart ? RR + 0.5 : 0.6, D - 0.55, 0, { h: D < 1.8 ? 2.4 : 3.0 });
   let dw = 0;
   if (D >= 2.3) {
     dw = Math.min(2.9, L * 0.45); const dd = D - 1.05;

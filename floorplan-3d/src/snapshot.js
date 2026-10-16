@@ -96,8 +96,13 @@ export function exportImage({ renderer, scene, camera, render, keepRatio = false
   x.textAlign = 'left'; x.textBaseline = 'alphabetic';
   x.fillStyle = '#1d2330'; x.font = `800 ${Math.round(22 * s)}px Inter, Arial, sans-serif`;
   x.fillText(title, 24 * s, H + 34 * s);
-  x.fillStyle = '#4a5160'; x.font = `500 ${Math.round(13 * s)}px Inter, Arial, sans-serif`;
-  x.fillText(lines.join('   ·   '), 24 * s, H + 60 * s);
+  x.fillStyle = '#4a5160';
+  // chữ dòng thông số co lại nếu dài, không chồng lên dòng ghi chú bên phải
+  const lineTxt = lines.filter(Boolean).join('   ·   ');
+  const maxW = c.width - 24 * s - 260 * s;
+  let fz = 13;
+  do { x.font = `500 ${Math.round(fz * s)}px Inter, Arial, sans-serif`; fz -= 0.5; } while (x.measureText(lineTxt).width > maxW && fz > 8);
+  x.fillText(lineTxt, 24 * s, H + 60 * s);
   x.textAlign = 'right'; x.fillStyle = '#8a8f99'; x.font = `italic ${Math.round(11 * s)}px Inter, Arial, sans-serif`;
   x.fillText(note || 'Hình ảnh chỉ mang tính chất minh hoạ', c.width - 20 * s, H + 60 * s);
   return new Promise((res) => c.toBlob(res, 'image/png'));
