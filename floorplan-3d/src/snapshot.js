@@ -28,7 +28,9 @@ export function exportImage({ renderer, scene, camera, render, keepRatio = false
   x.fillStyle = '#dcdcdc'; x.fillRect(0, 0, c.width, H);
   // Ảnh render: thu trọn vào vùng giữa (khi đang path tracing không đổi được cỡ khung nên không cắt, chừa nền)
   // focus: các điểm 3D cần giữ trong ảnh (góc căn) → chỉ lấy vùng quanh chúng rồi phóng cho vừa khung
-  let sx = 0, sy = 0, sw = src.width, sh = src.height;
+  // cỡ khung lúc vừa render (nét cao) – phải giữ lại vì trả pixel ratio về cũ sẽ làm canvas nhỏ lại
+  const srcW = src.width, srcH = src.height;
+  let sx = 0, sy = 0, sw = srcW, sh = srcH;
   if (focus) {
     const q = new THREE.Vector3();
     const pts = focus.map((p) => { q.set(p.x, p.y, p.z).project(camera); return [(q.x * 0.5 + 0.5) * src.width, (-q.y * 0.5 + 0.5) * src.height]; });
@@ -49,7 +51,7 @@ export function exportImage({ renderer, scene, camera, render, keepRatio = false
   const crop = { ox: side + (W - dw) / 2 - sx * sc, oy: (H - dh) / 2 - sy * sc, sc };
   if (k !== 1) { renderer.setPixelRatio(p0); render(1); }
   const v = new THREE.Vector3();
-  const toScreen = (p) => { v.set(p.x, p.y, p.z).project(camera); return { x: crop.ox + (v.x * 0.5 + 0.5) * src.width * crop.sc, y: crop.oy + (-v.y * 0.5 + 0.5) * src.height * crop.sc }; };
+  const toScreen = (p) => { v.set(p.x, p.y, p.z).project(camera); return { x: crop.ox + (v.x * 0.5 + 0.5) * srcW * crop.sc, y: crop.oy + (-v.y * 0.5 + 0.5) * srcH * crop.sc }; };
   if (callouts && ad) drawAdCallouts(x, callouts, toScreen, s, W, H, side);
   else if (callouts) drawCallouts(x, callouts, plan, toScreen, s, W, H, side);
   // Nhãn CSS (tên phòng, mã căn, tên tòa…) đang hiện trên màn hình
@@ -61,7 +63,7 @@ export function exportImage({ renderer, scene, camera, render, keepRatio = false
     if (!vis || !o.visible) return;
     o.getWorldPosition(v).project(camera);
     if (v.z > 1 || Math.abs(v.x) > 1 || Math.abs(v.y) > 1) return;
-    const px = crop.ox + (v.x * 0.5 + 0.5) * src.width * crop.sc, py = crop.oy + (-v.y * 0.5 + 0.5) * src.height * crop.sc;
+    const px = crop.ox + (v.x * 0.5 + 0.5) * srcW * crop.sc, py = crop.oy + (-v.y * 0.5 + 0.5) * srcH * crop.sc;
     const parts = [...o.element.querySelectorAll('b, span, small')].map((e) => e.textContent.trim()).filter(Boolean);
     const rows = parts.length ? parts : [o.element.textContent.trim()].filter(Boolean);
     if (!rows.length) return;
