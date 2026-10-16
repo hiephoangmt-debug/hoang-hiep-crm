@@ -533,7 +533,9 @@ export function buildScene(plan, opts = {}) {
     if (room.name && opts.labels !== false) {
       const el = document.createElement('div');
       el.className = 'label3d';
-      el.innerHTML = `<b>${escapeHtml(room.name)}</b><span>${fmt(area, 1)} m²</span>`;
+      const rx = room.points.map((p) => p.x), ry = room.points.map((p) => p.y);
+      const dm = `${fmt(Math.max(...rx) - Math.min(...rx), 2)} × ${fmt(Math.max(...ry) - Math.min(...ry), 2)} m`;
+      el.innerHTML = `<b>${escapeHtml(room.name)}</b><span>${fmt(area, 1)} m² · ${dm}</span>`;
       const lab = new CSS2DObject(el);
       lab.position.set(lp.x, 0.15, lp.y);
       lab.userData.noExport = true;
