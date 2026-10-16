@@ -573,8 +573,23 @@
     if (!inv.length) return "";
     const total = inv.reduce((a, c) => a + num(c.soTien), 0);
     const vats = inv.map((c) => (c.vat === "" || c.vat == null ? null : num(c.vat)));
-    const rows = S.SoLieu.filter((r) => r.nguon === "anh" && r.duAn === duAn && r.tuan === w && r.nhanSu === nhanSu && r.nenTang === nenTang);
+    const DT_NAME = "Đăng tin theo chứng từ";
+    const fromInv = (r) => String(r.chienDich || "").startsWith(DT_NAME);
+    const rows = S.SoLieu.filter((r) => r.nguon === "anh" && r.duAn === duAn && r.tuan === w && r.nhanSu === nhanSu && r.nenTang === nenTang && !fromInv(r));
     const spent = rows.reduce((a, r) => a + num(r.chiPhi), 0);
+    // Đăng tin: lịch sử giao dịch / biên lai chính là chi phí -> chưa có dòng chi phí thì tạo (hoặc cập nhật) một dòng bằng tổng chứng từ
+    if (nenTang === "Đăng tin" && !(rows.length && spent)) {
+      const prev = S.SoLieu.find((r) => r.nguon === "anh" && r.duAn === duAn && r.tuan === w && r.nhanSu === nhanSu && r.nenTang === nenTang && fromInv(r));
+      const files = inv.map((c) => c.tenFile).join(", ");
+      const saved = await call("crmSave", "SoLieu", {
+        id: prev ? prev.id : undefined, tuan: w, duAn, nhanSu, nenTang, taiKhoan: soleAccount(nhanSu, nenTang),
+        chienDich: `${DT_NAME} (${inv.length} file)`, chiPhi: total, chiPhiPhi: total, lead: prev ? prev.lead : "",
+        mql: "", sql: "", deal: "", ghiChu: "Theo chứng từ " + files, nguon: "anh",
+      });
+      S.SoLieu = S.SoLieu.filter((x) => x.id !== saved.id).concat(saved);
+      renderEntries();
+      return ` Đã ghi chi phí Đăng tin của ${nhanSu} = ${fmtInt(total)} đ (theo ${inv.length} chứng từ) vào tab Nhập số liệu – thêm số lead ở đó nếu có.`;
+    }
     if (rows.length && spent) {
       const factor = vats.every((v) => v != null) && new Set(vats).size === 1 ? 1 + vats[0] / 100 : total / spent;
       const upd = rows.map((r) => ({ id: r.id, chiPhiPhi: Math.round(num(r.chiPhi) * factor) }));
