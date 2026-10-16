@@ -23,6 +23,18 @@ const SLOTS_RAW = [
   ...LEFT.map(([k, x0, y0, x1, y1]) => [MIRROR[k], MX(x1), y0, MX(x0), y1, ...RIGHT_AREAS[MIRROR[k]]]),
   ...MID,
 ];
+/**
+ * Hướng đặt căn mẫu vào từng vị trí, đối chiếu bản vẽ mặt bằng tầng: [số lần xoay 90° theo chiều kim đồng hồ, lật trái–phải].
+ * Cánh phải đối xứng cánh trái; các căn sát nhau thường lật đối xứng qua vách chung (chung hộp WC / bếp).
+ */
+const ORIENT_LEFT = { 24: [3, 0], 25: [0, 1], 26: [1, 0], 27: [1, 1], 28: [1, 1], 23: [3, 1], 22: [3, 0], 21: [3, 1], 20: [3, 0], 19: [3, 1], 18: [2, 0], 17: [0, 1] };
+export const SLOT_ORIENT = {
+  ...Object.fromEntries(Object.entries(ORIENT_LEFT).flatMap(([k, [r, m]]) => [[k, { k: r, m: !!m }], [MIRROR[k], { k: (4 - r) % 4, m: !m }]])),
+  29: { k: 0, m: false }, 30: { k: 0, m: false }, 31: { k: 0, m: true }, 32: { k: 0, m: true },
+  16: { k: 2, m: false }, 15: { k: 2, m: true }, '12B': { k: 2, m: false }, '12A': { k: 2, m: true },
+};
+/** Góc bo của tòa trùng góc căn (bán kính m) */
+export const SLOT_RADII = { 24: { tl: 4.2 }, 26: { tr: 3 }, '03': { tl: 3 }, '05': { tr: 4.2 }, 19: { bl: 4.2 }, 17: { br: 3 }, 12: { bl: 3 }, 10: { br: 4.2 } };
 // Khung đặt căn chi tiết khi căn có hình chữ L (rộng hơn ô tô màu)
 export const FIT_RECTS = { 24: [440, 340, 628, 555], '05': [MX(628), 340, MX(440), 555], 19: [440, 975, 630, 1135], 10: [MX(630), 975, MX(440), 1135] };
 // Hành lang / sảnh thang (để tìm phía cửa vào của từng căn)

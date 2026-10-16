@@ -5,7 +5,9 @@ import { polygonArea } from './geom.js';
 import { toast, READONLY, linkTo, download, isStaleChunkError, reloadForUpdate } from './ui.js';
 import UNITS from './units/units.json';
 import { AD_FOOTER } from './adcopy.js';
-import { DEFAULT_UNIT, GARDEN_UNIT, gardenOf } from './buildingData.js';
+import { DEFAULT_UNIT, GARDEN_UNIT, gardenOf, SLOT_LIST, SLOT_ORIENT, SHOPS, PROVISIONAL, areaOf, residentialFloors } from './buildingData.js';
+import { orientPlan } from './unitPlacement.js';
+import { gardenUnit } from './gardenUnit.js';
 
 /** Mã căn (vị trí trên mặt bằng tầng) dùng mẫu này – để dễ nhận diện */
 function codesOf(id) {
@@ -33,6 +35,46 @@ const OFFICIAL = {
   'sv-1pn': [36.8, 32.9, 6.2, 5.0], 'sv-studio': [33.7, 30.4, 10.9, 8.0], 'sv-studio-b': [37.8, 33.7, 12.2, 9.8],
 };
 
+const offOf = (u) => u.official || OFFICIAL[u.id];
+
+// ---------- Từng mã căn 01 → 32: mặt bằng quay/lật đúng vị trí trên mặt bằng tầng, sân vườn theo diện tích từng tầng ----------
+const fl = (f) => f.replace(/^0/, '');
+const CODES = SLOT_LIST.map((s) => s.slot).filter((k) => DEFAULT_UNIT[k])
+  .sort((a, b) => parseInt(a, 10) - parseInt(b, 10) || a.localeCompare(b));
+/** Nhóm các tầng liền nhau có cùng diện tích căn + sân vườn */
+function floorGroups(code) {
+  const sl = SLOT_LIST.find((s) => s.slot === code);
+  const apt2 = SHOPS.find((s) => s.floor === '02' && s.apt && s.slot === code);
+  const rows = [...(apt2 ? [['02', { tim: apt2.tim, tt: apt2.tt }]] : []), ...residentialFloors(22).map((f) => [f, areaOf(f, sl)])]
+    .map(([f, a]) => ({ f, a, g: gardenOf(f, code) }));
+  const out = [];
+  for (const r of rows) {
+    const key = JSON.stringify([r.a, r.g]), last = out[out.length - 1];
+    if (last?.key === key) last.floors.push(r.f); else out.push({ key, floors: [r.f], a: r.a, g: r.g });
+  }
+  for (const g of out) g.label = 'Tầng ' + (g.floors.length > 1 ? `${fl(g.floors[0])}–${fl(g.floors[g.floors.length - 1])}` : fl(g.floors[0]));
+  return out;
+}
+const codeCache = new Map();
+/** Căn theo mã + nhóm tầng (dựng sân vườn đúng diện tích, quay/lật theo vị trí) */
+function codeUnit(code, gi) {
+  const groups = floorGroups(code), grp = groups[gi] || groups[0];
+  const key = code + '@' + grp.floors[0];
+  if (codeCache.has(key)) return codeCache.get(key);
+  const base = UNITS.find((u) => u.id === DEFAULT_UNIT[code]);
+  const sv = grp.g && UNITS.find((u) => u.id === GARDEN_UNIT[base.id]);
+  const src = sv?.gardenSpec ? gardenUnit(base, { id: sv.id, name: sv.name, type: sv.type, garden: { ...sv.gardenSpec, area: grp.g.tt } }) : base;
+  const o = SLOT_ORIENT[code] || { k: 0, m: false };
+  const dims = o.k % 2 ? [src.dims[1], src.dims[0]] : src.dims;
+  const u = {
+    ...src, id: `can-${code}@${grp.floors[0]}`, code, group: grp, groups, tpl: base.id, mirrored: o.m,
+    name: `Căn ${code}${grp.g ? ' · sân vườn' : ''}`, dims, plan: orientPlan(src.plan, o),
+    official: [grp.a.tim, grp.a.tt, ...(grp.g ? [grp.g.tim, grp.g.tt] : [])],
+  };
+  codeCache.set(key, u);
+  return u;
+}
+
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => [...document.querySelectorAll(s)];
 const fmt = (n, d = 1) => n.toLocaleString('vi-VN', { maximumFractionDigits: d, minimumFractionDigits: d });
@@ -52,22 +94,45 @@ function applySection() {
   $('#cutBtn')?.classList.toggle('active', section);
 }
 
+let listMode = 'code';
 function renderUnitList() {
-  $('#units').innerHTML = UNITS.map((u) => `
+  const head = `<div class="up-mode"><button data-mode="code" class="${listMode === 'code' ? 'active' : ''}">Theo mã căn</button><button data-mode="type" class="${listMode === 'type' ? 'active' : ''}">Theo loại căn</button></div>`;
+  if (listMode === 'code') {
+    $('#units').innerHTML = head + CODES.map((k) => {
+      const b = UNITS.find((u) => u.id === DEFAULT_UNIT[k]), gs = floorGroups(k), sv = gs.filter((g) => g.g);
+      const typ = gs.find((g) => !g.g) || gs[0];
+      return `<button class="up-unit" data-code="${k}">
+      <img src="./units/${b.id}.webp" alt="" loading="lazy" />
+      <span><b>Căn ${k}</b><small>${b.type} · Tim ${fmt(typ.a.tim)} m² · TT ${fmt(typ.a.tt)} m²</small>${sv.length ? `<small class="up-codes">🌳 Sân vườn: ${sv.map((g) => g.label.replace('Tầng ', 'T')).join(', ')}</small>` : ''}${PROVISIONAL.has(k) ? '<small class="up-codes">Mặt bằng tạm (chưa có bản vẽ riêng)</small>' : ''}</span>
+    </button>`;
+    }).join('');
+    $$('[data-code]').forEach((b) => (b.onclick = () => selectCode(b.dataset.code)));
+  } else {
+    $('#units').innerHTML = head + UNITS.map((u) => `
     <button class="up-unit" data-unit="${u.id}">
       <img src="./units/${u.id}.webp" alt="" loading="lazy" />
       <span><b>${u.name}</b><small>${u.type} · ${fmt(u.dims[0], 2)} × ${fmt(u.dims[1], 2)} m</small>${codesOf(u.id) ? `<small class="up-codes">${codesOf(u.id)}</small>` : ''}</span>
     </button>`).join('');
-  $$('[data-unit]').forEach((b) => (b.onclick = () => selectUnit(b.dataset.unit)));
+    $$('[data-unit]').forEach((b) => (b.onclick = () => selectUnit(b.dataset.unit)));
+  }
+  $$('[data-mode]').forEach((b) => (b.onclick = () => { listMode = b.dataset.mode; renderUnitList(); markActive(); }));
+}
+function markActive() {
+  $$('[data-unit]').forEach((b) => b.classList.toggle('active', b.dataset.unit === unit?.id));
+  $$('[data-code]').forEach((b) => b.classList.toggle('active', b.dataset.code === unit?.code));
+}
+function selectCode(code, gi) {
+  if (gi == null) { const gs = floorGroups(code); gi = Math.max(0, gs.findIndex((g) => !g.g)); }
+  selectUnit(codeUnit(code, gi));
 }
 
 function selectUnit(id) {
-  unit = UNITS.find((u) => u.id === id) || UNITS[0];
-  $$('[data-unit]').forEach((b) => b.classList.toggle('active', b.dataset.unit === unit.id));
+  unit = typeof id === 'object' ? id : UNITS.find((u) => u.id === id) || UNITS[0];
+  markActive();
   try { history.replaceState(null, '', '#' + unit.id); } catch { /* bỏ qua */ }
   store.plan = JSON.parse(JSON.stringify(unit.plan));
   if (viewer?.state.ad) applyStyle('green');
-  $('#planImg').src = `./units/${unit.id}.webp`;
+  $('#planImg').src = `./units/${unit.tpl || unit.id}.webp`;
   renderInfo();
   if (!viewer) {
     viewer = new Viewer3D($('#viewer'), store);
@@ -100,9 +165,12 @@ function renderInfo() {
   const wcs = rooms.filter((r) => /wc|tắm/i.test(r.name)).length;
   $('#info').innerHTML = `
     <h2>${unit.name}</h2>
+    ${unit.code ? `<div><small class="up-note">Chọn tầng (diện tích căn và sân vườn theo bảng từng tầng)</small>
+      <div class="up-floors">${unit.groups.map((g, i) => `<button class="chip ${g === unit.group ? 'active' : ''}" data-grp="${i}">${g.label}${g.g ? ' 🌳' : ''}</button>`).join('')}</div>
+      <p class="up-note">Mã căn: ${unit.group.floors.map((f) => `F2-${f}-${unit.code}`).slice(0, 3).join(', ')}${unit.group.floors.length > 3 ? '…' : ''}. Mặt bằng xoay${unit.mirrored ? ', lật đối xứng' : ''} đúng như vị trí căn trên mặt bằng tầng.${PROVISIONAL.has(unit.code) ? ' <b>Căn này chưa có bản vẽ riêng – đang ghép tạm mặt bằng 1PN.</b>' : ''}</p></div>` : ''}
     <div class="kv">
       <div><small>Loại căn</small><b>${unit.type}</b></div>
-      ${codesOf(unit.id) ? `<div style="grid-column: span 2"><small>Mã căn (vị trí trên mặt bằng tầng)</small><b>${codesOf(unit.id).replace('Căn ', '')}</b></div>` : ''}
+      ${!unit.code && codesOf(unit.id) ? `<div style="grid-column: span 2"><small>Mã căn (vị trí trên mặt bằng tầng)</small><b>${codesOf(unit.id).replace('Căn ', '')}</b></div>` : ''}
       <div><small>Kích thước</small><b>${fmt(unit.dims[0], 2)} × ${fmt(unit.dims[1], 2)} m</b></div>
       <div><small>Phòng ngủ</small><b>${beds}</b></div>
       <div><small>WC</small><b>${wcs}</b></div>
@@ -110,14 +178,15 @@ function renderInfo() {
     <div><small class="up-note">Các phòng (bấm để xem trong 3D)</small>
       <div class="up-rooms">${rooms.map((r, i) => `<button data-room="${i}"><span>${r.name}</span><small>${fmt(polygonArea(r.points))} m²</small></button>`).join('')}</div>
     </div>
-    ${OFFICIAL[unit.id] ? `<div class="kv">
-      <div><small>DT tim tường</small><b>${fmt(OFFICIAL[unit.id][0])} m²</b></div>
-      <div><small>DT thông thủy</small><b>${fmt(OFFICIAL[unit.id][1])} m²</b></div>
-      ${OFFICIAL[unit.id][2] ? `<div><small>🌳 Sân vườn tim</small><b>${fmt(OFFICIAL[unit.id][2])} m²</b></div><div><small>🌳 Sân vườn thông thủy</small><b>${fmt(OFFICIAL[unit.id][3])} m²</b></div>` : ''}
+    ${offOf(unit) ? `<div class="kv">
+      <div><small>DT tim tường</small><b>${fmt(offOf(unit)[0])} m²</b></div>
+      <div><small>DT thông thủy</small><b>${fmt(offOf(unit)[1])} m²</b></div>
+      ${offOf(unit)[2] ? `<div><small>🌳 Sân vườn tim</small><b>${fmt(offOf(unit)[2])} m²</b></div><div><small>🌳 Sân vườn thông thủy</small><b>${fmt(offOf(unit)[3])} m²</b></div>` : ''}
     </div>` : ''}
     <p class="up-note">Diện tích theo bảng của chủ đầu tư (căn đại diện; diện tích sân vườn khác nhau theo tầng – xem chính xác trong Bảng hàng tòa nhà). Tổng các phòng đo trên hình vẽ (tính tới tim tường): ${fmt(total)} m².</p>
     <p class="up-note">Hình ảnh và diện tích mang tính minh hoạ, dựng từ mặt bằng bán hàng. Thông số chính thức theo hợp đồng mua bán.</p>
     ${READONLY ? '' : '<button id="openDesign">✏️ Mở căn này trong công cụ thiết kế</button>'}`;
+  $$('[data-grp]').forEach((b) => (b.onclick = () => selectCode(unit.code, +b.dataset.grp)));
   $$('[data-room]').forEach((b) => (b.onclick = () => {
     if (tab !== '3d') setTab('3d');
     const shot = viewer.roomShot(rooms[+b.dataset.room]);
@@ -217,9 +286,9 @@ async function saveImage(mode) {
     mode,
     dims: unit.dims,
     title: `${unit.name} · Tòa F2`,
-    lines: [unit.type, `${fmt(unit.dims[0], 2)} × ${fmt(unit.dims[1], 2)} m`, ...(OFFICIAL[unit.id] ? [`Tim ${fmt(OFFICIAL[unit.id][0])} m² · Thông thủy ${fmt(OFFICIAL[unit.id][1])} m²`, OFFICIAL[unit.id][2] ? `Sân vườn ${fmt(OFFICIAL[unit.id][3])} m² TT` : ''] : [`Tổng DT các phòng ${fmt(total)} m²`, garden ? `Sân vườn ${fmt(garden)} m²` : '']), STYLES[store.plan.settings.style]?.name || ''].filter(Boolean),
+    lines: [unit.type, `${fmt(unit.dims[0], 2)} × ${fmt(unit.dims[1], 2)} m`, ...(unit.code ? [unit.group.label] : []), ...(offOf(unit) ? [`Tim ${fmt(offOf(unit)[0])} m² · Thông thủy ${fmt(offOf(unit)[1])} m²`, offOf(unit)[2] ? `Sân vườn ${fmt(offOf(unit)[3])} m² TT` : ''] : [`Tổng DT các phòng ${fmt(total)} m²`, garden ? `Sân vườn ${fmt(garden)} m²` : '']), STYLES[store.plan.settings.style]?.name || ''].filter(Boolean),
   });
-  download(blob, `${unit.id}-${mode === 'plan' ? 'mat-bang' : 'phoi-canh'}.png`);
+  download(blob, `${unit.id.replace('@', '-tang-')}-${mode === 'plan' ? 'mat-bang' : 'phoi-canh'}.png`);
   toast(mode === 'plan' ? 'Đã tải ảnh mặt bằng (5:6, nhìn từ trên, kèm diện tích và dài × rộng từng phòng).' : 'Đã tải ảnh phối cảnh theo góc đang xem (5:6). Mẹo: bấm 📸 Chụp ảnh như thật, chờ ảnh mịn rồi tải để có ảnh đẹp nhất.', 6000);
 }
 // Kiểu quảng cáo: đế sách, phong cách gỗ & xanh rêu, nắng sáng xiên có bóng lá, chú thích cảm xúc
@@ -249,7 +318,7 @@ function setAd(on) {
 $('#adBtn').onclick = () => setAd(!viewer.state.ad);
 $('#saveAdBtn').onclick = async () => {
   const blob = await viewer.exportPNG({ mode: 'view', ad: AD_FOOTER, title: `${unit.name} · Tòa F2`, lines: [unit.type, `${fmt(unit.dims[0], 2)} × ${fmt(unit.dims[1], 2)} m`] });
-  download(blob, `${unit.id}-quang-cao.png`);
+  download(blob, `${unit.id.replace('@', '-tang-')}-quang-cao.png`);
   toast('Đã tải ảnh quảng cáo 5:6. Mẹo: bấm 📸 Chụp ảnh như thật, chờ ảnh mịn rồi tải để có ảnh đẹp nhất.', 6000);
 };
 $('#saveBtn').onclick = () => saveImage('plan');
@@ -259,7 +328,13 @@ $('#tourBtn').onclick = () => (viewer.tour ? viewer.stopTour() : startTour());
 $('#tourAgain').onclick = () => startTour();
 
 renderUnitList();
-const fromHash = location.hash.slice(1);
-selectUnit(UNITS.some((u) => u.id === fromHash) ? fromHash : '3pn');
+const fromHash = decodeURIComponent(location.hash.slice(1));
+const hc = /^can-([0-9AB]+)(?:@(\w+))?$/.exec(fromHash);
+if (hc && CODES.includes(hc[1])) {
+  const gs = floorGroups(hc[1]);
+  const gi = gs.findIndex((g) => g.floors.includes(hc[2]));
+  selectCode(hc[1], gi >= 0 ? gi : undefined);
+} else if (UNITS.some((u) => u.id === fromHash)) { listMode = 'type'; renderUnitList(); selectUnit(fromHash); }
+else selectCode('24');
 
 document.querySelectorAll('[data-link]').forEach((a) => (a.href = linkTo(a.dataset.link)));
