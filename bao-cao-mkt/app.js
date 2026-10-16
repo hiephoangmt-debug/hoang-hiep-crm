@@ -1171,6 +1171,11 @@
     const all = lines.flatMap(amounts);
     if (all.length) total = Math.max(total, ...all.filter((v) => v <= Math.max(total, 1) * 1.0001 || !total));
     if (!total) return null;
+    // hoá đơn ghi "tiền trước thuế + VAT = tổng" (Google: 1.851.852 + 148.148 = 2.000.000): lấy tổng gồm VAT
+    for (const b of all) {
+      if (b >= total || b < total * 0.04 || b > total * 0.12) continue;
+      if (all.some((c) => Math.abs(c - (total + b)) <= 2)) { total = total + b; break; }
+    }
     const all1 = N.join(" ");
     const vm = /(?:thue suat|vat rate|thue vat|vat)[^\d%]{0,25}(\d{1,2}(?:[.,]\d)?)\s*%/.exec(all1) || /(?:thue suat|vat rate)\s*:?\s*(\d{1,2})\b/.exec(all1);
     const am = /(?:id tai khoan|tai khoan|account id|advertiser id|act)[^\d]{0,20}(\d[\d-]{7,}\d)/.exec(N.join(" "));
@@ -1251,6 +1256,23 @@
   }
 
   /**
+   * Thẻ chỉ số Google Ads bị cuộn mất dòng nhãn: "11.396 đ  2.809  183  2.085.421 đ" (CPC, hiển thị, lượt nhấp, chi phí).
+   * Nhận khi lượt nhấp × CPC ≈ chi phí (sai lệch ≤ 1,5%).
+   */
+  function googleCards(lines, N) {
+    const TOK = /(\d{1,3}(?:[.,]\d{3})+|\d+)\s*(đ|₫|d\b)?/g;
+    for (const line of lines) {
+      const t = Array.from(line.matchAll(TOK)).map((m) => ({ v: Math.round(toNum(m[1])), m: !!m[2] }));
+      for (let i = 0; i + 3 < t.length; i++) {
+        const [cpc, imp, clk, cost] = t.slice(i, i + 4);
+        if (!cpc.m || !cost.m || imp.m || clk.m || !clk.v || cost.v < 1000) continue;
+        if (Math.abs(clk.v * cpc.v - cost.v) <= cost.v * 0.015) return finishGoogle(lines, N, { cost: cost.v, clicks: clk.v, impressions: imp.v });
+      }
+    }
+    return null;
+  }
+
+  /**
    * Thẻ chỉ số nằm NGANG (ảnh chụp máy tính): một dòng chứa nhiều nhãn
    * "Lần nhấp  Lượt hiển thị  CPC Tr.bình  Chi phí", dòng số ngay sau "10  135  15.399 đ  153.988 đ".
    */
@@ -1301,6 +1323,9 @@
       if (!name && lines[ci + 1] && /^\[|[-–—|]/.test(lines[ci + 1]) && !/:/.test(lines[ci + 1]) &&
         !/thang|tuy chinh|quang cao|tong quan|ngay qua/.test(N[ci + 1])) name = lines[ci + 1].trim();
     }
+    // bỏ ký tự rác OCR quanh tên ("A ¢ | E Seerch-ToaF2-lead ~ Q Cc 9")
+    if (name.includes("|")) name = name.split("|").pop();
+    name = name.split(/\s[~»>]\s/)[0].replace(/^(?:[^\p{L}\d[]+|\p{L}\s+(?=\S{4,}))+/u, "").trim();
     const d = N.map((n) => /thang\s*(\d{1,2})\s+(\d{1,2})\s*[-–—‒]\s*\d{1,2}/.exec(n) || /(\d{1,2})\s*thg\s*(\d{1,2})/.exec(n)).find(Boolean);
     const date = d ? (/thang/.test(d[0]) ? `${d[2]}/${d[1]}` : `${d[1]}/${d[2]}`) : "";
     return { name: name || (date ? "Chiến dịch " + date : "Chiến dịch"), spent: cost, results: val.conv != null ? val.conv : null, resultType: val.conv != null ? "lead" : "",
@@ -1352,8 +1377,13 @@
     }
 
     // Google Ads (ads.google.com): các thẻ chỉ số "Lần nhấp / Lượt hiển thị / CPC / Chi phí" của chiến dịch đang mở
-    if (/adsgooglecom|googleads|chiendichtimkiem|cpctrbinh|cpctrungbinh/.test(compact(text)) && /chi phi/.test(N.join(" "))) {
+    const isGoogle = /adsgooglecom|googleads|chiendichtimkiem|cpctrbinh|cpctrungbinh/.test(compact(text));
+    if (isGoogle && /chi phi/.test(N.join(" "))) {
       const g = googleAds(lines, N, money);
+      if (g) return [g];
+    }
+    if (isGoogle) {
+      const g = googleCards(lines, N);
       if (g) return [g];
     }
     const SPENT_C = /(chitieu|sotiendachi)/;
