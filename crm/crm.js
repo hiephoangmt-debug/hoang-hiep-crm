@@ -139,7 +139,7 @@
 
   async function reload(tables) {
     const list = tables || ["DuAn", "NhanSu", "TaiKhoan", "SoLieu", "ChungTu", "BaoCao"];
-    const res = await Promise.all(list.map((t) => gas("crmList", t)));
+    const res = await Promise.all(list.map((t) => gas("crmList", t, TOKEN)));
     list.forEach((t, i) => (S[t] = res[i]));
   }
 
@@ -503,9 +503,9 @@
     const pj = project($("enProject").value);
     if (!B.parseDriveId(pj.nguonSoLieu)) return toast("Dự án chưa có link Google Sheet số liệu (tab Danh mục).", "err");
     let id = B.parseDriveId(pj.nguonSoLieu);
-    try { const src = await gas("crmSheetSource", pj.ten); id = src.id; if (src.switched) { pj.nguonSoLieu = src.url; renderEntries(); } } catch (e) { console.error(e); }
+    try { const src = await gas("crmSheetSource", pj.ten, TOKEN); id = src.id; if (src.switched) { pj.nguonSoLieu = src.url; renderEntries(); } } catch (e) { console.error(e); }
     const year = parseIso($("enWeek").value).getFullYear();
-    const r = await run("Đang đọc Google Sheet", () => gas("downloadFile", id));
+    const r = await run("Đang đọc Google Sheet", () => gas("downloadFile", id, TOKEN));
     const wb = XLSX.read(Uint8Array.from(atob(r.b64), (c) => c.charCodeAt(0)), { type: "array" });
     const weeks = B.loadData(wb);
     const list = [], weekIsos = [];
@@ -1181,7 +1181,7 @@
     if (!root) return [];
     const key = B.norm(pj.khoa || pj.ten).replace(/[^a-z0-9]/g, "");
     toast(`${pjName}: đang quét thư mục chứng từ trên Drive…`, "busy");
-    const files = (await gas("listTree", root)).filter((f) => (/^image\//.test(f.mimeType) || f.mimeType === "application/pdf") &&
+    const files = (await gas("listTree", root, TOKEN)).filter((f) => (/^image\//.test(f.mimeType) || f.mimeType === "application/pdf") &&
       f.path.slice(1).some((seg) => B.norm(seg).replace(/[^a-z0-9]/g, "") === key) &&
       fileInWeek(f, w) && !S.ChungTu.some((c) => c.fileId === f.id));
     if (!files.length) return [];
@@ -1227,7 +1227,7 @@
   }
   async function evidenceFile(r) {
     if (!fileCache.has(r.fileId)) {
-      const f = await gas("downloadFile", r.fileId);
+      const f = await gas("downloadFile", r.fileId, TOKEN);
       fileCache.set(r.fileId, new File([B.b64ToBlob(f.b64, f.type)], r.tenFile, { type: f.type }));
     }
     return fileCache.get(r.fileId);
@@ -1340,7 +1340,7 @@
     // báo cáo tuần: kèm các tuần trước để so sánh; báo cáo tháng / chiến dịch: đúng các tuần trong kỳ
     const rows = effective(S.SoLieu.filter((r) => r.duAn === pjName && (ky === "tuan" ? r.tuan <= w : wks.includes(r.tuan))));
     if (!last || !rows.some((r) => wks.includes(r.tuan))) throw new Error(`${pjName}: chưa có số liệu ${periodLabel(w)}.`);
-    if (!tplCache[tplId]) { const t = await gas("downloadFile", tplId); tplCache[tplId] = B.b64ToBlob(t.b64, t.type); }
+    if (!tplCache[tplId]) { const t = await gas("downloadFile", tplId, TOKEN); tplCache[tplId] = B.b64ToBlob(t.b64, t.type); }
     const accStaff = new Map(rows.map((r) => [r.taiKhoan || r.nhanSu || "(không rõ)", r.nhanSu]));
     let ev = [];
     if (ky === "tuan") {

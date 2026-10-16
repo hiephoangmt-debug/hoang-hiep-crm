@@ -41,7 +41,13 @@ function exportBlob_(url) {
 }
 
 /** Tải file theo ID; Google Sheets/Slides được xuất sang xlsx/pptx. Trả về base64. */
-function downloadFile(id) {
+/** Chỉ người đã đăng nhập CRM (nhân sự đã khai) hoặc chủ ứng dụng mới đọc được dữ liệu / file. */
+function crmRequireUser_(token) {
+  if (!crmMe_(token).role) throw new Error('Bạn chưa đăng nhập CRM (đăng nhập bằng Gmail đã khai ở Danh mục › Nhân sự).');
+}
+
+function downloadFile(id, token) {
+  crmRequireUser_(token);
   var f;
   try {
     f = DriveApp.getFileById(id);
@@ -65,7 +71,8 @@ function downloadFile(id) {
 }
 
 /** Liệt kê đệ quy mọi file trong thư mục; path = tên các thư mục cha (gồm thư mục gốc). */
-function listTree(folderId) {
+function listTree(folderId, token) {
+  crmRequireUser_(token);
   var root;
   try {
     root = DriveApp.getFolderById(folderId);
@@ -462,7 +469,8 @@ function crmBootstrap(token) {
   var me = crmMe_(token);
   var out = { schema: CRM_TABLES, sheetUrl: me.role === 'admin' ? crmBook_().getUrl() : '', user: crmUser_(), me: me };
   try { out.appUrl = ScriptApp.getService().getUrl(); } catch (e) { out.appUrl = ''; }
-  Object.keys(CRM_TABLES).forEach(function (t) { out[t] = crmPublic_(t, crmRows_(t)); });
+  // chưa đăng nhập: không trả dữ liệu (trang chỉ hiện ô đăng nhập)
+  Object.keys(CRM_TABLES).forEach(function (t) { out[t] = me.role ? crmPublic_(t, crmRows_(t)) : []; });
   return out;
 }
 
@@ -473,7 +481,8 @@ function crmPrepareFolders(token) {
   return true;
 }
 
-function crmList(name) {
+function crmList(name, token) {
+  crmRequireUser_(token);
   return crmPublic_(name, crmRows_(name));
 }
 
@@ -819,7 +828,8 @@ function crmSheetFile_(duAn) {
 }
 
 /** Cho trang: link file số liệu đang dùng (đã tự chuyển sang bản Google Trang tính nếu có). */
-function crmSheetSource(duAn) {
+function crmSheetSource(duAn, token) {
+  crmRequireUser_(token);
   var r = crmSheetFile_(duAn);
   return { id: r.file.getId(), url: r.url, switched: r.switched, isSheet: r.file.getMimeType() === MimeType.GOOGLE_SHEETS };
 }
