@@ -228,7 +228,19 @@ export function gardenUnit(base, spec) {
   const bb = { x0: Math.min(...xs), y0: Math.min(...ys), x1: Math.max(...xs), y1: Math.max(...ys) };
   const lg = plan.rooms.find((r) => /lô gia/i.test(r.name)) || plan.rooms[0];
   const c = { x: lg.points.reduce((s, p) => s + p.x, 0) / lg.points.length, y: lg.points.reduce((s, p) => s + p.y, 0) / lg.points.length };
-  const side = Object.entries({ top: c.y - bb.y0, bottom: bb.y1 - c.y, left: c.x - bb.x0, right: bb.x1 - c.x }).sort((a, b) => a[1] - b[1])[0][0];
+  // Mặt gắn sân = cạnh ngoài có lan can của lô gia (mặt tiền); không có thì lấy cạnh gần lô gia nhất
+  const nearSide = (pt) => Object.entries({ top: pt.y - bb.y0, bottom: bb.y1 - pt.y, left: pt.x - bb.x0, right: bb.x1 - pt.x }).sort((a, b) => a[1] - b[1])[0];
+  const score = { top: 0, bottom: 0, left: 0, right: 0 };
+  for (const op of plan.openings) {
+    if (op.type !== 'window' || (op.sill || 0) > 0.1 || op.height > 1.3) continue;
+    const w = plan.walls.find((x) => x.id === op.wallId);
+    if (!w) continue;
+    const pt = { x: w.a.x + (w.b.x - w.a.x) * op.t, y: w.a.y + (w.b.y - w.a.y) * op.t };
+    const [sd, dist] = nearSide(pt);
+    if (dist < 0.4) score[sd] += op.width;
+  }
+  const best = Object.entries(score).sort((a, b) => b[1] - a[1])[0];
+  const side = spec.garden.side || (best[1] > 0 ? best[0] : nearSide(c)[0]);
   const D = spec.garden.depth || 3;
   // Hệ toạ độ cục bộ của sân: u dọc mép mặt tiền, v hướng ra ngoài
   const onEdge = (pt) => side === 'top' ? Math.abs(pt.y - bb.y0) < 0.35 : side === 'bottom' ? Math.abs(pt.y - bb.y1) < 0.35 : side === 'left' ? Math.abs(pt.x - bb.x0) < 0.35 : Math.abs(pt.x - bb.x1) < 0.35;

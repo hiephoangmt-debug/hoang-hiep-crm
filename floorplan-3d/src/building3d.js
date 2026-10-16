@@ -576,7 +576,15 @@ export class BuildingView {
       const i = sh.floor === '01' ? 0 : 1, y0 = i * P;
       if (mode === 1 && i === 1) continue;
       const r = sh.rect, radii = radiiOf(r, i === 0 ? pod : tower);
-      if (sh.apt) { add(roundedPrism(r, y0, mode === 2 ? 1.6 : P - 0.45, radii, 0.08), aptMat); continue; }
+      if (sh.apt) {
+        // Căn hộ tầng 2 (cánh phải): bấm được như căn ở tầng trên
+        const key = `02-${sh.slot}`, st = b.units[key]?.status || 'available';
+        const passes = !interactive || (this.filter.status.has(st) && (!this.filter.type || this.filter.type === sh.type));
+        const mat = colorBy === 'facade' ? aptMat : new THREE.MeshStandardMaterial({ color: colorBy === 'type' ? TYPE_COLORS[sh.type] : STATUS[st].color, roughness: 0.45, transparent: !passes, opacity: passes ? 1 : 0.2 });
+        const m = add(roundedPrism(r, y0, mode === 2 ? 1.6 : P - 0.45, SLOT_RADII[sh.slot] || radii, 0.08), mat);
+        if (interactive) { m.userData = { floor: '02', floorIndex: -1, slot: sh, key }; units.push(m); if (mode === 2) tagEl(`<b>${sh.label}</b>`, (r.x0 + r.x1) / 2, y0 + 1.8, (r.y0 + r.y1) / 2); }
+        continue;
+      }
       const key = `${sh.floor}-${sh.slot}`;
       const st = b.units[key]?.status || 'available';
       const passes = !interactive || (this.filter.status.has(st) && (!this.filter.type || this.filter.type === 'Shop'));

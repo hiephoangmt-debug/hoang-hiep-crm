@@ -18,7 +18,7 @@ const MID = [
   ['16', 810, 882, 921, 1095, 66.3, 61.6], ['15', 921, 882, 1037, 1095, 66.1, 61.1], ['12B', 1037, 882, 1153, 1095, 66.1, 61.1], ['12A', 1153, 882, 1265, 1095, 66.3, 61.6],
 ];
 const MX = (x) => 2075 - x;
-const SLOTS = [
+const SLOTS_RAW = [
   ...LEFT,
   ...LEFT.map(([k, x0, y0, x1, y1]) => [MIRROR[k], MX(x1), y0, MX(x0), y1, ...RIGHT_AREAS[MIRROR[k]]]),
   ...MID,
@@ -48,7 +48,14 @@ const AREAS_8_19 = {
   16: [67.0, 61.0], 15: [67.0, 61.0], '12B': [67.0, 61.0], '12A': [67.0, 61.0], 12: [55.3, 50.2], 11: [33.9, 30.1],
 };
 /** Diện tích (tim, thông thủy) của một căn theo tầng */
+// Diện tích căn tầng 3 / 3A–7 khác tầng điển hình (các căn giữa)
+const AREAS_LOW = {
+  '03': { 27: [36.8, 32.9], '02': [36.9, 32.9], 28: [46.5, 32.9], '01': [46.5, 42.3], 30: [59.1, 54.6], 31: [59.1, 54.6], 29: [54.4, 50.1], 32: [54.4, 50.1] },
+  mid: { 27: [36.8, 32.6], '02': [36.8, 32.6], 28: [46.5, 41.8], '01': [46.5, 41.8], 30: [67.0, 60.8], 31: [67.0, 60.8], 29: [61.6, 55.8], 32: [61.6, 55.8] },
+};
 export function areaOf(floor, s) {
+  const low = floor === '03' ? AREAS_LOW['03'] : ['03A', '05', '06', '07'].includes(floor) ? AREAS_LOW.mid : null;
+  if (low?.[s.slot]) return { tim: low[s.slot][0], tt: low[s.slot][1] };
   const n = parseInt(floor, 10);
   const a = n >= 8 && n <= 19 ? AREAS_8_19[s.slot] : null;
   return a ? { tim: a[0], tt: a[1] } : { tim: s.tim, tt: s.tt };
@@ -83,14 +90,16 @@ const m2 = ([x0, y0, x1, y1]) => (x1 - x0) * (y1 - y0) * PX_TO_M * PX_TO_M;
 // sân giữa hai cánh là sàn hồ bơi ngoài trời
 const F2 = [
   ['TM-A', [440, 340, 628, 1135], 'shop'], ['TM-B', [810, 635, 1265, 848], 'shop'], ['TM-C', [628, 905, 1265, 1135], 'shop'],
-  ['CH', [1265, 340, 1635, 1135], 'apt'],
 ];
+const F2_APTS = { '03': [55.8, 50.3, 12.4, 9.3], '03A': [33.7, 30.2, 10.9, 8.1], '05': [94.5, 85.4, 16.4, 12.1], '06': [58.4, 52.6], '07': [58.4, 52.6], '08': [58.4, 52.6], '09': [38.2, 32.9], 10: [70.1, 63.2, 24.7, 22.6], 11: [33.7, 30.2, 16.1, 14.1], 12: [53.6, 49.1, 19.2, 17.4] };
 export const POOL_DECK = [810, 340, 1265, 635];
 export const POOL = [850, 420, 1225, 560];
 export const SHOP_FLOORS = ['01', '02'];
 export const SHOPS = [
   ...F1.map(([k, ...r]) => { const px = mapBox(F1_SRC, POD_PX, r.slice(0, 4)); return { slot: 'S' + k, label: k, floor: '01', px, rect: rectM(px), tim: r[4], tt: r[5], type: 'Shop', shop: true }; }),
   ...F2.map(([k, px, kind]) => ({ slot: k, label: k === 'CH' ? 'Căn hộ' : k, floor: '02', px, rect: rectM(px), tim: +m2(px).toFixed(1), tt: +(m2(px) * 0.92).toFixed(1), type: kind === 'shop' ? 'Shop' : '2PN', shop: kind === 'shop', apt: kind === 'apt' })),
+  // Tầng 2 cánh phải: 10 căn hộ có sân vườn (theo bảng mặt bằng tầng 2)
+  ...Object.entries(F2_APTS).map(([k, [tim, tt, bt, btt]]) => { const sl = SLOTS_RAW.find((x) => x[0] === k); const px = sl.slice(1, 5); return { slot: k, label: k, floor: '02', px, rect: rectM(px), fit: rectM(FIT_RECTS[k] || px), tim, tt, garden: bt ? { tim: bt, tt: btt } : null, type: unitType(tt), apt: true }; }),
 ];
 
 export function unitType(tt) {
@@ -103,7 +112,7 @@ export function unitType(tt) {
 }
 export const TYPE_COLORS = { Shop: '#8e6cc9', Studio: '#7fb3c8', '1PN': '#6aa0b8', '1PN+': '#b07a5c', '2PN': '#3d8a3d', '2PN+': '#f2b134', '3PN': '#ef6b4a' };
 
-export const SLOT_LIST = SLOTS.map(([slot, x0, y0, x1, y1, tim, tt]) => ({ slot, rect: rectM([x0, y0, x1, y1]), fit: rectM(FIT_RECTS[slot] || [x0, y0, x1, y1]), tim, tt, type: unitType(tt) }));
+export const SLOT_LIST = SLOTS_RAW.map(([slot, x0, y0, x1, y1, tim, tt]) => ({ slot, rect: rectM([x0, y0, x1, y1]), fit: rectM(FIT_RECTS[slot] || [x0, y0, x1, y1]), tim, tt, type: unitType(tt) }));
 
 /** Mặt bằng chi tiết mặc định cho từng vị trí (theo các căn mẫu đã dựng; vị trí chưa có ảnh mặt bằng thì để trống) */
 export const DEFAULT_UNIT = {
@@ -129,7 +138,23 @@ export const STATUS = {
 
 /** Danh sách tầng ở (bỏ số 4 → 3A, 13 → 12A theo thông lệ) */
 /** Tầng có sân vườn riêng bao quanh (tầng 3A → 7) */
-export const GARDEN_FLOORS = new Set(['03A', '05', '06', '07']);
+export const GARDEN_FLOORS = new Set(['03', '03A', '05', '06', '07']);
+
+// Diện tích sân vườn / ban công [tim, thông thủy] theo bảng mặt bằng tầng 3, 3A, 5, 6 (tầng 7 lấy như tầng 6).
+// Căn 06–09 không có sân vườn; các căn giữa 01, 02, 27–32 chỉ có ở tầng 3.
+const BC = (o) => Object.fromEntries(Object.entries(o).map(([k, v]) => [k, v]));
+const SIDE_3A = { 24: [56.9, 47.6], 25: [10.9, 8.0], 26: [12.4, 9.3], '03': [12.4, 9.3], '03A': [10.9, 8.0], '05': [16.4, 12.4], 20: [12.2, 9.8], 19: [60.1, 51.5], 10: [24.7, 20.0], 18: [16.1, 13.0], 11: [16.1, 13.0], 15: [21.4, 18.1], '12B': [21.4, 18.1] };
+export const GARDEN_AREA = {
+  '03': BC({ ...SIDE_3A, '03A': [10.9, 8.1], 23: [18.0, 14.8], 22: [18.0, 14.8], 21: [18.0, 14.8], 18: [16.1, 12.9], 11: [16.1, 12.9], 17: [19.2, 15.9], 12: [19.2, 15.9], 16: [29.9, 26.1], '12A': [29.9, 26.1],
+    27: [6.2, 5.0], '02': [6.2, 5.0], 28: [7.6, 6.2], '01': [7.6, 6.2], 30: [74.5, 69.0], 31: [74.5, 69.0], 29: [30.3, 27.3], 32: [30.3, 27.3] }),
+  '03A': BC({ ...SIDE_3A, 23: [13.5, 10.3], 22: [13.5, 10.3], 21: [13.5, 10.3], 17: [19.2, 15.9], 12: [19.2, 15.9], 16: [25.4, 21.6], '12A': [25.4, 21.6] }),
+  '05': BC({ ...SIDE_3A, 24: [56.1, 47.0], 23: [9.7, 6.9], 22: [9.7, 6.9], 21: [9.7, 6.9], 20: [11.5, 9.0], 17: [18.9, 15.6], 12: [18.9, 15.6], 16: [21.5, 18.2], '12A': [21.5, 18.2] }),
+  '06': BC({ ...SIDE_3A, 24: [51.6, 42.5], 23: [9.7, 6.9], 22: [9.7, 6.9], 21: [9.7, 6.9], 20: [6.3, 4.3], 19: [59.4, 50.8], 17: [14.0, 10.7], 12: [14.0, 10.7], 16: [21.5, 18.2], '12A': [21.5, 18.2] }),
+};
+GARDEN_AREA['07'] = GARDEN_AREA['06'];
+GARDEN_AREA['02'] = Object.fromEntries(Object.entries(F2_APTS).filter(([, v]) => v[2]).map(([k, v]) => [k, [v[2], v[3]]]));
+/** Diện tích sân vườn của căn (null nếu không có) */
+export function gardenOf(floor, slot) { const a = GARDEN_AREA[floor]?.[slot]; return a ? { tim: a[0], tt: a[1] } : null; }
 /** Căn mẫu sân vườn tương ứng với căn gốc */
 export const GARDEN_UNIT = { '1pn-plus-b': 'sv-1pn-plus', '2pn-1wc': 'sv-2pn-1wc', '2pn-b': 'sv-2pn-2wc', '3pn': 'sv-3pn', studio: 'sv-studio', 'studio-b': 'sv-studio-b', '1pn': 'sv-1pn', '1pn-plus': 'sv-1pn-plus-l', '2pn-a': 'sv-2pn-a' };
 
@@ -156,7 +181,7 @@ export function sampleBuilding() {
       b.units[`${fl}-${s.slot}`] = { status };
     }
   });
-  for (const s of SHOPS) if (s.shop) { const x = r(); b.units[`${s.floor}-${s.slot}`] = { status: x < 0.35 ? 'sold' : x < 0.45 ? 'deposit' : 'available' }; }
+  for (const s of SHOPS) if (s.shop || s.apt) { const x = r(); b.units[`${s.floor}-${s.slot}`] = { status: x < 0.35 ? 'sold' : x < 0.45 ? 'deposit' : 'available' }; }
   return b;
 }
 
@@ -164,7 +189,7 @@ export function unitCode(b, floor, slot) { return `${b.code}-${floor}-${String(s
 
 /** Giá ước tính (tỷ đồng): đơn giá × diện tích thông thủy, tầng cao +0,6%/tầng, căn góc +4% */
 export function unitPrice(b, floorIndex, s) {
-  if (s.shop) { const u = b.units[`${s.floor}-${s.slot}`]; return u?.price || Math.round(s.tt * (s.floor === '01' ? 110 : 70)) / 1000; }
+  if (s.shop || s.apt) { const u = b.units[`${s.floor}-${s.slot}`]; return u?.price || Math.round(s.tt * (s.apt ? b.pricePerM2 * 0.97 : s.floor === '01' ? 110 : 70)) / 1000; }
   const u = b.units[`${residentialFloors(b.floors)[floorIndex]}-${s.slot}`];
   if (u?.price) return u.price;
   const corner = ['24', '05', '19', '10'].includes(s.slot) ? 1.04 : 1;
