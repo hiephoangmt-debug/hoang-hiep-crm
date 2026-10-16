@@ -11,8 +11,8 @@
   const PLAB = { Facebook: "Facebook", Tiktok: "TikTok", Zalo: "Zalo", Google: "Google Ads", "Đăng tin": "Đăng tin" };
   const PCOL = { Facebook: "var(--fb)", Tiktok: "var(--tt)", Zalo: "var(--zl)", Google: "var(--gg)", "Đăng tin": "var(--dt)" };
   const KIND = { ads: "Chiến dịch", qc: "QC đang chạy", hoadon: "Hoá đơn" };
-  // ảnh nghiệm thu theo mẫu COLLECTION bản 16/10 (không còn slide hoá đơn)
-  const NEED = { Facebook: ["ads", "qc"], Tiktok: ["ads", "qc"], Zalo: ["ads", "qc"], Google: ["ads"], "Đăng tin": ["ads"] };
+  // ảnh nghiệm thu bắt buộc theo kênh (hoá đơn bắt buộc, trừ Đăng tin: ảnh chi tiết giao dịch)
+  const NEED = { Facebook: ["ads", "qc", "hoadon"], Tiktok: ["ads", "qc", "hoadon"], Zalo: ["ads", "qc", "hoadon"], Google: ["ads", "hoadon"], "Đăng tin": ["ads"] };
   /** Ô ảnh nghiệm thu của một ảnh: Google không có ô "QC đang chạy", Đăng tin chỉ một ô; hoá đơn là ảnh thêm (không bắt buộc). */
   const slotOf = (p, loai) => (p === "Đăng tin" || (p === "Google" && loai === "qc") ? "ads" : loai);
   const pad = (n) => String(n).padStart(2, "0");

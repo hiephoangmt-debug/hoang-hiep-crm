@@ -588,22 +588,26 @@
 
   // ------------------------------------------------------------ CHỨNG TỪ
   // Hướng dẫn nghiệm thu theo mẫu COLLECTION (bản 16/10): ảnh cần chụp cho từng kênh + các mục phải khoanh.
-  // Mẫu không còn slide hoá đơn – hoá đơn vẫn tải lên để app tính chi phí gồm VAT.
+  // Hoá đơn bắt buộc (mẫu không có slide hoá đơn -> báo cáo tự thêm trang "HÓA ĐƠN" sau ảnh của kênh).
   const REQ = {
     Facebook: {
       ads: "ID tài khoản quảng cáo · Search tên chiến dịch · Thời gian chạy · Tổng số kết quả · Tổng số tiền đã chi tiêu",
       qc: "ID tài khoản quảng cáo · Thời gian chạy · Quảng cáo đang hoạt động",
+      hoadon: "ID tài khoản quảng cáo · Số mã tham chiếu · Tổng số tiền đã thanh toán (VAT) · Hoá đơn có tên chiến dịch khớp tên trên TKQC",
     },
     Tiktok: {
       ads: "ID tài khoản quảng cáo · Search tên chiến dịch · Tổng số tiền thực chạy · Thời gian chạy (nghiệm thu)",
       qc: "ID tài khoản quảng cáo · Quảng cáo chạy",
+      hoadon: "ID tài khoản quảng cáo · Tổng số tiền đã thanh toán (VAT) · Hoá đơn có tên chiến dịch khớp tên trên TKQC",
     },
     Zalo: {
       ads: "Search tên chiến dịch · Tổng số tiền thực chạy · Thời gian chạy (nghiệm thu)",
       qc: "ID tài khoản quảng cáo · Thời gian chạy · Quảng cáo đang hoạt động",
+      hoadon: "Tổng số tiền đã thanh toán (VAT) · Hoá đơn có tên chiến dịch khớp tên trên TKQC",
     },
     Google: {
       ads: "ID tài khoản quảng cáo · Search tên chiến dịch · Tổng số tiền thực chạy · Thời gian chạy",
+      hoadon: "ID tài khoản quảng cáo · Số mã tham chiếu · Tổng số tiền đã thanh toán (VAT)",
     },
     "Đăng tin": {
       ads: "Màn hình chi tiết giao dịch đăng tin: tài khoản · mã / thời gian giao dịch · số tiền đã thanh toán",

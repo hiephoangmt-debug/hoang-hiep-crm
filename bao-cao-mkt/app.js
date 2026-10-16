@@ -423,6 +423,16 @@
     t.box.ext.setAttribute("cy", String(byTag(tbl, "a:tr").reduce((h, tr) => h + +tr.getAttribute("h"), 0)));
   }
 
+  /** Trang hoá đơn nhân bản từ trang ảnh của kênh: đổi tiêu đề + ghi chú các mục cần khoanh. */
+  function invoiceTitle(doc, plat) {
+    const label = (plat === "Tiktok" ? "TikTok" : plat).toUpperCase();
+    for (const body of shapeBodies(doc)) {
+      const t = norm(bodyText(body));
+      if (new RegExp("^" + norm(plat) + "( ads)?:?$").test(t)) setBodyText(body, "HÓA ĐƠN " + label + ":");
+      else if (/^\*?luu y/.test(t)) setBodyText(body, "*Lưu ý hoá đơn " + (plat === "Tiktok" ? "TikTok" : plat) + ": khoanh ID tài khoản quảng cáo, số mã tham chiếu, tổng số tiền đã thanh toán (VAT); hoá đơn có tên chiến dịch khớp tên trên tài khoản quảng cáo.");
+    }
+  }
+
   /** Nới rộng shape chứa body (đủ chỗ cho chữ dài hơn mẫu); center = giữ tâm. */
   function widen(body, minW, center) {
     const b = boxOf(body.parentNode);
@@ -767,10 +777,10 @@
 
     const out = []; // {src, files, clone, ctx}
     const usedOriginal = new Set();
-    const emit = (s, files, ctx, placeholder) => {
+    const emit = (s, files, ctx, placeholder, invoice) => {
       const clone = usedOriginal.has(s);
       usedOriginal.add(s);
-      out.push({ src: s, files, clone, ctx, placeholder: !!placeholder });
+      out.push({ src: s, files, clone, ctx, placeholder: !!placeholder, invoice: invoice || null });
     };
     // loại trang ảnh có trong mẫu theo kênh (Google không có trang "QC đang chạy" -> ảnh đó vào trang Chiến dịch)
     const slideKinds = {};
@@ -783,6 +793,15 @@
         : raw(p, k).concat(k === "ads" && slideKinds[p] && !slideKinds[p].has("qc") ? raw(p, "qc") : []);
       const used = (p) => data[p].length > 0 || Object.keys(KINDS).some((k) => imgsOf(p, k).length);
       const usedKinds = new Set();
+      // mẫu không có slide hoá đơn cho kênh: thêm trang "HÓA ĐƠN" (nhân bản trang ảnh cuối của kênh) ngay sau đó
+      const lastFrame = {};
+      seq.forEach((s) => { if (s.frame && s.platform) lastFrame[s.platform] = s; });
+      const addInvoices = (s, plat) => {
+        if (lastFrame[plat] !== s || plat === "Đăng tin" || (slideKinds[plat] && slideKinds[plat].has("hoadon"))) return;
+        const inv = raw(plat, "hoadon");
+        if (inv.length) chunk(inv, perSlide).forEach((fs) => emit(s, fs, ctx, false, plat));
+        else if (opts.placeholderMissing) emit(s, [], ctx, true, plat);
+      };
       for (const s of seq) {
         const tablePlats = s.tables.map((t) => t.platform).filter(Boolean);
         const plat = s.platform || (tablePlats.length ? tablePlats[0] : null);
@@ -794,9 +813,8 @@
           if (!files.length) {
             if (opts.placeholderMissing) emit(s, [], ctx, true);
             else if (!opts.dropEmptyImageSlides) emit(s, [], ctx);
-            continue;
-          }
-          chunk(files, perSlide).forEach((fs) => emit(s, fs, ctx));
+          } else chunk(files, perSlide).forEach((fs) => emit(s, fs, ctx));
+          addInvoices(s, plat);
           continue;
         }
         emit(s, [], ctx);
@@ -837,6 +855,7 @@
     for (const o of out) {
       const s = o.s;
       fillText(s.doc, o.ctx);
+      if (o.invoice) invoiceTitle(s.doc, o.invoice);
       if (opts.logo) swapLogo(s, opts.logo, logoRefs, logos);
       s.tables.forEach((t, i) => {
         t.platform = o.src.tables[i] ? o.src.tables[i].platform : t.platform;
