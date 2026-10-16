@@ -251,11 +251,17 @@
   }
 
   /** Số liệu đọc từ ảnh chỉ được tính khi người đó (tuần + dự án) chưa có số từ sheet/nhập tay. */
+  // số đọc từ ảnh chỉ bị thay bởi số nhập tay / từ Sheet của CÙNG người, CÙNG dự án, CÙNG kênh trong tuần
+  const effKey = (r) => r.tuan + "|" + r.duAn + "|" + r.nhanSu + "|" + (r.nenTang || "Facebook");
   function effective(rows) {
-    const solid = new Set(rows.filter((r) => r.nguon !== "anh").map((r) => r.tuan + "|" + r.duAn + "|" + r.nhanSu));
-    return rows.filter((r) => r.nguon !== "anh" || !solid.has(r.tuan + "|" + r.duAn + "|" + r.nhanSu));
+    const solid = new Set(rows.filter((r) => r.nguon !== "anh").map(effKey));
+    return rows.filter((r) => r.nguon !== "anh" || !solid.has(effKey(r)));
   }
-  const isShadowed = (r) => r.nguon === "anh" && S.SoLieu.some((x) => x.nguon !== "anh" && x.tuan === r.tuan && x.duAn === r.duAn && x.nhanSu === r.nhanSu);
+  const isShadowed = (r) => r.nguon === "anh" && S.SoLieu.some((x) => x.nguon !== "anh" && effKey(x) === effKey(r));
+  /** Dòng có thể nhập trùng: cùng người, dự án, kênh, tuần và cùng chi phí + lead với một dòng lưu trước đó. */
+  const sameNums = (a, b) => num(a.chiPhi) > 0 && num(a.chiPhi) === num(b.chiPhi) && num(a.lead) === num(b.lead);
+  const isDupRow = (r) => S.SoLieu.some((x) => x.id !== r.id && effKey(x) === effKey(r) && sameNums(x, r) &&
+    (String(x.ngayTao) < String(r.ngayTao) || (String(x.ngayTao) === String(r.ngayTao) && String(x.id) < String(r.id))));
 
   // ------------------------------------------------------------ TỔNG QUAN
   function sumOf(rows) {
@@ -381,7 +387,8 @@
       // nút xoá + nguồn ở ĐẦU hàng (bảng rộng, cột cuối hay bị khuất sau thanh cuộn ngang)
       const body = rs.map((r) => `<tr class="${drafts.has(r.id) ? "dirty" : ""}${isShadowed(r) ? " shadow" : ""}">
           <td class="act lead">${canEdit(r) || isNew(r.id) ? `<button type="button" class="link danger" data-gdel="${esc(r.id)}" title="Xoá dòng này">✕</button>` : `<span class="muted" title="Dòng của ${esc(r.nhanSu)} – chỉ quản trị mới xoá được">⊘</span>`}
-            ${r.nguon === "anh" ? `<small class="muted" title="${esc(r.ghiChu)}${isShadowed(r) ? " – không tính vì đã có số từ Sheet/nhập tay" : ""}">ảnh${isShadowed(r) ? "·0" : ""}</small>` : r.nguon === "sheet" ? `<small class="muted" title="Nhập từ Google Sheet">sheet</small>` : ""}</td>
+            ${r.nguon === "anh" ? `<small class="muted" title="${esc(r.ghiChu)}${isShadowed(r) ? " – không tính vì đã có số nhập tay / từ Sheet cho cùng kênh" : ""}">ảnh${isShadowed(r) ? "·0" : ""}</small>` : r.nguon === "sheet" ? `<small class="muted" title="Nhập từ Google Sheet">sheet</small>` : ""}
+            ${!isNew(r.id) && isDupRow(r) ? `<small class="warn-text" title="Cùng chi phí và lead với một dòng khác của ${esc(r.nhanSu)} trong tuần – kiểm tra rồi xoá dòng thừa">trùng?</small>` : ""}</td>
           ${GRID.map((c) => cell(r, c)).join("")}</tr>`).join("");
       return `<section class="card grid-sec${rs.length ? "" : " empty"}">
         <div class="sec-head"><h3>${PLATFORM_LABEL[p].toUpperCase()}</h3>
@@ -886,6 +893,15 @@
       .map((c, k) => (c.name ? c : Object.assign({}, c, { name: "Nhập tay " + (k + 1) + " – " + m.file })))
       // cùng số chi phí với dòng khác của ảnh này (vd. vừa đọc được vừa điền tay lại) -> chỉ giữ một
       .filter((c) => { const k = Math.round(num(c.spent)) + "|" + Math.round(num(c.results)); if (seenC.has(k)) return false; seenC.add(k); return true; });
+    // đã có dòng cùng chi phí + lead của người này (từ ảnh khác chụp lại cùng chiến dịch) -> không lưu thêm
+    const fresh = chosen.filter((c) => {
+      const named = S.SoLieu.some((x) => x.nguon === "anh" && x.tuan === m.tuan && x.duAn === m.duAn && x.nhanSu === m.nhanSu && x.chienDich === c.name);
+      const lead = c.resultType === "lead" ? c.results || 0 : 0;
+      return named || !S.SoLieu.some((x) => effKey(x) === effKey({ tuan: m.tuan, duAn: m.duAn, nhanSu: m.nhanSu, nenTang: m.nenTang }) &&
+        sameNums(x, { chiPhi: c.spent, lead }));
+    });
+    if (fresh.length < chosen.length) toast(`Bỏ qua ${chosen.length - fresh.length} dòng trùng số với dòng đã lưu của ${m.nhanSu} (cùng chi phí và lead).`, "err");
+    chosen.splice(0, chosen.length, ...fresh);
     if (!chosen.length) return 0;
     const opt0 = (v) => (v != null && v !== "" ? v : "");
     const rows = chosen.map((c) => {

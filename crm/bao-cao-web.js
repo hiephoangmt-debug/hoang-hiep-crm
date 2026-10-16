@@ -27,8 +27,9 @@
 
   /** Số nhập tay / từ Sheet thay cho số đọc từ ảnh của cùng người · tuần (giống CRM). */
   function effective(rows) {
-    const solid = new Set(rows.filter((r) => r.nguon !== "anh").map((r) => r.tuan + "|" + r.nhanSu));
-    return rows.filter((r) => r.nguon !== "anh" || !solid.has(r.tuan + "|" + r.nhanSu));
+    const k = (r) => r.tuan + "|" + r.nhanSu + "|" + (r.nenTang || "Facebook");
+    const solid = new Set(rows.filter((r) => r.nguon !== "anh").map(k));
+    return rows.filter((r) => r.nguon !== "anh" || !solid.has(k(r)));
   }
   function sum(rows) {
     const t = { cost: 0, fee: 0, lead: 0, imp: 0, reach: 0, click: 0, view: 0, mql: 0, sql: 0, deal: 0 };
