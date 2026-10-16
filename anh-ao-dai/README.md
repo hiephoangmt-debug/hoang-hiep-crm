@@ -9,6 +9,9 @@ Mở `index.html` bằng trình duyệt (cần mạng để tải thư viện nh
 1. **Bỏ ảnh vào đây**: chọn một hoặc nhiều ảnh chân dung (hoặc kéo thả vào khung). Mỗi ảnh được tự
    nhận diện khuôn mặt (68 điểm mốc), tự xoay, thu phóng cho mắt, mũi, miệng trùng với ảnh mẫu và tự khớp
    màu da. Kết quả hiện thành danh sách, bấm vào từng ảnh để chỉnh thêm, **Tải tất cả ảnh** để lưu.
+   - **Lấy cả tóc của bạn** (mặc định): tách tóc trong ảnh bằng MediaPipe, xoá mái tóc gốc của ảnh mẫu
+     (lấp bằng màu nền xung quanh) rồi ghép cả mặt lẫn tóc, nên tóc dài, ngắn, xoăn đều giữ đúng của từng người.
+   - **Chỉ lấy khuôn mặt**: giữ tóc mẫu, có thể đổi sang kiểu tóc vẽ sẵn.
 2. **Chữ**: 3 mẫu (Elegant Woman, Duyên Dáng Việt, Happy Women's Day), sửa từng dòng, đổi phông
    (Playfair, Bodoni, Cormorant), kiểu chữ (hồng pha lê, hồng đậm, trắng viền hồng, vàng hồng), cỡ, vị trí.
    Mặc định chữ nằm sau đầu như mẫu.
@@ -22,6 +25,8 @@ kéo ảnh trên khung, lăn chuột hoặc chụm 2 ngón để phóng to/thu n
 
 - `index.html`: toàn bộ giao diện và xử lý (canvas 1492×2000).
 - `mau.js`: ảnh mẫu nhúng dạng base64.
+- `hair-model.js`: mô hình tách tóc `hair_segmenter` của MediaPipe (Apache-2.0), thư viện
+  `@mediapipe/tasks-vision` 0.10.21 tải từ jsDelivr.
 - `models.js`: mô hình `tiny_face_detector` và `face_landmark_68` của
   [@vladmandic/face-api](https://github.com/vladmandic/face-api) 1.7.15 (MIT), nhúng sẵn để chạy cả khi mở file trực tiếp.
 
