@@ -10,7 +10,7 @@ const SAMPLE_DATA = {
     address: 'Lô A2-1 & A2-2, trục Võ Nguyên Giáp – Trường Sa, P. Ngũ Hành Sơn, Đà Nẵng',
     floors: 30,
     totalUnits: 400,
-    amenities: 'Condotel ~400 căn, khối thương mại dịch vụ; cao ~117m; sàn XD >45.000 m²; đối diện Silver Shores',
+    amenities: 'Condotel ~400 căn, khối thương mại dịch vụ; cao ~117m; sàn XD >45.000 m²; phía trước là công viên biển theo quy hoạch',
     hotline: '0904567009',
     manager: 'Hoàng Hiệp',
     notes: 'CĐT: Công ty TNHH Quản lý và Dịch vụ Hạ tầng Kỹ thuật Miền Trung. Đang thi công.',

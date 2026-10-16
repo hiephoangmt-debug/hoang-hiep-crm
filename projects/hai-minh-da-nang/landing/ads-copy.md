@@ -11,7 +11,7 @@ không hứa lợi nhuận, không ghi "sở hữu lâu dài", không nhận c�
 ## Mẫu 1 – Ra mắt tháng 11 (ma-mau: ra-mat)
 🌊 CĂN HỘ DỊCH VỤ HẢI MINH ĐÀ NẴNG – DỰ KIẾN RA MẮT THÁNG 11/2026
 
-📍 Góc Trường Sa – Nguyễn Đức Thuận, trục biển Võ Nguyên Giáp, đối diện Silver Shores
+📍 Góc Trường Sa – Nguyễn Đức Thuận, trục biển Võ Nguyên Giáp, phía trước là công viên biển theo quy hoạch
 🏙 Tháp 30 tầng · khoảng 400 căn hộ du lịch mặt biển
 🛏 1PN 47 m² · 2PN · 2PN+1 · 3PN · Dual Key 101 m²
 📜 Đất thương mại dịch vụ, thời hạn 50 năm (9/2026 – 9/2076) theo Quyết định của UBND TP Đà Nẵng
@@ -43,7 +43,7 @@ Giá phòng ven biển trục Võ Nguyên Giáp hiện phổ biến khoảng 1 �
 Ví dụ minh họa: căn 3 tỷ, giá thuê 1,2 triệu/đêm, công suất 60%, chi phí vận hành 40% → thu nhập ròng khoảng 13 triệu/tháng.
 (Ví dụ minh họa, không phải cam kết lợi nhuận.)
 
-🏙 Căn hộ dịch vụ Hải Minh – 30 tầng mặt biển, đối diện Silver Shores, dự kiến ra mắt 11/2026.
+🏙 Căn hộ dịch vụ Hải Minh – 30 tầng mặt biển, phía trước là công viên biển theo quy hoạch, dự kiến ra mắt 11/2026.
 📊 Nhận bảng tính dòng tiền chi tiết theo từng căn: 0904 567 009
 
 Tiêu đề: Nhận bảng tính dòng tiền từng căn
@@ -66,7 +66,7 @@ Mô tả: Nhận hồ sơ dự án qua Zalo
 
 ## Mẫu 5 – Ngắn cho Reels/Story (ma-mau: ngan)
 Căn hộ mặt biển Võ Nguyên Giáp 🌊
-30 tầng · ~400 căn · đối diện Silver Shores
+30 tầng · ~400 căn · trước mặt công viên biển
 Dự kiến ra mắt 11/2026 – đăng ký ưu tiên ngay 👇
 📞 0904 567 009
 
@@ -93,7 +93,7 @@ Chữ trên video/ảnh (≤ 20% diện tích):
 ☀️ 5h30 sáng. Kéo rèm – biển Mỹ Khê ngay trước mặt.
 🏊 6h00 – đã xuống biển. 🥐 8h00 – cà phê view biển. 🌅 18h00 – hoàng hôn trên ban công tầng cao.
 
-Đó là một ngày bình thường ở CĂN HỘ DỊCH VỤ HẢI MINH ĐÀ NẴNG – tháp 30 tầng ngay mặt biển Võ Nguyên Giáp, đối diện Silver Shores.
+Đó là một ngày bình thường ở CĂN HỘ DỊCH VỤ HẢI MINH ĐÀ NẴNG – tháp 30 tầng ngay mặt biển Võ Nguyên Giáp, phía trước là công viên biển theo quy hoạch.
 
 🌊 Biển trước nhà · Resort quanh nhà · An Thượng, Ngũ Hành Sơn, Hội An trong tầm tay
 🔥 Dự kiến ra mắt tháng 11/2026 – căn view biển trực diện luôn được chọn trước.
@@ -128,7 +128,7 @@ Mô tả: Đăng ký ưu tiên trước ngày ra mắt 11/2026
 
 Dọc Võ Nguyên Giáp – Trường Sa, quỹ đất sát biển gần như đã kín resort và khách sạn. Mỗi dự án căn hộ mặt biển mới đều là cơ hội không nhiều.
 
-🏙 HẢI MINH – tháp 30 tầng ngay mặt biển, đối diện Silver Shores
+🏙 HẢI MINH – tháp 30 tầng ngay mặt biển, phía trước là công viên biển theo quy hoạch
 🛏 1PN 47 m² đến Dual Key 101 m² – vừa nghỉ dưỡng, vừa cho thuê
 🔥 Dự kiến ra mắt tháng 11/2026
 
