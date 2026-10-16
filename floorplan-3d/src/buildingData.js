@@ -167,6 +167,11 @@ GARDEN_AREA['07'] = GARDEN_AREA['06'];
 GARDEN_AREA['02'] = Object.fromEntries(Object.entries(F2_APTS).filter(([, v]) => v[2]).map(([k, v]) => [k, [v[2], v[3]]]));
 /** Diện tích sân vườn của căn (null nếu không có) */
 export function gardenOf(floor, slot) { const a = GARDEN_AREA[floor]?.[slot]; return a ? { tim: a[0], tt: a[1] } : null; }
+/**
+ * Chỉnh dáng sân vườn riêng theo vị trí khi khác căn mẫu (đối chiếu bản vẽ tầng):
+ * căn 05 chỉ có 1 dải BC phía trước bo góc tòa (không ôm chữ L như căn 24).
+ */
+export const GARDEN_SHAPE = { '05': { wrap: null, round: 'start' } };
 /** Căn mẫu sân vườn tương ứng với căn gốc */
 export const GARDEN_UNIT = { '1pn-plus-b': 'sv-1pn-plus', '2pn-1wc': 'sv-2pn-1wc', '2pn-b': 'sv-2pn-2wc', '3pn': 'sv-3pn', studio: 'sv-studio', 'studio-b': 'sv-studio-b', '1pn': 'sv-1pn', '1pn-plus-c': 'sv-1pn-plus-l', '2pn-a': 'sv-2pn-a' };
 
