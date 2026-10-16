@@ -23,6 +23,7 @@ from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
 import requests
+import urllib3
 from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parent
@@ -53,14 +54,34 @@ def matched_keywords(text):
     return [k for k in KEYWORDS if re.search(r"(?<!\w)" + re.escape(k) + r"(?!\w)", t)]
 
 
-def fetch(url):
-    r = requests.get(url, headers=HEADERS, timeout=30)
-    r.raise_for_status()
-    return r.content
+def fetch(url, src=None):
+    """Tải trang. Với nguồn .gov.vn khó tính:
+    - fallback_urls: thử thêm địa chỉ khác (vd http://) khi https không vào được;
+    - ssl_fallback: trang thiếu chứng chỉ trung gian thì vẫn đọc (chỉ đọc tin công khai);
+    - vn_proxy: đi qua proxy Việt Nam (secret VN_PROXY_URL) nếu trang chặn IP nước ngoài.
+    """
+    src = src or {}
+    proxy = os.environ.get("VN_PROXY_URL", "").strip() if src.get("vn_proxy") else ""
+    proxies = {"http": proxy, "https": proxy} if proxy else None
+    last_err = None
+    for u in [url] + src.get("fallback_urls", []):
+        try:
+            try:
+                r = requests.get(u, headers=HEADERS, timeout=(15, 30), proxies=proxies)
+            except requests.exceptions.SSLError:
+                if not src.get("ssl_fallback"):
+                    raise
+                urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+                r = requests.get(u, headers=HEADERS, timeout=(15, 30), proxies=proxies, verify=False)
+            r.raise_for_status()
+            return r.content
+        except requests.RequestException as e:
+            last_err = e
+    raise last_err
 
 
 def parse_rss(src):
-    soup = BeautifulSoup(fetch(src["url"]), "xml")
+    soup = BeautifulSoup(fetch(src["url"], src), "xml")
     items = []
     for it in soup.find_all(["item", "entry"]):
         title = clean(it.title.get_text()) if it.title else ""
@@ -87,7 +108,7 @@ SKIP_LINK = re.compile(r"(lien-he|dang-nhap|so-do|tim-kiem|rss|javascript:|mailt
 def parse_html(src):
     base = src["url"]
     host = urlparse(base).netloc
-    soup = BeautifulSoup(fetch(base), "html.parser")
+    soup = BeautifulSoup(fetch(base, src), "html.parser")
     for tag in soup(["header", "footer", "nav", "script", "style"]):
         tag.decompose()
     items, seen = [], set()
