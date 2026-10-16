@@ -224,13 +224,13 @@ UNIT_SPECS.push(
 
 // Căn sân vườn tầng 3 (trên mái khối đế): dùng mặt bằng căn gốc + sân vườn phía mặt tiền; ảnh 2D là phối cảnh chủ đầu tư
 UNIT_SPECS.push(
-  { id: 'sv-1pn-plus', name: 'Sân vườn · 1 PN+', type: '1PN+', garden: { base: '1pn-plus-b', depth: 3.2 } },
-  { id: 'sv-2pn-1wc', name: 'Sân vườn · 2 PN 1 WC', type: '1PN+', garden: { base: '2pn-1wc', depth: 3.0 } },
-  { id: 'sv-2pn-2wc', name: 'Sân vườn · 2 PN 2 WC', type: '2PN', garden: { base: '2pn-b', depth: 2.8 } },
-  { id: 'sv-studio', name: 'Sân vườn · Studio', type: 'Studio', garden: { base: 'studio', depth: 2.6 } },
-  { id: 'sv-studio-b', name: 'Sân vườn · Studio dài', type: 'Studio', garden: { base: 'studio-b', depth: 2.6 } },
-  { id: 'sv-1pn', name: 'Sân vườn · 1 PN', type: '1PN', garden: { base: '1pn', depth: 2.8 } },
-  { id: 'sv-1pn-plus-l', name: 'Sân vườn · 1 PN+ (9,6 m)', type: '1PN+', garden: { base: '1pn-plus', depth: 3.0 } },
-  { id: 'sv-2pn-a', name: 'Sân vườn · 2 PN góc', type: '2PN', garden: { base: '2pn-a', depth: 3.0 } },
-  { id: 'sv-3pn', name: 'Sân vườn · 3 PN', type: '3PN', garden: { base: '3pn', depth: 3.2, wrap: 'top' } },
+  { id: 'sv-1pn-plus', name: 'Sân vườn · 1 PN+', type: '1PN+', garden: { base: '1pn-plus-b', area: 10.3 } },
+  { id: 'sv-2pn-1wc', name: 'Sân vườn · 2 PN 1 WC', type: '1PN+', garden: { base: '2pn-1wc', area: 18.2 } },
+  { id: 'sv-2pn-2wc', name: 'Sân vườn · 2 PN 2 WC', type: '2PN', garden: { base: '2pn-b', area: 9.3 } },
+  { id: 'sv-studio', name: 'Sân vườn · Studio', type: 'Studio', garden: { base: 'studio', area: 8.0 } },
+  { id: 'sv-studio-b', name: 'Sân vườn · Studio dài', type: 'Studio', garden: { base: 'studio-b', area: 9.8 } },
+  { id: 'sv-1pn', name: 'Sân vườn · 1 PN', type: '1PN', garden: { base: '1pn', area: 6.2 } },
+  { id: 'sv-1pn-plus-l', name: 'Sân vườn · 1 PN+ (9,6 m)', type: '1PN+', garden: { base: '1pn-plus', area: 15.9 } },
+  { id: 'sv-2pn-a', name: 'Sân vườn · 2 PN góc', type: '2PN', garden: { base: '2pn-a', area: 20.0 } },
+  { id: 'sv-3pn', name: 'Sân vườn · 3 PN', type: '3PN', garden: { base: '3pn', area: 47.6, wrap: 'top' } },
 );

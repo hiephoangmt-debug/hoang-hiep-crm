@@ -241,7 +241,7 @@ export function gardenUnit(base, spec) {
   }
   const best = Object.entries(score).sort((a, b) => b[1] - a[1])[0];
   const side = spec.garden.side || (best[1] > 0 ? best[0] : nearSide(c)[0]);
-  const D = spec.garden.depth || 3;
+  let D = spec.garden.depth || 3;
   // Hệ toạ độ cục bộ của sân: u dọc mép mặt tiền, v hướng ra ngoài
   const onEdge = (pt) => side === 'top' ? Math.abs(pt.y - bb.y0) < 0.35 : side === 'bottom' ? Math.abs(pt.y - bb.y1) < 0.35 : side === 'left' ? Math.abs(pt.x - bb.x0) < 0.35 : Math.abs(pt.x - bb.x1) < 0.35;
   // Sân chỉ chạy dọc đoạn tường thật của căn ở mặt đó (căn chữ L không bị sân thò ra ngoài phần khuyết)
@@ -254,6 +254,20 @@ export function gardenUnit(base, spec) {
   const e0 = Math.min(...pts.map(along)) - 0.1, e1 = Math.max(...pts.map(along)) + 0.1;
   const o = horiz ? e0 - bb.x0 : e0 - bb.y0;
   const L = e1 - e0;
+  // Độ sâu sân tự tính cho diện tích thông thủy sân vườn khớp bảng của chủ đầu tư (spec.garden.area)
+  if (spec.garden.area) {
+    let L2b = 0;
+    if (spec.garden.wrap) {
+      const w2 = spec.garden.wrap, hz = w2 === 'top' || w2 === 'bottom';
+      const dp = (pt) => w2 === 'top' ? pt.y - bb.y0 : w2 === 'bottom' ? bb.y1 - pt.y : w2 === 'left' ? pt.x - bb.x0 : bb.x1 - pt.x;
+      const rp2 = plan.rooms.filter((r) => Math.min(...r.points.map(dp)) < 0.5).flatMap((r) => r.points).map((q) => (hz ? q.x : q.y));
+      L2b = Math.max(...rp2) - Math.min(...rp2) + 0.2;
+    }
+    const area = (d) => L * d + (spec.garden.wrap ? (L2b + d) * d - (1 - Math.PI / 4) * d * d : 0);
+    let lo = 0.8, hi = 4.5;
+    for (let i = 0; i < 40; i++) { const m = (lo + hi) / 2; if (area(m) > spec.garden.area) hi = m; else lo = m; }
+    D = +lo.toFixed(2);
+  }
   const P = (u, v) => side === 'top' ? { x: bb.x0 + o + u, y: bb.y0 - v } : side === 'bottom' ? { x: bb.x0 + o + u, y: bb.y1 + v } : side === 'left' ? { x: bb.x0 - v, y: bb.y0 + o + u } : { x: bb.x1 + v, y: bb.y0 + o + u };
   // Bỏ tường + lan can giữa lô gia và sân vườn: lô gia thông thẳng ra sân (không còn hàng thanh rào)
   const inward = { top: [0, 0.3], bottom: [0, -0.3], left: [0.3, 0], right: [-0.3, 0] }[side];
@@ -284,17 +298,27 @@ export function gardenUnit(base, spec) {
   const rotU = side === 'top' || side === 'bottom' ? 0 : 90; // xoay để cạnh dài của đồ chạy dọc mép sân
   // Sân vườn kiểu resort: luống cây nhiệt đới + hoa dọc tường lửng, viền sỏi trắng, cây dừa ở góc,
   // sàn gỗ có 2 ghế nằm + dù che, lối đá bước trên cỏ từ cửa nhà ra sàn gỗ
-  add('shrubBed', L / 2, D - 0.4, rotU, { w: L - 0.3, d: 0.6 });
-  add('pebbles', L / 2, D - 0.82, rotU, { w: L - 1.2, d: 0.24 });
-  add('shrubBed', L - 0.36, (D - 0.7) / 2, (rotU + 90) % 360, { w: D - 1.0, d: 0.5 });
-  add('palm', 0.7, D - 0.7, 0, { h: 3.0 });
-  const dw = Math.min(2.9, L * 0.45), dd = D - 1.05;
-  add('deck', 0.1 + dw / 2, 0.15 + dd / 2, rotU, { w: dw, d: dd });
-  add('lounger', 0.1 + dw * 0.3, 0.15 + dd / 2, (rotOut + 180) % 360, { w: 0.68, d: Math.min(1.8, dd - 0.1) });
-  add('lounger', 0.1 + dw * 0.72, 0.15 + dd / 2, (rotOut + 180) % 360, { w: 0.68, d: Math.min(1.8, dd - 0.1) });
-  add('shrubBed', L - 0.36, D - 0.4, rotU, { w: 0.6, d: 0.6 });
+  // sân hẹp: luống cây mỏng hơn, bỏ sàn gỗ / ghế nằm cho khỏi chật
+  const bedD = D < 1.6 ? 0.4 : 0.6;
+  add('shrubBed', L / 2, D - bedD / 2 - 0.1, rotU, { w: L - 0.3, d: bedD });
+  if (D >= 1.6) add('pebbles', L / 2, D - bedD - 0.22, rotU, { w: L - 1.2, d: 0.24 });
+  if (D >= 2.0) add('shrubBed', L - 0.36, (D - 0.7) / 2, (rotU + 90) % 360, { w: D - 1.0, d: 0.5 });
+  add('palm', 0.6, D - 0.55, 0, { h: D < 1.8 ? 2.4 : 3.0 });
+  let dw = 0;
+  if (D >= 2.3) {
+    dw = Math.min(2.9, L * 0.45); const dd = D - 1.05;
+    add('deck', 0.1 + dw / 2, 0.15 + dd / 2, rotU, { w: dw, d: dd });
+    add('lounger', 0.1 + dw * 0.3, 0.15 + dd / 2, (rotOut + 180) % 360, { w: 0.68, d: Math.min(1.8, dd - 0.1) });
+    add('lounger', 0.1 + dw * 0.72, 0.15 + dd / 2, (rotOut + 180) % 360, { w: 0.68, d: Math.min(1.8, dd - 0.1) });
+    add('shrubBed', L - 0.36, D - 0.4, rotU, { w: 0.6, d: 0.6 });
+  } else if (D >= 1.7 && L > 3 && !spec.garden.wrap) {
+    // sân vừa: bộ bàn trà nhỏ 2 ghế
+    add('roundTable', 1.6, (D - bedD) / 2, 0, { w: 0.55, d: 0.55 });
+    for (const [du, r] of [[-0.55, 90], [0.55, 270]]) add('chair', 1.6 + du, (D - bedD) / 2, (r + rotOut) % 360, { color: '#cbb894' });
+    dw = 2.3;
+  }
   let k = 0;
-  for (let u = dw + 0.55; u < L - 0.9; u += 0.52) add('steppingStone', u, 0.45 + (k++ % 2 ? 0.05 : -0.05), rotU, { w: 0.46, d: 0.36 });
+  if (D >= 1.3) for (let u = dw + 0.55; u < L - 0.9; u += 0.52) add('steppingStone', u, Math.min(0.45, (D - bedD) / 2) + (k++ % 2 ? 0.05 : -0.05), rotU, { w: 0.46, d: 0.36 });
   if (wrap) {
     // Dải sân thứ hai: chạy dọc mép 'wrap', kéo dài qua ô góc để nối liền với dải chính
     const h2 = wrap === 'top' || wrap === 'bottom';
@@ -338,7 +362,7 @@ export function gardenUnit(base, spec) {
     }
     const far = farAtStart ? 0.9 : L2 - 0.9, cor = farAtStart ? L2 - D / 2 : D / 2;
     add2('palm', far, D - 0.75, 0, { h: 3.2 });
-    for (const k of [0.3, 0.55]) add2('lounger', farAtStart ? L2 * k : L2 * (1 - k), (D - 0.7) / 2 + 0.05, (rOut2 + 180) % 360, { w: 0.68, d: Math.min(1.8, D - 1.0) });
+    if (D >= 2.3) for (const k of [0.3, 0.55]) add2('lounger', farAtStart ? L2 * k : L2 * (1 - k), (D - 0.7) / 2 + 0.05, (rOut2 + 180) % 360, { w: 0.68, d: Math.min(1.8, D - 1.0) });
     // bàn tròn 4 ghế đặt giữa ô góc bo, cách luống hoa
     const rr = Math.max(0.9, R - 1.75), tu = farAtStart ? L2 - R + rr * Math.SQRT1_2 : R - rr * Math.SQRT1_2, tv = rr * Math.SQRT1_2;
     add2('roundTable', tu, tv, 0, { w: 0.75, d: 0.75 });
