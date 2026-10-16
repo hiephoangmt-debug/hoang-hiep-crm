@@ -41,7 +41,7 @@ jobs:
       - run: pip install -r requirements.txt
       - run: python publish_digest.py
         env:
-          WP_USER: ${{ secrets.WP_USER }}
+          WP_USER: ${{ secrets.WP_USER || vars.WP_USER }}
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
           DIGEST_DATE: ${{ inputs.date }}
           WP_STATUS: ${{ inputs.draft && 'draft' || 'publish' }}
