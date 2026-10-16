@@ -3,6 +3,7 @@
  * Dán toàn bộ file này vào Extensions > Apps Script của file "CRM Hoàng Hiệp", rồi Deploy > Web app.
  * File này được sinh từ google/Code.template.gs bằng `node google/build.mjs` – đừng sửa tay trong Code.gs.
  */
+var CRM_VER = 'ui-45';
 var S_LEADS = 'Khách hàng', S_EVENTS = 'Hoạt động', S_SITES = 'Website', S_CLICKS = 'Lượt bấm';
 var STATUS_NEW = 'Mới', STATUS_CONTACTED = 'Đã liên hệ';
 var TRACK_JS = /*__TRACK_JS__*/'';
@@ -25,7 +26,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-44', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: CRM_VER, hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -131,7 +132,7 @@ function summaries_() {
 // ---- API cho giao diện (google.script.run) ----
 function crmLoad(k) {
   requireUi_(k);
-  var ss = ss_(), out = { user: '', now: new Date().toISOString() };
+  var ss = ss_(), out = { user: '', now: new Date().toISOString(), ver: CRM_VER };
   var sh = ss.getSheetByName(S_LEADS), n = lastDataRow_(sh, 2);
   ensureLeadCols_(sh);
   var rows = n > 1 ? sh.getRange(2, 1, n - 1, LEAD_COLS).getValues() : [];

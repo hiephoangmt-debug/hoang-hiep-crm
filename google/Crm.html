@@ -134,6 +134,7 @@ code,pre{background:#F3F5FA;border:1px solid var(--line);border-radius:10px;font
 <div class="gbar" id="gbar"></div>
 <div id="diag"></div>
 <main id="main"><p class="mut">Đang tải…</p></main>
+<div class="small mut" id="ver" style="position:relative;z-index:1;text-align:center;padding:0 0 70px"></div>
 <dialog id="dlg"><div class="dlg" id="dlgBody"></div></dialog>
 <button id="fab" class="fab" aria-label="Hỏi quân sư AI">Hỏi quân sư</button>
 <section id="chat" class="chat" hidden aria-label="Hỏi quân sư"><div class="chead"><b>Hỏi quân sư</b><span class="sp"></span><button class="btn sm" id="chatx" aria-label="Đóng">Đóng</button></div><div class="cbody" id="chatBody"></div></section>
@@ -141,6 +142,7 @@ code,pre{background:#F3F5FA;border:1px solid var(--line);border-radius:10px;font
 
 <script>
 window.onerror = function (m, s, l) { var d = document.getElementById('diag'); if (d) d.textContent = 'Lỗi trang: ' + m + (l ? ' (dòng ' + l + ')' : ''); };
+var UI_VER = 'ui-45';
 var KEY = /*__KEY__*/'', D = null, tab = 'home', F = { status: 'todo', site: '', q: '', clicks: 'todo', cw: '', cch: '', cd: 'all', src: '', as: '', sort: 'new', prov: '', bud: '', when: '', sc: '', sd: 'asc', page: 1, df: '', dt: '', cf: '', ct: '', area: '', proj: '', dim: 'area' }, G = '';
 try { G = localStorage.getItem('crm_group') || ''; } catch (e) {}
 var STATUS = ['Mới', 'Đã liên hệ', 'Đang tư vấn', 'Đang cân nhắc', 'Quan tâm', 'Hẹn xem', 'Đã xem dự án', 'Đang thương lượng', 'Booking', 'Chốt', 'Mất', 'Tạm dừng'];
@@ -181,7 +183,7 @@ function ensureKey() {
   return new Promise(function (ok) { google.script.run.withSuccessHandler(function (k) { KEY = k || ''; ok(); }).withFailureHandler(function () { ok(); }).crmDialogKey(); });
 }
 function load() {
-  return ensureKey().then(function () { return run('crmLoad'); }).then(function (d) { D = d; $('#who').textContent = d.user; badges(); render(); }).catch(function (e) { $('#main').innerHTML = '<div class="card">Không tải được dữ liệu: ' + esc(e.message) + '<br><span class="mut">[khoá: ' + (KEY ? 'có' : 'trống') + '] Nếu khoá trống: dán lại cả Mã.gs và Crm.html mới nhất rồi mở menu CRM → Mở giao diện CRM. Mở bằng link web thì dùng menu CRM → Link vào CRM.</span></div>'; });
+  return ensureKey().then(function () { return run('crmLoad'); }).then(function (d) { D = d; $('#who').textContent = d.user; $('#ver').textContent = 'Giao diện ' + UI_VER + ' · Mã GS ' + (d.ver || 'cũ, chưa cập nhật'); badges(); render(); }).catch(function (e) { $('#main').innerHTML = '<div class="card">Không tải được dữ liệu: ' + esc(e.message) + '<br><span class="mut">[khoá: ' + (KEY ? 'có' : 'trống') + '] Nếu khoá trống: dán lại cả Mã.gs và Crm.html mới nhất rồi mở menu CRM → Mở giao diện CRM. Mở bằng link web thì dùng menu CRM → Link vào CRM.</span></div>'; });
 }
 function updateMenu() {
   var act = document.querySelector('#nav button.on'); $('#curtab').textContent = act ? act.childNodes[0].textContent.trim() : 'Menu';
