@@ -1201,7 +1201,13 @@
         if (/\/\s*ngay|ngan sach/.test(N[i])) continue;
         money(lines[i]).forEach((m) => ms.push(m.v));
       }
-      const cpc = ms.length > 1 ? Math.min(...ms) : row.cpc || 0;
+      let cpc = ms.length > 1 ? Math.min(...ms) : row.cpc || 0;
+      // có lượt nhấp: CPC là số tiền mà lượt nhấp × CPC ≈ một số tiền khác (chi phí) – tránh lấy nhầm số chênh lệch "↑ 3.173 đ"
+      if (row.clicks) {
+        const costs = ms.concat(row.cost ? [row.cost] : []);
+        const fit = ms.find((m) => costs.some((c) => c > m && Math.abs(row.clicks * m - c) <= c * 0.02));
+        if (fit) cpc = fit;
+      }
       const strip = (v) => { const t = String(v); return t.length > 4 ? Number(t.slice(1)) : 0; };
       const cands = Array.from(new Set([row.cost].concat(ms, ms.map(strip)).filter((v) => v && v > cpc)));
       let cost = 0;
@@ -1273,6 +1279,24 @@
   }
 
   /**
+   * Dòng chiến dịch trong bảng Google Ads: "... 478  24  5,02%  459.066 đ" (hiển thị, lượt nhấp, CTR, chi phí).
+   * Nhận khi hiển thị × CTR ≈ lượt nhấp (OCR hay mất dấu phẩy của CTR: "502%" = 5,02%).
+   */
+  function googleTableRow(lines, N) {
+    const TOK = /(\d{1,3}(?:[.,]\d{3})+|\d+(?:,\d+)?)\s*(%|đ|₫|d\b)?/g;
+    for (const line of lines.slice().reverse()) {
+      const t = Array.from(line.matchAll(TOK)).map((m) => ({ s: m[1], v: m[2] === "%" ? parseFloat(m[1].replace(",", ".")) : Math.round(toNum(m[1])), u: m[2] || "" }));
+      for (let i = t.length - 4; i >= 0; i--) { // cột Chi phí nằm cuối dòng: xét từ phải sang
+        const [imp, clk, ctr, cost] = t.slice(i, i + 4);
+        if (imp.u || clk.u || ctr.u !== "%" || cost.u === "%" || !clk.v || imp.v < clk.v || cost.v < 1000) continue;
+        const ok = [ctr.v, ctr.v / 10, ctr.v / 100].some((p) => p <= 100 && Math.abs((imp.v * p) / 100 - clk.v) <= Math.max(1, clk.v * 0.03));
+        if (ok) return finishGoogle(lines, N, { cost: cost.v, clicks: clk.v, impressions: imp.v });
+      }
+    }
+    return null;
+  }
+
+  /**
    * Thẻ chỉ số nằm NGANG (ảnh chụp máy tính): một dòng chứa nhiều nhãn
    * "Lần nhấp  Lượt hiển thị  CPC Tr.bình  Chi phí", dòng số ngay sau "10  135  15.399 đ  153.988 đ".
    */
@@ -1325,7 +1349,8 @@
     }
     // bỏ ký tự rác OCR quanh tên ("A ¢ | E Seerch-ToaF2-lead ~ Q Cc 9")
     if (name.includes("|")) name = name.split("|").pop();
-    name = name.split(/\s[~»>]\s/)[0].replace(/^(?:[^\p{L}\d[]+|\p{L}\s+(?=\S{4,}))+/u, "").trim();
+    if (/\[(search|pmax|display|video|tim kiem)/i.test(name)) name = name.slice(name.search(/\[(search|pmax|display|video|tim kiem)/i));
+    name = name.split(/\s[~»>_]\s/)[0].replace(/^(?:[^\p{L}\d[]+|\p{L}\s+(?=\S{4,}))+/u, "").trim();
     const d = N.map((n) => /thang\s*(\d{1,2})\s+(\d{1,2})\s*[-–—‒]\s*\d{1,2}/.exec(n) || /(\d{1,2})\s*thg\s*(\d{1,2})/.exec(n)).find(Boolean);
     const date = d ? (/thang/.test(d[0]) ? `${d[2]}/${d[1]}` : `${d[1]}/${d[2]}`) : "";
     return { name: name || (date ? "Chiến dịch " + date : "Chiến dịch"), spent: cost, results: val.conv != null ? val.conv : null, resultType: val.conv != null ? "lead" : "",
@@ -1383,7 +1408,7 @@
       if (g) return [g];
     }
     if (isGoogle) {
-      const g = googleCards(lines, N);
+      const g = googleCards(lines, N) || googleTableRow(lines, N);
       if (g) return [g];
     }
     const SPENT_C = /(chitieu|sotiendachi)/;
