@@ -330,6 +330,11 @@
     ctx.fillRect(0, 0, this.W, this.H);
     this.talkNow = null;
     this.faceBox = null;
+    this.covered = false;
+    this.listBox = null;
+    // Nút LIÊN HỆ NGAY cuối video: chữ động tránh chỗ này
+    var pl = this.timeline.pill, pu = this.unit, py = this.H - (this.W > this.H ? 130 : 330) * pu;
+    this.pillBox = pl && t >= pl.start - 0.5 ? { top: py - 60 * pu, bottom: py + 60 * pu } : null;
     this.drawBackground(t);
     this.drawCovers(t);
     this.drawGrade(t);
@@ -485,6 +490,13 @@
       x = clamp(x, 30 * u, W - bw - 30 * u);
       y = clamp(fb.y + fb.h * 1.2, 120 * u, H - bh - 200 * u);
     } else { x = 50 * u; y = H * 0.62; }
+    var lb = this.listBox;
+    if (lb && y < lb.bottom && y + bh > lb.top) {
+      // Danh sách chữ đang ở bên trái: đưa khung tên lên trên danh sách, hết chỗ thì sang phải
+      var above = lb.top - bh - 16 * u, fb2 = this.faceBand();
+      if (above > H * 0.1 && !(fb2 && above < fb2.bottom && above + bh > fb2.top)) y = above;
+      else x = W - bw - 50 * u;
+    }
     ctx.globalAlpha *= a;
     ctx.translate((1 - easeOut(local / 0.35)) * -40 * u, 0);
     roundRect(ctx, x, y, bw, bh, 18 * u);
@@ -633,6 +645,7 @@
       if (t < c.start || t > c.start + c.duration) continue;
       var a = clamp(Math.min((t - c.start) / 0.25, (c.start + c.duration - t) / 0.25), 0, 1);
       this.drawItem(c, t, easeInOut(a));
+      if (a > 0.5) this.covered = true;
       if (this.project.settings.pip !== false) {
         var base = this.timeline.items.filter(function (it) { return it.audio && !it.hidden && t >= it.start && t < it.start + it.duration; })[0];
         if (base) this.drawPip(base, t, easeInOut(a));
@@ -706,13 +719,40 @@
     ctx.restore();
   };
 
+  /** Người nói đang hiện toàn khung (không bị phối cảnh che). */
+  Renderer.prototype.personOnScreen = function () { return !!(this.talkNow && !this.covered); };
+
+  /**
+   * Vùng mặt + đầu người nói cần chừa ra (toạ độ y). Chưa nhận diện được mặt thì
+   * đoán theo khung quay thường gặp: đầu nằm khoảng 20%–58% chiều cao.
+   */
+  Renderer.prototype.faceBand = function () {
+    if (!this.personOnScreen()) return null;
+    var fb = this.faceBox, H = this.H;
+    if (fb) return { top: fb.y - fb.h * 0.45, bottom: fb.y + fb.h * 1.6 };
+    return { top: H * 0.2, bottom: H * 0.58 };
+  };
+
+  /** Chọn tâm y đầu tiên trong danh sách mà khối cao h không đè lên mặt / khối chữ khác. */
+  Renderer.prototype.placeBlock = function (h, centers, avoid) {
+    var H = this.H, lo = H * 0.09, hi = H * 0.87, m = 14 * this.unit;
+    for (var i = 0; i < centers.length; i++) {
+      var top = clamp(centers[i] * H - h / 2, lo, Math.max(lo, hi - h)), bot = top + h;
+      var ok = bot <= hi + 1 && avoid.every(function (b) { return !b || bot + m <= b.top || top - m >= b.bottom; });
+      if (ok) return top + h / 2;
+    }
+    return null;
+  };
+
   /** Chữ lớn hiệu ứng: từng dòng xuất hiện lần lượt; dòng có con số được tô màu chủ đạo. */
   Renderer.prototype.drawBigText = function (lines, local, duration, opt) {
     opt = opt || {};
     var ctx = this.ctx, W = this.W, H = this.H, u = this.unit;
     var fx = this.project.settings.textFx || 'pop';
     var maxW = W - 150 * u;
-    var size = Math.round((opt.big ? 92 : 84) * u);
+    // Có người nói trên hình: chữ nhỏ lại, đặt tránh mặt, hiện xong thì ẩn đi để lộ người
+    var person = !opt.big && this.personOnScreen();
+    var size = Math.round((opt.big ? 92 : person ? 56 : 84) * u);
     ctx.font = '900 ' + size + 'px ' + FONT;
     var rows = [];
     lines.forEach(function (l) { wrapText(ctx, String(l).toUpperCase(), maxW - 70 * u).forEach(function (r, j) { rows.push({ t: r, src: l, first: j === 0 }); }); });
@@ -721,10 +761,22 @@
     if (widest > maxW - 70 * u) size = Math.floor(size * (maxW - 70 * u) / widest);
     size = Math.max(Math.round(40 * u), size);
     ctx.font = '900 ' + size + 'px ' + FONT;
-    var bh = size * 1.42, gap = 16 * u;
+    var bh = size * 1.42, gap = (person ? 10 : 16) * u;
     var totalH = rows.length * bh + (rows.length - 1) * gap;
-    var y0 = (opt.big ? H * 0.5 : H * (W > H ? 0.48 : 0.44)) - totalH / 2;
+    var cy = opt.big ? H * 0.5 : H * (W > H ? 0.48 : 0.44);
+    if (person) cy = this.placeBlock(totalH, [0.74, 0.8, 0.66, 0.2], [this.faceBand(), this.pillBox]) || H * 0.76;
+    var y0 = cy - totalH / 2;
     var step = opt.fast ? 0.18 : 0.5, delay = opt.fast ? 0.05 : 0.25;
+    var nLines = lines.length;
+    if (person) {
+      // Giữ danh sách 3 giây sau dòng cuối rồi ẩn đi
+      var hideAt = delay + nLines * step + 3;
+      var keep = clamp((hideAt + 0.35 - local) / 0.35, 0, 1);
+      if (keep <= 0) return;
+      ctx.save();
+      ctx.globalAlpha *= keep;
+    }
+    if (local > delay) this.listBox = { top: y0, bottom: y0 + totalH };
     var li = -1;
     var theme = this.theme;
     rows.forEach(function (r, i) {
@@ -734,7 +786,7 @@
       if (p <= 0) return;
       var hasNum = /\d/.test(r.src);
       var w = ctx.measureText(r.t).width + 70 * u;
-      var x = (W - w) / 2, y = y0 + i * (bh + gap);
+      var x = person ? 48 * u : (W - w) / 2, y = y0 + i * (bh + gap);
       var text = r.t;
       ctx.save();
       if (fx === 'slide') {
@@ -801,6 +853,7 @@
       ctx.fillText(text, x + 35 * u, y + bh / 2 + 3 * u);
       ctx.restore();
     });
+    if (person) ctx.restore();
   };
 
   /** Gom chữ thành từng cụm ngắn (tối đa 3 chữ) để hiện kiểu TikTok. */
@@ -863,20 +916,39 @@
       return x;
     };
     var bigText = st.big.map(label).join(' ').toUpperCase();
-    var bigSize = Math.round((land ? 150 : 190) * u);
-    ctx.font = '900 ' + bigSize + 'px ' + FONT;
-    var bigW = ctx.measureText(bigText).width;
-    if (bigW > maxW) { bigSize = Math.floor(bigSize * maxW / bigW); ctx.font = '900 ' + bigSize + 'px ' + FONT; bigW = ctx.measureText(bigText).width; }
-    var leadW = st.lead.length ? lineW(st.lead) : 0, trailW = st.trail.length ? lineW(st.trail) : 0;
-    var gap = 6 * u;
-    var hLead = st.lead.length ? smallSize * 1.25 : 0, hTrail = st.trail.length ? smallSize * 1.25 : 0, hBig = bigSize * 1.02;
-    var total = hLead + hBig + hTrail + gap * 2;
     var S = this.project.settings, V = window.BdsVision;
-    var behindOk = S.textBehind !== false && V && V.ready() && this.talkNow && this.faceBox;
-    var upper = st.idx % 2 === 1;
-    // Mặt người ở nửa trên: chỉ đặt chữ trên đầu khi vẽ được "chữ nằm sau người", còn lại để dưới
-    if (upper && this.faceBox && !behindOk && S.faceTrack !== false) upper = (this.faceBox.y + this.faceBox.h / 2) > H * 0.5;
-    var cy = H * (upper ? (land ? 0.3 : 0.27) : (land ? 0.68 : 0.66));
+    var person = this.personOnScreen();
+    var behindOk = S.textBehind !== false && V && V.ready() && person && this.faceBox;
+    var bigSize, bigW, leadW, trailW, gap, hLead, hTrail, hBig, total;
+    var layout = function (k) {
+      smallSize = Math.round((land ? 50 : 60) * u * Math.max(0.8, k));
+      bigSize = Math.round((land ? 150 : 190) * u * k);
+      ctx.font = '900 ' + bigSize + 'px ' + FONT;
+      bigW = ctx.measureText(bigText).width;
+      if (bigW > maxW) { bigSize = Math.floor(bigSize * maxW / bigW); ctx.font = '900 ' + bigSize + 'px ' + FONT; bigW = ctx.measureText(bigText).width; }
+      leadW = st.lead.length ? lineW(st.lead) : 0;
+      trailW = st.trail.length ? lineW(st.trail) : 0;
+      gap = 6 * u;
+      hLead = st.lead.length ? smallSize * 1.25 : 0;
+      hTrail = st.trail.length ? smallSize * 1.25 : 0;
+      hBig = bigSize * 1.02;
+      total = hLead + hBig + hTrail + gap * 2;
+    };
+    // Tầng chữ xen kẽ trên/dưới, nhưng không đè lên mặt người nói và khung danh sách
+    var upPos = land ? 0.3 : 0.27, downPos = land ? 0.68 : 0.66;
+    var centers = st.idx % 2 === 1 ? [upPos, downPos, 0.76, 0.18] : [downPos, 0.76, upPos, 0.18];
+    var avoid = [this.listBox, this.pillBox, behindOk ? null : this.faceBand()];
+    var cy = null, scales = person ? [0.8, 0.62] : [1, 0.75];
+    for (var si = 0; si < scales.length && cy == null; si++) {
+      layout(scales[si]);
+      cy = this.placeBlock(total, centers, avoid);
+    }
+    if (cy == null) {
+      // Không còn chỗ trống: có danh sách thì nhường cho danh sách, không thì đặt dưới
+      if (this.listBox) return;
+      cy = H * 0.76;
+    }
+    var upper = cy < H * 0.45;
     var y = cy - total / 2;
     var bigX = (W - bigW) / 2;
     var fade = clamp((st.t1 - t) / 0.12, 0, 1);

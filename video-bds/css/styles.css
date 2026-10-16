@@ -305,3 +305,6 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); ou
 .small-dz { padding: 14px; }
 .dz-btns { justify-content: center; margin-top: 8px; }
 .link-input { margin-top: 8px; }
+.row-inline { display: flex; gap: 8px; align-items: center; }
+.row-inline input { flex: 1; min-width: 0; }
+.music-now { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 14px; padding: 8px 10px; border-radius: 10px; background: rgba(240, 180, 40, .12); }

@@ -820,6 +820,7 @@
         return inp.music[0].arrayBuffer().then(function (ab) { return getAudioCtx().decodeAudioData(ab); }).then(function (buf) {
           state.music.buffer = buf;
           state.music.name = inp.music[0].name;
+          showMusicNow();
         }).catch(function () {});
       }
     }).then(function () {
@@ -1619,13 +1620,17 @@
     });
     $('musicInput').onchange = function (e) {
       var f = e.target.files[0];
-      if (!f) { state.music.buffer = null; return; }
-      f.arrayBuffer().then(function (ab) { return getAudioCtx().decodeAudioData(ab); }).then(function (buf) {
-        state.music.buffer = buf;
-        state.music.name = f.name;
-        toast('Đã dùng nhạc: ' + f.name);
-      }).catch(function () { toast('Không đọc được file nhạc này.'); });
+      if (f) useMusicFile(f);
     };
+    $('btnMusicLink').onclick = function () { musicFromLink($('musicLink').value.trim()); };
+    $('btnMusicClear').onclick = function () {
+      state.music.buffer = null;
+      state.music.name = '';
+      $('musicInput').value = '';
+      showMusicNow();
+      toast('Đã quay lại nhạc nền có sẵn.');
+    };
+    showMusicNow();
     var vol = $('musicVol');
     vol.value = state.music.vol;
     $('musicVolLabel').textContent = state.music.vol + '%';
@@ -1634,6 +1639,63 @@
       $('musicVolLabel').textContent = vol.value + '%';
       save();
     };
+  }
+
+  /* ---------- Nhạc của bạn: file hoặc link ---------- */
+
+  function showMusicNow() {
+    var on = !!state.music.buffer;
+    $('musicNow').hidden = !on;
+    if (on) $('musicNowName').textContent = '🎵 Đang dùng: ' + state.music.name + ' (' + Math.round(state.music.buffer.duration) + ' giây)';
+  }
+
+  function useMusicFile(f) {
+    return f.arrayBuffer().then(function (ab) { return getAudioCtx().decodeAudioData(ab); }).then(function (buf) {
+      state.music.buffer = buf;
+      state.music.name = f.name;
+      showMusicNow();
+      toast('Đã dùng nhạc: ' + f.name);
+    }).catch(function () { toast('Không đọc được file nhạc này. Hãy dùng file mp3 hoặc m4a.'); });
+  }
+
+  function musicFromLink(url) {
+    if (!url) { toast('Dán link nhạc vào ô trước đã.'); return; }
+    if (/youtube\.com|youtu\.be|tiktok\.com|zingmp3|nhaccuatui|spotify|soundcloud|facebook\.com/i.test(url)) {
+      toast('Link YouTube, TikTok, Zing… không tải trực tiếp được. Hãy tải bài về máy rồi chọn file, hoặc để file lên Google Drive và dán link Drive.', 7000);
+      return;
+    }
+    var btn = $('btnMusicLink');
+    btn.disabled = true;
+    btn.textContent = 'Đang tải…';
+    var I = window.BdsImporter, job;
+    if (I.driveIds(url).length) {
+      var key = ($('driveKey').value || '').trim();
+      job = I.fromDrive(url, key).then(function (files) {
+        var f = files.filter(function (x) { return /^audio\//.test(x.type) || /\.(mp3|m4a|wav|aac|ogg)$/i.test(x.name); })[0];
+        if (!f) throw new Error('Trong link Drive không có file nhạc (mp3, m4a, wav).');
+        return f;
+      });
+    } else {
+      job = fetch(url).then(function (r) {
+        if (!r.ok) throw new Error('Link lỗi ' + r.status);
+        return r.blob();
+      }).then(function (b) {
+        var name = decodeURIComponent(url.split('?')[0].split('/').pop() || 'nhac') || 'nhac';
+        return new File([b], name, { type: b.type });
+      }, function (e) {
+        if (/Link lỗi/.test(e.message)) throw e;
+        throw new Error('Trang này không cho tải nhạc trực tiếp. Hãy tải bài về máy rồi chọn file, hoặc để lên Google Drive và dán link Drive.');
+      });
+    }
+    job.then(useMusicFile).catch(function (e) {
+      if (e.message === 'NEED_KEY') {
+        toast('Link Google Drive cần “khoá Google” (ở Bước 1, mục link Drive). Hoặc tải bài về máy rồi chọn file.', 7000);
+        $('driveKeyBox').open = true;
+      } else toast(e.message, 7000);
+    }).then(function () {
+      btn.disabled = false;
+      btn.textContent = 'Lấy nhạc';
+    });
   }
 
   /* ---------- Xem trước & phát ---------- */

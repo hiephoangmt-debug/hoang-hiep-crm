@@ -375,9 +375,13 @@
         <label>Nhạc nền
           <select id="moodSelect"></select>
         </label>
-        <label>Hoặc dùng nhạc của bạn
-          <input type="file" id="musicInput" accept="audio/*">
+        <label>Hoặc dùng nhạc của bạn (file mp3, m4a, wav…)
+          <input type="file" id="musicInput" accept="audio/*,.mp3,.m4a,.wav,.aac,.ogg">
         </label>
+        <label>Hoặc dán link nhạc (Google Drive, link file .mp3)
+          <span class="row-inline"><input type="url" id="musicLink" placeholder="https://drive.google.com/file/d/…"><button type="button" class="btn small" id="btnMusicLink">Lấy nhạc</button></span>
+        </label>
+        <div class="music-now" id="musicNow" hidden><span id="musicNowName"></span> <button type="button" class="btn small ghost" id="btnMusicClear">✕ Dùng lại nhạc có sẵn</button></div>
         <label>Âm lượng nhạc: <b id="musicVolLabel">45%</b>
           <input type="range" id="musicVol" min="0" max="100" value="45">
         </label>
