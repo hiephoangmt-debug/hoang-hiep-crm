@@ -772,6 +772,20 @@ function crmLabelHasWeek_(label, isoMonday) {
   return a <= t && t <= b;
 }
 
+/** Chèn một dòng trống vào cuối khối tuần (rows = chỉ số dòng 0-based của tuần), giữ công thức theo dòng trên. Trả chỉ số dòng mới. */
+function crmInsertWeekRow_(sh, rows, vals, forms, notes) {
+  var last = rows[rows.length - 1], width = vals[last].length;
+  var src = sh.getRange(last + 1, 1, 1, width).getFormulasR1C1()[0];
+  sh.insertRowAfter(last + 1);
+  src.forEach(function (f, j) { if (f) sh.getRange(last + 2, j + 1).setFormulaR1C1(f); });
+  var at = last + 1;
+  vals.splice(at, 0, src.map(function () { return ''; }));
+  forms.splice(at, 0, src.map(function (f) { return f ? f : ''; }));
+  notes.splice(at, 0, src.map(function () { return ''; }));
+  rows.push(at);
+  return at;
+}
+
 /**
  * items: [{nenTang, taiKhoan, nhanSu, chiPhi, lead, luotXem, ...}] – tổng theo tài khoản/kênh của tuần.
  * Trả {written, kept, noRow, sheetUrl}.
@@ -877,7 +891,12 @@ function crmWriteSheet_(duAn, tuan, items) {
         row = rows.filter(function (r) {
           return !used[plat + r] && !cell(r).trim() && ['chiPhi', 'chiPhiPhi', 'lead'].every(function (k) { return c[k] == null || forms[r][c[k]] || vals[r][c[k]] === '' || vals[r][c[k]] === null; });
         })[0];
-        if (row == null) { res.noRow.push(plat + ' ' + (it.nhanSu || it.taiKhoan)); return; }
+        if (row == null) {
+          // khối tuần đã hết dòng trống: chèn thêm một dòng ngay sau dòng cuối của tuần (chép công thức của dòng trên)
+          try { row = crmInsertWeekRow_(sh, rows, vals, forms, notes); } catch (e) { row = null; }
+          if (row == null) { res.noRow.push(plat + ' ' + (it.nhanSu || it.taiKhoan)); return; }
+          res.added = (res.added || 0) + 1;
+        }
         var label = ((it.nhanSu ? it.nhanSu + ' ' : '') + (id || '')).trim();
         if (label) { sh.getRange(row + 1, c.taiKhoan + 1).setValue(label).setNote(SHEET_NOTE); vals[row][c.taiKhoan] = label; }
       }

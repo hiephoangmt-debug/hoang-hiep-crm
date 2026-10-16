@@ -584,7 +584,8 @@
     } catch (e) { return " Chưa ghi được vào Google Sheet: " + e.message; }
   }
   const pushNote = (res) => !res ? "" : ` Google Sheet: đã điền ${res.written} ô` + (res.kept ? `, giữ nguyên ${res.kept} ô đã có số` : "") +
-    (res.noRow.length ? `, hết dòng trống cho ${res.noRow.join(", ")} (thêm dòng trong tuần rồi bấm "Ghi số từ ảnh vào Google Sheet")` : "") + ".";
+    (res.added ? `, thêm ${res.added} dòng mới vào tuần (khối tuần đã hết dòng trống)` : "") +
+    (res.noRow.length ? `, chưa ghi được ${res.noRow.join(", ")} (sheet không có cột cho kênh này hoặc không chèn được dòng)` : "") + ".";
 
   // ------------------------------------------------------------ CHỨNG TỪ
   // Hướng dẫn nghiệm thu theo mẫu COLLECTION (bản 16/10): ảnh cần chụp cho từng kênh + các mục phải khoanh.
