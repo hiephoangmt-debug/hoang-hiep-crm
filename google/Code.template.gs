@@ -3,7 +3,7 @@
  * Dán toàn bộ file này vào Extensions > Apps Script của file "CRM Hoàng Hiệp", rồi Deploy > Web app.
  * File này được sinh từ google/Code.template.gs bằng `node google/build.mjs` – đừng sửa tay trong Code.gs.
  */
-var CRM_VER = 'ui-46';
+var CRM_VER = 'ui-47';
 var S_LEADS = 'Khách hàng', S_EVENTS = 'Hoạt động', S_SITES = 'Website', S_CLICKS = 'Lượt bấm';
 var STATUS_NEW = 'Mới', STATUS_CONTACTED = 'Đã liên hệ';
 var TRACK_JS = /*__TRACK_JS__*/'';
