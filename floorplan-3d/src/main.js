@@ -1,4 +1,4 @@
-import { ask, toast, download } from './ui.js';
+import { ask, toast, download, isStaleChunkError, reloadForUpdate } from './ui.js';
 import { Store, samplePlan, studioPlan, luxuryPlan, emptyPlan, FLOOR_TYPES, uid } from './model.js';
 import { STYLES, PALETTE_FIELDS, roomKind, resolvePalette } from './styles.js';
 import { MAIN_KEY } from './furniture.js';
@@ -517,7 +517,7 @@ $('#real').onclick = () => {
   $('#ptStatus').style.display = 'block';
   $('#ptStatus').textContent = 'Đang chuẩn bị cảnh…';
   setTimeout(() => {
-    viewer.startRealRender().catch((err) => { console.error(err); toast('Trình duyệt không hỗ trợ render chân thực: ' + err.message, 5000); viewer.stopRealRender(); });
+    viewer.startRealRender().catch((err) => { console.error(err); viewer.stopRealRender(); if (isStaleChunkError(err) && reloadForUpdate()) return; toast('Trình duyệt không hỗ trợ render chân thực: ' + err.message, 5000); });
   }, 30);
 };
 viewer.onPTProgress = (n) => { $('#ptStatus').textContent = `📸 Render ánh sáng thật · ${Math.floor(n)} lượt mẫu${n < 60 ? ' (đợi ảnh mịn dần…)' : ' ✓'}`; };
