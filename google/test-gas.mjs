@@ -114,7 +114,7 @@ assert.equal(ctx.crmKey_(), K);
 assert.throws(() => ctx.crmLoad('sai-khoa'), /Không có quyền/); assert.throws(() => ctx.crmLog('', '0988111222', 'call'), /Không có quyền/);
 assert.equal(ctx.doGet({ parameter: { k: 'sai' } }).file, undefined); assert.ok(ctx.doGet({ parameter: { k: K } }).content.includes('CRM Hoàng Hiệp') && ctx.doGet({ parameter: { k: K } }).content.includes('</html>'));
 const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
-assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-41'); assert.equal(JSON.stringify(dbg).includes(K), false);
+assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-42'); assert.equal(JSON.stringify(dbg).includes(K), false);
 const L = ctx.crmLoad(K);
 assert.equal(L.leads.length, 2);
 const l0 = L.leads.find((x) => x.phone === '0988111222');
@@ -144,6 +144,12 @@ assert.throws(() => ctx.crmUpdateLead(K, '0988111222', { status: 'abc' }), /khô
   assert.ok(lf); assert.equal(lf.name, 'Khách LadiPage'); assert.equal(lf.project, 'FourS Tower'); assert.equal(lf.toa, 'F2');
   assert.match(lf.note, /Quan tâm: ADS/); assert.equal(lf.leadUrl, 'https://www.sun-fours-tower.com/toa-f2-ads'); assert.equal(lf.srcType, 'Website');
   ctx.crmDeleteLead(K, '0931000777'); }
+{ post({ name: 'Khách cũ', phone: '0931000888', project: 'Sun FourS Tower' }, { key: 'testkey12345' });
+  const rr2 = post({ name: 'Khách cũ', phone: '0931000888', project: 'Casamia Balanca', interest: 'Quan tâm dự án mới', source: 'https://x.com/toa-f1-ads' }, { key: 'testkey12345' });
+  assert.equal(rr2.new, false);
+  const lf2 = ctx.crmLoad(K).leads.find((x) => x.phone === '0931000888');
+  assert.equal(lf2.submits, 2); assert.equal(lf2.project, 'Casamia Balanca'); assert.ok(lf2.reAt && lf2.reAt.length > 10); assert.match(lf2.note, /Gửi lại .*Dự án Casamia Balanca \(trước đó: FourS Tower\)/); assert.equal(lf2.toa, 'F1');
+  ctx.crmDeleteLead(K, '0931000888'); }
 const ck0 = ctx.crmLoad(K).clicks[0];
 assert.throws(() => ctx.crmClickDone(K, ck0.row, 'sai-vid', true), /thay đổi/);
 ctx.crmClickDone(K, ck0.row, ck0.vid, true, 'đã xem Zalo');

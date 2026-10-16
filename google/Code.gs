@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-41', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-42', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -53,7 +53,7 @@ function iso_(d) { return d && typeof d.getTime === 'function' ? new Date(d.getT
 function phoneStr_(v) { var p = String(v == null ? '' : v); return p.length === 9 ? '0' + p : p; }
 
 // ---- Cột mở rộng của tab Khách hàng (W..AB): hẹn tiếp theo, ngân sách, mục đích, loại căn, tiềm năng, vay ----
-var LEAD_COLS = 46;
+var LEAD_COLS = 47;
 var LEAD_HEAD2 = ['SĐT phụ', 'Zalo', 'Tỉnh/thành phố', 'Ngày sinh', 'Nghề nghiệp', 'Ngân sách tối thiểu', 'Ngân sách tối đa', 'Vốn tự có', 'Khoản vay dự kiến', 'Thời điểm dự kiến mua', 'Lý do chưa quyết định', 'Loại nguồn', 'Trang phát sinh lead', 'Dự án quan tâm', 'Quận/huyện, phường/xã', 'Địa chỉ chi tiết', 'Link tài liệu (Drive)', 'Toà quan tâm'];
 function ensureLeadCols_(sh) {
   try {
@@ -65,6 +65,7 @@ function ensureLeadCols_(sh) {
     }
     if (sh.getRange(1, 29).getValue() && !sh.getRange(1, 45).getValue()) sh.getRange(1, 45).setValue('Link tài liệu (Drive)');
     if (sh.getRange(1, 29).getValue() && !sh.getRange(1, 46).getValue()) sh.getRange(1, 46).setValue('Toà quan tâm');
+    if (sh.getRange(1, 29).getValue() && !sh.getRange(1, 47).getValue()) sh.getRange(1, 47).setValue('Gửi lại gần nhất');
     if (sh.getRange(1, 29).getValue() && !sh.getRange(1, 42).getValue()) sh.getRange(1, 42, 1, 3).setValues([['Dự án quan tâm', 'Quận/huyện, phường/xã', 'Địa chỉ chi tiết']]);
     if (!sh.getRange(1, 29).getValue()) {
       sh.getRange(1, 29, 1, LEAD_HEAD2.length).setValues([LEAD_HEAD2]);
@@ -139,7 +140,7 @@ function crmLoad(k) {
       contactedAt: iso_(r[16]), status: String(r[18] || 'Mới'), assignee: String(r[19] || ''), value: Number(r[20]) || 0, note: String(r[21] || ''),
       next: ymd_(r[22]), budget: String(r[23] || ''), purpose: String(r[24] || ''), product: String(r[25] || ''), heat: String(r[26] || ''), loan: String(r[27] || ''),
       phone2: String(r[28] || ''), zalo: String(r[29] || ''), province: String(r[30] || ''), dob: ymd_(r[31]), job: String(r[32] || ''), bmin: String(r[33] || ''), bmax: String(r[34] || ''),
-      equity: String(r[35] || ''), loanAmt: String(r[36] || ''), buyTime: String(r[37] || ''), undecided: String(r[38] || ''), srcType: String(r[39] || ''), leadUrl: String(r[40] || ''), project: String(r[41] || ''), district: String(r[42] || ''), address: String(r[43] || ''), docUrl: String(r[44] || ''), toa: String(r[45] || '') };
+      equity: String(r[35] || ''), loanAmt: String(r[36] || ''), buyTime: String(r[37] || ''), undecided: String(r[38] || ''), srcType: String(r[39] || ''), leadUrl: String(r[40] || ''), project: String(r[41] || ''), district: String(r[42] || ''), address: String(r[43] || ''), docUrl: String(r[44] || ''), toa: String(r[45] || ''), reAt: r[46] && r[46].getTime ? iso_(r[46]) : String(r[46] || '') };
   }).reverse();
   var sm = summaries_();
   out.leads.forEach(function (l) {
@@ -1156,10 +1157,17 @@ function handleLead_(b, site) {
       var name = sh.getRange(row, 3), email = sh.getRange(row, 5);
       if (!name.getValue() && b.name) name.setValue(str_(b.name, 120));
       if (!email.getValue() && b.email) email.setValue(str_(b.email, 160));
-      if (b.message) {
-        var note = sh.getRange(row, 22);
-        note.setValue((note.getValue() ? note.getValue() + ' | ' : '') + str_(b.message, 500));
-      }
+      // Khách cũ để số lại (có thể cho dự án mới): giữ một dòng, ghi giờ gửi lại, cập nhật dự án/toà, ghi chú thêm.
+      ensureLeadCols_(sh);
+      var nowS = Utilities.formatDate(new Date(), 'Asia/Ho_Chi_Minh', 'HH:mm dd/MM');
+      var pj2 = projClean_(b.project || site.name), pcell = sh.getRange(row, 42), pold = String(pcell.getValue() || '');
+      var tz2 = /(?:toa|tòa|toà)[\s-]*(f[1-5])/i.exec(String(b.url || '') + ' ' + String(b.interest || '') + ' ' + String(b.message || ''));
+      var add = 'Gửi lại ' + nowS + (pj2 ? ' · Dự án ' + pj2 : '') + (pold && pj2 && pold.toLowerCase() !== pj2.toLowerCase() ? ' (trước đó: ' + pold + ')' : '') + (b.message ? ' · ' + str_(b.message, 400) : '');
+      if (pj2) pcell.setValue(str_(pj2, 120));
+      if (tz2) sh.getRange(row, 46).setValue(tz2[1].toUpperCase());
+      var note = sh.getRange(row, 22);
+      note.setValue((note.getValue() ? note.getValue() + ' | ' : '') + add);
+      sh.getRange(row, 47).setValue(new Date().toISOString());
     }
     if (!b.noEvent) logEvent_(b, site, 'form', '');
     return { ok: true, new: isNew };
