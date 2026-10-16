@@ -900,6 +900,14 @@ label.field input { font: 14px/1.3 var(--body); color: var(--ink); background: v
       else if (val > 0.78 && sat < 0.14) v = 0;            // trắng, xám sáng
       a[i] = v;
     }
+    // bỏ nền cùng tông nhưng sáng hơn hẳn tóc (tường gỗ, tường be): so với độ sáng giữa của tóc
+    const vals = [];
+    for (let i = 0; i < n; i += 3) if (a[i] > 0.8) vals.push(Math.max(cd[i * 4], cd[i * 4 + 1], cd[i * 4 + 2]) / 255);
+    if (vals.length > 50) {
+      vals.sort((p, q) => p - q);
+      const med = vals[vals.length >> 1], lim = Math.max(0.55, med * 1.8);
+      for (let i = 0; i < n; i++) if (a[i] > 0 && Math.max(cd[i * 4], cd[i * 4 + 1], cd[i * 4 + 2]) / 255 > lim) a[i] = 0;
+    }
     // giữ cả tai và da sát mặt: điểm có màu giống da mặt, nằm trong dải hai bên má
     let sr = 0, sg = 0, sb = 0, sn = 0;
     const [nx, ny] = P(sl[30]), rr = fw * k * 0.12;
