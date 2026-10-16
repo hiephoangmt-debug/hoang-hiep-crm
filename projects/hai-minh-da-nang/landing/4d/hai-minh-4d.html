@@ -495,6 +495,7 @@ playBtn.onclick=function(){playing=!playing; playBtn.textContent=playing?'❚❚
 var tgt=world.localToWorld(new THREE.Vector3(20,30,10));
 controls.target.copy(tgt);
 camera.position.copy(world.localToWorld(new THREE.Vector3(-150,250,380)));
+if(innerWidth<600){ controls.target.copy(world.localToWorld(new THREE.Vector3(-25,55,35))); camera.position.copy(world.localToWorld(new THREE.Vector3(-200,260,420))); }
 if(/close/.test(location.search)){controls.target.copy(world.localToWorld(new THREE.Vector3(-47,15,46)));camera.position.copy(world.localToWorld(new THREE.Vector3(/close2/.test(location.search)?-150:40,45,/close2/.test(location.search)?-60:140)));}
 controls.update();
 setFloor(+floorEl.value); setTime(+hourEl.value); refreshEnv();
@@ -515,9 +516,9 @@ var wmC=document.createElement('canvas'); wmC.width=1024; wmC.height=256; (funct
   g.font='600 38px "Be Vietnam Pro",Arial,sans-serif'; g.fillText('Hoàng Hiệp · Hải Minh Đà Nẵng',238,166); g.fillText(WEB,238,214); })(wmC.getContext('2d'));
 var hud=new THREE.Scene(), hudCam=new THREE.OrthographicCamera(0,1,1,0,-1,1);
 var wmTex=new THREE.CanvasTexture(wmC); wmTex.encoding=THREE.sRGBEncoding;
-var wm=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({map:wmTex,transparent:true,opacity:.85,depthTest:false,depthWrite:false,toneMapped:false})); hud.add(wm);
+var wm=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({map:wmTex,transparent:true,opacity:.6,depthTest:false,depthWrite:false,toneMapped:false})); hud.add(wm);
 var consoleEl=document.querySelector('.console');
-function placeWM(){ var W=innerWidth,H=innerHeight, w=Math.min(W*.6,360), h=w/4, cb=consoleEl?consoleEl.getBoundingClientRect().height:140; hudCam.right=W; hudCam.top=H; hudCam.updateProjectionMatrix(); wm.scale.set(w,h,1); wm.position.set(14+w/2,cb+14+h/2,0); }
+function placeWM(){ var W=innerWidth,H=innerHeight, w=Math.min(W*.4,230), h=w/4, cb=consoleEl?consoleEl.getBoundingClientRect().height:140; hudCam.right=W; hudCam.top=H; hudCam.updateProjectionMatrix(); wm.scale.set(w,h,1); wm.position.set(W-10-w/2,cb+8+h/2,0); }
 placeWM(); window.addEventListener('resize',placeWM); setTimeout(placeWM,800);
 // rooftop signage: HM logo + phone on the crown, facing Trường Sa (east) and Nguyễn Đức Thuận (north)
 var sgC=document.createElement('canvas'); sgC.width=1024; sgC.height=256; (function(g){ g.fillStyle='#0b2a3d'; g.fillRect(0,0,1024,256); drawLogo(g,16,16,224);
