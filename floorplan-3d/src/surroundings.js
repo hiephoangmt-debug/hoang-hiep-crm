@@ -243,9 +243,10 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
   const houses = [];
   const LOT = 5.5, DEP = 16, BLOCK = 11, ROW_GAP = 12, BLOCK_GAP = 10;
   const blockLen = BLOCK * LOT;
-  for (let bz = -560; bz <= 380; bz += DEP * 2 + ROW_GAP) {
-    for (let bxs = -560; bxs <= 330; bxs += blockLen + BLOCK_GAP) {
-      if (r() > density * 1.05) continue; // chế độ nhẹ: bớt dãy
+  // lấp kín đều các ô phố từ bờ sông lớn tới mép khu đất, không bỏ trống dãy nào (chế độ nhẹ chỉ bớt rất ít ở xa)
+  for (let bz = -560; bz <= 700; bz += DEP * 2 + ROW_GAP) {
+    for (let bxs = CITY_RIVER_X1 + 14; bxs <= 520; bxs += blockLen + BLOCK_GAP) {
+      if (density < 1 && Math.hypot(bxs, bz) > 450 && r() > 0.8) continue;
       const floors = 3 + Math.floor(r() * 2); // cả dãy cùng số tầng cho đều
       for (const [rowZ, face] of [[bz + DEP / 2, 1], [bz + DEP * 1.5, -1]]) {
         for (let k = 0; k < BLOCK; k++) {
