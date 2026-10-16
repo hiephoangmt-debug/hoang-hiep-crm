@@ -125,6 +125,11 @@ input:focus,select:focus{outline:2px solid var(--cta2);border-color:var(--cta2)}
 .dist div{display:flex;justify-content:space-between;gap:10px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);font-weight:500}
 .dist b{color:#fff;white-space:nowrap}
 
+.moments{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+.moments figure{margin:0;background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.moments img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.moments figcaption{padding:12px 14px;font-size:14.5px;color:var(--ink)}
+.moments b{display:block;color:var(--night);font-size:18px;font-weight:800}
 /* Compare */
 .vs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
 .vs > div{border-radius:16px;padding:24px}
@@ -238,6 +243,7 @@ footer a{color:#fff;text-decoration:underline;text-decoration:none;font-weight:6
   h2{font-size:27px}
   .sec{padding:46px 0}
   .needs{grid-template-columns:1fr}
+  .moments{grid-template-columns:1fr}
   .need{padding:18px 16px}
   .units{grid-template-columns:1fr}
   .f2{grid-template-columns:1fr}
@@ -361,7 +367,12 @@ footer a{color:#fff;text-decoration:underline;text-decoration:none;font-weight:6
       <h2>Năm nào cũng ra biển – <span>sao không có nhà của riêng mình?</span></h2>
       <p class="lead">Mười đêm nghỉ biển mỗi năm, phòng view biển 2–3 triệu/đêm, là 20–30 triệu tiền phòng. Trả xong là hết.</p>
     </div>
-    <!-- Chỗ đặt ảnh: ban công nhìn biển / gia đình 40–50 tuổi nghỉ dưỡng (WebP, có chữ "Hình minh họa") -->
+    <div class="moments">
+      <figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/claude/sweet-knuth-g4n4j5/projects/hai-minh-da-nang/landing/illus/binh-minh-phong-khach.webp" alt="Tranh minh họa: bình minh trên biển nhìn từ phòng khách căn hộ" width="1200" height="800" loading="lazy"><figcaption><b>05:30</b> Kéo rèm – bình minh ngay trước sofa</figcaption></figure>
+      <figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/claude/sweet-knuth-g4n4j5/projects/hai-minh-da-nang/landing/illus/phong-ngu-view-bien.webp" alt="Tranh minh họa: phòng ngủ nhìn ra biển buổi sáng" width="1200" height="800" loading="lazy"><figcaption><b>07:30</b> Bữa sáng trên giường, biển xanh ngoài cửa</figcaption></figure>
+      <figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/claude/sweet-knuth-g4n4j5/projects/hai-minh-da-nang/landing/illus/ban-cong-hoang-hon.webp" alt="Tranh minh họa: ban công nhìn biển lúc hoàng hôn với hai ghế và hai ly vang" width="1200" height="800" loading="lazy"><figcaption><b>18:00</b> Hai ly vang, cả dải biển chuyển màu hổ phách</figcaption></figure>
+    </div>
+    <p class="illu center">Tranh minh họa phong cách sống, không phải thiết kế nội thất thực tế của dự án.</p>
     <div class="vs">
       <div class="vs-a">
         <h3>Đi nghỉ thuê phòng mỗi năm</h3>

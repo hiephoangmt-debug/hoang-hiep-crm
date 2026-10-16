@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+<defs>
+ <linearGradient id="sky3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A2457"/><stop offset=".35" stop-color="#7A3D6B"/><stop offset=".62" stop-color="#E3674A"/><stop offset=".82" stop-color="#FF9A4D"/><stop offset="1" stop-color="#FFC77A"/></linearGradient>
+ <linearGradient id="sea3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9764F"/><stop offset=".25" stop-color="#8D4560"/><stop offset="1" stop-color="#241E44"/></linearGradient>
+ <radialGradient id="sun3" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFF1C9"/><stop offset=".3" stop-color="#FFC56E"/><stop offset="1" stop-color="#FF8A3D" stop-opacity="0"/></radialGradient>
+ <linearGradient id="deck" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6E4A3A"/><stop offset="1" stop-color="#3B2522"/></linearGradient>
+ <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB46A" stop-opacity=".45"/><stop offset="1" stop-color="#FFB46A" stop-opacity="0"/></linearGradient>
+</defs>
+<rect width="1200" height="800" fill="url(#sky3)"/>
+<g fill="#FFD7B0" opacity=".35"><ellipse cx="250" cy="250" rx="180" ry="12"/><ellipse cx="950" cy="210" rx="200" ry="14"/><ellipse cx="820" cy="300" rx="120" ry="8"/></g>
+<circle cx="760" cy="470" r="230" fill="url(#sun3)"/>
+<circle cx="760" cy="478" r="62" fill="#FFE6B0"/>
+<!-- distant headland silhouette -->
+<path d="M0 470 C80 440 160 430 240 446 C300 458 340 450 380 470 L380 480 L0 480 Z" fill="#3A2A55" opacity=".85"/>
+<rect y="478" width="1200" height="322" fill="url(#sea3)"/>
+<g fill="#FFD08C"><rect x="710" y="490" width="100" height="5" rx="2.5"/><rect x="690" y="510" width="140" height="5" rx="2.5" opacity=".85"/><rect x="720" y="534" width="80" height="5" rx="2.5" opacity=".75"/><rect x="670" y="560" width="180" height="5" rx="2.5" opacity=".6"/><rect x="705" y="590" width="110" height="5" rx="2.5" opacity=".5"/></g>
+<g stroke="#2A1E3E" stroke-width="2.6" fill="none" stroke-linecap="round"><path d="M520 300 q9 -9 18 0 q9 -9 18 0"/><path d="M570 280 q7 -7 14 0 q7 -7 14 0"/><path d="M470 330 q6 -6 12 0 q6 -6 12 0"/></g>
+<!-- balcony glass railing -->
+<rect y="560" width="1200" height="120" fill="#FFFFFF" opacity=".08"/>
+<rect y="556" width="1200" height="8" fill="#1A1430"/>
+<g fill="#1A1430"><rect x="0" y="556" width="12" height="130"/><rect x="400" y="556" width="10" height="130"/><rect x="800" y="556" width="10" height="130"/><rect x="1188" y="556" width="12" height="130"/></g>
+<!-- deck -->
+<rect y="680" width="1200" height="120" fill="url(#deck)"/>
+<g stroke="#2E1C1A" stroke-width="2" opacity=".5"><line x1="0" y1="710" x2="1200" y2="710"/><line x1="0" y1="745" x2="1200" y2="745"/><line x1="0" y1="780" x2="1200" y2="780"/></g>
+<rect y="680" width="1200" height="120" fill="url(#glow)"/>
+<!-- two lounge chairs (silhouette) -->
+<g fill="#1A1430">
+ <path d="M190 700 L250 560 L280 570 L235 690 L420 690 L420 712 L180 712 Z"/>
+ <rect x="200" y="712" width="12" height="50"/><rect x="398" y="712" width="12" height="50"/>
+ <path d="M1010 700 L950 560 L920 570 L965 690 L780 690 L780 712 L1020 712 Z"/>
+ <rect x="988" y="712" width="12" height="50"/><rect x="790" y="712" width="12" height="50"/>
+</g>
+<g fill="#E8875A" opacity=".9"><rect x="250" y="672" width="150" height="18" rx="8"/><rect x="800" y="672" width="150" height="18" rx="8"/></g>
+<!-- small table with two wine glasses -->
+<g transform="translate(600 640)">
+ <ellipse cx="0" cy="40" rx="70" ry="12" fill="#1A1430"/><rect x="-6" y="40" width="12" height="90" fill="#1A1430"/>
+ <g transform="translate(-24 0)"><path d="M-14 -10 Q0 22 14 -10 Z" fill="#8E1F3A"/><path d="M-16 -30 Q-16 10 0 14 Q16 10 16 -30 Z" fill="none" stroke="#FFE6C8" stroke-width="2.5"/><rect x="-1.5" y="14" width="3" height="22" fill="#FFE6C8"/><rect x="-10" y="35" width="20" height="3" rx="1.5" fill="#FFE6C8"/></g>
+ <g transform="translate(24 4)"><path d="M-14 -6 Q0 24 14 -6 Z" fill="#8E1F3A"/><path d="M-16 -26 Q-16 12 0 16 Q16 12 16 -26 Z" fill="none" stroke="#FFE6C8" stroke-width="2.5"/><rect x="-1.5" y="16" width="3" height="20" fill="#FFE6C8"/><rect x="-10" y="35" width="20" height="3" rx="1.5" fill="#FFE6C8"/></g>
+</g>
+<!-- plant silhouette left -->
+<g fill="#1A1430" transform="translate(70 600)"><rect x="-30" y="40" width="60" height="70" rx="8"/><ellipse cx="0" cy="0" rx="14" ry="60" transform="rotate(-18)"/><ellipse cx="14" cy="10" rx="12" ry="54" transform="rotate(22)"/><ellipse cx="-24" cy="26" rx="10" ry="44" transform="rotate(-46)"/></g>
+<!-- string lights -->
+<path d="M0 40 Q300 110 600 60 T1200 70" stroke="#3A2A55" stroke-width="2" fill="none"/>
+<g fill="#FFE2A0"><circle cx="100" cy="64" r="6"/><circle cx="230" cy="86" r="6"/><circle cx="370" cy="88" r="6"/><circle cx="500" cy="72" r="6"/><circle cx="640" cy="60" r="6"/><circle cx="780" cy="72" r="6"/><circle cx="920" cy="82" r="6"/><circle cx="1060" cy="76" r="6"/></g>
+</svg>
