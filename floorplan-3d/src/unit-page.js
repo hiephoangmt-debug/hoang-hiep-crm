@@ -177,6 +177,8 @@ $('#photoBtn').onclick = () => {
 $('#labelBtn').onclick = () => {
   const on = !viewer.state.labels;
   viewer.setOption('labels', on);
+  viewer._adKey = null;
+  viewer.frameAll(true);
   $('#labelBtn').classList.toggle('active', on);
 };
 $('#peopleBtn').onclick = () => {

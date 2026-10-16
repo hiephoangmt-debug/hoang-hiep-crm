@@ -106,7 +106,7 @@ export function exportImage({ renderer, scene, camera, render, keepRatio = false
 const fmtM = (n, d = 2) => n.toLocaleString('vi-VN', { minimumFractionDigits: d, maximumFractionDigits: d });
 
 /** Chú thích phòng đặt ra ngoài mặt bằng (2 bên), có đường dẫn; kèm đường kích thước tổng của căn */
-function drawCallouts(x, callouts, plan, toScreen, s, W, H, side) {
+export function drawCallouts(x, callouts, plan, toScreen, s, W, H, side, noDims = false) {
   const P = plan.corners.map(toScreen); // 4 góc mặt bằng ở cao độ sàn
   const L = Math.min(...P.map((p) => p.x)), R = Math.max(...P.map((p) => p.x));
   const T = Math.min(...P.map((p) => p.y)), B = Math.max(...P.map((p) => p.y));
@@ -131,8 +131,10 @@ function drawCallouts(x, callouts, plan, toScreen, s, W, H, side) {
   // cạnh trên (độ rộng) = cạnh 0–1 hoặc 3–2, chọn cạnh nằm cao hơn trên ảnh; tương tự cạnh dọc bên phải
   const eW = (P[0].y + P[1].y) < (P[3].y + P[2].y) ? [P[0], P[1]] : [P[3], P[2]];
   const eD = (P[1].x + P[2].x) > (P[0].x + P[3].x) ? [P[1], P[2]] : [P[0], P[3]];
-  dim(eW[0], eW[1], String(Math.round(plan.w * 1000)));
-  dim(eD[0], eD[1], String(Math.round(plan.d * 1000)));
+  if (!noDims) {
+    dim(eW[0], eW[1], String(Math.round(plan.w * 1000)));
+    dim(eD[0], eD[1], String(Math.round(plan.d * 1000)));
+  }
   // --- Chú thích
   const f1 = Math.round(12.5 * s), f2 = Math.round(10.5 * s), bh = f1 + f2 + 14 * s, gap = 8 * s;
   const items = callouts.map((c) => ({ ...c, a: toScreen(c.anchor) }));
