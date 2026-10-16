@@ -38,11 +38,18 @@ function teleClick_(b, site, ch) {
     + '\n🕒 ' + teleNow_());
 }
 
+/** Bỏ ký tự ẩn / khoảng trắng lẫn vào khi dán token (lỗi "Địa chỉ không khả dụng") */
+function teleUrl_(method) {
+  var t = String(TELE_TOKEN).replace(/[^0-9A-Za-z:_-]/g, '');
+  return 'https://api.telegram.org/bot' + t + '/' + method;
+}
+function teleChat_() { return String(TELE_CHAT_ID).replace(/[^0-9-]/g, ''); }
+
 function teleSend_(text) {
   try {
-    UrlFetchApp.fetch('https://api.telegram.org/bot' + String(TELE_TOKEN).trim() + '/sendMessage', {
+    UrlFetchApp.fetch(teleUrl_('sendMessage'), {
       method: 'post', contentType: 'application/json', muteHttpExceptions: true,
-      payload: JSON.stringify({ chat_id: String(TELE_CHAT_ID).trim(), text: text, disable_web_page_preview: true })
+      payload: JSON.stringify({ chat_id: teleChat_(), text: text, disable_web_page_preview: true })
     });
   } catch (err) {} // lỗi Telegram không làm hỏng việc lưu khách vào CRM
 }
@@ -51,7 +58,7 @@ function teleNow_() { return Utilities.formatDate(new Date(), 'Asia/Ho_Chi_Minh'
 
 /** Chạy 1 lần sau khi đã bấm Start / gửi "hi" cho bot → xem Nhật ký thực thi để lấy chat_id */
 function layChatId() {
-  var r = UrlFetchApp.fetch('https://api.telegram.org/bot' + String(TELE_TOKEN).trim() + '/getUpdates', { muteHttpExceptions: true });
+  var r = UrlFetchApp.fetch(teleUrl_('getUpdates'), { muteHttpExceptions: true });
   var j = JSON.parse(r.getContentText());
   if (!j.ok) { Logger.log('TOKEN SAI: ' + j.description + ' → dán lại token từ @BotFather'); return; }
   if (!j.result.length) { Logger.log('Token đúng nhưng bot chưa nhận tin. Mở bot trên Telegram, bấm Start, gửi "hi" rồi chạy lại.'); return; }
