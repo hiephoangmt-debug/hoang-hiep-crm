@@ -76,3 +76,9 @@
   .up-bar { padding-bottom: 10px; }
   .unitpage { padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px)); }
 }
+
+/* Điện thoại: các nút tự xuống dòng (iPhone không vuốt ngang được hàng nút dưới khung 3D) */
+@media (max-width: 1000px) {
+  .up-bar .chips { flex-wrap: wrap; overflow-x: visible; gap: 6px; touch-action: auto; }
+  .up-bar .chip { padding: 6px 10px; font-size: 13px; }
+}

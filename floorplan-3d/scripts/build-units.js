@@ -233,6 +233,17 @@ export function gardenUnit(base, spec) {
   // Hệ toạ độ cục bộ của sân: u dọc mép mặt tiền, v hướng ra ngoài
   const L = side === 'top' || side === 'bottom' ? bb.x1 - bb.x0 : bb.y1 - bb.y0;
   const P = (u, v) => side === 'top' ? { x: bb.x0 + u, y: bb.y0 - v } : side === 'bottom' ? { x: bb.x0 + u, y: bb.y1 + v } : side === 'left' ? { x: bb.x0 - v, y: bb.y0 + u } : { x: bb.x1 + v, y: bb.y0 + u };
+  // Bỏ tường + lan can giữa lô gia và sân vườn: lô gia thông thẳng ra sân (không còn hàng thanh rào)
+  const onEdge = (pt) => side === 'top' ? Math.abs(pt.y - bb.y0) < 0.2 : side === 'bottom' ? Math.abs(pt.y - bb.y1) < 0.2 : side === 'left' ? Math.abs(pt.x - bb.x0) < 0.2 : Math.abs(pt.x - bb.x1) < 0.2;
+  const inward = { top: [0, 0.3], bottom: [0, -0.3], left: [0.3, 0], right: [-0.3, 0] }[side];
+  const lgPoly = lg.points;
+  const drop = new Set(plan.walls.filter((w) => {
+    if (!onEdge(w.a) || !onEdge(w.b)) return false;
+    const m = { x: (w.a.x + w.b.x) / 2 + inward[0], y: (w.a.y + w.b.y) / 2 + inward[1] };
+    return pointInPolygon(m, lgPoly);
+  }).map((w) => w.id));
+  plan.walls = plan.walls.filter((w) => !drop.has(w.id));
+  plan.openings = plan.openings.filter((o) => !drop.has(o.wallId));
   const wall = (a, b) => plan.walls.push({ id: uid(), a: P(...a), b: P(...b), thickness: 0.12, height: 0.95 });
   wall([0, 0], [0, D]); wall([0, D], [L, D]); wall([L, D], [L, 0]);
   plan.rooms.push({ id: uid(), name: 'Sân vườn', floor: 'grass', points: [P(0, 0), P(L, 0), P(L, D), P(0, D)] });
