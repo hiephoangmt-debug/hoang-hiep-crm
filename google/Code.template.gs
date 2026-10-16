@@ -3,7 +3,7 @@
  * Dán toàn bộ file này vào Extensions > Apps Script của file "CRM Hoàng Hiệp", rồi Deploy > Web app.
  * File này được sinh từ google/Code.template.gs bằng `node google/build.mjs` – đừng sửa tay trong Code.gs.
  */
-var CRM_VER = 'ui-47';
+var CRM_VER = 'ui-48';
 var S_LEADS = 'Khách hàng', S_EVENTS = 'Hoạt động', S_SITES = 'Website', S_CLICKS = 'Lượt bấm';
 var STATUS_NEW = 'Mới', STATUS_CONTACTED = 'Đã liên hệ';
 var TRACK_JS = /*__TRACK_JS__*/'';
@@ -1047,16 +1047,16 @@ function doPost(e) {
 // Form của landing page (LadiPage...) gửi thẳng sang đây: hiểu các trường thường gặp, không cần mã nhúng.
 function normLeadBody_(b) {
   var o = {}; for (var k in b) o[k] = b[k];
+  if (o.vid) return o;   // khách đến từ mã theo dõi (?js=1): đã đủ vid, utm, url, giữ nguyên để báo cáo chiến dịch không đổi
   var u = str_(o.url || (/^https?:/i.test(String(o.source || '')) ? o.source : ''), 300);
   o.url = u;
-  if (!o.vid) o.vid = 'form-' + Utilities.getUuid().slice(0, 8);
-  var med = [o.utm_source, o.utm_medium, o.utm_campaign].filter(function (x) { return x; }).join(' / ');
-  if (o.utm_medium || (o.utm_source && o.utm_campaign)) { o.utm_campaign = o.utm_campaign ? med : o.utm_campaign; }
+  o.vid = 'form-' + Utilities.getUuid().slice(0, 8);
   if (!o.utm_source) o.utm_source = /^https?:/i.test(String(o.source || '')) || !o.source ? 'website' : o.source;
   if (!o.message) {
-    var parts = [];
+    var parts = [], src = [o.utm_source, o.utm_medium, o.utm_campaign].filter(function (x) { return x; }).join(' / ');
     if (o.interest) parts.push('Quan tâm: ' + o.interest);
     ['plan', 'need', 'budget', 'note'].forEach(function (f) { if (o[f]) parts.push(String(o[f])); });
+    if (src && o.utm_medium) parts.push('Nguồn: ' + src);
     o.message = parts.join(' · ');
   }
   return o;
@@ -1190,9 +1190,9 @@ function handleLead_(b, site) {
       // Khách cũ để số lại (có thể cho dự án mới): giữ một dòng, ghi giờ gửi lại, cập nhật dự án/toà, ghi chú thêm.
       ensureLeadCols_(sh);
       var nowS = Utilities.formatDate(new Date(), 'Asia/Ho_Chi_Minh', 'HH:mm dd/MM');
-      var pj2 = projClean_(b.project || site.name), pcell = sh.getRange(row, 42), pold = String(pcell.getValue() || '');
+      var pcell = sh.getRange(row, 42), pold = String(pcell.getValue() || ''), pj2 = projClean_(b.project || (pold ? '' : site.name));
       var tz2 = /(?:toa|tòa|toà)[\s-]*(f[1-5])/i.exec(String(b.url || '') + ' ' + String(b.interest || '') + ' ' + String(b.message || ''));
-      var add = 'Gửi lại ' + nowS + (pj2 ? ' · Dự án ' + pj2 : '') + (pold && pj2 && pold.toLowerCase() !== pj2.toLowerCase() ? ' (trước đó: ' + pold + ')' : '') + (b.message ? ' · ' + str_(b.message, 400) : '');
+      var add = 'Gửi lại ' + nowS + (pj2 ? ' · Dự án ' + pj2 : ' · Website ' + site.name) + (pold && pj2 && pold.toLowerCase() !== pj2.toLowerCase() ? ' (trước đó: ' + pold + ')' : '') + (b.message ? ' · ' + str_(b.message, 400) : '');
       if (pj2) pcell.setValue(str_(pj2, 120));
       if (tz2) sh.getRange(row, 46).setValue(tz2[1].toUpperCase());
       var note = sh.getRange(row, 22);

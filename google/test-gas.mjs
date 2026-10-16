@@ -114,7 +114,7 @@ assert.equal(ctx.crmKey_(), K);
 assert.throws(() => ctx.crmLoad('sai-khoa'), /Không có quyền/); assert.throws(() => ctx.crmLog('', '0988111222', 'call'), /Không có quyền/);
 assert.equal(ctx.doGet({ parameter: { k: 'sai' } }).file, undefined); assert.ok(ctx.doGet({ parameter: { k: K } }).content.includes('CRM Hoàng Hiệp') && ctx.doGet({ parameter: { k: K } }).content.includes('</html>'));
 const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
-assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-47'); assert.equal(JSON.stringify(dbg).includes(K), false);
+assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-48'); assert.equal(JSON.stringify(dbg).includes(K), false);
 const L = ctx.crmLoad(K);
 assert.equal(L.leads.length, 2);
 const l0 = L.leads.find((x) => x.phone === '0988111222');
@@ -166,6 +166,15 @@ assert.throws(() => ctx.crmUpdateLead(K, '0988111222', { status: 'abc' }), /khô
   assert.equal(rt2.mode, 'reAt'); assert.equal(ctx.crmLoad(K).leads.find((x) => x.phone === '0931000555').note, t0.note);
   assert.throws(() => ctx.crmTgTouch(K, { phone: '0900111999', at: early }), /Không tìm thấy/);
   ctx.crmDeleteLead(K, '0931000555'); }
+{ // khách từ mã theo dõi: utm_campaign giữ nguyên để khớp tab Chiến dịch
+  post({ action: 'lead', key: 'testkey12345', vid: 'vtrack1', phone: '0931000444', name: 'Từ tracker', url: 'https://a.com/x', utm_source: 'facebook', utm_medium: 'paid', utm_campaign: 'sale-thang-10' });
+  let tl = ctx.crmLoad(K).leads.find((x) => x.phone === '0931000444');
+  assert.equal(tl.campaign, 'sale-thang-10'); assert.equal(tl.source, 'facebook'); assert.equal(tl.vid, 'vtrack1');
+  // gửi lại cùng website: không ghi đè dự án đã chọn tay
+  ctx.crmUpdateLead(K, '0931000444', { project: 'Spana' });
+  post({ action: 'lead', key: 'testkey12345', vid: 'vtrack1', phone: '0931000444' });
+  tl = ctx.crmLoad(K).leads.find((x) => x.phone === '0931000444'); assert.equal(tl.project, 'Spana'); assert.equal(tl.submits, 2); assert.match(tl.note, /Gửi lại/);
+  ctx.crmDeleteLead(K, '0931000444'); }
 const ck0 = ctx.crmLoad(K).clicks[0];
 assert.throws(() => ctx.crmClickDone(K, ck0.row, 'sai-vid', true), /thay đổi/);
 ctx.crmClickDone(K, ck0.row, ck0.vid, true, 'đã xem Zalo');
