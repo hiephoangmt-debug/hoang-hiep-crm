@@ -54,7 +54,7 @@ function meterUV(g) {
   uv.needsUpdate = true;
 }
 
-const isRailing = (op) => op.type === 'window' && (op.sill || 0) <= 0.1 && op.height <= 1.3;
+const isRailing = (op) => op.gap || (op.type === 'window' && (op.sill || 0) <= 0.1 && op.height <= 1.3);
 
 function wallPieces(w, ops, H) {
   const L = wallLength(w);
@@ -99,6 +99,7 @@ function buildRailing(op, w) {
 }
 
 function buildWindow(op, w, H) {
+  if (op.gap) return new THREE.Group(); // lối thông trống (vd. lô gia ra sân vườn)
   if ((op.sill || 0) <= 0.1 && op.height <= 1.3) return buildRailing(op, w);
   const g = new THREE.Group();
   const width = op.width, h = Math.min(op.height, H - op.sill), fw = 0.055, fd = Math.min(0.09, w.thickness);
