@@ -11,7 +11,7 @@ const MODELS = {
   // sofa: dùng sofa văng thẳng dựng sẵn (mô hình sofa cong chiếm nhiều diện tích, không hợp căn hộ)
   armchair: { file: 'armchair.glb', fit: 'width', tint: 'fabric2' },
   chair: { file: 'chair.glb', fit: 'width', tint: 'fabric' },
-  plant: { file: 'plant.glb', fit: 'height', h: 1.25 },
+  // plant: dùng bồn cây vuông dựng sẵn (mô hình chậu đất nung tròn không hợp phong cách)
 };
 const cache = new Map();
 let loader = null;

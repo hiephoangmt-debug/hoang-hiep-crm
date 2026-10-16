@@ -168,9 +168,12 @@ const builders = {
   },
   diningTable(w, d, h) {
     const g = new THREE.Group();
-    g.add(box(w, 0.05, d, M.lightWood(), 0, h - 0.025, 0, 0.01));
-    legs(g, w, d, h - 0.05, 0.03, M.lightWood(), 0.08);
+    // Mặt đá marble trắng vân xám, chân kim loại đen; giữa bàn bình hoa + đĩa
+    const marble = mat(0xf4f2ee, { roughness: 0.12, metalness: 0.02, map: getTexture('marble') });
+    g.add(box(w, 0.04, d, marble, 0, h - 0.02, 0, 0.012));
+    legs(g, w, d, h - 0.04, 0.02, M.black(), 0.1);
     g.add(cyl(0.12, 0.08, 0.1, M.porcelain(), 0, h + 0.05, 0, 20));
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) if (w > 1.1) g.add(cyl(0.11, 0.11, 0.012, M.porcelain(), sx * w * 0.28, h + 0.006, sz * d * 0.28, 20));
     for (let i = 0; i < 3; i++) {
       const s = new THREE.Mesh(new THREE.SphereGeometry(0.04, 12, 10), mat([0xe74c3c, 0xf1c40f, 0x27ae60][i]));
       s.position.set(-0.04 + i * 0.04, h + 0.12, (i - 1) * 0.03);
@@ -285,21 +288,32 @@ const builders = {
     g.add(cyl(0.015, 0.015, 0.15, M.steel(), -w / 2 + 0.12, 0.62, 0, 10));
     return g;
   },
-  plant(w) {
+  /** Cây trong nhà: bồn vuông bo góc màu kem, thân mảnh, tán lá chùm mềm (kiểu bàng Singapore / trầu bà) */
+  plant(w, d, h) {
     const g = new THREE.Group();
-    const r = w / 2;
-    g.add(cyl(r * 0.6, r * 0.45, 0.35, mat(0xd9d4cc, { roughness: 0.6 }), 0, 0.175, 0, 20));
-    g.add(cyl(r * 0.55, r * 0.55, 0.02, mat(0x4b3621), 0, 0.34, 0, 20));
-    g.add(cyl(0.02, 0.025, 0.6, mat(0x5b4030), 0, 0.6, 0, 8));
-    const rnd = mulberry(Math.round(w * 1000));
-    for (let i = 0; i < 9; i++) {
-      const s = r * (0.45 + rnd() * 0.35);
-      const leaf = new THREE.Mesh(new THREE.IcosahedronGeometry(s, 0), i % 2 ? M.leaf() : M.leaf2());
-      const a = rnd() * Math.PI * 2, rr = rnd() * r * 0.6;
-      leaf.position.set(Math.cos(a) * rr, 0.75 + rnd() * 0.6, Math.sin(a) * rr);
-      leaf.rotation.set(rnd() * 3, rnd() * 3, rnd() * 3);
-      leaf.castShadow = true;
-      g.add(leaf);
+    const s = Math.min(0.42, w * 0.75), H = Math.max(0.9, h || 1.4);
+    g.add(box(s, 0.42, s, mat(0xece6db, { roughness: 0.7 }), 0, 0.21, 0, 0.04));
+    g.add(box(s - 0.05, 0.02, s - 0.05, mat(0x3d3024, { roughness: 1 }), 0, 0.42, 0));
+    const rnd = mulberry(Math.round(w * 1000 + H * 37));
+    const stem = mat(0x6b5440, { roughness: 0.9 });
+    const leafTex = getTexture('foliage');
+    const leaves = [0x3f7d3a, 0x4f8f3f, 0x5e9a48].map((c) => mat(c, { roughness: 0.85, map: leafTex }));
+    const ball = new THREE.SphereGeometry(1, 14, 10);
+    const n = 3;
+    for (let k = 0; k < n; k++) {
+      const a = (k / n) * Math.PI * 2 + rnd(), lean = 0.05 + rnd() * 0.06, top = 0.42 + (H - 0.42) * (0.65 + rnd() * 0.3);
+      const tx = Math.cos(a) * lean * 2, tz = Math.sin(a) * lean * 2;
+      const st = cyl(0.012, 0.016, top - 0.42, stem, tx / 2, 0.42 + (top - 0.42) / 2, tz / 2, 6);
+      st.rotation.set(Math.sin(a) * lean, 0, -Math.cos(a) * lean);
+      g.add(st);
+      for (let j = 0; j < 6; j++) {
+        const r = 0.09 + rnd() * 0.08;
+        const b = new THREE.Mesh(ball, leaves[(k + j) % 3]);
+        b.scale.set(r * 1.2, r, r * 1.2);
+        b.position.set(tx + (rnd() - 0.5) * 0.25, top - 0.1 + rnd() * 0.25, tz + (rnd() - 0.5) * 0.25);
+        b.castShadow = true;
+        g.add(b);
+      }
     }
     return g;
   },
