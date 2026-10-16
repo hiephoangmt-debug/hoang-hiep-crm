@@ -37,7 +37,7 @@
 <script src="https://script.google.com/macros/s/AKfycbyMWXl47PShn-ikZKwrFONJb9z89NOmVG6yIioyjGxo55IEbLh4yP7KiREPsxgSbxBl/exec?js=1" data-key="qgK6I9KWTqfS" async></script>
 
 <style>
-:root{--night:#0A2540;--night2:#123459;--sand:#FFF8EF;--sand2:#F6EAD8;--cta1:#FF5A1F;--cta2:#FF8A00;--gold:#FFC531;--zalo:#0068FF;--call:#12A150;--ink:#1B2A3A;--muted:#5E6B78;--line:#E7DCCB}
+:root{--night:#0A2540;--night2:#123459;--sand:#FFF8EF;--sand2:#F6EAD8;--cta1:#FF5A1F;--cta2:#FF8A00;--ink:#1B2A3A;--muted:#5E6B78;--line:#E7DCCB;--soft:#B9C7D6}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;font-family:"Be Vietnam Pro",Arial,sans-serif;font-weight:400;color:var(--ink);background:var(--sand);font-size:16.5px;line-height:1.65;padding-bottom:72px}
@@ -47,22 +47,22 @@ a{color:inherit}
 h1,h2,h3{font-weight:800;line-height:1.2;margin:0 0 14px}
 h1{font-size:36px}
 h2{font-size:30px;color:var(--night)}
-h2 span{color:var(--cta1)}
+h2 span{color:inherit}
 h3{font-size:20px}
 p{margin:0 0 14px}
 .sec{padding:60px 0}
 .dark{background:var(--night);color:#DCE6F0}
 .dark h2{color:#fff}
-.dark h2 span{color:var(--gold)}
+.dark h2 span{color:inherit}
 .sandbg{background:var(--sand)}
 .sand2{background:var(--sand2)}
 .center{text-align:center}
-.kicker{display:inline-block;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cta1);margin-bottom:10px}
-.dark .kicker{color:var(--gold)}
+.kicker{display:inline-block;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.dark .kicker{color:var(--soft)}
 .lead{font-size:18px;color:var(--muted);max-width:760px}
 .dark .lead{color:#B9C7D6}
 .center .lead{margin-left:auto;margin-right:auto}
-.tag-gold{display:inline-block;background:var(--gold);color:var(--night);font-weight:800;font-size:13px;padding:6px 14px;border-radius:30px;letter-spacing:.5px}
+.tag-gold{display:inline-block;background:transparent;border:1.5px solid var(--cta1);color:var(--cta1);font-weight:800;font-size:13px;padding:6px 14px;border-radius:30px;letter-spacing:.5px}
 .illu{font-size:12.5px;color:var(--muted);font-style:italic;margin-top:6px}
 .dark .illu{color:#8FA3B8}
 .note{font-size:13.5px;color:var(--muted)}
@@ -75,12 +75,12 @@ p{margin:0 0 14px}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,138,0,.55),0 10px 24px rgba(255,90,31,.35)}70%{box-shadow:0 0 0 12px rgba(255,138,0,0),0 10px 24px rgba(255,90,31,.35)}100%{box-shadow:0 0 0 0 rgba(255,138,0,0),0 10px 24px rgba(255,90,31,.35)}}
 .duo{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
 .b-zalo,.b-call{display:block;text-align:center;font-weight:700;font-size:15.5px;text-decoration:none;color:#fff;padding:14px 8px;border-radius:12px}
-.b-zalo{background:var(--zalo)}
-.b-call{background:var(--call)}
+.b-zalo{background:var(--night)}
+.b-call{background:#fff;color:var(--night);border:2px solid var(--night)}
 
 /* Top bar */
 .topbar{background:#061A2E;color:#DCE6F0;text-align:center;font-size:14px;padding:9px 12px}
-.topbar a{color:var(--gold);font-weight:800;text-decoration:none}
+.topbar a{color:#fff;text-decoration:underline;font-weight:800;text-decoration:none}
 
 /* Hero */
 .hero{background:var(--night);color:#fff;padding:26px 0 40px}
@@ -88,11 +88,11 @@ p{margin:0 0 14px}
 .hero-pic img{width:100%;aspect-ratio:16/9;object-fit:cover}
 .hero-pic .lbl{position:absolute;left:10px;bottom:10px;background:rgba(6,26,46,.75);color:#fff;font-size:12px;padding:4px 10px;border-radius:20px}
 .hero h1{margin-top:22px}
-.hero h1 span{color:var(--gold)}
+.hero h1 span{color:inherit;font-weight:600}
 .hero .sub{color:#B9C7D6;font-size:17px}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0 22px}
 .stats div{background:var(--night2);border-radius:12px;padding:14px 8px;text-align:center}
-.stats b{display:block;color:var(--gold);font-size:22px;font-weight:800;line-height:1.2}
+.stats b{display:block;color:#fff;font-size:22px;font-weight:800;line-height:1.2}
 .stats span{font-size:13px;color:#B9C7D6}
 .hero-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:34px;align-items:start}
 
@@ -107,23 +107,23 @@ input:focus,select:focus{outline:2px solid var(--cta2);border-color:var(--cta2)}
 .fine{font-size:12.5px;color:var(--muted);text-align:center;margin-top:10px}
 .dark .fine{color:#9FB2C6}
 .f2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
-.ok-msg{background:#E9F8EF;border:1px solid #12A150;color:#0B5C2E;border-radius:10px;padding:14px;margin-top:14px;font-weight:600}
+.ok-msg{background:var(--sand);border:1px solid var(--night);color:var(--night);border-radius:10px;padding:14px;margin-top:14px;font-weight:600}
 .err-msg{color:#C62828;font-size:14px;margin-top:8px;font-weight:600}
 
 /* Need cards */
 .needs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
 .need{display:block;text-decoration:none;background:#fff;border:2px solid var(--line);border-radius:16px;padding:22px 18px;color:var(--ink);transition:.2s}
 .need:hover{border-color:var(--cta1);transform:translateY(-2px)}
-.need i{font-style:normal;font-size:30px;display:block;margin-bottom:10px}
+.need i{font-style:normal;font-size:13px;font-weight:700;letter-spacing:2px;color:var(--muted);display:block;margin-bottom:10px}
 .need b{display:block;font-size:17.5px;color:var(--night);margin-bottom:6px;line-height:1.3}
 .need span{font-size:14.5px;color:var(--muted)}
-.need em{display:block;font-style:normal;color:var(--cta1);font-weight:700;font-size:14px;margin-top:10px}
+.need em{display:block;font-style:normal;color:var(--night);font-weight:700;font-size:14px;margin-top:10px}
 
 /* Location */
 .loc{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;margin-top:26px}
 .map{background:#fff;border-radius:16px;padding:12px;border:1px solid var(--line)}
 .dist div{display:flex;justify-content:space-between;gap:10px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);font-weight:500}
-.dist b{color:var(--gold);white-space:nowrap}
+.dist b{color:#fff;white-space:nowrap}
 
 /* Compare */
 .vs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
@@ -133,19 +133,19 @@ input:focus,select:focus{outline:2px solid var(--cta2);border-color:var(--cta2)}
 .vs li{padding:11px 0 11px 30px;position:relative;border-top:1px solid rgba(0,0,0,.07)}
 .vs-a{background:#fff;border:1px solid var(--line);color:var(--muted)}
 .vs-a h3{color:var(--muted)}
-.vs-a li:before{content:"✕";position:absolute;left:4px;color:#C9A98A;font-weight:700}
+.vs-a li:before{content:"✕";position:absolute;left:4px;color:#A9B3BD;font-weight:700}
 .vs-b{background:var(--night);color:#E6EEF6}
-.vs-b h3{color:var(--gold)}
+.vs-b h3{color:#fff}
 .vs-b li{border-top-color:rgba(255,255,255,.12)}
-.vs-b li:before{content:"✓";position:absolute;left:4px;color:var(--gold);font-weight:800}
+.vs-b li:before{content:"✓";position:absolute;left:4px;color:#fff;font-weight:800}
 
 /* Table */
 .tbl{width:100%;border-collapse:collapse;margin-top:24px;background:#fff;border-radius:12px;overflow:hidden;font-size:15.5px}
 .tbl th,.tbl td{padding:13px 10px;text-align:center;border-bottom:1px solid #EEE4D6}
 .tbl th{background:var(--night);color:#fff;font-weight:700}
 .tbl td:first-child,.tbl th:first-child{text-align:left}
-.tbl .hl{color:var(--cta1);font-weight:800;font-size:17px}
-.disclaim{background:#FFF1D6;border-left:4px solid var(--gold);padding:12px 14px;border-radius:6px;font-size:14.5px;margin-top:12px;font-weight:600;color:#5A4410}
+.tbl .hl{color:var(--night);font-weight:800;font-size:17px}
+.disclaim{background:#fff;border-left:4px solid var(--night);padding:12px 14px;border-radius:6px;font-size:14.5px;margin-top:12px;font-weight:600;color:var(--night)}
 .src{font-size:13px;color:var(--muted);margin-top:10px}
 .facts3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
 .facts3 div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}
@@ -156,19 +156,19 @@ input:focus,select:focus{outline:2px solid var(--cta2);border-color:var(--cta2)}
 .dk{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;margin-top:26px}
 .dk-plan{background:var(--night2);border-radius:16px;padding:22px}
 .dk-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.dk-row div{background:rgba(255,255,255,.06);border:1px dashed rgba(255,197,49,.6);border-radius:12px;padding:22px 12px;text-align:center}
-.dk-row b{display:block;color:var(--gold);font-size:18px}
+.dk-row div{background:rgba(255,255,255,.06);border:1px dashed rgba(255,255,255,.4);border-radius:12px;padding:22px 12px;text-align:center}
+.dk-row b{display:block;color:#fff;font-size:18px}
 .dk-row span{font-size:13.5px;color:#B9C7D6}
 .dk-door{text-align:center;font-size:13px;color:#B9C7D6;margin-top:10px}
 .ticks{list-style:none;padding:0;margin:0}
 .ticks li{padding:8px 0 8px 30px;position:relative}
-.ticks li:before{content:"✓";position:absolute;left:2px;color:var(--gold);font-weight:800}
+.ticks li:before{content:"✓";position:absolute;left:2px;color:#fff;font-weight:800}
 
 /* Units */
 .units{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:26px}
 .unit{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 14px;display:flex;flex-direction:column}
 .unit .t{font-weight:800;color:var(--night);font-size:17px}
-.unit .a{color:var(--cta1);font-weight:800;font-size:21px;margin:4px 0 8px}
+.unit .a{color:var(--night);font-weight:800;font-size:21px;margin:4px 0 8px}
 .unit p{font-size:14px;color:var(--muted);flex:1}
 .unit a{display:block;text-align:center;text-decoration:none;font-weight:700;font-size:14.5px;color:var(--night);border:2px solid var(--night);border-radius:10px;padding:10px 6px}
 .unit a:hover{background:var(--night);color:#fff}
@@ -179,7 +179,7 @@ input:focus,select:focus{outline:2px solid var(--cta2);border-color:var(--cta2)}
 .legal small{display:block;font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
 .legal b{font-weight:700;color:var(--night)}
 .honest{margin-top:16px;background:var(--night);color:#fff;border-radius:12px;padding:16px 18px;font-weight:600}
-.honest b{color:var(--gold)}
+.honest b{text-decoration:underline}
 
 /* FAQ */
 .faq details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:10px}
@@ -187,20 +187,21 @@ input:focus,select:focus{outline:2px solid var(--cta2);border-color:var(--cta2)}
 .faq details p{margin:10px 0 0;color:var(--muted)}
 
 /* Final */
+.dark .tag-gold{color:#fff;border-color:rgba(255,255,255,.5)}
 .final .formbox{max-width:720px;margin:26px auto 0}
 
 /* Footer */
 footer{background:#061A2E;color:#B9C7D6;font-size:14.5px;padding:34px 0 30px}
 footer b{color:#fff}
-footer a{color:var(--gold);text-decoration:none;font-weight:600}
+footer a{color:#fff;text-decoration:underline;text-decoration:none;font-weight:600}
 .privacy{margin-top:18px;font-size:13.5px;color:#93A6BA}
-.privacy summary{cursor:pointer;color:var(--gold);font-weight:600}
+.privacy summary{cursor:pointer;color:#fff;font-weight:600}
 
 /* Sticky bottom bar (mobile) */
 .stick{position:fixed;left:0;right:0;bottom:0;z-index:9990;display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:8px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:rgba(6,26,46,.96);box-shadow:0 -6px 18px rgba(0,0,0,.25)}
 .stick a{display:block;text-align:center;text-decoration:none;color:#fff;font-weight:800;font-size:14px;padding:12px 4px;border-radius:10px}
-.stick .z{background:var(--zalo)}
-.stick .c{background:var(--call)}
+.stick .z{background:var(--night2)}
+.stick .c{background:var(--night2)}
 .stick .p{background:linear-gradient(90deg,var(--cta1),var(--cta2))}
 
 /* Chat */
@@ -213,8 +214,8 @@ footer a{color:var(--gold);text-decoration:none;font-weight:600}
 .hmc-x{margin-left:auto;background:none;border:0;color:#fff;font-size:24px;cursor:pointer;line-height:1}
 .hmc-b{padding:14px}
 .hmc-b p{font-size:14px;background:var(--sand);border-radius:12px;padding:10px 12px;margin-bottom:10px}
-.hmc-q{display:block;width:100%;text-align:left;font-family:inherit;font-size:14.5px;font-weight:600;color:var(--night);background:#fff;border:1.5px solid var(--zalo);border-radius:22px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
-.hmc-q:hover{background:#EEF4FF}
+.hmc-q{display:block;width:100%;text-align:left;font-family:inherit;font-size:14.5px;font-weight:600;color:var(--night);background:#fff;border:1.5px solid var(--night);border-radius:22px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
+.hmc-q:hover{background:var(--sand)}
 .hmc-tip{font-size:12px;color:var(--muted);margin:4px 2px 0}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:150px;z-index:9999;background:var(--night);color:#fff;font-size:14px;padding:10px 16px;border-radius:10px;display:none;max-width:90vw;text-align:center}
 
@@ -287,8 +288,8 @@ footer a{color:var(--gold);text-decoration:none;font-weight:600}
         <button class="btn" type="submit">NHẬN BẢNG GIÁ &amp; CĂN VIEW BIỂN QUA ZALO</button>
       </form>
       <div class="duo">
-        <a class="b-zalo" href="https://zalo.me/0904567009" target="_blank" rel="noopener" data-track="zalo">💬 Chat Zalo ngay</a>
-        <a class="b-call" href="tel:0904567009" data-track="call">📞 Gọi tư vấn</a>
+        <a class="b-zalo" href="https://zalo.me/0904567009" target="_blank" rel="noopener" data-track="zalo">Chat Zalo ngay</a>
+        <a class="b-call" href="tel:0904567009" data-track="call">Gọi tư vấn</a>
       </div>
       <p class="fine">Miễn phí · Gửi riêng qua Zalo · Thông tin chỉ dùng để tư vấn</p>
     </div>
@@ -303,10 +304,10 @@ footer a{color:var(--gold);text-decoration:none;font-weight:600}
       <h2>Chọn nhu cầu – <span>xem đúng phần dành cho bạn</span></h2>
     </div>
     <div class="needs">
-      <a class="need" href="#gia-dinh" data-need="Nhà nghỉ dưỡng cho gia đình"><i>🏖️</i><b>Nhà nghỉ dưỡng cho gia đình</b><span>Mỗi năm đều ra biển Đà Nẵng, muốn có chỗ của riêng mình.</span><em>Xem phần này →</em></a>
-      <a class="need" href="#dong-tien" data-need="Tài sản tạo dòng tiền"><i>💰</i><b>Tài sản tạo dòng tiền</b><span>Có 2–5 tỷ nhàn rỗi, muốn tài sản thật cho thuê được.</span><em>Xem phần này →</em></a>
-      <a class="need" href="#dual-key" data-need="Thêm phòng cho kinh doanh lưu trú (Dual Key)"><i>🔑</i><b>Thêm phòng cho kinh doanh lưu trú (Dual Key)</b><span>Đang làm homestay, khách sạn mini, cần thêm phòng view biển.</span><em>Xem phần này →</em></a>
-      <a class="need" href="#dong-can" data-need="Chọn căn đẹp đợt đầu"><i>⭐</i><b>Chọn căn đẹp đợt đầu</b><span>Muốn nhận thông tin sớm để chọn tầng cao, view trực diện.</span><em>Xem phần này →</em></a>
+      <a class="need" href="#gia-dinh" data-need="Nhà nghỉ dưỡng cho gia đình"><i>01</i><b>Nhà nghỉ dưỡng cho gia đình</b><span>Mỗi năm đều ra biển Đà Nẵng, muốn có chỗ của riêng mình.</span><em>Xem phần này →</em></a>
+      <a class="need" href="#dong-tien" data-need="Tài sản tạo dòng tiền"><i>02</i><b>Tài sản tạo dòng tiền</b><span>Có 2–5 tỷ nhàn rỗi, muốn tài sản thật cho thuê được.</span><em>Xem phần này →</em></a>
+      <a class="need" href="#dual-key" data-need="Thêm phòng cho kinh doanh lưu trú (Dual Key)"><i>03</i><b>Thêm phòng cho kinh doanh lưu trú (Dual Key)</b><span>Đang làm homestay, khách sạn mini, cần thêm phòng view biển.</span><em>Xem phần này →</em></a>
+      <a class="need" href="#dong-can" data-need="Chọn căn đẹp đợt đầu"><i>04</i><b>Chọn căn đẹp đợt đầu</b><span>Muốn nhận thông tin sớm để chọn tầng cao, view trực diện.</span><em>Xem phần này →</em></a>
     </div>
   </div>
 </section>
@@ -321,13 +322,13 @@ footer a{color:var(--gold);text-decoration:none;font-weight:600}
       <div>
         <div class="map">
           <svg viewBox="0 0 420 300" role="img" aria-label="Sơ đồ minh họa vị trí Hải Minh và các điểm lân cận" style="width:100%;height:auto;display:block">
-            <rect width="420" height="300" fill="#F3EBDD"/>
-            <path d="M300 0 C285 60 300 120 285 180 C272 235 290 270 300 300 L420 300 L420 0 Z" fill="#7FCBD9"/>
-            <path d="M300 0 C285 60 300 120 285 180 C272 235 290 270 300 300" stroke="#F5E3C2" stroke-width="10" fill="none"/>
+            <rect width="420" height="300" fill="#FFF8EF"/>
+            <path d="M300 0 C285 60 300 120 285 180 C272 235 290 270 300 300 L420 300 L420 0 Z" fill="#C9D6E3"/>
+            <path d="M300 0 C285 60 300 120 285 180 C272 235 290 270 300 300" stroke="#F6EAD8" stroke-width="10" fill="none"/>
             <text x="350" y="40" font-size="14" fill="#0A2540" font-weight="700" font-family="Arial">Biển</text>
             <text x="336" y="58" font-size="12" fill="#0A2540" font-family="Arial">Mỹ Khê – Non Nước</text>
-            <line x1="262" y1="0" x2="248" y2="300" stroke="#C9B89A" stroke-width="5"/>
-            <text x="150" y="20" font-size="11" fill="#7A6A50" font-family="Arial">Trục Võ Nguyên Giáp – Trường Sa</text>
+            <line x1="262" y1="0" x2="248" y2="300" stroke="#D9CDBB" stroke-width="5"/>
+            <text x="150" y="20" font-size="11" fill="#5E6B78" font-family="Arial">Trục Võ Nguyên Giáp – Trường Sa</text>
             <circle cx="262" cy="150" r="12" fill="#FF5A1F"/>
             <circle cx="262" cy="150" r="20" fill="none" stroke="#FF5A1F" stroke-width="2" opacity=".5"/>
             <text x="150" y="146" font-size="14" font-weight="800" fill="#0A2540" font-family="Arial">HẢI MINH</text>
@@ -341,11 +342,11 @@ footer a{color:var(--gold);text-decoration:none;font-weight:600}
         <p class="illu">Sơ đồ minh họa, không theo tỷ lệ.</p>
       </div>
       <div class="dist">
-        <div><span>🏖️ Bãi biển Mỹ Khê – Non Nước</span><b>Vài bước chân</b></div>
-        <div><span>🏨 Silver Shores (Hòn Ngọc Á Châu)</span><b>Đối diện</b></div>
-        <div><span>🍹 Phố du lịch An Thượng</span><b>5–10 phút</b></div>
-        <div><span>✈️ Sân bay quốc tế Đà Nẵng</span><b>15–20 phút</b></div>
-        <div><span>🏮 Phố cổ Hội An</span><b>~30 phút</b></div>
+        <div><span>Bãi biển Mỹ Khê – Non Nước</span><b>Vài bước chân</b></div>
+        <div><span>Silver Shores (Hòn Ngọc Á Châu)</span><b>Đối diện</b></div>
+        <div><span>Phố du lịch An Thượng</span><b>5–10 phút</b></div>
+        <div><span>Sân bay quốc tế Đà Nẵng</span><b>15–20 phút</b></div>
+        <div><span>Phố cổ Hội An</span><b>~30 phút</b></div>
         <p class="note" style="margin-top:12px">Thời gian di chuyển ước tính bằng ô tô, tùy giờ và giao thông.</p>
       </div>
     </div>
@@ -521,8 +522,8 @@ footer a{color:var(--gold);text-decoration:none;font-weight:600}
         <button class="btn" type="submit">ĐĂNG KÝ ƯU TIÊN – NHẬN BẢNG GIÁ QUA ZALO</button>
       </form>
       <div class="duo">
-        <a class="b-zalo" href="https://zalo.me/0904567009" target="_blank" rel="noopener" data-track="zalo">💬 Chat Zalo ngay</a>
-        <a class="b-call" href="tel:0904567009" data-track="call">📞 Gọi tư vấn</a>
+        <a class="b-zalo" href="https://zalo.me/0904567009" target="_blank" rel="noopener" data-track="zalo">Chat Zalo ngay</a>
+        <a class="b-call" href="tel:0904567009" data-track="call">Gọi tư vấn</a>
       </div>
       <p class="fine">Miễn phí · Không thu tiền giữ chỗ · Thông tin chỉ dùng để tư vấn dự án Hải Minh</p>
     </div>
@@ -545,8 +546,8 @@ footer a{color:var(--gold);text-decoration:none;font-weight:600}
 
 <!-- THANH LIÊN HỆ CỐ ĐỊNH (điện thoại) -->
 <nav class="stick" aria-label="Liên hệ nhanh">
-  <a class="z" href="https://zalo.me/0904567009" target="_blank" rel="noopener" data-track="zalo">💬 Zalo</a>
-  <a class="c" href="tel:0904567009" data-track="call">📞 Gọi</a>
+  <a class="z" href="https://zalo.me/0904567009" target="_blank" rel="noopener" data-track="zalo">Zalo</a>
+  <a class="c" href="tel:0904567009" data-track="call">Gọi</a>
   <a class="p" href="#dang-ky">Nhận bảng giá</a>
 </nav>
 
