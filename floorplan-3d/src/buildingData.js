@@ -131,7 +131,7 @@ export const STATUS = {
 /** Tầng có sân vườn riêng bao quanh (tầng 3A → 7) */
 export const GARDEN_FLOORS = new Set(['03A', '05', '06', '07']);
 /** Căn mẫu sân vườn tương ứng với căn gốc */
-export const GARDEN_UNIT = { '1pn-plus-b': 'sv-1pn-plus', '2pn-1wc': 'sv-2pn-1wc', '2pn-b': 'sv-2pn-2wc', '3pn': 'sv-3pn' };
+export const GARDEN_UNIT = { '1pn-plus-b': 'sv-1pn-plus', '2pn-1wc': 'sv-2pn-1wc', '2pn-b': 'sv-2pn-2wc', '3pn': 'sv-3pn', studio: 'sv-studio', 'studio-b': 'sv-studio-b', '1pn': 'sv-1pn', '1pn-plus': 'sv-1pn-plus-l', '2pn-a': 'sv-2pn-a' };
 
 export function residentialFloors(top) {
   const out = [];
