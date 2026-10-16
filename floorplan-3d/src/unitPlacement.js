@@ -1,6 +1,7 @@
 // Ghép mặt bằng căn chi tiết vào ô căn trên mặt bằng tầng: chọn hướng (xoay 0/90/180/270°, lật hay không)
 // sao cho cửa vào quay ra hành lang và góc kính cong trùng góc bo của tòa, rồi co giãn cho vừa ô.
 import * as THREE from 'three';
+import { SLOT_RADII, SLOT_ORIENT, CORRIDORS, rectM } from './buildingData.js';
 
 function unitFeatures(plan) {
   const xs = plan.walls.flatMap((w) => [w.a.x, w.b.x]), ys = plan.walls.flatMap((w) => [w.a.y, w.b.y]);
@@ -41,7 +42,15 @@ function nearestOnRects(p, rects) {
  * slot: { fit: {x0,y0,x1,y1} (mét), corner: điểm góc bo hoặc null }; corridors: các hình chữ nhật hành lang (mét)
  * Trả về Matrix4 đặt căn (toạ độ mặt bằng căn → toạ độ tòa nhà, y = cao độ sàn).
  */
-export function placeUnit(plan, slot, corridors, floorY) {
+/** Khung ô căn + góc bo của tòa (mét) */
+export function slotFrame(sl) {
+  const r = SLOT_RADII[sl.slot] || {}, f = sl.fit;
+  const corner = r.tl ? { x: f.x0, y: f.y0 } : r.tr ? { x: f.x1, y: f.y0 } : r.bl ? { x: f.x0, y: f.y1 } : r.br ? { x: f.x1, y: f.y1 } : null;
+  return { fit: f, corner, orient: SLOT_ORIENT[sl.slot] };
+}
+
+/** Hướng đặt căn mẫu vào ô: k (số lần xoay 90°), m (lật), sx/sy (co giãn) */
+export function slotOrientation(plan, slot, corridors = CORRIDORS.map(rectM)) {
   const f = unitFeatures(plan);
   const fit = slot.fit;
   const SW = fit.x1 - fit.x0, SH = fit.y1 - fit.y0;
@@ -58,6 +67,7 @@ export function placeUnit(plan, slot, corridors, floorY) {
   let best = null;
   for (let k = 0; k < 4; k++)
     for (const m of [false, true]) {
+      if (slot.orient && (slot.orient.k !== k || slot.orient.m !== m)) continue; // hướng đã đối chiếu bản vẽ
       const W = k % 2 ? f.h : f.w, H = k % 2 ? f.w : f.h;
       const sx = SW / W, sy = SH / H;
       const map = (p) => { const q = tf({ x: p.x - f.c.x, y: p.y - f.c.y }, k, m); return { x: sc.x + q.x * sx, y: sc.y + q.y * sy }; };
@@ -65,13 +75,42 @@ export function placeUnit(plan, slot, corridors, floorY) {
       let score = Math.hypot(e.x - door.x, e.y - door.y) + Math.abs(Math.log(sx / sy)) * 6;
       if (f.curve && slot.corner) { const cc = map(f.curve); score += Math.hypot(cc.x - slot.corner.x, cc.y - slot.corner.y) * 1.5; }
       else if (f.curve || slot.corner) score += 4;
-      if (!best || score < best.score) best = { score, k, m, sx, sy };
+      if (!best || score < best.score) best = { score, k, m, sx, sy, c: f.c, sc };
     }
+  return best;
+}
+
+/**
+ * slot: { fit: {x0,y0,x1,y1} (mét), corner: điểm góc bo hoặc null }; corridors: các hình chữ nhật hành lang (mét)
+ * Trả về Matrix4 đặt căn (toạ độ mặt bằng căn → toạ độ tòa nhà, y = cao độ sàn).
+ */
+export function placeUnit(plan, slot, corridors, floorY) {
+  const best = slotOrientation(plan, slot, corridors);
   // Ghép ma trận: dời tâm căn về gốc → lật → xoay → co giãn → đặt vào ô
-  const M = new THREE.Matrix4().makeTranslation(-f.c.x, 0, -f.c.y);
+  const M = new THREE.Matrix4().makeTranslation(-best.c.x, 0, -best.c.y);
   if (best.m) M.premultiply(new THREE.Matrix4().makeScale(-1, 1, 1));
   M.premultiply(new THREE.Matrix4().makeRotationY((-best.k * Math.PI) / 2));
   M.premultiply(new THREE.Matrix4().makeScale(best.sx, 1, best.sy));
-  M.premultiply(new THREE.Matrix4().makeTranslation(sc.x, floorY, sc.y));
+  M.premultiply(new THREE.Matrix4().makeTranslation(best.sc.x, floorY, best.sc.y));
   return M;
+}
+
+/**
+ * Mặt bằng căn quay/lật đúng như vị trí trên mặt bằng tầng (giữ nguyên kích thước thật).
+ * Lật: đảo đầu tường (giữ phía mở cửa) và đổi bản lề cửa; đồ nội thất đổi góc.
+ */
+export function orientPlan(plan, { k, m }) {
+  const p = JSON.parse(JSON.stringify(plan));
+  const T = (q) => { const r = tf(q, k, m); q.x = +r.x.toFixed(4); q.y = +r.y.toFixed(4); };
+  for (const w of p.walls) { T(w.a); T(w.b); if (m) [w.a, w.b] = [w.b, w.a]; }
+  if (m) for (const o of p.openings) { o.t = 1 - o.t; if (o.type === 'door') o.flip = !o.flip; }
+  for (const r of p.rooms) { r.points.forEach(T); if (m) r.points.reverse(); }
+  for (const f of p.furniture) {
+    T(f);
+    let rot = f.rot || 0;
+    if (m) rot = 360 - rot;
+    f.rot = (((rot + k * 90) % 360) + 360) % 360;
+  }
+  for (const l of p.labels || []) T(l);
+  return p;
 }

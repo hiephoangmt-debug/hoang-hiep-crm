@@ -5,9 +5,9 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Sky } from 'three/examples/jsm/objects/Sky.js';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
-import { SLOT_LIST, CORES, CORRIDORS, PODIUM, rectM, STATUS, TYPE_COLORS, residentialFloors, unitCode, unitPrice, areaOf, DEFAULT_UNIT, GARDEN_FLOORS, SHOPS, POOL, POOL_DECK, gardenOf } from './buildingData.js';
+import { SLOT_LIST, CORES, CORRIDORS, PODIUM, rectM, STATUS, TYPE_COLORS, residentialFloors, unitCode, unitPrice, areaOf, DEFAULT_UNIT, GARDEN_FLOORS, SHOPS, POOL, POOL_DECK, gardenOf, SLOT_RADII } from './buildingData.js';
 import { buildScene } from './builder.js';
-import { placeUnit } from './unitPlacement.js';
+import { placeUnit, slotFrame } from './unitPlacement.js';
 import UNITS from './units/units.json';
 import { buildSurroundings } from './surroundings.js';
 
@@ -60,7 +60,6 @@ function roundedPrism(r, y0, h, radii = {}, inset = 0) {
 }
 
 // Góc bo theo mặt bằng tòa F2
-const SLOT_RADII = { 24: { tl: 4.2 }, 26: { tr: 3 }, '03': { tl: 3 }, '05': { tr: 4.2 }, 19: { bl: 4.2 }, 17: { br: 3 }, 12: { bl: 3 }, 10: { br: 4.2 } };
 const WINGS = [
   { px: [440, 340, 810, 1135], radii: { tl: 4.2, tr: 3, bl: 4.2, br: 3 } },
   { px: [810, 635, 1265, 1095], radii: {} },
@@ -736,11 +735,8 @@ export class BuildingView {
       this._unitCache.set(key, proto);
     }
     const g = proto.clone(true);
-    const r = SLOT_RADII[sl.slot] || {};
-    const f = sl.fit;
-    const corner = r.tl ? { x: f.x0, y: f.y0 } : r.tr ? { x: f.x1, y: f.y0 } : r.bl ? { x: f.x0, y: f.y1 } : r.br ? { x: f.x1, y: f.y1 } : null;
     g.matrixAutoUpdate = false;
-    g.matrix.copy(placeUnit(layout.plan, { fit: f, corner }, CORRIDORS_M, y + 0.12));
+    g.matrix.copy(placeUnit(layout.plan, slotFrame(sl), CORRIDORS_M, y + 0.12));
     root.add(g);
     // Đế màu theo trạng thái / loại căn bên dưới căn (lộ ra như viền màu)
     const plate = new THREE.Mesh(roundedPrism(sl.fit, y, 0.12, SLOT_RADII[sl.slot], -0.05), material);
