@@ -18,6 +18,7 @@ import re
 import sys
 import time
 import unicodedata
+from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
@@ -29,6 +30,9 @@ from bs4 import BeautifulSoup
 ROOT = Path(__file__).resolve().parent
 CONFIG = json.loads((ROOT / "sources.json").read_text(encoding="utf-8"))
 SEEN_FILE = ROOT / "seen.json"
+DIGEST_DIR = ROOT / "digest"  # tin đã gửi theo ngày, để đăng bản tin lên web
+DIGEST_KEEP_DAYS = 30
+VN_TZ = timezone(timedelta(hours=7))
 SEEN_LIMIT = 5000
 MAX_PER_RUN = 30
 HEADERS = {
@@ -193,6 +197,27 @@ def format_message(item):
     return "\n".join(lines)
 
 
+def save_digest(items):
+    """Ghi tin đã gửi vào digest/YYYY-MM-DD.json (giờ Việt Nam)."""
+    if not items:
+        return
+    DIGEST_DIR.mkdir(exist_ok=True)
+    now = datetime.now(VN_TZ)
+    path = DIGEST_DIR / f"{now:%Y-%m-%d}.json"
+    data = json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
+    for it in items:
+        data.append({
+            "title": it["title"], "link": it["link"], "source": it["source"],
+            "summary": it["summary"][:400], "keywords": it["keywords"][:6],
+            "time": now.strftime("%H:%M"),
+        })
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    cutoff = f"{now - timedelta(days=DIGEST_KEEP_DAYS):%Y-%m-%d}"
+    for old in DIGEST_DIR.glob("*.json"):
+        if old.stem < cutoff:
+            old.unlink()
+
+
 def main():
     dry_run = os.environ.get("DRY_RUN") == "1"
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
@@ -266,7 +291,7 @@ def main():
     else:
         to_send = new_items[-MAX_PER_RUN:]
 
-    sent, failed = 0, []
+    sent, failed, delivered = 0, [], []
     for it in to_send:
         msg = format_message(it)
         if dry_run:
@@ -275,6 +300,7 @@ def main():
         try:
             send_telegram(token, chat_id, msg)
             sent += 1
+            delivered.append(it)
         except (TelegramError, requests.RequestException) as e:
             failed.append(it)
             print(f"LỖI GỬI \"{it['title'][:60]}\": {e}", file=sys.stderr)
@@ -287,6 +313,7 @@ def main():
 
     if not dry_run:
         SEEN_FILE.write_text(json.dumps(seen[-SEEN_LIMIT:], indent=0) + "\n")
+        save_digest(delivered)
 
 
 if __name__ == "__main__":

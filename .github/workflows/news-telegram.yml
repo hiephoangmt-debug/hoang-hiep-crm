@@ -39,10 +39,10 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           TEST_MESSAGE: ${{ inputs.test_message && '1' || '' }}
-      # Lưu danh sách bài đã gửi để lần sau không gửi trùng.
+      # Lưu danh sách bài đã gửi (không gửi trùng) và tin trong ngày (để đăng bản tin lên web).
       - name: Lưu trạng thái
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
-          git add seen.json
-          git diff --cached --quiet || (git commit -m "news-telegram: cập nhật bài đã gửi [skip ci]" && git push)
+          git add seen.json digest
+          git diff --cached --quiet || (git commit -m "news-telegram: cập nhật bài đã gửi [skip ci]" && git pull --rebase origin main && git push)
