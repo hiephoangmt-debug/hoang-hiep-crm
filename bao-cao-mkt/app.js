@@ -740,10 +740,11 @@
     // Logo theo dự án. Chỉ nhận ảnh logo đúng kích thước gốc (mẫu mới dùng lại tên image9.png cho icon Facebook).
     // Mẫu thiếu logo của đơn vị (vd mẫu chỉ có TATILAND) thì thêm ảnh logo từ opts.logoExtra.
     let logos = opts.logos;
-    if (opts.logo && opts.logoSizes) {
+    const logoSizes = opts.logoSizes || { "TATILAND": [522, 260], "TATI INVEST": [600, 600] };
+    if (opts.logo) {
       logos = {};
       for (const [k, f] of Object.entries(opts.logos || {})) {
-        const zf = zip.file("ppt/media/" + f), want = opts.logoSizes[k];
+        const zf = zip.file("ppt/media/" + f), want = logoSizes[k];
         if (!zf) continue;
         const b = await zf.async("uint8array");
         const w = (b[16] << 24) | (b[17] << 16) | (b[18] << 8) | b[19], h = (b[20] << 24) | (b[21] << 16) | (b[22] << 8) | b[23];
