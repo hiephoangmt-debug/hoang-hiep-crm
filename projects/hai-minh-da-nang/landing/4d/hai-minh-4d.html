@@ -282,7 +282,7 @@ polyFlat(RIV,0x3f86a8,2.5);
   // layout traced from the satellite map: Hòn Lao (main, N–S), Hòn Mồ (NE), Hòn Dài (E), Hòn Lá / Hòn Tai to the south
   [[0,-200,190,165,330],[330,-570,75,38,55],[150,65,85,40,50],[-60,445,80,52,60],[25,675,28,16,26]].forEach(function(h){ var m=new THREE.Mesh(new THREE.SphereGeometry(1,28,12),mat); m.scale.set(h[2],h[3],h[4]); m.position.set(bx+h[0],0,bz+h[1]); scene.add(m); });
   window.__CLC=[bx,bz]; })();
-var NHS=mp(1600,1315); [[0,0,70,106],[-170,90,55,70],[120,160,60,80],[-60,260,45,55],[150,-60,40,50]].forEach(function(h){hill(NHS[0]+h[0],NHS[1]+h[1],h[2],h[3],0x7e8f73);});
+var NHS=mp(1700,1315); [[0,0,70,106],[-170,90,55,70],[120,160,60,80],[-60,260,45,55],[150,-60,40,50]].forEach(function(h){hill(NHS[0]+h[0],NHS[1]+h[1],h[2],h[3],0x7e8f73);});
 function inPoly(x,y,P){ var c=false; for(var i=0,j=P.length-1;i<P.length;j=i++){ if(((P[i][1]>y)!==(P[j][1]>y))&&(x<(P[j][0]-P[i][0])*(y-P[i][1])/(P[j][1]-P[i][1])+P[i][0])) c=!c; } return c; }
 // bridges: Trần Thị Lý (north) and Tiên Sơn (by Lotte Mart)
 function mroad(a,b,w,col,y){ var A=mp(a[0],a[1]),B=mp(b[0],b[1]),dx=B[0]-A[0],dz=B[1]-A[1],L=Math.hypot(dx,dz);
@@ -581,6 +581,7 @@ function loop(){
 }
 if(/closeMod/.test(location.search)) setMode('close');
 if(/viewW/.test(location.search)){ setMode('view'); yaw=Math.PI; placeViewCam(); }
+if(/viewS/.test(location.search)){ setMode('view'); yaw=Math.PI/2; placeViewCam(); }
 loop();
 })();
 </script>
