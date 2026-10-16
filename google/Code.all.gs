@@ -23,7 +23,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-40', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-41', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -1009,11 +1009,30 @@ function doPost(e) {
     if (!site) return json_({ error: 'Mã website không hợp lệ' });
     var action = b.action || (b.type === 'pageview' || b.type === 'click' ? 'track' : 'lead');
     if (action === 'track') return json_(handleTrack_(b, site));
-    return json_(handleLead_(b, site));
+    return json_(handleLead_(normLeadBody_(b), site));
   } catch (err) {
     return json_({ error: String(err && err.message || err) });
   }
 }
+
+// Form của landing page (LadiPage...) gửi thẳng sang đây: hiểu các trường thường gặp, không cần mã nhúng.
+function normLeadBody_(b) {
+  var o = {}; for (var k in b) o[k] = b[k];
+  var u = str_(o.url || (/^https?:/i.test(String(o.source || '')) ? o.source : ''), 300);
+  o.url = u;
+  if (!o.vid) o.vid = 'form-' + Utilities.getUuid().slice(0, 8);
+  var med = [o.utm_source, o.utm_medium, o.utm_campaign].filter(function (x) { return x; }).join(' / ');
+  if (o.utm_medium || (o.utm_source && o.utm_campaign)) { o.utm_campaign = o.utm_campaign ? med : o.utm_campaign; }
+  if (!o.utm_source) o.utm_source = /^https?:/i.test(String(o.source || '')) || !o.source ? 'website' : o.source;
+  if (!o.message) {
+    var parts = [];
+    if (o.interest) parts.push('Quan tâm: ' + o.interest);
+    ['plan', 'need', 'budget', 'note'].forEach(function (f) { if (o[f]) parts.push(String(o[f])); });
+    o.message = parts.join(' · ');
+  }
+  return o;
+}
+function projClean_(n) { return String(n || '').replace(/^\s*sun\s+(?=\S+\s+\S+)/i, '').replace(/\s+sun\s*group\s*$/i, '').trim(); }
 
 function json_(o) {
   return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
@@ -1129,6 +1148,8 @@ function handleLead_(b, site) {
       ensureLeadCols_(sh);
       sh.getRange(r, 40).setValue(String(b.vid || '').indexOf('manual-') === 0 ? 'Nhập thủ công' : 'Website');
       sh.getRange(r, 41).setValue(str_(b.url, 300));
+      var pj = projClean_(b.project || site.name); if (pj) sh.getRange(r, 42).setValue(str_(pj, 120));
+      var tz = /(?:toa|tòa|toà)[\s-]*(f[1-5])/i.exec(String(b.url || '') + ' ' + String(b.interest || '') + ' ' + String(b.message || '')); if (tz) sh.getRange(r, 46).setValue(tz[1].toUpperCase());
     } else {
       var c = sh.getRange(row, 10);
       c.setValue((Number(c.getValue()) || 1) + 1);
@@ -1168,6 +1189,7 @@ function onOpen() {
     .addItem('Cài khoá quân sư (AI)', 'caiKhoaQuanSu')
     .addItem('Cấp quyền đọc Google Sheet khác (để nhập khách)', 'capQuyenDocSheet')
     .addItem('Xem mã nhúng cho các website', 'showEmbed')
+    .addItem('Lấy đường dẫn nhận khách từ form (LadiPage)', 'showWebhook')
     .addItem('Tạo mã website ngẫu nhiên', 'newSiteKey')
     .addToUi();
 }
@@ -1190,6 +1212,16 @@ function showEmbed() {
   });
   SpreadsheetApp.getUi().alert('Dán vào <head> của từng landing page:\n\n' + (out.join('\n\n') || 'Chưa có website ở tab Website.') +
     '\n\nWebhook form (POST): ' + url + '?key=MÃ_WEBSITE');
+}
+
+function showWebhook() {
+  var url = webAppUrl_();
+  if (!url) { SpreadsheetApp.getUi().alert('Chưa triển khai. Vào Triển khai > Tùy chọn triển khai mới > Ứng dụng web.'); return; }
+  var sh = ss_().getSheetByName(S_SITES), n = sh.getLastRow(), out = [];
+  if (n > 1) sh.getRange(2, 1, n - 1, 3).getValues().forEach(function (r) { if (r[0] && String(r[2]).length >= 8) out.push(r[0] + ':\n' + url + '?key=' + r[2]); });
+  var msg = 'Dán đường dẫn này vào chỗ gửi khách (crmEndpoint) của form. Mỗi khách để lại số sẽ tự vào CRM.\n\n' + (out.join('\n\n') || 'Chưa có website ở tab Website.');
+  Logger.log(msg);
+  try { SpreadsheetApp.getUi().alert(msg); } catch (e) {}
 }
 
 function newSiteKey() {
