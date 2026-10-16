@@ -7,6 +7,7 @@ export const FLOOR_TYPES = {
   wood: 'Sàn gỗ',
   oak: 'Gỗ sồi sáng',
   walnut: 'Gỗ óc chó',
+  marbleGray: 'Đá xám vân trắng',
   darkTile: 'Gạch xám đậm',
   encaustic: 'Gạch bông',
   polished: 'Bê tông mài',

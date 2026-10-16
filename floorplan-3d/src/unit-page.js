@@ -132,6 +132,7 @@ function selectUnit(id) {
   try { history.replaceState(null, '', '#' + unit.id); } catch { /* bỏ qua */ }
   store.plan = JSON.parse(JSON.stringify(unit.plan));
   if (viewer?.state.ad) applyStyle('green');
+  else applyStyle(curStyle);
   $('#planImg').src = `./units/${unit.tpl || unit.id}.webp`;
   renderInfo();
   if (!viewer) {
@@ -200,8 +201,11 @@ function renderInfo() {
   };
 }
 
-function applyStyle(key) {
+// Phong cách mặc định của trang xem căn: gỗ óc chó sang trọng (giữ lựa chọn của khách khi đổi căn)
+let curStyle = 'walnut';
+function applyStyle(key, remember) {
   const st = STYLES[key];
+  if (remember) curStyle = key;
   store.plan.settings.style = key;
   store.plan.settings.palette = {};
   // sân vườn giữ cỏ
@@ -211,7 +215,7 @@ function applyStyle(key) {
 
 function renderStyles() {
   $('#styles').innerHTML = Object.entries(STYLES).slice(0, 6).map(([k, v]) => `<button class="chip ${store.plan?.settings.style === k ? 'active' : ''}" data-style="${k}" title="${v.desc}"><span class="sw">${[v.wall, v.palette.wood, v.palette.fabric].map((c) => `<i style="background:${c}"></i>`).join('')}</span>${v.name.replace(/ \(.*\)/, '')}</button>`).join('');
-  $$('[data-style]').forEach((b) => (b.onclick = () => { applyStyle(b.dataset.style); viewer.rebuild(); }));
+  $$('[data-style]').forEach((b) => (b.onclick = () => { applyStyle(b.dataset.style, true); viewer.rebuild(); }));
 }
 
 function setTab(t) {
