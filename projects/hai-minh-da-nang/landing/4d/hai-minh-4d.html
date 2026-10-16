@@ -326,41 +326,49 @@ function fins(grp,list,h,yb,mat,s){ var im=new THREE.InstancedMesh(new THREE.Box
 
 /* Scheme A – aerial render: dark glass, white floor bands, terracotta crown + vertical strips, podium wing with roof garden */
 var A=new THREE.Group(); T.add(A);
-var AW=19, AD=46;
-// base: the tower shaft runs straight to the ground; 2-storey glass shopfronts with white bands
-boxP(A,AW-1.6,FL[3],AD-1.6,0,0,0,glass);
-var colm=[]; for(var s2=-1;s2<=1;s2+=2){ for(var z=-AD/2+2;z<=AD/2-2;z+=6) colm.push([s2*(AW/2+.4),z]); for(var x=-AW/2+3;x<=AW/2-3;x+=6) colm.push([x,s2*(AD/2+.4)]); }
-fins(A,colm,FL[3],0,white,.6);
-// side wing along Nguyễn Đức Thuận: 3 storeys, roof garden with planters and a pergola
-// podium wing (render A): continues from the tower's south end, set back ~1 m from the Võ Nguyên Giáp face
-var WWd=22, WDd=30, WX=AW/2-1-WWd/2, WZ=AD/2+WDd/2-3, WH=FL[4];
-boxP(A,WWd-1.2,WH,WDd-1.2,WX,0,WZ,glass);
-var wc=[]; for(var x=WX-WWd/2+2;x<=WX+WWd/2-2;x+=6) wc.push([x,WZ+WDd/2-.3]); for(var z=WZ-WDd/2+5;z<=WZ+WDd/2-2;z+=6) wc.push([WX+WWd/2-.3,z]); fins(A,wc,FL[3],0,white,.6);
-[FL[2],FL[3],WH].forEach(function(yy,i){ var m=slab(A,rrect(WWd+1.6,WDd+1.6,.3),yy-(i<2?.35:0),i<2?.35:.6,white); m.position.x=WX; m.position.z=WZ; });
-var gr=new THREE.Mesh(new THREE.PlaneGeometry(WWd-2,WDd-2),greenRoof); gr.rotation.x=-Math.PI/2; gr.position.set(WX,WH+.65,WZ); A.add(gr);
-var pl=[]; for(var i=0;i<5;i++) pl.push([WX-WWd/2+2.5+i*4.2, WZ+WDd/2-2.2]); for(var i=0;i<6;i++) pl.push([WX+WWd/2-2.2, WZ-WDd/2+6+i*3.6]);
-pl.forEach(function(q){ boxP(A,2.6,.9,2.6,q[0],WH+.6,q[1],white); shrubsLocal(A,q[0],WH+1,q[1]); });
-for(var i=0;i<6;i++) shrubsLocal(A,WX+rnd(-8,8),WH+.6,WZ+rnd(-6,12));
-for(var i=0;i<4;i++) boxP(A,.4,3.2,.4,WX-6+i*4,WH+.6,WZ+4,white);
-boxP(A,14,.35,6,WX,WH+3.8,WZ+4,white);
+var AW=18, AD=48;
+// L-shaped tower (as described by the owner): the "back" of the L runs along Trường Sa (east wing),
+// the "foot" along Nguyễn Đức Thuận (north wing), the inner corner faces the pool deck inside the lot
+var NWX0=-31, NWZ1=-6;                                     // north wing: x NWX0..-AW/2, z -AD/2..NWZ1
+function Lpts(o){ return [[NWX0-o,-AD/2-o],[AW/2+o,-AD/2-o],[AW/2+o,AD/2+o],[-AW/2-o,AD/2+o],[-AW/2-o,NWZ1+o],[NWX0-o,NWZ1+o]]; }
+function Lshape(o,hole){ var P=Lpts(o), sh=new THREE.Shape(); P.forEach(function(p,i){ if(i) sh.lineTo(p[0],-p[1]); else sh.moveTo(p[0],-p[1]); }); sh.closePath();
+  if(hole!=null){ var H=Lpts(hole), hp=new THREE.Path(); H.slice().reverse().forEach(function(p,i){ if(i) hp.lineTo(p[0],-p[1]); else hp.moveTo(p[0],-p[1]); }); hp.closePath(); sh.holes.push(hp); } return sh; }
+function Lperim(o,step,skip){ var P=Lpts(o), out=[]; for(var i=0;i<P.length;i++){ var a=P[i], b=P[(i+1)%P.length], L=Math.hypot(b[0]-a[0],b[1]-a[1]), n=Math.max(1,Math.round(L/step));
+  for(var k=0;k<n;k++){ var t=(k+.5)/n, q=[a[0]+(b[0]-a[0])*t, a[1]+(b[1]-a[1])*t]; if(!skip||!skip(q)) out.push(q); } } return out; }
+
+// podium: 2-storey rectangle under the whole L; shopfronts on Trường Sa and Nguyễn Đức Thuận
+var PX0=NWX0-2, PX1=AW/2+3, PZ0=-AD/2-3, PZ1=AD/2+3, PW=PX1-PX0, PD=PZ1-PZ0, PCX=(PX0+PX1)/2, PCZ=(PZ0+PZ1)/2, WH=FL[3];
+boxP(A,PW-1.2,WH,PD-1.2,PCX,0,PCZ,glass);
+var wc=[]; for(var x=PX0+1;x<=PX1-1;x+=4.5){ wc.push([x,PZ0+.3]); wc.push([x,PZ1-.3]); } for(var z=PZ0+1;z<=PZ1-1;z+=4.5){ wc.push([PX1-.3,z]); wc.push([PX0+.3,z]); } fins(A,wc,WH,0,white,.6);
+[FL[2],WH].forEach(function(yy,i){ var m=slab(A,rrect(PW+1.4,PD+1.4,.3),yy-(i<1?.35:0),i<1?.35:.7,white); m.position.x=PCX; m.position.z=PCZ; });
+// floor 3 deck in the belly of the L: timber deck, swimming pool, loungers, planters and palms
+var deckY=WH+.7;
+var dk=new THREE.Mesh(new THREE.PlaneGeometry(PW-1.4,PD-1.4),M(0xb89a74,{roughness:.9})); dk.rotation.x=-Math.PI/2; dk.position.set(PCX,deckY+.02,PCZ); A.add(dk);
+var poolX0=NWX0+3, poolX1=-AW/2-4, poolZ0=NWZ1+5, poolZ1=AD/2-2;
+boxP(A,poolX1-poolX0+1.6,.5,poolZ1-poolZ0+1.6,(poolX0+poolX1)/2,deckY,(poolZ0+poolZ1)/2,white);
+var pw=new THREE.Mesh(new THREE.PlaneGeometry(poolX1-poolX0,poolZ1-poolZ0),M(0x38c6d9,{roughness:.08,metalness:.1,envMapIntensity:1.1,emissive:0x0b5866,emissiveIntensity:.25}));
+pw.rotation.x=-Math.PI/2; pw.position.set((poolX0+poolX1)/2,deckY+.55,(poolZ0+poolZ1)/2); A.add(pw);
+for(var i=0;i<6;i++){ boxP(A,1.1,.35,2.2,-AW/2-1.8,deckY,poolZ0+1.5+i*3.4,white); }
+var pl=[]; for(var z=NWZ1+2;z<=PZ1-1.5;z+=2.6) pl.push([PX0+1.3,z]); for(var x=PX0+1.5;x<=-AW/2-1;x+=2.6) pl.push([x,PZ1-1.3]);
+pl.forEach(function(q){ boxP(A,1.6,.8,1.6,q[0],deckY,q[1],white); shrubsLocal(A,q[0],deckY+.3,q[1]); });
 function shrubsLocal(grp,x,yy,z){ var m=new THREE.Mesh(new THREE.IcosahedronGeometry(rnd(.8,1.4),0),M(0x467d38)); m.position.set(x,yy+.6,z); m.castShadow=true; grp.add(m); }
-// glass shaft with a recessed vertical channel
-var shaftH=TOP-FL[3];
-boxP(A,AW,shaftH,AD*.36,0,FL[3],-AD/2+AD*.18,glass);
-boxP(A,AW-3,shaftH,AD*.1,0,FL[3],-AD/2+AD*.41,glass);       // recess (red channel)
-boxP(A,AW,shaftH,AD*.54,0,FL[3],AD/2-AD*.27,glass);
-// white floor bands (floors 3–25), terracotta for the crown floors
-for(var f=2;f<=30;f++) slab(A,rrect(AW+2.6,AD+2.6,.25),FL[f]-.32,f<=3?.5:.32,f>=26?red:white);
-slab(A,rrect(AW+3.4,AD+3.4,.25),TOP,1.2,red);           // roof slab
-// balcony dividers (dark) on long faces
-var dv=[]; for(var s2=-1;s2<=1;s2+=2) for(var z=-AD/2+2;z<=AD/2-2;z+=3.1) dv.push([s2*(AW/2+.9),z]);
-fins(A,dv,FL[26]-FL[3],FL[3],dark,.25);
-// terracotta grid: crown columns all round + 2 vertical strips down the long facades
-var cr=[]; for(var s2=-1;s2<=1;s2+=2){ for(var z=-AD/2+1.5;z<=AD/2-1.5;z+=3.1) cr.push([s2*(AW/2+1.4),z]); for(var x=-AW/2+1.5;x<=AW/2-1.5;x+=3.1) cr.push([x,s2*(AD/2+1.4)]); }
-fins(A,cr,TOP+1-FL[26],FL[26],red,.7);
-var st=[]; [-AD/2+AD*.36, -AD/2+AD*.46, AD/2-6.5, AD/2-3.2].forEach(function(z){ st.push([AW/2+1.2,z]); st.push([-(AW/2+1.2),z]); });
+
+// tower shaft: east wing (with a recessed channel on the Trường Sa face) + north wing
+var shaftH=TOP-FL[3], chZ0=-7, chZ1=-2.5;
+boxP(A,AW,shaftH,chZ0+AD/2,0,FL[3],(-AD/2+chZ0)/2,glass);
+boxP(A,AW-3,shaftH,chZ1-chZ0,-1.5,FL[3],(chZ0+chZ1)/2,glass);       // recess (red channel)
+boxP(A,AW,shaftH,AD/2-chZ1,0,FL[3],(chZ1+AD/2)/2,glass);
+boxP(A,-AW/2-NWX0,shaftH,NWZ1+AD/2,(NWX0-AW/2)/2,FL[3],(-AD/2+NWZ1)/2,glass);
+// white floor bands following the L, terracotta for the crown floors; flat red roof
+for(var f=3;f<=30;f++) slab(A,Lshape(1.3),FL[f]-.32,f===3?.5:.32,f>=26?red:white);
+slab(A,Lshape(1.7),TOP,1.2,red);
+// balcony dividers (dark) all round
+fins(A,Lperim(.9,3.1),FL[26]-FL[3],FL[3],dark,.25);
+// terracotta crown grid all round + vertical strips on the Trường Sa face and at the north-west end
+fins(A,Lperim(1.4,3.1),TOP+1-FL[26],FL[26],red,.7);
+var st=[[AW/2+1.2,chZ0-.3],[AW/2+1.2,chZ1+.3],[AW/2+1.2,AD/2-6.5],[AW/2+1.2,AD/2-3.2],[NWX0+3.2,-AD/2-1.2],[NWX0+6.5,-AD/2-1.2]];
 fins(A,st,FL[26]-FL[3]+2,FL[3]-2,red,.8);
-for(var f=4;f<=25;f++){ boxP(A,1,.5,AD*.1+.8,AW/2+.9,FL[f]+1.6,-AD/2+AD*.41,red); boxP(A,1,.5,AD*.1+.8,-(AW/2+.9),FL[f]+1.6,-AD/2+AD*.41,red); boxP(A,1,.5,3.3,AW/2+.9,FL[f]+1.6,AD/2-4.85,red); }
+for(var f=4;f<=25;f++){ boxP(A,1,.5,chZ1-chZ0+.8,AW/2+.9,FL[f]+1.6,(chZ0+chZ1)/2,red); boxP(A,1,.5,3.3,AW/2+.9,FL[f]+1.6,AD/2-4.85,red); boxP(A,3.3,.5,1,NWX0+4.85,FL[f]+1.6,-AD/2-.9,red); }
 
 /* Scheme B – white wavy balconies (second render) */
 var B=new THREE.Group(); T.add(B); B.visible=false;
@@ -384,9 +392,10 @@ var plaza=new THREE.Mesh(new THREE.CircleGeometry(26,40,Math.PI*.5,Math.PI*.5),M
 // selected floor highlight
 var hiMat=new THREE.MeshStandardMaterial({color:0xff6a2b,emissive:0xff6a2b,emissiveIntensity:.9,transparent:true,opacity:.9});
 var hiG=new THREE.ExtrudeGeometry(rrect(AW+3.4,AD+3.4,.25),{depth:3.2,bevelEnabled:false,curveSegments:5}); hiG.rotateX(-Math.PI/2);
-var hi=new THREE.Mesh(hiG,hiMat); T.add(hi);
+var hiLG=new THREE.ExtrudeGeometry(Lshape(1.7),{depth:3.2,bevelEnabled:false}); hiLG.rotateX(-Math.PI/2);
+var hi=new THREE.Group(), hiB=new THREE.Mesh(hiG,hiMat), hiA=new THREE.Mesh(hiLG,hiMat); hi.add(hiA); hi.add(hiB); hiB.visible=false; T.add(hi);
 var VIEWX=AW/2+2.0, SCH='A', curF=22;
-function fitHi(){ if(SCH==='B'){ var d=bD(curF); hi.scale.set((BW+3.4)/(AW+3.4),1,(d+3.4)/(AD+3.4)); hi.position.z=(BD-d)/2; } else { hi.scale.set(1,1,1); hi.position.z=0; } }
+function fitHi(){ hiA.visible=SCH==='A'; hiB.visible=SCH==='B'; if(SCH==='B'){ var d=bD(curF); hi.scale.set((BW+3.4)/(AW+3.4),1,(d+3.4)/(AD+3.4)); hi.position.z=(BD-d)/2; } else { hi.scale.set(1,1,1); hi.position.z=0; } }
 function setScheme(s){ SCH=s; fitHi(); A.visible=s==='A'; B.visible=s==='B'; VIEWX=s==='A'?AW/2+2.0:12.6; document.getElementById('sA').setAttribute('aria-pressed',s==='A'); document.getElementById('sB').setAttribute('aria-pressed',s==='B'); if(mode==='view') placeViewCam(); }
 
 /* ---------- Traffic ---------- */
