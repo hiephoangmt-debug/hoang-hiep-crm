@@ -5,7 +5,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Sky } from 'three/examples/jsm/objects/Sky.js';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
-import { SLOT_LIST, CORES, CORRIDORS, PODIUM, rectM, STATUS, TYPE_COLORS, residentialFloors, unitCode, unitPrice, areaOf, DEFAULT_UNIT, GARDEN_FLOORS, SHOPS, POOL, POOL_DECK } from './buildingData.js';
+import { SLOT_LIST, CORES, CORRIDORS, PODIUM, rectM, STATUS, TYPE_COLORS, residentialFloors, unitCode, unitPrice, areaOf, DEFAULT_UNIT, GARDEN_FLOORS, SHOPS, POOL, POOL_DECK, gardenOf } from './buildingData.js';
 import { buildScene } from './builder.js';
 import { placeUnit } from './unitPlacement.js';
 import UNITS from './units/units.json';
@@ -165,7 +165,7 @@ export class BuildingView {
     // Biển tên F2 và tên đường
     this.f2Tag = this.towerTag('TÒA F2 – MAI', 0xd9542f, b0.podiumFloors * b0.podiumHeight + residentialFloors(b0.floors).length * b0.floorHeight + 8);
     scene.add(this.f2Tag);
-    for (const [t, x, z, cls] of [['Đ. MINH MẠNG', AVENUE_X, -60, 'road green'], ['Đ. MINH MẠNG', AVENUE_X, 150, 'road green'], ['Đ. NGUYỄN PHƯỚC LAN', 90, roadZ, 'road gold'], ['Đ. NGUYỄN PHƯỚC LAN', -200, roadZ, 'road gold'], ['SÔNG ĐÔ TỎA · BIỂN MỸ KHÊ ↑', 0, -260, 'road blue']]) {
+    for (const [t, x, z, cls] of [['Đ. MINH MẠNG', AVENUE_X, -60, 'road green'], ['Đ. MINH MẠNG', AVENUE_X, 150, 'road green'], ['Đ. QUẢNG NAM', 90, roadZ, 'road gold'], ['Đ. NGUYỄN PHƯỚC LAN', -200, roadZ, 'road gold'], ['CẦU BÔ QUAN', AVENUE_X, -357, 'road green'], ['SÔNG ĐÔ TỎA', 120, -357, 'road blue'], ['BIỂN SƠN THỦY · MỸ KHÊ', 0, -700, 'road blue'], ['NÚI SƠN TRÀ', -820, -880, 'road green'], ['NGŨ HÀNH SƠN', 320, -575, 'road green']]) {
       const el = document.createElement('div');
       el.className = 'roadtag ' + cls;
       el.textContent = t;
@@ -437,7 +437,6 @@ export class BuildingView {
     const units = [];
     this.buildPodium(root, b, pod, { interactive, colorBy, add, slabMat, glassMat, units });
     const base = b.podiumFloors * P;
-    if (!(interactive && this.shopsMode)) this.addGardenRing(root, pod, base, false);
     const visibleTop = interactive ? Math.min(this.maxFloor, floors.length) : floors.length;
     const only = interactive ? this.onlyFloor : null;
     floors.forEach((fl, fi) => {
@@ -483,7 +482,7 @@ export class BuildingView {
       // Sàn + ban công nhô 0,4 m tạo vệt trắng ngang (bỏ ở tầng đang xem riêng)
       if (fi !== only) for (const w of WINGS) add(roundedPrism(rectM(w.px), y + H - 0.3, 0.3, w.radii, -0.4), slabMat);
       // Tầng 3A–7: sàn sân vườn riêng bao quanh tầng (đỡ bởi sàn tầng dưới / mái khối đế)
-      if (GARDEN_FLOORS.has(fl) && !ghost) this.addGardenRing(root, pod, y, true);
+      if (GARDEN_FLOORS.has(fl) && !ghost) this.addGardenRing(root, pod, y, fl !== '03', fl, interactive && fi === only);
       if (interactive && (fi % 2 === 0 || fi === floors.length - 1)) {
         const el = document.createElement('div');
         el.className = 'floorlabel';
@@ -600,40 +599,70 @@ export class BuildingView {
   }
 
   /** Sân vườn bao quanh tầng: sàn cỏ, bồn cây + lan can kính ở mép, cây bụi, hàng rào cây ngăn sân giữa các căn */
-  addGardenRing(root, pod, y, slab) {
+  addGardenRing(root, pod, y, slab, floor = '03', tags = false) {
+    // Sàn sân vườn bao quanh tầng, nhưng cỏ + bồn cây chỉ trải trước những căn có sân vườn ở tầng này
+    // (theo bảng: vd. căn 06–09 không có sân; căn giữa 01, 02, 27–32 chỉ có sân ở tầng 3 – phía sân trong)
     const M = (c, o = {}) => new THREE.MeshStandardMaterial({ color: c, roughness: 0.9, ...o });
-    this._gm ||= { grass: M(0x6f9e48, { roughness: 1 }), planter: M(0xd9d3c7, { roughness: 0.8 }), leaf: M(0x3f7a35), slab: M(0xf2efe9, { roughness: 0.6 }), glass: new THREE.MeshStandardMaterial({ color: 0xa9d6ea, roughness: 0.05, metalness: 0.3, transparent: true, opacity: 0.3 }) };
+    this._gm ||= { grass: M(0x6f9e48, { roughness: 1 }), planter: M(0xd9d3c7, { roughness: 0.8 }), leaf: M(0x3f7a35), slab: M(0xf2efe9, { roughness: 0.6 }), deck: M(0xd8d3ca, { roughness: 0.85 }), glass: new THREE.MeshStandardMaterial({ color: 0xa9d6ea, roughness: 0.05, metalness: 0.3, transparent: true, opacity: 0.3 }) };
     const g = this._gm;
     const R = { tl: 8, tr: 8, bl: 8, br: 8 };
     const add = (geo, mat, shadow = true) => { const m = new THREE.Mesh(geo, mat); m.castShadow = shadow; m.receiveShadow = true; root.add(m); return m; };
     if (slab) add(roundedPrism(pod, y - 0.3, 0.3, R), g.slab);
-    add(roundedPrism(pod, y, 0.06, R, 0.4), g.grass, false);
-    const bx = (x0, x1, z0, z1, y0, hh, mat) => { const m = add(new THREE.BoxGeometry(x1 - x0, hh, z1 - z0), mat); m.position.set((x0 + x1) / 2, y0 + hh / 2, (z0 + z1) / 2); return m; };
-    const e = 0.9, h = 0.5, t = 0.5;
-    const edges = [[pod.x0 + e, pod.x1 - e, pod.y0 + e - t, pod.y0 + e], [pod.x0 + e, pod.x1 - e, pod.y1 - e, pod.y1 - e + t], [pod.x0 + e - t, pod.x0 + e, pod.y0 + e, pod.y1 - e], [pod.x1 - e, pod.x1 - e + t, pod.y0 + e, pod.y1 - e]];
-    for (const [x0, x1, z0, z1] of edges) {
-      bx(x0, x1, z0, z1, y, h, g.planter);
-      bx(x0, x1, z0, z1, y + h, 0.4, g.leaf);
-    }
+    add(roundedPrism(pod, y, 0.03, R, 0.4), g.deck, false);
+    const bx = (x0, x1, z0, z1, y0, hh, mat) => { if (x1 - x0 < 0.05 || z1 - z0 < 0.05) return null; const m = add(new THREE.BoxGeometry(x1 - x0, hh, z1 - z0), mat); m.position.set((x0 + x1) / 2, y0 + hh / 2, (z0 + z1) / 2); return m; };
     // lan can kính ngoài cùng
     const gt = 0.04;
-    for (const [x0, x1, z0, z1] of [[pod.x0 + 0.3, pod.x1 - 0.3, pod.y0 + 0.3, pod.y0 + 0.3 + gt], [pod.x0 + 0.3, pod.x1 - 0.3, pod.y1 - 0.3 - gt, pod.y1 - 0.3], [pod.x0 + 0.3, pod.x0 + 0.3 + gt, pod.y0 + 0.3, pod.y1 - 0.3], [pod.x1 - 0.3 - gt, pod.x1 - 0.3, pod.y0 + 0.3, pod.y1 - 0.3]]) bx(x0, x1, z0, z1, y, 1.1, g.glass).castShadow = false;
-    // hàng rào cây ngăn sân giữa các căn ở mặt ngoài
-    const T = rectM(PODIUM);
-    for (const sl of SLOT_LIST) {
-      const r = sl.rect;
-      if (Math.abs(r.x0 - T.x0) < 0.3) for (const z of [r.y0, r.y1]) bx(pod.x0 + e, T.x0, z - 0.2, z + 0.2, y, 0.9, g.leaf);
-      if (Math.abs(r.x1 - T.x1) < 0.3) for (const z of [r.y0, r.y1]) bx(T.x1, pod.x1 - e, z - 0.2, z + 0.2, y, 0.9, g.leaf);
-      if (Math.abs(r.y1 - T.y1) < 0.3) for (const x of [r.x0, r.x1]) bx(x - 0.2, x + 0.2, T.y1, pod.y1 - e, y, 0.9, g.leaf);
-      if (Math.abs(r.y0 - T.y0) < 0.3) for (const x of [r.x0, r.x1]) bx(x - 0.2, x + 0.2, pod.y0 + e, T.y0, y, 0.9, g.leaf);
-    }
-    // cây bụi tròn dọc vành sân
+    for (const [x0, x1, z0, z1] of [[pod.x0 + 0.3, pod.x1 - 0.3, pod.y0 + 0.3, pod.y0 + 0.3 + gt], [pod.x0 + 0.3, pod.x1 - 0.3, pod.y1 - 0.3 - gt, pod.y1 - 0.3], [pod.x0 + 0.3, pod.x0 + 0.3 + gt, pod.y0 + 0.3, pod.y1 - 0.3], [pod.x1 - 0.3 - gt, pod.x1 - 0.3, pod.y0 + 0.3, pod.y1 - 0.3]]) { const m = bx(x0, x1, z0, z1, y, 1.1, g.glass); if (m) m.castShadow = false; }
+    const T = rectM(PODIUM), CY = rectM([810, 340, 1265, 635]); // sân trong giữa hai cánh
+    const o = 0.45, e = 0.55; // cách mép sàn; bề rộng bồn cây viền
     this._ball ||= new THREE.SphereGeometry(0.6, 10, 8);
-    const ring = (x, z) => (x < T.x0 || x > T.x1 || z < T.y0 || z > T.y1);
-    for (let x = pod.x0 + 1.9; x < pod.x1 - 1.5; x += 3.1)
-      for (const z of [pod.y0 + 1.9, pod.y1 - 1.9]) if (ring(x, z)) { const m = add(this._ball, g.leaf); const sc = 0.8 + ((x * 13) % 4) * 0.1; m.scale.set(sc, sc * 0.85, sc); m.position.set(x, y + 0.5 * sc, z); }
-    for (let z = pod.y0 + 4; z < pod.y1 - 3; z += 3.1)
-      for (const x of [pod.x0 + 1.9, pod.x1 - 1.9]) if (ring(x, z)) { const m = add(this._ball, g.leaf); const sc = 0.8 + ((z * 7) % 4) * 0.1; m.scale.set(sc, sc * 0.85, sc); m.position.set(x, y + 0.5 * sc, z); }
+    let curSlot = null;
+    const tagged = new Set();
+    const patch = (x0, x1, z0, z1, outer) => {
+      bx(x0, x1, z0, z1, y + 0.03, 0.05, g.grass);
+      if (tags && curSlot && !tagged.has(curSlot.slot)) {
+        // nhãn mã căn trên khoảnh sân vườn
+        tagged.add(curSlot.slot);
+        const ga = gardenOf(floor, curSlot.slot);
+        const el = document.createElement('div');
+        el.className = 'unitlabel gardentag';
+        el.innerHTML = `<b>🌳 ${unitCode(this.getBuilding(), floor, curSlot.slot)}</b><span>Sân vườn ${String(ga.tt).replace('.', ',')} m²</span>`;
+        const lab = new CSS2DObject(el);
+        lab.position.set((x0 + x1) / 2, y + 0.8, (z0 + z1) / 2);
+        root.add(lab);
+      }
+      // bồn cây + bụi cây dọc mép ngoài của khoảnh sân
+      const ed = { left: [x0, x0 + e, z0, z1], right: [x1 - e, x1, z0, z1], top: [x0, x1, z0, z0 + e], bottom: [x0, x1, z1 - e, z1] };
+      for (const sd of outer) {
+        const [a0, a1, b0, b1] = ed[sd];
+        bx(a0, a1, b0, b1, y, 0.5, g.planter);
+        const horiz = sd === 'top' || sd === 'bottom', len = horiz ? a1 - a0 : b1 - b0;
+        for (let t = 0.8; t < len - 0.5; t += 2.4) {
+          const m = add(this._ball, g.leaf); const sc = 0.65 + ((t * 13) % 4) * 0.08;
+          m.scale.set(sc, sc * 0.85, sc);
+          m.position.set(horiz ? a0 + t : (a0 + a1) / 2, y + 0.5 + 0.35 * sc, horiz ? (b0 + b1) / 2 : b0 + t);
+        }
+      }
+    };
+    for (const sl of SLOT_LIST) {
+      if (!gardenOf(floor, sl.slot)) continue;
+      curSlot = sl;
+      const r = sl.rect;
+      const L = Math.abs(r.x0 - T.x0) < 0.3, Rr = Math.abs(r.x1 - T.x1) < 0.3, Tp = Math.abs(r.y0 - T.y0) < 0.3, B = Math.abs(r.y1 - T.y1) < 0.3;
+      const zA = Tp ? pod.y0 + o : r.y0, zB = B ? pod.y1 - o : r.y1, xA = L ? pod.x0 + o : r.x0, xB = Rr ? pod.x1 - o : r.x1;
+      if (L) patch(pod.x0 + o, T.x0, zA, zB, ['left']);
+      if (Rr) patch(T.x1, pod.x1 - o, zA, zB, ['right']);
+      if (Tp) patch(xA, xB, pod.y0 + o, T.y0, ['top']);
+      if (B) patch(xA, xB, T.y1, pod.y1 - o, ['bottom']);
+      if (!L && !Rr && !Tp && !B) {
+        const tt = gardenOf(floor, sl.slot).tt;
+        if (r.y1 >= T.y1 - 3) { patch(r.x0, r.x1, r.y1, pod.y1 - o, ['bottom']); continue; } // căn giữa mặt trước (15, 16, 12A, 12B)
+        // căn giữa phía sân trong (chỉ tầng 3): sân rộng đúng diện tích thông thủy theo bảng
+        if (r.y0 >= CY.y1 - 0.5) { const x0 = Math.max(r.x0, CY.x0), x1 = Math.min(r.x1, CY.x1), d = Math.min(r.y0 - CY.y0 - 0.3, tt / (x1 - x0)); patch(x0, x1, r.y0 - d, r.y0, ['top']); }
+        else if (r.x1 <= CY.x0 + 0.5) { const z0 = Math.max(r.y0, CY.y0 + 0.3), z1 = Math.min(r.y1, CY.y1), d = tt / (z1 - z0); patch(r.x1, r.x1 + d, z0, z1, ['right']); }
+        else if (r.x0 >= CY.x1 - 0.5) { const z0 = Math.max(r.y0, CY.y0 + 0.3), z1 = Math.min(r.y1, CY.y1), d = tt / (z1 - z0); patch(r.x0 - d, r.x0, z0, z1, ['left']); }
+      }
+    }
   }
 
   /** Lõi thang ở mặt bằng tầng chi tiết – vẽ theo bản vẽ tầng 8–19 (px ảnh 2000×1414, cánh phải đối xứng):

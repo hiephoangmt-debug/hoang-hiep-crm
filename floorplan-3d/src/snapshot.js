@@ -96,8 +96,13 @@ export function exportImage({ renderer, scene, camera, render, keepRatio = false
   x.textAlign = 'left'; x.textBaseline = 'alphabetic';
   x.fillStyle = '#1d2330'; x.font = `800 ${Math.round(22 * s)}px Inter, Arial, sans-serif`;
   x.fillText(title, 24 * s, H + 34 * s);
-  x.fillStyle = '#4a5160'; x.font = `500 ${Math.round(13 * s)}px Inter, Arial, sans-serif`;
-  x.fillText(lines.join('   ·   '), 24 * s, H + 60 * s);
+  x.fillStyle = '#4a5160';
+  // chữ dòng thông số co lại nếu dài, không chồng lên dòng ghi chú bên phải
+  const lineTxt = lines.filter(Boolean).join('   ·   ');
+  const maxW = c.width - 24 * s - 260 * s;
+  let fz = 13;
+  do { x.font = `500 ${Math.round(fz * s)}px Inter, Arial, sans-serif`; fz -= 0.5; } while (x.measureText(lineTxt).width > maxW && fz > 8);
+  x.fillText(lineTxt, 24 * s, H + 60 * s);
   x.textAlign = 'right'; x.fillStyle = '#8a8f99'; x.font = `italic ${Math.round(11 * s)}px Inter, Arial, sans-serif`;
   x.fillText(note || 'Hình ảnh chỉ mang tính chất minh hoạ', c.width - 20 * s, H + 60 * s);
   return new Promise((res) => c.toBlob(res, 'image/png'));
@@ -106,7 +111,7 @@ export function exportImage({ renderer, scene, camera, render, keepRatio = false
 const fmtM = (n, d = 2) => n.toLocaleString('vi-VN', { minimumFractionDigits: d, maximumFractionDigits: d });
 
 /** Chú thích phòng đặt ra ngoài mặt bằng (2 bên), có đường dẫn; kèm đường kích thước tổng của căn */
-function drawCallouts(x, callouts, plan, toScreen, s, W, H, side) {
+export function drawCallouts(x, callouts, plan, toScreen, s, W, H, side, noDims = false) {
   const P = plan.corners.map(toScreen); // 4 góc mặt bằng ở cao độ sàn
   const L = Math.min(...P.map((p) => p.x)), R = Math.max(...P.map((p) => p.x));
   const T = Math.min(...P.map((p) => p.y)), B = Math.max(...P.map((p) => p.y));
@@ -131,8 +136,10 @@ function drawCallouts(x, callouts, plan, toScreen, s, W, H, side) {
   // cạnh trên (độ rộng) = cạnh 0–1 hoặc 3–2, chọn cạnh nằm cao hơn trên ảnh; tương tự cạnh dọc bên phải
   const eW = (P[0].y + P[1].y) < (P[3].y + P[2].y) ? [P[0], P[1]] : [P[3], P[2]];
   const eD = (P[1].x + P[2].x) > (P[0].x + P[3].x) ? [P[1], P[2]] : [P[0], P[3]];
-  dim(eW[0], eW[1], String(Math.round(plan.w * 1000)));
-  dim(eD[0], eD[1], String(Math.round(plan.d * 1000)));
+  if (!noDims) {
+    dim(eW[0], eW[1], String(Math.round(plan.w * 1000)));
+    dim(eD[0], eD[1], String(Math.round(plan.d * 1000)));
+  }
   // --- Chú thích
   const f1 = Math.round(12.5 * s), f2 = Math.round(10.5 * s), bh = f1 + f2 + 14 * s, gap = 8 * s;
   const items = callouts.map((c) => ({ ...c, a: toScreen(c.anchor) }));

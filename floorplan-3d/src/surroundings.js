@@ -84,8 +84,13 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
   const laneMat = new THREE.MeshStandardMaterial({ map: lanesTex, roughness: 0.92 });
   const asphalt = new THREE.MeshStandardMaterial({ color: 0x3b3e43, roughness: 0.95 });
   // Dải dọc theo trục đường, bỏ trống đoạn qua ngã tư (gap)
+  // Sông Đô Tỏa cắt ngang cuối đường Minh Mạng (theo ảnh 360: Minh Mạng → cầu Bô Quan → sông → biển Sơn Thủy)
+  const RIVER_Z0 = -415, RIVER_Z1 = -300, SEA_Z = -640;
   const strip = (axis, center, offset, width, height, y, mat, gap) => {
-    for (const [s0, s1] of [[-L / 2, center.cross - gap], [center.cross + gap, L / 2]]) {
+    const ranges = axis === 'z'
+      ? [[SEA_Z + 20, RIVER_Z0], [RIVER_Z1, center.cross - gap], [center.cross + gap, L / 2]]
+      : [[-L / 2, center.cross - gap], [center.cross + gap, L / 2]];
+    for (const [s0, s1] of ranges) {
       const len = s1 - s0;
       const m = new THREE.Mesh(height ? new THREE.BoxGeometry(width, height, len) : new THREE.PlaneGeometry(width, len), mat);
       if (!height) m.rotation.x = -Math.PI / 2;
@@ -107,6 +112,14 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
       strip(bv.axis, bv, sd * 0.18, 0.15, 0, 0.04, yellowMat, HALF); // vạch vàng đôi
     }
     if (bv.axis === 'z') occupy(bv.at, 0, HALF * 2 + 2, L); else occupy(0, bv.at, L, HALF * 2 + 2);
+    if (bv.axis === 'z') {
+      // Cầu Bô Quan: mặt cầu + lan can bắc qua sông
+      const len = RIVER_Z1 - RIVER_Z0 + 16, zc = (RIVER_Z0 + RIVER_Z1) / 2;
+      const deck = new THREE.Mesh(new THREE.BoxGeometry(HALF * 2, 1.2, len), new THREE.MeshStandardMaterial({ color: 0xd9d6cf, roughness: 0.8 }));
+      deck.position.set(bv.at, 0.4, zc); deck.receiveShadow = deck.castShadow = true; g.add(deck);
+      const top = new THREE.Mesh(new THREE.PlaneGeometry(22, len), laneMat); top.rotation.x = -Math.PI / 2; top.position.set(bv.at, 1.02, zc); g.add(top);
+      for (const sd of [-1, 1]) { const rail = new THREE.Mesh(new THREE.BoxGeometry(0.4, 1.1, len), new THREE.MeshStandardMaterial({ color: 0xf2f0ea })); rail.position.set(bv.at + sd * (HALF - 0.3), 1.55, zc); g.add(rail); }
+    }
   }
   // Mặt ngã tư
   for (const [w, d] of [[22, HALF * 2], [HALF * 2, 22]]) {
@@ -145,20 +158,27 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
   occupy(plaza.position.x, plaza.position.z, footprint.x1 - footprint.x0 + 10, apron);
   occupy((footprint.x0 + footprint.x1) / 2, (footprint.z0 + footprint.z1) / 2, footprint.x1 - footprint.x0 + 10, footprint.z1 - footprint.z0 + 10);
 
-  // --- Sông phía đông + núi xa ---
-  const river = new THREE.Mesh(new THREE.PlaneGeometry(260, 1800), new THREE.MeshStandardMaterial({ color: 0x4f86b3, roughness: 0.08, metalness: 0.5 }));
+  // --- Sông Đô Tỏa (cắt ngang cuối Minh Mạng), bờ biển Sơn Thủy phía xa, núi Sơn Trà (trái) & Ngũ Hành Sơn (phải) ---
+  const waterMat = new THREE.MeshStandardMaterial({ color: 0x4f86b3, roughness: 0.08, metalness: 0.5 });
+  const river = new THREE.Mesh(new THREE.PlaneGeometry(1800, RIVER_Z1 - RIVER_Z0), waterMat);
   river.rotation.x = -Math.PI / 2;
-  river.position.set(420, 0.04, 0);
+  river.position.set(0, 0.05, (RIVER_Z0 + RIVER_Z1) / 2);
   g.add(river);
-  occupy(420, 0, 300, 1800);
+  occupy(0, (RIVER_Z0 + RIVER_Z1) / 2, 1800, RIVER_Z1 - RIVER_Z0 + 20);
+  const sea = new THREE.Mesh(new THREE.PlaneGeometry(1800, 400), new THREE.MeshStandardMaterial({ color: 0x3f7fb8, roughness: 0.05, metalness: 0.45 }));
+  sea.rotation.x = -Math.PI / 2;
+  sea.position.set(0, 0.05, SEA_Z - 200);
+  g.add(sea);
+  const sand = new THREE.Mesh(new THREE.PlaneGeometry(1800, 26), new THREE.MeshStandardMaterial({ color: 0xe8dcbc, roughness: 1 }));
+  sand.rotation.x = -Math.PI / 2;
+  sand.position.set(0, 0.045, SEA_Z + 10);
+  g.add(sand);
+  occupy(0, SEA_Z - 180, 1800, 420);
   const mountainMat = new THREE.MeshStandardMaterial({ color: 0x5f7f68, roughness: 1, flatShading: true });
-  for (let i = 0; i < 9; i++) {
-    const h = 70 + r() * 90, rad = 170 + r() * 130;
-    const m = new THREE.Mesh(new THREE.SphereGeometry(1, 9, 6, 0, Math.PI * 2, 0, Math.PI / 2), mountainMat);
-    m.scale.set(rad, h, rad * 0.45);
-    m.position.set(-700 + i * 170 + r() * 60, -2, -760 - r() * 80);
-    g.add(m);
-  }
+  const hill = (x, z, rad, h, sx = 1) => { const m = new THREE.Mesh(new THREE.SphereGeometry(1, 9, 6, 0, Math.PI * 2, 0, Math.PI / 2), mountainMat); m.scale.set(rad * sx, h, rad * 0.5); m.position.set(x, -2, z); g.add(m); };
+  for (let i = 0; i < 5; i++) hill(-1020 + i * 90 + r() * 30, -880 - r() * 30, 150 + r() * 70, 110 + r() * 70, 1.3); // Sơn Trà (bên kia vịnh, lệch trái như ảnh 360)
+  for (let i = 0; i < 4; i++) hill(260 + i * 45, -560 - r() * 30, 18 + r() * 10, 35 + r() * 25); // Ngũ Hành Sơn (gần biển, bên phải)
+  occupy(330, -560, 220, 70);
 
   // --- Mây ---
   const cloudMat = new THREE.SpriteMaterial({ map: cloudTexture(), transparent: true, depthWrite: false, fog: false });
@@ -169,38 +189,49 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
     g.add(s);
   }
 
-  // --- Biệt thự / nhà phố mái ngói (thân + mái, dạng instanced) ---
+  // --- Khu nhà phố liền kề: dãy nhà đều nhau thẳng hàng theo ô phố (giống khu dân cư Hòa Xuân trong ảnh 360) ---
   const houses = [];
-  for (let gx = -560; gx <= 300; gx += 24) {
-    for (let gz = -560; gz <= 380; gz += 20) {
-      const x = gx + (r() - 0.5) * 4, z = gz + (r() - 0.5) * 4;
-      if (!free(x, z, 9)) continue;
-      if (Math.hypot(x, z) < 85) continue;
-      if (r() < 0.18 || r() > density) continue;
-      houses.push({ x, z, w: 11 + r() * 4, d: 9 + r() * 3, h: 7 + Math.floor(r() * 2) * 3.2, rot: (Math.round(r()) * Math.PI) / 2 });
+  const LOT = 5.5, DEP = 16, BLOCK = 11, ROW_GAP = 12, BLOCK_GAP = 10;
+  const blockLen = BLOCK * LOT;
+  for (let bz = -560; bz <= 380; bz += DEP * 2 + ROW_GAP) {
+    for (let bxs = -560; bxs <= 330; bxs += blockLen + BLOCK_GAP) {
+      if (r() > density * 1.05) continue; // chế độ nhẹ: bớt dãy
+      const floors = 3 + Math.floor(r() * 2); // cả dãy cùng số tầng cho đều
+      for (const [rowZ, face] of [[bz + DEP / 2, 1], [bz + DEP * 1.5, -1]]) {
+        for (let k = 0; k < BLOCK; k++) {
+          const x = bxs + LOT * (k + 0.5), z = rowZ;
+          if (!free(x, z, 3)) continue;
+          if (Math.hypot(x, z) < 85) continue;
+          houses.push({ x, z, w: LOT - 0.15, d: DEP - 2, h: floors * 3.4, face, k });
+        }
+      }
     }
   }
   const bodyMesh = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ roughness: 0.8 }), houses.length);
-  const roofGeo = new THREE.ConeGeometry(0.75, 1, 4);
-  roofGeo.rotateY(Math.PI / 4);
-  const roofMesh = new THREE.InstancedMesh(roofGeo, new THREE.MeshStandardMaterial({ roughness: 0.7 }), houses.length);
-  const wallColors = [0xf3e7d3, 0xefe2c9, 0xf6f1e8, 0xe9dcc4, 0xf1e4cc];
-  const roofColors = [0xb5532f, 0xc0603a, 0xa34a2b, 0xc96d3f];
+  const roofMesh = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ roughness: 0.75 }), houses.length);
+  const winMesh = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ color: 0x4d6274, roughness: 0.2, metalness: 0.4 }), houses.length);
+  const wallColors = [0xf4efe6, 0xefe7da, 0xf7f4ee];
+  const roofColors = [0xb85a34, 0xc4693f];
   houses.forEach((h, i) => {
-    dummy.position.set(h.x, h.h / 2, h.z); dummy.rotation.set(0, h.rot, 0); dummy.scale.set(h.w, h.h, h.d); dummy.updateMatrix();
+    dummy.rotation.set(0, 0, 0);
+    dummy.position.set(h.x, h.h / 2, h.z); dummy.scale.set(h.w, h.h, h.d); dummy.updateMatrix();
     bodyMesh.setMatrixAt(i, dummy.matrix);
-    bodyMesh.setColorAt(i, color.setHex(wallColors[i % wallColors.length]));
-    dummy.position.set(h.x, h.h + 1.6, h.z); dummy.scale.set(h.w * 1.08, 3.2, h.d * 1.08); dummy.updateMatrix();
+    bodyMesh.setColorAt(i, color.setHex(wallColors[h.k % wallColors.length]));
+    // mái ngói lệch (tum + sân thượng) – cả dãy cùng kiểu
+    dummy.position.set(h.x, h.h + 0.9, h.z - h.face * h.d * 0.18); dummy.scale.set(h.w, 1.8, h.d * 0.55); dummy.updateMatrix();
     roofMesh.setMatrixAt(i, dummy.matrix);
-    roofMesh.setColorAt(i, color.setHex(roofColors[i % roofColors.length]));
-    occupy(h.x, h.z, h.w + 3, h.d + 3);
+    roofMesh.setColorAt(i, color.setHex(roofColors[0]));
+    // mặt tiền kính hướng ra phố
+    dummy.position.set(h.x, h.h * 0.55, h.z + h.face * (h.d / 2 + 0.05)); dummy.scale.set(h.w * 0.7, h.h * 0.65, 0.1); dummy.updateMatrix();
+    winMesh.setMatrixAt(i, dummy.matrix);
+    occupy(h.x, h.z, h.w + 1, h.d + 1);
   });
   bodyMesh.castShadow = bodyMesh.receiveShadow = true;
   roofMesh.castShadow = true;
-  g.add(bodyMesh, roofMesh);
+  g.add(bodyMesh, roofMesh, winMesh);
 
   // --- Tòa cao tầng xa ---
-  const farTowers = [[-260, -420, 70], [-180, -470, 55], [160, -430, 62], [240, -520, 80], [-330, -330, 45], [300, -300, 50], [520, 120, 40], [560, -60, 58], [520, -220, 48]];
+  const farTowers = [[-260, -470, 70], [-180, -520, 55], [160, -470, 62], [120, -540, 80], [-330, -480, 45], [-420, -250, 50], [520, 120, 40], [560, -60, 58], [520, -220, 48]];
   const towerMat = new THREE.MeshStandardMaterial({ map: (() => {
     const c = document.createElement('canvas'); c.width = 64; c.height = 64; const x = c.getContext('2d');
     x.fillStyle = '#d7d4cc'; x.fillRect(0, 0, 64, 64); x.fillStyle = '#5d7184';

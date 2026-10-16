@@ -15,7 +15,7 @@ import { buildScene, disposeTree, SHARED } from './builder.js';
 import { upgradeFurniture, loadInteriorHDRI } from './realistic.js';
 import { resolvePalette, roomKind } from './styles.js';
 import { adCaption } from './adcopy.js';
-import { exportImage, drawAdCallouts } from './snapshot.js';
+import { exportImage, drawAdCallouts, drawCallouts } from './snapshot.js';
 import { getTexture } from './textures.js';
 import { closestOnSegment, rotatePoint, labelPoint, polygonArea, pointInPolygon, pointInRotRect } from './geom.js';
 import { CATALOG_MAP } from './furniture.js';
@@ -148,7 +148,7 @@ export class Viewer3D {
     this.built = built;
     this.scene.add(built.root);
     this.shadowCatcher.position.y = this.state.ad ? -0.95 : -0.158;
-    this._adList = null; this._adKey = null;
+    this._adList = null; this._plainList = null; this._adKey = null;
     if (this.state.ad) { this.addLeafShadows(built); this.adLabels(built); }
     this.applyExterior();
     this._above = undefined;
@@ -317,7 +317,11 @@ export class Viewer3D {
   /** Kiểu quảng cáo trên màn hình: chú thích đặt ra hai mép khung, mũi tên cong chỉ vào phòng */
   adOverlay() {
     let cv = this._adCanvas;
-    const on = this.state.ad && this.mode !== 'walk' && !this.tour && !this.ptActive;
+    // Nhãn tên phòng thường (khi bật 🏷 Tên phòng, nhìn từ ngoài): cũng đưa ra mép khung, có đường dẫn
+    const above = this.built && this.camera.position.y > this.built.height;
+    const plain = !this.state.ad && this.state.labels && above;
+    if (this.built && !this.tour && this.mode !== 'walk') this.built.labels.forEach((l) => { if (l.element) l.element.style.visibility = (plain || this.state.ad) ? 'hidden' : ''; });
+    const on = (this.state.ad || plain) && this.mode !== 'walk' && !this.tour && !this.ptActive;
     if (!on) { if (cv) cv.style.display = 'none'; return; }
     if (!cv) {
       cv = this._adCanvas = document.createElement('canvas');
@@ -327,7 +331,7 @@ export class Viewer3D {
     cv.style.display = '';
     const dpr = Math.min(window.devicePixelRatio || 1, 2), W = this.container.clientWidth, H = this.container.clientHeight;
     if (cv.width !== Math.round(W * dpr) || cv.height !== Math.round(H * dpr)) { cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); }
-    const key = this.camera.matrixWorld.elements.join(',') + W + 'x' + H;
+    const key = this.camera.matrixWorld.elements.join(',') + W + 'x' + H + (plain ? 'p' : 'a');
     if (key === this._adKey) return;
     this._adKey = key;
     const x = cv.getContext('2d');
@@ -336,7 +340,11 @@ export class Viewer3D {
     const v = new THREE.Vector3();
     const toScreen = (p) => { v.set(p.x, p.y, p.z).project(this.camera); return { x: (v.x * 0.5 + 0.5) * cv.width, y: (-v.y * 0.5 + 0.5) * cv.height }; };
     const s = dpr * Math.min(1, Math.max(0.62, W / 1100));
-    drawAdCallouts(x, this._adList ||= this.calloutList(true), toScreen, s, cv.width, cv.height, 0);
+    if (plain) {
+      const b = this.built.bounds;
+      const plan = { w: b.maxX - b.minX, d: b.maxY - b.minY, corners: [[b.minX, b.minY], [b.maxX, b.minY], [b.maxX, b.maxY], [b.minX, b.maxY]].map(([px, pz]) => ({ x: px, y: 0, z: pz })) };
+      drawCallouts(x, this._plainList ||= this.calloutList(false), plan, toScreen, s * 1.25, cv.width, cv.height, 0, true);
+    } else drawAdCallouts(x, this._adList ||= this.calloutList(true), toScreen, s, cv.width, cv.height, 0);
   }
 
   isStudio() { return !this.state.landscape && !this.panoActive; }
@@ -654,7 +662,7 @@ export class Viewer3D {
       const d = (s * 1.45 + 3.5) * k, A = THREE.MathUtils.degToRad(az), E = THREE.MathUtils.degToRad(el);
       pos = target.clone().add(new THREE.Vector3(Math.sin(A) * Math.cos(E), Math.sin(E), Math.cos(A) * Math.cos(E)).multiplyScalar(d));
     } else pos = this.isStudio() ? new THREE.Vector3(b.cx + s * 0.05, s * 1.3 + 2.5, b.maxY + s * 0.32 + 1) : new THREE.Vector3(b.cx + s * 0.08, s * 1.85 + 5, b.maxY + s * 0.45 + 1.5);
-    const fit = this.fitView(pos, target, this.state.ad ? 0.58 : 0.86); // kiểu quảng cáo: chừa hai bên cho chú thích
+    const fit = this.fitView(pos, target, this.state.ad || this.state.labels ? 0.6 : 0.86); // kiểu quảng cáo: chừa hai bên cho chú thích
     this.flyTo(fit.pos, fit.target, smooth);
   }
 
