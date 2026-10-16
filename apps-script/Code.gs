@@ -742,9 +742,9 @@ function crmDelete_(name, ids) {
 // Chỉ ghi vào ô trống (không công thức) hoặc ô do chính app đã ghi trước đó (có ghi chú SHEET_NOTE).
 // ---------------------------------------------------------------------
 var SHEET_NOTE = 'Tự điền từ ảnh nghiệm thu (CRM).';
-var SHEET_PLATFORMS = ['Facebook', 'Tiktok', 'Zalo', 'Google'];
+var SHEET_PLATFORMS = ['Facebook', 'Tiktok', 'Zalo', 'Google', 'Đăng tin'];
 /** Kênh có thư mục chứng từ riêng (thư mục "Kênh đăng tin" = kênh Đăng tin). */
-var EVIDENCE_CHANNELS = SHEET_PLATFORMS.concat(['Đăng tin']);
+var EVIDENCE_CHANNELS = SHEET_PLATFORMS;
 var SHEET_METRICS = [['chi phi thuc chay (+', 'chiPhiPhi'], ['chi phi thuc chay', 'chiPhi'], ['id tai khoan', 'taiKhoan'],
   ['lead', 'lead'], ['impressions', 'hienThi'], ['reach', 'tiepCan'], ['luot nhap', 'luotNhap'], ['luot xem', 'luotXem']];
 
