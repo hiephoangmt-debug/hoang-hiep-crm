@@ -91,36 +91,69 @@ const builders = {
     return g;
   },
   wardrobe(w, d, h) {
-    // Tủ quần áo full kính (như phối cảnh chủ đầu tư): khung nhôm đen, cánh + nóc kính, bên trong thấy quần áo treo, kệ, ngăn kéo
+    // Tủ quần áo full kính kiểu mẫu showroom: khung nhôm đen mảnh, kính khói trà, lòng tủ gỗ ấm, đèn LED hắt dưới kệ,
+    // cột treo dài / treo 2 tầng / cột kệ + ngăn kéo, quần áo tông nâu – be, hộp, túi xách minh hoạ
     const g = new THREE.Group();
-    const fr = M.black(), t = 0.03;
-    g.add(box(w, 0.06, d, fr, 0, 0.03, 0));
-    g.add(box(w, 0.02, d - 0.04, M.lightWood(), 0, 0.07, 0));
-    g.add(box(w - 0.04, h - 0.1, 0.02, M.lightWood(), 0, h / 2, -d / 2 + 0.02)); // hậu tủ
-    for (const sx of [-1, 1]) for (const sz of [-1, 1]) g.add(box(t, h, t, fr, sx * (w / 2 - t / 2), h / 2, sz * (d / 2 - t / 2)));
-    for (const sz of [-1, 1]) g.add(box(w, t, t, fr, 0, h - t / 2, sz * (d / 2 - t / 2)));
-    for (const sx of [-1, 1]) g.add(box(t, t, d, fr, sx * (w / 2 - t / 2), h - t / 2, 0));
-    const n = Math.max(2, Math.round(w / 0.5)), dw = w / n;
-    for (let i = 1; i < n; i++) g.add(box(0.02, h - 0.06, 0.03, fr, -w / 2 + dw * i, h / 2, d / 2 - 0.015)); // nẹp cánh
-    for (let i = 1; i < Math.ceil(n / 2); i++) g.add(box(0.018, h - 0.12, d - 0.06, M.lightWood(), -w / 2 + (w / Math.ceil(n / 2)) * i, h / 2, 0)); // vách ngăn
-    const glass = M.glass();
-    g.add(box(w - 0.04, h - 0.08, 0.008, glass, 0, h / 2, d / 2 - 0.01));
-    g.add(box(w - 0.04, 0.008, d - 0.04, glass, 0, h - 0.01, 0));
-    for (const sx of [-1, 1]) g.add(box(0.008, h - 0.08, d - 0.04, glass, sx * (w / 2 - 0.01), h / 2, 0));
-    // thanh treo + quần áo, kệ trên, ngăn kéo dưới
-    const railY = h - 0.38;
-    const rail = cyl(0.012, 0.012, w - 0.08, M.steel(), 0, railY, 0, 8);
-    rail.rotation.z = Math.PI / 2;
-    g.add(rail);
-    g.add(box(w - 0.06, 0.02, d - 0.06, M.lightWood(), 0, h - 0.3, 0));
-    const cols = [0xe9e4da, 0x2f3a4a, 0xb9c4cc, 0x8a6f58, 0xf2efe9, 0x55636e, 0xc8b49a];
-    const k = Math.max(4, Math.floor((w - 0.12) / 0.07));
-    for (let i = 0; i < k; i++) {
-      const x = -w / 2 + 0.08 + ((w - 0.16) / (k - 1)) * i, len = 0.75 + ((i * 37) % 5) * 0.08;
-      g.add(box(0.025, len, d * 0.7, mat(cols[i % cols.length], { roughness: 0.9 }), x, railY - len / 2 - 0.03, 0));
+    const fr = mat(0x1e1f21, { roughness: 0.35, metalness: 0.6 }), wood = M.lightWood(), t = 0.025;
+    const led = mat(0xfff3dc, { emissive: 0xffd9a0, emissiveIntensity: 1.6, roughness: 0.5 });
+    const smoke = mat(0x4a4038, { roughness: 0.05, metalness: 0.2, transparent: true, opacity: 0.32, depthWrite: false });
+    const cloth = [0x6b4a36, 0x8a6a4f, 0xc9b49a, 0xe8dfd2, 0x3b3532, 0xa88466, 0x5a4a42, 0xd8c8b4];
+    const C = (i) => mat(cloth[i % cloth.length], { roughness: 0.95 });
+    const z0 = -d / 2, inD = d - 0.05;
+    g.add(box(w, 0.08, d, mat(0x6f6a64, { roughness: 0.6 }), 0, 0.04, 0)); // chân đế
+    g.add(box(w - 0.02, h - 0.1, 0.02, wood, 0, h / 2 + 0.04, z0 + 0.012)); // hậu tủ
+    g.add(box(w, 0.025, d, wood, 0, h - 0.0125, 0)); // nóc
+    g.add(box(w - 0.02, 0.02, inD, wood, 0, 0.09, 0));
+    const ncol = Math.max(2, Math.round(w / 0.55)), cw = w / ncol;
+    for (let i = 0; i <= ncol; i++) {
+      const x = -w / 2 + cw * i;
+      g.add(box(0.02, h - 0.1, inD, wood, Math.min(w / 2 - 0.01, Math.max(-w / 2 + 0.01, x)), h / 2 + 0.04, -0.02)); // vách đứng
+      g.add(box(t, h - 0.08, t, fr, Math.min(w / 2 - t / 2, Math.max(-w / 2 + t / 2, x)), h / 2 + 0.04, d / 2 - t / 2)); // khung cánh
     }
-    for (let j = 0; j < 2; j++) g.add(box(w - 0.08, 0.2, d - 0.08, M.lightWood(), 0, 0.2 + j * 0.23, 0.0));
-    for (let i = 0; i < 3; i++) g.add(box(0.12, 0.08, 0.2, mat([0xd8cfc0, 0x6f7d88, 0xa48b6d][i], { roughness: 0.9 }), -w / 2 + 0.2 + i * 0.16, h - 0.24, 0));
+    g.add(box(w, t, t, fr, 0, h - t / 2, d / 2 - t / 2));
+    g.add(box(w, t, t, fr, 0, 0.09, d / 2 - t / 2));
+    g.add(box(w - 0.02, h - 0.12, 0.006, smoke, 0, h / 2 + 0.04, d / 2 - 0.012)); // cánh kính khói
+    for (const sx of [-1, 1]) g.add(box(0.006, h - 0.12, d - 0.04, smoke, sx * (w / 2 + 0.002), h / 2 + 0.04, 0));
+    const hang = (x, yTop, len, n, seed) => {
+      const rail = cyl(0.01, 0.01, cw - 0.06, M.steel(), x, yTop, 0, 8);
+      rail.rotation.z = Math.PI / 2;
+      g.add(rail);
+      g.add(box(cw - 0.05, 0.012, 0.03, led, x, yTop + 0.06, -0.02 + inD / 2 - 0.06)); // LED hắt
+      for (let k = 0; k < n; k++) {
+        const xx = x - (cw - 0.14) / 2 + ((cw - 0.14) / Math.max(1, n - 1)) * k;
+        const L = len * (0.82 + (((k + seed) * 37) % 5) * 0.045);
+        g.add(box(0.03, L, inD * 0.78, C(k + seed), xx, yTop - L / 2 - 0.03, 0));
+        g.add(box(0.008, 0.06, inD * 0.5, M.steel(), xx, yTop - 0.01, 0));
+      }
+    };
+    for (let i = 0; i < ncol; i++) {
+      const x = -w / 2 + cw * (i + 0.5);
+      const kind = ncol >= 3 && i === 0 ? 'shelf' : i % 2 ? 'double' : 'long';
+      // kệ trên cùng: hộp, chồng đồ gấp
+      g.add(box(cw - 0.03, 0.02, inD, wood, x, h - 0.36, -0.02));
+      g.add(box(cw - 0.05, 0.012, 0.03, led, x, h - 0.38, inD / 2 - 0.08));
+      g.add(box(cw * 0.42, 0.16, inD * 0.6, mat(i % 2 ? 0xe9e3d8 : 0x8a6f58, { roughness: 0.8 }), x - cw * 0.18, h - 0.27, -0.03));
+      g.add(box(cw * 0.36, 0.1, inD * 0.55, C(i + 2), x + cw * 0.2, h - 0.3, -0.03));
+      if (kind === 'shelf') {
+        for (const y of [0.95, 1.3, 1.62]) {
+          g.add(box(cw - 0.03, 0.02, inD, wood, x, y, -0.02));
+          g.add(box(cw - 0.05, 0.01, 0.03, led, x, y - 0.02, inD / 2 - 0.08));
+          for (let k = 0; k < 2; k++) g.add(box(cw * 0.38, 0.05 + k * 0.03, inD * 0.6, C(k * 3 + Math.round(y * 10)), x + (k ? 0.1 : -0.1), y + 0.04 + k * 0.015, -0.03));
+        }
+        for (let j = 0; j < 3; j++) { // ngăn kéo gỗ
+          g.add(box(cw - 0.04, 0.2, 0.02, wood, x, 0.21 + j * 0.23, inD / 2 - 0.03));
+          g.add(box(cw * 0.4, 0.015, 0.02, fr, x, 0.27 + j * 0.23, inD / 2 - 0.015));
+        }
+      } else if (kind === 'double') {
+        hang(x, h - 0.45, 0.62, 4, i * 3);
+        g.add(box(cw - 0.03, 0.02, inD, wood, x, 0.95, -0.02));
+        hang(x, 0.88, 0.5, 4, i * 3 + 2);
+      } else {
+        hang(x, h - 0.45, 1.0, 5, i * 2);
+        // dưới chân: túi xách / hộp tròn
+        g.add(box(0.26, 0.2, 0.14, mat(i % 2 ? 0x7a5236 : 0x9c7a5b, { roughness: 0.5 }), x, 0.21, 0));
+      }
+    }
     return g;
   },
   sofa(w, d) {
