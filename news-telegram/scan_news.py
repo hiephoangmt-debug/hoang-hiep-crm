@@ -114,6 +114,19 @@ def title_key(title):
     return hashlib.sha1(norm(t).encode()).hexdigest()[:16]
 
 
+class TelegramError(Exception):
+    pass
+
+
+HINTS = {
+    "chat not found": "TELEGRAM_CHAT_ID sai, hoặc chưa nhắn /start cho bot / chưa thêm bot vào nhóm.",
+    "bots can't send messages to bots": "TELEGRAM_CHAT_ID đang là id của bot; cần id người nhận (lấy từ @userinfobot).",
+    "bot was blocked by the user": "Bạn đã chặn bot: mở bot trên Telegram, bỏ chặn và bấm Start.",
+    "Unauthorized": "TELEGRAM_BOT_TOKEN sai: lấy lại bằng /token trong @BotFather.",
+    "Not Found": "TELEGRAM_BOT_TOKEN sai: lấy lại bằng /token trong @BotFather.",
+}
+
+
 def send_telegram(token, chat_id, text):
     for attempt in range(3):
         r = requests.post(
@@ -124,9 +137,15 @@ def send_telegram(token, chat_id, text):
         if r.status_code == 429:
             time.sleep(r.json().get("parameters", {}).get("retry_after", 5) + 1)
             continue
-        r.raise_for_status()
-        return
-    r.raise_for_status()
+        if r.ok:
+            return
+        try:
+            desc = r.json().get("description", r.text)
+        except ValueError:
+            desc = r.text
+        hint = next((h for k, h in HINTS.items() if k.lower() in desc.lower()), "")
+        raise TelegramError(f"Telegram {r.status_code}: {desc}" + (f" → {hint}" if hint else ""))
+    raise TelegramError("Telegram 429: gửi quá nhanh, thử lại sau.")
 
 
 def format_message(item):
@@ -142,8 +161,8 @@ def format_message(item):
 
 def main():
     dry_run = os.environ.get("DRY_RUN") == "1"
-    token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
-    chat_id = os.environ.get("TELEGRAM_CHAT_ID", "")
+    token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
+    chat_id = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
     if not dry_run and not (token and chat_id):
         sys.exit("Thiếu TELEGRAM_BOT_TOKEN hoặc TELEGRAM_CHAT_ID (hoặc đặt DRY_RUN=1).")
 
@@ -190,7 +209,10 @@ def main():
         if dry_run:
             print(msg)
         else:
-            send_telegram(token, chat_id, msg)
+            try:
+                send_telegram(token, chat_id, msg)
+            except TelegramError as e:
+                sys.exit(f"LỖI GỬI TIN THỬ: {e}")
             print("Đã gửi 1 tin thử.")
         return
 
@@ -201,14 +223,24 @@ def main():
     else:
         to_send = new_items[-MAX_PER_RUN:]
 
+    sent, failed = 0, []
     for it in to_send:
         msg = format_message(it)
         if dry_run:
             print("-" * 60 + "\n" + msg)
-        else:
+            continue
+        try:
             send_telegram(token, chat_id, msg)
-            time.sleep(1.1)  # giới hạn Telegram ~1 tin/giây/chat
-    print(f"Đã gửi {0 if dry_run else len(to_send)} tin.")
+            sent += 1
+        except (TelegramError, requests.RequestException) as e:
+            failed.append(it)
+            print(f"LỖI GỬI \"{it['title'][:60]}\": {e}", file=sys.stderr)
+        time.sleep(1.1)  # giới hạn Telegram ~1 tin/giây/chat
+    print(f"Đã gửi {sent} tin, lỗi {len(failed)} tin.")
+
+    # Gửi hỏng toàn bộ (sai token/chat id): không lưu trạng thái để lần sau gửi lại.
+    if failed and not sent:
+        sys.exit("Không gửi được tin nào, kiểm tra lỗi ở trên.")
 
     if not dry_run:
         SEEN_FILE.write_text(json.dumps(seen[-SEEN_LIMIT:], indent=0) + "\n")
