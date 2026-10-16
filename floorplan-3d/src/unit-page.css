@@ -68,3 +68,11 @@
   .up-bar { position: static; padding: 8px 12px; pointer-events: auto; background: var(--panel); border-top: 1px solid var(--line); }
   .up-bar .chips { box-shadow: none; background: transparent; padding: 0; }
 }
+
+/* Điện thoại: khung 3D co theo chiều cao màn hình (svh = khi thanh Safari đang hiện) để thanh công cụ
+   luôn nằm trong màn hình, trên thanh trình duyệt nổi; chừa khoảng trống cuối trang để cuộn qua thanh Safari */
+@media (max-width: 1000px) {
+  .up-3d, .up-2d { height: 62vh; height: clamp(220px, calc(100svh - 490px), 62svh); }
+  .up-bar { padding-bottom: 10px; }
+  .unitpage { padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px)); }
+}
