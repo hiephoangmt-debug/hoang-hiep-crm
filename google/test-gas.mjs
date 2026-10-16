@@ -114,7 +114,7 @@ assert.equal(ctx.crmKey_(), K);
 assert.throws(() => ctx.crmLoad('sai-khoa'), /Không có quyền/); assert.throws(() => ctx.crmLog('', '0988111222', 'call'), /Không có quyền/);
 assert.equal(ctx.doGet({ parameter: { k: 'sai' } }).file, undefined); assert.ok(ctx.doGet({ parameter: { k: K } }).content.includes('CRM Hoàng Hiệp') && ctx.doGet({ parameter: { k: K } }).content.includes('</html>'));
 const dbg = JSON.parse(ctx.doGet({ parameter: { debug: '1' } }).body);
-assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-43'); assert.equal(JSON.stringify(dbg).includes(K), false);
+assert.equal(dbg.hasKey, true); assert.equal(dbg.hasCrmHtml, true); assert.equal(dbg.version, 'ui-44'); assert.equal(JSON.stringify(dbg).includes(K), false);
 const L = ctx.crmLoad(K);
 assert.equal(L.leads.length, 2);
 const l0 = L.leads.find((x) => x.phone === '0988111222');
@@ -155,6 +155,17 @@ assert.throws(() => ctx.crmUpdateLead(K, '0988111222', { status: 'abc' }), /khô
   post({ type: 'click', channel: 'zalo', vid: 'v9' }, { key: 'testkey12345' });
   assert.deepEqual(JSON.parse(JSON.stringify(seen)), [['Landing A', '0931000999'], ['Landing A', 'zalo']]);
   ctx.crmDeleteLead(K, '0931000999'); vm.runInContext('teleLead_ = undefined; teleClick_ = undefined;', ctx); }
+{ ctx.crmImport(K, [{ name: 'Tg cũ', phone: '0931000555', source: 'nhập Excel' }]);
+  let t0 = ctx.crmLoad(K).leads.find((x) => x.phone === '0931000555'); assert.equal(t0.srcType, 'Data nhập');
+  const early = '2020-01-02T08:30:00';
+  const rt = ctx.crmTgTouch(K, { phone: '0931000555', name: 'Tên mới', note: 'Quan tâm: ADS', source: 'Google Ads', campaign: 'google / f2', url: 'https://x.com/toa-f2-ads', project: 'Sun FourS Tower', toa: 'F2', at: early });
+  assert.equal(rt.mode, 'at');
+  t0 = ctx.crmLoad(K).leads.find((x) => x.phone === '0931000555');
+  assert.equal(t0.srcType, 'Website'); assert.equal(t0.source, 'Google Ads'); assert.equal(t0.project, 'FourS Tower'); assert.equal(t0.toa, 'F2'); assert.match(t0.note, /Quan tâm: ADS/); assert.ok(t0.at.startsWith('2020-01-02'));
+  const rt2 = ctx.crmTgTouch(K, { phone: '0931000555', note: 'Quan tâm: ADS', at: '2030-05-05T09:00:00' });
+  assert.equal(rt2.mode, 'reAt'); assert.equal(ctx.crmLoad(K).leads.find((x) => x.phone === '0931000555').note, t0.note);
+  assert.throws(() => ctx.crmTgTouch(K, { phone: '0900111999', at: early }), /Không tìm thấy/);
+  ctx.crmDeleteLead(K, '0931000555'); }
 const ck0 = ctx.crmLoad(K).clicks[0];
 assert.throws(() => ctx.crmClickDone(K, ck0.row, 'sai-vid', true), /thay đổi/);
 ctx.crmClickDone(K, ck0.row, ck0.vid, true, 'đã xem Zalo');

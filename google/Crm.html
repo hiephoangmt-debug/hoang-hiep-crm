@@ -1630,7 +1630,10 @@ function addLead() {
         var next = function () {
           if (i >= tg.length) { $('#tgst').textContent = ''; load(); $('#dlgBody').innerHTML = '<div style="text-align:center;padding:18px 6px"><div style="font-size:44px;color:#1a9b4b;line-height:1">✓</div><h2 style="margin:8px 0 4px">Đã thêm xong</h2><div class="small mut">Thêm mới ' + ok + ' khách' + (dup ? ' · ' + dup + ' khách đã có sẵn nên bỏ qua' : '') + '. Khách nằm ở "Khách mới tháng này".</div><div class="row" style="justify-content:center;margin-top:14px"><button class="btn p" id="aclose">Tắt</button></div></div>'; $('#aclose').onclick = function () { $('#dlg').close(); }; return; }
           var x = tg[i++]; $('#tgst').textContent = 'Đang thêm ' + i + '/' + tg.length + '…';
-          run('crmCreateLead', { name: x.name, phone: x.phone, note: x.note, source: x.source, campaign: x.campaign, url: x.url, project: x.project, toa: x.toa, at: x.at, status: 'Mới' }).then(function (r) { if (r && r.dup) dup++; else ok++; next(); }).catch(function (e) { fail(e); btn.disabled = false; });
+          run('crmCreateLead', { name: x.name, phone: x.phone, note: x.note, source: x.source, campaign: x.campaign, url: x.url, project: x.project, toa: x.toa, at: x.at, status: 'Mới' }).then(function (r) {
+            if (!(r && r.dup)) { ok++; return next(); }
+            return run('crmTgTouch', { phone: x.phone, name: x.name, note: x.note, source: x.source, campaign: x.campaign, url: x.url, project: x.project, toa: x.toa, at: x.at }).then(function () { dup++; next(); });
+          }).catch(function (e) { fail(e); btn.disabled = false; });
         };
         next();
       };

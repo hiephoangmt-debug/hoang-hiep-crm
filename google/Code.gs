@@ -25,7 +25,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-43', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-44', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -668,6 +668,30 @@ function crmDeleteLead(k, phone) {
     var x = findLead_(phone);
     x.sh.deleteRow(x.row);
     return { ok: true };
+  });
+}
+
+// Dán tin báo khách mới từ Telegram cho số đã có trong CRM: đưa khách về đúng mốc giờ phát sinh trong tin, bỏ trạng thái "data nhập", điền ô còn trống.
+// Giờ trong tin sớm hơn ngày nhận hiện có thì sửa ngày nhận; muộn hơn thì ghi là gửi lại.
+function crmTgTouch(k, f) {
+  requireUi_(k); f = f || {};
+  return withLock_(function () {
+    var x = findLead_(f.phone), sh = x.sh, r = x.row, mode = 'none';
+    ensureLeadCols_(sh);
+    var tg = f.at ? new Date(f.at) : null; if (tg && isNaN(tg.getTime())) tg = null;
+    if (tg) {
+      var cur = sh.getRange(r, 2).getValue();
+      if (!(cur && cur.getTime) || tg.getTime() < cur.getTime()) { sh.getRange(r, 2).setValue(tg); mode = 'at'; }
+      else if (Math.abs(tg.getTime() - cur.getTime()) > 60000) { sh.getRange(r, 47).setValue(tg.toISOString()); mode = 'reAt'; }
+    }
+    if (String(sh.getRange(r, 40).getValue() || '') === 'Data nhập') sh.getRange(r, 40).setValue('Website');
+    var src = String(sh.getRange(r, 7).getValue() || '');
+    if (!src || /nhập\s*(excel|danh sách|sheet|file|chat|vcf|zalo)|import|nhập thủ công/i.test(src)) sh.getRange(r, 7).setValue(str_(f.source || 'google', 100));
+    var fill = function (col, v, max) { if (v && !String(sh.getRange(r, col).getValue() || '').trim()) sh.getRange(r, col).setValue(str_(v, max)); };
+    fill(3, f.name, 120); fill(8, f.campaign, 150); fill(41, f.url, 300); fill(42, projClean_(f.project), 120); fill(46, f.toa, 80);
+    var note = String(sh.getRange(r, 22).getValue() || ''), add = str_(f.note, 500);
+    if (add && note.indexOf(add) < 0) sh.getRange(r, 22).setValue((note ? note + ' | ' : '') + add);
+    return { ok: true, mode: mode };
   });
 }
 
