@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.19** + plugin Hoàng Hiệp CRM **2.20.53**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.19** + plugin Hoàng Hiệp CRM **2.20.54**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,16 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.54: trang Hudson Place (tòa S4) – Capital Square 3
+
+- Trang mới **Hudson Place S4 Capital Square Đà Nẵng** (`/du-an/capital-square-hudson-place-s4/`), nằm dưới tổ hợp Capital Square Đà Nẵng, theo tài liệu đào tạo bán hàng tòa S4 ngày 28/9/2026:
+  - Thông số: CĐT SIH, 24 tầng, 314 căn 1PN / 2PN / 3PN / 3PN dualkey, bàn giao quý III/2027 bán hoàn thiện, sở hữu lâu dài, vận hành Savills.
+  - Mặt bằng tầng 5 – 12, 14 – 24 (15 căn/sàn) và tầng 12A; bảng mã căn với diện tích thông thủy / tim tường; view từng dãy căn.
+  - Chính sách: miễn phí quản lý 1 năm, smarthome 100 / 200 / 300 triệu trừ vào giá, ưu đãi 8% / 12% / 18% theo cách thanh toán, vay 70% lãi suất 0% tới 36 tháng (2 phương án), ân hạn gốc 36 tháng.
+  - Quy trình mua theo hình thức chuyển nhượng hợp đồng mua bán, khái niệm giá chuyển nhượng / tổng giá bán, tiêu chuẩn bàn giao, 7 câu hỏi đáp (chat tự trả lời được).
+  - 17 ảnh: phối cảnh, mặt bằng tổng thể, mặt bằng tầng, layout 3 loại căn, 7 ảnh tiện ích, ảnh thi công 9/2026, tiêu chuẩn bàn giao. Đã cắt bỏ dòng chữ của đơn vị phân phối; không dùng mã QR, trang giới thiệu đơn vị phân phối.
+- **Cài (2 gói vì ảnh lớn hơn 4 MB):** Dự án → Nhập nhanh → tải `cap-nhat-code-1.zip`, rồi `cap-nhat-code-2.zip` → Nhập dữ liệu Đà Nẵng → Nhập / cập nhật dữ liệu → LiteSpeed Cache → Purge All.
 
 ## Có gì mới – plugin 2.20.53: chat hiểu từ viết tắt, trả lời tự nhiên hơn
 
