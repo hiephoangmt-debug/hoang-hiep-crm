@@ -278,6 +278,29 @@ function seeded(seed) {
   return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296);
 }
 
+/** Đế "cuốn sách" kiểu ảnh quảng cáo: bìa trên + xấp giấy + bìa dưới, bồn cây hai bên cửa vào */
+function buildBook(bounds, b) {
+  const g = new THREE.Group();
+  g.name = 'Đế sách';
+  const m = 0.7, W = b.maxX - b.minX + m * 2, D = b.maxY - b.minY + m * 2, top = -0.16;
+  const cover = new THREE.MeshStandardMaterial({ color: 0xf7f3ec, roughness: 0.7 });
+  const page = new THREE.MeshStandardMaterial({ color: 0xfbf8f2, roughness: 0.95 });
+  const page2 = new THREE.MeshStandardMaterial({ color: 0xe9e2d6, roughness: 0.95 });
+  const back = new THREE.MeshStandardMaterial({ color: 0x3a3d40, roughness: 0.6 });
+  const slab = (w, h, d, y, mat, dx = 0, dz = 0) => {
+    const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+    mesh.position.set(bounds.cx + dx, y - h / 2, bounds.cy + dz);
+    mesh.castShadow = true; mesh.receiveShadow = true;
+    g.add(mesh);
+  };
+  slab(W, 0.08, D, top, cover);
+  // xấp giấy: các lớp mỏng thụt vào một chút, xen màu để thấy gân giấy ở mép
+  const n = 16, th = 0.04;
+  for (let i = 0; i < n; i++) slab(W - 0.1, th, D - 0.1, top - 0.08 - i * th, i % 2 ? page2 : page, 0.015 * ((i % 3) - 1), 0.01 * ((i % 2) * 2 - 1));
+  slab(W + 0.05, 0.07, D + 0.05, top - 0.08 - n * th, back);
+  return g;
+}
+
 /**
  * @returns {{root:THREE.Group, doors:any[], roomLights:THREE.PointLight[], lampLights:THREE.PointLight[],
  *   lampShades:THREE.Mesh[], labels:CSS2DObject[], bounds:any, colliders:any[], furniture:THREE.Object3D[], spawn:THREE.Vector3}}
@@ -310,6 +333,7 @@ export function buildScene(plan, opts = {}) {
   } else {
     // Nền trắng: đế sàn màu than bám đúng hình các phòng (kiểu mặt cắt phối cảnh)
     const baseMat = new THREE.MeshStandardMaterial({ color: pal.cap, roughness: 0.85 });
+    if (opts.book) root.add(buildBook(bounds, b));
     for (const room of plan.rooms) {
       if (room.points.length < 3) continue;
       const sh = new THREE.Shape(room.points.map((p) => new THREE.Vector2(p.x, -p.y)));
@@ -459,6 +483,7 @@ export function buildScene(plan, opts = {}) {
       lab.position.set(lp.x, 0.15, lp.y);
       lab.userData.noExport = true;
       root.add(lab);
+      lab.userData.roomName = room.name;
       labels.push(lab);
     }
   }

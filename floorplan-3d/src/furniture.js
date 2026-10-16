@@ -168,9 +168,12 @@ const builders = {
   },
   diningTable(w, d, h) {
     const g = new THREE.Group();
-    g.add(box(w, 0.05, d, M.lightWood(), 0, h - 0.025, 0, 0.01));
-    legs(g, w, d, h - 0.05, 0.03, M.lightWood(), 0.08);
+    // Mặt đá marble trắng vân xám, chân kim loại đen; giữa bàn bình hoa + đĩa
+    const marble = mat(0xf4f2ee, { roughness: 0.12, metalness: 0.02, map: getTexture('marble') });
+    g.add(box(w, 0.04, d, marble, 0, h - 0.02, 0, 0.012));
+    legs(g, w, d, h - 0.04, 0.02, M.black(), 0.1);
     g.add(cyl(0.12, 0.08, 0.1, M.porcelain(), 0, h + 0.05, 0, 20));
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) if (w > 1.1) g.add(cyl(0.11, 0.11, 0.012, M.porcelain(), sx * w * 0.28, h + 0.006, sz * d * 0.28, 20));
     for (let i = 0; i < 3; i++) {
       const s = new THREE.Mesh(new THREE.SphereGeometry(0.04, 12, 10), mat([0xe74c3c, 0xf1c40f, 0x27ae60][i]));
       s.position.set(-0.04 + i * 0.04, h + 0.12, (i - 1) * 0.03);
@@ -285,21 +288,181 @@ const builders = {
     g.add(cyl(0.015, 0.015, 0.15, M.steel(), -w / 2 + 0.12, 0.62, 0, 10));
     return g;
   },
-  plant(w) {
+  /** Cây trong nhà: bồn vuông bo góc màu kem, thân mảnh, tán lá chùm mềm (kiểu bàng Singapore / trầu bà) */
+  plant(w, d, h) {
     const g = new THREE.Group();
-    const r = w / 2;
-    g.add(cyl(r * 0.6, r * 0.45, 0.35, mat(0xd9d4cc, { roughness: 0.6 }), 0, 0.175, 0, 20));
-    g.add(cyl(r * 0.55, r * 0.55, 0.02, mat(0x4b3621), 0, 0.34, 0, 20));
-    g.add(cyl(0.02, 0.025, 0.6, mat(0x5b4030), 0, 0.6, 0, 8));
-    const rnd = mulberry(Math.round(w * 1000));
-    for (let i = 0; i < 9; i++) {
-      const s = r * (0.45 + rnd() * 0.35);
-      const leaf = new THREE.Mesh(new THREE.IcosahedronGeometry(s, 0), i % 2 ? M.leaf() : M.leaf2());
-      const a = rnd() * Math.PI * 2, rr = rnd() * r * 0.6;
-      leaf.position.set(Math.cos(a) * rr, 0.75 + rnd() * 0.6, Math.sin(a) * rr);
-      leaf.rotation.set(rnd() * 3, rnd() * 3, rnd() * 3);
-      leaf.castShadow = true;
-      g.add(leaf);
+    const s = Math.min(0.42, w * 0.75), H = Math.max(0.9, h || 1.4);
+    g.add(box(s, 0.42, s, mat(0xece6db, { roughness: 0.7 }), 0, 0.21, 0, 0.04));
+    g.add(box(s - 0.05, 0.02, s - 0.05, mat(0x3d3024, { roughness: 1 }), 0, 0.42, 0));
+    const rnd = mulberry(Math.round(w * 1000 + H * 37));
+    const stem = mat(0x6b5440, { roughness: 0.9 });
+    const leafTex = getTexture('foliage');
+    const leaves = [0x3f7d3a, 0x4f8f3f, 0x5e9a48].map((c) => mat(c, { roughness: 0.85, map: leafTex }));
+    const ball = new THREE.SphereGeometry(1, 14, 10);
+    const n = 3;
+    for (let k = 0; k < n; k++) {
+      const a = (k / n) * Math.PI * 2 + rnd(), lean = 0.05 + rnd() * 0.06, top = 0.42 + (H - 0.42) * (0.65 + rnd() * 0.3);
+      const tx = Math.cos(a) * lean * 2, tz = Math.sin(a) * lean * 2;
+      const st = cyl(0.012, 0.016, top - 0.42, stem, tx / 2, 0.42 + (top - 0.42) / 2, tz / 2, 6);
+      st.rotation.set(Math.sin(a) * lean, 0, -Math.cos(a) * lean);
+      g.add(st);
+      for (let j = 0; j < 6; j++) {
+        const r = 0.09 + rnd() * 0.08;
+        const b = new THREE.Mesh(ball, leaves[(k + j) % 3]);
+        b.scale.set(r * 1.2, r, r * 1.2);
+        b.position.set(tx + (rnd() - 0.5) * 0.25, top - 0.1 + rnd() * 0.25, tz + (rnd() - 0.5) * 0.25);
+        b.castShadow = true;
+        g.add(b);
+      }
+    }
+    return g;
+  },
+  /** Sàn gỗ ngoài trời (deck) kiểu resort: ván gỗ teak có khe */
+  deck(w, d) {
+    const g = new THREE.Group();
+    const m = mat(0xa8774e, { roughness: 0.75, map: getTexture('woodGrain') });
+    const pw = 0.14, n = Math.floor(d / pw);
+    for (let i = 0; i < n; i++) {
+      const b = box(w, 0.05, pw - 0.012, m, 0, 0.025, -d / 2 + pw / 2 + i * pw);
+      b.castShadow = false;
+      g.add(b);
+    }
+    return g;
+  },
+  /** Ghế nằm tắm nắng: khung gỗ, đệm trắng, tựa lưng nghiêng */
+  lounger(w, d) {
+    const g = new THREE.Group();
+    const frame = mat(0x8a5a36, { roughness: 0.6, map: getTexture('woodGrain') });
+    const cush = mat(0xf3efe6, { roughness: 0.95, map: getTexture('fabric') });
+    g.add(box(w, 0.08, d * 0.68, frame, 0, 0.3, d * 0.16));
+    for (const sx of [-1, 1]) for (const sz of [-0.2, 0.48]) g.add(box(0.05, 0.3, 0.05, frame, sx * (w / 2 - 0.05), 0.15, sz * d));
+    g.add(box(w - 0.06, 0.07, d * 0.66, cush, 0, 0.375, d * 0.16, 0.03));
+    const back = new THREE.Group();
+    back.add(box(w, 0.06, d * 0.32, frame, 0, 0, -d * 0.16));
+    back.add(box(w - 0.06, 0.07, d * 0.3, cush, 0, 0.06, -d * 0.16, 0.03));
+    back.position.set(0, 0.34, -d * 0.18);
+    back.rotation.x = -0.6;
+    g.add(back);
+    g.add(box(0.36, 0.06, 0.2, cush, 0, 0.62, -d * 0.36, 0.03)); // gối
+    return g;
+  },
+  /** Dù che nắng: trụ gỗ, tán vải kem hình nón */
+  parasol(w) {
+    const g = new THREE.Group();
+    g.add(cyl(0.22, 0.25, 0.08, mat(0x4a4a4a, { roughness: 0.6 }), 0, 0.04, 0, 16));
+    g.add(cyl(0.025, 0.025, 2.3, mat(0x8a5a36, { roughness: 0.6 }), 0, 1.15, 0, 8));
+    const canopy = new THREE.Mesh(new THREE.ConeGeometry(w / 2, 0.45, 8, 1, true), mat(0xefe6d4, { roughness: 0.95, side: THREE.DoubleSide, map: getTexture('fabric') }));
+    canopy.position.y = 2.25;
+    canopy.castShadow = true;
+    g.add(canopy);
+    return g;
+  },
+  /** Cây dừa / cau kiểu nhiệt đới: thân cong nhiều đốt, tán lá dài rủ */
+  palm(w, d, h) {
+    const g = new THREE.Group();
+    const H = h || 3.4;
+    const trunk = mat(0x8c7a62, { roughness: 0.95, map: getTexture('woodGrain') });
+    const rnd = mulberry(Math.round(H * 1000 + w * 77));
+    const segs = 10;
+    let x = 0, z = 0;
+    const lean = 0.035 + rnd() * 0.02, dir = rnd() * Math.PI * 2;
+    for (let i = 0; i < segs; i++) {
+      const r0 = 0.11 - i * 0.004;
+      const c = cyl(r0, r0 + 0.012, H / segs + 0.02, trunk, x, (i + 0.5) * H / segs, z, 9);
+      g.add(c);
+      x += Math.cos(dir) * lean * i * 0.25; z += Math.sin(dir) * lean * i * 0.25;
+    }
+    // bồn đá dưới gốc
+    g.add(cyl(0.38, 0.34, 0.32, mat(0xcfc8bb, { roughness: 0.9, map: getTexture('concrete') }), 0, 0.16, 0, 18));
+    // Tàu lá: dải lá dài uốn cong rủ xuống, hoạ tiết lá chét xẻ lông chim (ảnh có kênh trong suốt)
+    const leafTex = palmLeafTexture();
+    const leafMats = [0x5a9440, 0x6aa24a, 0x4b843a].map((c) => mat(c, { roughness: 0.75, side: THREE.DoubleSide, map: leafTex, alphaTest: 0.45 }));
+    const top = new THREE.Vector3(x, H, z);
+    const nF = 12;
+    for (let f = 0; f < nF; f++) {
+      const a = (f / nF) * Math.PI * 2 + rnd() * 0.25;
+      const len = 1.4 + rnd() * 0.5, wid = 0.55;
+      const geo = new THREE.PlaneGeometry(len, wid, 12, 1);
+      const pos = geo.attributes.position;
+      for (let i = 0; i < pos.count; i++) {
+        const t = (pos.getX(i) + len / 2) / len; // 0 ở gốc → 1 ở ngọn
+        pos.setXYZ(i, t * len, 0.3 * Math.sin(t * Math.PI * 0.55) - 0.75 * t * t + Math.abs(pos.getY(i)) * 0.25, pos.getY(i) * (0.35 + 0.65 * Math.sin(Math.PI * Math.min(1, t * 1.1))));
+      }
+      geo.computeVertexNormals();
+      const frond = new THREE.Mesh(geo, leafMats[f % 3]);
+      frond.position.copy(top);
+      frond.rotation.y = a;
+      frond.castShadow = true;
+      g.add(frond);
+    }
+    return g;
+  },
+  /** Viền sỏi trắng */
+  pebbles(w, d) {
+    const g = new THREE.Group();
+    g.add(box(w, 0.03, d, mat(0xeeeae2, { roughness: 1, map: getTexture('concrete') }), 0, 0.015, 0));
+    const rnd = mulberry(Math.round(w * 313 + d * 71));
+    const pm = [0xf6f3ee, 0xe2ddd3, 0xd3cdc2].map((c) => mat(c, { roughness: 0.9 }));
+    const geo = new THREE.SphereGeometry(1, 8, 6);
+    for (let i = 0; i < Math.round(w * d * 70); i++) {
+      const p = new THREE.Mesh(geo, pm[i % 3]);
+      const r = 0.025 + rnd() * 0.025;
+      p.scale.set(r * 1.3, r * 0.6, r);
+      p.position.set((rnd() - 0.5) * w, 0.03, (rnd() - 0.5) * d);
+      g.add(p);
+    }
+    return g;
+  },
+  /** Đá lát bước chân trên cỏ: tấm đá tròn méo, mép bo, vân đá nhạt, lún nhẹ trong cỏ */
+  steppingStone(w, d) {
+    const g = new THREE.Group();
+    const rnd = mulberry(Math.round(w * 7919 + d * 104729));
+    const sh = new THREE.Shape();
+    const n = 14;
+    for (let i = 0; i <= n; i++) {
+      const a = (i / n) * Math.PI * 2, k = 0.88 + rnd() * 0.18;
+      const px = Math.cos(a) * w / 2 * k, py = Math.sin(a) * d / 2 * k;
+      i ? sh.lineTo(px, py) : sh.moveTo(px, py);
+    }
+    const geo = new THREE.ExtrudeGeometry(sh, { depth: 0.03, bevelEnabled: true, bevelThickness: 0.012, bevelSize: 0.015, bevelSegments: 2, curveSegments: 4 });
+    geo.rotateX(-Math.PI / 2);
+    const m = new THREE.Mesh(geo, mat(0xd6d0c4, { roughness: 0.92, map: getTexture('concrete') }));
+    m.position.y = 0.0;
+    m.receiveShadow = true;
+    g.add(m);
+    return g;
+  },
+  /** Luống cây bụi + hoa: viền gỗ thấp, mỗi bụi là chùm nhiều cụm lá tròn mềm (không góc cạnh), điểm hoa */
+  shrubBed(w, d) {
+    const g = new THREE.Group();
+    g.add(box(w, 0.16, d, mat(0x5e4330, { roughness: 0.8, map: getTexture('woodGrain') }), 0, 0.08, 0, 0.02));
+    g.add(box(w - 0.06, 0.02, d - 0.06, mat(0x3d3024, { roughness: 1 }), 0, 0.165, 0));
+    const rnd = mulberry(Math.round(w * 997 + d * 131));
+    const leafTex = getTexture('foliage');
+    const greens = [0x4f8a3a, 0x6a9a44, 0x3e7a45, 0x7aa64e, 0x5b8f5f, 0x8aa84a];
+    const flowers = [0xe58fb0, 0xf6f2ea, 0xf2c94c, 0xd96a8a, 0xb38fd6, 0xf08a5d].map((c) => mat(c, { roughness: 0.7 }));
+    const ball = new THREE.SphereGeometry(1, 14, 10);
+    const n = Math.max(3, Math.round(w * d * 6));
+    for (let i = 0; i < n; i++) {
+      const s = 0.16 + rnd() * 0.18;
+      const bx = (rnd() - 0.5) * (w - s * 1.2), bz = (rnd() - 0.5) * (d - s * 1.2);
+      const leaf = mat(greens[Math.floor(rnd() * greens.length)], { roughness: 0.9, map: leafTex });
+      // chùm 5–8 cụm lá nhỏ chồng nhau → dáng bụi cây tự nhiên
+      const k = 5 + Math.floor(rnd() * 4);
+      for (let j = 0; j < k; j++) {
+        const r = s * (0.45 + rnd() * 0.35);
+        const b = new THREE.Mesh(ball, leaf);
+        b.scale.set(r, r * (0.8 + rnd() * 0.3), r);
+        b.position.set(bx + (rnd() - 0.5) * s, 0.18 + r * 0.8 + rnd() * s * 0.5, bz + (rnd() - 0.5) * s);
+        b.castShadow = true;
+        g.add(b);
+      }
+      if (rnd() < 0.5) for (let f = 0; f < 6; f++) {
+        const fl = new THREE.Mesh(new THREE.IcosahedronGeometry(0.025 + rnd() * 0.02, 1), flowers[i % flowers.length]);
+        const a = rnd() * Math.PI * 2;
+        fl.position.set(bx + Math.cos(a) * s * 0.6, 0.2 + s * 1.15 + rnd() * 0.05, bz + Math.sin(a) * s * 0.6);
+        g.add(fl);
+      }
     }
     return g;
   },
@@ -413,6 +576,29 @@ function rugTexture() {
 }
 
 // ---------- Danh mục ----------
+let palmTex = null;
+/** Hoạ tiết tàu lá dừa: gân giữa + các lá chét nhọn hai bên, nền trong suốt */
+function palmLeafTexture() {
+  if (palmTex) return palmTex;
+  const c = document.createElement('canvas'); c.width = 512; c.height = 128;
+  const x = c.getContext('2d');
+  x.clearRect(0, 0, 512, 128);
+  x.strokeStyle = '#d9e6c8'; x.lineWidth = 3;
+  x.beginPath(); x.moveTo(0, 64); x.lineTo(512, 64); x.stroke();
+  for (let i = 4; i < 506; i += 11) {
+    const L = 58 * Math.sin(Math.PI * (0.12 + 0.88 * i / 512));
+    for (const s of [-1, 1]) {
+      const g = x.createLinearGradient(i, 64, i + 16, 64 + s * L);
+      g.addColorStop(0, '#e8f0dc'); g.addColorStop(1, '#ffffff');
+      x.fillStyle = g;
+      x.beginPath(); x.moveTo(i, 64); x.quadraticCurveTo(i + 12, 64 + s * L * 0.55, i + 20, 64 + s * L); x.quadraticCurveTo(i + 6, 64 + s * L * 0.5, i + 7, 64); x.fill();
+    }
+  }
+  palmTex = new THREE.CanvasTexture(c);
+  palmTex.colorSpace = THREE.SRGBColorSpace;
+  return palmTex;
+}
+
 export const CATALOG = [
   { type: 'bed', name: 'Giường đôi', cat: 'Phòng ngủ', w: 1.8, d: 2.05, h: 1.0, color: '#d8c3a5', icon: '🛏️' },
   { type: 'bedSingle', base: 'bed', name: 'Giường đơn', cat: 'Phòng ngủ', w: 1.2, d: 2.0, h: 1.0, color: '#d8c3a5', icon: '🛏️' },
@@ -437,6 +623,13 @@ export const CATALOG = [
   { type: 'toilet', name: 'Bồn cầu', cat: 'Phòng tắm', w: 0.42, d: 0.68, h: 0.8, color: '#ffffff', icon: '🚽' },
   { type: 'vanity', name: 'Lavabo', cat: 'Phòng tắm', w: 0.8, d: 0.5, h: 0.85, color: '#ffffff', icon: '🚰' },
   { type: 'shower', name: 'Vòi sen kính', cat: 'Phòng tắm', w: 0.9, d: 0.9, h: 2.0, color: '#d6eef7', icon: '🚿' },
+  { type: 'deck', name: 'Sàn gỗ ngoài trời', cat: 'Khác', w: 2.4, d: 2.0, h: 0.05, color: '#a8774e', icon: '🪵' },
+  { type: 'lounger', name: 'Ghế nằm tắm nắng', cat: 'Khác', w: 0.7, d: 1.9, h: 0.7, color: '#f3efe6', icon: '🏖️' },
+  { type: 'parasol', name: 'Dù che nắng', cat: 'Khác', w: 2.2, d: 2.2, h: 2.5, color: '#efe6d4', icon: '⛱️' },
+  { type: 'palm', name: 'Cây dừa / cau', cat: 'Khác', w: 2.6, d: 2.6, h: 3.4, color: '#4e8a3c', icon: '🌴' },
+  { type: 'pebbles', name: 'Viền sỏi trắng', cat: 'Khác', w: 2.0, d: 0.3, h: 0.04, color: '#eeeae2', icon: '⚪' },
+  { type: 'steppingStone', name: 'Đá lát sân vườn', cat: 'Khác', w: 0.5, d: 0.32, h: 0.04, color: '#d8d3c8', icon: '🪨' },
+  { type: 'shrubBed', name: 'Luống cây & hoa', cat: 'Khác', w: 2.0, d: 0.6, h: 0.6, color: '#3f7a35', icon: '🌺' },
   { type: 'bathtub', name: 'Bồn tắm', cat: 'Phòng tắm', w: 1.7, d: 0.75, h: 0.55, color: '#ffffff', icon: '🛁' },
   { type: 'stairs', name: 'Cầu thang', cat: 'Khác', w: 1.0, d: 3.2, h: 2.8, color: '#d4b48c', icon: '🪜' },
   { type: 'car', name: 'Ô tô', cat: 'Khác', w: 1.8, d: 4.4, h: 1.4, color: '#c0392b', icon: '🚗' },

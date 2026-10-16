@@ -8,10 +8,10 @@ import { CATALOG_MAP } from './furniture.js';
 const BASE = import.meta.env.BASE_URL || './';
 // Loại đồ → mô hình; fit: co theo 'width' (giữ tỉ lệ) hoặc 'box' (vừa khít rộng × sâu)
 const MODELS = {
-  sofa: { file: 'sofa.glb', fit: 'width', tint: 'fabric' },
+  // sofa: dùng sofa văng thẳng dựng sẵn (mô hình sofa cong chiếm nhiều diện tích, không hợp căn hộ)
   armchair: { file: 'armchair.glb', fit: 'width', tint: 'fabric2' },
   chair: { file: 'chair.glb', fit: 'width', tint: 'fabric' },
-  plant: { file: 'plant.glb', fit: 'height', h: 1.25 },
+  // plant: dùng bồn cây vuông dựng sẵn (mô hình chậu đất nung tròn không hợp phong cách)
 };
 const cache = new Map();
 let loader = null;
@@ -62,7 +62,7 @@ export async function upgradeFurniture(built, clippingPlanes = [], palette = nul
       else s = Math.min(w / m.size.x, (d * 1.15) / m.size.z);
       inst.scale.setScalar(s);
       inst.position.set(-m.center.x * s, -m.box.min.y * s, -m.center.z * s);
-      const tint = spec.tint && palette?.[spec.tint];
+      const tint = spec.tint && (item.color || palette?.[spec.tint]);
       inst.traverse((o) => {
         if (!o.isMesh || (!clippingPlanes.length && !tint)) return;
         o.material = o.material.clone();
