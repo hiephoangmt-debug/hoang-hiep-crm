@@ -1,0 +1,89 @@
+/**
+ * ChatAI.gs – TRẢ LỜI CHAT WEBSITE BẰNG AI cho "CRM Hoàng Hiệp".
+ * Dùng chung khoá AI "quân sư" đã cài (menu CRM > Cài khoá quân sư). Không cần khoá mới.
+ * Cài: Apps Script → + → Tệp lệnh → tên "ChatAI" → dán file này → Lưu.
+ * Rồi trong Mã.gs, hàm doPost, ngay dưới dòng  if (!site) return json_({ error: 'Mã website không hợp lệ' });
+ * thêm 1 dòng:
+ *     if (b.action === 'chat') return json_(chatAI_(b, site));
+ * Lưu → Triển khai → Quản lý bản triển khai → ✏️ → Phiên bản mới → Triển khai.
+ */
+var CHAT_MODEL = 'claude-haiku-5-5';
+
+var CHAT_FACTS = [
+  'DỰ ÁN: Khu căn hộ du lịch, thương mại dịch vụ Hải Minh (Căn hộ khách sạn / căn hộ dịch vụ Hải Minh Đà Nẵng).',
+  'Vị trí: Lô A2-1 & A2-2, góc Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, phường Ngũ Hành Sơn, TP Đà Nẵng. Băng qua đường và công viên là bãi biển Mỹ Khê – Non Nước.',
+  'Phía trước: khu đất ven biển được TP quy hoạch làm Công viên công cộng đường Trường Sa (khoảng 2,45 ha, thu hồi từ khu Hòn Ngọc Á Châu, dự kiến 2025–2027, tiến độ theo thành phố). KHÔNG nói "đối diện Silver Shores". Crowne Plaza (Silver Shores) ở phía Bắc; Hyatt Regency Danang và bãi tắm Sơn Thủy ở phía Nam.',
+  'Khoảng cách ước tính bằng ô tô: phố An Thượng 5–10 phút; Ngũ Hành Sơn 5–10 phút; cầu Rồng / trung tâm TP khoảng 15 phút; sân bay quốc tế Đà Nẵng 15–20 phút; phố cổ Hội An khoảng 30 phút.',
+  'Chủ đầu tư: Công ty TNHH Quản lý và Dịch vụ Hạ tầng Kỹ thuật Miền Trung.',
+  'Quy mô: 1 tòa tháp 30 tầng, cao khoảng 117 m, khoảng 400 căn hộ du lịch, tổng sàn xây dựng trên 45.000 m², khu đất 3.720 m² (Khu Khách sạn, Condotel và dân cư Saphia). Có khối thương mại dịch vụ.',
+  'Loại căn: 1PN 47,4 m²; 2PN 66,5–68,8 m²; 2PN+1 76,2–76,9 m²; 3PN 78,6–80 m²; Dual Key 101 m² (2 phần cửa riêng).',
+  'Pháp lý đất: đất thương mại dịch vụ, Nhà nước giao đất có thu tiền sử dụng đất, thời hạn 50 năm (17/9/2026 – 16/9/2076); UBND TP Đà Nẵng ban hành quyết định điều chỉnh thời hạn sử dụng đất (10/2026). Loại hình căn hộ du lịch (condotel), KHÔNG phải chung cư ở lâu dài.',
+  'Tình trạng: đang thi công, DỰ KIẾN ra mắt 11/2026. Giá bán, chính sách thanh toán, ngân hàng cho vay, mặt bằng chi tiết, tiện ích, đơn vị vận hành, số đêm chủ căn tự ở, tỷ lệ chia doanh thu, tiến độ bàn giao: CHƯA công bố – chủ đầu tư công bố khi ra mắt.',
+  'Giá phòng ven biển trục Võ Nguyên Giáp phổ biến khoảng 1–3 triệu/đêm (giá công khai trên nền tảng đặt phòng). Du lịch Đà Nẵng 11 tháng 2025: 16,5 triệu lượt khách lưu trú (+18,9%), khách quốc tế khoảng 7 triệu (+26,5%) – Cục Thống kê TP Đà Nẵng.',
+  'Đà Nẵng: Khu thương mại tự do (QĐ 1142/QĐ-TTg, 6/2025, ~1.881 ha); Trung tâm tài chính quốc tế (NQ 222/2025/QH15).',
+  'Giấy chứng nhận cho căn hộ du lịch: theo quy định pháp luật tại thời điểm cấp và hồ sơ dự án – KHÔNG hứa trước.',
+  'Chuyển nhượng / bán lại: thực hiện theo hợp đồng mua bán và quy định pháp luật; điều kiện cụ thể nằm trong hợp đồng mẫu khi ra mắt.',
+  'Không thu tiền giữ chỗ / đặt cọc ở giai đoạn này; đăng ký nhận thông tin miễn phí.',
+  'Liên hệ: chuyên viên Hoàng Hiệp – Hotline/Zalo 0904 567 009 (chỉ dùng số này).'
+].join('\n');
+
+var CHAT_RULES = [
+  'Bạn là trợ lý tư vấn của chuyên viên Hoàng Hiệp cho dự án Hải Minh Đà Nẵng, chat trên website.',
+  'Xưng "em", gọi khách "anh/chị". Trả lời tiếng Việt, ấm áp, tự nhiên như người thật, NGẮN (2–4 câu, tối đa ~70 từ), không dùng markdown, không gạch đầu dòng dài.',
+  'Hiểu cả câu viết tắt, không dấu, sai chính tả (vd "ko"=không, "dc"=được, "bn"=bao nhiêu, "can"=căn).',
+  'Chỉ dùng THÔNG TIN DỰ ÁN bên dưới. Điều chưa có hoặc chưa công bố: nói thật là chủ đầu tư sẽ công bố khi ra mắt và đề nghị gửi ngay khi có. Không bịa số liệu.',
+  'TUYỆT ĐỐI KHÔNG: hứa/cam kết lợi nhuận, nói "chắc chắn tăng giá", "sở hữu lâu dài", "nhất/đầu tiên/duy nhất", nhận đặt cọc/giữ chỗ, so sánh chê dự án khác, nhắc đến Sun Group. Mọi con số thu nhập phải kèm "chỉ là ví dụ minh họa, không phải cam kết".',
+  'Cuối mỗi câu trả lời, hỏi lại 1 câu ngắn khéo léo để hiểu nhu cầu (mục đích mua, số người, tầm tài chính, loại căn, thời gian ra xem), HOẶC mời để lại số Zalo để nhận tài liệu – không ép, không lặp lại lời mời nếu vừa mời ở câu trước.',
+  'Nếu khách hỏi ngoài dự án/bất động sản: trả lời lịch sự 1 câu và lái về dự án.',
+  'Nếu khách để lại số điện thoại: cảm ơn và nói chuyên viên sẽ nhắn Zalo sớm.'
+].join('\n');
+
+function chatAI_(b, site) {
+  var q = String(b.q || '').slice(0, 500).trim();
+  if (!q) return { error: 'empty' };
+  var key = PropertiesService.getScriptProperties().getProperty('ANTHROPIC_KEY') || '';
+  if (!key) return { error: 'nokey' };
+  var cache = CacheService.getScriptCache();
+  var g = Number(cache.get('chat_g') || 0); if (g >= 40) return { error: 'busy' };
+  cache.put('chat_g', String(g + 1), 60);
+  var vk = 'chat_v_' + String(b.vid || '').slice(0, 40), v = Number(cache.get(vk) || 0);
+  if (v >= 25) return { error: 'limit' };
+  cache.put(vk, String(v + 1), 3600);
+
+  var hist = [];
+  try { hist = JSON.parse(b.history || '[]'); } catch (e) { hist = []; }
+  var msgs = [];
+  hist.slice(-8).forEach(function (m) {
+    if (!m || !m.t) return;
+    var role = m.r === 'me' ? 'user' : 'assistant';
+    if (msgs.length && msgs[msgs.length - 1].role === role) msgs[msgs.length - 1].content += '\n' + String(m.t).slice(0, 600);
+    else msgs.push({ role: role, content: String(m.t).slice(0, 600) });
+  });
+  while (msgs.length && msgs[0].role !== 'user') msgs.shift();
+  if (msgs.length && msgs[msgs.length - 1].role === 'user') msgs[msgs.length - 1].content += '\n' + q;
+  else msgs.push({ role: 'user', content: q });
+
+  var system = CHAT_RULES + '\n\nKhách đang đọc phần: ' + String(b.topic || 'không rõ').slice(0, 40)
+    + '\n\nTHÔNG TIN DỰ ÁN:\n' + CHAT_FACTS;
+  try {
+    var res = UrlFetchApp.fetch('https://api.anthropic.com/v1/messages', {
+      method: 'post', contentType: 'application/json', muteHttpExceptions: true,
+      headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01' },
+      payload: JSON.stringify({ model: CHAT_MODEL, max_tokens: 400, system: system, messages: msgs })
+    });
+    if (res.getResponseCode() !== 200) return { error: 'ai ' + res.getResponseCode() };
+    var body = JSON.parse(res.getContentText());
+    var a = (body.content || []).map(function (x) { return x.text || ''; }).join('').trim();
+    if (!a) return { error: 'empty answer' };
+    try { if (typeof logChat_ === 'function') logChat_(b, site, q, a); } catch (e) {}
+    return { ok: true, a: a };
+  } catch (err) {
+    return { error: String(err && err.message || err) };
+  }
+}
+
+/** Chạy thử trong Apps Script → xem Nhật ký thực thi */
+function thuChatAI() {
+  Logger.log(JSON.stringify(chatAI_({ q: 'xa trung tâm ko', vid: 'test', topic: 'vi-tri' }, { name: 'Hải Minh' })));
+  Logger.log(JSON.stringify(chatAI_({ q: 'bán có lấy dc căn ko', vid: 'test', topic: 'phap-ly' }, { name: 'Hải Minh' })));
+}

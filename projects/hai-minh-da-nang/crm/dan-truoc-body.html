@@ -6,6 +6,36 @@
   - Khách gõ số điện thoại trong chat → gửi về CRM Hoàng Hiệp (+ Telegram).
   - Bấm Zalo / Gọi (kể cả nút LadiPage) → CRM ghi lượt bấm.
 ============================================================= -->
+<!-- Mã CRM Hoàng Hiệp (tự thêm nếu trang chưa có) + bắt form LadiPage -->
+<script>
+(function(){
+  var CRM='https://script.google.com/macros/s/AKfycbyMWXl47PShn-ikZKwrFONJb9z89NOmVG6yIioyjGxo55IEbLh4yP7KiREPsxgSbxBl/exec';
+  window.HM_CRM={url:CRM,key:'qgK6I9KWTqfS'};
+  if(!document.querySelector('script[src*="AKfycbyMWXl47PShn"]')){
+    var s=document.createElement('script'); s.src=CRM+'?js=1'; s.async=true; s.setAttribute('data-key','qgK6I9KWTqfS'); document.head.appendChild(s);
+  }
+  function grab(f){
+    var d={}; f.querySelectorAll('input,select,textarea').forEach(function(i){
+      var n=((i.name||'')+' '+(i.getAttribute('placeholder')||'')).toLowerCase(), v=(i.value||'').trim(); if(!v) return;
+      if(!d.phone&&(i.type==='tel'||/phone|sdt|sđt|điện thoại|09xx/.test(n))) d.phone=v;
+      else if(!d.name&&/name|tên|họ|nguyễn văn/.test(n)) d.name=v;
+      else if(i.tagName==='SELECT'||/nhu_cau|ngan_sach|loai_can/.test(n)) d.message=(d.message?d.message+' · ':'')+(i.name?i.name+': ':'')+v;
+    });
+    var dg=(d.phone||'').replace(/\D/g,''); if(dg.length<9||dg.length>12) return;
+    d.message=(d.message?d.message+' · ':'')+'Form LadiPage';
+    var tries=0;(function go(){ if(window.crmLead){window.crmLead(d);} else if(tries++<20) setTimeout(go,300); })();
+  }
+  document.addEventListener('click',function(e){
+    var f=e.target.closest&&e.target.closest('.ladi-form, form'); if(!f||f.id==='hmwForm') return;
+    var btn=e.target.closest('.ladi-button, button, [type=submit], [id^="BUTTON"]'); if(!btn) return;
+    setTimeout(function(){grab(f);},150);
+  },true);
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Enter') return; var f=e.target.closest&&e.target.closest('.ladi-form'); if(f) setTimeout(function(){grab(f);},150);
+  },true);
+})();
+</script>
+
 <style>
 #hmw{--n:#0A2540;--o:#FF5A1F;--o2:#FF8A00;font-family:"Be Vietnam Pro",Arial,sans-serif}
 #hmw *{box-sizing:border-box}
@@ -103,6 +133,11 @@
     {k:['hop dong'],a:'Hợp đồng mua bán và hợp đồng vận hành mẫu sẽ có khi dự án ra mắt. Em gửi bản mềm để anh/chị đọc trước khi quyết định.',lead:1},
     {k:['vay','ngan hang','lai suat','tra gop','thanh toan'],a:'Ngân hàng đồng hành, tỷ lệ cho vay và lịch thanh toán sẽ công bố trong chính sách bán hàng khi mở bán. Em gửi phương án thanh toán cụ thể theo căn và số vốn của anh/chị.',lead:1},
     {k:['condotel','chung cu','loai hinh'],a:'Hải Minh là căn hộ du lịch (condotel) trên đất thương mại dịch vụ, không phải chung cư ở lâu dài. Phù hợp nghỉ dưỡng và khai thác cho thuê du lịch.'},
+    {k:['trung tam','cau rong','song han','xa khong','bao lau'],a:'Không xa đâu ạ: từ Hải Minh lên cầu Rồng – trung tâm Đà Nẵng khoảng 15 phút đi ô tô, ra sân bay 15–20 phút, phố An Thượng 5–10 phút, Hội An khoảng 30 phút. Ở biển mà vào phố rất tiện.',lead:0},
+    {k:['ban lai','chuyen nhuong','sang ten','ban duoc','ban co lay','lay lai von','thanh khoan'],a:'Căn hộ du lịch được chuyển nhượng (bán lại) theo hợp đồng mua bán và quy định pháp luật. Điều kiện cụ thể nằm trong hợp đồng mẫu chủ đầu tư công bố khi ra mắt – em gửi để anh/chị đọc kỹ trước.',lead:1},
+    {k:['nguoi nuoc ngoai','viet kieu','foreigner'],a:'Việc người nước ngoài/Việt kiều mua căn hộ du lịch phụ thuộc quy định pháp luật và hồ sơ dự án; em sẽ xác nhận cụ thể khi chủ đầu tư công bố hồ sơ.',lead:1},
+    {k:['tien ich','ho boi','be boi','gym','nha hang','spa'],a:'Danh mục tiện ích chính thức sẽ công bố khi ra mắt. Hiện đã biết dự án có khối thương mại dịch vụ phục vụ khách lưu trú; quanh dự án có biển, công viên biển Trường Sa (quy hoạch), chuỗi resort và phố An Thượng.',lead:1},
+    {k:['ban giao','khi nao xong','hoan thien','noi that'],a:'Tiến độ bàn giao và tiêu chuẩn bàn giao (nội thất) chủ đầu tư sẽ công bố khi ra mắt. Dự án đang thi công.',lead:1},
     {k:['coc','giu cho','dat truoc','phi'],a:'Hiện chưa mở bán nên không thu tiền giữ chỗ hay đặt cọc. Đăng ký nhận thông tin hoàn toàn miễn phí.'}
   ];
 
@@ -124,7 +159,7 @@
 
   var $=function(id){return document.getElementById(id)};
   var body=$('hmwBody'), panel=$('hmwPanel'), badge=$('hmwBadge'), bubble=$('hmwBubble');
-  var started=false, gotPhone=false, curTopic=null, pending=null;
+  var started=false, gotPhone=false, curTopic=null, pending=null, askedPhone=0, H=[];
   function scroll(){body.scrollTop=body.scrollHeight;}
   function bot(t,d){setTimeout(function(){var e=document.createElement('div');e.className='hmw-msg hmw-bot';e.textContent=t;body.appendChild(e);scroll();},d||350);}
   function me(t){var e=document.createElement('div');e.className='hmw-msg hmw-me';e.textContent=t;body.appendChild(e);scroll();}
@@ -134,7 +169,7 @@
 
   function start(topic){
     if(!started){started=true;bot('Chào anh/chị 👋 Em là trợ lý tư vấn Căn hộ khách sạn Hải Minh Đà Nẵng (góc Võ Nguyên Giáp – Trường Sa).',80);}
-    if(topic){bot(topic.q,started?400:600);chips(topic.c.concat(['Nhận bảng giá']),900);}
+    if(topic){bot(topic.q,started?400:600);H.push({r:'bot',t:topic.q});chips(topic.c.concat(['Nhận bảng giá']),900);}
     else if(body.children.length<2){bot('Anh/chị cần tìm hiểu thông tin nào ạ?',500);chips(DEF,800);}
   }
   function sendCRM(phone,text){
@@ -143,23 +178,34 @@
     try{ if(window.gtag&&window.HM_TRACK&&!/\[/.test(window.HM_TRACK.form||'[')) gtag('event','conversion',{send_to:window.HM_TRACK.form}); }catch(e){}
   }
   function handle(text){
-    text=(text||'').trim(); if(!text) return; me(text);
+    text=(text||'').trim(); if(!text) return; me(text); H.push({r:'me',t:text});
     var digits=text.replace(/\D/g,''); if(/^84\d{9}$/.test(digits)) digits='0'+digits.slice(2);
     if(/^0\d{8,10}$/.test(digits)){
       gotPhone=true; sendCRM(digits,text);
       bot('Cảm ơn anh/chị! Em đã nhận số '+digits+'. Chuyên viên Hoàng Hiệp sẽ nhắn Zalo gửi tài liệu trong ít phút (giờ hành chính).\nCần gấp, anh/chị bấm Gọi hoặc Zalo bên dưới ạ.');
       acts(); return;
     }
-    var n=norm(text), hit=null, best=0;
+    var n=' '+norm(text).replace(/\bko\b|\bk\b|\bkhong\b/g,' khong ').replace(/\bdc\b|\bdk\b/g,' duoc ')+' ', hit=null, best=0;
     KB.forEach(function(it){var s=0;it.k.forEach(function(k){if(n.indexOf(norm(k))>-1)s+=k.length;});if(s>best){best=s;hit=it;}});
-    if(hit){
-      bot(hit.a);
-      if(hit.lead&&!gotPhone){bot('👉 Anh/chị nhập số Zalo vào ô bên dưới, em gửi tài liệu riêng cho mình.',1000);}
-      else chips(DEF,900);
-    }else{
-      bot('Câu này em nhờ chuyên viên trả lời trực tiếp cho chính xác ạ. Anh/chị để lại số Zalo, hoặc bấm Gọi / Zalo bên dưới.');
-      acts();
+    if(hit&&best>=5){
+      bot(hit.a); H.push({r:'bot',t:hit.a});
+      if(hit.lead&&!gotPhone&&!askedPhone){askedPhone=1;bot('👉 Anh/chị để lại số Zalo, em gửi tài liệu riêng cho mình nhé.',1000);}
+      return;
     }
+    ai(text);
+  }
+  function typing(){var e=document.createElement('div');e.className='hmw-msg hmw-bot';e.textContent='Em đang trả lời…';e.style.opacity='.6';body.appendChild(e);scroll();return e;}
+  function ai(text){
+    var C=window.HM_CRM, t=typing(), vid=''; try{vid=localStorage.getItem('crm_vid')||'';}catch(e){}
+    function fail(){ t.remove(); var m='Câu này em xin chuyên viên Hoàng Hiệp trả lời trực tiếp cho chính xác ạ. Anh/chị để lại số Zalo, hoặc bấm Gọi / Zalo bên dưới.'; bot(m,50); H.push({r:'bot',t:m}); acts(); }
+    if(!C||!window.fetch){fail();return;}
+    var done=false, to=setTimeout(function(){ if(!done){done=true;fail();} },15000);
+    fetch(C.url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'chat',key:C.key,vid:vid,q:text,topic:curTopic?curTopic.id:'',history:JSON.stringify(H.slice(-9,-1))})})
+      .then(function(r){return r.json();}).then(function(j){
+        if(done) return; done=true; clearTimeout(to);
+        if(!j||!j.a){fail();return;}
+        t.remove(); bot(j.a,50); H.push({r:'bot',t:j.a});
+      }).catch(function(){ if(!done){done=true;clearTimeout(to);fail();} });
   }
   function open(topic){
     panel.classList.add('open'); bubble.style.display='none'; badge.style.display='none';
