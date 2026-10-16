@@ -38,6 +38,7 @@ function hh_dataset_capital_square( $projects ) {
 		$p['type']    = array( 'to-hop', 'can-ho-so-huu-lau-dai' );
 		$p['excerpt'] = 'Tổ hợp căn hộ ven sông Hàn của BRG tại Sơn Trà, Đà Nẵng: 14 tòa 24 – 29 tầng, 3.391 căn, gồm Capital Square 2 (tòa 2.1 – 2.7) và Capital Square 3 (LAT 4-5, MAT 5-6, MAT 7-8-9), sở hữu lâu dài.';
 		$p['meta']    = array(
+			'hh_p_map_address' => 'Capital Square, Trần Hưng Đạo, An Hải, Đà Nẵng',
 			'hh_p_builder'    => 'Delta Group (kết cấu, xây thô tòa 2.4, 2.6 và MAT 5, MAT 6)',
 			'hh_p_zones'      => "Tòa 2.1 (Capital Square 2) | Căn hộ 1 – 3PN | 26 tầng, 207 căn | Đang mở bán\nTòa 2.2 (Capital Square 2) | Căn hộ 1 – 3PN | 26 tầng, 207 căn | Đang mở bán\nTòa 2.3 (Capital Square 2) | Căn hộ 1 – 3PN | 26 tầng, 207 căn | Đang mở bán\nTòa 2.4 – The King (Capital Square 2) | Căn hộ 1 – 3PN | 28 tầng, 265 căn | Đang mở bán\nTòa 2.5 (Capital Square 2) | Căn hộ 1 – 3PN | 28 tầng, 265 căn | Đang mở bán\nTòa 2.6 – The Queen (Capital Square 2) | Căn hộ 1 – 3PN | 28 tầng, 265 căn | Đang mở bán\nTòa 2.7 (Capital Square 2) | Căn hộ 1 – 3PN | 28 tầng, 265 căn | Đang mở bán\nKhối LAT 4-5 (Capital Square 3) | Căn hộ | 26 tầng, 374 căn | Đang cập nhật\nKhối MAT 5-6 (Capital Square 3) | Căn hộ | 24 tầng, 586 căn | Đang mở bán\nTòa MAT 7 (Capital Square 3) | Căn hộ | 29 tầng, 250 căn | Đang mở bán\nTòa MAT 8-9 (Capital Square 3) | Căn hộ | 29 tầng, 500 căn | Đang mở bán",
 			'hh_p_highlights' => "14 tòa 24 – 29 tầng, 3.391 căn hộ trên khu đất 61.368 m² ven sông Hàn\nHai phân khu: Capital Square 2 (Mega Assets, 1.681 căn) và Capital Square 3 (SIH, 1.710 căn)\nĐã có văn bản đủ điều kiện bán cho tòa 2.1 – 2.7 và các khối MAT 5-6, MAT 7, MAT 8-9\nLiền kề TTTM Vincom, cách cầu Rồng khoảng 1,5 km\nSổ hồng sở hữu lâu dài; tối đa 502 (CS2) và 512 (CS3) căn bán cho người nước ngoài",
@@ -87,6 +88,7 @@ function hh_dataset_capital_square( $projects ) {
 			'meta'    => $meta + array(
 				'hh_p_type'          => 'Căn hộ cao cấp ven sông Hàn',
 				'hh_p_address'       => $addr,
+				'hh_p_map_address'   => 'Capital Square, Trần Hưng Đạo, An Hải, Đà Nẵng',
 				'hh_p_ownership'     => 'Sở hữu lâu dài (sổ hồng từng căn)',
 				'hh_p_location_desc' => 'Tòa nằm trong tổ hợp Capital Square Đà Nẵng (61.368 m²) giữa các trục Trần Hưng Đạo – Ngô Quyền – Nguyễn Công Trứ, bờ Đông sông Hàn, liền kề TTTM Vincom.',
 				'hh_p_connections'   => "Liền kề | TTTM Vincom\nKhoảng 1,5 km | Cầu Rồng\n5 phút | Biển Mỹ Khê",

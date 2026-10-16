@@ -99,6 +99,7 @@ add_filter(
 				'hh_p_developer'     => 'Công ty CP Bất động sản SIH (hệ sinh thái BRG Group)',
 				'hh_p_manager'       => 'Savills (vận hành)',
 				'hh_p_type'          => 'Căn hộ cao cấp ven sông Hàn',
+				'hh_p_map_address'   => 'Capital Square, Trần Hưng Đạo, An Hải, Đà Nẵng',
 				'hh_p_address'       => 'Đường Nguyễn Công Trứ, tổ hợp Capital Square, phường An Hải (Sơn Trà cũ), Đà Nẵng',
 				'hh_p_blocks'        => '1 tòa (S4), thuộc phân khu Capital Square 3',
 				'hh_p_floors'        => '24 tầng; tầng điển hình 15 căn/sàn',
