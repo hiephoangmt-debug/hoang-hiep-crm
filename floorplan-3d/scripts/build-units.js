@@ -298,18 +298,39 @@ export function gardenUnit(base, spec) {
     const wall2 = (p0, p1) => plan.walls.push({ id: uid(), a: Q(...p0), b: Q(...p1), thickness: 0.12, height: 0.95 });
     const farAtStart = side === 'right' || side === 'bottom';
     if (farAtStart) wall2([0, 0], [0, D]); else wall2([L2, D], [L2, 0]);
-    wall2([0, D], [L2, D]);
-    plan.rooms.push({ id: uid(), name: 'Sân vườn', floor: 'grass', points: [Q(0, 0), Q(L2, 0), Q(L2, D), Q(0, D)] });
+    // Góc ngoài nơi hai dải gặp nhau: bo tròn bán kính = độ sâu sân (như góc kính bo của toà)
+    const R = D, N = 10;
+    const arc = [];
+    for (let i = 0; i <= N; i++) {
+      const t = (i / N) * Math.PI / 2;
+      arc.push(farAtStart ? [L2 - R + R * Math.sin(t), R * Math.cos(t)] : [R - R * Math.sin(t), R * Math.cos(t)]);
+    }
+    if (farAtStart) wall2([0, D], [L2 - R, D]); else wall2([R, D], [L2, D]);
+    for (let i = 0; i < N; i++) wall2(arc[i], arc[i + 1]);
+    const poly = farAtStart ? [[0, 0], [L2, 0], ...arc.slice().reverse(), [0, D]] : [[0, 0], [L2, 0], [L2, D], ...arc];
+    plan.rooms.push({ id: uid(), name: 'Sân vườn', floor: 'grass', points: poly.map((q) => Q(...q)) });
     const add2 = (type, u, v, rot = 0, extra = {}) => { const p = Q(u, v); plan.furniture.push({ id: uid(), type, x: +p.x.toFixed(3), y: +p.y.toFixed(3), rot, ...extra }); };
     const rU2 = h2 ? 0 : 90, rOut2 = { top: 0, bottom: 180, left: 270, right: 90 }[wrap];
     // luống hoa dọc lan can ngoài, viền sỏi, ghế nằm, bàn tròn 4 ghế ở ô góc, lối đá
-    add2('shrubBed', L2 / 2, D - 0.4, rU2, { w: L2 - 0.3, d: 0.6 });
-    add2('pebbles', L2 / 2, D - 0.82, rU2, { w: L2 - 1.2, d: 0.24 });
+    const sL = L2 - R - 0.2, sC = farAtStart ? sL / 2 + 0.1 : R + sL / 2 + 0.1;
+    add2('shrubBed', sC, D - 0.4, rU2, { w: sL, d: 0.6 });
+    add2('pebbles', sC, D - 0.82, rU2, { w: sL - 0.9, d: 0.24 });
+    // luống hoa + viền sỏi chạy theo cung bo
+    const nb = 7;
+    for (let i = 0; i < nb; i++) {
+      const t = ((i + 0.5) / nb) * Math.PI / 2, deg = (t * 180) / Math.PI;
+      const pos = (r) => farAtStart ? [L2 - R + r * Math.sin(t), r * Math.cos(t)] : [R - r * Math.sin(t), r * Math.cos(t)];
+      const rot = (rU2 + (farAtStart ? deg : -deg) + 360) % 360;
+      add2('shrubBed', ...pos(R - 0.4), rot, { w: (Math.PI / 2 * (R - 0.4)) / nb + 0.06, d: 0.6 });
+      add2('pebbles', ...pos(R - 0.82), rot, { w: (Math.PI / 2 * (R - 0.82)) / nb + 0.04, d: 0.24 });
+    }
     const far = farAtStart ? 0.9 : L2 - 0.9, cor = farAtStart ? L2 - D / 2 : D / 2;
     add2('palm', far, D - 0.75, 0, { h: 3.2 });
     for (const k of [0.3, 0.55]) add2('lounger', farAtStart ? L2 * k : L2 * (1 - k), (D - 0.7) / 2 + 0.05, (rOut2 + 180) % 360, { w: 0.68, d: Math.min(1.8, D - 1.0) });
-    add2('roundTable', cor, (D - 0.7) / 2, 0, { w: 0.75, d: 0.75 });
-    for (const [du, dv, r] of [[-0.62, 0, 90], [0.62, 0, 270], [0, -0.62, 180], [0, 0.62, 0]]) add2('chair', cor + du, (D - 0.7) / 2 + dv, (r + rOut2) % 360, { color: '#cbb894' });
+    // bàn tròn 4 ghế đặt giữa ô góc bo, cách luống hoa
+    const rr = Math.max(0.9, R - 1.75), tu = farAtStart ? L2 - R + rr * Math.SQRT1_2 : R - rr * Math.SQRT1_2, tv = rr * Math.SQRT1_2;
+    add2('roundTable', tu, tv, 0, { w: 0.75, d: 0.75 });
+    for (const [du, dv, r] of [[-0.62, 0, 90], [0.62, 0, 270], [0, -0.62, 180], [0, 0.62, 0]]) add2('chair', tu + du, tv + dv, (r + rOut2) % 360, { color: '#cbb894' });
   }
   const dims = side === 'top' || side === 'bottom' ? [base.dims[0], +(base.dims[1] + D).toFixed(2)] : [+(base.dims[0] + D).toFixed(2), base.dims[1]];
   return { ...base, id: spec.id, name: spec.name, type: spec.type, dims, garden: +(L * D).toFixed(1), plan };
