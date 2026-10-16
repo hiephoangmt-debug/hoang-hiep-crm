@@ -5,7 +5,7 @@ import { polygonArea } from './geom.js';
 import { toast, READONLY, linkTo, download, isStaleChunkError, reloadForUpdate } from './ui.js';
 import UNITS from './units/units.json';
 import { AD_FOOTER } from './adcopy.js';
-import { DEFAULT_UNIT, GARDEN_UNIT, gardenOf, SLOT_LIST, SLOT_ORIENT, SHOPS, PROVISIONAL, areaOf, residentialFloors } from './buildingData.js';
+import { DEFAULT_UNIT, GARDEN_UNIT, GARDEN_SHAPE, gardenOf, SLOT_LIST, SLOT_ORIENT, SHOPS, PROVISIONAL, areaOf, residentialFloors } from './buildingData.js';
 import { orientPlan } from './unitPlacement.js';
 import { gardenUnit } from './gardenUnit.js';
 
@@ -63,7 +63,7 @@ function codeUnit(code, gi) {
   if (codeCache.has(key)) return codeCache.get(key);
   const base = UNITS.find((u) => u.id === DEFAULT_UNIT[code]);
   const sv = grp.g && UNITS.find((u) => u.id === GARDEN_UNIT[base.id]);
-  const src = sv?.gardenSpec ? gardenUnit(base, { id: sv.id, name: sv.name, type: sv.type, garden: { ...sv.gardenSpec, area: grp.g.tt } }) : base;
+  const src = sv?.gardenSpec ? gardenUnit(base, { id: sv.id, name: sv.name, type: sv.type, garden: { ...sv.gardenSpec, ...GARDEN_SHAPE[code], area: grp.g.tt } }) : base;
   const o = SLOT_ORIENT[code] || { k: 0, m: false };
   const dims = o.k % 2 ? [src.dims[1], src.dims[0]] : src.dims;
   const u = {
