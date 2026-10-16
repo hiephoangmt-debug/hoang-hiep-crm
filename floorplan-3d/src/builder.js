@@ -340,7 +340,7 @@ export function buildScene(plan, opts = {}) {
       const sh = new THREE.Shape(room.points.map((p) => new THREE.Vector2(p.x, -p.y)));
       const g = new THREE.ExtrudeGeometry(sh, { depth: 0.16, bevelEnabled: false });
       g.rotateX(-Math.PI / 2);
-      g.translate(0, -0.16, 0);
+      g.translate(0, -0.175, 0); // thấp hơn mặt sàn 1,5 cm để không lẫn với sàn khi nhìn từ xa
       root.add(shadowy(new THREE.Mesh(g, baseMat), true, false));
     }
     // Chân tường ngoài cũng có đế
@@ -348,7 +348,7 @@ export function buildScene(plan, opts = {}) {
       const L = wallLength(w);
       if (L < 0.01) continue;
       const g = new THREE.BoxGeometry(L + w.thickness, 0.16, w.thickness);
-      g.translate(L / 2, -0.08, 0);
+      g.translate(L / 2, -0.095, 0);
       g.applyMatrix4(wallMatrix(w));
       root.add(shadowy(new THREE.Mesh(g, baseMat), true, false));
     }

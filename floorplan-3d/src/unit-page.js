@@ -66,7 +66,9 @@ function selectUnit(id) {
 
 function renderInfo() {
   const rooms = store.plan.rooms.slice().sort((a, b) => polygonArea(b.points) - polygonArea(a.points));
-  const total = rooms.reduce((s, r) => s + polygonArea(r.points), 0);
+  const isGarden = (r) => /sân vườn/i.test(r.name);
+  const total = rooms.filter((r) => !isGarden(r)).reduce((s, r) => s + polygonArea(r.points), 0);
+  const garden = rooms.filter(isGarden).reduce((s, r) => s + polygonArea(r.points), 0);
   const beds = rooms.filter((r) => /ngủ/i.test(r.name)).length;
   const wcs = rooms.filter((r) => /wc|tắm/i.test(r.name)).length;
   $('#info').innerHTML = `
@@ -80,7 +82,7 @@ function renderInfo() {
     <div><small class="up-note">Các phòng (bấm để xem trong 3D)</small>
       <div class="up-rooms">${rooms.map((r, i) => `<button data-room="${i}"><span>${r.name}</span><small>${fmt(polygonArea(r.points))} m²</small></button>`).join('')}</div>
     </div>
-    <div class="kv"><div style="grid-column: span 2"><small>Tổng diện tích các phòng (đo trên bản vẽ)</small><b>${fmt(total)} m²</b></div></div>
+    <div class="kv"><div style="grid-column: span 2"><small>Tổng diện tích các phòng (đo trên bản vẽ, gồm cả tường)</small><b>${fmt(total)} m²</b></div>${garden ? `<div style="grid-column: span 2"><small>🌳 Sân vườn (thông thủy, theo bảng chủ đầu tư)</small><b>${fmt(garden)} m²</b></div>` : ''}</div>
     <p class="up-note">Hình ảnh và diện tích mang tính minh hoạ, dựng từ mặt bằng bán hàng. Thông số chính thức theo hợp đồng mua bán.</p>
     ${READONLY ? '' : '<button id="openDesign">✏️ Mở căn này trong công cụ thiết kế</button>'}`;
   $$('[data-room]').forEach((b) => (b.onclick = () => {
@@ -174,12 +176,13 @@ $('#landBtn').onclick = () => {
   $('#landBtn').classList.toggle('active', on);
 };
 async function saveImage(mode) {
-  const total = store.plan.rooms.reduce((s, r) => s + polygonArea(r.points), 0);
+  const total = store.plan.rooms.filter((r) => !/sân vườn/i.test(r.name)).reduce((s, r) => s + polygonArea(r.points), 0);
+  const garden = store.plan.rooms.filter((r) => /sân vườn/i.test(r.name)).reduce((s, r) => s + polygonArea(r.points), 0);
   const blob = await viewer.exportPNG({
     mode,
     dims: unit.dims,
     title: `${unit.name} · Tòa F2`,
-    lines: [unit.type, `${fmt(unit.dims[0], 2)} × ${fmt(unit.dims[1], 2)} m`, `Tổng DT các phòng ${fmt(total)} m²`, STYLES[store.plan.settings.style]?.name || ''].filter(Boolean),
+    lines: [unit.type, `${fmt(unit.dims[0], 2)} × ${fmt(unit.dims[1], 2)} m`, `Tổng DT các phòng ${fmt(total)} m²`, garden ? `Sân vườn ${fmt(garden)} m²` : '', STYLES[store.plan.settings.style]?.name || ''].filter(Boolean),
   });
   download(blob, `${unit.id}-${mode === 'plan' ? 'mat-bang' : 'phoi-canh'}.png`);
   toast(mode === 'plan' ? 'Đã tải ảnh mặt bằng (5:6, nhìn từ trên, kèm diện tích và dài × rộng từng phòng).' : 'Đã tải ảnh phối cảnh theo góc đang xem (5:6). Mẹo: bấm 📸 Chụp ảnh như thật, chờ ảnh mịn rồi tải để có ảnh đẹp nhất.', 6000);
