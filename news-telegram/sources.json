@@ -5,7 +5,12 @@
       "name": "Sở Xây dựng Đà Nẵng",
       "type": "html",
       "url": "https://sxd.danang.gov.vn/",
-      "require_keywords": false
+      "require_keywords": false,
+      "fallback_urls": [
+        "http://sxd.danang.gov.vn/"
+      ],
+      "ssl_fallback": true,
+      "vn_proxy": true
     },
     {
       "name": "Cổng TTĐT Đà Nẵng",
@@ -17,7 +22,9 @@
       "name": "Bộ Xây dựng",
       "type": "html",
       "url": "https://moc.gov.vn/",
-      "require_keywords": true
+      "require_keywords": true,
+      "ssl_fallback": true,
+      "vn_proxy": true
     },
     {
       "name": "Google News · Sở Xây dựng Đà Nẵng",
