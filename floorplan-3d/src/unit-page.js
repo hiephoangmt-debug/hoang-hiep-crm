@@ -2,9 +2,18 @@
 import { Viewer3D } from './viewer3d.js';
 import { STYLES, roomKind } from './styles.js';
 import { polygonArea } from './geom.js';
-import { toast, READONLY, linkTo, download } from './ui.js';
+import { toast, READONLY, linkTo, download, isStaleChunkError, reloadForUpdate } from './ui.js';
 import UNITS from './units/units.json';
 import { AD_FOOTER } from './adcopy.js';
+
+// Diện tích pháp lý theo bảng chủ đầu tư (căn đại diện của từng loại): [tim, thông thủy, sân vườn tim, sân vườn thông thủy]
+const OFFICIAL = {
+  '3pn': [94.3, 87.0], '2pn-a': [70.1, 64.0], '2pn-b': [65.5, 59.6], '1pn-plus': [52.4, 48.4], '1pn-plus-b': [58.1, 53.5],
+  '2pn-1wc': [66.3, 61.6], '1pn': [36.8, 32.6], studio: [33.7, 30.4], 'studio-b': [37.8, 33.7],
+  'sv-3pn': [94.3, 87.0, 56.9, 47.6], 'sv-2pn-a': [70.1, 63.7, 24.7, 20.0], 'sv-2pn-2wc': [65.5, 59.6, 12.4, 9.3],
+  'sv-1pn-plus-l': [52.4, 48.4, 19.2, 15.9], 'sv-1pn-plus': [58.1, 53.5, 13.5, 10.3], 'sv-2pn-1wc': [66.3, 61.6, 21.5, 18.2],
+  'sv-1pn': [36.8, 32.9, 6.2, 5.0], 'sv-studio': [33.7, 30.4, 10.9, 8.0], 'sv-studio-b': [37.8, 33.7, 12.2, 9.8],
+};
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => [...document.querySelectorAll(s)];
@@ -82,7 +91,12 @@ function renderInfo() {
     <div><small class="up-note">Các phòng (bấm để xem trong 3D)</small>
       <div class="up-rooms">${rooms.map((r, i) => `<button data-room="${i}"><span>${r.name}</span><small>${fmt(polygonArea(r.points))} m²</small></button>`).join('')}</div>
     </div>
-    <div class="kv"><div style="grid-column: span 2"><small>Tổng diện tích các phòng (đo trên bản vẽ, gồm cả tường)</small><b>${fmt(total)} m²</b></div>${garden ? `<div style="grid-column: span 2"><small>🌳 Sân vườn (thông thủy, theo bảng chủ đầu tư)</small><b>${fmt(garden)} m²</b></div>` : ''}</div>
+    ${OFFICIAL[unit.id] ? `<div class="kv">
+      <div><small>DT tim tường</small><b>${fmt(OFFICIAL[unit.id][0])} m²</b></div>
+      <div><small>DT thông thủy</small><b>${fmt(OFFICIAL[unit.id][1])} m²</b></div>
+      ${OFFICIAL[unit.id][2] ? `<div><small>🌳 Sân vườn tim</small><b>${fmt(OFFICIAL[unit.id][2])} m²</b></div><div><small>🌳 Sân vườn thông thủy</small><b>${fmt(OFFICIAL[unit.id][3])} m²</b></div>` : ''}
+    </div>` : ''}
+    <p class="up-note">Diện tích theo bảng của chủ đầu tư (căn đại diện; diện tích sân vườn khác nhau theo tầng – xem chính xác trong Bảng hàng tòa nhà). Tổng các phòng đo trên hình vẽ (tính tới tim tường): ${fmt(total)} m².</p>
     <p class="up-note">Hình ảnh và diện tích mang tính minh hoạ, dựng từ mặt bằng bán hàng. Thông số chính thức theo hợp đồng mua bán.</p>
     ${READONLY ? '' : '<button id="openDesign">✏️ Mở căn này trong công cụ thiết kế</button>'}`;
   $$('[data-room]').forEach((b) => (b.onclick = () => {
@@ -158,7 +172,7 @@ $('#photoBtn').onclick = () => {
   $('#photoBtn').classList.add('active');
   $('#caption').hidden = false;
   $('#caption').innerHTML = 'Đang chuẩn bị ảnh như thật…';
-  viewer.startRealRender().catch((err) => { toast('Máy này chưa hỗ trợ chụp ảnh như thật: ' + err.message, 5000); viewer.stopRealRender(); });
+  viewer.startRealRender().catch((err) => { viewer.stopRealRender(); $('#photoBtn').classList.remove('active'); if (isStaleChunkError(err) && reloadForUpdate()) return; toast('Máy này chưa hỗ trợ chụp ảnh như thật: ' + err.message, 5000); });
 };
 $('#labelBtn').onclick = () => {
   const on = !viewer.state.labels;
@@ -182,7 +196,7 @@ async function saveImage(mode) {
     mode,
     dims: unit.dims,
     title: `${unit.name} · Tòa F2`,
-    lines: [unit.type, `${fmt(unit.dims[0], 2)} × ${fmt(unit.dims[1], 2)} m`, `Tổng DT các phòng ${fmt(total)} m²`, garden ? `Sân vườn ${fmt(garden)} m²` : '', STYLES[store.plan.settings.style]?.name || ''].filter(Boolean),
+    lines: [unit.type, `${fmt(unit.dims[0], 2)} × ${fmt(unit.dims[1], 2)} m`, ...(OFFICIAL[unit.id] ? [`Tim ${fmt(OFFICIAL[unit.id][0])} m² · Thông thủy ${fmt(OFFICIAL[unit.id][1])} m²`, OFFICIAL[unit.id][2] ? `Sân vườn ${fmt(OFFICIAL[unit.id][3])} m² TT` : ''] : [`Tổng DT các phòng ${fmt(total)} m²`, garden ? `Sân vườn ${fmt(garden)} m²` : '']), STYLES[store.plan.settings.style]?.name || ''].filter(Boolean),
   });
   download(blob, `${unit.id}-${mode === 'plan' ? 'mat-bang' : 'phoi-canh'}.png`);
   toast(mode === 'plan' ? 'Đã tải ảnh mặt bằng (5:6, nhìn từ trên, kèm diện tích và dài × rộng từng phòng).' : 'Đã tải ảnh phối cảnh theo góc đang xem (5:6). Mẹo: bấm 📸 Chụp ảnh như thật, chờ ảnh mịn rồi tải để có ảnh đẹp nhất.', 6000);

@@ -168,7 +168,7 @@ function drawCallouts(x, callouts, plan, toScreen, s, W, H, side) {
 }
 
 /** Chú thích kiểu quảng cáo: biểu tượng + tiêu đề chữ viết tay + gạch chân + câu lợi ích, mũi tên cong chỉ vào phòng */
-function drawAdCallouts(x, callouts, toScreen, s, W, H, side) {
+export function drawAdCallouts(x, callouts, toScreen, s, W, H, side) {
   const items = callouts.map((c) => ({ ...c, a: toScreen(c.anchor) }));
   const cx = side + W / 2;
   const fT = Math.round(19 * s), fL = Math.round(11.5 * s), bh = 64 * s, gap = 14 * s;

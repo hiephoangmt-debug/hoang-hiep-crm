@@ -46,3 +46,18 @@ export const READONLY = new URLSearchParams(location.search).has('khach');
 /** Giữ ?khach khi chuyển trang */
 export const linkTo = (page) => (READONLY ? `./${page}?khach` : `./${page}`);
 if (READONLY) document.documentElement.classList.add('readonly');
+
+// Sau mỗi lần cập nhật web, tên các file phần mềm đổi: trang đang mở từ trước sẽ không tải được phần
+// lazy (vd. "Chụp ảnh như thật") → tự tải lại trang một lần để lấy bản mới
+const STALE_KEY = 'floorplan3d.staleReload';
+export function isStaleChunkError(err) {
+  return /dynamically imported module|Importing a module script failed|error loading dynamically imported module|Failed to fetch/i.test(String(err?.message || err));
+}
+export function reloadForUpdate() {
+  try { if (sessionStorage.getItem(STALE_KEY) && Date.now() - +sessionStorage.getItem(STALE_KEY) < 60000) return false; sessionStorage.setItem(STALE_KEY, String(Date.now())); } catch { /* bỏ qua */ }
+  toast('Web vừa được cập nhật bản mới – đang tải lại trang…', 3000);
+  setTimeout(() => location.reload(), 900);
+  return true;
+}
+window.addEventListener('vite:preloadError', (e) => { e.preventDefault?.(); reloadForUpdate(); });
+window.addEventListener('unhandledrejection', (e) => { if (isStaleChunkError(e.reason)) reloadForUpdate(); });

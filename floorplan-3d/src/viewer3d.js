@@ -15,7 +15,7 @@ import { buildScene, disposeTree, SHARED } from './builder.js';
 import { upgradeFurniture, loadInteriorHDRI } from './realistic.js';
 import { resolvePalette, roomKind } from './styles.js';
 import { adCaption } from './adcopy.js';
-import { exportImage } from './snapshot.js';
+import { exportImage, drawAdCallouts } from './snapshot.js';
 import { getTexture } from './textures.js';
 import { closestOnSegment, rotatePoint, labelPoint, polygonArea, pointInPolygon, pointInRotRect } from './geom.js';
 import { CATALOG_MAP } from './furniture.js';
@@ -148,6 +148,7 @@ export class Viewer3D {
     this.built = built;
     this.scene.add(built.root);
     this.shadowCatcher.position.y = this.state.ad ? -0.95 : -0.158;
+    this._adList = null; this._adKey = null;
     if (this.state.ad) { this.addLeafShadows(built); this.adLabels(built); }
     this.applyExterior();
     this._above = undefined;
@@ -291,9 +292,51 @@ export class Viewer3D {
       const name = l.userData.roomName;
       if (!name) return;
       const t = adCaption(name, (seen[roomKind(name)] = (seen[roomKind(name)] || 0) + 1));
+      // một câu chỉ hiện một lần (vd. sân vườn 2 dải); nhãn gọn để không che mặt bằng
+      l.element.className = 'label3d adhide'; // kiểu quảng cáo: chú thích vẽ ra ngoài mép khung (adOverlay)
+      return;
+      seen['t:' + t.title] = 1;
       l.element.className = 'label3d adlabel';
       l.element.innerHTML = `<i>${t.icon}</i><b>${t.title}</b><span>${t.line}</span>`;
     });
+  }
+
+  /** Danh sách chú thích phòng (tên, diện tích, dài × rộng; kiểu quảng cáo: câu cảm xúc, bỏ câu trùng) */
+  calloutList(ad) {
+    return this.store.plan.rooms.filter((r) => r.points.length >= 3).map((r, i, arr) => {
+      const xs = r.points.map((p) => p.x), ys = r.points.map((p) => p.y);
+      const lp = labelPoint(r.points);
+      const base = { name: r.name, area: polygonArea(r.points), w: Math.max(...xs) - Math.min(...xs), d: Math.max(...ys) - Math.min(...ys), anchor: { x: lp.x, y: 0.1, z: lp.y } };
+      if (!ad) return base;
+      const nth = arr.slice(0, i + 1).filter((q) => roomKind(q.name) === roomKind(r.name)).length;
+      const t = adCaption(r.name, nth);
+      return { ...base, name: t.title, sub: t.line, icon: t.icon };
+    }).filter((c, i, arr) => !ad || arr.findIndex((d) => d.name === c.name) === i);
+  }
+
+  /** Kiểu quảng cáo trên màn hình: chú thích đặt ra hai mép khung, mũi tên cong chỉ vào phòng */
+  adOverlay() {
+    let cv = this._adCanvas;
+    const on = this.state.ad && this.mode !== 'walk' && !this.tour && !this.ptActive;
+    if (!on) { if (cv) cv.style.display = 'none'; return; }
+    if (!cv) {
+      cv = this._adCanvas = document.createElement('canvas');
+      Object.assign(cv.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', pointerEvents: 'none', zIndex: 2 });
+      this.container.appendChild(cv);
+    }
+    cv.style.display = '';
+    const dpr = Math.min(window.devicePixelRatio || 1, 2), W = this.container.clientWidth, H = this.container.clientHeight;
+    if (cv.width !== Math.round(W * dpr) || cv.height !== Math.round(H * dpr)) { cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); }
+    const key = this.camera.matrixWorld.elements.join(',') + W + 'x' + H;
+    if (key === this._adKey) return;
+    this._adKey = key;
+    const x = cv.getContext('2d');
+    x.setTransform(1, 0, 0, 1, 0, 0);
+    x.clearRect(0, 0, cv.width, cv.height);
+    const v = new THREE.Vector3();
+    const toScreen = (p) => { v.set(p.x, p.y, p.z).project(this.camera); return { x: (v.x * 0.5 + 0.5) * cv.width, y: (-v.y * 0.5 + 0.5) * cv.height }; };
+    const s = dpr * Math.min(1, Math.max(0.62, W / 1100));
+    drawAdCallouts(x, this._adList ||= this.calloutList(true), toScreen, s, cv.width, cv.height, 0);
   }
 
   isStudio() { return !this.state.landscape && !this.panoActive; }
@@ -611,7 +654,7 @@ export class Viewer3D {
       const d = (s * 1.45 + 3.5) * k, A = THREE.MathUtils.degToRad(az), E = THREE.MathUtils.degToRad(el);
       pos = target.clone().add(new THREE.Vector3(Math.sin(A) * Math.cos(E), Math.sin(E), Math.cos(A) * Math.cos(E)).multiplyScalar(d));
     } else pos = this.isStudio() ? new THREE.Vector3(b.cx + s * 0.05, s * 1.3 + 2.5, b.maxY + s * 0.32 + 1) : new THREE.Vector3(b.cx + s * 0.08, s * 1.85 + 5, b.maxY + s * 0.45 + 1.5);
-    const fit = this.fitView(pos, target);
+    const fit = this.fitView(pos, target, this.state.ad ? 0.58 : 0.86); // kiểu quảng cáo: chừa hai bên cho chú thích
     this.flyTo(fit.pos, fit.target, smooth);
   }
 
@@ -881,6 +924,7 @@ export class Viewer3D {
     else if (this.bloom.enabled) this.composer.render();
     else this.renderer.render(this.scene, this.camera);
     this.labelRenderer.render(this.scene, this.camera);
+    this.adOverlay();
   }
 
   resize() {
@@ -920,15 +964,7 @@ export class Viewer3D {
       extra = {
         // kích thước tổng: ưu tiên số ghi trên bản vẽ (info.dims), không có thì đo theo tường
         plan: { w: info.dims?.[0] ?? b.maxX - b.minX, d: info.dims?.[1] ?? b.maxY - b.minY, corners: [[b.minX, b.minY], [b.maxX, b.minY], [b.maxX, b.maxY], [b.minX, b.maxY]].map(([px, pz]) => ({ x: px, y: 0, z: pz })) },
-        callouts: this.store.plan.rooms.filter((r) => r.points.length >= 3).map((r, i, arr) => {
-          const xs = r.points.map((p) => p.x), ys = r.points.map((p) => p.y);
-          const lp = labelPoint(r.points);
-          const base = { name: r.name, area: polygonArea(r.points), w: Math.max(...xs) - Math.min(...xs), d: Math.max(...ys) - Math.min(...ys), anchor: { x: lp.x, y: 0.1, z: lp.y } };
-          if (!info.ad) return base;
-          const nth = arr.slice(0, i + 1).filter((q) => roomKind(q.name) === roomKind(r.name)).length;
-          const t = adCaption(r.name, nth);
-          return { ...base, name: t.title, sub: t.line, icon: t.icon };
-        }),
+        callouts: this.calloutList(info.ad),
       };
       this.built.labels.forEach((l) => (l.visible = false));
     }
