@@ -75,7 +75,7 @@ input[type=range]{width:100%;accent-color:var(--accent);min-width:0}
   </div>
 </header>
 
-<div class="viewhint" id="viewhint" hidden>Kéo sang trái / phải để nhìn quanh</div>
+<div class="viewhint" id="viewhint" hidden>Kéo để nhìn quanh 360° · quay lưng ra biển là hướng TP, sông Hàn, sân bay</div>
 
 <section class="console" aria-label="Điều khiển mô hình">
   <div class="modes" role="group" aria-label="Chế độ xem">
@@ -114,8 +114,8 @@ renderer.outputEncoding=THREE.sRGBEncoding; renderer.toneMapping=THREE.ACESFilmi
 app.appendChild(renderer.domElement);
 
 var scene=new THREE.Scene();
-scene.fog=new THREE.Fog(0xcfe2f2,700,5200);
-var camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,1,12000);
+scene.fog=new THREE.Fog(0xcfe2f2,900,9000);
+var camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,1,16000);
 var controls=new THREE.OrbitControls(camera,renderer.domElement);
 controls.enableDamping=true; controls.dampingFactor=.08; controls.maxPolarAngle=Math.PI*.485; controls.minDistance=70; controls.maxDistance=2600;
 controls.autoRotateSpeed=.6;
@@ -177,8 +177,6 @@ flat(4,2600,0xe2c27b,-560,0,0.14);
 flat(6,2600,0xcfc6b4,-17,0,0.11); flat(6,2600,0xcfc6b4,17,0,0.11);
 // Hải Minh lot
 flat(64,72,0xc9bfa6,-47,46,0.10);
-// river (Cổ Cò) far west
-flat(80,2600,0x3f86a8,-860,200,0.09,0.12);
 
 /* ---------- Vegetation: coconut palms, round trees, shrubs, flower beds ---------- */
 var seed=7; function srnd(){ seed=(seed*16807)%2147483647; return (seed-1)/2147483646; }
@@ -260,6 +258,39 @@ var col=new THREE.Color();
 boxes.forEach(function(b,i){dm.position.set(b[0],0,b[1]);dm.scale.set(b[2],b[4],b[3]);dm.updateMatrix();blocks.setMatrixAt(i,dm.matrix);col.setHSL(.09,.18,rnd(.78,.9));blocks.setColorAt(i,col);});
 blocks.castShadow=true; blocks.receiveShadow=true; world.add(blocks);
 function box(w,h,d,x,z,c,y){var m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),M(c||0xece6da,{roughness:.6}));m.position.set(x,(y||0)+h/2,z);m.castShadow=true;m.receiveShadow=true;world.add(m);return m;}
+/* West toward the city & airport – traced from the satellite map (north up, ~4 m per map pixel),
+   placed in scene space (x = east, z = south) relative to the Hải Minh lot */
+world.updateMatrixWorld(true);
+var SITE=world.localToWorld(new THREE.Vector3(-47,0,46));
+function mp(px,py){ return [SITE.x+(px-1600)*4, SITE.z+(py-840)*4]; }      // map pixel -> scene x,z
+function polyFlat(pts,col,y){ var sh=new THREE.Shape(); pts.forEach(function(p,i){ var q=mp(p[0],p[1]); if(i) sh.lineTo(q[0],-q[1]); else sh.moveTo(q[0],-q[1]); });
+  var g=new THREE.ShapeGeometry(sh); g.rotateX(-Math.PI/2); var m=new THREE.Mesh(g,M(col,{roughness:.55,metalness:0,envMapIntensity:.35,polygonOffset:true,polygonOffsetFactor:-6,polygonOffsetUnits:-6})); m.position.y=y||.09; scene.add(m); return m; }
+// Sông Hàn / Cổ Cò estuary
+var RIV=[[960,-900],[1000,-300],[1010,0],[1030,150],[1060,300],[1075,450],[1085,600],[1100,800],[1150,900],[1200,1000],[1250,1150],[1180,1250],
+  [880,1150],[700,1010],[600,890],[480,800],[560,700],[700,640],[760,560],[800,400],[840,250],[840,100],[850,-300],[830,-900]];
+polyFlat(RIV,0x3f86a8,2.5);
+var NHS=mp(1600,1315); [[0,0,70,106],[-170,90,55,70],[120,160,60,80],[-60,260,45,55],[150,-60,40,50]].forEach(function(h){hill(NHS[0]+h[0],NHS[1]+h[1],h[2],h[3],0x7e8f73);});
+function inPoly(x,y,P){ var c=false; for(var i=0,j=P.length-1;i<P.length;j=i++){ if(((P[i][1]>y)!==(P[j][1]>y))&&(x<(P[j][0]-P[i][0])*(y-P[i][1])/(P[j][1]-P[i][1])+P[i][0])) c=!c; } return c; }
+// bridges: Trần Thị Lý (north) and Tiên Sơn (by Lotte Mart)
+function mroad(a,b,w,col,y){ var A=mp(a[0],a[1]),B=mp(b[0],b[1]),dx=B[0]-A[0],dz=B[1]-A[1],L=Math.hypot(dx,dz);
+  var m=new THREE.Mesh(new THREE.PlaneGeometry(w,L),M(col,{polygonOffset:true,polygonOffsetFactor:-8,polygonOffsetUnits:-8})); m.rotation.x=-Math.PI/2; m.rotation.z=Math.atan2(dx,dz); m.position.set((A[0]+B[0])/2,y||.16,(A[1]+B[1])/2); scene.add(m); return m; }
+mroad([700,60],[1060,10],30,0xd6d2ca,4); mroad([740,505],[1210,400],30,0xd6d2ca,4);
+mroad([1170,0],[1500,850],26,0x3a3f47,.6);                       // Lê Văn Hiến toward the north
+// Đà Nẵng International Airport: two parallel runways + apron + terminal
+mroad([95,-900],[105,700],46,0x55595f,1.3); mroad([175,-900],[185,700],46,0x55595f,1.3);
+mroad([140,-900],[140,700],260,0x9aa88a,1.1);
+var tA=mp(260,-450), term=new THREE.Mesh(new THREE.BoxGeometry(90,18,320),M(0xdfe3e8,{roughness:.5})); term.position.set(tA[0],9,tA[1]); scene.add(term);
+// city blocks west of the river (Hải Châu, taller toward the north) and Hòa Cường between river and Lê Văn Hiến
+var cityB=[];
+for(var px=200;px<1385;px+=11) for(var py=-900;py<1250;py+=11){
+  var q=mp(px,py), inRiver=inPoly(px,py,RIV)||inPoly(px+4,py+4,RIV)||inPoly(px-4,py-4,RIV);
+  if(inRiver||px<230) continue; if(Math.random()>.45) continue;
+  var tall=py<300&&px>500&&px<820? rnd(18,70):rnd(8,22);
+  cityB.push([q[0]+rnd(-6,6),q[1]+rnd(-6,6),rnd(14,26),rnd(14,26),tall]); }
+var cGeo=new THREE.BoxGeometry(1,1,1); cGeo.translate(0,.5,0);
+var cityM=new THREE.InstancedMesh(cGeo,M(0xffffff,{roughness:.8}),cityB.length);
+cityB.forEach(function(b,i){dm.position.set(b[0],0,b[1]);dm.rotation.set(0,0,0);dm.scale.set(b[2],b[4],b[3]);dm.updateMatrix();cityM.setMatrixAt(i,dm.matrix);col.setHSL(.08,.15,rnd(.74,.9));cityM.setColorAt(i,col);});
+cityM.receiveShadow=true; scene.add(cityM);
 // Crowne Plaza (Silver Shores) to the north
 box(22,46,120,70,-470,0xf1ede4); box(60,18,26,60,-400,0xe9e2d4); box(30,12,40,90,-540,0xe9e2d4);
 // Hyatt Regency to the south
@@ -268,7 +299,9 @@ for(var i=0;i<18;i++) box(9,7,9,40+(i%6)*12,510+Math.floor(i/6)*16,0xe8d8c2);
 // distant hills: Sơn Trà (north) and Ngũ Hành Sơn (south-west)
 function hill(x,z,r,h,c){var m=new THREE.Mesh(new THREE.SphereGeometry(1,24,12),M(c,{roughness:1}));m.scale.set(r,h,r*.7);m.position.set(x,0,z);scene.add(m);return m;}
 hill(1600,-5200,2300,520,0x5f8a6f); hill(400,-4800,900,300,0x6a917a);
-[[-700,1250,70,95],[-600,1380,55,70],[-820,1420,60,80],[-760,1560,45,55],[-560,1520,40,50]].forEach(function(h){hill(h[0],h[1],h[2],h[3],0x7e8f73);});
+// Ngũ Hành Sơn (Marble Mountains): ~1.9 km south of the lot, between Lê Văn Hiến and Trường Sa
+
+
 
 /* ---------- Hải Minh tower: two facade schemes from the renders ---------- */
 var T=new THREE.Group(); T.position.set(-47,0,46); world.add(T);
@@ -299,16 +332,17 @@ boxP(A,AW-1.6,FL[3],AD-1.6,0,0,0,glass);
 var colm=[]; for(var s2=-1;s2<=1;s2+=2){ for(var z=-AD/2+2;z<=AD/2-2;z+=6) colm.push([s2*(AW/2+.4),z]); for(var x=-AW/2+3;x<=AW/2-3;x+=6) colm.push([x,s2*(AD/2+.4)]); }
 fins(A,colm,FL[3],0,white,.6);
 // side wing along Nguyễn Đức Thuận: 3 storeys, roof garden with planters and a pergola
-var WX=-(AW/2+16), WZ=-AD/2+13, WWd=32, WDd=26, WH=FL[4];
+// podium wing (render A): continues from the tower's south end, set back ~1 m from the Võ Nguyên Giáp face
+var WWd=22, WDd=30, WX=AW/2-1-WWd/2, WZ=AD/2+WDd/2-3, WH=FL[4];
 boxP(A,WWd-1.2,WH,WDd-1.2,WX,0,WZ,glass);
-var wc=[]; for(var x=WX-WWd/2+2;x<=WX+WWd/2-2;x+=6) wc.push([x,WZ-WDd/2+.3]); for(var z=WZ-WDd/2+2;z<=WZ+WDd/2-2;z+=6) wc.push([WX-WWd/2+.3,z]); fins(A,wc,FL[3],0,white,.6);
+var wc=[]; for(var x=WX-WWd/2+2;x<=WX+WWd/2-2;x+=6) wc.push([x,WZ+WDd/2-.3]); for(var z=WZ-WDd/2+5;z<=WZ+WDd/2-2;z+=6) wc.push([WX+WWd/2-.3,z]); fins(A,wc,FL[3],0,white,.6);
 [FL[2],FL[3],WH].forEach(function(yy,i){ var m=slab(A,rrect(WWd+1.6,WDd+1.6,.3),yy-(i<2?.35:0),i<2?.35:.6,white); m.position.x=WX; m.position.z=WZ; });
 var gr=new THREE.Mesh(new THREE.PlaneGeometry(WWd-2,WDd-2),greenRoof); gr.rotation.x=-Math.PI/2; gr.position.set(WX,WH+.65,WZ); A.add(gr);
-var pl=[]; for(var i=0;i<8;i++) pl.push([WX-WWd/2+2.5+i*3.9, WZ-WDd/2+2.2]); for(var i=0;i<6;i++) pl.push([WX-WWd/2+2.2, WZ-WDd/2+6+i*3.6]);
+var pl=[]; for(var i=0;i<5;i++) pl.push([WX-WWd/2+2.5+i*4.2, WZ+WDd/2-2.2]); for(var i=0;i<6;i++) pl.push([WX+WWd/2-2.2, WZ-WDd/2+6+i*3.6]);
 pl.forEach(function(q){ boxP(A,2.6,.9,2.6,q[0],WH+.6,q[1],white); shrubsLocal(A,q[0],WH+1,q[1]); });
-for(var i=0;i<6;i++) shrubsLocal(A,WX+rnd(-10,8),WH+.6,WZ+rnd(-8,8));
-for(var i=0;i<4;i++) boxP(A,.4,3.2,.4,WX-6+i*4,WH+.6,WZ-6,white);
-boxP(A,14,.35,6,WX,WH+3.8,WZ-6,white);
+for(var i=0;i<6;i++) shrubsLocal(A,WX+rnd(-8,8),WH+.6,WZ+rnd(-6,12));
+for(var i=0;i<4;i++) boxP(A,.4,3.2,.4,WX-6+i*4,WH+.6,WZ+4,white);
+boxP(A,14,.35,6,WX,WH+3.8,WZ+4,white);
 function shrubsLocal(grp,x,yy,z){ var m=new THREE.Mesh(new THREE.IcosahedronGeometry(rnd(.8,1.4),0),M(0x467d38)); m.position.set(x,yy+.6,z); m.castShadow=true; grp.add(m); }
 // glass shaft with a recessed vertical channel
 var shaftH=TOP-FL[3];
@@ -378,15 +412,15 @@ label('Minh Mạng','road',world,[-260,2,330]);
 label('Lê Văn Hiến','road',world,[-560,2,-200]);
 label('Công viên biển Trường Sa (quy hoạch)','',world,[62,10,60]);
 label('Bãi biển Mỹ Khê – Non Nước','',world,[150,4,-260]);
-label('Crowne Plaza (Silver Shores)','',world,[70,58,-470]);
+label('Crowne Plaza Danang','',world,[70,58,-470]);
 label('Hyatt Regency Danang','',world,[72,30,470]);
-label('TIA Wellness Resort','far',world,[70,20,-800]);
-label('Ariyana Convention Centre','far',world,[60,20,-1080]);
-label('Furama Resort Danang','far',world,[80,20,-1380]);
-label('Pullman Danang Beach Resort','far',world,[-30,20,-1460]);
+label('Chuỗi resort: TIA · Ariyana · Furama · Pullman','far',world,[60,20,-1050]);
 label('Biển Đông','far',world,[900,4,-150]);
 label('Bán đảo Sơn Trà','far',scene,[1300,560,-5200]);
-label('Ngũ Hành Sơn','far',scene,[-680,110,1350]);
+label('Ngũ Hành Sơn','far',scene,[NHS[0],120,NHS[1]]);
+(function(){ function L(t,px,py,h){ var q=mp(px,py); label(t,'far',scene,[q[0],h||20,q[1]]); }
+  L('Sông Hàn',930,700); L('Cầu Tiên Sơn',980,470); L('Cầu Trần Thị Lý',880,40);
+  L('Trung tâm TP (Hải Châu)',640,-250,80); L('Lotte Mart',865,440,30); L('Sân bay quốc tế Đà Nẵng',140,-100,30); })();
 
 /* ---------- Time of day (the 4th dimension) ---------- */
 var hourEl=document.getElementById('hour'), hourOut=document.getElementById('hourOut');
@@ -423,7 +457,8 @@ var floorEl=document.getElementById('floor'), floorOut=document.getElementById('
 var mode='overview', saved=null, yaw=0, pitch=-.04;
 function setFloor(f){ curF=f; fitHi(); hi.position.y=FL[f]-.2; floorOut.textContent='Tầng '+f; mainLbl.textContent='HẢI MINH · tầng '+f+' (~'+Math.round(FL[f]+1.6)+' m)'; if(mode==='view') placeViewCam(); }
 function placeViewCam(){
-  var f=+floorEl.value; var p=T.localToWorld(new THREE.Vector3(VIEWX,FL[f]+1.6,0)); camera.position.copy(p);
+  var f=+floorEl.value, c=Math.cos(yaw), sn=Math.sin(yaw), hz=(SCH==='A'?AD:BD)/2+2, k=1/Math.max(Math.abs(c)/VIEWX,Math.abs(sn)/hz,1e-6);
+  var p=T.localToWorld(new THREE.Vector3(c*k,FL[f]+1.6,sn*k)); camera.position.copy(p);
   var d=new THREE.Vector3(Math.cos(yaw)*Math.cos(pitch),Math.sin(pitch),Math.sin(yaw)*Math.cos(pitch)).applyQuaternion(world.quaternion);
   camera.lookAt(p.clone().add(d));
 }
@@ -438,7 +473,7 @@ function setMode(m){
 bOver.onclick=function(){setMode('overview');}; bView.onclick=function(){setMode('view');}; bSpin.onclick=function(){setMode(mode==='spin'?'overview':'spin');};
 var drag=null;
 renderer.domElement.addEventListener('pointerdown',function(e){ if(mode!=='view') return; drag={x:e.clientX,y:e.clientY,yaw:yaw,pitch:pitch}; renderer.domElement.setPointerCapture(e.pointerId); });
-renderer.domElement.addEventListener('pointermove',function(e){ if(!drag) return; yaw=Math.max(-1.45,Math.min(1.45,drag.yaw-(e.clientX-drag.x)*.004)); pitch=Math.max(-.6,Math.min(.35,drag.pitch+(e.clientY-drag.y)*.003)); placeViewCam(); });
+renderer.domElement.addEventListener('pointermove',function(e){ if(!drag) return; yaw=drag.yaw-(e.clientX-drag.x)*.004; pitch=Math.max(-.6,Math.min(.35,drag.pitch+(e.clientY-drag.y)*.003)); placeViewCam(); });
 window.addEventListener('pointerup',function(){drag=null;});
 
 hourEl.oninput=function(){setTime(+hourEl.value);};
@@ -455,7 +490,7 @@ if(/close/.test(location.search)){controls.target.copy(world.localToWorld(new TH
 controls.update();
 setFloor(+floorEl.value); setTime(+hourEl.value); refreshEnv();
 if(/schemeB/.test(location.search)) setScheme('B');
-var camQ=/cam=([-\d.]+),([-\d.]+),([-\d.]+)/.exec(location.search); if(camQ){controls.target.copy(world.localToWorld(new THREE.Vector3(-47,60,46)));camera.position.copy(world.localToWorld(new THREE.Vector3(-47+ +camQ[1],+camQ[2],46+ +camQ[3])));}
+var camQ=/cam=([-\d.]+),([-\d.]+),([-\d.]+)/.exec(location.search); if(camQ){controls.target.copy(world.localToWorld(new THREE.Vector3(-47,60,46)));camera.position.copy(world.localToWorld(new THREE.Vector3(-47+ +camQ[1],+camQ[2],46+ +camQ[3]))); var tg=/tgt=([-\d.]+),([-\d.]+),([-\d.]+)/.exec(location.search); if(tg){ controls.target.copy(world.localToWorld(new THREE.Vector3(-47+ +tg[1],+tg[2],46+ +tg[3]))); controls.maxDistance=8000; } }
 if(/topB/.test(location.search)){controls.target.copy(world.localToWorld(new THREE.Vector3(-47,90,46)));camera.position.copy(world.localToWorld(new THREE.Vector3(90,95,-60)));}
 
 /* ---------- Loop ---------- */
@@ -472,10 +507,16 @@ function loop(){
   camera.getWorldDirection(fwd); needle.style.transform='rotate('+(Math.atan2(fwd.x,-fwd.z)*-180/Math.PI)+'deg)';
   renderer.render(scene,camera);
   var W=innerWidth,H=innerHeight;
+  var placed=[];
   for(var j=0;j<LBL.length;j++){ var L=LBL[j]; v.copy(L.p); if(L.obj!==scene) L.obj.localToWorld(v); v.project(camera);
     var vis=v.z<1&&v.x>-1.1&&v.x<1.1&&v.y>-1.1&&v.y<1.1 && !(mode==='view'&&L.cls==='main');
-    L.e.style.display=vis?'block':'none'; if(vis){L.e.style.left=((v.x+1)/2*W)+'px';L.e.style.top=((1-v.y)/2*H)+'px';} }
+    if(vis){ var px=(v.x+1)/2*W, py=(1-v.y)/2*H, w=L.w||(L.w=L.e.offsetWidth||L.e.textContent.length*7), h=L.h||(L.h=L.e.offsetHeight||22);
+      var r=[px-w/2-4,py-h-3,px+w/2+4,py+3];
+      for(var k=0;k<placed.length;k++){ var q=placed[k]; if(r[0]<q[2]&&r[2]>q[0]&&r[1]<q[3]&&r[3]>q[1]){ vis=false; break; } }
+      if(vis){ placed.push(r); L.e.style.left=px+'px'; L.e.style.top=py+'px'; } }
+    L.e.style.display=vis?'block':'none'; }
 }
+if(/viewW/.test(location.search)){ setMode('view'); yaw=Math.PI; placeViewCam(); }
 loop();
 })();
 </script>
