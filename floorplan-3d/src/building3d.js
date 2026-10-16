@@ -625,7 +625,7 @@ export class BuildingView {
         const ga = gardenOf(floor, curSlot.slot);
         const el = document.createElement('div');
         el.className = 'unitlabel gardentag';
-        el.innerHTML = `<b>🌳 ${unitCode(this.getBuilding(), floor, curSlot.slot)}</b><span>Sân vườn ${String(ga.tt).replace('.', ',')} m²</span>`;
+        el.innerHTML = `<b>🌳 ${unitCode(this.getBuilding(), floor, curSlot.slot)}</b><span>BC sân vườn ${String(ga.tt).replace('.', ',')} m²</span>`;
         const lab = new CSS2DObject(el);
         lab.position.set((x0 + x1) / 2, y + 0.8, (z0 + z1) / 2);
         root.add(lab);

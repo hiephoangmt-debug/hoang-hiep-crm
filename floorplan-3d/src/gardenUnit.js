@@ -91,7 +91,7 @@ export function gardenUnit(base, spec) {
   const aS = roundStart ? arcPts(true) : null, aE = roundEnd ? arcPts(false) : null;
   for (const a of [aS, aE]) if (a) for (let i = 0; i < NA; i++) wall(a[i], a[i + 1]);
   const gp = [[0, 0], [L, 0], ...(aE ? aE.slice().reverse() : [[L, D]]), ...(aS ? aS.slice().reverse().map((q) => q).reverse() : [[0, D]])];
-  plan.rooms.push({ id: uid(), name: 'Sân vườn', floor: 'grass', points: (aS ? [[0, 0], [L, 0], ...(aE ? aE.slice().reverse() : [[L, D]]), ...aS] : gp).map((q) => P(...q)) });
+  plan.rooms.push({ id: uid(), name: 'Ban công sân vườn', floor: 'grass', points: (aS ? [[0, 0], [L, 0], ...(aE ? aE.slice().reverse() : [[L, D]]), ...aS] : gp).map((q) => P(...q)) });
   const rotOut = { top: 0, bottom: 180, left: 270, right: 90 }[side];
   const add = (type, u, v, rot = 0, extra = {}) => { const p = P(u, v); plan.furniture.push({ id: uid(), type, x: +p.x.toFixed(3), y: +p.y.toFixed(3), rot, ...extra }); };
   const rotU = side === 'top' || side === 'bottom' ? 0 : 90; // xoay để cạnh dài của đồ chạy dọc mép sân
@@ -131,7 +131,7 @@ export function gardenUnit(base, spec) {
     const h2 = wrap === 'top' || wrap === 'bottom';
     const al2 = (pt) => (h2 ? pt.x : pt.y);
     const dep2 = (pt) => wrap === 'top' ? pt.y - bb.y0 : wrap === 'bottom' ? bb.y1 - pt.y : wrap === 'left' ? pt.x - bb.x0 : bb.x1 - pt.x;
-    const rp = plan.rooms.filter((r) => r.name !== 'Sân vườn' && Math.min(...r.points.map(dep2)) < 0.5).flatMap((r) => r.points);
+    const rp = plan.rooms.filter((r) => !/sân vườn/i.test(r.name) && Math.min(...r.points.map(dep2)) < 0.5).flatMap((r) => r.points);
     let a0 = Math.min(...rp.map(al2)) - 0.1, a1 = Math.max(...rp.map(al2)) + 0.1;
     // phía dải chính: kéo tới mép ngoài của dải chính
     const mainOuter = side === 'right' || side === 'bottom' ? (h2 ? bb.x1 : bb.y1) + D : (h2 ? bb.x0 : bb.y0) - D;
@@ -156,7 +156,7 @@ export function gardenUnit(base, spec) {
     if (farAtStart) wall2([0, D], [L2 - R, D]); else wall2([R, D], [L2, D]);
     for (let i = 0; i < N; i++) wall2(arc[i], arc[i + 1]);
     const poly = farAtStart ? [[0, 0], [L2, 0], ...arc.slice().reverse(), [0, D]] : [[0, 0], [L2, 0], [L2, D], ...arc];
-    plan.rooms.push({ id: uid(), name: 'Sân vườn', floor: 'grass', points: poly.map((q) => Q(...q)) });
+    plan.rooms.push({ id: uid(), name: 'Ban công sân vườn', floor: 'grass', points: poly.map((q) => Q(...q)) });
     const add2 = (type, u, v, rot = 0, extra = {}) => { const p = Q(u, v); plan.furniture.push({ id: uid(), type, x: +p.x.toFixed(3), y: +p.y.toFixed(3), rot, ...extra }); };
     const rU2 = h2 ? 0 : 90, rOut2 = { top: 0, bottom: 180, left: 270, right: 90 }[wrap];
     // luống hoa dọc lan can ngoài, viền sỏi, ghế nằm, bàn tròn 4 ghế ở ô góc, lối đá

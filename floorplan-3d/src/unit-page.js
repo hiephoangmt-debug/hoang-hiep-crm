@@ -68,7 +68,7 @@ function codeUnit(code, gi) {
   const dims = o.k % 2 ? [src.dims[1], src.dims[0]] : src.dims;
   const u = {
     ...src, id: `can-${code}@${grp.floors[0]}`, code, group: grp, groups, tpl: base.id, mirrored: o.m,
-    name: `Căn ${code}${grp.g ? ' · sân vườn' : ''}`, dims, plan: orientPlan(src.plan, o),
+    name: `Căn ${code}${grp.g ? ' · BC sân vườn' : ''}`, dims, plan: orientPlan(src.plan, o),
     official: [grp.a.tim, grp.a.tt, ...(grp.g ? [grp.g.tim, grp.g.tt] : [])],
   };
   codeCache.set(key, u);
@@ -103,7 +103,7 @@ function renderUnitList() {
       const typ = gs.find((g) => !g.g) || gs[0];
       return `<button class="up-unit" data-code="${k}">
       <img src="./units/${b.id}.webp" alt="" loading="lazy" />
-      <span><b>Căn ${k}</b><small>${b.type} · Tim ${fmt(typ.a.tim)} m² · TT ${fmt(typ.a.tt)} m²</small>${sv.length ? `<small class="up-codes">🌳 Sân vườn: ${sv.map((g) => g.label.replace('Tầng ', 'T')).join(', ')}</small>` : ''}${PROVISIONAL.has(k) ? '<small class="up-codes">Mặt bằng tạm (chưa có bản vẽ riêng)</small>' : ''}</span>
+      <span><b>Căn ${k}</b><small>${b.type} · Tim ${fmt(typ.a.tim)} m² · TT ${fmt(typ.a.tt)} m²</small>${sv.length ? `<small class="up-codes">🌳 Ban công sân vườn (BC): ${sv.map((g) => g.label.replace('Tầng ', 'T')).join(', ')}</small>` : ''}${PROVISIONAL.has(k) ? '<small class="up-codes">Mặt bằng tạm (chưa có bản vẽ riêng)</small>' : ''}</span>
     </button>`;
     }).join('');
     $$('[data-code]').forEach((b) => (b.onclick = () => selectCode(b.dataset.code)));
@@ -165,7 +165,7 @@ function renderInfo() {
   const wcs = rooms.filter((r) => /wc|tắm/i.test(r.name)).length;
   $('#info').innerHTML = `
     <h2>${unit.name}</h2>
-    ${unit.code ? `<div><small class="up-note">Chọn tầng (diện tích căn và sân vườn theo bảng từng tầng)</small>
+    ${unit.code ? `<div><small class="up-note">Chọn tầng (tầng 2–7 có ban công sân vườn (BC); diện tích theo bảng từng tầng)</small>
       <div class="up-floors">${unit.groups.map((g, i) => `<button class="chip ${g === unit.group ? 'active' : ''}" data-grp="${i}">${g.label}${g.g ? ' 🌳' : ''}</button>`).join('')}</div>
       <p class="up-note">Mã căn: ${unit.group.floors.map((f) => `F2-${f}-${unit.code}`).slice(0, 3).join(', ')}${unit.group.floors.length > 3 ? '…' : ''}. Mặt bằng xoay${unit.mirrored ? ', lật đối xứng' : ''} đúng như vị trí căn trên mặt bằng tầng.${PROVISIONAL.has(unit.code) ? ' <b>Căn này chưa có bản vẽ riêng – đang ghép tạm mặt bằng 1PN.</b>' : ''}</p></div>` : ''}
     <div class="kv">
@@ -181,7 +181,7 @@ function renderInfo() {
     ${offOf(unit) ? `<div class="kv">
       <div><small>DT tim tường</small><b>${fmt(offOf(unit)[0])} m²</b></div>
       <div><small>DT thông thủy</small><b>${fmt(offOf(unit)[1])} m²</b></div>
-      ${offOf(unit)[2] ? `<div><small>🌳 Sân vườn tim</small><b>${fmt(offOf(unit)[2])} m²</b></div><div><small>🌳 Sân vườn thông thủy</small><b>${fmt(offOf(unit)[3])} m²</b></div>` : ''}
+      ${offOf(unit)[2] ? `<div><small>🌳 BC sân vườn – tim</small><b>${fmt(offOf(unit)[2])} m²</b></div><div><small>🌳 BC sân vườn – thông thủy</small><b>${fmt(offOf(unit)[3])} m²</b></div>` : ''}
     </div>` : ''}
     <p class="up-note">Diện tích theo bảng của chủ đầu tư (căn đại diện; diện tích sân vườn khác nhau theo tầng – xem chính xác trong Bảng hàng tòa nhà). Tổng các phòng đo trên hình vẽ (tính tới tim tường): ${fmt(total)} m².</p>
     <p class="up-note">Hình ảnh và diện tích mang tính minh hoạ, dựng từ mặt bằng bán hàng. Thông số chính thức theo hợp đồng mua bán.</p>
@@ -286,7 +286,7 @@ async function saveImage(mode) {
     mode,
     dims: unit.dims,
     title: `${unit.name} · Tòa F2`,
-    lines: [unit.type, `${fmt(unit.dims[0], 2)} × ${fmt(unit.dims[1], 2)} m`, ...(unit.code ? [unit.group.label] : []), ...(offOf(unit) ? [`Tim ${fmt(offOf(unit)[0])} m² · Thông thủy ${fmt(offOf(unit)[1])} m²`, offOf(unit)[2] ? `Sân vườn ${fmt(offOf(unit)[3])} m² TT` : ''] : [`Tổng DT các phòng ${fmt(total)} m²`, garden ? `Sân vườn ${fmt(garden)} m²` : '']), STYLES[store.plan.settings.style]?.name || ''].filter(Boolean),
+    lines: [unit.type, `${fmt(unit.dims[0], 2)} × ${fmt(unit.dims[1], 2)} m`, ...(unit.code ? [unit.group.label] : []), ...(offOf(unit) ? [`Tim ${fmt(offOf(unit)[0])} m² · Thông thủy ${fmt(offOf(unit)[1])} m²`, offOf(unit)[2] ? `BC sân vườn ${fmt(offOf(unit)[3])} m² TT` : ''] : [`Tổng DT các phòng ${fmt(total)} m²`, garden ? `Sân vườn ${fmt(garden)} m²` : '']), STYLES[store.plan.settings.style]?.name || ''].filter(Boolean),
   });
   download(blob, `${unit.id.replace('@', '-tang-')}-${mode === 'plan' ? 'mat-bang' : 'phoi-canh'}.png`);
   toast(mode === 'plan' ? 'Đã tải ảnh mặt bằng (5:6, nhìn từ trên, kèm diện tích và dài × rộng từng phòng).' : 'Đã tải ảnh phối cảnh theo góc đang xem (5:6). Mẹo: bấm 📸 Chụp ảnh như thật, chờ ảnh mịn rồi tải để có ảnh đẹp nhất.', 6000);
