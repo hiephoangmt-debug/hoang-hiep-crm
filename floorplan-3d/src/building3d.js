@@ -750,7 +750,7 @@ export class BuildingView {
     el.className = 'unitlabel';
     el.innerHTML = `<b>${sl.slot}</b><span>${sl.type}${layout.unitId || this.getBuilding().layouts?.[sl.slot] ? '' : ''}</span>`;
     const lab = new CSS2DObject(el);
-    lab.position.set((f.x0 + f.x1) / 2, y + 3.4, (f.y0 + f.y1) / 2);
+    lab.position.set((sl.fit.x0 + sl.fit.x1) / 2, y + 3.4, (sl.fit.y0 + sl.fit.y1) / 2);
     root.add(lab);
     return pick;
   }
