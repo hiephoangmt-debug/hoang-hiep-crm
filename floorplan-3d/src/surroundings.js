@@ -56,6 +56,10 @@ function palmGeometries() {
 
 /** Đường tâm sông lớn phía thành phố (x theo z) – dùng chung cho cảnh và nhãn */
 export const cityRiverMid = (z) => -480 + 70 * Math.sin((z + 300) / 520) - 0.00004 * (z - 200) ** 2;
+/** Nhánh sông Hàn: rẽ từ sông lớn (giữa ảnh 360) chảy thẳng vào trung tâm, hơi lệch về phía Sơn Trà */
+export const HAN_Z0 = -130;
+export const hanZ = (x) => { const d = cityRiverMid(HAN_Z0) - x; return HAN_Z0 - 0.22 * d + 45 * Math.sin(d / 280); };
+export const hanW = (x) => Math.max(90, 150 - (cityRiverMid(HAN_Z0) - x) * 0.04);
 
 export function buildSurroundings({ footprint, avenueX, reserved = [], density = 1 }) {
   const g = new THREE.Group();
@@ -207,6 +211,27 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
     const cityGround = new THREE.Mesh(gg, new THREE.MeshStandardMaterial({ color: 0x9fa69a, roughness: 1, side: THREE.DoubleSide }));
     g.add(cityGround);
     for (let z = Z0; z < Z1; z += 60) occupy((riverW(z + 30) - 2400) / 2, z + 30, riverW(z + 30) + 2400, 62);
+    // nhánh sông Hàn chảy vào trung tâm
+    const hp = [], hi = [], xs0 = riverMid(HAN_Z0), M = 60;
+    for (let i = 0; i <= M; i++) { const x = xs0 - (1700 * i) / M, w = hanW(x) / 2; hp.push(x, 0.4, hanZ(x) - w, x, 0.4, hanZ(x) + w); if (i) { const a = (i - 1) * 2; hi.push(a, a + 2, a + 1, a + 1, a + 2, a + 3); } }
+    const hg = new THREE.BufferGeometry(); hg.setAttribute('position', new THREE.Float32BufferAttribute(hp, 3)); hg.setIndex(hi); hg.computeVertexNormals();
+    g.add(new THREE.Mesh(hg, waterMat));
+    // đảo Sunneva: khu biệt thự mái đỏ giữa sông lớn và sông Đô Tỏa (phía phải ảnh 360)
+    const isX = riverMid(-360) - 10, isZ = -365;
+    const lagoon = new THREE.Mesh(new THREE.PlaneGeometry(320, 270), waterMat);
+    lagoon.rotation.x = -Math.PI / 2; lagoon.position.set(isX - 20, 0.3, isZ); g.add(lagoon);
+    occupy(isX - 20, isZ, 330, 280);
+    const isl = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 1.2, 40), new THREE.MeshStandardMaterial({ color: 0x86a55e, roughness: 1 }));
+    isl.scale.set(110, 1, 70); isl.position.set(isX - 20, 0.5, isZ); isl.receiveShadow = true; g.add(isl);
+    const villas = [];
+    for (let a = 0; a < 70; a++) { const t = r() * Math.PI * 2, q = Math.sqrt(r()) * 0.85; villas.push([isX - 20 + Math.cos(t) * 100 * q, isZ + Math.sin(t) * 62 * q]); }
+    const vb = new THREE.InstancedMesh(new THREE.BoxGeometry(9, 7, 9), new THREE.MeshStandardMaterial({ color: 0xf6f2ea, roughness: 0.8 }), villas.length);
+    const vr = new THREE.InstancedMesh(new THREE.ConeGeometry(7.2, 3.4, 4), new THREE.MeshStandardMaterial({ color: 0xc0472f, roughness: 0.7, flatShading: true }), villas.length);
+    villas.forEach(([x, z], i) => {
+      dummy.rotation.set(0, Math.PI / 4, 0); dummy.scale.set(1, 1, 1); dummy.position.set(x, 4.6, z); dummy.updateMatrix(); vb.setMatrixAt(i, dummy.matrix);
+      dummy.position.set(x, 9.8, z); dummy.updateMatrix(); vr.setMatrixAt(i, dummy.matrix);
+    });
+    g.add(vb, vr);
   }
   const bridgeMat = new THREE.MeshStandardMaterial({ color: 0xd9d6cf, roughness: 0.8 });
   const bridge = (z, w) => {
@@ -230,11 +255,14 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
   for (let dx = 30; dx < 900; dx += 26) {
     for (let z = -900; z < 1000; z += 26) {
       const x = riverW(z) - dx;
+      if (Math.abs(z - hanZ(x)) < hanW(x) / 2 + 12) continue; // sông Hàn
+      if (Math.abs(x - (riverMid(-360) - 30)) < 175 && Math.abs(z + 365) < 150) continue; // đầm quanh đảo Sunneva
       if (r() > density * 0.9) continue;
       const toCore = Math.hypot(x - (CITY_RIVER_X0 - 260), (z + 380) * 0.8); // lõi trung tâm phía phải (gần Sơn Trà)
-      const tall = r() < Math.max(0.08, 0.6 - toCore / 900);
-      if (tall) city.push([x + (r() - 0.5) * 8, z + (r() - 0.5) * 8, 14 + r() * 12, 14 + r() * 10, 40 + r() * (toCore < 400 ? 130 : 70)]);
-      else low.push([x + (r() - 0.5) * 6, z + (r() - 0.5) * 6, 12 + r() * 8, 12 + r() * 8, 8 + r() * 14]);
+      // như ảnh 360: phần lớn nhà thấp dày đặc, cao tầng lác đác, tập trung ở lõi gần sông Hàn – Sơn Trà
+      const tall = r() < Math.max(0.025, 0.16 - toCore / 3000);
+      if (tall) city.push([x + (r() - 0.5) * 8, z + (r() - 0.5) * 8, 14 + r() * 10, 14 + r() * 8, 45 + r() * (toCore < 400 ? 80 : 45)]);
+      else low.push([x + (r() - 0.5) * 6, z + (r() - 0.5) * 6, 12 + r() * 8, 12 + r() * 8, 7 + r() * 10]);
     }
   }
   const cityMesh = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), cityMat, city.length);
