@@ -1111,6 +1111,28 @@
     return path.map((x) => /^\s*(\d{1,2})\/(\d{1,2})\s*-\s*(\d{1,2})\/(\d{1,2})\s*$/.exec(x)).filter(Boolean)
       .every((m) => dn(+m[1], +m[2]) <= Z && dn(+m[3], +m[4]) >= A);
   }
+  /** Ảnh thuộc tuần w: theo thư mục tuần nếu có, không thì theo ngày tải lên Drive (nhân viên thả ảnh thẳng vào Kênh › Dự án). */
+  function fileInWeek(f, w) {
+    const hasWeekDir = f.path.some((x) => /^\s*\d{1,2}\/\d{1,2}\s*-\s*\d{1,2}\/\d{1,2}\s*$/.test(x));
+    if (hasWeekDir || !f.created) return folderInWeek(f.path, w);
+    const end = parseIso(w); end.setDate(end.getDate() + 7);
+    return f.created >= w && f.created < isoOf(end);
+  }
+  /** Nhân sự theo Gmail của người tải file lên (khai ở Danh mục › Nhân sự, một người có thể nhiều Gmail). */
+  function staffByEmail(email) {
+    const e = String(email || "").toLowerCase();
+    if (!e) return "";
+    const n = S.NhanSu.find((x) => x.trangThai !== "Nghỉ" && String(x.email || "").toLowerCase().split(/[\s,;|]+/).includes(e));
+    return n ? n.ten : "";
+  }
+  /** Kênh theo tên thư mục trong đường dẫn (Facebook / Google / Tiktok / Zalo). */
+  const channelFromPath = (path) => {
+    for (const seg of path.slice().reverse()) {
+      const p = PLATFORMS.find((x) => B.norm(x) === B.norm(seg));
+      if (p) return p;
+    }
+    return "";
+  };
   /** Ghi các ảnh/PDF mới trong thư mục chứng từ của dự án (tuần w) vào bảng ChungTu – đọc chữ để xếp loại, gán người. */
   async function importDriveEvidence(pjName, w) {
     const pj = project(pjName);
@@ -1120,7 +1142,7 @@
     toast(`${pjName}: đang quét thư mục chứng từ trên Drive…`, "busy");
     const files = (await gas("listTree", root)).filter((f) => (/^image\//.test(f.mimeType) || f.mimeType === "application/pdf") &&
       f.path.slice(1).some((seg) => B.norm(seg).replace(/[^a-z0-9]/g, "") === key) &&
-      folderInWeek(f.path, w) && !S.ChungTu.some((c) => c.fileId === f.id));
+      fileInWeek(f, w) && !S.ChungTu.some((c) => c.fileId === f.id));
     if (!files.length) return [];
     const ctx = { staffList: staffNames(), accounts: S.TaiKhoan.map((t) => ({ account: t.maTaiKhoan, staff: t.nhanSu })) };
     let wk = null;
@@ -1138,14 +1160,14 @@
         text = B.isPdf(file) ? await B.pdfText(file) : wk ? (await wk.recognize(file)).data.text || "" : "";
       } catch (e) { console.error(e); }
       const c = B.classifyText(text, ctx), g = B.guessClass(f.path, f.name);
-      const nhanSu = (c.staff && c.by === "id" ? c.staff : "") || staffFromPath(f.path, f.name) || c.staff || "";
+      const nhanSu = (c.staff && c.by === "id" ? c.staff : "") || staffFromPath(f.path, f.name) || staffByEmail(f.owner) || c.staff || "";
       if (hash) {
         // cùng nội dung với ảnh đã có của cùng người (hoặc ảnh chưa rõ người): không lấy
         if (seen.has(hash + "|" + nhanSu) || (!nhanSu && anyHash.has(hash))) continue;
         seen.add(hash + "|" + nhanSu); anyHash.add(hash);
       }
       rows.push({
-        tuan: w, duAn: pjName, nenTang: c.platform || g.platform, loai: c.kind || g.kind,
+        tuan: w, duAn: pjName, nenTang: channelFromPath(f.path) || c.platform || g.platform, loai: c.kind || g.kind,
         nhanSu,
         fileId: f.id, tenFile: f.name, url: "https://drive.google.com/file/d/" + f.id + "/view", hash,
       });

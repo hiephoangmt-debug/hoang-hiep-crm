@@ -86,7 +86,11 @@ function listTree(folderId) {
     var files = folder.getFiles();
     while (files.hasNext()) {
       var f = files.next();
-      out.push({ id: f.getId(), name: f.getName(), mimeType: f.getMimeType(), path: path });
+      // người tải lên (chủ file) + ngày tải: để nhận ảnh của ai, tuần nào khi nhân viên tải thẳng lên Drive qua link
+      var owner = '';
+      try { owner = f.getOwner().getEmail(); } catch (e) { /* Drive dùng chung */ }
+      out.push({ id: f.getId(), name: f.getName(), mimeType: f.getMimeType(), path: path, owner: owner,
+        created: crmFileDay_(f) });
     }
     var subs = folder.getFolders();
     while (subs.hasNext()) {
@@ -95,6 +99,10 @@ function listTree(folderId) {
     }
   })(root, prefix.concat([root.getName()]));
   return out;
+}
+
+function crmFileDay_(f) {
+  try { return Utilities.formatDate(f.getDateCreated(), Session.getScriptTimeZone(), 'yyyy-MM-dd'); } catch (e) { return ''; }
 }
 
 /** Bật "Bất kỳ ai có đường liên kết đều xem được" (bỏ qua nếu tổ chức chặn chia sẻ ra ngoài). */
@@ -426,6 +434,7 @@ function crmBootstrap(token) {
     if (changed) crmWriteAll_('DuAn', projects);
   });
   var me = crmMe_(token);
+  if (me.role === 'admin') { try { crmEnsureEvidenceFolders_(); } catch (e) { /* không có quyền tạo thư mục */ } }
   var out = { schema: CRM_TABLES, sheetUrl: me.role === 'admin' ? crmBook_().getUrl() : '', user: crmUser_(), me: me };
   try { out.appUrl = ScriptApp.getService().getUrl(); } catch (e) { out.appUrl = ''; }
   Object.keys(CRM_TABLES).forEach(function (t) { out[t] = crmPublic_(t, crmRows_(t)); });
@@ -907,6 +916,24 @@ function crmWeekFolder_(iso) {
   return a.getDate() + '/' + (a.getMonth() + 1) + '-' + b.getDate() + '/' + (b.getMonth() + 1);
 }
 
+/**
+ * Thư mục chứng từ chia theo kênh: tạo sẵn thư mục dự án trong mỗi kênh (Facebook/Sun, Facebook/Casamia, …)
+ * để nhân viên mở link Drive và thả ảnh vào đúng chỗ. Làm tối đa 6 giờ một lần.
+ */
+function crmEnsureEvidenceFolders_() {
+  var cache = CacheService.getScriptCache();
+  if (cache.get('evFolders')) return;
+  crmRows_('DuAn').forEach(function (p) {
+    var id = crmFolderId_(p.thuMucChungTu);
+    if (!id) return;
+    var root = DriveApp.getFolderById(id);
+    SHEET_PLATFORMS.forEach(function (ch) {
+      var f = crmSubFind_(root, ch);
+      if (f && !crmSubFind_(f, p.khoa || p.ten)) f.createFolder(p.khoa || p.ten);
+    });
+  });
+  cache.put('evFolders', '1', 21600);
+}
 /** Thư mục con trùng tên không phân biệt hoa thường / dấu ("Tiktok" = "TikTok"). */
 function crmSubFind_(parent, name) {
   var want = crmPlain_(name), it = parent.getFolders();
