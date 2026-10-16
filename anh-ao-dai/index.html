@@ -1,0 +1,948 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ảnh Áo Dài Hồng</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prata&family=Be+Vietnam+Pro:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Bodoni+Moda:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+/* Bố cục: khung ảnh 3:4 bên trái (dính khi cuộn), bảng chỉnh bên phải; điện thoại xếp một cột. */
+:root {
+  --bg: #fbf3f2;
+  --panel: #ffffff;
+  --ink: #3b2326;
+  --muted: #8a6b6e;
+  --line: #efd9d8;
+  --rose: #d9667a;
+  --rose-ink: #ffffff;
+  --rose-soft: #fbe3e5;
+  --stage: #f6dcdc;
+  --display: "Prata", "Times New Roman", serif;
+  --body: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1e1517; --panel: #2a1d20; --ink: #f6e6e7; --muted: #c09ea2; --line: #43302f;
+    --rose: #f08a9b; --rose-ink: #2a1215; --rose-soft: #4a2a30; --stage: #352528; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1e1517; --panel: #2a1d20; --ink: #f6e6e7; --muted: #c09ea2; --line: #43302f;
+  --rose: #f08a9b; --rose-ink: #2a1215; --rose-soft: #4a2a30; --stage: #352528; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; }
+body {
+  background: var(--bg); color: var(--ink); font: 14px/1.5 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 40px;
+}
+header { max-width: 1180px; margin: 0 auto 18px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; }
+h1 { font: 400 clamp(26px, 4vw, 36px)/1.15 var(--display); margin: 0; text-wrap: balance; }
+header p { margin: 0; color: var(--muted); max-width: 60ch; }
+.app { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 24px; align-items: start; }
+.stage { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); background: var(--stage); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; }
+canvas#view { display: block; width: auto; height: auto; max-width: 100%; max-height: calc(100vh - 120px); aspect-ratio: 1492 / 2000; border-radius: 6px; touch-action: none; cursor: grab; box-shadow: 0 10px 30px rgba(120, 40, 50, .18); }
+canvas#view.dragging { cursor: grabbing; }
+.hint { font-size: 12.5px; color: var(--muted); text-align: center; }
+.panel { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+section { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 12px; }
+h2 { font: 400 19px/1.2 var(--display); margin: 0; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.tag { font: 600 10.5px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+button, .file {
+  font: 500 13px/1 var(--body); color: var(--ink); background: var(--bg); border: 1px solid var(--line);
+  border-radius: 999px; padding: 9px 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+}
+button:hover, .file:hover { border-color: var(--rose); }
+button:focus-visible, .file:focus-within, input:focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+button[aria-pressed="true"] { background: var(--rose-soft); border-color: var(--rose); color: var(--ink); }
+button.primary, .file.primary { background: var(--rose); border-color: var(--rose); color: var(--rose-ink); }
+.file input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.file { position: relative; }
+label.slider { display: grid; grid-template-columns: 92px minmax(0, 1fr) 40px; gap: 8px; align-items: center; font-size: 13px; }
+label.slider output { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; font-size: 12px; }
+input[type="range"] { width: 100%; accent-color: var(--rose); }
+.swatches { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.sw { width: 28px; height: 28px; border-radius: 50%; padding: 0; border: 2px solid var(--panel); box-shadow: 0 0 0 1px var(--line); }
+.sw[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--rose); }
+input[type="color"] { width: 32px; height: 32px; border: 1px solid var(--line); border-radius: 50%; padding: 2px; background: var(--bg); cursor: pointer; }
+.note { font-size: 12.5px; color: var(--muted); margin: 0; }
+.check { display: flex; gap: 8px; align-items: center; font-size: 13px; }
+details > summary { cursor: pointer; font-size: 13px; color: var(--muted); }
+details[open] > summary { margin-bottom: 10px; }
+details .group { display: flex; flex-direction: column; gap: 10px; }
+.drop { display: flex; flex-direction: column; gap: 4px; padding: 18px 16px; border: 1.5px dashed var(--rose); border-radius: 12px; background: var(--rose-soft); cursor: pointer; position: relative; }
+.drop strong { font: 400 18px/1.2 var(--display); }
+.drop span { font-size: 13px; color: var(--muted); }
+.drop input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.drop:focus-within { outline: 2px solid var(--rose); outline-offset: 2px; }
+.stage.over { outline: 3px dashed var(--rose); outline-offset: -8px; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px; }
+.gallery .item { display: flex; flex-direction: column; gap: 4px; padding: 4px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); cursor: pointer; min-width: 0; font: 12px/1.3 var(--body); color: var(--ink); text-align: left; }
+.gallery .item[aria-pressed="true"] { border-color: var(--rose); box-shadow: 0 0 0 1px var(--rose); }
+.gallery .item img { width: 100%; aspect-ratio: 1492 / 2000; object-fit: cover; border-radius: 5px; display: block; }
+.gallery .item span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gallery .item .bad { color: var(--rose); }
+label.field { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 8px; align-items: center; font-size: 13px; }
+label.field input { font: 14px/1.3 var(--body); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; width: 100%; min-width: 0; }
+.result { position: fixed; inset: 0; background: rgba(30, 12, 16, .7); display: flex; align-items: center; justify-content: center; padding: 20px max(16px, env(safe-area-inset-right, 0px)) 20px max(16px, env(safe-area-inset-left, 0px)); z-index: 20; }
+.result .box { background: var(--panel); border-radius: 14px; padding: 16px; max-width: 520px; width: 100%; display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.result img { max-height: 70vh; width: auto; border-radius: 6px; }
+@media (max-width: 860px) {
+  .app { grid-template-columns: minmax(0, 1fr); }
+  .stage { position: static; }
+  canvas#view { max-height: 72vh; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Ảnh Áo Dài Hồng</h1>
+  <p>Bỏ ảnh của các bạn vào, khuôn mặt tự ghép vào khung áo dài. Thêm chữ, đổi kiểu tóc rồi tải ảnh về.</p>
+</header>
+
+<div class="app">
+  <div class="stage">
+    <canvas id="view" width="1492" height="2000" aria-label="Ảnh đang chỉnh"></canvas>
+    <div class="hint" id="hint">Kéo trên ảnh để di chuyển · lăn chuột hoặc chụm 2 ngón để phóng to/thu nhỏ</div>
+  </div>
+
+  <div class="panel">
+    <section>
+      <h2>Ảnh các bạn <span class="tag" id="faceState">Mặt gốc</span></h2>
+      <label class="drop" for="faceFile">
+        <strong>Bỏ ảnh vào đây</strong>
+        <span>Chọn một hoặc nhiều ảnh chân dung (hoặc kéo thả vào khung ảnh). Khuôn mặt được tự nhận diện, tự căn và khớp màu da.</span>
+        <input type="file" id="faceFile" accept="image/*" multiple>
+      </label>
+      <p class="note" id="autoStatus">Ảnh rõ mặt, nhìn thẳng, ánh sáng dịu sẽ ghép đẹp nhất.</p>
+      <div class="gallery" id="gallery" hidden></div>
+      <div class="row" id="galleryActions" hidden>
+        <button type="button" class="primary" id="downloadAll">Tải tất cả ảnh</button>
+        <button type="button" id="clearAll">Xoá danh sách</button>
+      </div>
+      <details>
+        <summary>Chỉnh tay khuôn mặt</summary>
+        <div class="group">
+          <div class="row">
+            <button type="button" id="faceReset">Dùng mặt gốc</button>
+            <button type="button" id="fFlip">Lật ngang ảnh mặt</button>
+            <button type="button" id="reAuto">Tự căn lại</button>
+          </div>
+          <div class="chips" role="group" aria-label="Vùng ghép">
+            <button type="button" id="maskFace" aria-pressed="true">Chỉ khuôn mặt</button>
+            <button type="button" id="maskHead" aria-pressed="false">Mặt + tóc từ ảnh</button>
+          </div>
+          <label class="slider">Thu phóng<input type="range" id="fScale" min="5" max="400" value="100"><output id="fScaleO"></output></label>
+          <label class="slider">Xoay<input type="range" id="fRot" min="-30" max="30" value="0" step="0.5"><output id="fRotO"></output></label>
+          <div class="row"><button type="button" id="fFlip">Lật ngang ảnh mặt</button></div>
+          <label class="slider">Rộng<input type="range" id="mRx" min="30" max="160" value="60"><output id="mRxO"></output></label>
+          <label class="slider">Cao<input type="range" id="mRy" min="40" max="200" value="88"><output id="mRyO"></output></label>
+          <label class="slider">Viền mờ<input type="range" id="mFeather" min="5" max="70" value="32"><output id="mFeatherO"></output></label>
+          <label class="slider">Độ sáng<input type="range" id="cBright" min="60" max="140" value="100"><output id="cBrightO"></output></label>
+          <label class="slider">Tương phản<input type="range" id="cContrast" min="60" max="140" value="100"><output id="cContrastO"></output></label>
+          <label class="slider">Bão hòa<input type="range" id="cSat" min="0" max="160" value="100"><output id="cSatO"></output></label>
+          <label class="slider">Ấm da<input type="range" id="cWarm" min="0" max="60" value="0"><output id="cWarmO"></output></label>
+          <label class="slider">Ánh hồng<input type="range" id="cPink" min="0" max="60" value="0"><output id="cPinkO"></output></label>
+          <label class="check"><input type="checkbox" id="autoColor" checked> Tự khớp màu da theo ảnh mẫu</label>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <h2>Chữ <label class="check"><input type="checkbox" id="tOn" checked> Hiện chữ</label></h2>
+      <div class="chips" role="group" aria-label="Mẫu chữ" id="tPresets">
+        <button type="button" data-p="0" aria-pressed="true">Elegant Woman</button>
+        <button type="button" data-p="1" aria-pressed="false">Duyên Dáng Việt</button>
+        <button type="button" data-p="2" aria-pressed="false">Happy Women's Day</button>
+      </div>
+      <label class="field">Dòng lớn 1<input type="text" id="tL1"></label>
+      <label class="field">Dòng lớn 2<input type="text" id="tL2"></label>
+      <label class="field">Dòng phụ<input type="text" id="tSub"></label>
+      <label class="field">Ngày<input type="text" id="tDate"></label>
+      <div class="chips" role="group" aria-label="Phông chữ" id="tFonts">
+        <button type="button" data-font="Playfair Display" style="font-family:'Playfair Display',serif">Playfair</button>
+        <button type="button" data-font="Bodoni Moda" style="font-family:'Bodoni Moda',serif">Bodoni</button>
+        <button type="button" data-font="Cormorant Garamond" style="font-family:'Cormorant Garamond',serif">Cormorant</button>
+      </div>
+      <div class="chips" role="group" aria-label="Kiểu chữ" id="tStyles">
+        <button type="button" data-ts="glass">Hồng pha lê</button>
+        <button type="button" data-ts="rose">Hồng đậm</button>
+        <button type="button" data-ts="white">Trắng viền hồng</button>
+        <button type="button" data-ts="gold">Vàng hồng</button>
+      </div>
+      <label class="slider">Cỡ chữ<input type="range" id="tSize" min="50" max="140" value="100"><output id="tSizeO"></output></label>
+      <label class="slider">Lên / xuống<input type="range" id="tY" min="-300" max="900" value="0"><output id="tYO"></output></label>
+      <label class="check"><input type="checkbox" id="tBehind" checked> Đặt chữ sau đầu (đầu che một phần chữ)</label>
+    </section>
+
+    <section>
+      <h2>Tóc <span class="tag" id="hairState">Giữ tóc gốc</span></h2>
+      <div class="chips" role="group" aria-label="Kiểu tóc" id="hairStyles">
+        <button type="button" data-style="none" aria-pressed="true">Giữ nguyên</button>
+        <button type="button" data-style="vai" aria-pressed="false">Ngang vai</button>
+        <button type="button" data-style="dai" aria-pressed="false">Dài thẳng</button>
+        <button type="button" data-style="song" aria-pressed="false">Dài uốn sóng</button>
+      </div>
+      <div class="swatches" role="group" aria-label="Màu tóc" id="hairColors">
+        <button type="button" class="sw" data-color="#1b1311" style="background:#1b1311" aria-label="Đen" aria-pressed="false"></button>
+        <button type="button" class="sw" data-color="#33221c" style="background:#33221c" aria-label="Nâu đen" aria-pressed="true"></button>
+        <button type="button" class="sw" data-color="#5b3524" style="background:#5b3524" aria-label="Nâu hạt dẻ" aria-pressed="false"></button>
+        <button type="button" class="sw" data-color="#8c5b3b" style="background:#8c5b3b" aria-label="Nâu sáng" aria-pressed="false"></button>
+        <button type="button" class="sw" data-color="#6d2a26" style="background:#6d2a26" aria-label="Nâu đỏ" aria-pressed="false"></button>
+        <input type="color" id="hairCustom" value="#33221c" aria-label="Màu tóc tự chọn">
+      </div>
+      <label class="slider">Cỡ tóc<input type="range" id="hScale" min="70" max="140" value="100"><output id="hScaleO"></output></label>
+      <label class="slider">Độ dài<input type="range" id="hLen" min="60" max="160" value="100"><output id="hLenO"></output></label>
+      <label class="slider">Độ bóng<input type="range" id="hGloss" min="0" max="100" value="50"><output id="hGlossO"></output></label>
+      <p class="note">Tóc mới vẽ đè lên tóc cũ nên chỉ có kiểu dài bằng hoặc dài hơn tóc gốc. Kéo trên ảnh khi chọn “Tóc” để chỉnh vị trí.</p>
+    </section>
+
+    <section>
+      <h2>Kéo trên ảnh sẽ di chuyển</h2>
+      <div class="chips" role="group" aria-label="Đối tượng kéo" id="dragTargets">
+        <button type="button" data-t="photo" aria-pressed="true">Ảnh mặt</button>
+        <button type="button" data-t="mask" aria-pressed="false">Vùng ghép</button>
+        <button type="button" data-t="hair" aria-pressed="false">Tóc</button>
+        <button type="button" data-t="person" aria-pressed="false" id="dragPerson" hidden>Người</button>
+      </div>
+      <label class="check"><input type="checkbox" id="guides" checked> Hiện vòng nét đứt khi chỉnh</label>
+    </section>
+
+    <section>
+      <h2>Nền</h2>
+      <div class="chips" role="group" aria-label="Nền ảnh">
+        <button type="button" id="bgMau" aria-pressed="true">Ảnh mẫu</button>
+        <button type="button" id="bgCode" aria-pressed="false">Cảnh lụa hồng (vẽ bằng code)</button>
+      </div>
+      <div class="group" id="personBox" hidden style="display:flex;flex-direction:column;gap:10px">
+        <div class="row">
+          <label class="file" for="personFile">Tải ảnh người (PNG tách nền)<input type="file" id="personFile" accept="image/png,image/webp,image/*"></label>
+          <button type="button" id="pFlip">Lật ngang</button>
+        </div>
+        <label class="slider">Chiều cao<input type="range" id="pH" min="600" max="2200" value="1560"><output id="pHO"></output></label>
+        <div class="row"><button type="button" id="reseed">Đổi vị trí cánh hoa</button></div>
+      </div>
+      <label class="check"><input type="checkbox" id="petals"> Thêm cánh hoa bay</label>
+    </section>
+
+    <section>
+      <h2>Xuất ảnh</h2>
+      <div class="row">
+        <button type="button" class="primary" id="download">Tải ảnh PNG (1492×2000)</button>
+        <button type="button" id="resetAll">Làm lại từ đầu</button>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="result" id="result" hidden>
+  <div class="box">
+    <img id="resultImg" alt="Ảnh đã ghép">
+    <p class="note">Nếu ảnh chưa tự tải về: nhấn giữ (điện thoại) hoặc chuột phải (máy tính) vào ảnh, chọn “Lưu ảnh”.</p>
+    <button type="button" id="closeResult">Đóng</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.15/dist/face-api.js"></script>
+<script src="models.js"></script>
+<script src="mau.js"></script>
+<script>
+(() => {
+  const W = 1492, H = 2000;
+  const view = document.getElementById('view');
+  const ctx = view.getContext('2d');
+  const $ = id => document.getElementById(id);
+
+  // Vị trí khuôn mặt trong ảnh mẫu (đo trên ảnh 1492×2000).
+  const FACE_DEFAULT = { cx: 745, cy: 505, rx: 60, ry: 88, feather: 0.32 };
+
+  const TEXT_PRESETS = [
+    { l1: 'Elegant', l2: 'Woman', sub: "Vietnamese women's day", date: '20.10.2026' },
+    { l1: 'Duyên', l2: 'Dáng Việt', sub: 'Chúc mừng ngày Phụ nữ Việt Nam', date: '20.10.2026' },
+    { l1: 'Happy', l2: "Women's Day", sub: 'Gửi những người phụ nữ tuyệt vời', date: '20.10.2026' },
+  ];
+  // Viền tóc gốc trong ảnh mẫu, dùng để đầu che lên chữ.
+  const HEAD_OUTLINE = [[755, 388], [800, 404], [828, 445], [838, 495], [840, 545], [842, 600], [812, 606], [778, 598], [776, 640],
+    [722, 640], [720, 596], [694, 584], [680, 545], [679, 480], [692, 430], [720, 400]];
+
+  const initial = () => ({
+    bg: 'mau', seed: 7, petals: false, guides: true, drag: 'photo',
+    person: { img: null, x: 746, bottom: 1960, h: 1560, flip: false },
+    face: { src: 'goc', img: null, px: 745, py: 505, scale: 1, rot: 0, flip: false,
+            ...FACE_DEFAULT, bright: 100, contrast: 100, sat: 100, warm: 0, pink: 0, gain: [1, 1, 1] },
+    autoColor: true,
+    text: { on: true, preset: 0, ...TEXT_PRESETS[0], font: 'Playfair Display', style: 'glass', size: 1, y: 0, behind: true },
+    hair: { style: 'none', color: '#33221c', dx: 0, dy: 0, scale: 1, len: 1, gloss: 0.5 },
+  });
+  let S = initial();
+
+  const sample = new Image();
+  sample.onload = () => { rebuildBase(); render(); };
+  sample.src = window.MAU_AO_DAI;
+
+  // ---------- tiện ích ----------
+  function rng(seed) { let s = seed >>> 0 || 1; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296; }
+  function hex(c) { const n = parseInt(c.slice(1), 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; }
+  function mix(c, t, k) { const a = hex(c), b = hex(t); return `rgb(${a.map((v, i) => Math.round(v + (b[i] - v) * k)).join(',')})`; }
+  function mixA(c, t, k, al) { const a = hex(c), b = hex(t); return `rgba(${a.map((v, i) => Math.round(v + (b[i] - v) * k)).join(',')},${al})`; }
+  function mk(w, h) { const c = document.createElement('canvas'); c.width = Math.max(1, Math.ceil(w)); c.height = Math.max(1, Math.ceil(h)); return c; }
+
+  // Đường cong mượt (Catmull-Rom) đi qua các điểm.
+  function smooth(c, pts, closed) {
+    const n = pts.length; if (n < 2) return;
+    const P = i => closed ? pts[(i + n) % n] : pts[Math.max(0, Math.min(n - 1, i))];
+    c.moveTo(pts[0][0], pts[0][1]);
+    const last = closed ? n : n - 1;
+    for (let i = 0; i < last; i++) {
+      const p0 = P(i - 1), p1 = P(i), p2 = P(i + 1), p3 = P(i + 2);
+      c.bezierCurveTo(p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6,
+                      p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6, p2[0], p2[1]);
+    }
+    if (closed) c.closePath();
+  }
+  function sampleSpline(pts, steps) {
+    const out = [], n = pts.length, P = i => pts[Math.max(0, Math.min(n - 1, i))];
+    for (let i = 0; i < n - 1; i++) {
+      const p0 = P(i - 1), p1 = P(i), p2 = P(i + 1), p3 = P(i + 2);
+      for (let s = 0; s < steps; s++) {
+        const t = s / steps, t2 = t * t, t3 = t2 * t;
+        out.push([0, 1].map(k => 0.5 * ((2 * p1[k]) + (-p0[k] + p2[k]) * t + (2 * p0[k] - 5 * p1[k] + 4 * p2[k] - p3[k]) * t2 + (-p0[k] + 3 * p1[k] - 3 * p2[k] + p3[k]) * t3)));
+      }
+    }
+    out.push(pts[n - 1]);
+    return out;
+  }
+
+  // ---------- cảnh lụa hồng vẽ bằng code ----------
+  function silk(c, pts, w, colA, colB, alpha) {
+    const line = sampleSpline(pts, 24), n = line.length;
+    for (let layer = 0; layer < 3; layer++) {
+      const off = (layer - 1) * w * 0.45, scaleW = 1 - layer * 0.22;
+      const top = [], bot = [];
+      for (let i = 0; i < n; i++) {
+        const a = line[Math.max(0, i - 1)], b = line[Math.min(n - 1, i + 1)];
+        let nx = -(b[1] - a[1]), ny = b[0] - a[0]; const L = Math.hypot(nx, ny) || 1; nx /= L; ny /= L;
+        const s = i / (n - 1);
+        const t = w * scaleW * (0.25 + 0.75 * Math.sin(Math.PI * s)) * (0.85 + 0.15 * Math.sin(s * 9 + layer));
+        const cx = line[i][0] + nx * off, cy = line[i][1] + ny * off;
+        top.push([cx + nx * t, cy + ny * t]); bot.push([cx - nx * t * 0.5, cy - ny * t * 0.5]);
+      }
+      const g = c.createLinearGradient(line[0][0], line[0][1], line[n - 1][0], line[n - 1][1]);
+      g.addColorStop(0, colA); g.addColorStop(0.5, colB); g.addColorStop(1, colA);
+      c.globalAlpha = alpha * (1 - layer * 0.2);
+      c.beginPath(); c.moveTo(top[0][0], top[0][1]);
+      top.forEach(p => c.lineTo(p[0], p[1])); bot.reverse().forEach(p => c.lineTo(p[0], p[1]));
+      c.closePath(); c.fillStyle = g; c.fill();
+      c.globalAlpha = alpha * 0.55; c.strokeStyle = 'rgba(255,255,255,.7)'; c.lineWidth = 2.2;
+      c.beginPath(); top.forEach((p, i) => i ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); c.stroke();
+    }
+    c.globalAlpha = 1;
+  }
+
+  function drawScene(c) {
+    let g = c.createLinearGradient(0, 0, W, H);
+    g.addColorStop(0, '#f8cfcb'); g.addColorStop(0.45, '#fde8e5'); g.addColorStop(1, '#f2aaa3');
+    c.fillStyle = g; c.fillRect(0, 0, W, H);
+    // vầng sáng + mặt trăng
+    g = c.createRadialGradient(800, 640, 40, 800, 640, 980);
+    g.addColorStop(0, 'rgba(255,253,250,1)'); g.addColorStop(0.5, 'rgba(255,246,243,.85)'); g.addColorStop(1, 'rgba(255,240,238,0)');
+    c.fillStyle = g; c.fillRect(0, 0, W, H);
+    c.save();
+    c.shadowColor = 'rgba(235,150,150,.35)'; c.shadowBlur = 60;
+    g = c.createRadialGradient(830, 560, 0, 830, 640, 620);
+    g.addColorStop(0, '#fffdfb'); g.addColorStop(0.8, '#fff3f0'); g.addColorStop(1, 'rgba(253,226,222,.95)');
+    c.beginPath(); c.arc(830, 640, 610, 0, Math.PI * 2); c.fillStyle = g; c.fill();
+    c.restore();
+    c.lineWidth = 5; c.strokeStyle = 'rgba(255,255,255,.85)'; c.stroke();
+    // dải lụa
+    silk(c, [[1600, -40], [1380, 380], [1470, 900], [1640, 1160]], 190, '#f3a49d', '#f8c3bd', 0.85);
+    silk(c, [[-120, 230], [240, 430], [520, 720], [690, 990], [600, 1260], [200, 1500], [-120, 1620]], 150, '#f6b1aa', '#fcd8d3', 0.75);
+    silk(c, [[-80, 620], [300, 650], [640, 830], [960, 880], [1250, 1010]], 60, '#f9c6c1', '#fff0ee', 0.55);
+    silk(c, [[1640, 720], [1260, 840], [960, 1080], [1120, 1320], [1640, 1520]], 170, '#f4aaa3', '#fbd2cd', 0.7);
+    // sàn phản chiếu
+    g = c.createLinearGradient(0, 1700, 0, H);
+    g.addColorStop(0, 'rgba(255,242,240,0)'); g.addColorStop(1, 'rgba(248,206,201,.85)');
+    c.fillStyle = g; c.fillRect(0, 1700, W, H - 1700);
+    c.strokeStyle = 'rgba(255,255,255,.45)'; c.lineWidth = 2;
+    for (let y = 1780; y < H; y += 46) { c.beginPath(); c.moveTo(980, y); c.lineTo(1492, y + 8); c.stroke(); }
+    silk(c, [[-120, 1720], [380, 1560], [820, 1720], [1220, 1910], [1640, 1800]], 210, '#f0958c', '#f9c4be', 0.8);
+    silk(c, [[-120, 1930], [300, 1830], [640, 2080]], 160, '#ec877e', '#f6b0a9', 0.85);
+  }
+
+  function drawPerson(c) {
+    const p = S.person; if (!p.img) return;
+    const s = p.h / p.img.height, w = p.img.width * s;
+    c.save();
+    c.translate(p.x, p.bottom - p.h); if (p.flip) c.scale(-1, 1);
+    c.drawImage(p.img, -w / 2, 0, w, p.h);
+    c.restore();
+    // bóng phản chiếu nhẹ dưới chân
+    c.save(); c.globalAlpha = 0.14;
+    c.translate(p.x, p.bottom); c.scale(p.flip ? -1 : 1, -0.35);
+    c.drawImage(p.img, -w / 2, -p.h, w, p.h);
+    c.restore();
+  }
+
+  function drawPetals(c) {
+    const r = rng(S.seed * 97 + 3);
+    for (let i = 0; i < 22; i++) {
+      const x = r() * W, y = 120 + r() * (H - 240), s = 10 + r() * 22, a = r() * Math.PI * 2;
+      if (Math.abs(x - S.face.cx) < 140 && Math.abs(y - S.face.cy) < 170) continue;
+      c.save(); c.translate(x, y); c.rotate(a);
+      const g = c.createLinearGradient(-s, 0, s, 0);
+      g.addColorStop(0, 'rgba(252,214,210,.95)'); g.addColorStop(1, 'rgba(240,150,146,.85)');
+      c.beginPath(); c.ellipse(0, 0, s, s * 0.52, 0, 0, Math.PI * 2);
+      c.fillStyle = g; c.shadowColor = 'rgba(200,90,90,.25)'; c.shadowBlur = 8; c.fill();
+      c.shadowBlur = 0; c.strokeStyle = 'rgba(255,255,255,.6)'; c.lineWidth = 1.2; c.stroke();
+      c.restore();
+    }
+  }
+
+  // ---------- nền (cache) ----------
+  const base = mk(W, H), bctx = base.getContext('2d');
+  function rebuildBase() {
+    targetLm = null;
+    bctx.clearRect(0, 0, W, H);
+    if (S.bg === 'mau') { if (sample.complete && sample.naturalWidth) bctx.drawImage(sample, 0, 0, W, H); }
+    else { drawScene(bctx); drawPerson(bctx); }
+  }
+
+  // ---------- lớp khuôn mặt ----------
+  function faceLayer() {
+    const f = S.face, pad = 1.05;
+    const bx = Math.floor(f.cx - f.rx * pad), by = Math.floor(f.cy - f.ry * pad);
+    const cw = Math.ceil(f.rx * 2 * pad) + 2, ch = Math.ceil(f.ry * 2 * pad) + 2;
+    const L = mk(cw, ch), c = L.getContext('2d');
+    c.translate(-bx, -by);
+    if (f.src === 'upload' && f.img) {
+      c.save();
+      c.filter = `brightness(${f.bright}%) contrast(${f.contrast}%) saturate(${f.sat}%) sepia(${f.warm * 0.5}%)`;
+      c.translate(f.px, f.py); c.rotate(f.rot * Math.PI / 180); c.scale(f.flip ? -f.scale : f.scale, f.scale);
+      c.drawImage(f.img, -f.img.width / 2, -f.img.height / 2);
+      c.restore();
+      if (S.autoColor && f.gain && f.gain.some(g => Math.abs(g - 1) > 0.01)) {
+        const id = c.getImageData(0, 0, cw, ch), d = id.data, [gr, gg, gb] = f.gain;
+        for (let i = 0; i < d.length; i += 4) { d[i] *= gr; d[i + 1] *= gg; d[i + 2] *= gb; }
+        c.putImageData(id, 0, 0);
+      }
+      if (f.pink > 0) {
+        c.save(); c.globalCompositeOperation = 'soft-light';
+        c.fillStyle = `rgba(255,140,160,${f.pink / 100})`; c.fillRect(bx, by, cw, ch); c.restore();
+      }
+    } else {
+      c.drawImage(base, 0, 0);
+    }
+    // mặt nạ elip viền mờ
+    c.save(); c.globalCompositeOperation = 'destination-in';
+    c.translate(f.cx, f.cy); c.scale(1, f.ry / f.rx);
+    const g = c.createRadialGradient(0, 0, 0, 0, 0, f.rx);
+    g.addColorStop(0, '#000'); g.addColorStop(Math.max(0, 1 - f.feather), '#000'); g.addColorStop(1, 'rgba(0,0,0,0)');
+    c.fillStyle = g; c.fillRect(-f.rx * 2, -f.rx * 2, f.rx * 4, f.rx * 4);
+    c.restore();
+    return { L, bx, by };
+  }
+
+  // ---------- tóc ----------
+  // Toạ độ theo đơn vị "bề rộng mặt" (U), gốc ở tâm mặt; y dương hướng xuống.
+  function hairShapes(style, len) {
+    const ext = y => (y <= 1 ? y : 1 + (y - 1) * len);
+    const wave = style === 'song';
+    const wv = (x, y) => wave && y > 0.25 ? x + Math.sign(x || 1) * 0.07 * Math.sin(y * 5.2) : x;
+    let right;
+    if (style === 'vai') {
+      right = [[0, -0.95], [0.36, -0.9], [0.58, -0.72], [0.7, -0.32], [0.78, 0.2], [0.83, 0.68], [0.92, 1.02], [1.0, 1.16], [0.86, 1.2], [0.7, 1.13], [0.5, 1.2]]
+        .map(([x, y]) => [x, y > 0.6 ? 0.6 + (y - 0.6) * len : y]);
+    } else {
+      right = [[0, -0.95], [0.36, -0.9], [0.58, -0.72], [0.7, -0.32], [0.78, 0.2], [0.84, 0.8], [0.93, 1.35], [0.97, 2.0], [0.94, 2.6], [0.86, 3.0], [0.72, 2.9], [0.6, 3.04], [0.46, 2.92]]
+        .map(([x, y]) => [x, ext(y)]);
+    }
+    right = right.map(([x, y]) => [wv(x, y), y]);
+    const outer = right.concat(right.slice(1).reverse().map(([x, y]) => [-x, y]));
+    const inR = [[0.44, -0.3], [0.47, 0.35], [0.43, 0.9], [0.47, 1.5], [0.5, ext(3.4)]].map(([x, y]) => [wv(x, y), y]);
+    const inner = inR.concat(inR.slice().reverse().map(([x, y]) => [-x, y]));
+    const fringe = [[-0.62, 0.05], [-0.69, -0.36], [-0.57, -0.74], [-0.3, -0.92], [0, -0.96], [0.3, -0.92], [0.57, -0.74], [0.69, -0.36], [0.62, 0.05],
+      [0.53, -0.1], [0.5, -0.38], [0.38, -0.58], [0.18, -0.7], [0.04, -0.69], [0, -0.63], [-0.04, -0.69], [-0.18, -0.7], [-0.38, -0.58], [-0.5, -0.38], [-0.53, -0.1]];
+    const bottom = style === 'vai' ? 0.6 + 0.6 * len : ext(3.05);
+    return { outer, inner, fringe, bottom };
+  }
+
+  function hairLayers() {
+    const h = S.hair, f = S.face;
+    const U = 120 * h.scale, ox = f.cx + h.dx, oy = f.cy + h.dy;
+    const sh = hairShapes(h.style, h.len);
+    const bx = Math.floor(ox - 1.2 * U), by = Math.floor(oy - 1.2 * U);
+    const cw = Math.ceil(2.4 * U) + 4, ch = Math.ceil((sh.bottom + 1.4) * U) + 4;
+    const T = p => [ox + p[0] * U - bx, oy + p[1] * U - by];
+    const r = rng(11);
+    const col = h.color, light = mix(col, '#ffffff', 0.28), dark = mix(col, '#000000', 0.45);
+
+    function fillHair(c, pts) {
+      const g = c.createLinearGradient(0, 0, 0, ch);
+      g.addColorStop(0, mix(col, '#ffffff', 0.08)); g.addColorStop(0.35, col); g.addColorStop(1, dark);
+      c.beginPath(); smooth(c, pts.map(T), true); c.fillStyle = g; c.fill();
+    }
+    function strands(c, gen, n) {
+      for (let i = 0; i < n; i++) {
+        const k = gen(i / (n - 1), r() - 0.5);
+        c.beginPath(); c.moveTo(...T(k[0]));
+        c.bezierCurveTo(...T(k[1]), ...T(k[2]), ...T(k[3]));
+        const lightStroke = r() < 0.45;
+        c.strokeStyle = lightStroke ? mixA(col, '#ffffff', 0.35, 0.10 + 0.12 * h.gloss) : mixA(col, '#000000', 0.5, 0.22);
+        c.lineWidth = (0.6 + r() * 1.6) * U / 120; c.stroke();
+      }
+    }
+    function sheen(c, x, y, rx, ry) {
+      if (h.gloss <= 0) return;
+      const [px, py] = T([x, y]);
+      c.save(); c.globalCompositeOperation = 'screen'; c.translate(px, py); c.scale(1, ry / rx);
+      const g = c.createRadialGradient(0, 0, 0, 0, 0, rx * U);
+      g.addColorStop(0, `rgba(255,235,225,${0.32 * h.gloss})`); g.addColorStop(1, 'rgba(255,235,225,0)');
+      c.fillStyle = g; c.fillRect(-rx * U, -rx * U, rx * 2 * U, rx * 2 * U); c.restore();
+    }
+
+    // lớp sau
+    const back = mk(cw, ch), b = back.getContext('2d');
+    fillHair(b, sh.outer);
+    b.save(); b.beginPath(); smooth(b, sh.outer.map(T), true); b.clip();
+    const end = sh.bottom;
+    strands(b, (u, j) => {
+      const x = (u * 2 - 1);
+      const wv = h.style === 'song' ? 0.12 : 0;
+      return [[x * 0.25, -0.93], [x * 0.85 + j * 0.05, -0.6], [x * (0.95 + wv) + j * 0.1, end * 0.45], [x * 0.88 + j * 0.15, end + 0.1]];
+    }, 220);
+    sheen(b, 0.18, -0.74, 0.5, 0.14);
+    sheen(b, -0.7, Math.min(1.6, end * 0.55), 0.18, 0.5);
+    sheen(b, 0.7, Math.min(1.6, end * 0.55), 0.18, 0.5);
+    b.restore();
+    // khoét phần cổ và thân áo để tóc chỉ buông hai bên
+    b.save(); b.globalCompositeOperation = 'destination-out'; b.filter = 'blur(1.5px)';
+    b.beginPath(); smooth(b, sh.inner.map(T), true); b.fillStyle = '#000'; b.fill(); b.restore();
+
+    // lớp trước (mái, ngôi giữa)
+    const front = mk(cw, ch), fr = front.getContext('2d');
+    fillHair(fr, sh.fringe);
+    fr.save(); fr.beginPath(); smooth(fr, sh.fringe.map(T), true); fr.clip();
+    strands(fr, (u, j) => {
+      const side = u < 0.5 ? -1 : 1, t = side < 0 ? u * 2 : (u - 0.5) * 2;
+      return [[side * 0.02, -0.68], [side * (0.25 + t * 0.1), -0.8 + t * 0.05 + j * 0.03], [side * (0.55 + t * 0.12), -0.55 + t * 0.2], [side * (0.6 + t * 0.1), 0.05 + j * 0.05]];
+    }, 140);
+    sheen(fr, 0.2, -0.76, 0.42, 0.12);
+    fr.restore();
+    return { back, front, bx, by };
+  }
+
+  // ---------- chữ ----------
+  const TEXT_STYLES = {
+    glass: { fill: ['#fde9ec', '#f1a9b6', '#fbdfe4'], stroke: 'rgba(176,74,96,.6)', hi: 'rgba(255,255,255,.95)', glow: 'rgba(225,120,140,.35)', small: '#b45f73' },
+    rose:  { fill: ['#e88aa0', '#c9506d', '#e07790'], stroke: 'rgba(120,30,50,.35)', hi: 'rgba(255,220,228,.7)', glow: 'rgba(200,80,110,.3)', small: '#b04463' },
+    white: { fill: ['#ffffff', '#fff3f5', '#ffffff'], stroke: 'rgba(214,110,134,.85)', hi: 'rgba(255,255,255,1)', glow: 'rgba(214,110,134,.45)', small: '#c76a82' },
+    gold:  { fill: ['#f7dcc6', '#c98f72', '#f2cdb3'], stroke: 'rgba(120,70,50,.45)', hi: 'rgba(255,245,235,.9)', glow: 'rgba(190,120,90,.3)', small: '#a8735a' },
+  };
+  function fitFont(c, txt, weight, size, family, maxW, italic) {
+    let px = size; c.font = `${italic ? 'italic ' : ''}${weight} ${px}px "${family}", serif`;
+    const w = c.measureText(txt).width; if (w > maxW) { px = size * maxW / w; c.font = `${italic ? 'italic ' : ''}${weight} ${px}px "${family}", serif`; }
+    return px;
+  }
+  function fancyText(c, txt, x, y, px, st) {
+    if (!txt) return;
+    const g = c.createLinearGradient(0, y - px * 0.75, 0, y + px * 0.1);
+    g.addColorStop(0, st.fill[0]); g.addColorStop(0.55, st.fill[1]); g.addColorStop(1, st.fill[2]);
+    c.save();
+    c.shadowColor = st.glow; c.shadowBlur = px * 0.08; c.shadowOffsetY = px * 0.015;
+    c.fillStyle = g; c.fillText(txt, x, y);
+    c.shadowColor = 'transparent';
+    c.lineJoin = 'round';
+    c.lineWidth = Math.max(1.2, px * 0.006); c.strokeStyle = st.stroke; c.strokeText(txt, x, y);
+    c.lineWidth = Math.max(1, px * 0.004); c.strokeStyle = st.hi; c.strokeText(txt, x - px * 0.006, y - px * 0.008);
+    c.restore();
+  }
+  function drawText(c) {
+    const t = S.text; if (!t.on) return;
+    const st = TEXT_STYLES[t.style] || TEXT_STYLES.glass;
+    const big = 290 * t.size, y0 = 300 + t.y;
+    c.save(); c.textAlign = 'center'; c.textBaseline = 'alphabetic';
+    const p1 = fitFont(c, t.l1, 400, big, t.font, 1380, false); fancyText(c, t.l1, 790, y0, p1, st);
+    const p2 = fitFont(c, t.l2, 400, big, t.font, 1380, false); fancyText(c, t.l2, 760, y0 + big * 0.74, p2, st);
+    const yS = y0 + big * 0.74 + 120 * t.size;
+    fitFont(c, t.sub, 400, 58 * t.size, t.font, 600, false);
+    c.fillStyle = st.small; c.globalAlpha = 0.92; c.fillText(t.sub, 1120, yS); c.globalAlpha = 1;
+    const pd = fitFont(c, t.date, 400, 96 * t.size, t.font, 600, true); fancyText(c, t.date, 1115, yS + 100 * t.size, pd, st);
+    c.restore();
+  }
+  // Vẽ lại phần đầu/người lên trên chữ.
+  function frontPatch(c) {
+    if (S.bg === 'code') { drawPerson(c); return; }
+    const m = mk(W, H), mc = m.getContext('2d');
+    mc.filter = 'blur(1.5px)'; mc.beginPath(); smooth(mc, HEAD_OUTLINE, true); mc.fill(); mc.filter = 'none';
+    mc.globalCompositeOperation = 'source-in'; mc.drawImage(base, 0, 0);
+    c.drawImage(m, 0, 0);
+  }
+
+  // ---------- vẽ tổng ----------
+  function compose(c, guides) {
+    c.clearRect(0, 0, W, H);
+    c.drawImage(base, 0, 0);
+    if (S.text.behind) { drawText(c); if (S.text.on) frontPatch(c); }
+    const f = S.face;
+    const hasHair = S.hair.style !== 'none';
+    const hasFace = (f.src === 'upload' && f.img) || hasHair;
+    let hl = null;
+    if (hasHair) {
+      hl = hairLayers();
+      c.save(); c.filter = 'blur(0.6px)'; c.shadowColor = 'rgba(110,40,40,.28)'; c.shadowBlur = 14; c.shadowOffsetY = 4;
+      c.drawImage(hl.back, hl.bx, hl.by); c.restore();
+    }
+    if (hasFace) { const fl = faceLayer(); c.drawImage(fl.L, fl.bx, fl.by); }
+    if (hl) { c.save(); c.filter = 'blur(0.7px)'; c.drawImage(hl.front, hl.bx, hl.by); c.restore(); }
+    if (S.petals) drawPetals(c);
+    if (!S.text.behind) drawText(c);
+    if (guides) drawGuides(c);
+  }
+
+  function drawGuides(c) {
+    const f = S.face;
+    c.save(); c.setLineDash([10, 8]); c.lineWidth = 3;
+    c.strokeStyle = 'rgba(217,102,122,.9)';
+    c.beginPath(); c.ellipse(f.cx, f.cy, f.rx, f.ry, 0, 0, Math.PI * 2); c.stroke();
+    if (S.bg === 'code' && !S.person.img) {
+      c.setLineDash([]); c.fillStyle = 'rgba(140,60,70,.75)'; c.textAlign = 'center';
+      c.font = '600 44px "Be Vietnam Pro", system-ui, sans-serif';
+      c.fillText('Tải ảnh người (PNG tách nền)', W / 2, 1180);
+      c.font = '400 32px "Be Vietnam Pro", system-ui, sans-serif';
+      c.fillText('ở mục “Nền” để đặt vào cảnh', W / 2, 1235);
+    }
+    c.restore();
+  }
+
+  let pending = false;
+  function render() {
+    if (pending) return; pending = true;
+    requestAnimationFrame(() => { pending = false; compose(ctx, S.guides); });
+    scheduleRefresh();
+  }
+
+  // ---------- điều khiển ----------
+  const sliders = [
+    ['fScale', () => Math.round(S.face.scale * 100), v => S.face.scale = v / 100, v => v + '%'],
+    ['fRot', () => S.face.rot, v => S.face.rot = v, v => v + '°'],
+    ['mRx', () => Math.round(S.face.rx), v => S.face.rx = v, v => v],
+    ['mRy', () => Math.round(S.face.ry), v => S.face.ry = v, v => v],
+    ['mFeather', () => Math.round(S.face.feather * 100), v => S.face.feather = v / 100, v => v + '%'],
+    ['cBright', () => S.face.bright, v => S.face.bright = v, v => v + '%'],
+    ['cContrast', () => S.face.contrast, v => S.face.contrast = v, v => v + '%'],
+    ['cSat', () => S.face.sat, v => S.face.sat = v, v => v + '%'],
+    ['cWarm', () => S.face.warm, v => S.face.warm = v, v => v],
+    ['cPink', () => S.face.pink, v => S.face.pink = v, v => v],
+    ['hScale', () => Math.round(S.hair.scale * 100), v => S.hair.scale = v / 100, v => v + '%'],
+    ['hLen', () => Math.round(S.hair.len * 100), v => S.hair.len = v / 100, v => v + '%'],
+    ['hGloss', () => Math.round(S.hair.gloss * 100), v => S.hair.gloss = v / 100, v => v + '%'],
+    ['tSize', () => Math.round(S.text.size * 100), v => S.text.size = v / 100, v => v + '%'],
+    ['tY', () => S.text.y, v => S.text.y = v, v => v],
+    ['pH', () => Math.round(S.person.h), v => { S.person.h = v; rebuildBase(); }, v => v],
+  ];
+  sliders.forEach(([id, get, set, fmt]) => {
+    const el = $(id), out = $(id + 'O');
+    el.addEventListener('input', () => { const v = parseFloat(el.value); set(v); out.textContent = fmt(v); render(); });
+  });
+  function syncUI() {
+    sliders.forEach(([id, get, , fmt]) => { const el = $(id); el.value = get(); $(id + 'O').textContent = fmt(get()); });
+    const press = (el, on) => el.setAttribute('aria-pressed', on ? 'true' : 'false');
+    press($('bgMau'), S.bg === 'mau'); press($('bgCode'), S.bg === 'code');
+    $('personBox').hidden = S.bg !== 'code'; $('dragPerson').hidden = S.bg !== 'code';
+    if (S.bg !== 'code' && S.drag === 'person') S.drag = 'photo';
+    document.querySelectorAll('#dragTargets button').forEach(b => press(b, b.dataset.t === S.drag));
+    document.querySelectorAll('#hairStyles button').forEach(b => press(b, b.dataset.style === S.hair.style));
+    document.querySelectorAll('#hairColors .sw').forEach(b => press(b, b.dataset.color === S.hair.color));
+    $('hairCustom').value = S.hair.color;
+    const head = S.face.rx > 80;
+    press($('maskFace'), !head); press($('maskHead'), head);
+    $('petals').checked = S.petals; $('guides').checked = S.guides; $('autoColor').checked = S.autoColor;
+    Object.entries(tFields).forEach(([id, k]) => { if (document.activeElement !== $(id)) $(id).value = S.text[k]; });
+    document.querySelectorAll('#tPresets button').forEach(b => press(b, +b.dataset.p === S.text.preset));
+    document.querySelectorAll('#tFonts button').forEach(b => press(b, b.dataset.font === S.text.font));
+    document.querySelectorAll('#tStyles button').forEach(b => press(b, b.dataset.ts === S.text.style));
+    $('tOn').checked = S.text.on; $('tBehind').checked = S.text.behind;
+    $('faceState').textContent = S.face.src === 'upload' && S.face.img ? 'Ảnh đã tải' : 'Mặt gốc';
+    const names = { none: 'Giữ tóc gốc', vai: 'Ngang vai', dai: 'Dài thẳng', song: 'Uốn sóng' };
+    $('hairState').textContent = names[S.hair.style];
+  }
+
+  function loadFile(input, cb) {
+    const file = input.files && input.files[0]; if (!file) return;
+    const url = URL.createObjectURL(file), img = new Image();
+    img.onload = () => cb(img);
+    img.onerror = () => { $('hint').textContent = 'Không đọc được ảnh này. Hãy thử ảnh JPG hoặc PNG khác.'; };
+    img.src = url; input.value = '';
+  }
+  // ---------- tự nhận diện và ghép khuôn mặt ----------
+  let modelsReady = null, targetLm = null;
+  const status = msg => { $('autoStatus').textContent = msg; };
+  function loadModels() {
+    if (modelsReady) return modelsReady;
+    if (!window.faceapi) return (modelsReady = Promise.reject(new Error('Chưa tải được bộ nhận diện khuôn mặt (cần mạng).')));
+    const M = window.FACE_MODELS || {};
+    const embedded = (url) => {
+      const k = Object.keys(M).find(name => String(url).endsWith(name)); if (!k) return null;
+      if (typeof M[k] === 'string') { const bin = atob(M[k]), u8 = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i); return new Response(u8); }
+      return new Response(JSON.stringify(M[k]), { headers: { 'Content-Type': 'application/json' } });
+    };
+    const realFetch = window.fetch.bind(window);
+    const patched = (url, o) => embedded(url && url.url ? url.url : url) || realFetch(url, o);
+    window.fetch = patched;
+    faceapi.env.monkeyPatch({ fetch: patched, createCanvasElement: () => document.createElement('canvas'), createImageElement: () => document.createElement('img') });
+    const tf = faceapi.tf;
+    modelsReady = (async () => {
+      // dùng WebGL (nhanh), máy không hỗ trợ thì chạy bằng CPU
+      let ok = false; try { ok = await tf.setBackend('webgl'); } catch { ok = false; }
+      if (!ok) await tf.setBackend('cpu');
+      await tf.ready();
+      await Promise.all([faceapi.nets.tinyFaceDetector.loadFromUri('models'), faceapi.nets.faceLandmark68Net.loadFromUri('models')]);
+    })();
+    modelsReady.catch(() => { modelsReady = null; });
+    return modelsReady;
+  }
+  async function detect(src) {
+    const opt = new faceapi.TinyFaceDetectorOptions({ inputSize: 608, scoreThreshold: 0.3 });
+    const all = await faceapi.detectAllFaces(src, opt).withFaceLandmarks();
+    if (!all.length) return null;
+    all.sort((a, b) => b.detection.box.area - a.detection.box.area);
+    return all[0].landmarks.positions.map(p => [p.x, p.y]);
+  }
+  const avg = (pts, a, b) => { let x = 0, y = 0; for (let i = a; i <= b; i++) { x += pts[i][0]; y += pts[i][1]; } const n = b - a + 1; return [x / n, y / n]; };
+  const keyPts = lm => [avg(lm, 36, 41), avg(lm, 42, 47), lm[30], lm[48], lm[54], lm[8], lm[27]];
+  // Phép đồng dạng (thu phóng + xoay + dời) khớp điểm nguồn sang điểm đích, bình phương tối thiểu.
+  function similarity(src, dst) {
+    const n = src.length; let sx = 0, sy = 0, dx = 0, dy = 0;
+    src.forEach((p, i) => { sx += p[0]; sy += p[1]; dx += dst[i][0]; dy += dst[i][1]; });
+    sx /= n; sy /= n; dx /= n; dy /= n;
+    let a = 0, b = 0, d = 0;
+    src.forEach((p, i) => { const x = p[0] - sx, y = p[1] - sy, u = dst[i][0] - dx, v = dst[i][1] - dy; a += x * u + y * v; b += x * v - y * u; d += x * x + y * y; });
+    const sc = Math.hypot(a, b) / d, th = Math.atan2(b, a);
+    return { sc, th, tx: dx - sc * (Math.cos(th) * sx - Math.sin(th) * sy), ty: dy - sc * (Math.sin(th) * sx + Math.cos(th) * sy) };
+  }
+  async function ensureTarget() {
+    if (targetLm) return targetLm;
+    targetLm = await detect(base);
+    return targetLm;
+  }
+  function meanColor(canvas, cx, cy, r) {
+    const x0 = Math.max(0, Math.round(cx - r)), y0 = Math.max(0, Math.round(cy - r)), sz = Math.round(r * 2);
+    const d = canvas.getContext('2d').getImageData(x0, y0, sz, sz).data; let R = 0, G = 0, B = 0, n = 0;
+    for (let y = 0; y < sz; y++) for (let x = 0; x < sz; x++) {
+      if ((x - r) ** 2 + (y - r) ** 2 > r * r) continue;
+      const i = (y * sz + x) * 4; if (d[i + 3] < 200) continue; R += d[i]; G += d[i + 1]; B += d[i + 2]; n++;
+    }
+    return n ? [R / n, G / n, B / n] : null;
+  }
+  // Tính toàn bộ thông số khuôn mặt cho một ảnh. Trả về null nếu không thấy mặt.
+  async function autoFace(img) {
+    await loadModels();
+    const tl = await ensureTarget();
+    if (!tl) throw new Error('Không tìm thấy khuôn mặt trong ảnh nền. Hãy đặt vùng ghép bằng tay.');
+    const sl = await detect(img); if (!sl) return null;
+    const T = similarity(keyPts(sl), keyPts(tl));
+    const iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height;
+    const c = Math.cos(T.th), sn = Math.sin(T.th);
+    const face = { ...S.face, img, src: 'upload', flip: false, scale: T.sc, rot: T.th * 180 / Math.PI,
+      px: T.sc * (c * iw / 2 - sn * ih / 2) + T.tx, py: T.sc * (sn * iw / 2 + c * ih / 2) + T.ty, gain: [1, 1, 1] };
+    // vùng ghép theo mặt trong ảnh nền: hai bên hàm, lông mày tới cằm
+    const jawW = tl[16][0] - tl[0][0], brow = Math.min(...tl.slice(17, 27).map(p => p[1])), chin = tl[8][1];
+    const top = brow - (chin - brow) * 0.28;
+    Object.assign(face, { cx: (tl[0][0] + tl[16][0]) / 2, cy: (top + chin) / 2 + 2, rx: jawW * 0.5, ry: (chin - top) / 2 + 4, feather: 0.3 });
+    // khớp màu da ở vùng má/mũi
+    const nose = tl[30], r = jawW * 0.18;
+    const tgt = meanColor(base, nose[0], nose[1], r);
+    const tmp = mk(W, H), tc = tmp.getContext('2d');
+    tc.translate(face.px, face.py); tc.rotate(T.th); tc.scale(T.sc, T.sc); tc.drawImage(img, -iw / 2, -ih / 2);
+    const srcC = meanColor(tmp, nose[0], nose[1], r);
+    if (tgt && srcC) face.gain = tgt.map((v, i) => Math.min(1.35, Math.max(0.75, 1 + (v / Math.max(1, srcC[i]) - 1) * 0.8)));
+    return face;
+  }
+
+  // ---------- danh sách ảnh đã ghép ----------
+  const items = []; let current = -1;
+  function renderItem(it) {
+    const saved = S.face; S.face = it.face;
+    const out = mk(W, H); compose(out.getContext('2d'), false); S.face = saved;
+    return new Promise(res => out.toBlob(b => { if (it.url) URL.revokeObjectURL(it.url); it.url = URL.createObjectURL(b); res(); }, 'image/png'));
+  }
+  function drawGallery() {
+    const g = $('gallery'); g.innerHTML = '';
+    g.hidden = !items.length; $('galleryActions').hidden = !items.some(i => i.face);
+    items.forEach((it, i) => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'item';
+      b.setAttribute('aria-pressed', i === current ? 'true' : 'false');
+      if (it.url) { const im = document.createElement('img'); im.src = it.url; im.alt = it.name; b.appendChild(im); }
+      const sp = document.createElement('span'); sp.textContent = it.manual ? 'Chỉnh tay: ' + it.name : it.name; if (it.manual) sp.className = 'bad'; b.appendChild(sp);
+      b.addEventListener('click', () => selectItem(i));
+      g.appendChild(b);
+    });
+  }
+  function selectItem(i) {
+    current = i; const it = items[i];
+    if (!it.face) {
+      // không nhận ra mặt: đặt ảnh giữa vùng ghép để chỉnh tay
+      it.manual = true;
+      it.face = { ...S.face, img: it.img, src: 'upload', flip: false, px: S.face.cx, py: S.face.cy, scale: (S.face.ry * 2 * 0.85) / (0.45 * it.img.height), rot: 0, gain: [1, 1, 1] };
+    }
+    S.face = it.face;
+    S.drag = 'photo'; syncUI(); render(); drawGallery();
+  }
+  async function refreshItems() { for (const it of items) if (it.face) await renderItem(it); drawGallery(); }
+  let refreshTimer = 0;
+  // Khi đổi tóc, chữ hay nền: cập nhật lại ảnh nhỏ trong danh sách.
+  function scheduleRefresh() { clearTimeout(refreshTimer); if (items.length) refreshTimer = setTimeout(refreshItems, 700); }
+
+  function readImage(file) {
+    return new Promise((res, rej) => { const img = new Image(); img.onload = () => res(img); img.onerror = rej; img.src = URL.createObjectURL(file); });
+  }
+  async function addFiles(files) {
+    files = [...files].filter(f => f.type.startsWith('image/')); if (!files.length) return;
+    status('Đang tải bộ nhận diện khuôn mặt…');
+    let ok = 0, lastErr = '';
+    for (let k = 0; k < files.length; k++) {
+      const file = files[k];
+      status(`Đang ghép ảnh ${k + 1}/${files.length}: ${file.name}`);
+      let img; try { img = await readImage(file); } catch { continue; }
+      const it = { name: file.name.replace(/\.[^.]+$/, ''), img, face: null, url: null };
+      try { it.face = await autoFace(img); } catch (e) { lastErr = e.message; console.error(e); }
+      if (it.face) { ok++; await renderItem(it); } else { it.manual = true; it.url = img.src; }
+      items.push(it); if (k === 0 || (it.face && current < 0)) current = items.length - 1;
+      drawGallery();
+    }
+    if (current >= 0) selectItem(current);
+    const bad = files.length - ok;
+    status(ok ? `Đã ghép ${ok} ảnh${bad ? `, ${bad} ảnh không thấy rõ mặt (bấm vào để chỉnh tay)` : ''}. Bấm vào từng ảnh để chỉnh thêm.` : (lastErr || 'Không nhận ra khuôn mặt. Hãy chọn ảnh rõ mặt hơn') + ' Có thể kéo ảnh bằng tay trong khung.');
+  }
+  $('faceFile').addEventListener('change', e => { const f = [...e.target.files]; e.target.value = ''; addFiles(f); });
+  const stage = document.querySelector('.stage');
+  stage.addEventListener('dragover', e => { e.preventDefault(); stage.classList.add('over'); });
+  stage.addEventListener('dragleave', () => stage.classList.remove('over'));
+  stage.addEventListener('drop', e => { e.preventDefault(); stage.classList.remove('over'); addFiles(e.dataTransfer.files); });
+  $('reAuto').addEventListener('click', async () => {
+    if (!S.face.img) return; status('Đang tự căn lại…');
+    try { const f = await autoFace(S.face.img); if (f) { S.face = f; if (current >= 0) items[current].face = f; syncUI(); render(); scheduleRefresh(); status('Đã căn lại.'); } else status('Không nhận ra khuôn mặt trong ảnh này.'); }
+    catch (e) { status(e.message); }
+  });
+  $('autoColor').addEventListener('change', e => { S.autoColor = e.target.checked; render(); scheduleRefresh(); });
+  $('downloadAll').addEventListener('click', async () => {
+    await refreshItems();
+    items.filter(i => i.face && i.url).forEach((it, k) => setTimeout(() => {
+      const a = document.createElement('a'); a.href = it.url; a.download = `ao-dai-${it.name}.png`; document.body.appendChild(a); a.click(); a.remove();
+    }, k * 400));
+    status('Đang tải về từng ảnh. Nếu trình duyệt hỏi, hãy cho phép tải nhiều tệp.');
+  });
+  $('clearAll').addEventListener('click', () => { items.forEach(i => i.url && URL.revokeObjectURL(i.url)); items.length = 0; current = -1; S.face.src = 'goc'; drawGallery(); syncUI(); render(); });
+
+  // ---------- chữ: điều khiển ----------
+  const tFields = { tL1: 'l1', tL2: 'l2', tSub: 'sub', tDate: 'date' };
+  Object.entries(tFields).forEach(([id, k]) => $(id).addEventListener('input', e => { S.text[k] = e.target.value; render(); scheduleRefresh(); }));
+  document.querySelectorAll('#tPresets button').forEach(b => b.addEventListener('click', () => { S.text.preset = +b.dataset.p; Object.assign(S.text, TEXT_PRESETS[S.text.preset]); syncUI(); render(); scheduleRefresh(); }));
+  document.querySelectorAll('#tFonts button').forEach(b => b.addEventListener('click', () => {
+    S.text.font = b.dataset.font; syncUI();
+    const f = b.dataset.font; Promise.all([document.fonts.load(`400 80px "${f}"`), document.fonts.load(`italic 400 80px "${f}"`)]).catch(() => {}).then(() => { render(); scheduleRefresh(); });
+  }));
+  document.querySelectorAll('#tStyles button').forEach(b => b.addEventListener('click', () => { S.text.style = b.dataset.ts; syncUI(); render(); scheduleRefresh(); }));
+  $('tOn').addEventListener('change', e => { S.text.on = e.target.checked; render(); scheduleRefresh(); });
+  $('tBehind').addEventListener('change', e => { S.text.behind = e.target.checked; render(); scheduleRefresh(); });
+
+  $('faceReset').addEventListener('click', () => { S.face.src = 'goc'; syncUI(); render(); });
+  $('maskFace').addEventListener('click', () => { Object.assign(S.face, { rx: 60, ry: 88, feather: 0.32, cy: S.face.cy > 0 ? S.face.cy : 505 }); syncUI(); render(); });
+  $('maskHead').addEventListener('click', () => {
+    Object.assign(S.face, { rx: 100, ry: 128, feather: 0.22 });
+    S.hair.style = 'none'; syncUI(); render();
+  });
+  $('fFlip').addEventListener('click', () => { S.face.flip = !S.face.flip; render(); });
+
+  document.querySelectorAll('#hairStyles button').forEach(b => b.addEventListener('click', () => {
+    S.hair.style = b.dataset.style;
+    if (S.hair.style !== 'none' && S.face.rx > 80) Object.assign(S.face, { rx: 60, ry: 88, feather: 0.32 });
+    syncUI(); render();
+  }));
+  document.querySelectorAll('#hairColors .sw').forEach(b => b.addEventListener('click', () => {
+    S.hair.color = b.dataset.color; if (S.hair.style === 'none') S.hair.style = 'dai'; syncUI(); render();
+  }));
+  $('hairCustom').addEventListener('input', e => { S.hair.color = e.target.value; if (S.hair.style === 'none') S.hair.style = 'dai'; syncUI(); render(); });
+
+  document.querySelectorAll('#dragTargets button').forEach(b => b.addEventListener('click', () => { S.drag = b.dataset.t; syncUI(); }));
+  $('guides').addEventListener('change', e => { S.guides = e.target.checked; render(); });
+  $('petals').addEventListener('change', e => { S.petals = e.target.checked; render(); });
+
+  $('bgMau').addEventListener('click', () => {
+    S.bg = 'mau'; Object.assign(S.face, { cx: FACE_DEFAULT.cx, cy: FACE_DEFAULT.cy });
+    rebuildBase(); syncUI(); render();
+  });
+  $('bgCode').addEventListener('click', () => { S.bg = 'code'; S.petals = true; rebuildBase(); syncUI(); render(); });
+  $('personFile').addEventListener('change', e => loadFile(e.target, img => {
+    S.person.img = img; S.drag = 'person'; rebuildBase(); syncUI(); render();
+    $('hint').textContent = 'Kéo để đặt người vào giữa cảnh. Sau đó chọn “Vùng ghép” và kéo vòng nét đứt lên khuôn mặt.';
+  }));
+  $('pFlip').addEventListener('click', () => { S.person.flip = !S.person.flip; rebuildBase(); render(); });
+  $('reseed').addEventListener('click', () => { S.seed = (S.seed * 31 + 17) % 9973; render(); });
+  $('resetAll').addEventListener('click', () => { S = initial(); rebuildBase(); syncUI(); render(); });
+
+  // ---------- kéo / thu phóng trên ảnh ----------
+  const pts = new Map(); let last = null, pinch = null;
+  function toCanvas(e) { const r = view.getBoundingClientRect(); return [(e.clientX - r.left) * W / r.width, (e.clientY - r.top) * H / r.height]; }
+  function move(dx, dy) {
+    const f = S.face, h = S.hair, p = S.person;
+    if (S.drag === 'photo') { if (f.src === 'upload' && f.img) { f.px += dx; f.py += dy; } else { f.cx += dx; f.cy += dy; } }
+    else if (S.drag === 'mask') { f.cx += dx; f.cy += dy; if (f.src !== 'upload') { f.px += dx; f.py += dy; } }
+    else if (S.drag === 'hair') { h.dx += dx; h.dy += dy; }
+    else if (S.drag === 'person') { p.x += dx; p.bottom += dy; rebuildBase(); }
+  }
+  function zoom(k) {
+    const f = S.face, h = S.hair, p = S.person;
+    if (S.drag === 'photo' && f.src === 'upload' && f.img) f.scale = Math.min(4, Math.max(0.05, f.scale * k));
+    else if (S.drag === 'hair') h.scale = Math.min(1.4, Math.max(0.7, h.scale * k));
+    else if (S.drag === 'person') { p.h = Math.min(2200, Math.max(600, p.h * k)); rebuildBase(); }
+    else { f.rx = Math.min(160, Math.max(30, f.rx * k)); f.ry = Math.min(200, Math.max(40, f.ry * k)); }
+    syncUI(); render();
+  }
+  view.addEventListener('pointerdown', e => {
+    view.setPointerCapture(e.pointerId); pts.set(e.pointerId, toCanvas(e));
+    if (pts.size === 1) last = toCanvas(e);
+    if (pts.size === 2) { const [a, b] = [...pts.values()]; pinch = Math.hypot(a[0] - b[0], a[1] - b[1]); }
+    view.classList.add('dragging');
+  });
+  view.addEventListener('pointermove', e => {
+    if (!pts.has(e.pointerId)) return;
+    pts.set(e.pointerId, toCanvas(e));
+    if (pts.size === 2 && pinch) {
+      const [a, b] = [...pts.values()], d = Math.hypot(a[0] - b[0], a[1] - b[1]);
+      if (d > 0) { zoom(d / pinch); pinch = d; } return;
+    }
+    const p = toCanvas(e); move(p[0] - last[0], p[1] - last[1]); last = p; render();
+  });
+  const up = e => { pts.delete(e.pointerId); if (pts.size < 2) pinch = null; if (pts.size === 1) last = [...pts.values()][0]; if (!pts.size) view.classList.remove('dragging'); };
+  view.addEventListener('pointerup', up); view.addEventListener('pointercancel', up);
+  view.addEventListener('wheel', e => { e.preventDefault(); zoom(e.deltaY < 0 ? 1.05 : 1 / 1.05); }, { passive: false });
+
+  // ---------- xuất ảnh ----------
+  $('download').addEventListener('click', () => {
+    const out = mk(W, H); compose(out.getContext('2d'), false);
+    out.toBlob(blob => {
+      if (!blob) return;
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'anh-ao-dai-hong.png';
+      document.body.appendChild(a); a.click(); a.remove();
+      $('resultImg').src = url; $('result').hidden = false;
+    }, 'image/png');
+  });
+  $('closeResult').addEventListener('click', () => { $('result').hidden = true; });
+
+  syncUI(); rebuildBase(); render();
+  if (document.fonts) document.fonts.ready.then(render);
+})();
+</script>
+</body>
+</html>
