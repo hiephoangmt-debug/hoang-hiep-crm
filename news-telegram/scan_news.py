@@ -8,6 +8,7 @@ Biến môi trường:
 Trạng thái các bài đã gửi lưu ở seen.json để không gửi trùng.
 Lần chạy đầu tiên chỉ ghi nhận bài hiện có (không gửi) để tránh spam,
 trừ khi đặt SEND_ON_FIRST_RUN=1.
+TEST_MESSAGE=1: gửi 1 tin thử (bài mới nhất), không lưu trạng thái.
 """
 import hashlib
 import html
@@ -151,13 +152,17 @@ def main():
     seen_set = set(seen)
     max_age = time.time() - 3 * 86400
 
-    new_items, errors = [], []
+    test_mode = os.environ.get("TEST_MESSAGE") == "1"
+    new_items, errors, latest = [], [], None
     for src in CONFIG["sources"]:
         try:
             items = parse_rss(src) if src["type"] == "rss" else parse_html(src)
         except Exception as e:  # một nguồn lỗi không làm hỏng cả lượt quét
             errors.append(f"{src['name']}: {e}")
             continue
+        for it in items:
+            if latest is None or (it["published"] or 0) > (latest["published"] or 0):
+                latest = dict(it, source=src["name"], keywords=matched_keywords(it["title"] + " " + it["summary"]))
         kept = 0
         for it in items:
             ids = {item_id(it), title_key(it["title"])}
@@ -177,6 +182,17 @@ def main():
 
     for e in errors:
         print("LỖI", e, file=sys.stderr)
+
+    if test_mode:
+        if latest is None:
+            sys.exit("Không lấy được bài nào để gửi thử.")
+        msg = "🧪 <b>TIN THỬ</b> – bot đã kết nối, tin mới sẽ về đây.\n\n" + format_message(latest)
+        if dry_run:
+            print(msg)
+        else:
+            send_telegram(token, chat_id, msg)
+            print("Đã gửi 1 tin thử.")
+        return
 
     new_items.sort(key=lambda x: x["published"] or 0)
     if first_run and os.environ.get("SEND_ON_FIRST_RUN") != "1":
