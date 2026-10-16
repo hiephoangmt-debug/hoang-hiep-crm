@@ -10,6 +10,7 @@ Biến môi trường:
   WP_CATEGORY_ID            mặc định 121 (Hạ tầng & quy hoạch)
   WP_STATUS                 publish (mặc định) hoặc draft
   DIGEST_DATE               YYYY-MM-DD; mặc định: trước 12h trưa là hôm qua, sau đó là hôm nay
+  PREVIEW=1                 xem thử: lấy tin mới nhất từ các nguồn, lưu thành bản nháp riêng
   DRY_RUN=1                 chỉ in HTML, không đăng
 """
 import html
@@ -21,6 +22,7 @@ from datetime import datetime, timedelta
 
 import requests
 
+import scan_news
 from scan_news import DIGEST_DIR, VN_TZ, norm, title_key
 
 DA_NANG_WORDS = [
@@ -111,15 +113,40 @@ def wp_request(method, url, auth, **kw):
     return r.json()
 
 
+def preview_items(limit=20):
+    """Tin mới nhất (có từ khoá) từ các nguồn, dùng cho bản nháp xem thử."""
+    items = []
+    for src in scan_news.CONFIG["sources"]:
+        try:
+            got = scan_news.parse_rss(src) if src["type"] == "rss" else scan_news.parse_html(src)
+        except Exception as e:
+            print("LỖI", src["name"], e)
+            continue
+        for it in got[:15]:
+            kws = scan_news.matched_keywords(it["title"] + " " + it["summary"])
+            if kws:
+                items.append(dict(it, source=src["name"], keywords=kws, summary=it["summary"][:400]))
+    items.sort(key=lambda x: x["published"] or 0, reverse=True)
+    return items[:limit]
+
+
 def main():
+    preview = os.environ.get("PREVIEW") == "1"
     day = digest_date()
-    path = DIGEST_DIR / f"{day:%Y-%m-%d}.json"
-    items = json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
+    if preview:
+        day = datetime.now(VN_TZ).date()
+        items = preview_items()
+    else:
+        path = DIGEST_DIR / f"{day:%Y-%m-%d}.json"
+        items = json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
     if not items:
         print(f"Ngày {day:%d/%m/%Y} chưa có tin nào, không đăng.")
         return
 
     post = build_post(day, items)
+    if preview:
+        post["title"] = "[XEM THỬ] " + post["title"]
+        post["slug"] += "-xem-thu"
     if os.environ.get("DRY_RUN") == "1":
         print(post["title"], "\n", post["slug"], "\n", post["content"])
         return
@@ -130,8 +157,10 @@ def main():
     if not (user and password):
         sys.exit("Thiếu WP_USER hoặc WP_APP_PASSWORD.")
     auth = (user, password)
+    me = wp_request("GET", base.replace("/posts", "/users/me"), auth, params={"_fields": "name"})
+    print(f"Đăng nhập WordPress OK: {me.get('name')}")
     post.update(
-        status=os.environ.get("WP_STATUS") or "publish",
+        status="draft" if preview else (os.environ.get("WP_STATUS") or "publish"),
         categories=[int(os.environ.get("WP_CATEGORY_ID") or 121)],
     )
 

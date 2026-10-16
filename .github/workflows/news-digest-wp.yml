@@ -17,6 +17,10 @@ on:
         description: 'Chỉ lưu bản nháp (chưa hiện trên web)'
         type: boolean
         default: false
+      preview:
+        description: 'Xem thử: lấy tin mới nhất, lưu bản nháp [XEM THỬ]'
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -41,3 +45,4 @@ jobs:
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
           DIGEST_DATE: ${{ inputs.date }}
           WP_STATUS: ${{ inputs.draft && 'draft' || 'publish' }}
+          PREVIEW: ${{ inputs.preview && '1' || '' }}
