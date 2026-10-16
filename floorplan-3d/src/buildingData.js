@@ -27,7 +27,7 @@ const SLOTS_RAW = [
  * Hướng đặt căn mẫu vào từng vị trí, đối chiếu bản vẽ mặt bằng tầng: [số lần xoay 90° theo chiều kim đồng hồ, lật trái–phải].
  * Cánh phải đối xứng cánh trái; các căn sát nhau thường lật đối xứng qua vách chung (chung hộp WC / bếp).
  */
-const ORIENT_LEFT = { 24: [3, 0], 25: [0, 1], 26: [1, 0], 27: [1, 1], 28: [1, 1], 23: [3, 1], 22: [3, 0], 21: [3, 1], 20: [3, 0], 19: [3, 1], 18: [2, 0], 17: [0, 1] };
+const ORIENT_LEFT = { 24: [3, 0], 25: [0, 1], 26: [1, 0], 27: [1, 0], 28: [1, 0], 23: [3, 1], 22: [3, 0], 21: [3, 1], 20: [3, 0], 19: [3, 1], 18: [2, 0], 17: [0, 1] };
 export const SLOT_ORIENT = {
   ...Object.fromEntries(Object.entries(ORIENT_LEFT).flatMap(([k, [r, m]]) => [[k, { k: r, m: !!m }], [MIRROR[k], { k: (4 - r) % 4, m: !m }]])),
   29: { k: 0, m: false }, 30: { k: 0, m: false }, 31: { k: 0, m: true }, 32: { k: 0, m: true },
@@ -129,16 +129,16 @@ export const SLOT_LIST = SLOTS_RAW.map(([slot, x0, y0, x1, y1, tim, tt]) => ({ s
 /** Mặt bằng chi tiết mặc định cho từng vị trí (theo các căn mẫu đã dựng; vị trí chưa có ảnh mặt bằng thì để trống) */
 export const DEFAULT_UNIT = {
   // Theo bản vẽ từng loại căn (ô đỏ trên sơ đồ định vị của mỗi bản vẽ)
-  24: '3pn', '05': '3pn', 26: '2pn-b', '03': '2pn-b', 19: '2pn-a', 10: '2pn-a', 27: '1pn', '02': '1pn',
+  24: '3pn', '05': '3pn', 26: '2pn-b', '03': '2pn-b', 19: '2pn-a', 10: '2pn-a',
+  // căn 27 / 02: Studio 5,315 × 6,82 m; căn 28 / 01: 1PN 4,65 × 8,08 m (ô đỏ trên sơ đồ bản vẽ 1PN)
+  27: 'studio', '02': 'studio', 28: '1pn', '01': '1pn',
   25: 'studio', '03A': 'studio', 18: 'studio', 11: 'studio', 20: 'studio-b', '09': 'studio-b',
   23: '1pn-plus-b', 22: '1pn-plus-b', 21: '1pn-plus-b', '06': '1pn-plus-b', '07': '1pn-plus-b', '08': '1pn-plus-b',
   17: '1pn-plus-c', 12: '1pn-plus-c',
   29: '2pn-1wc', 30: '2pn-1wc', 31: '2pn-1wc', 32: '2pn-1wc', 16: '2pn-1wc', 15: '2pn-1wc', '12B': '2pn-1wc', '12A': '2pn-1wc',
-  // Chưa có bản vẽ riêng (46,5 m²) – ghép tạm mặt bằng 1PN
-  28: '1pn', '01': '1pn',
 };
 /** Vị trí đang ghép tạm (mặt bằng chưa đúng căn thật) */
-export const PROVISIONAL = new Set(['28', '01']);
+export const PROVISIONAL = new Set();
 
 export const STATUS = {
   available: { name: 'Còn trống', color: '#22a06b' },
