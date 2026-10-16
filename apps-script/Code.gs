@@ -541,7 +541,7 @@ function crmWebReport_(k) {
   if (!bc) throw new Error('Link báo cáo không đúng hoặc đã bị thay. Nhờ quản trị gửi lại link mới.');
   return bc;
 }
-/** Tháng của một tuần = tháng chứa ngày thứ 5 của tuần đó (tuần vắt qua 2 tháng chỉ tính 1 lần). "2026-09-28" -> "2026-10" */
+/** Tháng của một tuần = tháng chứa ngày giữa tuần (ngày thứ 4 kể từ ngày bắt đầu; tuần vắt qua 2 tháng chỉ tính 1 lần). "2026-09-28" -> "2026-10" */
 function crmWeekMonth_(iso) {
   var p = String(iso).split('-').map(Number), d = new Date(p[0], p[1] - 1, p[2] + 3);
   return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2);
@@ -551,8 +551,11 @@ function crmReportScope_(key, allWeeks) {
   key = String(key);
   allWeeks = allWeeks.slice().sort();
   if (/^\d{4}-\d{2}-\d{2}$/.test(key)) {
+    // tuần trước = tuần có số liệu ngay trước (từ 10/10/2026 tuần đổi sang thứ 7 – thứ 6 nên không luôn là -7 ngày)
+    var before = allWeeks.filter(function (w) { return w < key; });
     var p = key.split('-').map(Number), d = new Date(p[0], p[1] - 1, p[2] - 7);
-    var prev = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+    var prev = before.length ? before[before.length - 1]
+      : d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
     return { ky: 'tuan', weeks: [key], prevWeeks: [prev] };
   }
   if (/^\d{4}-\d{2}$/.test(key)) {
@@ -710,6 +713,12 @@ function crmPlain_(s) {
 function crmDigits_(s) { return (String(s || '').replace(/(\d)[-\s](?=\d)/g, '$1').match(/\d{6,}/) || [''])[0]; }
 
 /** Nhãn tuần "05/10 - 11/10" có chứa ngày thứ 2 isoMonday (yyyy-mm-dd) không. */
+/** Nhãn tuần trong sheet bắt đầu đúng ngày iso ("10/10 - 16/10" với "2026-10-10"). */
+function crmLabelStartsAt_(label, iso) {
+  var m = /^(\d{1,2})\/(\d{1,2})\s*-/.exec(String(label || '').trim());
+  var p = String(iso).split('-').map(Number);
+  return !!m && +m[1] === p[2] && +m[2] === p[1];
+}
 function crmLabelHasWeek_(label, isoMonday) {
   var m = /^(\d{1,2})\/(\d{1,2})\s*-\s*(\d{1,2})\/(\d{1,2})/.exec(String(label || '').trim());
   if (!m) return false;
@@ -787,13 +796,18 @@ function crmWriteSheet_(duAn, tuan, items) {
       cols[st[0]] = mm;
     });
     // các dòng của tuần: từ dòng có nhãn tuần tới nhãn tuần kế tiếp / dòng TỔNG
-    var rows = [], inWeek = false;
-    for (var r = hdr + 2; r < vals.length; r++) {
-      var lab = String(vals[r][0] || '').trim();
-      if (crmPlain_(lab).indexOf('tong') === 0) break;
-      if (/^\d{1,2}\/\d{1,2}\s*-\s*\d{1,2}\/\d{1,2}/.test(lab)) { if (inWeek) break; inWeek = crmLabelHasWeek_(lab, tuan); }
-      if (inWeek) rows.push(r);
-    }
+    // ưu tiên nhãn bắt đầu đúng ngày đầu tuần (tuần 05/10 – 11/10 cũ và 10/10 – 16/10 mới cùng chứa ngày 10/10)
+    var rows = [];
+    [true, false].forEach(function (exact) {
+      if (rows.length) return;
+      var inWeek = false;
+      for (var r = hdr + 2; r < vals.length; r++) {
+        var lab = String(vals[r][0] || '').trim();
+        if (crmPlain_(lab).indexOf('tong') === 0) break;
+        if (/^\d{1,2}\/\d{1,2}\s*-\s*\d{1,2}\/\d{1,2}/.test(lab)) { if (inWeek) break; inWeek = exact ? crmLabelStartsAt_(lab, tuan) : crmLabelHasWeek_(lab, tuan); }
+        if (inWeek) rows.push(r);
+      }
+    });
     if (!rows.length) throw new Error('Sheet của ' + duAn + ' không có dòng tuần chứa ngày ' + tuan + '.');
     var res = { written: 0, kept: 0, noRow: [], sheetUrl: ss.getUrl(), source: src.switched ? src.url : '' };
     var mine = function (r, c) { return String(notes[r][c] || '').indexOf(SHEET_NOTE) === 0; };

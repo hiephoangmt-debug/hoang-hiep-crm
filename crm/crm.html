@@ -158,7 +158,7 @@
 </style>
 </head>
 <body>
-<div id="loading">Đang tải CRM… <small class="muted">(giao diện v43)</small></div>
+<div id="loading">Đang tải CRM… <small class="muted">(giao diện v44)</small></div>
 <div id="diag" style="max-width:760px;margin:0 auto;padding:0 16px;color:#b42318;font-size:13px"></div>
 <script>
   // Báo lỗi ngay trên màn hình (để biết trang dừng ở đâu khi không mở được bảng điều khiển trình duyệt)
@@ -279,7 +279,7 @@
           <label class="row" style="flex-direction:row;gap:6px;color:var(--text)"><input type="checkbox" id="rpKeepMissing" checked> Giữ trang nghiệm thu còn thiếu ảnh (ghi “CHƯA CÓ ẢNH”)</label>
           <button type="button" id="rpGo">Tạo báo cáo</button>
         </div>
-        <p class="hint">Dùng số liệu ở tab Nhập số liệu và ảnh ở tab Ảnh & chứng từ của tuần đã chọn; slide 1–6 là tổng, sau đó mỗi nhân sự một phần. File được lưu vào “Thư mục lưu báo cáo” của dự án (trống = My Drive), mỗi tháng một thư mục con “Tháng MM-YYYY”, mỗi tuần một file. <b>Tổng tháng</b> cộng các tuần thuộc tháng – tuần vắt qua 2 tháng (vd 28/09 – 04/10) tính vào tháng chứa ngày thứ 5 của tuần, nên không bị cộng 2 lần; <b>Tổng chiến dịch</b> cộng mọi tuần đã có số liệu. Báo cáo tổng chỉ gồm số liệu + biểu đồ (ảnh nghiệm thu nằm ở báo cáo từng tuần). Muốn tạo từ thư mục Drive có sẵn: <a id="rpProjectLink" target="_top">trang Báo cáo từ thư mục Drive</a>.</p>
+        <p class="hint">Dùng số liệu ở tab Nhập số liệu và ảnh ở tab Ảnh & chứng từ của tuần đã chọn; slide 1–6 là tổng, sau đó mỗi nhân sự một phần. File được lưu vào “Thư mục lưu báo cáo” của dự án (trống = My Drive), mỗi tháng một thư mục con “Tháng MM-YYYY”, mỗi tuần một file. <b>Tuần báo cáo:</b> từ 10/10/2026 tính <b>thứ 7 → thứ 6</b> (10/10 – 16/10, 17/10 – 23/10, …); các tuần trước đó giữ thứ 2 → chủ nhật như báo cáo cũ. <b>Tổng tháng</b> cộng các tuần thuộc tháng – tuần vắt qua 2 tháng (vd 28/09 – 04/10) tính vào tháng chứa ngày giữa tuần, nên không bị cộng 2 lần; <b>Tổng chiến dịch</b> cộng mọi tuần đã có số liệu. Báo cáo tổng chỉ gồm số liệu + biểu đồ (ảnh nghiệm thu nằm ở báo cáo từng tuần). Muốn tạo từ thư mục Drive có sẵn: <a id="rpProjectLink" target="_top">trang Báo cáo từ thư mục Drive</a>.</p>
       </section>
       <section class="card"><div class="sec-head"><h3>Lịch sử báo cáo</h3><button type="button" id="rpShare" class="ghost small" hidden></button></div>
         <p class="hint">File báo cáo được bật chia sẻ “Bất kỳ ai có đường liên kết đều xem được” – chỉ cần gửi link, các bạn mở xem/tải PDF không cần xin quyền.</p>

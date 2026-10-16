@@ -34,7 +34,18 @@
   const pad = (n) => String(n).padStart(2, "0");
   const isoOf = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
   const parseIso = (s) => { const [y, m, d] = String(s).split("-").map(Number); return new Date(y, m - 1, d); };
-  const mondayOf = (d) => { const x = new Date(d.getFullYear(), d.getMonth(), d.getDate()); x.setDate(x.getDate() - ((x.getDay() + 6) % 7)); return x; };
+  /**
+   * Ngày bắt đầu tuần báo cáo chứa ngày d.
+   * Từ 10/10/2026: tuần chạy thứ 7 → thứ 6 (10/10 – 16/10, 17/10 – 23/10, …).
+   * Trước đó giữ tuần thứ 2 → chủ nhật như các báo cáo cũ (… 28/09 – 04/10, 05/10 – 11/10).
+   */
+  const WEEK_SAT_FROM = new Date(2026, 9, 10);
+  const weekStartOf = (d) => {
+    const x = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    const sat = x >= WEEK_SAT_FROM;
+    x.setDate(x.getDate() - (sat ? (x.getDay() + 1) % 7 : (x.getDay() + 6) % 7));
+    return x;
+  };
   function weekLabel(iso, withYear) {
     const a = parseIso(iso), b = new Date(a);
     b.setDate(a.getDate() + 6);
@@ -48,15 +59,15 @@
   const extraWeeks = new Set(); // tuần chọn bằng lịch ("Tuần khác…")
   function weekList() {
     const set = new Set(extraWeeks);
-    let d = mondayOf(new Date());
+    const d = new Date();
     d.setDate(d.getDate() + 7);
-    for (let i = 0; i < 20; i++) { set.add(isoOf(d)); d.setDate(d.getDate() - 7); }
+    for (let i = 0; i < 21; i++) { set.add(isoOf(weekStartOf(d))); d.setDate(d.getDate() - 7); }
     S.SoLieu.forEach((r) => r.tuan && set.add(r.tuan));
     S.ChungTu.forEach((r) => r.tuan && set.add(r.tuan));
     return Array.from(set).sort().reverse();
   }
-  const latestDataWeek = () => S.SoLieu.map((r) => r.tuan).sort().pop() || isoOf(mondayOf(new Date()));
-  /** Tháng của tuần = tháng chứa ngày thứ 5 (tuần vắt qua 2 tháng chỉ thuộc 1 tháng). "2026-09-28" -> "2026-10" */
+  const latestDataWeek = () => S.SoLieu.map((r) => r.tuan).sort().pop() || isoOf(weekStartOf(new Date()));
+  /** Tháng của tuần = tháng chứa ngày giữa tuần (ngày thứ 4 của tuần; tuần vắt qua 2 tháng chỉ thuộc 1 tháng). "2026-09-28" -> "2026-10" */
   const weekMonth = (iso) => { const d = parseIso(iso); d.setDate(d.getDate() + 3); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}`; };
   const monthLabel = (m) => `Tháng ${+m.slice(5, 7)}/${m.slice(0, 4)}`;
   /** Kỳ báo cáo: tuần "2026-10-05", tháng "2026-10", toàn chiến dịch "all". */
@@ -189,7 +200,7 @@
     inp.addEventListener("change", () => {
       if (!inp.value) return;
       const [y, m, d] = inp.value.split("-").map(Number);
-      const w = isoOf(mondayOf(new Date(y, m - 1, d)));
+      const w = isoOf(weekStartOf(new Date(y, m - 1, d)));
       const sel = $(box.dataset.for);
       box.hidden = true;
       extraWeeks.add(w);
@@ -638,7 +649,7 @@
 
   let pending = []; // {file, url, nenTang, loai, nhanSu, note, campaigns:[{name, spent, results, resultType, date, use}]}
   const RESULT_LABEL = { lead: "lead", thruplay: "ThruPlay", tuongtac: "tương tác", xem: "lượt xem" };
-  /** Ngày "6/10" có nằm trong tuần (iso thứ 2) không. */
+  /** Ngày "6/10" có nằm trong tuần (iso = ngày đầu tuần) không. */
   function dateInWeek(dm, iso) {
     if (!dm) return true;
     const [d, m] = dm.split("/").map(Number);
@@ -1286,7 +1297,7 @@
     const tag = ky === "tuan" ? weekLabel(w).replace(/[\/ ]/g, "") : ky === "thang" ? `Thang${w.slice(5, 7)}-${w.slice(0, 4)}` : "ToanChienDich";
     const name = `Bao_cao_${pjName.replace(/\s+/g, "_")}_${tag}.pptx`;
     const folder = B.parseDriveId(pj.thuMucBaoCao) || "";
-    // mỗi tháng một thư mục con; tuần vắt 2 tháng nằm ở tháng chứa ngày thứ 5
+    // mỗi tháng một thư mục con; tuần vắt 2 tháng nằm ở tháng chứa ngày giữa tuần
     const sub = ky === "all" ? "Tổng chiến dịch" : "Tháng " + (ky === "thang" ? w : weekMonth(w)).split("-").reverse().join("-");
     const b64 = await B.blobToB64(res.blob);
     const out = { tuan: w, duAn: pjName, trangThai: "Nháp", pdfUrl: "", pptxUrl: "",
