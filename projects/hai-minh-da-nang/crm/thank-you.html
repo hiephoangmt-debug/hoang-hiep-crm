@@ -1,0 +1,15 @@
+<!-- Đổi lời "Thank you!" mặc định của form LadiPage thành lời cảm ơn riêng -->
+<script>
+(function(){
+  var MSG='Cảm ơn anh/chị! Chuyên viên sẽ gửi bảng giá & hồ sơ dự án qua Zalo 0904 567 009 trong ít phút.';
+  var RE=/^\s*(thank you!?|thanks!?|cảm ơn!?)\s*$/i;
+  var _alert=window.alert;
+  window.alert=function(m){ return _alert.call(window, RE.test(String(m||''))?MSG:m); };
+  function fix(root){
+    var w=document.createTreeWalker(root||document.body,NodeFilter.SHOW_TEXT,null,false),n;
+    while((n=w.nextNode())){ if(RE.test(n.nodeValue)&&!(n.parentNode&&n.parentNode.closest&&n.parentNode.closest('#hmw'))) n.nodeValue=MSG; }
+  }
+  function start(){ fix(document.body); new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(x){ if(x.nodeType===3){ if(RE.test(x.nodeValue)) x.nodeValue=MSG; } else if(x.nodeType===1) fix(x); }); if(m.type==='characterData'&&RE.test(m.target.nodeValue)) m.target.nodeValue=MSG;});}).observe(document.body,{childList:true,subtree:true,characterData:true}); }
+  if(document.body) start(); else document.addEventListener('DOMContentLoaded',start);
+})();
+</script>
