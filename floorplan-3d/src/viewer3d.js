@@ -11,7 +11,7 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
-import { buildScene, disposeTree, SHARED } from './builder.js';
+import { buildScene, disposeTree, SHARED, CUTAWAY } from './builder.js';
 import { upgradeFurniture, loadInteriorHDRI } from './realistic.js';
 import { resolvePalette, roomKind } from './styles.js';
 import { adCaption } from './adcopy.js';
@@ -882,6 +882,22 @@ export class Viewer3D {
     }
   }
 
+  /** Mặt cắt dollhouse: khi đang cắt tường, hạ tường bao phía gần camera (kèm cửa sổ, rèm) để nhìn rõ bên trong */
+  updateCutaway() {
+    const d = this.controls.target.clone().sub(this.camera.position);
+    const len = d.length(), hz = Math.hypot(d.x, d.z);
+    const on = this.state.cutaway !== false && this.state.cut < 0.999 && this.mode !== 'walk' && !this.tour && !this.ptActive && hz > len * 0.25;
+    CUTAWAY.on.value = on ? 1 : 0;
+    if (on) CUTAWAY.dir.value.set(d.x / hz, d.z / hz);
+    const key = on ? `${CUTAWAY.dir.value.x.toFixed(2)},${CUTAWAY.dir.value.y.toFixed(2)}` : 'off';
+    if (key === this._cutKey && this._cutBuilt === this.built) return;
+    this._cutKey = key; this._cutBuilt = this.built;
+    for (const o of this.built.cutObjs || []) {
+      const f = o.userData.cutFace;
+      o.visible = !(on && f.x * CUTAWAY.dir.value.x + f.z * CUTAWAY.dir.value.y < -0.2);
+    }
+  }
+
   // ---------------- Vòng lặp ----------------
   tick() {
     const now = performance.now();
@@ -910,6 +926,7 @@ export class Viewer3D {
       if (t >= 1) this.fly = null;
     }
     if (this.built) this.applyDoors(1 - Math.pow(0.002, dt));
+    if (this.built) this.updateCutaway();
     if (this.tour) this.tickTour(now);
     else if (this.mode === 'walk') this.walk(dt);
     else this.controls.update();
@@ -962,6 +979,7 @@ export class Viewer3D {
     const usePT = this.ptActive && this.pt.samples >= 1;
     const render = () => {
       if (usePT) { this.pt.renderSample(); return; }
+      this.updateCutaway();
       if (this.state.ao || this.bloom.enabled) this.composer.render(); else this.renderer.render(this.scene, this.camera);
     };
     this.labelRenderer.render(this.scene, this.camera);

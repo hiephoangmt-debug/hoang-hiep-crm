@@ -10,6 +10,23 @@ import { placePeople } from './people.js';
 
 const wallMat = new THREE.MeshStandardMaterial({ color: 0xf4efe6, roughness: 0.9, map: getTexture('plaster') });
 const capMat = new THREE.MeshBasicMaterial({ color: 0x2f3237, side: THREE.BackSide });
+
+/**
+ * Mặt cắt kiểu phối cảnh bán hàng (dollhouse): tường bao phía gần camera hạ thấp còn ~1 m để thấy rõ nội thất,
+ * tường phía xa và vách trong giữ cao. Mỗi đỉnh tường mang aFace = (pháp tuyến ngoài x, z, cờ tường bao).
+ */
+export const CUTAWAY = { on: { value: 0 }, dir: { value: new THREE.Vector2(0, 1) }, low: { value: 1.0 } };
+function cutawayShader(material) {
+  const prev = material.onBeforeCompile;
+  material.onBeforeCompile = (sh, r) => {
+    prev?.(sh, r);
+    sh.uniforms.uCutOn = CUTAWAY.on; sh.uniforms.uCutDir = CUTAWAY.dir; sh.uniforms.uCutLow = CUTAWAY.low;
+    sh.vertexShader = 'attribute vec3 aFace;\nvarying vec3 vFace;\nvarying float vCutY;\n' + sh.vertexShader.replace('#include <project_vertex>', '#include <project_vertex>\nvFace = aFace;\nvCutY = (modelMatrix * vec4(transformed, 1.0)).y;');
+    sh.fragmentShader = 'uniform float uCutOn;\nuniform vec2 uCutDir;\nuniform float uCutLow;\nvarying vec3 vFace;\nvarying float vCutY;\n' + sh.fragmentShader.replace('void main() {', 'void main() {\n  if (uCutOn > 0.5 && vFace.z > 0.5 && vCutY > uCutLow && dot(vFace.xy, uCutDir) < -0.2) discard;');
+  };
+  material.customProgramCacheKey = () => 'cutaway';
+}
+
 const frameMat = new THREE.MeshStandardMaterial({ color: 0x3a3f46, roughness: 0.35, metalness: 0.6 });
 const doorFrameMat = new THREE.MeshStandardMaterial({ color: 0xe9e2d6, roughness: 0.5 });
 const doorLeafMat = new THREE.MeshStandardMaterial({ color: 0x8b5a36, roughness: 0.45, map: getTexture('woodGrain') });
@@ -25,6 +42,9 @@ const slabMat = new THREE.MeshStandardMaterial({ color: 0xbdb7ad, roughness: 0.9
 const pavingMat = new THREE.MeshStandardMaterial({ map: getTexture('paving'), roughness: 0.85 });
 const trunkMat = new THREE.MeshStandardMaterial({ color: 0x6b4a32, roughness: 0.9 });
 const crownMats = [0x4e8f3a, 0x3d7a33, 0x67a547].map((c) => new THREE.MeshStandardMaterial({ color: c, roughness: 0.85, flatShading: true }));
+
+cutawayShader(wallMat);
+cutawayShader(capMat);
 
 export const SHARED = { wallMat, capMat, glassMat, lampMat, frameMat, doorFrameMat, doorLeafMat, ceilingMat, ledMat, topCapMat };
 
@@ -196,6 +216,29 @@ function buildSlide(op, w, H, interactive) {
 }
 
 function insideAnyRoom(plan, p) { return plan.rooms.some((r) => pointInPolygon(p, r.points)); }
+const OUTDOOR = /lô gia|ban công|sân vườn|logia/i;
+function insideIndoor(plan, p) { return plan.rooms.some((r) => !OUTDOOR.test(r.name || '') && pointInPolygon(p, r.points)); }
+/** Pháp tuyến ngoài của tường bao (một phía là trong nhà, phía kia là ngoài trời / lô gia) – dùng cho mặt cắt dollhouse */
+function makeCutFace(plan) {
+  return (w, L, wh) => {
+    if (wh < 1.5) return null; // lan can, tường lửng: giữ nguyên
+    const dx = (w.b.x - w.a.x) / L, dy = (w.b.y - w.a.y) / L, nx = -dy, ny = dx;
+    let plus = 0, minus = 0;
+    for (const t of [0.2, 0.5, 0.8]) {
+      const c = { x: w.a.x + (w.b.x - w.a.x) * t, y: w.a.y + (w.b.y - w.a.y) * t }, o = w.thickness / 2 + 0.25;
+      plus += insideIndoor(plan, { x: c.x + nx * o, y: c.y + ny * o }) ? 1 : 0;
+      minus += insideIndoor(plan, { x: c.x - nx * o, y: c.y - ny * o }) ? 1 : 0;
+    }
+    if (plus >= 2 && minus <= 0) return { x: -nx, z: -ny };
+    if (minus >= 2 && plus <= 0) return { x: nx, z: ny };
+    return null;
+  };
+}
+function faceAttr(g, f) {
+  const n = g.attributes.position.count, a = new Float32Array(n * 3);
+  if (f) for (let i = 0; i < n; i++) { a[i * 3] = f.x; a[i * 3 + 1] = f.z; a[i * 3 + 2] = 1; }
+  g.setAttribute('aFace', new THREE.BufferAttribute(a, 3));
+}
 function roomAreaAt(plan, p) { const r = plan.rooms.find((x) => pointInPolygon(p, x.points)); return r ? polygonArea(r.points) : 0; }
 
 /** Tấm vải có nếp gấp (sóng sin) – mặt phẳng theo trục x, cao theo y */
@@ -355,7 +398,8 @@ export function buildScene(plan, opts = {}) {
   }
 
   // --- Tường ---
-  const geos = [], capGeos = [], skirtGeos = [];
+  const geos = [], capGeos = [], skirtGeos = [], cutObjs = [];
+  const cutFace = makeCutFace(plan);
   const opsByWall = new Map();
   for (const op of plan.openings) {
     if (!opsByWall.has(op.wallId)) opsByWall.set(op.wallId, []);
@@ -367,6 +411,7 @@ export function buildScene(plan, opts = {}) {
     const ops = opsByWall.get(w.id) || [];
     const wh = w.height || H;
     const M = wallMatrix(w);
+    const face = cutFace(w, L, wh);
     for (const [u0, u1, y0, y1] of wallPieces(w, ops, wh)) {
       if (u1 - u0 < 1e-3 || y1 - y0 < 1e-3) continue;
       // Mảng kính cong: bỏ các trụ tường mảnh giữa các tấm kính (nhìn như khung)
@@ -375,6 +420,7 @@ export function buildScene(plan, opts = {}) {
       g.translate((u0 + u1) / 2, (y0 + y1) / 2, 0);
       meterUV(g);
       g.applyMatrix4(M);
+      faceAttr(g, face);
       geos.push(g);
       if (y1 >= wh - 1e-4) {
         const cg = new THREE.BoxGeometry(u1 - u0, 0.012, w.thickness + 0.002);
@@ -408,6 +454,7 @@ export function buildScene(plan, opts = {}) {
       else { g = buildDoor(op, w, wh, interactive); doors.push(interactive); }
       g.applyMatrix4(M);
       g.position.add(new THREE.Vector3(dx * c, 0, dy * c));
+      if (face) { g.userData.cutFace = face; cutObjs.push(g); }
       interactive.center = new THREE.Vector3(w.a.x + dx * c, 1, w.a.y + dy * c);
       root.add(g);
       if (plan.settings.curtains !== false && op.type !== 'door' && op.height >= 0.9 && !op.glass && op.sill > 0.05 || (op.type === 'slide' && plan.settings.curtains !== false)) {
@@ -421,6 +468,7 @@ export function buildScene(plan, opts = {}) {
           const cur = buildCurtains(op, w, wh, side, pal);
           cur.applyMatrix4(M);
           cur.position.add(new THREE.Vector3(dx * c, 0, dy * c));
+          if (face) { cur.userData.cutFace = face; cutObjs.push(cur); }
           root.add(cur);
         }
       }
@@ -595,7 +643,7 @@ export function buildScene(plan, opts = {}) {
     }
   }
 
-  return { root, doors, roomLights, lampLights, lampShades, labels, bounds, colliders, furniture: furnitureObjs, spawn, height: H };
+  return { root, doors, roomLights, lampLights, lampShades, labels, bounds, colliders, furniture: furnitureObjs, spawn, height: H, cutObjs };
 }
 
 function escapeHtml(s) {
