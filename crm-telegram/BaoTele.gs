@@ -1,6 +1,8 @@
 /**
  * BaoTele.gs – CRM Hoàng Hiệp báo khách mới về Telegram.
  * Đặt tên riêng (bt…) để chạy song song với tệp tele.gs cũ mà không đụng nhau.
+ * Một tệp dùng chung cho mọi website trong tab Website; tin báo ghi rõ [tên web] ở dòng đầu.
+ * Tên tệp trong Apps Script đặt tuỳ ý (vd: BaoTele-tat-ca-web), không ảnh hưởng chạy.
  *
  * Tệp này chạy riêng, KHÔNG cần sửa Code.gs (cập nhật Code.gs sau này cũng không mất).
  * Cứ mỗi phút xem tab "Khách hàng":
@@ -56,7 +58,7 @@ function kiemTraKhachMoi() {
 function btMsg_(k, seen) {
   var again = seen !== undefined || k.count > 1;
   return {
-    name: k.name, phone: k.phone,
+    name: (k.site ? '[' + k.site + '] ' : '') + k.name, phone: k.phone,   // tên web hiện ngay dòng đầu tin
     interest: [k.project, k.toa ? 'Tòa ' + k.toa : '', k.note].filter(String).join(' · '),
     yeu_cau: again ? '🔁 Khách gửi lại form lần ' + k.count + (k.status ? ' · đang ở trạng thái "' + k.status + '"' : '') + (k.owner ? ' · ' + k.owner + ' phụ trách' : '') : '',
     utm_source: k.utm, utm_campaign: k.camp,
