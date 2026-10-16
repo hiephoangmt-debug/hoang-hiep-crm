@@ -148,6 +148,19 @@ def send_telegram(token, chat_id, text):
     raise TelegramError("Telegram 429: gửi quá nhanh, thử lại sau.")
 
 
+def find_chats(token):
+    """Các cuộc trò chuyện vừa nhắn cho bot (để tìm đúng Chat ID)."""
+    r = requests.get(f"https://api.telegram.org/bot{token}/getUpdates", timeout=30)
+    chats = {}
+    for u in r.json().get("result", []):
+        for key in ("message", "channel_post", "my_chat_member", "edited_message"):
+            chat = (u.get(key) or {}).get("chat")
+            if chat:
+                name = chat.get("title") or " ".join(filter(None, [chat.get("first_name"), chat.get("last_name")]))
+                chats[chat["id"]] = f"{name} ({chat.get('type')})"
+    return chats
+
+
 def format_message(item):
     tags = " ".join("#" + re.sub(r"\W+", "_", k).strip("_") for k in item["keywords"][:4])
     lines = [f"🏗 <b>{html.escape(item['title'])}</b>", f"📰 {html.escape(item['source'])}"]
@@ -212,7 +225,16 @@ def main():
             try:
                 send_telegram(token, chat_id, msg)
             except TelegramError as e:
-                sys.exit(f"LỖI GỬI TIN THỬ: {e}")
+                print(f"LỖI GỬI TIN THỬ: {e}")
+                # Chat ID sai: hỏi Telegram xem ai vừa nhắn cho bot, gửi thử tới đó.
+                chats = find_chats(token) if "chat" in str(e).lower() or "bot" in str(e).lower() else {}
+                if not chats:
+                    sys.exit("Không tìm thấy cuộc trò chuyện nào: hãy nhắn 'hello' cho bot rồi chạy lại.")
+                for cid, name in chats.items():
+                    print(f"==> Tìm thấy Chat ID: {cid}  –  {name}")
+                cid = next(iter(chats))
+                send_telegram(token, cid, msg + f"\n\n🔑 Chat ID đúng: <code>{cid}</code> – lưu vào TELEGRAM_CHAT_ID.")
+                sys.exit(f"Đã gửi tin thử tới {cid}. Cập nhật TELEGRAM_CHAT_ID = {cid} rồi chạy lại.")
             print("Đã gửi 1 tin thử.")
         return
 
