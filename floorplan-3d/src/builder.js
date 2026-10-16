@@ -13,7 +13,7 @@ const capMat = new THREE.MeshBasicMaterial({ color: 0x2f3237, side: THREE.BackSi
 
 /**
  * Mặt cắt kiểu phối cảnh bán hàng (dollhouse): tường bao phía gần camera hạ thấp còn ~1 m để thấy rõ nội thất,
- * tường phía xa và vách trong giữ cao. Mỗi đỉnh tường mang aFace = (pháp tuyến ngoài x, z, cờ tường bao).
+ * vách ngăn trong cũng hạ thấp; chỉ tường bao phía xa giữ cao làm nền. aFace = (pháp tuyến ngoài x, z, cờ: 1 tường bao, 2 vách trong).
  */
 export const CUTAWAY = { on: { value: 0 }, dir: { value: new THREE.Vector2(0, 1) }, low: { value: 1.0 } };
 function cutawayShader(material) {
@@ -22,7 +22,7 @@ function cutawayShader(material) {
     prev?.(sh, r);
     sh.uniforms.uCutOn = CUTAWAY.on; sh.uniforms.uCutDir = CUTAWAY.dir; sh.uniforms.uCutLow = CUTAWAY.low;
     sh.vertexShader = 'attribute vec3 aFace;\nvarying vec3 vFace;\nvarying float vCutY;\n' + sh.vertexShader.replace('#include <project_vertex>', '#include <project_vertex>\nvFace = aFace;\nvCutY = (modelMatrix * vec4(transformed, 1.0)).y;');
-    sh.fragmentShader = 'uniform float uCutOn;\nuniform vec2 uCutDir;\nuniform float uCutLow;\nvarying vec3 vFace;\nvarying float vCutY;\n' + sh.fragmentShader.replace('void main() {', 'void main() {\n  if (uCutOn > 0.5 && vFace.z > 0.5 && vCutY > uCutLow && dot(vFace.xy, uCutDir) < -0.2) discard;');
+    sh.fragmentShader = 'uniform float uCutOn;\nuniform vec2 uCutDir;\nuniform float uCutLow;\nvarying vec3 vFace;\nvarying float vCutY;\n' + sh.fragmentShader.replace('void main() {', 'void main() {\n  if (uCutOn > 0.5 && vCutY > uCutLow && (vFace.z > 1.5 || (vFace.z > 0.5 && dot(vFace.xy, uCutDir) < -0.2))) discard;');
   };
   material.customProgramCacheKey = () => 'cutaway';
 }
@@ -220,7 +220,9 @@ const OUTDOOR = /lô gia|ban công|sân vườn|logia/i;
 function insideIndoor(plan, p) { return plan.rooms.some((r) => !OUTDOOR.test(r.name || '') && pointInPolygon(p, r.points)); }
 /** Pháp tuyến ngoài của tường bao (một phía là trong nhà, phía kia là ngoài trời / lô gia) – dùng cho mặt cắt dollhouse */
 function makeCutFace(plan) {
-  return (w, L, wh) => {
+  const xs = plan.walls.flatMap((w) => [w.a.x, w.b.x]), ys = plan.walls.flatMap((w) => [w.a.y, w.b.y]);
+  const bb = { x0: Math.min(...xs), y0: Math.min(...ys), x1: Math.max(...xs), y1: Math.max(...ys) };
+  return (w, L, wh, ops = []) => {
     if (wh < 1.5) return null; // lan can, tường lửng: giữ nguyên
     const dx = (w.b.x - w.a.x) / L, dy = (w.b.y - w.a.y) / L, nx = -dy, ny = dx;
     let plus = 0, minus = 0;
@@ -229,14 +231,18 @@ function makeCutFace(plan) {
       plus += insideIndoor(plan, { x: c.x + nx * o, y: c.y + ny * o }) ? 1 : 0;
       minus += insideIndoor(plan, { x: c.x - nx * o, y: c.y - ny * o }) ? 1 : 0;
     }
-    if (plus >= 2 && minus <= 0) return { x: -nx, z: -ny };
-    if (minus >= 2 && plus <= 0) return { x: nx, z: ny };
-    return null;
+    // chỉ tường nằm ở vỏ ngoài cùng của căn (đi ra 1,2 m là ra khỏi khung căn) – vách hộp kỹ thuật, vách lô gia… coi như vách trong
+    const mx = (w.a.x + w.b.x) / 2, my = (w.a.y + w.b.y) / 2;
+    const reach = ops.some((o) => o.glass) ? 1.2 : 0.35; // mảng kính cong ở góc bo: cho phép xa mép khung hơn
+    const outside = (sg) => { const q = { x: mx + sg * nx * reach, y: my + sg * ny * reach }; return q.x < bb.x0 || q.x > bb.x1 || q.y < bb.y0 || q.y > bb.y1; };
+    if (plus >= 2 && minus <= 0 && outside(-1)) return { x: -nx, z: -ny };
+    if (minus >= 2 && plus <= 0 && outside(1)) return { x: nx, z: ny };
+    return { x: 0, z: 0, inner: true }; // vách ngăn trong
   };
 }
 function faceAttr(g, f) {
   const n = g.attributes.position.count, a = new Float32Array(n * 3);
-  if (f) for (let i = 0; i < n; i++) { a[i * 3] = f.x; a[i * 3 + 1] = f.z; a[i * 3 + 2] = 1; }
+  if (f) for (let i = 0; i < n; i++) { a[i * 3] = f.x; a[i * 3 + 1] = f.z; a[i * 3 + 2] = f.inner ? 2 : 1; }
   g.setAttribute('aFace', new THREE.BufferAttribute(a, 3));
 }
 function roomAreaAt(plan, p) { const r = plan.rooms.find((x) => pointInPolygon(p, x.points)); return r ? polygonArea(r.points) : 0; }
@@ -411,7 +417,7 @@ export function buildScene(plan, opts = {}) {
     const ops = opsByWall.get(w.id) || [];
     const wh = w.height || H;
     const M = wallMatrix(w);
-    const face = cutFace(w, L, wh);
+    const face = cutFace(w, L, wh, ops);
     for (const [u0, u1, y0, y1] of wallPieces(w, ops, wh)) {
       if (u1 - u0 < 1e-3 || y1 - y0 < 1e-3) continue;
       // Mảng kính cong: bỏ các trụ tường mảnh giữa các tấm kính (nhìn như khung)

@@ -894,7 +894,7 @@ export class Viewer3D {
     this._cutKey = key; this._cutBuilt = this.built;
     for (const o of this.built.cutObjs || []) {
       const f = o.userData.cutFace;
-      o.visible = !(on && f.x * CUTAWAY.dir.value.x + f.z * CUTAWAY.dir.value.y < -0.2);
+      o.visible = !(on && (f.inner || f.x * CUTAWAY.dir.value.x + f.z * CUTAWAY.dir.value.y < -0.2));
     }
   }
 

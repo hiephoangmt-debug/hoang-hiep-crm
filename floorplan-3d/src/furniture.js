@@ -91,15 +91,36 @@ const builders = {
     return g;
   },
   wardrobe(w, d, h) {
+    // Tủ quần áo full kính (như phối cảnh chủ đầu tư): khung nhôm đen, cánh + nóc kính, bên trong thấy quần áo treo, kệ, ngăn kéo
     const g = new THREE.Group();
-    g.add(box(w, h, d, M.lightWood(), 0, h / 2, 0, 0.01));
-    const n = Math.max(2, Math.round(w / 0.5));
-    for (let i = 0; i < n; i++) {
-      const dw = w / n;
-      const x = -w / 2 + dw * (i + 0.5);
-      g.add(box(dw - 0.012, h - 0.04, 0.02, M.lightWood(), x, h / 2, d / 2 + 0.01));
-      g.add(box(0.02, 0.25, 0.03, M.metal(), x + (i % 2 ? -1 : 1) * (dw / 2 - 0.05), h * 0.52, d / 2 + 0.035));
+    const fr = M.black(), t = 0.03;
+    g.add(box(w, 0.06, d, fr, 0, 0.03, 0));
+    g.add(box(w, 0.02, d - 0.04, M.lightWood(), 0, 0.07, 0));
+    g.add(box(w - 0.04, h - 0.1, 0.02, M.lightWood(), 0, h / 2, -d / 2 + 0.02)); // hậu tủ
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) g.add(box(t, h, t, fr, sx * (w / 2 - t / 2), h / 2, sz * (d / 2 - t / 2)));
+    for (const sz of [-1, 1]) g.add(box(w, t, t, fr, 0, h - t / 2, sz * (d / 2 - t / 2)));
+    for (const sx of [-1, 1]) g.add(box(t, t, d, fr, sx * (w / 2 - t / 2), h - t / 2, 0));
+    const n = Math.max(2, Math.round(w / 0.5)), dw = w / n;
+    for (let i = 1; i < n; i++) g.add(box(0.02, h - 0.06, 0.03, fr, -w / 2 + dw * i, h / 2, d / 2 - 0.015)); // nẹp cánh
+    for (let i = 1; i < Math.ceil(n / 2); i++) g.add(box(0.018, h - 0.12, d - 0.06, M.lightWood(), -w / 2 + (w / Math.ceil(n / 2)) * i, h / 2, 0)); // vách ngăn
+    const glass = M.glass();
+    g.add(box(w - 0.04, h - 0.08, 0.008, glass, 0, h / 2, d / 2 - 0.01));
+    g.add(box(w - 0.04, 0.008, d - 0.04, glass, 0, h - 0.01, 0));
+    for (const sx of [-1, 1]) g.add(box(0.008, h - 0.08, d - 0.04, glass, sx * (w / 2 - 0.01), h / 2, 0));
+    // thanh treo + quần áo, kệ trên, ngăn kéo dưới
+    const railY = h - 0.38;
+    const rail = cyl(0.012, 0.012, w - 0.08, M.steel(), 0, railY, 0, 8);
+    rail.rotation.z = Math.PI / 2;
+    g.add(rail);
+    g.add(box(w - 0.06, 0.02, d - 0.06, M.lightWood(), 0, h - 0.3, 0));
+    const cols = [0xe9e4da, 0x2f3a4a, 0xb9c4cc, 0x8a6f58, 0xf2efe9, 0x55636e, 0xc8b49a];
+    const k = Math.max(4, Math.floor((w - 0.12) / 0.07));
+    for (let i = 0; i < k; i++) {
+      const x = -w / 2 + 0.08 + ((w - 0.16) / (k - 1)) * i, len = 0.75 + ((i * 37) % 5) * 0.08;
+      g.add(box(0.025, len, d * 0.7, mat(cols[i % cols.length], { roughness: 0.9 }), x, railY - len / 2 - 0.03, 0));
     }
+    for (let j = 0; j < 2; j++) g.add(box(w - 0.08, 0.2, d - 0.08, M.lightWood(), 0, 0.2 + j * 0.23, 0.0));
+    for (let i = 0; i < 3; i++) g.add(box(0.12, 0.08, 0.2, mat([0xd8cfc0, 0x6f7d88, 0xa48b6d][i], { roughness: 0.9 }), -w / 2 + 0.2 + i * 0.16, h - 0.24, 0));
     return g;
   },
   sofa(w, d) {
