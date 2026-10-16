@@ -235,10 +235,46 @@
 
   /* ---------- Ảnh & clip ---------- */
 
+  function decodeAB(ctx, ab) {
+    return new Promise(function (res, rej) {
+      var p = ctx.decodeAudioData(ab, res, rej);
+      if (p && p.then) p.then(res, rej);
+    });
+  }
+
+  // Giải mã tiếng để phân tích ở 16 kHz: đủ cho nhận giọng nói, tốn ít bộ nhớ hơn 3 lần (quan trọng trên iPhone)
+  var lightCtx;
+  function analysisCtx() {
+    if (lightCtx === undefined) {
+      try { lightCtx = new (window.OfflineAudioContext || window.webkitOfflineAudioContext)(1, 16000, 16000); } catch (e) { lightCtx = null; }
+    }
+    return lightCtx || getAudioCtx();
+  }
+
+  /**
+   * Lấy tiếng của clip quay để phân tích. Với MP4/MOV: chỉ tách phần tiếng (vài MB) thay vì đọc cả file video
+   * (video dài trên iPhone nặng hàng GB, đọc hết sẽ hết bộ nhớ và mất tiếng).
+   */
+  function decodeClipAudio(file) {
+    var full = function () {
+      return file.arrayBuffer().then(function (ab) {
+        return decodeAB(analysisCtx(), ab).catch(function () { return decodeAB(getAudioCtx(), ab); });
+      });
+    };
+    var isMp4 = /\.(mp4|mov|m4v|3gp)$/i.test(file.name || '') || /mp4|quicktime/.test(file.type || '');
+    if (!isMp4 || !window.BdsMp4Audio) return full();
+    return window.BdsMp4Audio.extract(file).then(function (blob) {
+      if (!blob) return full();
+      return blob.arrayBuffer().then(function (ab) {
+        return decodeAB(analysisCtx(), ab.slice(0)).catch(function () { return decodeAB(getAudioCtx(), ab); });
+      });
+    }).catch(function () { return full(); });
+  }
+
   /** Phân tích âm thanh clip: có tiếng không, và cắt khoảng lặng đầu/cuối. */
   function analyzeAudio(item, blob) {
     item.analyzing = true;
-    return blob.arrayBuffer().then(function (ab) { return getAudioCtx().decodeAudioData(ab); }).then(function (buf) {
+    return decodeClipAudio(blob).then(function (buf) {
       var sr = buf.sampleRate, win = Math.max(1, Math.floor(sr * 0.05)), n = Math.floor(buf.length / win);
       var chans = [];
       for (var c = 0; c < buf.numberOfChannels; c++) chans.push(buf.getChannelData(c));
@@ -431,7 +467,7 @@
       if (!item || !item.isVideo) throw new Error('Không đọc được video này. Hãy thử file MP4.');
       base = item;
       autoStatus('Đang quét giọng nói…');
-      return f.arrayBuffer().then(function (ab) { return getAudioCtx().decodeAudioData(ab); });
+      return decodeClipAudio(f);
     }).then(function (b) {
       buf = b;
       res = window.BdsAutoCut.findSpeech(buf, { minPause: minPause });
@@ -532,7 +568,7 @@
     var useAsr = opts.asr != null ? opts.asr : $('assembleAsr').checked;
     var fastAsr = (opts.asrMode || 'fast') === 'fast';
     var progress = opts.progress || assembleProgress;
-    var clips = [], broll = [], failed = [], noAudio = [];
+    var clips = [], broll = [], failed = [], noAudio = [], unread = [];
     $('assembleReport').innerHTML = '';
     var steps = videos.length * (useAsr ? 2 : 1) + images.length + 1, done = 0;
     var tick = function (label) { done++; progress(Math.min(1, done / steps), label); };
@@ -547,7 +583,7 @@
         progress(done / steps, 'Quét giọng nói clip ' + (i + 1) + '/' + videos.length + ': ' + f.name);
         return createMedia(f, f.name, { skipAnalyze: true, quiet: true }).then(function (item) {
           if (!item) { failed.push(f.name); return null; }
-          return f.arrayBuffer().then(function (ab) { return getAudioCtx().decodeAudioData(ab); })
+          return decodeClipAudio(f)
             .then(function (buf) { return { item: item, buf: buf, sp: AC.findSpeech(buf, { minPause: minPause }) }; })
             .catch(function () { noAudio.push(f.name); return { item: item, buf: null, sp: null }; });
         }).then(function (r) {
@@ -555,6 +591,13 @@
           if (!r) return;
           var role = opts.roleOf ? opts.roleOf(f) : null;
           var talkClip = role === 'talk' ? !!(r.sp && r.sp.segments.length) : (role === 'broll' ? false : looksLikeTalk(f, r.sp));
+          if (role === 'talk' && !r.buf && r.item.dur > 1) {
+            // Video quay (ô 1) nhưng không tách được tiếng để phân tích: vẫn dùng nguyên clip, giữ tiếng gốc
+            clips.push({ file: f, item: r.item, buf: null, segments: [[0, r.item.dur]], voiceGain: 1, duration: r.item.dur, speed: 1, rate: 0 });
+            unread.push(f.name);
+            noAudio = noAudio.filter(function (n) { return n !== f.name; });
+            return;
+          }
           if (role === 'talk' && !talkClip) noAudio.push(f.name);
           if (role === 'broll') noAudio = noAudio.filter(function (n) { return n !== f.name; }); // tư liệu không cần tiếng
           if (talkClip) clips.push({ file: f, item: r.item, buf: r.buf, segments: r.sp.segments, voiceGain: r.sp.voiceGain, duration: r.sp.duration, speed: r.sp.speed, rate: r.sp.rate });
@@ -574,6 +617,7 @@
       var c2 = Promise.resolve();
       clips.forEach(function (c, i) {
         c2 = c2.then(function () {
+          if (!c.buf) return;
           return AC.transcribe(c.buf, function (msg) { progress(done / steps, 'Clip ' + (i + 1) + '/' + clips.length + ': ' + msg); }, { maxSec: fastAsr ? 25 : 0 })
             .then(function (w) { c.words = w; tick('Đã chép lời ' + c.file.name); });
         });
@@ -604,10 +648,16 @@
             return { clip: c, segs: c.segments, start: c.segments[0][0], end: c.segments[c.segments.length - 1][1],
               text: (c.words || []).map(function (w) { return w.w; }).join(' '), partial: true };
           });
-        } else clips.forEach(function (c) { utts = utts.concat(AC.utterances(c, 0.7)); });
-        var m = AC.matchUtterances(utts, scenes);
+        } else clips.forEach(function (c) { if (c.buf) utts = utts.concat(AC.utterances(c, 0.7)); });
+        var m = AC.matchUtterances(utts.filter(function (u) { return u.clip.buf; }), scenes);
         perScene = m.scenes;
         dropped = m.dropped;
+        // Clip không phân tích được tiếng: đặt vào cảnh còn trống đầu tiên
+        clips.forEach(function (c) {
+          if (c.buf) return;
+          var si = perScene.findIndex(function (l, k) { return !l.length && (scenes[k].text || '').trim(); });
+          perScene[si >= 0 ? si : scenes.length - 1].push({ clip: c, segs: c.segments, start: 0, end: c.duration });
+        });
       } else {
         var spoken = scenes.filter(function (sc) { return (sc.text || '').trim(); }).length;
         if (clips.length >= spoken) {
@@ -625,7 +675,8 @@
           var totalW = weights.reduce(function (a, b) { return a + b; }, 0) || 1;
           var cum = 0;
           all.forEach(function (u) {
-            var d = durOf(u), frac = (cum + d / 2) / totalDur, acc = 0, k = 0;
+            // Clip chưa tách được câu (nguyên khối): xếp theo điểm bắt đầu
+            var d = durOf(u), frac = (u.clip.buf ? cum + d / 2 : cum + 0.01) / totalDur, acc = 0, k = 0;
             for (; k < scenes.length; k++) { acc += weights[k] / totalW; if (frac <= acc + 1e-9 && weights[k]) break; }
             perScene[Math.min(k, scenes.length - 1)].push(u);
             cum += d;
@@ -688,6 +739,7 @@
       });
       if (failed.length) lines.push('<div class="warn">⚠️ Không mở được ' + failed.length + ' video: ' + esc(failed.join(', ')) +
         '. Thường do video iPhone định dạng HEVC. Cách sửa: dùng Chrome bản mới, hoặc trên iPhone vào Cài đặt → Camera → Định dạng → chọn “Tương thích nhất” rồi quay lại.</div>');
+      if (unread.length) lines.push('<div class="warn">⚠️ Không phân tích được tiếng của: ' + esc(unread.join(', ')) + '. Đã dùng nguyên clip (giữ tiếng gốc, chưa cắt đoạn trùng). Nếu clip quá dài, hãy cắt nhỏ hoặc xuất lại sang MP4.</div>');
       if (noAudio.length) lines.push('<div class="muted">🔇 Không có tiếng (dùng làm cảnh quay phủ lên): ' + esc(noAudio.filter(function (x, i) { return noAudio.indexOf(x) === i; }).join(', ')) + '. Nếu đây là clip có người nói, hãy đổi sang file MP4.</div>');
       var restarts = 0;
       perScene.forEach(function (l) { l.forEach(function (u) { if (u.restarted) restarts++; }); });
