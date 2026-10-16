@@ -543,12 +543,14 @@ function loop(){
   renderer.render(scene,camera);
   renderer.autoClear=false; renderer.render(hud,hudCam); renderer.autoClear=true;
   var W=innerWidth,H=innerHeight;
-  var placed=[];
+  var placed=[], tr=[1e9,1e9,-1e9,-1e9];
+  for(var ci=0;ci<8;ci++){ v.set(ci&1?11:-33, ci&2?TOP+4:0, ci&4?28:-28); T.localToWorld(v); v.project(camera); if(v.z<1){ var sx=(v.x+1)/2*W, sy=(1-v.y)/2*H; tr[0]=Math.min(tr[0],sx); tr[1]=Math.min(tr[1],sy); tr[2]=Math.max(tr[2],sx); tr[3]=Math.max(tr[3],sy); } }
   for(var j=0;j<LBL.length;j++){ var L=LBL[j]; v.copy(L.p); if(L.obj!==scene) L.obj.localToWorld(v); v.project(camera);
     var vis=v.z<1&&v.x>-1.1&&v.x<1.1&&v.y>-1.1&&v.y<1.1 && !(mode==='view'&&L.cls==='main');
     if(vis){ var px=(v.x+1)/2*W, py=(1-v.y)/2*H, w=L.w||(L.w=L.e.offsetWidth||L.e.textContent.length*7), h=L.h||(L.h=L.e.offsetHeight||22);
       var r=[px-w/2-4,py-h-3,px+w/2+4,py+3];
-      for(var k=0;k<placed.length;k++){ var q=placed[k]; if(r[0]<q[2]&&r[2]>q[0]&&r[1]<q[3]&&r[3]>q[1]){ vis=false; break; } }
+      if(L.cls!=='main'&&mode!=='view'&&r[0]<tr[2]&&r[2]>tr[0]&&r[1]<tr[3]&&r[3]>tr[1]) vis=false;
+      for(var k=0;vis&&k<placed.length;k++){ var q=placed[k]; if(r[0]<q[2]&&r[2]>q[0]&&r[1]<q[3]&&r[3]>q[1]){ vis=false; break; } }
       if(vis){ placed.push(r); L.e.style.left=px+'px'; L.e.style.top=py+'px'; } }
     L.e.style.display=vis?'block':'none'; }
 }

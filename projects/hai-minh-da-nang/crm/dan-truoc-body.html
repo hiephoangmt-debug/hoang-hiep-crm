@@ -311,6 +311,19 @@
   setTimeout(go,4000);
 })();
 </script>
+<!-- Tuân thủ: đổi chữ "Giữ suất" (chưa mở bán, không giữ chỗ) và ẩn đồng hồ đếm ngược -->
+<script>
+(function(){
+  function run(){
+    var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null), n, list=[];
+    while((n=w.nextNode())){ if(/giữ\s*suất/i.test(n.nodeValue)) list.push(n); }
+    list.forEach(function(t){ t.nodeValue=t.nodeValue.replace(/GIỮ\s*SUẤT/g,'NHẬN THÔNG TIN').replace(/Giữ\s*suất/g,'Nhận thông tin').replace(/giữ\s*suất/g,'nhận thông tin'); });
+    document.querySelectorAll('.ladi-countdown').forEach(function(c){ var el=c.closest('[id^="COUNTDOWN"]')||c; el.style.display='none'; });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run); else run();
+  setTimeout(run,1500);
+})();
+</script>
 <!-- Mô hình 4D + trắc nghiệm + máy tính dòng tiền (tự chèn sau sơ đồ vị trí) -->
 <script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@0569cdf3b07d7ef7203fe159401ab75e13117414/projects/hai-minh-da-nang/landing/4d/hai-minh-4d-embed.js" defer></script>
 <script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@0569cdf3b07d7ef7203fe159401ab75e13117414/projects/hai-minh-da-nang/landing/tuong-tac/hai-minh-tuong-tac.js" defer></script>

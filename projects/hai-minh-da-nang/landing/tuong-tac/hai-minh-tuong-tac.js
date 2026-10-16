@@ -5,30 +5,30 @@
   if (window.__hmx) return; window.__hmx = 1;
   var ZALO = 'https://zalo.me/0904567009';
 
-  var css = '#hmx{background:#f4f6fa;padding:34px 0 30px;font-family:inherit;color:#13233d;clear:both}'
-    + '#hmx *{box-sizing:border-box}#hmx button,#hmx input{font-family:inherit}#hmx .w{max-width:1140px;margin:0 auto;padding:0 16px}'
-    + '#hmx .k{color:#e8571c;font-size:12px;letter-spacing:.14em;font-weight:700;text-transform:uppercase}'
+  var css = '#hmx{position:relative;z-index:5;isolation:isolate;display:block;visibility:visible;opacity:1;background:#f4f6fa;padding:34px 0 30px;font-family:inherit;color:#13233d;clear:both}'
+    + '#hmx *{box-sizing:border-box}#hmx button,#hmx input{font-family:inherit}#hmx .hx-w{max-width:1140px;margin:0 auto;padding:0 16px}'
+    + '#hmx .hx-k{color:#e8571c;font-size:12px;letter-spacing:.14em;font-weight:700;text-transform:uppercase}'
     + '#hmx h2{font-size:24px;line-height:1.25;margin:6px 0 8px;font-weight:800;color:#0f1d33}'
     + '#hmx p{margin:0 0 10px;line-height:1.55;font-size:15px}'
-    + '#hmx .g{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px}'
-    + '#hmx .c{background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 14px rgba(15,29,51,.08)}'
+    + '#hmx .hx-g{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px}'
+    + '#hmx .hx-c{background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 14px rgba(15,29,51,.08)}'
     + '#hmx h3{font-size:19px;margin:0 0 12px;color:#0f1d33;font-weight:800}'
-    + '#hmx .q{margin:0 0 14px}#hmx .q b{display:block;font-size:15px;margin-bottom:8px}'
-    + '#hmx .o{display:inline-block;margin:0 6px 8px 0;padding:9px 14px;border:1.5px solid #c9d3e2;border-radius:22px;background:#fff;color:#13233d;font-size:14px;cursor:pointer}'
-    + '#hmx .o[aria-pressed="true"]{background:#0f1d33;border-color:#0f1d33;color:#fff}'
-    + '#hmx .r{background:#fff4ee;border:1.5px solid #ffc9ad;border-radius:12px;padding:14px;margin:6px 0 12px;font-size:15px;line-height:1.5}'
-    + '#hmx .btn{display:block;width:100%;padding:14px 16px;border:0;border-radius:26px;background:#ff6a2b;color:#fff;font-weight:800;font-size:16px;cursor:pointer;text-align:center;text-decoration:none}'
-    + '#hmx .btn.z{background:#0068ff;margin-top:8px}#hmx .btn[disabled]{opacity:.45;cursor:default}'
-    + '#hmx .sl{margin:0 0 14px}#hmx .sl label{display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px}#hmx .sl output{font-weight:800;color:#0f1d33}'
+    + '#hmx .hx-q{margin:0 0 14px}#hmx .hx-q b{display:block;font-size:15px;margin-bottom:8px}'
+    + '#hmx .hx-o{display:inline-block;margin:0 6px 8px 0;padding:9px 14px;border:1.5px solid #c9d3e2;border-radius:22px;background:#fff;color:#13233d;font-size:14px;cursor:pointer}'
+    + '#hmx .hx-o[aria-pressed="true"]{background:#0f1d33;border-color:#0f1d33;color:#fff}'
+    + '#hmx .hx-r{background:#fff4ee;border:1.5px solid #ffc9ad;border-radius:12px;padding:14px;margin:6px 0 12px;font-size:15px;line-height:1.5}'
+    + '#hmx .hx-btn{display:block;width:100%;padding:14px 16px;border:0;border-radius:26px;background:#ff6a2b;color:#fff;font-weight:800;font-size:16px;cursor:pointer;text-align:center;text-decoration:none}'
+    + '#hmx .hx-btn.hx-z{background:#0068ff;margin-top:8px}#hmx .hx-btn[disabled]{opacity:.45;cursor:default}'
+    + '#hmx .hx-sl{margin:0 0 14px}#hmx .hx-sl label{display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px}#hmx .hx-sl output{font-weight:800;color:#0f1d33}'
     + '#hmx input[type=range]{width:100%;accent-color:#ff6a2b}'
-    + '#hmx .big{font-size:28px;font-weight:800;color:#e8571c;line-height:1.2}#hmx .sm{font-size:12.5px;color:#5b6a80;line-height:1.5}'
-    + '#hmx .f{display:none;margin-top:10px}#hmx .f.on{display:block}'
-    + '#hmx .f input{width:100%;padding:12px 14px;border:1.5px solid #c9d3e2;border-radius:10px;font-size:16px;margin-bottom:8px;font-family:inherit}'
-    + '#hmx .ok{display:none;background:#e9f7ee;border-radius:10px;padding:12px;font-size:15px;margin-top:8px}'
-    + '#hmx .u{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:16px}'
-    + '#hmx .u div{background:#fff;border-radius:12px;padding:14px;box-shadow:0 2px 10px rgba(15,29,51,.07);font-size:14px;line-height:1.45}'
-    + '#hmx .u b{display:block;font-size:17px;color:#0f1d33}#hmx .u i{font-style:normal;color:#e8571c;font-weight:700}'
-    + '@media(max-width:860px){#hmx .g{grid-template-columns:1fr}#hmx .u{grid-template-columns:1fr 1fr}#hmx h2{font-size:21px}}';
+    + '#hmx .hx-big{font-size:28px;font-weight:800;color:#e8571c;line-height:1.2}#hmx .hx-sm{font-size:12.5px;color:#5b6a80;line-height:1.5}'
+    + '#hmx .hx-f{display:none;margin-top:10px}#hmx .hx-f.hx-on{display:block}'
+    + '#hmx .hx-f input{width:100%;padding:12px 14px;border:1.5px solid #c9d3e2;border-radius:10px;font-size:16px;margin-bottom:8px;font-family:inherit}'
+    + '#hmx .hx-ok{display:none;background:#e9f7ee;border-radius:10px;padding:12px;font-size:15px;margin-top:8px}'
+    + '#hmx .hx-u{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:16px}'
+    + '#hmx .hx-u div{background:#fff;border-radius:12px;padding:14px;box-shadow:0 2px 10px rgba(15,29,51,.07);font-size:14px;line-height:1.45}'
+    + '#hmx .hx-u b{display:block;font-size:17px;color:#0f1d33}#hmx .hx-u i{font-style:normal;color:#e8571c;font-weight:700}'
+    + '@media(max-width:860px){#hmx .hx-g{grid-template-columns:1fr}#hmx .hx-u{grid-template-columns:1fr 1fr}#hmx h2{font-size:21px}}';
 
   var Q = [
     { id: 'muc', t: 'Anh/chị mua để:', o: ['Nghỉ dưỡng gia đình', 'Cho thuê', 'Cả hai'] },
@@ -38,39 +38,39 @@
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function form(id, label) {
-    return '<div class="f" id="' + id + '"><input type="text" name="ten" placeholder="Họ tên" autocomplete="name">'
+    return '<div class="hx-f" id="' + id + '"><input type="text" name="ten" placeholder="Họ tên" autocomplete="name">'
       + '<input type="tel" name="sdt" placeholder="Số điện thoại / Zalo" autocomplete="tel" inputmode="tel">'
-      + '<button type="button" class="btn" data-send>' + label + '</button>'
-      + '<div class="sm" style="margin-top:6px">Chuyên viên Hoàng Hiệp nhắn Zalo cho anh/chị. Không thu tiền giữ chỗ, đặt cọc.</div>'
-      + '<div class="ok">Cảm ơn anh/chị! Chuyên viên Hoàng Hiệp sẽ nhắn Zalo sớm. Cần gấp: <a href="tel:0904567009">0904 567 009</a></div></div>';
+      + '<button type="button" class="hx-btn" data-send>' + label + '</button>'
+      + '<div class="hx-sm" style="margin-top:6px">Chuyên viên Hoàng Hiệp nhắn Zalo cho anh/chị. Không thu tiền giữ chỗ, đặt cọc.</div>'
+      + '<div class="hx-ok">Cảm ơn anh/chị! Chuyên viên Hoàng Hiệp sẽ nhắn Zalo sớm. Cần gấp: <a href="tel:0904567009">0904 567 009</a></div></div>';
   }
 
   function html() {
     var q = Q.map(function (x) {
-      return '<div class="q" data-q="' + x.id + '"><b>' + x.t + '</b>' + x.o.map(function (o) {
-        return '<button type="button" class="o" aria-pressed="false">' + o + '</button>'; }).join('') + '</div>';
+      return '<div class="hx-q" data-q="' + x.id + '"><b>' + x.t + '</b>' + x.o.map(function (o) {
+        return '<button type="button" class="hx-o" aria-pressed="false">' + o + '</button>'; }).join('') + '</div>';
     }).join('');
-    return '<div class="w"><div class="k">Danh sách ưu tiên trước ngày ra mắt · dự kiến 11/2026</div>'
+    return '<div class="hx-w"><div class="hx-k">Danh sách ưu tiên trước ngày ra mắt · dự kiến 11/2026</div>'
       + '<h2>5 dòng căn, dòng nào hợp với anh/chị?</h2>'
       + '<p>Trả lời 3 câu để xem gợi ý dòng căn, hoặc tự kéo thử dòng tiền cho thuê. Bảng giá và mặt bằng gửi qua Zalo ngay khi chủ đầu tư công bố.</p>'
-      + '<div class="g"><div class="c" id="hmx-quiz"><h3>Căn nào hợp với anh/chị?</h3>' + q
-      + '<div class="r" id="hmx-res" hidden></div>'
-      + '<button type="button" class="btn" id="hmx-qgo" disabled>Gửi tôi danh sách căn phù hợp</button>' + form('hmx-qf', 'Gửi tôi danh sách căn phù hợp') + '</div>'
-      + '<div class="c" id="hmx-calc"><h3>Tính dòng tiền cho thuê (minh họa)</h3>'
-      + '<div class="sl"><label>Giá thuê mỗi đêm <output id="hmx-o1"></output></label><input type="range" id="hmx-s1" min="800000" max="4000000" step="50000" value="1500000"></div>'
-      + '<div class="sl"><label>Công suất phòng <output id="hmx-o2"></output></label><input type="range" id="hmx-s2" min="30" max="90" step="1" value="60"></div>'
-      + '<div class="sl"><label>Số đêm gia đình tự ở mỗi năm <output id="hmx-o3"></output></label><input type="range" id="hmx-s3" min="0" max="60" step="1" value="15"></div>'
-      + '<div class="sm">Doanh thu phòng minh họa mỗi năm</div><div class="big" id="hmx-y"></div><div id="hmx-m" style="font-size:15px;margin:2px 0 8px"></div>'
-      + '<div class="sm" style="margin-bottom:12px">Chỉ là ví dụ minh họa, không phải cam kết. Chưa trừ phí vận hành, thuế và tỷ lệ chia doanh thu (chủ đầu tư chưa công bố). Giá phòng ven biển trục Võ Nguyên Giáp phổ biến khoảng 1–3 triệu/đêm (giá công khai trên nền tảng đặt phòng).</div>'
-      + '<button type="button" class="btn" id="hmx-cgo">Nhận bảng tính chi tiết theo căn thật qua Zalo</button>' + form('hmx-cf', 'Gửi tôi bảng tính chi tiết')
-      + '<a class="btn z" href="' + ZALO + '" target="_blank" rel="noopener">Nhắn Zalo 0904 567 009</a></div></div>'
-      + '<div class="u">'
+      + '<div class="hx-g"><div class="hx-c" id="hmx-quiz"><h3>Căn nào hợp với anh/chị?</h3>' + q
+      + '<div class="hx-r" id="hmx-res" hidden></div>'
+      + '<button type="button" class="hx-btn" id="hmx-qgo" disabled>Gửi tôi danh sách căn phù hợp</button>' + form('hmx-qf', 'Gửi tôi danh sách căn phù hợp') + '</div>'
+      + '<div class="hx-c" id="hmx-calc"><h3>Tính dòng tiền cho thuê (minh họa)</h3>'
+      + '<div class="hx-sl"><label>Giá thuê mỗi đêm <output id="hmx-o1"></output></label><input type="range" id="hmx-s1" min="800000" max="4000000" step="50000" value="1500000"></div>'
+      + '<div class="hx-sl"><label>Công suất phòng <output id="hmx-o2"></output></label><input type="range" id="hmx-s2" min="30" max="90" step="1" value="60"></div>'
+      + '<div class="hx-sl"><label>Số đêm gia đình tự ở mỗi năm <output id="hmx-o3"></output></label><input type="range" id="hmx-s3" min="0" max="60" step="1" value="15"></div>'
+      + '<div class="hx-sm">Doanh thu phòng minh họa mỗi năm</div><div class="hx-big" id="hmx-y"></div><div id="hmx-m" style="font-size:15px;margin:2px 0 8px"></div>'
+      + '<div class="hx-sm" style="margin-bottom:12px">Chỉ là ví dụ minh họa, không phải cam kết. Chưa trừ phí vận hành, thuế và tỷ lệ chia doanh thu (chủ đầu tư chưa công bố). Giá phòng ven biển trục Võ Nguyên Giáp phổ biến khoảng 1–3 triệu/đêm (giá công khai trên nền tảng đặt phòng).</div>'
+      + '<button type="button" class="hx-btn" id="hmx-cgo">Nhận bảng tính chi tiết theo căn thật qua Zalo</button>' + form('hmx-cf', 'Gửi tôi bảng tính chi tiết')
+      + '<a class="hx-btn hx-z" href="' + ZALO + '" target="_blank" rel="noopener">Nhắn Zalo 0904 567 009</a></div></div>'
+      + '<div class="hx-u">'
       + '<div><b>1PN</b>47,4 m²<br><i>Giá: gửi qua Zalo</i></div>'
       + '<div><b>2PN</b>66,5–68,8 m²<br><i>Giá: gửi qua Zalo</i></div>'
       + '<div><b>2PN+1</b>76,2–76,9 m²<br><i>Giá: gửi qua Zalo</i></div>'
       + '<div><b>3PN</b>78,6–80 m²<br><i>Giá: gửi qua Zalo</i></div>'
       + '<div><b>Dual Key</b>101 m², 2 phần cửa riêng<br><i>Giá: gửi qua Zalo</i></div></div>'
-      + '<p class="sm" style="margin-top:10px">Diện tích theo thông tin dự án hiện có; giá, mặt bằng chi tiết và chính sách do chủ đầu tư công bố khi ra mắt.</p></div>';
+      + '<p class="hx-sm" style="margin-top:10px">Diện tích theo thông tin dự án hiện có; giá, mặt bằng chi tiết và chính sách do chủ đầu tư công bố khi ra mắt.</p></div>';
   }
 
   function vnd(n) { return n >= 1e9 ? (n / 1e9).toFixed(2).replace('.', ',') + ' tỷ' : Math.round(n / 1e6).toLocaleString('vi-VN') + ' triệu'; }
@@ -82,7 +82,7 @@
     else if (a.muc === 'Cả hai') { t = 'Dual Key (101 m²) hoặc 2PN+1 (76,2–76,9 m²)'; why = 'vừa có chỗ cho gia đình, vừa linh hoạt cho thuê'; }
     else { t = '2PN+1 (76,2–76,9 m²)'; why = 'thêm phòng linh hoạt cho gia đình nghỉ dưỡng'; }
     var pos = a.thich === 'View bình minh trên biển' ? ', ưu tiên căn mặt Đông nhìn về biển (đón bình minh)' : a.thich === 'Tầng cao' ? ', ưu tiên tầng cao' : '';
-    return { text: 'Dòng căn gợi ý: <b>' + t + '</b>' + pos + ' – ' + why + '.<br><span class="sm">Ngân sách ' + esc(a.ns.toLowerCase()) + ' sẽ được đối chiếu ngay khi có bảng giá. Gợi ý theo câu trả lời, chưa phải chọn căn cụ thể.</span>', plain: t + pos };
+    return { text: 'Dòng căn gợi ý: <b>' + t + '</b>' + pos + ' – ' + why + '.<br><span class="hx-sm">Ngân sách ' + esc(a.ns.toLowerCase()) + ' sẽ được đối chiếu ngay khi có bảng giá. Gợi ý theo câu trả lời, chưa phải chọn căn cụ thể.</span>', plain: t + pos };
   }
 
   function phoneOk(p) { p = String(p || '').replace(/[^\d+]/g, '').replace(/^\+?84/, '0'); return /^0\d{9}$/.test(p) ? p : ''; }
@@ -95,7 +95,7 @@
       var d = { name: ten || 'Khách web', phone: sdt, message: msgFn(), source: tag };
       try { if (window.crmLead) window.crmLead(d); } catch (e) {}
       try { if (window.gtag) window.gtag('event', 'generate_lead', { method: tag }); } catch (e) {}
-      btn.disabled = true; box.querySelector('.ok').style.display = 'block';
+      btn.disabled = true; box.querySelector('.hx-ok').style.display = 'block';
     };
   }
 
@@ -111,16 +111,16 @@
 
     // quiz
     var ans = {};
-    root.querySelectorAll('#hmx-quiz .q').forEach(function (q) {
-      q.querySelectorAll('.o').forEach(function (b) {
+    root.querySelectorAll('#hmx-quiz .hx-q').forEach(function (q) {
+      q.querySelectorAll('.hx-o').forEach(function (b) {
         b.onclick = function () {
-          q.querySelectorAll('.o').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+          q.querySelectorAll('.hx-o').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
           b.setAttribute('aria-pressed', 'true'); ans[q.getAttribute('data-q')] = b.textContent;
           if (ans.muc && ans.ns && ans.thich) { var r = suggest(ans), el = document.getElementById('hmx-res'); el.innerHTML = r.text; el.hidden = false; document.getElementById('hmx-qgo').disabled = false; }
         };
       });
     });
-    document.getElementById('hmx-qgo').onclick = function () { this.style.display = 'none'; document.getElementById('hmx-qf').classList.add('on'); document.querySelector('#hmx-qf [name=ten]').focus(); };
+    document.getElementById('hmx-qgo').onclick = function () { this.style.display = 'none'; document.getElementById('hmx-qf').classList.add('hx-on'); document.querySelector('#hmx-qf [name=ten]').focus(); };
     wireForm(document.getElementById('hmx-qf'), function () {
       return '[Trắc nghiệm] Mua để: ' + ans.muc + ' · Ngân sách: ' + ans.ns + ' · Thích: ' + ans.thich + ' → ' + suggest(ans).plain;
     }, 'trac-nghiem');
@@ -137,7 +137,7 @@
       return { p: p, occ: s2.value, own: own, y: y };
     }
     [s1, s2, s3].forEach(function (s) { s.oninput = calc; }); calc();
-    document.getElementById('hmx-cgo').onclick = function () { this.style.display = 'none'; document.getElementById('hmx-cf').classList.add('on'); document.querySelector('#hmx-cf [name=ten]').focus(); };
+    document.getElementById('hmx-cgo').onclick = function () { this.style.display = 'none'; document.getElementById('hmx-cf').classList.add('hx-on'); document.querySelector('#hmx-cf [name=ten]').focus(); };
     wireForm(document.getElementById('hmx-cf'), function () {
       var c = calc(); return '[Dòng tiền] Giá/đêm ' + (c.p / 1e6) + ' triệu · công suất ' + c.occ + '% · tự ở ' + c.own + ' đêm → doanh thu minh họa ≈ ' + vnd(c.y) + '/năm';
     }, 'may-tinh-dong-tien');
