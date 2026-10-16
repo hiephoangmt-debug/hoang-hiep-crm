@@ -434,11 +434,17 @@ function crmBootstrap(token) {
     if (changed) crmWriteAll_('DuAn', projects);
   });
   var me = crmMe_(token);
-  if (me.role === 'admin') { try { crmEnsureEvidenceFolders_(); } catch (e) { /* không có quyền tạo thư mục */ } }
   var out = { schema: CRM_TABLES, sheetUrl: me.role === 'admin' ? crmBook_().getUrl() : '', user: crmUser_(), me: me };
   try { out.appUrl = ScriptApp.getService().getUrl(); } catch (e) { out.appUrl = ''; }
   Object.keys(CRM_TABLES).forEach(function (t) { out[t] = crmPublic_(t, crmRows_(t)); });
   return out;
+}
+
+/** Tạo sẵn thư mục dự án trong các thư mục kênh – gọi ngầm sau khi CRM đã mở (không làm chậm lúc tải). */
+function crmPrepareFolders(token) {
+  if (crmMe_(token).role !== 'admin') return false;
+  crmEnsureEvidenceFolders_();
+  return true;
 }
 
 function crmList(name) {

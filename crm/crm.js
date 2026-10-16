@@ -1793,6 +1793,8 @@
     }
     $("loading").hidden = true;
     $("app").hidden = false;
+    // tạo sẵn thư mục dự án trong các thư mục kênh (Khối Collection) – chạy ngầm, lỗi thì bỏ qua
+    if (isAdmin()) gas("crmPrepareFolders", TOKEN).catch((e) => console.warn("crmPrepareFolders", e));
     $("who").innerHTML = (isAdmin() ? `<b>Quản trị</b>${S.me.owner ? " · " + esc(S.user || "") : " · " + esc(myName())}` : `<b>${esc(myName())}</b> · nhân viên`) +
       (S.me.owner ? "" : ` · <button type="button" class="link small" id="logout">Đăng xuất</button>`);
     if ($("logout")) $("logout").onclick = () => { try { localStorage.removeItem("crm.token"); } catch (_) { /* bỏ qua */ } TOKEN = ""; location.reload(); };
