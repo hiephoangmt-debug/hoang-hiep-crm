@@ -130,6 +130,26 @@ def preview_items(limit=20):
     return items[:limit]
 
 
+def login(base, user, password):
+    """Đăng nhập bằng Application Password. Thiếu WP_USER thì thử các tác giả công khai của web."""
+    me_url = base.replace("/posts", "/users/me")
+    candidates = [user] if user else []
+    if not user:
+        try:
+            authors = requests.get(base.replace("/posts", "/users"), params={"_fields": "slug,name"}, timeout=30).json()
+            candidates = [c for a in authors for c in (a.get("slug"), a.get("name")) if c]
+        except (requests.RequestException, ValueError):
+            pass
+    for name in dict.fromkeys(candidates):
+        r = requests.get(me_url, auth=(name, password), params={"_fields": "name"}, timeout=30)
+        if r.ok:
+            print(f"Đăng nhập WordPress OK: {r.json().get('name')} (tài khoản '{name}')")
+            return (name, password)
+    if user:
+        wp_request("GET", me_url, (user, password))  # in lỗi chi tiết
+    sys.exit("Không đăng nhập được WordPress: thêm secret WP_USER = tên đăng nhập, kiểm tra WP_APP_PASSWORD.")
+
+
 def main():
     preview = os.environ.get("PREVIEW") == "1"
     day = digest_date()
@@ -152,13 +172,10 @@ def main():
         return
 
     base = os.environ.get("WP_URL", "https://hiephoangmt.com").rstrip("/") + "/wp-json/wp/v2/posts"
-    user = os.environ.get("WP_USER", "").strip()
     password = os.environ.get("WP_APP_PASSWORD", "").strip()
-    if not (user and password):
-        sys.exit("Thiếu WP_USER hoặc WP_APP_PASSWORD.")
-    auth = (user, password)
-    me = wp_request("GET", base.replace("/posts", "/users/me"), auth, params={"_fields": "name"})
-    print(f"Đăng nhập WordPress OK: {me.get('name')}")
+    if not password:
+        sys.exit("Thiếu WP_APP_PASSWORD.")
+    auth = login(base, os.environ.get("WP_USER", "").strip(), password)
     post.update(
         status="draft" if preview else (os.environ.get("WP_STATUS") or "publish"),
         categories=[int(os.environ.get("WP_CATEGORY_ID") or 121)],
