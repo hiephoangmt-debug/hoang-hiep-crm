@@ -1058,7 +1058,7 @@
       try { sheetNote = pushNote(await pushToSheet(pj, w)); }
       catch (e) { sheetNote = " Chưa ghi được vào Google Sheet: " + e.message; sheetErr = true; }
     }
-    toast(`Đã lưu ${n} chứng từ vào Drive (Nhân sự/${pj}/${weekLabel(w)})` + (nRows ? ` và ${nRows} dòng số liệu đọc từ ảnh (xem tab Nhập số liệu).` : ".") + sheetNote, sheetErr ? "err" : "ok");
+    toast(`Đã lưu ${n} chứng từ vào Drive (thư mục chứng từ › kênh › ${weekLabel(w)} › ${pj} › tên bạn)` + (nRows ? ` và ${nRows} dòng số liệu đọc từ ảnh (xem tab Nhập số liệu).` : ".") + sheetNote, sheetErr ? "err" : "ok");
     renderEvidence();
   }
 
@@ -1082,7 +1082,8 @@
     return weeks;
   }
   // ------------------------------------------------------------ ảnh có sẵn trong thư mục chứng từ trên Drive
-  // Cấu trúc: Thư mục chứng từ / <Nhân sự> / <Dự án> / <tuần "3/10-9/10"> / ảnh
+  // Cấu trúc: Thư mục chứng từ / <Kênh> / <tuần "10/10-16/10"> / <Dự án> / <Nhân sự> / ảnh
+  // (kiểu cũ: Thư mục chứng từ / <Nhân sự> / <Dự án> / <tuần>) – chỉ cần đường dẫn có tên dự án và (nếu có) thư mục tuần
   const STOPW = ["anh", "chi", "em", "thi", "van", "sun", "casa", "group", "tai khoan"];
   const simpleWords = (x) => " " + B.norm(x).replace(/[^a-z0-9]+/g, " ").trim() + " ";
   /** Nhân sự theo tên file trước ("ngà sun.jpg"), rồi các thư mục từ trong ra ngoài ("Phan Hạnh/Sun/…"). */

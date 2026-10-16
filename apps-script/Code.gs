@@ -907,6 +907,28 @@ function crmWeekFolder_(iso) {
   return a.getDate() + '/' + (a.getMonth() + 1) + '-' + b.getDate() + '/' + (b.getMonth() + 1);
 }
 
+/** Thư mục con trùng tên không phân biệt hoa thường / dấu ("Tiktok" = "TikTok"). */
+function crmSubFind_(parent, name) {
+  var want = crmPlain_(name), it = parent.getFolders();
+  while (it.hasNext()) { var f = it.next(); if (crmPlain_(f.getName()) === want) return f; }
+  return null;
+}
+/**
+ * Thư mục lưu một chứng từ.
+ * - Thư mục chứng từ có sẵn thư mục con theo kênh (vd "Khối Collection" › Facebook / Google / Tiktok / Zalo / Kênh đăng tin):
+ *   <Kênh>/<Tuần>/<Dự án>/<Nhân sự>
+ * - Không có: kiểu cũ <Nhân sự>/<Dự án>/<Tuần>.
+ */
+function crmEvidenceFolder_(project, meta) {
+  var root = DriveApp.getFolderById(crmFolderId_(project.thuMucChungTu) || EVIDENCE_ROOT);
+  var byChannel = SHEET_PLATFORMS.some(function (p) { return crmSubFind_(root, p); });
+  if (byChannel) {
+    var ch = crmSubFind_(root, meta.nenTang || 'Facebook') || crmSub_(root, meta.nenTang || 'Khác');
+    return crmSub_(crmSub_(crmSub_(ch, crmWeekFolder_(meta.tuan)), project.khoa || project.ten), meta.nhanSu || 'Chưa gán');
+  }
+  return crmSub_(crmSub_(crmSub_(root, meta.nhanSu || 'Chưa gán'), project.khoa || project.ten), crmWeekFolder_(meta.tuan));
+}
+
 /** Lưu ảnh chứng từ vào Thư mục chứng từ/Nhân sự/Dự án/Tuần và ghi vào bảng ChungTu. */
 /**
  * Dùng chứng từ của dự án khác cho dự án duAn (ví dụ hoá đơn chung của Sun và Casamia):
@@ -923,9 +945,7 @@ function crmCopyEvidence_(id, duAn) {
     var same = crmSameEvidence_(crmRows_('ChungTu'), meta);
     if (same) return same;
   }
-  var rootId = crmFolderId_(project.thuMucChungTu) || EVIDENCE_ROOT;
-  var folder = crmSub_(crmSub_(crmSub_(DriveApp.getFolderById(rootId), meta.nhanSu || 'Chưa gán'),
-    project.khoa || project.ten), crmWeekFolder_(meta.tuan));
+  var folder = crmEvidenceFolder_(project, meta);
   var file = DriveApp.getFileById(src.fileId).makeCopy(src.tenFile, folder);
   return crmSave_('ChungTu', {
     tuan: meta.tuan, duAn: duAn, nhanSu: meta.nhanSu, nenTang: meta.nenTang, loai: meta.loai,
@@ -941,9 +961,7 @@ function crmUploadEvidence_(meta, b64) {
     var same = crmSameEvidence_(crmRows_('ChungTu'), meta);
     if (same) return same; // ảnh này đã lưu rồi: không tạo file trùng trên Drive
   }
-  var rootId = crmFolderId_(project.thuMucChungTu) || EVIDENCE_ROOT;
-  var folder = crmSub_(crmSub_(crmSub_(DriveApp.getFolderById(rootId), meta.nhanSu || 'Chưa gán'),
-    project.khoa || project.ten), crmWeekFolder_(meta.tuan));
+  var folder = crmEvidenceFolder_(project, meta);
   var file = folder.createFile(Utilities.newBlob(Utilities.base64Decode(b64), meta.mime || 'image/png', meta.tenFile));
   return crmSave_('ChungTu', {
     tuan: meta.tuan, duAn: meta.duAn, nhanSu: meta.nhanSu, nenTang: meta.nenTang, loai: meta.loai,
