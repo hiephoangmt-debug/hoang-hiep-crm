@@ -254,6 +254,8 @@ export function gardenUnit(base, spec) {
   const e0 = Math.min(...pts.map(along)) - 0.1, e1 = Math.max(...pts.map(along)) + 0.1;
   const o = horiz ? e0 - bb.x0 : e0 - bb.y0;
   const L = e1 - e0;
+  // bán kính bo góc ngoài: theo tỉ lệ chiều sâu sân như bản vẽ (spec.garden.radius), mặc định bo trọn
+  const gRad = (d) => (spec.garden.radius ? d * spec.garden.radius : Math.min(d, 3));
   // Độ sâu sân tự tính cho diện tích thông thủy sân vườn khớp bảng của chủ đầu tư (spec.garden.area)
   if (spec.garden.area) {
     let L2b = 0;
@@ -263,7 +265,7 @@ export function gardenUnit(base, spec) {
       const rp2 = plan.rooms.filter((r) => Math.min(...r.points.map(dp)) < 0.5).flatMap((r) => r.points).map((q) => (hz ? q.x : q.y));
       L2b = Math.max(...rp2) - Math.min(...rp2) + 0.2;
     }
-    const area = (d) => L * d + (spec.garden.wrap ? (L2b + d) * d - (1 - Math.PI / 4) * d * d : 0) - (spec.garden.round ? (1 - Math.PI / 4) * Math.min(d, 3) ** 2 : 0);
+    const area = (d) => L * d + (spec.garden.wrap ? (L2b + d) * d - (1 - Math.PI / 4) * d * d : 0) - (spec.garden.round ? (1 - Math.PI / 4) * gRad(d) ** 2 : 0);
     let lo = 0.8, hi = 4.5;
     for (let i = 0; i < 40; i++) { const m = (lo + hi) / 2; if (area(m) > spec.garden.area) hi = m; else lo = m; }
     D = +lo.toFixed(2);
@@ -286,7 +288,13 @@ export function gardenUnit(base, spec) {
     const m = { x: w.a.x + (w.b.x - w.a.x) * o.t + inward[0], y: w.a.y + (w.b.y - w.a.y) * o.t + inward[1] };
     if (pointInPolygon(m, lgPoly)) { o.gap = true; o.sill = 0; o.height = 2.8; }
   }
-  const wall = (a, b) => plan.walls.push({ id: uid(), a: P(...a), b: P(...b), thickness: 0.12, height: 0.95 });
+  // Lan can sân vườn bằng kính (như bản vẽ): gờ bê tông thấp + tấm kính liền suốt chiều dài
+  const wall = (a, b) => {
+    const w = { id: uid(), a: P(...a), b: P(...b), thickness: 0.12, height: 1.1 };
+    plan.walls.push(w);
+    const len = wallLength(w);
+    if (len > 0.2) plan.openings.push({ id: uid(), wallId: w.id, type: 'window', t: 0.5, width: +(len - 0.02).toFixed(3), sill: 0.15, height: 0.95, glass: true });
+  };
   const wrap = spec.garden.wrap; // mặt thứ hai sân ôm quanh (vd. căn góc 3PN: dọc dãy phòng ngủ + mặt lô gia)
   const cornerAtStart = wrap === 'top' || wrap === 'left';
   // Góc căn bo cong (góc kính bo của toà) → bo tròn góc ngoài của sân cùng phía
@@ -294,7 +302,7 @@ export function gardenUnit(base, spec) {
   // bo góc ngoài của sân theo bản vẽ: phía mép sàn lùi vào khu căn giữa (vd. căn 12 bo trái, căn 17 bo phải)
   const roundStart = !wrap && spec.garden.round === 'start', roundEnd = !wrap && spec.garden.round === 'end';
   void near;
-  const RR = Math.min(D, 3), NA = 8;
+  const RR = gRad(D), NA = 8;
   const arcPts = (start) => { const out = []; for (let i = 0; i <= NA; i++) { const t = (i / NA) * Math.PI / 2; out.push(start ? [RR - RR * Math.sin(t), D - RR + RR * Math.cos(t)] : [L - RR + RR * Math.sin(t), D - RR + RR * Math.cos(t)]); } return out; };
   if (!(wrap && cornerAtStart)) wall([0, 0], [0, roundStart ? D - RR : D]);
   wall([roundStart ? RR : 0, D], [roundEnd ? L - RR : L, D]);
@@ -349,7 +357,12 @@ export function gardenUnit(base, spec) {
     if (side === 'right' || side === 'bottom') a1 = mainOuter; else a0 = mainOuter;
     const L2 = a1 - a0;
     const Q = (u, v) => wrap === 'top' ? { x: a0 + u, y: bb.y0 - v } : wrap === 'bottom' ? { x: a0 + u, y: bb.y1 + v } : wrap === 'left' ? { x: bb.x0 - v, y: a0 + u } : { x: bb.x1 + v, y: a0 + u };
-    const wall2 = (p0, p1) => plan.walls.push({ id: uid(), a: Q(...p0), b: Q(...p1), thickness: 0.12, height: 0.95 });
+    const wall2 = (p0, p1) => {
+      const w = { id: uid(), a: Q(...p0), b: Q(...p1), thickness: 0.12, height: 1.1 };
+      plan.walls.push(w);
+      const len = wallLength(w);
+      if (len > 0.2) plan.openings.push({ id: uid(), wallId: w.id, type: 'window', t: 0.5, width: +(len - 0.02).toFixed(3), sill: 0.15, height: 0.95, glass: true });
+    };
     const farAtStart = side === 'right' || side === 'bottom';
     if (farAtStart) wall2([0, 0], [0, D]); else wall2([L2, D], [L2, 0]);
     // Góc ngoài nơi hai dải gặp nhau: bo tròn bán kính = độ sâu sân (như góc kính bo của toà)
