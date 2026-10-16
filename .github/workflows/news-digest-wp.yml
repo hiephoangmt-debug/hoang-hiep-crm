@@ -1,0 +1,48 @@
+# Đăng bản tin quy hoạch – hạ tầng trong ngày lên hiephoangmt.com (WordPress).
+# 21:53 đăng bản tin hôm nay; 06:47 sáng hôm sau cập nhật thêm tin cuối ngày vào đúng bài đó.
+# Cần secret: WP_USER, WP_APP_PASSWORD (Application Password trong WordPress).
+name: Bản tin lên website
+
+on:
+  schedule:
+    - cron: '53 14 * * *'   # 21:53 giờ Việt Nam
+    - cron: '47 23 * * *'   # 06:47 giờ Việt Nam
+  workflow_dispatch:
+    inputs:
+      date:
+        description: 'Ngày đăng (YYYY-MM-DD), để trống = tự chọn'
+        required: false
+        default: ''
+      draft:
+        description: 'Chỉ lưu bản nháp (chưa hiện trên web)'
+        type: boolean
+        default: false
+      preview:
+        description: 'Xem thử: lấy tin mới nhất, lưu bản nháp [XEM THỬ]'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: news-telegram
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: news-telegram/requirements.txt
+      - run: pip install -r requirements.txt
+      - run: python publish_digest.py
+        env:
+          WP_USER: ${{ secrets.WP_USER }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          DIGEST_DATE: ${{ inputs.date }}
+          WP_STATUS: ${{ inputs.draft && 'draft' || 'publish' }}
+          PREVIEW: ${{ inputs.preview && '1' || '' }}
