@@ -376,13 +376,37 @@ function crmCell_(v) {
   return v;
 }
 
+/**
+ * Mã tuần chuẩn (ngày bắt đầu tuần). Từ 10/10/2026 tuần chạy thứ 7 → thứ 6, nên mọi ngày từ 10/10 được quy về thứ 7 đầu tuần
+ * (vd "2026-10-12" do bản cũ tính theo thứ 2 -> "2026-10-10"). Tuần trước đó giữ nguyên; tháng ("2026-10") / "all" giữ nguyên.
+ */
+function crmWeekKey_(iso) {
+  iso = String(iso || '');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso) || iso < '2026-10-10') return iso;
+  var p = iso.split('-').map(Number), d = new Date(p[0], p[1] - 1, p[2]);
+  d.setDate(d.getDate() - (d.getDay() + 1) % 7);
+  return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+}
+var CRM_WEEK_TABLES = ['SoLieu', 'ChungTu', 'BaoCao'];
+
 function crmRows_(name) {
   var keys = CRM_TABLES[name].map(function (c) { return c[0]; });
   var vals = crmSheet_(name).getDataRange().getValues();
+  var week = CRM_WEEK_TABLES.indexOf(name) >= 0;
   return vals.slice(1).filter(function (r) { return r[0] !== ''; }).map(function (r) {
     var o = {};
     keys.forEach(function (k, i) { o[k] = r[i] === undefined ? '' : crmCell_(r[i]); });
+    if (week) o.tuan = crmWeekKey_(o.tuan);
     return o;
+  });
+}
+
+/** Ghi lại mã tuần chuẩn vào sheet nếu còn dòng kiểu cũ (vd tuần "2026-10-12" nhập bằng bản cũ). */
+function crmFixWeeks_() {
+  CRM_WEEK_TABLES.forEach(function (t) {
+    var col = CRM_TABLES[t].map(function (c) { return c[0]; }).indexOf('tuan');
+    var raw = crmSheet_(t).getDataRange().getValues().slice(1).filter(function (r) { return r[0] !== ''; });
+    if (raw.some(function (r) { return String(crmCell_(r[col])) !== crmWeekKey_(crmCell_(r[col])); })) crmWriteAll_(t, crmRows_(t));
   });
 }
 
@@ -406,6 +430,7 @@ function crmUser_() {
 
 function crmStamp_(o) {
   if (!o.id) o.id = Utilities.getUuid().replace(/-/g, '').slice(0, 10);
+  if (o.tuan) o.tuan = crmWeekKey_(o.tuan);
   if (!o.ngayTao) {
     o.ngayTao = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd HH:mm');
   }
@@ -432,6 +457,7 @@ function crmBootstrap(token) {
       if (seed && !p.logo && seed.logo) { p.logo = seed.logo; changed = true; }
     });
     if (changed) crmWriteAll_('DuAn', projects);
+    crmFixWeeks_();
   });
   var me = crmMe_(token);
   var out = { schema: CRM_TABLES, sheetUrl: me.role === 'admin' ? crmBook_().getUrl() : '', user: crmUser_(), me: me };
@@ -896,6 +922,7 @@ function crmShareSheet_(duAn) {
 
 /** Nhập số liệu từ Google Sheet: thay các dòng nguồn "sheet" của dự án trong những tuần được nhập. */
 function crmImportEntries_(duAn, weeks, list) {
+  weeks = [].concat(weeks || []).map(crmWeekKey_);
   return crmWithLock_(function () {
     var rows = crmRows_('SoLieu').filter(function (r) {
       return !(r.duAn === duAn && r.nguon === 'sheet' && weeks.indexOf(r.tuan) >= 0);

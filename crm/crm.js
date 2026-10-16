@@ -59,9 +59,11 @@
   const extraWeeks = new Set(); // tuần chọn bằng lịch ("Tuần khác…")
   function weekList() {
     const set = new Set(extraWeeks);
-    const d = new Date();
-    d.setDate(d.getDate() + 7);
-    for (let i = 0; i < 21; i++) { set.add(isoOf(weekStartOf(d))); d.setDate(d.getDate() - 7); }
+    // chỉ tuần này + tuần trước (+ các tuần đã có số liệu / ảnh); tuần khác chọn bằng "Tuần khác… (chọn ngày trên lịch)"
+    const cur = weekStartOf(new Date()), prev = new Date(cur);
+    prev.setDate(prev.getDate() - 1);
+    set.add(isoOf(cur));
+    set.add(isoOf(weekStartOf(prev)));
     S.SoLieu.forEach((r) => r.tuan && set.add(r.tuan));
     S.ChungTu.forEach((r) => r.tuan && set.add(r.tuan));
     return Array.from(set).sort().reverse();
