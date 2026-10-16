@@ -221,6 +221,14 @@
         var rect2 = drawCover(ctx, it.el, W, H, k.s0 + (k.s1 - k.s0) * e, k.x0 + (k.x1 - k.x0) * e, k.y0 + (k.y1 - k.y0) * e);
         if (it.track) this.drawTrackLabel(it.track, 0, rect2, t - it.start);
       }
+    } else if (this.projectImages().length) {
+      // Cảnh chỉ có chữ (mở đầu, cảnh chưa quay): lấy ảnh phối cảnh của dự án làm nền, tối bớt cho dễ đọc chữ
+      var imgs = this.projectImages(), kb = it.kb || { s0: 1.05, s1: 1.15, x0: 0, x1: 0, y0: 0, y1: 0 };
+      var img = imgs[Math.floor(it.start * 7 + (it.duration * 3)) % imgs.length];
+      var pe = easeInOut(clamp((t - it.start) / Math.max(1, it.duration), 0, 1));
+      drawCover(ctx, img, W, H, kb.s0 + (kb.s1 - kb.s0) * pe, kb.x0 + (kb.x1 - kb.x0) * pe, kb.y0 + (kb.y1 - kb.y0) * pe);
+      ctx.fillStyle = 'rgba(8,10,16,0.45)';
+      ctx.fillRect(0, 0, W, H);
     } else {
       // Cảnh chỉ có chữ: nền màu chủ đạo chuyển động nhẹ
       var g = ctx.createLinearGradient(0, 0, W, H);
@@ -881,6 +889,17 @@
 
   // Màu chuyển sắc cho từ khoá (giống video mẫu: xanh mint, đỏ đô, xanh navy, hồng tím, vàng)
   var KINETIC_FILLS = [['#bff3e6', '#3e9e8e'], ['#d24a5a', '#5a0f1c'], ['#6f9de8', '#132c66'], ['#f58cc0', '#7b4fd6'], ['#ffe9a6', '#d99a1e']];
+
+  /** Các ảnh phối cảnh đã tải xong trong dự án (làm nền cho cảnh chỉ có chữ). */
+  Renderer.prototype.projectImages = function () {
+    if (this._imgs && this._imgs.length) return this._imgs;
+    var out = [];
+    (this.project.scenes || []).forEach(function (sc) {
+      (sc.media || []).forEach(function (m) { if (!m.isVideo && m.el && m.el.naturalWidth && out.indexOf(m.el) === -1) out.push(m.el); });
+    });
+    this._imgs = out;
+    return out;
+  };
 
   /** Ảnh phối cảnh đầu tiên trong dự án (để tô vào chữ to, như chữ "BIỂN" trong video mẫu). */
   Renderer.prototype.textureImage = function () {

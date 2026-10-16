@@ -730,6 +730,7 @@
     return I.expandZips(files, function (m) { projProgress(0.01, m); }).then(function (list) {
       if (!link.trim()) return list;
       return I.fromDrive(link, key, function (m) { projProgress(0.02, label + ': ' + m); }).then(function (df) { return list.concat(df); }).catch(function (e) {
+        list.driveFailed = e.message === 'NEED_KEY' ? 'link Google Drive cần khoá Google (mục 🔑)' : e.message;
         if (e.message === 'NEED_KEY') {
           pre.push('<div class="warn">⚠️ ' + label + ': có link Google Drive nhưng chưa có khoá API. Mở mục “🔑” để làm theo, hoặc tải thư mục về (.zip) rồi kéo thả vào.</div>');
           $('driveKeyBox').open = true;
@@ -757,6 +758,15 @@
       asset = a2;
       var ct = I.classify(talk), ca = I.classify(asset);
       var talkVids = ct.media.filter(isVideoFile);
+      // Link tư liệu không tải được: hỏi lại thay vì lặng lẽ làm video không có phối cảnh
+      if (asset.driveFailed && !ca.media.length && !window.confirm('⚠️ Không lấy được ảnh phối cảnh / flycam từ link Drive ở ô 2:\n' + asset.driveFailed +
+        '.\n\nCách nhanh trên điện thoại: bấm “Chọn file” ở ô 2 → Duyệt → Google Drive → chọn ảnh, video dự án.\n\nBấm OK để vẫn làm video KHÔNG có phối cảnh, Huỷ để thêm tư liệu trước.')) {
+        projProgress(null);
+        $('projReport').innerHTML = pre.join('');
+        $('projReport').hidden = false;
+        updateProjButton();
+        return;
+      }
       // Ảnh lỡ bỏ vào phần video quay thì chuyển sang tư liệu
       var assets = ca.media.concat(ct.media.filter(function (f) { return !isVideoFile(f); }));
       runProject({
