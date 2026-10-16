@@ -8,6 +8,7 @@
  * Lưu → Triển khai → Quản lý bản triển khai → ✏️ → Phiên bản mới → Triển khai.
  */
 var CHAT_MODEL = 'claude-haiku-5-5';
+var CHAT_MODEL_2 = 'claude-sonnet-5-5';   // dùng khi model nhanh không trả lời
 
 var CHAT_FACTS = [
   'DỰ ÁN: Khu căn hộ du lịch, thương mại dịch vụ Hải Minh (Căn hộ khách sạn / căn hộ dịch vụ Hải Minh Đà Nẵng).',
@@ -65,21 +66,24 @@ function chatAI_(b, site) {
 
   var system = CHAT_RULES + '\n\nKhách đang đọc phần: ' + String(b.topic || 'không rõ').slice(0, 40)
     + '\n\nTHÔNG TIN DỰ ÁN:\n' + CHAT_FACTS;
-  try {
-    var res = UrlFetchApp.fetch('https://api.anthropic.com/v1/messages', {
-      method: 'post', contentType: 'application/json', muteHttpExceptions: true,
-      headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01' },
-      payload: JSON.stringify({ model: CHAT_MODEL, max_tokens: 400, system: system, messages: msgs })
-    });
-    if (res.getResponseCode() !== 200) return { error: 'ai ' + res.getResponseCode() };
-    var body = JSON.parse(res.getContentText());
-    var a = (body.content || []).map(function (x) { return x.text || ''; }).join('').trim();
-    if (!a) return { error: 'empty answer' };
-    try { if (typeof logChat_ === 'function') logChat_(b, site, q, a); } catch (e) {}
-    return { ok: true, a: a };
-  } catch (err) {
-    return { error: String(err && err.message || err) };
+  var models = [CHAT_MODEL, CHAT_MODEL_2], last = '';
+  for (var i = 0; i < models.length; i++) {
+    try {
+      var res = UrlFetchApp.fetch('https://api.anthropic.com/v1/messages', {
+        method: 'post', contentType: 'application/json', muteHttpExceptions: true,
+        headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01' },
+        payload: JSON.stringify({ model: models[i], max_tokens: 600, system: system, messages: msgs })
+      });
+      var code = res.getResponseCode(), body = {};
+      try { body = JSON.parse(res.getContentText()); } catch (e) {}
+      if (code !== 200) { last = 'ai ' + code + ' ' + ((body.error && body.error.message) || ''); continue; }
+      var a = (body.content || []).filter(function (x) { return x.type === 'text'; }).map(function (x) { return x.text || ''; }).join('').trim();
+      if (!a) { last = 'empty answer (' + (body.stop_reason || '') + ')'; continue; }
+      try { if (typeof logChat_ === 'function') logChat_(b, site, q, a); } catch (e) {}
+      return { ok: true, a: a };
+    } catch (err) { last = String(err && err.message || err); }
   }
+  return { error: last };
 }
 
 /** Chạy thử trong Apps Script → xem Nhật ký thực thi */
