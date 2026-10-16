@@ -737,19 +737,7 @@ footer a{color:#fff;text-decoration:underline;text-decoration:none;font-weight:6
   <a class="p" href="#dang-ky">Nhận bảng giá</a>
 </nav>
 
-<!-- CHAT NỔI -->
-<button id="hmc-btn" type="button" aria-label="Mở hỏi nhanh qua Zalo">💬</button>
-<div id="hmc-box" role="dialog" aria-label="Hỏi nhanh qua Zalo">
-  <div class="hmc-h"><div><b>Tư vấn Hải Minh</b><small>Trả lời qua Zalo 0904 567 009</small></div><button class="hmc-x" type="button" aria-label="Đóng">×</button></div>
-  <div class="hmc-b">
-    <p>Chào anh/chị. Chọn một câu dưới đây, Zalo sẽ mở để anh/chị gửi cho chuyên viên.</p>
-    <button class="hmc-q" type="button" data-msg="Chào anh Hiệp, gửi tôi bảng giá căn hộ Hải Minh Đà Nẵng.">Gửi tôi bảng giá</button>
-    <button class="hmc-q" type="button" data-msg="Chào anh Hiệp, căn view biển trực diện ở Hải Minh còn không?">Căn view biển còn không?</button>
-    <button class="hmc-q" type="button" data-msg="Chào anh Hiệp, tôi ở Hà Nội, có xem và tư vấn từ xa dự án Hải Minh được không?">Tôi ở Hà Nội, xem từ xa được không?</button>
-    <button class="hmc-q" type="button" data-msg="Chào anh Hiệp, tư vấn giúp tôi căn Dual Key 101 m² ở Hải Minh.">Tư vấn Dual Key</button>
-    <p class="hmc-tip">Lời nhắn được sao chép sẵn – dán vào ô chat Zalo là gửi được.</p>
-  </div>
-</div>
+<!-- Chat tự động + nút Zalo/Gọi nổi: dán mã crm/dan-truoc-body.html vào LadiPage "Trước </body>" -->
 <div class="toast" id="hm-toast"></div>
 
 <script>
@@ -815,19 +803,6 @@ footer a{color:#fff;text-decoration:underline;text-decoration:none;font-weight:6
     });
   });
 
-  // Chat nổi: chọn câu → sao chép lời nhắn → mở Zalo
-  var box = document.getElementById('hmc-box');
-  document.getElementById('hmc-btn').onclick = function () { box.classList.toggle('open'); };
-  box.querySelector('.hmc-x').onclick = function () { box.classList.remove('open'); };
-  box.querySelectorAll('.hmc-q').forEach(function (b) {
-    b.onclick = function () {
-      var msg = b.getAttribute('data-msg');
-      try { navigator.clipboard && navigator.clipboard.writeText(msg); } catch (e) {}
-      conv(T.zalo);
-      toast('Đã sao chép lời nhắn – dán vào Zalo để gửi');
-      window.open(ZALO, '_blank', 'noopener');
-    };
-  });
 })();
 </script>
 </body>
