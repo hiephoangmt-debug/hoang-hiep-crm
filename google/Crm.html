@@ -76,7 +76,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold2);border-co
 .cmch{display:flex;gap:6px;align-items:flex-end;height:130px;margin:10px 0 6px}.cmc{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}.cmb{height:110px;width:100%;display:flex;align-items:flex-end;justify-content:center;gap:2px}.cmb i{display:block;width:42%;max-width:20px;border-radius:3px 3px 0 0;min-height:1px}.cmc span{font-size:11px;color:var(--mut)}.lgd{display:inline-block;width:10px;height:10px;border-radius:3px;margin:0 3px 0 8px;vertical-align:-1px}@media(min-width:701px){.grid.kc.kcp{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}}
 .xl{border-collapse:collapse;width:100%;font-size:13.5px}.xl th,.xl td{border:1px solid #CFD8E6;padding:7px 10px;vertical-align:middle}.xl th{background:#E8EEF8;color:var(--navy9);font-weight:700;text-align:left;white-space:nowrap}.xl tbody tr:nth-child(even) td,.xl tr:nth-child(even) td{background:#F7F9FD}.xl tr.tot td{background:#FFF1DC;font-weight:700;border-top:2px solid var(--gold)}.xl tr.sel td{background:#FFF3E3}.xl td.nw{white-space:nowrap}
 tr.sel td{background:#FFF3E3}@media(min-width:701px){.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:10px;margin-bottom:12px}.cgrid>.card{margin:0}}
-.lvbar .chip{padding:5px 10px;font-weight:600;font-size:13.5px}.lvbar{gap:6px}.lvbar .btn.sm{padding:5px 9px;font-size:12.5px;white-space:nowrap}.lvbar .chip{white-space:nowrap}.lvbar{align-items:center}.prj{padding:8px 12px;margin-bottom:8px}.prj>summary{cursor:pointer;list-style:none;padding:2px 0}.prj>summary::-webkit-details-marker{display:none}.prj table{margin-top:6px}.lvt{table-layout:auto;width:100%}.lvt td{overflow-wrap:break-word;word-break:normal}.lvt td:nth-child(2){min-width:140px}.lvt td:nth-child(4){white-space:nowrap}.lvt .salesel{padding:3px 4px;font-size:12.5px}.lvt td.nw,.lvt th{white-space:nowrap}.lvt .salesel{max-width:130px}.lvt .tag{white-space:nowrap}@media(max-width:1200px){.lvt{table-layout:auto}.prj{overflow-x:auto}}.lvt td,.lvt th{padding:5px 5px}.lvt{font-size:13px}.prj{overflow-x:auto}.lvt tr.rowtodo td{background:#FDECEC}.snrow.done{opacity:.7}.snrow{margin-bottom:8px}
+.lvbar .chip{padding:5px 10px;font-weight:600;font-size:13.5px}.lvbar{gap:6px}.lvbar .btn.sm{padding:5px 9px;font-size:12.5px;white-space:nowrap}.lvbar .chip{white-space:nowrap}.lvbar{align-items:center}.prj{padding:8px 12px;margin-bottom:8px}.prj>summary{cursor:pointer;list-style:none;padding:2px 0}.prj>summary::-webkit-details-marker{display:none}.prj table{margin-top:6px}.lvt{table-layout:auto;width:100%}.lvt td{overflow-wrap:break-word;word-break:normal}.lvt td:nth-child(2){min-width:140px}.lvt .salesel{padding:3px 4px;font-size:12.5px}.lvt td.nw,.lvt th{white-space:nowrap}.lvt .salesel{max-width:130px}.lvt .tag{white-space:nowrap}@media(max-width:1200px){.lvt{table-layout:auto}.prj{overflow-x:auto}}.lvt td,.lvt th{padding:5px 5px}.lvt{font-size:12.5px}.lvt .salesel{max-width:112px}.prj{overflow-x:auto}.lvt tr.rowtodo td{background:#FDECEC}.snrow.done{opacity:.7}.snrow{margin-bottom:8px}
 @media(min-width:1001px) and (max-width:1360px){nav button{padding:9px 8px 12px;font-size:13.5px}}
 @media(min-width:701px){.grid.kc{grid-template-columns:repeat(7,1fr);gap:8px}.grid.kc .kpi{padding:9px 11px}.grid.kc .kpi b{font-size:21px}.grid.kc .kpi b.long{font-size:17px}.grid.kc .kpi span{font-size:11.5px;line-height:1.3}
 .salesel{padding:4px 8px;font-size:13px;max-width:150px}.fqw{flex:0 1 340px;min-width:200px}
@@ -142,7 +142,7 @@ code,pre{background:#F3F5FA;border:1px solid var(--line);border-radius:10px;font
 
 <script>
 window.onerror = function (m, s, l) { var d = document.getElementById('diag'); if (d) d.textContent = 'Lỗi trang: ' + m + (l ? ' (dòng ' + l + ')' : ''); };
-var UI_VER = 'ui-45';
+var UI_VER = 'ui-46';
 var KEY = /*__KEY__*/'', D = null, tab = 'home', F = { status: 'todo', site: '', q: '', clicks: 'todo', cw: '', cch: '', cd: 'all', src: '', as: '', sort: 'new', prov: '', bud: '', when: '', sc: '', sd: 'asc', page: 1, df: '', dt: '', cf: '', ct: '', area: '', proj: '', dim: 'area' }, G = '';
 try { G = localStorage.getItem('crm_group') || ''; } catch (e) {}
 var STATUS = ['Mới', 'Đã liên hệ', 'Đang tư vấn', 'Đang cân nhắc', 'Quan tâm', 'Hẹn xem', 'Đã xem dự án', 'Đang thương lượng', 'Booking', 'Chốt', 'Mất', 'Tạm dừng'];
@@ -163,7 +163,9 @@ function fmt(iso) { if (!iso) return ''; var d = new Date(iso); return d.toLocal
 function ago(iso) { var m = Math.round((Date.now() - new Date(iso).getTime()) / 60000); return m < 1 ? 'vừa xong' : m < 60 ? m + ' phút trước' : m < 1440 ? Math.round(m / 60) + ' giờ trước' : Math.round(m / 1440) + ' ngày trước'; }
 function vnd(n) { return Math.round(n || 0).toLocaleString('vi-VN') + 'đ'; }
 var isQuiet = function (l) { return !l.reAt && (l.srcType === 'Data nhập' || /nhập\s*(excel|danh sách|sheet|file|chat|vcf|zalo)|import/i.test(l.source || '')); };   // khách nhập từ file/Sheet: không nhắc gọi
-var todo = function (l) { return !l.called && !l.messaged && l.status === 'Mới' && !isQuiet(l) && !l.assignee && !l.careCount; };   // đã giao sale thì chờ sale báo cáo, không nhắc
+var SELF = 'Mình chăm';   // giao cho chính mình: vẫn nhắc việc như khách chưa giao
+var delegated = function (l) { return !!l.assignee && l.assignee !== SELF; };
+var todo = function (l) { return !l.called && !l.messaged && l.status === 'Mới' && !isQuiet(l) && !delegated(l) && !l.careCount; };   // đã giao sale thì chờ sale báo cáo, không nhắc
 var GROUPS = ['BĐS', 'Vân'];
 function gOf(name) { var s = D && D.sites.filter(function (x) { return x.name === name; })[0]; return s ? String(s.group || '') : ''; }
 function inG(name) { return !G || gOf(name) === G; }
@@ -308,11 +310,11 @@ function home() {
   });
 }
 
-function saleSel(l) { return '<select class="salesel" data-as="' + esc(l.phone) + '"><option value="">Chưa giao</option>' + saleNames([l.assignee].filter(Boolean)).map(function (s) { return '<option' + (s === l.assignee ? ' selected' : '') + '>' + esc(s) + '</option>'; }).join('') + '</select>'; }
+function saleSel(l) { return '<select class="salesel" data-as="' + esc(l.phone) + '"><option value="">Chưa giao</option><option' + (l.assignee === SELF ? ' selected' : '') + '>' + SELF + '</option>' + saleNames([l.assignee].filter(function (x) { return x && x !== SELF; })).map(function (s) { return '<option' + (s === l.assignee ? ' selected' : '') + '>' + esc(s) + '</option>'; }).join('') + '</select>'; }
 function saleNames(extra) { var a = (D.sales || []).slice(); (extra || []).forEach(function (s) { if (a.indexOf(s) < 0) a.push(s); }); return a; }
 function nextStep(l) {
   if (todo(l)) return 'Việc cần làm: gọi hoặc nhắn Zalo cho khách ngay.';
-  if (!l.assignee && l.status !== 'Chốt' && l.status !== 'Mất') return 'Việc cần làm: chọn sale phụ trách cho khách này.';
+  if (!delegated(l) && l.assignee !== SELF && l.status !== 'Chốt' && l.status !== 'Mất') return 'Việc cần làm: chọn sale phụ trách cho khách này.';
   if (l.status === 'Đã liên hệ') return 'Việc cần làm: hỏi nhu cầu, rồi đổi trạng thái sang Quan tâm hoặc Mất.';
   if (l.status === 'Quan tâm') return 'Việc cần làm: hẹn khách đi xem nhà.';
   if (l.status === 'Hẹn xem') return 'Việc cần làm: nhắc lịch hẹn, sau buổi xem cập nhật Chốt hoặc Mất.';
@@ -500,7 +502,7 @@ function stageOf(l) {
   if (l.status === 'Mất' || l.status === 'Tạm dừng') return 'lost';
   if (HOT_ST.indexOf(l.status) >= 0 || l.viewCount) return 'view';
   if (l.careCount || l.called || l.messaged || l.status !== 'Mới') return 'care';
-  return l.assignee ? 'wait' : 'new';
+  return delegated(l) ? 'wait' : 'new';
 }
 function stageTag(l) { var k = stageOf(l), d = STAGES.filter(function (x) { return x[0] === k; })[0]; return '<span class="tag ' + d[2] + '">' + d[1] + '</span>'; }
 function lvActions() {
@@ -549,10 +551,22 @@ function leadsGroups() {
   var body = '';
   var projOf = projOfLead;
   var rowsOf = function (list, flat) {
-    return '<table class="xl lvt"><tr>' + (flat ? '<th style="width:26px"><input type="checkbox" id="selall"></th>' : '') + '<th>' + (flat ? 'Để lại lúc' : 'Ngày') + '</th><th>Khách</th><th>Số điện thoại</th><th>Nguồn</th>' + (flat ? '<th>Dự án</th>' : '') + '<th>Toà</th><th>Giai đoạn</th><th>Chăm gần nhất</th><th>Hẹn</th><th>Giao sale</th><th></th></tr>' + list.map(function (l) {
-      var h = heat(l), p = srcParts(l), need = [l.purpose, l.product, l.budget && 'NS ' + l.budget].filter(Boolean).join(' · ');
-      return '<tr class="' + (stageOf(l) === 'new' ? 'rowtodo' : '') + '" data-open="' + esc(l.phone) + '" style="cursor:pointer">' + (flat ? '<td><input type="checkbox" data-sel="' + esc(l.phone) + '"></td>' : '') + '<td class="nw">' + (flat ? '<b>' + esc(fmt(leftAt(l)).slice(0, 5)) + '</b><div class="small mut">' + dmy(dayOf(leftAt(l))).slice(0, 5) + ' · ' + esc(ago(leftAt(l))) + '</div>' + (leftAt(l) !== l.at ? '<span class="tag amb" title="Khách này đã có trong CRM, vừa để lại số lần nữa">Trùng · gửi lại</span>' : '') : dmy(dayOf(l.at)).slice(0, 5)) + '</td><td><b>' + esc(cleanName(l.name).name || l.name || '(chưa có tên)') + '</b>' + (h && h[0] === 'Nóng' ? ' <span class="tag red">Nóng</span>' : '') + (l.province || need ? '<div class="small mut">' + esc([l.province, need].filter(Boolean).join(' · ')) + '</div>' : '') + '</td><td class="nw">' + esc(l.phone) + ' <button class="btn z xs" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button> <button class="btn g xs" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button></td><td class="small">' + esc(p.plat || '-') + '</td>' + (flat ? '<td class="small">' + esc(projOf(l)) + '</td>' : '') + '<td class="small nw">' + (toaOf(l).map(esc).join(', ') || '<span class="mut">-</span>') + '</td><td>' + stageTag(l) + (l.status !== 'Mới' && stageOf(l) !== 'won' ? '<div class="small mut">' + esc(l.status) + '</div>' : '') + '</td><td class="small">' + (l.careAt ? ago(l.careAt) + (l.careResult ? '<div class="mut">' + esc(l.careResult) + '</div>' : '') : '<span class="mut">Chưa chăm</span>') + '</td><td class="small nw">' + (l.next ? (l.next < ymdNow(0) ? '<span class="tag red">' + dmy(l.next).slice(0, 5) + ' quá hạn</span>' : dmy(l.next).slice(0, 5)) : '<span class="mut">-</span>') + '</td><td class="nw">' + saleSel(l) + '</td><td class="nw"><button class="btn xs" data-open="' + esc(l.phone) + '">Hồ sơ</button> <button class="btn xs" data-del="' + esc(l.phone) + '" title="Xoá khách này" style="color:var(--red)">Xoá</button></td></tr>';
-    }).join('') + '</table>';
+    var td = function (c, h) { return '<td' + (c ? ' class="' + c + '"' : '') + '>' + h + '</td>'; };
+    return '<div class="tw"><table class="xl lvt"><tr>' + (flat ? '<th style="width:26px"><input type="checkbox" id="selall"></th><th>Để lại lúc</th>' : '<th>Ngày</th>') + '<th>Khách</th><th>Nơi ở</th><th>Số điện thoại</th><th>Nguồn phát sinh</th><th>Dự án</th><th>Giao ai / mình chăm</th><th>Tiến độ</th><th>Nhu cầu</th><th></th></tr>' + list.map(function (l) {
+      var h = heat(l), p = srcParts(l), need = [l.purpose, l.product, l.budget && 'Ngân sách ' + l.budget].filter(Boolean).join(' · ') || (l.note ? l.note.replace(/\s+/g, ' ').slice(0, 70) : ''), toa = toaOf(l).join(', ');
+      var care = l.careAt ? 'Chăm ' + ago(l.careAt) + (l.careResult ? ' · ' + l.careResult : '') : 'Chưa chăm', nx = l.next ? (l.next < ymdNow(0) ? '<span class="tag red">Hẹn ' + dmy(l.next).slice(0, 5) + ' quá hạn</span>' : 'Hẹn ' + dmy(l.next).slice(0, 5)) : '';
+      return '<tr class="' + (stageOf(l) === 'new' ? 'rowtodo' : '') + '" data-open="' + esc(l.phone) + '" style="cursor:pointer">' + (flat ? '<td><input type="checkbox" data-sel="' + esc(l.phone) + '"></td>' : '') +
+        td('nw', flat ? '<b>' + esc(fmt(leftAt(l)).slice(0, 5)) + '</b><div class="small mut">' + dmy(dayOf(leftAt(l))).slice(0, 5) + ' · ' + esc(ago(leftAt(l))) + '</div>' + (leftAt(l) !== l.at ? '<span class="tag amb" title="Khách này đã có trong CRM, vừa để lại số lần nữa">Trùng · gửi lại</span>' : '') : dmy(dayOf(l.at)).slice(0, 5)) +
+        td('', '<b>' + esc(cleanName(l.name).name || l.name || '(chưa có tên)') + '</b>' + (h && h[0] === 'Nóng' ? ' <span class="tag red">Nóng</span>' : '')) +
+        td('small', esc([l.district, l.province].filter(Boolean).join(', ')) || '<span class="mut">-</span>') +
+        td('', '<span class="nw">' + esc(l.phone) + '</span> <button class="btn z xs" data-act="zalo" data-p="' + esc(l.phone) + '">Zalo</button> <button class="btn g xs" data-act="call" data-p="' + esc(l.phone) + '">Gọi</button>') +
+        td('small', '<b>' + esc(p.plat || '-') + '</b>' + (l.campaign ? '<div class="mut">' + esc(String(l.campaign).slice(0, 36)) + '</div>' : '')) +
+        td('small', (flat ? esc(projOf(l)) : '') + (toa ? (flat ? ' · ' : '') + '<b>' + esc(toa) + '</b>' : (flat ? '' : '<span class="mut">-</span>'))) +
+        td('nw', saleSel(l)) +
+        td('small', stageTag(l) + (l.status !== 'Mới' && stageOf(l) !== 'won' ? ' ' + esc(l.status) : '') + '<div class="mut">' + esc(care) + '</div>' + (nx ? '<div>' + nx + '</div>' : '')) +
+        td('small', need ? esc(need) : '<span class="mut">Chưa có</span>') +
+        td('nw', '<button class="btn xs" data-open="' + esc(l.phone) + '">Hồ sơ</button> <button class="btn xs" data-del="' + esc(l.phone) + '" title="Xoá khách này" style="color:var(--red)">Xoá</button>') + '</tr>';
+    }).join('') + '</table></div>';
   };
   var toaChips = function (a) { var c = {}; a.forEach(function (l) { toaOf(l).forEach(function (t) { c[t] = (c[t] || 0) + 1; }); }); return Object.keys(c).sort().map(function (t) { return ' <span class="tag">' + esc(t) + ': ' + c[t] + '</span>'; }).join(''); };
   var groups = function (list, openAll) {
@@ -813,7 +827,7 @@ function openLead(phone, page, keep) {
   var srcLine = [l.srcType, l.source, l.campaign].filter(Boolean).join(' · ') || 'Chưa rõ';
   var P = {
     h2: '<h2 style="margin:0">KH' + pad(l.id) + ' · ' + esc(l.name || '(chưa có tên)') + ' · ' + esc(l.phone) + ' ' + zl(l.phone, l) + '</h2><p class="mut small">' + esc(l.site) + ' · ' + esc(l.email) + ' · gửi form ' + l.submits + ' lần · nhận lúc ' + esc(fmt(l.at)) + '</p>',
-    actions: '<div class="row" style="margin:6px 0"><input id="qnm" value="' + esc(l.name) + '" placeholder="Nhập tên khách" style="flex:1;min-width:140px"><button class="btn sm p" id="qnmok">Lưu tên</button></div><div class="row" style="margin:6px 0"><span class="mut small">Giao sale:</span><select id="qas" style="flex:1;min-width:140px"><option value="">Chưa giao</option>' + saleNames([l.assignee].filter(Boolean)).map(function (x) { return '<option' + (x === l.assignee ? ' selected' : '') + '>' + esc(x) + '</option>'; }).join('') + '</select><button class="btn sm" id="qasadd">+ Thêm sale</button></div><div class="row" style="margin:6px 0"><span class="mut small">Dự án:</span><input id="qpj" list="qpjl" value="' + esc(canonProj(l.project)) + '" placeholder="Chọn hoặc gõ tên dự án" style="flex:1;min-width:140px"><datalist id="qpjl">' + projNames().map(function (n) { return '<option value="' + esc(n) + '">'; }).join('') + '</datalist><input id="qtoa" value="' + esc(l.toa || '') + '" placeholder="Toà" style="width:90px"><button class="btn sm" id="qpjok">Lưu dự án</button></div><div class="row"><button class="btn z" data-a="zalo">Nhắn Zalo</button><button class="btn g" data-a="call">Gọi</button><button class="btn" data-a="sms">Đã nhắn SMS</button>' + (aiOn() ? '<button class="btn" id="zcBtn">Chụp Zalo gửi lên</button>' : '') + (aiOn() ? '<button class="btn" id="aiBtn">AI phân tích khách hàng</button>' : '') + '</div>' +
+    actions: '<div class="row" style="margin:6px 0"><input id="qnm" value="' + esc(l.name) + '" placeholder="Nhập tên khách" style="flex:1;min-width:140px"><button class="btn sm p" id="qnmok">Lưu tên</button></div><div class="row" style="margin:6px 0"><span class="mut small">Giao sale:</span><select id="qas" style="flex:1;min-width:140px"><option value="">Chưa giao</option><option' + (l.assignee === SELF ? ' selected' : '') + '>' + SELF + '</option>' + saleNames([l.assignee].filter(function (x) { return x && x !== SELF; })).map(function (x) { return '<option' + (x === l.assignee ? ' selected' : '') + '>' + esc(x) + '</option>'; }).join('') + '</select><button class="btn sm" id="qasadd">+ Thêm sale</button></div><div class="row" style="margin:6px 0"><span class="mut small">Dự án:</span><input id="qpj" list="qpjl" value="' + esc(canonProj(l.project)) + '" placeholder="Chọn hoặc gõ tên dự án" style="flex:1;min-width:140px"><datalist id="qpjl">' + projNames().map(function (n) { return '<option value="' + esc(n) + '">'; }).join('') + '</datalist><input id="qtoa" value="' + esc(l.toa || '') + '" placeholder="Toà" style="width:90px"><button class="btn sm" id="qpjok">Lưu dự án</button></div><div class="row"><button class="btn z" data-a="zalo">Nhắn Zalo</button><button class="btn g" data-a="call">Gọi</button><button class="btn" data-a="sms">Đã nhắn SMS</button>' + (aiOn() ? '<button class="btn" id="zcBtn">Chụp Zalo gửi lên</button>' : '') + (aiOn() ? '<button class="btn" id="aiBtn">AI phân tích khách hàng</button>' : '') + '</div>' +
     '<div id="aiOut" class="card" hidden></div>',
     personal: '<h3>Thông tin cá nhân <span class="tag">Khách cung cấp</span></h3><div class="fgrid">' +
     lab('Họ và tên', inp('nm', l.name)) + lab('Link Drive / hồ sơ khách', inp('du', l.docUrl)) + lab('SĐT phụ', inp('p2', l.phone2)) + lab('Zalo', sel('zl', ['Đã kết nối', 'Chưa xác nhận', 'Không dùng Zalo'], l.zalo, 'Chưa cập nhật')) +
@@ -1834,7 +1848,7 @@ function clicks() {
 function ymdNow(add) { var d = new Date(); d.setDate(d.getDate() + (add || 0)); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
 function dmy(s) { return s ? s.slice(8, 10) + '/' + s.slice(5, 7) + '/' + s.slice(0, 4) : ''; }
 function todayGroups() {
-  var t = ymdNow(0), L = D.leads.filter(function (l) { return isBds(l.site) && l.status !== 'Chốt' && l.status !== 'Mất' && !l.assignee && (!isQuiet(l) || l.next); });
+  var t = ymdNow(0), L = D.leads.filter(function (l) { return isBds(l.site) && l.status !== 'Chốt' && l.status !== 'Mất' && !delegated(l) && (!isQuiet(l) || l.next); });
   var g = { late: [], now: [], fresh: [], viewed: [], hot: [], stale: [] };
   L.forEach(function (l) {
     if (l.next && l.next < t) g.late.push(l);
@@ -1863,7 +1877,7 @@ function today() {
       (l.next ? '<button class="btn" data-done="' + esc(l.phone) + '">Xong lịch này</button><button class="btn" data-snooze="1" data-p="' + esc(l.phone) + '">Dời 1 ngày</button><button class="btn" data-snooze="3" data-p="' + esc(l.phone) + '">Dời 3 ngày</button>' :
         '<button class="btn" data-set="' + esc(l.phone) + '">Đặt lịch ngày mai</button>') + '</div></div>';
   };
-  $('#main').innerHTML = '<div class="card"><b>Việc hôm nay · ' + total + ' việc</b><p class="small mut">Danh sách tự lập từ lịch hẹn và tình trạng chăm sóc. Đang chờ sale báo cáo: ' + D.leads.filter(function (x) { return x.assignee && isBds(x.site) && x.status !== 'Chốt' && x.status !== 'Mất'; }).length + ' khách, không nhắc ở đây. Bấm "Xong lịch này" hoặc dời lịch thì mới đổi, hệ thống không tự đánh dấu hoàn thành.</p></div>' +
+  $('#main').innerHTML = '<div class="card"><b>Việc hôm nay · ' + total + ' việc</b><p class="small mut">Danh sách tự lập từ lịch hẹn và tình trạng chăm sóc. Đang chờ sale báo cáo: ' + D.leads.filter(function (x) { return delegated(x) && isBds(x.site) && x.status !== 'Chốt' && x.status !== 'Mất'; }).length + ' khách, không nhắc ở đây. Bấm "Xong lịch này" hoặc dời lịch thì mới đổi, hệ thống không tự đánh dấu hoàn thành.</p></div>' +
     sec.map(function (s) { var a = g[s[0]]; return a.length ? '<h3 style="margin:14px 0 6px">' + s[1] + ' <span class="tag ' + (s[3] ? 'red' : 'amb') + '">' + a.length + '</span>' + (s[0] === 'fresh' ? ' <button class="btn sm" id="silfresh">Bỏ nhắc nhóm này</button>' : '') + '</h3><div class="small mut" style="margin-bottom:6px">' + s[2] + '</div>' + a.map(function (l) { return item(l, s[0]); }).join('') : ''; }).join('') +
     (total ? '' : '<div class="card mut">Hôm nay chưa có việc nào. Mở một khách, đặt "Hẹn tiếp theo" để việc hiện ở đây.</div>');
   var setNext = function (phone, d) {
