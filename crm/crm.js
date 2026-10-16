@@ -18,7 +18,7 @@
   const mineOnly = (r) => isAdmin() || r.nhanSu === myName();
   /** Tên được chọn trong các ô Nhân sự: quản trị chọn ai cũng được, nhân viên chỉ chọn mình. */
   const editableStaff = () => (isAdmin() ? staffNames() : [myName()].filter(Boolean));
-  const PLATFORM_LABEL = { Facebook: "Facebook", Tiktok: "TikTok", Zalo: "Zalo", Google: "Google" };
+  const PLATFORM_LABEL = { Facebook: "Facebook", Tiktok: "TikTok", Zalo: "Zalo", Google: "Google", "Đăng tin": "Đăng tin" };
   const STATUSES = ["Nháp", "Đã nộp", "Đã duyệt"];
 
   const $ = (id) => document.getElementById(id);
@@ -585,26 +585,26 @@
     (res.noRow.length ? `, hết dòng trống cho ${res.noRow.join(", ")} (thêm dòng trong tuần rồi bấm "Ghi số từ ảnh vào Google Sheet")` : "") + ".";
 
   // ------------------------------------------------------------ CHỨNG TỪ
-  // Hướng dẫn nghiệm thu theo mẫu COLLECTION (slide 8–25): ảnh cần chụp cho từng kênh + các mục phải khoanh
+  // Hướng dẫn nghiệm thu theo mẫu COLLECTION (bản 16/10): ảnh cần chụp cho từng kênh + các mục phải khoanh.
+  // Mẫu không còn slide hoá đơn – hoá đơn vẫn tải lên để app tính chi phí gồm VAT.
   const REQ = {
     Facebook: {
-      ads: "ID tài khoản quảng cáo · Search tên chiến dịch · Tổng số tiền thực chạy · Thời gian chạy (nghiệm thu)",
+      ads: "ID tài khoản quảng cáo · Search tên chiến dịch · Thời gian chạy · Tổng số kết quả · Tổng số tiền đã chi tiêu",
       qc: "ID tài khoản quảng cáo · Thời gian chạy · Quảng cáo đang hoạt động",
-      hoadon: "ID tài khoản quảng cáo · Số mã tham chiếu · Tổng số tiền đã thanh toán (VAT) · Hoá đơn có tên chiến dịch khớp tên trên TKQC",
     },
     Tiktok: {
       ads: "ID tài khoản quảng cáo · Search tên chiến dịch · Tổng số tiền thực chạy · Thời gian chạy (nghiệm thu)",
       qc: "ID tài khoản quảng cáo · Quảng cáo chạy",
-      hoadon: "ID tài khoản quảng cáo · Tổng số tiền đã thanh toán (VAT) · Hoá đơn có tên chiến dịch khớp tên trên TKQC",
     },
     Zalo: {
       ads: "Search tên chiến dịch · Tổng số tiền thực chạy · Thời gian chạy (nghiệm thu)",
       qc: "ID tài khoản quảng cáo · Thời gian chạy · Quảng cáo đang hoạt động",
-      hoadon: "Tổng số tiền đã thanh toán (VAT) · Hoá đơn có tên chiến dịch khớp tên trên TKQC",
     },
     Google: {
       ads: "ID tài khoản quảng cáo · Search tên chiến dịch · Tổng số tiền thực chạy · Thời gian chạy",
-      hoadon: "ID tài khoản quảng cáo · Số mã tham chiếu · Tổng số tiền thực chạy",
+    },
+    "Đăng tin": {
+      ads: "Màn hình chi tiết giao dịch đăng tin: tài khoản · mã / thời gian giao dịch · số tiền đã thanh toán",
     },
   };
   const reqOf = (p, k) => (REQ[p] || {})[k === "qc" && !(REQ[p] || {}).qc ? "ads" : k] || "";
@@ -623,9 +623,10 @@
       plats.forEach((p) => {
         const cells = Object.keys(KINDS).map((k) => {
           if (!REQ[p][k]) {
-            const why = `${PLATFORM_LABEL[p]} không cần ảnh “${KINDS[k]}” – mẫu báo cáo chỉ có slide Chiến dịch + Hoá đơn. Ảnh quảng cáo ${PLATFORM_LABEL[p]} (nếu có) được đặt chung vào slide Chiến dịch.`;
+            const why = k === "hoadon" ? `Mẫu báo cáo mới không có slide hoá đơn – không bắt buộc. Vẫn nên tải hoá đơn lên để app tính chi phí gồm VAT.`
+              : `${PLATFORM_LABEL[p]} không cần ảnh “${KINDS[k]}” – ảnh quảng cáo ${PLATFORM_LABEL[p]} (nếu có) được đặt chung vào slide chụp màn hình.`;
             const got = ev.filter((r) => r.nhanSu === st && r.nenTang === p && r.loai === k).length;
-            return `<td class="muted" title="${esc(why)}" data-req="${esc(why)}">Không cần${got ? `<br><small>${got} ảnh → tính vào Chiến dịch</small>` : ""}</td>`;
+            return `<td class="muted" title="${esc(why)}" data-req="${esc(why)}">Không cần${got ? `<br><small>${got} ảnh${k === "hoadon" ? " (đã có)" : " → tính vào Chiến dịch"}</small>` : ""}</td>`;
           }
           const n = ev.filter((r) => r.nhanSu === st && r.nenTang === p && (r.loai === k || (k === "ads" && r.loai === "qc" && !REQ[p].qc))).length;
           if (!n) missing++;
@@ -1128,7 +1129,7 @@
   /** Kênh theo tên thư mục trong đường dẫn (Facebook / Google / Tiktok / Zalo). */
   const channelFromPath = (path) => {
     for (const seg of path.slice().reverse()) {
-      const p = PLATFORMS.find((x) => B.norm(x) === B.norm(seg));
+      const p = PLATFORMS.find((x) => B.norm(x) === B.norm(seg).replace(/^kenh /, ""));
       if (p) return p;
     }
     return "";
@@ -1273,6 +1274,22 @@
     }
     return { parts };
   }
+  /** Bảng "REVIEW KẾT QUẢ SÀN": Lead / MQL / SQL / Deal của từng nhân sự ở mọi dự án trong kỳ w. */
+  function reviewData(w) {
+    const projects = S.DuAn.map((p) => ({ key: p.khoa || p.ten, name: p.ten }));
+    const rows = effective(S.SoLieu.filter((r) => weeksOfKey(w, r.duAn).includes(r.tuan)));
+    const order = staffNames();
+    const staff = Array.from(new Set(rows.map((r) => r.nhanSu).filter(Boolean)))
+      .sort((a, b) => (order.indexOf(a) + 1 || 99) - (order.indexOf(b) + 1 || 99));
+    return {
+      projects, san: "COLLECTION",
+      rows: staff.map((st) => ({ staff: st, by: Object.fromEntries(projects.map((p) => {
+        const rs = rows.filter((r) => r.nhanSu === st && r.duAn === p.name);
+        const t = (k) => rs.reduce((n, r) => n + num(r[k]), 0);
+        return [p.key, { lead: t("lead"), mql: t("mql"), sql: t("sql"), deal: t("deal") }];
+      })) })),
+    };
+  }
   async function buildOne(pjName, w, fmt) {
     if (fmt === "web") return buildWeb(pjName, w);
     const ky = kyOf(w), wks = weeksOfKey(w, pjName);
@@ -1316,6 +1333,8 @@
       placeholderMissing: ky === "tuan" && $("rpKeepMissing").checked,
       maxImageSide: 1600, // ảnh chụp màn hình thu nhỏ còn ~1600px: vẫn rõ chữ, file nhẹ hơn nhiều
       logo: pj.logo || "", logos: (window.BAO_CAO_MKT_CONFIG || {}).logos, logoMedia: window.TATI_LOGO_MEDIA,
+      logoSizes: window.TATI_LOGO_SIZES, logoExtra: window.TATI_LOGO_EXTRA,
+      review: reviewData(w),
     });
     const tag = ky === "tuan" ? weekLabel(w).replace(/[\/ ]/g, "") : ky === "thang" ? `Thang${w.slice(5, 7)}-${w.slice(0, 4)}` : "ToanChienDich";
     const name = `Bao_cao_${pjName.replace(/\s+/g, "_")}_${tag}.pptx`;

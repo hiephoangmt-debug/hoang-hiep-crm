@@ -7,11 +7,14 @@
   const num = (v) => { if (typeof v === "number") return v; const n = Number(String(v || "").replace(/\./g, "").replace(",", ".")); return isFinite(n) ? n : 0; };
   const fmt = (n) => Math.round(n || 0).toLocaleString("vi-VN");
   const fmt1 = (n) => (n || 0).toLocaleString("vi-VN", { maximumFractionDigits: 2 });
-  const PLATS = ["Facebook", "Tiktok", "Zalo", "Google"];
-  const PLAB = { Facebook: "Facebook", Tiktok: "TikTok", Zalo: "Zalo", Google: "Google Ads" };
-  const PCOL = { Facebook: "var(--fb)", Tiktok: "var(--tt)", Zalo: "var(--zl)", Google: "var(--gg)" };
+  const PLATS = ["Facebook", "Tiktok", "Zalo", "Google", "Đăng tin"];
+  const PLAB = { Facebook: "Facebook", Tiktok: "TikTok", Zalo: "Zalo", Google: "Google Ads", "Đăng tin": "Đăng tin" };
+  const PCOL = { Facebook: "var(--fb)", Tiktok: "var(--tt)", Zalo: "var(--zl)", Google: "var(--gg)", "Đăng tin": "var(--dt)" };
   const KIND = { ads: "Chiến dịch", qc: "QC đang chạy", hoadon: "Hoá đơn" };
-  const NEED = { Facebook: ["ads", "qc", "hoadon"], Tiktok: ["ads", "qc", "hoadon"], Zalo: ["ads", "qc", "hoadon"], Google: ["ads", "hoadon"] };
+  // ảnh nghiệm thu theo mẫu COLLECTION bản 16/10 (không còn slide hoá đơn)
+  const NEED = { Facebook: ["ads", "qc"], Tiktok: ["ads", "qc"], Zalo: ["ads", "qc"], Google: ["ads"], "Đăng tin": ["ads"] };
+  /** Ô ảnh nghiệm thu của một ảnh: Google không có ô "QC đang chạy", Đăng tin chỉ một ô; hoá đơn là ảnh thêm (không bắt buộc). */
+  const slotOf = (p, loai) => (p === "Đăng tin" || (p === "Google" && loai === "qc") ? "ads" : loai);
   const pad = (n) => String(n).padStart(2, "0");
   const parseIso = (s) => { const [y, m, d] = String(s).split("-").map(Number); return new Date(y, m - 1, d); };
   const isoOf = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
@@ -155,7 +158,7 @@
         const ran = W.some((r) => r.nhanSu === s && (r.nenTang || "Facebook") === p) || ev.some((c) => c.nhanSu === s && c.nenTang === p);
         if (!ran) return;
         NEED[p].forEach((k) => {
-          const got = ev.filter((c) => c.nhanSu === s && c.nenTang === p && (c.loai === k || (k === "ads" && c.loai === "qc" && p === "Google")));
+          const got = ev.filter((c) => c.nhanSu === s && c.nenTang === p && slotOf(p, c.loai) === k);
           need.push({ s, p, k, got });
         });
       });
@@ -219,13 +222,14 @@
         ${R.map((r) => `<tr><td><span class="dot" style="background:${PCOL[r.nenTang || "Facebook"]}"></span>${PLAB[r.nenTang || "Facebook"]}</td><td>${esc(r.taiKhoan || "–")}</td><td class="l">${esc(r.chienDich || "")}</td>
           <td>${fmt(num(r.chiPhi))}</td><td>${fmt(num(r.chiPhiPhi) || num(r.chiPhi))}</td><td>${fmt(num(r.lead))}</td><td>${num(r.hienThi) ? fmt(num(r.hienThi)) : "–"}</td><td>${num(r.luotNhap) ? fmt(num(r.luotNhap)) : "–"}</td></tr>`).join("")}
         </tbody></table></div>` : `<p class="muted">Chưa có số liệu.</p>`;
+      const shot = (k) => (c) => `<figure class="shot"><div class="ph" data-img="${esc(c.id)}" data-pdf="${/\.pdf$/i.test(c.tenFile || "") ? 1 : ""}">Đang tải ảnh…</div>
+            <figcaption><b>${KIND[c.loai] || KIND[k]}</b>${c.soTien ? ` · ${fmt(num(c.soTien))} đ${c.vat !== "" && c.vat != null ? " (VAT " + esc(c.vat) + "%)" : ""}` : ""}<br>${esc(c.tenFile)}</figcaption></figure>`;
       const chans = range ? "" : ps.map((p) => {
         const slots = NEED[p].map((k) => {
-          const got = ev.filter((c) => c.nhanSu === s && c.nenTang === p && (c.loai === k || (k === "ads" && c.loai === "qc" && p === "Google")));
+          const got = ev.filter((c) => c.nhanSu === s && c.nenTang === p && slotOf(p, c.loai) === k);
           if (!got.length) return `<figure class="shot miss"><div class="ph">CHƯA CÓ ẢNH<br>${KIND[k]}</div></figure>`;
-          return got.map((c) => `<figure class="shot"><div class="ph" data-img="${esc(c.id)}" data-pdf="${/\.pdf$/i.test(c.tenFile || "") ? 1 : ""}">Đang tải ảnh…</div>
-            <figcaption><b>${KIND[c.loai] || KIND[k]}</b>${c.soTien ? ` · ${fmt(num(c.soTien))} đ${c.vat !== "" && c.vat != null ? " (VAT " + esc(c.vat) + "%)" : ""}` : ""}<br>${esc(c.tenFile)}</figcaption></figure>`).join("");
-        }).join("");
+          return got.map(shot(k)).join("");
+        }).join("") + ev.filter((c) => c.nhanSu === s && c.nenTang === p && !NEED[p].includes(slotOf(p, c.loai))).map(shot("hoadon")).join("");
         return `<div class="chan"><div class="chan-h"><span class="dot" style="background:${PCOL[p]}"></span>${PLAB[p]}</div><div class="shots">${slots}</div></div>`;
       }).join("");
       return `<section class="card staff" style="border-top-color:${PCOL[ps[0] || "Facebook"]}">

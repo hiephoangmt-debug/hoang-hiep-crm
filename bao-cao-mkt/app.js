@@ -3,7 +3,7 @@
 (function () {
   "use strict";
 
-  const PLATFORMS = ["Facebook", "Tiktok", "Zalo", "Google"];
+  const PLATFORMS = ["Facebook", "Tiktok", "Zalo", "Google", "Đăng tin"];
   const KINDS = { ads: "Chiến dịch", qc: "QC đang chạy", hoadon: "Hóa đơn" };
   // từ khoá tiêu đề cột (đã bỏ dấu, viết thường) -> metric; thứ tự quan trọng
   const METRIC_KEYS = [
@@ -207,9 +207,9 @@
     const text = lines.join("\n");
     const rels = relMap(s.relsDoc);
     const shapes = topShapes(s.doc);
-    const platLines = PLATFORMS.filter((p) => lines.some((l) => new RegExp("^" + p.toLowerCase() + "( ads)?:?$").test(l)));
-    // slide phân cách kênh: dòng chỉ có tên kênh (FACEBOOK / TIKTOK / ZALO / GOOGLE)
-    s.divider = PLATFORMS.find((p) => lines.includes(p.toLowerCase())) || null;
+    const platLines = PLATFORMS.filter((p) => lines.some((l) => new RegExp("^(capture man hinh )?" + norm(p) + "( ads)?:?$").test(l)));
+    // slide phân cách kênh: dòng chỉ có tên kênh (FACEBOOK / TIKTOK / ZALO / GOOGLE / KÊNH ĐĂNG TIN)
+    s.divider = PLATFORMS.find((p) => lines.includes(norm(p)) || lines.includes("kenh " + norm(p)) || text.includes("kenh " + norm(p) + "\n") && lines.length <= 3) || null;
     // tiêu đề "TIKTOK ADS:", bỏ qua slide liệt kê ngân sách (nhiều kênh)
     s.titlePlatform = platLines.length === 1 ? platLines[0] : null;
     s.tables = shapes.filter((sh) => sh.el.nodeName === "p:graphicFrame" && sh.el.getElementsByTagName("a:tbl")[0]);
@@ -220,6 +220,12 @@
         sh.box.y >= t.box.y && sh.box.y < t.box.y + t.box.h);
       t.icon = icon || null;
       t.iconKey = icon && rels[icon.embed] ? rels[icon.embed].target : null;
+      // bảng "REVIEW KẾT QUẢ SÀN" (DATA MKT theo dự án) và bảng có cột đầu là tên kênh ("Kênh Đăng Tin")
+      const tbl = t.el.getElementsByTagName("a:tbl")[0];
+      const head = byTag(byTag(tbl, "a:tr")[0], "a:tc").map((tc) => norm(bodyText(tc)));
+      t.review = head.some((h) => h === "data mkt");
+      const hp = PLATFORMS.find((p) => head[0] === "kenh " + norm(p) || head[0] === norm(p));
+      t.headerPlatform = hp || null;
     });
     s.dividerIconKey = null;
     if (s.divider) {
@@ -230,7 +236,7 @@
     const frame = shapes
       .filter((sh) => sh.embed && sh.box && sh.box.w > 3 * EMU_IN && sh.box.w * sh.box.h < 0.6 * slideW * slideH && sh.box.x >= 0 && sh.box.y >= 0)
       .sort((a, b) => b.box.w * b.box.h - a.box.w * a.box.h)[0];
-    s.frame = frame && /luu y|demo/.test(text) && !s.tables.length ? frame : null;
+    s.frame = frame && (/luu y|demo/.test(text) || lines.some((l) => l.startsWith("capture man hinh"))) && !s.tables.length ? frame : null;
     s.kind = null;
     if (s.frame) {
       if (lines.some((l) => l.startsWith("hoa don")) || text.includes("ma tham chieu")) s.kind = "hoadon";
@@ -250,16 +256,17 @@
       if (s.divider && s.dividerIconKey) iconMap[s.dividerIconKey] = s.divider;
     });
     slides.forEach((s) => s.tables.forEach((t) => { if (s.platform && t.iconKey) iconMap[t.iconKey] = s.platform; }));
-    slides.forEach((s) => s.tables.forEach((t) => { t.platform = s.platform || (t.iconKey && iconMap[t.iconKey]) || null; }));
+    slides.forEach((s) => s.tables.forEach((t) => { t.platform = t.review ? null : t.headerPlatform || s.platform || (t.iconKey && iconMap[t.iconKey]) || null; }));
   }
 
   // ------------------------------------------------------------ điền nội dung
   function cellValues(header, label, r, merged) {
     return header.map((h, j) => {
-      if (h.startsWith("nen tang")) return merged ? null : label;
+      if (h.startsWith("nen tang") || h.startsWith("kenh ")) return merged ? null : label;
       if (h.startsWith("id tai khoan")) return r.account || (merged && label === "TỔNG" ? "TỔNG" : "");
       if (h.startsWith("chi phi thuc chay (")) return fmtInt(r.cost_fee);
       if (h.startsWith("ngan sach thuc chay")) return fmtInt(r.cost);
+      if (h.startsWith("ngan sach")) return fmtInt(r.cost_fee); // "Ngân sách đăng tin" / "Ngân sách": số đã trả
       if (h.startsWith("lead")) return fmtInt(r.lead);
       if (h.startsWith("impressions")) return fmtInt(r.impressions);
       if (h.startsWith("reach")) return fmtInt(r.reach);
@@ -353,6 +360,69 @@
     }
   }
 
+  /**
+   * Bảng "REVIEW KẾT QUẢ SÀN": mỗi nhân sự một dòng, cột Lead/MQL/SQL/Deal theo từng dự án (nhóm cột theo tên dự án ở dòng 2).
+   * review = { projects: [{ key, name }], rows: [{ staff, by: { <key>: {lead, mql, sql, deal} } }] }
+   */
+  function fillReview(t, review, slideH) {
+    if (!review || !review.rows) return;
+    const tbl = t.el.getElementsByTagName("a:tbl")[0];
+    const trs = byTag(tbl, "a:tr");
+    const txt = (tr) => byTag(tr, "a:tc").map((tc) => norm(bodyText(tc)));
+    // dòng chỉ số (Lead/MQL/SQL/Deal) và dòng tên dự án ngay trên
+    const mi = trs.findIndex((tr) => txt(tr).some((h) => h === "lead"));
+    if (mi < 1) return;
+    const metric = txt(trs[mi]), group = txt(trs[mi - 1]);
+    const colKey = metric.map((m, j) => {
+      const k = /^(lead|mql|sql|deal)/.exec(m);
+      const pj = review.projects.find((p) => group[j] && group[j].includes(norm(p.key)));
+      return k && pj ? [pj.key, k[1]] : null;
+    });
+    let rows = trs.slice(mi + 1);
+    const totalRow = rows.length > 1 && /^tong/.test(txt(rows[rows.length - 1]).join(" ").trim()) ? rows.pop() : null;
+    const n = Math.max(1, review.rows.length);
+    // mọi dòng nhân sự lấy theo dòng mẫu đầu tiên (cùng cỡ chữ, màu); cột "Tên Sàn" gộp dọc cả khối
+    const proto = rows[0];
+    rows.slice(1).forEach((r) => r.parentNode.removeChild(r));
+    rows = [proto];
+    while (rows.length < n) { const tr = proto.cloneNode(true); rows[rows.length - 1].parentNode.insertBefore(tr, rows[rows.length - 1].nextSibling); rows.push(tr); }
+    rows.forEach((tr, i) => {
+      const c0 = byTag(tr, "a:tc")[0];
+      ["rowSpan", "vMerge"].forEach((a) => c0.removeAttribute(a));
+      if (i === 0 && n > 1) c0.setAttribute("rowSpan", String(n));
+      if (i > 0) c0.setAttribute("vMerge", "1");
+      byTag(tr, "a:rPr").forEach((rpr) => rpr.removeAttribute("b"));
+    });
+    if (review.san) { const b0 = byTag(byTag(proto, "a:tc")[0], "a:txBody")[0]; if (b0) setBodyText(b0, review.san); }
+    const sum = {};
+    const put = (tr, vals) => byTag(tr, "a:tc").forEach((tc, j) => {
+      const body = byTag(tc, "a:txBody")[0];
+      if (body && vals[j] != null) setBodyText(body, vals[j]);
+    });
+    rows.forEach((tr, i) => {
+      const r = review.rows[i] || { staff: "", by: {} };
+      put(tr, colKey.map((ck, j) => {
+        if (j === 1) return r.staff;
+        if (!ck) return j === 0 ? null : "";
+        const v = ((r.by || {})[ck[0]] || {})[ck[1]] || 0;
+        sum[j] = (sum[j] || 0) + v;
+        return r.staff ? fmtInt(v) : "";
+      }));
+    });
+    if (totalRow) put(totalRow, colKey.map((ck, j) => (ck ? fmtInt(sum[j] || 0) : null)));
+    // cỡ chữ đồng đều: theo ô số liệu của dòng mẫu
+    const szCell = byTag(proto, "a:tc").map((tc) => byTag(tc, "a:rPr").find((r) => r.getAttribute("sz"))).find((r, j) => r && colKey[j]);
+    const sz = szCell ? szCell.getAttribute("sz") : null;
+    if (sz) rows.concat(totalRow ? [totalRow] : []).forEach((tr) => byTag(tr, "a:tc").forEach((tc) => byTag(tc, "a:rPr").forEach((r) => r.setAttribute("sz", sz))));
+    const maxH = slideH * 0.96 - t.box.y;
+    const all = byTag(tbl, "a:tr"), tot = all.reduce((h, tr) => h + +tr.getAttribute("h"), 0);
+    if (tot > maxH) {
+      const k = maxH / tot;
+      all.forEach((tr) => tr.setAttribute("h", String(Math.round(+tr.getAttribute("h") * k))));
+    }
+    t.box.ext.setAttribute("cy", String(byTag(tbl, "a:tr").reduce((h, tr) => h + +tr.getAttribute("h"), 0)));
+  }
+
   /** Nới rộng shape chứa body (đủ chỗ cho chữ dài hơn mẫu); center = giữ tâm. */
   function widen(body, minW, center) {
     const b = boxOf(body.parentNode);
@@ -370,16 +440,17 @@
         // "THÁNG 10/2026", "TỔNG CHIẾN DỊCH": một dòng, không xuống dòng đè lên dòng ngày
         if (ctx.title) { const bp = byTag(body, "a:bodyPr")[0]; if (bp) bp.setAttribute("wrap", "none"); }
       }
-      else if (/^\.{3,}\s*\d{1,2}\.\d{4}\s*-\s*\.{3,}\s*\d{1,2}\.\d{4}$/.test(t)) setBodyText(body, ctx.weekRangeText);
+      // khoảng ngày của tuần: "......10.2026 - .....10.2026" (mẫu cũ) hoặc "10.10.2026 - 16.10.2026" (mẫu mới)
+      else if (/^(?:\.{3,}\s*\d{1,2}|\d{1,2}\.\d{1,2})\.\d{4}\s*-\s*(?:\.{3,}\s*\d{1,2}|\d{1,2}\.\d{1,2})\.\d{4}$/.test(t)) setBodyText(body, ctx.weekRangeText);
       else if (t.startsWith("Thời gian triển khai:") && ctx.period) setBodyText(body, "Thời gian triển khai: " + ctx.period);
       else if (t.startsWith("REVIEW CHIẾN DỊCH") && ctx.campaign) setBodyText(body, "REVIEW CHIẾN DỊCH " + ctx.campaign);
       else {
         byTag(body, "a:p").forEach((p) => {
           const pt = paraText(p).trim();
-          const m = /^(Facebook|Tiktok|Zalo|Google):\s*$/i.exec(pt);
+          const m = /^(Facebook|Tiktok|Zalo|Google|Đăng tin):\s*$/i.exec(pt);
           if (m) {
             const name = m[1][0].toUpperCase() + m[1].slice(1).toLowerCase();
-            setParaText(p, `${name === "Tiktok" ? "TikTok" : name}: ${fmtInt(ctx.totals[name].cost_fee)} VNĐ`);
+            setParaText(p, `${name === "Tiktok" ? "TikTok" : name}: ${fmtInt((ctx.totals[name] || {}).cost_fee || 0)} VNĐ`);
             widen(body, 9 * EMU_IN, false);
           } else if (/^NHÂN SỰ:/.test(pt) && ctx.staff) {
             setParaText(p, "NHÂN SỰ: " + ctx.staff);
@@ -666,7 +737,26 @@
       slides.push(s);
     }
     resolvePlatforms(slides);
-    const logoRefs = opts.logo ? collectLogoRefs(slides, opts.logos) : {};
+    // Logo theo dự án. Chỉ nhận ảnh logo đúng kích thước gốc (mẫu mới dùng lại tên image9.png cho icon Facebook).
+    // Mẫu thiếu logo của đơn vị (vd mẫu chỉ có TATILAND) thì thêm ảnh logo từ opts.logoExtra.
+    let logos = opts.logos;
+    if (opts.logo && opts.logoSizes) {
+      logos = {};
+      for (const [k, f] of Object.entries(opts.logos || {})) {
+        const zf = zip.file("ppt/media/" + f), want = opts.logoSizes[k];
+        if (!zf) continue;
+        const b = await zf.async("uint8array");
+        const w = (b[16] << 24) | (b[17] << 16) | (b[18] << 8) | b[19], h = (b[20] << 24) | (b[21] << 16) | (b[22] << 8) | b[23];
+        if (!want || (w === want[0] && h === want[1])) logos[k] = f;
+      }
+    }
+    const logoRefs = opts.logo ? collectLogoRefs(slides, logos) : {};
+    const extra = opts.logo && !logoRefs[opts.logo] && (opts.logoExtra || {})[opts.logo];
+    if (extra && Object.keys(logoRefs).length) {
+      zip.file("ppt/media/" + extra.name, extra.b64, { base64: true });
+      logoRefs[opts.logo] = { target: "../media/" + extra.name, aspect: extra.aspect, fill: extra.fill };
+      logos = Object.assign({}, logos, { [opts.logo]: extra.name });
+    }
 
     // Phân đoạn: phần tổng | khối nhân sự (nhân bản) | phần kết
     const staffList = (opts.staffList || []).filter(Boolean);
@@ -688,7 +778,8 @@
       const data = dataFor(staff);
       const ctx = Object.assign({}, base, { data, totals: totalsOf(data), staff: staffLabel });
       const raw = imgsFor(staff);
-      const imgsOf = (p, k) => raw(p, k).concat(k === "ads" && slideKinds[p] && !slideKinds[p].has("qc") ? raw(p, "qc") : []);
+      const imgsOf = (p, k) => p === "Đăng tin" ? (k === "ads" ? Object.keys(KINDS).flatMap((x) => raw(p, x)) : [])
+        : raw(p, k).concat(k === "ads" && slideKinds[p] && !slideKinds[p].has("qc") ? raw(p, "qc") : []);
       const used = (p) => data[p].length > 0 || Object.keys(KINDS).some((k) => imgsOf(p, k).length);
       const usedKinds = new Set();
       for (const s of seq) {
@@ -745,10 +836,11 @@
     for (const o of out) {
       const s = o.s;
       fillText(s.doc, o.ctx);
-      if (opts.logo) swapLogo(s, opts.logo, logoRefs, opts.logos);
+      if (opts.logo) swapLogo(s, opts.logo, logoRefs, logos);
       s.tables.forEach((t, i) => {
         t.platform = o.src.tables[i] ? o.src.tables[i].platform : t.platform;
-        fillTable(t, o.ctx.data, H, accountLabel);
+        if (t.review) fillReview(t, opts.review, H);
+        else fillTable(t, o.ctx.data, H, accountLabel);
       });
       if (o.files.length) {
         await placeImages(zip, s, o.files, state);
@@ -963,6 +1055,7 @@
     if (/tik ?tok/.test(t)) platform = "Tiktok";
     else if (/zalo/.test(t)) platform = "Zalo";
     else if (/google|\bgg\b|adwords/.test(t)) platform = "Google";
+    else if (/dang tin|batdongsan|bat dong san|chotot|nha tot|alonhadat|homedy/.test(t)) platform = "Đăng tin";
     else if (/facebook|\bfb\b|meta/.test(t)) platform = "Facebook";
     const kind = /hoa ?don|\bhd\b|invoice|bill|thanh toan|\bvat\b|receipt|tham chieu/.test(t) ? "hoadon"
       : /quang cao|\bqc\b|dang chay|hoat dong|active/.test(t) ? "qc" : "ads";
@@ -987,6 +1080,7 @@
     Tiktok: ["tiktok"],
     Zalo: ["zalo"],
     Google: ["googleads", "google"],
+    "Đăng tin": ["batdongsan", "dangtin", "chotot", "nhatot", "alonhadat", "homedy", "muaban"],
   };
   const countHits = (t, words) => words.reduce((n, w) => n + (t.split(w).length - 1), 0);
 

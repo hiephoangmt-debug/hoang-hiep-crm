@@ -711,6 +711,8 @@ function crmDelete_(name, ids) {
 // ---------------------------------------------------------------------
 var SHEET_NOTE = 'Tự điền từ ảnh nghiệm thu (CRM).';
 var SHEET_PLATFORMS = ['Facebook', 'Tiktok', 'Zalo', 'Google'];
+/** Kênh có thư mục chứng từ riêng (thư mục "Kênh đăng tin" = kênh Đăng tin). */
+var EVIDENCE_CHANNELS = SHEET_PLATFORMS.concat(['Đăng tin']);
 var SHEET_METRICS = [['chi phi thuc chay (+', 'chiPhiPhi'], ['chi phi thuc chay', 'chiPhi'], ['id tai khoan', 'taiKhoan'],
   ['lead', 'lead'], ['impressions', 'hienThi'], ['reach', 'tiepCan'], ['luot nhap', 'luotNhap'], ['luot xem', 'luotXem']];
 
@@ -927,7 +929,7 @@ function crmEnsureEvidenceFolders_() {
     var id = crmFolderId_(p.thuMucChungTu);
     if (!id) return;
     var root = DriveApp.getFolderById(id);
-    SHEET_PLATFORMS.forEach(function (ch) {
+    EVIDENCE_CHANNELS.forEach(function (ch) {
       var f = crmSubFind_(root, ch);
       if (f && !crmSubFind_(f, p.khoa || p.ten)) f.createFolder(p.khoa || p.ten);
     });
@@ -936,8 +938,9 @@ function crmEnsureEvidenceFolders_() {
 }
 /** Thư mục con trùng tên không phân biệt hoa thường / dấu ("Tiktok" = "TikTok"). */
 function crmSubFind_(parent, name) {
-  var want = crmPlain_(name), it = parent.getFolders();
-  while (it.hasNext()) { var f = it.next(); if (crmPlain_(f.getName()) === want) return f; }
+  var bare = function (x) { return crmPlain_(x).replace(/^kenh /, ''); };
+  var want = bare(name), it = parent.getFolders();
+  while (it.hasNext()) { var f = it.next(); if (bare(f.getName()) === want) return f; }
   return null;
 }
 /**
@@ -950,7 +953,7 @@ function crmEvidenceFolder_(project, meta) {
   var root = DriveApp.getFolderById(crmFolderId_(project.thuMucChungTu) || EVIDENCE_ROOT);
   var byChannel = SHEET_PLATFORMS.some(function (p) { return crmSubFind_(root, p); });
   if (byChannel) {
-    var ch = crmSubFind_(root, meta.nenTang || 'Facebook') || crmSub_(root, meta.nenTang || 'Khác');
+    var ch = crmSubFind_(root, meta.nenTang || 'Facebook') || crmSub_(root, meta.nenTang === 'Đăng tin' ? 'Kênh đăng tin' : meta.nenTang || 'Khác');
     return crmSub_(crmSub_(crmSub_(ch, crmWeekFolder_(meta.tuan)), project.khoa || project.ten), meta.nhanSu || 'Chưa gán');
   }
   return crmSub_(crmSub_(crmSub_(root, meta.nhanSu || 'Chưa gán'), project.khoa || project.ten), crmWeekFolder_(meta.tuan));
