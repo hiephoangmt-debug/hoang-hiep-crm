@@ -9,7 +9,7 @@ import { SLOT_LIST, CORES, CORRIDORS, PODIUM, rectM, STATUS, TYPE_COLORS, reside
 import { buildScene } from './builder.js';
 import { placeUnit, slotFrame } from './unitPlacement.js';
 import UNITS from './units/units.json';
-import { buildSurroundings } from './surroundings.js';
+import { buildSurroundings, cityRiverMid } from './surroundings.js';
 
 /** Mặt đứng 1 ô (rộng 3 m × cao 1 tầng): khung, tường, cửa kính, lan can kính, bồn cây hoa */
 function facadeTexture(variant) {
@@ -164,7 +164,7 @@ export class BuildingView {
     // Biển tên F2 và tên đường
     this.f2Tag = this.towerTag('TÒA F2 – MAI', 0xd9542f, b0.podiumFloors * b0.podiumHeight + residentialFloors(b0.floors).length * b0.floorHeight + 8);
     scene.add(this.f2Tag);
-    for (const [t, x, z, cls] of [['Đ. MINH MẠNG', AVENUE_X, -60, 'road green'], ['Đ. MINH MẠNG', AVENUE_X, 150, 'road green'], ['Đ. QUẢNG NAM', 90, roadZ, 'road gold'], ['Đ. NGUYỄN PHƯỚC LAN', -200, roadZ, 'road gold'], ['CẦU BÔ QUAN', AVENUE_X, -357, 'road green'], ['SÔNG ĐÔ TỎA', 120, -357, 'road blue'], ['BIỂN SƠN THỦY · MỸ KHÊ', 0, -700, 'road blue'], ['NÚI SƠN TRÀ', -820, -880, 'road green'], ['NGŨ HÀNH SƠN', 320, -575, 'road green'], ['CẦU TRUNG LƯƠNG', -705, roadZ, 'road green'], ['CẦU HÒA XUÂN', -705, roadZ + 520, 'road green'], ['TRUNG TÂM ĐÀ NẴNG', -1000, -320, 'road blue']]) {
+    for (const [t, x, z, cls] of [['Đ. MINH MẠNG', AVENUE_X, -60, 'road green'], ['Đ. MINH MẠNG', AVENUE_X, 150, 'road green'], ['Đ. QUẢNG NAM', 90, roadZ, 'road gold'], ['Đ. NGUYỄN PHƯỚC LAN', -200, roadZ, 'road gold'], ['CẦU BÔ QUAN', AVENUE_X, -357, 'road green'], ['SÔNG ĐÔ TỎA', 120, -357, 'road blue'], ['BIỂN SƠN THỦY · MỸ KHÊ', 0, -700, 'road blue'], ['NÚI SƠN TRÀ', -820, -880, 'road green'], ['NGŨ HÀNH SƠN', 320, -575, 'road green'], ['CẦU TRUNG LƯƠNG', cityRiverMid(roadZ), roadZ, 'road green'], ['CẦU HÒA XUÂN', cityRiverMid(roadZ + 520), roadZ + 520, 'road green'], ['TRUNG TÂM ĐÀ NẴNG', cityRiverMid(-320) - 380, -320, 'road blue']]) {
       const el = document.createElement('div');
       el.className = 'roadtag ' + cls;
       el.textContent = t;
