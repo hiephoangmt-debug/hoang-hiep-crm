@@ -1539,7 +1539,12 @@ function askName() {
   bot('Em nhận được số <b>' + showPhone(st.phone) + '</b> rồi ạ 👍 Anh/chị cho em xin <b>tên</b> để chuyên viên tiện xưng hô nhé?');
   choices([{t: 'Bỏ qua', fn: () => finish()}]);
   focusInput();
+  // Khách để số mà không ghi tên: 60 giây sau vẫn gửi số về CRM + Telegram
+  clearTimeout(st.nameT); st.nameT = setTimeout(() => { if (st.step === 'name') finish(); }, 60000);
 }
+// Khách để số rồi đóng trang / chuyển ứng dụng trước khi ghi tên: gửi số ngay, không để mất khách
+addEventListener('pagehide', () => { if (st.phone && st.step === 'name') finish(); });
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden' && st.phone && st.step === 'name') finish(); });
 function thanksChoices() {
   choices([{t: 'Nhắn Zalo 0904 567 009', href: ZALO, pri: true}, {t: '📞 Gọi ngay', href: TEL}]);
 }
@@ -1569,6 +1574,7 @@ function ping() {
 // Gửi số điện thoại về CRM + email, giống form đăng ký trên trang
 function finish() {
   if (st.step === 'done') return;
+  clearTimeout(st.nameT);
   st.step = 'done';
   setInput('Nhắn thêm cho tư vấn viên…', false);
   const data = {
