@@ -11,6 +11,15 @@
 (function(){
   var CRM='https://script.google.com/macros/s/AKfycbyChbG-uvItjVlRk7JgLrwpUS6Cgah4nIA6BWHuEwgbXBqSlvAPJNSdZdp6pQ91d_rN/exec';
   window.HM_CRM={url:CRM,key:'qgK6I9KWTqfS'};
+  window.HM_JSONP=function(params,cb,ms){
+    var name='hmcb'+Date.now()+Math.floor(Math.random()*1e4), done=false, sc=document.createElement('script');
+    function end(r){ if(done) return; done=true; try{delete window[name];}catch(e){window[name]=undefined;} if(sc.parentNode) sc.parentNode.removeChild(sc); cb(r); }
+    window[name]=function(r){end(r||{});};
+    var q=['cb='+name,'key=qgK6I9KWTqfS']; for(var k in params) if(params[k]!=null) q.push(k+'='+encodeURIComponent(params[k]));
+    sc.src=CRM+'?'+q.join('&'); sc.onerror=function(){end({error:'không gọi được CRM'});};
+    setTimeout(function(){end({error:'quá thời gian'});},ms||15000);
+    document.head.appendChild(sc);
+  };
   if(!document.querySelector('script[src*="AKfycbyChbG-uvItjVlRk7"]')){
     var s=document.createElement('script'); s.src=CRM+'?js=1'; s.async=true; s.setAttribute('data-key','qgK6I9KWTqfS'); document.head.appendChild(s);
   }
@@ -198,14 +207,12 @@
   function ai(text){
     var C=window.HM_CRM, t=typing(), vid=''; try{vid=localStorage.getItem('crm_vid')||'';}catch(e){}
     function fail(){ t.remove(); var m='Câu này em xin chuyên viên Hoàng Hiệp trả lời trực tiếp cho chính xác ạ. Anh/chị để lại số Zalo, hoặc bấm Gọi / Zalo bên dưới.'; bot(m,50); H.push({r:'bot',t:m}); acts(); }
-    if(!C||!window.fetch){fail();return;}
-    var done=false, to=setTimeout(function(){ if(!done){done=true;fail();} },15000);
-    fetch(C.url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'chat',key:C.key,vid:vid,q:text,topic:curTopic?curTopic.id:'',history:JSON.stringify(H.slice(-9,-1))})})
-      .then(function(r){return r.json();}).then(function(j){
-        if(done) return; done=true; clearTimeout(to);
-        if(!j||!j.a){fail();return;}
-        t.remove(); bot(j.a,50); H.push({r:'bot',t:j.a});
-      }).catch(function(){ if(!done){done=true;clearTimeout(to);fail();} });
+    if(!C||!window.HM_JSONP){fail();return;}
+    var hist=H.slice(-5,-1).map(function(m){return {r:m.r,t:String(m.t).slice(0,200)};});
+    window.HM_JSONP({action:'chat',vid:vid,q:text,topic:curTopic?curTopic.id:'',history:JSON.stringify(hist)},function(j){
+      if(!j||!j.a){fail();return;}
+      t.remove(); bot(j.a,50); H.push({r:'bot',t:j.a});
+    },20000);
   }
   function open(topic){
     panel.classList.add('open'); bubble.style.display='none'; badge.style.display='none';
@@ -295,13 +302,11 @@
     line('1. Mã CRM trên trang: '+(window.crmLead?'✅ đã chạy':'❌ CHƯA chạy'));
     line('2. Đoạn mã chat mới: '+(document.getElementById('hmw')?'✅ có':'❌ không có'));
     function call(n,label,body){
-      fetch(C.url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(body)})
-        .then(function(r){return r.text();}).then(function(t){line(n+'. '+label+': '+(/"ok":true|"a":/.test(t)?'✅ ':'❌ ')+t.slice(0,160));})
-        .catch(function(e){line(n+'. '+label+': ❌ không gọi được CRM ('+e.message+')');});
+      window.HM_JSONP(body,function(j){ var t=JSON.stringify(j); line(n+'. '+label+': '+(j&&(j.ok||j.a)?'✅ ':'❌ ')+t.slice(0,160)); },20000);
     }
-    call(3,'Gửi khách thử về Sheet + Telegram',{key:C.key,action:'lead',name:'TEST tự động (crmtest)',phone:'0900000009',vid:'crmtest',url:location.href,message:'Kiểm tra kết nối'});
-    call(4,'Lượt bấm Zalo thử',{key:C.key,action:'track',type:'click',channel:'zalo',vid:'crmtest',url:location.href});
-    call(5,'Chat AI',{key:C.key,action:'chat',q:'Dự án cách biển bao xa?',vid:'crmtest'});
+    call(3,'Gửi khách thử về Sheet + Telegram',{action:'lead',name:'TEST tự động (crmtest)',phone:'0900000009',vid:'crmtest',url:location.href,message:'Kiểm tra kết nối'});
+    call(4,'Lượt bấm Zalo thử',{action:'track',type:'click',channel:'zalo',vid:'crmtest',url:location.href});
+    call(5,'Chat AI',{action:'chat',q:'Dự án cách biển bao xa?',vid:'crmtest'});
   }
   setTimeout(go,4000);
 })();

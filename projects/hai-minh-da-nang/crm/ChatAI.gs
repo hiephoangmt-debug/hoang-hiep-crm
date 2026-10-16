@@ -2,6 +2,8 @@
  * ChatAI.gs – TRẢ LỜI CHAT WEBSITE BẰNG AI cho "CRM Hoàng Hiệp".
  * Dùng chung khoá AI "quân sư" đã cài (menu CRM > Cài khoá quân sư). Không cần khoá mới.
  * Cài: Apps Script → + → Tệp lệnh → tên "ChatAI" → dán file này → Lưu.
+ * (Mới) Trong Mã.gs, hàm doGet, ngay dưới dòng  function doGet(e) {  thêm:
+ *     if (e && e.parameter && e.parameter.cb) return jsonp_(e.parameter);
  * Rồi trong Mã.gs, hàm doPost, ngay dưới dòng  if (!site) return json_({ error: 'Mã website không hợp lệ' });
  * thêm 1 dòng:
  *     if (b.action === 'chat') return json_(chatAI_(b, site));
@@ -90,4 +92,24 @@ function chatAI_(b, site) {
 function thuChatAI() {
   Logger.log(JSON.stringify(chatAI_({ q: 'xa trung tâm ko', vid: 'test', topic: 'vi-tri' }, { name: 'Hải Minh' })));
   Logger.log(JSON.stringify(chatAI_({ q: 'bán có lấy dc căn ko', vid: 'test', topic: 'phap-ly' }, { name: 'Hải Minh' })));
+}
+
+/**
+ * Gọi kiểu JSONP (GET + callback) – không bị trình duyệt chặn CORS.
+ * Trong Mã.gs, hàm doGet, thêm 1 dòng NGAY SAU dòng  function doGet(e) {
+ *     if (e && e.parameter && e.parameter.cb) return jsonp_(e.parameter);
+ */
+function jsonp_(p) {
+  var cb = String(p.cb || '');
+  if (!/^[A-Za-z_$][\w$.]{0,60}$/.test(cb)) cb = 'cb';
+  var out;
+  try {
+    var site = findSite_(p.key);
+    if (!site) out = { error: 'Mã website không hợp lệ' };
+    else if (p.action === 'chat') out = chatAI_(p, site);
+    else if (p.action === 'track') out = handleTrack_(p, site);
+    else if (p.action === 'lead') out = handleLead_(normLeadBody_(p), site);
+    else out = { ok: true, service: 'CRM Hoàng Hiệp' };
+  } catch (err) { out = { error: String(err && err.message || err) }; }
+  return ContentService.createTextOutput(cb + '(' + JSON.stringify(out) + ');').setMimeType(ContentService.MimeType.JAVASCRIPT);
 }
