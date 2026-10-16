@@ -4,6 +4,7 @@ import { STYLES, roomKind } from './styles.js';
 import { polygonArea } from './geom.js';
 import { toast, READONLY, linkTo, download } from './ui.js';
 import UNITS from './units/units.json';
+import { AD_FOOTER } from './adcopy.js';
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => [...document.querySelectorAll(s)];
@@ -38,6 +39,7 @@ function selectUnit(id) {
   $$('[data-unit]').forEach((b) => b.classList.toggle('active', b.dataset.unit === unit.id));
   try { history.replaceState(null, '', '#' + unit.id); } catch { /* bỏ qua */ }
   store.plan = JSON.parse(JSON.stringify(unit.plan));
+  if (viewer?.state.ad) applyStyle('green');
   $('#planImg').src = `./units/${unit.id}.webp`;
   renderInfo();
   if (!viewer) {
@@ -58,7 +60,7 @@ function selectUnit(id) {
     viewer.frameAll(false);
   }
   applySection();
-  viewer.setHour(15);
+  viewer.setHour(viewer.state.ad ? 8.2 : 15);
   setTab(tab);
 }
 
@@ -94,16 +96,18 @@ function renderInfo() {
   };
 }
 
+function applyStyle(key) {
+  const st = STYLES[key];
+  store.plan.settings.style = key;
+  store.plan.settings.palette = {};
+  // sân vườn giữ cỏ
+  store.plan.rooms.forEach((r) => { if (!/sân vườn/i.test(r.name)) r.floor = st.floors[roomKind(r.name)] || r.floor; });
+  renderStyles();
+}
+
 function renderStyles() {
-  $('#styles').innerHTML = Object.entries(STYLES).slice(0, 5).map(([k, v]) => `<button class="chip ${store.plan?.settings.style === k ? 'active' : ''}" data-style="${k}" title="${v.desc}"><span class="sw">${[v.wall, v.palette.wood, v.palette.fabric].map((c) => `<i style="background:${c}"></i>`).join('')}</span>${v.name.replace(/ \(.*\)/, '')}</button>`).join('');
-  $$('[data-style]').forEach((b) => (b.onclick = () => {
-    const st = STYLES[b.dataset.style];
-    store.plan.settings.style = b.dataset.style;
-    store.plan.settings.palette = {};
-    store.plan.rooms.forEach((r) => (r.floor = st.floors[roomKind(r.name)] || r.floor));
-    viewer.rebuild();
-    renderStyles();
-  }));
+  $('#styles').innerHTML = Object.entries(STYLES).slice(0, 6).map(([k, v]) => `<button class="chip ${store.plan?.settings.style === k ? 'active' : ''}" data-style="${k}" title="${v.desc}"><span class="sw">${[v.wall, v.palette.wood, v.palette.fabric].map((c) => `<i style="background:${c}"></i>`).join('')}</span>${v.name.replace(/ \(.*\)/, '')}</button>`).join('');
+  $$('[data-style]').forEach((b) => (b.onclick = () => { applyStyle(b.dataset.style); viewer.rebuild(); }));
 }
 
 function setTab(t) {
@@ -180,6 +184,36 @@ async function saveImage(mode) {
   download(blob, `${unit.id}-${mode === 'plan' ? 'mat-bang' : 'phoi-canh'}.png`);
   toast(mode === 'plan' ? 'Đã tải ảnh mặt bằng (5:6, nhìn từ trên, kèm diện tích và dài × rộng từng phòng).' : 'Đã tải ảnh phối cảnh theo góc đang xem (5:6). Mẹo: bấm 📸 Chụp ảnh như thật, chờ ảnh mịn rồi tải để có ảnh đẹp nhất.', 6000);
 }
+// Kiểu quảng cáo: đế sách, phong cách gỗ & xanh rêu, nắng sáng xiên có bóng lá, chú thích cảm xúc
+let adPrev = null;
+function setAd(on) {
+  if (on === !!viewer.state.ad) return;
+  if (on) {
+    adPrev = { style: store.plan.settings.style, hour: viewer.state.hour, labels: viewer.state.labels, iso: viewer.isoView };
+    applyStyle('green');
+    viewer.state.ad = true;
+    viewer.state.labels = true;
+    viewer.isoView = { az: -8, el: 62, k: 1.05 };
+    viewer.rebuild();
+    viewer.setHour(8.2);
+  } else {
+    viewer.state.ad = false;
+    viewer.state.labels = adPrev?.labels ?? false;
+    viewer.isoView = adPrev?.iso || viewer.isoView;
+    applyStyle(adPrev?.style || 'warm');
+    viewer.rebuild();
+    viewer.setHour(adPrev?.hour ?? 15);
+  }
+  viewer.frameAll(true);
+  $('#adBtn').classList.toggle('active', on);
+  $('#saveAdBtn').hidden = !on;
+}
+$('#adBtn').onclick = () => setAd(!viewer.state.ad);
+$('#saveAdBtn').onclick = async () => {
+  const blob = await viewer.exportPNG({ mode: 'view', ad: AD_FOOTER, title: `${unit.name} · Tòa F2`, lines: [unit.type, `${fmt(unit.dims[0], 2)} × ${fmt(unit.dims[1], 2)} m`] });
+  download(blob, `${unit.id}-quang-cao.png`);
+  toast('Đã tải ảnh quảng cáo 5:6. Mẹo: bấm 📸 Chụp ảnh như thật, chờ ảnh mịn rồi tải để có ảnh đẹp nhất.', 6000);
+};
 $('#saveBtn').onclick = () => saveImage('plan');
 $('#saveViewBtn').onclick = () => saveImage('view');
 $('#walkBtn').onclick = () => { document.body.classList.add('walking-page'); viewer.enterWalk(); };

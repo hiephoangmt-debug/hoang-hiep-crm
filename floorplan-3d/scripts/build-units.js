@@ -238,15 +238,20 @@ export function gardenUnit(base, spec) {
   plan.rooms.push({ id: uid(), name: 'Sân vườn', floor: 'grass', points: [P(0, 0), P(L, 0), P(L, D), P(0, D)] });
   const rotOut = { top: 0, bottom: 180, left: 270, right: 90 }[side];
   const add = (type, u, v, rot = 0, extra = {}) => { const p = P(u, v); plan.furniture.push({ id: uid(), type, x: +p.x.toFixed(3), y: +p.y.toFixed(3), rot, ...extra }); };
-  // Bồn cây dọc tường lửng phía ngoài và hai đầu
-  for (let u = 0.5; u < L - 0.3; u += 1.1) add('plant', u, D - 0.4, 0, { h: 0.9 + ((u * 7) % 3) * 0.25 });
-  add('plant', 0.45, D * 0.45); add('plant', L - 0.45, D * 0.45);
-  // Bàn trà ngoài trời + 2 ghế bành, thêm ghế nằm nếu sân rộng
-  const cu = L * 0.62, cv = D * 0.48;
-  add('roundTable', cu, cv, 0, { w: 0.6, d: 0.6 });
-  add('armchair', cu - 0.8, cv, (rotOut + 90) % 360, { w: 0.7, d: 0.7 });
-  add('armchair', cu + 0.8, cv, (rotOut + 270) % 360, { w: 0.7, d: 0.7 });
-  if (L > 7) add('rug', L * 0.25, cv, 0, { w: 1.8, d: 1.4 });
+  const rotU = side === 'top' || side === 'bottom' ? 0 : 90; // xoay để cạnh dài của đồ chạy dọc mép sân
+  // Sân vườn kiểu resort: luống cây nhiệt đới + hoa dọc tường lửng, viền sỏi trắng, cây dừa ở góc,
+  // sàn gỗ có 2 ghế nằm + dù che, lối đá bước trên cỏ từ cửa nhà ra sàn gỗ
+  add('shrubBed', L / 2, D - 0.4, rotU, { w: L - 0.3, d: 0.6 });
+  add('pebbles', L / 2, D - 0.82, rotU, { w: L - 1.2, d: 0.24 });
+  add('shrubBed', L - 0.36, (D - 0.7) / 2, (rotU + 90) % 360, { w: D - 1.0, d: 0.5 });
+  add('palm', 0.7, D - 0.7, 0, { h: 3.0 });
+  const dw = Math.min(2.9, L * 0.45), dd = D - 1.05;
+  add('deck', 0.1 + dw / 2, 0.15 + dd / 2, rotU, { w: dw, d: dd });
+  add('lounger', 0.1 + dw * 0.3, 0.15 + dd / 2, (rotOut + 180) % 360, { w: 0.68, d: Math.min(1.8, dd - 0.1) });
+  add('lounger', 0.1 + dw * 0.72, 0.15 + dd / 2, (rotOut + 180) % 360, { w: 0.68, d: Math.min(1.8, dd - 0.1) });
+  add('shrubBed', L - 0.36, D - 0.4, rotU, { w: 0.6, d: 0.6 });
+  let k = 0;
+  for (let u = dw + 0.55; u < L - 0.9; u += 0.52) add('steppingStone', u, 0.45 + (k++ % 2 ? 0.05 : -0.05), rotU, { w: 0.46, d: 0.36 });
   const dims = side === 'top' || side === 'bottom' ? [base.dims[0], +(base.dims[1] + D).toFixed(2)] : [+(base.dims[0] + D).toFixed(2), base.dims[1]];
   return { ...base, id: spec.id, name: spec.name, type: spec.type, dims, garden: +(L * D).toFixed(1), plan };
 }

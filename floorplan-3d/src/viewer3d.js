@@ -13,7 +13,8 @@ import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
 import { buildScene, disposeTree, SHARED } from './builder.js';
 import { upgradeFurniture, loadInteriorHDRI } from './realistic.js';
-import { resolvePalette } from './styles.js';
+import { resolvePalette, roomKind } from './styles.js';
+import { adCaption } from './adcopy.js';
 import { exportImage } from './snapshot.js';
 import { getTexture } from './textures.js';
 import { closestOnSegment, rotatePoint, labelPoint, polygonArea, pointInPolygon, pointInRotRect } from './geom.js';
@@ -141,11 +142,13 @@ export class Viewer3D {
       this.scene.remove(prev.root);
       disposeTree(prev.root);
     }
-    const built = buildScene(this.store.plan, { clippingPlanes: [this.clipPlane], ceiling: this.state.ceiling, landscape: this.state.landscape, people: this.state.people });
+    const built = buildScene(this.store.plan, { clippingPlanes: [this.clipPlane], ceiling: this.state.ceiling, landscape: this.state.landscape, people: this.state.people, book: this.state.ad });
     // Giữ trạng thái đóng/mở cửa sau khi dựng lại
     if (prev) for (const d of built.doors) { const o = prev.doors.find((p) => p.op.id === d.op.id); if (o) { d.open = o.open; d.target = o.target; } }
     this.built = built;
     this.scene.add(built.root);
+    this.shadowCatcher.position.y = this.state.ad ? -0.95 : -0.158;
+    if (this.state.ad) { this.addLeafShadows(built); this.adLabels(built); }
     this.applyExterior();
     this._above = undefined;
     if (this.ptActive) this.stopRealRender();
@@ -194,6 +197,7 @@ export class Viewer3D {
     this.state.hour = hour;
     // Mặt trời mọc 6h, lặn 18h; quỹ đạo nghiêng về phía nam
     const dayT = (hour - 6) / 12;
+    // (kiểu quảng cáo dùng giờ 8h sáng: nắng vàng xiên, bóng lá dài)
     const elev = Math.sin(Math.PI * dayT) * 62;
     const azim = 90 + dayT * 180;
     const phi = THREE.MathUtils.degToRad(90 - elev);
@@ -233,7 +237,7 @@ export class Viewer3D {
     this.shadowCatcher.visible = studio;
     if (studio) {
       this.sky.visible = false;
-      this.scene.background = new THREE.Color(night ? 0x1c2230 : 0xdcdcdc);
+      this.scene.background = new THREE.Color(night ? 0x1c2230 : this.state.ad ? 0xf2eee7 : 0xdcdcdc);
       this.hemi.groundColor.setHex(0xe8e6e1);
     } else this.hemi.groundColor.setHex(0x6b7f4f);
     this.isNight = night;
@@ -251,6 +255,45 @@ export class Viewer3D {
       }).catch((e) => console.warn('HDRI', e));
     } else if (this._roomEnv) this.scene.environment = this._roomEnv;
     this.rebuild();
+  }
+
+  /** Kiểu quảng cáo: tán lá vô hình phía trên chỉ để đổ bóng lá lốm đốm lên sàn khi nắng xiên */
+  addLeafShadows(built) {
+    if (!this._leafTex) {
+      const c = document.createElement('canvas'); c.width = c.height = 512;
+      const x = c.getContext('2d');
+      let seed = 7; const r = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+      x.fillStyle = '#fff';
+      for (let i = 0; i < 70; i++) {
+        const cx = r() * 512, cy = r() * 512, a = r() * Math.PI, l = 26 + r() * 40, w = l * 0.38;
+        x.save(); x.translate(cx, cy); x.rotate(a); x.beginPath(); x.ellipse(0, 0, l, w, 0, 0, Math.PI * 2); x.fill();
+        x.fillRect(-l * 1.6, -1.5, l * 0.7, 3); x.restore();
+      }
+      this._leafTex = new THREE.CanvasTexture(c);
+    }
+    const b = built.bounds, size = b.size * 1.6;
+    const mat = new THREE.MeshBasicMaterial({ alphaMap: this._leafTex, alphaTest: 0.5, side: THREE.DoubleSide, colorWrite: false, depthWrite: false });
+    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(size, size), mat);
+    mesh.customDepthMaterial = new THREE.MeshDepthMaterial({ depthPacking: THREE.RGBADepthPacking, alphaMap: this._leafTex, alphaTest: 0.5 });
+    mesh.rotation.x = -Math.PI / 2;
+    // đặt lệch về phía mặt trời buổi sáng (phía đông) để bóng lá rơi chéo vào một góc căn
+    mesh.position.set(b.maxX + 1.5, 4.2, b.minY + b.size * 0.15);
+    mesh.castShadow = true;
+    mesh.userData.noExport = true;
+    mesh.userData.leafGobo = true;
+    built.root.add(mesh);
+  }
+
+  /** Kiểu quảng cáo: nhãn phòng thành câu cảm xúc (tiêu đề chữ nghiêng + một câu lợi ích) */
+  adLabels(built) {
+    const seen = {};
+    built.labels.forEach((l) => {
+      const name = l.userData.roomName;
+      if (!name) return;
+      const t = adCaption(name, (seen[roomKind(name)] = (seen[roomKind(name)] || 0) + 1));
+      l.element.className = 'label3d adlabel';
+      l.element.innerHTML = `<i>${t.icon}</i><b>${t.title}</b><span>${t.line}</span>`;
+    });
   }
 
   isStudio() { return !this.state.landscape && !this.panoActive; }
@@ -367,7 +410,7 @@ export class Viewer3D {
       if (this.isStudio()) { grad.topColor.set(night ? 0x1c2230 : 0xdcdcdc); grad.bottomColor.set(night ? 0x1c2230 : 0xd4d4d4); grad.update(); }
       this.scene.background = grad;
       // Nhìn từ trên: HDRI trong nhà có "trời" là trần tối → dùng trời sáng để sàn, nội thất đủ sáng
-      if (above) { grad.topColor.set(night ? 0x2a3040 : 0xffffff); grad.bottomColor.set(night ? 0x1c2230 : 0xdcdcdc); grad.update(); this._ptEnvI = this.scene.environmentIntensity; this.scene.environmentIntensity = night ? 0.6 : 2.4; }
+      if (above) { grad.topColor.set(night ? 0x2a3040 : 0xffffff); grad.bottomColor.set(night ? 0x1c2230 : this.state.ad ? 0xf2eee7 : 0xdcdcdc); grad.update(); this._ptEnvI = this.scene.environmentIntensity; this.scene.environmentIntensity = night ? 0.6 : 2.4; }
       this.scene.environment = this.state.realistic && this.hdriEquirect && !above ? this.hdriEquirect : grad;
     } else {
       this._ptBg = { bg: this.scene.background, env: this.scene.environment };
@@ -379,7 +422,9 @@ export class Viewer3D {
     // bỏ vật nằm trên mặt cắt (đèn trần, LED hắt, thanh rèm) để ánh sáng trời lọt vào phòng như ảnh phối cảnh
     this._ptScaled = [];
     const cutY = this._ptSaved.cut < 0.999 ? 0.25 + this._ptSaved.cut * (this.built.height - 0.25) : null;
-    if (above && !this.isNight) {
+    // Kiểu quảng cáo giữ nắng sáng xiên (bóng dài, ấm); tán lá giả chỉ dùng cho bóng thường → bỏ khi render như thật
+    if (this.state.ad) this.built.root.traverse((o) => { if (o.userData.leafGobo && o.visible) { o.visible = false; o.userData.ptHidden = true; } });
+    if (above && !this.isNight && !this.state.ad) {
       // Nắng gần đỉnh đầu (lệch nhẹ) để trong phòng không bị tường che tối; tắt lại sẽ trả về theo giờ
       const t = this.sun.target.position, d = this.sun.position.distanceTo(t);
       this.sun.position.copy(t).add(new THREE.Vector3(0.28, 1, 0.38).normalize().multiplyScalar(d));
@@ -859,7 +904,7 @@ export class Viewer3D {
     // mode 'plan': ảnh mặt bằng nhìn thẳng từ trên (đọc rõ dài × rộng); 'view': giữ góc đang xem
     const planMode = info.mode === 'plan' && !(this.ptActive && this.pt.samples >= 1);
     const above = planMode || this.camera.position.y > (this.built?.height || 2.8) + 1;
-    const showLabels = above && this.mode !== 'walk' && info.mode !== 'view';
+    const showLabels = (above || info.ad) && this.mode !== 'walk' && (info.mode !== 'view' || info.ad);
     const prev = this.built.labels.map((l) => l.visible);
     // Ảnh như thật chỉ dùng khi đã có ít nhất 1 lượt render; chưa có thì lấy ảnh 3D thường
     const usePT = this.ptActive && this.pt.samples >= 1;
@@ -875,16 +920,20 @@ export class Viewer3D {
       extra = {
         // kích thước tổng: ưu tiên số ghi trên bản vẽ (info.dims), không có thì đo theo tường
         plan: { w: info.dims?.[0] ?? b.maxX - b.minX, d: info.dims?.[1] ?? b.maxY - b.minY, corners: [[b.minX, b.minY], [b.maxX, b.minY], [b.maxX, b.maxY], [b.minX, b.maxY]].map(([px, pz]) => ({ x: px, y: 0, z: pz })) },
-        callouts: this.store.plan.rooms.filter((r) => r.points.length >= 3).map((r) => {
+        callouts: this.store.plan.rooms.filter((r) => r.points.length >= 3).map((r, i, arr) => {
           const xs = r.points.map((p) => p.x), ys = r.points.map((p) => p.y);
           const lp = labelPoint(r.points);
-          return { name: r.name, area: polygonArea(r.points), w: Math.max(...xs) - Math.min(...xs), d: Math.max(...ys) - Math.min(...ys), anchor: { x: lp.x, y: 0.1, z: lp.y } };
+          const base = { name: r.name, area: polygonArea(r.points), w: Math.max(...xs) - Math.min(...xs), d: Math.max(...ys) - Math.min(...ys), anchor: { x: lp.x, y: 0.1, z: lp.y } };
+          if (!info.ad) return base;
+          const nth = arr.slice(0, i + 1).filter((q) => roomKind(q.name) === roomKind(r.name)).length;
+          const t = adCaption(r.name, nth);
+          return { ...base, name: t.title, sub: t.line, icon: t.icon };
         }),
       };
       this.built.labels.forEach((l) => (l.visible = false));
     }
     // Khung ảnh cố định 5:6 (2000 × 2400): render riêng vùng giữa đúng tỉ lệ rồi canh căn cho vừa khung
-    const FW = 2000, FH = 2400, fs = 2.4, band = Math.round(84 * fs), side = showLabels ? Math.round(185 * fs) : 0;
+    const FW = 2000, FH = 2400, fs = 2.4, band = Math.round((info.ad ? 92 : 84) * fs), side = showLabels ? Math.round((info.ad ? 200 : 185) * fs) : 0;
     const frame = { W: FW, H: FH, side, band, s: fs };
     const rw = FW - 2 * side, rh = FH - band;
     const saved = { pos: this.camera.position.clone(), target: this.controls.target.clone(), aspect: this.camera.aspect, pr: this.renderer.getPixelRatio() };

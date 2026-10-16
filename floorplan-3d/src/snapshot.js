@@ -12,7 +12,7 @@ function roundRect(x, X, Y, w, h, r) {
  * keepRatio: true khi đang path tracing (không đổi độ phân giải để khỏi mất các lượt đã tích luỹ);
  * title / lines / note: chữ ở khung tên.
  */
-export function exportImage({ renderer, scene, camera, render, keepRatio = false, scale = 2, title = '', lines = [], note = '', callouts = null, plan = null, frame = null, focus = null }) {
+export function exportImage({ renderer, scene, camera, render, keepRatio = false, scale = 2, title = '', lines = [], note = '', callouts = null, plan = null, frame = null, focus = null, ad = null }) {
   // frame: { W, H, side, band, s } – khung ảnh cố định (vd. 5:6); người gọi đã render vào canvas cỡ (W − 2·side) × (H − band)
   let W, H, s, band, side, src = renderer.domElement;
   const p0 = renderer.getPixelRatio();
@@ -38,7 +38,7 @@ export function exportImage({ renderer, scene, camera, render, keepRatio = false
     sx = (x0 + x1) / 2 - w / 2; sy = (y0 + y1) / 2 - h / 2; sw = w; sh = h;
   }
   const sc = Math.min(W / sw, H / sh), dw = sw * sc, dh = sh * sc;
-  if (focus) {
+  {
     // vùng lấy có thể vượt khỏi khung render → tô trước bằng đúng màu nền ảnh render (lấy ở góc)
     const t = document.createElement('canvas'); t.width = t.height = 1;
     const tx = t.getContext('2d'); tx.drawImage(src, 2, 2, 1, 1, 0, 0, 1, 1);
@@ -50,7 +50,8 @@ export function exportImage({ renderer, scene, camera, render, keepRatio = false
   if (k !== 1) { renderer.setPixelRatio(p0); render(1); }
   const v = new THREE.Vector3();
   const toScreen = (p) => { v.set(p.x, p.y, p.z).project(camera); return { x: crop.ox + (v.x * 0.5 + 0.5) * src.width * crop.sc, y: crop.oy + (-v.y * 0.5 + 0.5) * src.height * crop.sc }; };
-  if (callouts) drawCallouts(x, callouts, plan, toScreen, s, W, H, side);
+  if (callouts && ad) drawAdCallouts(x, callouts, toScreen, s, W, H, side);
+  else if (callouts) drawCallouts(x, callouts, plan, toScreen, s, W, H, side);
   // Nhãn CSS (tên phòng, mã căn, tên tòa…) đang hiện trên màn hình
   if (!callouts) {
   x.textAlign = 'center'; x.textBaseline = 'middle';
@@ -73,6 +74,22 @@ export function exportImage({ renderer, scene, camera, render, keepRatio = false
     let yy = py - h / 2 + 5 * s + f1 / 2;
     rows.forEach((t, i) => { x.font = `${i ? 500 : 700} ${i ? f2 : f1}px Inter, Arial, sans-serif`; x.fillText(t, px, yy); yy += (i ? f2 : f1) / 2 + 3 * s + f2 / 2; });
   });
+  }
+  if (ad) {
+    // Kiểu quảng cáo: nền kem liền, câu chốt chữ viết tay ở giữa, tên căn nhỏ bên dưới
+    x.fillStyle = '#fbf8f2'; x.fillRect(0, H, c.width, band);
+    const cx = c.width / 2;
+    x.textAlign = 'center'; x.textBaseline = 'alphabetic'; x.fillStyle = '#2f3a2c';
+    x.font = `700 ${Math.round(30 * s)}px 'Dancing Script', 'Brush Script MT', cursive`;
+    const tw = x.measureText(ad.title).width;
+    x.fillText(ad.title, cx, H + 36 * s);
+    x.strokeStyle = '#2f3a2c'; x.lineWidth = 1.2 * s;
+    for (const d of [-1, 1]) { x.beginPath(); x.moveTo(cx + d * (tw / 2 + 14 * s), H + 26 * s); x.lineTo(cx + d * (tw / 2 + 70 * s), H + 26 * s); x.stroke(); }
+    x.fillStyle = '#5d6656'; x.font = `500 ${Math.round(13 * s)}px Inter, Arial, sans-serif`;
+    x.fillText(ad.line, cx, H + 58 * s);
+    x.fillStyle = '#8a8f99'; x.font = `500 ${Math.round(11 * s)}px Inter, Arial, sans-serif`;
+    x.fillText([title, ...lines.slice(0, 2)].join('  ·  '), cx, H + 76 * s);
+    return new Promise((res) => c.toBlob(res, 'image/png'));
   }
   // Khung tên
   x.fillStyle = '#c8812a'; x.fillRect(0, H, Math.round(10 * s), band);
@@ -146,6 +163,47 @@ function drawCallouts(x, callouts, plan, toScreen, s, W, H, side) {
       x.textAlign = 'left'; x.textBaseline = 'top';
       x.fillStyle = '#1d2330'; x.font = `700 ${f1}px Inter, Arial, sans-serif`; x.fillText(it.name, bx + 9 * s, by + 6 * s);
       x.fillStyle = '#5a6070'; x.font = `500 ${f2}px Inter, Arial, sans-serif`; x.fillText(sub, bx + 9 * s, by + 8 * s + f1);
+    });
+  }
+}
+
+/** Chú thích kiểu quảng cáo: biểu tượng + tiêu đề chữ viết tay + gạch chân + câu lợi ích, mũi tên cong chỉ vào phòng */
+function drawAdCallouts(x, callouts, toScreen, s, W, H, side) {
+  const items = callouts.map((c) => ({ ...c, a: toScreen(c.anchor) }));
+  const cx = side + W / 2;
+  const fT = Math.round(19 * s), fL = Math.round(11.5 * s), bh = 64 * s, gap = 14 * s;
+  for (const sideName of ['left', 'right']) {
+    const g = items.filter((it) => (sideName === 'left') === (it.a.x < cx)).sort((p, q) => p.a.y - q.a.y);
+    let y = 30 * s;
+    g.forEach((it) => { it.y = Math.max(it.a.y - bh * 0.6, y); y = it.y + bh + gap; });
+    g.forEach((it) => {
+      const left = sideName === 'left';
+      const tx = left ? 22 * s : W + side * 2 - 22 * s;
+      x.textAlign = left ? 'left' : 'right'; x.textBaseline = 'alphabetic';
+      // biểu tượng
+      x.font = `${Math.round(18 * s)}px 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif`;
+      x.fillStyle = '#2f3a2c';
+      x.fillText(it.icon, tx, it.y + 18 * s);
+      // tiêu đề viết tay + gạch chân
+      x.font = `700 ${fT}px 'Dancing Script', 'Brush Script MT', cursive`;
+      x.fillText(it.name, tx, it.y + 42 * s);
+      const tw = x.measureText(it.name).width;
+      x.strokeStyle = '#2f3a2c'; x.lineWidth = 1.1 * s;
+      const ux0 = left ? tx : tx - tw - 30 * s, ux1 = left ? tx + tw + 30 * s : tx;
+      x.beginPath(); x.moveTo(ux0, it.y + 48 * s); x.lineTo(ux1, it.y + 48 * s); x.stroke();
+      // câu lợi ích
+      x.fillStyle = '#4d5648'; x.font = `500 ${fL}px Inter, Arial, sans-serif`;
+      x.fillText(it.sub, tx, it.y + 64 * s);
+      // mũi tên cong từ cuối gạch chân tới phòng
+      const sx = left ? ux1 : ux0, sy = it.y + 48 * s, ex = it.a.x + (left ? -6 : 6) * s, ey = it.a.y;
+      const mx = (sx + ex) / 2, my = Math.min(sy, ey) - 30 * s;
+      x.strokeStyle = 'rgba(47,58,44,.85)'; x.lineWidth = 1.4 * s;
+      x.beginPath(); x.moveTo(sx, sy); x.quadraticCurveTo(mx, my, ex, ey); x.stroke();
+      const ang = Math.atan2(ey - my, ex - mx), hl = 9 * s;
+      x.beginPath();
+      x.moveTo(ex, ey); x.lineTo(ex - hl * Math.cos(ang - 0.45), ey - hl * Math.sin(ang - 0.45));
+      x.moveTo(ex, ey); x.lineTo(ex - hl * Math.cos(ang + 0.45), ey - hl * Math.sin(ang + 0.45));
+      x.stroke();
     });
   }
 }

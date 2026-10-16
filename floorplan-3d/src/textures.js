@@ -186,16 +186,30 @@ const generators = {
     noise(x, 512, 22, r);
     return { c, size: 2 };
   },
-  grass: () => {
-    const [c, x] = canvas(512), r = rand(13);
-    x.fillStyle = '#5d8f3e'; x.fillRect(0, 0, 512, 512);
-    for (let i = 0; i < 9000; i++) {
-      x.strokeStyle = `hsl(${85 + r() * 30},${40 + r() * 25}%,${25 + r() * 25}%)`;
-      x.lineWidth = 1;
-      const px = r() * 512, py = r() * 512;
-      x.beginPath(); x.moveTo(px, py); x.lineTo(px + (r() - 0.5) * 4, py - 3 - r() * 5); x.stroke();
+  // Tán lá: các chiếc lá nhỏ chồng lên nhau, sáng tối xen kẽ (nhân với màu xanh của bụi cây)
+  foliage: () => {
+    const [c, x] = canvas(256), r = rand(29);
+    x.fillStyle = '#9a9a9a'; x.fillRect(0, 0, 256, 256);
+    for (let i = 0; i < 1400; i++) {
+      const v = 120 + r() * 135;
+      x.fillStyle = `rgb(${v},${v},${v})`;
+      x.save(); x.translate(r() * 256, r() * 256); x.rotate(r() * Math.PI);
+      x.beginPath(); x.ellipse(0, 0, 5 + r() * 5, 2 + r() * 2, 0, 0, Math.PI * 2); x.fill(); x.restore();
     }
-    return { c, size: 2.5 };
+    return { c, size: 0.6 };
+  },
+  grass: () => {
+    // Cỏ tự nhiên: nền xanh lá dịu, nhiều lá cỏ đậm nhạt, vệt cắt cỏ rất nhẹ
+    const [c, x] = canvas(512), r = rand(13);
+    x.fillStyle = '#6a9440'; x.fillRect(0, 0, 512, 512);
+    for (let k = 0; k < 4; k++) { x.fillStyle = k % 2 ? 'rgba(255,255,200,0.04)' : 'rgba(0,40,0,0.04)'; x.fillRect(0, k * 128, 512, 128); }
+    for (let i = 0; i < 16000; i++) {
+      x.strokeStyle = `hsl(${78 + r() * 28},${35 + r() * 30}%,${22 + r() * 32}%)`;
+      x.lineWidth = 0.8 + r() * 0.8;
+      const px = r() * 512, py = r() * 512;
+      x.beginPath(); x.moveTo(px, py); x.lineTo(px + (r() - 0.5) * 5, py - 3 - r() * 6); x.stroke();
+    }
+    return { c, size: 1.6 };
   },
   // Ốp gỗ veneer dạng tấm đứng (vân dọc, khe ron mỗi 0,6 m) – màu nhân với màu tường
   panel: () => {
