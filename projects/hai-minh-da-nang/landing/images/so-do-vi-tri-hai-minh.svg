@@ -46,6 +46,9 @@
   <text x="1190" y="468" font-size="24" fill="#3D5A3A">(quy hoạch, đối diện dự án)</text>
   <circle cx="1270" cy="750" r="14" fill="#0A2540"/>
   <text x="1295" y="760" font-size="30" fill="#0A2540">Bãi tắm Sơn Thủy</text>
+  <circle cx="1330" cy="930" r="14" fill="#0A2540"/>
+  <text x="1355" y="925" font-size="30" font-weight="700" fill="#0A2540">Hyatt Regency</text>
+  <text x="1355" y="960" font-size="26" fill="#0A2540">Danang Resort</text>
   <circle cx="705" cy="745" r="14" fill="#0A2540"/>
   <text x="430" y="800" font-size="28" fill="#0A2540">Sân vận động Ngũ Hành Sơn</text>
   <circle cx="610" cy="380" r="14" fill="#0A2540"/>
