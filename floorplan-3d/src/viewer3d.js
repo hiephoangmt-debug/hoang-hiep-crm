@@ -973,7 +973,8 @@ export class Viewer3D {
     // mode 'plan': ảnh mặt bằng nhìn thẳng từ trên (đọc rõ dài × rộng); 'view': giữ góc đang xem
     const planMode = info.mode === 'plan' && !(this.ptActive && this.pt.samples >= 1);
     const above = planMode || this.camera.position.y > (this.built?.height || 2.8) + 1;
-    const showLabels = (above || info.ad) && this.mode !== 'walk' && (info.mode !== 'view' || info.ad);
+    // bật 🏷 Tên phòng thì ảnh phối cảnh cũng đưa chú thích ra ngoài (tên, diện tích, dài × rộng)
+    const showLabels = (above || info.ad || this.state.labels) && this.mode !== 'walk' && (info.mode !== 'view' || info.ad || this.state.labels);
     const prev = this.built.labels.map((l) => l.visible);
     // Ảnh như thật chỉ dùng khi đã có ít nhất 1 lượt render; chưa có thì lấy ảnh 3D thường
     const usePT = this.ptActive && this.pt.samples >= 1;
@@ -995,7 +996,18 @@ export class Viewer3D {
       this.built.labels.forEach((l) => (l.visible = false));
     }
     // Khung ảnh cố định 5:6 (2000 × 2400): render riêng vùng giữa đúng tỉ lệ rồi canh căn cho vừa khung
-    const FW = 2000, FH = 2400, fs = 2.4, band = Math.round((info.ad ? 92 : 84) * fs), side = showLabels ? Math.round((info.ad ? 200 : 185) * fs) : 0;
+    const FW = 2000, FH = 2400, fs = 2.4, band = Math.round((info.ad ? 92 : 84) * fs);
+    let side = showLabels ? Math.round((info.ad ? 200 : 185) * fs) : 0;
+    if (showLabels && info.ad && extra.callouts?.length) {
+      // Cột chú thích vừa đúng chữ dài nhất → vùng ảnh căn rộng hơn, căn to hơn
+      const mx = document.createElement('canvas').getContext('2d');
+      let tw = 0;
+      for (const c of extra.callouts) {
+        mx.font = `700 ${Math.round(19 * fs)}px 'Dancing Script', 'Brush Script MT', cursive`; tw = Math.max(tw, mx.measureText(c.name).width + 30 * fs);
+        mx.font = `500 ${Math.round(11.5 * fs)}px Inter, Arial, sans-serif`; tw = Math.max(tw, mx.measureText(c.sub || '').width);
+      }
+      side = Math.round(Math.min(side, Math.max(120 * fs, tw + 34 * fs)));
+    }
     const frame = { W: FW, H: FH, side, band, s: fs };
     const rw = FW - 2 * side, rh = FH - band;
     const saved = { pos: this.camera.position.clone(), target: this.controls.target.clone(), aspect: this.camera.aspect, pr: this.renderer.getPixelRatio() };
@@ -1011,7 +1023,7 @@ export class Viewer3D {
       // Mặt bằng căn ngang (rộng > sâu): xoay 90° cho cạnh dài nằm dọc, căn to hơn trong khung 5:6
       if (planMode) this.camera.up.set(this.built.bounds.maxX - this.built.bounds.minX > this.built.bounds.maxY - this.built.bounds.minY ? 1 : 0, 0, this.built.bounds.maxX - this.built.bounds.minX > this.built.bounds.maxY - this.built.bounds.minY ? 0 : -1);
       this.camera.lookAt(t0);
-      const fit = this.fitView(p0, t0, 0.9);
+      const fit = this.fitView(p0, t0, planMode ? 0.9 : 0.98);
       this.camera.position.copy(fit.pos);
       this.camera.lookAt(fit.target);
       this.camera.updateMatrixWorld();
