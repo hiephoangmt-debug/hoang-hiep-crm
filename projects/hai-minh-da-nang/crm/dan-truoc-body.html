@@ -9,9 +9,9 @@
 <!-- Mã CRM Hoàng Hiệp (tự thêm nếu trang chưa có) + bắt form LadiPage -->
 <script>
 (function(){
-  var CRM='https://script.google.com/macros/s/AKfycbyMWXl47PShn-ikZKwrFONJb9z89NOmVG6yIioyjGxo55IEbLh4yP7KiREPsxgSbxBl/exec';
+  var CRM='https://script.google.com/macros/s/AKfycbyChbG-uvItjVlRk7JgLrwpUS6Cgah4nIA6BWHuEwgbXBqSlvAPJNSdZdp6pQ91d_rN/exec';
   window.HM_CRM={url:CRM,key:'qgK6I9KWTqfS'};
-  if(!document.querySelector('script[src*="AKfycbyMWXl47PShn"]')){
+  if(!document.querySelector('script[src*="AKfycbyChbG-uvItjVlRk7"]')){
     var s=document.createElement('script'); s.src=CRM+'?js=1'; s.async=true; s.setAttribute('data-key','qgK6I9KWTqfS'); document.head.appendChild(s);
   }
   function grab(f){
@@ -291,7 +291,7 @@
   function line(t){var d=document.createElement('div');d.textContent=t;d.style.marginTop='6px';box.appendChild(d);}
   function go(){
     document.body.appendChild(box);
-    var C=window.HM_CRM||{url:'https://script.google.com/macros/s/AKfycbyMWXl47PShn-ikZKwrFONJb9z89NOmVG6yIioyjGxo55IEbLh4yP7KiREPsxgSbxBl/exec',key:'qgK6I9KWTqfS'};
+    var C=window.HM_CRM||{url:'https://script.google.com/macros/s/AKfycbyChbG-uvItjVlRk7JgLrwpUS6Cgah4nIA6BWHuEwgbXBqSlvAPJNSdZdp6pQ91d_rN/exec',key:'qgK6I9KWTqfS'};
     line('1. Mã CRM trên trang: '+(window.crmLead?'✅ đã chạy':'❌ CHƯA chạy'));
     line('2. Đoạn mã chat mới: '+(document.getElementById('hmw')?'✅ có':'❌ không có'));
     function call(n,label,body){
