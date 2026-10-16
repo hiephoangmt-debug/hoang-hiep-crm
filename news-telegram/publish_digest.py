@@ -1,8 +1,8 @@
 """Đăng bản tin tổng hợp trong ngày lên website WordPress (hiephoangmt.com).
 
 Đọc tin đã gửi Telegram trong digest/YYYY-MM-DD.json, dựng 1 bài viết
-"Bản tin quy hoạch – hạ tầng Đà Nẵng ngày dd/mm/yyyy" và đăng vào chuyên mục.
-Chạy lại trong cùng ngày thì cập nhật đúng bài đó (không tạo bài trùng).
+"Bản tin quy hoạch – hạ tầng Đà Nẵng sáng dd/mm/yyyy" (tin của cả ngày hôm trước)
+và đăng vào chuyên mục. Chạy lại thì cập nhật đúng bài đó (không tạo bài trùng).
 
 Biến môi trường:
   WP_USER, WP_APP_PASSWORD  tài khoản WordPress + Application Password
@@ -82,7 +82,8 @@ def build_post(day, items):
     vn = [it for it in unique if not is_da_nang(it)]
 
     d = f"{day:%d/%m/%Y}"
-    title = f"Bản tin quy hoạch – hạ tầng Đà Nẵng ngày {d}"
+    pub = day + timedelta(days=1)  # đăng sáng hôm sau
+    title = f"Bản tin quy hoạch – hạ tầng Đà Nẵng sáng {pub:%d/%m/%Y}"
     intro = (f"Tổng hợp {len(unique)} tin quy hoạch, hạ tầng và bất động sản ngày {d}"
              f" ({len(dn)} tin Đà Nẵng, {len(vn)} tin cả nước), cập nhật từ Sở Xây dựng, Bộ Xây dựng,"
              " Cổng thông tin điện tử Đà Nẵng và các báo uy tín.")
@@ -95,7 +96,7 @@ def build_post(day, items):
                  " bấm vào tiêu đề để đọc bài gốc.</em></p>")
     return {
         "title": title,
-        "slug": f"ban-tin-quy-hoach-ha-tang-da-nang-{day:%d-%m-%Y}",
+        "slug": f"ban-tin-quy-hoach-ha-tang-da-nang-sang-{pub:%d-%m-%Y}",
         "content": "\n".join(parts),
         "excerpt": intro,
     }
@@ -154,7 +155,7 @@ def main():
     preview = os.environ.get("PREVIEW") == "1"
     day = digest_date()
     if preview:
-        day = datetime.now(VN_TZ).date()
+        day = datetime.now(VN_TZ).date() - timedelta(days=1)
         items = preview_items()
     else:
         path = DIGEST_DIR / f"{day:%Y-%m-%d}.json"

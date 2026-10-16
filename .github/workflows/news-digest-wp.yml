@@ -1,16 +1,15 @@
 # Đăng bản tin quy hoạch – hạ tầng trong ngày lên hiephoangmt.com (WordPress).
-# 21:53 đăng bản tin hôm nay; 06:47 sáng hôm sau cập nhật thêm tin cuối ngày vào đúng bài đó.
+# 08:20 mỗi sáng đăng bản tin tổng hợp toàn bộ tin của ngày hôm trước.
 # Cần secret: WP_USER, WP_APP_PASSWORD (Application Password trong WordPress).
 name: Bản tin lên website
 
 on:
   schedule:
-    - cron: '53 14 * * *'   # 21:53 giờ Việt Nam
-    - cron: '47 23 * * *'   # 06:47 giờ Việt Nam
+    - cron: '20 1 * * *'    # 08:20 giờ Việt Nam (GitHub có thể trễ vài phút)
   workflow_dispatch:
     inputs:
       date:
-        description: 'Ngày đăng (YYYY-MM-DD), để trống = tự chọn'
+        description: 'Ngày của tin (YYYY-MM-DD), để trống = hôm qua'
         required: false
         default: ''
       draft:

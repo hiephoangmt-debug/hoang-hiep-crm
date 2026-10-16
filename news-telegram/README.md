@@ -38,11 +38,11 @@ vẫn đến qua các nguồn Google News.
 ## Đăng bản tin lên website (hiephoangmt.com)
 
 Mỗi tin đã gửi Telegram được lưu vào `digest/YYYY-MM-DD.json`. Workflow **Bản tin lên website**
-(`publish_digest.py`) đăng 1 bài/ngày *"Bản tin quy hoạch – hạ tầng Đà Nẵng ngày dd/mm/yyyy"*
+(`publish_digest.py`) đăng 1 bài/ngày *"Bản tin quy hoạch – hạ tầng Đà Nẵng sáng dd/mm/yyyy"*
 vào chuyên mục **Hạ tầng & quy hoạch** (id 121), chia mục *Tin Đà Nẵng* / *Tin cả nước*,
 mỗi tin gồm tiêu đề, tên báo, tóm tắt ngắn và link bài gốc.
 
-- 21:53: đăng bản tin hôm nay; 06:47 sáng hôm sau: cập nhật thêm tin cuối ngày vào đúng bài đó.
+- 08:20 mỗi sáng (trước 9h): đăng bản tin tổng hợp toàn bộ tin của ngày hôm trước.
 - Chạy tay: **Actions → Bản tin lên website → Run workflow** (tích *bản nháp* để thử).
 
 Cài đặt: WordPress → **Người dùng → Hồ sơ → Mật khẩu ứng dụng (Application Passwords)** → tạo
