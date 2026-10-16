@@ -30,6 +30,38 @@
     return audioCtx;
   }
 
+  // iPhone/iPad (và Safari): video chỉ được phát có tiếng nếu lần phát đầu tiên nằm trong một lần chạm của người dùng
+  var NEEDS_UNLOCK = /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+    (/Safari/.test(navigator.userAgent) && !/Chrome|CriOS|Chromium|Android|Edg/.test(navigator.userAgent)) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+  /** Gọi trong lúc người dùng chạm: mở khoá tiếng cho các clip người nói và bộ âm thanh. */
+  function unlockMedia() {
+    try { getAudioCtx().resume(); } catch (e) { /* bỏ qua */ }
+    var n = 0;
+    state.scenes.forEach(function (sc) {
+      (sc.media || []).forEach(function (m) {
+        var el = m.el;
+        if (!m.isVideo || !el || el._bdsUnlocked || !(m.keepAudio && m.hasAudio)) return;
+        el._bdsUnlocked = true;
+        n++;
+        var wasMuted = el.muted;
+        el.muted = false;
+        try { var p = el.play(); if (p && p.catch) p.catch(function () {}); } catch (e) { /* bỏ qua */ }
+        el.pause();
+        el.muted = wasMuted;
+      });
+    });
+    return n;
+  }
+
+  function needsUnlock() {
+    if (!NEEDS_UNLOCK) return false;
+    return state.scenes.some(function (sc) {
+      return (sc.media || []).some(function (m) { return m.isVideo && m.el && m.keepAudio && m.hasAudio && !m.el._bdsUnlocked; });
+    });
+  }
+
   function toast(msg, ms) {
     var t = $('toast');
     t.textContent = msg;
@@ -863,7 +895,14 @@
       save();
       schedulePreview();
       if (!ok) return;
-      if ($('projExport').checked) {
+      if ($('projExport').checked && needsUnlock()) {
+        // iPhone: phải có một lần chạm để video có tiếng, nên để người dùng tự bấm "Xuất video"
+        $('outFull').checked = true;
+        $('outTrailer').checked = true;
+        $('outScenes').checked = false;
+        jumpTo(6);
+        toast('🚀 Đã dựng xong! Bấm nút “Xuất video” để bắt đầu (iPhone cần bấm để video có tiếng).', 8000);
+      } else if ($('projExport').checked) {
         $('outFull').checked = true;
         $('outTrailer').checked = true;
         $('outScenes').checked = false;
@@ -1870,6 +1909,7 @@
       if (exporting) return;
       if (Player.busy()) { Player.stop(); return; }
       if (!state.scenes.length) { toast('Chưa có kịch bản. Hãy tạo kịch bản ở Bước 2.'); return; }
+      unlockMedia();
       Player.play(timeline(state.previewKind));
     };
     $('scrub').addEventListener('input', function (e) {
@@ -1936,6 +1976,7 @@
 
   function doExport() {
     if (exporting) return;
+    unlockMedia();
     if (!window.MediaRecorder || !canvas.captureStream) {
       toast('Trình duyệt này chưa hỗ trợ xuất video. Hãy dùng Google Chrome hoặc Microsoft Edge bản mới.', 5000);
       return;
@@ -2019,6 +2060,8 @@
 
   function init() {
     canvas = $('canvas');
+    // Mỗi lần chạm màn hình: mở khoá tiếng cho clip mới thêm (iPhone)
+    if (NEEDS_UNLOCK) ['touchend', 'click'].forEach(function (ev) { document.addEventListener(ev, function () { if (needsUnlock()) unlockMedia(); }, true); });
     var seen = load();
     renderStepper();
     bindInfo();
