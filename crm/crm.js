@@ -609,6 +609,8 @@
       ads: "Màn hình chi tiết giao dịch đăng tin: tài khoản · mã / thời gian giao dịch · số tiền đã thanh toán",
     },
   };
+  // cột của bảng kiểm: chỉ loại ảnh có ít nhất một kênh bắt buộc (mẫu mới không còn slide hoá đơn -> ẩn cột Hoá đơn)
+  const CHECK_KINDS = Object.keys(KINDS).filter((k) => Object.values(REQ).some((r) => r[k]));
   const reqOf = (p, k) => (REQ[p] || {})[k === "qc" && !(REQ[p] || {}).qc ? "ads" : k] || "";
   /** Bảng kiểm nghiệm thu: mỗi nhân sự × kênh đã chạy × loại ảnh bắt buộc -> đã có / thiếu. */
   function renderChecklist() {
@@ -623,7 +625,7 @@
     staff.forEach((st) => {
       const plats = PLATFORMS.filter((p) => data.some((r) => r.nhanSu === st && (r.nenTang || "Facebook") === p) || ev.some((r) => r.nhanSu === st && r.nenTang === p));
       plats.forEach((p) => {
-        const cells = Object.keys(KINDS).map((k) => {
+        const cells = CHECK_KINDS.map((k) => {
           if (!REQ[p][k]) {
             const why = k === "hoadon" ? `Mẫu báo cáo mới không có slide hoá đơn – không bắt buộc. Vẫn nên tải hoá đơn lên để app tính chi phí gồm VAT.`
               : `${PLATFORM_LABEL[p]} không cần ảnh “${KINDS[k]}” – ảnh quảng cáo ${PLATFORM_LABEL[p]} (nếu có) được đặt chung vào slide chụp màn hình.`;
@@ -644,7 +646,7 @@
       });
     });
     $("evCheck").innerHTML = rows.length
-      ? `<table class="data check"><thead><tr><th>Nhân sự</th><th>Kênh</th>${Object.values(KINDS).map((l) => `<th>${l}</th>`).join("")}</tr></thead><tbody>${rows.join("")}</tbody></table>`
+      ? `<table class="data check"><thead><tr><th>Nhân sự</th><th>Kênh</th>${CHECK_KINDS.map((k) => `<th>${KINDS[k]}</th>`).join("")}</tr></thead><tbody>${rows.join("")}</tbody></table>`
       : `<p class="muted">Chưa có số liệu hoặc ảnh cho tuần này.</p>`;
     $("evCheckSum").textContent = rows.length ? (missing ? `${missing} trang nghiệm thu còn thiếu ảnh` : "Đủ ảnh nghiệm thu") : "";
     $("evCheckSum").className = missing ? "warn-text" : "ok-text";
