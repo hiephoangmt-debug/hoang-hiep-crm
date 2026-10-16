@@ -492,10 +492,11 @@ var playing=false, playBtn=document.getElementById('play');
 playBtn.onclick=function(){playing=!playing; playBtn.textContent=playing?'❚❚':'▶'; playBtn.setAttribute('aria-label',playing?'Dừng':'Chạy thời gian');};
 
 /* ---------- Initial camera ---------- */
-var tgt=world.localToWorld(new THREE.Vector3(20,30,10));
+// default view framed like the aerial render: from the north-west, sea top-left, park in front of the tower
+var tgt=world.localToWorld(new THREE.Vector3(-27,30,86));
 controls.target.copy(tgt);
-camera.position.copy(world.localToWorld(new THREE.Vector3(-150,250,380)));
-if(innerWidth<600){ controls.target.copy(world.localToWorld(new THREE.Vector3(-25,55,35))); camera.position.copy(world.localToWorld(new THREE.Vector3(-200,260,420))); }
+camera.position.copy(world.localToWorld(new THREE.Vector3(-377,260,-214)));
+if(innerWidth<600){ controls.target.copy(world.localToWorld(new THREE.Vector3(-40,45,60))); camera.position.copy(world.localToWorld(new THREE.Vector3(-520,360,-330))); }
 if(/close/.test(location.search)){controls.target.copy(world.localToWorld(new THREE.Vector3(-47,15,46)));camera.position.copy(world.localToWorld(new THREE.Vector3(/close2/.test(location.search)?-150:40,45,/close2/.test(location.search)?-60:140)));}
 controls.update();
 setFloor(+floorEl.value); setTime(+hourEl.value); refreshEnv();
