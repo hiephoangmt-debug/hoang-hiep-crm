@@ -8,6 +8,8 @@ var STATUS_NEW = 'Mới', STATUS_CONTACTED = 'Đã liên hệ';
 var TRACK_JS = /*__TRACK_JS__*/'';
 
 function doGet(e) {
+  // Phần mở rộng tự thêm trong project (file khác): chỉ chạy khi hàm đó tồn tại.
+  if (e && e.parameter && e.parameter.cb && typeof jsonp_ === 'function') return jsonp_(e.parameter);
   if (e && e.parameter && e.parameter.js) {
     return ContentService.createTextOutput(TRACK_JS).setMimeType(ContentService.MimeType.JAVASCRIPT);
   }
@@ -23,7 +25,7 @@ function doGet(e) {
 
 // ?debug=1: cho biết vì sao giao diện hiện hoặc không hiện (chỉ có/không, không lộ khoá hay dữ liệu)
 function debugInfo_() {
-  var o = { version: 'ui-42', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
+  var o = { version: 'ui-43', hasKey: crmKey_().length >= 20, canOpenSheet: false, hasCrmHtml: false };
   try { ss_().getSheetByName(S_LEADS).getLastRow(); o.canOpenSheet = true; } catch (x) {}
   try { crmHtml_(); o.hasCrmHtml = true; } catch (x) {}
   return o;
@@ -1008,6 +1010,7 @@ function doPost(e) {
     var b = parseBody_(e);
     var site = findSite_(b.key);
     if (!site) return json_({ error: 'Mã website không hợp lệ' });
+    if (b.action === 'chat' && typeof chatAI_ === 'function') return json_(chatAI_(b, site));
     var action = b.action || (b.type === 'pageview' || b.type === 'click' ? 'track' : 'lead');
     if (action === 'track') return json_(handleTrack_(b, site));
     return json_(handleLead_(normLeadBody_(b), site));
@@ -1093,6 +1096,7 @@ function handleTrack_(b, site) {
   var ch = ['zalo', 'phone', 'messenger', 'sms'].indexOf(b.channel) >= 0 ? b.channel : 'other';
   logEvent_(b, site, type, type === 'click' ? ch : '');
   if (type === 'click') { try { logClick_(b, site, ch); } catch (e) { /* thiếu tab Lượt bấm: vẫn giữ sự kiện ở tab Hoạt động */ } }
+  if (type === 'click' && typeof teleClick_ === 'function') teleClick_(b, site, ch);
   return { ok: true };
 }
 
@@ -1119,6 +1123,7 @@ function logClick_(b, site, ch) {
 function handleLead_(b, site) {
   var phone = normPhone_(b.phone);
   if (!phone) return { error: 'Số điện thoại không hợp lệ' };
+  if (typeof teleLead_ === 'function') teleLead_(b, site, phone);   // báo Telegram (file riêng trong project), nếu có
   var lock = LockService.getScriptLock();
   lock.waitLock(20000);
   try {
