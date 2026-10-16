@@ -502,6 +502,32 @@ if(/schemeB/.test(location.search)) setScheme('B');
 var camQ=/cam=([-\d.]+),([-\d.]+),([-\d.]+)/.exec(location.search); if(camQ){controls.target.copy(world.localToWorld(new THREE.Vector3(-47,60,46)));camera.position.copy(world.localToWorld(new THREE.Vector3(-47+ +camQ[1],+camQ[2],46+ +camQ[3]))); var tg=/tgt=([-\d.]+),([-\d.]+),([-\d.]+)/.exec(location.search); if(tg){ controls.target.copy(world.localToWorld(new THREE.Vector3(-47+ +tg[1],+tg[2],46+ +tg[3]))); controls.maxDistance=8000; } }
 if(/topB/.test(location.search)){controls.target.copy(world.localToWorld(new THREE.Vector3(-47,90,46)));camera.position.copy(world.localToWorld(new THREE.Vector3(90,95,-60)));}
 
+/* ---------- Brand watermark: drawn into the WebGL image (not a page element), so it stays in screenshots ---------- */
+function drawLogo(g,x,y,sz){ var r=sz*.16; g.save(); g.fillStyle='#0b2a3d'; g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+sz,y,x+sz,y+sz,r); g.arcTo(x+sz,y+sz,x,y+sz,r); g.arcTo(x,y+sz,x,y,r); g.arcTo(x,y,x+sz,y,r); g.fill();
+  g.strokeStyle='#d8bd88'; g.lineWidth=sz*.022; var m=sz*.06, r2=r*.75; g.beginPath(); g.moveTo(x+m+r2,y+m); g.arcTo(x+sz-m,y+m,x+sz-m,y+sz-m,r2); g.arcTo(x+sz-m,y+sz-m,x+m,y+sz-m,r2); g.arcTo(x+m,y+sz-m,x+m,y+m,r2); g.arcTo(x+m,y+m,x+sz-m,y+m,r2); g.stroke();
+  g.fillStyle='#d8bd88'; g.font='bold '+Math.round(sz*.36)+'px Georgia,"Times New Roman",serif'; g.textAlign='center'; g.textBaseline='middle'; g.fillText('HM',x+sz/2,y+sz*.42);
+  g.lineWidth=sz*.02; g.beginPath(); for(var i=0;i<=24;i++){ var t=i/24, px=x+sz*(.25+.5*t), py=y+sz*(.71+.025*Math.sin(t*Math.PI*2)); if(i) g.lineTo(px,py); else g.moveTo(px,py); } g.stroke(); g.restore(); }
+var WEB='cănhộdịchvụhảiminh.com.vn';
+var wmC=document.createElement('canvas'); wmC.width=1024; wmC.height=256; (function(g){
+  g.fillStyle='rgba(11,30,48,.62)'; g.beginPath(); g.moveTo(40,16); g.arcTo(1016,16,1016,240,36); g.arcTo(1016,240,0,240,36); g.arcTo(0,240,0,16,36); g.arcTo(0,16,1016,16,36); g.fill();
+  drawLogo(g,20,28,200);
+  g.fillStyle='#ffffff'; g.textBaseline='alphabetic'; g.font='800 64px "Be Vietnam Pro",Arial,sans-serif'; g.fillText('0904 567 009',236,112);
+  g.font='600 38px "Be Vietnam Pro",Arial,sans-serif'; g.fillText('Hoàng Hiệp · Hải Minh Đà Nẵng',238,166); g.fillText(WEB,238,214); })(wmC.getContext('2d'));
+var hud=new THREE.Scene(), hudCam=new THREE.OrthographicCamera(0,1,1,0,-1,1);
+var wmTex=new THREE.CanvasTexture(wmC); wmTex.encoding=THREE.sRGBEncoding;
+var wm=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({map:wmTex,transparent:true,opacity:.85,depthTest:false,depthWrite:false,toneMapped:false})); hud.add(wm);
+var consoleEl=document.querySelector('.console');
+function placeWM(){ var W=innerWidth,H=innerHeight, w=Math.min(W*.6,360), h=w/4, cb=consoleEl?consoleEl.getBoundingClientRect().height:140; hudCam.right=W; hudCam.top=H; hudCam.updateProjectionMatrix(); wm.scale.set(w,h,1); wm.position.set(14+w/2,cb+14+h/2,0); }
+placeWM(); window.addEventListener('resize',placeWM); setTimeout(placeWM,800);
+// rooftop signage: HM logo + phone on the crown, facing Trường Sa (east) and Nguyễn Đức Thuận (north)
+var sgC=document.createElement('canvas'); sgC.width=1024; sgC.height=256; (function(g){ g.fillStyle='#0b2a3d'; g.fillRect(0,0,1024,256); drawLogo(g,16,16,224);
+  g.fillStyle='#d8bd88'; g.font='800 92px "Be Vietnam Pro",Arial,sans-serif'; g.textBaseline='middle'; g.fillText('HẢI MINH',270,92); g.fillStyle='#ffffff'; g.font='700 64px "Be Vietnam Pro",Arial,sans-serif'; g.fillText('0904 567 009',272,190); })(sgC.getContext('2d'));
+var sgTex=new THREE.CanvasTexture(sgC); sgTex.encoding=THREE.sRGBEncoding;
+var sgMat=new THREE.MeshBasicMaterial({map:sgTex,toneMapped:false});
+function sign(grp,w,x,y,z,ry){ var m=new THREE.Mesh(new THREE.PlaneGeometry(w,w/4),sgMat); m.position.set(x,y,z); m.rotation.y=ry; grp.add(m); return m; }
+sign(A,15,AW/2+1.9,TOP-3.2,AD/2-10,Math.PI/2); sign(A,15,NWX0+10,TOP-3.2,-AD/2-1.9,Math.PI);
+sign(B,14,BW/2+1.8,TOP-3,BD/2-12,Math.PI/2);
+
 /* ---------- Loop ---------- */
 var needle=document.getElementById('needle'), clock=new THREE.Clock(), v=new THREE.Vector3(), fwd=new THREE.Vector3();
 function onResize(){camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);}
@@ -515,6 +541,7 @@ function loop(){
   if(mode!=='view') controls.update();
   camera.getWorldDirection(fwd); needle.style.transform='rotate('+(Math.atan2(fwd.x,-fwd.z)*-180/Math.PI)+'deg)';
   renderer.render(scene,camera);
+  renderer.autoClear=false; renderer.render(hud,hudCam); renderer.autoClear=true;
   var W=innerWidth,H=innerHeight;
   var placed=[];
   for(var j=0;j<LBL.length;j++){ var L=LBL[j]; v.copy(L.p); if(L.obj!==scene) L.obj.localToWorld(v); v.project(camera);
