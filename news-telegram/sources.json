@@ -1,0 +1,117 @@
+{
+  "_ghi_chu": "type=rss: đọc RSS. type=html: quét trang, lấy link bài viết. require_keywords=true: chỉ lấy bài có từ khoá BĐS/hạ tầng/quy hoạch.",
+  "sources": [
+    {
+      "name": "Sở Xây dựng Đà Nẵng",
+      "type": "html",
+      "url": "https://sxd.danang.gov.vn/",
+      "require_keywords": false
+    },
+    {
+      "name": "Cổng TTĐT Đà Nẵng",
+      "type": "html",
+      "url": "https://danang.gov.vn/",
+      "require_keywords": true
+    },
+    {
+      "name": "Bộ Xây dựng",
+      "type": "html",
+      "url": "https://moc.gov.vn/",
+      "require_keywords": true
+    },
+    {
+      "name": "Google News · Sở Xây dựng Đà Nẵng",
+      "type": "rss",
+      "require_keywords": false,
+      "url": "https://news.google.com/rss/search?q=%22S%E1%BB%9F+X%C3%A2y+d%E1%BB%B1ng%22+%C4%90%C3%A0+N%E1%BA%B5ng+when:2d&hl=vi&gl=VN&ceid=VN:vi"
+    },
+    {
+      "name": "Google News · Quy hoạch Đà Nẵng",
+      "type": "rss",
+      "require_keywords": false,
+      "url": "https://news.google.com/rss/search?q=quy+ho%E1%BA%A1ch+%C4%90%C3%A0+N%E1%BA%B5ng+when:2d&hl=vi&gl=VN&ceid=VN:vi"
+    },
+    {
+      "name": "Google News · Hạ tầng Đà Nẵng",
+      "type": "rss",
+      "require_keywords": false,
+      "url": "https://news.google.com/rss/search?q=(h%E1%BA%A1+t%E1%BA%A7ng+OR+giao+th%C3%B4ng+OR+cao+t%E1%BB%91c+OR+metro)+%C4%90%C3%A0+N%E1%BA%B5ng+when:2d&hl=vi&gl=VN&ceid=VN:vi"
+    },
+    {
+      "name": "Google News · BĐS Đà Nẵng",
+      "type": "rss",
+      "require_keywords": false,
+      "url": "https://news.google.com/rss/search?q=(b%E1%BA%A5t+%C4%91%E1%BB%99ng+s%E1%BA%A3n+OR+nh%C3%A0+%E1%BB%9F+OR+%C4%91%E1%BA%A5t+n%E1%BB%81n+OR+gi%C3%A1+%C4%91%E1%BA%A5t)+%C4%90%C3%A0+N%E1%BA%B5ng+when:2d&hl=vi&gl=VN&ceid=VN:vi"
+    },
+    {
+      "name": "Google News · Bộ Xây dựng",
+      "type": "rss",
+      "require_keywords": true,
+      "url": "https://news.google.com/rss/search?q=%22B%E1%BB%99+X%C3%A2y+d%E1%BB%B1ng%22+when:2d&hl=vi&gl=VN&ceid=VN:vi"
+    },
+    {
+      "name": "VnExpress · Bất động sản",
+      "type": "rss",
+      "url": "https://vnexpress.net/rss/bat-dong-san.rss",
+      "require_keywords": true
+    },
+    {
+      "name": "CafeF · Bất động sản",
+      "type": "rss",
+      "url": "https://cafef.vn/bat-dong-san.rss",
+      "require_keywords": true
+    }
+  ],
+  "keywords": [
+    "quy hoạch",
+    "hạ tầng",
+    "giao thông",
+    "cao tốc",
+    "đường vành đai",
+    "vành đai",
+    "hầm",
+    "metro",
+    "đường sắt",
+    "sân bay",
+    "cảng",
+    "khu đô thị",
+    "đô thị",
+    "khu dân cư",
+    "khu công nghiệp",
+    "khu thương mại tự do",
+    "bất động sản",
+    "nhà ở",
+    "nhà ở xã hội",
+    "chung cư",
+    "căn hộ",
+    "đất nền",
+    "giá đất",
+    "bảng giá đất",
+    "đấu giá đất",
+    "đấu giá quyền sử dụng đất",
+    "thu hồi đất",
+    "giải phóng mặt bằng",
+    "giải tỏa",
+    "tái định cư",
+    "sổ đỏ",
+    "giấy chứng nhận quyền sử dụng đất",
+    "chuyển mục đích sử dụng đất",
+    "giấy phép xây dựng",
+    "dự án",
+    "khởi công",
+    "thông xe",
+    "điều chỉnh quy hoạch",
+    "phân khu",
+    "quy hoạch chi tiết",
+    "1/500",
+    "1/2000",
+    "chỉnh trang",
+    "luật đất đai",
+    "luật nhà ở",
+    "kinh doanh bất động sản",
+    "cầu vượt",
+    "cây cầu",
+    "xây cầu",
+    "nút giao"
+  ]
+}
