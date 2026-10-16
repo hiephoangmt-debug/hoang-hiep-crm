@@ -281,4 +281,29 @@
   if(document.body) start(); else document.addEventListener('DOMContentLoaded',start);
 })();
 </script>
+<!-- Kiểm tra kết nối: mở trang với đuôi ?crmtest=1 -->
+<script>
+(function(){
+  if(!/crmtest=1/.test(location.search)) return;
+  var box=document.createElement('div');
+  box.style.cssText='position:fixed;left:10px;top:10px;right:10px;z-index:999999;background:#fff;color:#0A2540;border:3px solid #FF5A1F;border-radius:12px;padding:14px;font:15px/1.5 Arial,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.3);max-height:80vh;overflow:auto';
+  box.innerHTML='<b>KIỂM TRA KẾT NỐI CRM</b> (chụp màn hình gửi Claude)<br>';
+  function line(t){var d=document.createElement('div');d.textContent=t;d.style.marginTop='6px';box.appendChild(d);}
+  function go(){
+    document.body.appendChild(box);
+    var C=window.HM_CRM||{url:'https://script.google.com/macros/s/AKfycbyMWXl47PShn-ikZKwrFONJb9z89NOmVG6yIioyjGxo55IEbLh4yP7KiREPsxgSbxBl/exec',key:'qgK6I9KWTqfS'};
+    line('1. Mã CRM trên trang: '+(window.crmLead?'✅ đã chạy':'❌ CHƯA chạy'));
+    line('2. Đoạn mã chat mới: '+(document.getElementById('hmw')?'✅ có':'❌ không có'));
+    function call(n,label,body){
+      fetch(C.url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(body)})
+        .then(function(r){return r.text();}).then(function(t){line(n+'. '+label+': '+(/"ok":true|"a":/.test(t)?'✅ ':'❌ ')+t.slice(0,160));})
+        .catch(function(e){line(n+'. '+label+': ❌ không gọi được CRM ('+e.message+')');});
+    }
+    call(3,'Gửi khách thử về Sheet + Telegram',{key:C.key,action:'lead',name:'TEST tự động (crmtest)',phone:'0900000009',vid:'crmtest',url:location.href,message:'Kiểm tra kết nối'});
+    call(4,'Lượt bấm Zalo thử',{key:C.key,action:'track',type:'click',channel:'zalo',vid:'crmtest',url:location.href});
+    call(5,'Chat AI',{key:C.key,action:'chat',q:'Dự án cách biển bao xa?',vid:'crmtest'});
+  }
+  setTimeout(go,4000);
+})();
+</script>
 <!-- ============ HẾT ĐOẠN MÃ ============ -->
