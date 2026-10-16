@@ -3,12 +3,9 @@
   'use strict';
 
   var MOODS = {
-    'dien-anh': 'Điện ảnh: piano + dàn dây + trống (khuyên dùng)',
-    'chill': 'Chill nhẹ nhàng: piano lofi',
-    'none': 'Không nhạc',
-    'nhe-nhang': 'Nhẹ nhàng, ấm áp',
-    'soi-dong': 'Sôi động, trẻ trung',
-    'sang-trong': 'Sang trọng, cao cấp'
+    'none': 'Không nhạc nền (chỉ tiếng nói + hiệu ứng)',
+    'dien-anh': 'Điện ảnh: piano + dàn dây + trống',
+    'chill': 'Chill nhẹ nhàng: piano lofi'
   };
 
   function midi(n) { return 440 * Math.pow(2, (n - 69) / 12); }

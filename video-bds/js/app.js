@@ -15,7 +15,7 @@
     style: 'chuyen-nghiep',
     variant: 0,
     voiceMode: 'clip',
-    music: { mood: 'dien-anh', buffer: null, name: '', vol: 45 },
+    music: { mood: 'none', buffer: null, name: '', vol: 45 },
     settings: {
       format: '9:16', theme: 'vang', transition: 'mix', textFx: 'marker', subStyle: 'kinetic', beauty: 'vua', pace: 'auto', endStyle: 'pill', sfx: true, subtitles: true,
       grade: 'dien-anh', leak: true, grain: true, vignette: true, pip: true, faceTrack: true, textBehind: true, nameTag: true,
@@ -67,7 +67,7 @@
       try {
         localStorage.setItem(STORE_KEY, JSON.stringify({
           info: state.info, style: state.style, settings: state.settings, voiceMode: state.voiceMode,
-          mood: state.music.mood, vol: state.music.vol, helpSeen: true, v3: true, v4: true, v5: true, v4: true,
+          mood: state.music.mood, vol: state.music.vol, helpSeen: true, v3: true, v4: true, v5: true, v6: true,
           scenes: state.scenes.map(function (s) {
             return { title: s.title, text: s.text, bigText: s.bigText, shotNote: s.shotNote, durOverride: s.durOverride, showTitle: s.showTitle, quick: s.quick, layout: s.layout };
           })
@@ -86,7 +86,8 @@
       if (!d.v3) { delete saved.subStyle; delete saved.transition; delete saved.textFx; } // bản cũ: dùng kiểu mới mặc định
       Object.assign(state.settings, saved);
       state.voiceMode = d.voiceMode || state.voiceMode;
-      state.music.mood = d.v4 && d.mood ? d.mood : state.music.mood;
+      // Bản cũ: bỏ nhạc nền tự tạo, mặc định không nhạc
+      state.music.mood = d.v6 && window.BdsAudio.MOODS[d.mood] ? d.mood : 'none';
       state.music.vol = d.v5 && d.vol != null ? d.vol : state.music.vol; // bản cũ: dùng mức nhạc mới nhỏ hơn
       state.scenes = (d.scenes || []).map(newScene);
       return !!d.helpSeen;
@@ -1777,7 +1778,6 @@
         if (attached.indexOf(it.el) === -1) { attached.push(it.el); engine.attachClip(it.el); }
       });
       var mood = state.music.mood;
-      if (tl.kind === 'trailer' && mood !== 'none' && mood !== 'dien-anh') mood = 'soi-dong';
       if (state.music.buffer) {
         engine.playBuffer(state.music.buffer, t0, engine.music, { loop: true, duration: tl.total });
         engine.scheduleMusicVolume(t0, tl.total, 0.6 * vol, ranges);
