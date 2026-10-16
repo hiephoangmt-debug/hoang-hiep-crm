@@ -1572,11 +1572,13 @@ function parseTgLeads(t) {
     var nm = (pm[2] || '').replace(/mở\s*zalo/ig, '').replace(/[^\p{L}\s.'’-]/gu, ' ').replace(/\s+/g, ' ').trim().replace(/(^|\s)(\p{L})/gu, function (m0, a, c) { return a + c.toUpperCase(); });
     var line = function (re) { var m = re.exec(b); return m ? m[1].replace(/\s+/g, ' ').trim() : ''; };
     var qt = line(/quan\s*tâm\s*[:：]\s*([^\n]+)/i), yc = line(/yêu\s*cầu\s*[:：]\s*([^\n]+)/i), pa = line(/phương\s*án\s*[:：]\s*([^\n]+)/i), sk = line(/nguồn\s*[:：]\s*([^\n]+)/i);
+    var bl = b.split(/\n/).map(function (x) { return x.replace(/^\s*[•·\-*]\s*/, '').trim(); }).filter(function (x, i) { return i > 0 && /^[^:]{2,25}:/.test(x) || (/\|/.test(x)); }).filter(function (x) { return !/^(nguồn|trang)\s*:/i.test(x) && !/^https?:/i.test(x) && !/\d{1,2}:\d{2}(:\d{2})?\s+\d{1,2}\/\d{1,2}\/\d{4}/.test(x); }).map(function (x) { return /^(quan tâm|yêu cầu|phương án)\s*:/i.test(x) ? x : x; }).slice(0, 4);
+    if (!bl.length) { var nl = b.split(/\n/).map(function (x) { return x.replace(/^\s*[•·\-*]\s*/, '').trim(); }).filter(function (x) { return x && !/^(nguồn|trang)\s*:/i.test(x) && !/^https?:/i.test(x) && !/KH[ÁA]CH\s*M[ỚO]I/i.test(x) && !/\d{9}/.test(x) && !/\d{1,2}:\d{2}(:\d{2})?\s+\d{1,2}\/\d{1,2}\/\d{4}/.test(x); }); bl = nl.slice(0, 3); }
     var um = /https?:\/\/\S+/.exec(b), dm = /(\d{1,2}):(\d{2})(?::\d{2})?\s+(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(b);
     var low = (b + ' ' + (um ? um[0] : '')).toLowerCase().replace(/-/g, ' '), pj = projNames().filter(function (n) { return n && low.indexOf(n.toLowerCase()) >= 0; })[0] || '';
     var tz = /(?:tòa|toà|toa)[\s-]*(f[1-5])/i.exec(b) || /(?:^|[^a-z0-9])(f[1-5])(?![a-z0-9])/i.exec(sk + ' ' + qt + ' ' + (um ? um[0] : ''));
     var so = SRC_OPTS.filter(function (o) { return sk.toLowerCase().indexOf(o.toLowerCase()) >= 0; })[0] || (/google/i.test(sk) ? 'Google Ads' : /facebook|fb/i.test(sk) ? 'Facebook Ads' : '');
-    out.push({ name: nm, phone: ph, note: [qt && 'Quan tâm: ' + qt, yc && 'Yêu cầu: ' + yc, pa && 'Phương án: ' + pa].filter(Boolean).join(' · '), source: so, campaign: sk, url: um ? um[0].replace(/[),.;]+$/, '') : '', project: pj, toa: tz ? tz[1].toUpperCase() : '',
+    out.push({ name: nm, phone: ph, note: bl.join(' · '), source: so, campaign: sk, url: um ? um[0].replace(/[),.;]+$/, '') : '', project: pj, toa: tz ? tz[1].toUpperCase() : '',
       at: dm ? dm[5] + '-' + ('0' + dm[4]).slice(-2) + '-' + ('0' + dm[3]).slice(-2) + 'T' + ('0' + dm[1]).slice(-2) + ':' + dm[2] + ':00' : '' });
   });
   return out;
@@ -1596,6 +1598,13 @@ function addLead() {
   $('#apaste').oninput = function () {
     var t = this.value, set = function (id, v) { if (v) $(id).value = v; };
     var tg = parseTgLeads(t);
+    if (tg.length === 1) {
+      var g = tg[0], setv = function (id, v) { if (v) $(id).value = v; };
+      $('#apnote').innerHTML = ''; setv('#an', g.name); setv('#ap', g.phone); setv('#anote', g.note); setv('#ad', g.project); setv('#atoa', g.toa);
+      if (g.source) setv('#as2', g.source);
+      $('#apaste').dataset.ctx = JSON.stringify({ url: g.url, at: g.at, campaign: g.campaign });
+      return;
+    }
     if (tg.length > 1) {
       $('#apnote').innerHTML = '<div class="card" style="background:#FFF3E3"><b>Có ' + tg.length + ' khách trong tin vừa dán</b> (báo khách mới từ Telegram)<div class="small" style="margin:6px 0">' + tg.map(function (x) { return esc((x.name || 'Chưa tên') + ' · ' + x.phone + (x.toa ? ' · ' + x.toa : '')); }).join('<br>') + '</div><button class="btn p sm" id="tgall">Thêm tất cả ' + tg.length + ' khách</button> <span class="small mut" id="tgst"></span></div>';
       $('#tgall').onclick = function () {
