@@ -15,7 +15,7 @@ var CHAT_MODEL_2 = 'claude-sonnet-5-5';   // dùng khi model nhanh không trả 
 var CHAT_FACTS = [
   'DỰ ÁN: Khu căn hộ du lịch, thương mại dịch vụ Hải Minh (Căn hộ khách sạn / căn hộ dịch vụ Hải Minh Đà Nẵng).',
   'Vị trí: Lô A2-1 & A2-2, góc Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, phường Ngũ Hành Sơn, TP Đà Nẵng. Băng qua đường và công viên là bãi biển Mỹ Khê – Non Nước.',
-  'Phía trước: khu đất ven biển được TP quy hoạch làm Công viên công cộng đường Trường Sa (khoảng 2,45 ha, thu hồi từ khu Hòn Ngọc Á Châu, dự kiến 2025–2027, tiến độ theo thành phố). KHÔNG nói "đối diện Silver Shores". Crowne Plaza (Silver Shores) ở phía Bắc; Hyatt Regency Danang và bãi tắm Sơn Thủy ở phía Nam.',
+  'Phía trước: khu đất ven biển được TP quy hoạch làm Công viên công cộng đường Trường Sa (khoảng 2,45 ha, thu hồi từ khu Hòn Ngọc Á Châu, dự kiến 2025–2027, tiến độ theo thành phố). KHÔNG nói "đối diện Silver Shores". Dọc Võ Nguyên Giáp phía Bắc có chuỗi resort lân cận: Crowne Plaza Danang (Silver Shores), TIA Wellness Resort, Trung tâm Hội nghị Ariyana, Furama Resort Danang, Pullman Danang Beach Resort; phía Nam: Hyatt Regency Danang và bãi tắm Sơn Thủy. Không xếp hạng "nổi tiếng nhất".',
   'Khoảng cách ước tính bằng ô tô: phố An Thượng 5–10 phút; Ngũ Hành Sơn 5–10 phút; cầu Rồng / trung tâm TP khoảng 15 phút; sân bay quốc tế Đà Nẵng 15–20 phút; phố cổ Hội An khoảng 30 phút.',
   'Chủ đầu tư: Công ty TNHH Quản lý và Dịch vụ Hạ tầng Kỹ thuật Miền Trung.',
   'Quy mô: 1 tòa tháp 30 tầng, cao khoảng 117 m, khoảng 400 căn hộ du lịch, tổng sàn xây dựng trên 45.000 m², khu đất 3.720 m² (Khu Khách sạn, Condotel và dân cư Saphia). Có khối thương mại dịch vụ.',

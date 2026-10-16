@@ -30,7 +30,8 @@ body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--font);ov
 .console{position:fixed;left:0;right:0;bottom:0;z-index:5;
   padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
   background:var(--console);border-top:1px solid var(--line);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  display:grid;grid-template-columns:auto 1fr 1fr;gap:12px 22px;align-items:center}
+  display:grid;grid-template-columns:1fr 1fr;gap:10px 26px;align-items:center}
+.modes{grid-column:1/-1}
 .modes{display:flex;gap:6px;flex-wrap:wrap}
 .chip{font:600 13px var(--font);color:var(--ink);background:var(--chip);border:1px solid var(--line);border-radius:20px;padding:8px 13px;cursor:pointer;white-space:nowrap}
 .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
@@ -271,7 +272,7 @@ hill(1600,-5200,2300,520,0x5f8a6f); hill(400,-4800,900,300,0x6a917a);
 
 /* ---------- Hải Minh tower: two facade schemes from the renders ---------- */
 var T=new THREE.Group(); T.position.set(-47,0,46); world.add(T);
-var FL=[]; var y=0; for(var f=1;f<=30;f++){FL[f]=y; y+= f<=2?4.5:3.6;} var TOP=y;   // ≈109.8 m (+ crown ≈117 m)
+var FL=[]; var y=0; for(var f=1;f<=30;f++){FL[f]=y; y+= f<=2?4.5:(f===30?7:3.6);} var TOP=y;   // ≈113.2 m – top floor 7 m (+ crown ≈117 m)
 var glass=M(0x22384d,{roughness:.07,metalness:.8,envMapIntensity:1.0,emissive:0xffc27a,emissiveIntensity:0});
 var white=M(0xf6f5f1,{roughness:.45,metalness:.05,envMapIntensity:.4});
 var red=M(0x8c2f1f,{roughness:.55,metalness:.1,envMapIntensity:.4});
@@ -293,54 +294,66 @@ function fins(grp,list,h,yb,mat,s){ var im=new THREE.InstancedMesh(new THREE.Box
 /* Scheme A – aerial render: dark glass, white floor bands, terracotta crown + vertical strips, podium wing with roof garden */
 var A=new THREE.Group(); T.add(A);
 var AW=19, AD=46;
-// podium (2 floors) + inland wing with roof garden
-boxP(A,AW+5,FL[3],AD+5,0,0,0,glass);
-slab(A,rrect(AW+6,AD+6,5),FL[2]-.4,.4,white); slab(A,rrect(AW+6,AD+6,5),FL[3]-.5,.5,white);
-boxP(A,26,13.4,32,-(AW/2+2.5+13),0,6,glass);
-var WX=-(AW/2+2.5+13);
-[4.5-.35,9-.35,13.4].forEach(function(yy,i){ var m=slab(A,rrect(27,33,3),yy,i<2?.35:.5,white); m.position.x=WX; m.position.z=6; });
-var gr=new THREE.Mesh(new THREE.PlaneGeometry(24,29),greenRoof); gr.rotation.x=-Math.PI/2; gr.position.set(-(AW/2+2.5+13),14.0,6); A.add(gr);
-for(var i=0;i<16;i++) shrubsLocal(A,-(AW/2+2.5+13)+rnd(-10,10),14.0,6+rnd(-12,12));
-function shrubsLocal(grp,x,yy,z){ var m=new THREE.Mesh(new THREE.IcosahedronGeometry(rnd(.8,1.5),0),M(0x467d38)); m.position.set(x,yy+.6,z); m.castShadow=true; grp.add(m); }
+// base: the tower shaft runs straight to the ground; 2-storey glass shopfronts with white bands
+boxP(A,AW-1.6,FL[3],AD-1.6,0,0,0,glass);
+var colm=[]; for(var s2=-1;s2<=1;s2+=2){ for(var z=-AD/2+2;z<=AD/2-2;z+=6) colm.push([s2*(AW/2+.4),z]); for(var x=-AW/2+3;x<=AW/2-3;x+=6) colm.push([x,s2*(AD/2+.4)]); }
+fins(A,colm,FL[3],0,white,.6);
+// side wing along Nguyễn Đức Thuận: 3 storeys, roof garden with planters and a pergola
+var WX=-(AW/2+16), WZ=-AD/2+13, WWd=32, WDd=26, WH=FL[4];
+boxP(A,WWd-1.2,WH,WDd-1.2,WX,0,WZ,glass);
+var wc=[]; for(var x=WX-WWd/2+2;x<=WX+WWd/2-2;x+=6) wc.push([x,WZ-WDd/2+.3]); for(var z=WZ-WDd/2+2;z<=WZ+WDd/2-2;z+=6) wc.push([WX-WWd/2+.3,z]); fins(A,wc,FL[3],0,white,.6);
+[FL[2],FL[3],WH].forEach(function(yy,i){ var m=slab(A,rrect(WWd+1.6,WDd+1.6,.3),yy-(i<2?.35:0),i<2?.35:.6,white); m.position.x=WX; m.position.z=WZ; });
+var gr=new THREE.Mesh(new THREE.PlaneGeometry(WWd-2,WDd-2),greenRoof); gr.rotation.x=-Math.PI/2; gr.position.set(WX,WH+.65,WZ); A.add(gr);
+var pl=[]; for(var i=0;i<8;i++) pl.push([WX-WWd/2+2.5+i*3.9, WZ-WDd/2+2.2]); for(var i=0;i<6;i++) pl.push([WX-WWd/2+2.2, WZ-WDd/2+6+i*3.6]);
+pl.forEach(function(q){ boxP(A,2.6,.9,2.6,q[0],WH+.6,q[1],white); shrubsLocal(A,q[0],WH+1,q[1]); });
+for(var i=0;i<6;i++) shrubsLocal(A,WX+rnd(-10,8),WH+.6,WZ+rnd(-8,8));
+for(var i=0;i<4;i++) boxP(A,.4,3.2,.4,WX-6+i*4,WH+.6,WZ-6,white);
+boxP(A,14,.35,6,WX,WH+3.8,WZ-6,white);
+function shrubsLocal(grp,x,yy,z){ var m=new THREE.Mesh(new THREE.IcosahedronGeometry(rnd(.8,1.4),0),M(0x467d38)); m.position.set(x,yy+.6,z); m.castShadow=true; grp.add(m); }
 // glass shaft with a recessed vertical channel
 var shaftH=TOP-FL[3];
 boxP(A,AW,shaftH,AD*.36,0,FL[3],-AD/2+AD*.18,glass);
 boxP(A,AW-3,shaftH,AD*.1,0,FL[3],-AD/2+AD*.41,glass);       // recess (red channel)
 boxP(A,AW,shaftH,AD*.54,0,FL[3],AD/2-AD*.27,glass);
 // white floor bands (floors 3–25), terracotta for the crown floors
-for(var f=3;f<=30;f++) slab(A,rrect(AW+2.6,AD+2.6,3.2),FL[f]-.32,.32,f>=26?red:white);
-slab(A,rrect(AW+3.4,AD+3.4,3.6),TOP,1.0,red);           // roof slab
-slab(A,(function(){var s=rrect(AW+3.4,AD+3.4,3.6); s.holes.push(rrect(AW+1.2,AD+1.2,2.6)); return s;})(),TOP+4.6,1.4,red);   // open crown frame
+for(var f=2;f<=30;f++) slab(A,rrect(AW+2.6,AD+2.6,.25),FL[f]-.32,f<=3?.5:.32,f>=26?red:white);
+slab(A,rrect(AW+3.4,AD+3.4,.25),TOP,1.2,red);           // roof slab
 // balcony dividers (dark) on long faces
 var dv=[]; for(var s2=-1;s2<=1;s2+=2) for(var z=-AD/2+2;z<=AD/2-2;z+=3.1) dv.push([s2*(AW/2+.9),z]);
 fins(A,dv,FL[26]-FL[3],FL[3],dark,.25);
 // terracotta grid: crown columns all round + 2 vertical strips down the long facades
 var cr=[]; for(var s2=-1;s2<=1;s2+=2){ for(var z=-AD/2+1.5;z<=AD/2-1.5;z+=3.1) cr.push([s2*(AW/2+1.4),z]); for(var x=-AW/2+1.5;x<=AW/2-1.5;x+=3.1) cr.push([x,s2*(AD/2+1.4)]); }
-fins(A,cr,TOP+6-FL[26],FL[26],red,.7);
+fins(A,cr,TOP+1-FL[26],FL[26],red,.7);
 var st=[]; [-AD/2+AD*.36, -AD/2+AD*.46, AD/2-6.5, AD/2-3.2].forEach(function(z){ st.push([AW/2+1.2,z]); st.push([-(AW/2+1.2),z]); });
-fins(A,st,FL[26]-FL[3],FL[3],red,.8);
+fins(A,st,FL[26]-FL[3]+2,FL[3]-2,red,.8);
 for(var f=4;f<=25;f++){ boxP(A,1,.5,AD*.1+.8,AW/2+.9,FL[f]+1.6,-AD/2+AD*.41,red); boxP(A,1,.5,AD*.1+.8,-(AW/2+.9),FL[f]+1.6,-AD/2+AD*.41,red); boxP(A,1,.5,3.3,AW/2+.9,FL[f]+1.6,AD/2-4.85,red); }
-// rooftop pergola glass box
-boxP(A,AW-6,4.5,AD-14,0,TOP+1,0,glass);
 
 /* Scheme B – white wavy balconies (second render) */
 var B=new THREE.Group(); T.add(B); B.visible=false;
 boxP(B,30,FL[3],58,0,0,0,glass); for(var f=2;f<=3;f++) slab(B,rrect(32,60,4),FL[f]-.45,.45,white);
-boxP(B,18.4,TOP-FL[3],47,0,FL[3],0,glass);
-var mb=[]; for(var s2=-1;s2<=1;s2+=2) for(var i=0;i<16;i++) mb.push([s2*9.35,-22.5+i*3]); fins(B,mb,TOP-FL[3],FL[3],dark,.35);
-for(var f=3;f<=30;f++) slab(B,wavyShape(18.4,47,.9,f*.42,3.2),FL[f]-.38,.38,white);
-slab(B,wavyShape(18.4,47,.9,31*.42,3.2),TOP-.38,.38,white);
-var ringB=rrect(21.6,50.5,5); ringB.holes.push(rrect(19,48,4)); slab(B,ringB,TOP,7,white);
-boxP(B,18.4,1,47,0,TOP,0,dark);
+// L-shaped plan (as in the white render): main slab + wing on the north end toward Nguyễn Đức Thuận;
+// the wing steps back floor by floor from floor 21, the white crown sits on the main slab only
+var BW=18.4, BD=47; function bD(f){ return BD; }
+var WW=7.5, WD=19, WZ0=-BD/2+WD/2; function wW(f){ return f<21?WW:Math.max(0,WW-(f-20)*1.15); }
+boxP(B,BW,TOP-FL[3],BD,0,FL[3],0,glass);
+for(var f=3;f<=27;f++){ var w=wW(f); if(w<.4) break; var h=(f<30?FL[f+1]:TOP)-FL[f]; boxP(B,w+1,h,WD,-(BW/2+w/2)+.5,FL[f],WZ0,glass); }
+var mb=[]; for(var s2=-1;s2<=1;s2+=2) for(var i=0;i<16;i++) mb.push([s2*9.35,-22.5+i*3]); fins(B,mb,FL[21]-FL[3],FL[3],dark,.35);
+var mw=[]; for(var i=0;i<6;i++) mw.push([-(BW/2+WW)-.1,WZ0-WD/2+1.5+i*3.2]); fins(B,mw,FL[21]-FL[3],FL[3],dark,.35);
+for(var f=3;f<=30;f++){ slab(B,wavyShape(BW,BD,.9,f*.42,3.2),FL[f]-.38,.38,white);
+  var w=wW(f); if(w>=.4){ var m=slab(B,wavyShape(w+1,WD,.7,f*.42+1,2.4),FL[f]-.38,.38,white); m.position.set(-(BW/2+w/2)+.5,m.position.y,WZ0); } }
+var dTop=BD; slab(B,wavyShape(BW,BD,.9,31*.42,3.2),TOP-.38,.38,white);
+var ringB=rrect(BW+3.2,BD+3.5,5); ringB.holes.push(rrect(BW+.6,BD+1,4)); slab(B,ringB,TOP,4,white);
+var rf=boxP(B,BW,1,BD,0,TOP,0,dark);
 
 // corner plaza at the junction
 var plaza=new THREE.Mesh(new THREE.CircleGeometry(26,40,Math.PI*.5,Math.PI*.5),M(0xd9d2c4)); plaza.rotation.x=-Math.PI/2; plaza.position.set(-14,.11,8); world.add(plaza);
 // selected floor highlight
 var hiMat=new THREE.MeshStandardMaterial({color:0xff6a2b,emissive:0xff6a2b,emissiveIntensity:.9,transparent:true,opacity:.9});
-var hiG=new THREE.ExtrudeGeometry(rrect(AW+3.4,AD+3.4,3.6),{depth:3.2,bevelEnabled:false,curveSegments:5}); hiG.rotateX(-Math.PI/2);
+var hiG=new THREE.ExtrudeGeometry(rrect(AW+3.4,AD+3.4,.25),{depth:3.2,bevelEnabled:false,curveSegments:5}); hiG.rotateX(-Math.PI/2);
 var hi=new THREE.Mesh(hiG,hiMat); T.add(hi);
-var VIEWX=AW/2+2.0;
-function setScheme(s){ A.visible=s==='A'; B.visible=s==='B'; VIEWX=s==='A'?AW/2+2.0:12.6; document.getElementById('sA').setAttribute('aria-pressed',s==='A'); document.getElementById('sB').setAttribute('aria-pressed',s==='B'); if(mode==='view') placeViewCam(); }
+var VIEWX=AW/2+2.0, SCH='A', curF=22;
+function fitHi(){ if(SCH==='B'){ var d=bD(curF); hi.scale.set((BW+3.4)/(AW+3.4),1,(d+3.4)/(AD+3.4)); hi.position.z=(BD-d)/2; } else { hi.scale.set(1,1,1); hi.position.z=0; } }
+function setScheme(s){ SCH=s; fitHi(); A.visible=s==='A'; B.visible=s==='B'; VIEWX=s==='A'?AW/2+2.0:12.6; document.getElementById('sA').setAttribute('aria-pressed',s==='A'); document.getElementById('sB').setAttribute('aria-pressed',s==='B'); if(mode==='view') placeViewCam(); }
 
 /* ---------- Traffic ---------- */
 var cars=[], carMesh;
@@ -367,6 +380,10 @@ label('Công viên biển Trường Sa (quy hoạch)','',world,[62,10,60]);
 label('Bãi biển Mỹ Khê – Non Nước','',world,[150,4,-260]);
 label('Crowne Plaza (Silver Shores)','',world,[70,58,-470]);
 label('Hyatt Regency Danang','',world,[72,30,470]);
+label('TIA Wellness Resort','far',world,[70,20,-800]);
+label('Ariyana Convention Centre','far',world,[60,20,-1080]);
+label('Furama Resort Danang','far',world,[80,20,-1380]);
+label('Pullman Danang Beach Resort','far',world,[-30,20,-1460]);
 label('Biển Đông','far',world,[900,4,-150]);
 label('Bán đảo Sơn Trà','far',scene,[1300,560,-5200]);
 label('Ngũ Hành Sơn','far',scene,[-680,110,1350]);
@@ -404,7 +421,7 @@ function setTime(h){
 /* ---------- Floor selector & view mode ---------- */
 var floorEl=document.getElementById('floor'), floorOut=document.getElementById('floorOut');
 var mode='overview', saved=null, yaw=0, pitch=-.04;
-function setFloor(f){ hi.position.y=FL[f]-.2; floorOut.textContent='Tầng '+f; mainLbl.textContent='HẢI MINH · tầng '+f+' (~'+Math.round(FL[f]+1.6)+' m)'; if(mode==='view') placeViewCam(); }
+function setFloor(f){ curF=f; fitHi(); hi.position.y=FL[f]-.2; floorOut.textContent='Tầng '+f; mainLbl.textContent='HẢI MINH · tầng '+f+' (~'+Math.round(FL[f]+1.6)+' m)'; if(mode==='view') placeViewCam(); }
 function placeViewCam(){
   var f=+floorEl.value; var p=T.localToWorld(new THREE.Vector3(VIEWX,FL[f]+1.6,0)); camera.position.copy(p);
   var d=new THREE.Vector3(Math.cos(yaw)*Math.cos(pitch),Math.sin(pitch),Math.sin(yaw)*Math.cos(pitch)).applyQuaternion(world.quaternion);
@@ -434,8 +451,12 @@ playBtn.onclick=function(){playing=!playing; playBtn.textContent=playing?'❚❚
 var tgt=world.localToWorld(new THREE.Vector3(20,30,10));
 controls.target.copy(tgt);
 camera.position.copy(world.localToWorld(new THREE.Vector3(-150,250,380)));
+if(/close/.test(location.search)){controls.target.copy(world.localToWorld(new THREE.Vector3(-47,15,46)));camera.position.copy(world.localToWorld(new THREE.Vector3(/close2/.test(location.search)?-150:40,45,/close2/.test(location.search)?-60:140)));}
 controls.update();
 setFloor(+floorEl.value); setTime(+hourEl.value); refreshEnv();
+if(/schemeB/.test(location.search)) setScheme('B');
+var camQ=/cam=([-\d.]+),([-\d.]+),([-\d.]+)/.exec(location.search); if(camQ){controls.target.copy(world.localToWorld(new THREE.Vector3(-47,60,46)));camera.position.copy(world.localToWorld(new THREE.Vector3(-47+ +camQ[1],+camQ[2],46+ +camQ[3])));}
+if(/topB/.test(location.search)){controls.target.copy(world.localToWorld(new THREE.Vector3(-47,90,46)));camera.position.copy(world.localToWorld(new THREE.Vector3(90,95,-60)));}
 
 /* ---------- Loop ---------- */
 var needle=document.getElementById('needle'), clock=new THREE.Clock(), v=new THREE.Vector3(), fwd=new THREE.Vector3();
