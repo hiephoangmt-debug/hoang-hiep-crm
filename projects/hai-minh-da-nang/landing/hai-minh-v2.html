@@ -440,25 +440,60 @@ footer a{color:#fff;text-decoration:underline;text-decoration:none;font-weight:6
     <div class="loc">
       <div>
         <div class="map">
-          <svg viewBox="0 0 420 300" role="img" aria-label="Sơ đồ minh họa vị trí Hải Minh và các điểm lân cận" style="width:100%;height:auto;display:block">
-            <rect width="420" height="300" fill="#FFF8EF"/>
-            <path d="M300 0 C285 60 300 120 285 180 C272 235 290 270 300 300 L420 300 L420 0 Z" fill="#C9D6E3"/>
-            <path d="M300 0 C285 60 300 120 285 180 C272 235 290 270 300 300" stroke="#F6EAD8" stroke-width="10" fill="none"/>
-            <text x="350" y="40" font-size="14" fill="#0A2540" font-weight="700" font-family="Arial">Biển</text>
-            <text x="336" y="58" font-size="12" fill="#0A2540" font-family="Arial">Mỹ Khê – Non Nước</text>
-            <line x1="262" y1="0" x2="248" y2="300" stroke="#D9CDBB" stroke-width="5"/>
-            <text x="150" y="20" font-size="11" fill="#5E6B78" font-family="Arial">Trục Võ Nguyên Giáp – Trường Sa</text>
-            <circle cx="262" cy="150" r="12" fill="#FF5A1F"/>
-            <circle cx="262" cy="150" r="20" fill="none" stroke="#FF5A1F" stroke-width="2" opacity=".5"/>
-            <text x="150" y="146" font-size="14" font-weight="800" fill="#0A2540" font-family="Arial">HẢI MINH</text>
-            <text x="138" y="162" font-size="11" fill="#0A2540" font-family="Arial">đối diện Silver Shores</text>
-            <circle cx="200" cy="95" r="6" fill="#0A2540"/><text x="120" y="88" font-size="12" fill="#0A2540" font-family="Arial">An Thượng</text>
-            <circle cx="205" cy="225" r="6" fill="#0A2540"/><text x="110" y="230" font-size="12" fill="#0A2540" font-family="Arial">Ngũ Hành Sơn</text>
-            <circle cx="60" cy="60" r="6" fill="#0A2540"/><text x="20" y="48" font-size="12" fill="#0A2540" font-family="Arial">Sân bay ↖</text>
-            <circle cx="150" cy="285" r="6" fill="#0A2540"/><text x="40" y="290" font-size="12" fill="#0A2540" font-family="Arial">Hội An ↓</text>
+          <svg viewBox="120 0 810 588" role="img" aria-label="Sơ đồ vị trí Hải Minh tại góc giao Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận" style="width:100%;height:auto;display:block;font-family:Arial,sans-serif">
+            <rect x="0" width="1000" height="588" fill="#F4ECDF"/>
+            <!-- khu dân cư -->
+            <g fill="#E6DBCB">
+              <polygon points="0,560 150,488 300,410 378,372 432,470 470,588 0,588"/>
+              <polygon points="0,140 60,120 120,330 0,380"/>
+            </g>
+            <!-- dải cây xanh ven biển (phía Silver Shores) -->
+            <polygon points="392,0 602,0 672,200 752,430 842,588 628,588 508,280" fill="#DDE5D6"/>
+            <!-- bãi cát -->
+            <polygon points="602,0 652,0 732,200 812,430 905,588 842,588 752,430 672,200" fill="#EBD9B6"/>
+            <!-- biển -->
+            <polygon points="652,0 1000,0 1000,588 905,588 812,430 732,200" fill="#BCD0E3"/>
+            <g stroke="#FFFFFF" stroke-width="2" fill="none" opacity=".7">
+              <path d="M700 60 q20 10 40 0 t40 0"/><path d="M780 170 q20 10 40 0 t40 0"/><path d="M850 300 q20 10 40 0 t40 0"/><path d="M900 450 q20 10 40 0 t40 0"/>
+            </g>
+            <!-- đường -->
+            <g stroke="#FFFFFF" stroke-linecap="round" fill="none">
+              <polyline points="0,215 185,588" stroke-width="16"/>
+              <polyline points="0,520 140,455 300,377 495,280" stroke-width="10"/>
+              <polyline points="530,556 780,408" stroke-width="8"/>
+              <polyline points="372,362 470,588" stroke-width="6"/>
+              <polyline points="375,0 495,280 615,588" stroke-width="14"/>
+            </g>
+            <g stroke="#D9CDBB" stroke-width="1.5" fill="none">
+              <polyline points="0,215 185,588"/><polyline points="375,0 495,280 615,588"/>
+            </g>
+            <!-- lô dự án -->
+            <polygon points="489,294 452,312 478,366 516,348" fill="#FF5A1F" opacity=".22" stroke="#FF5A1F" stroke-width="2"/>
+            <circle cx="484" cy="330" r="30" fill="none" stroke="#FF5A1F" stroke-width="2" opacity=".45"/>
+            <circle cx="484" cy="330" r="11" fill="#FF5A1F" stroke="#fff" stroke-width="3"/>
+            <!-- nhãn dự án -->
+            <line x1="474" y1="338" x2="370" y2="405" stroke="#0A2540" stroke-width="1.5"/>
+            <rect x="150" y="400" width="230" height="70" rx="12" fill="#0A2540"/>
+            <text x="265" y="430" font-size="25" font-weight="700" fill="#fff" text-anchor="middle">HẢI MINH</text>
+            <text x="265" y="456" font-size="17" fill="#C9D6E3" text-anchor="middle">Góc 3 tuyến đường</text>
+            <!-- tên đường -->
+            <text transform="translate(420,95) rotate(66.8)" font-size="23" font-weight="700" fill="#0A2540">Võ Nguyên Giáp</text>
+            <text transform="translate(540,385) rotate(68.7)" font-size="23" font-weight="700" fill="#0A2540">Trường Sa</text>
+            <text transform="translate(225,388) rotate(-26)" font-size="21" font-weight="700" fill="#0A2540">Nguyễn Đức Thuận</text>
+            <text transform="translate(590,530) rotate(-30.6)" font-size="18" fill="#5E6B78">Minh Mạng</text>
+            
+            <!-- điểm mốc -->
+            <text x="540" y="130" font-size="20" font-weight="700" fill="#3D5A3A" transform="rotate(66 540 130)">Silver Shores (đối diện)</text>
+            <text x="790" y="110" font-size="26" font-weight="700" fill="#0A2540">Biển</text>
+            <text x="760" y="140" font-size="19" fill="#0A2540">Mỹ Khê –</text><text x="760" y="164" font-size="19" fill="#0A2540">Non Nước</text>
+            <text x="132" y="32" font-size="19" fill="#0A2540">↖ An Thượng · Cầu Rồng</text>
+            <text x="196" y="574" font-size="19" fill="#0A2540">↙ Ngũ Hành Sơn</text>
+            <text x="636" y="574" font-size="19" fill="#0A2540">Hội An ↓</text>
+            <!-- la bàn -->
+            <g transform="translate(900,540)"><polygon points="0,-24 8,4 0,-2 -8,4" fill="#0A2540"/><text y="20" font-size="13" font-weight="700" fill="#0A2540" text-anchor="middle">B</text></g>
           </svg>
         </div>
-        <p class="illu">Sơ đồ minh họa, không theo tỷ lệ.</p>
+        <p class="illu">Sơ đồ vẽ lại theo bản đồ vệ tinh, hướng Bắc lên trên; không theo tỷ lệ.</p>
       </div>
       <div class="dist">
         <div><span>Bãi biển Mỹ Khê – Non Nước</span><b>Vài bước chân</b></div>
