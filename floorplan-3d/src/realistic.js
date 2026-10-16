@@ -52,6 +52,7 @@ export async function upgradeFurniture(built, clippingPlanes = [], palette = nul
     const item = g.userData.item;
     const spec = item && MODELS[item.type];
     if (!spec) continue;
+    if (palette?.walnut && item.type === 'armchair') continue; // kiểu gỗ óc chó: giữ ghế bành khung gỗ cong dựng sẵn
     jobs.push(load(spec.file).then((m) => {
       if (!g.parent) return; // cảnh đã dựng lại
       const def = CATALOG_MAP[item.type];

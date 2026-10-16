@@ -39,8 +39,37 @@ const M = {
   lampShade: () => mat(0xfff1d6, { roughness: 0.9, emissive: 0xffd9a0, emissiveIntensity: 0.0 }),
 };
 
+// Mặt bàn gỗ burl chảy dòng nhựa đen (epoxy) – vẽ 1 lần, dùng chung
+let riverTex = null;
+function riverMat() {
+  if (!riverTex) {
+    const c = document.createElement('canvas'); c.width = 512; c.height = 512;
+    const x = c.getContext('2d');
+    let seed = 7; const r = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+    x.fillStyle = '#7a4a2a'; x.fillRect(0, 0, 512, 512);
+    for (let i = 0; i < 900; i++) { // vân burl xoáy
+      x.fillStyle = `rgba(${150 + r() * 70},${90 + r() * 40},${40 + r() * 30},${0.15 + r() * 0.25})`;
+      x.beginPath(); x.ellipse(r() * 512, r() * 512, 2 + r() * 10, 1 + r() * 6, r() * 3, 0, 7); x.fill();
+    }
+    for (let i = 0; i < 260; i++) { x.fillStyle = `rgba(40,20,10,${0.25 + r() * 0.3})`; x.beginPath(); x.arc(r() * 512, r() * 512, 0.8 + r() * 2, 0, 7); x.fill(); }
+    // dòng nhựa đen chảy chéo giữa bàn
+    x.fillStyle = '#0d0d0f';
+    x.beginPath();
+    const pts = [];
+    for (let i = 0; i <= 12; i++) { const t = i / 12; pts.push([60 + t * 400 + Math.sin(t * 9) * 30, 140 + t * 230 + Math.cos(t * 7) * 40]); }
+    x.moveTo(pts[0][0], pts[0][1] - 40);
+    pts.forEach(([px, py], i) => x.lineTo(px, py - 30 - Math.sin(i * 1.7) * 25));
+    pts.slice().reverse().forEach(([px, py], i) => x.lineTo(px, py + 30 + Math.cos(i * 1.3) * 25));
+    x.closePath(); x.fill();
+    for (let i = 0; i < 6; i++) { x.beginPath(); x.ellipse(120 + r() * 300, 150 + r() * 220, 12 + r() * 20, 8 + r() * 14, r() * 3, 0, 7); x.fill(); }
+    riverTex = new THREE.CanvasTexture(c);
+    riverTex.colorSpace = THREE.SRGBColorSpace;
+  }
+  return new THREE.MeshStandardMaterial({ map: riverTex, roughness: 0.12, metalness: 0.05 });
+}
+
 function box(w, h, d, material, x = 0, y = 0, z = 0, rounded = 0) {
-  const geo = rounded > 0 ? new RoundedBoxGeometry(w, h, d, 3, Math.min(rounded, w / 2, h / 2, d / 2)) : new THREE.BoxGeometry(w, h, d);
+  const geo = rounded > 0 ? new RoundedBoxGeometry(w, h, d, rounded >= 0.04 ? 5 : 3, Math.min(rounded, w / 2 - 1e-4, h / 2 - 1e-4, d / 2 - 1e-4)) : new THREE.BoxGeometry(w, h, d);
   const m = new THREE.Mesh(geo, material);
   m.position.set(x, y, z);
   m.castShadow = true;
@@ -91,18 +120,73 @@ const builders = {
     return g;
   },
   wardrobe(w, d, h) {
+    // Tủ quần áo full kính kiểu mẫu showroom: khung nhôm đen mảnh, kính khói trà, lòng tủ gỗ ấm, đèn LED hắt dưới kệ,
+    // cột treo dài / treo 2 tầng / cột kệ + ngăn kéo, quần áo tông nâu – be, hộp, túi xách minh hoạ
     const g = new THREE.Group();
-    g.add(box(w, h, d, M.lightWood(), 0, h / 2, 0, 0.01));
-    const n = Math.max(2, Math.round(w / 0.5));
-    for (let i = 0; i < n; i++) {
-      const dw = w / n;
-      const x = -w / 2 + dw * (i + 0.5);
-      g.add(box(dw - 0.012, h - 0.04, 0.02, M.lightWood(), x, h / 2, d / 2 + 0.01));
-      g.add(box(0.02, 0.25, 0.03, M.metal(), x + (i % 2 ? -1 : 1) * (dw / 2 - 0.05), h * 0.52, d / 2 + 0.035));
+    const fr = mat(0x1e1f21, { roughness: 0.35, metalness: 0.6 }), wood = M.lightWood(), t = 0.025;
+    const led = mat(0xfff3dc, { emissive: 0xffd9a0, emissiveIntensity: 1.6, roughness: 0.5 });
+    const smoke = mat(0x4a4038, { roughness: 0.05, metalness: 0.2, transparent: true, opacity: 0.32, depthWrite: false });
+    const cloth = [0x6b4a36, 0x8a6a4f, 0xc9b49a, 0xe8dfd2, 0x3b3532, 0xa88466, 0x5a4a42, 0xd8c8b4];
+    const C = (i) => mat(cloth[i % cloth.length], { roughness: 0.95 });
+    const z0 = -d / 2, inD = d - 0.05;
+    g.add(box(w, 0.08, d, mat(0x6f6a64, { roughness: 0.6 }), 0, 0.04, 0)); // chân đế
+    g.add(box(w - 0.02, h - 0.1, 0.02, wood, 0, h / 2 + 0.04, z0 + 0.012)); // hậu tủ
+    g.add(box(w, 0.025, d, wood, 0, h - 0.0125, 0)); // nóc
+    g.add(box(w - 0.02, 0.02, inD, wood, 0, 0.09, 0));
+    const ncol = Math.max(2, Math.round(w / 0.55)), cw = w / ncol;
+    for (let i = 0; i <= ncol; i++) {
+      const x = -w / 2 + cw * i;
+      g.add(box(0.02, h - 0.1, inD, wood, Math.min(w / 2 - 0.01, Math.max(-w / 2 + 0.01, x)), h / 2 + 0.04, -0.02)); // vách đứng
+      g.add(box(t, h - 0.08, t, fr, Math.min(w / 2 - t / 2, Math.max(-w / 2 + t / 2, x)), h / 2 + 0.04, d / 2 - t / 2)); // khung cánh
+    }
+    g.add(box(w, t, t, fr, 0, h - t / 2, d / 2 - t / 2));
+    g.add(box(w, t, t, fr, 0, 0.09, d / 2 - t / 2));
+    g.add(box(w - 0.02, h - 0.12, 0.006, smoke, 0, h / 2 + 0.04, d / 2 - 0.012)); // cánh kính khói
+    for (const sx of [-1, 1]) g.add(box(0.006, h - 0.12, d - 0.04, smoke, sx * (w / 2 + 0.002), h / 2 + 0.04, 0));
+    const hang = (x, yTop, len, n, seed) => {
+      const rail = cyl(0.01, 0.01, cw - 0.06, M.steel(), x, yTop, 0, 8);
+      rail.rotation.z = Math.PI / 2;
+      g.add(rail);
+      g.add(box(cw - 0.05, 0.012, 0.03, led, x, yTop + 0.06, -0.02 + inD / 2 - 0.06)); // LED hắt
+      for (let k = 0; k < n; k++) {
+        const xx = x - (cw - 0.14) / 2 + ((cw - 0.14) / Math.max(1, n - 1)) * k;
+        const L = len * (0.82 + (((k + seed) * 37) % 5) * 0.045);
+        g.add(box(0.03, L, inD * 0.78, C(k + seed), xx, yTop - L / 2 - 0.03, 0));
+        g.add(box(0.008, 0.06, inD * 0.5, M.steel(), xx, yTop - 0.01, 0));
+      }
+    };
+    for (let i = 0; i < ncol; i++) {
+      const x = -w / 2 + cw * (i + 0.5);
+      const kind = ncol >= 3 && i === 0 ? 'shelf' : i % 2 ? 'double' : 'long';
+      // kệ trên cùng: hộp, chồng đồ gấp
+      g.add(box(cw - 0.03, 0.02, inD, wood, x, h - 0.36, -0.02));
+      g.add(box(cw - 0.05, 0.012, 0.03, led, x, h - 0.38, inD / 2 - 0.08));
+      g.add(box(cw * 0.42, 0.16, inD * 0.6, mat(i % 2 ? 0xe9e3d8 : 0x8a6f58, { roughness: 0.8 }), x - cw * 0.18, h - 0.27, -0.03));
+      g.add(box(cw * 0.36, 0.1, inD * 0.55, C(i + 2), x + cw * 0.2, h - 0.3, -0.03));
+      if (kind === 'shelf') {
+        for (const y of [0.95, 1.3, 1.62]) {
+          g.add(box(cw - 0.03, 0.02, inD, wood, x, y, -0.02));
+          g.add(box(cw - 0.05, 0.01, 0.03, led, x, y - 0.02, inD / 2 - 0.08));
+          for (let k = 0; k < 2; k++) g.add(box(cw * 0.38, 0.05 + k * 0.03, inD * 0.6, C(k * 3 + Math.round(y * 10)), x + (k ? 0.1 : -0.1), y + 0.04 + k * 0.015, -0.03));
+        }
+        for (let j = 0; j < 3; j++) { // ngăn kéo gỗ
+          g.add(box(cw - 0.04, 0.2, 0.02, wood, x, 0.21 + j * 0.23, inD / 2 - 0.03));
+          g.add(box(cw * 0.4, 0.015, 0.02, fr, x, 0.27 + j * 0.23, inD / 2 - 0.015));
+        }
+      } else if (kind === 'double') {
+        hang(x, h - 0.45, 0.62, 4, i * 3);
+        g.add(box(cw - 0.03, 0.02, inD, wood, x, 0.95, -0.02));
+        hang(x, 0.88, 0.5, 4, i * 3 + 2);
+      } else {
+        hang(x, h - 0.45, 1.0, 5, i * 2);
+        // dưới chân: túi xách / hộp tròn
+        g.add(box(0.26, 0.2, 0.14, mat(i % 2 ? 0x7a5236 : 0x9c7a5b, { roughness: 0.5 }), x, 0.21, 0));
+      }
     }
     return g;
   },
   sofa(w, d) {
+    if (P.walnut) return walnutSofa(w, d);
     const g = new THREE.Group();
     const c = M.fabric(P.fabric), c2 = M.fabric(P.leather ? P.fabric : shadeHex(P.fabric, 0.04));
     g.add(box(w, 0.25, d, c, 0, 0.2, 0, 0.05));
@@ -120,6 +204,7 @@ const builders = {
     return g;
   },
   armchair(w, d) {
+    if (P.walnut) return walnutArmchair(w, d);
     const g = new THREE.Group();
     const c = M.fabric(P.fabric2);
     g.add(box(w, 0.25, d, c, 0, 0.22, 0, 0.05));
@@ -130,6 +215,7 @@ const builders = {
     return g;
   },
   coffeeTable(w, d, h) {
+    if (P.walnut) return walnutCoffeeTable(w, d, h);
     const g = new THREE.Group();
     g.add(box(w, 0.04, d, M.wood(), 0, h - 0.02, 0, 0.01));
     g.add(box(w - 0.1, 0.02, d - 0.1, M.wood(), 0, 0.12, 0));
@@ -139,6 +225,7 @@ const builders = {
     return g;
   },
   tvStand(w, d, h) {
+    if (P.walnut) return walnutTvStand(w, d, h);
     const g = new THREE.Group();
     g.add(box(w, h, d, M.darkWood(), 0, h / 2 + 0.05, 0, 0.01));
     legs(g, w, d, 0.05, 0.02, M.black());
@@ -467,6 +554,7 @@ const builders = {
     return g;
   },
   rug(w, d) {
+    if (P.walnut) return marbleInlay(w, d);
     const g = new THREE.Group();
     const m = box(w, 0.012, d, new THREE.MeshStandardMaterial({ map: rugTexture(), roughness: 1 }), 0, 0.006, 0);
     m.castShadow = false;
@@ -753,4 +841,99 @@ export function drawFurniture2D(ctx, item, px) {
       ctx.fillStyle = '#1b2631'; rr(ctx, -w * 0.42, -d * 0.18, w * 0.84, d * 0.45, 0.15); ctx.fill();
       break;
   }
+}
+
+// ---------- Kiểu gỗ óc chó sang trọng: khung gỗ nguyên khối, da nâu, gối màu bò ----------
+function walnutSofa(w, d) {
+  const g = new THREE.Group();
+  const wood = M.wood(), dark = M.darkWood(), leather = M.fabric(P.fabric), pillow = mat(P.accent, { roughness: 0.55 });
+  const tableW = w >= 2.0 ? 0.5 : 0, armW = 0.1, seatW = w - tableW - armW;
+  const x0 = -w / 2 + armW; // mép trái phần ngồi
+  // đế gỗ liền khối + chân lùi
+  g.add(box(w, 0.18, d, wood, 0, 0.15, 0, 0.08));
+  g.add(box(w - 0.12, 0.06, d - 0.12, dark, 0, 0.03, 0, 0.03));
+  g.add(box(w - tableW, 0.48, 0.1, wood, -tableW / 2, 0.45, -d / 2 + 0.05, 0.05)); // tựa lưng gỗ
+  g.add(box(armW + 0.04, 0.52, d, wood, -w / 2 + armW / 2 + 0.02, 0.45, 0, 0.07)); // tay gỗ trái bo tròn
+  if (tableW) { // bàn gỗ liền đầu sofa (để sách, đồ trang trí)
+    g.add(box(tableW, 0.07, d + 0.08, wood, w / 2 - tableW / 2, 0.455, 0.04, 0.035));
+    g.add(box(0.06, 0.26, d, wood, w / 2 - tableW + 0.03, 0.33, 0, 0.03));
+    g.add(box(0.22, 0.03, 0.28, mat(0xe9e3d6, { roughness: 0.7 }), w / 2 - tableW / 2, 0.505, 0.05));
+    g.add(cyl(0.035, 0.05, 0.16, mat(0xb08d57, { roughness: 0.3, metalness: 0.8 }), w / 2 - tableW / 2 + 0.12, 0.57, -0.12, 12));
+  }
+  const n = Math.max(1, Math.round(seatW / 0.7)), cw = seatW / n;
+  for (let i = 0; i < n; i++) {
+    const x = x0 + cw * (i + 0.5);
+    g.add(box(cw - 0.02, 0.16, d - 0.2, leather, x, 0.3, 0.06, 0.075)); // đệm ngồi da
+    g.add(box(cw - 0.03, 0.4, 0.17, leather, x, 0.56, -d / 2 + 0.18, 0.085)); // đệm lưng
+    const p = box(0.42, 0.34, 0.12, pillow, x, 0.58, -d / 2 + 0.32, 0.06); // gối màu bò
+    p.rotation.x = -0.25;
+    g.add(p);
+  }
+  return g;
+}
+function walnutArmchair(w, d) {
+  const g = new THREE.Group();
+  const wood = M.wood(), leather = M.fabric(P.fabric2), pillow = mat(P.accent, { roughness: 0.55 });
+  // khung gỗ cong dạng chữ C: hai má, đế trượt, lưng bo
+  g.add(box(w, 0.09, d, wood, 0, 0.07, 0, 0.045));
+  for (const s of [-1, 1]) g.add(box(0.13, 0.58, d - 0.02, wood, s * (w / 2 - 0.065), 0.36, 0, 0.065));
+  g.add(box(w, 0.68, 0.13, wood, 0, 0.4, -d / 2 + 0.065, 0.065));
+  for (const s of [-1, 1]) g.add(box(0.15, 0.07, d - 0.04, leather, s * (w / 2 - 0.075), 0.66, 0.0, 0.035)); // tay vịn bọc da
+  g.add(box(w - 0.26, 0.17, d - 0.18, leather, 0, 0.27, 0.05, 0.08));
+  g.add(box(w - 0.26, 0.44, 0.17, leather, 0, 0.55, -d / 2 + 0.2, 0.085));
+  const p = box(0.34, 0.3, 0.12, pillow, 0, 0.56, -d / 2 + 0.32, 0.06);
+  p.rotation.x = -0.25;
+  g.add(p);
+  return g;
+}
+function walnutCoffeeTable(w, d, h) {
+  const g = new THREE.Group();
+  const wood = M.wood();
+  g.add(box(w, 0.06, d, riverMat(), 0, h - 0.03, 0, 0.03)); // mặt burl + nhựa đen
+  g.add(box(w + 0.03, 0.05, d + 0.03, wood, 0, h - 0.075, 0, 0.025)); // viền gỗ
+  g.add(box(w * 0.72, h - 0.14, d * 0.7, wood, 0, (h - 0.14) / 2 + 0.03, 0, 0.08)); // chân đế khối bo
+  g.add(box(w * 0.78, 0.03, d * 0.76, M.darkWood(), 0, 0.015, 0, 0.015));
+  g.add(cyl(0.025, 0.03, 0.26, mat(0x1d1f22, { roughness: 0.2 }), w * 0.22, h + 0.13, -d * 0.15, 12)); // chai rượu
+  g.add(cyl(0.025, 0.03, 0.22, mat(0x3a1f18, { roughness: 0.2 }), w * 0.28, h + 0.11, -d * 0.05, 12));
+  return g;
+}
+function walnutTvStand(w, d, h) {
+  const g = new THREE.Group();
+  const wood = M.wood(), dark = M.darkWood();
+  const ch = Math.max(0.42, h);
+  g.add(box(w, ch - 0.12, d, wood, 0, 0.12 + (ch - 0.12) / 2, 0, 0.08));
+  g.add(box(w * 0.5, 0.1, 0.02, dark, 0, 0.12 + (ch - 0.12) * 0.55, d / 2 + 0.005)); // khe ngăn mở
+  for (const s of [-1, 1]) g.add(box(w * 0.22, 0.004, 0.012, M.black(), s * w * 0.32, 0.12 + (ch - 0.12) * 0.55, d / 2 + 0.008));
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) g.add(cyl(0.025, 0.04, 0.12, wood, sx * (w / 2 - 0.12), 0.06, sz * (d / 2 - 0.08), 10));
+  const tw = Math.min(w * 0.75, 1.65), th = tw * 0.57;
+  g.add(box(0.36, 0.02, 0.2, M.black(), 0, ch + 0.01, -0.02));
+  g.add(box(0.05, 0.08, 0.04, M.black(), 0, ch + 0.06, -0.02));
+  g.add(box(tw, th, 0.035, M.black(), 0, ch + 0.1 + th / 2, -0.02, 0.008));
+  const screen = new THREE.Mesh(new THREE.PlaneGeometry(tw - 0.03, th - 0.03), mat(0x0b0d10, { roughness: 0.08, metalness: 0.2 }));
+  screen.position.set(0, ch + 0.1 + th / 2, -0.001);
+  g.add(screen);
+  // loa cột đen hai bên
+  for (const s of [-1, 1]) {
+    g.add(cyl(0.1, 0.1, 0.02, M.black(), s * (w / 2 + 0.22), 0.01, 0, 20));
+    g.add(box(0.1, 1.05, 0.1, mat(0x1b1c1e, { roughness: 0.4 }), s * (w / 2 + 0.22), 0.55, 0, 0.02));
+  }
+  // đồ trang trí trên kệ
+  g.add(box(0.12, 0.2, 0.06, mat(0xb08d57, { roughness: 0.3, metalness: 0.8 }), -w * 0.36, ch + 0.1, 0.02, 0.02));
+  g.add(cyl(0.05, 0.06, 0.18, M.porcelain(), -w * 0.3, ch + 0.09, 0.03, 14));
+  return g;
+}
+function marbleInlay(w, d) {
+  // Thảm thay bằng ô đá xám viền đá đen (như sảnh khách mẫu)
+  const g = new THREE.Group();
+  const dark = mat(0x26272a, { roughness: 0.12, metalness: 0.05 });
+  const strip = (inset, t) => {
+    const W = w - inset * 2, D = d - inset * 2;
+    for (const s of [-1, 1]) {
+      g.add(box(W, 0.004, t, dark, 0, 0.004, s * (D / 2 - t / 2)));
+      g.add(box(t, 0.004, D, dark, s * (W / 2 - t / 2), 0.004, 0));
+    }
+  };
+  strip(0, 0.1); strip(0.18, 0.025); strip(0.26, 0.025);
+  g.children.forEach((m) => { m.castShadow = false; });
+  return g;
 }

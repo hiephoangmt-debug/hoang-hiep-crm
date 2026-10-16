@@ -173,6 +173,25 @@ const generators = {
     noise(x, 1024, 5, r);
     return { c, size };
   },
+  // Đá xám vân trắng (phòng khách kiểu gỗ óc chó)
+  marbleGray: () => {
+    const [c, x] = canvas(1024), r = rand(23);
+    const size = 1.6;
+    x.fillStyle = '#bfbebb'; x.fillRect(0, 0, 1024, 1024);
+    for (let k = 0; k < 30; k++) {
+      x.strokeStyle = `rgba(${235 + r() * 20},${235 + r() * 20},${235 + r() * 20},${0.12 + r() * 0.3})`;
+      x.lineWidth = 0.6 + r() * 2.2;
+      x.beginPath();
+      let px = r() * 1024, py = 0;
+      x.moveTo(px, py);
+      while (py < 1024) { px += (r() - 0.45) * 70; py += 20 + r() * 40; x.lineTo(px, py); }
+      x.stroke();
+    }
+    x.fillStyle = 'rgba(120,120,118,0.6)';
+    x.fillRect(0, 511, 1024, 2); x.fillRect(511, 0, 2, 1024); x.fillRect(0, 0, 1024, 1); x.fillRect(0, 0, 1, 1024);
+    noise(x, 1024, 5, r);
+    return { c, size };
+  },
   carpet: () => {
     const [c, x] = canvas(256), r = rand(5);
     x.fillStyle = '#b9ab9a'; x.fillRect(0, 0, 256, 256);
@@ -261,14 +280,14 @@ export function getTexture(name, anisotropy = 8) {
 }
 
 const FLOOR_PROPS = {
-  wood: { roughness: 0.45 }, oak: { roughness: 0.5 }, tile: { roughness: 0.2 }, marble: { roughness: 0.06, metalness: 0.02 },
+  wood: { roughness: 0.45 }, oak: { roughness: 0.5 }, tile: { roughness: 0.2 }, marble: { roughness: 0.06, metalness: 0.02 }, marbleGray: { roughness: 0.08, metalness: 0.02 },
   carpet: { roughness: 1 }, walnut: { roughness: 0.4 }, herringbone: { roughness: 0.35 }, herringboneLight: { roughness: 0.4 },
   darkTile: { roughness: 0.3 }, encaustic: { roughness: 0.45 }, polished: { roughness: 0.25, metalness: 0.02 }, concrete: { roughness: 0.85 }, terracotta: { roughness: 0.6 }, grass: { roughness: 1 },
 };
 const floorMats = new Map();
 export function floorMaterial(name) {
   if (!floorMats.has(name)) {
-    const strength = { wood: 3, oak: 3, walnut: 3, herringbone: 3, herringboneLight: 3, tile: 4, darkTile: 4, terracotta: 4, encaustic: 2, carpet: 1.5, concrete: 1.5, polished: 0.8, marble: 0.6, grass: 2 }[name] ?? 1;
+    const strength = { wood: 3, oak: 3, walnut: 3, herringbone: 3, herringboneLight: 3, tile: 4, darkTile: 4, terracotta: 4, encaustic: 2, carpet: 1.5, concrete: 1.5, polished: 0.8, marble: 0.6, marbleGray: 0.6, grass: 2 }[name] ?? 1;
     floorMats.set(name, new THREE.MeshStandardMaterial({ map: getTexture(name), normalMap: getNormalMap(name, strength), normalScale: new THREE.Vector2(0.6, 0.6), ...(FLOOR_PROPS[name] || {}) }));
   }
   return floorMats.get(name);

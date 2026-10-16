@@ -12,6 +12,12 @@ export const STYLES = {
     floors: { bedroom: 'herringboneLight', living: 'marble', kitchen: 'marble', wet: 'tile', outdoor: 'darkTile' },
     palette: { wood: '#c49a6c', woodDark: '#7a5236', fabric: '#a8653a', fabric2: '#2f5a45', bedding: '#6b7a3a', accent: '#5f6f35', cabinet: '#e8dcc8', stone: '#2e2f31', metal: '#2b2b2b', curtain: '#f6f1e8', drape: '#9aa36b', rug1: '#d9cdb8', rug2: '#9c8a72', leather: true, slats: true, led: false },
   },
+  walnut: {
+    name: 'Gỗ óc chó sang trọng', desc: 'Sofa khung gỗ óc chó bọc da nâu, bàn trà gỗ burl chảy nhựa đen, ghế bành khung gỗ cong, kệ TV gỗ, sàn đá xám viền đen, rèm xám',
+    wall: '#ece8e2', cap: '#2b2c2e',
+    floors: { bedroom: 'walnut', living: 'marbleGray', kitchen: 'marbleGray', wet: 'darkTile', outdoor: 'darkTile' },
+    palette: { wood: '#7b5236', woodDark: '#4b3020', fabric: '#4e3326', fabric2: '#4e3326', bedding: '#d9cfc2', accent: '#b9875e', cabinet: '#5a3c28', stone: '#2a2928', metal: '#2b2b2b', curtain: '#eceae6', drape: '#8e8a85', rug1: '#cfcfcc', rug2: '#2a2a2c', leather: true, slats: false, led: true, walnut: true },
+  },
   luxury: {
     name: 'Hiện đại sang trọng', desc: 'Sàn gỗ xương cá, đá marble trắng, sofa da bò, đèn LED hắt viền',
     wall: '#efe9e1', cap: '#3a3b3e',

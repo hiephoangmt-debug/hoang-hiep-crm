@@ -191,7 +191,7 @@ function renderBDetail() {
     <div class="kv">
       <div><small>DT tim tường</small><b>${ar.tim} m²</b></div>
       <div><small>DT thông thủy</small><b>${ar.tt} m²</b></div>
-      ${gardenOf(floor, slot.slot) ? `<div style="grid-column: span 2"><small>🌳 Sân vườn (tim / thông thủy)</small><b>${gardenOf(floor, slot.slot).tim} / ${gardenOf(floor, slot.slot).tt} m²</b></div>` : ''}
+      ${gardenOf(floor, slot.slot) ? `<div style="grid-column: span 2"><small>🌳 Ban công sân vườn – BC (tim / thông thủy)</small><b>${gardenOf(floor, slot.slot).tim} / ${gardenOf(floor, slot.slot).tt} m²</b></div>` : ''}
       ${READONLY ? '' : `<div><small>Giá ${u.price ? '' : '(ước tính)'}</small><b>${vndTy(price)} tỷ</b></div>
       <div><small>Đơn giá TT</small><b>${vndTy((price * 1000) / ar.tt)} tr/m²</b></div>`}
     </div>
