@@ -9,7 +9,7 @@ import { SLOT_LIST, CORES, CORRIDORS, PODIUM, rectM, STATUS, TYPE_COLORS, reside
 import { buildScene } from './builder.js';
 import { placeUnit, slotFrame } from './unitPlacement.js';
 import UNITS from './units/units.json';
-import { buildSurroundings, cityRiverMid, hanZ, dtZ } from './surroundings.js';
+import { buildSurroundings } from './surroundings.js';
 
 /** Mặt đứng 1 ô (rộng 3 m × cao 1 tầng): khung, tường, cửa kính, lan can kính, bồn cây hoa */
 function facadeTexture(variant) {
@@ -103,7 +103,7 @@ export class BuildingView {
     this.labels.domElement.className = 'labels-layer';
     container.appendChild(this.labels.domElement);
     const scene = (this.scene = new THREE.Scene());
-    this.fog = scene.fog = new THREE.Fog(0xcbdcea, 700, 4200);
+    this.fog = scene.fog = new THREE.Fog(0xcbdcea, 380, 1500);
     scene.environment = new THREE.PMREMGenerator(r).fromScene(new RoomEnvironment(), 0.04).texture;
     scene.environmentIntensity = 0.45;
     const sky = new Sky();
@@ -164,7 +164,7 @@ export class BuildingView {
     // Biển tên F2 và tên đường
     this.f2Tag = this.towerTag('TÒA F2 – MAI', 0xd9542f, b0.podiumFloors * b0.podiumHeight + residentialFloors(b0.floors).length * b0.floorHeight + 8);
     scene.add(this.f2Tag);
-    for (const [t, x, z, cls] of [['Đ. MINH MẠNG', AVENUE_X, -60, 'road green'], ['Đ. MINH MẠNG', AVENUE_X, 150, 'road green'], ['Đ. QUẢNG NAM', 90, roadZ, 'road gold'], ['Đ. NGUYỄN PHƯỚC LAN', -200, roadZ, 'road gold'], ['CẦU BÔ QUAN', AVENUE_X, dtZ(AVENUE_X), 'road green'], ['SÔNG ĐÔ TỎA', 150, dtZ(150), 'road blue'], ['BIỂN SƠN THỦY · MỸ KHÊ', 0, -960, 'road blue'], ['NÚI SƠN TRÀ', -1650, -1300, 'road green'], ['NGŨ HÀNH SƠN', 320, -815, 'road green'], ['CẦU TRUNG LƯƠNG', cityRiverMid(roadZ), roadZ, 'road green'], ['CẦU HÒA XUÂN', cityRiverMid(roadZ + 520), roadZ + 520, 'road green'], ['SÔNG HÀN', cityRiverMid(-130) - 380, hanZ(cityRiverMid(-130) - 380), 'road blue'], ['SUNNEVA ISLAND', -290, -360, 'road gold'], ['TRUNG TÂM ĐÀ NẴNG', cityRiverMid(-130) - 800, hanZ(cityRiverMid(-130) - 800) + 160, 'road blue']]) {
+    for (const [t, x, z, cls] of [['Đ. MINH MẠNG', AVENUE_X, -60, 'road green'], ['Đ. MINH MẠNG', AVENUE_X, 150, 'road green'], ['Đ. QUẢNG NAM', 90, roadZ, 'road gold'], ['Đ. NGUYỄN PHƯỚC LAN', -200, roadZ, 'road gold'], ['CẦU BÔ QUAN', AVENUE_X, -357, 'road green'], ['SÔNG ĐÔ TỎA', 120, -357, 'road blue'], ['BIỂN SƠN THỦY · MỸ KHÊ', 0, -700, 'road blue'], ['NÚI SƠN TRÀ', -820, -880, 'road green'], ['NGŨ HÀNH SƠN', 320, -575, 'road green'], ['CẦU TRUNG LƯƠNG', -705, roadZ, 'road green'], ['CẦU HÒA XUÂN', -705, roadZ + 520, 'road green'], ['TRUNG TÂM ĐÀ NẴNG', -1000, -320, 'road blue']]) {
       const el = document.createElement('div');
       el.className = 'roadtag ' + cls;
       el.textContent = t;
@@ -174,7 +174,7 @@ export class BuildingView {
       scene.add(o);
     }
 
-    this.camera = new THREE.PerspectiveCamera(38, 1, 0.5, 7000);
+    this.camera = new THREE.PerspectiveCamera(38, 1, 0.5, 4000);
     this.controls = new OrbitControls(this.camera, r.domElement);
     this.controls.enableDamping = true;
     this.controls.maxPolarAngle = Math.PI * 0.495;

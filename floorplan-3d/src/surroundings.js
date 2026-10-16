@@ -54,20 +54,6 @@ function palmGeometries() {
   return { trunk, crown: mergeGeometries(fronds) };
 }
 
-/** Đường tâm sông lớn phía thành phố (x theo z) – dùng chung cho cảnh và nhãn */
-export const cityRiverMid = (z) => -480 + 70 * Math.sin((z + 300) / 520) - 0.00004 * (z - 200) ** 2;
-/** Nhánh sông Hàn: rẽ từ sông lớn (giữa ảnh 360) chảy thẳng vào trung tâm, hơi lệch về phía Sơn Trà */
-export const HAN_Z0 = -130;
-export const hanZ = (x) => { const d = cityRiverMid(HAN_Z0) - x; return HAN_Z0 - 0.22 * d + 45 * Math.sin(d / 280); };
-/** Sông Đô Tỏa: kênh chạy chéo từ phía phải dự án vào ngã ba sông (trước đảo Sunneva) */
-export const DT_W = 60;
-const DT_A = [300, -310];
-const dtB = () => [cityRiverMid(-175) + 30, -175];
-export const dtZ = (x) => { const [bx, bz] = dtB(); const t = (x - bx) / (DT_A[0] - bx); return bz + t * (DT_A[1] - bz); };
-/** Đảo Sunneva: dải đất giữa sông Đô Tỏa (phía trước) và nhánh sông lớn (phía sau), phía tây đường Minh Mạng */
-export const inSunneva = (x, z) => x > cityRiverMid(z) + 95 && x < -110 && z < dtZ(x) - DT_W / 2 - 6 && z > -470;
-export const hanW = (x) => Math.max(90, 150 - (cityRiverMid(HAN_Z0) - x) * 0.04);
-
 export function buildSurroundings({ footprint, avenueX, reserved = [], density = 1 }) {
   const g = new THREE.Group();
   const r = rand(7);
@@ -99,13 +85,9 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
   const asphalt = new THREE.MeshStandardMaterial({ color: 0x3b3e43, roughness: 0.95 });
   // Dải dọc theo trục đường, bỏ trống đoạn qua ngã tư (gap)
   // Sông Đô Tỏa cắt ngang cuối đường Minh Mạng (theo ảnh 360: Minh Mạng → cầu Bô Quan → sông → biển Sơn Thủy)
-  // chỗ Minh Mạng (cầu Bô Quan) bắc qua sông Đô Tỏa; biển Sơn Thủy ở xa phía phải
-  const RIVER_Z0 = dtZ(avenueX) - 34, RIVER_Z1 = dtZ(avenueX) + 34, SEA_Z = -860;
-  // Sông lớn phía thành phố (cuối Nguyễn Phước Lan → cầu Trung Lương), uốn lượn như ảnh 360; bên kia là trung tâm Đà Nẵng
-  const RIVER_W = 170;
-  const riverMid = cityRiverMid;
-  const riverE = (z) => riverMid(z) + RIVER_W / 2, riverW = (z) => riverMid(z) - RIVER_W / 2;
-  const CITY_RIVER_X1 = riverE(footprint.z1 + 26), CITY_RIVER_X0 = riverW(footprint.z1 + 26);
+  const RIVER_Z0 = -415, RIVER_Z1 = -300, SEA_Z = -640;
+  // Sông lớn phía thành phố (cuối Nguyễn Phước Lan → cầu Trung Lương), bên kia là trung tâm Đà Nẵng
+  const CITY_RIVER_X0 = -760, CITY_RIVER_X1 = -650;
   const strip = (axis, center, offset, width, height, y, mat, gap) => {
     const ranges = axis === 'z'
       ? [[SEA_Z + 20, RIVER_Z0], [RIVER_Z1, center.cross - gap], [center.cross + gap, L / 2]]
@@ -180,17 +162,11 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
 
   // --- Sông Đô Tỏa (cắt ngang cuối Minh Mạng), bờ biển Sơn Thủy phía xa, núi Sơn Trà (trái) & Ngũ Hành Sơn (phải) ---
   const waterMat = new THREE.MeshStandardMaterial({ color: 0x4f86b3, roughness: 0.08, metalness: 0.5 });
-  {
-    const [bx] = dtB(), pts = [], idx = [], N = 30, x1 = 900;
-    for (let i = 0; i <= N; i++) {
-      const x = bx - 40 + ((x1 - bx + 40) * i) / N, zc = x < DT_A[0] ? dtZ(Math.max(x, bx)) : DT_A[1] - (x - DT_A[0]) * 0.55, w = DT_W / 2 + (x < bx + 60 ? (bx + 60 - x) * 0.5 : 0);
-      pts.push(x, 0.08, zc - w, x, 0.08, zc + w); if (i) { const a = (i - 1) * 2; idx.push(a, a + 2, a + 1, a + 1, a + 2, a + 3); }
-      occupy(x, zc, (x1 - bx) / N + 4, 2 * w + 16);
-    }
-    const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3)); geo.setIndex(idx); geo.computeVertexNormals();
-    const river = new THREE.Mesh(geo, waterMat); river.material.side = THREE.DoubleSide;
-    g.add(river);
-  }
+  const river = new THREE.Mesh(new THREE.PlaneGeometry(900 - CITY_RIVER_X0, RIVER_Z1 - RIVER_Z0), waterMat);
+  river.rotation.x = -Math.PI / 2;
+  river.position.set((900 + CITY_RIVER_X0) / 2, 0.05, (RIVER_Z0 + RIVER_Z1) / 2);
+  g.add(river);
+  occupy(0, (RIVER_Z0 + RIVER_Z1) / 2, 1800, RIVER_Z1 - RIVER_Z0 + 20);
   const sea = new THREE.Mesh(new THREE.PlaneGeometry(1800, 400), new THREE.MeshStandardMaterial({ color: 0x3f7fb8, roughness: 0.05, metalness: 0.45 }));
   sea.rotation.x = -Math.PI / 2;
   sea.position.set(0, 0.05, SEA_Z - 200);
@@ -200,89 +176,30 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
   sand.position.set(0, 0.045, SEA_Z + 10);
   g.add(sand);
   occupy(0, SEA_Z - 180, 1800, 420);
-  // núi xa: xanh lam mờ như chân trời trong ảnh 360
-  const mountainMat = new THREE.MeshStandardMaterial({ color: 0x6f8798, roughness: 1, flatShading: true, fog: false });
-  const farGround = new THREE.Mesh(new THREE.PlaneGeometry(9000, 9000), new THREE.MeshStandardMaterial({ color: 0xa3ab9e, roughness: 1 }));
-  farGround.rotation.x = -Math.PI / 2; farGround.position.y = -0.6; g.add(farGround);
+  const mountainMat = new THREE.MeshStandardMaterial({ color: 0x5f7f68, roughness: 1, flatShading: true });
   const hill = (x, z, rad, h, sx = 1) => { const m = new THREE.Mesh(new THREE.SphereGeometry(1, 9, 6, 0, Math.PI * 2, 0, Math.PI / 2), mountainMat); m.scale.set(rad * sx, h, rad * 0.5); m.position.set(x, -2, z); g.add(m); };
-  // dãy núi dạng sống núi răng cưa (không phải vòm): mặt cắt đỉnh gồ ghề, đùn theo chiều dày rồi xoay theo hướng dãy
-  const ridge = (x0, z0, x1, z1, hMax, depth, seed) => {
-    const rr = rand(seed), L2 = Math.hypot(x1 - x0, z1 - z0), N = 40, sh = new THREE.Shape();
-    sh.moveTo(0, -2);
-    let h = 0;
-    for (let i = 0; i <= N; i++) {
-      const t = i / N, env = Math.sin(Math.PI * t) ** 0.6; // thấp hai đầu, cao giữa
-      h = Math.max(4, (0.55 * h + 0.45 * hMax * (0.45 + 0.55 * rr())) * 1) ;
-      sh.lineTo(t * L2, h * env);
-    }
-    sh.lineTo(L2, -2);
-    const geo = new THREE.ExtrudeGeometry(sh, { depth, bevelEnabled: false, steps: 1 });
-    geo.translate(0, 0, -depth / 2);
-    const m = new THREE.Mesh(geo, mountainMat);
-    m.position.set(x0, 0, z0);
-    m.rotation.y = -Math.atan2(z1 - z0, x1 - x0);
-    g.add(m);
-  };
-  ridge(-2900, -1150, -1500, -1750, 170, 260, 31); // Sơn Trà: chân trời bên phải, biển phía trước
-  for (let i = 0; i < 4; i++) hill(260 + i * 45, -800 - r() * 30, 18 + r() * 10, 35 + r() * 25); // Ngũ Hành Sơn (gần biển, bên phải)
-  occupy(330, -800, 220, 70);
+  for (let i = 0; i < 5; i++) hill(-1020 + i * 90 + r() * 30, -880 - r() * 30, 150 + r() * 70, 110 + r() * 70, 1.3); // Sơn Trà (bên kia vịnh, lệch trái như ảnh 360)
+  for (let i = 0; i < 4; i++) hill(260 + i * 45, -560 - r() * 30, 18 + r() * 10, 35 + r() * 25); // Ngũ Hành Sơn (gần biển, bên phải)
+  occupy(330, -560, 220, 70);
 
   // --- Hướng về thành phố (theo ảnh 360): Nguyễn Phước Lan chạy thẳng ra sông lớn, cầu Trung Lương bắc qua,
   // cầu Hòa Xuân phía trái; bên kia sông là trung tâm Đà Nẵng dày nhà cao tầng, xa nữa là dãy núi ---
-  // dải nước uốn lượn: lưới theo đường tâm sông
-  {
-    const pos = [], idx = [], Z0 = -1200, Z1 = 1300, N = 80;
-    for (let i = 0; i <= N; i++) { const z = Z0 + ((Z1 - Z0) * i) / N; pos.push(riverW(z), 0.06, z, riverE(z), 0.06, z); if (i) { const a = (i - 1) * 2; idx.push(a, a + 2, a + 1, a + 1, a + 2, a + 3); } }
-    const geo = new THREE.BufferGeometry();
-    geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); geo.setIndex(idx); geo.computeVertexNormals();
-    const cityRiver = new THREE.Mesh(geo, waterMat); cityRiver.material.side = THREE.DoubleSide;
-    g.add(cityRiver);
-    for (let z = Z0; z < Z1; z += 40) occupy(riverMid(z + 20), z + 20, RIVER_W + 24, 42);
-    // bờ bên kia: nền thành phố bám theo mép sông
-    const gp = [], gi = [];
-    for (let i = 0; i <= N; i++) { const z = Z0 + ((Z1 - Z0) * i) / N; gp.push(-2400, 0.12, z, riverW(z) - 2, 0.12, z); if (i) { const a = (i - 1) * 2; gi.push(a, a + 2, a + 1, a + 1, a + 2, a + 3); } }
-    const gg = new THREE.BufferGeometry(); gg.setAttribute('position', new THREE.Float32BufferAttribute(gp, 3)); gg.setIndex(gi); gg.computeVertexNormals();
-    const cityGround = new THREE.Mesh(gg, new THREE.MeshStandardMaterial({ color: 0x9fa69a, roughness: 1, side: THREE.DoubleSide }));
-    g.add(cityGround);
-    for (let z = Z0; z < Z1; z += 60) occupy((riverW(z + 30) - 2400) / 2, z + 30, riverW(z + 30) + 2400, 62);
-    // nhánh sông Hàn chảy vào trung tâm
-    const hp = [], hi = [], xs0 = riverMid(HAN_Z0), M = 60;
-    for (let i = 0; i <= M; i++) { const x = xs0 - (1700 * i) / M, w = hanW(x) / 2; hp.push(x, 0.4, hanZ(x) - w, x, 0.4, hanZ(x) + w); if (i) { const a = (i - 1) * 2; hi.push(a, a + 2, a + 1, a + 1, a + 2, a + 3); } }
-    const hg = new THREE.BufferGeometry(); hg.setAttribute('position', new THREE.Float32BufferAttribute(hp, 3)); hg.setIndex(hi); hg.computeVertexNormals();
-    g.add(new THREE.Mesh(hg, waterMat));
-    // đảo Sunneva: dải đất biệt thự mái đỏ giữa sông Đô Tỏa và sông lớn (phía phải ảnh 360)
-    const villas = [];
-    for (let x = -460; x < -110; x += 15) for (let z = -470; z < -150; z += 15) {
-      if (!inSunneva(x, z)) continue;
-      occupy(x, z, 16, 16);
-      if (r() < 0.55) villas.push([x + (r() - 0.5) * 4, z + (r() - 0.5) * 4]);
-    }
-    const isl = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshStandardMaterial({ color: 0x8fae67, roughness: 1 }));
-    // nền đảo phủ đúng vùng inSunneva (lưới ô nhỏ)
-    {
-      const cells = [];
-      for (let x = -470; x < -100; x += 10) for (let z = -480; z < -140; z += 10) if (inSunneva(x + 5, z + 5)) cells.push([x + 5, z + 5]);
-      const im = new THREE.InstancedMesh(isl.geometry, isl.material, cells.length);
-      cells.forEach(([x, z], k) => { dummy.rotation.set(-Math.PI / 2, 0, 0); dummy.scale.set(10.2, 10.2, 1); dummy.position.set(x, 0.22, z); dummy.updateMatrix(); im.setMatrixAt(k, dummy.matrix); });
-      im.receiveShadow = true; g.add(im);
-    }
-    const vb = new THREE.InstancedMesh(new THREE.BoxGeometry(9, 7, 9), new THREE.MeshStandardMaterial({ color: 0xf6f2ea, roughness: 0.8 }), villas.length);
-    const vr = new THREE.InstancedMesh(new THREE.ConeGeometry(7.2, 3.4, 4), new THREE.MeshStandardMaterial({ color: 0xc0472f, roughness: 0.7, flatShading: true }), villas.length);
-    villas.forEach(([x, z], i) => {
-      dummy.rotation.set(0, Math.PI / 4, 0); dummy.scale.set(1, 1, 1); dummy.position.set(x, 3.7, z); dummy.updateMatrix(); vb.setMatrixAt(i, dummy.matrix);
-      dummy.position.set(x, 8.9, z); dummy.updateMatrix(); vr.setMatrixAt(i, dummy.matrix);
-    });
-    g.add(vb, vr);
-    // cầu nhỏ từ khu dự án sang đảo Sunneva qua sông Đô Tỏa
-    { const bx = -230, bz = dtZ(-230); const d = new THREE.Mesh(new THREE.BoxGeometry(16, 1.2, DT_W + 24), new THREE.MeshStandardMaterial({ color: 0xd9d6cf, roughness: 0.8 })); d.position.set(bx, 1.4, bz); d.rotation.y = Math.atan2(DT_A[1] - dtB()[1], DT_A[0] - dtB()[0]) * -1 + 0; g.add(d); }
-  }
+  const cityRiver = new THREE.Mesh(new THREE.PlaneGeometry(CITY_RIVER_X1 - CITY_RIVER_X0, 2600), waterMat);
+  cityRiver.rotation.x = -Math.PI / 2;
+  cityRiver.position.set((CITY_RIVER_X0 + CITY_RIVER_X1) / 2, 0.06, 100);
+  g.add(cityRiver);
+  occupy((CITY_RIVER_X0 + CITY_RIVER_X1) / 2, 0, CITY_RIVER_X1 - CITY_RIVER_X0 + 20, 2600);
+  const cityGround = new THREE.Mesh(new THREE.PlaneGeometry(1500, 2600), new THREE.MeshStandardMaterial({ color: 0x9fa69a, roughness: 1 }));
+  cityGround.rotation.x = -Math.PI / 2;
+  cityGround.position.set(CITY_RIVER_X0 - 750, 0.12, 100);
+  g.add(cityGround);
   const bridgeMat = new THREE.MeshStandardMaterial({ color: 0xd9d6cf, roughness: 0.8 });
   const bridge = (z, w) => {
-    const len = RIVER_W + 30, xc = riverMid(z);
+    const len = CITY_RIVER_X1 - CITY_RIVER_X0 + 30, xc = (CITY_RIVER_X0 + CITY_RIVER_X1) / 2;
     const deck = new THREE.Mesh(new THREE.BoxGeometry(len, 1.4, w), bridgeMat);
     deck.position.set(xc, 2.2, z); deck.castShadow = deck.receiveShadow = true; g.add(deck);
     for (const sd of [-1, 1]) { const rail = new THREE.Mesh(new THREE.BoxGeometry(len, 1.1, 0.5), new THREE.MeshStandardMaterial({ color: 0xf2f0ea })); rail.position.set(xc, 3.4, z + sd * (w / 2 - 0.3)); g.add(rail); }
-    for (let k = 1; k < 5; k++) { const pier = new THREE.Mesh(new THREE.BoxGeometry(3, 2.2, w * 0.7), bridgeMat); pier.position.set(xc - len / 2 + (len / 5) * k, 1.1, z); g.add(pier); }
+    for (let k = 1; k < 5; k++) { const pier = new THREE.Mesh(new THREE.BoxGeometry(3, 2.2, w * 0.7), bridgeMat); pier.position.set(CITY_RIVER_X0 - 15 + (len / 5) * k, 1.1, z); g.add(pier); }
   };
   bridge(roadZ, HALF * 2); // cầu Trung Lương nối Nguyễn Phước Lan
   bridge(roadZ + 520, 26); // cầu Hòa Xuân (xa phía trái)
@@ -295,16 +212,13 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
   })(), roughness: 0.7 });
   const lowMat = new THREE.MeshStandardMaterial({ roughness: 0.85 });
   const city = [], low = [];
-  for (let dx = 30; dx < 900; dx += 26) {
+  for (let x = CITY_RIVER_X0 - 30; x > CITY_RIVER_X0 - 900; x -= 26) {
     for (let z = -900; z < 1000; z += 26) {
-      const x = riverW(z) - dx;
-      if (Math.abs(z - hanZ(x)) < hanW(x) / 2 + 12) continue; // sông Hàn
       if (r() > density * 0.9) continue;
       const toCore = Math.hypot(x - (CITY_RIVER_X0 - 260), (z + 380) * 0.8); // lõi trung tâm phía phải (gần Sơn Trà)
-      // như ảnh 360: phần lớn nhà thấp dày đặc, cao tầng lác đác, tập trung ở lõi gần sông Hàn – Sơn Trà
-      const tall = r() < Math.max(0.025, 0.16 - toCore / 3000);
-      if (tall) city.push([x + (r() - 0.5) * 8, z + (r() - 0.5) * 8, 14 + r() * 10, 14 + r() * 8, 45 + r() * (toCore < 400 ? 80 : 45)]);
-      else low.push([x + (r() - 0.5) * 6, z + (r() - 0.5) * 6, 12 + r() * 8, 12 + r() * 8, 7 + r() * 10]);
+      const tall = r() < Math.max(0.08, 0.6 - toCore / 900);
+      if (tall) city.push([x + (r() - 0.5) * 8, z + (r() - 0.5) * 8, 14 + r() * 12, 14 + r() * 10, 40 + r() * (toCore < 400 ? 130 : 70)]);
+      else low.push([x + (r() - 0.5) * 6, z + (r() - 0.5) * 6, 12 + r() * 8, 12 + r() * 8, 8 + r() * 14]);
     }
   }
   const cityMesh = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), cityMat, city.length);
@@ -314,15 +228,13 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
   low.forEach(([x, z, w, d, h], i) => { dummy.rotation.set(0, 0, 0); dummy.position.set(x, h / 2, z); dummy.scale.set(w, h, d); dummy.updateMatrix(); lowMesh.setMatrixAt(i, dummy.matrix); lowMesh.setColorAt(i, color.setHex(lowCols[i % 4])); });
   g.add(cityMesh, lowMesh);
   // dãy núi xa phía tây (chân trời bên trái ảnh 360)
-  ridge(-3600, -1300, -3300, 400, 110, 300, 41); // dãy núi xa phía tây, thấp, mờ xanh
-  ridge(-3300, 400, -2600, 2400, 140, 300, 43);
-  ridge(-4200, -600, -4000, 1600, 160, 300, 47);
+  for (let i = 0; i < 9; i++) hill(-1750 - r() * 150, -200 + i * 180 + r() * 60, 220 + r() * 120, 90 + r() * 90, 1.2);
 
   // --- Mây ---
   const cloudMat = new THREE.SpriteMaterial({ map: cloudTexture(), transparent: true, depthWrite: false, fog: false });
   for (let i = 0; i < 18; i++) {
     const s = new THREE.Sprite(cloudMat);
-    s.position.set(-1400 + r() * 2400, 700 + r() * 250, -1400 + r() * 2200);
+    s.position.set(-900 + r() * 1800, 220 + r() * 160, -900 + r() * 1300);
     s.scale.set(220 + r() * 160, 90 + r() * 50, 1);
     g.add(s);
   }
@@ -331,7 +243,7 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
   const houses = [];
   const LOT = 5.5, DEP = 16, BLOCK = 11, ROW_GAP = 12, BLOCK_GAP = 10;
   const blockLen = BLOCK * LOT;
-  for (let bz = -820; bz <= 380; bz += DEP * 2 + ROW_GAP) {
+  for (let bz = -560; bz <= 380; bz += DEP * 2 + ROW_GAP) {
     for (let bxs = -560; bxs <= 330; bxs += blockLen + BLOCK_GAP) {
       if (r() > density * 1.05) continue; // chế độ nhẹ: bớt dãy
       const floors = 3 + Math.floor(r() * 2); // cả dãy cùng số tầng cho đều
@@ -369,7 +281,7 @@ export function buildSurroundings({ footprint, avenueX, reserved = [], density =
   g.add(bodyMesh, roofMesh, winMesh);
 
   // --- Tòa cao tầng xa ---
-  const farTowers = [[160, -600, 62], [120, -680, 80], [520, 120, 40], [560, -60, 58], [520, -220, 48]];
+  const farTowers = [[-260, -470, 70], [-180, -520, 55], [160, -470, 62], [120, -540, 80], [-330, -480, 45], [-420, -250, 50], [520, 120, 40], [560, -60, 58], [520, -220, 48]];
   const towerMat = new THREE.MeshStandardMaterial({ map: (() => {
     const c = document.createElement('canvas'); c.width = 64; c.height = 64; const x = c.getContext('2d');
     x.fillStyle = '#d7d4cc'; x.fillRect(0, 0, 64, 64); x.fillStyle = '#5d7184';
