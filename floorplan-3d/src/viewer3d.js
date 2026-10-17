@@ -1004,7 +1004,9 @@ export class Viewer3D {
     const planMode = info.mode === 'plan' && !(this.ptActive && this.pt.samples >= 1);
     const above = planMode || this.camera.position.y > (this.built?.height || 2.8) + 1;
     // bật 🏷 Tên phòng thì ảnh phối cảnh cũng đưa chú thích ra ngoài (tên, diện tích, dài × rộng)
-    const showLabels = (above || info.ad || this.state.labels) && this.mode !== 'walk' && (info.mode !== 'view' || info.ad || this.state.labels);
+    // ảnh như thật (chụp nhanh / siêu thật) luôn kèm chú thích phòng: tên, diện tích, dài × rộng
+    const photo = !!info.soft || (this.ptActive && this.pt.samples >= 1);
+    const showLabels = (above || info.ad || this.state.labels || photo) && this.mode !== 'walk' && (info.mode !== 'view' || info.ad || this.state.labels || photo);
     const prev = this.built.labels.map((l) => l.visible);
     // Ảnh như thật chỉ dùng khi đã có ít nhất 1 lượt render; chưa có thì lấy ảnh 3D thường
     const usePT = this.ptActive && this.pt.samples >= 1;
