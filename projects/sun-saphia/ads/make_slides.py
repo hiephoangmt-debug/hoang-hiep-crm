@@ -1,7 +1,7 @@
 """Tạo bộ slide carousel quảng cáo Sun Saphia Residence (1080x1350)."""
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import os
-HERE=os.path.dirname(os.path.abspath(__file__)); IMG=os.path.join(HERE,'..','images'); DN=os.path.join(HERE,'..','..','hai-minh-da-nang','landing','images')
+HERE=os.path.dirname(os.path.abspath(__file__)); IMG=os.environ.get('SLIDE_IMG') or os.path.join(HERE,'..','images'); DN=os.path.join(HERE,'..','..','hai-minh-da-nang','landing','images')
 B='/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'; R='/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
 F=lambda p,s:ImageFont.truetype(p,s)
 W,H=1080,1350; NAVY=(10,37,64); ORANGE=(255,106,43); GOLD=(255,176,103); WHITE=(255,255,255); SOFT=(220,232,244)
@@ -70,7 +70,7 @@ def card(d,x,y,w,h,title,sub,fill=(255,255,255,235)):
     text(d,x+28,y+80,sub,F(R,27),(60,72,90),maxw=w-56)
 
 slides=[]
-def save(im,n): im=wm(frame(im,n)) if not isinstance(im,tuple) else im; im.convert('RGB').save(os.path.join(HERE,f'slide-{n:02d}.jpg'),quality=90); slides.append(n)
+def save(im,n): im=frame(im,n) if not isinstance(im,tuple) else im; im.convert('RGB').save(os.path.join(HERE,f'slide-{n:02d}.jpg'),quality=90); slides.append(n)
 
 # 1 Hook
 im=shade(cover(os.path.join(IMG,'ss-thap-hd.webp'),focus=0.3),top=120,bottom=245,start=0.42); d=ImageDraw.Draw(im)
