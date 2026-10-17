@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.19** + plugin Hoàng Hiệp CRM **2.20.55**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.19** + plugin Hoàng Hiệp CRM **2.20.56**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.56: trang dự án Sun Saphia Residence
+
+- Trang mới **Sun Saphia Residence Đà Nẵng** (`/du-an/sun-saphia-residence/`), trạng thái Sắp mở bán: tòa 30 tầng (114 m) của Sun Group trên đường Trường Sa, khu Sơn Thủy; 782 căn (513 studio 30 – 31 m², 108 căn 1PN+1, 149 căn 2PN), 2 tầng hầm, đất 3.720,1 m², bàn giao dự kiến 11/2028.
+- Nội dung chuẩn SEO: vị trí đối diện công viên bãi tắm Sơn Thủy 2,45 ha (đất thu hồi từ Hòn Ngọc Á Châu, 47 tỷ, 2025 – 2027), mở rộng Võ Nguyên Giáp – Trường Sa – Lạc Long Quân 2.633 tỷ, đường sắt đô thị sân bay – Mỹ Khê – Hội An, bảng so sánh giá căn hộ ven biển (The Soleil, Futa, Nobu, Newtown Diamond – tham khảo), 5 câu hỏi đáp.
+- 5 ảnh: phối cảnh ven biển, phối cảnh tòa tháp, poster chủ đầu tư, bản đồ kết nối, sơ đồ vị trí tự vẽ. Không đăng bản vẽ chia lô, hồ sơ khảo sát, ảnh Google Maps, ảnh báo, ảnh stock.
+- Cài: Dự án → Nhập nhanh → tải `cap-nhat-code.zip` → Nhập dữ liệu Đà Nẵng → Nhập / cập nhật dữ liệu → LiteSpeed Cache → Purge All.
 
 ## Có gì mới – plugin 2.20.55: sửa bản đồ Hudson Place
 
