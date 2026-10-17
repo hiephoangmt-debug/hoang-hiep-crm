@@ -542,7 +542,7 @@ function drawLogo(g,x,y,sz){ var r=sz*.16; g.save(); g.fillStyle='#0b2a3d'; g.be
   g.strokeStyle='#d8bd88'; g.lineWidth=sz*.022; var m=sz*.06, r2=r*.75; g.beginPath(); g.moveTo(x+m+r2,y+m); g.arcTo(x+sz-m,y+m,x+sz-m,y+sz-m,r2); g.arcTo(x+sz-m,y+sz-m,x+m,y+sz-m,r2); g.arcTo(x+m,y+sz-m,x+m,y+m,r2); g.arcTo(x+m,y+m,x+sz-m,y+m,r2); g.stroke();
   g.fillStyle='#d8bd88'; g.font='bold '+Math.round(sz*.36)+'px Georgia,"Times New Roman",serif'; g.textAlign='center'; g.textBaseline='middle'; g.fillText('SR',x+sz/2,y+sz*.42);
   g.lineWidth=sz*.02; g.beginPath(); for(var i=0;i<=24;i++){ var t=i/24, px=x+sz*(.25+.5*t), py=y+sz*(.71+.025*Math.sin(t*Math.PI*2)); if(i) g.lineTo(px,py); else g.moveTo(px,py); } g.stroke(); g.restore(); }
-var WEB='sun-shaphiaresidence.com';
+var WEB='sun-saphia-residence.com';
 var wmC=document.createElement('canvas'); wmC.width=1024; wmC.height=256; (function(g){
   g.shadowColor='rgba(0,0,0,.45)'; g.shadowBlur=10;
   drawLogo(g,20,28,200);
