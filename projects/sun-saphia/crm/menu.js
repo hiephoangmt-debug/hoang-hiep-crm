@@ -21,7 +21,7 @@
     + '#ssm-pn .h small{display:block;color:#FFB067;font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}'
     + '#ssm-pn .h b{display:block;font-size:19px;margin-top:4px}'
     + '#ssm-pn ul{list-style:none;margin:0;padding:8px 10px;overflow:auto;flex:1}'
-    + '#ssm-pn li a{display:flex;align-items:center;gap:12px;padding:12px 10px;border-radius:12px;color:#e6eef7;text-decoration:none;font-size:15.5px;font-weight:600;transition:.2s}'
+    + '#ssm-pn li a{display:flex;align-items:center;gap:12px;padding:14px 14px;border-bottom:1px solid rgba(255,255,255,.08);border-radius:12px;color:#e6eef7;text-decoration:none;font-size:15.5px;font-weight:600;transition:.2s}'
     + '#ssm-pn li a:hover,#ssm-pn li a:active{background:rgba(255,138,61,.16);color:#fff;transform:translateX(4px)}'
     + '#ssm-pn li a span{width:28px;text-align:center;font-size:18px}'
     + '#ssm-pn .f{padding:12px 14px 18px;display:flex;gap:10px;border-top:1px solid rgba(255,255,255,.12)}'
@@ -46,9 +46,9 @@
     var ov = document.createElement('div'); ov.id = 'ssm-ov';
     var pn = document.createElement('nav'); pn.id = 'ssm-pn'; pn.setAttribute('aria-label', 'Danh mục trang');
     var lis = '';
-    ITEMS.forEach(function (it, i) { if (target(it)) lis += '<li><a href="#" data-i="' + i + '"><span>' + it[0] + '</span>' + it[1] + '</a></li>'; });
+    ITEMS.forEach(function (it, i) { if (target(it)) lis += '<li><a href="#" data-i="' + i + '">' + it[1] + '</a></li>'; });
     pn.innerHTML = '<div class="h"><small>Sun Saphia Residence</small><b>Xem nhanh</b></div><ul>' + lis + '</ul>'
-      + '<div class="f"><a class="z" href="https://zalo.me/0904567009" target="_blank" rel="noopener">Zalo</a><a class="c" href="tel:0904567009">📞 0904 567 009</a></div>';
+      + '<div class="f"><a class="z" href="https://zalo.me/0904567009" target="_blank" rel="noopener">Zalo</a><a class="c" href="tel:0904567009">Gọi 0904 567 009</a></div>';
     document.body.appendChild(ov); document.body.appendChild(pn); document.body.appendChild(btn);
     function open(v) { btn.classList.toggle('on', v); ov.classList.toggle('on', v); pn.classList.toggle('on', v); }
     btn.onclick = function () { open(!pn.classList.contains('on')); };
