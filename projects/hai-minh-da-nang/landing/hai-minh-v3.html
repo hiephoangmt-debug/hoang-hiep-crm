@@ -202,6 +202,13 @@ p{margin:0 0 14px}
 @media(max-width:900px){.pj{grid-template-columns:1fr}.spec div{grid-template-columns:92px 1fr}.inl{grid-template-columns:1fr}.cta-strip{padding:16px}.cs-b{width:100%}.cs-b .btn{flex:1}
  .pill{display:block;position:fixed;left:12px;right:92px;bottom:22px;z-index:9000;text-align:center;font-weight:800;font-size:14.5px;color:#fff;text-decoration:none;background:linear-gradient(90deg,var(--o1),var(--o2));padding:14px 10px;border-radius:30px;box-shadow:0 10px 24px rgba(255,90,31,.4)}
  .top a.hot{padding:8px 10px;font-size:14px}}
+
+.ask{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start;margin:30px auto 0;max-width:1000px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px}
+.ask h3{font-size:22px;color:var(--n)}.ask p{color:var(--mut);font-size:15px}
+.ask-q{list-style:none;padding:0;margin:0}.ask-q li{background:#fff4ec;border-radius:12px;padding:10px 14px;margin-bottom:8px;font-size:14.5px;color:var(--ink);font-style:italic}
+.ask-f select,.ask-f textarea{width:100%;padding:14px 15px;font-size:16px;font-family:inherit;border:1.5px solid #d6dce5;border-radius:12px;background:#f8fafc;color:var(--ink)}
+.askl{color:var(--o1);font-weight:700;text-decoration:none;white-space:nowrap}
+@media(max-width:900px){.ask{grid-template-columns:1fr;padding:18px}}
 @media(max-width:900px){
   .hero .wrap,.loc .grid,.final .grid{grid-template-columns:1fr}
   .hero h1{font-size:31px}
@@ -450,14 +457,48 @@ p{margin:0 0 14px}
     <div class="center">
       <span class="eyebrow">Hỏi đáp</span>
       <h2>Những câu hỏi khó, trả lời thẳng</h2>
+      <p class="lead">Chưa thấy câu hỏi của mình? <a class="askl" href="#hoi-chuyen-vien">Gửi câu hỏi riêng cho chuyên viên →</a></p>
     </div>
     <div class="faq">
-      <details><summary>Giá bán bao nhiêu?</summary><p>Chủ đầu tư chưa công bố giá. Anh/chị để lại số, chuyên viên gửi bảng giá qua Zalo ngay khi có, trước ngày ra mắt (dự kiến 11/2026).</p></details>
-      <details><summary>Condotel 50 năm khác căn hộ lâu dài thế nào?</summary><p>Hải Minh là căn hộ du lịch trên đất thương mại dịch vụ, thời hạn 50 năm (2026–2076), dùng để nghỉ dưỡng và cho thuê. Chung cư ở có loại hình và thời hạn khác. Giấy chứng nhận cấp theo quy định pháp luật tại thời điểm cấp.</p></details>
-      <details><summary>Cho thuê được không, thu về bao nhiêu?</summary><p>Căn hộ du lịch có thể khai thác cho thuê. Đơn vị vận hành và tỷ lệ chia doanh thu chủ đầu tư sẽ công bố. Mọi con số thu nhập trên trang chỉ là ví dụ minh họa, không phải cam kết.</p></details>
-      <details><summary>Có phải đặt cọc, giữ chỗ không?</summary><p>Không. Hiện không thu bất kỳ khoản tiền nào; đăng ký chỉ để nhận thông tin sớm.</p></details>
-      <details><summary>Sau này bán lại được không?</summary><p>Chuyển nhượng theo hợp đồng mua bán và quy định pháp luật; điều kiện cụ thể nằm trong hợp đồng mẫu khi ra mắt.</p></details>
-      <details><summary>Khi nào ra mắt, khi nào bàn giao?</summary><p>Dự kiến ra mắt 11/2026. Tiến độ bàn giao chủ đầu tư sẽ công bố khi ra mắt.</p></details>
+      <details><summary>Giá bán bao nhiêu?</summary><p>Chủ đầu tư chưa công bố giá. Anh/chị để lại số, chuyên viên gửi bảng giá qua Zalo ngay khi có, trước ngày ra mắt (dự kiến 11/2026). <a class="askl" href="#hoi-chuyen-vien">Hỏi thêm chuyên viên →</a></p></details>
+      <details><summary>Condotel 50 năm khác căn hộ lâu dài thế nào?</summary><p>Hải Minh là căn hộ du lịch trên đất thương mại dịch vụ, thời hạn 50 năm (2026–2076), dùng để nghỉ dưỡng và cho thuê. Chung cư ở có loại hình và thời hạn khác. Giấy chứng nhận cấp theo quy định pháp luật tại thời điểm cấp. <a class="askl" href="#hoi-chuyen-vien">Hỏi thêm chuyên viên →</a></p></details>
+      <details><summary>Cho thuê được không, thu về bao nhiêu?</summary><p>Căn hộ du lịch có thể khai thác cho thuê. Đơn vị vận hành và tỷ lệ chia doanh thu chủ đầu tư sẽ công bố. Mọi con số thu nhập trên trang chỉ là ví dụ minh họa, không phải cam kết. <a class="askl" href="#hoi-chuyen-vien">Hỏi thêm chuyên viên →</a></p></details>
+      <details><summary>Có phải đặt cọc, giữ chỗ không?</summary><p>Không. Hiện không thu bất kỳ khoản tiền nào; đăng ký chỉ để nhận thông tin sớm. <a class="askl" href="#hoi-chuyen-vien">Hỏi thêm chuyên viên →</a></p></details>
+      <details><summary>Sau này bán lại được không?</summary><p>Chuyển nhượng theo hợp đồng mua bán và quy định pháp luật; điều kiện cụ thể nằm trong hợp đồng mẫu khi ra mắt. <a class="askl" href="#hoi-chuyen-vien">Hỏi thêm chuyên viên →</a></p></details>
+      <details><summary>Khi nào ra mắt, khi nào bàn giao?</summary><p>Dự kiến ra mắt 11/2026. Tiến độ bàn giao chủ đầu tư sẽ công bố khi ra mắt. <a class="askl" href="#hoi-chuyen-vien">Hỏi thêm chuyên viên →</a></p></details>
+    </div>
+    <div class="ask" id="hoi-chuyen-vien">
+      <div class="ask-l">
+        <span class="eyebrow">Hỏi – đáp riêng</span>
+        <h3>Anh/chị còn băn khoăn điều gì? Hỏi thẳng chuyên viên</h3>
+        <p>Giá, căn view biển, pháp lý 50 năm, cho thuê, vay ngân hàng, bán lại… Chuyên viên Hoàng Hiệp trả lời qua Zalo, kèm tài liệu nếu có.</p>
+        <ul class="ask-q">
+          <li>“Căn 2PN tầng cao hướng biển giá khoảng bao nhiêu?”</li>
+          <li>“Ở Hà Nội thì quản lý cho thuê thế nào?”</li>
+          <li>“Hết 50 năm thì căn hộ ra sao?”</li>
+        </ul>
+      </div>
+      <form class="hm-form ask-f" data-form="hoi-dap">
+        <label for="chude">Chủ đề</label>
+        <select id="chude" name="chu_de">
+          <option value="" disabled selected>Chọn chủ đề câu hỏi</option>
+          <option>Giá và chính sách thanh toán</option>
+          <option>Căn view biển, tầng, hướng</option>
+          <option>Pháp lý, thời hạn 50 năm</option>
+          <option>Cho thuê, vận hành</option>
+          <option>Vay ngân hàng</option>
+          <option>Xem lô đất, gặp trực tiếp</option>
+          <option>Khác</option>
+        </select>
+        <label for="cauhoi">Câu hỏi của anh/chị</label>
+        <textarea id="cauhoi" name="cau_hoi" rows="3" placeholder="Ví dụ: căn Dual Key có mấy phòng ngủ, cho thuê riêng được không?"></textarea>
+        <label for="ten4">Họ và tên</label>
+        <input id="ten4" name="name" type="text" placeholder="Anh/chị tên gì ạ?">
+        <label for="sdt4">Số điện thoại / Zalo để nhận câu trả lời</label>
+        <input id="sdt4" name="phone" type="tel" placeholder="09xx xxx xxx">
+        <button class="btn" type="submit">Gửi câu hỏi cho chuyên viên</button>
+        <span class="alt">Trả lời qua Zalo · Không thu tiền giữ chỗ</span>
+      </form>
     </div>
     <div class="cta-strip"><div><b>Còn câu hỏi khác về Hải Minh?</b><span>Chuyên viên Hoàng Hiệp trả lời trực tiếp, không qua tổng đài.</span></div><div class="cs-b"><a class="btn" href="tel:0904567009">Gọi 0904 567 009</a><a class="btn zalo" href="https://zalo.me/0904567009">Nhắn Zalo</a></div></div>
   </div>

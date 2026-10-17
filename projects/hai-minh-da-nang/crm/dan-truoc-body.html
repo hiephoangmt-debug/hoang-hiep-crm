@@ -34,7 +34,7 @@
       var n=((i.name||'')+' '+(i.getAttribute('placeholder')||'')).toLowerCase(), v=(i.value||'').trim(); if(!v) return;
       if(!d.phone&&(i.type==='tel'||/phone|sdt|sđt|điện thoại|09xx/.test(n))) d.phone=v;
       else if(!d.name&&/name|tên|họ|nguyễn văn/.test(n)) d.name=v;
-      else if(i.tagName==='SELECT'||/nhu_cau|ngan_sach|loai_can/.test(n)) d.message=(d.message?d.message+' · ':'')+(i.name?i.name+': ':'')+v;
+      else if(i.tagName==='SELECT'||i.tagName==='TEXTAREA'||/nhu_cau|ngan_sach|loai_can|cau_hoi|chu_de|câu hỏi/.test(n)) d.message=(d.message?d.message+' · ':'')+(i.name?i.name+': ':'')+v;
     });
     var dg=(d.phone||'').replace(/\D/g,''); if(dg.length<9||dg.length>12) return;
     d.message=(d.message?d.message+' · ':'')+'Form LadiPage';
