@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1300" width="1000" height="1300" font-family="DejaVu Sans, Arial, sans-serif">
+  <defs>
+    <linearGradient id="sea" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#5cc3dc"/><stop offset=".35" stop-color="#2f93c2"/><stop offset="1" stop-color="#145a8c"/></linearGradient>
+    <linearGradient id="nav" x1="0" x2="1"><stop offset="0" stop-color="#0A2540"/><stop offset="1" stop-color="#12355c"/></linearGradient>
+    <pattern id="trees" width="26" height="26" patternUnits="userSpaceOnUse"><rect width="26" height="26" fill="#9fd08a"/><circle cx="7" cy="7" r="5" fill="#6fb65b"/><circle cx="20" cy="18" r="5.5" fill="#5ea84d"/></pattern>
+    <pattern id="vac" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><rect width="16" height="16" fill="#e4ecd6"/><line x1="0" y1="0" x2="0" y2="16" stroke="#d3ddc1" stroke-width="5"/></pattern>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#0A2540" flood-opacity=".28"/></filter>
+    <marker id="ar" markerWidth="10" markerHeight="10" refX="6" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#FF6A2B"/></marker>
+  </defs>
+
+  <!-- land -->
+  <rect width="1000" height="1300" fill="#f4f0e7"/>
+  <!-- city blocks -->
+  <g fill="#e6dfd1">
+    <rect x="30" y="110" width="120" height="90" rx="6"/><rect x="170" y="110" width="140" height="90" rx="6"/>
+    <rect x="30" y="220" width="120" height="120" rx="6"/><rect x="170" y="220" width="140" height="120" rx="6"/>
+    <rect x="30" y="400" width="140" height="190" rx="6"/><rect x="30" y="610" width="140" height="190" rx="6"/>
+    <rect x="30" y="870" width="120" height="140" rx="6"/><rect x="170" y="870" width="140" height="140" rx="6"/>
+  </g>
+  <!-- planned residential area around the lot -->
+  <rect x="195" y="398" width="270" height="405" rx="8" fill="#ead9cc"/>
+  <g stroke="#f4f0e7" stroke-width="8"><line x1="195" y1="600" x2="465" y2="600"/><line x1="330" y1="398" x2="330" y2="803"/></g>
+
+  <!-- Lotte -->
+  <rect x="330" y="170" width="140" height="175" rx="8" fill="#d9dde3" filter="url(#sh)"/>
+  <text x="400" y="248" text-anchor="middle" font-size="17" font-weight="700" fill="#0A2540">Lotte</text>
+  <text x="400" y="270" text-anchor="middle" font-size="14" fill="#41505f">Duty Free</text>
+
+  <!-- coastal strip -->
+  <rect x="525" y="60" width="185" height="600" fill="url(#vac)"/>
+  <text x="617" y="330" text-anchor="middle" font-size="15" fill="#5c6b52" font-weight="700">Đất Hòn</text>
+  <text x="617" y="350" text-anchor="middle" font-size="15" fill="#5c6b52" font-weight="700">Ngọc Á Châu</text>
+  <rect x="525" y="668" width="185" height="150" rx="6" fill="url(#trees)" stroke="#4f9a40" stroke-width="2"/>
+  <rect x="533" y="712" width="169" height="62" rx="10" fill="#ffffff" opacity=".92"/>
+  <text x="617" y="738" text-anchor="middle" font-size="14" font-weight="800" fill="#2f6b24">Công viên biển</text>
+  <text x="617" y="760" text-anchor="middle" font-size="13.5" font-weight="800" fill="#2f6b24">Trường Sa · ~2,45 ha</text>
+  <!-- villas / resorts south -->
+  <g fill="#f1d7c6" stroke="#e2b9a1"><rect x="540" y="860" width="40" height="28" rx="4"/><rect x="595" y="860" width="40" height="28" rx="4"/><rect x="650" y="860" width="40" height="28" rx="4"/>
+    <rect x="540" y="905" width="40" height="28" rx="4"/><rect x="595" y="905" width="40" height="28" rx="4"/><rect x="650" y="905" width="40" height="28" rx="4"/>
+    <rect x="540" y="950" width="40" height="28" rx="4"/><rect x="595" y="950" width="40" height="28" rx="4"/></g>
+  <rect x="525" y="1010" width="185" height="170" rx="6" fill="url(#trees)" stroke="#4f9a40" stroke-width="2"/>
+  <rect x="533" y="1052" width="169" height="84" rx="10" fill="#ffffff" opacity=".92"/>
+  <text x="617" y="1078" text-anchor="middle" font-size="14" font-weight="800" fill="#2f6b24">Công viên &amp; CLB</text>
+  <text x="617" y="1098" text-anchor="middle" font-size="14" font-weight="800" fill="#2f6b24">thể thao biển</text>
+  <text x="617" y="1118" text-anchor="middle" font-size="14" font-weight="800" fill="#2f6b24">Sơn Thủy ~3 ha</text>
+
+  <!-- beach + sea -->
+  <path d="M710 0 L770 0 C760 300 790 600 772 900 C760 1100 785 1200 780 1300 L710 1300 Z" fill="#f3dfae"/>
+  <path d="M770 0 L1000 0 L1000 1300 L780 1300 C785 1200 760 1100 772 900 C790 600 760 300 770 0 Z" fill="url(#sea)"/>
+  <g fill="none" stroke="#ffffff" stroke-opacity=".55" stroke-width="2.5">
+    <path d="M790 120 q20 -10 40 0 t40 0"/><path d="M860 260 q20 -10 40 0 t40 0"/><path d="M800 420 q20 -10 40 0 t40 0"/>
+    <path d="M880 560 q20 -10 40 0 t40 0"/><path d="M805 720 q20 -10 40 0 t40 0"/><path d="M870 880 q20 -10 40 0 t40 0"/><path d="M810 1040 q20 -10 40 0 t40 0"/>
+  </g>
+  <path d="M770 0 C760 300 790 600 772 900 C760 1100 785 1200 780 1300" fill="none" stroke="#ffffff" stroke-width="5" stroke-opacity=".8"/>
+  <text x="895" y="640" text-anchor="middle" font-size="26" font-weight="800" fill="#ffffff" fill-opacity=".9" transform="rotate(90 895 640)">BIỂN ĐÔNG</text>
+
+  <!-- Sơn Thủy beach marker -->
+  <g filter="url(#sh)"><circle cx="745" cy="1205" r="24" fill="#0068FF"/></g>
+  <text x="745" y="1214" text-anchor="middle" font-size="24">⛱</text>
+  <rect x="600" y="1238" width="170" height="34" rx="17" fill="#0068FF"/>
+  <text x="685" y="1261" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">Bãi tắm Sơn Thủy</text>
+
+  <!-- roads -->
+  <rect x="478" y="0" width="44" height="1300" fill="#ffffff" stroke="#d6cfc1" stroke-width="2"/>
+  <line x1="500" y1="0" x2="500" y2="1300" stroke="#ffc59f" stroke-width="3" stroke-dasharray="16 12"/>
+  <rect x="0" y="352" width="478" height="34" fill="#ffffff" stroke="#d6cfc1" stroke-width="2"/>
+  <rect x="0" y="812" width="710" height="30" fill="#ffffff" stroke="#d6cfc1" stroke-width="2"/>
+  <rect x="160" y="0" width="26" height="1300" fill="#ffffff" stroke="#d6cfc1" stroke-width="2"/>
+  <text x="508" y="215" font-size="15" font-weight="800" fill="#41505f" transform="rotate(-90 508 215)" text-anchor="middle">VÕ NGUYÊN GIÁP</text>
+  <text x="508" y="640" font-size="15" font-weight="800" fill="#41505f" transform="rotate(-90 508 640)" text-anchor="middle">TRƯỜNG SA</text>
+  <text x="508" y="1060" font-size="15" font-weight="800" fill="#41505f" transform="rotate(-90 508 1060)" text-anchor="middle">TRƯỜNG SA</text>
+  <text x="250" y="375" font-size="15" font-weight="800" fill="#41505f" text-anchor="middle">NGUYỄN ĐỨC THUẬN</text>
+  <text x="320" y="833" font-size="15" font-weight="800" fill="#41505f" text-anchor="middle">MINH MẠNG</text>
+  <text x="178" y="1150" font-size="13" font-weight="700" fill="#6b7785" transform="rotate(-90 178 1150)" text-anchor="middle">LÊ VĂN HIẾN</text>
+
+  <!-- Ngũ Hành Sơn -->
+  <g filter="url(#sh)">
+    <path d="M205 1150 L245 1060 L285 1150 Z" fill="#7d9a6e"/><path d="M265 1150 L320 1030 L375 1150 Z" fill="#6c8a5f"/><path d="M350 1150 L385 1085 L420 1150 Z" fill="#86a377"/>
+  </g>
+  <rect x="210" y="1162" width="210" height="52" rx="12" fill="#ffffff" filter="url(#sh)"/>
+  <text x="315" y="1185" text-anchor="middle" font-size="16" font-weight="800" fill="#0A2540">Ngũ Hành Sơn</text>
+  <text x="315" y="1205" text-anchor="middle" font-size="14" font-weight="700" fill="#FF6A2B">5–10 phút</text>
+
+  <!-- PROJECT LOT -->
+  <rect x="368" y="392" width="102" height="96" rx="8" fill="#FF6A2B" filter="url(#sh)"/>
+  <g fill="#ffffff"><rect x="404" y="404" width="30" height="74" rx="3"/></g>
+  <g fill="#FF6A2B"><rect x="409" y="410" width="6" height="6"/><rect x="423" y="410" width="6" height="6"/><rect x="409" y="422" width="6" height="6"/><rect x="423" y="422" width="6" height="6"/><rect x="409" y="434" width="6" height="6"/><rect x="423" y="434" width="6" height="6"/><rect x="409" y="446" width="6" height="6"/><rect x="423" y="446" width="6" height="6"/><rect x="409" y="458" width="6" height="6"/><rect x="423" y="458" width="6" height="6"/></g>
+  <circle cx="419" cy="440" r="70" fill="none" stroke="#FF6A2B" stroke-width="3" stroke-dasharray="6 8" opacity=".7"/>
+  <line x1="368" y1="470" x2="250" y2="520" stroke="#0A2540" stroke-width="2.5"/>
+  <g filter="url(#sh)"><rect x="40" y="500" width="260" height="78" rx="14" fill="url(#nav)"/></g>
+  <text x="170" y="532" text-anchor="middle" font-size="19" font-weight="800" fill="#FF8A3D">SUN SAPHIA</text>
+  <text x="170" y="558" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">RESIDENCE · 30 tầng</text>
+  <!-- walk to beach -->
+  <path d="M470 440 C560 470 640 520 735 520" fill="none" stroke="#FF6A2B" stroke-width="3.5" stroke-dasharray="8 7" marker-end="url(#ar)"/>
+  <rect x="555" y="470" width="140" height="30" rx="15" fill="#FF6A2B"/>
+  <text x="625" y="491" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">Ra biển đi bộ</text>
+
+  <!-- title -->
+  <rect x="0" y="0" width="470" height="62" fill="url(#nav)"/>
+  <text x="22" y="40" font-size="21" font-weight="800" fill="#ffffff">SƠ ĐỒ VỊ TRÍ · <tspan fill="#FF8A3D">SUN SAPHIA</tspan></text>
+
+  <!-- compass -->
+  <g transform="translate(930 80)"><circle r="34" fill="#ffffff" fill-opacity=".9"/><path d="M0 -26 L9 4 L0 -2 L-9 4 Z" fill="#FF6A2B"/><path d="M0 26 L9 -4 L0 2 L-9 -4 Z" fill="#9aa8b6"/><text y="-8" text-anchor="middle" font-size="0">N</text><text x="0" y="-38" text-anchor="middle" font-size="15" font-weight="800" fill="#ffffff">B</text></g>
+
+  <!-- direction chips -->
+  <g font-size="15" font-weight="800">
+    <g filter="url(#sh)"><rect x="18" y="80" width="250" height="56" rx="14" fill="#ffffff"/></g>
+    <text x="34" y="104" fill="#0A2540">↖ Sân bay QT Đà Nẵng</text><text x="56" y="125" fill="#FF6A2B">10–15 phút</text>
+    <g filter="url(#sh)"><rect x="285" y="80" width="185" height="56" rx="14" fill="#ffffff"/></g>
+    <text x="300" y="104" fill="#0A2540">↑ Cầu Rồng · TT</text><text x="322" y="125" fill="#FF6A2B">~15 phút</text>
+    <g filter="url(#sh)"><rect x="790" y="150" width="190" height="56" rx="14" fill="#ffffff"/></g>
+    <text x="805" y="174" fill="#0A2540">↑ Bán đảo Sơn Trà</text><text x="827" y="195" fill="#41505f" font-weight="700">phía Bắc</text>
+    <g filter="url(#sh)"><rect x="18" y="680" width="150" height="56" rx="14" fill="#ffffff"/></g>
+    <text x="32" y="704" fill="#0A2540">← Bà Nà Hills</text><text x="52" y="725" fill="#FF6A2B">~45 phút</text>
+    <g filter="url(#sh)"><rect x="18" y="1230" width="180" height="56" rx="14" fill="#ffffff"/></g>
+    <text x="32" y="1254" fill="#0A2540">↓ Phố cổ Hội An</text><text x="52" y="1275" fill="#FF6A2B">~30 phút</text>
+  </g>
+  <!-- Cù Lao Chàm -->
+  <g transform="translate(905 1165)"><ellipse rx="44" ry="22" fill="#6f9c76"/><ellipse cx="34" cy="-22" rx="14" ry="8" fill="#7fae86"/></g>
+  <rect x="822" y="1205" width="168" height="54" rx="14" fill="#ffffff" filter="url(#sh)"/>
+  <text x="906" y="1228" text-anchor="middle" font-size="15" font-weight="800" fill="#0A2540">↘ Cù Lao Chàm</text>
+  <text x="906" y="1248" text-anchor="middle" font-size="13" font-weight="700" fill="#41505f">~28 km ngoài khơi</text>
+
+  <text x="990" y="1294" text-anchor="end" font-size="11.5" fill="#ffffff" fill-opacity=".85">Sơ đồ minh họa, không theo tỷ lệ</text>
+</svg>
