@@ -429,7 +429,11 @@
     for (const body of shapeBodies(doc)) {
       const t = norm(bodyText(body));
       if (new RegExp("^" + norm(plat) + "( ads)?:?$").test(t)) setBodyText(body, "HÓA ĐƠN " + label + ":");
-      else if (/^\*?luu y/.test(t)) setBodyText(body, "*Lưu ý hoá đơn " + (plat === "Tiktok" ? "TikTok" : plat) + ": khoanh ID tài khoản quảng cáo, số mã tham chiếu, tổng số tiền đã thanh toán (VAT); hoá đơn có tên chiến dịch khớp tên trên tài khoản quảng cáo.");
+      // Đăng tin: tiêu đề "CAPTURE MÀN HÌNH ĐĂNG TIN" -> "HÓA ĐƠN ĐĂNG TIN (CHI TIẾT GIAO DỊCH)"
+      else if (plat === "Đăng tin" && /^capture man hinh dang tin/.test(t)) setBodyText(body, "HÓA ĐƠN ĐĂNG TIN (CHI TIẾT GIAO DỊCH)");
+      else if (/^\*?luu y/.test(t)) setBodyText(body, plat === "Đăng tin"
+        ? "*Lưu ý chứng từ Đăng tin: khoanh mã giao dịch, thời gian giao dịch (trong tuần), mã tin và số tiền đã thanh toán."
+        : "*Lưu ý hoá đơn " + (plat === "Tiktok" ? "TikTok" : plat) + ": khoanh ID tài khoản quảng cáo, số mã tham chiếu, tổng số tiền đã thanh toán (VAT); hoá đơn có tên chiến dịch khớp tên trên tài khoản quảng cáo.");
     }
   }
 
@@ -789,7 +793,8 @@
       const data = dataFor(staff);
       const ctx = Object.assign({}, base, { data, totals: totalsOf(data), staff: staffLabel });
       const raw = imgsFor(staff);
-      const imgsOf = (p, k) => p === "Đăng tin" ? (k === "ads" ? Object.keys(KINDS).flatMap((x) => raw(p, x)) : [])
+      // Đăng tin: ảnh tin đăng (+ "QC đang chạy" nếu có) vào trang chụp màn hình; chi tiết giao dịch là hoá đơn -> trang "HÓA ĐƠN ĐĂNG TIN"
+      const imgsOf = (p, k) => p === "Đăng tin" ? (k === "ads" ? raw(p, "ads").concat(raw(p, "qc")) : k === "qc" ? [] : raw(p, k))
         : raw(p, k).concat(k === "ads" && slideKinds[p] && !slideKinds[p].has("qc") ? raw(p, "qc") : []);
       const used = (p) => data[p].length > 0 || Object.keys(KINDS).some((k) => imgsOf(p, k).length);
       const usedKinds = new Set();
@@ -797,7 +802,7 @@
       const lastFrame = {};
       seq.forEach((s) => { if (s.frame && s.platform) lastFrame[s.platform] = s; });
       const addInvoices = (s, plat) => {
-        if (lastFrame[plat] !== s || plat === "Đăng tin" || (slideKinds[plat] && slideKinds[plat].has("hoadon"))) return;
+        if (lastFrame[plat] !== s || (slideKinds[plat] && slideKinds[plat].has("hoadon"))) return;
         const inv = raw(plat, "hoadon");
         if (inv.length) chunk(inv, perSlide).forEach((fs) => emit(s, fs, ctx, false, plat));
         else if (opts.placeholderMissing) emit(s, [], ctx, true, plat);
@@ -1115,6 +1120,8 @@
     const ks = Object.entries(KIND_WORDS).map(([k, ws]) => [k, countHits(t, ws)]).sort((a, b) => b[1] - a[1]);
     // hoá đơn ưu tiên khi có tiêu đề hoá đơn rõ ràng
     if (/baocaolaphoadon|invoice|hoadon/.test(t) && countHits(t, KIND_WORDS.hoadon) >= 2) res.kind = "hoadon";
+    // màn hình chi tiết / lịch sử giao dịch (Đăng tin: batdongsan, chợ tốt...) = chứng từ thanh toán
+    else if (/chitietgiaodich|lichsugiaodich|magiaodich/.test(t)) res.kind = "hoadon";
     else if (ks[0][1] > 0 && ks[0][1] > ks[1][1]) res.kind = ks[0][0];
     const ps = Object.entries(PLATFORM_WORDS).map(([p, ws]) => [p, countHits(t, ws)]).sort((a, b) => b[1] - a[1]);
     if (ps[0][1] > 0) res.platform = ps[0][0];

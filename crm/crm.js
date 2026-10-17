@@ -633,7 +633,8 @@
       hoadon: "ID tài khoản quảng cáo · Số mã tham chiếu · Tổng số tiền đã thanh toán (VAT)",
     },
     "Đăng tin": {
-      ads: "Màn hình chi tiết giao dịch đăng tin: tài khoản · mã / thời gian giao dịch · số tiền đã thanh toán",
+      ads: "Màn hình quản lý tin đăng: mã tin · ngày đăng · ngày hết hạn · lượt xem / khách hàng",
+      hoadon: "Chi tiết / lịch sử giao dịch: mã giao dịch · thời gian (trong tuần) · số tiền đã thanh toán",
     },
   };
   // cột của bảng kiểm: chỉ loại ảnh có ít nhất một kênh bắt buộc (mẫu mới không còn slide hoá đơn -> ẩn cột Hoá đơn)

@@ -11,10 +11,10 @@
   const PLAB = { Facebook: "Facebook", Tiktok: "TikTok", Zalo: "Zalo", Google: "Google Ads", "Đăng tin": "Đăng tin" };
   const PCOL = { Facebook: "var(--fb)", Tiktok: "var(--tt)", Zalo: "var(--zl)", Google: "var(--gg)", "Đăng tin": "var(--dt)" };
   const KIND = { ads: "Chiến dịch", qc: "QC đang chạy", hoadon: "Hoá đơn" };
-  // ảnh nghiệm thu bắt buộc theo kênh (hoá đơn bắt buộc, trừ Đăng tin: ảnh chi tiết giao dịch)
-  const NEED = { Facebook: ["ads", "qc", "hoadon"], Tiktok: ["ads", "qc", "hoadon"], Zalo: ["ads", "qc", "hoadon"], Google: ["ads", "hoadon"], "Đăng tin": ["ads"] };
-  /** Ô ảnh nghiệm thu của một ảnh: Google không có ô "QC đang chạy", Đăng tin chỉ một ô; hoá đơn là ảnh thêm (không bắt buộc). */
-  const slotOf = (p, loai) => (p === "Đăng tin" || (p === "Google" && loai === "qc") ? "ads" : loai);
+  // ảnh nghiệm thu bắt buộc theo kênh (Đăng tin: hoá đơn = ảnh chi tiết giao dịch)
+  const NEED = { Facebook: ["ads", "qc", "hoadon"], Tiktok: ["ads", "qc", "hoadon"], Zalo: ["ads", "qc", "hoadon"], Google: ["ads", "hoadon"], "Đăng tin": ["ads", "hoadon"] };
+  /** Ô ảnh nghiệm thu của một ảnh: Google và Đăng tin không có ô "QC đang chạy" (ảnh đó vào ô Chiến dịch). */
+  const slotOf = (p, loai) => ((p === "Đăng tin" || p === "Google") && loai === "qc" ? "ads" : loai);
   const pad = (n) => String(n).padStart(2, "0");
   const parseIso = (s) => { const [y, m, d] = String(s).split("-").map(Number); return new Date(y, m - 1, d); };
   const isoOf = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
