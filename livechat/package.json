@@ -1,0 +1,21 @@
+{
+  "name": "casamia-balanca-livechat",
+  "version": "1.0.0",
+  "description": "Live chat trực tiếp cho dự án Casamia Balanca – widget nhúng website + trang tư vấn viên",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "export": "node tools/export-landing.js",
+    "build-gas": "node tools/build-gas.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.131.0",
+    "express": "^5.2.1",
+    "socket.io": "^4.8.4"
+  }
+}
