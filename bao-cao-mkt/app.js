@@ -245,6 +245,43 @@
     }
   }
 
+  /**
+   * Mẫu cũ (10/10) không có mục Đăng tin: dựng mục "KÊNH ĐĂNG TIN" ảo từ mục Google
+   * (trang phân cách + trang bảng + trang ảnh chiến dịch), đặt ngay sau mục Google.
+   */
+  function addVirtualDangTin(slides) {
+    if (slides.some((s) => s.platform === "Đăng tin" && (s.divider || s.frame))) return;
+    const gIdx = slides.map((s, i) => (s.platform === "Google" && !s.closing ? i : -1)).filter((i) => i >= 0);
+    if (!gIdx.length) return;
+    const g = gIdx.map((i) => slides[i]);
+    const div = g.find((s) => s.divider === "Google");
+    const tbl = g.find((s) => s.tables.some((t) => t.platform === "Google"));
+    const frm = g.find((s) => s.frame && s.kind === "ads");
+    const v = [];
+    if (div) v.push(Object.assign({}, div, { virtual: "divider", divider: "Đăng tin", platform: "Đăng tin", el: null }));
+    if (tbl) v.push(Object.assign({}, tbl, { virtual: "table", platform: "Đăng tin", el: null,
+      tables: tbl.tables.map((t) => Object.assign({}, t, { platform: t.platform === "Google" ? "Đăng tin" : t.platform })) }));
+    if (frm) v.push(Object.assign({}, frm, { virtual: "frame", platform: "Đăng tin", kind: "ads", el: null }));
+    slides.splice(gIdx[gIdx.length - 1] + 1, 0, ...v);
+  }
+  /** Đổi chữ / bỏ icon Google trên trang Đăng tin ảo (bản nhân từ trang Google). */
+  function relabelVirtual(s, kind) {
+    const rels = relMap(s.relsDoc);
+    const shapes = topShapes(s.doc);
+    // bỏ icon Google (ảnh nhỏ gần vuông) – trang ảnh giữ ảnh khung lớn để đặt ảnh chứng từ
+    shapes.filter((sh) => sh.embed && sh.box && sh.box.w < 3 * EMU_IN && Math.abs(sh.box.w - sh.box.h) < EMU_IN / 3 &&
+      rels[sh.embed] && !/logo/i.test(rels[sh.embed].target))
+      .forEach((sh) => { if (kind !== "frame" || sh.box.w < 2 * EMU_IN) sh.el.parentNode.removeChild(sh.el); });
+    const items = ["Mã tin", "Ngày đăng / ngày hết hạn", "Lượt xem, khách hàng", "Mã giao dịch, số tiền đã thanh toán"];
+    let k = 0;
+    for (const body of shapeBodies(s.doc)) {
+      const t = norm(bodyText(body));
+      if (/^google( ads)?:?$/.test(t)) setBodyText(body, kind === "frame" ? "CAPTURE MÀN HÌNH ĐĂNG TIN" : "KÊNH ĐĂNG TIN");
+      else if (/^\*?luu y/.test(t)) setBodyText(body, "*Lưu ý cho capture Đăng tin: Khoanh các mục sau:");
+      else if (kind === "frame" && /^(id tai khoan|search ten|tong so tien|thoi gian chay|so ma tham chieu)/.test(t)) setBodyText(body, items[k++] || "");
+    }
+  }
+
   /** Gán kênh cho slide/bảng: tiêu đề > mục kênh hiện tại > icon trên bảng. */
   function resolvePlatforms(slides) {
     let section = null;
@@ -759,6 +796,7 @@
       slides.push(s);
     }
     resolvePlatforms(slides);
+    addVirtualDangTin(slides);
     // Logo theo dự án. Chỉ nhận ảnh logo đúng kích thước gốc (mẫu mới dùng lại tên image9.png cho icon Facebook).
     // Mẫu thiếu logo của đơn vị (vd mẫu chỉ có TATILAND) thì thêm ảnh logo từ opts.logoExtra.
     let logos = opts.logos;
@@ -790,7 +828,7 @@
     const out = []; // {src, files, clone, ctx}
     const usedOriginal = new Set();
     const emit = (s, files, ctx, placeholder, invoice) => {
-      const clone = usedOriginal.has(s);
+      const clone = usedOriginal.has(s) || !!s.virtual;
       usedOriginal.add(s);
       out.push({ src: s, files, clone, ctx, placeholder: !!placeholder, invoice: invoice || null });
     };
@@ -842,7 +880,7 @@
       else plan(block, null, opts.staff || "");
       plan(slides.slice(bEnd), null, "");
     }
-    const drop = slides.filter((s) => !usedOriginal.has(s));
+    const drop = slides.filter((s) => !s.virtual && !usedOriginal.has(s));
 
     // Nhân bản slide (từ bản gốc chưa điền)
     let maxSlideNo = Math.max(...Object.keys(zip.files).map((f) => (/^ppt\/slides\/slide(\d+)\.xml$/.exec(f) || [0, 0])[1] | 0));
@@ -854,8 +892,10 @@
         .filter((r) => r.getAttribute("Type") === NOTES_REL)
         .forEach((r) => r.parentNode.removeChild(r));
       o.s = Object.assign({}, o.src, { el: null, rid: null, path, doc: o.src.pristine.cloneNode(true), relsDoc });
+      if (o.src.virtual) relabelVirtual(o.s, o.src.virtual);
       analyzeSlide(o.s, W, H);
       o.s.platform = o.src.platform;
+      if (o.src.virtual) o.s.kind = o.src.kind;
       const ov = ct.createElementNS(ct.documentElement.namespaceURI, "Override");
       ov.setAttribute("PartName", "/" + path);
       ov.setAttribute("ContentType", SLIDE_CT);
