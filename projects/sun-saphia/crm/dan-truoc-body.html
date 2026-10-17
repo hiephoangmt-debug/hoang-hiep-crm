@@ -10,18 +10,18 @@
 <script>
 (function(){
   var CRM='https://script.google.com/macros/s/AKfycbyChbG-uvItjVlRk7JgLrwpUS6Cgah4nIA6BWHuEwgbXBqSlvAPJNSdZdp6pQ91d_rN/exec';
-  window.HM_CRM={url:CRM,key:'qgK6I9KWTqfS',project:'saphia'};
+  window.HM_CRM={url:CRM,key:'kGYgRtNhbHZr',project:'saphia'};
   window.HM_JSONP=function(params,cb,ms){
     var name='hmcb'+Date.now()+Math.floor(Math.random()*1e4), done=false, sc=document.createElement('script');
     function end(r){ if(done) return; done=true; try{delete window[name];}catch(e){window[name]=undefined;} if(sc.parentNode) sc.parentNode.removeChild(sc); cb(r); }
     window[name]=function(r){end(r||{});};
-    var q=['cb='+name,'key=qgK6I9KWTqfS']; for(var k in params) if(params[k]!=null) q.push(k+'='+encodeURIComponent(params[k]));
+    var q=['cb='+name,'key=kGYgRtNhbHZr']; for(var k in params) if(params[k]!=null) q.push(k+'='+encodeURIComponent(params[k]));
     sc.src=CRM+'?'+q.join('&'); sc.onerror=function(){end({error:'không gọi được CRM'});};
     setTimeout(function(){end({error:'quá thời gian'});},ms||15000);
     document.head.appendChild(sc);
   };
   if(!document.querySelector('script[src*="AKfycbyChbG-uvItjVlRk7"]')){
-    var s=document.createElement('script'); s.src=CRM+'?js=1'; s.async=true; s.setAttribute('data-key','qgK6I9KWTqfS'); document.head.appendChild(s);
+    var s=document.createElement('script'); s.src=CRM+'?js=1'; s.async=true; s.setAttribute('data-key','kGYgRtNhbHZr'); document.head.appendChild(s);
   }
   // Dự phòng: nếu mã theo dõi CRM (?js=1) tải chậm hoặc bị chặn, vẫn gửi khách về CRM qua JSONP
   function fallback(){ if(window.crmLead) return;
@@ -37,7 +37,7 @@
       else if(i.tagName==='SELECT'||i.tagName==='TEXTAREA'||/nhu_cau|ngan_sach|loai_can|cau_hoi|chu_de|câu hỏi/.test(n)) d.message=(d.message?d.message+' · ':'')+(i.name?i.name+': ':'')+v;
     });
     var dg=(d.phone||'').replace(/\D/g,''); if(dg.length<9||dg.length>12) return;
-    d.message='[Sun Saphia] '+(d.message?d.message+' · ':'')+'Form LadiPage';
+    d.message=''+(d.message?d.message+' · ':'')+'Form LadiPage';
     var tries=0;(function go(){ if(window.crmLead){window.crmLead(d);} else if(tries++<20) setTimeout(go,300); })();
   }
   document.addEventListener('click',function(e){
@@ -165,7 +165,7 @@
     else if(body.children.length<2){bot('Anh/chị cần tìm hiểu thông tin nào ạ?',500);chips(DEF,800);}
   }
   function sendCRM(phone,text){
-    var msg='[Sun Saphia] Chat web'+(curTopic?' – đang đọc: '+curTopic.id:'')+' – '+text;
+    var msg='Chat web'+(curTopic?' – đang đọc: '+curTopic.id:'')+' – '+text;
     try{ if(window.crmLead) window.crmLead({name:'Khách chat web',phone:phone,message:msg}); }catch(e){}
     try{ if(window.gtag&&window.HM_TRACK&&!/\[/.test(window.HM_TRACK.form||'[')) gtag('event','conversion',{send_to:window.HM_TRACK.form}); }catch(e){}
   }
@@ -284,7 +284,7 @@
   function line(t){var d=document.createElement('div');d.textContent=t;d.style.marginTop='6px';box.appendChild(d);}
   function go(){
     document.body.appendChild(box);
-    var C=window.HM_CRM||{url:'https://script.google.com/macros/s/AKfycbyChbG-uvItjVlRk7JgLrwpUS6Cgah4nIA6BWHuEwgbXBqSlvAPJNSdZdp6pQ91d_rN/exec',key:'qgK6I9KWTqfS'};
+    var C=window.HM_CRM||{url:'https://script.google.com/macros/s/AKfycbyChbG-uvItjVlRk7JgLrwpUS6Cgah4nIA6BWHuEwgbXBqSlvAPJNSdZdp6pQ91d_rN/exec',key:'kGYgRtNhbHZr'};
     line('1. Mã CRM trên trang: '+(window.crmLead?(window.crmLead.fallback?'✅ chạy (đường dự phòng JSONP)':'✅ đã chạy'):'❌ CHƯA chạy'));
     line('2. Đoạn mã chat mới: '+(document.getElementById('hmw')?'✅ có':'❌ không có'));
     function call(n,label,body){
