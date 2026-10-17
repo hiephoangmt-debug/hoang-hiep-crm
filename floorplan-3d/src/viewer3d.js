@@ -431,9 +431,11 @@ export class Viewer3D {
     this.applyDoors(1);
     if (!this.pt) {
       this.pt = new WebGLPathTracer(this.renderer);
-      this.pt.tiles.set(2, 2);
-      this.pt.bounces = 6;
-      this.pt.transmissiveBounces = 6;
+      // Nhanh hơn: vẽ trọn khung mỗi lượt, ít lần nảy sáng hơn, độ phân giải render thấp hơn trên điện thoại
+      this.pt.tiles.set(1, 1);
+      this.pt.bounces = 3;
+      this.pt.transmissiveBounces = 3;
+      this.pt.renderScale = matchMedia('(max-width: 900px)').matches ? 0.5 : 0.75;
       this.pt.filterGlossyFactor = 0.5;
       this.pt.minSamples = 1;
       this.pt.fadeDuration = 400;
@@ -498,6 +500,10 @@ export class Viewer3D {
     this.scene.traverse((o) => { if (o !== this.scene && !o.visible && o.parent) hidden.push(o); });
     hidden.forEach((o) => { this._ptDetached.push([o, o.parent]); o.parent.remove(o); });
     this.ptActive = true;
+    this._ptDone = false;
+    // đủ mịn thì dừng render (đỡ nóng máy), báo trang hiện nút tải
+    const q = +new URLSearchParams(location.search).get('pt'); // ?pt=N: đổi số lượt làm mịn (thử nghiệm)
+    this.ptTarget = q > 0 ? q : matchMedia('(max-width: 900px)').matches ? 32 : 48;
     this.pt.setScene(this.scene, this.camera);
     this._ptCam = this.camera.matrixWorld.clone();
   }
@@ -940,9 +946,11 @@ export class Viewer3D {
     }
     if (this.ptActive) {
       this.camera.updateMatrixWorld();
-      if (!this.camera.matrixWorld.equals(this._ptCam)) { this._ptCam.copy(this.camera.matrixWorld); this.pt.updateCamera(); }
+      if (!this.camera.matrixWorld.equals(this._ptCam)) { this._ptCam.copy(this.camera.matrixWorld); this.pt.updateCamera(); this._ptDone = false; }
+      if (this._ptDone) return;
       this.pt.renderSample();
       this.onPTProgress?.(this.pt.samples);
+      if (this.pt.samples >= this.ptTarget) { this._ptDone = true; this.onPTDone?.(); }
       return;
     }
     if (this.state.ao) this.composer.render();
