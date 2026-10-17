@@ -56,7 +56,7 @@
 
   /* ---- Phân tích: vì sao nên tìm hiểu sớm ---- */
   var AN = [
-    ['1', 'Quỹ đất mặt biển nội đô có hạn', 'Dải ven biển Võ Nguyên Giáp – Trường Sa đã kín resort, khách sạn; dự án căn hộ mới ngay mặt biển ngày càng ít. Phía trước Hải Minh là công viên biển theo quy hoạch, tầm nhìn ra biển thoáng.'],
+    ['1', 'Quỹ đất mặt biển nội đô có hạn', 'Dải ven biển Võ Nguyên Giáp – Trường Sa đã kín resort, khách sạn; dự án căn hộ mới ngay mặt biển ngày càng ít. Phía trước Hải Minh là công viên biển theo quy hoạch, tầm nhìn ra biển thoáng. Võ Nguyên Giáp – Trường Sa thuộc nhóm tuyến đường có giá đất cao trong bảng giá đất do UBND TP Đà Nẵng ban hành – giá trị vị trí rõ ràng (diễn biến giá trong quá khứ không bảo đảm cho tương lai).'],
     ['2', 'Nhu cầu lưu trú tăng đều', '11 tháng 2025 Đà Nẵng đón 16,5 triệu lượt khách lưu trú (+18,9%), khách quốc tế tăng 26,5%. Khu thương mại tự do và Trung tâm tài chính quốc tế mở thêm dòng khách công tác, chuyên gia ở dài ngày.'],
     ['3', 'Một căn, hai giá trị', 'Gia đình nghỉ dưỡng mỗi năm ngay mặt biển; những ngày không ở có thể cho thuê. Ví dụ minh họa: 1,5 triệu/đêm × 60% công suất × 350 đêm ≈ 315 triệu doanh thu phòng/năm, chưa trừ chi phí – không phải cam kết.'],
     ['4', 'Đi sớm, chọn được căn đẹp', 'Căn nhìn thẳng biển, tầng cao, hướng đón bình minh có số lượng giới hạn theo mặt bằng. Người trong danh sách ưu tiên nhận bảng giá, mặt bằng trước ngày ra mắt (dự kiến 11/2026) để so sánh, chọn căn kỹ.'],
