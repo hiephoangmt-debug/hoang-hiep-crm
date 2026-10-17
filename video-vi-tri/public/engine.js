@@ -145,9 +145,12 @@
       e._el = el(`<div class="n">${e.n}</div><div class="l">${e.text}<span>${e.sub || ''}</span></div>`, 'chip');
     } else if (e.type === 'route' && e.plane) {
       e._plane = el(`<svg viewBox="0 0 24 24" width="86" height="86">${ICONS.plane}</svg>`); e._plane.id = 'plane';
+    } else if (e.type === 'stats') {
+      e._el = el(e.items.map(it => `<div class="st"><div class="v">${it.text ?? '0'}</div><div class="u">${it.unit}</div><div class="l">${it.label || ''}</div></div>`).join(''), 'stats');
+      e._el.style.top = (e.y ?? 1180) + 'px';
     } else if (e.type === 'photo') {
       const d = document.createElement('div'); d.className = 'photo';
-      d.innerHTML = `<div class="img" style="background-image:url('${e.src}')"></div><div class="shade"></div><div class="cap"><div class="kicker">${e.kicker || ''}</div><div class="pname">${e.title || ''}</div><div class="rule"></div></div>`;
+      d.innerHTML = `<div class="img" style="background-image:url('${e.src}')"></div><div class="shade"></div><div class="cap"><div class="kicker">${e.kicker || ''}</div><div class="pname">${e.title || ''}</div><div class="rule"></div>${e.sub ? `<div class="psub">${e.sub}</div>` : ''}</div>`;
       d.style.opacity = 0; document.getElementById('stage').appendChild(d); e._el = d;
     } else if (e.type === 'end') {
       const d = document.createElement('div'); d.id = 'end'; d.innerHTML = e.html; document.getElementById('stage').appendChild(d); e._el = d;
@@ -284,6 +287,19 @@
         const pa = map.project(a), pb = map.project(b);
         const ang = Math.atan2(pa.y - pb.y, pa.x - pb.x) * 180 / Math.PI + 90;
         e._plane.style.transform = `translate(${pa.x}px, ${pa.y}px) rotate(${ang.toFixed(1)}deg)`;
+      } else if (e.type === 'stats') {
+        const o = vis(f, e.in, e.out, 14, 12);
+        e._el.style.opacity = o;
+        if (o <= 0) continue;
+        [...e._el.children].forEach((tile, i) => {
+          const it = e.items[i], t = E.outQuint(clamp((f - e.in - i * 7) / 22));
+          tile.style.opacity = t.toFixed(3);
+          tile.style.transform = `translateY(${((1 - t) * 50).toFixed(1)}px) scale(${(.92 + .08 * t).toFixed(3)})`;
+          if (it.to != null) {
+            const n = Math.round(it.to * E.out(clamp((f - e.in - i * 7) / 40)));
+            tile.children[0].textContent = n.toLocaleString('vi-VN');
+          }
+        });
       } else if (e.type === 'photo') {
         const o = vis(f, e.in, e.out, 20, 16);
         e._el.style.opacity = o.toFixed(3);
@@ -393,7 +409,7 @@
     const roof = turf.buffer(poly, -((t.towerInset ?? 14) - 1.5), { units: 'meters' });
     if (roof) { roof.properties = { col: P.orange300, b: top, h: top + 2.5 }; feats.push(roof); }
     const crown = turf.buffer(poly, -((t.towerInset ?? 14) + 6), { units: 'meters' });
-    if (crown) { crown.properties = { col: '#C9D7EE', b: top + 2.5, h: top + 9 }; feats.push(crown); }
+    if (crown) { crown.properties = { col: '#C9D7EE', b: top + 2.5, h: t.totalH ?? top + 9 }; feats.push(crown); }
     return turf.featureCollection(feats);
   }
 

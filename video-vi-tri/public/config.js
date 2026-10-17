@@ -17,8 +17,8 @@ window.CONFIG = {
     center: PROJECT_CENTER,
     // Lô đất Sun Saphia Residence (4 góc, theo vị trí khoanh trên bản đồ)
     polygon: [[108.25782, 16.02147], [108.25813, 16.02085], [108.25766, 16.02075], [108.25733, 16.02126]],
-    // Tòa tháp minh họa: đế 13 m + 34 tầng, kính xanh viền cam đồng
-    tower: { podiumH: 13, podiumInset: 4, towerInset: 12, floors: 34, floorH: 3.3, glass: '#2E5F96' },
+    // Tòa tháp: 30 tầng / 114 m (đế 3 tầng + 27 tầng căn hộ), kính xanh viền cam đồng
+    tower: { podiumH: 12, podiumInset: 4, towerInset: 12, floors: 27, floorH: 3.6, totalH: 114, glass: '#2E5F96' },
   },
 
   camera: [
@@ -80,14 +80,18 @@ window.CONFIG = {
     { type: 'fade', at: 1140, dur: 12 },
 
     // ===== Cảnh 5: Bay sát dự án =====
-    { type: 'chip', n: '04', text: 'Căn hộ view biển', sub: 'Mô hình minh họa', in: 1160, out: 1495 },
-    { type: 'pin', at: PROJECT_CENTER, in: 1300, out: 1495, lift: 420 },
-    { type: 'poi', name: 'Bãi tắm Sơn Thủy', icon: 'beach', at: [108.2612, 16.0226], in: 1330, out: 1495, beam: 130 },
-    { type: 'poi', name: 'Crowne Plaza', icon: 'hotel', at: [108.25653, 16.02735], in: 1350, out: 1495, beam: 120 },
+    { type: 'chip', n: '04', text: 'Căn hộ view biển', sub: '30 tầng · cao 114 m', in: 1160, out: 1495 },
+    { type: 'pin', at: PROJECT_CENTER, in: 1290, out: 1495, lift: 400 },
+    { type: 'stats', in: 1300, out: 1495, y: 1150, items: [
+      { to: 30, unit: 'Tầng', label: 'Cao 114 m · 2 tầng hầm' },
+      { to: 782, unit: 'Căn hộ', label: 'Studio · 1PN+1 · 2PN' },
+      { to: 3720, unit: 'm² đất', label: 'Mặt tiền Võ Nguyên Giáp' },
+      { text: '11/2028', unit: 'Bàn giao', label: 'Dự kiến' },
+    ] },
 
     // ===== Cảnh 6: Kết =====
     { type: 'fade', at: 1500, dur: 12, hold: true },
-    { type: 'photo', src: 'phoicanh.jpg', in: 1504, out: null, kicker: 'Phối cảnh dự án', title: 'SUN SAPHIA<br>RESIDENCE' },
+    { type: 'photo', src: 'phoicanh.jpg', in: 1504, out: null, kicker: 'Phối cảnh dự án', title: 'SUN SAPHIA<br>RESIDENCE', sub: '30 tầng · 782 căn hộ · Bàn giao 11/2028' },
     { type: 'end', in: 1650, html: `
       <div class="logo"><svg viewBox="0 0 24 24"><path d="M3 21V10l9-7 9 7v11h-6v-6H9v6H3z" fill="#FF7A1A"/></svg></div>
       <div class="name">SUN SAPHIA<br>RESIDENCE</div>
