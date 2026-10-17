@@ -305,7 +305,7 @@ p{margin:0 0 14px}
 .dn2 div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}.dn2 i{font-style:normal;font-size:24px}.dn2 b{display:block;color:var(--n);margin:6px 0 4px}.dn2 span{font-size:15px}
 .chk{list-style:none;padding:0}.chk li{position:relative;padding:0 0 12px 30px}.chk li::before{content:"✔";position:absolute;left:0;color:var(--o1);font-weight:800}
 .prose .faq{margin-top:10px}
-@media(max-width:900px){.agrid{display:flex;flex-direction:column}.agrid>div{display:contents}.agrid .sapo{order:1}.agrid aside{order:2}.agrid .fig{order:3}.ahero .fig img{max-height:70vh;object-fit:cover}.two,.g4,.dn2{grid-template-columns:1fr}.ahero h1{font-size:26px}.prose h2{font-size:23px}.sticky{position:static}.tb{font-size:14.5px}.tb th,.tb td{padding:9px 10px}}
+@media(max-width:900px){.agrid{display:flex;flex-direction:column}.agrid>div:first-child{display:contents}.agrid .sapo{order:1}.agrid .rc{order:2}.agrid .fig{order:3}.ahero .fig img{max-height:70vh;object-fit:cover}.two,.g4,.dn2{grid-template-columns:1fr}.ahero h1{font-size:26px}.prose h2{font-size:23px}.sticky{position:static}.tb{font-size:14.5px}.tb th,.tb td{padding:9px 10px}}
 
 /* ===== Tông navy – trắng – cam ===== */
 :root{--sand:#ffffff;--sand2:#f2f6fa;--line:#e2e9f1}
@@ -338,6 +338,12 @@ body{background:#fff}
 .box .inl{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15)}.box label{color:#fff!important}
 .faq details{border-left:4px solid #0A2540}.faq details[open]{border-left-color:#FF6A2B}
 .fig img{box-shadow:0 12px 30px rgba(10,37,64,.12)}
+
+.ahero .fig{margin:14px 0 0}.ahero .fig img{aspect-ratio:16/10;object-fit:cover;object-position:35% 18%}
+.ahero{padding-bottom:90px}
+.qf{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.qf div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:12px 14px;color:#c9d6e3;font-size:13.5px;line-height:1.35}
+.qf b{display:block;color:#FF8A3D;font-size:21px;font-weight:800}
 </style>
 </head>
 <body>
@@ -362,7 +368,7 @@ body{background:#fff}
         <p class="sapo"><strong>Sun Saphia Residence</strong> là tòa căn hộ mặt biển 30 tầng (~114 m) tại khu Saphia, phường Ngũ Hành Sơn, Đà Nẵng – góc đường Trường Sa và Nguyễn Đức Thuận, cạnh bãi tắm Sơn Thủy. Theo tài liệu giới thiệu của Sun Property, dự án có 782 căn gồm Studio, 1PN+1 và 2PN, dự kiến mở bán cuối tháng 11/2026 và bàn giao tháng 11/2028. Bài viết tổng hợp đầy đủ thông tin đã công bố, kèm nguồn dẫn, để anh/chị nắm nhanh trước ngày mở bán.</p>
         <figure class="fig"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/6adc4d532f6588cb7ce42192e5fc64c6ab2d6c53/projects/sun-saphia/images/ss-thap-hd.webp" alt="Phối cảnh Sun Saphia Residence – tòa tháp 30 tầng bên bãi biển Đà Nẵng" width="810" height="1125"><figcaption>Phối cảnh minh họa Sun Saphia Residence nhìn từ biển (tài liệu giới thiệu dự án).</figcaption></figure>
       </div>
-      <aside class="card sticky">
+      <div class="rc"><aside class="card">
         <h3>Nhận bảng giá Sun Saphia Residence</h3>
         <p class="note">Giá · mặt bằng · chính sách – gửi qua Zalo ngay khi chủ đầu tư công bố.</p>
         <form class="hm-form" data-form="seo-dau-trang">
@@ -375,6 +381,14 @@ body{background:#fff}
         </form>
         <p class="note" style="margin:12px 0 0">✔ Không thu tiền giữ chỗ · ✔ Thông tin có nguồn</p>
       </aside>
+      <div class="qf">
+        <div><b>30 tầng</b>~114 m · 2 hầm</div>
+        <div><b>782 căn</b>Studio · 1PN+1 · 2PN</div>
+        <div><b>3.720 m²</b>khu đất góc Trường Sa</div>
+        <div><b>10–15′</b>ra sân bay</div>
+        <div><b>11/2026</b>dự kiến mở bán</div>
+        <div><b>11/2028</b>dự kiến bàn giao</div>
+      </div></div>
     </div>
   </div>
 </section>
