@@ -12,9 +12,9 @@ function roundRect(x, X, Y, w, h, r) {
  * keepRatio: true khi đang path tracing (không đổi độ phân giải để khỏi mất các lượt đã tích luỹ);
  * title / lines / note: chữ ở khung tên.
  */
-export function exportImage({ renderer, scene, camera, render, keepRatio = false, scale = 2, title = '', lines = [], note = '', callouts = null, plan = null, frame = null, focus = null, ad = null }) {
+export function exportImage({ renderer, scene, camera, render, source = null, keepRatio = false, scale = 2, title = '', lines = [], note = '', callouts = null, plan = null, frame = null, focus = null, ad = null }) {
   // frame: { W, H, side, band, s } – khung ảnh cố định (vd. 5:6); người gọi đã render vào canvas cỡ (W − 2·side) × (H − band)
-  let W, H, s, band, side, src = renderer.domElement;
+  let W, H, s, band, side, src = source || renderer.domElement;
   const p0 = renderer.getPixelRatio();
   const k = keepRatio || frame ? 1 : scale;
   if (k !== 1) renderer.setPixelRatio(p0 * k);
