@@ -4,6 +4,8 @@
   "use strict";
 
   const B = window.BaoCaoMkt;
+  // địa chỉ CDN đã nạp file này (…/gh/<repo>@<sha>/crm/crm.js) -> gốc kho mã, dùng để lấy mẫu PPTX mới
+  const CODE_BASE = ((document.currentScript && document.currentScript.src) || "").replace(/crm\/crm\.js(?:[?#].*)?$/, "");
   const { PLATFORMS, KINDS, fmtInt, gas } = B;
 
   // ------------------------------------------------------------ đăng nhập / phân quyền
@@ -1106,6 +1108,20 @@
 
   // ------------------------------------------------------------ BÁO CÁO
   const tplCache = {};
+  // Mẫu cũ (10/10) trên Drive chưa có kênh Đăng tin -> dùng mẫu COLLECTION 16/10 (có Đăng tin) đi kèm mã nguồn
+  const OLD_TPL = "10S0gG5T_o1WOqqkvUiFdwdhauqoa9mA6";
+  const NEW_TPL_PATH = "bao-cao-mkt/mau/mau-collection-16-10.pptx";
+  async function newTemplate() {
+    if (!/^https:\/\/[^/]+\/gh\//.test(CODE_BASE)) return null;
+    const hosts = [CODE_BASE].concat(["fastly", "gcore"].map((h) => CODE_BASE.replace(/^https:\/\/[^/]+/, `https://${h}.jsdelivr.net`)));
+    for (const base of hosts) {
+      try {
+        const r = await fetch(base + NEW_TPL_PATH);
+        if (r.ok) { const b = await r.blob(); if (b.size > 100000) return b; }
+      } catch (e) { console.error(e); }
+    }
+    return null;
+  }
   function weeksForReport(rows) {
     const weeks = {};
     Array.from(new Set(rows.map((r) => r.tuan))).sort().forEach((w) => {
@@ -1341,7 +1357,8 @@
     // báo cáo tuần: kèm các tuần trước để so sánh; báo cáo tháng / chiến dịch: đúng các tuần trong kỳ
     const rows = effective(S.SoLieu.filter((r) => r.duAn === pjName && (ky === "tuan" ? r.tuan <= w : wks.includes(r.tuan))));
     if (!last || !rows.some((r) => wks.includes(r.tuan))) throw new Error(`${pjName}: chưa có số liệu ${periodLabel(w)}.`);
-    if (!tplCache[tplId]) { const t = await gas("downloadFile", tplId, TOKEN); tplCache[tplId] = B.b64ToBlob(t.b64, t.type); }
+    if (!tplCache[tplId]) tplCache[tplId] = (tplId === OLD_TPL && await newTemplate()) || await (async () => {
+      const t = await gas("downloadFile", tplId, TOKEN); return B.b64ToBlob(t.b64, t.type); })();
     const accStaff = new Map(rows.map((r) => [r.taiKhoan || r.nhanSu || "(không rõ)", r.nhanSu]));
     let ev = [];
     if (ky === "tuan") {
