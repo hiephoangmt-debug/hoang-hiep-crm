@@ -23,6 +23,12 @@
   if(!document.querySelector('script[src*="AKfycbyChbG-uvItjVlRk7"]')){
     var s=document.createElement('script'); s.src=CRM+'?js=1'; s.async=true; s.setAttribute('data-key','qgK6I9KWTqfS'); document.head.appendChild(s);
   }
+  // Dự phòng: nếu mã theo dõi CRM (?js=1) tải chậm hoặc bị chặn, vẫn gửi khách về CRM qua JSONP
+  function fallback(){ if(window.crmLead) return;
+    window.crmLead=function(d){ d=d||{}; var vid=''; try{vid=localStorage.getItem('hm_vid')||'';}catch(e){}
+      window.HM_JSONP({action:'lead',name:d.name||'',phone:d.phone||'',message:d.message||'',source:d.source||'',vid:vid,url:location.href,ref:document.referrer},function(){},20000); };
+    window.crmLead.fallback=true; }
+  setTimeout(fallback,6000);
   function grab(f){
     var d={}; f.querySelectorAll('input,select,textarea').forEach(function(i){
       var n=((i.name||'')+' '+(i.getAttribute('placeholder')||'')).toLowerCase(), v=(i.value||'').trim(); if(!v) return;
@@ -299,7 +305,7 @@
   function go(){
     document.body.appendChild(box);
     var C=window.HM_CRM||{url:'https://script.google.com/macros/s/AKfycbyChbG-uvItjVlRk7JgLrwpUS6Cgah4nIA6BWHuEwgbXBqSlvAPJNSdZdp6pQ91d_rN/exec',key:'qgK6I9KWTqfS'};
-    line('1. Mã CRM trên trang: '+(window.crmLead?'✅ đã chạy':'❌ CHƯA chạy'));
+    line('1. Mã CRM trên trang: '+(window.crmLead?(window.crmLead.fallback?'✅ chạy (đường dự phòng JSONP)':'✅ đã chạy'):'❌ CHƯA chạy'));
     line('2. Đoạn mã chat mới: '+(document.getElementById('hmw')?'✅ có':'❌ không có'));
     function call(n,label,body){
       window.HM_JSONP(body,function(j){ var t=JSON.stringify(j); line(n+'. '+label+': '+(j&&(j.ok||j.a)?'✅ ':'❌ ')+t.slice(0,160)); },20000);
@@ -308,7 +314,7 @@
     call(4,'Lượt bấm Zalo thử',{action:'track',type:'click',channel:'zalo',vid:'crmtest',url:location.href});
     call(5,'Chat AI',{action:'chat',q:'Dự án cách biển bao xa?',vid:'crmtest'});
   }
-  setTimeout(go,4000);
+  setTimeout(go,8000);
 })();
 </script>
 <!-- Tuân thủ: đổi chữ "Giữ suất" (chưa mở bán, không giữ chỗ) và ẩn đồng hồ đếm ngược -->
