@@ -349,6 +349,12 @@ body{background:#fff}
 @keyframes songHero{from{background-position:0 100%,0 100%,0 0,0 0,center}to{background-position:-900px 100%,1200px 100%,240px 48px,0 0,center}}
 .final{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='70' viewBox='0 0 900 70'%3E%3Cpath d='M0 30 Q112 56 225 30 T450 30 T675 30 T900 30 V0 H0Z' fill='%23ffffff'/%3E%3C/svg%3E") repeat-x 0 0/900px 70px,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='48' viewBox='0 0 240 48'%3E%3Cpath d='M0 12 Q30 2 60 12 T120 12 T180 12 T240 12 M0 36 Q30 26 60 36 T120 36 T180 36 T240 36' fill='none' stroke='%23ffffff' stroke-opacity='.08' stroke-width='1.5'/%3E%3C/svg%3E") repeat 0 0/240px 48px,linear-gradient(150deg,rgba(7,26,48,.94),rgba(12,44,78,.88)),url("https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/b5b89e267db196fba44e68853b81a8b4e9e43f2d/projects/hai-minh-da-nang/landing/images/dn-cau-rong-song-han.webp") center/cover no-repeat;animation:songFinal 14s linear infinite}
 @keyframes songFinal{from{background-position:0 0,0 0,0 0,center}to{background-position:900px 0,240px 48px,0 0,center}}
+
+.qft{width:100%;margin-top:14px;border-collapse:separate;border-spacing:0;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:16px;overflow:hidden;table-layout:fixed}
+.qft td{width:50%;padding:13px 16px;color:#c9d6e3;font-size:13.5px;line-height:1.4;vertical-align:top;border-bottom:1px solid rgba(255,255,255,.12)}
+.qft td+td{border-left:1px solid rgba(255,255,255,.12)}
+.qft tr:last-child td{border-bottom:0}
+.qft b{display:block;color:#FF8A3D;font-size:20px;font-weight:800;line-height:1.25}
 </style>
 </head>
 <body>
@@ -385,14 +391,13 @@ body{background:#fff}
         </form>
         <p class="note" style="margin:12px 0 0">✔ Không thu tiền giữ chỗ · ✔ Thông tin có nguồn</p>
       </aside>
-      <div class="qf">
-        <div><b>30 tầng</b>~114 m · 2 hầm</div>
-        <div><b>782 căn</b>Studio · 1PN+1 · 2PN</div>
-        <div><b>3.720 m²</b>khu đất góc Trường Sa</div>
-        <div><b>10–15′</b>ra sân bay</div>
-        <div><b>11/2026</b>dự kiến mở bán</div>
-        <div><b>11/2028</b>dự kiến bàn giao</div>
-      </div></div>
+      <table class="qft">
+        <tbody>
+          <tr><td><b>30 tầng</b>~114 m · 2 hầm</td><td><b>782 căn</b>Studio · 1PN+1 · 2PN</td></tr>
+          <tr><td><b>3.720 m²</b>khu đất góc Trường Sa</td><td><b>10–15′</b>ra sân bay</td></tr>
+          <tr><td><b>11/2026</b>dự kiến mở bán</td><td><b>11/2028</b>dự kiến bàn giao</td></tr>
+        </tbody>
+      </table></div>
     </div>
   </div>
 </section>
