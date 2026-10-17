@@ -145,6 +145,21 @@ p{margin:0 0 14px}
 .final .card p{color:var(--ink)}.final .card .note,.final .card .alt{color:var(--mut)}
 .final .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
 
+
+/* gallery Đà Nẵng */
+.gal-hero{position:relative;border-radius:20px;overflow:hidden;margin:24px 0 0}
+.gal-hero img{width:100%;aspect-ratio:16/8;object-fit:cover;transition:.6s}
+.gal-hero:hover img{transform:scale(1.04)}
+.gal-hero .cap{position:absolute;left:0;right:0;bottom:0;padding:22px 24px;color:#fff;background:linear-gradient(0deg,rgba(6,22,40,.85),rgba(6,22,40,0))}
+.gal-hero .cap b{display:block;font-size:22px}
+.gal{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:12px}
+.gal figure{position:relative;margin:0;border-radius:16px;overflow:hidden}
+.gal img{width:100%;aspect-ratio:3/4;object-fit:cover;transition:.5s}
+.gal figure:hover img{transform:scale(1.08)}
+.gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 10px;color:#fff;font-size:14px;font-weight:700;line-height:1.3;background:linear-gradient(0deg,rgba(0,0,0,.75),rgba(0,0,0,0))}
+.gal figcaption span{display:block;font-weight:500;font-size:12px;color:#e0e8f0}
+.credit{font-size:11.5px;color:#9aa6b2;margin-top:8px;text-align:right}
+@media(max-width:900px){.gal-hero .cap{padding:14px 16px;font-size:13.5px}.gal{grid-template-columns:repeat(2,1fr)}.gal figure:last-child{grid-column:span 2}.gal figure:last-child img{aspect-ratio:16/9}.gal-hero img{aspect-ratio:4/3}.gal-hero .cap b{font-size:18px}}
 @media(max-width:900px){
   .hero .wrap,.loc .grid,.final .grid{grid-template-columns:1fr}
   .hero h1{font-size:31px}
@@ -250,6 +265,26 @@ p{margin:0 0 14px}
       </ul>
       <p style="font-size:12.5px;color:#9fb2c6;margin-top:8px">Thời gian ước tính bằng ô tô.</p>
     </div>
+  </div>
+</section>
+
+<!-- DA NANG GALLERY -->
+<section class="sec" id="da-nang" style="background:#fff">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Sống ở Đà Nẵng</span>
+      <h2>Biển ngay trước nhà, cả miền Trung trong tầm tay</h2>
+      <p class="lead">Sáng tắm biển Mỹ Khê, chiều dạo Hội An, tối ngắm pháo hoa sông Hàn – khách thuê có lý do quay lại, gia đình có lý do ở lâu hơn.</p>
+    </div>
+    <figure class="gal-hero"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/b5b89e267db196fba44e68853b81a8b4e9e43f2d/projects/hai-minh-da-nang/landing/images/dn-bien-my-khe-tu-tren-cao.webp" alt="Bờ biển Mỹ Khê Đà Nẵng nhìn từ trên cao, dải cát dài và sóng trắng" width="1400" height="787" loading="lazy"><figcaption class="cap"><b>Bãi biển Mỹ Khê – Non Nước</b>Dải cát mịn, bờ thoải chạy dọc trục Võ Nguyên Giáp – Trường Sa</figcaption></figure>
+    <div class="gal">
+      <figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/b5b89e267db196fba44e68853b81a8b4e9e43f2d/projects/hai-minh-da-nang/landing/images/dn-cau-vang-ba-na.webp" alt="Cầu Vàng Bà Nà Hills nhìn từ trên cao" width="954" height="1400" loading="lazy"><figcaption>Cầu Vàng – Bà Nà<span>~45 phút ô tô</span></figcaption></figure>
+      <figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/b5b89e267db196fba44e68853b81a8b4e9e43f2d/projects/hai-minh-da-nang/landing/images/dn-pho-co-hoi-an.webp" alt="Phố cổ Hội An lúc chạng vạng, thuyền trên sông Hoài" width="1400" height="933" loading="lazy"><figcaption>Phố cổ Hội An<span>~30 phút ô tô</span></figcaption></figure>
+      <figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/b5b89e267db196fba44e68853b81a8b4e9e43f2d/projects/hai-minh-da-nang/landing/images/dn-phao-hoa-song-han.webp" alt="Pháo hoa trên sông Hàn Đà Nẵng" width="933" height="1400" loading="lazy"><figcaption>Lễ hội pháo hoa<span>sông Hàn mỗi mùa hè</span></figcaption></figure>
+      <figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/b5b89e267db196fba44e68853b81a8b4e9e43f2d/projects/hai-minh-da-nang/landing/images/dn-cau-rong-song-han.webp" alt="Cầu Rồng bắc qua sông Hàn buổi sáng" width="1400" height="1050" loading="lazy"><figcaption>Cầu Rồng – sông Hàn<span>~15 phút ô tô</span></figcaption></figure>
+      <figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/b5b89e267db196fba44e68853b81a8b4e9e43f2d/projects/hai-minh-da-nang/landing/images/dn-ca-chep-hoa-rong-dem.webp" alt="Tượng cá chép hóa rồng bên sông Hàn về đêm" width="1400" height="788" loading="lazy"><figcaption>Đêm bên sông Hàn<span>ẩm thực, phố đêm</span></figcaption></figure>
+    </div>
+    <p class="credit">Ảnh minh họa Đà Nẵng: Unsplash. Thời gian di chuyển ước tính bằng ô tô.</p>
   </div>
 </section>
 
