@@ -265,13 +265,16 @@
 <script>
 (function () {
   function tag() {
+    var ls = document.querySelectorAll('a[href^="tel:"], a[href*="zalo.me"]');
+    for (var j = 0; j < ls.length; j++) { var a = ls[j]; if (a.hasAttribute('data-crm-click') || (a.closest && a.closest('#hmw'))) continue;
+      a.setAttribute('data-crm-click', /zalo\.me/.test(a.getAttribute('href')) ? 'zalo' : 'phone'); }
     var els = document.querySelectorAll('[id^="BUTTON"], .ladi-button, [id^="HEADLINE"], [id^="PARAGRAPH"]');
     for (var i = 0; i < els.length; i++) {
       var el = els[i];
       if (el.hasAttribute('data-crm-click') || (el.closest && el.closest('.ladi-form, form, #hmw'))) continue;
       var t = (el.innerText || '').replace(/\s+/g, ' ').trim().toLowerCase();
       if (!t || t.length > 40) continue;
-      if (/^(chat |nhắn )?zalo( ngay)?$|^chat zalo/.test(t)) el.setAttribute('data-crm-click', 'zalo');
+      if (/zalo/.test(t)) el.setAttribute('data-crm-click', 'zalo');
       else if (/^g[oọ]i( tư vấn| ngay)?$|^hotline|0904[\s.]?567[\s.]?009/.test(t)) el.setAttribute('data-crm-click', 'phone');
     }
   }

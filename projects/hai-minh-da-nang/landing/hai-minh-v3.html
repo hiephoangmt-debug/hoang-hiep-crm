@@ -16,7 +16,7 @@
 :root{--n:#0A2540;--n2:#12355c;--n3:#0b1a30;--o1:#FF5A1F;--o2:#FF8A00;--sand:#FFF8EF;--sand2:#F5E9D6;--ink:#17283a;--mut:#5d6b7a;--line:#e8dcc9;--gold:#E8C77E}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:"Be Vietnam Pro",Arial,sans-serif;color:var(--ink);background:var(--sand);font-size:16.5px;line-height:1.65}
+body{margin:0;padding-bottom:0;font-family:"Be Vietnam Pro",Arial,sans-serif;color:var(--ink);background:var(--sand);font-size:16.5px;line-height:1.65}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
 .wrap{max-width:1120px;margin:0 auto;padding:0 18px}
@@ -178,6 +178,30 @@ p{margin:0 0 14px}
 .trip small{font-size:12px;color:#9fb2c6}
 @media(max-width:900px){.nb{grid-template-columns:1fr 1fr}.trip ol{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.nb{grid-template-columns:1fr}}
+
+/* touchpoints */
+.topbtn{display:flex;gap:8px}.top a.hot.zl{background:#0068FF}
+.q a.lock{text-decoration:none;transition:.3s}.q a.lock:hover{background:var(--o1);color:#fff}
+.cta-strip{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-top:26px;background:#fff;border:1.5px dashed #ffc4a6;border-radius:18px;padding:18px 22px;text-align:left}
+.cta-strip b{display:block;font-size:18px;color:var(--n)}.cta-strip span{font-size:14.5px;color:var(--mut)}
+.cs-b{display:flex;gap:10px;flex-wrap:wrap}.cs-b .btn{font-size:15px;padding:12px 18px}
+.pj{display:grid;grid-template-columns:1fr 1.15fr;gap:24px;margin-top:24px;align-items:start}
+.spec{margin:0;background:#fff;border-radius:18px;border:1px solid var(--line);padding:6px 20px}
+.spec div{display:grid;grid-template-columns:110px 1fr;gap:10px;padding:12px 0;border-bottom:1px solid #f0e6d6}
+.spec div:last-child{border-bottom:0}.spec dt{font-weight:700;color:var(--n);font-size:14.5px}.spec dd{margin:0;font-size:14.5px;color:var(--ink)}
+.units{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.u{display:block;text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;transition:.3s}
+.u:hover{transform:translateY(-5px);box-shadow:0 14px 28px rgba(10,37,64,.12);border-color:var(--o1)}
+.u b{display:block;font-size:20px;color:var(--n)}.u span{font-weight:700;color:var(--o1)}
+.u em{display:block;font-style:normal;font-size:13.5px;color:var(--mut);margin:4px 0 8px}
+.u i{font-style:normal;font-weight:800;font-size:14px;color:var(--o1)}
+.u.hot2{grid-column:span 2;background:linear-gradient(135deg,#0A2540,#12355c);border:0}.u.hot2 b{color:#fff}.u.hot2 em{color:#c9d6e3}.u.hot2 span,.u.hot2 i{color:#FFB067}
+.inl{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end;max-width:860px;margin:26px auto 0;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}
+.inl label{margin-top:0}.inl button{margin-top:0;white-space:nowrap}
+.pill{display:none}
+@media(max-width:900px){.pj{grid-template-columns:1fr}.spec div{grid-template-columns:92px 1fr}.inl{grid-template-columns:1fr}.cta-strip{padding:16px}.cs-b{width:100%}.cs-b .btn{flex:1}
+ .pill{display:block;position:fixed;left:12px;right:92px;bottom:22px;z-index:9000;text-align:center;font-weight:800;font-size:14.5px;color:#fff;text-decoration:none;background:linear-gradient(90deg,var(--o1),var(--o2));padding:14px 10px;border-radius:30px;box-shadow:0 10px 24px rgba(255,90,31,.4)}
+ .top a.hot{padding:8px 10px;font-size:14px}}
 @media(max-width:900px){
   .hero .wrap,.loc .grid,.final .grid{grid-template-columns:1fr}
   .hero h1{font-size:31px}
@@ -197,7 +221,7 @@ p{margin:0 0 14px}
 <header class="top">
   <div class="wrap">
     <div class="logo"><b>HM</b><span>HẢI MINH · ĐÀ NẴNG</span></div>
-    <a class="hot" href="tel:0904567009">📞 0904 567 009</a>
+    <div class="topbtn"><a class="hot zl" href="https://zalo.me/0904567009">Zalo</a><a class="hot" href="tel:0904567009">📞 0904 567 009</a></div>
   </div>
 </header>
 
@@ -268,6 +292,34 @@ p{margin:0 0 14px}
   </div>
 </section>
 
+<!-- PROJECT INFO -->
+<section class="sec" id="du-an">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Thông tin dự án</span>
+      <h2>Hải Minh – căn hộ khách sạn 30 tầng mặt biển Võ Nguyên Giáp</h2>
+      <p class="lead">Khu căn hộ du lịch, thương mại dịch vụ trên 2 lô góc của Khu Khách sạn – Condotel và dân cư Saphia.</p>
+    </div>
+    <div class="pj">
+      <dl class="spec">
+        <div><dt>Vị trí</dt><dd>Lô A2-1 &amp; A2-2, góc Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, P. Ngũ Hành Sơn, TP Đà Nẵng</dd></div>
+        <div><dt>Chủ đầu tư</dt><dd>Công ty TNHH Quản lý và Dịch vụ Hạ tầng Kỹ thuật Miền Trung</dd></div>
+        <div><dt>Quy mô</dt><dd>1 tòa tháp 30 tầng, cao ~117 m, khoảng 400 căn; khối đế thương mại 2 tầng, hồ bơi tầng 3</dd></div>
+        <div><dt>Khu đất</dt><dd>~3.720 m² (2 thửa góc), tổng sàn trên 45.000 m²</dd></div>
+        <div><dt>Pháp lý đất</dt><dd>Đất thương mại dịch vụ, thời hạn 50 năm (17/9/2026 – 16/9/2076); loại hình căn hộ du lịch</dd></div>
+        <div><dt>Tình trạng</dt><dd>Đang thi công · dự kiến ra mắt 11/2026 · giá, chính sách chủ đầu tư công bố khi ra mắt</dd></div>
+      </dl>
+      <div class="units">
+        <a class="u" href="#dang-ky"><b>1PN</b><span>47,4 m²</span><em>Gọn cho khách du lịch thuê ngắn ngày</em><i>Nhận giá 1PN →</i></a>
+        <a class="u" href="#dang-ky"><b>2PN</b><span>66,5–68,8 m²</span><em>Vợ chồng và 2 con</em><i>Nhận giá 2PN →</i></a>
+        <a class="u" href="#dang-ky"><b>2PN+1</b><span>76,2–76,9 m²</span><em>Thêm phòng linh hoạt cho ông bà</em><i>Nhận giá 2PN+1 →</i></a>
+        <a class="u" href="#dang-ky"><b>3PN</b><span>78,6–80 m²</span><em>Đủ chỗ cho ba thế hệ</em><i>Nhận giá 3PN →</i></a>
+        <a class="u hot2" href="#dang-ky"><b>Dual Key</b><span>101 m²</span><em>2 phần cửa riêng: vừa ở vừa cho thuê</em><i>Nhận giá Dual Key →</i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- NORTH BUYERS -->
 <section class="sec" id="nguoi-ha-noi" style="background:var(--sand2)">
   <div class="wrap">
@@ -305,9 +357,9 @@ p{margin:0 0 14px}
     <h2>3 câu hỏi trước khi chọn căn ở Hải Minh</h2>
     <p class="lead">Chủ đầu tư chưa công bố giá. Để lại số, anh/chị nhận câu trả lời đầy đủ ngay khi có – trước ngày ra mắt.</p>
     <div class="qgrid" style="text-align:left">
-      <div class="q"><div class="ico">🌅</div><h3>Tầng nào nhìn thẳng biển, hướng nào đón bình minh?</h3><p>Căn view trực diện có số lượng giới hạn theo mặt bằng.</p><span class="lock">🔒 Danh sách căn view trực diện</span></div>
-      <div class="q"><div class="ico">🏷️</div><h3>5 dòng căn – dòng nào cho thuê tốt nhất?</h3><p>1PN gọn cho khách du lịch, Dual Key vừa ở vừa cho thuê, 3PN cho cả nhà.</p><span class="lock">🔒 Bảng so sánh 5 dòng căn</span></div>
-      <div class="q"><div class="ico">⚖️</div><h3>Condotel 50 năm hay căn hộ lâu dài – nên chọn gì?</h3><p>Hiểu đúng pháp lý, thời hạn và cách khai thác trước khi quyết định.</p><span class="lock">🔒 Bản so sánh qua Zalo</span></div>
+      <div class="q"><div class="ico">🌅</div><h3>Tầng nào nhìn thẳng biển, hướng nào đón bình minh?</h3><p>Căn view trực diện có số lượng giới hạn theo mặt bằng.</p><a class="lock" href="#dang-ky">🔒 Danh sách căn view trực diện – mở khóa</a></div>
+      <div class="q"><div class="ico">🏷️</div><h3>5 dòng căn – dòng nào cho thuê tốt nhất?</h3><p>1PN gọn cho khách du lịch, Dual Key vừa ở vừa cho thuê, 3PN cho cả nhà.</p><a class="lock" href="#dang-ky">🔒 Bảng so sánh 5 dòng căn – mở khóa</a></div>
+      <div class="q"><div class="ico">⚖️</div><h3>Condotel 50 năm hay căn hộ lâu dài – nên chọn gì?</h3><p>Hiểu đúng pháp lý, thời hạn và cách khai thác trước khi quyết định.</p><a class="lock" href="#dang-ky">🔒 Bản so sánh qua Zalo – mở khóa</a></div>
     </div>
     <p style="margin-top:24px"><a class="btn" href="#dang-ky">Gửi tôi bảng giá trước ngày ra mắt</a></p>
   </div>
@@ -332,6 +384,7 @@ p{margin:0 0 14px}
         <li>Phố cổ Hội An<b>~30 phút</b></li>
       </ul>
       <p style="font-size:12.5px;color:#9fb2c6;margin-top:8px">Thời gian ước tính bằng ô tô.</p>
+      <p style="margin-top:14px;display:flex;flex-wrap:wrap;gap:10px"><a class="btn zalo" href="https://zalo.me/0904567009">Đặt lịch xem lô đất qua Zalo</a><a class="btn ghost" href="tel:0904567009">Gọi chuyên viên</a></p>
     </div>
   </div>
 </section>
@@ -347,6 +400,7 @@ p{margin:0 0 14px}
       <figure><div class="ph"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/4a26b749ab512b23f43f25a3fc4cac507e5850ca/projects/hai-minh-da-nang/landing/illus/phong-ngu-view-bien.webp" alt="Tranh minh họa bữa sáng bên cửa kính nhìn ra biển" width="1200" height="800" loading="lazy"></div><figcaption><b>8:00 – Bữa sáng bên khung kính</b><span>Cả nhà ăn sáng, rồi đi bộ ra biển tắm.</span><small>Tranh minh họa, không phải ảnh căn hộ thật</small></figcaption></figure>
       <figure><div class="ph"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/4a26b749ab512b23f43f25a3fc4cac507e5850ca/projects/hai-minh-da-nang/landing/illus/ban-cong-hoang-hon.webp" alt="Tranh minh họa ban công lúc hoàng hôn" width="1200" height="800" loading="lazy"></div><figcaption><b>18:00 – Hoàng hôn ban công</b><span>Gió biển, ánh chiều và một buổi tối không vội.</span><small>Tranh minh họa, không phải ảnh căn hộ thật</small></figcaption></figure>
     </div>
+    <div class="cta-strip"><div><b>Căn nào đón bình minh như tranh?</b><span>Nhận danh sách căn mặt Đông, tầng cao nhìn thẳng biển Mỹ Khê.</span></div><div class="cs-b"><a class="btn" href="#dang-ky">Xem căn đón bình minh</a><a class="btn zalo" href="https://zalo.me/0904567009">Hỏi qua Zalo</a></div></div>
   </div>
 </section>
 
@@ -365,7 +419,12 @@ p{margin:0 0 14px}
       <div><i>5</i><p style="margin:0"><b>Lời mời xem lô đất</b><span>Đi cùng chuyên viên ra tận góc Trường Sa – Nguyễn Đức Thuận.</span></p></div>
       <div><i>6</i><p style="margin:0"><b>Buổi giới thiệu riêng</b><span>Thông tin dự án, hợp đồng mẫu khi chủ đầu tư công bố.</span></p></div>
     </div>
-    <p class="center" style="margin-top:24px"><a class="btn" href="#dang-ky">Xem căn view đẹp còn lại</a></p>
+    <form class="hm-form inl" data-form="giua-trang">
+      <div><label for="ten3">Họ và tên</label><input id="ten3" name="name" type="text" placeholder="Anh/chị tên gì ạ?"></div>
+      <div><label for="sdt3">Số điện thoại / Zalo</label><input id="sdt3" name="phone" type="tel" placeholder="09xx xxx xxx"></div>
+      <button class="btn" type="submit">Vào danh sách ưu tiên</button>
+    </form>
+
   </div>
 </section>
 
@@ -381,6 +440,7 @@ p{margin:0 0 14px}
       <div><b>Căn hộ du lịch</b><span>Loại hình condotel để nghỉ dưỡng, cho thuê – không phải chung cư ở lâu dài.</span></div>
       <div><b>Chưa thu tiền</b><span>Không giữ chỗ, không đặt cọc. Giá, chính sách theo công bố của chủ đầu tư và hợp đồng mua bán.</span></div>
     </div>
+    <div class="cta-strip"><div><b>Condotel 50 năm hay căn hộ lâu dài?</b><span>Nhận bản so sánh pháp lý, thời hạn, cách khai thác – đọc trong 3 phút.</span></div><div class="cs-b"><a class="btn" href="#dang-ky">Nhận bản so sánh</a><a class="btn zalo" href="https://zalo.me/0904567009">Nhắn Zalo hỏi pháp lý</a></div></div>
   </div>
 </section>
 
@@ -399,6 +459,7 @@ p{margin:0 0 14px}
       <details><summary>Sau này bán lại được không?</summary><p>Chuyển nhượng theo hợp đồng mua bán và quy định pháp luật; điều kiện cụ thể nằm trong hợp đồng mẫu khi ra mắt.</p></details>
       <details><summary>Khi nào ra mắt, khi nào bàn giao?</summary><p>Dự kiến ra mắt 11/2026. Tiến độ bàn giao chủ đầu tư sẽ công bố khi ra mắt.</p></details>
     </div>
+    <div class="cta-strip"><div><b>Còn câu hỏi khác về Hải Minh?</b><span>Chuyên viên Hoàng Hiệp trả lời trực tiếp, không qua tổng đài.</span></div><div class="cs-b"><a class="btn" href="tel:0904567009">Gọi 0904 567 009</a><a class="btn zalo" href="https://zalo.me/0904567009">Nhắn Zalo</a></div></div>
   </div>
 </section>
 
@@ -438,5 +499,6 @@ p{margin:0 0 14px}
   </div>
 </section>
 
+<a class="pill" href="#dang-ky">🎁 Nhận bảng giá trước ngày ra mắt</a>
 </body>
 </html>
