@@ -28,7 +28,7 @@
     style: { version: 8, sources: {}, layers: [{ id: 'bg', type: 'background', paint: { 'background-color': P.sea } }] },
     center: k0.c, zoom: k0.z, pitch: k0.p, bearing: k0.b,
     interactive: false, fadeDuration: 0, preserveDrawingBuffer: true, attributionControl: false,
-    maxPitch: 78, pixelRatio: 1, antialias: true,
+    maxPitch: 78, pixelRatio: 1, antialias: (new URLSearchParams(location.search)).get("aa") !== "0",
   });
   await new Promise(r => map.on('load', r));
 
@@ -39,7 +39,6 @@
   map.addSource('sand', { type: 'geojson', data: data('sand') });
   map.addSource('water', { type: 'geojson', data: data('water') });
   map.addSource('roads', { type: 'geojson', data: data('roads') });
-  map.addSource('bld', { type: 'geojson', data: data('buildings') });
   map.addSource('hoian', { type: 'geojson', data: data('hoian') });
 
   map.addLayer({ id: 'land', type: 'fill', source: 'land', paint: { 'fill-color': P.land, 'fill-antialias': true } });
@@ -91,7 +90,15 @@
       paint: { 'line-width': 7, 'line-opacity': 0, 'line-gradient': ['interpolate', ['linear'], ['line-progress'], 0, 'rgba(255,255,255,0.15)', .55, P.orange300, 1, '#FFFFFF'] } });
   });
 
-  // Tòa nhà 3D
+  // Tòa nhà 3D (bỏ các tòa nhà nằm trong ranh giới dự án)
+  const bldAll = await (await fetch(data('buildings'))).json();
+  const [px0, py0, px1, py1] = turf.bbox(projPoly);
+  bldAll.features = bldAll.features.filter(ft => {
+    const c = ft.geometry.type === 'Polygon' ? ft.geometry.coordinates[0][0] : ft.geometry.coordinates[0][0][0];
+    if (c[0] < px0 - .0005 || c[0] > px1 + .0005 || c[1] < py0 - .0005 || c[1] > py1 + .0005) return true;
+    return !turf.booleanIntersects(ft, projPoly);
+  });
+  map.addSource('bld', { type: 'geojson', data: bldAll });
   map.addLayer({ id: 'bld', type: 'fill-extrusion', source: 'bld', minzoom: 13,
     paint: { 'fill-extrusion-color': ['interpolate', ['linear'], ['get', 'h'], 6, P.bldLow, 40, P.bldHigh],
       'fill-extrusion-height': ['get', 'h'], 'fill-extrusion-opacity': .92, 'fill-extrusion-vertical-gradient': true } });

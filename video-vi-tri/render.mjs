@@ -26,7 +26,7 @@ const browser = await chromium.launch({
 const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
 page.on('console', m => { if (m.type() === 'error' || m.type() === 'warning') console.log('[page]', m.text()); });
 page.on('pageerror', e => console.log('[pageerror]', e.message));
-const q = mode === 'still' ? '?' + (a3 || '') : '';
+const q = '?' + [mode === 'still' ? a3 : '', process.env.QS || ''].filter(Boolean).join('&');
 await page.goto(`http://localhost:${port}/index.html${q}`);
 await page.waitForFunction('window.READY === true', null, { timeout: 180000 });
 const stage = await page.$('#stage');

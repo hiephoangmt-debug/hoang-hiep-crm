@@ -8,7 +8,7 @@ for ((s=0; s<TOTAL; s+=STEP)); do
   f=$(printf "out/parts/p_%04d.mp4" $s)
   [ -s "$f" ] && continue
   for try in 1 2 3; do
-    node render.mjs video "$f.tmp.mp4" $s $e && mv "$f.tmp.mp4" "$f" && break
+    QS=aa=0 node render.mjs video "$f.tmp.mp4" $s $e && mv "$f.tmp.mp4" "$f" && break
     echo "đoạn $s lỗi, thử lại ($try)"
   done
   [ -s "$f" ] || { echo "đoạn $s thất bại"; exit 1; }
