@@ -28,12 +28,13 @@
 
   <!-- coastal strip -->
   <rect x="525" y="60" width="185" height="600" fill="url(#vac)"/>
-  <text x="617" y="330" text-anchor="middle" font-size="15" fill="#5c6b52" font-weight="700">Đất Hòn</text>
-  <text x="617" y="350" text-anchor="middle" font-size="15" fill="#5c6b52" font-weight="700">Ngọc Á Châu</text>
-  <rect x="525" y="668" width="185" height="150" rx="6" fill="url(#trees)" stroke="#4f9a40" stroke-width="2"/>
-  <rect x="533" y="712" width="169" height="62" rx="10" fill="#ffffff" opacity=".92"/>
-  <text x="617" y="738" text-anchor="middle" font-size="14" font-weight="800" fill="#2f6b24">Công viên biển</text>
-  <text x="617" y="760" text-anchor="middle" font-size="13.5" font-weight="800" fill="#2f6b24">Trường Sa · ~2,45 ha</text>
+  <text x="617" y="210" text-anchor="middle" font-size="15" fill="#5c6b52" font-weight="700">Đất Hòn</text>
+  <text x="617" y="230" text-anchor="middle" font-size="15" fill="#5c6b52" font-weight="700">Ngọc Á Châu</text>
+  <rect x="525" y="372" width="185" height="250" rx="6" fill="url(#trees)" stroke="#4f9a40" stroke-width="2"/>
+  <rect x="533" y="528" width="169" height="66" rx="10" fill="#ffffff" opacity=".94"/>
+  <text x="617" y="555" text-anchor="middle" font-size="14" font-weight="800" fill="#2f6b24">Công viên biển</text>
+  <text x="617" y="577" text-anchor="middle" font-size="13.5" font-weight="800" fill="#2f6b24">Trường Sa · ~2,45 ha</text>
+  <text x="617" y="660" text-anchor="middle" font-size="13" font-weight="800" fill="#2f6b24">◀ ngay trước dự án</text>
   <!-- villas / resorts south -->
   <g fill="#f1d7c6" stroke="#e2b9a1"><rect x="540" y="860" width="40" height="28" rx="4"/><rect x="595" y="860" width="40" height="28" rx="4"/><rect x="650" y="860" width="40" height="28" rx="4"/>
     <rect x="540" y="905" width="40" height="28" rx="4"/><rect x="595" y="905" width="40" height="28" rx="4"/><rect x="650" y="905" width="40" height="28" rx="4"/>
@@ -91,9 +92,9 @@
   <text x="170" y="532" text-anchor="middle" font-size="19" font-weight="800" fill="#FF8A3D">SUN SAPHIA</text>
   <text x="170" y="558" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">RESIDENCE · 30 tầng</text>
   <!-- walk to beach -->
-  <path d="M470 440 C560 470 640 520 735 520" fill="none" stroke="#FF6A2B" stroke-width="3.5" stroke-dasharray="8 7" marker-end="url(#ar)"/>
-  <rect x="555" y="470" width="140" height="30" rx="15" fill="#FF6A2B"/>
-  <text x="625" y="491" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">Ra biển đi bộ</text>
+  <path d="M470 440 C560 445 650 455 740 455" fill="none" stroke="#FF6A2B" stroke-width="3.5" stroke-dasharray="8 7" marker-end="url(#ar)"/>
+  <rect x="527" y="398" width="181" height="30" rx="15" fill="#FF6A2B"/>
+  <text x="617" y="418" text-anchor="middle" font-size="13.5" font-weight="800" fill="#fff">Qua công viên ra biển</text>
 
   <!-- title -->
   <rect x="0" y="0" width="470" height="62" fill="url(#nav)"/>
