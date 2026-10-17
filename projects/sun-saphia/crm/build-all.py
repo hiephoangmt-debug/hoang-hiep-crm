@@ -23,7 +23,8 @@ for kind, v in parts:
     else:
         out.append('(function(){var x=document.createElement("script");x.src=%s;x.defer=true;document.body.appendChild(x);})();' % json.dumps(v))
 out.append('}')
-out.append('if(document.body) run(); else document.addEventListener("DOMContentLoaded",run);')
+out.append('function go(){ var f=/[?&]ssforce/.test(location.search); if(!f){ if(navigator.webdriver) return; if(!document.querySelector(".ladi-wraper,.ladi-section")) return; } run(); }')
+out.append('if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",go); else go();')
 out.append('})();')
 (here / 'ss-all.js').write_text('\n'.join(out), encoding='utf-8')
 print([k for k, _ in parts])

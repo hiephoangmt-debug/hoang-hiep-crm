@@ -11,5 +11,6 @@ try{(0,eval)("\n(function(){\n  function run(){\n    var w=document.createTreeWa
 (function(){var x=document.createElement("script");x.src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@5c2cb9edaffa51facd745424aa81218d243b808f/projects/sun-saphia/4d/sun-saphia-4d-embed.js";x.defer=true;document.body.appendChild(x);})();
 (function(){var x=document.createElement("script");x.src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@7734701e3c2e53cfd1a8a40d38991e0365a52d13/projects/sun-saphia/tuong-tac/sun-saphia-tuong-tac.js";x.defer=true;document.body.appendChild(x);})();
 }
-if(document.body) run(); else document.addEventListener("DOMContentLoaded",run);
+function go(){ var f=/[?&]ssforce/.test(location.search); if(!f){ if(navigator.webdriver) return; if(!document.querySelector(".ladi-wraper,.ladi-section")) return; } run(); }
+if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",go); else go();
 })();
