@@ -29,12 +29,13 @@
     + '#hmx .hx-u div{background:#fff;border-radius:12px;padding:14px;box-shadow:0 2px 10px rgba(15,29,51,.07);font-size:14px;line-height:1.45}'
     + '#hmx .hx-u b{display:block;font-size:17px;color:#0f1d33}#hmx .hx-u i{font-style:normal;color:#e8571c;font-weight:700}'
     + '#hmx .hx-an{display:grid;gap:10px;margin:14px 0}#hmx .hx-ai{display:flex;gap:14px;background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 2px 10px rgba(15,29,51,.07)}'
-    + '#hmx .hx-ai i{flex:0 0 34px;height:34px;border-radius:50%;background:#ff6a2b;color:#fff;font-style:normal;font-weight:800;display:flex;align-items:center;justify-content:center}'
+    + '#hmx .hx-ai > i{flex:0 0 34px;height:34px;border-radius:50%;background:#ff6a2b;color:#fff;font-style:normal;font-weight:800;display:flex;align-items:center;justify-content:center}'
     + '#hmx .hx-ai b{display:block;font-size:16px;color:#0f1d33;margin-bottom:3px}#hmx .hx-ai span{font-size:14.5px;line-height:1.55}'
     + '#hmx .hx-chk{background:#eef3fa;border-left:4px solid #0f1d33;border-radius:10px;padding:12px 16px;margin:4px 0 14px}#hmx .hx-chk b{display:block;margin-bottom:4px}#hmx .hx-chk span{display:block;font-size:13.5px;line-height:1.55;color:#33435a}'
     + '#hmx .hx-cta{max-width:520px}'
     + '#hmx .hx-at{flex:1 1 0;min-width:0}#hmx .hx-av{flex:0 0 300px}#hmx .hx-fig{margin:0}#hmx .hx-fig img{display:block;width:100%;height:170px;object-fit:cover;border-radius:10px}#hmx .hx-fig figcaption{font-size:11.5px;color:#6b7a90;margin-top:4px}'
     + '#hmx .hx-bars{background:#f4f6fa;border-radius:10px;padding:12px}#hmx .hx-br{display:grid;grid-template-columns:92px 1fr auto;gap:8px;align-items:center;margin:5px 0;font-size:13px}#hmx .hx-br div{height:12px;background:#e1e7f0;border-radius:6px;overflow:hidden}#hmx .hx-br i{display:block;height:100%;background:linear-gradient(90deg,#ff8a4c,#ff6a2b);border-radius:6px}#hmx .hx-br em{font-style:normal;font-weight:700;color:#0f1d33;font-size:12.5px}#hmx .hx-bars small{display:block;font-size:11.5px;color:#6b7a90;margin-top:4px}'
+    + '#hmx .hx-cols{display:flex;align-items:flex-end;justify-content:space-around;height:150px;gap:10px}#hmx .hx-col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;flex:1}#hmx .hx-col i{display:block;width:70%;max-width:56px;background:linear-gradient(180deg,#ff8a4c,#ff6a2b);border-radius:6px 6px 0 0}#hmx .hx-col em{font-style:normal;font-weight:800;font-size:12.5px;color:#0f1d33;margin-bottom:4px}#hmx .hx-col span{font-size:12px;margin-top:4px;color:#33435a}'
     + '@media(max-width:760px){#hmx .hx-ai{flex-wrap:wrap}#hmx .hx-av{flex:1 1 100%}#hmx .hx-fig img{height:190px}}'
 
     + '@media(max-width:860px){#hmx .hx-g{grid-template-columns:1fr}#hmx .hx-u{grid-template-columns:1fr 1fr}#hmx h2{font-size:21px}}';
@@ -66,9 +67,11 @@
   function pic(src, alt, cap) { return '<figure class="hx-fig"><img src="' + IMG + src + '" alt="' + alt + '" loading="lazy" width="600" height="400"><figcaption>' + cap + '</figcaption></figure>'; }
   function bars(rows, unit) { var mx = Math.max.apply(null, rows.map(function (r) { return r[1]; }));
     return '<div class="hx-bars">' + rows.map(function (r) { return '<div class="hx-br"><span>' + r[0] + '</span><div><i style="width:' + Math.round(r[1] / mx * 100) + '%"></i></div><em>' + r[2] + '</em></div>'; }).join('') + (unit ? '<small>' + unit + '</small>' : '') + '</div>'; }
+  function cols(rows, note) { var mx = Math.max.apply(null, rows.map(function (r) { return r[1]; }));
+    return '<div class="hx-bars"><div class="hx-cols">' + rows.map(function (r) { return '<div class="hx-col"><em>' + r[2] + '</em><i style="height:' + Math.round(r[1] / mx * 110) + 'px' + (r[3] ? ';background:repeating-linear-gradient(45deg,#ff6a2b 0 6px,#ff9a66 6px 12px)' : '') + '"></i><span>' + r[0] + '</span></div>'; }).join('') + '</div><small>' + note + '</small></div>'; }
   var VIS = [
     pic('images/so-do-vi-tri-hai-minh-rong-v4.webp', 'Sơ đồ vị trí Hải Minh, phía trước là công viên biển Trường Sa', 'Sơ đồ vị trí – không theo tỷ lệ'),
-    bars([['Khách lưu trú', 16.5, '16,5 tr lượt · +18,9%'], ['Khách quốc tế', 7, '~7 tr lượt · +26,5%']], '11 tháng 2025 – Cục Thống kê TP Đà Nẵng'),
+    cols([['2023', 7.94, '7,94 tr'], ['2024', 10.9, '~10,9 tr'], ['11T/2025*', 16.5, '16,5 tr', 1]], 'Lượt khách cơ sở lưu trú Đà Nẵng (triệu lượt). Nguồn: Cục Thống kê TP Đà Nẵng (2023, 2025), Sở Du lịch qua báo chí (2024). *Từ 7/2025 số liệu gồm cả địa bàn Quảng Nam cũ sau hợp nhất, không so sánh trực tiếp.'),
     pic('illus/phong-ngu-view-bien.webp', 'Tranh minh họa bữa sáng bên cửa kính nhìn ra biển', 'Tranh minh họa, không phải ảnh căn hộ thật'),
     pic('illus/binh-minh-phong-khach.webp', 'Tranh minh họa phòng khách đón bình minh trên biển', 'Tranh minh họa, không phải ảnh căn hộ thật'),
     bars([['An Thượng', 8, '5–10 phút'], ['Ngũ Hành Sơn', 8, '5–10 phút'], ['Sân bay', 13, '10–15 phút'], ['Cầu Rồng', 15, '~15 phút'], ['Hội An', 30, '~30 phút'], ['Mikazuki', 35, '~35 phút'], ['Bà Nà Hills', 45, '~45 phút'], ['Huế', 120, '~2 giờ']], 'Ước tính bằng ô tô, tùy giờ cao điểm')
@@ -168,6 +171,28 @@
       + '<div class="hd-g">' + DN.map(function (d) { return '<div class="hd-c"><div class="hd-i">' + d[0] + '</div><div><b>' + d[1] + '</b><span>' + d[2] + '</span></div></div>'; }).join('') + '</div>'
       + '<div class="hd-s">Thời gian di chuyển là ước tính bằng ô tô. Các dự án hạ tầng theo quy hoạch, tiến độ do Nhà nước quyết định.</div></div>';
   }
+
+  /* ---- Chân trang minh bạch + chính sách bảo mật ---- */
+  function footer() {
+    if (document.getElementById('hmft')) return;
+    var st = document.createElement('style');
+    st.textContent = '#hmft{position:relative;z-index:5;display:block;background:#0b1626;color:#9fb0c6;font-family:inherit;font-size:12.5px;line-height:1.6;padding:22px 0 90px;clear:both}'
+      + '#hmft .ft-w{max-width:1140px;margin:0 auto;padding:0 16px}#hmft p{margin:0 0 8px}#hmft b{color:#dfe7f1}#hmft a{color:#ff8a4c}'
+      + '#hmft details{margin-top:6px}#hmft summary{cursor:pointer;color:#ff8a4c;font-weight:600}#hmft details div{margin-top:8px;padding:12px 14px;background:rgba(255,255,255,.05);border-radius:10px}';
+    document.head.appendChild(st);
+    var f = document.createElement('footer'); f.id = 'hmft';
+    f.innerHTML = '<div class="ft-w">'
+      + '<p>Trang thông tin dự án Hải Minh do <b>Hoàng Phạm Đình Hiệp</b> – chuyên viên tư vấn bất động sản – thực hiện. Đây không phải website của Chủ đầu tư hay đơn vị phân phối chính thức. Thông tin, hình ảnh tổng hợp từ nguồn công khai, mang tính tham khảo; bảng giá, chính sách và thông tin chính thức theo công bố của Chủ đầu tư và Hợp đồng mua bán.</p>'
+      + '<p>Địa chỉ dự án: Khu Khách sạn – Condotel và dân cư Saphia, góc Trường Sa – Nguyễn Đức Thuận, phường Ngũ Hành Sơn, TP Đà Nẵng.</p>'
+      + '<p>Liên hệ tư vấn: <b>Hoàng Phạm Đình Hiệp</b> · Hotline/Zalo <a href="tel:0904567009">0904 567 009</a> · Email <a href="mailto:hiephoangmt@gmail.com">hiephoangmt@gmail.com</a></p>'
+      + '<details id="chinh-sach-bao-mat"><summary>Chính sách bảo mật</summary><div>'
+      + '<p><b>Thông tin thu thập:</b> họ tên, số điện thoại/Zalo, nội dung anh/chị chọn hoặc nhắn trên trang (câu trả lời trắc nghiệm, thông số máy tính dòng tiền, tin nhắn chat) và thông tin kỹ thuật cơ bản (nguồn truy cập, thiết bị).</p>'
+      + '<p><b>Mục đích:</b> chỉ để chuyên viên Hoàng Phạm Đình Hiệp liên hệ, gửi tài liệu và tư vấn về dự án Hải Minh theo yêu cầu của anh/chị; đo lường hiệu quả quảng cáo.</p>'
+      + '<p><b>Lưu trữ và chia sẻ:</b> dữ liệu lưu trên hệ thống quản lý khách hàng của chuyên viên (Google Sheets, Telegram); không bán, không cho thuê dữ liệu cho bên thứ ba. Câu hỏi gửi qua khung chat có thể được xử lý bởi dịch vụ AI để tự động trả lời.</p>'
+      + '<p><b>Quyền của anh/chị:</b> yêu cầu xem, sửa hoặc xóa thông tin, hoặc ngừng nhận liên hệ bất cứ lúc nào qua Hotline/Zalo 0904 567 009 hoặc email hiephoangmt@gmail.com. Thông tin được xử lý theo Nghị định 13/2023/NĐ-CP về bảo vệ dữ liệu cá nhân.</p>'
+      + '</div></details></div>';
+    document.body.appendChild(f);
+  }
   function build() {
     if (document.getElementById('hmx')) return;
     var img = document.querySelector('img[src*="so-do-vi-tri-hai-minh"]');
@@ -216,6 +241,6 @@
     }, 'may-tinh-dong-tien');
   }
 
-  function start() { setTimeout(build, document.getElementById('hm4d') ? 0 : 600); }
+  function start() { try { footer(); } catch (e) {} setTimeout(build, document.getElementById('hm4d') ? 0 : 600); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();
