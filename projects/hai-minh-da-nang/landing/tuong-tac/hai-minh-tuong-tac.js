@@ -33,6 +33,10 @@
     + '#hmx .hx-ai b{display:block;font-size:16px;color:#0f1d33;margin-bottom:3px}#hmx .hx-ai span{font-size:14.5px;line-height:1.55}'
     + '#hmx .hx-chk{background:#eef3fa;border-left:4px solid #0f1d33;border-radius:10px;padding:12px 16px;margin:4px 0 14px}#hmx .hx-chk b{display:block;margin-bottom:4px}#hmx .hx-chk span{display:block;font-size:13.5px;line-height:1.55;color:#33435a}'
     + '#hmx .hx-cta{max-width:520px}'
+    + '#hmx .hx-at{flex:1 1 0;min-width:0}#hmx .hx-av{flex:0 0 300px}#hmx .hx-fig{margin:0}#hmx .hx-fig img{display:block;width:100%;height:170px;object-fit:cover;border-radius:10px}#hmx .hx-fig figcaption{font-size:11.5px;color:#6b7a90;margin-top:4px}'
+    + '#hmx .hx-bars{background:#f4f6fa;border-radius:10px;padding:12px}#hmx .hx-br{display:grid;grid-template-columns:92px 1fr auto;gap:8px;align-items:center;margin:5px 0;font-size:13px}#hmx .hx-br div{height:12px;background:#e1e7f0;border-radius:6px;overflow:hidden}#hmx .hx-br i{display:block;height:100%;background:linear-gradient(90deg,#ff8a4c,#ff6a2b);border-radius:6px}#hmx .hx-br em{font-style:normal;font-weight:700;color:#0f1d33;font-size:12.5px}#hmx .hx-bars small{display:block;font-size:11.5px;color:#6b7a90;margin-top:4px}'
+    + '@media(max-width:760px){#hmx .hx-ai{flex-wrap:wrap}#hmx .hx-av{flex:1 1 100%}#hmx .hx-fig img{height:190px}}'
+
     + '@media(max-width:860px){#hmx .hx-g{grid-template-columns:1fr}#hmx .hx-u{grid-template-columns:1fr 1fr}#hmx h2{font-size:21px}}';
 
   var Q = [
@@ -58,10 +62,21 @@
     ['4', 'Đi sớm, chọn được căn đẹp', 'Căn nhìn thẳng biển, tầng cao, hướng đón bình minh có số lượng giới hạn theo mặt bằng. Người trong danh sách ưu tiên nhận bảng giá, mặt bằng trước ngày ra mắt (dự kiến 11/2026) để so sánh, chọn căn kỹ.'],
     ['5', 'Kết nối trong 30 phút', 'Sân bay 10–15 phút, phố An Thượng và Ngũ Hành Sơn 5–10 phút, cầu Rồng khoảng 15 phút, phố cổ Hội An khoảng 30 phút – tiện cho cả gia đình lẫn khách thuê.']
   ];
+  var IMG = 'https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/4a26b749ab512b23f43f25a3fc4cac507e5850ca/projects/hai-minh-da-nang/landing/';
+  function pic(src, alt, cap) { return '<figure class="hx-fig"><img src="' + IMG + src + '" alt="' + alt + '" loading="lazy" width="600" height="400"><figcaption>' + cap + '</figcaption></figure>'; }
+  function bars(rows, unit) { var mx = Math.max.apply(null, rows.map(function (r) { return r[1]; }));
+    return '<div class="hx-bars">' + rows.map(function (r) { return '<div class="hx-br"><span>' + r[0] + '</span><div><i style="width:' + Math.round(r[1] / mx * 100) + '%"></i></div><em>' + r[2] + '</em></div>'; }).join('') + (unit ? '<small>' + unit + '</small>' : '') + '</div>'; }
+  var VIS = [
+    pic('images/so-do-vi-tri-hai-minh-rong-v4.webp', 'Sơ đồ vị trí Hải Minh, phía trước là công viên biển Trường Sa', 'Sơ đồ vị trí – không theo tỷ lệ'),
+    bars([['Khách lưu trú', 16.5, '16,5 tr lượt · +18,9%'], ['Khách quốc tế', 7, '~7 tr lượt · +26,5%']], '11 tháng 2025 – Cục Thống kê TP Đà Nẵng'),
+    pic('illus/phong-ngu-view-bien.webp', 'Tranh minh họa bữa sáng bên cửa kính nhìn ra biển', 'Tranh minh họa, không phải ảnh căn hộ thật'),
+    pic('illus/binh-minh-phong-khach.webp', 'Tranh minh họa phòng khách đón bình minh trên biển', 'Tranh minh họa, không phải ảnh căn hộ thật'),
+    bars([['An Thượng', 8, '5–10 phút'], ['Ngũ Hành Sơn', 8, '5–10 phút'], ['Sân bay', 13, '10–15 phút'], ['Cầu Rồng', 15, '~15 phút'], ['Hội An', 30, '~30 phút'], ['Mikazuki', 35, '~35 phút'], ['Bà Nà Hills', 45, '~45 phút'], ['Huế', 120, '~2 giờ']], 'Ước tính bằng ô tô, tùy giờ cao điểm')
+  ];
   function anHtml() {
     return '<div class="hx-k">Phân tích trước khi xuống tiền</div>'
       + '<h2>Vì sao căn mặt biển Hải Minh đáng cân nhắc ngay từ bây giờ?</h2>'
-      + '<div class="hx-an">' + AN.map(function (a) { return '<div class="hx-ai"><i>' + a[0] + '</i><div><b>' + a[1] + '</b><span>' + a[2] + '</span></div></div>'; }).join('') + '</div>'
+      + '<div class="hx-an">' + AN.map(function (a, k) { return '<div class="hx-ai"><i>' + a[0] + '</i><div class="hx-at"><b>' + a[1] + '</b><span>' + a[2] + '</span></div><div class="hx-av">' + VIS[k] + '</div></div>'; }).join('') + '</div>'
       + '<div class="hx-chk"><b>Minh bạch – những điều anh/chị nên xem kỹ</b>'
       + '<span>• Đất thương mại dịch vụ, thời hạn 50 năm (17/9/2026 – 16/9/2076); loại hình căn hộ du lịch, không phải chung cư ở lâu dài.</span>'
       + '<span>• Giá, chính sách thanh toán, đơn vị vận hành, tỷ lệ chia doanh thu: chủ đầu tư công bố khi ra mắt – đọc kỹ hợp đồng mẫu trước khi quyết định.</span>'
@@ -131,7 +146,7 @@
     ['🚆', 'Giao thông đồng bộ', 'Ga đường sắt Bắc – Nam, cảng Tiên Sa đón tàu du lịch quốc tế, cao tốc kết nối. Đường sắt tốc độ cao Bắc – Nam và đường sắt đô thị đang theo quy hoạch, tiến độ theo Nhà nước.'],
     ['🤝', 'Bình yên, thân thiện', 'Thành phố sạch, trật tự, người dân hiền hòa, mến khách – điều du khách trong và ngoài nước thường nhắc tới khi quay lại Đà Nẵng.'],
     ['🏖️', 'Biển cát mịn, bờ thoải', 'Mỹ Khê – Non Nước có bãi cát trắng mịn, bờ thoải, mùa hè sóng êm; phía sau là sông Hàn, bán đảo Sơn Trà và Ngũ Hành Sơn.'],
-    ['🗺️', 'Đi chơi không hết', 'Bà Nà, Sơn Trà, Ngũ Hành Sơn, Hội An, Mỹ Sơn, Cù Lao Chàm, lễ hội pháo hoa quốc tế… phù hợp nghỉ dài ngày, nhiều lần quay lại.'],
+    ['🗺️', 'Đi chơi không hết', 'Bà Nà Hills, công viên nước & onsen Mikazuki, Suối Lương – đèo Hải Vân, bán đảo Sơn Trà, Ngũ Hành Sơn, phố cổ Hội An, Mỹ Sơn, Cù Lao Chàm, lễ hội pháo hoa quốc tế; đi tiếp cố đô Huế khoảng 2 giờ. Ở dài ngày vẫn còn chỗ để đi.'],
     ['💰', 'Chi phí sinh hoạt hợp lý', 'Ăn uống, đi lại, dịch vụ ở mức dễ chịu, giá niêm yết rõ ràng – thuận cho khách lưu trú dài ngày và người làm việc từ xa.'],
     ['📈', 'Khách du lịch tăng đều', '11 tháng 2025: 16,5 triệu lượt khách lưu trú (+18,9%), khách quốc tế khoảng 7 triệu (+26,5%) – Cục Thống kê TP Đà Nẵng.'],
     ['🏦', 'Động lực mới', 'Khu thương mại tự do Đà Nẵng (QĐ 1142/QĐ-TTg, 6/2025) và Trung tâm tài chính quốc tế (NQ 222/2025/QH15) mở thêm dòng khách công tác, chuyên gia.']
