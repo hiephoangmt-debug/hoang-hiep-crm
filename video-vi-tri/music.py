@@ -9,8 +9,8 @@ N = int(SR * DUR)
 t = np.arange(N) / SR
 rng = np.random.default_rng(3)
 FPS = 30
-CUTS = [150, 470, 780, 1140]      # khung hình chuyển cảnh
-END = 1590                        # cảnh kết
+CUTS = [150, 470, 780, 1140, 1500]      # khung hình chuyển cảnh
+END = 1650                        # cảnh kết
 IMPACTS = [24, END]
 
 def note(n):  # MIDI -> Hz

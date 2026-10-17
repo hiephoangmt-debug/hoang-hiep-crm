@@ -70,11 +70,12 @@
   // ---------- Dự án: tự chia lô minh họa theo ranh giới ----------
   const projPoly = turf.polygon([C.project.polygon.concat([C.project.polygon[0]])]);
   const projCenter = C.project.center || turf.centroid(projPoly).geometry.coordinates;
-  const lots = buildLots(projPoly, C.project.gridBearing, C.project.grid);
+  const lots = C.project.tower ? buildTower(projPoly, C.project.tower) : buildLots(projPoly, C.project.gridBearing, C.project.grid);
   map.addSource('proj', { type: 'geojson', data: projPoly });
   map.addSource('lots', { type: 'geojson', data: lots });
   map.addLayer({ id: 'proj-fill', type: 'fill', source: 'proj', paint: { 'fill-color': P.navy800, 'fill-opacity': 0 } });
-  map.addLayer({ id: 'lots-flat', type: 'fill', source: 'lots', paint: { 'fill-color': ['get', 'col'], 'fill-opacity': 0 } });
+  if (C.project.tower) map.addLayer({ id: 'lots-flat', type: 'fill', source: 'proj', paint: { 'fill-color': P.orange, 'fill-opacity': 0 } });
+  else map.addLayer({ id: 'lots-flat', type: 'fill', source: 'lots', paint: { 'fill-color': ['get', 'col'], 'fill-opacity': 0 } });
   map.addLayer({ id: 'proj-glow', type: 'line', source: 'proj', paint: { 'line-color': P.orange, 'line-width': 30, 'line-blur': 22, 'line-opacity': 0 } });
   map.addLayer({ id: 'proj-line', type: 'line', source: 'proj', layout: { 'line-join': 'round' }, paint: { 'line-color': '#FFFFFF', 'line-width': 4, 'line-opacity': 0, 'line-dasharray': [3, 1.5] } });
 
@@ -103,7 +104,7 @@
     paint: { 'fill-extrusion-color': ['interpolate', ['linear'], ['get', 'h'], 6, P.bldLow, 40, P.bldHigh],
       'fill-extrusion-height': ['get', 'h'], 'fill-extrusion-opacity': .92, 'fill-extrusion-vertical-gradient': true } });
   map.addLayer({ id: 'lots-3d', type: 'fill-extrusion', source: 'lots',
-    paint: { 'fill-extrusion-color': ['get', 'col'], 'fill-extrusion-height': 0, 'fill-extrusion-opacity': .95, 'fill-extrusion-vertical-gradient': true } });
+    paint: { 'fill-extrusion-color': ['get', 'col'], 'fill-extrusion-height': 0, 'fill-extrusion-base': 0, 'fill-extrusion-opacity': .95, 'fill-extrusion-vertical-gradient': true } });
 
   // ---------- Chữ nằm trên mặt đất ----------
   await document.fonts.load('900 100px "Be Vietnam Pro"', 'ĐƯỜNG BIỂN SƠN THỦY Ấậờ');
@@ -144,6 +145,10 @@
       e._el = el(`<div class="n">${e.n}</div><div class="l">${e.text}<span>${e.sub || ''}</span></div>`, 'chip');
     } else if (e.type === 'route' && e.plane) {
       e._plane = el(`<svg viewBox="0 0 24 24" width="86" height="86">${ICONS.plane}</svg>`); e._plane.id = 'plane';
+    } else if (e.type === 'photo') {
+      const d = document.createElement('div'); d.className = 'photo';
+      d.innerHTML = `<div class="img" style="background-image:url('${e.src}')"></div><div class="shade"></div><div class="cap"><div class="kicker">${e.kicker || ''}</div><div class="pname">${e.title || ''}</div><div class="rule"></div></div>`;
+      d.style.opacity = 0; document.getElementById('stage').appendChild(d); e._el = d;
     } else if (e.type === 'end') {
       const d = document.createElement('div'); d.id = 'end'; d.innerHTML = e.html; document.getElementById('stage').appendChild(d); e._el = d;
     }
@@ -198,6 +203,7 @@
         setP('lots-flat', 'fill-opacity', +(o * lotsIn * (1 - rise) * .95).toFixed(3));
         setP('lots-3d', 'fill-extrusion-opacity', +(Math.max(.001, o * rise * .95)).toFixed(3));
         setP('lots-3d', 'fill-extrusion-height', ['*', ['get', 'h'], +rise.toFixed(3)]);
+        setP('lots-3d', 'fill-extrusion-base', ['*', ['coalesce', ['get', 'b'], 0], +rise.toFixed(3)]);
       } else if (e.type === 'area') {
         const o = vis(f, e.in, e.out, 20, 16), pulse = .7 + .3 * Math.sin(f / 7);
         setP('hoian-fill', 'fill-opacity', +(o * .16).toFixed(3));
@@ -251,7 +257,7 @@
         if (o <= 0) continue;
         const pt = map.project(e.at), t = clamp((f - e.in) / 24);
         const drop = (1 - E.back(t)) * -160, bob = Math.sin(f / 10) * 6 * t;
-        e._el.style.transform = `translate(${pt.x}px, ${pt.y}px)`;
+        e._el.style.transform = `translate(${pt.x}px, ${(pt.y - (e.lift || 0)).toFixed(1)}px)`;
         e._el.children[1].style.transform = `translate(-50%, calc(-100% + ${(drop + bob).toFixed(1)}px))`;
         const ring = e._el.children[0], rp = ((f - e.in) % 40) / 40;
         ring.style.transform = `scale(${(1 + rp * 2.4).toFixed(3)})`; ring.style.opacity = (1 - rp).toFixed(3);
@@ -278,6 +284,15 @@
         const pa = map.project(a), pb = map.project(b);
         const ang = Math.atan2(pa.y - pb.y, pa.x - pb.x) * 180 / Math.PI + 90;
         e._plane.style.transform = `translate(${pa.x}px, ${pa.y}px) rotate(${ang.toFixed(1)}deg)`;
+      } else if (e.type === 'photo') {
+        const o = vis(f, e.in, e.out, 20, 16);
+        e._el.style.opacity = o.toFixed(3);
+        if (o <= 0) continue;
+        const t = clamp((f - e.in) / ((e.out ?? e.in + 150) - e.in));
+        e._el.children[0].style.transform = `scale(${(1.12 - .1 * E.out(t)).toFixed(4)}) translateY(${(-20 * t).toFixed(1)}px)`;
+        const cap = e._el.children[2], ct = E.outQuint(clamp((f - e.in - 14) / 26));
+        cap.style.opacity = ct; cap.style.transform = `translateY(${((1 - ct) * 40).toFixed(1)}px)`;
+        cap.querySelector('.rule').style.transform = `scaleX(${E.outQuint(clamp((f - e.in - 24) / 24)).toFixed(3)})`;
       } else if (e.type === 'end') {
         const o = clamp((f - e.in) / 18);
         e._el.style.opacity = o;
@@ -359,6 +374,27 @@
   function partial(r, p) {
     if (p <= 0.001) return turf.lineString([r.from, r.from]);
     return turf.lineSliceAlong(r._line, 0, Math.max(0.0005, r._len * p));
+  }
+
+  // Tòa tháp minh họa: khối đế + thân tháp có các vạch sàn trắng
+  function buildTower(poly, t) {
+    const feats = [];
+    const podium = turf.buffer(poly, -(t.podiumInset ?? 4), { units: 'meters' });
+    if (podium) { podium.properties = { col: P.lotC, h: t.podiumH ?? 16, b: 0 }; feats.push(podium); }
+    const body = turf.buffer(poly, -(t.towerInset ?? 14), { units: 'meters' });
+    const fh = t.floorH ?? 3.4, base = t.podiumH ?? 16;
+    // mỗi tầng: dải kính + viền sàn màu cam đồng (giống phối cảnh)
+    for (let i = 0; i < (t.floors ?? 26); i++) {
+      const b0 = base + i * fh;
+      feats.push({ ...body, properties: { col: t.glass || '#2E5F96', b: b0, h: b0 + fh - .8 } });
+      feats.push({ ...body, properties: { col: i % 6 === 5 ? '#FFFFFF' : P.orange, b: b0 + fh - .8, h: b0 + fh } });
+    }
+    const top = base + (t.floors ?? 26) * fh;
+    const roof = turf.buffer(poly, -((t.towerInset ?? 14) - 1.5), { units: 'meters' });
+    if (roof) { roof.properties = { col: P.orange300, b: top, h: top + 2.5 }; feats.push(roof); }
+    const crown = turf.buffer(poly, -((t.towerInset ?? 14) + 6), { units: 'meters' });
+    if (crown) { crown.properties = { col: '#C9D7EE', b: top + 2.5, h: top + 9 }; feats.push(crown); }
+    return turf.featureCollection(feats);
   }
 
   function buildLots(poly, bearing, g) {
