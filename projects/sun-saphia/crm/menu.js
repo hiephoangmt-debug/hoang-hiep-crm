@@ -2,17 +2,12 @@
 (function () {
   if (window.__ssMenu) return; window.__ssMenu = 1;
   var ITEMS = [
-    ['🏢', 'Tổng quan dự án', /thông tin tổng quan|tòa tháp 30 tầng mặt biển khu saphia/i],
-    ['📍', 'Vị trí & kết nối', /vị trí sun saphia|4 điểm đáng chú ý/i],
-    ['🌳', 'Công viên – bãi tắm', /chuỗi công viên|dải công viên/i],
-    ['🏙️', 'Kiến trúc · 3D · 4D · 5D', /kiến trúc, phối cảnh|mô hình 3d/i],
-    ['📐', 'Mặt bằng · loại căn', /mặt bằng và các loại căn|chọn loại căn/i],
-    ['🧮', 'Căn nào hợp? · Dòng tiền', /thử nhanh: căn nào hợp/i],
-    ['💰', 'Giá bán', /giá bán sun saphia/i],
-    ['🗓️', 'Tiến độ · pháp lý', /tiến độ, pháp lý|vào danh sách quan tâm trước ngày/i],
-    ['🚆', 'Hạ tầng Đà Nẵng', /hạ tầng và đà phát triển/i],
-    ['❓', 'Hỏi đáp', /câu hỏi thường gặp/i],
-    ['📩', 'Nhận bảng giá', /có bảng giá là anh\/chị nhận ngay|nhận bảng giá chính thức trước khi mở bán/i]
+    ['🏢', 'Tổng quan', /thông tin tổng quan|tòa tháp 30 tầng mặt biển khu saphia/i],
+    ['📍', 'Vị trí', /vị trí sun saphia|4 điểm đáng chú ý/i],
+    ['🌳', 'Tiện ích', /chuỗi công viên|dải công viên|công viên – bãi tắm/i],
+    ['📐', 'Mặt bằng', /mặt bằng và các loại căn|chọn loại căn/i],
+    ['📜', 'Chính sách', /tiến độ, pháp lý và chính sách|vào danh sách quan tâm trước ngày|giá bán sun saphia/i],
+    ['🧊', '4D căn hộ', '#ss4d', /xoay 3d, xem nắng|kiến trúc, phối cảnh|mô hình 3d/i]
   ];
   var CSS = ''
     + '#ssm-btn{position:fixed;top:9px;right:12px;z-index:100000;width:44px;height:40px;border-radius:11px;border:1.5px solid rgba(255,197,154,.8);background:linear-gradient(145deg,#FF9A3D,#FF6A2B 55%,#E8460F);box-shadow:0 4px 14px rgba(255,106,43,.45);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0}'
@@ -39,6 +34,7 @@
     for (var i = 0; i < hs.length; i++) { var t = (hs[i].textContent || '').trim(); if (t.length < 160 && re.test(t)) { last = last || hs[i]; } }
     return last;
   }
+  function target(it) { if (typeof it[2] === 'string') { var e = document.querySelector(it[2]); return e || find(it[3]); } return find(it[2]); }
   function go(el) {
     var y = el.getBoundingClientRect().top + window.pageYOffset - 70;
     try { window.scrollTo({ top: y, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, y); }
@@ -50,7 +46,7 @@
     var ov = document.createElement('div'); ov.id = 'ssm-ov';
     var pn = document.createElement('nav'); pn.id = 'ssm-pn'; pn.setAttribute('aria-label', 'Danh mục trang');
     var lis = '';
-    ITEMS.forEach(function (it, i) { if (find(it[2])) lis += '<li><a href="#" data-i="' + i + '"><span>' + it[0] + '</span>' + it[1] + '</a></li>'; });
+    ITEMS.forEach(function (it, i) { if (target(it)) lis += '<li><a href="#" data-i="' + i + '"><span>' + it[0] + '</span>' + it[1] + '</a></li>'; });
     pn.innerHTML = '<div class="h"><small>Sun Saphia Residence</small><b>Xem nhanh</b></div><ul>' + lis + '</ul>'
       + '<div class="f"><a class="z" href="https://zalo.me/0904567009" target="_blank" rel="noopener">Zalo</a><a class="c" href="tel:0904567009">📞 0904 567 009</a></div>';
     document.body.appendChild(ov); document.body.appendChild(pn); document.body.appendChild(btn);
@@ -58,10 +54,10 @@
     btn.onclick = function () { open(!pn.classList.contains('on')); };
     ov.onclick = function () { open(false); };
     pn.querySelectorAll('ul a').forEach(function (a) {
-      a.onclick = function (e) { e.preventDefault(); var el = find(ITEMS[+a.getAttribute('data-i')][2]); open(false); if (el) setTimeout(function () { go(el); }, 250); };
+      a.onclick = function (e) { e.preventDefault(); var el = target(ITEMS[+a.getAttribute('data-i')]); open(false); if (el) setTimeout(function () { go(el); }, 250); };
     });
   }
   // chờ các khối chèn thêm (trắc nghiệm…) xuất hiện rồi mới dựng danh mục
-  function start() { setTimeout(build, 1200); }
+  function start() { setTimeout(build, 2500); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();
