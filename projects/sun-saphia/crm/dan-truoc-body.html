@@ -1,0 +1,312 @@
+<!-- ============================================================
+  SUN SAPHIA RESIDENCE – NÚT ZALO / GỌI / CHAT TƯ VẤN THEO ĐOẠN ĐANG ĐỌC
+  Dán TOÀN BỘ đoạn này vào LadiPage: Thiết lập > Mã tùy chỉnh > "Trước </body>"
+  (xóa đoạn mã chat cũ trước khi dán). Chỉ chạy trên trang đã Xuất bản.
+  - Khách dừng đọc một đoạn ~12 giây → hiện câu hỏi đúng chủ đề đoạn đó.
+  - Khách gõ số điện thoại trong chat → gửi về CRM Hoàng Hiệp (+ Telegram).
+  - Bấm Zalo / Gọi (kể cả nút LadiPage) → CRM ghi lượt bấm.
+============================================================= -->
+<!-- Mã CRM Hoàng Hiệp (tự thêm nếu trang chưa có) + bắt form LadiPage -->
+<script>
+(function(){
+  var CRM='https://script.google.com/macros/s/AKfycbyChbG-uvItjVlRk7JgLrwpUS6Cgah4nIA6BWHuEwgbXBqSlvAPJNSdZdp6pQ91d_rN/exec';
+  window.HM_CRM={url:CRM,key:'qgK6I9KWTqfS',project:'saphia'};
+  window.HM_JSONP=function(params,cb,ms){
+    var name='hmcb'+Date.now()+Math.floor(Math.random()*1e4), done=false, sc=document.createElement('script');
+    function end(r){ if(done) return; done=true; try{delete window[name];}catch(e){window[name]=undefined;} if(sc.parentNode) sc.parentNode.removeChild(sc); cb(r); }
+    window[name]=function(r){end(r||{});};
+    var q=['cb='+name,'key=qgK6I9KWTqfS']; for(var k in params) if(params[k]!=null) q.push(k+'='+encodeURIComponent(params[k]));
+    sc.src=CRM+'?'+q.join('&'); sc.onerror=function(){end({error:'không gọi được CRM'});};
+    setTimeout(function(){end({error:'quá thời gian'});},ms||15000);
+    document.head.appendChild(sc);
+  };
+  if(!document.querySelector('script[src*="AKfycbyChbG-uvItjVlRk7"]')){
+    var s=document.createElement('script'); s.src=CRM+'?js=1'; s.async=true; s.setAttribute('data-key','qgK6I9KWTqfS'); document.head.appendChild(s);
+  }
+  // Dự phòng: nếu mã theo dõi CRM (?js=1) tải chậm hoặc bị chặn, vẫn gửi khách về CRM qua JSONP
+  function fallback(){ if(window.crmLead) return;
+    window.crmLead=function(d){ d=d||{}; var vid=''; try{vid=localStorage.getItem('hm_vid')||'';}catch(e){}
+      window.HM_JSONP({action:'lead',name:d.name||'',phone:d.phone||'',message:d.message||'',source:d.source||'',vid:vid,url:location.href,ref:document.referrer},function(){},20000); };
+    window.crmLead.fallback=true; }
+  setTimeout(fallback,6000);
+  function grab(f){
+    var d={}; f.querySelectorAll('input,select,textarea').forEach(function(i){
+      var n=((i.name||'')+' '+(i.getAttribute('placeholder')||'')).toLowerCase(), v=(i.value||'').trim(); if(!v) return;
+      if(!d.phone&&(i.type==='tel'||/phone|sdt|sđt|điện thoại|09xx/.test(n))) d.phone=v;
+      else if(!d.name&&/name|tên|họ|nguyễn văn/.test(n)) d.name=v;
+      else if(i.tagName==='SELECT'||i.tagName==='TEXTAREA'||/nhu_cau|ngan_sach|loai_can|cau_hoi|chu_de|câu hỏi/.test(n)) d.message=(d.message?d.message+' · ':'')+(i.name?i.name+': ':'')+v;
+    });
+    var dg=(d.phone||'').replace(/\D/g,''); if(dg.length<9||dg.length>12) return;
+    d.message='[Sun Saphia] '+(d.message?d.message+' · ':'')+'Form LadiPage';
+    var tries=0;(function go(){ if(window.crmLead){window.crmLead(d);} else if(tries++<20) setTimeout(go,300); })();
+  }
+  document.addEventListener('click',function(e){
+    var f=e.target.closest&&e.target.closest('.ladi-form, form'); if(!f||f.id==='hmwForm') return;
+    var btn=e.target.closest('.ladi-button, button, [type=submit], [id^="BUTTON"]'); if(!btn) return;
+    setTimeout(function(){grab(f);},150);
+  },true);
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Enter') return; var f=e.target.closest&&e.target.closest('.ladi-form'); if(f) setTimeout(function(){grab(f);},150);
+  },true);
+})();
+</script>
+
+<style>
+#hmw{--n:#0A2540;--o:#FF5A1F;--o2:#FF8A00;font-family:"Be Vietnam Pro",Arial,sans-serif}
+#hmw *{box-sizing:border-box}
+#hmw .hmw-dock{position:fixed;right:18px;bottom:22px;z-index:99990;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+#hmw .hmw-btn{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;border:0;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.28);position:relative;font-family:inherit}
+#hmw .hmw-btn svg{width:27px;height:27px;fill:#fff}
+#hmw .hmw-zalo{background:#0068FF;font-weight:800;font-size:14px}
+#hmw .hmw-call{background:linear-gradient(135deg,var(--o),var(--o2));animation:hmwring 2.4s infinite}
+#hmw .hmw-chat{background:var(--n)}
+#hmw .hmw-badge{position:absolute;top:-2px;right:-2px;width:18px;height:18px;border-radius:50%;background:var(--o);color:#fff;font-size:11px;font-weight:800;display:none;align-items:center;justify-content:center;border:2px solid #fff}
+@keyframes hmwring{0%,100%{transform:rotate(0)}4%,12%{transform:rotate(-12deg)}8%,16%{transform:rotate(12deg)}20%{transform:rotate(0)}}
+#hmw .hmw-panel{position:fixed;right:88px;bottom:22px;z-index:99991;width:360px;max-width:calc(100vw - 24px);height:540px;max-height:calc(100vh - 44px);background:#fff;border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.3);display:none;flex-direction:column;overflow:hidden}
+#hmw .hmw-panel.open{display:flex}
+#hmw .hmw-head{background:var(--n);color:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px}
+#hmw .hmw-ava{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--o),var(--o2));display:flex;align-items:center;justify-content:center;font-weight:800}
+#hmw .hmw-head b{display:block;font-size:15px}
+#hmw .hmw-head small{color:#B9C7D6;font-size:12px}
+#hmw .hmw-x{margin-left:auto;background:none;border:0;color:#fff;font-size:24px;cursor:pointer;line-height:1}
+#hmw .hmw-body{flex:1;overflow-y:auto;padding:14px;background:#F6F1E9}
+#hmw .hmw-msg{max-width:86%;padding:10px 12px;border-radius:12px;margin:0 0 10px;font-size:14px;line-height:1.5;white-space:pre-line}
+#hmw .hmw-bot{background:#fff;color:#1B2A3A;border:1px solid #E7DCCB;border-bottom-left-radius:4px}
+#hmw .hmw-me{background:var(--n);color:#fff;margin-left:auto;border-bottom-right-radius:4px}
+#hmw .hmw-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+#hmw .hmw-chip{background:#fff;border:1.5px solid var(--n);color:var(--n);font-size:13px;font-weight:600;padding:6px 11px;border-radius:16px;cursor:pointer;font-family:inherit}
+#hmw .hmw-acts{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 10px}
+#hmw .hmw-acts a{font-size:13px;font-weight:700;text-decoration:none;padding:8px 12px;border-radius:8px;color:#fff;background:var(--n)}
+#hmw .hmw-acts a.o{background:linear-gradient(90deg,var(--o),var(--o2))}
+#hmw .hmw-foot{display:flex;gap:8px;padding:10px;border-top:1px solid #E7DCCB;background:#fff}
+#hmw .hmw-foot input{flex:1;border:1px solid #C9D3E0;border-radius:20px;padding:10px 14px;font-size:16px;font-family:inherit;outline:none}
+#hmw .hmw-foot button{background:linear-gradient(90deg,var(--o),var(--o2));color:#fff;border:0;border-radius:20px;padding:0 16px;font-weight:700;cursor:pointer;font-family:inherit}
+#hmw .hmw-bubble{position:fixed;right:86px;bottom:26px;z-index:99990;width:270px;background:#fff;color:#0A2540;font-size:14px;line-height:1.45;padding:12px 30px 12px 14px;border-radius:14px;border-left:4px solid var(--o);box-shadow:0 10px 28px rgba(0,0,0,.24);display:none;cursor:pointer;animation:hmwin .35s ease}
+#hmw .hmw-bubble .x{position:absolute;top:4px;right:8px;color:#999;font-size:18px;padding:2px 4px}
+#hmw .hmw-bubble .go{display:block;margin-top:8px;font-weight:800;color:var(--o)}
+@keyframes hmwin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (max-width:600px){
+  #hmw .hmw-dock{right:12px;bottom:84px;gap:10px}
+  #hmw .hmw-btn{width:50px;height:50px}
+  #hmw .hmw-bubble{right:72px;left:12px;width:auto;bottom:90px;font-size:13.5px}
+  #hmw .hmw-panel{right:10px;left:10px;width:auto;bottom:80px;height:72vh}
+}
+</style>
+
+<div id="hmw">
+  <div class="hmw-panel" id="hmwPanel" role="dialog" aria-label="Tư vấn Sun Saphia Residence">
+    <div class="hmw-head">
+      <div class="hmw-ava">HM</div>
+      <div><b>Tư vấn Sun Saphia Residence</b><small>Chuyên viên Hoàng Hiệp · Zalo 0904 567 009</small></div>
+      <button class="hmw-x" id="hmwClose" aria-label="Đóng">×</button>
+    </div>
+    <div class="hmw-body" id="hmwBody"></div>
+    <form class="hmw-foot" id="hmwForm">
+      <input id="hmwInput" type="text" placeholder="Nhập câu hỏi hoặc số Zalo..." autocomplete="off" aria-label="Nhập tin nhắn">
+      <button type="submit">Gửi</button>
+    </form>
+  </div>
+  <div class="hmw-bubble" id="hmwBubble" role="button"><span class="x" id="hmwBubbleX" aria-label="Đóng">×</span><span id="hmwBubbleText"></span><span class="go">Trả lời →</span></div>
+  <div class="hmw-dock">
+    <a class="hmw-btn hmw-zalo" href="https://zalo.me/0904567009" target="_blank" rel="noopener" aria-label="Chat Zalo"><svg viewBox="0 0 24 24" style="width:30px;height:30px"><path fill="#fff" d="M12 3C6.5 3 2 6.7 2 11.3c0 2.6 1.4 4.9 3.7 6.4L5 21l3.6-1.9c1.1.3 2.2.5 3.4.5 5.5 0 10-3.7 10-8.3S17.5 3 12 3z"/><path fill="#0068FF" d="M8 8.6h5.4v1.2l-3.6 4.2h3.7v1.4H7.8v-1.2l3.6-4.2H8z"/><path fill="#0068FF" d="M14.6 9.8h1.3v5.6h-1.3z"/></svg></a>
+    <a class="hmw-btn hmw-call" href="tel:0904567009" aria-label="Gọi 0904 567 009"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></a>
+    <button class="hmw-btn hmw-chat" id="hmwOpen" aria-label="Mở chat tư vấn"><span class="hmw-badge" id="hmwBadge">1</span><svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2zm3 6v2h2v-2H7zm4 0v2h2v-2h-2zm4 0v2h2v-2h-2z"/></svg></button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var TEL='tel:0904567009', ZALO='https://zalo.me/0904567009';
+  function norm(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d');}
+
+  /* ---------- Kiến thức trả lời (không hứa lợi nhuận, không "sở hữu lâu dài") ---------- */
+  var KB=[
+    {k:['bang gia','gia ban','bao nhieu tien','gia','nhan ho so','ho so du an'],a:'Giá bán chủ đầu tư công bố khi mở bán (dự kiến cuối tháng 11/2026), chênh theo tầng, hướng và view biển.\nAnh/chị để lại số Zalo, em gửi bảng giá và chính sách ngay khi có ạ.',lead:1},
+    {k:['ra mat','mo ban','khi nao','bao gio','su kien'],a:'Sun Saphia Residence dự kiến mở bán cuối tháng 11/2026 (theo kế hoạch của chủ đầu tư, có thể thay đổi). Anh/chị đăng ký sớm để nhận thông tin đợt đầu.',lead:1},
+    {k:['ban giao','khi nao xong','hoan thien','noi that'],a:'Dự kiến bàn giao tháng 11/2028 theo tài liệu giới thiệu dự án. Tiêu chuẩn bàn giao chủ đầu tư công bố khi mở bán.',lead:1},
+    {k:['chu dau tu','cdt','cong ty','sun','phat trien'],a:'Theo tài liệu giới thiệu, dự án do Sun Property phát triển. Hồ sơ pháp lý và đơn vị chủ đầu tư chính thức em gửi anh/chị khi mở bán ạ.',lead:1},
+    {k:['quy mo','bao nhieu tang','so can','tong so','dien tich dat'],a:'Quy mô: khu đất 3.720,1 m², 1 tòa 30 tầng (~114 m), 2 tầng hầm, tổng 782 căn.'},
+    {k:['studio','1pn','2pn','loai can','dien tich','mat bang','phong ngu','co cau'],a:'Cơ cấu căn:\n• Studio 30–31 m² (513 căn)\n• 1PN+1 50–51 m² (108 căn)\n• 2PN 60–70 m² (149 căn)\nAnh/chị để lại số Zalo, em gửi mặt bằng chi tiết ạ.',lead:1},
+    {k:['cach bien','bao xa','di bo','vi tri','o dau','dia chi'],a:'Dự án ở khu Saphia, phường Ngũ Hành Sơn, trên trục biển Võ Nguyên Giáp – Trường Sa, cạnh bãi tắm Sơn Thủy; phía trước là công viên biển Trường Sa theo quy hoạch.',lead:1},
+    {k:['phia truoc','truoc mat','cong vien','bi che','chan view','bai tam'],a:'Quanh dự án có chuỗi công viên – bãi tắm công cộng: bãi tắm Sơn Thủy (dự án công viên, CLB thể thao biển và bãi tắm đã được phê duyệt phương án khảo sát 3/2025), công viên biển Trường Sa ~2,45 ha (2025–2027) và công viên cuối đường Huyền Trân Công Chúa theo quy hoạch.'},
+    {k:['trung tam','cau rong','san bay','xa khong','bao lau','hoi an','ba na'],a:'Từ dự án: sân bay 10–15 phút, cầu Rồng – trung tâm ~15 phút, Ngũ Hành Sơn – An Thượng 5–10 phút, Hội An ~30 phút, Bà Nà ~45 phút (ước tính bằng ô tô).'},
+    {k:['xem vi tri','lich xem','tham quan','dat lich','xem thuc te','video'],a:'Em hẹn anh/chị xem khu đất và bãi tắm Sơn Thủy trực tiếp, hoặc gửi ảnh/video thực địa qua Zalo nếu anh/chị ở xa ạ.',lead:1},
+    {k:['phap ly','so hong','so','giay chung nhan','lau dai','thoi han','50 nam'],a:'Loại hình, thời hạn và giấy tờ pháp lý theo hồ sơ chính thức của chủ đầu tư. Em gửi bản đầy đủ khi mở bán để anh/chị đọc kỹ ạ.',lead:1},
+    {k:['vay','ngan hang','lai suat','tra gop','thanh toan','ho tro'],a:'Ngân hàng hỗ trợ, tỷ lệ cho vay, lịch thanh toán và hỗ trợ lãi suất (nếu có) nằm trong chính sách bán hàng khi mở bán. Em gửi phương án theo đúng căn và số vốn của anh/chị ạ.',lead:1},
+    {k:['cho thue','dong tien','loi nhuan','dau tu','khai thac'],a:'Căn studio, 1PN+1 hợp cho thuê du lịch ngắn ngày. Giá phòng ven biển trục Võ Nguyên Giáp phổ biến khoảng 1–3 triệu/đêm; thu nhập thực tế tùy công suất, chi phí – chỉ là ví dụ minh họa, không phải cam kết.',lead:1},
+    {k:['tien ich','ho boi','be boi','gym','nha hang','spa'],a:'Danh mục tiện ích nội khu chủ đầu tư công bố khi mở bán. Quanh dự án có biển, bãi tắm Sơn Thủy, công viên biển, chuỗi resort và phố An Thượng.',lead:1},
+    {k:['coc','giu cho','dat truoc','phi'],a:'Hiện chưa mở bán, em không thu tiền giữ chỗ hay đặt cọc. Đăng ký nhận thông tin hoàn toàn miễn phí ạ.'}
+  ];
+
+  /* ---------- Chủ đề theo đoạn khách đang đọc ---------- */
+  var TOPICS=[
+    {id:'tong-quan',m:/thong tin tong quan|782 can|30 tang/,q:'Anh/chị đang xem thông số dự án 👀 Em gửi mặt bằng và cơ cấu căn chi tiết qua Zalo nhé?',c:['Nhận mặt bằng','Studio','1PN+1','2PN']},
+    {id:'phoi-canh',m:/toa thap ben bai cat|phoi canh/,q:'Anh/chị thích căn view biển trực diện hay view hồ cảnh quan ạ? Em lọc sẵn căn theo hướng.',c:['View biển','Tầng cao','Nhận bảng giá']},
+    {id:'cong-vien',m:/chuoi cong vien|bai tam ngay them nha|son thuy/,q:'Bãi tắm Sơn Thủy và công viên biển ngay cạnh dự án. Anh/chị muốn xem video thực địa hay hẹn xem trực tiếp ạ?',c:['Xem video thực địa','Đặt lịch xem','Phía trước là gì?']},
+    {id:'ket-noi',m:/du gan de ket noi|ket noi/,q:'Anh/chị thường ra Đà Nẵng bằng máy bay hay ô tô ạ? Từ sân bay về dự án chỉ khoảng 10–15 phút.',c:['Cách sân bay bao xa?','Đi Hội An bao lâu?']},
+    {id:'thoi-diem',m:/vi sao nen tim hieu|thoi diem/,q:'Dự kiến mở bán cuối 11/2026. Anh/chị muốn nhận chính sách đợt đầu sớm nhất không ạ?',c:['Nhận chính sách','Có hỗ trợ vay không?','Khi nào mở bán?']},
+    {id:'hoi-dap',m:/cau hoi thuong gap|hoi dap/,q:'Chưa thấy câu hỏi của mình? Anh/chị gõ vào đây, em trả lời ngay ạ.',c:['Giá bán','Pháp lý','Có mất phí không?']}
+  ];
+
+  var $=function(id){return document.getElementById(id)};
+  var body=$('hmwBody'), panel=$('hmwPanel'), badge=$('hmwBadge'), bubble=$('hmwBubble');
+  var started=false, gotPhone=false, curTopic=null, pending=null, askedPhone=0, H=[];
+  function scroll(){body.scrollTop=body.scrollHeight;}
+  function bot(t,d){setTimeout(function(){var e=document.createElement('div');e.className='hmw-msg hmw-bot';e.textContent=t;body.appendChild(e);scroll();},d||350);}
+  function me(t){var e=document.createElement('div');e.className='hmw-msg hmw-me';e.textContent=t;body.appendChild(e);scroll();}
+  function chips(list,d){setTimeout(function(){var w=document.createElement('div');w.className='hmw-chips';list.forEach(function(c){var b=document.createElement('button');b.type='button';b.className='hmw-chip';b.textContent=c;b.onclick=function(){handle(c);};w.appendChild(b);});body.appendChild(w);scroll();},d||500);}
+  function acts(d){setTimeout(function(){var w=document.createElement('div');w.className='hmw-acts';w.innerHTML='<a class="o" href="'+TEL+'">📞 Gọi 0904 567 009</a><a href="'+ZALO+'" target="_blank" rel="noopener">💬 Chat Zalo</a>';body.appendChild(w);scroll();},d||600);}
+  var DEF=['Nhận bảng giá','Khi nào mở bán?','Loại căn','Phía trước là gì?','Cách sân bay bao xa?','Hỗ trợ vay'];
+
+  function start(topic){
+    if(!started){started=true;bot('Chào anh/chị 👋 Em là trợ lý tư vấn Sun Saphia Residence – căn hộ mặt biển 30 tầng khu Saphia, cạnh bãi tắm Sơn Thủy, Đà Nẵng.',80);}
+    if(topic){bot(topic.q,started?400:600);H.push({r:'bot',t:topic.q});chips(topic.c.concat(['Nhận bảng giá']),900);}
+    else if(body.children.length<2){bot('Anh/chị cần tìm hiểu thông tin nào ạ?',500);chips(DEF,800);}
+  }
+  function sendCRM(phone,text){
+    var msg='[Sun Saphia] Chat web'+(curTopic?' – đang đọc: '+curTopic.id:'')+' – '+text;
+    try{ if(window.crmLead) window.crmLead({name:'Khách chat web',phone:phone,message:msg}); }catch(e){}
+    try{ if(window.gtag&&window.HM_TRACK&&!/\[/.test(window.HM_TRACK.form||'[')) gtag('event','conversion',{send_to:window.HM_TRACK.form}); }catch(e){}
+  }
+  function handle(text){
+    text=(text||'').trim(); if(!text) return; me(text); H.push({r:'me',t:text});
+    var digits=text.replace(/\D/g,''); if(/^84\d{9}$/.test(digits)) digits='0'+digits.slice(2);
+    if(/^0\d{8,10}$/.test(digits)){
+      gotPhone=true; sendCRM(digits,text);
+      bot('Cảm ơn anh/chị! Em đã nhận số '+digits+'. Chuyên viên Hoàng Hiệp sẽ nhắn Zalo gửi tài liệu trong ít phút (giờ hành chính).\nCần gấp, anh/chị bấm Gọi hoặc Zalo bên dưới ạ.');
+      acts(); return;
+    }
+    var n=' '+norm(text).replace(/\bko\b|\bk\b|\bkhong\b/g,' khong ').replace(/\bdc\b|\bdk\b/g,' duoc ')+' ', hit=null, best=0;
+    KB.forEach(function(it){var s=0;it.k.forEach(function(k){if(n.indexOf(norm(k))>-1)s+=k.length;});if(s>best){best=s;hit=it;}});
+    if(hit&&best>=5){
+      bot(hit.a); H.push({r:'bot',t:hit.a});
+      if(hit.lead&&!gotPhone&&!askedPhone){askedPhone=1;bot('👉 Anh/chị để lại số Zalo, em gửi tài liệu riêng cho mình nhé.',1000);}
+      return;
+    }
+    ai(text);
+  }
+  function typing(){var e=document.createElement('div');e.className='hmw-msg hmw-bot';e.textContent='Em đang trả lời…';e.style.opacity='.6';body.appendChild(e);scroll();return e;}
+  function ai(text){
+    var C=window.HM_CRM, t=typing(), vid=''; try{vid=localStorage.getItem('crm_vid')||'';}catch(e){}
+    function fail(){ t.remove(); var m='Câu này em xin chuyên viên Hoàng Hiệp trả lời trực tiếp cho chính xác ạ. Anh/chị để lại số Zalo, hoặc bấm Gọi / Zalo bên dưới.'; bot(m,50); H.push({r:'bot',t:m}); acts(); }
+    if(!C||!window.HM_JSONP){fail();return;}
+    var hist=H.slice(-5,-1).map(function(m){return {r:m.r,t:String(m.t).slice(0,200)};});
+    window.HM_JSONP({action:'chat',project:'saphia',vid:vid,q:text,topic:curTopic?curTopic.id:'',history:JSON.stringify(hist)},function(j){
+      if(!j||!j.a){fail();return;}
+      t.remove(); bot(j.a,50); H.push({r:'bot',t:j.a});
+    },20000);
+  }
+  function open(topic){
+    panel.classList.add('open'); bubble.style.display='none'; badge.style.display='none';
+    start(topic||null);
+    if(window.innerWidth>600) setTimeout(function(){$('hmwInput').focus();},250);
+  }
+  $('hmwOpen').onclick=function(){ if(panel.classList.contains('open')) panel.classList.remove('open'); else open(pending); pending=null; };
+  $('hmwClose').onclick=function(){panel.classList.remove('open');};
+  $('hmwForm').onsubmit=function(e){e.preventDefault();var i=$('hmwInput');handle(i.value);i.value='';};
+  bubble.onclick=function(e){bubble.style.display='none'; if(e.target.id==='hmwBubbleX'){shownCount=99;return;} open(pending); pending=null;};
+  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href$="#chat-tu-van"]');if(a){e.preventDefault();open();}});
+
+  /* ---------- Theo dõi đoạn đang đọc: dừng ~12 giây → hỏi đúng chủ đề ---------- */
+  var DWELL=12, GAP=35, MAXPOP=3, shown={}, shownCount=0, lastPop=0, dwell=0, lastId=null, cache=[];
+  function sections(){
+    if(!cache.length){ var els=document.querySelectorAll('.ladi-section, main > section, body > section');
+      for(var i=0;i<els.length;i++){ var t=norm((els[i].innerText||'').slice(0,600)), tp=null;
+        for(var j=0;j<TOPICS.length;j++){ if(TOPICS[j].m.test(t)){tp=TOPICS[j];break;} }
+        cache.push({el:els[i],tp:tp}); } }
+    return cache;
+  }
+  function current(){
+    var y=window.innerHeight*0.45, s=sections();
+    for(var i=0;i<s.length;i++){ var r=s[i].el.getBoundingClientRect(); if(r.top<=y&&r.bottom>=y) return s[i].tp; }
+    return null;
+  }
+  setInterval(function(){
+    if(document.visibilityState!=='visible') return;
+    var tp=current(); curTopic=tp||curTopic;
+    var id=tp?tp.id:null;
+    if(id!==lastId){lastId=id;dwell=0;return;}
+    if(!tp||panel.classList.contains('open')||gotPhone||shown[id]||shownCount>=MAXPOP) return;
+    if(++dwell<DWELL) return;
+    if((Date.now()-lastPop)/1000<GAP) return;
+    shown[id]=1; shownCount++; lastPop=Date.now(); pending=tp;
+    $('hmwBubbleText').textContent=tp.q; bubble.style.display='block'; badge.style.display='flex';
+    setTimeout(function(){ if(pending===tp) bubble.style.display='none'; },25000);
+  },1000);
+  setTimeout(function(){cache=[];},4000);
+})();
+</script>
+
+<!-- Gắn nhãn nút Zalo / Gọi của LadiPage để CRM ghi lượt bấm -->
+<script>
+(function () {
+  function tag() {
+    var ls = document.querySelectorAll('a[href^="tel:"], a[href*="zalo.me"]');
+    for (var j = 0; j < ls.length; j++) { var a = ls[j]; if (a.hasAttribute('data-crm-click') || (a.closest && a.closest('#hmw'))) continue;
+      a.setAttribute('data-crm-click', /zalo\.me/.test(a.getAttribute('href')) ? 'zalo' : 'phone'); }
+    var els = document.querySelectorAll('[id^="BUTTON"], .ladi-button, [id^="HEADLINE"], [id^="PARAGRAPH"]');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      if (el.hasAttribute('data-crm-click') || (el.closest && el.closest('.ladi-form, form, #hmw'))) continue;
+      var t = (el.innerText || '').replace(/\s+/g, ' ').trim().toLowerCase();
+      if (!t || t.length > 40) continue;
+      if (/zalo/.test(t)) el.setAttribute('data-crm-click', 'zalo');
+      else if (/^g[oọ]i( tư vấn| ngay)?$|^hotline|0904[\s.]?567[\s.]?009/.test(t)) el.setAttribute('data-crm-click', 'phone');
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tag); else tag();
+  setTimeout(tag, 1500); setTimeout(tag, 4000);
+})();
+</script>
+<!-- Đổi lời "Thank you!" mặc định của form LadiPage thành lời cảm ơn riêng -->
+<script>
+(function(){
+  var MSG='Cảm ơn anh/chị! Chuyên viên sẽ gửi bảng giá & hồ sơ dự án qua Zalo 0904 567 009 trong ít phút.';
+  var RE=/^\s*(thank you!?|thanks!?|cảm ơn!?)\s*$/i;
+  var _alert=window.alert;
+  window.alert=function(m){ return _alert.call(window, RE.test(String(m||''))?MSG:m); };
+  function fix(root){
+    var w=document.createTreeWalker(root||document.body,NodeFilter.SHOW_TEXT,null,false),n;
+    while((n=w.nextNode())){ if(RE.test(n.nodeValue)&&!(n.parentNode&&n.parentNode.closest&&n.parentNode.closest('#hmw'))) n.nodeValue=MSG; }
+  }
+  function start(){ fix(document.body); new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(x){ if(x.nodeType===3){ if(RE.test(x.nodeValue)) x.nodeValue=MSG; } else if(x.nodeType===1) fix(x); }); if(m.type==='characterData'&&RE.test(m.target.nodeValue)) m.target.nodeValue=MSG;});}).observe(document.body,{childList:true,subtree:true,characterData:true}); }
+  if(document.body) start(); else document.addEventListener('DOMContentLoaded',start);
+})();
+</script>
+<!-- Kiểm tra kết nối: mở trang với đuôi ?crmtest=1 -->
+<script>
+(function(){
+  if(!/crmtest=1/.test(location.search)) return;
+  var box=document.createElement('div');
+  box.style.cssText='position:fixed;left:10px;top:10px;right:10px;z-index:999999;background:#fff;color:#0A2540;border:3px solid #FF5A1F;border-radius:12px;padding:14px;font:15px/1.5 Arial,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.3);max-height:80vh;overflow:auto';
+  box.innerHTML='<b>KIỂM TRA KẾT NỐI CRM</b> (chụp màn hình gửi Claude)<br>';
+  function line(t){var d=document.createElement('div');d.textContent=t;d.style.marginTop='6px';box.appendChild(d);}
+  function go(){
+    document.body.appendChild(box);
+    var C=window.HM_CRM||{url:'https://script.google.com/macros/s/AKfycbyChbG-uvItjVlRk7JgLrwpUS6Cgah4nIA6BWHuEwgbXBqSlvAPJNSdZdp6pQ91d_rN/exec',key:'qgK6I9KWTqfS'};
+    line('1. Mã CRM trên trang: '+(window.crmLead?(window.crmLead.fallback?'✅ chạy (đường dự phòng JSONP)':'✅ đã chạy'):'❌ CHƯA chạy'));
+    line('2. Đoạn mã chat mới: '+(document.getElementById('hmw')?'✅ có':'❌ không có'));
+    function call(n,label,body){
+      window.HM_JSONP(body,function(j){ var t=JSON.stringify(j); line(n+'. '+label+': '+(j&&(j.ok||j.a)?'✅ ':'❌ ')+t.slice(0,160)); },20000);
+    }
+    call(3,'Gửi khách thử về Sheet + Telegram',{action:'lead',name:'TEST tự động (crmtest) Sun Saphia',phone:'0900000009',vid:'crmtest',url:location.href,message:'Kiểm tra kết nối'});
+    call(4,'Lượt bấm Zalo thử',{action:'track',type:'click',channel:'zalo',vid:'crmtest',url:location.href});
+    call(5,'Chat AI',{action:'chat',project:'saphia',q:'Dự án cách biển bao xa?',vid:'crmtest'});
+  }
+  setTimeout(go,8000);
+})();
+</script>
+<!-- Tuân thủ: đổi chữ "Giữ suất" (chưa mở bán, không giữ chỗ) và ẩn đồng hồ đếm ngược -->
+<script>
+(function(){
+  function run(){
+    var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null), n, list=[];
+    while((n=w.nextNode())){ if(/giữ\s*suất/i.test(n.nodeValue)) list.push(n); }
+    list.forEach(function(t){ t.nodeValue=t.nodeValue.replace(/GIỮ\s*SUẤT/g,'NHẬN THÔNG TIN').replace(/Giữ\s*suất/g,'Nhận thông tin').replace(/giữ\s*suất/g,'nhận thông tin'); });
+    document.querySelectorAll('.ladi-countdown').forEach(function(c){ var el=c.closest('[id^="COUNTDOWN"]')||c; el.style.display='none'; });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run); else run();
+  setTimeout(run,1500);
+})();
+</script>
+<!-- ============ HẾT ĐOẠN MÃ ============ -->

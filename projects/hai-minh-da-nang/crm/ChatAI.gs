@@ -33,6 +33,19 @@ var CHAT_FACTS = [
   'Liên hệ: chuyên viên Hoàng Hiệp – Hotline/Zalo 0904 567 009 (chỉ dùng số này).'
 ].join('\n');
 
+
+var SAPHIA_FACTS = [
+  'DỰ ÁN: Sun Saphia Residence – căn hộ mặt biển tại khu Saphia, phường Ngũ Hành Sơn, Đà Nẵng, trên trục biển Võ Nguyên Giáp – Trường Sa, cạnh bãi tắm Sơn Thủy. Theo tài liệu giới thiệu, dự án do Sun Property phát triển.',
+  'Quy mô (theo tài liệu giới thiệu): khu đất 3.720,1 m²; 1 tòa 30 tầng ~114 m; 2 tầng hầm; 782 căn. Cơ cấu: Studio 30–31 m² (513 căn), 1PN+1 50–51 m² (108 căn), 2PN 60–70 m² (149 căn).',
+  'Dự kiến mở bán cuối tháng 11/2026; dự kiến bàn giao tháng 11/2028 (theo kế hoạch, có thể thay đổi).',
+  'Giá bán, chính sách thanh toán, ngân hàng, hỗ trợ lãi suất, pháp lý (loại hình, thời hạn), tiện ích nội khu, đơn vị vận hành: CHƯA công bố – chủ đầu tư công bố khi mở bán.',
+  'Xung quanh: bãi tắm Sơn Thủy (dự án Công viên, CLB thể thao biển và bãi tắm Sơn Thủy, phương án khảo sát phê duyệt QĐ 130 ngày 20/3/2025); công viên biển Trường Sa ~2,45 ha thu hồi từ khu Hòn Ngọc Á Châu, vốn ngân sách hơn 47 tỷ, kế hoạch 2025–2027; công viên cuối đường Huyền Trân Công Chúa theo quy hoạch.',
+  'Khoảng cách ước tính bằng ô tô: sân bay 10–15 phút; cầu Rồng – trung tâm ~15 phút; Ngũ Hành Sơn, An Thượng 5–10 phút; Hội An ~30 phút; Bà Nà ~45 phút.',
+  'Hạ tầng (theo quy hoạch): đường sắt đô thị sân bay – Hội An dự kiến khởi công 2/2027; mở rộng trục ven biển Võ Nguyên Giáp – Trường Sa. Du lịch Đà Nẵng 11 tháng 2025: 16,5 triệu lượt khách lưu trú.',
+  'Giá phòng ven biển trục Võ Nguyên Giáp phổ biến khoảng 1–3 triệu/đêm. Không thu tiền giữ chỗ/đặt cọc ở giai đoạn này.',
+  'Liên hệ: chuyên viên Hoàng Hiệp – Hotline/Zalo 0904 567 009. Trang thông tin do chuyên viên tư vấn thực hiện, không phải website chủ đầu tư.'
+].join('\n');
+
 var CHAT_RULES = [
   'Bạn là trợ lý tư vấn của chuyên viên Hoàng Hiệp cho dự án Hải Minh Đà Nẵng, chat trên website.',
   'Xưng "em", gọi khách "anh/chị". Trả lời tiếng Việt, ấm áp, tự nhiên như người thật, NGẮN (2–4 câu, tối đa ~70 từ), không dùng markdown, không gạch đầu dòng dài.',
@@ -70,8 +83,12 @@ function chatAI_(b, site) {
   if (msgs.length && msgs[msgs.length - 1].role === 'user') msgs[msgs.length - 1].content += '\n' + q;
   else msgs.push({ role: 'user', content: q });
 
-  var system = CHAT_RULES + '\n\nKhách đang đọc phần: ' + String(b.topic || 'không rõ').slice(0, 40)
-    + '\n\nTHÔNG TIN DỰ ÁN:\n' + CHAT_FACTS;
+  var isSaphia = /saphia/i.test(String(b.project || ''));
+  var rules = isSaphia
+    ? CHAT_RULES.replace(/cho dự án Hải Minh Đà Nẵng/, 'cho dự án Sun Saphia Residence Đà Nẵng').replace(/, nhắc đến Sun Group/, ', nói "đầu tiên", hứa chủ đầu tư chịu lãi suất')
+    : CHAT_RULES;
+  var system = rules + '\n\nKhách đang đọc phần: ' + String(b.topic || 'không rõ').slice(0, 40)
+    + '\n\nTHÔNG TIN DỰ ÁN:\n' + (isSaphia ? SAPHIA_FACTS : CHAT_FACTS);
   var models = [CHAT_MODEL, CHAT_MODEL_2], last = '';
   for (var i = 0; i < models.length; i++) {
     try {

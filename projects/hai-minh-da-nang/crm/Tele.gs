@@ -13,16 +13,19 @@ var TELE_TOKEN = 'DAN_TOKEN_BOT_VAO_DAY';
 var TELE_CHAT_ID = 'DAN_CHAT_ID_VAO_DAY';
 
 /** Bot HaiMinh_bot chỉ báo khách của Hải Minh. Khách của website khác (vd Sun FourS) không gửi vào bot này. */
-var TELE_CHI_BAO = /hải minh|hai minh|haiminh|cnhdchvhiminh|cănhộdịchvụhảiminh/i;
+var TELE_CHI_BAO = /hải minh|hai minh|haiminh|cnhdchvhiminh|cănhộdịchvụhảiminh|saphia|shaphia/i;
 function teleCuaToi_(b, site) {
-  return TELE_CHI_BAO.test(String(site && site.name || '') + ' ' + String(b && b.url || ''));
+  return TELE_CHI_BAO.test(String(site && site.name || '') + ' ' + String(b && b.url || '') + ' ' + String(b && b.message || ''));
+}
+function teleTen_(b, site) {
+  return /saphia|shaphia/i.test(String(b && b.url || '') + ' ' + String(b && b.message || '')) ? 'Sun Saphia Residence' : (site && site.name || 'website');
 }
 
 /** Khách để lại số: form trên trang, ô chat tự động có số điện thoại */
 function teleLead_(b, site, phone) {
   if (!teleCuaToi_(b, site)) return;
   teleSend_([
-    '🔔 KHÁCH MỚI · ' + (site && site.name || 'website'),
+    '🔔 KHÁCH MỚI · ' + teleTen_(b, site),
     '👤 ' + (b.name || '(chưa có tên)'),
     '📱 ' + phone + '  ·  Zalo: https://zalo.me/' + phone,
     b.nhu_cau ? '🎯 Nhu cầu: ' + b.nhu_cau : '',
@@ -39,7 +42,7 @@ function teleLead_(b, site, phone) {
 function teleClick_(b, site, ch) {
   var label = { phone: '📞 Khách bấm GỌI', zalo: '💬 Khách bấm ZALO', messenger: '💬 Khách bấm MESSENGER', sms: '✉️ Khách bấm SMS' }[ch];
   if (!label || !teleCuaToi_(b, site)) return;
-  teleSend_(label + ' · ' + (site && site.name || 'website')
+  teleSend_(label + ' · ' + teleTen_(b, site)
     + (b.utm_source ? '\n📣 ' + [b.utm_source, b.utm_campaign].filter(String).join(' / ') : '')
     + (b.url ? '\n🔗 ' + String(b.url).slice(0, 200) : '')
     + '\n🕒 ' + teleNow_());
