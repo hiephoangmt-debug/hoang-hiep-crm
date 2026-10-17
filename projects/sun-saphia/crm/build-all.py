@@ -12,6 +12,7 @@ for m in re.finditer(r'<script([^>]*)>(.*?)</script>', s, flags=re.S):
     pos = m.end()
 tail = re.sub(r'<!--.*?-->', '', s[pos:], flags=re.S).strip()
 if tail: parts.append(('html', tail))
+parts.append(('js', (here / 'menu.js').read_text(encoding='utf-8')))
 out = ['/* Sun Saphia – gộp toàn bộ mã "Trước </body>" (chat, Zalo, gọi, CRM, 3D·4D·5D, trắc nghiệm, máy tính). Sinh bởi build-all.py */',
        '(function(){ if(window.__ssAll) return; window.__ssAll=1;',
        'function run(){ var b=document.body;']
