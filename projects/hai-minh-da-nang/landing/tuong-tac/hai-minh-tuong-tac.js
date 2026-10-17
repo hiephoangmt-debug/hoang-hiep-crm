@@ -28,6 +28,11 @@
     + '#hmx .hx-u{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:16px}'
     + '#hmx .hx-u div{background:#fff;border-radius:12px;padding:14px;box-shadow:0 2px 10px rgba(15,29,51,.07);font-size:14px;line-height:1.45}'
     + '#hmx .hx-u b{display:block;font-size:17px;color:#0f1d33}#hmx .hx-u i{font-style:normal;color:#e8571c;font-weight:700}'
+    + '#hmx .hx-an{display:grid;gap:10px;margin:14px 0}#hmx .hx-ai{display:flex;gap:14px;background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 2px 10px rgba(15,29,51,.07)}'
+    + '#hmx .hx-ai i{flex:0 0 34px;height:34px;border-radius:50%;background:#ff6a2b;color:#fff;font-style:normal;font-weight:800;display:flex;align-items:center;justify-content:center}'
+    + '#hmx .hx-ai b{display:block;font-size:16px;color:#0f1d33;margin-bottom:3px}#hmx .hx-ai span{font-size:14.5px;line-height:1.55}'
+    + '#hmx .hx-chk{background:#eef3fa;border-left:4px solid #0f1d33;border-radius:10px;padding:12px 16px;margin:4px 0 14px}#hmx .hx-chk b{display:block;margin-bottom:4px}#hmx .hx-chk span{display:block;font-size:13.5px;line-height:1.55;color:#33435a}'
+    + '#hmx .hx-cta{max-width:520px}'
     + '@media(max-width:860px){#hmx .hx-g{grid-template-columns:1fr}#hmx .hx-u{grid-template-columns:1fr 1fr}#hmx h2{font-size:21px}}';
 
   var Q = [
@@ -45,12 +50,30 @@
       + '<div class="hx-ok">Cảm ơn anh/chị! Chuyên viên Hoàng Hiệp sẽ nhắn Zalo sớm. Cần gấp: <a href="tel:0904567009">0904 567 009</a></div></div>';
   }
 
+  /* ---- Phân tích: vì sao nên tìm hiểu sớm ---- */
+  var AN = [
+    ['1', 'Quỹ đất mặt biển nội đô có hạn', 'Dải ven biển Võ Nguyên Giáp – Trường Sa đã kín resort, khách sạn; dự án căn hộ mới ngay mặt biển ngày càng ít. Phía trước Hải Minh là công viên biển theo quy hoạch, tầm nhìn ra biển thoáng.'],
+    ['2', 'Nhu cầu lưu trú tăng đều', '11 tháng 2025 Đà Nẵng đón 16,5 triệu lượt khách lưu trú (+18,9%), khách quốc tế tăng 26,5%. Khu thương mại tự do và Trung tâm tài chính quốc tế mở thêm dòng khách công tác, chuyên gia ở dài ngày.'],
+    ['3', 'Một căn, hai giá trị', 'Gia đình nghỉ dưỡng mỗi năm ngay mặt biển; những ngày không ở có thể cho thuê. Ví dụ minh họa: 1,5 triệu/đêm × 60% công suất × 350 đêm ≈ 315 triệu doanh thu phòng/năm, chưa trừ chi phí – không phải cam kết.'],
+    ['4', 'Đi sớm, chọn được căn đẹp', 'Căn nhìn thẳng biển, tầng cao, hướng đón bình minh có số lượng giới hạn theo mặt bằng. Người trong danh sách ưu tiên nhận bảng giá, mặt bằng trước ngày ra mắt (dự kiến 11/2026) để so sánh, chọn căn kỹ.'],
+    ['5', 'Kết nối trong 30 phút', 'Sân bay 10–15 phút, phố An Thượng và Ngũ Hành Sơn 5–10 phút, cầu Rồng khoảng 15 phút, phố cổ Hội An khoảng 30 phút – tiện cho cả gia đình lẫn khách thuê.']
+  ];
+  function anHtml() {
+    return '<div class="hx-k">Phân tích trước khi xuống tiền</div>'
+      + '<h2>Vì sao căn mặt biển Hải Minh đáng cân nhắc ngay từ bây giờ?</h2>'
+      + '<div class="hx-an">' + AN.map(function (a) { return '<div class="hx-ai"><i>' + a[0] + '</i><div><b>' + a[1] + '</b><span>' + a[2] + '</span></div></div>'; }).join('') + '</div>'
+      + '<div class="hx-chk"><b>Minh bạch – những điều anh/chị nên xem kỹ</b>'
+      + '<span>• Đất thương mại dịch vụ, thời hạn 50 năm (17/9/2026 – 16/9/2076); loại hình căn hộ du lịch, không phải chung cư ở lâu dài.</span>'
+      + '<span>• Giá, chính sách thanh toán, đơn vị vận hành, tỷ lệ chia doanh thu: chủ đầu tư công bố khi ra mắt – đọc kỹ hợp đồng mẫu trước khi quyết định.</span>'
+      + '<span>• Hiện không thu tiền giữ chỗ, đặt cọc; đăng ký chỉ để nhận thông tin sớm.</span></div>'
+      + '<div class="hx-cta"><button type="button" class="hx-btn" id="hmx-ago">Gửi tôi bảng giá trước ngày ra mắt</button>' + form('hmx-af', 'Gửi tôi bảng giá trước ngày ra mắt') + '</div>';
+  }
   function html() {
     var q = Q.map(function (x) {
       return '<div class="hx-q" data-q="' + x.id + '"><b>' + x.t + '</b>' + x.o.map(function (o) {
         return '<button type="button" class="hx-o" aria-pressed="false">' + o + '</button>'; }).join('') + '</div>';
     }).join('');
-    return '<div class="hx-w"><div class="hx-k">Danh sách ưu tiên trước ngày ra mắt · dự kiến 11/2026</div>'
+    return '<div class="hx-w">' + anHtml() + '<div class="hx-k" style="margin-top:34px">Danh sách ưu tiên trước ngày ra mắt · dự kiến 11/2026</div>'
       + '<h2>5 dòng căn, dòng nào hợp với anh/chị?</h2>'
       + '<p>Trả lời 3 câu để xem gợi ý dòng căn, hoặc tự kéo thử dòng tiền cho thuê. Bảng giá và mặt bằng gửi qua Zalo ngay khi chủ đầu tư công bố.</p>'
       + '<div class="hx-g"><div class="hx-c" id="hmx-quiz"><h3>Căn nào hợp với anh/chị?</h3>' + q
@@ -103,7 +126,7 @@
   /* ---- Vì sao Đà Nẵng (chèn trước khối trắc nghiệm) ---- */
   var DN = [
     ['🏙️', 'Trung tâm của miền Trung', 'Sau khi hợp nhất với Quảng Nam (7/2025), Đà Nẵng có cả biển, sông, núi và di sản: phố cổ Hội An, Mỹ Sơn, Cù Lao Chàm nay cùng một thành phố.'],
-    ['✈️', 'Sân bay ngay trong nội thành', 'Từ sân bay quốc tế Đà Nẵng về Hải Minh chỉ khoảng 15–20 phút ô tô, xuống máy bay là ra biển. Thành phố có thêm sân bay Chu Lai ở phía Nam.'],
+    ['✈️', 'Sân bay ngay trong nội thành', 'Xuống máy bay chỉ khoảng 10–15 phút ô tô là tới Hải Minh, ra biển Mỹ Khê. Thành phố có thêm sân bay Chu Lai ở phía Nam.'],
     ['🌏', 'Bay thẳng tới nhiều nước', 'Đường bay quốc tế trực tiếp tới Hàn Quốc, Nhật Bản, Trung Quốc, Đài Loan, Singapore, Thái Lan, Ấn Độ… và các thành phố lớn trong nước; mạng bay tiếp tục được mở rộng.'],
     ['🚆', 'Giao thông đồng bộ', 'Ga đường sắt Bắc – Nam, cảng Tiên Sa đón tàu du lịch quốc tế, cao tốc kết nối. Đường sắt tốc độ cao Bắc – Nam và đường sắt đô thị đang theo quy hoạch, tiến độ theo Nhà nước.'],
     ['🤝', 'Bình yên, thân thiện', 'Thành phố sạch, trật tự, người dân hiền hòa, mến khách – điều du khách trong và ngoài nước thường nhắc tới khi quay lại Đà Nẵng.'],
@@ -171,6 +194,8 @@
     }
     [s1, s2, s3].forEach(function (s) { s.oninput = calc; }); calc();
     document.getElementById('hmx-cgo').onclick = function () { this.style.display = 'none'; document.getElementById('hmx-cf').classList.add('hx-on'); document.querySelector('#hmx-cf [name=ten]').focus(); };
+    document.getElementById('hmx-ago').onclick = function () { this.style.display = 'none'; document.getElementById('hmx-af').classList.add('hx-on'); document.querySelector('#hmx-af [name=ten]').focus(); };
+    wireForm(document.getElementById('hmx-af'), function () { return '[Phân tích] Muốn nhận bảng giá trước ngày ra mắt'; }, 'phan-tich');
     wireForm(document.getElementById('hmx-cf'), function () {
       var c = calc(); return '[Dòng tiền] Giá/đêm ' + (c.p / 1e6) + ' triệu · công suất ' + c.occ + '% · tự ở ' + c.own + ' đêm → doanh thu minh họa ≈ ' + vnd(c.y) + '/năm';
     }, 'may-tinh-dong-tien');
