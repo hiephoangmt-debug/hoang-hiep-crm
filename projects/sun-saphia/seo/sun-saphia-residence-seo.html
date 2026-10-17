@@ -418,6 +418,14 @@ body{background:#fff}
 .lx-map img{height:auto!important;min-height:0!important;object-fit:contain!important}
 .locx>tbody>tr>td.lx-r{vertical-align:middle}
 @media(max-width:760px){.lx-map{width:100%!important}.lx-map img{width:100%!important;max-height:none!important}}
+
+/* logo sắc nét + vệt sáng chạy qua */
+.logo{gap:12px}
+.logo b{position:relative;overflow:hidden;width:42px;height:42px;border-radius:11px;background:linear-gradient(145deg,#0d2f52,#081a2e);border:2px solid #F3D28A;box-shadow:0 0 0 1px rgba(243,210,138,.25),0 4px 14px rgba(0,0,0,.35);font-family:Georgia,"Times New Roman",serif;font-size:17px;font-weight:700;letter-spacing:.5px}
+.logo b{color:#F6D58E}
+.logo b::after{content:"";position:absolute;top:-20%;left:0;width:40%;height:140%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.75),rgba(255,255,255,0));transform:translateX(-180%) skewX(-20deg);animation:logoQuet 3.2s ease-in-out infinite}
+@keyframes logoQuet{0%{transform:translateX(-180%) skewX(-20deg)}50%,100%{transform:translateX(320%) skewX(-20deg)}}
+.logo span{font-weight:800;font-size:16px;letter-spacing:.12em;background:linear-gradient(110deg,#ffffff 40%,#F6D58E 50%,#ffffff 60%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:kimc 3.2s linear infinite}
 </style>
 </head>
 <body>
