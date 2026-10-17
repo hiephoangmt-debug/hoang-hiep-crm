@@ -350,7 +350,8 @@ $('#ptSave').onclick = () => {
   saveImage('view');
 };
 $('#saveBtn').onclick = () => saveImage('plan');
-$('#saveViewBtn').onclick = () => saveImage('view');
+// đang chụp siêu thật mà ảnh chưa mịn → chờ mịn xong mới tải (không bị nhiễu hạt)
+$('#saveViewBtn').onclick = () => (viewer.ptActive ? $('#ptSave').click() : saveImage('view'));
 $('#walkBtn').onclick = () => { document.body.classList.add('walking-page'); viewer.enterWalk(); };
 $('#tourBtn').onclick = () => (viewer.tour ? viewer.stopTour() : startTour());
 $('#tourAgain').onclick = () => startTour();
