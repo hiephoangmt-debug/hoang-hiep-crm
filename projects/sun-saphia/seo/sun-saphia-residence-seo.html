@@ -435,13 +435,20 @@ body{background:#fff}
 /* logo cam + line sáng chạy qua */
 .logo b{background:linear-gradient(145deg,#FF9A3D 0%,#FF6A2B 50%,#E8460F 100%)!important;border:2px solid #FFC59A!important;color:#ffffff!important;box-shadow:0 0 0 1px rgba(232,70,15,.6),0 4px 16px rgba(255,106,43,.5)!important;text-shadow:0 1px 2px rgba(120,30,0,.35)!important}
 .logo span{background:linear-gradient(110deg,#FF7A2F 40%,#FFF1E6 50%,#FF7A2F 60%)!important;background-size:200% 100%!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important}
+
+/* sửa thanh trên cho điện thoại: vệt sáng nằm trong nền ô SR, không dùng ::after */
+.logo b::after{content:none!important;display:none!important;animation:none!important}
+.logo b{background-image:linear-gradient(100deg,rgba(255,255,255,0) 40%,rgba(255,255,255,.85) 50%,rgba(255,255,255,0) 60%),linear-gradient(145deg,#FF9A3D 0%,#FF6A2B 50%,#E8460F 100%)!important;background-size:300% 100%,100% 100%!important;background-repeat:no-repeat!important;animation:logoNen 3s linear infinite!important}
+@keyframes logoNen{0%{background-position:140% 0,0 0}60%,100%{background-position:-40% 0,0 0}}
+.logo span{font-size:15px!important;letter-spacing:.14em!important;white-space:nowrap}
+@media(max-width:900px){.ahero{padding-top:12px!important}.hero-shade{padding-top:20px!important}}
 </style>
 </head>
 <body>
 
 <header class="top">
   <div class="wrap">
-    <div class="logo"><b>SR</b><span>SUN SAPHIA RESIDENCE</span></div>
+    <div class="logo"><b>SR</b><span>SAPHIA</span></div>
     <div class="topbtn"><a class="hot zl" href="https://zalo.me/0904567009">Zalo</a><a class="hot" href="tel:0904567009">📞 0904 567 009</a></div>
   </div>
 </header>
