@@ -12,8 +12,15 @@
 var TELE_TOKEN = 'DAN_TOKEN_BOT_VAO_DAY';
 var TELE_CHAT_ID = 'DAN_CHAT_ID_VAO_DAY';
 
+/** Bot HaiMinh_bot chỉ báo khách của Hải Minh. Khách của website khác (vd Sun FourS) không gửi vào bot này. */
+var TELE_CHI_BAO = /hải minh|hai minh|haiminh|cnhdchvhiminh|cănhộdịchvụhảiminh/i;
+function teleCuaToi_(b, site) {
+  return TELE_CHI_BAO.test(String(site && site.name || '') + ' ' + String(b && b.url || ''));
+}
+
 /** Khách để lại số: form trên trang, ô chat tự động có số điện thoại */
 function teleLead_(b, site, phone) {
+  if (!teleCuaToi_(b, site)) return;
   teleSend_([
     '🔔 KHÁCH MỚI · ' + (site && site.name || 'website'),
     '👤 ' + (b.name || '(chưa có tên)'),
@@ -31,7 +38,7 @@ function teleLead_(b, site, phone) {
 /** Khách bấm nút Gọi / Zalo / Messenger (chưa có số – xem tab "Lượt bấm") */
 function teleClick_(b, site, ch) {
   var label = { phone: '📞 Khách bấm GỌI', zalo: '💬 Khách bấm ZALO', messenger: '💬 Khách bấm MESSENGER', sms: '✉️ Khách bấm SMS' }[ch];
-  if (!label) return;
+  if (!label || !teleCuaToi_(b, site)) return;
   teleSend_(label + ' · ' + (site && site.name || 'website')
     + (b.utm_source ? '\n📣 ' + [b.utm_source, b.utm_campaign].filter(String).join(' / ') : '')
     + (b.url ? '\n🔗 ' + String(b.url).slice(0, 200) : '')
