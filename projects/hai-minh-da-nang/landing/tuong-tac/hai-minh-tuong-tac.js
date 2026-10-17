@@ -175,7 +175,7 @@
 
   /* ---- Chân trang minh bạch + chính sách bảo mật ---- */
   function footer() {
-    if (document.getElementById('hmft') || /không phải website của Chủ đầu tư/.test(document.body.innerText || '')) return;
+    if (document.getElementById('hmft') || /không phải website của Chủ đầu tư/i.test(document.body.textContent || '')) return;
     var st = document.createElement('style');
     st.textContent = '#hmft{position:relative;z-index:5;display:block;background:#0b1626;color:#9fb0c6;font-family:inherit;font-size:12.5px;line-height:1.6;padding:22px 0 90px;clear:both}'
       + '#hmft .ft-w{max-width:1140px;margin:0 auto;padding:0 16px}#hmft p{margin:0 0 8px}#hmft b{color:#dfe7f1}#hmft a{color:#ff8a4c}'
@@ -196,7 +196,7 @@
   }
   function build() {
     if (document.getElementById('hmx')) return;
-    STATIC = /Phân tích trước khi xuống tiền/.test(document.body.innerText || '');
+    STATIC = /Phân tích trước khi xuống tiền/i.test(document.body.textContent || '');
     var img = document.querySelector('img[src*="so-do-vi-tri-hai-minh"]');
     var after = document.getElementById('hm4d') || (img && (img.closest('.ladi-section') || img.closest('section')));
     if (!after) { var s = document.querySelectorAll('.ladi-section, section'); after = s.length ? s[Math.min(3, s.length - 1)] : null; }

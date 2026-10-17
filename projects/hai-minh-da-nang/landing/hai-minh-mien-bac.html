@@ -209,6 +209,45 @@ p{margin:0 0 14px}
 .ask-f select,.ask-f textarea{width:100%;padding:14px 15px;font-size:16px;font-family:inherit;border:1.5px solid #d6dce5;border-radius:12px;background:#f8fafc;color:var(--ink)}
 .askl{color:var(--o1);font-weight:700;text-decoration:none;white-space:nowrap}
 @media(max-width:900px){.ask{grid-template-columns:1fr;padding:18px}}
+
+/* long page */
+.story{background:#fff}.story h2{max-width:900px}
+.story-g{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:start;margin-top:10px}
+.story-g p{font-size:17px}
+.pain{list-style:none;margin:0;padding:0}
+.pain li{background:var(--sand);border-radius:14px;padding:14px 16px;margin-bottom:10px;border-left:4px solid var(--o1)}
+.pain s{display:block;color:#98a3ae;font-size:14px}.pain b{color:var(--n)}
+.dk2{background:linear-gradient(160deg,#0A2540,#0f2f52);color:#dce6f0}.dk2 h2{color:#fff}
+.v4-big{margin:24px 0 0;border-radius:18px;overflow:hidden}.v4-big img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.v4-big figcaption,.v4 figcaption{font-size:13.5px;color:#c7d3e3;padding:8px 2px}
+.v4{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.v4 figure{margin:0;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05)}
+.v4 img{width:100%;aspect-ratio:16/10;object-fit:cover}.v4 figcaption{padding:10px 14px}.v4 figcaption b{display:block;color:#fff;font-size:16px}
+.note4{font-size:12.5px;color:#9fb2c6;margin:10px 0 0}
+.dk2 .cta-strip{background:rgba(255,255,255,.06);border-color:rgba(255,176,103,.5)}.dk2 .cta-strip b{color:#fff}.dk2 .cta-strip span{color:#c7d3e3}
+.rg{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:24px}
+.rg div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;transition:.3s}.rg div:hover{transform:translateY(-5px);box-shadow:0 12px 26px rgba(10,37,64,.1)}
+.rg em{display:inline-block;font-style:normal;font-weight:800;color:#fff;background:var(--o1);border-radius:20px;padding:3px 10px;font-size:13px;margin-bottom:8px}
+.rg b{display:block;color:var(--n);font-size:15.5px;line-height:1.3;margin-bottom:4px}.rg span{font-size:13.5px;color:var(--mut);line-height:1.45;display:block}
+.am{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.am-c{background:var(--sand);border-radius:18px;padding:22px}.am-c>b{font-size:18px;color:var(--n)}
+.am-c ul{margin:10px 0;padding-left:20px}.am-c li{margin-bottom:6px;font-size:15px}.am-c small{color:var(--mut);font-size:12.5px}
+.dn{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+.dn div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px}
+.dn i{font-style:normal;font-size:26px}.dn b{display:block;color:#fff;margin:6px 0 4px}.dn span{font-size:14px;color:#c7d3e3;line-height:1.5}
+.rs{display:grid;gap:12px;margin-top:22px}
+.r{display:flex;gap:16px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+.r>i{flex:0 0 38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--o1),var(--o2));color:#fff;font-style:normal;font-weight:800;display:flex;align-items:center;justify-content:center}
+.r b{display:block;color:var(--n);font-size:17px;margin-bottom:4px}.r span{font-size:15px;color:var(--ink);line-height:1.6}.r small{display:block;font-size:12px;color:var(--mut);margin-top:6px}
+.cols{display:flex;align-items:flex-end;gap:24px;height:150px;margin-top:12px;max-width:380px}
+.cols div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+.cols em{font-style:normal;font-weight:800;font-size:13px;color:var(--n)}.cols i{display:block;width:60%;background:linear-gradient(180deg,#ff8a4c,#ff6a2b);border-radius:6px 6px 0 0;margin:4px 0}
+.cols i.st{background:repeating-linear-gradient(45deg,#ff6a2b 0 6px,#ff9a66 6px 12px)}.cols span{font-size:12px!important;color:var(--mut)!important}
+.pol{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+.pol div{background:#fff;border-radius:16px;padding:18px;border:1px solid var(--line)}
+.pol i{font-style:normal;font-size:26px}.pol b{display:block;color:var(--n);margin:6px 0 2px}.pol span{font-size:14px;color:var(--mut)}
+@media(max-width:900px){.story-g,.am{grid-template-columns:1fr}.v4{grid-template-columns:1fr}.rg{grid-template-columns:1fr 1fr}.dn{grid-template-columns:1fr 1fr}.pol{grid-template-columns:1fr 1fr}.r{padding:16px}}
+@media(max-width:520px){.dn,.pol{grid-template-columns:1fr}}
 @media(max-width:900px){
   .hero .wrap,.loc .grid,.final .grid{grid-template-columns:1fr}
   .hero h1{font-size:31px}
@@ -279,6 +318,27 @@ p{margin:0 0 14px}
   </div>
 </div>
 
+<!-- STORY HOOK -->
+<section class="sec story" id="cau-chuyen">
+  <div class="wrap">
+    <span class="eyebrow">Một câu chuyện quen thuộc</span>
+    <h2>Tháng 12 ở Hà Nội: trời mù, rét ẩm, cả nhà lại hỏi “Tết này đi đâu?”</h2>
+    <div class="story-g">
+      <div>
+        <p>Mỗi năm, nhiều gia đình phía Bắc lại bay vào Đà Nẵng. Đặt phòng khách sạn mùa cao điểm, chen chúc giờ nhận phòng, mỗi lần một chỗ khác nhau – vui, nhưng chưa bao giờ thấy là “nhà”.</p>
+        <p>Còn nếu có <b>một căn hộ của riêng mình ngay mặt biển Mỹ Khê</b>? Mở cửa là thấy sóng. Ông bà ở trọn mùa đông. Con cháu bay vào dịp lễ. Những tháng vắng nhà, căn hộ có thể cho thuê.</p>
+        <p>Đó là lý do ngày càng nhiều người Hà Nội tìm hiểu <b>căn hộ khách sạn Hải Minh</b> – tòa 30 tầng ngay góc Võ Nguyên Giáp – Trường Sa, dự kiến ra mắt 11/2026.</p>
+      </div>
+      <ul class="pain">
+        <li><s>Đặt phòng mùa cao điểm, giá đội lên</s><b>Căn của mình, đến là ở</b></li>
+        <li><s>Mỗi lần một khách sạn khác nhau</s><b>Một “nhà thứ hai” quen thuộc</b></li>
+        <li><s>Tiền phòng đi rồi là hết</s><b>Ngày vắng nhà, căn hộ có thể cho thuê</b></li>
+        <li><s>Đi biển phải chờ nghỉ dài ngày</s><b>Bay 1h20, cuối tuần cũng đi được</b></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <!-- DA NANG GALLERY -->
 <section class="sec" id="da-nang" style="background:#fff">
   <div class="wrap">
@@ -296,34 +356,6 @@ p{margin:0 0 14px}
       <figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/b5b89e267db196fba44e68853b81a8b4e9e43f2d/projects/hai-minh-da-nang/landing/images/dn-ca-chep-hoa-rong-dem.webp" alt="Tượng cá chép hóa rồng bên sông Hàn về đêm" width="1400" height="788" loading="lazy"><figcaption>Đêm bên sông Hàn<span>ẩm thực, phố đêm</span></figcaption></figure>
     </div>
     <p class="credit">Ảnh minh họa Đà Nẵng: Unsplash. Thời gian di chuyển ước tính bằng ô tô.</p>
-  </div>
-</section>
-
-<!-- PROJECT INFO -->
-<section class="sec" id="du-an">
-  <div class="wrap">
-    <div class="center">
-      <span class="eyebrow">Thông tin dự án</span>
-      <h2>Hải Minh – căn hộ khách sạn 30 tầng mặt biển Võ Nguyên Giáp</h2>
-      <p class="lead">Khu căn hộ du lịch, thương mại dịch vụ trên 2 lô góc của Khu Khách sạn – Condotel và dân cư Saphia.</p>
-    </div>
-    <div class="pj">
-      <dl class="spec">
-        <div><dt>Vị trí</dt><dd>Lô A2-1 &amp; A2-2, góc Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, P. Ngũ Hành Sơn, TP Đà Nẵng</dd></div>
-        <div><dt>Chủ đầu tư</dt><dd>Công ty TNHH Quản lý và Dịch vụ Hạ tầng Kỹ thuật Miền Trung</dd></div>
-        <div><dt>Quy mô</dt><dd>1 tòa tháp 30 tầng, cao ~117 m, khoảng 400 căn; khối đế thương mại 2 tầng, hồ bơi tầng 3</dd></div>
-        <div><dt>Khu đất</dt><dd>~3.720 m² (2 thửa góc), tổng sàn trên 45.000 m²</dd></div>
-        <div><dt>Pháp lý đất</dt><dd>Đất thương mại dịch vụ, thời hạn 50 năm (17/9/2026 – 16/9/2076); loại hình căn hộ du lịch</dd></div>
-        <div><dt>Tình trạng</dt><dd>Đang thi công · dự kiến ra mắt 11/2026 · giá, chính sách chủ đầu tư công bố khi ra mắt</dd></div>
-      </dl>
-      <div class="units">
-        <a class="u" href="#dang-ky"><b>1PN</b><span>47,4 m²</span><em>Gọn cho khách du lịch thuê ngắn ngày</em><i>Nhận giá 1PN →</i></a>
-        <a class="u" href="#dang-ky"><b>2PN</b><span>66,5–68,8 m²</span><em>Vợ chồng và 2 con</em><i>Nhận giá 2PN →</i></a>
-        <a class="u" href="#dang-ky"><b>2PN+1</b><span>76,2–76,9 m²</span><em>Thêm phòng linh hoạt cho ông bà</em><i>Nhận giá 2PN+1 →</i></a>
-        <a class="u" href="#dang-ky"><b>3PN</b><span>78,6–80 m²</span><em>Đủ chỗ cho ba thế hệ</em><i>Nhận giá 3PN →</i></a>
-        <a class="u hot2" href="#dang-ky"><b>Dual Key</b><span>101 m²</span><em>2 phần cửa riêng: vừa ở vừa cho thuê</em><i>Nhận giá Dual Key →</i></a>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -357,6 +389,34 @@ p{margin:0 0 14px}
   </div>
 </section>
 
+<!-- PROJECT INFO -->
+<section class="sec" id="du-an">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Thông tin dự án</span>
+      <h2>Hải Minh – căn hộ khách sạn 30 tầng mặt biển Võ Nguyên Giáp</h2>
+      <p class="lead">Khu căn hộ du lịch, thương mại dịch vụ trên 2 lô góc của Khu Khách sạn – Condotel và dân cư Saphia.</p>
+    </div>
+    <div class="pj">
+      <dl class="spec">
+        <div><dt>Vị trí</dt><dd>Lô A2-1 &amp; A2-2, góc Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, P. Ngũ Hành Sơn, TP Đà Nẵng</dd></div>
+        <div><dt>Chủ đầu tư</dt><dd>Công ty TNHH Quản lý và Dịch vụ Hạ tầng Kỹ thuật Miền Trung</dd></div>
+        <div><dt>Quy mô</dt><dd>1 tòa tháp 30 tầng, cao ~117 m, khoảng 400 căn; khối đế thương mại 2 tầng, hồ bơi tầng 3</dd></div>
+        <div><dt>Khu đất</dt><dd>~3.720 m² (2 thửa góc), tổng sàn trên 45.000 m²</dd></div>
+        <div><dt>Pháp lý đất</dt><dd>Đất thương mại dịch vụ, thời hạn 50 năm (17/9/2026 – 16/9/2076); loại hình căn hộ du lịch</dd></div>
+        <div><dt>Tình trạng</dt><dd>Đang thi công · dự kiến ra mắt 11/2026 · giá, chính sách chủ đầu tư công bố khi ra mắt</dd></div>
+      </dl>
+      <div class="units">
+        <a class="u" href="#dang-ky"><b>1PN</b><span>47,4 m²</span><em>Gọn cho khách du lịch thuê ngắn ngày</em><i>Nhận giá 1PN →</i></a>
+        <a class="u" href="#dang-ky"><b>2PN</b><span>66,5–68,8 m²</span><em>Vợ chồng và 2 con</em><i>Nhận giá 2PN →</i></a>
+        <a class="u" href="#dang-ky"><b>2PN+1</b><span>76,2–76,9 m²</span><em>Thêm phòng linh hoạt cho ông bà</em><i>Nhận giá 2PN+1 →</i></a>
+        <a class="u" href="#dang-ky"><b>3PN</b><span>78,6–80 m²</span><em>Đủ chỗ cho ba thế hệ</em><i>Nhận giá 3PN →</i></a>
+        <a class="u hot2" href="#dang-ky"><b>Dual Key</b><span>101 m²</span><em>2 phần cửa riêng: vừa ở vừa cho thuê</em><i>Nhận giá Dual Key →</i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CURIOSITY -->
 <section class="sec" id="to-mo">
   <div class="wrap center">
@@ -369,6 +429,25 @@ p{margin:0 0 14px}
       <div class="q"><div class="ico">⚖️</div><h3>Condotel 50 năm hay căn hộ lâu dài – nên chọn gì?</h3><p>Hiểu đúng pháp lý, thời hạn và cách khai thác trước khi quyết định.</p><a class="lock" href="#dang-ky">🔒 Bản so sánh qua Zalo – mở khóa</a></div>
     </div>
     <p style="margin-top:24px"><a class="btn" href="#dang-ky">Gửi tôi bảng giá trước ngày ra mắt</a></p>
+  </div>
+</section>
+
+<!-- 4D -->
+<section class="sec dk2" id="mo-hinh-4d">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow" style="color:#FFB067">Mô hình 4D minh họa</span>
+      <h2>Tầng nào nhìn thấy gì? Xem trước bằng mô hình 4D</h2>
+      <p class="lead" style="color:#c7d3e3">Mô hình dựng lại theo phối cảnh, vị trí lô đất và bản đồ vệ tinh – xoay, chọn tầng, đổi giờ trong ngày để thấy nắng, biển và Cù Lao Chàm từ căn hộ.</p>
+    </div>
+    <figure class="v4-big"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/bdb9433614b07a2302d96bba687c845f34a1eedf/projects/hai-minh-da-nang/landing/images/4d-tong-quan.webp" alt="Mô hình 4D tòa Hải Minh hình chữ L góc Trường Sa – Nguyễn Đức Thuận, phía trước là công viên biển" width="1200" height="750" loading="lazy"><figcaption>Tòa tháp chữ L: lưng hướng Trường Sa – biển, đáy dọc Nguyễn Đức Thuận; khối đế 2 tầng, hồ bơi tầng 3; phía trước là công viên biển theo quy hoạch.</figcaption></figure>
+    <div class="v4">
+      <figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/bdb9433614b07a2302d96bba687c845f34a1eedf/projects/hai-minh-da-nang/landing/images/4d-view-tang-10.webp" alt="Góc nhìn từ tầng 10 Hải Minh ra công viên và biển" width="1200" height="750" loading="lazy"><figcaption><b>Tầng 10 · ~40 m</b>Tán dừa công viên phía trước, biển ngay sau</figcaption></figure>
+      <figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/bdb9433614b07a2302d96bba687c845f34a1eedf/projects/hai-minh-da-nang/landing/images/4d-view-tang-28.webp" alt="Góc nhìn từ tầng 28 Hải Minh ra biển và Cù Lao Chàm" width="1200" height="750" loading="lazy"><figcaption><b>Tầng 28 · ~103 m</b>Biển mở rộng, xa xa Cù Lao Chàm</figcaption></figure>
+      <figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/bdb9433614b07a2302d96bba687c845f34a1eedf/projects/hai-minh-da-nang/landing/images/4d-lai-gan-can-huong-bien.webp" alt="Cận cảnh mặt căn hướng biển Hải Minh" width="1200" height="750" loading="lazy"><figcaption><b>Mặt căn hướng biển</b>Ban công nhìn thẳng công viên – bãi Mỹ Khê</figcaption></figure>
+    </div>
+    <p class="note4">Ảnh chụp từ mô hình minh họa, không phải bản vẽ của chủ đầu tư; tầm nhìn thực tế tùy căn, tầng, hướng. Mô hình tương tác đầy đủ nằm ngay sau phần Vị trí.</p>
+    <div class="cta-strip"><div><b>Muốn biết căn mình định chọn nhìn thấy gì?</b><span>Gửi tầng, hướng anh/chị quan tâm – chuyên viên gửi ảnh góc nhìn từ mô hình qua Zalo.</span></div><div class="cs-b"><a class="btn" href="#dang-ky">Nhận ảnh góc nhìn căn của tôi</a><a class="btn zalo" href="https://zalo.me/0904567009">Nhắn Zalo</a></div></div>
   </div>
 </section>
 
@@ -393,6 +472,110 @@ p{margin:0 0 14px}
       <p style="font-size:12.5px;color:#9fb2c6;margin-top:8px">Thời gian ước tính bằng ô tô.</p>
       <p style="margin-top:14px;display:flex;flex-wrap:wrap;gap:10px"><a class="btn zalo" href="https://zalo.me/0904567009">Đặt lịch xem lô đất qua Zalo</a><a class="btn ghost" href="tel:0904567009">Gọi chuyên viên</a></p>
     </div>
+  </div>
+</section>
+
+<!-- REGION -->
+<section class="sec" id="lien-ket-vung">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Liên kết vùng</span>
+      <h2>Từ Hải Minh, cả miền Trung chỉ là một chuyến đi ngắn</h2>
+      <p class="lead">Ở trung tâm dải biển Đà Nẵng – Hội An: sáng biển, trưa phố cổ, chiều lên núi, tối về nghe sóng.</p>
+    </div>
+    <div class="rg">
+      <div><em>5–10′</em><b>Phố An Thượng · Ngũ Hành Sơn</b><span>Ẩm thực, cà phê, phố khách quốc tế; danh thắng, làng đá Non Nước</span></div>
+      <div><em>10–15′</em><b>Sân bay quốc tế Đà Nẵng</b><span>Bay thẳng Hà Nội ~1h20; đường bay quốc tế đi Hàn, Nhật, Đài Loan, Singapore…</span></div>
+      <div><em>~15′</em><b>Cầu Rồng · sông Hàn</b><span>Trung tâm thành phố, phố đêm, lễ hội pháo hoa</span></div>
+      <div><em>~30′</em><b>Phố cổ Hội An</b><span>Di sản thế giới, đèn lồng, thả hoa đăng sông Hoài</span></div>
+      <div><em>~35′</em><b>Mikazuki</b><span>Công viên nước và onsen kiểu Nhật</span></div>
+      <div><em>~45′</em><b>Bà Nà Hills</b><span>Cầu Vàng, làng Pháp trên đỉnh núi</span></div>
+      <div><em>Tàu cao tốc</em><b>Cù Lao Chàm</b><span>Khu dự trữ sinh quyển, lặn ngắm san hô</span></div>
+      <div><em>~1h–1h30</em><b>Thánh địa Mỹ Sơn</b><span>Di sản văn hóa thế giới</span></div>
+      <div><em>Đèo Hải Vân</em><b>Suối Lương · Lăng Cô</b><span>Cung đường biển đẹp, suối và vịnh</span></div>
+      <div><em>~2 giờ</em><b>Cố đô Huế</b><span>Đại Nội, lăng tẩm, ẩm thực cung đình</span></div>
+    </div>
+    <p class="note4" style="color:#7d8a98">Thời gian ước tính bằng ô tô, tùy giờ cao điểm.</p>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section class="sec" id="tien-ich" style="background:#fff">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Tiện ích</span>
+      <h2>Trong tòa nhà và ngay quanh nhà</h2>
+    </div>
+    <div class="am">
+      <div class="am-c"><b>🏢 Trong dự án (theo phối cảnh)</b>
+        <ul><li>Khối đế thương mại – dịch vụ 2 tầng (tầng 1 cao ~7 m, tầng 2 ~6 m)</li><li>Hồ bơi và sân vườn tầng 3, nằm trong lòng chữ L, nhìn ra biển</li><li>Tầng trên cùng cao ~7 m</li><li>Mặt tiền 3 hướng: Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận</li></ul>
+        <small>Danh mục tiện ích chính thức, đơn vị vận hành do chủ đầu tư công bố khi ra mắt.</small></div>
+      <div class="am-c"><b>🌴 Ngay quanh nhà</b>
+        <ul><li>Công viên biển Trường Sa (~2,45 ha, theo quy hoạch) ngay phía trước</li><li>Bãi biển Mỹ Khê – Non Nước, bãi tắm Sơn Thủy</li><li>Chuỗi resort: Hyatt Regency, Crowne Plaza, TIA, Furama, Pullman</li><li>Phố An Thượng: nhà hàng, cà phê, chợ đêm, dịch vụ quốc tế</li><li>Siêu thị, chợ, ngân hàng, dịch vụ quanh khu Ngũ Hành Sơn</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY DA NANG -->
+<section class="sec dk2" id="vi-sao-da-nang">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow" style="color:#FFB067">Vì sao chọn Đà Nẵng</span>
+      <h2>Thành phố đáng sống, đáng đầu tư của miền Trung</h2>
+    </div>
+    <div class="dn">
+      <div><i>🏙️</i><b>Trung tâm miền Trung</b><span>Sau hợp nhất với Quảng Nam (7/2025): biển, sông, núi, Hội An, Mỹ Sơn, Cù Lao Chàm cùng một thành phố.</span></div>
+      <div><i>✈️</i><b>Sân bay trong nội thành</b><span>Về Hải Minh 10–15 phút; thêm sân bay Chu Lai phía Nam.</span></div>
+      <div><i>🌏</i><b>Bay thẳng nhiều nước</b><span>Hàn Quốc, Nhật Bản, Trung Quốc, Đài Loan, Singapore, Thái Lan, Ấn Độ…</span></div>
+      <div><i>🚆</i><b>Giao thông đồng bộ</b><span>Ga Bắc – Nam, cảng Tiên Sa đón tàu du lịch; đường sắt tốc độ cao, đường sắt đô thị theo quy hoạch.</span></div>
+      <div><i>🤝</i><b>Bình yên, thân thiện</b><span>Thành phố sạch, trật tự, người dân hiền hòa, mến khách.</span></div>
+      <div><i>🏖️</i><b>Biển cát mịn, bờ thoải</b><span>Mỹ Khê – Non Nước cát trắng mịn, mùa hè sóng êm.</span></div>
+      <div><i>🗺️</i><b>Đi chơi không hết</b><span>Bà Nà, Mikazuki, Suối Lương, Sơn Trà, Hội An, Mỹ Sơn, pháo hoa; Huế ~2 giờ.</span></div>
+      <div><i>💰</i><b>Chi phí hợp lý</b><span>Ăn uống, dịch vụ dễ chịu, giá niêm yết rõ ràng – hợp ở dài ngày.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ANALYSIS -->
+<section class="sec" id="phan-tich">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Phân tích trước khi xuống tiền</span>
+      <h2>7 lý do căn mặt biển Hải Minh đáng cân nhắc ngay từ bây giờ</h2>
+    </div>
+    <div class="rs">
+      <div class="r"><i>1</i><div><b>Quỹ đất mặt biển nội đô có hạn</b><span>Dải ven biển Võ Nguyên Giáp – Trường Sa đã kín resort, khách sạn; dự án căn hộ mới ngay mặt biển ngày càng ít. Trục này thuộc nhóm tuyến có giá đất cao trong bảng giá đất của thành phố (diễn biến giá quá khứ không bảo đảm cho tương lai).</span></div></div>
+      <div class="r"><i>2</i><div><b>Phía trước là công viên, không phải tòa nhà</b><span>Khu đất ven biển trước dự án được quy hoạch làm công viên công cộng ~2,45 ha – tầm nhìn ra biển thoáng, xanh.</span></div></div>
+      <div class="r"><i>3</i><div><b>Nhu cầu lưu trú tăng đều</b><span>Lượt khách cơ sở lưu trú Đà Nẵng: 7,94 triệu (2023) → ~10,9 triệu (2024) → 16,5 triệu (11 tháng 2025, gồm địa bàn Quảng Nam cũ sau hợp nhất).</span>
+        <div class="cols"><div><em>7,94 tr</em><i style="height:52px"></i><span>2023</span></div><div><em>~10,9 tr</em><i style="height:72px"></i><span>2024</span></div><div><em>16,5 tr</em><i class="st" style="height:110px"></i><span>11T/2025*</span></div></div>
+        <small>Nguồn: Cục Thống kê TP Đà Nẵng; Sở Du lịch qua báo chí. *Số liệu sau hợp nhất, không so sánh trực tiếp.</small></div></div>
+      <div class="r"><i>4</i><div><b>Một căn, hai giá trị</b><span>Gia đình nghỉ dưỡng mỗi năm; ngày vắng nhà có thể cho thuê. Ví dụ minh họa: 1,5 triệu/đêm × 60% công suất × 350 đêm ≈ 315 triệu doanh thu phòng/năm, chưa trừ chi phí – <u>không phải cam kết</u>. Tự kéo thử ở máy tính dòng tiền bên dưới.</span></div></div>
+      <div class="r"><i>5</i><div><b>Động lực mới của Đà Nẵng</b><span>Khu thương mại tự do (QĐ 1142/QĐ-TTg, 6/2025) và Trung tâm tài chính quốc tế (NQ 222/2025/QH15) mở thêm dòng khách công tác, chuyên gia ở dài ngày.</span></div></div>
+      <div class="r"><i>6</i><div><b>Đi sớm, chọn được căn đẹp</b><span>Căn nhìn thẳng biển, tầng cao, hướng đón bình minh có số lượng giới hạn theo mặt bằng – người trong danh sách ưu tiên có thời gian so sánh trước ngày ra mắt.</span></div></div>
+      <div class="r"><i>7</i><div><b>Minh bạch từ đầu</b><span>Đất thương mại dịch vụ 50 năm (2026–2076), loại hình căn hộ du lịch – nói rõ từ đầu để anh/chị quyết định đúng nhu cầu.</span></div></div>
+    </div>
+    <div class="cta-strip"><div><b>Muốn xem phân tích theo đúng căn mình quan tâm?</b><span>Chuyên viên gửi bảng so sánh tầng, hướng, dòng căn và bảng tính minh họa qua Zalo.</span></div><div class="cs-b"><a class="btn" href="#dang-ky">Nhận phân tích theo căn</a><a class="btn zalo" href="https://zalo.me/0904567009">Nhắn Zalo</a></div></div>
+  </div>
+</section>
+
+<!-- POLICY -->
+<section class="sec" id="chinh-sach" style="background:var(--sand2)">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Chính sách</span>
+      <h2>Chính sách bán hàng: nhận đầy đủ ngay khi chủ đầu tư công bố</h2>
+      <p class="lead">Dự án dự kiến ra mắt 11/2026. Người trong danh sách ưu tiên nhận trước toàn bộ thông tin sau để so sánh, chọn căn kỹ:</p>
+    </div>
+    <div class="pol">
+      <div><i>💰</i><b>Bảng giá từng căn</b><span>Theo tầng, hướng, dòng căn</span></div>
+      <div><i>📅</i><b>Tiến độ thanh toán</b><span>Các đợt, tỷ lệ, chiết khấu (nếu có)</span></div>
+      <div><i>🏦</i><b>Ngân hàng hỗ trợ vay</b><span>Tỷ lệ cho vay, thời gian ưu đãi</span></div>
+      <div><i>🔑</i><b>Chính sách vận hành, cho thuê</b><span>Đơn vị vận hành, số đêm chủ căn tự ở, tỷ lệ chia doanh thu</span></div>
+      <div><i>📄</i><b>Hợp đồng mẫu</b><span>Quyền, nghĩa vụ, chuyển nhượng, bàn giao</span></div>
+      <div><i>🏗️</i><b>Tiến độ xây dựng, bàn giao</b><span>Cập nhật ảnh công trường định kỳ</span></div>
+    </div>
+    <p class="note4" style="color:#6b7a90;text-align:center">Hiện chưa có chính sách chính thức; không thu tiền giữ chỗ, đặt cọc. Mọi con số thu nhập trên trang chỉ là minh họa, không phải cam kết.</p>
+    <div class="cta-strip"><div><b>Nhận chính sách đầy đủ trước ngày ra mắt</b><span>Gửi qua Zalo ngay khi chủ đầu tư công bố – miễn phí, không ràng buộc.</span></div><div class="cs-b"><a class="btn" href="#dang-ky">Gửi tôi chính sách</a><a class="btn zalo" href="https://zalo.me/0904567009">Hỏi chính sách qua Zalo</a></div></div>
   </div>
 </section>
 
