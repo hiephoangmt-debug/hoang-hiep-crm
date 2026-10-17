@@ -182,12 +182,12 @@
     document.head.appendChild(st);
     var f = document.createElement('footer'); f.id = 'hmft';
     f.innerHTML = '<div class="ft-w">'
-      + '<p>Trang thông tin dự án Hải Minh do <b>Hoàng Phạm Đình Hiệp</b> – chuyên viên tư vấn bất động sản – thực hiện. Đây không phải website của Chủ đầu tư hay đơn vị phân phối chính thức. Thông tin, hình ảnh tổng hợp từ nguồn công khai, mang tính tham khảo; bảng giá, chính sách và thông tin chính thức theo công bố của Chủ đầu tư và Hợp đồng mua bán.</p>'
+      + '<p>Trang thông tin dự án Hải Minh do <b>Hoàng Hiệp</b> – chuyên viên tư vấn bất động sản – thực hiện. Đây không phải website của Chủ đầu tư hay đơn vị phân phối chính thức. Thông tin, hình ảnh tổng hợp từ nguồn công khai, mang tính tham khảo; bảng giá, chính sách và thông tin chính thức theo công bố của Chủ đầu tư và Hợp đồng mua bán.</p>'
       + '<p>Địa chỉ dự án: Khu Khách sạn – Condotel và dân cư Saphia, góc Trường Sa – Nguyễn Đức Thuận, phường Ngũ Hành Sơn, TP Đà Nẵng.</p>'
-      + '<p>Liên hệ tư vấn: <b>Hoàng Phạm Đình Hiệp</b> · Hotline/Zalo <a href="tel:0904567009">0904 567 009</a> · Email <a href="mailto:hiephoangmt@gmail.com">hiephoangmt@gmail.com</a></p>'
+      + '<p>Liên hệ tư vấn: <b>Hoàng Hiệp</b> · Hotline/Zalo <a href="tel:0904567009">0904 567 009</a> · Email <a href="mailto:hiephoangmt@gmail.com">hiephoangmt@gmail.com</a></p>'
       + '<details id="chinh-sach-bao-mat"><summary>Chính sách bảo mật</summary><div>'
       + '<p><b>Thông tin thu thập:</b> họ tên, số điện thoại/Zalo, nội dung anh/chị chọn hoặc nhắn trên trang (câu trả lời trắc nghiệm, thông số máy tính dòng tiền, tin nhắn chat) và thông tin kỹ thuật cơ bản (nguồn truy cập, thiết bị).</p>'
-      + '<p><b>Mục đích:</b> chỉ để chuyên viên Hoàng Phạm Đình Hiệp liên hệ, gửi tài liệu và tư vấn về dự án Hải Minh theo yêu cầu của anh/chị; đo lường hiệu quả quảng cáo.</p>'
+      + '<p><b>Mục đích:</b> chỉ để chuyên viên Hoàng Hiệp liên hệ, gửi tài liệu và tư vấn về dự án Hải Minh theo yêu cầu của anh/chị; đo lường hiệu quả quảng cáo.</p>'
       + '<p><b>Lưu trữ và chia sẻ:</b> dữ liệu lưu trên hệ thống quản lý khách hàng của chuyên viên (Google Sheets, Telegram); không bán, không cho thuê dữ liệu cho bên thứ ba. Câu hỏi gửi qua khung chat có thể được xử lý bởi dịch vụ AI để tự động trả lời.</p>'
       + '<p><b>Quyền của anh/chị:</b> yêu cầu xem, sửa hoặc xóa thông tin, hoặc ngừng nhận liên hệ bất cứ lúc nào qua Hotline/Zalo 0904 567 009 hoặc email hiephoangmt@gmail.com. Thông tin được xử lý theo Nghị định 13/2023/NĐ-CP về bảo vệ dữ liệu cá nhân.</p>'
       + '</div></details></div>';
