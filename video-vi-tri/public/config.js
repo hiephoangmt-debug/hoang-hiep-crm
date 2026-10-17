@@ -45,6 +45,9 @@ window.CONFIG = {
       <div class="rule"></div>
       <div class="sub">Sơn Thủy · Ngũ Hành Sơn · Đà Nẵng</div>` },
 
+    // Dải liên hệ cố định ở cuối màn hình
+    { type: 'title', in: 40, out: 1495, y: 1748, html: `<div class="badge"><span class="ph"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" fill="#fff"/></svg></span><b>0904 567 009</b><i>Hoàng Hiệp</i></div>` },
+
     // ===== Cảnh 2: Vị trí dự án =====
     { type: 'chip', n: '01', text: 'Mặt tiền biển', sub: 'Vị trí dự án', in: 200, out: 440 },
     { type: 'label', text: 'BIỂN SƠN THỦY', style: 'sea', at: [108.2641, 16.0240], width: 1500, bearing: -26, in: 175, out: 480 },
@@ -89,7 +92,8 @@ window.CONFIG = {
       <div class="logo"><svg viewBox="0 0 24 24"><path d="M3 21V10l9-7 9 7v11h-6v-6H9v6H3z" fill="#FF7A1A"/></svg></div>
       <div class="name">SUN SAPHIA<br>RESIDENCE</div>
       <div class="tag">Căn hộ view biển Sơn Thủy · Đà Nẵng</div>
-      <div class="hot"><small>HOTLINE</small>0900 000 000</div>
+      <div class="hot"><small>HOTLINE · HOÀNG HIỆP</small>0904 567 009</div>
+      <div class="web">sun-saphia-residence.com</div>
       <div class="note">Mô hình 3D mang tính minh họa</div>` },
   ],
 };
