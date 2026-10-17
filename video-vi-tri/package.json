@@ -1,0 +1,19 @@
+{
+  "name": "video-vi-tri",
+  "private": true,
+  "type": "module",
+  "description": "Dựng video vị trí dự án BĐS bằng code: bản đồ 3D nền navy, chữ, thẻ tiện ích, đường bay.",
+  "scripts": {
+    "setup": "mkdir -p public/lib public/fonts && cp node_modules/maplibre-gl/dist/maplibre-gl.js node_modules/maplibre-gl/dist/maplibre-gl.css node_modules/@turf/turf/turf.min.js public/lib/ && cp node_modules/@fontsource/be-vietnam-pro/files/be-vietnam-pro-*-normal.woff2 public/fonts/",
+    "data": "bash scripts/lay_du_lieu.sh",
+    "music": "python3 music.py out/music.wav",
+    "frames": "node render.mjs frames",
+    "video": "node render.mjs video out/video_silent.mp4 && python3 music.py out/music.wav && ffmpeg -y -i out/video_silent.mp4 -i out/music.wav -c:v copy -c:a aac -b:a 192k -shortest out/video.mp4"
+  },
+  "dependencies": {
+    "@fontsource/be-vietnam-pro": "5.1.0",
+    "@turf/turf": "7.1.0",
+    "maplibre-gl": "4.7.1",
+    "playwright-core": "1.56.1"
+  }
+}
