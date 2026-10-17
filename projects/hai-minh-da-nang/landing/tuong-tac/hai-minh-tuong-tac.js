@@ -99,6 +99,37 @@
     };
   }
 
+
+  /* ---- Vì sao Đà Nẵng (chèn trước khối trắc nghiệm) ---- */
+  var DN = [
+    ['🏙️', 'Trung tâm của miền Trung', 'Sau khi hợp nhất với Quảng Nam (7/2025), Đà Nẵng có cả biển, sông, núi và di sản: phố cổ Hội An, Mỹ Sơn, Cù Lao Chàm nay cùng một thành phố.'],
+    ['✈️', 'Sân bay ngay trong nội thành', 'Từ sân bay quốc tế Đà Nẵng về Hải Minh chỉ khoảng 15–20 phút ô tô, xuống máy bay là ra biển. Thành phố có thêm sân bay Chu Lai ở phía Nam.'],
+    ['🌏', 'Bay thẳng tới nhiều nước', 'Đường bay quốc tế trực tiếp tới Hàn Quốc, Nhật Bản, Trung Quốc, Đài Loan, Singapore, Thái Lan, Ấn Độ… và các thành phố lớn trong nước; mạng bay tiếp tục được mở rộng.'],
+    ['🚆', 'Giao thông đồng bộ', 'Ga đường sắt Bắc – Nam, cảng Tiên Sa đón tàu du lịch quốc tế, cao tốc kết nối. Đường sắt tốc độ cao Bắc – Nam và đường sắt đô thị đang theo quy hoạch, tiến độ theo Nhà nước.'],
+    ['🤝', 'Bình yên, thân thiện', 'Thành phố sạch, trật tự, người dân hiền hòa, mến khách – điều du khách trong và ngoài nước thường nhắc tới khi quay lại Đà Nẵng.'],
+    ['🏖️', 'Biển cát mịn, bờ thoải', 'Mỹ Khê – Non Nước có bãi cát trắng mịn, bờ thoải, mùa hè sóng êm; phía sau là sông Hàn, bán đảo Sơn Trà và Ngũ Hành Sơn.'],
+    ['🗺️', 'Đi chơi không hết', 'Bà Nà, Sơn Trà, Ngũ Hành Sơn, Hội An, Mỹ Sơn, Cù Lao Chàm, lễ hội pháo hoa quốc tế… phù hợp nghỉ dài ngày, nhiều lần quay lại.'],
+    ['💰', 'Chi phí sinh hoạt hợp lý', 'Ăn uống, đi lại, dịch vụ ở mức dễ chịu, giá niêm yết rõ ràng – thuận cho khách lưu trú dài ngày và người làm việc từ xa.'],
+    ['📈', 'Khách du lịch tăng đều', '11 tháng 2025: 16,5 triệu lượt khách lưu trú (+18,9%), khách quốc tế khoảng 7 triệu (+26,5%) – Cục Thống kê TP Đà Nẵng.'],
+    ['🏦', 'Động lực mới', 'Khu thương mại tự do Đà Nẵng (QĐ 1142/QĐ-TTg, 6/2025) và Trung tâm tài chính quốc tế (NQ 222/2025/QH15) mở thêm dòng khách công tác, chuyên gia.']
+  ];
+  var dnCss = '#hmdn{position:relative;z-index:5;display:block;background:#0f1d33;color:#e6edf6;padding:34px 0 30px;font-family:inherit;clear:both}'
+    + '#hmdn *{box-sizing:border-box}#hmdn .hd-w{max-width:1140px;margin:0 auto;padding:0 16px}'
+    + '#hmdn .hd-k{color:#ff8a4c;font-size:12px;letter-spacing:.14em;font-weight:700;text-transform:uppercase}'
+    + '#hmdn h2{color:#fff;font-size:24px;line-height:1.25;margin:6px 0 8px;font-weight:800}'
+    + '#hmdn .hd-p{margin:0 0 16px;font-size:15px;line-height:1.55;color:#c7d3e3}'
+    + '#hmdn .hd-g{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}'
+    + '#hmdn .hd-c{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start}'
+    + '#hmdn .hd-i{font-size:24px;line-height:1}#hmdn b{display:block;color:#fff;font-size:16px;margin-bottom:4px}'
+    + '#hmdn .hd-c span{font-size:14px;line-height:1.5;color:#c7d3e3}#hmdn .hd-s{font-size:12px;color:#8fa1b8;margin-top:12px}'
+    + '@media(max-width:760px){#hmdn .hd-g{grid-template-columns:1fr}#hmdn h2{font-size:21px}}';
+  function dnHtml() {
+    return '<div class="hd-w"><div class="hd-k">Vì sao chọn Đà Nẵng</div>'
+      + '<h2>Thành phố đáng sống, đáng đầu tư của miền Trung</h2>'
+      + '<p class="hd-p">Hải Minh nằm giữa trục biển Võ Nguyên Giáp – Trường Sa, hưởng trọn những lợi thế của Đà Nẵng:</p>'
+      + '<div class="hd-g">' + DN.map(function (d) { return '<div class="hd-c"><div class="hd-i">' + d[0] + '</div><div><b>' + d[1] + '</b><span>' + d[2] + '</span></div></div>'; }).join('') + '</div>'
+      + '<div class="hd-s">Thời gian di chuyển là ước tính bằng ô tô. Các dự án hạ tầng theo quy hoạch, tiến độ do Nhà nước quyết định.</div></div>';
+  }
   function build() {
     if (document.getElementById('hmx')) return;
     var img = document.querySelector('img[src*="so-do-vi-tri-hai-minh"]');
@@ -108,6 +139,8 @@
     var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
     var root = document.createElement('div'); root.id = 'hmx'; root.innerHTML = html();
     after.parentNode.insertBefore(root, after.nextSibling);
+    var sd = document.createElement('style'); sd.textContent = dnCss; document.head.appendChild(sd);
+    var dnEl = document.createElement('div'); dnEl.id = 'hmdn'; dnEl.innerHTML = dnHtml(); root.parentNode.insertBefore(dnEl, root);
 
     // quiz
     var ans = {};
