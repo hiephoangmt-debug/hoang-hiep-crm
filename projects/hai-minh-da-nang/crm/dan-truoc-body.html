@@ -1,7 +1,7 @@
 <!-- ============================================================
   HẢI MINH – NÚT ZALO / GỌI / CHAT TƯ VẤN THEO ĐOẠN ĐANG ĐỌC
   Dán TOÀN BỘ đoạn này vào LadiPage: Thiết lập > Mã tùy chỉnh > "Trước </body>"
-  (xóa đoạn mã chat cũ trước khi dán). Chỉ chạy trên trang đã hai-minh-4d-embed.js" deferuất bản.
+  (xóa đoạn mã chat cũ trước khi dán). Chỉ chạy trên trang đã Xuất bản.
   - Khách dừng đọc một đoạn ~12 giây → hiện câu hỏi đúng chủ đề đoạn đó.
   - Khách gõ số điện thoại trong chat → gửi về CRM Hoàng Hiệp (+ Telegram).
   - Bấm Zalo / Gọi (kể cả nút LadiPage) → CRM ghi lượt bấm.
@@ -9,7 +9,7 @@
 <!-- Mã CRM Hoàng Hiệp (tự thêm nếu trang chưa có) + bắt form LadiPage -->
 <script>
 (function(){
-  var CRM='https://script.google.com/macros/s/AKfycbyChbG-uvItjVlRk7JgLrwpUS6Cgah4nIA6BWHuEwgbhai-minh-4d-embed.js" deferBqSlvAPJNSdZdp6pQ91d_rN/exec';
+  var CRM='https://script.google.com/macros/s/AKfycbyChbG-uvItjVlRk7JgLrwpUS6Cgah4nIA6BWHuEwgbXBqSlvAPJNSdZdp6pQ91d_rN/exec';
   window.HM_CRM={url:CRM,key:'qgK6I9KWTqfS'};
   window.HM_JSONP=function(params,cb,ms){
     var name='hmcb'+Date.now()+Math.floor(Math.random()*1e4), done=false, sc=document.createElement('script');
@@ -100,7 +100,7 @@
       <button type="submit">Gửi</button>
     </form>
   </div>
-  <div class="hmw-bubble" id="hmwBubble" role="button"><span class="x" id="hmwBubblehai-minh-4d-embed.js" defer" aria-label="Đóng">×</span><span id="hmwBubbleText"></span><span class="go">Trả lời →</span></div>
+  <div class="hmw-bubble" id="hmwBubble" role="button"><span class="x" id="hmwBubbleX" aria-label="Đóng">×</span><span id="hmwBubbleText"></span><span class="go">Trả lời →</span></div>
   <div class="hmw-dock">
     <a class="hmw-btn hmw-zalo" href="https://zalo.me/0904567009" target="_blank" rel="noopener" aria-label="Chat Zalo"><svg viewBox="0 0 24 24" style="width:30px;height:30px"><path fill="#fff" d="M12 3C6.5 3 2 6.7 2 11.3c0 2.6 1.4 4.9 3.7 6.4L5 21l3.6-1.9c1.1.3 2.2.5 3.4.5 5.5 0 10-3.7 10-8.3S17.5 3 12 3z"/><path fill="#0068FF" d="M8 8.6h5.4v1.2l-3.6 4.2h3.7v1.4H7.8v-1.2l3.6-4.2H8z"/><path fill="#0068FF" d="M14.6 9.8h1.3v5.6h-1.3z"/></svg></a>
     <a class="hmw-btn hmw-call" href="tel:0904567009" aria-label="Gọi 0904 567 009"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></a>
@@ -222,11 +222,11 @@
   $('hmwOpen').onclick=function(){ if(panel.classList.contains('open')) panel.classList.remove('open'); else open(pending); pending=null; };
   $('hmwClose').onclick=function(){panel.classList.remove('open');};
   $('hmwForm').onsubmit=function(e){e.preventDefault();var i=$('hmwInput');handle(i.value);i.value='';};
-  bubble.onclick=function(e){bubble.style.display='none'; if(e.target.id==='hmwBubblehai-minh-4d-embed.js" defer'){shownCount=99;return;} open(pending); pending=null;};
+  bubble.onclick=function(e){bubble.style.display='none'; if(e.target.id==='hmwBubbleX'){shownCount=99;return;} open(pending); pending=null;};
   document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href$="#chat-tu-van"]');if(a){e.preventDefault();open();}});
 
   /* ---------- Theo dõi đoạn đang đọc: dừng ~12 giây → hỏi đúng chủ đề ---------- */
-  var DWELL=12, GAP=35, MAhai-minh-4d-embed.js" deferPOP=3, shown={}, shownCount=0, lastPop=0, dwell=0, lastId=null, cache=[];
+  var DWELL=12, GAP=35, MAXPOP=3, shown={}, shownCount=0, lastPop=0, dwell=0, lastId=null, cache=[];
   function sections(){
     if(!cache.length){ var els=document.querySelectorAll('.ladi-section, main > section, body > section');
       for(var i=0;i<els.length;i++){ var t=norm((els[i].innerText||'').slice(0,600)), tp=null;
@@ -244,7 +244,7 @@
     var tp=current(); curTopic=tp||curTopic;
     var id=tp?tp.id:null;
     if(id!==lastId){lastId=id;dwell=0;return;}
-    if(!tp||panel.classList.contains('open')||gotPhone||shown[id]||shownCount>=MAhai-minh-4d-embed.js" deferPOP) return;
+    if(!tp||panel.classList.contains('open')||gotPhone||shown[id]||shownCount>=MAXPOP) return;
     if(++dwell<DWELL) return;
     if((Date.now()-lastPop)/1000<GAP) return;
     shown[id]=1; shownCount++; lastPop=Date.now(); pending=tp;
@@ -281,7 +281,7 @@
   var _alert=window.alert;
   window.alert=function(m){ return _alert.call(window, RE.test(String(m||''))?MSG:m); };
   function fix(root){
-    var w=document.createTreeWalker(root||document.body,NodeFilter.SHOW_TEhai-minh-4d-embed.js" deferT,null,false),n;
+    var w=document.createTreeWalker(root||document.body,NodeFilter.SHOW_TEXT,null,false),n;
     while((n=w.nextNode())){ if(RE.test(n.nodeValue)&&!(n.parentNode&&n.parentNode.closest&&n.parentNode.closest('#hmw'))) n.nodeValue=MSG; }
   }
   function start(){ fix(document.body); new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(x){ if(x.nodeType===3){ if(RE.test(x.nodeValue)) x.nodeValue=MSG; } else if(x.nodeType===1) fix(x); }); if(m.type==='characterData'&&RE.test(m.target.nodeValue)) m.target.nodeValue=MSG;});}).observe(document.body,{childList:true,subtree:true,characterData:true}); }
@@ -298,7 +298,7 @@
   function line(t){var d=document.createElement('div');d.textContent=t;d.style.marginTop='6px';box.appendChild(d);}
   function go(){
     document.body.appendChild(box);
-    var C=window.HM_CRM||{url:'https://script.google.com/macros/s/AKfycbyChbG-uvItjVlRk7JgLrwpUS6Cgah4nIA6BWHuEwgbhai-minh-4d-embed.js" deferBqSlvAPJNSdZdp6pQ91d_rN/exec',key:'qgK6I9KWTqfS'};
+    var C=window.HM_CRM||{url:'https://script.google.com/macros/s/AKfycbyChbG-uvItjVlRk7JgLrwpUS6Cgah4nIA6BWHuEwgbXBqSlvAPJNSdZdp6pQ91d_rN/exec',key:'qgK6I9KWTqfS'};
     line('1. Mã CRM trên trang: '+(window.crmLead?'✅ đã chạy':'❌ CHƯA chạy'));
     line('2. Đoạn mã chat mới: '+(document.getElementById('hmw')?'✅ có':'❌ không có'));
     function call(n,label,body){
@@ -315,7 +315,7 @@
 <script>
 (function(){
   function run(){
-    var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEhai-minh-4d-embed.js" deferT,null), n, list=[];
+    var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null), n, list=[];
     while((n=w.nextNode())){ if(/giữ\s*suất/i.test(n.nodeValue)) list.push(n); }
     list.forEach(function(t){ t.nodeValue=t.nodeValue.replace(/GIỮ\s*SUẤT/g,'NHẬN THÔNG TIN').replace(/Giữ\s*suất/g,'Nhận thông tin').replace(/giữ\s*suất/g,'nhận thông tin'); });
     document.querySelectorAll('.ladi-countdown').forEach(function(c){ var el=c.closest('[id^="COUNTDOWN"]')||c; el.style.display='none'; });
