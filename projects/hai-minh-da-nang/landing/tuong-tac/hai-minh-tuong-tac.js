@@ -3,6 +3,7 @@
    Gửi khách về CRM/Telegram qua window.crmLead (mã CRM đã có trên trang). */
 (function () {
   if (window.__hmx) return; window.__hmx = 1;
+  var STATIC = false; // trang đã có sẵn phân tích, lợi thế Đà Nẵng, dòng căn, chân trang -> chỉ chèn trắc nghiệm + máy tính
   var ZALO = 'https://zalo.me/0904567009';
 
   var css = '#hmx{position:relative;z-index:5;isolation:isolate;display:block;visibility:visible;opacity:1;background:#f4f6fa;padding:34px 0 30px;font-family:inherit;color:#13233d;clear:both}'
@@ -91,7 +92,7 @@
       return '<div class="hx-q" data-q="' + x.id + '"><b>' + x.t + '</b>' + x.o.map(function (o) {
         return '<button type="button" class="hx-o" aria-pressed="false">' + o + '</button>'; }).join('') + '</div>';
     }).join('');
-    return '<div class="hx-w">' + anHtml() + '<div class="hx-k" style="margin-top:34px">Danh sách ưu tiên trước ngày ra mắt · dự kiến 11/2026</div>'
+    return '<div class="hx-w">' + (STATIC ? '' : anHtml()) + '<div class="hx-k" style="margin-top:34px">Danh sách ưu tiên trước ngày ra mắt · dự kiến 11/2026</div>'
       + '<h2>5 dòng căn, dòng nào hợp với anh/chị?</h2>'
       + '<p>Trả lời 3 câu để xem gợi ý dòng căn, hoặc tự kéo thử dòng tiền cho thuê. Bảng giá và mặt bằng gửi qua Zalo ngay khi chủ đầu tư công bố.</p>'
       + '<div class="hx-g"><div class="hx-c" id="hmx-quiz"><h3>Căn nào hợp với anh/chị?</h3>' + q
@@ -105,13 +106,13 @@
       + '<div class="hx-sm" style="margin-bottom:12px">Chỉ là ví dụ minh họa, không phải cam kết. Chưa trừ phí vận hành, thuế và tỷ lệ chia doanh thu (chủ đầu tư chưa công bố). Giá phòng ven biển trục Võ Nguyên Giáp phổ biến khoảng 1–3 triệu/đêm (giá công khai trên nền tảng đặt phòng).</div>'
       + '<button type="button" class="hx-btn" id="hmx-cgo">Nhận bảng tính chi tiết theo căn thật qua Zalo</button>' + form('hmx-cf', 'Gửi tôi bảng tính chi tiết')
       + '<a class="hx-btn hx-z" href="' + ZALO + '" target="_blank" rel="noopener">Nhắn Zalo 0904 567 009</a></div></div>'
-      + '<div class="hx-u">'
+      + (STATIC ? '' : '<div class="hx-u">'
       + '<div><b>1PN</b>47,4 m²<br><i>Giá: gửi qua Zalo</i></div>'
       + '<div><b>2PN</b>66,5–68,8 m²<br><i>Giá: gửi qua Zalo</i></div>'
       + '<div><b>2PN+1</b>76,2–76,9 m²<br><i>Giá: gửi qua Zalo</i></div>'
       + '<div><b>3PN</b>78,6–80 m²<br><i>Giá: gửi qua Zalo</i></div>'
       + '<div><b>Dual Key</b>101 m², 2 phần cửa riêng<br><i>Giá: gửi qua Zalo</i></div></div>'
-      + '<p class="hx-sm" style="margin-top:10px">Diện tích theo thông tin dự án hiện có; giá, mặt bằng chi tiết và chính sách do chủ đầu tư công bố khi ra mắt.</p></div>';
+      + '<p class="hx-sm" style="margin-top:10px">Diện tích theo thông tin dự án hiện có; giá, mặt bằng chi tiết và chính sách do chủ đầu tư công bố khi ra mắt.</p>') + '</div>';
   }
 
   function vnd(n) { return n >= 1e9 ? (n / 1e9).toFixed(2).replace('.', ',') + ' tỷ' : Math.round(n / 1e6).toLocaleString('vi-VN') + ' triệu'; }
@@ -174,7 +175,7 @@
 
   /* ---- Chân trang minh bạch + chính sách bảo mật ---- */
   function footer() {
-    if (document.getElementById('hmft')) return;
+    if (document.getElementById('hmft') || /không phải website của Chủ đầu tư/.test(document.body.innerText || '')) return;
     var st = document.createElement('style');
     st.textContent = '#hmft{position:relative;z-index:5;display:block;background:#0b1626;color:#9fb0c6;font-family:inherit;font-size:12.5px;line-height:1.6;padding:22px 0 90px;clear:both}'
       + '#hmft .ft-w{max-width:1140px;margin:0 auto;padding:0 16px}#hmft p{margin:0 0 8px}#hmft b{color:#dfe7f1}#hmft a{color:#ff8a4c}'
@@ -195,6 +196,7 @@
   }
   function build() {
     if (document.getElementById('hmx')) return;
+    STATIC = /Phân tích trước khi xuống tiền/.test(document.body.innerText || '');
     var img = document.querySelector('img[src*="so-do-vi-tri-hai-minh"]');
     var after = document.getElementById('hm4d') || (img && (img.closest('.ladi-section') || img.closest('section')));
     if (!after) { var s = document.querySelectorAll('.ladi-section, section'); after = s.length ? s[Math.min(3, s.length - 1)] : null; }
@@ -203,7 +205,7 @@
     var root = document.createElement('div'); root.id = 'hmx'; root.innerHTML = html();
     after.parentNode.insertBefore(root, after.nextSibling);
     var sd = document.createElement('style'); sd.textContent = dnCss; document.head.appendChild(sd);
-    var dnEl = document.createElement('div'); dnEl.id = 'hmdn'; dnEl.innerHTML = dnHtml(); root.parentNode.insertBefore(dnEl, root);
+    if (!STATIC) { var dnEl = document.createElement('div'); dnEl.id = 'hmdn'; dnEl.innerHTML = dnHtml(); root.parentNode.insertBefore(dnEl, root); }
 
     // quiz
     var ans = {};
@@ -234,8 +236,10 @@
     }
     [s1, s2, s3].forEach(function (s) { s.oninput = calc; }); calc();
     document.getElementById('hmx-cgo').onclick = function () { this.style.display = 'none'; document.getElementById('hmx-cf').classList.add('hx-on'); document.querySelector('#hmx-cf [name=ten]').focus(); };
+    if (!STATIC) {
     document.getElementById('hmx-ago').onclick = function () { this.style.display = 'none'; document.getElementById('hmx-af').classList.add('hx-on'); document.querySelector('#hmx-af [name=ten]').focus(); };
     wireForm(document.getElementById('hmx-af'), function () { return '[Phân tích] Muốn nhận bảng giá trước ngày ra mắt'; }, 'phan-tich');
+    }
     wireForm(document.getElementById('hmx-cf'), function () {
       var c = calc(); return '[Dòng tiền] Giá/đêm ' + (c.p / 1e6) + ' triệu · công suất ' + c.occ + '% · tự ở ' + c.own + ' đêm → doanh thu minh họa ≈ ' + vnd(c.y) + '/năm';
     }, 'may-tinh-dong-tien');
