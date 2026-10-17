@@ -986,8 +986,34 @@ export class Viewer3D {
     const prev = this.built.labels.map((l) => l.visible);
     // Ảnh như thật chỉ dùng khi đã có ít nhất 1 lượt render; chưa có thì lấy ảnh 3D thường
     const usePT = this.ptActive && this.pt.samples >= 1;
+    // Ảnh đẹp nhanh: cộng dồn nhiều khung, mỗi khung lệch nắng (bóng đổ mềm như nắng thật) và lệch camera
+    // nửa điểm ảnh (khử răng cưa), bật bóng tối góc (AO) – kiểu Enscape/Lumion, vài giây là xong
+    const acc = info.soft && !usePT ? document.createElement('canvas') : null;
+    const softRender = () => {
+      const cv = this.renderer.domElement, W = cv.width, H = cv.height;
+      acc.width = W; acc.height = H;
+      const x = acc.getContext('2d');
+      const N = info.soft === true ? 32 : info.soft;
+      const sunPos = this.sun.position.clone(), t = this.sun.target.position, d = sunPos.distanceTo(t);
+      const dir = sunPos.clone().sub(t).normalize(), u = new THREE.Vector3(0, 1, 0).cross(dir).normalize(), v = dir.clone().cross(u);
+      const aoWas = this.gtao.enabled; this.gtao.enabled = true;
+      for (let i = 0; i < N; i++) {
+        // điểm rải đều trên đĩa (xoắn ốc vàng) → bóng mềm đều, không lốm đốm
+        const rr = Math.sqrt((i + 0.5) / N) * d * 0.022, a = i * 2.39996;
+        this.sun.position.copy(sunPos).addScaledVector(u, Math.cos(a) * rr).addScaledVector(v, Math.sin(a) * rr);
+        this.camera.setViewOffset(W, H, ((i * 0.618) % 1) - 0.5, ((i * 0.382) % 1) - 0.5, W, H);
+        this.updateCutaway();
+        this.composer.render();
+        x.globalAlpha = 1 / (i + 1);
+        x.drawImage(cv, 0, 0);
+      }
+      this.camera.clearViewOffset();
+      this.sun.position.copy(sunPos);
+      this.gtao.enabled = aoWas;
+    };
     const render = () => {
       if (usePT) { this.pt.renderSample(); return; }
+      if (acc) { softRender(); return; }
       this.updateCutaway();
       if (this.state.ao || this.bloom.enabled) this.composer.render(); else this.renderer.render(this.scene, this.camera);
     };
@@ -1039,7 +1065,7 @@ export class Viewer3D {
     // Đang render như thật không đổi được khung → cắt sát vùng có căn
     let focus = null;
     if (usePT) { const b = this.built.bounds; focus = []; for (const px of [b.minX, b.maxX]) for (const pz of [b.minY, b.maxY]) for (const py of [0, this.built.height]) focus.push({ x: px, y: py, z: pz }); }
-    const out = exportImage({ renderer: this.renderer, scene: this.scene, camera: this.camera, render, keepRatio: true, frame, focus, ...extra, ...info });
+    const out = exportImage({ renderer: this.renderer, scene: this.scene, camera: this.camera, render, source: acc, keepRatio: true, frame, focus, ...extra, ...info });
     if (!usePT) {
       this.renderer.setPixelRatio(saved.pr);
       this.composer.setPixelRatio(saved.pr);

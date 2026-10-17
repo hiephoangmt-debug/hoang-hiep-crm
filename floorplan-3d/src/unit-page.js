@@ -294,17 +294,18 @@ $('#landBtn').onclick = () => {
   viewer.setOption('landscape', on);
   $('#landBtn').classList.toggle('active', on);
 };
-async function saveImage(mode) {
+async function saveImage(mode, soft = false) {
   const total = store.plan.rooms.filter((r) => !/sân vườn/i.test(r.name)).reduce((s, r) => s + polygonArea(r.points), 0);
   const garden = store.plan.rooms.filter((r) => /sân vườn/i.test(r.name)).reduce((s, r) => s + polygonArea(r.points), 0);
   const blob = await viewer.exportPNG({
     mode,
+    soft,
     dims: unit.dims,
     title: `${unit.name} · Tòa F2`,
     lines: [unit.type, `${fmt(unit.dims[0], 2)} × ${fmt(unit.dims[1], 2)} m`, ...(unit.code ? [unit.group.label] : []), ...(offOf(unit) ? [`Tim ${fmt(offOf(unit)[0])} m² · Thông thủy ${fmt(offOf(unit)[1])} m²`, offOf(unit)[2] ? `BC sân vườn ${fmt(offOf(unit)[3])} m² TT` : ''] : [`Tổng DT các phòng ${fmt(total)} m²`, garden ? `Sân vườn ${fmt(garden)} m²` : '']), STYLES[store.plan.settings.style]?.name || ''].filter(Boolean),
   });
   download(blob, `${unit.id.replace('@', '-tang-')}-${mode === 'plan' ? 'mat-bang' : 'phoi-canh'}.png`);
-  toast(mode === 'plan' ? 'Đã tải ảnh mặt bằng (5:6, nhìn từ trên, kèm diện tích và dài × rộng từng phòng).' : 'Đã tải ảnh phối cảnh theo góc đang xem (5:6). Mẹo: bấm 📸 Chụp ảnh như thật, chờ ảnh mịn rồi tải để có ảnh đẹp nhất.', 6000);
+  toast(mode === 'plan' ? 'Đã tải ảnh mặt bằng (5:6, nhìn từ trên, kèm diện tích và dài × rộng từng phòng).' : soft ? 'Đã tải ảnh như thật 5:6 (bóng đổ mềm, khử răng cưa).' : 'Đã tải ảnh phối cảnh theo góc đang xem (5:6). Mẹo: bấm 📸 Chụp ảnh như thật để có ảnh đẹp hơn.', 6000);
 }
 // Kiểu quảng cáo: đế sách, phong cách gỗ & xanh rêu, nắng sáng xiên có bóng lá, chú thích cảm xúc
 let adPrev = null;
@@ -338,6 +339,12 @@ $('#saveAdBtn').onclick = async () => {
 };
 // Ảnh như thật: chưa đủ mịn thì chờ làm mịn xong rồi tự tải (ảnh không bị nhiễu hạt)
 let ptPending = false;
+$('#softBtn').onclick = async () => {
+  if (viewer.ptActive) viewer.stopRealRender();
+  const b = $('#softBtn'); b.disabled = true; b.textContent = '⏳ Đang chụp…';
+  await new Promise((r) => requestAnimationFrame(() => setTimeout(r, 30)));
+  try { await saveImage('view', true); } finally { b.disabled = false; b.textContent = '📸 Chụp ảnh như thật'; }
+};
 $('#ptSave').onclick = () => {
   if (viewer.ptActive && !viewer._ptDone) { ptPending = true; $('#ptSave').textContent = '⏳ Đang làm mịn – xong sẽ tự tải'; return; }
   saveImage('view');
