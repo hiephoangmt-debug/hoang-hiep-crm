@@ -344,6 +344,11 @@ body{background:#fff}
 .qf{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
 .qf div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:12px 14px;color:#c9d6e3;font-size:13.5px;line-height:1.35}
 .qf b{display:block;color:#FF8A3D;font-size:21px;font-weight:800}
+
+.ahero{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='70' viewBox='0 0 900 70'%3E%3Cpath d='M0 40 Q112 14 225 40 T450 40 T675 40 T900 40 V70 H0Z' fill='%23ffffff'/%3E%3C/svg%3E") repeat-x 0 100%/900px 70px,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='90' viewBox='0 0 1200 90'%3E%3Cpath d='M0 45 Q150 5 300 45 T600 45 T900 45 T1200 45 V90 H0Z' fill='%23ffffff' fill-opacity='.14'/%3E%3C/svg%3E") repeat-x 0 100%/1200px 90px,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='48' viewBox='0 0 240 48'%3E%3Cpath d='M0 12 Q30 2 60 12 T120 12 T180 12 T240 12 M0 36 Q30 26 60 36 T120 36 T180 36 T240 36' fill='none' stroke='%23ffffff' stroke-opacity='.08' stroke-width='1.5'/%3E%3C/svg%3E") repeat 0 0/240px 48px,linear-gradient(160deg,rgba(7,26,48,.93),rgba(10,37,64,.86) 55%,rgba(14,52,88,.9)),url("https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/b5b89e267db196fba44e68853b81a8b4e9e43f2d/projects/hai-minh-da-nang/landing/images/dn-bien-my-khe-tu-tren-cao.webp") center/cover no-repeat;animation:songHero 16s linear infinite}
+@keyframes songHero{from{background-position:0 100%,0 100%,0 0,0 0,center}to{background-position:-900px 100%,1200px 100%,240px 48px,0 0,center}}
+.final{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='70' viewBox='0 0 900 70'%3E%3Cpath d='M0 30 Q112 56 225 30 T450 30 T675 30 T900 30 V0 H0Z' fill='%23ffffff'/%3E%3C/svg%3E") repeat-x 0 0/900px 70px,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='48' viewBox='0 0 240 48'%3E%3Cpath d='M0 12 Q30 2 60 12 T120 12 T180 12 T240 12 M0 36 Q30 26 60 36 T120 36 T180 36 T240 36' fill='none' stroke='%23ffffff' stroke-opacity='.08' stroke-width='1.5'/%3E%3C/svg%3E") repeat 0 0/240px 48px,linear-gradient(150deg,rgba(7,26,48,.94),rgba(12,44,78,.88)),url("https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/b5b89e267db196fba44e68853b81a8b4e9e43f2d/projects/hai-minh-da-nang/landing/images/dn-cau-rong-song-han.webp") center/cover no-repeat;animation:songFinal 14s linear infinite}
+@keyframes songFinal{from{background-position:0 0,0 0,0 0,center}to{background-position:900px 0,240px 48px,0 0,center}}
 </style>
 </head>
 <body>
@@ -358,7 +363,6 @@ body{background:#fff}
 <article>
 <!-- HERO -->
 <section class="ahero" id="dau-trang">
-  <div class="van"></div><div class="song"></div><div class="song song2"></div>
   <div class="wrap">
     <p class="crumb"><a href="#dau-trang">Trang chủ</a> › Dự án Đà Nẵng › Sun Saphia Residence</p>
     <h1><span class="kim">Sun Saphia Residence</span> Đà Nẵng: vị trí, mặt bằng, loại căn, giá bán và tiến độ (cập nhật 10/2026)</h1>
@@ -556,7 +560,6 @@ body{background:#fff}
 
 <!-- FINAL -->
 <section class="sec final" id="dang-ky">
-  <div class="van"></div><div class="song song2"></div>
   <div class="wrap grid">
     <div>
       <span class="eyebrow" style="color:#FFB067">Sun Saphia Residence Đà Nẵng</span>
