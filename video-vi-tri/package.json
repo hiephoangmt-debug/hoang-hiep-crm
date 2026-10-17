@@ -8,7 +8,7 @@
     "data": "bash scripts/lay_du_lieu.sh",
     "music": "python3 music.py out/music.wav",
     "frames": "node render.mjs frames",
-    "video": "node render.mjs video out/video_silent.mp4 && python3 music.py out/music.wav && ffmpeg -y -i out/video_silent.mp4 -i out/music.wav -c:v copy -c:a aac -b:a 192k -shortest out/video.mp4"
+    "video": "bash render_parts.sh"
   },
   "dependencies": {
     "@fontsource/be-vietnam-pro": "5.1.0",

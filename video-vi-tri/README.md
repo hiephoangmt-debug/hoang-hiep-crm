@@ -19,7 +19,7 @@ npm run setup          # chép thư viện bản đồ + font vào public/
 pip install pyarrow shapely numpy
 npm run data           # tải dữ liệu bản đồ khu Đà Nẵng – Hội An (~1 phút)
 npm run frames 380,660,1000   # chụp thử vài khung hình -> out/frames
-npm run video          # xuất video có nhạc -> out/video.mp4
+npm run video          # xuất video có nhạc -> out/video.mp4 (render từng đoạn 5 giây, bị dừng thì chạy lại sẽ làm tiếp)
 ```
 
 Render dùng Chromium. Nếu máy không có sẵn, đặt biến `CHROME=/đường/dẫn/chrome`.
