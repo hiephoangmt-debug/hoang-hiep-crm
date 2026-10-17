@@ -1107,13 +1107,15 @@
   }
 
   // ------------------------------------------------------------ BÁO CÁO
-  const tplCache = {};
+  const tplCache = {}, tplSrc = {};
   // Mẫu cũ (10/10) trên Drive chưa có kênh Đăng tin -> dùng mẫu COLLECTION 16/10 (có Đăng tin) đi kèm mã nguồn
   const OLD_TPL = "10S0gG5T_o1WOqqkvUiFdwdhauqoa9mA6";
   const NEW_TPL_PATH = "bao-cao-mkt/mau/mau-collection-16-10.pptx";
   async function newTemplate() {
     if (!/^https:\/\/[^/]+\/gh\//.test(CODE_BASE)) return null;
-    const hosts = [CODE_BASE].concat(["fastly", "gcore"].map((h) => CODE_BASE.replace(/^https:\/\/[^/]+/, `https://${h}.jsdelivr.net`)));
+    const m = /\/gh\/([^@]+)@([^/]+)\/$/.exec(CODE_BASE);
+    const hosts = [CODE_BASE].concat(["fastly", "gcore"].map((h) => CODE_BASE.replace(/^https:\/\/[^/]+/, `https://${h}.jsdelivr.net`)),
+      m ? [`https://raw.githubusercontent.com/${m[1]}/${m[2]}/`] : []);
     for (const base of hosts) {
       try {
         const r = await fetch(base + NEW_TPL_PATH);
@@ -1357,8 +1359,15 @@
     // báo cáo tuần: kèm các tuần trước để so sánh; báo cáo tháng / chiến dịch: đúng các tuần trong kỳ
     const rows = effective(S.SoLieu.filter((r) => r.duAn === pjName && (ky === "tuan" ? r.tuan <= w : wks.includes(r.tuan))));
     if (!last || !rows.some((r) => wks.includes(r.tuan))) throw new Error(`${pjName}: chưa có số liệu ${periodLabel(w)}.`);
-    if (!tplCache[tplId]) tplCache[tplId] = (tplId === OLD_TPL && await newTemplate()) || await (async () => {
-      const t = await gas("downloadFile", tplId, TOKEN); return B.b64ToBlob(t.b64, t.type); })();
+    if (!tplCache[tplId]) {
+      const nt = tplId === OLD_TPL ? await newTemplate() : null;
+      if (nt) { tplCache[tplId] = nt; tplSrc[tplId] = "mẫu 16/10"; }
+      else {
+        const t = await gas("downloadFile", tplId, TOKEN);
+        tplCache[tplId] = B.b64ToBlob(t.b64, t.type);
+        tplSrc[tplId] = tplId === OLD_TPL ? "mẫu Drive 10/10 (không tải được mẫu 16/10)" : "mẫu Drive";
+      }
+    }
     const accStaff = new Map(rows.map((r) => [r.taiKhoan || r.nhanSu || "(không rõ)", r.nhanSu]));
     let ev = [];
     if (ky === "tuan") {
@@ -1402,7 +1411,7 @@
     const b64 = await B.blobToB64(res.blob);
     const out = { tuan: w, duAn: pjName, trangThai: "Nháp", pdfUrl: "", pptxUrl: "",
       tomTat: `${res.slides} slide, ${res.staffCount} nhân sự` + (ky === "tuan" ? `, ${res.nImg} ảnh` : `, ${wks.length} tuần`) +
-        (res.missing ? `, thiếu ${res.missing} ảnh nghiệm thu` : "") + ` · ${(res.blob.size / 1048576).toFixed(1)} MB` };
+        (res.missing ? `, thiếu ${res.missing} ảnh nghiệm thu` : "") + ` · ${(res.blob.size / 1048576).toFixed(1)} MB · ${tplSrc[tplId] || "mẫu Drive"}` };
     // tạo lại: ghi đè vào file cũ để link đã gửi nhóm vẫn mở được bản mới
     const prev = S.BaoCao.find((r) => r.duAn === pjName && r.tuan === w);
     const data = await uploadData(b64, pjName);

@@ -459,6 +459,14 @@
       else if (t.startsWith("Thời gian triển khai:") && ctx.period) setBodyText(body, "Thời gian triển khai: " + ctx.period);
       else if (t.startsWith("REVIEW CHIẾN DỊCH") && ctx.campaign) setBodyText(body, "REVIEW CHIẾN DỊCH " + ctx.campaign);
       else {
+        // mẫu cũ (10/10) chưa có dòng "Đăng tin:" trong khối ngân sách -> thêm sau dòng "Google:"
+        const ps = byTag(body, "a:p");
+        const gg = ps.find((p) => /^Google:\s*$/i.test(paraText(p).trim()));
+        if (gg && !ps.some((p) => /^Đăng tin:/i.test(paraText(p).trim()))) {
+          const dt = gg.cloneNode(true);
+          setParaText(dt, "Đăng tin:");
+          gg.parentNode.insertBefore(dt, gg.nextSibling);
+        }
         byTag(body, "a:p").forEach((p) => {
           const pt = paraText(p).trim();
           const m = /^(Facebook|Tiktok|Zalo|Google|Đăng tin):\s*$/i.exec(pt);
