@@ -540,6 +540,7 @@ def handle_customer(cid, channel, name, text, images=None):
                 notify_admin(f"🔥 KHÁCH NÓNG: {label(cid)}\n" +
                              "\n".join(f"{k}: {v}" for k, v in c["ho_so"].items()))
             if changed.get("sdt"):
+                suggest_friend_request(cid)
                 old = find_old_customer(cid, changed["sdt"])
                 if old:
                     notify_admin(f"🔁 {label(cid)} là khách cũ trong data: {old.get('ten', '')} {old.get('sdt', '')}")
@@ -579,6 +580,69 @@ def draft_for_personal_zalo(pasted: str) -> str:
         "Sau đó 1 dòng 'Gợi ý:' nêu bước tiếp theo nên làm với khách này. Không dùng thẻ điều khiển. "
         "Chỗ nào cần số liệu không có trong THÔNG TIN thì để [điền ...]."})
     return ask_claude(system, [{"role": "user", "content": pasted}], max_tokens=1200)
+
+
+# =============================================================== /ketban — lời mời kết bạn Zalo cá nhân
+FRIEND_MAX = 150  # ô "lời chào" khi gửi kết bạn Zalo giới hạn khoảng 150 ký tự
+
+
+def customer_brief(cid) -> str:
+    """Tóm tắt khách cho AI: hồ sơ + vài tin gần nhất."""
+    c = store.customers.get(cid) or {}
+    hs = c.get("ho_so", {})
+    recent = [m["text"][:200] for m in c.get("tin", []) if m["role"] == "user"][-5:]
+    return (f"Tên Zalo: {c.get('ten', '')}\nKênh: {c.get('kenh', '')}\nNhắn lần đầu: {c.get('lan_dau', '')}\n"
+            f"Hồ sơ: {json.dumps(hs, ensure_ascii=False)}\nTin khách đã nhắn: " + " | ".join(recent))
+
+
+def draft_friend_request(info: str) -> str:
+    system = build_system("__soan__")
+    system.append({"type": "text", "text":
+        "CHẾ ĐỘ LỜI MỜI KẾT BẠN ZALO: khách đã nhắn hỏi chuyên viên (qua bot Zalo, website hoặc gọi điện) nhưng chưa là bạn "
+        "Zalo cá nhân. Chuyên viên sẽ tìm SĐT khách và bấm Kết bạn, cần câu lời chào gửi kèm.\n"
+        f"Viết 3 phương án, MỖI PHƯƠNG ÁN TỐI ĐA {FRIEND_MAX - 15} KÝ TỰ (đếm cả dấu cách), 1 dòng, không markdown, tối đa 1 emoji:\n"
+        "- Mở đầu bằng 'Em [tên chuyên viên trong THÔNG TIN]' hoặc 'Em [tên] – [đơn vị]' để khách biết ai ngay.\n"
+        "- Nhắc ĐÚNG điều khách đã hỏi (dự án, căn, CSBH…) để khách nhớ ra và yên tâm đây không phải tin rác.\n"
+        "- Nêu lợi ích khi kết bạn: gửi CSBH/bảng giá/ảnh căn/video thực tế cho tiện.\n"
+        "- CẤM câu chung chung kiểu 'kết bạn với mình nhé', 'mình là môi giới BĐS', không hứa giá, không ép.\n"
+        "Trả về đúng dạng:\nPA1 (thân thiện): ...\nPA2 (chuyên nghiệp): ...\nPA3 (ngắn gọn): ...\n"
+        "Tin nhắn đầu tiên sau khi khách đồng ý: ... (1–3 câu, gửi kèm thông tin khách đã hỏi)\n"
+        "Nếu thiếu tên chuyên viên trong THÔNG TIN thì để [tên]."})
+    raw = ask_claude(system, [{"role": "user", "content": info}], max_tokens=700)
+    options, rest = [], []
+    for line in raw.splitlines():
+        m = re.match(r"\s*PA\d[^:]*:\s*(.+)", line)
+        if m:
+            msg = m.group(1).strip()
+            if len(msg) > FRIEND_MAX:
+                cut = msg[:FRIEND_MAX]  # cắt gọn ở dấu câu gần nhất để câu vẫn tròn ý
+                stop = max(cut.rfind(x) for x in (",", ".", "!", "–"))
+                msg = (cut[:stop] if stop > 60 else cut.rsplit(" ", 1)[0]).rstrip(" ,–") + " ạ"
+            options.append(msg)
+        elif line.strip():
+            rest.append(line.strip())
+    return options, "\n".join(rest)
+
+
+def send_friend_drafts(header, info):
+    """Mỗi phương án là 1 tin riêng → trên điện thoại nhấn giữ, Sao chép là dán được ngay."""
+    options, first_msg = draft_friend_request(info)
+    if not options:
+        notify_admin("Em chưa soạn được lời mời kết bạn, anh/chị thử lại /ketban giúp em.")
+        return
+    notify_admin(header + "\n👇 Nhấn giữ 1 trong các tin bên dưới → Sao chép → dán vào ô lời chào khi bấm Kết bạn.")
+    for o in options:
+        notify_admin(o)
+    if first_msg:
+        notify_admin("💬 Khi khách đồng ý kết bạn, nhắn tiếp:\n" + first_msg.split(":", 1)[-1].strip())
+
+
+def suggest_friend_request(cid):
+    """Khách vừa để lại SĐT → gửi chuyên viên lời mời kết bạn soạn sẵn (chạy nền)."""
+    def _go():
+        sdt = store.customers.get(cid, {}).get("ho_so", {}).get("sdt", "")
+        send_friend_drafts(f"🤝 Gợi ý KẾT BẠN Zalo cá nhân với {label(cid)}\n📱 Tìm SĐT: {sdt}", customer_brief(cid))
+    threading.Thread(target=_go, daemon=True).start()
 
 
 # =============================================================== /chaohang — quét data chào dự án
@@ -723,6 +787,7 @@ HELP = """📋 LỆNH CHUYÊN VIÊN
 /khach <chat_id> – xem hồ sơ khách
 /nong – danh sách khách nóng
 /thongke – số liệu tổng
+/ketban <mã khách hoặc mô tả khách> – soạn lời mời kết bạn Zalo cá nhân
 /capnhat <nội dung> – thêm CSBH, giá, căn mới… vào thông tin dự án (có hiệu lực ngay)
 /xemduan – xem thông tin dự án bot đang dùng
 /id – xem chat_id"""
@@ -793,6 +858,15 @@ def handle_admin(text) -> bool:
             hs = "\n".join(f"{k}: {v}" for k, v in c["ho_so"].items()) or "(chưa có)"
             last = "\n".join(("👤 " if m["role"] == "user" else "🤖 ") + m["text"][:120] for m in c["tin"][-6:])
             notify_admin(f"{label(arg1)} · {c['kenh']} · từ {c['lan_dau']}\n{hs}\n\n{last}")
+    elif cmd == "/ketban":
+        info = text.strip()[len(parts[0]):].strip()
+        if not info:
+            notify_admin("Ví dụ:\n/ketban " + "web_abc123  (mã khách trong thông báo)\n"
+                         "/ketban Chị Lan 0905xxxxxx, gọi hỏi căn 2PN FourS view sông, muốn xem nhà mẫu cuối tuần")
+        else:
+            brief = customer_brief(arg1) if arg1 in store.customers else info
+            threading.Thread(target=send_friend_drafts, args=("🤝 Lời mời kết bạn soạn sẵn", brief),
+                             daemon=True).start()
     elif cmd == "/capnhat":
         note = text.strip()[len(parts[0]):].strip()
         if not note:
