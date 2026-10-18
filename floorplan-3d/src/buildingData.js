@@ -135,7 +135,7 @@ export const DEFAULT_UNIT = {
   25: 'studio', '03A': 'studio', 18: 'studio', 11: 'studio', 20: 'studio-b', '09': 'studio-b',
   23: '1pn-plus-b', 22: '1pn-plus-b', 21: '1pn-plus-b', '06': '1pn-plus-b', '07': '1pn-plus-b', '08': '1pn-plus-b',
   17: '1pn-plus-c', 12: '1pn-plus-c',
-  29: '2pn-1wc', 30: '2pn-1wc', 31: '2pn-1wc', 32: '2pn-1wc', 16: '2pn-1wc', 15: '2pn-1wc', '12B': '2pn-1wc', '12A': '2pn-1wc',
+  29: '2pn-c', 32: '2pn-c', 30: '2pn-1wc', 31: '2pn-1wc', 16: '2pn-1wc', 15: '2pn-1wc', '12B': '2pn-1wc', '12A': '2pn-1wc',
 };
 /** Vị trí đang ghép tạm (mặt bằng chưa đúng căn thật) */
 export const PROVISIONAL = new Set();
@@ -173,7 +173,7 @@ export function gardenOf(floor, slot) { const a = GARDEN_AREA[floor]?.[slot]; re
  */
 export const GARDEN_SHAPE = { '05': { wrap: null, round: 'start' } };
 /** Căn mẫu sân vườn tương ứng với căn gốc */
-export const GARDEN_UNIT = { '1pn-plus-b': 'sv-1pn-plus', '2pn-1wc': 'sv-2pn-1wc', '2pn-b': 'sv-2pn-2wc', '3pn': 'sv-3pn', studio: 'sv-studio', 'studio-b': 'sv-studio-b', '1pn': 'sv-1pn', '1pn-plus-c': 'sv-1pn-plus-l', '2pn-a': 'sv-2pn-a' };
+export const GARDEN_UNIT = { '1pn-plus-b': 'sv-1pn-plus', '2pn-1wc': 'sv-2pn-1wc', '2pn-b': 'sv-2pn-2wc', '3pn': 'sv-3pn', studio: 'sv-studio', 'studio-b': 'sv-studio-b', '1pn': 'sv-1pn', '1pn-plus-c': 'sv-1pn-plus-l', '2pn-c': 'sv-2pn-c', '2pn-a': 'sv-2pn-a' };
 
 export function residentialFloors(top) {
   const out = [];

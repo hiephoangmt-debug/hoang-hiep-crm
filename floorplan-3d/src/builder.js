@@ -432,6 +432,7 @@ export function buildScene(plan, opts = {}) {
         const cg = new THREE.BoxGeometry(u1 - u0, 0.012, w.thickness + 0.002);
         cg.translate((u0 + u1) / 2, wh + 0.006, 0);
         cg.applyMatrix4(M);
+        faceAttr(cg, face);
         capGeos.push(cg);
       }
       if (y0 <= 1e-4 && u1 - u0 > 0.05) {

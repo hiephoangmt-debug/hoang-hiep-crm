@@ -499,6 +499,26 @@ export class Viewer3D {
     const hidden = [];
     this.scene.traverse((o) => { if (o !== this.scene && !o.visible && o.parent) hidden.push(o); });
     hidden.forEach((o) => { this._ptDetached.push([o, o.parent]); o.parent.remove(o); });
+    // Mặt cắt dollhouse cho ảnh siêu thật: bộ dò tia không chạy shader cắt tường → hạ thẳng đỉnh tường
+    // (tường bao phía gần camera + vách trong) xuống cao độ cắt trên bản sao hình khối, trả lại khi tắt
+    this._ptWallGeo = [];
+    if (this.state.cutaway !== false && this._ptSaved.cut < 0.999 && this.mode !== 'walk') {
+      const d = this.controls.target.clone().sub(this.camera.position), hz = Math.hypot(d.x, d.z) || 1, dx = d.x / hz, dz = d.z / hz, low = CUTAWAY.low.value;
+      this.built.root.traverse((o) => {
+        if (!o.isMesh || !(o.name === 'Tường' || o.name === 'Đỉnh tường') || !o.geometry.attributes.aFace) return;
+        const g = o.geometry.clone(), pos = g.attributes.position, f = g.attributes.aFace;
+        for (let i = 0; i < pos.count; i++) {
+          const inner = f.getZ(i) > 1.5, outer = f.getZ(i) > 0.5 && f.getX(i) * dx + f.getY(i) * dz < -0.2;
+          if ((inner || outer) && pos.getY(i) > low) pos.setY(i, o.name === 'Đỉnh tường' ? low + 0.006 : low);
+        }
+        pos.needsUpdate = true; g.computeBoundingBox(); g.computeBoundingSphere();
+        this._ptWallGeo.push([o, o.geometry]); o.geometry = g;
+      });
+      for (const ob of this.built.cutObjs || []) {
+        const f = ob.userData.cutFace;
+        if (ob.parent && (f.inner || f.x * dx + f.z * dz < -0.2)) { this._ptDetached.push([ob, ob.parent]); ob.parent.remove(ob); }
+      }
+    }
     this.ptActive = true;
     this._ptDone = false;
     // đủ mịn thì dừng render (đỡ nóng máy), báo trang hiện nút tải
@@ -514,6 +534,8 @@ export class Viewer3D {
     (this._ptDetached || []).forEach(([o, parent]) => { parent.add(o); if (o.userData.ptHidden) { o.visible = true; delete o.userData.ptHidden; } });
     this._ptDetached = null;
     (this._ptScaled || []).forEach(([o, sy]) => (o.scale.y = sy));
+    (this._ptWallGeo || []).forEach(([o, geo]) => { o.geometry.dispose(); o.geometry = geo; });
+    this._ptWallGeo = null;
     this._ptScaled = null;
     if (this._ptBg) { this.scene.background = this._ptBg.bg; this.scene.environment = this._ptBg.env; }
     if (this._ptEnvI != null) { this.scene.environmentIntensity = this._ptEnvI; this._ptEnvI = null; }
@@ -982,7 +1004,9 @@ export class Viewer3D {
     const planMode = info.mode === 'plan' && !(this.ptActive && this.pt.samples >= 1);
     const above = planMode || this.camera.position.y > (this.built?.height || 2.8) + 1;
     // bật 🏷 Tên phòng thì ảnh phối cảnh cũng đưa chú thích ra ngoài (tên, diện tích, dài × rộng)
-    const showLabels = (above || info.ad || this.state.labels) && this.mode !== 'walk' && (info.mode !== 'view' || info.ad || this.state.labels);
+    // ảnh như thật (chụp nhanh / siêu thật) luôn kèm chú thích phòng: tên, diện tích, dài × rộng
+    const photo = !!info.soft || (this.ptActive && this.pt.samples >= 1);
+    const showLabels = (above || info.ad || this.state.labels || photo) && this.mode !== 'walk' && (info.mode !== 'view' || info.ad || this.state.labels || photo);
     const prev = this.built.labels.map((l) => l.visible);
     // Ảnh như thật chỉ dùng khi đã có ít nhất 1 lượt render; chưa có thì lấy ảnh 3D thường
     const usePT = this.ptActive && this.pt.samples >= 1;

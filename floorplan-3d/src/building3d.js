@@ -655,6 +655,15 @@ export class BuildingView {
       if (B) patch(xA, xB, T.y1, pod.y1 - o, ['bottom']);
       if (!L && !Rr && !Tp && !B) {
         const tt = gardenOf(floor, sl.slot).tt;
+        // theo bản vẽ tầng 3: sân căn 28 / 01 nằm bên hông, ăn vào góc khuyết của căn 29 / 32;
+        // sân căn 29 / 32 chỉ là dải phía sân trong, bắt đầu sau góc khuyết
+        const SIDE_GARDEN = { 28: [810, 601, 835, 701], '01': [1240, 601, 1265, 701] };
+        if (SIDE_GARDEN[sl.slot]) { const q = rectM(SIDE_GARDEN[sl.slot]); patch(q.x0, q.x1, q.y0, q.y1, sl.slot === '01' ? ['left', 'top'] : ['right', 'top']); continue; }
+        const NOTCH = { 29: [835, 0], 32: [0, 1240] };
+        if (NOTCH[sl.slot] && r.y0 >= CY.y1 - 0.5) {
+          const [a, b] = NOTCH[sl.slot], x0 = a ? rectM([a, 0, a, 0]).x0 : r.x0, x1 = b ? rectM([b, 0, b, 0]).x0 : r.x1;
+          patch(x0, x1, r.y0 - Math.min(r.y0 - CY.y0 - 0.3, tt / (x1 - x0)), r.y0, ['top']); continue;
+        }
         if (r.y1 >= T.y1 - 3) { patch(r.x0, r.x1, r.y1, pod.y1 - o, ['bottom']); continue; } // căn giữa mặt trước (15, 16, 12A, 12B)
         // căn giữa phía sân trong (chỉ tầng 3): sân rộng đúng diện tích thông thủy theo bảng
         if (r.y0 >= CY.y1 - 0.5) { const x0 = Math.max(r.x0, CY.x0), x1 = Math.min(r.x1, CY.x1), d = Math.min(r.y0 - CY.y0 - 0.3, tt / (x1 - x0)); patch(x0, x1, r.y0 - d, r.y0, ['top']); }
