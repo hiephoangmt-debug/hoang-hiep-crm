@@ -585,6 +585,243 @@ export class Viewer3D {
     };
   }
 
+  // ---------------- Video dọc 9:16 kiểu TikTok: cầm máy đi ở tầm mắt, mở cửa bước vào, lướt qua từng phòng ----------------
+  /** Lộ trình camera: ngoài cửa chính → vào phòng khách (lia chậm) → qua cửa từng phòng → quay lại phòng khách */
+  videoPath() {
+    const plan = this.store.plan;
+    const area = (r) => polygonArea(r.points);
+    const OUT = /lô gia|ban công|sân vườn/i, WET = /wc|tắm|vệ sinh/i;
+    const rooms = plan.rooms.filter((r) => r.points.length >= 3);
+    const living = rooms.filter((r) => !OUT.test(r.name) && !WET.test(r.name)).sort((a, b) => area(b) - area(a))[0] || rooms[0];
+    const xs = plan.walls.flatMap((w) => [w.a.x, w.b.x]), ys = plan.walls.flatMap((w) => [w.a.y, w.b.y]);
+    const bb = { x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys) };
+    const cx = (bb.x0 + bb.x1) / 2, cy = (bb.y0 + bb.y1) / 2;
+    const at = (o) => { const w = plan.walls.find((x) => x.id === o.wallId); return w && { x: w.a.x + (w.b.x - w.a.x) * o.t, y: w.a.y + (w.b.y - w.a.y) * o.t, w }; };
+    const edge = (p) => Math.min(p.x - bb.x0, bb.x1 - p.x, p.y - bb.y0, bb.y1 - p.y);
+    // cửa chính: cửa đi rộng nhất trên vỏ ngoài căn
+    let ent = null;
+    for (const o of plan.openings) { if (o.type !== 'door') continue; const p = at(o); if (p && edge(p) < 0.45 && (!ent || o.width > ent.o.width)) ent = { o, p }; }
+    const V = (x, y, h = 1.5) => new THREE.Vector3(x, h, y);
+    const inwardOf = (p) => {
+      const w = p.w, L = Math.hypot(w.b.x - w.a.x, w.b.y - w.a.y) || 1;
+      let nx = -(w.b.y - w.a.y) / L, ny = (w.b.x - w.a.x) / L;
+      if (nx * (cx - p.x) + ny * (cy - p.y) < 0) { nx = -nx; ny = -ny; }
+      return { nx, ny };
+    };
+    const segs = [];
+    const lc = labelPoint(living.points);
+    const fmtA = (r) => `${r.name} · ${area(r).toFixed(1).replace('.', ',')} m²`;
+    if (ent) {
+      const { nx, ny } = inwardOf(ent.p);
+      const out = V(ent.p.x - nx * 1.6, ent.p.y - ny * 1.6), inn = V(ent.p.x + nx * 1.1, ent.p.y + ny * 1.1);
+      segs.push({ hold: 1.6, pos: out, look: V(ent.p.x + nx * 3, ent.p.y + ny * 3, 1.35), caption: 'Mở cửa căn hộ', door: true });
+      segs.push({ move: [out, inn, V(lc.x, lc.y)], dur: 3.2, caption: fmtA(living) });
+    } else segs.push({ move: [V(lc.x, lc.y), V(lc.x, lc.y)], dur: 0.5, caption: fmtA(living) });
+    const ls = this.roomShot(living);
+    segs.push({ hold: 3.2, pos: ls.pos, look: ls.target, pan: 40, caption: fmtA(living) });
+    // các phòng còn lại: phòng ngủ trước, rồi lô gia / sân vườn; bỏ WC cho video gọn
+    const others = rooms.filter((r) => r !== living && !WET.test(r.name) && area(r) > 2.5 && (!OUT.test(r.name) || /sân vườn/i.test(r.name)))
+      .sort((a, b) => (OUT.test(a.name) ? 1 : 0) - (OUT.test(b.name) ? 1 : 0) || area(b) - area(a));
+    let cur = ls.pos, exit = []; // ra khỏi phòng trước bằng đúng cửa đã vào (không đi xuyên tường)
+    for (const r of others) {
+      // cửa nối phòng này (gần nhất với phòng khách)
+      let best = null;
+      for (const o of plan.openings) {
+        if (o.type === 'window' && !o.gap) continue;
+        const p = at(o); if (!p) continue;
+        const d = Math.min(...r.points.map((q, i) => closestOnSegment(p, q, r.points[(i + 1) % r.points.length]).d));
+        if (d > 0.35) continue;
+        const dl = Math.min(...living.points.map((q, i) => closestOnSegment(p, q, living.points[(i + 1) % living.points.length]).d));
+        if (!best || dl < best.dl) best = { p, dl };
+      }
+      const sh = this.roomShot(r);
+      const rc0 = labelPoint(r.points);
+      sh.center = V(rc0.x, rc0.y, 1.2);
+      const pts = [cur, ...exit];
+      let door = [];
+      if (best) {
+        const w = best.p.w, L = Math.hypot(w.b.x - w.a.x, w.b.y - w.a.y) || 1, nx = -(w.b.y - w.a.y) / L, ny = (w.b.x - w.a.x) / L;
+        const rc = labelPoint(r.points), sg = Math.sign(nx * (rc.x - best.p.x) + ny * (rc.y - best.p.y)) || 1;
+        door = [V(best.p.x - sg * nx * 0.7, best.p.y - sg * ny * 0.7), V(best.p.x + sg * nx * 0.7, best.p.y + sg * ny * 0.7)];
+        pts.push(...door);
+      }
+      pts.push(sh.pos);
+      segs.push({ move: pts, dur: Math.max(2.2, pts.reduce((a, p, i) => a + (i ? p.distanceTo(pts[i - 1]) : 0), 0) / 1.1), caption: fmtA(r), center: sh.center });
+      segs.push({ hold: 2.6, pos: sh.pos, look: sh.target, pan: 30, caption: fmtA(r) });
+      cur = sh.pos;
+      exit = door.slice().reverse();
+    }
+    // kết: quay ra giữa phòng khách nhìn toàn không gian
+    if (others.length) segs.push({ move: [cur, ...exit, V(lc.x, lc.y)], dur: 3, caption: fmtA(living), center: ls.target });
+    segs.push({ hold: 1, pos: V(lc.x, lc.y), look: ls.target, caption: fmtA(living) });
+    // Đi liền một mạch (không dừng): gom mọi điểm thành một đường cong, tốc độ đều; hướng nhìn nội suy giữa các điểm
+    const way = [];
+    const push = (p, look, caption) => { const last = way[way.length - 1]; if (last && last.p.distanceTo(p) < 0.25) { last.look = look || last.look; last.caption = caption || last.caption; return; } way.push({ p, look, caption }); };
+    for (const g of segs) {
+      // điểm trên đường đi nhìn về tâm phòng sắp vào (ổn định, không dí sát tường / tủ)
+      if (g.move) g.move.forEach((p, k) => push(p, k === 0 ? null : g.center || null, g.caption));
+      else { push(g.pos, g.look, g.caption); way[way.length - 1].shot = true; }
+    }
+    // điểm không có hướng nhìn riêng (cửa, lối đi): nhìn về điểm kế tiếp
+    way.forEach((w, k) => {
+      if (w.look) return;
+      const nx = way.slice(k + 1).find((q) => q.p.distanceTo(w.p) > 0.3) || way[k - 1];
+      const d = nx.p.clone().sub(w.p).setY(0); if (d.lengthSq() < 1e-4) d.set(0, 0, -1);
+      w.look = w.p.clone().add(d.normalize().multiplyScalar(3)).setY(1.3);
+    });
+    // cảnh mở đầu đứng ngoài cửa giữ hướng nhìn vào nhà
+    if (ent && way[1]) way[0].look = way[1].p.clone().add(way[1].p.clone().sub(way[0].p).setY(0).normalize().multiplyScalar(3)).setY(1.35);
+    // đường gấp khúc bo góc nhỏ (không vồng ra như spline → không xuyên tường khi đi qua cửa)
+    const curve = new THREE.CurvePath();
+    {
+      const P = way.map((w) => w.p);
+      let start = P[0].clone();
+      for (let k = 1; k < P.length; k++) {
+        const a0 = P[k - 1], a1 = P[k], a2 = P[k + 1];
+        if (!a2) { curve.add(new THREE.LineCurve3(start, a1.clone())); break; }
+        const r = Math.min(0.55, a0.distanceTo(a1) / 2, a1.distanceTo(a2) / 2);
+        const pIn = a1.clone().add(a0.clone().sub(a1).setLength(r)), pOut = a1.clone().add(a2.clone().sub(a1).setLength(r));
+        if (start.distanceTo(pIn) > 1e-3) curve.add(new THREE.LineCurve3(start, pIn));
+        curve.add(new THREE.QuadraticBezierCurve3(pIn, a1.clone(), pOut));
+        start = pOut;
+      }
+    }
+    const len = curve.getLength();
+    // tốc độ đều, video ~20–28 giây
+    const DUR = Math.min(28, Math.max(18, len / 0.75)), intro = ent ? 1.2 : 0;
+    // bảng tra độ dài cung → tham số knot (để biết đang ở giữa 2 điểm nào)
+    // vị trí từng điểm mốc theo độ dài đường đi → biết đang ở giữa 2 mốc nào để nội suy hướng nhìn
+    const cum = [0]; for (let k = 1; k < way.length; k++) cum.push(cum[k - 1] + way[k].p.distanceTo(way[k - 1].p));
+    const knotAt = (u) => { const d = u * cum[cum.length - 1]; let k = 0; while (k < cum.length - 2 && cum[k + 1] < d) k++; return k + Math.min(1, (d - cum[k]) / Math.max(1e-6, cum[k + 1] - cum[k])); };
+    const ease = (x) => x * x * (3 - 2 * x);
+    const sample = (time) => {
+      if (time < intro) return { pos: way[0].p.clone(), look: way[0].look.clone(), caption: 'Mở cửa căn hộ', door: true, k: time / intro };
+      const u = Math.min(1, (time - intro) / DUR);
+      // tăng tốc nhẹ lúc đầu, giảm tốc lúc cuối cho mượt
+      const uu = u < 0.04 ? 0.04 * ease(u / 0.04) * 0.5 + 0 : u;
+      const pos = curve.getPointAt(Math.min(1, Math.max(0, uu)));
+      const kt = knotAt(uu), i0 = Math.floor(kt), i1 = Math.min(way.length - 1, i0 + 1), f = ease(kt - i0);
+      // nhìn theo hướng đi (điểm phía trước 2 m trên đường) → qua cửa nhìn thẳng vào phòng, không dí vào tường;
+      // tới gần điểm dừng ngắm của phòng thì xoay dần sang hướng ngắm đẹp của phòng đó
+      const ahead = curve.getPointAt(Math.min(1, uu + 2 / len)), fwd = ahead.clone().sub(pos).setY(0);
+      let look = fwd.lengthSq() > 1e-4 ? pos.clone().add(fwd.setLength(3)).setY(1.3) : way[i1].look.clone();
+      const d = u * cum[cum.length - 1];
+      let wgt = 0, best = null;
+      way.forEach((w, k) => { if (!w.shot) return; const dd = Math.abs(cum[k] - d); const ww = 1 - Math.min(1, dd / 1.6); if (ww > wgt) { wgt = ww; best = w; } });
+      if (best) look.lerp(best.look, ease(wgt));
+      return { pos, look, caption: (f < 0.5 ? way[i0] : way[i1]).caption, door: false };
+    };
+    return { duration: intro + DUR, sample };
+  }
+
+  /**
+   * Quay video dọc 9:16: vẽ từng khung theo lộ trình, ghép chữ (tên phòng, diện tích, tiêu đề, khung kết) lên canvas 2D.
+   * frame(t) trả về canvas đã vẽ tại thời điểm t (giây) – dùng cho ghi trực tiếp (MediaRecorder) hoặc xuất từng khung.
+   */
+  videoSetup({ w = 720, h = 1280, title = '', sub = '', end = [] } = {}) {
+    if (this.ptActive) this.stopRealRender();
+    this.stopTour?.();
+    if (this.mode === 'walk') this.exitWalk();
+    const path = this.videoPath();
+    const END = 2.4;
+    const saved = { cut: this.state.cut, labels: this.state.labels, fov: this.camera.fov, aspect: this.camera.aspect, pr: this.renderer.getPixelRatio(), pos: this.camera.position.clone(), target: this.controls.target.clone() };
+    this.state.cut = 1; this.updateClip();
+    this.built.labels.forEach((l) => (l.visible = false));
+    this.built.root.traverse((o) => { if (o.userData.ceiling) o.visible = this.state.ceiling; });
+    if (this._adCanvas) this._adCanvas.style.display = 'none';
+    this.renderer.setPixelRatio(1); this.renderer.setSize(w, h, false);
+    this.composer.setPixelRatio?.(1); this.composer.setSize(w, h);
+    this.camera.aspect = w / h; this.camera.fov = 72; this.camera.updateProjectionMatrix();
+    this.built.doors.forEach((d) => { d.target = 1; d.open = 0; });
+    // cánh cửa trong nhà: mở hẳn và ẩn để không che hình khi đi qua (cửa chính vẫn mở dần ở cảnh đầu)
+    const leaves = this.built.doors.filter((d) => d.pivot);
+    const out = document.createElement('canvas'); out.width = w; out.height = h;
+    const x = out.getContext('2d');
+    const s = w / 720;
+    const font = (wt, px) => `${wt} ${Math.round(px * s)}px Inter, Arial, sans-serif`;
+    const pill = (text, cxp, cyp, size, bg, fg) => {
+      x.font = font(700, size); const tw = x.measureText(text).width, pw = tw + 36 * s, ph = size * s * 1.9;
+      x.fillStyle = bg; x.beginPath(); x.roundRect(cxp - pw / 2, cyp - ph / 2, pw, ph, ph / 2); x.fill();
+      x.fillStyle = fg; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(text, cxp, cyp + 1);
+    };
+    const duration = path.duration + END;
+    let lastT = 0;
+    const frame = (t) => {
+      const dt = Math.max(0, Math.min(0.1, t - lastT)); lastT = t;
+      if (t < path.duration) {
+        const f = path.sample(t);
+        // cửa chính mở dần lúc đứng ngoài, các cửa khác đã mở sẵn
+        this.built.doors.forEach((d) => { d.open = f.door ? Math.min(1, (f.k || 0) * 1.4) : 1; });
+        leaves.forEach((d) => { d.pivot.visible = f.door; });
+        this.applyDoors(0);
+        // rung tay nhẹ như quay điện thoại
+        const sway = new THREE.Vector3(Math.sin(t * 1.3) * 0.015, Math.sin(t * 2.1) * 0.01, 0);
+        this.camera.position.copy(f.pos).add(sway);
+        this.camera.lookAt(f.look);
+        this.camera.updateMatrixWorld();
+        this.updateCutaway?.();
+        if (this.state.ao || this.bloom.enabled) this.composer.render(); else this.renderer.render(this.scene, this.camera);
+        x.drawImage(this.renderer.domElement, 0, 0, w, h);
+        // chữ: tiêu đề trên cùng, tên phòng + diện tích giữa dưới (hiện dần khi đổi phòng)
+        const g = x.createLinearGradient(0, 0, 0, 220 * s); g.addColorStop(0, 'rgba(0,0,0,.45)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+        x.fillStyle = g; x.fillRect(0, 0, w, 220 * s);
+        x.textAlign = 'center'; x.textBaseline = 'alphabetic'; x.fillStyle = '#fff';
+        x.font = font(800, 40); x.fillText(title, w / 2, 92 * s);
+        x.font = font(500, 24); x.fillStyle = 'rgba(255,255,255,.9)'; x.fillText(sub, w / 2, 132 * s);
+        pill(f.caption, w / 2, h - 230 * s, 30, 'rgba(15,23,42,.72)', '#fff');
+      } else {
+        // khung kết: nền tối, thông tin căn + lời mời xem nhà
+        const k = Math.min(1, (t - path.duration) / 0.5);
+        x.drawImage(this.renderer.domElement, 0, 0, w, h);
+        x.fillStyle = `rgba(12,16,24,${0.82 * k})`; x.fillRect(0, 0, w, h);
+        x.globalAlpha = k; x.textAlign = 'center'; x.fillStyle = '#fff';
+        x.font = font(800, 46); x.fillText(title, w / 2, h / 2 - 120 * s);
+        x.font = font(500, 26); end.forEach((line, i) => x.fillText(line, w / 2, h / 2 - 50 * s + i * 46 * s));
+        pill('Nhắn tin để xem nhà mẫu', w / 2, h / 2 + (end.length * 46 + 30) * s, 28, '#c8812a', '#fff');
+        x.globalAlpha = 1;
+      }
+      return out;
+    };
+    const restore = () => {
+      leaves.forEach((d) => { d.pivot.visible = true; });
+      this.camera.fov = saved.fov; this.camera.aspect = saved.aspect; this.camera.updateProjectionMatrix();
+      this.renderer.setPixelRatio(saved.pr); this.composer.setPixelRatio?.(saved.pr);
+      this.state.cut = saved.cut; this.updateClip();
+      this.built.labels.forEach((l) => (l.visible = saved.labels));
+      this.camera.position.copy(saved.pos); this.controls.target.copy(saved.target);
+      this.resize(); this.controls.update();
+    };
+    return { duration, frame, canvas: out, restore, fps: 30 };
+  }
+
+  /** Ghi video trực tiếp từ trình duyệt (mp4 nếu máy hỗ trợ, không thì webm) */
+  async recordVideo(opts = {}, onProgress) {
+    const v = this.videoSetup(opts);
+    const wasActive = this.active;
+    this.setActive(false);
+    const mime = ['video/mp4;codecs=avc1', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm'].find((m) => window.MediaRecorder?.isTypeSupported?.(m));
+    if (!mime) { v.restore(); this.setActive(wasActive); throw new Error('Trình duyệt này chưa hỗ trợ quay video'); }
+    const stream = v.canvas.captureStream(v.fps);
+    const rec = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 8e6 });
+    const chunks = [];
+    rec.ondataavailable = (e) => e.data.size && chunks.push(e.data);
+    const done = new Promise((res) => (rec.onstop = res));
+    rec.start(500);
+    const t0 = performance.now();
+    await new Promise((res) => {
+      const step = () => {
+        const t = (performance.now() - t0) / 1000;
+        v.frame(Math.min(t, v.duration));
+        onProgress?.(Math.min(1, t / v.duration));
+        if (t >= v.duration) res(); else requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+    rec.stop(); await done;
+    v.restore(); this.setActive(wasActive);
+    return { blob: new Blob(chunks, { type: mime.split(';')[0] }), ext: mime.includes('mp4') ? 'mp4' : 'webm' };
+  }
+
   /** Tham quan: toàn cảnh → bay lần lượt vào từng phòng → về toàn cảnh; giờ trong ngày trôi từ sáng tới tối */
   playTour({ onCaption, onProgress, onDone } = {}) {
     if (!this.built) return;
