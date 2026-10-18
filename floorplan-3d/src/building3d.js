@@ -659,10 +659,18 @@ export class BuildingView {
         // sân căn 29 / 32 chỉ là dải phía sân trong, bắt đầu sau góc khuyết
         // khoảnh sân vẽ theo đúng bản vẽ tầng 3 (toạ độ ảnh mặt bằng): dải xanh bên hông căn 27 / 28 (ăn vào góc khuyết
         // căn 29), sân căn 29 phía trên lô gia, cao tới ngang mép trên căn 27; cánh phải đối xứng
+        // căn 28 / 01: đầu sân cắt chéo 45° – mép ngoài lấn lên cạnh căn 27 / 02 (đường chéo trên bản vẽ)
         const EXACT = {
-          27: [[810, 535, 835, 620], ['right', 'top']], 28: [[810, 620, 835, 701], ['right']], 29: [[835, 535, 921, 635], ['top']],
-          '02': [[1240, 535, 1265, 620], ['left', 'top']], '01': [[1240, 620, 1265, 701], ['left']], 32: [[1153, 535, 1240, 635], ['top']],
+          27: [[810, 535, 835, 595], ['right', 'top']], 28: [[810, 620, 835, 701], ['right']], 29: [[835, 535, 921, 635], ['top']],
+          '02': [[1240, 535, 1265, 595], ['left', 'top']], '01': [[1240, 620, 1265, 701], ['left']], 32: [[1153, 535, 1240, 635], ['top']],
         };
+        const TRI = { 27: [[810, 595], [835, 595], [810, 620]], 28: [[810, 620], [835, 595], [835, 620]], '02': [[1265, 595], [1240, 595], [1265, 620]], '01': [[1265, 620], [1240, 595], [1240, 620]] };
+        if (TRI[sl.slot]) {
+          const pts = TRI[sl.slot].map(([px, py]) => { const q = rectM([px, py, px, py]); return new THREE.Vector2(q.x0, -q.y0); });
+          const geo = new THREE.ExtrudeGeometry(new THREE.Shape(pts), { depth: 0.05, bevelEnabled: false });
+          geo.rotateX(-Math.PI / 2); geo.translate(0, y + 0.03, 0);
+          add(geo, g.grass, false);
+        }
         if (EXACT[sl.slot]) { const [px, sides] = EXACT[sl.slot], q = rectM(px); patch(q.x0, q.x1, q.y0, q.y1, sides); continue; }
         if (r.y1 >= T.y1 - 3) { patch(r.x0, r.x1, r.y1, pod.y1 - o, ['bottom']); continue; } // căn giữa mặt trước (15, 16, 12A, 12B)
         // căn giữa phía sân trong (chỉ tầng 3): sân rộng đúng diện tích thông thủy theo bảng
