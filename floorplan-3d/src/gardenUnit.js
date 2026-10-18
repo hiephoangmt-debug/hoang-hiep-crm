@@ -51,7 +51,7 @@ export function gardenUnit(base, spec) {
       const rp2 = plan.rooms.filter((r) => Math.min(...r.points.map(dp)) < 0.5).flatMap((r) => r.points).map((q) => (hz ? q.x : q.y));
       L2b = Math.max(...rp2) - Math.min(...rp2) + 0.2;
     }
-    const area = (d) => notchArea + L * d + (spec.garden.bevel === 'start' ? (d * d) / 2 : 0) + (spec.garden.wrap ? (L2b + d) * d - (1 - Math.PI / 4) * d * d : 0) - (spec.garden.round ? (1 - Math.PI / 4) * gRad(d) ** 2 : 0);
+    const area = (d) => notchArea + L * d + (spec.garden.bevel === 'start' ? (d * d) / 2 : spec.garden.bevel === 'endIn' ? -(d * d) / 2 : 0) + (spec.garden.wrap ? (L2b + d) * d - (1 - Math.PI / 4) * d * d : 0) - (spec.garden.round ? (1 - Math.PI / 4) * gRad(d) ** 2 : 0);
     let lo = 0.8, hi = 8;
     for (let i = 0; i < 40; i++) { const m = (lo + hi) / 2; if (area(m) > spec.garden.area) hi = m; else lo = m; }
     D = +lo.toFixed(2);
@@ -91,14 +91,15 @@ export function gardenUnit(base, spec) {
   const RR = gRad(D), NA = 8;
   const arcPts = (start) => { const out = []; for (let i = 0; i <= NA; i++) { const t = (i / NA) * Math.PI / 2; out.push(start ? [RR - RR * Math.sin(t), D - RR + RR * Math.cos(t)] : [L - RR + RR * Math.sin(t), D - RR + RR * Math.cos(t)]); } return out; };
   // spec.garden.bevel = 'start': đầu sân cắt chéo 45° loe ra ngoài (mép ngoài dài hơn mép trong một đoạn = chiều sâu sân), như bản vẽ căn 28
-  const bevS = !wrap && spec.garden.bevel === 'start';
+  const bevS = !wrap && spec.garden.bevel === 'start', bevE = !wrap && spec.garden.bevel === 'endIn'; // endIn: cuối sân cắt chéo vào trong (căn 27)
   if (bevS) wall([0, 0], [-D, D]);
   else if (!(wrap && cornerAtStart)) wall([0, 0], [0, roundStart ? D - RR : D]);
-  wall([bevS ? -D : roundStart ? RR : 0, D], [roundEnd ? L - RR : L, D]);
-  if (!(wrap && !cornerAtStart)) wall([L, roundEnd ? D - RR : D], [L, 0]);
+  wall([bevS ? -D : roundStart ? RR : 0, D], [bevE ? L - D : roundEnd ? L - RR : L, D]);
+  if (bevE) wall([L - D, D], [L, 0]);
+  else if (!(wrap && !cornerAtStart)) wall([L, roundEnd ? D - RR : D], [L, 0]);
   const aS = roundStart ? arcPts(true) : null, aE = roundEnd ? arcPts(false) : null;
   for (const a of [aS, aE]) if (a) for (let i = 0; i < NA; i++) wall(a[i], a[i + 1]);
-  const gp = [[0, 0], [L, 0], ...(aE ? aE.slice().reverse() : [[L, D]]), ...(aS ? aS.slice().reverse().map((q) => q).reverse() : [[bevS ? -D : 0, D]])];
+  const gp = [[0, 0], [L, 0], ...(aE ? aE.slice().reverse() : [[bevE ? L - D : L, D]]), ...(aS ? aS.slice().reverse().map((q) => q).reverse() : [[bevS ? -D : 0, D]])];
   if (notch) {
     // ô khuyết: nền cỏ + lan can kính phía ngoài, vài chậu cây
     const Q = (x, y) => ({ x: bb.x0 + x, y: bb.y0 + y });
