@@ -5,7 +5,7 @@
 2. [Cài đặt lần đầu – 3 bước](#2-cài-đặt-lần-đầu--3-bước-khoảng-15-phút)
 3. [Dạy bot về dự án: CSBH, bảng hàng, link, hỏi đáp](#3-dạy-bot-về-dự-án-csbh-bảng-hàng-link-hỏi-đáp)
 4. [Độ nhiệt khách – biết gọi ai trước](#4-độ-nhiệt-khách--biết-gọi-ai-trước)
-5. [Nuôi dưỡng khách, dẫn đi xem nhà, chốt deal](#5-nuôi-dưỡng-khách-dẫn-đi-xem-nhà-chốt-deal)
+5. [Vòng đời khách: mới → đánh giá lại → nuôi → mua → hậu mãi](#5-vòng-đời-khách-mới--đánh-giá-lại--nuôi--mua--hậu-mãi)
 6. [Báo tin mới, chào dự án cho đúng khách](#6-báo-tin-mới-chào-dự-án-cho-đúng-khách)
 7. [Kết bạn Zalo cá nhân với khách](#7-kết-bạn-zalo-cá-nhân-với-khách)
 8. [Khách nhắn Zalo cá nhân: /soan, /dich](#8-khách-nhắn-zalo-cá-nhân-soan-dich)
@@ -14,6 +14,7 @@
 11. [Khung chat LadiPage, Google Sheet, khách cũ](#11-khung-chat-ladipage-google-sheet-khách-cũ)
 12. [Chạy 24/7 trên VPS](#12-chạy-247-trên-vps)
 13. [Lỗi thường gặp & lưu ý](#13-lỗi-thường-gặp--lưu-ý)
+14. [Dùng trên nhiều máy: Windows, Mac, iPad, điện thoại](#14-dùng-trên-nhiều-máy-windows-mac-ipad-điện-thoại)
 
 ---
 
@@ -23,13 +24,15 @@
 |---|---|
 | Khách mới hỏi dự án, CSBH, giá | Tư vấn ngay 24/7, khéo và hóm hỉnh, gợi ý đúng căn còn hàng, xin SĐT, hẹn xem nhà |
 | Khách cũ / khách quay lại | Chào như người quen, nhắc lại nhu cầu cũ, báo tin mới liên quan |
-| Khách im lặng sau khi hỏi | Tự nhắn chăm sóc sau 1, 3, 7 ngày, mỗi lần đưa 1 thông tin mới có ích |
+| Khách im lặng sau khi hỏi | Tự nhắn chăm sóc 1–3 ngày đầu, **đánh giá lại** sau 3 và 7 ngày, rồi khơi gợi dài hạn |
+| Khách nhắc mốc (ngày có tiền, ký HĐMB, đóng tiền) | Nhắc khéo trước 3 ngày, 1 ngày, đúng ngày |
+| Khách đã mua | Hậu mãi: thủ tục, mốc thanh toán, tiến độ, nhờ giới thiệu, dự án sau |
 | Khách đã hẹn xem nhà | Nhắc lịch trước 3 giờ, hôm sau hỏi cảm nhận |
 | Môi giới xin hợp tác, đồng nghiệp, tin rác | **Im lặng**, chuyển tin cho anh/chị |
 | Nhóm Zalo · người trong "danh bạ riêng" | **Luôn bỏ qua** |
 | Khách muốn cọc, giữ căn, đàm phán, khiếu nại | Báo khách "chuyên viên gọi ngay", bot tạm dừng 30 phút để anh/chị xử lý |
 
-Bot gửi về Zalo của anh/chị: 🆕 khách mới · 🔥 khách nóng (kèm điểm và lý do) · 📅 lịch hẹn · ⏰ sắp tới lịch · 🤝 gợi ý kết bạn · 🙋 cần anh/chị xử lý · 💌 đã chăm sóc ai · ☀️ báo cáo buổi sáng.
+Bot gửi về Zalo của anh/chị: 🆕 khách mới · 🔥 khách nóng (kèm điểm và lý do) · 📅 lịch hẹn · ⏰ sắp tới lịch · 🤝 gợi ý kết bạn · 🙋 cần anh/chị xử lý · 💌 đã chăm sóc ai · ☀️ báo cáo buổi sáng · 🩺 đánh giá lại khách · 📌 mốc của khách.
 
 Bot là **một tài khoản Zalo riêng** (Zalo Bot), khách nhắn vào đó. **Zalo cá nhân của anh/chị không bị đụng tới.**
 
@@ -181,9 +184,89 @@ Ngoài ra:
 
 ---
 
-## 5. Nuôi dưỡng khách, dẫn đi xem nhà, chốt deal
+## 5. Vòng đời khách: mới → đánh giá lại → nuôi → mua → hậu mãi
 
-### 5.1. Bot được dạy sẵn quy trình bán hàng
+Bot tự biết mỗi khách đang ở giai đoạn nào, và chăm sóc đúng kiểu của giai đoạn đó:
+
+| Giai đoạn | Thời gian | Bot làm gì | Anh/chị làm gì |
+|---|---|---|---|
+| 🆕 **Mới** | Ngày 1–3 | Tư vấn dồn lực. Khách im thì nhắn lại sau **1 ngày** và **3 ngày**, mỗi lần một góc mới | Gọi ngay khi có 🔥 |
+| 🩺 **Đánh giá lại** | Ngày 3 và ngày 7 | Gửi anh/chị **báo cáo đánh giá** (xem 5.1). Sau 7 ngày chăm sóc theo chiến lược mới | Đọc báo cáo, làm theo "Anh/chị nên" |
+| 📅 **Đã hẹn xem** | Tới ngày hẹn | Không nhắn làm phiền. Nhắc lịch trước 3 giờ, hôm sau hỏi cảm nhận | Dẫn khách xem, gửi bảng tính |
+| 🌱 **Nuôi dài hạn** | Sau 7 ngày | **Khơi gợi** sau 14, 30, 60, 90 ngày bằng câu chào hóm hỉnh hoặc câu hỏi gợi tò mò, kèm 1 tin mới có giá trị | `/khoigoi` khi có dịp |
+| 🏠 **Đã mua** | Sau khi chốt | **Hậu mãi**: cảm ơn, nhắc thủ tục, mốc đóng tiền, tiến độ, bàn giao. Khéo nhờ giới thiệu, gợi mở dự án sau | `/damua`, `/moc` |
+| ⛔ **Không làm phiền** | Khi khách từ chối | Không nhắn gì nữa | |
+
+Gõ **`/giaidoan`** để xem có bao nhiêu khách ở mỗi giai đoạn, và khách nào nóng nhất.
+
+### 5.1. Đánh giá lại khách sau 3 và 7 ngày
+Khách chưa chốt sau 3 ngày, rồi sau 7 ngày, bot đọc lại toàn bộ cuộc chat, bảng hàng và chính sách như một **trưởng phòng kinh doanh**, rồi gửi anh/chị:
+```
+🩺 ĐÁNH GIÁ LẠI SAU 3 NGÀY – Anh An
+🔄 Cần đổi hướng · 🌤 55/100
+👤 Anh An mua để ở, tầm 3 tỷ
+🎯 Nhu cầu rõ: có
+🏠 Đúng căn: chưa – căn A-12-05 vượt ngân sách, nên giới thiệu B-03
+💰 Chính sách: chưa – nên chọn phương án thanh toán giãn 18 tháng
+❓ Vì sao chưa chốt: vượt ngân sách, chưa thấy phương án thanh toán vừa sức
+👉 Anh/chị nên: gọi giới thiệu căn B-03, gửi bảng tính dòng tiền
+🤖 Bot sẽ chăm sóc theo hướng: giới thiệu B-03 2,9 tỷ + thanh toán giãn
+```
+Kèm theo là **1 tin nhắn mẫu** để anh/chị gửi khách (qua bot bằng `/tl`, hoặc copy sang Zalo cá nhân).
+
+Từ đó, mọi tin bot nhắn khách đều đi theo **chiến lược mới** này. Bot đánh giá khách thuộc 1 trong 4 hướng:
+- 🎯 **Sắp chốt:** dồn lực.
+- 🔄 **Đổi hướng:** đổi căn hoặc đổi chính sách cho khách.
+- 🌱 **Nuôi dài hạn:** bot chuyển sang nhịp chậm, nhắn sau 14, 30, 60, 90 ngày.
+- ⛔ **Nên dừng.**
+
+Muốn đánh giá một khách ngay, không chờ đủ ngày: **`/danhgia <mã khách>`**.
+
+### 5.2. Nhắc mốc thời gian, để khách không quên
+Khách nhắc tới một mốc ("cuối tháng anh bán xong nhà cũ", "15/11 ký HĐMB", "tuần sau vợ anh đi công tác về") thì bot **tự ghi mốc** và báo 📌 cho anh/chị.
+Anh/chị cũng tự thêm được:
+```
+/moc 123456789 15/11 ký HĐMB – mang CCCD 2 vợ chồng
+/moc 123456789 30/11 đóng đợt 2 – 30%
+```
+Bot nhắc khách **trước 3 ngày, trước 1 ngày, và đúng ngày**:
+- nhắc khéo, chu đáo như người nhà;
+- nói luôn việc cần chuẩn bị (giấy tờ, số tiền);
+- không đùa khi chuyện liên quan tới tiền hay pháp lý.
+
+Bot cũng báo anh/chị **sáng mỗi ngày** các mốc trong 3 ngày tới. Qua ngày mốc, bot hỏi anh/chị kết quả.
+- `/moc <mã>`: xem các mốc của một khách.
+- `/xoamoc <mã> <số>`: xóa một mốc.
+
+### 5.3. Khách đã mua: hậu mãi và chăm cho dự án sau
+Chốt được deal thì báo bot:
+```
+/damua 123456789 Căn A-12-05, 2PN, ký HĐĐC 18/10
+```
+Bot chuyển khách sang **hậu mãi**:
+- **Ngày 1:** cảm ơn, chúc mừng, tóm tắt các bước tiếp theo (hồ sơ, ký HĐMB, mốc đóng tiền).
+- **Tuần 1:** hỏi thủ tục có vướng gì không.
+- **Tháng 1:** cập nhật tiến độ dự án, hỏi thăm gia đình.
+- **Tháng 2:** hỏi thăm, khéo nhờ giới thiệu bạn bè có nhu cầu.
+- **Tháng 3, 6, 12:** tiến độ, bàn giao, sổ hồng, tình hình cho thuê. Có dự án mới thật sự hợp (đầu tư thêm, mua cho con) thì gợi mở 1 câu.
+
+Đừng quên thêm các **mốc thanh toán** bằng `/moc` để bot nhắc khách đúng hạn.
+Khi có dự án mới, `/chaohang` và `/khoigoi` tự cân nhắc cả khách đã mua (cho nhu cầu đầu tư thêm hoặc giới thiệu người quen).
+
+### 5.4. Khơi gợi lại khách cũ: `/khoigoi`
+```
+/khoigoi
+/khoigoi FourS vừa cất nóc, giá sắp điều chỉnh
+```
+Bot quét **khách lâu không nói chuyện** (từ 3 tuần trở lên) và **khách cũ trong file Excel**, chọn những người nên khơi gợi, rồi soạn tin riêng cho từng người. Tin mở đầu bằng **câu chào hóm hỉnh hoặc câu hỏi gợi tò mò** gắn với đúng nhu cầu cũ của khách, ví dụ:
+> "Anh ơi, căn 2PN view sông hôm trước anh khen vẫn chưa ai rước, em hơi lo cho nó 😄 Bên em vừa có chính sách thanh toán giãn 18 tháng, anh muốn em tính thử không ạ?"
+
+> "Chị ơi, nhà mình đã chốt được tổ ấm chưa, hay vẫn đang để em giữ lửa giúp ạ? 😊"
+
+Xem và gửi giống `/chaohang`: `/xem <mã> 1`, `/gui <mã>`. Khách chỉ có SĐT thì copy tin từ file CSV.
+
+### 5.5. Bot được dạy sẵn quy trình bán hàng
+
 Mỗi tin nhắn, bot chỉ tiến **một bước**, để khách không thấy bị ép:
 1. **Kết nối:** trả lời ngay điều khách hỏi, không bắt khách khai thông tin trước.
 2. **Hiểu nhu cầu:** mỗi tin chỉ hỏi 1 câu, và là câu **lựa chọn** dễ trả lời ("mình mua để ở hay cho thuê ạ?").
@@ -199,29 +282,30 @@ Bot cũng biết cách xử lý các câu từ chối hay gặp:
 - "Đang xem dự án khác": không chê dự án kia, chỉ nêu khác biệt thật.
 - "Chờ giá xuống": chia sẻ góc nhìn trung thực, không dọa.
 
-### 5.2. Chăm sóc tự động khách im lặng
-Khách hỏi xong rồi im, bot tự nhắn lại **sau 1 ngày, 3 ngày và 7 ngày**, chỉ trong khung **8h–21h**:
-- **Lần 1:** nối tiếp câu chuyện cũ, kèm 1 thông tin có ích (căn hợp, cách thanh toán nhẹ) và 1 câu hỏi dễ trả lời.
-- **Lần 2:** báo một điều mới (chính sách mới, căn đẹp vừa có), hoặc gỡ đúng điều khách còn băn khoăn.
-- **Lần 3:** nhẹ nhàng: "em vẫn giữ thông tin cho anh/chị, khi nào cần cứ nhắn em".
+### 5.6. Quy tắc chăm sóc tự động
+Bot nhắn lại khách im lặng sau **1, 3, 7, 14, 30, 60, 90 ngày**, tính từ tin cuối của khách, theo các quy tắc:
+- chỉ nhắn trong khung **8h–21h**;
+- mỗi khách **tối đa 1 tin chủ động mỗi ngày**;
+- ưu tiên nhắc lịch hẹn và nhắc mốc trước.
 
 Bot **không nhắn** trong các trường hợp:
 - khách đã có lịch hẹn sắp tới;
 - khách nói không quan tâm, đã mua chỗ khác hoặc xin đừng nhắn;
 - khách nằm trong danh bạ riêng;
 - anh/chị đang nói chuyện trực tiếp với khách đó;
-- khách im lặng đã hơn 45 ngày.
+- khách im lặng đã hơn 120 ngày;
+- hôm đó đã nhắn khách rồi.
 
 Khách trả lời lại thì lịch chăm sóc tính lại từ đầu. Mỗi đợt, bot báo 💌 cho anh/chị biết đã nhắn những ai.
 - `/chamsoc`: xem tình hình, ai đang chờ được chăm sóc.
 - `/chamsoc tat` / `/chamsoc bat`: tắt / bật (nhắc lịch hẹn vẫn chạy).
-- Muốn đổi số ngày: mở `.env`, sửa `FOLLOWUP_DAYS=1,3,7`.
+- Muốn đổi số ngày: mở `.env`, sửa `FOLLOWUP_DAYS=1,3,7,14,30,60,90` (khách chưa mua) hoặc `HAU_MAI_DAYS=1,7,30,60,90,180,365` (khách đã mua).
 
-### 5.3. Nhắc lịch & sau khi xem nhà
+### 5.7. Nhắc lịch & sau khi xem nhà
 - **Trước giờ hẹn 3 tiếng**, bot nhắn khách: "Dạ em nhắc anh/chị lịch xem … lúc 9:00 hôm nay ạ. Anh/chị cần em gửi định vị không ạ?". Đồng thời báo ⏰ cho anh/chị.
 - **Ngày hôm sau**, bot hỏi khách cảm nhận, khách thích điểm gì, còn băn khoăn gì, rồi đề nghị gửi bảng tính cho căn khách thích. Khách chưa đi xem thì bot hỏi khéo có muốn hẹn lại không.
 
-### 5.4. Anh/chị nên làm gì để chốt nhanh
+### 5.8. Anh/chị nên làm gì để chốt nhanh
 - Có 🔥 hoặc 🙋 thì **gọi ngay**. Khách nóng để quá 1 giờ dễ nguội.
 - Trước khi gọi, nhắn `/khach <mã>` để xem khách đã hỏi gì, đang băn khoăn gì (mục `ban_khoan`).
 - Cập nhật **bảng hàng và CSBH** thường xuyên. Bot có thông tin mới thì mới chăm sóc khách hay được.
@@ -303,13 +387,16 @@ Bot hiểu sẵn các viết tắt BĐS (CSBH, PN, HĐMB, CK, HTLS, SHR, F0/F1, 
 
 | Lúc | Việc |
 |---|---|
-| **8h sáng** | Đọc ☀️ báo cáo buổi sáng → gọi top khách nóng → xác nhận lịch hẹn hôm nay |
+| **8h sáng** | Đọc ☀️ báo cáo buổi sáng → gọi top khách nóng → xác nhận lịch hẹn và mốc của khách hôm nay |
+| **Nhận 🩺 đánh giá lại** | Làm theo "Anh/chị nên", gửi tin mẫu nếu hợp |
+| **Chốt được deal** | `/damua <mã> <căn>` → `/moc` các mốc ký HĐMB, đóng tiền |
 | **Có CSBH / bảng giá mới** | Chụp ảnh gửi bot → kiểm tra → `/luu` → `/baokhach <tin mới>` |
 | **Có căn bán / đổi giá** | Sửa ngay trên Google Sheet bảng hàng |
 | **Nhận 🔥 hoặc 🙋** | `/khach <mã>` xem nhanh → gọi trong 15 phút |
 | **Nhận 🤝** | Gửi kết bạn Zalo cá nhân + tin đầu tiên |
 | **Khách hỏi câu bot chưa biết** | Trả lời bằng `/tl` → lưu lại bằng lệnh `/hoidap` bot gợi ý |
-| **Cuối tuần** | `/nhiet` xem lại khách ấm, `/thongke` xem số liệu |
+| **Cuối tuần** | `/giaidoan`, `/nhiet` xem lại khách · `/thongke` xem số liệu |
+| **Đầu tháng** | `/khoigoi` khơi gợi lại khách cũ |
 
 ---
 
@@ -332,7 +419,12 @@ Nhắn các lệnh này cho bot từ Zalo của anh/chị. Gõ `/hd` để bot g
 | | `/tl <mã> <nội dung>` | Trả lời khách qua bot (bot nhường anh/chị 30 phút) |
 | | `/tat <mã>` · `/bat <mã>` | Tắt bot với 1 khách trong 24 giờ · bật lại |
 | | `/rieng <mã> [ghi chú]` · `/borieng <mã>` | Danh bạ riêng: bot luôn bỏ qua người này |
-| **Chăm sóc** | `/chamsoc` · `/chamsoc tat` · `/chamsoc bat` | Chăm sóc khách im lặng |
+| **Vòng đời** | `/giaidoan` | Khách đang ở giai đoạn nào |
+| | `/danhgia <mã>` | Đánh giá lại 1 khách ngay |
+| | `/moc <mã> <ngày> <việc>` · `/moc <mã>` · `/xoamoc <mã> <số>` | Mốc để bot nhắc khách |
+| | `/damua <mã> <căn>` | Khách đã mua → hậu mãi |
+| | `/khoigoi [chủ đề]` | Khơi gợi lại khách cũ |
+| **Chăm sóc** | `/chamsoc` · `/chamsoc tat` · `/chamsoc bat` | Chăm sóc tự động |
 | | `/baokhach <tin mới>` | Báo tin mới cho đúng khách |
 | | `/chaohang <dự án>` | Chào dự án mới cho đúng khách |
 | | `/xem <mã CD> <số>` · `/gui <mã CD>` | Xem / gửi tin của chiến dịch |
@@ -418,3 +510,25 @@ Cột `zalo_chat_id` để trống cũng được: khách nhắn bot và đưa S
 - **Không** đưa file `.env`, thư mục `data/` hay danh sách khách thật lên mạng hoặc GitHub.
 - Zalo có thể hạn chế bot nếu bot nhắn quá nhiều người không phản hồi. Vì vậy chăm sóc tự động chỉ nhắn tối đa 3 lần, chỉ trong giờ hành chính.
 - Chi phí API: mỗi tin trả lời khoảng vài chục đến vài trăm đồng. Đọc ảnh hoặc quét chiến dịch tốn hơn một chút.
+
+---
+
+## 14. Dùng trên nhiều máy: Windows, Mac, iPad, điện thoại
+
+**Đúng vậy: chỉ cần cài bot trên 1 máy.** Bot chạy ở máy đó. Anh/chị **điều khiển bot từ bất kỳ đâu qua Zalo**: điện thoại, iPad, máy Mac hay máy Windows, miễn là đăng nhập đúng Zalo đã nhắn `/chu`.
+
+| Thiết bị | Dùng để |
+|---|---|
+| **1 máy chạy bot** (khuyên dùng VPS, hoặc 1 máy tính luôn bật) | Chạy bot 24/7. Chứa `.env`, `du_an.md`, thư mục `data/` |
+| Điện thoại, iPad, máy khác | Mở Zalo → nhắn lệnh, gửi ảnh CSBH, nhận thông báo, trả lời khách bằng `/tl` |
+| Google Sheet (trên mọi máy) | Sửa bảng hàng, xem bảng khách hàng |
+
+**Lưu ý:**
+- **Không chạy bot cùng lúc trên 2 máy.** Khách sẽ nhận 2 câu trả lời, và dữ liệu khách bị chia làm 2 nơi.
+- **iPad và điện thoại không chạy được bot.** Chúng chỉ dùng để điều khiển bot qua Zalo, và như vậy là đủ.
+- Máy tính tắt, ngủ (sleep) hoặc mất mạng thì bot dừng. Muốn bot chạy suốt ngày đêm thì dùng **VPS** ([mục 12](#12-chạy-247-trên-vps)).
+- **Đổi sang máy khác:**
+  1. Tắt bot ở máy cũ.
+  2. Copy **cả thư mục `bds-bot`** sang máy mới, nhất là file `.env`, `du_an.md`, các thư mục `data/` và `bang_hang/`.
+  3. Chạy bot ở máy mới. Bot nhớ hết khách, lịch hẹn và mốc.
+- Khi muốn sửa `du_an.md` ở xa: dùng `/capnhat`, gửi ảnh hoặc `/hoidap` ngay trên Zalo, không cần mở máy chạy bot.

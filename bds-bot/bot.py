@@ -25,7 +25,7 @@ import urllib.error
 import urllib.request
 import base64
 import shutil
-from datetime import datetime
+from datetime import datetime, timedelta
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
@@ -100,16 +100,22 @@ INVENTORY_DIR = BASE_DIR / "bang_hang"      # bỏ file CSV bảng hàng vào đ
 BACKUP_DIR = DATA / "sao_luu_du_an"
 UPDATE_HEADER = "## Cập nhật mới nhất"
 QA_HEADER = "## Hỏi đáp mẫu (Q&A)"
-FOLLOWUP_DAYS = [float(x) for x in os.environ.get("FOLLOWUP_DAYS", "1,3,7").split(",") if x.strip()]
+# Khách im lặng: nhắn lại sau các mốc (ngày, tính từ tin cuối của khách)
+#   1, 3 = giai đoạn nóng · 7 = sau khi đánh giá lại · 14, 30, 60, 90 = nuôi dài hạn, khơi gợi
+FOLLOWUP_DAYS = [float(x) for x in os.environ.get("FOLLOWUP_DAYS", "1,3,7,14,30,60,90").split(",") if x.strip()]
 FOLLOWUP_HOURS = (8, 20)          # chỉ nhắn chăm sóc 8:00–20:59
-FOLLOWUP_MAX_AGE_DAYS = 45        # khách im quá 45 ngày thì thôi
+FOLLOWUP_MAX_AGE_DAYS = 120       # khách im quá 120 ngày thì thôi
+REVIEW_DAYS = (3, 7)              # đánh giá lại khách sau 3 và 7 ngày kể từ lần đầu nhắn
+AFTER_SALE_DAYS = [float(x) for x in os.environ.get("HAU_MAI_DAYS", "1,7,30,60,90,180,365").split(",") if x.strip()]
+MILESTONE_REMIND = (3, 1, 0)      # nhắc mốc của khách trước 3 ngày, 1 ngày và đúng ngày
 
 TAG_SILENT = "[KHONG_TRA_LOI]"
 TAG_HANDOFF = "[CHUYEN_NHAN_VIEN]"
 PROFILE_RE = re.compile(r"\[HO_SO\](\{.*?\})\[/HO_SO\]", re.S)
 APPT_RE = re.compile(r"\[LICH_HEN\](\{.*?\})\[/LICH_HEN\]", re.S)
+MOC_RE = re.compile(r"\[MOC\](\{.*?\})\[/MOC\]", re.S)
 # thẻ bị cắt dở (AI trả lời quá dài) hoặc thẻ lạ: xóa hết trước khi gửi khách
-LEFTOVER_TAG_RE = re.compile(r"\[/?(HO_SO|LICH_HEN)\].*", re.S)
+LEFTOVER_TAG_RE = re.compile(r"\[/?(HO_SO|LICH_HEN|MOC)\].*", re.S)
 LEFTOVER_FLAG_RE = re.compile(r"\[(KHONG_TRA_LOI|CHUYEN_NHAN_VIEN)\]")
 
 PROFILE_FIELDS = ["ho_ten", "sdt", "ngan_sach", "khu_vuc", "loai_hinh", "so_phong_ngu", "muc_dich",
@@ -138,6 +144,27 @@ def heat(c, now=None):
     elif days > 2:
         base -= int((days - 2) * 2)
     return max(0, min(100, base))
+
+
+def stage(c, now=None):
+    """Giai đoạn khách trong vòng đời."""
+    now = now or datetime.now()
+    hs = c.get("ho_so", {})
+    if hs.get("khong_lam_phien"):
+        return "ngung"
+    if c.get("mua"):
+        return "da_mua"
+    if any(str(a.get("luc", "")) >= now.strftime("%Y-%m-%d %H:%M") for a in c.get("lich", [])):
+        return "hen"
+    try:
+        age = (now - datetime.strptime(c.get("lan_dau", "")[:16], "%Y-%m-%d %H:%M")).total_seconds() / 86400
+    except ValueError:
+        age = 0
+    return "moi" if age < REVIEW_DAYS[0] else ("danh_gia" if age < REVIEW_DAYS[1] else "nuoi")
+
+
+STAGE_LABEL = {"moi": "🆕 Mới (1–3 ngày)", "danh_gia": "🩺 Đánh giá lại (3–7 ngày)", "nuoi": "🌱 Nuôi dài hạn",
+               "hen": "📅 Đã hẹn xem", "da_mua": "🏠 Đã mua – hậu mãi", "ngung": "⛔ Không làm phiền"}
 
 
 def heat_icon(score):
@@ -739,6 +766,7 @@ THẺ ĐIỀU KHIỂN — đặt ở CUỐI tin, khách không nhìn thấy
   +25 hẹn/xin đi xem nhà · +20 hỏi giá/tình trạng CĂN CỤ THỂ hoặc hỏi giữ căn, đặt cọc, thủ tục mua · +15 hỏi phương thức thanh toán, vay, chiết khấu chi tiết · +10 để lại SĐT · +10 ngân sách rõ và khớp sản phẩm · +10 muốn mua trong 3 tháng · +5 hỏi pháp lý/tiến độ · +5 nói đã có tiền / bán nhà cũ.
   −15 chỉ hỏi chung chung, "hỏi cho biết" · −20 chê đắt mạnh và không cân nhắc thêm · −30 nói đã mua chỗ khác / không có nhu cầu. Mốc: ≥70 nóng, 40–69 ấm, <40 lạnh. Ghi muc_do tương ứng (nong/am/lanh).
 - [LICH_HEN]{"ho_ten":"","sdt":"","du_an":"","thoi_gian":"","luc":"YYYY-MM-DD HH:MM","dia_diem":"","ghi_chu":""}[/LICH_HEN] khi khách đã chốt lịch xem nhà hoặc lịch gọi (phải có SĐT và thời gian). "luc" là thời điểm chính xác tính từ "Bây giờ là" (ví dụ "sáng mai 9h" → ngày mai 09:00).
+- [MOC]{"ngay":"YYYY-MM-DD","viec":""}[/MOC] khi khách nhắc 1 MỐC THỜI GIAN quan trọng sắp tới: ngày có tiền / bán xong nhà cũ, ngày ký HĐMB / HĐĐC, ngày đóng tiền đợt, ngày bàn giao, ngày gia đình quyết định, ngày đi công tác về, hạn CSBH khách đang nhắm. "ngay" tính từ "Bây giờ là" ("cuối tháng" → ngày cuối tháng này). "viec" ngắn gọn, ví dụ "đóng đợt 2 – 30%".
 - [CHUYEN_NHAN_VIEN] khi: khách muốn nói chuyện/gọi với người thật ngay, muốn đặt cọc/giữ căn, đàm phán giá hoặc chiết khấu riêng, khiếu nại, hỏi pháp lý chi tiết của một căn cụ thể, hoặc câu hỏi không có trong THÔNG TIN. Khi đó báo khách là chuyên viên sẽ liên hệ trong ít phút.
 
 DẪN DẮT KHÁCH ĐẾN XEM NHÀ / CHỐT – khéo, tự nhiên, không ép
@@ -757,6 +785,8 @@ Xử lý băn khoăn (đồng cảm trước, rồi đưa góc nhìn, rồi 1 b�
 - "Chờ giá xuống / thị trường": chia sẻ góc nhìn trung thực, nêu ưu đãi đang có (đúng THÔNG TIN), không dọa.
 Khách nói không quan tâm / đã mua chỗ khác / xin đừng nhắn: cảm ơn lịch sự, chúc mừng nếu đã mua, ghi [HO_SO]{"khong_lam_phien":"co"}[/HO_SO], không mời thêm.
 Khách im lặng thì không nhắn dồn: bot có lịch chăm sóc riêng.
+Nếu có "Chiến lược chăm sóc" trong phần thông tin khách thì đi theo hướng đó.
+KHÁCH ĐÃ MUA (hậu mãi): đồng hành như người nhà — nhắc thủ tục, mốc thanh toán, tiến độ, bàn giao, sổ hồng; trả lời tận tình, không chào bán thêm trừ khi khách hỏi hoặc có dự án thực sự hợp (đầu tư thêm, mua cho con); khéo léo nhờ giới thiệu bạn bè khi khách đang vui.
 
 THÔNG TIN MỚI NHẤT & BẢNG HÀNG
 - Mục "Cập nhật mới nhất" có ghi ngày [dd/mm/yyyy]: mục MỚI HƠN thay thế thông tin cũ khi mâu thuẫn (giá, CSBH, tiến độ). Không nhắc lại số cũ đã bị thay.
@@ -811,6 +841,14 @@ def build_system(cid):
         ctx.append("Khách mới, hôm nay mới nhắn lần đầu.")
     if c.get("ho_so"):
         ctx.append("Hồ sơ đã ghi nhận: " + json.dumps(c["ho_so"], ensure_ascii=False))
+    ctx.append("Giai đoạn: " + STAGE_LABEL.get(stage(c), ""))
+    if c.get("mua"):
+        ctx.append(f"KHÁCH ĐÃ MUA qua chuyên viên ngày {c['mua']['ngay']}: {c['mua'].get('can', '')} → chăm sóc hậu mãi.")
+    if c.get("chien_luoc"):
+        ctx.append("Chiến lược chăm sóc (từ lần đánh giá gần nhất): " + c["chien_luoc"])
+    mocs = [m for m in c.get("moc", []) if m.get("ngay", "") >= datetime.now().strftime("%Y-%m-%d")]
+    if mocs:
+        ctx.append("Mốc sắp tới của khách: " + "; ".join(f"{m['ngay']} {m['viec']}" for m in mocs[:5]))
     old = find_old_customer(cid, c.get("ho_so", {}).get("sdt", ""))
     if old:
         ctx.append("ĐÂY LÀ KHÁCH CŨ của chuyên viên (dữ liệu cũ): " +
@@ -889,7 +927,7 @@ def handle_customer(cid, channel, name, text, images=None):
         changed = store.merge_profile(cid, data)
         if changed:
             push_sheet("KhachHang", {"chat_id": cid, "ten_zalo": c.get("ten", ""), "kenh": channel,
-                                     **c["ho_so"], "do_nhiet": heat(c)})
+                                     **c["ho_so"], "do_nhiet": heat(c), "giai_doan": stage(c)})
             now_heat = heat(c)
             if now_heat >= HOT and before < HOT:
                 notify_admin(f"🔥 KHÁCH NÓNG {now_heat}/100: {label(cid)}\n"
@@ -897,6 +935,9 @@ def handle_customer(cid, channel, name, text, images=None):
                              "\n".join(f"{k}: {v}" for k, v in c["ho_so"].items()
                                        if k not in ("diem_nhiet", "ly_do_nhiet", "muc_do")) +
                              f"\n↩️ /khach {cid}")
+            if changed.get("da_mua") and not c.get("mua"):
+                notify_admin(f"🏠 {label(cid)} nói đã mua: {changed['da_mua']}\n"
+                             f"Nếu khách mua qua anh/chị: /damua {cid} <căn> để bot chăm sóc hậu mãi.")
             if changed.get("sdt"):
                 suggest_friend_request(cid)
                 old = find_old_customer(cid, changed["sdt"])
@@ -919,7 +960,17 @@ def handle_customer(cid, channel, name, text, images=None):
         notify_admin("📅 LỊCH HẸN MỚI – " + label(cid) + "\n" +
                      "\n".join(f"{k}: {v}" for k, v in appt.items() if v))
 
-    answer = APPT_RE.sub("", PROFILE_RE.sub("", raw))
+    # mốc thời gian của khách
+    for m in MOC_RE.finditer(raw):
+        try:
+            moc = json.loads(m.group(1))
+        except ValueError:
+            continue
+        if add_milestone(cid, moc.get("ngay", ""), moc.get("viec", "")):
+            notify_admin(f"📌 Mốc mới của {label(cid)}: {moc.get('ngay')} – {moc.get('viec')}\n"
+                         "Bot sẽ nhắc khách khéo trước 3 ngày, 1 ngày và đúng ngày.")
+
+    answer = MOC_RE.sub("", APPT_RE.sub("", PROFILE_RE.sub("", raw)))
     if TAG_HANDOFF in answer:
         answer = answer.replace(TAG_HANDOFF, "")
         store.pause(cid, HUMAN_PAUSE_MIN)
@@ -944,18 +995,45 @@ def followup_enabled():
     return os.environ.get("FOLLOWUP", "1") == "1"
 
 
+IM_LANG_GUIDE = [
+    # theo thứ tự FOLLOWUP_DAYS
+    "Mốc 1 ngày (giai đoạn nóng): tiếp đúng mạch cũ, đưa thêm 1 thông tin có ích cho đúng nhu cầu (căn hợp trong bảng hàng, "
+    "cách thanh toán nhẹ, ưu đãi đang có) + 1 câu hỏi lựa chọn dễ trả lời.",
+    "Mốc 3 ngày (cuối giai đoạn nóng): mở 1 góc mới — giải tỏa đúng băn khoăn của khách, hoặc mời nhận video/bảng tính, "
+    "hoặc mời xem nhà cuối tuần bằng 2 lựa chọn thời gian. Nếu ưu đãi sắp hết hạn thì nhắc khéo hạn chót.",
+    "Mốc 7 ngày (sau đánh giá lại): đi theo 'Chiến lược chăm sóc' nếu có — đổi căn / đổi phương án thanh toán / đổi cách tiếp cận "
+    "cho đúng điều khách thật sự cần. Hỏi 1 câu giúp hiểu lý do khách chưa quyết.",
+]
+KHOI_GOI_GUIDE = (
+    "Giai đoạn nuôi dài hạn — KHƠI GỢI như người quen lâu ngày: mở đầu bằng 1 câu chào hóm hỉnh hoặc 1 câu hỏi gợi tò mò "
+    "gắn với nhu cầu cũ của khách (ví dụ: 'Anh ơi, căn 2PN view sông hôm trước anh khen vẫn chưa ai rước, em hơi lo cho nó 😄', "
+    "'Chị ơi, nhà mình đã chốt được tổ ấm chưa, hay vẫn đang để em giữ lửa giúp ạ?'), rồi 1 thông tin mới có giá trị thật "
+    "(chính sách mới, căn mới hợp, tiến độ, hạ tầng khu vực). Không chào bán dồn dập, kết bằng câu hỏi nhẹ để khách dễ trả lời.")
+AFTER_SALE_GUIDE = [
+    "1 ngày sau khi mua: cảm ơn + chúc mừng chân thành, tóm tắt bước tiếp theo (hồ sơ, ký HĐMB, mốc đóng tiền nếu có), "
+    "khẳng định em luôn đồng hành, có gì cứ nhắn em.",
+    "1 tuần: hỏi thăm thủ tục có vướng gì không, nhắc giấy tờ/mốc sắp tới nếu có.",
+    "1 tháng: cập nhật tiến độ dự án (chỉ theo THÔNG TIN), hỏi thăm gia đình.",
+    "2 tháng: hỏi thăm + khéo léo nhờ giới thiệu nếu bạn bè/người thân có nhu cầu (không ép, cảm ơn trước).",
+    "3 tháng trở đi: tiến độ / bàn giao / sổ hồng / tình hình cho thuê khu vực; nếu có dự án mới thực sự hợp "
+    "(đầu tư thêm, mua cho con) thì gợi mở 1 câu, không chào bán dồn dập.",
+]
+
 CARE_PROMPTS = {
-    "im_lang": ("CHẾ ĐỘ CHĂM SÓC (tin nội bộ, không phải khách nhắn): khách chưa trả lời từ {last}. Đây là lần chăm sóc thứ {n}/{total}.\n"
-                "Viết 1 tin NGẮN (1–3 câu) để khách muốn trả lời lại, như chuyên viên tâm lý:\n"
-                "- Lần 1: tiếp đúng mạch cũ, đưa thêm 1 thông tin có ích cho nhu cầu của khách (căn hợp trong bảng hàng, "
-                "cách thanh toán nhẹ, ưu đãi đang có) + 1 câu hỏi lựa chọn dễ trả lời.\n"
-                "- Lần 2: chia sẻ 1 điều mới (cập nhật mới nhất, tiến độ, căn đẹp vừa có) hoặc giải tỏa đúng băn khoăn của khách, mời nhận video/bảng tính.\n"
-                "- Lần cuối: nhẹ nhàng, không áp lực: em vẫn giữ thông tin cho anh/chị, khi nào cần cứ nhắn em; có thể mời xem nhà cuối tuần.\n"
-                "KHÔNG lặp lại tin trước, không trách khách, không 'sao anh/chị không trả lời', không dọa hết hàng. "
-                "Nếu khách đã từ chối, đã mua chỗ khác, hoặc chuyện đã xong → chỉ trả về [KHONG_GUI]. Không dùng thẻ khác."),
+    "im_lang": ("CHẾ ĐỘ CHĂM SÓC (tin nội bộ, không phải khách nhắn): khách chưa trả lời từ {last}. Lần chăm sóc thứ {n}.\n"
+                "{guide}\n"
+                "Viết 1 tin NGẮN (1–3 câu). KHÔNG lặp lại tin trước, không trách khách, không 'sao anh/chị không trả lời', "
+                "không dọa hết hàng. Nếu khách đã từ chối, đã mua chỗ khác, hoặc chuyện đã xong → chỉ trả về [KHONG_GUI]. "
+                "Không dùng thẻ khác."),
     "sau_xem": ("CHẾ ĐỘ SAU XEM NHÀ (tin nội bộ): khách đã có lịch xem {du_an} lúc {luc}. Viết 1 tin ngắn hỏi thăm cảm nhận sau khi xem, "
                 "hỏi khách thích nhất điểm gì và còn băn khoăn gì, đề nghị gửi bảng tính chi tiết cho căn khách thích. "
                 "Nếu hội thoại cho thấy khách chưa đi xem / đã hủy → hỏi khéo có muốn hẹn lại lịch khác không. Không dùng thẻ."),
+    "nhac_moc": ("CHẾ ĐỘ NHẮC MỐC (tin nội bộ): mốc của khách là '{viec}' vào {ngay} ({khi}). Viết 1 tin ngắn nhắc khéo để khách "
+                 "không quên: nhẹ nhàng, chu đáo như người nhà, hóm hỉnh vừa phải nếu hợp ngữ cảnh (KHÔNG đùa khi nói về tiền "
+                 "đóng đợt / pháp lý). Gợi ý luôn việc cần chuẩn bị (giấy tờ, số tiền theo THÔNG TIN nếu có) và đề nghị hỗ trợ. "
+                 "Không dọa, không ép. Không dùng thẻ."),
+    "hau_mai": ("CHẾ ĐỘ HẬU MÃI (tin nội bộ): khách đã mua {can} ngày {ngay_mua}. {guide}\n"
+                "Viết 1 tin ngắn (1–3 câu), ấm áp, đúng mốc này. Không dùng thẻ."),
 }
 
 
@@ -971,14 +1049,123 @@ def draft_care(cid, mode, **kw):
     raw = ask_claude(system, msgs, max_tokens=500)
     if not raw or "[KHONG_GUI]" in raw:
         return ""
-    raw = APPT_RE.sub("", PROFILE_RE.sub("", raw))
+    raw = MOC_RE.sub("", APPT_RE.sub("", PROFILE_RE.sub("", raw)))
     return LEFTOVER_FLAG_RE.sub("", LEFTOVER_TAG_RE.sub("", raw)).strip()
 
 
+# ------------------------------------------------- mốc thời gian của khách
+def parse_day(s, now=None):
+    """'2026-11-15', '15/11/2026', '15/11' → 'YYYY-MM-DD' (thiếu năm: lấy lần tới gần nhất)."""
+    now = now or datetime.now()
+    s = str(s).strip()
+    for fmt in ("%Y-%m-%d", "%d/%m/%Y", "%d-%m-%Y", "%d/%m/%y"):
+        try:
+            return datetime.strptime(s[:10], fmt).strftime("%Y-%m-%d")
+        except ValueError:
+            pass
+    m = re.match(r"(\d{1,2})/(\d{1,2})$", s)
+    if m:
+        try:
+            d = datetime(now.year, int(m.group(2)), int(m.group(1)))
+        except ValueError:
+            return ""
+        if d.date() < now.date():
+            d = d.replace(year=now.year + 1)
+        return d.strftime("%Y-%m-%d")
+    return ""
+
+
+def add_milestone(cid, ngay, viec):
+    ngay = parse_day(ngay)
+    viec = str(viec or "").strip()[:200]
+    if not ngay or not viec or cid not in store.customers:
+        return False
+    with store.lock:
+        mocs = store.customers[cid].setdefault("moc", [])
+        if any(m["ngay"] == ngay and m["viec"].lower() == viec.lower() for m in mocs):
+            return False
+        mocs.append({"ngay": ngay, "viec": viec, "da_nhac": []})
+        mocs.sort(key=lambda m: m["ngay"])
+        store.save()
+    return True
+
+
+# ------------------------------------------------- đánh giá lại khách (3 & 7 ngày)
+REVIEW_PROMPT = """Bạn là trưởng phòng kinh doanh BĐS giàu kinh nghiệm, đánh giá lại 1 khách sau {day} ngày kể từ lần đầu nhắn để giúp chuyên viên chốt.
+Dựa vào hồ sơ, toàn bộ hội thoại, THÔNG TIN dự án và BẢNG HÀNG, phân tích THẲNG THẮN:
+- Khách là ai, nhu cầu thật (để ở / đầu tư, ngân sách, thời gian) đã rõ chưa?
+- Căn đã giới thiệu có đúng căn khách thích / hợp túi tiền chưa? Có căn nào trong bảng hàng hợp hơn không?
+- Chính sách đã đủ hấp dẫn với chính khách này chưa? Phương án thanh toán nào hợp hơn?
+- VÌ SAO khách chưa chốt / chưa đi xem (giá, pháp lý, chưa đúng căn, chưa tin, chờ vợ/chồng, đang so sánh, chưa có tiền, chỉ tham khảo…)? Dẫn chứng từ hội thoại.
+- Chuyên viên nên làm gì NGAY (gọi, đổi căn, gửi bảng tính, mời xem, chuyển nuôi dài hạn)?
+Chỉ trả về JSON, không viết gì khác:
+{{"tom_tat":"1 câu khách là ai, muốn gì","nhu_cau_ro":"co|chua – vì sao","dung_can":"co|chua|chua_ro – vì sao, căn nên gợi ý","chinh_sach":"hap_dan|chua – vì sao, phương án hợp hơn","ly_do_chua_chot":"...","diem_nhiet":0,"ly_do_nhiet":"≤12 chữ","huong":"sap_chot|doi_huong|nuoi_dai_han|ngung","chuyen_vien_nen_lam":"1–2 việc cụ thể","chien_luoc":"1–2 câu hướng dẫn bot chăm sóc tiếp","tin_goi_y":"1 tin nhắn mẫu chuyên viên có thể gửi khách (≤350 ký tự)"}}"""
+
+HUONG_LABEL = {"sap_chot": "🎯 Sắp chốt – dồn lực", "doi_huong": "🔄 Cần đổi hướng",
+               "nuoi_dai_han": "🌱 Chuyển nuôi dài hạn", "ngung": "⛔ Nên dừng"}
+
+
+def review_customer(cid, day):
+    c = store.customers.get(cid)
+    if not c:
+        return ""
+    system = build_system(cid)
+    system.append({"type": "text", "text": REVIEW_PROMPT.format(day=day)})
+    msgs = store.api_messages(cid)
+    note = "[Ghi chú nội bộ: hãy đánh giá lại khách này theo hướng dẫn, trả về JSON]"
+    if msgs and msgs[-1]["role"] == "user":
+        msgs[-1]["content"] = (msgs[-1]["content"] if isinstance(msgs[-1]["content"], str) else "") + "\n" + note
+    else:
+        msgs.append({"role": "user", "content": note})
+    raw = ask_claude(system, msgs, max_tokens=1200)
+    a, b = raw.find("{"), raw.rfind("}")
+    try:
+        r = json.loads(raw[a:b + 1]) if a >= 0 else {}
+    except ValueError:
+        r = {}
+    if not r:
+        return ""
+    with store.lock:
+        c["danh_gia"] = {**r, "luc": now_str(), "ngay_thu": day}
+        if r.get("chien_luoc"):
+            c["chien_luoc"] = r["chien_luoc"]
+        if r.get("huong") in ("nuoi_dai_han", "ngung") and c.get("cs_lan", 0) < 3:
+            c["cs_lan"] = 3  # bỏ qua chuỗi nóng, chuyển sang nhịp nuôi dài hạn
+        store.save()
+    upd = {}
+    try:
+        upd["diem_nhiet"] = max(0, min(100, int(float(r.get("diem_nhiet")))))
+        upd["muc_do"] = "nong" if upd["diem_nhiet"] >= HOT else ("am" if upd["diem_nhiet"] >= WARM else "lanh")
+        upd["ly_do_nhiet"] = r.get("ly_do_nhiet", "")
+    except (TypeError, ValueError):
+        pass
+    store.merge_profile(cid, upd)
+    report = (f"🩺 ĐÁNH GIÁ LẠI SAU {day} NGÀY – {label(cid)}\n"
+              f"{HUONG_LABEL.get(r.get('huong'), r.get('huong', ''))} · {heat_icon(heat(c))} {heat(c)}/100\n\n"
+              f"👤 {r.get('tom_tat', '')}\n"
+              f"🎯 Nhu cầu rõ: {r.get('nhu_cau_ro', '')}\n"
+              f"🏠 Đúng căn: {r.get('dung_can', '')}\n"
+              f"💰 Chính sách: {r.get('chinh_sach', '')}\n"
+              f"❓ Vì sao chưa chốt: {r.get('ly_do_chua_chot', '')}\n\n"
+              f"👉 Anh/chị nên: {r.get('chuyen_vien_nen_lam', '')}\n"
+              f"🤖 Bot sẽ chăm sóc theo hướng: {r.get('chien_luoc', '')}")
+    notify_admin(report)
+    if r.get("tin_goi_y"):
+        notify_admin(r["tin_goi_y"])
+        notify_admin(f"☝️ Tin mẫu – gửi qua bot: /tl {cid} <dán tin>  ·  hoặc copy gửi Zalo cá nhân")
+    return report
+
+
+# ------------------------------------------------- lịch việc chăm sóc
+def in_hours(now):
+    return FOLLOWUP_HOURS[0] <= now.hour <= FOLLOWUP_HOURS[1]
+
+
 def care_candidates(now):
-    """Trả về [(cid, việc)] cần làm: nhắc lịch, hỏi sau xem nhà, chăm sóc khách im lặng."""
+    """[(cid, (việc, dữ liệu))]: nhắc lịch, sau xem nhà, nhắc mốc, đánh giá lại, hậu mãi, chăm sóc khách im lặng."""
     ignore = load_ignore()
     jobs = []
+    today = now.date()
     with store.lock:
         items = list(store.customers.items())
     for cid, c in items:
@@ -986,23 +1173,60 @@ def care_candidates(now):
             continue
         if c.get("ho_so", {}).get("khong_lam_phien"):
             continue
+        # lịch xem nhà
         for a in c.get("lich", []):
             t = parse_time(a.get("luc"))
             if not t:
                 continue
             if not a.get("nhac") and 0 < (t - now).total_seconds() <= 3 * 3600:
                 jobs.append((cid, ("nhac", a)))
-            elif not a.get("hoi_sau") and (now - t).total_seconds() >= 20 * 3600 \
-                    and FOLLOWUP_HOURS[0] <= now.hour <= FOLLOWUP_HOURS[1]:
+            elif not a.get("hoi_sau") and (now - t).total_seconds() >= 20 * 3600 and in_hours(now):
                 jobs.append((cid, ("sau_xem", a)))
-        if not followup_enabled() or not FOLLOWUP_HOURS[0] <= now.hour <= FOLLOWUP_HOURS[1]:
+        if not in_hours(now):
             continue
+        # mốc của khách: nhắc trước 3 ngày, 1 ngày, đúng ngày
+        for m in c.get("moc", []):
+            try:
+                left = (datetime.strptime(m["ngay"], "%Y-%m-%d").date() - today).days
+            except (KeyError, ValueError):
+                continue
+            due = [d for d in MILESTONE_REMIND if left <= d and d not in m.get("da_nhac", [])]
+            if due and left >= 0:
+                jobs.append((cid, ("moc", (m, min(due), left))))
+            elif left == -1 and "qua" not in m.get("da_nhac", []):
+                jobs.append((cid, ("moc_qua", m)))
+        if not followup_enabled():
+            continue
+        # hậu mãi
+        if c.get("mua"):
+            try:
+                bought = datetime.strptime(c["mua"]["ngay"], "%Y-%m-%d")
+            except (KeyError, ValueError):
+                continue
+            k = len(c["mua"].get("hm", []))
+            if k < len(AFTER_SALE_DAYS) and (now - bought).total_seconds() / 86400 >= AFTER_SALE_DAYS[k]:
+                if c.get("tin") and c["tin"][-1]["t"][:10] == now.strftime("%Y-%m-%d"):
+                    continue  # hôm nay đã nói chuyện rồi
+                jobs.append((cid, ("hau_mai", k)))
+            continue
+        # đánh giá lại sau 3 và 7 ngày
+        try:
+            age = (now - datetime.strptime(c.get("lan_dau", "")[:16], "%Y-%m-%d %H:%M")).total_seconds() / 86400
+        except ValueError:
+            age = 0
+        done = [x.get("ngay_thu") for x in c.get("danh_gia_ls", [])]
+        for d in REVIEW_DAYS:
+            if d <= age < d + 14 and d not in done and (d == max(x for x in REVIEW_DAYS if x <= age)):
+                jobs.append((cid, ("danh_gia", d)))
+        # khách im lặng
         tin = c.get("tin", [])
         users = [m for m in tin if m["role"] == "user"]
         if not users or tin[-1]["role"] != "assistant":
             continue  # chỉ chăm sóc khi bot đã trả lời và khách đang im
-        if any(parse_time(a.get("luc")) and parse_time(a.get("luc")) > now for a in c.get("lich", [])):
+        if stage(c, now) == "hen":
             continue  # đã có lịch hẹn sắp tới → không làm phiền
+        if tin[-1]["t"][:10] == now.strftime("%Y-%m-%d"):
+            continue  # hôm nay đã nhắn khách rồi
         last = parse_time(users[-1]["t"])
         k = c.get("cs_lan", 0)
         if last and k < len(FOLLOWUP_DAYS):
@@ -1014,10 +1238,27 @@ def care_candidates(now):
 
 def run_care_once(now=None, max_send=20):
     now = now or datetime.now()
-    done = []
-    for cid, (kind, data) in care_candidates(now)[:max_send]:
+    done, sent, touched = [], 0, set()
+    order = {"nhac": 0, "moc": 1, "danh_gia": 2, "moc_qua": 2, "sau_xem": 3, "hau_mai": 4, "im_lang": 5}
+    for cid, (kind, data) in sorted(care_candidates(now), key=lambda j: order.get(j[1][0], 9)):
+        if sent >= max_send:
+            break
+        if kind not in ("danh_gia", "moc_qua", "nhac") and cid in touched:
+            continue  # mỗi khách tối đa 1 tin chủ động mỗi lượt (nhắc lịch hẹn thì luôn gửi)
+        text = ""
         with chat_lock(cid):
             c = store.customers[cid]
+            if kind == "danh_gia":
+                c.setdefault("danh_gia_ls", []).append({"ngay_thu": data, "luc": now_str()})
+                store.save()
+                review_customer(cid, data)
+                continue
+            if kind == "moc_qua":
+                data.setdefault("da_nhac", []).append("qua")
+                store.save()
+                notify_admin(f"📌 Mốc '{data['viec']}' ({data['ngay']}) của {label(cid)} đã qua – anh/chị kiểm tra kết quả giúp em."
+                             + (f"\nKhách đã mua? /damua {cid} <căn>" if not c.get("mua") else ""))
+                continue
             if kind == "nhac":
                 t = parse_time(data["luc"])
                 text = (f"Dạ em nhắc anh/chị lịch xem {data.get('du_an') or 'dự án'} lúc {t.strftime('%H:%M')}"
@@ -1029,19 +1270,50 @@ def run_care_once(now=None, max_send=20):
             elif kind == "sau_xem":
                 data["hoi_sau"] = True
                 text = draft_care(cid, "sau_xem", du_an=data.get("du_an", "dự án"), luc=data["luc"])
+            elif kind == "moc":
+                m, mark, left = data
+                m.setdefault("da_nhac", []).extend(d for d in MILESTONE_REMIND if d >= left and d not in m["da_nhac"])
+                khi = "hôm nay" if left == 0 else ("ngày mai" if left == 1 else f"còn {left} ngày")
+                text = draft_care(cid, "nhac_moc", viec=m["viec"], ngay=m["ngay"], khi=khi)
+                notify_admin(f"📌 Nhắc mốc {khi}: {label(cid)} – {m['viec']} ({m['ngay']})")
+            elif kind == "hau_mai":
+                guide = AFTER_SALE_GUIDE[min(data, len(AFTER_SALE_GUIDE) - 1)]
+                c["mua"].setdefault("hm", []).append(now_str())
+                text = draft_care(cid, "hau_mai", can=c["mua"].get("can", "căn hộ"), ngay_mua=c["mua"]["ngay"], guide=guide)
             else:
-                text = draft_care(cid, "im_lang", last=c["lan_cuoi"], n=data + 1, total=len(FOLLOWUP_DAYS))
+                guide = IM_LANG_GUIDE[data] if data < len(IM_LANG_GUIDE) else KHOI_GOI_GUIDE
+                text = draft_care(cid, "im_lang", last=c["lan_cuoi"], n=data + 1, guide=guide)
                 c["cs_lan"] = data + 1 if text else 99
             store.save()
             if text:
                 send_text(cid, text)
                 store.add_msg(cid, "assistant", text)
-                done.append(f"• {label(cid)}: {text[:80]}")
+                sent += 1
+                touched.add(cid)
+                done.append(f"• {label(cid)} [{kind}]: {text[:80]}")
         time.sleep(CAMPAIGN_DELAY if text else 0)
     if done:
         notify_admin(f"💌 Bot vừa chăm sóc {len(done)} khách:\n" + "\n".join(done[:15])
                      + "\n(/chamsoc tat để tắt chăm sóc tự động)")
     return done
+
+
+def pipeline_report():
+    now = datetime.now()
+    groups: dict = {}
+    with store.lock:
+        for cid, c in store.customers.items():
+            if c.get("loai") != "khach":
+                continue
+            groups.setdefault(stage(c, now), []).append((heat(c, now), cid))
+    out = ["🧭 VÒNG ĐỜI KHÁCH"]
+    for st in ("moi", "danh_gia", "hen", "nuoi", "da_mua", "ngung"):
+        rows = sorted(groups.get(st, []), reverse=True)
+        out.append(f"\n{STAGE_LABEL[st]}: {len(rows)}")
+        out += [f"  {heat_icon(h)} {h} · {label(cid)}" for h, cid in rows[:5]]
+        if len(rows) > 5:
+            out.append(f"  … +{len(rows) - 5}")
+    return "\n".join(out)
 
 
 def heat_report(limit=10, only_hot=False):
@@ -1076,8 +1348,17 @@ def morning_brief():
             for a in c.get("lich", []):
                 if str(a.get("luc", "")).startswith(today):
                     appts.append(f"• {a['luc'][11:16]} {label(cid)} – {a.get('du_an', '')}")
+    mocs = []
+    soon = (datetime.now() + timedelta(days=3)).strftime("%Y-%m-%d")
+    with store.lock:
+        for cid, c in store.customers.items():
+            for m in c.get("moc", []):
+                if today <= m.get("ngay", "") <= soon:
+                    mocs.append(f"• {m['ngay'][8:10]}/{m['ngay'][5:7]} {label(cid)} – {m['viec']}")
     notify_admin("☀️ CHÀO BUỔI SÁNG! Việc nên làm hôm nay:\n\n📅 Lịch hẹn hôm nay:\n"
-                 + ("\n".join(sorted(appts)) or "(chưa có)") + "\n\n" + heat_report(limit=8))
+                 + ("\n".join(sorted(appts)) or "(chưa có)")
+                 + "\n\n📌 Mốc của khách 3 ngày tới:\n" + ("\n".join(sorted(mocs)) or "(chưa có)")
+                 + "\n\n" + heat_report(limit=8))
 
 
 def care_loop():
@@ -1177,7 +1458,8 @@ def campaign_candidates() -> list:
     cands, seen_phones = [], set()
     with store.lock:
         for cid, c in store.customers.items():
-            if c.get("loai") == "khong_phai_khach" or cid in load_ignore():
+            if c.get("loai") == "khong_phai_khach" or cid in load_ignore() \
+                    or c.get("ho_so", {}).get("khong_lam_phien"):
                 continue
             if not c.get("tin") and not c.get("ho_so"):
                 continue
@@ -1187,7 +1469,8 @@ def campaign_candidates() -> list:
                 seen_phones.add(phone)
             cands.append({"id": cid, "ten": c.get("ho_so", {}).get("ho_ten") or c.get("ten", ""),
                           "ho_so": c.get("ho_so", {}), "tin_gan_day": recent,
-                          "nhan_lan_cuoi": c.get("lan_cuoi", "")})
+                          "nhan_lan_cuoi": c.get("lan_cuoi", ""), "giai_doan": stage(c),
+                          **({"da_mua_qua_chuyen_vien": c["mua"]} if c.get("mua") else {})})
     for r in load_old_customers():
         if r.get("zalo_chat_id") and r["zalo_chat_id"] in store.customers:
             continue
@@ -1218,7 +1501,21 @@ def run_campaign(project: str, mode: str = "chao") -> dict:
     results = []
     for i in range(0, len(cands), 20):
         batch = cands[i:i + 20]
-        if mode == "bao":
+        if mode == "khoi_goi":
+            prompt = (
+                f"KHƠI GỢI LẠI KHÁCH CŨ / KHÁCH LÂU KHÔNG TƯƠNG TÁC. Chủ đề gợi mở (nếu có): {project or 'không – tự chọn'}\n"
+                f"Hôm nay: {datetime.now().strftime('%d/%m/%Y')}.\n\n"
+                "Chấm điểm 0–10 mức NÊN khơi gợi khách này lúc này: lâu không nói chuyện (≥3 tuần) nhưng từng có nhu cầu thật, "
+                "có SĐT/nhu cầu rõ, đã mua (chăm sóc + nhờ giới thiệu / đầu tư thêm), có thông tin mới hợp với họ. "
+                "Khách mới nói chuyện gần đây, khách từ chối rõ ràng → 0–3.\n"
+                "Với khách đạt từ 5 điểm, viết tin khơi gợi như người quen lâu ngày: mở bằng 1 câu chào HÓM HỈNH hoặc 1 câu hỏi "
+                "gợi tò mò gắn với nhu cầu/căn cũ của khách, rồi 1 thông tin mới có giá trị thật (đúng THÔNG TIN/BẢNG HÀNG), "
+                "kết bằng câu hỏi nhẹ dễ trả lời. Khách đã mua: hỏi thăm căn/gia đình, cập nhật tiến độ, khéo nhờ giới thiệu. "
+                "Tối đa 400 ký tự, không markdown, không ép.\n"
+                "Chỉ trả về JSON array, không viết gì khác:\n"
+                '[{"id":"...","diem":8,"ly_do":"ngắn gọn","tin_nhan":"..."}]\n\n'
+                "DANH SÁCH KHÁCH:\n" + json.dumps(batch, ensure_ascii=False))
+        elif mode == "bao":
             prompt = (
                 f"TIN MỚI CẦN BÁO KHÁCH (chính sách / giá / căn mới / tiến độ): {project}\n"
                 "(Dùng đúng số liệu trong tin này và THÔNG TIN, không bịa thêm.)\n\n"
@@ -1341,8 +1638,12 @@ HELP = """📋 LỆNH CHUYÊN VIÊN
 /hoidap <câu hỏi> => <câu trả lời> – lưu câu trả lời chuẩn (gõ /hoidap để xem)
 /baokhach <tin mới> – tìm khách cần biết tin mới, soạn tin báo riêng
 
-💌 CHĂM SÓC & DẪN ĐI XEM NHÀ
-Bot tự nhắn lại khách im lặng (sau 1, 3, 7 ngày), nhắc lịch trước 3 giờ, hỏi cảm nhận sau xem nhà
+💌 VÒNG ĐỜI KHÁCH & CHĂM SÓC
+Bot tự: chăm khách mới 1–3 ngày → đánh giá lại ngày 3 & 7 → nuôi dài hạn (14, 30, 60, 90 ngày) → hậu mãi khi đã mua
+/giaidoan – khách đang ở giai đoạn nào · /danhgia <mã> – đánh giá lại 1 khách ngay
+/moc <mã> <ngày> <việc> – thêm mốc để bot nhắc khách (ký HĐMB, đóng tiền…) · /moc <mã> – xem · /xoamoc
+/damua <mã> <căn> – khách đã mua → chuyển sang hậu mãi
+/khoigoi [chủ đề] – tìm khách cũ nên khơi gợi lại, soạn lời chào hóm hỉnh riêng
 /chamsoc – xem tình hình · /chamsoc tat · /chamsoc bat
 /xemduan – xem thông tin dự án bot đang dùng
 
@@ -1467,6 +1768,57 @@ def handle_admin(text) -> bool:
         except ValueError:
             removed = ""
         notify_admin(f"🗑 Đã xóa: {removed}" if removed else "Gõ /hoidap để xem số thứ tự, rồi /xoahoidap <số>")
+    elif cmd == "/damua" and arg1:
+        if arg1 not in store.customers:
+            notify_admin("Không thấy khách " + arg1 + ". Mã khách có trong các thông báo của bot.")
+        else:
+            c = store.customers[arg1]
+            with store.lock:
+                c["mua"] = {"ngay": datetime.now().strftime("%Y-%m-%d"), "can": rest or "căn hộ", "hm": []}
+                c["loai"] = "khach"
+                store.save()
+            store.merge_profile(arg1, {"da_mua": rest or "đã mua"})
+            push_sheet("KhachHang", {"chat_id": arg1, "ten_zalo": c.get("ten", ""), **c["ho_so"], "giai_doan": "da_mua"})
+            notify_admin(f"🎉 Chúc mừng anh/chị chốt deal: {label(arg1)} – {rest}\n"
+                         "Bot chuyển khách sang HẬU MÃI: cảm ơn sau 1 ngày, hỏi thăm thủ tục sau 1 tuần, cập nhật tiến độ hằng tháng, "
+                         "khéo nhờ giới thiệu sau 2 tháng.\n"
+                         f"📌 Thêm mốc thanh toán / ký HĐMB để bot nhắc khách: /moc {arg1} 15/11 ký HĐMB")
+    elif cmd == "/moc" and arg1:
+        if arg1 not in store.customers:
+            notify_admin("Không thấy khách " + arg1)
+        elif rest:
+            day, _, viec = rest.partition(" ")
+            if add_milestone(arg1, day, viec):
+                notify_admin(f"📌 Đã thêm mốc {parse_day(day)} – {viec}. Bot nhắc khách trước 3 ngày, 1 ngày và đúng ngày.")
+            else:
+                notify_admin("Ví dụ: /moc " + arg1 + " 15/11 đóng đợt 2 – 30%   (ngày dạng 15/11 hoặc 15/11/2026)")
+        else:
+            mocs = store.customers[arg1].get("moc", [])
+            notify_admin((f"📌 Mốc của {label(arg1)}:\n" + "\n".join(
+                f"{i}. {m['ngay']} – {m['viec']}" for i, m in enumerate(mocs, 1)) + f"\nXóa: /xoamoc {arg1} <số>")
+                if mocs else f"Chưa có mốc. Thêm: /moc {arg1} 15/11 ký HĐMB")
+    elif cmd == "/xoamoc" and arg1:
+        mocs = store.customers.get(arg1, {}).get("moc", [])
+        try:
+            m = mocs.pop(int(rest) - 1)
+            store.save()
+            notify_admin(f"🗑 Đã xóa mốc {m['ngay']} – {m['viec']}")
+        except (ValueError, IndexError):
+            notify_admin(f"Gõ /moc {arg1} để xem số thứ tự, rồi /xoamoc {arg1} <số>")
+    elif cmd == "/danhgia" and arg1:
+        if arg1 in store.customers:
+            notify_admin("🩺 Đang đánh giá lại khách, chờ em chút nha...")
+            threading.Thread(target=lambda: review_customer(arg1, "hôm nay") or
+                             notify_admin("Em chưa đánh giá được, thử lại giúp em."), daemon=True).start()
+        else:
+            notify_admin("Không thấy khách " + arg1)
+    elif cmd == "/giaidoan":
+        notify_admin(pipeline_report())
+    elif cmd == "/khoigoi":
+        topic = text.strip()[len(parts[0]):].strip()
+        notify_admin("🔎 Đang tìm khách cũ nên khơi gợi lại, chờ em 1–3 phút nha...")
+        threading.Thread(target=lambda: notify_admin(campaign_report(run_campaign(topic, "khoi_goi"))),
+                         daemon=True).start()
     elif cmd == "/chamsoc":
         if arg1 in ("tat", "tắt"):
             save_env("FOLLOWUP", "0")
