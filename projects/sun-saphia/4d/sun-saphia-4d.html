@@ -117,7 +117,7 @@ app.appendChild(renderer.domElement);
 
 var scene=new THREE.Scene();
 scene.fog=new THREE.Fog(0xcfe2f2,900,9000);
-var camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,1,16000);
+var camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,2,16000);
 var controls=new THREE.OrbitControls(camera,renderer.domElement);
 controls.enableDamping=true; controls.dampingFactor=.08; controls.maxPolarAngle=Math.PI*.485; controls.minDistance=70; controls.maxDistance=2600;
 controls.autoRotateSpeed=.6;
@@ -162,7 +162,7 @@ flat(64,2600,0xf0e2bd,142,0,0.08);
 flat(18,2600,0x47c2c9,183,0,0.5);   // shallow turquoise near shore
 // sea
 var seaGeo=new THREE.PlaneGeometry(7000,9000,140,180); seaGeo.rotateX(-Math.PI/2);
-var seaMat=M(0x1b8fa8,{roughness:.16,metalness:.2,envMapIntensity:.9});
+var seaMat=M(0x1b8fa8,{roughness:.32,metalness:.2,envMapIntensity:.9});
 var sea=new THREE.Mesh(seaGeo,seaMat); sea.position.set(174+3500,.7,0); sea.receiveShadow=true; world.add(sea);
 var seaPos=seaGeo.attributes.position, seaBase=new Float32Array(seaPos.array);
 // surf line
@@ -346,7 +346,7 @@ var warm=M(0xF1C27D,{roughness:.25,metalness:.15,envMapIntensity:.6,emissive:0xf
 var lawn=M(0x6ea85a,{roughness:.95});
 // kết cấu đất nung có ô cửa kính theo từng tầng
 var tc=document.createElement('canvas'); tc.width=64; tc.height=64; (function(g){ g.fillStyle='#c2511f'; g.fillRect(0,0,64,64); g.fillStyle='#3a454b'; g.fillRect(18,14,28,34); g.fillStyle='rgba(255,255,255,.2)'; g.fillRect(18,14,28,3); g.fillStyle='#e7e2da'; g.fillRect(0,58,64,6); })(tc.getContext('2d'));
-function terraMat(rx,ry){ var t=new THREE.CanvasTexture(tc); t.encoding=THREE.sRGBEncoding; t.wrapS=t.wrapT=THREE.RepeatWrapping; t.repeat.set(rx,ry); return new THREE.MeshStandardMaterial({map:t,roughness:.75,metalness:0,envMapIntensity:.35}); }
+function terraMat(rx,ry){ var t=new THREE.CanvasTexture(tc); t.encoding=THREE.sRGBEncoding; t.wrapS=t.wrapT=THREE.RepeatWrapping; t.repeat.set(rx,ry); t.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy()); return new THREE.MeshStandardMaterial({map:t,roughness:.75,metalness:0,envMapIntensity:.35}); }
 var NF=26;                                         // số tầng điển hình tầng 3–28
 // --- Đế 2 tầng: cột trắng, kính sáng ấm, góc bo tròn ---
 var PX0=-31, PX1=TX+AW/2+6, PZ0=-29, PZ1=29, PW=PX1-PX0, PD=PZ1-PZ0, PCX=(PX0+PX1)/2, PCZ=(PZ0+PZ1)/2, WH=FL[3];
@@ -382,7 +382,7 @@ slab(A,Lshape(0,.3),FL[3],FL[29]-FL[3],glass);
 for(var f=4;f<=29;f++) slab(A,Lshape(1.6,3.2),FL[f]-.6,.6,white).position.y=FL[f]-.32;
 // lan can kính mảnh
 var rail=M(0xcfe3ee,{roughness:.1,metalness:.3,transparent:true,opacity:.18});
-for(var f=4;f<=28;f+=1) slab(A,Lring(1.5,1.4,3),FL[f],1.1,rail);
+// (bỏ lan can kính trong suốt: nhiều lớp trong suốt chồng nhau gây nháy sáng khi xoay)
 // dải đất nung: giữa mặt Đông (hướng biển), góc Bắc–Đông và đầu hồi cánh phía Tây
 var hT=FL[29]-FL[3];
 // mặt biển: dải đất nung lõm chạy suốt chiều cao, đúng chỗ gãy khối (lệch Bắc so với giữa)
@@ -406,8 +406,8 @@ boxP(A,12,.7,4.5,TX+AW/2+8,FL[2]+.6,0,white);
 // mặt sân góc giao lộ
 var plaza=new THREE.Mesh(new THREE.CircleGeometry(26,40,Math.PI*.5,Math.PI*.5),M(0xd9d2c4)); plaza.rotation.x=-Math.PI/2; plaza.position.set(-14,.11,8); world.add(plaza);
 // đánh dấu tầng đang chọn
-var hiMat=new THREE.MeshStandardMaterial({color:0xff6a2b,emissive:0xff6a2b,emissiveIntensity:.9,transparent:true,opacity:.9});
-var hiG=new THREE.ExtrudeGeometry(Lshape(1.5,.25),{depth:3,bevelEnabled:false,curveSegments:4}); hiG.rotateX(-Math.PI/2);
+var hiMat=new THREE.MeshStandardMaterial({color:0xff6a2b,emissive:0xff6a2b,emissiveIntensity:.55,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2});
+var hiG=new THREE.ExtrudeGeometry(Lring(1.9,1.0,.4),{depth:3,bevelEnabled:false,curveSegments:4}); hiG.rotateX(-Math.PI/2);
 var hi=new THREE.Group(), hiA=new THREE.Mesh(hiG,hiMat); hi.add(hiA); T.add(hi);
 var VIEWX=AW/2+1.8, SCH='A', curF=22;
 function fitHi(){}
