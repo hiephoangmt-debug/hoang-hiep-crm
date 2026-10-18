@@ -504,7 +504,7 @@ var mode='overview', saved=null, yaw=0, pitch=-.04;
 function setFloor(f){ curF=f; fitHi(); hi.position.y=FL[f]-.2; floorOut.textContent='Tầng '+f; mainLbl.textContent='SUN SAPHIA · tầng '+f+' (~'+Math.round(FL[f]+1.6)+' m)'; if(mode==='view') placeViewCam(); if(mode==='close') flyClose(); }
 function placeViewCam(){
   var f=+floorEl.value, c=Math.cos(yaw), sn=Math.sin(yaw), hz=(SCH==='A'?AD:BD)/2+2, k=1/Math.max(Math.abs(c)/VIEWX,Math.abs(sn)/hz,1e-6);
-  var p=T.localToWorld(new THREE.Vector3(TX+c*k,FL[f]+1.6,sn*k)); camera.position.copy(p);
+  var p=c<-.3? T.localToWorld(new THREE.Vector3(XW-1.8,FL[f]+1.6,(ZA+ZW)/2+sn*Math.min(9,Math.abs(sn/c)*1.8))) : T.localToWorld(new THREE.Vector3(TX+c*k,FL[f]+1.6,sn*k)); camera.position.copy(p);
   var d=new THREE.Vector3(Math.cos(yaw)*Math.cos(pitch),Math.sin(pitch),Math.sin(yaw)*Math.cos(pitch)).applyQuaternion(world.quaternion);
   camera.lookAt(p.clone().add(d));
 }
