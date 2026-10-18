@@ -22,7 +22,8 @@ export function gardenUnit(base, spec) {
   }
   const best = Object.entries(score).sort((a, b) => b[1] - a[1])[0];
   const side = spec.garden.side || (best[1] > 0 ? best[0] : nearSide(c)[0]);
-  let D = spec.garden.depth || 3;
+  // fixDepth: giữ đúng bề rộng sân như bản vẽ (không tự tính theo diện tích) – vd. căn 27 dải 1,4 m cắt chéo nhọn ở cuối
+  let D = spec.garden.fixDepth || spec.garden.depth || 3;
   // Hệ toạ độ cục bộ của sân: u dọc mép mặt tiền, v hướng ra ngoài
   const onEdge = (pt) => side === 'top' ? Math.abs(pt.y - bb.y0) < 0.35 : side === 'bottom' ? Math.abs(pt.y - bb.y1) < 0.35 : side === 'left' ? Math.abs(pt.x - bb.x0) < 0.35 : Math.abs(pt.x - bb.x1) < 0.35;
   // Sân chỉ chạy dọc đoạn tường thật của căn ở mặt đó (căn chữ L không bị sân thò ra ngoài phần khuyết)
@@ -43,7 +44,7 @@ export function gardenUnit(base, spec) {
   // bán kính bo góc ngoài: theo tỉ lệ chiều sâu sân như bản vẽ (spec.garden.radius), mặc định bo trọn
   const gRad = (d) => (spec.garden.radius ? d * spec.garden.radius : Math.min(d, 3));
   // Độ sâu sân tự tính cho diện tích thông thủy sân vườn khớp bảng của chủ đầu tư (spec.garden.area)
-  if (spec.garden.area) {
+  if (spec.garden.area && !spec.garden.fixDepth) {
     let L2b = 0;
     if (spec.garden.wrap) {
       const w2 = spec.garden.wrap, hz = w2 === 'top' || w2 === 'bottom';
@@ -117,7 +118,7 @@ export function gardenUnit(base, spec) {
   // sàn gỗ có 2 ghế nằm + dù che, lối đá bước trên cỏ từ cửa nhà ra sàn gỗ
   // sân hẹp: luống cây mỏng hơn, bỏ sàn gỗ / ghế nằm cho khỏi chật
   const bedD = D < 1.6 ? 0.4 : 0.6;
-  const sb0 = roundStart ? RR : 0.15, sb1 = roundEnd ? L - RR : L - 0.15;
+  const sb0 = roundStart ? RR : 0.15, sb1 = roundEnd ? L - RR : bevE ? L - D - 0.1 : L - 0.15;
   add('shrubBed', (sb0 + sb1) / 2, D - bedD / 2 - 0.1, rotU, { w: sb1 - sb0, d: bedD });
   if (D >= 1.6) add('pebbles', (sb0 + sb1) / 2, D - bedD - 0.22, rotU, { w: sb1 - sb0 - 0.9, d: 0.24 });
   // luống cây chạy theo cung bo
