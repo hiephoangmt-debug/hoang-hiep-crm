@@ -50,7 +50,7 @@ export function gardenUnit(base, spec) {
       L2b = Math.max(...rp2) - Math.min(...rp2) + 0.2;
     }
     const area = (d) => notchArea + L * d + (spec.garden.wrap ? (L2b + d) * d - (1 - Math.PI / 4) * d * d : 0) - (spec.garden.round ? (1 - Math.PI / 4) * gRad(d) ** 2 : 0);
-    let lo = 0.8, hi = 4.5;
+    let lo = 0.8, hi = 8;
     for (let i = 0; i < 40; i++) { const m = (lo + hi) / 2; if (area(m) > spec.garden.area) hi = m; else lo = m; }
     D = +lo.toFixed(2);
   }

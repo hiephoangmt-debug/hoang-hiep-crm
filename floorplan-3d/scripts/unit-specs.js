@@ -290,7 +290,7 @@ UNIT_SPECS.push(
   { id: 'sv-studio', name: 'Sân vườn · Studio', type: 'Studio', garden: { base: 'studio', area: 8.0 } },
   { id: 'sv-studio-b', name: 'Sân vườn · Studio dài', type: 'Studio', garden: { base: 'studio-b', area: 9.8 } },
   { id: 'sv-1pn', name: 'Sân vườn · 1 PN', type: '1PN', garden: { base: '1pn', area: 5.0 } },
-  { id: 'sv-2pn-c', name: 'Sân vườn · 2 PN (căn 29, 32)', type: '2PN', garden: { base: '2pn-c', area: 27.3, side: 'top', notch: [0, 0, 1.43, 3.41] } },
+  { id: 'sv-2pn-c', name: 'Sân vườn · 2 PN (căn 29, 32)', type: '2PN', garden: { base: '2pn-c', area: 27.3, side: 'top' } },
   { id: 'sv-1pn-plus-l', name: 'Sân vườn · 1 PN+ (căn 12, 17)', type: '1PN+', garden: { base: '1pn-plus-c', area: 15.9, round: 'start', radius: 0.5, laundry: true, side: 'bottom' } },
   { id: 'sv-2pn-a', name: 'Sân vườn · 2 PN góc', type: '2PN', garden: { base: '2pn-a', area: 20.0 } },
   { id: 'sv-3pn', name: 'Sân vườn · 3 PN', type: '3PN', garden: { base: '3pn', area: 47.6, wrap: 'top' } },
