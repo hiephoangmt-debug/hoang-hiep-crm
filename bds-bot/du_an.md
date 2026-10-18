@@ -41,11 +41,18 @@ Dòng nằm giữa dấu <!-- và --> là ghi chú, bot vẫn đọc được n�
 <!-- Liệt kê căn chuyển nhượng: mã căn, diện tích, giá, ghi chú -->
 - [điền mã căn – diện tích – giá – ghi chú]
 
-## Câu hỏi khách hay hỏi
-- Vay ngân hàng được bao nhiêu %? → [điền]
-- Phí quản lý? → [điền]
-- Người nước ngoài mua được không? → [điền]
-- Có hỗ trợ cho thuê lại không? → [điền]
+## Link dự án
+<!-- Bot gửi link này khi khách muốn xem thêm ảnh, video, vị trí. Hoặc nhắn bot: /link <link> -->
+- Website dự án: [điền link]
+- Video thực tế / flycam: [điền link]
+- Vị trí Google Maps nhà mẫu: [điền link]
+
+## Hỏi đáp mẫu (Q&A) (câu trả lời chuẩn của chuyên viên – dùng đúng ý, diễn đạt tự nhiên theo khách)
+<!-- Thêm nhanh từ Zalo: /hoidap <câu hỏi> => <câu trả lời> -->
+- H: Vay ngân hàng được bao nhiêu %? → Đ: [điền]
+- H: Phí quản lý bao nhiêu? → Đ: [điền]
+- H: Người nước ngoài mua được không? → Đ: [điền]
+- H: Có hỗ trợ cho thuê lại không? → Đ: [điền]
 
 ## Từ viết tắt riêng
 <!-- Bot đã hiểu sẵn các từ phổ biến (CSBH, PN, HĐMB, CK, HTLS, SHR, 3t5...).
