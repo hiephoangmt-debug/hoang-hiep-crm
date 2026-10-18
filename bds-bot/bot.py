@@ -583,7 +583,8 @@ def draft_for_personal_zalo(pasted: str) -> str:
 
 
 # =============================================================== /ketban — lời mời kết bạn Zalo cá nhân
-FRIEND_MAX = 150  # ô "lời chào" khi gửi kết bạn Zalo giới hạn khoảng 150 ký tự
+# ô "lời chào" khi gửi kết bạn Zalo rất ngắn → giữ lời chào gọn, chi tiết để ở tin nhắn sau
+FRIEND_MAX = int(os.environ.get("FRIEND_MAX_CHARS", "70") or 70)
 
 
 def customer_brief(cid) -> str:
@@ -600,10 +601,11 @@ def draft_friend_request(info: str) -> str:
     system.append({"type": "text", "text":
         "CHẾ ĐỘ LỜI MỜI KẾT BẠN ZALO: khách đã nhắn hỏi chuyên viên (qua bot Zalo, website hoặc gọi điện) nhưng chưa là bạn "
         "Zalo cá nhân. Chuyên viên sẽ tìm SĐT khách và bấm Kết bạn, cần câu lời chào gửi kèm.\n"
-        f"Viết 3 phương án, MỖI PHƯƠNG ÁN TỐI ĐA {FRIEND_MAX - 15} KÝ TỰ (đếm cả dấu cách), 1 dòng, không markdown, tối đa 1 emoji:\n"
-        "- Mở đầu bằng 'Em [tên chuyên viên trong THÔNG TIN]' hoặc 'Em [tên] – [đơn vị]' để khách biết ai ngay.\n"
-        "- Nhắc ĐÚNG điều khách đã hỏi (dự án, căn, CSBH…) để khách nhớ ra và yên tâm đây không phải tin rác.\n"
-        "- Nêu lợi ích khi kết bạn: gửi CSBH/bảng giá/ảnh căn/video thực tế cho tiện.\n"
+        f"Viết 3 phương án lời chào, MỖI PHƯƠNG ÁN TỐI ĐA {FRIEND_MAX - 5} KÝ TỰ (đếm cả dấu cách) — rất ngắn, 1 dòng, "
+        "không markdown, không emoji:\n"
+        "- Mở đầu bằng 'Em [tên chuyên viên trong THÔNG TIN]' (thêm đơn vị nếu còn chỗ) để khách biết ai ngay.\n"
+        "- Nhắc ĐÚNG điều khách đã hỏi bằng 2–4 chữ (tên dự án, 2PN, CSBH…) để khách nhớ ra, không phải tin rác.\n"
+        "- Nói gọn sẽ gửi gì (CSBH, bảng giá, ảnh căn). Chi tiết để dành cho tin nhắn đầu tiên.\n"
         "- CẤM câu chung chung kiểu 'kết bạn với mình nhé', 'mình là môi giới BĐS', không hứa giá, không ép.\n"
         "Trả về đúng dạng:\nPA1 (thân thiện): ...\nPA2 (chuyên nghiệp): ...\nPA3 (ngắn gọn): ...\n"
         "Tin nhắn đầu tiên sau khi khách đồng ý: ... (1–3 câu, gửi kèm thông tin khách đã hỏi)\n"
@@ -615,9 +617,9 @@ def draft_friend_request(info: str) -> str:
         if m:
             msg = m.group(1).strip()
             if len(msg) > FRIEND_MAX:
-                cut = msg[:FRIEND_MAX]  # cắt gọn ở dấu câu gần nhất để câu vẫn tròn ý
+                cut = msg[:FRIEND_MAX - 3]  # chừa chỗ cho " ạ"
                 stop = max(cut.rfind(x) for x in (",", ".", "!", "–"))
-                msg = (cut[:stop] if stop > 60 else cut.rsplit(" ", 1)[0]).rstrip(" ,–") + " ạ"
+                msg = (cut[:stop] if stop > FRIEND_MAX // 2 else cut.rsplit(" ", 1)[0]).rstrip(" ,–") + " ạ"
             options.append(msg)
         elif line.strip():
             rest.append(line.strip())

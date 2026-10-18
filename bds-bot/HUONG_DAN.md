@@ -90,7 +90,7 @@ Khách nhắn bot, gọi điện hoặc để lại SĐT trên web nhưng **chư
 > Zalo không cho bot tự gửi kết bạn từ Zalo cá nhân (dùng phần mềm tự động dễ bị khóa nick). Vì vậy bot **soạn sẵn**, còn anh/chị bấm gửi bằng tay, mỗi khách mất khoảng 20 giây.
 
 ### Bot tự soạn lời mời cho anh/chị
-- **Tự động:** khách vừa để lại SĐT là bot gửi về Zalo của anh/chị tin **🤝 Gợi ý KẾT BẠN**, kèm SĐT và **3 câu lời chào, mỗi câu là 1 tin riêng**.
+- **Tự động:** khách vừa để lại SĐT là bot gửi về Zalo của anh/chị tin **🤝 Gợi ý KẾT BẠN**, kèm SĐT và **3 câu lời chào ngắn (dưới 70 ký tự), mỗi câu là 1 tin riêng**.
 - **Khi cần:** nhắn bot
   - `/ketban web_abc123`: dùng mã khách có trong thông báo, bot đọc lại cuộc chat để soạn.
   - `/ketban Chị Lan 0905xxxxxx, gọi hỏi căn 2PN FourS view sông, muốn xem nhà mẫu cuối tuần`: dùng cho khách gọi điện hoặc gặp trực tiếp.
@@ -106,16 +106,20 @@ Khách nhắn bot, gọi điện hoặc để lại SĐT trên web nhưng **chư
 
 Khách nhắn Zalo cá nhân của anh/chị khi chưa kết bạn (hiện chữ **"Người lạ"**): trả lời khách trước (dùng `/soan`), rồi bấm **Kết bạn** ở đầu khung chat và dán lời chào như bước 4.
 
-### Mẫu lời chào dùng ngay (dưới 150 ký tự, sửa chỗ [ ])
+### Mẫu lời chào dùng ngay (ngắn, dưới 70 ký tự, sửa chỗ [ ])
+Ô lời chào kết bạn của Zalo **rất ngắn**, câu dài sẽ bị cắt. Vì vậy lời chào chỉ cần **tên + đúng điều khách hỏi**. Phần chi tiết (CSBH, giá, ảnh) để ở **tin nhắn gửi ngay sau** (bước 7), tin nhắn thì không giới hạn.
+
 | Tình huống | Lời chào |
 |---|---|
-| Khách hỏi CSBH qua bot | Em Hiệp – [đơn vị] đây ạ. Anh/chị vừa hỏi CSBH [dự án], em kết bạn để gửi bảng giá và ảnh căn thực tế cho tiện xem nha |
-| Vừa gọi điện xong | Em Hiệp vừa nói chuyện với anh/chị về căn 2PN [dự án] ạ. Em kết bạn để gửi mặt bằng và CSBH như đã hẹn nha |
-| Khách để SĐT trên web | Em Hiệp – [đơn vị], anh/chị vừa để lại SĐT trên web [dự án] ạ. Em kết bạn để gửi CSBH, bảng giá chi tiết nha |
-| Khách cũ đổi số / mất kết nối | Em Hiệp – người tư vấn căn [mã căn] cho anh/chị hồi [tháng/năm] ạ. Em kết bạn lại để tiện báo tiến độ, sổ hồng nha |
+| Khách hỏi CSBH qua bot | Em Hiệp – [đơn vị], gửi anh/chị CSBH [dự án] vừa hỏi ạ |
+| Vừa gọi điện xong | Em Hiệp vừa gọi anh/chị về căn 2PN [dự án], gửi mặt bằng ạ |
+| Khách để SĐT trên web | Em Hiệp, gửi anh/chị bảng giá [dự án] từ web ạ |
+| Khách cũ đổi số / mất kết nối | Em Hiệp – tư vấn căn [mã căn] cho anh/chị, kết bạn lại ạ |
+
+**Ô lời chào vẫn bị cắt?** Mở file `.env` bằng Notepad, sửa `FRIEND_MAX_CHARS=70` thành số nhỏ hơn (ví dụ `50`), rồi chạy lại bot.
 
 **Nên:** xưng tên + đơn vị, nhắc đúng dự án hoặc căn khách hỏi, nói rõ kết bạn để gửi gì.
-**Tránh:** "Kết bạn với mình nhé", "Mình là môi giới BĐS", gửi giá ngay trong lời chào, gửi lại nhiều lần khi khách chưa đồng ý.
+**Tránh:** câu dài (bị cắt), "Kết bạn với mình nhé", "Mình là môi giới BĐS", gửi giá ngay trong lời chào, gửi lại nhiều lần khi khách chưa đồng ý.
 ⚠️ Mỗi ngày đừng gửi kết bạn quá nhiều người lạ một lúc: Zalo dễ tạm khóa chức năng kết bạn. Ưu tiên khách 🔥 nóng trước.
 
 ---
