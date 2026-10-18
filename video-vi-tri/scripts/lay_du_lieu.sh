@@ -14,3 +14,4 @@ python3 scripts/tai_du_lieu.py buildings building data/building.geojson $N heigh
 python3 scripts/tai_du_lieu.py divisions division_area data/division_area.geojson $W subtype,class,names,admin_level &
 wait
 python3 scripts/xu_ly_du_lieu.py data public/data
+python3 scripts/saphia.py public/data/saphia.geojson

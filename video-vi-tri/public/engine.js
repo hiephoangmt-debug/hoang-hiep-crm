@@ -70,14 +70,24 @@
   // ---------- Dự án: tự chia lô minh họa theo ranh giới ----------
   const projPoly = turf.polygon([C.project.polygon.concat([C.project.polygon[0]])]);
   const projCenter = C.project.center || turf.centroid(projPoly).geometry.coordinates;
-  const lots = C.project.tower ? buildTower(projPoly, C.project.tower) : buildLots(projPoly, C.project.gridBearing, C.project.grid);
+  const lots = C.project.buildingUrl ? await (await fetch(C.project.buildingUrl)).json()
+    : C.project.tower ? buildTower(projPoly, C.project.tower) : buildLots(projPoly, C.project.gridBearing, C.project.grid);
   map.addSource('proj', { type: 'geojson', data: projPoly });
   map.addSource('lots', { type: 'geojson', data: lots });
   map.addLayer({ id: 'proj-fill', type: 'fill', source: 'proj', paint: { 'fill-color': P.navy800, 'fill-opacity': 0 } });
-  if (C.project.tower) map.addLayer({ id: 'lots-flat', type: 'fill', source: 'proj', paint: { 'fill-color': P.orange, 'fill-opacity': 0 } });
+  if (C.project.tower || C.project.buildingUrl) map.addLayer({ id: 'lots-flat', type: 'fill', source: 'proj', paint: { 'fill-color': P.orange, 'fill-opacity': 0 } });
   else map.addLayer({ id: 'lots-flat', type: 'fill', source: 'lots', paint: { 'fill-color': ['get', 'col'], 'fill-opacity': 0 } });
   map.addLayer({ id: 'proj-glow', type: 'line', source: 'proj', paint: { 'line-color': P.orange, 'line-width': 30, 'line-blur': 22, 'line-opacity': 0 } });
   map.addLayer({ id: 'proj-line', type: 'line', source: 'proj', layout: { 'line-join': 'round' }, paint: { 'line-color': '#FFFFFF', 'line-width': 4, 'line-opacity': 0, 'line-dasharray': [3, 1.5] } });
+
+  // Vùng tô màu (công viên quy hoạch...)
+  C.events.filter(e => e.type === 'zone').forEach((z, i) => {
+    z._id = 'zone' + i;
+    map.addSource(z._id, { type: 'geojson', data: turf.polygon([z.polygon.concat([z.polygon[0]])]) });
+    map.addLayer({ id: z._id + '-fill', type: 'fill', source: z._id, paint: { 'fill-color': z.color, 'fill-opacity': 0 } });
+    map.addLayer({ id: z._id + '-glow', type: 'line', source: z._id, paint: { 'line-color': z.color, 'line-width': 18, 'line-blur': 14, 'line-opacity': 0 } });
+    map.addLayer({ id: z._id + '-line', type: 'line', source: z._id, layout: { 'line-join': 'round' }, paint: { 'line-color': '#FFFFFF', 'line-width': 2.5, 'line-opacity': 0, 'line-dasharray': [2, 1.2] } });
+  });
 
   // Tuyến đường bay
   const routes = C.events.filter(e => e.type === 'route');
@@ -126,6 +136,7 @@
     mountain: '<path d="M2 20l7-12 4 6 3-4 6 10H2z" fill="#fff"/>',
     plane: '<path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" fill="#fff"/>',
     city: '<path d="M3 21V9l6-3v3l6-3v15H3zm14 0V10h4v11h-4zM6 12v2h2v-2H6zm4 0v2h2v-2h-2zm-4 4v2h2v-2H6zm4 0v2h2v-2h-2z" fill="#fff"/>',
+    tree: '<path d="M12 2l6 8h-3l4 6h-5v6h-4v-6H5l4-6H6z" fill="#fff"/>',
     star: '<path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z" fill="#fff"/>',
   };
   const el = (html, cls) => { const d = document.createElement('div'); if (cls) d.className = cls; d.innerHTML = html; d.style.opacity = 0; ui.appendChild(d); return d; };
@@ -207,6 +218,11 @@
         setP('lots-3d', 'fill-extrusion-opacity', +(Math.max(.001, o * rise * .95)).toFixed(3));
         setP('lots-3d', 'fill-extrusion-height', ['*', ['get', 'h'], +rise.toFixed(3)]);
         setP('lots-3d', 'fill-extrusion-base', ['*', ['coalesce', ['get', 'b'], 0], +rise.toFixed(3)]);
+      } else if (e.type === 'zone') {
+        const o = vis(f, e.in, e.out, 20, 16), pulse = .75 + .25 * Math.sin(f / 8);
+        setP(e._id + '-fill', 'fill-opacity', +(o * .42).toFixed(3));
+        setP(e._id + '-glow', 'line-opacity', +(o * pulse * .8).toFixed(3));
+        setP(e._id + '-line', 'line-opacity', +(o * .9).toFixed(3));
       } else if (e.type === 'area') {
         const o = vis(f, e.in, e.out, 20, 16), pulse = .7 + .3 * Math.sin(f / 7);
         setP('hoian-fill', 'fill-opacity', +(o * .16).toFixed(3));
