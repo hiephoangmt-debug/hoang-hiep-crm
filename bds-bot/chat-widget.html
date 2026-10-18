@@ -1,0 +1,109 @@
+<!--
+  KHUNG CHAT TƯ VẤN – dán toàn bộ đoạn này vào khối "HTML" của LadiPage.
+  Sửa 3 dòng cấu hình ngay dưới:
+    BOT_URL   : địa chỉ HTTPS của bot (ví dụ https://bot.tenmien.com)
+    ZALO_LINK : link Zalo bot hoặc Zalo của anh/chị (https://zalo.me/...)
+    TITLE     : tên hiển thị trên khung chat
+-->
+<div id="bdsw-root"></div>
+<script>
+(function () {
+  var BOT_URL = "https://bot.tenmien.com";
+  var ZALO_LINK = "https://zalo.me/";
+  var TITLE = "Tư vấn dự án";
+  var GREETING = "Dạ em chào anh/chị 👋 Anh/chị đang quan tâm dự án nào, hay cần em gợi ý căn hợp túi tiền ạ?";
+
+  if (window.__bdswLoaded) return; window.__bdswLoaded = true;
+
+  var sid;
+  try { sid = localStorage.getItem("bdsw_sid"); } catch (e) {}
+  if (!sid) {
+    sid = "s" + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+    try { localStorage.setItem("bdsw_sid", sid); } catch (e) {}
+  }
+
+  var css = "" +
+    "#bdsw-btn{position:fixed;right:18px;bottom:18px;z-index:2147483000;width:60px;height:60px;border-radius:50%;border:0;cursor:pointer;" +
+    "background:#0f5c4a;color:#fff;box-shadow:0 6px 20px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center}" +
+    "#bdsw-btn svg{width:28px;height:28px}" +
+    "#bdsw-dot{position:absolute;top:6px;right:6px;width:12px;height:12px;border-radius:50%;background:#e8b04b;border:2px solid #fff}" +
+    "#bdsw-panel{position:fixed;right:18px;bottom:90px;z-index:2147483000;width:360px;max-width:calc(100vw - 24px);height:520px;" +
+    "max-height:calc(100vh - 120px);background:#fff;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.25);display:none;" +
+    "flex-direction:column;overflow:hidden;font:15px/1.45 -apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#1d2522}" +
+    "#bdsw-panel.open{display:flex}" +
+    "#bdsw-head{background:#0f5c4a;color:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px}" +
+    "#bdsw-head b{flex:1;font-size:16px}#bdsw-head small{display:block;font-weight:400;opacity:.8;font-size:12px}" +
+    "#bdsw-close{background:none;border:0;color:#fff;font-size:24px;cursor:pointer;line-height:1}" +
+    "#bdsw-msgs{flex:1;overflow-y:auto;padding:14px;background:#f4f6f5;display:flex;flex-direction:column;gap:8px}" +
+    ".bdsw-m{max-width:82%;padding:9px 12px;border-radius:14px;white-space:pre-wrap;word-wrap:break-word}" +
+    ".bdsw-bot{background:#fff;align-self:flex-start;border-bottom-left-radius:4px;box-shadow:0 1px 2px rgba(0,0,0,.06)}" +
+    ".bdsw-me{background:#0f5c4a;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}" +
+    ".bdsw-typing{color:#7a8580;font-style:italic;font-size:13px}" +
+    "#bdsw-zalo{display:block;text-align:center;padding:8px;background:#e9f1ee;color:#0f5c4a;font-size:13px;text-decoration:none;font-weight:600}" +
+    "#bdsw-form{display:flex;gap:8px;padding:10px;border-top:1px solid #e3e8e6;background:#fff}" +
+    "#bdsw-input{flex:1;border:1px solid #cfd8d4;border-radius:20px;padding:10px 14px;font:inherit;outline:none;resize:none;max-height:90px}" +
+    "#bdsw-input:focus{border-color:#0f5c4a}" +
+    "#bdsw-send{border:0;background:#e8b04b;color:#1d2522;border-radius:20px;padding:0 16px;font-weight:700;cursor:pointer}" +
+    "#bdsw-send:disabled{opacity:.5}" +
+    "@media (max-width:480px){#bdsw-panel{right:8px;left:8px;width:auto;bottom:84px;height:calc(100vh - 110px)}}";
+  var st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
+
+  var root = document.getElementById("bdsw-root") || document.body;
+  root.insertAdjacentHTML("beforeend",
+    '<button id="bdsw-btn" aria-label="Chat tư vấn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span id="bdsw-dot"></span></button>' +
+    '<div id="bdsw-panel" role="dialog" aria-label="' + TITLE + '">' +
+      '<div id="bdsw-head"><b>' + TITLE + '<small>Thường trả lời trong vài giây</small></b><button id="bdsw-close" aria-label="Đóng">×</button></div>' +
+      '<div id="bdsw-msgs"></div>' +
+      '<a id="bdsw-zalo" href="' + ZALO_LINK + '" target="_blank" rel="noopener">💬 Chat qua Zalo</a>' +
+      '<form id="bdsw-form"><textarea id="bdsw-input" rows="1" placeholder="Nhập tin nhắn..." maxlength="1000"></textarea><button id="bdsw-send" type="submit">Gửi</button></form>' +
+    '</div>');
+
+  var $ = function (id) { return document.getElementById(id); };
+  var panel = $("bdsw-panel"), msgs = $("bdsw-msgs"), input = $("bdsw-input"), send = $("bdsw-send");
+  var history = [];
+  try { history = JSON.parse(localStorage.getItem("bdsw_hist") || "[]"); } catch (e) {}
+
+  function add(text, who, save) {
+    var d = document.createElement("div");
+    d.className = "bdsw-m " + (who === "me" ? "bdsw-me" : "bdsw-bot");
+    d.textContent = text; msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight;
+    if (save) {
+      history.push([who, text]); history = history.slice(-40);
+      try { localStorage.setItem("bdsw_hist", JSON.stringify(history)); } catch (e) {}
+    }
+  }
+  if (history.length) history.forEach(function (h) { add(h[1], h[0], false); });
+  else add(GREETING, "bot", true);
+
+  var polling = null;
+  function poll() {
+    fetch(BOT_URL + "/poll?sid=" + sid).then(function (r) { return r.json(); })
+      .then(function (d) { (d.replies || []).forEach(function (t) { add(t, "bot", true); }); })
+      .catch(function () {});
+  }
+  function toggle(open) {
+    panel.classList.toggle("open", open);
+    $("bdsw-dot").style.display = "none";
+    if (open) { input.focus(); poll(); polling = polling || setInterval(poll, 15000); }
+  }
+  $("bdsw-btn").onclick = function () { toggle(!panel.classList.contains("open")); };
+  $("bdsw-close").onclick = function () { toggle(false); };
+
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); $("bdsw-form").onsubmit(e); }
+  });
+  $("bdsw-form").onsubmit = function (e) {
+    e.preventDefault();
+    var text = input.value.trim(); if (!text) return;
+    add(text, "me", true); input.value = ""; send.disabled = true;
+    var t = document.createElement("div"); t.className = "bdsw-typing"; t.textContent = "Đang soạn tin...";
+    msgs.appendChild(t); msgs.scrollTop = msgs.scrollHeight;
+    fetch(BOT_URL + "/chat", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sid: sid, text: text }) })
+      .then(function (r) { return r.json(); })
+      .then(function (d) { (d.replies || []).forEach(function (r) { add(r, "bot", true); }); })
+      .catch(function () { add("Mạng hơi chập chờn ạ 😅 Anh/chị bấm \"Chat qua Zalo\" bên dưới để em hỗ trợ ngay nha.", "bot", false); })
+      .then(function () { t.remove(); send.disabled = false; input.focus(); });
+  };
+})();
+</script>
