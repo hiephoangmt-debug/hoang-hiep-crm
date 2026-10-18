@@ -337,58 +337,57 @@ function shrubsLocal(grp,x,yy,z){ var m=new THREE.Mesh(new THREE.IcosahedronGeom
 var A=new THREE.Group(); T.add(A);
 var AW=21, AD=50;                          // tháp: 21 m (Đông–Tây) × 50 m dọc Trường Sa, mặt dài nhìn ra biển
 var TX=6;                                  // tháp lệch về phía Trường Sa
-// --- Đế 2 tầng bao gần hết khu đất ---
-var PX0=-31, PX1=TX+AW/2+4, PZ0=-29, PZ1=29, PW=PX1-PX0, PD=PZ1-PZ0, PCX=(PX0+PX1)/2, PCZ=(PZ0+PZ1)/2, WH=FL[3];
-boxP(A,PW-1.6,WH,PD-1.6,PCX,0,PCZ,glass);
-var wc=[]; for(var x=PX0+1;x<=PX1-1;x+=5){ wc.push([x,PZ0+.4]); wc.push([x,PZ1-.4]); } for(var z=PZ0+1;z<=PZ1-1;z+=5){ wc.push([PX1-.4,z]); wc.push([PX0+.4,z]); }
-fins(A,wc,WH,0,stone,1.1);
-slab(A,rrect(PW+.8,PD+.8,.4),FL[2]-.4,.45,white).position.set(PCX,FL[2]-.4,PCZ);
-slab(A,rrect(PW+1.4,PD+1.4,.4),WH-.9,.9,beige).position.set(PCX,WH-.9,PCZ);
-// khối thấp màu trắng phía Bắc (như phối cảnh)
-boxP(A,16,9,14,TX-2,0,PZ0-8,white); boxP(A,15,1.2,13,TX-2,9,PZ0-8,beige);
-// --- Sân tầng 3 phía sau tháp: sàn gỗ, bể bơi, ghế, cây ---
-var deckY=WH+.05;
-var dk=new THREE.Mesh(new THREE.PlaneGeometry(PW-1.6,PD-1.6),M(0xc2a684,{roughness:.9})); dk.rotation.x=-Math.PI/2; dk.position.set(PCX,deckY,PCZ); A.add(dk);
-var poolX0=PX0+3, poolX1=TX-AW/2-4, poolZ0=-20, poolZ1=20;
+/* Theo phối cảnh chính thức: khối tháp thẳng, ban công trắng bo góc chạy quanh mỗi tầng, dải đất nung (terracotta)
+   chạy dọc giữa mặt hướng biển và một phần các mặt còn lại, 2 tầng đỉnh khung đất nung + kính, đế 2 tầng cột trắng,
+   kính sáng ấm, góc bo tròn, mái đế là vườn cây + bể bơi phía sau. */
+glass.color.set(0x34495d); glass.metalness=.6;
+var terra=M(0xC4622F,{roughness:.55,metalness:.12,envMapIntensity:.5});
+var warm=M(0xF1C27D,{roughness:.25,metalness:.15,envMapIntensity:.6,emissive:0xffb060,emissiveIntensity:.35});
+var lawn=M(0x6ea85a,{roughness:.95});
+// kết cấu đất nung có ô cửa kính theo từng tầng
+var tc=document.createElement('canvas'); tc.width=64; tc.height=64; (function(g){ g.fillStyle='#c4622f'; g.fillRect(0,0,64,64); g.fillStyle='#3d5468'; g.fillRect(12,10,40,44); g.fillStyle='rgba(255,255,255,.25)'; g.fillRect(12,10,40,3); g.fillStyle='#e7e2da'; g.fillRect(0,58,64,6); })(tc.getContext('2d'));
+function terraMat(rx,ry){ var t=new THREE.CanvasTexture(tc); t.encoding=THREE.sRGBEncoding; t.wrapS=t.wrapT=THREE.RepeatWrapping; t.repeat.set(rx,ry); return new THREE.MeshStandardMaterial({map:t,roughness:.55,metalness:.1,envMapIntensity:.5}); }
+var NF=26;                                         // số tầng điển hình tầng 3–28
+// --- Đế 2 tầng: cột trắng, kính sáng ấm, góc bo tròn ---
+var PX0=-31, PX1=TX+AW/2+6, PZ0=-29, PZ1=29, PW=PX1-PX0, PD=PZ1-PZ0, PCX=(PX0+PX1)/2, PCZ=(PZ0+PZ1)/2, WH=FL[3];
+slab(A,rrect(PW-2.4,PD-2.4,7),0,WH-.8,warm).position.set(PCX,0,PCZ);
+var wc=[]; for(var x=PX0+5;x<=PX1-5;x+=4.2){ wc.push([x,PZ0+.6]); wc.push([x,PZ1-.6]); } for(var z=PZ0+5;z<=PZ1-5;z+=4.2){ wc.push([PX1-.6,z]); wc.push([PX0+.6,z]); }
+fins(A,wc,WH-.8,0,white,.9);
+slab(A,rrect(PW,PD,8),FL[2]-.45,.45,white).position.set(PCX,FL[2]-.45,PCZ);
+slab(A,rrect(PW+.6,PD+.6,8.3),WH-.9,.9,white).position.set(PCX,WH-.9,PCZ);
+// mái đế: vườn cỏ, bồn cây, dừa; bể bơi phía sau (Tây)
+var deckY=WH+.02;
+slab(A,rrect(PW-1.4,PD-1.4,7.4),deckY-.05,.1,lawn).position.set(PCX,deckY-.05,PCZ);
+var poolX0=PX0+3, poolX1=TX-AW/2-4, poolZ0=-19, poolZ1=19;
 boxP(A,poolX1-poolX0+1.6,.5,poolZ1-poolZ0+1.6,(poolX0+poolX1)/2,deckY,(poolZ0+poolZ1)/2,white);
 var pw=new THREE.Mesh(new THREE.PlaneGeometry(poolX1-poolX0,poolZ1-poolZ0),M(0x38c6d9,{roughness:.08,metalness:.1,envMapIntensity:1.1,emissive:0x0b5866,emissiveIntensity:.25}));
 pw.rotation.x=-Math.PI/2; pw.position.set((poolX0+poolX1)/2,deckY+.55,(poolZ0+poolZ1)/2); A.add(pw);
-for(var i=0;i<10;i++) boxP(A,1.1,.35,2.2,poolX1+1.8,deckY,poolZ0+1+i*4,white);
-var pl=[]; for(var z=PZ0+2;z<=PZ1-2;z+=3) pl.push([PX0+1.3,z]); for(var x=PX0+3;x<=TX-AW/2-2;x+=3){ pl.push([x,PZ0+1.3]); pl.push([x,PZ1-1.3]); }
-pl.forEach(function(q){ boxP(A,1.6,.8,1.6,q[0],deckY,q[1],white); shrubsLocal(A,q[0],deckY+.3,q[1]); });
-// --- Thân tháp: khối chính 30 tầng + cánh phía Bắc thấp hơn 2 tầng (theo phối cảnh mặt đứng) ---
-var WZ=AD/2-15;                                   // ranh giới khối chính / cánh (z), cánh ở phía Nam ~15 m
-var mainTop=TOP, wingTop=FL[28];
-function vol(z0,z1,top){ var d=z1-z0, cz=(z0+z1)/2;
-  boxP(A,AW,FL[top===TOP?29:27]-FL[3],d,TX,FL[3],cz,glass);
-  for(var f=3;f<=(top===TOP?29:27);f++) slab(A,rrect(AW+1.3,d+1.3,.2),FL[f]-.26,.26,white).position.set(TX,FL[f]-.26,cz);
-  // 2 tầng đỉnh: kính cao, khung be, góc bo tròn
-  var y0=FL[top===TOP?29:27], hT=top-y0;
-  slab(A,rrect(AW-.4,d-.4,3),y0,hT,glassTop).position.set(TX,y0,cz);
-  slab(A,rrect(AW+1.6,d+1.6,3.4),y0-.5,.6,beige).position.set(TX,y0-.5,cz);
-  var ring=rrect(AW+2,d+2,3.6); ring.holes.push(rrect(AW-.6,d-.6,2.6)); slab(A,ring,top,2.6,beige).position.set(TX,top,cz);
-  boxP(A,AW-1,.6,d-1,TX,top,cz,dark);
-  var cr=[]; for(var z=z0+3;z<=z1-3+.1;z+=(d-6)/Math.max(1,Math.round((d-6)/6))){ cr.push([TX+AW/2+.25,z]); cr.push([TX-AW/2-.25,z]); }
-  fins(A,cr,hT,y0,beige,.7);
-}
-vol(-AD/2,WZ,mainTop); vol(WZ,AD/2,wingTop);
-// đố kính mảnh
-var mu=[]; for(var z=-AD/2+1.6;z<AD/2-1;z+=3.2){ mu.push([TX+AW/2+.2,z]); mu.push([TX-AW/2-.2,z]); }
-fins(A,mu,FL[27]-FL[3],FL[3],M(0xdfe6ec,{roughness:.4}),.12);
-// đường viền sáng màu trắng chạy dọc, lệch bậc mỗi ~9 tầng (đặc trưng mặt đứng)
-var stepZ=[[-17,-6,6],[ -11,0,13],[-20,-3,9]];
-[[3,12],[12,21],[21,29]].forEach(function(r,k){ var h=FL[r[1]]-FL[r[0]];
-  var L=stepZ[k].map(function(z){ return [TX+AW/2+.6,z]; }).concat(stepZ[(k+1)%3].map(function(z){ return [TX-AW/2-.6,z+2]; }));
-  fins(A,L,h,FL[r[0]],white,.55,.55);
-  if(k<2) stepZ[k].forEach(function(z,i){ var z2=stepZ[k+1][i]; boxP(A,.55,.55,Math.abs(z2-z)+.55,TX+AW/2+.6,FL[r[1]],(z+z2)/2,white); });
-});
-fins(A,[[TX+AW/2+.6,-AD/2+.3],[TX+AW/2+.6,AD/2-.3],[TX-AW/2-.6,-AD/2+.3],[TX-AW/2-.6,AD/2-.3],[TX+AW/2+.6,WZ],[TX-AW/2-.6,WZ]],FL[27]-FL[3],FL[3],white,.6,.6);
-// mặt hẹp (Bắc/Nam): ban công màu đồng mỗi tầng + trụ đồng
-for(var f=4;f<=27;f++){ boxP(A,AW-2,.45,1.6,TX,FL[f]-.1,-AD/2-.8,bronze); boxP(A,AW-2,.45,1.6,TX,FL[f]-.1,AD/2+.8,bronze); }
-var bn=[]; for(var x=TX-AW/2+1;x<=TX+AW/2-.9;x+=(AW-2)/3){ bn.push([x,AD/2+1.5]); bn.push([x,-AD/2-1.5]); }
-fins(A,bn,FL[27]-FL[3],FL[3],bronze,.6,.4);
-// --- Sảnh tầng 1–2 dưới tháp: kính trong, mái đón màu be ---
-boxP(A,10,.8,4,TX+AW/2+6,FL[2]+1,0,beige);
+var rp=[]; for(var z=PZ0+3;z<=PZ1-3;z+=5){ rp.push([PX1-2.2,z]); rp.push([PX0+1.8,z]); } for(var x=PX0+5;x<=PX1-5;x+=5){ rp.push([x,PZ0+2]); rp.push([x,PZ1-2]); }
+rp.forEach(function(q,i){ boxP(A,2,.9,2,q[0],deckY,q[1],white); if(i%2===0){ var tr=new THREE.Mesh(trunkGeo,trunkMat); tr.position.set(q[0],deckY+.9,q[1]); tr.scale.set(.8,6,.8); tr.castShadow=true; A.add(tr); var cw=new THREE.Mesh(crownGeo,leafMat); cw.position.set(q[0],deckY+6.9,q[1]); cw.scale.set(.7,.7,.7); cw.rotation.y=i; cw.castShadow=true; A.add(cw); } else shrubsLocal(A,q[0],deckY+.6,q[1]); });
+// --- Thân tháp ---
+boxP(A,AW,FL[29]-FL[3],AD,TX,FL[3],0,glass);
+// ban công trắng bo góc chạy quanh mỗi tầng
+for(var f=4;f<=29;f++) slab(A,rrect(AW+3.2,AD+3.2,3.2),FL[f]-.6,.6,white).position.set(TX,FL[f]-.32,0);
+// lan can kính mảnh
+var rail=M(0xcfe3ee,{roughness:.1,metalness:.3,transparent:true,opacity:.18});
+for(var f=4;f<=28;f+=1){ var r=rrect(AW+3,AD+3,3); r.holes.push(rrect(AW+2.8,AD+2.8,2.9)); slab(A,r,FL[f],1.1,rail).position.set(TX,FL[f],0); }
+// dải đất nung: giữa mặt Đông (hướng biển), nửa Bắc mặt Tây, một phần mặt Bắc
+var hT=FL[29]-FL[3];
+var tE=new THREE.Mesh(new THREE.BoxGeometry(2.4,hT,13),terraMat(1,NF)); tE.position.set(TX+AW/2+1.0,FL[3]+hT/2,0); tE.castShadow=true; A.add(tE);
+var tEm=tE.material; tEm.map.repeat.set(3,NF);
+var tW=new THREE.Mesh(new THREE.BoxGeometry(2.4,hT,22),terraMat(5,NF)); tW.position.set(TX-AW/2-1.0,FL[3]+hT/2,-AD/2+11.5); tW.castShadow=true; A.add(tW);
+var tN=new THREE.Mesh(new THREE.BoxGeometry(8,hT,2.4),terraMat(2,NF)); tN.position.set(TX+AW/2-4.2,FL[3]+hT/2,-AD/2-1.0); tN.castShadow=true; A.add(tN);
+// --- 2 tầng đỉnh: kính + khung đất nung, mái phẳng ---
+var hC=TOP-FL[29];
+boxP(A,AW-.6,hC,AD-.6,TX,FL[29],0,glassTop);
+var cr=[]; for(var z=-AD/2+.3;z<=AD/2-.2;z+=3.5){ cr.push([TX+AW/2+.4,z]); cr.push([TX-AW/2-.4,z]); } for(var x=TX-AW/2+.3;x<=TX+AW/2-.2;x+=3.5){ cr.push([x,AD/2+.4]); cr.push([x,-AD/2-.4]); }
+fins(A,cr,hC+.4,FL[29],terra,.9);
+slab(A,rrect(AW+2,AD+2,.6),FL[29]-.6,.8,terra).position.set(TX,FL[29]-.6,0);
+var ring=rrect(AW+2.2,AD+2.2,.6); ring.holes.push(rrect(AW-.2,AD-.2,.4)); slab(A,ring,TOP,1.8,terra).position.set(TX,TOP,0);
+boxP(A,AW-.6,.5,AD-.6,TX,TOP,0,dark);
+boxP(A,8,4,12,TX-2,TOP+.5,-8,stone); boxP(A,6,3.2,7,TX+3,TOP+.5,10,stone);
+// sảnh vào chính hướng Trường Sa
+boxP(A,12,.7,4.5,TX+AW/2+8,FL[2]+.6,0,white);
 
 // mặt sân góc giao lộ
 var plaza=new THREE.Mesh(new THREE.CircleGeometry(26,40,Math.PI*.5,Math.PI*.5),M(0xd9d2c4)); plaza.rotation.x=-Math.PI/2; plaza.position.set(-14,.11,8); world.add(plaza);
