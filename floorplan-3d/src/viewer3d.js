@@ -694,22 +694,34 @@ export class Viewer3D {
     const cum = [0]; for (let k = 1; k < way.length; k++) cum.push(cum[k - 1] + way[k].p.distanceTo(way[k - 1].p));
     const knotAt = (u) => { const d = u * cum[cum.length - 1]; let k = 0; while (k < cum.length - 2 && cum[k + 1] < d) k++; return k + Math.min(1, (d - cum[k]) / Math.max(1e-6, cum[k + 1] - cum[k])); };
     const ease = (x) => x * x * (3 - 2 * x);
-    const sample = (time) => {
-      if (time < intro) return { pos: way[0].p.clone(), look: way[0].look.clone(), caption: 'Mở cửa căn hộ', door: true, k: time / intro };
-      const u = Math.min(1, (time - intro) / DUR);
-      // tăng tốc nhẹ lúc đầu, giảm tốc lúc cuối cho mượt
-      const uu = u < 0.04 ? 0.04 * ease(u / 0.04) * 0.5 + 0 : u;
-      const pos = curve.getPointAt(Math.min(1, Math.max(0, uu)));
-      const kt = knotAt(uu), i0 = Math.floor(kt), i1 = Math.min(way.length - 1, i0 + 1), f = ease(kt - i0);
-      // nhìn theo hướng đi (điểm phía trước 2 m trên đường) → qua cửa nhìn thẳng vào phòng, không dí vào tường;
-      // tới gần điểm dừng ngắm của phòng thì xoay dần sang hướng ngắm đẹp của phòng đó
-      const ahead = curve.getPointAt(Math.min(1, uu + 2 / len)), fwd = ahead.clone().sub(pos).setY(0);
-      let look = fwd.lengthSq() > 1e-4 ? pos.clone().add(fwd.setLength(3)).setY(1.3) : way[i1].look.clone();
+    // hướng nhìn thô (theo hướng đi, gần điểm ngắm thì xoay về hướng ngắm) – chỉ lấy góc ngang (yaw)
+    const posAt = (time) => curve.getPointAt(Math.min(1, Math.max(0, (time - intro) / DUR)));
+    const rawDir = (time) => {
+      const u = Math.min(1, Math.max(0, (time - intro) / DUR));
+      if (time < intro) return way[0].look.clone().sub(way[0].p).setY(0).normalize();
+      const pos = curve.getPointAt(u), ahead = curve.getPointAt(Math.min(1, u + 2 / len));
+      let fwd = ahead.sub(pos).setY(0);
+      if (fwd.lengthSq() < 1e-4) fwd = way[way.length - 1].look.clone().sub(pos).setY(0);
+      fwd.normalize();
       const d = u * cum[cum.length - 1];
       let wgt = 0, best = null;
-      way.forEach((w, k) => { if (!w.shot) return; const dd = Math.abs(cum[k] - d); const ww = 1 - Math.min(1, dd / 1.6); if (ww > wgt) { wgt = ww; best = w; } });
-      if (best) look.lerp(best.look, ease(wgt));
-      return { pos, look, caption: (f < 0.5 ? way[i0] : way[i1]).caption, door: false };
+      way.forEach((w, k) => { if (!w.shot) return; const ww = 1 - Math.min(1, Math.abs(cum[k] - d) / 1.8); if (ww > wgt) { wgt = ww; best = w; } });
+      if (best) fwd.lerp(best.look.clone().sub(best.p).setY(0).normalize(), ease(wgt));
+      return fwd.lengthSq() > 1e-6 ? fwd.normalize() : new THREE.Vector3(0, 0, -1);
+    };
+    // làm mượt hướng nhìn: trung bình có trọng số trong ±0,7 s → quay đầu êm, không giật, không chúi xuống sàn
+    const smoothDir = (time) => {
+      const acc = new THREE.Vector3();
+      for (let k = -7; k <= 7; k++) { const w = 1 - Math.abs(k) / 8; acc.addScaledVector(rawDir(time + k * 0.1), w); }
+      if (acc.lengthSq() < 1e-6) acc.copy(rawDir(time));
+      return acc.setY(0).normalize();
+    };
+    const sample = (time) => {
+      const pos = time < intro ? way[0].p.clone() : posAt(time);
+      const dir = smoothDir(time);
+      const look = pos.clone().addScaledVector(dir, 3).setY(1.2);
+      const u = Math.min(1, Math.max(0, (time - intro) / DUR)), kt = knotAt(u), i0 = Math.floor(kt), i1 = Math.min(way.length - 1, i0 + 1);
+      return { pos, look, caption: time < intro ? 'Mở cửa căn hộ' : (kt - i0 < 0.5 ? way[i0] : way[i1]).caption, door: time < intro, k: time / intro };
     };
     return { duration: intro + DUR, sample };
   }
@@ -755,7 +767,7 @@ export class Viewer3D {
         leaves.forEach((d) => { d.pivot.visible = f.door; });
         this.applyDoors(0);
         // rung tay nhẹ như quay điện thoại
-        const sway = new THREE.Vector3(Math.sin(t * 1.3) * 0.015, Math.sin(t * 2.1) * 0.01, 0);
+        const sway = new THREE.Vector3(0, Math.sin(t * 1.1) * 0.006, 0); // nhún rất nhẹ, không lắc ngang
         this.camera.position.copy(f.pos).add(sway);
         this.camera.lookAt(f.look);
         this.camera.updateMatrixWorld();
