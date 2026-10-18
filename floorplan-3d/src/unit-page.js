@@ -131,12 +131,14 @@ function selectUnit(id) {
   markActive();
   try { history.replaceState(null, '', '#' + unit.id); } catch { /* bỏ qua */ }
   store.plan = JSON.parse(JSON.stringify(unit.plan));
+  if (viewer) viewer.keepNorth = !!unit.code;
   if (viewer?.state.ad) applyStyle('green');
   else applyStyle(curStyle);
   $('#planImg').src = `./units/${unit.tpl || unit.id}.webp`;
   renderInfo();
   if (!viewer) {
     viewer = new Viewer3D($('#viewer'), store);
+    viewer.keepNorth = !!unit.code;
     viewer.state.people = false;
     viewer.state.labels = false;
     viewer.isoView = { az: -38, el: 52, k: 1.2 };

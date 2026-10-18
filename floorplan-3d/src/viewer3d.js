@@ -682,7 +682,8 @@ export class Viewer3D {
     const s = b.size;
     let pos;
     // Nhìn từ trên: căn ngang (rộng > sâu) xoay cho cạnh dài nằm dọc màn hình, khớp với ảnh mặt bằng 5:6 tải về
-    if (preset === 'top') pos = b.maxX - b.minX > b.maxY - b.minY ? new THREE.Vector3(b.cx - 0.01, s * 1.55 + 4, b.cy) : new THREE.Vector3(b.cx, s * 1.55 + 4, b.cy + 0.01);
+    // keepNorth: giữ đúng hướng như trên mặt bằng tầng (xem theo mã căn), không xoay căn ngang thành dọc
+    if (preset === 'top') pos = !this.keepNorth && b.maxX - b.minX > b.maxY - b.minY ? new THREE.Vector3(b.cx - 0.01, s * 1.55 + 4, b.cy) : new THREE.Vector3(b.cx, s * 1.55 + 4, b.cy + 0.01);
     else if (preset === 'front') pos = new THREE.Vector3(b.cx, s * 0.35 + 1.5, b.maxY + s * 1.0 + 3);
     else if (this.isoView) {
       // Góc nhìn chéo kiểu phối cảnh bán hàng: từ phía mặt tiền, lệch trái, chúc xuống
@@ -1079,7 +1080,8 @@ export class Viewer3D {
       const t0 = planMode ? new THREE.Vector3(this.built.bounds.cx, 0, this.built.bounds.cy) : this.controls.target;
       const p0 = planMode ? t0.clone().add(new THREE.Vector3(0, this.built.bounds.size * 2 + 6, 0.001)) : this.camera.position;
       // Mặt bằng căn ngang (rộng > sâu): xoay 90° cho cạnh dài nằm dọc, căn to hơn trong khung 5:6
-      if (planMode) this.camera.up.set(this.built.bounds.maxX - this.built.bounds.minX > this.built.bounds.maxY - this.built.bounds.minY ? 1 : 0, 0, this.built.bounds.maxX - this.built.bounds.minX > this.built.bounds.maxY - this.built.bounds.minY ? 0 : -1);
+      const wide = !this.keepNorth && this.built.bounds.maxX - this.built.bounds.minX > this.built.bounds.maxY - this.built.bounds.minY;
+      if (planMode) this.camera.up.set(wide ? 1 : 0, 0, wide ? 0 : -1);
       this.camera.lookAt(t0);
       const fit = this.fitView(p0, t0, planMode ? 0.9 : 0.98);
       this.camera.position.copy(fit.pos);

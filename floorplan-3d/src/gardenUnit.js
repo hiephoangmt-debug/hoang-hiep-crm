@@ -22,7 +22,8 @@ export function gardenUnit(base, spec) {
   }
   const best = Object.entries(score).sort((a, b) => b[1] - a[1])[0];
   const side = spec.garden.side || (best[1] > 0 ? best[0] : nearSide(c)[0]);
-  let D = spec.garden.depth || 3;
+  // fixDepth: giữ đúng bề rộng sân như bản vẽ (không tự tính theo diện tích) – vd. căn 27 dải 1,4 m cắt chéo nhọn ở cuối
+  let D = spec.garden.fixDepth || spec.garden.depth || 3;
   // Hệ toạ độ cục bộ của sân: u dọc mép mặt tiền, v hướng ra ngoài
   const onEdge = (pt) => side === 'top' ? Math.abs(pt.y - bb.y0) < 0.35 : side === 'bottom' ? Math.abs(pt.y - bb.y1) < 0.35 : side === 'left' ? Math.abs(pt.x - bb.x0) < 0.35 : Math.abs(pt.x - bb.x1) < 0.35;
   // Sân chỉ chạy dọc đoạn tường thật của căn ở mặt đó (căn chữ L không bị sân thò ra ngoài phần khuyết)
@@ -34,14 +35,16 @@ export function gardenUnit(base, spec) {
   const pts = edgeRooms.flatMap((r) => r.points);
   // spec.garden.notch = [x0, y0, x1, y1] (m, so với góc khung căn): phần khuyết của căn chữ L cũng là sân (vd. căn 29/32 tầng 3)
   const notch = spec.garden.notch && horiz ? spec.garden.notch : null;
-  const e0 = notch ? bb.x0 + notch[0] : Math.min(...pts.map(along)) - 0.1, e1 = Math.max(...pts.map(along)) + 0.1;
+  // spec.garden.span = [u0, u1] (m, dọc mép tính từ góc khung căn): sân chỉ chạy một đoạn mép như bản vẽ (vd. căn 28 tầng 3)
+  const sp = spec.garden.span, base0 = horiz ? bb.x0 : bb.y0;
+  const e0 = sp ? base0 + sp[0] : notch ? bb.x0 + notch[0] : Math.min(...pts.map(along)) - 0.1, e1 = sp ? base0 + sp[1] : Math.max(...pts.map(along)) + 0.1;
   const notchArea = notch ? (notch[2] - notch[0]) * (notch[3] - notch[1]) : 0;
   const o = horiz ? e0 - bb.x0 : e0 - bb.y0;
   const L = e1 - e0;
   // bán kính bo góc ngoài: theo tỉ lệ chiều sâu sân như bản vẽ (spec.garden.radius), mặc định bo trọn
   const gRad = (d) => (spec.garden.radius ? d * spec.garden.radius : Math.min(d, 3));
   // Độ sâu sân tự tính cho diện tích thông thủy sân vườn khớp bảng của chủ đầu tư (spec.garden.area)
-  if (spec.garden.area) {
+  if (spec.garden.area && !spec.garden.fixDepth) {
     let L2b = 0;
     if (spec.garden.wrap) {
       const w2 = spec.garden.wrap, hz = w2 === 'top' || w2 === 'bottom';
@@ -49,7 +52,7 @@ export function gardenUnit(base, spec) {
       const rp2 = plan.rooms.filter((r) => Math.min(...r.points.map(dp)) < 0.5).flatMap((r) => r.points).map((q) => (hz ? q.x : q.y));
       L2b = Math.max(...rp2) - Math.min(...rp2) + 0.2;
     }
-    const area = (d) => notchArea + L * d + (spec.garden.wrap ? (L2b + d) * d - (1 - Math.PI / 4) * d * d : 0) - (spec.garden.round ? (1 - Math.PI / 4) * gRad(d) ** 2 : 0);
+    const area = (d) => notchArea + L * d + (spec.garden.bevel === 'start' ? (d * d) / 2 : spec.garden.bevel === 'endIn' ? -(d * d) / 2 : 0) + (spec.garden.wrap ? (L2b + d) * d - (1 - Math.PI / 4) * d * d : 0) - (spec.garden.round ? (1 - Math.PI / 4) * gRad(d) ** 2 : 0);
     let lo = 0.8, hi = 8;
     for (let i = 0; i < 40; i++) { const m = (lo + hi) / 2; if (area(m) > spec.garden.area) hi = m; else lo = m; }
     D = +lo.toFixed(2);
@@ -88,12 +91,16 @@ export function gardenUnit(base, spec) {
   void near;
   const RR = gRad(D), NA = 8;
   const arcPts = (start) => { const out = []; for (let i = 0; i <= NA; i++) { const t = (i / NA) * Math.PI / 2; out.push(start ? [RR - RR * Math.sin(t), D - RR + RR * Math.cos(t)] : [L - RR + RR * Math.sin(t), D - RR + RR * Math.cos(t)]); } return out; };
-  if (!(wrap && cornerAtStart)) wall([0, 0], [0, roundStart ? D - RR : D]);
-  wall([roundStart ? RR : 0, D], [roundEnd ? L - RR : L, D]);
-  if (!(wrap && !cornerAtStart)) wall([L, roundEnd ? D - RR : D], [L, 0]);
+  // spec.garden.bevel = 'start': đầu sân cắt chéo 45° loe ra ngoài (mép ngoài dài hơn mép trong một đoạn = chiều sâu sân), như bản vẽ căn 28
+  const bevS = !wrap && spec.garden.bevel === 'start', bevE = !wrap && spec.garden.bevel === 'endIn'; // endIn: cuối sân cắt chéo vào trong (căn 27)
+  if (bevS) wall([0, 0], [-D, D]);
+  else if (!(wrap && cornerAtStart)) wall([0, 0], [0, roundStart ? D - RR : D]);
+  wall([bevS ? -D : roundStart ? RR : 0, D], [bevE ? L - D : roundEnd ? L - RR : L, D]);
+  if (bevE) wall([L - D, D], [L, 0]);
+  else if (!(wrap && !cornerAtStart)) wall([L, roundEnd ? D - RR : D], [L, 0]);
   const aS = roundStart ? arcPts(true) : null, aE = roundEnd ? arcPts(false) : null;
   for (const a of [aS, aE]) if (a) for (let i = 0; i < NA; i++) wall(a[i], a[i + 1]);
-  const gp = [[0, 0], [L, 0], ...(aE ? aE.slice().reverse() : [[L, D]]), ...(aS ? aS.slice().reverse().map((q) => q).reverse() : [[0, D]])];
+  const gp = [[0, 0], [L, 0], ...(aE ? aE.slice().reverse() : [[bevE ? L - D : L, D]]), ...(aS ? aS.slice().reverse().map((q) => q).reverse() : [[bevS ? -D : 0, D]])];
   if (notch) {
     // ô khuyết: nền cỏ + lan can kính phía ngoài, vài chậu cây
     const Q = (x, y) => ({ x: bb.x0 + x, y: bb.y0 + y });
@@ -111,7 +118,7 @@ export function gardenUnit(base, spec) {
   // sàn gỗ có 2 ghế nằm + dù che, lối đá bước trên cỏ từ cửa nhà ra sàn gỗ
   // sân hẹp: luống cây mỏng hơn, bỏ sàn gỗ / ghế nằm cho khỏi chật
   const bedD = D < 1.6 ? 0.4 : 0.6;
-  const sb0 = roundStart ? RR : 0.15, sb1 = roundEnd ? L - RR : L - 0.15;
+  const sb0 = roundStart ? RR : 0.15, sb1 = roundEnd ? L - RR : bevE ? L - D - 0.1 : L - 0.15;
   add('shrubBed', (sb0 + sb1) / 2, D - bedD / 2 - 0.1, rotU, { w: sb1 - sb0, d: bedD });
   if (D >= 1.6) add('pebbles', (sb0 + sb1) / 2, D - bedD - 0.22, rotU, { w: sb1 - sb0 - 0.9, d: 0.24 });
   // luống cây chạy theo cung bo
