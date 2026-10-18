@@ -3,13 +3,27 @@
 <head>
 <meta charset="utf-8">
 <title>Chữ ký</title>
+<link rel="stylesheet" href="fonts.css">
 <style>
   html, body { margin: 0; background: transparent; overflow: hidden; }
-  canvas { display: block; }
+  canvas { display: block; position: absolute; left: 0; top: 0; }
+  /* Vệt sáng chạy qua nút hotline + website ở cảnh kết (toạ độ đo từ trang chính) */
+  .pill { position: absolute; left: 240.47px; top: 1117.09px; width: 599.05px; height: 155px; border-radius: 999px; overflow: hidden; opacity: 0; }
+  .pill .band, .pill2 .band { position: absolute; top: -50%; left: 0; width: 150px; height: 200%; transform: translateX(-300px) skewX(-22deg);
+    background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.75) 50%, rgba(255,255,255,0)); }
+  .pill2 { position: absolute; left: 339.78px; top: 1748px; width: 400.44px; height: 74px; border-radius: 999px; overflow: hidden; opacity: 0; }
+  .pill2 .band { width: 80px; }
+  .ring { position: absolute; left: 240.47px; top: 1117.09px; width: 599.05px; height: 155px; border-radius: 999px; border: 3px solid #FFC56E;
+    box-sizing: border-box; opacity: 0; box-shadow: 0 0 22px rgba(255,150,40,.8); }
+  .webshine { position: absolute; left: 292.95px; top: 1302.09px; width: 494.09px; height: 43px; white-space: nowrap; opacity: 0;
+    font: 700 34px 'Be Vietnam Pro', sans-serif; letter-spacing: 1px; color: transparent;
+    background: linear-gradient(100deg, rgba(255,190,90,0) 42%, #FFD08A 50%, rgba(255,190,90,0) 58%) no-repeat; background-size: 300% 100%;
+    -webkit-background-clip: text; background-clip: text; filter: drop-shadow(0 0 8px rgba(255,150,40,.7)); }
 </style>
 </head>
 <body>
 <canvas id="c" width="1080" height="1920"></canvas>
+<div class="pill2"><div class="band"></div></div><div class="ring"></div><div class="pill"><div class="band"></div></div><div class="webshine">sun-saphia-residence.com</div>
 <script>
 // Lớp chữ ký "Hoàng Hiệp – Đà Nẵng" (từ file hoanghiep_1.mov), tự viết ra rồi giữ nguyên.
 // Khung hình theo video chính (30 fps). Ảnh nét chữ: sig/s000.png … s193.png (600 × 421).
@@ -26,7 +40,7 @@ const imgs = [];
 let loaded = 0;
 for (let i = 0; i < N; i++) {
   const im = new Image();
-  im.onload = () => { if (++loaded === N) window.READY = true; };
+  im.onload = () => { if (++loaded === N) document.fonts.load('700 34px "Be Vietnam Pro"').then(() => { window.READY = true; }); };
   im.src = `sig/s${String(i).padStart(3, '0')}.png`;
   imgs.push(im);
 }
@@ -52,6 +66,25 @@ window.renderSig = f => {
     ctx.drawImage(imgs[idx], x, y, s.w, h);
     ctx.restore();
   }
+  // vệt sáng nhẹ qua dải hotline nhỏ ở cảnh bản đồ (mỗi 5 giây)
+  const p2 = document.querySelector('.pill2'), b2 = p2.querySelector('.band');
+  if (f >= 120 && f < 1480) {
+    const t2 = clamp(((f - 120) % 150) / 30);
+    p2.style.opacity = t2 > 0 && t2 < 1 ? .8 : 0;
+    b2.style.transform = `translateX(${(-160 + t2 * 720).toFixed(1)}px) skewX(-22deg)`;
+  } else p2.style.opacity = 0;
+  // vệt sáng + vòng sáng lan quanh nút hotline (lặp mỗi 2,2 giây)
+  const S0 = 1708, P = 66, band = document.querySelector('.pill .band'), pill = document.querySelector('.pill');
+  const ring = document.querySelector('.ring'), web = document.querySelector('.webshine');
+  if (f >= S0) {
+    const t = (f - S0) % P, live = clamp((1800 - f) / 6);
+    const sweep = clamp(t / 34);
+    pill.style.opacity = live; band.style.transform = `translateX(${(-300 + sweep * 1100).toFixed(1)}px) skewX(-22deg)`;
+    const rp = clamp(t / 42);
+    ring.style.opacity = ((1 - rp) * .85 * live).toFixed(3); ring.style.transform = `scale(${(1 + rp * .1).toFixed(4)}, ${(1 + rp * .38).toFixed(4)})`;
+    const wp = clamp((t - 10) / 34);
+    web.style.opacity = (wp > 0 && wp < 1 ? 1 : 0) * live; web.style.backgroundPosition = `${(100 - wp * 100).toFixed(1)}% 0`;
+  } else { pill.style.opacity = 0; ring.style.opacity = 0; web.style.opacity = 0; }
   return true;
 };
 </script>
