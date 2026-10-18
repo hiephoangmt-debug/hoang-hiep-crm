@@ -9,11 +9,10 @@
   canvas { display: block; position: absolute; left: 0; top: 0; }
   /* Vệt sáng chạy qua nút hotline + website ở cảnh kết (toạ độ đo từ trang chính) */
   .pill { position: absolute; left: 240.47px; top: 1117.09px; width: 599.05px; height: 155px; border-radius: 999px; overflow: hidden; opacity: 0; }
-  /* vệt sáng dạng 2 đường line sắc: 1 line đậm + 1 line mảnh đi kèm */
-  .pill .band, .pill2 .band { position: absolute; top: -50%; left: 0; width: 44px; height: 200%; transform: translateX(-300px) skewX(-24deg);
-    background: linear-gradient(90deg, rgba(255,255,255,0) 0 18%, rgba(255,255,255,.92) 22% 52%, rgba(255,255,255,0) 56% 68%, rgba(255,255,255,.75) 71% 79%, rgba(255,255,255,0) 82%); }
+  .pill .band, .pill2 .band { position: absolute; top: -50%; left: 0; width: 150px; height: 200%; transform: translateX(-300px) skewX(-22deg);
+    background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.75) 50%, rgba(255,255,255,0)); }
   .pill2 { position: absolute; left: 249.55px; top: 1748px; width: 580.91px; height: 74px; border-radius: 999px; overflow: hidden; opacity: 0; }
-  .pill2 .band { width: 30px; }
+  .pill2 .band { width: 80px; }
   .ring { position: absolute; left: 240.47px; top: 1117.09px; width: 599.05px; height: 155px; border-radius: 999px; border: 3px solid #FFC56E;
     box-sizing: border-box; opacity: 0; box-shadow: 0 0 22px rgba(255,150,40,.8); }
   .webshine { position: absolute; left: 292.95px; top: 1302.09px; width: 494.09px; height: 43px; white-space: nowrap; opacity: 0;
@@ -71,8 +70,8 @@ window.renderSig = f => {
   const p2 = document.querySelector('.pill2'), b2 = p2.querySelector('.band');
   if (f >= 120 && f < 1480) {
     const t2 = clamp(((f - 120) % 150) / 30);
-    p2.style.opacity = t2 > 0 && t2 < 1 ? .9 : 0;
-    b2.style.transform = `translateX(${(-80 + t2 * 720).toFixed(1)}px) skewX(-24deg)`;
+    p2.style.opacity = t2 > 0 && t2 < 1 ? .8 : 0;
+    b2.style.transform = `translateX(${(-160 + t2 * 900).toFixed(1)}px) skewX(-22deg)`;
   } else p2.style.opacity = 0;
   // vệt sáng + vòng sáng lan quanh nút hotline (lặp mỗi 2,2 giây)
   const S0 = 1708, P = 66, band = document.querySelector('.pill .band'), pill = document.querySelector('.pill');
@@ -80,7 +79,7 @@ window.renderSig = f => {
   if (f >= S0) {
     const t = (f - S0) % P, live = clamp((1800 - f) / 6);
     const sweep = clamp(t / 34);
-    pill.style.opacity = live; band.style.transform = `translateX(${(-120 + sweep * 860).toFixed(1)}px) skewX(-24deg)`;
+    pill.style.opacity = live; band.style.transform = `translateX(${(-300 + sweep * 1100).toFixed(1)}px) skewX(-22deg)`;
     const rp = clamp(t / 42);
     ring.style.opacity = ((1 - rp) * .85 * live).toFixed(3); ring.style.transform = `scale(${(1 + rp * .1).toFixed(4)}, ${(1 + rp * .38).toFixed(4)})`;
     const wp = clamp((t - 10) / 34);
