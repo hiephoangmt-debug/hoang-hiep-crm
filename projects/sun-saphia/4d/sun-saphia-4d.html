@@ -358,34 +358,45 @@ slab(A,rrect(PW+.6,PD+.6,8.3),WH-.9,.9,white).position.set(PCX,WH-.9,PCZ);
 // mái đế: vườn cỏ, bồn cây, dừa; bể bơi phía sau (Tây)
 var deckY=WH+.02;
 slab(A,rrect(PW-1.4,PD-1.4,7.4),deckY-.05,.1,lawn).position.set(PCX,deckY-.05,PCZ);
-var poolX0=PX0+3, poolX1=TX-AW/2-4, poolZ0=-19, poolZ1=19;
+var poolX0=PX0+3, poolX1=TX-AW/2-4, poolZ0=1, poolZ1=24;
 boxP(A,poolX1-poolX0+1.6,.5,poolZ1-poolZ0+1.6,(poolX0+poolX1)/2,deckY,(poolZ0+poolZ1)/2,white);
 var pw=new THREE.Mesh(new THREE.PlaneGeometry(poolX1-poolX0,poolZ1-poolZ0),M(0x38c6d9,{roughness:.08,metalness:.1,envMapIntensity:1.1,emissive:0x0b5866,emissiveIntensity:.25}));
 pw.rotation.x=-Math.PI/2; pw.position.set((poolX0+poolX1)/2,deckY+.55,(poolZ0+poolZ1)/2); A.add(pw);
 var rp=[]; for(var z=PZ0+3;z<=PZ1-3;z+=5){ rp.push([PX1-2.2,z]); rp.push([PX0+1.8,z]); } for(var x=PX0+5;x<=PX1-5;x+=5){ rp.push([x,PZ0+2]); rp.push([x,PZ1-2]); }
 rp.forEach(function(q,i){ boxP(A,2,.9,2,q[0],deckY,q[1],white); if(i%2===0){ var tr=new THREE.Mesh(trunkGeo,trunkMat); tr.position.set(q[0],deckY+.9,q[1]); tr.scale.set(.8,6,.8); tr.castShadow=true; A.add(tr); var cw=new THREE.Mesh(crownGeo,leafMat); cw.position.set(q[0],deckY+6.9,q[1]); cw.scale.set(.7,.7,.7); cw.rotation.y=i; cw.castShadow=true; A.add(cw); } else shrubsLocal(A,q[0],deckY+.6,q[1]); });
-// --- Thân tháp ---
-boxP(A,AW,FL[29]-FL[3],AD,TX,FL[3],0,glass);
+// --- Thân tháp chữ L: khối chính dọc Trường Sa (nhìn biển) + cánh dọc Nguyễn Đức Thuận ---
+var XA=TX-AW/2, XB=TX+AW/2, ZA=-AD/2, ZB=AD/2, WL=21, WD=20, XW=XA-WL, ZW=ZA+WD;
+// đa giác chữ L (toạ độ cục bộ x,z), nới ra g mét; góc lồi bo r, góc lõm bo nhỏ
+function Lpts(g){ return [[XW-g,ZA-g,1],[XB+g,ZA-g,1],[XB+g,ZB+g,1],[XA-g,ZB+g,1],[XA-g,ZW+g,0],[XW-g,ZW+g,1]]; }
+function Lshape(g,r){ var P=Lpts(g), s=new THREE.Shape(), n=P.length;
+  for(var i=0;i<n;i++){ var c=P[i], pr=P[(i+n-1)%n], nx=P[(i+1)%n], rr=Math.max(.05,c[2]?r:Math.min(r,.6));
+    var d1=Math.hypot(pr[0]-c[0],pr[1]-c[1]), d2=Math.hypot(nx[0]-c[0],nx[1]-c[1]);
+    var p1=[c[0]+(pr[0]-c[0])/d1*rr, c[1]+(pr[1]-c[1])/d1*rr], p2=[c[0]+(nx[0]-c[0])/d2*rr, c[1]+(nx[1]-c[1])/d2*rr];
+    if(i===0) s.moveTo(p1[0],-p1[1]); else s.lineTo(p1[0],-p1[1]); s.quadraticCurveTo(c[0],-c[1],p2[0],-p2[1]); }
+  s.closePath(); return s; }
+function Lring(g1,g2,r){ var s=Lshape(g1,r); s.holes.push(Lshape(g2,Math.max(.1,r-.2))); return s; }
+// điểm dọc chu vi (cho khung đất nung ở đỉnh)
+function Lalong(g,step){ var P=Lpts(g), out=[]; for(var i=0;i<P.length;i++){ var c=P[i], nx=P[(i+1)%P.length], L=Math.hypot(nx[0]-c[0],nx[1]-c[1]), k=Math.max(1,Math.round(L/step)); for(var j=0;j<k;j++) out.push([c[0]+(nx[0]-c[0])*j/k, c[1]+(nx[1]-c[1])*j/k]); } return out; }
+slab(A,Lshape(0,.3),FL[3],FL[29]-FL[3],glass);
 // ban công trắng bo góc chạy quanh mỗi tầng
-for(var f=4;f<=29;f++) slab(A,rrect(AW+3.2,AD+3.2,3.2),FL[f]-.6,.6,white).position.set(TX,FL[f]-.32,0);
+for(var f=4;f<=29;f++) slab(A,Lshape(1.6,3.2),FL[f]-.6,.6,white).position.y=FL[f]-.32;
 // lan can kính mảnh
 var rail=M(0xcfe3ee,{roughness:.1,metalness:.3,transparent:true,opacity:.18});
-for(var f=4;f<=28;f+=1){ var r=rrect(AW+3,AD+3,3); r.holes.push(rrect(AW+2.8,AD+2.8,2.9)); slab(A,r,FL[f],1.1,rail).position.set(TX,FL[f],0); }
-// dải đất nung: giữa mặt Đông (hướng biển), nửa Bắc mặt Tây, một phần mặt Bắc
+for(var f=4;f<=28;f+=1) slab(A,Lring(1.5,1.4,3),FL[f],1.1,rail);
+// dải đất nung: giữa mặt Đông (hướng biển), góc Bắc–Đông và đầu hồi cánh phía Tây
 var hT=FL[29]-FL[3];
-var tE=new THREE.Mesh(new THREE.BoxGeometry(2.4,hT,13),terraMat(1,NF)); tE.position.set(TX+AW/2+1.0,FL[3]+hT/2,0); tE.castShadow=true; A.add(tE);
-var tEm=tE.material; tEm.map.repeat.set(3,NF);
-var tW=new THREE.Mesh(new THREE.BoxGeometry(2.4,hT,22),terraMat(5,NF)); tW.position.set(TX-AW/2-1.0,FL[3]+hT/2,-AD/2+11.5); tW.castShadow=true; A.add(tW);
-var tN=new THREE.Mesh(new THREE.BoxGeometry(8,hT,2.4),terraMat(2,NF)); tN.position.set(TX+AW/2-4.2,FL[3]+hT/2,-AD/2-1.0); tN.castShadow=true; A.add(tN);
+var tE=new THREE.Mesh(new THREE.BoxGeometry(2.4,hT,13),terraMat(3,NF)); tE.position.set(XB+1.0,FL[3]+hT/2,0); tE.castShadow=true; A.add(tE);
+var tN=new THREE.Mesh(new THREE.BoxGeometry(9,hT,2.4),terraMat(2,NF)); tN.position.set(XB-4.7,FL[3]+hT/2,ZA-1.0); tN.castShadow=true; A.add(tN);
+var tW=new THREE.Mesh(new THREE.BoxGeometry(2.4,hT,12),terraMat(3,NF)); tW.position.set(XW-1.0,FL[3]+hT/2,(ZA+ZW)/2); tW.castShadow=true; A.add(tW);
+var tS=new THREE.Mesh(new THREE.BoxGeometry(9,hT,2.4),terraMat(2,NF)); tS.position.set(XA+4.7,FL[3]+hT/2,ZB+1.0); tS.castShadow=true; A.add(tS);
 // --- 2 tầng đỉnh: kính + khung đất nung, mái phẳng ---
 var hC=TOP-FL[29];
-boxP(A,AW-.6,hC,AD-.6,TX,FL[29],0,glassTop);
-var cr=[]; for(var z=-AD/2+.3;z<=AD/2-.2;z+=3.5){ cr.push([TX+AW/2+.4,z]); cr.push([TX-AW/2-.4,z]); } for(var x=TX-AW/2+.3;x<=TX+AW/2-.2;x+=3.5){ cr.push([x,AD/2+.4]); cr.push([x,-AD/2-.4]); }
-fins(A,cr,hC+.4,FL[29],terra,.9);
-slab(A,rrect(AW+2,AD+2,.6),FL[29]-.6,.8,terra).position.set(TX,FL[29]-.6,0);
-var ring=rrect(AW+2.2,AD+2.2,.6); ring.holes.push(rrect(AW-.2,AD-.2,.4)); slab(A,ring,TOP,1.8,terra).position.set(TX,TOP,0);
-boxP(A,AW-.6,.5,AD-.6,TX,TOP,0,dark);
-boxP(A,8,4,12,TX-2,TOP+.5,-8,stone); boxP(A,6,3.2,7,TX+3,TOP+.5,10,stone);
+slab(A,Lshape(-.3,.3),FL[29],hC,glassTop);
+fins(A,Lalong(.4,3.5),hC+.4,FL[29],terra,.9);
+slab(A,Lshape(1,.6),FL[29]-.6,.8,terra);
+slab(A,Lring(1.1,-.1,.6),TOP,1.8,terra);
+slab(A,Lshape(-.3,.3),TOP,.5,dark);
+boxP(A,8,4,12,TX-2,TOP+.5,-8,stone); boxP(A,6,3.2,7,TX+3,TOP+.5,10,stone); boxP(A,9,3,6,XW+8,TOP+.5,(ZA+ZW)/2,stone);
 // sảnh vào chính hướng Trường Sa
 boxP(A,12,.7,4.5,TX+AW/2+8,FL[2]+.6,0,white);
 
@@ -393,8 +404,8 @@ boxP(A,12,.7,4.5,TX+AW/2+8,FL[2]+.6,0,white);
 var plaza=new THREE.Mesh(new THREE.CircleGeometry(26,40,Math.PI*.5,Math.PI*.5),M(0xd9d2c4)); plaza.rotation.x=-Math.PI/2; plaza.position.set(-14,.11,8); world.add(plaza);
 // đánh dấu tầng đang chọn
 var hiMat=new THREE.MeshStandardMaterial({color:0xff6a2b,emissive:0xff6a2b,emissiveIntensity:.9,transparent:true,opacity:.9});
-var hiG=new THREE.ExtrudeGeometry(rrect(AW+3,AD+3,.25),{depth:3,bevelEnabled:false,curveSegments:4}); hiG.rotateX(-Math.PI/2);
-var hi=new THREE.Group(), hiA=new THREE.Mesh(hiG,hiMat); hiA.position.x=TX; hi.add(hiA); T.add(hi);
+var hiG=new THREE.ExtrudeGeometry(Lshape(1.5,.25),{depth:3,bevelEnabled:false,curveSegments:4}); hiG.rotateX(-Math.PI/2);
+var hi=new THREE.Group(), hiA=new THREE.Mesh(hiG,hiMat); hi.add(hiA); T.add(hi);
 var VIEWX=AW/2+1.8, SCH='A', curF=22;
 function fitHi(){}
 function setScheme(){}
