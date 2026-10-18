@@ -72,7 +72,7 @@
   const projCenter = C.project.center || turf.centroid(projPoly).geometry.coordinates;
   const lots = C.project.buildingUrl ? await (await fetch(C.project.buildingUrl)).json()
     : C.project.tower ? buildTower(projPoly, C.project.tower) : buildLots(projPoly, C.project.gridBearing, C.project.grid);
-  map.addSource('proj', { type: 'geojson', data: projPoly });
+  map.addSource('proj', { type: 'geojson', data: C.project.parcels ? turf.featureCollection(C.project.parcels.map(p => turf.polygon([p.concat([p[0]])]))) : projPoly });
   map.addSource('lots', { type: 'geojson', data: lots });
   map.addLayer({ id: 'proj-fill', type: 'fill', source: 'proj', paint: { 'fill-color': P.navy800, 'fill-opacity': 0 } });
   if (C.project.tower || C.project.buildingUrl) map.addLayer({ id: 'lots-flat', type: 'fill', source: 'proj', paint: { 'fill-color': P.orange, 'fill-opacity': 0 } });
@@ -168,6 +168,8 @@
     }
   });
   const fadeEl = document.getElementById('fade');
+  // Logo nhỏ góc phải trên
+  if (C.logo) { const lg = document.createElement('img'); lg.src = C.logo.src; lg.className = 'corner-logo'; ui.appendChild(lg); C.logo._el = lg; }
 
   // ---------- Camera: đường cong Hermite qua các điểm mốc ----------
   const keys = C.camera.map(k => ({ f: k.f, v: [k.c[0], k.c[1], k.z, k.p, k.b], hold: k.hold }));
@@ -246,6 +248,7 @@
       if (e.hold && f >= e.at) fo = 1;
     }
     if (C.fadeIn) fo = Math.max(fo, 1 - clamp(f / C.fadeIn));
+    if (C.logo) C.logo._el.style.opacity = vis(f, C.logo.in, C.logo.out, 20, 14).toFixed(3);
     fadeEl.style.opacity = fo.toFixed(3);
   }
 

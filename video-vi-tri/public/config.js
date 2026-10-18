@@ -1,14 +1,15 @@
 // KỊCH BẢN VIDEO — sửa file này để đổi dự án, chữ, tiện ích, góc camera.
 // Tọa độ luôn viết [kinh độ, vĩ độ]. 30 khung hình = 1 giây.
 // c = tâm camera, z = độ zoom, p = độ nghiêng, b = góc xoay. hold: true = dừng mềm tại mốc.
-const PROJECT_CENTER = [108.25767, 16.02115];
-const PARK = [[108.259488, 16.018852], [108.261798, 16.01988], [108.262141, 16.019157], [108.259832, 16.018128]]; // công viên biển đầu đường Minh Mạng (88 × 272 m, ~2,45 ha)
+const PROJECT_CENTER = [108.2577158, 16.0211116];
+const PARK = [[108.259309, 16.01923], [108.261644, 16.020269], [108.261995, 16.01953], [108.25966, 16.01849]]; // công viên biển đầu đường Minh Mạng (88 × 272 m, ~2,45 ha)
 const AIRPORT = [108.2030, 16.0552];
 const HOIAN = [108.3262, 15.8770];
 
 window.CONFIG = {
   duration: 1800,
   fadeIn: 24,
+  logo: { src: 'logo.png', in: 30, out: 1495 },
   palette: {
     sea: '#050F24', land: '#0C2042', green: '#0F2B4D', sand: '#1A3358', water: '#071A36', coast: '#7FB2FF',
     roadMinor: '#7F95BA', bldLow: '#16335D', bldHigh: '#2A5288', navy800: '#0A1C3A',
@@ -16,8 +17,9 @@ window.CONFIG = {
   },
   project: {
     center: PROJECT_CENTER,
-    // Lô đất chữ L: lưng Võ Nguyên Giáp (Trường Sa), chân Nguyễn Đức Thuận, bụng đường nội bộ (~3.700 m²)
-    polygon: [[108.257841, 16.021496], [108.2572142, 16.0211922], [108.2573275, 16.0209539], [108.2575364, 16.0210551], [108.2576536, 16.0208086], [108.2580714, 16.0210111]],
+    // 2 thửa: thửa 6 (2.399 m², góc bo) + thửa 11 (1.320 m²) = 3.719 m², góc Võ Nguyên Giáp × Nguyễn Đức Thuận
+    polygon: [[108.2573513, 16.0212283], [108.2573647, 16.0212651], [108.2577708, 16.021462], [108.2577851, 16.0214673], [108.2578002, 16.0214697], [108.2578153, 16.0214692], [108.25783, 16.0214658], [108.2578437, 16.0214596], [108.2578559, 16.0214508], [108.2578661, 16.0214398], [108.2578738, 16.021427], [108.258007, 16.0211467], [108.2580933, 16.0209651], [108.2575848, 16.0207368], [108.2574985, 16.0209185]],
+    parcels: [[[108.2578738, 16.021427], [108.2578661, 16.0214398], [108.2578559, 16.0214508], [108.2578437, 16.0214596], [108.25783, 16.0214658], [108.2578153, 16.0214692], [108.2578002, 16.0214697], [108.2577851, 16.0214673], [108.2577708, 16.021462], [108.2573647, 16.0212651], [108.2573513, 16.0212283], [108.2574985, 16.0209185], [108.258007, 16.0211467]], [[108.258007, 16.0211467], [108.2574985, 16.0209185], [108.2575848, 16.0207368], [108.2580933, 16.0209651]]],
     // Khối nhà minh họa sinh bởi scripts/saphia.py: tầng 1 cao 7 m, tầng 2 cao 6 m, hồ bơi sàn tầng 3, tháp chữ L 30 tầng / 114 m
     buildingUrl: 'data/saphia.geojson',
   },
@@ -60,8 +62,8 @@ window.CONFIG = {
     { type: 'route', from: PROJECT_CENTER, to: [108.26078, 16.02334], bend: 0, in: 325, dur: 28, out: 402 },
     { type: 'dist', from: PROJECT_CENTER, to: [108.26078, 16.02334], at: [108.25905, 16.02455], small: 'ra biển', in: 342, out: 400 },
     { type: 'zone', polygon: PARK, color: '#2FCB8C', in: 300, out: null },
-    { type: 'label', text: 'CÔNG VIÊN BIỂN', style: 'road', at: [108.26075, 16.01895], width: 230, bearing: 65.3, in: 320, out: 750 },
-    { type: 'poi', name: 'Công viên biển Sơn Thủy', sub: '2,45 ha · quy hoạch mới', icon: 'tree', at: [108.2612, 16.0195], in: 404, out: 472, beam: 150, dx: 90 },
+    { type: 'label', text: 'CÔNG VIÊN BIỂN', style: 'road', at: [108.260758, 16.019427], width: 230, bearing: 65.3, in: 320, out: 750 },
+    { type: 'poi', name: 'Công viên biển Sơn Thủy', sub: '2,45 ha · quy hoạch mới', icon: 'tree', at: [108.261437, 16.019729], in: 404, out: 472, beam: 150, dx: 90 },
 
     // ===== Cảnh 3: Tiện ích xung quanh =====
     { type: 'chip', n: '02', text: 'Resort 5 sao bao quanh', sub: 'Tiện ích', in: 490, out: 740 },
@@ -89,7 +91,7 @@ window.CONFIG = {
     { type: 'stats', in: 1300, out: 1495, y: 1150, items: [
       { to: 30, unit: 'Tầng', label: 'Cao 114 m · 2 tầng hầm' },
       { to: 782, unit: 'Căn hộ', label: 'Studio · 1PN+1 · 2PN' },
-      { to: 3720, unit: 'm² đất', label: 'Mặt tiền Võ Nguyên Giáp' },
+      { to: 3720, unit: 'm² đất', label: '2 thửa · góc VNG – N.Đ.Thuận' },
       { text: '11/2028', unit: 'Bàn giao', label: 'Dự kiến' },
     ] },
 
@@ -97,7 +99,7 @@ window.CONFIG = {
     { type: 'fade', at: 1500, dur: 12, hold: true },
     { type: 'photo', src: 'phoicanh.jpg', in: 1504, out: null, kicker: 'Phối cảnh dự án', title: 'SUN SAPHIA<br>RESIDENCE', sub: '30 tầng · 782 căn hộ · Bàn giao 11/2028' },
     { type: 'end', in: 1650, html: `
-      <div class="logo"><svg viewBox="0 0 24 24"><path d="M3 21V10l9-7 9 7v11h-6v-6H9v6H3z" fill="#FF7A1A"/></svg></div>
+      <div class="logo"><img src="logo.png"></div>
       <div class="name">SUN SAPHIA<br>RESIDENCE</div>
       <div class="tag">Căn hộ view biển Sơn Thủy · Đà Nẵng</div>
       <div class="hot"><small>HOTLINE · HOÀNG HIỆP</small>0904 567 009</div>
