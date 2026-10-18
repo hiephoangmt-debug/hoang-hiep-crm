@@ -12,31 +12,36 @@
 
 Bot gửi về Zalo của anh/chị: 🆕 khách mới · 🔥 khách nóng · 📅 lịch hẹn · 🙋 cần xử lý · 🤐 tin bot không trả lời.
 
-**Zalo cá nhân của anh/chị không bị đụng tới.** Nhóm Tati, gia đình, đồng nghiệp vẫn nhắn ở đó và anh/chị tự trả lời. Khách cũ nhắn ở Zalo cá nhân thì dùng lệnh `/soan` (xem bên dưới).
+Bot là **một tài khoản Zalo riêng** (Zalo Bot), khách nhắn vào đó. **Zalo cá nhân của anh/chị không bị đụng tới.** Nhóm Tati, gia đình, đồng nghiệp vẫn nhắn ở đó và anh/chị tự trả lời. Khách cũ nhắn ở Zalo cá nhân thì dùng lệnh `/soan` (xem bên dưới).
 
 ---
 
-## Cài đặt lần đầu (khoảng 20 phút)
+## BẮT ĐẦU NHANH – 3 bước, khoảng 15 phút
 
-**1. Tạo bot Zalo.** Vào https://bot.zaloplatforms.com, đăng nhập Zalo, tạo bot (đặt tên, ví dụ "Hiệp BĐS – Tư vấn dự án"), rồi copy **token**.
+**Bước 1 – Chuẩn bị 2 thứ (copy để sẵn vào Ghi chú điện thoại):**
+- **Token bot Zalo:** vào https://bot.zaloplatforms.com → đăng nhập Zalo → Tạo bot (đặt tên, ví dụ "Hiệp BĐS – Tư vấn dự án") → copy **token**.
+- **API key Claude:** vào https://console.anthropic.com → **Billing** nạp tiền (khoảng 5–10 USD dùng được lâu) → **API Keys** → Create key → copy.
 
-**2. Lấy API key Claude.** Vào https://console.anthropic.com, nạp tiền (tính theo lượng dùng), vào API Keys, tạo key rồi copy.
+**Bước 2 – Cài Python (chỉ 1 lần):** tải ở https://python.org → Download → cài. Máy Windows **nhớ tick ô "Add python.exe to PATH"** ở màn hình đầu tiên.
 
-**3. Cài Python** 3.9 trở lên từ python.org (máy Windows nhớ tick "Add to PATH"). Không cần cài thêm thư viện nào.
+**Bước 3 – Chạy bot:** mở thư mục bot, **bấm đúp**:
+- Windows: `CHAY_BOT_Windows.bat`
+- Mac: `CHAY_BOT_Mac.command` (lần đầu: chuột phải → Open)
 
-**4. Điền cấu hình.** Đổi tên `.env.example` thành `.env`, mở bằng Notepad, dán token và API key vào.
+Cửa sổ đen hiện ra và hỏi token Zalo, rồi API key: **dán vào và bấm Enter**. Bot tự kiểm tra, sai thì báo để dán lại.
+Cuối cùng màn hình hiện `/chu 1234` (mỗi lần mã khác) → **dùng Zalo của anh/chị nhắn đúng câu đó cho bot**. Xong! Bot nhận anh/chị là chủ và gửi danh sách lệnh về Zalo.
 
-**5. Điền thông tin dự án** vào `du_an.md`: tên anh/chị, các dự án, giá, CSBH, pháp lý. Có thể copy nguyên văn CSBH vào. **Bot chỉ nói những gì có trong file này.**
+👉 **Thử ngay:** nhờ người quen nhắn bot "cho em xin CSBH FourS Tower".
 
-**6. Chạy bot:** mở Terminal / CMD trong thư mục bot rồi gõ
+⚠️ Để cửa sổ đen **luôn mở**: đóng cửa sổ hoặc tắt máy thì bot dừng. Muốn chạy 24/7 không cần bật máy → xem phần **VPS** bên dưới.
+
+### Cho bot biết về dự án của anh/chị
+Cách nhanh nhất: **nhắn ngay trên Zalo cho bot**, không cần mở file (ví dụ dưới đây, thay bằng số thật của anh/chị):
 ```
-python3 bot.py
+/capnhat FourS Tower: căn 2PN 68m2 giá từ 3,2 tỷ, CK 3% khi thanh toán sớm 50%, sở hữu lâu dài, bàn giao Q4/2027
 ```
-(Windows: `python bot.py`)
-
-**7. Nhận thông báo:** dùng Zalo của anh/chị nhắn `/id` cho bot, copy số chat_id vào `ADMIN_CHAT_ID` trong `.env`, tắt bot (Ctrl+C) rồi chạy lại.
-
-**8. Thử ngay:** nhắn bot "cho em xin CSBH FourS Tower" để xem bot trả lời.
+Mỗi lần có CSBH, giá, căn mới thì `/capnhat` thêm. Có hiệu lực ngay. Gõ `/xemduan` để xem bot đang biết gì.
+Muốn điền bài bản thì mở file `du_an.md` bằng Notepad, thay các chỗ `[điền ...]`. **Bot chỉ nói những gì có trong file này, không tự bịa.**
 
 ---
 
@@ -63,6 +68,9 @@ Bot quét toàn bộ khách đã chat với bot và khách cũ trong file Excel,
 - `/gui <mã>` – bot gửi cho những khách đang chat với bot (mỗi chiến dịch chỉ gửi 1 lần)
 - Khách chỉ có SĐT: mở `data/chien_dich/<mã>.csv` bằng Excel, copy tin gửi qua Zalo cá nhân
 
+**Cập nhật dự án**
+- `/capnhat <nội dung>` – thêm CSBH / giá / căn mới · `/xemduan` – xem thông tin bot đang dùng
+
 **Quản lý**
 - `/tl <chat_id> <nội dung>` – trả lời khách qua bot (bot nhường anh/chị 30 phút)
 - `/rieng <chat_id> <ghi chú>` – đưa người đó vào danh bạ riêng, bot không bao giờ trả lời
@@ -82,14 +90,14 @@ Lưu lại bằng **File → Save As → CSV UTF-8**. Cột `zalo_chat_id` để
 
 ## Gắn khung chat lên LadiPage
 1. Bot phải chạy trên một máy có **địa chỉ HTTPS** (xem phần VPS bên dưới).
-2. Trong `.env`: `WEB_PORT=8080`, `ALLOWED_ORIGIN=https://tenmien-ladipage-cua-ban.com`
+2. Mở file `.env` (bot tự tạo sau lần chạy đầu) bằng Notepad: `WEB_PORT=8080`, `ALLOWED_ORIGIN=https://tenmien-ladipage-cua-ban.com`
 3. Mở `chat-widget.html`, sửa `BOT_URL`, `ZALO_LINK`, `TITLE`.
 4. Trong LadiPage: thêm phần tử **HTML** → dán toàn bộ nội dung `chat-widget.html` → xuất bản.
 
 Khách chat trên web cũng có hồ sơ, lịch hẹn và thông báo như khách Zalo. Anh/chị trả lời khách web bằng `/tl web_xxx ...` (mã có sẵn trong thông báo).
 
 ## Đổ dữ liệu về Google Sheet (tùy chọn)
-Làm theo hướng dẫn ở đầu file `google_sheet.gs`, rồi dán link Web App vào `SHEET_WEBHOOK_URL`. Bot tự ghi 2 trang: **KhachHang** (hồ sơ khách, tự cập nhật) và **LichHen**.
+Làm theo hướng dẫn ở đầu file `google_sheet.gs`, rồi mở `.env` dán link Web App vào `SHEET_WEBHOOK_URL`. Bot tự ghi 2 trang: **KhachHang** (hồ sơ khách, tự cập nhật) và **LichHen**.
 
 ---
 
@@ -97,7 +105,7 @@ Làm theo hướng dẫn ở đầu file `google_sheet.gs`, rồi dán link Web 
 Thuê VPS Ubuntu rẻ nhất (khoảng 100–150 nghìn/tháng là đủ), rồi:
 ```
 sudo apt update && sudo apt install -y python3
-# chép thư mục bot lên VPS (WinSCP / FileZilla), vào thư mục rồi chạy thử:
+# chép thư mục bot lên VPS (WinSCP / FileZilla), vào thư mục rồi chạy thử (bot hỏi token, key như trên máy tính):
 python3 bot.py
 ```
 Cho bot tự chạy lại khi VPS khởi động: tạo file `/etc/systemd/system/bdsbot.service`
@@ -124,3 +132,13 @@ Sau đó chạy `sudo systemctl enable --now bdsbot` và xem log bằng `journal
 - Chiến dịch chào hàng: nên chào **đúng người, ít mà chất**. Gửi ồ ạt dễ bị khách chặn và Zalo hạn chế bot.
 - Dữ liệu khách nằm trong thư mục `data/`, nhớ sao lưu định kỳ.
 - Chi phí API: mỗi tin trả lời khoảng vài chục đến vài trăm đồng, tùy độ dài hội thoại.
+
+## Gặp lỗi thường gặp
+| Hiện tượng | Cách xử lý |
+|---|---|
+| Bấm đúp file .bat, cửa sổ hiện rồi tắt / báo "python is not recognized" | Cài lại Python, **tick "Add python.exe to PATH"** |
+| "Tài khoản Claude chưa nạp tiền" | console.anthropic.com → Billing → nạp tiền |
+| "Token chưa đúng" | Vào bot.zaloplatforms.com copy lại token, đừng copy thừa dấu cách |
+| Muốn đổi token / key | Mở `.env` bằng Notepad sửa, hoặc xóa file `.env` rồi chạy lại để bot hỏi lại |
+| Bot trả lời "để em kiểm tra" nhiều quá | Thông tin dự án còn thiếu → `/capnhat` thêm |
+| Muốn đổi Zalo nhận thông báo | Mở `.env`, xóa số sau `ADMIN_CHAT_ID=`, chạy lại và nhắn `/chu <mã mới>` |

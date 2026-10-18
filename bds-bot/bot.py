@@ -16,6 +16,7 @@ Chỉ dùng thư viện chuẩn Python 3.9+.  Chạy:  python3 bot.py
 import csv
 import json
 import os
+import random
 import re
 import sys
 import threading
@@ -29,6 +30,12 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
 BASE_DIR = Path(__file__).resolve().parent
+ENV_FILE = BASE_DIR / ".env"
+
+try:  # cửa sổ CMD Windows đôi khi không in được emoji/tiếng Việt
+    sys.stdout.reconfigure(errors="replace")
+except (AttributeError, ValueError):
+    pass
 
 
 # =============================================================== CẤU HÌNH
@@ -42,7 +49,23 @@ def load_env(path: Path) -> None:
             os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
 
 
-load_env(BASE_DIR / ".env")
+def save_env(key, value):
+    """Ghi/sửa một dòng KEY=value trong .env (tự tạo .env từ .env.example nếu chưa có)."""
+    if not ENV_FILE.exists():
+        example = BASE_DIR / ".env.example"
+        ENV_FILE.write_text(example.read_text(encoding="utf-8") if example.exists() else "", encoding="utf-8")
+    lines = ENV_FILE.read_text(encoding="utf-8").splitlines()
+    for i, line in enumerate(lines):
+        if line.split("=", 1)[0].strip() == key:
+            lines[i] = f"{key}={value}"
+            break
+    else:
+        lines.append(f"{key}={value}")
+    ENV_FILE.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    os.environ[key] = value
+
+
+load_env(ENV_FILE)
 
 ZALO_TOKEN = os.environ.get("ZALO_BOT_TOKEN", "")
 ANTHROPIC_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
@@ -700,6 +723,8 @@ HELP = """📋 LỆNH CHUYÊN VIÊN
 /khach <chat_id> – xem hồ sơ khách
 /nong – danh sách khách nóng
 /thongke – số liệu tổng
+/capnhat <nội dung> – thêm CSBH, giá, căn mới… vào thông tin dự án (có hiệu lực ngay)
+/xemduan – xem thông tin dự án bot đang dùng
 /id – xem chat_id"""
 
 
@@ -768,6 +793,20 @@ def handle_admin(text) -> bool:
             hs = "\n".join(f"{k}: {v}" for k, v in c["ho_so"].items()) or "(chưa có)"
             last = "\n".join(("👤 " if m["role"] == "user" else "🤖 ") + m["text"][:120] for m in c["tin"][-6:])
             notify_admin(f"{label(arg1)} · {c['kenh']} · từ {c['lan_dau']}\n{hs}\n\n{last}")
+    elif cmd == "/capnhat":
+        note = text.strip()[len(parts[0]):].strip()
+        if not note:
+            notify_admin("Ví dụ: /capnhat FourS Tower: từ 1/11 chiết khấu 3% khi thanh toán sớm 50%")
+        else:
+            info = read_info() if INFO_FILE.exists() else "# THÔNG TIN CHUYÊN VIÊN & DỰ ÁN\n"
+            if "## Cập nhật mới nhất" not in info:
+                info = info.rstrip() + "\n\n## Cập nhật mới nhất (ưu tiên hơn thông tin cũ phía trên)\n"
+            INFO_FILE.write_text(info.rstrip() + f"\n- [{datetime.now().strftime('%d/%m/%Y')}] {note}\n",
+                                 encoding="utf-8")
+            notify_admin("✅ Đã cập nhật. Từ giờ bot tư vấn khách theo thông tin mới này.")
+    elif cmd == "/xemduan":
+        info = re.sub(r"<!--.*?-->", "", read_info(), flags=re.S).strip()
+        notify_admin(info[:3900] + ("\n…(còn nữa, xem file du_an.md)" if len(info) > 3900 else ""))
     elif cmd == "/nong":
         hot = [cid for cid, c in store.customers.items() if c.get("ho_so", {}).get("muc_do") == "nong"]
         notify_admin("🔥 Khách nóng:\n" + ("\n".join(
@@ -791,6 +830,19 @@ def handle_admin(text) -> bool:
 
 
 # =============================================================== ZALO UPDATE
+CLAIM_CODE = f"{random.randint(1000, 9999)}"
+
+
+def set_admin(cid):
+    """Chủ bot nhắn /chu <mã> → lưu chat_id vào .env, không cần chạy lại."""
+    global ADMIN_CHAT_ID
+    ADMIN_CHAT_ID = cid
+    save_env("ADMIN_CHAT_ID", cid)
+    log("Đã nhận chủ bot:", cid)
+    notify_admin("🎉 Xong! Từ giờ em báo khách mới, khách nóng, lịch hẹn về đây cho anh/chị.\n\n"
+                 "Thử ngay: nhắn em từ một Zalo khác (hoặc nhờ người quen) câu \"cho em xin CSBH\".\n\n" + HELP)
+
+
 def process_zalo_update(update):
     event = update.get("event_name", "")
     msg = update.get("message") or {}
@@ -818,6 +870,9 @@ def process_zalo_update(update):
 
     try:
         with chat_lock(cid):
+            if not ADMIN_CHAT_ID and text.replace(" ", "").lower() == "/chu" + CLAIM_CODE:
+                set_admin(cid)
+                return
             if text.lower() == "/id":
                 send_text(cid, f"chat_id của bạn: {cid}")
                 return
@@ -931,7 +986,70 @@ def start_web():
 
 
 # =============================================================== CHẠY
+def ask(prompt):
+    try:
+        return input(prompt).strip().strip('"').strip("'")
+    except EOFError:
+        return ""
+
+
+def check_claude_key(key):
+    res = post_json(CLAUDE_API, {"model": CLAUDE_MODEL, "max_tokens": 5,
+                                 "messages": [{"role": "user", "content": "hi"}]},
+                    {"x-api-key": key, "anthropic-version": "2023-06-01"}, timeout=60)
+    if res.get("content"):
+        return ""
+    msg = str((res.get("error") or {}).get("message", res))
+    if "credit" in msg.lower():
+        return "Tài khoản Claude chưa nạp tiền. Vào console.anthropic.com → Billing để nạp rồi thử lại."
+    return "Key không đúng (" + msg[:120] + ")"
+
+
+def setup_wizard():
+    """Lần đầu chạy: hỏi token + API key ngay trong cửa sổ, tự kiểm tra rồi lưu vào .env."""
+    global ZALO_TOKEN, ANTHROPIC_KEY
+    print("\n==============================================")
+    print("  CÀI ĐẶT BOT LẦN ĐẦU (chỉ làm 1 lần)")
+    print("  Dán bằng chuột phải hoặc Ctrl+V, rồi bấm Enter")
+    print("==============================================\n")
+    while not ZALO_TOKEN:
+        t = ask("1) Dán TOKEN bot Zalo (lấy ở bot.zaloplatforms.com): ")
+        if not t:
+            continue
+        ZALO_TOKEN = t
+        me = zalo("getMe", timeout=20)
+        if me.get("ok"):
+            print("   ✔ Đúng rồi! Bot Zalo:", (me.get("result") or {}).get("name", ""), "\n")
+            save_env("ZALO_BOT_TOKEN", t)
+        else:
+            print("   ✘ Token chưa đúng, anh/chị copy lại giúp em nhé.\n")
+            ZALO_TOKEN = ""
+    while not ANTHROPIC_KEY:
+        k = ask("2) Dán API KEY Claude (bắt đầu bằng sk-ant-, lấy ở console.anthropic.com): ")
+        if not k:
+            continue
+        err = check_claude_key(k)
+        if err:
+            print("   ✘", err, "\n")
+            continue
+        ANTHROPIC_KEY = k
+        save_env("ANTHROPIC_API_KEY", k)
+        print("   ✔ Đúng rồi! Đã lưu.\n")
+
+
+def warn_info():
+    if not INFO_FILE.exists():
+        log("⚠️  Chưa có file du_an.md – bot sẽ chưa biết gì về dự án.")
+        return
+    blanks = read_info().count("[điền")
+    if blanks:
+        log(f"⚠️  du_an.md còn {blanks} chỗ [điền ...]. Bot sẽ trả lời 'để em kiểm tra' ở những chỗ đó.")
+        log("    Mở du_an.md điền thêm, hoặc nhắn bot: /capnhat <thông tin mới>")
+
+
 def main():
+    if (not ANTHROPIC_KEY or (not ZALO_TOKEN and not WEB_PORT)) and sys.stdin and sys.stdin.isatty():
+        setup_wizard()
     if not ANTHROPIC_KEY:
         sys.exit("Thiếu ANTHROPIC_API_KEY trong file .env")
     if not ZALO_TOKEN and not WEB_PORT:
@@ -948,8 +1066,14 @@ def main():
         sys.exit(f"Token Zalo không hợp lệ: {me}")
     log("Bot Zalo đang chạy:", me["result"].get("name"))
     zalo("deleteWebhook")
+    warn_info()
     if not ADMIN_CHAT_ID:
-        log("👉 Nhắn /id cho bot từ Zalo của bạn, rồi điền ADMIN_CHAT_ID vào .env và chạy lại.")
+        print("\n" + "=" * 50)
+        print(f"  👉 BƯỚC CUỐI: dùng Zalo của anh/chị nhắn cho bot:   /chu {CLAIM_CODE}")
+        print("     (để bot biết anh/chị là chủ và gửi thông báo về)")
+        print("=" * 50 + "\n")
+    else:
+        log("✅ Bot đang chạy. Để cửa sổ này mở, tắt máy/đóng cửa sổ là bot dừng.")
 
     errors = 0
     while True:
