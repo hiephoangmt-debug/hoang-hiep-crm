@@ -108,7 +108,7 @@ if(!window.THREE){document.getElementById('app').innerHTML='<div class="err">Kh�
 var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
 var app=document.getElementById('app');
 var renderer;
-try{renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});}catch(e){app.innerHTML='<div class="err">Trình duyệt không hỗ trợ WebGL nên không hiển thị được mô hình 3D.</div>';return;}
+try{renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance',logarithmicDepthBuffer:true});}catch(e){app.innerHTML='<div class="err">Trình duyệt không hỗ trợ WebGL nên không hiển thị được mô hình 3D.</div>';return;}
 renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
 renderer.setSize(innerWidth,innerHeight);
 renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
