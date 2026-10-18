@@ -107,6 +107,37 @@ export const UNIT_SPECS = [
 const W = (ax, ay, bx, by, t = 0.12) => ({ a: [ax, ay], b: [bx, by], t });
 UNIT_SPECS.push(
   {
+    // Căn 29 / 32 (bản vẽ F2-08-29, căn 32 lật đối xứng): chữ L khuyết góc trên trái, lô gia hướng sân giữa,
+    // phòng ngủ chữ L bên trái, phòng ngủ 2 (đa năng) + WC phía hành lang, khách – ăn – bếp bên phải, cửa chính dưới
+    id: '2pn-c', name: '2 PN (căn 29, 32)', type: '2PN', dims: [5.7, 11.0], style: 'warm', manual: true,
+    walls: [
+      W(1.43, 0, 5.7, 0, 0.2), W(5.7, 0, 5.7, 11, 0.2), W(5.7, 11, 0, 11, 0.2), W(0, 11, 0, 3.41, 0.2), W(0, 3.41, 1.43, 3.41, 0.2), W(1.43, 3.41, 1.43, 0, 0.2),
+      W(1.43, 1.65, 5.7, 1.65, 0.15), W(2.75, 1.65, 2.75, 6.6), W(0, 6.6, 2.75, 6.6), W(2.37, 6.6, 2.37, 11), W(0, 8.47, 2.37, 8.47),
+    ],
+    openings: [
+      [0, 'window', 3.6, 3.9, { sill: 0.05, height: 1.05 }], [3, 'window', 4.6, 1.2, { sill: 0.9, height: 1.4 }],
+      [6, 'door', 2.1, 0.85], [6, 'door', 3.45, 0.95], [7, 'door', 6.0, 0.75],
+      [9, 'slide', 7.5, 1.2], [9, 'door', 8.9, 0.7], [2, 'door', 2.97, 0.95],
+    ],
+    rooms: [
+      ['Lô gia', 'darkTile', [[1.43, 0], [5.7, 0], [5.7, 1.65], [1.43, 1.65]]],
+      ['Phòng ngủ', 'herringboneLight', [[1.43, 1.65], [2.75, 1.65], [2.75, 6.6], [0, 6.6], [0, 3.41], [1.43, 3.41]]],
+      ['Phòng ngủ 2', 'herringboneLight', [[0, 6.6], [2.37, 6.6], [2.37, 8.47], [0, 8.47]]],
+      ['WC', 'tile', [[0, 8.47], [2.37, 8.47], [2.37, 11], [0, 11]]],
+      ['Phòng khách & bếp + ăn', 'marble', [[2.75, 1.65], [5.7, 1.65], [5.7, 11], [2.37, 11], [2.37, 6.6], [2.75, 6.6]]],
+    ],
+    furniture: [
+      ['washer', 5.2, 0.5, 0], ['plant', 1.75, 0.5],
+      ['bed', 1.05, 4.6, 270, { w: 1.6, nightstands: true }], ['wardrobe', 0.95, 6.3, 180, { w: 1.7, d: 0.55 }], ['plant', 2.4, 2.0],
+      ['wardrobe', 0.32, 7.55, 270, { w: 1.6, d: 0.55 }], ['desk', 1.5, 6.92, 0, { w: 1.0, d: 0.5 }], ['chair', 1.5, 7.45, 180],
+      ['toilet', 0.42, 9.9, 270], ['vanity', 1.75, 8.75, 0, { w: 0.7 }], ['shower', 1.8, 10.4, 0, { w: 1.0, d: 1.0 }],
+      ['sofa', 3.2, 3.85, 270, { w: 2.0, d: 0.85 }], ['rug', 4.2, 3.85, 0, { w: 1.6, d: 2.2 }], ['roundTable', 4.15, 3.85, 0, { w: 0.6, d: 0.6 }],
+      ['tvStand', 5.48, 3.85, 90, { w: 1.6, d: 0.4 }], ['plant', 5.4, 2.1],
+      ['diningTable', 4.75, 6.4, 90, { w: 1.2, d: 0.75 }], ['chair', 4.2, 6.1, 270], ['chair', 4.2, 6.7, 270], ['chair', 5.3, 6.1, 90], ['chair', 5.3, 6.7, 90],
+      ['fridge', 5.35, 8.0, 90], ['kitchen', 5.4, 9.35, 90, { w: 1.4 }], ['kitchen', 4.25, 10.68, 180, { w: 1.4 }],
+    ],
+  },
+  {
     // Căn 12 / 17 (bản vẽ F2-05-12, ~6,2 × 9,0 m, chữ nhật): WC + bếp phía hành lang, cửa vào cạnh phải,
     // bên trái phòng đa năng rồi phòng ngủ, bên phải ăn + khách thông nhau, 2 cửa kính ra sân vườn phía trước
     id: '1pn-plus-c', name: '1 PN+ (căn 12, 17)', type: '1PN+', dims: [6.2, 9.0], style: 'warm', manual: true,
@@ -259,6 +290,7 @@ UNIT_SPECS.push(
   { id: 'sv-studio', name: 'Sân vườn · Studio', type: 'Studio', garden: { base: 'studio', area: 8.0 } },
   { id: 'sv-studio-b', name: 'Sân vườn · Studio dài', type: 'Studio', garden: { base: 'studio-b', area: 9.8 } },
   { id: 'sv-1pn', name: 'Sân vườn · 1 PN', type: '1PN', garden: { base: '1pn', area: 5.0 } },
+  { id: 'sv-2pn-c', name: 'Sân vườn · 2 PN (căn 29, 32)', type: '2PN', garden: { base: '2pn-c', area: 27.3, side: 'top', notch: [0, 0, 1.43, 3.41] } },
   { id: 'sv-1pn-plus-l', name: 'Sân vườn · 1 PN+ (căn 12, 17)', type: '1PN+', garden: { base: '1pn-plus-c', area: 15.9, round: 'start', radius: 0.5, laundry: true, side: 'bottom' } },
   { id: 'sv-2pn-a', name: 'Sân vườn · 2 PN góc', type: '2PN', garden: { base: '2pn-a', area: 20.0 } },
   { id: 'sv-3pn', name: 'Sân vườn · 3 PN', type: '3PN', garden: { base: '3pn', area: 47.6, wrap: 'top' } },

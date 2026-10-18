@@ -32,7 +32,10 @@ export function gardenUnit(base, spec) {
   // các phòng chạm mép đó (tính cả góc kính bo cong) → khoảng chạy dọc mép của chúng
   const edgeRooms = plan.rooms.filter((r) => Math.min(...r.points.map(depthOf)) < 0.5);
   const pts = edgeRooms.flatMap((r) => r.points);
-  const e0 = Math.min(...pts.map(along)) - 0.1, e1 = Math.max(...pts.map(along)) + 0.1;
+  // spec.garden.notch = [x0, y0, x1, y1] (m, so với góc khung căn): phần khuyết của căn chữ L cũng là sân (vd. căn 29/32 tầng 3)
+  const notch = spec.garden.notch && horiz ? spec.garden.notch : null;
+  const e0 = notch ? bb.x0 + notch[0] : Math.min(...pts.map(along)) - 0.1, e1 = Math.max(...pts.map(along)) + 0.1;
+  const notchArea = notch ? (notch[2] - notch[0]) * (notch[3] - notch[1]) : 0;
   const o = horiz ? e0 - bb.x0 : e0 - bb.y0;
   const L = e1 - e0;
   // bán kính bo góc ngoài: theo tỉ lệ chiều sâu sân như bản vẽ (spec.garden.radius), mặc định bo trọn
@@ -46,7 +49,7 @@ export function gardenUnit(base, spec) {
       const rp2 = plan.rooms.filter((r) => Math.min(...r.points.map(dp)) < 0.5).flatMap((r) => r.points).map((q) => (hz ? q.x : q.y));
       L2b = Math.max(...rp2) - Math.min(...rp2) + 0.2;
     }
-    const area = (d) => L * d + (spec.garden.wrap ? (L2b + d) * d - (1 - Math.PI / 4) * d * d : 0) - (spec.garden.round ? (1 - Math.PI / 4) * gRad(d) ** 2 : 0);
+    const area = (d) => notchArea + L * d + (spec.garden.wrap ? (L2b + d) * d - (1 - Math.PI / 4) * d * d : 0) - (spec.garden.round ? (1 - Math.PI / 4) * gRad(d) ** 2 : 0);
     let lo = 0.8, hi = 4.5;
     for (let i = 0; i < 40; i++) { const m = (lo + hi) / 2; if (area(m) > spec.garden.area) hi = m; else lo = m; }
     D = +lo.toFixed(2);
@@ -91,6 +94,15 @@ export function gardenUnit(base, spec) {
   const aS = roundStart ? arcPts(true) : null, aE = roundEnd ? arcPts(false) : null;
   for (const a of [aS, aE]) if (a) for (let i = 0; i < NA; i++) wall(a[i], a[i + 1]);
   const gp = [[0, 0], [L, 0], ...(aE ? aE.slice().reverse() : [[L, D]]), ...(aS ? aS.slice().reverse().map((q) => q).reverse() : [[0, D]])];
+  if (notch) {
+    // ô khuyết: nền cỏ + lan can kính phía ngoài, vài chậu cây
+    const Q = (x, y) => ({ x: bb.x0 + x, y: bb.y0 + y });
+    plan.rooms.push({ id: uid(), name: 'Ban công sân vườn', floor: 'grass', points: [Q(notch[0], notch[1]), Q(notch[2], notch[1]), Q(notch[2], notch[3]), Q(notch[0], notch[3])] });
+    const nw = { id: uid(), a: Q(notch[0], notch[1]), b: Q(notch[0], notch[3]), thickness: 0.12, height: 1.1 };
+    plan.walls.push(nw);
+    plan.openings.push({ id: uid(), wallId: nw.id, type: 'window', t: 0.5, width: +(notch[3] - notch[1] - 0.02).toFixed(3), sill: 0.15, height: 0.95, glass: true });
+    for (const [fx, fy] of [[0.45, 0.6], [0.45, (notch[1] + notch[3]) / 2], [0.45, notch[3] - 0.5]]) plan.furniture.push({ id: uid(), type: 'shrubBed', x: bb.x0 + notch[0] + fx, y: bb.y0 + fy, rot: 90, w: 0.9, d: 0.6 });
+  }
   plan.rooms.push({ id: uid(), name: 'Ban công sân vườn', floor: 'grass', points: (aS ? [[0, 0], [L, 0], ...(aE ? aE.slice().reverse() : [[L, D]]), ...aS] : gp).map((q) => P(...q)) });
   const rotOut = { top: 0, bottom: 180, left: 270, right: 90 }[side];
   const add = (type, u, v, rot = 0, extra = {}) => { const p = P(u, v); plan.furniture.push({ id: uid(), type, x: +p.x.toFixed(3), y: +p.y.toFixed(3), rot, ...extra }); };
