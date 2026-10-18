@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Chữ ký</title>
+<style>
+  html, body { margin: 0; background: transparent; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// Lớp chữ ký "Hoàng Hiệp – Đà Nẵng" (từ file hoanghiep_1.mov), tự viết ra rồi giữ nguyên.
+// Khung hình theo video chính (30 fps). Ảnh nét chữ: sig/s000.png … s193.png (600 × 421).
+const N = 194;
+const SLOTS = [
+  // cảnh bản đồ: nhỏ, ngay trên dải hotline; viết lại nhẹ nhàng vài lần
+  { from: 40, to: 1495, w: 330, cx: 540, bottom: 1742, writes: [50, 520, 990], speed: 1 },
+  // cảnh kết: lớn hơn, dưới địa chỉ website
+  { from: 1652, to: 1800, w: 520, cx: 540, bottom: 1735, writes: [1656], speed: 1.5 },
+];
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ctx = document.getElementById('c').getContext('2d');
+const imgs = [];
+let loaded = 0;
+for (let i = 0; i < N; i++) {
+  const im = new Image();
+  im.onload = () => { if (++loaded === N) window.READY = true; };
+  im.src = `sig/s${String(i).padStart(3, '0')}.png`;
+  imgs.push(im);
+}
+window.renderSig = f => {
+  ctx.clearRect(0, 0, 1080, 1920);
+  for (const s of SLOTS) {
+    const vis = Math.min(clamp((f - s.from) / 12), clamp((s.to - f) / 12));
+    if (vis <= 0) continue;
+    let k = -1;                                   // lần viết đang áp dụng
+    s.writes.forEach((t, i) => { if (f >= t) k = i; });
+    if (k < 0) continue;
+    const t0 = s.writes[k], next = s.writes[k + 1];
+    const idx = Math.min(N - 1, Math.floor((f - t0) * s.speed));
+    let a = vis;
+    if (next != null) a *= clamp((next - f) / 15);   // mờ dần trước khi viết lại
+    const h = s.w * 421 / 600, x = s.cx - s.w / 2, y = s.bottom - h;
+    ctx.save();
+    ctx.globalAlpha = a;
+    ctx.shadowColor = 'rgba(2,8,22,.85)'; ctx.shadowBlur = 10; ctx.shadowOffsetY = 2;
+    ctx.drawImage(imgs[idx], x, y, s.w, h);
+    ctx.shadowColor = 'rgba(255,122,26,.55)'; ctx.shadowBlur = 18; ctx.shadowOffsetY = 0;
+    ctx.globalAlpha = a * .5;
+    ctx.drawImage(imgs[idx], x, y, s.w, h);
+    ctx.restore();
+  }
+  return true;
+};
+</script>
+</body>
+</html>
