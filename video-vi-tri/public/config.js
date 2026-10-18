@@ -49,7 +49,7 @@ window.CONFIG = {
       <div class="sub">Sơn Thủy · Ngũ Hành Sơn · Đà Nẵng</div>` },
 
     // Dải liên hệ cố định ở cuối màn hình
-    { type: 'title', in: 40, out: 1495, y: 1748, html: `<div class="badge"><span class="ph"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" fill="#fff"/></svg></span><b>0904 567 009</b></div>` },
+    { type: 'title', in: 40, out: 1495, y: 1748, html: `<div class="badge"><span class="ph"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" fill="#fff"/></svg></span><b>0904 567 009</b><i>Hoàng Hiệp</i></div>` },
 
     // ===== Cảnh 2: Vị trí dự án =====
     { type: 'chip', n: '01', text: 'Mặt tiền biển', sub: 'Vị trí dự án', in: 200, out: 440 },
