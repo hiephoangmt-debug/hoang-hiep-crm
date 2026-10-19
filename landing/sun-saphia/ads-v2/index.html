@@ -374,6 +374,17 @@ footer{background:#0B1E3F;color:#C9D6E3;padding:56px 0 90px;font-size:15px}
 .tb-act a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-weight:700;font-size:14px;border-radius:999px;padding:8px 14px;color:#FFFFFF}
 .tb-zalo{background:#0068FF}
 .tb-call{background:#C2552B}
+/* Máy tính: chữ + ảnh cột trái, form cột phải, không để trống */
+@media (min-width:861px){
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 400px;column-gap:48px;row-gap:16px;align-items:start}
+  .hero-side{display:contents}
+  .hero-side>.eyebrow{grid-column:1;grid-row:1}
+  .hero h1{grid-column:1;grid-row:2}
+  .hero .sub{grid-column:1;grid-row:3}
+  .hero .chips{grid-column:1;grid-row:4}
+  .hero-visual{grid-column:1;grid-row:5;margin-top:6px}
+  .hero .form-card{grid-column:2;grid-row:1 / span 5;align-self:start;position:sticky;top:20px}
+}
 /* Thanh đáy điện thoại */
 .mbar{display:none}
 .privacy{font-size:12.5px;color:#557080;margin-top:10px;text-align:center}
