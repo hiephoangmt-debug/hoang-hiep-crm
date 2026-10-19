@@ -811,10 +811,10 @@ body{background:#fff}
       a: ['Dạ em hiểu ạ, căn mặt biển thì ai cũng cân nhắc kỹ chuyện vốn.\nDòng Studio 30–31 m² chiếm khoảng 2/3 dự án, là lựa chọn vốn vào nhẹ nhất, Anh/Chị có thể xem trước.', 'Dạ chi phí là chuyện cần tính kỹ ạ. Khi có giá, em lập bảng tính theo đúng số vốn Anh/Chị chuẩn bị để mình xem có vừa không, không cần quyết ngay.'],
       c: ['Studio', 'Cho thuê'], ask: 'Anh/Chị cho em xin số Zalo, có giá em tính sẵn theo ngân sách của mình ạ.', topic: 'Lo về giá / ngân sách'},
     {id: 'vitri', k: ['vi tri', 'o dau', 'dia chi', 'cho nao', 'duong nao', 'khu nao', 'nam o', 'ban do', 'map', 'toa lac', 'phuong nao', 'quan nao'],
-      a: ['Dạ dự án ở giao lộ Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, mặt tiền trục biển, sát biển Sơn Thủy – Mỹ Khê ạ.', 'Dạ Sun Saphia nằm ngay mặt tiền trục biển, góc Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, sát bãi biển Sơn Thủy – Mỹ Khê ạ.'],
+      a: ['Dạ dự án ở giao lộ Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, mặt tiền trục đường biển; ra biển Sơn Thủy – Mỹ Khê khoảng 400 m, ở giữa là công viên ạ.', 'Dạ Sun Saphia nằm góc Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, mặt tiền trục đường biển; qua công viên khoảng 400 m là tới bãi biển Sơn Thủy – Mỹ Khê ạ.'],
       c: ['Cách biển bao xa', 'Tiện ích'], ask: 'Anh/Chị để lại Zalo, em gửi bản đồ và video vị trí thực tế ạ.', topic: 'Vị trí'},
-    {id: 'bien', k: ['cach bien', 'xa bien', 'gan bien', 'ra bien', 'sat bien', 'mat bien', 'view bien', 'nhin bien', 'bai tam', 'tam bien', 'bai bien', 'my khe', 'son thuy'],
-      a: ['Dạ dự án nằm ngay mặt tiền trục biển Võ Nguyên Giáp – Trường Sa, sát biển Sơn Thủy – Mỹ Khê ạ.\nCăn hướng Đông nhìn thẳng ra biển, tầng càng cao càng thoáng.'],
+    {id: 'bien', k: ['bien', 'cach bien', 'xa bien', 'gan bien', 'ra bien', 'toi bien', 'den bien', 'di bien', 'bao xa', 'bao nhieu m', 'bao nhieu met', 'may m', 'may met', 'bao nhieu km', 'di bo', 'may phut', 'sat bien', 'mat bien', 'view bien', 'nhin bien', 'bai tam', 'tam bien', 'bai bien', 'my khe', 'son thuy'],
+      a: ['Dạ từ dự án ra biển khoảng 400 m ạ, ở giữa là công viên ven biển, đi bộ vài phút là tới bãi Sơn Thủy – Mỹ Khê.\nCăn hướng Đông nhìn ra biển, tầng càng cao càng thoáng.', 'Dạ khoảng 400 m thôi ạ: băng qua công viên ven biển là tới bãi tắm Sơn Thủy – Mỹ Khê.\nTầng cao hướng Đông nhìn ra biển rất thoáng.'],
       c: ['Loại căn hộ', 'Vị trí dự án'], ask: 'Anh/Chị để lại Zalo, em gửi danh sách căn hướng biển khi có ạ.', topic: 'View biển'},
     {id: 'quymo', k: ['quy mo', 'bao nhieu tang', 'may tang', 'cao bao nhieu', 'bao nhieu can', 'may can', 'dien tich dat', 'tang ham', 'ham xe', 'dau xe', 'cho de xe'],
       a: ['Dạ dự án trên khu đất 3.720,1 m², gồm 30 tầng nổi và 2 tầng hầm, cao khoảng 114 m, tổng 782 căn ạ.'], c: ['Loại căn hộ', 'Bàn giao'], topic: 'Quy mô'},
@@ -1047,6 +1047,8 @@ body{background:#fff}
       if (hk === 'lead') lastAsk = turn;
       say(pick(['Dạ vâng ạ, Anh/Chị cần thông tin gì cứ hỏi em nhé.', 'Dạ không sao ạ. Anh/Chị muốn tìm hiểu thêm phần nào ạ?']), ['Vị trí dự án', 'Loại căn hộ']); return;
     }
+    if (!hk && words <= 2 && AFF.test(n) && !NEG.test(n)) { say(pick(['Dạ vâng ạ. Anh/Chị muốn em gửi thêm phần nào: vị trí, loại căn hay bảng giá khi công bố ạ?', 'Dạ em đây ạ. Anh/Chị cần em nói thêm về vị trí, loại căn hay tiện ích ạ?']), ['Loại căn hộ', 'Giá bán']); return; }
+    if (!hk && words <= 2 && NEG.test(n)) { say('Dạ vâng ạ, Anh/Chị cần thông tin gì cứ hỏi em nhé.', ['Vị trí dự án', 'Loại căn hộ']); return; }
     /* 5. Tìm ý */
     var best = null, score = 0;
     KB.forEach(function (it) { var sc = 0; it.k.forEach(function (k) { if (has(n, k)) sc += k.length + 2; }); if (sc > score) { score = sc; best = it; } });
