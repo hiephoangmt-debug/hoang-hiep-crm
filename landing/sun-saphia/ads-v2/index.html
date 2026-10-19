@@ -391,7 +391,10 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
   .tb-name,.tb-act .tb-zalo,.tb-act .tb-call span{display:none}
   .tb-in{min-height:50px}
   .tb-call{padding:7px 12px;font-size:16px}
-  .sticky,.cb-btn,.cb-nudge,.cb-box{display:none !important}
+  .cb-btn{display:none !important}
+  .sticky{bottom:86px}
+  .cb-nudge{bottom:212px}
+  .cb-box{z-index:80}
   .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;background:#FFFFFF;box-shadow:0 -6px 18px rgba(4,24,42,.18);padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));gap:8px}
   .mbar a{flex:1;text-align:center;text-decoration:none;font-weight:700;font-size:15px;color:#FFFFFF;border-radius:12px;padding:12px 4px}
   .mb-zalo{background:#0068FF}
@@ -993,7 +996,7 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
 
 <!-- STICKY BAR -->
 <div class="sticky">
-  <a class="s-form" href="#dang-ky-cuoi" id="cb-fab" aria-label="Mở khung tư vấn"><svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2zm3 6v2h2V9H7zm4 0v2h2V9h-2zm4 0v2h2V9h-2z"/></svg><i class="lb"> Nhận giá</i></a>
+  <a class="s-form" href="#dang-ky-cuoi" id="cb-fab" aria-label="Mở khung tư vấn"><i class="cb-badge"></i><svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2zm3 6v2h2V9H7zm4 0v2h2V9h-2zm4 0v2h2V9h-2z"/></svg><i class="lb"> Nhận giá</i></a>
   <a class="s-call" href="tel:0904567009" aria-label="Gọi 0904 567 009"><svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg><i class="lb"> Gọi ngay</i></a>
   <a class="s-zalo" href="https://zalo.me/0904567009" aria-label="Zalo 0904 567 009"><span>Zalo</span></a>
 </div>
