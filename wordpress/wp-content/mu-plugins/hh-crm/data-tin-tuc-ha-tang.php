@@ -457,7 +457,11 @@ function hh_import_news() {
 		$cat_id  = hh_news_category( $n['category'] );
 		$week    = (int) ( $n['week'] ?? 0 );
 		$date    = ! empty( $n['date'] ) ? (int) strtotime( $n['date'] . ' ' . wp_timezone_string() ) : ( $week ? hh_news_plan_date( $week, $pos[ $week ] = ( $pos[ $week ] ?? -1 ) + 1 ) : time() - $i * HOUR_IN_SECONDS );
-		if ( ! empty( $n['date'] ) && $date > time() ) {
+		if ( ! empty( $n['schedule'] ) ) {
+			// 'schedule': hẹn đăng đúng ngày (Y-m-d, có thể kèm giờ H:i), mặc định 8:00 sáng giờ Việt Nam; ngày đã qua thì đăng ngay.
+			$at   = date_create( $n['schedule'] . ( strlen( $n['schedule'] ) <= 10 ? ' 08:00' : '' ), new DateTimeZone( 'Asia/Ho_Chi_Minh' ) );
+			$date = $at ? $at->getTimestamp() : time();
+		} elseif ( ! empty( $n['date'] ) && $date > time() ) {
 			$date = time() - $i; // Tin có ngày cố định: không lên lịch (múi giờ web khác giờ Việt Nam vẫn đăng ngay).
 		}
 		$content = hh_news_build_content( $n, $seo );
@@ -504,6 +508,7 @@ function hh_import_news() {
 					'post_content'  => $content,
 					'post_category' => $cat_id ? array( $cat_id ) : array(),
 					'post_date'     => wp_date( 'Y-m-d H:i:s', $date ),
+					'post_date_gmt' => gmdate( 'Y-m-d H:i:s', $date ),
 				)
 			);
 			if ( ! $id || is_wp_error( $id ) ) {

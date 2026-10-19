@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.19** + plugin Hoàng Hiệp CRM **2.20.59**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.19** + plugin Hoàng Hiệp CRM **2.20.60**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,20 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.60: loạt bài hằng ngày dẫn về Sun Saphia Residence (đợt 1)
+
+- 7 bài tự đăng lúc 8:00 sáng mỗi ngày từ 20/10 đến 26/10/2026, mỗi bài dẫn link về trang Sun Saphia Residence và các dự án, bài liên quan:
+  - 20/10 Studio ven biển Đà Nẵng 2026: giá mua, giá thuê, cách tính dòng tiền
+  - 21/10 Mở rộng đường Võ Nguyên Giáp – Trường Sa – Lạc Long Quân 2.633 tỷ
+  - 22/10 Đường sắt đô thị sân bay – Mỹ Khê – Hội An
+  - 23/10 Các dự án căn hộ Sun Group ở Đà Nẵng 2026
+  - 24/10 Giữ chỗ (booking) căn hộ mới khác đặt cọc thế nào
+  - 25/10 Căn hộ ven biển: Mỹ Khê, Sơn Thủy hay Non Nước
+  - 26/10 Mua căn hộ Đà Nẵng từ xa (Hà Nội, TP.HCM)
+- Mỗi bài có ảnh đại diện tự vẽ, từ khoá Rank Math, mô tả, điểm chính, hỏi đáp.
+- Trình nhập bài hỗ trợ ô `schedule` (hẹn đúng ngày, mặc định 8:00 giờ Việt Nam).
+- Cài: Dự án → Nhập nhanh → tải `cap-nhat-code.zip` → Nhập dữ liệu Đà Nẵng → Nhập / cập nhật dữ liệu (bài vào trạng thái Lên lịch) → LiteSpeed Cache → Purge All.
 
 ## Có gì mới – plugin 2.20.59: đóng dấu ảnh thanh lịch hơn
 

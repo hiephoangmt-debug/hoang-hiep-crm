@@ -10,18 +10,18 @@ NAME, LINE = 'HOÀNG HIỆP', '0904 567 009  ·  hiephoangmt.com'
 TILE = 'hiephoangmt.com  ·  0904 567 009'
 
 
-def stamp(path):
+def stamp(path, tile=True):
     im = Image.open(path).convert('RGBA')
     W, H = im.size
     m = min(W, H)
-    # 1) Chữ chìm mảnh, rất mờ, lặp chéo.
+    # 1) Chữ chìm mảnh, rất mờ, lặp chéo (bỏ qua với đồ hoạ tự vẽ: tile=False).
     size = max(11, round(m * 0.022))
     f = ImageFont.truetype(F, size)
     tw = int(ImageDraw.Draw(im).textlength(TILE, font=f)) + size * 6
     diag = int(math.hypot(W, H)) + tw * 2
     layer = Image.new('RGBA', (diag, diag), (0, 0, 0, 0))
     d = ImageDraw.Draw(layer)
-    for row, y in enumerate(range(0, diag, size * 7)):
+    for row, y in enumerate(range(0, diag, size * 7) if tile else []):
         off = (row % 2) * tw // 2
         for x in range(-tw, diag, tw):
             d.text((x + off, y), TILE, font=f, fill=(255, 255, 255, 30))
