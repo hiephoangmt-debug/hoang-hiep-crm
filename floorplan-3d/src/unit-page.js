@@ -348,6 +348,16 @@ function videoOpts() {
     title: unit.code ? `Căn ${unit.code} · Tòa F2` : `${unit.name} · Tòa F2`,
     sub: [unit.type, off ? `Tim ${fmt(off[0])} m² · TT ${fmt(off[1])} m²` : '', off?.[2] ? `🌳 BC ${fmt(off[3])} m²` : ''].filter(Boolean).join('  ·  '),
     end: ['Four S Tower · Tòa F2', unit.group ? unit.group.label : unit.type, 'Đường Nguyễn Phước Lan – Minh Mạng, Đà Nẵng'],
+    // phương án nội thất cho khách chọn: phong cách đang xem + 2 phong cách khác
+    styles: (() => {
+      const cur = store.plan.settings.style || curStyle;
+      const keys = [cur, ...['walnut', 'scandi', 'luxury', 'japandi'].filter((k) => k !== cur)].slice(0, 3);
+      return {
+        list: keys.map((k) => ({ key: k, name: STYLES[k].name })),
+        apply: async (k) => { applyStyle(k); viewer.rebuild(); },
+        restore: async () => { applyStyle(cur); viewer.rebuild(); },
+      };
+    })(),
   };
 }
 window.__videoSetup = (o = {}) => viewer.videoSetup({ ...videoOpts(), ...o });
