@@ -411,9 +411,76 @@ export function buildScene(plan, opts = {}) {
     if (!opsByWall.has(op.wallId)) opsByWall.set(op.wallId, []);
     opsByWall.get(op.wallId).push(op);
   }
+  // Kính bo cong: chuỗi ≥ 3 đoạn tường kính nối liền có đổi hướng → dựng một tấm kính cong liền (mượt, không ghép tấm)
+  const curvedIds = new Set();
+  {
+    const isGlass = (w) => { const o = opsByWall.get(w.id) || []; return o.length === 1 && o[0].glass && o[0].width >= wallLength(w) * 0.6; };
+    const gw = plan.walls.filter(isGlass);
+    const key = (p) => `${p.x.toFixed(2)},${p.y.toFixed(2)}`;
+    const used = new Set();
+    for (const w0 of gw) {
+      if (used.has(w0.id)) continue;
+      // nối về hai phía
+      const chain = [w0]; used.add(w0.id);
+      let grow = true;
+      while (grow) {
+        grow = false;
+        for (const w of gw) {
+          if (used.has(w.id)) continue;
+          const head = chain[0], tail = chain[chain.length - 1];
+          const ends = (x) => [key(x.a), key(x.b)];
+          if (ends(w).some((k) => ends(tail).includes(k)) && !ends(w).every((k) => ends(tail).includes(k))) { chain.push(w); used.add(w.id); grow = true; }
+          else if (ends(w).some((k) => ends(head).includes(k))) { chain.unshift(w); used.add(w.id); grow = true; }
+        }
+      }
+      if (chain.length < 3) continue;
+      // thứ tự điểm dọc chuỗi
+      const pts = [];
+      let cur = chain.length > 1 && [key(chain[0].a)].some((k) => [key(chain[1].a), key(chain[1].b)].includes(k)) ? chain[0].b : chain[0].a;
+      pts.push(cur);
+      for (const w of chain) { const nxt = key(w.a) === key(cur) ? w.b : w.a; pts.push(nxt); cur = nxt; }
+      // có đổi hướng mới là cung cong
+      const dir = (i) => Math.atan2(pts[i + 1].y - pts[i].y, pts[i + 1].x - pts[i].x);
+      let turn = 0; for (let i = 1; i < pts.length - 1; i++) turn += Math.abs(Math.atan2(Math.sin(dir(i) - dir(i - 1)), Math.cos(dir(i) - dir(i - 1))));
+      if (turn < 0.5) continue;
+      chain.forEach((w) => curvedIds.add(w.id));
+      const op = opsByWall.get(chain[0].id)[0], wh = chain[0].height || H;
+      const y0 = op.sill || 0, y1 = Math.min(wh, y0 + op.height);
+      const curve = new THREE.CatmullRomCurve3(pts.map((p) => new THREE.Vector3(p.x, 0, p.y)), false, 'centripetal');
+      const S = 64, sp = curve.getSpacedPoints(S);
+      const band = (ya, yb, material, inset = 0) => {
+        if (yb - ya < 0.005) return null;
+        const pos = [], idx = [], uv = [];
+        sp.forEach((p, i) => { pos.push(p.x, ya, p.z, p.x, yb, p.z); uv.push(i / S, 0, i / S, 1); if (i) { const k = (i - 1) * 2; idx.push(k, k + 2, k + 1, k + 1, k + 2, k + 3); } });
+        const g = new THREE.BufferGeometry();
+        g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2)); g.setIndex(idx); g.computeVertexNormals();
+        const m = new THREE.Mesh(g, material); root.add(m); return m;
+      };
+      // phần tường đặc dưới / trên kính (bề dày bằng tường) + tấm kính cong + nẹp kim loại mảnh trên/dưới
+      const thick = chain[0].thickness || 0.1;
+      const solid = (ya, yb) => {
+        if (yb - ya < 0.005) return;
+        const shape = [];
+        const nrm = (i) => { const a = sp[Math.max(0, i - 1)], b = sp[Math.min(S, i + 1)]; const d = new THREE.Vector2(b.x - a.x, b.z - a.z).normalize(); return new THREE.Vector2(-d.y, d.x); };
+        sp.forEach((p, i) => { const n = nrm(i); shape.push(new THREE.Vector2(p.x + n.x * thick / 2, -(p.z + n.y * thick / 2))); });
+        for (let i = S; i >= 0; i--) { const p = sp[i], n = nrm(i); shape.push(new THREE.Vector2(p.x - n.x * thick / 2, -(p.z - n.y * thick / 2))); }
+        const g = new THREE.ExtrudeGeometry(new THREE.Shape(shape), { depth: yb - ya, bevelEnabled: false, curveSegments: 1 });
+        g.rotateX(-Math.PI / 2); g.translate(0, ya, 0);
+        root.add(shadowy(new THREE.Mesh(g, wallMat)));
+      };
+      solid(0, y0); solid(y1, wh);
+      const gm = band(y0, y1, glassMat); if (gm) { gm.material.side = THREE.DoubleSide; gm.renderOrder = 2; gm.name = 'Kính cong'; }
+      for (const yy of [y0, y1]) {
+        const tube = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(sp.map((p) => new THREE.Vector3(p.x, yy, p.z))), S, 0.022, 6, false), frameMat);
+        root.add(tube);
+      }
+      for (let i = 0; i < pts.length - 1; i++) colliders.push({ a: pts[i], b: pts[i + 1], r: thick / 2 });
+    }
+  }
   for (const w of plan.walls) {
     const L = wallLength(w);
     if (L < 0.01) continue;
+    if (curvedIds.has(w.id)) continue;
     const ops = opsByWall.get(w.id) || [];
     const wh = w.height || H;
     const M = wallMatrix(w);

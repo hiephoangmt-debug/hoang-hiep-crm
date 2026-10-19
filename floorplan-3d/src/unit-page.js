@@ -341,6 +341,36 @@ $('#saveAdBtn').onclick = async () => {
 };
 // Ảnh như thật: chưa đủ mịn thì chờ làm mịn xong rồi tự tải (ảnh không bị nhiễu hạt)
 let ptPending = false;
+// Video dọc 9:16 (TikTok / Reels): thông tin căn đưa vào tiêu đề và khung kết
+function videoOpts() {
+  const off = offOf(unit);
+  return {
+    title: unit.code ? `Căn ${unit.code} · Tòa F2` : `${unit.name} · Tòa F2`,
+    sub: [unit.type, off ? `Tim ${fmt(off[0])} m² · TT ${fmt(off[1])} m²` : '', off?.[2] ? `🌳 BC ${fmt(off[3])} m²` : ''].filter(Boolean).join('  ·  '),
+    end: ['Four S Tower · Tòa F2', unit.group ? unit.group.label : unit.type, 'Đường Nguyễn Phước Lan – Minh Mạng, Đà Nẵng'],
+    // phương án nội thất cho khách chọn: phong cách đang xem + 2 phong cách khác
+    styles: (() => {
+      const cur = store.plan.settings.style || curStyle;
+      const keys = [cur, ...['walnut', 'scandi', 'luxury', 'japandi'].filter((k) => k !== cur)].slice(0, 3);
+      return {
+        list: keys.map((k) => ({ key: k, name: STYLES[k].name })),
+        apply: async (k) => { applyStyle(k); viewer.rebuild(); },
+        restore: async () => { applyStyle(cur); viewer.rebuild(); },
+      };
+    })(),
+  };
+}
+window.__videoSetup = (o = {}) => viewer.videoSetup({ ...videoOpts(), ...o });
+$('#videoBtn').onclick = async () => {
+  const b = $('#videoBtn'); if (b.disabled) return;
+  b.disabled = true;
+  try {
+    const { blob, ext } = await viewer.recordVideo(videoOpts(), (p) => { b.textContent = `⏺ Đang quay ${Math.round(p * 100)}%`; });
+    download(blob, `${unit.id.replace('@', '-tang-')}-video.${ext}`);
+    toast(ext === 'mp4' ? 'Đã tải video 9:16 (mp4) – đăng thẳng TikTok / Reels / Zalo.' : 'Đã tải video 9:16 (webm). Máy này chưa xuất được mp4 – mở bằng Chrome mới hoặc Safari để có mp4.', 7000);
+  } catch (e) { toast('Không quay được video: ' + e.message, 6000); }
+  finally { b.disabled = false; b.textContent = '🎬 Quay video 9:16'; }
+};
 $('#softBtn').onclick = async () => {
   if (viewer.ptActive) viewer.stopRealRender();
   const b = $('#softBtn'); b.disabled = true; b.textContent = '⏳ Đang chụp…';
