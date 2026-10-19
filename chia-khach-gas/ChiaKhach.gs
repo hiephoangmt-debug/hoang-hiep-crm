@@ -23,7 +23,7 @@
 var MAC_DINH = {
   CRM_SHEET_ID: '',          // ID Sheet "CRM Hoàng Hiệp" (đoạn giữa /d/…/edit trong link)
   CRM_TAB: 'Khách hàng',
-  LOC_TRANG: 'sun-saphia-residence.com', // chỉ chia khách đến từ tên miền này (cột Trang phát sinh lead / Website); nhiều tên miền cách nhau dấu phẩy; để trống = mọi trang
+  LOC_TRANG: 'sun-saphia-residence.com/ads', // chỉ chia khách đến từ tên miền này (cột Trang phát sinh lead / Website); nhiều tên miền cách nhau dấu phẩy; để trống = mọi trang
   GIO_BAT_DAU: 7,            // giờ làm việc (giờ Việt Nam); từ 21h tới 7h sáng hôm sau không tính hạn
   GIO_KET_THUC: 21,
   HAN_NHAN_PHUT: 30,
