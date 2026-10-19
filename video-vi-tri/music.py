@@ -125,42 +125,26 @@ def swish(dur=0.35, lo=1500, hi=7000):
 def tick():
     n = int(0.03 * SR); tt = np.arange(n) / SR
     return bandpass(rng.standard_normal(n), 2500, 8000) * np.exp(-tt * 260) + np.sin(2 * np.pi * 3200 * tt) * np.exp(-tt * 180) * .3
-PENT = [1046.5, 1174.7, 1318.5, 1568.0, 1760.0, 2093.0]
-pops = sorted([t for k, t, _ in EV if k in ('poi', 'pin', 'dist', 'chip')])
-last = -99; step = 0
+# Chỉ một tiếng "ting" nhẹ, tròn khi có thứ mới hiện lên; gộp các thẻ hiện sát nhau thành 1 tiếng
+def mallet(freq, dur=0.7):
+    tt = np.arange(int(dur * SR)) / SR
+    x = np.sin(2 * np.pi * freq * tt) * np.exp(-tt * 6) + 0.25 * np.sin(2 * np.pi * freq * 4 * tt) * np.exp(-tt * 30)
+    return x * np.minimum(1, tt / 0.004)
+NOTES = [523.3, 587.3, 659.3, 784.0, 880.0]
+pops = sorted(set([t for k, t, _ in EV if k in ('poi', 'pin', 'dist', 'chip', 'stats')]))
+last = -99; n_note = 0; played = 0
 for t in pops:
-    step = step + 1 if t - last < 45 else 0      # các thẻ hiện liên tiếp: nốt cao dần
-    put(chime(PENT[min(step, len(PENT) - 1)] * (0.5 if step == 0 else 1)), t / FPS + 0.08, 0.075 if step else 0.085, 0.35 + 0.3 * ((step % 3) / 2))
-    last = t
-for k, t, raw in EV:                              # chữ trên mặt đất + tiêu đề: tiếng vút nhẹ
-    if k in ('label', 'title', 'zone'): put(swish(0.45, 900, 6000), t / FPS, 0.035, 0.5)
-for k, t, raw in EV:                              # máy bay: tiếng lướt qua có quét trái -> phải
-    if k == 'route' and 'plane: true' in raw:
-        d = int(_re.search(r"dur: (\d+)", raw).group(1)) / FPS + 0.6
-        n = int(d * SR); tt = np.arange(n) / SR; x = tt / d
-        jet = lowpass(rng.standard_normal(n), 1800) * np.sin(np.pi * x) ** 1.5
-        hum = np.sin(2 * np.pi * (180 + 60 * np.sin(np.pi * x)) * tt) * np.sin(np.pi * x) ** 2 * .25
-        s0 = int(t / FPS * SR); m = min(n, N - s0)
-        L[s0:s0 + m] += (jet + hum)[:m] * 0.09 * (1 - x[:m]); R[s0:s0 + m] += (jet + hum)[:m] * 0.09 * x[:m]
+    if t - last < 12: continue                     # hiện sát nhau -> chỉ 1 tiếng
+    n_note = n_note + 1 if t - last < 60 else 0
+    put(mallet(NOTES[min(n_note, len(NOTES) - 1)]), t / FPS + 0.06, 0.07, 0.5)
+    last = t; played += 1
 _rise = _re.search(r"rise: \[(\d+), (\d+)\]", _cfg)
-if _rise:                                         # tòa tháp mọc lên: tiếng dâng + nhịp chốt
-    a, b = int(_rise.group(1)) / FPS, int(_rise.group(2)) / FPS
-    n = int((b - a) * SR); tt = np.arange(n) / SR; x = tt / (b - a)
-    riser = bandpass(rng.standard_normal(n), 400, 5000) * x ** 2 * .6 + np.sin(2 * np.pi * (90 + 260 * x ** 2) * tt) * x * .35
-    put(riser, a, 0.08); put(boom[:int(1.2 * SR)], b, 0.18)
-for k, t, raw in EV:                              # số chạy: tiếng tích tắc
-    if k == 'stats':
-        for j in range(0, 44, 2): put(tick(), (t + j) / FPS, 0.05 * (1 - j / 60), 0.5 + 0.2 * np.sin(j))
-def sparkle():
-    out = np.zeros(int(0.6 * SR))
-    for j in range(4):
-        f0 = 2600 + 900 * j + rng.random() * 300; tt = np.arange(int(0.25 * SR)) / SR
-        tone = np.sin(2 * np.pi * f0 * tt) * np.exp(-tt * 22); o = int(j * 0.045 * SR)
-        out[o:o + len(tone)] += tone
-    return out
-for f0 in range(120, 1480, 150): put(sparkle(), f0 / FPS + 0.3, 0.012, 0.5)      # vệt sáng dải hotline nhỏ
-for f0 in range(1708, 1800, 66): put(sparkle(), f0 / FPS + 0.2, 0.03, 0.5)       # vệt sáng nút hotline cảnh kết
-print('sfx:', len(pops), 'pops,', len(EV), 'events')
+if _rise:                                         # tòa tháp mọc lên: tiếng dâng nhẹ
+    a_, b_ = int(_rise.group(1)) / FPS, int(_rise.group(2)) / FPS
+    n = int((b_ - a_) * SR); tt = np.arange(n) / SR; x = tt / (b_ - a_)
+    riser = bandpass(rng.standard_normal(n), 300, 3500) * x ** 2 * .5 + np.sin(2 * np.pi * (90 + 200 * x ** 2) * tt) * x * .3
+    put(riser, a_, 0.06)
+print('sfx:', played, 'ting,', len(EV), 'events')
 
 # 6) Vang (reverb) tổng hợp
 ir_n = int(2.2 * SR); it = np.arange(ir_n) / SR

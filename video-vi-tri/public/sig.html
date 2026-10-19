@@ -40,12 +40,30 @@ const imgs = [];
 let loaded = 0;
 for (let i = 0; i < N; i++) {
   const im = new Image();
-  im.onload = () => { if (++loaded === N) document.fonts.load('700 34px "Be Vietnam Pro"').then(() => { window.READY = true; }); };
+  im.onload = () => { if (++loaded === N) Promise.all([document.fonts.load('700 34px "Be Vietnam Pro"'), document.fonts.load('800 30px "Be Vietnam Pro"', 'HOÀNG HIỆP')]).then(() => { window.READY = true; }); };
   im.src = `sig/s${String(i).padStart(3, '0')}.png`;
   imgs.push(im);
 }
+// Watermark mờ chống sao chép: chữ lặp theo đường chéo, trôi chậm, phủ cả khung hình
+const WM = { text: 'HOÀNG HIỆP · 0904 567 009 · SUN SAPHIA RESIDENCE · ', alpha: 0.075, angle: -24, gap: 150 };
+function watermark(f) {
+  ctx.save();
+  // ảnh phối cảnh (sáng, nhiều chi tiết) cần watermark đậm hơn một chút
+  const photo = Math.min(clamp((f - 1500) / 12), clamp((1652 - f) / 12));
+  ctx.globalAlpha = (WM.alpha + photo * 0.09) * clamp(f / 20);
+  ctx.translate(540, 960); ctx.rotate(WM.angle * Math.PI / 180);
+  ctx.font = '800 30px "Be Vietnam Pro"'; ctx.letterSpacing = '4px';
+  ctx.fillStyle = '#FFFFFF'; ctx.strokeStyle = 'rgba(0,10,30,.9)'; ctx.lineWidth = 1.6; ctx.textBaseline = 'middle';
+  const unit = ctx.measureText(WM.text).width, drift = (f * 0.6) % unit;
+  for (let r = -11, i = 0; r <= 11; r++, i++) {
+    const off = (i % 2 ? unit / 2 : 0) - drift - unit * 3;
+    for (let x = off; x < 1500; x += unit) { ctx.strokeText(WM.text, x - 1200, r * WM.gap); ctx.fillText(WM.text, x - 1200, r * WM.gap); }
+  }
+  ctx.restore();
+}
 window.renderSig = f => {
   ctx.clearRect(0, 0, 1080, 1920);
+  watermark(f);
   for (const s of SLOTS) {
     const vis = Math.min(clamp((f - s.from) / 12), clamp((s.to - f) / 12));
     if (vis <= 0) continue;
