@@ -206,6 +206,11 @@ def post_json(url, body, headers=None, timeout=60):
             return json.loads(raw)
         except ValueError:
             return {"ok": False, "error_code": e.code, "description": raw[:300]}
+    except (urllib.error.URLError, OSError) as e:  # mất mạng, lỗi chứng chỉ…
+        msg = str(getattr(e, "reason", e))
+        if "CERTIFICATE" in msg.upper():
+            log("⚠️  Lỗi chứng chỉ HTTPS. Máy Mac: mở Applications → Python 3.x → bấm đúp 'Install Certificates.command' rồi chạy lại bot.")
+        return {"ok": False, "description": msg[:300]}
 
 
 # =============================================================== GỬI TIN

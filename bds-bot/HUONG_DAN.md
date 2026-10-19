@@ -2,7 +2,7 @@
 
 **Mục lục**
 1. [Bot làm được gì](#1-bot-làm-được-gì)
-2. [Cài đặt lần đầu – 3 bước](#2-cài-đặt-lần-đầu--3-bước-khoảng-15-phút)
+2. [Cài đặt lần đầu – từng bước](#2-cài-đặt-lần-đầu--từng-bước-khoảng-2030-phút)
 3. [Dạy bot về dự án: CSBH, bảng hàng, link, hỏi đáp](#3-dạy-bot-về-dự-án-csbh-bảng-hàng-link-hỏi-đáp)
 4. [Độ nhiệt khách – biết gọi ai trước](#4-độ-nhiệt-khách--biết-gọi-ai-trước)
 5. [Vòng đời khách: mới → đánh giá lại → nuôi → mua → hậu mãi](#5-vòng-đời-khách-mới--đánh-giá-lại--nuôi--mua--hậu-mãi)
@@ -38,29 +38,82 @@ Bot là **một tài khoản Zalo riêng** (Zalo Bot), khách nhắn vào đó. 
 
 ---
 
-## 2. Cài đặt lần đầu – 3 bước (khoảng 15 phút)
+## 2. Cài đặt lần đầu – từng bước (khoảng 20–30 phút)
 
-**Bước 1 – Chuẩn bị 2 thứ** (copy để sẵn vào Ghi chú điện thoại):
-- **Token bot Zalo:** vào https://bot.zaloplatforms.com → đăng nhập Zalo → **Tạo bot** (đặt tên, ví dụ "Hiệp BĐS – Tư vấn dự án") → copy **token**.
-- **API key Claude:** vào https://console.anthropic.com → **Billing** nạp tiền (5–10 USD dùng được lâu) → **API Keys** → **Create key** → copy (bắt đầu bằng `sk-ant-`).
+Cần: **1 máy tính** Windows hoặc Mac (máy sẽ chạy bot), **điện thoại có Zalo**, và **thẻ Visa/Mastercard** để nạp tiền API Claude.
+iPad và điện thoại không chạy được bot, chỉ dùng để điều khiển bot qua Zalo ([mục 14](#14-dùng-trên-nhiều-máy-windows-mac-ipad-điện-thoại)).
 
-**Bước 2 – Cài Python (chỉ 1 lần):** vào https://python.org → **Downloads** → tải và cài.
-Máy Windows: ở màn hình cài đầu tiên **nhớ tick ô "Add python.exe to PATH"**, rồi bấm Install Now.
+### Bước 1 – Tạo bot Zalo, lấy TOKEN (5 phút, làm trên điện thoại hoặc máy tính)
+1. Mở https://bot.zaloplatforms.com → **Đăng nhập** bằng Zalo (quét mã QR bằng app Zalo).
+2. Bấm **Tạo bot** → đặt tên, ví dụ `Hiệp BĐS – Tư vấn dự án`, chọn ảnh đại diện → tạo.
+3. Mở bot vừa tạo → tìm mục **Token** → **Sao chép**.
+4. Dán token vào **Ghi chú** trên điện thoại hoặc gửi vào "Cloud của tôi" trên Zalo cho dễ lấy. **Không gửi token cho ai khác.**
+5. Lưu luôn **link hoặc mã QR của bot**: đây là chỗ khách nhắn vào. Sau này đăng lên Facebook, LadiPage, danh thiếp.
 
-**Bước 3 – Chạy bot:** giải nén file zip, mở thư mục `bds-bot`, **bấm đúp**:
-- Windows: `CHAY_BOT_Windows.bat`
-- Mac: `CHAY_BOT_Mac.command` (lần đầu: chuột phải → Open)
+### Bước 2 – Lấy API KEY Claude (5–10 phút)
+1. Mở https://console.anthropic.com → **Sign up**, đăng ký bằng email (hoặc Google), xác nhận email.
+2. Vào **Settings → Billing** → **Buy credits / Add funds** → nạp **5–10 USD** bằng thẻ Visa/Mastercard. Chưa nạp tiền thì bot không trả lời được.
+3. Vào **API Keys** → **Create Key** → đặt tên `bot-bds` → **Copy**. Key bắt đầu bằng `sk-ant-…`.
+   ⚠️ Key **chỉ hiện 1 lần**. Dán ngay vào Ghi chú. Lỡ mất thì tạo key mới.
 
-Cửa sổ đen hiện ra:
-1. Hỏi **token Zalo** → dán (chuột phải hoặc Ctrl+V) → Enter. Bot tự kiểm tra, báo ✔ hoặc ✘.
-2. Hỏi **API key Claude** → dán → Enter.
-3. Màn hình hiện `/chu 1234` (mỗi lần một mã khác) → **dùng Zalo của anh/chị nhắn đúng câu đó cho bot**.
+### Bước 3 – Cài Python trên máy tính (5 phút, chỉ làm 1 lần)
+**Máy Windows:**
+1. Mở https://www.python.org/downloads → bấm nút vàng **Download Python 3.x**.
+2. Mở file vừa tải. Ở màn hình đầu tiên, **tick ô "Add python.exe to PATH"** (ô ở dưới cùng). Đây là bước quan trọng nhất.
+3. Bấm **Install Now**, chờ xong rồi bấm **Close**.
 
-Xong! Bot nhắn lại "🎉 Xong!" kèm danh sách lệnh.
+**Máy Mac:**
+1. Mở https://www.python.org/downloads → **Download Python 3.x** → mở file `.pkg` → **Continue** liên tục → **Install** (nhập mật khẩu máy).
+2. Cài xong, một cửa sổ thư mục **Python 3.x** tự mở → **bấm đúp `Install Certificates.command`**. Bước này bắt buộc, thiếu thì bot không kết nối được Zalo/Claude (báo lỗi CERTIFICATE).
 
-👉 **Thử ngay:** nhờ người quen nhắn bot "cho em xin CSBH FourS Tower".
+### Bước 4 – Giải nén bot (2 phút)
+1. Tải file `bds-bot.zip` về máy tính (gửi qua Zalo "Cloud của tôi" hoặc email cho tiện).
+2. **Windows:** chuột phải file zip → **Extract All…** (Giải nén tất cả) → **Extract**. **Mac:** bấm đúp file zip.
+3. Chuyển thư mục `bds-bot` ra chỗ dễ tìm, ví dụ **Desktop** hoặc **Documents**. **Đừng chạy bot từ bên trong file zip.**
 
-⚠️ Bot chỉ chạy khi cửa sổ đen **còn mở**. Muốn chạy 24/7 không cần bật máy → [mục 12](#12-chạy-247-trên-vps).
+### Bước 5 – Chạy bot lần đầu (3 phút)
+**Windows:** mở thư mục `bds-bot` → **bấm đúp `CHAY_BOT_Windows.bat`**.
+- Hiện bảng xanh **"Windows protected your PC"**: bấm **More info** → **Run anyway**.
+
+**Mac:** mở thư mục `bds-bot` → **chuột phải `CHAY_BOT_Mac.command` → Open → Open**.
+- Báo "không thể mở" hoặc "permission denied": mở **Terminal**, gõ `cd ` (có dấu cách), kéo thư mục `bds-bot` thả vào Terminal → Enter, rồi gõ `python3 bot.py` → Enter.
+
+Cửa sổ đen hiện ra và hỏi lần lượt:
+1. `Dán TOKEN bot Zalo` → dán token (Windows: **chuột phải**, Mac: **Cmd+V**) → **Enter**. Thấy **✔ Đúng rồi!** là được.
+2. `Dán API KEY Claude` → dán key → **Enter** → **✔ Đúng rồi! Đã lưu.**
+   - Báo "chưa nạp tiền": quay lại Bước 2, mục 2.
+   - Báo "Key không đúng": copy lại, nhớ không thừa dấu cách.
+
+Token và key được lưu vào file `.env`, **lần sau không phải nhập lại**.
+
+### Bước 6 – Nhận bot làm của mình (1 phút)
+1. Cửa sổ đen hiện dòng: `👉 BƯỚC CUỐI: dùng Zalo của anh/chị nhắn cho bot:   /chu 4821` (mỗi lần chạy, mã khác nhau).
+2. Trên điện thoại: mở Zalo → tìm bot (qua link hoặc QR ở Bước 1) → nhắn đúng `/chu 4821`.
+3. Bot trả lời **"🎉 Xong!"** kèm danh sách lệnh. Từ giờ, mọi thông báo khách sẽ về Zalo này.
+
+### Bước 7 – Dạy bot dự án đầu tiên (5 phút)
+Ngay trên Zalo, nhắn bot:
+```
+/capnhat Tên: Hiệp · Đơn vị: [tên sàn] · Hotline: [số] · Giờ dẫn khách 8h–21h
+```
+Sau đó:
+- chụp ảnh **CSBH / bảng giá** gửi bot → kiểm tra → `/luu`;
+- có Google Sheet bảng hàng thì gửi `/banghang <link>`.
+
+Muốn điền đầy đủ: mở file `du_an.md` bằng Notepad (Mac: TextEdit) và thay các chỗ `[điền ...]`. Xem chi tiết ở [mục 3](#3-dạy-bot-về-dự-án-csbh-bảng-hàng-link-hỏi-đáp).
+
+### Bước 8 – Thử như khách thật (2 phút)
+- Nhờ người quen (hoặc dùng Zalo thứ hai) nhắn bot: *"cho em xin CSBH FourS Tower"*, *"2pn tầm 3 tỷ có ko"*.
+- Bạn sẽ nhận 🆕 khách mới trên Zalo của mình. Gõ `/khach <mã>` để xem hồ sơ bot vừa ghi.
+- Tự nhắn bot từ Zalo chủ cũng được, nhưng tin bắt đầu bằng `/` sẽ được hiểu là lệnh.
+
+### Bước 9 – Giữ bot chạy liên tục
+- **Để cửa sổ đen luôn mở** (thu nhỏ được, nhưng không bấm X).
+- **Không cho máy ngủ:**
+  - Windows: **Settings → System → Power** → **Sleep: Never** (khi cắm sạc).
+  - Mac: **System Settings → Battery** (hoặc **Energy**) → bật **Prevent automatic sleeping**.
+- Tắt máy rồi mở lại: bấm đúp file chạy bot lần nữa. Lần này bot chạy luôn, không hỏi gì.
+- Muốn chạy 24/7 không cần bật máy: dùng **VPS** ([mục 12](#12-chạy-247-trên-vps)).
 
 ---
 
