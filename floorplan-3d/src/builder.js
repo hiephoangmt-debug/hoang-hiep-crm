@@ -414,7 +414,8 @@ export function buildScene(plan, opts = {}) {
   // Kính bo cong: chuỗi ≥ 3 đoạn tường kính nối liền có đổi hướng → dựng một tấm kính cong liền (mượt, không ghép tấm)
   const curvedIds = new Set();
   {
-    const isGlass = (w) => { const o = opsByWall.get(w.id) || []; return o.length === 1 && o[0].glass && o[0].width >= wallLength(w) * 0.6; };
+    // chỉ các đoạn ngắn của cung bo (≤ 1,6 m); đoạn thẳng dài giữ nguyên – tránh đường cong vồng ra ngoài (lan can sân vườn)
+    const isGlass = (w) => { const o = opsByWall.get(w.id) || []; return o.length === 1 && o[0].glass && o[0].width >= wallLength(w) * 0.6 && wallLength(w) <= 1.6; };
     const gw = plan.walls.filter(isGlass);
     const key = (p) => `${p.x.toFixed(2)},${p.y.toFixed(2)}`;
     const used = new Set();
