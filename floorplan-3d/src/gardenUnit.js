@@ -43,6 +43,38 @@ export function gardenUnit(base, spec) {
   const L = e1 - e0;
   // bán kính bo góc ngoài: theo tỉ lệ chiều sâu sân như bản vẽ (spec.garden.radius), mặc định bo trọn
   const gRad = (d) => (spec.garden.radius ? d * spec.garden.radius : Math.min(d, 3));
+  // squareCorner: tầng có sân vườn thì góc căn là góc vuông (sân bo cong bên ngoài thay cho kính bo của căn) – vd. căn 03/26 tầng 3–7
+  if (spec.garden.squareCorner) {
+    const corner = horiz ? { x: bb.x0, y: side === 'top' ? bb.y0 : bb.y1 } : { x: side === 'left' ? bb.x0 : bb.x1, y: bb.y0 };
+    const near = (q) => Math.hypot(q.x - corner.x, q.y - corner.y) < 3.2;
+    const arc = plan.walls.filter((w) => wallLength(w) <= 1.6 && near(w.a) && near(w.b) && plan.openings.some((o) => o.wallId === w.id && o.glass));
+    if (arc.length >= 2) {
+      const ids = new Set(arc.map((w) => w.id));
+      const pts = arc.flatMap((w) => [w.a, w.b]);
+      // đầu cung trên mép sân (A) và đầu cung trên cạnh hông (B)
+      const A = pts.reduce((m, q) => (depthOf(q) < depthOf(m) - 1e-6 || (Math.abs(depthOf(q) - depthOf(m)) < 1e-6 && along(q) > along(m)) ? q : m), pts[0]);
+      const sideDist = (q) => (horiz ? Math.abs(q.x - corner.x) : Math.abs(q.y - corner.y));
+      const B = pts.reduce((m, q) => (sideDist(q) < sideDist(m) - 1e-6 || (Math.abs(sideDist(q) - sideDist(m)) < 1e-6 && depthOf(q) > depthOf(m)) ? q : m), pts[0]);
+      plan.walls = plan.walls.filter((w) => !ids.has(w.id));
+      plan.openings = plan.openings.filter((o) => !ids.has(o.wallId));
+      const c = { x: corner.x, y: corner.y };
+      for (const [a, b] of [[A, c], [c, B]]) {
+        const w = { id: uid(), a: { ...a }, b: { ...b }, thickness: 0.2 };
+        plan.walls.push(w);
+        const L0 = wallLength(w);
+        if (L0 > 1) plan.openings.push({ id: uid(), wallId: w.id, type: 'window', t: 0.5, width: +Math.min(1.4, L0 - 0.4).toFixed(2), sill: 0.9, height: 1.4 });
+      }
+      // phòng có điểm nằm trên cung → thay cả đoạn cung bằng điểm góc vuông
+      const onArc = (q) => near(q) && Math.hypot(q.x - c.x, q.y - c.y) > 0.05 && pts.some((p) => Math.hypot(p.x - q.x, p.y - q.y) < 0.12);
+      for (const r of plan.rooms) {
+        if (!r.points.some(onArc)) continue;
+        const out = [];
+        let put = false;
+        for (const q of r.points) { if (onArc(q) && !(Math.hypot(q.x - A.x, q.y - A.y) < 0.12 || Math.hypot(q.x - B.x, q.y - B.y) < 0.12)) { if (!put) { out.push({ ...c }); put = true; } } else out.push(q); }
+        r.points = out;
+      }
+    }
+  }
   // wrapCorner: góc căn là kính bo cong (góc tòa) → sân ôm vòng quanh góc bo đó (đồng tâm), chạy xuống tới hết cung
   let Rc = 0;
   if (spec.garden.wrapCorner) {
