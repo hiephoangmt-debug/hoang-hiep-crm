@@ -1251,11 +1251,39 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
     {id: 'camon', k: ['cam on', 'ok', 'hieu roi', 'duoc roi', 'vang', 'da biet', 'tot qua', 'hay qua'],
       a: ['Dạ em cảm ơn Anh/Chị ạ. Anh/Chị cần thêm gì cứ nhắn em nhé.', 'Dạ vâng ạ, có gì Anh/Chị cứ hỏi tiếp, em trả lời ngay.'], c: []}
   ];
+  /* Sau khi trả lời: mở câu chuyện tiếp theo, dẫn dần tới mời để số/Zalo ('lead') */
+  var HOOK = {
+    dat: [['Anh/Chị có muốn em so sánh nhanh Studio và 1BR+ cho dễ chọn không ạ?', 'loaican']],
+    vitri: [['Anh/Chị có muốn biết căn nào nhìn thẳng ra biển không ạ?', 'bien'], ['Anh/Chị có muốn xem tiện ích ngay trong toà không ạ?', 'tienich']],
+    bien: [['Anh/Chị có muốn em gửi danh sách căn hướng biển ngay khi có không ạ?', 'lead']],
+    quymo: [['Anh/Chị có muốn xem 3 dòng căn trong toà không ạ?', 'loaican']],
+    o: [['Anh/Chị có muốn biết thời gian bàn giao để tính kế hoạch chuyển về không ạ?', 'bangiao']],
+    chothue: [['Anh/Chị có muốn em gửi bảng tính dòng tiền tham khảo cho Studio không ạ?', 'lead']],
+    thitruong: [['Anh/Chị có muốn xem giá thuê studio thực tế quanh Mỹ Khê không ạ?', 'chothue']],
+    dautu: [['Anh/Chị có muốn xem số liệu giá thuê quanh Mỹ Khê không ạ?', 'chothue']],
+    tienich: [['Anh/Chị có muốn biết dòng căn nào hợp gia đình có con nhỏ không ạ?', 'o']],
+    bangiao: [['Anh/Chị có muốn biết thêm phần pháp lý của dự án không ạ?', 'phaply']],
+    cdt: [['Anh/Chị có muốn biết quy mô toà nhà không ạ?', 'quymo']],
+    phaply: [['Anh/Chị có muốn em gửi hồ sơ pháp lý qua Zalo ngay khi chủ đầu tư công bố không ạ?', 'lead']],
+    luadao: [['Anh/Chị có muốn anh Hiệp gọi lại để trao đổi trực tiếp cho yên tâm không ạ?', 'lead']],
+    coc: [['Anh/Chị có muốn em báo ngay khi chủ đầu tư công bố chính sách không ạ?', 'lead']],
+    moban: [['Anh/Chị có muốn nằm trong danh sách được báo đầu tiên không ạ?', 'lead']],
+    vay: [['Anh/Chị dự kiến chuẩn bị vốn khoảng bao nhiêu để em tính trước giúp mình ạ?', '']],
+    suynghi: [['Trong lúc cân nhắc, Anh/Chị muốn xem trước vị trí hay loại căn ạ?', '']],
+    bot: [['Anh/Chị có muốn em chuyển anh Hiệp gọi lại cho mình không ạ?', 'lead']],
+    tuchoi: [['Anh/Chị đang quan tâm vị trí hay loại căn hơn ạ?', '']],
+    camon: [['Anh/Chị có muốn nhận bảng giá qua Zalo khi chủ đầu tư công bố không ạ?', 'lead']],
+    zalo: [['', '']]
+  };
+  var AFF = / (co|muon|vang|ok|duoc|uh|u|um|dong y|gui|gui di|gui em|gui anh|gui chi|nhe|yes|chac chan|tat nhien|duoc a|co a|muon a) /;
+  var NEG = / (khong|thoi|chua|de sau|khong can|khoi|no) /;
   var ALIAS = {'Studio': 'studio', '2BR': '2br', 'Để ở': 'de o', 'Cho thuê': 'cho thue', 'Tiện ích': 'tien ich', 'Bàn giao': 'ban giao', 'Pháp lý': 'phap ly', 'Chủ đầu tư': 'chu dau tu',
     'Vị trí dự án': 'vi tri', 'Loại căn hộ': 'loai can', 'Cách biển bao xa': 'cach bien', 'Giá bán': 'gia ban', 'Quy mô dự án': 'quy mo', 'Thị trường du lịch': 'du lich', 'Gặp anh Hiệp': 'gap anh hiep'};
 
   /* ---------- Giao diện ---------- */
-  var CSS = '.hhc-l{position:fixed;right:16px;bottom:18px;z-index:9001;width:58px;height:58px;border-radius:50%;border:3px solid #fff;background:#0B3C5D;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(4,24,42,.35);cursor:pointer;padding:0}'
+  /* Ẩn chat cũ nếu trang còn mã cũ (ss-all.js #hmw, chat .cb-*) để không hiện 2 khung chat */
+  var CSS = '#hmw,.cb-btn,.cb-box,.cb-nudge{display:none!important}'
+    + '.hhc-l{position:fixed;right:16px;bottom:18px;z-index:9001;width:58px;height:58px;border-radius:50%;border:3px solid #fff;background:#0B3C5D;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(4,24,42,.35);cursor:pointer;padding:0}'
     + '.hhc-l i{position:absolute;top:-3px;right:-3px;width:16px;height:16px;border-radius:50%;background:#3DDC84;border:3px solid #fff}'
     + '.hhc-n{position:fixed;right:84px;bottom:30px;z-index:9001;max-width:250px;background:#fff;color:#0B2E44;border-radius:14px 14px 4px 14px;padding:11px 30px 11px 13px;font-size:14px;line-height:1.45;box-shadow:0 12px 30px rgba(4,24,42,.28);cursor:pointer;display:none;font-family:inherit}'
     + '.hhc-n.on{display:block}.hhc-n button{position:absolute;right:6px;top:4px;border:0;background:none;font-size:18px;color:#557080;cursor:pointer}'
@@ -1335,7 +1363,7 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
   window.hhcOpen = open;
 
   /* ---------- Hội thoại ---------- */
-  var convo = [], turn = 0, lastAsk = -9, refused = false, phone = '', name = '', topics = [], miss = 0, told = {}, used = {}, lastQ = '';
+  var lastHook = null, convo = [], turn = 0, lastAsk = -9, refused = false, phone = '', name = '', topics = [], miss = 0, told = {}, used = {}, lastQ = '';
   function transcript() { var s = convo.join('\n'); return s.length > 6000 ? '…' + s.slice(-6000) : s; }
   function addTopic(t) { if (t && topics.indexOf(t) < 0) topics.push(t); }
   function variant(it) { var n = it.a.length, i = ((used[it.id] == null ? Math.floor(Math.random() * n) - 1 : used[it.id]) + 1) % n; used[it.id] = i; return it.a[i]; }
@@ -1388,7 +1416,17 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
     /* 3. Văng tục */
     if (isBad(n)) { urgent('đang bức xúc'); miss = 0; say(pick(['Dạ em xin lỗi nếu em trả lời chưa đúng ý Anh/Chị ạ. Em đã báo anh Hiệp, Anh/Chị gọi ' + SO + ' để anh hỗ trợ trực tiếp nhé.', 'Dạ em thành thật xin lỗi Anh/Chị ạ. Em chuyển anh Hiệp liên hệ mình ngay, hoặc Anh/Chị gọi thẳng ' + SO + '.'])); return; }
 
-    /* 4. Tìm ý */
+    /* 4. Khách trả lời ngắn "có/không" cho câu gợi mở vừa rồi */
+    var words = n.trim().split(' ').length, hk = lastHook; lastHook = null;
+    if (hk && words <= 4 && AFF.test(n) && !NEG.test(n)) {
+      if (hk === 'lead') { say(pick(['Dạ Anh/Chị gõ số Zalo vào ô bên dưới giúp em, em chuyển anh Hiệp gửi ngay ạ.', 'Dạ vâng ạ, Anh/Chị cho em xin số Zalo ở ô bên dưới, anh Hiệp gửi trong ít phút ạ.'])); return; }
+      for (var x = 0; x < KB.length; x++) if (KB[x].id === hk) { respond(KB[x]); return; }
+    }
+    if (hk && words <= 3 && NEG.test(n)) {
+      if (hk === 'lead') lastAsk = turn;
+      say(pick(['Dạ vâng ạ, Anh/Chị cần thông tin gì cứ hỏi em nhé.', 'Dạ không sao ạ. Anh/Chị muốn tìm hiểu thêm phần nào ạ?']), ['Vị trí dự án', 'Loại căn hộ']); return;
+    }
+    /* 5. Tìm ý */
     var best = null, score = 0;
     KB.forEach(function (it) { var sc = 0; it.k.forEach(function (k) { if (has(n, k)) sc += k.length + 2; }); if (sc > score) { score = sc; best = it; } });
     if (!best || score < 3) {
@@ -1397,20 +1435,52 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
       say(pick(['Dạ em chưa rõ ý Anh/Chị lắm ạ. Anh/Chị đang muốn hỏi về vị trí, loại căn hay giá ạ?', 'Dạ Anh/Chị nói rõ hơn giúp em một chút được không ạ, ví dụ "cách biển bao xa" hay "có mấy loại căn"?']), ['Vị trí dự án', 'Loại căn hộ']);
       return;
     }
+    respond(best);
+  }
+
+  function respond(best) {
     miss = 0; addTopic(best.topic);
     if (best.refuse) refused = true;
     if (best.human) urgent('muốn nói chuyện với người thật');
-    var txt = variant(best);
+    var txt = variant(best), asked = false;
     if (best.human) { var nn2 = nightNote(); if (nn2) txt += '\nGiờ này ' + nn2 + ' ạ.'; }
     /* Xin số khéo: đúng chủ đề, cách 3 lượt, khách từ chối thì thôi */
-    if (best.ask && !phone && !refused && turn - lastAsk >= 3 && (best.strong || turn >= 2)) { lastAsk = turn; txt += '\n' + best.ask; }
+    if (best.ask && !phone && !refused && turn - lastAsk >= 3 && (best.strong || turn >= 2)) { lastAsk = turn; txt += '\n' + best.ask; asked = true; }
+    /* Chưa hỏi lại khách thì mở tiếp câu chuyện thứ hai */
+    else if (!/\?\s*$/.test(txt) && HOOK[best.id]) {
+      var hs = HOOK[best.id].filter(function (h) { return h[0] && (h[1] !== 'lead' || (!phone && !refused && turn - lastAsk >= 2)); });
+      if (hs.length) { var h = pick(hs); txt += '\n' + h[0]; lastHook = h[1] || null; if (h[1] === 'lead') lastAsk = turn; }
+    }
+    if (asked) lastHook = 'lead';
     say(txt, best.c);
   }
 
   /* ---------- Form trên trang: gửi 3 nơi, không tải lại trang, cảm ơn tại form ---------- */
   var LABEL = {nhu_cau: 'Loại căn', muc_dich: 'Mục đích', ngan_sach: 'Ngân sách', so_thich: 'Thích', loai_can: 'Loại căn', cau_hoi: 'Câu hỏi'};
+  function isLadi(fm) { return !!(fm.closest && fm.closest('.ladi-form')); }
+  function toast(t) {
+    var d = el('div'); d.textContent = t;
+    d.style.cssText = 'position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:99995;max-width:92vw;background:#0B7A43;color:#fff;font-weight:600;font-size:15px;line-height:1.45;padding:12px 18px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.25);text-align:center';
+    document.body.appendChild(d); setTimeout(function () { d.remove(); }, 6000);
+  }
+  /* Form LadiPage (trang kéo-thả): để LadiPage tự xử lý, chỉ gửi thêm 3 nơi, không chặn */
+  function grabLadi(fm) {
+    var tel = fm.querySelector('input[type=tel],input[name=phone]'); if (!tel) return;
+    var ph = normPhone(tel.value); if (!ph) return;
+    var nmEl = fm.querySelector('input[name=name]'), nmv = nmEl ? nmEl.value.trim().slice(0, 60) : '', parts = [];
+    fm.querySelectorAll('select,textarea').forEach(function (x) { var v = x.tagName === 'SELECT' ? (x.value && x.options[x.selectedIndex] ? x.options[x.selectedIndex].text : '') : x.value.trim(); if (v) parts.push((LABEL[x.name] || x.name || 'Ghi chú') + ': ' + v); });
+    var r = lead({name: nmv, phone: ph, interest: 'Form LadiPage' + (parts.length ? ' · ' + parts.join(' · ') : ''), yeu_cau: parts.join(' · '), hoi_thoai: convo.length ? transcript() : ''});
+    if (nmv && !name) name = nmv; phone = phone || ph;
+    if (r === 'ok') { var nn = nightNote(); toast('Cảm ơn ' + (nmv || 'Anh/Chị') + '! Anh Hiệp sẽ gửi tài liệu qua Zalo ' + ph + (nn ? ' – ' + nn + '.' : ' trong ít phút.')); }
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target, fm = t && t.closest && t.closest('.ladi-form'); if (!fm) return;
+    if (!t.closest('.ladi-button,button,[type=submit],[id^="BUTTON"]')) return;
+    setTimeout(function () { grabLadi(fm); }, 0);
+  }, true);
   document.addEventListener('submit', function (e) {
     var fm = e.target; if (!fm || !fm.querySelector || fm.classList.contains('hhc-i')) return;
+    if (isLadi(fm)) { grabLadi(fm.closest('.ladi-form')); return; }
     var tel = fm.querySelector('input[type=tel],[name=phone]'); if (!tel) return;
     e.preventDefault(); e.stopImmediatePropagation();
     var ph = normPhone(tel.value), nmEl = fm.querySelector('[name=name]');
