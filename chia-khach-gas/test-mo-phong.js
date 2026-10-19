@@ -54,6 +54,8 @@ adv(29);run(); ok(K('K1').nguoi_giu===first,'29 phút: chưa thu hồi');
 adv(2);run(); k=K('K1'); ok(k.nguoi_giu!==first&&k.trang_thai==='cho_nhan','31 phút không nhận: thu hồi, giao '+k.ten_sale);
 ok(edits.some(e=>String(e.chat_id)===first&&/đã được thu hồi/.test(e.text)&&!/0905/.test(e.text)),'tin cũ của sale trước bị sửa, ẩn số');
 ok(to(900).some(s=>/Thu hồi K1/.test(s.text)),'quản lý được báo thu hồi');
+const m2=lastTo(k.nguoi_giu).text; ok(!/An|lượt|thu hồi|Vào lúc/.test(m2)&&/Giao lúc/.test(m2),'sale nhận lượt sau không biết thu hồi từ ai (tin như khách mới)');
+ok(!edits.filter(e=>String(e.chat_id)===first).some(e=>/Bình|Cường/.test(e.text)),'sale bị thu hồi không biết khách chuyển cho ai');
 // sale 2 nhận -> thấy số; 2h không báo cáo -> thu hồi
 const second=k.nguoi_giu; click(second,'n:K1'); run(); k=K('K1');
 ok(k.trang_thai==='da_nhan'&&edits.some(e=>String(e.chat_id)===second&&/0905123456/.test(e.text)),'bấm nhận: thấy số đầy đủ + nút báo cáo');

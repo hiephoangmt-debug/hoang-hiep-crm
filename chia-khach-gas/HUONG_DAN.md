@@ -22,6 +22,7 @@ Chạy miễn phí trên Google Apps Script, không cần máy chủ. Dành cho 
 - Mỗi sale chỉ nhận tin riêng với bot, không có nhóm chung nào hiện số.
 - Chưa bấm Nhận thì chỉ thấy số đã che.
 - **Bị thu hồi thì tin cũ tự sửa, xoá số.** Sale đó không xem lại được.
+- **Sale không biết khách bị thu hồi từ ai, cũng không biết khách chuyển cho ai.** Tin giao lượt sau giống hệt khách mới (ghi "Giao lúc", không ghi người giữ trước). Chỉ quản lý thấy lịch sử chuyển.
 - Tin của bot bật chế độ chống chuyển tiếp và chống lưu.
   Telegram không chặn được chụp màn hình; bot chỉ ghi lại ai đã nhận và xem số.
 - Mọi thao tác (giao, nhận, báo cáo, thu hồi, duyệt sale) ghi vào tab **NhatKy**.

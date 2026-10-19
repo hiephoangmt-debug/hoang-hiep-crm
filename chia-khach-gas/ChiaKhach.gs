@@ -194,9 +194,10 @@ function themKhachThu() { var k = {id: 'T' + Date.now() % 100000, luc_vao: nowD(
 /* --- giao khách --- */
 function salesDangLam_() { return rows_('Sale', T_SALE).filter(function (s) { return s.trang_thai === 'lam'; }); }
 function dangGiu_(chat) { return rows_('Khach', T_KHACH).filter(function (k) { return String(k.nguoi_giu) === String(chat) && /cho_nhan|da_nhan|dang_cham/.test(k.trang_thai); }).length; }
+/* Tin cho sale: không ghi ai giữ trước, không ghi giờ khách vào → sale không biết khách bị thu hồi từ ai */
 function tinKhach_(k, day) {
   return '🔥 <b>KHÁCH ' + esc(k.id) + '</b>' + (k.ten ? ' – ' + esc(k.ten) : '') + '\n📞 ' + (day ? '<b>' + esc(k.sdt) + '</b> · <a href="https://zalo.me/' + esc(k.sdt) + '">Mở Zalo</a>' : esc(che(k.sdt)))
-    + (k.nhu_cau ? '\n• Quan tâm: ' + esc(k.nhu_cau) : '') + (k.nguon ? '\n• Nguồn: ' + esc(k.nguon) : '') + '\n• Vào lúc: ' + fmt(k.luc_vao);
+    + (k.nhu_cau ? '\n• Quan tâm: ' + esc(k.nhu_cau) : '') + (k.nguon ? '\n• Nguồn: ' + esc(k.nguon) : '') + '\n• Giao lúc: ' + fmt(k.luc_giao || k.luc_vao);
 }
 function nutBaoCao_(id) {
   return [[{text: '📞 ' + BC.goi, callback_data: 'b:' + id + ':goi'}, {text: '🔕 ' + BC.knm, callback_data: 'b:' + id + ':knm'}],
