@@ -81,6 +81,12 @@ NOW=Date.UTC(2026,9,27,16,0); crmRow('0966000222','Khuya'); run(); const mk=sent
 NOW=Date.UTC(2026,9,28,1,0); k=K('K3'); click(k.nguoi_giu,'n:K3'); run(); click(k.nguoi_giu,'b:K3:hen'); run(); advW(14*60*6); run(); ok(K('K3').trang_thai==='chuyen_doi'&&K('K3').nguoi_giu===k.nguoi_giu,'hẹn gặp = chuyển đổi: qua hạn 3 ngày vẫn không thu hồi (6 ngày làm việc)');
 click(k.nguoi_giu,'b:K3:cd'); run(); ok(K('K3').trang_thai==='chot'&&to(900).some(s=>/đã chốt khách K3/.test(s.text)),'chốt: quản lý được báo');
 
+// lọc dự án: chỉ Sun Saphia (cả tên miền viết "shaphia")
+{const b0=vm.runInContext("rows_('Khach',T_KHACH).length",ctx);
+ const r1=Array(46).fill('');r1[1]=new FD();r1[2]='Cora';r1[3]='0988777666';r1[5]='www.cora-tower.com';r1[9]=1;r1[39]='Website';r1[40]='https://www.cora-tower.com/';r1[41]='Cora Tower';kh.appendRow(r1);
+ const r2=Array(46).fill('');r2[1]=new FD();r2[2]='Shaphia';r2[3]='0988777555';r2[5]='www.sun-shaphiaresidence.com';r2[9]=1;r2[39]='Website';r2[40]='https://www.sun-shaphiaresidence.com/';r2[41]='';kh.appendRow(r2);
+ run(); const added=vm.runInContext("rows_('Khach',T_KHACH).slice("+b0+").map(function(k){return k.sdt})",ctx);
+ ok(added.length===1&&added[0]==='0988777555','chỉ chia khách Sun Saphia, bỏ qua dự án khác ('+added.join(',')+')');}
 // ===== 8 LUẬT MỚI =====
 const nhacTo=(chat,re)=>sent.some(s=>String(s.chat_id)===String(chat)&&re.test(s.text));
 NOW=Date.UTC(2026,10,2,2,0); // thứ Hai 9h
