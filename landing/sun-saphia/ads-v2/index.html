@@ -388,6 +388,8 @@ footer{background:#0B1E3F;color:#C9D6E3;padding:56px 0 90px;font-size:15px}
 .hero .sub{color:#E8F5F7}
 .hero .chip{color:#FFFFFF;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35)}
 .hero-visual img{box-shadow:0 30px 70px rgba(0,0,0,.4)}
+/* Chặn nhấn giữ / kéo để lưu ảnh */
+.hero-visual img,.beach-img img,.ov-img img,.loc-map img,.view4d img{pointer-events:none;-webkit-touch-callout:none;-webkit-user-drag:none}
 /* TOP BAR */
 .topbar{background:#FFFFFF;border-bottom:1px solid #EADBC8}
 .tb-in{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px}
@@ -466,7 +468,7 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
 <header class="hero">
   <div class="wrap hero-grid">
     <div class="hero-visual">
-      <img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/d878b1dfa7ea891aa2d00b54f3c8f28ee5c536ee/landing/sun-saphia/ads-v2/hero-v3.jpg" alt="Phối cảnh tòa Sun Saphia Residence bên biển Đà Nẵng" width="1220" height="804">
+      <img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/d8a97ae095f4a32c62b225c4dc0a4ec1f3d35e79/landing/sun-saphia/ads-v2/w-hero.jpg" alt="Phối cảnh tòa Sun Saphia Residence bên biển Đà Nẵng" width="1220" height="804">
     </div>
     <div class="hero-side">
       <p class="eyebrow">Đang nhận đăng ký thông tin · Đà Nẵng</p>
@@ -523,7 +525,7 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
 <!-- BEACH BAND -->
 <section class="beach">
   <div class="wrap">
-    <div class="beach-img"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/d878b1dfa7ea891aa2d00b54f3c8f28ee5c536ee/landing/sun-saphia/ads-v2/bien-cong-vien.jpg" alt="Phối cảnh bãi biển và công viên ven biển trước Sun Saphia Residence" width="1100" height="554">
+    <div class="beach-img"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/d8a97ae095f4a32c62b225c4dc0a4ec1f3d35e79/landing/sun-saphia/ads-v2/w-bien-cong-vien.jpg" alt="Phối cảnh bãi biển và công viên ven biển trước Sun Saphia Residence" width="1100" height="554">
       <div class="beach-cap"><p class="eyebrow" style="color:#FFC98B">Phối cảnh dự án</p><h2>Trước mặt là biển. Dưới chân là công viên.</h2><a class="btn" href="#dang-ky-cuoi">Nhận bộ phối cảnh đầy đủ</a></div>
     </div>
   </div>
@@ -552,7 +554,7 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
     <p class="eyebrow">Tổng quan</p>
     <h2>Sun Saphia Residence trong một bảng</h2>
     <div class="ov-grid">
-      <div class="ov-img"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/3cfe2881929efc9896b38f294233d04758563d14/landing/sun-saphia/ads-v2/thap.jpg" alt="Phối cảnh toà tháp Sun Saphia Residence 30 tầng bên trục biển" width="900" height="1226"><span class="ov-cap">Phối cảnh minh hoạ · 30 tầng · ~114 m</span></div>
+      <div class="ov-img"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/d8a97ae095f4a32c62b225c4dc0a4ec1f3d35e79/landing/sun-saphia/ads-v2/w-thap.jpg" alt="Phối cảnh toà tháp Sun Saphia Residence 30 tầng bên trục biển" width="900" height="1226"><span class="ov-cap">Phối cảnh minh hoạ · 30 tầng · ~114 m</span></div>
       <div class="ov-table">
         <div class="ov-row"><span>Tên dự án</span><b>Sun Saphia Residence</b></div>
         <div class="ov-row"><span>Chủ đầu tư</span><b>Sun Property (thuộc Sun Group), theo tài liệu giới thiệu dự án</b></div>
@@ -586,8 +588,8 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
     <div class="loc-grid">
       <div class="loc-map">
         <picture>
-          <source media="(max-width: 860px)" srcset="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/3cfe2881929efc9896b38f294233d04758563d14/landing/sun-saphia/ads-v2/vi-tri-mob.jpg">
-          <img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/3cfe2881929efc9896b38f294233d04758563d14/landing/sun-saphia/ads-v2/vi-tri-desk.jpg" alt="Bản đồ vị trí Sun Saphia tại giao lộ Võ Nguyên Giáp – Trường Sa, sát bãi biển Sơn Thủy, cùng trục biển với Mỹ Khê, Ngũ Hành Sơn và Hội An" width="2100" height="950">
+          <source media="(max-width: 860px)" srcset="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/d8a97ae095f4a32c62b225c4dc0a4ec1f3d35e79/landing/sun-saphia/ads-v2/w-vi-tri-mob.jpg">
+          <img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/d8a97ae095f4a32c62b225c4dc0a4ec1f3d35e79/landing/sun-saphia/ads-v2/w-vi-tri-desk.jpg" alt="Bản đồ vị trí Sun Saphia tại giao lộ Võ Nguyên Giáp – Trường Sa, sát bãi biển Sơn Thủy, cùng trục biển với Mỹ Khê, Ngũ Hành Sơn và Hội An" width="2100" height="950">
         </picture>
       </div>
       <div class="loc-list">
@@ -641,7 +643,7 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
     <p class="eyebrow">Mặt bằng</p>
     <h2>Hình dung căn hộ của bạn</h2>
     <p class="lead">Video 4D toà tháp và căn hộ gửi riêng qua Zalo. Bên dưới là bố trí minh hoạ theo từng loại căn.</p>
-    <div class="view4d"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/3cfe2881929efc9896b38f294233d04758563d14/landing/sun-saphia/ads-v2/bien.jpg" alt="Phối cảnh minh hoạ Sun Saphia Residence nhìn ra biển Mỹ Khê" width="1600" height="804" loading="lazy"><a class="btn v4btn" href="https://zalo.me/0904567009">Nhận video 4D qua Zalo</a></div>
+    <div class="view4d"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/d8a97ae095f4a32c62b225c4dc0a4ec1f3d35e79/landing/sun-saphia/ads-v2/w-bien.jpg" alt="Phối cảnh minh hoạ Sun Saphia Residence nhìn ra biển Mỹ Khê" width="1600" height="804" loading="lazy"><a class="btn v4btn" href="https://zalo.me/0904567009">Nhận video 4D qua Zalo</a></div>
     <p class="v4note">Mô hình minh hoạ vị trí, hướng nắng và tầm nhìn; không phải bản vẽ thiết kế của chủ đầu tư.</p>
     <div class="tabs">
       <div role="tablist" class="tablist">
