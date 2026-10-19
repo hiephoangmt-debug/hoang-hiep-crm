@@ -1,6 +1,6 @@
 /* Sun Saphia Residence – Trợ lý trả lời nhanh của anh Hoàng Hiệp.
  * Một tệp dùng chung cho 3 trang LadiPage: chat tự động + gửi khách về Telegram, CRM Hoàng Hiệp, email.
- * Gắn: dán nguyên tệp vào <script>…</script> ngay trước </body>.
+ * Gắn: dán nguyên tệp vào một thẻ script ngay trước thẻ đóng body.
  * Chỉ dùng thông tin dự án đã được duyệt bên dưới (KB); không nêu giá, không hứa lợi nhuận.
  */
 (function () {
@@ -118,7 +118,7 @@
       c: ['Cho thuê', 'Studio'], ask: 'Anh/Chị để lại Zalo, em gửi số liệu thị trường và bảng tính tham khảo ạ.', topic: 'Đầu tư'},
     {id: 'tienich', k: ['tien ich', 'ho boi', 'be boi', 'nha tre', 'shop', 'khoi de', 'gym', 'sieu thi', 'truong hoc'],
       a: ['Dạ trong toà có hồ bơi tầng 3, nhà trẻ và shop khối đế ạ; xuống tầng là có, rất tiện cho gia đình và khách thuê.'], c: ['Loại căn hộ', 'Vị trí dự án'], ask: 'Anh/Chị để lại Zalo, em gửi phối cảnh tiện ích khi có ạ.', topic: 'Tiện ích'},
-    {id: 'bangiao', k: ['ban giao', 'khi nao xong', 'bao gio xong', 'tien do', 'hoan thanh', 'xay xong', 'khoi cong', 'nam nao', 'bao gio co nha'],
+    {id: 'bangiao', k: ['ban giao', 'khi nao ban giao', 'bao gio ban giao', 'khi nao xong', 'bao gio xong', 'tien do', 'hoan thanh', 'xay xong', 'khoi cong', 'nam nao', 'bao gio co nha'],
       a: ['Dạ bàn giao dự kiến tháng 11/2028 ạ; mốc chính xác ghi trong hợp đồng mua bán khi ký.'], c: ['Pháp lý', 'Loại căn hộ'], topic: 'Bàn giao'},
     {id: 'cdt', k: ['chu dau tu', 'sun group', 'sun property', 'ai xay', 'cong ty nao', 'thuong hieu', 'cua ai'],
       a: ['Dạ theo tài liệu giới thiệu dự án, Sun Saphia do Sun Property (thuộc Sun Group) phát triển ạ.'], c: ['Pháp lý', 'Quy mô dự án'], topic: 'Chủ đầu tư'},
@@ -131,7 +131,7 @@
     {id: 'coc', k: ['dat coc', 'coc', 'giu cho', 'booking', 'dat cho', 'giu can', 'chuyen khoan', 'tra truoc'],
       a: ['Dạ đăng ký trên trang không thu bất kỳ khoản tiền nào ạ. Chính sách booking, đặt cọc theo công bố của chủ đầu tư, thực hiện qua đại lý phân phối khi mở bán.'],
       c: ['Giá bán', 'Pháp lý'], ask: 'Anh/Chị để lại Zalo, có chính sách mở bán em báo ngay ạ.', strong: 1, topic: 'Booking / đặt cọc'},
-    {id: 'moban', k: ['mo ban', 'khi nao ban', 'dang ban', 'ban chua', 'da ban', 'ra hang', 'bao gio ban', 'con can khong', 'het can chua', 'con khong'],
+    {id: 'moban', k: ['mo ban', 'khi nao mo ban', 'dang ban', 'ban chua', 'da ban', 'ra hang', 'bao gio ban', 'con can khong', 'het can chua', 'con khong'],
       a: ['Dạ chủ đầu tư chưa công bố chính sách bán hàng ạ. Có thông tin chính thức là em báo Anh/Chị ngay để kịp chọn căn.'],
       c: ['Loại căn hộ', 'Giá bán'], ask: 'Anh/Chị để lại Zalo, có thông tin mở bán em báo đầu tiên ạ.', strong: 1, topic: 'Thời điểm mở bán'},
     {id: 'vay', k: ['vay ngan hang', 'vay von', 'cho vay', 'vay duoc', 'vay bao nhieu', 'vay tien', 'duoc vay', 'ngan hang', 'lai suat', 'tra gop', 'thanh toan', 'chiet khau', 'uu dai', 'khuyen mai', 'tien do thanh toan', 'ho tro'],
@@ -194,15 +194,13 @@
     list.slice(0, 2).forEach(function (c) { var b = el('button'); b.type = 'button'; b.textContent = c; b.onclick = function () { w.remove(); ask(c); }; w.appendChild(b); });
     log.appendChild(w); scrollEnd();
   }
-  var busy = 0;
-  /* Hiện "Đang trả lời…" ngắn rồi mới hiện tin, các tin nối tiếp nhau không chồng lên */
-  function say(txt, list) {
-    convo.push('Trợ lý: ' + txt);
-    var now = Date.now(), start = Math.max(now, busy), d = Math.min(1100, 450 + txt.length * 3); busy = start + d + 120;
-    setTimeout(function () {
-      var t = el('div', 'hhc-t'); t.textContent = 'Đang trả lời…'; log.appendChild(t); scrollEnd();
-      setTimeout(function () { t.remove(); bubble(txt, 'bot'); chips(list); }, d);
-    }, start - now);
+  var outq = [], talking = false;
+  /* Hiện "Đang trả lời…" ngắn rồi mới hiện tin; các tin xếp hàng, không chồng lên nhau */
+  function say(txt, list) { convo.push('Trợ lý: ' + txt); outq.push([txt, list]); if (!talking) next(); }
+  function next() {
+    var it = outq.shift(); if (!it) { talking = false; return; } talking = true;
+    var t = el('div', 'hhc-t'); t.textContent = 'Đang trả lời…'; log.appendChild(t); scrollEnd();
+    setTimeout(function () { t.remove(); bubble(it[0], 'bot'); chips(it[1]); setTimeout(next, 120); }, Math.min(1100, 450 + it[0].length * 3));
   }
 
   function build() {
@@ -257,8 +255,13 @@
   }
   /* Tìm số điện thoại trong câu: {ok: số} | {bad: true} | null */
   function findPhone(t) {
-    var groups = String(t).match(/\+?\d[\d\s.\-]{6,16}\d/g); if (!groups) return null;
-    for (var i = 0; i < groups.length; i++) { var g = groups[i], dg = g.replace(/\D/g, ''); if (dg.length < 8) continue; var p = normPhone(g); if (p) return {ok: p}; if (dg.length >= 8 && dg.length <= 13) return {bad: dg}; }
+    var groups = String(t).match(/\+?\d[\d\s.\-]{4,16}\d/g); if (!groups) return null;
+    var phoneWord = /(số|so|sđt|sdt|zalo|điện thoại|dien thoai|đt|liên hệ|lien he)\s*[:\-]?\s*(của )?(tôi|toi|em|mình|minh|anh|chị|chi)?\s*(là|la)?\s*[:\-]?\s*\+?\d/i.test(t);
+    for (var i = 0; i < groups.length; i++) {
+      var g = groups[i], dg = g.replace(/\D/g, ''), p = normPhone(g);
+      if (p) return {ok: p};
+      if ((dg.length >= 8 && dg.length <= 13) || (dg.length >= 6 && (dg.charAt(0) === '0' || phoneWord))) return {bad: dg};
+    }
     return null;
   }
   function sendChatLead() {
@@ -316,7 +319,11 @@
     var tel = fm.querySelector('input[type=tel],[name=phone]'); if (!tel) return;
     e.preventDefault(); e.stopImmediatePropagation();
     var ph = normPhone(tel.value), nmEl = fm.querySelector('[name=name]');
-    if (!ph) { tel.focus(); if (tel.setCustomValidity) { tel.setCustomValidity('Số điện thoại cần 10 số, ví dụ 0904 567 009'); tel.reportValidity && tel.reportValidity(); setTimeout(function () { tel.setCustomValidity(''); }, 3000); } return; }
+    if (!ph) {
+      tel.focus();
+      if (tel.setCustomValidity) { tel.setCustomValidity('Số điện thoại cần 10 số, ví dụ 0904 567 009'); if (tel.reportValidity) tel.reportValidity(); tel.addEventListener('input', function () { tel.setCustomValidity(''); }, {once: true}); }
+      return;
+    }
     var parts = [];
     fm.querySelectorAll('select,textarea').forEach(function (x) { var v = x.tagName === 'SELECT' ? (x.value && x.options[x.selectedIndex] ? x.options[x.selectedIndex].text : '') : x.value.trim(); if (v) parts.push((LABEL[x.name] || x.name || 'Ghi chú') + ': ' + v); });
     var btn = fm.querySelector('[type=submit],button'), nmv = nmEl ? nmEl.value.trim().slice(0, 60) : '';

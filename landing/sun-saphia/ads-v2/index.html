@@ -1028,15 +1028,6 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
 </footer>
 
 
-<!-- CHATBOT -->
-<button class="cb-btn" id="cb-open" type="button" aria-label="Mở khung tư vấn"><span class="cb-av">SS</span>Tư vấn dự án</button>
-<div class="cb-nudge" id="cb-nudge" role="button" tabindex="0"><button class="nx" type="button" aria-label="Ẩn">×</button><span id="cb-nudge-t"></span></div>
-<div class="cb-box" id="cb-box" role="dialog" aria-label="Trợ lý anh Hoàng Hiệp">
-  <div class="cb-head"><span class="cb-av">HH</span><div><b>Trợ lý anh Hoàng Hiệp</b><small>Tư vấn Sun Saphia Residence · Đang trực tuyến</small></div><button class="cb-x" id="cb-close" type="button" aria-label="Đóng">×</button></div>
-  <div class="cb-log" id="cb-log"></div>
-  <div class="cb-in"><input id="cb-text" type="text" placeholder="Nhập câu hỏi hoặc số điện thoại…" aria-label="Nhập câu hỏi"><button id="cb-send" type="button">Gửi</button></div>
-</div>
-
 <!-- THANH ĐÁY ĐIỆN THOẠI -->
 <nav class="mbar" aria-label="Liên hệ nhanh">
   <a class="mb-zalo" href="https://zalo.me/0904567009">Zalo</a>
@@ -1089,147 +1080,6 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
   ['r-gia','r-cs','r-o'].forEach(function(id){var e=document.getElementById(id);if(e)e.addEventListener('input',calc);});
   calc();
 
-  /* Chatbot */
-  (function(){
-    var box=document.getElementById('cb-box'),log=document.getElementById('cb-log'),inp=document.getElementById('cb-text'),btn=document.getElementById('cb-open');
-    var ndg=document.getElementById('cb-nudge'),ndgT=document.getElementById('cb-nudge-t');
-    if(!box)return;
-    var ZALO='https://zalo.me/0904567009',miss=0,lastTopic='',started=false,opened=false,asked=0,leadDone=false,lastLead=-9,turn=0,seen={};
-    function pick(a){return a[Math.floor(Math.random()*a.length)];}
-    function img(sel){var e=document.querySelector(sel);return e?(e.currentSrc||e.src):null;}
-    var IMG={map:'.loc-map img',bien:'.beach-img img',thap:'.ov-img img',hero:'.hero-visual img'};
-    var KB=[
-      {id:'bien',k:['xa bien','gan bien','cach bien','ra bien','toi bien','den bien','bai bien','bai tam','tam bien','di bo','bao nhieu met','may met','may phut','sat bien','mat bien','view bien','nhin bien','thay bien'],w:['bien','met'],a:['Dạ, dự án nằm ngay mặt tiền trục đường biển Võ Nguyên Giáp – Trường Sa. Từ toà nhà chỉ cần băng qua đường là tới công viên ven biển và bãi tắm Sơn Thủy, đi bộ vài phút ạ.\nCác căn hướng Đông nhìn thẳng ra biển, tầng càng cao tầm nhìn càng thoáng.'],img:'map',c:['Căn hướng biển','Bãi biển có tắm được không','Vị trí dự án']},
-      {id:'tam',k:['tam duoc','tam bien duoc','bien dep','bien sach','song lon','an toan khong','cuu ho'],a:['Dạ, bãi Sơn Thủy thuộc dải biển Mỹ Khê, bờ cát thoải, nước trong, là bãi tắm công cộng có lực lượng cứu hộ của thành phố. Mùa tắm biển đẹp nhất từ khoảng tháng 3 đến tháng 8 ạ.'],img:'bien',c:['Mùa mưa bão thế nào','Hiệu quả cho thuê']},
-      {id:'gia',k:['gia','gia studio','gia 1br','gia 2br','gia can','studio bao nhieu','can bao nhieu','bao nhieu tien','bang gia','chi phi','gia ban','gia ca','muc gia','tong gia','tren m2','1 m2','mot met'],w:['tien','ty','tr','re','mac','dat'],a:['Dạ, bảng giá từng căn chủ đầu tư chưa công bố; giá sẽ tuỳ tầng, hướng và tầm nhìn. Để chọn nhanh, Anh/Chị có thể xác định trước dòng căn:\n• Studio 30–31 m² (khoảng 2/3 dự án): vốn vào nhẹ, dễ cho thuê theo đêm hoặc theo tháng.\n• 1BR+ 50–51 m² (khoảng 1/7): thêm góc đa năng, hợp ở dài hạn.\n• 2BR 60–70 m² (khoảng 1/5): cho gia đình, ngôi nhà thứ hai bên biển.\nAnh/Chị dự kiến ngân sách khoảng bao nhiêu để em lọc căn sát hơn ạ?'],c:['Ngân sách dưới 3 tỷ','Ngân sách 3–4 tỷ','Ngân sách trên 4 tỷ','Chính sách thanh toán'],lead:1},
-      {id:'budget',k:['duoi 3','3 ty','2 ty','2 ty ruoi','von it','von nho','it tien','tien it','ngan sach thap'],a:['Dạ, với ngân sách dưới 3 tỷ, dòng căn nên xem trước là Studio 30–31 m². Đây là dòng chiếm khoảng 2/3 dự án nên nhiều lựa chọn tầng, hướng:\n• Ưu tiên dòng tiền: Studio tầng trung, cho thuê theo tháng. Tham khảo: studio ~30 m² gần Mỹ Khê đang rao thuê 8–9,5 triệu/tháng (muaban.net, 2026).\n• Ưu tiên giá trị lâu dài: Studio tầng cao, hướng Đông nhìn thẳng ra biển.\nKhi có bảng giá, em lọc đúng các căn nằm trong ngân sách của Anh/Chị; có thể kết hợp vay ngân hàng để giảm vốn ban đầu ạ.'],c:['Hỗ trợ vay ngân hàng','Xem bảng tính dòng tiền','Nhận danh sách Studio']},
-      {id:'budget2',k:['3 4 ty','3 den 4','tam 3 ty ruoi','3 ty ruoi','4 ty'],a:['Dạ, với khoảng 3–4 tỷ, Anh/Chị có 2 hướng để xem khi có bảng giá:\n• Studio tầng cao, hướng biển trực diện: nhóm căn được khách thuê ưa chuộng.\n• 1BR+ 50–51 m²: có phòng ngủ riêng và góc làm việc, số lượng ít (khoảng 1/7 dự án).\nAnh/Chị ưu tiên cho thuê hay để gia đình sử dụng ạ?'],c:['Mua để đầu tư','Mua để nghỉ dưỡng']},
-      {id:'budget3',k:['tren 4','5 ty','6 ty','tien nhieu','du tien','ngan sach lon'],a:['Dạ, với ngân sách trên 4 tỷ, Anh/Chị có thể cân nhắc:\n• 2BR 60–70 m²: đủ chỗ cho cả nhà; thời gian không ở có thể cho khách gia đình, nhóm bạn thuê.\n• 2 căn Studio: chia nhỏ vốn, có hai nguồn cho thuê.\nToà có hồ bơi tầng 3 và nhà trẻ ngay trong toà, rất tiện cho gia đình có con nhỏ ạ.'],c:['Mua để nghỉ dưỡng','Mua để đầu tư','Nhận mặt bằng 2BR']},
-      {id:'booking',k:['booking','giu cho','dat cho','coc','dat coc','50 trieu','giu can','dang ky'],a:['Dạ, trang này chỉ nhận đăng ký nhận thông tin, không thu bất kỳ khoản tiền nào. Chính sách mua và thanh toán theo công bố của chủ đầu tư, thực hiện qua đại lý phân phối khi dự án mở bán. Anh/Chị để lại số điện thoại, anh Hoàng Hiệp gửi thông tin ngay khi có ạ.'],c:['Căn hướng biển','Chính sách thanh toán','Đăng ký nhận thông tin'],lead:1},
-      {id:'vitri',k:['vi tri','o dau','dia chi','duong nao','ban do','map','nam o','cho nao','khu nao','phuong nao','quan nao'],a:['Dạ, Sun Saphia nằm ngay giao lộ Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, mặt tiền trục biển; băng qua đường là bãi tắm Sơn Thủy – Mỹ Khê.\n• Cùng trục biển với Furama, Crowne Plaza, Marriott, KOI Resort, Meliá.\n• Phía Bắc: phố Tây An Thượng, Mỹ Khê, bán đảo Sơn Trà.\n• Phía Nam: Ngũ Hành Sơn, đường về phố cổ Hội An.\n• Sân bay quốc tế nằm ngay trong thành phố.\nAnh/Chị muốn xem đường đi từ sân bay hay khoảng cách tới khu pháo hoa ạ?'],img:'map',c:['Cách biển bao xa','Khoảng cách tới sân bay','Vị trí bắn pháo hoa'],go:'.loc'},
-      {id:'sanbay',k:['san bay','khoang cach','di chuyen','bao lau','trung tam','cau rong','hai chau','ve trung tam'],a:['Dạ, sân bay quốc tế Đà Nẵng nằm ngay trong thành phố; từ sân bay về dự án đi qua cầu Tiên Sơn hoặc cầu Rồng. Về trung tâm Hải Châu và cầu Rồng cũng rất thuận tiện.\nThời gian di chuyển tuỳ khung giờ, em có video lộ trình thực tế nếu Anh/Chị cần ạ.'],img:'map',c:['Đi Hội An bao xa','Nhận video vị trí']},
-      {id:'hoian',k:['hoi an','ngu hanh son','non nuoc','ba na','son tra','di choi','dia diem'],a:['Dạ, từ dự án đi theo trục biển Trường Sa – Lạc Long Quân là về phố cổ Hội An; Ngũ Hành Sơn và làng đá Non Nước nằm ngay phía Nam. Phía Bắc là bán đảo Sơn Trà, còn Bà Nà Hills của Sun Group đi về phía Tây thành phố ạ.'],img:'map',c:['Vị trí bắn pháo hoa','Tiện ích dự án']},
-      {id:'phaohoa',k:['phao hoa','diff','le hoi','su kien','ironman'],a:['Dạ, Lễ hội pháo hoa quốc tế Đà Nẵng (DIFF) được tổ chức trên sông Hàn, khu vực bờ Tây gần đường Đỗ Pháp Thuận – Phan Đăng Lưu.\nMùa lễ hội, các khách sạn ven biển thường đạt công suất 90–95%, là thời điểm cho thuê thuận lợi ạ.'],img:'map',c:['Giá thuê khu vực','Hiệu quả cho thuê']},
-      {id:'phaply',k:['phap ly','so hong','so do','co so','giay to','giay chung nhan','thoi han','lau dai','50 nam','vinh vien','so huu'],a:['Dạ, pháp lý là phần em khuyên Anh/Chị xem kỹ nhất. Chủ đầu tư chưa công bố đầy đủ hồ sơ; khi có, Anh/Chị nên kiểm tra 3 điểm:\n1. Loại đất và thời hạn sử dụng (lâu dài hay có thời hạn).\n2. Loại giấy chứng nhận được cấp cho từng căn.\n3. Dự án đã đủ điều kiện bán theo Luật Kinh doanh bất động sản chưa (giấy phép xây dựng, bảo lãnh ngân hàng).\nEm sẽ gửi văn bản ngay khi có để Anh/Chị đọc trước khi quyết định ạ.'],c:['Thời gian bàn giao','Nhận hồ sơ pháp lý'],lead:1},
-      {id:'bangiao',k:['ban giao','khi nao xong','tien do','xay xong','bao gio xong','hoan thanh','khoi cong','dang xay'],a:['Dạ, thời gian bàn giao dự kiến là tháng 11/2028 theo thông tin mở bán; mốc chính thức được ghi trong hợp đồng mua bán. Trong thời gian xây dựng, Anh/Chị thanh toán theo tiến độ ạ.'],img:'thap',c:['Chính sách thanh toán','Tiêu chuẩn bàn giao']},
-      {id:'tieuchuan',k:['noi that','tieu chuan','ban giao the nao','full noi that','hoan thien co ban','thiet bi','thang may','ham xe','dau xe','cho do xe','gui xe','oto'],a:['Dạ, toà nhà có 30 tầng nổi và 2 tầng hầm để xe. Tiêu chuẩn bàn giao nội thất, thiết bị từng loại căn theo danh mục của chủ đầu tư trong hợp đồng; em sẽ gửi Anh/Chị bảng tiêu chuẩn bàn giao chính thức ạ.'],img:'thap',c:['Thời gian bàn giao','Các loại căn hộ']},
-      {id:'vay',k:['vay','ngan hang','lai suat','tra gop','thanh toan','chiet khau','uu dai','khuyen mai','tra truoc','dong tien truoc','bao nhieu phan tram','tien do thanh toan'],a:['Dạ, thông thường có ba phương án thanh toán để Anh/Chị lựa chọn:\n• Thanh toán theo tiến độ xây dựng: chia nhỏ theo từng đợt.\n• Thanh toán sớm: thường có chiết khấu, theo chính sách chủ đầu tư.\n• Kết hợp vay ngân hàng: giảm số tiền bỏ ra ban đầu, có thể được hỗ trợ lãi suất trong thời gian đầu.\nTỷ lệ cụ thể áp dụng theo chính sách từng đợt. Anh/Chị dự kiến chuẩn bị trước khoảng bao nhiêu để em tính thử ạ?'],c:['Lập lịch thanh toán','Ngân sách dưới 3 tỷ'],lead:1},
-      {id:'chothue',k:['cho thue','dong tien','loi nhuan','loi suat','thu nhap','kinh doanh','airbnb','co loi','sinh loi','gia thue','thue duoc','thue bao nhieu','cong suat'],a:['Dạ, em chia sẻ số liệu thị trường để Anh/Chị tự đánh giá:\n• Studio ~30 m² gần Mỹ Khê đang rao thuê dài hạn 8–9,5 triệu/tháng (muaban.net, 2026).\n• Giá thuê căn hộ Đà Nẵng năm 2026 tăng khoảng 10–15% (Nhà Đầu tư, CafeBiz).\n• Khách quốc tế 9 tháng 2026 đạt 7,73 triệu lượt, tăng 28,7%.\nCó 2 cách khai thác:\n1. Thuê dài hạn: dòng tiền đều, nhẹ đầu.\n2. Thuê theo đêm qua đơn vị quản lý: doanh thu cao hơn vào mùa cao điểm (tháng 3–8, mùa pháo hoa DIFF).\nVí dụ minh hoạ trên trang: 1,2 triệu/đêm, công suất 55%, tự ở 20 đêm → doanh thu khoảng 228 triệu/năm, chưa trừ phí và thuế. Số liệu để tham khảo, không phải cam kết lợi nhuận ạ.'],c:['Xem bảng tính dòng tiền','Chưa có kinh nghiệm cho thuê','Mùa mưa bão thế nào'],go:'#danh-gia'},
-      {id:'tanggia',k:['tang gia','tiem nang','sinh loi','luot song','ban lai','chuyen nhuong','thanh khoan','co len gia','dau tu co lo'],a:['Dạ, em không hứa trước việc tăng giá, nhưng có vài yếu tố quanh dự án Anh/Chị nên biết:\n• Trục biển Võ Nguyên Giáp – Trường Sa – Lạc Long Quân vào danh sách ưu tiên mở rộng, vốn dự kiến ~2.633 tỷ đồng.\n• Đường sắt đô thị sân bay – Hội An (30,2 km, 14 ga), dự kiến khởi công 2/2027.\n• Phố Tây An Thượng mở rộng giai đoạn 2 (~104 tỷ đồng).\n• Quỹ đất mặt biển Mỹ Khê ngày càng hiếm.\nMốc thời gian theo báo chí, có thể thay đổi; Anh/Chị nên cân nhắc theo khả năng tài chính của mình ạ.'],c:['Hiệu quả cho thuê','Giá bán']},
-      {id:'vanhanh',k:['quan ly cho thue','ai quan ly','don vi quan ly','cong ty quan ly','chua tung','van hanh','quan ly','ai lo','de cho thue','kho cho thue','ban ron','kinh nghiem','thuan loi','o xa','khong o da nang'],a:['Dạ, Anh/Chị không cần tự vận hành. Có 3 cách phổ biến:\n1. Cho thuê dài hạn 6–12 tháng qua môi giới: mỗi tháng nhận tiền, nhẹ đầu nhất.\n2. Giao đơn vị quản lý: họ đăng phòng, đón khách, dọn dẹp, chia doanh thu; Anh/Chị chỉ xem báo cáo.\n3. Vừa ở vừa cho thuê: giữ vài tuần hè cho gia đình, thời gian còn lại cho thuê.\nMùa mưa (tháng 9–12) nên chuyển sang thuê theo tháng để dòng tiền ổn định ạ.'],c:['Giá thuê khu vực','Phí quản lý']},
-      {id:'phi',k:['phi quan ly','phi dich vu','phi bao tri','phi hang thang','chi phi hang thang','thue'],a:['Dạ, phí quản lý vận hành hằng tháng và phí bảo trì do chủ đầu tư và ban quản lý toà nhà công bố theo quy định. Thuế cho thuê áp dụng theo quy định hiện hành; em sẽ gửi bảng tính đã gồm thuế theo căn Anh/Chị chọn. Em sẽ gửi Anh/Chị mức phí chính thức khi có ạ.'],c:['Hiệu quả cho thuê','Chính sách thanh toán']},
-      {id:'mua',k:['mua mua','mua bao','bao','ngap','gio bien','nhiem man','mua mua bao','thoi tiet'],a:['Dạ, Đà Nẵng có mùa khô khoảng tháng 2–8 (mùa du lịch biển) và mùa mưa tháng 9–12. Trục Võ Nguyên Giáp – Trường Sa là trục đường lớn của thành phố. Kinh nghiệm của nhiều chủ nhà:\n• Mùa cao điểm: cho thuê theo đêm.\n• Mùa mưa: chuyển sang thuê theo tháng cho chuyên gia, khách ở dài để giữ dòng tiền.\nCác sự kiện như pháo hoa DIFF, Ironman cũng kéo khách đến quanh năm ạ.'],c:['Hiệu quả cho thuê','Tiêu chuẩn bàn giao']},
-      {id:'tienich',k:['tien ich','ho boi','be boi','nha tre','shop','gym','khoi de','resort','sieu thi','cho','truong hoc','benh vien','an uong','nha hang','pho tay','an thuong'],a:['Dạ, nội khu dự án có hồ bơi tầng 3, nhà trẻ và khu thương mại khối đế.\nXung quanh có bãi biển Sơn Thủy, công viên ven biển, phố An Thượng với nhiều nhà hàng, cùng các khu nghỉ dưỡng Furama, Crowne Plaza, Hyatt Regency. Chợ, siêu thị, trường học và bệnh viện trong khu vực Ngũ Hành Sơn đều thuận tiện di chuyển ạ.'],img:'bien',c:['Các loại căn hộ','Vị trí dự án']},
-      {id:'loaican',k:['loai can','studio','1br','2br','1 phong','2 phong','phong ngu','dien tich','m2','can nao','mat bang','4d','can ho'],a:['Dạ, dự án có 3 dòng căn:\n• Studio 30–31 m² (khoảng 2/3 dự án): ngủ, tiếp khách, làm việc trong một không gian; hợp cho thuê theo đêm.\n• 1BR+ 50–51 m² (khoảng 1/7): phòng ngủ riêng + góc đa năng; hợp chuyên gia, cặp đôi ở dài hạn.\n• 2BR 60–70 m² (khoảng 1/5): hai phòng ngủ cho gia đình, nghỉ dưỡng dài ngày.\n1BR+ và 2BR số lượng ít nên thường được chọn sớm. Anh/Chị mua để ở, nghỉ dưỡng hay đầu tư ạ?'],c:['Mua để đầu tư','Mua để nghỉ dưỡng','Nhận mặt bằng chi tiết'],go:'.plan'},
-      {id:'dautu',k:['dau tu','de dau tu','kiem loi','an chenh'],a:['Dạ, nếu mua để đầu tư, em gợi ý 2 phương án:\n• Studio tầng trung: vốn vừa phải, cho thuê theo tháng; hợp chuyên gia và khách châu Âu ở dài (miễn visa 45 ngày cho 12 nước).\n• Studio tầng cao hướng biển: cho thuê theo đêm tốt hơn vào mùa cao điểm.\nAnh/Chị có thể kéo thử bảng tính dòng tiền ngay trên trang để thấy con số theo giá thuê và công suất mình tự chọn ạ.'],c:['Xem bảng tính dòng tiền','Hỗ trợ vay ngân hàng']},
-      {id:'nghiduong',k:['nghi duong','gia dinh','ca nha','de o','o lau dai','ve huu','cho con','bo me'],a:['Dạ, với nhu cầu nghỉ dưỡng cho gia đình, căn 2BR là lựa chọn phù hợp: đủ không gian cho cả nhà, thời gian không sử dụng có thể cho thuê. Dự án có nhà trẻ và hồ bơi trong toà, thuận tiện cho gia đình có con nhỏ và người lớn tuổi ạ.'],c:['Nhận mặt bằng 2BR','Tiện ích dự án']},
-      {id:'view',k:['huong','tang cao','truc dien','binh minh','huong dong','tang may','tang dep','con can','con khong','het chua'],a:['Dạ, các căn hướng Đông nhìn thẳng ra biển và tầng cao là nhóm được quan tâm nhiều nhất. Khi chọn căn, Anh/Chị có thể cân nhắc:\n• Tầng cao: tầm nhìn biển rộng, yên tĩnh.\n• Tầng trung: giá mềm hơn, vẫn thấy biển.\nEm có thể gửi danh sách căn hướng biển khi chủ đầu tư công bố để Anh/Chị xem ạ.'],img:'bien',c:['Đăng ký nhận thông tin','Giá bán']},
-      {id:'cdt',k:['chu dau tu','sun group','ai xay','uy tin','thuong hieu','sun property','bao nhieu tang','cao bao nhieu','bao nhieu can','quy mo'],a:['Dạ, theo tài liệu giới thiệu dự án, Sun Saphia do Sun Property (thuộc Sun Group) phát triển. Sun Group là đơn vị đứng sau Bà Nà Hills, InterContinental Sun Peninsula và hệ thống Sun World; năm 2026, hệ sinh thái Sun Group nhận 5 trong 13 giải World Travel Awards của Đà Nẵng.\nQuy mô: toà tháp 30 tầng nổi, 2 tầng hầm, cao ~114 m, 782 căn (công bố), trên khu đất 3.720,1 m² ạ.'],img:'thap',c:['Thời gian bàn giao','Thông tin pháp lý']},
-      {id:'nuocngoai',k:['nuoc ngoai','viet kieu','foreigner','nguoi han','nguoi nhat'],a:['Dạ, quyền sở hữu của người nước ngoài và Việt kiều phụ thuộc vào loại hình sản phẩm và giấy chứng nhận. Em xin gửi Anh/Chị văn bản chính thức để kiểm tra đúng trường hợp của mình ạ.'],c:['Thông tin pháp lý']},
-      {id:'xem',k:['xem nha','tham quan','nha mau','gap','hen','xem thuc te','xem du an','qua xem','ra xem'],a:['Dạ, khi Anh/Chị ra Đà Nẵng, anh Hoàng Hiệp sẽ đón và đưa Anh/Chị đi xem thực tế vị trí dự án. Nếu ở xa, có thể gọi video giới thiệu trực tiếp. Anh/Chị dự kiến đi vào thời gian nào ạ?'],c:['Đặt lịch tham quan'],lead:1},
-      {id:'sosanh',k:['so sanh','du an khac','symphony','fours','sun cosmo','sun ponte','nen chon','hon du an'],a:['Dạ, mỗi dự án có thế mạnh riêng. Điểm khác biệt của Sun Saphia là nằm trực diện trục biển Mỹ Khê, phù hợp nhu cầu nghỉ dưỡng và cho thuê khách du lịch; các dự án ven sông Hàn của Sun Group phù hợp hơn với nhu cầu ở trung tâm. Anh/Chị ưu tiên biển hay trung tâm ạ?'],c:['Cách biển bao xa','Hiệu quả cho thuê']},
-      {id:'hi',k:['chao','hello','hi','alo','xin chao','co ai','ad oi','em oi','shop'],a:['Dạ, em kính chào Anh/Chị. Anh/Chị cần tìm hiểu thông tin nào về dự án Sun Saphia Residence ạ?'],c:['Giá bán','Vị trí dự án','Hiệu quả cho thuê']},
-      {id:'thanks',k:['cam on','thank','ok em','oke','duoc roi','hieu roi','vang','da biet'],a:['Dạ, em cảm ơn Anh/Chị. Anh/Chị còn băn khoăn điều gì nữa không ạ? Nếu cần tài liệu đầy đủ, em có thể gửi qua Zalo bất cứ lúc nào.'],c:['Giá bán','Thông tin pháp lý','Nhận bảng giá']},
-      {id:'suynghi',k:['suy nghi','de xem','tham khao','chua chac','chua can','de sau','tu tu','can nhac','ban voi'],a:['Dạ, Anh/Chị cứ thong thả cân nhắc ạ. Nếu tiện, em gửi bộ tài liệu dự án để Anh/Chị và gia đình cùng xem, và chỉ báo khi có thông tin mới về giá hoặc chính sách.'],c:['Nhận tài liệu dự án','Xem bảng tính dòng tiền']},
-      {id:'dua',k:['dua thoi','gion','noi dua','troi oi','qua troi','mua het','trung so','vietlott','xo so','lam sao giau'],a:['Dạ, Anh/Chị vui tính quá ạ. Nếu Anh/Chị "trúng lớn" thật thì căn hướng biển tầng cao là lựa chọn rất xứng đáng đấy ạ. Em gửi Anh/Chị danh sách để "chuẩn bị trước" nhé?','Dạ, em xin ghi nhận tinh thần lạc quan của Anh/Chị ạ. Ở đây có biển, có bình minh, chỉ còn thiếu Anh/Chị nữa thôi. Anh/Chị muốn xem căn nào trước ạ?'],c:['Căn hướng biển','Giá bán']},
-      {id:'bot',k:['bot','robot','nguoi that','ai tra loi','may tu dong','tu dong','ai dang chat','ban la ai','em la ai'],a:['Dạ, em là trợ lý của anh Hoàng Hiệp, hỗ trợ Anh/Chị các thông tin nhanh về dự án. Để trao đổi trực tiếp với anh Hiệp, Anh/Chị vui lòng gọi hoặc nhắn Zalo số 0904 567 009 ạ.'],c:['Nhắn Zalo 0904 567 009','Gọi 0904 567 009']}
-    ];
-    var ALIAS={'Nhận bảng giá':'bang gia','Chính sách thanh toán':'thanh toan','Hỗ trợ vay ngân hàng':'vay','Đăng ký nhận thông tin':'booking','Căn hướng biển':'huong dong','Khoảng cách tới sân bay':'san bay','Vị trí bắn pháo hoa':'phao hoa','Nhận video vị trí':'san bay','Giá thuê khu vực':'gia thue','Nhận hồ sơ pháp lý':'phap ly','Thông tin pháp lý':'phap ly','Thời gian bàn giao':'ban giao','Lập lịch thanh toán':'thanh toan','Xem bảng tính dòng tiền':'cho thue','Chưa có kinh nghiệm cho thuê':'chua tung','Nhận phối cảnh tiện ích':'tien ich','Các loại căn hộ':'loai can','Nhận mặt bằng chi tiết':'mat bang','Nhận mặt bằng 2BR':'mat bang','Đặt lịch tham quan':'xem nha','Giá bán':'gia ban','Vị trí dự án':'vi tri','Hiệu quả cho thuê':'cho thue','Tiện ích dự án':'tien ich','Ngân sách dưới 3 tỷ':'duoi 3','Ngân sách 3–4 tỷ':'3 4 ty','Ngân sách trên 4 tỷ':'tren 4','Nhận danh sách Studio':'duoi 3','Mua để đầu tư':'dau tu','Mua để nghỉ dưỡng':'nghi duong','Nhận tài liệu dự án':'bang gia','Cách biển bao xa':'xa bien','Bãi biển có tắm được không':'tam duoc','Mùa mưa bão thế nào':'mua bao','Đi Hội An bao xa':'hoi an','Tiêu chuẩn bàn giao':'tieu chuan','Phí quản lý':'phi quan ly'};
-    var TAIL=' Thông tin chỉ dùng để gửi tài liệu, không làm phiền Anh/Chị ạ.';
-    var LEADBY={
-      gia:'Dạ, giá từng căn còn tuỳ tầng và hướng nên em không muốn báo chung chung. Nếu tiện, Anh/Chị gõ số Zalo vào ô bên dưới, anh Hiệp sẽ gửi bảng giá đúng dòng căn và ngân sách Anh/Chị quan tâm ngay khi chủ đầu tư công bố.',
-      vay:'Dạ, mỗi người có số vốn khác nhau nên bảng tính riêng sẽ sát hơn. Nếu tiện, Anh/Chị gõ số Zalo vào ô bên dưới, anh Hiệp sẽ lập bảng thanh toán và vay theo đúng số tiền Anh/Chị dự kiến.',
-      phaply:'Dạ, pháp lý nên đọc trên văn bản cho chắc. Nếu tiện, Anh/Chị gõ số Zalo vào ô bên dưới, anh Hiệp sẽ gửi hồ sơ để Anh/Chị xem kỹ ở nhà.',
-      booking:'Dạ, khi chủ đầu tư công bố chính sách mở bán, anh Hiệp sẽ báo Anh/Chị sớm để kịp chọn căn ưng ý. Anh/Chị chỉ cần gõ số Zalo vào ô bên dưới.',
-      xem:'Dạ, để anh Hiệp sắp xếp lịch đón Anh/Chị, Anh/Chị gõ số điện thoại vào ô bên dưới giúp em nhé.',
-      chothue:'Dạ, nếu tiện, Anh/Chị gõ số Zalo vào ô bên dưới, anh Hiệp sẽ gửi bảng tính dòng tiền cho thuê theo đúng căn Anh/Chị chọn.',
-      _:'Dạ, nếu tiện, Anh/Chị gõ số Zalo vào ô bên dưới, anh Hiệp sẽ gửi bảng giá, mặt bằng và bảng tính dòng tiền để Anh/Chị xem kỹ. Anh/Chị cứ hỏi tiếp, em vẫn trả lời bình thường.'
-    };
-    var LEADMAP={budget:'gia',budget2:'gia',budget3:'gia',loaican:'gia',view:'gia',dautu:'chothue',tanggia:'chothue',vanhanh:'chothue',nghiduong:'gia'};
-    function leadMsg(t){var k=LEADMAP[t]||t;return (LEADBY[k]||LEADBY._)+TAIL;}
-    var pend=null,lastHint=-9;
-    var ZITEM={gia:'bảng giá theo đúng ngân sách',budget:'danh sách Studio và bảng giá',budget2:'bảng giá Studio tầng cao và 1BR+',budget3:'mặt bằng và bảng giá căn 2BR',vay:'bảng tính thanh toán và vay',phaply:'hồ sơ pháp lý',booking:'thông tin mở bán ngay khi chủ đầu tư công bố',chothue:'bảng tính dòng tiền cho thuê',dautu:'bảng tính dòng tiền cho thuê',tanggia:'tài liệu hạ tầng quanh dự án',vanhanh:'phương án cho thuê phù hợp',vitri:'video vị trí thực tế',sanbay:'video lộ trình thực tế',hoian:'bản đồ kết nối',bien:'danh sách căn hướng biển',view:'danh sách căn hướng biển',loaican:'mặt bằng chi tiết từng căn',nghiduong:'mặt bằng căn 2BR',tienich:'phối cảnh tiện ích',xem:'lịch xem dự án',bangiao:'tiến độ và tiêu chuẩn bàn giao',tieuchuan:'bảng tiêu chuẩn bàn giao',phi:'bảng phí dự kiến',cdt:'hồ sơ dự án'};
-    function zItem(id){return ZITEM[id]||'bảng giá và mặt bằng';}
-    function withZalo(c){c=(c||[]).slice(0,2);if(!leadDone&&c.indexOf('Nhắn Zalo 0904 567 009')<0)c.push('Nhắn Zalo 0904 567 009');return c;}
-    function norm(t){var x=(' '+t+' ').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ');
-      var AB={' ko ':' khong ',' k ':' khong ',' kh ':' khong ',' hong ':' khong ',' dc ':' duoc ',' bn ':' bao nhieu ',' bnhieu ':' bao nhieu ',' j ':' gi ',' mn ':' moi nguoi ',' tr ':' trieu ',' cty ':' cong ty ',' cdt ':' chu dau tu ',' sh ':' so hong ',' pn ':' phong ngu ',' a ':' anh ',' c ':' chi '};
-      for(var z=0;z<2;z++)for(var k in AB)x=x.split(k).join(AB[k]);return x;}
-    function scrollEnd(){log.scrollTop=log.scrollHeight;}
-    function add(txt,who,im){var d=document.createElement('div');d.className='cb-m '+(who==='me'?'cb-me':'cb-bot');d.textContent=txt;
-      if(im){var u=img(IMG[im]);if(u){var w=document.createElement('div');w.className='cb-wrap';w.appendChild(d);var i=document.createElement('img');i.className='cb-img';i.src=u;i.alt='';i.onload=scrollEnd;i.onclick=function(){window.open(u,'_blank');};w.appendChild(i);log.appendChild(w);scrollEnd();return;}}
-      log.appendChild(d);scrollEnd();}
-    function chips(list){if(!list||!list.length)return;var w=document.createElement('div');w.className='cb-chips';list.forEach(function(c){var b=document.createElement('button');b.type='button';b.className='cb-chip'+(/Zalo|Đặt lịch|Nhận|Gọi|Đăng ký/.test(c)?' hot':'');b.textContent=c;b.onclick=function(){w.remove();ask(c);};w.appendChild(b);});log.appendChild(w);scrollEnd();}
-    function bot(txt,list,im,delay){
-      var L=txt.split('\n'),parts=L.length<3?[txt]:[L[0],L.slice(1,-1).join('\n'),L[L.length-1]];
-      if(L.length===2&&L[0].length>60)parts=[L[0],L[1]];
-      var i=0,total=0;
-      function next(){var p=parts[i],t=document.createElement('div');t.className='cb-typing';t.textContent='Đang trả lời…';log.appendChild(t);scrollEnd();
-        var d=i===0?(delay||Math.min(700,380+p.length*2)):Math.min(1500,500+p.length*6);total+=d;
-        setTimeout(function(){t.remove();var last=i===parts.length-1;add(p,'bot',last?im:null);i++;if(!last)setTimeout(next,300);else chips(list);},d);}
-      next();return 900;}
-    function leadAsk(after,topic){if(leadDone||turn-lastLead<3)return;lastLead=turn;pend=null;setTimeout(function(){bot(leadMsg(topic),['Nhắn Zalo 0904 567 009','Gọi 0904 567 009'],null,1100);},after+1200);}
-    function phone(t){var m=t.replace(/[\s.\-]/g,'').match(/(\+?84|0)(3|5|7|8|9)\d{8}/);return m?m[0]:null;}
-    function goto(sel){var e=document.querySelector(sel);if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
-    function ask(q){
-      add(q,'me');turn++;asked++;
-      if(q==='Nhắn Zalo 0904 567 009'){window.open(ZALO,'_blank');bot('Dạ, Zalo đã được mở. Anh/Chị nhắn "Sun Saphia" để nhận bảng giá ạ.',[]);return;}
-      if(q==='Gọi 0904 567 009'){location.href='tel:0904567009';return;}
-      var ph=phone(q);
-      if(ph){leadDone=true;var f=document.getElementById('sdt2'),n=document.getElementById('ten2');if(f)f.value=ph;
-        bot('Dạ, em cảm ơn Anh/Chị. Em đã điền sẵn số '+ph+' vào phiếu bên dưới, Anh/Chị chỉ cần thêm tên và bấm "Gửi đăng ký" là anh Hiệp nhận được ngay ạ.',['Nhắn Zalo 0904 567 009']);
-        setTimeout(function(){goto('#dang-ky-cuoi');if(n)n.focus();},1800);return;}
-      var joke=/(haha|hihi|hehe|kaka|kk+|=\)+|:\)+|:d|😂|🤣|😄|😆|😁|đùa|giỡn|vui tính)/i.test(q);
-      var nq=norm(ALIAS[q]||q),best=null,score=0;
-      KB.forEach(function(it){var sc=0;it.k.forEach(function(k){if(nq.indexOf(' '+k+' ')>-1)sc+=k.length+3;});(it.w||[]).forEach(function(k){if(nq.indexOf(' '+k+' ')>-1)sc+=1;});if(it.id===lastTopic)sc+=0.5;if(sc>score){score=sc;best=it;}});
-      if(best&&score>=2){miss=0;lastTopic=best.id;var rep=seen[best.id];seen[best.id]=1;var txt=pick(best.a);
-        if(joke&&best.id!=='dua')txt=pick(['Dạ, Anh/Chị hóm hỉnh quá ạ. ','Dạ, nói chuyện với Anh/Chị vui thật ạ. '])+txt.replace(/^Dạ, /,'');
-        if(!leadDone&&!/\?\s*$/.test(txt)&&(best.lead||turn-lastHint>=3)&&best.id!=='hi'&&best.id!=='bot'&&best.id!=='thanks'){lastHint=turn;txt+='\n'+pick(['Nếu tiện, Anh/Chị nhắn Zalo 0904 567 009 cho em, em gửi '+zItem(best.id)+' để Anh/Chị xem cho rõ ạ.','Anh/Chị cho em xin số Zalo, em gửi '+zItem(best.id)+' qua đó cho tiện xem nhé ạ.']);}
-        var d=bot(txt,withZalo(best.c),best.img);
-        }
-      else if(joke){bot(pick(['Dạ, Anh/Chị vui tính quá ạ. Biển Mỹ Khê cũng đang "cười" với Anh/Chị đấy ạ. Anh/Chị muốn tìm hiểu giá bán hay vị trí trước ạ?','Dạ, em cũng mong mỗi ngày đều được trò chuyện vui như thế này ạ. Anh/Chị cần em hỗ trợ thông tin gì về dự án ạ?']),['Giá bán','Vị trí dự án','Hiệu quả cho thuê']);}
-      else{miss++;
-        if(miss<2){bot('Dạ, để em trả lời sát nhất, Anh/Chị đang quan tâm về nội dung nào dưới đây ạ? Anh/Chị cũng có thể hỏi cụ thể hơn, ví dụ "cách biển bao xa", "giá studio", "thanh toán thế nào".',['Giá bán','Vị trí dự án','Nhắn Zalo 0904 567 009']);}
-        else{miss=0;bot('Dạ, câu hỏi này cần thông tin chi tiết từ chủ đầu tư, em xin phép để anh Hoàng Hiệp trả lời Anh/Chị cho chính xác. Anh/Chị có thể nhắn Zalo hoặc để lại số điện thoại, hoặc tiếp tục hỏi em các nội dung khác ạ.',['Nhắn Zalo 0904 567 009','Giá bán','Vị trí dự án']);}}
-    }
-    function open(ctx){hideNudge();box.classList.add('open');opened=true;
-      if(!started){started=true;bot(ctx&&ctx.greet?ctx.greet:'Dạ, em chào Anh/Chị ạ.\nAnh/Chị đang quan tâm Sun Saphia để ở, nghỉ dưỡng hay cho thuê ạ? Em gửi đúng thông tin Anh/Chị cần.',ctx&&ctx.chips?ctx.chips:['Giá bán','Vị trí dự án','Nhắn Zalo 0904 567 009'],ctx&&ctx.img,300);}
-      else if(ctx&&ctx.greet){bot(ctx.greet,withZalo(ctx.chips),ctx.img,300);}
-      setTimeout(function(){inp.focus();},300);}
-    btn.onclick=function(){open(curCtx);};
-    var fab=document.getElementById('cb-fab');if(fab)fab.addEventListener('click',function(e){e.preventDefault();if(box.classList.contains('open')){box.classList.remove('open');}else{open(curCtx);}});
-    document.getElementById('cb-close').onclick=function(){box.classList.remove('open');};
-    function send(){var t=inp.value.trim();if(!t)return;inp.value='';ask(t);}
-    document.getElementById('cb-send').onclick=send;
-    inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();send();}});
-    /* Smart nudges: khách dừng lâu ở mục nào thì hỏi đúng chuyện đó */
-    var SEC=[
-      {sel:'.hot',t:'Anh/Chị có muốn tìm hiểu <b>hiệu quả cho thuê</b> tại khu vực này không ạ?',g:'Dạ, lượng khách du lịch đến Đà Nẵng đang tăng mạnh. Anh/Chị có muốn tìm hiểu hiệu quả cho thuê căn hộ tại khu vực này không ạ?',c:['Hiệu quả cho thuê','Giá thuê khu vực']},
-      {sel:'.beach',t:'Anh/Chị có muốn nhận <b>danh sách căn hướng biển</b> không ạ?',g:'Dạ, các căn hướng biển trực diện thường được lựa chọn sớm nhất. Anh/Chị có muốn nhận danh sách căn hướng biển khi có không ạ?',c:['Căn hướng biển','Giá bán'],img:'bien'},
-      {sel:'.ov-grid',t:'Anh/Chị cần thêm thông tin về <b>pháp lý và thời gian bàn giao</b> không ạ?',g:'Dạ, Anh/Chị cần thêm thông tin về pháp lý hoặc thời gian bàn giao của dự án không ạ?',c:['Thông tin pháp lý','Thời gian bàn giao'],img:'thap'},
-      {sel:'.loc',t:'Anh/Chị cần hướng dẫn <b>đường đi từ sân bay</b> đến dự án không ạ?',g:'Dạ, Anh/Chị có cần thông tin về đường đi từ sân bay, hoặc khoảng cách tới khu vực bắn pháo hoa không ạ?',c:['Khoảng cách tới sân bay','Vị trí bắn pháo hoa','Nhận video vị trí'],img:'map'},
-      {sel:'.plan',t:'Anh/Chị có muốn nhận <b>mặt bằng chi tiết</b> từng loại căn không ạ?',g:'Dạ, Anh/Chị đang quan tâm dòng căn nào ạ? Em xin gửi mặt bằng chi tiết để Anh/Chị tiện hình dung.',c:['Mua để đầu tư','Mua để nghỉ dưỡng','Nhận mặt bằng chi tiết']},
-      {sel:'#danh-gia',t:'Anh/Chị có muốn nhận <b>bảng tính theo căn cụ thể</b> không ạ?',g:'Dạ, bảng tính trên trang mang tính minh hoạ. Em có thể lập bảng tính theo căn, giá và chính sách cụ thể để Anh/Chị tham khảo ạ.',c:['Lập lịch thanh toán','Chưa có kinh nghiệm cho thuê']},
-      {sel:'.faq',t:'Anh/Chị còn câu hỏi nào khác, <b>em xin hỗ trợ</b> ạ.',g:'Dạ, nếu Anh/Chị còn câu hỏi nào khác về dự án, em xin hỗ trợ ạ.',c:['Giá bán','Hỗ trợ vay ngân hàng','Đăng ký nhận thông tin']}
-    ];
-    var curCtx=null,nudged={},nCount=0,timers={};
-    function hideNudge(){ndg.classList.remove('show');}
-    function showNudge(s){if(opened&&box.classList.contains('open'))return;if(document.body.classList.contains('in4d'))return;if(nudged[s.sel]||nCount>=2)return;nudged[s.sel]=1;nCount++;
-      curCtx={greet:s.g,chips:s.c,img:s.img};ndgT.innerHTML=s.t;ndg.classList.add('show');if(fab){fab.classList.remove('ping');void fab.offsetWidth;fab.classList.add('ping');}
-      setTimeout(function(){if(curCtx&&curCtx.greet===s.g)hideNudge();},14000);}
-    ndg.addEventListener('click',function(e){if(e.target.classList.contains('nx')){e.stopPropagation();hideNudge();return;}open(curCtx);});
-    if('IntersectionObserver' in window){
-      var io=new IntersectionObserver(function(es){es.forEach(function(en){var s=en.target._cb;
-        if(en.isIntersecting&&en.intersectionRatio>=0.35){timers[s.sel]=setTimeout(function(){showNudge(s);},15000);}
-        else{clearTimeout(timers[s.sel]);}});},{threshold:[0,0.35]});
-      SEC.forEach(function(s){var el=document.querySelector(s.sel);if(el){el._cb=s;io.observe(el);}});
-    }
-    /* Điện thoại: đang xem 4D thì ẩn nút nổi để không che khung */
-    var v4=document.querySelector('.view4d');
-    if(v4&&'IntersectionObserver' in window){new IntersectionObserver(function(es){var on=es[0].isIntersecting&&es[0].intersectionRatio>=0.45&&innerWidth<=860;
-      document.body.classList.toggle('in4d',on);if(on)hideNudge();},{threshold:[0,0.45,0.7]}).observe(v4);}
-    /* Sắp rời trang (máy tính): níu nhẹ */
-    document.addEventListener('mouseout',function(e){if(!e.relatedTarget&&e.clientY<5&&!leadDone&&!nudged.exit){nudged.exit=1;nCount=Math.min(nCount,3);showNudge({sel:'exit',t:'Anh/Chị có muốn nhận <b>bảng giá và mặt bằng</b> để tham khảo sau không ạ?',g:'Dạ, trước khi Anh/Chị rời trang, em xin phép gửi bảng giá và mặt bằng để Anh/Chị tham khảo khi thuận tiện ạ.',c:['Nhận bảng giá','Nhắn Zalo 0904 567 009']});}});
-  })();
   /* Copy lock */
   function inField(e){var t=e.target;return t&&t.closest&&t.closest('input,textarea,select');}
   document.addEventListener('contextmenu',function(e){if(!inField(e))e.preventDefault();});
@@ -1241,6 +1091,353 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
     if(mod&&['c','x','u','s','p','a'].indexOf(k)>-1&&!inField(e)){e.preventDefault();}
   });
 })();
+</script>
+<script>
+/* Sun Saphia Residence – Trợ lý trả lời nhanh của anh Hoàng Hiệp.
+ * Một tệp dùng chung cho 3 trang LadiPage: chat tự động + gửi khách về Telegram, CRM Hoàng Hiệp, email.
+ * Gắn: dán nguyên tệp vào một thẻ script ngay trước thẻ đóng body.
+ * Chỉ dùng thông tin dự án đã được duyệt bên dưới (KB); không nêu giá, không hứa lợi nhuận.
+ */
+(function () {
+  if (window.__hhc) return; window.__hhc = 1;
+
+  /* ---------- Cấu hình ---------- */
+  var TG = 'https://script.google.com/macros/s/AKfycbwvmG1HMtrQOeUXCuBJ6CHmMb4TcCZ53_n5lwPAt3-6-lG2_fIRX0q25Rv-6LPwVWXZHw/exec?key=sft-tg-4821';
+  var CRM = 'https://script.google.com/macros/s/AKfycbyChbG-uvItjVlRk7JgLrwpUS6Cgah4nIA6BWHuEwgbXBqSlvAPJNSdZdp6pQ91d_rN/exec?key=kGYgRtNhbHZr';
+  var MAIL = 'https://formsubmit.co/ajax/hiephoangmt@gmail.com';
+  var PROJECT = 'Sun Saphia Residence';
+  var TEL = 'tel:0904567009', ZALO = 'https://zalo.me/0904567009', SO = '0904 567 009';
+
+  /* ---------- Tiện ích ---------- */
+  function sget(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }
+  function sset(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
+  function lget(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function lset(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+  function vnNow() { var d = new Date(); return new Date(d.getTime() + (d.getTimezoneOffset() + 420) * 60000); }
+  function two(n) { return (n < 10 ? '0' : '') + n; }
+  function vnTime() { var d = vnNow(); return two(d.getHours()) + ':' + two(d.getMinutes()) + ' ' + two(d.getDate()) + '/' + two(d.getMonth() + 1) + '/' + d.getFullYear(); }
+  function nightNote() { var h = vnNow().getHours(); return h >= 21 ? 'anh Hiệp trả lời từ 8h sáng mai' : h < 8 ? 'anh Hiệp trả lời từ 8h sáng nay' : ''; }
+
+  /* Nguồn quảng cáo: giữ trong phiên để gửi kèm */
+  var SRC_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid', 'ttclid'];
+  var qs = {}; try { location.search.replace(/^\?/, '').split('&').forEach(function (p) { var i = p.indexOf('='); if (i > 0) qs[decodeURIComponent(p.slice(0, i))] = decodeURIComponent(p.slice(i + 1).replace(/\+/g, ' ')); }); } catch (e) {}
+  SRC_KEYS.forEach(function (k) { if (qs[k]) sset('hhc_' + k, qs[k]); });
+  function src() { var d = {}; SRC_KEYS.forEach(function (k) { var v = qs[k] || sget('hhc_' + k); if (v) d[k] = v; }); return d; }
+
+  /* Số điện thoại Việt Nam: di động 0[35789]xxxxxxxx hoặc bàn 02xxxxxxxxx */
+  function normPhone(p) {
+    p = String(p || '').replace(/[^\d+]/g, '');
+    if (p.indexOf('+84') === 0) p = '0' + p.slice(3); else if (p.indexOf('84') === 0 && (p.length === 11 || p.length === 12)) p = '0' + p.slice(2);
+    return /^0(3|5|7|8|9)\d{8}$/.test(p) || /^02\d{9}$/.test(p) ? p : '';
+  }
+
+  /* ---------- Gửi đi (beacon: vẫn tới nơi khi khách đóng trang) ---------- */
+  function beacon(u, body) { try { if (navigator.sendBeacon && navigator.sendBeacon(u, body)) return true; } catch (e) {} return false; }
+  function postJSON(u, d) {
+    var s = JSON.stringify(d);
+    if (beacon(u, new Blob([s], {type: 'text/plain;charset=utf-8'}))) return;
+    try { fetch(u, {method: 'POST', mode: 'no-cors', keepalive: true, headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: s}).catch(function () {}); } catch (e) {}
+  }
+  function postMail(d) {
+    var p = []; for (var k in d) if (d[k] !== '' && d[k] != null) p.push(encodeURIComponent(k) + '=' + encodeURIComponent(String(d[k])));
+    var body = p.join('&');
+    try { fetch(MAIL, {method: 'POST', mode: 'no-cors', keepalive: true, headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json'}, body: body}).catch(function () {}); }
+    catch (e) { beacon(MAIL, new Blob([body], {type: 'application/x-www-form-urlencoded'})); }
+  }
+  var sentMem = {};
+  function wasSent(ph) { return sentMem[ph] || sget('hhc_sent_' + ph) || lget('hhc_sent_' + ph); }
+  function markSent(ph) { sentMem[ph] = 1; sset('hhc_sent_' + ph, '1'); lset('hhc_sent_' + ph, String(Date.now())); }
+
+  /* d: {name, phone, interest, cau_hoi, hoi_thoai, ...}. Trả về 'ok' | 'dup' | '' (số sai) */
+  function lead(d) {
+    d = Object.assign({}, d, src(), {time: vnTime(), source: location.href.split('#')[0].split('?')[0]});
+    if (d.thong_bao) { postJSON(TG, d); return 'ok'; }
+    var ph = normPhone(d.phone); if (!ph) return '';
+    if (wasSent(ph)) return 'dup';
+    markSent(ph); d.phone = ph;
+    postJSON(TG, d);
+    postJSON(CRM, Object.assign({project: PROJECT, url: d.source, message: [d.interest, d.cau_hoi].filter(Boolean).join(' · ').slice(0, 500)}, d));
+    postMail(Object.assign({_subject: 'Khách Sun Saphia: ' + (d.name || 'chưa rõ tên') + ' - ' + ph, _template: 'table', _captcha: 'false'}, d));
+    try { if (window.gtag) gtag('event', 'generate_lead', {event_label: d.interest || ''}); } catch (e) {}
+    try { if (window.fbq) fbq('track', 'Lead', {content_name: d.interest || ''}); } catch (e) {}
+    return 'ok';
+  }
+  window.hhcLead = lead;
+
+  /* ---------- Hiểu câu hỏi (có dấu, không dấu, viết tắt) ---------- */
+  var ABBR = {ko: 'khong', k: 'khong', kh: 'khong', khg: 'khong', hok: 'khong', hong: 'khong', hem: 'khong', dc: 'duoc', dk: 'duoc', bn: 'bao nhieu', bnh: 'bao nhieu', bnhieu: 'bao nhieu',
+    cdt: 'chu dau tu', sh: 'so hong', pn: 'phong ngu', ntn: 'nhu the nao', j: 'gi', mk: 'minh', mik: 'minh', vs: 'voi', sdt: 'so dien thoai', dt: 'dien thoai',
+    bh: 'bao gio', bgio: 'bao gio', ib: 'nhan tin', dky: 'dang ky', tks: 'cam on', thks: 'cam on', thank: 'cam on', thanks: 'cam on', r: 'roi', ms: 'moi', lm: 'lam',
+    tr: 'trieu', ty: 'ty', oke: 'ok', okie: 'ok', okay: 'ok', zl: 'zalo', ad: 'anh', e: 'em', nt: 'nhan tin', ng: 'nguoi', bds: 'bat dong san', tl: 'tra loi', bt: 'binh thuong', mn: 'moi nguoi'};
+  function norm(t) {
+    var x = String(t || '').toLowerCase().replace(/đ/g, 'd').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+    return ' ' + x.split(' ').map(function (w) { return ABBR[w] || w; }).join(' ') + ' ';
+  }
+  var BAD = ['dm', 'dmm', 'dcm', 'dkm', 'dit', 'djt', 'du ma', 'vcl', 'vkl', 'vl', 'cc', 'clm', 'cmm', 'cmn', 'loz', 'buoi', 'deo', 'me may', 'cha may', 'oc cho', 'do ngu', 'ngu vay', 'ngu the', 'ngu nhu', 'lol', 'fuck', 'shit'];
+  function has(n, k) { return n.indexOf(' ' + k + ' ') > -1; }
+  function isBad(n) { for (var i = 0; i < BAD.length; i++) if (has(n, BAD[i])) return true; return false; }
+
+  /* ---------- Kiến thức & câu trả lời (chỉ dùng thông tin đã duyệt) ---------- */
+  var KB = [
+    {id: 'chao', k: ['chao', 'xin chao', 'hello', 'hi', 'alo', 'co ai khong', 'anh oi', 'chi oi', 'em oi'],
+      a: ['Dạ em chào Anh/Chị ạ. Anh/Chị đang quan tâm Sun Saphia để ở, nghỉ dưỡng hay cho thuê ạ?', 'Dạ em đây ạ. Anh/Chị muốn xem giá, vị trí hay loại căn trước ạ?'], c: ['Vị trí dự án', 'Loại căn hộ']},
+    {id: 'gia', k: ['gia', 'bang gia', 'bao nhieu tien', 'gia ban', 'gia ca', 'muc gia', 'tong gia', 'gia studio', 'gia can', 'bao nhieu 1 m2', 'tren m2', 'bao nhieu ty', 'gia bao nhieu', 'bao nhieu mot can', 'bao nhieu 1 can'],
+      a: ['Dạ chủ đầu tư chưa công bố giá, nên em chưa dám báo con số nào cho Anh/Chị.\nAnh/Chị đang nghiêng về Studio, 1BR+ hay 2BR ạ?', 'Dạ bảng giá chủ đầu tư chưa công bố ạ, giá sẽ tuỳ tầng, hướng và tầm nhìn.\nAnh/Chị cho em biết dòng căn quan tâm, có giá em gửi đúng căn đó trước.'],
+      c: ['Studio', '2BR'], ask: 'Anh/Chị để lại số Zalo, chủ đầu tư công bố là em gửi bảng giá ngay ạ.', strong: 1, topic: 'Giá bán'},
+    {id: 'dat', k: ['dat qua', 'mac qua', 'cao qua', 'dat the', 'dat vay', 'dat lam', 'chat qua', 'sao dat', 'gia cao', 'khong du tien', 'it tien', 'von it', 'von nho'],
+      a: ['Dạ em hiểu ạ, căn mặt biển thì ai cũng cân nhắc kỹ chuyện vốn.\nDòng Studio 30–31 m² chiếm khoảng 2/3 dự án, là lựa chọn vốn vào nhẹ nhất, Anh/Chị có thể xem trước.', 'Dạ chi phí là chuyện cần tính kỹ ạ. Khi có giá, em lập bảng tính theo đúng số vốn Anh/Chị chuẩn bị để mình xem có vừa không, không cần quyết ngay.'],
+      c: ['Studio', 'Cho thuê'], ask: 'Anh/Chị cho em xin số Zalo, có giá em tính sẵn theo ngân sách của mình ạ.', topic: 'Lo về giá / ngân sách'},
+    {id: 'vitri', k: ['vi tri', 'o dau', 'dia chi', 'cho nao', 'duong nao', 'khu nao', 'nam o', 'ban do', 'map', 'toa lac', 'phuong nao', 'quan nao'],
+      a: ['Dạ dự án ở giao lộ Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, mặt tiền trục biển, sát biển Sơn Thủy – Mỹ Khê ạ.', 'Dạ Sun Saphia nằm ngay mặt tiền trục biển, góc Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, sát bãi biển Sơn Thủy – Mỹ Khê ạ.'],
+      c: ['Cách biển bao xa', 'Tiện ích'], ask: 'Anh/Chị để lại Zalo, em gửi bản đồ và video vị trí thực tế ạ.', topic: 'Vị trí'},
+    {id: 'bien', k: ['cach bien', 'xa bien', 'gan bien', 'ra bien', 'sat bien', 'mat bien', 'view bien', 'nhin bien', 'bai tam', 'tam bien', 'bai bien', 'my khe', 'son thuy'],
+      a: ['Dạ dự án nằm ngay mặt tiền trục biển Võ Nguyên Giáp – Trường Sa, sát biển Sơn Thủy – Mỹ Khê ạ.\nCăn hướng Đông nhìn thẳng ra biển, tầng càng cao càng thoáng.'],
+      c: ['Loại căn hộ', 'Vị trí dự án'], ask: 'Anh/Chị để lại Zalo, em gửi danh sách căn hướng biển khi có ạ.', topic: 'View biển'},
+    {id: 'quymo', k: ['quy mo', 'bao nhieu tang', 'may tang', 'cao bao nhieu', 'bao nhieu can', 'may can', 'dien tich dat', 'tang ham', 'ham xe', 'dau xe', 'cho de xe'],
+      a: ['Dạ dự án trên khu đất 3.720,1 m², gồm 30 tầng nổi và 2 tầng hầm, cao khoảng 114 m, tổng 782 căn ạ.'], c: ['Loại căn hộ', 'Bàn giao'], topic: 'Quy mô'},
+    {id: 'loaican', k: ['loai can', 'dong can', 'can ho', 'studio', '1br', '1 br', '1pn', '1 phong ngu', '2br', '2 br', '2pn', '2 phong ngu', 'phong ngu', 'dien tich', 'm2', 'mat bang', 'rong bao nhieu', 'can nao'],
+      a: ['Dạ có 3 dòng: Studio 30–31 m² (khoảng 2/3 dự án), 1BR+ 50–51 m² (khoảng 1/7) và 2BR 60–70 m² (khoảng 1/5) ạ.\nAnh/Chị mua để ở, nghỉ dưỡng hay cho thuê ạ?', 'Dạ dự án gồm Studio 30–31 m², 1BR+ 50–51 m² và 2BR 60–70 m²; Studio nhiều nhất, khoảng 2/3 dự án.\nAnh/Chị định ở hay cho thuê để em gợi ý dòng hợp ạ?'],
+      c: ['Để ở', 'Cho thuê'], ask: 'Anh/Chị để lại Zalo, em gửi mặt bằng từng dòng căn khi chủ đầu tư công bố ạ.', topic: 'Loại căn'},
+    {id: 'o', k: ['de o', 'o lau dai', 'gia dinh', 'ca nha', 'cho con', 'bo me', 'nghi duong', 've huu', 'nha thu hai'],
+      a: ['Dạ để gia đình ở hoặc nghỉ dưỡng thì 2BR 60–70 m² rộng rãi nhất; toà có hồ bơi tầng 3 và nhà trẻ ngay trong toà ạ.', 'Dạ nếu ở cùng gia đình, Anh/Chị xem dòng 2BR 60–70 m² trước ạ; ngay trong toà có nhà trẻ, hồ bơi tầng 3 và shop khối đế.'],
+      c: ['Tiện ích', 'Bàn giao'], ask: 'Anh/Chị để lại Zalo, em gửi mặt bằng 2BR khi có ạ.', topic: 'Mua để ở / nghỉ dưỡng'},
+    {id: 'chothue', k: ['cho thue', 'thue', 'dong tien', 'loi nhuan', 'sinh loi', 'loi suat', 'kinh doanh', 'airbnb', 'gia thue', 'thu nhap', 'co loi', 'cong suat', 'khai thac'],
+      a: ['Dạ em chia sẻ số liệu tham khảo: studio ~30 m² gần Mỹ Khê đang rao thuê 8–9,5 triệu/tháng (muaban.net 2026); giá thuê căn hộ Đà Nẵng 2026 tăng khoảng 10–15%.\nĐây là số liệu thị trường, em không cam kết giá thuê hay lợi nhuận ạ.', 'Dạ theo tin rao trên muaban.net 2026, studio ~30 m² gần Mỹ Khê cho thuê khoảng 8–9,5 triệu/tháng; khách quốc tế 9 tháng 2026 đạt 7,73 triệu, tăng 28,7%.\nSố liệu để tham khảo, không phải cam kết ạ.'],
+      c: ['Studio', 'Thị trường du lịch'], ask: 'Anh/Chị để lại Zalo, em gửi bảng tính dòng tiền để mình tự kiểm tra ạ.', topic: 'Cho thuê / dòng tiền'},
+    {id: 'thitruong', k: ['du lich', 'khach du lich', 'khach quoc te', 'thi truong', 'tang truong', 'tiem nang', 'tang gia', 'len gia', 'thanh khoan'],
+      a: ['Dạ theo số liệu 9 tháng 2026, Đà Nẵng đón 7,73 triệu lượt khách quốc tế, tăng 28,7%; giá thuê căn hộ năm 2026 tăng khoảng 10–15% ạ.\nEm không dám hứa tăng giá, Anh/Chị cân nhắc theo khả năng tài chính của mình ạ.'],
+      c: ['Cho thuê', 'Vị trí dự án'], topic: 'Thị trường'},
+    {id: 'dautu', k: ['dau tu', 'an chenh', 'luot song', 'ban lai', 'chuyen nhuong'],
+      a: ['Dạ nếu đầu tư cho thuê, nhiều người chọn Studio vì vốn vào nhẹ và dễ cho thuê theo tháng hoặc theo đêm ạ.\nEm không cam kết lợi nhuận, chỉ gửi số liệu để Anh/Chị tự đánh giá.'],
+      c: ['Cho thuê', 'Studio'], ask: 'Anh/Chị để lại Zalo, em gửi số liệu thị trường và bảng tính tham khảo ạ.', topic: 'Đầu tư'},
+    {id: 'tienich', k: ['tien ich', 'ho boi', 'be boi', 'nha tre', 'shop', 'khoi de', 'gym', 'sieu thi', 'truong hoc'],
+      a: ['Dạ trong toà có hồ bơi tầng 3, nhà trẻ và shop khối đế ạ; xuống tầng là có, rất tiện cho gia đình và khách thuê.'], c: ['Loại căn hộ', 'Vị trí dự án'], ask: 'Anh/Chị để lại Zalo, em gửi phối cảnh tiện ích khi có ạ.', topic: 'Tiện ích'},
+    {id: 'bangiao', k: ['ban giao', 'khi nao ban giao', 'bao gio ban giao', 'khi nao xong', 'bao gio xong', 'tien do', 'hoan thanh', 'xay xong', 'khoi cong', 'nam nao', 'bao gio co nha'],
+      a: ['Dạ bàn giao dự kiến tháng 11/2028 ạ; mốc chính xác ghi trong hợp đồng mua bán khi ký.'], c: ['Pháp lý', 'Loại căn hộ'], topic: 'Bàn giao'},
+    {id: 'cdt', k: ['chu dau tu', 'sun group', 'sun property', 'ai xay', 'cong ty nao', 'thuong hieu', 'cua ai'],
+      a: ['Dạ theo tài liệu giới thiệu dự án, Sun Saphia do Sun Property (thuộc Sun Group) phát triển ạ.'], c: ['Pháp lý', 'Quy mô dự án'], topic: 'Chủ đầu tư'},
+    {id: 'phaply', k: ['phap ly', 'so hong', 'so do', 'giay to', 'giay chung nhan', 'lau dai', 'thoi han', '50 nam', 'so huu', 'giay phep', 'nguoi nuoc ngoai', 'viet kieu'],
+      a: ['Dạ hồ sơ pháp lý chi tiết chủ đầu tư chưa công bố ạ; có văn bản là em gửi để Anh/Chị đọc kỹ trước khi quyết định.\nKhi đó mình nên xem loại đất, thời hạn và loại giấy chứng nhận từng căn.', 'Dạ pháp lý chi tiết chưa công bố ạ, em không muốn nói miệng khi chưa có giấy tờ.\nCó văn bản của chủ đầu tư là em gửi Anh/Chị xem đầu tiên.'],
+      c: ['Chủ đầu tư', 'Bàn giao'], ask: 'Anh/Chị để lại số Zalo, có hồ sơ là em gửi ngay ạ.', strong: 1, topic: 'Pháp lý'},
+    {id: 'luadao', k: ['lua dao', 'bi lua', 'lua khong', 'lua dao khong', 'uy tin khong', 'tin duoc khong', 'co that khong', 'that khong', 'scam', 'mat tien', 'an cap', 'gia mao', 'co chac khong', 'tin sao duoc'],
+      a: ['Dạ Anh/Chị cẩn thận là rất đúng ạ. Đăng ký ở đây chỉ để nhận thông tin, không thu bất kỳ khoản tiền nào.\nKhi mở bán, mọi giao dịch theo hợp đồng và văn bản chính thức của chủ đầu tư.', 'Dạ em hiểu ạ. Trang chỉ nhận đăng ký thông tin, không thu tiền; Anh/Chị cứ gọi thẳng anh Hiệp ' + SO + ' để hỏi kỹ trước.'],
+      c: ['Pháp lý', 'Gặp anh Hiệp'], topic: 'Lo ngại uy tín'},
+    {id: 'coc', k: ['dat coc', 'coc', 'giu cho', 'booking', 'dat cho', 'giu can', 'chuyen khoan', 'tra truoc'],
+      a: ['Dạ đăng ký trên trang không thu bất kỳ khoản tiền nào ạ. Chính sách booking, đặt cọc theo công bố của chủ đầu tư, thực hiện qua đại lý phân phối khi mở bán.'],
+      c: ['Giá bán', 'Pháp lý'], ask: 'Anh/Chị để lại Zalo, có chính sách mở bán em báo ngay ạ.', strong: 1, topic: 'Booking / đặt cọc'},
+    {id: 'moban', k: ['mo ban', 'khi nao mo ban', 'dang ban', 'ban chua', 'da ban', 'ra hang', 'bao gio ban', 'con can khong', 'het can chua', 'con khong'],
+      a: ['Dạ chủ đầu tư chưa công bố chính sách bán hàng ạ. Có thông tin chính thức là em báo Anh/Chị ngay để kịp chọn căn.'],
+      c: ['Loại căn hộ', 'Giá bán'], ask: 'Anh/Chị để lại Zalo, có thông tin mở bán em báo đầu tiên ạ.', strong: 1, topic: 'Thời điểm mở bán'},
+    {id: 'vay', k: ['vay ngan hang', 'vay von', 'cho vay', 'vay duoc', 'vay bao nhieu', 'vay tien', 'duoc vay', 'ngan hang', 'lai suat', 'tra gop', 'thanh toan', 'chiet khau', 'uu dai', 'khuyen mai', 'tien do thanh toan', 'ho tro'],
+      a: ['Dạ chính sách thanh toán, vay và hỗ trợ lãi suất chủ đầu tư chưa công bố ạ.\nCó chính sách là em lập bảng tính theo đúng số vốn Anh/Chị dự kiến.', 'Dạ phần thanh toán và vay ngân hàng chưa có công bố chính thức ạ; có là em gửi ngay để mình tính trước.'],
+      c: ['Giá bán', 'Studio'], ask: 'Anh/Chị để lại Zalo, có chính sách em gửi bảng tính ngay ạ.', strong: 1, topic: 'Thanh toán / vay'},
+    {id: 'xem', k: ['xem nha', 'nha mau', 'tham quan', 'xem thuc te', 'di xem', 'qua xem', 'ra xem', 'hen gap', 'gap mat', 'van phong'],
+      a: ['Dạ Anh/Chị ra Đà Nẵng thì anh Hiệp hẹn đưa đi xem thực tế vị trí ạ. Anh/Chị dự kiến đi lúc nào ạ?'], c: ['Gặp anh Hiệp', 'Vị trí dự án'], ask: 'Anh/Chị để lại số, anh Hiệp gọi hẹn lịch ạ.', strong: 1, topic: 'Hẹn xem dự án'},
+    {id: 'suynghi', k: ['suy nghi', 'de xem', 'can nhac', 'tham khao', 'chua chac', 'chua can', 'de sau', 'tu tu', 'ban voi vo', 'ban voi chong', 'hoi y kien'],
+      a: ['Dạ Anh/Chị cứ thong thả cân nhắc ạ, mua nhà là việc lớn. Em gửi tài liệu để cả nhà cùng xem, không làm phiền đâu ạ.', 'Dạ không vội đâu ạ. Khi nào có giá và mặt bằng em chỉ gửi một lần để Anh/Chị so sánh.'],
+      c: ['Vị trí dự án', 'Loại căn hộ'], ask: 'Nếu tiện Anh/Chị để lại Zalo, em gửi tài liệu để mình xem dần ạ.', topic: 'Còn cân nhắc'},
+    {id: 'ban', k: ['ban lam', 'ban qua', 'luc khac', 'de luc khac', 'khi khac', 'chut nua', 'toi ban', 'minh ban', 'dang hop', 'dang lai xe'],
+      a: ['Dạ em không làm mất thời gian của Anh/Chị ạ. Anh/Chị để lại số Zalo, em gửi gọn tài liệu để lúc rảnh mình xem.', 'Dạ vâng ạ. Anh/Chị cứ để số Zalo, em gửi tài liệu gọn, lúc nào rảnh mình xem nhé.'], c: [], topic: 'Đang bận'},
+    {id: 'bot', k: ['bot', 'robot', 'may tra loi', 'tu dong', 'nguoi that khong', 'phai nguoi khong', 'ai dang chat', 'ai tra loi', 'ban la ai', 'em la ai', 'chatbot', 'tra loi tu dong', 'la may', 'phai may'],
+      a: ['Dạ em là trợ lý trả lời nhanh của anh Hoàng Hiệp, không phải người thật ạ. Câu nào cần chính xác, em chuyển anh Hiệp gọi lại cho Anh/Chị.', 'Dạ đúng rồi ạ, em là trợ lý trả lời nhanh của anh Hoàng Hiệp. Anh/Chị muốn nói chuyện với anh Hiệp thì gọi ' + SO + ' hoặc để số, anh gọi lại.'],
+      c: ['Gặp anh Hiệp', 'Giá bán'], topic: 'Hỏi có phải máy'},
+    {id: 'nguoi', k: ['nguoi that', 'gap nguoi', 'noi chuyen voi nguoi', 'gap anh hiep', 'anh hiep', 'goi cho toi', 'goi lai', 'goi cho minh', 'nhan vien', 'tu van vien', 'chuyen vien', 'nguoi tu van', 'gap anh', 'gap truc tiep'],
+      a: ['Dạ em báo anh Hiệp ngay ạ. Anh/Chị gọi trực tiếp ' + SO + ', hoặc để lại số, anh Hiệp gọi lại cho mình.'], c: [], human: 1, topic: 'Muốn gặp người thật'},
+    {id: 'zalo', k: ['zalo', 'nhan zalo', 'so zalo', 'so dien thoai', 'hotline', 'lien he', 'so may'],
+      a: ['Dạ Anh/Chị nhắn Zalo ' + SO + ' (anh Hoàng Hiệp) ạ, hoặc gõ số của mình vào đây, anh Hiệp chủ động liên hệ.'], c: [], topic: 'Xin liên hệ'},
+    {id: 'tuchoi', k: ['khong de so', 'khong cho so', 'khong muon de', 'khong can goi', 'dung goi', 'khong de lai', 'khong muon cho', 'thoi khoi', 'khong can dau'],
+      a: ['Dạ không sao ạ, Anh/Chị cứ hỏi thoải mái, em không xin số nữa đâu ạ.'], c: ['Vị trí dự án', 'Loại căn hộ'], refuse: 1},
+    {id: 'camon', k: ['cam on', 'ok', 'hieu roi', 'duoc roi', 'vang', 'da biet', 'tot qua', 'hay qua'],
+      a: ['Dạ em cảm ơn Anh/Chị ạ. Anh/Chị cần thêm gì cứ nhắn em nhé.', 'Dạ vâng ạ, có gì Anh/Chị cứ hỏi tiếp, em trả lời ngay.'], c: []}
+  ];
+  var ALIAS = {'Studio': 'studio', '2BR': '2br', 'Để ở': 'de o', 'Cho thuê': 'cho thue', 'Tiện ích': 'tien ich', 'Bàn giao': 'ban giao', 'Pháp lý': 'phap ly', 'Chủ đầu tư': 'chu dau tu',
+    'Vị trí dự án': 'vi tri', 'Loại căn hộ': 'loai can', 'Cách biển bao xa': 'cach bien', 'Giá bán': 'gia ban', 'Quy mô dự án': 'quy mo', 'Thị trường du lịch': 'du lich', 'Gặp anh Hiệp': 'gap anh hiep'};
+
+  /* ---------- Giao diện ---------- */
+  var CSS = '.hhc-l{position:fixed;right:16px;bottom:18px;z-index:9001;width:58px;height:58px;border-radius:50%;border:3px solid #fff;background:#0B3C5D;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(4,24,42,.35);cursor:pointer;padding:0}'
+    + '.hhc-l i{position:absolute;top:-3px;right:-3px;width:16px;height:16px;border-radius:50%;background:#3DDC84;border:3px solid #fff}'
+    + '.hhc-n{position:fixed;right:84px;bottom:30px;z-index:9001;max-width:250px;background:#fff;color:#0B2E44;border-radius:14px 14px 4px 14px;padding:11px 30px 11px 13px;font-size:14px;line-height:1.45;box-shadow:0 12px 30px rgba(4,24,42,.28);cursor:pointer;display:none;font-family:inherit}'
+    + '.hhc-n.on{display:block}.hhc-n button{position:absolute;right:6px;top:4px;border:0;background:none;font-size:18px;color:#557080;cursor:pointer}'
+    + '.hhc-b{position:fixed;right:16px;bottom:16px;z-index:99990;width:370px;max-width:calc(100vw - 24px);height:560px;max-height:calc(100vh - 32px);background:#F3FAFB;border-radius:18px;box-shadow:0 24px 60px rgba(4,24,42,.4);display:none;flex-direction:column;overflow:hidden;font-family:inherit;color:#0B2E44}'
+    + '.hhc-b.on{display:flex}'
+    + '.hhc-h{background:#0B3C5D;color:#fff;padding:12px 14px;display:flex;align-items:center;gap:11px}'
+    + '.hhc-av{flex:none;width:40px;height:40px;border-radius:50%;background:#C2552B;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}'
+    + '.hhc-h b{display:block;font-size:15px;line-height:1.3}.hhc-h small{display:block;font-size:12px;color:#9CC7D3;line-height:1.35}'
+    + '.hhc-x{margin-left:auto;background:none;border:0;color:#fff;font-size:26px;line-height:1;cursor:pointer;padding:0 4px}'
+    + '.hhc-log{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;-webkit-overflow-scrolling:touch}'
+    + '.hhc-m{max-width:86%;padding:10px 13px;border-radius:15px;font-size:15px;line-height:1.5;white-space:pre-line;word-wrap:break-word;text-align:left}'
+    + '.hhc-bot{background:#fff;border:1px solid #CFE7EC;border-bottom-left-radius:4px;align-self:flex-start}'
+    + '.hhc-me{background:#C2552B;color:#fff;border-bottom-right-radius:4px;align-self:flex-end}'
+    + '.hhc-t{font-size:13px;color:#557080;align-self:flex-start;padding-left:4px}'
+    + '.hhc-c{display:flex;flex-wrap:wrap;gap:6px}.hhc-c button{background:#fff;border:1.5px solid #0F7C8F;color:#0F7C8F;border-radius:999px;padding:6px 12px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit}'
+    + '.hhc-c button:hover{background:#0F7C8F;color:#fff}'
+    + '.hhc-q{display:flex;gap:6px;padding:8px 10px 0;background:#fff;border-top:1px solid #CFE7EC}.hhc-q a{flex:1;text-align:center;text-decoration:none;font-size:13px;font-weight:700;border-radius:10px;padding:7px 4px;color:#fff}'
+    + '.hhc-q .z{background:#0068FF}.hhc-q .g{background:#0B3C5D}'
+    + '.hhc-i{display:flex;gap:8px;padding:8px 10px 10px;background:#fff}.hhc-i input{flex:1;min-width:0;border:1px solid #CFE7EC;border-radius:999px;padding:11px 14px;font-size:16px;font-family:inherit;background:#F3FAFB;color:#0B2E44;-webkit-user-select:text;user-select:text}'
+    + '.hhc-i button{background:#C2552B;color:#fff;border:0;border-radius:999px;padding:0 16px;font-weight:700;cursor:pointer;font-family:inherit;font-size:15px}'
+    + '@media (max-width:600px){.hhc-b{right:0;left:0;bottom:0;width:100%;max-width:100%;height:82vh;max-height:82vh;border-radius:18px 18px 0 0}.hhc-n{right:80px;bottom:96px}}'
+    + '.hhc-ok{margin:10px 0 0;font-weight:600;color:#0B7A43;text-align:left}';
+
+  var box, log, inp, launcher, nudge, started = false;
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+  function scrollEnd() { log.scrollTop = log.scrollHeight; }
+  function bubble(txt, who) { var d = el('div', 'hhc-m ' + (who === 'me' ? 'hhc-me' : 'hhc-bot')); d.textContent = txt; log.appendChild(d); scrollEnd(); }
+  function chips(list) {
+    if (!list || !list.length) return;
+    var w = el('div', 'hhc-c');
+    list.slice(0, 2).forEach(function (c) { var b = el('button'); b.type = 'button'; b.textContent = c; b.onclick = function () { w.remove(); ask(c); }; w.appendChild(b); });
+    log.appendChild(w); scrollEnd();
+  }
+  var outq = [], talking = false;
+  /* Hiện "Đang trả lời…" ngắn rồi mới hiện tin; các tin xếp hàng, không chồng lên nhau */
+  function say(txt, list) { convo.push('Trợ lý: ' + txt); outq.push([txt, list]); if (!talking) next(); }
+  function next() {
+    var it = outq.shift(); if (!it) { talking = false; return; } talking = true;
+    var t = el('div', 'hhc-t'); t.textContent = 'Đang trả lời…'; log.appendChild(t); scrollEnd();
+    setTimeout(function () { t.remove(); bubble(it[0], 'bot'); chips(it[1]); setTimeout(next, 120); }, Math.min(1100, 450 + it[0].length * 3));
+  }
+
+  function build() {
+    var st = el('style'); st.textContent = CSS; document.head.appendChild(st);
+    box = el('div', 'hhc-b'); box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', 'Trợ lý trả lời nhanh của anh Hoàng Hiệp');
+    box.innerHTML = '<div class="hhc-h"><span class="hhc-av">HH</span><div><b>Trợ lý trả lời nhanh</b><small>của anh Hoàng Hiệp · Sun Saphia Residence</small></div><button class="hhc-x" type="button" aria-label="Đóng">×</button></div>'
+      + '<div class="hhc-log"></div>'
+      + '<div class="hhc-q"><a class="z" href="' + ZALO + '" target="_blank" rel="noopener">Nhắn Zalo ' + SO + '</a><a class="g" href="' + TEL + '">Gọi anh Hiệp</a></div>'
+      + '<form class="hhc-i" autocomplete="off"><input type="text" name="hhc_msg" placeholder="Nhập câu hỏi hoặc số điện thoại…" aria-label="Nhập câu hỏi" enterkeyhint="send"><button type="submit">Gửi</button></form>';
+    document.body.appendChild(box);
+    log = box.querySelector('.hhc-log'); inp = box.querySelector('input');
+    box.querySelector('.hhc-x').onclick = function () { box.classList.remove('on'); };
+    box.querySelector('.hhc-i').addEventListener('submit', function (e) { e.preventDefault(); e.stopPropagation(); var v = inp.value.trim(); if (!v) return; inp.value = ''; ask(v); });
+    /* Nút mở chat: dùng nút sẵn có trên trang (#cb-fab hoặc [data-hhc-open]); không có thì tạo nút tròn góc phải */
+    var own = document.querySelectorAll('#cb-fab,[data-hhc-open]');
+    if (own.length) { own.forEach(function (b) { b.addEventListener('click', function (e) { e.preventDefault(); e.stopImmediatePropagation(); toggle(); }, true); }); launcher = own[0]; }
+    else {
+      launcher = el('button', 'hhc-l', '<i></i><svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2zm3 6v2h2V9H7zm4 0v2h2V9h-2zm4 0v2h2V9h-2z"/></svg>');
+      launcher.type = 'button'; launcher.setAttribute('aria-label', 'Mở trợ lý trả lời nhanh'); launcher.onclick = toggle; document.body.appendChild(launcher);
+    }
+    /* Một lời mời nhẹ sau 25 giây, mỗi phiên một lần */
+    nudge = el('div', 'hhc-n', '<button type="button" aria-label="Ẩn">×</button>Anh/Chị cần <b>vị trí, loại căn</b> hay nhận bảng giá khi công bố? Em trả lời nhanh ạ.');
+    if (own.length) nudge.style.bottom = '150px';
+    document.body.appendChild(nudge);
+    nudge.onclick = function (e) { if (e.target.tagName === 'BUTTON') { nudge.classList.remove('on'); return; } nudge.classList.remove('on'); open(); };
+    if (!sget('hhc_nudged')) setTimeout(function () { if (!box.classList.contains('on') && !sget('hhc_nudged')) { sset('hhc_nudged', '1'); nudge.classList.add('on'); setTimeout(function () { nudge.classList.remove('on'); }, 15000); } }, 25000);
+  }
+  function toggle() { if (box.classList.contains('on')) box.classList.remove('on'); else open(); }
+  function open() {
+    nudge && nudge.classList.remove('on'); box.classList.add('on');
+    if (!started) {
+      started = true; var nn = nightNote();
+      say('Dạ em chào Anh/Chị, em là trợ lý trả lời nhanh của anh Hoàng Hiệp về Sun Saphia Residence ạ.\nAnh/Chị đang quan tâm để ở, nghỉ dưỡng hay cho thuê ạ?' + (nn ? '\n(Giờ này ' + nn + '; em vẫn trả lời nhanh thông tin dự án.)' : ''), ['Vị trí dự án', 'Loại căn hộ']);
+    }
+    setTimeout(function () { try { inp.focus({preventScroll: true}); } catch (e) {} }, 250);
+  }
+  window.hhcOpen = open;
+
+  /* ---------- Hội thoại ---------- */
+  var convo = [], turn = 0, lastAsk = -9, refused = false, phone = '', name = '', topics = [], miss = 0, told = {}, used = {}, lastQ = '';
+  function transcript() { var s = convo.join('\n'); return s.length > 6000 ? '…' + s.slice(-6000) : s; }
+  function addTopic(t) { if (t && topics.indexOf(t) < 0) topics.push(t); }
+  function variant(it) { var n = it.a.length, i = ((used[it.id] == null ? Math.floor(Math.random() * n) - 1 : used[it.id]) + 1) % n; used[it.id] = i; return it.a[i]; }
+  function notifyOnce(kind, d) { if (told[kind] || sget('hhc_told_' + kind)) return; told[kind] = 1; sset('hhc_told_' + kind, '1'); lead(Object.assign({phone: phone, name: name, interest: topics.join(', '), hoi_thoai: transcript()}, d)); }
+  function urgent(why) { notifyOnce('human', {thong_bao: 'Khách trên trang Sun Saphia ' + why, yeu_cau: '⚠️ KHÁCH MUỐN NÓI CHUYỆN VỚI NGƯỜI THẬT – vào hỗ trợ ngay', cau_hoi: lastQ}); }
+  function findName(t) {
+    var m = t.match(/(?:tên(?: tôi| em| mình| anh| chị)?(?: là)?|tôi là|mình là|em là|anh là|chị là|ten(?: toi| em| minh)?(?: la)?|toi la|minh la)\s+([A-Za-zÀ-ỹĐđ]+(?:\s+[A-Za-zÀ-ỹĐđ]+){0,3})/i);
+    if (!m) return '';
+    if (/^(ai|gì|gi|khách|khach|người|nguoi|bot|máy|may|trợ|tro)(\s|$)/i.test(m[1])) return '';
+    var n = m[1].replace(/\s+(ạ|a|nhé|nhe|nha|đây|day)$/i, '').trim();
+    return n.length >= 2 && n.length <= 40 ? n.replace(/(^|\s)\S/g, function (c) { return c.toUpperCase(); }) : '';
+  }
+  /* Tìm số điện thoại trong câu: {ok: số} | {bad: true} | null */
+  function findPhone(t) {
+    var groups = String(t).match(/\+?\d[\d\s.\-]{4,16}\d/g); if (!groups) return null;
+    var phoneWord = /(số|so|sđt|sdt|zalo|điện thoại|dien thoai|đt|liên hệ|lien he)\s*[:\-]?\s*(của )?(tôi|toi|em|mình|minh|anh|chị|chi)?\s*(là|la)?\s*[:\-]?\s*\+?\d/i.test(t);
+    for (var i = 0; i < groups.length; i++) {
+      var g = groups[i], dg = g.replace(/\D/g, ''), p = normPhone(g);
+      if (p) return {ok: p};
+      if ((dg.length >= 8 && dg.length <= 13) || (dg.length >= 6 && (dg.charAt(0) === '0' || phoneWord))) return {bad: dg};
+    }
+    return null;
+  }
+  function sendChatLead() {
+    var r = lead({name: name, phone: phone, interest: 'Chat tư vấn' + (topics.length ? ' – ' + topics.join(', ') : ''), cau_hoi: lastQ, hoi_thoai: transcript()});
+    return r;
+  }
+
+  function ask(q) {
+    var raw = String(q).slice(0, 500);
+    bubble(raw, 'me'); convo.push('Khách: ' + raw); turn++;
+    var n = norm(ALIAS[raw] || raw);
+    var nm = findName(raw); if (nm) name = nm;
+
+    /* 1. Số điện thoại */
+    var f = findPhone(raw);
+    if (f && f.ok === '0904567009') { say('Dạ ' + SO + ' là số của anh Hoàng Hiệp ạ. Anh/Chị gõ số của mình để anh Hiệp gọi lại nhé.'); return; }
+    if (f && f.ok) {
+      if (phone === f.ok) { say('Dạ em đã có số ' + f.ok + ' rồi ạ, anh Hiệp sẽ liên hệ mình sớm.'); return; }
+      phone = f.ok; var r = sendChatLead(), nn = nightNote();
+      say('Dạ em cảm ơn ' + (name ? 'Anh/Chị ' + name : 'Anh/Chị') + ', em đã chuyển số ' + phone + ' cho anh Hiệp ạ.\n' + (nn ? 'Giờ này hơi muộn, ' + nn + ' qua Zalo nhé ạ.' : 'Anh Hiệp sẽ liên hệ qua Zalo trong ít phút ạ.') );
+      return;
+    }
+    if (f && f.bad) { say(pick(['Dạ số ' + f.bad + ' hình như chưa đúng ạ, số di động cần 10 số, ví dụ 0904 567 009. Anh/Chị kiểm tra giúp em nhé.', 'Dạ em chưa nhận được số này ạ, Anh/Chị gõ lại giúp em số 10 chữ số (ví dụ 0904 567 009) nhé.'])); return; }
+    lastQ = raw;
+
+    /* 2. Báo "khách đang chat" từ tin thứ 2 khi chưa có số */
+    if (!phone && turn >= 2) notifyOnce('chat', {thong_bao: 'Khách đang chat trên trang Sun Saphia (chưa để số)'});
+
+    /* 3. Văng tục */
+    if (isBad(n)) { urgent('đang bức xúc'); miss = 0; say(pick(['Dạ em xin lỗi nếu em trả lời chưa đúng ý Anh/Chị ạ. Em đã báo anh Hiệp, Anh/Chị gọi ' + SO + ' để anh hỗ trợ trực tiếp nhé.', 'Dạ em thành thật xin lỗi Anh/Chị ạ. Em chuyển anh Hiệp liên hệ mình ngay, hoặc Anh/Chị gọi thẳng ' + SO + '.'])); return; }
+
+    /* 4. Tìm ý */
+    var best = null, score = 0;
+    KB.forEach(function (it) { var sc = 0; it.k.forEach(function (k) { if (has(n, k)) sc += k.length + 2; }); if (sc > score) { score = sc; best = it; } });
+    if (!best || score < 3) {
+      miss++;
+      if (miss >= 2) { miss = 0; say('Dạ câu này em xin chuyển anh Hiệp trả lời cho chính xác ạ. Anh/Chị nhắn Zalo ' + SO + ' hoặc để lại số, anh Hiệp phản hồi ngay.', []); return; }
+      say(pick(['Dạ em chưa rõ ý Anh/Chị lắm ạ. Anh/Chị đang muốn hỏi về vị trí, loại căn hay giá ạ?', 'Dạ Anh/Chị nói rõ hơn giúp em một chút được không ạ, ví dụ "cách biển bao xa" hay "có mấy loại căn"?']), ['Vị trí dự án', 'Loại căn hộ']);
+      return;
+    }
+    miss = 0; addTopic(best.topic);
+    if (best.refuse) refused = true;
+    if (best.human) urgent('muốn nói chuyện với người thật');
+    var txt = variant(best);
+    if (best.human) { var nn2 = nightNote(); if (nn2) txt += '\nGiờ này ' + nn2 + ' ạ.'; }
+    /* Xin số khéo: đúng chủ đề, cách 3 lượt, khách từ chối thì thôi */
+    if (best.ask && !phone && !refused && turn - lastAsk >= 3 && (best.strong || turn >= 2)) { lastAsk = turn; txt += '\n' + best.ask; }
+    say(txt, best.c);
+  }
+
+  /* ---------- Form trên trang: gửi 3 nơi, không tải lại trang, cảm ơn tại form ---------- */
+  var LABEL = {nhu_cau: 'Loại căn', muc_dich: 'Mục đích', ngan_sach: 'Ngân sách', so_thich: 'Thích', loai_can: 'Loại căn', cau_hoi: 'Câu hỏi'};
+  document.addEventListener('submit', function (e) {
+    var fm = e.target; if (!fm || !fm.querySelector || fm.classList.contains('hhc-i')) return;
+    var tel = fm.querySelector('input[type=tel],[name=phone]'); if (!tel) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    var ph = normPhone(tel.value), nmEl = fm.querySelector('[name=name]');
+    if (!ph) {
+      tel.focus();
+      if (tel.setCustomValidity) { tel.setCustomValidity('Số điện thoại cần 10 số, ví dụ 0904 567 009'); if (tel.reportValidity) tel.reportValidity(); tel.addEventListener('input', function () { tel.setCustomValidity(''); }, {once: true}); }
+      return;
+    }
+    var parts = [];
+    fm.querySelectorAll('select,textarea').forEach(function (x) { var v = x.tagName === 'SELECT' ? (x.value && x.options[x.selectedIndex] ? x.options[x.selectedIndex].text : '') : x.value.trim(); if (v) parts.push((LABEL[x.name] || x.name || 'Ghi chú') + ': ' + v); });
+    var btn = fm.querySelector('[type=submit],button'), nmv = nmEl ? nmEl.value.trim().slice(0, 60) : '';
+    if (nmv && !name) name = nmv;
+    lead({name: nmv, phone: ph, interest: 'Form ' + (fm.getAttribute('data-form') || (btn ? btn.textContent.trim() : 'đăng ký')) + (parts.length ? ' · ' + parts.join(' · ') : ''), yeu_cau: parts.join(' · '), hoi_thoai: convo.length ? transcript() : ''});
+    phone = phone || ph;
+    if (btn) { btn.disabled = true; btn.textContent = 'Đã gửi ✓'; }
+    var ok = fm.querySelector('.hhc-ok') || fm.parentNode.querySelector('.hhc-ok');
+    if (!ok) { ok = el('p', 'hhc-ok'); fm.appendChild(ok); }
+    var nn = nightNote();
+    ok.textContent = 'Cảm ơn ' + (nmv || 'Anh/Chị') + '! Anh Hiệp sẽ gửi tài liệu qua Zalo ' + ph + (nn ? ' – ' + nn + '.' : ' trong ít phút.');
+  }, true);
+
+  /* Dự phòng khi khách đóng trang: nếu có số mà chưa gửi được thì gửi nốt */
+  window.addEventListener('pagehide', function () { if (phone && !wasSent(phone)) sendChatLead(); });
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build); else build();
+})();
+
 </script>
 </body>
 </html>
