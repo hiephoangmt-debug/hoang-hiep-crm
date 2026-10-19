@@ -121,12 +121,13 @@ msg('1','/khach'); run(); ok(/trước <b>/.test(lastTo('1').text)&&/Sau thời 
 // 8. xếp hạng tuần
 msg(900,'/tuan'); run(); ok(/Xếp hạng 7 ngày qua/.test(lastTo(900).text)&&/nhận đúng hạn/.test(lastTo(900).text),'8. /tuan: xếp hạng tuần');
 console.log('\n'+lastTo(900).text.replace(/<[^>]+>/g,''));
-// lọc dự án: chỉ Sun Saphia (cả tên miền viết "shaphia")
+// lọc tên miền: chỉ sun-saphia-residence.com
 {const b0=vm.runInContext("rows_('Khach',T_KHACH).length",ctx);
  const r1=Array(46).fill('');r1[1]=new FD();r1[2]='Cora';r1[3]='0988777666';r1[5]='www.cora-tower.com';r1[9]=1;r1[39]='Website';r1[40]='https://www.cora-tower.com/';r1[41]='Cora Tower';kh.appendRow(r1);
- const r2=Array(46).fill('');r2[1]=new FD();r2[2]='Shaphia';r2[3]='0988777555';r2[5]='www.sun-shaphiaresidence.com';r2[9]=1;r2[39]='Website';r2[40]='https://www.sun-shaphiaresidence.com/';r2[41]='';kh.appendRow(r2);
+ const r2=Array(46).fill('');r2[1]=new FD();r2[2]='Shaphia';r2[3]='0988777555';r2[5]='www.sun-shaphiaresidence.com';r2[9]=1;r2[39]='Website';r2[40]='https://www.sun-shaphiaresidence.com/';r2[41]='Sun Saphia Residence';kh.appendRow(r2);
+ const r3=Array(46).fill('');r3[1]=new FD();r3[2]='Ads';r3[3]='0988777444';r3[5]='www.sun-saphia-residence.com';r3[9]=1;r3[39]='Website';r3[40]='https://www.sun-saphia-residence.com/ads';r3[41]='Sun Saphia Residence';kh.appendRow(r3);
  run(); const added=vm.runInContext("rows_('Khach',T_KHACH).slice("+b0+").map(function(k){return k.sdt})",ctx);
- ok(added.length===1&&added[0]==='0988777555','chỉ chia khách Sun Saphia, bỏ qua dự án khác ('+added.join(',')+')');}
+ ok(added.length===1&&added[0]==='0988777444','chỉ chia khách từ sun-saphia-residence.com, bỏ qua sun-shaphiaresidence.com và dự án khác ('+added.join(',')+')');}
 // lệnh
 msg(900,'/sale');msg(900,'/baocao');msg(1,'/khach');msg(77,'hello');run();
 ok(/Đội chia khách/.test(to(900).slice(-2)[0].text),'/sale liệt kê đội');ok(/Báo cáo chia khách/.test(to(900).slice(-1)[0].text),'/baocao có báo cáo');

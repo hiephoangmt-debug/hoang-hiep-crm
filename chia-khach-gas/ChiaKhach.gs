@@ -23,7 +23,7 @@
 var MAC_DINH = {
   CRM_SHEET_ID: '',          // ID Sheet "CRM Hoàng Hiệp" (đoạn giữa /d/…/edit trong link)
   CRM_TAB: 'Khách hàng',
-  LOC_DU_AN: 'Saphia,Shaphia', // chỉ chia khách Sun Saphia (cột dự án / trang / website có 1 trong các chữ này); để trống = mọi dự án
+  LOC_TRANG: 'sun-saphia-residence.com', // chỉ chia khách đến từ tên miền này (cột Trang phát sinh lead / Website); nhiều tên miền cách nhau dấu phẩy; để trống = mọi trang
   GIO_BAT_DAU: 7,            // giờ làm việc (giờ Việt Nam); từ 21h tới 7h sáng hôm sau không tính hạn
   GIO_KET_THUC: 21,
   HAN_NHAN_PHUT: 30,
@@ -224,12 +224,12 @@ function layKhachCRM_() {
   var id = cfg('CRM_SHEET_ID'); if (!id) return [];
   var sh = SpreadsheetApp.openById(id).getSheetByName(cfg('CRM_TAB')); if (!sh) return [];
   var n = sh.getLastRow(); if (n < 2) return [];
-  var w = Math.min(46, sh.getLastColumn()), loc = String(cfg('LOC_DU_AN') || '').toLowerCase().split(',').map(function (x) { return x.trim(); }).filter(String);
+  var w = Math.min(46, sh.getLastColumn()), loc = String(cfg('LOC_TRANG') || '').toLowerCase().split(',').map(function (x) { return x.trim(); }).filter(String);
   return sh.getRange(2, 1, n - 1, w).getValues().map(function (r) {
     return {sdt: normPhone(r[3]), ten: String(r[2] || ''), luc: r[1], web: String(r[5] || ''), utm: [r[6], r[7]].filter(String).join(' / '),
       ghi_chu: String(r[21] || '').slice(0, 300), loai: String(r[39] || ''), trang: String(r[40] || ''), du_an: String(r[41] || ''), so_lan: Number(r[9]) || 1};
   }).filter(function (k) {
-    var chu = (k.du_an + ' ' + k.trang + ' ' + k.web).toLowerCase();
+    var chu = (k.trang + ' ' + k.web).toLowerCase();
     return k.sdt.length === 10 && k.loai === 'Website' && (!loc.length || loc.some(function (x) { return chu.indexOf(x) > -1; }));
   });
 }

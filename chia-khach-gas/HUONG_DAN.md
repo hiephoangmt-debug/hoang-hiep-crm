@@ -125,7 +125,7 @@ Sửa ngay trong tab **CauHinh**, không cần sửa code:
 | `HAN_CHUYEN_DOI_NGAY` | 3 | Số ngày để chuyển đổi |
 | `GIO_BAT_DAU` · `GIO_KET_THUC` | 7 · 21 | Giờ tính hạn |
 | `SO_LUOT_TOI_DA` | 4 | Chuyển quá số lượt này thì giao quản lý |
-| `LOC_DU_AN` | Saphia,Shaphia | Chỉ chia khách Sun Saphia. Để trống = chia khách mọi dự án |
+| `LOC_TRANG` | sun-saphia-residence.com | Chỉ chia khách đến từ tên miền này. Chỉ trang /ads: `sun-saphia-residence.com/ads`. Để trống = mọi trang |
 | `TOI_DA_CHUA_BAO_CAO` | 5 | Đang giữ từ ngần này khách chưa báo cáo thì tạm không giao thêm |
 | `THU_HOI_TU_DUNG` | 3 | Bị thu hồi vì không nhận ngần này lần/ngày thì tự tạm dừng |
 | `NONG_NHAC_NGAY` · `NONG_THU_HOI_NGAY` | 2 · 7 | Khách nóng: nhắc / thu hồi khi không cập nhật |
