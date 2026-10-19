@@ -1150,7 +1150,7 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
     var pend=null,lastHint=-9;
     var ZITEM={gia:'bảng giá theo đúng ngân sách',budget:'danh sách Studio và bảng giá',budget2:'bảng giá Studio tầng cao và 1BR+',budget3:'mặt bằng và bảng giá căn 2BR',vay:'bảng tính thanh toán và vay',phaply:'hồ sơ pháp lý',booking:'thông tin mở bán ngay khi chủ đầu tư công bố',chothue:'bảng tính dòng tiền cho thuê',dautu:'bảng tính dòng tiền cho thuê',tanggia:'tài liệu hạ tầng quanh dự án',vanhanh:'phương án cho thuê phù hợp',vitri:'video vị trí thực tế',sanbay:'video lộ trình thực tế',hoian:'bản đồ kết nối',bien:'danh sách căn hướng biển',view:'danh sách căn hướng biển',loaican:'mặt bằng chi tiết từng căn',nghiduong:'mặt bằng căn 2BR',tienich:'phối cảnh tiện ích',xem:'lịch xem dự án',bangiao:'tiến độ và tiêu chuẩn bàn giao',tieuchuan:'bảng tiêu chuẩn bàn giao',phi:'bảng phí dự kiến',cdt:'hồ sơ dự án'};
     function zItem(id){return ZITEM[id]||'bảng giá và mặt bằng';}
-    function withZalo(c){c=(c||[]).slice();if(!leadDone&&c.indexOf('Nhắn Zalo 0904 567 009')<0)c.push('Nhắn Zalo 0904 567 009');return c;}
+    function withZalo(c){c=(c||[]).slice(0,2);if(!leadDone&&c.indexOf('Nhắn Zalo 0904 567 009')<0)c.push('Nhắn Zalo 0904 567 009');return c;}
     function norm(t){var x=(' '+t+' ').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ');
       var AB={' ko ':' khong ',' k ':' khong ',' kh ':' khong ',' hong ':' khong ',' dc ':' duoc ',' bn ':' bao nhieu ',' bnhieu ':' bao nhieu ',' j ':' gi ',' mn ':' moi nguoi ',' tr ':' trieu ',' cty ':' cong ty ',' cdt ':' chu dau tu ',' sh ':' so hong ',' pn ':' phong ngu ',' a ':' anh ',' c ':' chi '};
       for(var z=0;z<2;z++)for(var k in AB)x=x.split(k).join(AB[k]);return x;}
@@ -1159,8 +1159,14 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
       if(im){var u=img(IMG[im]);if(u){var w=document.createElement('div');w.className='cb-wrap';w.appendChild(d);var i=document.createElement('img');i.className='cb-img';i.src=u;i.alt='';i.onload=scrollEnd;i.onclick=function(){window.open(u,'_blank');};w.appendChild(i);log.appendChild(w);scrollEnd();return;}}
       log.appendChild(d);scrollEnd();}
     function chips(list){if(!list||!list.length)return;var w=document.createElement('div');w.className='cb-chips';list.forEach(function(c){var b=document.createElement('button');b.type='button';b.className='cb-chip'+(/Zalo|Đặt lịch|Nhận|Gọi|Đăng ký/.test(c)?' hot':'');b.textContent=c;b.onclick=function(){w.remove();ask(c);};w.appendChild(b);});log.appendChild(w);scrollEnd();}
-    function bot(txt,list,im,delay){var t=document.createElement('div');t.className='cb-typing';t.textContent='Đang soạn tin…';log.appendChild(t);scrollEnd();
-      var d=delay||Math.min(900,350+txt.length*1.5);setTimeout(function(){t.remove();add(txt,'bot',im);chips(list);},d);return d;}
+    function bot(txt,list,im,delay){
+      var L=txt.split('\n'),parts=L.length<3?[txt]:[L[0],L.slice(1,-1).join('\n'),L[L.length-1]];
+      if(L.length===2&&L[0].length>60)parts=[L[0],L[1]];
+      var i=0,total=0;
+      function next(){var p=parts[i],t=document.createElement('div');t.className='cb-typing';t.textContent='Đang trả lời…';log.appendChild(t);scrollEnd();
+        var d=i===0?(delay||Math.min(700,380+p.length*2)):Math.min(1500,500+p.length*6);total+=d;
+        setTimeout(function(){t.remove();var last=i===parts.length-1;add(p,'bot',last?im:null);i++;if(!last)setTimeout(next,300);else chips(list);},d);}
+      next();return 900;}
     function leadAsk(after,topic){if(leadDone||turn-lastLead<3)return;lastLead=turn;pend=null;setTimeout(function(){bot(leadMsg(topic),['Nhắn Zalo 0904 567 009','Gọi 0904 567 009'],null,1100);},after+1200);}
     function phone(t){var m=t.replace(/[\s.\-]/g,'').match(/(\+?84|0)(3|5|7|8|9)\d{8}/);return m?m[0]:null;}
     function goto(sel){var e=document.querySelector(sel);if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
@@ -1175,18 +1181,18 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
       var joke=/(haha|hihi|hehe|kaka|kk+|=\)+|:\)+|:d|😂|🤣|😄|😆|😁|đùa|giỡn|vui tính)/i.test(q);
       var nq=norm(ALIAS[q]||q),best=null,score=0;
       KB.forEach(function(it){var sc=0;it.k.forEach(function(k){if(nq.indexOf(' '+k+' ')>-1)sc+=k.length+3;});(it.w||[]).forEach(function(k){if(nq.indexOf(' '+k+' ')>-1)sc+=1;});if(it.id===lastTopic)sc+=0.5;if(sc>score){score=sc;best=it;}});
-      if(best&&score>=2){miss=0;lastTopic=best.id;var rep=seen[best.id];seen[best.id]=1;var txt=pick(best.a);if(rep&&best.a.length===1)txt='Dạ, em xin nhắc lại thông tin:\n'+txt;
+      if(best&&score>=2){miss=0;lastTopic=best.id;var rep=seen[best.id];seen[best.id]=1;var txt=pick(best.a);
         if(joke&&best.id!=='dua')txt=pick(['Dạ, Anh/Chị hóm hỉnh quá ạ. ','Dạ, nói chuyện với Anh/Chị vui thật ạ. '])+txt.replace(/^Dạ, /,'');
-        if(!leadDone&&(best.lead||turn-lastHint>=2)&&best.id!=='hi'&&best.id!=='bot'){lastHint=turn;txt+='\n👉 '+(/\?\s*$/.test(txt)?'Hoặc nhanh nhất, ':'')+'Anh/Chị bấm "Nhắn Zalo" bên dưới, anh Hiệp gửi ngay '+zItem(best.id)+' ạ.';}
-        var d=bot(txt,withZalo(best.c),best.img);if(best.go)setTimeout(function(){goto(best.go);},d+600);
+        if(!leadDone&&!/\?\s*$/.test(txt)&&(best.lead||turn-lastHint>=3)&&best.id!=='hi'&&best.id!=='bot'&&best.id!=='thanks'){lastHint=turn;txt+='\n'+pick(['Nếu tiện, Anh/Chị nhắn Zalo 0904 567 009 cho em, em gửi '+zItem(best.id)+' để Anh/Chị xem cho rõ ạ.','Anh/Chị cho em xin số Zalo, em gửi '+zItem(best.id)+' qua đó cho tiện xem nhé ạ.']);}
+        var d=bot(txt,withZalo(best.c),best.img);
         }
       else if(joke){bot(pick(['Dạ, Anh/Chị vui tính quá ạ. Biển Mỹ Khê cũng đang "cười" với Anh/Chị đấy ạ. Anh/Chị muốn tìm hiểu giá bán hay vị trí trước ạ?','Dạ, em cũng mong mỗi ngày đều được trò chuyện vui như thế này ạ. Anh/Chị cần em hỗ trợ thông tin gì về dự án ạ?']),['Giá bán','Vị trí dự án','Hiệu quả cho thuê']);}
       else{miss++;
-        if(miss<2){bot('Dạ, để em trả lời sát nhất, Anh/Chị đang quan tâm về nội dung nào dưới đây ạ? Anh/Chị cũng có thể hỏi cụ thể hơn, ví dụ "cách biển bao xa", "giá studio", "thanh toán thế nào".',['Giá bán','Vị trí dự án','Cách biển bao xa','Chính sách thanh toán','Hiệu quả cho thuê','Thông tin pháp lý']);}
+        if(miss<2){bot('Dạ, để em trả lời sát nhất, Anh/Chị đang quan tâm về nội dung nào dưới đây ạ? Anh/Chị cũng có thể hỏi cụ thể hơn, ví dụ "cách biển bao xa", "giá studio", "thanh toán thế nào".',['Giá bán','Vị trí dự án','Nhắn Zalo 0904 567 009']);}
         else{miss=0;bot('Dạ, câu hỏi này cần thông tin chi tiết từ chủ đầu tư, em xin phép để anh Hoàng Hiệp trả lời Anh/Chị cho chính xác. Anh/Chị có thể nhắn Zalo hoặc để lại số điện thoại, hoặc tiếp tục hỏi em các nội dung khác ạ.',['Nhắn Zalo 0904 567 009','Giá bán','Vị trí dự án']);}}
     }
     function open(ctx){hideNudge();box.classList.add('open');opened=true;
-      if(!started){started=true;bot(ctx&&ctx.greet?ctx.greet:'Dạ, em kính chào Anh/Chị. Em là trợ lý của anh Hoàng Hiệp, hỗ trợ thông tin dự án Sun Saphia Residence – căn hộ mặt biển Mỹ Khê do Sun Property phát triển.\nAnh/Chị cần tìm hiểu thông tin nào ạ?',ctx&&ctx.chips?ctx.chips:['Giá bán','Vị trí dự án','Hiệu quả cho thuê','Các loại căn hộ','Tiện ích dự án','Nhắn Zalo 0904 567 009'],ctx&&ctx.img,300);}
+      if(!started){started=true;bot(ctx&&ctx.greet?ctx.greet:'Dạ, em chào Anh/Chị ạ.\nAnh/Chị đang quan tâm Sun Saphia để ở, nghỉ dưỡng hay cho thuê ạ? Em gửi đúng thông tin Anh/Chị cần.',ctx&&ctx.chips?ctx.chips:['Giá bán','Vị trí dự án','Nhắn Zalo 0904 567 009'],ctx&&ctx.img,300);}
       else if(ctx&&ctx.greet){bot(ctx.greet,withZalo(ctx.chips),ctx.img,300);}
       setTimeout(function(){inp.focus();},300);}
     btn.onclick=function(){open(curCtx);};
@@ -1207,13 +1213,13 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
     ];
     var curCtx=null,nudged={},nCount=0,timers={};
     function hideNudge(){ndg.classList.remove('show');}
-    function showNudge(s){if(opened&&box.classList.contains('open'))return;if(document.body.classList.contains('in4d'))return;if(nudged[s.sel]||nCount>=4)return;nudged[s.sel]=1;nCount++;
+    function showNudge(s){if(opened&&box.classList.contains('open'))return;if(document.body.classList.contains('in4d'))return;if(nudged[s.sel]||nCount>=2)return;nudged[s.sel]=1;nCount++;
       curCtx={greet:s.g,chips:s.c,img:s.img};ndgT.innerHTML=s.t;ndg.classList.add('show');if(fab){fab.classList.remove('ping');void fab.offsetWidth;fab.classList.add('ping');}
       setTimeout(function(){if(curCtx&&curCtx.greet===s.g)hideNudge();},14000);}
     ndg.addEventListener('click',function(e){if(e.target.classList.contains('nx')){e.stopPropagation();hideNudge();return;}open(curCtx);});
     if('IntersectionObserver' in window){
       var io=new IntersectionObserver(function(es){es.forEach(function(en){var s=en.target._cb;
-        if(en.isIntersecting&&en.intersectionRatio>=0.35){timers[s.sel]=setTimeout(function(){showNudge(s);},9000);}
+        if(en.isIntersecting&&en.intersectionRatio>=0.35){timers[s.sel]=setTimeout(function(){showNudge(s);},15000);}
         else{clearTimeout(timers[s.sel]);}});},{threshold:[0,0.35]});
       SEC.forEach(function(s){var el=document.querySelector(s.sel);if(el){el._cb=s;io.observe(el);}});
     }
