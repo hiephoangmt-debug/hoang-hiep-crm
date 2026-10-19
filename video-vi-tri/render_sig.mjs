@@ -11,7 +11,7 @@ const server = http.createServer((q, r) => { const p = path.join(ROOT, decodeURI
 const [mode, arg] = process.argv.slice(2);
 const browser = await chromium.launch({ executablePath: process.env.CHROME || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' });
 const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
-await page.goto(`http://localhost:${server.address().port}/sig.html`);
+await page.goto(`http://localhost:${server.address().port}/${process.env.PAGE || 'brand.html'}`);
 await page.waitForFunction('window.READY === true');
 const shot = () => page.screenshot({ type: 'png', omitBackground: true });
 if (mode === 'png') {
