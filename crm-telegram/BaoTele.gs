@@ -20,7 +20,7 @@
  */
 var BT_WEBAPP = 'https://script.google.com/macros/s/AKfycbwvmG1HMtrQOeUXCuBJ6CHmMb4TcCZ53_n5lwPAt3-6-lG2_fIRX0q25Rv-6LPwVWXZHw/exec?key=sft-tg-4821';
 // Trang đã tự báo Telegram trực tiếp (kèm nội dung chat) → CRM không báo lại để khỏi trùng tin.
-var BT_SKIP_PAGE = /sun-fours-tower\.com/i;
+var BT_SKIP_PAGE = /sun-fours-tower\.com|sun-saphia-residence\.com/i;
 var BT_SHEET = 'Khách hàng', BT_LOG = 'Báo Telegram';
 var BT_MAX_PER_RUN = 10;
 
