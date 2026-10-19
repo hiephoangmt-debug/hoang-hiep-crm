@@ -83,6 +83,26 @@ function phutLamViec(a, b) {
   }
   return Math.floor(tong / 60000);
 }
+/* Thời điểm đủ "phut" phút làm việc tính từ a (bỏ qua 21h–7h) */
+function hanLuc(a, phut) {
+  a = ms(a); var off = 7 * 3600000, gs = num('GIO_BAT_DAU') * 3600000, ge = num('GIO_KET_THUC') * 3600000, con = phut * 60000;
+  for (var day = Math.floor((a + off) / 86400000); day < Math.floor((a + off) / 86400000) + 400; day++) {
+    var d0 = day * 86400000 - off, x = Math.max(a, d0 + gs), y = d0 + ge;
+    if (y > x) { if (y - x >= con) return x + con; con -= y - x; }
+  }
+  return a;
+}
+/* Giờ hạn của khách theo trạng thái hiện tại */
+function han_(k) {
+  var st = k.trang_thai, ngay = phutMotNgay();
+  if (st === 'cho_nhan') return {viec: 'bấm Nhận', luc: hanLuc(k.luc_giao, num('HAN_NHAN_PHUT'))};
+  if (st === 'da_nhan') return {viec: 'báo cáo', luc: hanLuc(k.luc_nhan, num('HAN_BAO_CAO_PHUT'))};
+  if (st === 'dang_cham') return {viec: 'lên Hẹn gặp / Khách nóng / Đã chốt', luc: hanLuc(k.luc_nhan, num('HAN_CHUYEN_DOI_NGAY') * ngay)};
+  if (st === 'chuyen_doi') return {viec: 'cập nhật báo cáo', luc: hanLuc(k.luc_bao_cao || k.luc_nhan, num('NONG_THU_HOI_NGAY') * ngay)};
+  if (st === 'cho_ly_do') return {viec: 'gõ lý do đóng', luc: hanLuc(k.luc_bao_cao, num('HAN_BAO_CAO_PHUT'))};
+  return null;
+}
+function dongHan_(k) { var h = han_(k); return h ? '⏱ Hạn ' + h.viec + ': <b>trước ' + fmt(h.luc) + '</b>. Sau thời gian trên sẽ bị thu hồi.' : ''; }
 function phutMotNgay() { return (num('GIO_KET_THUC') - num('GIO_BAT_DAU')) * 60; }
 function che(sdt) { sdt = String(sdt || ''); return sdt.length >= 8 ? sdt.slice(0, 4) + ' ••• ' + sdt.slice(-3) : '•••'; }
 function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
@@ -268,7 +288,7 @@ function giao_(k) {
   var s = ung[0], t = nowD(), dem = trongGio(ms(t));
   k.trang_thai = 'cho_nhan'; k.nguoi_giu = String(s.chat_id); k.ten_sale = s.ten; k.luc_giao = t; k.luc_nhan = ''; k.luc_bao_cao = ''; k.bao_cao = ''; k.nhac = ''; k.ly_do_dong = '';
   k.so_luot = Number(k.so_luot || 0) + 1;
-  k.msg_id = gui_(s.chat_id, tinKhach_(k, false) + '\n\n⏱ Bấm <b>Nhận khách</b> trong ' + num('HAN_NHAN_PHUT') + ' phút' + (dem ? '' : ' (tính từ ' + num('GIO_BAT_DAU') + 'h sáng)') + ', quá hạn sẽ chuyển bạn khác.',
+  k.msg_id = gui_(s.chat_id, tinKhach_(k, false) + '\n\n' + dongHan_(k) + (dem ? '' : '\n(Ngoài giờ ' + num('GIO_BAT_DAU') + 'h–' + num('GIO_KET_THUC') + 'h không tính.)'),
     [[{text: '✅ Nhận khách', callback_data: 'n:' + k.id}]], !dem);
   save_('Khach', T_KHACH, k);
   s.luc_giao_cuoi = t; save_('Sale', T_SALE, s);
@@ -301,19 +321,19 @@ function kiemTraHan_() {
     if (st === 'cho_nhan') {
       p = phutLamViec(k.luc_giao, now);
       if (p >= num('HAN_NHAN_PHUT')) thuHoi_(k, 'không bấm nhận trong ' + num('HAN_NHAN_PHUT') + ' phút');
-      else if (p >= num('NHAC_NHAN_PHUT') && !coNhac_(k, 'n')) { datNhac_(k, 'n'); save_('Khach', T_KHACH, k); nhac_(k, '⏰ Còn ' + (num('HAN_NHAN_PHUT') - p) + ' phút để bấm <b>Nhận khách ' + esc(k.id) + '</b>, quá hạn sẽ chuyển bạn khác.'); }
+      else if (p >= num('NHAC_NHAN_PHUT') && !coNhac_(k, 'n')) { datNhac_(k, 'n'); save_('Khach', T_KHACH, k); nhac_(k, '⏰ Còn ' + (num('HAN_NHAN_PHUT') - p) + ' phút để bấm <b>Nhận khách ' + esc(k.id) + '</b>.\n' + dongHan_(k)); }
     } else if (st === 'da_nhan') {
       p = phutLamViec(k.luc_nhan, now);
       if (p >= num('HAN_BAO_CAO_PHUT')) thuHoi_(k, 'nhận nhưng không báo cáo trong ' + Math.round(num('HAN_BAO_CAO_PHUT') / 60) + ' giờ');
-      else if (p >= num('NHAC_BAO_CAO_PHUT') && !coNhac_(k, 'b')) { datNhac_(k, 'b'); save_('Khach', T_KHACH, k); nhac_(k, '⏰ Còn ' + (num('HAN_BAO_CAO_PHUT') - p) + ' phút để <b>báo cáo khách ' + esc(k.id) + '</b> (bấm 1 nút báo cáo).'); }
+      else if (p >= num('NHAC_BAO_CAO_PHUT') && !coNhac_(k, 'b')) { datNhac_(k, 'b'); save_('Khach', T_KHACH, k); nhac_(k, '⏰ <b>Báo cáo khách ' + esc(k.id) + ' để cập nhật</b> (bấm 1 nút báo cáo), còn ' + (num('HAN_BAO_CAO_PHUT') - p) + ' phút.\n' + dongHan_(k)); }
     } else if (st === 'dang_cham') {
       p = phutLamViec(k.luc_nhan, now);
       if (p >= num('HAN_CHUYEN_DOI_NGAY') * ngay) thuHoi_(k, num('HAN_CHUYEN_DOI_NGAY') + ' ngày chưa chuyển đổi');
-      else if (p >= num('NHAC_CHUYEN_DOI_NGAY') * ngay && !coNhac_(k, 'c')) { datNhac_(k, 'c'); save_('Khach', T_KHACH, k); nhac_(k, '⏰ Khách ' + esc(k.id) + ' còn khoảng ' + (num('HAN_CHUYEN_DOI_NGAY') - num('NHAC_CHUYEN_DOI_NGAY')) + ' ngày để lên Hẹn gặp / Khách nóng / Đã chốt, không thì sẽ chuyển bạn khác.'); }
+      else if (p >= num('NHAC_CHUYEN_DOI_NGAY') * ngay && !coNhac_(k, 'c')) { datNhac_(k, 'c'); save_('Khach', T_KHACH, k); nhac_(k, '⏰ <b>Báo cáo khách ' + esc(k.id) + ' để cập nhật</b>: còn khoảng ' + (num('HAN_CHUYEN_DOI_NGAY') - num('NHAC_CHUYEN_DOI_NGAY')) + ' ngày để lên Hẹn gặp / Khách nóng / Đã chốt.\n' + dongHan_(k)); }
     } else if (st === 'chuyen_doi') {
       p = phutLamViec(k.luc_bao_cao || k.luc_nhan, now);
       if (p >= num('NONG_THU_HOI_NGAY') * ngay) thuHoi_(k, 'khách nóng ' + num('NONG_THU_HOI_NGAY') + ' ngày không cập nhật');
-      else if (p >= num('NONG_NHAC_NGAY') * ngay && !coNhac_(k, 'h')) { datNhac_(k, 'h'); save_('Khach', T_KHACH, k); nhac_(k, '⏰ Khách ' + esc(k.id) + ' (' + esc(k.bao_cao) + ') đã ' + num('NONG_NHAC_NGAY') + ' ngày chưa cập nhật. Bấm 1 nút báo cáo giúp nhé, ' + num('NONG_THU_HOI_NGAY') + ' ngày im lặng sẽ chuyển bạn khác.'); }
+      else if (p >= num('NONG_NHAC_NGAY') * ngay && !coNhac_(k, 'h')) { datNhac_(k, 'h'); save_('Khach', T_KHACH, k); nhac_(k, '⏰ <b>Báo cáo khách ' + esc(k.id) + ' để cập nhật</b> (' + esc(k.bao_cao) + ', đã ' + num('NONG_NHAC_NGAY') + ' ngày chưa cập nhật).\n' + dongHan_(k)); }
     } else if (st === 'cho_ly_do') {
       if (phutLamViec(k.luc_bao_cao, now) >= num('HAN_BAO_CAO_PHUT')) { P().deleteProperty('LYDO_' + k.nguoi_giu); thuHoi_(k, 'không ghi lý do đóng khách'); }
     }
@@ -384,7 +404,7 @@ function lenh_(m) {
   if (c === '/lam') { s.trang_thai = 'lam'; save_('Sale', T_SALE, s); log_(s.ten, 'đi làm'); gui_(chat, '▶️ Đã bật nhận khách.'); return; }
   if (c === '/khach') {
     var l = rows_('Khach', T_KHACH).filter(function (k) { return String(k.nguoi_giu) === chat && DANG_GIU.test(k.trang_thai) && k.trang_thai !== 'cho_nhan'; });
-    gui_(chat, l.length ? l.map(function (k) { return '• ' + esc(k.id) + ' ' + esc(k.sdt) + ' – ' + esc(k.bao_cao || 'chưa báo cáo'); }).join('\n') : 'Bạn chưa giữ khách nào.'); return;
+    gui_(chat, l.length ? '<b>Khách bạn đang giữ</b>\n' + l.map(function (k) { var h = han_(k); return '• ' + esc(k.id) + ' ' + esc(k.sdt) + ' – ' + esc(k.bao_cao || 'chưa báo cáo') + (h ? '\n   ⏱ ' + h.viec + ' trước <b>' + fmt(h.luc) + '</b>' : ''); }).join('\n') + '\n\nSau thời gian trên sẽ bị thu hồi.' : 'Bạn chưa giữ khách nào.'); return;
   }
   gui_(chat, 'Lệnh: /khach (khách đang giữ) · /nghi · /lam');
 }
@@ -420,7 +440,7 @@ function bam_(q) {
   if (parts[0] === 'n') {
     if (k.trang_thai !== 'cho_nhan') return tl('Đã nhận rồi');
     k.trang_thai = 'da_nhan'; k.luc_nhan = nowD(); save_('Khach', T_KHACH, k); log_(k.ten_sale, 'nhận khách', k.id, 'xem số');
-    sua_(chat, k.msg_id, tinKhach_(k, true) + '\n\n✅ Bạn đã nhận. Báo cáo trong ' + Math.round(num('HAN_BAO_CAO_PHUT') / 60) + ' giờ, chuyển đổi trong ' + num('HAN_CHUYEN_DOI_NGAY') + ' ngày (chỉ tính ' + num('GIO_BAT_DAU') + 'h–' + num('GIO_KET_THUC') + 'h).', nutBaoCao_(k.id));
+    sua_(chat, k.msg_id, tinKhach_(k, true) + '\n\n✅ Bạn đã nhận. Báo cáo khách này để cập nhật.\n' + dongHan_(k) + '\n(Hạn chuyển đổi: trước ' + fmt(hanLuc(k.luc_nhan, num('HAN_CHUYEN_DOI_NGAY') * phutMotNgay())) + ' · chỉ tính ' + num('GIO_BAT_DAU') + 'h–' + num('GIO_KET_THUC') + 'h)', nutBaoCao_(k.id));
     return tl('Đã nhận khách');
   }
   if (parts[0] === 'b' && BC[parts[2]]) {
@@ -438,7 +458,7 @@ function bam_(q) {
     else if (k.trang_thai !== 'chuyen_doi') k.trang_thai = 'dang_cham';
     save_('Khach', T_KHACH, k); log_(k.ten_sale, 'báo cáo', k.id, BC[code]);
     var xong = k.trang_thai === 'chot';
-    sua_(chat, k.msg_id, tinKhach_(k, true) + '\n\n📝 Báo cáo mới nhất: <b>' + esc(BC[code]) + '</b> (' + fmt(k.luc_bao_cao) + ')', xong ? [] : nutBaoCao_(k.id));
+    sua_(chat, k.msg_id, tinKhach_(k, true) + '\n\n📝 Báo cáo mới nhất: <b>' + esc(BC[code]) + '</b> (' + fmt(k.luc_bao_cao) + ')' + (xong ? '' : '\n' + dongHan_(k)), xong ? [] : nutBaoCao_(k.id));
     if (code === 'cd') baoQL_('🎉 <b>' + esc(k.ten_sale) + '</b> đã chốt khách ' + esc(k.id) + '.');
     return tl('Đã ghi báo cáo');
   }

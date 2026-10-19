@@ -55,7 +55,7 @@ adv(29);run(); ok(K('K1').nguoi_giu===first,'29 phút: chưa thu hồi');
 adv(2);run(); k=K('K1'); ok(k.nguoi_giu!==first&&k.trang_thai==='cho_nhan','31 phút không nhận: thu hồi, giao '+k.ten_sale);
 ok(edits.some(e=>String(e.chat_id)===first&&/đã được thu hồi/.test(e.text)&&!/0905/.test(e.text)),'tin cũ của sale trước bị sửa, ẩn số');
 ok(to(900).some(s=>/Thu hồi K1/.test(s.text)),'quản lý được báo thu hồi');
-const m2=lastTo(k.nguoi_giu).text; ok(!/An|lượt|thu hồi|Vào lúc/.test(m2)&&/Giao lúc/.test(m2),'sale nhận lượt sau không biết thu hồi từ ai (tin như khách mới)');
+const m2=lastTo(k.nguoi_giu).text; ok(!/An|lượt|đã được thu hồi|Vào lúc/.test(m2)&&/Giao lúc/.test(m2),'sale nhận lượt sau không biết thu hồi từ ai (tin như khách mới)');
 ok(!edits.filter(e=>String(e.chat_id)===first).some(e=>/Bình|Cường/.test(e.text)),'sale bị thu hồi không biết khách chuyển cho ai');
 // sale 2 nhận -> thấy số; 2h không báo cáo -> thu hồi
 const second=k.nguoi_giu; click(second,'n:K1'); run(); k=K('K1');
@@ -73,7 +73,7 @@ ok(k.trang_thai==='cho_nhan','khách 20:50 được giao ('+k.ten_sale+')');
 NOW=Date.UTC(2026,9,27,0,15); run(); ok(K('K2').nguoi_giu===n1,'7:15 sáng hôm sau (10+15 phút làm việc): chưa thu hồi');
 NOW=Date.UTC(2026,9,27,0,21); run(); ok(K('K2').nguoi_giu!==n1,'7:21: đủ 30 phút làm việc → thu hồi');
 // khách lúc 23h: tin gửi im lặng
-NOW=Date.UTC(2026,9,27,16,0); crmRow('0966000222','Khuya'); run(); const mk=sent.filter(s=>/KHÁCH K3/.test(s.text)).pop(); ok(mk&&mk.disable_notification===true&&/tính từ 7h/.test(mk.text),'khách 23h: gửi im lặng, hạn tính từ 7h');
+NOW=Date.UTC(2026,9,27,16,0); crmRow('0966000222','Khuya'); run(); const mk=sent.filter(s=>/KHÁCH K3/.test(s.text)).pop(); ok(mk&&mk.disable_notification===true&&/trước 07:30 28\/10/.test(mk.text),'khách 23h: gửi im lặng, hạn nhận 07:30 sáng hôm sau');
 // chuyển đổi dừng hạn
 NOW=Date.UTC(2026,9,28,1,0); k=K('K3'); click(k.nguoi_giu,'n:K3'); run(); click(k.nguoi_giu,'b:K3:hen'); run(); advW(14*60*6); run(); ok(K('K3').trang_thai==='chuyen_doi'&&K('K3').nguoi_giu===k.nguoi_giu,'hẹn gặp = chuyển đổi: qua hạn 3 ngày vẫn không thu hồi (6 ngày làm việc)');
 click(k.nguoi_giu,'b:K3:cd'); run(); ok(K('K3').trang_thai==='chot'&&to(900).some(s=>/đã chốt khách K3/.test(s.text)),'chốt: quản lý được báo');
@@ -83,8 +83,10 @@ const nhacTo=(chat,re)=>sent.some(s=>String(s.chat_id)===String(chat)&&re.test(s
 NOW=Date.UTC(2026,10,2,2,0); // thứ Hai 9h
 crmRow('0933000001','Nhắc'); run(); let r=K('K4'); const h4=r.nguoi_giu;
 adv(21); run(); ok(nhacTo(h4,/Còn 9 phút để bấm/),'1. nhắc trước khi thu hồi (phút 21: còn 9 phút)');
-click(h4,'n:K4'); run(); adv(91); run(); ok(nhacTo(h4,/phút để <b>báo cáo khách K4/),'1. nhắc báo cáo ở phút 91');
-click(h4,'b:K4:goi'); run(); advW(14*60*2-91+5); run(); ok(nhacTo(h4,/K4 còn khoảng 1 ngày/),'1. nhắc ngày thứ 2 chưa chuyển đổi');
+ok(sent.some(x=>/KHÁCH K4/.test(x.text)&&/Hạn bấm Nhận: <b>trước 09:30 02\/11<\/b>. Sau thời gian trên sẽ bị thu hồi/.test(x.text)),'tin giao ghi giờ hạn cụ thể (09:30)');
+click(h4,'n:K4'); run(); ok(edits.some(e=>/Báo cáo khách này để cập nhật/.test(e.text)&&/Hạn báo cáo: <b>trước 11:21 02\/11/.test(e.text)),'nhận xong: ghi hạn báo cáo cụ thể (11:21)');
+adv(91); run(); ok(nhacTo(h4,/Báo cáo khách K4 để cập nhật/)&&nhacTo(h4,/Sau thời gian trên sẽ bị thu hồi/),'1. nhắc báo cáo ở phút 91, ghi giờ hạn');
+click(h4,'b:K4:goi'); run(); advW(14*60*2-91+5); run(); ok(nhacTo(h4,/K4 để cập nhật<\/b>: còn khoảng 1 ngày/),'1. nhắc ngày thứ 2 chưa chuyển đổi');
 // 2. khách quay lại
 const before=sent.length; crmRow('0933000001','Nhắc',2); run();
 ok(nhacTo(h4,/Khách K4 vừa liên hệ lại/)&&!sent.slice(before).some(s=>/KHÁCH K5/.test(s.text)),'2. khách gửi lại → báo đúng người đang chăm, không chia mới');
@@ -111,6 +113,8 @@ const giu2=vm.runInContext("rows_('Khach',T_KHACH).filter(function(k){return k.n
 msg(900,'/xoa Bình'); run(); const con=vm.runInContext("rows_('Khach',T_KHACH).filter(function(k){return k.nguoi_giu=='2'&&DANG_GIU.test(k.trang_thai)}).length",ctx);
 ok(vm.runInContext("timSale_('2').trang_thai",ctx)==='nghi_viec'&&con===0&&/Đã gỡ Bình/.test(lastTo(900).text),'7. /xoa: gỡ sale, thu hồi '+giu2+' khách đang giữ');
 msg(2,'/khach'); run(); ok(/dangky/.test(lastTo(2).text),'7. sale đã gỡ không xem được khách');
+// /khach có hạn
+msg('1','/khach'); run(); ok(/trước <b>/.test(lastTo('1').text)&&/Sau thời gian trên sẽ bị thu hồi/.test(lastTo('1').text),'/khach liệt kê giờ hạn từng khách');
 // 8. xếp hạng tuần
 msg(900,'/tuan'); run(); ok(/Xếp hạng 7 ngày qua/.test(lastTo(900).text)&&/nhận đúng hạn/.test(lastTo(900).text),'8. /tuan: xếp hạng tuần');
 console.log('\n'+lastTo(900).text.replace(/<[^>]+>/g,''));

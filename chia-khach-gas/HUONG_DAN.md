@@ -30,6 +30,12 @@ Chạy miễn phí trên Google Apps Script, không cần máy chủ. Dành cho 
 
 Mọi hạn và nhắc chỉ tính trong giờ 7h–21h.
 
+**Giờ hạn ghi rõ trên từng tin.** Ví dụ khách giao lúc 9h00:
+- Tin giao: "⏱ Hạn bấm Nhận: **trước 09:30**. Sau thời gian trên sẽ bị thu hồi."
+- Bấm Nhận lúc 9h21: "Báo cáo khách này để cập nhật. ⏱ Hạn báo cáo: **trước 11:21**…" kèm hạn chuyển đổi.
+- Tin nhắc: "⏰ Báo cáo khách K4 để cập nhật… ⏱ Hạn báo cáo: trước 11:21. Sau thời gian trên sẽ bị thu hồi."
+- Lệnh `/khach`: liệt kê từng khách đang giữ kèm giờ hạn.
+
 ## Riêng tư
 
 - Mỗi sale chỉ nhận tin riêng với bot, không có nhóm chung nào hiện số.
@@ -101,7 +107,7 @@ Sửa ngay trong tab **CauHinh**, không cần sửa code:
 
 ## Kiểm tra
 
-`node test-mo-phong.js` chạy 46 tình huống trên bản giả lập Google Sheet và Telegram:
+`node test-mo-phong.js` chạy 49 tình huống trên bản giả lập Google Sheet và Telegram:
 - 30 phút, 2 giờ, 3 ngày;
 - ban đêm;
 - sale khác bấm nhầm khách;
