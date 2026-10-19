@@ -286,7 +286,7 @@ UNIT_SPECS.push(
 UNIT_SPECS.push(
   { id: 'sv-1pn-plus', name: 'Sân vườn · 1 PN+', type: '1PN+', garden: { base: '1pn-plus-b', area: 10.3 } },
   { id: 'sv-2pn-1wc', name: 'Sân vườn · 2 PN 1 WC', type: '1PN+', garden: { base: '2pn-1wc', area: 18.2 } },
-  { id: 'sv-2pn-2wc', name: 'Sân vườn · 2 PN 2 WC', type: '2PN', garden: { base: '2pn-b', area: 9.3, round: 'start' } },
+  { id: 'sv-2pn-2wc', name: 'Sân vườn · 2 PN 2 WC', type: '2PN', garden: { base: '2pn-b', area: 9.3, round: 'start', squareCorner: true } },
   { id: 'sv-studio', name: 'Sân vườn · Studio', type: 'Studio', garden: { base: 'studio', area: 8.0 } },
   { id: 'sv-studio-b', name: 'Sân vườn · Studio dài', type: 'Studio', garden: { base: 'studio-b', area: 9.8 } },
   // căn 28 / 01 tầng 3: sân là dải bên hông phía sân trong, chạy trước lô gia + phòng khách (không trước phòng ngủ), lấn lên một đoạn cạnh căn 27

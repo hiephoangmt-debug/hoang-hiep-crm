@@ -8,6 +8,7 @@ import { AD_FOOTER } from './adcopy.js';
 import { DEFAULT_UNIT, GARDEN_UNIT, GARDEN_SHAPE, gardenOf, SLOT_LIST, SLOT_ORIENT, SHOPS, PROVISIONAL, areaOf, residentialFloors } from './buildingData.js';
 import { orientPlan } from './unitPlacement.js';
 import { gardenUnit } from './gardenUnit.js';
+import { TIERS, furniturePackage, packageText, fmtM } from './furniturePackage.js';
 
 /** Mã căn (vị trí trên mặt bằng tầng) dùng mẫu này – để dễ nhận diện */
 function codesOf(id) {
@@ -197,9 +198,11 @@ function renderInfo() {
       <div><small>DT thông thủy</small><b>${fmt(offOf(unit)[1])} m²</b></div>
       ${offOf(unit)[2] ? `<div><small>🌳 BC sân vườn – tim</small><b>${fmt(offOf(unit)[2])} m²</b></div><div><small>🌳 BC sân vườn – thông thủy</small><b>${fmt(offOf(unit)[3])} m²</b></div>` : ''}
     </div>` : ''}
+    <div class="up-pkg" id="pkg"></div>
     <p class="up-note">Diện tích theo bảng của chủ đầu tư (căn đại diện; diện tích sân vườn khác nhau theo tầng – xem chính xác trong Bảng hàng tòa nhà). Tổng các phòng đo trên hình vẽ (tính tới tim tường): ${fmt(total)} m².</p>
     <p class="up-note">Hình ảnh và diện tích mang tính minh hoạ, dựng từ mặt bằng bán hàng. Thông số chính thức theo hợp đồng mua bán.</p>
     ${READONLY ? '' : '<button id="openDesign">✏️ Mở căn này trong công cụ thiết kế</button>'}`;
+  renderPackage();
   $$('[data-grp]').forEach((b) => (b.onclick = () => selectCode(unit.code, +b.dataset.grp)));
   $$('[data-room]').forEach((b) => (b.onclick = () => {
     if (tab !== '3d') setTab('3d');
@@ -211,6 +214,37 @@ function renderInfo() {
   if ($('#openDesign')) $('#openDesign').onclick = () => {
     try { localStorage.setItem('floorplan3d.openUnit', JSON.stringify({ layout: store.plan, info: { code: unit.name, floor: '10', slot: { type: unit.type, tt: +total.toFixed(1) } } })); } catch { return toast('Không lưu được dữ liệu để chuyển trang.'); }
     location.href = './index.html';
+  };
+}
+
+// Gói hoàn thiện nội thất (giữ hạng gói khách chọn khi đổi căn)
+let pkgTier = 'std';
+try { pkgTier = localStorage.getItem('floorplan3d.pkgTier') || 'std'; } catch {}
+function renderPackage() {
+  const el = $('#pkg');
+  if (!el) return;
+  const pk = furniturePackage(store.plan, pkgTier);
+  const all = TIERS.map((t) => furniturePackage(store.plan, t.key).total);
+  el.innerHTML = `
+    <h3>🛋 Gói hoàn thiện nội thất · ${unit.type}</h3>
+    <div class="up-pkg-tiers">${TIERS.map((t, i) => `<button class="chip ${t.key === pkgTier ? 'active' : ''}" data-tier="${t.key}">${t.name}<small>${fmtM(all[i])}</small></button>`).join('')}</div>
+    <p class="up-note">${pk.tier.desc}</p>
+    <div class="up-pkg-total"><small>Tổng gói ${pk.tier.name.toLowerCase()}</small><b>${fmtM(pk.total)}</b>
+      <span>Dính tường ${fmtM(pk.split.built)} · Thiết bị ${fmtM(pk.split.appliance)} · Đồ rời ${fmtM(pk.split.loose)}</span></div>
+    ${pk.groups.map((g, i) => `<details ${i < 2 ? 'open' : ''}><summary><span>${g.icon} ${g.name}</span><b>${fmtM(g.total)}</b></summary>
+      <ul>${g.items.map((x) => `<li><div><b>${x.name}</b>${x.note ? ` <em>· ${x.note}</em>` : ''}<small>${x.spec}</small></div><span>${x.qty !== 1 || x.unit === 'md' ? `${String(x.qty).replace('.', ',')} ${x.unit} × ${fmtM(x.price)}<br>` : ''}<b>${fmtM(x.total)}</b></span></li>`).join('')}</ul>
+      ${g.note ? `<p class="up-note">${g.note}</p>` : ''}</details>`).join('')}
+    <button id="pkgCopy">📋 Sao chép báo giá gửi khách</button>
+    <p class="up-note">Đơn giá tham khảo (triệu đồng) đã gồm lắp đặt, chưa gồm VAT. Số mét tủ bếp, tủ áo tính theo mặt bằng căn; báo giá chính xác sau khi khảo sát.</p>`;
+  $$('[data-tier]').forEach((b) => (b.onclick = () => {
+    pkgTier = b.dataset.tier;
+    try { localStorage.setItem('floorplan3d.pkgTier', pkgTier); } catch {}
+    renderPackage();
+  }));
+  $('#pkgCopy').onclick = async () => {
+    const txt = packageText(unit.name + (unit.code ? ` · ${unit.group.label}` : ''), pk);
+    try { await navigator.clipboard.writeText(txt); toast('Đã sao chép báo giá – dán vào Zalo / Messenger để gửi khách'); }
+    catch { download(new Blob([txt], { type: 'text/plain' }), `goi-noi-that-${unit.id || 'can'}.txt`); }
   };
 }
 

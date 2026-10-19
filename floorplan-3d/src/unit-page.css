@@ -96,3 +96,25 @@
 .up-mode button { flex: 1; font-size: 12px; font-weight: 600; padding: 7px 6px; }
 .up-floors { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
 @media (max-width: 1000px) { .up-mode { position: static; flex-direction: column; min-width: 110px; } }
+/* Gói hoàn thiện nội thất */
+.up-pkg { display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--line); padding-top: 12px; }
+.up-pkg h3 { margin: 0; font-size: 15px; }
+.up-pkg-tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.up-pkg-tiers .chip { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 4px; }
+.up-pkg-tiers small { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.up-pkg-tiers .chip.active small { color: inherit; }
+.up-pkg-total { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 10px; padding: 10px; display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 2px 8px; }
+.up-pkg-total small { color: var(--muted); font-size: 12px; }
+.up-pkg-total b { font-size: 20px; color: #c2410c; font-variant-numeric: tabular-nums; }
+.up-pkg-total span { grid-column: span 2; font-size: 11px; color: var(--muted); }
+.up-pkg details { border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+.up-pkg summary { display: flex; justify-content: space-between; gap: 8px; padding: 8px 10px; cursor: pointer; font-size: 13px; list-style: none; }
+.up-pkg summary::-webkit-details-marker { display: none; }
+.up-pkg summary b { font-variant-numeric: tabular-nums; }
+.up-pkg ul { list-style: none; margin: 0; padding: 0 10px 8px; }
+.up-pkg li { display: flex; justify-content: space-between; gap: 10px; padding: 6px 0; border-top: 1px dashed var(--line); font-size: 12px; }
+.up-pkg li small { display: block; color: var(--muted); font-size: 11px; }
+.up-pkg li em { color: var(--muted); font-style: normal; }
+.up-pkg li > span { text-align: right; white-space: nowrap; color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.up-pkg li > span b { color: var(--text); font-size: 12px; }
+.up-pkg details > .up-note { margin: 0; padding: 0 10px 8px; }
