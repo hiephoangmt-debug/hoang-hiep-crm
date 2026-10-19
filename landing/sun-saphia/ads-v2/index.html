@@ -454,6 +454,18 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
   .blabels p{font-size:11px}
   h2{font-size:28px}
 }
+/* Chữ chạy trên thanh đầu (điện thoại) */
+.tb-run{display:none}
+@keyframes tbrun{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (max-width:600px){
+  .tb-act{display:none}
+  .tb-run{display:block;flex:1;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+  .tb-track{display:inline-flex;white-space:nowrap;animation:tbrun 18s linear infinite;will-change:transform}
+  .tb-track span{padding-right:44px;font-size:15px;font-weight:600;color:#0B3C5D;text-align:left}
+  .tb-track span b{font-family:'Playfair Display',Georgia,serif;font-size:17px;color:#7A4A22}
+  .tb-track span::after{content:"✦";margin-left:44px;color:#C2552B;font-size:12px}
+}
+@media (max-width:600px) and (prefers-reduced-motion:reduce){.tb-track{animation-duration:40s}}
 </style>
 </head>
 <body>
@@ -461,6 +473,7 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
 <!-- TOP BAR -->
 <div class="topbar"><div class="wrap tb-in">
   <a class="tb-logo" href="#dang-ky"><span class="tb-sr">SR</span><span class="tb-name">Sun Saphia Residence</span></a>
+  <div class="tb-run" aria-label="Sun Saphia Residence – Căn hộ Sun Group – Trực diện biển đầu tiên tại Đà Nẵng"><div class="tb-track" aria-hidden="true"><span><b>Sun Saphia Residence</b></span><span>Căn hộ Sun Group – Trực diện biển đầu tiên tại Đà Nẵng</span><span><b>Sun Saphia Residence</b></span><span>Căn hộ Sun Group – Trực diện biển đầu tiên tại Đà Nẵng</span></div></div>
   <div class="tb-act"><a class="tb-zalo" href="https://zalo.me/0904567009">Zalo</a><a class="tb-call" href="tel:0904567009" aria-label="Gọi 0904 567 009">📞 <span>0904 567 009</span></a></div>
 </div></div>
 
