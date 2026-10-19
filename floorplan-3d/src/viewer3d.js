@@ -634,9 +634,9 @@ export class Viewer3D {
         const dl = Math.min(...living.points.map((q, i) => closestOnSegment(p, q, living.points[(i + 1) % living.points.length]).d));
         if (!best || dl < best.dl) best = { p, dl };
       }
-      const sh = this.roomShot(r);
+      // video: đứng giữa phòng (xa tường, rèm), nhìn từ phía cửa vào sâu trong phòng → không dí sát rèm / tường gây chớp sáng
       const rc0 = labelPoint(r.points);
-      sh.center = V(rc0.x, rc0.y, 1.2);
+      const sh = { pos: V(rc0.x, rc0.y), target: null, center: V(rc0.x, rc0.y, 1.2) };
       const pts = [cur, ...exit];
       let door = [];
       if (best) {
@@ -645,6 +645,10 @@ export class Viewer3D {
         door = [V(best.p.x - sg * nx * 0.7, best.p.y - sg * ny * 0.7), V(best.p.x + sg * nx * 0.7, best.p.y + sg * ny * 0.7)];
         pts.push(...door);
       }
+      // hướng ngắm: từ cửa nhìn qua tâm phòng (lùi tâm về phía cửa 0,4 m cho rộng khung)
+      const inDir = best ? sh.pos.clone().sub(door[1]).setY(0) : new THREE.Vector3(0, 0, -1);
+      if (inDir.lengthSq() > 0.04) { const n = inDir.clone().normalize(); sh.pos.addScaledVector(n, -Math.min(0.4, inDir.length() * 0.3)); sh.target = sh.pos.clone().addScaledVector(n, 3).setY(1.1); }
+      else sh.target = sh.pos.clone().add(new THREE.Vector3(0, 0, -3)).setY(1.1);
       pts.push(sh.pos);
       segs.push({ move: pts, dur: Math.max(2.2, pts.reduce((a, p, i) => a + (i ? p.distanceTo(pts[i - 1]) : 0), 0) / 1.1), caption: fmtA(r), center: sh.center });
       segs.push({ hold: 2.6, pos: sh.pos, look: sh.target, pan: 30, caption: fmtA(r) });
