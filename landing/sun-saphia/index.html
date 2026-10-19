@@ -90,8 +90,9 @@ section{padding:80px 0}
 .loc h2{color:#FFFFFF}
 .loc .lead{color:#CDE8EE}
 .loc-grid{display:flex;gap:40px;align-items:center;flex-wrap:wrap;margin-top:30px}
-.loc-map{flex:1 1 460px;background:#FFFFFF;border-radius:18px;padding:10px}
-.loc-list{flex:1 1 380px;display:flex;flex-direction:column;gap:18px}
+.loc-map{flex:1 1 100%}
+.loc-map img{display:block;width:100%;height:auto;border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.loc-list{flex:1 1 100%;display:grid;grid-template-columns:repeat(2,1fr);gap:18px 32px;align-items:start}
 .loc-item{display:flex;gap:16px;align-items:flex-start}
 .loc-item .dot{flex:none;width:14px;height:14px;border-radius:50%;background:#FFC98B;margin-top:7px}
 .loc-item p{font-size:17px;color:#CDE8EE}
@@ -258,6 +259,9 @@ footer p{margin:6px 0}
   .day{grid-template-columns:1fr 1fr}
   .prod-grid,.easy-grid,.in-grid{grid-template-columns:1fr}
   .why{grid-template-columns:1fr}
+  .loc-list{grid-template-columns:1fr}
+  .loc-map{margin:0 -20px}
+  .loc-map img{border-radius:0}
   .bars{gap:8px;height:220px}
   .blabels{gap:8px}
   .bcol b{font-size:15px}
@@ -387,33 +391,14 @@ footer p{margin:6px 0}
     <p class="lead">Ở đây, Võ Nguyên Giáp gặp Trường Sa. Một hướng là trung tâm và Sơn Trà, một hướng là Ngũ Hành Sơn và phố cổ Hội An. Trước mặt là biển.</p>
     <div class="loc-grid">
       <div class="loc-map">
-        <svg viewBox="0 0 560 420" width="100%" role="img" aria-label="Sơ đồ vị trí Sun Saphia trên trục biển Đà Nẵng">
-          <rect width="560" height="420" rx="14" fill="#FFFFFF"/>
-          <path d="M340 0 C 360 30 470 30 490 80 C 500 120 400 140 380 170 C 355 210 355 270 370 320 C 385 360 410 395 430 420 L560 420 L560 0 Z" fill="#CFEDF3"/>
-          <text x="480" y="260" text-anchor="middle" font-family="Be Vietnam Pro, Arial" font-size="18" font-weight="600" fill="#1590A6">BIỂN ĐÔNG</text>
-          <path d="M380 40 C 440 45 470 70 455 100 C 435 130 395 135 380 165" fill="none" stroke="#0F7C8F" stroke-width="8" stroke-linecap="round"/>
-          <path d="M380 165 C 355 200 350 240 352 255" fill="none" stroke="#C2552B" stroke-width="10" stroke-linecap="round"/>
-          <path d="M352 255 C 355 310 375 360 405 415" fill="none" stroke="#E09A3E" stroke-width="8" stroke-linecap="round" stroke-dasharray="14 8"/>
-          <path d="M200 0 L 215 420" stroke="#C9D8DE" stroke-width="12"/>
-          <text x="226" y="40" font-family="Be Vietnam Pro, Arial" font-size="15" fill="#557080">Sông Hàn</text>
-          <text x="24" y="100" font-family="Be Vietnam Pro, Arial" font-size="16" fill="#557080">Trung tâm</text>
-          <circle cx="110" cy="150" r="9" fill="#0F7C8F"/><text x="24" y="180" font-family="Be Vietnam Pro, Arial" font-size="16" font-weight="600" fill="#0B3C5D">✈ Sân bay</text>
-          <text x="470" y="30" text-anchor="end" font-family="Be Vietnam Pro, Arial" font-size="16" font-weight="600" fill="#0B3C5D">Sơn Trà</text>
-          <text x="345" y="205" text-anchor="end" font-family="Be Vietnam Pro, Arial" font-size="16" font-weight="700" fill="#C2552B">Võ Nguyên Giáp</text>
-          <text x="250" y="330" font-family="Be Vietnam Pro, Arial" font-size="16" font-weight="700" fill="#B5482A">Trường Sa</text>
-          <text x="280" y="400" font-family="Be Vietnam Pro, Arial" font-size="15" fill="#2F4A5A">↓ Hội An</text>
-          <circle cx="352" cy="255" r="16" fill="#C2552B" stroke="#FFFFFF" stroke-width="5"/>
-          <rect x="384" y="234" width="150" height="42" rx="8" fill="#0B3C5D"/>
-          <text x="459" y="262" text-anchor="middle" font-family="Be Vietnam Pro, Arial" font-size="17" font-weight="700" fill="#FFC98B">SUN SAPHIA</text>
-          <text x="20" y="408" font-family="Be Vietnam Pro, Arial" font-size="12" fill="#557080">Sơ đồ minh hoạ, không theo tỷ lệ</text>
-        </svg>
+        <img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/claude/kind-gauss-1fvupf/landing/sun-saphia/vi-tri.jpg" alt="Ảnh vệ tinh Đà Nẵng nhìn về phía bắc: Sun Saphia tại giao lộ Võ Nguyên Giáp – Trường Sa, sát bãi biển Sơn Thủy" width="1200" height="791">
       </div>
       <div class="loc-list">
         <div class="loc-item"><span class="dot"></span><p><b>Mặt tiền trục biển chính</b> của thành phố, giao lộ Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận.</p></div>
         <div class="loc-item"><span class="dot"></span><p><b>Sát biển Sơn Thủy, Mỹ Khê</b>: bãi biển ngay trong lòng thành phố.</p></div>
         <div class="loc-item"><span class="dot"></span><p><b>Cùng trục biển với phố Tây An Thượng</b>, Ngũ Hành Sơn và đường về Hội An.</p></div>
         <div class="loc-item"><span class="dot"></span><p><b>Sân bay nằm giữa phố</b>: khách bay tới là vào kỳ nghỉ ngay.</p></div>
-        <a class="btn" href="#dang-ky-cuoi" style="align-self:flex-start;margin-top:6px">Nhận video vị trí thực tế</a>
+        <a class="btn" href="#dang-ky-cuoi" style="justify-self:start;margin-top:6px">Nhận video vị trí thực tế</a>
       </div>
     </div>
   </div>
