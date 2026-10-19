@@ -348,9 +348,16 @@ footer{background:#0B1E3F;color:#C9D6E3;padding:56px 0 90px;font-size:15px}
 .cb-nudge .nx{position:absolute;right:8px;top:6px;background:none;border:none;font-size:18px;color:#557080;cursor:pointer}
 @keyframes nudgeIn{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
 @keyframes wave{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
-.cb-btn.ping .cb-av{animation:wave 1s 2}
+.sticky a.ping{animation:wave 1s 2}
 @media (max-width:860px){.cb-nudge{left:12px;bottom:72px;max-width:calc(100vw - 90px)}}
 @media (max-width:860px){.cb-btn{left:12px;bottom:16px;padding:6px 14px 6px 6px;font-size:13px}.cb-av{width:34px;height:34px}.cb-box{left:12px;right:12px;width:auto;bottom:16px;height:calc(100vh - 40px);max-height:calc(100vh - 40px)}}
+
+.cb-btn{display:none !important}
+.cb-box{left:auto !important;right:16px;bottom:24px}
+.cb-nudge{left:auto !important;right:84px;bottom:150px;border-radius:16px 16px 4px 16px}
+@media (max-width:860px){.cb-box{left:12px !important;right:12px;bottom:16px}.cb-nudge{right:74px;bottom:140px;max-width:calc(100vw - 100px)}}
+.sticky .s-form{position:relative}
+.sticky .s-form .cb-badge{position:absolute;top:-4px;right:-4px;width:18px;height:18px;border-radius:50%;background:#3DDC84;border:3px solid #FFFFFF}
 </style>
 </head>
 <body>
@@ -902,15 +909,15 @@ footer{background:#0B1E3F;color:#C9D6E3;padding:56px 0 90px;font-size:15px}
 <!-- CHATBOT -->
 <button class="cb-btn" id="cb-open" type="button" aria-label="Mở khung tư vấn"><span class="cb-av">SS</span><span class="cb-dot"></span>Tư vấn dự án</button>
 <div class="cb-nudge" id="cb-nudge" role="button" tabindex="0"><button class="nx" type="button" aria-label="Ẩn">×</button><span id="cb-nudge-t"></span></div>
-<div class="cb-box" id="cb-box" role="dialog" aria-label="Tư vấn Sun Saphia Residence">
-  <div class="cb-head"><span class="cb-av">SS</span><div><b>Tư vấn Sun Saphia Residence</b><small>Đang trực tuyến</small></div><button class="cb-x" id="cb-close" type="button" aria-label="Đóng">×</button></div>
+<div class="cb-box" id="cb-box" role="dialog" aria-label="Trợ lý anh Hoàng Hiệp">
+  <div class="cb-head"><span class="cb-av">HH</span><div><b>Trợ lý anh Hoàng Hiệp</b><small>Tư vấn Sun Saphia Residence · Đang trực tuyến</small></div><button class="cb-x" id="cb-close" type="button" aria-label="Đóng">×</button></div>
   <div class="cb-log" id="cb-log"></div>
   <div class="cb-in"><input id="cb-text" type="text" placeholder="Nhập câu hỏi hoặc số điện thoại…" aria-label="Nhập câu hỏi"><button id="cb-send" type="button">Gửi</button></div>
 </div>
 
 <!-- STICKY BAR -->
 <div class="sticky">
-  <a class="s-form" href="#dang-ky-cuoi" aria-label="Nhận bảng giá"><svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2zm3 6v2h2V9H7zm4 0v2h2V9h-2zm4 0v2h2V9h-2z"/></svg><i class="lb"> Nhận giá</i></a>
+  <a class="s-form" href="#dang-ky-cuoi" id="cb-fab" aria-label="Mở khung tư vấn"><i class="cb-badge"></i><svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2zm3 6v2h2V9H7zm4 0v2h2V9h-2zm4 0v2h2V9h-2z"/></svg><i class="lb"> Nhận giá</i></a>
   <a class="s-call" href="tel:0904567009" aria-label="Gọi 0904 567 009"><svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg><i class="lb"> Gọi ngay</i></a>
   <a class="s-zalo" href="https://zalo.me/0904567009" aria-label="Zalo 0904 567 009"><span>Zalo</span></a>
 </div>
@@ -986,10 +993,10 @@ footer{background:#0B1E3F;color:#C9D6E3;padding:56px 0 90px;font-size:15px}
       {id:'thanks',k:['cam on','thank','ok em','oke','duoc roi'],a:['Dạ, em cảm ơn Anh/Chị đã quan tâm đến dự án. Khi cần thêm thông tin, Anh/Chị cứ nhắn tại đây hoặc liên hệ số 0904 567 009 ạ.'],c:['Nhận bảng giá']},
       {id:'suynghi',k:['suy nghi','de xem','tham khao','chua chac','chua can','de sau','tu tu'],a:['Dạ, Anh/Chị cứ thong thả cân nhắc ạ. Em xin phép gửi bộ tài liệu dự án để Anh/Chị tham khảo khi thuận tiện, và chỉ liên hệ khi có thông tin mới về giá hoặc chính sách.'],c:['Nhận tài liệu dự án','Xem bảng tính dòng tiền'],lead:1},
       {id:'dua',k:['dua thoi','gion','noi dua','troi oi','qua troi','mua het','bao nhieu cung mua','trung so','vietlott','xo so','lam sao giau'],a:['Dạ, Anh/Chị vui tính quá ạ. Nếu Anh/Chị "trúng lớn" thật thì căn hướng biển tầng cao là lựa chọn rất xứng đáng đấy ạ. Em gửi Anh/Chị danh sách để "chuẩn bị trước" nhé?','Dạ, em xin ghi nhận tinh thần lạc quan của Anh/Chị ạ. Ở đây có biển, có bình minh, chỉ còn thiếu Anh/Chị nữa thôi. Anh/Chị muốn xem căn nào trước ạ?'],c:['Căn hướng biển còn trống','Giá bán']},
-      {id:'bot',k:['bot','robot','nguoi that','ai tra loi','may tu dong','tu dong'],a:['Dạ, đây là kênh hỗ trợ thông tin nhanh của dự án. Để trao đổi trực tiếp với chuyên viên tư vấn, Anh/Chị vui lòng gọi hoặc nhắn Zalo số 0904 567 009 ạ.'],c:['Nhắn Zalo 0904 567 009','Gọi 0904 567 009']}
+      {id:'bot',k:['bot','robot','nguoi that','ai tra loi','may tu dong','tu dong'],a:['Dạ, em là trợ lý của anh Hoàng Hiệp, hỗ trợ Anh/Chị các thông tin nhanh về dự án. Để trao đổi trực tiếp với anh Hiệp, Anh/Chị vui lòng gọi hoặc nhắn Zalo số 0904 567 009 ạ.'],c:['Nhắn Zalo 0904 567 009','Gọi 0904 567 009']}
     ];
     var ALIAS={'Nhận bảng giá':'gia','Chính sách thanh toán':'thanh toan','Hỗ trợ vay ngân hàng':'vay','Đăng ký giữ chỗ':'booking','Căn hướng biển còn trống':'view','Khoảng cách tới sân bay':'san bay','Vị trí bắn pháo hoa':'phao hoa','Nhận video vị trí':'san bay','Giá thuê khu vực':'cho thue','Việc cho thuê có thuận lợi không':'thuan loi','Nhận hồ sơ pháp lý':'phap ly','Thông tin pháp lý':'phap ly','Thời gian bàn giao':'ban giao','Lập lịch thanh toán':'vay','Xem bảng tính dòng tiền':'cho thue','Chưa có kinh nghiệm cho thuê':'chua tung','Nhận phối cảnh tiện ích':'tien ich','Các loại căn hộ':'loai can','Nhận mặt bằng chi tiết':'mat bang','Nhận mặt bằng 2BR':'mat bang','Đặt lịch tham quan':'xem nha','Giá bán':'gia','Vị trí dự án':'vi tri','Hiệu quả cho thuê':'cho thue','Tiện ích dự án':'tien ich','Ngân sách dưới 3 tỷ':'duoi 3','Nhận danh sách Studio':'duoi 3','Mua để đầu tư':'dau tu','Mua để nghỉ dưỡng':'nghi duong','Nhận tài liệu dự án':'gia'};
-    var LEADASK=['Dạ, để em gửi đúng thông tin căn hộ và bảng giá, Anh/Chị vui lòng nhập số điện thoại hoặc Zalo ở ô bên dưới ạ.','Anh/Chị vui lòng để lại số điện thoại, chuyên viên sẽ gửi tài liệu chi tiết trong ít phút ạ.'];
+    var LEADASK=['Dạ, để em gửi đúng thông tin căn hộ và bảng giá, Anh/Chị vui lòng nhập số điện thoại hoặc Zalo ở ô bên dưới ạ.','Anh/Chị vui lòng để lại số điện thoại, anh Hoàng Hiệp sẽ gửi tài liệu chi tiết trong ít phút ạ.'];
     function norm(t){return (' '+t+' ').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ');}
     function scrollEnd(){log.scrollTop=log.scrollHeight;}
     function add(txt,who,im){var d=document.createElement('div');d.className='cb-m '+(who==='me'?'cb-me':'cb-bot');d.textContent=txt;
@@ -1007,7 +1014,7 @@ footer{background:#0B1E3F;color:#C9D6E3;padding:56px 0 90px;font-size:15px}
       if(q==='Gọi 0904 567 009'){location.href='tel:0904567009';return;}
       var ph=phone(q);
       if(ph){leadDone=true;var f=document.getElementById('sdt2'),n=document.getElementById('ten2');if(f)f.value=ph;
-        bot('Dạ, em đã ghi nhận số '+ph+'. Số điện thoại đã được điền sẵn vào phiếu đăng ký bên dưới, Anh/Chị vui lòng nhập họ tên và bấm "Gửi đăng ký" để chuyên viên liên hệ ạ.',['Nhắn Zalo 0904 567 009']);
+        bot('Dạ, em đã ghi nhận số '+ph+'. Số điện thoại đã được điền sẵn vào phiếu đăng ký bên dưới, Anh/Chị vui lòng nhập họ tên và bấm "Gửi đăng ký" để anh Hoàng Hiệp liên hệ ạ.',['Nhắn Zalo 0904 567 009']);
         setTimeout(function(){goto('#dang-ky-cuoi');if(n)n.focus();},1800);return;}
       var joke=/(haha|hihi|hehe|kaka|kk+|=\)+|:\)+|:d|😂|🤣|😄|😆|😁|đùa|giỡn|vui tính)/i.test(q);
       var nq=norm(ALIAS[q]||q),best=null,score=0;
@@ -1015,14 +1022,15 @@ footer{background:#0B1E3F;color:#C9D6E3;padding:56px 0 90px;font-size:15px}
       if(best){var rep=seen[best.id];seen[best.id]=1;var txt=pick(best.a);if(rep&&best.a.length===1)txt='Dạ, em xin nhắc lại thông tin:\n'+txt;
         if(joke&&best.id!=='dua')txt=pick(['Dạ, Anh/Chị hóm hỉnh quá ạ. ','Dạ, nói chuyện với Anh/Chị vui thật ạ. '])+txt.replace(/^Dạ, /,'');var d=bot(txt,best.c,best.img);if(best.go)setTimeout(function(){goto(best.go);},d+600);if(best.lead||asked>=3){leadAsk(d);asked=0;}}
       else if(joke){bot(pick(['Dạ, Anh/Chị vui tính quá ạ. Biển Mỹ Khê cũng đang "cười" với Anh/Chị đấy ạ. Anh/Chị muốn tìm hiểu giá bán hay vị trí trước ạ?','Dạ, em cũng mong mỗi ngày đều được trò chuyện vui như thế này ạ. Anh/Chị cần em hỗ trợ thông tin gì về dự án ạ?']),['Giá bán','Vị trí dự án','Hiệu quả cho thuê']);}
-      else{bot('Dạ, nội dung này em xin phép chuyển chuyên viên tư vấn trả lời trực tiếp để đảm bảo chính xác. Anh/Chị vui lòng để lại số điện thoại, hoặc chọn thông tin bên dưới ạ.',['Nhắn Zalo 0904 567 009','Giá bán','Vị trí dự án','Hiệu quả cho thuê']);}
+      else{bot('Dạ, nội dung này em xin phép chuyển anh Hoàng Hiệp trả lời trực tiếp để đảm bảo chính xác. Anh/Chị vui lòng để lại số điện thoại, hoặc chọn thông tin bên dưới ạ.',['Nhắn Zalo 0904 567 009','Giá bán','Vị trí dự án','Hiệu quả cho thuê']);}
     }
-    function open(ctx){hideNudge();box.classList.add('open');btn.style.display='none';opened=true;
-      if(!started){started=true;bot(ctx&&ctx.greet?ctx.greet:'Dạ, em kính chào Anh/Chị. Cảm ơn Anh/Chị đã quan tâm đến Sun Saphia Residence – căn hộ mặt biển Mỹ Khê của Sun Group.\nAnh/Chị cần tìm hiểu thông tin nào ạ?',ctx&&ctx.chips?ctx.chips:['Giá bán','Vị trí dự án','Hiệu quả cho thuê','Các loại căn hộ','Tiện ích dự án','Đăng ký giữ chỗ'],ctx&&ctx.img,500);}
+    function open(ctx){hideNudge();box.classList.add('open');opened=true;
+      if(!started){started=true;bot(ctx&&ctx.greet?ctx.greet:'Dạ, em kính chào Anh/Chị. Em là trợ lý của anh Hoàng Hiệp, hỗ trợ thông tin dự án Sun Saphia Residence – căn hộ mặt biển Mỹ Khê của Sun Group.\nAnh/Chị cần tìm hiểu thông tin nào ạ?',ctx&&ctx.chips?ctx.chips:['Giá bán','Vị trí dự án','Hiệu quả cho thuê','Các loại căn hộ','Tiện ích dự án','Đăng ký giữ chỗ'],ctx&&ctx.img,500);}
       else if(ctx&&ctx.greet){bot(ctx.greet,ctx.chips,ctx.img,500);}
       setTimeout(function(){inp.focus();},300);}
     btn.onclick=function(){open(curCtx);};
-    document.getElementById('cb-close').onclick=function(){box.classList.remove('open');btn.style.display='';};
+    var fab=document.getElementById('cb-fab');if(fab)fab.addEventListener('click',function(e){e.preventDefault();if(box.classList.contains('open')){box.classList.remove('open');}else{open(curCtx);}});
+    document.getElementById('cb-close').onclick=function(){box.classList.remove('open');};
     function send(){var t=inp.value.trim();if(!t)return;inp.value='';ask(t);}
     document.getElementById('cb-send').onclick=send;
     inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();send();}});
@@ -1039,7 +1047,7 @@ footer{background:#0B1E3F;color:#C9D6E3;padding:56px 0 90px;font-size:15px}
     var curCtx=null,nudged={},nCount=0,timers={};
     function hideNudge(){ndg.classList.remove('show');}
     function showNudge(s){if(opened&&box.classList.contains('open'))return;if(nudged[s.sel]||nCount>=4)return;nudged[s.sel]=1;nCount++;
-      curCtx={greet:s.g,chips:s.c,img:s.img};ndgT.innerHTML=s.t;ndg.classList.add('show');btn.classList.remove('ping');void btn.offsetWidth;btn.classList.add('ping');
+      curCtx={greet:s.g,chips:s.c,img:s.img};ndgT.innerHTML=s.t;ndg.classList.add('show');if(fab){fab.classList.remove('ping');void fab.offsetWidth;fab.classList.add('ping');}
       setTimeout(function(){if(curCtx&&curCtx.greet===s.g)hideNudge();},14000);}
     ndg.addEventListener('click',function(e){if(e.target.classList.contains('nx')){e.stopPropagation();hideNudge();return;}open(curCtx);});
     if('IntersectionObserver' in window){
