@@ -58,7 +58,7 @@
 
   /* ---- Phân tích: vì sao nên tìm hiểu sớm ---- */
   var AN = [
-    ['1', 'Quỹ đất mặt biển nội đô có hạn', 'Dải ven biển Võ Nguyên Giáp – Trường Sa đã kín resort, khách sạn; dự án căn hộ mới ngay mặt biển ngày càng ít. Phía trước Hải Minh là công viên biển theo quy hoạch, tầm nhìn ra biển thoáng. Võ Nguyên Giáp – Trường Sa thuộc nhóm tuyến đường có giá đất cao trong bảng giá đất do UBND TP Đà Nẵng ban hành – giá trị vị trí rõ ràng (diễn biến giá trong quá khứ không bảo đảm cho tương lai).'],
+    ['1', 'Quỹ đất mặt biển nội đô có hạn', 'Dải ven biển Võ Nguyên Giáp – Trường Sa đã kín resort, khách sạn; dự án căn hộ mới ngay mặt biển ngày càng ít. Đối diện Hải Minh là dải resort ven biển, gần công viên biển cuối đường Minh Mạng theo quy hoạch. Võ Nguyên Giáp – Trường Sa thuộc nhóm tuyến đường có giá đất cao trong bảng giá đất do UBND TP Đà Nẵng ban hành – giá trị vị trí rõ ràng (diễn biến giá trong quá khứ không bảo đảm cho tương lai).'],
     ['2', 'Nhu cầu lưu trú tăng đều', '11 tháng 2025 Đà Nẵng đón 16,5 triệu lượt khách lưu trú (+18,9%), khách quốc tế tăng 26,5%. Khu thương mại tự do và Trung tâm tài chính quốc tế mở thêm dòng khách công tác, chuyên gia ở dài ngày.'],
     ['3', 'Một căn, hai giá trị', 'Gia đình nghỉ dưỡng mỗi năm ngay mặt biển; những ngày không ở có thể cho thuê. Ví dụ minh họa: 1,5 triệu/đêm × 60% công suất × 350 đêm ≈ 315 triệu doanh thu phòng/năm, chưa trừ chi phí – không phải cam kết.'],
     ['4', 'Đi sớm, chọn được căn đẹp', 'Căn nhìn thẳng biển, tầng cao, hướng đón bình minh có số lượng giới hạn theo mặt bằng. Người trong danh sách ưu tiên nhận bảng giá, mặt bằng trước ngày ra mắt (dự kiến 11/2026) để so sánh, chọn căn kỹ.'],
@@ -71,7 +71,7 @@
   function cols(rows, note) { var mx = Math.max.apply(null, rows.map(function (r) { return r[1]; }));
     return '<div class="hx-bars"><div class="hx-cols">' + rows.map(function (r) { return '<div class="hx-col"><em>' + r[2] + '</em><i style="height:' + Math.round(r[1] / mx * 110) + 'px' + (r[3] ? ';background:repeating-linear-gradient(45deg,#ff6a2b 0 6px,#ff9a66 6px 12px)' : '') + '"></i><span>' + r[0] + '</span></div>'; }).join('') + '</div><small>' + note + '</small></div>'; }
   var VIS = [
-    pic('images/so-do-vi-tri-hai-minh-rong-v4.webp', 'Sơ đồ vị trí Hải Minh, phía trước là công viên biển Trường Sa', 'Sơ đồ vị trí – không theo tỷ lệ'),
+    pic('images/so-do-vi-tri-hai-minh-rong-v5.webp', 'Sơ đồ vị trí Hải Minh, gần công viên biển Trường Sa cuối Minh Mạng', 'Sơ đồ vị trí – không theo tỷ lệ'),
     cols([['2023', 7.94, '7,94 tr'], ['2024', 10.9, '~10,9 tr'], ['11T/2025*', 16.5, '16,5 tr', 1]], 'Lượt khách cơ sở lưu trú Đà Nẵng (triệu lượt). Nguồn: Cục Thống kê TP Đà Nẵng (2023, 2025), Sở Du lịch qua báo chí (2024). *Từ 7/2025 số liệu gồm cả địa bàn Quảng Nam cũ sau hợp nhất, không so sánh trực tiếp.'),
     pic('illus/phong-ngu-view-bien.webp', 'Tranh minh họa bữa sáng bên cửa kính nhìn ra biển', 'Tranh minh họa, không phải ảnh căn hộ thật'),
     pic('illus/binh-minh-phong-khach.webp', 'Tranh minh họa phòng khách đón bình minh trên biển', 'Tranh minh họa, không phải ảnh căn hộ thật'),

@@ -18,8 +18,8 @@
     <rect x="30" y="870" width="120" height="140" rx="6"/><rect x="170" y="870" width="140" height="140" rx="6"/>
   </g>
   <!-- planned residential area around the lot -->
-  <rect x="195" y="398" width="270" height="405" rx="8" fill="#ead9cc"/>
-  <g stroke="#f4f0e7" stroke-width="8"><line x1="195" y1="600" x2="465" y2="600"/><line x1="330" y1="398" x2="330" y2="803"/></g>
+  <rect x="195" y="398" width="270" height="300" rx="8" fill="#ead9cc"/>
+  <g stroke="#f4f0e7" stroke-width="8"><line x1="195" y1="600" x2="465" y2="600"/><line x1="330" y1="398" x2="330" y2="698"/></g>
 
   <!-- Lotte -->
   <rect x="330" y="170" width="140" height="175" rx="8" fill="#d9dde3" filter="url(#sh)"/>
@@ -27,18 +27,18 @@
   <text x="400" y="270" text-anchor="middle" font-size="14" fill="#41505f">Duty Free</text>
 
   <!-- coastal strip -->
-  <rect x="525" y="60" width="185" height="745" fill="url(#vac)"/>
-  <rect x="535" y="490" width="165" height="92" rx="10" fill="#ffffff" opacity=".9"/>
-  <text x="617" y="516" text-anchor="middle" font-size="14.5" fill="#5c6b52" font-weight="800">Dải đất resort</text>
-  <text x="617" y="537" text-anchor="middle" font-size="14.5" fill="#5c6b52" font-weight="800">ven biển</text>
-  <text x="617" y="558" text-anchor="middle" font-size="12" fill="#5c6b52" font-weight="700">(Hòn Ngọc Á Châu,</text>
-  <text x="617" y="574" text-anchor="middle" font-size="12" fill="#5c6b52" font-weight="700">đang điều chỉnh QH)</text>
-  <rect x="525" y="640" width="185" height="168" rx="6" fill="url(#trees)" stroke="#4f9a40" stroke-width="2"/>
-  <rect x="533" y="672" width="169" height="104" rx="10" fill="#ffffff" opacity=".94"/>
-  <text x="617" y="699" text-anchor="middle" font-size="14" font-weight="800" fill="#2f6b24">Công viên biển</text>
-  <text x="617" y="721" text-anchor="middle" font-size="13.5" font-weight="800" fill="#2f6b24">Trường Sa · ~2,45 ha</text>
-  <text x="617" y="745" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2f6b24">cuối đường Minh Mạng</text>
-  <text x="617" y="764" text-anchor="middle" font-size="12" font-weight="700" fill="#2f6b24">(quy hoạch 2025–2027)</text>
+  <rect x="525" y="60" width="185" height="500" fill="url(#vac)"/>
+  <rect x="535" y="448" width="165" height="92" rx="10" fill="#ffffff" opacity=".9"/>
+  <text x="617" y="474" text-anchor="middle" font-size="14.5" fill="#5c6b52" font-weight="800">Dải đất resort</text>
+  <text x="617" y="495" text-anchor="middle" font-size="14.5" fill="#5c6b52" font-weight="800">ven biển</text>
+  <text x="617" y="516" text-anchor="middle" font-size="12" fill="#5c6b52" font-weight="700">(Hòn Ngọc Á Châu,</text>
+  <text x="617" y="532" text-anchor="middle" font-size="12" fill="#5c6b52" font-weight="700">đang điều chỉnh QH)</text>
+  <rect x="525" y="562" width="185" height="136" rx="6" fill="url(#trees)" stroke="#4f9a40" stroke-width="2"/>
+  <rect x="533" y="578" width="169" height="104" rx="10" fill="#ffffff" opacity=".94"/>
+  <text x="617" y="605" text-anchor="middle" font-size="14" font-weight="800" fill="#2f6b24">Công viên biển</text>
+  <text x="617" y="627" text-anchor="middle" font-size="13.5" font-weight="800" fill="#2f6b24">Trường Sa · ~2,45 ha</text>
+  <text x="617" y="651" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2f6b24">cuối đường Minh Mạng</text>
+  <text x="617" y="670" text-anchor="middle" font-size="12" font-weight="700" fill="#2f6b24">(quy hoạch 2025–2027)</text>
   <!-- villas / resorts south -->
   <g fill="#f1d7c6" stroke="#e2b9a1"><rect x="540" y="860" width="40" height="28" rx="4"/><rect x="595" y="860" width="40" height="28" rx="4"/><rect x="650" y="860" width="40" height="28" rx="4"/>
     <rect x="540" y="905" width="40" height="28" rx="4"/><rect x="595" y="905" width="40" height="28" rx="4"/><rect x="650" y="905" width="40" height="28" rx="4"/>
@@ -69,13 +69,13 @@
   <rect x="478" y="0" width="44" height="1300" fill="#ffffff" stroke="#d6cfc1" stroke-width="2"/>
   <line x1="500" y1="0" x2="500" y2="1300" stroke="#ffc59f" stroke-width="3" stroke-dasharray="16 12"/>
   <rect x="0" y="352" width="478" height="34" fill="#ffffff" stroke="#d6cfc1" stroke-width="2"/>
-  <rect x="0" y="812" width="710" height="30" fill="#ffffff" stroke="#d6cfc1" stroke-width="2"/>
+  <rect x="0" y="700" width="710" height="30" fill="#ffffff" stroke="#d6cfc1" stroke-width="2"/>
   <rect x="160" y="0" width="26" height="1300" fill="#ffffff" stroke="#d6cfc1" stroke-width="2"/>
   <text x="508" y="215" font-size="15" font-weight="800" fill="#41505f" transform="rotate(-90 508 215)" text-anchor="middle">VÕ NGUYÊN GIÁP</text>
   <text x="508" y="640" font-size="15" font-weight="800" fill="#41505f" transform="rotate(-90 508 640)" text-anchor="middle">TRƯỜNG SA</text>
   <text x="508" y="1060" font-size="15" font-weight="800" fill="#41505f" transform="rotate(-90 508 1060)" text-anchor="middle">TRƯỜNG SA</text>
   <text x="250" y="375" font-size="15" font-weight="800" fill="#41505f" text-anchor="middle">NGUYỄN ĐỨC THUẬN</text>
-  <text x="320" y="833" font-size="15" font-weight="800" fill="#41505f" text-anchor="middle">MINH MẠNG</text>
+  <text x="320" y="721" font-size="15" font-weight="800" fill="#41505f" text-anchor="middle">MINH MẠNG</text>
   <text x="178" y="1150" font-size="13" font-weight="700" fill="#6b7785" transform="rotate(-90 178 1150)" text-anchor="middle">LÊ VĂN HIẾN</text>
 
   <!-- Ngũ Hành Sơn -->
@@ -115,8 +115,8 @@
     <text x="300" y="104" fill="#0A2540">↑ Cầu Rồng · TT</text><text x="322" y="125" fill="#FF6A2B">~15 phút</text>
     <g filter="url(#sh)"><rect x="790" y="150" width="190" height="56" rx="14" fill="#ffffff"/></g>
     <text x="805" y="174" fill="#0A2540">↑ Bán đảo Sơn Trà</text><text x="827" y="195" fill="#41505f" font-weight="700">phía Bắc</text>
-    <g filter="url(#sh)"><rect x="18" y="680" width="150" height="56" rx="14" fill="#ffffff"/></g>
-    <text x="32" y="704" fill="#0A2540">← Bà Nà Hills</text><text x="52" y="725" fill="#FF6A2B">~45 phút</text>
+    <g filter="url(#sh)"><rect x="18" y="610" width="150" height="56" rx="14" fill="#ffffff"/></g>
+    <text x="32" y="634" fill="#0A2540">← Bà Nà Hills</text><text x="52" y="655" fill="#FF6A2B">~45 phút</text>
     <g filter="url(#sh)"><rect x="18" y="1230" width="180" height="56" rx="14" fill="#ffffff"/></g>
     <text x="32" y="1254" fill="#0A2540">↓ Phố cổ Hội An</text><text x="52" y="1275" fill="#FF6A2B">~30 phút</text>
   </g>
