@@ -208,19 +208,36 @@ section{padding:80px 0}
 .infra-item h3{font-size:19px;color:#0B3C5D;margin:8px 0 6px}
 .infra-item p{font-size:15px;color:#2F4A5A}
 
-/* QUIZ */
-.quiz{background:linear-gradient(160deg,#0B3C5D 0%,#0E5A7A 60%,#1590A6 100%);color:#F3FAFB}
-.quiz h2{color:#FFFFFF}
-.quiz .lead{color:#CDE8EE}
-.quiz-grid{display:flex;gap:36px;flex-wrap:wrap;margin-top:30px;align-items:flex-start}
-.quiz-form{flex:1 1 520px;background:#FFFFFF;border-radius:20px;padding:30px;color:#0B2E44}
-.quiz-form label{display:block;font-size:15px;font-weight:600;color:#0B3C5D;margin:14px 0 6px}
+/* QUIZ + CALC */
+.pick{background:#FFFFFF}
+.pick-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:28px;align-items:start}
+.card2{background:#FFFFFF;border:1px solid #CFE7EC;border-radius:20px;padding:28px;box-shadow:0 12px 30px rgba(11,60,93,.08)}
+.card2 h3{font-size:22px;color:#0B3C5D;margin-bottom:12px}
+.quiz-form label{display:block;font-size:15px;font-weight:600;color:#2F4A5A;margin:14px 0 6px}
 .quiz-form input,.quiz-form select{width:100%;font-family:'Be Vietnam Pro',Arial,sans-serif;font-size:16px;color:#0B2E44;background:#F3FAFB;border:1px solid #CFE7EC;border-radius:12px;padding:13px 14px}
-.quiz-form button{width:100%;margin-top:20px;background:#C2552B;color:#FFFFFF;font-family:'Be Vietnam Pro',Arial,sans-serif;font-weight:700;font-size:17px;border:none;border-radius:12px;padding:16px;cursor:pointer}
-.quiz-result{flex:1 1 340px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:28px}
-.quiz-result h3{font-size:22px;color:#FFC98B}
-.quiz-result p{font-size:17px;color:#E8F5F7;margin-top:10px}
-#goi-y{font-family:'Playfair Display',Georgia,serif;font-size:30px;color:#FFFFFF;margin-top:12px;line-height:1.2}
+.quiz-form button{width:100%;margin-top:18px;background:#C2552B;color:#FFFFFF;font-family:'Be Vietnam Pro',Arial,sans-serif;font-weight:700;font-size:17px;border:none;border-radius:12px;padding:16px;cursor:pointer}
+.suggest{margin-top:16px;background:#FFF4E6;border-radius:14px;padding:16px 18px}
+.suggest b{display:block;font-family:'Playfair Display',Georgia,serif;font-size:24px;color:#C2552B}
+.suggest p{font-size:15px;color:#5A3A1E;margin-top:4px}
+.calc .row{margin-top:16px}
+.calc .row-h{display:flex;justify-content:space-between;font-size:15px;color:#2F4A5A}
+.calc .row-h b{color:#0B3C5D}
+.calc input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:8px;background:#0B3C5D;margin-top:10px;outline:none}
+.calc input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#C2552B;border:3px solid #FFFFFF;box-shadow:0 2px 6px rgba(0,0,0,.3);cursor:pointer}
+.calc input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#C2552B;border:3px solid #FFFFFF;cursor:pointer}
+.calc .out{margin-top:20px;border-top:1px solid #E6F1F3;padding-top:16px}
+.calc .out small{font-size:14px;color:#557080}
+.calc .big{font-family:'Playfair Display',Georgia,serif;font-size:44px;font-weight:700;color:#C2552B;line-height:1.1}
+.calc .sub3{font-size:16px;color:#0B3C5D;font-weight:600}
+.calc .note3{font-size:13px;color:#557080;margin-top:10px;line-height:1.5}
+.calc .btn-z{display:block;text-align:center;margin-top:12px;background:#0B3C5D;color:#FFFFFF;font-weight:700;font-size:17px;padding:15px;border-radius:999px;text-decoration:none;transition:.3s}
+.calc .btn-z:hover{filter:brightness(1.15)}
+.calc .btn{display:block;text-align:center;margin-top:16px}
+.types{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+.type{background:#F3FAFB;border:1px solid #CFE7EC;border-radius:16px;padding:18px 20px}
+.type h4{font-size:20px;color:#0B3C5D}
+.type p{font-size:15px;color:#2F4A5A}
+.type span{display:block;margin-top:6px;font-size:15px;font-weight:700;color:#C2552B}
 
 /* FAQ */
 .faq{display:flex;flex-direction:column;gap:12px;margin-top:30px}
@@ -287,6 +304,8 @@ footer{background:#0B1E3F;color:#C9D6E3;padding:56px 0 110px;font-size:15px}
   .bcol b{font-size:15px}
   .kpi b{font-size:30px}
   .infra-grid{grid-template-columns:1fr 1fr}
+  .pick-grid,.types{grid-template-columns:1fr}
+  .calc .big{font-size:38px}
   .ov-img{flex:1 1 100%}
   .ft-grid{grid-template-columns:1fr;gap:28px}
   .months{grid-template-columns:repeat(6,1fr)}
@@ -381,7 +400,7 @@ footer{background:#0B1E3F;color:#C9D6E3;padding:56px 0 110px;font-size:15px}
     <p class="eyebrow">Tổng quan</p>
     <h2>Sun Saphia Residence trong một bảng</h2>
     <div class="ov-grid">
-      <div class="ov-img"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/e47584ba12063697aeb8411560dfd67f474dfd77/landing/sun-saphia/thap.jpg" alt="Phối cảnh toà tháp Sun Saphia Residence 30 tầng bên trục biển" width="752" height="1256"><span class="ov-cap">Phối cảnh minh hoạ · 30 tầng · ~114 m</span></div>
+      <div class="ov-img"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/e47584ba12063697aeb8411560dfd67f474dfd77/landing/sun-saphia/thap.jpg" alt="Phối cảnh toà tháp Sun Saphia Residence 30 tầng bên trục biển" width="752" height="1213"><span class="ov-cap">Phối cảnh minh hoạ · 30 tầng · ~114 m</span></div>
       <div class="ov-table">
         <div class="ov-row"><span>Tên dự án</span><b>Sun Saphia Residence</b></div>
         <div class="ov-row"><span>Chủ đầu tư</span><b>Sun Group</b></div>
@@ -693,58 +712,66 @@ footer{background:#0B1E3F;color:#C9D6E3;padding:56px 0 110px;font-size:15px}
   </div>
 </section>
 
-<!-- 12. QUIZ -->
-<section class="quiz" id="danh-gia">
+<!-- 12. QUIZ + CALC -->
+<section class="pick" id="danh-gia">
   <div class="wrap">
-    <p class="eyebrow" style="color:#FFC98B">30 giây tự đánh giá</p>
-    <h2>Sun Saphia có hợp với bạn không?</h2>
-    <p class="lead">Trả lời 4 câu, xem ngay loại căn hợp với bạn. Để lại số điện thoại để nhận phân tích chi tiết.</p>
-    <div class="quiz-grid">
-      <div class="quiz-form">
+    <p class="eyebrow">Danh sách ưu tiên · Đợt giữ chỗ đầu tiên</p>
+    <h2>3 dòng căn, dòng nào hợp với anh/chị?</h2>
+    <p class="lead">Trả lời 3 câu để xem gợi ý dòng căn, hoặc tự kéo thử dòng tiền cho thuê. Bảng giá và mặt bằng gửi qua Zalo.</p>
+    <div class="pick-grid">
+      <div class="card2 quiz-form">
+        <h3>Căn nào hợp với anh/chị?</h3>
         <form>
-          <label for="q1">1. Bạn mua để làm gì?</label>
+          <label for="q1">Anh/chị mua để</label>
           <select id="q1" name="muc_dich">
             <option value="" disabled selected>Chọn mục đích</option>
-            <option value="dau-tu">Đầu tư cho thuê, có dòng tiền</option>
-            <option value="nghi-duong">Nghỉ dưỡng cho gia đình</option>
-            <option value="ca-hai">Vừa ở vừa cho thuê</option>
-            <option value="tich-san">Giữ tài sản lâu dài</option>
+            <option value="nghi-duong">Nghỉ dưỡng gia đình</option>
+            <option value="dau-tu">Cho thuê, có dòng tiền</option>
+            <option value="ca-hai">Cả hai</option>
           </select>
-          <label for="q2">2. Ngân sách dự kiến?</label>
+          <label for="q2">Ngân sách dự kiến</label>
           <select id="q2" name="ngan_sach">
             <option value="" disabled selected>Chọn ngân sách</option>
             <option value="duoi-3">Dưới 3 tỷ</option>
             <option value="3-4">3 – 4 tỷ</option>
             <option value="tren-4">Trên 4 tỷ</option>
           </select>
-          <label for="q3">3. Ai sẽ đi cùng bạn khi nghỉ ở đây?</label>
-          <select id="q3" name="di_cung">
+          <label for="q3">Anh/chị thích</label>
+          <select id="q3" name="so_thich">
             <option value="" disabled selected>Chọn</option>
-            <option value="mot-hai">Một mình hoặc hai người</option>
-            <option value="gia-dinh">Gia đình có con nhỏ</option>
-            <option value="nhieu-the-he">Nhiều thế hệ</option>
-          </select>
-          <label for="q4">4. Bạn có dự định vay ngân hàng?</label>
-          <select id="q4" name="vay">
-            <option value="" disabled selected>Chọn</option>
-            <option value="co">Có</option>
-            <option value="khong">Không</option>
-            <option value="chua-ro">Chưa rõ</option>
+            <option value="binh-minh">View bình minh trên biển</option>
+            <option value="tang-cao">Tầng cao</option>
+            <option value="can-lon">Căn rộng cho cả nhà</option>
           </select>
           <label for="ten3">Họ và tên</label>
           <input id="ten3" name="name" type="text" placeholder="Nguyễn Văn A">
           <label for="sdt3">Số điện thoại / Zalo</label>
           <input id="sdt3" name="phone" type="tel" placeholder="09xx xxx xxx">
-          <button type="submit">Nhận phân tích cho tôi</button>
+          <button type="submit">Gửi tôi danh sách căn phù hợp</button>
         </form>
+        <div class="suggest"><b id="goi-y">Chọn câu trả lời ở trên</b><p id="goi-y-mo-ta">Gợi ý dòng căn sẽ hiện ngay tại đây.</p></div>
       </div>
-      <div class="quiz-result">
-        <h3>Gợi ý dành cho bạn</h3>
-        <p id="goi-y">Chọn câu trả lời bên cạnh</p>
-        <p id="goi-y-mo-ta">Gợi ý thay đổi theo từng câu bạn chọn.</p>
-        <p style="font-size:14px;color:#9CC7D3;margin-top:18px">Gợi ý sơ bộ. Chuyên viên sẽ chọn căn cụ thể theo tầng, hướng và chính sách thanh toán.</p>
+      <div class="card2 calc">
+        <h3>Tính dòng tiền cho thuê (minh hoạ)</h3>
+        <div class="row"><div class="row-h"><span>Giá thuê mỗi đêm</span><b id="v-gia">1,2 triệu</b></div><input type="range" id="r-gia" min="0.5" max="3" step="0.05" value="1.2" aria-label="Giá thuê mỗi đêm"></div>
+        <div class="row"><div class="row-h"><span>Công suất phòng</span><b id="v-cs">55%</b></div><input type="range" id="r-cs" min="20" max="90" step="1" value="55" aria-label="Công suất phòng"></div>
+        <div class="row"><div class="row-h"><span>Số đêm gia đình tự ở mỗi năm</span><b id="v-o">20 đêm</b></div><input type="range" id="r-o" min="0" max="90" step="1" value="20" aria-label="Số đêm tự ở"></div>
+        <div class="out">
+          <small>Doanh thu phòng minh hoạ mỗi năm</small>
+          <div class="big" id="v-dt">≈ 228 triệu</div>
+          <div class="sub3" id="v-dt2">≈ 19 triệu mỗi tháng · 190 đêm cho thuê</div>
+          <p class="note3">Chỉ là ví dụ minh hoạ, không phải cam kết. Chưa trừ phí vận hành, thuế và tỷ lệ chia doanh thu. Hãy kéo theo giá thuê và công suất anh/chị tra được cho căn tương tự trên Booking, Airbnb.</p>
+        </div>
+        <a class="btn" href="#dang-ky-cuoi">Nhận bảng tính chi tiết theo căn thật</a>
+        <a class="btn-z" href="https://zalo.me/0904567009">Nhắn Zalo 0904 567 009</a>
       </div>
     </div>
+    <div class="types">
+      <div class="type"><h4>Studio</h4><p>30–31 m²</p><span>Giá: gửi qua Zalo</span></div>
+      <div class="type"><h4>1BR+</h4><p>50–51 m²</p><span>Giá: gửi qua Zalo</span></div>
+      <div class="type"><h4>2BR</h4><p>60–70 m²</p><span>Giá: gửi qua Zalo</span></div>
+    </div>
+    <p class="fine">Diện tích theo thông tin phân phối; giá, mặt bằng và chính sách theo công bố của chủ đầu tư.</p>
   </div>
 </section>
 
@@ -848,16 +875,29 @@ footer{background:#0B1E3F;color:#C9D6E3;padding:56px 0 110px;font-size:15px}
   /* Quiz suggestion */
   function v(id){var e=document.getElementById(id);return e?e.value:'';}
   function suggest(){
-    var md=v('q1'),ns=v('q2'),dc=v('q3'),title='',desc='';
-    if(dc==='nhieu-the-he'||dc==='gia-dinh'||md==='nghi-duong'){title='Căn 2BR';desc='Đủ chỗ cho gia đình, làm ngôi nhà thứ hai bên biển; thời gian không ở có thể cho thuê khách gia đình mùa cao điểm.';}
-    else if(md==='dau-tu'&&ns==='duoi-3'){title='Studio';desc='Vốn vào nhẹ, dễ cho thuê theo đêm hoặc theo tháng; hợp nhà đầu tư muốn dòng tiền.';}
-    else if(md==='ca-hai'||dc==='mot-hai'){title='1BR+';desc='Riêng tư hơn studio, có góc đa năng; vừa ở vừa cho thuê chuyên gia dài hạn.';}
-    else if(md==='tich-san'){title='Studio hoặc 2BR view biển';desc='Ưu tiên căn view biển trực diện, tầng cao: loại căn khan hiếm, dễ giữ giá.';}
-    else if(md){title='Studio';desc='Lựa chọn phổ biến nhất của nhà đầu tư tại dự án.';}
-    if(v('q4')==='co'&&title){desc+=' Chuyên viên sẽ gửi kèm phương án vay và lịch thanh toán.';}
-    if(title){document.getElementById('goi-y').textContent=title;document.getElementById('goi-y-mo-ta').textContent=desc;}
+    var md=v('q1'),ns=v('q2'),st=v('q3'),t='',d='';
+    if(st==='can-lon'||md==='nghi-duong'){t='Căn 2BR';d='Đủ chỗ cho cả nhà, làm ngôi nhà thứ hai bên biển; thời gian không ở có thể cho thuê khách gia đình.';}
+    else if(md==='dau-tu'&&ns==='duoi-3'){t='Studio';d='Vốn vào nhẹ, dễ cho thuê theo đêm hoặc theo tháng.';}
+    else if(md==='ca-hai'){t='1BR+';d='Riêng tư hơn studio, có góc đa năng; vừa ở vừa cho thuê dài hạn.';}
+    else if(md){t='Studio';d='Lựa chọn phổ biến nhất của nhà đầu tư tại dự án.';}
+    if(st==='binh-minh'&&t){d+=' Ưu tiên căn hướng Đông nhìn thẳng ra biển.';}
+    if(st==='tang-cao'&&t){d+=' Ưu tiên tầng cao, view biển thoáng.';}
+    if(t){document.getElementById('goi-y').textContent=t;document.getElementById('goi-y-mo-ta').textContent=d;}
   }
-  ['q1','q2','q3','q4'].forEach(function(id){var e=document.getElementById(id);if(e)e.addEventListener('change',suggest);});
+  ['q1','q2','q3'].forEach(function(id){var e=document.getElementById(id);if(e)e.addEventListener('change',suggest);});
+  /* Rental calculator */
+  function fmt(n){return n.toLocaleString('vi-VN',{maximumFractionDigits:1});}
+  function calc(){
+    var g=parseFloat(v('r-gia')),c=parseFloat(v('r-cs')),o=parseFloat(v('r-o'));
+    var nights=Math.round((365-o)*c/100), dt=nights*g;
+    document.getElementById('v-gia').textContent=fmt(g)+' triệu';
+    document.getElementById('v-cs').textContent=c+'%';
+    document.getElementById('v-o').textContent=o+' đêm';
+    document.getElementById('v-dt').textContent='≈ '+Math.round(dt)+' triệu';
+    document.getElementById('v-dt2').textContent='≈ '+Math.round(dt/12)+' triệu mỗi tháng · '+nights+' đêm cho thuê';
+  }
+  ['r-gia','r-cs','r-o'].forEach(function(id){var e=document.getElementById(id);if(e)e.addEventListener('input',calc);});
+  calc();
   /* Copy lock */
   function inField(e){var t=e.target;return t&&t.closest&&t.closest('input,textarea,select');}
   document.addEventListener('contextmenu',function(e){if(!inField(e))e.preventDefault();});
