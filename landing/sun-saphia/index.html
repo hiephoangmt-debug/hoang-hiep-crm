@@ -323,6 +323,42 @@ footer{background:#0B1E3F;color:#C9D6E3;padding:56px 0 110px;font-size:15px}
   .hot-grid,.am-grid,.infra-grid,.day{grid-template-columns:1fr}
   .hot-item b{font-size:38px}
 }
+
+/* CHATBOT */
+.cb-btn{position:fixed;left:18px;bottom:90px;z-index:60;display:flex;align-items:center;gap:10px;background:#0B3C5D;color:#FFFFFF;border:3px solid #FFFFFF;border-radius:999px;padding:10px 18px 10px 10px;font-family:'Be Vietnam Pro',Arial,sans-serif;font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 12px 28px rgba(4,24,42,.35);transition:.3s}
+.cb-btn:hover{transform:translateY(-3px)}
+.cb-av{width:40px;height:40px;border-radius:50%;background:#C2552B;display:flex;align-items:center;justify-content:center;font-size:20px}
+.cb-dot{width:10px;height:10px;border-radius:50%;background:#3DDC84;box-shadow:0 0 0 3px rgba(61,220,132,.3)}
+.cb-box{position:fixed;left:18px;bottom:90px;z-index:61;width:370px;max-width:calc(100vw - 24px);height:560px;max-height:calc(100vh - 120px);background:#F3FAFB;border-radius:20px;box-shadow:0 24px 60px rgba(4,24,42,.4);display:none;flex-direction:column;overflow:hidden;font-family:'Be Vietnam Pro',Arial,sans-serif}
+.cb-box.open{display:flex}
+.cb-head{background:#0B3C5D;color:#FFFFFF;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.cb-head b{display:block;font-size:16px}
+.cb-head small{font-size:12px;color:#9CC7D3}
+.cb-x{margin-left:auto;background:none;border:none;color:#FFFFFF;font-size:24px;cursor:pointer;line-height:1}
+.cb-log{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.cb-m{max-width:85%;padding:10px 14px;border-radius:16px;font-size:14.5px;line-height:1.5;white-space:pre-line}
+.cb-bot{background:#FFFFFF;color:#0B2E44;border:1px solid #CFE7EC;border-bottom-left-radius:4px;align-self:flex-start}
+.cb-me{background:#C2552B;color:#FFFFFF;border-bottom-right-radius:4px;align-self:flex-end}
+.cb-chips{display:flex;flex-wrap:wrap;gap:6px}
+.cb-chip{background:#FFFFFF;border:1.5px solid #0F7C8F;color:#0F7C8F;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+.cb-chip:hover{background:#0F7C8F;color:#FFFFFF}
+.cb-chip.hot{border-color:#C2552B;color:#C2552B}
+.cb-chip.hot:hover{background:#C2552B;color:#FFFFFF}
+.cb-in{display:flex;gap:8px;padding:10px;background:#FFFFFF;border-top:1px solid #CFE7EC}
+.cb-in input{flex:1;border:1px solid #CFE7EC;border-radius:999px;padding:11px 14px;font-size:15px;font-family:inherit;background:#F3FAFB;color:#0B2E44}
+.cb-in button{background:#C2552B;color:#FFFFFF;border:none;border-radius:999px;padding:0 16px;font-weight:700;cursor:pointer;font-family:inherit}
+.cb-typing{font-size:13px;color:#557080;align-self:flex-start;padding-left:4px}
+.cb-img{display:block;max-width:100%;border-radius:12px;margin-top:8px;border:1px solid #CFE7EC;cursor:zoom-in}
+.cb-wrap{align-self:flex-start;max-width:88%}
+.cb-nudge{position:fixed;left:18px;bottom:152px;z-index:60;max-width:270px;background:#FFFFFF;color:#0B2E44;border-radius:16px 16px 16px 4px;padding:12px 34px 12px 14px;font-family:'Be Vietnam Pro',Arial,sans-serif;font-size:14px;line-height:1.45;box-shadow:0 14px 34px rgba(4,24,42,.3);cursor:pointer;display:none;animation:nudgeIn .45s both}
+.cb-nudge.show{display:block}
+.cb-nudge b{color:#C2552B}
+.cb-nudge .nx{position:absolute;right:8px;top:6px;background:none;border:none;font-size:18px;color:#557080;cursor:pointer}
+@keyframes nudgeIn{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes wave{0%,100%{transform:rotate(0)}20%{transform:rotate(-14deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}}
+.cb-btn.ping .cb-av{animation:wave 1s 2}
+@media (max-width:860px){.cb-nudge{left:12px;bottom:130px;max-width:calc(100vw - 90px)}}
+@media (max-width:860px){.cb-btn{left:12px;bottom:78px;padding:6px 14px 6px 6px;font-size:13px}.cb-av{width:34px;height:34px}.cb-box{left:12px;bottom:78px;height:calc(100vh - 110px)}}
 </style>
 </head>
 <body>
@@ -870,6 +906,16 @@ footer{background:#0B1E3F;color:#C9D6E3;padding:56px 0 110px;font-size:15px}
   </div>
 </footer>
 
+
+<!-- CHATBOT -->
+<button class="cb-btn" id="cb-open" type="button" aria-label="Mở trợ lý tư vấn"><span class="cb-av">🏖️</span><span class="cb-dot"></span>Hỏi nhanh về dự án</button>
+<div class="cb-nudge" id="cb-nudge" role="button" tabindex="0"><button class="nx" type="button" aria-label="Ẩn">×</button><span id="cb-nudge-t"></span></div>
+<div class="cb-box" id="cb-box" role="dialog" aria-label="Trợ lý tư vấn Sun Saphia">
+  <div class="cb-head"><span class="cb-av">🏖️</span><div><b>Trợ lý Sun Saphia</b><small>Trả lời ngay · chuyên viên Hoàng Hiệp hỗ trợ</small></div><button class="cb-x" id="cb-close" type="button" aria-label="Đóng">×</button></div>
+  <div class="cb-log" id="cb-log"></div>
+  <div class="cb-in"><input id="cb-text" type="text" placeholder="Nhập câu hỏi hoặc số Zalo…" aria-label="Nhập câu hỏi"><button id="cb-send" type="button">Gửi</button></div>
+</div>
+
 <!-- STICKY BAR -->
 <div class="sticky">
   <a class="s-form" href="#dang-ky-cuoi" aria-label="Nhận bảng giá"><span>💬</span><i class="lb"> Nhận giá</i></a>
@@ -914,6 +960,102 @@ footer{background:#0B1E3F;color:#C9D6E3;padding:56px 0 110px;font-size:15px}
   }
   ['r-gia','r-cs','r-o'].forEach(function(id){var e=document.getElementById(id);if(e)e.addEventListener('input',calc);});
   calc();
+
+  /* Chatbot */
+  (function(){
+    var box=document.getElementById('cb-box'),log=document.getElementById('cb-log'),inp=document.getElementById('cb-text'),btn=document.getElementById('cb-open');
+    var ndg=document.getElementById('cb-nudge'),ndgT=document.getElementById('cb-nudge-t');
+    if(!box)return;
+    var ZALO='https://zalo.me/0904567009',started=false,opened=false,asked=0,leadDone=false,lastLead=-9,turn=0,seen={};
+    function pick(a){return a[Math.floor(Math.random()*a.length)];}
+    function img(sel){var e=document.querySelector(sel);return e?(e.currentSrc||e.src):null;}
+    var IMG={map:'.loc-map img',bien:'.beach-img img',thap:'.ov-img img',hero:'.hero-visual img'};
+    var KB=[
+      {id:'gia',k:['gia','bao nhieu','bang gia','tien','ty ','chi phi','mac','dat qua','re'],a:['Giá thì mỗi căn một số anh/chị ạ, tầng cao view biển "kiêu" hơn một chút 😄\nStudio 30–31 m² là cửa vào nhẹ nhất để sở hữu căn mặt biển thương hiệu Sun.\nBảng giá đợt này em gửi qua Zalo được ngay, kèm chính sách chiết khấu.','Câu hỏi "triệu đô" đây rồi 😄 Giá theo từng căn, từng tầng, từng hướng.\nAnh/chị cho em biết ngân sách khoảng bao nhiêu, em lọc sẵn mấy căn vừa túi mà view vẫn đẹp nhé.'],c:['Gửi bảng giá qua Zalo','Dưới 3 tỷ có căn không?','Có hỗ trợ vay?'],lead:1},
+      {id:'budget',k:['duoi 3','3 ty','2 ty','it tien','von it','von nho'],a:['Có ạ! Studio 30–31 m² là "vé vào cửa" mặt biển Mỹ Khê cho tầm ngân sách này. Số lượng studio đẹp tầng cao thì… hết nhanh hơn kem trên bãi biển tháng 7 😅\nEm giữ giúp anh/chị danh sách căn còn trống nhé?'],c:['Gửi danh sách studio','Có hỗ trợ vay?'],lead:1},
+      {id:'booking',k:['booking','giu cho','dat cho','coc','50 trieu'],a:['Dự án đang nhận giữ chỗ đợt đầu, tham khảo 50 triệu/vị trí theo thông tin mở bán.\nGiữ sớm = được chọn căn đẹp trước, vì căn view biển trực diện thường "bay" đầu tiên 🏃\nĐiều kiện hoàn tiền theo chính sách từng đợt, em gửi văn bản rõ ràng qua Zalo ạ.'],c:['Giữ chỗ ngay','Căn view biển còn không?'],lead:1},
+      {id:'vitri',k:['vi tri','o dau','dia chi','duong nao','ban do','map'],a:['Sun Saphia đứng ngay giao lộ Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, mặt tiền trục biển. Sáng mở cửa là thấy biển Sơn Thủy, khỏi cần đặt báo thức 🌅'],img:'map',c:['Cách sân bay bao xa?','Gần pháo hoa không?','Nhận video vị trí'],go:'.loc'},
+      {id:'sanbay',k:['san bay','bao xa','khoang cach','di chuyen','bao lau'],a:['Sân bay Đà Nẵng nằm ngay giữa thành phố, đi về dự án qua cầu Tiên Sơn hoặc cầu Rồng. Khách thuê đáp máy bay là "check-in biển" luôn, không phải ôm vali đi đường dài ✈️\nThời gian thực tế tuỳ giờ, em gửi video lộ trình qua Zalo cho chuẩn nhé.'],img:'map',c:['Nhận video vị trí','Gần pháo hoa không?'],lead:1},
+      {id:'phaohoa',k:['phao hoa','diff','le hoi','su kien'],a:['Pháo hoa DIFF bắn trên sông Hàn, bờ Tây khu Đỗ Pháp Thuận – Phan Đăng Lưu 🎆 Mùa này phòng ven biển cháy hàng, nhiều khách sạn kín 90–95% — chủ căn hộ cho thuê thì… cười tươi như pháo hoa 😄'],img:'map',c:['Giá thuê thế nào?','Có dễ cho thuê?']},
+      {id:'phaply',k:['phap ly','so hong','so do','thoi han','lau dai','50 nam','giay to'],a:['Pháp lý thì em không "nói miệng" đâu ạ 😊 Em gửi anh/chị văn bản chính thức của chủ đầu tư (loại đất, thời hạn, loại giấy chứng nhận) để mình đọc kỹ trước khi xuống tiền.'],c:['Gửi hồ sơ pháp lý','Bàn giao khi nào?'],lead:1},
+      {id:'bangiao',k:['ban giao','khi nao xong','tien do','hoan thien','xay xong'],a:['Bàn giao dự kiến tháng 11/2028 theo thông tin mở bán, mốc chính thức ghi trong hợp đồng. Từ giờ tới đó anh/chị góp theo tiến độ, nhẹ nhàng như sóng Mỹ Khê thôi 🌊'],img:'thap',c:['Chính sách thanh toán','Có hỗ trợ vay?']},
+      {id:'vay',k:['vay','ngan hang','lai suat','tra gop','thanh toan','chiet khau','uu dai','khuyen mai'],a:['Thanh toán, chiết khấu, vay ngân hàng và hỗ trợ lãi suất đi theo từng đợt mở bán.\nAnh/chị cho em con số muốn bỏ ra ban đầu, em tính lịch thanh toán cụ thể — rõ từng tháng, không "đánh đố" ạ.'],c:['Tính lịch thanh toán cho tôi','Gửi bảng giá qua Zalo'],lead:1},
+      {id:'chothue',k:['cho thue','dong tien','loi nhuan','loi suat','thu nhap','kinh doanh','airbnb','co loi','sinh loi'],a:['Số liệu thật nè: studio ~30 m² gần biển Mỹ Khê đang rao thuê dài hạn 8–9,5 triệu/tháng (2026); khách sạn 4–5 sao Đà Nẵng quý III/2026 kín khoảng 88–90%.\nAnh/chị kéo thử bảng "Tính dòng tiền" trên trang, tự làm "giám đốc tài chính" 5 giây nhé 😄 (minh hoạ, không cam kết lợi nhuận)'],c:['Mở bảng tính dòng tiền','Chưa từng cho thuê được không?'],go:'#danh-gia'},
+      {id:'vanhanh',k:['chua tung','van hanh','quan ly','ai lo','de cho thue','kho cho thue','ban ron'],a:['Yên tâm, không cần biết làm khách sạn đâu ạ 😄 3 cách:\n1) Cho thuê dài hạn 6–12 tháng qua môi giới.\n2) Giao công ty quản lý lo từ đăng phòng tới dọn dẹp, anh/chị chỉ… xem báo cáo.\n3) Vừa ở vừa cho thuê.\nMùa mưa (T9–T12) chuyển sang thuê tháng để dòng tiền đều.'],c:['Giá thuê thế nào?','Gửi bảng giá qua Zalo']},
+      {id:'tienich',k:['tien ich','ho boi','nha tre','shop','gym','khoi de','resort'],a:['Trong toà có hồ bơi tầng 3, nhà trẻ, shop khối đế — xuống thang máy là có, khỏi chạy xe 😎\nNgoài toà: biển Sơn Thủy ngay trước mặt, công viên ven biển, phố Tây An Thượng, Furama, Crowne Plaza, Hyatt…'],img:'bien',c:['Nhận phối cảnh tiện ích','Loại căn nào?'],lead:1},
+      {id:'loaican',k:['loai can','studio','1br','2br','phong ngu','dien tich','m2','can nao','mat bang','4d'],a:['3 dòng căn cho 3 kiểu người:\n• Studio 30–31 m² — nhà đầu tư thích dòng tiền.\n• 1BR+ 50–51 m² — cặp đôi, chuyên gia ở dài.\n• 2BR 60–70 m² — cả nhà, "ngôi nhà thứ hai" bên biển.\n1BR+ và 2BR ít căn nên hay hết sớm. Anh/chị nghiêng về kiểu nào ạ?'],c:['Tôi mua để đầu tư','Tôi mua để nghỉ dưỡng','Gửi mặt bằng 4D'],go:'.plan'},
+      {id:'dautu',k:['dau tu','de dau tu'],a:['Chuẩn "dân đầu tư" rồi 😄 Em gợi ý Studio: vốn vào nhẹ, dễ cho thuê theo đêm lẫn theo tháng. Ưu tiên tầng cao, hướng biển để giữ giá và dễ cho thuê hơn.'],c:['Mở bảng tính dòng tiền','Gửi danh sách studio'],lead:1},
+      {id:'nghiduong',k:['nghi duong','gia dinh','ca nha','de o'],a:['Vậy 2BR là chân ái ạ 🏖️ Đủ chỗ cho cả nhà, mùa hè về biển, phần thời gian còn lại cho thuê khách gia đình. Có nhà trẻ trong toà nên các bé cũng có chỗ chơi.'],c:['Gửi mặt bằng 2BR','Gửi bảng giá qua Zalo'],lead:1},
+      {id:'view',k:['view','huong','tang cao','truc dien','binh minh'],a:['Căn hướng Đông nhìn thẳng ra biển, tầng cao, đón bình minh — nhóm này là "hot girl" của dự án, ai cũng hỏi 😄 Em gửi danh sách căn view biển còn trống ngay khi có nhé.'],img:'bien',c:['Giữ chỗ ngay','Gửi bảng giá qua Zalo'],lead:1},
+      {id:'cdt',k:['chu dau tu','sun group','ai xay','uy tin','thuong hieu'],a:['Chủ đầu tư là Sun Group — "nhà" của Bà Nà Hills, InterContinental Sun Peninsula, Sun World. Toà 30 tầng, cao ~114 m, 782 căn (công bố).'],img:'thap',c:['Bàn giao khi nào?','Pháp lý thế nào?']},
+      {id:'nuocngoai',k:['nuoc ngoai','viet kieu','foreigner'],a:['Trường hợp người nước ngoài/Việt kiều tuỳ loại hình sản phẩm và giấy chứng nhận. Em gửi văn bản chính thức để kiểm tra đúng trường hợp của anh/chị ạ.'],c:['Gửi hồ sơ pháp lý'],lead:1},
+      {id:'xem',k:['xem nha','tham quan','nha mau','gap','hen','xem thuc te'],a:['Anh/chị ra Đà Nẵng em dẫn đi xem tận nơi, còn ở xa thì em gọi video "tour" vị trí luôn 📱 Cho em xin số Zalo để sắp lịch nhé.'],c:['Đặt lịch xem'],lead:1},
+      {id:'hi',k:['chao','hello','hi ','alo','xin chao'],a:['Chào anh/chị 👋 Hôm nay biển Mỹ Khê vẫn xanh, em vẫn ở đây trả lời mọi câu hỏi về Sun Saphia ạ!','Em chào anh/chị ạ 😊 Anh/chị muốn hỏi giá, vị trí hay chuyện cho thuê trước?'],c:['Giá bao nhiêu?','Vị trí ở đâu?','Cho thuê có lời?']},
+      {id:'thanks',k:['cam on','thank','ok em','oke','duoc roi'],a:['Dạ không có chi ạ 🙏 Khi nào cần bảng giá hay mặt bằng, anh/chị gõ "giá" là em có mặt liền!','Em cảm ơn anh/chị đã ghé! Còn thắc mắc gì cứ hỏi em nhé, em không đi đâu cả 😄'],c:['Gửi bảng giá qua Zalo']},
+      {id:'suynghi',k:['suy nghi','de xem','tham khao','chua chac','chua can','de sau','tu tu'],a:['Dạ cứ thong thả ạ, mua nhà đâu phải mua trà sữa 😄 Em gửi anh/chị bộ tài liệu để xem dần, không gọi làm phiền đâu — chỉ nhắn khi có căn đẹp hoặc chính sách tốt.'],c:['Gửi tài liệu qua Zalo','Mở bảng tính dòng tiền'],lead:1},
+      {id:'bot',k:['bot','robot','nguoi that','ai tra loi','may'],a:['Em là trợ lý tự động, trả lời nhanh 24/7 😎 Còn câu khó hay cần báo giá từng căn thì chuyên viên Hoàng Hiệp (người thật 100%) trả lời trực tiếp qua Zalo ạ.'],c:['Nhắn Zalo 0904 567 009','Gọi 0904 567 009']}
+    ];
+    var ALIAS={'Gửi bảng giá qua Zalo':'gia','Chính sách thanh toán':'thanh toan','Có hỗ trợ vay?':'vay','Giữ chỗ ngay':'booking','Căn view biển còn không?':'view','Cách sân bay bao xa?':'san bay','Gần pháo hoa không?':'phao hoa','Nhận video vị trí':'san bay','Giá thuê thế nào?':'cho thue','Có dễ cho thuê?':'chua tung','Gửi hồ sơ pháp lý':'phap ly','Bàn giao khi nào?':'ban giao','Tính lịch thanh toán cho tôi':'vay','Mở bảng tính dòng tiền':'cho thue','Chưa từng cho thuê được không?':'chua tung','Nhận phối cảnh tiện ích':'tien ich','Loại căn nào?':'loai can','Gửi mặt bằng 4D':'mat bang','Gửi mặt bằng 2BR':'mat bang','Pháp lý thế nào?':'phap ly','Đặt lịch xem':'xem nha','Giá bao nhiêu?':'gia','Vị trí ở đâu?':'vi tri','Cho thuê có lời?':'cho thue','Tiện ích gì?':'tien ich','Dưới 3 tỷ có căn không?':'duoi 3','Gửi danh sách studio':'duoi 3','Tôi mua để đầu tư':'dau tu','Tôi mua để nghỉ dưỡng':'nghi duong','Gửi tài liệu qua Zalo':'gia','Xem phối cảnh':'tien ich'};
+    var LEADASK=['Anh/chị cho em xin số điện thoại/Zalo nhé, chuyên viên Hoàng Hiệp gửi tài liệu trong vài phút. Hứa không spam, chỉ gửi đồ "xịn" thôi 😄','Để em gửi đúng căn đúng giá, anh/chị gõ giúp em số Zalo ở ô bên dưới nha 📩'];
+    function norm(t){return (' '+t+' ').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ');}
+    function scrollEnd(){log.scrollTop=log.scrollHeight;}
+    function add(txt,who,im){var d=document.createElement('div');d.className='cb-m '+(who==='me'?'cb-me':'cb-bot');d.textContent=txt;
+      if(im){var u=img(IMG[im]);if(u){var w=document.createElement('div');w.className='cb-wrap';w.appendChild(d);var i=document.createElement('img');i.className='cb-img';i.src=u;i.alt='';i.onload=scrollEnd;i.onclick=function(){window.open(u,'_blank');};w.appendChild(i);log.appendChild(w);scrollEnd();return;}}
+      log.appendChild(d);scrollEnd();}
+    function chips(list){if(!list||!list.length)return;var w=document.createElement('div');w.className='cb-chips';list.forEach(function(c){var b=document.createElement('button');b.type='button';b.className='cb-chip'+(/Zalo|Giữ chỗ|Đặt lịch|Gửi|Gọi/.test(c)?' hot':'');b.textContent=c;b.onclick=function(){w.remove();ask(c);};w.appendChild(b);});log.appendChild(w);scrollEnd();}
+    function bot(txt,list,im,delay){var t=document.createElement('div');t.className='cb-typing';t.textContent='Trợ lý đang gõ…';log.appendChild(t);scrollEnd();
+      var d=delay||Math.min(1600,450+txt.length*6);setTimeout(function(){t.remove();add(txt,'bot',im);chips(list);},d);return d;}
+    function leadAsk(after){if(leadDone||turn-lastLead<3)return;lastLead=turn;setTimeout(function(){bot(pick(LEADASK),['Nhắn Zalo 0904 567 009','Gọi 0904 567 009'],null,900);},after+300);}
+    function phone(t){var m=t.replace(/[\s.\-]/g,'').match(/(\+?84|0)(3|5|7|8|9)\d{8}/);return m?m[0]:null;}
+    function goto(sel){var e=document.querySelector(sel);if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
+    function ask(q){
+      add(q,'me');turn++;asked++;
+      if(q==='Nhắn Zalo 0904 567 009'){window.open(ZALO,'_blank');bot('Em mở Zalo rồi đó ạ, anh/chị nhắn "Sun Saphia" là em gửi bảng giá liền tay 🚀',[]);return;}
+      if(q==='Gọi 0904 567 009'){location.href='tel:0904567009';return;}
+      var ph=phone(q);
+      if(ph){leadDone=true;var f=document.getElementById('sdt2'),n=document.getElementById('ten2');if(f)f.value=ph;
+        bot('Tuyệt vời, em nhận số '+ph+' rồi 🎉 Em điền sẵn vào form đăng ký bên dưới, anh/chị chỉ cần ghi tên và bấm "Gửi đăng ký" là chuyên viên liên hệ ngay ạ.',['Nhắn Zalo 0904 567 009']);
+        setTimeout(function(){goto('#dang-ky-cuoi');if(n)n.focus();},1800);return;}
+      var nq=norm(ALIAS[q]||q),best=null,score=0;
+      KB.forEach(function(it){var sc=0;it.k.forEach(function(k){if(nq.indexOf(' '+k)>-1)sc+=k.length;});if(sc>score){score=sc;best=it;}});
+      if(best){var rep=seen[best.id];seen[best.id]=1;var txt=pick(best.a);if(rep&&best.a.length===1)txt='Em nhắc lại xíu nha 😄\n'+txt;
+        var d=bot(txt,best.c,best.img);if(best.go)setTimeout(function(){goto(best.go);},d+600);if(best.lead||asked>=3){leadAsk(d);asked=0;}}
+      else{bot(pick(['Câu này hay quá, em xin phép nhờ chuyên viên trả lời cho chuẩn ạ 😊 Anh/chị gõ số Zalo, hoặc chọn nhanh bên dưới nhé.','Ui, câu này vượt "giáo trình" của em rồi 😅 Để chuyên viên Hoàng Hiệp trả lời trực tiếp cho chính xác nha.']),['Nhắn Zalo 0904 567 009','Giá bao nhiêu?','Vị trí ở đâu?','Cho thuê có lời?']);}
+    }
+    function open(ctx){hideNudge();box.classList.add('open');btn.style.display='none';opened=true;
+      if(!started){started=true;bot(ctx&&ctx.greet?ctx.greet:'Xin chào anh/chị 👋 Em là trợ lý Sun Saphia — căn hộ mặt biển Mỹ Khê của Sun Group.\nHỏi em gì cũng được, trừ… số đề nha 😄',ctx&&ctx.chips?ctx.chips:['Giá bao nhiêu?','Vị trí ở đâu?','Cho thuê có lời?','Loại căn nào?','Tiện ích gì?','Giữ chỗ ngay'],ctx&&ctx.img,500);}
+      else if(ctx&&ctx.greet){bot(ctx.greet,ctx.chips,ctx.img,500);}
+      setTimeout(function(){inp.focus();},300);}
+    btn.onclick=function(){open(curCtx);};
+    document.getElementById('cb-close').onclick=function(){box.classList.remove('open');btn.style.display='';};
+    function send(){var t=inp.value.trim();if(!t)return;inp.value='';ask(t);}
+    document.getElementById('cb-send').onclick=send;
+    inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();send();}});
+    /* Smart nudges: khách dừng lâu ở mục nào thì hỏi đúng chuyện đó */
+    var SEC=[
+      {sel:'.hot',t:'Số liệu "khủng" ha 😄 Anh/chị muốn biết <b>khách thuê đông vậy thì cho thuê được bao nhiêu</b> không?',g:'Thấy anh/chị ngắm số liệu du lịch hơi lâu nè 😄 Khách đông vậy thì chuyện cho thuê ra sao, em kể nhanh nhé?',c:['Cho thuê có lời?','Giá thuê thế nào?']},
+      {sel:'.beach',t:'View này mà ngày nào cũng thấy thì sao ta 🌊 <b>Xem căn view biển còn trống?</b>',g:'View này đẹp đúng không ạ 😍 Căn hướng biển trực diện là nhóm hết sớm nhất. Anh/chị muốn em lọc căn view biển còn trống không?',c:['Căn view biển còn không?','Giá bao nhiêu?'],img:'bien'},
+      {sel:'.ov-grid',t:'Đang "soi" thông số dự án hả anh/chị? <b>Hỏi em pháp lý, bàn giao</b> nhé 📋',g:'Thông số chi tiết nè anh/chị 📋 Hay hỏi nhất là pháp lý và bàn giao — anh/chị muốn em nói cái nào trước?',c:['Pháp lý thế nào?','Bàn giao khi nào?'],img:'thap'},
+      {sel:'.loc',t:'Đang xem bản đồ hả 😄 <b>Cần em chỉ đường từ sân bay</b> không ạ?',g:'Thấy anh/chị xem bản đồ kỹ ghê 🗺️ Từ sân bay về dự án, hay khu pháo hoa DIFF, em chỉ nhanh nha?',c:['Cách sân bay bao xa?','Gần pháo hoa không?','Nhận video vị trí'],img:'map'},
+      {sel:'.plan',t:'Mặt bằng nhìn vậy chứ ở ngoài rộng hơn nhiều 😄 <b>Nhận mặt bằng 4D</b>?',g:'Anh/chị đang cân nhắc dòng căn nào ạ? Em gửi mặt bằng 4D cho dễ hình dung nha 🏠',c:['Tôi mua để đầu tư','Tôi mua để nghỉ dưỡng','Gửi mặt bằng 4D']},
+      {sel:'#danh-gia',t:'Kéo bảng tính hăng say ghê 😄 <b>Muốn em tính theo căn thật</b> không?',g:'Bảng tính chỉ là minh hoạ thôi ạ 😄 Em tính theo căn thật, giá thật, chính sách thật cho anh/chị nhé?',c:['Tính lịch thanh toán cho tôi','Chưa từng cho thuê được không?']},
+      {sel:'.faq',t:'Còn câu nào chưa có trong danh sách? <b>Hỏi em liền</b> 🙋',g:'Câu hỏi thường gặp chưa đủ "đã" ạ? Anh/chị hỏi thẳng em luôn nhé 🙋',c:['Giá bao nhiêu?','Có hỗ trợ vay?','Giữ chỗ ngay']}
+    ];
+    var curCtx=null,nudged={},nCount=0,timers={};
+    function hideNudge(){ndg.classList.remove('show');}
+    function showNudge(s){if(opened&&box.classList.contains('open'))return;if(nudged[s.sel]||nCount>=4)return;nudged[s.sel]=1;nCount++;
+      curCtx={greet:s.g,chips:s.c,img:s.img};ndgT.innerHTML=s.t;ndg.classList.add('show');btn.classList.remove('ping');void btn.offsetWidth;btn.classList.add('ping');
+      setTimeout(function(){if(curCtx&&curCtx.greet===s.g)hideNudge();},14000);}
+    ndg.addEventListener('click',function(e){if(e.target.classList.contains('nx')){e.stopPropagation();hideNudge();return;}open(curCtx);});
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(en){var s=en.target._cb;
+        if(en.isIntersecting&&en.intersectionRatio>=0.35){timers[s.sel]=setTimeout(function(){showNudge(s);},9000);}
+        else{clearTimeout(timers[s.sel]);}});},{threshold:[0,0.35]});
+      SEC.forEach(function(s){var el=document.querySelector(s.sel);if(el){el._cb=s;io.observe(el);}});
+    }
+    /* Sắp rời trang (máy tính): níu nhẹ */
+    document.addEventListener('mouseout',function(e){if(!e.relatedTarget&&e.clientY<5&&!leadDone&&!nudged.exit){nudged.exit=1;nCount=Math.min(nCount,3);showNudge({sel:'exit',t:'Ơ khoan đã 🙈 <b>Để em gửi bảng giá qua Zalo</b> rồi hẵng đi nha!',g:'Khoan đi đã ạ 😄 Để lại số Zalo, em gửi bảng giá + mặt bằng để anh/chị xem lúc rảnh, không làm phiền đâu!',c:['Gửi bảng giá qua Zalo','Nhắn Zalo 0904 567 009']});}});
+  })();
   /* Copy lock */
   function inField(e){var t=e.target;return t&&t.closest&&t.closest('input,textarea,select');}
   document.addEventListener('contextmenu',function(e){if(!inField(e))e.preventDefault();});
