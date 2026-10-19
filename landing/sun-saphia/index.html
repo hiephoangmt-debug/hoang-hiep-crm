@@ -234,9 +234,16 @@ section{padding:80px 0}
 .final ul{margin:20px 0 0 20px;color:#E8F5F7;font-size:17px}
 .final li{margin:6px 0}
 
-footer{background:#082C44;color:#9CC7D3;padding:32px 0 100px;font-size:14px}
-footer p{margin:6px 0}
-
+footer{background:#0B1E3F;color:#C9D6E3;padding:56px 0 110px;font-size:15px}
+.ft-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px}
+.ft-brand{font-family:'Playfair Display',Georgia,serif;font-size:30px;font-style:italic;color:#FFFFFF;line-height:1.1}
+.ft-brand small{display:block;font-family:'Be Vietnam Pro',Arial,sans-serif;font-style:normal;font-size:11px;letter-spacing:4px;color:#E8833A;margin-top:6px}
+.ft-col p{margin:6px 0;line-height:1.6}
+.ft-col h4{font-size:15px;font-weight:700;letter-spacing:2px;color:#E8833A;margin-bottom:12px}
+.ft-col a{color:#FFFFFF;text-decoration:underline;text-underline-offset:3px}
+.ft-col a:hover{color:#FFC98B}
+.ft-line{border:none;border-top:1px solid rgba(255,255,255,.12);margin:36px 0 22px}
+.ft-note{font-size:13px;color:#8FA3B8;line-height:1.7}
 /* STICKY BAR */
 .sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;gap:8px;padding:10px;background:rgba(8,44,68,.96)}
 .sticky a{flex:1;text-align:center;font-weight:700;font-size:15px;padding:13px 6px;border-radius:12px;text-decoration:none;color:#FFFFFF}
@@ -244,7 +251,16 @@ footer p{margin:6px 0}
 .s-zalo{background:#1590A6}
 .s-form{background:#C2552B}
 
-@media (min-width:861px){.sticky{left:auto;right:20px;bottom:20px;width:460px;border-radius:16px}}
+@media (min-width:861px){
+.sticky{left:auto;right:22px;bottom:24px;width:auto;flex-direction:column;gap:14px;padding:0;background:none}
+.sticky a{flex:none;width:62px;height:62px;padding:0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0;border:3px solid #FFFFFF;box-shadow:0 10px 24px rgba(4,24,42,.35);transition:.3s}
+.sticky a:hover{transform:scale(1.08)}
+.sticky a span{font-size:24px}
+.sticky .s-form{background:#0B1E3F}
+.sticky .s-call{background:#E8833A}
+.sticky .s-zalo{background:#0B1E3F}
+.sticky .s-zalo span{font-size:15px;font-weight:800}
+}
 @media (max-width:860px){
   .hero{padding-top:0}
   .hero-grid{gap:24px}
@@ -266,6 +282,7 @@ footer p{margin:6px 0}
   .bcol b{font-size:15px}
   .kpi b{font-size:30px}
   .infra-grid{grid-template-columns:1fr 1fr}
+  .ft-grid{grid-template-columns:1fr;gap:28px}
   .months{grid-template-columns:repeat(6,1fr)}
   .form-card{flex:1 1 100%}
   .band h3{font-size:26px}
@@ -780,17 +797,34 @@ footer p{margin:6px 0}
 
 <footer>
   <div class="wrap">
-    <p><b style="color:#FFFFFF">Hoàng Hiệp</b> · Chuyên viên tư vấn bất động sản · 0904 567 009</p>
-    <p>Đây là trang tư vấn của chuyên viên kinh doanh, không phải website chính thức của chủ đầu tư Sun Group. Thông tin, hình vẽ và số liệu mang tính tham khảo; giá bán, chính sách, tiện ích và pháp lý theo văn bản chính thức của chủ đầu tư tại thời điểm giao dịch. Không cam kết lợi nhuận hay giá thuê.</p>
-    <p>Số liệu du lịch: Sở VHTT&amp;DL Đà Nẵng, Báo Đà Nẵng (9 tháng 2026). Miễn visa: Nghị quyết 44/NQ-CP. Giá thuê tham khảo: tin rao muaban.net 2026; Nhà Đầu tư, CafeBiz. Công suất phòng: CBRE, Avison Young, CoStar.</p>
+    <div class="ft-grid">
+      <div class="ft-col">
+        <p class="ft-brand">Sun Saphia<small>RESIDENCE</small></p>
+        <p style="margin-top:16px"><a href="#dang-ky">Sun Saphia Residence</a> – căn hộ mặt biển tại giao lộ Võ Nguyên Giáp – Trường Sa, sát bãi biển Sơn Thủy, Đà Nẵng.</p>
+      </div>
+      <div class="ft-col">
+        <h4>ĐỊA CHỈ DỰ ÁN</h4>
+        <p>Giao lộ Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, TP. Đà Nẵng</p>
+        <p><a href="https://www.google.com/maps/search/?api=1&query=V%C3%B5%20Nguy%C3%AAn%20Gi%C3%A1p%2C%20Tr%C6%B0%E1%BB%9Dng%20Sa%2C%20Nguy%E1%BB%85n%20%C4%90%E1%BB%A9c%20Thu%E1%BA%ADn%2C%20%C4%90%C3%A0%20N%E1%BA%B5ng" target="_blank" rel="noopener">📍 Chỉ đường Google Maps ↗</a></p>
+      </div>
+      <div class="ft-col">
+        <h4>TƯ VẤN &amp; BÁN HÀNG</h4>
+        <p>Hoàng Phạm Đình Hiệp – Giám đốc kinh doanh</p>
+        <p>Hotline: <a href="tel:0904567009">0904 567 009</a></p>
+        <p>Zalo: <a href="https://zalo.me/0904567009">0904 567 009</a></p>
+      </div>
+    </div>
+    <hr class="ft-line">
+    <p class="ft-note">Trang thông tin dự án do Giám đốc kinh doanh Hoàng Phạm Đình Hiệp cung cấp, không phải website chính thức của chủ đầu tư. Hình ảnh phối cảnh và sơ đồ mang tính minh hoạ. Thông tin, giá bán và chính sách có thể thay đổi theo quy định của chủ đầu tư tại từng thời điểm; không cam kết lợi nhuận hay giá thuê. Cập nhật lần cuối: 19/10/2026.</p>
+    <p class="ft-note">Số liệu: Sở VHTT&amp;DL Đà Nẵng, Báo Đà Nẵng (9 tháng 2026); Nghị quyết 44/NQ-CP; tin rao muaban.net, Nhà Đầu tư, CafeBiz; CBRE, Avison Young, CoStar.</p>
   </div>
 </footer>
 
 <!-- STICKY BAR -->
 <div class="sticky">
-  <a class="s-call" href="tel:0904567009">📞 Gọi ngay</a>
-  <a class="s-zalo" href="https://zalo.me/0904567009">💬 Zalo</a>
-  <a class="s-form" href="#dang-ky-cuoi">📄 Nhận giá</a>
+  <a class="s-form" href="#dang-ky-cuoi" aria-label="Nhận bảng giá"><span>💬</span> Nhận giá</a>
+  <a class="s-call" href="tel:0904567009" aria-label="Gọi 0904 567 009"><span>📞</span> Gọi ngay</a>
+  <a class="s-zalo" href="https://zalo.me/0904567009" aria-label="Zalo 0904 567 009"><span>Zalo</span></a>
 </div>
 
 <script>
