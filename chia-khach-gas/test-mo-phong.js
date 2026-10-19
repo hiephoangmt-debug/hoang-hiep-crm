@@ -1,5 +1,5 @@
 const vm=require('vm'),fs=require('fs');
-const code=fs.readFileSync(__dirname+'/ChiaKhach.gs','utf8').replace("var BOT_TOKEN_DAN_VAO_DAY = 'DÁN_MÃ_BOT_CHIA_KHÁCH_VÀO_ĐÂY';","var BOT_TOKEN_DAN_VAO_DAY = 'TEST123';");
+const code=fs.readFileSync(__dirname+'/ChiaKhach.gs','utf8').replace("var BOT_TOKEN_DAN_VAO_DAY = 'DÁN_MÃ_BOT_CHIA_KHÁCH_VÀO_ĐÂY';","var BOT_TOKEN_DAN_VAO_DAY = 'TEST123';").replace("var LINK_SHEET_CRM_DAN_VAO_DAY = 'DÁN_LINK_SHEET_CRM_HOÀNG_HIỆP_VÀO_ĐÂY';","var LINK_SHEET_CRM_DAN_VAO_DAY = 'https://docs.google.com/spreadsheets/d/crm-id/edit#gid=0';");
 let NOW=Date.UTC(2026,9,20,2,0); // 9:00 VN
 const RD=Date; class FD extends RD{constructor(...a){a.length?super(...a):super(NOW)} static now(){return NOW}}
 function Sheet(name){this.name=name;this.d=[];}
@@ -25,6 +25,7 @@ const ctx={Date:FD,console,JSON,Math,String,Number,Object,Array,
   if(m==='getUpdates'){const off=p.offset||0;res={ok:true,result:upd.filter(x=>x.update_id>=off)};}
   else if(m==='sendMessage'){mid++;sent.push(Object.assign({mid},p));res={ok:true,result:{message_id:mid}};}
   else if(m==='editMessageText'){edits.push(p);}
+  else if(m==='getMe'){res={ok:true,result:{username:'chia_khach_test_bot'}};}
   return{getContentText:()=>JSON.stringify(res)};}}};
 vm.createContext(ctx);vm.runInContext(code,ctx);
 let fails=0;const ok=(c,m)=>{console.log((c?'  ✅ ':'  ❌ ')+m);if(!c)fails++};
@@ -35,7 +36,9 @@ const K=id=>vm.runInContext(`timKhach_('${id}')`,ctx);
 const to=chat=>sent.filter(s=>String(s.chat_id)===String(chat));
 const lastTo=chat=>to(chat).pop()||{text:''};
 // cài đặt
-msg(900,'chào','QuanLy'); vm.runInContext('caiDat()',ctx); active.s['CauHinh'].d.forEach(r=>{if(r[0]==='CRM_SHEET_ID')r[1]='crm-id';}); vm.runInContext('ghiNhanKhachCu_()',ctx);
+msg(900,'chào','QuanLy'); vm.runInContext('caiDat()',ctx);
+ok(active.s['CauHinh'].d.some(r=>r[0]==='CRM_SHEET_ID'&&r[1]==='crm-id'),'caiDat lấy ID từ link Sheet CRM');
+msg(5,'chào','Người khác'); vm.runInContext('caiDat()',ctx); ok(props.QUAN_LY_ID==='900','chạy lại caiDat không đổi quản lý');
 ok(props.QUAN_LY_ID==='900','quản lý được ghi nhận'); ok(/Bot chia khách đã chạy/.test(lastTo(900).text),'quản lý nhận tin cài đặt');
 // sale đăng ký + duyệt
 msg(1,'/dangky An','An');msg(2,'/dangky Bình','Binh');msg(3,'/dangky Cường','Cuong');run();

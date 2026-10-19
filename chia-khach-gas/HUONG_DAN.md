@@ -50,31 +50,57 @@ Mọi hạn và nhắc chỉ tính trong giờ 7h–21h.
 
 ## Cài đặt (1 lần, khoảng 10 phút)
 
-1. **Tạo bot mới**
-   - Telegram → tìm `@BotFather` → gõ `/newbot` → đặt tên, ví dụ "Chia khách Sun Saphia".
-   - Copy mã bot BotFather gửi.
-   - Dùng bot mới, đừng dùng lại bot báo khách đang có.
-2. **Quản lý nhắn cho bot**
-   - Quản lý mở bot mới, bấm **Start**, nhắn 1 tin bất kỳ.
-   - Người nhắn tin này sẽ thành quản lý.
-3. **Tạo Sheet**
-   - Tạo Google Sheet mới, đặt tên "Chia khách".
-   - Vào Tiện ích mở rộng → Apps Script → xoá nội dung mẫu → dán toàn bộ tệp `ChiaKhach.gs` → Lưu.
-4. **Dán mã bot**
-   - Tìm dòng `var BOT_TOKEN_DAN_VAO_DAY = '…'`, dán mã bot vào giữa hai dấu `'`, rồi Lưu.
-5. **Chạy cài đặt**
-   - Chọn hàm `caiDat` ở thanh trên → bấm **Chạy** → cấp quyền (Nâng cao → Đi tới… → Cho phép).
-   - Quản lý nhận tin "✅ Bot chia khách đã chạy" là xong.
-6. **Nối với CRM**
-   - Mở tab **CauHinh**, dòng `CRM_SHEET_ID`: dán ID của Sheet "CRM Hoàng Hiệp" (đoạn giữa `/d/` và `/edit` trong link Sheet).
-   - Chạy lại hàm `caiDat` một lần nữa.
-   - Khách đang có sẵn trong CRM sẽ không bị chia lại; chỉ khách mới từ lúc này mới được chia.
-7. **Mời sale**
-   - Từng sale mở bot, gõ `/dangky Tên` (ví dụ `/dangky Lan`).
-   - Quản lý nhận tin có nút **✅ Duyệt** và bấm duyệt.
-8. **Thử**
-   - Chạy hàm `themKhachThu` để giao 1 khách giả, rồi kiểm tra bên sale.
-   - Thử xong, xoá dòng khách thử trong tab **Khach**.
+**Bước 1 – Tạo bot Telegram mới**
+1. Mở Telegram, tìm **@BotFather**, bấm Start, gõ `/newbot`.
+2. Đặt tên hiển thị, ví dụ `Chia khách Sun Saphia`.
+3. Đặt tên đăng nhập, phải kết thúc bằng `bot`, ví dụ `chiakhach_saphia_bot`.
+4. BotFather trả về một mã dạng `1234567890:AAH...xyz`. Copy mã này, giữ kín, không gửi ai.
+
+Dùng bot mới, đừng dùng lại bot báo khách đang có.
+
+**Bước 2 – Quản lý nhắn cho bot**
+1. Người làm quản lý mở bot vừa tạo (bấm link `t.me/tên_bot` BotFather gửi).
+2. Bấm **Start** và nhắn 1 tin bất kỳ, ví dụ `chào`.
+
+Người nhắn tin này sẽ là quản lý.
+
+**Bước 3 – Tạo Sheet và dán mã**
+1. Mở Google Sheets bằng **đúng tài khoản Google đang giữ Sheet "CRM Hoàng Hiệp"**. Tạo bảng tính mới, đặt tên `Chia khách`.
+2. Menu **Tiện ích mở rộng → Apps Script**. Xoá hết chữ có sẵn trong ô soạn.
+3. Mở tệp `ChiaKhach.gs`, chọn tất cả, copy, dán vào ô soạn.
+4. Tìm 2 dòng gần đầu tệp, thay phần chữ giữa 2 dấu nháy `'...'`:
+   - `var BOT_TOKEN_DAN_VAO_DAY = '...'` → dán mã bot ở Bước 1.
+   - `var LINK_SHEET_CRM_DAN_VAO_DAY = '...'` → dán link Sheet "CRM Hoàng Hiệp" (copy từ thanh địa chỉ trình duyệt).
+5. Bấm biểu tượng 💾 **Lưu**.
+
+**Bước 4 – Chạy cài đặt**
+1. Ở thanh trên, ô chọn hàm, chọn **caiDat**, rồi bấm **▶ Chạy**.
+2. Google hỏi quyền:
+   - bấm **Xem xét quyền**, chọn tài khoản của anh;
+   - nếu hiện "Google chưa xác minh ứng dụng này", bấm **Nâng cao → Đi tới … (không an toàn)**;
+   - bấm **Cho phép**.
+
+   Đây là mã của chính anh nên an toàn.
+3. Xong khi quản lý nhận tin **"✅ Bot chia khách đã chạy"**.
+   - Từ giờ bot tự chạy mỗi phút, không cần mở máy.
+   - Khách đang có sẵn trong CRM không bị chia lại; chỉ khách mới từ lúc này mới được chia.
+
+Nếu báo lỗi, đọc dòng đỏ:
+- "Mã bot chưa đúng" → copy lại mã ở Bước 1.
+- "Quản lý mở bot… nhắn 1 tin" → làm lại Bước 2.
+- "Không mở được Sheet CRM" → kiểm tra link, và dùng đúng tài khoản Google đang giữ Sheet CRM.
+
+**Bước 5 – Mời sale vào đội**
+1. Gửi cho từng sale link bot (`t.me/tên_bot`).
+2. Sale bấm Start, gõ `/dangky Tên`, ví dụ `/dangky Lan`.
+3. Quản lý nhận tin có nút **✅ Duyệt**, bấm là xong.
+
+**Bước 6 – Thử**
+1. Trong Apps Script, chọn hàm **themKhachThu**, bấm **▶ Chạy**.
+2. Một sale sẽ nhận "Khách thử" với giờ hạn. Bấm Nhận, thử 1 nút báo cáo.
+3. Thử xong: mở tab **Khach**, xoá dòng khách thử.
+
+**Lưu ý riêng tư:** nhóm Telegram đang báo khách mới (bot cũ) hiện cả số đầy đủ. Nhóm đó chỉ nên có anh và quản lý, đừng thêm sale.
 
 ## Lệnh
 
@@ -107,7 +133,7 @@ Sửa ngay trong tab **CauHinh**, không cần sửa code:
 
 ## Kiểm tra
 
-`node test-mo-phong.js` chạy 49 tình huống trên bản giả lập Google Sheet và Telegram:
+`node test-mo-phong.js` chạy 51 tình huống trên bản giả lập Google Sheet và Telegram:
 - 30 phút, 2 giờ, 3 ngày;
 - ban đêm;
 - sale khác bấm nhầm khách;

@@ -169,23 +169,36 @@ function quanLy_() { return P().getProperty('QUAN_LY_ID'); }
 function baoQL_(text, nut) { var q = quanLy_(); if (q) gui_(q, text, nut); }
 
 /* ======================= CÀI ĐẶT ======================= */
-/* 1) Dán mã bot vào BOT_TOKEN bên dưới, chạy hàm caiDat. Quản lý nhắn bot 1 tin bất kỳ trước khi chạy. */
+/* Dán 2 thứ vào giữa dấu nháy rồi chạy hàm caiDat (quản lý nhắn bot 1 tin bất kỳ trước khi chạy lần đầu) */
 var BOT_TOKEN_DAN_VAO_DAY = 'DÁN_MÃ_BOT_CHIA_KHÁCH_VÀO_ĐÂY';
+var LINK_SHEET_CRM_DAN_VAO_DAY = 'DÁN_LINK_SHEET_CRM_HOÀNG_HIỆP_VÀO_ĐÂY';
 function caiDat() {
   if (BOT_TOKEN_DAN_VAO_DAY.indexOf('DÁN_') !== 0) P().setProperty('BOT_TOKEN', BOT_TOKEN_DAN_VAO_DAY);
+  if (!P().getProperty('BOT_TOKEN')) throw new Error('Chưa dán mã bot vào dòng BOT_TOKEN_DAN_VAO_DAY');
   tg_('deleteWebhook', {});
-  var r = tg_('getUpdates', {timeout: 0});
-  if (!r.ok) throw new Error('Mã bot chưa đúng');
-  var msgs = (r.result || []).filter(function (u) { return u.message && u.message.chat; });
-  if (!msgs.length) throw new Error('Quản lý mở Telegram, bấm Start và nhắn cho bot 1 tin rồi chạy lại');
-  var last = msgs[msgs.length - 1];
-  P().setProperty('QUAN_LY_ID', String(last.message.chat.id));
-  P().setProperty('OFFSET', String(last.update_id + 1));
+  var me = tg_('getMe', {}); if (!me.ok) throw new Error('Mã bot chưa đúng, copy lại từ BotFather');
+  /* Lần đầu: người nhắn bot gần nhất là quản lý. Chạy lại: giữ nguyên quản lý cũ. */
+  if (!quanLy_()) {
+    var r = tg_('getUpdates', {timeout: 0});
+    var msgs = (r.result || []).filter(function (u) { return u.message && u.message.chat; });
+    if (!msgs.length) throw new Error('Quản lý mở bot @' + me.result.username + ' trên Telegram, bấm Start, nhắn 1 tin rồi chạy lại');
+    var last = msgs[msgs.length - 1];
+    P().setProperty('QUAN_LY_ID', String(last.message.chat.id));
+    P().setProperty('OFFSET', String(last.update_id + 1));
+  }
   var sh = tab_('CauHinh', ['khoa', 'gia_tri', 'ghi_chu']);
   if (sh.getLastRow() < 2) Object.keys(MAC_DINH).forEach(function (k) { sh.appendRow([k, MAC_DINH[k], '']); });
   [['Sale', T_SALE], ['Khach', T_KHACH], ['NhatKy', T_NK]].forEach(function (x) { tab_(x[0], x[1]).getRange(1, 1, 1, x[1].length).setValues([x[1]]); });
   var hc = tabMap_('CauHinh'); Object.keys(MAC_DINH).forEach(function (k) { if (!hc.hasOwnProperty(k)) sh.appendRow([k, MAC_DINH[k], '']); });
-  ghiNhanKhachCu_();
+  if (LINK_SHEET_CRM_DAN_VAO_DAY.indexOf('DÁN_') !== 0) {
+    var m = LINK_SHEET_CRM_DAN_VAO_DAY.match(/\/d\/([a-zA-Z0-9_-]+)/), crmId = m ? m[1] : LINK_SHEET_CRM_DAN_VAO_DAY.trim();
+    var rowsCH = sh.getRange(2, 1, sh.getLastRow() - 1, 1).getValues();
+    for (var i = 0; i < rowsCH.length; i++) if (rowsCH[i][0] === 'CRM_SHEET_ID') sh.getRange(i + 2, 2).setValue(crmId);
+  }
+  if (!cfg('CRM_SHEET_ID')) throw new Error('Chưa dán link Sheet CRM vào dòng LINK_SHEET_CRM_DAN_VAO_DAY');
+  try { SpreadsheetApp.openById(cfg('CRM_SHEET_ID')).getSheetByName(cfg('CRM_TAB')).getLastRow(); }
+  catch (e) { throw new Error('Không mở được Sheet CRM hoặc tab "' + cfg('CRM_TAB') + '". Kiểm tra link và dùng đúng tài khoản Google đang giữ Sheet CRM.'); }
+  if (!P().getProperty('DA_XEM')) ghiNhanKhachCu_();
   ScriptApp.getProjectTriggers().forEach(function (t) { ScriptApp.deleteTrigger(t); });
   ScriptApp.newTrigger('chayMoiPhut').timeBased().everyMinutes(1).create();
   ScriptApp.newTrigger('baoCaoToi').timeBased().atHour(num('GIO_BAO_CAO_TOI')).nearMinute(10).everyDays(1).inTimezone('Asia/Ho_Chi_Minh').create();
