@@ -18,6 +18,7 @@ Chỉ dùng thư viện chuẩn Python 3.9+.  Chạy:  python3 bot.py
 import csv
 import io
 import json
+import queue
 import os
 import random
 import re
@@ -95,7 +96,9 @@ WORK_END = env_hm("GIO_KET_THUC", "21:30")
 REPORT_HOUR = env_hm("GIO_BAO_CAO", "8:00")
 DELETE_LIMIT_H = 47                                # Telegram chỉ cho xoá tin < 48 giờ
 
-TG_API = "https://api.telegram.org/bot{token}/{method}"
+TG_API = os.environ.get("TG_API_BASE", "https://api.telegram.org").rstrip("/") + "/bot{token}/{method}"
+SHEET_URL = os.environ.get("SHEET_WEBHOOK_URL", "").strip()
+SHEET_SECRET = os.environ.get("SHEET_SECRET", "").strip()
 LOCK = threading.RLock()
 
 
@@ -203,7 +206,10 @@ def audit(actor, action, lead_id="", detail=""):
         w = csv.writer(f)
         if new:
             w.writerow(["thoi_gian", "nguoi", "hanh_dong", "khach", "chi_tiet"])
-        w.writerow([now().strftime("%Y-%m-%d %H:%M:%S"), actor, action, lead_id, detail])
+        row = [now().strftime("%Y-%m-%d %H:%M:%S"), sale_name(actor) if str(actor) in DB["sales"] else str(actor), action, lead_id, detail]
+        w.writerow(row)
+    if SHEET_URL:
+        SYNC_Q.put(row)
 
 
 def sale_name(sid):
@@ -839,16 +845,18 @@ def export(uid):
 
 
 # =============================================================== BÁO CÁO
-def build_report(days=1, title=""):
-    since = (now() - timedelta(days=days - 1)).replace(hour=0, minute=0, second=0, microsecond=0)
+def build_report(days=1, title="", end=None):
+    end = end or now()
+    since = (end - timedelta(days=days - 1)).replace(hour=0, minute=0, second=0, microsecond=0)
+    within = lambda dt: since <= dt <= end  # noqa: E731
     per = {}
     new = hot = closed = mgr = 0
     for l in DB["leads"].values():
-        if parse(l["created"]) >= since:
+        if within(parse(l["created"])):
             new += 1
         for h in l["history"]:
             at = parse(h["at"])
-            if at < since:
+            if not within(at):
                 continue
             if h["act"] == "giao":
                 per.setdefault(h["who"], {"g": 0, "n": 0, "t": 0, "s": 0.0, "nong": 0})["g"] += 1
@@ -862,10 +870,10 @@ def build_report(days=1, title=""):
             elif h["act"] == "ve_quan_ly":
                 mgr += 1
         for n in l.get("notes", []):
-            if parse(n["at"]) >= since and n["code"] == "nong":
+            if within(parse(n["at"])) and n["code"] == "nong":
                 per.setdefault(n["who"], {"g": 0, "n": 0, "t": 0, "s": 0.0, "nong": 0})["nong"] += 1
                 hot += 1
-            if parse(n["at"]) >= since and n["code"] in ("sai_so", "khong_nhu_cau"):
+            if within(parse(n["at"])) and n["code"] in ("sai_so", "khong_nhu_cau"):
                 closed += 1
     rows = []
     for sid, d in sorted(per.items(), key=lambda x: (-x[1]["nong"], x[1]["t"], -x[1]["n"])):
@@ -907,27 +915,16 @@ def tick():
     if (t.hour, t.minute) >= REPORT_HOUR and DB.get("last_daily") != today:
         DB["last_daily"] = today
         save_db()
-        rep = build_report(days=1, title="Hôm qua") if False else build_yesterday()
+        y = t - timedelta(days=1)
+        rep = build_report(days=1, title=f"Báo cáo ngày {y:%d/%m}", end=y.replace(hour=23, minute=59, second=59))
         notify_admins(rep)
         notify_group(rep)
         if t.weekday() == 0 and DB.get("last_weekly") != today:
             DB["last_weekly"] = today
             save_db()
-            wk = build_report(days=7, title="🏆 Xếp hạng tuần")
+            wk = build_report(days=7, title="🏆 Xếp hạng tuần", end=y.replace(hour=23, minute=59, second=59))
             notify_admins(wk)
             notify_group(wk)
-
-
-def build_yesterday():
-    global now
-    real = now
-    y = real() - timedelta(days=1)
-    end = y.replace(hour=23, minute=59, second=59)
-    now = lambda: end  # noqa: E731  (tính báo cáo cho ngày hôm qua)
-    try:
-        return build_report(days=1, title=f"Báo cáo ngày {y:%d/%m}")
-    finally:
-        now = real
 
 
 def ticker():
@@ -937,6 +934,74 @@ def ticker():
         except Exception as e:
             log("Lỗi kiểm tra hạn:", e)
         time.sleep(30)
+
+
+# =============================================================== LƯU GOOGLE DRIVE (Google Sheet + file sao lưu)
+SYNC_Q = queue.Queue()
+_synced = {}
+
+
+def sheet_post(body):
+    body["secret"] = SHEET_SECRET
+    req = urllib.request.Request(SHEET_URL, data=json.dumps(body, ensure_ascii=False).encode("utf-8"), method="POST")
+    req.add_header("Content-Type", "application/json")
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            res = json.loads(r.read().decode("utf-8", "replace") or "{}")
+        if res.get("ok") is False:
+            log("Lỗi Google Sheet:", res)
+            return False
+        return True
+    except Exception as e:
+        log("Không gửi được Google Sheet:", e)
+        return False
+
+
+def lead_row(l):
+    notes = l.get("notes") or []
+    last = notes[-1] if notes else {}
+    return {"id": l["id"], "ngay_vao": (l["created"] or "").replace("T", " "), "ten": l.get("name", ""),
+            "sdt": l["phone"], "nhu_cau": l.get("need", ""), "ngan_sach": l.get("budget", ""),
+            "muc_dich": l.get("purpose", ""), "loi_nhan": l.get("note", ""), "nguon": l.get("source", ""),
+            "trang_thai": STATUS.get(l["status"], l["status"]),
+            "nguoi_giu": sale_name(l["owner"]) if l.get("owner") else "",
+            "so_luot": l.get("rounds", 0),
+            "da_qua": ", ".join(sale_name(x) for x in l.get("excluded", [])),
+            "bao_cao_cuoi": f"{REPORT_LABEL.get(last.get('code'), 'Ghi chú') if last else ''} {last.get('note', '')}".strip(),
+            "luc_bao_cao": (l.get("last_report") or "").replace("T", " "),
+            "tat_ca_ghi_chu": "\n".join(f"{(n['at'] or '')[:16].replace('T', ' ')} {sale_name(n['who'])}: "
+                                         f"{REPORT_LABEL.get(n['code'], 'Ghi chú')} {n.get('note', '')}".strip() for n in notes)}
+
+
+def syncer():
+    while True:
+        time.sleep(60)
+        if not SHEET_URL:
+            continue
+        try:
+            with LOCK:
+                rows = [lead_row(l) for l in DB["leads"].values()]
+            changed = [r for r in rows if _synced.get(r["id"]) != json.dumps(r, ensure_ascii=False, sort_keys=True)]
+            for i in range(0, len(changed), 200):
+                part = changed[i:i + 200]
+                if sheet_post({"loai": "khach", "rows": part}):
+                    for r in part:
+                        _synced[r["id"]] = json.dumps(r, ensure_ascii=False, sort_keys=True)
+            logs = []
+            while not SYNC_Q.empty() and len(logs) < 500:
+                logs.append(SYNC_Q.get())
+            if logs and not sheet_post({"loai": "nhatky", "rows": logs}):
+                for r in logs:
+                    SYNC_Q.put(r)
+            today = now().strftime("%Y-%m-%d")
+            if DB.get("last_backup") != today:
+                with LOCK:
+                    snap = json.dumps(DB, ensure_ascii=False)
+                if sheet_post({"loai": "saoluu", "ten": f"chia_khach_{now():%Y%m%d_%H%M}.json", "noi_dung": snap}):
+                    DB["last_backup"] = today
+                    save_db()
+        except Exception as e:
+            log("Lỗi đồng bộ Drive:", e)
 
 
 # =============================================================== WEBHOOK LADIPAGE
@@ -1049,6 +1114,7 @@ def setup():
         save_db()
         print(f"\n👉 Mở Telegram, nhắn cho @{bot_name} đúng câu:  /quanly {DB['claim_code']}\n")
     print(f"Webhook LadiPage:  http://<địa-chỉ-máy>:{PORT}/lead?key={LEAD_KEY}")
+    print("Lưu Google Drive:", "đã bật" if SHEET_URL else "chưa bật (xem HUONG_DAN.md mục 4)")
     print(f"Giờ tính hạn: {WORK_START[0]}:{WORK_START[1]:02d}–{WORK_END[0]}:{WORK_END[1]:02d}\n")
 
 
@@ -1074,6 +1140,7 @@ def poll():
 def main():
     setup()
     threading.Thread(target=ticker, daemon=True).start()
+    threading.Thread(target=syncer, daemon=True).start()
     srv = ThreadingHTTPServer(("0.0.0.0", PORT), Hook)
     threading.Thread(target=srv.serve_forever, daemon=True).start()
     log(f"Bot chia khách đang chạy. Cổng webhook {PORT}. Ctrl+C để dừng.")
