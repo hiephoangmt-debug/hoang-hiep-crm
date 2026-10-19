@@ -10,7 +10,7 @@ Sheet.prototype={getLastRow(){return this.d.length},getLastColumn(){return Math.
   setValues(v){v.forEach((row,i)=>{sh.d[r-1+i]=sh.d[r-1+i]||[];row.forEach((x,j)=>sh.d[r-1+i][c-1+j]=x)});return this},setValue(x){this.setValues([[x]])},setNumberFormat(){return this}}}};
 function SS(){this.s={};}SS.prototype={getSheetByName(n){return this.s[n]||null},insertSheet(n){return this.s[n]=new Sheet(n)}};
 const active=new SS(), crm=new SS(); const kh=crm.insertSheet('Khách hàng'); kh.appendRow(Array(46).fill('h'));
-function crmRow(phone,name){const r=Array(46).fill('');r[1]=new FD();r[2]=name;r[3]=phone;r[5]='sun-saphia-residence.com';r[6]='google';r[39]='Website';r[40]='https://www.sun-saphia-residence.com/ads';r[41]='Sun Saphia Residence';kh.appendRow(r);}
+function crmRow(phone,name,lan){const r=Array(46).fill('');r[1]=new FD();r[2]=name;r[3]=phone;r[9]=lan||1;r[5]='sun-saphia-residence.com';r[6]='google';r[39]='Website';r[40]='https://www.sun-saphia-residence.com/ads';r[41]='Sun Saphia Residence';kh.appendRow(r);}
 crmRow('0911111111','Cũ');
 const props={};let upd=[],uid=1,mid=100;const sent=[],edits=[];
 function U(o){upd.push(Object.assign({update_id:uid++},o));}
@@ -18,9 +18,9 @@ function msg(chat,text,first){U({message:{chat:{id:chat},from:{id:chat,first_nam
 function click(chat,data){const m=sent.filter(s=>s.reply_markup&&JSON.stringify(s.reply_markup).includes('"'+data+'"')).pop();U({callback_query:{id:'q'+uid,from:{id:chat},data,message:{chat:{id:chat},message_id:m?m.mid:0}}});}
 const ctx={Date:FD,console,JSON,Math,String,Number,Object,Array,
  SpreadsheetApp:{getActiveSpreadsheet:()=>active,openById:()=>crm},
- PropertiesService:{getScriptProperties:()=>({getProperty:k=>props[k]===undefined?null:props[k],setProperty:(k,v)=>props[k]=String(v)})},
+ PropertiesService:{getScriptProperties:()=>({getProperty:k=>props[k]===undefined?null:props[k],setProperty:(k,v)=>props[k]=String(v),deleteProperty:k=>{delete props[k]}})},
  LockService:{getScriptLock:()=>({tryLock:()=>true,releaseLock(){}})},
- ScriptApp:{getProjectTriggers:()=>[],deleteTrigger(){},newTrigger:()=>{const c={timeBased:()=>c,everyMinutes:()=>c,atHour:()=>c,nearMinute:()=>c,everyDays:()=>c,inTimezone:()=>c,create:()=>c};return c}},
+ ScriptApp:{WeekDay:{MONDAY:'MONDAY'},getProjectTriggers:()=>[],deleteTrigger(){},newTrigger:()=>{const c={timeBased:()=>c,everyMinutes:()=>c,atHour:()=>c,nearMinute:()=>c,everyDays:()=>c,onWeekDay:()=>c,inTimezone:()=>c,create:()=>c};return c}},
  UrlFetchApp:{fetch(u,o){const m=u.split('/').pop(),p=JSON.parse(o.payload||'{}');let res={ok:true,result:true};
   if(m==='getUpdates'){const off=p.offset||0;res={ok:true,result:upd.filter(x=>x.update_id>=off)};}
   else if(m==='sendMessage'){mid++;sent.push(Object.assign({mid},p));res={ok:true,result:{message_id:mid}};}
@@ -30,6 +30,7 @@ vm.createContext(ctx);vm.runInContext(code,ctx);
 let fails=0;const ok=(c,m)=>{console.log((c?'  ✅ ':'  ❌ ')+m);if(!c)fails++};
 const run=()=>vm.runInContext('chayMoiPhut()',ctx);
 const adv=min=>{NOW+=min*60000;};
+const advW=min=>{let w=0;while(w<min){NOW+=60000;const h=(new RD(NOW+7*3600000)).getUTCHours();if(h>=7&&h<21)w++;}}; // tua theo phút làm việc
 const K=id=>vm.runInContext(`timKhach_('${id}')`,ctx);
 const to=chat=>sent.filter(s=>String(s.chat_id)===String(chat));
 const lastTo=chat=>to(chat).pop()||{text:''};
@@ -74,8 +75,45 @@ NOW=Date.UTC(2026,9,27,0,21); run(); ok(K('K2').nguoi_giu!==n1,'7:21: đủ 30 p
 // khách lúc 23h: tin gửi im lặng
 NOW=Date.UTC(2026,9,27,16,0); crmRow('0966000222','Khuya'); run(); const mk=sent.filter(s=>/KHÁCH K3/.test(s.text)).pop(); ok(mk&&mk.disable_notification===true&&/tính từ 7h/.test(mk.text),'khách 23h: gửi im lặng, hạn tính từ 7h');
 // chuyển đổi dừng hạn
-NOW=Date.UTC(2026,9,28,1,0); k=K('K3'); click(k.nguoi_giu,'n:K3'); run(); click(k.nguoi_giu,'b:K3:hen'); run(); adv(60*24*10); run(); ok(K('K3').trang_thai==='chuyen_doi'&&K('K3').nguoi_giu===k.nguoi_giu,'hẹn gặp = chuyển đổi: 10 ngày không thu hồi');
+NOW=Date.UTC(2026,9,28,1,0); k=K('K3'); click(k.nguoi_giu,'n:K3'); run(); click(k.nguoi_giu,'b:K3:hen'); run(); advW(14*60*6); run(); ok(K('K3').trang_thai==='chuyen_doi'&&K('K3').nguoi_giu===k.nguoi_giu,'hẹn gặp = chuyển đổi: qua hạn 3 ngày vẫn không thu hồi (6 ngày làm việc)');
 click(k.nguoi_giu,'b:K3:cd'); run(); ok(K('K3').trang_thai==='chot'&&to(900).some(s=>/đã chốt khách K3/.test(s.text)),'chốt: quản lý được báo');
+
+// ===== 8 LUẬT MỚI =====
+const nhacTo=(chat,re)=>sent.some(s=>String(s.chat_id)===String(chat)&&re.test(s.text));
+NOW=Date.UTC(2026,10,2,2,0); // thứ Hai 9h
+crmRow('0933000001','Nhắc'); run(); let r=K('K4'); const h4=r.nguoi_giu;
+adv(21); run(); ok(nhacTo(h4,/Còn 9 phút để bấm/),'1. nhắc trước khi thu hồi (phút 21: còn 9 phút)');
+click(h4,'n:K4'); run(); adv(91); run(); ok(nhacTo(h4,/phút để <b>báo cáo khách K4/),'1. nhắc báo cáo ở phút 91');
+click(h4,'b:K4:goi'); run(); advW(14*60*2-91+5); run(); ok(nhacTo(h4,/K4 còn khoảng 1 ngày/),'1. nhắc ngày thứ 2 chưa chuyển đổi');
+// 2. khách quay lại
+const before=sent.length; crmRow('0933000001','Nhắc',2); run();
+ok(nhacTo(h4,/Khách K4 vừa liên hệ lại/)&&!sent.slice(before).some(s=>/KHÁCH K5/.test(s.text)),'2. khách gửi lại → báo đúng người đang chăm, không chia mới');
+// 6. khách nóng
+click(h4,'b:K4:nong'); run(); advW(14*60*2+5); run(); ok(nhacTo(h4,/2 ngày chưa cập nhật/),'6. khách nóng 2 ngày chưa cập nhật → nhắc');
+advW(14*60*5+5); run(); ok(K('K4').nguoi_giu!==h4,'6. khách nóng 7 ngày im lặng → thu hồi');
+// 5. đóng khách cần lý do + duyệt
+r=K('K4'); const h5=r.nguoi_giu; click(h5,'n:K4'); run(); click(h5,'b:K4:khong'); run(); ok(K('K4').trang_thai==='cho_ly_do','5. bấm Không nhu cầu → phải gõ lý do');
+msg(h5,'Đã mua dự án khác'); run(); ok(K('K4').trang_thai==='cho_duyet_dong'&&to(900).some(s=>/xin đóng khách K4/.test(s.text)&&/Đã mua dự án khác/.test(s.text)),'5. lý do gửi quản lý duyệt');
+click(900,'dd:K4'); run(); ok(K('K4').trang_thai==='dong','5. quản lý duyệt → đóng');
+// 3. không ôm quá 5 khách chưa báo cáo
+vm.runInContext("rows_('Sale',T_SALE).forEach(function(s){if(s.chat_id!='1'){s.trang_thai='nghi';save_('Sale',T_SALE,s);}else{s.trang_thai='lam';save_('Sale',T_SALE,s);}})",ctx);
+for(let i=0;i<6;i++) crmRow('09440000'+(10+i),'Tải '+i); run();
+const ks=vm.runInContext("rows_('Khach',T_KHACH).filter(function(k){return /^09440000/.test(k.sdt)}).map(function(k){return k.trang_thai+'|'+k.nguoi_giu})",ctx);
+ok(ks.filter(x=>x==='cho_nhan|1').length===5&&ks.filter(x=>x.startsWith('cho_giao')).length===1,'3. đang giữ 5 khách chưa báo cáo → khách thứ 6 chờ ('+ks.join(' ')+')');
+const k6=vm.runInContext("rows_('Khach',T_KHACH).filter(function(k){return k.trang_thai==='cho_giao'})[0].id",ctx);
+const k1st=vm.runInContext("rows_('Khach',T_KHACH).filter(function(k){return k.trang_thai==='cho_nhan'&&k.nguoi_giu=='1'})[0].id",ctx);
+click('1','n:'+k1st); run(); click('1','b:'+k1st+':goi'); run(); run(); ok(K(k6).trang_thai==='cho_nhan'&&K(k6).nguoi_giu==='1','3. báo cáo bớt 1 khách → khách đang chờ tự được giao');
+// 4. bị thu hồi 3 lần/ngày → tự tạm dừng
+vm.runInContext("rows_('Sale',T_SALE).forEach(function(s){s.trang_thai='lam';save_('Sale',T_SALE,s);})",ctx);
+adv(31); run(); const s1=vm.runInContext("timSale_('1').trang_thai",ctx); ok(s1==='nghi'&&to(900).some(x=>/Tự tạm dừng/.test(x.text)),'4. bị thu hồi ≥3 lần/ngày vì không nhận → tự tạm dừng, báo quản lý');
+// 7. /xoa
+const giu2=vm.runInContext("rows_('Khach',T_KHACH).filter(function(k){return k.nguoi_giu=='2'&&DANG_GIU.test(k.trang_thai)}).length",ctx);
+msg(900,'/xoa Bình'); run(); const con=vm.runInContext("rows_('Khach',T_KHACH).filter(function(k){return k.nguoi_giu=='2'&&DANG_GIU.test(k.trang_thai)}).length",ctx);
+ok(vm.runInContext("timSale_('2').trang_thai",ctx)==='nghi_viec'&&con===0&&/Đã gỡ Bình/.test(lastTo(900).text),'7. /xoa: gỡ sale, thu hồi '+giu2+' khách đang giữ');
+msg(2,'/khach'); run(); ok(/dangky/.test(lastTo(2).text),'7. sale đã gỡ không xem được khách');
+// 8. xếp hạng tuần
+msg(900,'/tuan'); run(); ok(/Xếp hạng 7 ngày qua/.test(lastTo(900).text)&&/nhận đúng hạn/.test(lastTo(900).text),'8. /tuan: xếp hạng tuần');
+console.log('\n'+lastTo(900).text.replace(/<[^>]+>/g,''));
 // lệnh
 msg(900,'/sale');msg(900,'/baocao');msg(1,'/khach');msg(77,'hello');run();
 ok(/Đội chia khách/.test(to(900).slice(-2)[0].text),'/sale liệt kê đội');ok(/Báo cáo chia khách/.test(to(900).slice(-1)[0].text),'/baocao có báo cáo');

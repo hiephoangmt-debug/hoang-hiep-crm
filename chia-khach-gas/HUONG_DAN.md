@@ -17,6 +17,19 @@ Chạy miễn phí trên Google Apps Script, không cần máy chủ. Dành cho 
 7. **Chuyển quá 4 lượt, hoặc không còn sale nào chưa từng giữ khách đó** → bot gửi khách cho quản lý, kèm nút "Chia lại".
 8. **21h10 mỗi tối**: quản lý nhận báo cáo từng sale (được giao, đã nhận, đã báo cáo, bị thu hồi, chuyển đổi, đã chốt).
 
+## Luật thêm cho chỉn chu
+
+1. **Nhắc trước khi thu hồi**: phút 20 nhắc "còn 10 phút để nhận"; phút 90 nhắc "còn 30 phút để báo cáo"; ngày thứ 2 nhắc "còn 1 ngày để chuyển đổi". Tin nhắc trả lời ngay dưới tin khách.
+2. **Khách cũ quay lại** (gửi form lần nữa) → báo đúng sale đang chăm, không chia cho người khác. Khách đã đóng thì chia lại như khách mới.
+3. **Không ôm khách**: ai đang có từ 5 khách chưa nhận/chưa báo cáo thì tạm không giao thêm. Cả đội đều đầy thì khách chờ, có người báo cáo xong là tự giao.
+4. **Hay bị thu hồi thì tự tạm dừng**: bị thu hồi 3 lần trong 1 ngày vì không bấm nhận → bot tạm dừng sale đó và báo quản lý (`/mo Tên` để mở lại).
+5. **Đóng khách phải có lý do**: bấm "Không có nhu cầu" → sale gõ 1 dòng lý do → quản lý bấm Đồng ý đóng hoặc Chia lại. 2 giờ không gõ lý do thì thu hồi.
+6. **Khách nóng không được bỏ quên**: đã Hẹn gặp / Khách nóng thì 2 ngày chưa cập nhật bị nhắc, 7 ngày im lặng thì thu hồi.
+7. **Sale nghỉ việc**: quản lý gõ `/xoa Tên` → gỡ khỏi đội, thu hồi và chia lại toàn bộ khách người đó đang giữ; tin cũ bị xoá số.
+8. **Xếp hạng tuần**: 8h sáng thứ Hai gửi quản lý xếp hạng 7 ngày (chốt, tỷ lệ chuyển đổi, tỷ lệ nhận đúng hạn, số lần không báo cáo). Gõ `/tuan` để xem bất cứ lúc nào.
+
+Mọi hạn và nhắc chỉ tính trong giờ 7h–21h.
+
 ## Riêng tư
 
 - Mỗi sale chỉ nhận tin riêng với bot, không có nhóm chung nào hiện số.
@@ -66,6 +79,8 @@ Chạy miễn phí trên Google Apps Script, không cần máy chủ. Dành cho 
 | Quản lý | `/sale` | Danh sách đội, mỗi người đang giữ bao nhiêu khách |
 | Quản lý | `/baocao` | Báo cáo hôm nay |
 | Quản lý | `/tam Tên` · `/mo Tên` | Tạm dừng / mở lại chia cho một sale |
+| Quản lý | `/xoa Tên` | Sale nghỉ việc: gỡ khỏi đội, chia lại khách đang giữ |
+| Quản lý | `/tuan` | Xếp hạng 7 ngày qua |
 
 ## Đổi luật
 
@@ -79,10 +94,14 @@ Sửa ngay trong tab **CauHinh**, không cần sửa code:
 | `GIO_BAT_DAU` · `GIO_KET_THUC` | 7 · 21 | Giờ tính hạn |
 | `SO_LUOT_TOI_DA` | 4 | Chuyển quá số lượt này thì giao quản lý |
 | `LOC_DU_AN` | trống | Ví dụ `Saphia` = chỉ chia khách Sun Saphia |
+| `TOI_DA_CHUA_BAO_CAO` | 5 | Đang giữ từ ngần này khách chưa báo cáo thì tạm không giao thêm |
+| `THU_HOI_TU_DUNG` | 3 | Bị thu hồi vì không nhận ngần này lần/ngày thì tự tạm dừng |
+| `NONG_NHAC_NGAY` · `NONG_THU_HOI_NGAY` | 2 · 7 | Khách nóng: nhắc / thu hồi khi không cập nhật |
+| `NHAC_NHAN_PHUT` · `NHAC_BAO_CAO_PHUT` · `NHAC_CHUYEN_DOI_NGAY` | 20 · 90 · 2 | Lúc gửi tin nhắc |
 
 ## Kiểm tra
 
-`node test-mo-phong.js` chạy 29 tình huống trên bản giả lập Google Sheet và Telegram:
+`node test-mo-phong.js` chạy 46 tình huống trên bản giả lập Google Sheet và Telegram:
 - 30 phút, 2 giờ, 3 ngày;
 - ban đêm;
 - sale khác bấm nhầm khách;
