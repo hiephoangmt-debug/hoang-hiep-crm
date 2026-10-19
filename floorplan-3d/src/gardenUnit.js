@@ -57,15 +57,18 @@ export function gardenUnit(base, spec) {
       const B = pts.reduce((m, q) => (sideDist(q) < sideDist(m) - 1e-6 || (Math.abs(sideDist(q) - sideDist(m)) < 1e-6 && depthOf(q) > depthOf(m)) ? q : m), pts[0]);
       plan.walls = plan.walls.filter((w) => !ids.has(w.id));
       plan.openings = plan.openings.filter((o) => !ids.has(o.wallId));
-      const c = { x: corner.x, y: corner.y };
+      // góc vuông thật = giao của 2 mặt tiền đi qua 2 đầu cung (chọn điểm phía cung phình ra)
+      const cen = { x: pts.reduce((t, q) => t + q.x, 0) / pts.length, y: pts.reduce((t, q) => t + q.y, 0) / pts.length };
+      const c = [{ x: A.x, y: B.y }, { x: B.x, y: A.y }].sort((p1, p2) => Math.hypot(p1.x - cen.x, p1.y - cen.y) - Math.hypot(p2.x - cen.x, p2.y - cen.y))[0];
       for (const [a, b] of [[A, c], [c, B]]) {
         const w = { id: uid(), a: { ...a }, b: { ...b }, thickness: 0.2 };
         plan.walls.push(w);
         const L0 = wallLength(w);
-        if (L0 > 1) plan.openings.push({ id: uid(), wallId: w.id, type: 'window', t: 0.5, width: +Math.min(1.4, L0 - 0.4).toFixed(2), sill: 0.9, height: 1.4 });
+        if (L0 > 1 && Math.abs(depthOf(w.a) - depthOf(w.b)) < 0.05) plan.openings.push({ id: uid(), wallId: w.id, type: 'window', t: 0.5, width: +Math.min(1.4, L0 - 0.4).toFixed(2), sill: 0.9, height: 1.4 });
       }
       // phòng có điểm nằm trên cung → thay cả đoạn cung bằng điểm góc vuông
-      const onArc = (q) => near(q) && Math.hypot(q.x - c.x, q.y - c.y) > 0.05 && pts.some((p) => Math.hypot(p.x - q.x, p.y - q.y) < 0.12);
+      const bx = { x0: Math.min(A.x, B.x) - 0.12, x1: Math.max(A.x, B.x) + 0.12, y0: Math.min(A.y, B.y) - 0.12, y1: Math.max(A.y, B.y) + 0.12 };
+      const onArc = (q) => q.x > bx.x0 && q.x < bx.x1 && q.y > bx.y0 && q.y < bx.y1 && Math.hypot(q.x - c.x, q.y - c.y) > 0.05;
       for (const r of plan.rooms) {
         if (!r.points.some(onArc)) continue;
         const out = [];
