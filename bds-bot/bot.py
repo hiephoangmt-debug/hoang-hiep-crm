@@ -24,6 +24,9 @@ import time
 import urllib.error
 import urllib.request
 import base64
+import io
+import xml.etree.ElementTree as ET
+import zipfile
 import shutil
 from datetime import datetime, timedelta
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -520,6 +523,76 @@ def sheet_csv_url(url: str) -> str:
             + (f"&gid={gid.group(1)}" if gid else ""))
 
 
+def xlsx_sheets(data: bytes):
+    """Đọc file Excel .xlsx (không cần thư viện ngoài) → [(tên sheet, [[ô, ô, ...], ...])]."""
+    ns = {"m": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
+    rid = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id"
+    z = zipfile.ZipFile(io.BytesIO(data))
+    shared = []
+    if "xl/sharedStrings.xml" in z.namelist():
+        for si in ET.fromstring(z.read("xl/sharedStrings.xml")).findall("m:si", ns):
+            shared.append("".join(t.text or "" for t in si.iter("{%s}t" % ns["m"])))
+    rels = {}
+    if "xl/_rels/workbook.xml.rels" in z.namelist():
+        for r in ET.fromstring(z.read("xl/_rels/workbook.xml.rels")):
+            target = r.get("Target", "").lstrip("/")
+            rels[r.get("Id")] = target if target.startswith("xl/") else "xl/" + target
+    out = []
+    wb = ET.fromstring(z.read("xl/workbook.xml"))
+    for sh in wb.findall("m:sheets/m:sheet", ns):
+        path = rels.get(sh.get(rid), "")
+        if path not in z.namelist():
+            continue
+        rows = []
+        for row in ET.fromstring(z.read(path)).iter("{%s}row" % ns["m"]):
+            cells = {}
+            for c in row.findall("m:c", ns):
+                ref = re.match(r"([A-Z]+)", c.get("r", "A"))
+                col = 0
+                for ch in ref.group(1) if ref else "A":
+                    col = col * 26 + ord(ch) - 64
+                t, v = c.get("t"), c.find("m:v", ns)
+                if t == "s" and v is not None:
+                    val = shared[int(v.text)] if v.text and v.text.isdigit() and int(v.text) < len(shared) else ""
+                elif t == "inlineStr":
+                    val = "".join(x.text or "" for x in c.iter("{%s}t" % ns["m"]))
+                else:
+                    val = v.text if v is not None and v.text else ""
+                    if re.fullmatch(r"-?\d+\.0+", val):
+                        val = val.split(".")[0]
+                cells[col] = val.strip()
+            if any(cells.values()):
+                rows.append([cells.get(i, "") for i in range(1, max(cells) + 1)])
+        out.append((sh.get("name", "Sheet"), rows))
+    return out
+
+
+def rows_to_csv(rows):
+    buf = io.StringIO()
+    csv.writer(buf).writerows(rows)
+    return buf.getvalue()
+
+
+def xlsx_to_text(data: bytes, limit=60000):
+    parts = [f"=== Sheet: {name} ===\n{rows_to_csv(rows)}" for name, rows in xlsx_sheets(data) if rows]
+    text = "\n".join(parts)
+    return text[:limit] + ("\n…(file dài, phần sau bị lược)" if len(text) > limit else "")
+
+
+INVENTORY_HINTS = ("mã căn", "ma can", "căn", "tầng", "diện tích", "dt", "giá", "tòa", "toa", "hướng", "pn")
+
+
+def looks_like_inventory(rows):
+    """Sheet có dáng bảng hàng: nhiều dòng, dòng tiêu đề có các cột như mã căn / tầng / diện tích / giá."""
+    if len(rows) < 8:
+        return False
+    for head in rows[:6]:
+        h = " ".join(head).lower()
+        if sum(1 for k in INVENTORY_HINTS if k in h) >= 3:
+            return True
+    return False
+
+
 def inventory_urls():
     return [u.strip() for u in os.environ.get("BANG_HANG_URLS", "").split(",") if u.strip()]
 
@@ -538,6 +611,14 @@ def inventory_sources(force=False):
             try:
                 out.append((f.name, f.read_text(encoding="utf-8-sig")))
             except (OSError, UnicodeDecodeError):
+                out.append((f.name, ""))
+        for f in sorted(INVENTORY_DIR.glob("*.xlsx")):  # bỏ thẳng file Excel bảng hàng vào thư mục
+            if f.name.startswith("~$"):
+                continue
+            try:
+                out.append((f.name, xlsx_to_text(f.read_bytes(), INVENTORY_MAX_CHARS)))
+            except Exception as e:
+                log("Không đọc được file Excel", f.name, repr(e))
                 out.append((f.name, ""))
     for i, u in enumerate(inventory_urls(), 1):
         t, body = _inv_cache.get(u, (0, ""))
@@ -727,6 +808,81 @@ def handle_admin_link(url, note):
     return True
 
 
+def find_file(msg):
+    """Tìm link tải + tên file trong tin Zalo (tên trường có thể khác nhau tùy loại tin)."""
+    name = ""
+    for k in ("file_name", "filename", "name", "title"):
+        if isinstance(msg.get(k), str):
+            name = msg[k]
+            break
+    stack = [msg]
+    while stack:
+        cur = stack.pop()
+        if isinstance(cur, dict):
+            for k, v in cur.items():
+                if isinstance(v, str) and v.startswith("http") and k not in ("avatar", "thumb", "thumbnail"):
+                    return v, name or v.split("?")[0].rsplit("/", 1)[-1]
+                if isinstance(v, (dict, list)):
+                    stack.append(v)
+                if not name and k in ("file_name", "filename", "name") and isinstance(v, str):
+                    name = v
+        elif isinstance(cur, list):
+            stack.extend(cur)
+    return "", name
+
+
+FILE_HELP = ("Em chưa mở được file này qua Zalo 😥 Anh/chị chọn 1 cách:\n"
+             "📸 CSBH, bảng giá: mở file → chụp màn hình từng phần gửi em → /luu\n"
+             "📋 Bảng hàng nhiều căn: chép file Excel vào thư mục bang_hang (cạnh bot.py) trên máy chạy bot – "
+             "bot tự đọc, hoặc đưa lên Google Sheet rồi /banghang <link>\n"
+             "✍️ Ít thông tin: /capnhat <nội dung>")
+
+
+def handle_admin_file(msg, event):
+    url, fname = find_file(msg)
+    if not url:
+        log("Tin file chưa đọc được – dữ liệu Zalo gửi:", json.dumps({"event": event, **msg}, ensure_ascii=False)[:1500])
+        notify_admin(FILE_HELP)
+        return
+    notify_admin(f"📥 Em nhận file {fname or ''} rồi, đang đọc, chờ em khoảng 30–60 giây nha...")
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 bds-bot"})
+        with urllib.request.urlopen(req, timeout=60) as r:
+            data = r.read(25_000_000)
+            ctype = (r.headers.get("Content-Type") or "").lower()
+    except Exception as e:
+        log("Không tải được file:", repr(e))
+        notify_admin(FILE_HELP)
+        return
+    low = (fname or url).lower().split("?")[0]
+    inventory = []
+    if low.endswith((".xlsx", ".xlsm")) or data[:2] == b"PK" and "pdf" not in ctype:
+        try:
+            sheets = xlsx_sheets(data)
+        except Exception as e:
+            log("Không đọc được Excel:", repr(e))
+            notify_admin("File Excel này em đọc chưa được (có thể là .xls đời cũ). Anh/chị mở file → "
+                         "Lưu thành .xlsx rồi gửi lại, hoặc chụp màn hình gửi em nha.")
+            return
+        inventory = [(n, rows) for n, rows in sheets if looks_like_inventory(rows)]
+        text = xlsx_to_text(data)
+        block = {"type": "text", "text": f"NỘI DUNG FILE EXCEL '{fname}' (mỗi sheet dạng CSV):\n" + text}
+    elif low.endswith(".csv"):
+        block = {"type": "text", "text": f"NỘI DUNG FILE CSV '{fname}':\n" + data.decode("utf-8-sig", "replace")[:60000]}
+    elif low.endswith(".pdf") or "pdf" in ctype:
+        block = {"type": "document", "source": {"type": "base64", "media_type": "application/pdf",
+                                                "data": base64.b64encode(data).decode()}}
+    else:
+        notify_admin(f"Em chưa đọc được loại file '{fname}'. Gửi em file Excel (.xlsx), PDF, CSV hoặc ảnh chụp nha.")
+        return
+    extract_and_preview([block], f"File: {fname}")
+    if inventory and ADMIN_CHAT_ID in pending_updates:
+        project = pending_updates[ADMIN_CHAT_ID].get("du_an") or Path(fname).stem
+        pending_updates[ADMIN_CHAT_ID]["bang_hang_kem"] = [(f"{project} {n}", rows_to_csv(rows)) for n, rows in inventory]
+        notify_admin("📋 Trong file có bảng hàng: " + ", ".join(f"{n} ({len(rows) - 1} dòng)" for n, rows in inventory)
+                     + "\n/luu sẽ lưu luôn bảng hàng này NGUYÊN VĂN (không qua AI, không sai số).")
+
+
 def handle_admin_image(url, caption):
     notify_admin("📥 Em nhận ảnh rồi, đang đọc CSBH/bảng hàng, chờ em khoảng 30 giây nha...")
     extract_and_preview([image_block(url)], caption)
@@ -752,10 +908,23 @@ def extract_and_preview(blocks, caption, source_url=""):
                  "Sai chỗ nào: copy đoạn trên, sửa rồi gửi /capnhat <nội dung đã sửa>")
 
 
+def save_inventory_csv(project, text):
+    INVENTORY_DIR.mkdir(parents=True, exist_ok=True)
+    slug = re.sub(r"[^\w]+", "_", project or "bang_hang").strip("_")[:40] or "bang_hang"
+    f = INVENTORY_DIR / f"{slug}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+    f.write_text(text.strip() + "\n", encoding="utf-8-sig")
+    return f
+
+
 def save_pending():
     info = pending_updates.pop(ADMIN_CHAT_ID, None)
     if not info:
         return "Không có gì đang chờ lưu. Gửi ảnh CSBH/bảng hàng hoặc /capnhat <nội dung> trước nha."
+    extra = ""
+    for project, text in info.pop("bang_hang_kem", []):
+        extra += f"\n📋 Đã lưu bảng hàng nguyên văn: {save_inventory_csv(project, text).name}"
+    if info["loai"] == "BANG_HANG" and extra:
+        return "✅ Đã lưu. Bot tư vấn theo bảng hàng này ngay." + extra
     if info["loai"] == "BANG_HANG":
         INVENTORY_DIR.mkdir(parents=True, exist_ok=True)
         slug = re.sub(r"[^\w]+", "_", info["du_an"] or "bang_hang").strip("_")[:40] or "bang_hang"
@@ -774,7 +943,7 @@ def save_pending():
     if info.get("link"):
         note += f" – Link: {info['link']}"
     add_update(note)
-    return "✅ Đã lưu vào thông tin dự án. Bot tư vấn khách theo chính sách mới ngay."
+    return "✅ Đã lưu vào thông tin dự án. Bot tư vấn khách theo chính sách mới ngay." + extra
 
 
 SYSTEM_RULES = """Bạn là trợ lý tư vấn bất động sản của chuyên viên có tên trong phần THÔNG TIN bên dưới, đang nhắn tin với khách qua Zalo hoặc website. Bạn nói chuyện như một chuyên viên BĐS giỏi nhất: am hiểu, có tâm, có duyên, hóm hỉnh — khách thấy vui và tin tưởng, không thấy đang nói chuyện với máy.
@@ -1847,8 +2016,10 @@ def handle_admin(text) -> bool:
                          "Hoặc chụp ảnh CSBH / bảng giá gửi thẳng cho em.")
         else:
             add_update(note)
-            notify_admin("✅ Đã cập nhật. Từ giờ bot tư vấn khách theo thông tin mới này.\n"
-                         "📣 Muốn báo cho khách đang quan tâm: /baokhach " + note[:200])
+            personal = re.search(r"(?i)(tên|hotline|đơn vị|sđt|giờ dẫn khách)\s*:", note)
+            notify_admin("✅ Đã cập nhật. Từ giờ bot tư vấn khách theo thông tin mới này."
+                         + ("" if personal else "\n📣 Nếu là tin mới về dự án, muốn báo cho khách đang quan tâm: /baokhach "
+                            + note[:200]))
     elif cmd == "/xoacapnhat":
         try:
             removed = remove_update(int(arg1))
@@ -2077,6 +2248,10 @@ def process_zalo_update(update):
                 return
             if ADMIN_CHAT_ID and cid == ADMIN_CHAT_ID and images:
                 handle_admin_image(images[0], msg.get("caption") or "")
+                return
+            if ADMIN_CHAT_ID and cid == ADMIN_CHAT_ID and not (msg.get("text") or "").strip() \
+                    and event not in ("message.image.received", "message.sticker.received"):
+                threading.Thread(target=handle_admin_file, args=(msg, event), daemon=True).start()
                 return
             if ADMIN_CHAT_ID and cid == ADMIN_CHAT_ID and text.startswith("/"):
                 if not handle_admin(text):
