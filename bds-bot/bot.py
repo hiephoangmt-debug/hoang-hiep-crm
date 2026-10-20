@@ -1723,6 +1723,7 @@ HELP = """📋 LỆNH CHUYÊN VIÊN
 /gui <mã> – gửi tin chào cho khách đang chat với bot
 /tl <chat_id> <nội dung> – trả lời khách qua bot
 /tat <chat_id> – tắt bot với 1 khách · /bat <chat_id> – bật lại
+/xoakhach <chat_id> – xóa hồ sơ + lịch sử chat, bot tư vấn khách lại từ đầu
 /rieng <chat_id> [ghi chú] – đưa vào danh bạ riêng (bot luôn bỏ qua)
 /borieng <chat_id> – bỏ khỏi danh bạ riêng
 /khach <chat_id> – xem hồ sơ khách
@@ -1871,6 +1872,20 @@ def handle_admin(text) -> bool:
         except ValueError:
             removed = ""
         notify_admin(f"🗑 Đã xóa: {removed}" if removed else "Gõ /hoidap để xem số thứ tự, rồi /xoahoidap <số>")
+    elif cmd == "/xoakhach" and arg1:
+        if arg1 not in store.customers:
+            notify_admin("Không thấy khách " + arg1 + ". Mã khách có trong các thông báo của bot.")
+        else:
+            bk = DATA / "sao_luu_khach"
+            bk.mkdir(parents=True, exist_ok=True)
+            with store.lock:
+                old = store.customers.pop(arg1)
+                (bk / f"{re.sub(r'[^\w-]', '_', arg1)}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json").write_text(
+                    json.dumps(old, ensure_ascii=False, indent=1), encoding="utf-8")
+                store.save()
+            store.resume(arg1)
+            notify_admin(f"🧹 Đã xóa hồ sơ và lịch sử chat của {old.get('ten') or arg1}. Lần tới khách nhắn, "
+                         "bot tư vấn lại từ đầu như khách mới.\n(Bản sao lưu ở data/sao_luu_khach/)")
     elif cmd == "/damua" and arg1:
         if arg1 not in store.customers:
             notify_admin("Không thấy khách " + arg1 + ". Mã khách có trong các thông báo của bot.")

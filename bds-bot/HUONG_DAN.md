@@ -500,6 +500,7 @@ Nhắn các lệnh này cho bot từ Zalo của anh/chị. Gõ `/hd` để bot g
 | | `/khach <mã>` | Hồ sơ, độ nhiệt, tin gần nhất của khách |
 | | `/tl <mã> <nội dung>` | Trả lời khách qua bot (bot nhường anh/chị 30 phút) |
 | | `/tat <mã>` · `/bat <mã>` | Tắt bot với 1 khách trong 24 giờ · bật lại |
+| | `/xoakhach <mã>` | Xóa hồ sơ + lịch sử chat, bot tư vấn khách lại từ đầu (có sao lưu) |
 | | `/rieng <mã> [ghi chú]` · `/borieng <mã>` | Danh bạ riêng: bot luôn bỏ qua người này |
 | **Vòng đời** | `/giaidoan` | Khách đang ở giai đoạn nào |
 | | `/danhgia <mã>` | Đánh giá lại 1 khách ngay |
@@ -615,3 +616,13 @@ Cột `zalo_chat_id` để trống cũng được: khách nhắn bot và đưa S
   2. Copy **cả thư mục `bds-bot`** sang máy mới, nhất là file `.env`, `du_an.md`, các thư mục `data/` và `bang_hang/`.
   3. Chạy bot ở máy mới. Bot nhớ hết khách, lịch hẹn và mốc.
 - Khi muốn sửa `du_an.md` ở xa: dùng `/capnhat`, gửi ảnh hoặc `/hoidap` ngay trên Zalo, không cần mở máy chạy bot.
+
+### Cho bot tư vấn lại từ đầu
+- **Một khách:** `/xoakhach <mã khách>` xóa hồ sơ và lịch sử chat của khách đó. Lần tới khách nhắn, bot tư vấn như khách mới. Bản sao lưu nằm ở `data/sao_luu_khach/`.
+- **Bot đang im với khách** (sau `/tat` hoặc `/tl`): gõ `/bat <mã khách>`.
+- **Tất cả khách:**
+  1. Tắt bot.
+  2. Vào thư mục `data`, đổi tên `khach_hang.json` thành `khach_hang_cu_backup.json`.
+  3. Chạy lại bot.
+
+  Thông tin dự án, bảng hàng, token và key vẫn giữ nguyên.
