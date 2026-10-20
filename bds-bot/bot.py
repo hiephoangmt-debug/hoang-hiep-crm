@@ -1345,6 +1345,21 @@ def heat_report(limit=10, only_hot=False):
     return "\n".join(out)
 
 
+HOLIDAYS = {"01-01": "Tết Dương lịch", "02-14": "Valentine", "03-08": "Quốc tế Phụ nữ 8/3",
+            "06-01": "Quốc tế Thiếu nhi 1/6", "10-20": "Ngày Phụ nữ Việt Nam 20/10",
+            "11-20": "Ngày Nhà giáo 20/11", "12-24": "Giáng sinh"}
+
+
+def holiday_hint(now=None):
+    now = now or datetime.now()
+    for add, when in ((0, "HÔM NAY"), (1, "NGÀY MAI")):
+        d = now + timedelta(days=add)
+        name = HOLIDAYS.get(d.strftime("%m-%d"))
+        if name:
+            return f"💐 {when} là {name}! Gửi lời chúc riêng cho khách: /chucmung {name}\n\n"
+    return ""
+
+
 def morning_brief():
     today = datetime.now().strftime("%Y-%m-%d")
     appts = []
@@ -1360,7 +1375,7 @@ def morning_brief():
             for m in c.get("moc", []):
                 if today <= m.get("ngay", "") <= soon:
                     mocs.append(f"• {m['ngay'][8:10]}/{m['ngay'][5:7]} {label(cid)} – {m['viec']}")
-    notify_admin("☀️ CHÀO BUỔI SÁNG! Việc nên làm hôm nay:\n\n📅 Lịch hẹn hôm nay:\n"
+    notify_admin("☀️ CHÀO BUỔI SÁNG! Việc nên làm hôm nay:\n\n" + holiday_hint() + "📅 Lịch hẹn hôm nay:\n"
                  + ("\n".join(sorted(appts)) or "(chưa có)")
                  + "\n\n📌 Mốc của khách 3 ngày tới:\n" + ("\n".join(sorted(mocs)) or "(chưa có)")
                  + "\n\n" + heat_report(limit=8))
@@ -1506,7 +1521,22 @@ def run_campaign(project: str, mode: str = "chao") -> dict:
     results = []
     for i in range(0, len(cands), 20):
         batch = cands[i:i + 20]
-        if mode == "khoi_goi":
+        if mode == "chuc":
+            prompt = (
+                f"GỬI LỜI CHÚC NHÂN DỊP: {project}\nHôm nay: {datetime.now().strftime('%d/%m/%Y')}.\n\n"
+                "Chấm điểm 0–10 mức NÊN gửi lời chúc cho khách này: khách thật đã từng trò chuyện / có SĐT / có nhu cầu rõ, "
+                "khách đã mua (ưu tiên cao nhất), khách nóng/ấm. Khách chỉ nhắn 1–2 câu chung chung từ lâu → 4–5. "
+                "Người không phải khách → 0.\n"
+                "Với khách đạt từ 5 điểm, viết lời chúc RIÊNG: xưng em, gọi anh/chị + tên. Đúng tinh thần của dịp "
+                "(ví dụ 20/10, 8/3: khách NỮ → chúc chính chị; khách NAM → chúc anh và gửi lời chúc tới chị nhà / mẹ / con gái, "
+                "đoán giới tính từ cách xưng hô, tên; không chắc thì chúc chung 'anh/chị và gia đình'). "
+                "Ấm áp, có duyên, 1 câu hóm hỉnh nhẹ nhàng gắn với nhà cửa nếu hợp (ví dụ 'chúc chị luôn là nữ chủ nhân xinh đẹp của "
+                "tổ ấm…'), nhắc khéo 1 chi tiết riêng của khách (căn đã mua, dự án quan tâm) nếu tự nhiên. "
+                "TUYỆT ĐỐI không chào bán, không nhắc giá, không kêu gọi mua. Tối đa 300 ký tự, không markdown, tối đa 2 emoji.\n"
+                "Chỉ trả về JSON array, không viết gì khác:\n"
+                '[{"id":"...","diem":8,"ly_do":"ngắn gọn","tin_nhan":"..."}]\n\n'
+                "DANH SÁCH KHÁCH:\n" + json.dumps(batch, ensure_ascii=False))
+        elif mode == "khoi_goi":
             prompt = (
                 f"KHƠI GỢI LẠI KHÁCH CŨ / KHÁCH LÂU KHÔNG TƯƠNG TÁC. Chủ đề gợi mở (nếu có): {project or 'không – tự chọn'}\n"
                 f"Hôm nay: {datetime.now().strftime('%d/%m/%Y')}.\n\n"
@@ -1558,10 +1588,11 @@ def run_campaign(project: str, mode: str = "chao") -> dict:
                 results.append(item)
 
     results.sort(key=lambda x: -x["diem"])
-    picked = [r for r in results if r["diem"] >= CAMPAIGN_MIN_SCORE]
+    min_score = 5 if mode == "chuc" else CAMPAIGN_MIN_SCORE
+    picked = [r for r in results if r["diem"] >= min_score]
     camp_id = datetime.now().strftime("%m%d%H%M")
     camp = {"id": camp_id, "du_an": project, "tao_luc": now_str(), "da_gui": False,
-            "tong_quet": len(cands), "khach": picked}
+            "tong_quet": len(cands), "khach": picked, "diem_toi_thieu": min_score}
     CAMPAIGN_DIR.mkdir(parents=True, exist_ok=True)
     (CAMPAIGN_DIR / f"{camp_id}.json").write_text(json.dumps(camp, ensure_ascii=False, indent=1), encoding="utf-8")
     with (CAMPAIGN_DIR / f"{camp_id}.csv").open("w", newline="", encoding="utf-8-sig") as f:
@@ -1578,7 +1609,7 @@ def campaign_report(camp) -> str:
     ks = camp["khach"]
     bot_n = sum(1 for k in ks if not k["id"].startswith("sdt:"))
     lines = [f"🎯 CHIẾN DỊCH {camp['id']} – {camp['du_an']}",
-             f"Đã quét {camp['tong_quet']} khách → {len(ks)} khách hợp (≥{CAMPAIGN_MIN_SCORE} điểm)", ""]
+             f"Đã quét {camp['tong_quet']} khách → {len(ks)} khách hợp (≥{camp.get('diem_toi_thieu', CAMPAIGN_MIN_SCORE)} điểm)", ""]
     for i, k in enumerate(ks[:15], 1):
         lines.append(f"{i}. {k['diem']}/10 {k['ten'] or k['id']} – {k.get('ly_do', '')}")
     if len(ks) > 15:
@@ -1649,6 +1680,7 @@ Bot tự: chăm khách mới 1–3 ngày → đánh giá lại ngày 3 & 7 → n
 /moc <mã> <ngày> <việc> – thêm mốc để bot nhắc khách (ký HĐMB, đóng tiền…) · /moc <mã> – xem · /xoamoc
 /damua <mã> <căn> – khách đã mua → chuyển sang hậu mãi
 /khoigoi [chủ đề] – tìm khách cũ nên khơi gợi lại, soạn lời chào hóm hỉnh riêng
+/chucmung <dịp> – soạn lời chúc riêng từng khách (20/10, 8/3, Trung thu, Tết…) → /xem, /gui
 /chamsoc – xem tình hình · /chamsoc tat · /chamsoc bat
 /xemduan – xem thông tin dự án bot đang dùng
 
@@ -1819,6 +1851,14 @@ def handle_admin(text) -> bool:
             notify_admin("Không thấy khách " + arg1)
     elif cmd == "/giaidoan":
         notify_admin(pipeline_report())
+    elif cmd == "/chucmung":
+        occasion = text.strip()[len(parts[0]):].strip()
+        if not occasion:
+            notify_admin("Ví dụ:\n/chucmung 20/10 Ngày Phụ nữ Việt Nam\n/chucmung Trung thu\n/chucmung Tết Nguyên đán")
+        else:
+            notify_admin(f"💐 Đang soạn lời chúc \"{occasion}\" riêng cho từng khách, chờ em 1–3 phút nha...")
+            threading.Thread(target=lambda: notify_admin(campaign_report(run_campaign(occasion, "chuc"))),
+                             daemon=True).start()
     elif cmd == "/khoigoi":
         topic = text.strip()[len(parts[0]):].strip()
         notify_admin("🔎 Đang tìm khách cũ nên khơi gợi lại, chờ em 1–3 phút nha...")

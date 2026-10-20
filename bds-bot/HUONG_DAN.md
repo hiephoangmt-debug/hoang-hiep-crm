@@ -379,6 +379,18 @@ Bot làm 3 việc:
 
 Sau `/capnhat`, bot cũng gợi ý sẵn lệnh `/baokhach`.
 
+**Ngày lễ: `/chucmung`**
+```
+/chucmung 20/10 Ngày Phụ nữ Việt Nam
+```
+Bot soạn **lời chúc riêng cho từng khách**:
+- khách nữ: chúc chính chị;
+- khách nam: chúc anh và gửi lời chúc tới chị nhà, mẹ, con gái;
+- khách đã mua được ưu tiên, và lời chúc nhắc khéo một chi tiết riêng của khách;
+- **không chào bán** trong lời chúc.
+
+Trước các ngày 1/1, 14/2, 8/3, 1/6, 20/10, 20/11, 24/12, báo cáo buổi sáng sẽ nhắc anh/chị gửi lời chúc. Riêng Tết và Trung thu theo lịch âm, anh/chị tự gõ `/chucmung Tết` khi tới dịp.
+
 **Có dự án mới: `/chaohang`**
 ```
 /chaohang FourS Tower – đợt mở bán căn 2PN view sông
@@ -477,6 +489,7 @@ Nhắn các lệnh này cho bot từ Zalo của anh/chị. Gõ `/hd` để bot g
 | | `/moc <mã> <ngày> <việc>` · `/moc <mã>` · `/xoamoc <mã> <số>` | Mốc để bot nhắc khách |
 | | `/damua <mã> <căn>` | Khách đã mua → hậu mãi |
 | | `/khoigoi [chủ đề]` | Khơi gợi lại khách cũ |
+| | `/chucmung <dịp>` | Lời chúc riêng từng khách (20/10, 8/3, Trung thu, Tết…) |
 | **Chăm sóc** | `/chamsoc` · `/chamsoc tat` · `/chamsoc bat` | Chăm sóc tự động |
 | | `/baokhach <tin mới>` | Báo tin mới cho đúng khách |
 | | `/chaohang <dự án>` | Chào dự án mới cho đúng khách |
