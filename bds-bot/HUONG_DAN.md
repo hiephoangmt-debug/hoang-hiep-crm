@@ -25,7 +25,7 @@
 | Khách mới hỏi dự án, CSBH, giá | Tư vấn ngay 24/7, khéo và hóm hỉnh, gợi ý đúng căn còn hàng, xin SĐT, hẹn xem nhà |
 | Khách cũ / khách quay lại | Chào như người quen, nhắc lại nhu cầu cũ, báo tin mới liên quan |
 | Khách im lặng sau khi hỏi | Tự nhắn chăm sóc 1–3 ngày đầu, **đánh giá lại** sau 3 và 7 ngày, rồi khơi gợi dài hạn |
-| Khách nhắc mốc (ngày có tiền, ký HĐMB, đóng tiền) | Nhắc khéo trước 3 ngày, 1 ngày, đúng ngày |
+| Khách nhắc mốc (ngày có tiền, ký HĐMB, đóng tiền) | Nhắc khéo 1 lần, trước 1 ngày |
 | Khách đã mua | Hậu mãi: thủ tục, mốc thanh toán, tiến độ, nhờ giới thiệu, dự án sau |
 | Khách đã hẹn xem nhà | Nhắc lịch trước 3 giờ, hôm sau hỏi cảm nhận |
 | Môi giới xin hợp tác, đồng nghiệp, tin rác | **Im lặng**, chuyển tin cho anh/chị |
@@ -246,7 +246,7 @@ Bot tự biết mỗi khách đang ở giai đoạn nào, và chăm sóc đúng 
 | 🆕 **Mới** | Ngày 1–3 | Tư vấn dồn lực. Khách im thì nhắn lại sau **1 ngày** và **3 ngày**, mỗi lần một góc mới | Gọi ngay khi có 🔥 |
 | 🩺 **Đánh giá lại** | Ngày 3 và ngày 7 | Gửi anh/chị **báo cáo đánh giá** (xem 5.1). Sau 7 ngày chăm sóc theo chiến lược mới | Đọc báo cáo, làm theo "Anh/chị nên" |
 | 📅 **Đã hẹn xem** | Tới ngày hẹn | Không nhắn làm phiền. Nhắc lịch trước 3 giờ, hôm sau hỏi cảm nhận | Dẫn khách xem, gửi bảng tính |
-| 🌱 **Nuôi dài hạn** | Sau 7 ngày | **Khơi gợi** sau 14, 30, 60, 90 ngày bằng câu chào hóm hỉnh hoặc câu hỏi gợi tò mò, kèm 1 tin mới có giá trị | `/khoigoi` khi có dịp |
+| 🌱 **Nuôi dài hạn** | Sau 7 ngày | Nhắn 1 tin sau **8 ngày** theo chiến lược mới, rồi **1 tin khơi gợi sau 30 ngày** (câu chào hóm hỉnh, kèm tin mới có giá trị). Sau đó **thôi**, chờ khách nhắn lại | `/khoigoi` khi có tin thật sự đáng báo |
 | 🏠 **Đã mua** | Sau khi chốt | **Hậu mãi**: cảm ơn, nhắc thủ tục, mốc đóng tiền, tiến độ, bàn giao. Khéo nhờ giới thiệu, gợi mở dự án sau | `/damua`, `/moc` |
 | ⛔ **Không làm phiền** | Khi khách từ chối | Không nhắn gì nữa | |
 
@@ -270,7 +270,7 @@ Kèm theo là **1 tin nhắn mẫu** để anh/chị gửi khách (qua bot bằn
 Từ đó, mọi tin bot nhắn khách đều đi theo **chiến lược mới** này. Bot đánh giá khách thuộc 1 trong 4 hướng:
 - 🎯 **Sắp chốt:** dồn lực.
 - 🔄 **Đổi hướng:** đổi căn hoặc đổi chính sách cho khách.
-- 🌱 **Nuôi dài hạn:** bot chuyển sang nhịp chậm, nhắn sau 14, 30, 60, 90 ngày.
+- 🌱 **Nuôi dài hạn:** bot chuyển sang nhịp chậm, chỉ còn 1 tin khơi gợi sau 30 ngày.
 - ⛔ **Nên dừng.**
 
 Muốn đánh giá một khách ngay, không chờ đủ ngày: **`/danhgia <mã khách>`**.
@@ -282,7 +282,7 @@ Anh/chị cũng tự thêm được:
 /moc 123456789 15/11 ký HĐMB – mang CCCD 2 vợ chồng
 /moc 123456789 30/11 đóng đợt 2 – 30%
 ```
-Bot nhắc khách **trước 3 ngày, trước 1 ngày, và đúng ngày**:
+Bot nhắc khách **1 lần, trước 1 ngày** (mốc thêm muộn thì nhắc đúng ngày):
 - nhắc khéo, chu đáo như người nhà;
 - nói luôn việc cần chuẩn bị (giấy tờ, số tiền);
 - không đùa khi chuyện liên quan tới tiền hay pháp lý.
@@ -300,8 +300,8 @@ Bot chuyển khách sang **hậu mãi**:
 - **Ngày 1:** cảm ơn, chúc mừng, tóm tắt các bước tiếp theo (hồ sơ, ký HĐMB, mốc đóng tiền).
 - **Tuần 1:** hỏi thủ tục có vướng gì không.
 - **Tháng 1:** cập nhật tiến độ dự án, hỏi thăm gia đình.
-- **Tháng 2:** hỏi thăm, khéo nhờ giới thiệu bạn bè có nhu cầu.
-- **Tháng 3, 6, 12:** tiến độ, bàn giao, sổ hồng, tình hình cho thuê. Có dự án mới thật sự hợp (đầu tư thêm, mua cho con) thì gợi mở 1 câu.
+- **Tháng 3:** hỏi thăm, khéo nhờ giới thiệu bạn bè có nhu cầu.
+- **Tháng 6, 12:** tiến độ, bàn giao, sổ hồng, tình hình cho thuê. Có dự án mới thật sự hợp (đầu tư thêm, mua cho con) thì gợi mở 1 câu.
 
 Đừng quên thêm các **mốc thanh toán** bằng `/moc` để bot nhắc khách đúng hạn.
 Khi có dự án mới, `/chaohang` và `/khoigoi` tự cân nhắc cả khách đã mua (cho nhu cầu đầu tư thêm hoặc giới thiệu người quen).
@@ -335,24 +335,41 @@ Bot cũng biết cách xử lý các câu từ chối hay gặp:
 - "Đang xem dự án khác": không chê dự án kia, chỉ nêu khác biệt thật.
 - "Chờ giá xuống": chia sẻ góc nhìn trung thực, không dọa.
 
-### 5.6. Quy tắc chăm sóc tự động
-Bot nhắn lại khách im lặng sau **1, 3, 7, 14, 30, 60, 90 ngày**, tính từ tin cuối của khách, theo các quy tắc:
-- chỉ nhắn trong khung **8h–21h**;
-- mỗi khách **tối đa 1 tin chủ động mỗi ngày**;
-- ưu tiên nhắc lịch hẹn và nhắc mốc trước.
+### 5.6. Không làm phiền khách – quy tắc bot luôn tuân theo
+Nhắn quá nhiều thì khách thấy phiền, dễ chặn, và Zalo cũng hạn chế bot. Vì vậy **mọi tin bot chủ động gửi** (chăm sóc, nhắc mốc, hậu mãi, `/chucmung`, `/baokhach`, `/chaohang`, `/khoigoi`) đều qua cùng một bộ giới hạn:
+
+| Giới hạn | Mặc định |
+|---|---|
+| Mỗi khách | **Tối đa 1 tin/ngày** |
+| Trong 7 ngày | **Tối đa 2 tin** |
+| Trong 30 ngày | **Tối đa 4 tin** |
+| Khách **không trả lời 3 tin liền** | Bot **thôi nhắn**, chờ khách nhắn lại |
+| Giờ nhắn | Chỉ **8h–21h** |
+
+**Lịch chăm sóc khách im lặng:** **1 ngày → 3 ngày → 8 ngày → 30 ngày** (tính từ tin cuối của khách), rồi dừng. Khách trả lời lại thì tính lại từ đầu.
+
+**Được ưu tiên** (vẫn tối đa 1 tin/ngày):
+- nhắc lịch hẹn xem nhà mà khách đã đồng ý;
+- nhắc mốc của khách;
+- hỏi thăm sau khi xem nhà.
+
+**Khách đã mua:** giới hạn chỉ tính từ ngày mua, để tin cảm ơn và hậu mãi không bị chặn. Lịch hậu mãi: 1 ngày, 1 tuần, 1 tháng, 3 tháng, 6 tháng, 1 năm.
+
+**Khi anh/chị gửi chiến dịch** (`/gui`): bot tự **bỏ qua** khách vừa nhận tin gần đây hoặc đã nhận đủ tin, và báo lại 🛡 bỏ qua những ai. Lúc chọn khách, bot cũng tự hạ điểm những khách đã nhận nhiều tin.
 
 Bot **không nhắn** trong các trường hợp:
 - khách đã có lịch hẹn sắp tới;
 - khách nói không quan tâm, đã mua chỗ khác hoặc xin đừng nhắn;
 - khách nằm trong danh bạ riêng;
-- anh/chị đang nói chuyện trực tiếp với khách đó;
-- khách im lặng đã hơn 120 ngày;
-- hôm đó đã nhắn khách rồi.
+- anh/chị đang nói chuyện trực tiếp với khách đó.
 
-Khách trả lời lại thì lịch chăm sóc tính lại từ đầu. Mỗi đợt, bot báo 💌 cho anh/chị biết đã nhắn những ai.
-- `/chamsoc`: xem tình hình, ai đang chờ được chăm sóc.
-- `/chamsoc tat` / `/chamsoc bat`: tắt / bật (nhắc lịch hẹn vẫn chạy).
-- Muốn đổi số ngày: mở `.env`, sửa `FOLLOWUP_DAYS=1,3,7,14,30,60,90` (khách chưa mua) hoặc `HAU_MAI_DAYS=1,7,30,60,90,180,365` (khách đã mua).
+Anh/chị trả lời tay bằng `/tl` thì **không bị giới hạn**. Mỗi đợt, bot báo 💌 cho anh/chị biết đã nhắn những ai.
+- `/chamsoc`: xem tình hình. `/chamsoc tat` / `/chamsoc bat`: tắt / bật (nhắc lịch hẹn vẫn chạy).
+- Muốn chỉnh các giới hạn, mở `.env`:
+  - `MAX_TIN_CHU_DONG_TUAN=2`, `MAX_TIN_CHU_DONG_THANG=4`, `MAX_TIN_KHONG_TRA_LOI=3`;
+  - `FOLLOWUP_DAYS=1,3,8,30` (lịch chăm sóc), `HAU_MAI_DAYS=1,7,30,90,180,365` (lịch hậu mãi).
+
+**Lời khuyên:** đừng nâng các giới hạn này lên. Ít mà chất thì khách quý mình hơn, và một tin có giá trị thật luôn hơn năm tin hỏi thăm chung chung.
 
 ### 5.7. Nhắc lịch & sau khi xem nhà
 - **Trước giờ hẹn 3 tiếng**, bot nhắn khách: "Dạ em nhắc anh/chị lịch xem … lúc 9:00 hôm nay ạ. Anh/chị cần em gửi định vị không ạ?". Đồng thời báo ⏰ cho anh/chị.
@@ -574,7 +591,7 @@ Cột `zalo_chat_id` để trống cũng được: khách nhắn bot và đưa S
 - Bot **không bao giờ** tự nhận cọc, đưa số tài khoản, cam kết lợi nhuận, hay bịa giá.
 - Dữ liệu khách nằm trong thư mục `data/`. **Sao lưu định kỳ** (copy cả thư mục ra USB hoặc Google Drive).
 - **Không** đưa file `.env`, thư mục `data/` hay danh sách khách thật lên mạng hoặc GitHub.
-- Zalo có thể hạn chế bot nếu bot nhắn quá nhiều người không phản hồi. Vì vậy chăm sóc tự động chỉ nhắn tối đa 3 lần, chỉ trong giờ hành chính.
+- Zalo có thể hạn chế bot nếu bot nhắn quá nhiều người không phản hồi. Vì vậy bot có bộ giới hạn chống làm phiền ([mục 5.6](#56-không-làm-phiền-khách--quy-tắc-bot-luôn-tuân-theo)).
 - Chi phí API: mỗi tin trả lời khoảng vài chục đến vài trăm đồng. Đọc ảnh hoặc quét chiến dịch tốn hơn một chút.
 
 ---

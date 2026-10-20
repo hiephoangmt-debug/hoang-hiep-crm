@@ -101,13 +101,18 @@ BACKUP_DIR = DATA / "sao_luu_du_an"
 UPDATE_HEADER = "## Cập nhật mới nhất"
 QA_HEADER = "## Hỏi đáp mẫu (Q&A)"
 # Khách im lặng: nhắn lại sau các mốc (ngày, tính từ tin cuối của khách)
-#   1, 3 = giai đoạn nóng · 7 = sau khi đánh giá lại · 14, 30, 60, 90 = nuôi dài hạn, khơi gợi
-FOLLOWUP_DAYS = [float(x) for x in os.environ.get("FOLLOWUP_DAYS", "1,3,7,14,30,60,90").split(",") if x.strip()]
+#   1, 3 = giai đoạn nóng · 8 = sau khi đánh giá lại (ngày 7) · 30 = khơi gợi nhẹ, rồi thôi
+FOLLOWUP_DAYS = [float(x) for x in os.environ.get("FOLLOWUP_DAYS", "1,3,8,30").split(",") if x.strip()]
 FOLLOWUP_HOURS = (8, 20)          # chỉ nhắn chăm sóc 8:00–20:59
 FOLLOWUP_MAX_AGE_DAYS = 120       # khách im quá 120 ngày thì thôi
 REVIEW_DAYS = (3, 7)              # đánh giá lại khách sau 3 và 7 ngày kể từ lần đầu nhắn
-AFTER_SALE_DAYS = [float(x) for x in os.environ.get("HAU_MAI_DAYS", "1,7,30,60,90,180,365").split(",") if x.strip()]
-MILESTONE_REMIND = (3, 1, 0)      # nhắc mốc của khách trước 3 ngày, 1 ngày và đúng ngày
+AFTER_SALE_DAYS = [float(x) for x in os.environ.get("HAU_MAI_DAYS", "1,7,30,90,180,365").split(",") if x.strip()]
+MILESTONE_REMIND = (1,)           # nhắc mốc của khách 1 lần, trước 1 ngày (thêm mốc muộn thì nhắc đúng ngày)
+
+# CHỐNG LÀM PHIỀN – áp dụng cho MỌI tin bot chủ động gửi khách (chăm sóc, nhắc mốc, chúc mừng, chiến dịch)
+MAX_PROACTIVE_WEEK = int(os.environ.get("MAX_TIN_CHU_DONG_TUAN", "2"))      # tối đa 2 tin / 7 ngày
+MAX_PROACTIVE_MONTH = int(os.environ.get("MAX_TIN_CHU_DONG_THANG", "4"))    # tối đa 4 tin / 30 ngày
+MAX_UNANSWERED = int(os.environ.get("MAX_TIN_KHONG_TRA_LOI", "3"))          # khách lơ 3 tin liền → bot thôi nhắn
 
 TAG_SILENT = "[KHONG_TRA_LOI]"
 TAG_HANDOFF = "[CHUYEN_NHAN_VIEN]"
@@ -165,6 +170,47 @@ def stage(c, now=None):
 
 STAGE_LABEL = {"moi": "🆕 Mới (1–3 ngày)", "danh_gia": "🩺 Đánh giá lại (3–7 ngày)", "nuoi": "🌱 Nuôi dài hạn",
                "hen": "📅 Đã hẹn xem", "da_mua": "🏠 Đã mua – hậu mãi", "ngung": "⛔ Không làm phiền"}
+
+
+def proactive_times(c):
+    out = []
+    for t in c.get("chu_dong", []):
+        try:
+            out.append(datetime.strptime(t[:16], "%Y-%m-%d %H:%M"))
+        except ValueError:
+            pass
+    return out
+
+
+def can_proactive(c, now=None, kind=""):
+    """Được phép chủ động nhắn khách lúc này không (chống làm phiền)."""
+    now = now or datetime.now()
+    if kind == "nhac":
+        return True  # nhắc lịch hẹn khách đã đồng ý: luôn gửi
+    times = proactive_times(c)
+    if c.get("mua"):  # đã mua: chỉ tính tin từ ngày mua, để tin cảm ơn / hậu mãi không bị chặn
+        bought = c["mua"].get("ngay", "")
+        times = [t for t in times if t.strftime("%Y-%m-%d") >= bought]
+    if any((now - t).total_seconds() < 20 * 3600 for t in times):
+        return False  # tối đa 1 tin/ngày
+    if kind in ("moc", "sau_xem"):
+        return True  # tin khách cần (nhắc mốc, hỏi thăm sau xem nhà): chỉ giới hạn 1 tin/ngày
+    if sum(1 for t in times if (now - t).days < 7) >= MAX_PROACTIVE_WEEK:
+        return False
+    if sum(1 for t in times if (now - t).days < 30) >= MAX_PROACTIVE_MONTH:
+        return False
+    if kind not in ("moc", "hau_mai", "sau_xem"):
+        last_user = max((parse_time(m["t"]) for m in c.get("tin", []) if m["role"] == "user" and parse_time(m["t"])),
+                        default=None)
+        unanswered = sum(1 for t in times if not last_user or t > last_user)
+        if unanswered >= MAX_UNANSWERED:
+            return False  # khách đã lơ nhiều tin liền → thôi, chờ khách nhắn lại
+    return True
+
+
+def mark_proactive(c, now=None):
+    c.setdefault("chu_dong", []).append((now or datetime.now()).strftime("%Y-%m-%d %H:%M"))
+    c["chu_dong"] = c["chu_dong"][-30:]
 
 
 def heat_icon(score):
@@ -1006,7 +1052,7 @@ IM_LANG_GUIDE = [
     "cách thanh toán nhẹ, ưu đãi đang có) + 1 câu hỏi lựa chọn dễ trả lời.",
     "Mốc 3 ngày (cuối giai đoạn nóng): mở 1 góc mới — giải tỏa đúng băn khoăn của khách, hoặc mời nhận video/bảng tính, "
     "hoặc mời xem nhà cuối tuần bằng 2 lựa chọn thời gian. Nếu ưu đãi sắp hết hạn thì nhắc khéo hạn chót.",
-    "Mốc 7 ngày (sau đánh giá lại): đi theo 'Chiến lược chăm sóc' nếu có — đổi căn / đổi phương án thanh toán / đổi cách tiếp cận "
+    "Mốc 1 tuần (sau đánh giá lại): đi theo 'Chiến lược chăm sóc' nếu có — đổi căn / đổi phương án thanh toán / đổi cách tiếp cận "
     "cho đúng điều khách thật sự cần. Hỏi 1 câu giúp hiểu lý do khách chưa quyết.",
 ]
 KHOI_GOI_GUIDE = (
@@ -1253,6 +1299,11 @@ def run_care_once(now=None, max_send=20):
         text = ""
         with chat_lock(cid):
             c = store.customers[cid]
+            if kind not in ("danh_gia", "moc_qua") and not can_proactive(c, now, kind):
+                if kind == "im_lang" and data >= len(IM_LANG_GUIDE):
+                    c["cs_lan"] = 99  # đã nhắn đủ, khách không phản hồi → dừng hẳn chuỗi chăm sóc
+                    store.save()
+                continue
             if kind == "danh_gia":
                 c.setdefault("danh_gia_ls", []).append({"ngay_thu": data, "luc": now_str()})
                 store.save()
@@ -1293,6 +1344,8 @@ def run_care_once(now=None, max_send=20):
             if text:
                 send_text(cid, text)
                 store.add_msg(cid, "assistant", text)
+                mark_proactive(c, now)
+                store.save()
                 sent += 1
                 touched.add(cid)
                 done.append(f"• {label(cid)} [{kind}]: {text[:80]}")
@@ -1490,6 +1543,8 @@ def campaign_candidates() -> list:
             cands.append({"id": cid, "ten": c.get("ho_so", {}).get("ho_ten") or c.get("ten", ""),
                           "ho_so": c.get("ho_so", {}), "tin_gan_day": recent,
                           "nhan_lan_cuoi": c.get("lan_cuoi", ""), "giai_doan": stage(c),
+                          "so_tin_bot_chu_dong_30_ngay": sum(1 for t in proactive_times(c)
+                                                             if (datetime.now() - t).days < 30),
                           **({"da_mua_qua_chuyen_vien": c["mua"]} if c.get("mua") else {})})
     for r in load_old_customers():
         if r.get("zalo_chat_id") and r["zalo_chat_id"] in store.customers:
@@ -1517,6 +1572,8 @@ def run_campaign(project: str, mode: str = "chao") -> dict:
     cands = campaign_candidates()
     system = [{"type": "text", "cache_control": {"type": "ephemeral"}, "text":
         "Bạn là trợ lý phân tích data khách hàng bất động sản, giúp chuyên viên chọn khách để chào dự án.\n"
+        "NGUYÊN TẮC KHÔNG LÀM PHIỀN: ít mà chất — chỉ chọn khách thật sự hợp; khách có so_tin_bot_chu_dong_30_ngay ≥ 2 "
+        "thì hạ điểm (trừ lời chúc ngày lễ cho khách đã mua).\n"
         + ABBREVIATIONS + knowledge()}]
     results = []
     for i in range(0, len(cands), 20):
@@ -1570,7 +1627,8 @@ def run_campaign(project: str, mode: str = "chao") -> dict:
             "(Nếu tên dự án có trong THÔNG TIN thì dùng đúng thông tin đó, không bịa thêm.)\n\n"
             "Chấm điểm 0–10 mức phù hợp của từng khách với sản phẩm này dựa trên ngân sách, khu vực, loại hình, "
             "số phòng ngủ, mục đích, thời gian mua, dự án đã quan tâm/đã mua, mức độ nóng. "
-            "Thiếu dữ liệu thì chấm thận trọng (tối đa 5).\n"
+            "Thiếu dữ liệu thì chấm thận trọng (tối đa 5). Khách đã nhận nhiều tin chủ động gần đây "
+            "(so_tin_bot_chu_dong_30_ngay ≥ 2) → trừ điểm, tránh làm phiền.\n"
             "Với khách đạt từ 5 điểm, viết tin chào riêng: xưng em, gọi anh/chị + tên, nhắc khéo nhu cầu cũ của khách, "
             "nêu 1–2 điểm hợp nhất với họ, một câu hóm hỉnh nhẹ, kết bằng câu hỏi mở. Tối đa 450 ký tự, không markdown.\n"
             "Chỉ trả về JSON array, không viết gì khác:\n"
@@ -1633,19 +1691,27 @@ def send_campaign(camp_id):
     if camp.get("da_gui"):
         notify_admin("Chiến dịch này đã gửi rồi, em không gửi lặp lại cho khách nha.")
         return
-    ignore, sent = load_ignore(), 0
+    ignore, sent, skipped = load_ignore(), 0, []
     for k in camp["khach"]:
         cid = k["id"]
         if cid.startswith("sdt:") or cid in ignore or not k.get("tin_nhan"):
             continue
+        c = store.get(cid)
+        if c.get("ho_so", {}).get("khong_lam_phien") or not can_proactive(c):
+            skipped.append(k.get("ten") or cid)
+            continue
         send_text(cid, k["tin_nhan"])
-        store.get(cid)
         store.add_msg(cid, "assistant", k["tin_nhan"])
+        with store.lock:
+            mark_proactive(c)
+            store.save()
         sent += 1
         time.sleep(CAMPAIGN_DELAY)
     camp["da_gui"] = True
     (CAMPAIGN_DIR / f"{camp_id}.json").write_text(json.dumps(camp, ensure_ascii=False, indent=1), encoding="utf-8")
-    notify_admin(f"✅ Đã gửi tin chào {camp['du_an']} cho {sent} khách. Khách trả lời là bot tư vấn tiếp.")
+    notify_admin(f"✅ Đã gửi \"{camp['du_an']}\" cho {sent} khách. Khách trả lời là bot tư vấn tiếp."
+                 + (f"\n🛡 Bỏ qua {len(skipped)} khách để tránh làm phiền (vừa nhận tin gần đây / đã nhận đủ tin "
+                    f"trong tuần–tháng / đã lơ nhiều tin): " + ", ".join(skipped[:10]) if skipped else ""))
 
 
 # =============================================================== LỆNH CHUYÊN VIÊN
