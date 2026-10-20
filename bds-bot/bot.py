@@ -23,11 +23,13 @@ import threading
 import time
 import urllib.error
 import urllib.request
+import atexit
 import base64
 import io
 import xml.etree.ElementTree as ET
 import zipfile
 import shutil
+import socket
 from datetime import datetime, timedelta
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -222,8 +224,25 @@ def heat_icon(score):
 
 
 
+LOG_FILE = DATA / "bot.log"
+_log_lock = threading.Lock()
+
+
 def log(*a):
-    print(datetime.now().strftime("%d/%m %H:%M:%S"), *a, flush=True)
+    line = datetime.now().strftime("%d/%m %H:%M:%S") + " " + " ".join(str(x) for x in a)
+    try:
+        print(line, flush=True)
+    except Exception:
+        pass
+    try:  # luôn ghi nhật ký ra file (chạy ẩn vẫn xem được: XEM_NHAT_KY.bat)
+        with _log_lock:
+            LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
+            if LOG_FILE.exists() and LOG_FILE.stat().st_size > 2_000_000:
+                LOG_FILE.replace(LOG_FILE.with_suffix(".log.1"))
+            with LOG_FILE.open("a", encoding="utf-8") as f:
+                f.write(line + "\n")
+    except OSError:
+        pass
 
 
 def now_str():
@@ -2520,7 +2539,29 @@ def disable_quick_edit():
         pass
 
 
+_instance_lock = None
+PID_FILE = DATA / "bot.pid"
+
+
+def single_instance():
+    """Chỉ cho 1 bot chạy trên máy (2 bot cùng chạy → khách nhận 2 câu trả lời)."""
+    global _instance_lock
+    _instance_lock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    try:
+        _instance_lock.bind(("127.0.0.1", int(os.environ.get("BOT_LOCK_PORT", "47321"))))
+    except OSError:
+        log("⛔ Bot ĐANG CHẠY rồi (ở cửa sổ khác hoặc đang chạy ẩn). Không mở thêm bot thứ 2.")
+        log("   Muốn chạy lại: bấm đúp TAT_BOT.bat trước, rồi mở lại.")
+        if sys.stdin and sys.stdin.isatty():
+            time.sleep(8)
+        sys.exit(1)
+    DATA.mkdir(parents=True, exist_ok=True)
+    PID_FILE.write_text(str(os.getpid()), encoding="utf-8")
+    atexit.register(lambda: PID_FILE.unlink() if PID_FILE.exists() and PID_FILE.read_text().strip() == str(os.getpid()) else None)
+
+
 def main():
+    single_instance()
     if (not ANTHROPIC_KEY or (not ZALO_TOKEN and not WEB_PORT)) and sys.stdin and sys.stdin.isatty():
         setup_wizard()
     if not ANTHROPIC_KEY:

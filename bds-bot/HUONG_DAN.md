@@ -561,6 +561,20 @@ Cột `zalo_chat_id` để trống cũng được: khách nhắn bot và đưa S
 
 ---
 
+## 11b. Chạy ẩn trên máy Windows (không hiện cửa sổ đen)
+
+| File (bấm đúp) | Tác dụng |
+|---|---|
+| `CHAY_BOT_AN.vbs` | Chạy bot **ẩn**, không có cửa sổ nào, không sợ lỡ tay bấm X. Hiện thông báo "Bot đã chạy ẩn" là xong |
+| `TAT_BOT.bat` | Tắt bot đang chạy ẩn |
+| `XEM_NHAT_KY.bat` | Mở nhật ký: khách nhắn gì, bot trả lời gì, lỗi gì |
+| `TU_CHAY_KHI_BAT_MAY.bat` | Bấm 1 lần: **mỗi lần bật máy bot tự chạy ẩn**. Bấm lần nữa để tắt tính năng này |
+
+- Lần đầu cài (nhập token, key, `/chu`) vẫn phải dùng `CHAY_BOT_Windows.bat` có cửa sổ. Sau đó mới chuyển sang chạy ẩn.
+- Máy chỉ cho **1 bot chạy cùng lúc**. Lỡ mở thêm, bot thứ 2 tự thoát và báo "Bot ĐANG CHẠY rồi". Muốn đổi từ cửa sổ sang chạy ẩn: đóng cửa sổ đen trước, rồi bấm `CHAY_BOT_AN.vbs`.
+- Kiểm tra bot còn sống: nhắn `/thongke` cho bot trên Zalo.
+- ⚠️ **Tắt máy, máy ngủ (sleep), hoặc mất mạng thì bot dừng.** Muốn chạy suốt ngày đêm kể cả khi tắt máy → dùng VPS (mục 12).
+
 ## 12. Chạy 24/7 trên VPS
 
 1. Thuê VPS Ubuntu rẻ nhất (khoảng 100–150 nghìn/tháng là đủ).
