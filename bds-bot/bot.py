@@ -2249,6 +2249,22 @@ def warn_info():
         log("    Mở du_an.md điền thêm, hoặc nhắn bot: /capnhat <thông tin mới>")
 
 
+def disable_quick_edit():
+    """Windows: bấm chuột vào cửa sổ đen sẽ làm bot đứng (chế độ Select). Tắt chế độ đó đi."""
+    if os.name != "nt":
+        return
+    try:
+        import ctypes
+        k32 = ctypes.windll.kernel32
+        h = k32.GetStdHandle(-10)  # STD_INPUT_HANDLE
+        mode = ctypes.c_uint32()
+        if k32.GetConsoleMode(h, ctypes.byref(mode)):
+            # bỏ ENABLE_QUICK_EDIT_MODE (0x40), giữ ENABLE_EXTENDED_FLAGS (0x80)
+            k32.SetConsoleMode(h, (mode.value & ~0x40) | 0x80)
+    except Exception:
+        pass
+
+
 def main():
     if (not ANTHROPIC_KEY or (not ZALO_TOKEN and not WEB_PORT)) and sys.stdin and sys.stdin.isatty():
         setup_wizard()
@@ -2263,12 +2279,13 @@ def main():
         while True:
             time.sleep(3600)
 
+    disable_quick_edit()
     threading.Thread(target=care_loop, daemon=True).start()
     me = zalo("getMe")
     if not me.get("ok"):
         sys.exit(f"Token Zalo không hợp lệ: {me}")
     info = me.get("result") or {}
-    log("Bot Zalo đang chạy:", info.get("account_name") or info.get("display_name") or info.get("name") or "OK")
+    log("Bot Zalo đang chạy:", info.get("display_name") or info.get("name") or info.get("account_name") or "OK")
     zalo("deleteWebhook")
     warn_info()
     if not ADMIN_CHAT_ID:
