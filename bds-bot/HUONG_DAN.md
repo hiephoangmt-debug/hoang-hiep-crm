@@ -43,12 +43,16 @@ Bot là **một tài khoản Zalo riêng** (Zalo Bot), khách nhắn vào đó. 
 Cần: **1 máy tính** Windows hoặc Mac (máy sẽ chạy bot), **điện thoại có Zalo**, và **thẻ Visa/Mastercard** để nạp tiền API Claude.
 iPad và điện thoại không chạy được bot, chỉ dùng để điều khiển bot qua Zalo ([mục 14](#14-dùng-trên-nhiều-máy-windows-mac-ipad-điện-thoại)).
 
-### Bước 1 – Tạo bot Zalo, lấy TOKEN (5 phút, làm trên điện thoại hoặc máy tính)
-1. Mở https://bot.zaloplatforms.com → **Đăng nhập** bằng Zalo (quét mã QR bằng app Zalo).
-2. Bấm **Tạo bot** → đặt tên, ví dụ `Hiệp BĐS – Tư vấn dự án`, chọn ảnh đại diện → tạo.
-3. Mở bot vừa tạo → tìm mục **Token** → **Sao chép**.
-4. Dán token vào **Ghi chú** trên điện thoại hoặc gửi vào "Cloud của tôi" trên Zalo cho dễ lấy. **Không gửi token cho ai khác.**
-5. Lưu luôn **link hoặc mã QR của bot**: đây là chỗ khách nhắn vào. Sau này đăng lên Facebook, LadiPage, danh thiếp.
+### Bước 1 – Tạo bot Zalo, lấy TOKEN (5 phút, làm trên app Zalo điện thoại)
+1. Mở **app Zalo** → ô tìm kiếm gõ **Zalo Bot Manager** → mở Official Account có tên đó.
+   (Hoặc trên máy tính vào https://bot.zaloplatforms.com → **Tạo Bot** → dùng app Zalo quét mã QR.)
+2. Trong cửa sổ chat của Zalo Bot Manager, bấm **Tạo bot** ở menu phía dưới → mở ứng dụng **Zalo Bot Creator**.
+3. Nhập **tên bot**. Tên **bắt buộc bắt đầu bằng chữ "Bot"**, ví dụ: `Bot Hiệp BĐS Đà Nẵng`. Điền các thông tin còn lại → bấm **Tạo Bot**.
+4. Zalo gửi **thông tin bot** và **Bot Token** qua tin nhắn về Zalo của anh/chị. Mở tin đó, nhấn giữ token → **Sao chép**.
+   Token có dạng `số:chuỗi-ký-tự-dài`: copy **đủ cả phần sau dấu hai chấm**. Gửi vào "Cloud của tôi" để lát dán trên máy tính. **Không gửi token cho ai khác.**
+5. Lưu **link hoặc mã QR của bot** (trong thông tin bot): đây là chỗ khách nhắn vào. Sau này đăng lên Facebook, LadiPage, danh thiếp.
+
+Bot dùng cách **Long polling** (tự hỏi Zalo xem có tin mới), nên **không cần cài Webhook**, không cần tên miền.
 
 ### Bước 2 – Lấy API KEY Claude (5–10 phút)
 1. Mở https://console.anthropic.com → **Sign up**, đăng ký bằng email (hoặc Google), xác nhận email.
