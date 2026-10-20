@@ -575,34 +575,67 @@ Cột `zalo_chat_id` để trống cũng được: khách nhắn bot và đưa S
 - Kiểm tra bot còn sống: nhắn `/thongke` cho bot trên Zalo.
 - ⚠️ **Tắt máy, máy ngủ (sleep), hoặc mất mạng thì bot dừng.** Muốn chạy suốt ngày đêm kể cả khi tắt máy → dùng VPS (mục 12).
 
-## 12. Chạy 24/7 trên VPS
+## 12. Chạy 24/7 trên VPS (tắt máy tính bot vẫn chạy)
 
-1. Thuê VPS Ubuntu rẻ nhất (khoảng 100–150 nghìn/tháng là đủ).
-2. Cài Python:
-   ```
-   sudo apt update && sudo apt install -y python3
-   ```
-3. Chép thư mục bot lên VPS bằng WinSCP hoặc FileZilla.
-4. Vào thư mục bot, chạy thử:
-   ```
-   python3 bot.py
-   ```
-   Bot hỏi token và key giống như trên máy tính.
-5. Cho bot tự chạy lại khi VPS khởi động: tạo file `/etc/systemd/system/bdsbot.service` với nội dung:
-   ```
-   [Unit]
-   Description=Bot BDS
-   After=network-online.target
-   [Service]
-   WorkingDirectory=/root/bds-bot
-   ExecStart=/usr/bin/python3 /root/bds-bot/bot.py
-   Restart=always
-   [Install]
-   WantedBy=multi-user.target
-   ```
-6. Bật bot: `sudo systemctl enable --now bdsbot`. Xem log: `journalctl -u bdsbot -f`.
+VPS là một máy chủ ảo luôn bật trên mạng. Cài bot lên đó **một lần**, sau đó tắt máy tính thoải mái. Anh/chị vẫn điều khiển bot qua Zalo như cũ.
 
-**HTTPS cho khung chat mà không cần tự cài chứng chỉ:** dùng Cloudflare Tunnel (miễn phí), trỏ tên miền phụ (ví dụ `bot.tenmien.com`) về `http://localhost:8080`.
+### Bước 1 – Thuê VPS (10 phút)
+Thuê ở nhà cung cấp VPS Việt Nam bất kỳ, hoặc nước ngoài (Vultr, DigitalOcean…). Chọn:
+- **Hệ điều hành: Ubuntu** (22.04 hoặc 24.04);
+- **Cấu hình rẻ nhất**: 1 CPU, 1 GB RAM là đủ;
+- **Vị trí:** Việt Nam hoặc Singapore.
+
+Thuê xong, nhà cung cấp gửi 3 thông tin (qua email hoặc trang quản lý): **địa chỉ IP** (ví dụ `103.45.67.89`), **tài khoản** (thường là `root`), **mật khẩu**. Lưu lại.
+
+### Bước 2 – Tắt bot trên máy tính (bắt buộc)
+⚠️ Không được để bot chạy cùng lúc ở máy tính và VPS, vì tin khách sẽ bị chia đôi lộn xộn.
+1. Đang chạy ẩn thì bấm đúp `TAT_BOT.bat`. Đang chạy cửa sổ đen thì đóng cửa sổ.
+2. Đã bật "tự chạy khi bật máy" thì bấm đúp `TU_CHAY_KHI_BAT_MAY.bat` thêm một lần để **tắt**.
+
+### Bước 3 – Chép bot lên VPS (5 phút)
+1. Chép file `cai_vps.sh` vào thư mục bot đang dùng (thư mục có `.env`) nếu chưa có.
+2. Bấm nút **Start** → gõ **PowerShell** → mở.
+3. Gõ lệnh sau, thay `ĐƯỜNG-DẪN` bằng thư mục bot của anh/chị và `IP` bằng địa chỉ IP VPS:
+   ```
+   scp -r "ĐƯỜNG-DẪN" root@IP:/root/bds-bot
+   ```
+   Ví dụ: `scp -r "C:\Users\Hi\Desktop\bds-bot\bds-bot" root@103.45.67.89:/root/bds-bot`
+4. Hỏi *"Are you sure you want to continue connecting"* → gõ **yes** → Enter.
+5. Hỏi password → dán mật khẩu VPS (**gõ không hiện chữ là bình thường**) → Enter. Chờ chép xong.
+
+Lệnh này chép **cả** token, key (`.env`), thông tin dự án và dữ liệu khách lên VPS. Bot trên VPS nhớ hết, không cần nhắn `/chu` lại.
+
+### Bước 4 – Bật bot trên VPS (2 phút)
+1. Vẫn trong PowerShell, gõ: `ssh root@IP` → nhập mật khẩu → Enter.
+2. Gõ lệnh:
+   ```
+   bash /root/bds-bot/cai_vps.sh
+   ```
+3. Thấy **"✅ BOT ĐANG CHẠY 24/7 TRÊN VPS"** là xong. Gõ `exit` để thoát, rồi đóng PowerShell.
+4. Nhắn `/thongke` cho bot trên Zalo. Bot trả lời là bot đang chạy trên VPS.
+
+Script tự làm mấy việc: đặt **giờ Việt Nam**, cài Python nếu thiếu, cho bot **tự chạy lại** khi VPS khởi động lại hoặc khi bot gặp lỗi.
+
+### Cập nhật bot trên VPS khi có bản mới
+Trong PowerShell trên máy tính, gõ 2 lệnh:
+```
+scp "ĐƯỜNG-DẪN\bot.py" root@IP:/root/bds-bot/
+ssh root@IP systemctl restart bdsbot
+```
+Mỗi lệnh hỏi mật khẩu một lần.
+
+### Lệnh hay dùng (sau khi `ssh root@IP`)
+| Việc | Lệnh |
+|---|---|
+| Xem nhật ký trực tiếp (thoát: Ctrl+C) | `tail -f /root/bds-bot/data/bot.log` |
+| Khởi động lại bot | `systemctl restart bdsbot` |
+| Tắt bot | `systemctl stop bdsbot` |
+| Xem tình trạng | `systemctl status bdsbot` |
+
+**Lưu ý:**
+- Từ giờ **dữ liệu khách nằm trên VPS**. Đừng chạy lại bot trên máy tính.
+- Sửa thông tin dự án: dùng `/capnhat`, gửi ảnh, `/link`, `/hoidap` qua Zalo như bình thường.
+- **HTTPS cho khung chat LadiPage** (nếu dùng): Cloudflare Tunnel (miễn phí) trỏ tên miền phụ, ví dụ `bot.tenmien.com`, về `http://localhost:8080`.
 
 ---
 
