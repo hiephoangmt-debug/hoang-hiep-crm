@@ -121,6 +121,18 @@ msg('1','/khach'); run(); ok(/trước <b>/.test(lastTo('1').text)&&/Sau thời 
 // 8. xếp hạng tuần
 msg(900,'/tuan'); run(); ok(/Xếp hạng 7 ngày qua/.test(lastTo(900).text)&&/nhận đúng hạn/.test(lastTo(900).text),'8. /tuan: xếp hạng tuần');
 console.log('\n'+lastTo(900).text.replace(/<[^>]+>/g,''));
+// gia hạn chuyển đổi
+{NOW=Date.UTC(2026,10,9,2,0); vm.runInContext("rows_('Sale',T_SALE).forEach(function(s){s.trang_thai=s.chat_id=='2'?'nghi_viec':'lam';save_('Sale',T_SALE,s);})",ctx);
+ crmRow('0955000777','Gia hạn'); run(); const id=vm.runInContext("rows_('Khach',T_KHACH).filter(function(k){return k.sdt==='0955000777'})[0].id",ctx); let g=K(id); const hg=g.nguoi_giu;
+ msg(hg,'/giahan '+id); run(); ok(/Chỉ gia hạn được hạn chuyển đổi/.test(lastTo(hg).text),'gia hạn: chưa nhận/báo cáo thì không gia hạn được');
+ click(hg,'n:'+id); run(); click(hg,'b:'+id+':goi'); run();
+ advW(14*60*2+5); run(); const nh=sent.filter(s=>String(s.chat_id)===hg&&/còn khoảng 1 ngày/.test(s.text)&&s.text.includes(id)).pop();
+ ok(nh&&JSON.stringify(nh.reply_markup||{}).includes('gh:'+id),'gia hạn: tin nhắc ngày 2 có nút Xin gia hạn');
+ click(hg,'gh:'+id); run(); ok(Number(K(id).gia_han)===1&&/Đã gia hạn khách/.test(lastTo(hg).text)&&to(900).some(s=>/gia hạn khách/.test(s.text)&&s.text.includes(id)),'gia hạn: bấm nút → +1 ngày, quản lý được báo');
+ msg(hg,'/giahan '+id); run(); ok(/đã gia hạn rồi/.test(lastTo(hg).text),'gia hạn: chỉ được 1 lần');
+ advW(14*60*1); run(); ok(K(id).nguoi_giu===hg,'gia hạn: qua mốc 3 ngày cũ vẫn chưa thu hồi');
+ ok(sent.filter(s=>String(s.chat_id)===hg&&/còn khoảng 1 ngày/.test(s.text)&&s.text.includes(id)).length===2,'gia hạn: nhắc lại trước hạn mới 1 ngày');
+ advW(14*60*1); run(); g=K(id); ok(g.nguoi_giu!==hg&&edits.some(e=>String(e.chat_id)===hg&&/đã được thu hồi/.test(e.text)&&e.text.includes(id)),'gia hạn: hết ngày gia hạn mà chưa chuyển đổi → thu hồi');}
 // lọc tên miền: chỉ sun-saphia-residence.com
 {const b0=vm.runInContext("rows_('Khach',T_KHACH).length",ctx);
  const r1=Array(46).fill('');r1[1]=new FD();r1[2]='Cora';r1[3]='0988777666';r1[5]='www.cora-tower.com';r1[9]=1;r1[39]='Website';r1[40]='https://www.cora-tower.com/';r1[41]='Cora Tower';kh.appendRow(r1);

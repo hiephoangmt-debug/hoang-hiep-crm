@@ -37,7 +37,9 @@ var MAC_DINH = {
   TOI_DA_CHUA_BAO_CAO: 5,    // đang giữ từ ngần này khách chưa báo cáo thì tạm không giao thêm
   THU_HOI_TU_DUNG: 3,        // bị thu hồi vì không nhận ngần này lần trong 1 ngày thì tự tạm dừng
   NONG_NHAC_NGAY: 2,         // khách nóng/hẹn gặp: 2 ngày chưa cập nhật thì nhắc
-  NONG_THU_HOI_NGAY: 7       // khách nóng/hẹn gặp: 7 ngày im lặng thì thu hồi
+  NONG_THU_HOI_NGAY: 7,      // khách nóng/hẹn gặp: 7 ngày im lặng thì thu hồi
+  GIA_HAN_NGAY: 1,           // sale xin gia hạn hạn chuyển đổi: cộng thêm ngần này ngày
+  SO_LAN_GIA_HAN: 1          // mỗi khách được xin gia hạn tối đa ngần này lần
 };
 
 var BC = {  // nút báo cáo của sale
@@ -46,12 +48,12 @@ var BC = {  // nút báo cáo của sale
   hen:   'Hẹn gặp / xem dự án',
   nong:  'Khách nóng',
   cd:    'Đã chốt',
-  khong: 'Không có nhu cầu'
+  khong: 'Không tiềm năng'
 };
 var CHUYEN_DOI = {hen: 1, nong: 1, cd: 1};   // báo cáo nào được tính là đã chuyển đổi (dừng hạn 3 ngày)
 
 var T_KHACH = ['id', 'luc_vao', 'ten', 'sdt', 'nhu_cau', 'nguon', 'trang', 'trang_thai', 'nguoi_giu', 'ten_sale', 'msg_id',
-  'luc_giao', 'luc_nhan', 'luc_bao_cao', 'bao_cao', 'so_bao_cao', 'da_qua', 'so_luot', 'ghi_chu', 'nhac', 'ly_do_dong', 'so_lan_gui'];
+  'luc_giao', 'luc_nhan', 'luc_bao_cao', 'bao_cao', 'so_bao_cao', 'da_qua', 'so_luot', 'ghi_chu', 'nhac', 'ly_do_dong', 'so_lan_gui', 'gia_han'];
 var T_SALE = ['chat_id', 'ten', 'username', 'trang_thai', 'luc_giao_cuoi', 'them_luc'];
 var T_NK = ['thoi_gian', 'nguoi', 'hanh_dong', 'khach', 'chi_tiet'];
 
@@ -97,12 +99,16 @@ function han_(k) {
   var st = k.trang_thai, ngay = phutMotNgay();
   if (st === 'cho_nhan') return {viec: 'bấm Nhận', luc: hanLuc(k.luc_giao, num('HAN_NHAN_PHUT'))};
   if (st === 'da_nhan') return {viec: 'báo cáo', luc: hanLuc(k.luc_nhan, num('HAN_BAO_CAO_PHUT'))};
-  if (st === 'dang_cham') return {viec: 'lên Hẹn gặp / Khách nóng / Đã chốt', luc: hanLuc(k.luc_nhan, num('HAN_CHUYEN_DOI_NGAY') * ngay)};
+  if (st === 'dang_cham') return {viec: 'lên Hẹn gặp / Khách nóng / Đã chốt', luc: hanLuc(k.luc_nhan, hanCD_(k))};
   if (st === 'chuyen_doi') return {viec: 'cập nhật báo cáo', luc: hanLuc(k.luc_bao_cao || k.luc_nhan, num('NONG_THU_HOI_NGAY') * ngay)};
   if (st === 'cho_ly_do') return {viec: 'gõ lý do đóng', luc: hanLuc(k.luc_bao_cao, num('HAN_BAO_CAO_PHUT'))};
   return null;
 }
 function dongHan_(k) { var h = han_(k); return h ? '⏱ Hạn ' + h.viec + ': <b>trước ' + fmt(h.luc) + '</b>. Sau thời gian trên sẽ bị thu hồi.' : ''; }
+/* Số phút làm việc để chuyển đổi, đã cộng phần gia hạn */
+function hanCD_(k) { return (num('HAN_CHUYEN_DOI_NGAY') + Number(k.gia_han || 0) * num('GIA_HAN_NGAY')) * phutMotNgay(); }
+function conGiaHan_(k) { return Number(k.gia_han || 0) < num('SO_LAN_GIA_HAN'); }
+function nutGiaHan_(k) { return conGiaHan_(k) ? [[{text: '⏳ Xin gia hạn ' + num('GIA_HAN_NGAY') + ' ngày', callback_data: 'gh:' + k.id}]] : null; }
 function phutMotNgay() { return (num('GIO_KET_THUC') - num('GIO_BAT_DAU')) * 60; }
 function che(sdt) { sdt = String(sdt || ''); return sdt.length >= 8 ? sdt.slice(0, 4) + ' ••• ' + sdt.slice(-3) : '•••'; }
 function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
@@ -157,8 +163,9 @@ function sua_(chat, msgId, text, nut) {
   p.reply_markup = {inline_keyboard: nut || []};
   tg_('editMessageText', p);
 }
-function nhac_(k, text) {
+function nhac_(k, text, nut) {
   var p = {chat_id: k.nguoi_giu, text: text, parse_mode: 'HTML', protect_content: true};
+  if (nut) p.reply_markup = {inline_keyboard: nut};
   if (k.msg_id) p.reply_to_message_id = Number(k.msg_id);
   tg_('sendMessage', p);
 }
@@ -300,7 +307,7 @@ function giao_(k) {
   ung.forEach(function (s) { s._giu = dangGiu_(s.chat_id); });
   ung.sort(function (a, b) { return a._giu - b._giu || ms(a.luc_giao_cuoi) - ms(b.luc_giao_cuoi); });
   var s = ung[0], t = nowD(), dem = trongGio(ms(t));
-  k.trang_thai = 'cho_nhan'; k.nguoi_giu = String(s.chat_id); k.ten_sale = s.ten; k.luc_giao = t; k.luc_nhan = ''; k.luc_bao_cao = ''; k.bao_cao = ''; k.nhac = ''; k.ly_do_dong = '';
+  k.trang_thai = 'cho_nhan'; k.nguoi_giu = String(s.chat_id); k.ten_sale = s.ten; k.luc_giao = t; k.luc_nhan = ''; k.luc_bao_cao = ''; k.bao_cao = ''; k.nhac = ''; k.ly_do_dong = ''; k.gia_han = 0;
   k.so_luot = Number(k.so_luot || 0) + 1;
   k.msg_id = gui_(s.chat_id, tinKhach_(k, false) + '\n\n' + dongHan_(k) + (dem ? '' : '\n(Ngoài giờ ' + num('GIO_BAT_DAU') + 'h–' + num('GIO_KET_THUC') + 'h không tính.)'),
     [[{text: '✅ Nhận khách', callback_data: 'n:' + k.id}]], !dem);
@@ -342,8 +349,9 @@ function kiemTraHan_() {
       else if (p >= num('NHAC_BAO_CAO_PHUT') && !coNhac_(k, 'b')) { datNhac_(k, 'b'); save_('Khach', T_KHACH, k); nhac_(k, '⏰ <b>Báo cáo khách ' + esc(k.id) + ' để cập nhật</b> (bấm 1 nút báo cáo), còn ' + (num('HAN_BAO_CAO_PHUT') - p) + ' phút.\n' + dongHan_(k)); }
     } else if (st === 'dang_cham') {
       p = phutLamViec(k.luc_nhan, now);
-      if (p >= num('HAN_CHUYEN_DOI_NGAY') * ngay) thuHoi_(k, num('HAN_CHUYEN_DOI_NGAY') + ' ngày chưa chuyển đổi');
-      else if (p >= num('NHAC_CHUYEN_DOI_NGAY') * ngay && !coNhac_(k, 'c')) { datNhac_(k, 'c'); save_('Khach', T_KHACH, k); nhac_(k, '⏰ <b>Báo cáo khách ' + esc(k.id) + ' để cập nhật</b>: còn khoảng ' + (num('HAN_CHUYEN_DOI_NGAY') - num('NHAC_CHUYEN_DOI_NGAY')) + ' ngày để lên Hẹn gặp / Khách nóng / Đã chốt.\n' + dongHan_(k)); }
+      var hcd = hanCD_(k), truoc = (num('HAN_CHUYEN_DOI_NGAY') - num('NHAC_CHUYEN_DOI_NGAY')) * ngay;
+      if (p >= hcd) thuHoi_(k, (Number(k.gia_han) ? 'hết hạn chuyển đổi (đã gia hạn)' : num('HAN_CHUYEN_DOI_NGAY') + ' ngày chưa chuyển đổi'));
+      else if (p >= hcd - truoc && !coNhac_(k, 'c')) { datNhac_(k, 'c'); save_('Khach', T_KHACH, k); nhac_(k, '⏰ <b>Báo cáo khách ' + esc(k.id) + ' để cập nhật</b>: còn khoảng ' + Math.round(truoc / ngay) + ' ngày để lên Hẹn gặp / Khách nóng / Đã chốt.\n' + dongHan_(k) + (conGiaHan_(k) ? '\nCần thêm thời gian? Bấm nút dưới hoặc gõ <code>/giahan ' + esc(k.id) + '</code> (được 1 lần, trước giờ hạn).' : ''), nutGiaHan_(k)); }
     } else if (st === 'chuyen_doi') {
       p = phutLamViec(k.luc_bao_cao || k.luc_nhan, now);
       if (p >= num('NONG_THU_HOI_NGAY') * ngay) thuHoi_(k, 'khách nóng ' + num('NONG_THU_HOI_NGAY') + ' ngày không cập nhật');
@@ -416,11 +424,17 @@ function lenh_(m) {
   }
   if (c === '/nghi') { s.trang_thai = 'nghi'; save_('Sale', T_SALE, s); log_(s.ten, 'tự nghỉ'); gui_(chat, '⏸ Đã tạm dừng nhận khách. Nhắn /lam để nhận lại.'); return; }
   if (c === '/lam') { s.trang_thai = 'lam'; save_('Sale', T_SALE, s); log_(s.ten, 'đi làm'); gui_(chat, '▶️ Đã bật nhận khách.'); return; }
+  if (c === '/giahan') {
+    var dc = rows_('Khach', T_KHACH).filter(function (k) { return String(k.nguoi_giu) === chat && k.trang_thai === 'dang_cham'; });
+    var kg = arg ? timKhach_(arg.toUpperCase()) : (dc.length === 1 ? dc[0] : null);
+    if (!kg) { gui_(chat, arg ? 'Không thấy khách ' + esc(arg) + '.' : (dc.length ? 'Gõ kèm mã khách, ví dụ <code>/giahan ' + esc(dc[0].id) + '</code>. Khách đang chờ chuyển đổi: ' + dc.map(function (k) { return esc(k.id); }).join(', ') : 'Bạn không có khách nào cần gia hạn.')); return; }
+    gui_(chat, giaHan_(kg, chat)); return;
+  }
   if (c === '/khach') {
     var l = rows_('Khach', T_KHACH).filter(function (k) { return String(k.nguoi_giu) === chat && DANG_GIU.test(k.trang_thai) && k.trang_thai !== 'cho_nhan'; });
-    gui_(chat, l.length ? '<b>Khách bạn đang giữ</b>\n' + l.map(function (k) { var h = han_(k); return '• ' + esc(k.id) + ' ' + esc(k.sdt) + ' – ' + esc(k.bao_cao || 'chưa báo cáo') + (h ? '\n   ⏱ ' + h.viec + ' trước <b>' + fmt(h.luc) + '</b>' : ''); }).join('\n') + '\n\nSau thời gian trên sẽ bị thu hồi.' : 'Bạn chưa giữ khách nào.'); return;
+    gui_(chat, l.length ? '<b>Khách bạn đang giữ</b>\n' + l.map(function (k) { var h = han_(k); return '• ' + esc(k.id) + ' ' + esc(k.sdt) + ' – ' + esc(k.bao_cao || 'chưa báo cáo') + (h ? '\n   ⏱ ' + h.viec + ' trước <b>' + fmt(h.luc) + '</b>' : '') + (k.trang_thai === 'dang_cham' && conGiaHan_(k) ? ' · gia hạn: <code>/giahan ' + esc(k.id) + '</code>' : ''); }).join('\n') + '\n\nSau thời gian trên sẽ bị thu hồi.' : 'Bạn chưa giữ khách nào.'); return;
   }
-  gui_(chat, 'Lệnh: /khach (khách đang giữ) · /nghi · /lam');
+  gui_(chat, 'Lệnh: /khach (khách đang giữ) · /giahan Mã (xin thêm ' + num('GIA_HAN_NGAY') + ' ngày) · /nghi · /lam');
 }
 
 function bam_(q) {
@@ -464,7 +478,7 @@ function bam_(q) {
     if (code === 'khong') {
       k.trang_thai = 'cho_ly_do'; save_('Khach', T_KHACH, k); log_(k.ten_sale, 'báo cáo', k.id, BC[code]);
       P().setProperty('LYDO_' + chat, k.id);
-      sua_(chat, k.msg_id, tinKhach_(k, true) + '\n\n✍️ Gõ <b>1 dòng lý do</b> khách không có nhu cầu (ví dụ: đã mua dự án khác, sai số…). Quản lý duyệt mới đóng hẳn.');
+      sua_(chat, k.msg_id, tinKhach_(k, true) + '\n\n✍️ Gõ <b>1 dòng lý do</b> khách không tiềm năng (ví dụ: không có nhu cầu, chỉ tham khảo, tài chính chưa phù hợp, đã mua dự án khác, sai số, môi giới…). Quản lý duyệt mới đóng hẳn.');
       return tl('Gõ lý do giúp nhé');
     }
     if (code === 'cd') k.trang_thai = 'chot';
@@ -476,7 +490,21 @@ function bam_(q) {
     if (code === 'cd') baoQL_('🎉 <b>' + esc(k.ten_sale) + '</b> đã chốt khách ' + esc(k.id) + '.');
     return tl('Đã ghi báo cáo');
   }
+  if (parts[0] === 'gh') { var kq = giaHan_(k, chat); gui_(chat, kq); return tl(kq.replace(/<[^>]+>/g, '').slice(0, 190)); }
   tl('');
+}
+
+/* Sale xin gia hạn hạn chuyển đổi: tự duyệt, mỗi khách tối đa SO_LAN_GIA_HAN lần, báo quản lý */
+function giaHan_(k, chat) {
+  if (String(k.nguoi_giu) !== String(chat)) return 'Khách này không còn giao cho bạn.';
+  if (k.trang_thai === 'chuyen_doi' || k.trang_thai === 'chot') return 'Khách ' + esc(k.id) + ' đã chuyển đổi, không cần gia hạn.';
+  if (k.trang_thai !== 'dang_cham') return 'Chỉ gia hạn được hạn chuyển đổi ' + num('HAN_CHUYEN_DOI_NGAY') + ' ngày (sau khi đã báo cáo khách).';
+  if (!conGiaHan_(k)) return 'Khách ' + esc(k.id) + ' đã gia hạn rồi, không gia hạn thêm được.\n' + dongHan_(k);
+  k.gia_han = Number(k.gia_han || 0) + 1; boNhac_(k, 'c'); save_('Khach', T_KHACH, k);
+  var h = han_(k); log_(k.ten_sale, 'gia hạn', k.id, '+' + num('GIA_HAN_NGAY') + ' ngày, hạn mới ' + fmt(h.luc));
+  sua_(chat, k.msg_id, tinKhach_(k, true) + '\n\n📝 Báo cáo mới nhất: <b>' + esc(k.bao_cao) + '</b>' + (k.luc_bao_cao ? ' (' + fmt(k.luc_bao_cao) + ')' : '') + '\n⏳ Đã gia hạn ' + num('GIA_HAN_NGAY') + ' ngày.\n' + dongHan_(k), nutBaoCao_(k.id));
+  baoQL_('⏳ <b>' + esc(k.ten_sale) + '</b> gia hạn khách ' + esc(k.id) + ' thêm ' + num('GIA_HAN_NGAY') + ' ngày. Hạn chuyển đổi mới: ' + fmt(h.luc) + '.');
+  return '⏳ Đã gia hạn khách ' + esc(k.id) + ' thêm ' + num('GIA_HAN_NGAY') + ' ngày.\n' + dongHan_(k);
 }
 
 /* ======================= BÁO CÁO ======================= */
