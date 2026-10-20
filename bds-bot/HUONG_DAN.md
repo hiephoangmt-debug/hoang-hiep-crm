@@ -176,16 +176,32 @@ Bot dùng bảng hàng thế nào khi tư vấn:
 
 *Cách khác:* lưu bảng hàng Excel thành **CSV UTF-8** rồi bỏ vào thư mục `bang_hang/`, cạnh file `bot.py`.
 
-### 3.4. Gửi link dự án: `/link`
+### 3.4. Gửi link hoặc file dự án: web, Google Drive, slide thuyết trình, Excel, PDF
 ```
-/link https://trangduan.vn/chinh-sach-ban-hang  CSBH chính thức
+/link https://drive.google.com/file/d/.../view   slide giới thiệu FourS
 ```
-- Bot đọc trang web hoặc **file PDF**, tóm tắt lại để anh/chị duyệt → `/luu`.
-- Link được lưu kèm, để bot gửi khách khi khách muốn xem thêm ảnh, video hoặc vị trí.
-- Trang chặn bot hoặc phải đăng nhập (ví dụ Facebook): bot **chỉ lưu link**. Muốn bot hiểu nội dung thì chụp màn hình gửi bot.
-- Gửi link Google Sheet thì bot tự hiểu là bảng hàng.
 
-Các link cố định (website, video flycam, vị trí nhà mẫu) có thể điền sẵn ở mục **"Link dự án"** trong `du_an.md`.
+| Loại | Bot đọc được? | Ghi chú |
+|---|---|---|
+| Trang web dự án, bài báo | ✅ | Trang dựng bằng hình, cần đăng nhập (Facebook) → bot chỉ lưu link, nên chụp màn hình gửi bot |
+| File **PDF** (CSBH, brochure, slide xuất PDF) | ✅ đọc cả chữ trong hình | Tốt nhất cho slide thuyết trình, tối đa khoảng 30MB |
+| **Google Slides / Google Docs** | ✅ | Bot tự xuất ra PDF để đọc |
+| File trên **Google Drive** (PDF, PowerPoint, Excel, Word) | ✅ | Phải mở quyền xem (xem bên dưới) |
+| **Thư mục** Google Drive | ❌ | Gửi link **từng file** |
+| **PowerPoint .pptx**, **Word .docx** | ✅ đọc chữ | Slide toàn hình → lưu thành PDF rồi gửi |
+| **Excel .xlsx** | ✅ | Sheet bảng giá từng căn được lưu nguyên văn làm bảng hàng |
+| Google Sheet | ✅ | Bot tự chuyển sang `/banghang` (tự lấy bản mới 10 phút/lần) |
+| File đời cũ .xls / .ppt / .doc | ❌ | Mở file → Lưu thành .xlsx / .pptx / PDF |
+| Canva | ❌ | Canva → Chia sẻ → Tải xuống PDF → gửi file PDF |
+
+**Mở quyền xem cho link Google Drive / Slides / Docs:**
+1. Mở file trên Drive → bấm **Chia sẻ (Share)**.
+2. Mục **Quyền truy cập chung** → chọn **"Bất kỳ ai có đường liên kết"**, quyền **Người xem**.
+3. Bấm **Sao chép đường liên kết** → gửi bot: `/link <link>`.
+
+Gửi file trực tiếp qua Zalo (Excel, PDF, PowerPoint) cũng được: bot tải về và đọc như trên. Nếu bot báo chưa mở được file, chép file vào thư mục `bang_hang` cạnh `bot.py` (với Excel bảng hàng), hoặc dùng link Drive.
+
+Sau khi bot đọc, bot gửi bản tóm tắt để anh/chị **kiểm tra con số** → `/luu` (hoặc `/huy`). Link được lưu kèm, để bot gửi khách khi khách muốn xem thêm.
 
 ### 3.5. Hỏi đáp mẫu (Q&A): câu trả lời chuẩn của anh/chị
 Với câu khách hay hỏi, anh/chị dạy bot **một lần**, bot trả lời đúng ý mãi mãi:
@@ -497,7 +513,7 @@ Nhắn các lệnh này cho bot từ Zalo của anh/chị. Gõ `/hd` để bot g
 | | `/xoacapnhat <số>` | Xóa cập nhật sai / hết hạn |
 | | `/banghang <link Sheet>` | Dùng bảng hàng Google Sheet · `/banghang` để xem · `/banghang xoa` |
 | | `/xoabanghang <tên file>` | Xóa file bảng hàng đã lưu từ ảnh |
-| | `/link <link> [ghi chú]` | Bot đọc trang web / PDF → `/luu` |
+| | `/link <link> [ghi chú]` | Bot đọc web, PDF, Google Drive/Docs/Slides, PowerPoint, Word, Excel → `/luu` |
 | | `/hoidap <hỏi> => <đáp>` | Lưu câu trả lời chuẩn · `/hoidap` để xem · `/xoahoidap <số>` |
 | | `/xemduan` | Xem tất cả thông tin bot đang biết |
 | **Khách** | `/nong` · `/nhiet` | Khách nóng nên gọi · xếp hạng độ nhiệt |

@@ -31,6 +31,7 @@ import shutil
 from datetime import datetime, timedelta
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+import urllib.parse
 from urllib.parse import parse_qs, urlparse
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -743,7 +744,7 @@ def image_block(url):
 EXTRACT_PROMPT = """Chuyên viên BĐS gửi ảnh / trang web / PDF tài liệu dự án (chính sách bán hàng, bảng giá, bảng hàng, tiến độ thanh toán, mặt bằng…) để cập nhật cho bot tư vấn.
 Ghi chú kèm ảnh: {caption}
 
-Đọc thật kỹ tài liệu, chỉ lấy phần liên quan dự án (bỏ quảng cáo, menu web), chép CHÍNH XÁC mọi con số (giá, %, ngày, mã căn, diện tích). Chữ nào mờ không đọc chắc thì ghi [không rõ], tuyệt đối không đoán.
+Đọc thật kỹ tài liệu (slide thuyết trình thì đọc cả chữ trong hình: vị trí, tiện ích, mặt bằng, tiến độ, CĐT, pháp lý), chỉ lấy phần liên quan dự án (bỏ quảng cáo, menu web), chép CHÍNH XÁC mọi con số (giá, %, ngày, mã căn, diện tích). Chữ nào mờ không đọc chắc thì ghi [không rõ], tuyệt đối không đoán.
 Trả về đúng định dạng:
 LOAI: CSBH hoặc BANG_HANG
 DU_AN: <tên dự án, nếu ảnh/ghi chú có>
@@ -782,30 +783,133 @@ def html_to_text(html):
     return re.sub(r"\n\s*\n+", "\n", text).strip()
 
 
+def office_text(data: bytes, kind: str) -> str:
+    """Lấy chữ trong file PowerPoint (.pptx) hoặc Word (.docx) – không cần thư viện ngoài."""
+    z = zipfile.ZipFile(io.BytesIO(data))
+    a = "{http://schemas.openxmlformats.org/drawingml/2006/main}"
+    w = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
+    out = []
+    if kind == "pptx":
+        slides = sorted((n for n in z.namelist() if re.fullmatch(r"ppt/slides/slide\d+\.xml", n)),
+                        key=lambda n: int(re.search(r"(\d+)", n.rsplit("/", 1)[1]).group(1)))
+        for i, n in enumerate(slides, 1):
+            paras = ["".join(t.text or "" for t in para.iter(a + "t")) for para in ET.fromstring(z.read(n)).iter(a + "p")]
+            out.append(f"--- Slide {i} ---\n" + "\n".join(x for x in paras if x.strip()))
+    else:
+        doc = ET.fromstring(z.read("word/document.xml"))
+        out = ["".join(t.text or "" for t in para.iter(w + "t")) for para in doc.iter(w + "p")]
+    return "\n".join(x for x in out if x.strip())[:60000]
+
+
+def content_to_block(data: bytes, ctype: str, name: str):
+    """Nội dung tải về → (khối gửi AI, [sheet bảng hàng], lỗi). Nhận PDF, Excel, PowerPoint, Word, CSV, trang web."""
+    low = (name or "").lower().split("?")[0]
+    ctype = (ctype or "").lower()
+    if data[:4] == b"%PDF" or "pdf" in ctype or low.endswith(".pdf"):
+        if len(data) > 30_000_000:
+            return None, [], "File PDF lớn quá (trên 30MB). Anh/chị tách nhỏ hoặc gửi các trang quan trọng nha."
+        return {"type": "document", "source": {"type": "base64", "media_type": "application/pdf",
+                                               "data": base64.b64encode(data).decode()}}, [], ""
+    if data[:2] == b"PK":
+        try:
+            names = zipfile.ZipFile(io.BytesIO(data)).namelist()
+        except zipfile.BadZipFile:
+            names = []
+        try:
+            if any(n.startswith("xl/") for n in names):
+                sheets = xlsx_sheets(data)
+                inventory = [(n, rows) for n, rows in sheets if looks_like_inventory(rows)]
+                return {"type": "text", "text": f"NỘI DUNG FILE EXCEL '{name}' (mỗi sheet dạng CSV):\n"
+                        + xlsx_to_text(data)}, inventory, ""
+            if any(n.startswith("ppt/") for n in names):
+                text = office_text(data, "pptx")
+                if len(text) < 200:
+                    return None, [], ("Slide này chủ yếu là hình, chữ rất ít. Anh/chị mở PowerPoint → File → Lưu dạng PDF "
+                                      "rồi gửi em file PDF (em đọc được cả hình), hoặc chụp màn hình các slide quan trọng.")
+                return {"type": "text", "text": f"NỘI DUNG SLIDE '{name}':\n" + text}, [], ""
+            if any(n.startswith("word/") for n in names):
+                return {"type": "text", "text": f"NỘI DUNG FILE WORD '{name}':\n" + office_text(data, "docx")}, [], ""
+        except Exception as e:
+            log("Không đọc được file Office:", repr(e))
+        return None, [], "File này em đọc chưa được. Anh/chị lưu thành PDF hoặc .xlsx rồi gửi lại, hoặc chụp màn hình nha."
+    if low.endswith((".xls", ".ppt", ".doc")):
+        return None, [], ("Đây là file Office đời cũ (.xls/.ppt/.doc). Anh/chị mở file → Lưu thành .xlsx / .pptx / PDF "
+                          "rồi gửi lại nha.")
+    text = data.decode("utf-8-sig", "replace")
+    if low.endswith(".csv") or "csv" in ctype:
+        return {"type": "text", "text": f"NỘI DUNG FILE CSV '{name}':\n" + text[:60000]}, [], ""
+    if "html" in ctype or text.lstrip()[:15].lower().startswith(("<!doctype", "<html")):
+        if re.search(r"accounts\.google\.com/(ServiceLogin|v3/signin)|Sign in - Google Accounts", text):
+            return None, [], ("Link Google này chưa mở quyền xem. Anh/chị bấm Chia sẻ → Quyền truy cập chung → "
+                              "'Bất kỳ ai có đường liên kết' (Người xem) rồi gửi lại link nha.")
+        page = html_to_text(text)
+        if len(page) < 150:
+            return None, [], ("Trang này gần như không có chữ (trang dựng bằng hình / cần đăng nhập). "
+                              "Anh/chị chụp màn hình gửi em, hoặc tải PDF gửi em nha.")
+        return {"type": "text", "text": "NỘI DUNG TRANG WEB:\n" + page[:60000]}, [], ""
+    return {"type": "text", "text": f"NỘI DUNG '{name}':\n" + text[:60000]}, [], ""
+
+
+def normalize_link(url):
+    """Link Google Drive / Docs / Slides → link tải trực tiếp. Trả (link tải, ghi chú lỗi)."""
+    if "drive.google.com/drive/folders" in url or "drive.google.com/drive/u/" in url and "folders" in url:
+        return "", ("Đây là link THƯ MỤC Drive, em không mở cả thư mục được. Anh/chị mở thư mục → chuột phải từng file "
+                    "(CSBH, bảng giá, slide) → Chia sẻ → Sao chép đường liên kết → gửi em: /link <link file>")
+    m = re.search(r"docs\.google\.com/(document|presentation)/d/([\w-]+)", url)
+    if m:
+        kind, fid = m.groups()
+        return (f"https://docs.google.com/{kind}/d/{fid}/export?format=pdf"), ""
+    m = re.search(r"drive\.google\.com/(?:file/d/|open\?id=|uc\?(?:[^#]*&)?id=)([\w-]+)", url)
+    if m:
+        return f"https://drive.google.com/uc?export=download&id={m.group(1)}", ""
+    return url, ""
+
+
+def download(url, limit=30_000_000, timeout=60):
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0) bds-bot"})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        name = ""
+        cd = r.headers.get("Content-Disposition") or ""
+        m = re.search(r"filename\*?=(?:UTF-8'')?\"?([^\";]+)", cd)
+        if m:
+            name = urllib.parse.unquote(m.group(1))
+        return r.read(limit), (r.headers.get("Content-Type") or "").lower(), name
+
+
 def handle_admin_link(url, note):
-    """Chuyên viên gửi link dự án (web, bài báo, PDF CSBH) → bot đọc, tóm tắt, chờ /luu."""
+    """Chuyên viên gửi link dự án (web, PDF, Google Drive / Docs / Slides, PowerPoint, Word) → bot đọc, tóm tắt, chờ /luu."""
     if "docs.google.com/spreadsheets" in url:
         return handle_admin(f"/banghang {url}")
-    notify_admin("🌐 Em đang đọc link, chờ em khoảng 30 giây nha...")
+    dl, err = normalize_link(url)
+    if err:
+        notify_admin(err)
+        return True
+    notify_admin("🌐 Em đang đọc link, chờ em khoảng 30–60 giây nha...")
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0) bds-bot"})
-        with urllib.request.urlopen(req, timeout=30) as r:
-            ctype = (r.headers.get("Content-Type") or "").lower()
-            data = r.read(20_000_000)
+        data, ctype, fname = download(dl)
     except Exception as e:
         log("Không mở được link:", url, repr(e))
         add_update(f"Link {note or 'dự án'}: {url}")
-        notify_admin("Em không mở được trang này (trang chặn bot hoặc cần đăng nhập), nên chỉ lưu LINK để gửi khách khi cần.\n"
-                     "Muốn bot hiểu nội dung: chụp màn hình gửi em, hoặc /capnhat <nội dung>.")
+        notify_admin("Em không mở được link này (trang chặn bot, cần đăng nhập, hoặc file Drive chưa mở quyền xem), "
+                     "nên chỉ lưu LINK để gửi khách khi cần.\n"
+                     "Link Drive: Chia sẻ → 'Bất kỳ ai có đường liên kết' rồi gửi lại. "
+                     "Hoặc chụp màn hình gửi em, hoặc /capnhat <nội dung>.")
         return True
-    if "pdf" in ctype or url.lower().split("?")[0].endswith(".pdf"):
-        doc = {"type": "document", "source": {"type": "base64", "media_type": "application/pdf",
-                                              "data": base64.b64encode(data).decode()}}
-    else:
-        text = html_to_text(data.decode("utf-8", "replace"))[:60000]
-        doc = {"type": "text", "text": "NỘI DUNG TRANG WEB:\n" + text}
-    extract_and_preview([doc], f"{note} (nguồn: {url})".strip(), url)
+    block, inventory, err = content_to_block(data, ctype, fname or url)
+    if err:
+        notify_admin(err)
+        return True
+    extract_and_preview([block], f"{note} (nguồn: {url})".strip(), url)
+    attach_inventory(inventory, fname or note or "bang_hang")
     return True
+
+
+def attach_inventory(inventory, fname):
+    if inventory and ADMIN_CHAT_ID in pending_updates:
+        project = pending_updates[ADMIN_CHAT_ID].get("du_an") or Path(fname).stem
+        pending_updates[ADMIN_CHAT_ID]["bang_hang_kem"] = [(f"{project} {n}", rows_to_csv(rows)) for n, rows in inventory]
+        notify_admin("📋 Trong file có bảng hàng: " + ", ".join(f"{n} ({len(rows) - 1} dòng)" for n, rows in inventory)
+                     + "\n/luu sẽ lưu luôn bảng hàng này NGUYÊN VĂN (không qua AI, không sai số).")
 
 
 def find_file(msg):
@@ -846,41 +950,17 @@ def handle_admin_file(msg, event):
         return
     notify_admin(f"📥 Em nhận file {fname or ''} rồi, đang đọc, chờ em khoảng 30–60 giây nha...")
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 bds-bot"})
-        with urllib.request.urlopen(req, timeout=60) as r:
-            data = r.read(25_000_000)
-            ctype = (r.headers.get("Content-Type") or "").lower()
+        data, ctype, _ = download(url)
     except Exception as e:
         log("Không tải được file:", repr(e))
         notify_admin(FILE_HELP)
         return
-    low = (fname or url).lower().split("?")[0]
-    inventory = []
-    if low.endswith((".xlsx", ".xlsm")) or data[:2] == b"PK" and "pdf" not in ctype:
-        try:
-            sheets = xlsx_sheets(data)
-        except Exception as e:
-            log("Không đọc được Excel:", repr(e))
-            notify_admin("File Excel này em đọc chưa được (có thể là .xls đời cũ). Anh/chị mở file → "
-                         "Lưu thành .xlsx rồi gửi lại, hoặc chụp màn hình gửi em nha.")
-            return
-        inventory = [(n, rows) for n, rows in sheets if looks_like_inventory(rows)]
-        text = xlsx_to_text(data)
-        block = {"type": "text", "text": f"NỘI DUNG FILE EXCEL '{fname}' (mỗi sheet dạng CSV):\n" + text}
-    elif low.endswith(".csv"):
-        block = {"type": "text", "text": f"NỘI DUNG FILE CSV '{fname}':\n" + data.decode("utf-8-sig", "replace")[:60000]}
-    elif low.endswith(".pdf") or "pdf" in ctype:
-        block = {"type": "document", "source": {"type": "base64", "media_type": "application/pdf",
-                                                "data": base64.b64encode(data).decode()}}
-    else:
-        notify_admin(f"Em chưa đọc được loại file '{fname}'. Gửi em file Excel (.xlsx), PDF, CSV hoặc ảnh chụp nha.")
+    block, inventory, err = content_to_block(data, ctype, fname)
+    if err:
+        notify_admin(err)
         return
     extract_and_preview([block], f"File: {fname}")
-    if inventory and ADMIN_CHAT_ID in pending_updates:
-        project = pending_updates[ADMIN_CHAT_ID].get("du_an") or Path(fname).stem
-        pending_updates[ADMIN_CHAT_ID]["bang_hang_kem"] = [(f"{project} {n}", rows_to_csv(rows)) for n, rows in inventory]
-        notify_admin("📋 Trong file có bảng hàng: " + ", ".join(f"{n} ({len(rows) - 1} dòng)" for n, rows in inventory)
-                     + "\n/luu sẽ lưu luôn bảng hàng này NGUYÊN VĂN (không qua AI, không sai số).")
+    attach_inventory(inventory, fname)
 
 
 def handle_admin_image(url, caption):
@@ -1907,7 +1987,7 @@ HELP = """📋 LỆNH CHUYÊN VIÊN
 /xoacapnhat <số> – xóa cập nhật sai / hết hạn
 /banghang <link Google Sheet> – bot đọc bảng hàng, tự lấy bản mới 10 phút/lần
 /banghang – xem bảng hàng đang dùng · /xoabanghang <tên file>
-/link <link web/PDF dự án> – bot đọc trang, tóm tắt → /luu
+/link <link> – bot đọc web, PDF, Google Drive/Docs/Slides, PowerPoint, Word → tóm tắt → /luu
 /hoidap <câu hỏi> => <câu trả lời> – lưu câu trả lời chuẩn (gõ /hoidap để xem)
 /baokhach <tin mới> – tìm khách cần biết tin mới, soạn tin báo riêng
 
