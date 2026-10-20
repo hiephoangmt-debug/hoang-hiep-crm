@@ -2066,6 +2066,10 @@ def process_zalo_update(update):
             if not ADMIN_CHAT_ID and text.replace(" ", "").lower() == "/chu" + CLAIM_CODE:
                 set_admin(cid)
                 return
+            if not ADMIN_CHAT_ID and text.lower().startswith("/chu"):
+                send_text(cid, "Mã chưa đúng ạ. Anh/chị nhắn đúng câu đang hiện trên màn hình máy tính chạy bot, "
+                               "ví dụ: /chu 2303 (thay bằng 4 số trên màn hình).")
+                return
             if text.lower() == "/id":
                 send_text(cid, f"chat_id của bạn: {cid}")
                 return
@@ -2261,7 +2265,8 @@ def main():
     me = zalo("getMe")
     if not me.get("ok"):
         sys.exit(f"Token Zalo không hợp lệ: {me}")
-    log("Bot Zalo đang chạy:", me["result"].get("name"))
+    info = me.get("result") or {}
+    log("Bot Zalo đang chạy:", info.get("account_name") or info.get("display_name") or info.get("name") or "OK")
     zalo("deleteWebhook")
     warn_info()
     if not ADMIN_CHAT_ID:
