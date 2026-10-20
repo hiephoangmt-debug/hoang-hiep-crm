@@ -1742,7 +1742,8 @@ HELP = """📋 LỆNH CHUYÊN VIÊN
 /baokhach <tin mới> – tìm khách cần biết tin mới, soạn tin báo riêng
 
 💌 VÒNG ĐỜI KHÁCH & CHĂM SÓC
-Bot tự: chăm khách mới 1–3 ngày → đánh giá lại ngày 3 & 7 → nuôi dài hạn (14, 30, 60, 90 ngày) → hậu mãi khi đã mua
+Bot tự: chăm khách mới 1–3 ngày → đánh giá lại ngày 3 & 7 → nhắn tiếp ngày 8, 30 rồi thôi → hậu mãi khi đã mua
+🛡 Chống làm phiền: tối đa 1 tin/ngày, 2 tin/tuần, 4 tin/tháng; khách lơ 3 tin liền thì bot thôi nhắn
 /giaidoan – khách đang ở giai đoạn nào · /danhgia <mã> – đánh giá lại 1 khách ngay
 /moc <mã> <ngày> <việc> – thêm mốc để bot nhắc khách (ký HĐMB, đóng tiền…) · /moc <mã> – xem · /xoamoc
 /damua <mã> <căn> – khách đã mua → chuyển sang hậu mãi
