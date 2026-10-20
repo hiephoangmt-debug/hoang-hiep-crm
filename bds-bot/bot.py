@@ -959,7 +959,8 @@ def handle_customer(cid, channel, name, text, images=None):
     with store.lock:
         c["loai"] = "khach"
     if first_time:
-        notify_admin(f"🆕 Khách mới ({'web' if channel == 'web' else 'Zalo'}): {name or cid}\n\"{text[:300]}\"")
+        notify_admin(f"🆕 Khách mới ({'web' if channel == 'web' else 'Zalo'}): {name or 'Khách'}\n\"{text[:300]}\"\n"
+                     f"Mã khách: {cid}\n👉 /khach {cid} · /tl {cid} <nội dung>")
 
     # hồ sơ khách
     for m in PROFILE_RE.finditer(raw):
