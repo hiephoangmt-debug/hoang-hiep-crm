@@ -12,7 +12,7 @@ function SS(){this.s={};}SS.prototype={getSheetByName(n){return this.s[n]||null}
 const active=new SS(), crm=new SS(); const kh=crm.insertSheet('Khách hàng'); kh.appendRow(Array(46).fill('h'));
 function crmRow(phone,name,lan){const r=Array(46).fill('');r[1]=new FD();r[2]=name;r[3]=phone;r[9]=lan||1;r[5]='sun-saphia-residence.com';r[6]='google';r[39]='Website';r[40]='https://www.sun-saphia-residence.com/ads';r[41]='Sun Saphia Residence';kh.appendRow(r);}
 crmRow('0911111111','Cũ');
-const props={};let upd=[],uid=1,mid=100;const sent=[],edits=[];
+const props={};let BOTID=111;let upd=[],uid=1,mid=100;const sent=[],edits=[];
 function U(o){upd.push(Object.assign({update_id:uid++},o));}
 function msg(chat,text,first){U({message:{chat:{id:chat},from:{id:chat,first_name:first||'X'},text}});}
 function click(chat,data){const m=sent.filter(s=>s.reply_markup&&JSON.stringify(s.reply_markup).includes('"'+data+'"')).pop();U({callback_query:{id:'q'+uid,from:{id:chat},data,message:{chat:{id:chat},message_id:m?m.mid:0}}});}
@@ -25,7 +25,7 @@ const ctx={Date:FD,console,JSON,Math,String,Number,Object,Array,
   if(m==='getUpdates'){const off=p.offset||0;res={ok:true,result:upd.filter(x=>x.update_id>=off)};}
   else if(m==='sendMessage'){mid++;sent.push(Object.assign({mid},p));res={ok:true,result:{message_id:mid}};}
   else if(m==='editMessageText'){edits.push(p);}
-  else if(m==='getMe'){res={ok:true,result:{username:'chia_khach_test_bot'}};}
+  else if(m==='getMe'){res={ok:true,result:{id:BOTID,username:'chia_khach_test_bot'}};}
   return{getContentText:()=>JSON.stringify(res)};}}};
 vm.createContext(ctx);vm.runInContext(code,ctx);
 let fails=0;const ok=(c,m)=>{console.log((c?'  ✅ ':'  ❌ ')+m);if(!c)fails++};
@@ -147,4 +147,7 @@ ok(/Đội chia khách/.test(to(900).slice(-2)[0].text),'/sale liệt kê đội
 ok(/dangky/.test(lastTo(77).text),'người lạ được hướng dẫn đăng ký');
 ok(sent.every(s=>s.protect_content===true),'mọi tin bật chặn chuyển tiếp/lưu');
 console.log('\n'+to(900).slice(-1)[0].text.replace(/<[^>]+>/g,''));
+// đổi sang bot mới: chạy lại caiDat → giữ quản lý, bỏ OFFSET cũ
+{const offOld=props.OFFSET; vm.runInContext('caiDat()',ctx); ok(props.OFFSET===offOld,'chạy lại caiDat cùng bot: giữ vị trí đọc tin');
+ BOTID=222; vm.runInContext('caiDat()',ctx); ok(props.OFFSET===undefined&&props.QUAN_LY_ID==='900'&&props.BOT_ID==='222','đổi bot mới: giữ quản lý, đọc tin bot mới từ đầu');}
 console.log('\nTỔNG LỖI: '+fails);process.exit(fails?1:0);

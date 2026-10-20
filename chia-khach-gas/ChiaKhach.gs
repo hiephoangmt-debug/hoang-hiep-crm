@@ -184,6 +184,9 @@ function caiDat() {
   if (!P().getProperty('BOT_TOKEN')) throw new Error('Chưa dán mã bot vào dòng BOT_TOKEN_DAN_VAO_DAY');
   tg_('deleteWebhook', {});
   var me = tg_('getMe', {}); if (!me.ok) throw new Error('Mã bot chưa đúng, copy lại từ BotFather');
+  /* Đổi sang bot mới: bỏ vị trí đọc tin của bot cũ */
+  if (P().getProperty('BOT_ID') && P().getProperty('BOT_ID') !== String(me.result.id)) P().deleteProperty('OFFSET');
+  P().setProperty('BOT_ID', String(me.result.id));
   /* Lần đầu: người nhắn bot gần nhất là quản lý. Chạy lại: giữ nguyên quản lý cũ. */
   if (!quanLy_()) {
     var r = tg_('getUpdates', {timeout: 0});
