@@ -2152,7 +2152,8 @@ def handle_admin(text) -> bool:
             bk.mkdir(parents=True, exist_ok=True)
             with store.lock:
                 old = store.customers.pop(arg1)
-                (bk / f"{re.sub(r'[^\w-]', '_', arg1)}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json").write_text(
+                safe_id = re.sub(r"[^\w-]", "_", arg1)
+                (bk / f"{safe_id}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json").write_text(
                     json.dumps(old, ensure_ascii=False, indent=1), encoding="utf-8")
                 store.save()
             store.resume(arg1)
