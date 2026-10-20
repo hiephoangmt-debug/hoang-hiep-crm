@@ -8,9 +8,10 @@ Chạy miễn phí trên Google Apps Script, không cần máy chủ. Dành cho 
    - Tin nhắn chỉ hiện số đã che (ví dụ `0905 ••• 456`) và nút **✅ Nhận khách**.
 2. **Không bấm Nhận trong 30 phút** → thu hồi, giao cho bạn khác.
 3. **Bấm Nhận** → sale mới thấy số đầy đủ, kèm nút Zalo và 6 nút báo cáo:
-   Đã gọi · Không nghe máy · Hẹn gặp · Khách nóng · Đã chốt · Không có nhu cầu.
+   Đã gọi · Không nghe máy · Hẹn gặp · Khách nóng · Đã chốt · Không tiềm năng.
 4. **Nhận rồi mà 2 giờ không bấm báo cáo** → thu hồi, giao bạn khác.
 5. **3 ngày chưa chuyển đổi** → thu hồi, giao bạn khác.
+   - Cần thêm thời gian: trước giờ hạn, gõ `/giahan K4` hoặc bấm nút **⏳ Xin gia hạn 1 ngày** trong tin nhắc. Mỗi khách được 1 lần, bot tự duyệt và báo quản lý. Không xin thì hết hạn tự chuyển.
    - "Chuyển đổi" là khi sale bấm Hẹn gặp, Khách nóng hoặc Đã chốt.
 6. **Giờ tính hạn: 7h–21h.** Từ 21h đến 7h sáng hôm sau không tính.
    - Khách vào ban đêm vẫn được giao, nhưng tin gửi im lặng (không reo chuông), hạn bắt đầu tính từ 7h.
@@ -23,7 +24,7 @@ Chạy miễn phí trên Google Apps Script, không cần máy chủ. Dành cho 
 2. **Khách cũ quay lại** (gửi form lần nữa) → báo đúng sale đang chăm, không chia cho người khác. Khách đã đóng thì chia lại như khách mới.
 3. **Không ôm khách**: ai đang có từ 5 khách chưa nhận/chưa báo cáo thì tạm không giao thêm. Cả đội đều đầy thì khách chờ, có người báo cáo xong là tự giao.
 4. **Hay bị thu hồi thì tự tạm dừng**: bị thu hồi 3 lần trong 1 ngày vì không bấm nhận → bot tạm dừng sale đó và báo quản lý (`/mo Tên` để mở lại).
-5. **Đóng khách phải có lý do**: bấm "Không có nhu cầu" → sale gõ 1 dòng lý do → quản lý bấm Đồng ý đóng hoặc Chia lại. 2 giờ không gõ lý do thì thu hồi.
+5. **Đóng khách phải có lý do**: bấm "Không tiềm năng" → sale gõ 1 dòng lý do → quản lý bấm Đồng ý đóng hoặc Chia lại. 2 giờ không gõ lý do thì thu hồi.
 6. **Khách nóng không được bỏ quên**: đã Hẹn gặp / Khách nóng thì 2 ngày chưa cập nhật bị nhắc, 7 ngày im lặng thì thu hồi.
 7. **Sale nghỉ việc**: quản lý gõ `/xoa Tên` → gỡ khỏi đội, thu hồi và chia lại toàn bộ khách người đó đang giữ; tin cũ bị xoá số.
 8. **Xếp hạng tuần**: 8h sáng thứ Hai gửi quản lý xếp hạng 7 ngày (chốt, tỷ lệ chuyển đổi, tỷ lệ nhận đúng hạn, số lần không báo cáo). Gõ `/tuan` để xem bất cứ lúc nào.
@@ -107,6 +108,7 @@ Nếu báo lỗi, đọc dòng đỏ:
 | Ai | Lệnh | Việc |
 |---|---|---|
 | Sale | `/khach` | Xem khách đang giữ |
+| Sale | `/giahan K4` | Xin thêm 1 ngày cho hạn chuyển đổi (1 lần mỗi khách) |
 | Sale | `/nghi` · `/lam` | Tạm dừng / bật lại nhận khách (nghỉ phép, bận) |
 | Quản lý | `/sale` | Danh sách đội, mỗi người đang giữ bao nhiêu khách |
 | Quản lý | `/baocao` | Báo cáo hôm nay |
@@ -129,12 +131,13 @@ Sửa ngay trong tab **CauHinh**, không cần sửa code:
 | `TOI_DA_CHUA_BAO_CAO` | 5 | Đang giữ từ ngần này khách chưa báo cáo thì tạm không giao thêm |
 | `THU_HOI_TU_DUNG` | 3 | Bị thu hồi vì không nhận ngần này lần/ngày thì tự tạm dừng |
 | `NONG_NHAC_NGAY` · `NONG_THU_HOI_NGAY` | 2 · 7 | Khách nóng: nhắc / thu hồi khi không cập nhật |
+| `GIA_HAN_NGAY` · `SO_LAN_GIA_HAN` | 1 · 1 | Số ngày được cộng khi xin gia hạn / số lần được xin mỗi khách |
 | `NHAC_NHAN_PHUT` · `NHAC_BAO_CAO_PHUT` · `NHAC_CHUYEN_DOI_NGAY` | 20 · 90 · 2 | Lúc gửi tin nhắc |
 
 ## Kiểm tra
 
 `node test-mo-phong.js` chạy 59 tình huống trên bản giả lập Google Sheet và Telegram:
-- 30 phút, 2 giờ, 3 ngày;
+- 30 phút, 2 giờ, 3 ngày, gia hạn;
 - ban đêm;
 - sale khác bấm nhầm khách;
 - che số và xoá số khi thu hồi;
