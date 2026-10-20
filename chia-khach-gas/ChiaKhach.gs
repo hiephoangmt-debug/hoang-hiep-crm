@@ -213,8 +213,25 @@ function caiDat() {
   ScriptApp.newTrigger('chayMoiPhut').timeBased().everyMinutes(1).create();
   ScriptApp.newTrigger('baoCaoToi').timeBased().atHour(num('GIO_BAO_CAO_TOI')).nearMinute(10).everyDays(1).inTimezone('Asia/Ho_Chi_Minh').create();
   ScriptApp.newTrigger('baoCaoTuan').timeBased().onWeekDay(ScriptApp.WeekDay.MONDAY).atHour(8).nearMinute(5).inTimezone('Asia/Ho_Chi_Minh').create();
-  gui_(quanLy_(), '✅ Bot chia khách đã chạy. Anh là <b>quản lý</b>.\nSale nhắn bot: <code>/dangky Tên</code> để xin vào đội, anh bấm Duyệt.\nLệnh: /sale · /baocao · /tuan · /tam Tên · /mo Tên · /xoa Tên');
-  log_('hệ thống', 'cài đặt', '', 'quản lý ' + quanLy_());
+  P().setProperty('BOT_USERNAME', me.result.username || '');
+  var daGui = gui_(quanLy_(), '✅ Bot chia khách đã chạy. Anh là <b>quản lý</b>.\nSale nhắn bot: <code>/dangky Tên</code> để xin vào đội, anh bấm Duyệt.\nLệnh: /sale · /baocao · /tuan · /tam Tên · /mo Tên · /xoa Tên');
+  log_('hệ thống', 'cài đặt', '', 'quản lý ' + quanLy_() + ' · bot @' + me.result.username);
+  kiemTra(daGui ? 'đã gửi tin cài đặt' : '');
+}
+
+/* Chạy hàm này khi bot không trả lời: ghi tình trạng vào tab NhatKy (không ghi mã bot) */
+function kiemTra(daGui) {
+  var me = tg_('getMe', {}), ql = quanLy_(), kq = [];
+  kq.push(me.ok ? 'bot @' + me.result.username + ' (link t.me/' + me.result.username + ')' : 'MÃ BOT SAI: ' + (me.description || 'không gọi được Telegram'));
+  if (me.ok && ql) {
+    var r = daGui ? {ok: true} : tg_('sendMessage', {chat_id: ql, text: '🔎 Kiểm tra bot: quản lý nhận được tin này là bot nhắn được cho anh.', protect_content: true});
+    kq.push(r.ok ? 'nhắn quản lý ' + ql + ': OK' : 'KHÔNG nhắn được quản lý ' + ql + ': ' + (r.description || '') + ' → quản lý mở t.me/' + me.result.username + ' bấm Start');
+  } else if (!ql) kq.push('chưa có quản lý');
+  var tr = ScriptApp.getProjectTriggers().map(function (t) { return t.getHandlerFunction(); });
+  kq.push('trình kích hoạt: ' + (tr.length ? tr.join(', ') : 'KHÔNG CÓ → chạy caiDat'));
+  if (me.ok) { var w = tg_('getWebhookInfo', {}); if (w.ok && w.result.url) kq.push('ĐANG CÓ WEBHOOK (bot khác đang dùng mã này): ' + w.result.url); if (w.ok) kq.push('tin chờ đọc: ' + (w.result.pending_update_count || 0)); }
+  log_('hệ thống', 'kiểm tra', '', kq.join(' · '));
+  return kq.join('\n');
 }
 /* Khách đã có sẵn trong CRM lúc cài đặt: đánh dấu đã xem, không chia lại */
 function ghiNhanKhachCu_() {
