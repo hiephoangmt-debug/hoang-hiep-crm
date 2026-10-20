@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Hướng dẫn sale dùng bot chia khách Sun Saphia</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap">
+<style>
+@page{size:A4;margin:14mm 14mm 16mm}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Be Vietnam Pro','DejaVu Sans',sans-serif;color:#10283a;font-size:11pt;line-height:1.5}
+h1{font-size:25pt;line-height:1.15;color:#0B3C5D;font-weight:800}
+h2{font-size:16pt;color:#0B3C5D;margin:0 0 8px;display:flex;align-items:center;gap:10px}
+h2 .n{display:inline-flex;width:30px;height:30px;border-radius:50%;background:#C2552B;color:#fff;font-size:13pt;align-items:center;justify-content:center;flex:none}
+h3{font-size:12pt;margin:10px 0 4px;color:#0B3C5D}
+p{margin:4px 0}
+.page{page-break-after:always}
+.page:last-child{page-break-after:auto}
+.lead{font-size:12pt;color:#35505f;margin:6px 0 14px}
+.sec{margin-bottom:16px;break-inside:avoid}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{border:1.5px solid #cfe2ea;border-radius:12px;padding:10px 12px;background:#fff;break-inside:avoid}
+.card.ios .tag{background:#111}
+.card.and .tag{background:#2e8b3d}
+.tag{display:inline-block;color:#fff;font-size:9.5pt;font-weight:700;border-radius:6px;padding:2px 8px;margin-bottom:6px}
+ol{margin:4px 0 4px 20px}
+ol li{margin:3px 0}
+ul{margin:4px 0 4px 18px}
+b{font-weight:700}
+code{font-family:'DejaVu Sans Mono',monospace;background:#eef4f7;border:1px solid #d5e3ea;border-radius:5px;padding:0 4px;font-size:10pt}
+.btn{display:inline-block;background:#e9f3fb;border:1px solid #b7d4ea;color:#1b5f93;border-radius:6px;padding:0 6px;font-weight:600;font-size:10pt;white-space:nowrap}
+.note{background:#fff5e8;border:1.5px solid #f1d2a8;border-radius:10px;padding:8px 12px;margin:8px 0;break-inside:avoid}
+.warn{background:#fdecec;border:1.5px solid #f0bcbc;border-radius:10px;padding:8px 12px;margin:8px 0;break-inside:avoid}
+.ok{background:#eaf6ec;border:1.5px solid #bfe0c5;border-radius:10px;padding:8px 12px;margin:8px 0;break-inside:avoid}
+table{border-collapse:collapse;width:100%;margin:6px 0;font-size:10.5pt;break-inside:avoid}
+th,td{border:1px solid #cfdde4;padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#0B3C5D;color:#fff}
+tr:nth-child(even) td{background:#f5f9fb}
+/* Telegram mockup */
+.phone{background:#cfe3c7;border-radius:14px;padding:10px;border:1.5px solid #b5ceb0;break-inside:avoid}
+.ph-top{background:#fff;border-radius:10px;padding:5px 10px;font-weight:700;font-size:10pt;margin-bottom:8px;display:flex;justify-content:space-between}
+.ph-top span{font-weight:400;color:#6a7d88}
+.msg{background:#fff;border-radius:12px 12px 12px 4px;padding:8px 10px;font-size:10pt;max-width:92%;margin-bottom:6px;line-height:1.45}
+.msg.me{background:#e1f7c9;margin-left:auto;border-radius:12px 12px 4px 12px;width:fit-content}
+.kb{display:grid;grid-template-columns:1fr 1fr;gap:4px;max-width:92%;margin-bottom:6px}
+.kb.one{grid-template-columns:1fr}
+.kb div{background:rgba(255,255,255,.75);border-radius:8px;text-align:center;font-size:9.5pt;font-weight:600;padding:5px 4px;color:#1b4f72}
+.hl{outline:2.5px solid #C2552B;outline-offset:1px}
+.red{color:#C2552B;font-weight:700}
+.grid2{display:grid;grid-template-columns:1.05fr .95fr;gap:14px;align-items:start}
+.cover{display:grid;grid-template-columns:1fr 210px;gap:18px;align-items:center;margin:14px 0}
+.qr{border:2px solid #0B3C5D;border-radius:14px;padding:10px;text-align:center;background:#fff}
+.qr img{width:180px;height:180px}
+.qr div{font-size:9.5pt;font-weight:700;color:#0B3C5D;word-break:break-all}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.step{border:1.5px solid #cfe2ea;border-radius:12px;padding:8px 10px;background:#f7fbfd}
+.step b.k{display:block;color:#C2552B;font-size:10pt}
+.foot{font-size:9pt;color:#6a7d88;margin-top:10px}
+.big{font-size:20pt;font-weight:800;color:#C2552B}
+</style>
+</head>
+<body>
+
+<!-- TRANG 1: BÌA -->
+<section class="page">
+  <p style="font-weight:700;color:#C2552B;letter-spacing:.5px">SUN SAPHIA RESIDENCE · DÀNH CHO SALE</p>
+  <h1>Hướng dẫn dùng bot chia khách trên Telegram</h1>
+  <p class="lead">Khách để lại số trên trang quảng cáo sẽ được bot tự gửi cho từng bạn qua Telegram. Đọc 1 lần, làm theo từng bước, khoảng 10 phút là xong. Có hướng dẫn riêng cho <b>iPhone</b> và <b>Android</b>.</p>
+
+  <div class="cover">
+    <div>
+      <h3>Link vào bot</h3>
+      <p style="font-size:14pt;font-weight:700;color:#0B3C5D">t.me/Chiakhach_Saphia_bot</p>
+      <p>Bấm link trên điện thoại, hoặc mở <b>Camera</b> quét mã bên cạnh.</p>
+      <div class="warn"><b>Chỉ dùng link này.</b> Không tự tìm tên bot trong Telegram, dễ vào nhầm bot khác.</div>
+    </div>
+    <div class="qr"><img src="qr.svg" alt="Mã QR vào bot"><div>t.me/Chiakhach_Saphia_bot</div></div>
+  </div>
+
+  <h3>6 bước</h3>
+  <div class="steps">
+    <div class="step"><b class="k">Bước 1</b>Cài Telegram</div>
+    <div class="step"><b class="k">Bước 2</b>Vào bot, đăng ký</div>
+    <div class="step"><b class="k">Bước 3</b>Bật thông báo</div>
+    <div class="step"><b class="k">Bước 4</b>Nhận khách trong 30 phút</div>
+    <div class="step"><b class="k">Bước 5</b>Gọi khách, bấm báo cáo trong 2 giờ</div>
+    <div class="step"><b class="k">Bước 6</b>Chuyển đổi trong 3 ngày</div>
+  </div>
+
+  <h3 style="margin-top:16px">3 con số cần nhớ</h3>
+  <table>
+    <tr><th style="width:22%">Mốc</th><th>Việc phải làm</th><th style="width:32%">Quá hạn</th></tr>
+    <tr><td class="big">30 phút</td><td>Bấm <span class="btn">✅ Nhận khách</span></td><td>Khách chuyển cho bạn khác</td></tr>
+    <tr><td class="big">2 giờ</td><td>Gọi / nhắn Zalo khách, bấm 1 nút báo cáo</td><td>Khách chuyển cho bạn khác</td></tr>
+    <tr><td class="big">3 ngày</td><td>Lên Hẹn gặp, Khách nóng hoặc Đã chốt (xin gia hạn được thêm 1 ngày)</td><td>Khách chuyển cho bạn khác</td></tr>
+  </table>
+  <div class="ok">Chỉ tính giờ <b>từ 7h đến 21h</b>. Ban đêm đồng hồ dừng. Giờ hạn cụ thể luôn ghi trên từng tin của bot, ví dụ <i>"Hạn bấm Nhận: trước 09:30"</i>.</div>
+</section>
+
+<!-- TRANG 2: CÀI TELEGRAM + VÀO BOT -->
+<section class="page">
+  <div class="sec">
+    <h2><span class="n">1</span>Cài Telegram</h2>
+    <p>Đã có Telegram thì bỏ qua, sang Bước 2.</p>
+    <div class="cols">
+      <div class="card ios"><span class="tag">iPhone</span>
+        <ol>
+          <li>Mở <b>App Store</b>.</li>
+          <li>Bấm <b>Tìm kiếm</b>, gõ <b>Telegram</b>.</li>
+          <li>Chọn <b>Telegram Messenger</b> (biểu tượng máy bay giấy xanh), bấm <b>Nhận</b>.</li>
+          <li>Mở app, bấm <b>Start Messaging</b>.</li>
+          <li>Chọn mã nước <b>+84</b>, nhập số điện thoại, bấm <b>Next</b>.</li>
+          <li>Nhập mã 5 số Telegram gửi qua tin nhắn SMS.</li>
+          <li>Nhập tên, bấm <b>Continue</b>. Khi app hỏi quyền thông báo, bấm <b>Cho phép</b>.</li>
+        </ol>
+      </div>
+      <div class="card and"><span class="tag">Android</span>
+        <ol>
+          <li>Mở <b>CH Play</b> (Google Play).</li>
+          <li>Gõ <b>Telegram</b> vào ô tìm kiếm.</li>
+          <li>Chọn <b>Telegram</b> (biểu tượng máy bay giấy xanh), bấm <b>Cài đặt</b>.</li>
+          <li>Mở app, bấm <b>Start Messaging</b>.</li>
+          <li>Chọn <b>+84</b>, nhập số điện thoại, bấm mũi tên <b>→</b>.</li>
+          <li>Nhập mã 5 số Telegram gửi qua SMS hoặc cuộc gọi.</li>
+          <li>Nhập tên, bấm <b>→</b>. Khi app hỏi quyền thông báo, bấm <b>Cho phép</b>.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2><span class="n">2</span>Vào bot và đăng ký</h2>
+    <div class="grid2">
+      <div>
+        <ol>
+          <li>Bấm link <b>t.me/Chiakhach_Saphia_bot</b> (hoặc quét mã QR ở trang đầu).
+            <ul>
+              <li><b>iPhone:</b> nếu mở ra Safari, bấm <b>Open in Telegram</b> / <b>Mở</b>.</li>
+              <li><b>Android:</b> nếu máy hỏi mở bằng app nào, chọn <b>Telegram</b>.</li>
+            </ul>
+          </li>
+          <li>Kiểm tra tên bot trên cùng là <b>Chiakhach_Saphia_bot</b>.</li>
+          <li>Bấm nút <b>START</b> (hoặc <b>BẮT ĐẦU</b>) ở dưới màn hình.</li>
+          <li>Gõ vào ô tin nhắn: <code>/dangky</code> + dấu cách + tên của bạn, rồi gửi.<br>Ví dụ: <code>/dangky Lan</code></li>
+          <li>Bot trả lời <i>"Đã gửi yêu cầu vào đội, chờ quản lý duyệt"</i>.</li>
+          <li>Quản lý duyệt xong, bot báo <i>"✅ Quản lý đã duyệt"</i>. Từ lúc này bạn bắt đầu nhận khách.</li>
+        </ol>
+        <div class="note">Gõ đúng <b>tên thật</b> để quản lý nhận ra. Tên này hiện trong báo cáo hằng ngày.</div>
+      </div>
+      <div class="phone">
+        <div class="ph-top">Chiakhach_Saphia_bot <span>bot</span></div>
+        <div class="msg me">/dangky Lan</div>
+        <div class="msg">Đã gửi yêu cầu vào đội, chờ quản lý duyệt ạ.</div>
+        <div class="msg">✅ Quản lý đã duyệt. Bạn sẽ nhận khách lần lượt. Lệnh: /khach · /nghi · /lam</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANG 3: THÔNG BÁO -->
+<section class="page">
+  <div class="sec">
+    <h2><span class="n">3</span>Bật thông báo (bắt buộc)</h2>
+    <p>Khách đến là đồng hồ 30 phút chạy ngay. <b>Tắt tiếng hoặc chặn thông báo là mất khách.</b> Làm đủ cả 3 phần dưới đây.</p>
+
+    <h3>3a. Cho phép Telegram báo trên điện thoại</h3>
+    <div class="cols">
+      <div class="card ios"><span class="tag">iPhone</span>
+        <ol>
+          <li>Mở <b>Cài đặt</b> (Settings) của iPhone.</li>
+          <li>Kéo xuống, chọn <b>Telegram</b> → <b>Thông báo</b>.</li>
+          <li>Bật <b>Cho phép thông báo</b>.</li>
+          <li>Bật đủ: <b>Màn hình khoá</b>, <b>Trung tâm thông báo</b>, <b>Biểu ngữ</b>, <b>Âm thanh</b>.</li>
+          <li>Nếu hay dùng <b>Tập trung / Không làm phiền</b>: vào <b>Cài đặt → Tập trung</b>, chọn chế độ đang dùng → <b>Ứng dụng</b> → thêm <b>Telegram</b> vào danh sách được phép.</li>
+        </ol>
+      </div>
+      <div class="card and"><span class="tag">Android</span>
+        <ol>
+          <li>Mở <b>Cài đặt</b> → <b>Ứng dụng</b> → <b>Telegram</b>.</li>
+          <li>Chọn <b>Thông báo</b> → bật <b>Hiển thị thông báo</b>.</li>
+          <li>Quay lại, chọn <b>Pin</b> → chọn <b>Không hạn chế</b> (Samsung, Xiaomi, Oppo… hay tự tắt app chạy ngầm, làm mất thông báo).</li>
+          <li><b>Xiaomi / Redmi:</b> thêm <b>Tự khởi động</b> → bật cho Telegram.</li>
+          <li><b>Oppo / Realme / Vivo:</b> thêm <b>Cho phép chạy nền</b> → bật.</li>
+        </ol>
+        <p style="font-size:9.5pt;color:#556">Tên mục có thể khác chút tuỳ máy. Gõ "Telegram" vào ô tìm kiếm trong Cài đặt cho nhanh.</p>
+      </div>
+    </div>
+
+    <h3>3b. Không tắt tiếng bot</h3>
+    <div class="cols">
+      <div class="card ios"><span class="tag">iPhone</span>
+        <ol>
+          <li>Mở khung chat với bot, bấm vào <b>tên bot</b> trên cùng.</li>
+          <li>Nếu thấy <b>Unmute / Bật tiếng</b> thì bấm vào. Thấy <b>Mute / Tắt tiếng</b> là đang bật tiếng, giữ nguyên.</li>
+        </ol>
+      </div>
+      <div class="card and"><span class="tag">Android</span>
+        <ol>
+          <li>Mở khung chat với bot, bấm vào <b>tên bot</b> trên cùng.</li>
+          <li>Mục <b>Notifications / Thông báo</b> phải đang <b>bật</b> (công tắc xanh).</li>
+        </ol>
+      </div>
+    </div>
+
+    <h3>3c. Ghim bot lên đầu danh sách chat</h3>
+    <div class="cols">
+      <div class="card ios"><span class="tag">iPhone</span>
+        <p>Ở danh sách chat, <b>vuốt từ trái sang phải</b> trên dòng bot → bấm <b>Ghim</b> (Pin).</p>
+      </div>
+      <div class="card and"><span class="tag">Android</span>
+        <p>Ở danh sách chat, <b>nhấn giữ</b> dòng bot → bấm biểu tượng <b>📌 Ghim</b> (Pin) trên cùng.</p>
+      </div>
+    </div>
+    <div class="ok"><b>Thử ngay:</b> gõ <code>/khach</code> gửi bot, khoá màn hình. Bot trả lời mà điện thoại có kêu và hiện thông báo là đã đúng.</div>
+  </div>
+</section>
+
+<!-- TRANG 4: NHẬN KHÁCH -->
+<section class="page">
+  <div class="sec">
+    <h2><span class="n">4</span>Có khách: bấm Nhận trong 30 phút</h2>
+    <div class="grid2">
+      <div>
+        <ol>
+          <li>Bot gửi tin <b>🔥 KHÁCH K…</b>. Số điện thoại đang <b>che</b> (ví dụ <code>0905 ••• 456</code>).</li>
+          <li>Bấm nút <span class="btn">✅ Nhận khách</span> ngay dưới tin. Đừng gõ chữ, chỉ cần bấm nút.</li>
+          <li>Tin tự đổi, hiện <b>số đầy đủ</b>, link <b>Mở Zalo</b> và 6 nút báo cáo.</li>
+        </ol>
+        <div class="note">Phút thứ 20 chưa bấm, bot nhắc <i>"còn 10 phút"</i>. Phút 30 chưa bấm, khách chuyển cho bạn khác, tin của bạn bị xoá số.</div>
+        <div class="warn">Bị thu hồi <b>3 lần trong 1 ngày</b> vì không bấm Nhận thì bot tạm dừng giao khách cho bạn, phải báo quản lý mở lại. Bận thì gõ <code>/nghi</code> trước.</div>
+        <p><b>Khách vào ban đêm:</b> tin gửi im lặng, không kêu. Hạn tính từ 7h sáng hôm sau, ví dụ khách vào 23h thì hạn là <b>trước 07:30</b>.</p>
+      </div>
+      <div class="phone">
+        <div class="ph-top">Chiakhach_Saphia_bot <span>bot</span></div>
+        <div class="msg">🔥 <b>KHÁCH K12</b> – Minh<br>📞 0905 ••• 456<br>• Quan tâm: căn 2PN view biển<br>• Nguồn: google<br>• Giao lúc: 09:00 21/10<br><br>⏱ Hạn bấm Nhận: <b>trước 09:30 21/10</b>. Sau thời gian trên sẽ bị thu hồi.</div>
+        <div class="kb one"><div class="hl">✅ Nhận khách</div></div>
+        <div class="msg" style="margin-top:8px">✅ Bạn đã nhận. Báo cáo khách này để cập nhật.<br>📞 <b>0905123456</b> · <u>Mở Zalo</u><br>⏱ Hạn báo cáo: <b>trước 11:21 21/10</b>.</div>
+        <div class="kb">
+          <div>📞 Đã gọi, đang tư vấn</div><div>🔕 Không nghe máy</div>
+          <div>📅 Hẹn gặp / xem dự án</div><div>🔥 Khách nóng</div>
+          <div>✅ Đã chốt</div><div>🚫 Không tiềm năng</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2><span class="n">5</span>Gọi khách, bấm báo cáo trong 2 giờ</h2>
+    <ol>
+      <li>Bấm vào số để <b>gọi</b>, hoặc bấm <b>Mở Zalo</b> để nhắn Zalo.</li>
+      <li>Gọi xong, bấm <b>1 nút</b> đúng tình trạng khách:</li>
+    </ol>
+    <table>
+      <tr><th style="width:30%">Nút</th><th>Bấm khi</th></tr>
+      <tr><td>📞 Đã gọi, đang tư vấn</td><td>Đã nói chuyện, khách đang cân nhắc</td></tr>
+      <tr><td>🔕 Không nghe máy</td><td>Gọi chưa được. Vẫn tính là đã báo cáo, nhớ gọi lại / nhắn Zalo</td></tr>
+      <tr><td>📅 Hẹn gặp / xem dự án</td><td>Khách đồng ý gặp, xem nhà mẫu, gọi video. <b>Tính là đã chuyển đổi</b></td></tr>
+      <tr><td>🔥 Khách nóng</td><td>Khách quan tâm thật, hỏi căn cụ thể. <b>Tính là đã chuyển đổi</b></td></tr>
+      <tr><td>✅ Đã chốt</td><td>Khách đã đặt cọc / ký</td></tr>
+      <tr><td>🚫 Không tiềm năng</td><td>Đã nói chuyện, đánh giá không tiềm năng. Phải gõ lý do (xem Bước 6)</td></tr>
+    </table>
+    <p>Tình trạng khách thay đổi thì bấm lại nút mới để cập nhật. Phút 90 chưa báo cáo, bot nhắc <i>"còn 30 phút"</i>.</p>
+  </div>
+</section>
+
+<!-- TRANG 5: 3 NGÀY, GIA HẠN, KHÔNG TIỀM NĂNG -->
+<section class="page">
+  <div class="sec">
+    <h2><span class="n">6</span>Chuyển đổi trong 3 ngày</h2>
+    <p>Trong 3 ngày (chỉ tính 7h–21h) kể từ lúc nhận, đưa khách lên <b>Hẹn gặp</b>, <b>Khách nóng</b> hoặc <b>Đã chốt</b>. Còn 1 ngày, bot nhắc kèm nút xin gia hạn.</p>
+
+    <h3>Xin gia hạn thêm 1 ngày</h3>
+    <div class="grid2">
+      <div>
+        <p>Khách cần thêm thời gian (đang cân nhắc, đi công tác, hẹn tuần sau…). Chọn 1 trong 2 cách, làm <b>trước giờ hạn</b>:</p>
+        <ul>
+          <li>Bấm nút <span class="btn">⏳ Xin gia hạn 1 ngày</span> trong tin nhắc của bot, <b>hoặc</b></li>
+          <li>Gõ <code>/giahan</code> + mã khách, ví dụ <code>/giahan K12</code>.</li>
+        </ul>
+        <p>Bot tự duyệt và báo giờ hạn mới. <b>Mỗi khách chỉ gia hạn được 1 lần.</b> Không xin thì hết hạn tự chuyển cho bạn khác.</p>
+        <p style="font-size:9.5pt;color:#556">Không nhớ mã khách? Gõ <code>/khach</code>, bot liệt kê khách đang giữ kèm mã và giờ hạn.</p>
+      </div>
+      <div class="phone">
+        <div class="ph-top">Chiakhach_Saphia_bot <span>bot</span></div>
+        <div class="msg">⏰ <b>Báo cáo khách K12 để cập nhật</b>: còn khoảng 1 ngày để lên Hẹn gặp / Khách nóng / Đã chốt.<br>⏱ Hạn: <b>trước 11:21 24/10</b>.</div>
+        <div class="kb one"><div class="hl">⏳ Xin gia hạn 1 ngày</div></div>
+        <div class="msg">⏳ Đã gia hạn khách K12 thêm 1 ngày.<br>⏱ Hạn: <b>trước 11:21 25/10</b>.</div>
+      </div>
+    </div>
+
+    <h3>Khách không tiềm năng</h3>
+    <div class="grid2">
+      <div>
+        <ol>
+          <li>Bấm <span class="btn">🚫 Không tiềm năng</span>.</li>
+          <li>Bot hỏi lý do. Gõ <b>1 dòng</b> gửi luôn, ví dụ:
+            <ul><li>Chỉ tham khảo, chưa có nhu cầu</li><li>Tài chính chưa phù hợp</li><li>Đã mua dự án khác</li><li>Sai số / số ảo</li><li>Là môi giới</li></ul>
+          </li>
+          <li>Quản lý duyệt <b>Đồng ý đóng</b> hoặc <b>Chia lại</b> cho bạn khác.</li>
+        </ol>
+        <div class="note">Gõ lý do trong <b>2 giờ</b>, quá giờ khách bị thu hồi. Báo đúng thì <b>không bị tính</b> là bị thu hồi. Để khách tự hết hạn thì bị tính.</div>
+      </div>
+      <div class="phone">
+        <div class="ph-top">Chiakhach_Saphia_bot <span>bot</span></div>
+        <div class="msg">✍️ Gõ <b>1 dòng lý do</b> khách không tiềm năng (ví dụ: không có nhu cầu, chỉ tham khảo, tài chính chưa phù hợp…). Quản lý duyệt mới đóng hẳn.</div>
+        <div class="msg me">Chỉ tham khảo, chưa có nhu cầu năm nay</div>
+        <div class="msg">📝 Đã gửi lý do, chờ quản lý duyệt đóng khách K12.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANG 6: LỆNH, QUY TẮC, LỖI -->
+<section class="page">
+  <div class="sec">
+    <h2><span class="n">7</span>Lệnh gõ cho bot</h2>
+    <table>
+      <tr><th style="width:26%">Gõ</th><th>Dùng để</th></tr>
+      <tr><td><code>/khach</code></td><td>Xem khách đang giữ, mã khách và giờ hạn từng khách</td></tr>
+      <tr><td><code>/giahan K12</code></td><td>Xin thêm 1 ngày cho hạn chuyển đổi (1 lần mỗi khách)</td></tr>
+      <tr><td><code>/nghi</code></td><td>Tạm ngưng nhận khách (nghỉ phép, đi họp, lái xe…)</td></tr>
+      <tr><td><code>/lam</code></td><td>Nhận khách trở lại</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h2><span class="n">8</span>Quy tắc chung</h2>
+    <ul>
+      <li>Khách được chia lần lượt, <b>ưu tiên người đang giữ ít khách nhất</b>. Không ai được chọn khách.</li>
+      <li>Đang giữ <b>5 khách chưa nhận/chưa báo cáo</b> thì tạm không được giao thêm. Báo cáo xong là nhận tiếp.</li>
+      <li>Khách bị thu hồi: tin cũ bị xoá số, <b>không lấy lại được</b>. Không ai biết khách từng ở với ai.</li>
+      <li>Khách cũ gửi form lại thì về đúng người đang chăm.</li>
+      <li><b>Không chụp màn hình, không chuyển tiếp số khách</b> ra ngoài. Không tự chuyển khách cho nhau, cần đổi thì báo quản lý.</li>
+      <li>Báo đúng tình trạng. Quản lý xem báo cáo 21h mỗi tối và xếp hạng sáng thứ Hai.</li>
+    </ul>
+  </div>
+
+  <div class="sec">
+    <h2><span class="n">9</span>Gặp lỗi thì làm gì</h2>
+    <table>
+      <tr><th style="width:38%">Gặp chuyện</th><th>Cách xử lý</th></tr>
+      <tr><td>Bấm link báo "không tồn tại" / không mở được</td><td>Cài Telegram trước (Bước 1), rồi bấm lại link hoặc quét mã QR. Kiểm tra đúng <b>Chiakhach_Saphia_bot</b>.</td></tr>
+      <tr><td>Gõ <code>/dangky</code> mà bot không trả lời</td><td>Chờ 1–2 phút (bot đọc tin mỗi phút). Vẫn không thấy thì bấm <b>START</b> lại rồi gõ lại.</td></tr>
+      <tr><td>Bot báo "Nhắn /dangky… để xin vào đội"</td><td>Bạn chưa được duyệt. Gõ <code>/dangky Tên</code> rồi báo quản lý.</td></tr>
+      <tr><td>Không thấy thông báo khi có khách</td><td>Làm lại Bước 3 (thông báo, bật tiếng bot, pin "Không hạn chế" trên Android).</td></tr>
+      <tr><td>Bấm nút báo "Khách này không còn giao cho bạn"</td><td>Khách đã quá hạn và chuyển cho bạn khác.</td></tr>
+      <tr><td>Hôm nay không được giao khách</td><td>Gõ <code>/khach</code>: có thể bạn đang giữ 5 khách chưa báo cáo, đang <code>/nghi</code>, hoặc bị tạm dừng.</td></tr>
+      <tr><td>Đổi điện thoại / số Telegram</td><td>Báo quản lý trước để chuyển khách và duyệt lại.</td></tr>
+    </table>
+  </div>
+  <p class="foot">Sun Saphia Residence · Bot chia khách · Bản 20/10/2026</p>
+</section>
+
+</body>
+</html>
