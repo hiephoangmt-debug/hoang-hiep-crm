@@ -44,6 +44,10 @@ header h1 { font-size: 24px; margin: 0 0 2px; }
   padding: 6px 12px; border-radius: 8px; cursor: pointer; min-height: 34px; }
 .seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); font-weight: 600;
   box-shadow: 0 0 0 1px var(--border); }
+.fresh { flex-basis: 100%; display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-2); }
+.fresh b { color: var(--ink); }
+.fresh .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--up); flex: none; }
+.fresh.old .dot { background: #fab219; }
 .range-label { color: var(--muted); font-size: 13px; margin-left: auto; }
 h2 { font-size: 18px; margin: 32px 0 4px; }
 .note { color: var(--ink-2); font-size: 13px; margin: 0 0 12px; }
@@ -75,6 +79,11 @@ td { font-variant-numeric: tabular-nums; }
 td .nm { display: block; font-size: 12px; color: var(--muted); }
 th[aria-sort]::after { content: " ↓"; } th[aria-sort="ascending"]::after { content: " ↑"; }
 canvas.spark { width: 90px; height: 28px; display: block; }
+.pill { display: inline-block; font-size: 12px; font-weight: 600; padding: 1px 7px; border-radius: 6px; background: var(--chip); white-space: nowrap; margin: 1px 0; }
+.sigs { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.sig .sig-h { display: flex; justify-content: space-between; align-items: baseline; }
+.sig .n { font-size: 20px; font-weight: 700; }
+.sig .note { margin: 2px 0 8px; }
 .empty { color: var(--muted); font-size: 14px; padding: 24px 0; text-align: center; }
 .sample { display: inline-block; font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 6px;
   background: #fab21933; color: var(--ink); margin-left: 6px; }
@@ -90,6 +99,7 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
   </header>
 
   <div class="toolbar">
+    <div class="fresh" id="fresh"><span class="dot"></span><span id="freshTxt">Đang tải…</span></div>
     <div class="seg" id="range" role="group" aria-label="Khoảng thời gian">
       <button data-m="1">1 tháng</button><button data-m="3">3 tháng</button>
       <button data-m="6" aria-pressed="true">6 tháng</button><button data-m="12">1 năm</button>
@@ -111,14 +121,16 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
   <section>
     <h2>Vàng</h2>
     <p class="note">Giá SJC mua/bán và giá vàng thế giới quy đổi ra triệu đồng/lượng (theo tỷ giá USD/VND cùng ngày) – khoảng cách giữa hai đường là chênh lệch SJC so với thế giới.</p>
-    <div class="card"><div class="chart"><canvas id="cGold"></canvas></div></div>
+    <div class="card"><div class="stats" id="goldStats"></div><div class="chart"><canvas id="cGold"></canvas></div></div>
   </section>
 
   <section>
     <h2>Chứng khoán</h2>
     <div class="grid2">
-      <div class="card"><h3>VN-Index</h3><div class="chart sm"><canvas id="cVni"></canvas></div></div>
+      <div class="card"><h3>VN-Index</h3><div class="stats" id="vniStats"></div><div class="chart sm"><canvas id="cVni"></canvas></div></div>
       <div class="card"><h3>VN30</h3><div class="chart sm"><canvas id="cVn30"></canvas></div></div>
+      <div class="card"><h3>HNX-Index</h3><div class="chart sm"><canvas id="cHnx"></canvas></div></div>
+      <div class="card"><h3>UPCoM</h3><div class="chart sm"><canvas id="cUpcom"></canvas></div></div>
     </div>
   </section>
 
@@ -139,10 +151,19 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
   </section>
 
   <section>
-    <h2>USD/VND và Bitcoin</h2>
+    <h2>Tín hiệu tham khảo</h2>
+    <p class="note">Các chỉ báo kỹ thuật phổ biến, tính từ giá và khối ngoại đã qua. Đây là dữ kiện để cân nhắc, <b>không phải dự đoán</b>: không chỉ báo nào cho biết chắc giá sẽ lên hay xuống.</p>
+    <div class="sigs" id="signals"></div>
+  </section>
+
+  <section>
+    <h2>Tỷ giá, tiền số và thế giới</h2>
     <div class="grid2">
       <div class="card"><h3>USD/VND</h3><div class="chart sm"><canvas id="cUsd"></canvas></div></div>
       <div class="card"><h3>Bitcoin (USD)</h3><div class="chart sm"><canvas id="cBtc"></canvas></div></div>
+      <div class="card"><h3>Bạc (USD/oz)</h3><div class="chart sm"><canvas id="cBac"></canvas></div></div>
+      <div class="card"><h3>Dầu Brent (USD/thùng)</h3><div class="chart sm"><canvas id="cDau"></canvas></div></div>
+      <div class="card" style="grid-column: 1 / -1"><h3>S&amp;P 500 – chứng khoán Mỹ</h3><div class="chart sm"><canvas id="cSp"></canvas></div></div>
     </div>
   </section>
 
@@ -159,7 +180,7 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
   </section>
 
   <footer>
-    Nguồn: SJC, Yahoo Finance, DNSE/VNDirect, CafeF; BĐS và lãi suất nhập tay. Số liệu tự cập nhật mỗi ngày lúc 15:45 và 18:30.
+    Nguồn: SJC, Yahoo Finance (vàng/bạc/dầu/S&amp;P 500/USD/Bitcoin, trễ ~15 phút), DNSE/VNDirect, CafeF; BĐS và lãi suất nhập tay. Số liệu tự cập nhật mỗi giờ trong phiên (9:15–15:15, thứ 2–6) và 18:30 hằng ngày.
     Chỉ để tham khảo, không phải khuyến nghị đầu tư.
     <div class="err" id="errs"></div>
   </footer>
@@ -207,11 +228,44 @@ Promise.all([j('data/prices.json'), j('data/stocks.json'), t('data/bds.csv'), t(
     BDS = csv(b).map(r => ({ ...r, gia_m2: +r.gia_m2 })).filter(r => !isNaN(r.gia_m2));
     LS = csv(l).map(r => ({ ...r, lai_suat: +r.lai_suat, ky_han_thang: +r.ky_han_thang })).filter(r => !isNaN(r.lai_suat));
     $('updated').textContent = P.updated
-      ? 'Cập nhật: ' + new Date(P.updated).toLocaleString('vi-VN', { dateStyle: 'full', timeStyle: 'short' })
+      ? 'Cập nhật: ' + new Date(P.updated).toLocaleString('vi-VN', { dateStyle: 'full', timeStyle: 'short', timeZone: 'Asia/Ho_Chi_Minh' }) + intraday(P.updated)
       : 'Chưa có số liệu – chạy workflow “Thống kê đầu tư” trên GitHub Actions để lấy lần đầu.';
     if (P.errors && P.errors.length) $('errs').textContent = 'Nguồn lỗi lần cập nhật gần nhất: ' + P.errors.join(' · ');
-    initRange(); render();
+    initRange(); render(); fresh(); setInterval(fresh, 30000);
   });
+
+// Thanh "cập nhật lúc…" luôn ghim ở đầu trang
+function vnParts(d) {
+  const p = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Ho_Chi_Minh', weekday: 'short', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(d);
+  const g = (t) => p.find(x => x.type === t)?.value;
+  return { wd: g('weekday'), h: +g('hour'), m: +g('minute'), date: `${g('day')}/${g('month')}` };
+}
+function nextRun(now) {
+  // lịch: 9:15 → 15:15 mỗi giờ (thứ 2–6), 18:30 mỗi ngày – giờ VN
+  for (let i = 1; i <= 60 * 48; i++) {
+    const d = new Date(now.getTime() + i * 60000), v = vnParts(d);
+    const wk = !['Sat', 'Sun'].includes(v.wd);
+    if ((wk && v.m === 15 && v.h >= 9 && v.h <= 15) || (v.h === 18 && v.m === 30)) return d;
+  }
+  return null;
+}
+function fresh() {
+  if (!P.updated) { $('freshTxt').textContent = 'Chưa có số liệu'; return; }
+  const u = new Date(P.updated), now = new Date(), mins = Math.round((now - u) / 60000);
+  const ago = mins < 1 ? 'vừa xong' : mins < 60 ? `${mins} phút trước` : mins < 1440 ? `${Math.floor(mins / 60)} giờ ${mins % 60} phút trước` : `${Math.floor(mins / 1440)} ngày trước`;
+  const v = vnParts(u), hm = (x) => `${String(x.h).padStart(2, '0')}:${String(x.m).padStart(2, '0')}`;
+  const n = nextRun(now), nv = n && vnParts(n);
+  $('freshTxt').innerHTML = `Cập nhật <b>${hm(v)} ngày ${v.date}</b> (${ago})${nv ? ` · lần tới khoảng ${hm(nv)}${nv.date !== vnParts(now).date ? ' ngày ' + nv.date : ''}` : ''}`;
+  $('fresh').classList.toggle('old', mins > 26 * 60);
+}
+
+// Đang trong phiên giao dịch (9h–15h, thứ 2–6 giờ VN) -> số hôm nay là tạm tính
+function intraday(iso) {
+  const p = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Ho_Chi_Minh', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date(iso));
+  const g = (t) => p.find(x => x.type === t)?.value;
+  const hm = +g('hour') * 60 + +g('minute');
+  return !['Sat', 'Sun'].includes(g('weekday')) && hm >= 540 && hm < 900 ? ' · đang trong phiên, giá hôm nay là tạm tính' : '';
+}
 
 // ---------- tiện ích chuỗi thời gian
 const pts = (key) => Object.entries(P.series[key] || {}).filter(([, v]) => v != null).sort((a, b) => a[0] < b[0] ? -1 : 1);
@@ -322,7 +376,12 @@ function renderTiles(s) {
     ['VN-Index', pts('vnindex'), 'điểm', 2],
     ['VN30', pts('vn30'), 'điểm', 2],
     ['USD/VND', pts('usd_vnd'), 'đ', 0],
+    ['HNX-Index', pts('hnx'), 'điểm', 2],
+    ['UPCoM', pts('upcom'), 'điểm', 2],
     ['Bitcoin', pts('btc'), 'USD', 0],
+    ['Bạc', pts('bac'), 'USD/oz', 2],
+    ['Dầu Brent', pts('dau'), 'USD/thùng', 2],
+    ['S&P 500 (Mỹ)', pts('sp500'), 'điểm', 0],
     ['BĐS (TB khu vực)', bdsAvg(), 'tr/m²', 1],
   ];
   $('tiles').innerHTML = items.map(([lbl, arr, unit, dec]) => {
@@ -394,6 +453,26 @@ function renderKn(s) {
   }] }, options: o });
 }
 
+// RSI 14 phiên (Wilder)
+function rsi(c, p = 14) {
+  if (c.length <= p) return null;
+  let g = 0, l = 0;
+  for (let i = 1; i <= p; i++) { const d = c[i] - c[i - 1]; d > 0 ? g += d : l -= d; }
+  g /= p; l /= p;
+  for (let i = p + 1; i < c.length; i++) {
+    const d = c[i] - c[i - 1];
+    g = (g * (p - 1) + Math.max(d, 0)) / p; l = (l * (p - 1) + Math.max(-d, 0)) / p;
+  }
+  return l === 0 ? 100 : 100 - 100 / (1 + g / l);
+}
+// số phiên liên tiếp cùng dấu tính từ cuối (dương = mua ròng, âm = bán ròng)
+function streak(a) {
+  let n = 0, sg = 0;
+  for (let i = a.length - 1; i >= 0; i--) { const x = Math.sign(a[i]); if (!sg) sg = x; if (!x || x !== sg) break; n++; }
+  return n * sg;
+}
+const ma = (c, k) => c.length >= k ? c.slice(-k).reduce((a, b) => a + b, 0) / k : null;
+
 // ---------- cổ phiếu lớn
 let filt = 'all', sortKey = 'm1', sortAsc = false;
 function stockRows() {
@@ -409,12 +488,26 @@ function stockRows() {
       if (m1 >= 3 && last > ma20) trend = 'up';
       else if (m1 <= -3 && last < ma20) trend = 'down';
     }
-    const kn = Object.entries(it.kn || {}).sort().slice(-5);
+    const knAll = Object.entries(it.kn || {}).sort();
+    const kn = knAll.slice(-5);
     const kn5 = kn.length ? kn.reduce((t, [, v]) => t + v, 0) : null;
-    const vol = (it.closes || []).slice(-20).map(r => r[2]);
-    return { code, name: it.name, last, d1: ch(1), w1: ch(5), m1, m3: ch(60), y1: ch(n - 1 >= 240 ? 240 : n - 1),
-      ma20, trend, kn5, spark: c.slice(-60), date: it.closes.at(-1)[0],
-      vol: vol.length ? vol.at(-1) : null };
+    const knStreak = streak(knAll.map(([, v]) => v));
+    const vols = (it.closes || []).map(r => r[2]);
+    const avgVol = vols.length > 20 ? vols.slice(-21, -1).reduce((a, b) => a + b, 0) / 20 : null;
+    const volRatio = avgVol ? vols.at(-1) / avgVol : null;
+    const ma50 = ma(50), ma200 = ma(200);
+    const ma200prev = n >= 205 ? c.slice(-205, -5).reduce((a, b) => a + b, 0) / 200 : null;
+    const r = { code, name: it.name, last, d1: ch(1), w1: ch(5), m1, m3: ch(60), y1: ch(n - 1 >= 240 ? 240 : n - 1),
+      ma20, ma50, ma200, trend, kn5, knStreak, volRatio, rsi: rsi(c), spark: c.slice(-60), date: it.closes.at(-1)[0] };
+    r.sig = [];
+    if (r.rsi != null && r.rsi >= 70) r.sig.push(['Quá mua', 'down', 'RSI ' + fmt(r.rsi) + ' ≥ 70: tăng nóng, dễ điều chỉnh']);
+    if (r.rsi != null && r.rsi <= 30) r.sig.push(['Quá bán', 'up', 'RSI ' + fmt(r.rsi) + ' ≤ 30: giảm sâu, có thể hồi']);
+    if (ma200 && ma200prev && last > ma200 && c[n - 6] <= ma200prev) r.sig.push(['Vượt MA200', 'up', 'Vừa vượt lên trên trung bình 200 phiên']);
+    if (ma200 && ma200prev && last < ma200 && c[n - 6] >= ma200prev) r.sig.push(['Thủng MA200', 'down', 'Vừa rơi xuống dưới trung bình 200 phiên']);
+    if (knStreak >= 5) r.sig.push(['KN gom ' + knStreak + ' phiên', 'up', 'Khối ngoại mua ròng ' + knStreak + ' phiên liên tiếp']);
+    if (knStreak <= -5) r.sig.push(['KN xả ' + -knStreak + ' phiên', 'down', 'Khối ngoại bán ròng ' + -knStreak + ' phiên liên tiếp']);
+    if (volRatio != null && volRatio >= 2) r.sig.push(['KL đột biến x' + fmt(volRatio, 1), 'flat', 'Khối lượng gấp ' + fmt(volRatio, 1) + ' lần trung bình 20 phiên']);
+    return r;
   }).filter(Boolean);
 }
 const TREND = { up: ['▲ Tăng', 'up'], flat: ['● Đi ngang', 'flat'], down: ['▼ Giảm', 'down'] };
@@ -430,10 +523,10 @@ function renderStocks() {
   if (!rows.length) { $('tbl').innerHTML = '<tr><td class="empty">Chưa có số liệu cổ phiếu.</td></tr>'; return; }
   const cols = [
     ['code', 'Mã'], ['last', 'Giá'], ['trend', 'Xu hướng'], ['d1', '1 phiên'], ['w1', '1 tuần'], ['m1', '1 tháng'], ['m3', '3 tháng'], ['y1', '1 năm'],
-    ['kn5', 'Khối ngoại 5 phiên (tỷ)'], ['spark', '3 tháng qua'],
+    ['rsi', 'RSI'], ['kn5', 'Khối ngoại 5 phiên (tỷ)'], ['sig', 'Tín hiệu'], ['spark', '3 tháng qua'],
   ];
   const order = { up: 2, flat: 1, down: 0 };
-  const val = (r, k) => k === 'trend' ? order[r.trend] * 1000 + (r.m1 ?? 0) : k === 'code' ? r.code : r[k];
+  const val = (r, k) => k === 'sig' ? r.sig.length : k === 'trend' ? order[r.trend] * 1000 + (r.m1 ?? 0) : k === 'code' ? r.code : r[k];
   const list = rows.filter(r => filt === 'all' || r.trend === filt).sort((a, b) => {
     const x = val(a, sortKey), y = val(b, sortKey);
     if (x == null) return 1; if (y == null) return -1;
@@ -445,7 +538,9 @@ function renderStocks() {
     <td><b>${r.code}</b><span class="nm">${r.name || ''}</span></td>
     <td>${fmt(r.last, 2)}</td><td><span class="badge ${TREND[r.trend][1]}">${TREND[r.trend][0]}</span></td>
     <td>${pc(r.d1)}</td><td>${pc(r.w1)}</td><td>${pc(r.m1)}</td><td>${pc(r.m3)}</td><td>${pc(r.y1)}</td>
+    <td><span class="${r.rsi >= 70 ? 'down' : r.rsi <= 30 ? 'up' : ''}">${fmt(r.rsi)}</span></td>
     <td><span class="${cls(r.kn5)}">${r.kn5 == null ? '–' : (r.kn5 >= 0 ? 'Mua ' : 'Bán ') + fmt(Math.abs(r.kn5), 1)}</span></td>
+    <td style="text-align:left">${r.sig.map(([t, c, d]) => `<span class="pill ${c}" title="${d}">${t}</span>`).join(' ') || '<span class="flat">–</span>'}</td>
     <td><canvas class="spark" data-c="${r.code}" aria-label="Giá ${r.code} 3 tháng"></canvas></td></tr>`).join('');
   $('tbl').innerHTML = head + '<tbody>' + body + '</tbody>';
   $('tbl').querySelectorAll('th').forEach(th => th.onclick = () => {
@@ -464,6 +559,44 @@ function renderStocks() {
     a.forEach((v, i) => { const x = i / (a.length - 1) * (w - 4) + 2, y = h - 3 - (v - mn) / sp * (h - 6); i ? g.lineTo(x, y) : g.moveTo(x, y); });
     g.stroke();
   });
+}
+
+function renderSignals() {
+  const rows = stockRows();
+  const groups = [
+    ['Quá mua (RSI ≥ 70)', 'Tăng nóng trong 14 phiên, thường dễ có nhịp điều chỉnh.', r => r.rsi >= 70, 'down'],
+    ['Quá bán (RSI ≤ 30)', 'Giảm mạnh trong 14 phiên, thường dễ có nhịp hồi.', r => r.rsi != null && r.rsi <= 30, 'up'],
+    ['Khối ngoại gom', 'Mua ròng từ 5 phiên liên tiếp trở lên.', r => r.knStreak >= 5, 'up'],
+    ['Khối ngoại xả', 'Bán ròng từ 5 phiên liên tiếp trở lên.', r => r.knStreak <= -5, 'down'],
+    ['Trên MA200', 'Giá trên trung bình 200 phiên: xu hướng dài hạn còn tốt.', r => r.ma200 && r.last > r.ma200, 'up'],
+    ['Dưới MA200', 'Giá dưới trung bình 200 phiên: xu hướng dài hạn yếu.', r => r.ma200 && r.last < r.ma200, 'down'],
+    ['Khối lượng đột biến', 'Khối lượng phiên gần nhất gấp 2 lần trung bình 20 phiên trở lên.', r => r.volRatio >= 2, 'flat'],
+  ];
+  $('signals').innerHTML = rows.length ? groups.map(([t, d, f, c]) => {
+    const hit = rows.filter(f);
+    return `<div class="card sig"><div class="sig-h"><b>${t}</b><span class="n ${c}">${hit.length}</span></div>
+      <div class="note">${d}</div>
+      <div>${hit.map(r => `<span class="pill ${c}">${r.code}</span>`).join(' ') || '<span class="flat">Không có mã nào</span>'}</div></div>`;
+  }).join('') : '<div class="empty">Chưa có số liệu cổ phiếu.</div>';
+
+  // VN-Index
+  const v = pts('vnindex').map(([, x]) => x);
+  if (v.length) {
+    const last = v.at(-1), r = rsi(v), m50 = ma(v, 50), m200 = ma(v, 200);
+    const side = (m, name) => m == null ? '' : `<span>${name}: <b class="${cls(last - m)}">${last >= m ? 'trên' : 'dưới'} ${fmt(Math.abs(last / m - 1) * 100, 1)}%</b></span>`;
+    $('vniStats').innerHTML = `<span>RSI: <b class="${r >= 70 ? 'down' : r <= 30 ? 'up' : ''}">${fmt(r)}</b></span>${side(m50, 'So với MA50')}${side(m200, 'So với MA200')}`;
+  }
+}
+function renderPremium(s) {
+  const w = Object.fromEntries(goldWorldVnd());
+  const a = inRange(pts('sjc_ban'), s).filter(([d]) => w[d] != null).map(([d, v]) => [d, v - w[d]]);
+  if (!a.length) { $('goldStats').innerHTML = ''; return; }
+  const vals = a.map(([, v]) => v), avg = vals.reduce((x, y) => x + y, 0) / vals.length;
+  const now = vals.at(-1);
+  const note = now > avg * 1.15 ? 'cao hơn bình thường – mua SJC lúc này chịu chênh lệch lớn' : now < avg * 0.85 ? 'thấp hơn bình thường' : 'gần mức trung bình';
+  $('goldStats').innerHTML = `<span>SJC đắt hơn thế giới: <b>${fmt(now, 1)} tr/lượng</b> (${fmt(now / (w[a.at(-1)[0]]) * 100, 1)}%)</span>
+    <span>Trung bình kỳ: <b>${fmt(avg, 1)}</b> · thấp nhất <b>${fmt(Math.min(...vals), 1)}</b> · cao nhất <b>${fmt(Math.max(...vals), 1)}</b></span>
+    <span>Hiện ${note}</span>`;
 }
 
 function renderBds(s) {
@@ -504,9 +637,14 @@ function render() {
   renderTiles(s); renderCompare(s, e); renderGold(s);
   simple('cVni', 'vnindex', 'VN-Index', 'điểm', css('--s1'), 2);
   simple('cVn30', 'vn30', 'VN30', 'điểm', css('--s1'), 2);
-  renderKn(s); renderStocks();
+  renderKn(s); renderStocks(); renderSignals(); renderPremium(s);
   simple('cUsd', 'usd_vnd', 'USD/VND', 'đ', css('--s4'));
   simple('cBtc', 'btc', 'Bitcoin', 'USD', css('--s5'));
+  simple('cHnx', 'hnx', 'HNX-Index', 'điểm', css('--s1'), 2);
+  simple('cUpcom', 'upcom', 'UPCoM', 'điểm', css('--s1'), 2);
+  simple('cBac', 'bac', 'Bạc', 'USD/oz', css('--s7'), 2);
+  simple('cDau', 'dau', 'Dầu Brent', 'USD/thùng', css('--s2'), 2);
+  simple('cSp', 'sp500', 'S&P 500', 'điểm', css('--s3'));
   renderBds(s); renderLs();
 }
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => render());

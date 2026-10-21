@@ -1,10 +1,10 @@
 # Thống kê kênh đầu tư
 
-Trang web biểu đồ theo ngày cho các kênh: **vàng SJC & thế giới, VN-Index/VN30, khối ngoại mua/bán ròng,
+Trang web biểu đồ theo ngày cho các kênh: **vàng SJC & thế giới, bạc, dầu Brent, S&P 500, VN-Index, VN30, HNX, UPCoM, khối ngoại mua/bán ròng,
 30 cổ phiếu lớn (đang tăng / đi ngang / giảm), USD/VND, Bitcoin, bất động sản, lãi suất tiết kiệm**.
 
 - Xem trang: `https://hiephoangmt-debug.github.io/hoang-hiep-crm/dau-tu/` (sau khi merge vào `main`).
-- Tự cập nhật: workflow **Thống kê đầu tư** chạy 15:45 và 18:30 mỗi ngày, lưu số vào `data/` rồi đăng lại trang.
+- Tự cập nhật: workflow **Thống kê đầu tư** chạy mỗi giờ trong phiên (9:15–15:15, thứ 2–6) và 18:30 hằng ngày, lưu số vào `data/` rồi đăng lại trang.
 - Lần đầu: vào tab **Actions → Thống kê đầu tư → Run workflow** để lấy ngay ~1–2 năm lịch sử
   (riêng giá SJC chỉ có từ ngày bắt đầu chạy).
 

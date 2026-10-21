@@ -2,8 +2,8 @@
 
 Kênh tự động:
   - Vàng SJC (mua/bán, triệu đồng/lượng)          – sjc.com.vn
-  - Vàng thế giới (USD/oz), USD/VND, Bitcoin (USD) – Yahoo Finance
-  - VN-Index, VN30 và ~30 cổ phiếu lớn             – DNSE (dự phòng: VNDirect)
+  - Vàng thế giới (USD/oz), bạc, dầu Brent, S&P 500, USD/VND, Bitcoin – Yahoo Finance
+  - VN-Index, VN30, HNX-Index, UPCoM và ~30 cổ phiếu lớn             – DNSE (dự phòng: VNDirect)
   - Khối ngoại mua/bán ròng toàn sàn HOSE và từng mã lớn – CafeF
 Kênh nhập tay (sửa file CSV trong data/):
   - bds.csv       – giá BĐS theo khu vực (triệu đồng/m²)
@@ -265,10 +265,14 @@ def main():
     series = prices.setdefault("series", {})
     errors = []
 
+    sources = prices.setdefault("sources", {})
+
     def step(name, fn):
         log(f"• {name}")
         try:
             fn()
+            if not name.startswith("Mã "):
+                sources[name] = datetime.now(VN_TZ).isoformat(timespec="minutes")
         except Exception as e:  # noqa: BLE001
             errors.append(f"{name}: {e}")
             log(f"   LỖI: {e}")
@@ -312,8 +316,13 @@ def main():
     step("Vàng thế giới", yahoo("vang_tg", "GC=F"))
     step("USD/VND", usd)
     step("Bitcoin", yahoo("btc", "BTC-USD"))
+    step("Bạc", yahoo("bac", "SI=F"))
+    step("Dầu Brent", yahoo("dau", "BZ=F"))
+    step("S&P 500", yahoo("sp500", "^GSPC"))
     step("VN-Index", index("vnindex", "VNINDEX"))
     step("VN30", index("vn30", "VN30"))
+    step("HNX-Index", index("hnx", "HNX"))
+    step("UPCoM", index("upcom", "UPCOM"))
     step("Khối ngoại HOSE", foreign)
 
     # ---- cổ phiếu lớn

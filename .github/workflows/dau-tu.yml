@@ -1,11 +1,12 @@
 # Lấy giá vàng, chứng khoán, khối ngoại, USD, Bitcoin mỗi ngày cho trang Thống kê đầu tư (dau-tu/).
-# Chạy 15:45 (sau phiên chiều) và 18:30 giờ Việt Nam, rồi đăng lại trang web.
+# Chạy mỗi giờ trong phiên (9:15 → 15:15, thứ 2–6) và 18:30 mỗi ngày (giờ VN), rồi đăng lại trang web.
+# GitHub có thể chạy trễ 5–15 phút so với lịch.
 name: Thống kê đầu tư
 
 on:
   schedule:
-    - cron: '45 8 * * *'
-    - cron: '30 11 * * *'
+    - cron: '15 2-8 * * 1-5'   # 9:15, 10:15 … 15:15 giờ VN
+    - cron: '30 11 * * *'      # 18:30 giờ VN (cả cuối tuần: vàng, Bitcoin…)
   workflow_dispatch:
 
 permissions:
