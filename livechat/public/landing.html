@@ -2,6 +2,42 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
+<script>
+/* ===== Google Ads – Casamia Balanca (gắn sẵn trong trang) =====
+   - Chặn chuyển đổi cũ k61uCK206ZAdEJO0haAD (từng bắn mỗi lần tải trang).
+   - Trang tự gửi chuyển đổi khi gửi form / bấm Gọi-Zalo, không phụ thuộc mã trong Cài đặt LadiPage.
+   Điền nhãn (phần sau dấu "/" trong send_to). Để trống = chưa gửi. */
+(function (w, d) {
+  var ADS_ID = 'AW-872503827';
+  var LABEL = { lead: '', contact: '' };
+  var OLD = 'k61uCK206ZAdEJO0haAD';
+  var dl = w.dataLayer = w.dataLayer || [];
+  function bad(x) {
+    try { return x && x[0] === 'event' && x[1] === 'conversion' && x[2] && String(x[2].send_to || '').indexOf(OLD) > -1; } catch (e) { return false; }
+  }
+  for (var i = dl.length - 1; i >= 0; i--) if (bad(dl[i])) dl.splice(i, 1);
+  var push = dl.push;
+  dl.push = function () {
+    var keep = [];
+    for (var j = 0; j < arguments.length; j++) if (!bad(arguments[j])) keep.push(arguments[j]);
+    return keep.length ? push.apply(dl, keep) : dl.length;
+  };
+  function cmd() { w.dataLayer.push(arguments); }
+  w.casamiaConv = function (kind) {
+    var label = LABEL[kind]; if (!label) return;
+    if (kind === 'contact') {
+      try { if (sessionStorage.getItem('casamia_contact_sent')) return; sessionStorage.setItem('casamia_contact_sent', '1'); } catch (e) {}
+    }
+    cmd('event', 'conversion', { send_to: ADS_ID + '/' + label, value: kind === 'lead' ? 500000 : 100000, currency: 'VND' });
+  };
+  // Chỉ tải thư viện + config nếu trong Cài đặt LadiPage chưa có
+  w.addEventListener('DOMContentLoaded', function () {
+    if (d.querySelector('script[src*="gtag/js?id=' + ADS_ID + '"]')) return;
+    var s = d.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ADS_ID; d.head.appendChild(s);
+    cmd('js', new Date()); cmd('config', ADS_ID);
+  });
+})(window, document);
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Casamia Balanca Hội An – Biệt thự compound rừng dừa, 363 căn</title>
 <meta name="description" content="Casamia Balanca Hội An: 363 biệt thự compound giữa 31,1 ha rừng dừa, sổ lâu dài, ~10 phút ra phố cổ. Ưu đãi tháng 10/2026: cọc 300 triệu, vay 70% lãi 0%.">
@@ -1611,6 +1647,7 @@ const API_BASE = '';
     const m = /zalo/.test(a.className + a.getAttribute('href')) ? 'zalo' : 'call';
     if (window.fbq) fbq('track', 'Contact', { method: m });
     if (window.gtag) gtag('event', 'contact', { method: m });
+    if (window.casamiaConv) casamiaConv('contact');
   });
 
   // Mã khách dùng chung với khung chat để gộp đăng ký + hội thoại
@@ -1699,6 +1736,7 @@ const API_BASE = '';
       window.dispatchEvent(new CustomEvent('casamia:lead', { detail: { name: data.name || '', phone: String(data.phone || '').replace(/[\s.-]/g, '') } }));
       if (window.fbq) fbq('track', 'Lead');
       if (window.gtag) gtag('event', 'generate_lead');
+      if (window.casamiaConv) casamiaConv('lead');
       const name = (data.name || '').trim();
       form.innerHTML = `<div class="done"><div class="big">🎉</div><h3>Em đã nhận thông tin${name ? ' của ' + name.replace(/[<>&"]/g, '') : ''}!</h3>
         <p>Em sẽ gửi tài liệu qua Zalo trong ít phút. Để nhận nhanh hơn, anh/chị kết bạn Zalo với em nhé.</p>

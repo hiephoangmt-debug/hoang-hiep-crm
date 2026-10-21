@@ -2,6 +2,42 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
+<script>
+/* ===== Google Ads – Casamia Balanca (gắn sẵn trong trang) =====
+   - Chặn chuyển đổi cũ k61uCK206ZAdEJO0haAD (từng bắn mỗi lần tải trang).
+   - Trang tự gửi chuyển đổi khi gửi form / bấm Gọi-Zalo, không phụ thuộc mã trong Cài đặt LadiPage.
+   Điền nhãn (phần sau dấu "/" trong send_to). Để trống = chưa gửi. */
+(function (w, d) {
+  var ADS_ID = 'AW-872503827';
+  var LABEL = { lead: '', contact: '' };
+  var OLD = 'k61uCK206ZAdEJO0haAD';
+  var dl = w.dataLayer = w.dataLayer || [];
+  function bad(x) {
+    try { return x && x[0] === 'event' && x[1] === 'conversion' && x[2] && String(x[2].send_to || '').indexOf(OLD) > -1; } catch (e) { return false; }
+  }
+  for (var i = dl.length - 1; i >= 0; i--) if (bad(dl[i])) dl.splice(i, 1);
+  var push = dl.push;
+  dl.push = function () {
+    var keep = [];
+    for (var j = 0; j < arguments.length; j++) if (!bad(arguments[j])) keep.push(arguments[j]);
+    return keep.length ? push.apply(dl, keep) : dl.length;
+  };
+  function cmd() { w.dataLayer.push(arguments); }
+  w.casamiaConv = function (kind) {
+    var label = LABEL[kind]; if (!label) return;
+    if (kind === 'contact') {
+      try { if (sessionStorage.getItem('casamia_contact_sent')) return; sessionStorage.setItem('casamia_contact_sent', '1'); } catch (e) {}
+    }
+    cmd('event', 'conversion', { send_to: ADS_ID + '/' + label, value: kind === 'lead' ? 500000 : 100000, currency: 'VND' });
+  };
+  // Chỉ tải thư viện + config nếu trong Cài đặt LadiPage chưa có
+  w.addEventListener('DOMContentLoaded', function () {
+    if (d.querySelector('script[src*="gtag/js?id=' + ADS_ID + '"]')) return;
+    var s = d.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ADS_ID; d.head.appendChild(s);
+    cmd('js', new Date()); cmd('config', ADS_ID);
+  });
+})(window, document);
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Casamia Balanca Hội An – Nhà ở sinh thái, nhà vườn & biệt thự Hội An</title>
 <meta name="description" content="Casamia Balanca Hội An: nhà vườn Park Home, biệt thự bên sông Cổ Cò để an cư – sổ hồng lâu dài, trường mầm non quốc tế, Clubhouse, 10 phút tới phố cổ. Vay 70%, 0% lãi 24 tháng.">
@@ -839,7 +875,7 @@ if(k==='hn'||k==='dn')document.documentElement.setAttribute('data-kv',k);}catch(
   $$('.kv-tabs button').forEach(function(b){b.addEventListener('click',function(){kvShow(b.getAttribute('data-k'))})});
   if(KV){var u0=st.get('cm_utm')||'';if(!/kv=/.test(u0))st.set('cm_utm',(u0?u0+'&':'')+'kv='+KV);}
   // Đo lượt bấm Gọi / Zalo cho quảng cáo
-  document.addEventListener('click',function(e){var a=e.target.closest('a[href^="tel:"],a[href*="zalo.me"]');if(!a)return;var m=/zalo/.test(a.getAttribute('href'))?'zalo':'call';if(window.gtag)gtag('event','contact',{method:m});if(window.fbq)fbq('track','Contact',{method:m});});
+  document.addEventListener('click',function(e){var a=e.target.closest('a[href^="tel:"],a[href*="zalo.me"]');if(!a)return;var m=/zalo/.test(a.getAttribute('href'))?'zalo':'call';if(window.gtag)gtag('event','contact',{method:m});if(window.casamiaConv)casamiaConv('contact');if(window.fbq)fbq('track','Contact',{method:m});});
   // modal
   var modal=$('#modal');
   function openM(t,need){$('#mt').innerHTML=t||'Nhận bảng giá &amp; căn đẹp';var f=$('form',modal);if(f.need)f.need.value=need||'';modal.hidden=false;if(window.gtag)gtag('event','open_lead_form');setTimeout(function(){if(innerWidth>860)$('input[name=phone]',modal).focus()},60);}
@@ -856,7 +892,7 @@ if(k==='hn'||k==='dn')document.documentElement.setAttribute('data-kv',k);}catch(
     var body={type:'lead',v:vid,name:d.name||'',phone:String(d.phone).trim(),need:[d.need,d.muc_dich,d.ngan_sach].filter(Boolean).join(' · '),form:(f.getAttribute('data-form')||'Trang chủ')+(KV==='hn'?' · Khách Hà Nội/xa':KV==='dn'?' · Khách Hội An–ĐN':''),page:location.href,referrer:document.referrer,utm:st.get('cm_utm')||''};
     fetch(GAS,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}).then(function(r){return r.json()}).then(function(res){
       if(res&&res.ok===false)throw new Error(res.error||'');
-      st.set(KEY,'1');if(window.gtag)gtag('event','generate_lead');if(window.fbq)fbq('track','Lead');
+      st.set(KEY,'1');if(window.gtag)gtag('event','generate_lead');if(window.casamiaConv)casamiaConv('lead');if(window.fbq)fbq('track','Lead');
       var n=(d.name||'').replace(/[<>&"]/g,'').trim();
       f.innerHTML=f.classList.contains('ic-f')?'<p class="ok1">✓ Em đã nhận số'+(n?' của '+n:'')+', sẽ nhắn Zalo ngay ạ.</p>':'<div class="done"><div class="big">🌿</div><h3>Em đã nhận thông tin'+(n?' của '+n:'')+'!</h3><p>Em gửi tài liệu qua Zalo trong ít phút. Cần gấp, anh/chị gọi <a href="tel:0904567009"><b>0904 567 009</b></a> nhé.</p></div>';
     }).catch(function(x){btn.disabled=false;btn.textContent=lb;err.textContent=(x&&x.message)?x.message:'Gửi chưa được, anh/chị thử lại hoặc nhắn Zalo 0904 567 009 giúp em.';});
