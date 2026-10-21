@@ -88,7 +88,6 @@ function hh_dataset_dat_nen_dien_ngoc( $projects ) {
 <p>Lô gần ĐH FPT hợp với người mua xây nhà cho thuê sinh viên, giảng viên, chuyên gia hoặc kinh doanh dịch vụ; lô đường lớn hợp làm văn phòng, cửa hàng. Cần kiểm tra kỹ sổ đỏ, chỉ giới xây dựng và quy hoạch từng lô trước khi giao dịch.</p>' . hh_dien_ngoc_links( 'khu-do-thi-1a-1b-dien-ngoc' ),
 		'sources' => array(
 			'https://batdongsan.com.vn/ban-dat-nen-du-an-khu-do-thi-so-1a',
-			'https://baodangland.vn/khu-do-thi-1b-dien-ngoc/',
 			'https://ngocphatland.com/dat-dien-ngoc/khu-do-thi-1b-dien-ngoc/',
 			'https://san43.com/nha-dat-ban-prj-khu-do-thi-1b-tai-thi-xa-dien-ban.html',
 			'https://dantri.com.vn/nha-dat/khu-do-thi-moi-dien-nam-dien-ngoc-dong-luc-cat-canh-cua-do-thi-mien-trung-20170329110908935.htm',
@@ -146,7 +145,6 @@ function hh_dataset_dat_nen_dien_ngoc( $projects ) {
 			'https://batdongsan.com.vn/ban-dat-nen-du-an-khu-do-thi-so-3-dien-nam-dien-ngoc',
 			'https://ngocphatland.com/khu-do-thi-so-3-dien-ngoc/1-500-khu-do-thi-so-3-dien-ngoc/',
 			'https://san43.com/ban-dat-prj-khu-do-thi-so-3-tai-thi-xa-dien-ban.html',
-			'https://baodangland.vn/khu-do-thi-so-3-dien-ngoc/',
 		),
 	);
 
@@ -254,7 +252,6 @@ function hh_dataset_dat_nen_dien_ngoc( $projects ) {
 			'https://batdongsan.com.vn/ban-dat-nen-du-an-khu-do-thi-so-9-dien-nam-dien-ngoc',
 			'https://reatimes.vn/ky-1-gan-20-nam-du-anvan-chua-nghiem-thu-ban-giao-202201224000013792.htm',
 			'https://tuoitrethudo.vn/quang-nam-nguoi-dan-song-do-chet-do-canh-du-an-khu-do-thi-so-9-tai-phuong-dien-ngoc-158726.html',
-			'https://baodangland.vn/khu-do-thi-so-9/',
 			'https://alonhadat.com.vn/nha-dat/can-ban/dat-tho-cu-dat-o/phuong-dien-ngoc-thi-xa-dien-ban-px7706.html',
 		),
 	);

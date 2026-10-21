@@ -76,7 +76,7 @@ HTML
 				array( 'Studio Sun Saphia Residence giá bao nhiêu?', 'Ước tính theo giá tin rao, studio 30 – 31 m² khoảng 1,9 – 2,6 tỷ; giá thật phụ thuộc tầng, view và chính sách khi mở bán.' ),
 			),
 		),
-		'sources'  => array( 'https://baodangland.vn/sun-saphia-residence/' ),
+		'sources'  => array(),
 	);
 
 	/* ---------------- 23/10 – Mặt bằng ---------------- */
@@ -244,7 +244,7 @@ HTML
 				array( 'Sun Saphia Residence có sổ hồng không?', 'Căn hộ có thời hạn vẫn được cấp giấy chứng nhận, ghi thời hạn theo dự án. Hình thức cụ thể chờ hồ sơ pháp lý chính thức.' ),
 			),
 		),
-		'sources'  => array( 'https://baodangland.vn/sun-saphia-residence/' ),
+		'sources'  => array(),
 	);
 
 	/* ---------------- 26/10 – Đầu tư cho thuê ---------------- */
