@@ -93,12 +93,18 @@
   const routes = C.events.filter(e => e.type === 'route');
   routes.forEach((r, i) => {
     r._id = 'route' + i;
-    r._line = arc(r.from, r.to, r.bend ?? .25);
+    r._line = r.coords ? turf.lineString(r.coords) : arc(r.from, r.to, r.bend ?? .25);
+    if (r.coords) { r.from = r.coords[0]; r.to = r.coords[r.coords.length - 1]; }
     r._len = turf.length(r._line);
     map.addSource(r._id, { type: 'geojson', data: turf.lineString([r.from, r.from]), lineMetrics: true });
-    map.addLayer({ id: r._id + '-glow', type: 'line', source: r._id, layout: { 'line-cap': 'round' }, paint: { 'line-color': P.orange, 'line-width': 26, 'line-blur': 18, 'line-opacity': 0 } });
-    map.addLayer({ id: r._id, type: 'line', source: r._id, layout: { 'line-cap': 'round' },
-      paint: { 'line-width': 7, 'line-opacity': 0, 'line-gradient': ['interpolate', ['linear'], ['line-progress'], 0, 'rgba(255,255,255,0.15)', .55, P.orange300, 1, '#FFFFFF'] } });
+    const rc = r.color || P.orange;
+    map.addLayer({ id: r._id + '-glow', type: 'line', source: r._id, layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': rc, 'line-width': r.glowW || 26, 'line-blur': 18, 'line-opacity': 0 } });
+    if (r.dash) map.addLayer({ id: r._id, type: 'line', source: r._id, layout: { 'line-cap': 'butt', 'line-join': 'round' },
+      paint: { 'line-width': r.width || 6, 'line-opacity': 0, 'line-color': rc, 'line-dasharray': [2, 1.6] } });
+    else if (r.solid) map.addLayer({ id: r._id, type: 'line', source: r._id, layout: { 'line-cap': 'round', 'line-join': 'round' },
+      paint: { 'line-width': r.width || 7, 'line-opacity': 0, 'line-color': rc } });
+    else map.addLayer({ id: r._id, type: 'line', source: r._id, layout: { 'line-cap': 'round' },
+      paint: { 'line-width': r.width || 7, 'line-opacity': 0, 'line-gradient': ['interpolate', ['linear'], ['line-progress'], 0, 'rgba(255,255,255,0.15)', .55, P.orange300, 1, '#FFFFFF'] } });
   });
 
   // Tòa nhà 3D (bỏ các tòa nhà nằm trong ranh giới dự án)
@@ -136,6 +142,10 @@
     mountain: '<path d="M2 20l7-12 4 6 3-4 6 10H2z" fill="#fff"/>',
     plane: '<path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" fill="#fff"/>',
     city: '<path d="M3 21V9l6-3v3l6-3v15H3zm14 0V10h4v11h-4zM6 12v2h2v-2H6zm4 0v2h2v-2h-2zm-4 4v2h2v-2H6zm4 0v2h2v-2h-2z" fill="#fff"/>',
+    bed: '<path d="M3 18V6h2v7h6V8h7a3 3 0 0 1 3 3v7h-2v-2H5v2H3zm4-6a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" fill="#fff"/>',
+    camera: '<path d="M9 4h6l1.5 2H20a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3.5L9 4zm3 4a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9z" fill="#fff"/>',
+    train: '<path d="M7 3h10a3 3 0 0 1 3 3v9a3 3 0 0 1-2 2.8l1.5 2.2h-2.4L16 18H8l-1.1 2H4.5L6 17.8A3 3 0 0 1 4 15V6a3 3 0 0 1 3-3zm-1 4v4h12V7H6zm2 7.5a1.5 1.5 0 1 0 0 .01zm8 0a1.5 1.5 0 1 0 0 .01z" fill="#fff"/>',
+    bridge: '<path d="M2 17h20v2H2zm2-2v-4a8 8 0 0 1 16 0v4h-2v-4a6 6 0 0 0-12 0v4z" fill="#fff"/>',
     tree: '<path d="M12 2l6 8h-3l4 6h-5v6h-4v-6H5l4-6H6z" fill="#fff"/>',
     star: '<path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z" fill="#fff"/>',
   };
@@ -144,7 +154,7 @@
   C.events.forEach(e => {
     if (e.type === 'poi') {
       const sub = e.sub ?? (e.showDist === false ? '' : '≈ ' + fmtKm(turf.distance(projCenter, e.at)));
-      e._el = el(`<div class="beam"></div><div class="dot"></div><div class="card"><div class="ico"><svg viewBox="0 0 24 24">${ICONS[e.icon || 'star']}</svg></div><div><div class="t1">${e.name}</div>${sub ? `<div class="t2">${sub}</div>` : ''}</div></div>`, 'poi');
+      e._el = el(`<div class="beam"></div><div class="dot"></div><div class="card${e.small ? ' sm' : ''}"><div class="ico"><svg viewBox="0 0 24 24">${ICONS[e.icon || 'star']}</svg></div><div><div class="t1">${e.name}</div>${sub ? `<div class="t2">${sub}</div>` : ''}</div></div>`, 'poi');
     } else if (e.type === 'pin') {
       e._el = el(`<div class="ring"></div><svg viewBox="0 0 92 120"><defs><linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB547"/><stop offset="1" stop-color="#FF7A1A"/></linearGradient></defs><path d="M46 118C46 118 6 70 6 44a40 40 0 0 1 80 0c0 26-40 74-40 74z" fill="url(#pg)" stroke="#fff" stroke-width="5"/><circle cx="46" cy="44" r="15" fill="#fff"/></svg>`, 'pin');
     } else if (e.type === 'dist') {

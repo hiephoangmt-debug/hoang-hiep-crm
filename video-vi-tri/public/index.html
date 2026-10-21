@@ -91,6 +91,16 @@
   #end .logo img { width: 170px; height: 170px; border-radius: 40px; display: block; }
   #end .brand { margin-top: 64px; height: 155px; display: flex; align-items: center; justify-content: center; }
   #end .brand img { height: 128px; display: block; filter: drop-shadow(0 6px 24px rgba(0,0,0,.45)); }
+  .poi .card.sm { padding: 8px 16px 8px 9px; gap: 10px; border-radius: 12px; border-width: 1.5px; }
+  .poi .card.sm .ico { width: 32px; height: 32px; border-radius: 9px; }
+  .poi .card.sm .ico svg { width: 20px; height: 20px; }
+  .poi .card.sm .t1 { font-size: 23px; }
+  .poi .card.sm .t2 { font-size: 18px; }
+  .title .panel { display: inline-block; padding: 26px 40px 30px; border-radius: 26px; background: linear-gradient(180deg, rgba(8,22,46,.82), rgba(4,12,29,.82));
+    border: 1.5px solid rgba(255,122,26,.55); box-shadow: 0 20px 60px rgba(0,0,0,.45); }
+  .h2 { font-weight: 900; font-size: 76px; line-height: 1.04; letter-spacing: -.5px; }
+  .h2 em { font-style: normal; color: var(--orange); }
+  .big3 { font-weight: 900; font-size: 210px; line-height: .9; color: var(--orange); text-shadow: 0 0 50px rgba(255,122,26,.5); }
   .credit { position: absolute; right: 22px; bottom: 16px; color: rgba(255,255,255,.35); font-size: 16px; font-weight: 500; }
 </style>
 </head>
@@ -107,7 +117,7 @@
 </div>
 <script src="lib/maplibre-gl.js"></script>
 <script src="lib/turf.min.js"></script>
-<script src="config.js"></script>
+<script>document.write('<script src="' + (new URLSearchParams(location.search).get('cfg') || 'config.js') + '"><\/script>');</script>
 <script src="engine.js"></script>
 </body>
 </html>

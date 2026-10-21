@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Lớp thương hiệu (video 2)</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+  html, body { margin: 0; background: transparent; overflow: hidden; }
+  canvas { display: block; position: absolute; left: 0; top: 0; }
+  /* vệt sáng chỉ chạy trên nét chữ logo (dùng logo làm mặt nạ) */
+  .shine { position: absolute; opacity: 0;
+    -webkit-mask: url(tatiland.png) center / 100% 100% no-repeat; mask: url(tatiland.png) center / 100% 100% no-repeat;
+    background: linear-gradient(105deg, rgba(255,255,255,0) 40%, rgba(255,255,255,.95) 50%, rgba(255,255,255,0) 60%) no-repeat;
+    background-size: 300% 100%; }
+  .webshine { position: absolute; left: 292.95px; top: 1299.09px; width: 494.09px; height: 43px; white-space: nowrap; opacity: 0;
+    font: 700 34px 'Be Vietnam Pro', sans-serif; letter-spacing: 1px; color: transparent;
+    background: linear-gradient(100deg, rgba(255,190,90,0) 42%, #FFD08A 50%, rgba(255,190,90,0) 58%) no-repeat; background-size: 300% 100%;
+    -webkit-background-clip: text; background-clip: text; filter: drop-shadow(0 0 8px rgba(255,150,40,.7)); }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<div class="shine" id="shA"></div><div class="shine" id="shB"></div><div class="webshine">sun-saphia-residence.com</div>
+<script>
+// Lớp phủ thương hiệu TATILAND COLLECTION, khung hình theo video chính (30 fps):
+//  - logo nhỏ cuối màn hình ở các cảnh bản đồ (thay dải hotline cũ)
+//  - logo trắng mờ giữa khung hình làm watermark chống sao chép
+//  - vệt sáng lướt qua chữ logo + dòng website ở cảnh kết
+const AR = 464 / 1881;                                     // tỉ lệ cao/rộng của logo
+const BOTTOM = { w: 340, cx: 540, top: 1742, from: 30, to: 1640 };
+const END = { x: 280.55, y: 1127.59, w: 518.89, h: 128 };  // vị trí logo trong cảnh kết (đo từ trang chính)
+const WM = { w: 560, cy: 960, alpha: 0.12 };
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ctx = document.getElementById('c').getContext('2d');
+const logo = new Image(), white = new Image();
+let n = 0; const done = () => { if (++n === 2) document.fonts.load('700 34px "Be Vietnam Pro"').then(() => { window.READY = true; }); };
+logo.onload = done; white.onload = done; logo.src = 'tatiland.png'; white.src = 'tatiland_white.png';
+const place = (el, x, y, w, h) => Object.assign(el.style, { left: x + 'px', top: y + 'px', width: w + 'px', height: h + 'px' });
+const shA = document.getElementById('shA'), shB = document.getElementById('shB'), web = document.querySelector('.webshine');
+place(shA, BOTTOM.cx - BOTTOM.w / 2, BOTTOM.top, BOTTOM.w, BOTTOM.w * AR);
+place(shB, END.x, END.y, END.w, END.h);
+
+window.renderSig = f => {
+  ctx.clearRect(0, 0, 1080, 1920);
+  // watermark: logo trắng mờ giữa hình (đậm hơn chút trên ảnh phối cảnh sáng)
+  const photo = 0, endFade = 1;                  // cảnh kết đã có logo thật, ẩn watermark
+  ctx.save();
+  ctx.globalAlpha = (WM.alpha + photo * 0.08) * clamp((f - 20) / 20) * endFade;
+  ctx.shadowColor = 'rgba(0,10,30,.6)'; ctx.shadowBlur = 6;
+  ctx.drawImage(white, 540 - WM.w / 2, WM.cy - WM.w * AR / 2, WM.w, WM.w * AR);
+  ctx.restore();
+  // logo nhỏ cuối màn hình ở cảnh bản đồ
+  const vb = Math.min(clamp((f - BOTTOM.from) / 18), clamp((BOTTOM.to - f) / 14));
+  if (vb > 0) {
+    const rise = (1 - (1 - Math.pow(1 - clamp((f - BOTTOM.from) / 24), 5))) * 30;
+    ctx.save(); ctx.globalAlpha = vb;
+    ctx.shadowColor = 'rgba(2,8,22,.9)'; ctx.shadowBlur = 16; ctx.shadowOffsetY = 3;
+    ctx.drawImage(logo, BOTTOM.cx - BOTTOM.w / 2, BOTTOM.top + rise, BOTTOM.w, BOTTOM.w * AR);
+    ctx.restore();
+  }
+  // vệt sáng qua logo cuối màn hình, mỗi 5 giây
+  if (f >= 120 && f < 1600) {
+    const t = clamp(((f - 120) % 150) / 34);
+    shA.style.opacity = t > 0 && t < 1 ? vb : 0; shA.style.backgroundPosition = `${(100 - t * 100).toFixed(1)}% 0`;
+  } else shA.style.opacity = 0;
+  // cảnh kết: vệt sáng qua logo lớn + dòng website, mỗi 2,2 giây
+  if (false) {
+    const t = (f - 1700) % 66, live = clamp((1800 - f) / 6);
+    const p = clamp(t / 34), wp = clamp((t - 10) / 34);
+    shB.style.opacity = (p > 0 && p < 1 ? 1 : 0) * live; shB.style.backgroundPosition = `${(100 - p * 100).toFixed(1)}% 0`;
+    web.style.opacity = (wp > 0 && wp < 1 ? 1 : 0) * live; web.style.backgroundPosition = `${(100 - wp * 100).toFixed(1)}% 0`;
+  } else { shB.style.opacity = 0; web.style.opacity = 0; }
+  return true;
+};
+</script>
+</body>
+</html>
