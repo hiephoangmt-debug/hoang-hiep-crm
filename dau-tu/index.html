@@ -49,6 +49,17 @@ header h1 { font-size: 24px; margin: 0 0 2px; }
 .fresh b { color: var(--ink); }
 .fresh .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--up); flex: none; }
 .fresh.old .dot { background: #fab219; }
+.nav { flex-basis: 100%; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
+.nav::-webkit-scrollbar { display: none; }
+.nav a { flex: none; text-decoration: none; color: var(--ink-2); font-size: 14px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); white-space: nowrap; }
+.nav a:hover { color: var(--ink); }
+.nav a[aria-current="true"] { background: var(--ink); color: var(--page); border-color: var(--ink); font-weight: 600; }
+.nav a:focus-visible, .seg button:focus-visible, th:focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; }
+section { scroll-margin-top: calc(var(--stick, 150px) + 8px); }
+@media (max-width: 480px) {
+  .fresh { font-size: 13px; } .fresh .next, .range-label { display: none; }
+  .toolbar { gap: 6px; padding: 6px 0; } .nav a { font-size: 13px; padding: 5px 10px; }
+}
 .range-label { color: var(--muted); font-size: 13px; margin-left: auto; }
 h2 { font-size: 18px; margin: 32px 0 4px; }
 .note { color: var(--ink-2); font-size: 13px; margin: 0 0 12px; }
@@ -107,25 +118,26 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
       <button data-m="0">Tất cả</button>
     </div>
     <span class="range-label" id="rangeLabel"></span>
+    <nav class="nav" id="nav" aria-label="Chọn mục"><a href="#tong-quan">Tổng quan</a><a href="#so-sanh">So sánh</a><a href="#vang">Vàng</a><a href="#chung-khoan">Chứng khoán</a><a href="#khoi-ngoai">Khối ngoại</a><a href="#co-phieu">Cổ phiếu lớn</a><a href="#tin-hieu">Tín hiệu</a><a href="#the-gioi">Tỷ giá & thế giới</a><a href="#bds">Bất động sản</a><a href="#lai-suat">Lãi suất</a></nav>
   </div>
 
-  <section>
+  <section id="tong-quan">
     <div class="tiles" id="tiles"></div>
   </section>
 
-  <section>
+  <section id="so-sanh">
     <h2>So sánh hiệu suất các kênh</h2>
     <p class="note">Mỗi kênh quy về 100 ở đầu kỳ: đường ở 110 nghĩa là lãi 10% so với đầu kỳ. Bấm tên trong chú thích để ẩn/hiện.</p>
     <div class="card"><div class="chart"><canvas id="cCompare"></canvas></div></div>
   </section>
 
-  <section>
+  <section id="vang">
     <h2>Vàng</h2>
     <p class="note">Giá SJC mua/bán và giá vàng thế giới quy đổi ra triệu đồng/lượng (theo tỷ giá USD/VND cùng ngày) – khoảng cách giữa hai đường là chênh lệch SJC so với thế giới.</p>
     <div class="card"><div class="stats" id="goldStats"></div><div class="chart"><canvas id="cGold"></canvas></div></div>
   </section>
 
-  <section>
+  <section id="chung-khoan">
     <h2>Chứng khoán</h2>
     <div class="grid2">
       <div class="card"><h3>VN-Index</h3><div class="stats" id="vniStats"></div><div class="chart sm"><canvas id="cVni"></canvas></div></div>
@@ -135,7 +147,7 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
     </div>
   </section>
 
-  <section>
+  <section id="khoi-ngoai">
     <h2>Khối ngoại mua / bán ròng (sàn HOSE)</h2>
     <p class="note">Cột xanh là mua ròng, cột đỏ là bán ròng, đơn vị tỷ đồng.</p>
     <div class="card">
@@ -144,20 +156,20 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
     </div>
   </section>
 
-  <section>
+  <section id="co-phieu">
     <h2>Cổ phiếu lớn: mã nào đang tăng, đi ngang, giảm</h2>
     <p class="note">Xu hướng tính theo 20 phiên gần nhất: <b>Tăng</b> khi giá tăng từ 3% trở lên và đang nằm trên đường trung bình 20 phiên; <b>Giảm</b> khi giảm từ 3% trở lên và nằm dưới trung bình 20 phiên; còn lại là <b>Đi ngang</b>. Bấm tiêu đề cột để sắp xếp. Giá: nghìn đồng.</p>
     <div class="counts" id="counts"></div>
     <div class="card tbl-wrap"><table id="tbl"></table></div>
   </section>
 
-  <section>
+  <section id="tin-hieu">
     <h2>Tín hiệu tham khảo</h2>
     <p class="note">Các chỉ báo kỹ thuật phổ biến, tính từ giá và khối ngoại đã qua. Đây là dữ kiện để cân nhắc, <b>không phải dự đoán</b>: không chỉ báo nào cho biết chắc giá sẽ lên hay xuống.</p>
     <div class="sigs" id="signals"></div>
   </section>
 
-  <section>
+  <section id="the-gioi">
     <h2>Tỷ giá, tiền số và thế giới</h2>
     <div class="grid2">
       <div class="card"><h3>USD/VND</h3><div class="chart sm"><canvas id="cUsd"></canvas></div></div>
@@ -168,15 +180,15 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
     </div>
   </section>
 
-  <section>
+  <section id="bds">
     <h2>Bất động sản <span id="bdsSample"></span></h2>
-    <p class="note">Nhập tay trong file <code>dau-tu/data/bds.csv</code> (ngày, khu vực, giá triệu đồng/m²).</p>
+    <p class="note">Giá <b>rao bán</b> trung bình (triệu đồng/m²) theo quý, từ báo cáo thị trường của Batdongsan.com.vn – không phải giá giao dịch thật hay bảng giá nhà nước. Một số mốc quý II được tính ngược từ % thay đổi trong báo cáo (chạm vào điểm để xem ghi chú). Số liệu nhập tay trong <code>dau-tu/data/bds.csv</code>; biểu đồ luôn hiện toàn bộ các quý.</p>
     <div class="card"><div class="chart"><canvas id="cBds"></canvas></div></div>
   </section>
 
-  <section>
+  <section id="lai-suat">
     <h2>Lãi suất tiết kiệm <span id="lsSample"></span></h2>
-    <p class="note">Nhập tay trong file <code>dau-tu/data/lai_suat.csv</code>. Đường “Tiết kiệm” trong biểu đồ so sánh dùng lãi suất kỳ hạn 12 tháng trung bình.</p>
+    <p class="note">Nhập tay trong file <code>dau-tu/data/lai_suat.csv</code>. Đường “Tiết kiệm” trong biểu đồ so sánh dùng lãi suất kỳ hạn 12 tháng <b>tại quầy</b> trung bình các ngân hàng. Lãi suất thay đổi thường xuyên – kiểm tra lại với ngân hàng trước khi gửi.</p>
     <div class="card tbl-wrap"><table id="tblLs"></table></div>
   </section>
 
@@ -240,7 +252,7 @@ Promise.all([j('data/prices.json'), j('data/stocks.json'), t('data/bds.csv'), t(
       ? 'Vàng, chứng khoán, khối ngoại, tỷ giá, hàng hoá, bất động sản – biểu đồ theo ngày.'
       : 'Chưa có số liệu – chạy workflow “Thống kê đầu tư” trên GitHub Actions để lấy lần đầu.';
     if (P.errors && P.errors.length) $('errs').textContent = 'Nguồn lỗi lần cập nhật gần nhất: ' + P.errors.join(' · ');
-    initRange(); render(); fresh(); setInterval(fresh, 30000);
+    initRange(); render(); fresh(); setInterval(fresh, 30000); initNav();
   });
 
 // Thanh "cập nhật lúc…" luôn ghim ở đầu trang
@@ -264,7 +276,7 @@ function fresh() {
   const ago = mins < 1 ? 'vừa xong' : mins < 60 ? `${mins} phút trước` : mins < 1440 ? `${Math.floor(mins / 60)} giờ ${mins % 60} phút trước` : `${Math.floor(mins / 1440)} ngày trước`;
   const v = vnParts(u), hm = (x) => `${String(x.h).padStart(2, '0')}:${String(x.m).padStart(2, '0')}`;
   const n = nextRun(now), nv = n && vnParts(n);
-  $('freshTxt').innerHTML = `Cập nhật <b>${hm(v)} ngày ${v.date}</b> (${ago})${intraday(P.updated)}${nv ? ` · lần tới khoảng ${hm(nv)}${nv.date !== vnParts(now).date ? ' ngày ' + nv.date : ''}` : ''}`;
+  $('freshTxt').innerHTML = `Cập nhật <b>${hm(v)} ${v.date}</b> (${ago})${intraday(P.updated)}${nv ? `<span class="next"> · lần tới ~${hm(nv)}${nv.date !== vnParts(now).date ? ' ngày ' + nv.date : ''}</span>` : ''}`;
   $('fresh').classList.toggle('old', mins > 26 * 60);
 }
 
@@ -273,7 +285,7 @@ function intraday(iso) {
   const p = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Ho_Chi_Minh', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date(iso));
   const g = (t) => p.find(x => x.type === t)?.value;
   const hm = +g('hour') * 60 + +g('minute');
-  return !['Sat', 'Sun'].includes(g('weekday')) && hm >= 540 && hm < 900 ? ' · <b>đang trong phiên, giá hôm nay là tạm tính</b>' : '';
+  return !['Sat', 'Sun'].includes(g('weekday')) && hm >= 540 && hm < 900 ? ' · <b>trong phiên, giá tạm tính</b>' : '';
 }
 
 // ---------- tiện ích chuỗi thời gian
@@ -298,13 +310,18 @@ function goldWorldVnd() {
   if (!u.length) return [];
   return g.map(([d, v]) => { const r = at(u, d) ?? u[0][1]; return [d, v * r * LUONG_PER_OZ / 1e6]; });
 }
+// Chuỗi BĐS dùng cho ô tổng quan và biểu đồ so sánh: khu vực có nhiều mốc số liệu nhất
+function bdsMainName() {
+  const cnt = {};
+  BDS.forEach(r => cnt[r.khu_vuc] = (cnt[r.khu_vuc] || 0) + 1);
+  return Object.keys(cnt).reduce((a, b) => cnt[b] > (cnt[a] || 0) ? b : a, null);
+}
 function bdsAvg() {
-  const by = {};
-  BDS.forEach(r => (by[r.ngay] = by[r.ngay] || []).push(r.gia_m2));
-  return Object.keys(by).sort().map(d => [d, by[d].reduce((a, b) => a + b, 0) / by[d].length]);
+  const name = bdsMainName();
+  return BDS.filter(r => r.khu_vuc === name).sort((a, b) => a.ngay < b.ngay ? -1 : 1).map(r => [r.ngay, r.gia_m2]);
 }
 function savingsIndex(s, e) {
-  const rates = LS.filter(r => r.ky_han_thang === 12);
+  const rates = LS.filter(r => r.ky_han_thang === 12 && !/online/i.test(r.hinh_thuc || ''));
   const use = rates.length ? rates : LS;
   if (!use.length) return [];
   const by = {}; use.forEach(r => (by[r.ngay] = by[r.ngay] || []).push(r.lai_suat));
@@ -379,7 +396,7 @@ function simple(id, key, label, unit, color, dec = 0) {
 function change(arr, s) {
   if (!arr.length) return {};
   const last = arr.at(-1)[1], prev = arr.length > 1 ? arr.at(-2)[1] : null;
-  const base = at(arr, s) ?? arr.find(([d]) => d >= s)?.[1];
+  const base = arr.length > 1 ? (at(arr, s) ?? arr.find(([d]) => d >= s)?.[1]) : null;
   return { last, d1: prev ? (last / prev - 1) * 100 : null, rng: base ? (last / base - 1) * 100 : null, date: arr.at(-1)[0] };
 }
 
@@ -396,7 +413,7 @@ function renderTiles(s) {
     ['Bạc', pts('bac'), 'USD/oz', 2],
     ['Dầu Brent', pts('dau'), 'USD/thùng', 2],
     ['S&P 500 (Mỹ)', pts('sp500'), 'điểm', 0],
-    ['BĐS (TB khu vực)', bdsAvg(), 'tr/m²', 1],
+    [bdsMainName() || 'Bất động sản', bdsAvg(), 'tr/m²', 0],
   ];
   $('tiles').innerHTML = items.map(([lbl, arr, unit, dec]) => {
     const c = change(arr, s);
@@ -617,9 +634,17 @@ function renderBds(s) {
   const areas = [...new Set(BDS.map(r => r.khu_vuc))];
   const colors = ['--s1', '--s2', '--s3', '--s4', '--s5', '--s6', '--s7'];
   const ds = areas.slice(0, 7).map((a, i) => line(a,
-    BDS.filter(r => r.khu_vuc === a && r.ngay >= s).sort((x, y) => x.ngay < y.ngay ? -1 : 1).map(r => [r.ngay, r.gia_m2]),
+    BDS.filter(r => r.khu_vuc === a).sort((x, y) => x.ngay < y.ngay ? -1 : 1).map(r => [r.ngay, r.gia_m2]),
     css(colors[i]), { pointRadius: 3 }));
-  draw('cBds', { type: 'line', data: { datasets: ds }, options: baseOpts('tr/m²', { legend: true, dec: 1, xunit: 'month' }) });
+  const o = baseOpts('tr/m²', { legend: true, dec: 0, xunit: 'quarter' });
+  o.interaction = { mode: 'nearest', intersect: false };
+  o.scales.x.time.displayFormats.quarter = "'Q'q/yyyy";
+  o.plugins.tooltip.callbacks.title = (it) => { if (!it.length) return ''; const d = new Date(it[0].parsed.x); return `Quý ${Math.floor(d.getMonth() / 3) + 1}/${d.getFullYear()}`; };
+  o.plugins.tooltip.callbacks.afterLabel = (c) => {
+    const r = BDS.find(x => x.khu_vuc === c.dataset.label && tsOf(x.ngay) === c.parsed.x);
+    return r && r.ghi_chu ? ' ' + r.ghi_chu : '';
+  };
+  draw('cBds', { type: 'line', data: { datasets: ds }, options: o });
   const sample = BDS.some(r => /MẪU/i.test(r.ghi_chu || ''));
   $('bdsSample').innerHTML = sample ? '<span class="sample">Số liệu mẫu</span>' : '';
 }
@@ -628,10 +653,39 @@ function renderLs() {
   $('lsSample').innerHTML = sample ? '<span class="sample">Số liệu mẫu</span>' : '';
   if (!LS.length) { $('tblLs').innerHTML = '<tr><td class="empty">Chưa nhập lãi suất.</td></tr>'; return; }
   const latest = {};
-  LS.forEach(r => { const k = r.ngan_hang + '|' + r.ky_han_thang; if (!latest[k] || latest[k].ngay < r.ngay) latest[k] = r; });
-  const rows = Object.values(latest).sort((a, b) => b.lai_suat - a.lai_suat);
-  $('tblLs').innerHTML = '<thead><tr><th>Ngân hàng</th><th>Kỳ hạn</th><th>Lãi suất</th><th>Ngày</th></tr></thead><tbody>' +
-    rows.map(r => `<tr><td>${esc(r.ngan_hang)}</td><td>${r.ky_han_thang} tháng</td><td>${fmt(r.lai_suat, 2)}%/năm</td><td>${dvn(r.ngay)}</td></tr>`).join('') + '</tbody>';
+  LS.forEach(r => { const k = r.ngan_hang + '|' + r.ky_han_thang + '|' + (r.hinh_thuc || ''); if (!latest[k] || latest[k].ngay < r.ngay) latest[k] = r; });
+  const rows = Object.values(latest).sort((a, b) => (a.hinh_thuc || '').localeCompare(b.hinh_thuc || '') * -1 || b.lai_suat - a.lai_suat);
+  $('tblLs').innerHTML = '<thead><tr><th>Ngân hàng</th><th>Hình thức</th><th>Kỳ hạn</th><th>Lãi suất</th><th>Ngày</th><th>Nguồn</th></tr></thead><tbody>' +
+    rows.map(r => `<tr><td>${esc(r.ngan_hang)}</td><td>${esc(r.hinh_thuc || '–')}</td><td>${r.ky_han_thang} tháng</td><td><b>${fmt(r.lai_suat, 2)}%</b>/năm</td><td>${dvn(r.ngay)}</td><td style="text-align:left">${esc(r.ghi_chu)}</td></tr>`).join('') + '</tbody>';
+}
+
+// Thanh chọn mục: bấm để nhảy tới mục, tự sáng mục đang xem
+function initNav() {
+  const bar = document.querySelector('.toolbar');
+  const setH = () => document.documentElement.style.setProperty('--stick', bar.offsetHeight + 'px');
+  setH(); addEventListener('resize', setH);
+  const links = [...$('nav').querySelectorAll('a')];
+  const mark = (id) => links.forEach(a => {
+    const on = a.getAttribute('href') === '#' + id;
+    a.setAttribute('aria-current', String(on));
+    if (on) a.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  });
+  links.forEach(a => a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const id = a.getAttribute('href').slice(1);
+    document.getElementById(id).scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    mark(id);
+  }));
+  const secs = links.map(a => document.getElementById(a.getAttribute('href').slice(1)));
+  const onScroll = () => {
+    const y = bar.getBoundingClientRect().bottom + 24;
+    let cur = secs[0];
+    for (const s of secs) if (s.getBoundingClientRect().top <= y) cur = s;
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = secs.at(-1);
+    mark(cur.id);
+  };
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  if (location.hash && document.getElementById(location.hash.slice(1))) setTimeout(() => document.getElementById(location.hash.slice(1)).scrollIntoView(), 50);
 }
 
 function initRange() {

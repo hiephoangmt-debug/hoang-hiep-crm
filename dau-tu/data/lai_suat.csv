@@ -1,2 +1,15 @@
-ngay,ngan_hang,ky_han_thang,lai_suat,ghi_chu
-2026-10-01,Ví dụ – Ngân hàng X,12,5.0,SỐ LIỆU MẪU – xoá và nhập lãi suất thật (%/năm)
+ngay,ngan_hang,ky_han_thang,lai_suat,hinh_thuc,ghi_chu
+2026-10-20,Vietcombank,12,5.4,Tại quầy,CafeBiz 20/10/2026
+2026-10-20,Agribank,12,5.4,Tại quầy,CafeBiz 20/10/2026
+2026-10-20,VietinBank,12,5.9,Tại quầy,CafeBiz 20/10/2026
+2026-10-20,BIDV,12,5.9,Tại quầy,CafeBiz 20/10/2026
+2026-10-19,VPBank,12,6.9,Tại quầy,CafeF 19/10/2026
+2026-10-19,MB,12,6.2,Tại quầy,CafeF 19/10/2026
+2026-10-19,SHB,12,6.2,Tại quầy,CafeF 19/10/2026
+2026-10-19,Techcombank,12,6.05,Tại quầy,CafeF 19/10/2026 – số dư dưới 1 tỷ
+2026-10-19,ACB,12,5.3,Tại quầy,CafeF 19/10/2026
+2026-10-18,MB,12,6.3,Online,CafeF 18/10/2026
+2026-10-18,SHB,12,6.5,Online,CafeF 18/10/2026
+2026-10-18,ACB,12,5.7,Online,CafeF 18/10/2026
+2026-10-12,Sacombank,12,7.5,Online,CafeF 12/10/2026
+2026-10-12,Techcombank,12,6.75,Online,CafeF 12/10/2026
