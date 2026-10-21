@@ -1605,10 +1605,11 @@ const API_BASE = '';
 
   // Đo lượt bấm Gọi / Zalo cho quảng cáo
   document.addEventListener('click', e => {
-    const a = e.target.closest('.js-tel, .js-zalo');
+    const a = e.target.closest('.js-tel, .js-zalo, a[href^="tel:"], a[href*="zalo.me"]');
     if (!a) return;
-    if (window.fbq) fbq('track', 'Contact', { method: a.classList.contains('js-zalo') ? 'zalo' : 'call' });
-    if (window.gtag) gtag('event', 'contact', { method: a.classList.contains('js-zalo') ? 'zalo' : 'call' });
+    const m = /zalo/.test(a.className + a.getAttribute('href')) ? 'zalo' : 'call';
+    if (window.fbq) fbq('track', 'Contact', { method: m });
+    if (window.gtag) gtag('event', 'contact', { method: m });
   });
 
   // Mã khách dùng chung với khung chat để gộp đăng ký + hội thoại

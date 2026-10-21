@@ -837,6 +837,8 @@ if(k==='hn'||k==='dn')document.documentElement.setAttribute('data-kv',k);}catch(
   kvShow(KV||'hn');
   $$('.kv-tabs button').forEach(function(b){b.addEventListener('click',function(){kvShow(b.getAttribute('data-k'))})});
   if(KV){var u0=st.get('cm_utm')||'';if(!/kv=/.test(u0))st.set('cm_utm',(u0?u0+'&':'')+'kv='+KV);}
+  // Đo lượt bấm Gọi / Zalo cho quảng cáo
+  document.addEventListener('click',function(e){var a=e.target.closest('a[href^="tel:"],a[href*="zalo.me"]');if(!a)return;var m=/zalo/.test(a.getAttribute('href'))?'zalo':'call';if(window.gtag)gtag('event','contact',{method:m});if(window.fbq)fbq('track','Contact',{method:m});});
   // modal
   var modal=$('#modal');
   function openM(t,need){$('#mt').innerHTML=t||'Nhận bảng giá &amp; căn đẹp';var f=$('form',modal);if(f.need)f.need.value=need||'';modal.hidden=false;if(window.gtag)gtag('event','open_lead_form');setTimeout(function(){if(innerWidth>860)$('input[name=phone]',modal).focus()},60);}
