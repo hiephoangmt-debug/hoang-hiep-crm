@@ -91,6 +91,7 @@ td { font-variant-numeric: tabular-nums; }
 td .nm { display: block; font-size: 12px; color: var(--muted); }
 th[aria-sort]::after { content: " ↓"; } th[aria-sort="ascending"]::after { content: " ↑"; }
 canvas.spark { width: 90px; height: 28px; display: block; }
+.toolbar-in { margin: 0 0 10px; }
 .pill { display: inline-block; font-size: 12px; font-weight: 600; padding: 1px 7px; border-radius: 6px; background: var(--chip); white-space: nowrap; margin: 1px 0; }
 .sigs { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
 .sig .sig-h { display: flex; justify-content: space-between; align-items: baseline; }
@@ -188,12 +189,17 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
 
   <section id="lai-suat">
     <h2>Lãi suất tiết kiệm <span id="lsSample"></span></h2>
-    <p class="note">Nhập tay trong file <code>dau-tu/data/lai_suat.csv</code>. Đường “Tiết kiệm” trong biểu đồ so sánh dùng lãi suất kỳ hạn 12 tháng <b>tại quầy</b> trung bình các ngân hàng. Lãi suất thay đổi thường xuyên – kiểm tra lại với ngân hàng trước khi gửi.</p>
-    <div class="card tbl-wrap"><table id="tblLs"></table></div>
+    <p class="note">Lãi suất tiền gửi VND cho cá nhân (%/năm), bot tự cập nhật cùng lịch với giá vàng và chứng khoán. Mức cao nhất mỗi kỳ hạn được tô xanh; bấm tiêu đề cột để sắp xếp. Đường “Tiết kiệm” trong biểu đồ so sánh dùng lãi suất 12 tháng <b>tại quầy</b> trung bình. Lãi suất có thể khác theo số tiền và chương trình – kiểm tra lại với ngân hàng trước khi gửi.</p>
+    <div class="toolbar-in"><div class="seg" id="lsKinds" role="group" aria-label="Hình thức gửi"></div></div>
+    <div class="card">
+      <div class="stats" id="lsStats"></div>
+      <div class="tbl-wrap"><table id="tblLs"></table></div>
+    </div>
+    <div class="card" style="margin-top:12px"><h3>Lãi suất 12 tháng trung bình theo ngày</h3><div class="chart sm"><canvas id="cLs"></canvas></div></div>
   </section>
 
   <footer>
-    Nguồn: SJC / PNJ / Bảo Tín Minh Châu / DOJI (vàng miếng), Yahoo Finance (vàng/bạc/dầu/S&amp;P 500/USD/Bitcoin, trễ ~15 phút), DNSE/VNDirect, CafeF; BĐS và lãi suất nhập tay. Số liệu tự cập nhật mỗi giờ trong phiên (9:15–15:15, thứ 2–6) và 18:30 hằng ngày.
+    Nguồn: SJC / PNJ / Bảo Tín Minh Châu / DOJI (vàng miếng), Yahoo Finance (vàng/bạc/dầu/S&amp;P 500/USD/Bitcoin, trễ ~15 phút), DNSE/VNDirect, CafeF (khối ngoại), 24hMoney / Người Quan Sát (lãi suất); BĐS nhập tay. Số liệu tự cập nhật mỗi giờ trong phiên (9:15–15:15, thứ 2–6) và 18:30 hằng ngày.
     Chỉ để tham khảo, không phải khuyến nghị đầu tư.
     <div class="err" id="errs"></div>
   </footer>
@@ -221,7 +227,7 @@ const tsOf = (s) => { const [y, m, d] = s.split('-'); return new Date(+y, m - 1,
 const keyOf = (ms) => { const t = new Date(ms); return `${t.getFullYear()}-${pad(t.getMonth() + 1)}-${pad(t.getDate())}`; };
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-let P = { series: {} }, ST = { symbols: {} }, BDS = [], LS = [];
+let P = { series: {} }, ST = { symbols: {} }, BDS = [], LS = [], RA = null;
 let months = 6;
 try { const m = localStorage.getItem('dautu-range'); if (m !== null && [0, 1, 3, 6, 12].includes(+m)) months = +m; } catch (e) {}
 const charts = {};
@@ -242,8 +248,9 @@ function csv(text) {
   }).filter(o => /^\d{4}-\d{2}-\d{2}$/.test(o.ngay));
 }
 
-Promise.all([j('data/prices.json'), j('data/stocks.json'), t('data/bds.csv'), t('data/lai_suat.csv')])
-  .then(([p, s, b, l]) => {
+Promise.all([j('data/prices.json'), j('data/stocks.json'), t('data/bds.csv'), t('data/lai_suat.csv'), j('data/lai_suat_auto.json')])
+  .then(([p, s, b, l, ra]) => {
+    RA = ra && ra.bang && Object.keys(ra.bang).length ? ra : null;
     P = p || P; P.series = P.series || {};
     ST = s || ST; ST.symbols = ST.symbols || {};
     BDS = csv(b).map(r => ({ ...r, gia_m2: +r.gia_m2 })).filter(r => !isNaN(r.gia_m2));
@@ -323,9 +330,11 @@ function bdsAvg() {
 function savingsIndex(s, e) {
   const rates = LS.filter(r => r.ky_han_thang === 12 && !/online/i.test(r.hinh_thuc || ''));
   const use = rates.length ? rates : LS;
-  if (!use.length) return [];
   const by = {}; use.forEach(r => (by[r.ngay] = by[r.ngay] || []).push(r.lai_suat));
+  // lãi suất tự động (trung bình 12 tháng tại quầy) ghi đè các ngày có số
+  for (const [d, v] of rateAvgHistory('Tại quầy')) by[d] = [v];
   const rr = Object.keys(by).sort().map(d => [d, by[d].reduce((a, b) => a + b, 0) / by[d].length]);
+  if (!rr.length) return [];
   const out = []; let v = 100;
   let from = s;
   if (!months) {
@@ -339,6 +348,17 @@ function savingsIndex(s, e) {
     out.push([k, v]); v *= 1 + r / 100 / 365;
   }
   return out;
+}
+
+// Lãi suất 12 tháng trung bình theo ngày, theo hình thức gửi (từ dữ liệu tự động)
+function rateAvgHistory(kind) {
+  if (!RA || !RA.lich_su_12t) return [];
+  const by = {};
+  for (const [key, h] of Object.entries(RA.lich_su_12t)) {
+    if (!key.startsWith(kind + '|')) continue;
+    for (const [d, v] of Object.entries(h)) (by[d] = by[d] || []).push(v);
+  }
+  return Object.keys(by).sort().map(d => [d, by[d].reduce((a, b) => a + b, 0) / by[d].length]);
 }
 
 // ---------- vẽ
@@ -648,7 +668,54 @@ function renderBds(s) {
   const sample = BDS.some(r => /MẪU/i.test(r.ghi_chu || ''));
   $('bdsSample').innerHTML = sample ? '<span class="sample">Số liệu mẫu</span>' : '';
 }
+const BIG4 = ['vietcombank', 'bidv', 'vietinbank', 'agribank'];
+const TERMS = ['12', '1', '3', '6', '18', '24', '36']; // 12 tháng đứng đầu cho dễ thấy trên điện thoại
+let lsKind = null, lsSort = '12', lsAsc = false;
 function renderLs() {
+  if (RA) return renderLsAuto();
+  renderLsManual();
+}
+function renderLsAuto() {
+  $('lsSample').innerHTML = '';
+  const kinds = Object.keys(RA.bang);
+  if (!kinds.includes(lsKind)) lsKind = kinds.includes('Tại quầy') ? 'Tại quầy' : kinds[0];
+  const banks = RA.bang[lsKind] || {};
+  const terms = TERMS.filter(k => Object.values(banks).some(v => v[k] != null));
+  const rows = Object.entries(banks).map(([name, v]) => ({ name, v, big4: BIG4.includes(name.toLowerCase().replace(/\s+/g, '')) }));
+  const val = (r) => lsSort === 'name' ? r.name : r.v[lsSort];
+  rows.sort((a, b) => {
+    const x = val(a), y = val(b);
+    if (x == null) return 1; if (y == null) return -1;
+    return (x < y ? -1 : x > y ? 1 : 0) * (lsAsc ? 1 : -1);
+  });
+  const max = Object.fromEntries(terms.map(k => [k, Math.max(...rows.map(r => r.v[k] ?? -1))]));
+  const r12 = rows.filter(r => r.v['12'] != null), b4 = r12.filter(r => r.big4);
+  const avg = (a) => a.length ? a.reduce((t, r) => t + r.v['12'], 0) / a.length : null;
+  const top = [...r12].sort((a, b) => b.v['12'] - a.v['12'])[0];
+  $('lsKinds').innerHTML = kinds.map(k => `<button data-k="${esc(k)}" aria-pressed="${k === lsKind}">${esc(k)}</button>`).join('');
+  $('lsKinds').querySelectorAll('button').forEach(b => b.onclick = () => { lsKind = b.dataset.k; renderLs(); });
+  $('lsStats').innerHTML = `
+    ${top ? `<span>Cao nhất 12 tháng: <b class="up">${fmt(top.v['12'], 2)}%</b> (${esc(top.name)})</span>` : ''}
+    <span>Trung bình 12 tháng: <b>${fmt(avg(r12), 2)}%</b> (${r12.length} ngân hàng)</span>
+    ${b4.length ? `<span>Big4: <b>${fmt(avg(b4), 2)}%</b></span>` : ''}
+    <span>Nguồn: <b>${esc(RA.nguon)}</b>${RA.nguon_cap_nhat ? ', cập nhật ' + esc(RA.nguon_cap_nhat) : ''}</span>`;
+  const head = '<thead><tr><th data-k="name"' + (lsSort === 'name' ? ` aria-sort="${lsAsc ? 'ascending' : 'descending'}"` : '') + '>Ngân hàng</th>' +
+    terms.map(k => `<th data-k="${k}"${k === lsSort ? ` aria-sort="${lsAsc ? 'ascending' : 'descending'}"` : ''}>${k} tháng</th>`).join('') + '</tr></thead>';
+  const body = rows.map(r => `<tr><td><b>${esc(r.name)}</b>${r.big4 ? ' <span class="pill">Big4</span>' : ''}</td>` +
+    terms.map(k => { const x = r.v[k]; return `<td>${x == null ? '<span class="flat">–</span>' : x === max[k] ? `<b class="up">${fmt(x, 2)}</b>` : fmt(x, 2)}</td>`; }).join('') + '</tr>').join('');
+  $('tblLs').innerHTML = head + '<tbody>' + body + '</tbody>';
+  $('tblLs').querySelectorAll('th').forEach(th => th.onclick = () => {
+    const k = th.dataset.k;
+    if (lsSort === k) lsAsc = !lsAsc; else { lsSort = k; lsAsc = k === 'name'; }
+    renderLs();
+  });
+  // biểu đồ lãi suất 12 tháng trung bình theo thời gian
+  const colors = { 'Tại quầy': '--s1', 'Online': '--s2', 'Tổng hợp': '--s3' };
+  const ds = kinds.map(k => line(k + ' – TB 12 tháng', rateAvgHistory(k), css(colors[k] || '--s4'), { pointRadius: 3 }));
+  draw('cLs', { type: 'line', data: { datasets: ds }, options: baseOpts('%/năm', { legend: true, dec: 2, tickDec: 1 }) });
+}
+function renderLsManual() {
+  $('lsKinds').innerHTML = ''; $('lsStats').innerHTML = '';
   const sample = LS.some(r => /MẪU/i.test(r.ghi_chu || ''));
   $('lsSample').innerHTML = sample ? '<span class="sample">Số liệu mẫu</span>' : '';
   if (!LS.length) { $('tblLs').innerHTML = '<tr><td class="empty">Chưa nhập lãi suất.</td></tr>'; return; }
