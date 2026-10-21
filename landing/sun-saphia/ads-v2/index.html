@@ -465,6 +465,16 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
 }
 @media (max-width:600px) and (prefers-reduced-motion:reduce){.tb-track{animation-duration:40s}}
 </style>
+<!-- Google tag (gtag.js) – Google Ads AW-872503827 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-872503827"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-872503827');
+  /* Chuyển đổi "Sun Saphia – Gửi form": dán nhãn sau dấu / khi có, ví dụ 'AW-872503827/AbCdEf123'. Để trống = chưa ghi chuyển đổi. */
+  window.HHC_ADS_SEND_TO = '';
+</script>
 </head>
 <body>
 
@@ -1150,6 +1160,7 @@ p,li,.ov-cap{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyp
     postJSON(CRM, Object.assign({project: PROJECT, url: d.source, message: [d.interest, d.cau_hoi].filter(Boolean).join(' · ').slice(0, 500)}, d));
     postMail(Object.assign({_subject: 'Khách Sun Saphia: ' + (d.name || 'chưa rõ tên') + ' - ' + ph, _template: 'table', _captcha: 'false'}, d));
     try { if (window.gtag) gtag('event', 'generate_lead', {event_label: d.interest || ''}); } catch (e) {}
+    try { if (window.gtag && window.HHC_ADS_SEND_TO) gtag('event', 'conversion', {send_to: window.HHC_ADS_SEND_TO}); } catch (e) {}  // Google Ads: Sun Saphia – Gửi form
     try { if (window.fbq) fbq('track', 'Lead', {content_name: d.interest || ''}); } catch (e) {}
     return 'ok';
   }
