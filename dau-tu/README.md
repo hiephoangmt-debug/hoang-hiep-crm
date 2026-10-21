@@ -4,6 +4,7 @@ Trang web biểu đồ theo ngày cho các kênh: **vàng SJC & thế giới, b�
 30 cổ phiếu lớn (đang tăng / đi ngang / giảm), USD/VND, Bitcoin, bất động sản, lãi suất tiết kiệm**.
 
 - Xem trang: `https://hiephoangmt-debug.github.io/hoang-hiep-crm/dau-tu/` (sau khi merge vào `main`).
+- Ô **Tra cứu mã**: gõ mã hoặc tên công ty bất kỳ (HOSE, HNX, UPCoM) – trang lấy trực tiếp giá (VNDirect, dự phòng Simplize), giá trong phiên (VPS), khối ngoại (CafeF); danh sách mã do bot lưu mỗi ngày ở `data/ma_ck.json`.
 - Tự cập nhật: workflow **Thống kê đầu tư** chạy mỗi giờ trong phiên (9:15–15:15, thứ 2–6) và 18:30 hằng ngày, lưu số vào `data/` rồi đăng lại trang.
 - Lần đầu: vào tab **Actions → Thống kê đầu tư → Run workflow** để lấy ngay ~1–2 năm lịch sử
   (riêng giá SJC chỉ có từ ngày bắt đầu chạy).
