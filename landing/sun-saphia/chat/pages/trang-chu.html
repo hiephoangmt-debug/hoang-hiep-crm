@@ -714,6 +714,25 @@ body{background:#fff}
 </footer>
 <a class="pill" href="#dang-ky">📩 Nhận bảng giá ngay khi công bố</a>
 <script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@afea225cd1c07439c244feaf9f6fa8e7bf42a111/projects/sun-saphia/crm/ss-all-nochat.js" defer></script>
+<!-- Nút liên hệ nhanh: chat, Zalo, gọi – góc dưới bên phải -->
+<style>
+.hhfab{position:fixed;right:18px;bottom:18px;z-index:9000;display:flex;flex-direction:column;gap:12px;align-items:flex-end}
+.hhfab a{position:relative;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;color:#fff;border:3px solid #fff;box-shadow:0 10px 24px -6px rgba(11,26,58,.55);text-decoration:none;font:800 13px/1 'Be Vietnam Pro',Arial,sans-serif;transition:transform .2s;padding:0;box-sizing:border-box}
+.hhfab a:hover{transform:scale(1.08)}
+.hhfab .f-chat{background:#13285a}
+.hhfab .f-zalo{background:#0068ff}
+.hhfab .f-call{background:linear-gradient(135deg,#ffa04a,#f07b1f);animation:hhRing 1.6s infinite}
+@keyframes hhRing{0%{box-shadow:0 0 0 0 rgba(240,123,31,.6)}70%{box-shadow:0 0 0 16px rgba(240,123,31,0)}100%{box-shadow:0 0 0 0 rgba(240,123,31,0)}}
+.hhfab .lb{position:absolute;right:68px;top:50%;transform:translateY(-50%);white-space:nowrap;background:#13285a;color:#fff;font:600 13px/1 'Be Vietnam Pro',Arial,sans-serif;padding:9px 13px;border-radius:999px;box-shadow:0 8px 20px -8px rgba(11,26,58,.6);opacity:0;pointer-events:none;transition:opacity .2s}
+.hhfab a:hover .lb,.hhfab a:focus-visible .lb{opacity:1}
+@media (max-width:760px){.hhfab{right:12px;bottom:14px;gap:10px}.hhfab a{width:52px;height:52px}.hhfab .lb{display:none}}
+@media (prefers-reduced-motion:reduce){.hhfab .f-call{animation:none}}
+</style>
+<div class="hhfab" aria-label="Liên hệ nhanh">
+  <a href="#" class="f-chat" data-hhc-open aria-label="Chat hỏi nhanh về dự án"><svg viewBox="0 0 24 24" width="26" height="26" fill="#fff" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm3 6.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg><span class="lb">Hỏi nhanh</span></a>
+  <a href="https://zalo.me/0904567009" class="f-zalo" target="_blank" rel="noopener" aria-label="Nhắn Zalo 0904 567 009">Zalo<span class="lb">Nhắn Zalo</span></a>
+  <a href="tel:0904567009" class="f-call" aria-label="Gọi 0904 567 009"><svg viewBox="0 0 24 24" width="25" height="25" fill="#fff" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg><span class="lb">Gọi 0904 567 009</span></a>
+</div>
 <script>
 /* Sun Saphia Residence – Trợ lý trả lời nhanh của anh Hoàng Hiệp.
  * Một tệp dùng chung cho 3 trang LadiPage: chat tự động + gửi khách về Telegram, CRM Hoàng Hiệp, email.
