@@ -5,6 +5,7 @@ Kênh tự động:
   - Vàng thế giới (USD/oz), bạc, dầu Brent, S&P 500, USD/VND, Bitcoin – Yahoo Finance
   - VN-Index, VN30, HNX-Index, UPCoM và ~30 cổ phiếu lớn             – DNSE (dự phòng: VNDirect)
   - Khối ngoại mua/bán ròng toàn sàn HOSE và từng mã lớn – CafeF
+  - Lãi suất tiết kiệm tại quầy / online ~38 ngân hàng – 24hMoney (dự phòng: Người Quan Sát)
 Kênh nhập tay (sửa file CSV trong data/):
   - bds.csv       – giá BĐS theo khu vực (triệu đồng/m²)
   - lai_suat.csv  – lãi suất tiết kiệm (%/năm)
@@ -15,6 +16,7 @@ Nguồn nào lỗi thì bỏ qua, giữ số cũ, các nguồn khác vẫn chạ
 
 from __future__ import annotations
 
+import html
 import json
 import math
 import re
@@ -29,6 +31,7 @@ VN_TZ = timezone(timedelta(hours=7))
 DATA = Path(__file__).parent / "data"
 PRICES_FILE = DATA / "prices.json"
 STOCKS_FILE = DATA / "stocks.json"
+RATES_FILE = DATA / "lai_suat_auto.json"
 KEEP_DAYS = 800  # giữ tối đa ~2 năm cho chỉ số / vàng
 STOCK_KEEP = 260  # ~1 năm phiên cho từng mã
 
@@ -340,6 +343,82 @@ def fetch_foreign(symbol: str, pages: int = 1, size: int = 20):
     raise last or ValueError("CafeF rỗng")
 
 
+# ---------------------------------------------------------------- Lãi suất tiết kiệm
+def _html_cells(row_html):
+    out = []
+    for c in re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", row_html, flags=re.S):
+        out.append(re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", c))).strip())
+    return out
+
+
+def _rate_tables(page):
+    """[(tiêu đề trước bảng, [hàng ô])] cho mọi bảng có cột 'x tháng'."""
+    out = []
+    for m in re.finditer(r"<table.*?</table>", page, flags=re.S):
+        rows = [_html_cells(r) for r in re.findall(r"<tr.*?</tr>", m.group(0), flags=re.S)]
+        rows = [r for r in rows if r]
+        if not rows or not any(re.search(r"\d+\s*tháng", c) for c in rows[0]):
+            continue
+        before = re.sub(r"<[^>]+>", " ", page[max(0, m.start() - 2500):m.start()])
+        out.append((html.unescape(re.sub(r"\s+", " ", before))[-400:], rows))
+    return out
+
+
+def _parse_rate_rows(rows):
+    head = rows[0]
+    cols = {}
+    for i, c in enumerate(head):
+        mm = re.search(r"(\d+)\s*tháng", c)
+        if mm:
+            cols[i] = int(mm.group(1))
+    banks = {}
+    for r in rows[1:]:
+        if len(r) < 2 or not r[0] or r[0] == head[0]:
+            continue
+        vals = {}
+        for i, k in cols.items():
+            if i < len(r):
+                v = to_num(r[i])
+                if v is not None and 0 < v < 20:
+                    vals[str(k)] = v
+        if vals:
+            banks[r[0]] = vals
+    return banks
+
+
+def fetch_rates():
+    """Lãi suất tiền gửi VND cá nhân: {'Tại quầy': {ngân hàng: {kỳ hạn: %}}, 'Online': {...}}."""
+    errs = []
+    # 1) 24hMoney – có 2 bảng tại quầy / online, kỳ hạn 1–36 tháng
+    try:
+        page = get("https://24hmoney.vn/lai-suat-gui-ngan-hang").text
+        res = {}
+        for before, rows in _rate_tables(page):
+            low = before.lower()
+            # loại bảng = từ khoá xuất hiện gần bảng nhất
+            pq, po = low.rfind("quầy"), max(low.rfind("trực tuyến"), low.rfind("online"))
+            kind = "Online" if po > pq else "Tại quầy" if pq >= 0 else None
+            if kind and kind not in res:
+                res[kind] = _parse_rate_rows(rows)
+        upd = re.search(r"Cập nhật lúc:?\s*([\d:]+\s+\d{1,2}/\d{1,2}/\d{4})", page)
+        if sum(len(v) for v in res.values()) >= 4:
+            return res, "24hMoney", upd.group(1) if upd else None
+        errs.append("24hMoney: không đọc được bảng")
+    except Exception as e:  # noqa: BLE001
+        errs.append(f"24hMoney: {e}")
+    # 2) Người Quan Sát – 1 bảng (1, 6, 12 tháng), không tách tại quầy / online
+    try:
+        page = get("https://dulieu.nguoiquansat.vn/lai-suat").text
+        tabs = _rate_tables(page)
+        if tabs:
+            upd = re.search(r"Cập nhật lúc:?\s*([\d:]+\s+\d{1,2}/\d{1,2}/\d{4})", page)
+            return {"Tổng hợp": _parse_rate_rows(tabs[0][1])}, "Người Quan Sát", upd.group(1) if upd else None
+        errs.append("Người Quan Sát: không thấy bảng")
+    except Exception as e:  # noqa: BLE001
+        errs.append(f"Người Quan Sát: {e}")
+    raise ValueError(" | ".join(errs))
+
+
 # ---------------------------------------------------------------- main
 def main():
     DATA.mkdir(exist_ok=True)
@@ -412,6 +491,24 @@ def main():
     step("UPCoM", index("upcom", "UPCOM"))
     step("Khối ngoại HOSE", foreign)
 
+    rates = load(RATES_FILE, {})
+
+    def lai_suat():
+        res, src, upd = fetch_rates()
+        rates.update({"nguon": src, "nguon_cap_nhat": upd, "ngay": today(), "bang": res})
+        # lịch sử lãi suất 12 tháng từng ngân hàng, mỗi ngày 1 điểm
+        hist = rates.setdefault("lich_su_12t", {})
+        for kind, banks in res.items():
+            for bank, v in banks.items():
+                if "12" in v:
+                    h = hist.setdefault(f"{kind}|{bank}", {})
+                    h[today()] = v["12"]
+                    for d in sorted(h)[:-KEEP_DAYS]:
+                        del h[d]
+        log(f"   {src}: " + ", ".join(f"{k} {len(v)} ngân hàng" for k, v in res.items()))
+
+    step("Lãi suất", lai_suat)
+
     # ---- cổ phiếu lớn
     stocks = load(STOCKS_FILE, {"symbols": {}})
     syms = stocks.setdefault("symbols", {})
@@ -445,6 +542,8 @@ def main():
     prices["errors"] = errors
     stocks["updated"] = now
     PRICES_FILE.write_text(json.dumps(prices, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    if rates:
+        RATES_FILE.write_text(json.dumps(rates, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     STOCKS_FILE.write_text(json.dumps(stocks, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     log(f"\nXong. {len(errors)} nguồn lỗi.")
     for e in errors:
