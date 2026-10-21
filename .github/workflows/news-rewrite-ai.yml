@@ -1,0 +1,58 @@
+# Mỗi sáng 07:35: AI chọn các tin xây dựng – quy hoạch – hạ tầng Đà Nẵng nổi bật hôm qua/hôm nay,
+# viết lại thành bài riêng (có dẫn nguồn) và đăng lên hiephoangmt.com, báo link về Telegram.
+# Cần secret: ANTHROPIC_API_KEY, WP_APP_PASSWORD (đã có), TELEGRAM_* (đã có).
+name: AI viết bài lên website
+
+on:
+  schedule:
+    - cron: '35 0 * * *'    # 07:35 giờ Việt Nam
+  workflow_dispatch:
+    inputs:
+      max_articles:
+        description: 'Số bài tối đa'
+        required: false
+        default: '3'
+      draft:
+        description: 'Chỉ lưu bản nháp (chưa hiện trên web)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: news-rewrite-ai
+  cancel-in-progress: false
+
+jobs:
+  rewrite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: news-telegram
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: news-telegram/requirements.txt
+      - run: pip install -r requirements.txt
+      - run: python rewrite_articles.py
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          WP_USER: ${{ secrets.WP_USER || vars.WP_USER }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          MAX_ARTICLES: ${{ inputs.max_articles || '3' }}
+          WP_STATUS: ${{ inputs.draft && 'draft' || 'publish' }}
+      # Ghi nhớ chủ đề đã viết để không viết trùng.
+      - name: Lưu trạng thái
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
+          git add rewritten.json 2>/dev/null || true
+          git diff --cached --quiet || (git commit -m "news-rewrite: ghi nhận bài đã viết [skip ci]" && git pull --rebase origin main && git push)

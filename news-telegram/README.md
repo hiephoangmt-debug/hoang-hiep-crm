@@ -48,3 +48,14 @@ mỗi tin gồm tiêu đề, tên báo, tóm tắt ngắn và link bài gốc.
 Cài đặt: WordPress → **Người dùng → Hồ sơ → Mật khẩu ứng dụng (Application Passwords)** → tạo
 mật khẩu tên `bot-ban-tin`, rồi thêm 2 secret GitHub: `WP_USER` (tên đăng nhập WordPress) và
 `WP_APP_PASSWORD` (mật khẩu ứng dụng vừa tạo).
+
+## AI viết bài lên website
+
+Workflow **AI viết bài lên website** (`rewrite_articles.py`) chạy 07:35 mỗi sáng:
+lấy tin Đà Nẵng về quy hoạch – xây dựng – hạ tầng – nhà ở của hôm qua/hôm nay, Claude chọn tối đa
+3 chủ đề nổi bật (gộp bài trùng, bỏ chủ đề đã viết – lưu ở `rewritten.json`), tra cứu nguồn bằng
+web search/fetch rồi viết bài mới 600–900 từ có mục *Nguồn tham khảo*, đăng vào chuyên mục
+**Hạ tầng & quy hoạch** và báo link về Telegram.
+
+Cần secret `ANTHROPIC_API_KEY`. Chạy tay: **Actions → AI viết bài lên website → Run workflow**
+(chọn số bài, tích *bản nháp* để thử).
