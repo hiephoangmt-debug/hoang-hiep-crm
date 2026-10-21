@@ -33,6 +33,7 @@ DATA = Path(__file__).parent / "data"
 PRICES_FILE = DATA / "prices.json"
 STOCKS_FILE = DATA / "stocks.json"
 RATES_FILE = DATA / "lai_suat_auto.json"
+TICKERS_FILE = DATA / "ma_ck.json"
 KEEP_DAYS = 800  # giữ tối đa ~2 năm cho chỉ số / vàng
 STOCK_KEEP = 260  # ~1 năm phiên cho từng mã
 
@@ -566,6 +567,24 @@ def main():
         log(f"   {src}: " + ", ".join(f"{k} {len(v)} ngân hàng" for k, v in res.items()))
 
     step("Lãi suất", lai_suat)
+
+    def ds_ma():
+        # danh sách mã cho ô tra cứu – mỗi ngày lấy 1 lần
+        old = load(TICKERS_FILE, {})
+        if old.get("ngay") == today() and old.get("ma"):
+            log("   đã có danh sách hôm nay")
+            return
+        r = get("https://api-finfo.vndirect.com.vn/v4/stocks",
+                params={"q": "type:STOCK~status:LISTED", "fields": "code,companyName,floor", "size": 5000})
+        rows = [[x["code"], (x.get("companyName") or "").strip(), x.get("floor") or ""]
+                for x in r.json().get("data") or [] if x.get("code")]
+        if len(rows) < 500:
+            raise ValueError(f"danh sách mã quá ít ({len(rows)})")
+        rows.sort()
+        TICKERS_FILE.write_text(json.dumps({"ngay": today(), "ma": rows}, ensure_ascii=False, separators=(",", ":")),
+                                encoding="utf-8")
+        log(f"   {len(rows)} mã")
+    step("Danh sách mã", ds_ma)
 
     # ---- cổ phiếu lớn
     stocks = load(STOCKS_FILE, {"symbols": {}})

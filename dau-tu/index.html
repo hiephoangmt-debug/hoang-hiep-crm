@@ -97,6 +97,25 @@ canvas.spark { width: 90px; height: 28px; display: block; }
 .sig .sig-h { display: flex; justify-content: space-between; align-items: baseline; }
 .sig .n { font-size: 20px; font-weight: 700; }
 .sig .note { margin: 2px 0 8px; }
+.search { display: flex; gap: 8px; margin-bottom: 8px; }
+.search-box { position: relative; flex: 1; min-width: 0; }
+.search input { width: 100%; font: inherit; font-size: 16px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--axis); background: var(--surface); color: var(--ink); text-transform: uppercase; }
+.search input::placeholder { text-transform: none; color: var(--muted); }
+.btn { font: inherit; font-weight: 600; padding: 10px 18px; border-radius: 10px; border: 0; background: var(--ink); color: var(--page); cursor: pointer; }
+.sugg { position: absolute; z-index: 6; left: 0; right: 0; top: calc(100% + 4px); margin: 0; padding: 4px; list-style: none; background: var(--surface); border: 1px solid var(--axis); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,.15); max-height: 320px; overflow-y: auto; }
+.sugg li { padding: 8px 10px; border-radius: 8px; cursor: pointer; display: flex; gap: 10px; align-items: baseline; }
+.sugg li[aria-selected="true"], .sugg li:hover { background: var(--chip); }
+.sugg b { min-width: 44px; } .sugg span { color: var(--ink-2); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sugg small { margin-left: auto; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.chips button { font: inherit; font-size: 13px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--ink-2); cursor: pointer; }
+.link { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-decoration-color: var(--axis); text-underline-offset: 3px; }
+.ma-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-bottom: 6px; }
+.ma-head .code { font-size: 26px; font-weight: 750; }
+.ma-head .px { font-size: 26px; font-weight: 650; }
+.ma-head .nm { color: var(--ink-2); flex-basis: 100%; font-size: 14px; }
+.kv { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px 14px; margin: 10px 0; }
+.kv div { display: flex; flex-direction: column; } .kv span { font-size: 12px; color: var(--muted); } .kv b { font-variant-numeric: tabular-nums; }
 .empty { color: var(--muted); font-size: 14px; padding: 24px 0; text-align: center; }
 .sample { display: inline-block; font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 6px;
   background: #fab21933; color: var(--ink); margin-left: 6px; }
@@ -119,11 +138,25 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
       <button data-m="0">Tất cả</button>
     </div>
     <span class="range-label" id="rangeLabel"></span>
-    <nav class="nav" id="nav" aria-label="Chọn mục"><a href="#tong-quan">Tổng quan</a><a href="#so-sanh">So sánh</a><a href="#vang">Vàng</a><a href="#chung-khoan">Chứng khoán</a><a href="#khoi-ngoai">Khối ngoại</a><a href="#co-phieu">Cổ phiếu lớn</a><a href="#tin-hieu">Tín hiệu</a><a href="#the-gioi">Tỷ giá & thế giới</a><a href="#bds">Bất động sản</a><a href="#lai-suat">Lãi suất</a><a href="#fed">Lãi suất Fed</a></nav>
+    <nav class="nav" id="nav" aria-label="Chọn mục"><a href="#tong-quan">Tổng quan</a><a href="#tra-cuu">Tra cứu mã</a><a href="#so-sanh">So sánh</a><a href="#vang">Vàng</a><a href="#chung-khoan">Chứng khoán</a><a href="#khoi-ngoai">Khối ngoại</a><a href="#co-phieu">Cổ phiếu lớn</a><a href="#tin-hieu">Tín hiệu</a><a href="#the-gioi">Tỷ giá & thế giới</a><a href="#bds">Bất động sản</a><a href="#lai-suat">Lãi suất</a><a href="#fed">Lãi suất Fed</a></nav>
   </div>
 
   <section id="tong-quan">
     <div class="tiles" id="tiles"></div>
+  </section>
+
+  <section id="tra-cuu">
+    <h2>Tra cứu mã cổ phiếu</h2>
+    <p class="note">Gõ mã hoặc tên công ty (HOSE, HNX, UPCoM) để xem giá, xu hướng, RSI, khối ngoại và tín hiệu. Số liệu lấy trực tiếp lúc bạn tra (VNDirect, VPS, CafeF).</p>
+    <form class="search" id="searchForm" autocomplete="off">
+      <div class="search-box">
+        <input id="maInput" type="search" inputmode="search" placeholder="VD: HPG, DXG, Hòa Phát…" aria-label="Mã cổ phiếu" enterkeyhint="search">
+        <ul class="sugg" id="sugg" role="listbox" hidden></ul>
+      </div>
+      <button type="submit" class="btn">Xem</button>
+    </form>
+    <div class="chips" id="recent"></div>
+    <div id="maResult"></div>
   </section>
 
   <section id="so-sanh">
@@ -268,7 +301,7 @@ Promise.all([j('data/prices.json'), j('data/stocks.json'), t('data/bds.csv'), t(
       ? 'Vàng, chứng khoán, khối ngoại, tỷ giá, hàng hoá, bất động sản – biểu đồ theo ngày.'
       : 'Chưa có số liệu – chạy workflow “Thống kê đầu tư” trên GitHub Actions để lấy lần đầu.';
     if (P.errors && P.errors.length) $('errs').textContent = 'Nguồn lỗi lần cập nhật gần nhất: ' + P.errors.join(' · ');
-    initRange(); render(); fresh(); setInterval(fresh, 30000); initNav();
+    initRange(); render(); fresh(); setInterval(fresh, 30000); initNav(); initSearch();
   });
 
 // Thanh "cập nhật lúc…" luôn ghim ở đầu trang
@@ -536,40 +569,43 @@ const ma = (c, k) => c.length >= k ? c.slice(-k).reduce((a, b) => a + b, 0) / k 
 
 // ---------- cổ phiếu lớn
 let filt = 'all', sortKey = 'm1', sortAsc = false;
+// Phân tích 1 mã từ chuỗi [ngày, giá, khối lượng] và khối ngoại {ngày: tỷ}
+function analyze(code, name, rowsIn, knObj) {
+  const c = rowsIn.map(r => r[1]);
+  if (!c.length) return null;
+  const n = c.length, last = c[n - 1];
+  const ch = (k) => n > k ? (last / c[n - 1 - k] - 1) * 100 : null;
+  const ma = (k) => n >= k ? c.slice(-k).reduce((a, b) => a + b, 0) / k : null;
+  const m1 = ch(20), ma20 = ma(20);
+  let trend = 'flat';
+  if (m1 != null && ma20 != null) {
+    if (m1 >= 3 && last > ma20) trend = 'up';
+    else if (m1 <= -3 && last < ma20) trend = 'down';
+  }
+  const knAll = Object.entries(knObj || {}).sort();
+  const kn = knAll.slice(-5);
+  const kn5 = kn.length ? kn.reduce((t, [, v]) => t + v, 0) : null;
+  const kn20 = knAll.length ? knAll.slice(-20).reduce((t, [, v]) => t + v, 0) : null;
+  const knStreak = streak(knAll.map(([, v]) => v));
+  const vols = rowsIn.map(r => r[2]);
+  const avgVol = vols.length > 20 ? vols.slice(-21, -1).reduce((a, b) => a + b, 0) / 20 : null;
+  const volRatio = avgVol ? vols.at(-1) / avgVol : null;
+  const ma50 = ma(50), ma200 = ma(200);
+  const ma200prev = n >= 205 ? c.slice(-205, -5).reduce((a, b) => a + b, 0) / 200 : null;
+  const r = { code, name, last, d1: ch(1), w1: ch(5), m1, m3: ch(60), y1: ch(240),
+    ma20, ma50, ma200, trend, kn5, kn20, knStreak, volRatio, avgVol, vol: vols.at(-1), rsi: rsi(c), spark: c.slice(-60), date: rowsIn.at(-1)[0] };
+  r.sig = [];
+  if (r.rsi != null && r.rsi >= 70) r.sig.push(['Quá mua', 'down', 'RSI ' + fmt(r.rsi) + ' ≥ 70: tăng nóng, dễ điều chỉnh']);
+  if (r.rsi != null && r.rsi <= 30) r.sig.push(['Quá bán', 'up', 'RSI ' + fmt(r.rsi) + ' ≤ 30: giảm sâu, có thể hồi']);
+  if (ma200 && ma200prev && last > ma200 && c[n - 6] <= ma200prev) r.sig.push(['Vượt MA200', 'up', 'Vừa vượt lên trên trung bình 200 phiên']);
+  if (ma200 && ma200prev && last < ma200 && c[n - 6] >= ma200prev) r.sig.push(['Thủng MA200', 'down', 'Vừa rơi xuống dưới trung bình 200 phiên']);
+  if (knStreak >= 5) r.sig.push(['KN gom ' + knStreak + ' phiên', 'up', 'Khối ngoại mua ròng ' + knStreak + ' phiên liên tiếp']);
+  if (knStreak <= -5) r.sig.push(['KN xả ' + -knStreak + ' phiên', 'down', 'Khối ngoại bán ròng ' + -knStreak + ' phiên liên tiếp']);
+  if (volRatio != null && volRatio >= 2) r.sig.push(['KL đột biến x' + fmt(volRatio, 1), 'flat', 'Khối lượng gấp ' + fmt(volRatio, 1) + ' lần trung bình 20 phiên']);
+  return r;
+}
 function stockRows() {
-  return Object.entries(ST.symbols).map(([code, it]) => {
-    const c = (it.closes || []).map(r => r[1]);
-    if (!c.length) return null;
-    const n = c.length, last = c[n - 1];
-    const ch = (k) => n > k ? (last / c[n - 1 - k] - 1) * 100 : null;
-    const ma = (k) => n >= k ? c.slice(-k).reduce((a, b) => a + b, 0) / k : null;
-    const m1 = ch(20), ma20 = ma(20);
-    let trend = 'flat';
-    if (m1 != null && ma20 != null) {
-      if (m1 >= 3 && last > ma20) trend = 'up';
-      else if (m1 <= -3 && last < ma20) trend = 'down';
-    }
-    const knAll = Object.entries(it.kn || {}).sort();
-    const kn = knAll.slice(-5);
-    const kn5 = kn.length ? kn.reduce((t, [, v]) => t + v, 0) : null;
-    const knStreak = streak(knAll.map(([, v]) => v));
-    const vols = (it.closes || []).map(r => r[2]);
-    const avgVol = vols.length > 20 ? vols.slice(-21, -1).reduce((a, b) => a + b, 0) / 20 : null;
-    const volRatio = avgVol ? vols.at(-1) / avgVol : null;
-    const ma50 = ma(50), ma200 = ma(200);
-    const ma200prev = n >= 205 ? c.slice(-205, -5).reduce((a, b) => a + b, 0) / 200 : null;
-    const r = { code, name: it.name, last, d1: ch(1), w1: ch(5), m1, m3: ch(60), y1: ch(240),
-      ma20, ma50, ma200, trend, kn5, knStreak, volRatio, rsi: rsi(c), spark: c.slice(-60), date: it.closes.at(-1)[0] };
-    r.sig = [];
-    if (r.rsi != null && r.rsi >= 70) r.sig.push(['Quá mua', 'down', 'RSI ' + fmt(r.rsi) + ' ≥ 70: tăng nóng, dễ điều chỉnh']);
-    if (r.rsi != null && r.rsi <= 30) r.sig.push(['Quá bán', 'up', 'RSI ' + fmt(r.rsi) + ' ≤ 30: giảm sâu, có thể hồi']);
-    if (ma200 && ma200prev && last > ma200 && c[n - 6] <= ma200prev) r.sig.push(['Vượt MA200', 'up', 'Vừa vượt lên trên trung bình 200 phiên']);
-    if (ma200 && ma200prev && last < ma200 && c[n - 6] >= ma200prev) r.sig.push(['Thủng MA200', 'down', 'Vừa rơi xuống dưới trung bình 200 phiên']);
-    if (knStreak >= 5) r.sig.push(['KN gom ' + knStreak + ' phiên', 'up', 'Khối ngoại mua ròng ' + knStreak + ' phiên liên tiếp']);
-    if (knStreak <= -5) r.sig.push(['KN xả ' + -knStreak + ' phiên', 'down', 'Khối ngoại bán ròng ' + -knStreak + ' phiên liên tiếp']);
-    if (volRatio != null && volRatio >= 2) r.sig.push(['KL đột biến x' + fmt(volRatio, 1), 'flat', 'Khối lượng gấp ' + fmt(volRatio, 1) + ' lần trung bình 20 phiên']);
-    return r;
-  }).filter(Boolean);
+  return Object.entries(ST.symbols).map(([code, it]) => analyze(code, it.name, it.closes || [], it.kn)).filter(Boolean);
 }
 const TREND = { up: ['▲ Tăng', 'up'], flat: ['● Đi ngang', 'flat'], down: ['▼ Giảm', 'down'] };
 function renderStocks() {
@@ -596,7 +632,7 @@ function renderStocks() {
   const head = '<thead><tr>' + cols.map(([k, l]) => `<th data-k="${k}" ${k === sortKey ? `aria-sort="${sortAsc ? 'ascending' : 'descending'}"` : ''}>${l}</th>`).join('') + '</tr></thead>';
   const pc = (v) => `<span class="${cls(v)}">${pct(v)}</span>`;
   const body = list.map(r => `<tr>
-    <td><b>${esc(r.code)}</b><span class="nm">${esc(r.name)}</span></td>
+    <td><button class="link" data-ma="${esc(r.code)}"><b>${esc(r.code)}</b></button><span class="nm">${esc(r.name)}</span></td>
     <td>${fmt(r.last, 2)}</td><td><span class="badge ${TREND[r.trend][1]}">${TREND[r.trend][0]}</span></td>
     <td>${pc(r.d1)}</td><td>${pc(r.w1)}</td><td>${pc(r.m1)}</td><td>${pc(r.m3)}</td><td>${pc(r.y1)}</td>
     <td><span class="${r.rsi >= 70 ? 'down' : r.rsi <= 30 ? 'up' : ''}">${fmt(r.rsi)}</span></td>
@@ -609,6 +645,7 @@ function renderStocks() {
     if (sortKey === k) sortAsc = !sortAsc; else { sortKey = k; sortAsc = k === 'code'; }
     renderStocks();
   });
+  $('tbl').querySelectorAll('button.link').forEach(b => b.onclick = () => lookup(b.dataset.ma, true));
   const map = Object.fromEntries(list.map(r => [r.code, r]));
   $('tbl').querySelectorAll('canvas.spark').forEach(cv => {
     const r = map[cv.dataset.c], a = r.spark; if (a.length < 2) return;
@@ -766,6 +803,167 @@ function renderLsManual() {
     rows.map(r => `<tr><td>${esc(r.ngan_hang)}</td><td>${esc(r.hinh_thuc || '–')}</td><td>${r.ky_han_thang} tháng</td><td><b>${fmt(r.lai_suat, 2)}%</b>/năm</td><td>${dvn(r.ngay)}</td><td style="text-align:left">${esc(r.ghi_chu)}</td></tr>`).join('') + '</tbody>';
 }
 
+// ---------- Tra cứu mã bất kỳ
+let MA_LIST = [];
+const noAcc = (x) => x.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase();
+function suggest(q) {
+  q = q.trim(); if (!q || !MA_LIST.length) return [];
+  const Q = q.toUpperCase(), nq = noAcc(q);
+  const a = [], b = [];
+  for (const m of MA_LIST) {
+    if (m[0].startsWith(Q)) a.push(m);
+    else if (nq.length >= 2 && b.length < 8 && m[3].includes(nq)) b.push(m);
+    if (a.length >= 8) break;
+  }
+  return a.concat(b).slice(0, 8);
+}
+function recent() { try { return JSON.parse(localStorage.getItem('dautu-ma') || '[]'); } catch (e) { return []; } }
+function saveRecent(code) {
+  const r = [code, ...recent().filter(x => x !== code)].slice(0, 8);
+  try { localStorage.setItem('dautu-ma', JSON.stringify(r)); } catch (e) {}
+  renderRecent();
+}
+function renderRecent() {
+  const r = recent();
+  const pick = r.length ? r : ['HPG', 'FPT', 'VCB', 'SSI', 'VHM', 'MWG'];
+  $('recent').innerHTML = `<span class="note" style="margin:0;align-self:center">${r.length ? 'Đã xem:' : 'Thử:'}</span>` +
+    pick.map(c => `<button type="button" data-ma="${esc(c)}">${esc(c)}</button>`).join('');
+  $('recent').querySelectorAll('button').forEach(b => b.onclick = () => lookup(b.dataset.ma));
+}
+function initSearch() {
+  const inp = $('maInput'), box = $('sugg');
+  let items = [], sel = -1;
+  const close = () => { box.hidden = true; sel = -1; };
+  const show = () => {
+    items = suggest(inp.value);
+    if (!items.length) return close();
+    box.innerHTML = items.map((m, i) => `<li role="option" data-i="${i}" aria-selected="${i === sel}"><b>${esc(m[0])}</b><span>${esc(m[1])}</span><small>${esc(m[2])}</small></li>`).join('');
+    box.hidden = false;
+    box.querySelectorAll('li').forEach(li => li.onmousedown = (e) => { e.preventDefault(); inp.value = items[+li.dataset.i][0]; close(); lookup(inp.value); });
+  };
+  inp.addEventListener('input', () => { sel = -1; show(); });
+  inp.addEventListener('keydown', (e) => {
+    if (box.hidden) return;
+    if (e.key === 'ArrowDown') { sel = Math.min(sel + 1, items.length - 1); show(); e.preventDefault(); }
+    if (e.key === 'ArrowUp') { sel = Math.max(sel - 1, 0); show(); e.preventDefault(); }
+    if (e.key === 'Escape') close();
+    if (e.key === 'Enter' && sel >= 0) { inp.value = items[sel][0]; }
+  });
+  inp.addEventListener('blur', () => setTimeout(close, 150));
+  $('searchForm').addEventListener('submit', (e) => {
+    e.preventDefault(); close();
+    let q = inp.value.trim();
+    if (!q) return;
+    // gõ tên công ty -> lấy gợi ý đầu tiên
+    if (!/^[A-Za-z0-9]{2,5}$/.test(q)) { const s = suggest(q); if (s.length) q = s[0][0]; }
+    lookup(q);
+  });
+  renderRecent();
+  j('data/ma_ck.json').then(d => {
+    if (d && d.ma) MA_LIST = d.ma.map(m => [m[0], m[1] || '', m[2] || '', noAcc(m[1] || '')]);
+  });
+}
+const getJ = (u, ms = 15000) => {
+  const ctl = new AbortController(); const tm = setTimeout(() => ctl.abort(), ms);
+  return fetch(u, { signal: ctl.signal }).then(r => { clearTimeout(tm); if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+};
+async function maPrices(code) {
+  const from = new Date(Date.now() - 400 * 864e5).toISOString().slice(0, 10);
+  try {
+    const d = await getJ(`https://api-finfo.vndirect.com.vn/v4/stock_prices?sort=date&q=code:${code}~date:gte:${from}&size=400`);
+    const rows = (d.data || []).filter(x => x.close != null).map(x => [x.date.slice(0, 10), +(x.adClose ?? x.close), +(x.nmVolume || 0), +x.close, x.floor]).sort((a, b) => a[0] < b[0] ? -1 : 1);
+    if (rows.length) return { rows, src: 'VNDirect' };
+  } catch (e) { /* thử nguồn khác */ }
+  const d = await getJ(`https://api.simplize.vn/api/historical/quote/prices/${code}?type=stock&page=0&size=300`);
+  const rows = (d.data || []).map(x => [keyOf(x.date * 1000), x.priceClose / 1000, +(x.volume || 0), x.priceClose / 1000, '']).sort((a, b) => a[0] < b[0] ? -1 : 1);
+  if (!rows.length) throw new Error('Không có số liệu giá');
+  return { rows, src: 'Simplize' };
+}
+async function maForeign(code) {
+  const d = await getJ(`https://cafef.vn/du-lieu/Ajax/PageNew/DataHistory/GDKhoiNgoai.ashx?Symbol=${code}&StartDate=&EndDate=&PageIndex=1&PageSize=30`);
+  const rows = (d.Data && d.Data.Data) || [];
+  // suy đơn vị: giá trị mua / khối lượng mua ≈ giá 1 cổ phiếu (đồng)
+  const ratios = rows.filter(r => r.GtMua > 0 && r.KLMua > 0).map(r => r.GtMua / r.KLMua).sort((a, b) => a - b);
+  let k = 1e9;
+  if (ratios.length) { const mid = ratios[Math.floor(ratios.length / 2)]; k = [1, 1e3, 1e6, 1e9].reduce((best, u) => Math.abs(Math.log10(mid * u / 30000)) < Math.abs(Math.log10(mid * best / 30000)) ? u : best, 1); k = 1e9 / k; }
+  const out = {};
+  for (const r of rows) {
+    const [dd, mm, yy] = String(r.Ngay).split('/');
+    const net = r.GTDGRong != null ? r.GTDGRong : (r.GtMua || 0) - (r.GtBan || 0);
+    out[`${yy}-${mm.padStart(2, '0')}-${dd.padStart(2, '0')}`] = net / k;
+  }
+  return out;
+}
+async function maLive(code) {
+  const d = await getJ(`https://bgapidatafeed.vps.com.vn/getliststockdata/${code}`, 8000);
+  const x = Array.isArray(d) ? d[0] : null;
+  return x && x.lastPrice ? { last: +x.lastPrice, ref: +x.r, ceil: +x.c, floor: +x.f, vol: +(x.lot || 0) * 10 } : null;
+}
+let maSeq = 0;
+async function lookup(raw, scroll) {
+  const code = String(raw || '').trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+  if (!code) return;
+  $('maInput').value = code;
+  const seq = ++maSeq;
+  if (scroll) document.getElementById('tra-cuu').scrollIntoView({ behavior: 'smooth' });
+  $('maResult').innerHTML = `<div class="card empty">Đang tải ${esc(code)}…</div>`;
+  const [pr, fr, lv] = await Promise.allSettled([maPrices(code), maForeign(code), maLive(code)]);
+  if (seq !== maSeq) return;
+  if (pr.status !== 'fulfilled') {
+    $('maResult').innerHTML = `<div class="card empty">Không tìm thấy số liệu cho mã <b>${esc(code)}</b>. Kiểm tra lại mã (VD: HPG, VNM) hoặc thử lại sau.</div>`;
+    return;
+  }
+  saveRecent(code);
+  const { rows, src } = pr.value;
+  const kn = fr.status === 'fulfilled' ? fr.value : {};
+  const live = lv.status === 'fulfilled' ? lv.value : null;
+  const info = MA_LIST.find(m => m[0] === code);
+  const r = analyze(code, info ? info[1] : '', rows, kn);
+  const lastRow = rows.at(-1);
+  const px = live ? live.last : lastRow[3];
+  const ref = live ? live.ref : (rows.length > 1 ? rows.at(-2)[3] : null);
+  const chg = ref ? (px / ref - 1) * 100 : null;
+  const floorName = info ? info[2] : (lastRow[4] || '');
+  const kv = (lbl, val) => `<div><span>${lbl}</span><b>${val}</b></div>`;
+  const pc = (v) => `<span class="${cls(v)}">${pct(v)}</span>`;
+  const knTxt = (v) => v == null ? '–' : `<span class="${cls(v)}">${v >= 0 ? 'Mua' : 'Bán'} ${fmt(Math.abs(v), 1)} tỷ</span>`;
+  const side = (m) => m == null ? '–' : `<span class="${cls(r.last - m)}">${r.last >= m ? 'trên' : 'dưới'} ${fmt(Math.abs(r.last / m - 1) * 100, 1)}%</span>`;
+  $('maResult').innerHTML = `<div class="card">
+    <div class="ma-head">
+      <span class="code">${esc(code)}</span>
+      <span class="px">${fmt(px, 2)}</span>
+      <span class="${cls(chg)}"><b>${arrow(chg)}${pct(chg)}</b></span>
+      <span class="badge ${TREND[r.trend][1]}">${TREND[r.trend][0]}</span>
+      <span class="nm">${esc(r.name || '')}${floorName ? ' · ' + esc(floorName) : ''} · giá nghìn đồng${live ? ` · tham chiếu ${fmt(live.ref, 2)}, trần ${fmt(live.ceil, 2)}, sàn ${fmt(live.floor, 2)}` : ''}</span>
+    </div>
+    <div class="kv">
+      ${kv('1 tuần', pc(r.w1))}${kv('1 tháng', pc(r.m1))}${kv('3 tháng', pc(r.m3))}${kv('1 năm', pc(r.y1))}
+      ${kv('RSI 14', `<span class="${r.rsi >= 70 ? 'down' : r.rsi <= 30 ? 'up' : ''}">${fmt(r.rsi)}</span>`)}
+      ${kv('So với MA50', side(r.ma50))}${kv('So với MA200', side(r.ma200))}
+      ${kv('KL so với TB 20 phiên', r.volRatio == null ? '–' : 'x' + fmt(r.volRatio, 1))}
+      ${kv('Khối ngoại 5 phiên', knTxt(r.kn5))}${kv('Khối ngoại 20 phiên', knTxt(r.kn20))}
+    </div>
+    <div style="margin-bottom:8px">${r.sig.map(([t, c, d]) => `<span class="pill ${c}" title="${d}">${t}</span>`).join(' ') || '<span class="note">Không có tín hiệu đặc biệt.</span>'}</div>
+    <div class="chart"><canvas id="cMa"></canvas></div>
+    <div class="chart sm" style="margin-top:12px"><canvas id="cMaKn"></canvas></div>
+    <p class="note" style="margin:8px 0 0">Nguồn giá: ${src} (đã điều chỉnh chia tách/cổ tức)${live ? ', giá trong phiên: VPS' : ''}${Object.keys(kn).length ? ', khối ngoại: CafeF' : ''}. Cập nhật đến ${dvn(r.date)}.</p>
+  </div>`;
+  const s = startDate();
+  const series = rows.map(x => [x[0], x[1]]);
+  const maLine = (k) => series.map((x, i) => i >= k - 1 ? [x[0], series.slice(i - k + 1, i + 1).reduce((t, y) => t + y[1], 0) / k] : null).filter(Boolean);
+  draw('cMa', { type: 'line', data: { datasets: [
+    line(code, inRange(series, s), css('--s1')),
+    line('MA20', inRange(maLine(20), s), css('--s4'), { borderWidth: 1.5 }),
+    line('MA50', inRange(maLine(50), s), css('--s7'), { borderWidth: 1.5, borderDash: [5, 4] }),
+  ] }, options: baseOpts('nghìn đ', { legend: true, dec: 2 }) });
+  const knA = Object.entries(kn).sort();
+  const o = baseOpts('tỷ', { dec: 1 });
+  o.plugins.tooltip.callbacks.label = (c) => ` Khối ngoại ${c.parsed.y >= 0 ? 'mua ròng' : 'bán ròng'}: ${fmt(Math.abs(c.parsed.y), 1)} tỷ`;
+  o.scales.x.offset = true;
+  draw('cMaKn', { type: 'bar', data: { datasets: [{ label: 'Khối ngoại ròng', data: xy(knA),
+    backgroundColor: knA.map(([, v]) => v >= 0 ? css('--up') : css('--down')), borderRadius: 3, maxBarThickness: 16 }] }, options: o });
+}
+
 // Thanh chọn mục: bấm để nhảy tới mục, tự sáng mục đang xem
 function initNav() {
   const bar = document.querySelector('.toolbar');
@@ -803,6 +1001,7 @@ function initRange() {
       try { localStorage.setItem('dautu-range', months); } catch (e) {}
       $('range').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
       render();
+      if ($('cMa')) lookup($('maInput').value);
     };
   });
 }
