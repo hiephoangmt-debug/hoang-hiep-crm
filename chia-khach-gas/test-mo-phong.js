@@ -134,6 +134,18 @@ console.log('\n'+lastTo(900).text.replace(/<[^>]+>/g,''));
  advW(14*60*1); run(); ok(K(id).nguoi_giu===hg,'gia hạn: qua mốc 3 ngày cũ vẫn chưa thu hồi');
  ok(sent.filter(s=>String(s.chat_id)===hg&&/còn khoảng 1 ngày/.test(s.text)&&s.text.includes(id)).length===2,'gia hạn: nhắc lại trước hạn mới 1 ngày');
  advW(14*60*1); run(); g=K(id); ok(g.nguoi_giu!==hg&&edits.some(e=>String(e.chat_id)===hg&&/đã được thu hồi/.test(e.text)&&e.text.includes(id)),'gia hạn: hết ngày gia hạn mà chưa chuyển đổi → thu hồi');}
+// quản lý thêm khách bằng tay
+{vm.runInContext("rows_('Sale',T_SALE).forEach(function(s){s.trang_thai=s.chat_id=='2'?'nghi_viec':'lam';save_('Sale',T_SALE,s);})",ctx);
+ const b0=vm.runInContext("rows_('Khach',T_KHACH).length",ctx);
+ msg(900,'/them 0912 345 678 Chị Hoa - căn 2PN, xem cuối tuần\n+84 913 000 111 Anh Nam\nabc\n0912345678 trùng'); run();
+ const added=vm.runInContext("rows_('Khach',T_KHACH).slice("+b0+")",ctx);
+ ok(added.length===2&&added[0].sdt==='0912345678'&&added[0].ten==='Chị Hoa'&&added[0].nhu_cau==='căn 2PN, xem cuối tuần'&&added[1].sdt==='0913000111'&&added[1].ten==='Anh Nam','/them: thêm 2 khách, đúng tên, số, nhu cầu');
+ ok(added.every(k=>k.trang_thai==='cho_nhan'&&k.nguon==='quản lý thêm'),'/them: khách được giao ngay cho sale');
+ const rep=lastTo(900).text; ok(/❌ Không thấy số hợp lệ: abc/.test(rep)&&/đã có/.test(rep)&&(rep.match(/✅/g)||[]).length===2,'/them: báo dòng lỗi và số trùng');
+ ok(sent.some(s=>/KHÁCH /.test(s.text)&&/0912 ••• 678/.test(s.text)&&!/0912345678/.test(s.text)),'/them: sale chỉ thấy số đã che');
+ msg(900,'/them'); run(); ok(/Gõ: /.test(lastTo(900).text),'/them trống: hướng dẫn cách gõ');
+ const h=added[0].nguoi_giu; crmRow('0912345678','Hoa web'); run();
+ ok(vm.runInContext("rows_('Khach',T_KHACH).filter(function(k){return k.sdt==='0912345678'}).length",ctx)===1&&nhacTo(h,/vừa để lại thông tin/),'/them rồi khách tự điền web: không chia trùng, báo người đang giữ');}
 // lọc tên miền: chỉ sun-saphia-residence.com
 {const b0=vm.runInContext("rows_('Khach',T_KHACH).length",ctx);
  const r1=Array(46).fill('');r1[1]=new FD();r1[2]='Cora';r1[3]='0988777666';r1[5]='www.cora-tower.com';r1[9]=1;r1[39]='Website';r1[40]='https://www.cora-tower.com/';r1[41]='Cora Tower';kh.appendRow(r1);

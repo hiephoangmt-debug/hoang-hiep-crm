@@ -110,6 +110,7 @@ Nếu báo lỗi, đọc dòng đỏ:
 | Sale | `/khach` | Xem khách đang giữ |
 | Sale | `/giahan K4` | Xin thêm 1 ngày cho hạn chuyển đổi (1 lần mỗi khách) |
 | Sale | `/nghi` · `/lam` | Tạm dừng / bật lại nhận khách (nghỉ phép, bận) |
+| Quản lý | `/them 0905123456 Tên - nhu cầu` | Thêm khách bằng tay (khách giới thiệu, Facebook, gọi hotline…), bot chia ngay. Nhiều khách: mỗi khách 1 dòng dưới chữ /them |
 | Quản lý | `/sale` | Danh sách đội, mỗi người đang giữ bao nhiêu khách |
 | Quản lý | `/baocao` | Báo cáo hôm nay |
 | Quản lý | `/tam Tên` · `/mo Tên` | Tạm dừng / mở lại chia cho một sale |
@@ -136,7 +137,7 @@ Sửa ngay trong tab **CauHinh**, không cần sửa code:
 
 ## Kiểm tra
 
-`node test-mo-phong.js` chạy 61 tình huống trên bản giả lập Google Sheet và Telegram:
+`node test-mo-phong.js` chạy 67 tình huống trên bản giả lập Google Sheet và Telegram:
 - 30 phút, 2 giờ, 3 ngày, gia hạn;
 - ban đêm;
 - sale khác bấm nhầm khách;

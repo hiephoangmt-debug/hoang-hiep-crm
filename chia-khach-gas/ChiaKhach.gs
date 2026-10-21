@@ -283,6 +283,12 @@ function nhanKhachMoi_() {
   });
   if (!moi.length) return;
   var dem = Number(P().getProperty('DEM') || 0);
+  moi = moi.filter(function (c) {
+    var k = tatCa.filter(function (x) { return x.sdt === c.sdt && (DANG_GIU.test(x.trang_thai) || x.trang_thai === 'chot') && x.nguoi_giu; }).pop();
+    if (!k) return true;
+    nhac_(k, '🔁 <b>Khách ' + esc(k.id) + ' vừa để lại thông tin</b> trên web' + (c.ghi_chu ? ' (' + esc(c.ghi_chu.slice(0, 120)) + ')' : '') + '. Liên hệ ngay giúp nhé.');
+    log_(k.ten_sale, 'khách quay lại', k.id, 'web'); return false;
+  });
   moi.forEach(function (c) {
     dem++;
     var k = {id: 'K' + dem, luc_vao: nowD(), ten: c.ten, sdt: c.sdt, nhu_cau: [c.du_an, c.ghi_chu].filter(String).join(' · '),
@@ -293,6 +299,26 @@ function nhanKhachMoi_() {
   P().setProperty('DEM', String(dem));
 }
 /* Thêm khách bằng tay để thử: themKhachThu() */
+/* Quản lý thêm khách bằng tay: mỗi dòng "Số Tên - nhu cầu" */
+function themKhachTay_(txt) {
+  var dong = String(txt || '').split(/\n+/).map(function (x) { return x.trim(); }).filter(String);
+  if (!dong.length) return 'Gõ: <code>/them 0905123456 Tên khách - nhu cầu</code>\nNhiều khách: mỗi khách 1 dòng ngay dưới chữ /them.';
+  var tatCa = rows_('Khach', T_KHACH), dem = Number(P().getProperty('DEM') || 0), kq = [];
+  dong.forEach(function (d) {
+    var m = d.match(/(\+?84|0)[\d .\-]{8,13}\d/), sdt = m ? normPhone(m[0]) : '';
+    if (sdt.length !== 10) { kq.push('❌ Không thấy số hợp lệ: ' + esc(d.slice(0, 60))); return; }
+    var cu = tatCa.filter(function (x) { return x.sdt === sdt && (DANG_GIU.test(x.trang_thai) || /chot|cho_giao|cho_quan_ly/.test(x.trang_thai)); }).pop();
+    if (cu) { kq.push('⚠️ ' + esc(che(sdt)) + ' đã có: ' + esc(cu.id) + (cu.ten_sale ? ' – ' + esc(cu.ten_sale) : '') + ' (' + esc(cu.trang_thai) + '), không thêm.'); return; }
+    var con = d.replace(m[0], ' ').replace(/\s+/g, ' ').trim(), i = con.indexOf(' - ');
+    var ten = (i > -1 ? con.slice(0, i) : con).replace(/^[-–:,\s]+|[-–:,\s]+$/g, ''), nc = i > -1 ? con.slice(i + 3).trim() : '';
+    dem++; P().setProperty('DEM', String(dem));
+    var k = {id: 'K' + dem, luc_vao: nowD(), ten: ten.slice(0, 60), sdt: sdt, nhu_cau: nc.slice(0, 200), nguon: 'quản lý thêm', trang: '', trang_thai: 'moi', da_qua: '', so_luot: 0, so_bao_cao: 0};
+    save_('Khach', T_KHACH, k); log_('quản lý', 'thêm khách', k.id, che(sdt)); tatCa.push(k);
+    giao_(k);
+    kq.push('✅ ' + esc(k.id) + ' ' + esc(che(sdt)) + (k.ten ? ' – ' + esc(k.ten) : '') + ': ' + (k.trang_thai === 'cho_nhan' ? 'đã giao ' + esc(k.ten_sale) : k.trang_thai === 'cho_giao' ? 'đội đang bận, chờ giao' : 'chưa có sale nhận'));
+  });
+  return '<b>Thêm khách</b>\n' + kq.join('\n');
+}
 function themKhachThu() { var k = {id: 'T' + Date.now() % 100000, luc_vao: nowD(), ten: 'Khách thử', sdt: '0900000000', nhu_cau: 'Thử hệ thống', nguon: 'thử', trang_thai: 'moi', da_qua: '', so_luot: 0, so_bao_cao: 0}; save_('Khach', T_KHACH, k); giao_(k); }
 
 /* --- giao khách --- */
@@ -418,6 +444,7 @@ function lenh_(m) {
       gui_(xv.chat_id, 'Tài khoản của bạn đã được gỡ khỏi đội chia khách. Cảm ơn bạn.');
       gui_(chat, '🗑 Đã gỡ ' + esc(xv.ten) + ', thu hồi và chia lại ' + giu.length + ' khách người đó đang giữ.'); return;
     }
+    if (c === '/them') { gui_(chat, themKhachTay_(t.replace(/^\S+[ \t]*/, ''))); return; }
     if (c === '/sale') { gui_(chat, danhSachSale_()); return; }
     if (c === '/baocao') { gui_(chat, baoCao_(Date.now())); return; }
     if (c === '/tam' || c === '/mo') {
@@ -426,7 +453,7 @@ function lenh_(m) {
       x.trang_thai = c === '/tam' ? 'nghi' : 'lam'; save_('Sale', T_SALE, x); log_('quản lý', c === '/tam' ? 'tạm dừng' : 'mở lại', '', x.ten);
       gui_(chat, (c === '/tam' ? '⏸ Tạm dừng chia cho ' : '▶️ Mở lại chia cho ') + esc(x.ten)); return;
     }
-    gui_(chat, 'Lệnh quản lý: /sale · /baocao · /tuan · /tam Tên · /mo Tên · /xoa Tên'); return;
+    gui_(chat, 'Lệnh quản lý: /them Số Tên - nhu cầu · /sale · /baocao · /tuan · /tam Tên · /mo Tên · /xoa Tên'); return;
   }
   if (!s || /cho_duyet|tu_choi|nghi_viec/.test(s.trang_thai)) { gui_(chat, 'Nhắn <code>/dangky Tên của bạn</code> để xin vào đội chia khách.'); return; }
   /* Đang chờ ghi lý do đóng khách: tin tiếp theo (không phải lệnh) là lý do */
