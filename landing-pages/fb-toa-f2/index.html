@@ -608,6 +608,7 @@ if (FB_PIXEL_ID) {
   document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('a[href*="zalo.me"], a[href^="tel:"]'); if (a) fbq('track', 'Contact', {content_name: a.href.indexOf('tel:') === 0 ? 'Gọi' : 'Zalo'}); }, true);
 }
 </script>
+<style>.bigstats b{white-space:nowrap}@media (min-width:1025px){.bigstats b{font-size:clamp(34px,3.4vw,50px)}}</style>
 </head>
 <body data-subject="Lead Facebook Tòa F2">
 
@@ -1257,7 +1258,7 @@ const cio = new IntersectionObserver(es => es.forEach(e => {
   const step = t => { const k = Math.min(1, (t - t0) / 1400); el.textContent = f(end * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); };
   requestAnimationFrame(step);
 }), {threshold: .5});
-if (!matchMedia('(prefers-reduced-motion:reduce)').matches) $$('[data-count]').forEach(el => cio.observe(el));
+// Số hiện sẵn, không chạy số (chạy số làm trang giật)
 
 // Máy tính vốn theo loại căn (đơn vị triệu đồng)
 const fm = v => v >= 1000 ? (Math.round(v / 10) / 100).toLocaleString('vi-VN', {maximumFractionDigits: 2}) + ' tỷ' : Math.round(v).toLocaleString('vi-VN') + ' triệu';

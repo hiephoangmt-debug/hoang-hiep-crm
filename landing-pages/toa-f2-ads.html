@@ -546,6 +546,7 @@ var SFT_ADS = {lead: '', call: '', zalo: ''};
 /* Google Ads: ghi nhận khách bấm gọi, bấm Zalo (gửi form đã ghi trong code form) */
 document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href*="zalo.me"]'); if (a) gtag('event', a.href.indexOf('tel:') === 0 ? 'phone_call_click' : 'zalo_click'); }, true);
 </script>
+<style>.bigstats b{white-space:nowrap}@media (min-width:1025px){.bigstats b{font-size:clamp(34px,3.4vw,50px)}}</style>
 </head>
 <body data-subject="Lead ADS Tòa F2 FourS Tower">
 
@@ -1126,7 +1127,7 @@ const cio = new IntersectionObserver(es => es.forEach(e => {
   const step = t => { const k = Math.min(1, (t - t0) / 1400); el.textContent = f(end * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); };
   requestAnimationFrame(step);
 }), {threshold: .5});
-if (!matchMedia('(prefers-reduced-motion:reduce)').matches) $$('[data-count]').forEach(el => cio.observe(el));
+// Số hiện sẵn, không chạy số (chạy số làm trang giật)
 
 // Máy tính vốn tự có khi vay 70%
 const fmt = n => n >= 1e9 ? (n / 1e9).toLocaleString('vi-VN', {maximumFractionDigits: 2}) + ' tỷ' : Math.round(n / 1e6).toLocaleString('vi-VN') + ' triệu';
