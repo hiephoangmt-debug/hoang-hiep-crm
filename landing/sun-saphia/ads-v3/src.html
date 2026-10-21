@@ -102,11 +102,20 @@
 .btn-gold::before{content:"";position:absolute;top:0;left:-80%;width:45%;height:100%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.55),rgba(255,255,255,0));transform:skewX(-22deg);animation:hhcShine 3.2s ease-in-out infinite;pointer-events:none;z-index:-1}
 @keyframes hhcShine{0%{left:-80%}55%,100%{left:135%}}
 @media (prefers-reduced-motion:reduce){.btn-gold::before{animation:none;display:none}}
-.fab .chat{background:var(--green-800);border:2px solid var(--gold)}
-.mbar{grid-template-columns:.9fr .9fr .9fr 1.3fr!important}
-.mbar a:nth-child(1){background:#0b1a3a!important;color:#fff!important}.mbar a:nth-child(2){background:var(--green-800)!important;color:#fff!important}.mbar a:nth-child(3){background:#0068ff!important;color:#fff!important}.mbar a:nth-child(4){background:linear-gradient(135deg,#ffa04a,#f07b1f)!important;color:#fff!important;font-weight:800}
 .ben{padding:0;overflow:hidden}.ben .bd{padding:34px 22px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
 .ben .ph{overflow:visible}.ben .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1}
+/* Nút gọi, Zalo, chat: cột tròn góc dưới bên phải */
+.mbar{display:none!important}
+.fab{display:flex!important;position:fixed;right:18px;bottom:18px;z-index:9000;flex-direction:column;gap:12px;align-items:flex-end}
+.fab a{position:relative;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;color:#fff;border:3px solid #fff;box-shadow:0 10px 24px -6px rgba(11,26,58,.55);text-decoration:none;font:800 13px/1 var(--sans);transition:transform .2s;animation:none;padding:0}
+.fab a:hover{transform:scale(1.08)}
+.fab .f-chat{background:#13285a}
+.fab .f-zalo{background:#0068ff}
+.fab .f-call{background:linear-gradient(135deg,#ffa04a,#f07b1f);animation:ringg 1.6s infinite}
+.fab .lb{position:absolute;right:68px;top:50%;transform:translateY(-50%);white-space:nowrap;background:#13285a;color:#fff;font:600 13px/1 var(--sans);padding:9px 13px;border-radius:999px;box-shadow:0 8px 20px -8px rgba(11,26,58,.6);opacity:0;pointer-events:none;transition:opacity .2s}
+.fab a:hover .lb,.fab a:focus-visible .lb{opacity:1}
+@media (max-width:760px){.fab{right:12px;bottom:14px;gap:10px}.fab a{width:52px;height:52px}.fab .lb{display:none}}
+@media (prefers-reduced-motion:reduce){.fab .f-call{animation:none}}
 .privacy-note{font-size:12.5px;color:var(--muted);margin-top:8px}
 .privacy-note a{text-decoration:underline}
 .hhc-ok{margin-top:10px;background:#e8f6ee;color:#0b6b3a;border-radius:10px;padding:10px 12px;font-size:14.5px;font-weight:600}
@@ -456,16 +465,11 @@
   <p>Số liệu: Sở VHTT&amp;DL Đà Nẵng, Báo Đà Nẵng (9 tháng 2026); Nghị quyết 44/NQ-CP; tin rao muaban.net, Nhà Đầu tư, CafeBiz; Avison Young, CoStar. Cập nhật: 21/10/2026.</p>
 </footer>
 
-<div class="fab">
-  <a href="#" class="chat" data-hhc-open aria-label="Chat hỏi nhanh về dự án"><svg viewBox="0 0 24 24" width="26" height="26" fill="#fff" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm3 6.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg></a>
-  <a href="tel:0904567009" class="call" aria-label="Gọi hotline 0904 567 009"><svg viewBox="0 0 24 24" width="26" height="26" fill="#fff" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg></a>
-  <a href="https://zalo.me/0904567009" class="zalo" target="_blank" rel="noopener" aria-label="Chat Zalo">Zalo</a>
-</div>
-<div class="mbar">
-  <a href="#" data-hhc-open>💬 Hỏi</a>
-  <a href="tel:0904567009">📞 Gọi</a>
-  <a href="https://zalo.me/0904567009" target="_blank" rel="noopener">Zalo</a>
-  <a href="#dang-ky" data-pop data-interest="ADS – thanh dưới điện thoại" data-title="Nhận bảng giá &amp; mặt bằng" data-sub="Gửi qua Zalo ngay khi chủ đầu tư công bố." data-btn="Gửi cho tôi qua Zalo →">Nhận bảng giá</a>
+<!-- Nút liên hệ nhanh: góc dưới bên phải, mọi thiết bị -->
+<div class="fab" aria-label="Liên hệ nhanh">
+  <a href="#" class="f-chat" data-hhc-open aria-label="Chat hỏi nhanh về dự án"><svg viewBox="0 0 24 24" width="26" height="26" fill="#fff" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm3 6.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg><span class="lb">Hỏi nhanh</span></a>
+  <a href="https://zalo.me/0904567009" class="f-zalo" target="_blank" rel="noopener" aria-label="Nhắn Zalo 0904 567 009">Zalo<span class="lb">Nhắn Zalo</span></a>
+  <a href="tel:0904567009" class="f-call" aria-label="Gọi 0904 567 009"><svg viewBox="0 0 24 24" width="25" height="25" fill="#fff" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg><span class="lb">Gọi 0904 567 009</span></a>
 </div>
 
 <div class="modal pop" id="leadPop" role="dialog" aria-modal="true" aria-labelledby="popT"><div class="box">
