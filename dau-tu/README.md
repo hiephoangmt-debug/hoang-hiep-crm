@@ -24,5 +24,5 @@ Sửa `BIG_STOCKS` trong `fetch_prices.py`.
 
 ## Nguồn
 
-SJC (giá vàng), Yahoo Finance (vàng thế giới, USD/VND, Bitcoin), DNSE – dự phòng VNDirect (chỉ số, cổ phiếu),
+SJC – dự phòng PNJ, Bảo Tín Minh Châu, DOJI (giá vàng miếng), Yahoo Finance (vàng thế giới, USD/VND, Bitcoin), DNSE – dự phòng VNDirect (chỉ số, cổ phiếu),
 CafeF (khối ngoại), Vietcombank (dự phòng tỷ giá). Nguồn nào lỗi thì bỏ qua, trang ghi chú ở cuối.

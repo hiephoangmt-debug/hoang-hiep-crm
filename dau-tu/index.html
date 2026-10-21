@@ -181,7 +181,7 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
   </section>
 
   <footer>
-    Nguồn: SJC, Yahoo Finance (vàng/bạc/dầu/S&amp;P 500/USD/Bitcoin, trễ ~15 phút), DNSE/VNDirect, CafeF; BĐS và lãi suất nhập tay. Số liệu tự cập nhật mỗi giờ trong phiên (9:15–15:15, thứ 2–6) và 18:30 hằng ngày.
+    Nguồn: SJC / PNJ / Bảo Tín Minh Châu / DOJI (vàng miếng), Yahoo Finance (vàng/bạc/dầu/S&amp;P 500/USD/Bitcoin, trễ ~15 phút), DNSE/VNDirect, CafeF; BĐS và lãi suất nhập tay. Số liệu tự cập nhật mỗi giờ trong phiên (9:15–15:15, thứ 2–6) và 18:30 hằng ngày.
     Chỉ để tham khảo, không phải khuyến nghị đầu tư.
     <div class="err" id="errs"></div>
   </footer>
@@ -610,7 +610,7 @@ function renderPremium(s) {
   const note = now > avg * 1.15 ? 'cao hơn bình thường – mua SJC lúc này chịu chênh lệch lớn' : now < avg * 0.85 ? 'thấp hơn bình thường' : 'gần mức trung bình';
   $('goldStats').innerHTML = `<span>SJC đắt hơn thế giới: <b>${fmt(now, 1)} tr/lượng</b> (${fmt(now / (w[a.at(-1)[0]]) * 100, 1)}%)</span>
     <span>Trung bình kỳ: <b>${fmt(avg, 1)}</b> · thấp nhất <b>${fmt(Math.min(...vals), 1)}</b> · cao nhất <b>${fmt(Math.max(...vals), 1)}</b></span>
-    <span>Hiện ${note}</span>`;
+    <span>Hiện ${note}</span>${P.sjc_nguon ? `<span>Nguồn giá vàng miếng SJC: <b>${esc(P.sjc_nguon)}</b></span>` : ''}`;
 }
 
 function renderBds(s) {
