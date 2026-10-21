@@ -34,6 +34,16 @@ add_filter(
 			$img( 'choi-nghi-cafe-noi-khu', 'Chòi nghỉ và café ngoài trời trên trục nội khu Capital Square', 'tiện ích', 'Chòi nghỉ' ),
 			$img( 'tieu-chuan-ban-giao', 'Tiêu chuẩn bàn giao căn hộ bán hoàn thiện Hudson Place S4: phòng tắm đủ thiết bị, cửa chống cháy smartkey, ban công', 'thư viện', 'Tiêu chuẩn bàn giao' ),
 		);
+		$old_links = implode( "\n", $lines ); // Danh sách ảnh bản đầu – thay bằng danh sách mới khi chưa sửa tay.
+		array_splice(
+			$lines,
+			2,
+			0,
+			array(
+				$img( 'mat-bang-vi-tri-capital-square-3', 'Mặt bằng vị trí các tòa Capital Square: Hudson Place, Broadway Place, Kings Place, Queens Place, Times Place giữa Trần Hưng Đạo, Ngô Quyền và Nguyễn Công Trứ', 'tổng thể', 'Vị trí Hudson Place trong tổ hợp' ),
+				$img( 'phoi-canh-dem-toa-s4-c3', 'Phối cảnh đêm Capital Square Đà Nẵng nhìn từ sông Hàn: tòa S4 Hudson Place và tòa C3, phía sau là Sơn Trà và biển Mỹ Khê', 'thư viện', 'Tòa S4 nhìn từ sông Hàn' ),
+			)
+		);
 		$content = '<p><strong>Hudson Place</strong> (mã bán hàng <strong>tòa S4</strong>) là tòa căn hộ 24 tầng, 314 căn thuộc phân khu <strong>Capital Square 3</strong> do Công ty CP Bất động sản SIH làm chủ đầu tư, nằm trong <a href="/du-an/capital-square-da-nang/">tổ hợp Capital Square Đà Nẵng</a> ven sông Hàn. Tòa có căn 1PN, 2PN, 3PN và 3PN dualkey, dự kiến bàn giao quý III/2027, sổ hồng sở hữu lâu dài, đơn vị vận hành Savills.</p>
 <h2>Thông số tòa S4 Hudson Place</h2>
 <table>
@@ -87,6 +97,14 @@ add_filter(
 <p>Bể bơi resort, bể bơi trẻ em, sân chơi trẻ em, sân golf mini, sân vườn thư giãn, đồi chà là, chòi nghỉ và café ngoài trời; trong tổ hợp có công viên khoảng 2.000 m², Grand Central Mall, sân pickleball, sân bóng rổ, khu BBQ, outdoor gym, sân khấu ngoài trời, đường dạo trên cao.</p>
 <p>Liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> để nhận bảng giá từng căn, phiếu tính dòng tiền theo phương án vay hoặc thanh toán sớm của Hudson Place, hoặc gửi yêu cầu tại <a href="/lien-he/">trang liên hệ</a>.</p>';
 
+		$old_content = $content; // Bản đầu – cập nhật khi anh chưa sửa tay.
+		$content     = str_replace(
+			'đang thi công phần thân.</p>',
+			'đang thi công phần thân.</p>
+<p>Trên mặt bằng vị trí mới của chủ đầu tư, Hudson Place đứng cùng cụm với Broadway Place, nhìn thẳng ra bể bơi resort phía đường Nguyễn Công Trứ; phía Bắc là Kings Place, Queens Place và Times Place, phía Tây là đường Trần Hưng Đạo ven sông Hàn, phía Đông là Đại lộ Ngô Quyền. Chủ đầu tư ghi thời gian di chuyển khoảng 5 phút ra biển Mỹ Khê và 30 phút đi Hội An. Nhìn từ sông Hàn về đêm, tòa S4 nằm phía bên phải tổ hợp, hướng về Mỹ Khê.</p>',
+			$content
+		);
+
 		$projects[] = array(
 			'slug'    => 'capital-square-hudson-place-s4',
 			'title'   => 'Hudson Place S4 Capital Square Đà Nẵng',
@@ -124,6 +142,8 @@ add_filter(
 				'hh_p_faq'           => "Hudson Place S4 có bao nhiêu căn? | 24 tầng, 314 căn hộ; tầng điển hình 15 căn/sàn gồm 2 căn 1PN, 7 căn 2PN và 6 căn 3PN.\nHudson Place S4 bao giờ bàn giao? | Dự kiến quý III/2027, bàn giao bán hoàn thiện: phòng tắm đủ thiết bị, cửa chống cháy smartkey, sàn và tường trát phẳng.\nHudson Place S4 có sổ hồng lâu dài không? | Có, sở hữu lâu dài. Khách mua theo hình thức chuyển nhượng hợp đồng mua bán, ký tại văn phòng chủ đầu tư SIH.\nVay mua Hudson Place S4 được bao nhiêu? | Tới 70% tổng giá bán, lãi suất 0% tới 36 tháng (phương án 1), ân hạn gốc 36 tháng, miễn phí trả nợ trước hạn trong thời gian hỗ trợ lãi suất.\nThanh toán sớm Hudson Place S4 được ưu đãi bao nhiêu? | Theo tài liệu 28/9/2026: thanh toán tiến độ 8%, thanh toán nhanh 100% giá chuyển nhượng 12%, thanh toán sớm 95% giá bán 18%; tặng gói smarthome 100 – 300 triệu trừ vào giá.\nCăn dualkey Hudson Place là gì? | Căn 3PN khoảng 101 m² chia thành một căn 2 phòng ngủ và một studio có cửa riêng, ở hai thế hệ hoặc vừa ở vừa cho thuê.\nHudson Place S4 do ai vận hành? | Savills.",
 			),
 			'content' => $content,
+			'fix_content' => array( $old_content ),
+			'fix_meta'    => array( 'hh_p_image_links' => array( $old_links ) ),
 			'sources' => array( 'https://www.capital-square.vn/' ),
 		);
 		return $projects;
