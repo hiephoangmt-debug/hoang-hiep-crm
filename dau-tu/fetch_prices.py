@@ -1,7 +1,7 @@
 """Lấy giá các kênh đầu tư mỗi ngày và lưu vào data/*.json để trang index.html vẽ biểu đồ.
 
 Kênh tự động:
-  - Vàng SJC (mua/bán, triệu đồng/lượng)          – sjc.com.vn
+  - Vàng miếng SJC (mua/bán, triệu đồng/lượng)    – SJC, dự phòng PNJ / Bảo Tín Minh Châu / DOJI
   - Vàng thế giới (USD/oz), bạc, dầu Brent, S&P 500, USD/VND, Bitcoin – Yahoo Finance
   - VN-Index, VN30, HNX-Index, UPCoM và ~30 cổ phiếu lớn             – DNSE (dự phòng: VNDirect)
   - Khối ngoại mua/bán ròng toàn sàn HOSE và từng mã lớn – CafeF
@@ -116,38 +116,101 @@ def to_num(x):
 
 
 # ---------------------------------------------------------------- Vàng SJC
-def fetch_sjc():
-    r = S.post(
-        "https://sjc.com.vn/GoldPrice/Services/PriceService.ashx",
-        data={"method": "GetCurrentGoldPricesByBranch", "BranchId": "1"},
-        headers={"Referer": "https://sjc.com.vn/", "Origin": "https://sjc.com.vn",
-                 "X-Requested-With": "XMLHttpRequest"},
-        timeout=25,
-    )
-    r.raise_for_status()
-    rows = r.json().get("data") or []
-    pick = None
-    for row in rows:
-        name = (row.get("TypeName") or "").upper()
-        if "SJC" in name and ("1L" in name or "1 L" in name or "LƯỢNG" in name):
-            pick = row
-            break
-    pick = pick or (rows[0] if rows else None)
-    if not pick:
-        raise ValueError("SJC không trả dữ liệu")
-    buy = to_num(pick.get("BuyValue") or pick.get("Buy"))
-    sell = to_num(pick.get("SellValue") or pick.get("Sell"))
+LUONG_PER_OZ = 37.5 / 31.1034768
+SJC_SOURCES = (
+    # (tên, phương thức, url, dữ liệu POST)
+    ("SJC", "post", "https://sjc.com.vn/GoldPrice/Services/PriceService.ashx",
+     {"method": "GetCurrentGoldPricesByBranch", "BranchId": "1"}),
+    ("PNJ", "get", "https://edge-api.pnj.io/ecom-frontend/v1/get-gold-price?zone=00", None),
+    ("Bảo Tín Minh Châu", "get",
+     "http://api.btmc.vn/api/BTMCAPI/getpricebtmc?key=3kd8ub1llcg9t45hnoh8hmn7t5kc2v", None),
+    ("DOJI", "get", "http://update.giavang.doji.vn/banggia/doji_92411/92411", None),
+)
+BUY_KEYS = ("buy", "mua", "pb")
+SELL_KEYS = ("sell", "ban", "bán", "ps")
+SKIP_WORDS = ("NHẪN", "NỮ TRANG", "TRANG SỨC", "NHAN", "NU TRANG")
 
-    def mil(v):  # quy về triệu đồng/lượng
-        if v is None:
-            return None
-        if v > 1e6:
-            return v / 1e6
-        if v > 1e3:  # nghìn đồng
-            return v / 1e3
-        return v
 
-    return mil(buy), mil(sell)
+def _records(resp_text):
+    """Mọi bản ghi (dict) trong JSON, hoặc mọi thẻ XML có thuộc tính."""
+    try:
+        data = json.loads(resp_text)
+    except ValueError:
+        return [dict(re.findall(r'([\w@:-]+)="([^"]*)"', attrs))
+                for attrs in re.findall(r"<\w+\s([^>]+?)/?>", resp_text)]
+    out, stack = [], [data]
+    while stack:
+        x = stack.pop()
+        if isinstance(x, dict):
+            out.append(x)
+            stack.extend(x.values())
+        elif isinstance(x, list):
+            stack.extend(x)
+    return out[::-1]
+
+
+def _pick_sjc(records):
+    """Dòng vàng miếng SJC: (giá mua, giá bán) ở đơn vị gốc của nguồn."""
+    best = None
+    for d in records:
+        name = " ".join(str(v) for v in d.values() if isinstance(v, str)).upper()
+        if "SJC" not in name or any(w in name for w in SKIP_WORDS):
+            continue
+        buy = sell = None
+        for k, v in d.items():
+            kl = k.lower()
+            n = to_num(v) if not isinstance(v, (dict, list)) else None
+            if not n or n <= 0:
+                continue
+            if buy is None and any(t in kl for t in BUY_KEYS):
+                buy = n
+            elif sell is None and any(t in kl for t in SELL_KEYS):
+                sell = n
+        if buy and sell:
+            score = ("MIẾNG" in name or "1L" in name or "1 L" in name)
+            if best is None or (score and not best[2]):
+                best = (buy, sell, score)
+    if not best:
+        raise ValueError("không thấy dòng vàng miếng SJC")
+    return best[0], best[1]
+
+
+def _to_trieu_luong(v, ref):
+    """Đổi giá về triệu đồng/lượng; đơn vị gốc có thể là đồng, nghìn, lượng hay chỉ.
+    Chọn cách đổi cho kết quả gần giá vàng thế giới quy đổi (ref) nhất."""
+    cands = [v * f for f in (1e-6, 1e-5, 1e-3, 1e-2, 1, 10)]
+    if ref:
+        c = min(cands, key=lambda x: abs(math.log(x / ref)))
+        if 0.7 * ref <= c <= 1.8 * ref:
+            return c
+        raise ValueError(f"giá {v} không khớp giá thế giới quy đổi {ref:.1f}")
+    ok = [c for c in cands if 50 <= c <= 1000]
+    if not ok:
+        raise ValueError(f"không đổi được đơn vị giá {v}")
+    return ok[0]
+
+
+def fetch_sjc(ref=None):
+    """Giá vàng miếng SJC (triệu đồng/lượng). Thử lần lượt SJC, PNJ, BTMC, DOJI."""
+    errs = []
+    for name, method, url, data in SJC_SOURCES:
+        try:
+            if method == "post":
+                r = S.post(url, data=data, timeout=25, headers={
+                    "Referer": "https://sjc.com.vn/", "Origin": "https://sjc.com.vn",
+                    "X-Requested-With": "XMLHttpRequest"})
+                r.raise_for_status()
+            else:
+                r = get(url)
+            buy, sell = _pick_sjc(_records(r.text))
+            # cùng một hệ số cho mua và bán
+            sell_t = _to_trieu_luong(sell, ref)
+            k = sell_t / sell
+            return round(buy * k, 3), round(sell_t, 3), name
+        except Exception as e:  # noqa: BLE001
+            errs.append(f"{name}: {e}")
+            log(f"   {name} lỗi: {e}")
+    raise ValueError(" | ".join(errs))
 
 
 # ---------------------------------------------------------------- Yahoo
@@ -299,10 +362,15 @@ def main():
     first = lambda key: len(series.get(key, {})) < 30  # noqa: E731
 
     def sjc():
-        buy, sell = fetch_sjc()
+        ref = None
+        g, u = series.get("vang_tg", {}), series.get("usd_vnd", {})
+        if g and u:
+            ref = g[max(g)] * u[max(u)] * LUONG_PER_OZ / 1e6
+        buy, sell, src = fetch_sjc(ref)
         merge(series, "sjc_mua", {today(): buy})
         merge(series, "sjc_ban", {today(): sell})
-        log(f"   SJC mua {buy} / bán {sell} triệu/lượng")
+        prices["sjc_nguon"] = src
+        log(f"   SJC mua {buy} / bán {sell} triệu/lượng (nguồn {src})")
 
     def yahoo(key, sym):
         def run():
@@ -331,9 +399,9 @@ def main():
         merge(series, "kn_rong", {d: v["rong"] for d, v in data.items()})
         log(f"   {len(data)} phiên khối ngoại")
 
-    step("Vàng SJC", sjc)
     step("Vàng thế giới", yahoo("vang_tg", "GC=F"))
     step("USD/VND", usd)
+    step("Vàng SJC", sjc)  # sau vàng thế giới + USD để kiểm tra đơn vị
     step("Bitcoin", yahoo("btc", "BTC-USD"))
     step("Bạc", yahoo("bac", "SI=F"))
     step("Dầu Brent", yahoo("dau", "BZ=F"))
