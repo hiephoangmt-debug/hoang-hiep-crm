@@ -3,7 +3,7 @@
 Kênh tự động:
   - Vàng miếng SJC (mua/bán, triệu đồng/lượng)    – SJC, dự phòng PNJ / Bảo Tín Minh Châu / DOJI
   - Vàng thế giới (USD/oz), bạc, dầu Brent, S&P 500, lợi suất TP Mỹ 10 năm, USD/VND, Bitcoin – Yahoo Finance
-  - Lãi suất Fed: biên độ mục tiêu (trên/dưới) và lãi suất thực tế EFFR – FRED (Fed St. Louis)
+  - Lãi suất Fed: biên độ mục tiêu (trên/dưới) và lãi suất thực tế EFFR – Fed New York (dự phòng: FRED)
   - VN-Index, VN30, HNX-Index, UPCoM và ~30 cổ phiếu lớn             – DNSE (dự phòng: VNDirect)
   - Khối ngoại mua/bán ròng toàn sàn HOSE và từng mã lớn – CafeF
   - Lãi suất tiết kiệm tại quầy / online ~38 ngân hàng – 24hMoney (dự phòng: Người Quan Sát)
@@ -233,11 +233,31 @@ def fetch_yahoo(symbol: str, rng: str):
     raise last
 
 
-# ---------------------------------------------------------------- FRED (lãi suất Fed)
+# ---------------------------------------------------------------- Lãi suất Fed
+def fetch_nyfed(n: int):
+    """Fed New York: lãi suất EFFR mỗi ngày làm việc kèm biên độ mục tiêu.
+    Trả (trần, sàn, thực tế) dạng {ngày: %}."""
+    r = get(f"https://markets.newyorkfed.org/api/rates/unsecured/effr/last/{n}.json", timeout=40)
+    up, lo, ef = {}, {}, {}
+    for row in r.json().get("refRates") or []:
+        d = row.get("effectiveDate")
+        if not d:
+            continue
+        if row.get("targetRateTo") is not None:
+            up[d] = float(row["targetRateTo"])
+        if row.get("targetRateFrom") is not None:
+            lo[d] = float(row["targetRateFrom"])
+        if row.get("percentRate") is not None:
+            ef[d] = float(row["percentRate"])
+    if not up:
+        raise ValueError("Fed New York rỗng")
+    return up, lo, ef
+
+
 def fetch_fred(series_id: str, days: int):
     """Chuỗi số liệu FRED (Fed St. Louis) dạng CSV, không cần khoá API. {ngày: giá trị}."""
     start = (datetime.now(VN_TZ) - timedelta(days=days)).strftime("%Y-%m-%d")
-    r = get("https://fred.stlouisfed.org/graph/fredgraph.csv", params={"id": series_id, "cosd": start})
+    r = get("https://fred.stlouisfed.org/graph/fredgraph.csv", params={"id": series_id, "cosd": start}, timeout=60)
     out = {}
     for line in r.text.strip().splitlines()[1:]:
         parts = line.split(",")
@@ -511,10 +531,17 @@ def main():
     step("Lợi suất TP Mỹ 10 năm", us10y)
 
     def fed():
-        days = 800 if first("fed_tren") else 60
-        for key, sid in (("fed_tren", "DFEDTARU"), ("fed_duoi", "DFEDTARL"), ("fed_thuc", "DFF")):
-            n = merge(series, key, fetch_fred(sid, days))
-            log(f"   {sid}: {n} điểm")
+        try:
+            up, lo, ef = fetch_nyfed(550 if first("fed_tren") else 30)
+            merge(series, "fed_tren", up)
+            merge(series, "fed_duoi", lo)
+            merge(series, "fed_thuc", ef)
+            log(f"   Fed New York: {len(up)} ngày")
+        except Exception as e:  # noqa: BLE001
+            log(f"   Fed New York lỗi ({e}) -> thử FRED")
+            days = 800 if first("fed_tren") else 60
+            for key, sid in (("fed_tren", "DFEDTARU"), ("fed_duoi", "DFEDTARL"), ("fed_thuc", "DFF")):
+                log(f"   {sid}: {merge(series, key, fetch_fred(sid, days))} điểm")
     step("Lãi suất Fed", fed)
     step("VN-Index", index("vnindex", "VNINDEX"))
     step("VN30", index("vn30", "VN30"))
