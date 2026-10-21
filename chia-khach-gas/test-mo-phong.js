@@ -2,12 +2,13 @@ const vm=require('vm'),fs=require('fs');
 const code=fs.readFileSync(__dirname+'/ChiaKhach.gs','utf8').replace("var BOT_TOKEN_DAN_VAO_DAY = 'DÁN_MÃ_BOT_CHIA_KHÁCH_VÀO_ĐÂY';","var BOT_TOKEN_DAN_VAO_DAY = 'TEST123';").replace("var LINK_SHEET_CRM_DAN_VAO_DAY = 'DÁN_LINK_SHEET_CRM_HOÀNG_HIỆP_VÀO_ĐÂY';","var LINK_SHEET_CRM_DAN_VAO_DAY = 'https://docs.google.com/spreadsheets/d/crm-id/edit#gid=0';");
 let NOW=Date.UTC(2026,9,20,2,0); // 9:00 VN
 const RD=Date; class FD extends RD{constructor(...a){a.length?super(...a):super(NOW)} static now(){return NOW}}
+const gs=x=>typeof x==='string'&&x[0]==="'"?x.slice(1):(typeof x==='string'&&/^0\d{8,}$/.test(x)?Number(x):x); // giống Google Sheet
 function Sheet(name){this.name=name;this.d=[];}
 Sheet.prototype={getLastRow(){return this.d.length},getLastColumn(){return Math.max(0,...this.d.map(r=>r.length))},
  setFrozenRows(){},hideSheet(){},
- appendRow(r){this.d.push(r.slice())},
+ appendRow(r){this.d.push(r.map(gs))},
  getRange(r,c,nr=1,nc=1){const sh=this;return{getValues(){const o=[];for(let i=0;i<nr;i++){const row=sh.d[r-1+i]||[];const x=[];for(let j=0;j<nc;j++)x.push(row[c-1+j]===undefined?'':row[c-1+j]);o.push(x);}return o},
-  setValues(v){v.forEach((row,i)=>{sh.d[r-1+i]=sh.d[r-1+i]||[];row.forEach((x,j)=>sh.d[r-1+i][c-1+j]=x)});return this},setValue(x){this.setValues([[x]])},setNumberFormat(){return this}}}};
+  setValues(v){v.forEach((row,i)=>{sh.d[r-1+i]=sh.d[r-1+i]||[];row.forEach((x,j)=>sh.d[r-1+i][c-1+j]=gs(x))});return this},setValue(x){this.setValues([[x]])},setNumberFormat(){return this}}}};
 function SS(){this.s={};}SS.prototype={getSheetByName(n){return this.s[n]||null},insertSheet(n){return this.s[n]=new Sheet(n)}};
 const active=new SS(), crm=new SS(); const kh=crm.insertSheet('Khách hàng'); kh.appendRow(Array(46).fill('h'));
 function crmRow(phone,name,lan){const r=Array(46).fill('');r[1]=new FD();r[2]=name;r[3]=phone;r[9]=lan||1;r[5]='sun-saphia-residence.com';r[6]='google';r[39]='Website';r[40]='https://www.sun-saphia-residence.com/ads';r[41]='Sun Saphia Residence';kh.appendRow(r);}
@@ -142,11 +143,18 @@ console.log('\n'+lastTo(900).text.replace(/<[^>]+>/g,''));
  const added=vm.runInContext("rows_('Khach',T_KHACH).slice("+b0+")",ctx);
  ok(added.length===2&&added[0].sdt==='0912345678'&&added[0].ten==='Chị Hoa'&&added[0].nhu_cau==='căn 2PN, xem cuối tuần'&&added[1].sdt==='0913000111'&&added[1].ten==='Anh Nam','/them: thêm 2 khách, đúng tên, số, nhu cầu');
  ok(added.every(k=>k.trang_thai==='cho_nhan'&&k.nguon==='quản lý thêm'),'/them: khách được giao ngay cho sale');
- const rep=lastTo(900).text; ok(/❌ Không thấy số hợp lệ: abc/.test(rep)&&/đã có/.test(rep)&&(rep.match(/✅/g)||[]).length===2,'/them: báo dòng lỗi và số trùng');
+ const rep=lastTo(900).text; ok(/đã có/.test(rep)&&(rep.match(/✅/g)||[]).length===2&&added[1].nhu_cau==='abc','/them: báo số trùng; dòng không có số thành ghi chú của khách trên');
+ msg(900,'/them abc 123'); run(); ok(/Không thấy số/.test(lastTo(900).text),'/them không có số: báo lỗi');
  ok(sent.some(s=>/KHÁCH /.test(s.text)&&/0912 ••• 678/.test(s.text)&&!/0912345678/.test(s.text)),'/them: sale chỉ thấy số đã che');
  msg(900,'/them'); run(); ok(/Gõ: /.test(lastTo(900).text),'/them trống: hướng dẫn cách gõ');
  const h=added[0].nguoi_giu; crmRow('0912345678','Hoa web'); run();
  ok(vm.runInContext("rows_('Khach',T_KHACH).filter(function(k){return k.sdt==='0912345678'}).length",ctx)===1&&nhacTo(h,/vừa để lại thông tin/),'/them rồi khách tự điền web: không chia trùng, báo người đang giữ');}
+// dán nguyên tin báo khách
+{const b0=vm.runInContext("rows_('Khach',T_KHACH).length",ctx);
+ msg(900,'/them 🔥 KHÁCH MỚI ĐỂ LẠI SỐ\n📞 0395652778 – Đinh Nữ Mai Sương · Mở Zalo\n• Quan tâm: ADS – form cuối trang\n• Nguồn: google / f2 / Google Ads\n• Trang: https://www.sun-fours-tower.com/toa-f2-ads\n🕒 22:20:15 20/10/2026'); run();
+ const a=vm.runInContext("rows_('Khach',T_KHACH).slice("+b0+")",ctx);
+ ok(a.length===1&&a[0].ten==='Đinh Nữ Mai Sương'&&a[0].nhu_cau==='ADS – form cuối trang'&&a[0].nguon==='google / f2 / Google Ads'&&a[0].trang==='https://www.sun-fours-tower.com/toa-f2-ads','/them dán nguyên tin báo: 1 khách, đúng tên/nhu cầu/nguồn/trang ('+JSON.stringify(a[0]&&[a[0].ten,a[0].nhu_cau,a[0].nguon])+')');
+ ok(!/❌/.test(lastTo(900).text),'/them dán nguyên tin báo: không báo lỗi dòng phụ');}
 // lọc tên miền: chỉ sun-saphia-residence.com
 {const b0=vm.runInContext("rows_('Khach',T_KHACH).length",ctx);
  const r1=Array(46).fill('');r1[1]=new FD();r1[2]='Cora';r1[3]='0988777666';r1[5]='www.cora-tower.com';r1[9]=1;r1[39]='Website';r1[40]='https://www.cora-tower.com/';r1[41]='Cora Tower';kh.appendRow(r1);

@@ -137,7 +137,7 @@ Sửa ngay trong tab **CauHinh**, không cần sửa code:
 
 ## Kiểm tra
 
-`node test-mo-phong.js` chạy 68 tình huống trên bản giả lập Google Sheet và Telegram:
+`node test-mo-phong.js` chạy 71 tình huống trên bản giả lập Google Sheet và Telegram:
 - 30 phút, 2 giờ, 3 ngày, gia hạn;
 - ban đêm;
 - sale khác bấm nhầm khách;

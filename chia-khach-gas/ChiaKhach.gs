@@ -127,12 +127,14 @@ function tab_(name, head) {
 function rows_(name, head) {
   var sh = tab_(name, head), n = sh.getLastRow(), list = [];
   if (n > 1) sh.getRange(2, 1, n - 1, head.length).getValues().forEach(function (r, i) {
-    var o = {_r: i + 2}; head.forEach(function (h, j) { o[h] = r[j]; }); list.push(o);
+    var o = {_r: i + 2}; head.forEach(function (h, j) { o[h] = r[j]; });
+    if (o.hasOwnProperty('sdt')) o.sdt = normPhone(o.sdt);   // Sheet hay tự bỏ số 0 đầu
+    list.push(o);
   });
   return list;
 }
 function save_(name, head, o) {
-  var sh = tab_(name, head), v = [head.map(function (h) { return o[h] == null ? '' : o[h]; })];
+  var sh = tab_(name, head), v = [head.map(function (h) { return o[h] == null ? '' : (h === 'sdt' && o[h] !== '' ? "'" + o[h] : o[h]); })];  // ' giữ số 0 đầu
   if (o._r) sh.getRange(o._r, 1, 1, head.length).setValues(v);
   else { sh.appendRow(v[0]); o._r = sh.getLastRow(); }
 }
@@ -312,24 +314,43 @@ function nhanKhachMoi_() {
   P().setProperty('DEM', String(dem));
 }
 /* Thêm khách bằng tay để thử: themKhachThu() */
-/* Quản lý thêm khách bằng tay: mỗi dòng "Số Tên - nhu cầu" */
+/* Quản lý thêm khách bằng tay.
+   Mỗi dòng có số = 1 khách ("Số Tên - nhu cầu"). Dòng không có số ngay dưới = chi tiết của khách đó
+   (dán nguyên tin báo khách: "Quan tâm:", "Nguồn:", "Trang:" được đọc riêng; dòng tiêu đề, giờ bị bỏ qua). */
+var SO_RE = /(\+?84|0)[\d .\-]{8,13}\d/;
+function sachChu_(x) { return String(x || '').replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}]/gu, ' ').replace(/Mở Zalo/gi, ' ').replace(/\s+/g, ' ').replace(/^[\s\-–—·•:,|/]+|[\s\-–—·•:,|/]+$/g, '').trim(); }
 function themKhachTay_(txt) {
   var dong = String(txt || '').split(/\n+/).map(function (x) { return x.trim(); }).filter(String);
-  if (!dong.length) return 'Gõ: <code>/them 0905123456 Tên khách - nhu cầu</code>\nNhiều khách: mỗi khách 1 dòng ngay dưới chữ /them.';
-  var tatCa = rows_('Khach', T_KHACH), dem = Number(P().getProperty('DEM') || 0), kq = [];
+  if (!dong.length) return 'Gõ: <code>/them 0905123456 Tên khách - nhu cầu</code>\nNhiều khách: mỗi khách 1 dòng ngay dưới chữ /them. Dán nguyên tin báo khách cũng được.';
+  var ds = [], kq = [];
   dong.forEach(function (d) {
-    var m = d.match(/(\+?84|0)[\d .\-]{8,13}\d/), sdt = m ? normPhone(m[0]) : '';
-    if (sdt.length !== 10) { kq.push('❌ Không thấy số hợp lệ: ' + esc(d.slice(0, 60))); return; }
-    var cu = tatCa.filter(function (x) { return x.sdt === sdt && (DANG_GIU.test(x.trang_thai) || /chot|cho_giao|cho_quan_ly/.test(x.trang_thai)); }).pop();
-    if (cu) { kq.push('⚠️ ' + esc(che(sdt)) + ' đã có: ' + esc(cu.id) + (cu.ten_sale ? ' – ' + esc(cu.ten_sale) : '') + ' (' + esc(cu.trang_thai) + '), không thêm.'); return; }
-    var con = d.replace(m[0], ' ').replace(/\s+/g, ' ').trim(), i = con.indexOf(' - ');
-    var ten = (i > -1 ? con.slice(0, i) : con).replace(/^[-–:,\s]+|[-–:,\s]+$/g, ''), nc = i > -1 ? con.slice(i + 3).trim() : '';
-    dem++; P().setProperty('DEM', String(dem));
-    var k = {id: 'K' + dem, luc_vao: nowD(), ten: ten.slice(0, 60), sdt: sdt, nhu_cau: nc.slice(0, 200), nguon: 'quản lý thêm', trang: '', trang_thai: 'moi', da_qua: '', so_luot: 0, so_bao_cao: 0};
-    save_('Khach', T_KHACH, k); log_('quản lý', 'thêm khách', k.id, che(sdt)); tatCa.push(k);
-    giao_(k);
-    kq.push('✅ ' + esc(k.id) + ' ' + esc(che(sdt)) + (k.ten ? ' – ' + esc(k.ten) : '') + ': ' + (k.trang_thai === 'cho_nhan' ? 'đã giao ' + esc(k.ten_sale) : k.trang_thai === 'cho_giao' ? 'đội đang bận, chờ giao' : 'chưa có sale nhận'));
+    var m = d.match(SO_RE), sdt = m ? normPhone(m[0]) : '';
+    if (m && sdt.length === 10) {
+      var ten, nc = '';
+      var truoc = sachChu_(d.slice(0, d.indexOf(m[0]))), sau = d.slice(d.indexOf(m[0]) + m[0].length), k2 = sau.indexOf(' - ');
+      ten = sachChu_(k2 > -1 ? sau.slice(0, k2) : sau) || truoc; nc = k2 > -1 ? sachChu_(sau.slice(k2 + 3)) : '';
+      ds.push({sdt: sdt, ten: ten, nc: nc ? [nc] : [], nguon: '', trang: ''}); return;
+    }
+    var c = ds[ds.length - 1], x = sachChu_(d);
+    if (!c) { if (m || /\d{6,}/.test(d)) kq.push('❌ Không thấy số hợp lệ: ' + esc(d.slice(0, 60))); return; }
+    var kv = x.match(/^(Quan tâm|Nhu cầu|Ghi chú|Dự án|Nguồn|Trang|Web|Tên|Họ tên|Ngân sách)\s*:\s*(.*)$/i);
+    if (kv) {
+      var key = kv[1].toLowerCase();
+      if (key === 'nguồn') c.nguon = kv[2]; else if (key === 'trang' || key === 'web') c.trang = kv[2];
+      else if ((key === 'tên' || key === 'họ tên') && !c.ten) c.ten = kv[2]; else c.nc.push(kv[2]);
+    } else if (x && !/^\d{1,2}:\d{2}(:\d{2})?\s+\d{1,2}\/\d{1,2}(\/\d{2,4})?$/.test(x)) c.nc.push(x);
   });
+  var tatCa = rows_('Khach', T_KHACH), dem = Number(P().getProperty('DEM') || 0);
+  ds.forEach(function (c) {
+    var cu = tatCa.filter(function (x) { return x.sdt === c.sdt && (DANG_GIU.test(x.trang_thai) || /chot|cho_giao|cho_quan_ly/.test(x.trang_thai)); }).pop();
+    if (cu) { kq.push('⚠️ ' + esc(che(c.sdt)) + ' đã có: ' + esc(cu.id) + (cu.ten_sale ? ' – ' + esc(cu.ten_sale) : '') + ' (' + esc(cu.trang_thai) + '), không thêm.'); return; }
+    dem++; P().setProperty('DEM', String(dem));
+    var k = {id: 'K' + dem, luc_vao: nowD(), ten: c.ten.slice(0, 60), sdt: c.sdt, nhu_cau: c.nc.join(' · ').slice(0, 200), nguon: (c.nguon || 'quản lý thêm').slice(0, 100), trang: c.trang.slice(0, 200), trang_thai: 'moi', da_qua: '', so_luot: 0, so_bao_cao: 0};
+    save_('Khach', T_KHACH, k); log_('quản lý', 'thêm khách', k.id, che(c.sdt)); tatCa.push(k);
+    giao_(k);
+    kq.push('✅ ' + esc(k.id) + ' ' + esc(che(c.sdt)) + (k.ten ? ' – ' + esc(k.ten) : '') + ': ' + (k.trang_thai === 'cho_nhan' ? 'đã giao ' + esc(k.ten_sale) : k.trang_thai === 'cho_giao' ? 'đội đang bận, chờ giao' : 'chưa có sale nhận'));
+  });
+  if (!ds.length && !kq.length) kq.push('❌ Không thấy số điện thoại nào.');
   return '<b>Thêm khách</b>\n' + kq.join('\n');
 }
 function themKhachThu() { var k = {id: 'T' + Date.now() % 100000, luc_vao: nowD(), ten: 'Khách thử', sdt: '0900000000', nhu_cau: 'Thử hệ thống', nguon: 'thử', trang_thai: 'moi', da_qua: '', so_luot: 0, so_bao_cao: 0}; save_('Khach', T_KHACH, k); giao_(k); }
