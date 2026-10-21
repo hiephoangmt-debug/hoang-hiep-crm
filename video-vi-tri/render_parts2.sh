@@ -15,7 +15,7 @@ for ((s=0; s<TOTAL; s+=STEP)); do
 done
 ls out2/parts/p_*.mp4 | sed "s/^out2\/parts\//file '/; s/$/'/" > out2/parts/list.txt
 ffmpeg -y -loglevel error -f concat -safe 0 -i out2/parts/list.txt -c copy out2/video_silent.mp4
-MUSIC_CFG=config2.js MUSIC_DUR=53.667 MUSIC_CUTS="[150, 454, 650, 900, 1130, 1300]" MUSIC_END=1478 MUSIC_START_HIT=8 python3 music.py out2/music2.wav
+MUSIC_BG=0 MUSIC_BOOM=0.12 MUSIC_CFG=config2.js MUSIC_DUR=53.667 MUSIC_CUTS="[150, 454, 650, 900, 1130, 1300]" MUSIC_END=1478 MUSIC_START_HIT=8 python3 music.py out2/music2.wav
 [ -s out2/brand.mov ] || PAGE=brand2.html node render_sig.mjs mov out2/brand.mov
 ffmpeg -y -loglevel error -i out2/video_silent.mp4 -i out2/brand.mov -i out2/music2.wav \
   -filter_complex "[0:v][1:v]overlay=0:0:format=auto,format=yuv420p[v]" \

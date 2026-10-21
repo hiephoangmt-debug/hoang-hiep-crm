@@ -83,6 +83,10 @@ while tk < END / FPS:
         L[s0:s0 + n] += tone[:n] * 0.045 * (1 - pan); R[s0:s0 + n] += tone[:n] * 0.045 * pan
     tk += step; idx += 1
 
+# MUSIC_BG=0: bỏ nhạc nền (mục 1–4), chỉ giữ hiệu ứng âm thanh
+if os.environ.get('MUSIC_BG', '1') == '0':
+    L[:] = 0; R[:] = 0
+
 # 5) Whoosh trước mỗi lần chuyển cảnh + tiếng "boom" khi hiện chữ
 noise = rng.standard_normal(N)
 wn_n = int(1.6 * SR); wt = np.arange(wn_n) / SR
@@ -101,7 +105,7 @@ boom = np.sin(2 * np.pi * (38 + 40 * np.exp(-bt * 6)) * bt) * np.exp(-bt * 2.2)
 boom += lowpass(rng.standard_normal(boom_n), 900) * np.exp(-bt * 5) * 0.6
 for c in IMPACTS:
     s0 = int(c / FPS * SR); n = min(boom_n, N - s0)
-    L[s0:s0 + n] += boom[:n] * 0.32; R[s0:s0 + n] += boom[:n] * 0.32
+    BG = float(os.environ.get('MUSIC_BOOM', 0.32)); L[s0:s0 + n] += boom[:n] * BG; R[s0:s0 + n] += boom[:n] * BG
 
 # 5b) Hiệu ứng âm thanh theo kịch bản (đọc mốc thời gian từ public/config.js)
 import re as _re, os as _os
