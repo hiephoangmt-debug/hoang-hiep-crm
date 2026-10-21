@@ -1,17 +1,17 @@
 # Tự tổng hợp nhạc nền điện ảnh + hiệu ứng whoosh, khớp với các mốc chuyển cảnh của video.
 # Cách dùng: python3 music.py out/music.wav
-import sys, wave
+import sys, wave, os, json
 import numpy as np
 
 SR = 44100
-DUR = 60.0
+DUR = float(os.environ.get('MUSIC_DUR', 60.0))          # giây
 N = int(SR * DUR)
 t = np.arange(N) / SR
 rng = np.random.default_rng(3)
 FPS = 30
-CUTS = [150, 470, 780, 1140, 1500]      # khung hình chuyển cảnh
-END = 1650                        # cảnh kết
-IMPACTS = [24, END]
+CUTS = json.loads(os.environ.get('MUSIC_CUTS', '[150, 470, 780, 1140, 1500]'))      # khung hình chuyển cảnh
+END = int(os.environ.get('MUSIC_END', 1650))                        # cảnh kết
+IMPACTS = [int(os.environ.get('MUSIC_START_HIT', 24)), END]
 
 def note(n):  # MIDI -> Hz
     return 440.0 * 2 ** ((n - 69) / 12)
@@ -105,7 +105,7 @@ for c in IMPACTS:
 
 # 5b) Hiệu ứng âm thanh theo kịch bản (đọc mốc thời gian từ public/config.js)
 import re as _re, os as _os
-_cfg = open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), 'public', 'config.js'), encoding='utf-8').read()
+_cfg = open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), 'public', os.environ.get('MUSIC_CFG', 'config.js')), encoding='utf-8').read()
 EV = [(m.group(1), int(m.group(2)), m.group(0)) for m in _re.finditer(r"type: '(\w+)'[^\n]*?in: (\d+)", _cfg)]
 def put(x, t, gain, pan=0.5):
     s0 = int(t * SR); n = min(len(x), N - s0)
