@@ -106,7 +106,7 @@ miễn phí
 ```
 Sun FourS Tower Đà Nẵng
 Tòa F2 Mở Bán Từ 26/09
-Chiết Khấu Tới 19%
+Quà Nội Thất Tới 100 Triệu
 Vay 70% – Lãi Suất 0% 24 Tháng
 Chỉ 25% Vốn Đến Khi Nhận Nhà
 Căn Hộ Sun Group Đà Nẵng
@@ -126,7 +126,7 @@ Nhận Nhà Dự Kiến 05/2028
 ```
 Tòa F2 Sun FourS Tower: vay 70%, hỗ trợ lãi suất 0% 24 tháng. Cọc chỉ 100 triệu.
 607 căn đủ điều kiện bán (VB 17239/SXD-QLN), Techcombank bảo lãnh. Xem hồ sơ ngay.
-Chiết khấu cộng dồn tới 19% khi thanh toán sớm trước 25/10/2026. Nhận giá từng căn.
+Tặng nội thất Nhà Xinh tới 100 triệu, trừ thẳng vào giá. Nhận giá từng căn qua Zalo.
 Cách biển ~2 km, 10 phút ra sân bay. Căn sân vườn riêng tầng 2–7, số lượng có hạn.
 ```
 **Đường dẫn hiển thị:** `toa-f2` / `uu-dai`
@@ -146,7 +146,7 @@ Cách biển ~2 km, 10 phút ra sân bay. Căn sân vườn riêng tầng 2–7,
 - **Cuộc gọi:** 0904 567 009 (bật trong giờ làm việc)
 - **Đoạn nội dung có cấu trúc** – chọn tiêu đề "Loại", nhập: Studio, 1PN, 1PN+, 2PN, 3PN, Căn sân vườn
 
-⚠️ **Sau 25/10/2026** phải gỡ "Chiết khấu tới 19%" và mô tả số 3, vì ưu đãi thanh toán sớm đã hết hạn. Google sẽ từ chối quảng cáo nếu nội dung không còn đúng với trang.
+⚠️ Từ 17/10/2026 chính sách đổi sang quà nội thất Nhà Xinh (tiêu đề và mô tả ở trên đã sửa). **Sau 25/10/2026** nếu không gia hạn thanh toán sớm thì bỏ mọi câu có "15,5%" hoặc "trước 25/10". Google sẽ từ chối quảng cáo nếu nội dung không còn đúng với trang.
 
 ---
 

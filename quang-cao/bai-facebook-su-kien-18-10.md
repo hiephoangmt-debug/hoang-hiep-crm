@@ -67,7 +67,7 @@ Căn 2 phòng ngủ 61 m² ~2,8 tỷ – vốn ban đầu chỉ khoảng 700 tri
 • Ngân hàng cho vay 70% – chủ đầu tư hỗ trợ lãi suất 0%, chưa trả gốc 24 tháng
 • 31/05/2028: nhận nhà dự kiến
 
-Có sẵn vốn: thanh toán nhanh chỉ còn khoảng 2,4 tỷ (chiết khấu cộng dồn tới 19%, đến 25/10/2026).
+Có sẵn vốn: thanh toán nhanh chỉ còn khoảng 2,3 tỷ (đã trừ quà nội thất Nhà Xinh 75 triệu và chiết khấu thanh toán sớm, đến 25/10/2026).
 
 Pháp lý rõ ràng:
 ✅ 607 căn đủ điều kiện bán (VB 17239/SXD-QLN)

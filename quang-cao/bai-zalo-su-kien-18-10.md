@@ -61,7 +61,7 @@ Hè tắm biển, đông tránh rét – có một căn nhà ở Đà Nẵng, c�
 Tòa F2 – Sun FourS Tower:
 • Căn 2PN 61 m² ~2,8 tỷ, vốn ban đầu chỉ ~700 triệu
 • Vay 70%, 24 tháng không lãi, không gốc
-• Chiết khấu cộng dồn tới 19% – chỉ đến 25/10/2026
+• Tặng nội thất Nhà Xinh tới 100 triệu + chiết khấu tới 15,5% (thanh toán sớm đến 25/10/2026)
 • Nhận nhà dự kiến 31/05/2028
 
 📅 9:00 Chủ nhật 18/10 – gặp đội dự án tại Sun Gallery Tây Hồ View, 58 Quảng Bá, Tây Hồ, Hà Nội.

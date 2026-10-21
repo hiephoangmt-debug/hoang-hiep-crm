@@ -51,7 +51,7 @@ Tháp F2 – Sun FourS Tower, đại đô thị Sun Riverpolis bên sông Cổ C
 ✅ 607 căn đủ điều kiện bán – VB 17239/SXD-QLN
 ✅ Cách biển Sơn Thủy ~2 km, sân bay 10 phút
 ✅ Vay 70%, 24 tháng không lãi, không gốc
-✅ Chiết khấu cộng dồn tới 19% (đến 25/10/2026)
+✅ Tặng nội thất Nhà Xinh tới 100 triệu + chiết khấu tới 15,5% (thanh toán sớm đến 25/10/2026)
 
 Số lượng chỗ có hạn. Đăng ký nhận thư mời ghi tên 👇
 🔗 https://www.sun-fours-tower.com/toa-f2-ads?utm_source=facebook&utm_campaign=su-kien-11-10#su-kien
@@ -98,7 +98,7 @@ Một căn hộ Sun Group giữa sông và biển, ngay Đà Nẵng:
 🌊 Bên sông Cổ Cò, cách biển Sơn Thủy ~2 km
 🏊 Hồ bơi bốn mùa, gym, spa, Kids Club ngay tầng 2
 🏦 Vay 70%, 24 tháng không lãi – chỉ cần 25% đến khi nhận nhà (dự kiến 31/05/2028)
-💰 Chiết khấu cộng dồn tới 19% – chỉ đến 25/10
+💰 Tặng nội thất Nhà Xinh tới 100 triệu + chiết khấu tới 15,5%
 
 Chưa đăng ký vẫn có thể đến – nhắn em trước để giữ chỗ ngồi và nhận thư mời ghi tên:
 👉 https://www.sun-fours-tower.com/toa-f2-ads?utm_source=facebook&utm_campaign=su-kien-11-10#su-kien

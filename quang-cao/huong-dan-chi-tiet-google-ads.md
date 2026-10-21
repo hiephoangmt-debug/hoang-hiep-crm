@@ -198,7 +198,7 @@ Mỗi nhóm tạo **2 quảng cáo** (Google tự thử bản nào tốt hơn). 
 ```
 Sun FourS Tower Đà Nẵng
 Tòa F2 Mở Bán Từ 26/09
-Chiết Khấu Tới 19%
+Quà Nội Thất Tới 100 Triệu
 Vay 70% – Lãi Suất 0% 24 Tháng
 Chỉ 25% Vốn Đến Khi Nhận Nhà
 Căn Hộ Sun Group Đà Nẵng
@@ -219,7 +219,7 @@ Nhận Nhà Dự Kiến 05/2028
 ```
 Tòa F2 Sun FourS Tower: vay 70%, hỗ trợ lãi suất 0% 24 tháng. Cọc chỉ 100 triệu.
 607 căn đủ điều kiện bán (VB 17239/SXD-QLN), Techcombank bảo lãnh. Xem hồ sơ ngay.
-Chiết khấu cộng dồn tới 19% khi thanh toán sớm trước 25/10/2026. Nhận giá từng căn.
+Tặng nội thất Nhà Xinh tới 100 triệu, trừ thẳng vào giá. Nhận giá từng căn qua Zalo.
 Cách biển ~2 km, 10 phút ra sân bay. Căn sân vườn riêng tầng 2–7, số lượng có hạn.
 ```
 
@@ -289,7 +289,7 @@ Căn sân vườn riêng
    - Thời hạn thành viên: **30 ngày**
 2. Khi đối tượng có **≥ 1.000 người** (thường sau 1–3 tuần), tạo chiến dịch **Demand Gen** (hoặc **Hiển thị**) chỉ nhắm đối tượng này.
    - Ngân sách: 100.000 – 200.000 ₫/ngày
-   - Nội dung: "Còn 19% chiết khấu đến 25/10 – Nhận bảng giá qua Zalo"
+   - Nội dung: "Quà nội thất tới 100 triệu – Nhận bảng giá qua Zalo"
 3. Loại trừ người đã để số: tạo thêm đối tượng **"Đã chuyển đổi"** rồi đặt làm **loại trừ**.
 
 ---
@@ -323,7 +323,7 @@ Căn sân vườn riêng
 
 ## Phần 10 – Lỗi hay gặp và chính sách
 
-1. **Hết ưu đãi 25/10/2026:** ngày 25/10 **phải sửa** tiêu đề "Chiết Khấu Tới 19%" và mô tả có "trước 25/10/2026". Google từ chối quảng cáo có nội dung không còn đúng với trang, và khách thấy sai sẽ mất niềm tin. Báo Claude cập nhật trang cùng lúc.
+1. **Hết ưu đãi 25/10/2026:** từ 17/10/2026 chính sách "chiết khấu 19%" đã thay bằng quà nội thất Nhà Xinh (tiêu đề và mô tả ở trên đã sửa). Sau 25/10, nếu chủ đầu tư không gia hạn thanh toán sớm thì bỏ mọi câu có "15,5%" hoặc "trước 25/10". Google từ chối quảng cáo có nội dung không còn đúng với trang, và khách thấy sai sẽ mất niềm tin. Báo Claude cập nhật trang cùng lúc.
 2. **Không hứa lợi nhuận:** không viết "lãi chắc chắn", "cam kết sinh lời", "x2 tài sản", vì Google dễ từ chối và vi phạm quy định quảng cáo BĐS.
 3. **"Lãi suất 0%"** phải đi kèm điều kiện trên trang (vay 70%, tối đa 24 tháng, ngân hàng chỉ định). Trang đã ghi đủ.
 4. **Quảng cáo "Bị từ chối" hoặc "Hạn chế":** bấm vào trạng thái để xem lý do, sửa đúng chữ vi phạm rồi gửi lại. Không tạo lại quảng cáo mới.
