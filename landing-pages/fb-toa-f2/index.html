@@ -510,6 +510,13 @@ footer nav a{color:#ffb067}
 @media (max-width:760px){.w2{padding:18px}.w2-grid{grid-template-columns:1fr}.w2-cta .btn{width:100%}}
 .t360{position:relative;display:block;width:100%;height:100%;border:0;padding:0;cursor:pointer;background:#0b1a3a;overflow:hidden}.t360 img{width:100%;height:100%;object-fit:cover;opacity:.8;transition:transform .6s}.t360:hover img{transform:scale(1.04)}.t360-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:linear-gradient(135deg,#ffa04a,#f47a1f);color:#fff;font:800 17px/1 var(--sans);padding:18px 30px;border-radius:999px;white-space:nowrap;box-shadow:0 12px 30px -8px rgba(244,122,31,.75)}
 .t360-box{margin-top:36px;border-radius:20px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.7);aspect-ratio:16/9;background:#0b1a3a}@media (max-width:640px){.t360-box{aspect-ratio:4/5}}.pano360{width:100%;height:100%;background:#0b1a3a}.pano360:fullscreen{width:100vw;height:100vh}.t360-box:fullscreen{border-radius:0;width:100vw;height:100vh}.t360-hint{margin:14px auto 0;text-align:center;font-size:14px;color:rgba(255,255,255,.75)}
+.nx{max-width:1080px;margin:0 auto 28px;display:grid;gap:22px;align-items:center;background:#fff;border:1px solid #e7ddd3;border-radius:22px;padding:18px;box-shadow:0 24px 50px -30px rgba(11,26,58,.45)}
+.nx a.nx-img{display:block;border-radius:16px;overflow:hidden;line-height:0}.nx a.nx-img img{width:100%;height:auto;display:block}
+.nx .nx-b{color:#1b2333}.nx .nx-tag{display:inline-block;background:#fff3e8;color:#8b4a1c;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:999px}
+.nx h3{font-size:clamp(24px,3vw,32px);line-height:1.2;margin:10px 0 8px;color:#13285a}.nx h3 b{color:#f47a1f}
+.nx ul{list-style:none;margin:14px 0;padding:0;display:grid;gap:8px}.nx li{display:flex;justify-content:space-between;gap:12px;background:#f6f1ec;border-radius:12px;padding:10px 14px;font-weight:600}.nx li b{color:#f47a1f;font-size:1.08em}
+.nx p{margin:0 0 12px;color:#5a6275;font-size:15px}
+@media (min-width:820px){.nx{grid-template-columns:minmax(0,400px) minmax(0,1fr);padding:22px}}
 </style>
 <style>
 /* ===== Phần riêng trang Facebook (cùng hệ màu trang ADS) ===== */
@@ -1093,6 +1100,20 @@ if (FB_PIXEL_ID) {
     <p class="center rv" style="margin-top:22px"><button type="button" class="btn btn-gold btn-pulse" data-pop data-interest="FB – chọn căn theo view" data-title="Chọn căn theo view anh chị thích" data-sub="Danh sách căn view sông, biển, pháo hoa còn trống kèm giá sau chiết khấu – gửi qua Zalo." data-btn="Gửi danh sách cho tôi →">Chọn căn theo view yêu thích</button></p>
   </div>
 </section>
+
+<section style="padding-bottom:0"><div class="container">
+<div class="nx" id="qua-nha-xinh">
+  <a class="nx-img" href="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@76ad62df117e7f49307759704a4726c38d01e38b/landing-pages/assets/uu-dai-fours-tower-2km-cham-bien.jpg" target="_blank" rel="noopener"><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@76ad62df117e7f49307759704a4726c38d01e38b/landing-pages/assets/uu-dai-fours-tower-2km-cham-bien-720.jpg" width="720" height="880" alt="Sun FourS Tower Tòa F2 – 2 km chạm biển, trọn nhịp sống thư thái" loading="lazy" decoding="async"></a>
+  <div class="nx-b">
+    <span class="nx-tag">Chính sách mới · ký từ 17/10/2026</span>
+    <h3>Tặng gói nội thất <b>Nhà Xinh</b> tới 100 triệu</h3>
+    <p>Trừ thẳng vào giá trước VAT &amp; KPBT, trừ trước rồi mới tính các chiết khấu %.</p>
+    <ul><li>Studio <b>35 triệu</b></li><li>1PN · 1PN+ <b>50 triệu</b></li><li>2PN <b>75 triệu</b></li><li>3PN <b>100 triệu</b></li></ul>
+    <p>Sau quà vẫn cộng: không vay 3% · từ chối bảo lãnh 1% · thanh toán sớm tới 12% (trước 25/10/2026).</p>
+    <button type="button" class="btn btn-gold" data-pop data-interest="FB – quà Nhà Xinh" data-title="Giá căn của tôi sau quà Nhà Xinh" data-sub="Bảng tính đúng căn: trừ quà nội thất, chiết khấu và lịch thanh toán – gửi qua Zalo." data-btn="Gửi bảng tính cho tôi →">Tính giá sau quà cho căn của tôi</button>
+  </div>
+</div>
+</div></section>
 
 <!-- DEADLINE -->
 <!-- CHO THUÊ -->
@@ -2013,6 +2034,28 @@ const watch = setInterval(() => {
     else box.scrollIntoView({ behavior: 'smooth', block: 'center' });
     if (b) start(b);
   }); });
+})();
+</script>
+<script>
+/* Hết hạn thanh toán sớm 25/10/2026: tự đổi các câu "chiết khấu tới 15,5%" sang chiết khấu còn hiệu lực (quà Nhà Xinh vẫn giữ) */
+(function () {
+  if (Date.now() < new Date('2026-10-26T00:00:00+07:00').getTime()) return;
+  var R = [[/chiết khấu tới ~?15,5%/g, 'chiết khấu không vay 3%'], [/Chiết khấu tới ~?15,5%/g, 'Chiết khấu không vay 3%'],
+    [/chiết khấu tối đa \+ quà/gi, 'chiết khấu không vay + quà'], [/thanh toán nhanh chỉ còn khoảng/gi, 'không vay, tổng còn khoảng'],
+    [/ ?\((?:thanh toán sớm|TT sớm) (?:trước|đến) 25\/10(?:\/2026)?\)/g, ''], [/ · thanh toán sớm tới 12% \(trước 25\/10\/2026\)/g, ''], [/ ?Tổng chiết khấu (?:tối đa|tới) (?:khoảng )?~?15,5%[^.]*\./g, ' Thanh toán sớm đã hết hạn 25/10/2026.']];
+  var EXACT = {'15,5%': '3%', '~15,5%': '3%', '15,5': '3', '2,3 tỷ': '2,6 tỷ'};
+  function fix(root) {
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n, t;
+    while ((n = w.nextNode())) {
+      if (/^(SCRIPT|STYLE)$/.test(n.parentNode.nodeName)) continue;
+      t = n.nodeValue; var k = t.trim();
+      if (EXACT[k]) { n.nodeValue = t.replace(k, EXACT[k]); continue; }
+      R.forEach(function (r) { t = t.replace(r[0], r[1]); });
+      if (t !== n.nodeValue) n.nodeValue = t;
+    }
+  }
+  function run() { fix(document.body); try { new MutationObserver(function (ms) { ms.forEach(function (m) { m.addedNodes.forEach(function (x) { if (x.nodeType === 1) fix(x); else if (x.nodeType === 3 && x.parentNode) fix(x.parentNode); }); }); }).observe(document.body, {childList: true, subtree: true}); } catch (e) {} }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
 })();
 </script>
 </body>

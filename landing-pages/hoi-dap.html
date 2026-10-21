@@ -2352,5 +2352,27 @@ const watch = setInterval(() => {
 }, 1000);
 })();
 </script>
+<script>
+/* Hết hạn thanh toán sớm 25/10/2026: tự đổi các câu "chiết khấu tới 15,5%" sang chiết khấu còn hiệu lực (quà Nhà Xinh vẫn giữ) */
+(function () {
+  if (Date.now() < new Date('2026-10-26T00:00:00+07:00').getTime()) return;
+  var R = [[/chiết khấu tới ~?15,5%/g, 'chiết khấu không vay 3%'], [/Chiết khấu tới ~?15,5%/g, 'Chiết khấu không vay 3%'],
+    [/chiết khấu tối đa \+ quà/gi, 'chiết khấu không vay + quà'], [/thanh toán nhanh chỉ còn khoảng/gi, 'không vay, tổng còn khoảng'],
+    [/ ?\((?:thanh toán sớm|TT sớm) (?:trước|đến) 25\/10(?:\/2026)?\)/g, ''], [/ · thanh toán sớm tới 12% \(trước 25\/10\/2026\)/g, ''], [/ ?Tổng chiết khấu (?:tối đa|tới) (?:khoảng )?~?15,5%[^.]*\./g, ' Thanh toán sớm đã hết hạn 25/10/2026.']];
+  var EXACT = {'15,5%': '3%', '~15,5%': '3%', '15,5': '3', '2,3 tỷ': '2,6 tỷ'};
+  function fix(root) {
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n, t;
+    while ((n = w.nextNode())) {
+      if (/^(SCRIPT|STYLE)$/.test(n.parentNode.nodeName)) continue;
+      t = n.nodeValue; var k = t.trim();
+      if (EXACT[k]) { n.nodeValue = t.replace(k, EXACT[k]); continue; }
+      R.forEach(function (r) { t = t.replace(r[0], r[1]); });
+      if (t !== n.nodeValue) n.nodeValue = t;
+    }
+  }
+  function run() { fix(document.body); try { new MutationObserver(function (ms) { ms.forEach(function (m) { m.addedNodes.forEach(function (x) { if (x.nodeType === 1) fix(x); else if (x.nodeType === 3 && x.parentNode) fix(x.parentNode); }); }); }).observe(document.body, {childList: true, subtree: true}); } catch (e) {} }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
+})();
+</script>
 </body>
 </html>
