@@ -219,6 +219,18 @@ function caiDat() {
   kiemTra(daGui ? 'đã gửi tin cài đặt' : '');
 }
 
+/* Danh sách lệnh hiện ra khi gõ dấu / trong Telegram: sale thấy lệnh sale, quản lý thấy lệnh quản lý */
+function datLenh_() {
+  var sale = [{command: 'khach', description: 'Khách đang giữ và giờ hạn'}, {command: 'giahan', description: 'Xin thêm 1 ngày: /giahan K12'},
+    {command: 'nghi', description: 'Tạm ngưng nhận khách'}, {command: 'lam', description: 'Nhận khách trở lại'}, {command: 'dangky', description: 'Xin vào đội: /dangky Tên'}];
+  var ql = [{command: 'them', description: 'Thêm khách: /them Số Tên - nhu cầu'}, {command: 'sale', description: 'Danh sách đội'},
+    {command: 'baocao', description: 'Báo cáo hôm nay'}, {command: 'tuan', description: 'Xếp hạng 7 ngày'}, {command: 'tam', description: 'Tạm dừng sale: /tam Tên'},
+    {command: 'mo', description: 'Mở lại / duyệt sale: /mo Tên'}, {command: 'xoa', description: 'Sale nghỉ việc: /xoa Tên'}];
+  var a = tg_('setMyCommands', {commands: sale});
+  var b = quanLy_() ? tg_('setMyCommands', {commands: ql, scope: {type: 'chat', chat_id: Number(quanLy_())}}) : {ok: true};
+  return a.ok && b.ok;
+}
+
 /* Chạy hàm này khi bot không trả lời: ghi tình trạng vào tab NhatKy (không ghi mã bot) */
 function kiemTra(daGui) {
   var me = tg_('getMe', {}), ql = quanLy_(), kq = [];
@@ -227,6 +239,7 @@ function kiemTra(daGui) {
     var r = daGui ? {ok: true} : tg_('sendMessage', {chat_id: ql, text: '🔎 Kiểm tra bot: quản lý nhận được tin này là bot nhắn được cho anh.', protect_content: true});
     kq.push(r.ok ? 'nhắn quản lý ' + ql + ': OK' : 'KHÔNG nhắn được quản lý ' + ql + ': ' + (r.description || '') + ' → quản lý mở t.me/' + me.result.username + ' bấm Start');
   } else if (!ql) kq.push('chưa có quản lý');
+  if (me.ok) kq.push(datLenh_() ? 'danh sách lệnh: đã cài' : 'danh sách lệnh: LỖI');
   var tr = ScriptApp.getProjectTriggers().map(function (t) { return t.getHandlerFunction(); });
   kq.push('trình kích hoạt: ' + (tr.length ? tr.join(', ') : 'KHÔNG CÓ → chạy caiDat'));
   if (me.ok) { var w = tg_('getWebhookInfo', {}); if (w.ok && w.result.url) kq.push('ĐANG CÓ WEBHOOK (bot khác đang dùng mã này): ' + w.result.url); if (w.ok) kq.push('tin chờ đọc: ' + (w.result.pending_update_count || 0)); }
