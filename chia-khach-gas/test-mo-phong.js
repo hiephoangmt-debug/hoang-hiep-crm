@@ -46,6 +46,7 @@ msg(1,'/dangky An','An');msg(2,'/dangky Bình','Binh');msg(3,'/dangky Cường',
 ok(to(900).filter(s=>/xin vào đội chia khách/.test(s.text)).length===3,'quản lý nhận 3 yêu cầu duyệt');
 click(900,'dy:1');click(900,'dy:2');click(900,'dy:3');run();
 ok(/đã duyệt/.test(lastTo(1).text),'sale An được báo đã duyệt');
+click(900,'dy:1');click(900,'dy:1');run(); ok(to(1).filter(s=>/đã duyệt/.test(s.text)).length===1,'bấm Duyệt nhiều lần: sale chỉ nhận 1 tin, nhật ký ghi 1 lần');
 // khách cũ không chia
 run(); ok(!sent.some(s=>/0911/.test(s.text)||/KHÁCH K/.test(s.text)),'khách có sẵn lúc cài đặt không bị chia');
 // khách mới 9h

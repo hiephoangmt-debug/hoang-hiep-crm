@@ -490,6 +490,7 @@ function bam_(q) {
   if (parts[0] === 'dy' || parts[0] === 'tc') {
     if (chat !== String(quanLy_())) return tl('Chỉ quản lý được duyệt');
     var s = timSale_(parts[1]); if (!s) return tl('Không thấy');
+    if (s.trang_thai !== 'cho_duyet') { sua_(q.message.chat.id, q.message.message_id, (s.trang_thai === 'tu_choi' ? '❌ Đã từ chối ' : '✅ Đã duyệt ') + esc(s.ten)); return tl('Đã xử lý rồi'); }
     s.trang_thai = parts[0] === 'dy' ? 'lam' : 'tu_choi'; save_('Sale', T_SALE, s); log_('quản lý', parts[0] === 'dy' ? 'duyệt sale' : 'từ chối sale', '', s.ten);
     gui_(s.chat_id, parts[0] === 'dy' ? '✅ Quản lý đã duyệt. Bạn sẽ nhận khách lần lượt. Lệnh: /khach · /nghi · /lam' : 'Yêu cầu vào đội chưa được duyệt.');
     sua_(q.message.chat.id, q.message.message_id, (parts[0] === 'dy' ? '✅ Đã duyệt ' : '❌ Đã từ chối ') + esc(s.ten));
