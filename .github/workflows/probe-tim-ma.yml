@@ -1,0 +1,10 @@
+name: Thử nguồn tìm mã (tạm)
+on:
+  push:
+    branches: [claude/probe-tim-ma]
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash probe/probe.sh
