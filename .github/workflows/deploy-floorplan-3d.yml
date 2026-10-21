@@ -7,6 +7,7 @@ on:
     branches: [main]
     paths:
       - 'floorplan-3d/**'
+      - 'dau-tu/**'
       - '.github/workflows/deploy-floorplan-3d.yml'
   workflow_dispatch:
 
@@ -34,6 +35,9 @@ jobs:
           cache-dependency-path: floorplan-3d/package-lock.json
       - run: npm ci
       - run: npm run build
+      # Trang Thống kê đầu tư (tĩnh) nằm ở /dau-tu/
+      - name: Thêm trang đầu tư
+        run: mkdir -p dist/dau-tu && cp -r ../dau-tu/index.html ../dau-tu/data dist/dau-tu/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
