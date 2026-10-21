@@ -16,7 +16,7 @@ Trang web biểu đồ theo ngày cho các kênh: **vàng SJC & thế giới, b�
 | `data/lai_suat.csv` | `ngay,ngan_hang,ky_han_thang,lai_suat,ghi_chu` | %/năm; kỳ hạn 12 tháng dùng cho biểu đồ so sánh |
 
 Hai file đang có **số liệu mẫu** – xoá và nhập số thật (sửa trực tiếp trên GitHub được, cả trên điện thoại).
-Ngày viết dạng `YYYY-MM-DD`.
+Ngày viết dạng `YYYY-MM-DD`; tên khu vực / ngân hàng không dùng dấu phẩy.
 
 ## Đổi danh sách cổ phiếu
 

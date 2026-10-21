@@ -16,6 +16,7 @@ Nguồn nào lỗi thì bỏ qua, giữ số cũ, các nguồn khác vẫn chạ
 from __future__ import annotations
 
 import json
+import math
 import re
 import sys
 import time
@@ -119,6 +120,8 @@ def fetch_sjc():
     r = S.post(
         "https://sjc.com.vn/GoldPrice/Services/PriceService.ashx",
         data={"method": "GetCurrentGoldPricesByBranch", "BranchId": "1"},
+        headers={"Referer": "https://sjc.com.vn/", "Origin": "https://sjc.com.vn",
+                 "X-Requested-With": "XMLHttpRequest"},
         timeout=25,
     )
     r.raise_for_status()
@@ -218,12 +221,26 @@ CAFEF_URLS = (
 )
 
 
-def _ty(v):
-    """Giá trị giao dịch -> tỷ đồng (CafeF trả đồng)."""
-    v = to_num(v)
-    if v is None:
-        return None
-    return v / 1e9 if abs(v) >= 1e6 else v
+def _scale(rows):
+    """Hệ số chia để đổi giá trị giao dịch CafeF ra tỷ đồng.
+
+    Không biết chắc CafeF trả đồng, triệu hay tỷ, nên suy ra từ chính dữ liệu:
+    giá trị mua / khối lượng mua phải ra giá 1 cổ phiếu cỡ vài chục nghìn đồng.
+    Chọn đơn vị (1, 1e3, 1e6, 1e9 đồng) cho kết quả gần 30.000 đ/cp nhất.
+    """
+    ratios = []
+    for r in rows:
+        gt, kl = to_num(r.get("GtMua")), to_num(r.get("KLMua"))
+        if gt and kl and gt > 0 and kl > 0:
+            ratios.append(gt / kl)
+    if ratios:
+        ratios.sort()
+        mid = ratios[len(ratios) // 2]
+        unit = min((1.0, 1e3, 1e6, 1e9), key=lambda u: abs(math.log10(mid * u / 30000)))
+        return 1e9 / unit
+    # Không có khối lượng: đoán theo độ lớn
+    mx = max([abs(to_num(r.get(k)) or 0) for r in rows for k in ("GtMua", "GtBan", "GTDGRong")] or [0])
+    return 1e9 if mx >= 1e8 else 1e3 if mx >= 1e5 else 1.0
 
 
 def fetch_foreign(symbol: str, pages: int = 1, size: int = 20):
@@ -238,14 +255,16 @@ def fetch_foreign(symbol: str, pages: int = 1, size: int = 20):
                 rows = data.get("Data") if isinstance(data, dict) else data
                 if not rows:
                     break
+                k = _scale(rows)
+                ty = lambda v: None if to_num(v) is None else to_num(v) / k  # noqa: E731
                 for row in rows:
                     d = row.get("Ngay") or row.get("Date")
                     if not d:
                         continue
                     dd, mm, yy = re.split(r"[/-]", d)[:3]
                     key = f"{yy[:4]}-{int(mm):02d}-{int(dd):02d}"
-                    buy, sell = _ty(row.get("GtMua")), _ty(row.get("GtBan"))
-                    net = _ty(row.get("GTDGRong"))
+                    buy, sell = ty(row.get("GtMua")), ty(row.get("GtBan"))
+                    net = ty(row.get("GTDGRong"))
                     if net is None and buy is not None and sell is not None:
                         net = buy - sell
                     out[key] = {"mua": buy, "ban": sell, "rong": net}

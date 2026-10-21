@@ -41,7 +41,8 @@ header h1 { font-size: 24px; margin: 0 0 2px; }
   position: sticky; top: 0; z-index: 5; background: var(--page); padding: 8px 0; }
 .seg { display: inline-flex; background: var(--chip); border-radius: 10px; padding: 3px; gap: 2px; }
 .seg button { border: 0; background: transparent; color: var(--ink-2); font: inherit; font-size: 14px;
-  padding: 6px 12px; border-radius: 8px; cursor: pointer; min-height: 34px; }
+  padding: 6px 12px; border-radius: 8px; cursor: pointer; min-height: 34px; white-space: nowrap; }
+@media (max-width: 480px) { .seg { width: 100%; } .seg button { flex: 1; padding: 6px 4px; font-size: 13px; } }
 .seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); font-weight: 600;
   box-shadow: 0 0 0 1px var(--border); }
 .fresh { flex-basis: 100%; display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-2); }
@@ -190,6 +191,10 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 <script>
 (() => {
+if (!window.Chart) {
+  document.getElementById('updated').textContent = 'Không tải được thư viện biểu đồ – kiểm tra mạng rồi tải lại trang.';
+  return;
+}
 const LUONG_PER_OZ = 37.5 / 31.1034768;
 const $ = (id) => document.getElementById(id);
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
@@ -199,10 +204,14 @@ const pct = (v) => v == null || isNaN(v) ? '–' : (v > 0 ? '+' : '') + nf(1).fo
 const cls = (v, eps = 0.05) => v == null || isNaN(v) ? 'flat' : v > eps ? 'up' : v < -eps ? 'down' : 'flat';
 const arrow = (v, eps = 0.05) => v == null || isNaN(v) ? '' : v > eps ? '▲ ' : v < -eps ? '▼ ' : '● ';
 const dvn = (s) => { const [y, m, d] = s.split('-'); return `${d}/${m}/${y}`; };
+const pad = (n) => String(n).padStart(2, '0');
+const tsOf = (s) => { const [y, m, d] = s.split('-'); return new Date(+y, m - 1, +d).getTime(); };
+const keyOf = (ms) => { const t = new Date(ms); return `${t.getFullYear()}-${pad(t.getMonth() + 1)}-${pad(t.getDate())}`; };
+const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 let P = { series: {} }, ST = { symbols: {} }, BDS = [], LS = [];
 let months = 6;
-try { const m = localStorage.getItem('dautu-range'); if (m !== null) months = +m; } catch (e) {}
+try { const m = localStorage.getItem('dautu-range'); if (m !== null && [0, 1, 3, 6, 12].includes(+m)) months = +m; } catch (e) {}
 const charts = {};
 
 // ---------- tải dữ liệu
@@ -228,7 +237,7 @@ Promise.all([j('data/prices.json'), j('data/stocks.json'), t('data/bds.csv'), t(
     BDS = csv(b).map(r => ({ ...r, gia_m2: +r.gia_m2 })).filter(r => !isNaN(r.gia_m2));
     LS = csv(l).map(r => ({ ...r, lai_suat: +r.lai_suat, ky_han_thang: +r.ky_han_thang })).filter(r => !isNaN(r.lai_suat));
     $('updated').textContent = P.updated
-      ? 'Cập nhật: ' + new Date(P.updated).toLocaleString('vi-VN', { dateStyle: 'full', timeStyle: 'short', timeZone: 'Asia/Ho_Chi_Minh' }) + intraday(P.updated)
+      ? 'Vàng, chứng khoán, khối ngoại, tỷ giá, hàng hoá, bất động sản – biểu đồ theo ngày.'
       : 'Chưa có số liệu – chạy workflow “Thống kê đầu tư” trên GitHub Actions để lấy lần đầu.';
     if (P.errors && P.errors.length) $('errs').textContent = 'Nguồn lỗi lần cập nhật gần nhất: ' + P.errors.join(' · ');
     initRange(); render(); fresh(); setInterval(fresh, 30000);
@@ -255,7 +264,7 @@ function fresh() {
   const ago = mins < 1 ? 'vừa xong' : mins < 60 ? `${mins} phút trước` : mins < 1440 ? `${Math.floor(mins / 60)} giờ ${mins % 60} phút trước` : `${Math.floor(mins / 1440)} ngày trước`;
   const v = vnParts(u), hm = (x) => `${String(x.h).padStart(2, '0')}:${String(x.m).padStart(2, '0')}`;
   const n = nextRun(now), nv = n && vnParts(n);
-  $('freshTxt').innerHTML = `Cập nhật <b>${hm(v)} ngày ${v.date}</b> (${ago})${nv ? ` · lần tới khoảng ${hm(nv)}${nv.date !== vnParts(now).date ? ' ngày ' + nv.date : ''}` : ''}`;
+  $('freshTxt').innerHTML = `Cập nhật <b>${hm(v)} ngày ${v.date}</b> (${ago})${intraday(P.updated)}${nv ? ` · lần tới khoảng ${hm(nv)}${nv.date !== vnParts(now).date ? ' ngày ' + nv.date : ''}` : ''}`;
   $('fresh').classList.toggle('old', mins > 26 * 60);
 }
 
@@ -264,7 +273,7 @@ function intraday(iso) {
   const p = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Ho_Chi_Minh', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date(iso));
   const g = (t) => p.find(x => x.type === t)?.value;
   const hm = +g('hour') * 60 + +g('minute');
-  return !['Sat', 'Sun'].includes(g('weekday')) && hm >= 540 && hm < 900 ? ' · đang trong phiên, giá hôm nay là tạm tính' : '';
+  return !['Sat', 'Sun'].includes(g('weekday')) && hm >= 540 && hm < 900 ? ' · <b>đang trong phiên, giá hôm nay là tạm tính</b>' : '';
 }
 
 // ---------- tiện ích chuỗi thời gian
@@ -276,13 +285,13 @@ function lastDate() {
 }
 function startDate() {
   if (!months) return '0000-00-00';
-  const d = new Date(lastDate() + 'T00:00:00'); d.setMonth(d.getMonth() - months);
+  const d = new Date(lastDate() + 'T00:00:00Z'); d.setUTCMonth(d.getUTCMonth() - months);
   return d.toISOString().slice(0, 10);
 }
 const inRange = (arr, s) => arr.filter(([d]) => d >= s);
 // giá trị tại ngày (lấy điểm gần nhất trước đó)
 function at(arr, d) { let v = null; for (const [k, x] of arr) { if (k <= d) v = x; else break; } return v; }
-const xy = (arr) => arr.map(([d, v]) => ({ x: d, y: v }));
+const xy = (arr) => arr.map(([d, v]) => ({ x: tsOf(d), y: v }));
 
 function goldWorldVnd() {
   const g = pts('vang_tg'), u = pts('usd_vnd');
@@ -301,7 +310,12 @@ function savingsIndex(s, e) {
   const by = {}; use.forEach(r => (by[r.ngay] = by[r.ngay] || []).push(r.lai_suat));
   const rr = Object.keys(by).sort().map(d => [d, by[d].reduce((a, b) => a + b, 0) / by[d].length]);
   const out = []; let v = 100;
-  const d = new Date((s > '0000' ? s : rr[0][0]) + 'T00:00:00Z'), end = new Date(e + 'T00:00:00Z');
+  let from = s;
+  if (!months) {
+    const firsts = ['vnindex', 'vang_tg', 'usd_vnd'].map(k => pts(k)[0]?.[0]).filter(Boolean);
+    from = firsts.length ? firsts.sort()[0] : rr[0][0];
+  }
+  const d = new Date(from + 'T00:00:00Z'), end = new Date(e + 'T00:00:00Z');
   for (; d <= end; d.setUTCDate(d.getUTCDate() + 1)) {
     const k = d.toISOString().slice(0, 10);
     const r = at(rr, k) ?? rr[0][1];
@@ -324,7 +338,7 @@ function baseOpts(unit, opt = {}) {
         backgroundColor: css('--surface'), titleColor: css('--ink'), bodyColor: ink2,
         borderColor: css('--axis'), borderWidth: 1, padding: 10, usePointStyle: true,
         callbacks: {
-          title: (it) => it.length ? dvn(new Date(it[0].parsed.x).toISOString().slice(0, 10)) : '',
+          title: (it) => it.length ? dvn(keyOf(it[0].parsed.x)) : '',
           label: (c) => ` ${c.dataset.label}: ${fmt(c.parsed.y, opt.dec ?? 0)}${unit ? ' ' + unit : ''}`,
         },
       },
@@ -442,7 +456,7 @@ function renderKn(s) {
   const o = baseOpts('tỷ', { dec: 0 });
   o.plugins.tooltip.callbacks.label = (c) => ` ${c.parsed.y >= 0 ? 'Mua ròng' : 'Bán ròng'}: ${fmt(Math.abs(c.parsed.y), 0)} tỷ`;
   o.plugins.tooltip.callbacks.afterLabel = (c) => {
-    const d = new Date(c.parsed.x).toISOString().slice(0, 10);
+    const d = keyOf(c.parsed.x);
     const m = P.series.kn_mua?.[d], b = P.series.kn_ban?.[d];
     return m != null ? ` Mua ${fmt(m)} · Bán ${fmt(b)} tỷ` : '';
   };
@@ -497,7 +511,7 @@ function stockRows() {
     const volRatio = avgVol ? vols.at(-1) / avgVol : null;
     const ma50 = ma(50), ma200 = ma(200);
     const ma200prev = n >= 205 ? c.slice(-205, -5).reduce((a, b) => a + b, 0) / 200 : null;
-    const r = { code, name: it.name, last, d1: ch(1), w1: ch(5), m1, m3: ch(60), y1: ch(n - 1 >= 240 ? 240 : n - 1),
+    const r = { code, name: it.name, last, d1: ch(1), w1: ch(5), m1, m3: ch(60), y1: ch(240),
       ma20, ma50, ma200, trend, kn5, knStreak, volRatio, rsi: rsi(c), spark: c.slice(-60), date: it.closes.at(-1)[0] };
     r.sig = [];
     if (r.rsi != null && r.rsi >= 70) r.sig.push(['Quá mua', 'down', 'RSI ' + fmt(r.rsi) + ' ≥ 70: tăng nóng, dễ điều chỉnh']);
@@ -535,7 +549,7 @@ function renderStocks() {
   const head = '<thead><tr>' + cols.map(([k, l]) => `<th data-k="${k}" ${k === sortKey ? `aria-sort="${sortAsc ? 'ascending' : 'descending'}"` : ''}>${l}</th>`).join('') + '</tr></thead>';
   const pc = (v) => `<span class="${cls(v)}">${pct(v)}</span>`;
   const body = list.map(r => `<tr>
-    <td><b>${r.code}</b><span class="nm">${r.name || ''}</span></td>
+    <td><b>${esc(r.code)}</b><span class="nm">${esc(r.name)}</span></td>
     <td>${fmt(r.last, 2)}</td><td><span class="badge ${TREND[r.trend][1]}">${TREND[r.trend][0]}</span></td>
     <td>${pc(r.d1)}</td><td>${pc(r.w1)}</td><td>${pc(r.m1)}</td><td>${pc(r.m3)}</td><td>${pc(r.y1)}</td>
     <td><span class="${r.rsi >= 70 ? 'down' : r.rsi <= 30 ? 'up' : ''}">${fmt(r.rsi)}</span></td>
@@ -617,7 +631,7 @@ function renderLs() {
   LS.forEach(r => { const k = r.ngan_hang + '|' + r.ky_han_thang; if (!latest[k] || latest[k].ngay < r.ngay) latest[k] = r; });
   const rows = Object.values(latest).sort((a, b) => b.lai_suat - a.lai_suat);
   $('tblLs').innerHTML = '<thead><tr><th>Ngân hàng</th><th>Kỳ hạn</th><th>Lãi suất</th><th>Ngày</th></tr></thead><tbody>' +
-    rows.map(r => `<tr><td>${r.ngan_hang}</td><td>${r.ky_han_thang} tháng</td><td>${fmt(r.lai_suat, 2)}%/năm</td><td>${dvn(r.ngay)}</td></tr>`).join('') + '</tbody>';
+    rows.map(r => `<tr><td>${esc(r.ngan_hang)}</td><td>${r.ky_han_thang} tháng</td><td>${fmt(r.lai_suat, 2)}%/năm</td><td>${dvn(r.ngay)}</td></tr>`).join('') + '</tbody>';
 }
 
 function initRange() {
