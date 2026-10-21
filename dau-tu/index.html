@@ -119,7 +119,7 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
       <button data-m="0">Tất cả</button>
     </div>
     <span class="range-label" id="rangeLabel"></span>
-    <nav class="nav" id="nav" aria-label="Chọn mục"><a href="#tong-quan">Tổng quan</a><a href="#so-sanh">So sánh</a><a href="#vang">Vàng</a><a href="#chung-khoan">Chứng khoán</a><a href="#khoi-ngoai">Khối ngoại</a><a href="#co-phieu">Cổ phiếu lớn</a><a href="#tin-hieu">Tín hiệu</a><a href="#the-gioi">Tỷ giá & thế giới</a><a href="#bds">Bất động sản</a><a href="#lai-suat">Lãi suất</a></nav>
+    <nav class="nav" id="nav" aria-label="Chọn mục"><a href="#tong-quan">Tổng quan</a><a href="#so-sanh">So sánh</a><a href="#vang">Vàng</a><a href="#chung-khoan">Chứng khoán</a><a href="#khoi-ngoai">Khối ngoại</a><a href="#co-phieu">Cổ phiếu lớn</a><a href="#tin-hieu">Tín hiệu</a><a href="#the-gioi">Tỷ giá & thế giới</a><a href="#bds">Bất động sản</a><a href="#lai-suat">Lãi suất</a><a href="#fed">Lãi suất Fed</a></nav>
   </div>
 
   <section id="tong-quan">
@@ -198,8 +198,17 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
     <div class="card" style="margin-top:12px"><h3>Lãi suất 12 tháng trung bình theo ngày</h3><div class="chart sm"><canvas id="cLs"></canvas></div></div>
   </section>
 
+  <section id="fed">
+    <h2>Lãi suất Fed (Mỹ)</h2>
+    <p class="note">Lãi suất điều hành của Cục Dự trữ Liên bang Mỹ. Fed tăng lãi suất thường làm USD mạnh lên, gây áp lực lên tỷ giá, giá vàng và dòng vốn ngoại vào chứng khoán Việt Nam; Fed giảm thì ngược lại. Vùng màu là biên độ mục tiêu, đường liền là lãi suất thực tế (EFFR), đường đứt là lợi suất trái phiếu Mỹ 10 năm.</p>
+    <div class="card">
+      <div class="stats" id="fedStats"></div>
+      <div class="chart"><canvas id="cFed"></canvas></div>
+    </div>
+  </section>
+
   <footer>
-    Nguồn: SJC / PNJ / Bảo Tín Minh Châu / DOJI (vàng miếng), Yahoo Finance (vàng/bạc/dầu/S&amp;P 500/USD/Bitcoin, trễ ~15 phút), DNSE/VNDirect, CafeF (khối ngoại), 24hMoney / Người Quan Sát (lãi suất); BĐS nhập tay. Số liệu tự cập nhật mỗi giờ trong phiên (9:15–15:15, thứ 2–6) và 18:30 hằng ngày.
+    Nguồn: SJC / PNJ / Bảo Tín Minh Châu / DOJI (vàng miếng), Yahoo Finance (vàng/bạc/dầu/S&amp;P 500/TP Mỹ/USD/Bitcoin, trễ ~15 phút), FRED (lãi suất Fed), DNSE/VNDirect, CafeF (khối ngoại), 24hMoney / Người Quan Sát (lãi suất); BĐS nhập tay. Số liệu tự cập nhật mỗi giờ trong phiên (9:15–15:15, thứ 2–6) và 18:30 hằng ngày.
     Chỉ để tham khảo, không phải khuyến nghị đầu tư.
     <div class="err" id="errs"></div>
   </footer>
@@ -433,6 +442,7 @@ function renderTiles(s) {
     ['Bạc', pts('bac'), 'USD/oz', 2],
     ['Dầu Brent', pts('dau'), 'USD/thùng', 2],
     ['S&P 500 (Mỹ)', pts('sp500'), 'điểm', 0],
+    ['Lãi suất Fed (trần)', pts('fed_tren'), '%', 2],
     [bdsMainName() || 'Bất động sản', bdsAvg(), 'tr/m²', 0],
   ];
   $('tiles').innerHTML = items.map(([lbl, arr, unit, dec]) => {
@@ -650,6 +660,36 @@ function renderPremium(s) {
     <span>Hiện ${note}</span>${P.sjc_nguon ? `<span>Nguồn giá vàng miếng SJC: <b>${esc(P.sjc_nguon)}</b></span>` : ''}`;
 }
 
+function renderFed(s) {
+  const up = pts('fed_tren'), lo = pts('fed_duoi');
+  if (up.length) {
+    const last = up.at(-1), loLast = lo.length ? lo.at(-1)[1] : null;
+    // các lần Fed đổi lãi suất
+    const changes = [];
+    for (let i = 1; i < up.length; i++) if (up[i][1] !== up[i - 1][1]) changes.push([up[i][0], up[i][1] - up[i - 1][1]]);
+    const lastCh = changes.at(-1);
+    const yearAgo = new Date(last[0] + 'T00:00:00Z'); yearAgo.setUTCFullYear(yearAgo.getUTCFullYear() - 1);
+    const in12 = changes.filter(([d]) => d >= yearAgo.toISOString().slice(0, 10));
+    const net12 = in12.reduce((t, [, v]) => t + v, 0);
+    const effr = pts('fed_thuc').at(-1), y10 = pts('us10y').at(-1);
+    const bp = (v) => `${v > 0 ? '+' : ''}${fmt(v * 100)} điểm cơ bản`;
+    $('fedStats').innerHTML = `
+      <span>Biên độ mục tiêu: <b>${fmt(loLast, 2)}–${fmt(last[1], 2)}%</b></span>
+      ${effr ? `<span>Lãi suất thực tế (EFFR): <b>${fmt(effr[1], 2)}%</b> (${dvn(effr[0])})</span>` : ''}
+      ${lastCh ? `<span>Lần đổi gần nhất: <b class="${lastCh[1] > 0 ? 'down' : 'up'}">${lastCh[1] > 0 ? 'tăng' : 'giảm'} ${bp(Math.abs(lastCh[1])).replace('+', '')}</b> ngày ${dvn(lastCh[0])}</span>` : ''}
+      <span>12 tháng qua: <b>${in12.length ? `${in12.length} lần, tổng ${bp(net12)}` : 'giữ nguyên'}</b></span>
+      ${y10 ? `<span>Lợi suất TP Mỹ 10 năm: <b>${fmt(y10[1], 2)}%</b></span>` : ''}`;
+  } else $('fedStats').innerHTML = '';
+  const band = css('--s1');
+  const ds = [
+    line('Trần mục tiêu', inRange(up, s), band, { stepped: true, borderWidth: 1, fill: '+1', backgroundColor: band + '22' }),
+    line('Sàn mục tiêu', inRange(lo, s), band, { stepped: true, borderWidth: 1 }),
+    line('Lãi suất thực tế (EFFR)', inRange(pts('fed_thuc'), s), css('--s2')),
+    line('Lợi suất TP Mỹ 10 năm', inRange(pts('us10y'), s), css('--s3'), { borderDash: [6, 4] }),
+  ];
+  draw('cFed', { type: 'line', data: { datasets: ds }, options: baseOpts('%', { legend: true, dec: 2, tickDec: 1 }) });
+}
+
 function renderBds(s) {
   const areas = [...new Set(BDS.map(r => r.khu_vuc))];
   const colors = ['--s1', '--s2', '--s3', '--s4', '--s5', '--s6', '--s7'];
@@ -780,6 +820,7 @@ function render() {
   simple('cBac', 'bac', 'Bạc', 'USD/oz', css('--s7'), 2);
   simple('cDau', 'dau', 'Dầu Brent', 'USD/thùng', css('--s2'), 2);
   simple('cSp', 'sp500', 'S&P 500', 'điểm', css('--s3'));
+  renderFed(s);
   renderBds(s); renderLs();
 }
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => render());

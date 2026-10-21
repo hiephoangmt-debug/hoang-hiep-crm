@@ -2,7 +2,8 @@
 
 Kênh tự động:
   - Vàng miếng SJC (mua/bán, triệu đồng/lượng)    – SJC, dự phòng PNJ / Bảo Tín Minh Châu / DOJI
-  - Vàng thế giới (USD/oz), bạc, dầu Brent, S&P 500, USD/VND, Bitcoin – Yahoo Finance
+  - Vàng thế giới (USD/oz), bạc, dầu Brent, S&P 500, lợi suất TP Mỹ 10 năm, USD/VND, Bitcoin – Yahoo Finance
+  - Lãi suất Fed: biên độ mục tiêu (trên/dưới) và lãi suất thực tế EFFR – FRED (Fed St. Louis)
   - VN-Index, VN30, HNX-Index, UPCoM và ~30 cổ phiếu lớn             – DNSE (dự phòng: VNDirect)
   - Khối ngoại mua/bán ròng toàn sàn HOSE và từng mã lớn – CafeF
   - Lãi suất tiết kiệm tại quầy / online ~38 ngân hàng – 24hMoney (dự phòng: Người Quan Sát)
@@ -230,6 +231,23 @@ def fetch_yahoo(symbol: str, rng: str):
         except Exception as e:  # noqa: BLE001
             last = e
     raise last
+
+
+# ---------------------------------------------------------------- FRED (lãi suất Fed)
+def fetch_fred(series_id: str, days: int):
+    """Chuỗi số liệu FRED (Fed St. Louis) dạng CSV, không cần khoá API. {ngày: giá trị}."""
+    start = (datetime.now(VN_TZ) - timedelta(days=days)).strftime("%Y-%m-%d")
+    r = get("https://fred.stlouisfed.org/graph/fredgraph.csv", params={"id": series_id, "cosd": start})
+    out = {}
+    for line in r.text.strip().splitlines()[1:]:
+        parts = line.split(",")
+        if len(parts) >= 2 and re.fullmatch(r"\d{4}-\d{2}-\d{2}", parts[0]):
+            v = to_num(parts[1])
+            if v is not None:
+                out[parts[0]] = v
+    if not out:
+        raise ValueError(f"FRED rỗng cho {series_id}")
+    return out
 
 
 # ---------------------------------------------------------------- Vietcombank (dự phòng USD)
@@ -485,6 +503,19 @@ def main():
     step("Bạc", yahoo("bac", "SI=F"))
     step("Dầu Brent", yahoo("dau", "BZ=F"))
     step("S&P 500", yahoo("sp500", "^GSPC"))
+    def us10y():
+        pts_ = fetch_yahoo("^TNX", "2y" if first("us10y") else "1mo")
+        # Yahoo từng trả ^TNX nhân 10 (42,5 = 4,25%) -> quy về %
+        pts_ = {d: (v / 10 if v > 20 else v) for d, v in pts_.items()}
+        log(f"   {merge(series, 'us10y', pts_)} điểm")
+    step("Lợi suất TP Mỹ 10 năm", us10y)
+
+    def fed():
+        days = 800 if first("fed_tren") else 60
+        for key, sid in (("fed_tren", "DFEDTARU"), ("fed_duoi", "DFEDTARL"), ("fed_thuc", "DFF")):
+            n = merge(series, key, fetch_fred(sid, days))
+            log(f"   {sid}: {n} điểm")
+    step("Lãi suất Fed", fed)
     step("VN-Index", index("vnindex", "VNINDEX"))
     step("VN30", index("vn30", "VN30"))
     step("HNX-Index", index("hnx", "HNX"))
