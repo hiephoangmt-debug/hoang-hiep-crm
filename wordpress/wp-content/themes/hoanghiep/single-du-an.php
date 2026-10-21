@@ -238,7 +238,7 @@ while ( have_posts() ) :
 				$subzones = new WP_Query(
 					array(
 						'post_type'      => 'du-an',
-						'posts_per_page' => 12,
+						'posts_per_page' => 24,
 						'post__not_in'   => array( $id ),
 						'meta_query'     => array( array( 'key' => 'hh_p_parent', 'value' => $id ) ),
 						'orderby'        => array( 'menu_order' => 'ASC', 'title' => 'ASC' ),
