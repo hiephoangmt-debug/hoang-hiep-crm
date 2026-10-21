@@ -313,10 +313,20 @@ def fetch_vndirect(symbol: str, days: int, index=False):
 
 def fetch_ohlc(kind: str, symbol: str, days: int):
     try:
-        return fetch_dnse(kind, symbol, days)
+        data = fetch_dnse(kind, symbol, days)
     except Exception as e:  # noqa: BLE001
         log(f"   DNSE lỗi {symbol}: {e} -> thử VNDirect")
         return fetch_vndirect(symbol, days, index=(kind == "index"))
+    # DNSE chỉ có nến ngày sau khi hết phiên -> lấy giá đang khớp hôm nay từ VNDirect
+    if today() not in data:
+        try:
+            live = fetch_vndirect(symbol, 5, index=(kind == "index"))
+            for d, v in live.items():
+                if d not in data:
+                    data[d] = v
+        except Exception as e:  # noqa: BLE001
+            log(f"   không lấy được giá trong phiên {symbol}: {e}")
+    return data
 
 
 # ---------------------------------------------------------------- CafeF khối ngoại
