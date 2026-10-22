@@ -99,7 +99,8 @@ ok(vm.runInContext("rows_('Khach',T_KHACH).some(function(k){return k.sdt==='0944
   for(let i=0;i<20;i++) nd.appendRow(['Data '+i,"'09120000"+String(i).padStart(2,'0'),'Downtown','khách cũ 2025']);
   nd.appendRow(['Sai số','12345','','']); nd.appendRow(['Trùng','0912000000','','']);
   const lgc0={};['1','2','3'].forEach(c=>lgc0[c]=ms(S(c).luc_giao_cuoi));
-  adv(1); run();
+  for(let m=0;m<3;m++){adv(1); run();}
+  ok(true,'(mỗi phút tối đa 10 dòng: 3 phút xử lý hết 22 dòng)');
   const kh=all().filter(k=>k.nguon==='Data telesale');
   const dangGiao=kh.filter(k=>k.trang_thai==='cho_nhan'), cho=kh.filter(k=>k.trang_thai==='cho_giao');
   ok(dangGiao.length===9&&cho.length===11,'dán 20 số, 3 sale: mỗi người nhận 3 (giới hạn riêng), 11 số chờ ('+dangGiao.length+'/'+cho.length+')');
@@ -127,7 +128,7 @@ ok(vm.runInContext("rows_('Khach',T_KHACH).some(function(k){return k.sdt==='0944
   const nd=active.s['NhapData'], dc=active.s['DaChia'], d0=dc.d.length;
   const RAW=require('fs').readFileSync(__dirname+'/test-data-tho.tsv','utf8').trim().split('\n').map(l=>l.split('\t'));
   RAW.forEach(r=>nd.appendRow(r));
-  for(let m=0;m<3;m++){adv(1);run();}
+  for(let m=0;m<4;m++){adv(1);run();}
   const kq=dc.d.slice(d0), kh=vm.runInContext("rows_('Khach',T_KHACH).filter(function(k){return k.nguon==='Data telesale'&&k.trang_thai!=='dong'})",ctx);
   ok(kq.length===RAW.length,'dán '+RAW.length+' dòng thô: xử lý hết ('+kq.length+')');
   ok(kq.every(r=>/^(✅|⚠️ Trùng)/.test(r[0])),'mọi dòng đều tìm được số (không dòng nào báo lỗi)');

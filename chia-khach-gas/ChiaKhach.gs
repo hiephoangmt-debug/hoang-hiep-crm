@@ -270,7 +270,9 @@ function ghiNhanKhachCu_() {
 /* ======================= VÒNG CHẠY MỖI PHÚT ======================= */
 function chayMoiPhut() {
   var lock = LockService.getScriptLock(); if (!lock.tryLock(20000)) return;
-  try { capNhatTieuDe_(); xuLyTinNhan_(); nhanKhachMoi_(); nhapData_(); kiemTraHan_(); }
+  /* Nút bấm của sale được xử lý trước và xen giữa các việc nặng, để không phải chờ chia data xong */
+  var bd = Date.now();
+  try { capNhatTieuDe_(); xuLyTinNhan_(); nhanKhachMoi_(); xuLyTinNhan_(); nhapData_(bd + 25000); xuLyTinNhan_(); kiemTraHan_(); xuLyTinNhan_(); }
   finally { lock.releaseLock(); }
 }
 
@@ -390,7 +392,7 @@ function docDongKhac_(r, tab) {
 /* --- tab NhapData: quản lý dán data, bot chia dần ---
    Dán kiểu gì cũng được: copy nguyên dòng thô từ tab dự án (giờ | tên | email/SĐT lẫn lộn | link web | IP | FORM…)
    hoặc gọn: Tên | SĐT | Dự án | Ghi chú. Bot tự tìm SĐT, tên, dự án (theo link web), ghi chú.
-   Xử lý xong dòng nào thì chuyển dòng đó sang tab DaChia kèm kết quả. Mỗi phút tối đa 30 dòng.
+   Xử lý xong dòng nào thì chuyển dòng đó sang tab DaChia kèm kết quả. Mỗi phút tối đa 10 dòng / 25 giây.
    Khách chia kiểu dự án khác: vòng riêng, giới hạn riêng, không ảnh hưởng FourS / Saphia. */
 var TEN_DU_AN = {'sun-danangdowntown': 'Downtown', 'sun-spanatower': 'Spana Tower', 'cora-tower': 'Cora Tower', 'fpt-city': 'FPT City',
   'filmore-danang': 'Filmore', 'legend-city-danang': 'Legend City', 'peninsula-danang': 'Peninsula', 'masteri-riveradanang': 'Masteri',
@@ -417,12 +419,14 @@ function docDongNhap_(r) {
   if (!da && ghi.length && ghi[0].length <= 30) da = ghi.shift();   // kiểu gọn: cột thứ 3 là dự án
   return {sdt: sdt, ten: ten.slice(0, 60), du_an: da, ghi_chu: ghi.join(' · ').slice(0, 200)};
 }
-function nhapData_() {
+function nhapData_(han) {
+  han = han || Date.now() + 25000;   // mỗi phút chỉ chia data tối đa ~25 giây, phần còn lại để phút sau
   var sh = tab_('NhapData'), n = sh.getLastRow(); if (!n) { sh.getRange(1, 1).setValue(HD_NHAP); return; }
   var w = Math.max(1, Math.min(26, sh.getLastColumn())), v = sh.getRange(1, 1, n, w).getValues();
   var dc = tab_('DaChia', T_DACHIA), xong = [], tatCa = null, lam = 0, dem = Number(P().getProperty('DEM') || 0);
-  for (var i = 0; i < v.length && lam < 30; i++) {
+  for (var i = 0; i < v.length && lam < 10 && Date.now() < han; i++) {
     var r = v[i];
+    if (lam && lam % 3 === 0) xuLyTinNhan_();   // xen kẽ xử lý nút bấm
     if (!r.some(function (x) { return String(x).trim(); }) || String(r[0]).indexOf('⬇️') === 0) continue;
     lam++; tatCa = tatCa || rows_('Khach', T_KHACH);
     var c = docDongNhap_(r), kq;
