@@ -120,7 +120,10 @@ ok(vm.runInContext("rows_('Khach',T_KHACH).some(function(k){return k.sdt==='0944
   const d0=dangGiao[0]; click(d0.nguoi_giu,'n:'+d0.id); run(); click(d0.nguoi_giu,'b:'+d0.id+':knm'); adv(1); run();
   ok(all().filter(k=>k.nguon==='Data telesale'&&k.trang_thai==='cho_giao').length===10&&all().filter(k=>k.nguoi_giu===d0.nguoi_giu&&k.nguon==='Data telesale'&&k.trang_thai==='cho_nhan').length===3,'báo cáo xong 1 khách data → tự giao tiếp 1 số đang chờ');
   // không nhận trong 30 phút → thu hồi, chia người khác (như cũ)
-  adv(31); run(); ok(all().some(k=>k.nguon==='Data telesale'&&String(k.da_qua).length>0),'data không bấm nhận 30 phút: thu hồi, chia người khác như khách thường');
+  const giu0=all().filter(k=>k.nguon==='Data telesale'&&k.nguoi_giu).map(k=>k.id+':'+k.nguoi_giu).join();
+  adv(31); run(); advW(60*14*4); run();
+  ok(!all().some(k=>k.nguon==='Data telesale'&&String(k.da_qua).length>0)&&all().filter(k=>k.nguon==='Data telesale'&&k.nguoi_giu).map(k=>k.id+':'+k.nguoi_giu).join()===giu0,'data telesale: quá 30 phút / 2 giờ / 3 ngày vẫn KHÔNG thu hồi, giữ nguyên người nhận');
+  ok(!sent.some(s=>/Data|Downtown/.test(s.text)&&/sẽ bị thu hồi|Còn \d+ phút/.test(s.text)),'tin data telesale không ghi hạn thu hồi, không nhắc hạn');
 }
 
 // ===== Dán nguyên dòng thô từ tab Dowtown =====

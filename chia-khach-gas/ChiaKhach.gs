@@ -11,6 +11,7 @@
  *  4. Mỗi tối gửi báo cáo cho quản lý.
  *  5. Data telesale / dự án khác: dán vào tab "NhapData" (nguyên dòng thô cũng được) (hoặc các tab Sheet "DATA CHẠY GOOGLE") → bot tự chia
  *     như khách thường, nhưng xoay vòng RIÊNG và giới hạn RIÊNG: không làm mất lượt, không chặn khách FourS / Saphia.
+ *     Data telesale KHÔNG thu hồi tự động: giao ai người đó giữ (quản lý vẫn chia lại được bằng nút / /xoa).
  * Thêm: nhắc trước hạn · khách quay lại về đúng người đang chăm · không ôm quá 5 khách chưa báo cáo ·
  *       bị thu hồi 3 lần/ngày thì tự tạm dừng · đóng khách phải ghi lý do và quản lý duyệt ·
  *       khách nóng 2 ngày nhắc, 7 ngày im lặng thì thu hồi · /xoa sale nghỉ việc · xếp hạng tuần.
@@ -105,6 +106,7 @@ function hanLuc(a, phut) {
 }
 /* Giờ hạn của khách theo trạng thái hiện tại */
 function han_(k) {
+  if (laKhac_(k)) return null;   // data telesale / dự án khác: không có hạn, không thu hồi
   var st = k.trang_thai, ngay = phutMotNgay();
   if (st === 'cho_nhan') return {viec: 'bấm Nhận', luc: hanLuc(k.luc_giao, num('HAN_NHAN_PHUT'))};
   if (st === 'da_nhan') return {viec: 'báo cáo', luc: hanLuc(k.luc_nhan, num('HAN_BAO_CAO_PHUT'))};
@@ -536,7 +538,7 @@ function giao_(k) {
   var s = ung[0], t = nowD(), dem = trongGio(ms(t));
   k.trang_thai = 'cho_nhan'; k.nguoi_giu = String(s.chat_id); k.ten_sale = s.ten; k.luc_giao = t; k.luc_nhan = ''; k.luc_bao_cao = ''; k.bao_cao = ''; k.nhac = ''; k.ly_do_dong = ''; k.gia_han = 0;
   k.so_luot = Number(k.so_luot || 0) + 1;
-  k.msg_id = gui_(s.chat_id, tinKhach_(k, false) + '\n\n' + dongHan_(k) + (dem ? '' : '\n(Ngoài giờ ' + num('GIO_BAT_DAU') + 'h–' + num('GIO_KET_THUC') + 'h không tính.)'),
+  k.msg_id = gui_(s.chat_id, tinKhach_(k, false) + '\n\n' + (khac ? '📌 Data telesale: khách giao cho bạn giữ, không bị thu hồi. Bấm Nhận để xem số.' : dongHan_(k)) + (dem || khac ? '' : '\n(Ngoài giờ ' + num('GIO_BAT_DAU') + 'h–' + num('GIO_KET_THUC') + 'h không tính.)'),
     [[{text: '✅ Nhận khách', callback_data: 'n:' + k.id}]], !dem);
   save_('Khach', T_KHACH, k);
   s[cot] = t; save_('Sale', T_SALE, s);
@@ -569,6 +571,7 @@ function kiemTraHan_() {
       if (laKhac_(k) && khacDay) return;   // data telesale chờ nhiều: hết người rảnh thì để phút sau
       giao_(k); if (laKhac_(k) && k.trang_thai === 'cho_giao') khacDay = true; return;
     }
+    if (laKhac_(k)) return;   // data telesale / dự án khác: giao ai người đó giữ, không thu hồi tự động
     if (st === 'cho_nhan') {
       p = phutLamViec(k.luc_giao, now);
       if (p >= num('HAN_NHAN_PHUT')) thuHoi_(k, 'không bấm nhận trong ' + num('HAN_NHAN_PHUT') + ' phút');
@@ -700,7 +703,7 @@ function bam_(q) {
   if (parts[0] === 'n') {
     if (k.trang_thai !== 'cho_nhan') return tl('Đã nhận rồi');
     k.trang_thai = 'da_nhan'; k.luc_nhan = nowD(); save_('Khach', T_KHACH, k); log_(k.ten_sale, 'nhận khách', k.id, 'xem số');
-    sua_(chat, k.msg_id, tinKhach_(k, true) + '\n\n✅ Bạn đã nhận. Báo cáo khách này để cập nhật.\n' + dongHan_(k) + '\n(Hạn chuyển đổi: trước ' + fmt(hanLuc(k.luc_nhan, num('HAN_CHUYEN_DOI_NGAY') * phutMotNgay())) + ' · chỉ tính ' + num('GIO_BAT_DAU') + 'h–' + num('GIO_KET_THUC') + 'h)', nutBaoCao_(k.id));
+    sua_(chat, k.msg_id, tinKhach_(k, true) + '\n\n✅ Bạn đã nhận. Báo cáo khách này để cập nhật.' + (laKhac_(k) ? '' : '\n' + dongHan_(k) + '\n(Hạn chuyển đổi: trước ' + fmt(hanLuc(k.luc_nhan, num('HAN_CHUYEN_DOI_NGAY') * phutMotNgay())) + ' · chỉ tính ' + num('GIO_BAT_DAU') + 'h–' + num('GIO_KET_THUC') + 'h)'), nutBaoCao_(k.id));
     return tl('Đã nhận khách');
   }
   if (parts[0] === 'b' && BC[parts[2]]) {
