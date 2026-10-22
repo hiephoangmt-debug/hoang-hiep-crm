@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><title>Lớp chữ video xây dựng</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+  /* ?bg=1: chỉ nền (ảnh tĩnh); mặc định: lớp chữ trong suốt phủ lên ảnh động */
+  html,body{margin:0;background:transparent;overflow:hidden}
+  #stage{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:'Be Vietnam Pro',sans-serif;color:#fff}
+  .bg #stage{background:#071530}
+  .bg #stage:before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 30% at 50% 14%,rgba(40,90,160,.55),rgba(7,21,48,0) 70%)}
+  .fadeT{position:absolute;left:0;right:0;top:470px;height:170px;background:linear-gradient(#071530,rgba(7,21,48,0))}
+  .fadeB{position:absolute;left:0;right:0;top:1250px;height:181px;background:linear-gradient(rgba(7,21,48,0),#071530)}
+  .bg .fadeT,.bg .fadeB,.bg .ui{display:none}
+  .kick{position:absolute;top:92px;left:0;right:0;text-align:center;font-weight:800;font-size:36px;letter-spacing:10px;color:#FFB547}
+  .ttl{position:absolute;top:150px;left:0;right:0;text-align:center;font-weight:900;font-size:108px;line-height:1.04;letter-spacing:-2px;text-shadow:0 10px 40px rgba(0,0,0,.6)}
+  .ttl em{font-style:normal;color:#FF7A1A}
+  .note{position:absolute;right:28px;top:600px;font-weight:600;font-size:22px;color:rgba(255,255,255,.75);text-shadow:0 2px 6px rgba(0,0,0,.8)}
+  .tod{position:absolute;left:28px;top:596px;display:flex;align-items:center;gap:10px;padding:8px 18px 8px 10px;border-radius:999px;background:rgba(5,14,34,.7);border:2px solid rgba(255,255,255,.25);font-weight:800;font-size:26px}
+  .tod svg{width:34px;height:34px}
+  .stats{position:absolute;top:1300px;left:0;right:0;display:flex;justify-content:center;gap:22px}
+  .st{background:rgba(5,14,34,.9);border:3px solid #FF7A1A;border-radius:22px;padding:14px 20px;text-align:center;width:250px;box-sizing:border-box}
+  .st b{display:block;font-weight:900;font-size:60px;color:#FF7A1A;line-height:1;font-variant-numeric:tabular-nums}
+  .st span{display:block;font-weight:700;font-size:26px;margin-top:6px}
+  .bar{position:absolute;top:1452px;left:140px;width:800px;height:12px;border-radius:6px;background:rgba(255,255,255,.15);overflow:hidden}
+  .bar i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#FF7A1A,#FFB547)}
+  .tag{position:absolute;left:0;right:0;top:395px;text-align:center}
+  .tag span{display:inline-block;background:#FF7A1A;font-weight:900;font-size:40px;padding:10px 28px;border-radius:16px;box-shadow:0 0 30px rgba(255,122,26,.5)}
+</style></head><body>
+<div id="stage">
+  <div class="fadeT"></div><div class="fadeB"></div>
+  <div class="ui">
+    <div class="kick">SUN SAPHIA RESIDENCE</div>
+    <div class="ttl" id="t1">HÀNH TRÌNH<br><em>XÂY DỰNG</em></div>
+    <div class="ttl" id="t2" style="opacity:0;font-size:94px;top:160px">TÒA THÁP<br><em>30 TẦNG</em> BÊN BIỂN</div>
+    <div class="tag" id="tag" style="opacity:0"><span>Dự kiến bàn giao 11/2028</span></div>
+    <div class="tod" id="tod"><svg viewBox="0 0 24 24" id="ico"></svg><span id="todt">Ngày</span></div>
+    <div class="note">Hình ảnh mô phỏng minh họa</div>
+    <div class="stats">
+      <div class="st"><b id="s1">0</b><span>tầng</span></div>
+      <div class="st"><b id="s2">0 m</b><span>chiều cao</span></div>
+      <div class="st"><b id="s3">0%</b><span>tiến độ</span></div>
+    </div>
+    <div class="bar"><i id="bar"></i></div>
+  </div>
+</div>
+<script src="xay_data.js"></script>
+<script>
+if (new URLSearchParams(location.search).get('bg')) document.body.className = 'bg';
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x)), $ = id => document.getElementById(id);
+const SUN = '<circle cx="12" cy="12" r="5" fill="#FFC23D"/><g stroke="#FFC23D" stroke-width="2" stroke-linecap="round"><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"/></g>';
+const MOON = '<path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="#CFE0FF"/>';
+const back = t => { const c1 = 1.9, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); };
+let lastIco = '';
+window.renderSig = f => {
+  const [fl, pod, n] = XD[Math.min(f, XD.length - 1)];
+  const floors = Math.round(fl), prog = Math.round((pod * 0.1 + fl / 30 * 0.85 + clamp((f - 660) / 100) * 0.05) * 100);
+  $('s1').textContent = floors + '/30'; $('s2').textContent = Math.round(fl / 30 * 114) + ' m'; $('s3').textContent = prog + '%';
+  $('bar').style.width = prog + '%';
+  const ico = n > 0.5 ? MOON : SUN; if (ico !== lastIco) { $('ico').innerHTML = ico; lastIco = ico; }
+  $('todt').textContent = n > 0.5 ? 'Đêm' : 'Ngày';
+  // tiêu đề: đổi ở đoạn hoàn thiện
+  const sw = clamp((f - 770) / 18);
+  $('t1').style.opacity = 1 - sw; $('t2').style.opacity = sw;
+  $('t2').style.transform = `scale(${(.85 + .15 * back(sw)).toFixed(3)})`;
+  const tg = clamp((f - 815) / 16); $('tag').style.opacity = tg; $('tag').style.transform = `scale(${(.3 + .7 * back(tg)).toFixed(3)})`;
+  const ui = clamp(f / 12); document.querySelector('.ui').style.opacity = ui;
+  return true;
+};
+document.fonts.ready.then(() => { window.renderSig(0); window.READY = true; });
+</script>
+</body></html>

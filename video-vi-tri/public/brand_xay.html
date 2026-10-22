@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Lớp Hoàng Hiệp (video giải mã)</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+  html, body { margin: 0; background: transparent; overflow: hidden; }
+  canvas { display: block; position: absolute; left: 0; top: 0; }
+  /* dải hotline Hoàng Hiệp (giống bản video 1) */
+  .bwrap { position: absolute; left: 0; right: 0; top: 1748px; text-align: center; opacity: 0; font-family: 'Be Vietnam Pro', sans-serif; }
+  .badge { position: relative; display: inline-flex; align-items: center; gap: 14px; padding: 10px 26px 10px 10px; border-radius: 999px; overflow: hidden;
+    background: rgba(8,22,46,.82); border: 2px solid rgba(255,122,26,.9); box-shadow: 0 8px 26px rgba(0,0,0,.45), 0 0 22px rgba(255,122,26,.35); }
+  .badge .ph { width: 50px; height: 50px; border-radius: 50%; background: #FF7A1A; display: grid; place-items: center; }
+  .badge .ph svg { width: 28px; height: 28px; }
+  .badge b { font-weight: 900; font-size: 38px; letter-spacing: 1px; color: #fff; }
+  .badge i { font-style: normal; font-weight: 600; font-size: 26px; color: #FFB547; padding-left: 14px; border-left: 2px solid rgba(255,255,255,.25); }
+  .badge .band { position: absolute; top: -50%; left: 0; width: 80px; height: 200%; transform: translateX(-300px) skewX(-22deg); opacity: .8;
+    background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.75) 50%, rgba(255,255,255,0)); }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<div class="bwrap"><div class="badge"><span class="ph"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" fill="#fff"/></svg></span><b>0904 567 009</b><i>Hoàng Hiệp</i><div class="band"></div></div></div>
+<script>
+// Lớp phủ Hoàng Hiệp cho video 2 (1610 khung, 30 fps): dải hotline + chữ ký tự viết + watermark chữ mờ giữa hình.
+const N = 194, TOTAL = 900;
+const SIG = { w: 330, cx: 540, bottom: 1742, from: 40, to: TOTAL + 30, writes: [40, 480] };
+const WM = { text: 'HOÀNG HIỆP · 0904 567 009', alpha: 0.16, y: 960 };
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ctx = document.getElementById('c').getContext('2d');
+const imgs = []; let loaded = 0;
+for (let i = 0; i < N; i++) {
+  const im = new Image();
+  im.onload = () => { if (++loaded === N) Promise.all([document.fonts.load('900 38px "Be Vietnam Pro"', '0904'), document.fonts.load('800 40px "Be Vietnam Pro"', 'HOÀNG HIỆP')]).then(() => { window.READY = true; }); };
+  im.src = `sig/s${String(i).padStart(3, '0')}.png`; imgs.push(im);
+}
+const bwrap = document.querySelector('.bwrap'), band = document.querySelector('.badge .band');
+window.renderSig = f => {
+  ctx.clearRect(0, 0, 1080, 1920);
+  // watermark: 1 dòng mờ ngang giữa hình
+  ctx.save();
+  ctx.globalAlpha = WM.alpha * clamp((f - 20) / 20);
+  ctx.font = '800 40px "Be Vietnam Pro"'; ctx.letterSpacing = '8px'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.lineWidth = 2; ctx.strokeStyle = 'rgba(0,10,30,.8)'; ctx.fillStyle = '#FFFFFF';
+  ctx.strokeText(WM.text, 544, WM.y); ctx.fillText(WM.text, 544, WM.y);
+  ctx.restore();
+  // dải hotline: hiện lên nhẹ nhàng, vệt sáng mỗi 5 giây
+  const vb = clamp((f - 40) / 18), rise = (1 - (1 - Math.pow(1 - clamp((f - 40) / 24), 5))) * 40;
+  bwrap.style.opacity = vb.toFixed(3); bwrap.style.transform = `translateY(${rise.toFixed(1)}px)`;
+  const t2 = f >= 120 ? clamp(((f - 120) % 150) / 30) : 0;
+  band.style.opacity = t2 > 0 && t2 < 1 ? .8 : 0; band.style.transform = `translateX(${(-160 + t2 * 900).toFixed(1)}px) skewX(-22deg)`;
+  // chữ ký tự viết ngay trên dải hotline
+  const vis = clamp((f - SIG.from) / 12);
+  let k = -1; SIG.writes.forEach((t, i) => { if (f >= t) k = i; });
+  if (vis > 0 && k >= 0) {
+    const t0 = SIG.writes[k], next = SIG.writes[k + 1];
+    const idx = Math.min(N - 1, Math.floor(f - t0));
+    let a = vis; if (next != null) a *= clamp((next - f) / 15);
+    const h = SIG.w * 421 / 600, x = SIG.cx - SIG.w / 2, y = SIG.bottom - h;
+    ctx.save(); ctx.globalAlpha = a;
+    ctx.shadowColor = 'rgba(2,8,22,.85)'; ctx.shadowBlur = 10; ctx.shadowOffsetY = 2; ctx.drawImage(imgs[idx], x, y, SIG.w, h);
+    ctx.shadowColor = 'rgba(255,122,26,.55)'; ctx.shadowBlur = 18; ctx.shadowOffsetY = 0; ctx.globalAlpha = a * .5; ctx.drawImage(imgs[idx], x, y, SIG.w, h);
+    ctx.restore();
+  }
+  return true;
+};
+</script>
+</body>
+</html>
