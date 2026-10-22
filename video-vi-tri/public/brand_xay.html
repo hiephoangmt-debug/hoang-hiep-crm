@@ -24,8 +24,8 @@
 <div class="bwrap"><div class="badge"><span class="ph"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" fill="#fff"/></svg></span><b>0904 567 009</b><i>Hoàng Hiệp</i><div class="band"></div></div></div>
 <script>
 // Lớp phủ Hoàng Hiệp cho video 2 (1610 khung, 30 fps): dải hotline + chữ ký tự viết + watermark chữ mờ giữa hình.
-const N = 194, TOTAL = 900;
-const SIG = { w: 330, cx: 540, bottom: 1742, from: 40, to: TOTAL + 30, writes: [40, 480] };
+const N = 194, TOTAL = 1230;
+const SIG = { w: 330, cx: 540, bottom: 1742, from: 40, to: TOTAL + 30, writes: [40, 480, 920] };
 const WM = { text: 'HOÀNG HIỆP · 0904 567 009', alpha: 0.16, y: 960 };
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const ctx = document.getElementById('c').getContext('2d');

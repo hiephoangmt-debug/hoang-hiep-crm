@@ -2,9 +2,10 @@
 # Cách dùng: python3 build.py out.mp4 [khung_bắt_đầu khung_kết_thúc]   (in ra build_data.json cho lớp chữ)
 import numpy as np, cv2, json, sys, subprocess, math
 A = cv2.imread('p1.jpg')[..., ::-1].astype(np.float32)
+A2 = cv2.imread('after.png')[..., ::-1].astype(np.float32)   # ảnh hoàn thiện: cỏ phía trước đã dọn
 B0 = cv2.imread('before.png')[..., ::-1].astype(np.float32)
 H, W, _ = A.shape
-FPS, TOTAL = 30, 900
+FPS, TOTAL = 30, 1230
 rng = np.random.default_rng(7)
 yy, xx = np.mgrid[0:H, 0:W]
 clamp = lambda x, a=0.0, b=1.0: max(a, min(b, x))
@@ -21,7 +22,7 @@ lum = A.mean(2); sat = (A.max(2) - A.min(2)) / (A.max(2) + 1)
 GLASS = ((lum > 35) & (lum < 175) & (sat < 0.28)).astype(np.float32) * MT
 # ô cửa sổ: tầng × khoang, bật đèn ngẫu nhiên
 ROW = np.clip(((TBASE - yy) / FL).astype(int), 0, 40); COL = np.clip(((xx - TX0) / 21).astype(int), 0, 20)
-LIT = rng.random((41, 21)) < 0.5; FLICK = rng.random((41, 21))
+RANK = rng.random((41, 21)); LIT = RANK < 0.5; FLICK = rng.random((41, 21))
 SHOP = np.zeros((H, W), np.float32); SHOP[652:736, PX0 + 8:PX1 - 8] = 1; SHOP *= (lum < 200)
 
 # khung bê tông (tầng đang thi công)
@@ -52,10 +53,10 @@ def light_at(f):
         w = math.exp(-((u - 0.43) / 0.07) ** 2) + 0.8 * math.exp(-((u - 0.9) / 0.06) ** 2)
         return n, w
     if 90 <= f < 690: return cyc(((f - 90) % 150) / 150)
-    if 690 <= f < 860:
-        u = (f - 690) / 170       # hoàng hôn → đêm dài (khoe đèn) → bình minh
-        n = ss(u / 0.22) * (1 - ss((u - 0.72) / 0.2))
-        w = math.exp(-((u - 0.12) / 0.09) ** 2) + 0.8 * math.exp(-((u - 0.86) / 0.07) ** 2)
+    if 770 <= f < 1130:           # hoàn thiện: 2 vòng ngày–đêm dài, đêm kéo dài để khoe đèn
+        u = ((f - 770) % 180) / 180
+        n = ss((u - 0.22) / 0.16) * (1 - ss((u - 0.80) / 0.14))
+        w = math.exp(-((u - 0.25) / 0.07) ** 2) + 0.8 * math.exp(-((u - 0.88) / 0.06) ** 2)
         return n, w
     return 0.0, 0.0
 
@@ -147,7 +148,7 @@ def frame(f):
     crane_a = (1 - ss((f - 690) / 25))
     top = draw_crane(img, f, yF, crane_a)
     # hoàn thiện: cảnh quan, hàng cọ hiện dần → trùng ảnh phối cảnh
-    k = ss((f - 705) / 50); img = img * (1 - k) + A * k
+    k = ss((f - 705) / 50); img = img * (1 - k) + A2 * k
     # ---------- ánh sáng ----------
     n, w = light_at(f)
     bk = np.maximum(built, k * MB)
@@ -164,6 +165,7 @@ def frame(f):
         # đèn cửa sổ ở các tầng đã hoàn thiện (có tầng tắt/bật theo thời gian)
         slot = f // 20
         lit = LIT ^ (FLICK < 0.06 * ((slot * 7919) % 5 == 0))
+        if f >= 770: lit = (RANK < 0.12 + 0.55 * n) ^ (FLICK < 0.04 * ((slot * 7919) % 5 == 0))
         Lw = GLASS * lit[ROW, COL] * glassd * (1 - k) + GLASS * lit[ROW, COL] * k
         Lw = cv2.GaussianBlur(Lw, (0, 0), 0.8)
         img += Lw[..., None] * np.array([255, 178, 96], np.float32) * 0.5 * n
@@ -188,7 +190,7 @@ def frame(f):
         if 100 < f < 690:
             glow(img, [(TX0 + 20, yF + 6, 2), (TX1 - 20, yF + 6, 2), (650, yP + 4, 1.5)], 14, np.array([230, 240, 255], np.float32), 0.8 * n)
             if top and (f // 15) % 2 == 0: glow(img, [(915, top - 27, 1.5)], 3, np.array([255, 40, 30], np.float32), n * crane_a)
-        if f >= 690:
+        if f >= 720:
             glow(img, [(650, TTOP - 2, 1)], 4, np.array([255, 40, 30], np.float32), n * (0.6 + 0.4 * ((f // 15) % 2)))
     return np.clip(img, 0, 255).astype(np.uint8), fl, pod, n
 
