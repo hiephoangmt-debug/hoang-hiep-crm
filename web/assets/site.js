@@ -1,7 +1,12 @@
 /* ===== Cấu hình ===== */
 const CONFIG = {
-  // URL Web App của Google Apps Script (xem integrations/google-apps-script/Code.gs). Để trống thì lead chỉ hiện lời cảm ơn.
-  LEAD_ENDPOINT: "",
+  // Cổng nhận khách (URL ứng dụng web Google Apps Script / FormSubmit). Để trống một mục = tắt mục đó.
+  TELEGRAM_ENDPOINT: "", // Apps Script gửi Telegram + lưu Sheet (như trang Sun FourS Tower)
+  CRM_ENDPOINT: "",      // Cổng CRM Sale Đà Nẵng
+  CRM2_ENDPOINT: "",     // CRM Hoàng Hiệp (Google Sheet)
+  MAIL_ENDPOINT: "https://formsubmit.co/ajax/hiephoangmt@gmail.com", // Email qua FormSubmit
+  LEAD_ENDPOINT: "",     // Tùy chọn: ghi tab "Dowtown" (integrations/google-apps-script/Code.gs)
+  PROJECT: "Da Nang Downtown",
   // Link thư mục Google Drive chứa bảng giá, mặt bằng, brochure (chia sẻ "Bất kỳ ai có đường liên kết"). Để trống thì gửi qua Zalo.
   DOCS_URL: "",
   HOTLINE: "0904 567 009",
@@ -22,20 +27,40 @@ const CONFIG = {
   if (!landing || /[?&](gclid|utm_source|fbclid)=/.test(location.search)) { landing = location.href; store.set('ddt_landing', landing); }
   const PHONE_RE = /^(\+84|0)\d{9,10}$/;
   const cleanPhone = (v) => (v || '').replace(/[\s.\-()]/g, '');
-  const pageSource = 'seo' + (location.pathname.replace(/\//g, '-').replace(/-$/, '') || '-da-nang-downtown');
   const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
   /* ===== Gửi lead ===== */
-  async function submitLead(data) {
-    const payload = Object.assign({
-      need: '', unit_type: '', channel: '', note: '',
-      source: pageSource, page: location.href, landing, submitted_at: new Date().toISOString()
-    }, data);
-    if (window.dataLayer) window.dataLayer.push({ event: 'generate_lead', form: payload.via || 'form', page: location.pathname });
+  const projectName = () => /sun-galaxy-complex/.test(location.pathname) ? 'Sun Galaxy Complex'
+    : /thap-408m/.test(location.pathname) ? 'Tháp 408m Da Nang Downtown' : CONFIG.PROJECT;
+  const VIA_LABEL = { form: 'Form đăng ký', popup: 'Popup tài liệu', chat: 'Chat tự động' };
+  async function submitLead(input) {
+    const project = projectName();
+    const data = {
+      name: input.name || '', phone: input.phone || '',
+      nhu_cau: input.need || '', loai_can: input.unit_type || '', kenh_nhan: input.channel || '',
+      hinh_thuc: VIA_LABEL[input.via] || 'Form đăng ký', hoi_thoai: input.note || '',
+      du_an: project, time: new Date().toLocaleString('vi-VN'), source: location.href, landing
+    };
+    new URLSearchParams(location.search).forEach((v, k) => { if (/^(utm_|gclid|fbclid)/.test(k)) data[k] = v; });
+    Object.keys(data).forEach(k => { if (data[k] === '') delete data[k]; });
+
+    if (window.dataLayer) window.dataLayer.push({ event: 'generate_lead', form: input.via || 'form', page: location.pathname });
+    if (typeof window.gtag === 'function') window.gtag('event', 'generate_lead', { event_label: document.title });
     if (typeof window.fbq === 'function') window.fbq('track', 'Lead');
-    if (!CONFIG.LEAD_ENDPOINT) return true;
-    // text/plain tránh preflight CORS với Google Apps Script
-    await fetch(CONFIG.LEAD_ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+
+    // text/plain + no-cors: Apps Script nhận được mà không cần CORS preflight
+    const plain = (url, body) => fetch(url, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) });
+    const jobs = [];
+    if (CONFIG.TELEGRAM_ENDPOINT) jobs.push(plain(CONFIG.TELEGRAM_ENDPOINT, data));
+    if (CONFIG.CRM_ENDPOINT) jobs.push(plain(CONFIG.CRM_ENDPOINT, Object.assign({ project }, data)));
+    if (CONFIG.CRM2_ENDPOINT) jobs.push(plain(CONFIG.CRM2_ENDPOINT, Object.assign({ project }, data)));
+    if (CONFIG.LEAD_ENDPOINT) jobs.push(plain(CONFIG.LEAD_ENDPOINT, Object.assign({ via: input.via, need: input.need, unit_type: input.unit_type, channel: input.channel, note: input.note, page: location.href }, data)));
+    if (CONFIG.MAIL_ENDPOINT) jobs.push(fetch(CONFIG.MAIL_ENDPOINT, {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(Object.assign({ _subject: 'Khách đăng ký ' + project + ': ' + data.name + ' - ' + data.phone, _template: 'table', _captcha: 'false' }, data))
+    }));
+    const results = await Promise.allSettled(jobs);
+    if (jobs.length && results.every(r => r.status === 'rejected')) throw new Error('send_failed');
     return true;
   }
 
