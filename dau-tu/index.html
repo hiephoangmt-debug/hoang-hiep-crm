@@ -39,10 +39,14 @@ header h1 { font-size: 24px; margin: 0 0 2px; }
 .sub { color: var(--ink-2); font-size: 14px; }
 .toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 18px 0 8px;
   position: sticky; top: 0; z-index: 5; background: var(--page); padding: 8px 0; }
-.seg { display: inline-flex; background: var(--chip); border-radius: 10px; padding: 3px; gap: 2px; }
+.seg { display: inline-flex; background: var(--chip); border-radius: 10px; padding: 3px; gap: 2px; max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.seg::-webkit-scrollbar { display: none; }
+.viewbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 10px; }
+.viewbar .seg button { flex: none; }
+.hm td { min-width: 52px; } .hm .chg-up { color: var(--up-text); } .hm .chg-down { color: var(--down-text); }
 .seg button { border: 0; background: transparent; color: var(--ink-2); font: inherit; font-size: 14px;
   padding: 6px 12px; border-radius: 8px; cursor: pointer; min-height: 34px; white-space: nowrap; }
-@media (max-width: 480px) { .seg { width: 100%; } .seg button { flex: 1; padding: 6px 4px; font-size: 13px; } }
+@media (max-width: 480px) { .seg { width: 100%; } .seg button { flex: 1; padding: 6px 4px; font-size: 13px; } .viewbar .seg { width: auto; } .viewbar .seg button { padding: 6px 10px; } #lvKinds button { flex: none; padding: 6px 10px; } }
 .seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); font-weight: 600;
   box-shadow: 0 0 0 1px var(--border); }
 .fresh { flex-basis: 100%; display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-2); }
@@ -85,8 +89,9 @@ h2 { font-size: 18px; margin: 32px 0 4px; }
 .tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 table { border-collapse: collapse; width: 100%; font-size: 14px; }
 th, td { padding: 8px 10px; text-align: right; border-bottom: 1px solid var(--grid); white-space: nowrap; }
-th { color: var(--ink-2); font-weight: 600; font-size: 13px; cursor: pointer; user-select: none; position: sticky; top: 0; background: var(--surface); }
-th:first-child, td:first-child { text-align: left; position: sticky; left: 0; background: var(--surface); }
+th { color: var(--ink-2); font-weight: 600; font-size: 13px; cursor: pointer; user-select: none; background: var(--surface); }
+/* cột tên ghim bên trái khi vuốt ngang (không dùng sticky top: Safari iOS bỏ ghim cột đầu của tiêu đề) */
+th:first-child, td:first-child { text-align: left; position: -webkit-sticky; position: sticky; left: 0; z-index: 1; background: var(--surface); box-shadow: 1px 0 0 var(--grid); }
 td { font-variant-numeric: tabular-nums; }
 td .nm { display: block; font-size: 12px; color: var(--muted); }
 th[aria-sort]::after { content: " ↓"; } th[aria-sort="ascending"]::after { content: " ↑"; }
@@ -240,6 +245,7 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
     <h2>Lãi suất tiết kiệm <span id="lsSample"></span></h2>
     <p class="note">Lãi suất tiền gửi VND cho cá nhân (%/năm), bot tự cập nhật cùng lịch với giá vàng và chứng khoán. Mức cao nhất mỗi kỳ hạn được tô xanh; bấm tiêu đề cột để sắp xếp. Đường “Tiết kiệm” trong biểu đồ so sánh dùng lãi suất 12 tháng <b>tại quầy</b> trung bình. Lãi suất có thể khác theo số tiền và chương trình – kiểm tra lại với ngân hàng trước khi gửi.</p>
     <div class="toolbar-in"><div class="seg" id="lsKinds" role="group" aria-label="Hình thức gửi"></div></div>
+    <div class="viewbar"><div class="seg" id="lsView" role="group" aria-label="Xem theo"></div><select id="lsTerm" class="sel" aria-label="Kỳ hạn"></select></div>
     <div class="card">
       <div class="stats" id="lsStats"></div>
       <div class="tbl-wrap"><table id="tblLs"></table></div>
@@ -256,7 +262,7 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
 
   <section id="lai-vay">
     <h2>Lãi vay ngân hàng</h2>
-    <p class="note">Lãi vay mua nhà, vay sản xuất kinh doanh và lãi vay bình quân ngân hàng công bố hằng tháng (%/năm). Không có nguồn tổng hợp tự động nên số được nhập tay từ báo chí, ghi nguồn từng dòng (chạm vào cột để xem); cập nhật trong <code>dau-tu/data/lai_vay.csv</code>. Lãi thực tế tuỳ hồ sơ, tài sản bảo đảm và thời điểm – hỏi lại ngân hàng trước khi vay.</p>
+    <p class="note">Lãi vay mua nhà, vay sản xuất kinh doanh và lãi vay bình quân ngân hàng công bố hằng tháng (%/năm). Vay thế chấp, tín chấp và mua nhà ưu đãi: bot tự lấy mỗi ngày từ bảng tổng hợp của Techcombank, Topi, Smartland; bình quân hằng tháng, kinh doanh và mua nhà (báo chí) nhập tay từ báo, ghi nguồn từng dòng (<code>dau-tu/data/lai_vay.csv</code>). Chọn Ngày / Tuần / Tháng / Năm để so sánh theo thời gian. Lãi thực tế tuỳ hồ sơ, tài sản bảo đảm và thời điểm – hỏi lại ngân hàng trước khi vay.</p>
     <div class="card" style="margin-bottom:12px">
       <h3>Lãi vay và lãi gửi trên cùng biểu đồ</h3>
       <p class="note" style="margin:0 0 8px">Đường liền là lãi gửi (huy động) 12 tháng, đường đứt là lãi vay; khoảng cách giữa hai nhóm là chênh lệch ngân hàng hưởng. Lãi gửi và liên ngân hàng có số theo ngày, lãi vay bình quân theo tháng.</p>
@@ -271,6 +277,7 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
       <div class="chart sm" style="margin-top:12px"><canvas id="cLnhDs"></canvas></div>
     </div>
     <div class="toolbar-in"><div class="seg" id="lvKinds" role="group" aria-label="Loại vay"></div></div>
+    <div class="viewbar" id="lvViewBar"><div class="seg" id="lvView" role="group" aria-label="Xem theo"></div></div>
     <div class="card">
       <div class="stats" id="lvStats"></div>
       <div class="tbl-wrap"><table id="tblLv"></table></div>
@@ -342,7 +349,7 @@ const tsOf = (s) => { const [y, m, d] = s.split('-'); return new Date(+y, m - 1,
 const keyOf = (ms) => { const t = new Date(ms); return `${t.getFullYear()}-${pad(t.getMonth() + 1)}-${pad(t.getDate())}`; };
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-let P = { series: {} }, ST = { symbols: {} }, BDS = [], LS = [], RA = null, LV = [];
+let P = { series: {} }, ST = { symbols: {} }, BDS = [], LS = [], RA = null, LV = [], LA = null;
 let months = 6;
 try { const m = localStorage.getItem('dautu-range'); if (m !== null && [0, 1, 3, 6, 12].includes(+m)) months = +m; } catch (e) {}
 const charts = {};
@@ -363,8 +370,9 @@ function csv(text) {
   }).filter(o => /^\d{4}-\d{2}-\d{2}$/.test(o.ngay));
 }
 
-Promise.all([j('data/prices.json'), j('data/stocks.json'), t('data/bds.csv'), t('data/lai_suat.csv'), j('data/lai_suat_auto.json'), t('data/lai_vay.csv')])
-  .then(([p, s, b, l, ra, lv]) => {
+Promise.all([j('data/prices.json'), j('data/stocks.json'), t('data/bds.csv'), t('data/lai_suat.csv'), j('data/lai_suat_auto.json'), t('data/lai_vay.csv'), j('data/lai_vay_auto.json')])
+  .then(([p, s, b, l, ra, lv, la]) => {
+    LA = la && la.bang && Object.keys(la.bang).length ? la : null;
     LV = csv(lv).map(r => ({ ...r, lai_suat: +r.lai_suat, chenh_lech: r.chenh_lech ? +r.chenh_lech : null })).filter(r => !isNaN(r.lai_suat));
     RA = ra && ra.bang && Object.keys(ra.bang).length ? ra : null;
     P = p || P; P.series = P.series || {};
@@ -772,6 +780,41 @@ function renderPremium(s) {
     <span>Hiện ${note}</span>${P.sjc_nguon ? `<span>Nguồn giá vàng miếng SJC: <b>${esc(P.sjc_nguon)}</b></span>` : ''}`;
 }
 
+// ---------- Bảng theo thời gian: mỗi cột một ngày / tuần / tháng / năm
+const VIEWS = [['now', 'Hôm nay'], ['day', 'Ngày (30)'], ['week', 'Tuần'], ['month', 'Tháng'], ['year', 'Năm']];
+function viewSeg(el, cur, pick) {
+  el.innerHTML = VIEWS.map(([k, l]) => `<button data-v="${k}" aria-pressed="${k === cur}">${l}</button>`).join('');
+  el.querySelectorAll('button').forEach(b => b.onclick = () => pick(b.dataset.v));
+}
+function periods(gran, end) {
+  const out = [], e = new Date(end + 'T00:00:00Z'), iso = (d) => d.toISOString().slice(0, 10);
+  if (gran === 'day') for (let i = 0; i < 30; i++) { const d = new Date(e); d.setUTCDate(d.getUTCDate() - i); out.push({ end: iso(d), label: dvn(iso(d)).slice(0, 5) }); }
+  if (gran === 'week') for (let i = 0; i < 12; i++) { const d = new Date(e); d.setUTCDate(d.getUTCDate() - 7 * i); const s0 = new Date(d); s0.setUTCDate(s0.getUTCDate() - 6); out.push({ end: iso(d), label: `${dvn(iso(s0)).slice(0, 5)}–${dvn(iso(d)).slice(0, 5)}` }); }
+  if (gran === 'month') for (let i = 0; i < 12; i++) { const d = new Date(Date.UTC(e.getUTCFullYear(), e.getUTCMonth() - i + 1, 0)); const k = i === 0 ? end : iso(d); out.push({ end: k, label: `T${d.getUTCMonth() + 1}/${String(d.getUTCFullYear()).slice(2)}` }); }
+  if (gran === 'year') for (let i = 0; i < 5; i++) { const y = e.getUTCFullYear() - i; out.push({ end: i === 0 ? end : `${y}-12-31`, label: String(y) }); }
+  return out;
+}
+// rows: [{name, hist: {ngày: giá trị}, tag?}] ; higherGood: lãi gửi tăng là tốt (xanh), lãi vay tăng là xấu (đỏ)
+function histMatrix(tbl, rows, gran, o = {}) {
+  const ends = rows.flatMap(r => Object.keys(r.hist)).sort();
+  if (!ends.length) { tbl.innerHTML = '<tr><td class="empty">Chưa có lịch sử – bot ghi thêm mỗi ngày.</td></tr>'; return; }
+  const first = ends[0], per = periods(gran, ends.at(-1));
+  const val = (r, p) => { let v = null; for (const d of Object.keys(r.hist).sort()) { if (d <= p.end) v = r.hist[d]; else break; } return v; };
+  const data = rows.map(r => ({ ...r, vals: per.map(p => p.end < first ? null : val(r, p)) }));
+  data.sort((a, b) => { const x = a.vals[0], y = b.vals[0]; if (x == null) return 1; if (y == null) return -1; return o.higherGood ? y - x : x - y; });
+  const head = '<thead><tr><th>Ngân hàng</th>' + per.map(p => `<th>${p.label}</th>`).join('') + '</tr></thead>';
+  const body = data.map(r => `<tr class="pick" data-b="${esc(r.name)}" aria-selected="${r.name === o.selected}"><td><b>${esc(r.name)}</b>${r.tag || ''}</td>` + r.vals.map((v, i) => {
+    if (v == null) return '<td><span class="flat">–</span></td>';
+    const older = r.vals[i + 1];
+    let c = '', a = '';
+    if (older != null && Math.abs(v - older) > 1e-9) { const up = v > older; c = (up === !!o.higherGood) ? 'chg-up' : 'chg-down'; a = up ? '▲' : '▼'; }
+    return `<td class="${c}" title="${older != null && a ? (v > older ? '+' : '') + fmt(v - older, 2) + ' điểm' : ''}">${a ? a + ' ' : ''}${fmt(v, o.dec ?? 2)}</td>`;
+  }).join('') + '</tr>').join('');
+  tbl.classList.add('hm');
+  tbl.innerHTML = head + '<tbody>' + body + '</tbody>';
+  if (o.onPick) tbl.querySelectorAll('tr.pick').forEach(t => t.onclick = () => o.onPick(t.dataset.b));
+}
+
 // Biểu đồ cột ngang theo ngân hàng (trục danh mục, không theo thời gian)
 function barH(id, rows, label, color, unit = '%') {
   const o = {
@@ -787,7 +830,48 @@ function barH(id, rows, label, color, unit = '%') {
   const el = $(id); el.parentElement.style.height = Math.max(160, rows.length * 34 + 50) + 'px';
   draw(id, { type: 'bar', data: { labels: rows.map(r => r.name), datasets: [{ label, data: rows.map(r => r.v), backgroundColor: color, borderRadius: 4, maxBarThickness: 22 }] }, options: o });
 }
-const LV_KINDS = ['Bình quân', 'Mua nhà', 'Kinh doanh'];
+const LV_MANUAL = ['Bình quân', 'Mua nhà', 'Kinh doanh'];
+const LV_AUTO = ['Thế chấp', 'Tín chấp', 'Mua nhà ưu đãi'];
+const LV_LABEL = { 'Bình quân': 'Bình quân hằng tháng', 'Mua nhà': 'Mua nhà (báo chí)', 'Kinh doanh': 'Sản xuất kinh doanh', 'Thế chấp': 'Vay thế chấp', 'Tín chấp': 'Vay tín chấp', 'Mua nhà ưu đãi': 'Mua nhà ưu đãi' };
+let lvView = 'now';
+function lvKindsList() { return [...(LA ? LV_AUTO.filter(k => LA.bang[k]) : []), ...LV_MANUAL]; }
+function renderLvAuto(kind) {
+  const banks = LA.bang[kind] || {};
+  const srcs = [...new Set(Object.values(banks).flatMap(b => Object.keys(b)))];
+  const rows = Object.entries(banks).map(([name, by]) => {
+    const tus = Object.values(by).map(v => v.tu).filter(x => x != null);
+    return { name, by, main: Math.min(...tus), ky: Object.assign({}, ...Object.values(by).map(v => v.ky || {})) };
+  }).sort((a, b) => a.main - b.main);
+  const lo = rows[0], hi = [...rows].sort((a, b) => b.main - a.main)[0];
+  $('lvStats').innerHTML = rows.length ? `<span>Thấp nhất: <b class="up">từ ${fmt(lo.main, 2)}%</b> (${esc(lo.name)})</span><span>Cao nhất: <b class="down">từ ${fmt(hi.main, 2)}%</b> (${esc(hi.name)})</span><span>${rows.length} ngân hàng</span><span>Nguồn: <b>${srcs.map(esc).join(', ')}</b> · bot cập nhật ${LA.ngay ? dvn(LA.ngay) : ''}</span>` : '';
+  if (lvView === 'now') {
+    let head, body;
+    if (kind === 'Mua nhà ưu đãi') {
+      const terms = [...new Set(rows.flatMap(r => Object.keys(r.ky)))].sort((a, b) => a - b);
+      const min = Object.fromEntries(terms.map(t => [t, Math.min(...rows.map(r => r.ky[t] ?? Infinity))]));
+      head = '<thead><tr><th>Ngân hàng</th><th>Từ</th>' + terms.map(t => `<th>Cố định ${t} tháng</th>`).join('') + '<th>Chi tiết</th></tr></thead>';
+      body = rows.map(r => `<tr><td><b>${esc(r.name)}</b></td><td><b>${fmt(r.main, 2)}</b></td>` + terms.map(t => { const x = r.ky[t]; return `<td>${x == null ? '<span class="flat">–</span>' : x === min[t] ? `<b class="up">${fmt(x, 2)}</b>` : fmt(x, 2)}</td>`; }).join('') +
+        `<td style="text-align:left;white-space:normal;min-width:220px">${Object.values(r.by).map(v => esc(v.raw)).join('<br>')}</td></tr>`).join('');
+    } else {
+      const rng = (v) => v ? `${fmt(v.tu, 2)}${v.den ? '–' + fmt(v.den, 2) : '+'}` : '<span class="flat">–</span>';
+      head = '<thead><tr><th>Ngân hàng</th><th>Thấp nhất</th>' + srcs.map(x => `<th>Theo ${esc(x)}</th>`).join('') + '</tr></thead>';
+      body = rows.map(r => `<tr><td><b>${esc(r.name)}</b></td><td>${r.main === lo.main ? `<b class="up">${fmt(r.main, 2)}</b>` : `<b>${fmt(r.main, 2)}</b>`}</td>` + srcs.map(x => `<td>${rng(r.by[x])}</td>`).join('') + '</tr>').join('');
+    }
+    $('tblLv').classList.remove('hm');
+    $('tblLv').innerHTML = head + '<tbody>' + body + '</tbody>';
+  } else {
+    const hist = LA.lich_su || {};
+    const hrows = rows.map(r => {
+      const h = {};
+      for (const src of srcs) for (const [d, v] of Object.entries(hist[`${kind}|${r.name}|${src}`] || {})) h[d] = h[d] == null ? v : Math.min(h[d], v);
+      return { name: r.name, hist: h };
+    });
+    histMatrix($('tblLv'), hrows, lvView, { higherGood: false });
+  }
+  $('lvAllTitle').textContent = `${LV_LABEL[kind]} – mức thấp nhất mỗi ngân hàng (%/năm)`;
+  barH('cLvAll', rows.map(r => ({ name: r.name, v: r.main, ghi_chu: Object.entries(r.by).map(([k, v]) => `${k}: ${v.raw}`).join(' | ') })), 'Từ', css(kind === 'Tín chấp' ? '--s2' : '--s1'));
+}
+const LV_KINDS = LV_MANUAL;
 const LV_TITLE = { 'Bình quân': 'Lãi vay bình quân ngân hàng công bố (tháng gần nhất)', 'Mua nhà': 'Lãi vay mua nhà – mức ưu đãi thấp nhất', 'Kinh doanh': 'Lãi vay sản xuất kinh doanh – mức thấp nhất' };
 let lvKind = 'Bình quân', lvSort = null, lvAsc = true, lvBank = null;
 const monthLbl = (d) => 'T' + (+d.slice(5, 7)) + '/' + d.slice(2, 4);
@@ -868,8 +952,14 @@ function renderLnh(s) {
   draw('cLnhDs', { type: 'bar', data: { datasets: [{ label: 'Doanh số qua đêm', data: xy(ds), backgroundColor: css('--s1') + '99', borderRadius: 2, maxBarThickness: 12 }] }, options: o });
 }
 function renderLaiVay() {
-  $('lvKinds').innerHTML = LV_KINDS.map(k => `<button data-k="${k}" aria-pressed="${k === lvKind}">${k === 'Bình quân' ? 'Bình quân hằng tháng' : k === 'Kinh doanh' ? 'Sản xuất kinh doanh' : 'Mua nhà'}</button>`).join('');
+  const kinds = lvKindsList();
+  if (!kinds.includes(lvKind)) lvKind = kinds[0];
+  if (!renderLaiVay.init && LA) { lvKind = kinds[0]; renderLaiVay.init = true; }
+  $('lvKinds').innerHTML = kinds.map(k => `<button data-k="${k}" aria-pressed="${k === lvKind}">${LV_LABEL[k]}</button>`).join('');
   $('lvKinds').querySelectorAll('button').forEach(b => b.onclick = () => { lvKind = b.dataset.k; lvSort = null; renderLaiVay(); });
+  const auto = LV_AUTO.includes(lvKind);
+  $('lvViewBar').hidden = !auto;
+  if (auto) { viewSeg($('lvView'), lvView, (v) => { lvView = v; renderLaiVay(); }); renderLvAuto(lvKind); renderLvBank(); return; }
   const cols = lvCols(lvKind);
   const rows = lvTable(lvKind);
   const key = lvSort || 'main';
@@ -1086,7 +1176,7 @@ function renderBds(s) {
 }
 const BIG4 = ['vietcombank', 'bidv', 'vietinbank', 'agribank'];
 const TERMS = ['12', '1', '3', '6', '18', '24', '36']; // 12 tháng đứng đầu cho dễ thấy trên điện thoại
-let lsKind = null, lsSort = '12', lsAsc = false;
+let lsKind = null, lsSort = '12', lsAsc = false, lsView = 'now', lsTerm = '12';
 function renderLs() {
   if (RA) return renderLsAuto();
   renderLsManual();
@@ -1097,6 +1187,10 @@ function renderLsAuto() {
   if (!kinds.includes(lsKind)) lsKind = kinds.includes('Tại quầy') ? 'Tại quầy' : kinds[0];
   const banks = RA.bang[lsKind] || {};
   const terms = TERMS.filter(k => Object.values(banks).some(v => v[k] != null));
+  viewSeg($('lsView'), lsView, (v) => { lsView = v; renderLs(); });
+  $('lsTerm').hidden = lsView === 'now';
+  $('lsTerm').innerHTML = terms.map(k => `<option value="${k}"${k === lsTerm ? ' selected' : ''}>Kỳ hạn ${k} tháng</option>`).join('');
+  $('lsTerm').onchange = () => { lsTerm = $('lsTerm').value; renderLs(); };
   const rows = Object.entries(banks).map(([name, v]) => ({ name, v, big4: BIG4.includes(name.toLowerCase().replace(/\s+/g, '')) }));
   const val = (r) => lsSort === 'name' ? r.name : r.v[lsSort];
   rows.sort((a, b) => {
@@ -1119,8 +1213,20 @@ function renderLsAuto() {
     terms.map(k => `<th data-k="${k}"${k === lsSort ? ` aria-sort="${lsAsc ? 'ascending' : 'descending'}"` : ''}>${k} tháng</th>`).join('') + '</tr></thead>';
   const body = rows.map(r => `<tr class="pick" data-b="${esc(r.name)}" aria-selected="${r.name === lsBank}"><td><b>${esc(r.name)}</b>${r.big4 ? ' <span class="pill">Big4</span>' : ''}</td>` +
     terms.map(k => { const x = r.v[k]; return `<td>${x == null ? '<span class="flat">–</span>' : x === max[k] ? `<b class="up">${fmt(x, 2)}</b>` : fmt(x, 2)}</td>`; }).join('') + '</tr>').join('');
+  $('tblLs').classList.remove('hm');
   $('tblLs').innerHTML = head + '<tbody>' + body + '</tbody>';
-  $('tblLs').querySelectorAll('th').forEach(th => th.onclick = () => {
+  if (lsView !== 'now') {
+    // lịch sử theo kỳ hạn đang chọn: lich_su (đủ kỳ hạn) + lich_su_12t (từ 21/10) cho kỳ 12 tháng
+    const ti = ['1', '3', '6', '12', '18', '24', '36'].indexOf(lsTerm);
+    const hrows = Object.keys(banks).map(name => {
+      const hist = {};
+      if (lsTerm === '12') Object.assign(hist, (RA.lich_su_12t || {})[lsKind + '|' + name] || {});
+      for (const [d, arr] of Object.entries((RA.lich_su || {})[lsKind + '|' + name] || {})) if (arr && arr[ti] != null) hist[d] = arr[ti];
+      return { name, hist, tag: BIG4.includes(name.toLowerCase().replace(/\s+/g, '')) ? ' <span class="pill">Big4</span>' : '' };
+    });
+    histMatrix($('tblLs'), hrows, lsView, { higherGood: true, selected: lsBank, onPick: (b) => { lsBank = b; renderLs(); document.getElementById('lsDetail').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } });
+  }
+  else $('tblLs').querySelectorAll('th').forEach(th => th.onclick = () => {
     const k = th.dataset.k;
     if (lsSort === k) lsAsc = !lsAsc; else { lsSort = k; lsAsc = k === 'name'; }
     renderLs();
@@ -1129,7 +1235,7 @@ function renderLsAuto() {
   const colors = { 'Tại quầy': '--s1', 'Online': '--s2', 'Tổng hợp': '--s3' };
   const ds = kinds.map(k => line(k + ' – TB 12 tháng', rateAvgHistory(k), css(colors[k] || '--s4'), { pointRadius: 3 }));
   draw('cLs', { type: 'line', data: { datasets: ds }, options: baseOpts('%/năm', { legend: true, dec: 2, tickDec: 1 }) });
-  $('tblLs').querySelectorAll('tr.pick').forEach(t => t.onclick = () => { lsBank = t.dataset.b; renderLs(); document.getElementById('lsDetail').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); });
+  if (lsView === 'now') $('tblLs').querySelectorAll('tr.pick').forEach(t => t.onclick = () => { lsBank = t.dataset.b; renderLs(); document.getElementById('lsDetail').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); });
   renderLsBank();
 }
 let lsBank = null;

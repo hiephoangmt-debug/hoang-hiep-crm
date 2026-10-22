@@ -7,6 +7,7 @@ Kênh tự động:
   - Lãi suất Fed: biên độ mục tiêu (trên/dưới) và lãi suất thực tế EFFR – Fed New York (dự phòng: FRED)
   - VN-Index, VN30, HNX-Index, UPCoM và ~30 cổ phiếu lớn             – DNSE (dự phòng: VNDirect)
   - Khối ngoại mua/bán ròng toàn sàn HOSE và từng mã lớn – CafeF
+  - Lãi vay tín chấp / thế chấp (Techcombank, Topi) và vay mua nhà ưu đãi (Smartland) theo ngân hàng
   - Lãi suất tiết kiệm tại quầy / online ~38 ngân hàng – 24hMoney (dự phòng: Người Quan Sát)
 Kênh nhập tay (sửa file CSV trong data/):
   - bds.csv       – giá BĐS theo khu vực (triệu đồng/m²)
@@ -35,6 +36,8 @@ PRICES_FILE = DATA / "prices.json"
 STOCKS_FILE = DATA / "stocks.json"
 RATES_FILE = DATA / "lai_suat_auto.json"
 TICKERS_FILE = DATA / "ma_ck.json"
+LOANS_FILE = DATA / "lai_vay_auto.json"
+TERMS = ("1", "3", "6", "12", "18", "24", "36")
 KEEP_DAYS = 800  # giữ tối đa ~2 năm cho chỉ số / vàng
 STOCK_KEEP = 260  # ~1 năm phiên cho từng mã
 
@@ -521,6 +524,107 @@ def fetch_rates():
     raise ValueError(" | ".join(errs))
 
 
+# ---------------------------------------------------------------- Lãi vay (bảng tổng hợp)
+BANK_ALIAS = {"mb": "MB", "mbbank": "MB", "bidv": "BIDV", "vietinbank": "VietinBank", "vietcombank": "Vietcombank",
+              "agribank": "Agribank", "techcombank": "Techcombank", "vpbank": "VPBank", "acb": "ACB",
+              "sacombank": "Sacombank", "tpbank": "TPBank", "vib": "VIB", "hdbank": "HDBank", "shb": "SHB",
+              "ocb": "OCB", "msb": "MSB", "seabank": "SeABank", "banviet": "BVBank", "bvbank": "BVBank",
+              "lpbank": "LPBank", "eximbank": "Eximbank", "namabank": "Nam A Bank", "shinhanbank": "Shinhan Bank",
+              "shinhan": "Shinhan Bank", "uob": "UOB", "hsbc": "HSBC", "standardchartered": "Standard Chartered",
+              "woori": "Woori Bank", "wooribank": "Woori Bank", "abbank": "ABBank", "pvcombank": "PVcomBank"}
+
+
+def bank_name(raw):
+    import unicodedata
+    t = unicodedata.normalize("NFD", raw).encode("ascii", "ignore").decode().lower()
+    t = re.sub(r"\(.*?\)", "", t)
+    key = re.sub(r"[^a-z0-9]", "", t)
+    return BANK_ALIAS.get(key) or BANK_ALIAS.get(key.replace("bank", "")) or raw.strip()
+
+
+def parse_rate_cell(cell):
+    """'Từ 12.9' / '14.9 - 20.5' / '8,0% (6 tháng); 8,5% (12 tháng)' -> {tu, den, ky: {tháng: %}}."""
+    out = {"tu": None, "den": None, "ky": {}}
+    nums = []
+    for m in re.finditer(r"(\d+(?:[.,]\d+)?)(?:\s*[–-]\s*(\d+(?:[.,]\d+)?))?\s*%?\s*(?:\((\d+)\s*th)?", cell):
+        a = float(m.group(1).replace(",", "."))
+        b = float(m.group(2).replace(",", ".")) if m.group(2) else None
+        if not (2 <= a <= 40):
+            continue
+        nums += [a] + ([b] if b and 2 <= b <= 40 else [])
+        if m.group(3):
+            out["ky"][m.group(3)] = a
+    if nums:
+        out["tu"], out["den"] = min(nums), (max(nums) if len(nums) > 1 else None)
+    return out
+
+
+def fetch_loans():
+    """Bảng lãi vay theo ngân hàng từ các trang tổng hợp (cập nhật hằng ngày/tháng).
+    Trả {'bang': {loại: {ngân hàng: {nguồn: {tu, den, ky, raw}}}}, 'nguon': [...]}"""
+    bang, used, errs = {}, [], []
+
+    def add(kind, bank, src, cell):
+        v = parse_rate_cell(cell)
+        if v["tu"] is None:
+            return
+        v["raw"] = cell[:80]
+        bang.setdefault(kind, {}).setdefault(bank_name(bank), {})[src] = v
+
+    def tables(url):
+        page = get(url).text
+        return [[_html_cells(r) for r in re.findall(r"<tr.*?</tr>", t, flags=re.S)]
+                for t in re.findall(r"<table.*?</table>", page, flags=re.S)]
+
+    # 1) Techcombank & 2) Topi: cột 'tín chấp' / 'thế chấp'
+    for src, url in (("Techcombank", "https://techcombank.com/thong-tin/blog/lai-suat-vay-ngan-hang"),
+                     ("Topi", "https://topi.vn/so-sanh-lai-suat-vay-ngan-hang.html")):
+        try:
+            n = 0
+            for rows in tables(url):
+                rows = [r for r in rows if r]
+                if not rows:
+                    continue
+                head = [h.lower() for h in rows[0]]
+                ci = next((i for i, h in enumerate(head) if "tín chấp" in h), None)
+                cm = next((i for i, h in enumerate(head) if "thế chấp" in h), None)
+                if ci is None and cm is None:
+                    continue
+                for r in rows[1:]:
+                    if len(r) < 2 or not r[0]:
+                        continue
+                    if ci is not None and ci < len(r):
+                        add("Tín chấp", r[0], src, r[ci])
+                    if cm is not None and cm < len(r):
+                        add("Thế chấp", r[0], src, r[cm])
+                    n += 1
+            if n:
+                used.append(src)
+            else:
+                errs.append(f"{src}: không thấy bảng")
+        except Exception as e:  # noqa: BLE001
+            errs.append(f"{src}: {e}")
+    # 3) Smartland: vay mua nhà – lãi ưu đãi theo kỳ cố định
+    try:
+        n = 0
+        for rows in tables("https://smartland.vn/lai-suat-vay-mua-nha-2026/"):
+            rows = [r for r in rows if r]
+            if rows and any("ưu đãi" in h.lower() for h in rows[0]):
+                for r in rows[1:]:
+                    if len(r) >= 2 and r[0]:
+                        add("Mua nhà ưu đãi", r[0], "Smartland", r[1])
+                        n += 1
+        if n:
+            used.append("Smartland")
+    except Exception as e:  # noqa: BLE001
+        errs.append(f"Smartland: {e}")
+    if not bang:
+        raise ValueError(" | ".join(errs) or "không có bảng lãi vay")
+    for e in errs:
+        log("   " + e)
+    return {"bang": bang, "nguon": used}
+
+
 # ---------------------------------------------------------------- main
 def main():
     DATA.mkdir(exist_ok=True)
@@ -635,9 +739,39 @@ def main():
                     h[today()] = v["12"]
                     for d in sorted(h)[:-KEEP_DAYS]:
                         del h[d]
+        # lịch sử đủ kỳ hạn: {loại|ngân hàng: {ngày: [1T, 3T, 6T, 12T, 18T, 24T, 36T]}}
+        full = rates.setdefault("lich_su", {})
+        for kind, banks in res.items():
+            for bank, v in banks.items():
+                h = full.setdefault(f"{kind}|{bank}", {})
+                h[today()] = [v.get(t) for t in TERMS]
+                for d in sorted(h)[:-KEEP_DAYS]:
+                    del h[d]
         log(f"   {src}: " + ", ".join(f"{k} {len(v)} ngân hàng" for k, v in res.items()))
 
     step("Lãi suất", lai_suat)
+
+    loans = load(LOANS_FILE, {})
+
+    def lai_vay():
+        res = fetch_loans()
+        loans["ngay"] = today()
+        loans["bang"] = res["bang"]
+        loans["nguon"] = res["nguon"]
+        # lịch sử mức thấp nhất mỗi ngày: {loại|ngân hàng|nguồn: {ngày: từ}}
+        hist = loans.setdefault("lich_su", {})
+        for kind, banks in res["bang"].items():
+            for bank, by_src in banks.items():
+                for src, v in by_src.items():
+                    if v.get("tu") is None:
+                        continue
+                    h = hist.setdefault(f"{kind}|{bank}|{src}", {})
+                    h[today()] = v["tu"]
+                    for d in sorted(h)[:-KEEP_DAYS]:
+                        del h[d]
+        log("   " + ", ".join(f"{k}: {len(v)} ngân hàng" for k, v in res["bang"].items()) + f" ({', '.join(res['nguon'])})")
+
+    step("Lãi vay", lai_vay)
 
     def ds_ma():
         # danh sách mã cho ô tra cứu – mỗi ngày lấy 1 lần
@@ -690,6 +824,8 @@ def main():
     prices["errors"] = errors
     stocks["updated"] = now
     PRICES_FILE.write_text(json.dumps(prices, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    if loans:
+        LOANS_FILE.write_text(json.dumps(loans, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     if rates:
         RATES_FILE.write_text(json.dumps(rates, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     STOCKS_FILE.write_text(json.dumps(stocks, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
