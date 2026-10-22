@@ -1,9 +1,9 @@
 /* ===== Cấu hình ===== */
 const CONFIG = {
   // Cổng nhận khách (URL ứng dụng web Google Apps Script / FormSubmit). Để trống một mục = tắt mục đó.
-  TELEGRAM_ENDPOINT: "", // Apps Script gửi Telegram + lưu Sheet (như trang Sun FourS Tower)
+  TELEGRAM_ENDPOINT: "https://script.google.com/macros/s/AKfycbwvmG1HMtrQOeUXCuBJ6CHmMb4TcCZ53_n5lwPAt3-6-lG2_fIRX0q25Rv-6LPwVWXZHw/exec?key=sft-tg-4821", // Apps Script gửi Telegram + lưu Sheet, dùng chung với trang Sun FourS Tower
   CRM_ENDPOINT: "",      // Cổng CRM Sale Đà Nẵng
-  CRM2_ENDPOINT: "",     // CRM Hoàng Hiệp (Google Sheet)
+  CRM2_ENDPOINT: "https://script.google.com/macros/s/AKfycbyChbG-uvItjVlRk7JgLrwpUS6Cgah4nIA6BWHuEwgbXBqSlvAPJNSdZdp6pQ91d_rN/exec?key=cjEWpW29QRjS", // CRM Hoàng Hiệp (Google Sheet), dùng chung với FourS
   MAIL_ENDPOINT: "https://formsubmit.co/ajax/hiephoangmt@gmail.com", // Email qua FormSubmit
   LEAD_ENDPOINT: "",     // Tùy chọn: ghi tab "Dowtown" (integrations/google-apps-script/Code.gs)
   PROJECT: "Da Nang Downtown",
