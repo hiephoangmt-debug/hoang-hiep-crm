@@ -280,10 +280,13 @@ function chayMoiPhut() {
 
 /* Bản cũ chưa có cột mới (nhom, luc_giao_khac): ghi thêm tiêu đề 1 lần */
 function capNhatTieuDe_() {
-  if (P().getProperty('TIEU_DE') === '4') return;
+  if (P().getProperty('TIEU_DE') === '5') return;
+  /* Ghi link mở thẳng trình soạn code vào tab CauHinh (để lần sau dán code mới từ điện thoại) */
+  var ch = tab_('CauHinh', ['khoa', 'gia_tri', 'ghi_chu']), link = 'https://script.google.com/d/' + ScriptApp.getScriptId() + '/edit';
+  if (!tabMap_('CauHinh').hasOwnProperty('LINK_CODE')) ch.appendRow(['LINK_CODE', link, 'Bấm để mở thẳng Apps Script, dán code mới']);
   [['Sale', T_SALE], ['Khach', T_KHACH], ['DaChia', T_DACHIA]].forEach(function (x) { tab_(x[0], x[1]).getRange(1, 1, 1, x[1].length).setValues([x[1]]); });
   var nd = tab_('NhapData'); if (!nd.getLastRow()) nd.getRange(1, 1).setValue(HD_NHAP);
-  P().setProperty('TIEU_DE', '4');
+  P().setProperty('TIEU_DE', '5');
 }
 
 /* --- khách mới từ CRM --- */
