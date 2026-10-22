@@ -280,3 +280,6 @@ footer a{color:#fff}
 figure.photo{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--soft)}
 figure.photo img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
 @media (max-width:960px){.hero.has-photo::before{background:linear-gradient(180deg,rgba(7,27,48,.75),rgba(7,27,48,.92))}}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px;margin:0 0 16px}
+.photo-grid figure{margin:0}
+.link-btn{background:none;border:0;padding:0;font:inherit;color:var(--accent);font-weight:700;text-decoration:underline;cursor:pointer}
