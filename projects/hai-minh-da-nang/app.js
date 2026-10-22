@@ -3,6 +3,11 @@ const STORAGE_KEY = 'crm-hai-minh-da-nang';
 let db = load();
 // Dữ liệu cũ chưa có link 4D → điền link mặc định
 if (db.project && !db.project.link4d) db.project.link4d = SAMPLE_DATA.project.link4d;
+// Dự án đã đổi tên Hải Minh → Sun Saphia Residence: cập nhật thông tin dự án cũ, giữ người phụ trách & hotline
+if (db.project && /Hải Minh/.test(db.project.name || '') && !/Sun Saphia/.test(db.project.name || '')) {
+  db.project = Object.assign({}, SAMPLE_DATA.project, { manager: db.project.manager || SAMPLE_DATA.project.manager, hotline: db.project.hotline || SAMPLE_DATA.project.hotline });
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(db)); } catch (e) { /* ignore */ }
+}
 
 function load() {
   try {

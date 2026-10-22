@@ -1,5 +1,5 @@
 /* Sun Saphia Residence – khối tương tác chèn vào trang LadiPage (dán loader trong "Trước </body>"):
-   trắc nghiệm 3 câu "Căn nào hợp với anh/chị?" + máy tính dòng tiền minh họa + 5 dòng căn.
+   trắc nghiệm 3 câu "Căn nào hợp với anh/chị?" + máy tính dòng tiền minh họa + 3 dòng căn.
    Gửi khách về CRM/Telegram qua window.crmLead (mã CRM đã có trên trang). */
 (function () {
   if (window.__hmx) return; window.__hmx = 1;
@@ -93,7 +93,7 @@
         return '<button type="button" class="hx-o" aria-pressed="false">' + o + '</button>'; }).join('') + '</div>';
     }).join('');
     return '<div class="hx-w">' + (STATIC ? '' : anHtml()) + '<div class="hx-k" style="margin-top:34px">Danh sách ưu tiên trước ngày ra mắt · dự kiến 11/2026</div>'
-      + '<h2>5 dòng căn, dòng nào hợp với anh/chị?</h2>'
+      + '<h2>3 dòng căn, dòng nào hợp với anh/chị?</h2>'
       + '<p>Trả lời 3 câu để xem gợi ý dòng căn, hoặc tự kéo thử dòng tiền cho thuê. Bảng giá và mặt bằng gửi qua Zalo ngay khi chủ đầu tư công bố.</p>'
       + '<div class="hx-g"><div class="hx-c" id="hmx-quiz"><h3>Căn nào hợp với anh/chị?</h3>' + q
       + '<div class="hx-r" id="hmx-res" hidden></div>'
@@ -107,11 +107,9 @@
       + '<button type="button" class="hx-btn" id="hmx-cgo">Nhận bảng tính chi tiết theo căn thật qua Zalo</button>' + form('hmx-cf', 'Gửi tôi bảng tính chi tiết')
       + '<a class="hx-btn hx-z" href="' + ZALO + '" target="_blank" rel="noopener">Nhắn Zalo 0904 567 009</a></div></div>'
       + (STATIC ? '' : '<div class="hx-u">'
-      + '<div><b>1PN</b>47,4 m²<br><i>Giá: gửi qua Zalo</i></div>'
-      + '<div><b>2PN</b>66,5–68,8 m²<br><i>Giá: gửi qua Zalo</i></div>'
-      + '<div><b>2PN+1</b>76,2–76,9 m²<br><i>Giá: gửi qua Zalo</i></div>'
-      + '<div><b>3PN</b>78,6–80 m²<br><i>Giá: gửi qua Zalo</i></div>'
-      + '<div><b>Dual Key</b>101 m², 2 phần cửa riêng<br><i>Giá: gửi qua Zalo</i></div></div>'
+      + '<div><b>Studio</b>30–31 m² · 513 căn<br><i>Giá: gửi qua Zalo</i></div>'
+      + '<div><b>1PN+1</b>50–51 m² · 108 căn<br><i>Giá: gửi qua Zalo</i></div>'
+      + '<div><b>2PN</b>60–70 m² · 149 căn<br><i>Giá: gửi qua Zalo</i></div></div>'
       + '<p class="hx-sm" style="margin-top:10px">Diện tích theo thông tin dự án hiện có; giá, mặt bằng chi tiết và chính sách do chủ đầu tư công bố khi ra mắt.</p>') + '</div>';
   }
 
@@ -119,10 +117,10 @@
 
   function suggest(a) {
     var t, why;
-    if (a.thich === 'Căn lớn cho cả nhà') { t = a.muc === 'Nghỉ dưỡng gia đình' ? '3PN (78,6–80 m²)' : 'Dual Key (101 m², 2 phần cửa riêng)'; why = a.muc === 'Nghỉ dưỡng gia đình' ? 'đủ chỗ cho cả nhà' : 'cả nhà ở một phần, phần còn lại có thể cho thuê'; }
-    else if (a.muc === 'Cho thuê') { t = '1PN (47,4 m²) hoặc 2PN (66,5–68,8 m²)'; why = 'diện tích gọn, hợp khách du lịch thuê ngắn ngày'; }
-    else if (a.muc === 'Cả hai') { t = 'Dual Key (101 m²) hoặc 2PN+1 (76,2–76,9 m²)'; why = 'vừa có chỗ cho gia đình, vừa linh hoạt cho thuê'; }
-    else { t = '2PN+1 (76,2–76,9 m²)'; why = 'thêm phòng linh hoạt cho gia đình nghỉ dưỡng'; }
+    if (a.thich === 'Căn lớn cho cả nhà') { t = '2PN (60–70 m²)'; why = 'đủ chỗ cho cả nhà nghỉ dưỡng'; }
+    else if (a.muc === 'Cho thuê') { t = 'Studio (30–31 m²) hoặc 1PN+1 (50–51 m²)'; why = 'diện tích gọn, hợp khách du lịch thuê ngắn ngày'; }
+    else if (a.muc === 'Cả hai') { t = '1PN+1 (50–51 m²) hoặc 2PN (60–70 m²)'; why = 'vừa có chỗ cho gia đình, vừa linh hoạt cho thuê'; }
+    else { t = '2PN (60–70 m²)'; why = 'rộng rãi cho gia đình nghỉ dưỡng'; }
     var pos = a.thich === 'View bình minh trên biển' ? ', ưu tiên căn mặt Đông nhìn về biển (đón bình minh)' : a.thich === 'Tầng cao' ? ', ưu tiên tầng cao' : '';
     return { text: 'Dòng căn gợi ý: <b>' + t + '</b>' + pos + ' – ' + why + '.<br><span class="hx-sm">Ngân sách ' + esc(a.ns.toLowerCase()) + ' sẽ được đối chiếu ngay khi có bảng giá. Gợi ý theo câu trả lời, chưa phải chọn căn cụ thể.</span>', plain: t + pos };
   }

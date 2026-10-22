@@ -13,7 +13,7 @@ không hứa lợi nhuận, không ghi "sở hữu lâu dài", không nhận c�
 
 📍 Góc Trường Sa – Nguyễn Đức Thuận, trục biển Võ Nguyên Giáp, đối diện là dải resort ven biển, gần công viên biển cuối đường Minh Mạng (quy hoạch)
 🏙 Tháp 30 tầng · 782 căn hộ du lịch mặt biển
-🛏 1PN 47 m² · 2PN · 2PN+1 · 3PN · Dual Key 101 m²
+🛏 Studio 30–31 m² · 1PN+1 50–51 m² · 2PN 60–70 m²
 📜 Đất thương mại dịch vụ, thời hạn 50 năm (9/2026 – 9/2076) theo Quyết định của UBND TP Đà Nẵng
 
 👉 Đăng ký ưu tiên để nhận bảng giá, mặt bằng và chọn căn view biển đẹp trước ngày ra mắt.
@@ -83,7 +83,7 @@ Chữ trên video/ảnh (≤ 20% diện tích):
 - Sở thích: bất động sản, đầu tư, du lịch nghỉ dưỡng, khách sạn/resort, Đà Nẵng.
 - Ngân sách thử: 200–300k/ngày/mẫu, chạy 3–5 mẫu song song 3–4 ngày, giữ mẫu có giá/lead thấp nhất.
 - Ảnh: phối cảnh tòa tháp, phối cảnh mặt biển, ảnh công trường thực tế (tăng độ tin cậy).
-- Lead form tức thì: Họ tên, SĐT, câu hỏi "Loại căn quan tâm" (1PN/2PN/2PN+1/3PN/Dual Key).
+- Lead form tức thì: Họ tên, SĐT, câu hỏi "Loại căn quan tâm" (Studio/1PN+1/2PN).
 
 ---
 
@@ -129,7 +129,7 @@ Mô tả: Đăng ký ưu tiên trước ngày ra mắt 11/2026
 Dọc Võ Nguyên Giáp – Trường Sa, quỹ đất sát biển gần như đã kín resort và khách sạn. Mỗi dự án căn hộ mặt biển mới đều là cơ hội không nhiều.
 
 🏙 SUN SAPHIA – tháp 30 tầng ngay mặt biển, đối diện là dải resort ven biển, gần công viên biển cuối đường Minh Mạng (quy hoạch)
-🛏 1PN 47 m² đến Dual Key 101 m² – vừa nghỉ dưỡng, vừa cho thuê
+🛏 Studio 30–31 m² đến 2PN 60–70 m² – vừa nghỉ dưỡng, vừa cho thuê
 🔥 Dự kiến ra mắt tháng 11/2026
 
 👉 Khách đăng ký sớm được ưu tiên chọn tầng cao, view biển trực diện.

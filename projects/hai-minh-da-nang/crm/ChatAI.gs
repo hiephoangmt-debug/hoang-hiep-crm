@@ -19,7 +19,7 @@ var CHAT_FACTS = [
   'Khoảng cách ước tính bằng ô tô: phố An Thượng 5–10 phút; Ngũ Hành Sơn 5–10 phút; cầu Rồng / trung tâm TP khoảng 15 phút; sân bay quốc tế Đà Nẵng 10–15 phút; phố cổ Hội An khoảng 30 phút.',
   'Chủ đầu tư: Công ty TNHH Quản lý và Dịch vụ Hạ tầng Kỹ thuật Miền Trung.',
   'Quy mô: 1 tòa tháp 30 tầng, cao khoảng 114 m, 782 căn hộ du lịch, tổng sàn xây dựng trên 45.000 m², khu đất 3.720 m² (Khu Khách sạn, Condotel và dân cư Saphia). Có khối thương mại dịch vụ.',
-  'Loại căn: 1PN 47,4 m²; 2PN 66,5–68,8 m²; 2PN+1 76,2–76,9 m²; 3PN 78,6–80 m²; Dual Key 101 m² (2 phần cửa riêng).',
+  'Loại căn: Studio 30–31 m² (513 căn), 1PN+1 50–51 m² (108 căn), 2PN 60–70 m² (149 căn).',
   'Pháp lý đất: đất thương mại dịch vụ, Nhà nước giao đất có thu tiền sử dụng đất, thời hạn 50 năm (17/9/2026 – 16/9/2076); UBND TP Đà Nẵng ban hành quyết định điều chỉnh thời hạn sử dụng đất (10/2026). Loại hình căn hộ du lịch (condotel), KHÔNG phải chung cư ở lâu dài.',
   'Tình trạng: đang thi công, DỰ KIẾN ra mắt 11/2026. Giá bán, chính sách thanh toán, ngân hàng cho vay, mặt bằng chi tiết, tiện ích, đơn vị vận hành, số đêm chủ căn tự ở, tỷ lệ chia doanh thu, tiến độ bàn giao: CHƯA công bố – chủ đầu tư công bố khi ra mắt.',
   'Kiến trúc theo phối cảnh: tháp thẳng, mặt dài hướng biển, kính xanh nhạt, đường viền sáng chạy dọc, ban công/trụ màu đồng ở hai đầu hồi, đỉnh bậc góc bo; 2 tầng đế mặt kính. Vị trí góc Trường Sa – Nguyễn Đức Thuận; phía Bắc là Lotte Duty Free. Trang có mô hình minh họa 3D·4D·5D (xoay, nắng theo giờ, view từ tầng). Website: www.sun-saphia-residence.com.',
