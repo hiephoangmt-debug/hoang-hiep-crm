@@ -12,15 +12,70 @@ defined( 'ABSPATH' ) || exit;
 
 const HH_AUTO_FEED = 'https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/refs/heads/claude/wordpress-hiephoangmt-domain-rf8u3u/wordpress/tu-dong/';
 
+// Kiểm tra danh sách bài mỗi 15 phút; ngoài ra hẹn riêng đúng phút đăng của bài kế tiếp (hh_auto_posts_at).
+add_filter(
+	'cron_schedules',
+	static function ( $s ) {
+		$s['hh_15min'] = array( 'interval' => 15 * MINUTE_IN_SECONDS, 'display' => 'Mỗi 15 phút' );
+		return $s;
+	}
+);
 add_action(
 	'init',
 	static function () {
-		if ( ! wp_next_scheduled( 'hh_auto_posts' ) ) {
-			wp_schedule_event( time() + 120, 'hourly', 'hh_auto_posts' );
+		$next = wp_get_scheduled_event( 'hh_auto_posts' );
+		if ( $next && 'hh_15min' !== $next->schedule ) {
+			wp_clear_scheduled_hook( 'hh_auto_posts' ); // Bản cũ chạy mỗi giờ → đổi sang 15 phút.
+			$next = false;
+		}
+		if ( ! $next ) {
+			wp_schedule_event( time() + 60, 'hh_15min', 'hh_auto_posts' );
 		}
 	}
 );
 add_action( 'hh_auto_posts', 'hh_auto_posts_run' );
+add_action( 'hh_auto_posts_at', 'hh_auto_posts_run' );
+
+/*
+ * Trang được LiteSpeed lưu đệm nên lượt xem không chạy được lịch hẹn của WordPress.
+ * Trình duyệt khách gọi nhẹ wp-cron.php (tối đa 5 phút/lần mỗi khách) để lịch chạy đúng giờ.
+ */
+add_action(
+	'wp_footer',
+	static function () {
+		if ( is_admin() || '0' === (string) get_option( 'hh_auto_posts_on', '1' ) ) {
+			return;
+		}
+		$url = wp_json_encode( site_url( 'wp-cron.php' ) );
+		echo "<script>try{var hk='hhCron',hn=Date.now();if(!(hn-(+sessionStorage.getItem(hk)||0)<3e5)){sessionStorage.setItem(hk,hn);fetch($url,{credentials:'omit',keepalive:true}).catch(function(){});}}catch(e){}</script>\n"; // phpcs:ignore WordPress.Security.EscapeOutput
+	},
+	99
+);
+
+/** Hẹn chạy đúng phút đăng của bài sắp tới gần nhất (cộng 20 giây). */
+function hh_auto_posts_schedule_next( $index, $done ) {
+	$tz   = new DateTimeZone( 'Asia/Ho_Chi_Minh' );
+	$next = 0;
+	foreach ( (array) ( $index['posts'] ?? array() ) as $item ) {
+		$slug = sanitize_title( (string) ( $item['slug'] ?? '' ) );
+		$at   = date_create( (string) ( $item['publish'] ?? '' ), $tz );
+		if ( ! $slug || ! $at || isset( $done[ $slug ] ) ) {
+			continue;
+		}
+		$ts = max( $at->getTimestamp(), time() + 100 ); // Bài tới hạn còn sót (lượt trước giới hạn 3 bài, lỗi mạng) → thử lại sau ~2 phút.
+		if ( ! $next || $ts < $next ) {
+			$next = $ts;
+		}
+	}
+	$current = wp_next_scheduled( 'hh_auto_posts_at' );
+	if ( $next && $current === $next + 20 ) {
+		return;
+	}
+	wp_clear_scheduled_hook( 'hh_auto_posts_at' );
+	if ( $next ) {
+		wp_schedule_single_event( $next + 20, 'hh_auto_posts_at' );
+	}
+}
 
 /** Ghi nhật ký (giữ 40 dòng gần nhất). */
 function hh_auto_posts_log( $msg ) {
@@ -120,6 +175,7 @@ function hh_auto_posts_run( $force = false ) {
 	}
 	update_option( 'hh_auto_posts_done', $done, false );
 	update_option( 'hh_auto_posts_rev', $revs, false );
+	hh_auto_posts_schedule_next( $index, $done );
 	if ( $made ) {
 		do_action( 'litespeed_purge_all' ); // Xoá bộ nhớ đệm LiteSpeed để bài mới hiện ngay.
 	}
@@ -226,7 +282,7 @@ function hh_auto_posts_page() {
 			<p><label><input type="checkbox" name="run_now" value="1"> Kiểm tra và đăng bài tới hạn ngay bây giờ</label></p>
 			<p><button class="button button-primary" name="hh_auto_save" value="1">Lưu</button></p>
 		</form>
-		<p>Lần kiểm tra gần nhất: <?php echo $checked ? esc_html( wp_date( 'd/m/Y H:i', $checked ) ) : 'chưa'; ?> · Lần tới: <?php echo $next ? esc_html( wp_date( 'd/m/Y H:i', $next ) ) : '–'; ?></p>
+		<p>Lần kiểm tra gần nhất: <?php echo $checked ? esc_html( wp_date( 'd/m/Y H:i', $checked ) ) : 'chưa'; ?> · Lần tới: <?php echo $next ? esc_html( wp_date( 'd/m/Y H:i', $next ) ) : '–'; ?><?php $at_next = wp_next_scheduled( 'hh_auto_posts_at' ); echo $at_next ? ' · Hẹn đăng bài kế tiếp: ' . esc_html( wp_date( 'd/m/Y H:i', $at_next ) ) : ''; ?></p>
 		<h2>Lịch bài</h2>
 		<table class="widefat striped"><thead><tr><th>Giờ đăng</th><th>Bài</th><th>Trạng thái</th></tr></thead><tbody>
 		<?php foreach ( (array) ( $index['posts'] ?? array() ) as $item ) : ?>
