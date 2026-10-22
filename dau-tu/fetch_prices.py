@@ -3,6 +3,7 @@
 Kênh tự động:
   - Vàng miếng SJC (mua/bán, triệu đồng/lượng)    – SJC, dự phòng PNJ / Bảo Tín Minh Châu / DOJI
   - Vàng thế giới (USD/oz), bạc, dầu Brent, S&P 500, lợi suất TP Mỹ 10 năm, USD/VND, Bitcoin – Yahoo Finance
+  - Lãi suất liên ngân hàng qua đêm → 9 tháng và doanh số – Ngân hàng Nhà nước (API công khai sbv.gov.vn)
   - Lãi suất Fed: biên độ mục tiêu (trên/dưới) và lãi suất thực tế EFFR – Fed New York (dự phòng: FRED)
   - VN-Index, VN30, HNX-Index, UPCoM và ~30 cổ phiếu lớn             – DNSE (dự phòng: VNDirect)
   - Khối ngoại mua/bán ròng toàn sàn HOSE và từng mã lớn – CafeF
@@ -392,6 +393,50 @@ def fetch_foreign(symbol: str, pages: int = 1, size: int = 20):
     raise last or ValueError("CafeF rỗng")
 
 
+# ---------------------------------------------------------------- Liên ngân hàng (NHNN)
+LNH_KEYS = {"qua đêm": "lnh_on", "1 tuần": "lnh_1w", "2 tuần": "lnh_2w", "1 tháng": "lnh_1m",
+            "3 tháng": "lnh_3m", "6 tháng": "lnh_6m", "9 tháng": "lnh_9m"}
+
+
+def fetch_interbank(pages: int):
+    """Lãi suất bình quân liên ngân hàng NHNN công bố mỗi ngày làm việc.
+    Trả {khoá chuỗi: {ngày: %}}, thêm 'lnh_on_ds' = doanh số qua đêm (tỷ đồng)."""
+    out = {}
+    base = "https://sbv.gov.vn/o/headless-delivery/v1.0/content-structures/3450260/structured-contents"
+    for page in range(1, pages + 1):
+        r = get(base, params={"pageSize": 100, "page": page, "sort": "datePublished:desc"},
+                headers={"Accept": "application/json"}, timeout=40)
+        d = r.json()
+        for it in d.get("items") or []:
+            fields = it.get("contentFields") or []
+            raw = next((f.get("contentFieldValue", {}).get("data") for f in fields if f.get("name") == "ngayApDung"), None)
+            if not raw:
+                continue
+            # NHNN lưu nửa đêm giờ VN dạng UTC (17:00 hôm trước) -> đổi về ngày VN
+            day = datetime.fromisoformat(raw.replace("Z", "+00:00")).astimezone(VN_TZ).strftime("%Y-%m-%d")
+            for f in fields:
+                if f.get("name") != "laiSuatThiTruongNganHangs":
+                    continue
+                sub = {n.get("name"): (n.get("contentFieldValue") or {}).get("data") for n in f.get("nestedContentFields") or []}
+                key = LNH_KEYS.get((sub.get("thoihan") or "").strip().lower())
+                if not key:
+                    continue
+                try:
+                    out.setdefault(key, {})[day] = float(str(sub.get("laiSuatBQLienNganHang")).replace(",", "."))
+                except (TypeError, ValueError):
+                    continue
+                if key == "lnh_on":
+                    try:
+                        out.setdefault("lnh_on_ds", {})[day] = float(str(sub.get("doanhSo")).replace(".", "").replace(",", "."))
+                    except (TypeError, ValueError):
+                        pass
+        if d.get("lastPage", 1) <= page:
+            break
+    if not out.get("lnh_on"):
+        raise ValueError("NHNN không trả lãi suất liên ngân hàng")
+    return out
+
+
 # ---------------------------------------------------------------- Lãi suất tiết kiệm
 def _html_cells(row_html):
     out = []
@@ -554,6 +599,14 @@ def main():
             for key, sid in (("fed_tren", "DFEDTARU"), ("fed_duoi", "DFEDTARL"), ("fed_thuc", "DFF")):
                 log(f"   {sid}: {merge(series, key, fetch_fred(sid, days))} điểm")
     step("Lãi suất Fed", fed)
+
+    def lien_ngan_hang():
+        data = fetch_interbank(6 if first("lnh_on") else 1)
+        for key, pts_ in data.items():
+            merge(series, key, pts_)
+        last = max(data["lnh_on"])
+        log(f"   {len(data['lnh_on'])} ngày, qua đêm {data['lnh_on'][last]}% ({last})")
+    step("Liên ngân hàng", lien_ngan_hang)
     step("VN-Index", index("vnindex", "VNINDEX"))
     step("VN30", index("vn30", "VN30"))
     step("HNX-Index", index("hnx", "HNX"))
