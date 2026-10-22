@@ -19,7 +19,7 @@ Trang web biểu đồ theo ngày cho các kênh: **vàng SJC & thế giới, b�
 BĐS: giá rao bán theo quý từ báo cáo Batdongsan.com.vn. Lãi suất: bot tự lấy mỗi lần chạy. Cập nhật thêm dòng mới khi có số mới (sửa trực tiếp trên GitHub được, cả trên điện thoại).
 Ngày viết dạng `YYYY-MM-DD`; tên khu vực / ngân hàng không dùng dấu phẩy.
 
-| `data/lai_vay.csv` | `ngay,ngan_hang,loai,lai_suat,uu_dai_thang,ghi_chu` | Lãi vay %/năm; `loai` = `Mua nhà`, `Kinh doanh` hoặc `Bình quân` (ngân hàng công bố hằng tháng) |
+| `data/lai_vay.csv` | `ngay,ngan_hang,loai,ky_han,lai_suat,chenh_lech,ghi_chu` | Lãi vay %/năm; `loai` = `Bình quân` (ngày = cuối tháng), `Mua nhà` (ky_han = thời gian cố định, VD `12 tháng`) hoặc `Kinh doanh` (`Ngắn hạn` / `Trung dài hạn`) |
 
 ## Đổi danh sách cổ phiếu
 

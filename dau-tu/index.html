@@ -116,6 +116,8 @@ canvas.spark { width: 90px; height: 28px; display: block; }
 .ma-head .nm { color: var(--ink-2); flex-basis: 100%; font-size: 14px; }
 .kv { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px 14px; margin: 10px 0; }
 .kv div { display: flex; flex-direction: column; } .kv span { font-size: 12px; color: var(--muted); } .kv b { font-variant-numeric: tabular-nums; }
+.sel { font: inherit; font-size: 16px; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--axis); background: var(--surface); color: var(--ink); max-width: 100%; }
+tr.pick { cursor: pointer; } tr.pick:hover td, tr.pick[aria-selected="true"] td { background: var(--chip); }
 .calc { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px 14px; margin-bottom: 6px; }
 .calc label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--ink-2); }
 .calc input, .calc select { font: inherit; font-size: 16px; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--axis); background: var(--page); color: var(--ink); min-width: 0; }
@@ -237,13 +239,21 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
   <section id="lai-vay">
     <h2>Lãi vay ngân hàng</h2>
     <p class="note">Lãi vay mua nhà, vay sản xuất kinh doanh và lãi vay bình quân ngân hàng công bố hằng tháng (%/năm). Không có nguồn tổng hợp tự động nên số được nhập tay từ báo chí, ghi nguồn từng dòng (chạm vào cột để xem); cập nhật trong <code>dau-tu/data/lai_vay.csv</code>. Lãi thực tế tuỳ hồ sơ, tài sản bảo đảm và thời điểm – hỏi lại ngân hàng trước khi vay.</p>
-    <div class="grid2">
-      <div class="card"><h3>Vay mua nhà – lãi ưu đãi</h3><div class="stats" id="lvNhaStats"></div><div class="chart sm"><canvas id="cLvNha"></canvas></div></div>
-      <div class="card"><h3>Vay sản xuất kinh doanh – mức từ</h3><div class="chart sm"><canvas id="cLvKd"></canvas></div></div>
-      <div class="card"><h3>Lãi vay bình quân tháng gần nhất</h3><div class="chart sm"><canvas id="cLvBq"></canvas></div></div>
-      <div class="card"><h3>Lãi vay bình quân theo tháng</h3><div class="chart sm"><canvas id="cLvBqT"></canvas></div></div>
+    <div class="toolbar-in"><div class="seg" id="lvKinds" role="group" aria-label="Loại vay"></div></div>
+    <div class="card">
+      <div class="stats" id="lvStats"></div>
+      <div class="tbl-wrap"><table id="tblLv"></table></div>
     </div>
-
+    <div class="card" style="margin-top:12px"><h3 id="lvAllTitle"></h3><div class="chart sm"><canvas id="cLvAll"></canvas></div></div>
+    <div class="card" style="margin-top:12px" id="lvDetail">
+      <h3 id="lvDetTitle">Chi tiết ngân hàng</h3>
+      <div class="toolbar-in"><select id="lvBank" class="sel" aria-label="Chọn ngân hàng"></select></div>
+      <div class="grid2">
+        <div><h3>Lãi vay bình quân theo tháng</h3><div class="chart sm"><canvas id="cLvBank"></canvas></div></div>
+        <div><h3>Lãi vay mua nhà theo thời gian cố định</h3><div class="chart sm"><canvas id="cLvBankNha"></canvas></div></div>
+      </div>
+      <div class="note" id="lvBankNotes" style="margin:8px 0 0"></div>
+    </div>
     <div class="card" style="margin-top:12px">
       <h3>Tính trả góp vay mua nhà / kinh doanh</h3>
       <form class="calc" id="calc">
@@ -324,7 +334,7 @@ function csv(text) {
 
 Promise.all([j('data/prices.json'), j('data/stocks.json'), t('data/bds.csv'), t('data/lai_suat.csv'), j('data/lai_suat_auto.json'), t('data/lai_vay.csv')])
   .then(([p, s, b, l, ra, lv]) => {
-    LV = csv(lv).map(r => ({ ...r, lai_suat: +r.lai_suat, uu_dai_thang: r.uu_dai_thang ? +r.uu_dai_thang : null })).filter(r => !isNaN(r.lai_suat));
+    LV = csv(lv).map(r => ({ ...r, lai_suat: +r.lai_suat, chenh_lech: r.chenh_lech ? +r.chenh_lech : null })).filter(r => !isNaN(r.lai_suat));
     RA = ra && ra.bang && Object.keys(ra.bang).length ? ra : null;
     P = p || P; P.series = P.series || {};
     ST = s || ST; ST.symbols = ST.symbols || {};
@@ -745,26 +755,93 @@ function barH(id, rows, label, color, unit = '%') {
   const el = $(id); el.parentElement.style.height = Math.max(160, rows.length * 34 + 50) + 'px';
   draw(id, { type: 'bar', data: { labels: rows.map(r => r.name), datasets: [{ label, data: rows.map(r => r.v), backgroundColor: color, borderRadius: 4, maxBarThickness: 22 }] }, options: o });
 }
+const LV_KINDS = ['Bình quân', 'Mua nhà', 'Kinh doanh'];
+const LV_TITLE = { 'Bình quân': 'Lãi vay bình quân ngân hàng công bố (tháng gần nhất)', 'Mua nhà': 'Lãi vay mua nhà – mức ưu đãi thấp nhất', 'Kinh doanh': 'Lãi vay sản xuất kinh doanh – mức thấp nhất' };
+let lvKind = 'Bình quân', lvSort = null, lvAsc = true, lvBank = null;
+const monthLbl = (d) => 'T' + (+d.slice(5, 7)) + '/' + d.slice(2, 4);
+function lvCols(kind) {
+  const rows = LV.filter(r => r.loai === kind);
+  // tháng mới nhất đứng đầu cho dễ thấy trên điện thoại
+  if (kind === 'Bình quân') return [...new Set(rows.map(r => r.ngay.slice(0, 7)))].sort().reverse().map(m => ({ key: m, label: monthLbl(m + '-01') }));
+  const order = (k) => { const m = k.match(/(\d+)/); return m ? +m[1] : k === 'Ngắn hạn' ? 0 : 999; };
+  return [...new Set(rows.map(r => r.ky_han))].sort((a, b) => order(a) - order(b)).map(k => ({ key: k, label: k }));
+}
+function lvTable(kind) {
+  const by = {};
+  for (const r of LV.filter(x => x.loai === kind)) {
+    const b = by[r.ngan_hang] = by[r.ngan_hang] || { name: r.ngan_hang, v: {}, notes: {}, spread: null, sys: /hệ thống|TB /i.test(r.ngan_hang) };
+    const k = kind === 'Bình quân' ? r.ngay.slice(0, 7) : r.ky_han;
+    if (!by[r.ngan_hang].v[k] || by[r.ngan_hang].notes[k]?.ngay < r.ngay) { b.v[k] = r.lai_suat; b.notes[k] = r; }
+    if (r.chenh_lech != null) b.spread = r.chenh_lech;
+  }
+  return Object.values(by).map(b => {
+    const vals = Object.values(b.v);
+    const keys = Object.keys(b.v).sort();
+    b.main = kind === 'Bình quân' ? b.v[keys.at(-1)] : Math.min(...vals);
+    b.mainKey = kind === 'Bình quân' ? keys.at(-1) : null;
+    b.chg = kind === 'Bình quân' && keys.length > 1 ? b.v[keys.at(-1)] - b.v[keys.at(-2)] : null;
+    return b;
+  });
+}
 function renderLaiVay() {
-  const latest = (loai) => {
-    const m = {};
-    LV.filter(r => r.loai === loai).forEach(r => { if (!m[r.ngan_hang] || m[r.ngan_hang].ngay < r.ngay) m[r.ngan_hang] = r; });
-    return Object.values(m).sort((a, b) => a.lai_suat - b.lai_suat);
-  };
-  const toRows = (a) => a.map(r => ({ name: r.ngan_hang, v: r.lai_suat, ghi_chu: r.ghi_chu, extra: r.uu_dai_thang ? `Cố định ${r.uu_dai_thang} tháng` : '' }));
-  const nha = latest('Mua nhà'), kd = latest('Kinh doanh'), bq = latest('Bình quân');
-  barH('cLvNha', toRows(nha), 'Lãi ưu đãi', css('--s1'));
-  barH('cLvKd', toRows(kd), 'Lãi vay từ', css('--s3'));
-  barH('cLvBq', toRows(bq), 'Bình quân', css('--s7'));
-  const lo = nha.filter(r => !/bình quân|TB /i.test(r.ngan_hang));
-  $('lvNhaStats').innerHTML = lo.length ? `<span>Thấp nhất: <b class="up">${fmt(lo[0].lai_suat, 1)}%</b> (${esc(lo[0].ngan_hang)})</span><span>Sau ưu đãi: thường <b>13–15%</b></span>` : '';
-  // diễn biến bình quân theo tháng
-  const banks = [...new Set(LV.filter(r => r.loai === 'Bình quân').map(r => r.ngan_hang))];
-  const colors = ['--s1', '--s2', '--s3', '--s4', '--s5', '--s6', '--s7'];
-  const ds = banks.slice(0, 7).map((b, i) => line(b, LV.filter(r => r.loai === 'Bình quân' && r.ngan_hang === b).sort((x, y) => x.ngay < y.ngay ? -1 : 1).map(r => [r.ngay, r.lai_suat]), css(colors[i]), { pointRadius: 4 }));
-  const o = baseOpts('%/năm', { legend: true, dec: 2, xunit: 'month' });
-  o.plugins.tooltip.callbacks.title = (it) => it.length ? 'Tháng ' + keyOf(it[0].parsed.x).slice(5, 7) + '/' + keyOf(it[0].parsed.x).slice(0, 4) : '';
-  draw('cLvBqT', { type: 'line', data: { datasets: ds }, options: o });
+  $('lvKinds').innerHTML = LV_KINDS.map(k => `<button data-k="${k}" aria-pressed="${k === lvKind}">${k === 'Bình quân' ? 'Bình quân hằng tháng' : k === 'Kinh doanh' ? 'Sản xuất kinh doanh' : 'Mua nhà'}</button>`).join('');
+  $('lvKinds').querySelectorAll('button').forEach(b => b.onclick = () => { lvKind = b.dataset.k; lvSort = null; renderLaiVay(); });
+  const cols = lvCols(lvKind);
+  const rows = lvTable(lvKind);
+  const key = lvSort || 'main';
+  const val = (r) => key === 'name' ? r.name : key === 'main' ? r.main : key === 'chg' ? r.chg : key === 'spread' ? r.spread : r.v[key];
+  rows.sort((a, b) => { const x = val(a), y = val(b); if (x == null) return 1; if (y == null) return -1; return (x < y ? -1 : x > y ? 1 : 0) * (lvAsc ? 1 : -1); });
+  const banks = rows.filter(r => !r.sys);
+  const lo = [...banks].sort((a, b) => a.main - b.main)[0], hi = [...banks].sort((a, b) => b.main - a.main)[0];
+  const sys = rows.find(r => r.sys);
+  $('lvStats').innerHTML = banks.length ? `
+    <span>Thấp nhất: <b class="up">${fmt(lo.main, 2)}%</b> (${esc(lo.name)})</span>
+    <span>Cao nhất: <b class="down">${fmt(hi.main, 2)}%</b> (${esc(hi.name)})</span>
+    <span>${banks.length} ngân hàng</span>
+    ${sys ? `<span>${esc(sys.name)}: <b>${fmt(sys.main, 2)}%</b></span>` : ''}
+    ${lvKind === 'Mua nhà' ? '<span>Sau ưu đãi thả nổi thường <b>13–15%</b></span>' : ''}` : '';
+  const th = (k, l) => `<th data-k="${k}"${k === key ? ` aria-sort="${lvAsc ? 'ascending' : 'descending'}"` : ''}>${l}</th>`;
+  const min = Object.fromEntries(cols.map(c => [c.key, Math.min(...banks.map(r => r.v[c.key] ?? Infinity))]));
+  let head = '<thead><tr>' + th('name', 'Ngân hàng') + cols.map(c => th(c.key, c.label)).join('');
+  if (lvKind === 'Bình quân') head += th('chg', 'Thay đổi') + th('spread', 'Chênh lệch cho vay – huy động');
+  head += '</tr></thead>';
+  const body = rows.map(r => {
+    let tr = `<tr class="pick" data-b="${esc(r.name)}" aria-selected="${r.name === lvBank}"><td><b>${esc(r.name)}</b></td>` +
+      cols.map(c => { const x = r.v[c.key]; const n = r.notes[c.key]; return `<td title="${esc(n ? n.ghi_chu : '')}">${x == null ? '<span class="flat">–</span>' : x === min[c.key] && !r.sys ? `<b class="up">${fmt(x, 2)}</b>` : fmt(x, 2)}</td>`; }).join('');
+    if (lvKind === 'Bình quân') tr += `<td>${r.chg == null ? '–' : `<span class="${cls(-r.chg)}">${r.chg > 0 ? '+' : ''}${fmt(r.chg, 2)}</span>`}</td><td>${r.spread == null ? '–' : fmt(r.spread, 2)}</td>`;
+    return tr + '</tr>';
+  }).join('');
+  $('tblLv').innerHTML = head + '<tbody>' + body + '</tbody>';
+  $('tblLv').querySelectorAll('th').forEach(t => t.onclick = () => { const k = t.dataset.k; if (lvSort === k) lvAsc = !lvAsc; else { lvSort = k; lvAsc = k === 'name' || k !== 'chg'; } renderLaiVay(); });
+  $('tblLv').querySelectorAll('tr.pick').forEach(t => t.onclick = () => { lvBank = t.dataset.b; renderLaiVay(); document.getElementById('lvDetail').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); });
+  // biểu đồ tất cả ngân hàng của loại đang chọn
+  $('lvAllTitle').textContent = LV_TITLE[lvKind] + ' (%/năm)';
+  const bars = [...rows].sort((a, b) => a.main - b.main).map(r => ({ name: r.name, v: r.main, ghi_chu: (r.mainKey ? r.notes[r.mainKey] : Object.values(r.notes).find(n => n.lai_suat === r.main))?.ghi_chu }));
+  barH('cLvAll', bars, LV_TITLE[lvKind].split(' – ')[0], css(lvKind === 'Kinh doanh' ? '--s3' : lvKind === 'Mua nhà' ? '--s1' : '--s7'));
+  renderLvBank();
+}
+function renderLvBank() {
+  const all = [...new Set(LV.map(r => r.ngan_hang))].filter(b => !/hệ thống|TB /i.test(b)).sort((a, b) => a.localeCompare(b, 'vi'));
+  if (!all.includes(lvBank)) lvBank = all.includes('BIDV') ? 'BIDV' : all[0];
+  $('lvBank').innerHTML = all.map(b => `<option${b === lvBank ? ' selected' : ''}>${esc(b)}</option>`).join('');
+  $('lvBank').onchange = () => { lvBank = $('lvBank').value; renderLaiVay(); };
+  $('lvDetTitle').textContent = 'Chi tiết: ' + lvBank;
+  const mine = LV.filter(r => r.ngan_hang === lvBank);
+  // bình quân theo tháng của ngân hàng + đường toàn hệ thống để so
+  const bq = mine.filter(r => r.loai === 'Bình quân').sort((a, b) => a.ngay < b.ngay ? -1 : 1).map(r => [r.ngay.slice(0, 7) + '-01', r.lai_suat]);
+  const sys = LV.filter(r => r.loai === 'Bình quân' && /hệ thống/i.test(r.ngan_hang)).sort((a, b) => a.ngay < b.ngay ? -1 : 1).map(r => [r.ngay.slice(0, 7) + '-01', r.lai_suat]);
+  const o = baseOpts('%/năm', { legend: true, dec: 2, xunit: 'month', tickDec: 1 });
+  o.plugins.tooltip.callbacks.title = (it) => it.length ? 'Tháng ' + monthLbl(keyOf(it[0].parsed.x)).slice(1) : '';
+  o.scales.x.offset = true;
+  draw('cLvBank', { type: 'line', data: { datasets: [
+    line(lvBank, bq, css('--s1'), { pointRadius: 5 }),
+    line('Toàn hệ thống (NHNN)', sys, css('--muted'), { borderDash: [5, 4], pointRadius: 3 }),
+  ].filter(d => d.data.length) }, options: o });
+  // mua nhà theo thời gian cố định + kinh doanh
+  const nha = mine.filter(r => r.loai !== 'Bình quân').sort((a, b) => (a.loai + a.ky_han).localeCompare(b.loai + b.ky_han, 'vi', { numeric: true }));
+  if (nha.length) barH('cLvBankNha', nha.map(r => ({ name: (r.loai === 'Kinh doanh' ? 'KD ' : 'Nhà ') + r.ky_han, v: r.lai_suat, ghi_chu: r.ghi_chu })), 'Lãi vay', css('--s2'));
+  else draw('cLvBankNha', { type: 'bar', data: { datasets: [{ data: [] }] }, options: {} });
+  $('lvBankNotes').innerHTML = mine.length ? '<b>Nguồn:</b> ' + [...new Set(mine.map(r => r.ghi_chu))].map(esc).join(' · ') : '';
 }
 // Tính trả góp
 function amortize(P, years, r1, m1, r2, method) {
