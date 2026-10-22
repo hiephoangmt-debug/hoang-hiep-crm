@@ -143,7 +143,7 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
       <button data-m="0">Tất cả</button>
     </div>
     <span class="range-label" id="rangeLabel"></span>
-    <nav class="nav" id="nav" aria-label="Chọn mục"><a href="#tong-quan">Tổng quan</a><a href="#tra-cuu">Tra cứu mã</a><a href="#so-sanh">So sánh</a><a href="#vang">Vàng</a><a href="#chung-khoan">Chứng khoán</a><a href="#khoi-ngoai">Khối ngoại</a><a href="#co-phieu">Cổ phiếu lớn</a><a href="#tin-hieu">Tín hiệu</a><a href="#the-gioi">Tỷ giá & thế giới</a><a href="#bds">Bất động sản</a><a href="#lai-suat">Lãi suất</a><a href="#lai-vay">Lãi vay</a><a href="#fed">Lãi suất Fed</a></nav>
+    <nav class="nav" id="nav" aria-label="Chọn mục"><a href="#tong-quan">Tổng quan</a><a href="#tra-cuu">Tra cứu mã</a><a href="#theo-ngay">Theo ngày</a><a href="#so-sanh">So sánh</a><a href="#vang">Vàng</a><a href="#chung-khoan">Chứng khoán</a><a href="#khoi-ngoai">Khối ngoại</a><a href="#co-phieu">Cổ phiếu lớn</a><a href="#tin-hieu">Tín hiệu</a><a href="#the-gioi">Tỷ giá & thế giới</a><a href="#bds">Bất động sản</a><a href="#lai-suat">Lãi suất</a><a href="#lai-vay">Lãi vay</a><a href="#fed">Lãi suất Fed</a></nav>
   </div>
 
   <section id="tong-quan">
@@ -162,6 +162,17 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
     </form>
     <div class="chips" id="recent"></div>
     <div id="maResult"></div>
+  </section>
+
+  <section id="theo-ngay">
+    <h2>Theo dõi theo ngày</h2>
+    <p class="note">Mỗi ngày một dòng: giá chốt của ngày đó (hoặc giá gần nhất trước đó với vàng SJC, lãi suất). Chọn ngày để xem lùi về trước; mũi tên là thay đổi so với ngày liền trước.</p>
+    <div class="toolbar-in" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <label class="note" style="margin:0" for="dayEnd">Đến ngày</label>
+      <input id="dayEnd" type="date" class="sel">
+      <div class="seg" id="dayN" role="group" aria-label="Số ngày"><button data-n="10">10 ngày</button><button data-n="30" aria-pressed="true">30 ngày</button><button data-n="90">90 ngày</button></div>
+    </div>
+    <div class="card tbl-wrap"><table id="tblDay"></table></div>
   </section>
 
   <section id="so-sanh">
@@ -234,11 +245,25 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
       <div class="tbl-wrap"><table id="tblLs"></table></div>
     </div>
     <div class="card" style="margin-top:12px"><h3>Lãi suất 12 tháng trung bình theo ngày</h3><div class="chart sm"><canvas id="cLs"></canvas></div></div>
+    <div class="card" style="margin-top:12px" id="lsDetail">
+      <h3 id="lsDetTitle">Chi tiết ngân hàng theo ngày</h3>
+      <div class="toolbar-in"><select id="lsBank" class="sel" aria-label="Chọn ngân hàng"></select></div>
+      <div class="stats" id="lsBankStats"></div>
+      <div class="chart sm"><canvas id="cLsBank"></canvas></div>
+      <p class="note" style="margin:8px 0 0">Lãi suất 12 tháng của ngân hàng theo từng ngày bot ghi nhận (bắt đầu từ 21/10/2026), so với trung bình các ngân hàng. Bấm vào dòng trong bảng để chọn ngân hàng.</p>
+    </div>
   </section>
 
   <section id="lai-vay">
     <h2>Lãi vay ngân hàng</h2>
     <p class="note">Lãi vay mua nhà, vay sản xuất kinh doanh và lãi vay bình quân ngân hàng công bố hằng tháng (%/năm). Không có nguồn tổng hợp tự động nên số được nhập tay từ báo chí, ghi nguồn từng dòng (chạm vào cột để xem); cập nhật trong <code>dau-tu/data/lai_vay.csv</code>. Lãi thực tế tuỳ hồ sơ, tài sản bảo đảm và thời điểm – hỏi lại ngân hàng trước khi vay.</p>
+    <div class="card" style="margin-bottom:12px">
+      <h3>Lãi suất liên ngân hàng – theo ngày (NHNN)</h3>
+      <p class="note" style="margin:0 0 8px">Lãi suất các ngân hàng vay nhau, Ngân hàng Nhà nước công bố mỗi ngày làm việc. Đây là chi phí vốn ngắn hạn của ngân hàng: khi lãi qua đêm tăng kéo dài, lãi vay và lãi gửi thường tăng theo sau vài tuần.</p>
+      <div class="stats" id="lnhStats"></div>
+      <div class="chart"><canvas id="cLnh"></canvas></div>
+      <div class="chart sm" style="margin-top:12px"><canvas id="cLnhDs"></canvas></div>
+    </div>
     <div class="toolbar-in"><div class="seg" id="lvKinds" role="group" aria-label="Loại vay"></div></div>
     <div class="card">
       <div class="stats" id="lvStats"></div>
@@ -283,7 +308,7 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
   </section>
 
   <footer>
-    Nguồn: SJC / PNJ / Bảo Tín Minh Châu / DOJI (vàng miếng), Yahoo Finance (vàng/bạc/dầu/S&amp;P 500/TP Mỹ/USD/Bitcoin, trễ ~15 phút), Fed New York / FRED (lãi suất Fed), DNSE/VNDirect, CafeF (khối ngoại), 24hMoney / Người Quan Sát (lãi suất); BĐS nhập tay. Số liệu tự cập nhật mỗi giờ trong phiên (9:15–15:15, thứ 2–6) và 18:30 hằng ngày.
+    Nguồn: SJC / PNJ / Bảo Tín Minh Châu / DOJI (vàng miếng), Yahoo Finance (vàng/bạc/dầu/S&amp;P 500/TP Mỹ/USD/Bitcoin, trễ ~15 phút), Fed New York / FRED (lãi suất Fed), Ngân hàng Nhà nước (liên ngân hàng), DNSE/VNDirect, CafeF (khối ngoại), 24hMoney / Người Quan Sát (lãi suất); BĐS nhập tay. Số liệu tự cập nhật mỗi giờ trong phiên (9:15–15:15, thứ 2–6) và 18:30 hằng ngày.
     Chỉ để tham khảo, không phải khuyến nghị đầu tư.
     <div class="err" id="errs"></div>
   </footer>
@@ -518,6 +543,7 @@ function renderTiles(s) {
     ['Bạc', pts('bac'), 'USD/oz', 2],
     ['Dầu Brent', pts('dau'), 'USD/thùng', 2],
     ['S&P 500 (Mỹ)', pts('sp500'), 'điểm', 0],
+    ['Liên ngân hàng qua đêm', pts('lnh_on'), '%', 2],
     ['Lãi suất Fed (trần)', pts('fed_tren'), '%', 2],
     [bdsMainName() || 'Bất động sản', bdsAvg(), 'tr/m²', 0],
   ];
@@ -783,6 +809,29 @@ function lvTable(kind) {
     return b;
   });
 }
+function renderLnh(s) {
+  const on = pts('lnh_on');
+  if (!on.length) { $('lnhStats').innerHTML = '<span>Chưa có số liệu – bot sẽ lấy ở lần chạy tới.</span>'; }
+  else {
+    const last = on.at(-1), prev = on.at(-2);
+    const wk = at(on, keyOf(tsOf(last[0]) - 7 * 864e5)), mo = at(on, keyOf(tsOf(last[0]) - 30 * 864e5));
+    const d = (a, b) => b == null ? '–' : `<span class="${cls(-(a - b), 0.001)}">${a - b > 0 ? '+' : ''}${fmt(a - b, 2)}</span>`;
+    const t = (k, l) => { const a = pts(k).at(-1); return a ? `<span>${l}: <b>${fmt(a[1], 2)}%</b></span>` : ''; };
+    $('lnhStats').innerHTML = `<span>Qua đêm ngày ${dvn(last[0])}: <b>${fmt(last[1], 2)}%</b></span>
+      <span>So với hôm trước: <b>${d(last[1], prev && prev[1])}</b> · 1 tuần: <b>${d(last[1], wk)}</b> · 1 tháng: <b>${d(last[1], mo)}</b> điểm</span>
+      ${t('lnh_1w', '1 tuần')}${t('lnh_1m', '1 tháng')}${t('lnh_3m', '3 tháng')}${t('lnh_6m', '6 tháng')}`;
+  }
+  draw('cLnh', { type: 'line', data: { datasets: [
+    line('Qua đêm', inRange(on, s), css('--s1')),
+    line('1 tuần', inRange(pts('lnh_1w'), s), css('--s2')),
+    line('1 tháng', inRange(pts('lnh_1m'), s), css('--s3')),
+    line('3 tháng', inRange(pts('lnh_3m'), s), css('--s7'), { borderDash: [5, 4] }),
+  ] }, options: baseOpts('%/năm', { legend: true, dec: 2, tickDec: 1 }) });
+  const ds = inRange(pts('lnh_on_ds'), s);
+  const o = baseOpts('tỷ đồng', { dec: 0 });
+  o.scales.x.offset = true;
+  draw('cLnhDs', { type: 'bar', data: { datasets: [{ label: 'Doanh số qua đêm', data: xy(ds), backgroundColor: css('--s1') + '99', borderRadius: 2, maxBarThickness: 12 }] }, options: o });
+}
 function renderLaiVay() {
   $('lvKinds').innerHTML = LV_KINDS.map(k => `<button data-k="${k}" aria-pressed="${k === lvKind}">${k === 'Bình quân' ? 'Bình quân hằng tháng' : k === 'Kinh doanh' ? 'Sản xuất kinh doanh' : 'Mua nhà'}</button>`).join('');
   $('lvKinds').querySelectorAll('button').forEach(b => b.onclick = () => { lvKind = b.dataset.k; lvSort = null; renderLaiVay(); });
@@ -843,6 +892,49 @@ function renderLvBank() {
   else draw('cLvBankNha', { type: 'bar', data: { datasets: [{ data: [] }] }, options: {} });
   $('lvBankNotes').innerHTML = mine.length ? '<b>Nguồn:</b> ' + [...new Set(mine.map(r => r.ghi_chu))].map(esc).join(' · ') : '';
 }
+// ---------- Bảng theo dõi theo ngày
+let dayN = 30;
+const DAY_COLS = [
+  ['vnindex', 'VN-Index', 2, 'trade'], ['vn30', 'VN30', 2, 'trade'], ['kn_rong', 'Khối ngoại ròng (tỷ)', 0, 'trade', true],
+  ['sjc_ban', 'Vàng SJC bán (tr/lượng)', 1, 'carry'], ['vang_tg', 'Vàng TG (USD/oz)', 0, 'any'],
+  ['usd_vnd', 'USD/VND', 0, 'any'], ['lai12', 'Lãi gửi TB 12T tại quầy (%)', 2, 'carry'],
+  ['lnh_on', 'Liên NH qua đêm (%)', 2, 'trade'], ['fed_tren', 'Fed trần (%)', 2, 'carry'], ['us10y', 'TP Mỹ 10 năm (%)', 2, 'any'],
+  ['btc', 'Bitcoin (USD)', 0, 'any'], ['dau', 'Dầu Brent (USD)', 2, 'any'],
+];
+function renderDays() {
+  const lai = Object.fromEntries(rateAvgHistory('Tại quầy'));
+  const get = (k) => k === 'lai12' ? lai : (P.series[k] || {});
+  const last = lastDate();
+  const inp = $('dayEnd');
+  if (!inp.value) inp.value = last;
+  inp.max = last;
+  const end = inp.value || last;
+  // danh sách ngày: các ngày có ít nhất 1 số liệu
+  const all = new Set();
+  DAY_COLS.forEach(([k]) => Object.keys(get(k)).forEach(d => all.add(d)));
+  const days = [...all].filter(d => d <= end).sort().reverse().slice(0, dayN + 1);
+  const cell = (k, d, dec, mode, net) => {
+    const ser = get(k);
+    let v = ser[d], carried = false;
+    if (v == null && mode === 'carry') { const a = Object.keys(ser).filter(x => x < d).sort(); if (a.length) { v = ser[a.at(-1)]; carried = true; } }
+    if (v == null) return '<td><span class="flat">–</span></td>';
+    if (net) return `<td><span class="${cls(v)}">${v >= 0 ? 'Mua ' : 'Bán '}${fmt(Math.abs(v), 0)}</span></td>`;
+    // so với ngày có số liệu liền trước
+    const prevD = Object.keys(ser).filter(x => x < d).sort().at(-1);
+    const pv = prevD ? ser[prevD] : null;
+    const ch = pv ? (v / pv - 1) * 100 : null;
+    const arr = carried || ch == null || Math.abs(ch) < 0.005 ? '' : `<span class="${cls(ch, 0.005)}" title="${pct(ch)}">${ch > 0 ? '▲' : '▼'}</span> `;
+    return `<td${carried ? ' class="flat"' : ''}>${arr}${fmt(v, dec)}</td>`;
+  };
+  const wd = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+  const head = '<thead><tr><th>Ngày</th>' + DAY_COLS.map(c => `<th>${c[1]}</th>`).join('') + '</tr></thead>';
+  const body = days.slice(0, dayN).map(d => `<tr><td><b>${dvn(d).slice(0, 5)}</b> <span class="nm" style="display:inline">${wd[new Date(d + 'T00:00:00Z').getUTCDay()]}</span></td>` +
+    DAY_COLS.map(([k, , dec, mode, net]) => cell(k, d, dec, mode, net)).join('') + '</tr>').join('');
+  $('tblDay').innerHTML = head + '<tbody>' + (body || '<tr><td class="empty">Chưa có số liệu</td></tr>') + '</tbody>';
+  inp.onchange = renderDays;
+  $('dayN').querySelectorAll('button').forEach(b => { b.setAttribute('aria-pressed', String(+b.dataset.n === dayN)); b.onclick = () => { dayN = +b.dataset.n; renderDays(); }; });
+}
+
 // Tính trả góp
 function amortize(P, years, r1, m1, r2, method) {
   const n = Math.round(years * 12), rows = [];
@@ -982,7 +1074,7 @@ function renderLsAuto() {
     <span>Nguồn: <b>${esc(RA.nguon)}</b>${RA.nguon_cap_nhat ? ', cập nhật ' + esc(RA.nguon_cap_nhat) : ''}</span>`;
   const head = '<thead><tr><th data-k="name"' + (lsSort === 'name' ? ` aria-sort="${lsAsc ? 'ascending' : 'descending'}"` : '') + '>Ngân hàng</th>' +
     terms.map(k => `<th data-k="${k}"${k === lsSort ? ` aria-sort="${lsAsc ? 'ascending' : 'descending'}"` : ''}>${k} tháng</th>`).join('') + '</tr></thead>';
-  const body = rows.map(r => `<tr><td><b>${esc(r.name)}</b>${r.big4 ? ' <span class="pill">Big4</span>' : ''}</td>` +
+  const body = rows.map(r => `<tr class="pick" data-b="${esc(r.name)}" aria-selected="${r.name === lsBank}"><td><b>${esc(r.name)}</b>${r.big4 ? ' <span class="pill">Big4</span>' : ''}</td>` +
     terms.map(k => { const x = r.v[k]; return `<td>${x == null ? '<span class="flat">–</span>' : x === max[k] ? `<b class="up">${fmt(x, 2)}</b>` : fmt(x, 2)}</td>`; }).join('') + '</tr>').join('');
   $('tblLs').innerHTML = head + '<tbody>' + body + '</tbody>';
   $('tblLs').querySelectorAll('th').forEach(th => th.onclick = () => {
@@ -994,6 +1086,35 @@ function renderLsAuto() {
   const colors = { 'Tại quầy': '--s1', 'Online': '--s2', 'Tổng hợp': '--s3' };
   const ds = kinds.map(k => line(k + ' – TB 12 tháng', rateAvgHistory(k), css(colors[k] || '--s4'), { pointRadius: 3 }));
   draw('cLs', { type: 'line', data: { datasets: ds }, options: baseOpts('%/năm', { legend: true, dec: 2, tickDec: 1 }) });
+  $('tblLs').querySelectorAll('tr.pick').forEach(t => t.onclick = () => { lsBank = t.dataset.b; renderLs(); document.getElementById('lsDetail').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); });
+  renderLsBank();
+}
+let lsBank = null;
+function renderLsBank() {
+  const hist = RA.lich_su_12t || {};
+  const banks = [...new Set(Object.keys(hist).map(k => k.split('|')[1]))].sort((a, b) => a.localeCompare(b, 'vi'));
+  if (!banks.length) { $('lsDetail').hidden = true; return; }
+  $('lsDetail').hidden = false;
+  if (!banks.includes(lsBank)) lsBank = banks.includes('Vietcombank') ? 'Vietcombank' : banks[0];
+  $('lsBank').innerHTML = banks.map(b => `<option${b === lsBank ? ' selected' : ''}>${esc(b)}</option>`).join('');
+  $('lsBank').onchange = () => { lsBank = $('lsBank').value; renderLs(); };
+  $('lsDetTitle').textContent = 'Chi tiết theo ngày: ' + lsBank;
+  const colors = { 'Tại quầy': '--s1', 'Online': '--s2', 'Tổng hợp': '--s3' };
+  const kinds = Object.keys(RA.bang);
+  const ds = [];
+  const parts = [];
+  for (const k of kinds) {
+    const h = hist[k + '|' + lsBank];
+    if (!h) continue;
+    const a = Object.entries(h).sort();
+    ds.push(line(`${k}`, a, css(colors[k] || '--s4'), { pointRadius: 3, stepped: true }));
+    const last = a.at(-1)[1], first = a[0][1];
+    const changes = a.filter((x, i) => i && x[1] !== a[i - 1][1]).length;
+    parts.push(`<span>${k}: <b>${fmt(last, 2)}%</b>${a.length > 1 ? ` (${last === first ? 'không đổi' : (last > first ? '+' : '') + fmt(last - first, 2) + ' điểm'} từ ${dvn(a[0][0])}${changes ? `, đổi ${changes} lần` : ''})` : ''}</span>`);
+  }
+  ds.push(line('TB tại quầy các NH', rateAvgHistory('Tại quầy'), css('--muted'), { borderDash: [5, 4], pointRadius: 0 }));
+  $('lsBankStats').innerHTML = parts.join('');
+  draw('cLsBank', { type: 'line', data: { datasets: ds }, options: baseOpts('%/năm', { legend: true, dec: 2, tickDec: 1 }) });
 }
 function renderLsManual() {
   $('lsKinds').innerHTML = ''; $('lsStats').innerHTML = '';
@@ -1223,7 +1344,7 @@ function render() {
   simple('cBac', 'bac', 'Bạc', 'USD/oz', css('--s7'), 2);
   simple('cDau', 'dau', 'Dầu Brent', 'USD/thùng', css('--s2'), 2);
   simple('cSp', 'sp500', 'S&P 500', 'điểm', css('--s3'));
-  renderFed(s); renderLaiVay(); initCalc();
+  renderFed(s); renderLnh(s); renderLaiVay(); initCalc(); renderDays();
   renderBds(s); renderLs();
 }
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => render());
