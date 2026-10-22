@@ -48,7 +48,7 @@
 .hero2 .form-card{position:sticky;top:96px;margin-top:6px}
 @media (max-width:980px){.hero2 .container{grid-template-columns:1fr}.hero2 .form-card{position:static}.hero-nums2{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.hero2{padding:20px 0 46px}.banner{margin:12px -4px 14px;border-radius:16px}.banner .cap{font-size:12px;left:8px;bottom:8px}.hero2 .sub{font-size:16px}}
-/* Sự kiện: không lặp ảnh, chỉ thông tin + đếm ngược + giữ chỗ */
+/* Sự kiện: không lặp ảnh, chỉ thông tin + đếm ngược + đăng ký tham dự */
 .ev-wrap{max-width:1000px;margin:0 auto}
 .ev-wrap .ev-bar{margin-top:0}
 .ev-note{max-width:1000px;margin:14px auto 0;text-align:center;font-size:13px;color:rgba(255,255,255,.7)}
@@ -134,7 +134,7 @@
 </head>
 <body>
 
-<div class="topbar" id="topbar">📅 Kick-off Sun Saphia Residence · 8:30 thứ Sáu 23/10 · còn <span class="tcd" id="topcd">-- ngày</span> <a href="#su-kien">Giữ chỗ tham dự</a></div>
+<div class="topbar" id="topbar">📅 Kick-off Sun Saphia Residence · 8:30 thứ Sáu 23/10 · còn <span class="tcd" id="topcd">-- ngày</span> <a href="#su-kien">Đăng ký tham dự</a></div>
 
 <nav class="nav" aria-label="Mục trên trang">
   <div class="container">
@@ -159,7 +159,7 @@
       <span class="eyebrow">Sun Property · thành viên Sun Group · Đà Nẵng</span>
       <h1>Sun Saphia Residence – <em>Đón ánh dương, giao hòa nhịp sống</em></h1>
       <p class="sub">Căn hộ trên trục biển Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, ra biển Sơn Thủy – Mỹ Khê khoảng 400 m qua công viên ven biển.</p>
-      <a class="banner" href="#su-kien" aria-label="Sự kiện Kick-off Sun Saphia Residence 23/10 – giữ chỗ tham dự">
+      <a class="banner" href="#su-kien" aria-label="Sự kiện Kick-off Sun Saphia Residence 23/10 – đăng ký tham dự">
         <picture><source media="(max-width:640px)" srcset="{{IMG3}}kick-off-sun-saphia-23-10-900.jpg"><img src="{{IMG3}}kick-off-sun-saphia-23-10-1200.jpg" width="1200" height="675" alt="Sự kiện Kick-off Sun Saphia Residence “Đón ánh dương – Giao hòa nhịp sống”: 8:30 thứ Sáu 23/10/2026 tại KOI Resorts & Residence Da Nang, 11 Trường Sa, phường Ngũ Hành Sơn, TP. Đà Nẵng" fetchpriority="high" decoding="async"></picture>
         <span class="cap">📅 <b>8:30 · Thứ Sáu 23/10/2026</b> · KOI Resorts &amp; Residence</span>
       </a>
@@ -208,11 +208,11 @@
       <div class="ev-bar">
         <div><p class="ev-cdl">Còn lại</p><div class="ev-cd" id="evCd" aria-label="Thời gian còn lại đến sự kiện"><div><b id="evD">–</b><span>ngày</span></div><div><b id="evH">–</b><span>giờ</span></div><div><b id="evM">–</b><span>phút</span></div></div></div>
         <form class="ev-form" data-form="Đăng ký sự kiện Kick-off Sun Saphia 23/10" aria-labelledby="ev-form-title">
-          <h3 id="ev-form-title">Giữ chỗ tham dự <small>· nhận thư mời ghi tên qua Zalo, số lượng chỗ có hạn</small></h3>
+          <h3 id="ev-form-title">Đăng ký tham dự <small>· nhận thư mời ghi tên qua Zalo, số lượng chỗ có hạn</small></h3>
           <label class="sr" for="ev-name">Họ và tên</label><input id="ev-name" name="name" placeholder="Họ và tên" autocomplete="name">
           <label class="sr" for="ev-phone">Số điện thoại</label><input id="ev-phone" name="phone" type="tel" placeholder="Số điện thoại / Zalo *" autocomplete="tel" inputmode="tel" required>
           <label class="sr" for="ev-n">Số người tham dự</label><select id="ev-n" name="so_nguoi"><option value="1 người">1 người tham dự</option><option value="2 người">2 người tham dự</option><option value="3–4 người">3–4 người tham dự</option></select>
-          <button class="btn btn-gold" type="submit">Giữ chỗ 23/10 →</button>
+          <button class="btn btn-gold" type="submit">Đăng ký tham dự →</button>
         </form>
       </div>
       <p class="ev-note">Ở xa chưa về Đà Nẵng kịp? Để lại số, em gửi tài liệu sự kiện và gọi video giới thiệu dự án qua Zalo.</p>
