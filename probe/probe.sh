@@ -1,31 +1,21 @@
 #!/usr/bin/env bash
 UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
-urls=(
- "https://dulieu.nguoiquansat.vn/lai-suat-lien-ngan-hang"
- "https://dulieu.nguoiquansat.vn/lai-suat"
- "https://24hmoney.vn/lai-suat-lien-ngan-hang"
- "https://vnsignal.vn/vi-mo/lai-suat-lien-ngan-hang"
- "https://cafef.vn/du-lieu/lai-suat-lien-ngan-hang.chn"
- "https://webgia.com/lai-suat/lien-ngan-hang/"
- "https://www.sbv.gov.vn/webcenter/portal/vi/menu/rm/ls/lslnh"
- "https://sbv.gov.vn/vi/lãi-suất-thị-trường-liên-ngân-hàng"
-)
-for u in "${urls[@]}"; do
-  echo "=================== $u"
-  curl -sSL -m 25 -A "$UA" -o /tmp/p.html -w "HTTP %{http_code} size %{size_download}\n" "$u" || { echo CURL FAIL; continue; }
-  python3 - <<'PY'
+curl -sSL -m 30 -A "$UA" -o /tmp/sbv.html "https://sbv.gov.vn/vi/lãi-suất-thị-trường-liên-ngân-hàng"
+curl -sSL -m 30 -A "$UA" -o /tmp/vns.html "https://vnsignal.vn/vi-mo/lai-suat-lien-ngan-hang"
+python3 - <<'PY'
 import re,html
-t=open('/tmp/p.html',encoding='utf-8',errors='ignore').read()
-def clean(x): return re.sub(r'\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',x))).strip()
-print('title:', clean((re.findall(r'<title>(.*?)</title>',t,flags=re.S) or [''])[0])[:120])
-for m in list(re.finditer(r'(?i)qua đêm|liên ngân hàng|overnight',t))[:3]:
-    print('  ctx:', clean(t[max(0,m.start()-300):m.start()+500])[:500])
-tables=re.findall(r'<table.*?</table>',t,flags=re.S)
-for ti,tb in enumerate(tables[:4]):
-    rows=re.findall(r'<tr.*?</tr>',tb,flags=re.S)
-    print(f'--- TABLE {ti}: {len(rows)} rows')
-    for r in rows[:5]+rows[-1:]:
-        print('   ',[clean(c)[:30] for c in re.findall(r'<t[hd][^>]*>(.*?)</t[hd]>',r,flags=re.S)])
-for a in sorted(set(re.findall(r'https?://[\w.-]*api[\w./?=&%-]*',t)))[:8]: print('  api?',a)
+t=open('/tmp/sbv.html',encoding='utf-8',errors='ignore').read()
+print('===== SBV')
+for kw in ['laiSuat','thoihan','doanhSo','fetch(','ajax','/o/','api/']:
+    for m in list(re.finditer(re.escape(kw),t))[:4]:
+        print(f'[{kw}]', t[max(0,m.start()-250):m.start()+250].replace('\n',' ')[:500])
+        print()
+v=open('/tmp/vns.html',encoding='utf-8',errors='ignore').read()
+print('===== VNSIGNAL')
+for kw in ['qua đêm','Qua đêm','overnight','"ON"','1 tuần','vnibor','VNIBOR']:
+    for m in list(re.finditer(re.escape(kw),v))[:3]:
+        print(f'[{kw}]', v[max(0,m.start()-200):m.start()+400].replace('\n',' ')[:600])
+        print()
+for m in re.findall(r'(\{[^{}]{0,80}"date"[^{}]{0,200}\})', v)[:5]: print('JSON?', m)
+print('next_data' , '__NEXT_DATA__' in v, 'next_f', v.count('self.__next_f'))
 PY
-done
