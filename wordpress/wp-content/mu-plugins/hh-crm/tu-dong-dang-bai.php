@@ -67,15 +67,38 @@ function hh_auto_posts_run( $force = false ) {
 		}
 	}
 	$done = (array) get_option( 'hh_auto_posts_done', array() );
+	$revs = (array) get_option( 'hh_auto_posts_rev', array() ); // Phiên bản nội dung đã áp dụng cho từng bài.
 	$tz   = new DateTimeZone( 'Asia/Ho_Chi_Minh' );
 	$made = 0;
 	foreach ( (array) $index['posts'] as $item ) {
 		$slug = sanitize_title( (string) ( $item['slug'] ?? '' ) );
 		$at   = date_create( (string) ( $item['publish'] ?? '' ), $tz );
 		$file = (string) ( $item['file'] ?? '' );
-		if ( ! $slug || ! $at || ! preg_match( '#^[a-z0-9/_.-]+\.txt$#', $file ) || isset( $done[ $slug ] ) || $at->getTimestamp() > time() ) {
+		$rev  = (int) ( $item['rev'] ?? 1 );
+		if ( ! $slug || ! $at || ! preg_match( '#^[a-z0-9/_.-]+\.txt$#', $file ) || $at->getTimestamp() > time() ) {
 			continue;
 		}
+		if ( isset( $done[ $slug ] ) ) {
+			// Bài đã đăng có bản sửa mới (rev tăng): cập nhật nếu chưa ai sửa tay.
+			if ( ! is_int( $done[ $slug ] ) || $rev <= (int) ( $revs[ $slug ] ?? 1 ) ) {
+				continue;
+			}
+			$pack = hh_auto_posts_get( $file );
+			$n    = is_wp_error( $pack ) ? $pack : hh_quick_post_decode( $pack );
+			$res  = is_wp_error( $n ) ? $n : hh_auto_post_update( $done[ $slug ], $n );
+			if ( is_wp_error( $res ) && 'http' === $res->get_error_code() ) {
+				hh_auto_posts_log( $slug . ': ' . $res->get_error_message() );
+				continue; // Lỗi mạng – thử lại lượt sau.
+			}
+			$revs[ $slug ] = $rev;
+			hh_auto_posts_log( is_wp_error( $res ) ? $slug . ': không cập nhật – ' . $res->get_error_message() : 'Đã cập nhật: ' . get_the_title( $res ) );
+			$made += is_wp_error( $res ) ? 0 : 1;
+			if ( $made >= 3 ) {
+				break;
+			}
+			continue;
+		}
+		$revs[ $slug ] = $rev;
 		$pack = hh_auto_posts_get( $file );
 		$n    = is_wp_error( $pack ) ? $pack : hh_quick_post_decode( $pack );
 		if ( is_wp_error( $n ) ) {
@@ -96,6 +119,7 @@ function hh_auto_posts_run( $force = false ) {
 		}
 	}
 	update_option( 'hh_auto_posts_done', $done, false );
+	update_option( 'hh_auto_posts_rev', $revs, false );
 	if ( $made ) {
 		do_action( 'litespeed_purge_all' ); // Xoá bộ nhớ đệm LiteSpeed để bài mới hiện ngay.
 	}
@@ -135,6 +159,33 @@ function hh_auto_post_publish( $n, $ts ) {
 		)
 	);
 	update_post_meta( $id, '_hh_auto_post', current_time( 'mysql' ) );
+	update_post_meta( $id, '_hh_news_hash', md5( get_post_field( 'post_content', $id ) ) );
+	return $id;
+}
+
+/**
+ * Cập nhật bài đã tự đăng theo gói mới: chỉ khi bài do web tự đăng và nội dung chưa bị sửa tay.
+ * Giữ nguyên ngày đăng, đường dẫn và ảnh đại diện.
+ */
+function hh_auto_post_update( $id, $n ) {
+	$post = get_post( $id );
+	if ( ! $post || 'post' !== $post->post_type || ! get_post_meta( $id, '_hh_auto_post', true ) ) {
+		return new WP_Error( 'missing', 'bài không còn hoặc không do web tự đăng.' );
+	}
+	if ( get_post_meta( $id, '_hh_news_hash', true ) !== md5( $post->post_content ) ) {
+		return new WP_Error( 'edited', 'bài đã được sửa tay (giữ nguyên).' );
+	}
+	if ( ! empty( $n['kind'] ) || $n['slug'] !== $post->post_name ) {
+		return new WP_Error( 'kind', 'gói không khớp bài.' );
+	}
+	$n['content'] = wp_kses_post( (string) $n['content'] );
+	$keep         = array( 'post_status' => $post->post_status, 'post_date' => $post->post_date, 'post_date_gmt' => $post->post_date_gmt );
+	wp_update_post( array( 'ID' => $id, 'post_status' => 'draft' ) ); // Trình Nhập nhanh chỉ ghi vào bản nháp.
+	$new = hh_quick_post_create( $n );
+	wp_update_post( array( 'ID' => $id ) + $keep + array( 'edit_date' => true ) );
+	if ( is_wp_error( $new ) ) {
+		return $new;
+	}
 	update_post_meta( $id, '_hh_news_hash', md5( get_post_field( 'post_content', $id ) ) );
 	return $id;
 }

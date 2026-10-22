@@ -41,7 +41,7 @@ foreach ( $posts as $n ) {
 	unset( $n['schedule'], $n['week'] );
 	$file = 'bai/' . $n['slug'] . '.txt';
 	file_put_contents( $out . '/' . $file, chunk_split( 'HHBAI1:' . base64_encode( json_encode( $n, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ), 1000, "\n" ) );
-	$by[ $n['slug'] ] = array( 'slug' => $n['slug'], 'title' => $n['title'], 'publish' => $pub, 'file' => $file );
+	$by[ $n['slug'] ] = array( 'slug' => $n['slug'], 'title' => $n['title'], 'publish' => $pub, 'file' => $file ) + ( empty( $n['rev'] ) ? array() : array( 'rev' => (int) $n['rev'] ) ); // rev tăng → web cập nhật bài đã đăng (nếu chưa sửa tay).
 	echo "$pub  {$n['slug']}\n";
 }
 uasort( $by, static fn( $a, $b ) => strcmp( $a['publish'], $b['publish'] ) );

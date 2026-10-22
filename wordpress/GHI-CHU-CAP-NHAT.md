@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.20** + plugin Hoàng Hiệp CRM **2.20.64**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.20** + plugin Hoàng Hiệp CRM **2.20.65**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.65: tự đăng bài cập nhật được bài đã đăng
+- Mục Tự đăng bài giờ cập nhật được bài đã đăng khi có bản sửa mới (giữ ngày đăng, đường dẫn, ảnh). Bài anh đã sửa tay thì giữ nguyên, nhật ký ghi "đã được sửa tay".
+- Bài cao tốc nội thị 19/10 sẽ tự thêm phần "Cập nhật 22/10: hai mặt cắt điển hình và quỹ đất dọc tuyến"; bài mới về mặt cắt 138 m, quỹ đất, TOD tự đăng 11:00 ngày 22/10.
 
 ## Có gì mới – plugin 2.20.64, giao diện 2.15.20: trang tòa C3 Capital Square
 - Trang mới **Tòa C3 Capital Square Đà Nẵng** (/du-an/capital-square-toa-c3/): phân tầng 26 tầng (16 shophouse, căn sân vườn tầng 4, penthouse tầng 26), bảng 9 căn tầng điển hình kèm diện tích thông thủy và hướng nhìn, 4 ảnh có nhãn Hoàng Hiệp.

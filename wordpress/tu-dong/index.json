@@ -1,11 +1,12 @@
 {
-    "updated": "2026-10-21T05:26:14+00:00",
+    "updated": "2026-10-22T02:13:48+00:00",
     "posts": [
         {
             "slug": "cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen-tien-do",
             "title": "Cao tốc nội thị Đà Nẵng – Chu Lai gần 90 km: hướng tuyến, quy mô, tiến độ và tác động tới Sun Saphia Residence",
             "publish": "2026-10-19 15:00",
-            "file": "bai/cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen-tien-do.txt"
+            "file": "bai/cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen-tien-do.txt",
+            "rev": 2
         },
         {
             "slug": "studio-ven-bien-da-nang-gia-mua-gia-thue-2026",
@@ -24,6 +25,12 @@
             "title": "Đường sắt đô thị sân bay – Mỹ Khê – Hội An: tiến độ mới nhất, căn hộ ven biển như Sun Saphia Residence hưởng lợi",
             "publish": "2026-10-22 08:00",
             "file": "bai/duong-sat-do-thi-san-bay-my-khe-hoi-an-bat-dong-san-huong-loi.txt"
+        },
+        {
+            "slug": "mat-cat-cao-toc-noi-thi-da-nang-chu-lai-quy-dat-tod",
+            "title": "Mặt cắt cao tốc nội thị Đà Nẵng – Chu Lai: đoạn 138 m, đoạn khoảng 170 m và quỹ đất dọc sông Trường Giang",
+            "publish": "2026-10-22 11:00",
+            "file": "bai/mat-cat-cao-toc-noi-thi-da-nang-chu-lai-quy-dat-tod.txt"
         },
         {
             "slug": "gia-sun-saphia-residence-bao-nhieu",
