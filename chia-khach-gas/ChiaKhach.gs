@@ -9,7 +9,7 @@
  *     3 ngày chưa chuyển đổi (hẹn gặp / khách nóng / đã chốt) → thu hồi, giao bạn khác.
  *     Mọi hạn chỉ tính trong giờ làm việc 7h–21h (từ 21h tới 7h sáng hôm sau không tính).
  *  4. Mỗi tối gửi báo cáo cho quản lý.
- *  5. Data telesale / dự án khác: dán vào tab "NhapData" (hoặc các tab Sheet "DATA CHẠY GOOGLE") → bot tự chia
+ *  5. Data telesale / dự án khác: dán vào tab "NhapData" (nguyên dòng thô cũng được) (hoặc các tab Sheet "DATA CHẠY GOOGLE") → bot tự chia
  *     như khách thường, nhưng xoay vòng RIÊNG và giới hạn RIÊNG: không làm mất lượt, không chặn khách FourS / Saphia.
  * Thêm: nhắc trước hạn · khách quay lại về đúng người đang chăm · không ôm quá 5 khách chưa báo cáo ·
  *       bị thu hồi 3 lần/ngày thì tự tạm dừng · đóng khách phải ghi lý do và quản lý duyệt ·
@@ -63,7 +63,8 @@ var T_KHACH = ['id', 'luc_vao', 'ten', 'sdt', 'nhu_cau', 'nguon', 'trang', 'tran
 /* luc_giao_cuoi: lượt FourS/Saphia · luc_giao_khac: lượt dự án khác (2 vòng xoay riêng) */
 var T_SALE = ['chat_id', 'ten', 'username', 'trang_thai', 'luc_giao_cuoi', 'them_luc', 'luc_giao_khac'];
 var T_NK = ['thoi_gian', 'nguoi', 'hanh_dong', 'khach', 'chi_tiet'];
-var T_NHAP = ['Tên', 'SĐT', 'Dự án', 'Ghi chú', 'Bot ghi (đừng sửa)'];
+var HD_NHAP = '⬇️ Dán data từ dòng 2 trở xuống (copy nguyên dòng từ tab dự án cũng được, hoặc: Tên | SĐT | Dự án | Ghi chú). Bot chia xong tự chuyển dòng sang tab DaChia.';
+var T_DACHIA = ['Kết quả', 'Lúc xử lý', 'Dữ liệu gốc →'];
 
 /* Trạng thái khách: cho_nhan → da_nhan → dang_cham | chuyen_doi → chot ; cho_ly_do → cho_duyet_dong → dong ;
    cho_giao (đội đang quá tải, chờ chia) ; cho_quan_ly (hết sale) */
@@ -275,10 +276,10 @@ function chayMoiPhut() {
 
 /* Bản cũ chưa có cột mới (nhom, luc_giao_khac): ghi thêm tiêu đề 1 lần */
 function capNhatTieuDe_() {
-  if (P().getProperty('TIEU_DE') === '3') return;
-  [['Sale', T_SALE], ['Khach', T_KHACH], ['NhapData', T_NHAP]].forEach(function (x) { tab_(x[0], x[1]).getRange(1, 1, 1, x[1].length).setValues([x[1]]); });
-  tab_('NhapData', T_NHAP).getRange('B:B').setNumberFormat('@');   // giữ số 0 đầu khi dán
-  P().setProperty('TIEU_DE', '3');
+  if (P().getProperty('TIEU_DE') === '4') return;
+  [['Sale', T_SALE], ['Khach', T_KHACH], ['DaChia', T_DACHIA]].forEach(function (x) { tab_(x[0], x[1]).getRange(1, 1, 1, x[1].length).setValues([x[1]]); });
+  var nd = tab_('NhapData'); if (!nd.getLastRow()) nd.getRange(1, 1).setValue(HD_NHAP);
+  P().setProperty('TIEU_DE', '4');
 }
 
 /* --- khách mới từ CRM --- */
@@ -386,31 +387,63 @@ function docDongKhac_(r, tab) {
     utm: nguon, web: url, trang: url.split('?')[0].slice(0, 200), nhom: 'khac', so_lan: 1};
 }
 
-/* --- tab NhapData: quản lý dán data (Tên | SĐT | Dự án | Ghi chú), bot chia dần, ghi kết quả vào cột E ---
-   Mỗi phút xử lý tối đa 30 dòng. Khách chia kiểu dự án khác: vòng riêng, không ảnh hưởng FourS / Saphia. */
+/* --- tab NhapData: quản lý dán data, bot chia dần ---
+   Dán kiểu gì cũng được: copy nguyên dòng thô từ tab dự án (giờ | tên | email/SĐT lẫn lộn | link web | IP | FORM…)
+   hoặc gọn: Tên | SĐT | Dự án | Ghi chú. Bot tự tìm SĐT, tên, dự án (theo link web), ghi chú.
+   Xử lý xong dòng nào thì chuyển dòng đó sang tab DaChia kèm kết quả. Mỗi phút tối đa 30 dòng.
+   Khách chia kiểu dự án khác: vòng riêng, giới hạn riêng, không ảnh hưởng FourS / Saphia. */
+var TEN_DU_AN = {'sun-danangdowntown': 'Downtown', 'sun-spanatower': 'Spana Tower', 'cora-tower': 'Cora Tower', 'fpt-city': 'FPT City',
+  'filmore-danang': 'Filmore', 'legend-city-danang': 'Legend City', 'peninsula-danang': 'Peninsula', 'masteri-riveradanang': 'Masteri',
+  'mia-plaza': 'Mia Plaza', 'hiyori-aquatower': 'Hiyori', 'estuarydanang': 'Estuary', 'fusiondanang': 'Fusion', 'sun-fours-tower': 'FourS Tower',
+  'sun-saphia-residence': 'Sun Saphia'};
+function duAnTuLink_(url) {
+  var d = String(url).replace(/^https?:\/\/(www\.)?/i, '').split(/[\/?#]/)[0].toLowerCase(); if (!d) return '';
+  var g = d.replace(/\.(com|vn|net|org)(\.vn)?$/, ''); return TEN_DU_AN[g] || d;
+}
+function docDongNhap_(r) {
+  var sdt = '', ten = '', url = '', ghi = [];
+  r.forEach(function (o) {
+    if (o instanceof Date) return;
+    var x = String(o == null ? '' : o).trim(); if (!x) return;
+    if (/^\d{4}-\d{1,2}-\d{1,2}([ T]\d{1,2}:\d{2}(:\d{2})?)?$/.test(x) || /^\d{1,2}\/\d{1,2}\/\d{2,4}( \d{1,2}:\d{2}(:\d{2})?)?$/.test(x)) return;  // ngày giờ
+    if (/^\d{1,3}(\.\d{1,3}){3}$/.test(x) || /^FORM\d*$/i.test(x) || x.indexOf('@') > -1) return;                       // IP, mã form, email
+    if (/^https?:\/\//i.test(x)) { if (!url) url = x; return; }
+    if (/^[a-z0-9.-]+\.(com|vn|net|org|ai)$/i.test(x)) return;                                                         // chatgpt.com…
+    var p = normPhone(x);
+    if (/^[\d\s.+\-()']+$/.test(x) && /^0[1-9]\d{8}$/.test(p)) { if (!sdt) sdt = p; return; }
+    if (!ten) ten = x; else if (ghi.indexOf(x) < 0) ghi.push(x);
+  });
+  var da = url ? duAnTuLink_(url) : '';
+  if (!da && ghi.length && ghi[0].length <= 30) da = ghi.shift();   // kiểu gọn: cột thứ 3 là dự án
+  return {sdt: sdt, ten: ten.slice(0, 60), du_an: da, ghi_chu: ghi.join(' · ').slice(0, 200)};
+}
 function nhapData_() {
-  var sh = tab_('NhapData', T_NHAP), n = sh.getLastRow(); if (n < 2) return;
-  var v = sh.getRange(2, 1, n - 1, 5).getValues(), tatCa = null, lam = 0, dem = Number(P().getProperty('DEM') || 0);
+  var sh = tab_('NhapData'), n = sh.getLastRow(); if (!n) { sh.getRange(1, 1).setValue(HD_NHAP); return; }
+  var w = Math.max(1, Math.min(26, sh.getLastColumn())), v = sh.getRange(1, 1, n, w).getValues();
+  var dc = tab_('DaChia', T_DACHIA), xong = [], tatCa = null, lam = 0, dem = Number(P().getProperty('DEM') || 0);
   for (var i = 0; i < v.length && lam < 30; i++) {
-    var r = v[i]; if (String(r[4]).trim() || (!String(r[0]).trim() && !String(r[1]).trim())) continue;
+    var r = v[i];
+    if (!r.some(function (x) { return String(x).trim(); }) || String(r[0]).indexOf('⬇️') === 0) continue;
     lam++; tatCa = tatCa || rows_('Khach', T_KHACH);
-    var raw = String(r[1]).trim(), m = raw.match(SO_RE), sdt = normPhone(m ? m[0] : raw), kq;
-    if (!/^0[1-9]\d{8}$/.test(sdt)) kq = '❌ Số không hợp lệ';
+    var c = docDongNhap_(r), kq;
+    if (!c.sdt) kq = '❌ Không thấy số điện thoại hợp lệ';
     else {
-      var cu = tatCa.filter(function (x) { return x.sdt === sdt && (DANG_GIU.test(x.trang_thai) || /chot|cho_giao|cho_quan_ly/.test(x.trang_thai)); }).pop();
-      if (cu) kq = '⚠️ Trùng ' + cu.id + (cu.ten_sale ? ' – ' + cu.ten_sale + ' đang giữ' : '') + ', không chia';
+      var cu = tatCa.filter(function (x) { return x.sdt === c.sdt && (DANG_GIU.test(x.trang_thai) || /chot|cho_giao|cho_quan_ly/.test(x.trang_thai)); }).pop();
+      if (cu) kq = '⚠️ Trùng ' + cu.id + (cu.ten_sale ? ' – ' + cu.ten_sale + ' đang giữ' : ' (đang chờ giao)') + ', không chia';
       else {
         dem++; P().setProperty('DEM', String(dem));
-        var da = String(r[2] || '').trim(), gc = String(r[3] || '').trim();
-        var k = {id: 'K' + dem, luc_vao: nowD(), ten: String(r[0] || '').trim().slice(0, 60), sdt: sdt, nhu_cau: [da ? 'Dự án: ' + da : '', gc].filter(String).join(' · ').slice(0, 200),
+        var k = {id: 'K' + dem, luc_vao: nowD(), ten: c.ten, sdt: c.sdt, nhu_cau: [c.du_an ? 'Dự án: ' + c.du_an : '', c.ghi_chu].filter(String).join(' · ').slice(0, 200),
           nguon: 'Data telesale', trang: '', trang_thai: 'moi', da_qua: '', so_luot: 0, so_bao_cao: 0, nhom: 'khac'};
-        save_('Khach', T_KHACH, k); log_('quản lý', 'nhập data', k.id, che(sdt)); tatCa.push(k);
+        save_('Khach', T_KHACH, k); log_('quản lý', 'nhập data', k.id, che(c.sdt)); tatCa.push(k);
         giao_(k);
-        kq = k.id + (k.trang_thai === 'cho_nhan' ? ' → ' + k.ten_sale + ' ' + fmt(k.luc_giao) : k.trang_thai === 'cho_giao' ? ' chờ giao (sale đang đủ khách)' : ' chuyển quản lý');
+        kq = '✅ ' + k.id + (k.trang_thai === 'cho_nhan' ? ' → ' + k.ten_sale : k.trang_thai === 'cho_giao' ? ' chờ giao (sale đang đủ khách, tự giao khi có người báo cáo)' : ' chuyển quản lý');
       }
     }
-    sh.getRange(i + 2, 5).setValue(kq);
+    dc.appendRow([kq, nowD()].concat(r.map(function (x) { return typeof x === 'string' && /^0\d{8,}$/.test(x) ? "'" + x : x; })));
+    xong.push(i + 1);
   }
+  for (var j = xong.length - 1; j >= 0; j--) sh.deleteRow(xong[j]);
+  if (!sh.getLastRow()) sh.getRange(1, 1).setValue(HD_NHAP);
 }
 
 /* Thêm khách bằng tay để thử: themKhachThu() */

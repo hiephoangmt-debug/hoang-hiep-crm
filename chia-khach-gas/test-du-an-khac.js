@@ -5,7 +5,7 @@ const RD=Date; class FD extends RD{constructor(...a){a.length?super(...a):super(
 const gs=x=>typeof x==='string'&&x[0]==="'"?x.slice(1):(typeof x==='string'&&/^0\d{8,}$/.test(x)?Number(x):x); // giống Google Sheet
 function Sheet(name){this.name=name;this.d=[];}
 Sheet.prototype={getLastRow(){return this.d.length},getLastColumn(){return Math.max(0,...this.d.map(r=>r.length))},
- setFrozenRows(){},hideSheet(){},
+ setFrozenRows(){},hideSheet(){},deleteRow(r){this.d.splice(r-1,1)},
  appendRow(r){this.d.push(r.map(gs))},
  getRange(r,c,nr=1,nc=1){const sh=this;return{getValues(){const o=[];for(let i=0;i<nr;i++){const row=sh.d[r-1+i]||[];const x=[];for(let j=0;j<nc;j++)x.push(row[c-1+j]===undefined?'':row[c-1+j]);o.push(x);}return o},
   setValues(v){v.forEach((row,i)=>{sh.d[r-1+i]=sh.d[r-1+i]||[];row.forEach((x,j)=>sh.d[r-1+i][c-1+j]=gs(x))});return this},setValue(x){this.setValues([[x]])},setNumberFormat(){return this}}}};
@@ -95,7 +95,7 @@ ok(vm.runInContext("rows_('Khach',T_KHACH).some(function(k){return k.sdt==='0944
 { const all=()=>vm.runInContext("rows_('Khach',T_KHACH)",ctx);
   // dọn: đóng hết khách đang giữ để bắt đầu sạch
   vm.runInContext("rows_('Khach',T_KHACH).forEach(function(k){k.trang_thai='dong';save_('Khach',T_KHACH,k);})",ctx);
-  const nd=active.s['NhapData']; ok(nd&&nd.d[0][4]==='Bot ghi (đừng sửa)','tab NhapData tự tạo với tiêu đề');
+  const nd=active.s['NhapData']; ok(nd&&/Dán data/.test(nd.d[0][0]),'tab NhapData tự tạo, có dòng hướng dẫn');
   for(let i=0;i<20;i++) nd.appendRow(['Data '+i,"'09120000"+String(i).padStart(2,'0'),'Downtown','khách cũ 2025']);
   nd.appendRow(['Sai số','12345','','']); nd.appendRow(['Trùng','0912000000','','']);
   const lgc0={};['1','2','3'].forEach(c=>lgc0[c]=ms(S(c).luc_giao_cuoi));
@@ -104,8 +104,10 @@ ok(vm.runInContext("rows_('Khach',T_KHACH).some(function(k){return k.sdt==='0944
   const dangGiao=kh.filter(k=>k.trang_thai==='cho_nhan'), cho=kh.filter(k=>k.trang_thai==='cho_giao');
   ok(dangGiao.length===9&&cho.length===11,'dán 20 số, 3 sale: mỗi người nhận 3 (giới hạn riêng), 11 số chờ ('+dangGiao.length+'/'+cho.length+')');
   ok(['1','2','3'].every(c=>dangGiao.filter(k=>k.nguoi_giu===c).length===3),'chia đều 3-3-3');
-  ok(/^K\d+ → /.test(nd.d[1][4])&&/chờ giao/.test(nd.d[20][4]),'cột E ghi kết quả: "'+nd.d[1][4]+'" / "'+nd.d[20][4]+'"');
-  ok(/không hợp lệ/.test(nd.d[21][4])&&/Trùng K/.test(nd.d[22][4]),'số sai và số trùng được ghi rõ, không chia');
+  const dc=active.s['DaChia'];
+  ok(dc.d.length===23&&/^✅ K\d+ → /.test(dc.d[1][0])&&/chờ giao/.test(dc.d[20][0])&&/Dự án: Downtown · khách cũ/.test(kh[0].nhu_cau),'dòng xử lý xong chuyển sang DaChia kèm kết quả: "'+dc.d[1][0]+'" / "'+dc.d[20][0]+'"');
+  ok(/Không thấy số/.test(dc.d[21][0])&&/Trùng K/.test(dc.d[22][0]),'số sai và số trùng được ghi rõ, không chia');
+  ok(nd.d.length===1&&/Dán data/.test(nd.d[0][0]),'NhapData còn lại dòng hướng dẫn, sẵn sàng dán tiếp');
   ok(!to(900).some(s=>/Data \d/.test(s.text)||/đang chờ, sẽ tự giao/.test(s.text)&&s.mid>0&&kh.some(k=>s.text.includes(k.id))),'quản lý không bị spam tin chờ giao của data');
   ok(['1','2','3'].every(c=>ms(S(c).luc_giao_cuoi)===lgc0[c]),'data telesale không đổi lượt Saphia/FourS');
   // Khách Saphia đến khi sale đang đủ data: vẫn giao ngay, đúng người theo vòng cũ
@@ -118,5 +120,20 @@ ok(vm.runInContext("rows_('Khach',T_KHACH).some(function(k){return k.sdt==='0944
   ok(all().filter(k=>k.nguon==='Data telesale'&&k.trang_thai==='cho_giao').length===10&&all().filter(k=>k.nguoi_giu===d0.nguoi_giu&&k.nguon==='Data telesale'&&k.trang_thai==='cho_nhan').length===3,'báo cáo xong 1 khách data → tự giao tiếp 1 số đang chờ');
   // không nhận trong 30 phút → thu hồi, chia người khác (như cũ)
   adv(31); run(); ok(all().some(k=>k.nguon==='Data telesale'&&String(k.da_qua).length>0),'data không bấm nhận 30 phút: thu hồi, chia người khác như khách thường');
+}
+
+// ===== Dán nguyên dòng thô từ tab Dowtown =====
+{ vm.runInContext("rows_('Khach',T_KHACH).forEach(function(k){k.trang_thai='dong';save_('Khach',T_KHACH,k);})",ctx);
+  const nd=active.s['NhapData'], dc=active.s['DaChia'], d0=dc.d.length;
+  const RAW=require('fs').readFileSync(__dirname+'/test-data-tho.tsv','utf8').trim().split('\n').map(l=>l.split('\t'));
+  RAW.forEach(r=>nd.appendRow(r));
+  for(let m=0;m<3;m++){adv(1);run();}
+  const kq=dc.d.slice(d0), kh=vm.runInContext("rows_('Khach',T_KHACH).filter(function(k){return k.nguon==='Data telesale'&&k.trang_thai!=='dong'})",ctx);
+  ok(kq.length===RAW.length,'dán '+RAW.length+' dòng thô: xử lý hết ('+kq.length+')');
+  ok(kq.every(r=>/^(✅|⚠️ Trùng)/.test(r[0])),'mọi dòng đều tìm được số (không dòng nào báo lỗi)');
+  const so=new Set(kh.map(k=>k.sdt)); ok(kh.length===so.size&&so.size===kq.filter(r=>/^✅/.test(r[0])).length,'mỗi số 1 khách, dòng gửi lặp báo Trùng: '+so.size+' khách');
+  const ng=kh.find(k=>k.sdt==='0981131391'); ok(ng&&ng.ten==='Ngoc Nguyen'&&/Dự án: Downtown/.test(ng.nhu_cau)&&/Hà Nội/.test(ng.nhu_cau),'dòng 1: tên Ngoc Nguyen, số 0981131391, Dự án Downtown, ghi chú Hà Nội ('+(ng&&ng.nhu_cau)+')');
+  const hu=kh.find(k=>k.sdt==='0777046811'); ok(hu&&hu.ten==='Trần Lê Huy'&&!/@|FORM|113\./.test(hu.nhu_cau),'bỏ email, IP, mã FORM khỏi ghi chú');
+  const tu=kh.find(k=>k.sdt==='0982116244'); ok(tu&&/^Cẩm T/.test(tu.ten),'Cẩm Tú: tên đúng');
 }
 console.log('\nTỔNG LỖI: '+fails);process.exit(fails?1:0);

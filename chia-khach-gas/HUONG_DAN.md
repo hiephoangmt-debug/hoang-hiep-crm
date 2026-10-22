@@ -143,8 +143,10 @@ Sửa ngay trong tab **CauHinh**, không cần sửa code:
 ## Dán data telesale cho bot tự chia (tab NhapData)
 
 1. Mở Sheet **Chia khách** → tab **NhapData**.
-2. Dán data vào cột A–D: **Tên | SĐT | Dự án | Ghi chú**. Để trống cột E.
-3. Khoảng 1 phút sau, bot tự chia. Cột E ghi kết quả: `K12 → Lê Tài 14:02`, `chờ giao`, `Trùng…` hoặc `Số không hợp lệ`.
+2. Dán data từ **dòng 2** trở xuống. Có 2 cách dán:
+   - Copy **nguyên dòng thô** từ tab dự án (Dowtown, SPANA TOWER…): giờ, tên, email, SĐT, link web, IP, FORM… Bot tự lọc ra SĐT, tên, dự án (theo link web) và ghi chú (địa chỉ, loại căn).
+   - Hoặc dán gọn: **Tên | SĐT | Dự án | Ghi chú**.
+3. Khoảng 1 phút sau, bot chia. Dòng nào xử lý xong thì được **chuyển sang tab DaChia**, cột A ghi kết quả: `✅ K12 → Lê Tài`, `chờ giao`, `⚠️ Trùng…` (1 khách gửi form nhiều lần chỉ chia 1 lần) hoặc `❌ Không thấy số`.
 
 - Sale nhận như khách thường: bấm Nhận → báo cáo → hạn 30 phút / 2 giờ / 3 ngày, thu hồi như cũ.
 - Mỗi sale giữ tối đa `TOI_DA_CHUA_BAO_CAO_KHAC` (mặc định 3) khách data chưa báo cáo. Báo cáo xong 1 khách thì bot giao tiếp 1 số. Dán 200 số cũng không dồn hết một lúc.
