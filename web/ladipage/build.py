@@ -135,7 +135,7 @@ def build():
                   '<a class="btn btn-ghost" href="tel:+84904567009">Gọi 0904 567 009</a>')
     # Trang con chưa có trên LadiPage: trỏ về mục tương ứng trong trang
     b = re.sub(r'href="/sun-galaxy-complex/[^"]*"', 'href="#sun-galaxy-complex"', b)
-    b = re.sub(r'href="/thap-408m/[^"]*"', 'href="#thap-408m"', b)
+    b = re.sub(r'href="/thap-69-tang/[^"]*"', 'href="#thap-408m"', b)
     b = re.sub(r'href="/#([^"]*)"', r'href="#\1"', b)
     b = b.replace('href="/"', 'href="#tong-quan"')
     # Ảnh: bỏ srcset, dùng link tuyệt đối

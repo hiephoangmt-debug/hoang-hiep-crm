@@ -104,7 +104,7 @@ function normalize(raw) {
 function projectOf(url) {
   const u = String(url || '');
   if (/sun-galaxy-complex/.test(u)) return 'Sun Galaxy Complex';
-  if (/thap-408m/.test(u)) return 'Tháp 408m';
+  if (/thap-69-tang/.test(u)) return 'Tháp 69 tầng (408m)';
   return 'Da Nang Downtown';
 }
 

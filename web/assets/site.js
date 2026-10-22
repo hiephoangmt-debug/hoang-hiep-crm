@@ -31,7 +31,7 @@ const CONFIG = {
 
   /* ===== Gửi lead ===== */
   const projectName = () => /sun-galaxy-complex/.test(location.pathname) ? 'Sun Galaxy Complex'
-    : /thap-408m/.test(location.pathname) ? 'Tháp 408m Da Nang Downtown' : CONFIG.PROJECT;
+    : /thap-69-tang/.test(location.pathname) ? 'Tháp 69 tầng (408m) Da Nang Downtown' : CONFIG.PROJECT;
   const VIA_LABEL = { form: 'Form đăng ký', popup: 'Popup tài liệu', chat: 'Chat tự động' };
   async function submitLead(input) {
     const project = projectName();
@@ -201,7 +201,7 @@ const CONFIG = {
     { k: ['vay', 'lãi', 'ngân hàng', 'trả góp', 'thanh toán'], a: 'Chính sách đang được giới thiệu: hỗ trợ vay tới 70–80%, <b>ân hạn gốc và hỗ trợ lãi 0% tối đa 30 tháng</b>. Anh/chị có thể thử mục <a href="/#tinh-vay">Tính khoản vay</a> trên trang. Chính sách chính xác theo từng đợt, em gửi bản mới nhất nhé?', lead: true },
     { k: ['pháp lý', 'phap ly', 'sổ', 'sở hữu', 'người nước ngoài', 'quy hoạch'], a: 'Quy hoạch 1/500 theo QĐ 392/QĐ-UBND ngày 15/8/2025. Căn hộ ở: người Việt sở hữu lâu dài, người nước ngoài tối đa 50 năm. Căn hộ lưu trú có quy định riêng. Trước khi đặt cọc nên xem văn bản đủ điều kiện mở bán và bảo lãnh ngân hàng.' },
     { k: ['bàn giao', 'ban giao', 'tiến độ', 'khi nào', 'thi công'], a: 'Khởi công tổng thể 19/8/2025, Sun Galaxy Complex khởi công 25/7/2026. Mốc bàn giao căn hộ đang được giới thiệu là <b>quý 4/2028</b>. Tháp 69 tầng dự kiến hoàn thành khoảng 2030.' },
-    { k: ['tháp', 'thap', '408', '69 tầng', 'cao nhất'], a: 'Tháp biểu tượng <b>69 tầng, cao 408m</b>, cao thứ 2 Việt Nam sau Landmark 81, gồm khách sạn 5 sao, văn phòng, căn hộ, TTTM và đài quan sát. Xem <a href="/thap-408m/">trang tháp 408m</a>.', lead: true },
+    { k: ['tháp', 'thap', '408', '69 tầng', 'cao nhất'], a: 'Tháp biểu tượng <b>69 tầng, cao 408m</b>, cao thứ 2 Việt Nam sau Landmark 81, gồm khách sạn 5 sao, văn phòng, căn hộ, TTTM và đài quan sát. Xem <a href="/thap-69-tang/">trang tháp 408m</a>.', lead: true },
     { k: ['loại căn', 'studio', 'phòng ngủ', '1pn', '2pn', '3pn', 'penthouse', 'shophouse', 'diện tích'], a: 'Sản phẩm dự kiến gồm Studio, 1PN+, 2PN, 3PN, Sky Villa/Penthouse và shophouse ven sông. Mặt bằng chi tiết công bố theo bảng hàng, em gửi anh/chị layout từng loại nhé?', lead: true },
     { k: ['tiện ích', 'tien ich', 'hồ bơi', 'nhà hát', 'opera'], a: 'Toàn khu có nhà hát opera 4.000 chỗ, bảo tàng, phố thương mại ven sông, khán đài pháo hoa. Nội khu dự kiến có hồ bơi vô cực, gym, spa, kid club.' }
   ];

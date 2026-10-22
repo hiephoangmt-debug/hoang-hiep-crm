@@ -40,6 +40,6 @@ Dựng bằng `ladipage/build_basic.py` từ `ladipage/basic/*.html`:
 |---|---|---|
 | Da Nang Downtown (trang chủ) | `6ad9e11192364b00132fb925` | `www.sun-danangdowntown.com` |
 | Sun Galaxy Complex | `6ad9e1136b2c75001205ce79` | `www.sun-danangdowntown.com/sun-galaxy-complex` |
-| Tháp 408m | `6ad9e11406fc060013e37e43` | `www.sun-danangdowntown.com/thap-408m` |
+| Tháp 408m | `6ad9e11406fc060013e37e43` | `www.sun-danangdowntown.com/thap-69-tang` |
 
 Trang kéo-thả cũ `68b9064ebe3b5d001262fd88` đang giữ tên miền; gỡ tên miền khỏi trang này trước khi gắn cho trang chủ mới.

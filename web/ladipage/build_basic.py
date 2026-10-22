@@ -16,13 +16,13 @@ CDN = 'https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@claude/great
 PAGES = {
     'index.html': ('da-nang-downtown.html', True),
     'sun-galaxy-complex/index.html': ('sun-galaxy-complex.html', False),
-    'thap-408m/index.html': ('thap-408m.html', False),
+    'thap-69-tang/index.html': ('thap-69-tang.html', False),
 }
 
 
 def fix_urls(text, is_home):
     # Trang con trên LadiPage không có dấu "/" cuối
-    for slug in ('sun-galaxy-complex', 'thap-408m'):
+    for slug in ('sun-galaxy-complex', 'thap-69-tang'):
         text = text.replace(f'{SITE}/{slug}/', f'{SITE}/{slug}')
         text = re.sub(rf'href="/{slug}/(#[^"]*)?"', lambda m: f'href="{SITE}/{slug}{m.group(1) or ""}"', text)
         text = text.replace(f'href=\\"/{slug}/\\"', f'href=\\"{SITE}/{slug}\\"')  # trong chuỗi JS
