@@ -1,19 +1,47 @@
-ngay,ngan_hang,loai,lai_suat,uu_dai_thang,ghi_chu
-2026-08-31,Vietcombank,Bình quân,7.4,,Lãi vay bình quân tháng 8/2026 – Dân Trí 19/10/2026
-2026-08-31,VietinBank,Bình quân,6.24,,Tháng 8/2026 (tính từ mức giảm 0.14 điểm của tháng 9) – Dân Trí
-2026-09-30,VietinBank,Bình quân,6.1,,Lãi vay bình quân tháng 9/2026 – Dân Trí 19/10/2026
-2026-08-31,Agribank,Bình quân,8.52,,Lãi vay bình quân tháng 8/2026 – Agribank
-2026-09-30,Agribank,Bình quân,8.42,,Lãi vay bình quân tháng 9/2026 – Dân Trí 19/10/2026
-2026-08-31,Techcombank,Bình quân,11.2,,Lãi vay bình quân tháng 8/2026 – Dân Trí
-2026-09-30,Techcombank,Bình quân,10.14,,Lãi vay bình quân tháng 9/2026 – Dân Trí 19/10/2026
-2026-09-30,OCB,Bình quân,11.38,,Lãi vay bình quân tháng 9/2026 – Dân Trí 19/10/2026
-2026-09-30,Vikki Bank,Bình quân,11.06,,Lãi vay bình quân tháng 9/2026 – Báo Nghệ An
-2026-10-15,BIDV,Mua nhà,9.5,12,Gói Ngôi nhà đầu tiên 30.000 tỷ: 9.5% cố định 12 tháng / 10% 18 tháng / 10.5% 24 tháng – Tạp chí Thương Gia 10/2026
-2026-10-15,Vietcombank,Mua nhà,9.6,6,9.6% cố định 6 tháng / 9.9% 12 tháng (thông báo 1 chi nhánh TP.HCM) – Tạp chí Thương Gia 10/2026
-2026-09-15,VIB,Mua nhà,11.1,,Khoảng 11.1–12% – 24h 9/2026
-2026-09-15,VPBank,Mua nhà,13.2,,24h 9/2026
-2026-09-15,TB 11 NH (DKRA),Mua nhà,10.9,24,Bình quân 11 ngân hàng – cố định 12–24 tháng; sau ưu đãi thả nổi phổ biến 13–15% (biên độ 3.3–3.5% – VARS) – 9/2026
-2026-10-19,BIDV,Kinh doanh,6.0,6,Từ 6% – gói 100.000 tỷ ngắn hạn đến 6 tháng cho sản xuất kinh doanh và lĩnh vực ưu tiên – Báo Chính phủ 19/10/2026
-2026-10-19,SHB,Kinh doanh,5.0,,Từ 5% (giảm 1.5–2%) – Báo Chính phủ 19/10/2026
-2026-10-19,MB,Kinh doanh,7.9,,Từ 7.9% cho 5 lĩnh vực ưu tiên (giảm 1.5%) – Báo Chính phủ 19/10/2026
-2026-08-31,Agribank,Kinh doanh,6.1,,Ngắn hạn tối thiểu 6.1%; trung dài hạn tối thiểu 7.8% – Agribank tháng 8/2026
+ngay,ngan_hang,loai,ky_han,lai_suat,chenh_lech,ghi_chu
+2026-07-31,Toàn hệ thống (NHNN),Bình quân,,10.5,,Tháng 7/2026 – tính ngược từ mức tăng 0.2 điểm của tháng 8 (CafeF)
+2026-08-31,Toàn hệ thống (NHNN),Bình quân,,10.7,,Lãi vay bình quân toàn hệ thống tháng 8/2026 theo NHNN – CafeF
+2026-07-31,Techcombank,Bình quân,,10.62,,Tháng 7 – tính ngược từ mức tăng 0.58 điểm của tháng 8 (VnExpress)
+2026-08-31,Techcombank,Bình quân,,11.2,,Tháng 8/2026 – VnExpress / Dân Trí
+2026-09-30,Techcombank,Bình quân,,10.14,,Tháng 9/2026 (giảm 1.06 điểm) – Dân Trí 19/10/2026
+2026-08-31,OCB,Bình quân,,10.94,,Tháng 8 – tính ngược từ mức tăng 0.44 điểm của tháng 9 (Dân Trí)
+2026-09-30,OCB,Bình quân,,11.38,,Tháng 9/2026 – Dân Trí 19/10/2026
+2026-09-30,Vikki Bank,Bình quân,,11.06,2.87,Tháng 9/2026 theo Báo Nghệ An (có nguồn ghi là tháng 10)
+2026-08-31,HDBank,Bình quân,,10.4,,Tháng 8/2026 – CafeF
+2026-07-31,VPBank,Bình quân,,9.84,,Tháng 7 – bằng tháng 8 (không đổi) – VietnamNet
+2026-08-31,VPBank,Bình quân,,9.84,2.06,Tháng 8/2026 – VietnamNet
+2026-07-31,ACB,Bình quân,,9.28,,Tháng 7/2026 – Znews
+2026-08-31,ACB,Bình quân,,9.4,,Tháng 8/2026 (tăng 0.12 điểm) – VietnamNet
+2026-09-30,KienlongBank,Bình quân,,9.31,,Tháng 9/2026 (giảm so với tháng 8) – Dân Trí 19/10/2026
+2026-07-31,MB,Bình quân,,8.56,,Tháng 7 – tính ngược từ mức tăng 0.15 điểm của tháng 8 (VietnamNet)
+2026-08-31,MB,Bình quân,,8.71,2.75,Tháng 8/2026 – VietnamNet (có nguồn ghi khác)
+2026-08-31,Agribank,Bình quân,,8.52,,Tháng 8/2026 – Agribank
+2026-09-30,Agribank,Bình quân,,8.42,0.99,Tháng 9/2026 – Dân Trí 19/10/2026
+2026-09-30,PGBank,Bình quân,,8.23,,Tháng 9/2026 (giảm so với tháng 8) – Dân Trí 19/10/2026
+2026-08-31,BIDV,Bình quân,,7.59,,Tháng 8 – tính ngược từ mức tăng 0.14 điểm của tháng 9 (Dân Trí)
+2026-09-30,BIDV,Bình quân,,7.73,2.75,Tháng 9/2026 – Dân Trí 19/10/2026
+2026-08-31,Vietcombank,Bình quân,,7.4,,Tháng 8/2026 (chưa công bố tháng 9 đến 19/10) – Dân Trí
+2026-08-31,VietinBank,Bình quân,,6.24,,Tháng 8 – tính ngược từ mức giảm 0.14 điểm của tháng 9 (Dân Trí)
+2026-09-30,VietinBank,Bình quân,,6.1,2.4,Tháng 9/2026 – Dân Trí 19/10/2026
+2026-09-30,SCB,Bình quân,,5.35,,Tháng 9/2026 (giảm so với tháng 8) – Dân Trí 19/10/2026
+2026-09-16,Agribank,Mua nhà,6 tháng,8.0,,Khảo sát Smartland 16/9/2026 (không phải biểu lãi chính thức)
+2026-09-16,Techcombank,Mua nhà,6 tháng,8.5,,Khoảng 8.5–9.5% cố định 6–12 tháng – Smartland 16/9/2026
+2026-09-16,Techcombank,Mua nhà,12 tháng,9.5,,Khoảng 8.5–9.5% cố định 6–12 tháng – Smartland 16/9/2026
+2026-10-15,Vietcombank,Mua nhà,6 tháng,9.6,,Thông báo 1 chi nhánh TP.HCM – Tạp chí Thương Gia 10/2026
+2026-10-15,Vietcombank,Mua nhà,12 tháng,9.9,,Thông báo 1 chi nhánh TP.HCM – Tạp chí Thương Gia 10/2026
+2026-09-16,Vietcombank,Mua nhà,24 tháng,13.9,,Smartland 16/9/2026
+2026-10-15,BIDV,Mua nhà,12 tháng,9.5,,Gói Ngôi nhà đầu tiên 30.000 tỷ – Tạp chí Thương Gia 10/2026
+2026-10-15,BIDV,Mua nhà,18 tháng,10.0,,Gói Ngôi nhà đầu tiên – Tạp chí Thương Gia 10/2026
+2026-10-15,BIDV,Mua nhà,24 tháng,10.5,,Gói Ngôi nhà đầu tiên – Tạp chí Thương Gia 10/2026
+2026-09-16,BIDV,Mua nhà,6 tháng,9.7,,Smartland 16/9/2026
+2026-09-15,ACB,Mua nhà,12 tháng,10.0,,Quanh 10% – Người Quan Sát 9/2026
+2026-09-15,VIB,Mua nhà,12 tháng,11.1,,DKRA – 24h 9/2026
+2026-09-15,VIB,Mua nhà,24 tháng,12.0,,DKRA – 24h 9/2026
+2026-09-15,VIB,Mua nhà,60 tháng,11.5,,Gói cố định 5 năm – Người Quan Sát 9/2026
+2026-09-15,VPBank,Mua nhà,12 tháng,13.2,,DKRA – 24h 9/2026
+2026-09-15,TB 11 NH (DKRA),Mua nhà,24 tháng,10.9,,Bình quân 11 ngân hàng cố định 12–24 tháng; sau ưu đãi thả nổi 13–15% (VARS) – 9/2026
+2026-10-19,SHB,Kinh doanh,Ngắn hạn,5.0,,Từ 5% (giảm 1.5–2%) – Báo Chính phủ 19/10/2026
+2026-10-19,BIDV,Kinh doanh,Ngắn hạn,6.0,,Từ 6% – gói 100.000 tỷ kỳ hạn đến 6 tháng – Báo Chính phủ 19/10/2026
+2026-08-31,Agribank,Kinh doanh,Ngắn hạn,6.1,,Tối thiểu 6.1% – Agribank tháng 8/2026
+2026-08-31,Agribank,Kinh doanh,Trung dài hạn,7.8,,Tối thiểu 7.8% – Agribank tháng 8/2026
+2026-10-19,MB,Kinh doanh,Ngắn hạn,7.9,,Từ 7.9% cho 5 lĩnh vực ưu tiên – Báo Chính phủ 19/10/2026
