@@ -62,7 +62,7 @@ window.renderSig = f => {
   $('t1').style.opacity = 1 - sw; $('t2').style.opacity = sw;
   $('t2').style.transform = `scale(${(.85 + .15 * back(sw)).toFixed(3)})`;
   const tg = clamp((f - 815) / 16); $('tag').style.opacity = tg; $('tag').style.transform = `scale(${(.3 + .7 * back(tg)).toFixed(3)})`;
-  const ui = clamp(f / 12); document.querySelector('.ui').style.opacity = ui;
+  document.querySelector('.ui').style.opacity = 1;   // hiện đủ ngay khung đầu (TikTok lấy khung đầu làm bìa)
   return true;
 };
 document.fonts.ready.then(() => { window.renderSig(0); window.READY = true; });

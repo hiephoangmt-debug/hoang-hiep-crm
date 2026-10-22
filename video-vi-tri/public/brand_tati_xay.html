@@ -17,11 +17,11 @@ function rr(x, y, w, h, r) { ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x 
 window.renderSig = f => {
   ctx.clearRect(0, 0, 1080, 1920);
   // logo mờ giữa ảnh
-  ctx.globalAlpha = WM.alpha * clamp((f - 15) / 20);
+  ctx.globalAlpha = WM.alpha;
   const wh = WM.w * AR; ctx.drawImage(white, WM.cx - WM.w / 2, WM.cy - wh / 2, WM.w, wh);
   ctx.globalAlpha = 1;
   // logo chính: thẻ trắng nổi lên nhẹ
-  const v = clamp((f - 20) / 18), rise = (1 - (1 - Math.pow(1 - clamp((f - 20) / 26), 4))) * 50;
+  const v = 1, rise = 0;   // logo có ngay từ khung đầu
   if (v > 0) {
     const h = MAIN.w * AR, pad = 34, x = MAIN.cx - MAIN.w / 2, y = MAIN.top + rise;
     ctx.globalAlpha = v;

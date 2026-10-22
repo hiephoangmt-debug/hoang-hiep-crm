@@ -40,13 +40,13 @@ window.renderSig = f => {
   ctx.clearRect(0, 0, 1080, 1920);
   // watermark: 1 dòng mờ ngang giữa hình
   ctx.save();
-  ctx.globalAlpha = WM.alpha * clamp((f - 20) / 20);
+  ctx.globalAlpha = WM.alpha;
   ctx.font = '800 40px "Be Vietnam Pro"'; ctx.letterSpacing = '8px'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
   ctx.lineWidth = 2; ctx.strokeStyle = 'rgba(0,10,30,.8)'; ctx.fillStyle = '#FFFFFF';
   ctx.strokeText(WM.text, 544, WM.y); ctx.fillText(WM.text, 544, WM.y);
   ctx.restore();
   // dải hotline: hiện lên nhẹ nhàng, vệt sáng mỗi 5 giây
-  const vb = clamp((f - 40) / 18), rise = (1 - (1 - Math.pow(1 - clamp((f - 40) / 24), 5))) * 40;
+  const vb = 1, rise = 0;   // dải hotline có ngay từ khung đầu
   bwrap.style.opacity = vb.toFixed(3); bwrap.style.transform = `translateY(${rise.toFixed(1)}px)`;
   const t2 = f >= 120 ? clamp(((f - 120) % 150) / 30) : 0;
   band.style.opacity = t2 > 0 && t2 < 1 ? .8 : 0; band.style.transform = `translateX(${(-160 + t2 * 900).toFixed(1)}px) skewX(-22deg)`;
