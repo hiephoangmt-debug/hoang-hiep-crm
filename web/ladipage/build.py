@@ -76,7 +76,11 @@ FAB = """<div class="ldp-fab">
 EXTRA_CSS = '''
 /* Bản LadiPage: một cột, không sticky, ảnh nền hero bằng CSS */
 .site-header{position:relative}
-.layout{grid-template-columns:minmax(0,1fr);max-width:920px;gap:0}
+/* Mọi khối cùng độ rộng 960px (khung desktop LadiPage), căn giữa đều hai bên */
+.container,.layout{max-width:960px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px}
+.layout{grid-template-columns:minmax(0,1fr);gap:0}
+.hero .container{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:28px}
+.nav{gap:16px}
 .toc{display:none}
 .hero.has-photo{background:linear-gradient(90deg,rgba(7,27,48,.92) 0%,rgba(7,27,48,.78) 45%,rgba(7,27,48,.4) 100%),url(''' + RAW + '''da-nang-downtown-phoi-canh-1920.webp) center/cover no-repeat}
 .hero.has-photo::before{display:none}
