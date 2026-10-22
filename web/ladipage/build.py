@@ -66,6 +66,13 @@ LEAD_FORM = '''      <form id="lead-form">
         <button class="btn btn-accent" type="submit">Nhận bảng giá ngay</button>
       </form>'''
 
+FAB = """<div class="ldp-fab">
+  <a class="ldp-fab-btn ldp-fab-chat" href="#dang-ky" aria-label="Chat tư vấn, để lại lời nhắn" title="Chat tư vấn"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path fill="#ffffff" d="M12 3C6.5 3 2 6.6 2 11c0 2.4 1.3 4.6 3.4 6.1L5 21l4.1-2.2c.9.2 1.9.3 2.9.3 5.5 0 10-3.6 10-8s-4.5-8-10-8zm-4 9.3a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6zm4 0a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6zm4 0a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6z"/></svg></a>
+  <a class="ldp-fab-btn ldp-fab-call" href="tel:+84904567009" aria-label="Gọi 0904 567 009" title="Gọi 0904 567 009"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="#ffffff" d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.6a1 1 0 01-.25 1z"/></svg></a>
+  <a class="ldp-fab-btn ldp-fab-zalo" href="https://zalo.me/0904567009" target="_blank" rel="noopener" aria-label="Nhắn Zalo 0904 567 009" title="Zalo 0904 567 009">Zalo</a>
+</div>
+"""
+
 EXTRA_CSS = '''
 /* Bản LadiPage: một cột, không sticky, ảnh nền hero bằng CSS */
 .site-header{position:relative}
@@ -80,6 +87,13 @@ EXTRA_CSS = '''
 .quick-lead h3{color:#fff;margin:0 0 6px}
 .quick-lead p{margin:0}
 .site-footer{padding-bottom:44px}
+/* Nút nổi góc phải dưới: Chat, Gọi, Zalo */
+.ldp-fab{position:fixed;right:20px;bottom:24px;z-index:999;display:flex;flex-direction:column;gap:14px}
+.ldp-fab-btn{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#fff;font-weight:800;font-size:15px;box-shadow:0 8px 22px rgba(7,27,48,.35)}
+.ldp-fab-chat{background:#0b2a4a;border:2px solid #ff7a1a}
+.ldp-fab-call{background:#ff7a1a}
+.ldp-fab-zalo{background:#0b2a4a;border:2px solid #ff7a1a;color:#fff}
+@media (max-width:768px){.ldp-fab{right:14px;bottom:18px;gap:10px}.ldp-fab-btn{width:52px;height:52px;font-size:14px}}
 '''
 
 
@@ -124,7 +138,7 @@ def build():
     b = re.sub(r'\s(srcset|sizes)="[^"]*"', '', b)
     b = b.replace('/images/', RAW)
 
-    out = '<!doctype html>\n<html lang="vi">\n<head>\n' + head + '</head>\n<body>\n' + b + '</body>\n</html>\n'
+    out = '<!doctype html>\n<html lang="vi">\n<head>\n' + head + '</head>\n<body>\n' + b + FAB + '</body>\n</html>\n'
     for bad in ('data-open', 'type="button"', 'site.js', 'loan-calc', 'href="/'):
         if bad in out:
             raise SystemExit(f'Còn sót: {bad}')
