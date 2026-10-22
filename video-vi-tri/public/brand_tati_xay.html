@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><title>Lớp TATILAND (video xây dựng)</title>
+<style>html,body{margin:0;background:transparent;overflow:hidden}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// Lớp TATILAND Collection cho video xây dựng: logo chính trên thẻ trắng cuối màn hình + logo trắng mờ nhỏ giữa ảnh.
+const TOTAL = 1230, AR = 460 / 1877;
+const MAIN = { w: 560, cx: 540, top: 1610 };            // logo chính
+const WM = { w: 360, cx: 540, cy: 880, alpha: 0.17 };   // logo mờ giữa ảnh
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ctx = document.getElementById('c').getContext('2d');
+const logo = new Image(), white = new Image(); let n = 0;
+const ok = () => { if (++n === 2) window.READY = true; };
+logo.onload = ok; white.onload = ok; logo.src = 'tati_col.png'; white.src = 'tati_col_white.png';
+const tmp = document.createElement('canvas'); tmp.width = 1080; tmp.height = 400; const tc = tmp.getContext('2d');
+function rr(x, y, w, h, r) { ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); }
+window.renderSig = f => {
+  ctx.clearRect(0, 0, 1080, 1920);
+  // logo mờ giữa ảnh
+  ctx.globalAlpha = WM.alpha * clamp((f - 15) / 20);
+  const wh = WM.w * AR; ctx.drawImage(white, WM.cx - WM.w / 2, WM.cy - wh / 2, WM.w, wh);
+  ctx.globalAlpha = 1;
+  // logo chính: thẻ trắng nổi lên nhẹ
+  const v = clamp((f - 20) / 18), rise = (1 - (1 - Math.pow(1 - clamp((f - 20) / 26), 4))) * 50;
+  if (v > 0) {
+    const h = MAIN.w * AR, pad = 34, x = MAIN.cx - MAIN.w / 2, y = MAIN.top + rise;
+    ctx.globalAlpha = v;
+    ctx.shadowColor = 'rgba(0,0,0,.45)'; ctx.shadowBlur = 30; ctx.shadowOffsetY = 10;
+    rr(x - pad, y - pad + 6, MAIN.w + pad * 2, h + pad * 2 - 12, 26); ctx.fillStyle = 'rgba(255,255,255,.97)'; ctx.fill();
+    ctx.shadowColor = 'transparent';
+    ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(166,120,46,.9)'; ctx.stroke();
+    ctx.drawImage(logo, x, y, MAIN.w, h);
+    // vệt sáng chạy qua nét chữ mỗi 5 giây
+    const t = f >= 90 ? clamp(((f - 90) % 150) / 32) : 0;
+    if (t > 0 && t < 1) {
+      tc.clearRect(0, 0, 1080, 400); tc.globalCompositeOperation = 'source-over'; tc.drawImage(logo, 0, 0, MAIN.w, h);
+      tc.globalCompositeOperation = 'source-in';
+      const bx = -160 + t * (MAIN.w + 320), g = tc.createLinearGradient(bx - 70, 0, bx + 70, 0);
+      g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(.5, 'rgba(255,255,255,.85)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+      tc.setTransform(1, 0, -0.35, 1, 0, 0); tc.fillStyle = g; tc.fillRect(-200, 0, MAIN.w + 600, h); tc.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.drawImage(tmp, 0, 0, MAIN.w, h, x, y, MAIN.w, h);
+    }
+    ctx.globalAlpha = 1;
+  }
+  return true;
+};
+</script></body></html>

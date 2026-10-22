@@ -19,10 +19,20 @@ MT = np.zeros((H, W), np.float32); MT[TTOP:TBASE, TX0:TX1] = 1; MT[TTOP:80, 476:
 MP = np.zeros((H, W), np.float32); MP[PTOP:PBASE, PX0:PX1] = 1
 MB = np.maximum(MT, MP)
 lum = A.mean(2); sat = (A.max(2) - A.min(2)) / (A.max(2) + 1)
-GLASS = ((lum > 35) & (lum < 175) & (sat < 0.28)).astype(np.float32) * MT
-# ô cửa sổ: tầng × khoang, bật đèn ngẫu nhiên
-ROW = np.clip(((TBASE - yy) / FL).astype(int), 0, 40); COL = np.clip(((xx - TX0) / 21).astype(int), 0, 20)
-RANK = rng.random((41, 21)); LIT = RANK < 0.5; FLICK = rng.random((41, 21))
+# ô cửa sổ: dải kính giữa 2 sàn (đóng kín theo chiều ngang) rồi cắt theo khoang → mỗi căn một ô đèn gọn
+orange = (A[..., 0] - A[..., 1]) > 38
+gb = ((lum < 182) & (sat < 0.38) & ~orange).astype(np.uint8) * (MT > 0).astype(np.uint8)
+gb = cv2.morphologyEx(gb, cv2.MORPH_CLOSE, np.ones((1, 31), np.uint8))
+gb = cv2.morphologyEx(gb, cv2.MORPH_OPEN, np.ones((5, 9), np.uint8))
+for x in (565, 628, 668, 712, 788): gb[:, x - 1:x + 2] = 0
+gb[:, 668:712] = 0                                               # lõi thang màu cam
+NCELL, CELL = cv2.connectedComponents(gb, connectivity=4)
+CR = rng.random(NCELL); CR[0] = 9                                # thứ tự bật đèn
+CI = rng.uniform(0.45, 0.95, NCELL); CI[0] = 0                     # độ sáng từng căn
+CT = rng.random(NCELL) < 0.12                                    # vài căn ánh trắng
+CELLMASK = cv2.GaussianBlur((CELL > 0).astype(np.float32), (0, 0), 0.9)
+DET = np.clip(cv2.GaussianBlur(lum, (0, 0), 0.8) / 150.0, 0.35, 1.15)[..., None]   # giữ vân kính, rèm, khung cửa
+LIT = CR < 0.5; FLICK = rng.random(NCELL)
 SHOP = np.zeros((H, W), np.float32); SHOP[652:736, PX0 + 8:PX1 - 8] = 1; SHOP *= (lum < 200)
 
 # khung bê tông (tầng đang thi công)
@@ -162,14 +172,19 @@ def frame(f):
         img = img * (1 - SKY[..., None] * n) + NIGHTS * SKY[..., None] * n
         tw = 0.6 + 0.4 * np.sin(STARPH + f * 0.25)
         img += (STAR * tw * SKY * n * 255)[..., None] * 0.8
-        # đèn cửa sổ ở các tầng đã hoàn thiện (có tầng tắt/bật theo thời gian)
-        slot = f // 20
-        lit = LIT ^ (FLICK < 0.06 * ((slot * 7919) % 5 == 0))
-        if f >= 770: lit = (RANK < 0.12 + 0.55 * n) ^ (FLICK < 0.04 * ((slot * 7919) % 5 == 0))
-        Lw = GLASS * lit[ROW, COL] * glassd * (1 - k) + GLASS * lit[ROW, COL] * k
-        Lw = cv2.GaussianBlur(Lw, (0, 0), 0.8)
-        img += Lw[..., None] * np.array([255, 178, 96], np.float32) * 0.5 * n
-        img += cv2.GaussianBlur(Lw, (0, 0), 6)[..., None] * np.array([255, 160, 80], np.float32) * 0.25 * n
+        # đèn cửa sổ: mỗi căn một ô sáng đều, chỉ ở tầng đã lắp kính
+        slot = f // 45
+        lit = LIT ^ (FLICK < 0.03 * ((slot * 7919) % 4 == 0))
+        if f >= 770: lit = (CR < 0.10 + 0.42 * n) ^ (FLICK < 0.02 * ((slot * 7919) % 4 == 0))
+        lit = lit.copy(); lit[0] = False
+        on = (lit * CI)[CELL]
+        warm = np.where(CT[CELL], 0, 1).astype(np.float32)[..., None]
+        colr = warm * np.array([255, 186, 108], np.float32) + (1 - warm) * np.array([235, 240, 255], np.float32)
+        vis = glassd * (1 - k) + k
+        Lw = cv2.GaussianBlur(on * vis, (0, 0), 1.0) * CELLMASK
+        a_ = (0.74 * Lw * n)[..., None]
+        img = img * (1 - a_) + colr * DET * 1.05 * a_
+        img += cv2.GaussianBlur(Lw, (0, 0), 7)[..., None] * np.array([255, 165, 85], np.float32) * 0.22 * n
         Ls = SHOP * glassd * (1 - k) + SHOP * k
         img += cv2.GaussianBlur(Ls, (0, 0), 1)[..., None] * np.array([255, 195, 120], np.float32) * 0.42 * n
         # đèn đường, xe chạy, đèn công trường, đèn đỏ đỉnh cẩu
