@@ -7,27 +7,34 @@
 <meta name="description" content="Vàng, chứng khoán, khối ngoại, USD, Bitcoin, bất động sản – cập nhật mỗi ngày bằng biểu đồ.">
 <style>
 :root {
+  /* Bảng màu: xanh navy (chủ đạo) – trắng (nền) – cam (điểm nhấn) */
   color-scheme: light;
-  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
-  --grid: #e1e0d9; --axis: #c3c2b7; --border: rgba(11,11,11,0.10); --chip: #f0efec;
-  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --s5: #e87ba4; --s6: #008300; --s7: #6250d6;
-  --up: #0ca30c; --up-text: #006300; --down: #d03b3b; --down-text: #b52f2f; --flat: #898781;
+  --page: #f3f5f9; --surface: #ffffff; --ink: #0f1f3d; --ink-2: #44516b; --muted: #7b869b;
+  --grid: #e2e7ef; --axis: #c3cad8; --border: rgba(15,31,61,0.12); --chip: #e8ecf3;
+  --navy: #14284b; --navy-ink: #ffffff; --navy-sub: #c9d3e6; --orange: #f26b1d; --orange-ink: #b9500f;
+  --active-bg: #14284b; --active-ink: #ffffff;
+  --s1: #1f4e9c; --s2: #f26b1d; --s3: #1baf7a; --s4: #e0a100; --s5: #e87ba4; --s6: #008300; --s7: #6250d6;
+  --up: #0ca30c; --up-text: #006300; --down: #d03b3b; --down-text: #b52f2f; --flat: #7b869b;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #898781;
-    --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10); --chip: #262624;
-    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9;
-    --up: #0ca30c; --up-text: #0ca30c; --down: #e66767; --down-text: #e66767;
+    --page: #0a1324; --surface: #101c33; --ink: #eef2f8; --ink-2: #b6c0d3; --muted: #8590a6;
+    --grid: #1d2a44; --axis: #2d3c5c; --border: rgba(255,255,255,0.10); --chip: #18263f;
+    --navy: #0f2142; --navy-ink: #ffffff; --navy-sub: #aebbd4; --orange: #ff7a2e; --orange-ink: #ff9a5c;
+    --active-bg: #ff7a2e; --active-ink: #0a1324;
+    --s1: #5b8def; --s2: #ff7a2e; --s3: #199e70; --s4: #d4a017; --s5: #d55181; --s6: #22a022; --s7: #9085e9;
+    --up: #0ca30c; --up-text: #2fbf4a; --down: #e66767; --down-text: #f07a7a; --flat: #8590a6;
   }
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #898781;
-  --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10); --chip: #262624;
-  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9;
-  --up: #0ca30c; --up-text: #0ca30c; --down: #e66767; --down-text: #e66767;
+  --page: #0a1324; --surface: #101c33; --ink: #eef2f8; --ink-2: #b6c0d3; --muted: #8590a6;
+  --grid: #1d2a44; --axis: #2d3c5c; --border: rgba(255,255,255,0.10); --chip: #18263f;
+  --navy: #0f2142; --navy-ink: #ffffff; --navy-sub: #aebbd4; --orange: #ff7a2e; --orange-ink: #ff9a5c;
+  --active-bg: #ff7a2e; --active-ink: #0a1324;
+  --s1: #5b8def; --s2: #ff7a2e; --s3: #199e70; --s4: #d4a017; --s5: #d55181; --s6: #22a022; --s7: #9085e9;
+  --up: #0ca30c; --up-text: #2fbf4a; --down: #e66767; --down-text: #f07a7a; --flat: #8590a6;
 }
 * { box-sizing: border-box; }
 body {
@@ -35,7 +42,11 @@ body {
   font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 .wrap { max-width: 1120px; margin: 0 auto; padding: 20px 16px 48px; }
-header h1 { font-size: 24px; margin: 0 0 2px; }
+header { background: var(--navy); color: var(--navy-ink); border-radius: 16px; padding: 18px 18px 16px; position: relative; overflow: hidden; border: 1px solid var(--border); }
+header::after { content: ""; position: absolute; right: -46px; top: -56px; width: 120px; height: 120px; border-radius: 50%; background: var(--orange); opacity: .92; }
+header > * { position: relative; z-index: 1; }
+header h1 { font-size: 24px; margin: 0 0 4px; text-wrap: balance; max-width: 78%; }
+header .sub { color: var(--navy-sub); max-width: 84%; }
 .sub { color: var(--ink-2); font-size: 14px; }
 .toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 18px 0 8px;
   position: sticky; top: 0; z-index: 5; background: var(--page); padding: 8px 0; }
@@ -47,8 +58,7 @@ header h1 { font-size: 24px; margin: 0 0 2px; }
 .seg button { border: 0; background: transparent; color: var(--ink-2); font: inherit; font-size: 14px;
   padding: 6px 12px; border-radius: 8px; cursor: pointer; min-height: 34px; white-space: nowrap; }
 @media (max-width: 480px) { .seg { width: 100%; } .seg button { flex: 1; padding: 6px 4px; font-size: 13px; } .viewbar .seg { width: auto; } .viewbar .seg button { padding: 6px 10px; } #lvKinds button { flex: none; padding: 6px 10px; } }
-.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); font-weight: 600;
-  box-shadow: 0 0 0 1px var(--border); }
+.seg button[aria-pressed="true"] { background: var(--active-bg); color: var(--active-ink); font-weight: 600; }
 .fresh { flex-basis: 100%; display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-2); }
 .fresh b { color: var(--ink); }
 .fresh .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--up); flex: none; }
@@ -57,15 +67,16 @@ header h1 { font-size: 24px; margin: 0 0 2px; }
 .nav::-webkit-scrollbar { display: none; }
 .nav a { flex: none; text-decoration: none; color: var(--ink-2); font-size: 14px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); white-space: nowrap; }
 .nav a:hover { color: var(--ink); }
-.nav a[aria-current="true"] { background: var(--ink); color: var(--page); border-color: var(--ink); font-weight: 600; }
-.nav a:focus-visible, .seg button:focus-visible, th:focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; }
+.nav a[aria-current="true"] { background: var(--orange); color: #fff; border-color: var(--orange); font-weight: 600; }
+.nav a:focus-visible, .seg button:focus-visible, th:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
 section { scroll-margin-top: calc(var(--stick, 150px) + 8px); }
 @media (max-width: 480px) {
   .fresh { font-size: 13px; } .fresh .next, .range-label { display: none; }
   .toolbar { gap: 6px; padding: 6px 0; } .nav a { font-size: 13px; padding: 5px 10px; }
 }
 .range-label { color: var(--muted); font-size: 13px; margin-left: auto; }
-h2 { font-size: 18px; margin: 32px 0 4px; }
+h2 { font-size: 19px; margin: 34px 0 4px; color: var(--ink); text-wrap: balance; }
+h2::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; background: var(--orange); margin-right: 8px; vertical-align: 2px; }
 .note { color: var(--ink-2); font-size: 13px; margin: 0 0 12px; }
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
 .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; }
@@ -77,14 +88,16 @@ h2 { font-size: 18px; margin: 32px 0 4px; }
 .chart { position: relative; height: 320px; }
 .chart.sm { height: 240px; }
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid2 > *, .tiles > *, .kv > *, .card { min-width: 0; }
 @media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } .chart { height: 270px; } }
 .card h3 { font-size: 15px; margin: 0 0 8px; }
 .stats { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 14px; margin: 0 0 10px; color: var(--ink-2); }
 .stats b { color: var(--ink); }
 .counts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
 .counts button { text-align: left; font: inherit; color: inherit; cursor: pointer; }
-.counts button[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--ink); }
+.counts button[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--orange); }
 .counts .n { font-size: 26px; font-weight: 700; }
+@media (max-width: 480px) { .counts button.card { padding: 10px 8px; } .counts .badge { font-size: 12px; white-space: normal; } .counts .n { font-size: 22px; } }
 .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; white-space: nowrap; }
 .tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 table { border-collapse: collapse; width: 100%; font-size: 14px; }
@@ -106,7 +119,8 @@ canvas.spark { width: 90px; height: 28px; display: block; }
 .search-box { position: relative; flex: 1; min-width: 0; }
 .search input { width: 100%; font: inherit; font-size: 16px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--axis); background: var(--surface); color: var(--ink); text-transform: uppercase; }
 .search input::placeholder { text-transform: none; color: var(--muted); }
-.btn { font: inherit; font-weight: 600; padding: 10px 18px; border-radius: 10px; border: 0; background: var(--ink); color: var(--page); cursor: pointer; }
+.btn { font: inherit; font-weight: 600; padding: 10px 18px; border-radius: 10px; border: 0; background: var(--orange); color: #fff; cursor: pointer; }
+.btn:hover { filter: brightness(1.05); }
 .sugg { position: absolute; z-index: 6; left: 0; right: 0; top: calc(100% + 4px); margin: 0; padding: 4px; list-style: none; background: var(--surface); border: 1px solid var(--axis); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,.15); max-height: 320px; overflow-y: auto; }
 .sugg li { padding: 8px 10px; border-radius: 8px; cursor: pointer; display: flex; gap: 10px; align-items: baseline; }
 .sugg li[aria-selected="true"], .sugg li:hover { background: var(--chip); }
@@ -114,7 +128,7 @@ canvas.spark { width: 90px; height: 28px; display: block; }
 .sugg small { margin-left: auto; color: var(--muted); }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
 .chips button { font: inherit; font-size: 13px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--ink-2); cursor: pointer; }
-.link { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-decoration-color: var(--axis); text-underline-offset: 3px; }
+.link { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-decoration-color: var(--orange); text-underline-offset: 3px; }
 .ma-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-bottom: 6px; }
 .ma-head .code { font-size: 26px; font-weight: 750; }
 .ma-head .px { font-size: 26px; font-weight: 650; }
@@ -250,7 +264,7 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
       <div class="stats" id="lsStats"></div>
       <div class="tbl-wrap"><table id="tblLs"></table></div>
     </div>
-    <div class="card" style="margin-top:12px"><h3>Lãi suất 12 tháng trung bình theo ngày</h3><div class="chart sm"><canvas id="cLs"></canvas></div></div>
+    <div class="card" style="margin-top:12px" id="lsAvgCard"><h3>Lãi suất 12 tháng trung bình theo ngày</h3><div class="chart sm"><canvas id="cLs"></canvas></div></div>
     <div class="card" style="margin-top:12px" id="lsDetail">
       <h3 id="lsDetTitle">Chi tiết ngân hàng theo ngày</h3>
       <div class="toolbar-in"><select id="lsBank" class="sel" aria-label="Chọn ngân hàng"></select></div>
@@ -537,10 +551,27 @@ function simple(id, key, label, unit, color, dec = 0) {
   draw(id, { type: 'line', data: { datasets: [line(label, a, color)] }, options: baseOpts(unit, { dec, tickDec: dec > 0 && a.length && a.at(-1)[1] < 10 ? dec : 0 }) });
 }
 
+// khoảng cách thường gặp giữa 2 điểm số liệu (ngày → ~1 ngày, quý → ~90 ngày)
+function gapOf(arr) {
+  if (arr.length < 2) return 7 * 864e5;
+  const d = []; for (let i = 1; i < arr.length; i++) d.push(tsOf(arr[i][0]) - tsOf(arr[i - 1][0]));
+  d.sort((a, b) => a - b);
+  return Math.max(7 * 864e5, d[Math.floor((d.length - 1) / 2)] * 1.5); // trung vị dưới: ít điểm vẫn ra khoảng nhỏ
+}
+// mốc đầu kỳ: điểm gần nhất trước ngày bắt đầu, hoặc điểm đầu tiên trong kỳ – chỉ khi đủ gần
+function baseAt(arr, s) {
+  if (!arr.length) return null;
+  if (!months) return arr[0];
+  const g = gapOf(arr), st = tsOf(s);
+  let b = null; for (const x of arr) { if (x[0] <= s) b = x; else break; }
+  if (b && st - tsOf(b[0]) <= g) return b;
+  const f = arr.find(([d]) => d >= s);
+  return f && f !== arr.at(-1) && tsOf(f[0]) - st <= g ? f : null;
+}
 function change(arr, s) {
   if (!arr.length) return {};
   const last = arr.at(-1)[1], prev = arr.length > 1 ? arr.at(-2)[1] : null;
-  const base = arr.length > 1 ? (at(arr, s) ?? arr.find(([d]) => d >= s)?.[1]) : null;
+  const base = baseAt(arr, s)?.[1];
   return { last, d1: prev ? (last / prev - 1) * 100 : null, rng: base ? (last / base - 1) * 100 : null, date: arr.at(-1)[0] };
 }
 
@@ -561,12 +592,22 @@ function renderTiles(s) {
     ['Lãi suất Fed (trần)', pts('fed_tren'), '%', 2],
     [bdsMainName() || 'Bất động sản', bdsAvg(), 'tr/m²', 0],
   ];
-  $('tiles').innerHTML = items.map(([lbl, arr, unit, dec]) => {
+  $('tiles').innerHTML = items.map(([lblRaw, arr, unit, dec]) => {
+    const lbl = esc(lblRaw);
     const c = change(arr, s);
+    // lãi suất: thay đổi tính bằng điểm %, không phải % của %
+    let d1 = pct(c.d1), rg = pct(c.rng), d1v = c.d1, rgv = c.rng;
+    if (unit === '%' && arr.length) {
+      const last = arr.at(-1)[1], prev = arr.length > 1 ? arr.at(-2)[1] : null;
+      const base = baseAt(arr, s)?.[1];
+      d1v = prev == null ? null : last - prev; rgv = base == null ? null : last - base;
+      const pp = (v) => v == null ? '–' : `${v > 0 ? '+' : ''}${fmt(v, 2)} điểm`;
+      d1 = pp(d1v); rg = pp(rgv);
+    }
     return `<div class="card tile"><div class="lbl">${lbl}</div>
       <div class="val">${fmt(c.last, dec)} <span class="unit">${unit}</span></div>
-      <div class="chg"><span class="${cls(c.d1)}" title="So với lần trước">${arrow(c.d1)}${pct(c.d1)}</span>
-      <span class="${cls(c.rng)}" title="So với đầu kỳ">${months ? 'Kỳ' : 'Từ đầu'}: ${pct(c.rng)}</span></div>
+      <div class="chg"><span class="${cls(d1v, 0.001)}" title="So với lần trước">${arrow(d1v, 0.001)}${d1}</span>
+      <span class="${cls(rgv, 0.001)}" title="So với đầu kỳ">${months ? 'Kỳ' : 'Từ đầu'}: ${rg}</span></div>
       <div class="unit">${c.date ? dvn(c.date) : 'chưa có'}</div></div>`;
   }).join('');
 }
@@ -574,7 +615,7 @@ function renderTiles(s) {
 function renderCompare(s, e) {
   const index = (arr) => {
     const a = inRange(arr, s);
-    if (months) { const b = at(arr, s); if (b != null && (!a.length || a[0][0] > s)) a.unshift([s, b]); }
+    if (months) { const b = baseAt(arr, s); if (b && b[0] < s) a.unshift([s, b[1]]); }
     if (!a.length) return [];
     const base = a[0][1];
     return a.map(([d, v]) => [d, v / base * 100]);
@@ -696,7 +737,7 @@ function renderStocks() {
   const cnt = { up: 0, flat: 0, down: 0 }; rows.forEach(r => cnt[r.trend]++);
   const btn = (k, label, color) => `<button class="card" data-f="${k}" aria-pressed="${filt === k}">
     <div class="badge ${color}">${label}</div><div class="n">${k === 'all' ? rows.length : cnt[k]}</div></button>`;
-  $('counts').style.gridTemplateColumns = 'repeat(4, 1fr)';
+  $('counts').style.gridTemplateColumns = 'repeat(4, minmax(0, 1fr))';
   $('counts').innerHTML = rows.length ? btn('all', 'Tất cả', '') + btn('up', '▲ Tăng', 'up') + btn('flat', '● Đi ngang', 'flat') + btn('down', '▼ Giảm', 'down') : '';
   $('counts').querySelectorAll('button').forEach(b => b.onclick = () => { filt = b.dataset.f; renderStocks(); });
 
@@ -803,7 +844,7 @@ function histMatrix(tbl, rows, gran, o = {}) {
   const data = rows.map(r => ({ ...r, vals: per.map(p => p.end < first ? null : val(r, p)) }));
   data.sort((a, b) => { const x = a.vals[0], y = b.vals[0]; if (x == null) return 1; if (y == null) return -1; return o.higherGood ? y - x : x - y; });
   const head = '<thead><tr><th>Ngân hàng</th>' + per.map(p => `<th>${p.label}</th>`).join('') + '</tr></thead>';
-  const body = data.map(r => `<tr class="pick" data-b="${esc(r.name)}" aria-selected="${r.name === o.selected}"><td><b>${esc(r.name)}</b>${r.tag || ''}</td>` + r.vals.map((v, i) => {
+  const body = data.map(r => `<tr${o.onPick ? ' class="pick"' : ''} data-b="${esc(r.name)}" aria-selected="${r.name === o.selected}"><td><b>${esc(r.name)}</b>${r.tag || ''}</td>` + r.vals.map((v, i) => {
     if (v == null) return '<td><span class="flat">–</span></td>';
     const older = r.vals[i + 1];
     let c = '', a = '';
@@ -879,6 +920,7 @@ function lvCols(kind) {
   const rows = LV.filter(r => r.loai === kind);
   // tháng mới nhất đứng đầu cho dễ thấy trên điện thoại
   if (kind === 'Bình quân') return [...new Set(rows.map(r => r.ngay.slice(0, 7)))].sort().reverse().map(m => ({ key: m, label: monthLbl(m + '-01') }));
+  // (nhãn kỳ hạn được escape khi in ra)
   const order = (k) => { const m = k.match(/(\d+)/); return m ? +m[1] : k === 'Ngắn hạn' ? 0 : 999; };
   return [...new Set(rows.map(r => r.ky_han))].sort((a, b) => order(a) - order(b)).map(k => ({ key: k, label: k }));
 }
@@ -933,7 +975,8 @@ function renderLnh(s) {
   if (!on.length) { $('lnhStats').innerHTML = '<span>Chưa có số liệu – bot sẽ lấy ở lần chạy tới.</span>'; }
   else {
     const last = on.at(-1), prev = on.at(-2);
-    const wk = at(on, keyOf(tsOf(last[0]) - 7 * 864e5)), mo = at(on, keyOf(tsOf(last[0]) - 30 * 864e5));
+    const back = (n) => { const d = new Date(last[0] + 'T00:00:00Z'); d.setUTCDate(d.getUTCDate() - n); return d.toISOString().slice(0, 10); };
+    const wk = at(on, back(7)), mo = at(on, back(30));
     const d = (a, b) => b == null ? '–' : `<span class="${cls(-(a - b), 0.001)}">${a - b > 0 ? '+' : ''}${fmt(a - b, 2)}</span>`;
     const t = (k, l) => { const a = pts(k).at(-1); return a ? `<span>${l}: <b>${fmt(a[1], 2)}%</b></span>` : ''; };
     $('lnhStats').innerHTML = `<span>Qua đêm ngày ${dvn(last[0])}: <b>${fmt(last[1], 2)}%</b></span>
@@ -974,7 +1017,7 @@ function renderLaiVay() {
     <span>${banks.length} ngân hàng</span>
     ${sys ? `<span>${esc(sys.name)}: <b>${fmt(sys.main, 2)}%</b></span>` : ''}
     ${lvKind === 'Mua nhà' ? '<span>Sau ưu đãi thả nổi thường <b>13–15%</b></span>' : ''}` : '';
-  const th = (k, l) => `<th data-k="${k}"${k === key ? ` aria-sort="${lvAsc ? 'ascending' : 'descending'}"` : ''}>${l}</th>`;
+  const th = (k, l) => `<th data-k="${esc(k)}"${k === key ? ` aria-sort="${lvAsc ? 'ascending' : 'descending'}"` : ''}>${esc(l)}</th>`;
   const min = Object.fromEntries(cols.map(c => [c.key, Math.min(...banks.map(r => r.v[c.key] ?? Infinity))]));
   let head = '<thead><tr>' + th('name', 'Ngân hàng') + cols.map(c => th(c.key, c.label)).join('');
   if (lvKind === 'Bình quân') head += th('chg', 'Thay đổi') + th('spread', 'Chênh lệch cho vay – huy động');
@@ -996,6 +1039,8 @@ function renderLaiVay() {
 }
 function renderLvBank() {
   const all = [...new Set(LV.map(r => r.ngan_hang))].filter(b => !/hệ thống|TB /i.test(b)).sort((a, b) => a.localeCompare(b, 'vi'));
+  $('lvDetail').hidden = !all.length;
+  if (!all.length) return;
   if (!all.includes(lvBank)) lvBank = all.includes('BIDV') ? 'BIDV' : all[0];
   $('lvBank').innerHTML = all.map(b => `<option${b === lvBank ? ' selected' : ''}>${esc(b)}</option>`).join('');
   $('lvBank').onchange = () => { lvBank = $('lvBank').value; renderLaiVay(); };
@@ -1096,7 +1141,11 @@ function initCalc() {
   const v = (id) => parseFloat($(id).value);
   const P = v('cAmt'), years = v('cYears'), r1 = v('cR1'), m1 = Math.max(0, v('cM1') || 0), r2 = v('cR2'), method = $('cMethod').value;
   try { localStorage.setItem('dautu-calc', JSON.stringify(Object.fromEntries(ids.map(id => [id, $(id).value])))); } catch (e) {}
-  if (!(P > 0) || !(years > 0) || isNaN(r1) || isNaN(r2)) { $('calcOut').innerHTML = '<div><span>Nhập đủ số tiền, thời hạn và lãi suất</span></div>'; return; }
+  if (!(P > 0) || !(Math.round(years * 12) >= 1) || years > 50 || isNaN(r1) || isNaN(r2) || r1 < 0 || r2 < 0) {
+    $('calcOut').innerHTML = '<div><span>Nhập số tiền vay, thời hạn từ 1 tháng đến 50 năm và lãi suất không âm</span></div>';
+    ['cCalcYear', 'cCalcBal'].forEach(id => { if (charts[id]) { charts[id].destroy(); delete charts[id]; } });
+    return;
+  }
   const rows = amortize(P, years, r1, m1, r2, method);
   const tot = rows.reduce((t, r) => t + r.interest, 0);
   const first = rows[0], after = rows[Math.min(m1, rows.length - 1)];
@@ -1183,6 +1232,7 @@ function renderLs() {
 }
 function renderLsAuto() {
   $('lsSample').innerHTML = '';
+  $('lsAvgCard').hidden = false; $('lsView').hidden = false;
   const kinds = Object.keys(RA.bang);
   if (!kinds.includes(lsKind)) lsKind = kinds.includes('Tại quầy') ? 'Tại quầy' : kinds[0];
   const banks = RA.bang[lsKind] || {};
@@ -1267,6 +1317,7 @@ function renderLsBank() {
 }
 function renderLsManual() {
   $('lsKinds').innerHTML = ''; $('lsStats').innerHTML = '';
+  $('lsTerm').hidden = true; $('lsView').hidden = true; $('lsDetail').hidden = true; $('lsAvgCard').hidden = true;
   const sample = LS.some(r => /MẪU/i.test(r.ghi_chu || ''));
   $('lsSample').innerHTML = sample ? '<span class="sample">Số liệu mẫu</span>' : '';
   if (!LS.length) { $('tblLs').innerHTML = '<tr><td class="empty">Chưa nhập lãi suất.</td></tr>'; return; }
@@ -1286,9 +1337,12 @@ function suggest(q) {
   const a = [], b = [];
   for (const m of MA_LIST) {
     if (m[0].startsWith(Q)) a.push(m);
-    else if (nq.length >= 2 && b.length < 8 && m[3].includes(nq)) b.push(m);
-    if (a.length >= 8) break;
+    else if (nq.length >= 2 && m[3].includes(nq)) b.push(m);
   }
+  const big = new Set(Object.keys(ST.symbols || {})), rc = recent();
+  const score = (m) => (big.has(m[0]) ? 0 : 100) + (rc.includes(m[0]) ? 0 : 10) + (m[2] === 'HOSE' ? 0 : m[2] === 'HNX' ? 3 : 6) + m[1].length / 100;
+  a.sort((x, y) => (x[0] === Q ? -1 : y[0] === Q ? 1 : score(x) - score(y)));
+  b.sort((x, y) => score(x) - score(y));
   return a.concat(b).slice(0, 8);
 }
 function recent() { try { return JSON.parse(localStorage.getItem('dautu-ma') || '[]'); } catch (e) { return []; } }
@@ -1349,7 +1403,8 @@ async function maPrices(code) {
     if (rows.length) return { rows, src: 'VNDirect' };
   } catch (e) { /* thử nguồn khác */ }
   const d = await getJ(`https://api.simplize.vn/api/historical/quote/prices/${code}?type=stock&page=0&size=300`);
-  const rows = (d.data || []).map(x => [keyOf(x.date * 1000), x.priceClose / 1000, +(x.volume || 0), x.priceClose / 1000, '']).sort((a, b) => a[0] < b[0] ? -1 : 1);
+  const vnDay = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Ho_Chi_Minh' });
+  const rows = (d.data || []).map(x => [vnDay.format(new Date(x.date * 1000)), x.priceClose / 1000, +(x.volume || 0), x.priceClose / 1000, '']).sort((a, b) => a[0] < b[0] ? -1 : 1);
   if (!rows.length) throw new Error('Không có số liệu giá');
   return { rows, src: 'Simplize' };
 }
@@ -1422,6 +1477,12 @@ async function lookup(raw, scroll) {
     <div class="chart sm" style="margin-top:12px"><canvas id="cMaKn"></canvas></div>
     <p class="note" style="margin:8px 0 0">Nguồn giá: ${src} (đã điều chỉnh chia tách/cổ tức)${live ? ', giá trong phiên: VPS' : ''}${Object.keys(kn).length ? ', khối ngoại: CafeF' : ''}. Cập nhật đến ${dvn(r.date)}.</p>
   </div>`;
+  MA_LAST = { code, rows, kn };
+  drawMa();
+}
+let MA_LAST = null;
+function drawMa() {
+  const { code, rows, kn } = MA_LAST;
   const s = startDate();
   const series = rows.map(x => [x[0], x[1]]);
   const maLine = (k) => series.map((x, i) => i >= k - 1 ? [x[0], series.slice(i - k + 1, i + 1).reduce((t, y) => t + y[1], 0) / k] : null).filter(Boolean);
@@ -1475,7 +1536,7 @@ function initRange() {
       try { localStorage.setItem('dautu-range', months); } catch (e) {}
       $('range').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
       render();
-      if ($('cMa')) lookup($('maInput').value);
+      if ($('cMa') && MA_LAST) drawMa();
     };
   });
 }
