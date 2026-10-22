@@ -155,5 +155,74 @@ HTML
 		),
 	);
 
+	/* ---------------- 22/10 – Cải tạo cảnh quan hai bờ sông Hàn ---------------- */
+	$posts[] = array(
+		'slug'     => 'cai-tao-canh-quan-hai-bo-song-han-29-ha',
+		'title'    => 'Cải tạo cảnh quan hai bờ sông Hàn khoảng 29,22 ha: 5 phường, các khu vực dự kiến và căn hộ ven sông hưởng lợi',
+		'excerpt'  => 'Dự án đầu tư, cải tạo cảnh quan hai bờ sông Hàn dự kiến khoảng 29,22 ha qua 5 phường Sơn Trà, An Hải, Hải Châu, Hòa Cường, Ngũ Hành Sơn: bến thủy, tuyến đi bộ, chiếu sáng. Các khu vực và tác động tới căn hộ ven sông.',
+		'keyword'  => 'cải tạo cảnh quan sông Hàn',
+		'keywords_extra' => array( 'cảnh quan hai bờ sông Hàn', 'căn hộ ven sông Hàn', 'bờ Đông sông Hàn', 'Capital Square Đà Nẵng' ),
+		'project'  => 'capital-square-da-nang',
+		'schedule' => '2026-10-22 18:00',
+		'category' => 'Thị trường',
+		'tags'     => array( 'Hạ tầng Đà Nẵng', 'Sông Hàn', 'Căn hộ ven sông Hàn' ),
+		'image'    => 'plugin:img/tin-tuc/cai-tao-canh-quan-hai-bo-song-han.jpg',
+		'image_alt' => 'Sơ đồ minh hoạ các khu vực dự kiến cải tạo cảnh quan hai bờ sông Hàn, từ cầu Thuận Phước đến cầu Tiên Sơn',
+		'content'  => <<<HTML
+<p>Đà Nẵng đang chuẩn bị dự án <strong>đầu tư, cải tạo cảnh quan hai bên bờ sông Hàn</strong>. Theo thông tin đang được chia sẻ, phạm vi dự kiến khoảng <strong>292.194 m² (khoảng 29,22 ha)</strong>, trải trên 5 phường Sơn Trà, An Hải, Hải Châu, Hòa Cường và Ngũ Hành Sơn – từ khu cầu Thuận Phước đến cầu Tiên Sơn. Hoàng Hiệp tổng hợp các khu vực dự kiến, mục tiêu dự án và tác động tới nhà ở ven sông.</p>
+<!--hh-featured-->
+<h2>Dự án làm gì?</h2>
+<p>Mục tiêu được nêu: cải tạo, chỉnh trang và nâng cao chất lượng cảnh quan đô thị; liên kết với <strong>hệ thống bến thủy nội địa</strong>, <strong>tuyến đi bộ</strong> và <strong>chiếu sáng cảnh quan</strong> các công trình, cầu qua sông; tăng khả năng tiếp cận mặt nước, kết nối không gian đô thị và phát huy giá trị cảnh quan sông Hàn.</p>
+<h2>Các khu vực dự kiến</h2>
+<table>
+<thead><tr><th>Bờ</th><th>Khu vực</th><th>Đoạn sông (theo bản đồ dự kiến)</th></tr></thead>
+<tbody>
+<tr><td rowspan="5">Bờ Tây (Hải Châu, Hòa Cường)</td><td>1, 2</td><td>Phía Bắc, từ khu cầu Thuận Phước đến cầu Sông Hàn</td></tr>
+<tr><td>3.1</td><td>Cầu Sông Hàn – cầu Rồng</td></tr>
+<tr><td>3.2, 4.1</td><td>Cầu Rồng – cầu Trần Thị Lý</td></tr>
+<tr><td>4.2</td><td>Phía Nam cầu Trần Thị Lý</td></tr>
+<tr><td>4.3</td><td>Gần cầu Tiên Sơn</td></tr>
+<tr><td rowspan="3">Bờ Đông (Sơn Trà, An Hải, Ngũ Hành Sơn)</td><td>6</td><td>Phía Bắc cầu Sông Hàn</td></tr>
+<tr><td>5.1</td><td>Cầu Sông Hàn – cầu Rồng (dọc đường Trần Hưng Đạo)</td></tr>
+<tr><td>5.2, 5.3</td><td>Cầu Rồng – cầu Trần Thị Lý</td></tr>
+</tbody>
+</table>
+<p>Ranh giới và tổng mức đầu tư từng khu vực chưa được công bố trên báo chí đến ngày đăng bài – cần chờ văn bản phê duyệt chính thức.</p>
+<h2>Nằm trong chuỗi dự án ven sông Hàn</h2>
+<ul>
+<li><strong>Quy hoạch phân khu ven sông Hàn và bờ Đông</strong> (Quyết định 2451/QĐ-UBND, hơn 6.600 ha): bờ Đông định hướng trung tâm tài chính – thương mại mới, bờ Tây bảo tồn di sản, kết nối cộng đồng (Thanh Niên, 9/2026).</li>
+<li><strong>Cải tạo cảnh quan bờ Đông dọc đường Trần Hưng Đạo</strong>: vốn hơn 425 tỷ đồng, thực hiện 2025 – 2028.</li>
+<li><strong>Chiếu sáng nghệ thuật "Dòng sông ánh sáng"</strong>: giai đoạn 1 khoảng 149 tỷ đồng, 2025 – 2027 – đèn trang trí các cầu, chiếu sáng mặt nước.</li>
+<li>Điều chỉnh dự án bến du thuyền theo hướng tăng cây xanh, mở lối đi công cộng (Tuổi Trẻ, 3/2026); hầm vượt sông Hàn nối Sơn Trà – Hải Châu, nâng cấp cầu đi bộ Nguyễn Văn Trỗi đang được thúc đẩy.</li>
+</ul>
+<h2>Căn hộ ven sông nào hưởng lợi?</h2>
+<p><strong>Bờ Đông, đường Trần Hưng Đạo</strong> (khu vực 5.1 – 5.3): tổ hợp <a href="/du-an/capital-square-da-nang/">Capital Square Đà Nẵng</a> với các tòa mặt đường Trần Hưng Đạo, <a href="/du-an/sun-ponte-residence/">Sun Ponte Residence</a> và <a href="/du-an/sun-cosmo-residence/">Sun Cosmo Residence</a> phía Nam. Phía Bắc bờ Đông (khu vực 6) có <a href="/du-an/sun-symphony-residence/">Sun Symphony Residence</a>, <a href="/du-an/peninsula-da-nang/">Peninsula Đà Nẵng</a>.</p>
+<p><strong>Bờ Tây</strong> (khu vực 3.2 – 4.3): <a href="/du-an/the-filmore-da-nang/">The Filmore</a>, <a href="/du-an/danang-landmark/">Danang Landmark</a> trên đường Bạch Đằng, <a href="/du-an/m-riverside-da-nang/">M Riverside</a> gần cầu Trần Thị Lý.</p>
+<p>Lợi ích trực tiếp: lối đi bộ và tiếp cận mặt nước tốt hơn, bến thủy phục vụ du lịch đường sông, cảnh quan về đêm đẹp hơn – yếu tố quan trọng với căn hộ cho thuê khách du lịch. Trong thời gian thi công, các đoạn đường ven sông có thể bị rào chắn tạm thời.</p>
+<p>Xem thêm: <a href="/du-an/capital-square-hudson-place-s4/">Hudson Place S4 Capital Square</a> – tòa căn hộ cạnh cầu Sông Hàn.</p>
+<p>Cần bảng giá căn hộ ven sông Hàn hai bờ hoặc so sánh dự án, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Cải tạo cảnh quan hai bờ sông Hàn 29,22 ha: các khu vực',
+			'desc'      => 'Dự án cải tạo cảnh quan hai bờ sông Hàn khoảng 29,22 ha qua 5 phường: bến thủy, tuyến đi bộ, chiếu sáng. Các khu vực dự kiến, căn hộ ven sông hưởng lợi.',
+			'points'    => array(
+				'Phạm vi dự kiến khoảng 29,22 ha, 5 phường hai bờ sông Hàn',
+				'Bến thủy nội địa, tuyến đi bộ, chiếu sáng cảnh quan công trình và cầu',
+				'Bờ Đông Trần Hưng Đạo đã có dự án cảnh quan hơn 425 tỷ (2025 – 2028)',
+			),
+			'faq'       => array(
+				array( 'Dự án cải tạo cảnh quan hai bờ sông Hàn rộng bao nhiêu?', 'Theo thông tin đang được chia sẻ, khoảng 292.194 m² (29,22 ha) thuộc các phường Sơn Trà, An Hải, Hải Châu, Hòa Cường, Ngũ Hành Sơn; chờ văn bản phê duyệt chính thức.' ),
+				array( 'Cải tạo cảnh quan sông Hàn gồm những gì?', 'Chỉnh trang cảnh quan, kết nối bến thủy nội địa, tuyến đi bộ, chiếu sáng cảnh quan công trình và cầu qua sông, tăng khả năng tiếp cận mặt nước.' ),
+			),
+		),
+		'sources'  => array(
+			'https://thanhnien.vn/dien-mao-hai-bo-song-han-5-nam-toi-185260917170837573.htm',
+			'https://www.vietnamplus.vn/da-nang-nang-cap-cai-tao-canh-quan-tuyen-duong-ven-song-han-post941645.vnp',
+			'https://dantri.com.vn/du-lich/da-nang-chi-149-ty-dong-thap-sang-song-han-20250924190725916.htm',
+			'https://tuoitre.vn/dieu-chinh-du-an-ben-du-thuyen-da-nang-tang-cay-xanh-mo-loi-di-cong-cong-20260325163605872.htm',
+		),
+	);
+
 	return $posts;
 }
