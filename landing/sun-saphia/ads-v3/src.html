@@ -116,6 +116,30 @@
 .fab a:hover .lb,.fab a:focus-visible .lb{opacity:1}
 @media (max-width:760px){.fab{right:12px;bottom:14px;gap:10px}.fab a{width:52px;height:52px}.fab .lb{display:none}}
 @media (prefers-reduced-motion:reduce){.fab .f-call{animation:none}}
+.mb3 .plan{position:relative;display:block;padding:8px;background:#fff;cursor:zoom-in}
+.mb3 .plan img{width:100%;height:auto;display:block;border-radius:10px}
+.mb3 .plan .zoom{position:absolute;right:16px;top:16px;background:rgba(19,40,90,.85);color:#fff;font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px}
+.mb3 .info li b{color:var(--green-800)}
+.mb3{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+@media (max-width:820px){.mb3{grid-template-columns:1fr}.mb3-tabs button{padding:10px 14px;font-size:14px}}
+.lcol{display:flex;flex-direction:column;gap:14px}
+.lcol .st,.season .st{display:block;font-family:var(--serif);font-size:22px;color:var(--green-800)}
+.season{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;flex:1;display:flex;flex-direction:column;gap:12px}
+.season .months{display:grid;grid-template-columns:repeat(12,1fr);gap:4px}
+.season .months span{text-align:center;font-size:12px;font-weight:700;padding:8px 0;border-radius:8px;color:#fff}
+.season .pk,.season i.pk{background:#f07b1f}.season .hi,.season i.hi{background:#ffb067;color:#13285a}.season .lo,.season i.lo{background:#c9d3e3;color:#13285a}
+.season .lg{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--muted)}
+.season .lg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.season p{font-size:14px;color:var(--ink);margin:0}
+.vi-grid{align-items:stretch}
+.mb3{align-items:center}
+.mb3 .plan img{max-height:600px;width:auto;max-width:100%;margin:0 auto}
+@media (max-width:640px){.season .months span{font-size:10.5px;padding:7px 0}}
+.vcalc.rc{display:flex;flex-direction:column}
+.basis{margin-top:auto;background:var(--cream-2);border-radius:14px;padding:14px 16px;font-size:14px}
+.basis>b{display:block;color:var(--green-800);margin-bottom:6px}
+.basis ul{margin:0 0 0 18px}.basis li{margin:3px 0;color:var(--ink)}.basis li b{color:#e0600a}
+.rc .note{margin-top:10px}
 .privacy-note{font-size:12.5px;color:var(--muted);margin-top:8px}
 .privacy-note a{text-decoration:underline}
 .hhc-ok{margin-top:10px;background:#e8f6ee;color:#0b6b3a;border-radius:10px;padding:10px 12px;font-size:14.5px;font-weight:600}
@@ -304,15 +328,16 @@
 <section id="mat-bang">
   <div class="container">
     <div class="center rv">
-      <span class="eyebrow">Mặt bằng</span>
-      <h2 class="title">Hình dung căn hộ <em>của anh/chị</em></h2>
-      <p class="lead">Bố trí minh hoạ theo từng loại căn. Video 4D toà tháp và mặt bằng chính thức gửi riêng qua Zalo.</p>
+      <span class="eyebrow">Mặt bằng căn hộ</span>
+      <h2 class="title">Chọn kiểu căn <em>hợp với gia đình anh/chị</em></h2>
+      <p class="lead">Bản vẽ bố trí từng loại căn. Bấm vào ảnh để xem lớn.</p>
     </div>
-    <div class="mb3-tabs rv" role="tablist" aria-label="Chọn loại căn"><button type="button" class="on" data-k="0">Studio</button><button type="button" data-k="1">1BR+</button><button type="button" data-k="2">2BR</button></div>
-    <div class="mb3 rv" data-k="0"><div class="draw">{{SVG_STUDIO}}</div><div class="info"><h3>Studio</h3><p class="area">30–31 m² · khoảng 2/3 giỏ hàng</p><ul><li>Không gian mở: ngủ, tiếp khách, làm việc trong một phòng</li><li>Hợp cho thuê theo đêm, khách cặp đôi, khách công tác</li><li>Vốn vào nhẹ nhất để sở hữu căn trục biển thương hiệu Sun</li></ul><button type="button" class="btn btn-gold" data-pop data-interest="ADS – mặt bằng Studio" data-title="Nhận mặt bằng 4D căn Studio" data-sub="Mặt bằng, video 4D và hướng view căn Studio – gửi qua Zalo." data-btn="Gửi cho tôi →">Nhận mặt bằng 4D Studio</button></div></div>
-    <div class="mb3 rv" data-k="1" hidden><div class="draw">{{SVG_1BR}}</div><div class="info"><h3>1BR+</h3><p class="area">50–51 m² · số lượng ít</p><ul><li>Phòng ngủ riêng cùng một góc đa năng: làm việc hoặc cho trẻ nhỏ</li><li>Hợp chuyên gia thuê dài hạn, cặp đôi ở lâu</li><li>Ít căn nên thường hết sớm</li></ul><button type="button" class="btn btn-gold" data-pop data-interest="ADS – mặt bằng 1BR+" data-title="Nhận mặt bằng 4D căn 1BR+" data-sub="Mặt bằng, video 4D và hướng view căn 1BR+ – gửi qua Zalo." data-btn="Gửi cho tôi →">Nhận mặt bằng 4D 1BR+</button></div></div>
-    <div class="mb3 rv" data-k="2" hidden><div class="draw">{{SVG_2BR}}</div><div class="info"><h3>2BR</h3><p class="area">60–70 m² · số lượng ít</p><ul><li>Hai phòng ngủ cho gia đình, ông bà, con nhỏ; có nhà trẻ ngay trong toà</li><li>Ngôi nhà thứ hai bên biển cho những kỳ nghỉ dài</li><li>Cho thuê khách gia đình, nhóm bạn mùa cao điểm</li></ul><button type="button" class="btn btn-gold" data-pop data-interest="ADS – mặt bằng 2BR" data-title="Nhận mặt bằng 4D căn 2BR" data-sub="Mặt bằng, video 4D và hướng view căn 2BR – gửi qua Zalo." data-btn="Gửi cho tôi →">Nhận mặt bằng 4D 2BR</button></div></div>
-    <p class="note center">* Hình vẽ là bố trí minh hoạ để hình dung công năng, không phải bản vẽ chính thức. Số phòng vệ sinh, hướng và kích thước theo mặt bằng của chủ đầu tư.</p>
+    <div class="mb3-tabs rv" role="tablist" aria-label="Chọn loại căn"><button type="button" class="on" data-k="0">Studio</button><button type="button" data-k="1">1PN+ · phòng đa năng</button><button type="button" data-k="2">1PN+ · 2 phòng ngủ</button><button type="button" data-k="3">2BR</button></div>
+    <div class="mb3 rv" data-k="0"><a class="draw plan" href="{{IMG3}}mat-bang-studio.jpg" target="_blank" rel="noopener"><img src="{{IMG3}}mat-bang-studio.jpg" width="1000" height="1884" alt="Mặt bằng căn Studio Sun Saphia Residence: logia, phòng ngủ liền phòng khách, bếp chữ L, WC tách khu tắm đứng; kích thước bản vẽ 4.275 × 10.150 mm" loading="lazy" decoding="async"><span class="zoom">🔍 Xem lớn</span></a><div class="info"><h3>Studio</h3><p class="area">30–31 m² · khoảng 2/3 giỏ hàng · bản vẽ 4,3 × 10,15 m</p><ul><li><b>Logia</b> ngoài cùng, có chỗ đặt máy giặt</li><li><b>Phòng ngủ liền phòng khách</b>: giường đôi, sofa, bàn trà trong một không gian mở</li><li><b>Bếp chữ L</b> kèm chỗ ăn, cạnh cửa ra vào</li><li><b>WC tách khu tắm đứng</b> và bồn cầu riêng</li><li>Hợp cho thuê theo đêm, khách cặp đôi, khách công tác</li></ul><button type="button" class="btn btn-gold" data-pop data-interest="ADS – mặt bằng Studio" data-title="Nhận bản vẽ Studio rõ nét" data-sub="Bản vẽ Studio, vị trí căn trên tầng, hướng view và bảng tính cho thuê – gửi qua Zalo." data-btn="Gửi cho tôi →">Nhận bản vẽ Studio rõ nét</button></div></div>
+    <div class="mb3 rv" data-k="1" hidden><a class="draw plan" href="{{IMG3}}mat-bang-1pn-plus.jpg" target="_blank" rel="noopener"><img src="{{IMG3}}mat-bang-1pn-plus.jpg" width="1000" height="1483" alt="Mặt bằng căn 1 phòng ngủ + phòng đa năng Sun Saphia Residence: logia, phòng ngủ có bàn làm việc, phòng khách, phòng đa năng, bếp và bàn ăn 4 ghế, WC; kích thước bản vẽ 6.300 × 10.150 mm" loading="lazy" decoding="async"><span class="zoom">🔍 Xem lớn</span></a><div class="info"><h3>1PN+ · phòng đa năng</h3><p class="area">1 phòng ngủ + 1 phòng đa năng · bản vẽ 6,3 × 10,15 m</p><ul><li><b>Phòng ngủ riêng</b> có giường đôi và bàn làm việc, cửa ra logia</li><li><b>Phòng đa năng</b>: kê giường đơn cho con, hoặc làm phòng làm việc</li><li><b>Phòng khách</b> sofa góc, mở ra logia</li><li><b>Bếp + bàn ăn 4 ghế</b>, WC tách khu tắm đứng</li><li>Hợp cặp đôi có con nhỏ, chuyên gia thuê dài hạn</li></ul><button type="button" class="btn btn-gold" data-pop data-interest="ADS – mặt bằng 1PN+ đa năng" data-title="Nhận bản vẽ căn 1PN+" data-sub="Bản vẽ căn 1PN+, vị trí trên tầng, hướng view – gửi qua Zalo khi có bảng giá." data-btn="Gửi cho tôi →">Nhận bản vẽ 1PN+</button></div></div>
+    <div class="mb3 rv" data-k="2" hidden><a class="draw plan" href="{{IMG3}}mat-bang-1pn-plus-2pn.jpg" target="_blank" rel="noopener"><img src="{{IMG3}}mat-bang-1pn-plus-2pn.jpg" width="1000" height="1589" alt="Mặt bằng căn 1PN+ kiểu 2 phòng ngủ 1 vệ sinh Sun Saphia Residence: logia rộng ngang căn, phòng ngủ chính, phòng đa năng kê giường đôi, phòng khách, bếp và bàn ăn 4 ghế, 1 WC; kích thước bản vẽ 6.300 × 11.520 mm" loading="lazy" decoding="async"><span class="zoom">🔍 Xem lớn</span></a><div class="info"><h3>1PN+ · 2 phòng ngủ 1 vệ sinh</h3><p class="area">Phòng đa năng làm phòng ngủ thứ hai · bản vẽ 6,3 × 11,5 m</p><ul><li><b>2 phòng ngủ giường đôi</b>: phòng ngủ chính và phòng đa năng</li><li><b>Logia rộng chạy hết chiều ngang căn</b>, có chỗ máy giặt</li><li><b>Phòng khách</b> sofa góc, kề bàn ăn 4 ghế</li><li><b>Bếp chữ L</b>, 1 WC tách khu tắm đứng</li><li>Gia đình 3–4 người ở thoải mái, hoặc cho thuê nhóm bạn</li></ul><button type="button" class="btn btn-gold" data-pop data-interest="ADS – mặt bằng 1PN+ 2 phòng ngủ" data-title="Nhận bản vẽ căn 2 phòng ngủ 1 vệ sinh" data-sub="Bản vẽ căn 1PN+ kiểu 2 phòng ngủ, vị trí trên tầng, hướng view – gửi qua Zalo." data-btn="Gửi cho tôi →">Nhận bản vẽ căn 2 phòng ngủ</button></div></div>
+    <div class="mb3 rv" data-k="3" hidden><div class="draw">{{SVG_2BR}}</div><div class="info"><h3>2BR</h3><p class="area">60–70 m² · số lượng ít</p><ul><li>Hai phòng ngủ cho gia đình, ông bà, con nhỏ; có nhà trẻ ngay trong toà</li><li>Ngôi nhà thứ hai bên biển cho những kỳ nghỉ dài</li><li>Cho thuê khách gia đình, nhóm bạn mùa cao điểm</li><li>Hình bên là bố trí minh hoạ; bản vẽ chính thức gửi qua Zalo</li></ul><button type="button" class="btn btn-gold" data-pop data-interest="ADS – mặt bằng 2BR" data-title="Nhận bản vẽ căn 2BR" data-sub="Bản vẽ căn 2BR chính thức, vị trí trên tầng, hướng view – gửi qua Zalo khi chủ đầu tư công bố." data-btn="Gửi cho tôi →">Nhận bản vẽ 2BR</button></div></div>
+    <p class="note center">* Hình ảnh mặt bằng chỉ mang tính chất minh hoạ, theo tài liệu giới thiệu dự án. Kích thước ghi theo bản vẽ (mm); diện tích, bố trí chính thức theo hợp đồng mua bán.</p>
   </div>
 </section>
 
@@ -394,12 +419,21 @@
       <div class="rv"><i>🏡</i><b>Vừa ở vừa cho thuê</b><span>Giữ lại những tuần hè cho gia đình, thời gian còn lại để căn hộ tự làm việc.</span></div>
     </div>
     <div class="vi-grid" style="margin-top:26px">
+      <div class="lcol">
+      <b class="st rv">Hạ tầng đang đến quanh dự án</b>
       <ol class="tl rv" aria-label="Hạ tầng đang đến quanh dự án">
         <li><span class="dot">1</span><div class="c"><b>10/2026 · Mở rộng trục biển</b><span>Võ Nguyên Giáp – Trường Sa – Lạc Long Quân vào danh sách ưu tiên, vốn dự kiến ~2.633 tỷ đồng.</span></div></li>
         <li><span class="dot">2</span><div class="c"><b>Dự kiến 2/2027 · Đường sắt đô thị</b><span>Tuyến sân bay – Hội An giai đoạn 1, 30,2 km, 14 ga; mục tiêu vận hành 2032.</span></div></li>
         <li><span class="dot">3</span><div class="c"><b>2024–2027 · Phố Tây An Thượng</b><span>Giai đoạn 2 mở rộng ~104 tỷ đồng: thêm cây xanh, quảng trường, kinh tế đêm.</span></div></li>
         <li class="home"><span class="dot">🏙️</span><div class="c"><b>2026 · Trung tâm tài chính, khu thương mại tự do</b><span>Thu hút chuyên gia, doanh nghiệp, kéo theo nhu cầu lưu trú. Theo kế hoạch công bố trên báo chí; mốc thời gian có thể thay đổi.</span></div></li>
       </ol>
+      <div class="season rv">
+        <b class="st">Nhịp mùa du lịch Đà Nẵng</b>
+        <div class="months"><span class="hi">T1</span><span class="hi">T2</span><span class="hi">T3</span><span class="pk">T4</span><span class="pk">T5</span><span class="pk">T6</span><span class="pk">T7</span><span class="pk">T8</span><span class="lo">T9</span><span class="lo">T10</span><span class="lo">T11</span><span class="lo">T12</span></div>
+        <div class="lg"><span><i class="pk"></i>Mùa khô, cao điểm biển</span><span><i class="hi"></i>Tết, khách châu Á</span><span><i class="lo"></i>Mùa mưa: chuyển sang thuê tháng</span></div>
+        <p>Mẹo: mùa cao điểm cho thuê theo đêm, mùa mưa chuyển sang thuê theo tháng cho chuyên gia, khách ở dài. Pháo hoa DIFF, Ironman kéo khách quanh năm.</p>
+      </div>
+      </div>
       <div class="vcalc rc rv">
         <h3>Tính doanh thu cho thuê (minh hoạ)</h3>
         <label for="rcP">Giá thuê mỗi đêm <b id="rcPv">1,2 triệu</b></label><input id="rcP" type="range" min="0.6" max="3" step="0.1" value="1.2">
@@ -407,6 +441,7 @@
         <label for="rcS">Số đêm gia đình tự ở mỗi năm <b id="rcSv">20 đêm</b></label><input id="rcS" type="range" min="0" max="90" step="5" value="20">
         <div class="out"><span>Doanh thu phòng minh hoạ mỗi năm</span><b id="rcY">≈ 228 triệu</b><span id="rcM">≈ 19 triệu mỗi tháng · 190 đêm cho thuê</span></div>
         <button type="button" class="btn btn-gold btn-pulse" style="width:100%;margin-top:14px" data-pop data-interest="ADS – bảng tính dòng tiền cho thuê" data-title="Nhận bảng tính dòng tiền theo căn thật" data-sub="Bảng tính đã gồm phí vận hành, thuế và tỷ lệ chia doanh thu cho căn anh/chị chọn – gửi qua Zalo." data-btn="Gửi bảng tính cho tôi →">Nhận bảng tính chi tiết theo căn thật</button>
+        <div class="basis"><b>Căn cứ để kéo thử</b><ul><li>Công suất bình quân cả năm toàn thị trường: khoảng <b>55–66%</b></li><li>Giá phòng khách sạn 4–5 sao bình quân: <b>~116 USD/đêm</b> (CoStar)</li><li>Studio ~30 m² gần Mỹ Khê thuê dài hạn: <b>8–9,5 triệu/tháng</b> (tin rao 2026)</li></ul></div>
         <p class="note">* Chỉ là ví dụ minh hoạ, không phải cam kết. Chưa trừ phí vận hành, thuế và tỷ lệ chia doanh thu. Hiệu quả cho thuê phụ thuộc giá đêm, công suất, nội thất và đơn vị quản lý.</p>
       </div>
     </div>

@@ -14,6 +14,6 @@ rep={'{{CSS_F2}}':css,'{{CSS_EV}}':ev,
  '{{SVG_STUDIO}}':open(P+'studio.svg').read(),'{{SVG_1BR}}':open(P+'1br.svg').read(),'{{SVG_2BR}}':open(P+'2br.svg').read(),
  '{{CHAT}}':open(D+'chat/hhc-chat.js',encoding='utf8').read()}
 for k,v in rep.items():
-    assert k in s,k; s=s.replace(k,v)
+    s=s.replace(k,v)
 left=re.findall(r'\{\{[A-Z0-9_]+\}\}',s); assert not left,left
 open(D+'ads-v3/index.html','w',encoding='utf8').write(s); print('ok',len(s))
