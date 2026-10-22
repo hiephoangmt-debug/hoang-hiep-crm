@@ -224,5 +224,75 @@ HTML
 		),
 	);
 
+	/* ---------------- 22/10 – Trường tiểu học Hòa Xuân ---------------- */
+	$posts[] = array(
+		'slug'     => 'truong-tieu-hoc-cong-lap-khu-do-thi-sinh-thai-hoa-xuan',
+		'title'    => 'Trường tiểu học công lập trong Khu đô thị sinh thái Hòa Xuân: khu đất 13.655 m², 3 mặt tiền Lê Sỹ – Cồn Dầu 18 – Đỗ Quỳ',
+		'excerpt'  => 'Đà Nẵng triển khai đầu tư Trường Tiểu học Hòa Xuân trong Khu đô thị sinh thái Hòa Xuân: khu đất 13.655 m², ba mặt tiền Lê Sỹ, Cồn Dầu 18, Đỗ Quỳ. Ý nghĩa với cư dân và đất nền khu vực.',
+		'keyword'  => 'trường tiểu học Hòa Xuân',
+		'keywords_extra' => array( 'khu đô thị sinh thái Hòa Xuân', 'đất nền Hòa Xuân', 'trường học Cẩm Lệ', 'Cồn Dầu Hòa Xuân' ),
+		'project'  => 'kdt-sinh-thai-hoa-xuan',
+		'schedule' => '2026-10-22 17:00',
+		'category' => 'Thị trường',
+		'tags'     => array( 'Hạ tầng Đà Nẵng', 'Hòa Xuân', 'Trường học' ),
+		'image'    => 'plugin:img/tin-tuc/truong-tieu-hoc-hoa-xuan.jpg',
+		'image_alt' => 'Sơ đồ mặt bằng chức năng Trường Tiểu học Hòa Xuân: khối lớp học, hành chính, bể bơi, sân chào cờ, cổng phía đường Lê Sỹ',
+		'content'  => <<<HTML
+<p>Khu đô thị sinh thái Hòa Xuân sắp có thêm một <strong>trường tiểu học công lập</strong>. Theo thông tin đang được chia sẻ, dự án <strong>Trường Tiểu học Hòa Xuân</strong> được phê duyệt chủ trương đầu tư tháng 9/2026, trên khu đất <strong>13.655 m²</strong> có ba mặt tiếp giáp các đường <strong>Lê Sỹ, Cồn Dầu 18 và Đỗ Quỳ</strong>. Phương án kiến trúc giới thiệu các khối lớp học bao quanh sân trường, khu thể thao và mảng xanh lớn.</p>
+<!--hh-featured-->
+<h2>Thông tin dự án</h2>
+<table>
+<tbody>
+<tr><th>Tên dự án</th><td>Trường Tiểu học Hòa Xuân (công lập)</td></tr>
+<tr><th>Vị trí</th><td>Khu đô thị sinh thái Hòa Xuân, phường Hòa Xuân (Cẩm Lệ cũ), Đà Nẵng</td></tr>
+<tr><th>Diện tích đất</th><td>13.655 m²</td></tr>
+<tr><th>Tiếp giáp</th><td>Đường Lê Sỹ, Cồn Dầu 18, Đỗ Quỳ</td></tr>
+<tr><th>Chủ trương đầu tư</th><td>Phê duyệt tháng 9/2026 (theo thông tin đang chia sẻ)</td></tr>
+</tbody>
+</table>
+<p>Đến ngày đăng bài, Hoàng Hiệp chưa thấy báo chí đăng số quyết định, tổng mức đầu tư và thời gian thi công – bài sẽ cập nhật khi có văn bản chính thức.</p>
+<h2>Thiết kế: khối lớp 4 tầng, bể bơi, sân chào cờ trung tâm</h2>
+<p>Theo bản vẽ quy hoạch tổng mặt bằng và phối cảnh đang được chia sẻ, trường bố trí:</p>
+<ul>
+<li><strong>Khối lớp học</strong> 4 tầng hình chữ L, mái lắp pin năng lượng mặt trời, sân thượng trồng cây.</li>
+<li><strong>Khối phục vụ học tập</strong> và <strong>khối hành chính quản trị</strong> riêng.</li>
+<li><strong>Bể bơi</strong> trong nhà thi đấu mái vòm – tiện ích hiếm ở trường tiểu học công lập.</li>
+<li><strong>Sân chào cờ</strong> bậc cấp nhiều màu ở trung tâm, sân khấu, vườn dạo cây xanh và <strong>vườn thực nghiệm</strong> cho học sinh.</li>
+<li>Cổng chính và <strong>vịnh dừng đón/trả học sinh</strong> phía đường Lê Sỹ, tách lối vào cho giáo viên, học sinh và lối xe kỹ thuật, nhà để xe, nhà bảo vệ, trạm biến áp.</li>
+</ul>
+<h2>Vị trí trên bản đồ</h2>
+<p>Khu đất hiện là bãi đất trống trong lõi khu dân cư Cồn Dầu, được bao bởi các tuyến Lê Sỹ, Đỗ Quỳ và Cồn Dầu 18; xung quanh là các đường Cồn Dầu 12, 16, 17, 19 và Lê Quang Chi, phía Bắc có công viên cây xanh với lối dạo vòng tròn. Từ đây ra đường Hoàng Thế Thiện và sông Cẩm Lệ chỉ vài phút. Phía Tây Nam khu đất còn một phần đất trống chưa xây dựng.</p>
+<h2>Nằm trong đề án trường lớp 2026 – 2030</h2>
+<p>HĐND thành phố đã thông qua đề án đầu tư trường lớp mầm non và phổ thông công lập giai đoạn 2026 – 2030 với tổng kinh phí gần <strong>28.500 tỷ đồng</strong> (VOV), ưu tiên các khu đô thị mới đông dân. Cùng khu vực, thành phố đã phê duyệt chủ trương đầu tư <strong>hạ tầng Khu liên hợp thể dục thể thao Hòa Xuân</strong>, tổng mức hơn 233,7 tỷ đồng, thực hiện 2025 – 2029.</p>
+<h2>Ý nghĩa với cư dân và nhà đất Hòa Xuân</h2>
+<ul>
+<li><strong>Gia đình trẻ</strong>: trường công lập ngay trong khu giúp con đi học gần, giảm áp lực tuyển sinh ở các trường cũ.</li>
+<li><strong>Nhà phố, đất nền quanh trường</strong> (các tuyến Lê Sỹ, Đỗ Quỳ, Cồn Dầu): thuận lợi ở thật và kinh doanh dịch vụ phục vụ phụ huynh, học sinh. Ngược lại, lô sát cổng trường có thể ồn và kẹt xe giờ đưa đón.</li>
+<li><strong>Tiện ích xã hội hoàn thiện dần</strong> là yếu tố giữ giá dài hạn cho khu đô thị mới, bên cạnh hạ tầng giao thông và cảnh quan ven sông Cẩm Lệ.</li>
+</ul>
+<h2>Dự án quanh khu vực</h2>
+<p>Xem thông tin <a href="/du-an/kdt-sinh-thai-hoa-xuan/">Khu đô thị sinh thái Hòa Xuân</a>, phân khu <a href="/du-an/dat-nen-con-dau-hoa-xuan/">đất nền Cồn Dầu Hòa Xuân</a> và <a href="/du-an/euro-village-2/">Euro Village 2</a> ven sông.</p>
+<p>Cần tìm lô đất, nhà phố gần trường hoặc kiểm tra quy hoạch một lô ở Hòa Xuân, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Trường tiểu học Hòa Xuân: 13.655 m², KĐT sinh thái',
+			'desc'      => 'Trường Tiểu học Hòa Xuân công lập trong Khu đô thị sinh thái Hòa Xuân: khu đất 13.655 m², 3 mặt tiền Lê Sỹ, Cồn Dầu 18, Đỗ Quỳ. Tác động tới nhà đất.',
+			'points'    => array(
+				'Khu đất 13.655 m², ba mặt tiền Lê Sỹ – Cồn Dầu 18 – Đỗ Quỳ',
+				'Chủ trương đầu tư phê duyệt 9/2026 (theo thông tin đang chia sẻ)',
+				'Nằm trong đề án trường lớp công lập 2026 – 2030 gần 28.500 tỷ đồng',
+			),
+			'faq'       => array(
+				array( 'Trường Tiểu học Hòa Xuân mới xây ở đâu?', 'Trong Khu đô thị sinh thái Hòa Xuân, trên khu đất 13.655 m² giáp ba đường Lê Sỹ, Cồn Dầu 18 và Đỗ Quỳ.' ),
+				array( 'Khi nào xây Trường Tiểu học Hòa Xuân?', 'Chủ trương đầu tư được phê duyệt tháng 9/2026 theo thông tin đang chia sẻ; thời gian thi công chờ quyết định đầu tư chính thức.' ),
+			),
+		),
+		'sources'  => array(
+			'https://vov.vn/xa-hoi/da-nang-dau-tu-gan-28500-ty-dong-xay-dung-nang-cap-truong-hoc-thiet-bi-day-hoc-post1320232.vov',
+			'https://danang.gov.vn/vi/w/chi-dao-ieu-hanh-noi-bat-cua-ubnd-thanh-pho-chu-tich-ubnd-thanh-pho-ngay-29-5',
+		),
+	);
+
 	return $posts;
 }
