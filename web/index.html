@@ -144,9 +144,10 @@
       <a href="#quy-mo">Quy mô</a>
       <a href="/sun-galaxy-complex/">Sun Galaxy Complex</a>
       <a href="#gia-ban">Giá bán</a>
+      <a href="#tinh-vay">Tính vay</a>
       <a href="#faq">Hỏi đáp</a>
     </nav>
-    <a class="btn btn-accent" href="#dang-ky">Nhận bảng giá</a>
+    <a class="btn btn-accent" href="#dang-ky" data-open="docs">Nhận bảng giá</a>
   </div>
 </header>
 
@@ -164,9 +165,10 @@
       <h1>Da Nang Downtown: Toàn cảnh siêu dự án <span>80.000 tỷ</span> và tòa tháp 408m bên sông Hàn</h1>
       <p class="lead">Da Nang Downtown được xây trên 76,92 ha đất Công viên Châu Á cũ. Bài viết tổng hợp vị trí, quy hoạch, pháp lý, phân khu Sun Galaxy Complex, loại sản phẩm, giá tham khảo và tiến độ mới nhất, kèm đánh dấu rõ thông tin nào đã được xác nhận chính thức.</p>
       <div class="hero-cta">
-        <a class="btn btn-accent" href="#dang-ky">Nhận bảng giá &amp; mặt bằng</a>
-        <a class="btn btn-ghost" href="#tong-quan">Đọc tổng quan</a>
+        <a class="btn btn-accent" href="#dang-ky" data-open="docs">Tải bảng giá &amp; mặt bằng</a>
+        <a class="btn btn-ghost" href="#tinh-vay">Tính khoản vay</a>
       </div>
+      <div class="trust"><span>Hotline/Zalo 0904 567 009</span><span>Gửi bảng giá trong 5 phút</span><span>Tư vấn miễn phí, không phí môi giới</span></div>
       <p class="meta-line">Cập nhật: <time datetime="2026-10-08">08/10/2026</time> · Thời gian đọc: ~10 phút</p>
     </div>
     <div class="stats" role="list" aria-label="Số liệu chính">
@@ -191,7 +193,8 @@
       <li><a href="#thap-408m">Tháp biểu tượng 408m</a></li>
       <li><a href="#sun-galaxy-complex">Sun Galaxy Complex</a></li>
       <li><a href="#san-pham">Loại hình sản phẩm</a></li>
-      <li><a href="#gia-ban">Giá bán &amp; chính sách</a></li>
+      <li><a href="#gia-ban">Giá bán &amp; chính sách</a>
+        <ol><li><a href="#tai-lieu">Tài liệu dự án</a></li><li><a href="#tinh-vay">Tính khoản vay</a></li></ol></li>
       <li><a href="#phap-ly">Pháp lý &amp; tiến độ</a></li>
       <li><a href="#tiem-nang">Tiềm năng đầu tư</a></li>
       <li><a href="#luu-y">Lưu ý khi mua</a></li>
@@ -375,6 +378,35 @@
     </div>
     <p>Để nhận <strong>bảng giá, mặt bằng và chính sách mới nhất</strong> ngay khi chủ đầu tư công bố, vui lòng <a href="#dang-ky">đăng ký tại đây</a>.</p>
 
+
+    <h3 id="tai-lieu">Bộ tài liệu dự án (gửi miễn phí qua Zalo)</h3>
+    <div class="docs">
+      <div class="doc"><div class="doc-ico" aria-hidden="true">PDF</div><b>Bảng giá &amp; chính sách</b><span>Giá từng căn, chiết khấu, tiến độ thanh toán theo đợt mới nhất.</span><button class="btn btn-accent" type="button" data-open="docs">Nhận bảng giá</button></div>
+      <div class="doc"><div class="doc-ico" aria-hidden="true">PDF</div><b>Mặt bằng &amp; layout</b><span>Mặt bằng tầng, diện tích, hướng view từng loại căn.</span><button class="btn btn-accent" type="button" data-open="docs">Nhận mặt bằng</button></div>
+      <div class="doc"><div class="doc-ico" aria-hidden="true">PDF</div><b>Brochure dự án</b><span>Phối cảnh, tiện ích, hệ sinh thái Sun Group – Accor.</span><button class="btn btn-accent" type="button" data-open="docs">Nhận brochure</button></div>
+      <div class="doc"><div class="doc-ico" aria-hidden="true">XLS</div><b>Bảng tính dòng tiền</b><span>Phương án vay, chi phí, thu nhập cho thuê minh họa.</span><button class="btn btn-accent" type="button" data-open="docs">Nhận bảng tính</button></div>
+    </div>
+
+    <h3 id="tinh-vay">Tính khoản vay minh họa</h3>
+    <p>Kéo thanh trượt để xem vốn tự có và số tiền trả hàng tháng sau thời gian ân hạn. Kết quả chỉ để tham khảo, lãi suất thực tế theo ngân hàng tại thời điểm giải ngân.</p>
+    <div class="calc">
+      <form id="loan-calc" onsubmit="return false">
+        <div><label for="c-price">Giá căn hộ (tỷ đồng)</label><input id="c-price" name="price" type="number" min="1" max="100" step="0.1" value="5" inputmode="decimal"></div>
+        <div><label for="c-ratio">Tỷ lệ vay <output id="out-ratio">70%</output></label><input id="c-ratio" name="ratio" type="range" min="0" max="80" step="5" value="70"></div>
+        <div><label for="c-grace">Ân hạn gốc, hỗ trợ lãi 0% <output id="out-grace">30 tháng</output></label><input id="c-grace" name="grace" type="range" min="0" max="30" step="6" value="30"></div>
+        <div><label for="c-rate">Lãi suất sau ân hạn (%/năm)</label><input id="c-rate" name="rate" type="number" min="0" max="20" step="0.1" value="10" inputmode="decimal"></div>
+        <div><label for="c-years">Thời hạn vay</label><select id="c-years" name="years"><option value="10">10 năm</option><option value="15">15 năm</option><option value="20" selected>20 năm</option><option value="25">25 năm</option></select></div>
+      </form>
+      <div class="calc-out" aria-live="polite">
+        <div><small>Vốn tự có cần chuẩn bị</small><b id="r-own">–</b></div>
+        <div><small>Khoản vay ngân hàng</small><b id="r-loan">–</b></div>
+        <div><small>Thời gian ân hạn</small><b id="r-grace">–</b></div>
+        <div class="big"><small>Trả hàng tháng sau ân hạn (gốc + lãi)</small><b id="r-monthly">–</b></div>
+        <p>Chính sách hỗ trợ lãi và ân hạn theo công bố của chủ đầu tư từng đợt.</p>
+        <button class="btn btn-accent" type="button" data-open="docs">Nhận phương án vay chi tiết</button>
+      </div>
+    </div>
+
     <h2 id="phap-ly">8. Pháp lý và tiến độ</h2>
     <ol class="timeline">
       <li><time datetime="2025-08-15">15/8/2025</time>Phê duyệt quy hoạch chi tiết 1/500 (QĐ 392/QĐ-UBND, theo thông tin dự án).</li>
@@ -448,15 +480,16 @@
           <li>Bảng tính dòng tiền và phương án vay</li>
           <li>Lịch tham quan sa bàn và căn hộ mẫu</li>
         </ul>
-        <p>Hotline: <a href="tel:+84904567009" style="color:#ff8c42;font-weight:700">0904 567 009</a><br>Email: <a href="mailto:hiephoangmt@gmail.com" style="color:#ff8c42;font-weight:700">hiephoangmt@gmail.com</a></p>
+        <p><a class="btn btn-zalo" href="https://zalo.me/0904567009" target="_blank" rel="noopener">Nhắn Zalo ngay</a> <button class="btn btn-ghost" type="button" data-open="chat">Chat tư vấn</button></p>
+        <p>Hotline/Zalo: <a href="tel:+84904567009" style="color:#ff8c42;font-weight:700">0904 567 009</a><br>Email: <a href="mailto:hiephoangmt@gmail.com" style="color:#ff8c42;font-weight:700">hiephoangmt@gmail.com</a></p>
       </div>
-      <form id="lead-form" novalidate>
+      <form id="lead-form" class="lead-form" data-via="form" novalidate>
         <div>
           <label for="f-name">Họ và tên *</label>
           <input id="f-name" name="name" autocomplete="name" required>
         </div>
         <div>
-          <label for="f-phone">Số điện thoại *</label>
+          <label for="f-phone">Số điện thoại / Zalo *</label>
           <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" pattern="^(\+84|0)\d{9,10}$" required>
         </div>
         <div>
@@ -478,10 +511,18 @@
             <option>Shophouse</option>
           </select>
         </div>
+        <div>
+          <label for="f-channel">Nhận tài liệu qua</label>
+          <select id="f-channel" name="channel">
+            <option>Zalo</option>
+            <option>Gọi điện</option>
+            <option>Email</option>
+          </select>
+        </div>
         <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
         <button class="btn btn-accent" type="submit">Nhận bảng giá ngay</button>
         <p class="form-note">Thông tin của bạn được bảo mật và chỉ dùng để tư vấn dự án.</p>
-        <div class="form-ok" role="status" aria-live="polite">Cảm ơn bạn! Chuyên viên sẽ liên hệ trong thời gian sớm nhất.</div>
+        <div class="form-ok" role="status" aria-live="polite"></div>
       </form>
     </section>
 
@@ -519,7 +560,8 @@
 
 <div class="float-cta">
   <a class="btn btn-navy" href="tel:+84904567009">Gọi ngay</a>
-  <a class="btn btn-accent" href="#dang-ky">Nhận bảng giá</a>
+  <a class="btn btn-zalo" href="https://zalo.me/0904567009" target="_blank" rel="noopener">Zalo</a>
+  <a class="btn btn-accent" href="#dang-ky" data-open="docs">Nhận bảng giá</a>
 </div>
 
 <script src="/assets/site.js" defer></script>

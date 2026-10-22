@@ -116,7 +116,7 @@
       <a href="#gia-ban">Giá bán</a>
       <a href="#faq">Hỏi đáp</a>
     </nav>
-    <a class="btn btn-accent" href="#dang-ky">Nhận bảng giá</a>
+    <a class="btn btn-accent" href="#dang-ky" data-open="docs">Nhận bảng giá</a>
   </div>
 </header>
 
@@ -134,9 +134,10 @@
       <h1>Sun Galaxy Complex: Tháp 47 tầng <span>Accor</span> &amp; Moon Gate bên sông Hàn</h1>
       <p class="lead">Sun Galaxy Complex là tổ hợp lễ hội, sự kiện, văn hóa và lưu trú quy mô quốc tế đầu tiên của Đà Nẵng, và là phân khu mở màn của đại đô thị <a href="/" style="color:#ff8c42">Da Nang Downtown</a>. Bài viết tổng hợp thông số, loại căn, giá tham khảo và lưu ý khi đầu tư.</p>
       <div class="hero-cta">
-        <a class="btn btn-accent" href="#dang-ky">Nhận bảng giá Sun Galaxy</a>
-        <a class="btn btn-ghost" href="/">Tổng quan Da Nang Downtown</a>
+        <a class="btn btn-accent" href="#dang-ky" data-open="docs">Tải bảng giá Sun Galaxy</a>
+        <a class="btn btn-ghost" href="/#tinh-vay">Tính khoản vay</a>
       </div>
+      <div class="trust"><span>Hotline/Zalo 0904 567 009</span><span>Gửi bảng giá trong 5 phút</span><span>Tư vấn miễn phí, không phí môi giới</span></div>
       <p class="meta-line">Cập nhật: <time datetime="2026-10-08">08/10/2026</time> · Thời gian đọc: ~7 phút</p>
     </div>
     <div class="stats" role="list" aria-label="Số liệu chính">
@@ -250,7 +251,7 @@
         </tbody>
       </table>
     </div>
-    <div class="inline-cta"><p>Nhận bảng giá Sun Galaxy Complex ngay khi chủ đầu tư công bố.</p><a class="btn btn-accent" href="#dang-ky">Đăng ký nhận bảng giá</a></div>
+    <div class="inline-cta"><p>Nhận bảng giá Sun Galaxy Complex ngay khi chủ đầu tư công bố, hoặc <a href="/#tinh-vay">tính thử khoản vay</a>.</p><button class="btn btn-accent" type="button" data-open="docs">Đăng ký nhận bảng giá</button></div>
 
     <h2 id="dau-tu">7. Tiềm năng và rủi ro khi đầu tư</h2>
     <h3>Điểm cộng</h3>
@@ -297,15 +298,16 @@
           <li>Mặt bằng tầng và layout căn hộ</li>
           <li>Phương án cho thuê qua Accor và bảng tính dòng tiền</li>
         </ul>
-        <p>Hotline: <a href="tel:+84904567009" style="color:#ff8c42;font-weight:700">0904 567 009</a><br>Email: <a href="mailto:hiephoangmt@gmail.com" style="color:#ff8c42;font-weight:700">hiephoangmt@gmail.com</a></p>
+        <p><a class="btn btn-zalo" href="https://zalo.me/0904567009" target="_blank" rel="noopener">Nhắn Zalo ngay</a> <button class="btn btn-ghost" type="button" data-open="chat">Chat tư vấn</button></p>
+        <p>Hotline/Zalo: <a href="tel:+84904567009" style="color:#ff8c42;font-weight:700">0904 567 009</a><br>Email: <a href="mailto:hiephoangmt@gmail.com" style="color:#ff8c42;font-weight:700">hiephoangmt@gmail.com</a></p>
       </div>
-      <form id="lead-form" novalidate>
+      <form id="lead-form" class="lead-form" data-via="form" novalidate>
         <div>
           <label for="f-name">Họ và tên *</label>
           <input id="f-name" name="name" autocomplete="name" required>
         </div>
         <div>
-          <label for="f-phone">Số điện thoại *</label>
+          <label for="f-phone">Số điện thoại / Zalo *</label>
           <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" pattern="^(\+84|0)\d{9,10}$" required>
         </div>
         <div>
@@ -326,10 +328,18 @@
             <option>Penthouse</option>
           </select>
         </div>
+        <div>
+          <label for="f-channel">Nhận tài liệu qua</label>
+          <select id="f-channel" name="channel">
+            <option>Zalo</option>
+            <option>Gọi điện</option>
+            <option>Email</option>
+          </select>
+        </div>
         <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
         <button class="btn btn-accent" type="submit">Nhận bảng giá ngay</button>
         <p class="form-note">Thông tin của bạn được bảo mật và chỉ dùng để tư vấn dự án.</p>
-        <div class="form-ok" role="status" aria-live="polite">Cảm ơn bạn! Chuyên viên sẽ liên hệ trong thời gian sớm nhất.</div>
+        <div class="form-ok" role="status" aria-live="polite"></div>
       </form>
     </section>
 
@@ -364,7 +374,8 @@
 
 <div class="float-cta">
   <a class="btn btn-navy" href="tel:+84904567009">Gọi ngay</a>
-  <a class="btn btn-accent" href="#dang-ky">Nhận bảng giá</a>
+  <a class="btn btn-zalo" href="https://zalo.me/0904567009" target="_blank" rel="noopener">Zalo</a>
+  <a class="btn btn-accent" href="#dang-ky" data-open="docs">Nhận bảng giá</a>
 </div>
 
 <script src="/assets/site.js" defer></script>
