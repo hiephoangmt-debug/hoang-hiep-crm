@@ -258,6 +258,12 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
     <h2>Lãi vay ngân hàng</h2>
     <p class="note">Lãi vay mua nhà, vay sản xuất kinh doanh và lãi vay bình quân ngân hàng công bố hằng tháng (%/năm). Không có nguồn tổng hợp tự động nên số được nhập tay từ báo chí, ghi nguồn từng dòng (chạm vào cột để xem); cập nhật trong <code>dau-tu/data/lai_vay.csv</code>. Lãi thực tế tuỳ hồ sơ, tài sản bảo đảm và thời điểm – hỏi lại ngân hàng trước khi vay.</p>
     <div class="card" style="margin-bottom:12px">
+      <h3>Lãi vay và lãi gửi trên cùng biểu đồ</h3>
+      <p class="note" style="margin:0 0 8px">Đường liền là lãi gửi (huy động) 12 tháng, đường đứt là lãi vay; khoảng cách giữa hai nhóm là chênh lệch ngân hàng hưởng. Lãi gửi và liên ngân hàng có số theo ngày, lãi vay bình quân theo tháng.</p>
+      <div class="stats" id="mixStats"></div>
+      <div class="chart"><canvas id="cMix"></canvas></div>
+    </div>
+    <div class="card" style="margin-bottom:12px">
       <h3>Lãi suất liên ngân hàng – theo ngày (NHNN)</h3>
       <p class="note" style="margin:0 0 8px">Lãi suất các ngân hàng vay nhau, Ngân hàng Nhà nước công bố mỗi ngày làm việc. Đây là chi phí vốn ngắn hạn của ngân hàng: khi lãi qua đêm tăng kéo dài, lãi vay và lãi gửi thường tăng theo sau vài tuần.</p>
       <div class="stats" id="lnhStats"></div>
@@ -274,7 +280,7 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12px; }
       <h3 id="lvDetTitle">Chi tiết ngân hàng</h3>
       <div class="toolbar-in"><select id="lvBank" class="sel" aria-label="Chọn ngân hàng"></select></div>
       <div class="grid2">
-        <div><h3>Lãi vay bình quân theo tháng</h3><div class="chart sm"><canvas id="cLvBank"></canvas></div></div>
+        <div><h3>Lãi vay bình quân và lãi gửi 12 tháng</h3><div class="chart sm"><canvas id="cLvBank"></canvas></div></div>
         <div><h3>Lãi vay mua nhà theo thời gian cố định</h3><div class="chart sm"><canvas id="cLvBankNha"></canvas></div></div>
       </div>
       <div class="note" id="lvBankNotes" style="margin:8px 0 0"></div>
@@ -809,6 +815,35 @@ function lvTable(kind) {
     return b;
   });
 }
+// Lãi vay + lãi gửi chung 1 biểu đồ (cùng đơn vị %/năm)
+function renderMix(s) {
+  const bqSys = LV.filter(r => r.loai === 'Bình quân' && /hệ thống/i.test(r.ngan_hang)).sort((a, b) => a.ngay < b.ngay ? -1 : 1).map(r => [r.ngay.slice(0, 7) + '-15', r.lai_suat]);
+  // lãi vay bình quân trung bình các ngân hàng mỗi tháng
+  const byM = {};
+  LV.filter(r => r.loai === 'Bình quân' && !/hệ thống/i.test(r.ngan_hang)).forEach(r => (byM[r.ngay.slice(0, 7)] = byM[r.ngay.slice(0, 7)] || []).push(r.lai_suat));
+  const bqAvg = Object.keys(byM).sort().map(m => [m + '-15', byM[m].reduce((a, b) => a + b, 0) / byM[m].length]);
+  const nha = LV.filter(r => r.loai === 'Mua nhà' && /TB /.test(r.ngan_hang)).map(r => [r.ngay, r.lai_suat]);
+  const gq = rateAvgHistory('Tại quầy'), go = rateAvgHistory('Online');
+  const csvQ = {}; LS.filter(r => r.ky_han_thang === 12 && !/online/i.test(r.hinh_thuc || '')).forEach(r => (csvQ[r.ngay] = csvQ[r.ngay] || []).push(r.lai_suat));
+  const gqAll = Object.keys(csvQ).sort().map(d => [d, csvQ[d].reduce((a, b) => a + b, 0) / csvQ[d].length]).filter(([d]) => !gq.length || d < gq[0][0]).concat(gq);
+  // vẽ toàn bộ (không cắt theo kỳ) vì lãi vay chỉ có vài mốc tháng
+  const from = [...bqSys, ...bqAvg, ...gqAll].map(x => x[0]).sort()[0] || s;
+  const lnh = pts('lnh_on').filter(([d]) => d >= from);
+  const ds = [
+    line('Gửi 12T tại quầy (TB)', gqAll, css('--s1'), { pointRadius: 2 }),
+    line('Gửi 12T online (TB)', go, css('--s3'), { pointRadius: 2 }),
+    line('Liên ngân hàng qua đêm', lnh, css('--muted'), { borderWidth: 1.5 }),
+    line('Vay bình quân – toàn hệ thống (NHNN)', bqSys, css('--s2'), { borderDash: [6, 4], pointRadius: 4 }),
+    line('Vay bình quân – TB các ngân hàng', bqAvg, css('--s5'), { borderDash: [6, 4], pointRadius: 4 }),
+    line('Vay mua nhà ưu đãi (TB DKRA)', nha, css('--s7'), { showLine: false, pointRadius: 6, pointStyle: 'rectRot' }),
+  ].filter(d => d.data.length);
+  const o = baseOpts('%/năm', { legend: true, dec: 2, tickDec: 1 });
+  o.interaction = { mode: 'nearest', intersect: false, axis: 'x' };
+  draw('cMix', { type: 'line', data: { datasets: ds }, options: o });
+  const lastV = (a) => a.length ? a.at(-1)[1] : null;
+  const g = lastV(gqAll), v = lastV(bqAvg) ?? lastV(bqSys);
+  $('mixStats').innerHTML = g != null && v != null ? `<span>Lãi gửi 12T tại quầy: <b>${fmt(g, 2)}%</b></span><span>Lãi vay bình quân: <b>${fmt(v, 2)}%</b></span><span>Chênh lệch vay – gửi: <b>${fmt(v - g, 2)} điểm</b></span>` : '';
+}
 function renderLnh(s) {
   const on = pts('lnh_on');
   if (!on.length) { $('lnhStats').innerHTML = '<span>Chưa có số liệu – bot sẽ lấy ở lần chạy tới.</span>'; }
@@ -882,9 +917,17 @@ function renderLvBank() {
   const o = baseOpts('%/năm', { legend: true, dec: 2, xunit: 'month', tickDec: 1 });
   o.plugins.tooltip.callbacks.title = (it) => it.length ? 'Tháng ' + monthLbl(keyOf(it[0].parsed.x)).slice(1) : '';
   o.scales.x.offset = true;
+  // lãi gửi 12 tháng của cùng ngân hàng (khớp tên không phân biệt hoa thường/khoảng trắng)
+  const norm = (x) => x.toLowerCase().replace(/\s+|bank$/g, '');
+  const dep = [];
+  if (RA && RA.lich_su_12t) for (const [k, h] of Object.entries(RA.lich_su_12t)) {
+    const [kind, name] = k.split('|');
+    if (norm(name) === norm(lvBank)) dep.push(line(`Gửi 12T ${kind.toLowerCase()}`, Object.entries(h).sort(), css(kind === 'Online' ? '--s3' : '--s4'), { pointRadius: 2 }));
+  }
   draw('cLvBank', { type: 'line', data: { datasets: [
-    line(lvBank, bq, css('--s1'), { pointRadius: 5 }),
-    line('Toàn hệ thống (NHNN)', sys, css('--muted'), { borderDash: [5, 4], pointRadius: 3 }),
+    line('Vay bình quân ' + lvBank, bq, css('--s1'), { pointRadius: 5, borderDash: [6, 4] }),
+    line('Vay bình quân toàn hệ thống', sys, css('--muted'), { borderDash: [3, 3], pointRadius: 3 }),
+    ...dep,
   ].filter(d => d.data.length) }, options: o });
   // mua nhà theo thời gian cố định + kinh doanh
   const nha = mine.filter(r => r.loai !== 'Bình quân').sort((a, b) => (a.loai + a.ky_han).localeCompare(b.loai + b.ky_han, 'vi', { numeric: true }));
@@ -1344,7 +1387,7 @@ function render() {
   simple('cBac', 'bac', 'Bạc', 'USD/oz', css('--s7'), 2);
   simple('cDau', 'dau', 'Dầu Brent', 'USD/thùng', css('--s2'), 2);
   simple('cSp', 'sp500', 'S&P 500', 'điểm', css('--s3'));
-  renderFed(s); renderLnh(s); renderLaiVay(); initCalc(); renderDays();
+  renderFed(s); renderMix(s); renderLnh(s); renderLaiVay(); initCalc(); renderDays();
   renderBds(s); renderLs();
 }
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => render());
