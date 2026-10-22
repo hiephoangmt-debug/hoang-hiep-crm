@@ -62,13 +62,17 @@
   .chip b { font-weight: 800; font-size: 34px; }
   .chip span { font-weight: 800; font-size: 32px; color: var(--orange3); margin-left: 6px; }
   .q { font-weight: 900; color: var(--orange); }
+  /* phụ đề theo giọng đọc */
+  #sub { position: absolute; left: 0; right: 0; top: 1424px; height: 80px; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+  #sub span { display: inline-block; max-width: 980px; padding: 10px 26px; border-radius: 16px; background: rgba(4,12,30,.86); border: 2px solid rgba(255,255,255,.14);
+    font-weight: 800; font-size: 38px; line-height: 1.2; text-align: center; color: #fff; white-space: nowrap; box-shadow: 0 10px 30px rgba(0,0,0,.45); opacity: 0; }
 </style>
 </head>
 <body>
-<div id="stage"><div class="grid"></div><div id="layer"></div>
+<div id="stage"><div class="grid"></div><div id="layer"></div><div id="sub"><span></span></div>
 <svg id="grain" width="1080" height="1920"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
 </div>
-<script src="ex_config.js"></script>
+<script>document.write('<script src="' + (new URLSearchParams(location.search).get('cfg') || 'ex_config.js') + '"><\/script>')</script>
 <script>
 // Bộ dựng video giải mã: mỗi mục trong EX.items có thời điểm vào/ra (khung hình, 30 fps) và kiểu hiệu ứng.
 (async function () {
@@ -143,11 +147,11 @@
       const lt = f - a;
       if (it.type === 'img' && it.kb) { const k = clamp(lt / ((b ?? a + 300) - a)); el.querySelector('img').style.transform = `scale(${(it.kb[0] + (it.kb[1] - it.kb[0]) * k).toFixed(4)})`; }
       if (it.type === 'count') { const k = E.out(clamp((lt - 4) / (it.dur || 36))); el.querySelector('.num').textContent = (it.prefix || '') + (it.dec ? (it.to * k).toFixed(it.dec).replace('.', ',') : fmt(it.to * k)); }
-      if (it.type === 'bars') el.querySelectorAll('.bar').forEach((bar, i) => { const k = E.outQ(clamp((lt - 8 - i * 10) / 30)); bar.querySelector('.col').style.transform = `scaleY(${k.toFixed(3)})`; bar.querySelector('.v').textContent = fmt(it.items[i].value * k); });
+      if (it.type === 'bars') el.querySelectorAll('.bar').forEach((bar, i) => { const k = E.outQ(clamp((lt - 8 - (it.delays ? it.delays[i] : i * 10)) / 30)); bar.querySelector('.col').style.transform = `scaleY(${k.toFixed(3)})`; bar.querySelector('.v').textContent = fmt(it.items[i].value * k); });
       if (it.type === 'progress') { const k = E.out(clamp((lt - 6) / 40)), fl = el.querySelector('.fill'); fl.style.width = (it.pct * k) + '%'; fl.textContent = Math.round(it.pct * k) + '%'; }
-      if (it.type === 'check' || it.type === 'chips') { const rows = el.children; for (let i = 0; i < rows.length; i++) { const k = E.outQ(clamp((lt - (it.stagger || 18) * i) / 18)); rows[i].style.opacity = k; rows[i].style.transform = `translateX(${((1 - k) * 120).toFixed(1)}px)`; } }
+      if (it.type === 'check' || it.type === 'chips') { const rows = el.children; for (let i = 0; i < rows.length; i++) { const k = E.outQ(clamp((lt - (it.delays ? it.delays[i] : (it.stagger || 18) * i)) / 18)); rows[i].style.opacity = k; rows[i].style.transform = `translateX(${((1 - k) * 120).toFixed(1)}px)`; } }
       if (it.type === 'flow') { const nodes = el.querySelectorAll('.node'); nodes.forEach((n, i) => { const k = E.back(clamp((lt - (it.stagger || 22) * i) / 18)); n.style.opacity = clamp(k); n.style.transform = `scale(${(.4 + .6 * k).toFixed(3)})`; }); }
-      if (it.type === 'scale') { const k = E.inOut(clamp((lt - 20) / 40)), ang = (it.tilt || -10) * k; const beam = el.querySelector('.beam'); beam.style.transform = `rotate(${ang}deg)`;
+      if (it.type === 'scale') { const k = E.inOut(clamp((lt - (it.tiltDelay ?? 20)) / 40)), ang = (it.tilt || -10) * k; const beam = el.querySelector('.beam'); beam.style.transform = `rotate(${ang}deg)`;
         const dy = Math.sin(ang * Math.PI / 180) * 270; el.querySelector('.pl').style.transform = `translate(0px, ${(-dy).toFixed(1)}px) rotate(${-ang}deg)`; el.querySelector('.pr').style.transform = `translate(0px, ${dy.toFixed(1)}px) rotate(${-ang}deg)`;
         el.querySelector('.pl').style.transformOrigin = '110px 250px'; el.querySelector('.pr').style.transformOrigin = '650px 250px'; }
       if (it.type === 'hl' && !it.box) { el.style.transform = `scaleX(${E.inOut(clamp(lt / (it.dur || 18))).toFixed(3)})`; el.style.opacity = (vis * .75).toFixed(3); }
@@ -161,7 +165,17 @@
         const k = E.out(clamp((lt - (it.stagger || 22) * i - 12) / 14)); Object.assign(ar.style, { left: r0 + 'px', top: '71px', width: Math.max(0, r1 - r0) + 'px', transform: `scaleX(${k.toFixed(3)})`, opacity: k > 0 ? 1 : 0 }); });
     }
   }
-  window.renderFrame = async f => { apply(f); return true; };
+  // phụ đề: EX.subs = [[giây bắt đầu, giây kết thúc, 'chữ'], ...] theo thời gian giọng đọc (+ EX.voiceOffset)
+  const subEl = document.querySelector('#sub span'); let curSub = null;
+  function applySub(f) {
+    const t = f / 30 - (EX.voiceOffset || 0);
+    const s = (EX.subs || []).find(x => t >= x[0] - 0.05 && t < x[1] + 0.12);
+    if (!s) { subEl.style.opacity = 0; return; }
+    if (s !== curSub) { subEl.innerHTML = s[2]; curSub = s; }
+    const k = Math.min(clamp((t - s[0] + 0.05) / 0.15), clamp((s[1] + 0.12 - t) / 0.12));
+    subEl.style.opacity = k.toFixed(3); subEl.style.transform = `translateY(${((1 - E.outQ(clamp((t - s[0] + 0.05) / 0.2))) * 14).toFixed(1)}px)`;
+  }
+  window.renderFrame = async f => { apply(f); applySub(f); return true; };
   window.TOTAL = EX.duration;
   await document.fonts.load('900 96px "Be Vietnam Pro"', 'ĐỂ'); await document.fonts.ready;
   await Promise.all([...document.images].map(im => im.complete ? 1 : new Promise(r => { im.onload = im.onerror = r; })));
