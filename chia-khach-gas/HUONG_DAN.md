@@ -111,6 +111,7 @@ Nếu báo lỗi, đọc dòng đỏ:
 | Sale | `/giahan K4` | Xin thêm 1 ngày cho hạn chuyển đổi (1 lần mỗi khách) |
 | Sale | `/nghi` · `/lam` | Tạm dừng / bật lại nhận khách (nghỉ phép, bận) |
 | Quản lý | `/them 0905123456 Tên - nhu cầu` | Thêm khách bằng tay (khách giới thiệu, Facebook, gọi hotline…), bot chia ngay. Nhiều khách: mỗi khách 1 dòng dưới chữ /them |
+| Quản lý | `/themkhac 0905123456 Tên - Downtown` | Thêm khách dự án khác: chia theo vòng riêng, không tính lượt FourS/Saphia |
 | Quản lý | `/sale` | Danh sách đội, mỗi người đang giữ bao nhiêu khách |
 | Quản lý | `/baocao` | Báo cáo hôm nay |
 | Quản lý | `/tam Tên` · `/mo Tên` | Tạm dừng / mở lại chia cho một sale |
@@ -134,10 +135,22 @@ Sửa ngay trong tab **CauHinh**, không cần sửa code:
 | `NONG_NHAC_NGAY` · `NONG_THU_HOI_NGAY` | 2 · 7 | Khách nóng: nhắc / thu hồi khi không cập nhật |
 | `GIA_HAN_NGAY` · `SO_LAN_GIA_HAN` | 1 · 1 | Số ngày được cộng khi xin gia hạn / số lần được xin mỗi khách |
 | `NHAC_NHAN_PHUT` · `NHAC_BAO_CAO_PHUT` · `NHAC_CHUYEN_DOI_NGAY` | 20 · 90 · 2 | Lúc gửi tin nhắc |
+| `NGUON_KHAC_SHEET_ID` | (trống) | Link hoặc ID Sheet **DATA CHẠY GOOGLE**. Có giá trị thì bot chia luôn khách dự án khác |
+| `NGUON_KHAC_TAB` | (trống) | Chỉ đọc các tab này, ví dụ `Dowtown, SPANA TOWER`. Trống = mọi tab dự án (bỏ TONG_HOP, UPLOAD_…, CRM_…, SAN_PHAM) |
+| `NHOM_RIENG` | fours,saphia | Khách có chữ này tính lượt FourS/Saphia; còn lại là dự án khác |
+
+## Chia khách dự án khác (không tính lượt FourS / Saphia)
+
+- Bot đọc dòng **mới** trong các tab dự án của Sheet DATA CHẠY GOOGLE (Downtown, Spana, Cora…). Data cũ có sẵn và tab mới thêm sau không bị đổ lại.
+- Có **2 vòng xoay riêng**: FourS/Saphia và dự án khác. Sale nhận khách Downtown không bị mất lượt khách Saphia, và ngược lại.
+- Tin giao ghi rõ `Quan tâm: Dự án: <tên tab>`. Hạn nhận, báo cáo, thu hồi giống khách Saphia.
+- Khách gửi form nhiều lần liền chỉ tính 1 khách. Số đang có người giữ thì báo người đó, không chia trùng.
+- Giới hạn "giữ 5 khách chưa báo cáo" tính chung cả 2 nhóm.
+- `/them` có dòng `Trang:` là web dự án khác → tự vào nhóm dự án khác. Không ghi trang → nhóm FourS/Saphia.
 
 ## Kiểm tra
 
-`node test-mo-phong.js` chạy 71 tình huống trên bản giả lập Google Sheet và Telegram:
+`node test-mo-phong.js` và `node test-du-an-khac.js` chạy các tình huống trên bản giả lập Google Sheet và Telegram:
 - 30 phút, 2 giờ, 3 ngày, gia hạn;
 - ban đêm;
 - sale khác bấm nhầm khách;
