@@ -12,7 +12,7 @@ Site tĩnh (HTML/CSS/JS thuần), deploy thư mục `web/` lên gốc domain.
 - Domain trong `canonical`, `og:url`, JSON-LD, `sitemap.xml`, `robots.txt` (đang dùng `https://www.sun-danangdowntown.com`).
 - Ảnh OG 1200×630: `/images/da-nang-downtown-og.jpg`, `/images/sun-galaxy-complex-og.jpg`.
 - `CONFIG` ở đầu `assets/site.js`:
-  - `LEAD_ENDPOINT`: URL Web App Google Apps Script (mã ở `integrations/google-apps-script/Code.gs`). Lead ghi vào Sheet **Leads – Website Da Nang Downtown** trên Google Drive và gửi email báo khách mới.
+  - `LEAD_ENDPOINT`: URL Web App Google Apps Script (mã ở `integrations/google-apps-script/Code.gs`). Lead ghi vào Sheet **DATA CHẠY GOOGLE**, tab **Dowtown** (A thời gian, B tên, C SĐT, D nhu cầu, E link có gclid, L mã form WEB-FORM / WEB-POPUP / WEB-CHAT) và gửi email báo khách mới.
   - `DOCS_URL`: link thư mục Google Drive chứa bảng giá, mặt bằng, brochure. Khách để lại thông tin xong sẽ thấy nút mở tài liệu.
   - `ZALO_URL`, `HOTLINE`: đang là 0904 567 009.
 

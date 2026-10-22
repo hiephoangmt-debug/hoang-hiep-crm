@@ -103,6 +103,7 @@
         "addressCountry": "VN"
       },
       "geo": {"@type": "GeoCoordinates", "latitude": 16.0393, "longitude": 108.2275},
+      "image": "https://www.sun-danangdowntown.com/images/da-nang-downtown-og.jpg",
       "containsPlace": {"@id": "https://www.sun-danangdowntown.com/sun-galaxy-complex/#place"}
     },
     {
@@ -128,6 +129,7 @@
 }
 </script>
 
+<link rel="preload" as="image" type="image/webp" href="/images/da-nang-downtown-phoi-canh-960.webp" imagesrcset="/images/da-nang-downtown-phoi-canh-960.webp 960w, /images/da-nang-downtown-phoi-canh-1920.webp 1920w" imagesizes="100vw">
 <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
@@ -151,7 +153,11 @@
   </div>
 </header>
 
-<section class="hero">
+<section class="hero has-photo">
+  <picture class="hero-bg">
+    <source type="image/webp" srcset="/images/da-nang-downtown-phoi-canh-960.webp 960w, /images/da-nang-downtown-phoi-canh-1920.webp 1920w" sizes="100vw">
+    <img src="/images/da-nang-downtown-phoi-canh-960.webp" width="1920" height="1080" fetchpriority="high" decoding="async" alt="Phối cảnh phố thương mại ven sông Da Nang Downtown với tòa tháp 408m lúc hoàng hôn">
+  </picture>
   <div class="container">
     <div>
       <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -178,9 +184,6 @@
       <div class="stat" role="listitem"><b>4.000 chỗ</b><small>Nhà hát opera hơn 9.000 m²</small></div>
     </div>
   </div>
-  <svg class="skyline" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
-    <path fill="#fff" d="M0 120V90h60V70h40v20h50V55h30v35h70V80h40V40h20V10h8v30h20v50h60V65h50v25h80V50h35v40h90V75h45v15h70V60h40v30h60V85h70v35z"/>
-  </svg>
 </section>
 
 <div class="container layout">
@@ -243,32 +246,12 @@
     <h2 id="vi-tri">2. Vị trí Da Nang Downtown: "lõi kim cương" bên sông Hàn</h2>
     <p>Dự án nằm ở bờ Đông sông Hàn, trong đoạn giữa <strong>cầu Trần Thị Lý</strong> và <strong>cầu Tiên Sơn</strong>, tại khu vực giao lộ Phan Đăng Lưu – Đỗ Pháp Thuận. Đây là một trong số ít quỹ đất lớn còn lại ngay trung tâm Đà Nẵng, có mặt tiền sông dài và tầm nhìn về quận Hải Châu cũ cùng biển Mỹ Khê.</p>
 
-    <figure class="map">
-      <svg viewBox="0 0 800 420" role="img" aria-labelledby="map-title map-desc">
-        <title id="map-title">Sơ đồ vị trí Da Nang Downtown</title>
-        <desc id="map-desc">Sơ đồ minh họa: dự án nằm bờ Đông sông Hàn, giữa cầu Trần Thị Lý ở phía Bắc và cầu Tiên Sơn ở phía Nam, cách biển Mỹ Khê về phía Đông và gần sân bay Đà Nẵng về phía Tây.</desc>
-        <rect width="800" height="420" fill="#eef4fa"/>
-        <rect x="620" y="0" width="180" height="420" fill="#cfe3f5"/>
-        <text x="710" y="210" text-anchor="middle" font-size="16" fill="#2c5f8a" font-weight="700">BIỂN</text>
-        <text x="710" y="232" text-anchor="middle" font-size="14" fill="#2c5f8a">Mỹ Khê</text>
-        <path d="M300 0 C330 90 280 160 320 230 C350 290 330 360 360 420 L420 420 C390 360 410 290 380 230 C340 160 390 90 360 0 Z" fill="#9cc6ea"/>
-        <text x="300" y="130" font-size="14" fill="#1b4f7a" font-weight="700" transform="rotate(-78 300 130)">SÔNG HÀN</text>
-        <rect x="250" y="120" width="170" height="10" fill="#7a8796"/>
-        <text x="160" y="118" font-size="13" fill="#333">Cầu Trần Thị Lý</text>
-        <rect x="290" y="330" width="160" height="10" fill="#7a8796"/>
-        <text x="200" y="360" font-size="13" fill="#333">Cầu Tiên Sơn</text>
-        <rect x="395" y="150" width="140" height="160" rx="12" fill="#0b2a4a"/>
-        <text x="465" y="215" text-anchor="middle" font-size="15" fill="#ff8c42" font-weight="800">DA NANG</text>
-        <text x="465" y="235" text-anchor="middle" font-size="15" fill="#ff8c42" font-weight="800">DOWNTOWN</text>
-        <text x="465" y="258" text-anchor="middle" font-size="12" fill="#fff">76,92 ha</text>
-        <circle cx="440" cy="285" r="7" fill="#ff8c42"/>
-        <text x="455" y="290" font-size="11" fill="#fff">Tháp 408m</text>
-        <text x="110" y="250" text-anchor="middle" font-size="14" fill="#555">Hải Châu</text>
-        <text x="110" y="270" text-anchor="middle" font-size="12" fill="#777">(trung tâm hành chính)</text>
-        <text x="110" y="380" text-anchor="middle" font-size="13" fill="#555">✈ Sân bay Đà Nẵng</text>
-        <text x="580" y="60" text-anchor="middle" font-size="12" fill="#555">Sơn Trà ↑</text>
-      </svg>
-      <figcaption>Sơ đồ minh họa vị trí tương đối, không theo tỷ lệ. Ranh giới chính xác theo quy hoạch 1/500 được phê duyệt.</figcaption>
+    <figure class="photo">
+      <picture>
+        <source type="image/webp" srcset="/images/da-nang-downtown-vi-tri-giao-thong-960.webp 960w, /images/da-nang-downtown-vi-tri-giao-thong-1920.webp 1920w" sizes="(max-width: 960px) 100vw, 860px">
+        <img src="/images/da-nang-downtown-vi-tri-giao-thong-960.webp" width="1920" height="1080" loading="lazy" decoding="async" alt="Sơ đồ vị trí Da Nang Downtown bên sông Hàn giữa cầu Trần Thị Lý và cầu Tiên Sơn, cùng các tuyến LRT du lịch, LRT 2, LRT 4 và MRT 2 theo quy hoạch">
+      </picture>
+      <figcaption>Vị trí Da Nang Downtown và mạng lưới đường sắt đô thị theo quy hoạch (LRT du lịch, LRT 2, LRT 4, MRT 2). Ảnh minh họa.</figcaption>
     </figure>
 
     <h3>Kết nối giao thông và tiện ích xung quanh</h3>
@@ -276,6 +259,8 @@
       <li><strong>Trung tâm Hải Châu:</strong> sang bờ Tây qua cầu Trần Thị Lý hoặc cầu Tiên Sơn, chỉ vài phút di chuyển.</li>
       <li><strong>Biển Mỹ Khê:</strong> khoảng 2–3 km về phía Đông.</li>
       <li><strong>Sân bay quốc tế Đà Nẵng:</strong> khoảng 10–15 phút đi xe (tùy giờ).</li>
+      <li><strong>Trục đường chính:</strong> cầu Trần Thị Lý, cầu Tiên Sơn, Phan Đăng Lưu, Ngũ Hành Sơn, Võ Nguyên Giáp.</li>
+      <li><strong>Đường sắt đô thị theo quy hoạch:</strong> tuyến LRT du lịch chạy dọc hai bờ sông Hàn, LRT 2 qua cầu Tiên Sơn, LRT 4 và MRT 2, với các ga dự kiến quanh khu dự án. Các tuyến này đang ở giai đoạn quy hoạch, chưa có mốc xây dựng.</li>
       <li><strong>Cầu Rồng, Lễ hội pháo hoa DIFF:</strong> nằm trên cùng trục sông Hàn. Khán đài DIFF mới thuộc chính phân khu <a href="/sun-galaxy-complex/">Sun Galaxy Complex</a>.</li>
       <li><strong>Cùng hệ sinh thái Sun Group:</strong> Sun World Bà Nà Hills, InterContinental Danang Sun Peninsula, Sun Symphony Residence, Sun Ponte Residence.</li>
     </ul>

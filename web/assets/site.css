@@ -270,3 +270,13 @@ footer a{color:#fff}
   .float-cta .btn{font-size:13.5px;padding:12px 6px}
 }
 @media (max-width:380px){.site-header .btn{padding:9px 12px;font-size:13px}}
+
+/* Ảnh */
+.hero.has-photo{background:#071b30;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:-2}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:60% 40%}
+.hero.has-photo::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(7,27,48,.92) 0%,rgba(7,27,48,.78) 45%,rgba(7,27,48,.35) 100%),linear-gradient(0deg,rgba(7,27,48,.6),transparent 40%)}
+.hero.has-photo .stat{background:rgba(7,27,48,.55);backdrop-filter:blur(6px)}
+figure.photo{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--soft)}
+figure.photo img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+@media (max-width:960px){.hero.has-photo::before{background:linear-gradient(180deg,rgba(7,27,48,.75),rgba(7,27,48,.92))}}

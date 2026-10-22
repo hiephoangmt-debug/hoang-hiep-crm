@@ -17,6 +17,9 @@ const CONFIG = {
     get(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
   };
+  // Giữ link đầu tiên khách vào (có gclid/utm từ quảng cáo) cho cả phiên
+  let landing = store.get('ddt_landing');
+  if (!landing || /[?&](gclid|utm_source|fbclid)=/.test(location.search)) { landing = location.href; store.set('ddt_landing', landing); }
   const PHONE_RE = /^(\+84|0)\d{9,10}$/;
   const cleanPhone = (v) => (v || '').replace(/[\s.\-()]/g, '');
   const pageSource = 'seo' + (location.pathname.replace(/\//g, '-').replace(/-$/, '') || '-da-nang-downtown');
@@ -26,7 +29,7 @@ const CONFIG = {
   async function submitLead(data) {
     const payload = Object.assign({
       need: '', unit_type: '', channel: '', note: '',
-      source: pageSource, page: location.href, submitted_at: new Date().toISOString()
+      source: pageSource, page: location.href, landing, submitted_at: new Date().toISOString()
     }, data);
     if (window.dataLayer) window.dataLayer.push({ event: 'generate_lead', form: payload.via || 'form', page: location.pathname });
     if (typeof window.fbq === 'function') window.fbq('track', 'Lead');
