@@ -404,9 +404,17 @@ def fetch_interbank(pages: int):
     out = {}
     base = "https://sbv.gov.vn/o/headless-delivery/v1.0/content-structures/3450260/structured-contents"
     for page in range(1, pages + 1):
-        r = get(base, params={"pageSize": 100, "page": page, "sort": "datePublished:desc"},
-                headers={"Accept": "application/json"}, timeout=40)
-        d = r.json()
+        if page > 1:
+            time.sleep(3)  # NHNN chặn khi gọi dồn dập
+        try:
+            r = get(base, params={"pageSize": 100, "page": page, "sort": "datePublished:desc"},
+                    headers={"Accept": "application/json"}, timeout=40)
+            d = r.json()
+        except Exception as e:  # noqa: BLE001
+            if page == 1:
+                raise
+            log(f"   trang {page} lỗi ({e}) – giữ {page - 1} trang đã lấy")
+            break
         for it in d.get("items") or []:
             fields = it.get("contentFields") or []
             raw = next((f.get("contentFieldValue", {}).get("data") for f in fields if f.get("name") == "ngayApDung"), None)
@@ -601,7 +609,7 @@ def main():
     step("Lãi suất Fed", fed)
 
     def lien_ngan_hang():
-        data = fetch_interbank(6 if first("lnh_on") else 1)
+        data = fetch_interbank(4 if first("lnh_on") else 1)
         for key, pts_ in data.items():
             merge(series, key, pts_)
         last = max(data["lnh_on"])
