@@ -6,14 +6,15 @@ const SOURCES = ['Facebook', 'Zalo', 'Landing page', 'Giới thiệu', 'Booking/
 
 const SAMPLE_DATA = {
   project: {
-    name: 'Khu căn hộ du lịch, thương mại dịch vụ Hải Minh',
-    address: 'Lô A2-1 & A2-2, trục Võ Nguyên Giáp – Trường Sa, P. Ngũ Hành Sơn, Đà Nẵng',
+    name: 'Sun Saphia Residence',
+    address: 'Góc Nguyễn Đức Thuận – Trường Sa (trục Võ Nguyên Giáp – Trường Sa), khu Saphia, P. Ngũ Hành Sơn, Đà Nẵng',
     floors: 30,
-    totalUnits: 400,
-    amenities: 'Condotel ~400 căn, khối thương mại dịch vụ; cao ~117m; sàn XD >45.000 m²; phía trước là công viên biển theo quy hoạch',
+    totalUnits: 782,
     hotline: '0904567009',
+    link4d: 'https://www.sun-saphia-residence.com/#ss4d',
+    amenities: 'Khu đất 3.720,1 m²; 1 tòa 30 tầng ~114 m; 2 tầng hầm; 782 căn (Studio 30–31 m², 1PN+1 50–51 m², 2PN 60–70 m²). Đối diện là dải đất resort ven biển; công viên biển Trường Sa (quy hoạch) cuối đường Minh Mạng; gần bãi tắm Sơn Thủy.',
     manager: 'Hoàng Hiệp',
-    notes: 'CĐT: Công ty TNHH Quản lý và Dịch vụ Hạ tầng Kỹ thuật Miền Trung. Đang thi công.',
+    notes: 'Tên pháp lý: Khu căn hộ du lịch, thương mại dịch vụ Hải Minh. Dự kiến bàn giao 11/2028 (theo tài liệu giới thiệu, có thể thay đổi).',
   },
   units: [
     { id: 'u1', code: 'HM-201', floor: 2, type: 'Studio', area: 30, price: 6000000, status: 'Đã cho thuê' },

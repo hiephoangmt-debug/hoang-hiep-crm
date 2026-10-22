@@ -11,14 +11,16 @@
  */
 var TELE_TOKEN = 'DAN_TOKEN_BOT_VAO_DAY';
 var TELE_CHAT_ID = 'DAN_CHAT_ID_VAO_DAY';
+/** Link mô hình 3D·4D·5D – kèm trong tin báo khách mới để chép gửi khách qua Zalo */
+var TELE_LINK_4D = 'https://www.sun-saphia-residence.com/#ss4d';
 
-/** Bot HaiMinh_bot chỉ báo khách của Hải Minh. Khách của website khác (vd Sun FourS) không gửi vào bot này. */
+/** Bot HaiMinh_bot chỉ báo khách của Sun Saphia Residence. Khách của website khác (vd Sun FourS) không gửi vào bot này. */
 var TELE_CHI_BAO = /hải minh|hai minh|haiminh|cnhdchvhiminh|cănhộdịchvụhảiminh|saphia|shaphia/i;
 function teleCuaToi_(b, site) {
   return TELE_CHI_BAO.test(String(site && site.name || '') + ' ' + String(b && b.url || '') + ' ' + String(b && b.message || ''));
 }
 function teleTen_(b, site) {
-  return /saphia|shaphia/i.test(String(b && b.url || '') + ' ' + String(b && b.message || '')) ? 'Sun Saphia Residence' : (site && site.name || 'website');
+  return 'Sun Saphia Residence'; // Hải Minh đã đổi tên thành Sun Saphia Residence
 }
 
 /** Khách để lại số: form trên trang, ô chat tự động có số điện thoại */
@@ -34,6 +36,7 @@ function teleLead_(b, site, phone) {
     b.message ? '💬 ' + String(b.message).slice(0, 300) : '',
     (b.utm_source || b.utm_campaign) ? '📣 ' + [b.utm_source, b.utm_campaign].filter(String).join(' / ') : '',
     b.url ? '🔗 ' + String(b.url).slice(0, 200) : '',
+    '🧊 Link 4D gửi khách: ' + TELE_LINK_4D,
     '🕒 ' + teleNow_()
   ].filter(String).join('\n'));
 }
@@ -81,6 +84,6 @@ function layChatId() {
 /** Chạy thử → Telegram nhận 2 tin mẫu */
 function thuTele() {
   teleLead_({ name: 'Khách thử', nhu_cau: 'Tài sản tạo dòng tiền', loai_can: '2PN', ngan_sach: '3–5 tỷ',
-    utm_source: 'google', utm_campaign: 'haiminh', url: 'https://www.cănhộdịchvụhảiminh.com.vn/ads' }, { name: 'Hải Minh Đà Nẵng' }, '0909000000');
-  teleClick_({ utm_source: 'google', url: 'https://www.cănhộdịchvụhảiminh.com.vn/ads' }, { name: 'Hải Minh Đà Nẵng' }, 'zalo');
+    utm_source: 'google', utm_campaign: 'haiminh', url: 'https://www.cănhộdịchvụhảiminh.com.vn/ads' }, { name: 'Sun Saphia Residence Đà Nẵng' }, '0909000000');
+  teleClick_({ utm_source: 'google', url: 'https://www.cănhộdịchvụhảiminh.com.vn/ads' }, { name: 'Sun Saphia Residence Đà Nẵng' }, 'zalo');
 }

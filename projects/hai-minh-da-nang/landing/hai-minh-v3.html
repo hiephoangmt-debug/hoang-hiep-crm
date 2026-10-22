@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="ladipage-rules" content="v2">
-<title>Căn Hộ Khách Sạn Hải Minh Đà Nẵng – Nhà Thứ Hai Bên Biển Mỹ Khê</title>
-<meta name="description" content="Hải Minh: tòa căn hộ khách sạn 30 tầng góc Võ Nguyên Giáp – Trường Sa, đối diện là dải resort ven biển, gần công viên biển cuối đường Minh Mạng (quy hoạch). Căn 47–101 m². Dự kiến ra mắt 11/2026 – nhận bảng giá trước ngày ra mắt.">
-<meta property="og:title" content="Căn nhìn thẳng biển Mỹ Khê sẽ có giá bao nhiêu khi ra mắt? – Hải Minh Đà Nẵng">
+<title>Sun Saphia Residence Đà Nẵng – Nhà Thứ Hai Bên Biển Mỹ Khê</title>
+<meta name="description" content="Sun Saphia Residence: tòa căn hộ khách sạn 30 tầng góc Võ Nguyên Giáp – Trường Sa, đối diện là dải resort ven biển, gần công viên biển cuối đường Minh Mạng (quy hoạch). Căn 47–101 m². Dự kiến ra mắt 11/2026 – nhận bảng giá trước ngày ra mắt.">
+<meta property="og:title" content="Căn nhìn thẳng biển Mỹ Khê sẽ có giá bao nhiêu khi ra mắt? – Sun Saphia Residence Đà Nẵng">
 <meta property="og:description" content="30 tầng mặt biển Võ Nguyên Giáp · 1PN đến Dual Key · Dự kiến ra mắt 11/2026. Nhận bảng giá và mặt bằng qua Zalo.">
 <meta property="og:image" content="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/98845f3/projects/hai-minh-da-nang/landing/images/chia-se-hai-minh-1200x630.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -221,13 +221,40 @@ p{margin:0 0 14px}
   .sec{padding:46px 0}
   .top .logo span{display:none}
 }
+/* logo Sun Saphia Residence (cam + vệt sáng) */
+/* logo sắc nét + vệt sáng chạy qua */
+.logo{gap:12px}
+.logo b{position:relative;overflow:hidden;width:42px;height:42px;border-radius:11px;background:linear-gradient(145deg,#0d2f52,#081a2e);border:2px solid #F3D28A;box-shadow:0 0 0 1px rgba(243,210,138,.25),0 4px 14px rgba(0,0,0,.35);font-family:Georgia,"Times New Roman",serif;font-size:17px;font-weight:700;letter-spacing:.5px}
+.logo b{color:#F6D58E}
+.logo b::after{content:"";position:absolute;top:-20%;left:0;width:40%;height:140%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.75),rgba(255,255,255,0));transform:translateX(-180%) skewX(-20deg);animation:logoQuet 3.2s ease-in-out infinite}
+@keyframes logoQuet{0%{transform:translateX(-180%) skewX(-20deg)}50%,100%{transform:translateX(320%) skewX(-20deg)}}
+.logo span{font-weight:800;font-size:16px;letter-spacing:.12em;background:linear-gradient(110deg,#ffffff 40%,#F6D58E 50%,#ffffff 60%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:kimc 3.2s linear infinite}
+
+/* logo vàng đậm kiểu Sun + line sáng chạy qua */
+.logo b{background:linear-gradient(145deg,#FFD36A 0%,#F0B23A 45%,#C98A1A 100%)!important;border:2px solid #FFE3A0!important;color:#0A2540!important;box-shadow:0 0 0 1px rgba(201,138,26,.6),0 4px 16px rgba(240,178,58,.45)!important;font-weight:800!important;text-shadow:0 1px 0 rgba(255,255,255,.35)}
+.logo b::after{background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.95),rgba(255,255,255,0))!important;width:35%!important}
+.logo span{background:linear-gradient(110deg,#F2B33D 40%,#FFF7DC 50%,#F2B33D 60%)!important;background-size:200% 100%!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;animation:kimc 2.6s linear infinite!important;font-weight:800!important}
+
+/* logo cam + line sáng chạy qua */
+.logo b{background:linear-gradient(145deg,#FF9A3D 0%,#FF6A2B 50%,#E8460F 100%)!important;border:2px solid #FFC59A!important;color:#ffffff!important;box-shadow:0 0 0 1px rgba(232,70,15,.6),0 4px 16px rgba(255,106,43,.5)!important;text-shadow:0 1px 2px rgba(120,30,0,.35)!important}
+.logo span{background:linear-gradient(110deg,#FF7A2F 40%,#FFF1E6 50%,#FF7A2F 60%)!important;background-size:200% 100%!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important}
+
+/* sửa thanh trên cho điện thoại: vệt sáng nằm trong nền ô SR, không dùng ::after */
+.logo b::after{content:none!important;display:none!important;animation:none!important}
+.logo b{background-image:linear-gradient(100deg,rgba(255,255,255,0) 40%,rgba(255,255,255,.85) 50%,rgba(255,255,255,0) 60%),linear-gradient(145deg,#FF9A3D 0%,#FF6A2B 50%,#E8460F 100%)!important;background-size:300% 100%,100% 100%!important;background-repeat:no-repeat!important;animation:logoNen 3s linear infinite!important}
+@keyframes logoNen{0%{background-position:140% 0,0 0}60%,100%{background-position:-40% 0,0 0}}
+.logo span{font-size:15px!important;letter-spacing:.14em!important;white-space:nowrap}
+@media(max-width:900px){.ahero{padding-top:12px!important}.hero-shade{padding-top:20px!important}}
+.top .wrap{justify-content:flex-start}
+@media(max-width:900px){.top .logo span{display:inline!important;font-size:14px!important;letter-spacing:.1em!important}}
+@keyframes kimc{from{background-position:150% 0}to{background-position:-50% 0}}
 </style>
 </head>
 <body>
 
 <header class="top">
   <div class="wrap">
-    <div class="logo"><b>HM</b><span>HẢI MINH</span></div>
+    <div class="logo"><b>SR</b><span>SUN SAPHIA RESIDENCE</span></div>
     <div class="topbtn"><a class="hot zl" href="https://zalo.me/0904567009">Zalo</a><a class="hot" href="tel:0904567009">📞 0904 567 009</a></div>
   </div>
 </header>
@@ -239,10 +266,10 @@ p{margin:0 0 14px}
       <div class="up">
         <div class="badge"><i></i>Dự kiến ra mắt 11/2026 · Đang nhận danh sách ưu tiên</div>
         <h1>Rời phố đông Hà Nội,<br><span class="kim">1 giờ 20 phút bay</span> là chạm biển Mỹ Khê</h1>
-        <p class="sub">Xuống máy bay 10–15 phút là tới Hải Minh – tòa căn hộ khách sạn 30 tầng ngay góc Võ Nguyên Giáp – Trường Sa, băng qua đường là dải ven biển rồi tới bãi cát Mỹ Khê. Một ngôi nhà thứ hai bên biển cho cả gia đình: nghỉ khi muốn, cho thuê khi vắng.</p>
+        <p class="sub">Xuống máy bay 10–15 phút là tới Sun Saphia Residence – tòa căn hộ khách sạn 30 tầng ngay góc Võ Nguyên Giáp – Trường Sa, băng qua đường là dải ven biển rồi tới bãi cát Mỹ Khê. Một ngôi nhà thứ hai bên biển cho cả gia đình: nghỉ khi muốn, cho thuê khi vắng.</p>
         <div class="chips">
-          <div class="chip"><b>30 tầng</b>cao ~117 m</div>
-          <div class="chip"><b>~400 căn</b>1PN → Dual Key</div>
+          <div class="chip"><b>30 tầng</b>cao ~114 m</div>
+          <div class="chip"><b>782 căn</b>1PN → Dual Key</div>
           <div class="chip"><b>47–101 m²</b>5 dòng căn</div>
           <div class="chip"><b>~1h20</b>bay từ Nội Bài</div>
         </div>
@@ -272,7 +299,7 @@ p{margin:0 0 14px}
 <div class="nums">
   <div class="wrap">
     <div><b>30</b><span>tầng mặt biển</span></div>
-    <div><b>~117 m</b><span>chiều cao tòa tháp</span></div>
+    <div><b>~114 m</b><span>chiều cao tòa tháp</span></div>
     <div><b>3.720 m²</b><span>khu đất 2 lô góc</span></div>
     <div><b>50 năm</b><span>đất TMDV 2026–2076</span></div>
     <div><b>11/2026</b><span>dự kiến ra mắt</span></div>
@@ -304,14 +331,14 @@ p{margin:0 0 14px}
   <div class="wrap">
     <div class="center">
       <span class="eyebrow">Thông tin dự án</span>
-      <h2>Hải Minh – căn hộ khách sạn 30 tầng mặt biển Võ Nguyên Giáp</h2>
+      <h2>Sun Saphia Residence – căn hộ khách sạn 30 tầng mặt biển Võ Nguyên Giáp</h2>
       <p class="lead">Khu căn hộ du lịch, thương mại dịch vụ trên 2 lô góc của Khu Khách sạn – Condotel và dân cư Saphia.</p>
     </div>
     <div class="pj">
       <dl class="spec">
         <div><dt>Vị trí</dt><dd>Lô A2-1 &amp; A2-2, góc Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, P. Ngũ Hành Sơn, TP Đà Nẵng</dd></div>
         <div><dt>Chủ đầu tư</dt><dd>Công ty TNHH Quản lý và Dịch vụ Hạ tầng Kỹ thuật Miền Trung</dd></div>
-        <div><dt>Quy mô</dt><dd>1 tòa tháp 30 tầng, cao ~117 m, khoảng 400 căn; khối đế thương mại 2 tầng, hồ bơi tầng 3</dd></div>
+        <div><dt>Quy mô</dt><dd>1 tòa tháp 30 tầng, cao ~114 m, 782 căn; khối đế thương mại 2 tầng, hồ bơi tầng 3</dd></div>
         <div><dt>Khu đất</dt><dd>~3.720 m² (2 thửa góc), tổng sàn trên 45.000 m²</dd></div>
         <div><dt>Pháp lý đất</dt><dd>Đất thương mại dịch vụ, thời hạn 50 năm (17/9/2026 – 16/9/2076); loại hình căn hộ du lịch</dd></div>
         <div><dt>Tình trạng</dt><dd>Đang thi công · dự kiến ra mắt 11/2026 · giá, chính sách chủ đầu tư công bố khi ra mắt</dd></div>
@@ -336,17 +363,17 @@ p{margin:0 0 14px}
       <p class="lead">Không cần nghỉ dài ngày mới đi được biển. Một chuyến bay ngắn, cuối tuần là cả nhà đã ở bên sóng.</p>
     </div>
     <div class="nb">
-      <div class="nb-c"><i>✈️</i><b>Gần hơn anh/chị nghĩ</b><span>Hà Nội – Đà Nẵng bay khoảng 1 giờ 20 phút, nhiều chuyến mỗi ngày. Xuống sân bay 10–15 phút là tới Hải Minh.</span></div>
+      <div class="nb-c"><i>✈️</i><b>Gần hơn anh/chị nghĩ</b><span>Hà Nội – Đà Nẵng bay khoảng 1 giờ 20 phút, nhiều chuyến mỗi ngày. Xuống sân bay 10–15 phút là tới Sun Saphia Residence.</span></div>
       <div class="nb-c"><i>🌤️</i><b>Đổi gió, đổi mùa</b><span>Khi miền Bắc vào đông lạnh, nồm ẩm, Đà Nẵng dịu hơn; mùa hè biển êm, nước trong, tắm biển từ khoảng tháng 3 đến tháng 9.</span></div>
       <div class="nb-c"><i>👨‍👩‍👧‍👦</i><b>Chỗ của ông bà, con cháu</b><span>Ông bà nghỉ đông dài ngày bên biển, con cháu bay vào dịp lễ, hè – một căn cho ba thế hệ.</span></div>
       <div class="nb-c"><i>🔑</i><b>Vắng nhà vẫn có giá trị</b><span>Những tháng ở Hà Nội, căn hộ du lịch có thể cho thuê. Đơn vị vận hành, tỷ lệ chia doanh thu chủ đầu tư sẽ công bố.</span></div>
     </div>
     <div class="trip">
-      <b>Một cuối tuần của gia đình Hà Nội ở Hải Minh</b>
+      <b>Một cuối tuần của gia đình Hà Nội ở Sun Saphia Residence</b>
       <ol>
         <li><em>Thứ Sáu 18:00</em>Cất cánh từ Nội Bài sau giờ làm</li>
         <li><em>19:30</em>Hạ cánh Đà Nẵng</li>
-        <li><em>19:45</em>Về tới Hải Minh, mở cửa nghe tiếng sóng</li>
+        <li><em>19:45</em>Về tới Sun Saphia Residence, mở cửa nghe tiếng sóng</li>
         <li><em>Thứ Bảy 5:30</em>Cả nhà ngắm bình minh, tắm biển Mỹ Khê</li>
         <li><em>Chiều</em>Phố cổ Hội An ~30 phút</li>
         <li><em>Chủ Nhật tối</em>Bay về, sáng thứ Hai đi làm bình thường</li>
@@ -361,7 +388,7 @@ p{margin:0 0 14px}
 <section class="sec" id="to-mo">
   <div class="wrap center">
     <span class="eyebrow">Điều khách hỏi nhiều nhất</span>
-    <h2>3 câu hỏi trước khi chọn căn ở Hải Minh</h2>
+    <h2>3 câu hỏi trước khi chọn căn ở Sun Saphia Residence</h2>
     <p class="lead">Chủ đầu tư chưa công bố giá. Để lại số, anh/chị nhận câu trả lời đầy đủ ngay khi có – trước ngày ra mắt.</p>
     <div class="qgrid" style="text-align:left">
       <div class="q"><div class="ico">🌅</div><h3>Tầng nào nhìn thẳng biển, hướng nào đón bình minh?</h3><p>Căn view trực diện có số lượng giới hạn theo mặt bằng.</p><a class="lock" href="#dang-ky">🔒 Danh sách căn view trực diện – mở khóa</a></div>
@@ -376,7 +403,7 @@ p{margin:0 0 14px}
 <section class="sec loc" id="vi-tri">
   <div class="wrap grid">
     <figure>
-      <img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/2a577841786251d0fe57b85ca1ae465d3cfe0294/projects/hai-minh-da-nang/landing/images/so-do-vi-tri-hai-minh-rong-v5.webp" alt="Sơ đồ vị trí Hải Minh góc Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, gần công viên biển Trường Sa cuối Minh Mạng" width="1620" height="1330" loading="lazy">
+      <img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/2a577841786251d0fe57b85ca1ae465d3cfe0294/projects/hai-minh-da-nang/landing/images/so-do-vi-tri-hai-minh-rong-v5.webp" alt="Sơ đồ vị trí Sun Saphia Residence góc Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, gần công viên biển Trường Sa cuối Minh Mạng" width="1620" height="1330" loading="lazy">
       <figcaption>Sơ đồ vẽ lại theo bản đồ vệ tinh, hướng Bắc lên trên, không theo tỷ lệ.</figcaption>
     </figure>
     <div>
@@ -399,7 +426,7 @@ p{margin:0 0 14px}
 <!-- FEELING -->
 <section class="sec" id="cam-giac">
   <div class="wrap center">
-    <span class="eyebrow">Một ngày ở Hải Minh</span>
+    <span class="eyebrow">Một ngày ở Sun Saphia Residence</span>
     <h2>Thức dậy cùng biển, ngủ cùng tiếng sóng</h2>
     <p class="lead">Ngôi nhà thứ hai cho cả gia đình mỗi dịp nghỉ – và những ngày vắng nhà, căn hộ có thể cho thuê.</p>
     <div class="feel" style="text-align:left">
@@ -461,7 +488,7 @@ p{margin:0 0 14px}
     </div>
     <div class="faq">
       <details><summary>Giá bán bao nhiêu?</summary><p>Chủ đầu tư chưa công bố giá. Anh/chị để lại số, chuyên viên gửi bảng giá qua Zalo ngay khi có, trước ngày ra mắt (dự kiến 11/2026). <a class="askl" href="#hoi-chuyen-vien">Hỏi thêm chuyên viên →</a></p></details>
-      <details><summary>Condotel 50 năm khác căn hộ lâu dài thế nào?</summary><p>Hải Minh là căn hộ du lịch trên đất thương mại dịch vụ, thời hạn 50 năm (2026–2076), dùng để nghỉ dưỡng và cho thuê. Chung cư ở có loại hình và thời hạn khác. Giấy chứng nhận cấp theo quy định pháp luật tại thời điểm cấp. <a class="askl" href="#hoi-chuyen-vien">Hỏi thêm chuyên viên →</a></p></details>
+      <details><summary>Condotel 50 năm khác căn hộ lâu dài thế nào?</summary><p>Sun Saphia Residence là căn hộ du lịch trên đất thương mại dịch vụ, thời hạn 50 năm (2026–2076), dùng để nghỉ dưỡng và cho thuê. Chung cư ở có loại hình và thời hạn khác. Giấy chứng nhận cấp theo quy định pháp luật tại thời điểm cấp. <a class="askl" href="#hoi-chuyen-vien">Hỏi thêm chuyên viên →</a></p></details>
       <details><summary>Cho thuê được không, thu về bao nhiêu?</summary><p>Căn hộ du lịch có thể khai thác cho thuê. Đơn vị vận hành và tỷ lệ chia doanh thu chủ đầu tư sẽ công bố. Mọi con số thu nhập trên trang chỉ là ví dụ minh họa, không phải cam kết. <a class="askl" href="#hoi-chuyen-vien">Hỏi thêm chuyên viên →</a></p></details>
       <details><summary>Có phải đặt cọc, giữ chỗ không?</summary><p>Không. Hiện không thu bất kỳ khoản tiền nào; đăng ký chỉ để nhận thông tin sớm. <a class="askl" href="#hoi-chuyen-vien">Hỏi thêm chuyên viên →</a></p></details>
       <details><summary>Sau này bán lại được không?</summary><p>Chuyển nhượng theo hợp đồng mua bán và quy định pháp luật; điều kiện cụ thể nằm trong hợp đồng mẫu khi ra mắt. <a class="askl" href="#hoi-chuyen-vien">Hỏi thêm chuyên viên →</a></p></details>
@@ -500,7 +527,7 @@ p{margin:0 0 14px}
         <span class="alt">Trả lời qua Zalo · Không thu tiền giữ chỗ</span>
       </form>
     </div>
-    <div class="cta-strip"><div><b>Còn câu hỏi khác về Hải Minh?</b><span>Chuyên viên Hoàng Hiệp trả lời trực tiếp, không qua tổng đài.</span></div><div class="cs-b"><a class="btn" href="tel:0904567009">Gọi 0904 567 009</a><a class="btn zalo" href="https://zalo.me/0904567009">Nhắn Zalo</a></div></div>
+    <div class="cta-strip"><div><b>Còn câu hỏi khác về Sun Saphia Residence?</b><span>Chuyên viên Hoàng Hiệp trả lời trực tiếp, không qua tổng đài.</span></div><div class="cs-b"><a class="btn" href="tel:0904567009">Gọi 0904 567 009</a><a class="btn zalo" href="https://zalo.me/0904567009">Nhắn Zalo</a></div></div>
   </div>
 </section>
 

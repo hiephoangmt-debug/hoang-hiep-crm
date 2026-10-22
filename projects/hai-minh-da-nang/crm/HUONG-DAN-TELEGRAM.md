@@ -1,4 +1,4 @@
-# Báo khách Hải Minh về Telegram (qua CRM Hoàng Hiệp)
+# Báo khách Sun Saphia Residence về Telegram (qua CRM Hoàng Hiệp)
 
 Trang /ads và trang chính đã gắn mã CRM Hoàng Hiệp. Mã này tự ghi lại:
 - form có số điện thoại (form đầu trang, form cuối trang, ô chat tự động khi khách gõ số),
@@ -30,4 +30,4 @@ Trong hàm `handleLead_`, ngay dưới dòng `if (!phone) return { error: 'Số 
 1. Chọn hàm `thuTele` → **Chạy** → Telegram nhận 2 tin mẫu.
 2. **Triển khai → Quản lý bản triển khai → ✏️ Sửa → Phiên bản: Phiên bản mới → Triển khai.**
    (Giữ nguyên đường link /exec, không tạo bản triển khai mới, để mã trên trang vẫn chạy.)
-3. Vào trang /ads gửi thử form tên "Test Hải Minh" → kiểm tra Sheet CRM và Telegram.
+3. Vào trang /ads gửi thử form tên "Test Sun Saphia Residence" → kiểm tra Sheet CRM và Telegram.

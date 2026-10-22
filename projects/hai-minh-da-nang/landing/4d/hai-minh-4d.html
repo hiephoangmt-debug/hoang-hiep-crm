@@ -1,4 +1,4 @@
-<title>Hải Minh 4D</title>
+<title>Sun Saphia Residence 4D</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,8 +66,8 @@ input[type=range]{width:100%;accent-color:var(--accent);min-width:0}
 <header class="top">
   <div class="brand">
     <small>Mô hình 4D minh họa · Đà Nẵng</small>
-    <h1>Căn hộ khách sạn <span>Hải Minh</span></h1>
-    <p>30 tầng · ~117 m · ~400 căn · góc Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận</p>
+    <h1>Sun Saphia <span>Residence</span></h1>
+    <p>30 tầng · ~114 m · 782 căn · góc Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận</p>
   </div>
   <div class="contact">
     Hotline / Zalo<b>0904 567 009</b>
@@ -177,7 +177,7 @@ flat(32,2600,asphalt,-560,0,0.12);              // Lê Văn Hiến
 flat(4,2600,0xe2c27b,-560,0,0.14);
 // sidewalks along the boulevard
 flat(6,2600,0xcfc6b4,-17,0,0.11); flat(6,2600,0xcfc6b4,17,0,0.11);
-// Hải Minh lot: thửa 6 (2.399 m², góc bo giáp Nguyễn Đức Thuận – Trường Sa) + thửa 11 (1.320 m², 60 × 22,1 m)
+// Sun Saphia Residence lot: thửa 6 (2.399 m², góc bo giáp Nguyễn Đức Thuận – Trường Sa) + thửa 11 (1.320 m², 60 × 22,1 m)
 // ≈ 60 m (dọc Nguyễn Đức Thuận) × 61 m (dọc Trường Sa) – theo bản đồ địa chính
 var LOT=(function(){ var x0=-80.6,x1=-20,z0=8,z1=70,r=13,sh=new THREE.Shape();
   sh.moveTo(x0,-z0); sh.lineTo(x1-r,-z0); sh.quadraticCurveTo(x1,-z0,x1,-(z0+r)); sh.lineTo(x1,-z1); sh.lineTo(x0,-z1); sh.closePath(); return sh; })();
@@ -277,7 +277,7 @@ boxes.forEach(function(b,i){dm.position.set(b[0],0,b[1]);dm.scale.set(b[2],b[4],
 blocks.castShadow=true; blocks.receiveShadow=true; world.add(blocks);
 function box(w,h,d,x,z,c,y){var m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),M(c||0xece6da,{roughness:.6}));m.position.set(x,(y||0)+h/2,z);m.castShadow=true;m.receiveShadow=true;world.add(m);return m;}
 /* West toward the city & airport – traced from the satellite map (north up, ~4 m per map pixel),
-   placed in scene space (x = east, z = south) relative to the Hải Minh lot */
+   placed in scene space (x = east, z = south) relative to the Sun Saphia Residence lot */
 world.updateMatrixWorld(true);
 var SITE=world.localToWorld(new THREE.Vector3(-47,0,46));
 function mp(px,py){ return [SITE.x+(px-1600)*4, SITE.z+(py-840)*4]; }      // map pixel -> scene x,z
@@ -327,9 +327,9 @@ hill(1600,-5200,2300,520,0x5f8a6f); hill(400,-4800,900,300,0x6a917a);
 
 
 
-/* ---------- Hải Minh tower: two facade schemes from the renders ---------- */
+/* ---------- Sun Saphia Residence tower: two facade schemes from the renders ---------- */
 var T=new THREE.Group(); T.position.set(-41,0,39); world.add(T);
-var FL=[]; var y=0; for(var f=1;f<=30;f++){FL[f]=y; y+= f===1?7:f===2?6:(f===30?7:3.6);} var TOP=y;   // tầng 1 cao 7 m, tầng 2 cao 6 m, tầng 3–29 3,6 m, tầng 30 cao 7 m → mái ≈117 m
+var FL=[]; var y=0; for(var f=1;f<=30;f++){FL[f]=y; y+= f===1?7:f===2?6:(f===30?7:3.6);} var TOP=y;   // tầng 1 cao 7 m, tầng 2 cao 6 m, tầng 3–29 3,6 m, tầng 30 cao 7 m → mái ≈114 m
 var glass=M(0x22384d,{roughness:.07,metalness:.8,envMapIntensity:1.0,emissive:0xffc27a,emissiveIntensity:0});
 var white=M(0xf6f5f1,{roughness:.45,metalness:.05,envMapIntensity:.4});
 var red=M(0x8c2f1f,{roughness:.55,metalness:.1,envMapIntensity:.4});
@@ -437,7 +437,7 @@ updateCars(0);
 /* ---------- Labels ---------- */
 var labelsEl=document.getElementById('labels'), LBL=[];
 function label(text,cls,obj,pos){var e=document.createElement('div');e.className='lb '+(cls||'');e.textContent=text;labelsEl.appendChild(e);LBL.push({e:e,obj:obj,p:new THREE.Vector3(pos[0],pos[1],pos[2]),cls:cls});return e;}
-var mainLbl=label('HẢI MINH · 30 tầng','main',T,[0,TOP+18,0]);
+var mainLbl=label('SUN SAPHIA · 30 tầng','main',T,[0,TOP+18,0]);
 label('Võ Nguyên Giáp','road',world,[0,2,-360]);
 label('Trường Sa','road',world,[0,2,260]);
 label('Nguyễn Đức Thuận','road',world,[-250,2,0]);
@@ -494,7 +494,7 @@ function setTime(h){
 /* ---------- Floor selector & view mode ---------- */
 var floorEl=document.getElementById('floor'), floorOut=document.getElementById('floorOut');
 var mode='overview', saved=null, yaw=0, pitch=-.04;
-function setFloor(f){ curF=f; fitHi(); hi.position.y=FL[f]-.2; floorOut.textContent='Tầng '+f; mainLbl.textContent='HẢI MINH · tầng '+f+' (~'+Math.round(FL[f]+1.6)+' m)'; if(mode==='view') placeViewCam(); if(mode==='close') flyClose(); }
+function setFloor(f){ curF=f; fitHi(); hi.position.y=FL[f]-.2; floorOut.textContent='Tầng '+f; mainLbl.textContent='SUN SAPHIA · tầng '+f+' (~'+Math.round(FL[f]+1.6)+' m)'; if(mode==='view') placeViewCam(); if(mode==='close') flyClose(); }
 function placeViewCam(){
   var f=+floorEl.value, c=Math.cos(yaw), sn=Math.sin(yaw), hz=(SCH==='A'?AD:BD)/2+2, k=1/Math.max(Math.abs(c)/VIEWX,Math.abs(sn)/hz,1e-6);
   var p=T.localToWorld(new THREE.Vector3(c*k,FL[f]+1.6,sn*k)); camera.position.copy(p);
@@ -542,14 +542,14 @@ if(/topB/.test(location.search)){controls.target.copy(world.localToWorld(new THR
 /* ---------- Brand watermark: drawn into the WebGL image (not a page element), so it stays in screenshots ---------- */
 function drawLogo(g,x,y,sz){ var r=sz*.16; g.save(); g.fillStyle='#0b2a3d'; g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+sz,y,x+sz,y+sz,r); g.arcTo(x+sz,y+sz,x,y+sz,r); g.arcTo(x,y+sz,x,y,r); g.arcTo(x,y,x+sz,y,r); g.fill();
   g.strokeStyle='#d8bd88'; g.lineWidth=sz*.022; var m=sz*.06, r2=r*.75; g.beginPath(); g.moveTo(x+m+r2,y+m); g.arcTo(x+sz-m,y+m,x+sz-m,y+sz-m,r2); g.arcTo(x+sz-m,y+sz-m,x+m,y+sz-m,r2); g.arcTo(x+m,y+sz-m,x+m,y+m,r2); g.arcTo(x+m,y+m,x+sz-m,y+m,r2); g.stroke();
-  g.fillStyle='#d8bd88'; g.font='bold '+Math.round(sz*.36)+'px Georgia,"Times New Roman",serif'; g.textAlign='center'; g.textBaseline='middle'; g.fillText('HM',x+sz/2,y+sz*.42);
+  g.fillStyle='#d8bd88'; g.font='bold '+Math.round(sz*.36)+'px Georgia,"Times New Roman",serif'; g.textAlign='center'; g.textBaseline='middle'; g.fillText('SR',x+sz/2,y+sz*.42);
   g.lineWidth=sz*.02; g.beginPath(); for(var i=0;i<=24;i++){ var t=i/24, px=x+sz*(.25+.5*t), py=y+sz*(.71+.025*Math.sin(t*Math.PI*2)); if(i) g.lineTo(px,py); else g.moveTo(px,py); } g.stroke(); g.restore(); }
 var WEB='cănhộdịchvụhảiminh.com.vn';
 var wmC=document.createElement('canvas'); wmC.width=1024; wmC.height=256; (function(g){
   g.shadowColor='rgba(0,0,0,.45)'; g.shadowBlur=10;
   drawLogo(g,20,28,200);
   g.fillStyle='#ffffff'; g.textBaseline='alphabetic'; g.font='800 64px "Be Vietnam Pro",Arial,sans-serif'; g.fillText('0904 567 009',236,112);
-  g.font='600 38px "Be Vietnam Pro",Arial,sans-serif'; g.fillText('Hoàng Hiệp · Hải Minh Đà Nẵng',238,166); g.fillText(WEB,238,214); })(wmC.getContext('2d'));
+  g.font='600 38px "Be Vietnam Pro",Arial,sans-serif'; g.fillText('Hoàng Hiệp · Sun Saphia Residence',238,166); g.fillText(WEB,238,214); })(wmC.getContext('2d'));
 var hud=new THREE.Scene(), hudCam=new THREE.OrthographicCamera(0,1,1,0,-1,1);
 var wmTex=new THREE.CanvasTexture(wmC); wmTex.encoding=THREE.sRGBEncoding;
 var wm=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({map:wmTex,transparent:true,opacity:.26,depthTest:false,depthWrite:false,toneMapped:false})); hud.add(wm);
@@ -558,7 +558,7 @@ function placeWM(){ var W=innerWidth,H=innerHeight, w=Math.min(W*.72,480), h=w/4
 placeWM(); window.addEventListener('resize',placeWM); setTimeout(placeWM,800);
 // rooftop signage: HM logo + phone on the crown, facing Trường Sa (east) and Nguyễn Đức Thuận (north)
 var sgC=document.createElement('canvas'); sgC.width=1024; sgC.height=256; (function(g){ g.fillStyle='#0b2a3d'; g.fillRect(0,0,1024,256); drawLogo(g,16,16,224);
-  g.fillStyle='#d8bd88'; g.font='800 92px "Be Vietnam Pro",Arial,sans-serif'; g.textBaseline='middle'; g.fillText('HẢI MINH',270,92); g.fillStyle='#ffffff'; g.font='700 64px "Be Vietnam Pro",Arial,sans-serif'; g.fillText('0904 567 009',272,190); })(sgC.getContext('2d'));
+  g.fillStyle='#d8bd88'; g.font='800 92px "Be Vietnam Pro",Arial,sans-serif'; g.textBaseline='middle'; g.fillText('SUN SAPHIA',270,92); g.fillStyle='#ffffff'; g.font='700 64px "Be Vietnam Pro",Arial,sans-serif'; g.fillText('0904 567 009',272,190); })(sgC.getContext('2d'));
 var sgTex=new THREE.CanvasTexture(sgC); sgTex.encoding=THREE.sRGBEncoding;
 var sgMat=new THREE.MeshBasicMaterial({map:sgTex,toneMapped:false});
 function sign(grp,w,x,y,z,ry){ var m=new THREE.Mesh(new THREE.PlaneGeometry(w,w/4),sgMat); m.position.set(x,y,z); m.rotation.y=ry; grp.add(m); return m; }

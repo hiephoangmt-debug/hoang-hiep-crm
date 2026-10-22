@@ -33,6 +33,8 @@ js = r'''/* Sun Saphia 3D·4D·5D – chèn vào trang (dán loader trong "Trư�
       f.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0'; f.srcdoc = DOC; box.innerHTML = ''; box.appendChild(f);
     }
     document.getElementById('ss4d-go').onclick = load;
+    // link gửi khách: .../#ss4d (hoặc ?xem=4d) → cuộn thẳng tới mô hình và mở luôn
+    if (/#(ss4d|hm4d|4d)\b|[?&]xem=4d/i.test(location.hash + ' ' + location.search)) setTimeout(function(){ try { wrap.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) { wrap.scrollIntoView(); } load(); }, 400);
     if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function(es){ if (es[0].isIntersecting){ io.disconnect(); load(); } }, { rootMargin: '200px' }); io.observe(box); }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build); else build();

@@ -5,7 +5,7 @@ body = (here / 'hai-minh-4d.html').read_text(encoding='utf-8')
 doc = ('<!doctype html><html lang="vi"><head><meta charset="utf-8">'
        '<meta name="viewport" content="width=device-width,initial-scale=1"><base target="_blank">'
        + body + '</html>')
-js = r'''/* Hải Minh 4D – chèn vào trang (dán loader trong "Trước </body>"). Sinh tự động bởi build-embed.py */
+js = r'''/* Sun Saphia Residence 4D – chèn vào trang (dán loader trong "Trước </body>"). Sinh tự động bởi build-embed.py */
 (function(){
   if (window.__hm4d) return; window.__hm4d = 1;
   var DOC = __DOC__;
@@ -21,7 +21,7 @@ js = r'''/* Hải Minh 4D – chèn vào trang (dán loader trong "Trước </bo
     wrap.style.cssText = 'position:relative;width:100%;background:#0f1d33;padding:28px 0 22px;clear:both';
     wrap.innerHTML = '<div style="max-width:1140px;margin:0 auto;padding:0 16px;font-family:inherit">'
       + '<div style="color:#ff7a3d;font-size:12px;letter-spacing:.14em;font-weight:700;text-transform:uppercase">Mô hình 4D minh họa</div>'
-      + '<h2 style="color:#fff;font-size:24px;line-height:1.25;margin:6px 0 6px;font-weight:800">Xoay, chọn tầng, xem nắng trong ngày quanh Hải Minh</h2>'
+      + '<h2 style="color:#fff;font-size:24px;line-height:1.25;margin:6px 0 6px;font-weight:800">Xoay, chọn tầng, xem nắng trong ngày quanh Sun Saphia Residence</h2>'
       + '<p style="color:#c7d3e3;font-size:14px;line-height:1.5;margin:0 0 14px">Kéo để xoay · chọn “View từ tầng” để nhìn ra biển, sông Hàn, sân bay. Mô hình dựng lại để minh họa, không phải bản vẽ của chủ đầu tư.</p>'
       + '<div id="hm4d-box" style="position:relative;width:100%;height:min(78vh,640px);min-height:440px;border-radius:14px;overflow:hidden;background:#1b2b44">'
       + '<button type="button" id="hm4d-go" style="position:absolute;inset:0;margin:auto;width:220px;height:52px;border:0;border-radius:26px;background:#ff6a2b;color:#fff;font-weight:800;font-size:16px;cursor:pointer">▶ Mở mô hình 4D</button>'
@@ -29,10 +29,12 @@ js = r'''/* Hải Minh 4D – chèn vào trang (dán loader trong "Trước </bo
     a.parentNode.insertBefore(wrap, a.nextSibling);
     var box = document.getElementById('hm4d-box'), done = false;
     function load(){ if (done) return; done = true;
-      var f = document.createElement('iframe'); f.title = 'Mô hình 4D Hải Minh'; f.setAttribute('allow', 'fullscreen');
+      var f = document.createElement('iframe'); f.title = 'Mô hình 4D Sun Saphia Residence'; f.setAttribute('allow', 'fullscreen');
       f.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0'; f.srcdoc = DOC; box.innerHTML = ''; box.appendChild(f);
     }
     document.getElementById('hm4d-go').onclick = load;
+    // link gửi khách: .../#ss4d (hoặc ?xem=4d) → cuộn thẳng tới mô hình và mở luôn
+    if (/#(ss4d|hm4d|4d)\b|[?&]xem=4d/i.test(location.hash + ' ' + location.search)) setTimeout(function(){ try { wrap.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) { wrap.scrollIntoView(); } load(); }, 400);
     if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function(es){ if (es[0].isIntersecting){ io.disconnect(); load(); } }, { rootMargin: '200px' }); io.observe(box); }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build); else build();

@@ -24,12 +24,12 @@
     <polyline points="810,0 930,250 1010,490 1110,700 1270,1100" stroke-width="24"/>
   </g>
   <polyline points="460,0 700,520 945,1100" stroke="#E7CF96" stroke-width="10" fill="none"/>
-  <!-- Hải Minh -->
+  <!-- Sun Saphia Residence -->
   <circle cx="990" cy="515" r="60" fill="#FF5A1F" opacity=".18"/>
   <circle cx="990" cy="515" r="22" fill="#FF5A1F" stroke="#fff" stroke-width="6"/>
   <line x1="970" y1="522" x2="700" y2="575" stroke="#0A2540" stroke-width="3"/>
   <rect x="300" y="520" width="400" height="110" rx="18" fill="#0A2540"/>
-  <text x="500" y="570" font-size="44" font-weight="700" fill="#fff" text-anchor="middle">HẢI MINH</text>
+  <text x="500" y="570" font-size="44" font-weight="700" fill="#fff" text-anchor="middle">SUN SAPHIA</text>
   <text x="500" y="610" font-size="28" fill="#C9D6E3" text-anchor="middle">Góc 3 tuyến đường</text>
   <!-- tên đường -->
   <text transform="translate(860,170) rotate(64)" font-size="34" font-weight="700" fill="#0A2540">Võ Nguyên Giáp</text>

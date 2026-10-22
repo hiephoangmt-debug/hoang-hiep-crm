@@ -1,4 +1,4 @@
-# Bài chạy Ads – Căn hộ dịch vụ Hải Minh Đà Nẵng
+# Bài chạy Ads – Sun Saphia Residence Đà Nẵng
 
 Link đích (gắn UTM theo từng mẫu):
 `https://www.xn--cnhdchvhiminh-prb1884ifsamh6h.com.vn/?utm_source=facebook&utm_medium=cpc&utm_campaign=haiminh_t11&utm_content=<ma-mau>`
@@ -9,17 +9,17 @@ không hứa lợi nhuận, không ghi "sở hữu lâu dài", không nhận c�
 ---
 
 ## Mẫu 1 – Ra mắt tháng 11 (ma-mau: ra-mat)
-🌊 CĂN HỘ DỊCH VỤ HẢI MINH ĐÀ NẴNG – DỰ KIẾN RA MẮT THÁNG 11/2026
+🌊 SUN SAPHIA RESIDENCE ĐÀ NẴNG – DỰ KIẾN RA MẮT THÁNG 11/2026
 
 📍 Góc Trường Sa – Nguyễn Đức Thuận, trục biển Võ Nguyên Giáp, đối diện là dải resort ven biển, gần công viên biển cuối đường Minh Mạng (quy hoạch)
-🏙 Tháp 30 tầng · khoảng 400 căn hộ du lịch mặt biển
+🏙 Tháp 30 tầng · 782 căn hộ du lịch mặt biển
 🛏 1PN 47 m² · 2PN · 2PN+1 · 3PN · Dual Key 101 m²
 📜 Đất thương mại dịch vụ, thời hạn 50 năm (9/2026 – 9/2076) theo Quyết định của UBND TP Đà Nẵng
 
 👉 Đăng ký ưu tiên để nhận bảng giá, mặt bằng và chọn căn view biển đẹp trước ngày ra mắt.
 📞 Hotline/Zalo: 0904 567 009
 
-Tiêu đề: Hải Minh – Ra mắt dự kiến 11/2026
+Tiêu đề: Sun Saphia Residence – Ra mắt dự kiến 11/2026
 Mô tả: Đăng ký ưu tiên nhận bảng giá
 Nút: Tìm hiểu thêm / Đăng ký
 
@@ -28,13 +28,13 @@ Sống giữa hệ sinh thái biển sôi động nhất Đà Nẵng 🌴
 
 Bước chân ra là biển Mỹ Khê – Non Nước. Xung quanh là chuỗi resort, khách sạn cao cấp, phố du lịch An Thượng, danh thắng Ngũ Hành Sơn và tuyến đi Hội An.
 
-✨ Căn hộ dịch vụ Hải Minh – tháp 30 tầng mặt biển Võ Nguyên Giáp, khoảng 400 căn hộ du lịch, dự kiến ra mắt tháng 11/2026.
+✨ Sun Saphia Residence – tháp 30 tầng mặt biển Võ Nguyên Giáp, 782 căn hộ du lịch, dự kiến ra mắt tháng 11/2026.
 
 📩 Để lại thông tin nhận bảng giá & danh sách căn view biển.
 📞 0904 567 009 (Zalo)
 
 Tiêu đề: Căn hộ mặt biển Võ Nguyên Giáp
-Mô tả: Tháp 30 tầng · ~400 căn · Dự kiến 11/2026
+Mô tả: Tháp 30 tầng · 782 căn · Dự kiến 11/2026
 
 ## Mẫu 3 – Bài toán dòng tiền (ma-mau: dong-tien)
 💰 Căn hộ biển Đà Nẵng cho thuê theo đêm – bài toán dòng tiền ra sao?
@@ -43,14 +43,14 @@ Giá phòng ven biển trục Võ Nguyên Giáp hiện phổ biến khoảng 1 �
 Ví dụ minh họa: căn 3 tỷ, giá thuê 1,2 triệu/đêm, công suất 60%, chi phí vận hành 40% → thu nhập ròng khoảng 13 triệu/tháng.
 (Ví dụ minh họa, không phải cam kết lợi nhuận.)
 
-🏙 Căn hộ dịch vụ Hải Minh – 30 tầng mặt biển, đối diện là dải resort ven biển, gần công viên biển cuối đường Minh Mạng (quy hoạch), dự kiến ra mắt 11/2026.
+🏙 Sun Saphia Residence – 30 tầng mặt biển, đối diện là dải resort ven biển, gần công viên biển cuối đường Minh Mạng (quy hoạch), dự kiến ra mắt 11/2026.
 📊 Nhận bảng tính dòng tiền chi tiết theo từng căn: 0904 567 009
 
 Tiêu đề: Nhận bảng tính dòng tiền từng căn
 Mô tả: Căn hộ du lịch mặt biển Đà Nẵng
 
 ## Mẫu 4 – Cập nhật pháp lý (ma-mau: phap-ly)
-📜 CẬP NHẬT PHÁP LÝ DỰ ÁN HẢI MINH ĐÀ NẴNG
+📜 CẬP NHẬT PHÁP LÝ DỰ ÁN SUN SAPHIA ĐÀ NẴNG
 
 UBND TP Đà Nẵng đã ban hành Quyết định điều chỉnh thời hạn sử dụng đất dự án Khu căn hộ du lịch, thương mại dịch vụ Hải Minh:
 ✅ Diện tích đất 3.720 m² – Khu Khách sạn – Condotel và dân cư Saphia, P. Ngũ Hành Sơn
@@ -61,12 +61,12 @@ UBND TP Đà Nẵng đã ban hành Quyết định điều chỉnh thời hạn 
 🏙 Quy mô 30 tầng, dự kiến ra mắt tháng 11/2026.
 👉 Nhận hồ sơ dự án & bảng giá ưu tiên: 0904 567 009
 
-Tiêu đề: Hải Minh – Pháp lý đất 50 năm
+Tiêu đề: Sun Saphia Residence – Pháp lý đất 50 năm
 Mô tả: Nhận hồ sơ dự án qua Zalo
 
 ## Mẫu 5 – Ngắn cho Reels/Story (ma-mau: ngan)
 Căn hộ mặt biển Võ Nguyên Giáp 🌊
-30 tầng · ~400 căn · gần công viên biển
+30 tầng · 782 căn · gần công viên biển
 Dự kiến ra mắt 11/2026 – đăng ký ưu tiên ngay 👇
 📞 0904 567 009
 
@@ -93,7 +93,7 @@ Chữ trên video/ảnh (≤ 20% diện tích):
 ☀️ 5h30 sáng. Kéo rèm – biển Mỹ Khê ngay trước mặt.
 🏊 6h00 – đã xuống biển. 🥐 8h00 – cà phê view biển. 🌅 18h00 – hoàng hôn trên ban công tầng cao.
 
-Đó là một ngày bình thường ở CĂN HỘ DỊCH VỤ HẢI MINH ĐÀ NẴNG – tháp 30 tầng ngay mặt biển Võ Nguyên Giáp, đối diện là dải resort ven biển, gần công viên biển cuối đường Minh Mạng (quy hoạch).
+Đó là một ngày bình thường ở SUN SAPHIA RESIDENCE ĐÀ NẴNG – tháp 30 tầng ngay mặt biển Võ Nguyên Giáp, đối diện là dải resort ven biển, gần công viên biển cuối đường Minh Mạng (quy hoạch).
 
 🌊 Biển trước nhà · Resort quanh nhà · An Thượng, Ngũ Hành Sơn, Hội An trong tầm tay
 🔥 Dự kiến ra mắt tháng 11/2026 – căn view biển trực diện luôn được chọn trước.
@@ -102,19 +102,19 @@ Chữ trên video/ảnh (≤ 20% diện tích):
 📞 Hotline/Zalo: 0904 567 009
 
 Tiêu đề: Mở mắt là thấy biển Mỹ Khê
-Mô tả: Hải Minh · 30 tầng mặt biển · Dự kiến 11/2026
+Mô tả: Sun Saphia Residence · 30 tầng mặt biển · Dự kiến 11/2026
 
 ## Mẫu 7 – Cả hệ sinh thái biển trong một địa chỉ (ma-mau: he-sinh-thai-2)
 🌊 KHÔNG CHỈ LÀ CĂN HỘ – LÀ CẢ MỘT HỆ SINH THÁI BIỂN
 
-Trong vài phút quanh Hải Minh:
+Trong vài phút quanh Sun Saphia Residence:
 🏖 Bãi biển Mỹ Khê – Non Nước, top bãi biển đẹp của Việt Nam
 🏨 Chuỗi resort & khách sạn cao cấp dọc Võ Nguyên Giáp – Trường Sa
 🏄 Lướt sóng, chèo SUP, golf ven biển
 🦐 Hải sản tươi, phố đêm An Thượng
 ⛰ Ngũ Hành Sơn, làng đá Non Nước – thẳng đường đi Hội An
 
-📍 Góc Trường Sa – Nguyễn Đức Thuận · Tháp 30 tầng · ~400 căn hộ du lịch
+📍 Góc Trường Sa – Nguyễn Đức Thuận · Tháp 30 tầng · 782 căn hộ du lịch
 📜 Đất thương mại dịch vụ 50 năm (9/2026 – 9/2076)
 
 Nơi bạn nghỉ dưỡng – cũng là nơi khách du lịch muốn thuê. 💰
@@ -128,7 +128,7 @@ Mô tả: Đăng ký ưu tiên trước ngày ra mắt 11/2026
 
 Dọc Võ Nguyên Giáp – Trường Sa, quỹ đất sát biển gần như đã kín resort và khách sạn. Mỗi dự án căn hộ mặt biển mới đều là cơ hội không nhiều.
 
-🏙 HẢI MINH – tháp 30 tầng ngay mặt biển, đối diện là dải resort ven biển, gần công viên biển cuối đường Minh Mạng (quy hoạch)
+🏙 SUN SAPHIA – tháp 30 tầng ngay mặt biển, đối diện là dải resort ven biển, gần công viên biển cuối đường Minh Mạng (quy hoạch)
 🛏 1PN 47 m² đến Dual Key 101 m² – vừa nghỉ dưỡng, vừa cho thuê
 🔥 Dự kiến ra mắt tháng 11/2026
 
@@ -140,7 +140,7 @@ Mô tả: Đăng ký ưu tiên chọn căn view biển
 
 ## Mẫu 9 – Video/Reels 15 giây (ma-mau: reels-15s)
 Cảnh 1 (0–3s): Flycam biển Mỹ Khê – chữ: "BIỂN NGAY TRƯỚC NHÀ"
-Cảnh 2 (3–7s): Phối cảnh tòa tháp 30 tầng – chữ: "HẢI MINH · MẶT BIỂN VÕ NGUYÊN GIÁP"
+Cảnh 2 (3–7s): Phối cảnh tòa tháp 30 tầng – chữ: "SUN SAPHIA · MẶT BIỂN VÕ NGUYÊN GIÁP"
 Cảnh 3 (7–11s): Resort, An Thượng, Ngũ Hành Sơn lướt nhanh – chữ: "CẢ HỆ SINH THÁI BIỂN QUANH BẠN"
 Cảnh 4 (11–15s): Logo + chữ: "DỰ KIẾN RA MẮT 11/2026 · ĐĂNG KÝ ƯU TIÊN · 0904 567 009"
-Caption: Mở mắt là biển, bước ra là resort 🌊 Hải Minh Đà Nẵng – dự kiến ra mắt 11/2026. Đăng ký ưu tiên 👇
+Caption: Mở mắt là biển, bước ra là resort 🌊 Sun Saphia Residence Đà Nẵng – dự kiến ra mắt 11/2026. Đăng ký ưu tiên 👇

@@ -1,4 +1,4 @@
-/* Hải Minh – khối tương tác chèn vào trang LadiPage (dán loader trong "Trước </body>"):
+/* Sun Saphia Residence – khối tương tác chèn vào trang LadiPage (dán loader trong "Trước </body>"):
    trắc nghiệm 3 câu "Căn nào hợp với anh/chị?" + máy tính dòng tiền minh họa + 5 dòng căn.
    Gửi khách về CRM/Telegram qua window.crmLead (mã CRM đã có trên trang). */
 (function () {
@@ -58,7 +58,7 @@
 
   /* ---- Phân tích: vì sao nên tìm hiểu sớm ---- */
   var AN = [
-    ['1', 'Quỹ đất mặt biển nội đô có hạn', 'Dải ven biển Võ Nguyên Giáp – Trường Sa đã kín resort, khách sạn; dự án căn hộ mới ngay mặt biển ngày càng ít. Đối diện Hải Minh là dải resort ven biển, gần công viên biển cuối đường Minh Mạng theo quy hoạch. Võ Nguyên Giáp – Trường Sa thuộc nhóm tuyến đường có giá đất cao trong bảng giá đất do UBND TP Đà Nẵng ban hành – giá trị vị trí rõ ràng (diễn biến giá trong quá khứ không bảo đảm cho tương lai).'],
+    ['1', 'Quỹ đất mặt biển nội đô có hạn', 'Dải ven biển Võ Nguyên Giáp – Trường Sa đã kín resort, khách sạn; dự án căn hộ mới ngay mặt biển ngày càng ít. Đối diện Sun Saphia Residence là dải resort ven biển, gần công viên biển cuối đường Minh Mạng theo quy hoạch. Võ Nguyên Giáp – Trường Sa thuộc nhóm tuyến đường có giá đất cao trong bảng giá đất do UBND TP Đà Nẵng ban hành – giá trị vị trí rõ ràng (diễn biến giá trong quá khứ không bảo đảm cho tương lai).'],
     ['2', 'Nhu cầu lưu trú tăng đều', '11 tháng 2025 Đà Nẵng đón 16,5 triệu lượt khách lưu trú (+18,9%), khách quốc tế tăng 26,5%. Khu thương mại tự do và Trung tâm tài chính quốc tế mở thêm dòng khách công tác, chuyên gia ở dài ngày.'],
     ['3', 'Một căn, hai giá trị', 'Gia đình nghỉ dưỡng mỗi năm ngay mặt biển; những ngày không ở có thể cho thuê. Ví dụ minh họa: 1,5 triệu/đêm × 60% công suất × 350 đêm ≈ 315 triệu doanh thu phòng/năm, chưa trừ chi phí – không phải cam kết.'],
     ['4', 'Đi sớm, chọn được căn đẹp', 'Căn nhìn thẳng biển, tầng cao, hướng đón bình minh có số lượng giới hạn theo mặt bằng. Người trong danh sách ưu tiên nhận bảng giá, mặt bằng trước ngày ra mắt (dự kiến 11/2026) để so sánh, chọn căn kỹ.'],
@@ -71,7 +71,7 @@
   function cols(rows, note) { var mx = Math.max.apply(null, rows.map(function (r) { return r[1]; }));
     return '<div class="hx-bars"><div class="hx-cols">' + rows.map(function (r) { return '<div class="hx-col"><em>' + r[2] + '</em><i style="height:' + Math.round(r[1] / mx * 110) + 'px' + (r[3] ? ';background:repeating-linear-gradient(45deg,#ff6a2b 0 6px,#ff9a66 6px 12px)' : '') + '"></i><span>' + r[0] + '</span></div>'; }).join('') + '</div><small>' + note + '</small></div>'; }
   var VIS = [
-    pic('images/so-do-vi-tri-hai-minh-rong-v5.webp', 'Sơ đồ vị trí Hải Minh, gần công viên biển Trường Sa cuối Minh Mạng', 'Sơ đồ vị trí – không theo tỷ lệ'),
+    pic('images/so-do-vi-tri-hai-minh-rong-v5.webp', 'Sơ đồ vị trí Sun Saphia Residence, gần công viên biển Trường Sa cuối Minh Mạng', 'Sơ đồ vị trí – không theo tỷ lệ'),
     cols([['2023', 7.94, '7,94 tr'], ['2024', 10.9, '~10,9 tr'], ['11T/2025*', 16.5, '16,5 tr', 1]], 'Lượt khách cơ sở lưu trú Đà Nẵng (triệu lượt). Nguồn: Cục Thống kê TP Đà Nẵng (2023, 2025), Sở Du lịch qua báo chí (2024). *Từ 7/2025 số liệu gồm cả địa bàn Quảng Nam cũ sau hợp nhất, không so sánh trực tiếp.'),
     pic('illus/phong-ngu-view-bien.webp', 'Tranh minh họa bữa sáng bên cửa kính nhìn ra biển', 'Tranh minh họa, không phải ảnh căn hộ thật'),
     pic('illus/binh-minh-phong-khach.webp', 'Tranh minh họa phòng khách đón bình minh trên biển', 'Tranh minh họa, không phải ảnh căn hộ thật'),
@@ -79,7 +79,7 @@
   ];
   function anHtml() {
     return '<div class="hx-k">Phân tích trước khi xuống tiền</div>'
-      + '<h2>Vì sao căn mặt biển Hải Minh đáng cân nhắc ngay từ bây giờ?</h2>'
+      + '<h2>Vì sao căn mặt biển Sun Saphia Residence đáng cân nhắc ngay từ bây giờ?</h2>'
       + '<div class="hx-an">' + AN.map(function (a, k) { return '<div class="hx-ai"><i>' + a[0] + '</i><div class="hx-at"><b>' + a[1] + '</b><span>' + a[2] + '</span></div><div class="hx-av">' + VIS[k] + '</div></div>'; }).join('') + '</div>'
       + '<div class="hx-chk"><b>Minh bạch – những điều anh/chị nên xem kỹ</b>'
       + '<span>• Đất thương mại dịch vụ, thời hạn 50 năm (17/9/2026 – 16/9/2076); loại hình căn hộ du lịch, không phải chung cư ở lâu dài.</span>'
@@ -145,7 +145,7 @@
   /* ---- Vì sao Đà Nẵng (chèn trước khối trắc nghiệm) ---- */
   var DN = [
     ['🏙️', 'Trung tâm của miền Trung', 'Sau khi hợp nhất với Quảng Nam (7/2025), Đà Nẵng có cả biển, sông, núi và di sản: phố cổ Hội An, Mỹ Sơn, Cù Lao Chàm nay cùng một thành phố.'],
-    ['✈️', 'Sân bay ngay trong nội thành', 'Xuống máy bay chỉ khoảng 10–15 phút ô tô là tới Hải Minh, ra biển Mỹ Khê. Thành phố có thêm sân bay Chu Lai ở phía Nam.'],
+    ['✈️', 'Sân bay ngay trong nội thành', 'Xuống máy bay chỉ khoảng 10–15 phút ô tô là tới Sun Saphia Residence, ra biển Mỹ Khê. Thành phố có thêm sân bay Chu Lai ở phía Nam.'],
     ['🌏', 'Bay thẳng tới nhiều nước', 'Đường bay quốc tế trực tiếp tới Hàn Quốc, Nhật Bản, Trung Quốc, Đài Loan, Singapore, Thái Lan, Ấn Độ… và các thành phố lớn trong nước; mạng bay tiếp tục được mở rộng.'],
     ['🚆', 'Giao thông đồng bộ', 'Ga đường sắt Bắc – Nam, cảng Tiên Sa đón tàu du lịch quốc tế, cao tốc kết nối. Đường sắt tốc độ cao Bắc – Nam và đường sắt đô thị đang theo quy hoạch, tiến độ theo Nhà nước.'],
     ['🤝', 'Bình yên, thân thiện', 'Thành phố sạch, trật tự, người dân hiền hòa, mến khách – điều du khách trong và ngoài nước thường nhắc tới khi quay lại Đà Nẵng.'],
@@ -168,7 +168,7 @@
   function dnHtml() {
     return '<div class="hd-w"><div class="hd-k">Vì sao chọn Đà Nẵng</div>'
       + '<h2>Thành phố đáng sống, đáng đầu tư của miền Trung</h2>'
-      + '<p class="hd-p">Hải Minh nằm giữa trục biển Võ Nguyên Giáp – Trường Sa, hưởng trọn những lợi thế của Đà Nẵng:</p>'
+      + '<p class="hd-p">Sun Saphia Residence nằm giữa trục biển Võ Nguyên Giáp – Trường Sa, hưởng trọn những lợi thế của Đà Nẵng:</p>'
       + '<div class="hd-g">' + DN.map(function (d) { return '<div class="hd-c"><div class="hd-i">' + d[0] + '</div><div><b>' + d[1] + '</b><span>' + d[2] + '</span></div></div>'; }).join('') + '</div>'
       + '<div class="hd-s">Thời gian di chuyển là ước tính bằng ô tô. Các dự án hạ tầng theo quy hoạch, tiến độ do Nhà nước quyết định.</div></div>';
   }
@@ -183,12 +183,12 @@
     document.head.appendChild(st);
     var f = document.createElement('footer'); f.id = 'hmft';
     f.innerHTML = '<div class="ft-w">'
-      + '<p>Trang thông tin dự án Hải Minh do <b>Hoàng Hiệp</b> – chuyên viên tư vấn bất động sản – thực hiện. Đây không phải website của Chủ đầu tư hay đơn vị phân phối chính thức. Thông tin, hình ảnh tổng hợp từ nguồn công khai, mang tính tham khảo; bảng giá, chính sách và thông tin chính thức theo công bố của Chủ đầu tư và Hợp đồng mua bán.</p>'
+      + '<p>Trang thông tin dự án Sun Saphia Residence do <b>Hoàng Hiệp</b> – chuyên viên tư vấn bất động sản – thực hiện. Đây không phải website của Chủ đầu tư hay đơn vị phân phối chính thức. Thông tin, hình ảnh tổng hợp từ nguồn công khai, mang tính tham khảo; bảng giá, chính sách và thông tin chính thức theo công bố của Chủ đầu tư và Hợp đồng mua bán.</p>'
       + '<p>Địa chỉ dự án: Khu Khách sạn – Condotel và dân cư Saphia, góc Trường Sa – Nguyễn Đức Thuận, phường Ngũ Hành Sơn, TP Đà Nẵng.</p>'
       + '<p>Liên hệ tư vấn: <b>Hoàng Hiệp</b> · Hotline/Zalo <a href="tel:0904567009">0904 567 009</a> · Email <a href="mailto:hiephoangmt@gmail.com">hiephoangmt@gmail.com</a></p>'
       + '<details id="chinh-sach-bao-mat"><summary>Chính sách bảo mật</summary><div>'
       + '<p><b>Thông tin thu thập:</b> họ tên, số điện thoại/Zalo, nội dung anh/chị chọn hoặc nhắn trên trang (câu trả lời trắc nghiệm, thông số máy tính dòng tiền, tin nhắn chat) và thông tin kỹ thuật cơ bản (nguồn truy cập, thiết bị).</p>'
-      + '<p><b>Mục đích:</b> chỉ để chuyên viên Hoàng Hiệp liên hệ, gửi tài liệu và tư vấn về dự án Hải Minh theo yêu cầu của anh/chị; đo lường hiệu quả quảng cáo.</p>'
+      + '<p><b>Mục đích:</b> chỉ để chuyên viên Hoàng Hiệp liên hệ, gửi tài liệu và tư vấn về dự án Sun Saphia Residence theo yêu cầu của anh/chị; đo lường hiệu quả quảng cáo.</p>'
       + '<p><b>Lưu trữ và chia sẻ:</b> dữ liệu lưu trên hệ thống quản lý khách hàng của chuyên viên (Google Sheets, Telegram); không bán, không cho thuê dữ liệu cho bên thứ ba. Câu hỏi gửi qua khung chat có thể được xử lý bởi dịch vụ AI để tự động trả lời.</p>'
       + '<p><b>Quyền của anh/chị:</b> yêu cầu xem, sửa hoặc xóa thông tin, hoặc ngừng nhận liên hệ bất cứ lúc nào qua Hotline/Zalo 0904 567 009 hoặc email hiephoangmt@gmail.com. Thông tin được xử lý theo Nghị định 13/2023/NĐ-CP về bảo vệ dữ liệu cá nhân.</p>'
       + '</div></details></div>';

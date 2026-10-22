@@ -1,6 +1,6 @@
-# CRM – Căn hộ dịch vụ Hải Minh Đà Nẵng
+# CRM – Sun Saphia Residence Đà Nẵng
 
-Ứng dụng web tĩnh (không cần server) để quản lý dự án căn hộ dịch vụ Hải Minh.
+Ứng dụng web tĩnh (không cần server) để quản lý dự án Sun Saphia Residence.
 
 ## Tính năng
 - **Tổng quan**: tổng số căn, căn trống, tỷ lệ lấp đầy, doanh thu thuê/tháng, pipeline khách hàng.

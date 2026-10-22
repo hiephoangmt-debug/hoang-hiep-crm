@@ -37,3 +37,7 @@ th { color: var(--muted); font-weight: 600; }
 .grid-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
 .grid-form label { display: flex; flex-direction: column; gap: 4px; color: var(--muted); font-size: .9em; }
 dialog { border: 1px solid var(--border); border-radius: 10px; background: var(--surface); color: var(--text); width: min(640px, 95vw); }
+
+/* Link mô hình 4D gửi khách */
+.link4d { grid-column: 1 / -1; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.link4d .btn { display: inline-block; padding: 8px 14px; border-radius: 8px; background: #ff6a2b; color: #fff; font-weight: 700; text-decoration: none; }

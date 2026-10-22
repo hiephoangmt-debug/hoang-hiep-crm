@@ -1,6 +1,8 @@
 const STORAGE_KEY = 'crm-hai-minh-da-nang';
 
 let db = load();
+// Dữ liệu cũ chưa có link 4D → điền link mặc định
+if (db.project && !db.project.link4d) db.project.link4d = SAMPLE_DATA.project.link4d;
 
 function load() {
   try {
@@ -80,6 +82,7 @@ const PROJECT_FIELDS = [
   { key: 'floors', label: 'Số tầng', type: 'number' },
   { key: 'totalUnits', label: 'Tổng số căn', type: 'number' },
   { key: 'hotline', label: 'Hotline' },
+  { key: 'link4d', label: 'Link mô hình 4D (gửi khách)', type: 'url' },
   { key: 'manager', label: 'Người phụ trách' },
   { key: 'amenities', label: 'Tiện ích', type: 'textarea' },
   { key: 'notes', label: 'Ghi chú', type: 'textarea' },
@@ -109,6 +112,11 @@ document.addEventListener('click', (e) => {
   } else if (action === 'edit-customer') {
     const c = db.customers.find((x) => x.id === id);
     openEditor(customerFields(), c, saveCustomer(c));
+  } else if (action === 'copy-4d') {
+    const link = db.project.link4d || '';
+    const done = () => alert('Đã chép link 4D – dán vào Zalo/Messenger gửi khách:\n' + link);
+    if (navigator.clipboard) navigator.clipboard.writeText(link).then(done, () => prompt('Chép link 4D:', link));
+    else prompt('Chép link 4D:', link);
   } else if (action === 'del-customer' && confirm('Xoá khách hàng này?')) {
     db.customers = db.customers.filter((x) => x.id !== id); save();
   }
@@ -149,7 +157,7 @@ $('#customerSearch').oninput = render;
 // ---- Render ----
 function render() {
   const { units, customers, project } = db;
-  document.title = 'CRM – ' + (project.name || 'Hải Minh');
+  document.title = 'CRM – ' + (project.name || 'Sun Saphia Residence');
 
   const rented = units.filter((u) => u.status === 'Đã cho thuê');
   const occupancy = units.length ? Math.round((rented.length / units.length) * 100) : 0;
@@ -188,7 +196,7 @@ function render() {
   $('#projectForm').innerHTML = PROJECT_FIELDS.map((f) => {
     const val = esc(project[f.key]);
     return `<label>${f.label}${f.type === 'textarea' ? `<textarea name="${f.key}">${val}</textarea>` : `<input name="${f.key}" type="${f.type || 'text'}" value="${val}">`}</label>`;
-  }).join('');
+  }).join('') + (project.link4d ? `<div class="link4d"><a class="btn" href="${esc(project.link4d)}" target="_blank" rel="noopener">🧊 Mở mô hình 4D</a> <button type="button" data-action="copy-4d">Chép link 4D gửi khách</button></div>` : '');
 }
 
 render();
