@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import html
 import json
+import os
 import math
 import re
 import sys
@@ -87,10 +88,20 @@ def get(url, **kw):
 
 
 def load(path: Path, default):
+    """Đọc JSON. File chưa có -> default. File có mà hỏng -> dừng hẳn, để không ghi đè mất lịch sử."""
+    if not path.exists():
+        return default
     try:
         return json.loads(path.read_text(encoding="utf-8"))
-    except Exception:  # noqa: BLE001
-        return default
+    except Exception as e:  # noqa: BLE001
+        raise SystemExit(f"File {path.name} bị hỏng ({e}) – dừng để giữ lịch sử, cần sửa file trước.")
+
+
+def save(path: Path, obj):
+    """Ghi JSON qua file tạm rồi thay thế, tránh file bị cắt dở."""
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(json.dumps(obj, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    os.replace(tmp, path)
 
 
 def merge(series: dict, key: str, points: dict):
@@ -380,8 +391,14 @@ def fetch_foreign(symbol: str, pages: int = 1, size: int = 20):
                     d = row.get("Ngay") or row.get("Date")
                     if not d:
                         continue
-                    dd, mm, yy = re.split(r"[/-]", d)[:3]
-                    key = f"{yy[:4]}-{int(mm):02d}-{int(dd):02d}"
+                    try:
+                        if re.match(r"\d{4}-\d{2}-\d{2}", d):
+                            key = d[:10]
+                        else:
+                            dd, mm, yy = re.split(r"[/-]", d)[:3]
+                            key = f"{yy[:4]}-{int(mm):02d}-{int(dd):02d}"
+                    except ValueError:
+                        continue
                     buy, sell = ty(row.get("GtMua")), ty(row.get("GtBan"))
                     net = ty(row.get("GTDGRong"))
                     if net is None and buy is not None and sell is not None:
@@ -543,17 +560,28 @@ def bank_name(raw):
 
 
 def parse_rate_cell(cell):
-    """'Từ 12.9' / '14.9 - 20.5' / '8,0% (6 tháng); 8,5% (12 tháng)' -> {tu, den, ky: {tháng: %}}."""
+    """'Từ 12.9' / '14.9 - 20.5' / '8,0% (6 tháng); 8,5% (12 tháng)' / '10,0% cố định 36 tháng'
+    -> {tu, den, ky: {tháng: %}}. Số đứng trước 'tháng/năm/ngày…' là thời hạn, không phải lãi suất."""
     out = {"tu": None, "den": None, "ky": {}}
+    num = r"(\d+(?:[.,]\d+)?)"
+    f = lambda x: float(x.replace(",", "."))  # noqa: E731
     nums = []
-    for m in re.finditer(r"(\d+(?:[.,]\d+)?)(?:\s*[–-]\s*(\d+(?:[.,]\d+)?))?\s*%?\s*(?:\((\d+)\s*th)?", cell):
-        a = float(m.group(1).replace(",", "."))
-        b = float(m.group(2).replace(",", ".")) if m.group(2) else None
+    for m in re.finditer(num + r"(?:\s*[–-]\s*" + num + r")?", cell):
+        if re.match(r"\s*(tháng|năm|th\b|ngày|tuần|tỷ|triệu|lần)", cell[m.end():m.end() + 10], re.I):
+            continue
+        a, b = f(m.group(1)), (f(m.group(2)) if m.group(2) else None)
         if not (2 <= a <= 40):
             continue
-        nums += [a] + ([b] if b and 2 <= b <= 40 else [])
-        if m.group(3):
-            out["ky"][m.group(3)] = a
+        nums += [a] + ([b] if b is not None and 2 <= b <= 40 else [])
+    # kỳ cố định: '8,0% (6 tháng)', '10,0% cố định 36 tháng', 'cố định 3 năm 8,5%'
+    for m in re.finditer(num + r"(?:\s*[–-]\s*\d+(?:[.,]\d+)?)?\s*%[^;%\d]{0,25}(\d+)\s*(tháng|năm)", cell, re.I):
+        months = int(m.group(2)) * (12 if m.group(3).lower() == "năm" else 1)
+        if 2 <= f(m.group(1)) <= 40:
+            out["ky"].setdefault(str(months), f(m.group(1)))
+    for m in re.finditer(r"(\d+)\s*(tháng|năm)[^;%\d]{0,20}" + num + r"\s*%", cell, re.I):
+        months = int(m.group(1)) * (12 if m.group(2).lower() == "năm" else 1)
+        if 2 <= f(m.group(3)) <= 40:
+            out["ky"].setdefault(str(months), f(m.group(3)))
     if nums:
         out["tu"], out["den"] = min(nums), (max(nums) if len(nums) > 1 else None)
     return out
@@ -756,6 +784,12 @@ def main():
     def lai_vay():
         res = fetch_loans()
         loans["ngay"] = today()
+        # nguồn nào hôm nay lỗi thì giữ số lần trước của nguồn đó (đánh dấu 'cu')
+        for kind, banks in (loans.get("bang") or {}).items():
+            for bank, by in banks.items():
+                for src, v in by.items():
+                    if src not in res["nguon"]:
+                        res["bang"].setdefault(kind, {}).setdefault(bank, {})[src] = {**v, "cu": True}
         loans["bang"] = res["bang"]
         loans["nguon"] = res["nguon"]
         # lịch sử mức thấp nhất mỗi ngày: {loại|ngân hàng|nguồn: {ngày: từ}}
@@ -786,8 +820,7 @@ def main():
         if len(rows) < 500:
             raise ValueError(f"danh sách mã quá ít ({len(rows)})")
         rows.sort()
-        TICKERS_FILE.write_text(json.dumps({"ngay": today(), "ma": rows}, ensure_ascii=False, separators=(",", ":")),
-                                encoding="utf-8")
+        save(TICKERS_FILE, {"ngay": today(), "ma": rows})
         log(f"   {len(rows)} mã")
     step("Danh sách mã", ds_ma)
 
@@ -799,7 +832,10 @@ def main():
             item = syms.setdefault(code, {})
             item["name"] = name
             hist = {r[0]: r for r in item.get("closes", [])}
-            data = fetch_ohlc("stock", code, 400 if len(hist) < 30 else 20)
+            full = len(hist) < 30 or datetime.now(VN_TZ).hour >= 18
+            data = fetch_ohlc("stock", code, 400 if full else 20)
+            if full and len(data) >= 30:
+                hist = {}  # thay toàn bộ để giá cũ cùng kiểu điều chỉnh với giá mới
             for d, (c, v) in data.items():
                 hist[d] = [d, round(c, 3), int(v)]
             item["closes"] = [hist[k] for k in sorted(hist)][-STOCK_KEEP:]
@@ -823,12 +859,12 @@ def main():
     prices["updated"] = now
     prices["errors"] = errors
     stocks["updated"] = now
-    PRICES_FILE.write_text(json.dumps(prices, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    save(PRICES_FILE, prices)
     if loans:
-        LOANS_FILE.write_text(json.dumps(loans, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+        save(LOANS_FILE, loans)
     if rates:
-        RATES_FILE.write_text(json.dumps(rates, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    STOCKS_FILE.write_text(json.dumps(stocks, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+        save(RATES_FILE, rates)
+    save(STOCKS_FILE, stocks)
     log(f"\nXong. {len(errors)} nguồn lỗi.")
     for e in errors:
         log("  -", e)
