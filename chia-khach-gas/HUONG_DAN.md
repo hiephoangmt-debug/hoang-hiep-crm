@@ -112,6 +112,7 @@ Nếu báo lỗi, đọc dòng đỏ:
 | Sale | `/nghi` · `/lam` | Tạm dừng / bật lại nhận khách (nghỉ phép, bận) |
 | Quản lý | `/them 0905123456 Tên - nhu cầu` | Thêm khách bằng tay (khách giới thiệu, Facebook, gọi hotline…), bot chia ngay. Nhiều khách: mỗi khách 1 dòng dưới chữ /them |
 | Quản lý | `/themkhac 0905123456 Tên - Downtown` | Thêm khách dự án khác: chia theo vòng riêng, không tính lượt FourS/Saphia |
+| Quản lý | `/chialai K12` | Chia lại khách sang nhánh 2, 3… (vòng riêng, không mất lượt khách mới). Nhiều khách: `/chialai K12 K15` |
 | Quản lý | `/sale` | Danh sách đội, mỗi người đang giữ bao nhiêu khách |
 | Quản lý | `/baocao` | Báo cáo hôm nay |
 | Quản lý | `/tam Tên` · `/mo Tên` | Tạm dừng / mở lại chia cho một sale |
@@ -140,6 +141,15 @@ Sửa ngay trong tab **CauHinh**, không cần sửa code:
 | `TOI_DA_CHUA_BAO_CAO_KHAC` | 3 | Data telesale: số khách chưa báo cáo tối đa mỗi sale |
 | `NHOM_RIENG` | fours,saphia | Khách có chữ này tính lượt FourS/Saphia; còn lại là dự án khác |
 
+## Nhánh chia khách FourS / Saphia
+
+- **Nhánh 1**: khách mới về. Chia **lần lượt** từng sale đang làm: ai lâu nhất chưa được giao khách mới thì tới lượt.
+- **Nhánh 2, 3…**: khách đã có sale nhận và chăm, rồi quay lại chia tiếp:
+  - quá 3 ngày chưa chuyển đổi (hoặc nhận rồi không báo cáo / khách nóng im lặng 7 ngày) → bot tự thu hồi, sang nhánh tiếp theo;
+  - sale báo **không nhu cầu** nhưng anh Hiệp kiểm tra thấy có nhu cầu → bấm **🔁 Chia lại** trên tin xin đóng khách, hoặc gõ `/chialai K12` (khách đã đóng cũng được).
+- Nhánh 2, 3… có **vòng xoay riêng**: nhận khách nhánh 2 **không làm mất lượt khách mới** của sale. Khách không quay về người đã từng giữ.
+- Khách mới bị thu hồi vì **chưa bấm Nhận** trong 30 phút vẫn là nhánh 1, giao người tới lượt kế tiếp.
+
 ## Dán data telesale cho bot tự chia (tab NhapData)
 
 1. Mở Sheet **Chia khách** → tab **NhapData**.
@@ -163,7 +173,7 @@ Sửa ngay trong tab **CauHinh**, không cần sửa code:
 
 ## Kiểm tra
 
-`node test-mo-phong.js` và `node test-du-an-khac.js` chạy các tình huống trên bản giả lập Google Sheet và Telegram:
+`node test-mo-phong.js`, `node test-du-an-khac.js` và `node test-nhanh.js` chạy các tình huống trên bản giả lập Google Sheet và Telegram:
 - 30 phút, 2 giờ, 3 ngày, gia hạn;
 - ban đêm;
 - sale khác bấm nhầm khách;
