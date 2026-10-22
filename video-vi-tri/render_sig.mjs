@@ -18,7 +18,7 @@ if (mode === 'png') {
   for (const f of arg.split(',').map(Number)) { await page.evaluate(f => window.renderSig(f), f); fs.writeFileSync(`out/sig_${String(f).padStart(4, '0')}.png`, await shot()); }
 } else {
   const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', '30', '-c:v', 'png', '-i', '-', '-c:v', 'qtrle', '-pix_fmt', 'argb', arg], { stdio: ['pipe', 'inherit', 'inherit'] });
-  for (let f = 0; f < 1800; f++) {
+  for (let f = 0; f < Number(process.env.FRAMES || 1800); f++) {
     await page.evaluate(f => window.renderSig(f), f);
     const b = await shot(); if (!ff.stdin.write(b)) await new Promise(r => ff.stdin.once('drain', r));
   }

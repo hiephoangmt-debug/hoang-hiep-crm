@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Video giải mã</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+  :root { --navy: #0A1A33; --navy2: #061229; --orange: #FF7A1A; --orange3: #FFB547; --yellow: #FFC23D; --white: #fff; }
+  html, body { margin: 0; background: var(--navy2); overflow: hidden; }
+  #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: 'Be Vietnam Pro', sans-serif; color: #fff;
+    background: radial-gradient(ellipse 90% 70% at 50% 40%, #13305A 0%, #0A1A33 55%, #050E22 100%); }
+  #grain { position: absolute; inset: 0; opacity: .08; mix-blend-mode: overlay; pointer-events: none; }
+  .grid { position: absolute; inset: 0; opacity: .07; background-image: linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px); background-size: 72px 72px; }
+  .it { position: absolute; opacity: 0; will-change: transform, opacity; }
+  /* thẻ ảnh */
+  .card { border-radius: 22px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.55), 0 0 0 3px rgba(255,255,255,.9); background: #000; }
+  .card img { display: block; width: 100%; height: 100%; object-fit: cover; transform-origin: 50% 50%; }
+  .card .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 18px 22px; font-weight: 800; font-size: 30px;
+    background: linear-gradient(180deg, rgba(5,14,34,0), rgba(5,14,34,.92)); }
+  .card .cap small { display: block; font-weight: 600; font-size: 22px; color: var(--orange3); }
+  .hl { position: absolute; background: var(--yellow); mix-blend-mode: multiply; transform-origin: 0 50%; }
+  .hlbox { position: absolute; border: 5px solid var(--orange); border-radius: 12px; box-shadow: 0 0 24px rgba(255,122,26,.8); }
+  /* chữ */
+  .t { text-align: center; line-height: 1.08; text-shadow: 0 6px 30px rgba(0,0,0,.55); }
+  .kick { font-weight: 800; font-size: 30px; letter-spacing: 6px; color: var(--orange3); text-transform: uppercase; }
+  .h1 { font-weight: 900; font-size: 96px; letter-spacing: -1px; }
+  .h2 { font-weight: 900; font-size: 68px; letter-spacing: -.5px; }
+  .h3 { font-weight: 800; font-size: 46px; }
+  .p { font-weight: 600; font-size: 36px; color: rgba(255,255,255,.9); line-height: 1.3; }
+  em { font-style: normal; color: var(--orange); }
+  .tag { display: inline-block; background: var(--orange); color: #fff; font-weight: 900; padding: 8px 22px; border-radius: 14px; box-shadow: 0 0 30px rgba(255,122,26,.5); }
+  .ghost { display: inline-block; border: 3px solid var(--orange); color: #fff; font-weight: 800; padding: 8px 22px; border-radius: 14px; background: rgba(5,14,34,.7); }
+  .num { font-weight: 900; color: var(--orange); text-shadow: 0 0 40px rgba(255,122,26,.45); letter-spacing: -2px; }
+  .unit { font-weight: 800; color: #fff; }
+  /* biểu đồ cột */
+  .bars { display: flex; align-items: flex-end; gap: 36px; }
+  .bar { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
+  .bar .v { font-weight: 900; font-size: 52px; margin-bottom: 10px; }
+  .bar .col { width: 190px; border-radius: 14px 14px 0 0; transform-origin: 50% 100%; box-shadow: 0 0 30px rgba(255,122,26,.25); }
+  .bar .l { margin-top: 14px; font-weight: 800; font-size: 34px; }
+  .bar .s { font-weight: 600; font-size: 24px; color: var(--orange3); margin-top: 2px; }
+  .axis { position: absolute; left: -20px; right: -20px; bottom: 0; height: 4px; background: rgba(255,255,255,.7); border-radius: 2px; }
+  /* thanh % */
+  .prog { height: 92px; border-radius: 18px; background: rgba(255,255,255,.12); overflow: hidden; border: 3px solid rgba(255,255,255,.85); position: relative; }
+  .prog .fill { position: absolute; left: 0; top: 0; bottom: 0; background: linear-gradient(90deg, #FF7A1A, #FFB547); display: flex; align-items: center; justify-content: flex-end; padding-right: 22px; box-sizing: border-box; font-weight: 900; font-size: 50px; }
+  /* checklist */
+  .chk { display: flex; gap: 26px; align-items: flex-start; margin-bottom: 34px; }
+  .chk .n { flex: none; width: 92px; height: 92px; border-radius: 22px; background: var(--orange); display: grid; place-items: center; font-weight: 900; font-size: 54px; box-shadow: 0 0 30px rgba(255,122,26,.5); }
+  .chk .tt { font-weight: 900; font-size: 46px; }
+  .chk .ss { font-weight: 600; font-size: 32px; color: rgba(255,255,255,.85); margin-top: 4px; line-height: 1.25; }
+  .chk .ss b { color: var(--orange3); }
+  /* sơ đồ */
+  .node { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 250px; }
+  .node .ic { width: 150px; height: 150px; border-radius: 40px; background: rgba(5,14,34,.85); border: 4px solid var(--orange); display: grid; place-items: center; box-shadow: 0 0 34px rgba(255,122,26,.4); }
+  .node .ic svg { width: 84px; height: 84px; }
+  .node .nt { font-weight: 800; font-size: 34px; text-align: center; line-height: 1.15; }
+  .arrow { position: absolute; height: 8px; background: linear-gradient(90deg, rgba(255,181,71,.2), #FFB547); transform-origin: 0 50%; border-radius: 4px; }
+  .arrow:after { content: ''; position: absolute; right: -16px; top: -12px; border-left: 26px solid #FFB547; border-top: 16px solid transparent; border-bottom: 16px solid transparent; }
+  .chip { display: inline-flex; align-items: center; gap: 16px; padding: 12px 22px 12px 12px; border-radius: 18px; background: rgba(5,14,34,.88); border: 2px solid var(--orange); box-shadow: 0 10px 30px rgba(0,0,0,.45); margin: 0 0 18px; }
+  .chip .ci { width: 52px; height: 52px; border-radius: 14px; background: var(--orange); display: grid; place-items: center; }
+  .chip .ci svg { width: 32px; height: 32px; }
+  .chip b { font-weight: 800; font-size: 34px; }
+  .chip span { font-weight: 800; font-size: 32px; color: var(--orange3); margin-left: 6px; }
+  .q { font-weight: 900; color: var(--orange); }
+</style>
+</head>
+<body>
+<div id="stage"><div class="grid"></div><div id="layer"></div>
+<svg id="grain" width="1080" height="1920"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+</div>
+<script src="ex_config.js"></script>
+<script>
+// Bộ dựng video giải mã: mỗi mục trong EX.items có thời điểm vào/ra (khung hình, 30 fps) và kiểu hiệu ứng.
+(async function () {
+  const EX = window.EX, layer = document.getElementById('layer');
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const E = { out: t => 1 - Math.pow(1 - t, 3), outQ: t => 1 - Math.pow(1 - t, 5), inOut: t => (t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2),
+    back: t => { const c1 = 1.9, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); } };
+  const ICON = EX.icons || {};
+  const fmt = n => Math.round(n).toLocaleString('vi-VN');
+  const mk = (it, html, cls) => { const d = document.createElement('div'); d.className = 'it ' + (cls || ''); d.innerHTML = html;
+    Object.assign(d.style, { left: (it.x ?? 0) + 'px', top: (it.y ?? 0) + 'px' }); if (it.w) d.style.width = it.w + 'px'; if (it.h) d.style.height = it.h + 'px';
+    layer.appendChild(d); it._el = d; return d; };
+
+  for (const it of EX.items) {
+    if (it.type === 'img') {
+      mk(it, `<img src="${it.src}"${it.pos ? ` style="object-position:${it.pos}"` : ''}>${it.cap ? `<div class="cap">${it.cap}</div>` : ''}`, 'card');
+      if (it.r != null) it._el.style.borderRadius = it.r + 'px';
+    } else if (it.type === 'txt') {
+      mk(it, it.html, 't'); if (!it.w) { it._el.style.left = '0px'; it._el.style.width = '1080px'; }
+      if (it.align) it._el.style.textAlign = it.align;
+    } else if (it.type === 'count') {
+      mk(it, `<span class="num" style="font-size:${it.size || 150}px">0</span>${it.unit ? `<span class="unit" style="font-size:${(it.size || 150) * .42}px"> ${it.unit}</span>` : ''}${it.sub ? `<div class="p" style="margin-top:6px">${it.sub}</div>` : ''}`, 't');
+      it._el.style.left = '0px'; it._el.style.width = '1080px';
+    } else if (it.type === 'bars') {
+      const mx = Math.max(...it.items.map(b => b.value));
+      mk(it, `<div class="bars" style="height:${it.h}px;position:relative"><div class="axis"></div>${it.items.map(b => `<div class="bar"><div class="v" style="color:${b.color}">0</div><div class="col" style="height:${(it.h - 170) * b.value / mx}px;background:linear-gradient(180deg,${b.color},${b.color2 || b.color})"></div><div class="l">${b.label}</div><div class="s">${b.sub || ''}</div></div>`).join('')}</div>`);
+      it._el.style.height = 'auto';
+    } else if (it.type === 'progress') {
+      mk(it, `<div class="prog"><div class="fill">0%</div></div>${it.label ? `<div class="p" style="margin-top:14px;text-align:center">${it.label}</div>` : ''}`);
+    } else if (it.type === 'check') {
+      mk(it, it.items.map(c => `<div class="chk"><div class="n">${c.n}</div><div><div class="tt">${c.title}</div><div class="ss">${c.sub}</div></div></div>`).join(''));
+    } else if (it.type === 'flow') {
+      mk(it, `<div style="display:flex;gap:${it.gap || 110}px;justify-content:center">${it.nodes.map(n => `<div class="node"><div class="ic"><svg viewBox="0 0 24 24">${ICON[n.icon] || ''}</svg></div><div class="nt">${n.text}</div></div>`).join('')}</div>`);
+      it._el.style.left = '0px'; it._el.style.width = '1080px';
+    } else if (it.type === 'chips') {
+      mk(it, it.items.map(c => `<div><div class="chip"><div class="ci"><svg viewBox="0 0 24 24">${ICON[c.icon] || ''}</svg></div><b>${c.name}</b><span>${c.dist}</span></div></div>`).join(''));
+    } else if (it.type === 'scale') {
+      mk(it, `<svg width="760" height="520" viewBox="0 0 760 520"><g class="beam" style="transform-origin:380px 120px">
+        <rect x="60" y="112" width="640" height="16" rx="8" fill="#fff"/>
+        <line x1="110" y1="120" x2="110" y2="250" stroke="#FFB547" stroke-width="4"/><line x1="650" y1="120" x2="650" y2="250" stroke="#FFB547" stroke-width="4"/>
+        <g class="pl"><path d="M20 250h180l-24 52H44z" fill="#FF7A1A"/><text x="110" y="370" text-anchor="middle" font-family="Be Vietnam Pro" font-weight="900" font-size="56" fill="#fff">${it.left}</text><text x="110" y="414" text-anchor="middle" font-family="Be Vietnam Pro" font-weight="600" font-size="28" fill="#FFB547">${it.leftSub || ''}</text></g>
+        <g class="pr"><path d="M560 250h180l-24 52H584z" fill="#16325C" stroke="#fff" stroke-width="3"/><text x="650" y="370" text-anchor="middle" font-family="Be Vietnam Pro" font-weight="900" font-size="56" fill="#fff">${it.right}</text><text x="650" y="414" text-anchor="middle" font-family="Be Vietnam Pro" font-weight="600" font-size="28" fill="#FFB547">${it.rightSub || ''}</text></g>
+      </g><path d="M380 120 L330 500 H430 Z" fill="rgba(255,255,255,.9)"/><circle cx="380" cy="120" r="18" fill="#FF7A1A"/></svg>`);
+      it._el.style.left = ((1080 - 760) / 2) + 'px';
+    } else if (it.type === 'hl') {
+      mk(it, '', it.box ? 'hlbox' : 'hl');
+    }
+  }
+
+  // hiệu ứng vào / ra theo khung hình
+  function apply(f) {
+    for (const it of EX.items) {
+      const el = it._el, a = it.in, b = it.out;
+      const tin = clamp((f - a) / (it.dIn || 16)), tout = b == null ? 1 : clamp((b - f) / (it.dOut || 12));
+      const vis = Math.min(tin, tout);
+      el.style.opacity = vis.toFixed(3);
+      if (vis <= 0) continue;
+      const exitY = (1 - tout) * -40;
+      let tr = '';
+      const anim = it.anim || 'up';
+      if (anim === 'pop') tr = `scale(${(.3 + .7 * E.back(tin)).toFixed(3)})`;
+      else if (anim === 'up') tr = `translateY(${((1 - E.outQ(tin)) * 80 + exitY).toFixed(1)}px)`;
+      else if (anim === 'left') tr = `translateX(${((1 - E.outQ(tin)) * -700).toFixed(1)}px) rotate(${(it.rot || 0)}deg)`;
+      else if (anim === 'right') tr = `translateX(${((1 - E.outQ(tin)) * 700).toFixed(1)}px) rotate(${(it.rot || 0)}deg)`;
+      else if (anim === 'drop') tr = `translateY(${((1 - E.back(tin)) * -500).toFixed(1)}px) rotate(${((it.rot || 0) * (2 - tin)).toFixed(2)}deg)`;
+      else if (anim === 'zoom') tr = `scale(${(1.25 - .25 * E.outQ(tin)).toFixed(3)})`;
+      if (it.move && f >= it.move.at) {  // di chuyển tới vị trí mới (vd: thu nhỏ, đẩy lên)
+        const m = it.move, t = E.inOut(clamp((f - m.at) / (m.dur || 20)));
+        tr += ` translate(${((m.dx || 0) * t).toFixed(1)}px, ${((m.dy || 0) * t).toFixed(1)}px) scale(${(1 + ((m.s ?? 1) - 1) * t).toFixed(3)})`;
+      }
+      el.style.transform = tr; el.style.transformOrigin = it.origin || '50% 50%';
+      const lt = f - a;
+      if (it.type === 'img' && it.kb) { const k = clamp(lt / ((b ?? a + 300) - a)); el.querySelector('img').style.transform = `scale(${(it.kb[0] + (it.kb[1] - it.kb[0]) * k).toFixed(4)})`; }
+      if (it.type === 'count') { const k = E.out(clamp((lt - 4) / (it.dur || 36))); el.querySelector('.num').textContent = (it.prefix || '') + (it.dec ? (it.to * k).toFixed(it.dec).replace('.', ',') : fmt(it.to * k)); }
+      if (it.type === 'bars') el.querySelectorAll('.bar').forEach((bar, i) => { const k = E.outQ(clamp((lt - 8 - i * 10) / 30)); bar.querySelector('.col').style.transform = `scaleY(${k.toFixed(3)})`; bar.querySelector('.v').textContent = fmt(it.items[i].value * k); });
+      if (it.type === 'progress') { const k = E.out(clamp((lt - 6) / 40)), fl = el.querySelector('.fill'); fl.style.width = (it.pct * k) + '%'; fl.textContent = Math.round(it.pct * k) + '%'; }
+      if (it.type === 'check' || it.type === 'chips') { const rows = el.children; for (let i = 0; i < rows.length; i++) { const k = E.outQ(clamp((lt - (it.stagger || 18) * i) / 18)); rows[i].style.opacity = k; rows[i].style.transform = `translateX(${((1 - k) * 120).toFixed(1)}px)`; } }
+      if (it.type === 'flow') { const nodes = el.querySelectorAll('.node'); nodes.forEach((n, i) => { const k = E.back(clamp((lt - (it.stagger || 22) * i) / 18)); n.style.opacity = clamp(k); n.style.transform = `scale(${(.4 + .6 * k).toFixed(3)})`; }); }
+      if (it.type === 'scale') { const k = E.inOut(clamp((lt - 20) / 40)), ang = (it.tilt || -10) * k; const beam = el.querySelector('.beam'); beam.style.transform = `rotate(${ang}deg)`;
+        const dy = Math.sin(ang * Math.PI / 180) * 270; el.querySelector('.pl').style.transform = `translate(0px, ${(-dy).toFixed(1)}px) rotate(${-ang}deg)`; el.querySelector('.pr').style.transform = `translate(0px, ${dy.toFixed(1)}px) rotate(${-ang}deg)`;
+        el.querySelector('.pl').style.transformOrigin = '110px 250px'; el.querySelector('.pr').style.transformOrigin = '650px 250px'; }
+      if (it.type === 'hl' && !it.box) { el.style.transform = `scaleX(${E.inOut(clamp(lt / (it.dur || 18))).toFixed(3)})`; el.style.opacity = (vis * .75).toFixed(3); }
+    }
+    // mũi tên trong sơ đồ: vẽ sau khi node hiện
+    for (const it of EX.items.filter(x => x.type === 'flow')) {
+      if (!it._arrows) { it._arrows = []; const nodes = it._el.querySelectorAll('.node');
+        for (let i = 0; i < nodes.length - 1; i++) { const ar = document.createElement('div'); ar.className = 'arrow'; it._el.appendChild(ar); it._arrows.push(ar); } }
+      const nodes = it._el.querySelectorAll('.node'), lt = f - it.in;
+      it._arrows.forEach((ar, i) => { const r0 = nodes[i].offsetLeft + nodes[i].offsetWidth / 2 + 85, r1 = nodes[i + 1].offsetLeft + nodes[i + 1].offsetWidth / 2 - 100;
+        const k = E.out(clamp((lt - (it.stagger || 22) * i - 12) / 14)); Object.assign(ar.style, { left: r0 + 'px', top: '71px', width: Math.max(0, r1 - r0) + 'px', transform: `scaleX(${k.toFixed(3)})`, opacity: k > 0 ? 1 : 0 }); });
+    }
+  }
+  window.renderFrame = async f => { apply(f); return true; };
+  window.TOTAL = EX.duration;
+  await document.fonts.load('900 96px "Be Vietnam Pro"', 'ĐỂ'); await document.fonts.ready;
+  await Promise.all([...document.images].map(im => im.complete ? 1 : new Promise(r => { im.onload = im.onerror = r; })));
+  apply(0); window.READY = true;
+})();
+</script>
+</body>
+</html>

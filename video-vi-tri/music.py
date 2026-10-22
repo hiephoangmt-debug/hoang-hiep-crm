@@ -25,7 +25,7 @@ def bandpass(x, lo, hi):
     return np.fft.irfft(X * ((f > lo) & (f < hi)), len(x))
 
 def env_adsr(n, a, r):
-    e = np.ones(n); a = int(a * SR); r = int(r * SR)
+    e = np.ones(n); a = min(int(a * SR), n // 2); r = min(int(r * SR), n - a)
     e[:a] = np.linspace(0, 1, a) ** 2; e[n - r:] *= np.linspace(1, 0, r) ** 2
     return e
 
@@ -135,7 +135,8 @@ def mallet(freq, dur=0.7):
     x = np.sin(2 * np.pi * freq * tt) * np.exp(-tt * 6) + 0.25 * np.sin(2 * np.pi * freq * 4 * tt) * np.exp(-tt * 30)
     return x * np.minimum(1, tt / 0.004)
 NOTES = [523.3, 587.3, 659.3, 784.0, 880.0]
-pops = sorted(set([t for k, t, _ in EV if k in ('poi', 'pin', 'dist', 'chip', 'stats')]))
+POP_TYPES = tuple(os.environ.get('MUSIC_POP', 'poi,pin,dist,chip,stats').split(','))
+pops = sorted(set([t for k, t, _ in EV if k in POP_TYPES]))
 last = -99; n_note = 0; played = 0
 for t in pops:
     if t - last < 12: continue                     # hiện sát nhau -> chỉ 1 tiếng

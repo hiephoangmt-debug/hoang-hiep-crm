@@ -9,7 +9,7 @@ import { spawn } from 'node:child_process';
 import { chromium } from 'playwright-core';
 
 const ROOT = path.resolve('public');
-const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.geojson': 'application/json', '.woff2': 'font/woff2', '.png': 'image/png' };
+const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.geojson': 'application/json', '.woff2': 'font/woff2', '.png': 'image/png', '.jpg': 'image/jpeg' };
 const server = http.createServer((req, res) => {
   const p = path.join(ROOT, decodeURIComponent(req.url.split('?')[0]));
   if (!p.startsWith(ROOT) || !fs.existsSync(p) || fs.statSync(p).isDirectory()) { res.writeHead(404); return res.end(); }
@@ -27,7 +27,7 @@ const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, de
 page.on('console', m => { if (m.type() === 'error' || m.type() === 'warning') console.log('[page]', m.text()); });
 page.on('pageerror', e => console.log('[pageerror]', e.message));
 const q = '?' + [mode === 'still' ? a3 : '', process.env.QS || ''].filter(Boolean).join('&');
-await page.goto(`http://localhost:${port}/index.html${q}`);
+await page.goto(`http://localhost:${port}/${process.env.MAIN || 'index.html'}${q}`);
 await page.waitForFunction('window.READY === true', null, { timeout: 180000 });
 const stage = await page.$('#stage');
 fs.mkdirSync(path.dirname(out), { recursive: true });
