@@ -32,3 +32,14 @@ cd web && python3 -m http.server 8000
 - `ladipage/build.py` dựng `ladipage/da-nang-downtown.html` (HTML tĩnh theo luật LadiPage v2) từ `index.html`.
 - Trang LadiPage của www.sun-danangdowntown.com dùng file này (form FORM431, FORM438; nút nổi Chat/Gọi/Zalo).
 - Ảnh trỏ về repo public trên nhánh `claude/great-tesla-ki0len`, không xóa nhánh khi trang còn dùng.
+
+### Trang LadiPage chế độ basic (giữ nguyên HTML, như Sun FourS Tower)
+Dựng bằng `ladipage/build_basic.py` từ `ladipage/basic/*.html`:
+
+| Trang | LadiPage ID | Đường dẫn cần gắn |
+|---|---|---|
+| Da Nang Downtown (trang chủ) | `6ad9e11192364b00132fb925` | `www.sun-danangdowntown.com` |
+| Sun Galaxy Complex | `6ad9e1136b2c75001205ce79` | `www.sun-danangdowntown.com/sun-galaxy-complex` |
+| Tháp 408m | `6ad9e11406fc060013e37e43` | `www.sun-danangdowntown.com/thap-408m` |
+
+Trang kéo-thả cũ `68b9064ebe3b5d001262fd88` đang giữ tên miền; gỡ tên miền khỏi trang này trước khi gắn cho trang chủ mới.
