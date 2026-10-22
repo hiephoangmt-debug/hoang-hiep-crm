@@ -390,36 +390,44 @@ var lawn=M(0x6ea85a,{roughness:.95});
 var tc=document.createElement('canvas'); tc.width=64; tc.height=64; (function(g){ g.fillStyle='#c2511f'; g.fillRect(0,0,64,64); g.fillStyle='#3a454b'; g.fillRect(18,14,28,34); g.fillStyle='rgba(255,255,255,.2)'; g.fillRect(18,14,28,3); g.fillStyle='#e7e2da'; g.fillRect(0,58,64,6); })(tc.getContext('2d'));
 function terraMat(rx,ry){ var t=new THREE.CanvasTexture(tc); t.encoding=THREE.sRGBEncoding; t.wrapS=t.wrapT=THREE.RepeatWrapping; t.repeat.set(rx,ry); t.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy()); return new THREE.MeshStandardMaterial({map:t,roughness:.75,metalness:0,envMapIntensity:.35}); }
 var NF=26;                                         // số tầng điển hình tầng 3–28
-/* Hình khối theo mô hình 3D tham khảo + phối cảnh chính thức: tháp gần vuông, khuyết một góc ở phía Đông Nam
-   (mặt biển – phía Nam), đế 2 tầng ôm sát tháp, khối thấp mái cỏ ở góc Tây Nam, mái đế trồng cây. */
-var X1=TX+AW/2, X0=X1-34, Z0=-26, Z1=20, NX=X1-12, NZ=Z1-15;   // tháp ~34 m (Đông–Tây) × 46 m (Bắc–Nam), khuyết 12 × 15 m
-var XA=X0, XB=X1, ZA=Z0, ZB=Z1, XW=X0, ZW=(Z0+NZ)/2, WL=0, WD=0;
+/* Hình khối theo 2 ảnh phối cảnh chính thức: chữ L – mặt biển phẳng ~48 m dọc Trường Sa; nhìn từ phía sau khối Bắc nhô ra,
+   khối Nam lùi vào (khuyết góc Tây Nam), chỗ gãy ốp đất nung; đế 2 tầng ôm tháp, mái trồng cây, khối thấp mái cỏ trong góc khuyết. */
+var X1=TX+AW/2, X0=X1-30, Z0=-25, Z1=23;                 // tháp ~30 m (Đông–Tây) × 48 m (Bắc–Nam), mặt biển phẳng x=X1
+var CX=X0+11, CZ=Z1-19;                                   // góc khuyết Tây Nam: 11 m × 19 m (chữ L: khối Bắc nhô ra phía sau)
+var ZM=CZ, SL=0, XS=CX;
+var XA=X0, XB=X1, ZA=Z0, ZB=Z1, XW=X0, ZW=(Z0+ZM-SL)/2, WL=0, WD=0, NX=X1, NZ=Z1;
 // --- Đế 2 tầng: cột trắng, kính sáng ấm, góc bo tròn ---
-var PX0=X0-5, PX1=X1+5, PZ0=Z0-4, PZ1=Z1+10, PW=PX1-PX0, PD=PZ1-PZ0, PCX=(PX0+PX1)/2, PCZ=(PZ0+PZ1)/2, WH=FL[3];
+var PX0=X0-5, PX1=X1+5, PZ0=Z0-4, PZ1=Z1+5, PW=PX1-PX0, PD=PZ1-PZ0, PCX=(PX0+PX1)/2, PCZ=(PZ0+PZ1)/2, WH=FL[3];
 slab(A,rrect(PW-2.4,PD-2.4,7),0,WH-.8,warm).position.set(PCX,0,PCZ);
 var wc=[]; for(var x=PX0+5;x<=PX1-5;x+=4.2){ wc.push([x,PZ0+.6]); wc.push([x,PZ1-.6]); } for(var z=PZ0+5;z<=PZ1-5;z+=4.2){ wc.push([PX1-.6,z]); wc.push([PX0+.6,z]); }
 fins(A,wc,WH-.8,0,white,.9);
 slab(A,rrect(PW,PD,8),FL[2]-.45,.45,white).position.set(PCX,FL[2]-.45,PCZ);
 slab(A,rrect(PW+.6,PD+.6,8.3),WH-.9,.9,white).position.set(PCX,WH-.9,PCZ);
-// mái đế: vườn cỏ, bồn cây, dừa (phần lộ ra quanh tháp và trong góc khuyết)
+// mái đế: vườn cỏ, bồn cây, dừa quanh chân tháp
 var deckY=WH+.02;
 slab(A,rrect(PW-1.4,PD-1.4,7.4),deckY-.05,.1,lawn).position.set(PCX,deckY-.05,PCZ);
-var rp=[]; for(var z=PZ0+3;z<=PZ1-3;z+=5){ rp.push([PX1-2.2,z]); rp.push([PX0+1.8,z]); } for(var x=PX0+5;x<=PX1-5;x+=5){ rp.push([x,PZ0+1.8]); rp.push([x,PZ1-2]); }
-for(var x=NX+3;x<=X1-2;x+=4.5) for(var z=NZ+3;z<=Z1-1;z+=4.5) rp.push([x,z]);   // vườn trên mái trong góc khuyết
+var rp=[]; for(var z=PZ0+3;z<=PZ1-3;z+=5){ rp.push([PX1-2.2,z]); if(z<CZ-1) rp.push([PX0+1.8,z]); } for(var x=PX0+5;x<=PX1-5;x+=5){ rp.push([x,PZ0+1.8]); rp.push([x,PZ1-2]); }
 rp.forEach(function(q,i){ boxP(A,2,.9,2,q[0],deckY,q[1],white); if(i%2===0){ var tr=new THREE.Mesh(trunkGeo,trunkMat); tr.position.set(q[0],deckY+.9,q[1]); tr.scale.set(.8,6,.8); tr.castShadow=true; A.add(tr); var cw=new THREE.Mesh(crownGeo,leafMat); cw.position.set(q[0],deckY+6.9,q[1]); cw.scale.set(.7,.7,.7); cw.rotation.y=i; cw.castShadow=true; A.add(cw); } else shrubsLocal(A,q[0],deckY+.6,q[1]); });
-// khối thấp mái cỏ góc Tây Nam (3 tầng)
-var AXc=X0+7, AZc=(Z1+PZ1)/2+.5, AWd=20, ADd=PZ1-Z1-1.5, AH=FL[5]-deckY;
+// khối thấp mái cỏ góc Tây Nam (3 tầng), sát mặt Tây khối Nam
+var ax0=PX0+1, ax1=CX-2.2, az0=CZ+2.5, az1=PZ1-1, AXc=(ax0+ax1)/2, AZc=(az0+az1)/2, AWd=ax1-ax0, ADd=az1-az0, AH=FL[5]-deckY;
 boxP(A,AWd,AH,ADd,AXc,deckY,AZc,warm);
-fins(A,(function(){ var o=[]; for(var x=AXc-AWd/2+1;x<=AXc+AWd/2-1;x+=3.4){ o.push([x,AZc+ADd/2+.2]); } for(var z=AZc-ADd/2+1;z<=AZc+ADd/2-1;z+=3.4){ o.push([AXc-AWd/2-.2,z]); } return o; })(),AH,deckY,white,.6);
+fins(A,(function(){ var o=[]; for(var x=ax0+1;x<=ax1-1;x+=3.4) o.push([x,az1+.2]); for(var z=az0+1;z<=az1-1;z+=3.4) o.push([ax0-.2,z]); return o; })(),AH,deckY,white,.6);
 for(var k=1;k<=2;k++) boxP(A,AWd+.8,.45,ADd+.8,AXc,deckY+AH*k/3,AZc,white);
 boxP(A,AWd+.6,.5,ADd+.6,AXc,deckY+AH,AZc,white);
 boxP(A,AWd-.6,.25,ADd-.6,AXc,deckY+AH+.5,AZc,lawn);
-// --- Thân tháp: hình chữ nhật khuyết góc Đông Nam ---
-// đa giác (toạ độ cục bộ x,z), nới ra g mét; góc lồi bo r, góc lõm bo nhỏ
-function Lpts(g){ return [[X0-g,Z0-g,1],[X1+g,Z0-g,1],[X1+g,NZ+g,1],[NX+g,NZ+g,0],[NX+g,Z1+g,1],[X0-g,Z1+g,1]]; }
+// --- Thân tháp chữ L: mặt biển phẳng, khuyết góc Tây Nam ---
+// đa giác (toạ độ cục bộ x,z) nới ra g mét; góc lồi bo r, góc lõm bo nhỏ (tự xác định lồi/lõm)
+function Lpts(g){
+  var P=[[X0,Z0],[X1,Z0],[X1,Z1],[CX,Z1],[CX,CZ],[X0,CZ]];
+  var n=P.length, out=[];
+  for(var i=0;i<n;i++){ var pr=P[(i+n-1)%n], c=P[i], nx=P[(i+1)%n];
+    var ax=c[0]-pr[0], az=c[1]-pr[1], bx=nx[0]-c[0], bz=nx[1]-c[1], cross=ax*bz-az*bx;   // >0: góc lồi (đi theo chiều kim đồng hồ trong hệ x Đông, z Nam)
+    var n1=[az?(az>0?1:-1):0, ax?(ax>0?-1:1):0], n2=[bz?(bz>0?1:-1):0, bx?(bx>0?-1:1):0];   // pháp tuyến ra ngoài của 2 cạnh
+    out.push([c[0]+g*(n1[0]+n2[0]-(n1[0]&&n2[0]?n1[0]:0)), c[1]+g*(n1[1]+n2[1]-(n1[1]&&n2[1]?n1[1]:0)), cross>0?1:0]); }
+  return out; }
 function Lshape(g,r){ var P=Lpts(g), s=new THREE.Shape(), n=P.length;
-  for(var i=0;i<n;i++){ var c=P[i], pr=P[(i+n-1)%n], nx=P[(i+1)%n], rr=Math.max(.05,c[2]?r:Math.min(r,.6));
-    var d1=Math.hypot(pr[0]-c[0],pr[1]-c[1]), d2=Math.hypot(nx[0]-c[0],nx[1]-c[1]);
+  for(var i=0;i<n;i++){ var c=P[i], pr=P[(i+n-1)%n], nx=P[(i+1)%n];
+    var d1=Math.hypot(pr[0]-c[0],pr[1]-c[1]), d2=Math.hypot(nx[0]-c[0],nx[1]-c[1]), rr=Math.max(.05,Math.min(c[2]?r:Math.min(r,.6),d1/2-.01,d2/2-.01));
     var p1=[c[0]+(pr[0]-c[0])/d1*rr, c[1]+(pr[1]-c[1])/d1*rr], p2=[c[0]+(nx[0]-c[0])/d2*rr, c[1]+(nx[1]-c[1])/d2*rr];
     if(i===0) s.moveTo(p1[0],-p1[1]); else s.lineTo(p1[0],-p1[1]); s.quadraticCurveTo(c[0],-c[1],p2[0],-p2[1]); }
   s.closePath(); return s; }
@@ -432,12 +440,13 @@ for(var f=4;f<=29;f++) slab(A,Lshape(1.6,3.2),FL[f]-.6,.6,white).position.y=FL[f
 // (bỏ lan can kính trong suốt: nhiều lớp trong suốt chồng nhau gây nháy sáng khi xoay)
 var hT=FL[29]-FL[3];
 function tStrip(w,d,x,z,rx){ var m=new THREE.Mesh(new THREE.BoxGeometry(w,hT,d),terraMat(rx,NF)); m.position.set(x,FL[3]+hT/2,z); m.castShadow=true; A.add(m); return m; }
-// dải đất nung: góc trong của phần khuyết, giữa mặt biển phần phía Bắc, góc Đông Bắc, giữa mặt Tây
-tStrip(2.4,5,NX+1.0,NZ+2.5,2);
-tStrip(5,2.4,NX+2.5,NZ+1.0,2);
-tStrip(2.4,6.5,X1+1.0,(Z0+NZ)/2,2);
-tStrip(9,2.4,X1-4.7,Z0-1.0,2);
-tStrip(2.4,6.5,X0-1.0,(Z0+Z1)/2,2);
+// đất nung: mặt Nam của khối Bắc nhô ra (ốp kín) + dải ở góc trong chữ L (thấy rõ từ phía sau)
+tStrip(CX-X0,2.4,(X0+CX)/2,CZ+1.0,4);
+tStrip(2.4,6,CX-1.0,CZ+3,2);
+// mặt biển: dải đất nung chạy suốt chiều cao ngay đường chia khối (lệch Bắc so với giữa)
+tStrip(2.4,6,X1+1.0,CZ,2);
+// viền góc Đông Bắc (giáp Nguyễn Đức Thuận)
+tStrip(7,2.4,X1-3.7,Z0-1.0,2);
 // --- 2 tầng đỉnh: kính + khung đất nung, mái phẳng ---
 var hC=TOP-FL[29];
 slab(A,Lshape(-.3,.3),FL[29],hC,glassTop);
@@ -445,9 +454,9 @@ fins(A,Lalong(.4,3.5),hC+.4,FL[29],terra,.9);
 slab(A,Lshape(1,.6),FL[29]-.6,.8,terra);
 slab(A,Lring(1.4,-.1,.6),TOP-1.2,3.4,terra);
 slab(A,Lshape(-.3,.3),TOP,.5,dark);
-boxP(A,8,4,12,X0+12,TOP+.5,-12,stone); boxP(A,6,3.2,7,X0+8,TOP+.5,8,stone); boxP(A,7,3,6,X1-8,TOP+.5,-16,stone);
+boxP(A,8,4,12,X1-12,TOP+.5,-12,stone); boxP(A,6,3.2,8,X1-9,TOP+.5,12,stone); boxP(A,6,3,6,X0+6,TOP+.5,-18,stone);
 // sảnh vào chính hướng Trường Sa
-boxP(A,4.5,.7,12,X1+6.5,FL[2]+.6,(Z0+NZ)/2,white);
+boxP(A,4.5,.7,12,X1+6.5,FL[2]+.6,(Z0+ZM-SL)/2,white);
 
 // mặt sân góc giao lộ
 var plaza=new THREE.Mesh(new THREE.CircleGeometry(26,40,Math.PI*.5,Math.PI*.5),M(0xd9d2c4)); plaza.rotation.x=-Math.PI/2; plaza.position.set(-14,.11,8); world.add(plaza);
@@ -466,7 +475,7 @@ var B={visible:false};
   lag.rotation.x=-Math.PI/2; lag.scale.set(34,120,1); lag.position.set(66,.2,-430); world.add(lag);
   var rim=new THREE.Mesh(new THREE.RingGeometry(1,1.08,48),M(0xeee6d3)); rim.rotation.x=-Math.PI/2; rim.scale.set(34,120,1); rim.position.set(66,.22,-430); world.add(rim);
   var vm=M(0xf3f0e8,{roughness:.5}), vg=M(0x31424f,{roughness:.2,metalness:.4,envMapIntensity:.8});
-  var V=[[34,-210],[34,-250],[34,-290],[34,-330],[34,-560],[34,-600],[34,-640],[96,-200],[96,-240],[100,-640],[60,-250],[62,-610],[34,-370],[34,-520]];
+  var V=[[34,-330],[34,-560],[34,-600],[34,-640],[100,-640],[62,-610],[34,-370],[34,-520]];
   V.forEach(function(p,i){ var w=rnd(14,20), d=rnd(10,14), h=i%3?7:10.5;
     var g=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),vm); g.position.set(p[0],h/2,p[1]); g.castShadow=g.receiveShadow=true; world.add(g);
     var gl=new THREE.Mesh(new THREE.BoxGeometry(w*.8,1.4,d+.2),vg); gl.position.set(p[0],h*.32,p[1]); world.add(gl);
@@ -476,8 +485,9 @@ var B={visible:false};
   lp.forEach(function(p,i){ dm.rotation.set(0,0,0); dm.position.set(p[0],0,p[1]); dm.scale.set(1,p[2],1); dm.updateMatrix(); tr.setMatrixAt(i,dm.matrix);
     dm.position.set(p[0],p[2],p[1]); dm.rotation.set(0,i,0); dm.scale.set(1,1,1); dm.updateMatrix(); cw.setMatrixAt(i,dm.matrix); });
   tr.castShadow=cw.castShadow=true; world.add(tr); world.add(cw);
-  // Lotte Duty Free (khối thấp dài màu trắng phía Bắc đường Nguyễn Đức Thuận)
-  var lt=new THREE.Mesh(new THREE.BoxGeometry(60,14,130),M(0xf2f0ea,{roughness:.5})); lt.position.set(-62,7,-110); lt.castShadow=lt.receiveShadow=true; world.add(lt);
+  // VV Mall (lô 8 Võ Nguyên Giáp, Khuê Mỹ): khối thương mại thấp phía biển, phía Bắc dự án
+  var lt=new THREE.Mesh(new THREE.BoxGeometry(68,16,84),M(0xf2f0ea,{roughness:.5})); lt.position.set(62,8,-205); lt.castShadow=lt.receiveShadow=true; world.add(lt);
+  var ltg=new THREE.Mesh(new THREE.BoxGeometry(68.4,4,84.4),M(0x31424f,{roughness:.2,metalness:.4,envMapIntensity:.8})); ltg.position.set(62,6,-205); world.add(ltg);
 })();
 
 /* ---------- Traffic ---------- */
@@ -501,7 +511,7 @@ label('Trường Sa','road',world,[0,2,260]);
 label('Nguyễn Đức Thuận','road',world,[-250,2,0]);
 label('Minh Mạng','road',world,[-260,2,212]);
 label('Lê Văn Hiến','road',world,[-560,2,-200]);
-label('Khu đất dự án · 3.720,1 m²','',world,[-50,3,64]); label('Khu thấp tầng & hồ cảnh quan (phối cảnh minh họa)','',world,[66,14,-430]); label('Lotte Duty Free','',world,[-62,20,-110]);
+label('Khu đất dự án · 3.720,1 m²','',world,[-50,3,64]); label('Khu thấp tầng & hồ cảnh quan (phối cảnh minh họa)','',world,[66,14,-430]); label('VV Mall','',world,[62,24,-205]);
 label('Dải đất resort ven biển (đang điều chỉnh quy hoạch)','',world,[62,10,60]);
 label('Công viên biển Trường Sa (quy hoạch) · cuối Minh Mạng','',world,[64,10,163]);
 label('Resort ven biển','',world,[70,12,282]);
@@ -555,7 +565,7 @@ var mode='overview', saved=null, yaw=0, pitch=-.04;
 function setFloor(f){ curF=f; fitHi(); hi.position.y=FL[f]-.2; floorOut.textContent='Tầng '+f; mainLbl.textContent='SUN SAPHIA · tầng '+f+' (~'+Math.round(FL[f]+1.6)+' m)'; if(mode==='view') placeViewCam(); if(mode==='close') flyClose(); }
 function placeViewCam(){
   var f=+floorEl.value, c=Math.cos(yaw), sn=Math.sin(yaw), hz=(SCH==='A'?AD:BD)/2+2, k=1/Math.max(Math.abs(c)/VIEWX,Math.abs(sn)/hz,1e-6);
-  var p=c<-.3? T.localToWorld(new THREE.Vector3(X0-1.8,FL[f]+1.6,(Z0+Z1)/2+sn*Math.min(12,Math.abs(sn/c)*1.8))) : T.localToWorld(new THREE.Vector3(TX+c*k,FL[f]+1.6,sn*k)); camera.position.copy(p);
+  var p=c<-.3? T.localToWorld(new THREE.Vector3(X0-1.8,FL[f]+1.6,(Z0+ZM-SL)/2+sn*Math.min(8,Math.abs(sn/c)*1.8))) : T.localToWorld(new THREE.Vector3(TX+c*k,FL[f]+1.6,sn*k)); camera.position.copy(p);
   var d=new THREE.Vector3(Math.cos(yaw)*Math.cos(pitch),Math.sin(pitch),Math.sin(yaw)*Math.cos(pitch)).applyQuaternion(world.quaternion);
   camera.lookAt(p.clone().add(d));
 }
