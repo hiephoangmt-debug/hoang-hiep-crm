@@ -47,28 +47,31 @@ const all=()=>vm.runInContext("rows_('Khach',T_KHACH)",ctx);
 const giao=()=>all()[all().length-1];
 let n=0; const moi=()=>{adv(1);n++;crmRow('090100'+String(n).padStart(4,'0'),'Mới '+n);run();return giao();};
 // Nhánh 1: khách mới lần lượt Hạnh, Tài, Linh
-const a=[moi(),moi(),moi()].map(k=>ten[k.nguoi_giu]);
-ok(a.join()==='Hạnh,Tài,Linh','khách mới 1-3 chia lần lượt: '+a.join());
+const a=[moi(),moi(),moi()].map(k=>k.nguoi_giu);
+ok(new Set(a).size===3,'khách mới 1-3 bốc ngẫu nhiên, mỗi người 1 khách: '+a.map(x=>ten[x]).join(','));
 // đóng K2, K3 cho gọn (tránh bị thu hồi vì không nhận trong lúc tua 3 ngày)
 vm.runInContext("['K2','K3'].forEach(function(id){var k=timKhach_(id);k.trang_thai='dong';save_('Khach',T_KHACH,k);})",ctx);
 // K1 (Hạnh) nhận, báo cáo "đã gọi", 3 ngày chưa chuyển đổi → thu hồi → nhánh 2
-let k1=K('K1'); click(k1.nguoi_giu,'n:K1'); run(); click(k1.nguoi_giu,'b:K1:goi'); run();
+let k1=K('K1'); const g1=k1.nguoi_giu; click(k1.nguoi_giu,'n:K1'); run(); click(k1.nguoi_giu,'b:K1:goi'); run();
 const lgc=()=>[1,2,3,4,5].map(i=>String(S(i).luc_giao_cuoi)).join('|');
 const truoc=lgc();
 advW(14*60*3+5); run(); k1=K('K1');
-ok(Number(k1.nhanh)===2&&k1.trang_thai==='cho_nhan'&&k1.nguoi_giu!=='1','3 ngày chưa chuyển đổi: thu hồi, sang nhánh 2, giao '+ten[k1.nguoi_giu]);
+ok(Number(k1.nhanh)===2&&k1.trang_thai==='cho_nhan'&&k1.nguoi_giu!==g1,'3 ngày chưa chuyển đổi: thu hồi, sang nhánh 2, giao '+ten[k1.nguoi_giu]);
 ok(lgc()===truoc,'chia nhánh 2 KHÔNG đổi lượt khách mới (luc_giao_cuoi giữ nguyên)');
 ok(S(k1.nguoi_giu).luc_giao_lai,'lượt nhánh 2 ghi riêng vào luc_giao_lai');
 // Khách mới tiếp theo vẫn về Ngà, Thu (người chưa có lượt), rồi quay lại Hạnh
-const b=[moi(),moi(),moi()].map(k=>ten[k.nguoi_giu]);
-ok(b.join()==='Ngà,Thu,Hạnh','khách mới 4-6: '+b.join()+' (người nhận nhánh 2 không bị mất lượt khách mới)');
+const b=[moi(),moi()].map(k=>k.nguoi_giu), con=['1','2','3','4','5'].filter(x=>!a.includes(x));
+ok(b.slice().sort().join()===con.sort().join(),'khách mới 4-5 về đúng 2 người chưa nhận vòng 1: '+b.map(x=>ten[x]).join(',')+' (người nhận nhánh 2 không bị mất lượt khách mới)');
+ok(!to(900).some(s=>/vòng 2<\/b> chia khách mới/.test(s.text)),'chưa đủ 5 người thì chưa sang vòng 2');
+const b6=moi(); ok(to(900).some(s=>/Bắt đầu <b>vòng 2<\/b> chia khách mới/.test(s.text))&&/Vòng: 2/.test(sent.filter(s=>/KHÁCH K\d+/.test(s.text)).pop().text),'khách mới thứ 6: cả đội đã nhận đủ → sang vòng 2, báo quản lý, tin giao ghi Vòng: 2 ('+ten[b6.nguoi_giu]+')');
+msg(900,'/sale');run(); ok(/vòng 2/.test(lastTo(900).text)&&/✔ đã nhận vòng này/.test(lastTo(900).text),'/sale hiện vòng hiện tại và ai đã nhận');
 // Khách mới bị thu hồi vì KHÔNG bấm nhận: vẫn nhánh 1
 const k6=giao(); adv(31); run(); const k6b=K(k6.id);
 ok(Number(k6b.nhanh||1)===1&&k6b.nguoi_giu!==k6.nguoi_giu,'khách mới không bấm nhận 30 phút: giao người tới lượt kế tiếp, vẫn nhánh 1 ('+ten[k6b.nguoi_giu]+')');
 // Sale báo không nhu cầu → anh Hiệp bấm Chia lại → nhánh 2
-let kx=K('K4'); click(kx.nguoi_giu,'n:K4'); run(); click(kx.nguoi_giu,'b:K4:khong'); run(); msg(Number(kx.nguoi_giu),'khách bảo không có nhu cầu'); run();
+let kx=K('K4'); const g4=kx.nguoi_giu; click(kx.nguoi_giu,'n:K4'); run(); click(kx.nguoi_giu,'b:K4:khong'); run(); msg(Number(kx.nguoi_giu),'khách bảo không có nhu cầu'); run();
 const lgc2=lgc(); click(900,'cl:K4'); run(); kx=K('K4');
-ok(Number(kx.nhanh)===2&&kx.trang_thai==='cho_nhan'&&kx.nguoi_giu!=='4','sale báo không nhu cầu, quản lý bấm Chia lại: nhánh 2, giao '+ten[kx.nguoi_giu]);
+ok(Number(kx.nhanh)===2&&kx.trang_thai==='cho_nhan'&&kx.nguoi_giu!==g4,'sale báo không nhu cầu, quản lý bấm Chia lại: nhánh 2, giao '+ten[kx.nguoi_giu]);
 ok(lgc()===lgc2,'chia lại không đổi lượt khách mới');
 // Khách đã đóng, anh Hiệp check có nhu cầu: /chialai K2 → nhánh 2
 msg(900,'/chialai K2'); run(); const k2=K('K2');

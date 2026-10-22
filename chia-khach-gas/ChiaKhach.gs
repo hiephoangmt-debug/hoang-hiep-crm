@@ -520,8 +520,8 @@ function nutBaoCao_(id) {
     [{text: '✅ ' + BC.cd, callback_data: 'b:' + id + ':cd'}, {text: '🚫 ' + BC.khong, callback_data: 'b:' + id + ':khong'}]];
 }
 function giao_(k) {
-  var qua = String(k.da_qua || '').split(',').filter(String);
-  var ung = salesDangLam_().filter(function (s) { return qua.indexOf(String(s.chat_id)) < 0; });
+  var qua = String(k.da_qua || '').split(',').filter(String), dangLam = salesDangLam_();
+  var ung = dangLam.filter(function (s) { return qua.indexOf(String(s.chat_id)) < 0; });
   if (!ung.length || Number(k.so_luot) >= num('SO_LUOT_TOI_DA')) {
     k.trang_thai = 'cho_quan_ly'; k.nguoi_giu = ''; k.ten_sale = ''; save_('Khach', T_KHACH, k);
     baoQL_('⚠️ Không còn sale nhận ' + esc(k.id) + ', anh xử lý giúp:\n' + tinKhach_(k, true), [[{text: '🔁 Chia lại từ đầu', callback_data: 'cl:' + k.id}]]);
@@ -541,19 +541,43 @@ function giao_(k) {
     return;
   }
   ung = ranh;
-  /* FourS/Saphia (nhánh 1 và nhánh 2+): chia lần lượt, ai lâu chưa được giao trong vòng đó thì tới lượt.
-     Data telesale: ưu tiên người đang giữ ít khách hơn rồi mới tới lượt. */
-  if (khac) ung.forEach(function (s) { s._giu = demGiu(s.chat_id, DANG_GIU); });
-  ung.forEach(function (s, i) { s._tt = i; });
-  ung.sort(function (a, b) { return (khac ? a._giu - b._giu : 0) || ms(a[cot]) - ms(b[cot]) || a._tt - b._tt; });
-  var s = ung[0], t = nowD(), dem = trongGio(ms(t));
+  /* FourS/Saphia: chia theo VÒNG. Mỗi vòng mỗi sale nhận 1 khách; người nhận kế tiếp bốc ngẫu nhiên trong số
+     người chưa nhận ở vòng đó. Ai cũng nhận xong thì sang vòng mới và báo quản lý.
+     Nhánh 1 (khách mới) và nhánh 2+ (chia lại) có 2 vòng riêng, không ảnh hưởng nhau.
+     Data telesale: ưu tiên người đang giữ ít khách hơn rồi tới người lâu chưa được giao. */
+  var s, vongMoi = 0;
+  if (khac) {
+    ung.forEach(function (x, i) { x._giu = demGiu(x.chat_id, DANG_GIU); x._tt = i; });
+    ung.sort(function (a, b) { return a._giu - b._giu || ms(a[cot]) - ms(b[cot]) || a._tt - b._tt; });
+    s = ung[0];
+  } else {
+    var key = lai ? 'VONG_LAI' : 'VONG_MOI', vg = JSON.parse(P().getProperty(key) || '{"so":1,"da":[]}');
+    var chua = function (x) { return vg.da.indexOf(String(x.chat_id)) < 0; };
+    var pool = ung.filter(chua), tinh = true;
+    if (!pool.length) {
+      /* Người chưa nhận vòng này mà chỉ bị loại riêng với khách này (đã từng giữ) → vòng chưa xong, giao thêm cho người khác */
+      var conCho = dangLam.filter(function (x) { return chua(x) && demGiu(x.chat_id, CHUA_BAO_CAO) < tran; });
+      if (conCho.length) tinh = false;
+      else { vg.so = Number(vg.so || 1) + 1; vg.da = []; vongMoi = vg.so; }
+      pool = ung;
+    }
+    s = pool[Math.floor(Math.random() * pool.length)];
+    if (tinh) vg.da.push(String(s.chat_id));
+    k._vong = vg.so;
+    P().setProperty(key, JSON.stringify(vg));
+    if (vongMoi) {
+      baoQL_('🔄 Bắt đầu <b>vòng ' + vongMoi + '</b> ' + (lai ? 'chia lại (nhánh 2+)' : 'chia khách mới') + ': cả đội đã nhận đủ 1 khách vòng ' + (vongMoi - 1) + '.');
+      log_('hệ thống', 'sang vòng mới', '', (lai ? 'chia lại' : 'khách mới') + ' · vòng ' + vongMoi);
+    }
+  }
+  var t = nowD(), dem = trongGio(ms(t));
   k.trang_thai = 'cho_nhan'; k.nguoi_giu = String(s.chat_id); k.ten_sale = s.ten; k.luc_giao = t; k.luc_nhan = ''; k.luc_bao_cao = ''; k.bao_cao = ''; k.nhac = ''; k.ly_do_dong = ''; k.gia_han = 0;
   k.so_luot = Number(k.so_luot || 0) + 1;
-  k.msg_id = gui_(s.chat_id, tinKhach_(k, false) + '\n\n' + (khac ? '📌 Data telesale: khách giao cho bạn giữ, không bị thu hồi. Bấm Nhận để xem số.' : dongHan_(k)) + (dem || khac ? '' : '\n(Ngoài giờ ' + num('GIO_BAT_DAU') + 'h–' + num('GIO_KET_THUC') + 'h không tính.)'),
+  k.msg_id = gui_(s.chat_id, tinKhach_(k, false) + (k._vong ? '\n• Vòng: ' + k._vong + (lai ? ' (chia lại)' : '') : '') + '\n\n' + (khac ? '📌 Data telesale: khách giao cho bạn giữ, không bị thu hồi. Bấm Nhận để xem số.' : dongHan_(k)) + (dem || khac ? '' : '\n(Ngoài giờ ' + num('GIO_BAT_DAU') + 'h–' + num('GIO_KET_THUC') + 'h không tính.)'),
     [[{text: '✅ Nhận khách', callback_data: 'n:' + k.id}]], !dem);
   save_('Khach', T_KHACH, k);
   s[cot] = t; save_('Sale', T_SALE, s);
-  log_(s.ten, 'được giao', k.id, 'lượt ' + k.so_luot + (khac ? ' · dự án khác' : ' · nhánh ' + Number(k.nhanh || 1)));
+  log_(s.ten, 'được giao', k.id, 'lượt ' + k.so_luot + (khac ? ' · dự án khác' : ' · nhánh ' + Number(k.nhanh || 1) + ' · vòng ' + k._vong));
 }
 function sangNhanhMoi_(k) { if (!laKhac_(k)) { k.nhanh = Number(k.nhanh || 1) + 1; k.so_luot = 0; } }
 /* Quản lý chia lại 1 khách (kể cả khách đã đóng): sang nhánh tiếp theo */
@@ -776,7 +800,8 @@ function giaHan_(k, chat) {
 function danhSachSale_() {
   var l = rows_('Sale', T_SALE).filter(function (s) { return s.trang_thai !== 'tu_choi'; });
   if (!l.length) return 'Chưa có sale nào. Sale nhắn bot /dangky Tên để xin vào đội.';
-  return '<b>Đội chia khách</b>\n' + l.map(function (s) { return (s.trang_thai === 'lam' ? '▶️ ' : s.trang_thai === 'nghi' ? '⏸ ' : '⏳ ') + esc(s.ten) + ' – đang giữ ' + dangGiu_(s.chat_id, null, '') + (dangGiu_(s.chat_id, null, 'khac') ? ' (+' + dangGiu_(s.chat_id, null, 'khac') + ' dự án khác)' : ''); }).join('\n');
+  var vg = JSON.parse(P().getProperty('VONG_MOI') || '{"so":1,"da":[]}');
+  return '<b>Đội chia khách</b> · khách mới đang ở <b>vòng ' + vg.so + '</b>\n' + l.map(function (s) { return (s.trang_thai === 'lam' ? '▶️ ' : s.trang_thai === 'nghi' ? '⏸ ' : '⏳ ') + esc(s.ten) + (s.trang_thai === 'lam' ? (vg.da.indexOf(String(s.chat_id)) > -1 ? ' ✔ đã nhận vòng này' : ' · chưa nhận vòng này') : '') + ' – đang giữ ' + dangGiu_(s.chat_id, null, '') + (dangGiu_(s.chat_id, null, 'khac') ? ' (+' + dangGiu_(s.chat_id, null, 'khac') + ' dự án khác)' : ''); }).join('\n');
 }
 function baoCao_(t) {
   var hom = vnDay(t), nk = rows_('NhatKy', T_NK).filter(function (r) { return vnDay(ms(r.thoi_gian)) === hom; });

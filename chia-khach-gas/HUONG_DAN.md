@@ -143,11 +143,12 @@ Sửa ngay trong tab **CauHinh**, không cần sửa code:
 
 ## Nhánh chia khách FourS / Saphia
 
-- **Nhánh 1**: khách mới về. Chia **lần lượt** từng sale đang làm: ai lâu nhất chưa được giao khách mới thì tới lượt.
+- **Nhánh 1**: khách mới về, chia theo **vòng**. Mỗi vòng mỗi sale đang làm nhận đúng 1 khách; người nhận kế tiếp được **bốc ngẫu nhiên** trong số người chưa nhận ở vòng đó (không theo thứ tự cố định). Cả đội nhận đủ thì sang **vòng 2, 3…**: bot báo quản lý, tin giao ghi `Vòng: 2`. `/sale` cho biết đang vòng mấy, ai đã nhận.
+- Sale đang nghỉ (/nghi) hoặc đang giữ từ 5 khách chưa báo cáo thì không chặn vòng: vòng xong khi những người nhận được khách đều đã nhận.
 - **Nhánh 2, 3…**: khách đã có sale nhận và chăm, rồi quay lại chia tiếp:
   - quá 3 ngày chưa chuyển đổi (hoặc nhận rồi không báo cáo / khách nóng im lặng 7 ngày) → bot tự thu hồi, sang nhánh tiếp theo;
   - sale báo **không nhu cầu** nhưng anh Hiệp kiểm tra thấy có nhu cầu → bấm **🔁 Chia lại** trên tin xin đóng khách, hoặc gõ `/chialai K12` (khách đã đóng cũng được).
-- Nhánh 2, 3… có **vòng xoay riêng**: nhận khách nhánh 2 **không làm mất lượt khách mới** của sale. Khách không quay về người đã từng giữ.
+- Nhánh 2, 3… cũng chia theo vòng bốc ngẫu nhiên nhưng là **vòng riêng**: nhận khách nhánh 2 **không làm mất lượt khách mới** của sale. Khách không quay về người đã từng giữ.
 - Khách mới bị thu hồi vì **chưa bấm Nhận** trong 30 phút vẫn là nhánh 1, giao người tới lượt kế tiếp.
 
 ## Dán data telesale cho bot tự chia (tab NhapData)

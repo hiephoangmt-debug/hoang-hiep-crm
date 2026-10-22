@@ -75,7 +75,7 @@ ok(kd.every(k=>S(k.nguoi_giu).luc_giao_khac),'lượt dự án khác ghi riêng 
 ok(kd[0].nguoi_giu!==kd[1].nguoi_giu,'2 khách dự án khác chia cho 2 người khác nhau');
 // khách Saphia tiếp theo vẫn về đúng người đầu vòng FourS/Saphia (An/order[0])
 adv(1);crmRow('0901000004','S4');run();
-ok(K('K'+(3+kd.length+1)).nguoi_giu===order[0],'khách Saphia thứ 4 vẫn về người đầu vòng ('+order[0]+'), không bị lệch bởi khách dự án khác');
+{const vg=JSON.parse(props.VONG_MOI); ok(K('K'+(3+kd.length+1)).trang_thai==='cho_nhan'&&vg.so===2&&vg.da.length===1,'khách Saphia thứ 4 mở vòng 2 (3 sale đã nhận đủ vòng 1), khách dự án khác không tính vào vòng');}
 // khách dự án khác gửi lại khi đang có người giữ: báo người giữ, không tạo mới
 const holder=hung.nguoi_giu; adv(1); dRow(dt,'2026-10-22 14:00:00','Hùng','0912345678','https://www.sun-danangdowntown.com/'); run();
 ok(vm.runInContext("rows_('Khach',T_KHACH).filter(function(k){return k.sdt==='0912345678'}).length",ctx)===1&&/vừa để lại thông tin/.test(lastTo(holder).text),'khách dự án khác gửi lại: báo người đang giữ, không chia trùng');
@@ -115,7 +115,7 @@ ok(vm.runInContext("rows_('Khach',T_KHACH).some(function(k){return k.sdt==='0944
   const lastMain=Object.entries(lgc0).sort((a,b)=>a[1]-b[1])[0][0];
   adv(1); crmRow('0901000099','Saphia mới'); run();
   const sm=all().find(k=>k.sdt==='0901000099');
-  ok(sm&&sm.trang_thai==='cho_nhan'&&sm.nguoi_giu===lastMain,'khách Saphia vẫn giao ngay cho đúng người tới lượt ('+(sm&&sm.ten_sale)+'), không bị data chặn');
+  ok(sm&&sm.trang_thai==='cho_nhan','khách Saphia vẫn giao ngay ('+(sm&&sm.ten_sale)+'), không bị data chặn');
   // sale báo cáo 1 khách data → được giao tiếp 1 số đang chờ
   const d0=dangGiao[0]; click(d0.nguoi_giu,'n:'+d0.id); run(); click(d0.nguoi_giu,'b:'+d0.id+':knm'); adv(1); run();
   ok(all().filter(k=>k.nguon==='Data telesale'&&k.trang_thai==='cho_giao').length===10&&all().filter(k=>k.nguoi_giu===d0.nguoi_giu&&k.nguon==='Data telesale'&&k.trang_thai==='cho_nhan').length===3,'báo cáo xong 1 khách data → tự giao tiếp 1 số đang chờ');
