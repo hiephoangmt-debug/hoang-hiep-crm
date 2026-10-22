@@ -163,7 +163,7 @@ HTML
 		'keyword'  => 'cải tạo cảnh quan sông Hàn',
 		'keywords_extra' => array( 'cảnh quan hai bờ sông Hàn', 'căn hộ ven sông Hàn', 'bờ Đông sông Hàn', 'Capital Square Đà Nẵng' ),
 		'project'  => 'capital-square-da-nang',
-		'schedule' => '2026-10-22 18:00',
+		'schedule' => '2026-10-22 10:30',
 		'category' => 'Thị trường',
 		'tags'     => array( 'Hạ tầng Đà Nẵng', 'Sông Hàn', 'Căn hộ ven sông Hàn' ),
 		'image'    => 'plugin:img/tin-tuc/cai-tao-canh-quan-hai-bo-song-han.jpg',
