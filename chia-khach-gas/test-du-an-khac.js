@@ -90,4 +90,33 @@ const nt=data.insertSheet('Tab mới');dRow(nt,'x','Old','0944000111','https://a
 ok(!vm.runInContext("rows_('Khach',T_KHACH).some(function(k){return k.sdt==='0944000111'})",ctx),'tab mới thêm sau: data có sẵn không bị chia');
 dRow(nt,'x','New','0944000222','https://abc.com');run();
 ok(vm.runInContext("rows_('Khach',T_KHACH).some(function(k){return k.sdt==='0944000222'&&k.nhom==='khac'})",ctx),'tab mới: dòng thêm sau được chia');
+
+// ===== Tab NhapData: dán 1 loạt data telesale =====
+{ const all=()=>vm.runInContext("rows_('Khach',T_KHACH)",ctx);
+  // dọn: đóng hết khách đang giữ để bắt đầu sạch
+  vm.runInContext("rows_('Khach',T_KHACH).forEach(function(k){k.trang_thai='dong';save_('Khach',T_KHACH,k);})",ctx);
+  const nd=active.s['NhapData']; ok(nd&&nd.d[0][4]==='Bot ghi (đừng sửa)','tab NhapData tự tạo với tiêu đề');
+  for(let i=0;i<20;i++) nd.appendRow(['Data '+i,"'09120000"+String(i).padStart(2,'0'),'Downtown','khách cũ 2025']);
+  nd.appendRow(['Sai số','12345','','']); nd.appendRow(['Trùng','0912000000','','']);
+  const lgc0={};['1','2','3'].forEach(c=>lgc0[c]=ms(S(c).luc_giao_cuoi));
+  adv(1); run();
+  const kh=all().filter(k=>k.nguon==='Data telesale');
+  const dangGiao=kh.filter(k=>k.trang_thai==='cho_nhan'), cho=kh.filter(k=>k.trang_thai==='cho_giao');
+  ok(dangGiao.length===9&&cho.length===11,'dán 20 số, 3 sale: mỗi người nhận 3 (giới hạn riêng), 11 số chờ ('+dangGiao.length+'/'+cho.length+')');
+  ok(['1','2','3'].every(c=>dangGiao.filter(k=>k.nguoi_giu===c).length===3),'chia đều 3-3-3');
+  ok(/^K\d+ → /.test(nd.d[1][4])&&/chờ giao/.test(nd.d[20][4]),'cột E ghi kết quả: "'+nd.d[1][4]+'" / "'+nd.d[20][4]+'"');
+  ok(/không hợp lệ/.test(nd.d[21][4])&&/Trùng K/.test(nd.d[22][4]),'số sai và số trùng được ghi rõ, không chia');
+  ok(!to(900).some(s=>/Data \d/.test(s.text)||/đang chờ, sẽ tự giao/.test(s.text)&&s.mid>0&&kh.some(k=>s.text.includes(k.id))),'quản lý không bị spam tin chờ giao của data');
+  ok(['1','2','3'].every(c=>ms(S(c).luc_giao_cuoi)===lgc0[c]),'data telesale không đổi lượt Saphia/FourS');
+  // Khách Saphia đến khi sale đang đủ data: vẫn giao ngay, đúng người theo vòng cũ
+  const lastMain=Object.entries(lgc0).sort((a,b)=>a[1]-b[1])[0][0];
+  adv(1); crmRow('0901000099','Saphia mới'); run();
+  const sm=all().find(k=>k.sdt==='0901000099');
+  ok(sm&&sm.trang_thai==='cho_nhan'&&sm.nguoi_giu===lastMain,'khách Saphia vẫn giao ngay cho đúng người tới lượt ('+(sm&&sm.ten_sale)+'), không bị data chặn');
+  // sale báo cáo 1 khách data → được giao tiếp 1 số đang chờ
+  const d0=dangGiao[0]; click(d0.nguoi_giu,'n:'+d0.id); run(); click(d0.nguoi_giu,'b:'+d0.id+':knm'); adv(1); run();
+  ok(all().filter(k=>k.nguon==='Data telesale'&&k.trang_thai==='cho_giao').length===10&&all().filter(k=>k.nguoi_giu===d0.nguoi_giu&&k.nguon==='Data telesale'&&k.trang_thai==='cho_nhan').length===3,'báo cáo xong 1 khách data → tự giao tiếp 1 số đang chờ');
+  // không nhận trong 30 phút → thu hồi, chia người khác (như cũ)
+  adv(31); run(); ok(all().some(k=>k.nguon==='Data telesale'&&String(k.da_qua).length>0),'data không bấm nhận 30 phút: thu hồi, chia người khác như khách thường');
+}
 console.log('\nTỔNG LỖI: '+fails);process.exit(fails?1:0);

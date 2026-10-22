@@ -137,7 +137,18 @@ Sửa ngay trong tab **CauHinh**, không cần sửa code:
 | `NHAC_NHAN_PHUT` · `NHAC_BAO_CAO_PHUT` · `NHAC_CHUYEN_DOI_NGAY` | 20 · 90 · 2 | Lúc gửi tin nhắc |
 | `NGUON_KHAC_SHEET_ID` | (trống) | Link hoặc ID Sheet **DATA CHẠY GOOGLE**. Có giá trị thì bot chia luôn khách dự án khác |
 | `NGUON_KHAC_TAB` | (trống) | Chỉ đọc các tab này, ví dụ `Dowtown, SPANA TOWER`. Trống = mọi tab dự án (bỏ TONG_HOP, UPLOAD_…, CRM_…, SAN_PHAM) |
+| `TOI_DA_CHUA_BAO_CAO_KHAC` | 3 | Data telesale: số khách chưa báo cáo tối đa mỗi sale |
 | `NHOM_RIENG` | fours,saphia | Khách có chữ này tính lượt FourS/Saphia; còn lại là dự án khác |
+
+## Dán data telesale cho bot tự chia (tab NhapData)
+
+1. Mở Sheet **Chia khách** → tab **NhapData**.
+2. Dán data vào cột A–D: **Tên | SĐT | Dự án | Ghi chú**. Để trống cột E.
+3. Khoảng 1 phút sau, bot tự chia. Cột E ghi kết quả: `K12 → Lê Tài 14:02`, `chờ giao`, `Trùng…` hoặc `Số không hợp lệ`.
+
+- Sale nhận như khách thường: bấm Nhận → báo cáo → hạn 30 phút / 2 giờ / 3 ngày, thu hồi như cũ.
+- Mỗi sale giữ tối đa `TOI_DA_CHUA_BAO_CAO_KHAC` (mặc định 3) khách data chưa báo cáo. Báo cáo xong 1 khách thì bot giao tiếp 1 số. Dán 200 số cũng không dồn hết một lúc.
+- **Không ảnh hưởng FourS / Saphia:** data có vòng xoay riêng, giới hạn riêng. Khách FourS/Saphia vẫn chia ngay và đúng lượt như trước.
 
 ## Chia khách dự án khác (không tính lượt FourS / Saphia)
 

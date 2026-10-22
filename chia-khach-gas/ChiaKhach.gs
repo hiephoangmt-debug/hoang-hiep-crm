@@ -9,8 +9,8 @@
  *     3 ngày chưa chuyển đổi (hẹn gặp / khách nóng / đã chốt) → thu hồi, giao bạn khác.
  *     Mọi hạn chỉ tính trong giờ làm việc 7h–21h (từ 21h tới 7h sáng hôm sau không tính).
  *  4. Mỗi tối gửi báo cáo cho quản lý.
- *  5. Dự án khác (các tab trong Sheet "DATA CHẠY GOOGLE": Downtown, Spana, Cora…) cũng tự chia,
- *     nhưng xoay vòng RIÊNG: khách dự án khác không làm mất lượt chia FourS / Saphia của sale.
+ *  5. Data telesale / dự án khác: dán vào tab "NhapData" (hoặc các tab Sheet "DATA CHẠY GOOGLE") → bot tự chia
+ *     như khách thường, nhưng xoay vòng RIÊNG và giới hạn RIÊNG: không làm mất lượt, không chặn khách FourS / Saphia.
  * Thêm: nhắc trước hạn · khách quay lại về đúng người đang chăm · không ôm quá 5 khách chưa báo cáo ·
  *       bị thu hồi 3 lần/ngày thì tự tạm dừng · đóng khách phải ghi lý do và quản lý duyệt ·
  *       khách nóng 2 ngày nhắc, 7 ngày im lặng thì thu hồi · /xoa sale nghỉ việc · xếp hạng tuần.
@@ -44,6 +44,7 @@ var MAC_DINH = {
   SO_LAN_GIA_HAN: 1,         // mỗi khách được xin gia hạn tối đa ngần này lần
   NGUON_KHAC_SHEET_ID: '',   // ID Sheet "DATA CHẠY GOOGLE" (khách dự án khác); để trống = không chia dự án khác
   NGUON_KHAC_TAB: '',        // chỉ đọc các tab này (cách nhau dấu phẩy); để trống = mọi tab dự án
+  TOI_DA_CHUA_BAO_CAO_KHAC: 3, // data telesale: mỗi sale giữ tối đa ngần này khách chưa báo cáo, xong mới giao tiếp
   NHOM_RIENG: 'fours,saphia' // khách có chữ này (trang / nhu cầu / nguồn) tính lượt FourS–Saphia; còn lại là dự án khác
 };
 
@@ -62,6 +63,7 @@ var T_KHACH = ['id', 'luc_vao', 'ten', 'sdt', 'nhu_cau', 'nguon', 'trang', 'tran
 /* luc_giao_cuoi: lượt FourS/Saphia · luc_giao_khac: lượt dự án khác (2 vòng xoay riêng) */
 var T_SALE = ['chat_id', 'ten', 'username', 'trang_thai', 'luc_giao_cuoi', 'them_luc', 'luc_giao_khac'];
 var T_NK = ['thoi_gian', 'nguoi', 'hanh_dong', 'khach', 'chi_tiet'];
+var T_NHAP = ['Tên', 'SĐT', 'Dự án', 'Ghi chú', 'Bot ghi (đừng sửa)'];
 
 /* Trạng thái khách: cho_nhan → da_nhan → dang_cham | chuyen_doi → chot ; cho_ly_do → cho_duyet_dong → dong ;
    cho_giao (đội đang quá tải, chờ chia) ; cho_quan_ly (hết sale) */
@@ -267,15 +269,16 @@ function ghiNhanKhachCu_() {
 /* ======================= VÒNG CHẠY MỖI PHÚT ======================= */
 function chayMoiPhut() {
   var lock = LockService.getScriptLock(); if (!lock.tryLock(20000)) return;
-  try { capNhatTieuDe_(); xuLyTinNhan_(); nhanKhachMoi_(); kiemTraHan_(); }
+  try { capNhatTieuDe_(); xuLyTinNhan_(); nhanKhachMoi_(); nhapData_(); kiemTraHan_(); }
   finally { lock.releaseLock(); }
 }
 
 /* Bản cũ chưa có cột mới (nhom, luc_giao_khac): ghi thêm tiêu đề 1 lần */
 function capNhatTieuDe_() {
-  if (P().getProperty('TIEU_DE') === '2') return;
-  [['Sale', T_SALE], ['Khach', T_KHACH]].forEach(function (x) { tab_(x[0], x[1]).getRange(1, 1, 1, x[1].length).setValues([x[1]]); });
-  P().setProperty('TIEU_DE', '2');
+  if (P().getProperty('TIEU_DE') === '3') return;
+  [['Sale', T_SALE], ['Khach', T_KHACH], ['NhapData', T_NHAP]].forEach(function (x) { tab_(x[0], x[1]).getRange(1, 1, 1, x[1].length).setValues([x[1]]); });
+  tab_('NhapData', T_NHAP).getRange('B:B').setNumberFormat('@');   // giữ số 0 đầu khi dán
+  P().setProperty('TIEU_DE', '3');
 }
 
 /* --- khách mới từ CRM --- */
@@ -383,6 +386,33 @@ function docDongKhac_(r, tab) {
     utm: nguon, web: url, trang: url.split('?')[0].slice(0, 200), nhom: 'khac', so_lan: 1};
 }
 
+/* --- tab NhapData: quản lý dán data (Tên | SĐT | Dự án | Ghi chú), bot chia dần, ghi kết quả vào cột E ---
+   Mỗi phút xử lý tối đa 30 dòng. Khách chia kiểu dự án khác: vòng riêng, không ảnh hưởng FourS / Saphia. */
+function nhapData_() {
+  var sh = tab_('NhapData', T_NHAP), n = sh.getLastRow(); if (n < 2) return;
+  var v = sh.getRange(2, 1, n - 1, 5).getValues(), tatCa = null, lam = 0, dem = Number(P().getProperty('DEM') || 0);
+  for (var i = 0; i < v.length && lam < 30; i++) {
+    var r = v[i]; if (String(r[4]).trim() || (!String(r[0]).trim() && !String(r[1]).trim())) continue;
+    lam++; tatCa = tatCa || rows_('Khach', T_KHACH);
+    var raw = String(r[1]).trim(), m = raw.match(SO_RE), sdt = normPhone(m ? m[0] : raw), kq;
+    if (!/^0[1-9]\d{8}$/.test(sdt)) kq = '❌ Số không hợp lệ';
+    else {
+      var cu = tatCa.filter(function (x) { return x.sdt === sdt && (DANG_GIU.test(x.trang_thai) || /chot|cho_giao|cho_quan_ly/.test(x.trang_thai)); }).pop();
+      if (cu) kq = '⚠️ Trùng ' + cu.id + (cu.ten_sale ? ' – ' + cu.ten_sale + ' đang giữ' : '') + ', không chia';
+      else {
+        dem++; P().setProperty('DEM', String(dem));
+        var da = String(r[2] || '').trim(), gc = String(r[3] || '').trim();
+        var k = {id: 'K' + dem, luc_vao: nowD(), ten: String(r[0] || '').trim().slice(0, 60), sdt: sdt, nhu_cau: [da ? 'Dự án: ' + da : '', gc].filter(String).join(' · ').slice(0, 200),
+          nguon: 'Data telesale', trang: '', trang_thai: 'moi', da_qua: '', so_luot: 0, so_bao_cao: 0, nhom: 'khac'};
+        save_('Khach', T_KHACH, k); log_('quản lý', 'nhập data', k.id, che(sdt)); tatCa.push(k);
+        giao_(k);
+        kq = k.id + (k.trang_thai === 'cho_nhan' ? ' → ' + k.ten_sale + ' ' + fmt(k.luc_giao) : k.trang_thai === 'cho_giao' ? ' chờ giao (sale đang đủ khách)' : ' chuyển quản lý');
+      }
+    }
+    sh.getRange(i + 2, 5).setValue(kq);
+  }
+}
+
 /* Thêm khách bằng tay để thử: themKhachThu() */
 /* Quản lý thêm khách bằng tay.
    Mỗi dòng có số = 1 khách ("Số Tên - nhu cầu"). Dòng không có số ngay dưới = chi tiết của khách đó
@@ -451,17 +481,20 @@ function giao_(k) {
     baoQL_('⚠️ Không còn sale nhận ' + esc(k.id) + ', anh xử lý giúp:\n' + tinKhach_(k, true), [[{text: '🔁 Chia lại từ đầu', callback_data: 'cl:' + k.id}]]);
     log_('hệ thống', 'chuyển quản lý', k.id, 'hết sale / quá lượt'); return;
   }
-  /* Không ôm khách: ai đang có quá nhiều khách chưa báo cáo thì tạm bỏ qua */
-  var ranh = ung.filter(function (s) { return dangGiu_(s.chat_id, CHUA_BAO_CAO) < num('TOI_DA_CHUA_BAO_CAO'); });
+  /* 2 nhóm tách hẳn: FourS/Saphia và dự án khác (data telesale). Chỉ đếm khách cùng nhóm, chỉ xét lượt cùng nhóm,
+     nên data telesale không làm mất lượt và không chặn khách FourS/Saphia */
+  var khac = laKhac_(k), cot = khac ? 'luc_giao_khac' : 'luc_giao_cuoi', all = rows_('Khach', T_KHACH);
+  function demGiu(chat, re) { return all.filter(function (x) { return x.id !== k.id && String(x.nguoi_giu) === String(chat) && re.test(x.trang_thai) && laKhac_(x) === khac; }).length; }
+  /* Không ôm khách: ai đang có quá nhiều khách chưa báo cáo (cùng nhóm) thì tạm bỏ qua */
+  var tran = num(khac ? 'TOI_DA_CHUA_BAO_CAO_KHAC' : 'TOI_DA_CHUA_BAO_CAO');
+  var ranh = ung.filter(function (s) { return demGiu(s.chat_id, CHUA_BAO_CAO) < tran; });
   if (!ranh.length) {
     var cho = k.trang_thai === 'cho_giao'; k.trang_thai = 'cho_giao'; k.nguoi_giu = ''; k.ten_sale = ''; save_('Khach', T_KHACH, k);
-    if (!cho) { baoQL_('⏳ Đội đang giữ nhiều khách chưa báo cáo, khách ' + esc(k.id) + ' đang chờ, sẽ tự giao khi có người rảnh.'); log_('hệ thống', 'chờ giao', k.id, 'đội quá tải'); }
+    if (!cho && !khac) { baoQL_('⏳ Đội đang giữ nhiều khách chưa báo cáo, khách ' + esc(k.id) + ' đang chờ, sẽ tự giao khi có người rảnh.'); log_('hệ thống', 'chờ giao', k.id, 'đội quá tải'); }
     return;
   }
   ung = ranh;
-  /* 2 vòng xoay riêng: FourS/Saphia và dự án khác. Chỉ đếm khách cùng nhóm, chỉ xét lượt cùng nhóm */
-  var khac = laKhac_(k), cot = khac ? 'luc_giao_khac' : 'luc_giao_cuoi';
-  ung.forEach(function (s) { s._giu = dangGiu_(s.chat_id, null, khac ? 'khac' : ''); });
+  ung.forEach(function (s) { s._giu = demGiu(s.chat_id, DANG_GIU); });
   ung.sort(function (a, b) { return a._giu - b._giu || ms(a[cot]) - ms(b[cot]); });
   var s = ung[0], t = nowD(), dem = trongGio(ms(t));
   k.trang_thai = 'cho_nhan'; k.nguoi_giu = String(s.chat_id); k.ten_sale = s.ten; k.luc_giao = t; k.luc_nhan = ''; k.luc_bao_cao = ''; k.bao_cao = ''; k.nhac = ''; k.ly_do_dong = ''; k.gia_han = 0;
@@ -492,10 +525,13 @@ function thuHoi_(k, lyDo) {
 
 /* --- kiểm tra hạn --- */
 function kiemTraHan_() {
-  var now = Date.now(), ngay = phutMotNgay();
+  var now = Date.now(), ngay = phutMotNgay(), khacDay = false;
   rows_('Khach', T_KHACH).forEach(function (k) {
     var st = k.trang_thai, p;
-    if (st === 'cho_giao') { giao_(k); return; }
+    if (st === 'cho_giao') {
+      if (laKhac_(k) && khacDay) return;   // data telesale chờ nhiều: hết người rảnh thì để phút sau
+      giao_(k); if (laKhac_(k) && k.trang_thai === 'cho_giao') khacDay = true; return;
+    }
     if (st === 'cho_nhan') {
       p = phutLamViec(k.luc_giao, now);
       if (p >= num('HAN_NHAN_PHUT')) thuHoi_(k, 'không bấm nhận trong ' + num('HAN_NHAN_PHUT') + ' phút');
