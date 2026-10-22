@@ -58,17 +58,47 @@ input[type=range]{width:100%;accent-color:var(--accent);min-width:0}
   .contact b{font-size:15px}
   .lb{font-size:11px}
 }
+
+/* ===== Tông thương hiệu: xanh navy · trắng · cam ===== */
+:root{--navy:#0A2540;--navy2:#12355c;--orange:#FF6A2B;--orange2:#E8460F;--white:#ffffff;--accent:#FF6A2B}
+.top{pointer-events:auto;background:linear-gradient(90deg,var(--navy),var(--navy2));border-bottom:3px solid var(--orange);padding-bottom:10px;box-shadow:0 4px 18px rgba(10,37,64,.35)}
+.brand{display:flex;align-items:center;gap:12px}
+.srb{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:11px;color:#fff;font:700 18px Georgia,"Times New Roman",serif;
+  background-image:linear-gradient(100deg,rgba(255,255,255,0) 40%,rgba(255,255,255,.85) 50%,rgba(255,255,255,0) 60%),linear-gradient(145deg,#FF9A3D 0%,#FF6A2B 50%,#E8460F 100%);
+  background-size:300% 100%,100% 100%;background-repeat:no-repeat;border:2px solid #FFC59A;box-shadow:0 4px 14px rgba(255,106,43,.5);text-shadow:0 1px 2px rgba(120,30,0,.35);animation:srQuet 3s linear infinite}
+@keyframes srQuet{0%{background-position:140% 0,0 0}60%,100%{background-position:-40% 0,0 0}}
+.brand small{color:#FFB067}
+.brand h1{color:#fff}
+.brand h1 span{color:var(--orange)}
+.brand p{color:#C9D6E3}
+.contact{color:#C9D6E3}
+.contact b{color:#fff}
+.contact a{color:#FF8A3D}
+.compass{position:fixed;right:max(16px,env(safe-area-inset-right,0px));top:calc(104px + env(safe-area-inset-top,0px));margin:0;background:#fff;border:2px solid var(--navy);box-shadow:0 3px 10px rgba(10,37,64,.25)}
+.console{background:rgba(255,255,255,.97);color:var(--navy);border-top:3px solid var(--orange);box-shadow:0 -6px 22px rgba(10,37,64,.18)}
+.chip{color:var(--navy);background:#fff;border:1.5px solid var(--navy)}
+.chip[aria-pressed="true"]{background:var(--orange);border-color:var(--orange);color:#fff;box-shadow:0 3px 10px rgba(255,106,43,.35)}
+.sl label{color:#4a5d72}
+.sl output{color:var(--navy)}
+.sl .play{background:var(--orange);border-color:var(--orange);color:#fff}
+.note{color:#5d6b7a}
+input[type=range]{accent-color:var(--orange)}
+.lb{background:rgba(10,37,64,.88);border-color:rgba(255,255,255,.35)}
+.lb.main{background:var(--orange);border-color:#fff}
+.viewhint{background:var(--navy);color:#fff;border-color:var(--orange)}
+.contact b{white-space:nowrap}
+@media (max-width:760px){.contact a{display:none}.srb{width:38px;height:38px;font-size:16px}.compass{top:calc(84px + env(safe-area-inset-top,0px))}}
 </style>
 
 <div id="app"></div>
 <div class="labels" id="labels"></div>
 
 <header class="top">
-  <div class="brand">
+  <div class="brand"><b class="srb">SR</b><div>
     <small>Mô hình 3D · 4D · 5D minh họa · Đà Nẵng</small>
     <h1><span>Sun Saphia</span> Residence</h1>
     <p>30 tầng · ~114 m · 782 căn · góc Trường Sa – Nguyễn Đức Thuận</p>
-  </div>
+  </div></div>
   <div class="contact">
     Hotline / Zalo<b>0904 567 009</b>
     <a href="https://zalo.me/0904567009" target="_blank" rel="noopener">Nhắn Zalo nhận bảng giá →</a>
