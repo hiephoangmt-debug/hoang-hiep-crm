@@ -60,6 +60,7 @@ ok(Number(k1.nhanh)===2&&k1.trang_thai==='cho_nhan'&&k1.nguoi_giu!==g1,'3 ngày 
 ok(lgc()===truoc,'chia nhánh 2 KHÔNG đổi lượt khách mới (luc_giao_cuoi giữ nguyên)');
 ok(S(k1.nguoi_giu).luc_giao_lai,'lượt nhánh 2 ghi riêng vào luc_giao_lai');
 // Khách mới tiếp theo vẫn về Ngà, Thu (người chưa có lượt), rồi quay lại Hạnh
+delete props.VONG_MOI; // giả lập vừa dán bản mới: phải dựng lại vòng từ nhật ký
 const b=[moi(),moi()].map(k=>k.nguoi_giu), con=['1','2','3','4','5'].filter(x=>!a.includes(x));
 ok(b.slice().sort().join()===con.sort().join(),'khách mới 4-5 về đúng 2 người chưa nhận vòng 1: '+b.map(x=>ten[x]).join(',')+' (người nhận nhánh 2 không bị mất lượt khách mới)');
 ok(!to(900).some(s=>/vòng 2<\/b> chia khách mới/.test(s.text)),'chưa đủ 5 người thì chưa sang vòng 2');

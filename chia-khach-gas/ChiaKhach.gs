@@ -551,7 +551,7 @@ function giao_(k) {
     ung.sort(function (a, b) { return a._giu - b._giu || ms(a[cot]) - ms(b[cot]) || a._tt - b._tt; });
     s = ung[0];
   } else {
-    var key = lai ? 'VONG_LAI' : 'VONG_MOI', vg = JSON.parse(P().getProperty(key) || '{"so":1,"da":[]}');
+    var key = lai ? 'VONG_LAI' : 'VONG_MOI', vg = layVong_(key, dangLam);
     var chua = function (x) { return vg.da.indexOf(String(x.chat_id)) < 0; };
     var pool = ung.filter(chua), tinh = true;
     if (!pool.length) {
@@ -578,6 +578,26 @@ function giao_(k) {
   save_('Khach', T_KHACH, k);
   s[cot] = t; save_('Sale', T_SALE, s);
   log_(s.ten, 'được giao', k.id, 'lượt ' + k.so_luot + (khac ? ' · dự án khác' : ' · nhánh ' + Number(k.nhanh || 1) + ' · vòng ' + k._vong));
+}
+/* Vòng chia hiện tại. Lần đầu chạy bản chia theo vòng: dựng lại vòng khách mới từ nhật ký
+   (các lần "được giao … lượt 1" của khách FourS/Saphia) để không tính lại người đã nhận. */
+function layVong_(key, dangLam) {
+  var luu = P().getProperty(key); if (luu) return JSON.parse(luu);
+  var vg = {so: 1, da: []};
+  if (key === 'VONG_MOI') {
+    var chinh = {}, theoTen = {}, lam = dangLam.map(function (x) { return String(x.chat_id); });
+    rows_('Khach', T_KHACH).forEach(function (k) { if (!laKhac_(k)) chinh[k.id] = 1; });
+    rows_('Sale', T_SALE).forEach(function (x) { theoTen[x.ten] = String(x.chat_id); });
+    rows_('NhatKy', T_NK).forEach(function (r) {
+      if (r.hanh_dong !== 'được giao' || !chinh[r.khach] || !/^lượt 1(\D|$)/.test(r.chi_tiet) || /nhánh [2-9]/.test(r.chi_tiet)) return;
+      var id = theoTen[r.nguoi]; if (!id || vg.da.indexOf(id) > -1) return;
+      vg.da.push(id);
+      if (lam.length && lam.every(function (x) { return vg.da.indexOf(x) > -1; })) { vg.so++; vg.da = []; }
+    });
+    log_('hệ thống', 'dựng vòng', '', 'khách mới vòng ' + vg.so + ', đã nhận: ' + vg.da.length + ' người');
+  }
+  P().setProperty(key, JSON.stringify(vg));
+  return vg;
 }
 function sangNhanhMoi_(k) { if (!laKhac_(k)) { k.nhanh = Number(k.nhanh || 1) + 1; k.so_luot = 0; } }
 /* Quản lý chia lại 1 khách (kể cả khách đã đóng): sang nhánh tiếp theo */
@@ -800,7 +820,7 @@ function giaHan_(k, chat) {
 function danhSachSale_() {
   var l = rows_('Sale', T_SALE).filter(function (s) { return s.trang_thai !== 'tu_choi'; });
   if (!l.length) return 'Chưa có sale nào. Sale nhắn bot /dangky Tên để xin vào đội.';
-  var vg = JSON.parse(P().getProperty('VONG_MOI') || '{"so":1,"da":[]}');
+  var vg = layVong_('VONG_MOI', salesDangLam_());
   return '<b>Đội chia khách</b> · khách mới đang ở <b>vòng ' + vg.so + '</b>\n' + l.map(function (s) { return (s.trang_thai === 'lam' ? '▶️ ' : s.trang_thai === 'nghi' ? '⏸ ' : '⏳ ') + esc(s.ten) + (s.trang_thai === 'lam' ? (vg.da.indexOf(String(s.chat_id)) > -1 ? ' ✔ đã nhận vòng này' : ' · chưa nhận vòng này') : '') + ' – đang giữ ' + dangGiu_(s.chat_id, null, '') + (dangGiu_(s.chat_id, null, 'khac') ? ' (+' + dangGiu_(s.chat_id, null, 'khac') + ' dự án khác)' : ''); }).join('\n');
 }
 function baoCao_(t) {
