@@ -1,7 +1,8 @@
 """Tạo hai-minh-4d-embed.js từ hai-minh-4d.html: chèn mô hình 4D vào trang LadiPage (iframe srcdoc, tải khi cuộn tới)."""
 import json, pathlib
 here = pathlib.Path(__file__).parent
-body = (here / 'hai-minh-4d.html').read_text(encoding='utf-8')
+# dùng chung mô hình với trang Sun Saphia (cùng một dự án)
+body = (here.parents[2] / 'sun-saphia' / '4d' / 'sun-saphia-4d.html').read_text(encoding='utf-8')
 doc = ('<!doctype html><html lang="vi"><head><meta charset="utf-8">'
        '<meta name="viewport" content="width=device-width,initial-scale=1"><base target="_blank">'
        + body + '</html>')
