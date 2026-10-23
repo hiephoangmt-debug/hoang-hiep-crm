@@ -71,6 +71,8 @@
 .cc .ufw{fill:#dfeefa;stroke:#5a8fb8;stroke-width:22}
 .cc .ut{font-family:Lexend,sans-serif;font-size:210px;fill:#43546b;text-anchor:middle}
 .cc .ut2{font-family:Lexend,sans-serif;font-size:170px;fill:#7b8796;text-anchor:middle}
+.cc .udl{stroke:#b5733a;stroke-width:38;stroke-linecap:butt}
+.cc .uda{fill:none;stroke:#b5733a;stroke-width:16;stroke-dasharray:70 50;opacity:.85}
 .cc .udm{stroke:#E8460F;stroke-width:22}
 .cc .udt{font-family:Lexend,sans-serif;font-size:260px;font-weight:600;fill:#E8460F;text-anchor:middle}
 @media(max-width:860px){.cc .unitrow{grid-template-columns:1fr;padding:14px}.cc .udraw svg{max-height:520px}.cc .grid>div:first-child{display:block}.cc .grid .plan{display:block}.cc .utext ul{grid-template-columns:1fr 1fr}}
@@ -189,21 +191,21 @@
   /* Bản vẽ căn theo tỷ lệ (đơn vị mm), cửa vào phía trên, logia phía dưới */
   var PLAN={
    STU:{W:3800,H:9000,n:'Studio',i:[['wall',0,2300,1700,2300],['wall',1700,0,1700,1500],['wc',250,250],['sh',900,150,700,950],['t',850,1900,'WC'],
-     ['in',2750,350],['k',3200,700,600,2900,'Bếp'],['wd',3200,4300,600,1500,'Tủ'],['bed',300,3700,1600,2000],['t2',1100,5950,'Giường 1,6 × 2 m'],
+     ['in',3250,350],['dr',3700,0,-1,0,0,1,900,1],['dr',1700,1500,0,1,-1,0,750],['k',3200,1000,600,2600,'Bếp'],['wd',3200,4300,600,1500,'Tủ'],['bed',300,3700,1600,2000],['t2',1100,5950,'Giường 1,6 × 2 m'],
      ['sofa',300,6300,1500,800],['t2',1050,7400,'Sofa'],['gl',0,7600,3800,7600],['lg',0,7600,3800,1400],['tb',2400,7950,800,800],['t',1200,8450,'Logia']],
      L:[['Giường đôi','1,6 × 2,0 m'],['Sofa','1,5 m'],['Tủ bếp','sâu 0,6 m, dài 2,9 m'],['Phòng tắm','1,7 × 2,3 m'],['Logia','sâu 1,4 m'],['Trần','cao 3,5 m']]},
    BR1:{W:6200,H:9000,n:'1BR+1',i:[['wall',0,1800,2600,1800],['wall',2600,0,2600,1200],['wc',250,200],['sh',1300,150,1100,900],['t',1300,1550,'WC'],
-     ['wall',0,4400,1800,4400],['wall',2600,2400,2600,4400],['bed',300,2100,1000,2000],['t2',1950,3300,'Phòng đa năng'],['t2',800,4250,'Giường 1 × 2 m'],
-     ['wall',0,5000,2100,5000],['wall',2900,5000,2900,7900],['bed',300,5500,1600,2000],['wd',2250,5150,550,1600,''],['t2',1100,7700,'Phòng ngủ 1,6 × 2 m'],
-     ['in',4700,350],['k',5600,600,600,3000,'Bếp'],['tb',4300,3700,900,1300],['t2',4750,5250,'Bàn ăn'],['sofa',3400,6700,2000,800],['t',4400,6350,'Phòng khách'],
+     ['wall',0,4400,1800,4400],['wall',2600,1800,2600,4400],['dr',1800,4400,1,0,0,-1,800],['dr',2600,1200,0,1,-1,0,600],['bed',300,2100,1000,2000],['t2',1950,3300,'Phòng đa năng'],['t2',800,4250,'Giường 1 × 2 m'],
+     ['wall',0,5000,2100,5000],['wall',2900,5000,2900,7900],['bed',300,5500,1600,2000],['wd',2250,6000,550,1600,''],['dr',2100,5000,1,0,0,1,800],['t2',1100,7700,'Phòng ngủ 1,6 × 2 m'],
+     ['in',5250,350],['dr',4800,0,1,0,0,1,900,1],['k',5600,600,600,3000,'Bếp'],['tb',4300,3700,900,1300],['t2',4750,5250,'Bàn ăn'],['sofa',3400,6700,2000,800],['t',4400,6350,'Phòng khách'],
      ['gl',0,7900,6200,7900],['lg',0,7900,6200,1100],['t',3100,8550,'Logia']],
      L:[['Giường đôi','1,6 × 2,0 m'],['Giường đơn','1,0 × 2,0 m'],['Sofa','2,0 m'],['Bàn ăn','0,9 × 1,3 m'],['Tủ bếp','sâu 0,6 m, dài 3 m'],['Trần','cao 3,5 m']]},
    BR2:{W:7250,H:9900,n:'2BR',i:[['wall',0,3300,3900,3300],['wall',3900,0,3900,2500],['bed',500,450,1800,2000],['wd',3250,300,600,2000,''],['t2',1400,2850,'Phòng ngủ 1 · giường 1,8 × 2 m'],
      ['wall',0,6200,3100,6200],['wall',3900,3300,3900,5400],['bed',600,3700,1600,2000],['t2',1400,5950,'Phòng ngủ 2 · 1,6 × 2 m'],
      ['wall',5300,0,5300,1400],['wall',5300,2000,7250,2000],['wc',6650,200],['sh',5450,150,900,900],['t',6300,1700,'WC 1'],
-     ['wall',5300,2600,5300,4000],['wall',5300,4000,7250,4000],['wc',6650,2250],['sh',5450,2150,900,900],['t',6300,3700,'WC 2'],
+     ['wall',5300,2600,5300,4000],['wall',5300,4000,7250,4000],['wc',6650,2250],['sh',5450,3000,900,900],['t',6750,3750,'WC 2'],
      ['k',6650,4300,600,2900,'Bếp'],['tb',4900,6900,900,1300],['t2',5350,8450,'Bàn ăn'],['sofa',700,7400,2200,850],['t',2300,6800,'Phòng khách'],
-     ['in',6100,5000],['wall',4600,8800,7250,8800],['gl',0,8800,4600,8800],['lg',0,8800,4600,1100],['t',2300,9450,'Logia']],
+     ['in',4650,350],['dr',4200,0,1,0,0,1,900,1],['dr',3900,2500,0,1,-1,0,800],['dr',3900,5400,0,1,-1,0,800],['dr',5300,1400,0,1,1,0,600],['dr',5300,2600,0,-1,1,0,600],['wall',4600,8800,7250,8800],['gl',0,8800,4600,8800],['lg',0,8800,4600,1100],['t',2300,9450,'Logia']],
      L:[['Giường ngủ 1','1,8 × 2,0 m'],['Giường ngủ 2','1,6 × 2,0 m'],['Sofa','2,2 m'],['Bàn ăn','0,9 × 1,3 m'],['Phòng tắm','2 phòng'],['Trần','cao 3,5 m']]}};
   function fmt(v){return (v/1000).toLocaleString('vi-VN',{minimumFractionDigits:v%1000?1:0,maximumFractionDigits:2})+' m';}
   function drawUnit(t){var P=PLAN[t],S=document.getElementById('ccUnit');if(!S)return;while(S.firstChild)S.removeChild(S.firstChild);
@@ -225,6 +227,11 @@
       else if(k=='in'){a('path',{d:'M'+(x-260)+' '+(-700)+'L'+(x+260)+' '+(-700)+'L'+x+' '+(-250)+'Z',fill:'#F26A21'});tx('ut',x,-760,'Cửa vào');}
       else if(k=='t')tx('ut',x,y,q[3]);else if(k=='t2')tx('ut2',x,y,q[3]);});
     a('rect',{class:'uw',x:0,y:0,width:W,height:H});
+    P.i.forEach(function(q){if(q[0]!='dr')return;var hx=q[1],hy=q[2],dx=q[3],dy=q[4],sx=q[5],sy=q[6],L=q[7];
+      var cx=hx+dx*L,cy=hy+dy*L,ox=hx+sx*L,oy=hy+sy*L;
+      a('line',{x1:hx,y1:hy,x2:cx,y2:cy,stroke:'#fbf6ee','stroke-width':q[8]?140:90});
+      a('line',{class:'udl',x1:hx,y1:hy,x2:ox,y2:oy});
+      a('path',{class:'uda',d:'M'+cx+' '+cy+'A'+L+' '+L+' 0 0 '+((dx*sy-dy*sx)>0?1:0)+' '+ox+' '+oy});});
     var dy=H+450;a('line',{class:'udm',x1:0,y1:dy,x2:W,y2:dy});a('line',{class:'udm',x1:0,y1:dy-150,x2:0,y2:dy+150});a('line',{class:'udm',x1:W,y1:dy-150,x2:W,y2:dy+150});tx('udt',W/2,dy+330,fmt(W));
     var dx=-450;a('line',{class:'udm',x1:dx,y1:0,x2:dx,y2:H});a('line',{class:'udm',x1:dx-150,y1:0,x2:dx+150,y2:0});a('line',{class:'udm',x1:dx-150,y1:H,x2:dx+150,y2:H});tx('udt',dx-140,H/2,fmt(H),1);
     a('rect',{x:W-1000,y:H+820,width:1000,height:70,fill:'#0A2540'});tx('ut2',W-500,H+1000,'1 m');
