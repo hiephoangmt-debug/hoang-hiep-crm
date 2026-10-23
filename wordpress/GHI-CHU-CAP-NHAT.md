@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.20** + plugin Hoàng Hiệp CRM **2.20.67**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.21** + plugin Hoàng Hiệp CRM **2.20.67**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -48,9 +48,10 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 - Chỉ thay ô nào vẫn là bản cũ do web nhập; ô anh đã tự sửa trong wp-admin giữ nguyên. Bài chi tiết chỉ điền vì hai bài hiện chưa có nội dung.
 - Sau khi giải nén: **Dự án → Nhập dữ liệu Đà Nẵng → Nhập / cập nhật dữ liệu**, rồi **LiteSpeed Cache → Purge All**.
 
-## Có gì mới – plugin 2.20.67: đưa 105 trang dự án và tin nhà đất vào sitemap
+## Có gì mới – plugin 2.20.67, giao diện 2.15.21: đưa 105 trang dự án và tin nhà đất vào sitemap
 - Sitemap Rank Math trước chỉ có bài viết, trang, chuyên mục – thiếu toàn bộ trang Dự án (/du-an/) và tin Nhà đất (/nha-dat/). Bản này bật hai loại trong sitemap (du-an-sitemap.xml, bat-dong-san-sitemap.xml) để Google tìm và lập chỉ mục.
 - Sau khi cài: Rank Math → Sơ đồ trang web kiểm tra có mục "Dự án", "Nhà đất"; gửi lại sitemap_index.xml trong Google Search Console.
+- Giao diện: dự án chưa có giá không khai báo kiểu Product trong schema (tránh lỗi "Đoạn trích sản phẩm" trên Search Console).
 
 ## Có gì mới – plugin 2.20.66: tự đăng bài đúng phút hẹn
 - Web hẹn riêng đúng phút đăng của bài kế tiếp (thay vì chờ lượt kiểm tra mỗi giờ); danh sách bài mới được kiểm tra mỗi 15 phút.

@@ -579,6 +579,9 @@ function hh_schema_project() {
 			'seller'        => array( '@id' => home_url( '/#agent' ) ),
 		);
 	}
+	if ( empty( $data['offers'] ) ) {
+		$data['@type'] = $type; // Chưa có giá: bỏ kiểu Product (Google báo lỗi Product thiếu offers/review).
+	}
 	return array_filter( $data, fn( $v ) => null !== $v && '' !== $v );
 }
 
