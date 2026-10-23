@@ -644,6 +644,13 @@ document.getElementById('dl2d').addEventListener('click',function(){
 var fe=document.getElementById('floor'); fe.addEventListener('input',function(){ state.floor=+fe.value; document.getElementById('flo').textContent=fname(state.floor); if(state.sel!==null) { var keep=+document.getElementById('hour').value; select(state.sel); document.getElementById('hour').value=keep; showHour(); } });
 document.getElementById('hour').addEventListener('input',showHour);
 [].forEach.call(document.querySelectorAll('#vmode button'),function(b){ b.addEventListener('click',function(){ setMode(b.getAttribute('data-m')); }); });
-plan(); select(5);
+plan();
+(function(){ // mở thẳng 1 căn: ?u=<mã căn>&f=<tầng> (dùng khi bấm căn trên mô hình 4D)
+  var q=location.search||'', mu=/[?&]u=([0-9A-Za-z]+)/.exec(q), mf=/[?&]f=(\d+)/.exec(q), idx=5;
+  if(mf){ var fv=Math.max(3,Math.min(28,+mf[1])); state.floor=fv; fe.value=fv; document.getElementById('flo').textContent=fname(fv); }
+  if(mu) for(var i=0;i<U.length;i++) if(U[i][0].toUpperCase()===mu[1].toUpperCase()){ idx=i; break; }
+  select(idx);
+  if(mu) setTimeout(function(){ var el=document.getElementById('info'); if(el&&el.scrollIntoView) el.scrollIntoView({behavior:'smooth',block:'start'}); },600);
+})();
 })();
 </script>
