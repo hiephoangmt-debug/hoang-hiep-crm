@@ -12,6 +12,7 @@ rep={'{{CSS_F2}}':css,'{{CSS_EV}}':ev,
  '{{MAP}}':RAW+'e896904c71c093b1d48a7dc792a5e93f932165cd/landing/sun-saphia/ads-v2/',
  '{{ICON}}':RAW+'d878b1dfa7ea891aa2d00b54f3c8f28ee5c536ee/landing/sun-saphia/ads-v2/',
  '{{SVG_STUDIO}}':open(P+'studio.svg').read(),'{{SVG_1BR}}':open(P+'1br.svg').read(),'{{SVG_2BR}}':open(P+'2br.svg').read(),
+ '{{CHON_CAN}}':open(P+'chon-can.html',encoding='utf8').read(),
  '{{CHAT}}':open(D+'chat/hhc-chat.js',encoding='utf8').read()}
 for k,v in rep.items():
     s=s.replace(k,v)
