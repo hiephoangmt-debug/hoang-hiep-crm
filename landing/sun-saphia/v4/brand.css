@@ -297,4 +297,7 @@ body.lp-on{overflow:hidden}
 .banks .bl{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .banks .bl img{height:30px;width:100%;max-width:150px;object-fit:contain;margin:0 auto;padding:8px 0;box-sizing:content-box;border-top:1px solid rgba(255,255,255,.18)}
 @media(max-width:520px){.banks .bl img{height:22px}}
-.banks .bl img:first-child{height:36px;padding:5px 0}@media(max-width:520px){.banks .bl img:first-child{height:27px}}
+/* Ngân hàng: nền xanh navy, 3 logo cùng một chiều cao */
+.banks{background:var(--nvd)!important}
+.banks .bl img{height:32px!important;padding:10px 0!important}
+@media(max-width:520px){.banks .bl img{height:24px!important}}
