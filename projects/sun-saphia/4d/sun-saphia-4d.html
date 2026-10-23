@@ -395,7 +395,7 @@ var NF=26;                                         // số tầng điển hình 
    đầu phía Nam có khối 2PN nhô ra phía biển ~7 m; đoạn cuối phía Nam chỉ còn 1 dãy căn. */
 var X1=TX+AW/2, Z0=-27, Z1=27;
 function UV(u,v){ return [X1-v, Z0+u]; }
-var X0=X1-46, CX=X1-23, CZ=Z0+22;      // X0: mặt Tây cánh Bắc; CX: mặt Tây thân; CZ: mặt Nam cánh Bắc
+var X0=X1-46, CX=X1-21, CZ=Z0+21;      // X0: mặt Tây cánh Bắc; CX: mặt Tây thân; CZ: mặt Nam cánh Bắc
 var ZM=CZ, SL=0, XS=CX;
 var XA=X0, XB=X1, ZA=Z0, ZB=Z1, XW=X0, ZW=(Z0+CZ)/2, WL=0, WD=0, NX=X1, NZ=Z1;
 // --- Đế 2 tầng: cột trắng, kính sáng ấm, góc bo tròn ---
@@ -420,7 +420,7 @@ boxP(A,AWd-.6,.25,ADd-.6,AXc,deckY+AH+.5,AZc,lawn);
 // --- Thân tháp chữ L: mặt biển phẳng, khuyết góc Tây Nam ---
 // đa giác (toạ độ cục bộ x,z) nới ra g mét; góc lồi bo r, góc lõm bo nhỏ (tự xác định lồi/lõm)
 function Lpts(g){
-  var P=[[0,0],[37,0],[37,-7],[52,-7],[52,12],[54,12],[54,23],[22,23],[22,46],[0,46]].map(function(q){ return UV(q[0],q[1]); });
+  var P=[[0,0],[37,0],[37,-7],[52,-7],[52,9],[54,9],[54,21],[21,21],[21,46],[0,46]].map(function(q){ return UV(q[0],q[1]); });
   var n=P.length, out=[];
   for(var i=0;i<n;i++){ var pr=P[(i+n-1)%n], c=P[i], nx=P[(i+1)%n];
     var ax=c[0]-pr[0], az=c[1]-pr[1], bx=nx[0]-c[0], bz=nx[1]-c[1], cross=ax*bz-az*bx;   // >0: góc lồi (đi theo chiều kim đồng hồ trong hệ x Đông, z Nam)
@@ -665,6 +665,7 @@ function loop(){
 if(/closeMod/.test(location.search)) setMode('close');
 if(/viewW/.test(location.search)){ setMode('view'); yaw=Math.PI; placeViewCam(); }
 if(/viewS/.test(location.search)){ setMode('view'); yaw=Math.PI/2; placeViewCam(); }
+if(/viewN/.test(location.search)){ setMode('view'); yaw=-Math.PI/2; placeViewCam(); }
 if(/viewE/.test(location.search)){ setMode('view'); yaw=0; placeViewCam(); }
 loop();
 })();
