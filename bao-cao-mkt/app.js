@@ -1427,6 +1427,36 @@
     const STATUS = /(dang hoat dong|da tam dung|da hoan tat|dang tat|da tat)/;
     const STATUS_C = /(danghoatdong|datamdung|dahoantat|dangtat)/;
 
+    /** Các dòng của bảng Trình quản lý quảng cáo (trên dòng thứ `end`): tên · số tiền đã chi · hiển thị · tiếp cận. */
+    function tableRows(end) {
+      // dòng tổng không có số (bảng đã lọc / bị cắt): đọc từng dòng của bảng phía trên
+      // "slight đà nẵng 1.366.135 đ 9.095 5.390 28 Tháng 9, 2026 - Liên tục" ; cấp quảng cáo có thêm cột "chi phí / kết quả"
+      const rows = [];
+      const dr0 = /(\d{1,2})\s*thang\s*(\d{1,2})\s*,?\s*(?:\d{4})?\s*[-–—]\s*(\d{1,2})\s*thang\s*(\d{1,2})/.exec(N.join(" "));
+      for (let i = Math.max(0, end - 40); i < end; i++) {
+        // bỏ số không phải tiền: "3 Đăng tin", "6.412 Đang diễn ra" (chữ đ/d dính vào chữ phía sau)
+        const ms = money(lines[i]).filter((m) => m.v >= 1000 && /\d[.,]\d{3}/.test(lines[i].substr(m.index, m.len)) &&
+          !/^\p{L}/u.test(lines[i].slice(m.index + m.len)));
+        if (!ms.length) continue;
+        let name = lines[i].slice(0, ms[0].index)
+          .replace(/s[uử]\s*d[uụ]ng\s*ng[aâ]n\s*s.*$/i, "")
+          .replace(/^[^\p{L}]+/u, "").replace(/(\s+[^\p{L}\s]{1,3})+\s*$/u, "").trim();
+        if (!name || /^(ket qua|tong|chi phi|so tien|ngan sach)/.test(norm(name))) continue;
+        const last = ms[ms.length - 1], spent = last.v;
+        if (!spent) continue;
+        const tail = lines[i].slice(last.index + last.len).replace(/\d{1,2}\s*th[aá]ng\s*\d{1,2}.*$/i, "");
+        const ints = Array.from(tail.matchAll(/(?:^|\s)(\d{1,3}(?:[.,]\d{3})+|\d+)(?=\s|$)/g)).map((m) => Math.round(toNum(m[1])));
+        // cấp quảng cáo: số đầu là "chi phí trên mỗi kết quả" -> số kết quả = chi tiêu / giá
+        const cpr = ms.length >= 2 ? ms[0].v : 0;
+        const results = cpr && Math.abs(spent / cpr - Math.round(spent / cpr)) < 0.05 ? Math.round(spent / cpr) : null;
+        rows.push({
+          name, spent, results, resultType: results != null ? "lead" : "", status: "",
+          date: dr0 ? `${dr0[1]}/${dr0[2]}` : "", until: dr0 ? `${dr0[3]}/${dr0[4]}` : "",
+          impressions: ints[0] != null ? ints[0] : null, reach: ints[1] != null ? ints[1] : null, clicks: null, views: null,
+        });
+      }
+      return rows;
+    }
     // Trình quản lý quảng cáo trên máy tính: dòng tổng "Kết quả từ 26 chiến dịch  30.305.510 đ  1.508.714 …"
     const fi = N.findIndex((n) => /ket qua tu \d+ (chien dich|nhom quang cao|quang cao)/.test(n));
     if (fi >= 0) {
@@ -1454,6 +1484,13 @@
           clicks: v["luot click"] != null ? v["luot click"] : null, views: v.thruplay != null ? v.thruplay : null,
         }];
       }
+      const rows = tableRows(fi);
+      if (rows.length) return rows;
+    }
+    // bảng Trình quản lý quảng cáo bị cắt mất dòng "Kết quả từ …"
+    if (fi < 0 && /adsmanager|quangcaodoivoi1|nhomquangcaodoivoi/.test(compact(text))) {
+      const rows = tableRows(lines.length);
+      if (rows.length) return rows;
     }
 
     // Google Ads (ads.google.com): các thẻ chỉ số "Lần nhấp / Lượt hiển thị / CPC / Chi phí" của chiến dịch đang mở
