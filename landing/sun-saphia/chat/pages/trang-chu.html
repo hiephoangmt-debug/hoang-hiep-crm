@@ -864,8 +864,8 @@ footer p{text-align:center!important;max-width:760px;margin-left:auto!important;
 .cc .ufu{fill:#fff;stroke:#7b8796;stroke-width:22}
 .cc .ufu2{fill:#f3e2cf;stroke:#b08a62;stroke-width:22}
 .cc .ufw{fill:#dfeefa;stroke:#5a8fb8;stroke-width:22}
-.cc .ut{font-family:Lexend,sans-serif;font-size:210px;fill:#43546b;text-anchor:middle}
-.cc .ut2{font-family:Lexend,sans-serif;font-size:170px;fill:#7b8796;text-anchor:middle}
+.cc .ut{font-family:Lexend,sans-serif;font-size:210px;font-weight:600;fill:#2b3a4d;text-anchor:middle;paint-order:stroke;stroke:#fff;stroke-width:50;stroke-opacity:.8}
+.cc .ut2{font-family:Lexend,sans-serif;font-size:165px;fill:#3d4b5c;text-anchor:middle;paint-order:stroke;stroke:#fff;stroke-width:45;stroke-opacity:.8}
 .cc .udl{stroke:#b5733a;stroke-width:38;stroke-linecap:butt}
 .cc .uda{fill:none;stroke:#b5733a;stroke-width:16;stroke-dasharray:70 50;opacity:.85}
 .cc .udm{stroke:#E8460F;stroke-width:22}
@@ -907,7 +907,7 @@ footer p{text-align:center!important;max-width:760px;margin-left:auto!important;
       <div class="utext">
         <span class="eyebrow">Vẽ theo tỷ lệ thật</span>
         <h3 id="ccUT">Căn Studio 3,8 × 9 m</h3>
-        <p id="ccUD">Bố trí nội thất gợi ý theo bản vẽ mặt bằng căn trình bày tại Kick-off, đồ đạc vẽ đúng kích thước thường dùng để anh/chị dễ hình dung.</p>
+        <p id="ccUD">Mặt bằng 4D tô màu theo bản vẽ căn trình bày tại Kick-off: sàn gỗ, gạch phòng tắm, nội thất vẽ đúng kích thước thường dùng để anh/chị dễ hình dung khi bố trí.</p>
         <ul id="ccUL"></ul>
         <p class="unote">Kích thước phủ bì theo bản vẽ Kick-off; bố trí nội thất mang tính gợi ý, bàn giao hoàn thiện cơ bản. Trần căn hộ cao 3,5 m.</p>
       </div>
@@ -986,46 +986,72 @@ footer p{text-align:center!important;max-width:760px;margin-left:auto!important;
 
   /* Bản vẽ căn theo tỷ lệ (đơn vị mm), cửa vào phía trên, logia phía dưới */
   var PLAN={
-   STU:{W:3800,H:9000,n:'Studio',i:[['wall',0,2300,1700,2300],['wall',1700,0,1700,1500],['wc',250,250],['sh',900,150,700,950],['t',850,1900,'WC'],
-     ['in',3250,350],['dr',3700,0,-1,0,0,1,900,1],['dr',1700,1500,0,1,-1,0,750],['k',3200,1000,600,2600,'Bếp'],['wd',3200,4300,600,1500,'Tủ'],['bed',300,3700,1600,2000],['t2',1100,5950,'Giường 1,6 × 2 m'],
-     ['sofa',300,6300,1500,800],['t2',1050,7400,'Sofa'],['gl',0,7600,3800,7600],['lg',0,7600,3800,1400],['tb',2400,7950,800,800],['t',1200,8450,'Logia']],
+   STU:{W:3800,H:9000,n:'Studio',i:[['tile',0,0,1700,2300],['rug',150,4300,2000,2300,'#d9cbbb'],['wall',0,2300,1700,2300],['wall',1700,0,1700,1500],['wc',250,250],['sh',900,150,700,950],['lav',250,1300,550,420],['t',850,1900,'WC'],
+     ['in',3250,350],['dr',3700,0,-1,0,0,1,900,1],['dr',1700,1500,0,1,-1,0,750],['k',3200,1000,600,2600,'Bếp'],['wd',3200,4300,600,1500,'Tủ'],['bed',300,3700,1600,2000,'#a9bfa0'],['t2',1100,5950,'Giường 1,6 × 2 m'],
+     ['sofa',300,6300,1500,800],['tv',3650,6300,120,1000],['ct',2350,6700,300],['t2',1050,7400,'Sofa'],['gl',0,7600,3800,7600],['lg',0,7600,3800,1400],['tb',2500,7950,800,800,0],['plant',600,8350,320],['t',1200,8450,'Logia']],
      L:[['Giường đôi','1,6 × 2,0 m'],['Sofa','1,5 m'],['Tủ bếp','sâu 0,6 m, dài 2,9 m'],['Phòng tắm','1,7 × 2,3 m'],['Logia','sâu 1,4 m'],['Trần','cao 3,5 m']]},
-   BR1:{W:6200,H:9000,n:'1BR+1',i:[['wall',0,1800,2600,1800],['wall',2600,0,2600,1200],['wc',250,200],['sh',1300,150,1100,900],['t',1300,1550,'WC'],
-     ['wall',0,4400,1800,4400],['wall',2600,1800,2600,4400],['dr',1800,4400,1,0,0,-1,800],['dr',2600,1200,0,1,-1,0,600],['bed',300,2100,1000,2000],['t2',1950,3300,'Phòng đa năng'],['t2',800,4250,'Giường 1 × 2 m'],
-     ['wall',0,5000,2100,5000],['wall',2900,5000,2900,7900],['bed',300,5500,1600,2000],['wd',2250,6000,550,1600,''],['dr',2100,5000,1,0,0,1,800],['t2',1100,7700,'Phòng ngủ 1,6 × 2 m'],
-     ['in',5250,350],['dr',4800,0,1,0,0,1,900,1],['k',5600,600,600,3000,'Bếp'],['tb',4300,3700,900,1300],['t2',4750,5250,'Bàn ăn'],['sofa',3400,6700,2000,800],['t',4400,6350,'Phòng khách'],
+   BR1:{W:6200,H:9000,n:'1BR+1',i:[['tile',0,0,2600,1800],['rug',3200,5700,2500,2000,'#d8c7b3'],['wall',0,1800,2600,1800],['wall',2600,0,2600,1200],['wc',250,200],['sh',1300,150,1100,900],['lav',250,1150,500,400],['t',1300,1550,'WC'],
+     ['wall',0,4400,1800,4400],['wall',2600,1800,2600,4400],['dr',1800,4400,1,0,0,-1,800],['dr',2600,1200,0,1,-1,0,600],['bed',300,2100,1000,2000,'#7fae7a'],['ct',1950,2700,300],['t2',1950,3300,'Phòng đa năng'],['t2',800,4250,'Giường 1 × 2 m'],
+     ['wall',0,5000,2100,5000],['wall',2900,5000,2900,7900],['bed',600,5500,1600,2000,'#9fb7c9'],['wd',2250,6000,550,1600,''],['dr',2100,5000,1,0,0,1,800],['t2',1100,7700,'Phòng ngủ 1,6 × 2 m'],
+     ['in',5250,350],['dr',4800,0,1,0,0,1,900,1],['k',5600,600,600,3000,'Bếp'],['tb',4300,3700,900,1300],['plant',5800,7450,300],['plant',600,8450,300],['t2',4750,5250,'Bàn ăn'],['sofa',3400,6900,2000,800],['ct',4400,6200,320],['tv',6050,5600,120,1300],['t',4400,5500,'Phòng khách'],
      ['gl',0,7900,6200,7900],['lg',0,7900,6200,1100],['t',3100,8550,'Logia']],
      L:[['Giường đôi','1,6 × 2,0 m'],['Giường đơn','1,0 × 2,0 m'],['Sofa','2,0 m'],['Bàn ăn','0,9 × 1,3 m'],['Tủ bếp','sâu 0,6 m, dài 3 m'],['Trần','cao 3,5 m']]},
-   BR2:{W:7250,H:9900,n:'2BR',i:[['wall',0,3300,3900,3300],['wall',3900,0,3900,2500],['bed',500,450,1800,2000],['wd',3250,300,600,2000,''],['t2',1400,2850,'Phòng ngủ 1 · giường 1,8 × 2 m'],
-     ['wall',0,6200,3100,6200],['wall',3900,3300,3900,5400],['bed',600,3700,1600,2000],['t2',1400,5950,'Phòng ngủ 2 · 1,6 × 2 m'],
+   BR2:{W:7250,H:9900,n:'2BR',i:[['tile',5300,0,1950,4000],['rug',400,6700,3000,1900,'#d8c7b3'],['wall',0,3300,3900,3300],['wall',3900,0,3900,2500],['bed',900,450,1800,2000,'#c7b299'],['wd',3250,300,600,2000,''],['t2',1400,2850,'Phòng ngủ 1 · giường 1,8 × 2 m'],
+     ['wall',0,6200,3100,6200],['wall',3900,3300,3900,5400],['bed',1000,3700,1600,2000,'#9fb7c9'],['t2',1400,5950,'Phòng ngủ 2 · 1,6 × 2 m'],
      ['wall',5300,0,5300,1400],['wall',5300,2000,7250,2000],['wc',6650,200],['sh',5450,150,900,900],['t',6300,1700,'WC 1'],
      ['wall',5300,2600,5300,4000],['wall',5300,4000,7250,4000],['wc',6650,2250],['sh',5450,3000,900,900],['t',6750,3750,'WC 2'],
-     ['k',6650,4300,600,2900,'Bếp'],['tb',4900,6900,900,1300],['t2',5350,8450,'Bàn ăn'],['sofa',700,7400,2200,850],['t',2300,6800,'Phòng khách'],
+     ['k',6650,4300,600,2900,'Bếp'],['tb',4900,6900,900,1300],['t2',5350,8450,'Bàn ăn'],['sofa',800,7550,2200,850],['ct',1900,7000,320],['tv',900,6300,2000,110],['plant',3600,8400,320],['plant',400,9400,280],['t',3050,6950,'Phòng khách'],
      ['in',4650,350],['dr',4200,0,1,0,0,1,900,1],['dr',3900,2500,0,1,-1,0,800],['dr',3900,5400,0,1,-1,0,800],['dr',5300,1400,0,1,1,0,600],['dr',5300,2600,0,-1,1,0,600],['wall',4600,8800,7250,8800],['gl',0,8800,4600,8800],['lg',0,8800,4600,1100],['t',2300,9450,'Logia']],
      L:[['Giường ngủ 1','1,8 × 2,0 m'],['Giường ngủ 2','1,6 × 2,0 m'],['Sofa','2,2 m'],['Bàn ăn','0,9 × 1,3 m'],['Phòng tắm','2 phòng'],['Trần','cao 3,5 m']]}};
   function fmt(v){return (v/1000).toLocaleString('vi-VN',{minimumFractionDigits:v%1000?1:0,maximumFractionDigits:2})+' m';}
   function drawUnit(t){var P=PLAN[t],S=document.getElementById('ccUnit');if(!S)return;while(S.firstChild)S.removeChild(S.firstChild);
     var W=P.W,H=P.H;S.setAttribute('viewBox',(-900)+' '+(-950)+' '+(W+1500)+' '+(H+2050));
     function a(n,o){var e=el(n,o);S.appendChild(e);return e;}function tx(c,x,y,v,r){var e=a('text',{class:c,x:x,y:y});if(r)e.setAttribute('transform','rotate(-90 '+x+' '+y+')');e.textContent=v;}
-    a('rect',{class:'ufl',x:0,y:0,width:W,height:H});
+    var D=a('defs',{});function dd(n,o,par){var e=el(n,o);(par||D).appendChild(e);return e;}
+    var pw=dd('pattern',{id:'ccWood',width:1200,height:200,patternUnits:'userSpaceOnUse'});dd('rect',{width:1200,height:200,fill:'#e7c89c'},pw);
+      dd('line',{x1:0,y1:0,x2:1200,y2:0,stroke:'#cfa874','stroke-width':14},pw);dd('line',{x1:420,y1:0,x2:420,y2:100,stroke:'#d4ae7c','stroke-width':10},pw);dd('line',{x1:0,y1:100,x2:1200,y2:100,stroke:'#d9b689','stroke-width':8},pw);dd('line',{x1:900,y1:100,x2:900,y2:200,stroke:'#d4ae7c','stroke-width':10},pw);
+    var pt=dd('pattern',{id:'ccTile',width:300,height:300,patternUnits:'userSpaceOnUse'});dd('rect',{width:300,height:300,fill:'#e6ecef'},pt);dd('path',{d:'M0 0H300M0 0V300',stroke:'#c6d1d8','stroke-width':12},pt);
+    var pk=dd('pattern',{id:'ccDeck',width:600,height:150,patternUnits:'userSpaceOnUse'});dd('rect',{width:600,height:150,fill:'#c9c3b8'},pk);dd('line',{x1:0,y1:0,x2:600,y2:0,stroke:'#b3ab9e','stroke-width':12},pk);
+    var fs=dd('filter',{id:'ccSh',x:'-20%',y:'-20%',width:'140%',height:'140%'});dd('feDropShadow',{dx:50,dy:70,stdDeviation:60,'flood-color':'#4a3520','flood-opacity':.28},fs);
+    a('rect',{x:0,y:0,width:W,height:H,fill:'url(#ccWood)'});
     P.i.forEach(function(q){var k=q[0];
-      if(k=='lg')a('rect',{class:'ulg',x:q[1],y:q[2],width:q[3],height:q[4]});});
-    P.i.forEach(function(q){var k=q[0],x=q[1],y=q[2];
+      if(k=='lg')a('rect',{x:q[1],y:q[2],width:q[3],height:q[4],fill:'url(#ccDeck)'});
+      if(k=='tile')a('rect',{x:q[1],y:q[2],width:q[3],height:q[4],fill:'url(#ccTile)'});
+      if(k=='rug'){a('rect',{x:q[1],y:q[2],width:q[3],height:q[4],rx:40,fill:q[5]||'#d8c7b3',stroke:'#bfa98f','stroke-width':30});a('rect',{x:q[1]+120,y:q[2]+120,width:q[3]-240,height:q[4]-240,rx:30,fill:'none',stroke:'#fff','stroke-opacity':.5,'stroke-width':20});}});
+    function G(){var g=el('g',{filter:'url(#ccSh)'});S.appendChild(g);return function(n,o){var e=el(n,o);g.appendChild(e);return e;};}
+    function chair(f,x,y,r){var t='rotate('+r+' '+x+' '+y+')';f('rect',{x:x-210,y:y-210,width:420,height:420,rx:90,fill:'#f4efe6',stroke:'#a99178','stroke-width':18,transform:t});f('rect',{x:x-210,y:y-210,width:420,height:90,rx:40,fill:'#8a6a4a',transform:t});}
+    function plant(x,y,r){var f=G();f('circle',{cx:x,cy:y,r:r,fill:'#5f8f4e'});[[-.45,-.3],[.4,-.35],[-.3,.45],[.45,.35],[0,0]].forEach(function(p,i){f('circle',{cx:x+p[0]*r,cy:y+p[1]*r,r:r*.45,fill:i%2?'#7fb069':'#4f7f3f'});});}
+    P.i.forEach(function(q){var k=q[0],x=q[1],y=q[2],f,w,h;
       if(k=='wall')a('line',{class:'uiw',x1:q[1],y1:q[2],x2:q[3],y2:q[4]});
       else if(k=='gl')a('line',{class:'ugl',x1:q[1],y1:q[2],x2:q[3],y2:q[4]});
-      else if(k=='bed'){a('rect',{class:'ufu',x:x,y:y,width:q[3],height:q[4],rx:60});a('rect',{class:'ufu2',x:x+80,y:y+80,width:q[3]/2-120,height:380,rx:60});a('rect',{class:'ufu2',x:x+q[3]/2+40,y:y+80,width:q[3]/2-120,height:380,rx:60});a('line',{class:'ufu',x1:x,y1:y+600,x2:x+q[3],y2:y+600});}
-      else if(k=='sofa'){a('rect',{class:'ufu2',x:x,y:y,width:q[3],height:q[4],rx:120});a('rect',{class:'ufu',x:x+150,y:y+220,width:q[3]-300,height:q[4]-220,rx:60});}
-      else if(k=='tb'){a('rect',{class:'ufu2',x:x,y:y,width:q[3],height:q[4],rx:60});}
-      else if(k=='k'){a('rect',{class:'ufu',x:x,y:y,width:q[3],height:q[4]});a('circle',{class:'ufu',cx:x+q[3]/2,cy:y+500,r:160});tx('ut2',x+q[3]/2,y+q[4]/2,q[5],1);}
-      else if(k=='wd'){a('rect',{class:'ufu2',x:x,y:y,width:q[3],height:q[4]});if(q[5])tx('ut2',x+q[3]/2,y+q[4]/2+60,q[5]);}
-      else if(k=='wc'){a('rect',{class:'ufw',x:x,y:y,width:420,height:180,rx:40});a('ellipse',{class:'ufw',cx:x+210,cy:y+480,rx:200,ry:280});}
-      else if(k=='sh'){a('rect',{class:'ufw',x:x,y:y,width:q[3],height:q[4],rx:30});a('line',{class:'ufw',x1:x,y1:y,x2:x+q[3],y2:y+q[4]});}
-      else if(k=='in'){a('path',{d:'M'+(x-260)+' '+(-700)+'L'+(x+260)+' '+(-700)+'L'+x+' '+(-250)+'Z',fill:'#F26A21'});tx('ut',x,-760,'Cửa vào');}
-      else if(k=='t')tx('ut',x,y,q[3]);else if(k=='t2')tx('ut2',x,y,q[3]);});
+      else if(k=='bed'){f=G();w=q[3];h=q[4];var bc=q[5]||'#9fb7c9';f('rect',{x:x,y:y,width:w,height:h,rx:70,fill:'#fff',stroke:'#b9a58c','stroke-width':20});
+        f('rect',{x:x-40,y:y-60,width:w+80,height:140,rx:40,fill:'#7a5a3c'});
+        f('rect',{x:x+90,y:y+110,width:w/2-140,height:380,rx:80,fill:'#fbfbfb',stroke:'#cdbfae','stroke-width':16});f('rect',{x:x+w/2+50,y:y+110,width:w/2-140,height:380,rx:80,fill:'#fbfbfb',stroke:'#cdbfae','stroke-width':16});
+        f('path',{d:'M'+x+' '+(y+700)+'H'+(x+w)+'V'+(y+h-60)+'Q'+(x+w)+' '+(y+h)+' '+(x+w-60)+' '+(y+h)+'H'+(x+60)+'Q'+x+' '+(y+h)+' '+x+' '+(y+h-60)+'Z',fill:bc});
+        f('rect',{x:x,y:y+700,width:w,height:160,fill:'#fff',opacity:.55});
+        if(w>1200){[[x-520,y+40],[x+w+80,y+40]].forEach(function(p){if(p[0]<60)return;f('rect',{x:p[0],y:p[1],width:440,height:420,rx:40,fill:'#b08a62'});f('circle',{cx:p[0]+220,cy:p[1]+210,r:120,fill:'#fff3d6',stroke:'#d9b76a','stroke-width':16});});}}
+      else if(k=='sofa'){f=G();w=q[3];h=q[4];f('rect',{x:x,y:y,width:w,height:h,rx:140,fill:'#5d7a92'});f('rect',{x:x+170,y:y+230,width:w-340,height:h-260,rx:70,fill:'#7f9bb2'});
+        for(var c=1;c<3;c++)f('line',{x1:x+170+(w-340)*c/3,y1:y+250,x2:x+170+(w-340)*c/3,y2:y+h-40,stroke:'#5d7a92','stroke-width':16});
+        f('rect',{x:x+240,y:y+60,width:300,height:200,rx:60,fill:'#e9b44c'});}
+      else if(k=='tb'){f=G();w=q[3];h=q[4];var cx=x+w/2,cy=y+h/2;
+        if(q[5]!==0){if(h>w){chair(f,x-230,cy-300,-90);chair(f,x-230,cy+300,-90);chair(f,x+w+230,cy-300,90);chair(f,x+w+230,cy+300,90);}else{chair(f,cx,y-230,0);chair(f,cx,y+h+230,180);}}
+        f('rect',{x:x,y:y,width:w,height:h,rx:70,fill:'#c89b6d',stroke:'#9c7247','stroke-width':20});f('circle',{cx:cx,cy:cy,r:110,fill:'#7fb069'});}
+      else if(k=='ct'){f=G();f('circle',{cx:x,cy:y,r:q[3],fill:'#b9895d',stroke:'#8f6640','stroke-width':18});f('circle',{cx:x,cy:y,r:q[3]*.35,fill:'#f2e3cc'});}
+      else if(k=='tv'){f=G();f('rect',{x:x,y:y,width:q[3],height:q[4],rx:30,fill:'#3b3b3b'});}
+      else if(k=='plant')plant(x,y,q[3]);
+      else if(k=='k'){f=G();w=q[3];h=q[4];f('rect',{x:x,y:y,width:w,height:h,fill:'#eceff1',stroke:'#9aa5ae','stroke-width':18});
+        f('rect',{x:x+90,y:y+300,width:w-180,height:520,rx:60,fill:'#cfd8dc',stroke:'#90a4ae','stroke-width':14});f('circle',{cx:x+w/2,cy:y+560,r:60,fill:'#90a4ae'});
+        [[.32,.62],[.68,.62],[.32,.78],[.68,.78]].forEach(function(p){f('circle',{cx:x+w*p[0],cy:y+h*p[1],r:110,fill:'none',stroke:'#37474f','stroke-width':22});});tx('ut2',x+w/2,y+h*.45,q[5],1);}
+      else if(k=='wd'){f=G();f('rect',{x:x,y:y,width:q[3],height:q[4],fill:'#a07850',stroke:'#7a5a3c','stroke-width':18});f('line',{x1:x+q[3]/2,y1:y+40,x2:x+q[3]/2,y2:y+q[4]-40,stroke:'#7a5a3c','stroke-width':12});if(q[5])tx('ut2',x+q[3]/2,y+q[4]/2+60,q[5]);}
+      else if(k=='wc'){f=G();f('rect',{x:x,y:y,width:420,height:180,rx:40,fill:'#fff',stroke:'#8fa3b3','stroke-width':16});f('ellipse',{cx:x+210,cy:y+480,rx:200,ry:280,fill:'#fff',stroke:'#8fa3b3','stroke-width':16});f('ellipse',{cx:x+210,cy:y+500,rx:120,ry:180,fill:'#e3edf3'});}
+      else if(k=='sh'){a('rect',{x:x,y:y,width:q[3],height:q[4],rx:30,fill:'#d6e6f0',stroke:'#7fa6c2','stroke-width':18});a('circle',{cx:x+q[3]/2,cy:y+q[4]/2,r:60,fill:'#7fa6c2'});a('line',{x1:x,y1:y+q[4],x2:x+q[3],y2:y+q[4],stroke:'#5a8fb8','stroke-width':30});}
+      else if(k=='lav'){f=G();f('rect',{x:x,y:y,width:q[3],height:q[4],rx:40,fill:'#fff',stroke:'#8fa3b3','stroke-width':16});f('ellipse',{cx:x+q[3]/2,cy:y+q[4]/2,rx:q[3]*.3,ry:q[4]*.28,fill:'#e3edf3'});}
+      else if(k=='in'){a('path',{d:'M'+(x-260)+' '+(-700)+'L'+(x+260)+' '+(-700)+'L'+x+' '+(-250)+'Z',fill:'#F26A21'});tx('ut',x,-760,'Cửa vào');}});
+    P.i.forEach(function(q){if(q[0]=='t')tx('ut',q[1],q[2],q[3]);else if(q[0]=='t2')tx('ut2',q[1],q[2],q[3]);});
     a('rect',{class:'uw',x:0,y:0,width:W,height:H});
     P.i.forEach(function(q){if(q[0]!='dr')return;var hx=q[1],hy=q[2],dx=q[3],dy=q[4],sx=q[5],sy=q[6],L=q[7];
       var cx=hx+dx*L,cy=hy+dy*L,ox=hx+sx*L,oy=hy+sy*L;
-      a('line',{x1:hx,y1:hy,x2:cx,y2:cy,stroke:'#fbf6ee','stroke-width':q[8]?140:90});
+      a('line',{x1:hx,y1:hy,x2:cx,y2:cy,stroke:'#e7c89c','stroke-width':q[8]?140:90});
       a('line',{class:'udl',x1:hx,y1:hy,x2:ox,y2:oy});
       a('path',{class:'uda',d:'M'+cx+' '+cy+'A'+L+' '+L+' 0 0 '+((dx*sy-dy*sx)>0?1:0)+' '+ox+' '+oy});});
     var dy=H+450;a('line',{class:'udm',x1:0,y1:dy,x2:W,y2:dy});a('line',{class:'udm',x1:0,y1:dy-150,x2:0,y2:dy+150});a('line',{class:'udm',x1:W,y1:dy-150,x2:W,y2:dy+150});tx('udt',W/2,dy+330,fmt(W));
