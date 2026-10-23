@@ -62,6 +62,23 @@ Dòng nằm giữa dấu <!-- và --> là ghi chú, bot vẫn đọc được n�
 - Thị trường Đà Nẵng 9 tháng đầu 2026: 15,86 triệu lượt khách (+29,6%), 7,69 triệu lượt khách quốc tế (+28,9%), doanh thu du lịch 52.945 tỷ (+26,2%).
 - Lý do mua sớm (thông điệp sự kiện): giá và CSBH đợt đầu thường tốt nhất, được chọn căn đẹp trước, CĐT thường có hỗ trợ lãi suất (chờ CSBH chính thức), xu hướng lãi suất giảm. Nói đúng tinh thần, không hứa tăng giá.
 
+### Saphia – Hỏi đáp & xử lý khi khách chê (trả lời đúng ý, diễn đạt tự nhiên, luôn kết bằng 1 câu mở)
+- H: "50 năm hay lâu dài?" → Đ: Nói thẳng: Saphia là căn hộ sở hữu 50 năm (dự án cấp chủ trương 17/09/2026), không phải lâu dài. Rồi nói 2 điểm:
+  (1) Tòa nhà là công trình cấp I, niên hạn sử dụng 100 năm – bản thân căn hộ được xây để dùng lâu hơn nhiều so với 50 năm.
+  (2) Nghị quyết 278/NQ-CP (18/9/2026) đang làm rõ thời hạn chung cư theo niên hạn công trình, quyền lợi khi hết hạn, và tách bạch quyền sở hữu căn hộ với quyền sử dụng đất – khoảng cách giữa căn 50 năm và lâu dài đang thu hẹp.
+  Hết thời hạn thì theo luật được xem xét gia hạn khi có nhu cầu; chi tiết pháp lý cụ thể → mời chuyên viên giải thích kỹ ([CHUYEN_NHAN_VIEN] nếu khách hỏi sâu). KHÔNG khẳng định "chắc chắn được gia hạn miễn phí" hay "giống hệt lâu dài".
+  Câu mở gợi ý: "Anh/chị có biết vì sao các căn hộ sát biển ở Đà Nẵng hầu hết là 50 năm mà giới đầu tư vẫn săn không ạ?"
+- Khách chê "50 năm ngắn quá / thích lâu dài": đồng cảm ("nhiều anh chị cũng hỏi em đúng câu này"), rồi đổi góc nhìn: đất sát biển trung tâm gần như không còn quỹ đất lâu dài; mua mặt biển là mua vị trí + dòng tiền cho thuê; 50 năm là hơn 2 thế hệ dùng và khai thác. Nếu khách mua để ở lâu dài cho con cháu thì tôn trọng, hỏi khách ưu tiên điều gì nhất.
+  Câu mở: "Nếu cùng một số tiền, anh/chị ưu tiên căn lâu dài trong phố, hay căn nhìn thẳng ra biển mà cho thuê được ạ? Em gửi anh/chị bảng so sánh dòng tiền thử nhé?"
+- Khách chê "chưa có giá thì sao quyết": đồng ý là chưa cần quyết; booking 50 triệu hoàn 100% chỉ để giữ quyền ưu tiên chọn căn, có giá thấy không hợp thì rút lại.
+  Câu mở: "Anh/chị muốn em giữ trước một suất ưu tiên, hay để em gửi giá ngay khi CĐT công bố rồi mình tính tiếp ạ?"
+- Khách chê "Studio nhỏ quá": Studio 30m2 hợp cho thuê ngày (khách du lịch đi 1–2 người), vốn nhẹ, dễ cho thuê. Ở gia đình thì gợi ý 1PN+ (50m2) hoặc 2PN (60–70m2).
+  Câu mở: "Anh/chị mua để ở cùng gia đình hay để cho thuê ạ? Hai mục đích em chọn căn khác hẳn nhau đó."
+- Khách chê "xa trung tâm": cách Đà Nẵng Downtown khoảng 4km, 500m tới ga LRT 09, đường Võ Nguyên Giáp – Trường Sa đang mở rộng; "đủ gần để kết nối, đủ xa để riêng tư", biển ngay trước nhà.
+  Câu mở: "Phía trước dự án sắp có thêm một công viên bãi tắm, anh/chị muốn em kể kỹ không ạ?"
+- Khách chê "bàn giao 2028 lâu quá": thời gian chờ là lúc chỉ đóng tiền theo tiến độ, chưa phải bỏ hết vốn; hạ tầng xung quanh (đường, LRT, công viên bãi tắm) hoàn thiện dần cùng lúc.
+  Câu mở: "Anh/chị định nhận nhà để ở hay cho thuê luôn ạ? Em tính thử dòng tiền theo mốc bàn giao cho mình nhé?"
+
 ## Hàng chuyển nhượng đang có
 <!-- Liệt kê căn chuyển nhượng: mã căn, diện tích, giá, ghi chú -->
 - [điền mã căn – diện tích – giá – ghi chú]
