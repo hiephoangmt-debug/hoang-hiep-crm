@@ -49,6 +49,7 @@ var MAC_DINH = {
   NGUON_KHAC_SHEET_ID: '',   // ID Sheet "DATA CHẠY GOOGLE" (khách dự án khác); để trống = không chia dự án khác
   NGUON_KHAC_TAB: '',        // chỉ đọc các tab này (cách nhau dấu phẩy); để trống = mọi tab dự án
   TOI_DA_CHUA_BAO_CAO_KHAC: 3, // data telesale: mỗi sale giữ tối đa ngần này khách chưa báo cáo, xong mới giao tiếp
+  DU_AN_CHIA: 'saphia,shaphia', // khách cũ (đã có trong CRM) gửi lại từ web mà "Dự án quan tâm" có chữ này cũng được chia
   NHOM_RIENG: 'fours,saphia' // khách có chữ này (trang / nhu cầu / nguồn) tính lượt FourS–Saphia; còn lại là dự án khác
 };
 
@@ -298,22 +299,29 @@ function layKhachCRM_() {
   var id = cfg('CRM_SHEET_ID'); if (!id) return [];
   var sh = SpreadsheetApp.openById(id).getSheetByName(cfg('CRM_TAB')); if (!sh) return [];
   var n = sh.getLastRow(); if (n < 2) return [];
-  var w = Math.min(46, sh.getLastColumn()), loc = String(cfg('LOC_TRANG') || '').toLowerCase().split(',').map(function (x) { return x.trim(); }).filter(String);
+  var w = Math.min(47, sh.getLastColumn()), loc = dsCfg_('LOC_TRANG'), da = dsCfg_('DU_AN_CHIA');
   return sh.getRange(2, 1, n - 1, w).getValues().map(function (r) {
+    var gc = String(r[21] || ''), j = gc.lastIndexOf('| Gửi lại');   // khách gửi lại: lấy nội dung lần gửi mới nhất
     return {sdt: normPhone(r[3]), ten: String(r[2] || ''), luc: r[1], web: String(r[5] || ''), utm: [r[6], r[7]].filter(String).join(' / '),
-      ghi_chu: String(r[21] || '').slice(-300), loai: String(r[39] || ''), trang: String(r[40] || ''), du_an: String(r[41] || ''), so_lan: Number(r[9]) || 1};
+      ghi_chu: (j > -1 ? gc.slice(j + 2) : gc).slice(0, 300), loai: String(r[39] || ''), trang: String(r[40] || ''), du_an: String(r[41] || ''),
+      so_lan: Number(r[9]) || 1, gui_lai: String(r[46] || '')};
   }).filter(function (k) {
-    var chu = (k.trang + ' ' + k.web).toLowerCase();
     if (k.sdt.length !== 10) return false;
+    var chu = (k.trang + ' ' + k.web).toLowerCase(), duAn = k.du_an.toLowerCase();
+    /* 1. khách để số trên web, trang thuộc LOC_TRANG */
     if (k.loai === 'Website' && (!loc.length || loc.some(function (x) { return chu.indexOf(x) > -1; }))) return true;
-    /* Số đã có sẵn trong CRM (data nhập / dự án khác) vừa gửi lại form trên trang Saphia: CRM chỉ cập nhật dòng cũ
-       (cột Dự án = Saphia, ghi chú "Gửi lại … Dự án Saphia"), nên vẫn tính là khách cần chia. */
-    return k.so_lan > 1 && /saphia/i.test(k.du_an + ' ' + k.ghi_chu.split('|').pop());
+    /* 2. khách cũ (dự án khác / data nhập) vừa gửi lại từ web, CRM đổi "Dự án quan tâm" sang dự án được chia */
+    return !!k.gui_lai && da.some(function (x) { return duAn.indexOf(x) > -1; });
   });
 }
 function nhanKhachMoi_() {
-  var seen = JSON.parse(P().getProperty('DA_XEM') || '{}'), moi = [], lai = [], doi = false;
-  layKhachCRM_().forEach(function (k) {
+  var seen = JSON.parse(P().getProperty('DA_XEM') || '{}'), moi = [], lai = [], doi = false, ds = layKhachCRM_();
+  /* Lần đầu chạy luật mới (thêm khách cũ gửi lại): ghi nhận các dòng đang có, không chia */
+  if (P().getProperty('CRM_LUAT') !== '2') {
+    ds.forEach(function (k) { seen[k.sdt] = Math.max(Number(seen[k.sdt] || 0), k.so_lan); });
+    P().setProperty('DA_XEM', JSON.stringify(seen)); P().setProperty('CRM_LUAT', '2'); ds = [];
+  }
+  ds.forEach(function (k) {
     var cu = Number(seen[k.sdt] || 0);
     if (!cu) { seen[k.sdt] = k.so_lan; moi.push(k); doi = true; }
     else if (k.so_lan > cu) { seen[k.sdt] = k.so_lan; lai.push(k); doi = true; }
