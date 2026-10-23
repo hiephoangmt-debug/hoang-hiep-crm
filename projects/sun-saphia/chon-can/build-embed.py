@@ -22,11 +22,11 @@ js = r'''/* Sun Saphia – Chọn căn theo view (mặt bằng tầng theo tỷ 
     var wrap = document.createElement('div'); wrap.id = 'sscc';
     wrap.style.cssText = 'position:relative;width:100%;background:#f7f4ee;padding:26px 0 20px;clear:both';
     wrap.innerHTML = '<div style="max-width:1180px;margin:0 auto;padding:0 12px;font-family:inherit">'
-      + '<div style="color:#E8460F;font-size:12px;letter-spacing:.14em;font-weight:800;text-transform:uppercase">Layout tầng 3A – 28</div>'
-      + '<h2 style="color:#0A2540;font-size:26px;line-height:1.25;margin:6px 0 6px;font-weight:700">Chọn căn trên mặt bằng tầng 3A–28</h2>'
+      + '<div style="color:#E96118;font-size:12px;letter-spacing:.14em;font-weight:800;text-transform:uppercase">Layout tầng 3A – 28</div>'
+      + '<h2 style="color:#275286;font-family:Fahkwang,inherit;font-size:30px;line-height:1.25;margin:6px 0 6px;font-weight:300">Chọn căn trên mặt bằng tầng 3A–28</h2>'
       + '<p style="color:#41505f;font-size:14px;line-height:1.5;margin:0 0 12px">Mặt bằng tầng điển hình 3A–28 vẽ theo tỷ lệ, có hệ cửa kính và ban công. Bấm vào căn để xem mặt bằng căn, phối cảnh 3D, nắng theo giờ và view; đăng ký ưu tiên căn ngay trong khung.</p>'
       + '<div id="sscc-box" style="position:relative;width:100%;height:1080px;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 8px 24px rgba(10,37,64,.10)">'
-      + '<button type="button" id="sscc-go" style="position:absolute;inset:0;margin:auto;width:230px;height:52px;border:0;border-radius:26px;background:#FF6A2B;color:#fff;font-weight:800;font-size:16px;cursor:pointer">▶ Mở công cụ chọn căn</button>'
+      + '<button type="button" id="sscc-go" style="position:absolute;inset:0;margin:auto;width:230px;height:52px;border:0;border-radius:26px;background:#E96118;color:#fff;font-weight:800;font-size:16px;cursor:pointer">▶ Mở công cụ chọn căn</button>'
       + '</div></div>';
     a.parentNode.insertBefore(wrap, a.nextSibling);
     var box = document.getElementById('sscc-box'), done = false;
