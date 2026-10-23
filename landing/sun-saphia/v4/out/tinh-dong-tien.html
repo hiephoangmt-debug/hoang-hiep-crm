@@ -737,6 +737,12 @@ pick('segU','data-u',function(v){u=v;st.d.p=null;st.m.p=null;$('iB').value={stud
     + '.hhc-q .z{background:#0068FF}.hhc-q .g{background:#0B2545}'
     + '.hhc-i{display:flex;gap:8px;padding:10px;background:#fff;border-top:1px solid #D7DFEC}.hhc-i input{flex:1;min-width:0;border:1px solid #D7DFEC;border-radius:999px;padding:11px 14px;font-size:16px;font-family:inherit;background:#F6F8FC;color:#0A1F38;-webkit-user-select:text;user-select:text}'
     + '.hhc-i button{background:#F26B1D;color:#fff;border:0;border-radius:999px;padding:0 16px;font-weight:700;cursor:pointer;font-family:inherit;font-size:15px}'
+    + '.hhc-n2{position:fixed;right:84px;bottom:30px;z-index:9001;width:290px;max-width:calc(100vw - 24px);background:#fff;color:#0A1F38;border-radius:14px 14px 4px 14px;padding:12px 30px 12px 14px;font-size:14px;line-height:1.45;box-shadow:0 12px 30px rgba(4,24,42,.28);display:none;font-family:inherit;animation:hhcUp .35s ease}'
+    + '.hhc-n2.on{display:block}.hhc-n2 p{margin:0 0 8px}.hhc-n2 .hhc-c button{font-size:13px;padding:6px 11px;text-align:left}'
+    + '.hhc-n2>.hhc-nx{position:absolute;top:4px;right:6px;border:0;background:none;font-size:20px;line-height:1;color:#6b7a90;cursor:pointer;padding:2px 4px}'
+    + '@keyframes hhcUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}'
+    + '@media (prefers-reduced-motion:reduce){.hhc-n2{animation:none}}'
+    + '@media (max-width:600px){.hhc-n2{left:10px;right:66px;width:auto;bottom:84px;border-radius:14px}}'
     + '@media (max-width:600px){.hhc-b{right:0;left:0;bottom:0;width:100%;max-width:100%;height:82vh;max-height:82vh;border-radius:18px 18px 0 0}.hhc-n{right:80px;bottom:96px}}'
     + '.hhc-ok{margin:10px 0 0;font-weight:600;color:#0B7A43;text-align:left}';
 
@@ -756,7 +762,7 @@ pick('segU','data-u',function(v){u=v;st.d.p=null;st.m.p=null;$('iB').value={stud
   function next() {
     var it = outq.shift(); if (!it) { talking = false; return; } talking = true;
     var t = el('div', 'hhc-t'); t.textContent = 'Đang trả lời…'; log.appendChild(t); scrollEnd();
-    setTimeout(function () { t.remove(); bubble(it[0], 'bot'); chips(it[1]); setTimeout(next, 120); }, Math.min(1100, 450 + it[0].length * 3));
+    setTimeout(function () { t.remove(); bubble(it[0], 'bot'); chips(it[1]); armIdle(); setTimeout(next, 120); }, Math.min(1100, 450 + it[0].length * 3));
   }
 
   function build() {
@@ -781,6 +787,7 @@ pick('segU','data-u',function(v){u=v;st.d.p=null;st.m.p=null;$('iB').value={stud
     if (own.length) nudge.style.bottom = '150px';
     document.body.appendChild(nudge);
     nudge.onclick = function (e) { if (e.target.tagName === 'BUTTON') { nudge.classList.remove('on'); return; } nudge.classList.remove('on'); open(); };
+    watchDwell();
     if (!sget('hhc_nudged')) setTimeout(function () { if (!box.classList.contains('on') && !sget('hhc_nudged')) { sset('hhc_nudged', '1'); nudge.classList.add('on'); setTimeout(function () { nudge.classList.remove('on'); }, 15000); } }, 25000);
   }
   function toggle() { if (box.classList.contains('on')) box.classList.remove('on'); else open(); }
@@ -793,6 +800,90 @@ pick('segU','data-u',function(v){u=v;st.d.p=null;st.m.p=null;$('iB').value={stud
     setTimeout(function () { try { inp.focus({preventScroll: true}); } catch (e) {} }, 250);
   }
   window.hhcOpen = open;
+
+  /* ---------- Khách dừng lâu ở một phần trang: hỏi khéo, gợi 2 câu hỏi đúng phần đó ---------- */
+  var DWELL = 7000, NUDGE_MAX = 3, NUDGE_GAP = 35000;
+  var SECT = [
+    {k: ['vi tri', 'toa do', 'trung diem'], t: 'Anh/Chị đang xem vị trí ạ? Nhiều khách hỏi em mấy câu này:', q: ['Từ sân bay tới dự án bao xa?', 'Dự án cách biển bao xa?']},
+    {k: ['tam nhin', 'huong view', 'khung tranh'], t: 'Mỗi hướng một khung cảnh đó ạ. Anh/Chị muốn biết thêm:', q: ['Mỗi hướng nhìn ra gì?', 'Tầng cao có thấy sông Hàn không?']},
+    {k: ['co cau', 'layout', 'mat bang', '782 can'], t: 'Anh/Chị đang chọn loại căn ạ? Em gợi ý nhanh:', q: ['Có những loại căn nào?', 'Studio rộng bao nhiêu m2?']},
+    {k: ['phap ly', '50 nam', 'giay to'], t: 'Phần pháp lý nhiều khách hỏi kỹ lắm ạ:', q: ['Sở hữu 50 năm hay lâu dài?', 'Hết 50 năm thì sao?']},
+    {k: ['tien ich'], t: 'Anh/Chị đang xem tiện ích ạ? Khách hay hỏi:', q: ['Trong toà có hồ bơi, gym không?', 'Gần trường học, bệnh viện không?']},
+    {k: ['cho thue', 'dong tien', 'khai thac', 'gia thue', 'khach thue', 'nguon cau', 'chon loai can'], t: 'Phần cho thuê này em tính giúp được ạ:', q: ['Cho thuê được bao nhiêu một tháng?', 'Dùng vốn vay có ổn không?']},
+    {k: ['vay ngan hang'], t: 'Anh/Chị định dùng vốn vay ạ? Em giải thích nhanh:', q: ['Vay ngân hàng được bao nhiêu?', 'Tiến độ thanh toán thế nào?']},
+    {k: ['tinh trang gia', 'so sanh', 'gia tung can', 'gia can ho'], t: 'Giá chưa công bố, nhưng em trả lời được mấy câu này ạ:', q: ['Khi nào có giá chính thức?', 'Booking bao nhiêu, có hoàn không?']},
+    {k: ['tien do', 'moc thoi gian'], t: 'Anh/Chị đang xem các mốc thời gian ạ:', q: ['Khi nào mở bán?', 'Tiến độ thanh toán thế nào?']},
+    {k: ['thoi diem', 'mua som', 'dang ky som', 'khan hiem', 'gia tri'], t: 'Nhiều khách đang giữ chỗ sớm ạ. Anh/Chị muốn biết:', q: ['Booking bao nhiêu, có hoàn không?', 'Đầu tư có lời không?']},
+    {k: ['dai ly', 'mua o dau'], t: 'Anh/Chị muốn mua đúng kênh chính thức ạ? Em giải thích:', q: ['Mua qua đại lý nào chính thức?', 'Booking bao nhiêu, có hoàn không?']},
+    {k: ['chan dung', 'chu nhan', 'ho la ai'], t: 'Anh/Chị thuộc nhóm nào ạ? Em gợi ý đúng căn:', q: ['Mua để ở nghỉ dưỡng có hợp không?', 'Cho thuê được bao nhiêu một tháng?']},
+    {k: ['thong tin tong quan', 'tong quan'], t: 'Anh/Chị cần em tóm tắt nhanh gì không ạ?', q: ['Giá dự kiến bao nhiêu?', 'Khi nào mở bán?']}
+  ];
+  var asked = {}, idleT = null, idleN = 0, nudge2, dwellT = null, nudgeN = 0, lastNudge = 0, loadAt = Date.now();
+  function openWith(q) {
+    nudge2 && nudge2.classList.remove('on'); nudge && nudge.classList.remove('on'); box.classList.add('on');
+    if (!started) { started = true; say('Dạ em chào Anh/Chị, em là trợ lý trả lời nhanh của anh Hoàng Hiệp về Sun Saphia Residence ạ.'); }
+    ask(q);
+  }
+  function busy() {
+    var a = document.activeElement;
+    return box.classList.contains('on') || (a && /INPUT|TEXTAREA|SELECT/.test(a.tagName)) || Date.now() - loadAt < 8000;
+  }
+  function showNudge(rule) {
+    var qs = rule.q.filter(function (q) { return !asked[norm(q)]; }); if (!qs.length) return;
+    nudge2.innerHTML = '';
+    var x = el('button', 'hhc-nx', '×'); x.type = 'button'; x.setAttribute('aria-label', 'Ẩn'); x.onclick = function () { nudge2.classList.remove('on'); };
+    var p = el('p'); p.textContent = rule.t; var w = el('div', 'hhc-c');
+    qs.slice(0, 2).forEach(function (q) { var b = el('button'); b.type = 'button'; b.textContent = q; b.onclick = function () { openWith(q); }; w.appendChild(b); });
+    nudge2.appendChild(x); nudge2.appendChild(p); nudge2.appendChild(w);
+    nudge && nudge.classList.remove('on'); nudge2.classList.add('on');
+    nudgeN++; lastNudge = Date.now(); sset('hhc_nudged', '1'); sset('hhc_nn', String(nudgeN));
+    clearTimeout(nudge2.hideT); nudge2.hideT = setTimeout(function () { nudge2.classList.remove('on'); }, 14000);
+  }
+  function ruleFor(sec) {
+    if (sec.__hhcRule !== undefined) return sec.__hhcRule;
+    var ey = sec.querySelector('.ey'), h = sec.querySelector('h2'), r = null;
+    var full = norm((ey ? ey.textContent : '') + ' ' + (h ? h.textContent : ''));
+    function find(n) { for (var i = 0; i < SECT.length; i++) for (var j = 0; j < SECT[i].k.length; j++) if (n.indexOf(' ' + SECT[i].k[j] + ' ') > -1) return SECT[i]; return null; }
+    if (!/^ (dang ky nhan|tom tat|hoi dap|nhan bang gia|tim hieu them)/.test(norm(ey && ey.textContent.trim() ? ey.textContent : (h ? h.textContent : '')))) r = (ey && find(norm(ey.textContent))) || find(full);
+    return (sec.__hhcRule = r);
+  }
+  function watchDwell() {
+    if (!('IntersectionObserver' in window)) return;
+    nudge2 = el('div', 'hhc-n2'); nudge2.setAttribute('role', 'status'); document.body.appendChild(nudge2);
+    nudgeN = +(sget('hhc_nn') || 0);
+    var seen = {}; try { seen = JSON.parse(sget('hhc_secs') || '{}'); } catch (e) {}
+    var cur = null, inView = [];
+    function track(sec) {
+      if (cur === sec) return; cur = sec; clearTimeout(dwellT);
+      if (sec) dwellT = setTimeout(function () { fire(sec, ruleFor(sec)); }, DWELL);
+    }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        var i = inView.indexOf(e.target);
+        if (e.isIntersecting) { if (i < 0) inView.push(e.target); } else if (i > -1) inView.splice(i, 1);
+      });
+      track(inView.length ? inView[inView.length - 1] : null);
+    }, {rootMargin: '-45% 0px -45% 0px'});
+    function fire(sec, r) {
+      var key = r.t; if (seen[key] || nudgeN >= NUDGE_MAX || Date.now() - lastNudge < NUDGE_GAP) return;
+      if (busy()) { dwellT = setTimeout(function () { if (cur === sec) fire(sec, r); }, 4000); return; }
+      seen[key] = 1; sset('hhc_secs', JSON.stringify(seen)); showNudge(r);
+    }
+    document.querySelectorAll('section').forEach(function (sc) { if (ruleFor(sc)) io.observe(sc); });
+  }
+
+  /* ---------- Đang chat mà khách im lâu: nhắc nhẹ, gợi thêm câu hỏi (tối đa 2 lần) ---------- */
+  var IDLE_Q = ['Booking bao nhiêu, có hoàn không?', 'Khi nào mở bán?', 'Sở hữu 50 năm hay lâu dài?', 'Cho thuê được bao nhiêu một tháng?', 'Từ sân bay tới dự án bao xa?', 'Vay ngân hàng được bao nhiêu?', 'Có những loại căn nào?'];
+  function armIdle() {
+    clearTimeout(idleT);
+    if (idleN >= 2 || outq.length) return;
+    idleT = setTimeout(function () {
+      if (!box.classList.contains('on') || inp.value.trim() || talking) return;
+      var qs = IDLE_Q.filter(function (q) { return !asked[norm(q)]; }); if (qs.length < 2) return;
+      idleN++;
+      say(pick(['Dạ Anh/Chị cứ thong thả xem ạ. Nhiều khách cũng hay hỏi thêm mấy câu này, Anh/Chị bấm là em trả lời liền:', 'Dạ em vẫn ở đây ạ. Anh/Chị còn băn khoăn gì cứ hỏi em, ví dụ:']), qs.slice(0, 2));
+    }, 45000);
+  }
 
   /* ---------- Hội thoại ---------- */
   var lastHook = null, convo = [], turn = 0, lastAsk = -9, refused = false, phone = '', name = '', topics = [], miss = 0, told = {}, used = {}, lastQ = '';
@@ -826,7 +917,7 @@ pick('segU','data-u',function(v){u=v;st.d.p=null;st.m.p=null;$('iB').value={stud
 
   function ask(q) {
     var raw = String(q).slice(0, 500);
-    bubble(raw, 'me'); convo.push('Khách: ' + raw); turn++;
+    bubble(raw, 'me'); convo.push('Khách: ' + raw); turn++; clearTimeout(idleT); asked[norm(raw)] = 1;
     var n = norm(ALIAS[raw] || raw);
     var nm = findName(raw); if (nm) name = nm;
 
