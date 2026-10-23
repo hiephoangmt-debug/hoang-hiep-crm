@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.21** + plugin Hoàng Hiệp CRM **2.20.68**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.21** + plugin Hoàng Hiệp CRM **2.20.69**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.69: Sun Saphia Residence theo tài liệu chủ đầu tư 23/10
+- Trang Sun Saphia: pháp lý thời hạn 50 năm kể từ 17/09/2026, công trình cấp I niên hạn 100 năm (chuyển loại dự án sang "Căn hộ dịch vụ (50 năm)"); 2PN 133 căn; mặt bằng tầng 3A – 28 (28 căn/sàn); vị trí giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa; ga LRT 09 cách 500 m; ngân hàng VietinBank, BIDV, NCB; bài toán cho thuê tham khảo; bảng so sánh giá mới. Thêm 6 ảnh: phối cảnh đêm, mặt bằng tổng thể, mặt bằng tầng, 3 layout căn.
+- Các bài Sun Saphia đã đăng (giá, mặt bằng, dự án Sun Group) tự cập nhật số liệu mới; bài chưa đăng (vị trí, pháp lý, đầu tư, có nên mua, tiến độ) đã sửa sẵn.
+- Tự đăng bài: cập nhật được cả ảnh đại diện khi bài có ảnh cũ sai số liệu.
 
 ## Có gì mới – plugin 2.20.68: form liên hệ chạy được khi bật bộ nhớ đệm LiteSpeed
 - Trang lưu đệm giữ mã bảo vệ (nonce) cũ quá 12 – 24 giờ làm form báo lỗi. Nay khách vãng lai gửi được dù mã đã cũ; chống spam bằng ô bẫy, kiểm tra số điện thoại thật và giới hạn 6 lần gửi/giờ mỗi địa chỉ IP. Người đăng nhập vẫn kiểm tra mã như cũ.

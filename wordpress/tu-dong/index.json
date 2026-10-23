@@ -1,5 +1,5 @@
 {
-    "updated": "2026-10-22T07:58:58+00:00",
+    "updated": "2026-10-23T14:35:21+00:00",
     "posts": [
         {
             "slug": "cao-toc-noi-thi-da-nang-chu-lai-huong-tuyen-tien-do",
@@ -42,7 +42,8 @@
             "slug": "gia-sun-saphia-residence-bao-nhieu",
             "title": "Giá Sun Saphia Residence bao nhiêu? Ước tính tổng tiền studio, 1PN+1, 2PN (cập nhật 10/2026)",
             "publish": "2026-10-22 15:00",
-            "file": "bai/gia-sun-saphia-residence-bao-nhieu.txt"
+            "file": "bai/gia-sun-saphia-residence-bao-nhieu.txt",
+            "rev": 2
         },
         {
             "slug": "truong-tieu-hoc-cong-lap-khu-do-thi-sinh-thai-hoa-xuan",
@@ -54,13 +55,15 @@
             "slug": "du-an-can-ho-sun-group-da-nang-2026",
             "title": "Các dự án căn hộ Sun Group ở Đà Nẵng 2026: từ Sun Symphony đến Sun Saphia Residence – vị trí, bàn giao, giá",
             "publish": "2026-10-23 08:00",
-            "file": "bai/du-an-can-ho-sun-group-da-nang-2026.txt"
+            "file": "bai/du-an-can-ho-sun-group-da-nang-2026.txt",
+            "rev": 2
         },
         {
             "slug": "mat-bang-can-ho-sun-saphia-residence",
-            "title": "Mặt bằng Sun Saphia Residence: 782 căn, 513 studio, 108 căn 1PN+1, 149 căn 2PN – chọn căn nào?",
+            "title": "Mặt bằng Sun Saphia Residence: 782 căn, 513 studio, 108 căn 1PN+, 133 căn 2PN – chọn căn nào?",
             "publish": "2026-10-23 15:00",
-            "file": "bai/mat-bang-can-ho-sun-saphia-residence.txt"
+            "file": "bai/mat-bang-can-ho-sun-saphia-residence.txt",
+            "rev": 2
         },
         {
             "slug": "giu-cho-booking-can-ho-moi-da-nang-can-biet",
@@ -82,7 +85,7 @@
         },
         {
             "slug": "phap-ly-sun-saphia-residence-so-huu-bao-lau",
-            "title": "Pháp lý Sun Saphia Residence: sở hữu bao lâu, mua giai đoạn giữ chỗ cần kiểm tra gì?",
+            "title": "Pháp lý Sun Saphia Residence: thời hạn 50 năm từ 17/9/2026, công trình niên hạn 100 năm – người mua cần biết gì?",
             "publish": "2026-10-25 15:00",
             "file": "bai/phap-ly-sun-saphia-residence-so-huu-bao-lau.txt"
         },

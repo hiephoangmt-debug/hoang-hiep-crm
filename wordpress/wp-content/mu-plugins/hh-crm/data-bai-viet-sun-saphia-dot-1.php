@@ -188,6 +188,7 @@ HTML
 		'keywords_extra' => array( 'Sun Saphia Residence', 'căn hộ Sun Group Đà Nẵng', 'Sun Property Đà Nẵng' ),
 		'project'  => 'sun-saphia-residence',
 		'schedule' => '2026-10-23',
+		'rev'      => 2, // 23/10: số căn 2PN 133, thời hạn 50 năm theo tài liệu chủ đầu tư.
 		'category' => 'Dự án',
 		'tags'     => array( 'Sun Group', 'Căn hộ Đà Nẵng', 'Sun Saphia Residence' ),
 		'image'    => 'plugin:img/tin-tuc/du-an-can-ho-sun-group-da-nang-2026.jpg',
@@ -216,7 +217,7 @@ HTML
 <h2>Sắp mở bán: Sun Galaxy Complex và Sun Saphia Residence</h2>
 <ul>
 <li><a href="/du-an/sun-galaxy-complex/">Sun Galaxy Complex</a> (Chương Dương, ven sông Hàn): khởi công 25/7/2026, khán đài pháo hoa gần 20.000 chỗ, khoảng 1.400 phòng lưu trú; chưa có bảng giá chính thức.</li>
-<li>{$saphia} (Trường Sa, khu Sơn Thủy): tòa 30 tầng (114 m), 782 căn gồm 513 studio, 108 căn 1PN+1, 149 căn 2PN; bàn giao dự kiến 11/2028. Chủ đầu tư giới thiệu đây là dự án căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng; đang nhận giữ chỗ.</li>
+<li>{$saphia} (Trường Sa, khu Sơn Thủy): tòa 30 tầng (114 m), 782 căn gồm 513 studio, 108 căn 1PN+, 133 căn 2PN; thời hạn 50 năm kể từ 17/09/2026; bàn giao dự kiến 11/2028. Chủ đầu tư giới thiệu đây là dự án căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng; đang nhận giữ chỗ.</li>
 </ul>
 <p>Các con số trên lấy từ dữ liệu dự án trên web và tin rao; bàn giao theo hợp đồng từng dự án.</p>
 {$cta}

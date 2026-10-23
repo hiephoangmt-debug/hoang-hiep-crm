@@ -237,6 +237,9 @@ function hh_auto_post_update( $id, $n ) {
 	$n['content'] = wp_kses_post( (string) $n['content'] );
 	$keep         = array( 'post_status' => $post->post_status, 'post_date' => $post->post_date, 'post_date_gmt' => $post->post_date_gmt );
 	wp_update_post( array( 'ID' => $id, 'post_status' => 'draft' ) ); // Trình Nhập nhanh chỉ ghi vào bản nháp.
+	if ( ! empty( $n['image_replace'] ) && ! empty( $n['image'] ) ) {
+		delete_post_thumbnail( $id ); // Gói đánh dấu thay ảnh đại diện (ảnh cũ có số liệu sai).
+	}
 	$new = hh_quick_post_create( $n );
 	wp_update_post( array( 'ID' => $id ) + $keep + array( 'edit_date' => true ) );
 	if ( is_wp_error( $new ) ) {
