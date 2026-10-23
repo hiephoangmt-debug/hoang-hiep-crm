@@ -137,6 +137,12 @@ def anticopy():
     a = s.index('<style id="chong-copy">'); b = s.index('</script>', s.index('<script id="chong-copy-js">')) + 9
     return s[a:b]
 
+GADS = ('<!-- Google tag (gtag.js) – Google Ads AW-872503827 -->\n'
+        '<script async src="https://www.googletagmanager.com/gtag/js?id=AW-872503827"></script>\n'
+        '<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","AW-872503827");'
+        '/* Chuyển đổi "Sun Saphia – Gửi form": ghi khi khách gửi form hoặc để lại số trong khung chat (1 lần / số) */'
+        'window.HHC_ADS_SEND_TO="AW-872503827/BtrxCMasq6QdEJO0haAD";</script>\n')
+
 def head(title, desc, canon, og_img, kw, ld_graph, favicon, robots='index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1', extra=''):
     ld = json.dumps({'@context': 'https://schema.org', '@graph': ld_graph}, ensure_ascii=False)
     return ('<!DOCTYPE html>\n<html lang="vi">\n<head>\n<meta charset="utf-8">\n'
@@ -152,7 +158,7 @@ def head(title, desc, canon, og_img, kw, ld_graph, favicon, robots='index,follow
             '<link rel="icon" type="image/png" href="%s">\n<link rel="apple-touch-icon" href="%s">\n'
             '<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
             '<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Fahkwang:wght@300;400;500&display=swap" rel="stylesheet">\n'
-            '<script type="application/ld+json">%s</script>\n%s\n<style>%s</style>\n%s\n</head>\n') % (
+            '<script type="application/ld+json">%s</script>\n%s\n' + GADS + '<style>%s</style>\n%s\n</head>\n') % (
         esc(title), esc(desc), esc(kw), robots, canon, canon, esc(title), esc(desc), og_img, favicon, favicon, ld,
         extra, open(os.path.join(os.path.dirname(__file__), 'brand.css'), encoding='utf8').read(), anticopy())
 
