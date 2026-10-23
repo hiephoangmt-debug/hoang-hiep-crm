@@ -93,9 +93,15 @@ var MODEL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/82b3a622a
 var COL={'STU':'#E86A78','1PN+1':'#4FB3E0','2PN':'#F2C14E'};
 var NAME={'STU':'Studio','1PN+1':'1PN+1','2PN':'2PN'};
 var TINT={'STU':'#f7c1c6','1PN+1':'#b5def2','2PN':'#f9e19c'}, LIGHT={'STU':'#fdebed','1PN+1':'#e6f4fb','2PN':'#fdf3d4'};   // màu sàn theo loại căn (như chú thích CĐT)
+// diện tích từng căn theo mặt bằng tầng 3A–28 của CĐT: [thông thủy, tim tường] (m²)
+var AREA={'11':[70.21,77.35],'12':[31,34.58],'12A':[30,34.58],'12B':[51.11,56.42],'15':[30,34.58],'16':[30,34.58],'17':[50.18,56.38],'18':[67.68,75.5],'19':[67.69,76.36],
+ '10':[50.28,56.42],'09':[30,34.58],'08':[30,34.58],'07':[31,35.03],'06':[30,34.13],'05':[30,34.58],'03A':[61.14,68.67],'03':[60.30,68.32],'01':[30,33.88],'02':[30,33.88],
+ '28':[48.98,55.27],'27':[30,33.88],'26':[30,33.88],'25':[30,33.88],'24':[30,33.88],'23':[30,33.88],'22':[30,33.88],'21':[30,33.88],'20':[40.03,46.38]};
+function m2(x){ return String(x).replace('.',','); }
+function areaTxt(id){ var a=AREA[id]; return a?'Thông thủy '+m2(a[0])+' m² · tim tường '+m2(a[1])+' m²':''; }
 var INFO={'STU':['30–31 m²','3,8 × 9,0 m','giường đôi kê sát tường, sofa, bếp chạy dọc tường kèm tủ lạnh, WC có vách tắm kính và chỗ đặt máy giặt, ban công + lô gia đặt cục nóng điều hòa'],
-          'STUL':['~40 m² thông thủy (~46 m² tim tường)','4,0 × 9 m + sảnh vào 2,8 m','studio lớn ở đầu hồi, 2 mặt thoáng (Tây + Nam) với 2 góc bo, giường đôi, sofa, bàn ăn, bếp + tủ lạnh, WC vách kính, ban công'],
-          '1PN+1':['50–51 m²','6,2 × 9,0 m','phòng ngủ có cửa sổ, góc +1 (giường ban ngày, bàn làm việc), WC vách kính, bếp + bàn ăn 4 chỗ, phòng khách mở ra ban công'],
+          'STUL':['40,03 m² thông thủy (46,38 m² tim tường)','4,0 × 9 m + sảnh vào 2,8 m','studio lớn ở đầu hồi, 2 mặt thoáng (Tây + Nam) với 2 góc bo, giường đôi, sofa, bàn ăn, bếp + tủ lạnh, WC vách kính, ban công'],
+          '1PN+1':['49–51 m²','6,2 × 9,0 m','phòng ngủ có cửa sổ, góc +1 (giường ban ngày, bàn làm việc), WC vách kính, bếp + bàn ăn 4 chỗ, phòng khách mở ra ban công'],
           '2PN':['60–70 m²','7,25 × 9,9 m','căn góc mặt kính bo cong, 2 phòng ngủ, 2 WC, phòng giặt, bếp chữ L, bàn ăn 4 chỗ, phòng khách mở ra lô gia']};
 var VIEW={E:['Biển Đông trực diện','Bình minh trên biển, bán đảo Sơn Trà phía Bắc, Cù Lao Chàm phía Đông Nam.','Nắng sáng dịu, chiều mát'],
           W:['Sông Hàn · trung tâm TP','Hoàng hôn phía sông Hàn, thành phố lên đèn, xa xa núi Bà Nà.','Nắng chiều – nên có rèm'],
@@ -361,7 +367,7 @@ function select(i){
   var views=f.split('').map(function(c){return VIEW[c][0]}).join(' + ');
   var fl=state.floor, h=Math.round(elev(fl));
   var far=fl>=20?'Tầng cao: nhìn xa, thoáng tối đa.':fl>=10?'Tầng trung: vượt qua hàng cây ven biển, tầm nhìn rộng.':'Tầng thấp: gần mặt đất, cây xanh và phố biển.';
-  document.getElementById('info').innerHTML='<h3>Căn '+code(r[0])+' · '+NAME[t]+'</h3><div class="sub">'+inf[0]+' · layout '+inf[1]+' · tầng '+fname(fl)+' (~'+h+' m)</div>'
+  document.getElementById('info').innerHTML='<h3>Căn '+code(r[0])+' · '+NAME[t]+'</h3><div class="sub">'+areaTxt(r[0])+' · layout '+inf[1]+' · tầng '+fname(fl)+' (~'+h+' m)</div>'
     +f.split('').map(function(c,k){return '<span class="tag'+(k?'':' o')+'">'+VIEW[c][0]+'</span>'}).join('')
     +'<p><b>View:</b> '+f.split('').map(function(c){return VIEW[c][1]}).join(' ')+'</p>'
     +'<p><b>Nắng:</b> '+VIEW[m][2]+'. <b>Bố trí:</b> '+inf[2]+'.</p><p>'+far+'</p>';
@@ -396,7 +402,7 @@ function unitPlan(r,cd){
   txt(L+W*k/2,yy-9,String(W).replace('.',',')+' m',11,dc,800);
   txt(xx-11,T+D*k/2,String(D).replace('.',',')+' m',11,dc,800,'middle',-90);
   txt(L+W*k/2,T+D*k+20,'Hành lang · cửa vào',10.5,'#5d6b7a',700);
-  txt(L+W*k/2,T+D*k+37,'Vẽ lại theo layout CĐT · kích thước tim tường '+String(sp.W).replace('.',',')+' × '+String(sp.D).replace('.',',')+' m',9.5,'#8a96a3',400);
+  txt(L+W*k/2,T+D*k+37,areaTxt(r[0])+' · layout '+m2(sp.W)+' × '+m2(sp.D)+' m (theo CĐT)',9.5,'#8a96a3',600);
   o.push('</svg>');
   document.getElementById('unit').innerHTML='<div class="ut">Mặt bằng căn '+cd+'</div>'+o.join('');
 }
