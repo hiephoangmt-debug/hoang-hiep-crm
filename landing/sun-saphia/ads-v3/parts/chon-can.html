@@ -243,11 +243,16 @@
   function pick(g){if(cur)cur.classList.remove('sel');cur=g;g.classList.add('sel');var u=g._u,t=T[u[1]],c=code(g);
     document.getElementById('ccCode').textContent=c;document.getElementById('ccType').textContent=t.n;document.getElementById('ccArea').textContent=t.a+' (theo loại căn)';
     document.getElementById('ccDim').textContent=t.d;drawUnit(u[1]);var ut=document.getElementById('ccUT');if(ut)ut.textContent=ut.textContent.replace(/^Căn [^·]+/,'Căn '+c+' · '+t.n+' ');document.getElementById('ccView').textContent=u[6];
-    var b=document.getElementById('ccBtn');b.setAttribute('data-interest','ADS – chọn căn '+c+' ('+t.n+', tầng '+F.options[F.selectedIndex].text.replace('Tầng ','')+')');b.setAttribute('data-title','Đăng ký ưu tiên căn '+c);}
-  function flUp(){var n=F.options[F.selectedIndex].text.replace('Tầng ','');document.getElementById('ccFl').textContent=n;var fb=document.getElementById('ccFlBtn');fb.setAttribute('data-interest','ADS – bảng hàng tầng '+n);fb.setAttribute('data-title','Nhận bảng hàng tầng '+n);}
+    var b=document.getElementById('ccBtn');b.setAttribute('data-interest',(document.getElementById('leadPop')?'ADS':'Web')+' – chọn căn '+c+' ('+t.n+', tầng '+F.options[F.selectedIndex].text.replace('Tầng ','')+')');b.setAttribute('data-title','Đăng ký ưu tiên căn '+c);}
+  function flUp(){var n=F.options[F.selectedIndex].text.replace('Tầng ','');document.getElementById('ccFl').textContent=n;var fb=document.getElementById('ccFlBtn');fb.setAttribute('data-interest',(document.getElementById('leadPop')?'ADS':'Web')+' – bảng hàng tầng '+n);fb.setAttribute('data-title','Nhận bảng hàng tầng '+n);}
   F.addEventListener('change',function(){label();flUp();if(cur)pick(cur);});
   document.querySelectorAll('.cc .flt button').forEach(function(bt){bt.addEventListener('click',function(){document.querySelectorAll('.cc .flt button').forEach(function(x){x.classList.toggle('on',x===bt);});
     var t=bt.getAttribute('data-t');G.forEach(function(g){var ok=t=='ALL'||(t.indexOf('V:')==0?g._u[6].toLowerCase().indexOf(t.slice(2).toLowerCase())>-1:g._u[1]==t);g.classList.toggle('dim',!ok);});});});
+
+  if(!document.getElementById('leadPop'))document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.cc [data-pop]');if(!b)return;e.preventDefault();
+    var sec=document.getElementById('dang-ky'),fm=sec&&sec.querySelector('form[data-form]');if(!fm)return;fm.setAttribute('data-form',b.getAttribute('data-interest')||'chon-can');
+    var h=sec.querySelector('h2,h3');if(h&&b.getAttribute('data-title')){h._o=h._o||h.innerHTML;h.textContent=b.getAttribute('data-title');}
+    sec.scrollIntoView({behavior:'smooth'});var ph=fm.querySelector('input[type=tel]');if(ph)setTimeout(function(){ph.focus({preventScroll:true});},700);});
   label();flUp();pick(G[4]);var pl=document.getElementById('ccPlan');if(pl)pl.scrollLeft=0;
 })();
 </script>
