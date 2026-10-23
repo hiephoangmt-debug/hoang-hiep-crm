@@ -388,7 +388,7 @@ def ads(domain):
          '</div><div class="hr">%s</div></div></div></section>'
          '<section class="hstrip"><div class="wrap">%s'
          '<div class="qlinks"><a href="{M}/bang-gia">Bảng giá</a><a href="#mat-bang">Mặt bằng &amp; chọn căn</a><a href="{M}/tinh-dong-tien">Tính dòng tiền</a><a href="{M}/phap-ly">Pháp lý &amp; tiến độ</a></div></div></section>'
-         '<script>document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("[data-4d]");if(!a)return;var b=document.getElementById("ss4d-box");if(!b)return;e.preventDefault();'
+         '<script>document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("[data-4d]");if(!a)return;var b=document.getElementById("ss4d-box");if(!b)return;e.preventDefault();if(innerWidth<=760&&window.ss4dFull){ss4dFull();return}'
          'try{b.scrollIntoView({behavior:"smooth",block:"center"})}catch(x){b.scrollIntoView()}var g=document.getElementById("ss4d-go");if(g)g.click();'
          'try{if(window.gtag)gtag("event","xem_4d",{event_label:"hero"})}catch(x){}});</script>') % (
         img('thap-bien-hoang-hon', 'Phối cảnh Sun Saphia Residence bên bờ biển Đà Nẵng lúc hoàng hôn', eager=True, sizes='100vw'), SK,

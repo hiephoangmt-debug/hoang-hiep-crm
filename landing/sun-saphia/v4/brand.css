@@ -424,3 +424,10 @@ body{padding-bottom:84px}
  .play{width:100%;box-sizing:border-box}
 }
 @media(prefers-reduced-motion:reduce){.hero.cine .hbg img,.play i{animation:none}}
+.sbox{text-align:center}
+.sbox div{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 12px}
+.sbox div i{font-style:normal;color:var(--or)}
+@media(max-width:620px){.sbox{padding:18px 14px}.sbox div{flex-direction:column;gap:6px;font-size:21px}.sbox div i{display:none}.sbox .btn{width:100%}}
+.why .box{align-items:center;text-align:center;gap:6px}
+.why .box span{display:block}
+@media(max-width:620px){.why .box{padding:18px 14px;font-size:22px}}

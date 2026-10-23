@@ -173,7 +173,7 @@ def why_cards():
     return ''.join('<div class="card"><span class="n">%s</span><h3 class="oc">%s</h3><p>%s</p></div>' % x for x in it)
 
 def slogan_box(interest):
-    return ('<div class="sbox"><div>Chi phí <b>tốt nhất</b> · Lựa chọn <b>đẹp nhất</b> · Tăng giá <b>đầu tiên</b></div>'
+    return ('<div class="sbox"><div><span>Chi phí <b>tốt nhất</b></span><i>·</i><span>Lựa chọn <b>đẹp nhất</b></span><i>·</i><span>Tăng giá <b>đầu tiên</b></span></div>'
             '<button type="button" class="btn sm" data-pop data-interest="%s">Đăng ký sớm – ưu tiên chọn căn</button></div>') % esc(interest)
 
 def why_now():
@@ -182,7 +182,7 @@ def why_now():
           ('03', 'Chủ đầu tư hỗ trợ lãi suất', 'Mức hỗ trợ lãi suất cao nhất đang áp dụng. Cuối 2028 – đầu 2029 (bàn giao), lãi suất kỳ vọng đã hạ và thị trường đã khác.'),
           ('04', 'Dòng tiền tìm đến trước', 'Khi thị trường quay đầu, sản phẩm giá trị thực, dòng tiền tốt, trung tâm, khan hiếm được tìm đến và tăng giá trước tiên.')]
     return ('<div class="why">' + ''.join('<div class="card"><span class="n">%s</span><h3 class="oc">%s</h3><p>%s</p></div>' % x for x in it)
-            + '<div class="box">Chi phí <b>tốt nhất</b><br>Lựa chọn <b>đẹp nhất</b><br>Tăng giá <b>đầu tiên</b></div></div>'
+            + '<div class="box"><span>Chi phí <b>tốt nhất</b></span><span>Lựa chọn <b>đẹp nhất</b></span><span>Tăng giá <b>đầu tiên</b></span></div></div>'
             '<p class="note">Chính sách giá, hỗ trợ lãi suất cụ thể theo công bố chính thức của chủ đầu tư khi mở bán.</p>')
 
 def views():
