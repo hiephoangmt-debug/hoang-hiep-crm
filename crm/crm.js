@@ -1163,18 +1163,24 @@
     return "";
   }
   /** Thư mục tuần ("3/10-9/10") có giao với tuần báo cáo không; không có thư mục tuần = có. */
+  // thư mục tuần: "17/10-23/10", "Tuần 3 ( 17.10.2026 - 23.10.2026)"
+  const WEEK_DIR = /(\d{1,2})[\/.](\d{1,2})(?:[\/.]\d{4})?\s*[-–—]\s*(\d{1,2})[\/.](\d{1,2})(?:[\/.]\d{4})?/;
   function folderInWeek(path, iso) {
     const a = parseIso(iso), b = new Date(a);
     b.setDate(a.getDate() + 6);
     const dn = (d, m) => m * 31 + d;
     const A = dn(a.getDate(), a.getMonth() + 1), Z = dn(b.getDate(), b.getMonth() + 1);
-    return path.map((x) => /^\s*(\d{1,2})\/(\d{1,2})\s*-\s*(\d{1,2})\/(\d{1,2})\s*$/.exec(x)).filter(Boolean)
+    return path.map((x) => WEEK_DIR.exec(x)).filter(Boolean)
       .every((m) => dn(+m[1], +m[2]) <= Z && dn(+m[3], +m[4]) >= A);
   }
-  /** Ảnh thuộc tuần w: theo thư mục tuần nếu có, không thì theo ngày tải lên Drive (nhân viên thả ảnh thẳng vào Kênh › Dự án). */
+  /**
+   * Ảnh thuộc tuần w (chỉ lấy ảnh trong khoảng thời gian đang chọn): theo thư mục tuần nếu có,
+   * không thì theo ngày tải lên Drive (nhân viên thả ảnh thẳng vào thư mục).
+   */
   function fileInWeek(f, w) {
-    const hasWeekDir = f.path.some((x) => /^\s*\d{1,2}\/\d{1,2}\s*-\s*\d{1,2}\/\d{1,2}\s*$/.test(x));
-    if (hasWeekDir || !f.created) return folderInWeek(f.path, w);
+    // nằm trong thư mục tuần: theo tên thư mục (ảnh tuần trước tải bù vào sáng thứ 7 vẫn đúng tuần)
+    if (f.path.some((x) => WEEK_DIR.test(x))) return folderInWeek(f.path, w);
+    if (!f.created) return false;
     const end = parseIso(w); end.setDate(end.getDate() + 7);
     return f.created >= w && f.created < isoOf(end);
   }
@@ -1200,8 +1206,10 @@
     if (!root) return [];
     const key = B.norm(pj.khoa || pj.ten).replace(/[^a-z0-9]/g, "");
     toast(`${pjName}: đang quét thư mục chứng từ trên Drive…`, "busy");
+    // thư mục chứng từ riêng của dự án (vd "Sun FourS Tower ( F2)"): không cần thư mục con mang tên dự án
+    const shared = S.DuAn.filter((p) => B.parseDriveId(p.thuMucChungTu) === root).length > 1;
     const files = (await gas("listTree", root, TOKEN)).filter((f) => (/^image\//.test(f.mimeType) || f.mimeType === "application/pdf") &&
-      f.path.slice(1).some((seg) => B.norm(seg).replace(/[^a-z0-9]/g, "") === key) &&
+      (!shared || f.path.slice(1).some((seg) => B.norm(seg).replace(/[^a-z0-9]/g, "") === key)) &&
       fileInWeek(f, w) && !S.ChungTu.some((c) => c.fileId === f.id));
     if (!files.length) return [];
     const ctx = { staffList: staffNames(), accounts: S.TaiKhoan.map((t) => ({ account: t.maTaiKhoan, staff: t.nhanSu })) };
