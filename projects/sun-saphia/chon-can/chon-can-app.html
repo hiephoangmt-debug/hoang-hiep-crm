@@ -90,6 +90,7 @@ body{margin:0;background:var(--bg);font-family:var(--font);color:var(--navy);-we
 <script>
 (function(){
 var MODEL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/79c49f65e1f94d6b3777d37dd04fa9f8687dec6f/projects/sun-saphia/4d/sun-saphia-4d.html';
+var FLOOR_TEX='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d2c068bdf94af0038c110135328a496209367d34/projects/sun-saphia/images/mat-bang-tang-4d.webp';
 var COL={'STU':'#E86A78','1PN+1':'#4FB3E0','2PN':'#F2C14E'};
 var NAME={'STU':'Studio','1PN+1':'1PN+1','2PN':'2PN'};
 var TINT={'STU':'#f7c1c6','1PN+1':'#b5def2','2PN':'#f9e19c'}, LIGHT={'STU':'#fdebed','1PN+1':'#e6f4fb','2PN':'#fdf3d4'};   // màu sàn theo loại căn (như chú thích CĐT)
@@ -445,7 +446,7 @@ function init3(){
   el.appendChild(r.domElement);
   var sc=new THREE.Scene(); sc.background=new THREE.Color(0xcfe3f2); sc.fog=new THREE.Fog(0xcfe3f2,180,700);
   var cam=new THREE.PerspectiveCamera(45,1,.1,900), ctl=new THREE.OrbitControls(cam,r.domElement);
-  ctl.enableDamping=true; ctl.maxPolarAngle=Math.PI*.47; ctl.minDistance=4; ctl.maxDistance=40;
+  ctl.enableDamping=true; ctl.maxPolarAngle=Math.PI*.47; ctl.minDistance=4; ctl.maxDistance=95;
   // môi trường phản chiếu (trời + đất) cho kính, đá, gỗ bóng
   var es=new THREE.Scene(), eg=new THREE.SphereGeometry(50,32,16), ec=[], ep=eg.attributes.position;
   for(var i=0;i<ep.count;i++){ var yy=ep.getY(i)/50, c1=new THREE.Color(yy>0?0xbcd9f0:0xb8ab98).lerp(new THREE.Color(yy>0?0xffffff:0x8f8676),yy>0?Math.max(0,1-yy*1.6):Math.min(1,-yy*2)); ec.push(c1.r,c1.g,c1.b); }
@@ -557,6 +558,20 @@ function buildRoom(r){
   }
   function plantAt(q,x,z,sz){ var s2=sz/.5; cyl(.15*s2,.11*s2,.36*s2,x,0,z,pot,q); for(var k2=0;k2<7;k2++){ var a=k2*.9, m=new THREE.Mesh(new THREE.SphereGeometry(.15*s2,10,8),k2%2?leaf:leaf2); m.scale.set(1,1.5,1); m.position.set(x+Math.cos(a)*.1*s2,(.52+rnd(k2)*.33)*s2,z+Math.sin(a)*.1*s2); m.castShadow=true; q.add(m); } }
   sp.items.forEach(F);
+  // đặt căn vào mặt bằng tầng: các căn xung quanh, hành lang, lõi thang nằm đúng vị trí dưới chân căn đang xem
+  (function(){
+    var P=unitM(r), det=P[0]*P[3]-P[1]*P[2]; if(!det) return;
+    var pg=new THREE.Group(); pg.matrixAutoUpdate=false;
+    pg.matrix.set(P[3]/det,0,-P[2]/det,(-P[3]*P[4]+P[2]*P[5])/det, 0,1,0,0, -P[1]/det,0,P[0]/det,(P[1]*P[4]-P[0]*P[5])/det, 0,0,0,1);
+    g.add(pg);
+    if(!TX.floorPlan){ var ld=new THREE.TextureLoader(); ld.setCrossOrigin('anonymous'); TX.floorPlan=ld.load(FLOOR_TEX); TX.floorPlan.encoding=THREE.sRGBEncoding; TX.floorPlan.anisotropy=8; }
+    var geo=new THREE.PlaneGeometry(54.4,49.6); geo.rotateX(-Math.PI/2);
+    var pm=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({map:TX.floorPlan,transparent:true,alphaTest:.05,roughness:1,envMapIntensity:.3}));
+    pm.position.set(27.2,-.035,14.9); pm.receiveShadow=true; pg.add(pm);
+    var osh=new THREE.Shape(); OUT.forEach(function(q,i){ if(i) osh.lineTo(q[0],-q[1]); else osh.moveTo(q[0],-q[1]); });
+    var sg=new THREE.ExtrudeGeometry(osh,{depth:.3,bevelEnabled:false}); sg.rotateX(-Math.PI/2);
+    var slab=new THREE.Mesh(sg,M(0xe9e6df,{roughness:.9})); slab.position.y=-.36; slab.receiveShadow=true; pg.add(slab);
+  })();
   // tầm mắt "đứng trong căn" (toạ độ đã xoay)
   function toL(p){ var q2=mapP(VM,p); return [q2[0]-W2/2,q2[1]-D2/2]; }
   R3.eye=toL(sp.eye); R3.look=toL(sp.look);
