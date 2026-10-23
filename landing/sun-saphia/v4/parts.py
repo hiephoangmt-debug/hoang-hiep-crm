@@ -94,6 +94,7 @@ def author():
 
 def footer(base):
     links = ' · '.join('<a href="%s%s">%s</a>' % (base, p, t) for p, t in PAGES)
+    links += ' · <a href="%s/chinh-sach-bao-mat">Chính sách bảo mật</a>' % base
     return ('<footer class="ft"><div class="wrap">'
             '<div class="fbr"><img src="' + RAW + '093918cb38d81f5e24fbe4d8477cea21e3de6ca8/landing/sun-saphia/v4/img/logo-mark.webp" alt="" width="34" height="48" loading="lazy">'
             '<div><b>SUN SAPHIA RESIDENCE</b><span>Trước mặt là Biển · Sau lưng là Sông · Bên cạnh là Núi</span></div>'
@@ -105,7 +106,7 @@ def footer(base):
             'theo công bố của Chủ đầu tư và Hợp đồng mua bán. Hình ảnh phối cảnh, tiện ích là minh họa.</p>'
             '<p>Liên hệ tư vấn: Hoàng Hiệp · Hotline/Zalo <a href="tel:%s">%s</a> · Email <a href="mailto:hiephoangmt@gmail.com">hiephoangmt@gmail.com</a></p>'
             '<p>Chính sách bảo mật: thông tin anh/chị gửi chỉ dùng để chuyên viên liên hệ tư vấn; không bán hay chia sẻ cho bên thứ ba; '
-            'yêu cầu xóa dữ liệu qua Hotline/Zalo hoặc email trên (Nghị định 13/2023/NĐ-CP).</p></div></footer>'
+            'yêu cầu xóa dữ liệu qua Hotline/Zalo hoặc email trên (Nghị định 13/2023/NĐ-CP). <a href="' + MAIN + '/chinh-sach-bao-mat">Xem chính sách bảo mật</a>.</p></div></footer>'
             '<a class="pill" href="#dang-ky">📩 Nhận bảng giá ngay khi công bố</a>') % (links, TEL, TEL_S)
 
 def daily():
