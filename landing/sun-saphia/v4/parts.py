@@ -108,11 +108,7 @@ def footer(base):
             '<p>Chính sách bảo mật: thông tin anh/chị gửi chỉ dùng để chuyên viên liên hệ tư vấn; không bán hay chia sẻ cho bên thứ ba; '
             'yêu cầu xóa dữ liệu qua Hotline/Zalo hoặc email trên (Nghị định 13/2023/NĐ-CP). <a href="' + MAIN + '/chinh-sach-bao-mat">Xem chính sách bảo mật</a>.</p></div></footer>'
             '<a class="pill" href="#dang-ky">📩 Nhận bảng giá ngay khi công bố</a>'
-            '<nav class="mbar" aria-label="Liên hệ nhanh">'
-            '<a href="#" data-hhc-open><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg><span>Chat</span></a>'
-            '<a href="%s" target="_blank" rel="noopener" class="mz"><b>Zalo</b><span>Nhắn tin</span></a>'
-            '<a href="tel:%s"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg><span>Gọi</span></a>'
-            '<a href="#" class="mc" data-pop data-interest="Thanh liên hệ dưới đáy (điện thoại)">Nhận bảng giá</a></nav>') % (links, TEL, TEL_S, ZALO, TEL)
+) % (links, TEL, TEL_S)
 
 def daily():
     return ('<div class="daily" id="dai-ly"><img src="%s" width="900" height="1126" loading="lazy" decoding="async" '
