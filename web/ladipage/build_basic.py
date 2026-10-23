@@ -57,6 +57,30 @@ def build():
                 raise SystemExit(f'{dest}: còn sót {bad}')
         (OUT / dest).write_text(html, encoding='utf-8')
         print(OUT / dest, len(html), 'bytes')
+        if src == 'sun-galaxy-complex/index.html':
+            build_galaxy_domain(html)
+
+
+
+GALAXY_SITE = 'https://www.sun-galaxy-complex.com.vn'
+
+
+def build_galaxy_domain(html):
+    """Bản trang Sun Galaxy Complex cho tên miền riêng www.sun-galaxy-complex.com.vn.
+
+    Canonical, og:url, schema và liên kết tới chính trang trỏ về tên miền riêng;
+    liên kết sang Da Nang Downtown và Tháp 69 tầng giữ nguyên tên miền sun-danangdowntown.com.
+    """
+    own = f'{SITE}/sun-galaxy-complex'
+    html = html.replace(f'"{own}"', f'"{GALAXY_SITE}/"')
+    html = html.replace(f'"{own}#', f'"{GALAXY_SITE}/#')
+    html = html.replace(f'href="{own}"', f'href="{GALAXY_SITE}/"')
+    html = html.replace(f'content="{own}"', f'content="{GALAXY_SITE}/"')
+    if own + '"' in html or own + '#' in html:
+        raise SystemExit('sun-galaxy-complex-vn: còn sót liên kết về trang con')
+    dest = OUT / 'sun-galaxy-complex-vn.html'
+    dest.write_text(html, encoding='utf-8')
+    print(dest, len(html), 'bytes')
 
 
 if __name__ == '__main__':

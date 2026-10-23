@@ -944,7 +944,7 @@ const CONFIG = {
   const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
   /* ===== Gửi lead ===== */
-  const projectName = () => /sun-galaxy-complex/.test(location.pathname) ? 'Sun Galaxy Complex'
+  const projectName = () => (/sun-galaxy-complex/.test(location.pathname) || /galaxy/.test(location.hostname)) ? 'Sun Galaxy Complex'
     : /thap-69-tang/.test(location.pathname) ? 'Tháp 69 tầng (408m) Da Nang Downtown' : CONFIG.PROJECT;
   const VIA_LABEL = { form: 'Form đăng ký', popup: 'Popup tài liệu', chat: 'Chat tự động' };
   async function submitLead(input) {
