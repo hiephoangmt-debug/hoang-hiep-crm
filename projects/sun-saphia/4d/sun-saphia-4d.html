@@ -89,6 +89,20 @@ input[type=range]{accent-color:var(--orange)}
 .contact b{white-space:nowrap}
 @media (max-width:760px){.contact a{display:none}.srb{width:38px;height:38px;font-size:16px}.compass{top:calc(84px + env(safe-area-inset-top,0px))}}
 .srb{background:#fff!important;border:0!important;box-shadow:none!important;width:34px!important;height:48px!important;padding:4px 7px!important;object-fit:contain;animation:none!important}
+@media (max-width:760px){
+  .top{padding-top:calc(8px + env(safe-area-inset-top,0px));padding-bottom:6px}
+  .brand{gap:8px}.brand small{display:none}.brand h1{font-size:16px;margin:0}
+  .contact{display:none}
+  .srb{width:26px!important;height:36px!important;padding:3px 5px!important}
+  .compass{top:calc(60px + env(safe-area-inset-top,0px))}
+  .viewhint{top:calc(64px + env(safe-area-inset-top,0px))}
+  .console{padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px));gap:6px}
+  .modes{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
+  .modes::-webkit-scrollbar{display:none}
+  .chip{padding:6px 11px;font-size:12.5px}
+  .sl{gap:8px}.sl label{font-size:10px;letter-spacing:1px}.sl output{font-size:14px;min-width:54px}
+  .note{display:none}
+}
 </style>
 
 <div id="app"></div>

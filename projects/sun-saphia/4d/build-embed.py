@@ -23,7 +23,14 @@ js = r'''/* Sun Saphia 3D·4D·5D – chèn vào trang (dán loader trong "Trư�
       + '<div style="color:#FFAA01;font-size:12px;letter-spacing:.14em;font-weight:700;text-transform:uppercase">Mô hình 3D · 4D · 5D minh họa</div>'
       + '<h2 style="color:#fff;font-family:Fahkwang,inherit;font-size:28px;line-height:1.25;margin:6px 0 6px;font-weight:300">Sun Saphia Residence: xoay 3D, xem nắng theo giờ (4D), đứng ở tầng nhìn ra biển (5D)</h2>'
       + '<p style="color:#c7d3e3;font-size:14px;line-height:1.5;margin:0 0 14px">Kéo để xoay · chọn “5D · View từ căn” rồi kéo để nhìn ra biển, Cù Lao Chàm, sông Hàn, sân bay. Mô hình dựng lại để minh họa, không phải bản vẽ của chủ đầu tư.</p>'
-      + '<div id="ss4d-box" style="position:relative;width:100%;height:min(78vh,640px);min-height:440px;border-radius:14px;overflow:hidden;background:#1b2b44">'
+      + '<style>#ss4d-box{position:relative;width:100%;height:min(78vh,640px);min-height:440px;border-radius:14px;overflow:hidden;background:#1b2b44}'
+      + '@media(max-width:760px){#ss4d-box{height:calc(100svh - 160px);min-height:500px}}'
+      + '#ss4d-box.full{position:fixed;inset:0;width:100%;height:100%;min-height:0;border-radius:0;z-index:2147483600}'
+      + '#ss4d-fs{display:inline-flex;align-items:center;gap:6px;margin:0 0 12px;border:1.5px solid rgba(255,255,255,.6);background:rgba(255,255,255,.1);color:#fff;font:700 14px/1 inherit;padding:10px 16px;border-radius:999px;cursor:pointer}'
+      + '#ss4d-x{display:none;position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:10px;z-index:2147483601;border:0;background:#E96118;color:#fff;font:800 14px/1 inherit;padding:10px 14px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.3);cursor:pointer}'
+      + 'html.ss4d-on,html.ss4d-on body{overflow:hidden!important}html.ss4d-on #ss4d-x{display:block}</style>'
+      + '<button type="button" id="ss4d-fs">⛶ Xem toàn màn hình</button><button type="button" id="ss4d-x">✕ Đóng</button>'
+      + '<div id="ss4d-box">'
       + '<button type="button" id="ss4d-go" style="position:absolute;inset:0;margin:auto;width:220px;height:52px;border:0;border-radius:26px;background:#E96118;color:#fff;font-weight:800;font-size:16px;cursor:pointer">▶ Mở mô hình 3D · 4D · 5D</button>'
       + '</div></div>';
     a.parentNode.insertBefore(wrap, a.nextSibling);
@@ -33,6 +40,12 @@ js = r'''/* Sun Saphia 3D·4D·5D – chèn vào trang (dán loader trong "Trư�
       f.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0'; f.srcdoc = DOC; box.innerHTML = ''; box.appendChild(f);
     }
     document.getElementById('ss4d-go').onclick = load;
+    var root = document.documentElement;
+    function full(on){ load(); box.classList.toggle('full', on); root.classList.toggle('ss4d-on', on); }
+    window.ss4dFull = function(){ full(true); };
+    document.getElementById('ss4d-fs').onclick = function(){ full(true); };
+    document.getElementById('ss4d-x').onclick = function(){ full(false); try { wrap.scrollIntoView({ block: 'start' }); } catch (e) {} };
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && box.classList.contains('full')) full(false); });
     // link gửi khách: .../#ss4d (hoặc ?xem=4d) → cuộn thẳng tới mô hình và mở luôn
     if (/#(ss4d|hm4d|4d)\b|[?&]xem=4d/i.test(location.hash + ' ' + location.search)) setTimeout(function(){ try { wrap.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) { wrap.scrollIntoView(); } load(); }, 400);
     if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function(es){ if (es[0].isIntersecting){ io.disconnect(); load(); } }, { rootMargin: '200px' }); io.observe(box); }
