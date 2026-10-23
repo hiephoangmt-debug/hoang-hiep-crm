@@ -33,12 +33,11 @@ js = r'''/* Sun Saphia – Chọn căn theo view (mặt bằng tầng theo tỷ 
     box.style.height = (window.innerWidth < 820 ? 560 : 760) + 'px';
     window.addEventListener('message', function(e){ var d = e.data; if (!d || !d.sscc) return;
       if (d.sscc === 'h' && d.h > 200) box.style.height = Math.ceil(d.h) + 'px';
-      if (d.sscc === 'open') { var off = 0; [].forEach.call(document.querySelectorAll('header,nav,.nav,.top,#topbar,.topbar'), function(x){ var cs = getComputedStyle(x); if (cs.position === 'fixed' || cs.position === 'sticky') { var r = x.getBoundingClientRect(); if (r.top <= 6 && r.bottom > off && r.bottom < 220) off = r.bottom; } });
-        var vh = Math.max(380, window.innerHeight - off - 10), bt = box.getBoundingClientRect().top + window.pageYOffset, cur = window.pageYOffset, fr = box.querySelector('iframe');
-        var want = Math.min(Math.max(cur + off + 6, bt), bt + box.offsetHeight - vh);
-        var topIn = Math.max(0, want - bt);
-        window.scrollTo({ top: Math.max(0, want - off - 6), behavior: 'smooth' });
-        if (fr && fr.contentWindow) fr.contentWindow.postMessage({ sscc: 'vh', h: vh, top: topIn }, '*'); }
+      if (d.sscc === 'open') { var off = 0; [].forEach.call(document.querySelectorAll('body *'), function(x){ if (x.closest('#sscc')) return; var cs = getComputedStyle(x); if (cs.position === 'fixed' || cs.position === 'sticky') { var r = x.getBoundingClientRect(); if (r.top < 200 && r.bottom > off && r.bottom < 280 && r.width > window.innerWidth * 0.6 && r.height > 20 && cs.display !== 'none' && cs.visibility !== 'hidden') off = r.bottom; } });
+        var bt = box.getBoundingClientRect().top + window.pageYOffset, bh = box.offsetHeight, ih = window.innerHeight, S = window.pageYOffset, fr = box.querySelector('iframe');
+        function win(S){ var t = Math.max(bt, S + off + 6), b2 = Math.min(bt + bh, S + ih - 6); return [t, b2]; }
+        S = Math.max(0, bt - off - 6); var w = win(S); window.scrollTo({ top: S, behavior: 'smooth' });
+        if (fr && fr.contentWindow) fr.contentWindow.postMessage({ sscc: 'vh', h: Math.max(300, w[1] - w[0]), top: w[0] - bt }, '*'); }
       if (d.sscc === 'lead') { var it = 'Web/ADS – chọn căn ' + d.unit + ' (' + d.type + ', tầng ' + d.floor + ')';
         var b = document.createElement('button'); b.type = 'button'; b.setAttribute('data-pop', ''); b.setAttribute('data-interest', (document.getElementById('leadPop') ? 'ADS' : 'Web') + ' – chọn căn ' + d.unit + ' (' + d.type + ', tầng ' + d.floor + ')');
         b.setAttribute('data-title', 'Đăng ký ưu tiên căn ' + d.unit); b.setAttribute('data-sub', 'Để lại số Zalo, chuyên viên báo giá và tình trạng căn này ngay khi chủ đầu tư công bố bảng hàng.'); b.setAttribute('data-btn', 'Giữ ưu tiên căn này →');
