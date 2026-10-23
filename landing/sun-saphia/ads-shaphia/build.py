@@ -8,7 +8,7 @@ def rp(a,b,n=1):
     global s
     c=s.count(a); assert c==n,(a[:80],c); s=s.replace(a,b)
 rp('<meta property="og:url" content="https://www.sun-saphia-residence.com/ads">','<meta property="og:url" content="https://www.sun-shaphiaresidence.com/ads">\n<link rel="canonical" href="https://www.sun-shaphiaresidence.com/ads">')
-rp('<title>Sun Saphia Residence Đà Nẵng – Căn hộ mặt biển Mỹ Khê | Kick-off 23/10</title>','<title>Sun Saphia Residence Đà Nẵng – Căn hộ mặt biển Mỹ Khê | Nhận bảng giá</title>')
+s=s.replace('| Mở bán cuối 11/2026</title>','| Nhận bảng giá</title>')
 s=re.sub(r'<meta property="og:title" content="[^"]*">','<meta property="og:title" content="Sun Saphia Residence Đà Nẵng – căn hộ trục biển của Sun">',s)
 s=re.sub(r'<meta property="og:description" content="[^"]*">','<meta property="og:description" content="Studio · 1PN+ · 2PN trên trục biển Võ Nguyên Giáp – Trường Sa, ra biển khoảng 400 m. Đăng ký nhận bảng giá, mặt bằng và chính sách qua Zalo, không thu tiền.">',s)
 s=re.sub(r'<meta property="og:image" content="[^"]*">','<meta property="og:image" content="'+IMG+'chia-se-ss-phoi-canh-1200x630.jpg">',s)
@@ -19,5 +19,4 @@ s=s[:a]+('<a class="banner" href="#su-kien" aria-label="Phối cảnh Sun Saphia
  '<img src="'+PC+'" width="1280" height="720" alt="Phối cảnh Sun Saphia Residence – tòa tháp 30 tầng bên bờ biển Đà Nẵng lúc hoàng hôn" fetchpriority="high" decoding="async">'
  '<span class="cap"><span class="hero-cap-ev">📅 <b>Kick-off 8:30 · Thứ Sáu 23/10</b> · KOI Resorts &amp; Residence · </span>Phối cảnh minh hoạ</span></a>')+s[b:]
 # Menu "Sự kiện 23/10" bỏ hẳn sau sự kiện
-rp('<li><a href="#su-kien">Sự kiện 23/10</a></li>','<li class="hero-cap-ev"><a href="#su-kien">Sự kiện 23/10</a></li>')
 open(D+'ads-shaphia/index.html','w',encoding='utf8').write(s); print('ok',len(s))
