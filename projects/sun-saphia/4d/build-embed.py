@@ -18,13 +18,13 @@ js = r'''/* Sun Saphia 3D·4D·5D – chèn vào trang (dán loader trong "Trư�
   function build(){
     var a = anchor(); if (!a) return;
     var wrap = document.createElement('div'); wrap.id = 'ss4d';
-    wrap.style.cssText = 'position:relative;width:100%;background:#0f1d33;padding:28px 0 22px;clear:both';
+    wrap.style.cssText = 'position:relative;width:100%;background:linear-gradient(160deg,#0B2447,#275286);padding:28px 0 22px;clear:both';
     wrap.innerHTML = '<div style="max-width:1140px;margin:0 auto;padding:0 16px;font-family:inherit">'
-      + '<div style="color:#ff7a3d;font-size:12px;letter-spacing:.14em;font-weight:700;text-transform:uppercase">Mô hình 3D · 4D · 5D minh họa</div>'
-      + '<h2 style="color:#fff;font-size:24px;line-height:1.25;margin:6px 0 6px;font-weight:800">Sun Saphia Residence: xoay 3D, xem nắng theo giờ (4D), đứng ở tầng nhìn ra biển (5D)</h2>'
+      + '<div style="color:#FFAA01;font-size:12px;letter-spacing:.14em;font-weight:700;text-transform:uppercase">Mô hình 3D · 4D · 5D minh họa</div>'
+      + '<h2 style="color:#fff;font-family:Fahkwang,inherit;font-size:28px;line-height:1.25;margin:6px 0 6px;font-weight:300">Sun Saphia Residence: xoay 3D, xem nắng theo giờ (4D), đứng ở tầng nhìn ra biển (5D)</h2>'
       + '<p style="color:#c7d3e3;font-size:14px;line-height:1.5;margin:0 0 14px">Kéo để xoay · chọn “5D · View từ căn” rồi kéo để nhìn ra biển, Cù Lao Chàm, sông Hàn, sân bay. Mô hình dựng lại để minh họa, không phải bản vẽ của chủ đầu tư.</p>'
       + '<div id="ss4d-box" style="position:relative;width:100%;height:min(78vh,640px);min-height:440px;border-radius:14px;overflow:hidden;background:#1b2b44">'
-      + '<button type="button" id="ss4d-go" style="position:absolute;inset:0;margin:auto;width:220px;height:52px;border:0;border-radius:26px;background:#ff6a2b;color:#fff;font-weight:800;font-size:16px;cursor:pointer">▶ Mở mô hình 3D · 4D · 5D</button>'
+      + '<button type="button" id="ss4d-go" style="position:absolute;inset:0;margin:auto;width:220px;height:52px;border:0;border-radius:26px;background:#E96118;color:#fff;font-weight:800;font-size:16px;cursor:pointer">▶ Mở mô hình 3D · 4D · 5D</button>'
       + '</div></div>';
     a.parentNode.insertBefore(wrap, a.nextSibling);
     var box = document.getElementById('ss4d-box'), done = false;
