@@ -131,7 +131,7 @@ input[type=range]{accent-color:var(--orange)}
   <p class="note">Mô hình dựng lại theo hình phối cảnh và bản đồ vệ tinh để minh họa vị trí, hướng nắng và tầm nhìn; không phải bản vẽ thiết kế của chủ đầu tư. Kích thước, công trình xung quanh và tầm nhìn chỉ là ước lượng.</p>
 </section>
 
-<div class="ss-wmk" aria-hidden="true" style="position:fixed;inset:0;pointer-events:none;z-index:60;background-image:url(&quot;data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='560'%20height='200'%3E%3Cg%20transform='rotate%28-22%20280%20100%29'%20font-family='Arial,sans-serif'%20font-weight='700'%20font-size='15'%20fill='%230A2540'%20fill-opacity='.2'%20stroke='%23ffffff'%20stroke-opacity='.25'%20stroke-width='.6'%3E%3Ctext%20x='10'%20y='70'%3Esun-saphia-residence.com%20%C2%B7%200904%20567%20009%3C/text%3E%3Ctext%20x='240'%20y='170'%3Esun-saphia-residence.com%20%C2%B7%200904%20567%20009%3C/text%3E%3C/g%3E%3C/svg%3E&quot;);background-repeat:repeat"></div>
+<div class="ss-wmk" id="ssWmk" aria-hidden="true" style="display:none;position:fixed;inset:0;pointer-events:none;z-index:60;background-image:url(&quot;data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='560'%20height='200'%3E%3Cg%20transform='rotate%28-22%20280%20100%29'%20font-family='Arial,sans-serif'%20font-weight='700'%20font-size='15'%20fill='%230A2540'%20fill-opacity='.2'%20stroke='%23ffffff'%20stroke-opacity='.25'%20stroke-width='.6'%3E%3Ctext%20x='10'%20y='70'%3Esun-saphia-residence.com%20%C2%B7%200904%20567%20009%3C/text%3E%3Ctext%20x='240'%20y='170'%3Esun-saphia-residence.com%20%C2%B7%200904%20567%20009%3C/text%3E%3C/g%3E%3C/svg%3E&quot;);background-repeat:repeat"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script>
@@ -653,6 +653,7 @@ function setPlan(on){
   planOn=on; if(on&&!planMesh) makePlan();
   clipTower(on); planMesh&&(planMesh.visible=on); hi.visible=!on&&mode!=='view';
   bPlan.setAttribute('aria-pressed',on);
+  var wk=document.getElementById('ssWmk'); if(wk) wk.style.display=on?'block':'none';
   if(typeof wm!=='undefined') wm.material.opacity=on?.1:.26;
   if(on) updPlan(true); else { setFloor(+floorEl.value); if(DEF) flyTo(DEF.p,DEF.t); }
 }
