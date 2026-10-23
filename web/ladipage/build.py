@@ -122,7 +122,7 @@ def build():
     b = re.sub(r'<a class="skip".*?</a>\n', '', b)
     b = sub_once(r'  <picture class="hero-bg">.*?</picture>\n', '', b)
     b = sub_once(r'  <aside class="toc".*?</aside>\n', '', b)
-    b = sub_once(r'<div class="float-cta">.*?</div>\n', '', b)
+    b = re.sub(r'<div class="float-cta">.*?</div>\n', '', b, flags=re.S)
     b = re.sub(r'<script[^>]*src=[^>]*></script>\n?', '', b)
     b = b.replace('<details open>', '<details>')
     b = sub_once(r'    <h3 id="tinh-vay">.*?\n      </div>\n    </div>\n', DOCS_FORM + LOAN, b)

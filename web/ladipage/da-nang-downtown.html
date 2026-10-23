@@ -273,7 +273,6 @@ footer a{color:#fff}
   .toc{position:static;margin-bottom:28px}
   .nav{display:none}
   .lead-box{grid-template-columns:1fr;padding:22px}
-  .float-cta{display:flex}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
 @media print{.site-header,.float-cta,.lead-box,.toc{display:none}}
@@ -384,10 +383,9 @@ footer a{color:#fff}
 .calc-out p{font-size:12.5px;opacity:.75;margin:0}
 
 @media (max-width:960px){
-  .fab{bottom:calc(84px + env(safe-area-inset-bottom,0px));right:14px;gap:10px}
+  .fab{bottom:calc(18px + env(safe-area-inset-bottom,0px));right:14px;gap:10px}
   .fab-btn{width:50px;height:50px}
-  .fab-zalo,.fab-call{display:none}
-  .chat{right:16px;left:16px;width:auto;bottom:calc(84px + env(safe-area-inset-bottom,0px));height:min(520px,calc(100vh - 120px))}
+  .chat{right:16px;left:16px;width:auto;bottom:calc(80px + env(safe-area-inset-bottom,0px));height:min(520px,calc(100vh - 120px))}
   .calc{grid-template-columns:minmax(0,1fr);padding:16px}
   .fab-teaser{width:200px}
   .float-cta .btn{padding:12px 8px;font-size:14px}
@@ -446,6 +444,9 @@ figure.photo.natural img{aspect-ratio:auto;object-fit:contain;width:auto;max-wid
 /* Chữ trong bài căn đều hai bên */
 article p,article li,.hero .lead,.summary li,.card p,.doc span,details p,.related .body span,figcaption,.foot-note,.foot-brand p:first-of-type,.lead-box p,.lead-box li{text-align:justify;text-justify:inter-word}
 article .cta-row,article .inline-cta p,.form-note{text-align:left}
+
+/* Mọi nút liên hệ nằm ở góc phải dưới, không dùng thanh ngang dưới đáy */
+.float-cta{display:none!important}
 
 /* Bản LadiPage: một cột, không sticky, ảnh nền hero bằng CSS */
 .site-header{position:relative}
@@ -897,7 +898,6 @@ article .cta-row,article .inline-cta p,.form-note{text-align:left}
     <p class="foot-note">Trang thông tin dự án do Giám đốc kinh doanh Hoàng Phạm Đình Hiệp cung cấp, không phải website chính thức của chủ đầu tư Sun Group hay đơn vị vận hành Accor. Hình ảnh phối cảnh mang tính minh họa. Thông tin, giá bán và chính sách có thể thay đổi theo quy định của chủ đầu tư tại từng thời điểm. Cập nhật lần cuối: <time datetime="2026-10-22">22/10/2026</time>.</p>
   </div>
 </footer>
-
 
 <div class="ldp-fab">
   <a class="ldp-fab-btn ldp-fab-chat" href="#dang-ky" aria-label="Chat tư vấn, để lại lời nhắn" title="Chat tư vấn"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path fill="#ffffff" d="M12 3C6.5 3 2 6.6 2 11c0 2.4 1.3 4.6 3.4 6.1L5 21l4.1-2.2c.9.2 1.9.3 2.9.3 5.5 0 10-3.6 10-8s-4.5-8-10-8zm-4 9.3a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6zm4 0a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6zm4 0a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6z"/></svg></a>
