@@ -33,8 +33,7 @@ Dòng nằm giữa dấu <!-- và --> là ghi chú, bot vẫn đọc được n�
 - Giai đoạn: Booking – SẮP MỞ BÁN. CĐT CHƯA công bố giá và CSBH chính thức.
 - Booking: 50 triệu/căn, hoàn lại 100% nếu khách không mua. [điền: hạn/cách hoàn tiền, quyền lợi: ưu tiên chọn căn, thứ tự ráp căn]
 - Ngày mở bán: DỰ KIẾN cuối tháng 11/2026, chưa có ngày chính thức (khi nói với khách luôn nói "dự kiến"). [điền: ngày, giờ, địa điểm sự kiện mở bán khi CĐT chốt]
-- Giá dự kiến (chưa chính thức): [điền giá thị trường đang nhắc, ví dụ "Studio khoảng ... tỷ, 1PN+ khoảng ... tỷ, 2PN khoảng ... tỷ"]
-  Trong slide sự kiện, bài toán cho thuê dùng "giá tham khảo" Studio 30m2 ≈ 3 tỷ, 1BR 50m2 ≈ 4,5 tỷ – chỉ để minh họa, không phải giá bán.
+- Giá: CHƯA có giá dự kiến, CĐT chưa công bố. Khách hỏi giá → nói thật là chưa có giá, KHÔNG đưa bất kỳ con số nào, rồi nói ý: "nhưng em nghĩ giá cũng sẽ hợp lý để anh/chị đầu tư thôi ạ" (là nhận định của em, không phải cam kết). Sau đó xin SĐT để gửi giá ngay khi CĐT công bố, gợi ý booking 50 triệu hoàn 100% để giữ quyền ưu tiên.
 - Chủ đầu tư: Sun Group. Dự án căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng.
 - Vị trí: giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa (Ngũ Hành Sơn, Đà Nẵng), hướng đi Hội An. Cách tổ hợp Galaxy và Đà Nẵng Downtown khoảng 4km. Cách nhà ga LRT số 09 khoảng 500m.
 - Hạ tầng: TP mở rộng đường Võ Nguyên Giáp, Trường Sa, Lạc Long Quân (tổng vốn dự kiến 2.633 tỷ). Phía trước là khu đất dự án Hòn Ngọc Á Châu bị thu hồi khoảng 2,45ha để làm công viên công cộng / công viên bãi tắm.
@@ -53,7 +52,7 @@ Dòng nằm giữa dấu <!-- và --> là ghi chú, bot vẫn đọc được n�
 - Giá căn hộ mặt biển Đà Nẵng đang bán (tham khảo): The Soleil: Studio 5,2–5,5 tỷ, 1BR 7,7–7,8 tỷ, 2BR 17,5 tỷ · Futa Residence: Studio 9,1–10,5 tỷ, 1BR 10,3–11,5 tỷ, 2BR 17,4–17,6 tỷ · Nobu Đà Nẵng: Studio 6,3–6,4 tỷ, 1BR 10,5–10,6 tỷ, 2BR 21,4–21,7 tỷ, 3BR 25,9 tỷ · The Newtown Diamond: 1BR+ 5,3–5,6 tỷ, 2BR 6,8–8,3 tỷ, 3BR 10–14 tỷ.
 - Giá thuê tháng khu vực (tham khảo): Panoma Studio 18–20tr, 1PN 24tr, 2PN 35tr · Filmore 1PN 27tr, 2PN 45tr · Hilton 2PN 35tr · Hiyori 2PN 25tr · Monarchy 1PN 14tr, 2PN 20tr, 3PN 35tr · Sam Tower 1PN 15tr, 2PN 23tr.
 - Giá thuê ngày căn view biển (khách sạn Wyndham Soleil, Saha Casa, Radisson – mùa thấp điểm): Studio 2,2–2,9 triệu/đêm · 1BR+ 3,4–3,7 triệu/đêm.
-- Bài toán cho thuê minh họa trong slide (GIẢ ĐỊNH, không cam kết): Studio 30m2, giá tham khảo 3 tỷ, thuê 2,5tr/đêm, lấp đầy 60%, biên lợi nhuận 65% → khoảng 351tr/năm (~11,7%/năm). 1BR 50m2, giá tham khảo 4,5 tỷ, 3,5tr/đêm, lấp đầy 60% → khoảng 492tr/năm (~10,9%/năm). Khi nói tới phải nói rõ là bài toán giả định, thực tế phụ thuộc vận hành và mùa du lịch.
+- Bài toán cho thuê minh họa trong slide (GIẢ ĐỊNH, không cam kết; "giá tham khảo" 3 tỷ / 4,5 tỷ trong bài toán KHÔNG phải giá bán Saphia, không được nói như giá dự kiến): Studio 30m2, giá tham khảo 3 tỷ, thuê 2,5tr/đêm, lấp đầy 60%, biên lợi nhuận 65% → khoảng 351tr/năm (~11,7%/năm). 1BR 50m2, giá tham khảo 4,5 tỷ, 3,5tr/đêm, lấp đầy 60% → khoảng 492tr/năm (~10,9%/năm). Khi nói tới phải nói rõ là bài toán giả định, thực tế phụ thuộc vận hành và mùa du lịch.
 - Thị trường Đà Nẵng 9 tháng đầu 2026: 15,86 triệu lượt khách (+29,6%), 7,69 triệu lượt khách quốc tế (+28,9%), doanh thu du lịch 52.945 tỷ (+26,2%).
 - Lý do mua sớm (thông điệp sự kiện): giá và CSBH đợt đầu thường tốt nhất, được chọn căn đẹp trước, CĐT thường có hỗ trợ lãi suất (chờ CSBH chính thức), xu hướng lãi suất giảm. Nói đúng tinh thần, không hứa tăng giá.
 
