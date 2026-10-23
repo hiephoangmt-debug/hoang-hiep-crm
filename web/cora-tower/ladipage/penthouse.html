@@ -11,8 +11,8 @@
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="theme-color" content="#0b2a5b">
 <link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ff0367decadc596ca72250527c03c4eb7e566b60/web/cora-tower/assets/favicon.svg">
-<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ff0367decadc596ca72250527c03c4eb7e566b60/web/cora-tower/assets/favicon-180.png">
+<link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/20280b09852ec64ed4301042273f0c6992f6ace5/web/cora-tower/assets/favicon.svg">
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/20280b09852ec64ed4301042273f0c6992f6ace5/web/cora-tower/assets/favicon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="vi_VN">
 <meta property="og:site_name" content="Cora Tower Đà Nẵng">
@@ -479,7 +479,21 @@ section.alt .toc{background:var(--bg)}
 .split-media,.media-stack,.split-media.zoom{position:relative!important;top:auto!important;min-height:0!important}
 .split-media>picture,.split-media>a.zoom-link,.split-media img,.media-stack img{position:static!important;inset:auto!important;height:auto!important;width:100%!important;object-fit:initial!important}
 .split{align-items:start!important}
-.toc ol{columns:auto!important}
+.toc ol{columns:auto!important;list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.toc li{margin:0}
+#bai-viet{padding-bottom:8px!important}
+#bai-viet .toc{margin-bottom:0}
+.art-part{padding-top:0!important;padding-bottom:0!important}
+.art-part:last-of-type{padding-bottom:64px!important}
+.art-part h3{margin-top:0!important;padding-top:34px}
+.btn.toc-btn{display:flex;justify-content:flex-start;width:100%;height:100%;text-align:left;background:var(--bg);color:var(--brand);border:1px solid var(--line);box-shadow:none;border-radius:12px;padding:10px 14px;font-size:.95rem;font-weight:600}
+.btn.toc-btn:hover{border-color:var(--brand-2);color:var(--brand-2)}
+.nav{gap:6px!important}
+.btn.nav-btn{background:transparent;color:var(--brand);box-shadow:none;padding:6px 9px;font-size:.9rem;border-radius:999px;white-space:nowrap}
+.nav{gap:2px!important;flex-wrap:nowrap!important}
+.site-head .btn{white-space:nowrap}
+.btn.nav-btn[aria-current=page],.btn.nav-btn:hover{background:color-mix(in srgb,var(--brand-2) 12%,#fff);color:var(--brand-2)}
+.btn.foot-btn{background:transparent;box-shadow:none;padding:6px 10px;color:inherit;font-weight:600;font-size:.95rem}
 .cs-wrap{margin-top:24px}
 .cs-frame{overflow:hidden}
 .cs-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}
@@ -622,7 +636,7 @@ section.alt .toc{background:var(--bg)}
 <header class="site-head">
   <div class="wrap">
     <a class="logo" href="https://www.cora-tower.com/" aria-label="Cora Tower – Trang chủ"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect x="5" y="6" width="8" height="21" rx="1.5" fill="#0b2a5b"/><rect x="16" y="3" width="9" height="24" rx="1.5" fill="#f26b1d"/><rect x="2" y="26" width="26" height="2.5" rx="1" fill="#0b2a5b"/></svg>CORA <span>TOWER</span></a>
-    <nav class="nav" aria-label="Điều hướng chính"><a href="https://www.cora-tower.com/">Tổng quan</a><a href="https://www.cora-tower.com/#mat-bang">Mặt bằng</a><a href="https://www.cora-tower.com/#gia">Bảng giá</a><a href="https://www.cora-tower.com/khoi-de-shophouse">Shophouse</a><a href="penthouse.html" aria-current="page">Duplex – Penthouse</a><a href="https://www.cora-tower.com/#tien-ich">Tiện ích</a><a href="https://www.cora-tower.com/#vi-tri">Vị trí</a><a href="https://www.cora-tower.com/#phap-ly">Pháp lý</a></nav>
+    <nav class="nav" aria-label="Điều hướng chính"><a class="btn nav-btn" href="https://www.cora-tower.com/">Tổng quan</a><a class="btn nav-btn" href="https://www.cora-tower.com/#mat-bang">Mặt bằng</a><a class="btn nav-btn" href="https://www.cora-tower.com/#gia">Bảng giá</a><a class="btn nav-btn" href="https://www.cora-tower.com/khoi-de-shophouse">Shophouse</a><a class="btn nav-btn" href="penthouse.html" aria-current="page">Duplex – Penthouse</a><a class="btn nav-btn" href="https://www.cora-tower.com/#tien-ich">Tiện ích</a><a class="btn nav-btn" href="https://www.cora-tower.com/#vi-tri">Vị trí</a><a class="btn nav-btn" href="https://www.cora-tower.com/#phap-ly">Pháp lý</a></nav>
     <a class="btn head-cta" href="tel:0904567009" aria-label="Gọi tư vấn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg>Gọi ngay</a>
     <a class="btn head-cta-alt" href="#dang-ky">Nhận giá duplex</a>
   </div>
@@ -630,7 +644,7 @@ section.alt .toc{background:var(--bg)}
 
 <main>
   <section class="hero">
-    <div class="hero-bg"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ff0367decadc596ca72250527c03c4eb7e566b60/web/cora-tower/assets/img/view-thanh-pho-hoang-hon-cora-tower.jpg" width="1600" height="900" alt="View thành phố Đà Nẵng lúc hoàng hôn từ căn hộ Cora Tower" decoding="async"></div>
+    <div class="hero-bg"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/20280b09852ec64ed4301042273f0c6992f6ace5/web/cora-tower/assets/img/view-thanh-pho-hoang-hon-cora-tower.jpg" width="1600" height="900" alt="View thành phố Đà Nẵng lúc hoàng hôn từ căn hộ Cora Tower" decoding="async"></div>
     <div class="wrap hero-grid">
       <div>
         <nav class="breadcrumb" aria-label="breadcrumb"><a href="https://www.cora-tower.com/">Cora Tower</a> › Duplex – Penthouse</nav>
@@ -659,10 +673,10 @@ section.alt .toc{background:var(--bg)}
       <div class="center reveal"><span class="kicker">Một ngày ở tầng 25</span><h2>Từ bình minh đến khi thành phố lên đèn</h2>
         <p class="sub">Ở trên cao, thời gian trôi theo ánh sáng. Đây là một ngày bình thường của chủ nhân penthouse Cora Tower.</p></div>
       <ol class="day">
-        <li class="reveal"><figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ff0367decadc596ca72250527c03c4eb7e566b60/web/cora-tower/assets/img/view-bien-tu-ban-cong-cora-tower.jpg" width="1600" height="900" alt="Ban công căn hộ Cora Tower đón nắng sớm hướng biển" decoding="async"></figure><time>05:45</time><h3>Nắng đầu tiên</h3><p>Ánh bình minh từ phía biển tràn qua ô kính cao gấp đôi bình thường. Bạn pha ly cà phê, cả căn nhà sáng lên trước khi thành phố kịp thức giấc.</p></li>
-        <li class="reveal"><figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ff0367decadc596ca72250527c03c4eb7e566b60/web/cora-tower/assets/img/ho-boi-trong-nha-cora-tower.jpg" width="1600" height="900" alt="Hồ bơi trong nhà kính tầng 2 Cora Tower buổi sáng" decoding="async"></figure><time>09:00</time><h3>Kỳ nghỉ không cần xếp vali</h3><p>Một chuyến thang máy xuống tầng 2: vài vòng bơi trong hồ kính đầy nắng, rồi xông hơi Jjimjilbang kiểu Hàn. Trở lên nhà, tầng lửng là góc làm việc yên tĩnh nhìn ra trời xanh.</p></li>
-        <li class="reveal"><figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ff0367decadc596ca72250527c03c4eb7e566b60/web/cora-tower/assets/img/view-song-va-bien-cora-tower.jpg" width="1600" height="900" alt="Ban công nhìn ra sông và biển Đà Nẵng lúc chiều" decoding="async"></figure><time>17:30</time><h3>Hoàng hôn sông Hàn</h3><p>Mặt trời lặn sau rặng núi phía Tây, sông đổi màu bạc rồi tím. Bọn trẻ về nhà, cả gia đình ra ban công – khoảnh khắc mà không bức ảnh nào chụp đủ.</p></li>
-        <li class="reveal"><figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ff0367decadc596ca72250527c03c4eb7e566b60/web/cora-tower/assets/img/phoi-canh-cora-tower-ve-dem.jpg" width="1600" height="930" alt="Khối mái cam Cora Tower phát sáng khi thành phố lên đèn" decoding="async"></figure><time>20:30</time><h3>Thành phố lên đèn</h3><p>Phố xá Đà Nẵng trải dài lấp lánh dưới chân, vòng quay Sun Wheel sáng ở phía xa. Những đêm lễ hội, ban công nhà bạn là khán đài riêng.</p></li>
+        <li class="reveal"><figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/20280b09852ec64ed4301042273f0c6992f6ace5/web/cora-tower/assets/img/view-bien-tu-ban-cong-cora-tower.jpg" width="1600" height="900" alt="Ban công căn hộ Cora Tower đón nắng sớm hướng biển" decoding="async"></figure><time>05:45</time><h3>Nắng đầu tiên</h3><p>Ánh bình minh từ phía biển tràn qua ô kính cao gấp đôi bình thường. Bạn pha ly cà phê, cả căn nhà sáng lên trước khi thành phố kịp thức giấc.</p></li>
+        <li class="reveal"><figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/20280b09852ec64ed4301042273f0c6992f6ace5/web/cora-tower/assets/img/ho-boi-trong-nha-cora-tower.jpg" width="1600" height="900" alt="Hồ bơi trong nhà kính tầng 2 Cora Tower buổi sáng" decoding="async"></figure><time>09:00</time><h3>Kỳ nghỉ không cần xếp vali</h3><p>Một chuyến thang máy xuống tầng 2: vài vòng bơi trong hồ kính đầy nắng, rồi xông hơi Jjimjilbang kiểu Hàn. Trở lên nhà, tầng lửng là góc làm việc yên tĩnh nhìn ra trời xanh.</p></li>
+        <li class="reveal"><figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/20280b09852ec64ed4301042273f0c6992f6ace5/web/cora-tower/assets/img/view-song-va-bien-cora-tower.jpg" width="1600" height="900" alt="Ban công nhìn ra sông và biển Đà Nẵng lúc chiều" decoding="async"></figure><time>17:30</time><h3>Hoàng hôn sông Hàn</h3><p>Mặt trời lặn sau rặng núi phía Tây, sông đổi màu bạc rồi tím. Bọn trẻ về nhà, cả gia đình ra ban công – khoảnh khắc mà không bức ảnh nào chụp đủ.</p></li>
+        <li class="reveal"><figure><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/20280b09852ec64ed4301042273f0c6992f6ace5/web/cora-tower/assets/img/phoi-canh-cora-tower-ve-dem.jpg" width="1600" height="930" alt="Khối mái cam Cora Tower phát sáng khi thành phố lên đèn" decoding="async"></figure><time>20:30</time><h3>Thành phố lên đèn</h3><p>Phố xá Đà Nẵng trải dài lấp lánh dưới chân, vòng quay Sun Wheel sáng ở phía xa. Những đêm lễ hội, ban công nhà bạn là khán đài riêng.</p></li>
       </ol>
     </div>
   </section>
@@ -701,7 +715,7 @@ section.alt .toc{background:var(--bg)}
         </div>
         <p class="note">Thông tin tổng hợp, chỉ mang tính tham khảo. Thông số chính thức theo hồ sơ của chủ đầu tư.</p>
       </div>
-      <div class="media-stack reveal"><div class="split-media zoom"><a href="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ff0367decadc596ca72250527c03c4eb7e566b60/web/cora-tower/assets/img/cau-truc-toa-can-ho-cora-tower.jpg" class="zoom-link"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ff0367decadc596ca72250527c03c4eb7e566b60/web/cora-tower/assets/img/cau-truc-toa-can-ho-cora-tower.jpg" width="1600" height="900" alt="Cấu trúc tòa Cora Tower: tầng 25 căn hộ duplex trong khối mái" decoding="async"></a></div><figure class="stack-photo"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ff0367decadc596ca72250527c03c4eb7e566b60/web/cora-tower/assets/img/penthouse-duplex-san-vuon-cora-tower.jpg" width="1120" height="756" alt="Sân vườn trên cao của căn penthouse Cora Tower nhìn ra thành phố" decoding="async"><figcaption>Sân vườn trên cao – không gian riêng của tầng 25</figcaption></figure></div>
+      <div class="media-stack reveal"><div class="split-media zoom"><a href="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/20280b09852ec64ed4301042273f0c6992f6ace5/web/cora-tower/assets/img/cau-truc-toa-can-ho-cora-tower.jpg" class="zoom-link"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/20280b09852ec64ed4301042273f0c6992f6ace5/web/cora-tower/assets/img/cau-truc-toa-can-ho-cora-tower.jpg" width="1600" height="900" alt="Cấu trúc tòa Cora Tower: tầng 25 căn hộ duplex trong khối mái" decoding="async"></a></div><figure class="stack-photo"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/20280b09852ec64ed4301042273f0c6992f6ace5/web/cora-tower/assets/img/penthouse-duplex-san-vuon-cora-tower.jpg" width="1120" height="756" alt="Sân vườn trên cao của căn penthouse Cora Tower nhìn ra thành phố" decoding="async"><figcaption>Sân vườn trên cao – không gian riêng của tầng 25</figcaption></figure></div>
     </div>
   </section>
 
@@ -712,7 +726,7 @@ section.alt .toc{background:var(--bg)}
         <h2>Mặt bằng penthouse &amp; tầng lửng gợi ý</h2>
         <p class="sub">Tầng 25 mỗi tòa khoảng 24 căn. Với chiều cao ~7 m, căn 1PN làm thêm lửng thành 2PN+1, căn 2PN thành 3PN, căn 2PN+1 thành 3PN+1 – xem so sánh sàn chính và tầng lửng bên dưới.</p>
       </div>
-      <div class="cs-wrap"><div class="cs-frame" aria-roledescription="carousel"><div class="cs-track" id="cs-p-a1"><div class="cs-slide" aria-roledescription="slide"><div class="cs-card"><p class="cs-cap"><b>A1 · tầng 25</b></p><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ff0367decadc596ca72250527c03c4eb7e566b60/web/cora-tower/assets/img/mat-bang-penthouse-tang-25-toa-a1-cora-tower.jpg" width="2000" height="1415" alt="Mặt bằng tầng 25 penthouse tòa A1 Cora Tower với mã căn và diện tích" decoding="async"></div></div><div class="cs-slide" aria-roledescription="slide"><div class="cs-card"><p class="cs-cap"><b>A1 · tầng lửng</b></p><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ff0367decadc596ca72250527c03c4eb7e566b60/web/cora-tower/assets/img/mat-bang-penthouse-tang-lung-25-toa-a1-cora-tower.jpg" width="2000" height="1415" alt="Mặt bằng tầng lửng 25 penthouse duplex tòa A1 Cora Tower" decoding="async"></div></div><div class="cs-slide" aria-roledescription="slide"><div class="cs-card"><p class="cs-cap"><b>A2 · tầng 25</b></p><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ff0367decadc596ca72250527c03c4eb7e566b60/web/cora-tower/assets/img/mat-bang-penthouse-tang-25-toa-a2-cora-tower.jpg" width="2000" height="1415" alt="Mặt bằng tầng 25 penthouse tòa A2 Cora Tower với mã căn và diện tích" decoding="async"></div></div><div class="cs-slide" aria-roledescription="slide"><div class="cs-card"><p class="cs-cap"><b>A2 · tầng lửng</b></p><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ff0367decadc596ca72250527c03c4eb7e566b60/web/cora-tower/assets/img/mat-bang-penthouse-tang-lung-25-toa-a2-cora-tower.jpg" width="2000" height="1415" alt="Mặt bằng tầng lửng 25 penthouse duplex tòa A2 Cora Tower" decoding="async"></div></div></div></div><div class="cs-nav"><button type="button" class="cs-go" aria-controls="cs-p-a1" data-slide="prev" aria-label="Previous">&#8592;</button><span class="cs-hint">Vuốt hoặc bấm mũi tên · 4 mặt bằng</span><button type="button" class="cs-go" aria-controls="cs-p-a1" data-slide="next" aria-label="Next">&#8594;</button></div></div>
+      <div class="cs-wrap"><div class="cs-frame" aria-roledescription="carousel"><div class="cs-track" id="cs-p-a1"><div class="cs-slide" aria-roledescription="slide"><div class="cs-card"><p class="cs-cap"><b>A1 · tầng 25</b></p><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/20280b09852ec64ed4301042273f0c6992f6ace5/web/cora-tower/assets/img/mat-bang-penthouse-tang-25-toa-a1-cora-tower.jpg" width="2000" height="1415" alt="Mặt bằng tầng 25 penthouse tòa A1 Cora Tower với mã căn và diện tích" decoding="async"></div></div><div class="cs-slide" aria-roledescription="slide"><div class="cs-card"><p class="cs-cap"><b>A1 · tầng lửng</b></p><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/20280b09852ec64ed4301042273f0c6992f6ace5/web/cora-tower/assets/img/mat-bang-penthouse-tang-lung-25-toa-a1-cora-tower.jpg" width="2000" height="1415" alt="Mặt bằng tầng lửng 25 penthouse duplex tòa A1 Cora Tower" decoding="async"></div></div><div class="cs-slide" aria-roledescription="slide"><div class="cs-card"><p class="cs-cap"><b>A2 · tầng 25</b></p><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/20280b09852ec64ed4301042273f0c6992f6ace5/web/cora-tower/assets/img/mat-bang-penthouse-tang-25-toa-a2-cora-tower.jpg" width="2000" height="1415" alt="Mặt bằng tầng 25 penthouse tòa A2 Cora Tower với mã căn và diện tích" decoding="async"></div></div><div class="cs-slide" aria-roledescription="slide"><div class="cs-card"><p class="cs-cap"><b>A2 · tầng lửng</b></p><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/20280b09852ec64ed4301042273f0c6992f6ace5/web/cora-tower/assets/img/mat-bang-penthouse-tang-lung-25-toa-a2-cora-tower.jpg" width="2000" height="1415" alt="Mặt bằng tầng lửng 25 penthouse duplex tòa A2 Cora Tower" decoding="async"></div></div></div></div><div class="cs-nav"><button type="button" class="cs-go" aria-controls="cs-p-a1" data-slide="prev" aria-label="Previous">&#8592;</button><span class="cs-hint">Vuốt hoặc bấm mũi tên · 4 mặt bằng</span><button type="button" class="cs-go" aria-controls="cs-p-a1" data-slide="next" aria-label="Next">&#8594;</button></div></div>
             <p class="note">Tầng lửng là layout gợi ý của chủ đầu tư, chủ nhà tự thi công sau bàn giao và nộp phương án cho Ban quản lý. Thông số chính thức theo văn bản ký kết.</p>
       <div class="center" style="margin-top:22px"><a class="btn lg" href="#dang-ky">Nhận giỏ hàng penthouse</a></div>
     </div>
@@ -720,7 +734,7 @@ section.alt .toc{background:var(--bg)}
 
   <section>
     <div class="wrap split rev">
-      <div class="split-media reveal"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ff0367decadc596ca72250527c03c4eb7e566b60/web/cora-tower/assets/img/phoi-canh-cora-tower-ve-dem.jpg" width="1600" height="930" alt="Khối mái màu cam phát sáng về đêm – nơi bố trí căn duplex tầng 25 Cora Tower" decoding="async"><div class="badge">Dành cho số ít<small>ưu tiên khách đăng ký sớm</small></div></div>
+      <div class="split-media reveal"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/20280b09852ec64ed4301042273f0c6992f6ace5/web/cora-tower/assets/img/phoi-canh-cora-tower-ve-dem.jpg" width="1600" height="930" alt="Khối mái màu cam phát sáng về đêm – nơi bố trí căn duplex tầng 25 Cora Tower" decoding="async"><div class="badge">Dành cho số ít<small>ưu tiên khách đăng ký sớm</small></div></div>
       <div class="reveal">
         <span class="kicker">Chủ nhân</span>
         <h2>Dành cho những người đã đi đủ xa để biết mình muốn gì</h2>
@@ -738,14 +752,18 @@ section.alt .toc{background:var(--bg)}
   <section class="alt" id="bai-viet">
     <div class="wrap article">
       <div class="center reveal"><span class="kicker">Câu chuyện penthouse</span><h2>Penthouse Cora Tower: nơi bầu trời Đà Nẵng trở thành phòng khách</h2></div>
-      <nav class="toc" aria-label="Mục lục"><b>Nội dung bài viết</b><ol><li><a href="#ph-cam-xuc">Sống trên đỉnh Cora Tower</a></li><li><a href="#ph-7m">Trần 7 m: tự viết căn nhà của riêng mình</a></li><li><a href="#ph-view">Tầm nhìn không bị che chắn</a></li><li><a href="#ph-layout">Mặt bằng và cách làm duplex</a></li><li><a href="#ph-gia">Giá penthouse và chính sách</a></li><li><a href="#ph-dau-tu">Giá trị đầu tư của penthouse</a></li><li><a href="#ph-ai">Penthouse dành cho ai?</a></li></ol></nav>
+      <nav class="toc" aria-label="Mục lục"><b>Nội dung bài viết</b><ol><li><a class="btn toc-btn" href="#ph-cam-xuc">Sống trên đỉnh Cora Tower</a></li><li><a class="btn toc-btn" href="#ph-7m">Trần 7 m: tự viết căn nhà của riêng mình</a></li><li><a class="btn toc-btn" href="#ph-view">Tầm nhìn không bị che chắn</a></li><li><a class="btn toc-btn" href="#ph-layout">Mặt bằng và cách làm duplex</a></li><li><a class="btn toc-btn" href="#ph-gia">Giá penthouse và chính sách</a></li><li><a class="btn toc-btn" href="#ph-dau-tu">Giá trị đầu tư của penthouse</a></li><li><a class="btn toc-btn" href="#ph-ai">Penthouse dành cho ai?</a></li></ol></nav>
       <div class="prose">
-<h3 id="ph-cam-xuc">Sống trên đỉnh Cora Tower</h3>
+</div>
+    </div>
+  </section>
+  <section class="alt art-part" id="ph-cam-xuc"><div class="wrap article"><div class="prose"><h3>Sống trên đỉnh Cora Tower</h3>
 <p>Ai từng đứng trên một tầng thật cao lúc chiều tà đều nhớ cảm giác ấy: tiếng ồn của phố xá lùi xa, gió mát hơn, và cả thành phố bỗng nhỏ lại vừa trong một khung nhìn. <strong>Penthouse Cora Tower</strong> giữ lại cảm giác đó – không phải cho một buổi chiều, mà cho mỗi ngày.</p>
 <p>Buổi sáng, nắng từ phía biển tràn qua ô kính cao gấp đôi bình thường, đánh thức cả căn nhà. Chiều xuống, mặt trời lặn sau rặng núi phía Tây, sông Hàn đổi màu bạc rồi tím, vòng quay Sun Wheel lên đèn ở phía xa. Những tối lễ hội, cả gia đình ngồi trên ban công tầng 25 – nơi không có tòa nhà nào chắn tầm mắt. Đó không chỉ là một căn hộ cao nhất, mà là <strong>một góc trời riêng giữa lòng Đà Nẵng</strong>.</p>
 <p>Các căn penthouse nằm trọn trong <strong>khối mái màu cam</strong> – phần kiến trúc dễ nhận ra nhất của hai tòa tháp. Từ vòng xoay 29/3 nhìn lên, đó là “vương miện” của Cora Tower; từ bên trong nhìn ra, đó là khung cửa sổ lớn nhất của cả dự án. Và mỗi tòa tháp chỉ có duy nhất một tầng như thế.</p>
 
-<h3 id="ph-7m">Trần 7 m: tự viết căn nhà của riêng mình</h3>
+</div></div></section>
+  <section class="alt art-part" id="ph-7m"><div class="wrap article"><div class="prose"><h3>Trần 7 m: tự viết căn nhà của riêng mình</h3>
 <p>Penthouse Cora Tower có chiều cao tầng khoảng <strong>7 m</strong> – gấp đôi căn hộ thông thường. Bạn nhận một không gian còn để ngỏ, và toàn quyền kể câu chuyện của riêng mình trong đó: làm phòng khách thông tầng với đèn chùm buông dài, đặt thư viện trên tầng lửng nhìn xuống, hay chia thành <strong>duplex hai tầng</strong> với phòng ngủ riêng tư phía trên. Chủ đầu tư có sẵn <strong>layout duplex gợi ý</strong>:</p>
 <ul>
 <li>Căn 1PN làm lửng thành <strong>2PN+1</strong>.</li>
@@ -754,28 +772,31 @@ section.alt .toc{background:var(--bg)}
 </ul>
 <p>Nhà vệ sinh tầng 2 nên bố trí theo trục kỹ thuật; phương án thi công gửi Ban quản lý duyệt khoảng 1–2 tuần. Điều đáng giá nhất: <strong>giá penthouse tính theo đơn nguyên một căn</strong> – phần tầng lửng anh/chị tự làm không tính thêm tiền.</p>
 
-<h3 id="ph-view">Tầm nhìn không bị che chắn</h3>
+</div></div></section>
+  <section class="alt art-part" id="ph-view"><div class="wrap article"><div class="prose"><h3>Tầm nhìn không bị che chắn</h3>
 <p>Cora Tower đứng giữa khu đô thị thấp tầng nên từ tầng 25, tầm nhìn trải rộng về mọi hướng: <strong>sông Hàn và trung tâm thành phố</strong>, <strong>biển</strong> phía Đông, rặng núi phía Tây và toàn cảnh Sun Neo City xanh mướt. Báo chí giới thiệu bộ sưu tập penthouse của Sun Group tại Nam trung tâm Đà Nẵng (Cora Tower, Spana Tower, S-Light Tower) có ban công như “khán đài” ngắm pháo hoa lễ hội quốc tế Đà Nẵng – trải nghiệm mà hiếm căn nhà nào trong thành phố có được.</p>
 
-<h3 id="ph-layout">Mặt bằng penthouse và cách làm duplex</h3>
+</div></div></section>
+  <section class="alt art-part" id="ph-layout"><div class="wrap article"><div class="prose"><h3>Mặt bằng penthouse và cách làm duplex</h3>
 <p>Tầng 25 mỗi tòa có khoảng <strong>24 căn</strong>, sàn chính từ <strong>51,9 đến 88,6 m²</strong> thông thủy (56,3 – 94,7 m² tim tường), gồm các loại 1PN, 1PN+1, 2PN và 2PN+1. Xem từng mã căn và tầng lửng gợi ý ở mục <a href="#mat-bang-penthouse">mặt bằng penthouse</a>. Thời hạn hoàn thiện là <strong>12 tháng</strong> kể từ ngày bàn giao.</p>
 
-<h3 id="ph-gia">Giá penthouse Cora Tower và chính sách</h3>
+</div></div></section>
+  <section class="alt art-part" id="ph-gia"><div class="wrap article"><div class="prose"><h3>Giá penthouse Cora Tower và chính sách</h3>
 <p>Giá tùy vị trí, diện tích và hướng view. Đặt cọc khi ký hợp đồng thực hiện nguyện vọng 300 triệu; chính sách cơ bản giống căn hộ điển hình: vay tối đa 70%, hỗ trợ lãi suất đến 24 tháng, Sun Early Key thanh toán 70% nhận nhà dự kiến 31/10/2027. Vì số lượng rất ít, giỏ hàng penthouse thường chỉ gửi trực tiếp – <a href="#dang-ky">đăng ký ưu tiên</a> hoặc gọi <a href="tel:0904567009">0904 567 009</a>.</p>
 
-<h3 id="ph-dau-tu">Giá trị đầu tư của penthouse</h3>
+</div></div></section>
+  <section class="alt art-part" id="ph-dau-tu"><div class="wrap article"><div class="prose"><h3>Giá trị đầu tư của penthouse</h3>
 <p>Mỗi tòa tháp chỉ có một tầng mái. Trong khi căn hộ điển hình có hàng trăm căn tương tự, penthouse luôn là <strong>nhóm sản phẩm khan hiếm nhất</strong> – yếu tố giữ giá tốt theo thời gian. Diện tích sử dụng thực tế sau khi làm lửng lớn hơn đáng kể so với giá mua, cộng với tầm nhìn không thể tái tạo, khiến penthouse vừa là nơi ở vừa là tài sản để dành.</p>
 
-<h3 id="ph-ai">Penthouse dành cho ai?</h3>
+</div></div></section>
+  <section class="alt art-part" id="ph-ai"><div class="wrap article"><div class="prose"><h3>Penthouse dành cho ai?</h3>
 <ul>
 <li>Gia đình đa thế hệ cần nhiều phòng nhưng vẫn muốn sống trong căn hộ có tiện ích, an ninh.</li>
 <li>Doanh nhân muốn không gian tiếp khách khác biệt, có dấu ấn riêng.</li>
 <li>Người yêu thiết kế, muốn tự tay tạo nên căn nhà thông tầng của mình.</li>
 <li>Nhà đầu tư tìm tài sản hiếm, giữ giá trị dài hạn.</li>
 </ul>
-<p class="prose-cta">📞 Nhận bảng giá, mặt bằng và giỏ hàng mới nhất: gọi/Zalo <a href="tel:0904567009"><b>0904 567 009</b></a> hoặc <a href="#dang-ky">để lại thông tin</a>.</p></div>
-    </div>
-  </section>
+<p class="prose-cta">📞 Nhận bảng giá, mặt bằng và giỏ hàng mới nhất: gọi/Zalo <a href="tel:0904567009"><b>0904 567 009</b></a> hoặc <a href="#dang-ky">để lại thông tin</a>.</p></div></div></section>
 
   <section class="alt" id="faq">
     <div class="wrap" style="max-width:860px">
@@ -826,8 +847,8 @@ section.alt .toc{background:var(--bg)}
       <a class="contact-row" href="mailto:hiephoangmt@gmail.com"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></i><span><small>Email</small><b>hiephoangmt@gmail.com</b></span></a>
     </div>
     <nav class="foot-links" aria-label="Liên kết Cora Tower">
-      <a href="https://www.cora-tower.com/">Tổng quan</a><a href="https://www.cora-tower.com/#mat-bang">Mặt bằng</a><a href="https://www.cora-tower.com/#gia">Bảng giá</a><a href="https://www.cora-tower.com/khoi-de-shophouse">Shophouse</a>
-      <a href="penthouse.html">Penthouse</a><a href="https://www.cora-tower.com/#phap-ly">Pháp lý</a><a href="https://www.cora-tower.com/">Căn hộ Sun Đà Nẵng</a>
+      <a class="btn foot-btn" href="https://www.cora-tower.com/">Tổng quan</a><a class="btn foot-btn" href="https://www.cora-tower.com/#mat-bang">Mặt bằng</a><a class="btn foot-btn" href="https://www.cora-tower.com/#gia">Bảng giá</a><a class="btn foot-btn" href="https://www.cora-tower.com/khoi-de-shophouse">Shophouse</a>
+      <a class="btn foot-btn" href="penthouse.html">Penthouse</a><a class="btn foot-btn" href="https://www.cora-tower.com/#phap-ly">Pháp lý</a><a class="btn foot-btn" href="https://www.cora-tower.com/">Căn hộ Sun Đà Nẵng</a>
     </nav>
     <div class="legal">Trang thông tin dự án do Giám đốc kinh doanh Hoàng Phạm Đình Hiệp cung cấp, không phải website chính thức của chủ đầu tư. Hình ảnh phối cảnh, mặt bằng mang tính minh họa. Thông tin, giá bán và chính sách có thể thay đổi theo quy định của chủ đầu tư tại từng thời điểm. Cập nhật lần cuối: 07/10/2026.</div>
   </div>
