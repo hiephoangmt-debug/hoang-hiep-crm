@@ -2,58 +2,57 @@
 
 Trang đích: https://www.sun-saphia-residence.com/ads (hoặc https://www.sun-shaphiaresidence.com/ads)
 
-## 1. Google Ads – Quảng cáo tìm kiếm thích ứng
+## 1. Google Ads – Quảng cáo tìm kiếm thích ứng (bản đúng chính sách, cập nhật 23/10/2026)
+
+Trang đích: https://www.sun-saphia-residence.com/ads
 
 ### 15 dòng tiêu đề (tối đa 30 ký tự)
 | # | Tiêu đề | Ký tự | Ghim |
 |---|---|---|---|
 | 1 | Sun Saphia Residence | 20 | Vị trí 1 |
 | 2 | Căn Hộ Mặt Biển Đà Nẵng | 23 | Vị trí 1 |
-| 3 | Nhận Bảng Giá Sun Saphia | 24 | Vị trí 2 |
-| 4 | Studio View Biển Đà Nẵng | 24 | |
-| 5 | Pháp Lý 50 Năm Rõ Ràng | 22 | |
-| 6 | Vietcombank, BIDV Hỗ Trợ Vay | 28 | |
-| 7 | 400m Ra Bãi Tắm Sơn Thủy | 24 | |
-| 8 | Mở Bán Dự Kiến Cuối 11/2026 | 27 | |
-| 9 | Mặt Bằng Studio, 1BR+, 2BR | 26 | |
-| 10 | Trục Biển Võ Nguyên Giáp | 24 | |
-| 11 | Đăng Ký Không Thu Tiền | 22 | |
+| 3 | Đại Lý Chính Thức TATILAND | 26 | Vị trí 2 |
+| 4 | Bảng Giá Gốc Từ Đại Lý | 22 | Vị trí 2 |
+| 5 | Studio View Biển Đà Nẵng | 24 | |
+| 6 | Pháp Lý 50 Năm Rõ Ràng | 22 | |
+| 7 | Vietcombank, BIDV Hỗ Trợ Vay | 28 | |
+| 8 | 400m Ra Bãi Tắm Sơn Thủy | 24 | |
+| 9 | Mở Bán Dự Kiến Cuối 11/2026 | 27 | |
+| 10 | Mặt Bằng Studio, 1BR+, 2BR | 26 | |
+| 11 | Đăng Ký Nhận Thông Tin Sớm | 26 | |
 | 12 | Căn Hộ Trường Sa Đà Nẵng | 24 | |
-| 13 | Đại Lý Phân Phối Chính Thức | 27 | |
-| 14 | Chọn Căn View Biển Sớm | 22 | |
-| 15 | Bảng Giá Gốc Từ Đại Lý F1 | 25 | |
+| 13 | Tính Dòng Tiền Cho Thuê | 23 | |
+| 14 | Chọn Căn Trên Mặt Bằng 3D | 25 | |
+| 15 | Trần Cao 3,5m, View Biển | 24 | |
+
+**Bỏ:** "Đăng Ký Không Thu Tiền", "Không Thu Tiền Giữ Chỗ", "Bảng Giá Gốc Từ Đại Lý F1", "Chọn Căn View Biển Sớm" (dễ hiểu là hứa ưu tiên chọn căn).
 
 ### 4 dòng mô tả (tối đa 90 ký tự)
-1. Căn hộ mặt biển 30 tầng góc Trường Sa – Nguyễn Đức Thuận. Nhận bảng giá qua Zalo. (81)
-2. Studio 30m², 1BR+ 50m², 2BR 60–70m². Trần 3,5m. Đăng ký nhận mặt bằng từng tầng. (80)
-3. Pháp lý 50 năm, Vietcombank, BIDV, NCB hỗ trợ vay. Không thu tiền giữ chỗ. (74)
-4. Ra biển khoảng 400m qua công viên 2,45ha. Gọi video xem thực tế cho khách ở xa. (79)
+1. Căn hộ mặt biển 30 tầng, giao lộ Võ Nguyên Giáp – Trường Sa. Nhận bảng giá gốc qua Zalo. (88)
+2. Đại lý phân phối chính thức TATILAND. Đăng ký nhận thông tin, mặt bằng tầng miễn phí. (85)
+3. Studio 30m², 1BR+ 50m², 2BR 60–70m², trần 3,5m. Pháp lý 50 năm; Vietcombank, BIDV, NCB. (87)
+4. Ra biển 400m qua công viên 2,45ha. Tự tính dòng tiền cho thuê theo từng căn trên web. (85)
 
 ### Đường dẫn hiển thị
 sun-saphia-residence.com / **Bang-Gia** / **Mat-Bang**
 
-### Liên kết trang web (sitelink) – tiêu đề tối đa 25 ký tự
+### Liên kết trang web (sitelink)
 | Tiêu đề | Mô tả 1 | Mô tả 2 | URL |
 |---|---|---|---|
-| Nhận Bảng Giá | Gửi qua Zalo khi công bố | Không thu tiền giữ chỗ | /ads#dang-ky |
-| Mặt Bằng Căn Hộ | Studio, 1BR+, 2BR | Bản vẽ từng loại căn | /ads#mat-bang |
-| Vị Trí Dự Án | Góc Trường Sa – Nguyễn Đức Thuận | Ra biển khoảng 400m | /ads#vi-tri |
-| Tính Dòng Tiền Cho Thuê | Giá thuê theo đêm thực tế | Kéo thử theo căn | /ads#cho-thue |
+| Bảng Giá Sun Saphia | So sánh giá căn mặt biển | Tính trả góp ngân hàng | https://www.sun-saphia-residence.com/bang-gia |
+| Mặt Bằng & Chọn Căn | Layout tầng 3A–28 | Studio, 1BR+, 2BR | https://www.sun-saphia-residence.com/mat-bang |
+| Tính Dòng Tiền Cho Thuê | Giá thuê theo đêm, tháng | Kéo thanh tính theo căn | https://www.sun-saphia-residence.com/tinh-dong-tien |
+| Pháp Lý & Tiến Độ | GCN đầu tư, thời hạn 50 năm | Mở bán dự kiến 11/2026 | https://www.sun-saphia-residence.com/phap-ly |
 
-### Chú thích (callout) – tối đa 25 ký tự
-- Pháp lý 50 năm
-- Trần căn hộ cao 3,5m
-- Vietcombank, BIDV, NCB
-- Không thu tiền giữ chỗ
-- Bể bơi view biển
-- Gọi video xem thực tế
-- Đại lý chính thức TATI
+### Chú thích (callout, tối đa 25 ký tự)
+Đại lý chính thức · Đăng ký miễn phí · Trần căn hộ 3,5m · Vietcombank, BIDV, NCB · Bể bơi view biển · Gọi video xem thực tế · Pháp lý 50 năm
+**Bỏ:** "Không thu tiền giữ chỗ", "Đại lý chính thức TATI".
 
-### Đoạn nội dung có cấu trúc (structured snippet)
+### Đoạn nội dung có cấu trúc
 Kiểu: **Loại** – Studio, 1BR+, 2BR
 
 ### Tiện ích cuộc gọi
-0904 567 009 (gắn số ở đây, không ghi số điện thoại trong tiêu đề vì Google không duyệt).
+0904 567 009. Tạo chuyển đổi "Bấm gọi" rồi gửi nhãn để gắn vào trang (HHC_ADS_CALL_TO).
 
 ## 2. Facebook / Zalo – bài quảng cáo
 
@@ -90,6 +89,7 @@ Mỗi sáng xuống công viên ra biển Sơn Thủy, chiều ngắm hoàng hô
 👉 Đăng ký nhận mặt bằng căn view biển: 0904 567 009 (Zalo)
 
 ## 3. Lưu ý khi chạy
+- Không ghi "không thu tiền giữ chỗ", "ưu tiên chọn căn", "tăng giá" trong quảng cáo; đặt chỗ 50 triệu nộp vào tài khoản công ty TATILAND/chủ đầu tư.
 - Được ghi "Đại lý phân phối chính thức" vì TATILAND có chứng nhận của Sun Property (23/10/2026). Lưu sẵn ảnh chứng nhận để gửi Google nếu quảng cáo bị xem xét. Trên trang đích đã có khối chứng nhận và tên công ty ở chân trang.
 - Không đưa con số lợi nhuận (11,7%, 10,9%) vào tiêu đề/mô tả Google Ads: dễ bị từ chối vì tuyên bố tài chính. Để trên trang đích, kèm ghi chú "không phải cam kết".
 - Chữ "Sun Group" trong nội dung quảng cáo có thể bị hạn chế nếu chủ thương hiệu khiếu nại. Bản trên chỉ dùng "Sun Saphia" ở Google Ads cho an toàn; Facebook có nhắc "Sun Group" kèm "Sun Property Kick-off" đúng sự kiện.
