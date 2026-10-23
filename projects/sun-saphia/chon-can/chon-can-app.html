@@ -89,7 +89,7 @@ body{margin:0;background:var(--bg);font-family:var(--font);color:var(--navy);-we
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script>
 (function(){
-var MODEL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/fafdea8bc8037d2813909cb7e1662a400a4eb146/projects/sun-saphia/4d/sun-saphia-4d.html';
+var MODEL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/75927658a9d87ba428363dc74b55102ff369c268/projects/sun-saphia/4d/sun-saphia-4d.html';
 var COL={'STU':'#E86A78','1PN+1':'#4FB3E0','2PN':'#F2C14E'};
 var NAME={'STU':'Studio','1PN+1':'1PN+1','2PN':'2PN'};
 var INFO={'STU':['30–31 m²','3,8 × 9,0 m','giường đôi kê sát tường, sofa, bếp chạy dọc tường kèm tủ lạnh, WC có vách tắm kính và chỗ đặt máy giặt, ban công + lô gia đặt cục nóng điều hòa'],
@@ -113,6 +113,8 @@ var U=[['11','2PN',0,9.9,0,7.25,'EN',['E','N']],['12','STU',10,13.8,0,9,'E'],['1
  ['24','STU',35.2,39,10.7,19.7,'W'],['23','STU',39,42.8,10.7,19.7,'W'],['22','STU',42.8,46.6,10.7,19.7,'W'],['21','STU',46.6,50.4,10.7,19.7,'W'],
  ['20','STU',47.6,54.4,8.8,19.7,'WS',null,'STUL']];   // căn 20: studio lớn đầu hồi, ôm cuối hành lang, 2 góc bo
 function SK(r){ return r[8]||r[1]; }
+// căn đối xứng (soi gương) theo bản vẽ CĐT: các cặp căn cạnh nhau quay lưng WC vào nhau hoặc bếp + hộp gen + lô gia điều hòa vào nhau
+var MIR={'12A':1,'16':1,'26':1,'24':1,'22':1,'09':1,'07':1,'05':1,'02':1};
 var OUT=[[0,0],[39.9,0],[39.9,-9.9],[54.4,-9.9],[54.4,0],[48.1,0],[48.1,8.8],[54.4,8.8],[54.4,19.7],[17.6,19.7],[17.6,24.85],[19.8,24.85],[19.8,39.7],[0,39.7]],
     ROUND={0:1.8,2:1.8,3:1.8,7:1.5,8:1.5,12:1.8,13:1.8};
 var CORR=[[9.2,9,48.1,10.7],[9.2,7.25,10.4,32.45],[45,-0.3,48.1,10.7]];
@@ -215,7 +217,7 @@ var CCW={N:'W',W:'S',S:'E',E:'N'};
 /* biến đổi toạ độ bản vẽ CĐT → toạ độ "mặt kính chính ở trên" (x',z'); trả ma trận [a,b,c,d,e,f]: x'=a·x+c·y+e, z'=b·x+d·y+f */
 function orient(r){
   var t=r[1], sp=SPEC[SK(r)];
-  if(t!=='2PN') return {m:[-1,0,0,-1,sp.W,sp.D],W2:sp.W,D2:sp.D,face:r[6][0],side:null};
+  if(t!=='2PN'){ var m0=[-1,0,0,-1,sp.W,sp.D]; if(MIR[r[0]]) m0=mmul(m0,[-1,0,0,1,sp.W,0]); return {m:m0,W2:sp.W,D2:sp.D,face:r[6][0],side:null}; }
   var L=r[7][0], T=r[7][1], left=CCW[L]===T;
   return {m:left?[0,1,1,0,0,0]:[0,1,-1,0,sp.D,0],W2:sp.D,D2:sp.W,face:L,side:[left?'l':'r',T]};
 }
