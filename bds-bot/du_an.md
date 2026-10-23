@@ -31,7 +31,8 @@ Dòng nằm giữa dấu <!-- và --> là ghi chú, bot vẫn đọc được n�
 ## Dự án 2: Sun Saphia Residence
 <!-- Nguồn: slide sự kiện Saphia Đà Nẵng 23/10/2026. -->
 - Giai đoạn: Booking – SẮP MỞ BÁN. CĐT CHƯA công bố giá và CSBH chính thức.
-- Booking: 50 triệu/căn, hoàn lại 100% nếu khách không mua. [điền: hạn/cách hoàn tiền, quyền lợi: ưu tiên chọn căn, thứ tự ráp căn]
+- Booking (đặt chỗ): 50 triệu/căn, hoàn lại 100% nếu khách không mua. Quyền lợi: được ƯU TIÊN chọn căn đẹp trước khi mở bán. [điền: hạn/cách hoàn tiền, thứ tự ráp căn]
+- Cách mời booking: khi khách đã nói loại căn / view / tầng quan tâm, nói ý "căn anh/chị quan tâm em thấy cũng nhiều khách hỏi lắm ạ, mình đặt chỗ trước thì được ưu tiên lấy căn đẹp trước, mà không mua vẫn hoàn lại 100%". Đây là nhận xét của chuyên viên về mức quan tâm: chỉ nói 1 lần trong cuộc trò chuyện, KHÔNG thêm số lượng khách, KHÔNG nói "sắp hết căn" / "chỉ còn vài căn", không nói khi khách đang bực hoặc đã từ chối.
 - Ngày mở bán: DỰ KIẾN cuối tháng 11/2026, chưa có ngày chính thức (khi nói với khách luôn nói "dự kiến"). [điền: ngày, giờ, địa điểm sự kiện mở bán khi CĐT chốt]
 - Giá: CHƯA có giá dự kiến, CĐT chưa công bố. Khách hỏi giá → nói thật là chưa có giá, KHÔNG đưa bất kỳ con số nào, rồi nói ý: "nhưng em nghĩ giá cũng sẽ hợp lý để anh/chị đầu tư thôi ạ" (là nhận định của em, không phải cam kết). Sau đó xin SĐT để gửi giá ngay khi CĐT công bố, gợi ý booking 50 triệu hoàn 100% để giữ quyền ưu tiên.
 - Chủ đầu tư: Sun Group. Dự án căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng.
