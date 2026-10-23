@@ -89,7 +89,7 @@ body{margin:0;background:var(--bg);font-family:var(--font);color:var(--navy);-we
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script>
 (function(){
-var MODEL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/f458ade9f655562c54e57f9522b510c1caf039ac/projects/sun-saphia/4d/sun-saphia-4d.html';
+var MODEL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/5de0e9f56f42cd27f4fde20c90f922b2f436d8e6/projects/sun-saphia/4d/sun-saphia-4d.html';
 var COL={'STU':'#E86A78','1PN+1':'#4FB3E0','2PN':'#F2C14E'};
 var NAME={'STU':'Studio','1PN+1':'1PN+1','2PN':'2PN'};
 var INFO={'STU':['30–31 m²','3,8 × 9,0 m','giường đôi kê sát tường, sofa, bếp chạy dọc tường kèm tủ lạnh, WC có vách tắm kính và chỗ đặt máy giặt, ban công + lô gia đặt cục nóng điều hòa'],
@@ -104,19 +104,43 @@ var VIEW={E:['Biển Đông trực diện','Bình minh trên biển, bán đảo
 // u: Bắc→Nam dọc Trường Sa, v: từ mặt biển vào trong (mét) – theo slide "Mặt bằng tầng điển hình" của CĐT
 var U=[['11','2PN',0,9.9,0,7.25,'EN',['E','N']],['12','STU',10,13.8,0,9,'E'],['12A','STU',13.8,17.6,0,9,'E'],['12B','1PN+1',17.6,23.8,0,9,'E'],
  ['15','STU',23.8,27.6,0,9,'E'],['16','STU',27.6,31.4,0,9,'E'],['17','1PN+1',31.4,37.6,0,9,'E'],
- ['18','2PN',39.9,47.15,-6.4,3.5,'EN',['N','E']],['19','2PN',47.15,54.4,-6.4,3.5,'ES',['S','E']],
+ ['18','2PN',39.9,47.15,-9.9,0,'EN',['N','E']],['19','2PN',47.15,54.4,-9.9,0,'ES',['S','E']],
  ['10','1PN+1',0,9,7.25,13.45,'N'],['09','STU',0,9,13.45,17.25,'N'],['08','STU',0,9,17.25,21.05,'N'],['07','STU',0,9,21.05,24.85,'N'],
  ['06','STU',0,9,24.85,28.65,'N'],['05','STU',0,9,28.65,32.45,'N'],
- ['03A','2PN',0,9.9,32.45,39.7,'WN',['W','N']],['03','2PN',10.5,20.4,32.45,39.7,'WS',['W','S']],
- ['01','STU',11.4,20.4,24.15,27.95,'S'],['02','STU',11.4,20.4,27.95,31.75,'S'],
+ ['03A','2PN',0,9.9,32.45,39.7,'WN',['W','N']],['03','2PN',9.9,19.8,32.45,39.7,'WS',['W','S']],
+ ['01','STU',10.8,19.8,24.85,28.65,'S'],['02','STU',10.8,19.8,28.65,32.45,'S'],
  ['28','1PN+1',17.6,23.8,10.7,19.7,'W'],['27','STU',23.8,27.6,10.7,19.7,'W'],['26','STU',27.6,31.4,10.7,19.7,'W'],['25','STU',31.4,35.2,10.7,19.7,'W'],
  ['24','STU',35.2,39,10.7,19.7,'W'],['23','STU',39,42.8,10.7,19.7,'W'],['22','STU',42.8,46.6,10.7,19.7,'W'],['21','STU',46.6,50.4,10.7,19.7,'W'],
  ['20','STU',47.6,54.4,8.8,19.7,'WS',null,'STUL']];   // căn 20: studio lớn đầu hồi, ôm cuối hành lang, 2 góc bo
 function SK(r){ return r[8]||r[1]; }
-var OUT=[[0,0],[39.9,0],[39.9,-6.4],[54.4,-6.4],[54.4,3.5],[47.6,3.5],[47.6,8.8],[54.4,8.8],[54.4,19.7],[20.4,19.7],[20.4,39.7],[0,39.7]], ROUND={0:1.8,2:1.8,3:1.8,7:1.5,8:1.5,10:1.8,11:1.8};
-var CORR=[[9.4,9,47.6,10.7],[9.4,7.25,11.4,32.45],[43.6,3.5,47.6,10.7]],
-    CORE=[[37.6,3.5,43.6,9,'Thang bộ'],[11.4,10.7,17.6,18.8,'Sảnh thang máy'],[11.4,18.8,17.6,22.5,'Thang bộ · KT']];
-var S=13, OX=70, OY=60+7*S;
+var OUT=[[0,0],[39.9,0],[39.9,-9.9],[54.4,-9.9],[54.4,0],[48.1,0],[48.1,8.8],[54.4,8.8],[54.4,19.7],[17.6,19.7],[17.6,24.85],[19.8,24.85],[19.8,39.7],[0,39.7]],
+    ROUND={0:1.8,2:1.8,3:1.8,7:1.5,8:1.5,12:1.8,13:1.8};
+var CORR=[[9.2,9,48.1,10.7],[9.2,7.25,10.4,32.45],[45,-0.3,48.1,10.7]];
+// lõi thang theo slide CĐT: [loại, u0,v0,u1,v1, nhãn]  lift = thang máy, stair = thang bộ, room = kỹ thuật/gen, lobby = sảnh
+var CORES=[
+ ['room',10.4,10.7,17.6,24.6],
+ ['lift',10.6,11.0,12.5,13.2],['lift',12.6,11.0,14.5,13.2],['room',14.6,11.0,16.6,13.2,'KT'],['room',16.7,11.0,17.5,13.2],
+ ['lobby',10.4,13.3,17.6,16.5,'Sảnh thang máy'],
+ ['lift',10.6,16.6,12.8,18.8],['lift',12.9,16.6,15.1,18.8],['lift',15.2,16.6,17.4,18.8],
+ ['lobby',10.4,18.9,14.7,20.2],['room',10.5,20.3,12.4,24.5,'KT'],['room',12.5,20.3,14.7,22.3],['room',12.5,22.4,14.7,24.5],['stair',14.8,18.9,17.6,24.6,'Thang bộ'],
+ ['room',37.6,0,45,9],
+ ['stair',37.7,0.2,40.4,5.2,'Thang bộ'],['room',40.5,0.2,43.1,1.8,'KT'],['room',40.5,1.9,41.9,3.4],['room',42,1.9,43.1,3.3],['room',37.7,5.3,41.6,8.9,'KT'],
+ ['lift',42.2,3.4,44.9,6.15],['lift',42.2,6.25,44.9,9.0]];
+function svgCores(fx,fy,k){
+  var o=[];
+  CORES.forEach(function(c){ var x=fx(c[1]),y=fy(c[2]),w=(c[3]-c[1])*k,h=(c[4]-c[2])*k, lw=Math.max(1,k*.09);
+    if(c[0]==='room') o.push('<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="#d9dee4" stroke="#0A2540" stroke-width="'+lw+'"/>');
+    else if(c[0]==='lobby') o.push('<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="#eef1f4"/>');
+    else if(c[0]==='lift'){ o.push('<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="#fff" stroke="#0A2540" stroke-width="'+lw+'"/>');
+      var m=k*.25; o.push('<path d="M'+(x+m)+' '+(y+m)+' L'+(x+w-m)+' '+(y+h-m)+' M'+(x+w-m)+' '+(y+m)+' L'+(x+m)+' '+(y+h-m)+'" stroke="#6b7785" stroke-width="'+lw*.8+'"/><rect x="'+(x+m)+'" y="'+(y+m)+'" width="'+(w-2*m)+'" height="'+(h-2*m)+'" fill="none" stroke="#6b7785" stroke-width="'+lw*.6+'"/>'); }
+    else if(c[0]==='stair'){ o.push('<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="#fff" stroke="#0A2540" stroke-width="'+lw+'"/>');
+      var vert=h>w, n=Math.round((vert?h:w)/(k*.28)); for(var i=1;i<n;i++){ if(vert){ var yy=y+h*i/n; o.push('<line x1="'+x+'" y1="'+yy+'" x2="'+(x+w)+'" y2="'+yy+'" stroke="#9aa5b1" stroke-width="'+lw*.5+'"/>'); } else { var xx=x+w*i/n; o.push('<line x1="'+xx+'" y1="'+y+'" x2="'+xx+'" y2="'+(y+h)+'" stroke="#9aa5b1" stroke-width="'+lw*.5+'"/>'); } }
+      o.push(vert?'<line x1="'+(x+w/2)+'" y1="'+y+'" x2="'+(x+w/2)+'" y2="'+(y+h)+'" stroke="#0A2540" stroke-width="'+lw+'"/>':'<line x1="'+x+'" y1="'+(y+h/2)+'" x2="'+(x+w)+'" y2="'+(y+h/2)+'" stroke="#0A2540" stroke-width="'+lw+'"/>'); }
+    if(c[5]&&c[5]!=='KT'||c[5]==='KT'&&w>k*1.6){ var fs=c[5]==='KT'?k*.6:Math.min(k*.75,w/6.5); o.push('<text x="'+(x+w/2)+'" y="'+(y+h/2+fs*.35)+'" font-size="'+fs+'" font-weight="700" fill="#41505f" text-anchor="middle"'+(c[0]==='stair'&&h>w*1.4?' transform="rotate(-90 '+(x+w/2)+' '+(y+h/2)+')"':'')+'>'+c[5]+'</text>'); }
+  });
+  return o.join('');
+}
+var S=13, OX=70, OY=60+10.5*S;
 
 /* ---------- layout căn theo bản vẽ CĐT (mét; x trái→phải, y từ cửa vào → mặt kính như slide) ----------
    segs: [x0,y0,x1,y1, loại(x tường bao|w tường|g kính|n cửa sổ|r lan can), [[t0,t1,phía mở]...] ]
@@ -294,8 +318,7 @@ function plan(){
   o.push('<path d="'+bp+'" fill="#e9edf1" stroke="#0A2540" stroke-width="5" stroke-linejoin="round"/>');
   o.push('<g clip-path="url(#bld)">');
   CORR.forEach(function(c){ o.push('<rect x="'+X(c[0])+'" y="'+Y(c[1])+'" width="'+(c[2]-c[0])*S+'" height="'+(c[3]-c[1])*S+'" fill="#f4f6f8"/>'); });
-  CORE.forEach(function(c){ o.push('<rect x="'+X(c[0])+'" y="'+Y(c[1])+'" width="'+(c[2]-c[0])*S+'" height="'+(c[3]-c[1])*S+'" fill="#b9c1ca"/>'); if(c[4]) o.push('<text x="'+X((c[0]+c[2])/2)+'" y="'+(Y((c[1]+c[3])/2)+4)+'" font-size="10" font-weight="700" fill="#41505f" text-anchor="middle">'+c[4]+'</text>'); });
-  [[11.9,11.3],[14.2,11.3],[11.8,16.6],[13.75,16.6],[15.7,16.6]].forEach(function(e){ var x=X(e[0]),y=Y(e[1]),s=1.7*S; o.push('<rect x="'+x+'" y="'+y+'" width="'+s+'" height="'+s+'" fill="none" stroke="#6b7785" stroke-width="1.5"/><path d="M'+x+' '+y+' l'+s+' '+s+' M'+(x+s)+' '+y+' l'+(-s)+' '+s+'" stroke="#6b7785" stroke-width="1"/>'); });
+  o.push(svgCores(X,Y,S));
   U.forEach(function(r,i){
     var id=r[0],t=r[1],x=X(r[2]),y=Y(r[4]),w=(r[3]-r[2])*S,h=(r[5]-r[4])*S, M=mmul([S,0,0,S,OX,OY],unitM(r));
     var fp=SPEC[SK(r)].floor.map(function(p){ var q=mapP(M,p); return q[0].toFixed(1)+' '+q[1].toFixed(1); }).join(' L');
@@ -310,7 +333,7 @@ function plan(){
   o.push('</g>');
   o.push('<path d="'+bp+'" fill="none" stroke="#0A2540" stroke-width="5" stroke-linejoin="round" style="pointer-events:none"/>');
   // la bàn + thước tỷ lệ
-  var cx=X(30), cy=Y(-3.2);
+  var cx=X(28), cy=Y(-5);
   o.push('<g transform="translate('+cx+' '+cy+') rotate(-90)"><circle r="20" fill="#fff" stroke="#0A2540" stroke-width="2"/><path d="M0 -16 L6 2 L0 -3 L-6 2Z" fill="#FF6A2B"/><text y="-22" font-size="11" font-weight="800" text-anchor="middle" fill="#0A2540">B</text></g>');
   o.push('<g transform="translate('+X(30)+' '+(Y(37.5))+')"><rect width="'+10*S+'" height="6" fill="#0A2540"/><rect width="'+5*S+'" height="6" fill="#fff" stroke="#0A2540"/><text x="0" y="-5" font-size="10" font-weight="700" fill="#41505f">0</text><text x="'+10*S+'" y="-5" font-size="10" font-weight="700" fill="#41505f" text-anchor="middle">10 m</text></g>');
   o.push('<g font-size="11" font-weight="700" fill="#0A2540" transform="translate('+X(24)+' '+Y(23)+')">'
