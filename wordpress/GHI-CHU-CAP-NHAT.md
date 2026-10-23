@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.20** + plugin Hoàng Hiệp CRM **2.20.66**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.20** + plugin Hoàng Hiệp CRM **2.20.67**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.67: cập nhật Đà Nẵng Downtown và Sun Galaxy Complex (23/10/2026)
+
+- **Đà Nẵng Downtown** (`/du-an/da-nang-downtown/`): mô tả ngắn mới, điểm nhấn, phân khu (Sun Galaxy Complex thi công cọc móng, nhận giữ chỗ), tiến độ thêm mốc 7/7/2026 (Accor) và 17/10/2026; thêm bài giới thiệu chi tiết có ảnh và liên kết sang www.sun-danangdowntown.com, /sun-galaxy-complex, /thap-69-tang.
+- **Sun Galaxy Complex** (`/du-an/sun-galaxy-complex/`): vận hành Accor – Sofitel, Swissôtel, MGallery; khán đài khoảng 30.000 chỗ (quy hoạch duyệt gần 20.000); Moon Gate có hồ bơi vô cực; 4 tầng hầm, full nội thất 5 sao; tiến độ cọc móng 17/10/2026; bài giới thiệu chi tiết có ảnh, liên kết sang www.sun-galaxy-complex.com.vn.
+- Chỉ thay ô nào vẫn là bản cũ do web nhập; ô anh đã tự sửa trong wp-admin giữ nguyên. Bài chi tiết chỉ điền vì hai bài hiện chưa có nội dung.
+- Sau khi giải nén: **Dự án → Nhập dữ liệu Đà Nẵng → Nhập / cập nhật dữ liệu**, rồi **LiteSpeed Cache → Purge All**.
 
 ## Có gì mới – plugin 2.20.66: tự đăng bài đúng phút hẹn
 - Web hẹn riêng đúng phút đăng của bài kế tiếp (thay vì chờ lượt kiểm tra mỗi giờ); danh sách bài mới được kiểm tra mỗi 15 phút.

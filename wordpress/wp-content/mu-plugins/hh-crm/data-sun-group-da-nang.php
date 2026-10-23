@@ -182,7 +182,37 @@ function hh_dataset_sun_group_da_nang( $projects ) {
 		'type'    => array( 'to-hop', 'can-ho-so-huu-lau-dai' ),
 		'area'    => 'hai-chau',
 		'hot'     => true,
-		'excerpt' => 'Siêu tổ hợp giải trí – thương mại – đô thị 76,92 ha ven sông Hàn của Sun Group trên khu đất Asia Park cũ, tổng vốn khoảng 79.790 tỷ đồng, có tòa tháp 69 tầng cao 408 m – cao nhất miền Trung.',
+		'excerpt' => 'Siêu tổ hợp giải trí – thương mại – đô thị 76,92 ha ven sông Hàn của Sun Group trên khu đất Asia Park cũ, tổng vốn khoảng 79.790 tỷ đồng, có tòa tháp 69 tầng cao 408 m – cao nhất miền Trung. Phân khu đầu tiên Sun Galaxy Complex đang thi công cọc móng và nhận giữ chỗ.',
+		'fix_excerpt' => 'Siêu tổ hợp giải trí – thương mại – đô thị 76,92 ha ven sông Hàn của Sun Group trên khu đất Asia Park cũ, tổng vốn khoảng 79.790 tỷ đồng, có tòa tháp 69 tầng cao 408 m – cao nhất miền Trung.',
+		'fix_meta' => array(
+			'hh_p_highlights' => array( "Tòa tháp biểu tượng 69 tầng, cao 408 m – cao nhất miền Trung\nCông viên văn hóa giải trí, nhà hát, phố thương mại ven sông Hàn\nTháp tích hợp khách sạn 5 sao, văn phòng hạng A, căn hộ cao cấp, trung tâm thương mại" ),
+			'hh_p_zones' => array( "Tháp biểu tượng 69 tầng | Khách sạn 5 sao, văn phòng, căn hộ cao cấp, TTTM | 408 m | Đang thi công\nSun Galaxy Complex | Căn hộ dịch vụ, khách sạn, khán đài pháo hoa, TTTM | Hơn 210.000 m² | Khởi công 25/7/2026" ),
+			'hh_p_progress' => array( "19/8/2025 | Khởi công Đà Nẵng Downtown\n25/7/2026 | Khởi công Sun Galaxy Complex" ),
+		),
+		'content' => <<<'HTML'
+<p><strong>Đà Nẵng Downtown</strong> (Da Nang Downtown) là siêu tổ hợp văn hóa – giải trí – thương mại – đô thị 76,92 ha của Sun Group trên khu đất Công viên Châu Á (Asia Park) cũ, ven bờ Đông sông Hàn giữa cầu Trần Thị Lý và cầu Tiên Sơn. Tổng vốn khoảng 79.790 tỷ đồng, khởi công ngày 19/8/2025.</p>
+<figure><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@claude/great-tesla-ki0len/web/images/da-nang-downtown-phoi-canh-1920.webp" alt="Phối cảnh phố thương mại ven sông Đà Nẵng Downtown với tòa tháp 69 tầng" loading="lazy" width="1600"><figcaption>Phố thương mại ven sông và tòa tháp 69 tầng. Ảnh minh họa.</figcaption></figure>
+<h2>Điểm nhấn của dự án</h2>
+<ul>
+<li><strong>Tòa tháp 69 tầng, cao 408 m</strong>: cao thứ 2 Việt Nam sau Landmark 81, cao nhất miền Trung; gồm khách sạn 5 sao, văn phòng hạng A, căn hộ cao cấp, TTTM và đài quan sát.</li>
+<li><strong>Cụm văn hóa</strong>: nhà hát khoảng 4.000 chỗ, bảo tàng, trung tâm triển lãm.</li>
+<li><strong>Phố thương mại ven sông</strong> và không gian lễ hội phục vụ kinh tế đêm.</li>
+<li><strong>Sun Galaxy Complex</strong>: phân khu đầu tiên với vòng Moon Gate, khán đài pháo hoa khoảng 30.000 chỗ, căn hộ do Accor vận hành.</li>
+</ul>
+<h2>Tiến độ mới nhất (17/10/2026)</h2>
+<figure><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@claude/great-tesla-ki0len/web/images/tien-do-da-nang-downtown-17-10-2026-flycam-1600.webp" alt="Công trường Đà Nẵng Downtown ngày 17/10/2026 bên sông Hàn" loading="lazy" width="1600"><figcaption>Toàn cảnh công trường Đà Nẵng Downtown ngày 17/10/2026.</figcaption></figure>
+<p>Nhiều khối công trình đang lên kết cấu, hạ tầng ven hồ và đường nội khu đang thi công. Sun Galaxy Complex đang thi công cọc móng và nhận giữ chỗ. Ngày 7/7/2026 Sun Group và Accor ký hợp tác đưa Sofitel, Swissôtel, MGallery về khu phức hợp pháo hoa DIFF.</p>
+<h2>Giá bán và chính sách</h2>
+<p>Chủ đầu tư chưa công bố bảng giá chính thức. Mức thị trường đang lưu hành khoảng 60–100 triệu/m² tùy phân khu, chỉ để tham khảo. Các đơn vị phân phối giới thiệu hỗ trợ vay tới 70–80%, ân hạn gốc và hỗ trợ lãi 0% tối đa 30 tháng.</p>
+<h2>Xem chi tiết từng phân khu</h2>
+<ul>
+<li><a href="https://www.sun-danangdowntown.com/">Trang thông tin Đà Nẵng Downtown</a>: vị trí, quy hoạch, pháp lý, công cụ tính khoản vay.</li>
+<li><a href="https://www.sun-danangdowntown.com/sun-galaxy-complex">Sun Galaxy Complex</a> (hoặc <a href="https://www.sun-galaxy-complex.com.vn/">sun-galaxy-complex.com.vn</a>): Moon Gate, khán đài 30.000 chỗ, loại căn, giá tham khảo.</li>
+<li><a href="https://www.sun-danangdowntown.com/thap-69-tang">Tháp 69 tầng</a>: ý tưởng kiến trúc, công năng, so sánh các tòa nhà cao nhất Việt Nam.</li>
+</ul>
+<p><em>Thông tin tổng hợp từ báo chí và tài liệu giới thiệu dự án, cập nhật 23/10/2026; giá và chính sách có thể thay đổi theo chủ đầu tư.</em></p>
+HTML
+		,
 		'meta'    => array(
 			'hh_p_status'     => 'sap-mo-ban',
 			'hh_p_developer'  => 'Tập đoàn Sun Group',
@@ -190,9 +220,9 @@ function hh_dataset_sun_group_da_nang( $projects ) {
 			'hh_p_address'    => 'Số 01 Phan Đăng Lưu (khu Asia Park cũ), phường Hòa Cường (cũ), Hải Châu, Đà Nẵng – ven sông Hàn',
 			'hh_p_scale'      => '76,92 ha – tổng vốn khoảng 79.790 tỷ đồng',
 			'hh_p_start'      => '19/8/2025',
-			'hh_p_highlights' => "Tòa tháp biểu tượng 69 tầng, cao 408 m – cao nhất miền Trung\nCông viên văn hóa giải trí, nhà hát, phố thương mại ven sông Hàn\nTháp tích hợp khách sạn 5 sao, văn phòng hạng A, căn hộ cao cấp, trung tâm thương mại",
-			'hh_p_zones'      => "Tháp biểu tượng 69 tầng | Khách sạn 5 sao, văn phòng, căn hộ cao cấp, TTTM | 408 m | Đang thi công\nSun Galaxy Complex | Căn hộ dịch vụ, khách sạn, khán đài pháo hoa, TTTM | Hơn 210.000 m² | Khởi công 25/7/2026",
-			'hh_p_progress'   => "19/8/2025 | Khởi công Đà Nẵng Downtown\n25/7/2026 | Khởi công Sun Galaxy Complex",
+			'hh_p_highlights' => "Tòa tháp biểu tượng 69 tầng, cao 408 m – cao nhất miền Trung, cao thứ 2 Việt Nam\nPhân khu đầu tiên Sun Galaxy Complex: Moon Gate, khán đài pháo hoa khoảng 30.000 chỗ, Accor vận hành (Sofitel, Swissôtel, MGallery)\nNhà hát khoảng 4.000 chỗ, bảo tàng, phố thương mại ven sông Hàn\nTháp tích hợp khách sạn 5 sao, văn phòng hạng A, căn hộ cao cấp, trung tâm thương mại",
+			'hh_p_zones'      => "Tháp biểu tượng 69 tầng | Khách sạn 5 sao, văn phòng, căn hộ cao cấp, TTTM | 408 m | Đang thi công\nSun Galaxy Complex | Căn hộ dịch vụ Accor, khách sạn, khán đài pháo hoa, TTTM | Hơn 210.000 m² | Thi công cọc móng (17/10/2026), nhận giữ chỗ",
+			'hh_p_progress'   => "19/8/2025 | Khởi công Đà Nẵng Downtown\n7/7/2026 | Sun Group và Accor ký hợp tác: Sofitel, Swissôtel, MGallery tại khu phức hợp pháo hoa DIFF\n25/7/2026 | Khởi công Sun Galaxy Complex\n17/10/2026 | Sun Galaxy Complex thi công cọc móng; nhiều khối công trình Downtown đang lên kết cấu",
 			'hh_p_location_desc' => 'Đà Nẵng Downtown nằm ngay trung tâm thành phố, ven sông Hàn trong đoạn giữa cầu Trần Thị Lý và cầu Tiên Sơn, tại giao lộ Phan Đăng Lưu – Đỗ Pháp Thuận (khu Asia Park cũ).',
 		),
 		'sources' => array( 'https://dantri.com.vn/bat-dong-san/sun-group-khoi-cong-sieu-to-hop-giai-tri-thuong-mai-gan-80000-ty-dong-tai-da-nang-20250819202225532.htm', 'https://cafef.vn/sun-group-khoi-cong-sieu-du-an-80000-ty-dong-tai-da-nang-quyet-xay-toa-thap-cao-thu-2-viet-nam-188250819063225554.chn', 'https://baodautu.vn/batdongsan/da-nang-khoi-cong-sieu-du-an-da-nang-downtown-tong-von-gan-80000-ty-dong-d363815.html' ),
@@ -204,22 +234,52 @@ function hh_dataset_sun_group_da_nang( $projects ) {
 		'area'    => 'ngu-hanh-son',
 		'parent'  => 'da-nang-downtown',
 		'hot'     => true,
-		'excerpt' => 'Tổ hợp lễ hội – giải trí – căn hộ dịch vụ hơn 210.000 m² của Sun Group trên đường Chương Dương, bờ Đông sông Hàn: khán đài pháo hoa DIFF, khách sạn quốc tế, TTTM và căn hộ do Accor quản lý vận hành. Khởi công 25/7/2026.',
+		'excerpt' => 'Tổ hợp lễ hội – giải trí – căn hộ dịch vụ hơn 210.000 m² của Sun Group trên đường Chương Dương, bờ Đông sông Hàn: tháp 47 tầng với vòng Moon Gate, khán đài pháo hoa khoảng 30.000 chỗ, căn hộ do Accor (Sofitel, Swissôtel) vận hành, bàn giao full nội thất 5 sao. Khởi công 25/7/2026, đang thi công cọc móng.',
+		'fix_excerpt' => 'Tổ hợp lễ hội – giải trí – căn hộ dịch vụ hơn 210.000 m² của Sun Group trên đường Chương Dương, bờ Đông sông Hàn: khán đài pháo hoa DIFF, khách sạn quốc tế, TTTM và căn hộ do Accor quản lý vận hành. Khởi công 25/7/2026.',
+		'fix_meta' => array(
+			'hh_p_manager' => array( 'Accor (thương hiệu Sofitel, Swissôtel) – theo đơn vị phân phối' ),
+			'hh_p_units' => array( 'Khán đài gần 20.000 chỗ, TTTM 7 tầng, 114 nhà phố, khoảng 1.400 phòng lưu trú (theo báo chí); đơn vị phân phối nêu khoảng 3.800 căn hộ' ),
+			'hh_p_highlights' => array( "Cổng Mặt Trăng (Moon Gate) đường kính 69 m nhìn thẳng không gian pháo hoa DIFF\nKhán đài lễ hội gần 20.000 chỗ, TTTM ven sông 7 tầng\nCăn hộ dịch vụ do Accor quản lý (theo đơn vị phân phối)" ),
+			'hh_p_amenities_in' => array( "Khán đài pháo hoa DIFF\nTrung tâm thương mại ven sông 7 tầng\nHồ bơi vô cực, sky bar\nNhà hàng, gym, spa\nConcierge 24/7" ),
+			'hh_p_progress' => array( '25/7/2026 | Khởi công Sun Galaxy Complex' ),
+		),
+		'content' => <<<'HTML'
+<p><strong>Sun Galaxy Complex</strong> là phân khu đầu tiên của đại đô thị Đà Nẵng Downtown: tổ hợp lễ hội – sự kiện – lưu trú hơn 210.000 m² trên đường Chương Dương, bờ Đông sông Hàn, gần cầu Trần Thị Lý. Tổng vốn gần 10.750 tỷ đồng, khởi công ngày 25/7/2026.</p>
+<figure><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@claude/great-tesla-ki0len/web/images/sun-galaxy-complex-moon-gate-thap-hoang-hon-1600.webp" alt="Sun Galaxy Complex với vòng Moon Gate và tòa tháp 69 tầng nhìn từ sông Hàn" loading="lazy" width="1600"><figcaption>Sun Galaxy Complex (trái) và tòa tháp 69 tầng (phải) nhìn từ sông Hàn. Ảnh minh họa.</figcaption></figure>
+<h2>Thông số chính</h2>
+<ul>
+<li>Tháp 47 tầng, cao khoảng 183 m, 4 tầng hầm.</li>
+<li>Khoảng 1.400 phòng lưu trú, 114 nhà phố, TTTM ven sông 7 tầng (theo báo chí); đơn vị phân phối nêu khoảng 3.800 căn hộ.</li>
+<li>Căn hộ bàn giao full nội thất tiêu chuẩn 5 sao; Studio khoảng 32,6 m², 1PN 49,1 m², 2PN 72,3 m² (theo đơn vị phân phối).</li>
+<li>Vận hành: Accor với các thương hiệu Sofitel, Swissôtel, MGallery (thỏa thuận ngày 7/7/2026).</li>
+</ul>
+<h2>Moon Gate và hồ bơi vô cực</h2>
+<figure><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@claude/great-tesla-ki0len/web/images/sun-galaxy-complex-ho-boi-vo-cuc-moon-gate-1600.webp" alt="Hồ bơi vô cực trong vòng Moon Gate của Sun Galaxy Complex nhìn ra sông Hàn" loading="lazy" width="1600"><figcaption>Hồ bơi vô cực trong lòng vòng Moon Gate. Ảnh minh họa.</figcaption></figure>
+<p>Vòng Moon Gate đường kính khoảng 69 m khoét xuyên khối tháp, nhìn thẳng ra không gian pháo hoa DIFF; bên trong là hồ bơi vô cực và sân thư giãn trên cao. Ý tưởng thiết kế "Non – Đất – Nước": các lớp Biển, Sông, Sân vườn, Ngũ Hành, Mây trời xếp từ khối đế lên đỉnh tháp.</p>
+<h2>Khán đài pháo hoa khoảng 30.000 chỗ</h2>
+<figure><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@claude/great-tesla-ki0len/web/images/sun-galaxy-complex-khan-dai-30000-cho-1600.webp" alt="Phương án khán đài 30.000 chỗ của Sun Galaxy Complex hướng nhìn pháo hoa DIFF" loading="lazy" width="1600"><figcaption>Phương án khán đài bậc thang hướng nhìn trực diện pháo hoa DIFF. Ảnh minh họa theo tài liệu giới thiệu.</figcaption></figure>
+<p>Khán đài bậc thang cao dần từ tầng 1 đến tầng 4, sân khấu DIFF nổi trên mặt nước, công viên ven sông và đường 6 làn đi ngầm bên dưới khán đài. Quy hoạch được duyệt ghi gần 20.000 chỗ; tài liệu giới thiệu mới nhất ghi khoảng 30.000 chỗ.</p>
+<h2>Tiến độ và giá</h2>
+<p>Ngày 17/10/2026 công trường đang thi công cọc móng với hàng chục máy khoan cọc nhồi. Dự án đang nhận giữ chỗ (khoảng 50 triệu/căn), chưa công bố bảng giá chính thức; các mức giá lưu hành từ 60 đến khoảng 148 triệu/m² chỉ để tham khảo.</p>
+<p>Xem đầy đủ thông số, mặt bằng, công cụ tính vay và đăng ký nhận bảng giá tại <a href="https://www.sun-galaxy-complex.com.vn/">sun-galaxy-complex.com.vn</a> hoặc <a href="https://www.sun-danangdowntown.com/sun-galaxy-complex">trang Sun Galaxy Complex trên Đà Nẵng Downtown</a>.</p>
+<p><em>Thông tin tổng hợp từ báo chí và tài liệu giới thiệu dự án, cập nhật 23/10/2026; giá và chính sách có thể thay đổi theo chủ đầu tư.</em></p>
+HTML
+		,
 		'meta'    => array(
 			'hh_p_status'     => 'sap-mo-ban',
 			'hh_p_developer'  => 'Tập đoàn Sun Group',
-			'hh_p_manager'    => 'Accor (thương hiệu Sofitel, Swissôtel) – theo đơn vị phân phối',
+			'hh_p_manager'    => "Accor – thương hiệu Sofitel, Swissôtel, MGallery (thỏa thuận Sun Group – Accor ngày 7/7/2026)",
 			'hh_p_type'       => 'Căn hộ dịch vụ, khách sạn quốc tế, nhà phố, trung tâm thương mại, khán đài pháo hoa',
 			'hh_p_address'    => 'Đường Chương Dương, khu Mỹ An, bờ Đông sông Hàn, Ngũ Hành Sơn, Đà Nẵng – gần cầu Trần Thị Lý',
 			'hh_p_scale'      => 'Hơn 210.000 m² – tổng vốn khoảng 10.750 tỷ đồng',
-			'hh_p_units'      => 'Khán đài gần 20.000 chỗ, TTTM 7 tầng, 114 nhà phố, khoảng 1.400 phòng lưu trú (theo báo chí); đơn vị phân phối nêu khoảng 3.800 căn hộ',
+			'hh_p_units'      => "Khán đài khoảng 30.000 chỗ (tài liệu giới thiệu; quy hoạch duyệt gần 20.000 chỗ), TTTM 7 tầng, 114 nhà phố, khoảng 1.400 phòng lưu trú (theo báo chí); đơn vị phân phối nêu khoảng 3.800 căn hộ",
 			'hh_p_unit_area'  => 'Studio 32,6 m² · 1PN 49,1 m² · 2PN 72,3 m²',
 			'hh_p_start'      => '25/7/2026',
 			'hh_p_handover'   => 'Khoảng 36 tháng kể từ ngày nhận bàn giao mặt bằng (dự kiến)',
-			'hh_p_highlights' => "Cổng Mặt Trăng (Moon Gate) đường kính 69 m nhìn thẳng không gian pháo hoa DIFF\nKhán đài lễ hội gần 20.000 chỗ, TTTM ven sông 7 tầng\nCăn hộ dịch vụ do Accor quản lý (theo đơn vị phân phối)",
+			'hh_p_highlights' => "Cổng Mặt Trăng (Moon Gate) đường kính 69 m nhìn thẳng không gian pháo hoa DIFF, bên trong là hồ bơi vô cực\nKhán đài lễ hội khoảng 30.000 chỗ, sân khấu DIFF nổi trên mặt nước, đường 6 làn đi ngầm dưới khán đài\nTháp 47 tầng, 4 tầng hầm, bàn giao full nội thất tiêu chuẩn 5 sao\nAccor vận hành: Sofitel, Swissôtel, MGallery",
 			'hh_p_unit_types' => "Studio | 32,6 m² | – | Liên hệ\nCăn 1PN | 49,1 m² | 1 | Liên hệ\nCăn 2PN | 72,3 m² | 2 | Liên hệ\nCăn 3 – 4PN | – | 3 | Liên hệ",
-			'hh_p_amenities_in' => "Khán đài pháo hoa DIFF\nTrung tâm thương mại ven sông 7 tầng\nHồ bơi vô cực, sky bar\nNhà hàng, gym, spa\nConcierge 24/7",
-			'hh_p_progress'   => '25/7/2026 | Khởi công Sun Galaxy Complex',
+			'hh_p_amenities_in' => "Khán đài pháo hoa DIFF khoảng 30.000 chỗ\nHồ bơi vô cực trong vòng Moon Gate, hồ bơi tràn bờ trên cao\nTrung tâm thương mại ven sông, nhà hàng, sky lounge\nGym, spa, ballroom\nConcierge 24/7 theo tiêu chuẩn Accor",
+			'hh_p_progress'   => "7/7/2026 | Accor ký vận hành Sofitel, Swissôtel, MGallery tại khu phức hợp pháo hoa DIFF\n25/7/2026 | Khởi công Sun Galaxy Complex\n17/10/2026 | Công trường thi công cọc móng, hàng chục máy khoan cọc nhồi ven sông Hàn",
 		),
 		'sources' => array( 'https://vneconomy.vn/buoc-dot-pha-trong-phat-trien-cong-nghiep-van-hoa-da-nang.htm', 'https://cafeland.vn/du-an/sun-galaxy-complex-to-hop-can-ho-tai-da-nang-5758.html' ),
 	);
