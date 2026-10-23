@@ -128,10 +128,19 @@ def banks():
         import base64, io
         from PIL import Image
         out = ''
-        for f, alt in (('nh-1', 'Vietcombank'), ('nh-2', 'BIDV'), ('nh-3', 'NCB')):
+        # Chuẩn hóa: chữ chính của 3 logo cao bằng nhau và cùng nằm trên một đường giữa
+        spec = (('nh-1', 'Vietcombank', 74, 116), ('nh-2', 'BIDV', 23, 116), ('nh-3', 'NCB', 12, 65))
+        # Cân giữa kích thước chữ và kích thước cả logo (trung bình nhân), đặt cùng một đường giữa
+        CW, CH, S0 = 330, 120, 56.0
+        for f, alt, y0, y1 in spec:
             im = Image.open(SK_DIR + f + '.webp').convert('RGBA')
-            buf = io.BytesIO(); im.save(buf, 'PNG', optimize=True)
-            out += '<img src="data:image/png;base64,%s" alt="%s" width="%d" height="%d">' % (base64.b64encode(buf.getvalue()).decode(), alt, im.width, im.height)
+            k = S0 / (im.height * (y1 - y0 + 1)) ** 0.5
+            im = im.resize((round(im.width * k), round(im.height * k)), Image.LANCZOS)
+            cy = ((y0 + y1) / 2 * k + im.height / 2) / 2
+            cv = Image.new('RGBA', (CW, CH), (255, 255, 255, 0))
+            cv.alpha_composite(im, ((CW - im.width) // 2, round(CH / 2 - cy)))
+            buf = io.BytesIO(); cv.save(buf, 'PNG', optimize=True)
+            out += '<img src="data:image/png;base64,%s" alt="%s" width="%d" height="%d">' % (base64.b64encode(buf.getvalue()).decode(), alt, CW, CH)
         _BANKS = '<div class="banks"><span>NGÂN HÀNG HỖ TRỢ</span><div class="bl">' + out + '</div></div>'
     return _BANKS
 

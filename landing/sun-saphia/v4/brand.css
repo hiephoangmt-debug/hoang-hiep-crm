@@ -301,3 +301,7 @@ body.lp-on{overflow:hidden}
 .banks{background:var(--nvd)!important}
 .banks .bl img{height:32px!important;padding:10px 0!important}
 @media(max-width:520px){.banks .bl img{height:24px!important}}
+.banks .bl img{height:58px!important;width:100%!important;max-width:170px!important;padding:6px 0!important;object-fit:contain}
+@media(max-width:520px){.banks .bl img{height:44px!important}}
+.banks .bl img{height:50px!important;max-width:150px!important;padding:4px 0!important}
+@media(max-width:520px){.banks .bl img{height:40px!important}}
