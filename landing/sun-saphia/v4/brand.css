@@ -356,3 +356,35 @@ body.lp-on{overflow:hidden}
 .cta2 .btn.call{background:linear-gradient(135deg,var(--or2),var(--or));box-shadow:0 10px 22px -12px rgba(233,97,24,.9)}
 @media(max-width:420px){.cta2 .btn{font-size:14.5px;padding:12px 10px}}
 @media(max-width:520px){.cta2 .hm{display:none}}
+
+/* Bảng trên điện thoại: mỗi dòng thành một thẻ, không phải vuốt ngang */
+@media(max-width:620px){
+.tw{overflow:visible;box-shadow:none;border-radius:0}
+table.tbl.st{min-width:0;background:transparent}
+.tbl.st thead{display:none}
+.tbl.st,.tbl.st tbody,.tbl.st tr,.tbl.st td{display:block;width:100%}
+.tbl.st tr{background:#fff;border-radius:14px;box-shadow:var(--sh);border:1px solid var(--ln);margin-bottom:10px;padding:6px 14px;overflow:hidden}
+.tbl.st tr:nth-child(even) td{background:transparent}
+.tbl.st td{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px dashed var(--ln);text-align:right;font-size:14.5px}
+.tbl.st td:last-child{border-bottom:0}
+.tbl.st td::before{content:attr(data-l);flex:0 0 42%;text-align:left;font-weight:600;color:var(--mut);font-size:13px}
+.tbl.st td:first-child{display:block;text-align:left;font-size:16px;color:var(--nvd);font-weight:800;background:var(--pp)!important;margin:-6px -14px 4px;padding:10px 14px;border-bottom:2px solid var(--or)}
+.tbl.st td:first-child::before{display:none}
+.tc .tbl.st tr{box-shadow:none}
+}
+
+/* Thanh liên hệ dưới đáy trên điện thoại: thay cụm nút nổi, không che nội dung */
+.mbar{display:none}
+@media(max-width:760px){
+.hhfab,.pill,.hhc-l{display:none!important}
+body{padding-bottom:calc(68px + env(safe-area-inset-bottom))}
+.mbar{display:grid;grid-template-columns:1fr 1fr 1fr 2.1fr;gap:6px;position:fixed;left:0;right:0;bottom:0;z-index:9500;background:#fff;border-top:1px solid var(--ln);box-shadow:0 -8px 24px -12px rgba(11,36,71,.35);padding:7px 8px calc(7px + env(safe-area-inset-bottom))}
+.mbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;color:var(--nvd);font-size:11.5px;font-weight:700;border-radius:12px;min-height:50px}
+.mbar a span{font-size:11.5px}
+.mbar .mz b{font-size:15px;color:#0068FF;line-height:1.1}
+.mbar a:nth-child(3){color:var(--or)}
+.mbar .mc{background:linear-gradient(135deg,var(--or2),var(--or));color:#fff;font-size:15px;font-weight:800;position:relative;overflow:hidden}
+.mbar .mc::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:45%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.7),rgba(255,255,255,0));transform:skewX(-20deg);animation:shine 3s ease-in-out infinite}
+.hhc-n{bottom:84px!important;right:12px!important}
+body.tool-on .mbar{opacity:0;pointer-events:none}
+}

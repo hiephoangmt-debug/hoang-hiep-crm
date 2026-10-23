@@ -1,11 +1,15 @@
 # Khối nội dung dùng lại giữa các trang (số liệu theo tài liệu Kick-off 23/10/2026 của chủ đầu tư)
 from parts import *
+import re
 
 def tbl(head, rows, cls=''):
+    """Bảng; trên điện thoại tự chuyển thành thẻ xếp dọc (nhãn cột lấy từ data-l)."""
     h = ''.join('<th>%s</th>' % x for x in head) if head else ''
-    return '<div class="tw"><table class="tbl %s">%s<tbody>%s</tbody></table></div>' % (
-        cls, ('<thead><tr>%s</tr></thead>' % h) if h else '',
-        ''.join('<tr>%s</tr>' % ''.join('<td>%s</td>' % c for c in r) for r in rows))
+    def cell(i, c):
+        return ('<td data-l="%s">%s</td>' % (esc(re.sub('<[^>]+>', '', head[i])), c)) if head and i < len(head) else '<td>%s</td>' % c
+    return '<div class="tw"><table class="tbl %s%s">%s<tbody>%s</tbody></table></div>' % (
+        cls, ' st' if head else '', ('<thead><tr>%s</tr></thead>' % h) if h else '',
+        ''.join('<tr>%s</tr>' % ''.join(cell(i, c) for i, c in enumerate(r)) for r in rows))
 
 OVERVIEW = [
     ('Tên dự án', 'Sun Saphia Residence'),
