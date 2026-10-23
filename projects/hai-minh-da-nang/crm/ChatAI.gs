@@ -132,7 +132,7 @@ function jsonp_(p) {
     else if (p.action === 'chat') out = chatAI_(p, site);
     else if (p.action === 'track') out = handleTrack_(p, site);
     else if (p.action === 'lead') out = handleLead_(normLeadBody_(p), site);
-    else if (p.action === 'access') out = checkAccess_(p);   // QuyenXem.gs – mã xem link riêng
+    else if (/^access/.test(String(p.action))) out = accessRoute_(p);   // QuyenXem.gs – quyền xem link riêng (email + mã 6 số)
     else out = { ok: true, service: 'CRM Hoàng Hiệp' };
   } catch (err) { out = { error: String(err && err.message || err) }; }
   return ContentService.createTextOutput(cb + '(' + JSON.stringify(out) + ');').setMimeType(ContentService.MimeType.JAVASCRIPT);
