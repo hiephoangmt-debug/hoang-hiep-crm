@@ -46,4 +46,6 @@ js = r'''/* Sun Saphia – Chọn căn theo view (mặt bằng tầng theo tỷ 
 })();
 '''.replace('__DOC__', json.dumps(doc, ensure_ascii=False).replace('</', '<\\/'))
 (here / 'chon-can-embed.js').write_text(js, encoding='utf-8')
+# bản mở riêng (gửi khách / gắn CRM)
+(here / 'chon-can-app.html').write_text(doc.replace('<base target="_blank">',''), encoding='utf-8')
 print(len(js))
