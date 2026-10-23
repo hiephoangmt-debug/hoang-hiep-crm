@@ -195,13 +195,22 @@ function hh_handle_lead() {
 		exit;
 	};
 
-	if ( ! isset( $_POST['hh_lead_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['hh_lead_nonce'] ), 'hh_lead' ) ) {
+	$nonce_ok = isset( $_POST['hh_lead_nonce'] ) && wp_verify_nonce( sanitize_key( $_POST['hh_lead_nonce'] ), 'hh_lead' );
+	// Khách vãng lai: trang có thể lấy từ bộ nhớ đệm LiteSpeed (mã nonce đã hết hạn) – không chặn, chống spam bằng
+	// ô bẫy, kiểm tra số điện thoại và giới hạn số lần gửi theo IP. Người đã đăng nhập vẫn bắt buộc nonce hợp lệ.
+	if ( ! $nonce_ok && is_user_logged_in() ) {
 		$go( 'loi' );
 	}
 	// Honeypot: bots fill every field; pretend success.
 	if ( ! empty( $_POST['website'] ) ) {
 		$go( 'ok' );
 	}
+	$ip_key = 'hh_lead_ip_' . md5( sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ?? '' ) ) );
+	$sent   = (int) get_transient( $ip_key );
+	if ( ! $nonce_ok && $sent >= 6 ) {
+		$go( 'loi' ); // Quá 6 lần/giờ từ cùng một địa chỉ.
+	}
+	set_transient( $ip_key, $sent + 1, HOUR_IN_SECONDS );
 
 	$name    = sanitize_text_field( wp_unslash( $_POST['name'] ?? '' ) );
 	$phone   = sanitize_text_field( wp_unslash( $_POST['phone'] ?? '' ) );
