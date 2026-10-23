@@ -149,6 +149,7 @@ def head(title, desc, canon, og_img, kw, ld_graph, favicon, robots='index,follow
             '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
             '<meta name="ladipage-rules" content="v2">\n'
             '<meta name="google-site-verification" content="OO3WrCdUIBf26Hv1d8ODrA2q6TyoM8KtpgaN1u0tab4">\n'
+            '<meta name="msvalidate.01" content="FD5EECF46EC3DFAD732075C3073BE779">\n'
             '<title>%s</title>\n<meta name="description" content="%s">\n<meta name="keywords" content="%s">\n'
             '<meta name="robots" content="%s">\n<link rel="canonical" href="%s">\n'
             '<meta property="og:type" content="website">\n<meta property="og:url" content="%s">\n'
