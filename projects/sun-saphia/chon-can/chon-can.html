@@ -92,6 +92,7 @@ body{margin:0;background:var(--bg);font-family:var(--font);color:var(--navy);-we
 var MODEL='__MODEL__';
 var COL={'STU':'#E86A78','1PN+1':'#4FB3E0','2PN':'#F2C14E'};
 var NAME={'STU':'Studio','1PN+1':'1PN+1','2PN':'2PN'};
+var TINT={'STU':'#f7c1c6','1PN+1':'#b5def2','2PN':'#f9e19c'}, LIGHT={'STU':'#fdebed','1PN+1':'#e6f4fb','2PN':'#fdf3d4'};   // màu sàn theo loại căn (như chú thích CĐT)
 var INFO={'STU':['30–31 m²','3,8 × 9,0 m','giường đôi kê sát tường, sofa, bếp chạy dọc tường kèm tủ lạnh, WC có vách tắm kính và chỗ đặt máy giặt, ban công + lô gia đặt cục nóng điều hòa'],
           'STUL':['~40 m² thông thủy (~46 m² tim tường)','4,0 × 9 m + sảnh vào 2,8 m','studio lớn ở đầu hồi, 2 mặt thoáng (Tây + Nam) với 2 góc bo, giường đôi, sofa, bàn ăn, bếp + tủ lạnh, WC vách kính, ban công'],
           '1PN+1':['50–51 m²','6,2 × 9,0 m','phòng ngủ có cửa sổ, góc +1 (giường ban ngày, bàn làm việc), WC vách kính, bếp + bàn ăn 4 chỗ, phòng khách mở ra ban công'],
@@ -325,7 +326,7 @@ function plan(){
     var id=r[0],t=r[1],x=X(r[2]),y=Y(r[4]),w=(r[3]-r[2])*S,h=(r[5]-r[4])*S, M=mmul([S,0,0,S,OX,OY],unitM(r));
     var fp=SPEC[SK(r)].floor.map(function(p){ var q=mapP(M,p); return q[0].toFixed(1)+' '+q[1].toFixed(1); }).join(' L');
     var g='<g class="u" data-i="'+i+'"><path class="b" d="M'+fp+'Z" fill="'+COL[t]+'" stroke="#fff" stroke-width="2"/>';
-    g+='<g transform="'+mstr(M)+'" opacity=".9" style="pointer-events:none">'+svgSpec(SK(r),.4).replace('fill="#f3e6d4"','fill="'+COL[t]+'" fill-opacity=".55"')+'</g>';
+    g+='<g transform="'+mstr(M)+'" opacity=".9" style="pointer-events:none">'+svgSpec(SK(r),.4).replace('fill="#f3e6d4"','fill="'+TINT[t]+'"')+'</g>';
     var cx=x+w/2, cy=y+h/2, LC=SPEC[SK(r)].lc; if(LC){ var lp=mapP(M,LC); cx=lp[0]; cy=lp[1]; }
     g+='<rect x="'+(cx-17)+'" y="'+(cy-12)+'" width="34" height="24" rx="5" fill="#fff" fill-opacity=".88" stroke="'+COL[t]+'" stroke-width="1.5"/>';
     g+='<text x="'+cx+'" y="'+(cy-1)+'" font-size="11" font-weight="800" fill="#0A2540" text-anchor="middle">'+id+'</text>';
@@ -385,7 +386,8 @@ function unitPlan(r,cd){
   txt(L+W*k/2,14,'↑ '+VIEW[O.face][0],11,'#12355c',800);
   if(O.side){ var sx=O.side[0]==='l'?14:VW-12; o.push('<rect x="'+(O.side[0]==='l'?0:VW-26)+'" y="'+(T-8)+'" width="26" height="'+(D*k+8)+'" fill="'+(O.side[1]==='E'?'#cfe8f5':'#e8eef3')+'"/>');
     txt(sx,T+D*k/2,'↑ '+VIEW[O.side[1]][0],10,'#12355c',800,'middle',O.side[0]==='l'?-90:90); }
-  o.push('<g transform="'+mstr(M)+'">'+svgSpec(t,1)+'</g>');
+  o.push('<g transform="'+mstr(M)+'">'+svgSpec(t,1).replace('fill="#f3e6d4"','fill="'+LIGHT[r[1]]+'"')+'</g>');
+  o.push('<rect x="'+(VW-96)+'" y="'+(VH-22)+'" width="12" height="12" rx="2" fill="'+COL[r[1]]+'"/><text x="'+(VW-80)+'" y="'+(VH-12)+'" font-size="10" font-weight="800" fill="#0A2540">'+NAME[r[1]]+'</text>');
   sp.labels.forEach(function(l){ var p=mapP(M,[l[1],l[2]]); txt(p[0],p[1],l[0],10,'#0A2540',800); });
   // kích thước
   var dc='#E8460F', yy=T-20, xx=L-22;
