@@ -410,6 +410,13 @@ var deckY=WH+.02;
 slab(A,rrect(PW-1.4,PD-1.4,7.4),deckY-.05,.1,lawn).position.set(PCX,deckY-.05,PCZ);
 var rp=[]; for(var z=PZ0+3;z<=PZ1-3;z+=5){ rp.push([PX1-2.2,z]); if(z<CZ-1) rp.push([PX0+1.8,z]); } for(var x=PX0+5;x<=PX1-5;x+=5){ rp.push([x,PZ0+1.8]); rp.push([x,PZ1-2]); }
 rp.forEach(function(q,i){ boxP(A,2,.9,2,q[0],deckY,q[1],white); if(i%2===0){ var tr=new THREE.Mesh(trunkGeo,trunkMat); tr.position.set(q[0],deckY+.9,q[1]); tr.scale.set(.8,6,.8); tr.castShadow=true; A.add(tr); var cw=new THREE.Mesh(crownGeo,leafMat); cw.position.set(q[0],deckY+6.9,q[1]); cw.scale.set(.7,.7,.7); cw.rotation.y=i; cw.castShadow=true; A.add(cw); } else shrubsLocal(A,q[0],deckY+.6,q[1]); });
+// hồ bơi phía trước (theo phối cảnh): trên mái đế, dọc mặt tháp hướng biển
+(function(){ var px0=X1+1.4, px1=X1+6.2, pz0=Z0+3, pz1=Z0+33;
+  boxP(A,px1-px0+1.2,.55,pz1-pz0+1.2,(px0+px1)/2,deckY,(pz0+pz1)/2,white);
+  var pw=new THREE.Mesh(new THREE.PlaneGeometry(px1-px0,pz1-pz0),M(0x38c6d9,{roughness:.06,metalness:.1,envMapIntensity:1.2,emissive:0x0b5866,emissiveIntensity:.3}));
+  pw.rotation.x=-Math.PI/2; pw.position.set((px0+px1)/2,deckY+.58,(pz0+pz1)/2); A.add(pw);
+  for(var z=pz0+2;z<pz1;z+=4.5){ boxP(A,1.6,.35,.7,px0-.9,deckY+.55,z,M(0xf2efe8)); }   // ghế tắm nắng
+})();
 // khối thấp mái cỏ góc Tây Nam (3 tầng), sát mặt Tây khối Nam
 var ax0=X1-44, ax1=X1-27, az0=Z0+31, az1=Z0+51, AXc=(ax0+ax1)/2, AZc=(az0+az1)/2, AWd=ax1-ax0, ADd=az1-az0, AH=FL[5]-deckY;
 boxP(A,AWd,AH,ADd,AXc,deckY,AZc,warm);
