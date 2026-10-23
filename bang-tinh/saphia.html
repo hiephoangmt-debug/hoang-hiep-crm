@@ -132,6 +132,24 @@ td:last-child, th:last-child { text-align: right; }
     <p class="yield" id="yield">Nhập giá mua để xem lợi nhuận mỗi năm bằng bao nhiêu % số tiền bỏ ra.</p>
   </section>
 
+  <section class="card" aria-label="Phương án vay ngân hàng" id="loanCard">
+    <h2>4. Nếu dùng vốn vay ngân hàng</h2>
+    <p class="sub" style="margin-top:0">Cách nhiều nhà đầu tư hay làm: tự bỏ khoảng 25%, phần còn lại vay. Ngân hàng hỗ trợ dự án: Vietcombank, BIDV, NCB. Mức hỗ trợ lãi suất, ân hạn nợ gốc theo chính sách bán hàng khi CĐT công bố.</p>
+    <div class="field">
+      <label for="own"><span>Vốn tự có</span><b id="ownOut"></b></label>
+      <input type="range" id="own" min="20" max="100" step="5" value="25">
+    </div>
+    <div class="field">
+      <label for="rate"><span>Lãi suất vay sau thời gian ưu đãi (giả định)</span><b id="rateOut"></b></label>
+      <input type="range" id="rate" min="5" max="14" step="0.5" value="9">
+    </div>
+    <div class="field">
+      <label for="term"><span>Thời hạn vay</span><b id="termOut"></b></label>
+      <input type="range" id="term" min="5" max="30" step="1" value="20">
+    </div>
+    <div id="loanResult" class="yield">Nhập giá mua ở mục 3 để tính phương án vay.</div>
+  </section>
+
   <section class="card" aria-label="Giá thuê khu vực">
     <h2>Giá thuê khu vực để đối chiếu</h2>
     <table>
@@ -171,7 +189,7 @@ td:last-child, th:last-child { text-align: right; }
   </div>
 
   <div class="note">
-    <p><b>Lưu ý:</b> Đây là bảng tính tham khảo theo giả định, không phải cam kết lợi nhuận. Kết quả thực tế phụ thuộc vào giá mua, mùa du lịch, cách vận hành và chi phí thực tế.</p>
+    <p><b>Lưu ý:</b> Đây là bảng tính tham khảo theo giả định, không phải cam kết lợi nhuận. Kết quả thực tế phụ thuộc vào giá mua, mùa du lịch, cách vận hành và chi phí thực tế. Lãi suất vay là giả định, thực tế theo ngân hàng và có thể thả nổi sau thời gian ưu đãi.</p>
     <p>Sun Saphia Residence chưa công bố giá bán chính thức. Giá thuê đối chiếu lấy từ tài liệu sự kiện dự án tháng 10/2026.</p>
   </div>
 </main>
@@ -258,6 +276,36 @@ td:last-child, th:last-child { text-align: right; }
     } else {
       $("yield").textContent = "Nhập giá mua để xem lợi nhuận mỗi năm bằng bao nhiêu % số tiền bỏ ra.";
     }
+    calcLoan(buy, profit);
+  }
+
+  function calcLoan(buy, profit) {
+    var own = parseFloat($("own").value), rate = parseFloat($("rate").value), term = parseFloat($("term").value);
+    $("ownOut").textContent = own + "% giá căn";
+    $("rateOut").textContent = fmtNum(rate, 1) + "%/năm";
+    $("termOut").textContent = term + " năm";
+    if (!(buy > 0)) { $("loanResult").textContent = "Nhập giá mua ở mục 3 để tính phương án vay."; return; }
+    var price = buy * 1000, ownV = price * own / 100, loan = price - ownV;
+    if (loan <= 0) {
+      $("loanResult").innerHTML = "Mua bằng 100% vốn tự có: tiền thuê về túi khoảng <b>" + fmtMoney(profit / 12) + "/tháng</b>.";
+      return;
+    }
+    var principalM = loan / term / 12, interestM = loan * rate / 100 / 12, payM = principalM + interestM;
+    var rentM = profit / 12, net = rentM - payM, cover = rentM / payM * 100;
+    var roe = (profit - loan * rate / 100) / ownV * 100;
+    $("loanResult").innerHTML =
+      '<ul class="rows" style="margin-top:0">' +
+      "<li><span>Tiền tự bỏ ra</span><span>" + fmtMoney(ownV) + "</span></li>" +
+      "<li><span>Số tiền vay</span><span>" + fmtMoney(loan) + "</span></li>" +
+      "<li><span>Góp ngân hàng tháng đầu (gốc đều + lãi)</span><span>" + fmtMoney(payM) + "</span></li>" +
+      "<li><span>Tiền thuê về túi mỗi tháng</span><span>" + fmtMoney(rentM) + "</span></li>" +
+      '<li class="total"><span>' + (net >= 0 ? "Còn dư mỗi tháng" : "Cần bù thêm mỗi tháng") + "</span><span" +
+        (net < 0 ? ' style="color:var(--orange)"' : "") + ">" + fmtMoney(Math.abs(net)) + "</span></li>" +
+      "</ul>" +
+      "<p style=\"margin:10px 0 0\">Tiền thuê gánh được khoảng <b>" + fmtNum(cover, 0) + "%</b> tiền góp tháng đầu. " +
+      "Lời trên vốn tự bỏ ra (sau lãi vay năm đầu) khoảng <b>" + fmtNum(roe, 1) + "%/năm</b>. " +
+      "Tiền góp giảm dần mỗi năm vì dư nợ giảm.</p>" +
+      '<p class="sub">Trước bàn giao (dự kiến 11/2028), nếu chính sách có hỗ trợ lãi suất và ân hạn gốc thì giai đoạn này gần như chưa phải góp.</p>';
   }
 
   $("types").addEventListener("click", function (e) {
@@ -268,7 +316,7 @@ td:last-child, th:last-child { text-align: right; }
     var b = e.target.closest("button"); if (!b) return;
     state.mode = b.dataset.mode; applyPreset();
   });
-  ["rent", "occ", "cost", "buy"].forEach(function (id) { $(id).addEventListener("input", calc); });
+  ["rent", "occ", "cost", "buy", "own", "rate", "term"].forEach(function (id) { $(id).addEventListener("input", calc); });
 
   $("zaloBtn").href = ZALO_LINK;
   if (HOTLINE) $("callBtn").href = "tel:" + HOTLINE.replace(/\s/g, "");
