@@ -26,6 +26,10 @@ def fix_urls(text, is_home):
         text = text.replace(f'{SITE}/{slug}/', f'{SITE}/{slug}')
         text = re.sub(rf'href="/{slug}/(#[^"]*)?"', lambda m: f'href="{SITE}/{slug}{m.group(1) or ""}"', text)
         text = text.replace(f'href=\\"/{slug}/\\"', f'href=\\"{SITE}/{slug}\\"')  # trong chuỗi JS
+    # Sun Galaxy Complex có canonical ở tên miền riêng: mọi liên kết trỏ thẳng về đó (tránh trùng lặp)
+    own = f'{SITE}/sun-galaxy-complex'
+    text = re.sub(rf'href=(\\?)"{re.escape(own)}(#[^"\\]*)?(\\?)"',
+                  lambda m: f'href={m.group(1)}"{GALAXY_SITE}/{m.group(2) or ""}{m.group(3)}"', text)
     # Ảnh: tên miền chưa chứa ảnh, lấy qua CDN
     text = text.replace(f'{SITE}/images/', CDN)
     text = re.sub(r'(?<=["\s,(])/images/', CDN, text)
