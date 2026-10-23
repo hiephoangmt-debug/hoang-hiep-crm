@@ -36,7 +36,7 @@ def units_table():
     return tbl(['Loại căn', 'Diện tích', 'Kích thước', 'Số lượng', 'Bố trí', 'Phù hợp'], [list(u) for u in UNITS])
 
 def units_drawings():
-    return ('<div class="g3">'
+    return ('<div class="g3 eqi">'
             + fig('can-studio', 'Mặt bằng căn Studio Sun Saphia Residence 30 m², kích thước 3,8 × 9 m', '<b>Studio</b> · 30–31 m² · 3,8 × 9 m', wm=True)
             + fig('can-1br', 'Mặt bằng căn 1BR+1 Sun Saphia Residence 50 m², kích thước 6,2 × 9 m', '<b>1BR+1</b> · 50–51 m² · 6,2 × 9 m', wm=True)
             + fig('can-2br', 'Mặt bằng căn 2BR góc Sun Saphia Residence 60–70 m², kích thước 7,25 × 9,9 m', '<b>2BR</b> · 60–70 m² · 7,25 × 9,9 m', wm=True)
@@ -82,7 +82,7 @@ def occ_chart():
                  '<text x="%d" y="226" font-size="13" text-anchor="middle" fill="#275286" font-weight="700">%s</text>') % (
             x, 205 - a * 1.8, a * 1.8, x + 38, 205 - b * 1.8, b * 1.8, x + 17, 199 - a * 1.8, str(a).replace('.', ','), x + 55, 199 - b * 1.8,
             str(b).replace('.', ','), x + 36, r)
-    return ('<figure class="card" style="margin:0"><svg viewBox="0 0 380 240" role="img" aria-label="Tỷ lệ lấp đầy khách sạn Sun Group theo vùng: Bắc 57,3%% lên 62,2%%, Trung 70,65%% lên 81,3%%, Nam 62,4%% lên 73,2%% (2025 – 2026)" style="width:100%%;height:auto">'
+    return ('<figure class="card fill" style="margin:0;display:flex;flex-direction:column;justify-content:center"><svg viewBox="0 0 380 240" role="img" aria-label="Tỷ lệ lấp đầy khách sạn Sun Group theo vùng: Bắc 57,3%% lên 62,2%%, Trung 70,65%% lên 81,3%%, Nam 62,4%% lên 73,2%% (2025 – 2026)" style="width:100%%;height:auto">'
             '<line x1="40" y1="205" x2="370" y2="205" stroke="#D6DEEA"/>%s'
             '<rect x="230" y="8" width="12" height="12" fill="#FFAA01"/><text x="246" y="18" font-size="12" fill="#2B3650">2025</text>'
             '<rect x="292" y="8" width="12" height="12" fill="#E96118"/><text x="308" y="18" font-size="12" fill="#2B3650">2026</text></svg>'
@@ -121,13 +121,13 @@ def timeline():
             '<p class="note">Các mốc là kế hoạch dự kiến, có thể thay đổi theo công bố của chủ đầu tư và cơ quan nhà nước.</p>')
 
 def legal_box():
-    return ('<div class="g2" style="align-items:start"><div class="txt">'
+    return ('<div class="g2 eq"><div class="txt">'
             '<h3>Giấy chứng nhận đăng ký đầu tư</h3><p>Mã dự án <b>2572746483</b>, do Sở Tài chính TP Đà Nẵng cấp, chứng nhận lần đầu ngày <b>17/09/2026</b>.</p>'
             '<h3>Thời hạn dự án 50 năm</h3><p>Thời hạn hoạt động dự án 50 năm kể từ ngày 17/09/2026. Công trình cấp I, niên hạn sử dụng 100 năm.</p>'
             '<h3>Ngân hàng hỗ trợ</h3><div class="banks"><span>NGÂN HÀNG HỖ TRỢ</span>'
             '<img src="%snh-1.webp" alt="Vietcombank" width="347" height="117" loading="lazy"><img src="%snh-2.webp" alt="BIDV" width="366" height="117" loading="lazy"><img src="%snh-3.webp" alt="NCB" width="342" height="101" loading="lazy"></div>'
             '<p class="note" style="margin-top:10px">Tỷ lệ vay, thời gian hỗ trợ lãi suất theo chính sách bán hàng công bố khi mở bán.</p></div>'
-            '<div class="g2" style="gap:12px">%s%s</div></div>') % (
+            '<div class="g2 gcn" style="gap:12px">%s%s</div></div>') % (
         SK, SK, SK,
         fig('gcn-dau-tu-2', 'Giấy chứng nhận đăng ký đầu tư dự án Sun Saphia Residence, mã dự án 2572746483 (đã làm mờ)', 'Trang 1 GCN đăng ký đầu tư (làm mờ)'),
         fig('gcn-dau-tu-1', 'Trích GCN đăng ký đầu tư: thời hạn hoạt động dự án 50 năm kể từ ngày cấp (đã làm mờ)', 'Mục thời hạn hoạt động 50 năm'))
@@ -190,3 +190,40 @@ def cta_block(label, title='Có bảng giá là anh/chị <b>nhận ngay</b>', s
             '<p style="margin-top:14px">%s</p><ul class="ck" style="color:#fff"><li>Bảng giá gốc &amp; chính sách thanh toán</li><li>Mặt bằng từng tầng, căn còn trống</li><li>Bảng tính dòng tiền theo căn anh/chị chọn</li></ul>'
             '<p><a class="btn sm" href="%s" target="_blank" rel="noopener" style="background:#0068FF">Nhắn Zalo %s</a> <a class="btn sm gh" href="tel:%s" style="color:#fff;border-color:#fff">Gọi ngay</a></p></div>%s</div></div></div></section>') % (
         tiles('tr'), title, sub, ZALO, TEL_S, TEL, form('cuoi', label, title='Gửi tôi bảng giá', note='Gửi qua Zalo ngay khi chủ đầu tư công bố. Miễn phí, không ràng buộc.', btn='Gửi tôi bảng giá'))
+
+def hero_stats():
+    return ('<div class="stats"><div><b>30 tầng</b><span>114 m · 2 hầm</span></div><div><b>782 căn</b><span>Studio · 1BR+ · 2BR</span></div>'
+            '<div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>50 năm</b><span>thời hạn dự án</span></div></div>')
+
+def hero_perks():
+    return hero_stats() + ('<div class="perk"><b>Đăng ký sớm – nhận trước:</b><span>Bảng giá gốc</span><span>Mặt bằng căn trống</span>'
+                           '<span>Chính sách &amp; hỗ trợ lãi suất</span><span>Ưu tiên chọn căn đẹp</span></div>')
+
+def cta_band(title, sub, btn, interest, link=None):
+    """Dải kêu gọi giữa trang: nút mở popup đăng ký + Zalo + link sang trang liên quan."""
+    lk = ('<a class="lk" href="%s%s">%s →</a>' % (MAIN, link[0], link[1])) if link else ''
+    return ('<div class="wrap"><div class="band"><div><b class="bt">%s</b><span>%s</span></div>'
+            '<div class="bb"><button type="button" class="btn" data-pop data-interest="%s">%s</button>'
+            '<a class="btn zl" href="%s" target="_blank" rel="noopener">Zalo %s</a>%s</div></div></div>') % (
+        title, sub, esc(interest), btn, ZALO, TEL_S, lk)
+
+def popup():
+    return ('<div id="leadPop" class="lp" role="dialog" aria-modal="true" aria-labelledby="lp-t" hidden><div class="lpb">'
+            '<button type="button" class="lpx" aria-label="Đóng">×</button>'
+            '<img src="%sthap-bien-hoang-hon-900.webp" alt="" width="900" height="503" loading="lazy">'
+            '<div class="lpc"><b class="ey">Ưu tiên người đăng ký sớm</b><h2 id="lp-t" class="dp">Nhận <b>bảng giá gốc</b> &amp; mặt bằng căn đẹp</h2>'
+            '<ul class="ck"><li>Gửi qua Zalo ngay khi chủ đầu tư công bố</li><li>Ưu tiên chọn căn view biển trước ngày mở bán</li><li>Không thu tiền giữ chỗ</li></ul>'
+            '<form class="hm-form" id="popForm" data-form="Popup">'
+            '<input name="name" type="text" autocomplete="name" placeholder="Họ và tên" aria-label="Họ và tên">'
+            '<input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Số điện thoại / Zalo" aria-label="Số điện thoại / Zalo" required>'
+            '<button class="btn" type="submit">Nhận thông tin ngay</button></form></div></div></div>'
+            '<script>(function(){var p=document.getElementById("leadPop");if(!p)return;var f=document.getElementById("popForm"),base=f.getAttribute("data-form"),shown=false;'
+            'function op(it){f.setAttribute("data-form",base+(it?" – "+it:""));p.hidden=false;document.body.classList.add("lp-on");shown=true;'
+            'setTimeout(function(){var i=f.querySelector("[name=phone]");if(i&&innerWidth>760)i.focus();},80);}'
+            'function cl(){p.hidden=true;document.body.classList.remove("lp-on");}'
+            'document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-pop]");if(b){e.preventDefault();op(b.getAttribute("data-interest")||"");}'
+            'else if(e.target===p||e.target.closest(".lpx"))cl();});document.addEventListener("keydown",function(e){if(e.key==="Escape")cl();});'
+            'function once(k){try{if(sessionStorage.getItem(k))return false;sessionStorage.setItem(k,1);}catch(x){}return true;}'
+            'setTimeout(function(){if(!shown&&!document.querySelector(".hhc-ok")&&once("ssPopT"))op("tự mở sau 45 giây");},45000);'
+            'document.addEventListener("mouseout",function(e){if(!e.relatedTarget&&e.clientY<8&&!shown&&innerWidth>900&&once("ssPopE"))op("sắp rời trang");});'
+            '})();</script>') % SK

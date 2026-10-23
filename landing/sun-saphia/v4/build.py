@@ -22,8 +22,24 @@ def page(path, title, desc, kw, body, lds, cur, tools=False, canon=None, robots=
     url = MAIN + path
     body = body.replace('{M}', MAIN)
     html = head(title, desc, canon or url, OG, kw, lds, FAV, robots=robots)
-    html += '<body>\n' + header(cur, MAIN, LOGO) + '\n<main id="dau-trang">' + body + '</main>\n' + footer(MAIN) + '\n' + tail(tools) + '</body>\n</html>\n'
+    html += '<body>\n' + header(cur, MAIN, LOGO) + '\n<main id="dau-trang">' + body + '</main>\n' + footer(MAIN) + '\n' + popup() + tail(tools) + '</body>\n</html>\n'
     return html
+
+def band(*a, **k):
+    return '<div class="bandw">' + cta_band(*a, **k) + '</div>'
+
+def ins(b, marker, html):
+    assert marker in b, marker
+    return b.replace(marker, html + marker, 1)
+
+def bands_at(b, items):
+    """Chèn dải CTA trước mục thứ n (đếm các thẻ <section class="sec ...>, mục đầu = 0)."""
+    import re as _re
+    pos = [m.start() for m in _re.finditer(r'<section class="sec', b)]
+    for n, html in sorted(items, key=lambda x: -x[0]):
+        if n < len(pos):
+            b = b[:pos[n]] + html + b[pos[n]:]
+    return b
 
 def hero_home():
     return ('<section class="hero"><img class="sun" src="%smat-troi.webp" alt="" width="700" height="898" aria-hidden="true">'
@@ -39,10 +55,10 @@ def hero_home():
             '"Đón ánh dương – Giao hòa nhịp sống" ngày 23/10/2026.</p>'
             '<div class="stats"><div><b>30 tầng</b><span>114 m · 2 hầm</span></div><div><b>782 căn</b><span>Studio · 1BR+ · 2BR</span></div>'
             '<div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>50 năm</b><span>thời hạn dự án</span></div></div>'
-            '<div class="pic">%s<span>Phối cảnh minh họa</span></div></div>'
-            '<div>%s</div></div></div></section>') % (
-        SK, SK, img('thap-bien-hoang-hon', 'Phối cảnh Sun Saphia Residence – tòa tháp 30 tầng bên bờ biển Đà Nẵng lúc hoàng hôn', eager=True),
-        form('dau', 'Web – trang chủ đầu trang', h='h2'))
+            '</div>'
+            '<div class="hr">%s<div class="pic">%s<span>Phối cảnh minh họa</span></div></div></div></div></section>') % (
+        SK, SK, form('dau', 'Web – trang chủ đầu trang', h='h2'),
+        img('thap-bien-hoang-hon', 'Phối cảnh Sun Saphia Residence – tòa tháp 30 tầng bên bờ biển Đà Nẵng lúc hoàng hôn', eager=True))
 
 def home():
     fq, fld = faq([
@@ -82,11 +98,11 @@ def home():
     b += ('<section class="sec" id="vi-sao-mua-som"><div class="wrap">' + sh('?', 'Mua sớm', 'Tại sao nên chọn <b>thời điểm này</b>?', 'o') + why_now() + '</div></section>')
     # Tổng quan
     b += ('<section class="sec alt" id="tong-quan">' + tiles('tr') + '<div class="wrap">' + sh('i', 'Thông tin tổng quan', 'Dự án căn hộ <b>mặt biển đầu tiên</b> của Sun Group tại Đà Nẵng', 'n') +
-          '<div class="g2" style="align-items:start"><div>' + overview() + '<p class="note" style="margin-top:10px">Theo tài liệu công bố tại Kick-off 23/10/2026; giá bán và chính sách theo công bố chính thức của chủ đầu tư.</p></div>'
-          '<div>' + fig('thap-cat-3', 'Tòa tháp Sun Saphia Residence 30 tầng giữa cây xanh, mặt đứng kính và ban công màu đồng', 'Tòa tháp 30 tầng – 114 m (phối cảnh minh họa)') + '</div></div></div></section>')
+          '<div class="g2 eq"><div>' + overview() + '<p class="note" style="margin-top:10px">Theo tài liệu công bố tại Kick-off 23/10/2026; giá bán và chính sách theo công bố chính thức của chủ đầu tư.</p></div>'
+          '<div class="hr">' + fig('thap-cat-3', 'Tòa tháp Sun Saphia Residence 30 tầng giữa cây xanh, mặt đứng kính và ban công màu đồng', 'Tòa tháp 30 tầng – 114 m (phối cảnh minh họa)', cls='fill ct') + '<a class="btn" href="#" data-pop data-interest="Trang chủ – thông tin tổng quan">Nhận brochure &amp; bảng giá</a></div></div></div></section>')
     # 01 Vị trí
     b += ('<section class="sec" id="vi-tri"><div class="wrap">' + sh('01', 'Vị trí', 'Tọa độ <b>trung điểm</b> hệ di sản Đà Nẵng', 'y') +
-          '<div class="g2"><div class="txt"><p>Dự án nằm ở giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, đúng đoạn nối đại lộ ven biển với "cung đường tỷ đô" của chuỗi resort Đà Nẵng – Hội An. '
+          '<div class="g2 eq"><div class="txt"><p>Dự án nằm ở giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, đúng đoạn nối đại lộ ven biển với "cung đường tỷ đô" của chuỗi resort Đà Nẵng – Hội An. '
           'Một hướng về trung tâm và bán đảo Sơn Trà, một hướng về Ngũ Hành Sơn và phố cổ Hội An; trước mặt là biển Mỹ Khê – Sơn Thủy.</p>'
           '<ul class="ck"><li><b>~400 m</b> ra bãi tắm Sơn Thủy qua công viên ven biển</li><li><b>~500 m</b> tới nhà ga LRT 09 (quy hoạch tuyến sân bay – Hội An)</li>'
           '<li><b>4 km</b> tới tổ hợp Galaxy và Đà Nẵng Downtown – đủ gần để kết nối, đủ xa để riêng tư</li><li><b>5–10 phút</b> tới Ngũ Hành Sơn, phố An Thượng · <b>10–15 phút</b> tới sân bay · <b>~30 phút</b> tới Hội An</li></ul>'
@@ -97,28 +113,28 @@ def home():
           '<article class="card">' + img('mo-rong-duong-bien', 'Trục đường biển Võ Nguyên Giáp – Trường Sa – Lạc Long Quân được mở rộng', 'r') + '<h3 style="margin-top:12px">Mở rộng trục biển 2.633 tỷ</h3><p class="just">TP Đà Nẵng quyết định mở rộng đường Võ Nguyên Giáp, Trường Sa, Lạc Long Quân; tổng mức đầu tư dự kiến 2.633 tỷ đồng.</p></article>'
           '<article class="card">' + img('lrt', 'Minh họa tàu điện đô thị LRT trên cao', 'r') + '<h3 style="margin-top:12px">500 m tới nhà ga LRT 09</h3><p class="just">Từ sân bay về Saphia thuận tiện, từ Saphia đến các địa danh du lịch; mở ra tiềm năng thương mại dịch vụ, khai thác cho thuê và gia tăng giá trị. Giai đoạn 1 dự kiến khởi công 2/2027.</p></article>'
           '<article class="card">' + img('galaxy-downtown', 'Phối cảnh tổ hợp Galaxy và Đà Nẵng Downtown cách dự án khoảng 4 km', 'r') + '<h3 style="margin-top:12px">4 km tới Galaxy – Downtown</h3><p class="just">Trung tâm mới của thành phố đủ gần để kết nối mỗi ngày; Khu thương mại tự do Đà Nẵng (QĐ 1142/QĐ-TTg, 6/2025) kéo theo chuyên gia, doanh nghiệp.</p></article></div>'
-          '<div class="g2" style="margin-top:34px"><div class="txt"><span class="ey">Công viên bãi tắm ngay trước thềm nhà</span><h3 class="dp" style="font-size:28px">Từ dự án bỏ hoang <b>thành công viên công cộng</b></h3>'
+          '<div class="g2 eq" style="margin-top:34px"><div class="txt"><span class="ey">Công viên bãi tắm ngay trước thềm nhà</span><h3 class="dp" style="font-size:28px">Từ dự án bỏ hoang <b>thành công viên công cộng</b></h3>'
           '<p>Dự án Hòn Ngọc Á Châu quy mô 12 ha khởi công năm 2010, triển khai thời gian ngắn rồi bỏ hoang, gây lãng phí đất đai. Theo các quyết định điều chỉnh, thành phố chủ trương thu hồi khoảng <b>2,45 ha đất phía Nam (rộng 90 m)</b> để làm công viên công cộng – ngay trước Sun Saphia Residence.</p>'
           '<p>Dự án Công viên, Câu lạc bộ thể thao biển và Bãi tắm Sơn Thủy có phương án khảo sát được phê duyệt theo Quyết định 130 ngày 20/3/2025, quy mô khoảng 3 ha, mật độ xây dựng khoảng 3,9% – chủ yếu cây xanh, bãi cát, sân thể thao.</p>'
           '<p class="src">Nguồn: Báo Văn Hóa · VnEconomy · tài liệu Kick-off.</p></div>'
           + fig('khu-dat-cong-vien', 'Ảnh vệ tinh khu đất thu hồi làm công viên bãi tắm phía trước dự án Sun Saphia Residence', 'Khu đất công viên ven biển trước dự án') + '</div></div></section>')
     # 02 Tầm nhìn
     b += ('<section class="sec alt" id="tam-nhin">' + tiles('tr') + '<div class="wrap">' + sh('02', 'Tầm nhìn', 'Sông, Núi, Biển <b>chung một tầm nhìn</b>', 'o') +
-          '<div class="g2"><div class="txt"><p>Từ tầng cao, thiên nhiên mở ra như một vũ điệu đa tầng cảnh sắc: dòng sông, dáng Ngũ Hành Sơn và sắc xanh biển Mỹ Khê cùng hiện diện trong một tầm nhìn khoáng đạt. '
+          '<div class="g2 eq"><div class="txt"><p>Từ tầng cao, thiên nhiên mở ra như một vũ điệu đa tầng cảnh sắc: dòng sông, dáng Ngũ Hành Sơn và sắc xanh biển Mỹ Khê cùng hiện diện trong một tầm nhìn khoáng đạt. '
           'Sông mềm mại, núi trùng điệp, biển mênh mang – ba lớp thiên nhiên hòa quyện, mang đến trải nghiệm sống giữa những chuyển động đặc trưng của Đà Nẵng.</p>'
           '<div class="trio"><div>Trước mặt là <b>Biển</b></div><div>Sau lưng là <b>Sông</b></div><div>Bên cạnh là <b>Núi</b></div></div></div>'
           + fig('song-nui-bien-art', 'Tranh minh họa sông, núi, biển Đà Nẵng hòa chung một tầm nhìn') + '</div>'
           '<div style="margin-top:26px">' + views() + '</div></div></section>')
     # 03 Thiết kế
     b += ('<section class="sec" id="thiet-ke"><div class="wrap">' + sh('03', 'Cảm hứng thiết kế', 'Vũ điệu Di sản – <b>dấu ấn Apsara</b> trong hình hài đương đại', 'n') +
-          '<div class="g2"><div class="txt"><p>Lấy cảm hứng từ nghệ thuật điêu khắc Chăm Pa và hình tượng vũ nữ Apsara, kiến trúc dự án chắt lọc tinh thần di sản để tái hiện bằng ngôn ngữ đương đại.</p>'
+          '<div class="g2 eq"><div class="txt"><p>Lấy cảm hứng từ nghệ thuật điêu khắc Chăm Pa và hình tượng vũ nữ Apsara, kiến trúc dự án chắt lọc tinh thần di sản để tái hiện bằng ngôn ngữ đương đại.</p>'
           '<p>Sự kết hợp giữa <b>bản sắc văn hóa địa phương</b> và <b>phong cách hiện đại</b> tạo nên một biểu tượng mới của Sun Group bên biển Đà Nẵng: khối tháp thẳng, mặt dài hướng biển, mặt đứng kính xanh nhạt với ban công và trụ màu đồng.</p></div>'
           + fig('apsara-art', 'Tranh vũ nữ Apsara cách điệu – cảm hứng thiết kế Vũ điệu Di sản của Sun Saphia Residence') + '</div></div></section>')
     # 04 Sản phẩm
     b += ('<section class="sec alt" id="mat-bang">' + tiles('tr') + '<div class="wrap">' + sh('04', 'Cơ cấu sản phẩm', 'Nhỏ diện tích – <b>lớn dư địa giá trị</b>', 'o') +
           '<p class="lead just">Căn diện tích gọn, vốn vào vừa sức, dễ ở và dễ cho thuê. Trần căn hộ cao 3,5 m, bàn giao hoàn thiện cơ bản. Mặt bằng tầng thiết kế tối ưu về tầm view biển Mỹ Khê.</p>'
           + units_table() +
-          '<div class="g2" style="margin-top:26px">' + fig('mat-bang-tong-the', 'Mặt bằng tổng thể Sun Saphia Residence hướng ra biển Mỹ Khê, phía trước là công viên ven biển', 'Mặt bằng tổng thể – tối ưu tầm view biển Mỹ Khê', wm=True)
+          '<div class="g2 eq" style="margin-top:26px">' + fig('mat-bang-tong-the', 'Mặt bằng tổng thể Sun Saphia Residence hướng ra biển Mỹ Khê, phía trước là công viên ven biển', 'Mặt bằng tổng thể – tối ưu tầm view biển Mỹ Khê', wm=True)
           + fig('layout-tang-3a-28', 'Layout tầng điển hình 3A–28 tòa Saphia, 28 căn mỗi tầng', 'Layout tầng 3A–28', wm=True) + '</div>'
           '<div style="margin-top:22px">' + units_drawings() + '</div>'
           '<p style="margin-top:18px"><a class="btn sm nv" href="{M}/mat-bang">Xem chi tiết mặt bằng từng loại căn →</a></p>'
@@ -132,7 +148,7 @@ def home():
           '<article class="card">' + img('tien-ich-ho-boi', 'Bể bơi view biển lúc hoàng hôn – tiện ích Wellness (ảnh minh họa)', 'r') + '<h3 style="margin-top:12px">Wellness</h3><p>Bể bơi view biển, phòng yoga – ngắm hoàng hôn từ mặt nước.</p></article>'
           '<article class="card">' + img('tien-ich-gym', 'Phòng gym, pilates hiện đại – tiện ích Healthy (ảnh minh họa)', 'r') + '<h3 style="margin-top:12px">Healthy</h3><p>Gym, pilates tại khu Gym &amp; Yoga; nhà trẻ, shop khối đế ngay trong tòa nhà.</p></article>'
           '<article class="card">' + img('the-thao-bien', 'Thể thao biển: bơi, dù lượn, kayak, jetski – tiện ích Waterfront (ảnh minh họa)', 'r') + '<h3 style="margin-top:12px">Waterfront</h3><p>Sống gắn với biển mỗi ngày: kayak, SUP, dù lượn, jetski ngay trước nhà.</p></article></div>'
-          '<div class="g2" style="margin-top:30px"><div class="txt"><span class="ey">Chuỗi 03 công viên bãi tắm</span><h3 class="dp" style="font-size:28px">Bãi biển hiện hữu <b>ngay trước thềm nhà</b></h3>'
+          '<div class="g2 eq" style="margin-top:30px"><div class="txt"><span class="ey">Chuỗi 03 công viên bãi tắm</span><h3 class="dp" style="font-size:28px">Bãi biển hiện hữu <b>ngay trước thềm nhà</b></h3>'
           '<p>Bãi biển và vùng nước biển tại Việt Nam là tài sản công thuộc sở hữu toàn dân, do Nhà nước đại diện quản lý. Tại Saphia, bãi biển hiện hữu ngay trước "thềm nhà", cùng chuỗi 3 công viên bãi tắm:</p>'
           '<ul class="ck"><li><b>Bãi tắm Sơn Thủy</b> – bãi tắm đầu tiên trong chuỗi, sát khu Saphia</li><li><b>Công viên bãi tắm đối diện</b> – thuộc dự án thu hồi KDL Hòn Ngọc Á Châu, ngay trước dự án</li><li><b>Công viên bãi tắm Huyền Trân Công Chúa</b> – cuối đường Huyền Trân Công Chúa, gần Ngũ Hành Sơn</li></ul></div>'
           + fig('bai-bien-hien-huu', 'Ảnh vệ tinh bãi biển hiện hữu và khu công viên trước khu Saphia', 'Bãi biển hiện hữu trước khu Saphia') + '</div>'
@@ -144,19 +160,24 @@ def home():
     b += ('<section class="sec" id="chu-nhan"><div class="wrap">' + sh('07', 'Chân dung khách hàng', 'Các chủ nhân tương lai của Saphia – <b>họ là ai?</b>', 'n') + personas() + '</div></section>')
     # 08 Khan hiếm
     b += ('<section class="sec alt" id="khan-hiem">' + tiles('tr') + '<div class="wrap">' + sh('08', 'Mức độ khan hiếm', 'Căn hộ mặt biển Đà Nẵng – <b>nguồn cung rất hữu hạn</b>', 'y') +
-          '<div class="g2" style="align-items:start"><div><p class="lead">Biển là tài nguyên hữu hạn. Sun Saphia Residence là căn hộ mặt biển hiếm hoi trên chuỗi resort Đà Nẵng – Hội An, cung đường tỷ đô Võ Nguyên Giáp – Trường Sa.</p>'
+          '<div class="g2 eq"><div><p class="lead">Biển là tài nguyên hữu hạn. Sun Saphia Residence là căn hộ mặt biển hiếm hoi trên chuỗi resort Đà Nẵng – Hội An, cung đường tỷ đô Võ Nguyên Giáp – Trường Sa.</p>'
           + price_table() + '<p style="margin-top:14px"><a class="btn sm nv" href="{M}/bang-gia">Xem bảng giá &amp; tính vay →</a></p></div>'
           + fig('ban-do-gia-ban', 'Bản đồ giá chào bán các dự án căn hộ ven biển Đà Nẵng', 'Giá chào bán các dự án ven biển (tham khảo)') + '</div></div></section>')
     # 09 Dòng tiền
     b += ('<section class="sec" id="cho-thue"><div class="wrap">' + sh('09', 'Tiềm năng khai thác', 'Tiềm năng khai thác <b>dòng tiền vượt trội</b>', 'o') +
           '<p class="lead just">Đà Nẵng là điểm hội tụ 3 dòng di dân – một điểm đến: nhóm khách hàng thực, nguồn cầu thuê nhà bền vững.</p>' + migration() +
-          '<div class="g2" style="margin-top:30px;align-items:start"><div>' + rent_night() + '<div style="margin-top:16px">' + rent_month_table() + '</div></div>' + occ_chart() + '</div>'
+          '<div style="margin-top:30px">' + rent_night() + '</div><div class="g2 eq" style="margin-top:18px"><div>' + rent_month_table() + '</div>' + occ_chart() + '</div>'
           '<h3 class="dp" style="font-size:28px;margin:30px 0 14px">Ba nhóm <b>khách thuê</b> chính</h3>' + tenants() +
           '<div style="margin-top:26px">' + rent_case() + '</div><p><a class="btn sm nv" href="{M}/cho-thue">Tự tính dòng tiền theo căn →</a></p></div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('♥', 'Giá trị', 'Bốn giá trị <b>cộng hưởng</b> trong một sản phẩm', 'n') + values4() + '</div></section>')
     b += ('<section class="sec" id="tien-do"><div class="wrap">' + sh('⌛', 'Tiến độ', 'Mốc thời gian <b>quan trọng</b>', 'y') + timeline() + '</div></section>')
     b += ('<section class="sec alt" id="hoi-dap"><div class="wrap">' + sh('?', 'Hỏi đáp', 'Câu hỏi thường gặp về <b>Sun Saphia Residence</b>', 'o') + fq +
           '<h3 style="margin-top:26px">Xem thêm</h3>' + related('/') + '</div></section>')
+    b = ins(b, '<section class="sec" id="vi-sao-mua-som">', band('Thời điểm vàng – đừng để lỡ đợt đầu', 'Nhận phân tích thị trường và bảng giá gốc ngay khi chủ đầu tư công bố.', 'Nhận bảng giá sớm', 'Trang chủ – sau mục thời điểm', ('/bang-gia', 'Xem trang Bảng giá')))
+    b = ins(b, '<section class="sec alt" id="tam-nhin">', band('Muốn xem thực tế vị trí?', 'Chuyên viên gọi video Zalo, đi từ dự án ra biển cho anh/chị xem – miễn phí.', 'Đặt lịch xem vị trí', 'Trang chủ – đặt lịch xem vị trí', ('/mat-bang', 'Xem mặt bằng & hướng view')))
+    b = ins(b, '<section class="sec" id="phap-ly">', band('Căn view biển đẹp có hạn trên mỗi tầng', 'Để lại số để được ưu tiên giữ chỗ căn anh/chị chọn ngay khi mở bán.', 'Ưu tiên chọn căn', 'Trang chủ – ưu tiên chọn căn', ('/mat-bang', 'Chọn căn trên mặt bằng tầng')))
+    b = ins(b, '<section class="sec alt" id="tien-ich">', band('Nhận bản sao pháp lý &amp; chính sách vay', 'GCN đầu tư, tiến độ, chính sách Vietcombank – BIDV – NCB gửi qua Zalo.', 'Nhận hồ sơ pháp lý', 'Trang chủ – hồ sơ pháp lý', ('/phap-ly', 'Xem trang Pháp lý')))
+    b = ins(b, '<section class="sec alt"><div class="wrap">' + sh('♥', 'Giá trị', 'Bốn giá trị <b>cộng hưởng</b> trong một sản phẩm', 'n'), band('Nhận bảng tính dòng tiền theo căn', 'Tính theo giá thật khi có bảng giá: giá thuê, lấp đầy, lợi nhuận từng căn.', 'Nhận bảng tính', 'Trang chủ – bảng tính dòng tiền', ('/cho-thue', 'Tự tính trên trang Cho thuê')))
     b += cta_block('Web – trang chủ cuối trang')
     title = 'Sun Saphia Residence Đà Nẵng: Giá, Mặt bằng, Pháp lý 2026'
     desc = 'Sun Saphia Residence – căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng: 30 tầng, 782 căn, pháp lý 50 năm, Vietcombank, BIDV, NCB hỗ trợ vay. Mở bán cuối 11/2026.'
@@ -170,8 +191,8 @@ def sub_hero(path, name, h1, lead, img_name, alt, label):
     cr, ld = crumbs([('Trang chủ', MAIN + '/'), ('Sun Saphia Residence', MAIN + '/'), (name, MAIN + path)])
     return ('<section class="hero" style="padding-bottom:40px"><img class="sun" src="%smat-troi.webp" alt="" width="700" height="898" aria-hidden="true"><div class="wrap">%s'
             '<div class="g2" style="margin-top:14px"><div><img class="ribbon" src="%sruy-bang.webp" alt="" width="608" height="232" aria-hidden="true">'
-            '<h1 class="dp">%s</h1>%s<p class="lead just">%s</p><div class="pic">%s</div></div><div>%s</div></div></div></section>') % (
-        SK, cr, SK, h1, author(), lead, img(img_name, alt, eager=True), form('dau', label, h='h2')), ld
+            '<h1 class="dp">%s</h1>%s<p class="lead just">%s</p>%s</div><div class="hr">%s<div class="pic">%s</div></div></div></div></section>') % (
+        SK, cr, SK, h1, author(), lead, hero_perks(), form('dau', label, h='h2'), img(img_name, alt, eager=True)), ld
 
 def bang_gia():
     hero, cld = sub_hero('/bang-gia', 'Bảng giá', 'Giá Sun Saphia Residence – <b>bảng giá</b> căn hộ mặt biển Đà Nẵng',
@@ -214,6 +235,8 @@ def bang_gia():
           '$("vg").textContent=$("ig").value.replace(".",",");$("vt").textContent=$("it").value+"%%";$("vl").textContent=$("il").value.replace(".",",");$("vn").textContent=$("in").value;'
           '$("r1").textContent=f(v);$("r2").textContent=f(m);$("r3").textContent=f(g-v);}["ig","it","il","in"].forEach(function(i){$(i).addEventListener("input",u)});u();})();</script>') % (SK, SK, SK)
     b += ('<section class="sec alt" id="hoi-dap"><div class="wrap">' + sh('?', 'Hỏi đáp', 'Hỏi đáp về <b>giá Sun Saphia</b>', 'y') + fq + '<h3 style="margin-top:26px">Xem thêm</h3>' + related('/bang-gia') + '</div></section>')
+    b = bands_at(b, [(1, band('Bảng giá sắp công bố – nhận sớm nhất', 'Đăng ký ngay để nhận bảng giá gốc, chính sách thanh toán qua Zalo trước ngày mở bán.', 'Nhận bảng giá gốc', 'Bảng giá – giữa trang', ('/mat-bang', 'Xem mặt bằng trước khi chọn'))),
+                     (3, band('Muốn biết căn nào hợp túi tiền?', 'Chuyên viên tư vấn phương án vốn, vay ngân hàng theo từng loại căn.', 'Tư vấn phương án vốn', 'Bảng giá – tư vấn vốn', ('/cho-thue', 'Xem dòng tiền cho thuê')))])
     b += cta_block('Web – bảng giá cuối trang', title='Nhận <b>bảng giá gốc</b> ngay khi công bố')
     title = 'Giá Sun Saphia Residence 2026 – Bảng giá, so sánh, vay ngân hàng'
     desc = 'Giá Sun Saphia Residence Đà Nẵng: tình trạng bảng giá, so sánh giá căn hộ mặt biển, vay Vietcombank, BIDV, NCB, bảng tính trả góp. Nhận bảng giá gốc qua Zalo.'
@@ -242,6 +265,8 @@ def mat_bang():
           '<div id="chon-can"></div></div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('3', 'Hướng view', 'Mỗi hướng <b>một khung tranh</b>', 'y') + views() + '</div></section>')
     b += ('<section class="sec" id="hoi-dap"><div class="wrap">' + sh('?', 'Hỏi đáp', 'Hỏi đáp về <b>mặt bằng</b>', 'o') + fq + '<h3 style="margin-top:26px">Xem thêm</h3>' + related('/mat-bang') + '</div></section>')
+    b = bands_at(b, [(1, band('Căn view biển đẹp có hạn trên mỗi tầng', 'Để lại số để được ưu tiên chọn căn trên mặt bằng ngay khi mở bán.', 'Ưu tiên chọn căn', 'Mặt bằng – ưu tiên chọn căn', ('/bang-gia', 'Xem giá từng loại căn'))),
+                     (3, band('Nhận mặt bằng căn còn trống', 'Gửi mặt bằng từng tầng, bản vẽ căn và hướng view qua Zalo.', 'Nhận mặt bằng', 'Mặt bằng – nhận mặt bằng tầng', ('/phap-ly', 'Xem pháp lý dự án')))])
     b += cta_block('Web – mặt bằng cuối trang', title='Nhận <b>mặt bằng căn còn trống</b>')
     title = 'Mặt bằng Sun Saphia Residence – Layout tầng 3A–28, chọn căn'
     desc = 'Mặt bằng tầng 3A–28 Sun Saphia Residence, 28 căn mỗi tầng: Studio 30 m², 1BR+ 50 m², 2BR 60–70 m², căn góc. Bấm từng căn xem nội thất, hướng view, mô hình 4D.'
@@ -272,6 +297,8 @@ def phap_ly():
           '<div class="card"><span class="n">BƯỚC 3</span><h3 class="oc">Giữ chỗ / đặt cọc</h3><p>Theo quy trình chủ đầu tư tại sự kiện mở bán; tiền chuyển vào tài khoản theo hướng dẫn chính thức.</p></div>'
           '<div class="card"><span class="n">BƯỚC 4</span><h3 class="oc">Ký hợp đồng</h3><p>Ký Hợp đồng mua bán với chủ đầu tư, thanh toán theo tiến độ, vay ngân hàng nếu cần.</p></div></div></div></section>')
     b += ('<section class="sec alt" id="hoi-dap"><div class="wrap">' + sh('?', 'Hỏi đáp', 'Hỏi đáp về <b>pháp lý</b>', 'n') + fq + '<h3 style="margin-top:26px">Xem thêm</h3>' + related('/phap-ly') + '</div></section>')
+    b = bands_at(b, [(1, band('Nhận bản sao pháp lý dự án', 'GCN đăng ký đầu tư, Nghị quyết 278, tiến độ – gửi qua Zalo.', 'Nhận hồ sơ pháp lý', 'Pháp lý – nhận hồ sơ', ('/bang-gia', 'Xem bảng giá & vay'))),
+                     (3, band('Đăng ký sớm để được giữ chỗ đầu tiên', 'Đại lý chính thức – bảng giá gốc, giữ chỗ đúng quy trình chủ đầu tư.', 'Đăng ký giữ chỗ', 'Pháp lý – đăng ký giữ chỗ', ('/mat-bang', 'Chọn căn trên mặt bằng')))])
     b += cta_block('Web – pháp lý cuối trang', title='Nhận <b>hồ sơ pháp lý</b> và chính sách')
     title = 'Pháp lý Sun Saphia Residence – GCN đầu tư, thời hạn 50 năm, tiến độ'
     desc = 'Pháp lý Sun Saphia Residence: GCN đầu tư 2572746483 (17/09/2026), thời hạn 50 năm, công trình cấp I niên hạn 100 năm, Nghị quyết 278/NQ-CP, tiến độ mở bán – bàn giao.'
@@ -291,7 +318,7 @@ def cho_thue():
     b = hero
     b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Nguồn cầu', '3 dòng di dân – <b>1 điểm đến</b>', 'o') + migration() + '</div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('2', 'Giá thuê', 'Giá thuê căn hộ mặt biển <b>siêu ấn tượng</b>', 'y') +
-          '<div class="g2" style="align-items:start"><div>' + rent_night() + '<div style="margin-top:16px">' + rent_month_table() + '</div></div>' + occ_chart() + '</div></div></section>')
+          rent_night() + '<div class="g2 eq" style="margin-top:18px"><div>' + rent_month_table() + '</div>' + occ_chart() + '</div></div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('3', 'Khách thuê', 'Ba nhóm <b>khách thuê</b> chính', 'n') + tenants() + '</div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('4', 'Dòng tiền', 'Bài toán vận hành – <b>tự tính theo căn</b>', 'o') +
           '<div class="g2" style="align-items:start"><div>' + rent_case() + '</div>'
@@ -312,6 +339,8 @@ def cho_thue():
           '<div class="card"><h3 class="oc">Nội thất</h3><p>Bàn giao hoàn thiện cơ bản – cần dự trù chi phí nội thất trước khi cho thuê.</p></div>'
           '<div class="card"><h3 class="oc">Quy định</h3><p>Lưu trú ngắn ngày theo quy định của tòa nhà và địa phương.</p></div></div></div></section>')
     b += ('<section class="sec" id="hoi-dap"><div class="wrap">' + sh('?', 'Hỏi đáp', 'Hỏi đáp về <b>cho thuê</b>', 'n') + fq + '<h3 style="margin-top:26px">Xem thêm</h3>' + related('/cho-thue') + '</div></section>')
+    b = bands_at(b, [(1, band('Nhận bảng tính dòng tiền theo căn', 'Tính theo giá thật khi có bảng giá: giá thuê, lấp đầy, lợi nhuận từng căn.', 'Nhận bảng tính', 'Cho thuê – bảng tính dòng tiền', ('/bang-gia', 'Xem bảng giá'))),
+                     (3, band('Studio hay 1BR+ cho thuê tốt hơn?', 'Chuyên viên so sánh dòng tiền từng loại căn theo nhu cầu của anh/chị.', 'Tư vấn chọn căn cho thuê', 'Cho thuê – tư vấn chọn căn', ('/mat-bang', 'Xem mặt bằng Studio, 1BR+')))])
     b += cta_block('Web – cho thuê cuối trang', title='Nhận <b>bảng tính dòng tiền</b> theo căn')
     title = 'Đầu tư căn hộ cho thuê Đà Nẵng – Dòng tiền Sun Saphia Residence'
     desc = 'Giá thuê căn hộ view biển Đà Nẵng 2,2–3,7 triệu/đêm, lấp đầy khách sạn Sun Group miền Trung 81,3%. Tự tính dòng tiền studio, 1BR+ Sun Saphia Residence theo giá và lấp đầy.'
@@ -328,9 +357,9 @@ def ads(domain):
          '<p class="slogan">Trước mặt là <b>Biển</b> · Sau lưng là <b>Sông</b> · Bên cạnh là <b>Núi</b></p>'
          '<ul class="ck"><li>Studio 30 m², 1BR+ 50 m², 2BR 60–70 m² · trần cao 3,5 m</li><li>Ra bãi tắm Sơn Thủy ~400 m qua công viên ven biển</li>'
          '<li>Pháp lý 50 năm · Vietcombank, BIDV, NCB hỗ trợ vay</li><li>Đại lý phân phối chính thức – bảng giá gốc, không thu tiền giữ chỗ</li></ul>'
-         '<div class="pic">%s<span>Phối cảnh minh họa</span></div></div><div>%s</div></div></div></section>') % (
-        SK, SK, img('thap-bien-hoang-hon', 'Phối cảnh Sun Saphia Residence bên bờ biển Đà Nẵng lúc hoàng hôn', eager=True),
-        form('dau', 'ADS – form đầu trang', title='Nhận bảng giá &amp; mặt bằng', h='h2'))
+         '%s</div><div class="hr">%s<div class="pic">%s<span>Phối cảnh minh họa</span></div></div></div></div></section>') % (
+        SK, SK, hero_stats(), form('dau', 'ADS – form đầu trang', title='Nhận bảng giá &amp; mặt bằng', h='h2'),
+        img('thap-bien-hoang-hon', 'Phối cảnh Sun Saphia Residence bên bờ biển Đà Nẵng lúc hoàng hôn', eager=True))
     b += ('<section class="sec alt"><div class="wrap">' + sh('★', 'Thời điểm vàng', 'Vì sao <b>đăng ký sớm</b>?', 'o') + why_now() + '</div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('01', 'Vị trí', 'Trung điểm <b>hệ di sản</b> Đà Nẵng', 'y') +
           '<div class="g2"><div><ul class="ck"><li><b>~400 m</b> ra bãi tắm Sơn Thủy</li><li><b>~500 m</b> tới ga LRT 09 (quy hoạch sân bay – Hội An)</li><li><b>4 km</b> tới Galaxy, Đà Nẵng Downtown</li>'
@@ -345,12 +374,16 @@ def ads(domain):
           '<article class="card">' + img('the-thao-bien', 'Thể thao biển (ảnh minh họa)', 'r') + '<h3 style="margin-top:12px">Kayak · SUP · Jetski</h3></article></div></div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('09', 'Cho thuê', 'Tiềm năng <b>dòng tiền</b>', 'o') + rent_night() + '<div style="margin-top:20px">' + rent_case() + '</div></div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('05', 'Pháp lý', 'Pháp lý <b>rõ ràng</b>', 'n') + legal_box() + '<div style="margin-top:26px">' + daily() + '</div></div></section>')
+    b = bands_at(b, [(1, band('Thời điểm vàng – đừng để lỡ đợt đầu', 'Nhận bảng giá gốc và chính sách sớm nhất qua Zalo.', 'Nhận bảng giá sớm', 'ADS – sau lý do mua sớm')),
+                     (3, band('Căn view biển đẹp có hạn trên mỗi tầng', 'Để lại số để được ưu tiên chọn căn ngay khi mở bán.', 'Ưu tiên chọn căn', 'ADS – ưu tiên chọn căn')),
+                     (6, band('Nhận bảng tính dòng tiền theo căn', 'Giá thuê, lấp đầy, lợi nhuận từng căn – gửi qua Zalo.', 'Nhận bảng tính', 'ADS – bảng tính dòng tiền'))])
+    b += ('<section class="sec alt"><div class="wrap"><h2 class="dp" style="font-size:30px;margin-bottom:16px">Tìm hiểu <b>thêm</b></h2>' + related('/ads') + '</div></section>')
     b += cta_block('ADS – form cuối trang')
     title = 'Sun Saphia Residence Đà Nẵng – Căn hộ mặt biển | Mở bán cuối 11/2026'
     desc = 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng: Studio, 1BR+, 2BR, ra biển 400 m, pháp lý 50 năm. Đăng ký nhận bảng giá gốc từ đại lý chính thức, không thu tiền.'
     html = head(title, desc, url, OG, 'sun saphia residence, căn hộ mặt biển đà nẵng, bảng giá sun saphia', [article_ld(title, desc, url)], FAV)
     b = b.replace('{M}', MAIN)
-    html += '<body>\n' + header('/ads', MAIN, LOGO) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN) + '\n' + tail(True) + '</body>\n</html>\n'
+    html += '<body>\n' + header('/ads', MAIN, LOGO) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN) + '\n' + popup() + tail(True) + '</body>\n</html>\n'
     return html
 
 if __name__ == '__main__':

@@ -50,7 +50,7 @@ def form(fid, label, title='Nhận bảng giá Sun Saphia Residence',
             '<form class="hm-form" data-form="%s">'
             '<label for="t-%s">Họ và tên</label><input id="t-%s" name="name" type="text" autocomplete="name" placeholder="Anh/chị tên gì ạ?">'
             '<label for="p-%s">Số điện thoại / Zalo</label><input id="p-%s" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xx xxx xxx" required>'
-            '%s<button class="btn" type="submit">%s</button>'
+            '%s<p class="urg">⚡ Người đăng ký trước được ưu tiên chọn căn và nhận chính sách sớm nhất</p><button class="btn" type="submit">%s</button>'
             '<span class="alt">Hoặc <a href="%s" target="_blank" rel="noopener">nhắn Zalo</a> · <a href="tel:%s">gọi %s</a></span>'
             '</form><p class="fcs">✔ Không thu tiền giữ chỗ · ✔ Đại lý phân phối chính thức</p></div>') % (
         h, title, h, note, label, fid, fid, fid, fid, sel, btn, ZALO, TEL, TEL_S)
