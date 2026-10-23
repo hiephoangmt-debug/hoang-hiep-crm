@@ -979,7 +979,19 @@ font-family:'Cormorant Garamond',Georgia,serif!important;font-size:18px!importan
 .cc .cclg{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-size:13px;margin-top:10px}
 .cc .cclg i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:5px}
 .cc .note{text-align:center!important;font-size:12.5px;color:#6b7280;margin-top:12px}
-.cc .unitrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;margin-top:18px;background:#fff;border-radius:18px;padding:18px 22px;box-shadow:0 10px 30px -18px rgba(10,37,64,.5);align-items:center}
+.ccm{position:fixed;inset:0;z-index:9500;background:rgba(6,20,38,.62);display:flex;align-items:center;justify-content:center;padding:14px;animation:ccmIn .18s ease}
+.ccm[hidden]{display:none}
+@keyframes ccmIn{from{opacity:0}to{opacity:1}}
+.ccm-box{position:relative;background:#fff;border-radius:20px;width:100%;max-width:1000px;max-height:94vh;overflow:auto;box-shadow:0 30px 80px -20px rgba(0,0,0,.6)}
+.ccm-x{position:absolute;top:10px;right:12px;z-index:2;width:40px;height:40px;border-radius:50%;border:0;background:#0A2540;color:#fff;font-size:24px;line-height:1;cursor:pointer}
+.ccm-dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:14px;margin:4px 0 12px}
+.ccm-dl dt{color:#6b7280}.ccm-dl dd{margin:0;color:#0A2540;font-weight:500;text-align:left!important}
+.cc .utext .btn-cc{display:block;width:100%;border:0;cursor:pointer;font:inherit;font-weight:600;color:#fff;background:linear-gradient(135deg,#ffa04a,#E8460F);padding:13px;border-radius:99px}
+.ccm-back{display:block;width:100%;margin-top:8px;border:1.5px solid #0A2540;background:#fff;color:#0A2540;font:inherit;font-weight:600;padding:10px;border-radius:99px;cursor:pointer}
+.cc .info .btn-4d{display:block;width:100%;margin:2px 0 8px;border:1.5px solid #ffb067;background:transparent;color:#ffb067;font:inherit;font-weight:600;padding:11px;border-radius:99px;cursor:pointer}
+.cc .info .btn-4d:hover{background:#ffb067;color:#0A2540}
+body.ccm-on{overflow:hidden}
+.cc .unitrow{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:22px;background:#fff;border-radius:20px;padding:22px 26px;align-items:center}
 .cc .udraw{min-width:0;text-align:center}
 .cc .udraw svg{width:100%;height:auto;max-height:560px;display:block;min-width:0;margin:0 auto}
 .cc .utext h3{margin:6px 0 8px;color:#0A2540}
@@ -1001,7 +1013,7 @@ font-family:'Cormorant Garamond',Georgia,serif!important;font-size:18px!importan
 .cc .uda{fill:none;stroke:#b5733a;stroke-width:16;stroke-dasharray:70 50;opacity:.85}
 .cc .udm{stroke:#E8460F;stroke-width:22}
 .cc .udt{font-family:Lexend,sans-serif;font-size:260px;font-weight:600;fill:#E8460F;text-anchor:middle}
-@media(max-width:860px){.cc .unitrow{grid-template-columns:1fr;padding:14px}.cc .udraw svg{max-height:520px}.cc .grid>div:first-child{display:block}.cc .grid .plan{display:block}.cc .utext ul{grid-template-columns:1fr 1fr}}
+@media(max-width:860px){.cc .unitrow{grid-template-columns:1fr;padding:16px 14px;gap:10px}.cc .udraw svg{max-height:52vh}.ccm{padding:0;align-items:flex-end}.ccm-box{border-radius:20px 20px 0 0;max-height:96vh}.cc .grid>div:first-child{display:block}.cc .grid .plan{display:block}.cc .utext ul{grid-template-columns:1fr 1fr}}
 @media(max-width:860px){.cc .grid{grid-template-columns:1fr}.cc .info{position:static}}
 </style>
   <div class="wrapc">
@@ -1023,6 +1035,7 @@ font-family:'Cormorant Garamond',Georgia,serif!important;font-size:18px!importan
           <dt>Hướng nhìn</dt><dd id="ccView">–</dd>
           <dt>Tình trạng</dt><dd>Chưa mở bán – nhận đăng ký ưu tiên</dd>
         </dl>
+        <button type="button" class="btn-4d" id="ccOpen">🔍 Xem mặt bằng căn 4D</button>
         <button type="button" class="btn-cc" id="ccBtn" data-pop data-interest="ADS – chọn căn trên mặt bằng" data-title="Đăng ký ưu tiên căn" data-sub="Để lại số Zalo, chuyên viên báo giá và tình trạng căn này ngay khi chủ đầu tư công bố bảng hàng." data-btn="Giữ ưu tiên căn này →">Đăng ký ưu tiên căn này →</button>
         <p>Đăng ký không thu tiền. Giá, tình trạng căn theo bảng hàng chính thức của chủ đầu tư.</p>
       </aside><div class="sum">
@@ -1033,6 +1046,7 @@ font-family:'Cormorant Garamond',Georgia,serif!important;font-size:18px!importan
         </div></div>
     </div>
     
+    <div class="ccm" id="ccModal" hidden role="dialog" aria-modal="true" aria-labelledby="ccUT"><div class="ccm-box"><button type="button" class="ccm-x" aria-label="Đóng">×</button>
     <div class="unitrow" id="ccUnitRow">
       <div class="udraw"><svg id="ccUnit" role="img" aria-label="Bản vẽ căn hộ theo tỷ lệ thật"></svg></div>
       <div class="utext">
@@ -1040,9 +1054,13 @@ font-family:'Cormorant Garamond',Georgia,serif!important;font-size:18px!importan
         <h3 id="ccUT">Căn Studio 3,8 × 9 m</h3>
         <p id="ccUD">Mặt bằng 4D tô màu theo bản vẽ căn trình bày tại Kick-off: sàn gỗ, gạch phòng tắm, nội thất vẽ đúng kích thước thường dùng để anh/chị dễ hình dung khi bố trí.</p>
         <ul id="ccUL"></ul>
+        <dl class="ccm-dl"><dt>Hướng nhìn</dt><dd id="ccMV">–</dd><dt>Tình trạng</dt><dd>Chưa mở bán – nhận đăng ký ưu tiên</dd></dl>
+        <button type="button" class="btn-cc" id="ccBtn2" data-pop data-btn="Giữ ưu tiên căn này →" data-sub="Để lại số Zalo, chuyên viên báo giá và tình trạng căn này ngay khi chủ đầu tư công bố bảng hàng.">Đăng ký ưu tiên căn này →</button>
+        <button type="button" class="ccm-back">← Chọn căn khác</button>
         <p class="unote">Kích thước phủ bì theo bản vẽ Kick-off; bố trí nội thất mang tính gợi ý, bàn giao hoàn thiện cơ bản. Trần căn hộ cao 3,5 m.</p>
       </div>
     </div>
+    </div></div>
     <p class="note">Mặt bằng vẽ lại theo layout tầng 3A–28 trình bày tại sự kiện Kick-off 23/10/2026, mang tính minh hoạ, không theo tỷ lệ. Mã căn, diện tích từng căn và danh sách tầng theo bảng hàng chính thức của chủ đầu tư.</p>
   </div>
 <script>
@@ -1113,7 +1131,7 @@ font-family:'Cormorant Garamond',Georgia,serif!important;font-size:18px!importan
   U.forEach(function(u){var g=el('g',{class:'u '+u[1],tabindex:0,role:'button'});g.appendChild(shape(u[2],u[3],u[4],u[5],u[7]));
     interior(g,u);var cx=u[2]+u[4]/2,cy=u[3]+u[5]/2;g.appendChild(MOB?el('rect',{class:'pill',x:cx-27,y:cy-19,width:54,height:34,rx:8}):el('rect',{class:'pill',x:cx-24,y:cy-17,width:48,height:31,rx:7}));var a=el('text',{x:cx,y:MOB?cy+8:cy-3,'text-anchor':'middle'});var b=el('text',{class:'t2',x:cx,y:cy+10,'text-anchor':'middle'});b.textContent=T[u[1]].n;
     g.appendChild(a);g.appendChild(b);g._u=u;g._a=a;svg.appendChild(g);G.push(g);
-    g.addEventListener('click',function(){pick(g);});g.addEventListener('keydown',function(e){if(e.key=='Enter'||e.key==' '){e.preventDefault();pick(g);}});});
+    g.addEventListener('click',function(){pick(g,1);});g.addEventListener('keydown',function(e){if(e.key=='Enter'||e.key==' '){e.preventDefault();pick(g,1);}});});
 
   /* Bản vẽ căn theo tỷ lệ (đơn vị mm), cửa vào phía trên, logia phía dưới */
   var PLAN={
@@ -1193,10 +1211,17 @@ font-family:'Cormorant Garamond',Georgia,serif!important;font-size:18px!importan
   function code(g){return 'SP'+F.value+g._u[0];}
   function label(){G.forEach(function(g){g._a.textContent=g._u[0];g.setAttribute('aria-label','Căn '+code(g)+', '+T[g._u[1]].n);});}
   var cur=null;
-  function pick(g){if(cur)cur.classList.remove('sel');cur=g;g.classList.add('sel');var u=g._u,t=T[u[1]],c=code(g);
+  var MD=document.getElementById('ccModal');
+  function openM(){if(!MD)return;MD.hidden=false;document.body.classList.add('ccm-on');}
+  function closeM(){if(!MD)return;MD.hidden=true;document.body.classList.remove('ccm-on');}
+  if(MD){MD.addEventListener('click',function(e){if(e.target===MD||e.target.closest('.ccm-x,.ccm-back,#ccBtn2'))closeM();});addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});}
+  document.getElementById('ccOpen').addEventListener('click',openM);
+  function pick(g,op){if(cur)cur.classList.remove('sel');cur=g;g.classList.add('sel');var u=g._u,t=T[u[1]],c=code(g);
     document.getElementById('ccCode').textContent=c;document.getElementById('ccType').textContent=t.n;document.getElementById('ccArea').textContent=t.a+' (theo loại căn)';
     document.getElementById('ccDim').textContent=t.d;drawUnit(u[1]);var ut=document.getElementById('ccUT');if(ut)ut.textContent=ut.textContent.replace(/^Căn [^·]+/,'Căn '+c+' · '+t.n+' ');document.getElementById('ccView').textContent=u[6];
-    var b=document.getElementById('ccBtn');b.setAttribute('data-interest',(document.getElementById('leadPop')?'ADS':'Web')+' – chọn căn '+c+' ('+t.n+', tầng '+F.options[F.selectedIndex].text.replace('Tầng ','')+')');b.setAttribute('data-title','Đăng ký ưu tiên căn '+c);}
+    var b=document.getElementById('ccBtn');b.setAttribute('data-interest',(document.getElementById('leadPop')?'ADS':'Web')+' – chọn căn '+c+' ('+t.n+', tầng '+F.options[F.selectedIndex].text.replace('Tầng ','')+')');b.setAttribute('data-title','Đăng ký ưu tiên căn '+c);
+    var b2=document.getElementById('ccBtn2');b2.setAttribute('data-interest',b.getAttribute('data-interest'));b2.setAttribute('data-title','Đăng ký ưu tiên căn '+c);document.getElementById('ccMV').textContent=u[6];
+    if(op)openM();}
   function flUp(){var n=F.options[F.selectedIndex].text.replace('Tầng ','');document.getElementById('ccFl').textContent=n;var fb=document.getElementById('ccFlBtn');fb.setAttribute('data-interest',(document.getElementById('leadPop')?'ADS':'Web')+' – bảng hàng tầng '+n);fb.setAttribute('data-title','Nhận bảng hàng tầng '+n);}
   F.addEventListener('change',function(){label();flUp();if(cur)pick(cur);});
   document.querySelectorAll('.cc .flt button').forEach(function(bt){bt.addEventListener('click',function(){document.querySelectorAll('.cc .flt button').forEach(function(x){x.classList.toggle('on',x===bt);});
@@ -1219,7 +1244,7 @@ font-family:'Cormorant Garamond',Georgia,serif!important;font-size:18px!importan
       <h2 class="title">Trước mặt là biển – <em>dưới chân là công viên</em></h2>
     </div>
     <div class="gal">
-      <figure class="w t rv"><span class="num">Kick-off 23/10</span><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/79ee4a6d86910e9de5f5ebd996b34c9a52637fd3/landing/sun-saphia/ads-v3/kick-off-sun-saphia-23-10-1200.jpg" width="1200" height="675" alt="Phối cảnh Sun Saphia Residence bên biển Đà Nẵng, cầu Rồng phía xa" loading="lazy" decoding="async"><figcaption><b>Đón ánh dương</b><span>Phối cảnh trong tài liệu sự kiện của chủ đầu tư</span></figcaption></figure>
+      <figure class="w t rv"><span class="num">Kick-off 23/10</span><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/TEST/landing/sun-saphia/ads-v3/kick-off-sun-saphia-23-10-1200.jpg" width="1200" height="675" alt="Phối cảnh Sun Saphia Residence bên biển Đà Nẵng, cầu Rồng phía xa" loading="lazy" decoding="async"><figcaption><b>Đón ánh dương</b><span>Phối cảnh trong tài liệu sự kiện của chủ đầu tư</span></figcaption></figure>
       <figure class="rv"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/d69a66192973f0a184ad7b402751b7b09e542238/landing/sun-saphia/ads-v2/w-thap.jpg" width="800" height="450" alt="Toà tháp Sun Saphia 30 tầng" loading="lazy" decoding="async"><figcaption><b>30 tầng · ~114 m</b><span>Phối cảnh minh hoạ</span></figcaption></figure>
       <figure class="rv"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/d69a66192973f0a184ad7b402751b7b09e542238/landing/sun-saphia/ads-v2/w-bien-cong-vien.jpg" width="800" height="450" alt="Công viên ven biển trước dự án" loading="lazy" decoding="async"><figcaption><b>Công viên ven biển</b><span>Ra bãi Sơn Thủy khoảng 400 m</span></figcaption></figure>
       <figure class="w rv"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/d69a66192973f0a184ad7b402751b7b09e542238/landing/sun-saphia/ads-v2/w-bien.jpg" width="800" height="450" alt="Nhìn ra biển Mỹ Khê" loading="lazy" decoding="async"><figcaption><b>Biển Sơn Thủy – Mỹ Khê</b><span>Bãi biển ngay trong lòng thành phố</span></figcaption></figure>
