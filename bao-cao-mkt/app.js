@@ -1247,6 +1247,19 @@
       ["conv", /^(chuyen doi|luot chuyen doi|khach hang tiem nang|conversions?)\b/]];
     const at = {};
     N.forEach((n, i) => LBL.forEach(([k, re]) => { if (at[k] == null && re.test(n)) at[k] = i; }));
+    // dòng tổng của bảng ("Total: All enabled …  2971  5,76%  2.051.096 đ  171", "Tổng số: Chiến dịch …") là số chắc nhất:
+    // thẻ chỉ số phía trên hay bị đọc sót ô / dính mũi tên vào số
+    for (let i = 0; i < N.length; i++) {
+      if (!/^(\W*)(total|tong so)\b/.test(N[i])) continue;
+      const ms = money(lines[i]).filter((m) => /\d[.,]\d{3}/.test(lines[i].substr(m.index, m.len)));
+      if (!ms.length) continue;
+      const m = ms[ms.length - 1];
+      const ints = (s) => Array.from(s.matchAll(/(?:^|\s)(\d{1,3}(?:[.,]\d{3})+|\d+)(?=\s|$)/g)).map((x) => Math.round(toNum(x[1])));
+      const before = ints(lines[i].slice(0, m.index)), after = ints(lines[i].slice(m.index + m.len));
+      const row = { cost: m.v, clicks: after.length ? after[after.length - 1] : null, impressions: before.length ? before[before.length - 1] : null };
+      if (row.clicks != null && row.impressions != null && row.clicks > row.impressions) row.clicks = null;
+      return finishGoogle(lines, N, row);
+    }
     const row = scorecardRow(lines, N, LBL);
     if (row) {
       // Không tin hẳn vào thứ tự ô (ô nền xanh hay bị đọc sót) hay dòng số nhỏ "↑ 2.327.110 đ" (mũi tên hay bị
