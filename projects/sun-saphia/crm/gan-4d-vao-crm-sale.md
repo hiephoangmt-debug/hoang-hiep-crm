@@ -11,10 +11,10 @@ Thêm mô hình 4D dự án vào CRM Sale (trang "Bảng hàng dự án"), khôn
    - `link4dKhach`: link gửi khách (nếu trống thì dùng `link4d`).
 
    Điền sẵn cho dự án tên **Sun Saphia Residence**:
-   - `link4d` = `https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/4cc5f6f1ed93b2fce45a802a1e5a111957b58b2a/projects/sun-saphia/4d/sun-saphia-4d.html`
+   - `link4d` = `https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/fafdea8bc8037d2813909cb7e1662a400a4eb146/projects/sun-saphia/4d/sun-saphia-4d.html?crm`
    - `link4dKhach` = `https://www.sun-saphia-residence.com/#ss4d`
-   - (tuỳ chọn) `linkChonCan` = `https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/7c55f8c649bb79381fd06e56ec499dadf932c03d/projects/sun-saphia/chon-can/chon-can-app.html` – công cụ chọn căn: mặt bằng tầng 28 căn, mặt bằng từng căn, 3D, tải ảnh có số điện thoại.
-   - Mặt bằng tầng đặt trên tòa nhà: thêm `?plan&f=<tầng>` vào sau `link4d` (ví dụ `...sun-saphia-4d.html?plan&f=18`).
+   - (tuỳ chọn) `linkChonCan` = `https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/b25ed5c4c1198c72e8551f552d74ed21a5743095/projects/sun-saphia/chon-can/chon-can-app.html` – công cụ chọn căn: mặt bằng tầng 28 căn, mặt bằng từng căn, 3D, tải ảnh có số điện thoại.
+   - Mặt bằng tầng đặt trên tòa nhà: thêm `?plan&f=<tầng>` vào sau `link4d` dạng `&plan&f=<tầng>` (ví dụ `...sun-saphia-4d.html?crm&plan&f=18`).
 
 2. **Màn sửa dự án (quyền Quản trị / Giám đốc)**: thêm 2 ô nhập "Link mô hình 4D (nhúng)" và "Link 4D gửi khách", lưu vào 2 trường trên.
 
@@ -23,7 +23,7 @@ Thêm mô hình 4D dự án vào CRM Sale (trang "Bảng hàng dự án"), khôn
    - Chỉ tạo iframe khi người dùng mở tab (không tải sẵn, cho nhẹ trên điện thoại).
    - Nút **"Mở toàn màn hình"**: mở `link4d` ở tab mới.
    - Nút **"Chép link gửi khách"**: chép `link4dKhach || link4d` vào bộ nhớ tạm, báo "Đã chép link 4D – dán vào Zalo gửi khách". Không có quyền clipboard thì hiện ô cho chép tay.
-   - Nút **"Mặt bằng tầng"**: mở `link4d + '?plan&f=18'` (tòa nhà cắt ngang tầng, hiện mặt bằng 28 căn). Nếu có `linkChonCan` thêm nút **"Chọn căn"** mở link đó.
+   - Nút **"Mặt bằng tầng"**: mở `link4d + '&plan&f=18'` (tòa nhà cắt ngang tầng, hiện mặt bằng 28 căn). Nếu có `linkChonCan` thêm nút **"Chọn căn"** mở link đó.
    - Dòng ghi chú nhỏ: "Mô hình minh họa, không phải bản vẽ của chủ đầu tư."
 
 4. Giữ nguyên giao diện và màu hiện có. Chạy test, deploy Netlify, tăng số bản.
