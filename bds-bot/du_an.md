@@ -71,6 +71,8 @@ Dòng nằm giữa dấu <!-- và --> là ghi chú, bot vẫn đọc được n�
 - Website dự án: [điền link]
 - Video thực tế / flycam: [điền link]
 - Vị trí Google Maps nhà mẫu: [điền link]
+- Bảng tính cho thuê Sun Saphia Residence (khách tự chỉnh số, chọn Studio/1PN+/2PN, thuê ngày/tháng): https://hiephoangmt-debug.github.io/hoang-hiep-crm/bang-tinh/saphia.html
+  Gửi khi khách hỏi về cho thuê, dòng tiền, lợi nhuận, hoặc khi khách đồng ý xem bảng tính. Muốn mở sẵn đúng loại căn thì thêm vào cuối link: ?loai=studio hoặc ?loai=1pn hoặc ?loai=2pn (thêm &thue=thang nếu khách muốn cho thuê tháng).
 
 ## Hỏi đáp mẫu (Q&A) (câu trả lời chuẩn của chuyên viên – dùng đúng ý, diễn đạt tự nhiên theo khách)
 <!-- Thêm nhanh từ Zalo: /hoidap <câu hỏi> => <câu trả lời> -->
