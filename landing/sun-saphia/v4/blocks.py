@@ -139,6 +139,17 @@ def nq278():
             '<li>Giao cơ quan chức năng bảo đảm quyền lợi người dân, tách bạch quyền sở hữu căn hộ và quyền sử dụng đất</li></ul>'
             '<p><b>Ý nghĩa:</b> giá trị căn hộ 50 năm đang được định hình lại, thu hẹp khoảng cách giữa sản phẩm thương mại dịch vụ 50 năm và căn hộ sở hữu lâu dài.</p></div>')
 
+def why_cards():
+    it = [('01', 'Chính sách giá và bán hàng tốt nhất', 'Chính sách bán hàng và chính sách giá tốt nhất từ chủ đầu tư dành cho giai đoạn đầu.'),
+          ('02', 'Chọn căn đẹp nhất', 'Sản phẩm có dòng tiền tốt, hữu hạn, vị trí mặt biển trung tâm. Căn đẹp chỉ có ở đợt đầu.'),
+          ('03', 'Chủ đầu tư hỗ trợ lãi suất', 'Mức hỗ trợ lãi suất cao nhất đang áp dụng. Cuối 2028 – đầu 2029 (bàn giao), lãi suất kỳ vọng đã hạ và thị trường đã khác.'),
+          ('04', 'Dòng tiền tìm đến trước', 'Khi thị trường quay đầu, sản phẩm giá trị thực, dòng tiền tốt, trung tâm, khan hiếm được tìm đến và tăng giá trước tiên.')]
+    return ''.join('<div class="card"><span class="n">%s</span><h3 class="oc">%s</h3><p>%s</p></div>' % x for x in it)
+
+def slogan_box(interest):
+    return ('<div class="sbox"><div>Chi phí <b>tốt nhất</b> · Lựa chọn <b>đẹp nhất</b> · Tăng giá <b>đầu tiên</b></div>'
+            '<button type="button" class="btn sm" data-pop data-interest="%s">Đăng ký sớm – ưu tiên chọn căn</button></div>') % esc(interest)
+
 def why_now():
     it = [('01', 'Chính sách giá và bán hàng tốt nhất', 'Chính sách bán hàng và chính sách giá tốt nhất từ chủ đầu tư dành cho giai đoạn đầu.'),
           ('02', 'Chọn căn đẹp nhất', 'Sản phẩm có dòng tiền tốt, hữu hạn, vị trí mặt biển trung tâm. Căn đẹp chỉ có ở đợt đầu.'),
@@ -188,7 +199,9 @@ def cta_block(label, title='Có bảng giá là anh/chị <b>nhận ngay</b>', s
     return ('<section class="sec" id="dang-ky"><div class="wrap"><div class="cta">%s<div class="g2"><div>'
             '<span class="ey" style="color:var(--yl)">Đăng ký nhận thông tin</span><h2 class="dp">%s</h2>'
             '<p style="margin-top:14px">%s</p><ul class="ck" style="color:#fff"><li>Bảng giá gốc &amp; chính sách thanh toán</li><li>Mặt bằng từng tầng, căn còn trống</li><li>Bảng tính dòng tiền theo căn anh/chị chọn</li></ul>'
-            '<p><a class="btn sm" href="%s" target="_blank" rel="noopener" style="background:#0068FF">Nhắn Zalo %s</a> <a class="btn sm gh" href="tel:%s" style="color:#fff;border-color:#fff">Gọi ngay</a></p></div>%s</div></div></div></section>') % (
+            '<p><a class="btn sm" href="%s" target="_blank" rel="noopener" style="background:#0068FF">Nhắn Zalo %s</a> <a class="btn sm gh" href="tel:%s" style="color:#fff;border-color:#fff">Gọi ngay</a></p>'
+            '<div class="trust"><div><b>Đại lý chính thức</b><span>Sun Property chứng nhận 23/10/2026</span></div><div><b>0 đồng</b><span>Không thu tiền giữ chỗ</span></div><div><b>Phản hồi nhanh</b><span>Gửi tài liệu qua Zalo trong ít phút</span></div></div>'
+            '</div>%s</div></div></div></section>') % (
         tiles('tr'), title, sub, ZALO, TEL_S, TEL, form('cuoi', label, title='Gửi tôi bảng giá', note='Gửi qua Zalo ngay khi chủ đầu tư công bố. Miễn phí, không ràng buộc.', btn='Gửi tôi bảng giá'))
 
 def hero_stats():

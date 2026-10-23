@@ -48,7 +48,7 @@ def hero_home():
             '<span class="tag">🔥 Vừa Kick-off 23/10/2026 · <b>Dự kiến mở bán cuối 11/2026</b></span>'
             '<img class="ribbon" src="%sruy-bang.webp" alt="" width="608" height="232" style="margin-top:16px" aria-hidden="true">'
             '<h1 class="dp">Sun Saphia Residence – căn hộ <b>mặt biển đầu tiên</b> của Sun Group tại Đà Nẵng</h1>'
-            '<p class="slogan">Trước mặt là <b>Biển</b> · Sau lưng là <b>Sông</b> · Bên cạnh là <b>Núi</b></p>'
+            + SLOGAN
             + author() +
             '<p class="lead just">Tòa tháp 30 tầng (114 m) trên cung đường tỷ đô Võ Nguyên Giáp – Trường Sa, 782 căn Studio, 1BR+, 2BR, trần cao 3,5 m, pháp lý 50 năm, '
             'Vietcombank – BIDV – NCB hỗ trợ vay. Bài viết tổng hợp toàn bộ thông tin chủ đầu tư công bố tại sự kiện Kick-off '
@@ -190,8 +190,8 @@ def home():
 def sub_hero(path, name, h1, lead, img_name, alt, label):
     cr, ld = crumbs([('Trang chủ', MAIN + '/'), ('Sun Saphia Residence', MAIN + '/'), (name, MAIN + path)])
     return ('<section class="hero" style="padding-bottom:40px"><img class="sun" src="%smat-troi.webp" alt="" width="700" height="898" aria-hidden="true"><div class="wrap">%s'
-            '<div class="g2" style="margin-top:14px"><div><img class="ribbon" src="%sruy-bang.webp" alt="" width="608" height="232" aria-hidden="true">'
-            '<h1 class="dp">%s</h1>%s<p class="lead just">%s</p>%s</div><div class="hr">%s<div class="pic">%s</div></div></div></div></section>') % (
+            '<div class="g2" style="margin-top:14px"><div><span class="tag">🔥 Vừa Kick-off 23/10/2026 · <b>Dự kiến mở bán cuối 11/2026</b></span><img class="ribbon" src="%sruy-bang.webp" alt="" width="608" height="232" style="margin-top:14px" aria-hidden="true">'
+            '<h1 class="dp">%s</h1>' + SLOGAN + '%s<p class="lead just">%s</p>%s</div><div class="hr">%s<div class="pic">%s</div></div></div></div></section>') % (
         SK, cr, SK, h1, author(), lead, hero_perks(), form('dau', label, h='h2'), img(img_name, alt, eager=True)), ld
 
 def bang_gia():
@@ -207,10 +207,11 @@ def bang_gia():
         ('Bây giờ có phải đặt cọc để giữ giá?', 'Không. Hiện chỉ đăng ký nhận thông tin, không thu bất kỳ khoản tiền nào.')])
     b = hero
     b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Tình trạng giá', 'Giá Sun Saphia Residence <b>hiện tại</b>', 'o') +
-          '<div class="g2" style="align-items:start"><div class="txt"><p>Chủ đầu tư Sun Property chưa công bố giá bán chính thức. Mọi con số "giá Sun Saphia" đang lan truyền trước ngày mở bán chỉ là phỏng đoán.</p>'
+          '<div class="g2 eq"><div class="txt"><p>Chủ đầu tư Sun Property chưa công bố giá bán chính thức. Mọi con số "giá Sun Saphia" đang lan truyền trước ngày mở bán chỉ là phỏng đoán.</p>'
           '<p>Tại Kick-off, chủ đầu tư dùng <b>giá tham khảo 3 tỷ cho studio 30 m²</b> và <b>4,5 tỷ cho 1BR 50 m²</b> để minh họa bài toán cho thuê – đây là giá giả định, không phải giá bán.</p>'
-          '<ul class="ck"><li>Bảng giá chính thức: dự kiến công bố cuối 11/2026</li><li>Phương thức thanh toán, hỗ trợ lãi suất: công bố cùng chính sách bán hàng</li><li>Người đăng ký trước nhận bảng giá và mặt bằng căn còn trống sớm nhất</li></ul></div>'
-          '<div>' + why_now().replace('class="why"', 'class="g2" style="gap:14px"') + '</div></div></div></section>')
+          '<ul class="ck"><li>Bảng giá chính thức: dự kiến công bố cuối 11/2026</li><li>Phương thức thanh toán, hỗ trợ lãi suất: công bố cùng chính sách bán hàng</li><li>Người đăng ký trước nhận bảng giá và mặt bằng căn còn trống sớm nhất</li></ul>'
+          + slogan_box('Bảng giá – giữa trang') + '</div>'
+          '<div class="g2" style="gap:14px">' + why_cards() + '</div></div></div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('2', 'So sánh', 'Giá căn hộ <b>mặt biển Đà Nẵng</b> đang chào bán', 'y') +
           '<div class="g2" style="align-items:start"><div>' + price_table() + '<p class="just" style="margin-top:14px">Sun Saphia Residence có lợi thế thương hiệu Sun Group, vị trí ngay trục biển Võ Nguyên Giáp – Trường Sa và cơ cấu căn nhỏ (65% là studio) giúp tổng vốn mỗi căn vừa sức hơn so với các dự án mặt biển hạng sang.</p></div>'
           + fig('ban-do-gia-ban', 'Bản đồ giá chào bán các dự án căn hộ ven biển Đà Nẵng: The Soleil, Futa Residence, Nobu, The Newtown Diamond', 'Vị trí và giá chào bán các dự án ven biển') + '</div></div></section>')
@@ -223,7 +224,9 @@ def bang_gia():
     b += ('<section class="sec"><div class="wrap">' + sh('4', 'Vay ngân hàng', 'Vay mua căn hộ – <b>Vietcombank, BIDV, NCB</b>', 'o') +
           '<div class="g2" style="align-items:start"><div class="txt"><p>Ba ngân hàng hỗ trợ cho vay dự án: Vietcombank, BIDV, NCB. Lãi suất cho vay đang có xu hướng giảm sau chỉ đạo tháng 10/2026; chủ đầu tư thông tin mức hỗ trợ lãi suất cao nhất đang áp dụng cho giai đoạn đầu.</p>'
           '<div class="banks"><span>NGÂN HÀNG HỖ TRỢ</span><img src="%snh-1.webp" alt="Vietcombank" width="347" height="117" loading="lazy"><img src="%snh-2.webp" alt="BIDV" width="366" height="117" loading="lazy"><img src="%snh-3.webp" alt="NCB" width="342" height="101" loading="lazy"></div>'
-          '<p class="note" style="margin-top:10px">Bảng tính bên cạnh chỉ để ước lượng; con số thực tế theo hồ sơ vay và chính sách từng ngân hàng.</p></div>'
+          '<h3 style="margin-top:18px">Hồ sơ vay thường cần</h3><ul class="ck"><li>CCCD, giấy tờ cư trú, tình trạng hôn nhân</li><li>Chứng minh thu nhập: sao kê lương, hợp đồng thuê, kinh doanh</li><li>Hợp đồng mua bán / thỏa thuận đặt cọc với chủ đầu tư</li></ul>'
+          '<p class="note" style="margin-top:10px">Bảng tính bên cạnh chỉ để ước lượng; con số thực tế theo hồ sơ vay và chính sách từng ngân hàng.</p>'
+          '<button type="button" class="btn sm" data-pop data-interest="Bảng giá – tư vấn vay">Nhận tư vấn phương án vay</button></div>'
           '<div class="calc" id="tinh-vay"><h3>Tính trả góp hàng tháng</h3>'
           '<label>Giá căn (tỷ đồng) <output id="vg">3</output></label><input type="range" id="ig" min="2" max="12" step="0.1" value="3">'
           '<label>Tỷ lệ vay <output id="vt">50%%</output></label><input type="range" id="it" min="10" max="70" step="5" value="50">'
@@ -260,7 +263,9 @@ def mat_bang():
     b += ('<section class="sec"><div class="wrap">' + sh('2', 'Layout tầng', 'Mặt bằng tầng điển hình <b>3A–28</b>', 'n') +
           '<div class="g2"><div class="txt"><p>Mặt bằng tầng điển hình 3A–28 tòa Saphia có 28 căn: dãy Studio chạy dọc hành lang giữa, hai đầu tòa bố trí 1BR+ và 2BR, các căn góc bo tròn có hai mặt thoáng. '
           'Lõi thang máy, thang bộ đặt giữa tòa, giúp quãng đi từ thang tới căn ngắn.</p>'
-          '<p>Hướng chính: <b>trước mặt là biển</b> Mỹ Khê – Sơn Thủy; một bên về thành phố, biển Mỹ Khê phía Sơn Trà; một bên về Ngũ Hành Sơn – Hội An; phía sau là sông Hàn, sân bay, Hòa Xuân.</p></div>'
+          '<p>Hướng chính: <b>trước mặt là biển</b> Mỹ Khê – Sơn Thủy; một bên về thành phố, biển Mỹ Khê phía Sơn Trà; một bên về Ngũ Hành Sơn – Hội An; phía sau là sông Hàn, sân bay, Hòa Xuân.</p>'
+          '<ul class="ck"><li><b>Studio</b> – 19 căn/tầng, dãy giữa, hai mặt hướng biển và hướng thành phố</li><li><b>1BR+1</b> – 4 căn/tầng ở hai đầu hành lang</li><li><b>2BR</b> – 5 căn/tầng, có căn góc bo tròn hai mặt thoáng</li><li>Trần 3,5 m, logia kính lớn đón gió biển</li></ul>'
+          '<button type="button" class="btn sm" data-pop data-interest="Mặt bằng – nhận layout từng tầng">Nhận mặt bằng từng tầng qua Zalo</button></div>'
           + fig('layout-tang-3a-28', 'Layout tầng điển hình 3A–28 Sun Saphia Residence, 28 căn mỗi tầng', 'Layout tầng 3A–28 (tài liệu chủ đầu tư)', wm=True) + '</div>'
           '<div id="chon-can"></div></div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('3', 'Hướng view', 'Mỗi hướng <b>một khung tranh</b>', 'y') + views() + '</div></section>')
@@ -289,6 +294,7 @@ def phap_ly():
           '<div class="g2" style="align-items:start"><div class="txt"><p>Căn hộ trong dự án có thời hạn 50 năm thường bị so sánh thiệt thòi với căn hộ sở hữu lâu dài. Nghị quyết 278/NQ-CP ngày 18/9/2026 của Chính phủ đang thay đổi cách nhìn này, '
           'khi thời hạn sử dụng chung cư được xác định theo niên hạn công trình và hồ sơ thiết kế.</p>'
           '<p>Với Sun Saphia Residence, công trình được xếp <b>cấp I, niên hạn sử dụng 100 năm</b>. Quyền lợi cụ thể của người mua khi hết thời hạn dự án sẽ theo quy định pháp luật và Hợp đồng mua bán; anh/chị nên đọc kỹ điều khoản này khi ký.</p>'
+          '<h3>Khi ký Hợp đồng mua bán nên xem kỹ</h3><ul class="ck"><li>Điều khoản thời hạn sở hữu và quyền lợi khi hết hạn</li><li>Tiến độ thanh toán, bàn giao, phạt chậm bàn giao</li><li>Phí quản lý, quy định cho thuê căn hộ</li></ul>'
           '<p class="note">Nội dung mang tính giải thích chung, không thay thế tư vấn pháp lý.</p></div>' + nq278() + '</div></div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('3', 'Tiến độ', 'Mốc thời gian <b>dự án</b>', 'y') + timeline() + '</div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('4', 'Mua ở đâu', 'Mua qua <b>đại lý phân phối chính thức</b>', 'o') + daily() +
@@ -354,16 +360,18 @@ def ads(domain):
          '<span class="tag">🔥 Kick-off 23/10/2026 · <b>Mở bán dự kiến cuối 11/2026</b></span>'
          '<img class="ribbon" src="%sruy-bang.webp" alt="" width="608" height="232" style="margin-top:14px" aria-hidden="true">'
          '<h1 class="dp">Căn hộ <b>mặt biển đầu tiên</b> của Sun Group tại Đà Nẵng</h1>'
-         '<p class="slogan">Trước mặt là <b>Biển</b> · Sau lưng là <b>Sông</b> · Bên cạnh là <b>Núi</b></p>'
+         + SLOGAN +
          '<ul class="ck"><li>Studio 30 m², 1BR+ 50 m², 2BR 60–70 m² · trần cao 3,5 m</li><li>Ra bãi tắm Sơn Thủy ~400 m qua công viên ven biển</li>'
          '<li>Pháp lý 50 năm · Vietcombank, BIDV, NCB hỗ trợ vay</li><li>Đại lý phân phối chính thức – bảng giá gốc, không thu tiền giữ chỗ</li></ul>'
          '%s</div><div class="hr">%s<div class="pic">%s<span>Phối cảnh minh họa</span></div></div></div></div></section>') % (
-        SK, SK, hero_stats(), form('dau', 'ADS – form đầu trang', title='Nhận bảng giá &amp; mặt bằng', h='h2'),
+        SK, SK, hero_perks(), form('dau', 'ADS – form đầu trang', title='Nhận bảng giá &amp; mặt bằng', h='h2'),
         img('thap-bien-hoang-hon', 'Phối cảnh Sun Saphia Residence bên bờ biển Đà Nẵng lúc hoàng hôn', eager=True))
     b += ('<section class="sec alt"><div class="wrap">' + sh('★', 'Thời điểm vàng', 'Vì sao <b>đăng ký sớm</b>?', 'o') + why_now() + '</div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('01', 'Vị trí', 'Trung điểm <b>hệ di sản</b> Đà Nẵng', 'y') +
           '<div class="g2"><div><ul class="ck"><li><b>~400 m</b> ra bãi tắm Sơn Thủy</li><li><b>~500 m</b> tới ga LRT 09 (quy hoạch sân bay – Hội An)</li><li><b>4 km</b> tới Galaxy, Đà Nẵng Downtown</li>'
-          '<li>Mở rộng trục biển Võ Nguyên Giáp – Trường Sa: <b>2.633 tỷ</b></li><li>Công viên bãi tắm 2,45 ha ngay trước dự án</li></ul></div>'
+          '<li>Mở rộng trục biển Võ Nguyên Giáp – Trường Sa: <b>2.633 tỷ</b></li><li>Công viên bãi tắm 2,45 ha ngay trước dự án</li></ul>'
+          '<p>Giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa: một hướng về trung tâm, Sơn Trà; một hướng về Ngũ Hành Sơn, Hội An; trước mặt là biển Mỹ Khê – Sơn Thủy.</p>'
+          '<button type="button" class="btn sm" data-pop data-interest="ADS – đặt lịch xem vị trí qua video">Đặt lịch xem vị trí qua video</button></div>'
           + fig('ban-do-ket-noi', 'Bản đồ kết nối Sun Saphia Residence', 'Bản đồ kết nối') + '</div></div></section>')
     b += ('<section class="sec alt" id="mat-bang"><div class="wrap">' + sh('04', 'Mặt bằng', 'Chọn căn trên <b>mặt bằng tầng</b>', 'n') + units_table() +
           '<div style="margin-top:20px">' + units_drawings() + '</div><div id="chon-can"></div></div></section>')

@@ -12,6 +12,9 @@ TEL = '0904567009'
 TEL_S = '0904 567 009'
 ZALO = 'https://zalo.me/0904567009'
 UPDATED = '23/10/2026'
+CC_SHA = 'b36d37dd422a487fd4545e37635fe9c3ecacdf55'
+D4_SHA = 'df42c7854c3d33ad678fa9e08157fca320e02e5b'
+SLOGAN = '<p class="slogan">Trước mặt là <b>Biển</b> · Sau lưng là <b>Sông</b> · Bên cạnh là <b>Núi</b></p>'
 
 def esc(s):
     return s.replace('&', '&amp;').replace('"', '&quot;').replace('<', '&lt;')
@@ -92,6 +95,9 @@ def author():
 def footer(base):
     links = ' · '.join('<a href="%s%s">%s</a>' % (base, p, t) for p, t in PAGES)
     return ('<footer class="ft"><div class="wrap">'
+            '<div class="fbr"><img src="' + RAW + '093918cb38d81f5e24fbe4d8477cea21e3de6ca8/landing/sun-saphia/v4/img/logo-mark.webp" alt="" width="34" height="48" loading="lazy">'
+            '<div><b>SUN SAPHIA RESIDENCE</b><span>Trước mặt là Biển · Sau lưng là Sông · Bên cạnh là Núi</span></div>'
+            '<a class="btn sm" href="#" data-pop data-interest="Chân trang">Nhận bảng giá gốc</a></div>'
             '<p class="fl">%s</p>'
             '<p>Trang thông tin dự án Sun Saphia Residence do <b>Hoàng Phạm Đình Hiệp</b> – Giám đốc kinh doanh TATILAND (Công ty CP Đầu tư Địa ốc TATI), '
             'đại lý phân phối chính thức dự án theo chứng nhận của Sun Property ngày 23/10/2026 – thực hiện. Đây không phải website của chủ đầu tư. '
@@ -117,6 +123,8 @@ def tail(with_tools):
     a = s.index('<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@afea225cd1c07439c244feaf9f6fa8e7bf42a111/projects/sun-saphia/crm/ss-all-nochat.js"')
     b = s.index('</body>')
     t = s[a:b]
+    t = re.sub(r'hoang-hiep-crm@[0-9a-f]{40}/projects/sun-saphia/chon-can/chon-can-embed\.js', 'hoang-hiep-crm@' + CC_SHA + '/projects/sun-saphia/chon-can/chon-can-embed.js', t)
+    t = re.sub(r'hoang-hiep-crm@[0-9a-f]{40}/projects/sun-saphia/4d/sun-saphia-4d-embed\.js', 'hoang-hiep-crm@' + D4_SHA + '/projects/sun-saphia/4d/sun-saphia-4d-embed.js', t)
     if not with_tools:
         x = t.index('<!-- 4D + CHỌN CĂN 3D -->'); y = t.index('<!-- /4D -->') + len('<!-- /4D -->')
         t = t[:x] + t[y:]
