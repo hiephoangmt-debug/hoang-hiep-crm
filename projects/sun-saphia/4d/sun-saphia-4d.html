@@ -268,7 +268,23 @@ beds.forEach(function(b){ var w=P2W(b[0],b[1]), n=b[3]<.45?4:7; for(var j=0;j<n;
 for(var i=0;i<60;i++){ var x=rnd(30,100), z=rnd(PZ-PD/2+4,PZ+PD/2-4); if(srnd()<.55) addPalm(x,z); else roundT.push([x,z,rnd(3,5),srnd()]); }
 // dải đất resort ven biển đối diện dự án (đang điều chỉnh quy hoạch): cát + cây phi lao, dừa thưa
 flat(98,278,0xc3bc95,64,-20,0.09);
-for(var i=0;i<170;i++){ var x=rnd(20,108), z=rnd(-158,116); if(srnd()<.25) addPalm(x,z); else roundT.push([x,z,rnd(2.6,4.4),srnd()*.5]); }
+// hồ bơi dạng hồ cong phía trước dự án (theo phối cảnh): sàn gỗ/đá, dừa bao quanh, khối resort thấp tầng phía Nam hồ
+var LG={x:66,z:8,a:31,b:15};
+function lagR(t){ return 1+.13*Math.sin(2*t+.6)+.07*Math.sin(3*t+1.7); }
+function inLag(x,z,m){ var dx=x-LG.x, dz=z-LG.z, t=Math.atan2(dz/LG.b,dx/LG.a), r=lagR(t); return (dx*dx)/Math.pow(LG.a*r+m,2)+(dz*dz)/Math.pow(LG.b*r+m,2)<1; }
+var RB=[[44,52,24,12,9],[70,58,20,12,11],[94,48,16,14,8],[48,80,22,12,7.5],[80,86,26,12,9]];   // khối resort thấp tầng [x,z,dài,rộng,cao]
+function inRB(x,z){ return RB.some(function(r){ return Math.abs(x-r[0])<r[2]/2+3&&Math.abs(z-r[1])<r[3]/2+3; }); }
+for(var i=0;i<170;i++){ var x=rnd(20,108), z=rnd(-158,116); if(inLag(x,z,7)||inRB(x,z)) continue; if(srnd()<.25) addPalm(x,z); else roundT.push([x,z,rnd(2.6,4.4),srnd()*.5]); }
+(function(){
+  function lagShape(m){ var sh=new THREE.Shape(); for(var i=0;i<=72;i++){ var t=i/72*Math.PI*2, r=lagR(t), x=LG.x+(LG.a*r+m)*Math.cos(t), z=LG.z+(LG.b*r+m)*Math.sin(t); if(i) sh.lineTo(x,-z); else sh.moveTo(x,-z); } return sh; }
+  function lay(m,col,y,o){ var g=new THREE.ShapeGeometry(lagShape(m)); g.rotateX(-Math.PI/2); var me=new THREE.Mesh(g,M(col,o||{roughness:.8})); me.position.y=y; me.receiveShadow=true; world.add(me); return me; }
+  lay(6,0xe6dccb,.13); lay(1.2,0xf7f4ee,.16);
+  lay(0,0x37c4d6,.19,{roughness:.05,metalness:.1,envMapIntensity:1.3,emissive:0x0c5f6e,emissiveIntensity:.35});
+  lay(-LG.b*.55,0x2ab0c6,.2,{roughness:.05,metalness:.1,envMapIntensity:1.3,emissive:0x0a5260,emissiveIntensity:.3});
+  for(var i=0;i<34;i++){ var t=i/34*Math.PI*2, r=lagR(t); addPalm(LG.x+(LG.a*r+4.2)*Math.cos(t),LG.z+(LG.b*r+4.2)*Math.sin(t),rnd(10,14)); }
+  for(var j=0;j<14;j++){ var t2=Math.PI*(.15+j*.05), r2=lagR(t2); box(1.8,.35,.7,LG.x+(LG.a*r2+2.6)*Math.cos(t2),LG.z+(LG.b*r2+2.6)*Math.sin(t2),0xffffff,.13); }
+  RB.forEach(function(r){ var b=box(r[2],r[4],r[3],r[0],r[1],0xf3efe7); for(var k=1;k<r[4]/3.2;k++) box(r[2]+.6,.35,r[3]+.6,r[0],r[1],0xffffff,k*3.2); box(r[2]-1,r[4]-1.2,r[3]+.2,r[0],r[1],0x9fc3d6,.6).material.transparent=false; box(r[2]+1,.5,r[3]+1,r[0],r[1],0xd8cfbf,r[4]); });
+})();
 // beach palms (fringe between park and sand)
 for(var z=-1100;z<1250;z+=7){ if(srnd()<.75) addPalm(rnd(108,124),z+rnd(-2,2),rnd(10,15)); }
 // scrub on the vacant land to the north
@@ -522,7 +538,8 @@ label('Nguyễn Đức Thuận','road',world,[-250,2,0]);
 label('Minh Mạng','road',world,[-260,2,212]);
 label('Lê Văn Hiến','road',world,[-560,2,-200]);
 label('Khu đất dự án · 3.720,1 m²','',world,[-50,3,64]); label('Khu thấp tầng & hồ cảnh quan (phối cảnh minh họa)','',world,[66,14,-430]); label('VV Mall','',world,[62,24,-205]);
-label('Dải đất resort ven biển (đang điều chỉnh quy hoạch)','',world,[62,10,60]);
+label('Dải đất resort ven biển (đang điều chỉnh quy hoạch)','',world,[62,10,-60]);
+label('Hồ bơi phía trước (theo phối cảnh)','',world,[66,8,8]);
 label('Công viên biển Trường Sa (quy hoạch) · cuối Minh Mạng','',world,[64,10,163]);
 label('Resort ven biển','',world,[70,12,282]);
 label('Bãi biển · bãi tắm Sơn Thủy','',world,[150,4,330]);
