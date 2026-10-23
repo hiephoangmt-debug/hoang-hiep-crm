@@ -63,7 +63,7 @@ Dòng nằm giữa dấu <!-- và --> là ghi chú, bot vẫn đọc được n�
 - Lý do mua sớm (thông điệp sự kiện): giá và CSBH đợt đầu thường tốt nhất, được chọn căn đẹp trước, CĐT thường có hỗ trợ lãi suất (chờ CSBH chính thức), xu hướng lãi suất giảm. Nói đúng tinh thần, không hứa tăng giá.
 
 ### Saphia – Hỏi đáp & xử lý khi khách chê (trả lời đúng ý, diễn đạt tự nhiên, luôn kết bằng 1 câu mở)
-- H: "50 năm hay lâu dài?" → Đ: Nói thẳng: Saphia là căn hộ sở hữu 50 năm (dự án cấp chủ trương 17/09/2026), không phải lâu dài. Rồi nói 2 điểm:
+- H: "50 năm hay lâu dài?" → Đ: Nói thẳng: Saphia là căn hộ sở hữu 50 năm (thời hạn dự án 50 năm tính từ 17/09/2026, ngày cấp Giấy chứng nhận đăng ký đầu tư), không phải lâu dài. Rồi nói 2 điểm:
   (1) Tòa nhà là công trình cấp I, niên hạn sử dụng 100 năm – bản thân căn hộ được xây để dùng lâu hơn nhiều so với 50 năm.
   (2) Nghị quyết 278/NQ-CP (18/9/2026) đang làm rõ thời hạn chung cư theo niên hạn công trình, quyền lợi khi hết hạn, và tách bạch quyền sở hữu căn hộ với quyền sử dụng đất – khoảng cách giữa căn 50 năm và lâu dài đang thu hẹp.
   Hết thời hạn thì theo luật được xem xét gia hạn khi có nhu cầu; chi tiết pháp lý cụ thể → mời chuyên viên giải thích kỹ ([CHUYEN_NHAN_VIEN] nếu khách hỏi sâu). KHÔNG khẳng định "chắc chắn được gia hạn miễn phí" hay "giống hệt lâu dài".
