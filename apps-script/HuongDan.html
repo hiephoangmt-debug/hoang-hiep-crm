@@ -41,6 +41,8 @@
   .shot figcaption { padding:6px 10px; font-size:14px; }
   .shot figcaption b { color:var(--accent); }
   .req { margin:6px 0 0; padding-left:20px; font-size:14px; }
+  .shots.dt { grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); align-items:start; }
+  .shots.dt img { max-height:520px; object-fit:contain; object-position:top; background:#fff; }
   #deckStatus { font-size:14px; color:var(--muted); }
   /* mô phỏng giao diện app */
   .mock { border:1px solid var(--line); border-radius:10px; background:var(--bg); padding:10px; margin:8px 0 4px; font-size:13px; max-width:520px; }
@@ -101,7 +103,7 @@
   <!-- 1. CHỤP NGHIỆM THU -->
   <section id="chup">
     <h2>1. Hướng dẫn chụp nghiệm thu</h2>
-    <p>Mỗi kênh đã chạy trong tuần cần đủ <b>3 loại ảnh</b> (Google: 2 loại):</p>
+    <p>Mỗi kênh đã chạy trong tuần cần đủ <b>3 loại ảnh</b> (Google và Đăng tin: 2 loại – xem <a href="#ch-dt">mẫu Đăng tin</a>):</p>
     <div class="wrap"><table>
       <tr><th>Loại ảnh</th><th>Chụp ở đâu</th></tr>
       <tr><td><b>Chiến dịch</b></td><td>Trình quản lý quảng cáo, tab Chiến dịch: lọc đúng <b>khoảng ngày của tuần báo cáo</b>, search tên chiến dịch, thấy dòng <b>tổng chi tiêu</b>. <b>Chiến dịch đã tắt / tạm dừng giữa tuần vẫn phải có trong ảnh</b> vì vẫn có chi phí: bỏ bộ lọc "Đang hoạt động"/"Có lượt phân phối" để hiện cả chiến dịch đã tắt.</td></tr>
@@ -143,11 +145,18 @@
       <li><b>Hoá đơn:</b> ① ID tài khoản QC (Account ID) ② số mã tham chiếu (Invoice number) ③ tổng số tiền thực chạy</li>
     </ul>
 
-    <h3 id="ch-dt">Đăng tin (batdongsan, Chợ Tốt…)</h3>
+    <h3 id="ch-dt">Đăng tin (batdongsan, Chợ Tốt, Nhà Tốt…)</h3>
+    <p>Đăng tin cần <b>2 loại ảnh</b>, chụp trong ứng dụng / trang web đăng tin (không có "QC đang chạy"). Chọn kênh <b>Đăng tin</b> khi tải lên.</p>
+    <div class="shots dt">
+      <figure class="shot"><img data-img="crm/img/dt-tin.jpg" alt="Màn hình Quản lý tin"><figcaption><b>Chiến dịch</b> · màn hình <b>Quản lý tin</b> (mỗi tin đang chạy 1 ảnh): ① mã tin ② ngày đăng – ngày hết hạn ③ lượt xem, khách hàng</figcaption></figure>
+      <figure class="shot"><img data-img="crm/img/dt-lichsu.jpg" alt="Lịch sử giao dịch"><figcaption><b>Hoá đơn</b> · <b>Lịch sử giao dịch</b>, cuộn sao cho thấy đủ các khoản trong tuần: ①③ số tiền bị trừ ②④ ngày giờ. App tự <b>cộng các khoản có ngày trong tuần</b> làm chi phí Đăng tin.</figcaption></figure>
+      <figure class="shot"><img data-img="crm/img/dt-chitiet.jpg" alt="Chi tiết giao dịch"><figcaption><b>Hoá đơn</b> · hoặc <b>Chi tiết giao dịch</b> từng khoản: ① số tiền ② mã giao dịch ③ ngày giờ ④ mã tin</figcaption></figure>
+    </div>
     <ul class="req">
       <li><b>Chiến dịch:</b> màn hình quản lý tin – ① mã tin ② ngày đăng / hết hạn ③ lượt xem, khách hàng</li>
-      <li><b>Hoá đơn (chi tiết / lịch sử giao dịch):</b> ① mã giao dịch ② thời gian giao dịch trong tuần ③ số tiền đã thanh toán – app lấy số này làm chi phí Đăng tin</li>
+      <li><b>Hoá đơn (lịch sử / chi tiết giao dịch):</b> ① số tiền đã thanh toán ② thời gian giao dịch <b>trong tuần báo cáo</b> ③ mã giao dịch / mã tin</li>
     </ul>
+    <p class="tip">Chụp bằng <b>điện thoại</b> (ảnh dọc) để app đọc đúng số. Ảnh màn hình máy tính quá ngang hay bị sót số tiền màu đỏ ở mép phải – khi đó gõ tổng tiền vào ô "Tổng hoá đơn" dưới ảnh. Giao dịch của tuần trước (vd 16/10 khi báo cáo tuần 17/10 – 23/10) không tính.</p>
   </section>
 
   <!-- 2. GỬI LÊN APP -->
@@ -267,23 +276,94 @@
   });
 </script>
 <script>
+/* Trang hướng dẫn: hiện các slide hướng dẫn chụp nghiệm thu lấy từ chính file PPTX mẫu (qua PDF do Apps Script tạo). */
 (function () {
-  // tải lần lượt từng file, file nào lỗi thì thử máy chủ dự phòng kế tiếp
-  var list = [["https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@edbbb85a4067f7ae98811bbbc0288002d1b151ea/crm/huong-dan.js", "https://fastly.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@edbbb85a4067f7ae98811bbbc0288002d1b151ea/crm/huong-dan.js", "https://gcore.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@edbbb85a4067f7ae98811bbbc0288002d1b151ea/crm/huong-dan.js", "https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/edbbb85a4067f7ae98811bbbc0288002d1b151ea/crm/huong-dan.js", "https://cdn.statically.io/gh/hiephoangmt-debug/hoang-hiep-crm/edbbb85a4067f7ae98811bbbc0288002d1b151ea/crm/huong-dan.js"]];
-  function load(i, k) {
-    if (i >= list.length) return;
-    var s = document.createElement("script");
-    s.src = list[i][k];
-    s.onload = function () { load(i + 1, 0); };
-    s.onerror = function () {
-      if (s.parentNode) s.parentNode.removeChild(s);
-      if (k + 1 < list[i].length) return load(i, k + 1);
-      var d = document.getElementById("diag");
-      if (d) d.innerHTML += "Không tải được mã: " + list[i][0].split("/").pop() + "<br>";
-    };
-    document.body.appendChild(s);
+  var PDFJS = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/";
+  var status = document.getElementById("deckStatus");
+  var say = function (t) { if (status) status.textContent = t; };
+  // tiêu đề kênh trong slide viết HOA; ghi chú có thể nhắc nhầm kênh nên chỉ xét chữ HOA
+  var CHANNELS = [["fb", /FACEBOOK/], ["tt", /TIKTOK/], ["zl", /ZALO/], ["gg", /GOOGLE/]];
+  // ảnh mẫu đi kèm mã nguồn (crm/img/…): lấy theo địa chỉ CDN đã nạp file này, chạy thử tại chỗ thì theo đường dẫn tương đối
+  var SELF = (document.currentScript && document.currentScript.src) || "";
+  var BASE = /\/crm\/huong-dan\.js/.test(SELF) ? SELF.replace(/crm\/huong-dan\.js.*$/, "") : "../";
+  Array.prototype.forEach.call(document.querySelectorAll("img[data-img]"), function (im) { im.src = BASE + im.getAttribute("data-img"); });
+  var KIND_LABEL = { ads: "Chiến dịch", qc: "QC đang chạy", hoadon: "Hoá đơn" };
+
+  function plain(t) {
+    return t.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D").toLowerCase();
   }
-  load(0, 0);
+  function kindOf(t) {
+    var p = plain(t);
+    if (/hoa don|invoice|ma tham chieu|da thanh toan|chi tiet giao dich/.test(p)) return "hoadon";
+    if (/dang hoat dong|quang cao chay/.test(p)) return "qc";
+    return "ads";
+  }
+  function loadScript(src) {
+    return new Promise(function (ok, fail) {
+      var s = document.createElement("script");
+      s.src = src; s.onload = ok; s.onerror = function () { fail(new Error("Không tải được " + src)); };
+      document.head.appendChild(s);
+    });
+  }
+  function deck() {
+    return new Promise(function (ok, fail) {
+      google.script.run.withSuccessHandler(ok).withFailureHandler(fail).crmGuideDeck();
+    });
+  }
+  function toBytes(b64) {
+    var s = atob(b64), a = new Uint8Array(s.length);
+    for (var i = 0; i < s.length; i++) a[i] = s.charCodeAt(i);
+    return a;
+  }
+
+  async function run() {
+    if (!(window.google && google.script && google.script.run)) {
+      say("Mở trang này từ link app (…/exec?page=huongdan) để xem slide mẫu.");
+      return;
+    }
+    var d = await deck();
+    if (!window.pdfjsLib) await loadScript(PDFJS + "pdf.min.js");
+    pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + "pdf.worker.min.js";
+    var pdf = await pdfjsLib.getDocument({ data: toBytes(d.b64) }).promise;
+    var ch = "", n = 0;
+    for (var i = 1; i <= pdf.numPages; i++) {
+      var page = await pdf.getPage(i);
+      var text = (await page.getTextContent()).items.map(function (x) { return x.str; }).join(" ");
+      for (var k = 0; k < CHANNELS.length; k++) if (CHANNELS[k][1].test(text)) { ch = CHANNELS[k][0]; break; }
+      // slide hướng dẫn chụp = có ghi chú "Lưu ý … capture" / "Demo"
+      if (!ch || !/capture|demo/i.test(plain(text))) continue;
+      var box = document.querySelector('.shots[data-ch="' + ch + '"]');
+      if (!box) continue;
+      say("Đang hiện slide mẫu " + i + "/" + pdf.numPages + "…");
+      var vp0 = page.getViewport({ scale: 1 });
+      var vp = page.getViewport({ scale: Math.min(2.5, 1400 / vp0.width) });
+      var cv = document.createElement("canvas");
+      cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
+      await page.render({ canvasContext: cv.getContext("2d"), viewport: vp }).promise;
+      var blob = await new Promise(function (ok) { cv.toBlob(ok, "image/jpeg", 0.85); });
+      var fig = document.createElement("figure");
+      fig.className = "shot";
+      fig.innerHTML = '<img alt=""><figcaption><b>' + KIND_LABEL[kindOf(text)] + "</b> · slide " + i + " trong file mẫu – chạm để phóng to</figcaption>";
+      fig.querySelector("img").src = URL.createObjectURL(blob);
+      box.appendChild(fig);
+      n++;
+    }
+    say(n ? "Slide mẫu lấy từ file báo cáo mẫu " + (d.name || "") + "." : "Không tìm thấy slide hướng dẫn trong file mẫu.");
+  }
+
+  document.addEventListener("click", function (e) {
+    var z = document.getElementById("zoom");
+    if (z) { z.remove(); return; }
+    if (e.target.matches(".shot img")) {
+      z = document.createElement("div");
+      z.id = "zoom";
+      z.innerHTML = '<img alt="">';
+      z.firstChild.src = e.target.src;
+      document.body.appendChild(z);
+    }
+  });
+  run().catch(function (e) { say("Chưa tải được slide mẫu (" + (e && e.message || e) + "). Xem danh sách mục cần chụp bên dưới mỗi kênh."); });
 })();
-</script></body>
+</script>
+</body>
 </html>

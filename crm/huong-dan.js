@@ -5,6 +5,10 @@
   var say = function (t) { if (status) status.textContent = t; };
   // tiêu đề kênh trong slide viết HOA; ghi chú có thể nhắc nhầm kênh nên chỉ xét chữ HOA
   var CHANNELS = [["fb", /FACEBOOK/], ["tt", /TIKTOK/], ["zl", /ZALO/], ["gg", /GOOGLE/]];
+  // ảnh mẫu đi kèm mã nguồn (crm/img/…): lấy theo địa chỉ CDN đã nạp file này, chạy thử tại chỗ thì theo đường dẫn tương đối
+  var SELF = (document.currentScript && document.currentScript.src) || "";
+  var BASE = /\/crm\/huong-dan\.js/.test(SELF) ? SELF.replace(/crm\/huong-dan\.js.*$/, "") : "../";
+  Array.prototype.forEach.call(document.querySelectorAll("img[data-img]"), function (im) { im.src = BASE + im.getAttribute("data-img"); });
   var KIND_LABEL = { ads: "Chiến dịch", qc: "QC đang chạy", hoadon: "Hoá đơn" };
 
   function plain(t) {
