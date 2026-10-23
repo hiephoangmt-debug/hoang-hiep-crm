@@ -232,7 +232,7 @@ def bang_gia():
           '<p style="margin-top:16px"><a class="btn sm nv" href="{M}/mat-bang">Xem mặt bằng và chọn căn →</a></p></div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('4', 'Vay ngân hàng', 'Vay mua căn hộ – <b>Vietcombank, BIDV, NCB</b>', 'o') +
           '<div class="g2" style="align-items:start"><div class="txt"><p>Ba ngân hàng hỗ trợ cho vay dự án: Vietcombank, BIDV, NCB. Lãi suất cho vay đang có xu hướng giảm sau chỉ đạo tháng 10/2026; chủ đầu tư thông tin mức hỗ trợ lãi suất cao nhất đang áp dụng cho giai đoạn đầu.</p>'
-          '<div class="banks"><span>NGÂN HÀNG HỖ TRỢ</span><img src="%snh-1.webp" alt="Vietcombank" width="347" height="117" loading="lazy"><img src="%snh-2.webp" alt="BIDV" width="366" height="117" loading="lazy"><img src="%snh-3.webp" alt="NCB" width="342" height="101" loading="lazy"></div>'
+          + banks() +
           '<h3 style="margin-top:18px">Hồ sơ vay thường cần</h3><ul class="ck"><li>CCCD, giấy tờ cư trú, tình trạng hôn nhân</li><li>Chứng minh thu nhập: sao kê lương, hợp đồng thuê, kinh doanh</li><li>Hợp đồng mua bán / thỏa thuận đặt cọc với chủ đầu tư</li></ul>'
           '<p class="note" style="margin-top:10px">Bảng tính bên cạnh chỉ để ước lượng; con số thực tế theo hồ sơ vay và chính sách từng ngân hàng.</p>'
           '<button type="button" class="btn sm" data-pop data-interest="Bảng giá – tư vấn vay">Nhận tư vấn phương án vay</button></div>'
@@ -245,7 +245,7 @@ def bang_gia():
           '<script>(function(){function $(i){return document.getElementById(i)}function f(v){return v>=1e9?(v/1e9).toFixed(2).replace(".",",")+" tỷ":Math.round(v/1e6).toLocaleString("vi-VN")+" tr"}'
           'function u(){var g=+$("ig").value*1e9,t=+$("it").value/100,l=+$("il").value/1200,n=+$("in").value*12,v=g*t,m=v*l/(1-Math.pow(1+l,-n));'
           '$("vg").textContent=$("ig").value.replace(".",",");$("vt").textContent=$("it").value+"%%";$("vl").textContent=$("il").value.replace(".",",");$("vn").textContent=$("in").value;'
-          '$("r1").textContent=f(v);$("r2").textContent=f(m);$("r3").textContent=f(g-v);}["ig","it","il","in"].forEach(function(i){$(i).addEventListener("input",u)});u();})();</script>') % (SK, SK, SK)
+          '$("r1").textContent=f(v);$("r2").textContent=f(m);$("r3").textContent=f(g-v);}["ig","it","il","in"].forEach(function(i){$(i).addEventListener("input",u)});u();})();</script>') % ()
     b += ('<section class="sec alt" id="hoi-dap"><div class="wrap">' + sh('?', 'Hỏi đáp', 'Hỏi đáp về <b>giá Sun Saphia</b>', 'y') + fq + '<h3 style="margin-top:26px">Xem thêm</h3>' + related('/bang-gia') + '</div></section>')
     b = bands_at(b, [(1, band('Bảng giá sắp công bố – nhận sớm nhất', 'Đăng ký ngay để nhận bảng giá gốc, chính sách thanh toán qua Zalo trước ngày mở bán.', 'Nhận bảng giá gốc', 'Bảng giá – giữa trang', ('/mat-bang', 'Xem mặt bằng trước khi chọn'))),
                      (3, band('Muốn biết căn nào hợp túi tiền?', 'Chuyên viên tư vấn phương án vốn, vay ngân hàng theo từng loại căn.', 'Tư vấn phương án vốn', 'Bảng giá – tư vấn vốn', ('/cho-thue', 'Xem dòng tiền cho thuê')))])

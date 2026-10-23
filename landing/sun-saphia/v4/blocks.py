@@ -120,15 +120,28 @@ def timeline():
             '<div><b>11/2028</b>Dự kiến bàn giao căn hộ</div></div>'
             '<p class="note">Các mốc là kế hoạch dự kiến, có thể thay đổi theo công bố của chủ đầu tư và cơ quan nhà nước.</p>')
 
+_BANKS = None
+def banks():
+    """Logo 3 ngân hàng nhúng thẳng vào trang (không phụ thuộc tải ảnh ngoài)."""
+    global _BANKS
+    if _BANKS is None:
+        import base64, io
+        from PIL import Image
+        out = ''
+        for f, alt in (('nh-1', 'Vietcombank'), ('nh-2', 'BIDV'), ('nh-3', 'NCB')):
+            im = Image.open(SK_DIR + f + '.webp').convert('RGBA')
+            buf = io.BytesIO(); im.save(buf, 'PNG', optimize=True)
+            out += '<img src="data:image/png;base64,%s" alt="%s" width="%d" height="%d">' % (base64.b64encode(buf.getvalue()).decode(), alt, im.width, im.height)
+        _BANKS = '<div class="banks"><span>NGÂN HÀNG HỖ TRỢ</span><div class="bl">' + out + '</div></div>'
+    return _BANKS
+
 def legal_box():
     return ('<div class="g2 eq"><div class="txt">'
             '<h3>Giấy chứng nhận đăng ký đầu tư</h3><p>Mã dự án <b>2572746483</b>, do Sở Tài chính TP Đà Nẵng cấp, chứng nhận lần đầu ngày <b>17/09/2026</b>.</p>'
             '<h3>Thời hạn dự án 50 năm</h3><p>Thời hạn hoạt động dự án 50 năm kể từ ngày 17/09/2026. Công trình cấp I, niên hạn sử dụng 100 năm.</p>'
-            '<h3>Ngân hàng hỗ trợ</h3><div class="banks"><span>NGÂN HÀNG HỖ TRỢ</span>'
-            '<img src="%snh-1.webp" alt="Vietcombank" width="347" height="117" loading="lazy"><img src="%snh-2.webp" alt="BIDV" width="366" height="117" loading="lazy"><img src="%snh-3.webp" alt="NCB" width="342" height="101" loading="lazy"></div>'
+            '<h3>Ngân hàng hỗ trợ</h3>' + banks() + ''
             '<p class="note" style="margin-top:10px">Tỷ lệ vay, thời gian hỗ trợ lãi suất theo chính sách bán hàng công bố khi mở bán.</p></div>'
             '<div class="g2 gcn" style="gap:12px">%s%s</div></div>') % (
-        SK, SK, SK,
         fig('gcn-dau-tu-2', 'Giấy chứng nhận đăng ký đầu tư dự án Sun Saphia Residence, mã dự án 2572746483 (đã làm mờ)', 'Trang 1 GCN đăng ký đầu tư (làm mờ)'),
         fig('gcn-dau-tu-1', 'Trích GCN đăng ký đầu tư: thời hạn hoạt động dự án 50 năm kể từ ngày cấp (đã làm mờ)', 'Mục thời hạn hoạt động 50 năm'))
 
