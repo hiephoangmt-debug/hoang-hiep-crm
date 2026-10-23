@@ -940,7 +940,7 @@ body.ccm-on{overflow:hidden}
      ['in',4650,350],['dr',4200,0,1,0,0,1,900,1],['dr',3900,2500,0,1,-1,0,800],['dr',3900,5400,0,1,-1,0,800],['dr',5300,1400,0,1,1,0,600],['dr',5300,2600,0,-1,1,0,600],['wall',4600,8800,7250,8800],['gl',0,8800,4600,8800],['lg',0,8800,4600,1100],['t',2300,9450,'Logia']],
      L:[['Giường ngủ 1','1,8 × 2,0 m'],['Giường ngủ 2','1,6 × 2,0 m'],['Sofa','2,2 m'],['Bàn ăn','0,9 × 1,3 m'],['Phòng tắm','2 phòng'],['Trần','cao 3,5 m']]}};
   function fmt(v){return (v/1000).toLocaleString('vi-VN',{minimumFractionDigits:v%1000?1:0,maximumFractionDigits:2})+' m';}
-  function drawUnit(t){var P=PLAN[t],S=document.getElementById('ccUnit');if(!S)return;while(S.firstChild)S.removeChild(S.firstChild);
+  function drawUnit(t,cn){var P=PLAN[t],S=document.getElementById('ccUnit');if(!S)return;while(S.firstChild)S.removeChild(S.firstChild);
     var W=P.W,H=P.H;S.setAttribute('viewBox',(-900)+' '+(-950)+' '+(W+1500)+' '+(H+2050));
     function a(n,o){var e=el(n,o);S.appendChild(e);return e;}function tx(c,x,y,v,r){var e=a('text',{class:c,x:x,y:y});if(r)e.setAttribute('transform','rotate(-90 '+x+' '+y+')');e.textContent=v;}
     var D=a('defs',{});function dd(n,o,par){var e=el(n,o);(par||D).appendChild(e);return e;}
@@ -984,7 +984,12 @@ body.ccm-on{overflow:hidden}
       else if(k=='lav'){f=G();f('rect',{x:x,y:y,width:q[3],height:q[4],rx:40,fill:'#fff',stroke:'#8fa3b3','stroke-width':16});f('ellipse',{cx:x+q[3]/2,cy:y+q[4]/2,rx:q[3]*.3,ry:q[4]*.28,fill:'#e3edf3'});}
       else if(k=='in'){a('path',{d:'M'+(x-260)+' '+(-700)+'L'+(x+260)+' '+(-700)+'L'+x+' '+(-250)+'Z',fill:'#F26A21'});tx('ut',x,-760,'Cửa vào');}});
     P.i.forEach(function(q){if(q[0]=='t')tx('ut',q[1],q[2],q[3]);else if(q[0]=='t2')tx('ut2',q[1],q[2],q[3]);});
-    a('rect',{class:'uw',x:0,y:0,width:W,height:H});
+    if(cn){var r=Math.min(1600,W*.3),cut,od;
+      if(cn=='br'){cut='M'+(W-r)+' '+H+'A'+r+' '+r+' 0 0 0 '+W+' '+(H-r)+'V'+(H+80)+'H'+(W-r)+'Z';od='M0 0H'+W+'V'+(H-r)+'A'+r+' '+r+' 0 0 1 '+(W-r)+' '+H+'H0Z';}
+      else if(cn=='bl'){cut='M'+r+' '+H+'A'+r+' '+r+' 0 0 1 0 '+(H-r)+'V'+(H+80)+'H'+r+'Z';od='M0 0H'+W+'V'+H+'H'+r+'A'+r+' '+r+' 0 0 1 0 '+(H-r)+'Z';}
+      cut=cut.replace('V'+(H+80),'L'+(cn=='br'?W+80:-80)+' '+(H+80));
+      a('path',{d:cut,fill:'#fff'});a('path',{d:od,class:'uw'});}
+    else a('rect',{class:'uw',x:0,y:0,width:W,height:H});
     P.i.forEach(function(q){if(q[0]!='dr')return;var hx=q[1],hy=q[2],dx=q[3],dy=q[4],sx=q[5],sy=q[6],L=q[7];
       var cx=hx+dx*L,cy=hy+dy*L,ox=hx+sx*L,oy=hy+sy*L;
       a('line',{x1:hx,y1:hy,x2:cx,y2:cy,stroke:'#e7c89c','stroke-width':q[8]?140:90});
@@ -1005,7 +1010,7 @@ body.ccm-on{overflow:hidden}
   document.getElementById('ccOpen').addEventListener('click',openM);
   function pick(g,op){if(cur)cur.classList.remove('sel');cur=g;g.classList.add('sel');var u=g._u,t=T[u[1]],c=code(g);
     document.getElementById('ccCode').textContent=c;document.getElementById('ccType').textContent=t.n;document.getElementById('ccArea').textContent=t.a+' (theo loại căn)';
-    document.getElementById('ccDim').textContent=t.d;drawUnit(u[1]);var ut=document.getElementById('ccUT');if(ut)ut.textContent=ut.textContent.replace(/^Căn [^·]+/,'Căn '+c+' · '+t.n+' ');document.getElementById('ccView').textContent=u[6];
+    document.getElementById('ccDim').textContent=t.d;var LC={b:{tl:'bl',tr:'br',bl:'tl',br:'tr'},t:{tl:'tl',tr:'tr',bl:'bl',br:'br'},l:{tl:'tl',tr:'bl',bl:'tr',br:'br'},r:{tl:'bl',tr:'tl',br:'tr',bl:'br'}};drawUnit(u[1],u[7]?LC[DOOR[u[0]]||'b'][u[7]]:'');var ut=document.getElementById('ccUT');if(ut)ut.textContent=ut.textContent.replace(/^Căn [^·]+/,'Căn '+c+' · '+t.n+' ');document.getElementById('ccView').textContent=u[6];
     var b=document.getElementById('ccBtn');b.setAttribute('data-interest',(document.getElementById('leadPop')?'ADS':'Web')+' – chọn căn '+c+' ('+t.n+', tầng '+F.options[F.selectedIndex].text.replace('Tầng ','')+')');b.setAttribute('data-title','Đăng ký ưu tiên căn '+c);
     var b2=document.getElementById('ccBtn2');b2.setAttribute('data-interest',b.getAttribute('data-interest'));b2.setAttribute('data-title','Đăng ký ưu tiên căn '+c);document.getElementById('ccMV').textContent=u[6];
     if(op)openM();}
