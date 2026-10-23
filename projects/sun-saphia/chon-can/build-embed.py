@@ -30,7 +30,7 @@ js = r'''/* Sun Saphia – Chọn căn theo view (mặt bằng tầng theo tỷ 
       + '</div></div>';
     a.parentNode.insertBefore(wrap, a.nextSibling);
     var box = document.getElementById('sscc-box'), done = false;
-    function fit(){ box.style.height = (window.innerWidth < 820 ? 1560 : 900) + 'px'; }
+    function fit(){ box.style.height = (window.innerWidth < 820 ? 2080 : 1060) + 'px'; }
     fit(); window.addEventListener('resize', fit);
     function load(){ if (done) return; done = true;
       var f = document.createElement('iframe'); f.title = 'Chọn căn Sun Saphia'; f.setAttribute('allow', 'fullscreen');
