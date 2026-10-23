@@ -375,7 +375,7 @@ def cho_thue():
 def ads(domain):
     url = MAIN + '/ads'  # cả hai tên miền chuẩn hóa về trang ads chính
     b = ('<section class="hero cine"><div class="hbg" aria-hidden="true">%s</div><div class="wrap"><div class="g2"><div class="hl">'
-         '<span class="tag">🔥 Mở bán dự kiến cuối 11/2026 · <b>Đại lý chính thức TATILAND</b></span>'
+         '<span class="tag">🔥 Vừa Kick-off 23/10 · <b>Mở bán dự kiến cuối 11/2026</b></span>'
          '<img class="ribbon" src="%sruy-bang.webp" alt="" width="608" height="232" style="margin-top:14px" aria-hidden="true">'
          '<h1 class="dp">Sun Saphia Residence – căn hộ <b>mặt biển</b> Đà Nẵng</h1>'
          + SLOGAN +

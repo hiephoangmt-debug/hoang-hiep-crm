@@ -416,7 +416,7 @@ body{padding-bottom:84px}
  .hero.cine{padding:0 0 30px}
  .hero.cine .hbg{bottom:auto;height:min(78vw,340px)}
  .hero.cine .hbg::after{background:linear-gradient(180deg,rgba(11,36,71,.15) 0%,rgba(11,36,71,0) 30%,rgba(11,36,71,.55) 72%,var(--nvd) 100%)}
- .hero.cine .hbg img{object-position:58% 50%}
+ .hero.cine .hbg img{object-position:74% 62%;animation:none}
  .hero.cine .hl{padding-top:calc(min(78vw,340px) - 34px)}
  .hero.cine .hl>.tag{font-size:12px;padding:6px 12px}
  .hero.cine .ribbon{width:110px}
