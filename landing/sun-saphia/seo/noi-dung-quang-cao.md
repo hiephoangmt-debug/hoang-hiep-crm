@@ -19,9 +19,9 @@ Trang đích: https://www.sun-saphia-residence.com/ads (hoặc https://www.sun-s
 | 10 | Trục Biển Võ Nguyên Giáp | 24 | |
 | 11 | Đăng Ký Không Thu Tiền | 22 | |
 | 12 | Căn Hộ Trường Sa Đà Nẵng | 24 | |
-| 13 | Tư Vấn Riêng Qua Zalo | 21 | |
+| 13 | Đại Lý Phân Phối Chính Thức | 27 | |
 | 14 | Chọn Căn View Biển Sớm | 22 | |
-| 15 | Bàn Giao 11/2028 | 16 | |
+| 15 | Bảng Giá Gốc Từ Đại Lý F1 | 25 | |
 
 ### 4 dòng mô tả (tối đa 90 ký tự)
 1. Căn hộ mặt biển 30 tầng góc Trường Sa – Nguyễn Đức Thuận. Nhận bảng giá qua Zalo. (81)
@@ -47,6 +47,7 @@ sun-saphia-residence.com / **Bang-Gia** / **Mat-Bang**
 - Không thu tiền giữ chỗ
 - Bể bơi view biển
 - Gọi video xem thực tế
+- Đại lý chính thức TATI
 
 ### Đoạn nội dung có cấu trúc (structured snippet)
 Kiểu: **Loại** – Studio, 1BR+, 2BR
@@ -68,7 +69,9 @@ Ngày 23/10/2026, Sun Property chính thức Kick-off dự án. Những gì anh/
 🚆 Khoảng 500m tới ga LRT 09 (quy hoạch) · 4km tới Galaxy, Đà Nẵng Downtown
 🔑 Dự kiến mở bán cuối 11/2026 · bàn giao 11/2028
 
-👉 Để lại số Zalo để nhận bảng giá và mặt bằng từng tầng ngay khi công bố. Không thu tiền giữ chỗ.
+🏅 TATILAND – đại lý phân phối chính thức Sun Saphia Residence (chứng nhận Sun Property 23/10/2026)
+
+👉 Để lại số Zalo để nhận bảng giá gốc và mặt bằng từng tầng ngay khi công bố. Không thu tiền giữ chỗ.
 ☎️ 0904 567 009 (Zalo)
 
 ### Mẫu B – Góc cho thuê
@@ -87,7 +90,7 @@ Mỗi sáng xuống công viên ra biển Sơn Thủy, chiều ngắm hoàng hô
 👉 Đăng ký nhận mặt bằng căn view biển: 0904 567 009 (Zalo)
 
 ## 3. Lưu ý khi chạy
-- Không ghi "đại lý chính thức" nếu chưa có giấy chứng nhận đại lý.
+- Được ghi "Đại lý phân phối chính thức" vì TATILAND có chứng nhận của Sun Property (23/10/2026). Lưu sẵn ảnh chứng nhận để gửi Google nếu quảng cáo bị xem xét. Trên trang đích đã có khối chứng nhận và tên công ty ở chân trang.
 - Không đưa con số lợi nhuận (11,7%, 10,9%) vào tiêu đề/mô tả Google Ads: dễ bị từ chối vì tuyên bố tài chính. Để trên trang đích, kèm ghi chú "không phải cam kết".
 - Chữ "Sun Group" trong nội dung quảng cáo có thể bị hạn chế nếu chủ thương hiệu khiếu nại. Bản trên chỉ dùng "Sun Saphia" ở Google Ads cho an toàn; Facebook có nhắc "Sun Group" kèm "Sun Property Kick-off" đúng sự kiện.
 - Giá bán chưa công bố: không ghi giá cụ thể trong quảng cáo.
