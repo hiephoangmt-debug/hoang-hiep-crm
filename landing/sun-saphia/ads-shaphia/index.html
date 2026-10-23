@@ -1034,7 +1034,7 @@ body.ccm-on{overflow:hidden}
       <div class="flt" role="group" aria-label="Lọc loại căn"><button type="button" class="on" data-t="ALL">Tất cả</button><button type="button" data-t="STU">Studio</button><button type="button" data-t="BR1">1BR+1</button><button type="button" data-t="BR2">2BR</button><button type="button" data-t="V:Biển">Hướng biển</button><button type="button" data-t="V:Thành phố">Thành phố – Mỹ Khê</button><button type="button" data-t="V:Hội An">Hội An</button><button type="button" data-t="V:Sân bay">Sân bay – Hòa Xuân</button></div>
     </div>
     <div class="grid">
-      <div><p class="swipe">← Vuốt ngang để xem cả tầng →</p><div class="plan" id="ccPlan"><svg id="ccSvg" viewBox="50 18 940 735" role="img" aria-label="Mặt bằng tầng điển hình Sun Saphia Residence, bấm vào từng căn để xem thông tin"></svg></div></div>
+      <div><p class="swipe">← Vuốt ngang để xem cả tầng →</p><div class="plan" id="ccPlan"><svg id="ccSvg" viewBox="40 0 1000 880" role="img" aria-label="Mặt bằng tầng điển hình Sun Saphia Residence, bấm vào từng căn để xem thông tin"></svg></div></div>
       <div class="side"><aside class="info" aria-live="polite">
         <div class="code" id="ccCode">Chọn một căn</div>
         <dl>
@@ -1048,9 +1048,9 @@ body.ccm-on{overflow:hidden}
         <button type="button" class="btn-cc" id="ccBtn" data-pop data-interest="ADS – chọn căn trên mặt bằng" data-title="Đăng ký ưu tiên căn" data-sub="Để lại số Zalo, chuyên viên báo giá và tình trạng căn này ngay khi chủ đầu tư công bố bảng hàng." data-btn="Giữ ưu tiên căn này →">Đăng ký ưu tiên căn này →</button>
         <p>Đăng ký không thu tiền. Giá, tình trạng căn theo bảng hàng chính thức của chủ đầu tư.</p>
       </aside><div class="sum">
-          <b class="h">Tầng <span id="ccFl">8</span> có 27 căn</b>
-          <div class="chips"><div style="--c:#E5577A"><b>18</b>Studio</div><div style="--c:#2FA6E0"><b>4</b>1BR+1</div><div style="--c:#E8B73C"><b>5</b>2BR</div></div>
-          <div class="dirs"><div>🌊 Biển<b>9</b></div><div>🏙️ TP – Mỹ Khê<b>8</b></div><div>🏮 Hội An<b>4</b></div><div>✈️ Sân bay<b>10</b></div></div>
+          <b class="h">Tầng <span id="ccFl">8</span> có 28 căn</b>
+          <div class="chips"><div style="--c:#E5577A"><b>19</b>Studio</div><div style="--c:#2FA6E0"><b>4</b>1BR+1</div><div style="--c:#E8B73C"><b>5</b>2BR</div></div>
+          <div class="dirs"><div>🌊 Biển<b>9</b></div><div>🏙️ TP – Mỹ Khê<b>8</b></div><div>🏮 Hội An<b>4</b></div><div>✈️ Sân bay<b>11</b></div></div>
           <button type="button" class="btn-fl" id="ccFlBtn" data-pop data-interest="ADS – bảng hàng theo tầng" data-title="Nhận bảng hàng tầng" data-sub="Để lại số Zalo, chuyên viên gửi bảng hàng, giá từng căn của tầng này ngay khi chủ đầu tư công bố." data-btn="Gửi bảng hàng cho tôi →">Nhận bảng hàng tầng này</button>
         </div></div>
     </div>
@@ -1078,23 +1078,39 @@ body.ccm-on{overflow:hidden}
   var T={STU:{n:'Studio',a:'30–31 m²',d:'3,8 × 9 m'},BR1:{n:'1BR+1',a:'50–51 m²',d:'6,2 × 9 m'},BR2:{n:'2BR',a:'60–70 m²',d:'7,25 × 9,9 m'}};
   /* [mã, loại, x, y, w, h, hướng, góc bo] – mặt bằng tầng 3A–28, phía trên là hướng biển */
   var U=[
-    ['11','BR2',110,150,120,110,'Biển + thành phố, Mỹ Khê (căn góc)','tl'],
-    ['12','STU',230,150,62,110,'Biển'],['12A','STU',292,150,62,110,'Biển'],['12B','BR1',354,150,92,110,'Biển'],
-    ['15','STU',446,150,62,110,'Biển'],['16','STU',508,150,62,110,'Biển'],['17','BR1',570,150,92,110,'Biển'],
-    ['18','BR2',720,40,105,140,'Biển','tl'],['19','BR2',825,40,105,140,'Biển + Hội An (căn góc)','tr'],
-    ['10','BR1',110,260,100,80,'Thành phố – Mỹ Khê'],
-    ['09','STU',110,340,100,52,'Thành phố – Mỹ Khê'],['08','STU',110,392,100,52,'Thành phố – Mỹ Khê'],['07','STU',110,444,100,52,'Thành phố – Mỹ Khê'],
-    ['06','STU',110,496,100,52,'Thành phố – Mỹ Khê'],['05','STU',110,548,100,52,'Thành phố – Mỹ Khê'],
-    ['03A','BR2',110,600,120,100,'Thành phố – Mỹ Khê + sân bay, Hòa Xuân (căn góc)','bl'],['03','BR2',230,600,120,100,'Sân bay, Hòa Xuân','br'],
-    ['01','STU',250,470,100,62,'Hội An'],['02','STU',250,532,100,62,'Hội An'],
-    ['26','BR1',360,330,92,110,'Sân bay, Hòa Xuân'],
-    ['27','STU',452.0,330,66.3,110,'Sân bay, Hòa Xuân'],['25','STU',518.3,330,66.3,110,'Sân bay, Hòa Xuân'],['24','STU',584.7,330,66.3,110,'Sân bay, Hòa Xuân'],
-    ['23','STU',651.0,330,66.3,110,'Sân bay, Hòa Xuân'],['22','STU',717.3,330,66.3,110,'Sân bay, Hòa Xuân'],['21','STU',783.7,330,66.3,110,'Sân bay, Hòa Xuân'],
-    ['20','STU',850,330,80,110,'Hội An + sân bay, Hòa Xuân (căn góc)','L20']
+    ['11','BR2',100.0,176.0,172.0,112.0,'Biển + thành phố, Mỹ Khê (căn góc)','tl'],
+    ['12','STU',272.0,176.0,64.0,144.0,'Biển'],
+    ['12A','STU',336.0,176.0,60.0,144.0,'Biển'],
+    ['12B','BR1',396.0,176.0,100.0,144.0,'Biển'],
+    ['15','STU',496.0,176.0,60.0,144.0,'Biển'],
+    ['16','STU',556.0,176.0,60.0,144.0,'Biển'],
+    ['17','BR1',616.0,176.0,96.0,144.0,'Biển'],
+    ['18','BR2',708.0,40.0,136.0,140.0,'Biển','tl'],
+    ['19','BR2',844.0,40.0,136.0,140.0,'Biển + Hội An (căn góc)','tr'],
+    ['10','BR1',100.0,288.0,148.0,96.0,'Thành phố – Mỹ Khê'],
+    ['09','STU',100.0,384.0,148.0,60.0,'Thành phố – Mỹ Khê'],
+    ['08','STU',100.0,444.0,148.0,64.0,'Thành phố – Mỹ Khê'],
+    ['07','STU',100.0,508.0,148.0,60.0,'Thành phố – Mỹ Khê'],
+    ['06','STU',100.0,568.0,148.0,60.0,'Thành phố – Mỹ Khê'],
+    ['05','STU',100.0,628.0,148.0,60.0,'Thành phố – Mỹ Khê'],
+    ['03A','BR2',100.0,688.0,156.0,116.0,'Thành phố – Mỹ Khê + sân bay, Hòa Xuân (căn góc)','bl'],
+    ['03','BR2',256.0,688.0,156.0,116.0,'Sân bay, Hòa Xuân','br'],
+    ['01','STU',272.0,568.0,140.0,60.0,'Hội An'],
+    ['02','STU',272.0,628.0,140.0,60.0,'Hội An'],
+    ['28','BR1',396.0,348.0,96.0,144.0,'Sân bay, Hòa Xuân'],
+    ['27','STU',492.0,348.0,56.6,144.0,'Sân bay, Hòa Xuân'],
+    ['26','STU',548.6,348.0,56.6,144.0,'Sân bay, Hòa Xuân'],
+    ['25','STU',605.1,348.0,56.6,144.0,'Sân bay, Hòa Xuân'],
+    ['24','STU',661.7,348.0,56.6,144.0,'Sân bay, Hòa Xuân'],
+    ['23','STU',718.3,348.0,56.6,144.0,'Sân bay, Hòa Xuân'],
+    ['22','STU',774.9,348.0,56.6,144.0,'Sân bay, Hòa Xuân'],
+    ['21','STU',831.4,348.0,56.6,144.0,'Sân bay, Hòa Xuân'],
+    ['20','STU',888.0,316.0,92.0,176.0,'Hội An + sân bay, Hòa Xuân (căn góc)','rr']
   ];
+  var AREA={"11":[70.21,77.35],"12":[31,34.58],"12A":[30,34.58],"12B":[51.11,56.42],"15":[30,34.58],"16":[30,34.58],"17":[50.18,56.38],"18":[67.68,75.5],"19":[67.69,76.36],"10":[50.28,56.42],"09":[30,34.58],"08":[30,34.58],"07":[31,35.03],"06":[30,34.13],"05":[30,34.58],"03A":[61.14,68.67],"03":[60.3,68.32],"01":[30,33.88],"02":[30,33.88],"28":[48.98,55.27],"27":[30,33.88],"26":[30,33.88],"25":[30,33.88],"24":[30,33.88],"23":[30,33.88],"22":[30,33.88],"21":[30,33.88],"20":[40.03,46.38]};
 
   /* hướng cửa vào (phía hành lang): b dưới, t trên, l trái, r phải */
-  var DOOR={'11':'b','12':'b','12A':'b','12B':'b','15':'b','16':'b','17':'b','18':'b','19':'b','10':'r','09':'r','08':'r','07':'r','06':'r','05':'r','03A':'t','03':'t','01':'l','02':'l','26':'t','27':'t','25':'t','24':'t','23':'t','22':'t','21':'t','20':'t'};
+  var DOOR={'11':'b','12':'b','12A':'b','12B':'b','15':'b','16':'b','17':'b','18':'b','19':'b','10':'r','09':'r','08':'r','07':'r','06':'r','05':'r','03A':'t','03':'t','01':'l','02':'l','28':'t','27':'t','26':'t','25':'t','24':'t','23':'t','22':'t','21':'t','20':'l'};
   function interior(g,u){var X=u[2],Y=u[3],W=u[4],H=u[5],d=DOOR[u[0]]||'b';
     function P(a,t){if(d=='b')return[X+a*W,Y+H-t*H];if(d=='t')return[X+a*W,Y+t*H];if(d=='r')return[X+W-t*W,Y+a*H];return[X+t*W,Y+a*H];}
     function R(a0,t0,a1,t1,c){var p=P(a0,t0),q=P(a1,t1);g.appendChild(el('rect',{class:c,x:Math.min(p[0],q[0]),y:Math.min(p[1],q[1]),width:Math.abs(q[0]-p[0]),height:Math.abs(q[1]-p[1]),rx:1.5}));}
@@ -1105,34 +1121,32 @@ body.ccm-on{overflow:hidden}
     else{L(0,.28,.3,.28);L(.3,0,.3,.28);R(.04,.05,.24,.2,'fu');R(.74,.04,.97,.3,'fu');L(0,.46,1,.46);L(.5,.46,.5,.88);R(.07,.54,.42,.82,'fu');L(.07,.59,.42,.59);R(.58,.54,.93,.82,'fu');L(.58,.59,.93,.59);}
   }
   function el(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);return e;}
-  function shape(x,y,w,h,c){if(c=='L20'){var R=26;return el('path',{class:'sh',d:'M815 282H'+(930-R)+'Q930 282 930 '+(282+R)+'V'+(440-R)+'Q930 440 '+(930-R)+' 440H850V330H815Z'});}if(!c)return el('rect',{class:'sh',x:x,y:y,width:w,height:h,rx:2});var r=34,d;
+  function shape(x,y,w,h,c){if(!c)return el('rect',{class:'sh',x:x,y:y,width:w,height:h,rx:2});var r=34,d;
     if(c=='tl')d='M'+x+' '+(y+h)+'V'+(y+r)+'Q'+x+' '+y+' '+(x+r)+' '+y+'H'+(x+w)+'V'+(y+h)+'Z';
     if(c=='tr')d='M'+x+' '+y+'H'+(x+w-r)+'Q'+(x+w)+' '+y+' '+(x+w)+' '+(y+r)+'V'+(y+h)+'H'+x+'Z';
     if(c=='bl')d='M'+x+' '+y+'H'+(x+w)+'V'+(y+h)+'H'+(x+r)+'Q'+x+' '+(y+h)+' '+x+' '+(y+h-r)+'Z';
+    if(c=='rr')d='M'+x+' '+y+'H'+(x+w-r)+'Q'+(x+w)+' '+y+' '+(x+w)+' '+(y+r)+'V'+(y+h-r)+'Q'+(x+w)+' '+(y+h)+' '+(x+w-r)+' '+(y+h)+'H'+x+'Z';
     if(c=='br')d='M'+x+' '+y+'H'+(x+w)+'V'+(y+h-r)+'Q'+(x+w)+' '+(y+h)+' '+(x+w-r)+' '+(y+h)+'H'+x+'Z';
     return el('path',{class:'sh',d:d});}
   /* nền: hành lang, lõi thang */
-  svg.appendChild(el('rect',{class:'cor',x:110,y:260,width:140,height:340}));
-  svg.appendChild(el('rect',{class:'cor',x:230,y:260,width:585,height:70}));
-  svg.appendChild(el('rect',{class:'cor',x:662,y:150,width:58,height:110}));
-  svg.appendChild(el('rect',{class:'core',x:250,y:280,width:100,height:180,rx:6}));
-  svg.appendChild(el('rect',{class:'core',x:662,y:170,width:58,height:80,rx:6}));
-  [[258,292],[302,292],[258,334],[302,334]].forEach(function(p){svg.appendChild(el('rect',{class:'lift',x:p[0],y:p[1],width:38,height:36,rx:2}));
-    svg.appendChild(el('line',{class:'lx',x1:p[0],y1:p[1],x2:p[0]+38,y2:p[1]+36}));svg.appendChild(el('line',{class:'lx',x1:p[0]+38,y1:p[1],x2:p[0],y2:p[1]+36}));});
-  for(var k=0;k<9;k++)svg.appendChild(el('line',{class:'st',x1:262,y1:390+k*7,x2:338,y2:390+k*7}));
-  svg.appendChild(el('line',{class:'lx',x1:300,y1:390,x2:300,y2:446}));
-  for(var k=0;k<8;k++)svg.appendChild(el('line',{class:'st',x1:668,y1:178+k*8,x2:714,y2:178+k*8}));
-  svg.appendChild(el('line',{class:'lx',x1:691,y1:178,x2:691,y2:236}));
+  svg.appendChild(el('rect',{class:'cor',x:248.0,y:320.0,width:640.0,height:28.0}));
+  svg.appendChild(el('rect',{class:'cor',x:248.0,y:288.0,width:24.0,height:424.0}));
+  svg.appendChild(el('rect',{class:'cor',x:828.0,y:184.0,width:60.0,height:136.0}));
+  svg.appendChild(el('rect',{class:'core',x:272.0,y:348.0,width:124.0,height:220.0,rx:5}));
+  svg.appendChild(el('rect',{class:'core',x:712.0,y:180.0,width:116.0,height:140.0,rx:5}));
+  [[277.6,356.0,46.4,37.6],[328.0,356.0,46.4,37.6],[276.0,440.0,36.0,36.0],[316.0,440.0,36.0,36.0],[356.0,440.0,36.0,36.0],[789.6,264.0,36.0,33.6],[789.6,300.8,36.0,33.6]].forEach(function(p){svg.appendChild(el('rect',{class:'lift',x:p[0],y:p[1],width:p[2],height:p[3],rx:2}));svg.appendChild(el('line',{class:'lx',x1:p[0],y1:p[1],x2:p[0]+p[2],y2:p[1]+p[3]}));svg.appendChild(el('line',{class:'lx',x1:p[0]+p[2],y1:p[1],x2:p[0],y2:p[1]+p[3]}));});
+  for(var k=0;k<9;k++)svg.appendChild(el('line',{class:'st',x1:280.0,y1:500.0+k*6,x2:392.0,y2:500.0+k*6}));
+  for(var k=0;k<11;k++)svg.appendChild(el('line',{class:'st',x1:717.6,y1:188.0+k*11,x2:757.6,y2:188.0+k*11}));
   var MOB=window.matchMedia&&matchMedia('(max-width:640px)').matches;if(MOB)svg.classList.add('mob');
-  var tx=el('text',{class:'sea',x:420,y:118,'text-anchor':'middle'});tx.textContent=MOB?'≈ BIỂN MỸ KHÊ – SƠN THỦY ≈':'≈≈≈  HƯỚNG BIỂN  ≈≈≈';svg.appendChild(tx);
+  var tx=el('text',{class:'sea',x:400,y:118,'text-anchor':'middle'});tx.textContent=MOB?'≈ BIỂN MỸ KHÊ – SƠN THỦY ≈':'≈≈≈  HƯỚNG BIỂN  ≈≈≈';svg.appendChild(tx);
   function dir(t,x,y,r){var e=el('text',{class:'sea',x:x,y:y,'text-anchor':'middle',transform:r?'rotate('+r+' '+x+' '+y+')':''});e.textContent=t;svg.appendChild(e);}
-  dir(MOB?'◀ THÀNH PHỐ · MỸ KHÊ':'◀ HƯỚNG THÀNH PHỐ · BIỂN MỸ KHÊ',78,450,-90);
-  if(!MOB)(function(){var x=580,y=598;svg.appendChild(el('rect',{x:x,y:y,width:250,height:96,rx:10,fill:'#fff',stroke:'#0A2540','stroke-width':1.5}));
+  dir(MOB?'◀ THÀNH PHỐ · MỸ KHÊ':'◀ HƯỚNG THÀNH PHỐ · BIỂN MỸ KHÊ',70,500,-90);
+  if(!MOB)(function(){var x=640,y=600;svg.appendChild(el('rect',{x:x,y:y,width:250,height:96,rx:10,fill:'#fff',stroke:'#0A2540','stroke-width':1.5}));
     var h=el('text',{x:x+14,y:y+22,'font-family':'Lexend,sans-serif','font-size':12,'font-weight':700,fill:'#0A2540','letter-spacing':'.1em'});h.textContent='CHÚ THÍCH';svg.appendChild(h);
-    [['#E5577A','Căn hộ Studio · 30–31 m²'],['#2FA6E0','Căn hộ 1BR+1 · 50–51 m²'],['#E8B73C','Căn hộ 2BR · 60–70 m²']].forEach(function(r,i){
+    [['#E5577A','Căn hộ Studio · 30–40 m²'],['#2FA6E0','Căn hộ 1BR+ · 49–51 m²'],['#E8B73C','Căn hộ 2BR · 60–70 m²']].forEach(function(r,i){
       svg.appendChild(el('rect',{x:x+14,y:y+32+i*20,width:24,height:14,rx:3,fill:r[0]}));
-      var t=el('text',{x:x+46,y:y+44+i*20,'font-family':'Lexend,sans-serif','font-size':12.5,fill:'#0A2540'});t.textContent=r[1];svg.appendChild(t);});})();dir(MOB?'HỘI AN ▶':'HƯỚNG HỘI AN ▶',962,450,90);dir(MOB?'▼ SÂN BAY · HÒA XUÂN ▼':'▼ HƯỚNG SÂN BAY · HÒA XUÂN ▼',520,735,0);
-  var t2=el('text',{x:300,y:384,'text-anchor':'middle','font-size':10.5,fill:'#6b7280','font-family':'Lexend,sans-serif'});t2.textContent='Thang máy';svg.appendChild(t2);
+      var t=el('text',{x:x+46,y:y+44+i*20,'font-family':'Lexend,sans-serif','font-size':12.5,fill:'#0A2540'});t.textContent=r[1];svg.appendChild(t);});})();dir(MOB?'HỘI AN ▶':'HƯỚNG HỘI AN ▶',1010,380,90);dir(MOB?'▼ SÂN BAY · HÒA XUÂN ▼':'▼ HƯỚNG SÂN BAY · HÒA XUÂN ▼',560,850,0);
+  var t2=el('text',{x:333.6,y:420.0,'text-anchor':'middle','font-size':10.5,fill:'#6b7280','font-family':'Lexend,sans-serif'});t2.textContent='Thang máy';svg.appendChild(t2);
   var F=document.getElementById('ccF'), fl=['3A'];for(var i=5;i<=28;i++)fl.push(i<10?'0'+i:''+i);
   fl.forEach(function(f){var o=document.createElement('option');o.value=f;o.textContent='Tầng '+(f.charAt(0)=='0'?f.slice(1):f);F.appendChild(o);});
   F.value='08';
@@ -1148,16 +1162,14 @@ body.ccm-on{overflow:hidden}
      ['in',3250,350],['dr',3700,0,-1,0,0,1,900,1],['dr',1700,1500,0,1,-1,0,750],['k',3200,1000,600,2600,'Bếp'],['wd',3200,4300,600,1500,'Tủ'],['bed',300,3700,1600,2000,'#a9bfa0'],['t2',1100,5950,'Giường 1,6 × 2 m'],
      ['sofa',300,6300,1500,800],['tv',3650,6300,120,1000],['ct',2350,6700,300],['t2',1050,7400,'Sofa'],['gl',0,7600,3800,7600],['lg',0,7600,3800,1400],['tb',2500,7950,800,800,0],['plant',600,8350,320],['t',1200,8450,'Logia']],
      L:[['Giường đôi','1,6 × 2,0 m'],['Sofa','1,5 m'],['Tủ bếp','sâu 0,6 m, dài 2,9 m'],['Phòng tắm','1,7 × 2,3 m'],['Logia','sâu 1,4 m'],['Trần','cao 3,5 m']]},
-   S20:{W:5200,H:9000,n:'Studio góc',o:'M0 0H3900Q5200 0 5200 1300V7700Q5200 9000 3900 9000H1400V2700H0Z',i:[
-     ['tile',1500,0,1800,2300],['rug',1550,4900,2600,1800,'#d9cbbb'],
-     ['wall',1500,0,1500,1500],['wall',3300,0,3300,2300],['wall',1500,2300,3300,2300],
-     ['wc',1650,200],['sh',2400,150,800,900],['lav',1650,1400,500,400],['t',2400,2050,'WC'],
-     ['k',4500,1400,600,2600,'Bếp'],['t2',700,2450,'Sảnh'],
-     ['bed',1800,3300,1600,2000,'#a9bfa0'],['wd',4550,4300,550,1500,'Tủ'],['t2',2600,5550,'Giường 1,6 × 2 m'],
-     ['sofa',1800,6300,1500,800],['ct',3900,6700,300],['tv',5050,5900,120,1000],['t2',2550,7350,'Sofa'],
-     ['gl',1400,7700,5200,7700],['lg',1400,7700,3800,1300],['plant',1900,8400,300],['tb',3900,7950,800,800,0],['t',3000,8500,'Logia'],
-     ['inl',0,1450],['dr',0,1000,0,1,1,0,900,1],['dr',1700,2300,1,0,0,-1,700]],
-     L:[['Loại căn','Studio góc chữ L'],['Giường đôi','1,6 × 2,0 m'],['Sofa','1,5 m'],['Tủ bếp','sâu 0,6 m'],['Cửa vào','cuối hành lang'],['Trần','cao 3,5 m']]},
+   S20:{W:4600,H:9900,n:'Studio góc',o:'M0 0H3000Q4600 0 4600 1600V8300Q4600 9900 3000 9900H0Z',i:[
+     ['tile',0,1500,1900,2300],['wall',0,1500,1900,1500],['wall',1900,1500,1900,2300],['wall',1900,3200,1900,3800],['wall',0,3800,1900,3800],
+     ['wc',200,1700],['sh',1000,1650,800,900],['lav',200,2900,500,400],['t',1000,3500,'WC'],['t2',2300,900,'Sảnh'],
+     ['k',3950,1800,600,2600,'Bếp'],['bed',1300,4500,1600,2000,'#a9bfa0'],['wd',150,4300,550,1500,'Tủ'],['t2',2100,6750,'Giường 1,6 × 2 m'],
+     ['rug',900,6900,2800,1500,'#d9cbbb'],['sofa',1300,7200,1600,800],['ct',3400,7600,300],['t2',2100,8250,'Sofa'],
+     ['gl',0,8600,4600,8600],['lg',0,8600,4600,1300],['plant',500,9250,300],['tb',2200,8900,800,800,0],['t',1500,9450,'Logia'],
+     ['inl',0,750],['dr',0,300,0,1,1,0,900,1],['dr',1900,2300,0,1,1,0,700]],
+     L:[['Thông thủy','40,03 m²'],['Tim tường','46,38 m²'],['Giường đôi','1,6 × 2,0 m'],['Sofa','1,6 m'],['Cửa vào','cuối hành lang'],['Trần','cao 3,5 m']]},
    BR1:{W:6200,H:9000,n:'1BR+1',i:[['tile',0,0,2600,1800],['rug',3200,5700,2500,2000,'#d8c7b3'],['wall',0,1800,2600,1800],['wall',2600,0,2600,1200],['wc',250,200],['sh',1300,150,1100,900],['lav',250,1150,500,400],['t',1300,1550,'WC'],
      ['wall',0,4400,1800,4400],['wall',2600,1800,2600,4400],['dr',1800,4400,1,0,0,-1,800],['dr',2600,1200,0,1,-1,0,600],['bed',300,2100,1000,2000,'#7fae7a'],['ct',1950,2700,300],['t2',1950,3300,'Phòng đa năng'],['t2',800,4250,'Giường 1 × 2 m'],
      ['wall',0,5000,2100,5000],['wall',2900,5000,2900,7900],['bed',600,5500,1600,2000,'#9fb7c9'],['wd',2250,6000,550,1600,''],['dr',2100,5000,1,0,0,1,800],['t2',1100,7700,'Phòng ngủ 1,6 × 2 m'],
@@ -1251,8 +1263,8 @@ body.ccm-on{overflow:hidden}
   if(MD){MD.addEventListener('click',function(e){if(e.target===MD||e.target.closest('.ccm-x,.ccm-back,#ccBtn2'))closeM();});addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});}
   document.getElementById('ccOpen').addEventListener('click',openM);
   function pick(g,op){if(cur)cur.classList.remove('sel');cur=g;g.classList.add('sel');var u=g._u,t=T[u[1]],c=code(g);
-    document.getElementById('ccCode').textContent=c;document.getElementById('ccType').textContent=t.n;document.getElementById('ccArea').textContent=u[0]=='20'?'Studio góc chữ L, rộng hơn Studio thường – diện tích theo bảng hàng':t.a+' (theo loại căn)';
-    document.getElementById('ccDim').textContent=u[7]=='L20'?'Căn góc chữ L (minh hoạ)':t.d;var LC={b:{tl:'bl',tr:'br',bl:'tl',br:'tr'},t:{tl:'tl',tr:'tr',bl:'bl',br:'br'},l:{tl:'tl',tr:'bl',bl:'tr',br:'br'},r:{tl:'bl',tr:'tl',br:'tr',bl:'br'}};drawUnit(u[7]=='L20'?'S20':u[1],u[7]=='L20'?'tr br':(u[7]?LC[DOOR[u[0]]||'b'][u[7]]:undefined));var ut=document.getElementById('ccUT');if(ut)ut.textContent=ut.textContent.replace(/^Căn [^·]+/,'Căn '+c+' · '+t.n+' ');document.getElementById('ccView').textContent=u[6];
+    document.getElementById('ccCode').textContent=c;document.getElementById('ccType').textContent=t.n;var ar=AREA[u[0]];document.getElementById('ccArea').textContent=ar?('Thông thủy '+String(ar[0]).replace('.',',')+' m² · tim tường '+String(ar[1]).replace('.',',')+' m²'):t.a;
+    document.getElementById('ccDim').textContent=u[0]=='20'?'≈ 4,6 × 9,9 m (căn góc)':t.d;var LC={b:{tl:'bl',tr:'br',bl:'tl',br:'tr'},t:{tl:'tl',tr:'tr',bl:'bl',br:'br'},l:{tl:'tl',tr:'bl',bl:'tr',br:'br'},r:{tl:'bl',tr:'tl',br:'tr',bl:'br'}};drawUnit(u[0]=='20'?'S20':u[1],u[0]=='20'?'tr br':(u[7]?LC[DOOR[u[0]]||'b'][u[7]]:undefined));var ut=document.getElementById('ccUT');if(ut)ut.textContent=ut.textContent.replace(/^Căn [^·]+/,'Căn '+c+' · '+t.n+' ');document.getElementById('ccView').textContent=u[6];
     var b=document.getElementById('ccBtn');b.setAttribute('data-interest',(document.getElementById('leadPop')?'ADS':'Web')+' – chọn căn '+c+' ('+t.n+', tầng '+F.options[F.selectedIndex].text.replace('Tầng ','')+')');b.setAttribute('data-title','Đăng ký ưu tiên căn '+c);
     var b2=document.getElementById('ccBtn2');b2.setAttribute('data-interest',b.getAttribute('data-interest'));b2.setAttribute('data-title','Đăng ký ưu tiên căn '+c);document.getElementById('ccMV').textContent=u[6];
     if(op)openM();}
@@ -1268,7 +1280,7 @@ body.ccm-on{overflow:hidden}
   (function(){var d=el('defs',{}),pt=el('pattern',{id:'ccWm',width:330,height:110,patternUnits:'userSpaceOnUse',patternTransform:'rotate(-24)'});
     var t=el('text',{x:0,y:40,'font-family':'Lexend,sans-serif','font-size':11.5,'font-weight':600,fill:'#0A2540','fill-opacity':.13});t.textContent='sun-saphia-residence.com · 0904 567 009';pt.appendChild(t);
     var t2=el('text',{x:150,y:95,'font-family':'Lexend,sans-serif','font-size':11.5,'font-weight':600,fill:'#0A2540','fill-opacity':.13});t2.textContent='sun-saphia-residence.com · 0904 567 009';pt.appendChild(t2);
-    d.appendChild(pt);svg.appendChild(d);svg.appendChild(el('rect',{x:50,y:18,width:940,height:735,fill:'url(#ccWm)','pointer-events':'none'}));})();
+    d.appendChild(pt);svg.appendChild(d);svg.appendChild(el('rect',{x:40,y:0,width:1000,height:880,fill:'url(#ccWm)','pointer-events':'none'}));})();
   label();flUp();pick(G[4]);var pl=document.getElementById('ccPlan');if(pl)pl.scrollLeft=0;
 })();
 </script>
@@ -1282,7 +1294,7 @@ body.ccm-on{overflow:hidden}
       <h2 class="title">Trước mặt là biển – <em>dưới chân là công viên</em></h2>
     </div>
     <div class="gal">
-      <figure class="w t rv"><span class="num">Kick-off 23/10</span><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/7b5426485ad670cf6c09acc29c98dbc5e4c1f0a4/landing/sun-saphia/ads-v3/kick-off-sun-saphia-23-10-1200.jpg" width="1200" height="675" alt="Phối cảnh Sun Saphia Residence bên biển Đà Nẵng, cầu Rồng phía xa" loading="lazy" decoding="async"><figcaption><b>Đón ánh dương</b><span>Phối cảnh trong tài liệu sự kiện của chủ đầu tư</span></figcaption></figure>
+      <figure class="w t rv"><span class="num">Kick-off 23/10</span><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/TEST/landing/sun-saphia/ads-v3/kick-off-sun-saphia-23-10-1200.jpg" width="1200" height="675" alt="Phối cảnh Sun Saphia Residence bên biển Đà Nẵng, cầu Rồng phía xa" loading="lazy" decoding="async"><figcaption><b>Đón ánh dương</b><span>Phối cảnh trong tài liệu sự kiện của chủ đầu tư</span></figcaption></figure>
       <figure class="rv"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/d69a66192973f0a184ad7b402751b7b09e542238/landing/sun-saphia/ads-v2/w-thap.jpg" width="800" height="450" alt="Toà tháp Sun Saphia 30 tầng" loading="lazy" decoding="async"><figcaption><b>30 tầng · ~114 m</b><span>Phối cảnh minh hoạ</span></figcaption></figure>
       <figure class="rv"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/d69a66192973f0a184ad7b402751b7b09e542238/landing/sun-saphia/ads-v2/w-bien-cong-vien.jpg" width="800" height="450" alt="Công viên ven biển trước dự án" loading="lazy" decoding="async"><figcaption><b>Công viên ven biển</b><span>Ra bãi Sơn Thủy khoảng 400 m</span></figcaption></figure>
       <figure class="w rv"><img src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/d69a66192973f0a184ad7b402751b7b09e542238/landing/sun-saphia/ads-v2/w-bien.jpg" width="800" height="450" alt="Nhìn ra biển Mỹ Khê" loading="lazy" decoding="async"><figcaption><b>Biển Sơn Thủy – Mỹ Khê</b><span>Bãi biển ngay trong lòng thành phố</span></figcaption></figure>
