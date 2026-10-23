@@ -27,7 +27,7 @@ def page(path, title, desc, kw, body, lds, cur, tools=False, canon=None, robots=
     body = body.replace('{M}', MAIN)
     html = head(title, desc, canon or url, OG, kw, lds + [ORG, RES], FAV)
     html += '<body>\n' + header(cur, MAIN, LOGO) + '\n<main id="dau-trang">' + body + '</main>\n' + footer(MAIN) + '\n' + popup() + tail(tools) + '</body>\n</html>\n'
-    return html
+    return copy_fix(html)
 
 def band(*a, **k):
     return '<div class="bandw">' + cta_band(*a, **k) + '</div>'
@@ -412,7 +412,7 @@ def ads(domain):
     html = head(title, desc, url, OG, 'sun saphia residence, căn hộ mặt biển đà nẵng, bảng giá sun saphia', [article_ld(title, desc, url), ORG, RES], FAV)
     b = b.replace('{M}', MAIN)
     html += '<body>\n' + header('/ads', MAIN, LOGO) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN) + '\n' + popup() + tail(True) + '</body>\n</html>\n'
-    return html
+    return copy_fix(html)
 
 def tinh_dong_tien():
     cr, cld = crumbs([('Trang chủ', MAIN + '/'), ('Sun Saphia Residence', MAIN + '/'), ('Tính dòng tiền', MAIN + '/tinh-dong-tien')])

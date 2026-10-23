@@ -141,7 +141,56 @@ GADS = ('<!-- Google tag (gtag.js) – Google Ads AW-872503827 -->\n'
         '<script async src="https://www.googletagmanager.com/gtag/js?id=AW-872503827"></script>\n'
         '<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","AW-872503827");'
         '/* Chuyển đổi "Sun Saphia – Gửi form": ghi khi khách gửi form hoặc để lại số trong khung chat (1 lần / số) */'
-        'window.HHC_ADS_SEND_TO="AW-872503827/BtrxCMasq6QdEJO0haAD";</script>\n')
+        'window.HHC_ADS_SEND_TO="AW-872503827/BtrxCMasq6QdEJO0haAD";'
+        '/* Chuyển đổi "Bấm gọi": dán nhãn vào HHC_ADS_CALL_TO khi đã tạo trong Google Ads, ví dụ "AW-872503827/xxxx" */'
+        'window.HHC_ADS_CALL_TO="";'
+        'document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest(\'a[href^="tel:"]\');'
+        'if(a&&window.HHC_ADS_CALL_TO&&window.gtag)gtag("event","conversion",{send_to:window.HHC_ADS_CALL_TO});},true);</script>\n')
+
+# Câu chữ đúng chính sách quảng cáo (áp cho toàn bộ trang, kể cả dữ liệu cấu trúc và chatbot)
+DATCHO = 'TATILAND nhận đặt chỗ 50 triệu theo chính sách chủ đầu tư (nộp vào tài khoản công ty, hoàn 100% nếu không mua)'
+COPY_FIX = [
+    ('Đăng ký nhận bảng giá gốc từ đại lý chính thức, không thu tiền.', 'Đăng ký nhận bảng giá gốc từ đại lý chính thức TATILAND, miễn phí.'),
+    ('Đại lý phân phối chính thức – bảng giá gốc, không thu tiền giữ chỗ', 'Đại lý phân phối chính thức TATILAND – bảng giá gốc từ đại lý'),
+    ('Ưu tiên chọn căn đẹp', 'Hướng dẫn đặt chỗ chính thức'),
+    ('⚡ Người đăng ký trước được ưu tiên chọn căn và nhận chính sách sớm nhất', '⚡ Đăng ký để nhận chính sách sớm; thứ tự chọn căn theo quy trình đặt chỗ chính thức của chủ đầu tư'),
+    ('✔ Không thu tiền giữ chỗ · ✔ Đại lý phân phối chính thức', '✔ Đăng ký nhận thông tin miễn phí · ✔ Đại lý phân phối chính thức TATILAND'),
+    ('Zalo 0904 567 009 · đại lý chính thức · không thu tiền', 'Zalo 0904 567 009 · đại lý chính thức TATILAND · đăng ký miễn phí'),
+    ('Đại lý chính thức TATILAND · Zalo 0904 567 009 · không thu tiền giữ chỗ', 'Đại lý chính thức TATILAND · Zalo 0904 567 009 · đăng ký miễn phí'),
+    ('khan hiếm được tìm đến và tăng giá trước tiên.', 'khan hiếm thường được quan tâm trước. Diễn biến giá trong quá khứ không bảo đảm cho tương lai.'),
+    ('Tăng giá <b>đầu tiên</b>', 'Vị trí <b>khan hiếm</b>'),
+    ('Để lại số để được ưu tiên chọn căn ngay khi mở bán.', 'Để lại số để nhận hướng dẫn chọn căn và đặt chỗ theo quy trình chính thức của chủ đầu tư.'),
+    ('Để lại số để được ưu tiên chọn căn trên mặt bằng ngay khi mở bán.', 'Để lại số để nhận mặt bằng căn trống và hướng dẫn đặt chỗ theo quy trình chính thức.'),
+    ('Để lại số để được ưu tiên giữ chỗ căn anh/chị chọn ngay khi mở bán.', 'Để lại số để nhận mặt bằng căn trống và hướng dẫn đặt chỗ theo quy trình chính thức.'),
+    ('>Ưu tiên chọn căn</button>', '>Hướng dẫn chọn căn</button>'),
+    ('– ưu tiên chọn căn"', '– hướng dẫn chọn căn"'),
+    ('It can be view from your Home.', 'Biển ngay ngoài ban công.'),
+    ('Giữ chỗ, ký hợp đồng đúng quy trình chủ đầu tư', 'Giữ chỗ, ký hợp đồng đúng quy trình chủ đầu tư; tiền đặt chỗ nộp vào tài khoản TATILAND/chủ đầu tư, không qua tài khoản cá nhân'),
+    ('<b>0 đồng</b><span>Không thu tiền giữ chỗ</span>', '<b>Miễn phí</b><span>Đăng ký nhận thông tin miễn phí</span>'),
+    ('Ưu tiên người đăng ký sớm', 'Đại lý phân phối chính thức TATILAND'),
+    ('<li>Ưu tiên chọn căn view biển trước ngày mở bán</li><li>Không thu tiền giữ chỗ</li>', '<li>Hướng dẫn chọn căn và đặt chỗ theo quy trình chính thức</li><li>Đăng ký nhận thông tin miễn phí</li>'),
+    ('Bây giờ có phải đặt cọc để giữ giá?', 'Đặt chỗ Sun Saphia Residence thế nào?'),
+    ('Bây giờ có phải đặt cọc không?', 'Đặt chỗ Sun Saphia Residence thế nào?'),
+    ('Không. Hiện chỉ đăng ký nhận thông tin, bảng giá và mặt bằng; không thu bất kỳ khoản tiền nào.', 'Đăng ký nhận thông tin, bảng giá và mặt bằng là miễn phí. ' + DATCHO + '; thứ tự chọn căn theo quy trình đặt chỗ chính thức.'),
+    ('Không. Hiện chỉ đăng ký nhận thông tin, không thu bất kỳ khoản tiền nào.', 'Đăng ký nhận thông tin là miễn phí. ' + DATCHO + '; thứ tự chọn căn theo quy trình đặt chỗ chính thức.'),
+    ('Đăng ký sớm – ưu tiên chọn căn', 'Đăng ký nhận chính sách sớm'),
+    ('Đăng ký sớm để được giữ chỗ đầu tiên', 'Nhận hướng dẫn đặt chỗ chính thức'),
+    ('>Đăng ký giữ chỗ</button>', '>Nhận hướng dẫn đặt chỗ</button>'),
+    ('– đăng ký giữ chỗ"', '– hướng dẫn đặt chỗ"'),
+    ('Để lại số Zalo, nhận tài liệu, mặt bằng. Không thu tiền.', 'Để lại số Zalo, nhận tài liệu, mặt bằng. Miễn phí.'),
+    ('tiền chuyển vào tài khoản theo hướng dẫn chính thức.', 'tiền nộp vào tài khoản TATILAND/chủ đầu tư theo hướng dẫn chính thức, không qua tài khoản cá nhân.'),
+    ('Đăng ký sớm – nhận trước:', 'Đăng ký – nhận ngay khi công bố:'),
+    # chatbot
+    ('Trang chỉ nhận đăng ký thông tin, không thu tiền;', 'Đăng ký trên trang là miễn phí, trang không thu tiền; tiền đặt chỗ (nếu có) chỉ nộp vào tài khoản công ty TATILAND/chủ đầu tư;'),
+    ('Hiện mình đặt chỗ 50 triệu, hoàn lại 100% nếu không mua, để được ưu tiên chọn căn đẹp trước khi mở bán.', DATCHO + '; thứ tự chọn căn theo quy trình đặt chỗ chính thức.'),
+    ('Hiện đang nhận đặt chỗ 50 triệu, hoàn lại 100% nếu không mua, để giữ ưu tiên chọn căn view biển.', DATCHO + '.'),
+    ('Hiện chỉ cần đặt chỗ 50 triệu, hoàn lại 100% nếu không mua.', DATCHO + '.'),
+]
+
+def copy_fix(html):
+    for a, b in COPY_FIX:
+        html = html.replace(a, b)
+    return html
 
 def head(title, desc, canon, og_img, kw, ld_graph, favicon, robots='index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1', extra=''):
     ld = json.dumps({'@context': 'https://schema.org', '@graph': ld_graph}, ensure_ascii=False)

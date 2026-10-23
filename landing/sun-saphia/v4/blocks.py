@@ -37,7 +37,7 @@ UNITS = [
 ]
 
 def units_table():
-    return tbl(['Loại căn', 'Diện tích', 'Kích thước', 'Số lượng', 'Bố trí', 'Phù hợp'], [list(u) for u in UNITS])
+    return tbl(['Loại căn', 'Diện tích', 'Kích thước', 'Số lượng', 'Bố trí', 'Phù hợp'], [list(u) for u in UNITS]) + '<p class="src">Ba loại căn đã công bố chi tiết: 754 căn; phần còn lại trong tổng 782 căn theo công bố chính thức của chủ đầu tư.</p>'
 
 def units_drawings():
     return ('<div class="g3 eqi">'
