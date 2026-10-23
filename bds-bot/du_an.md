@@ -28,14 +28,19 @@ Dòng nằm giữa dấu <!-- và --> là ghi chú, bot vẫn đọc được n�
 - Phù hợp với: [điền, ví dụ: gia đình trẻ, đầu tư cho thuê chuyên gia...]
 - Căn đang có sẵn: [điền hoặc ghi "hỏi chuyên viên"]
 
-## Dự án 2: [tên dự án]
-- Vị trí:
-- Loại hình:
-- Giá bán:
-- CSBH:
-- Pháp lý:
-- Tiến độ:
-- Phù hợp với:
+## Dự án 2: Sun Saphia Residence
+- Chủ đầu tư: Sun Group
+- Vị trí: Đà Nẵng, căn hộ mặt biển – dự án căn hộ mặt biển đầu tiên trong hệ sinh thái Sun Group tại Đà Nẵng. [điền địa chỉ cụ thể, khoảng cách tới các điểm nổi bật]
+- Loại hình: [điền: căn hộ 1PN/2PN/3PN, penthouse...]
+- Diện tích: [điền]
+- Giá bán: [điền khoảng giá theo loại căn]
+- Chính sách bán hàng (CSBH): [dán CSBH mới nhất]
+- Phương thức thanh toán: [điền các phương án]
+- Pháp lý: [điền: sở hữu lâu dài / 50 năm, tình trạng sổ...]
+- Tiến độ / bàn giao: [điền]
+- Tiện ích nổi bật: [điền]
+- Phù hợp với: [điền]
+- Căn đang có sẵn: [điền hoặc ghi "hỏi chuyên viên"]
 
 ## Hàng chuyển nhượng đang có
 <!-- Liệt kê căn chuyển nhượng: mã căn, diện tích, giá, ghi chú -->
@@ -58,6 +63,7 @@ Dòng nằm giữa dấu <!-- và --> là ghi chú, bot vẫn đọc được n�
 <!-- Bot đã hiểu sẵn các từ phổ biến (CSBH, PN, HĐMB, CK, HTLS, SHR, 3t5...).
      Thêm ở đây mã căn, tên tắt dự án, tiếng lóng riêng của khách/sàn mình. -->
 - FourS / Fours / Four S / 4S / Sun FourS / FST = dự án FourS Tower
+- Saphia / Sapphia / Saphire / Sapphire / Sun Saphia / SSR = dự án Sun Saphia Residence
 - F2 = tòa F2 dự án FourS (ví dụ, sửa cho đúng)
 - [điền: viết tắt = nghĩa]
 
