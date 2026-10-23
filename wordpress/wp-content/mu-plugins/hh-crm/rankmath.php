@@ -233,3 +233,34 @@ add_filter(
 	},
 	20
 );
+
+/*
+ * Sitemap: bật trang Dự án (du-an) và Nhà đất (bat-dong-san) trong sitemap Rank Math.
+ * Hai loại bài này do plugin đăng ký nên Rank Math để mặc định "không đưa vào sitemap" – Google khó tìm thấy.
+ */
+add_filter(
+	'rank_math/sitemap/exclude_post_type',
+	static fn( $exclude, $type ) => in_array( $type, array( 'du-an', 'bat-dong-san' ), true ) ? false : $exclude,
+	10,
+	2
+);
+add_action(
+	'init',
+	static function () {
+		if ( '2' === get_option( 'hh_rm_sitemap_pt' ) || ! defined( 'RANK_MATH_VERSION' ) ) {
+			return;
+		}
+		$opt = get_option( 'rank-math-options-sitemap' );
+		if ( is_array( $opt ) ) {
+			foreach ( array( 'du-an', 'bat-dong-san' ) as $type ) {
+				$opt[ 'pt_' . $type . '_sitemap' ] = 'on';
+			}
+			update_option( 'rank-math-options-sitemap', $opt );
+			if ( class_exists( '\RankMath\Sitemap\Cache' ) && method_exists( '\RankMath\Sitemap\Cache', 'invalidate_storage' ) ) {
+				\RankMath\Sitemap\Cache::invalidate_storage();
+			}
+		}
+		update_option( 'hh_rm_sitemap_pt', '2', false );
+	},
+	30
+);

@@ -48,6 +48,10 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 - Chỉ thay ô nào vẫn là bản cũ do web nhập; ô anh đã tự sửa trong wp-admin giữ nguyên. Bài chi tiết chỉ điền vì hai bài hiện chưa có nội dung.
 - Sau khi giải nén: **Dự án → Nhập dữ liệu Đà Nẵng → Nhập / cập nhật dữ liệu**, rồi **LiteSpeed Cache → Purge All**.
 
+## Có gì mới – plugin 2.20.67: đưa 105 trang dự án và tin nhà đất vào sitemap
+- Sitemap Rank Math trước chỉ có bài viết, trang, chuyên mục – thiếu toàn bộ trang Dự án (/du-an/) và tin Nhà đất (/nha-dat/). Bản này bật hai loại trong sitemap (du-an-sitemap.xml, bat-dong-san-sitemap.xml) để Google tìm và lập chỉ mục.
+- Sau khi cài: Rank Math → Sơ đồ trang web kiểm tra có mục "Dự án", "Nhà đất"; gửi lại sitemap_index.xml trong Google Search Console.
+
 ## Có gì mới – plugin 2.20.66: tự đăng bài đúng phút hẹn
 - Web hẹn riêng đúng phút đăng của bài kế tiếp (thay vì chờ lượt kiểm tra mỗi giờ); danh sách bài mới được kiểm tra mỗi 15 phút.
 - Trang được LiteSpeed lưu đệm nên lịch hẹn WordPress không chạy theo lượt xem: trình duyệt khách gọi nhẹ wp-cron.php (tối đa 5 phút/lần mỗi khách) để lịch chạy đúng giờ.
