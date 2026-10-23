@@ -374,7 +374,7 @@ def cho_thue():
 # ---------- Trang chạy quảng cáo ----------
 def ads(domain):
     url = MAIN + '/ads'  # cả hai tên miền chuẩn hóa về trang ads chính
-    b = ('<section class="hero"><img class="sun" src="%smat-troi.webp" alt="" width="700" height="898" aria-hidden="true"><div class="wrap"><div class="g2" style="margin-top:10px"><div>'
+    b = ('<section class="hero cine"><div class="hbg" aria-hidden="true">%s</div><div class="wrap"><div class="g2"><div class="hl">'
          '<span class="tag">🔥 Mở bán dự kiến cuối 11/2026 · <b>Đại lý chính thức TATILAND</b></span>'
          '<img class="ribbon" src="%sruy-bang.webp" alt="" width="608" height="232" style="margin-top:14px" aria-hidden="true">'
          '<h1 class="dp">Sun Saphia Residence – căn hộ <b>mặt biển</b> Đà Nẵng</h1>'
@@ -382,12 +382,18 @@ def ads(domain):
          '<ul class="ck"><li><b>Đại lý chính thức TATILAND</b> – bảng giá gốc từ đại lý, gửi qua Zalo khi công bố</li>'
          '<li><b>Studio 30 m², 1BR+ 50 m², 2BR 60–70 m²</b> · trần cao 3,5 m, view biển</li>'
          '<li><b>400 m ra bãi tắm Sơn Thủy</b> · giao lộ Võ Nguyên Giáp – Trường Sa</li>'
-         '<li><b>Pháp lý 50 năm</b> · Vietcombank, BIDV, NCB hỗ trợ vay</li>'
-         '<li><a href="#mat-bang">Chọn căn trên mặt bằng 3D</a> · <a href="{M}/tinh-dong-tien">tính dòng tiền cho thuê</a></li></ul>'
-         '<div class="qlinks"><a href="{M}/bang-gia">Bảng giá</a><a href="#mat-bang">Mặt bằng &amp; chọn căn</a><a href="{M}/tinh-dong-tien">Tính dòng tiền</a><a href="{M}/phap-ly">Pháp lý &amp; tiến độ</a></div>'
-         '%s</div><div class="hr">%s<div class="pic">%s<span>Phối cảnh minh họa</span></div></div></div></div></section>') % (
-        SK, SK, hero_perks(), form('dau', 'ADS – form đầu trang', title='Nhận bảng giá gốc từ đại lý', note='Bảng giá gốc, mặt bằng tầng, chính sách – gửi qua Zalo ngay khi chủ đầu tư công bố. Đăng ký miễn phí.', h='h2'),
-        img('thap-bien-hoang-hon', 'Phối cảnh Sun Saphia Residence bên bờ biển Đà Nẵng lúc hoàng hôn', eager=True))
+         '<li><b>Pháp lý 50 năm</b> · Vietcombank, BIDV, NCB hỗ trợ vay</li></ul>'
+         '<a class="play" href="#ss4d" data-4d><i aria-hidden="true">▶</i><span><b>Xem dự án 3D · 4D</b><small>Xoay tòa tháp · nắng theo giờ · view biển từ căn</small></span></a>'
+         '<span class="cap">Phối cảnh minh họa</span>'
+         '</div><div class="hr">%s</div></div></div></section>'
+         '<section class="hstrip"><div class="wrap">%s'
+         '<div class="qlinks"><a href="{M}/bang-gia">Bảng giá</a><a href="#mat-bang">Mặt bằng &amp; chọn căn</a><a href="{M}/tinh-dong-tien">Tính dòng tiền</a><a href="{M}/phap-ly">Pháp lý &amp; tiến độ</a></div></div></section>'
+         '<script>document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("[data-4d]");if(!a)return;var b=document.getElementById("ss4d-box");if(!b)return;e.preventDefault();'
+         'try{b.scrollIntoView({behavior:"smooth",block:"center"})}catch(x){b.scrollIntoView()}var g=document.getElementById("ss4d-go");if(g)g.click();'
+         'try{if(window.gtag)gtag("event","xem_4d",{event_label:"hero"})}catch(x){}});</script>') % (
+        img('thap-bien-hoang-hon', 'Phối cảnh Sun Saphia Residence bên bờ biển Đà Nẵng lúc hoàng hôn', eager=True, sizes='100vw'), SK,
+        form('dau', 'ADS – form đầu trang', title='Nhận bảng giá gốc từ đại lý', note='Bảng giá gốc, mặt bằng tầng, chính sách – gửi qua Zalo ngay khi chủ đầu tư công bố. Đăng ký miễn phí.', h='h2'),
+        hero_perks())
     b += tldr('Sun Saphia Residence', [('Dự án', 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, 30 tầng, 782 căn'), ('Loại căn', 'Studio 30 m² · 1BR+ 50 m² · 2BR 60–70 m²'),
         ('Pháp lý', '50 năm · Vietcombank, BIDV, NCB hỗ trợ vay'), ('Mở bán', 'Dự kiến cuối 11/2026'), ('Nhận bảng giá', 'Zalo 0904 567 009 · đại lý chính thức · không thu tiền')])
     b += ('<section class="sec alt"><div class="wrap">' + sh('★', 'Thời điểm vàng', 'Vì sao <b>đăng ký sớm</b>?', 'o') + why_now() + '</div></section>')

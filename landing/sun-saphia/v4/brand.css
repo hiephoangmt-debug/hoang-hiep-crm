@@ -386,3 +386,40 @@ body{padding-bottom:84px}
 .qlinks{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 6px}
 .qlinks a{background:#fff;border:1.5px solid var(--nv);color:var(--nv);font-weight:700;font-size:14px;padding:8px 14px;border-radius:999px;text-decoration:none}
 .qlinks a:hover{background:var(--nv);color:#fff}
+/* Hero ads điện ảnh: ảnh hoàng hôn phủ kín, zoom chậm như video */
+.hero.cine{background:var(--nvd);padding:40px 0 46px;color:#fff}
+.hero.cine .hbg{position:absolute;inset:0;overflow:hidden}
+.hero.cine .hbg img{width:100%;height:100%;object-fit:cover;object-position:62% 40%;transform-origin:65% 45%;animation:kb 26s ease-in-out infinite alternate}
+.hero.cine .hbg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,36,71,.93) 0%,rgba(11,36,71,.78) 38%,rgba(11,36,71,.25) 72%,rgba(11,36,71,.1) 100%),linear-gradient(0deg,rgba(11,36,71,.75) 0%,rgba(11,36,71,0) 30%)}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.14) translate(-1.5%,-1%)}}
+.hero.cine .wrap{position:relative;z-index:1}
+.hero.cine .g2{align-items:center}
+.hero.cine .dp{color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.35)}
+.hero.cine .dp b{color:var(--yl)}
+.hero.cine .slogan{color:#e6eef8}
+.hero.cine .slogan b{color:var(--yl)}
+.hero.cine ul.ck li{color:#fff}
+.hero.cine ul.ck li b{color:#fff}
+.hero.cine ul.ck li:before{box-shadow:inset 0 0 0 4px var(--nvd),0 0 0 1.5px var(--or)}
+.hero.cine .hl{position:relative}
+.play{display:inline-flex;align-items:center;gap:14px;margin-top:6px;color:#fff;text-decoration:none;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:10px 20px 10px 10px;border-radius:999px}
+.play i{position:relative;flex:none;width:52px;height:52px;border-radius:50%;background:var(--or);display:grid;place-items:center;font-style:normal;font-size:19px;padding-left:4px;box-shadow:0 0 0 0 rgba(233,97,24,.6);animation:pulse 2s infinite}
+.play b{display:block;font-size:16px}
+.play small{display:block;font-size:12.5px;color:#d5e0ee}
+.play:hover{background:rgba(255,255,255,.2)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(233,97,24,.6)}70%{box-shadow:0 0 0 16px rgba(233,97,24,0)}100%{box-shadow:0 0 0 0 rgba(233,97,24,0)}}
+.hero.cine .cap{display:block;margin-top:14px;font-size:11px;color:rgba(255,255,255,.6)}
+.hstrip{padding:6px 0 26px;background:#fff}
+.hstrip .stats{margin-top:20px}
+.hstrip .qlinks{margin-top:14px}
+@media(max-width:900px){
+ .hero.cine{padding:0 0 30px}
+ .hero.cine .hbg{bottom:auto;height:min(78vw,340px)}
+ .hero.cine .hbg::after{background:linear-gradient(180deg,rgba(11,36,71,.15) 0%,rgba(11,36,71,0) 30%,rgba(11,36,71,.55) 72%,var(--nvd) 100%)}
+ .hero.cine .hbg img{object-position:58% 50%}
+ .hero.cine .hl{padding-top:calc(min(78vw,340px) - 92px)}
+ .hero.cine .hl>.tag{position:absolute;top:16px;left:0;right:0;width:fit-content;max-width:100%}
+ .hero.cine .cap{position:absolute;top:calc(min(78vw,340px) - 120px);right:0;margin:0}
+ .play{width:100%;box-sizing:border-box}
+}
+@media(prefers-reduced-motion:reduce){.hero.cine .hbg img,.play i{animation:none}}
