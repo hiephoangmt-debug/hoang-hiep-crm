@@ -26,14 +26,17 @@ async function call(method, body) {
   return data.result;
 }
 
+const lastConv = new Map();
+
 async function broadcast(conv, html) {
   if (!enabled || !CHAT_IDS.length) return;
   const link = PUBLIC_URL ? `\n\n<a href="${PUBLIC_URL}/agent.html#${conv.id}">Mở hội thoại</a>` : '';
-  const hint = '\n<i>↩️ Reply tin này để trả lời khách · gõ /zalo để chuyển Zalo</i>';
+  const hint = '\n<i>💬 Nhắn thẳng = trả lời khách mới nhất · vuốt trái tin này để trả lời đúng khách · /zalo = mời khách qua Zalo</i>';
   for (const chatId of CHAT_IDS) {
     try {
       const m = await call('sendMessage', { chat_id: chatId, text: html + link + hint, parse_mode: 'HTML', disable_web_page_preview: true });
       msgToConv.set(`${chatId}:${m.message_id}`, conv.id);
+      lastConv.set(chatId, { id: conv.id, t: Date.now(), who: html.replace(/<[^>]+>/g, '').split('\n').map(l => l.trim()).filter(Boolean).slice(0, 3).join(' · ').slice(0, 120) });
       if (msgToConv.size > 5000) msgToConv.delete(msgToConv.keys().next().value);
     } catch (e) {
       console.error('Telegram gửi lỗi:', e.message);
@@ -114,15 +117,20 @@ function handle(msg) {
   if (msg.text.startsWith('/start')) {
     return call('sendMessage', { chat_id: chatId, text: '✅ Đã kết nối live chat Casamia Balanca. Thông báo khách mới sẽ gửi về đây.' }).catch(() => {});
   }
-  const convId = msg.reply_to_message && msgToConv.get(`${chatId}:${msg.reply_to_message.message_id}`);
+  let convId = msg.reply_to_message && msgToConv.get(`${chatId}:${msg.reply_to_message.message_id}`);
+  let ganNhat = null;
   if (!convId) {
-    return call('sendMessage', { chat_id: chatId, text: '↩️ Hãy bấm "Reply" vào tin thông báo của khách để trả lời đúng người.', reply_to_message_id: msg.message_id }).catch(() => {});
+    const l = lastConv.get(chatId);
+    if (!l || Date.now() - l.t > 12 * 3600 * 1000) {
+      return call('sendMessage', { chat_id: chatId, text: 'Chưa có khách nào trong 12 giờ qua. Để trả lời khách cũ: chạm giữ (hoặc vuốt sang trái) tin báo của khách đó → Trả lời, rồi gõ nội dung.', reply_to_message_id: msg.message_id }).catch(() => {});
+    }
+    ganNhat = l; convId = l.id;
   }
   const isZalo = /^\/zalo\b/i.test(msg.text.trim());
   const ok = replyHandler(convId, isZalo ? '' : msg.text, isZalo ? 'zalo' : undefined);
   call('sendMessage', {
     chat_id: chatId,
-    text: ok ? (isZalo ? '✅ Đã gửi lời mời Zalo cho khách' : '✅ Đã gửi cho khách') : '❌ Không tìm thấy hội thoại',
+    text: ok ? (isZalo ? '✅ Đã gửi lời mời Zalo cho khách' : '✅ Đã gửi cho khách') + (ganNhat ? `\n👤 Khách gần nhất: ${ganNhat.who}\n(Muốn gửi khách khác: vuốt sang trái tin báo của khách đó rồi nhắn)` : '') : '❌ Không tìm thấy hội thoại',
     reply_to_message_id: msg.message_id,
   }).then(m => ok && msgToConv.set(`${chatId}:${m.message_id}`, convId)).catch(() => {});
   // Reply tiếp vào chính tin của mình cũng được.

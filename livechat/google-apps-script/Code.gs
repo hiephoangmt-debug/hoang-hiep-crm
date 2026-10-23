@@ -165,11 +165,21 @@ function mapGet_(key) {
 }
 
 function notify_(v, html) {
-  const hint = '\n<i>↩️ Reply tin này để trả lời khách · gõ /zalo để chuyển Zalo</i>';
+  const hint = '\n<i>💬 Nhắn thẳng = trả lời khách mới nhất · vuốt trái tin này để trả lời đúng khách · /zalo = mời khách qua Zalo</i>';
   chatIds_().forEach(function (id) {
     const res = tg_('sendMessage', { chat_id: id, text: html + hint, parse_mode: 'HTML', disable_web_page_preview: true });
     if (res && res.ok) mapSet_(id + ':' + res.result.message_id, v);
   });
+  // Nhớ khách gần nhất: nhắn không bấm Reply sẽ gửi cho khách này
+  const label = String(html).replace(/<[^>]+>/g, '').split('\n').map(function (l) { return l.trim(); }).filter(String).slice(0, 3).join(' · ').slice(0, 120);
+  PropertiesService.getScriptProperties().setProperty('last_khach', JSON.stringify({ v: v, t: Date.now(), who: label }));
+}
+
+function lastKhach_() {
+  try {
+    const o = JSON.parse(PropertiesService.getScriptProperties().getProperty('last_khach') || 'null');
+    return o && Date.now() - o.t < 12 * 3600 * 1000 ? o : null;
+  } catch (e) { return null; }
 }
 
 function handleTelegram_(u) {
@@ -188,17 +198,24 @@ function handleTelegram_(u) {
     return;
   }
   if (/^\/(ai|aikey)(@\w+)?(\s|$)/i.test(msg.text.trim()) && typeof aiCommand_ === 'function') { aiCommand_(chatId, msg); return; }
-  const v = msg.reply_to_message ? mapGet_(chatId + ':' + msg.reply_to_message.message_id) : '';
+  let v = msg.reply_to_message ? mapGet_(chatId + ':' + msg.reply_to_message.message_id) : '';
+  let ganNhat = null;
   if (!v) {
-    tg_('sendMessage', { chat_id: chatId, text: '↩️ Hãy bấm "Reply" vào tin thông báo của khách để trả lời đúng người.', reply_to_message_id: msg.message_id });
-    return;
+    ganNhat = lastKhach_();
+    if (!ganNhat) {
+      tg_('sendMessage', { chat_id: chatId, text: 'Chưa có khách nào trong 12 giờ qua. Để trả lời khách cũ: chạm giữ (hoặc vuốt sang trái) tin báo của khách đó → Trả lời, rồi gõ nội dung.', reply_to_message_id: msg.message_id });
+      return;
+    }
+    v = ganNhat.v;
   }
   const isZalo = /^\/zalo\b/i.test(msg.text.trim());
   const text = isZalo ? ZALO_INVITE : clean_(msg.text);
   sheet_('TraLoi').appendRow([Utilities.getUuid(), v, text, Date.now(), isZalo ? 'zalo' : '']);
   sheet_('Chat').appendRow([now_(), v, 'Tư vấn', text]);
   mapSet_(chatId + ':' + msg.message_id, v);
-  const ok = tg_('sendMessage', { chat_id: chatId, text: isZalo ? '✅ Đã gửi lời mời Zalo cho khách' : '✅ Đã gửi cho khách (khách nhận trong vài giây)', reply_to_message_id: msg.message_id });
+  let xacNhan = isZalo ? '✅ Đã gửi lời mời Zalo cho khách' : '✅ Đã gửi cho khách (khách nhận trong vài giây)';
+  if (ganNhat) xacNhan += '\n👤 Khách gần nhất: ' + ganNhat.who + '\n(Muốn gửi khách khác: vuốt sang trái tin báo của khách đó rồi nhắn)';
+  const ok = tg_('sendMessage', { chat_id: chatId, text: xacNhan, reply_to_message_id: msg.message_id });
   if (ok && ok.ok) mapSet_(chatId + ':' + ok.result.message_id, v);
 }
 
