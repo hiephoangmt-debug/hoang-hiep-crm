@@ -157,7 +157,7 @@
       a: ['Dạ đăng ký trên trang không thu bất kỳ khoản tiền nào ạ. Chính sách booking, đặt cọc theo công bố của chủ đầu tư, thực hiện qua đại lý phân phối khi mở bán.'],
       c: ['Giá bán', 'Pháp lý'], ask: 'Anh/Chị để lại Zalo, có chính sách mở bán em báo ngay ạ.', strong: 1, topic: 'Booking / đặt cọc'},
     {id: 'moban', k: ['mo ban', 'khi nao mo ban', 'dang ban', 'ban chua', 'da ban', 'ra hang', 'bao gio ban', 'con can khong', 'het can chua', 'con khong'],
-      a: ['Dạ chủ đầu tư chưa công bố chính sách bán hàng ạ. Có thông tin chính thức là em báo Anh/Chị ngay để kịp chọn căn.'],
+      a: ['Dạ theo timeline chủ đầu tư công bố: ra mắt thông tin 17/10/2026, Kick-off 23/10/2026, sự kiện mở bán dự kiến cuối tháng 11/2026 ạ. Bảng giá và chính sách bán hàng sẽ công bố trước mở bán; Anh/Chị đăng ký sớm để em gửi ngay và giữ ưu tiên chọn căn view biển.'],
       c: ['Loại căn hộ', 'Giá bán'], ask: 'Anh/Chị để lại Zalo, có thông tin mở bán em báo đầu tiên ạ.', strong: 1, topic: 'Thời điểm mở bán'},
     {id: 'vay', k: ['vay ngan hang', 'vay von', 'cho vay', 'vay duoc', 'vay bao nhieu', 'vay tien', 'duoc vay', 'ngan hang', 'lai suat', 'tra gop', 'thanh toan', 'chiet khau', 'uu dai', 'khuyen mai', 'tien do thanh toan', 'ho tro'],
       a: ['Dạ ngân hàng hỗ trợ cho dự án là Vietcombank, BIDV và NCB ạ. Tỷ lệ vay, lãi suất và tiến độ thanh toán theo chính sách bán hàng chủ đầu tư sắp công bố.\nCó chính sách là em lập bảng tính theo đúng số vốn Anh/Chị dự kiến.', 'Dạ dự án có Vietcombank, BIDV, NCB hỗ trợ cho vay ạ; tỷ lệ vay và hỗ trợ lãi suất chờ chính sách chính thức, có là em gửi ngay để mình tính trước.'],

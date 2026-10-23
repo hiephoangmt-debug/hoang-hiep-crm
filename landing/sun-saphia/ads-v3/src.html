@@ -235,6 +235,35 @@ summary{font-size:1.12em;font-weight:700}
 </section>
 
 <!-- SỰ KIỆN KICK-OFF 23/10/2026 (tự ẩn sau khi kết thúc) -->
+<!-- TIMELINE MỞ BÁN -->
+<section class="tlm" aria-label="Timeline triển khai Sun Saphia Residence">
+<style>
+.tlm{padding:26px 0 8px;background:#fff}
+.tlm h2{text-align:center;margin:0 0 18px;font-size:clamp(24px,3vw,34px);color:#0A2540}
+.tlm ol{list-style:none;margin:0 auto;padding:0;max-width:880px;display:grid;grid-template-columns:repeat(3,1fr);position:relative}
+.tlm ol:before{content:"";position:absolute;left:16%;right:16%;top:15px;height:3px;background:linear-gradient(90deg,#0A2540,#F26A21)}
+.tlm li{text-align:center;position:relative;padding:0 6px}
+.tlm li i{display:block;width:32px;height:32px;margin:0 auto 10px;border-radius:50%;background:#0A2540;border:4px solid #fff;box-shadow:0 0 0 2px #0A2540;position:relative}
+.tlm li.now i{background:#F26A21;box-shadow:0 0 0 2px #F26A21,0 0 0 8px rgba(242,106,33,.18);animation:tlp 1.8s infinite}
+@keyframes tlp{50%{box-shadow:0 0 0 2px #F26A21,0 0 0 14px rgba(242,106,33,0)}}
+.tlm li b{display:block;font-size:15px;color:#0A2540}
+.tlm li span{font-size:13px;color:#5b6b80}
+.tlm li.now b{color:#E8460F;font-size:17px}
+.tlm .cd{text-align:center;margin:16px auto 0;font-size:14px;color:#0A2540}
+.tlm .cd b{color:#E8460F}
+@media(max-width:560px){.tlm li b{font-size:13px}.tlm li.now b{font-size:14px}.tlm li span{font-size:12px}}
+</style>
+  <div class="container">
+    <h2>Timeline triển khai Sun Saphia Residence</h2>
+    <ol>
+      <li><i></i><b>17/10/2026</b><span>Ra mắt thông tin dự án</span></li>
+      <li><i></i><b>23/10/2026</b><span>Sự kiện Kick-off</span></li>
+      <li class="now"><i></i><b>Cuối 11/2026</b><span>Sự kiện mở bán (dự kiến)</span></li>
+    </ol>
+    <p class="cd">Còn khoảng <b id="mbcd">-- ngày</b> tới sự kiện mở bán dự kiến · <a href="#dang-ky">Đăng ký để nhận bảng giá trước</a></p>
+  </div>
+</section>
+
 <section class="ev" id="su-kien" aria-labelledby="h-ev">
   <div class="container">
     <div class="ev-head">
@@ -722,7 +751,7 @@ summary{font-size:1.12em;font-weight:700}
     var now = Date.now(), ev = $('#su-kien'), tb = $('#topbar');
     if (now > HIDE) {
       if (ev) ev.parentNode.removeChild(ev);
-      if (tb) tb.innerHTML = 'Sun Saphia Residence · căn hộ trục biển của Sun tại Đà Nẵng · <a href="#dang-ky">Nhận bảng giá</a>';
+      if (tb) tb.innerHTML = '📅 Dự kiến mở bán cuối 11/2026 · <a href="#dang-ky">Đăng ký nhận bảng giá trước</a>';
       $$('a[href="#su-kien"]').forEach(function (a) { a.setAttribute('href', '#dang-ky'); });
       $$('.hero-cap-ev').forEach(function (x) { x.remove(); });
       return;
@@ -735,6 +764,7 @@ summary{font-size:1.12em;font-weight:700}
     setTimeout(evTick, 30000);
   }
   evTick();
+  (function(){var el=$('#mbcd');if(!el)return;var d=Math.ceil((new Date('2026-11-25T08:00:00+07:00').getTime()-Date.now())/864e5);el.textContent=d>0?d+' ngày':'vài ngày';})();
   /* Mặt bằng: đổi loại căn */
   $$('.mb3-tabs button').forEach(function (b) { b.addEventListener('click', function () {
     $$('.mb3-tabs button').forEach(function (x) { x.classList.toggle('on', x === b); });
