@@ -57,6 +57,7 @@ Dòng nằm giữa dấu <!-- và --> là ghi chú, bot vẫn đọc được n�
 ## Từ viết tắt riêng
 <!-- Bot đã hiểu sẵn các từ phổ biến (CSBH, PN, HĐMB, CK, HTLS, SHR, 3t5...).
      Thêm ở đây mã căn, tên tắt dự án, tiếng lóng riêng của khách/sàn mình. -->
+- FourS / Fours / Four S / 4S / Sun FourS / FST = dự án FourS Tower
 - F2 = tòa F2 dự án FourS (ví dụ, sửa cho đúng)
 - [điền: viết tắt = nghĩa]
 
