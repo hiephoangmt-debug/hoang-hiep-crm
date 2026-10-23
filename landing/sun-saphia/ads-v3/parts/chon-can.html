@@ -14,7 +14,9 @@
 .cc .grid .plan{flex:1;display:flex;align-items:center}
 .cc .grid>*{min-width:0}
 .cc .plan{background:#fff;border-radius:18px;padding:10px;box-shadow:0 10px 30px -18px rgba(10,37,64,.5);overflow:auto}
-.cc svg{width:100%;height:auto;display:block;min-width:600px}
+.cc{overflow-x:hidden}
+.cc .plan svg{width:100%;height:auto;display:block;min-width:600px}
+.cc .plan{max-width:100%;min-width:0}
 .cc .swipe{display:none;text-align:center!important;font-size:12.5px;color:#5b6b80;margin:0 0 6px}
 @media(max-width:640px){.cc .swipe{display:block}}
 .cc .u{cursor:pointer;transition:opacity .2s}
@@ -52,7 +54,8 @@
 .cc .cclg i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:5px}
 .cc .note{text-align:center!important;font-size:12.5px;color:#6b7280;margin-top:12px}
 .cc .unitrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;margin-top:18px;background:#fff;border-radius:18px;padding:18px 22px;box-shadow:0 10px 30px -18px rgba(10,37,64,.5);align-items:center}
-.cc .udraw svg{width:100%;height:auto;max-height:560px;display:block}
+.cc .udraw{min-width:0;text-align:center}
+.cc .udraw svg{width:100%;height:auto;max-height:560px;display:block;min-width:0;margin:0 auto}
 .cc .utext h3{margin:6px 0 8px;color:#0A2540}
 .cc .utext ul{list-style:none;padding:0;margin:12px 0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .cc .utext li{background:#f6f1ea;border-radius:12px;padding:9px 12px;font-size:13px;color:#43546b;text-align:left!important}
@@ -70,7 +73,7 @@
 .cc .ut2{font-family:Lexend,sans-serif;font-size:170px;fill:#7b8796;text-anchor:middle}
 .cc .udm{stroke:#E8460F;stroke-width:22}
 .cc .udt{font-family:Lexend,sans-serif;font-size:260px;font-weight:600;fill:#E8460F;text-anchor:middle}
-@media(max-width:860px){.cc .unitrow{grid-template-columns:1fr;padding:14px}.cc .udraw svg{max-height:520px}}
+@media(max-width:860px){.cc .unitrow{grid-template-columns:1fr;padding:14px}.cc .udraw svg{max-height:520px}.cc .grid>div:first-child{display:block}.cc .grid .plan{display:block}.cc .utext ul{grid-template-columns:1fr 1fr}}
 @media(max-width:860px){.cc .grid{grid-template-columns:1fr}.cc .info{position:static}}
 </style>
   <div class="wrapc">
