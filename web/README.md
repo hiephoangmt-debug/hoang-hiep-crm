@@ -41,5 +41,9 @@ Dựng bằng `ladipage/build_basic.py` từ `ladipage/basic/*.html`:
 | Da Nang Downtown (trang chủ) | `6ad9e11192364b00132fb925` | `www.sun-danangdowntown.com` |
 | Sun Galaxy Complex | `6ad9e1136b2c75001205ce79` | `www.sun-danangdowntown.com/sun-galaxy-complex` |
 | Tháp 408m | `6ad9e11406fc060013e37e43` | `www.sun-danangdowntown.com/thap-69-tang` |
+| Sun Galaxy Complex (tên miền riêng, file `sun-galaxy-complex-vn.html`) | `6adaad493a703e00122bd4b5` | `www.sun-galaxy-complex.com.vn` (đang gắn trang kéo-thả cũ `6a5ef498c741e90012cc1b28`) |
 
 Trang kéo-thả cũ `68b9064ebe3b5d001262fd88` đang giữ tên miền; gỡ tên miền khỏi trang này trước khi gắn cho trang chủ mới.
+
+### hiephoangmt.com (WordPress)
+Nội dung hai bài `/du-an/da-nang-downtown/` và `/du-an/sun-galaxy-complex/` nằm trong plugin trên nhánh `claude/wordpress-hiephoangmt-domain-rf8u3u` (`wordpress/wp-content/mu-plugins/hh-crm/data-sun-group-da-nang.php`, plugin 2.20.67).
