@@ -1119,6 +1119,20 @@ THÔNG TIN MỚI NHẤT & BẢNG HÀNG
 - Khách muốn giữ căn / lock căn → [CHUYEN_NHAN_VIEN].
 - Khách QUAY LẠI và có mục cập nhật MỚI HƠN lần nhắn trước của khách, liên quan dự án/nhu cầu của khách → chủ động báo khéo 1 câu ("à anh/chị ơi, bên X vừa có chính sách mới rất hợp với mình…"), không báo dồn dập.
 
+DỰ ÁN SẮP MỞ BÁN / ĐANG NHẬN BOOKING (chưa có giá chính thức)
+Áp dụng cho dự án có ghi "Giai đoạn: Booking" hoặc "Sắp mở bán" trong THÔNG TIN.
+- Nói rõ, tự nhiên: dự án CHƯA công bố giá và CSBH chính thức, CĐT sẽ công bố khi mở bán; khách booking sớm được ưu tiên chọn căn đẹp và nhận thông tin đầu tiên.
+- "Giá dự kiến (chưa chính thức)" chỉ được nói khi có trong THÔNG TIN, và LUÔN kèm ý "đây là giá dự kiến thị trường đang nhắc, chưa phải giá chính thức của CĐT". Không có giá dự kiến → không đưa con số, không tự đoán; có thể so sánh mặt bằng giá các dự án đã mở bán gần đó nếu có trong THÔNG TIN.
+- KHÔNG nói "giá chắc chắn", "chốt giá", "giá gốc thấp nhất", không hứa chiết khấu khi CSBH chưa có. Không dùng tin đồn ngoài THÔNG TIN.
+- Giải thích booking theo đúng THÔNG TIN: số tiền, có hoàn lại không, hạn hoàn, quyền lợi (ưu tiên chọn căn, thứ tự ráp căn). Thiếu thông tin nào thì nói em kiểm tra và báo lại.
+- Mục tiêu tư vấn ở giai đoạn này: hiểu nhu cầu (loại căn, tầng/view, ngân sách dự kiến) → xin SĐT để "gửi giá và CSBH ngay khi CĐT công bố" → mời booking hoặc mời dự sự kiện mở bán. Ghi nhu cầu vào [HO_SO], ghi du_an_quan_tam.
+- Khách muốn booking / chuyển tiền booking / giữ thứ tự → báo chuyên viên gọi ngay để hướng dẫn đúng tài khoản CĐT/đại lý, thêm [CHUYEN_NHAN_VIEN]. Bot không gửi số tài khoản.
+- Độ nhiệt: hỏi cách booking hoặc muốn booking +20; xin nhận giá khi công bố +10.
+- Khi mục "Cập nhật mới nhất" có giá/CSBH chính thức của dự án → dùng giá chính thức, bỏ hẳn giá dự kiến cũ, và báo khéo khách đã hỏi trước đó.
+
+TRANG KHÁCH ĐANG XEM
+Nếu phần thông tin khách có "Khách đang chat từ trang web của dự án X" → khách hỏi chung chung ("giá bao nhiêu", "còn căn không") thì hiểu là hỏi về dự án X, không hỏi lại "anh/chị quan tâm dự án nào".
+
 VÍ DỤ GIỌNG VĂN
 Khách: "cho hỏi giá căn 2pn bên dự án A"
 Em: "Dạ chào anh/chị! Căn 2PN bên A đang có giá từ [giá trong THÔNG TIN] ạ, căn góc thì view đẹp đến mức nhìn lâu là muốn chốt luôn 😄
@@ -1126,6 +1140,10 @@ Anh/chị mua để ở hay đầu tư cho thuê ạ, để em lọc đúng căn
 
 Khách: "đắt quá"
 Em: "Dạ em hiểu ạ, số tiền lớn thì mình phải cân nhắc kỹ là đúng rồi. Nếu chia ra thì bên A chỉ cần thanh toán [theo THÔNG TIN] là nhận nhà, phần còn lại giãn theo tiến độ. Em gửi anh/chị bảng tính dòng tiền cụ thể nhé?"
+
+Khách (dự án đang booking): "giá bn vậy e"
+Em: "Dạ bên B hiện CĐT chưa công bố giá chính thức ạ. Thị trường đang nhắc giá dự kiến khoảng [giá dự kiến trong THÔNG TIN], nhưng đây chưa phải giá chốt nha anh/chị.
+Mình đang nhắm căn mấy PN ạ? Em ghi nhận để gửi giá và CSBH cho anh/chị ngay khi CĐT công bố."
 """
 
 
@@ -1151,6 +1169,8 @@ def build_system(cid):
     ctx = [f"Bây giờ là {datetime.now().strftime('%H:%M, %A %d/%m/%Y')}.",
            "Kênh: " + ("website (LadiPage)" if cid.startswith("web_") else "Zalo"),
            "Tên Zalo của khách: " + (c.get("ten") or "chưa rõ")]
+    if c.get("trang"):
+        ctx.append(f"Khách đang chat từ trang web của dự án {c['trang']}.")
     if c.get("lan_dau", "")[:10] < datetime.now().strftime("%Y-%m-%d"):
         ctx.append(f"Khách QUAY LẠI, nhắn lần đầu ngày {c['lan_dau'][:10]}.")
         prev = [m["t"] for m in c.get("tin", [])[:-1] if m["role"] == "user"]
@@ -1227,7 +1247,8 @@ def handle_customer(cid, channel, name, text, images=None):
     with store.lock:
         c["loai"] = "khach"
     if first_time:
-        notify_admin(f"🆕 Khách mới ({'web' if channel == 'web' else 'Zalo'}): {name or 'Khách'}\n\"{text[:300]}\"\n"
+        page = f" · trang {c['trang']}" if c.get("trang") else ""
+        notify_admin(f"🆕 Khách mới ({'web' if channel == 'web' else 'Zalo'}{page}): {name or 'Khách'}\n\"{text[:300]}\"\n"
                      f"Mã khách: {cid}\n👉 /khach {cid} · /tl {cid} <nội dung>")
 
     # hồ sơ khách
@@ -2445,6 +2466,10 @@ class WebHandler(BaseHTTPRequestHandler):
                 not web_quota_ok("sid:" + sid, WEB_DAILY_LIMIT):
             return self._json(429, {"replies": ["Dạ hôm nay mình nhắn nhiều quá rồi ạ 😄 Anh/chị để lại SĐT hoặc chat Zalo để chuyên viên gọi tư vấn trực tiếp nha."]})
         cid = "web_" + sid
+        project = re.sub(r"\s+", " ", str(data.get("project", ""))).strip()[:80]
+        if project:
+            with store.lock:
+                store.get(cid, "web")["trang"] = project
         try:
             with chat_lock(cid):
                 handle_customer(cid, "web", str(data.get("name", ""))[:60], text)

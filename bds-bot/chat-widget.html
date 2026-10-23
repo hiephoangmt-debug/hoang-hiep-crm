@@ -1,17 +1,23 @@
 <!--
   KHUNG CHAT TƯ VẤN – dán toàn bộ đoạn này vào khối "HTML" của LadiPage.
-  Sửa 3 dòng cấu hình ngay dưới:
+  Sửa các dòng cấu hình ngay dưới:
     BOT_URL   : địa chỉ HTTPS của bot (ví dụ https://bot.tenmien.com)
     ZALO_LINK : link Zalo bot hoặc Zalo của anh/chị (https://zalo.me/...)
     TITLE     : tên hiển thị trên khung chat
+    PROJECT   : tên dự án của trang này, đúng như trong du_an.md (ví dụ "Sun Saphia Residence").
+                Bot sẽ hiểu khách đang hỏi về dự án này. Trang tổng hợp nhiều dự án thì để "".
+    GREETING  : câu chào đầu tiên
+    QUICK     : các nút câu hỏi gợi ý, khách bấm là gửi luôn. Không muốn có thì để []
 -->
 <div id="bdsw-root"></div>
 <script>
 (function () {
   var BOT_URL = "https://bot.tenmien.com";
   var ZALO_LINK = "https://zalo.me/";
-  var TITLE = "Tư vấn dự án";
-  var GREETING = "Dạ em chào anh/chị 👋 Anh/chị đang quan tâm dự án nào, hay cần em gợi ý căn hợp túi tiền ạ?";
+  var TITLE = "Tư vấn Sun Saphia Residence";
+  var PROJECT = "Sun Saphia Residence";
+  var GREETING = "Dạ em chào anh/chị 👋 Sun Saphia Residence – căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng – đang nhận booking ạ. Anh/chị cần em gửi thông tin gì trước nè?";
+  var QUICK = ["Giá dự kiến bao nhiêu?", "Booking thế nào, có hoàn tiền không?", "Khi nào mở bán?", "Có những loại căn nào?", "Cho thuê có tốt không?"];
 
   if (window.__bdswLoaded) return; window.__bdswLoaded = true;
 
@@ -39,6 +45,9 @@
     ".bdsw-bot{background:#fff;align-self:flex-start;border-bottom-left-radius:4px;box-shadow:0 1px 2px rgba(0,0,0,.06)}" +
     ".bdsw-me{background:#0f5c4a;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}" +
     ".bdsw-typing{color:#7a8580;font-style:italic;font-size:13px}" +
+    "#bdsw-quick{display:flex;flex-wrap:wrap;gap:6px;padding:8px 10px 0;background:#f4f6f5}" +
+    ".bdsw-q{border:1px solid #0f5c4a;background:#fff;color:#0f5c4a;border-radius:16px;padding:5px 10px;font:inherit;font-size:13px;cursor:pointer}" +
+    ".bdsw-q:hover{background:#e9f1ee}" +
     "#bdsw-zalo{display:block;text-align:center;padding:8px;background:#e9f1ee;color:#0f5c4a;font-size:13px;text-decoration:none;font-weight:600}" +
     "#bdsw-form{display:flex;gap:8px;padding:10px;border-top:1px solid #e3e8e6;background:#fff}" +
     "#bdsw-input{flex:1;border:1px solid #cfd8d4;border-radius:20px;padding:10px 14px;font:inherit;outline:none;resize:none;max-height:90px}" +
@@ -54,6 +63,7 @@
     '<div id="bdsw-panel" role="dialog" aria-label="' + TITLE + '">' +
       '<div id="bdsw-head"><b>' + TITLE + '<small>Thường trả lời trong vài giây</small></b><button id="bdsw-close" aria-label="Đóng">×</button></div>' +
       '<div id="bdsw-msgs"></div>' +
+      '<div id="bdsw-quick"></div>' +
       '<a id="bdsw-zalo" href="' + ZALO_LINK + '" target="_blank" rel="noopener">💬 Chat qua Zalo</a>' +
       '<form id="bdsw-form"><textarea id="bdsw-input" rows="1" placeholder="Nhập tin nhắn..." maxlength="1000"></textarea><button id="bdsw-send" type="submit">Gửi</button></form>' +
     '</div>');
@@ -96,14 +106,26 @@
     e.preventDefault();
     var text = input.value.trim(); if (!text) return;
     add(text, "me", true); input.value = ""; send.disabled = true;
+    var qk = $("bdsw-quick"); if (qk) qk.style.display = "none";
     var t = document.createElement("div"); t.className = "bdsw-typing"; t.textContent = "Đang soạn tin...";
     msgs.appendChild(t); msgs.scrollTop = msgs.scrollHeight;
     fetch(BOT_URL + "/chat", { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ sid: sid, text: text }) })
+      body: JSON.stringify({ sid: sid, text: text, project: PROJECT }) })
       .then(function (r) { return r.json(); })
       .then(function (d) { (d.replies || []).forEach(function (r) { add(r, "bot", true); }); })
       .catch(function () { add("Mạng hơi chập chờn ạ 😅 Anh/chị bấm \"Chat qua Zalo\" bên dưới để em hỗ trợ ngay nha.", "bot", false); })
       .then(function () { t.remove(); send.disabled = false; input.focus(); });
   };
+
+  var quick = $("bdsw-quick");
+  function hideQuick() { quick.style.display = "none"; }
+  if (QUICK.length && !history.some(function (h) { return h[0] === "me"; })) {
+    QUICK.forEach(function (q) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "bdsw-q"; b.textContent = q;
+      b.onclick = function () { input.value = q; $("bdsw-form").onsubmit({ preventDefault: function () {} }); };
+      quick.appendChild(b);
+    });
+  } else hideQuick();
 })();
 </script>

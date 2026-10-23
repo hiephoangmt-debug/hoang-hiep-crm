@@ -543,8 +543,18 @@ Nhắn các lệnh này cho bot từ Zalo của anh/chị. Gõ `/hd` để bot g
 **Khung chat trên LadiPage**
 1. Bot phải chạy trên máy có **địa chỉ HTTPS** (xem [mục 12](#12-chạy-247-trên-vps)).
 2. Mở `.env` bằng Notepad, sửa 2 dòng: `WEB_PORT=8080` và `ALLOWED_ORIGIN=https://tenmien-ladipage-cua-ban.com`.
-3. Mở `chat-widget.html`, sửa `BOT_URL`, `ZALO_LINK`, `TITLE`.
+3. Mở `chat-widget.html`, sửa `BOT_URL`, `ZALO_LINK`, `TITLE`, và 3 dòng cho riêng trang đó:
+   - `PROJECT`: tên dự án của trang, **gõ đúng như trong `du_an.md`** (ví dụ `"Sun Saphia Residence"`). Khách hỏi "giá bao nhiêu" bot tự hiểu là hỏi dự án này, không hỏi lại. Trang nhiều dự án thì để `""`.
+   - `GREETING`: câu chào đầu tiên.
+   - `QUICK`: các nút câu hỏi gợi ý, khách bấm là gửi luôn (ẩn sau khi khách nhắn tin đầu tiên). Không muốn có thì để `[]`.
+   Mỗi landing page một dự án → mỗi trang dán một bản `chat-widget.html` với `PROJECT` khác nhau.
 4. Trong LadiPage: thêm phần tử **HTML** → dán toàn bộ nội dung `chat-widget.html` → Xuất bản.
+
+**Dự án đang nhận booking, chưa có giá chính thức** (ví dụ Sun Saphia Residence):
+- Trong `du_an.md`, ghi dòng `- Giai đoạn: Booking – SẮP MỞ BÁN`, điền mục `Booking` (số tiền, hoàn tiền, quyền lợi) và `Giá dự kiến (chưa chính thức)`.
+- Bot sẽ luôn nói rõ "đây là giá dự kiến, chưa phải giá chính thức", không hứa chiết khấu, và tập trung xin SĐT để gửi giá khi CĐT công bố, mời booking. Khách muốn chuyển tiền booking → bot báo anh/chị gọi ngay, bot không gửi số tài khoản.
+- Để trống giá dự kiến → bot không đưa con số nào.
+- Khi có giá chính thức: thêm mục `## Cập nhật mới nhất [dd/mm/yyyy]` ghi giá + CSBH, đổi dòng `Giai đoạn` thành `Đang mở bán`. Bot tự bỏ giá dự kiến cũ.
 
 Anh/chị trả lời khách web bằng `/tl web_xxx ...` (mã có trong thông báo).
 

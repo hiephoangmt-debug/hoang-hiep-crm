@@ -29,18 +29,33 @@ Dòng nằm giữa dấu <!-- và --> là ghi chú, bot vẫn đọc được n�
 - Căn đang có sẵn: [điền hoặc ghi "hỏi chuyên viên"]
 
 ## Dự án 2: Sun Saphia Residence
-- Chủ đầu tư: Sun Group
-- Vị trí: Đà Nẵng, căn hộ mặt biển – dự án căn hộ mặt biển đầu tiên trong hệ sinh thái Sun Group tại Đà Nẵng. [điền địa chỉ cụ thể, khoảng cách tới các điểm nổi bật]
-- Loại hình: [điền: căn hộ 1PN/2PN/3PN, penthouse...]
-- Diện tích: [điền]
-- Giá bán: [điền khoảng giá theo loại căn]
-- Chính sách bán hàng (CSBH): [dán CSBH mới nhất]
-- Phương thức thanh toán: [điền các phương án]
-- Pháp lý: [điền: sở hữu lâu dài / 50 năm, tình trạng sổ...]
-- Tiến độ / bàn giao: [điền]
-- Tiện ích nổi bật: [điền]
-- Phù hợp với: [điền]
-- Căn đang có sẵn: [điền hoặc ghi "hỏi chuyên viên"]
+<!-- Nguồn: slide sự kiện Saphia Đà Nẵng 23/10/2026. -->
+- Giai đoạn: Booking – SẮP MỞ BÁN. CĐT CHƯA công bố giá và CSBH chính thức.
+- Booking: [điền: số tiền booking/căn, có hoàn lại không, hạn hoàn, quyền lợi: ưu tiên chọn căn, thứ tự ráp căn]
+- Ngày dự kiến mở bán / sự kiện: [điền]
+- Giá dự kiến (chưa chính thức): [điền giá thị trường đang nhắc, ví dụ "Studio khoảng ... tỷ, 1PN+ khoảng ... tỷ, 2PN khoảng ... tỷ"]
+  Trong slide sự kiện, bài toán cho thuê dùng "giá tham khảo" Studio 30m2 ≈ 3 tỷ, 1BR 50m2 ≈ 4,5 tỷ – chỉ để minh họa, không phải giá bán.
+- Chủ đầu tư: Sun Group. Dự án căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng.
+- Vị trí: giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa (Ngũ Hành Sơn, Đà Nẵng), hướng đi Hội An. Cách tổ hợp Galaxy và Đà Nẵng Downtown khoảng 4km. Cách nhà ga LRT số 09 khoảng 500m.
+- Hạ tầng: TP mở rộng đường Võ Nguyên Giáp, Trường Sa, Lạc Long Quân (tổng vốn dự kiến 2.633 tỷ). Phía trước là khu đất dự án Hòn Ngọc Á Châu bị thu hồi khoảng 2,45ha để làm công viên công cộng / công viên bãi tắm.
+- Tầm nhìn: trước mặt biển Mỹ Khê, sau lưng sông Đô Tỏa, bên cạnh Ngũ Hành Sơn; tầng cao nhìn được sông Hàn và thành phố.
+- Thiết kế: cảm hứng điêu khắc Chăm Pa, hình tượng vũ nữ Apsara, ngôn ngữ đương đại.
+- Quy mô: diện tích đất 3.720,1m2 · 1 tòa 30 tầng (114m) · 2 tầng hầm · 782 căn · trần căn hộ cao 3,5m.
+- Loại căn (cơ cấu): Studio 513 căn (30–31m2) · 1PN+ (1BR+) 108 căn (50–51m2) · 2PN 133 căn (60–70m2). Layout tầng điển hình tầng 3A–28.
+- Bàn giao: dự kiến tháng 11/2028, hoàn thiện cơ bản.
+- Pháp lý: dự án đã có Giấy chứng nhận đăng ký đầu tư (lần đầu 17/09/2026), thời hạn dự án 50 năm kể từ 17/09/2026. Công trình cấp I, niên hạn sử dụng 100 năm. (Căn hộ sở hữu 50 năm – không phải sở hữu lâu dài.)
+- Ngân hàng hỗ trợ: Vietcombank, BIDV, NCB. [điền tỷ lệ cho vay, hỗ trợ lãi suất, ân hạn khi có CSBH]
+- Tiện ích: bể bơi view biển, yoga, gym, pilates, khu wellness; chuỗi công viên bãi tắm (Sơn Thủy – đối diện dự án – Huyền Trân Công Chúa), bãi biển ngay trước nhà; thể thao biển: kayak, SUP, dù lượn, jetski. Xung quanh có trường học, siêu thị, bệnh viện.
+- Phù hợp với: người trẻ làm việc tự do (Studio, 1PN+, cho thuê bù chi phí) · người thành đạt mua second home · người muốn nghỉ hưu sớm, sống chậm · người lớn tuổi về biển dưỡng sức · nhà đầu tư cho thuê ngắn ngày / trung hạn.
+- Căn đang có sẵn: chưa mở bán – chỉ nhận booking.
+
+### Saphia – số liệu tham khảo (từ slide, chỉ dùng để so sánh, KHÔNG phải cam kết)
+- Giá căn hộ mặt biển Đà Nẵng đang bán (tham khảo): The Soleil: Studio 5,2–5,5 tỷ, 1BR 7,7–7,8 tỷ, 2BR 17,5 tỷ · Futa Residence: Studio 9,1–10,5 tỷ, 1BR 10,3–11,5 tỷ, 2BR 17,4–17,6 tỷ · Nobu Đà Nẵng: Studio 6,3–6,4 tỷ, 1BR 10,5–10,6 tỷ, 2BR 21,4–21,7 tỷ, 3BR 25,9 tỷ · The Newtown Diamond: 1BR+ 5,3–5,6 tỷ, 2BR 6,8–8,3 tỷ, 3BR 10–14 tỷ.
+- Giá thuê tháng khu vực (tham khảo): Panoma Studio 18–20tr, 1PN 24tr, 2PN 35tr · Filmore 1PN 27tr, 2PN 45tr · Hilton 2PN 35tr · Hiyori 2PN 25tr · Monarchy 1PN 14tr, 2PN 20tr, 3PN 35tr · Sam Tower 1PN 15tr, 2PN 23tr.
+- Giá thuê ngày căn view biển (khách sạn Wyndham Soleil, Saha Casa, Radisson – mùa thấp điểm): Studio 2,2–2,9 triệu/đêm · 1BR+ 3,4–3,7 triệu/đêm.
+- Bài toán cho thuê minh họa trong slide (GIẢ ĐỊNH, không cam kết): Studio 30m2, giá tham khảo 3 tỷ, thuê 2,5tr/đêm, lấp đầy 60%, biên lợi nhuận 65% → khoảng 351tr/năm (~11,7%/năm). 1BR 50m2, giá tham khảo 4,5 tỷ, 3,5tr/đêm, lấp đầy 60% → khoảng 492tr/năm (~10,9%/năm). Khi nói tới phải nói rõ là bài toán giả định, thực tế phụ thuộc vận hành và mùa du lịch.
+- Thị trường Đà Nẵng 9 tháng đầu 2026: 15,86 triệu lượt khách (+29,6%), 7,69 triệu lượt khách quốc tế (+28,9%), doanh thu du lịch 52.945 tỷ (+26,2%).
+- Lý do mua sớm (thông điệp sự kiện): giá và CSBH đợt đầu thường tốt nhất, được chọn căn đẹp trước, CĐT thường có hỗ trợ lãi suất (chờ CSBH chính thức), xu hướng lãi suất giảm. Nói đúng tinh thần, không hứa tăng giá.
 
 ## Hàng chuyển nhượng đang có
 <!-- Liệt kê căn chuyển nhượng: mã căn, diện tích, giá, ghi chú -->
