@@ -417,9 +417,10 @@ body{padding-bottom:84px}
  .hero.cine .hbg{bottom:auto;height:min(78vw,340px)}
  .hero.cine .hbg::after{background:linear-gradient(180deg,rgba(11,36,71,.15) 0%,rgba(11,36,71,0) 30%,rgba(11,36,71,.55) 72%,var(--nvd) 100%)}
  .hero.cine .hbg img{object-position:58% 50%}
- .hero.cine .hl{padding-top:calc(min(78vw,340px) - 92px)}
- .hero.cine .hl>.tag{position:absolute;top:16px;left:0;right:0;width:fit-content;max-width:100%}
- .hero.cine .cap{position:absolute;top:calc(min(78vw,340px) - 120px);right:0;margin:0}
+ .hero.cine .hl{padding-top:calc(min(78vw,340px) - 34px)}
+ .hero.cine .hl>.tag{font-size:12px;padding:6px 12px}
+ .hero.cine .ribbon{width:110px}
+ .hero.cine .cap{position:absolute;top:calc(min(78vw,340px) - 60px);right:0;margin:0}
  .play{width:100%;box-sizing:border-box}
 }
 @media(prefers-reduced-motion:reduce){.hero.cine .hbg img,.play i{animation:none}}
