@@ -378,4 +378,16 @@ const CONFIG = {
     calc.addEventListener('input', run);
     run();
   }
+
+  // Bảng trên điện thoại hiển thị dạng thẻ: gắn tên cột cho từng ô (bỏ qua ô chỉ có nhãn trạng thái)
+  document.querySelectorAll('.table-wrap table').forEach(t => {
+    const heads = [...t.querySelectorAll('thead th')].map(th => th.textContent.trim());
+    t.querySelectorAll('tbody tr').forEach(tr => {
+      [...tr.children].forEach((cell, i) => {
+        if (i === 0 || !heads[i] || cell.tagName !== 'TD' || /^(Thông tin|Mức tham khảo)$/.test(heads[i])) return;
+        if (cell.children.length === 1 && cell.textContent.trim() === cell.firstElementChild.textContent.trim() && cell.firstElementChild.classList.contains('badge')) return;
+        cell.setAttribute('data-label', heads[i]);
+      });
+    });
+  });
 })();

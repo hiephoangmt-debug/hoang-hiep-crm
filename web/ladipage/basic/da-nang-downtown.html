@@ -447,6 +447,20 @@ article .cta-row,article .inline-cta p,.form-note{text-align:left}
 
 /* Mọi nút liên hệ nằm ở góc phải dưới, không dùng thanh ngang dưới đáy */
 .float-cta{display:none!important}
+
+/* Điện thoại: bảng thành thẻ, không phải kéo ngang; danh sách hẹp căn trái để không hở chữ */
+@media (max-width:640px){
+  .table-wrap{overflow:visible;border:0;border-radius:0}
+  .table-wrap table{min-width:0;font-size:15px}
+  .table-wrap thead{display:none}
+  .table-wrap tbody,.table-wrap tr{display:block}
+  .table-wrap tr{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 10px;background:#fff;box-shadow:0 1px 2px rgba(15,35,64,.04)}
+  .table-wrap th,.table-wrap td{display:block;padding:3px 0;border:0;background:none;white-space:normal}
+  .table-wrap tr>:first-child{font-weight:700;color:var(--navy);font-size:15.5px;padding-bottom:6px;margin-bottom:4px;border-bottom:1px dashed var(--line)}
+  .table-wrap td[data-label]::before{content:attr(data-label) ": ";font-weight:600;color:var(--muted)}
+  .table-wrap caption{display:block;padding:0 2px 10px;caption-side:top}
+  article li,.summary li,.lead-box li,.card p,.related .body span,figcaption,.doc span{text-align:left}
+}
 </style>
 </head>
 <body>
@@ -1292,6 +1306,18 @@ const CONFIG = {
     calc.addEventListener('input', run);
     run();
   }
+
+  // Bảng trên điện thoại hiển thị dạng thẻ: gắn tên cột cho từng ô (bỏ qua ô chỉ có nhãn trạng thái)
+  document.querySelectorAll('.table-wrap table').forEach(t => {
+    const heads = [...t.querySelectorAll('thead th')].map(th => th.textContent.trim());
+    t.querySelectorAll('tbody tr').forEach(tr => {
+      [...tr.children].forEach((cell, i) => {
+        if (i === 0 || !heads[i] || cell.tagName !== 'TD' || /^(Thông tin|Mức tham khảo)$/.test(heads[i])) return;
+        if (cell.children.length === 1 && cell.textContent.trim() === cell.firstElementChild.textContent.trim() && cell.firstElementChild.classList.contains('badge')) return;
+        cell.setAttribute('data-label', heads[i]);
+      });
+    });
+  });
 })();
 
 })();
