@@ -139,8 +139,8 @@ def banks():
             cy = ((y0 + y1) / 2 * k + im.height / 2) / 2
             cv = Image.new('RGBA', (CW, CH), (255, 255, 255, 0))
             cv.alpha_composite(im, ((CW - im.width) // 2, round(CH / 2 - cy)))
-            buf = io.BytesIO(); cv.save(buf, 'PNG', optimize=True)
-            out += '<img src="data:image/png;base64,%s" alt="%s" width="%d" height="%d">' % (base64.b64encode(buf.getvalue()).decode(), alt, CW, CH)
+            buf = io.BytesIO(); cv.save(buf, 'WEBP', quality=90, method=6)
+            out += '<img src="data:image/webp;base64,%s" alt="%s" width="%d" height="%d">' % (base64.b64encode(buf.getvalue()).decode(), alt, CW, CH)
         _BANKS = '<div class="banks"><span>NGÂN HÀNG HỖ TRỢ</span><div class="bl">' + out + '</div></div>'
     return _BANKS
 
@@ -212,7 +212,8 @@ def related(cur):
     it = [('/bang-gia', 'Giá Sun Saphia Residence', 'So sánh giá căn hộ mặt biển, vay ngân hàng'),
           ('/mat-bang', 'Mặt bằng & chọn căn', 'Layout tầng 3A–28, Studio, 1BR+, 2BR'),
           ('/phap-ly', 'Pháp lý & tiến độ', 'GCN đầu tư, thời hạn 50 năm, mốc mở bán'),
-          ('/cho-thue', 'Cho thuê & dòng tiền', 'Giá thuê, lấp đầy, tính dòng tiền'),
+          ('/cho-thue', 'Cho thuê & dòng tiền', 'Giá thuê, lấp đầy, nhóm khách thuê'),
+          ('/tinh-dong-tien', 'Bảng tính dòng tiền', 'Kéo thanh tính tiền về túi theo căn'),
           ('/', 'Tổng quan dự án', 'Vị trí, tầm nhìn, tiện ích, chân dung khách hàng')]
     it = [x for x in it if x[0] != cur][:4]
     return '<div class="rel">' + ''.join('<a href="%s%s">%s<span>%s</span></a>' % (MAIN, p, t, d) for p, t, d in it) + '</div>'

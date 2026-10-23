@@ -4,6 +4,7 @@ import sys
 sys.path.insert(0, __import__('os').path.dirname(__file__))
 from parts import *
 from blocks import *
+import calc_page
 
 H = sys.argv[1] if len(sys.argv) > 1 else 'HASH'
 V4 = RAW + H + '/landing/sun-saphia/v4/img/'
@@ -175,7 +176,7 @@ def home():
           '<p class="lead just">Đà Nẵng là điểm hội tụ 3 dòng di dân – một điểm đến: nhóm khách hàng thực, nguồn cầu thuê nhà bền vững.</p>' + migration() +
           '<div style="margin-top:30px">' + rent_night() + '</div><div class="g2 eq" style="margin-top:18px"><div>' + rent_month_table() + '</div>' + occ_chart() + '</div>'
           '<h3 class="dp" style="font-size:28px;margin:30px 0 14px">Ba nhóm <b>khách thuê</b> chính</h3>' + tenants() +
-          '<div style="margin-top:26px">' + rent_case() + '</div><p><a class="btn sm nv" href="{M}/cho-thue">Tự tính dòng tiền theo căn →</a></p></div></section>')
+          '<div style="margin-top:26px">' + rent_case() + '</div><p><a class="btn sm nv" href="{M}/tinh-dong-tien">Tự tính dòng tiền theo căn →</a></p></div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('♥', 'Giá trị', 'Bốn giá trị <b>cộng hưởng</b> trong một sản phẩm', 'n') + values4() + '</div></section>')
     b += ('<section class="sec" id="tien-do"><div class="wrap">' + sh('⌛', 'Tiến độ', 'Mốc thời gian <b>quan trọng</b>', 'y') + timeline() + '</div></section>')
     b += ('<section class="sec alt" id="hoi-dap"><div class="wrap">' + sh('?', 'Hỏi đáp', 'Câu hỏi thường gặp về <b>Sun Saphia Residence</b>', 'o') + fq +
@@ -184,7 +185,7 @@ def home():
     b = ins(b, '<section class="sec alt" id="tam-nhin">', band('Muốn xem thực tế vị trí?', 'Chuyên viên gọi video Zalo, đi từ dự án ra biển cho anh/chị xem – miễn phí.', 'Đặt lịch xem vị trí', 'Trang chủ – đặt lịch xem vị trí', ('/mat-bang', 'Xem mặt bằng & hướng view')))
     b = ins(b, '<section class="sec" id="phap-ly">', band('Căn view biển đẹp có hạn trên mỗi tầng', 'Để lại số để được ưu tiên giữ chỗ căn anh/chị chọn ngay khi mở bán.', 'Ưu tiên chọn căn', 'Trang chủ – ưu tiên chọn căn', ('/mat-bang', 'Chọn căn trên mặt bằng tầng')))
     b = ins(b, '<section class="sec alt" id="tien-ich">', band('Nhận bản sao pháp lý &amp; chính sách vay', 'GCN đầu tư, tiến độ, chính sách Vietcombank – BIDV – NCB gửi qua Zalo.', 'Nhận hồ sơ pháp lý', 'Trang chủ – hồ sơ pháp lý', ('/phap-ly', 'Xem trang Pháp lý')))
-    b = ins(b, '<section class="sec alt"><div class="wrap">' + sh('♥', 'Giá trị', 'Bốn giá trị <b>cộng hưởng</b> trong một sản phẩm', 'n'), band('Nhận bảng tính dòng tiền theo căn', 'Tính theo giá thật khi có bảng giá: giá thuê, lấp đầy, lợi nhuận từng căn.', 'Nhận bảng tính', 'Trang chủ – bảng tính dòng tiền', ('/cho-thue', 'Tự tính trên trang Cho thuê')))
+    b = ins(b, '<section class="sec alt"><div class="wrap">' + sh('♥', 'Giá trị', 'Bốn giá trị <b>cộng hưởng</b> trong một sản phẩm', 'n'), band('Nhận bảng tính dòng tiền theo căn', 'Tính theo giá thật khi có bảng giá: giá thuê, lấp đầy, lợi nhuận từng căn.', 'Nhận bảng tính', 'Trang chủ – bảng tính dòng tiền', ('/tinh-dong-tien', 'Mở bảng tính dòng tiền')))
     b += cta_block('Web – trang chủ cuối trang')
     title = 'Sun Saphia Residence Đà Nẵng: Giá, Mặt bằng, Pháp lý 2026'
     desc = 'Sun Saphia Residence – căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng: 30 tầng, 782 căn, pháp lý 50 năm, Vietcombank, BIDV, NCB hỗ trợ vay. Mở bán cuối 11/2026.'
@@ -413,10 +414,30 @@ def ads(domain):
     html += '<body>\n' + header('/ads', MAIN, LOGO) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN) + '\n' + popup() + tail(True) + '</body>\n</html>\n'
     return html
 
+def tinh_dong_tien():
+    cr, cld = crumbs([('Trang chủ', MAIN + '/'), ('Sun Saphia Residence', MAIN + '/'), ('Tính dòng tiền', MAIN + '/tinh-dong-tien')])
+    fq, fld = faq([
+        ('Cho thuê studio Sun Saphia được bao nhiêu mỗi tháng?', 'Với giả định 2,5 triệu/đêm, lấp đầy 60%, chi phí vận hành 35% doanh thu, studio mang về khoảng 356 triệu/năm, tức khoảng 30 triệu/tháng. Anh/chị có thể kéo các thanh để tính theo giả định của mình.'),
+        ('Nên cho thuê ngày hay cho thuê tháng?', 'Cho thuê ngày (kiểu Airbnb) doanh thu cao hơn nhưng cần đơn vị vận hành, chi phí 30–40% doanh thu. Cho thuê tháng ổn định, ít công, chi phí khoảng 10% nhưng giá thấp hơn: studio khu vực khoảng 18–20 triệu/tháng.'),
+        ('Tỷ lệ lấp đầy bao nhiêu là hợp lý?', 'Bài toán của chủ đầu tư dùng 60%. Khách sạn Sun Group tại miền Trung đạt 81,3% năm 2026; mùa mưa (khoảng tháng 9–12) thường thấp hơn.'),
+        ('Kết quả bảng tính có phải cam kết?', 'Không. Đây là ước tính theo giả định; kết quả thực tế phụ thuộc giá mua, mùa du lịch, cách vận hành và chi phí thực tế.')])
+    b = ('<section class="sec nv" style="padding:30px 0 40px"><div class="wrap">' + cr.replace('class="crumb"', 'class="crumb" style="color:#AFC0DA"') +
+         '<span class="ey" style="margin-top:14px">Sun Saphia Residence · Đà Nẵng</span><h1 class="dp" style="color:#fff">Bảng tính <b>dòng tiền</b> cho thuê</h1>'
+         '<p class="lead" style="color:#C9D6EA">Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng. Anh/chị chọn loại căn, kéo các thanh để tính thử tiền về túi mỗi tháng theo ý mình.</p>'
+         '</div></section>')
+    b += '<section class="sec alt" style="padding-top:30px"><div class="wrap">' + calc_page.page_body() + '</div></section>'
+    b += ('<section class="sec" id="hoi-dap"><div class="wrap">' + sh('?', 'Hỏi đáp', 'Hỏi đáp về <b>dòng tiền cho thuê</b>', 'o') + fq +
+          '<h3 style="margin-top:26px">Xem thêm</h3>' + related('/tinh-dong-tien') + '</div></section>')
+    b += cta_block('Web – tính dòng tiền cuối trang', title='Nhận <b>bảng tính chi tiết</b> theo căn anh/chị chọn')
+    title = 'Bảng tính dòng tiền cho thuê căn hộ Sun Saphia Residence Đà Nẵng'
+    desc = 'Tự tính tiền cho thuê căn hộ Sun Saphia Residence: Studio, 1PN+, 2PN, cho thuê ngày hoặc tháng, giá thuê, lấp đầy, chi phí, lợi nhuận và thời gian hoàn vốn.'
+    return page('/tinh-dong-tien', title, desc, 'tính dòng tiền căn hộ, cho thuê căn hộ đà nẵng, lợi nhuận cho thuê studio, airbnb đà nẵng, sun saphia cho thuê',
+                b, [article_ld(title, desc, MAIN + '/tinh-dong-tien'), cld, fld], '/tinh-dong-tien')
+
 if __name__ == '__main__':
     import os
     os.makedirs(OUT, exist_ok=True)
-    out = {'trang-chu.html': home(), 'bang-gia.html': bang_gia(), 'mat-bang.html': mat_bang(), 'phap-ly.html': phap_ly(), 'cho-thue.html': cho_thue(),
+    out = {'trang-chu.html': home(), 'bang-gia.html': bang_gia(), 'mat-bang.html': mat_bang(), 'phap-ly.html': phap_ly(), 'cho-thue.html': cho_thue(), 'tinh-dong-tien.html': tinh_dong_tien(),
            'ads.html': ads(MAIN), 'ads-shaphia.html': ads('https://www.sun-shaphiaresidence.com')}
     # Trang chủ tên miền phụ: cùng nội dung, chuẩn hóa về tên miền chính để tránh trùng nội dung
     out['shaphia.html'] = out['trang-chu.html']

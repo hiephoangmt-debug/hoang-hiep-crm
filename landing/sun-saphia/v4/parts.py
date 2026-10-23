@@ -70,7 +70,7 @@ def faq(items):
 def tiles(pos='tr'):
     return '<span class="tiles t-%s" aria-hidden="true"><img src="%stile-1.webp" alt="" width="201" height="201" loading="lazy"></span>' % (pos, SK)
 
-PAGES = [('/', 'Tổng quan'), ('/bang-gia', 'Bảng giá'), ('/mat-bang', 'Mặt bằng'), ('/phap-ly', 'Pháp lý'), ('/cho-thue', 'Cho thuê')]
+PAGES = [('/', 'Tổng quan'), ('/bang-gia', 'Bảng giá'), ('/mat-bang', 'Mặt bằng'), ('/phap-ly', 'Pháp lý'), ('/cho-thue', 'Cho thuê'), ('/tinh-dong-tien', 'Tính dòng tiền')]
 
 def header(cur, base, logo, cta='#dang-ky'):
     nav = ''.join('<a href="%s%s"%s>%s</a>' % (base, p if p != '/' else '/', ' aria-current="page"' if p == cur else '', t)
