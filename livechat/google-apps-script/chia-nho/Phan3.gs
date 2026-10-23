@@ -9,7 +9,7 @@ function tg_(method, body) {
 }
 function chatIds_() { return String(TELEGRAM_CHAT_ID).split(',').map(function (s) { return s.trim(); }).filter(String); }
 
-function mapSet_(key, v) { sheet_('Map').appendRow([key, v]); }
+function mapSet_(key, v) { sheet_('Map').appendRow(["'" + key, v]); } // dấu ' giữ dạng chữ, tránh Sheets tự đổi thành giờ
 function mapGet_(key) {
   const f = sheet_('Map').createTextFinder(key).matchEntireCell(true).findNext();
   return f ? String(f.offset(0, 1).getValue()) : '';
