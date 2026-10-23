@@ -622,7 +622,7 @@ var playing=false, playBtn=document.getElementById('play');
 playBtn.onclick=function(){playing=!playing; playBtn.textContent=playing?'❚❚':'▶'; playBtn.setAttribute('aria-label',playing?'Dừng':'Chạy thời gian');};
 
 /* ---------- mặt bằng tầng đặt lên tòa nhà: cắt ngang tháp tại tầng đang chọn ---------- */
-var PLAN_URL='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@15c681a13cc712d5b107949e7247c7cd071ca239/projects/sun-saphia/images/mat-bang-tang-4d.webp';
+var PLAN_URL='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@6d625b1a2c79b9a2ab3245f83127cc44b123e59b/projects/sun-saphia/images/mat-bang-tang-4d.webp';
 var planOn=false, planMesh=null, clipped=false, clipP=new THREE.Plane(new THREE.Vector3(0,-1,0),0), bPlan=document.getElementById('mPlan');
 function planY(f){ return FL[Math.max(3,Math.min(28,f))]; }
 function clipTower(on){
@@ -633,7 +633,7 @@ function clipTower(on){
 }
 function makePlan(){
   var ld=new THREE.TextureLoader(); ld.setCrossOrigin('anonymous');
-  var tx=ld.load(PLAN_URL); tx.encoding=THREE.sRGBEncoding; tx.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
+  var tx=ld.load(PLAN_URL); tx.encoding=THREE.sRGBEncoding; tx.anisotropy=Math.min(16,renderer.capabilities.getMaxAnisotropy()); tx.generateMipmaps=true; tx.minFilter=THREE.LinearMipmapLinearFilter;
   var g=new THREE.PlaneGeometry(54.4,49.6); g.rotateX(-Math.PI/2); g.rotateY(-Math.PI/2);   // ảnh: trái→phải = Bắc→Nam, trên = biển
   planMesh=new THREE.Mesh(g,new THREE.MeshBasicMaterial({map:tx,transparent:true,alphaTest:.04,toneMapped:false}));
   planMesh.position.set(X1-14.9,0,Z0+27.2); planMesh.renderOrder=3; T.add(planMesh);
@@ -650,6 +650,7 @@ function setPlan(on){
   planOn=on; if(on&&!planMesh) makePlan();
   clipTower(on); planMesh&&(planMesh.visible=on); hi.visible=!on&&mode!=='view';
   bPlan.setAttribute('aria-pressed',on);
+  if(typeof wm!=='undefined') wm.material.opacity=on?.1:.26;
   if(on) updPlan(true); else { setFloor(+floorEl.value); if(DEF) flyTo(DEF.p,DEF.t); }
 }
 bPlan.onclick=function(){ setPlan(!planOn); };
@@ -688,6 +689,7 @@ var wm=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({
 var consoleEl=document.querySelector('.console');
 function placeWM(){ var W=innerWidth,H=innerHeight, w=Math.min(W*.72,480), h=w/4, cb=consoleEl?consoleEl.getBoundingClientRect().height:140; hudCam.right=W; hudCam.top=H; hudCam.updateProjectionMatrix(); wm.scale.set(w,h,1); wm.position.set(W/2,cb+(H-cb)*.42,0); }
 placeWM(); window.addEventListener('resize',placeWM); setTimeout(placeWM,800);
+if(/[?&]crm/.test(location.search)) wm.visible=false;   // xem trong CRM nội bộ: không cần chữ chìm
 // rooftop signage: HM logo + phone on the crown, facing Trường Sa (east) and Nguyễn Đức Thuận (north)
 var sgC=document.createElement('canvas'); sgC.width=1024; sgC.height=256; (function(g){ g.fillStyle='#0b2a3d'; g.fillRect(0,0,1024,256); drawLogo(g,16,16,224);
   g.fillStyle='#d8bd88'; g.font='800 92px "Be Vietnam Pro",Arial,sans-serif'; g.textBaseline='middle'; g.fillText('SUN SAPHIA',270,92); g.fillStyle='#ffffff'; g.font='700 64px "Be Vietnam Pro",Arial,sans-serif'; g.fillText('0904 567 009',272,190); })(sgC.getContext('2d'));
