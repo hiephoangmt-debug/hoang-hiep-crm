@@ -301,10 +301,14 @@ function layKhachCRM_() {
   var w = Math.min(46, sh.getLastColumn()), loc = String(cfg('LOC_TRANG') || '').toLowerCase().split(',').map(function (x) { return x.trim(); }).filter(String);
   return sh.getRange(2, 1, n - 1, w).getValues().map(function (r) {
     return {sdt: normPhone(r[3]), ten: String(r[2] || ''), luc: r[1], web: String(r[5] || ''), utm: [r[6], r[7]].filter(String).join(' / '),
-      ghi_chu: String(r[21] || '').slice(0, 300), loai: String(r[39] || ''), trang: String(r[40] || ''), du_an: String(r[41] || ''), so_lan: Number(r[9]) || 1};
+      ghi_chu: String(r[21] || '').slice(-300), loai: String(r[39] || ''), trang: String(r[40] || ''), du_an: String(r[41] || ''), so_lan: Number(r[9]) || 1};
   }).filter(function (k) {
     var chu = (k.trang + ' ' + k.web).toLowerCase();
-    return k.sdt.length === 10 && k.loai === 'Website' && (!loc.length || loc.some(function (x) { return chu.indexOf(x) > -1; }));
+    if (k.sdt.length !== 10) return false;
+    if (k.loai === 'Website' && (!loc.length || loc.some(function (x) { return chu.indexOf(x) > -1; }))) return true;
+    /* Số đã có sẵn trong CRM (data nhập / dự án khác) vừa gửi lại form trên trang Saphia: CRM chỉ cập nhật dòng cũ
+       (cột Dự án = Saphia, ghi chú "Gửi lại … Dự án Saphia"), nên vẫn tính là khách cần chia. */
+    return k.so_lan > 1 && /saphia/i.test(k.du_an + ' ' + k.ghi_chu.split('|').pop());
   });
 }
 function nhanKhachMoi_() {
