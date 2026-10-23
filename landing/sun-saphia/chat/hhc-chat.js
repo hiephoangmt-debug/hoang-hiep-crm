@@ -266,7 +266,7 @@
     + '.hhc-n2>.hhc-nx{position:absolute;top:4px;right:6px;border:0;background:none;font-size:20px;line-height:1;color:#6b7a90;cursor:pointer;padding:2px 4px}'
     + '@keyframes hhcUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}'
     + '@media (prefers-reduced-motion:reduce){.hhc-n2{animation:none}}'
-    + '@media (max-width:600px){.hhc-n2{left:12px;right:12px;width:auto;bottom:84px;border-radius:14px}}'
+    + '@media (max-width:600px){.hhc-n2{left:10px;right:66px;width:auto;bottom:84px;border-radius:14px}}'
     + '@media (max-width:600px){.hhc-b{right:0;left:0;bottom:0;width:100%;max-width:100%;height:82vh;max-height:82vh;border-radius:18px 18px 0 0}.hhc-n{right:80px;bottom:96px}}'
     + '.hhc-ok{margin:10px 0 0;font-weight:600;color:#0B7A43;text-align:left}';
 
@@ -376,13 +376,17 @@
     nudge2 = el('div', 'hhc-n2'); nudge2.setAttribute('role', 'status'); document.body.appendChild(nudge2);
     nudgeN = +(sget('hhc_nn') || 0);
     var seen = {}; try { seen = JSON.parse(sget('hhc_secs') || '{}'); } catch (e) {}
-    var cur = null;
+    var cur = null, inView = [];
+    function track(sec) {
+      if (cur === sec) return; cur = sec; clearTimeout(dwellT);
+      if (sec) dwellT = setTimeout(function () { fire(sec, ruleFor(sec)); }, DWELL);
+    }
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) {
-        var r = ruleFor(e.target); if (!r) return;
-        if (e.isIntersecting) { if (cur !== e.target) { cur = e.target; clearTimeout(dwellT); dwellT = setTimeout(function () { fire(e.target, r); }, DWELL); } }
-        else if (cur === e.target) { cur = null; clearTimeout(dwellT); }
+        var i = inView.indexOf(e.target);
+        if (e.isIntersecting) { if (i < 0) inView.push(e.target); } else if (i > -1) inView.splice(i, 1);
       });
+      track(inView.length ? inView[inView.length - 1] : null);
     }, {rootMargin: '-45% 0px -45% 0px'});
     function fire(sec, r) {
       var key = r.t; if (seen[key] || nudgeN >= NUDGE_MAX || Date.now() - lastNudge < NUDGE_GAP) return;
