@@ -282,3 +282,11 @@ body.lp-on{overflow:hidden}
 .fbr b{display:block;color:var(--or2);letter-spacing:.14em;font-size:15px}
 .fbr span{font-family:Fahkwang,serif;color:#fff;font-size:16px}
 .fbr .btn{margin-left:auto}
+.tldr{background:#fff;border:1.5px solid var(--ln);border-left:6px solid var(--or);border-radius:18px;padding:20px 22px;box-shadow:var(--sh)}
+.tldr h2{font:800 15px/1.3 "Be Vietnam Pro",Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--nv);margin:0 0 12px}
+.tldr dl{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 26px;margin:0}
+.tldr dl div{display:grid;grid-template-columns:150px 1fr;gap:10px;padding:7px 0;border-bottom:1px dashed var(--ln)}
+.tldr dt{font-weight:700;color:var(--or);font-size:14px}
+.tldr dd{margin:0;font-size:14.5px;color:var(--ink)}
+@media(max-width:760px){.tldr dl{grid-template-columns:1fr}.tldr dl div{grid-template-columns:120px 1fr}}
+@media(max-width:520px){.tldr dl div{grid-template-columns:1fr;gap:2px}}

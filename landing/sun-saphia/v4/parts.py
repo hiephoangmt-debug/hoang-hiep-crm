@@ -135,7 +135,7 @@ def anticopy():
     a = s.index('<style id="chong-copy">'); b = s.index('</script>', s.index('<script id="chong-copy-js">')) + 9
     return s[a:b]
 
-def head(title, desc, canon, og_img, kw, ld_graph, favicon, robots='index,follow', extra=''):
+def head(title, desc, canon, og_img, kw, ld_graph, favicon, robots='index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1', extra=''):
     ld = json.dumps({'@context': 'https://schema.org', '@graph': ld_graph}, ensure_ascii=False)
     return ('<!DOCTYPE html>\n<html lang="vi">\n<head>\n<meta charset="utf-8">\n'
             '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
@@ -152,3 +152,9 @@ def head(title, desc, canon, og_img, kw, ld_graph, favicon, robots='index,follow
             '<script type="application/ld+json">%s</script>\n%s\n<style>%s</style>\n%s\n</head>\n') % (
         esc(title), esc(desc), esc(kw), robots, canon, canon, esc(title), esc(desc), og_img, favicon, favicon, ld,
         extra, open(os.path.join(os.path.dirname(__file__), 'brand.css'), encoding='utf8').read(), anticopy())
+
+def tldr(title, items):
+    """Ô tóm tắt đầu trang: câu trả lời ngắn, rõ để Google, Bing, ChatGPT trích dẫn."""
+    return ('<section class="sec" style="padding:0 0 34px"><div class="wrap"><div class="tldr"><h2>Tóm tắt nhanh: %s</h2><dl>%s</dl>'
+            '<p class="src" style="margin:10px 0 0">Cập nhật %s · Nguồn: tài liệu Kick-off của chủ đầu tư Sun Property · TATILAND – đại lý phân phối chính thức</p></div></div></section>') % (
+        title, ''.join('<div><dt>%s</dt><dd>%s</dd></div>' % x for x in items), UPDATED)
