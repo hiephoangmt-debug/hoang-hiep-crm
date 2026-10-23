@@ -32,7 +32,7 @@ Dòng nằm giữa dấu <!-- và --> là ghi chú, bot vẫn đọc được n�
 <!-- Nguồn: slide sự kiện Saphia Đà Nẵng 23/10/2026. -->
 - Giai đoạn: Booking – SẮP MỞ BÁN. CĐT CHƯA công bố giá và CSBH chính thức.
 - Booking: 50 triệu/căn, hoàn lại 100% nếu khách không mua. [điền: hạn/cách hoàn tiền, quyền lợi: ưu tiên chọn căn, thứ tự ráp căn]
-- Ngày mở bán: 15/11/2026. [điền: giờ, địa điểm sự kiện mở bán]
+- Ngày mở bán: DỰ KIẾN cuối tháng 11/2026, chưa có ngày chính thức (khi nói với khách luôn nói "dự kiến"). [điền: ngày, giờ, địa điểm sự kiện mở bán khi CĐT chốt]
 - Giá dự kiến (chưa chính thức): [điền giá thị trường đang nhắc, ví dụ "Studio khoảng ... tỷ, 1PN+ khoảng ... tỷ, 2PN khoảng ... tỷ"]
   Trong slide sự kiện, bài toán cho thuê dùng "giá tham khảo" Studio 30m2 ≈ 3 tỷ, 1BR 50m2 ≈ 4,5 tỷ – chỉ để minh họa, không phải giá bán.
 - Chủ đầu tư: Sun Group. Dự án căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng.
