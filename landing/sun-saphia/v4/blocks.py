@@ -222,7 +222,7 @@ def cta_block(label, title='Có bảng giá là anh/chị <b>nhận ngay</b>', s
     return ('<section class="sec" id="dang-ky"><div class="wrap"><div class="cta">%s<div class="g2"><div>'
             '<span class="ey" style="color:var(--yl)">Đăng ký nhận thông tin</span><h2 class="dp">%s</h2>'
             '<p style="margin-top:14px">%s</p><ul class="ck" style="color:#fff"><li>Bảng giá gốc &amp; chính sách thanh toán</li><li>Mặt bằng từng tầng, căn còn trống</li><li>Bảng tính dòng tiền theo căn anh/chị chọn</li></ul>'
-            '<p><a class="btn sm" href="%s" target="_blank" rel="noopener" style="background:#0068FF">Nhắn Zalo %s</a> <a class="btn sm gh" href="tel:%s" style="color:#fff;border-color:#fff">Gọi ngay</a></p>'
+            '<div class="cta2"><a class="btn zl" href="%s" target="_blank" rel="noopener"><span class="hm">Nhắn </span>Zalo %s</a><a class="btn call" href="tel:%s">Gọi ngay</a></div>'
             '<div class="trust"><div><b>Đại lý chính thức</b><span>Sun Property chứng nhận 23/10/2026</span></div><div><b>0 đồng</b><span>Không thu tiền giữ chỗ</span></div><div><b>Phản hồi nhanh</b><span>Gửi tài liệu qua Zalo trong ít phút</span></div></div>'
             '</div>%s</div></div></div></section>') % (
         tiles('tr'), title, sub, ZALO, TEL_S, TEL, form('cuoi', label, title='Gửi tôi bảng giá', note='Gửi qua Zalo ngay khi chủ đầu tư công bố. Miễn phí, không ràng buộc.', btn='Gửi tôi bảng giá'))

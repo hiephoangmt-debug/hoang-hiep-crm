@@ -348,3 +348,11 @@ body.lp-on{overflow:hidden}
 
 @media(max-width:900px){.tdt{display:flex;flex-direction:column;gap:18px}.tdt .col{display:contents}
 .tdt .o1{order:1}.tdt .o2{order:2}.tdt .o3{order:3}.tdt .o4{order:4}.tdt .o5{order:5}.tdt .o6{order:6}.tdt .o7{order:7}}
+
+/* Hai nút liên hệ: cùng cỡ, thẳng hàng */
+.cta2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:6px 0 4px;align-items:stretch}
+.cta2 .btn{display:flex;align-items:center;justify-content:center;min-height:54px;padding:12px 16px;font-size:16px;border-radius:14px;margin:0;box-sizing:border-box}
+.cta2 .btn.zl{background:#0068FF;box-shadow:0 10px 22px -12px rgba(0,104,255,.9)}
+.cta2 .btn.call{background:linear-gradient(135deg,var(--or2),var(--or));box-shadow:0 10px 22px -12px rgba(233,97,24,.9)}
+@media(max-width:420px){.cta2 .btn{font-size:14.5px;padding:12px 10px}}
+@media(max-width:520px){.cta2 .hm{display:none}}
