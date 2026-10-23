@@ -592,13 +592,14 @@ var mode='overview', saved=null, yaw=0, pitch=-.04;
 function setFloor(f){ curF=f; fitHi(); hi.position.y=FL[f]-.2; floorOut.textContent='Tầng '+f; mainLbl.textContent='SUN SAPHIA · tầng '+f+' (~'+Math.round(FL[f]+1.6)+' m)'; if(mode==='view') placeViewCam(); if(mode==='close') flyClose(); }
 function placeViewCam(){
   var f=+floorEl.value, c=Math.cos(yaw), sn=Math.sin(yaw), hz=(SCH==='A'?AD:BD)/2+2, k=1/Math.max(Math.abs(c)/VIEWX,Math.abs(sn)/hz,1e-6);
-  var p=c<-.3? T.localToWorld(new THREE.Vector3(X0-1.8,FL[f]+1.6,(Z0+ZM-SL)/2+sn*Math.min(8,Math.abs(sn/c)*1.8))) : T.localToWorld(new THREE.Vector3(TX+c*k,FL[f]+1.6,sn*k)); camera.position.copy(p);
+  var p=c<-.3? T.localToWorld(new THREE.Vector3(X0-1.8,FL[f]+1.6,(Z0+ZM-SL)/2+sn*Math.min(8,Math.abs(sn/c)*1.8))) : T.localToWorld(new THREE.Vector3(TX+c*k,FL[f]+1.6,sn*k)); camera.position.copy(p); if(unitEye) camera.position.copy(unitEye);
   var d=new THREE.Vector3(Math.cos(yaw)*Math.cos(pitch),Math.sin(pitch),Math.sin(yaw)*Math.cos(pitch)).applyQuaternion(world.quaternion);
   camera.lookAt(p.clone().add(d));
 }
 var bClose=document.getElementById('mClose'), fly=null, DEF=null,
   bOver=document.getElementById('mOverview'), bView=document.getElementById('mView'), bSpin=document.getElementById('mSpin'), hint=document.getElementById('viewhint');
 function setMode(m){
+  if(m!=='view') unitEye=null;
   if(m===mode&&m!=='spin') return;
   if(mode==='view'&&m!=='view'&&saved){camera.position.copy(saved.p);controls.target.copy(saved.t);}
   if(m==='view'){ saved={p:camera.position.clone(),t:controls.target.clone()}; controls.enabled=false; controls.autoRotate=false; yaw=0; pitch=-.04; camera.fov=60; camera.updateProjectionMatrix(); hi.visible=false; placeViewCam(); hint.hidden=false; setTimeout(function(){hint.hidden=true;},3500); }
@@ -628,7 +629,7 @@ function planY(f){ return FL[Math.max(3,Math.min(28,f))]; }
 function clipTower(on){
   renderer.localClippingEnabled=true;
   A.traverse(function(o){ if(!o.isMesh) return; if(!clipped) o.material=Array.isArray(o.material)?o.material.map(function(m){return m.clone();}):o.material.clone();
-    (Array.isArray(o.material)?o.material:[o.material]).forEach(function(m){ m.clippingPlanes=on?[clipP]:null; m.clipShadows=true; m.needsUpdate=true; }); });
+    (Array.isArray(o.material)?o.material:[o.material]).forEach(function(m){ m.clippingPlanes=on?[clipP]:[]; m.clipShadows=true; m.needsUpdate=true; }); });
   clipped=true;
 }
 function makePlan(){
@@ -641,7 +642,8 @@ function makePlan(){
 function updPlan(fly){
   var f=+floorEl.value, y=planY(f);
   planMesh.position.y=y+.4; clipP.constant=T.localToWorld(new THREE.Vector3(0,y+.5,0)).y;
-  mainLbl.textContent='MẶT BẰNG TẦNG '+(f<=28?f:'3A–28')+' · 28 căn (minh họa)';
+  mainLbl.textContent='MẶT BẰNG TẦNG '+(f<=28?f:'3A–28')+' · bấm vào căn để xem';
+  floorOut.textContent='Tầng '+f+' · bấm căn';
   if(fly){ var m=innerWidth<600, c=new THREE.Vector3(X1-14.9,y,Z0+27.2);
     flyTo(T.localToWorld(new THREE.Vector3(c.x-(m?70:46),y+(m?150:60),c.z+(m?2:3))),T.localToWorld(new THREE.Vector3(c.x+(m?6:2),y,c.z))); }
 }
@@ -656,6 +658,76 @@ function setPlan(on){
 bPlan.onclick=function(){ setPlan(!planOn); };
 var setFloor0=setFloor; setFloor=function(f){ setFloor0(f); if(planOn){ hi.visible=false; updPlan(false); } };
 var bView0=bView.onclick; bView.onclick=function(){ if(planOn) setPlan(false); bView0(); };
+
+/* ---------- bấm vào căn trên mặt bằng tầng: hiện thẻ căn, mở mặt bằng & 3D căn, view từ đúng căn ---------- */
+var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/043864e8ecbcc0161bb7430e14c86ba2b4added1/projects/sun-saphia/chon-can/chon-can-app.html';
+var unitEye=null;
+// [mã, loại, u0,u1, v0,v1, hướng mặt kính chính] – cùng số liệu với công cụ chọn căn
+var UNITS=[['11','2PN',0,9.9,0,7.25,'E'],['12','STU',10,13.8,0,9,'E'],['12A','STU',13.8,17.6,0,9,'E'],['12B','1PN',17.6,23.8,0,9,'E'],['15','STU',23.8,27.6,0,9,'E'],['16','STU',27.6,31.4,0,9,'E'],['17','1PN',31.4,37.6,0,9,'E'],
+ ['18','2PN',39.9,47.15,-9.9,0,'E'],['19','2PN',47.15,54.4,-9.9,0,'E'],['10','1PN',0,9,7.25,13.45,'N'],['09','STU',0,9,13.45,17.25,'N'],['08','STU',0,9,17.25,21.05,'N'],['07','STU',0,9,21.05,24.85,'N'],['06','STU',0,9,24.85,28.65,'N'],['05','STU',0,9,28.65,32.45,'N'],
+ ['03A','2PN',0,9.9,32.45,39.7,'W'],['03','2PN',9.9,19.8,32.45,39.7,'W'],['01','STU',10.8,19.8,24.85,28.65,'S'],['02','STU',10.8,19.8,28.65,32.45,'S'],
+ ['28','1PN',17.6,23.8,10.7,19.7,'W'],['27','STU',23.8,27.6,10.7,19.7,'W'],['26','STU',27.6,31.4,10.7,19.7,'W'],['25','STU',31.4,35.2,10.7,19.7,'W'],['24','STU',35.2,39,10.7,19.7,'W'],['23','STU',39,42.8,10.7,19.7,'W'],['22','STU',42.8,46.6,10.7,19.7,'W'],['21','STU',46.6,50.4,10.7,19.7,'W'],
+ ['20','STUL',50.4,54.4,8.8,19.7,'W']];
+var UINFO={STU:['Studio','3,8 × 9 m'],STUL:['Studio lớn đầu hồi','2 mặt thoáng'],'1PN':['1PN+1','6,2 × 9 m'],'2PN':['2PN góc bo','7,25 × 9,9 m']};
+// diện tích theo mặt bằng tầng 3A–28 của CĐT: [thông thủy, tim tường] m²
+var UAREA={'11':[70.21,77.35],'12':[31,34.58],'12A':[30,34.58],'12B':[51.11,56.42],'15':[30,34.58],'16':[30,34.58],'17':[50.18,56.38],'18':[67.68,75.5],'19':[67.69,76.36],
+ '10':[50.28,56.42],'09':[30,34.58],'08':[30,34.58],'07':[31,35.03],'06':[30,34.13],'05':[30,34.58],'03A':[61.14,68.67],'03':[60.30,68.32],'01':[30,33.88],'02':[30,33.88],
+ '28':[48.98,55.27],'27':[30,33.88],'26':[30,33.88],'25':[30,33.88],'24':[30,33.88],'23':[30,33.88],'22':[30,33.88],'21':[30,33.88],'20':[40.03,46.38]};
+function um2(x){ return String(x).replace('.',','); }
+var UVIEW={E:['Biển Đông',0],W:['Sông Hàn · trung tâm TP',Math.PI],N:['Sơn Trà (Bắc)',-Math.PI/2],S:['Đô thị phía Nam',Math.PI/2]};
+var UCOL={STU:0xe86a78,STUL:0xe86a78,'1PN':0x4fb3e0,'2PN':0xf2c14e};
+var uHi=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({color:0xff6a2b,transparent:true,opacity:.42,depthWrite:false,toneMapped:false}));
+uHi.rotation.x=-Math.PI/2; uHi.visible=false; uHi.renderOrder=4; T.add(uHi);
+var uCss=document.createElement('style'); uCss.textContent='#uCard{position:fixed;left:50%;top:96px;transform:translateX(-50%);z-index:30;width:min(92vw,360px);background:#fff;border-radius:14px;box-shadow:0 10px 30px rgba(10,37,64,.28);padding:12px 14px;font-family:inherit;color:#0A2540;border-top:4px solid #FF6A2B}'
+ +'#uCard h4{margin:0 26px 2px 0;font-size:17px}#uCard .s{font-size:13px;color:#41505f;margin-bottom:8px}#uCard .b{display:flex;gap:6px;flex-wrap:wrap}#uCard button{flex:1;min-width:130px;border:0;border-radius:10px;padding:9px 8px;font:800 13px inherit;cursor:pointer}'
+ +'#uCard .o{background:#FF6A2B;color:#fff}#uCard .n{background:#0A2540;color:#fff}#uCard .x{position:absolute;right:8px;top:6px;background:none;min-width:0;flex:0;font-size:18px;color:#5d6b7a;padding:2px 6px}'
+ +'#uOv{position:fixed;inset:0;z-index:40;background:rgba(10,37,64,.55);display:flex;align-items:center;justify-content:center}#uOv .w{position:relative;width:min(98vw,1180px);height:min(94vh,980px);background:#fff;border-radius:14px;overflow:hidden}'
+ +'#uOv iframe{width:100%;height:100%;border:0}#uOv .c{position:absolute;right:10px;top:8px;z-index:2;border:0;border-radius:18px;background:#FF6A2B;color:#fff;font:800 14px inherit;padding:7px 12px;cursor:pointer}';
+document.head.appendChild(uCss);
+var uCard=null;
+function unitAt(u,v){ var hit=null; UNITS.forEach(function(r){ if(r[1]==='STUL') return; if(u>=r[2]&&u<=r[3]&&v>=r[4]&&v<=r[5]) hit=r; });
+  if(!hit&&u>=47.6&&u<=54.4&&v>=8.8&&v<=19.7&&!(u<50.4&&v>10.7)) hit=UNITS[UNITS.length-1]; return hit; }
+function uFloor(){ return Math.max(3,Math.min(28,+floorEl.value)); }
+function uCode(r){ var f=uFloor(); return 'SP'+(f<10?'0':'')+f+r[0]; }
+function showUnit(r){
+  var y=planY(+floorEl.value)+.55, u0=r[1]==='STUL'?r[2]:r[2], w=r[3]-u0, d=r[5]-r[4];
+  uHi.scale.set(d,w,1); uHi.position.set(X1-(r[4]+r[5])/2,y,Z0+(u0+r[3])/2); uHi.visible=true; uHi.material.color.setHex(0xff6a2b);
+  if(!uCard){ uCard=document.createElement('div'); uCard.id='uCard'; document.body.appendChild(uCard); }
+  var inf=UINFO[r[1]], vw=UVIEW[r[6]];
+  uCard.innerHTML='<button class="x" aria-label="Đóng">✕</button><h4>Căn '+uCode(r)+' · '+inf[0]+'</h4><div class="s"><b>Thông thủy '+um2(UAREA[r[0]][0])+' m²</b> · tim tường '+um2(UAREA[r[0]][1])+' m²<br>'+inf[1]+' · view '+vw[0]+'</div>'
+    +'<div class="b"><button class="o" data-a="plan">Mặt bằng &amp; 3D căn</button><button class="n" data-a="view">View từ căn này (5D)</button></div>';
+  uCard.style.display='block';
+  uCard.querySelector('.x').onclick=function(){ uCard.style.display='none'; uHi.visible=false; };
+  uCard.querySelector('[data-a=plan]').onclick=function(){ openUnitTool(r); };
+  uCard.querySelector('[data-a=view]').onclick=function(){ viewFromUnit(r); };
+}
+function openUnitTool(r){
+  var ov=document.createElement('div'); ov.id='uOv';
+  ov.innerHTML='<div class="w"><button class="c">✕ Đóng</button><iframe title="Mặt bằng & 3D căn" allow="fullscreen" src="'+CC_URL+'?u='+r[0]+'&f='+uFloor()+'"></iframe></div>';
+  ov.querySelector('.c').onclick=function(){ ov.remove(); }; ov.onclick=function(e){ if(e.target===ov) ov.remove(); };
+  document.body.appendChild(ov);
+}
+function viewFromUnit(r){
+  var f=uFloor(), y=FL[f]+1.6, uc=(r[2]+r[3])/2, vc=(r[4]+r[5])/2, p;
+  if(r[6]==='E') p=new THREE.Vector3(X1-r[4]+1.4,y,Z0+uc);
+  else if(r[6]==='W') p=new THREE.Vector3(X1-r[5]-1.4,y,Z0+uc);
+  else if(r[6]==='N') p=new THREE.Vector3(X1-vc,y,Z0+r[2]-1.4);
+  else p=new THREE.Vector3(X1-vc,y,Z0+r[3]+1.4);
+  if(uCard) uCard.style.display='none'; uHi.visible=false;
+  if(planOn) setPlan(false);
+  floorEl.value=f; setFloor(f);
+  setMode('view'); yaw=UVIEW[r[6]][1]; pitch=-.05; unitEye=T.localToWorld(p); placeViewCam();
+  mainLbl.textContent='View từ căn '+uCode(r)+' · '+UVIEW[r[6]][0];
+}
+(function(){ var down=null, rc=new THREE.Raycaster(), ndc=new THREE.Vector2();
+  renderer.domElement.addEventListener('pointerdown',function(e){ down=[e.clientX,e.clientY]; });
+  renderer.domElement.addEventListener('pointerup',function(e){
+    if(!down||!planOn||!planMesh) return; var mv=Math.hypot(e.clientX-down[0],e.clientY-down[1]); down=null; if(mv>7) return;
+    var rect=renderer.domElement.getBoundingClientRect(); ndc.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);
+    rc.setFromCamera(ndc,camera); var hit=rc.intersectObject(planMesh)[0]; if(!hit) return;
+    var lp=T.worldToLocal(hit.point.clone()), u=lp.z-Z0, v=X1-lp.x, r=unitAt(u,v); if(r) showUnit(r); });
+})();
+var setPlan0=setPlan; setPlan=function(on){ setPlan0(on); mainLbl.style.visibility=on?'hidden':''; if(!on){ uHi.visible=false; if(uCard) uCard.style.display='none'; } };   // ẩn nhãn nổi trên nóc khi xem mặt bằng (khỏi che bản vẽ)
 
 /* ---------- Initial camera ---------- */
 // default view framed like the aerial render: from the north-west, sea top-left, park in front of the tower
