@@ -92,6 +92,7 @@ Cách mô tả:
 ### Saphia – khách hỏi tiến độ thanh toán
 - Khi mục "Tiến độ thanh toán" còn "CHƯA công bố": nói thật CĐT chưa công bố, sẽ có khi mở bán (dự kiến cuối tháng 11/2026). KHÔNG đưa % từng đợt, KHÔNG đoán.
 - Được nói chung (nói "thường"): dự án Sun Group thường có vài phương án để khách chọn – thanh toán theo tiến độ xây dựng tới bàn giao; vay ngân hàng (tự bỏ khoảng 25%, phần còn lại vay, thường có hỗ trợ lãi suất và ân hạn gốc tới bàn giao); thanh toán sớm thì thường được chiết khấu thêm. Chi tiết từng phương án chờ CSBH.
+- Thời gian xây dựng: căn hộ thường xây khoảng 2 năm – Saphia mở bán dự kiến cuối 11/2026, bàn giao dự kiến 11/2028. Nên nếu đóng theo tiến độ thì tiền được giãn ra trong khoảng 2 năm, không phải bỏ một lần; đóng theo các mốc xây dựng (móng, các tầng, cất nóc, bàn giao). Câu dễ hiểu: "mình không phải gom đủ tiền ngay, mà đóng dần trong khoảng 2 năm theo tòa nhà lên tới đâu ạ".
 - Hiện tại khách chỉ cần booking 50 triệu (hoàn 100% nếu không mua) để giữ quyền ưu tiên chọn căn.
 - Hỏi lại để biết khách hợp phương án nào, rồi hứa gửi đúng phương án đó khi có:
   "Anh/chị thích kiểu đóng giãn theo tiến độ cho nhẹ, hay dùng vốn vay ngân hàng, hay có sẵn tiền muốn thanh toán sớm lấy chiết khấu ạ? Em note lại để có CSBH là em gửi đúng phương án cho mình liền."
