@@ -27,7 +27,21 @@ EXTRA_CSS = """
 .split-media,.media-stack,.split-media.zoom{position:relative!important;top:auto!important;min-height:0!important}
 .split-media>picture,.split-media>a.zoom-link,.split-media img,.media-stack img{position:static!important;inset:auto!important;height:auto!important;width:100%!important;object-fit:initial!important}
 .split{align-items:start!important}
-.toc ol{columns:auto!important}
+.toc ol{columns:auto!important;list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.toc li{margin:0}
+#bai-viet{padding-bottom:8px!important}
+#bai-viet .toc{margin-bottom:0}
+.art-part{padding-top:0!important;padding-bottom:0!important}
+.art-part:last-of-type{padding-bottom:64px!important}
+.art-part h3{margin-top:0!important;padding-top:34px}
+.btn.toc-btn{display:flex;justify-content:flex-start;width:100%;height:100%;text-align:left;background:var(--bg);color:var(--brand);border:1px solid var(--line);box-shadow:none;border-radius:12px;padding:10px 14px;font-size:.95rem;font-weight:600}
+.btn.toc-btn:hover{border-color:var(--brand-2);color:var(--brand-2)}
+.nav{gap:6px!important}
+.btn.nav-btn{background:transparent;color:var(--brand);box-shadow:none;padding:6px 9px;font-size:.9rem;border-radius:999px;white-space:nowrap}
+.nav{gap:2px!important;flex-wrap:nowrap!important}
+.site-head .btn{white-space:nowrap}
+.btn.nav-btn[aria-current=page],.btn.nav-btn:hover{background:color-mix(in srgb,var(--brand-2) 12%,#fff);color:var(--brand-2)}
+.btn.foot-btn{background:transparent;box-shadow:none;padding:6px 10px;color:inherit;font-weight:600;font-size:.95rem}
 .cs-wrap{margin-top:24px}
 .cs-frame{overflow:hidden}
 .cs-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}
@@ -168,6 +182,32 @@ def convert(name):
         state["s"] = state["s"].replace(m.group(0), rep, 1)
     s = state["s"].replace("</body>", CAROUSEL_JS + "\n</body>")
     s = re.sub(r'\sloading="lazy"', "", s)
+    # LadiPage only turns <a class="btn"> into clickable buttons (section / link actions);
+    # plain text links in the menu, table of contents and footer become dead text.
+    def linkify(cls):
+        def f(m):
+            return re.sub(r'<a (?![^>]*class=)', f'<a class="btn {cls}" ', m.group(0))
+        return f
+    # Split the article so every TOC heading starts its own <section id=...>:
+    # LadiPage keeps section ids as scroll targets but drops ids on inner headings.
+    def split_article(m):
+        sec = m.group(0)
+        pm = re.search(r'<div class="prose">(.*)</div>\s*</div>\s*</section>$', sec, flags=re.S)
+        if not pm:
+            return sec
+        parts = re.split(r'(?=<h3 id=")', pm.group(1))
+        head = sec[:pm.start()] + '<div class="prose">' + parts[0]
+        out = head + "</div>\n    </div>\n  </section>"
+        for part in parts[1:]:
+            hid = re.match(r'<h3 id="([^"]+)"', part).group(1)
+            part = part.replace(f'<h3 id="{hid}"', "<h3", 1)
+            out += (f'\n  <section class="alt art-part" id="{hid}"><div class="wrap article"><div class="prose">'
+                    + part + "</div></div></section>")
+        return out
+    s = re.sub(r'<section class="alt" id="bai-viet">.*?</section>(?=\s*<section|\s*<footer|\s*<div class="lead)', split_article, s, count=1, flags=re.S)
+    s = re.sub(r'<nav class="nav".*?</nav>', linkify("nav-btn"), s, flags=re.S)
+    s = re.sub(r'<nav class="toc".*?</nav>', linkify("toc-btn"), s, flags=re.S)
+    s = re.sub(r'<nav class="foot-links".*?</nav>', linkify("foot-btn"), s, flags=re.S)
 
     # Floating call/Zalo buttons are not exported: LadiPage turns them into static boxes.
     # Paste marketing/ladipage-nut-lien-he.html into an HTML element in the builder instead.
