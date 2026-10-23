@@ -54,6 +54,27 @@ Dòng nằm giữa dấu <!-- và --> là ghi chú, bot vẫn đọc được n�
 - Phù hợp với: người trẻ làm việc tự do (Studio, 1PN+, cho thuê bù chi phí) · người thành đạt mua second home · người muốn nghỉ hưu sớm, sống chậm · người lớn tuổi về biển dưỡng sức · nhà đầu tư cho thuê ngắn ngày / trung hạn.
 - Căn đang có sẵn: chưa mở bán – chỉ nhận booking.
 
+### Saphia – mô tả vị trí cho khách dễ hình dung
+<!-- Khoảng cách dưới đây là ƯỚC TÍNH theo bản đồ, chuyên viên kiểm tra lại bằng Google Maps và sửa số nếu cần. -->
+Địa điểm: ngay bãi tắm Sơn Thủy, giao lộ Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, phường Ngũ Hành Sơn (trước là Khuê Mỹ), Đà Nẵng. Nằm đúng chỗ đường biển Võ Nguyên Giáp nối sang đường Trường Sa đi Hội An.
+Khoảng cách (đi xe, ước tính):
+- Ngũ Hành Sơn (núi Non Nước): khoảng 3km, ~5 phút
+- Cầu Trần Thị Lý / Sun World Asia Park / Đà Nẵng Downtown: khoảng 4km, ~10 phút
+- Cầu Rồng: khoảng 6km, ~15 phút
+- Cầu sông Hàn, chợ Hàn: khoảng 7km, ~15–20 phút
+- Sân bay Đà Nẵng: khoảng 8km, ~15–20 phút
+- Biển Mỹ Khê đoạn Phạm Văn Đồng (khu đông khách du lịch): khoảng 5km, đi dọc biển
+- Phố cổ Hội An: khoảng 25km, ~35 phút theo đường biển Trường Sa – Lạc Long Quân
+- Bà Nà Hills: khoảng 35km, ~50 phút
+- Ngay cạnh dải resort 5 sao: Furama, Hyatt Regency, Sheraton Grand, Crowne Plaza (đều nằm trên Võ Nguyên Giáp – Trường Sa)
+- Nhà ga LRT 09 (tàu điện nhẹ, đang quy hoạch): khoảng 500m
+Cách mô tả:
+1. Chưa biết khách quen chỗ nào → HỎI TRƯỚC 1 câu, rồi mới mô tả: "Anh/chị đang ở Đà Nẵng hay từng ghé Đà Nẵng chưa ạ? Anh/chị nhớ chỗ nào nhất – cầu Rồng, sân bay, Ngũ Hành Sơn hay mấy resort ven biển – để em chỉ theo đó cho dễ hình dung?"
+2. Khách ở Đà Nẵng / đã từng đến → mô tả theo đúng mốc khách nói, chỉ 1–2 mốc gần nhất, ví dụ: "từ cầu Rồng chạy thẳng ra biển rồi xuôi về phía Hội An khoảng 15 phút, ngay bãi tắm Sơn Thủy, gần resort Furama với Hyatt đó ạ".
+3. Khách ở xa, chưa đến Đà Nẵng → vẽ bức tranh đơn giản: "xuống máy bay chạy khoảng 15–20 phút là tới, nằm trên con đường biển đẹp nhất Đà Nẵng nối từ trung tâm về Hội An, ngay đoạn có các resort 5 sao, trước mặt là biển, nhìn ngang là núi Ngũ Hành Sơn". Bay Hà Nội hoặc TP.HCM ra Đà Nẵng khoảng 1 tiếng 20 phút.
+4. Không liệt kê cả danh sách khoảng cách trong 1 tin. Có link Google Maps trong mục Link dự án thì gửi kèm.
+5. Kết bằng câu mở, ví dụ: "Anh/chị muốn em gửi vị trí trên Google Maps để mình xem đường đi từ chỗ anh/chị không ạ?" hoặc "Lần tới ra Đà Nẵng anh/chị ghé xem thực tế khu đất, em dẫn đi luôn nha – anh/chị định ra dịp nào ạ?"
+
 ### Saphia – số liệu tham khảo (từ slide, chỉ dùng để so sánh, KHÔNG phải cam kết)
 - Giá căn hộ mặt biển Đà Nẵng đang bán (tham khảo): The Soleil: Studio 5,2–5,5 tỷ, 1BR 7,7–7,8 tỷ, 2BR 17,5 tỷ · Futa Residence: Studio 9,1–10,5 tỷ, 1BR 10,3–11,5 tỷ, 2BR 17,4–17,6 tỷ · Nobu Đà Nẵng: Studio 6,3–6,4 tỷ, 1BR 10,5–10,6 tỷ, 2BR 21,4–21,7 tỷ, 3BR 25,9 tỷ · The Newtown Diamond: 1BR+ 5,3–5,6 tỷ, 2BR 6,8–8,3 tỷ, 3BR 10–14 tỷ.
 - Giá thuê tháng khu vực (tham khảo): Panoma Studio 18–20tr, 1PN 24tr, 2PN 35tr · Filmore 1PN 27tr, 2PN 45tr · Hilton 2PN 35tr · Hiyori 2PN 25tr · Monarchy 1PN 14tr, 2PN 20tr, 3PN 35tr · Sam Tower 1PN 15tr, 2PN 23tr.
