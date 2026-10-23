@@ -301,3 +301,8 @@ figure.photo img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
 /* Thẻ dự án liên quan có ảnh */
 .related .thumb-img{width:100%;height:160px;object-fit:cover;display:block;background:var(--navy)}
 .related .body em{display:block;margin-top:8px;font-style:normal;font-weight:700;color:var(--accent);font-size:14px}
+
+/* Menu 7 mục: không xuống dòng, gọn lại trên màn vừa */
+.nav a,.brand{white-space:nowrap}
+@media (max-width:1240px){.nav{gap:14px}.nav a{font-size:14px}}
+@media (max-width:1100px){.nav{display:none}}
