@@ -791,7 +791,7 @@
       p.campaigns = p.loai === "hoadon" ? [] : B.extractCampaigns(p.text || "").map((c) => Object.assign(c, { use: !c.rounded && !c.overview && (dateInWeek(c.date, w) || (!!c.until && dateInWeek(c.until, w))) }));
       // không đọc ra số: mở sẵn một dòng điền tay ngay dưới ảnh
       if (p.loai !== "hoadon" && !p.campaigns.length) p.campaigns = [{ manual: true, name: "", spent: 0, results: 0, resultType: "lead", use: false }];
-      p.invoice = B.extractInvoice(p.text || "") || { total: 0, vat: null };
+      p.invoice = B.extractInvoice(p.text || "", w) || { total: 0, vat: null };
       if (!p.account && p.invoice.account) p.account = p.invoice.account;
       p.note = "Đọc: " + ([r.kind && KINDS[r.kind], r.account && "TK " + r.account,
         p.campaigns.length && p.loai !== "hoadon" && p.campaigns.length + " chiến dịch",
@@ -985,7 +985,7 @@
       if (B.isPdf(file)) text = await B.pdfText(file);
       else { toast("Đang đọc chữ trong ảnh…", "busy"); text = (await (await B.ocrWorker()).recognize(file)).data.text || ""; }
     } catch (e) { return toast("Không đọc được hoá đơn: " + e.message, "err"); }
-    const inv = B.extractInvoice(text);
+    const inv = B.extractInvoice(text, r.tuan);
     if (!inv) {
       showText(`Chữ app đọc được trong ${r.tenFile}`, text, "Không tìm thấy tổng tiền – gõ “Tổng hoá đơn” và “VAT %” vào ô dưới hoá đơn rồi bấm Lưu.");
       return;

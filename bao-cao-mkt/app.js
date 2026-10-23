@@ -1208,10 +1208,42 @@
    * Hoá đơn / biên lai (Meta, Google, TikTok…): {total, vat, account, period} hoặc null.
    * total = tổng tiền phải trả (đã gồm VAT/phí); vat = % thuế nếu in trên hoá đơn.
    */
-  function extractInvoice(text) {
+  /**
+   * "Lịch sử giao dịch" (batdongsan, Chợ Tốt…): mỗi giao dịch "[mã tin] - tiêu đề  - 105.000" + dòng "16:08 - 23/10/2026 Thanh toán".
+   * Cộng các khoản bị trừ có ngày trong tuần (weekIso = ngày đầu tuần, 7 ngày); không có tuần thì cộng tất cả.
+   */
+  function transactionHistory(lines, N, weekIso) {
+    if (!N.some((n) => /lich su giao dich|tru tien day tin|so du/.test(n))) return null;
+    const items = [];
+    for (let i = 0; i < lines.length; i++) {
+      // khoản trừ ở cuối dòng: "- 105.000", "-2.476.117"
+      // số tiền ở cuối dòng: có dấu trừ ("- 105.000") hoặc có đơn vị ("771.646 đ"; dấu trừ màu đỏ hay bị đọc sót)
+      const m = /(?:[-–—~]\s*(\d{1,3}(?:[.,]\d{3})+)\s*(?:đ|₫|d)?|(?:^|\s)(\d{1,3}(?:[.,]\d{3})+)\s*(?:đ|₫))\s*$/.exec(lines[i]);
+      if (!m || /so du|don gia|gia tin/.test(N[i].slice(Math.max(0, N[i].length - 40)).replace(/\d[\d.,\s]*\D*$/, ""))) continue;
+      m[1] = m[1] || m[2];
+      let date = null;
+      for (let k = i; k <= Math.min(lines.length - 1, i + 3) && !date; k++) {
+        const d = /(\d{1,2})\s*\/\s*(\d{1,2})\s*\/\s*(\d{4})/.exec(lines[k]);
+        if (d && (k === i || !/[-–—~]\s*\d{1,3}(?:[.,]\d{3})+\s*$/.test(lines[k]))) date = new Date(+d[3], +d[2] - 1, +d[1]);
+      }
+      items.push({ v: Math.round(toNum(m[1])), date });
+    }
+    if (!items.length) return null;
+    let use = items;
+    if (weekIso) {
+      const a = new Date(weekIso + "T00:00:00"), b = new Date(a); b.setDate(b.getDate() + 7);
+      use = items.filter((x) => x.date && x.date >= a && x.date < b);
+    }
+    const total = use.reduce((t, x) => t + x.v, 0);
+    return { total, vat: null, items: use.length, history: true };
+  }
+
+  function extractInvoice(text, weekIso) {
     const MONEY = /(\d{1,3}(?:[.,]\d{3})+|\d+)\s*(?:đ|₫|vnd|d\b)/gi;
     const lines = String(text).split(/\n+/).map((l) => l.trim()).filter(Boolean);
     const N = lines.map(norm);
+    const hist = transactionHistory(lines, N, weekIso);
+    if (hist && hist.total) return hist;
     const amounts = (l) => Array.from(l.matchAll(MONEY)).map((m) => Math.round(toNum(m[1])));
     let total = 0;
     // dòng tổng có nhãn rõ ràng – xét nhãn mạnh trước (bảng tóm tắt Meta có "Đã thanh toán" ở từng dòng giao dịch)
