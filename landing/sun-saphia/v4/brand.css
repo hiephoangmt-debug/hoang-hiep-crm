@@ -382,3 +382,7 @@ body{padding-bottom:84px}
 .pill{left:10px;right:70px;bottom:14px;padding:14px 10px;font-size:14px}
 }
 
+
+.qlinks{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 6px}
+.qlinks a{background:#fff;border:1.5px solid var(--nv);color:var(--nv);font-weight:700;font-size:14px;padding:8px 14px;border-radius:999px;text-decoration:none}
+.qlinks a:hover{background:var(--nv);color:#fff}

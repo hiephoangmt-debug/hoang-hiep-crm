@@ -375,14 +375,18 @@ def cho_thue():
 def ads(domain):
     url = MAIN + '/ads'  # cả hai tên miền chuẩn hóa về trang ads chính
     b = ('<section class="hero"><img class="sun" src="%smat-troi.webp" alt="" width="700" height="898" aria-hidden="true"><div class="wrap"><div class="g2" style="margin-top:10px"><div>'
-         '<span class="tag">🔥 Kick-off 23/10/2026 · <b>Mở bán dự kiến cuối 11/2026</b></span>'
+         '<span class="tag">🔥 Mở bán dự kiến cuối 11/2026 · <b>Đại lý chính thức TATILAND</b></span>'
          '<img class="ribbon" src="%sruy-bang.webp" alt="" width="608" height="232" style="margin-top:14px" aria-hidden="true">'
-         '<h1 class="dp">Căn hộ <b>mặt biển đầu tiên</b> của Sun Group tại Đà Nẵng</h1>'
+         '<h1 class="dp">Sun Saphia Residence – căn hộ <b>mặt biển</b> Đà Nẵng</h1>'
          + SLOGAN +
-         '<ul class="ck"><li>Studio 30 m², 1BR+ 50 m², 2BR 60–70 m² · trần cao 3,5 m</li><li>Ra bãi tắm Sơn Thủy ~400 m qua công viên ven biển</li>'
-         '<li>Pháp lý 50 năm · Vietcombank, BIDV, NCB hỗ trợ vay</li><li>Đại lý phân phối chính thức – bảng giá gốc, không thu tiền giữ chỗ</li></ul>'
+         '<ul class="ck"><li><b>Đại lý chính thức TATILAND</b> – bảng giá gốc từ đại lý, gửi qua Zalo khi công bố</li>'
+         '<li><b>Studio 30 m², 1BR+ 50 m², 2BR 60–70 m²</b> · trần cao 3,5 m, view biển</li>'
+         '<li><b>400 m ra bãi tắm Sơn Thủy</b> · giao lộ Võ Nguyên Giáp – Trường Sa</li>'
+         '<li><b>Pháp lý 50 năm</b> · Vietcombank, BIDV, NCB hỗ trợ vay</li>'
+         '<li><a href="#mat-bang">Chọn căn trên mặt bằng 3D</a> · <a href="{M}/tinh-dong-tien">tính dòng tiền cho thuê</a></li></ul>'
+         '<div class="qlinks"><a href="{M}/bang-gia">Bảng giá</a><a href="#mat-bang">Mặt bằng &amp; chọn căn</a><a href="{M}/tinh-dong-tien">Tính dòng tiền</a><a href="{M}/phap-ly">Pháp lý &amp; tiến độ</a></div>'
          '%s</div><div class="hr">%s<div class="pic">%s<span>Phối cảnh minh họa</span></div></div></div></div></section>') % (
-        SK, SK, hero_perks(), form('dau', 'ADS – form đầu trang', title='Nhận bảng giá &amp; mặt bằng', h='h2'),
+        SK, SK, hero_perks(), form('dau', 'ADS – form đầu trang', title='Nhận bảng giá gốc từ đại lý', note='Bảng giá gốc, mặt bằng tầng, chính sách – gửi qua Zalo ngay khi chủ đầu tư công bố. Đăng ký miễn phí.', h='h2'),
         img('thap-bien-hoang-hon', 'Phối cảnh Sun Saphia Residence bên bờ biển Đà Nẵng lúc hoàng hôn', eager=True))
     b += tldr('Sun Saphia Residence', [('Dự án', 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, 30 tầng, 782 căn'), ('Loại căn', 'Studio 30 m² · 1BR+ 50 m² · 2BR 60–70 m²'),
         ('Pháp lý', '50 năm · Vietcombank, BIDV, NCB hỗ trợ vay'), ('Mở bán', 'Dự kiến cuối 11/2026'), ('Nhận bảng giá', 'Zalo 0904 567 009 · đại lý chính thức · không thu tiền')])
@@ -407,8 +411,8 @@ def ads(domain):
                      (6, band('Nhận bảng tính dòng tiền theo căn', 'Giá thuê, lấp đầy, lợi nhuận từng căn – gửi qua Zalo.', 'Nhận bảng tính', 'ADS – bảng tính dòng tiền'))])
     b += ('<section class="sec alt"><div class="wrap"><h2 class="dp" style="font-size:30px;margin-bottom:16px">Tìm hiểu <b>thêm</b></h2>' + related('/ads') + '</div></section>')
     b += cta_block('ADS – form cuối trang')
-    title = 'Sun Saphia Residence Đà Nẵng – Căn hộ mặt biển | Mở bán cuối 11/2026'
-    desc = 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng: Studio, 1BR+, 2BR, ra biển 400 m, pháp lý 50 năm. Đăng ký nhận bảng giá gốc từ đại lý chính thức, không thu tiền.'
+    title = 'Sun Saphia Residence – Căn hộ mặt biển Đà Nẵng | Đại lý chính thức TATILAND'
+    desc = 'Căn hộ mặt biển Đà Nẵng: Studio 30m², 1BR+ 50m², 2BR 60–70m², ra biển 400m, pháp lý 50 năm, Vietcombank, BIDV, NCB hỗ trợ vay. Bảng giá gốc từ đại lý chính thức TATILAND.'
     html = head(title, desc, url, OG, 'sun saphia residence, căn hộ mặt biển đà nẵng, bảng giá sun saphia', [article_ld(title, desc, url), ORG, RES], FAV)
     b = b.replace('{M}', MAIN)
     html += '<body>\n' + header('/ads', MAIN, LOGO) + '\n<main id="dau-trang">' + b + '</main>\n' + footer(MAIN) + '\n' + popup() + tail(True) + '</body>\n</html>\n'
