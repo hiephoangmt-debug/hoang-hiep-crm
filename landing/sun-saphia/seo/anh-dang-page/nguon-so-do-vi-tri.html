@@ -1,65 +1,79 @@
-<!doctype html><html><head><meta charset="utf-8"><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600;700;800&family=Fahkwang:wght@400;500&display=swap" rel="stylesheet">
-<style>*{margin:0}#c{width:1000px;height:1400px;position:relative}text{font-family:"Be Vietnam Pro",sans-serif}</style></head><body><div id="c">
+<!doctype html><html><head><meta charset="utf-8"><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600;700;800&family=Fahkwang:wght@400&display=swap" rel="stylesheet">
+<style>*{margin:0}#c{width:1000px;height:1400px}text{font-family:"Be Vietnam Pro",sans-serif}</style></head><body><div id="c">
 <svg width="1000" height="1400" viewBox="0 0 1000 1400">
 <defs><linearGradient id="sea" x1="0" x2="1"><stop offset="0" stop-color="#1d4f8c"/><stop offset="1" stop-color="#0B2447"/></linearGradient>
 <pattern id="wv" width="60" height="30" patternUnits="userSpaceOnUse"><path d="M0 15 q15 -8 30 0 t30 0" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="2"/></pattern>
 <filter id="sh"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity=".3"/></filter></defs>
 <rect width="1000" height="1400" fill="#F4EEE2"/>
-<!-- sea (right of diagonal coast) -->
-<path d="M930 0 C860 120 800 220 770 300 C730 420 680 540 650 620 C620 700 600 780 580 850 C560 950 540 1050 520 1150 C500 1250 485 1330 470 1400 H1000 V0 Z" fill="url(#sea)"/>
-<path d="M930 0 C860 120 800 220 770 300 C730 420 680 540 650 620 C620 700 600 780 580 850 C560 950 540 1050 520 1150 C500 1250 485 1330 470 1400 H1000 V0 Z" fill="url(#wv)"/>
-<path d="M930 0 C860 120 800 220 770 300 C730 420 680 540 650 620 C620 700 600 780 580 850 C560 950 540 1050 520 1150 C500 1250 485 1330 470 1400" fill="none" stroke="#F3D9A4" stroke-width="14"/>
+<!-- sea -->
+<path d="M972 0 L864 196 L799 343 L734 500 L680 617 L637 735 L605 833 L583 931 L562 1029 L540 1176 L518 1400 H1000 V0 Z" fill="url(#sea)"/>
+<path d="M972 0 L864 196 L799 343 L734 500 L680 617 L637 735 L605 833 L583 931 L562 1029 L540 1176 L518 1400 H1000 V0 Z" fill="url(#wv)"/>
+<polyline points="972,0 864,196 799,343 734,500 680,617 637,735 605,833 583,931 562,1029 540,1176 518,1400" fill="none" stroke="#F3D9A4" stroke-width="14" stroke-linejoin="round"/>
 <!-- airport -->
-<g transform="rotate(8 170 250)"><rect x="140" y="40" width="60" height="420" rx="8" fill="#ddd5c3"/><rect x="166" y="60" width="8" height="380" fill="#fff" opacity=".7"/></g>
-<text x="205" y="262" font-size="34" text-anchor="middle">✈</text>
-<!-- river Han + branches -->
-<path d="M560 0 C540 60 525 110 515 160 C500 230 480 280 460 330 C430 400 400 450 380 500 C340 600 300 680 260 760 C220 860 200 980 190 1100 C180 1220 170 1320 160 1400" fill="none" stroke="#3a78c2" stroke-width="30" stroke-linecap="round"/>
-<path d="M400 470 C320 500 220 520 120 540 C70 550 30 560 0 570" fill="none" stroke="#3a78c2" stroke-width="16" stroke-linecap="round"/>
-<path d="M300 690 C240 720 170 760 100 790" fill="none" stroke="#3a78c2" stroke-width="12" stroke-linecap="round"/>
-<text x="545" y="250" font-size="18" font-weight="700" fill="#2c5f9e" transform="rotate(-66 545 250)">SÔNG HÀN</text>
-<!-- bridges -->
-<text x="370" y="135" font-size="17" font-weight="700" fill="#8a6a1a">Cầu Rồng</text>
-<text x="290" y="296" font-size="17" font-weight="700" fill="#8a6a1a">Cầu Trần Thị Lý</text>
-<!-- cross roads + bridges -->
-<g fill="none" stroke-linecap="round">
-<path d="M240 175 C340 160 430 150 518 145 C620 140 720 150 815 150" stroke="#fff" stroke-width="9"/>
-<path d="M250 340 C340 325 410 312 468 305 C560 300 650 310 748 310" stroke="#fff" stroke-width="9"/>
-<path d="M230 440 C300 425 360 418 418 412 C520 420 610 425 712 420" stroke="#fff" stroke-width="8"/>
-<path d="M494 147 L542 143" stroke="#FFAA01" stroke-width="13"/>
-<path d="M446 308 L492 303" stroke="#FFAA01" stroke-width="13"/>
-<path d="M398 414 L440 411" stroke="#d8cdb6" stroke-width="11"/>
+<polygon points="40,20 95,26 62,450 8,444" fill="#ddd5c3"/><line x1="66" y1="45" x2="37" y2="425" stroke="#fff" stroke-width="5" opacity=".8"/>
+<text x="110" y="250" font-size="34">✈</text>
+<!-- river -->
+<polyline points="605,0 572,137 529,225 502,294 464,382 432,461 410,529 367,598 313,686 259,784 216,931 170,1060 108,1180 40,1300" fill="none" stroke="#3a78c2" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="470" y="250" font-size="18" font-weight="700" fill="#2c5f9e" transform="rotate(-62 470 250)">SÔNG HÀN</text>
+<!-- main inland road (Ngo Quyen / Le Van Hien) -->
+<polyline points="702,0 680,98 626,343 556,568 508,833 464,1078 410,1225 367,1400" fill="none" stroke="#fff" stroke-width="7" stroke-linejoin="round"/>
+<!-- cross roads -->
+<g fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round">
+<polyline points="160,160 572,137 862,190"/>
+<polyline points="170,310 502,294 777,345"/>
+<polyline points="170,500 410,529 672,575"/>
 </g>
-<!-- roads -->
-<path d="M880 0 C820 110 770 210 735 300 C690 420 645 540 615 620 C585 700 565 780 548 850 C530 950 510 1050 492 1150 C475 1250 460 1330 448 1400" fill="none" stroke="#fff" stroke-width="9"/>
-<path d="M880 0 C820 110 770 210 735 300 C690 420 645 540 615 620 C585 700 565 780 548 850 C530 950 510 1050 492 1150 C475 1250 460 1330 448 1400" fill="none" stroke="#E96118" stroke-width="2.5" stroke-dasharray="9 7"/>
-<path d="M700 0 C660 150 620 300 590 420 C560 540 530 640 510 720 C490 820 470 950 450 1080 C430 1200 420 1300 410 1400" fill="none" stroke="#fff" stroke-width="6"/>
-<text x="700" y="380" font-size="14" font-weight="800" fill="#8a5a2a" transform="rotate(-68 700 380)">VÕ NGUYÊN GIÁP</text>
-<text x="515" y="1060" font-size="14" font-weight="800" fill="#8a5a2a" transform="rotate(-80 515 1060)">TRƯỜNG SA</text>
-<!-- places -->
-<text x="120" y="675" font-size="16" font-weight="700" fill="#7a6f5c">HÒA CƯỜNG</text>
-<g transform="translate(530,335)"><circle r="16" fill="#275286"/><circle r="6" fill="#fff"/></g>
-<g transform="translate(440,1110)"><path d="M-44 22 L-20 -24 L0 8 L18 -34 L46 22 Z" fill="#5f8f5a"/><path d="M-20 -24 L-11 -8 L-27 -6 Z M18 -34 L26 -16 L9 -14 Z" fill="#e9f1e2"/></g>
-<g transform="translate(762,330)"><circle r="13" fill="#2f9e6a"/><text y="5" font-size="13" text-anchor="middle" fill="#fff">⛱</text></g>
-<g transform="translate(518,1265)"><circle r="13" fill="#2f9e6a"/><text y="5" font-size="13" text-anchor="middle" fill="#fff">⛱</text></g>
-<g transform="translate(505,910)"><rect x="-13" y="-13" width="26" height="26" rx="6" fill="#7b3fb0"/><text y="6" font-size="15" fill="#fff" text-anchor="middle" font-weight="800">M</text></g>
+<!-- bridges -->
+<g stroke-linecap="round"><line x1="548" y1="138" x2="598" y2="140" stroke="#FFAA01" stroke-width="15"/>
+<line x1="478" y1="293" x2="527" y2="297" stroke="#FFAA01" stroke-width="15"/>
+<line x1="386" y1="526" x2="436" y2="532" stroke="#FFAA01" stroke-width="15"/></g>
+<text x="420" y="122" font-size="17" font-weight="800" fill="#8a6a1a">Cầu Rồng</text>
+<text x="335" y="282" font-size="17" font-weight="800" fill="#8a6a1a">Cầu Trần Thị Lý</text>
+<text x="300" y="498" font-size="17" font-weight="800" fill="#8a6a1a">Cầu Tiên Sơn</text>
+<!-- road names -->
+<text x="660" y="170" font-size="13" font-weight="800" fill="#8a5a2a" transform="rotate(10 660 170)">VÕ VĂN KIỆT</text>
+<text x="600" y="322" font-size="13" font-weight="800" fill="#8a5a2a" transform="rotate(11 600 322)">NGUYỄN VĂN THOẠI</text>
+<text x="500" y="566" font-size="13" font-weight="800" fill="#8a5a2a" transform="rotate(10 500 566)">HỒ XUÂN HƯƠNG</text>
+<!-- coastal road -->
+<polyline points="950,0 842,196 777,343 712,500 658,617 615,735 583,833 561,931 540,1029 518,1176 496,1400" fill="none" stroke="#fff" stroke-width="9" stroke-linejoin="round"/>
+<polyline points="950,0 842,196 777,343 712,500 658,617 615,735 583,833 561,931 540,1029 518,1176 496,1400" fill="none" stroke="#E96118" stroke-width="2.5" stroke-dasharray="9 7"/>
+<text x="735" y="470" font-size="13" font-weight="800" fill="#8a5a2a" transform="rotate(-66 735 470)">VÕ NGUYÊN GIÁP</text>
+<text x="535" y="1120" font-size="13" font-weight="800" fill="#8a5a2a" transform="rotate(-82 535 1120)">TRƯỜNG SA</text>
+<!-- An Thuong -->
+<rect x="660" y="390" width="70" height="105" rx="12" fill="#f6c9a8" opacity=".7" transform="rotate(-24 695 442)"/>
+<!-- POIs -->
+<g font-weight="800" font-size="14">
+<g transform="translate(628,82)"><rect x="-12" y="-12" width="24" height="24" rx="6" fill="#c0392b"/><text y="5" fill="#fff" text-anchor="middle" font-size="13">V</text></g>
+<text x="646" y="70" fill="#0B2447">Vincom Plaza</text>
+<g transform="translate(340,560)"><rect x="-12" y="-12" width="24" height="24" rx="6" fill="#d81e2a"/><text y="5" fill="#fff" text-anchor="middle" font-size="13">L</text></g>
+<text x="243" y="566" fill="#0B2447">Lotte Mart</text>
+<g transform="translate(455,335)"><circle r="14" fill="#275286"/><circle r="5" fill="#fff"/></g>
+<text x="340" y="370" fill="#0B2447">Asia Park · Downtown</text>
+<text x="590" y="455" fill="#b4531a" font-size="15">Phố Tây</text><text x="590" y="473" fill="#b4531a" font-size="15">An Thượng</text>
+<text x="250" y="415" fill="#7a6f5c" font-size="15">HÒA CƯỜNG</text>
+</g>
+<g transform="translate(799,330)"><circle r="12" fill="#2f9e6a"/><text y="5" font-size="12" text-anchor="middle" fill="#fff">⛱</text></g>
+<text x="820" y="335" font-size="16" font-weight="700" fill="#fff">Bãi biển Mỹ Khê</text>
+<g transform="translate(540,1240)"><circle r="12" fill="#2f9e6a"/><text y="5" font-size="12" text-anchor="middle" fill="#fff">⛱</text></g>
+<text x="560" y="1246" font-size="16" font-weight="700" fill="#fff">Bãi biển Non Nước</text>
+<!-- Ngu Hanh Son -->
+<g transform="translate(470,1080)"><path d="M-44 22 L-20 -24 L0 8 L18 -34 L46 22 Z" fill="#5f8f5a"/><path d="M-20 -24 L-11 -8 L-27 -6 Z M18 -34 L26 -16 L9 -14 Z" fill="#e9f1e2"/></g>
+<g transform="translate(530,868)"><rect x="-13" y="-13" width="26" height="26" rx="6" fill="#7b3fb0"/><text y="6" font-size="15" fill="#fff" text-anchor="middle" font-weight="800">M</text></g>
 <!-- links -->
-<g stroke="#E96118" stroke-width="4" stroke-dasharray="10 8" fill="none" opacity=".9">
-<path d="M548 850 C450 700 330 480 220 300"/><path d="M548 850 C545 650 538 480 532 352"/><path d="M548 850 L590 860"/><path d="M548 850 L460 1090"/></g>
-<!-- Saphia -->
-<circle cx="548" cy="850" r="42" fill="rgba(233,97,24,.25)" stroke="#E96118" stroke-width="4"/>
-<circle cx="548" cy="850" r="21" fill="#E96118" stroke="#fff" stroke-width="5" filter="url(#sh)"/><text x="548" y="858" font-size="21" text-anchor="middle" fill="#fff">★</text>
+<g stroke="#E96118" stroke-width="4" stroke-dasharray="10 8" fill="none" opacity=".85">
+<path d="M565 823 C420 650 250 420 120 260"/><path d="M565 823 C520 650 480 480 458 350"/><path d="M565 823 L598 826"/><path d="M565 823 L533 860"/><path d="M565 823 L478 1060"/></g>
+<circle cx="565" cy="823" r="40" fill="rgba(233,97,24,.25)" stroke="#E96118" stroke-width="4"/>
+<circle cx="565" cy="823" r="20" fill="#E96118" stroke="#fff" stroke-width="5" filter="url(#sh)"/><text x="565" y="831" font-size="20" text-anchor="middle" fill="#fff">★</text>
 <g filter="url(#sh)" font-weight="800">
-<rect x="190" y="800" width="300" height="66" rx="12" fill="#E96118"/><text x="340" y="831" font-size="22" fill="#fff" text-anchor="middle">SUN SAPHIA</text><text x="340" y="854" font-size="14" fill="#fff" text-anchor="middle" font-weight="700">Võ Nguyên Giáp – Nguyễn Đức Thuận</text>
-<rect x="640" y="815" width="200" height="60" rx="12" fill="#FFAA01"/><text x="740" y="842" font-size="20" fill="#0B2447" text-anchor="middle">~400 m</text><text x="740" y="864" font-size="14" fill="#0B2447" text-anchor="middle" font-weight="700">Bãi tắm Sơn Thủy</text>
-<rect x="280" y="930" width="190" height="56" rx="12" fill="#fff"/><text x="375" y="955" font-size="19" fill="#7b3fb0" text-anchor="middle">~500 m</text><text x="375" y="975" font-size="13" fill="#0B2447" text-anchor="middle" font-weight="700">Ga LRT 09 (quy hoạch)</text>
-<rect x="250" y="1150" width="190" height="56" rx="12" fill="#fff"/><text x="345" y="1175" font-size="19" fill="#3d7a38" text-anchor="middle">5–10 phút</text><text x="345" y="1195" font-size="13" fill="#0B2447" text-anchor="middle" font-weight="700">Ngũ Hành Sơn</text>
-<rect x="545" y="460" width="180" height="56" rx="12" fill="#fff"/><text x="635" y="485" font-size="19" fill="#275286" text-anchor="middle">4 km</text><text x="635" y="505" font-size="13" fill="#0B2447" text-anchor="middle" font-weight="700">Downtown · Galaxy</text>
-<rect x="20" y="560" width="200" height="56" rx="12" fill="#fff"/><text x="120" y="585" font-size="19" fill="#E96118" text-anchor="middle">10–15 phút</text><text x="120" y="605" font-size="13" fill="#0B2447" text-anchor="middle" font-weight="700">Sân bay quốc tế</text>
-<rect x="250" y="1330" width="190" height="50" rx="12" fill="#0B2447"/><text x="345" y="1362" font-size="18" fill="#fff" text-anchor="middle">↓ ~30 phút Hội An</text>
+<rect x="215" y="770" width="300" height="64" rx="12" fill="#E96118"/><text x="365" y="800" font-size="22" fill="#fff" text-anchor="middle">SUN SAPHIA</text><text x="365" y="822" font-size="14" fill="#fff" text-anchor="middle" font-weight="700">Võ Nguyên Giáp – Nguyễn Đức Thuận</text>
+<rect x="650" y="795" width="200" height="60" rx="12" fill="#FFAA01"/><text x="750" y="822" font-size="20" fill="#0B2447" text-anchor="middle">~400 m</text><text x="750" y="844" font-size="14" fill="#0B2447" text-anchor="middle" font-weight="700">Bãi tắm Sơn Thủy</text>
+<rect x="300" y="890" width="190" height="56" rx="12" fill="#fff"/><text x="395" y="915" font-size="19" fill="#7b3fb0" text-anchor="middle">~500 m</text><text x="395" y="935" font-size="13" fill="#0B2447" text-anchor="middle" font-weight="700">Ga LRT 09 (quy hoạch)</text>
+<rect x="260" y="1110" width="190" height="56" rx="12" fill="#fff"/><text x="355" y="1135" font-size="19" fill="#3d7a38" text-anchor="middle">5–10 phút</text><text x="355" y="1155" font-size="13" fill="#0B2447" text-anchor="middle" font-weight="700">Ngũ Hành Sơn</text>
+<rect x="400" y="645" width="180" height="56" rx="12" fill="#fff"/><text x="490" y="670" font-size="19" fill="#275286" text-anchor="middle">4 km</text><text x="490" y="690" font-size="13" fill="#0B2447" text-anchor="middle" font-weight="700">Downtown · Galaxy</text>
+<rect x="20" y="660" width="200" height="56" rx="12" fill="#fff"/><text x="120" y="685" font-size="19" fill="#E96118" text-anchor="middle">10–15 phút</text><text x="120" y="705" font-size="13" fill="#0B2447" text-anchor="middle" font-weight="700">Sân bay quốc tế</text>
+<rect x="250" y="1320" width="190" height="50" rx="12" fill="#0B2447"/><text x="345" y="1352" font-size="18" fill="#fff" text-anchor="middle">↓ ~30 phút Hội An</text>
 <rect x="770" y="20" width="210" height="50" rx="12" fill="#0B2447"/><text x="875" y="52" font-size="17" fill="#fff" text-anchor="middle">↑ Bán đảo Sơn Trà</text></g>
-<text x="815" y="300" font-size="16" font-weight="700" fill="#fff">Bãi biển Mỹ Khê</text>
-<text x="540" y="1270" font-size="16" font-weight="700" fill="#fff">Bãi biển Non Nước</text>
-<text x="830" y="640" font-family="Fahkwang" font-size="40" fill="rgba(255,255,255,.9)" text-anchor="middle">BIỂN</text>
+<text x="840" y="640" font-family="Fahkwang" font-size="40" fill="rgba(255,255,255,.9)" text-anchor="middle">BIỂN</text>
 <g transform="translate(940,120)"><circle r="26" fill="rgba(255,255,255,.15)"/><path d="M0 -17 L8 7 L0 2 L-8 7 Z" fill="#fff"/><text y="22" font-size="11" fill="#fff" text-anchor="middle" font-weight="800">B</text></g>
-<text x="20" y="1390" font-size="13" font-weight="600" fill="#8a8170">Sơ đồ minh họa theo bản đồ, không theo tỷ lệ</text>
+<text x="20" y="1392" font-size="13" font-weight="600" fill="#8a8170">Sơ đồ minh họa theo Google Maps, không theo tỷ lệ</text>
 </svg></div></body></html>
