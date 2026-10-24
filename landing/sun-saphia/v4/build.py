@@ -366,6 +366,9 @@ def cho_thue():
         ('Tỷ lệ lấp đầy thực tế ra sao?', 'Bài toán minh họa của chủ đầu tư dùng 60%. Khách sạn của Sun Group tại miền Trung đạt 81,3% năm 2026 (từ 70,65% năm 2025) – cao nhất cả nước.'),
         ('Lợi nhuận 11,7% có phải cam kết?', 'Không. Đó là bài toán minh họa với giá giả định 3 tỷ, giá thuê 2,5 triệu/đêm, lấp đầy 60%, lợi nhuận 65% doanh thu. Kết quả thực tế phụ thuộc giá mua, mùa vụ và cách vận hành.'),
         ('Ai sẽ thuê căn hộ?', 'Ba nhóm chính: nhân sự chuỗi resort ven biển (thuê trung hạn), khách thuê ngắn ngày kiểu Airbnb và khách du lịch ưu tiên căn hộ mặt biển.'),
+        ('Người mới chưa từng cho thuê có làm được không?', 'Được. Có 4 cách: tự cho thuê ngắn ngày, giao đơn vị vận hành, cho thuê tháng hoặc cho thuê dài hạn. Người ở xa, bận rộn thường giao đơn vị vận hành (phí thường 15–30% doanh thu) hoặc cho thuê tháng cho nhàn.'),
+        ('Cho thuê căn hộ có phải đóng thuế không?', 'Có, nếu doanh thu trên 100 triệu đồng/năm: khoảng 10% doanh thu (5% GTGT + 5% TNCN) theo Thông tư 40/2021/TT-BTC. Dưới 100 triệu/năm không phải nộp.'),
+        ('Cần chuẩn bị gì để cho thuê?', 'Nội thất phong cách nghỉ dưỡng, thiết bị cơ bản (máy lạnh, wifi, bếp, máy giặt, khoá mã số), đồ dùng (ga gối 3 bộ xoay vòng, khăn, đồ vệ sinh), đồ an toàn (bình chữa cháy, hộp sơ cứu), ảnh chụp đẹp và tài khoản trên Airbnb, Booking, Agoda.'),
         ('Có đơn vị vận hành cho thuê không?', 'Phương án vận hành theo công bố của chủ đầu tư khi mở bán; đại lý sẽ tư vấn các lựa chọn tự vận hành hoặc thuê đơn vị quản lý.')])
     b = hero
     b += tldr('cho thuê căn hộ Sun Saphia', [('Giá thuê theo đêm', 'Studio view biển 2,2–2,9 triệu · 1BR+ 3,4–3,7 triệu (ngoài mùa cao điểm)'), ('Giá thuê theo tháng (khu lân cận)', 'Studio 18–20 triệu · 1PN 14–27 triệu · 2PN 20–45 triệu'),
@@ -375,7 +378,46 @@ def cho_thue():
     b += ('<section class="sec"><div class="wrap">' + sh('2', 'Giá thuê', 'Giá thuê căn hộ mặt biển <b>siêu ấn tượng</b>', 'y') +
           rent_night() + '<div class="g2 eq" style="margin-top:18px"><div>' + rent_month_table() + '</div>' + occ_chart() + '</div></div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('3', 'Khách thuê', 'Ba nhóm <b>khách thuê</b> chính', 'n') + tenants() + '</div></section>')
-    b += ('<section class="sec"><div class="wrap">' + sh('4', 'Dòng tiền', 'Bài toán vận hành – <b>tự tính theo căn</b>', 'o') +
+    # 4 cách cho thuê
+    b += ('<section class="sec"><div class="wrap">' + sh('4', 'Chọn cách cho thuê', '4 cách cho thuê – <b>chọn cách hợp với mình</b>', 'o') +
+          '<p class="just" style="max-width:860px">Không có cách nào “tốt nhất” cho mọi người. Có thời gian và thích tự làm thì tự cho thuê ngắn ngày; bận rộn thì giao đơn vị vận hành; muốn nhàn, ổn định thì cho thuê theo tháng hoặc theo năm.</p>'
+          + tbl(['', 'Ngắn ngày – tự vận hành', 'Ngắn ngày – giao đơn vị vận hành', 'Theo tháng (3–6 tháng)', 'Dài hạn (từ 1 năm)'], [
+            ['Khách là ai', 'Khách du lịch, gia đình, cặp đôi', 'Khách du lịch, khách quốc tế', 'Chuyên gia, nhân sự resort, người làm việc từ xa', 'Gia đình, nhân sự ở lâu'],
+            ['Giá tham khảo', 'Studio 2,2–2,9 tr/đêm', 'Studio 2,2–2,9 tr/đêm', 'Studio khu vực ~18–20 tr/tháng', 'Thấp hơn thuê tháng, đổi lại ổn định'],
+            ['Công sức của chủ nhà', 'Nhiều: đăng tin, nhắn khách, dọn phòng', 'Ít: chỉ theo dõi báo cáo', 'Ít: tìm khách vài lần/năm', 'Rất ít'],
+            ['Chi phí chính', 'Phí nền tảng, dọn phòng, điện nước, giặt là', 'Phí quản lý (thường 15–30% doanh thu) + chi phí vận hành', 'Môi giới (thường ~nửa tháng–1 tháng tiền nhà)', 'Môi giới 1 lần, bảo trì'],
+            ['Dòng tiền', 'Cao nhất, lên xuống theo mùa', 'Cao, đều hơn tự làm', 'Đều, thấp hơn ngắn ngày', 'Đều nhất, thấp nhất'],
+            ['Hợp với ai', 'Người ở Đà Nẵng, có thời gian', 'Người ở xa, bận rộn', 'Muốn nhàn mà vẫn tốt', 'Muốn “để đó” an tâm']]) +
+          '<p class="src">Mức phí tham khảo thị trường Đà Nẵng, thay đổi theo đơn vị và hợp đồng. Phương án vận hành chính thức theo công bố của chủ đầu tư khi mở bán.</p>'
+          '<div class="g3" style="margin-top:20px"><div class="card"><span class="n">MẸO 1</span><h3 class="oc">Kết hợp theo mùa</h3><p>Cao điểm (khoảng 4–8, Tết, mùa pháo hoa) cho thuê theo đêm; mùa mưa (khoảng 9–12) chuyển sang thuê tháng để không bỏ trống.</p></div>'
+          '<div class="card"><span class="n">MẸO 2</span><h3 class="oc">Chọn căn theo khách</h3><p>Studio hợp cặp đôi, khách đi công tác; 1BR+ hợp gia đình nhỏ, ở dài; 2BR hợp nhóm bạn, gia đình đông người.</p></div>'
+          '<div class="card"><span class="n">MẸO 3</span><h3 class="oc">View là giá thuê</h3><p>Căn nhìn thẳng biển, tầng cao thường đặt được giá cao hơn và kín lịch hơn – chọn căn ngay từ đầu là bước quan trọng nhất.</p></div></div>'
+          '</div></section>')
+    # 7 bước
+    steps = [('Chọn đúng căn', 'Xác định khách mục tiêu trước (du lịch, gia đình hay ở dài), rồi chọn loại căn, hướng view, tầng phù hợp. Đại lý gửi mặt bằng căn trống để so sánh.'),
+             ('Nhận nhà, làm nội thất', 'Căn bàn giao hoàn thiện cơ bản. Làm nội thất theo phong cách nghỉ dưỡng, sáng màu, dễ lau dọn – ảnh đẹp thì khách đặt nhiều.'),
+             ('Làm thủ tục', 'Kiểm tra nội quy toà nhà về lưu trú; khai báo tạm trú cho khách (khách nước ngoài khai báo theo quy định); kê khai, nộp thuế cho thuê tài sản.'),
+             ('Chụp ảnh, đăng tin', 'Chụp ảnh chuyên nghiệp lúc ban ngày và hoàng hôn. Ngắn ngày: Airbnb, Booking, Agoda, Traveloka. Thuê tháng: nhóm Facebook, Zalo, trang bất động sản.'),
+             ('Định giá theo mùa', 'Giá cao vào hè, lễ Tết, sự kiện; giảm nhẹ hoặc chuyển sang thuê tháng vào mùa mưa. Theo dõi giá các căn view biển quanh khu vực.'),
+             ('Vận hành hằng ngày', 'Khoá cửa mã số để khách tự nhận phòng; thuê dọn phòng, giặt là theo lượt; trả lời khách nhanh để giữ đánh giá tốt.'),
+             ('Theo dõi tiền và thuế', 'Ghi chép doanh thu, chi phí từng tháng; nộp thuế đúng hạn; xem lại giá và lịch trống mỗi quý.')]
+    b += ('<section class="sec alt"><div class="wrap">' + sh('5', 'Cho người mới', '7 bước từ <b>nhận nhà đến có khách</b>', 'y') +
+          '<div class="stp">' + ''.join('<div class="card"><span class="sn">%d</span><h3>%s</h3><p>%s</p></div>' % (k + 1, t, d) for k, (t, d) in enumerate(steps)) +
+          '<div class="card cta-c"><h3>Chưa rõ bước nào?</h3><p>Chuyên viên hướng dẫn từng bước, giới thiệu đơn vị nội thất và vận hành.</p><button type="button" class="btn sm" data-pop data-interest="Cho thuê – hướng dẫn người mới">Nhận hướng dẫn miễn phí</button></div></div>'
+          '</div></section>')
+    # chuẩn bị gì, cho thuê thêm gì
+    b += ('<section class="sec"><div class="wrap">' + sh('6', 'Chuẩn bị gì', 'Cho thuê cần <b>những gì</b> – và kiếm thêm từ đâu', 'n') +
+          '<div class="g4 prep">'
+          '<div class="card"><span class="n">🛋 NỘI THẤT</span><ul class="ck"><li>Giường tốt, nệm êm</li><li>Sofa bed (thêm chỗ ngủ)</li><li>Bàn ăn, bàn làm việc nhỏ</li><li>Rèm cản sáng, đèn vàng ấm</li><li>Ghế, bàn trà ngoài ban công</li></ul></div>'
+          '<div class="card"><span class="n">🔌 THIẾT BỊ</span><ul class="ck"><li>Máy lạnh, wifi mạnh</li><li>Smart TV (Netflix, YouTube)</li><li>Bếp từ, tủ lạnh, lò vi sóng</li><li>Máy giặt, bàn ủi, máy sấy tóc</li><li>Khoá cửa mã số</li></ul></div>'
+          '<div class="card"><span class="n">🧺 ĐỒ DÙNG</span><ul class="ck"><li>Ga gối, khăn: 3 bộ xoay vòng</li><li>Đồ vệ sinh cá nhân</li><li>Chén bát, ly, ấm nước</li><li>Nước suối, cà phê chào khách</li><li>Sổ hướng dẫn nhà, wifi</li></ul></div>'
+          '<div class="card"><span class="n">🛟 AN TOÀN</span><ul class="ck"><li>Bình chữa cháy nhỏ</li><li>Hộp sơ cứu</li><li>Két sắt mini</li><li>Số khẩn cấp, lối thoát hiểm</li><li>Bảo hiểm tài sản (nên có)</li></ul></div></div>'
+          '<h3 style="margin-top:26px">Kiếm thêm ngoài tiền phòng</h3>'
+          '<div class="g3"><div class="card"><h3 class="oc">Dịch vụ đi lại</h3><p>Đưa đón sân bay (10–15 phút), cho thuê xe máy, đặt xe đi Hội An, Bà Nà.</p></div>'
+          '<div class="card"><h3 class="oc">Trải nghiệm biển</h3><p>Giới thiệu SUP, kayak, dù lượn, jetski ngay bãi biển trước nhà; tour Sơn Trà, Ngũ Hành Sơn.</p></div>'
+          '<div class="card"><h3 class="oc">Tiện ích ở lâu</h3><p>Gói dọn phòng hằng tuần, giặt ủi, nấu ăn theo yêu cầu cho khách thuê tháng.</p></div></div>'
+          '</div></section>')
+    b += ('<section class="sec"><div class="wrap">' + sh('7', 'Dòng tiền', 'Bài toán vận hành – <b>tự tính theo căn</b>', 'o') +
           '<div class="g2" style="align-items:start"><div>' + rent_case() + '</div>'
           '<div class="calc" id="tinh-dong-tien"><h3>Tự tính dòng tiền</h3>'
           '<label>Giá mua (tỷ đồng) <output id="og">3</output></label><input type="range" id="cg" min="2" max="10" step="0.1" value="3">'
@@ -388,11 +430,12 @@ def cho_thue():
           'function u(){var g=+$("cg").value*1000,t=+$("ct").value,l=+$("cl").value/100,p=+$("cp").value/100,d=t*365*l,n=d*p;'
           '$("og").textContent=$("cg").value.replace(".",",");$("ot").textContent=$("ct").value.replace(".",",");$("ol").textContent=$("cl").value+"%";$("op").textContent=$("cp").value+"%";'
           '$("k1").textContent=f(d);$("k2").textContent=f(n)+" (~"+f(n/12)+"/th)";$("k3").textContent=(n/g*100).toFixed(1).replace(".",",")+"%";}["cg","ct","cl","cp"].forEach(function(i){$(i).addEventListener("input",u)});u();})();</script>')
-    b += ('<section class="sec alt"><div class="wrap">' + sh('5', 'Lưu ý', 'Chi phí và <b>rủi ro</b> cần tính', 'y') +
+    b += ('<section class="sec alt"><div class="wrap">' + sh('8', 'Lưu ý', 'Chi phí, thuế và <b>rủi ro</b> cần tính', 'y') +
           '<div class="g4"><div class="card"><h3 class="oc">Mùa vụ</h3><p>Hè và lễ Tết lấp đầy cao; mùa mưa (khoảng 9–12) thấp hơn.</p></div>'
           '<div class="card"><h3 class="oc">Chi phí vận hành</h3><p>Phí quản lý, dọn phòng, điện nước, hoa hồng nền tảng đặt phòng, khấu hao nội thất.</p></div>'
           '<div class="card"><h3 class="oc">Nội thất</h3><p>Bàn giao hoàn thiện cơ bản – cần dự trù chi phí nội thất trước khi cho thuê.</p></div>'
-          '<div class="card"><h3 class="oc">Quy định</h3><p>Lưu trú ngắn ngày theo quy định của tòa nhà và địa phương.</p></div></div></div></section>')
+          '<div class="card"><h3 class="oc">Quy định</h3><p>Lưu trú ngắn ngày theo nội quy toà nhà và quy định địa phương; khai báo tạm trú cho khách.</p></div></div>'
+          '<div class="card" style="margin-top:18px"><h3 class="oc">Thuế cho thuê</h3><p class="just">Cá nhân cho thuê tài sản có doanh thu trên 100 triệu đồng/năm nộp thuế khoảng <b>10% doanh thu</b> (5% GTGT + 5% TNCN, theo Thông tư 40/2021/TT-BTC); dưới mức này không phải nộp. Có thể tự kê khai hoặc để đơn vị vận hành, bên thuê khai nộp thay theo hợp đồng.</p></div></div></section>')
     b += ('<section class="sec" id="hoi-dap"><div class="wrap">' + sh('?', 'Hỏi đáp', 'Hỏi đáp về <b>cho thuê</b>', 'n') + fq + '<h3 style="margin-top:26px">Xem thêm</h3>' + related('/cho-thue') + '</div></section>')
     b = bands_at(b, [(1, band('Nhận bảng tính dòng tiền theo căn', 'Tính theo giá thật khi có bảng giá: giá thuê, lấp đầy, lợi nhuận từng căn.', 'Nhận bảng tính', 'Cho thuê – bảng tính dòng tiền', ('/bang-gia', 'Xem bảng giá'))),
                      (3, band('Studio hay 1BR+ cho thuê tốt hơn?', 'Chuyên viên so sánh dòng tiền từng loại căn theo nhu cầu của anh/chị.', 'Tư vấn chọn căn cho thuê', 'Cho thuê – tư vấn chọn căn', ('/mat-bang', 'Xem mặt bằng Studio, 1BR+')))])

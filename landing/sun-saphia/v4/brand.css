@@ -491,3 +491,12 @@ body{padding-bottom:84px}
 .hfl .ok{border:2px solid #2f9e6a}.hfl .ok b{color:#2f9e6a}
 .hfl .no{border:2px solid var(--or)}.hfl .no b{color:var(--or)}
 .hfl .gr{border:2px dashed var(--nv)}
+.stp{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.stp .card{position:relative;padding-top:22px}
+.stp .sn{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--or);color:#fff;font-weight:800;font-size:19px;margin-bottom:10px}
+.stp h3{font-size:18px;margin-bottom:6px;color:var(--nv)}
+.stp p{font-size:14.5px;line-height:1.55}
+.stp .cta-c{background:var(--nvd);color:#fff}.stp .cta-c h3{color:var(--yl)}.stp .cta-c p{color:#d5e0ee}
+.prep .ck li{font-size:14.5px}
+@media(max-width:980px){.stp{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.stp{grid-template-columns:1fr}}
