@@ -185,12 +185,19 @@ def why_now():
             + '<div class="box"><span>Chi phí <b>tốt nhất</b></span><span>Lựa chọn <b>đẹp nhất</b></span><span>Tăng giá <b>đầu tiên</b></span></div></div>'
             '<p class="note">Chính sách giá, hỗ trợ lãi suất cụ thể theo công bố chính thức của chủ đầu tư khi mở bán.</p>')
 
+
+IMG3 = RAW + 'fc04110b48e042d4acb3890ea1d46686aea154f0/landing/sun-saphia/v4/img/'
+def rimg(name, alt, pos='50% 50%'):
+    u = IMG3 + name
+    return ('<img src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 600px" width="1600" height="900" '
+            'alt="%s" style="object-position:%s" loading="lazy" decoding="async">') % (u, u, u, alt, pos)
+
 def views(bien_html=None):
     it = [('view-bien', 'Hướng <b>Biển</b>', 'It can be view from your Home.', 'Không cần đi nghỉ dưỡng, biển đã ở ngay ngoài ban công. Trước mặt là biển Mỹ Khê – Sơn Thủy.', 'View biển Mỹ Khê – Sơn Thủy nhìn từ tầng cao Sun Saphia Residence'),
           ('view-nui-ngu-hanh-son', 'Hướng <b>Núi</b> Ngũ Hành Sơn', 'Một bức tranh treo ngay cửa sổ.', 'Nhìn về Ngũ Hành Sơn – biểu tượng của Đà Nẵng, ngày nào cũng ở trong tầm mắt.', 'Sun Saphia Residence bên bờ biển, hướng nhìn về Ngũ Hành Sơn'),
           ('view-song-han', 'Hướng <b>Sông Hàn</b>', 'Hoàng hôn trên sông Hàn, vé xem miễn phí mỗi chiều.', 'Dòng sông thành phố trong một khung nhìn, cùng với biển và núi.', 'Phối cảnh Sun Saphia Residence nhìn về phía sông Hàn và thành phố'),
           ('view-do-thi-dem', 'Hướng <b>Đô thị</b>', 'Đà Nẵng lên đèn, ngay trước mắt bạn.', 'Thành phố rực sáng về đêm, mà tiếng ồn thì ở lại xa hơn.', 'Sun Saphia Residence về đêm, phía sau là đô thị Đà Nẵng lên đèn')]
-    return '<div class="vw">' + ''.join('<article>%s<div><h3>%s</h3><q>%s</q><p class="just">%s</p></div></article>' % ((bien_html if (bien_html and a[0] == 'view-bien') else img(a[0], a[4])), a[1], a[2], a[3]) for a in it) + '</div>'
+    return '<div class="vw">' + ''.join('<article>%s<div><h3>%s</h3><q>%s</q><p class="just">%s</p></div></article>' % ((bien_html if (bien_html and a[0] == 'view-bien') else rimg('bien-dem-ban-cong', 'Ban công căn hộ nhìn ra biển và công viên lên đèn về đêm (ảnh minh họa)') if a[0] == 'view-do-thi-dem' else img(a[0], a[4])), a[1], a[2], a[3]) for a in it) + '</div>'
 
 def personas():
     it = [('kh-tre-tu-do', 'Khách hàng trẻ tự do', 'Làm điều mình thích, ở nơi mình thích.', 'Không gian linh hoạt để làm việc, đam mê, thể thao biển.', 'Căn Studio, 1BR+ nhỏ gọn; bãi biển cho SUP, kayak, jetski; cho thuê bù chi phí.', 'Làm việc từ đâu cũng được, thì sao không từ Đà Nẵng, cạnh biển?'),
@@ -203,7 +210,7 @@ def personas():
             'kh-lon-tuoi': 'Mọi người vui vẻ bên biển, minh họa khách hàng lớn tuổi về với biển'}
     return '<div class="ps">' + ''.join(
         '<article>%s<div><h3>%s</h3><p class="k">%s</p><dl><dt>Họ tìm</dt><dd>%s</dd><dt>Saphia có</dt><dd>%s</dd></dl><q>%s</q></div></article>' % (
-            img(a[0], alts[a[0]]), a[1], a[2], a[3], a[4], a[5]) for a in it) + '</div>'
+            (rimg('gia-dinh-ban-cong', 'Gia đình quây quần trên ban công căn hộ nhìn ra biển lúc hoàng hôn (ảnh minh họa)', '68% 80%') if a[0] == 'kh-thanh-dat' else rimg('ong-ba-ban-cong', 'Hai ông bà uống trà trên ban công nhìn ra biển Mỹ Khê và bán đảo Sơn Trà (ảnh minh họa)', '92% 50%') if a[0] == 'kh-lon-tuoi' else img(a[0], alts[a[0]])), a[1], a[2], a[3], a[4], a[5]) for a in it) + '</div>'
 
 def values4():
     return ('<div class="g4 k2">'
