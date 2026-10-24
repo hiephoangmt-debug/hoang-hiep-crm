@@ -435,3 +435,19 @@ body{padding-bottom:84px}
 .sbox2{border:1.5px solid var(--or);border-radius:18px;padding:20px 22px;background:#fff}
 @media(max-width:620px){.sbox2{padding:18px 16px}.sbox2 h3.dp{font-size:25px!important}}
 .jr .card p{text-align:left}
+/* Hero ads: ảnh biển hiện trọn, chữ + form nằm dưới ảnh */
+.hero.cine2{padding:0;background:var(--nvd);color:#fff}
+.hban{position:relative;overflow:hidden;background:#1a2b4a}
+.hban img{display:block;width:100%;height:clamp(260px,38vw,540px);object-fit:cover;object-position:62% 55%}
+.hban::after{content:"";position:absolute;left:0;right:0;bottom:0;height:70px;background:linear-gradient(180deg,rgba(11,36,71,0),var(--nvd));pointer-events:none}
+.hban .cap{position:absolute;right:14px;bottom:12px;z-index:1;font-size:11px;color:rgba(255,255,255,.75)}
+.hbody{padding:22px 0 44px}
+.hbody .g2{align-items:start}
+.cine2 .dp{color:#fff}
+.cine2 .dp b{color:var(--yl)}
+.cine2 h1.dp{margin:14px 0 10px}
+.cine2 .slogan{color:#e6eef8}
+.cine2 .slogan b{color:var(--yl)}
+.cine2 ul.ck li,.cine2 ul.ck li b{color:#fff}
+.cine2 ul.ck li:before{box-shadow:inset 0 0 0 4px var(--nvd),0 0 0 1.5px var(--or)}
+@media(max-width:900px){.hban img{height:auto;aspect-ratio:16/10}.hbody{padding:10px 0 30px}.cine2 .play{width:100%;box-sizing:border-box}.cine2 .hr{margin-top:22px}}

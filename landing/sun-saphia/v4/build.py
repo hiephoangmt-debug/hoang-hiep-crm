@@ -374,9 +374,12 @@ def cho_thue():
 # ---------- Trang chạy quảng cáo ----------
 def ads(domain):
     url = MAIN + '/ads'  # cả hai tên miền chuẩn hóa về trang ads chính
-    b = ('<section class="hero cine"><div class="hbg" aria-hidden="true">%s</div><div class="wrap"><div class="g2"><div class="hl">'
+    HB = RAW + '90c9302fe8dca2fa597009660b9635821c7d1eb5/landing/sun-saphia/v4/img/hero-bien'
+    b = ('<section class="hero cine2"><div class="hban"><img src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1668w" sizes="100vw" width="1668" height="943" '
+         'alt="Căn hộ cao tầng mặt biển Đà Nẵng – ban công nhìn ra biển lúc hoàng hôn (ảnh minh họa)" fetchpriority="high" decoding="async">'
+         '<span class="cap">Ảnh minh họa</span></div>'
+         '<div class="hbody"><div class="wrap"><div class="g2"><div class="hl">'
          '<span class="tag">🔥 Vừa Kick-off 23/10 · <b>Mở bán dự kiến cuối 11/2026</b></span>'
-         '<img class="ribbon" src="%sruy-bang.webp" alt="" width="608" height="232" style="margin-top:14px" aria-hidden="true">'
          '<h1 class="dp">Sun Saphia Residence – căn hộ <b>mặt biển</b> Đà Nẵng</h1>'
          + SLOGAN +
          '<ul class="ck"><li><b>Đại lý chính thức TATILAND</b> – bảng giá gốc từ đại lý, gửi qua Zalo khi công bố</li>'
@@ -384,14 +387,13 @@ def ads(domain):
          '<li><b>400 m ra bãi tắm Sơn Thủy</b> · giao lộ Võ Nguyên Giáp – Trường Sa</li>'
          '<li><b>Pháp lý 50 năm</b> · Vietcombank, BIDV, NCB hỗ trợ vay</li></ul>'
          '<a class="play" href="#ss4d" data-4d><i aria-hidden="true">▶</i><span><b>Xem dự án 3D · 4D</b><small>Xoay tòa tháp · nắng theo giờ · view biển từ căn</small></span></a>'
-         '<span class="cap">Phối cảnh minh họa</span>'
-         '</div><div class="hr">%s</div></div></div></section>'
+         '</div><div class="hr">%s</div></div></div></div></section>'
          '<section class="hstrip"><div class="wrap">%s'
          '<div class="qlinks"><a href="{M}/bang-gia">Bảng giá</a><a href="#mat-bang">Mặt bằng &amp; chọn căn</a><a href="{M}/tinh-dong-tien">Tính dòng tiền</a><a href="{M}/phap-ly">Pháp lý &amp; tiến độ</a></div></div></section>'
          '<script>document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("[data-4d]");if(!a)return;var b=document.getElementById("ss4d-box");if(!b)return;e.preventDefault();if(innerWidth<=760&&window.ss4dFull){ss4dFull();return}'
          'try{b.scrollIntoView({behavior:"smooth",block:"center"})}catch(x){b.scrollIntoView()}var g=document.getElementById("ss4d-go");if(g)g.click();'
          'try{if(window.gtag)gtag("event","xem_4d",{event_label:"hero"})}catch(x){}});</script>') % (
-        img('thap-bien-hoang-hon', 'Phối cảnh Sun Saphia Residence bên bờ biển Đà Nẵng lúc hoàng hôn', eager=True, sizes='100vw'), SK,
+        HB, HB, HB,
         form('dau', 'ADS – form đầu trang', title='Nhận bảng giá gốc từ đại lý', note='Bảng giá gốc, mặt bằng tầng, chính sách – gửi qua Zalo ngay khi chủ đầu tư công bố. Đăng ký miễn phí.', h='h2'),
         hero_perks())
     b += tldr('Sun Saphia Residence', [('Dự án', 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, 30 tầng, 782 căn'), ('Loại căn', 'Studio 30 m² · 1BR+ 50 m² · 2BR 60–70 m²'),
