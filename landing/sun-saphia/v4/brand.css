@@ -474,3 +474,6 @@ body{padding-bottom:84px}
 @media(max-width:620px){.kn{grid-template-columns:1fr 1fr}.kn b{font-size:23px}}
 .kn b{white-space:nowrap;font-size:clamp(20px,2vw,26px)}
 .sodo{max-width:470px;margin:0 auto}
+.sodo-l{display:none;margin-bottom:22px}
+.sodo-l img{border-radius:20px}
+@media(min-width:901px){.sodo-l{display:block}.vt{display:flex!important;align-items:center;gap:24px}.vt .kn,.vt .sodo{display:none}.vt>div{display:flex;align-items:center;gap:28px}.vt>div p{margin:0!important;flex:1}.vt .btn{flex:none}}
