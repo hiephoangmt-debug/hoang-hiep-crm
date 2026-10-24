@@ -209,7 +209,7 @@ def sub_hero(path, name, h1, lead, img_name, alt, label):
     return ('<section class="hero" style="padding-bottom:40px"><img class="sun" src="%smat-troi.webp" alt="" width="700" height="898" aria-hidden="true"><div class="wrap">%s'
             '<div class="g2" style="margin-top:14px"><div><span class="tag">🔥 Vừa Kick-off 23/10/2026 · <b>Dự kiến mở bán cuối 11/2026</b></span><img class="ribbon" src="%sruy-bang.webp" alt="" width="608" height="232" style="margin-top:14px" aria-hidden="true">'
             '<h1 class="dp">%s</h1>' + SLOGAN + '%s<p class="lead just">%s</p>%s</div><div class="hr">%s<div class="pic">%s</div></div></div></div></section>') % (
-        SK, cr, SK, h1, author(), lead, hero_perks(), form('dau', label, h='h2'), img(img_name, alt, eager=True)), ld
+        SK, cr, SK, h1, author(), lead, hero_perks(), form('dau', label, h='h2'), (img_name if img_name.startswith('<') else img(img_name, alt, eager=True))), ld
 
 def bang_gia():
     hero, cld = sub_hero('/bang-gia', 'Bảng giá', 'Giá Sun Saphia Residence – <b>bảng giá</b> căn hộ mặt biển Đà Nẵng',
@@ -339,7 +339,7 @@ def phap_ly():
 def cho_thue():
     hero, cld = sub_hero('/cho-thue', 'Cho thuê', 'Đầu tư căn hộ cho thuê Đà Nẵng – <b>dòng tiền</b> Sun Saphia',
                          'Studio view biển Đà Nẵng đang cho thuê 2,2–2,9 triệu/đêm, 1BR+ 3,4–3,7 triệu/đêm (ngoài mùa cao điểm); khách sạn Sun Group miền Trung lấp đầy 81,3% năm 2026. Trang này tổng hợp nguồn khách thuê, giá thuê theo đêm và theo tháng, và công cụ để anh/chị tự tính dòng tiền theo từng căn.',
-                         'ho-boi-hoang-hon', 'Bể bơi vô cực nhìn ra biển Đà Nẵng lúc hoàng hôn', 'Web – cho thuê đầu trang')
+                         ('<img src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 900px" width="1600" height="900" alt="Hồ bơi tầng 3 nhìn ra biển Đà Nẵng lúc hoàng hôn – Sun Saphia Residence (ảnh minh họa)" fetchpriority="high" decoding="async">' % ((RAW + 'a0a6849c15880dc681b6e91708d2a0752bd2aa43/landing/sun-saphia/v4/img/ho-boi-tang-3',) * 3)), 'Hồ bơi tầng 3', 'Web – cho thuê đầu trang')
     fq, fld = faq([
         ('Cho thuê căn hộ Sun Saphia được bao nhiêu?', 'Giá thuê căn hộ view biển Đà Nẵng hiện khoảng 2,2–2,9 triệu/đêm (studio) và 3,4–3,7 triệu/đêm (1BR+), chưa tính mùa cao điểm. Thuê tháng các tòa ven sông Hàn: studio 18–20 triệu, 1PN 14–27 triệu, 2PN 20–45 triệu.'),
         ('Tỷ lệ lấp đầy thực tế ra sao?', 'Bài toán minh họa của chủ đầu tư dùng 60%. Khách sạn của Sun Group tại miền Trung đạt 81,3% năm 2026 (từ 70,65% năm 2025) – cao nhất cả nước.'),
