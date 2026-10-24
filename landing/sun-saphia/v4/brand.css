@@ -454,3 +454,22 @@ body{padding-bottom:84px}
 .cine2 h1.dp{margin-top:6px}
 .jr a{color:inherit;text-decoration:underline;text-decoration-color:rgba(233,97,24,.5);text-underline-offset:3px}.jr a:hover{color:var(--or)}
 .vw img.vb{object-position:62% 55%}
+/* Dải ảnh lớn tòa tháp bên biển */
+.pband{position:relative;background:var(--nvd);overflow:hidden}
+.pband img{display:block;width:100%;height:clamp(300px,46vw,640px);object-fit:cover;object-position:50% 40%}
+.pband::after{content:"";position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(180deg,rgba(11,36,71,0),rgba(11,36,71,.85));pointer-events:none}
+.pband .cap{position:absolute;right:14px;top:12px;z-index:2;font-size:11px;color:#fff;background:rgba(0,0,0,.3);padding:3px 9px;border-radius:99px}
+.pband .wrap{position:absolute;left:0;right:0;bottom:26px;z-index:2}
+.pband .pbt{max-width:620px;color:#fff}
+.pband .dp{color:#fff;font-size:clamp(28px,3.6vw,44px);text-shadow:0 2px 14px rgba(0,0,0,.35)}
+.pband .dp b{color:var(--yl)}
+.pband p{margin:6px 0 14px;color:#e6eef8;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+@media(max-width:760px){.pband img{height:auto;aspect-ratio:16/9}.pband::after{display:none}.pband .wrap{position:static;padding-top:16px;padding-bottom:26px}.pband .pbt{max-width:none}}
+@media(min-width:761px){.pband::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(11,36,71,.75) 0%,rgba(11,36,71,.35) 38%,rgba(11,36,71,0) 55%);pointer-events:none}.pband::after{z-index:1}}
+.kn{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.kn div{background:#fff;border-radius:14px;padding:14px 14px 12px;box-shadow:var(--sh);border-top:3px solid var(--or)}
+.kn b{display:block;font:500 26px/1.15 Fahkwang,serif;color:var(--nv)}
+.kn span{font-size:13.5px;color:var(--mut)}
+.sodo img{border-radius:18px}
+@media(max-width:620px){.kn{grid-template-columns:1fr 1fr}.kn b{font-size:23px}}
+.kn b{white-space:nowrap;font-size:clamp(20px,2vw,26px)}
