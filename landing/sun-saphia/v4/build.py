@@ -452,12 +452,14 @@ def vi_sao():
                          'thap-tren-cao-ngay', 'Sun Saphia Residence trên trục biển Võ Nguyên Giáp – Trường Sa nhìn từ trên cao', 'Web – vì sao mặt biển đầu trang')
     fq, fld = faq([
         ('Sun Saphia Residence có phải căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng?', 'Đúng. Dự án do Sun Property – thành viên Tập đoàn Sun Group – phát triển, được giới thiệu tại Kick-off 23/10/2026 là dự án căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, trên trục Võ Nguyên Giáp – Trường Sa, cách bãi tắm Sơn Thủy khoảng 400 m.'),
+        ('Sun Group đã làm những dự án nào ở Đà Nẵng?', 'Du lịch – nghỉ dưỡng: Sun World Ba Na Hills (cáp treo, Cầu Vàng), InterContinental Danang Sun Peninsula Resort, Premier Village Danang Resort, Sun World Asia Park. Căn hộ: Sun Cosmo, Sun Ponte, Sun Symphony ven sông Hàn; Sun Galaxy Complex; FourS Tower (Sun Riverpolis). Sun Saphia Residence là dự án căn hộ mặt biển đầu tiên.'),
         ('Vì sao căn hộ mặt biển ở Đà Nẵng hiếm?', 'Biển là tài nguyên hữu hạn; dải đất ven biển Đà Nẵng phần lớn đã dành cho resort, khách sạn và không gian công cộng. Bãi biển là tài sản công, nên căn hộ có thể nhìn thẳng ra biển và đi bộ ra bãi tắm chỉ còn rất ít vị trí.'),
         ('Căn hộ mặt biển Đà Nẵng đang chào bán giá bao nhiêu?', 'Theo giá chào bán trình bày tại Kick-off: studio khoảng 5,2–10,5 tỷ, 1BR 7,7–11,5 tỷ, 2BR 17,4–21,7 tỷ tùy dự án (The Soleil, Futa Residence, Nobu). Giá Sun Saphia Residence chưa công bố, dự kiến cuối 11/2026.'),
         ('Mua căn hộ mặt biển để cho thuê có tốt không?', 'Đà Nẵng đón 15,86 triệu lượt khách 9 tháng đầu 2026 (+29,6%); khách sạn Sun Group miền Trung lấp đầy 81,3% năm 2026. Studio view biển đang cho thuê 2,2–2,9 triệu/đêm ngoài mùa cao điểm. Kết quả thực tế phụ thuộc giá mua, mùa vụ và cách vận hành.'),
         ('Khi nào mở bán Sun Saphia Residence?', 'Dự kiến cuối tháng 11/2026, bàn giao tháng 11/2028. Đăng ký nhận thông tin, bảng giá là miễn phí.')])
     b = hero
     b += tldr('vì sao Sun Group ra mắt căn hộ mặt biển tại Đà Nẵng', [
+        ('Hành trình', 'Núi (Bà Nà) → bán đảo (InterContinental) → sông Hàn (Sun Cosmo, Ponte, Symphony) → Nam trung tâm (Galaxy, FourS) → biển (Saphia)'),
         ('1. Quỹ đất', 'Đất mặt biển Đà Nẵng gần như cạn; khu Saphia là một trong rất ít vị trí căn hộ đi bộ ra biển (~400 m)'),
         ('2. Du lịch', '15,86 triệu lượt khách 9 tháng 2026 (+29,6%); Đà Nẵng là 1 trong 3 cực tăng trưởng du lịch cả nước'),
         ('3. Hạ tầng', 'Mở rộng trục biển 2.633 tỷ; ga LRT 09 cách ~500 m; Khu thương mại tự do Đà Nẵng'),
@@ -471,11 +473,26 @@ def vi_sao():
           'Phía trước, thành phố chủ trương thu hồi khoảng <b>2,45 ha</b> đất của dự án Hòn Ngọc Á Châu bỏ hoang để làm công viên công cộng – tầm nhìn ra biển được giữ thoáng.</p>'
           '<ul class="ck"><li>Trước mặt là biển Mỹ Khê – Sơn Thủy</li><li>Sau lưng là sông Hàn, bên cạnh là Ngũ Hành Sơn</li><li>Chuỗi 3 công viên bãi tắm: Sơn Thủy, công viên đối diện, Huyền Trân Công Chúa</li></ul></div>'
           + fig('bai-bien-hien-huu', 'Bãi biển hiện hữu trước khu Saphia, Đà Nẵng', 'Bãi biển hiện hữu trước khu Saphia') + '</div></div></section>')
-    b += ('<section class="sec"><div class="wrap">' + sh('2', 'Từ sông ra biển', 'Bước tiếp theo của Sun Group <b>tại Đà Nẵng</b>', 'n') +
-          '<div class="txt just"><p>Sun Group gắn bó với Đà Nẵng qua Bà Nà Hills, InterContinental Danang Sun Peninsula Resort và các dự án căn hộ ven sông Hàn như Sun Cosmo Residence, Sun Symphony Residence, Sun Ponte Residence. '
-          'Sun Saphia Residence là lần đầu tập đoàn đưa dòng căn hộ ra <b>mặt biển</b>, trên “cung đường tỷ đô” nối chuỗi resort Đà Nẵng – Hội An.</p>'
-          '<p>Kiến trúc lấy cảm hứng từ điêu khắc Chăm Pa và vũ nữ Apsara: khối tháp 30 tầng (114 m), mặt dài hướng biển, mặt đứng kính xanh nhạt với ban công và trụ màu đồng – một biểu tượng mới bên biển Đà Nẵng.</p></div>'
-          '<p class="note">Phần phân tích là góc nhìn của đại lý phân phối TATILAND dựa trên tài liệu Kick-off và số liệu công bố, không phải phát biểu chính thức của chủ đầu tư.</p></div></section>')
+    b += ('<section class="sec"><div class="wrap">' + sh('2', 'Hành trình Sun Group', 'Từ núi, qua sông, <b>ra biển</b> Đà Nẵng', 'n') +
+          '<div class="txt just"><p>Bà Nà Hills là dự án đầu tiên đánh dấu chặng đường của Sun Group tại Việt Nam (từ 2007). Gần 20 năm qua, tập đoàn đã đi một vòng trọn vẹn quanh Đà Nẵng: '
+          '<b>lên núi</b> với Bà Nà, <b>ra bán đảo</b> với khu nghỉ dưỡng Sơn Trà, <b>về sông Hàn</b> với chuỗi căn hộ trung tâm, mở rộng <b>về phía Nam</b> – và nay là <b>mặt biển</b> với Sun Saphia Residence.</p></div>'
+          '<div class="g4 jr">'
+          '<div class="card"><span class="n">CHẶNG 1 · NÚI</span><h3 class="oc">Sun World Ba Na Hills</h3><p>Cáp treo Bà Nà (2009) giữ 2 kỷ lục Guinness, tuyến dài 5.042,62 m; Cầu Vàng (6/2018) thành biểu tượng du lịch Đà Nẵng ra thế giới.</p></div>'
+          '<div class="card"><span class="n">CHẶNG 2 · BÁN ĐẢO &amp; BIỂN NGHỈ DƯỠNG</span><h3 class="oc">InterContinental · Premier Village</h3><p>InterContinental Danang Sun Peninsula Resort trên bán đảo Sơn Trà – được World Travel Awards vinh danh khu nghỉ dưỡng sang trọng hàng đầu thế giới; Premier Village Danang Resort ven biển Võ Nguyên Giáp. Cùng Sun World Asia Park bên sông Hàn.</p></div>'
+          '<div class="card"><span class="n">CHẶNG 3 · SÔNG HÀN</span><h3 class="oc">Sun Cosmo · Sun Ponte · Sun Symphony</h3><p>Chuỗi căn hộ ven sông Hàn: Sun Cosmo (cầu Trần Thị Lý, tòa The Panoma đã bàn giao), Sun Ponte (cạnh cầu Rồng, 2 tháp 26 tầng, gần 500 căn), Sun Symphony (bến Bạch Đằng, 3 tháp, khoảng 1.313 căn) – đã lần lượt bàn giao cho cư dân.</p></div>'
+          '<div class="card"><span class="n">CHẶNG 4 · NAM TRUNG TÂM</span><h3 class="oc">Sun Galaxy · FourS Tower</h3><p>Sun Galaxy Complex 47 tầng cạnh cầu Trần Thị Lý (căn hộ mang thương hiệu Accor); FourS Tower trong khu đô thị Sun Riverpolis, Ngũ Hành Sơn – đã mở bán tháp F2 (Tháp Mùa Xuân).</p></div>'
+          '</div>'
+          '<div class="g2" style="margin-top:22px;align-items:center"><div class="sbox2"><span class="ey">CHẶNG 5 · BIỂN</span><h3 class="dp" style="font-size:30px;margin:6px 0 10px">Sun Saphia Residence – <b>mảnh ghép còn thiếu</b></h3>'
+          '<p class="just">Sun Group đã có núi (Bà Nà), có sông (chuỗi căn hộ sông Hàn), có resort ven biển – nhưng chưa có <b>căn hộ để ở và cho thuê</b> ngay mặt biển. Saphia lấp đúng khoảng trống đó: '
+          'trên trục Võ Nguyên Giáp – Trường Sa, cách bãi tắm Sơn Thủy khoảng 400 m, tầm nhìn cùng lúc về biển Mỹ Khê, sông Hàn và Ngũ Hành Sơn. '
+          'Vì vậy thông điệp của dự án là <b>“Trước mặt là Biển · Sau lưng là Sông · Bên cạnh là Núi”</b>.</p></div>'
+          '<div><ul class="ck"><li><b>Kinh nghiệm bàn giao</b> – chuỗi căn hộ sông Hàn đã về tay cư dân, người mua có thể đến xem chất lượng thực tế</li>'
+          '<li><b>Thương hiệu cho thuê</b> – các tòa Sun Group sông Hàn (như The Panoma) đang cho thuê 18–35 triệu/tháng, là mốc tham chiếu cho căn mặt biển</li>'
+          '<li><b>Hệ sinh thái du lịch</b> – Bà Nà, Sun World, resort của tập đoàn kéo khách về Đà Nẵng, tạo nguồn khách thuê</li>'
+          '<li><b>Bước lên của sản phẩm</b> – từ căn hộ ven sông sang căn hộ mặt biển, quỹ đất hiếm hơn, dòng tiền nghỉ dưỡng rõ hơn</li></ul>'
+          '<a class="lk" href="{M}/cho-thue">So sánh giá thuê các tòa ven sông →</a></div></div>'
+          '<p class="src">Nguồn: báo chí (VnExpress, Reatimes, Cafeland…) và thông tin chủ đầu tư công bố; quy mô, tiến độ từng dự án theo công bố của chủ đầu tư. '
+          'Phần phân tích là góc nhìn của đại lý phân phối TATILAND, không phải phát biểu chính thức của chủ đầu tư.</p></div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('3', 'Du lịch', 'Du lịch Đà Nẵng <b>tăng gần 30%</b>', 'y') +
           '<div class="stats"><div><b>15,86 triệu</b><span>lượt khách 9 tháng 2026 · +29,6%</span></div><div><b>7,69 triệu</b><span>khách quốc tế · +28,9%</span></div>'
           '<div><b>52.945 tỷ</b><span>doanh thu du lịch · +26,2%</span></div><div><b>81,3%</b><span>lấp đầy khách sạn Sun Group miền Trung 2026</span></div></div>'

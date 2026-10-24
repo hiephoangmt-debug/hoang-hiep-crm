@@ -431,3 +431,7 @@ body{padding-bottom:84px}
 .why .box{align-items:center;text-align:center;gap:6px}
 .why .box span{display:block}
 @media(max-width:620px){.why .box{padding:18px 14px;font-size:22px}}
+.jr .card h3.oc{font-size:17px}
+.sbox2{border:1.5px solid var(--or);border-radius:18px;padding:20px 22px;background:#fff}
+@media(max-width:620px){.sbox2{padding:18px 16px}.sbox2 h3.dp{font-size:25px!important}}
+.jr .card p{text-align:left}
