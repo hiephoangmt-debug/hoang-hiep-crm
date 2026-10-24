@@ -18,7 +18,7 @@ RES = {'@type': 'Residence', '@id': MAIN + '/#du-an', 'name': 'Sun Saphia Reside
        'address': {'@type': 'PostalAddress', 'streetAddress': 'Giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa', 'addressLocality': 'Phường Ngũ Hành Sơn', 'addressRegion': 'Đà Nẵng', 'addressCountry': 'VN'}}
 PERSON = {'@type': 'Person', 'name': 'Hoàng Phạm Đình Hiệp', 'jobTitle': 'Giám đốc kinh doanh', 'worksFor': ORG}
 
-def article_ld(title, desc, url, pub='2026-10-17', mod='2026-10-23'):
+def article_ld(title, desc, url, pub='2026-10-17', mod='2026-10-24'):
     return {'@type': 'Article', 'headline': title, 'description': desc, 'datePublished': pub, 'dateModified': mod,
             'author': PERSON, 'publisher': ORG, 'image': OG, 'mainEntityOfPage': url, 'inLanguage': 'vi', 'about': {'@id': MAIN + '/#du-an'}}
 
