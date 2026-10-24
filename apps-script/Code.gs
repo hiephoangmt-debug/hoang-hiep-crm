@@ -652,11 +652,11 @@ function crmRequireAdmin_(token) {
   if (crmMe_(token).role !== 'admin') throw new Error('Chỉ quản trị mới tạo được báo cáo.');
 }
 
-var CRM_ADMIN_ONLY = ['crmImportEntries_', 'crmShareSheet_', 'crmTrashReportFiles_'];
+var CRM_ADMIN_ONLY = ['crmImportEntries_', 'crmShareSheet_', 'crmTrashReportFiles_', 'crmTidyEvidence_'];
 var CRM_CALLS = {
   crmSave: crmSave_, crmSaveMany: crmSaveMany_, crmDelete: crmDelete_, crmImportEntries: crmImportEntries_,
   crmUploadEvidence: crmUploadEvidence_, crmCopyEvidence: crmCopyEvidence_, crmWriteSheet: crmWriteSheet_,
-  crmShareSheet: crmShareSheet_, crmTrashReportFiles: crmTrashReportFiles_,
+  crmShareSheet: crmShareSheet_, crmTrashReportFiles: crmTrashReportFiles_, crmTidyEvidence: crmTidyEvidence_,
 };
 var CRM_STAFF_TABLES = ['SoLieu', 'ChungTu', 'TaiKhoan'];
 
@@ -1027,6 +1027,28 @@ function crmEvidenceFolder_(project, meta) {
   if (lv.project) f = crmSub_(f, project.khoa || project.ten);
   return lv.week ? crmSub_(f, crmWeekFolder_(meta.tuan)) : f;
 }
+/**
+ * Xếp lại ảnh chứng từ đã lưu của một dự án + tuần vào đúng thư mục <Kênh>/<Nhân sự> (theo link chứng từ hiện tại),
+ * lấy lại khỏi Thùng rác nếu ảnh đã bị xoá (chưa xoá vĩnh viễn). Không tải lại, không đổi mã file.
+ */
+function crmTidyEvidence_(duAn, tuan) {
+  var project = crmRows_('DuAn').filter(function (p) { return p.ten === duAn; })[0];
+  if (!project) throw new Error('Không có dự án ' + duAn);
+  var res = { moved: 0, restored: 0, ok: 0, missing: [] };
+  crmRows_('ChungTu').filter(function (r) { return r.duAn === duAn && r.tuan === tuan && r.fileId; }).forEach(function (r) {
+    var file;
+    try { file = DriveApp.getFileById(r.fileId); } catch (e) { res.missing.push((r.nhanSu || '?') + ' · ' + r.tenFile); return; }
+    if (file.isTrashed()) { file.setTrashed(false); res.restored++; }
+    var folder = crmEvidenceFolder_(project, r);
+    var ps = file.getParents(), inside = false;
+    while (ps.hasNext()) if (ps.next().getId() === folder.getId()) inside = true;
+    if (inside) { res.ok++; return; }
+    file.moveTo(folder);
+    res.moved++;
+  });
+  return res;
+}
+
 /**
  * Có cần thư mục con Tuần / Dự án không:
  * - thư mục chứng từ riêng của dự án (vd "Sun FourS Tower ( F2)") -> không cần thư mục Dự án

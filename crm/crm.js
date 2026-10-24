@@ -1666,6 +1666,16 @@
         renderEvidence();
       } catch (_) { /* đã báo */ } finally { $("evScan").disabled = false; }
     });
+    $("evTidy").addEventListener("click", async () => {
+      const pj = $("evProject").value, w = $("evWeek").value;
+      $("evTidy").disabled = true;
+      try {
+        const r = await run("Đang xếp lại ảnh trên Drive", () => call("crmTidyEvidence", pj, w));
+        toast(`${pj} · ${periodLabel(w)}: đã chuyển ${r.moved} ảnh vào đúng Kênh › Nhân sự` +
+          (r.restored ? `, lấy lại ${r.restored} ảnh từ Thùng rác` : "") + (r.ok ? `, ${r.ok} ảnh đã đúng chỗ` : "") + "." +
+          (r.missing.length ? ` Không tìm thấy ${r.missing.length} ảnh (đã xoá vĩnh viễn – cần tải lại): ${r.missing.join("; ")}.` : ""), r.missing.length ? "err" : "ok");
+      } catch (_) { /* đã báo */ } finally { $("evTidy").disabled = false; }
+    });
     // chạm vào ô của bảng kiểm (điện thoại không rê chuột được): hiện yêu cầu của ô đó
     $("evCheck").addEventListener("click", async (e) => {
       const btn = e.target.closest("[data-copyev]");
@@ -1834,7 +1844,7 @@
   /** Ẩn/khoá các phần chỉ quản trị dùng. */
   function applyRole() {
     const admin = isAdmin();
-    document.querySelectorAll('[data-tab="danhmuc"], #enImport, #enShare, #enPush, #evScan, #evDedupe, #rpGo, #rpFormat, #rpPdf, #rpKeepMissing, #sheetLink, #reportLink')
+    document.querySelectorAll('[data-tab="danhmuc"], #enImport, #enShare, #enPush, #evScan, #evTidy, #evDedupe, #rpGo, #rpFormat, #rpPdf, #rpKeepMissing, #sheetLink, #reportLink')
       .forEach((el) => { const box = el.closest("label") || el; box.hidden = !admin; if (!admin) box.style.display = "none"; });
     if (!admin) {
       $("evStaff").innerHTML = opt(myName(), myName(), myName());
