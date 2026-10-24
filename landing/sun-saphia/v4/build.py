@@ -18,8 +18,8 @@ RES = {'@type': 'Residence', '@id': MAIN + '/#du-an', 'name': 'Sun Saphia Reside
        'address': {'@type': 'PostalAddress', 'streetAddress': 'Giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa', 'addressLocality': 'Phường Ngũ Hành Sơn', 'addressRegion': 'Đà Nẵng', 'addressCountry': 'VN'}}
 PERSON = {'@type': 'Person', 'name': 'Hoàng Phạm Đình Hiệp', 'jobTitle': 'Giám đốc kinh doanh', 'worksFor': ORG}
 
-def article_ld(title, desc, url):
-    return {'@type': 'Article', 'headline': title, 'description': desc, 'datePublished': '2026-10-17', 'dateModified': '2026-10-23',
+def article_ld(title, desc, url, pub='2026-10-17', mod='2026-10-23'):
+    return {'@type': 'Article', 'headline': title, 'description': desc, 'datePublished': pub, 'dateModified': mod,
             'author': PERSON, 'publisher': ORG, 'image': OG, 'mainEntityOfPage': url, 'inLanguage': 'vi', 'about': {'@id': MAIN + '/#du-an'}}
 
 def page(path, title, desc, kw, body, lds, cur, tools=False, canon=None, robots='index,follow'):
@@ -106,7 +106,7 @@ def home():
     b += ('<section class="sec" id="vi-sao-mua-som"><div class="wrap">' + sh('?', 'Mua sớm', 'Tại sao nên chọn <b>thời điểm này</b>?', 'o') + why_now() + '</div></section>')
     # Tổng quan
     b += ('<section class="sec alt" id="tong-quan">' + tiles('tr') + '<div class="wrap">' + sh('i', 'Thông tin tổng quan', 'Dự án căn hộ <b>mặt biển đầu tiên</b> của Sun Group tại Đà Nẵng', 'n') +
-          '<div class="g2 eq"><div>' + overview() + '<p class="note" style="margin-top:10px">Theo tài liệu công bố tại Kick-off 23/10/2026; giá bán và chính sách theo công bố chính thức của chủ đầu tư.</p></div>'
+          '<div class="g2 eq"><div>' + overview() + '<p class="note" style="margin-top:10px">Theo tài liệu công bố tại Kick-off 23/10/2026; giá bán và chính sách theo công bố chính thức của chủ đầu tư. <a class="lk" href="{M}/vi-sao-sun-group">Vì sao Sun Group ra mắt căn hộ mặt biển đầu tiên tại Đà Nẵng →</a></p></div>'
           '<div class="hr">' + fig('thap-cat-3', 'Tòa tháp Sun Saphia Residence 30 tầng giữa cây xanh, mặt đứng kính và ban công màu đồng', 'Tòa tháp 30 tầng – 114 m (phối cảnh minh họa)', cls='fill ct') + '<a class="btn" href="#" data-pop data-interest="Trang chủ – thông tin tổng quan">Nhận brochure &amp; bảng giá</a></div></div></div></section>')
     # 01 Vị trí
     b += ('<section class="sec" id="vi-tri"><div class="wrap">' + sh('01', 'Vị trí', 'Tọa độ <b>trung điểm</b> hệ di sản Đà Nẵng', 'y') +
@@ -524,10 +524,10 @@ def vi_sao():
     b = bands_at(b, [(2, band('Căn hộ mặt biển có hạn – đợt đầu chọn căn đẹp nhất', 'Nhận bảng giá gốc và mặt bằng căn trống qua Zalo.', 'Nhận bảng giá sớm', 'Vì sao mặt biển – giữa trang', ('/bang-gia', 'Xem bảng giá'))),
                      (5, band('Muốn biết căn nào cho thuê tốt nhất?', 'Nhận bảng tính dòng tiền theo căn anh/chị quan tâm.', 'Nhận bảng tính', 'Vì sao mặt biển – dòng tiền', ('/tinh-dong-tien', 'Tự tính dòng tiền')))])
     b += cta_block('Web – vì sao mặt biển cuối trang', title='Sở hữu căn hộ <b>mặt biển đầu tiên</b> của Sun Group tại Đà Nẵng')
-    title = 'Vì sao Sun Group ra mắt căn hộ mặt biển đầu tiên tại Đà Nẵng? | Sun Saphia Residence'
-    desc = 'Vì sao Sun Group chọn Đà Nẵng cho căn hộ mặt biển đầu tiên Sun Saphia Residence: quỹ đất biển khan hiếm, du lịch +29,6%, hạ tầng 2.633 tỷ, LRT, 3 triệu dân, lãi suất giảm.'
-    return page(P, title, desc, 'căn hộ mặt biển đầu tiên sun group, vì sao sun group đà nẵng, căn hộ mặt biển đà nẵng, sun saphia residence, sun group đà nẵng',
-                b, [article_ld(title, desc, MAIN + P), cld, fld], P)
+    title = 'Vì sao Sun Group ra mắt căn hộ mặt biển đầu tiên tại Đà Nẵng?'
+    desc = 'Sun Saphia Residence – căn hộ cao tầng mặt biển đầu tiên của Sun Group tại Đà Nẵng: quỹ đất biển hiếm, du lịch +29,6%, hạ tầng 2.633 tỷ, lãi suất giảm.'
+    return page(P, title, desc, 'căn hộ mặt biển đầu tiên sun group, căn hộ cao tầng mặt biển đà nẵng, vì sao sun group đà nẵng, các dự án sun group đà nẵng, sun saphia residence',
+                b, [article_ld(title, desc, MAIN + P, '2026-10-24', '2026-10-24'), cld, fld], P)
 
 if __name__ == '__main__':
     import os
