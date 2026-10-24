@@ -379,7 +379,6 @@ def ads(domain):
          'alt="Căn hộ cao tầng mặt biển Đà Nẵng – ban công nhìn ra biển lúc hoàng hôn (ảnh minh họa)" fetchpriority="high" decoding="async">'
          '<span class="cap">Ảnh minh họa</span></div>'
          '<div class="hbody"><div class="wrap"><div class="g2"><div class="hl">'
-         '<span class="tag">🔥 Vừa Kick-off 23/10 · <b>Mở bán dự kiến cuối 11/2026</b></span>'
          '<h1 class="dp">Sun Saphia Residence – căn hộ <b>mặt biển</b> Đà Nẵng</h1>'
          + SLOGAN +
          '<ul class="ck"><li><b>Đại lý chính thức TATILAND</b> – bảng giá gốc từ đại lý, gửi qua Zalo khi công bố</li>'

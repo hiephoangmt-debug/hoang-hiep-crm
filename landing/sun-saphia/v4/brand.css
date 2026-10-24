@@ -451,3 +451,4 @@ body{padding-bottom:84px}
 .cine2 ul.ck li,.cine2 ul.ck li b{color:#fff}
 .cine2 ul.ck li:before{box-shadow:inset 0 0 0 4px var(--nvd),0 0 0 1.5px var(--or)}
 @media(max-width:900px){.hban img{height:auto;aspect-ratio:16/10}.hbody{padding:10px 0 30px}.cine2 .play{width:100%;box-sizing:border-box}.cine2 .hr{margin-top:22px}}
+.cine2 h1.dp{margin-top:6px}
