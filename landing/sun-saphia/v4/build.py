@@ -448,8 +448,8 @@ def tinh_dong_tien():
 
 def vi_sao():
     P = '/vi-sao-sun-group'
-    hero, cld = sub_hero(P, 'Vì sao mặt biển', 'Vì sao Sun Group ra mắt <b>căn hộ mặt biển đầu tiên</b> tại Đà Nẵng?',
-                         'Sun Saphia Residence là dự án căn hộ cao tầng mặt biển đầu tiên của Sun Group tại Đà Nẵng (trước đó tập đoàn mới có resort, biệt thự biển), ra mắt tại Kick-off 23/10/2026. Bài viết phân tích 6 lý do khiến thời điểm này và vị trí này phù hợp: '
+    hero, cld = sub_hero(P, 'Vì sao mặt biển', 'Có phải lần đầu tiên Sun Group làm <b>căn hộ cao tầng ngay mặt biển</b> Đà Nẵng?',
+                         'Đúng. Sun Saphia Residence là dự án căn hộ cao tầng mặt biển đầu tiên của Sun Group tại Đà Nẵng (trước đó tập đoàn mới có resort, biệt thự biển), ra mắt tại Kick-off 23/10/2026. Bài viết phân tích 6 lý do khiến thời điểm này và vị trí này phù hợp: '
                          'quỹ đất mặt biển gần như cạn, du lịch Đà Nẵng tăng gần 30%, hạ tầng trục biển và đường sắt đô thị, dân số mới sau sáp nhập, lãi suất đi xuống và nhu cầu căn hộ nhỏ để ở – cho thuê.',
                          'thap-tren-cao-ngay', 'Sun Saphia Residence trên trục biển Võ Nguyên Giáp – Trường Sa nhìn từ trên cao', 'Web – vì sao mặt biển đầu trang')
     fq, fld = faq([
@@ -524,8 +524,8 @@ def vi_sao():
     b = bands_at(b, [(2, band('Căn hộ mặt biển có hạn – đợt đầu chọn căn đẹp nhất', 'Nhận bảng giá gốc và mặt bằng căn trống qua Zalo.', 'Nhận bảng giá sớm', 'Vì sao mặt biển – giữa trang', ('/bang-gia', 'Xem bảng giá'))),
                      (5, band('Muốn biết căn nào cho thuê tốt nhất?', 'Nhận bảng tính dòng tiền theo căn anh/chị quan tâm.', 'Nhận bảng tính', 'Vì sao mặt biển – dòng tiền', ('/tinh-dong-tien', 'Tự tính dòng tiền')))])
     b += cta_block('Web – vì sao mặt biển cuối trang', title='Sở hữu căn hộ <b>mặt biển đầu tiên</b> của Sun Group tại Đà Nẵng')
-    title = 'Vì sao Sun Group ra mắt căn hộ mặt biển đầu tiên tại Đà Nẵng?'
-    desc = 'Sun Saphia Residence – căn hộ cao tầng mặt biển đầu tiên của Sun Group tại Đà Nẵng: quỹ đất biển hiếm, du lịch +29,6%, hạ tầng 2.633 tỷ, lãi suất giảm.'
+    title = 'Có phải lần đầu tiên Sun Group làm căn hộ cao tầng ngay mặt biển Đà Nẵng?'
+    desc = 'Đúng. Sun Saphia Residence là căn hộ cao tầng mặt biển đầu tiên của Sun Group tại Đà Nẵng. Vì sao là lúc này: đất biển hiếm, du lịch +29,6%, lãi suất giảm.'
     return page(P, title, desc, 'căn hộ mặt biển đầu tiên sun group, căn hộ cao tầng mặt biển đà nẵng, vì sao sun group đà nẵng, các dự án sun group đà nẵng, sun saphia residence',
                 b, [article_ld(title, desc, MAIN + P, '2026-10-24', '2026-10-24'), cld, fld], P)
 
