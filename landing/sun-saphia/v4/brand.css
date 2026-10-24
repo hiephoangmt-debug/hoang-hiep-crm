@@ -453,3 +453,4 @@ body{padding-bottom:84px}
 @media(max-width:900px){.hban img{height:auto;aspect-ratio:16/10}.hbody{padding:10px 0 30px}.cine2 .play{width:100%;box-sizing:border-box}.cine2 .hr{margin-top:22px}}
 .cine2 h1.dp{margin-top:6px}
 .jr a{color:inherit;text-decoration:underline;text-decoration-color:rgba(233,97,24,.5);text-underline-offset:3px}.jr a:hover{color:var(--or)}
+.vw img.vb{object-position:62% 55%}
