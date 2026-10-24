@@ -473,3 +473,4 @@ body{padding-bottom:84px}
 .sodo img{border-radius:18px}
 @media(max-width:620px){.kn{grid-template-columns:1fr 1fr}.kn b{font-size:23px}}
 .kn b{white-space:nowrap;font-size:clamp(20px,2vw,26px)}
+.sodo{max-width:470px;margin:0 auto}
