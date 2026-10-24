@@ -163,7 +163,9 @@ function tabMap_(name) {
   if (n > 1) sh.getRange(2, 1, n - 1, 2).getValues().forEach(function (r) { if (r[0]) m[String(r[0]).trim()] = r[1]; });
   return m;
 }
-function log_(nguoi, hd, khach, ct) { tab_('NhatKy', T_NK).appendRow([nowD(), nguoi || '', hd, khach || '', ct || '']); }
+/* Chữ bắt đầu bằng = + - @ thì Sheet hiểu là công thức (#ERROR!): thêm dấu ' để giữ nguyên chữ */
+function chu_(x) { x = x == null ? '' : x; return typeof x === 'string' && /^[=+\-@]/.test(x) ? "'" + x : x; }
+function log_(nguoi, hd, khach, ct) { tab_('NhatKy', T_NK).appendRow([nowD(), chu_(nguoi), chu_(hd), chu_(khach), chu_(ct)]); }
 
 /* ======================= TELEGRAM ======================= */
 function tg_(method, payload) {
