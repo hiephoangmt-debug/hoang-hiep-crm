@@ -307,6 +307,8 @@ def phap_ly():
     fq, fld = faq([
         ('Sun Saphia Residence sở hữu bao lâu?', 'Thời hạn dự án 50 năm kể từ ngày 17/09/2026 theo GCN đăng ký đầu tư. Công trình cấp I, niên hạn sử dụng 100 năm. Quyền lợi cụ thể của người mua ghi trong Hợp đồng mua bán.'),
         ('Nghị quyết 278/NQ-CP ảnh hưởng gì tới căn hộ 50 năm?', 'Nghị quyết (18/9/2026) xác định thời hạn sử dụng chung cư theo niên hạn công trình và hồ sơ thiết kế, làm rõ quyền và nghĩa vụ khi hết thời hạn, tách bạch quyền sở hữu căn hộ và quyền sử dụng đất – qua đó thu hẹp khoảng cách giữa sản phẩm 50 năm và căn hộ sở hữu lâu dài.'),
+        ('Hết 50 năm thì căn hộ Sun Saphia ra sao?', '50 năm là thời hạn dự án (thời hạn đất) từ 17/09/2026; khi hết hạn, Luật Đất đai 2024 cho phép xem xét gia hạn nếu sử dụng đúng mục đích. Toà nhà là công trình cấp I, niên hạn 100 năm. Quyền lợi cụ thể theo quy định tại thời điểm đó và Hợp đồng mua bán.'),
+        ('Hết niên hạn công trình có bị mất nhà không?', 'Theo Luật Nhà ở 2023, hết niên hạn không tự động mất quyền sở hữu. Toà nhà được kiểm định: còn an toàn thì tiếp tục sử dụng; không an toàn thì cải tạo, xây lại và chủ sở hữu được bồi thường, tái định cư hoặc nhận căn hộ mới theo phương án được duyệt.'),
         ('Dự án đã có giấy tờ gì?', 'GCN đăng ký đầu tư mã dự án 2572746483 do Sở Tài chính TP Đà Nẵng cấp, chứng nhận lần đầu 17/09/2026. Các giấy tờ tiếp theo theo tiến độ chủ đầu tư công bố.'),
         ('Khi nào được ký hợp đồng mua bán?', 'Theo quy trình và chính sách chủ đầu tư công bố khi mở bán (dự kiến cuối 11/2026). Đại lý chính thức sẽ hướng dẫn từng bước giữ chỗ – đặt cọc – ký hợp đồng.'),
         ('Mua qua TATILAND có an toàn không?', 'TATILAND được Sun Property chứng nhận là đại lý phân phối chính thức ngày 23/10/2026; giao dịch theo đúng quy trình, hợp đồng của chủ đầu tư.')])
@@ -321,8 +323,25 @@ def phap_ly():
           '<p>Với Sun Saphia Residence, công trình được xếp <b>cấp I, niên hạn sử dụng 100 năm</b>. Quyền lợi cụ thể của người mua khi hết thời hạn dự án sẽ theo quy định pháp luật và Hợp đồng mua bán; anh/chị nên đọc kỹ điều khoản này khi ký.</p>'
           '<h3>Khi ký Hợp đồng mua bán nên xem kỹ</h3><ul class="ck"><li>Điều khoản thời hạn sở hữu và quyền lợi khi hết hạn</li><li>Tiến độ thanh toán, bàn giao, phạt chậm bàn giao</li><li>Phí quản lý, quy định cho thuê căn hộ</li></ul>'
           '<p class="note">Nội dung mang tính giải thích chung, không thay thế tư vấn pháp lý.</p></div>' + nq278() + '</div></div></section>')
-    b += ('<section class="sec alt"><div class="wrap">' + sh('3', 'Tiến độ', 'Mốc thời gian <b>dự án</b>', 'y') + timeline() + '</div></section>')
-    b += ('<section class="sec"><div class="wrap">' + sh('4', 'Mua ở đâu', 'Mua qua <b>đại lý phân phối chính thức</b>', 'o') + daily() +
+    b += ('<section class="sec alt" id="het-han"><div class="wrap">' + sh('3', 'Hết hạn thì sao?', 'Hết 50 năm, hết niên hạn – <b>quyền lợi người mua</b>', 'o') +
+          '<div class="g2" style="align-items:start"><div class="txt just">'
+          '<p>Nhiều người nhầm hai mốc thời gian. Với Sun Saphia Residence:</p>'
+          + tbl(['Mốc', 'Sun Saphia', 'Nghĩa là gì'], [['Thời hạn dự án', '50 năm từ 17/09/2026', 'Thời hạn sử dụng đất của dự án theo GCN đầu tư'], ['Niên hạn công trình', '100 năm (công trình cấp I)', 'Tuổi thọ thiết kế của toà nhà']]) +
+          '<h3 style="margin-top:18px">Khi hết niên hạn công trình</h3>'
+          '<p>Theo Luật Nhà ở 2023, thời hạn sử dụng chung cư được xác định theo hồ sơ thiết kế và kết luận kiểm định. Hết niên hạn, UBND cấp tỉnh tổ chức <b>kiểm định chất lượng</b>:</p>'
+          '<ul class="ck"><li><b>Còn an toàn</b>: tiếp tục sử dụng theo thời hạn ghi trong kết luận kiểm định.</li>'
+          '<li><b>Không còn an toàn</b>: phá dỡ để cải tạo, xây dựng lại; chủ sở hữu được bồi thường, tái định cư hoặc nhận căn hộ mới, giá trị tương ứng theo phương án được duyệt.</li>'
+          '<li>Luật hiện hành <b>không quy định tự động mất quyền sở hữu</b> khi hết niên hạn.</li></ul>'
+          '<h3>Khi hết thời hạn dự án 50 năm</h3>'
+          '<p>Luật Đất đai 2024 cho phép người sử dụng đất có thời hạn <b>được xem xét gia hạn</b> khi có nhu cầu, sử dụng đúng mục đích và chấp hành pháp luật. Cách gia hạn và nghĩa vụ tài chính đối với từng căn hộ theo quy định tại thời điểm đó và điều khoản trong Hợp đồng mua bán.</p>'
+          '<p class="note">Nội dung mang tính giải thích chung, không thay thế tư vấn pháp lý. Đọc thêm: '
+          '<a href="https://thuvienphapluat.vn/chinh-sach-phap-luat-moi/vn/ho-tro-phap-luat/tu-van-phap-luat/57443/thoi-han-su-dung-nha-chung-cu-theo-luat-nha-o-2023" target="_blank" rel="noopener">Thời hạn sử dụng nhà chung cư theo Luật Nhà ở 2023 (Thư viện Pháp luật)</a> · '
+          '<a href="https://dantri.com.vn/bat-dong-san/luat-su-chung-cu-co-nien-han-khong-dong-nghia-het-quyen-khi-het-han-20260805121957957.htm" target="_blank" rel="noopener">Chung cư có niên hạn không đồng nghĩa “hết quyền” khi hết hạn (Dân trí)</a></p>'
+          '</div><div class="card" style="padding:22px"><span class="n">KHI KÝ HỢP ĐỒNG</span><h3 class="oc">3 điều khoản cần đọc kỹ</h3>'
+          '<ul class="ck" style="margin-top:10px"><li>Thời hạn sở hữu căn hộ và quyền gia hạn khi hết 50 năm</li><li>Trách nhiệm của chủ đầu tư, ban quản trị khi kiểm định, cải tạo toà nhà</li><li>Nghĩa vụ tài chính phát sinh (nếu có) khi gia hạn</li></ul>'
+          '<button type="button" class="btn sm" data-pop data-interest="Pháp lý – hỏi về hết hạn 50 năm" style="margin-top:12px">Nhận giải thích từ đại lý</button></div></div></div></section>')
+    b += ('<section class="sec alt"><div class="wrap">' + sh('4', 'Tiến độ', 'Mốc thời gian <b>dự án</b>', 'y') + timeline() + '</div></section>')
+    b += ('<section class="sec"><div class="wrap">' + sh('5', 'Mua ở đâu', 'Mua qua <b>đại lý phân phối chính thức</b>', 'o') + daily() +
           '<div class="g4" style="margin-top:24px"><div class="card"><span class="n">BƯỚC 1</span><h3 class="oc">Đăng ký</h3><p>Để lại số Zalo, nhận tài liệu, mặt bằng. Không thu tiền.</p></div>'
           '<div class="card"><span class="n">BƯỚC 2</span><h3 class="oc">Nhận bảng giá</h3><p>Bảng giá, chính sách gốc khi chủ đầu tư công bố; chọn căn trên mặt bằng.</p></div>'
           '<div class="card"><span class="n">BƯỚC 3</span><h3 class="oc">Giữ chỗ / đặt cọc</h3><p>Theo quy trình chủ đầu tư tại sự kiện mở bán; tiền chuyển vào tài khoản theo hướng dẫn chính thức.</p></div>'
