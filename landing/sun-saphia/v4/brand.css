@@ -478,3 +478,16 @@ body{padding-bottom:84px}
 .sodo-l img{border-radius:20px}
 @media(min-width:901px){.sodo-l{display:block}.vt{display:flex!important;align-items:center;gap:24px}.vt .kn,.vt .sodo{display:none}.vt>div{display:flex;align-items:center;gap:28px}.vt>div p{margin:0!important;flex:1}.vt .btn{flex:none}}
 .just td,.just th{text-align:left}
+.hhr{display:flex;flex-direction:column;gap:18px}
+@media(min-width:901px){.hhr{position:sticky;top:90px}}
+.hfl{background:#fff;border-radius:18px;padding:20px 22px;box-shadow:var(--sh)}
+.hfl .n{display:block;margin-bottom:12px}
+.hfl .fs{background:var(--pp,#F4F7FB);border-radius:14px;padding:12px 14px;font-weight:700;font-size:15px;color:var(--nv);text-align:center;line-height:1.45}
+.hfl .fs small{display:block;font-weight:600;font-size:12.5px;color:var(--mut)}
+.hfl .fs b{display:block}
+.hfl .fa{text-align:center;color:var(--or);font-size:18px;line-height:1.3}
+.hfl .fb{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.hfl .fb .fs{font-weight:600;font-size:14px}
+.hfl .ok{border:2px solid #2f9e6a}.hfl .ok b{color:#2f9e6a}
+.hfl .no{border:2px solid var(--or)}.hfl .no b{color:var(--or)}
+.hfl .gr{border:2px dashed var(--nv)}
