@@ -993,7 +993,7 @@ function crmEnsureEvidenceFolders_() {
     var root = DriveApp.getFolderById(id);
     EVIDENCE_CHANNELS.forEach(function (ch) {
       var f = crmSubFind_(root, ch);
-      if (f && !crmSubFind_(f, p.khoa || p.ten)) f.createFolder(p.khoa || p.ten);
+      if (f && crmEvidenceLevels_(root, p, '').project && !crmSubFind_(f, p.khoa || p.ten)) f.createFolder(p.khoa || p.ten);
     });
   });
   cache.put('evFolders', '1', 21600);
@@ -1013,12 +1013,36 @@ function crmSubFind_(parent, name) {
  */
 function crmEvidenceFolder_(project, meta) {
   var root = DriveApp.getFolderById(crmFolderId_(project.thuMucChungTu) || EVIDENCE_ROOT);
+  var lv = crmEvidenceLevels_(root, project, meta.tuan);
   var byChannel = SHEET_PLATFORMS.some(function (p) { return crmSubFind_(root, p); });
+  var f = root;
   if (byChannel) {
-    var ch = crmSubFind_(root, meta.nenTang || 'Facebook') || crmSub_(root, meta.nenTang === 'Đăng tin' ? 'Kênh đăng tin' : meta.nenTang || 'Khác');
-    return crmSub_(crmSub_(crmSub_(ch, crmWeekFolder_(meta.tuan)), project.khoa || project.ten), meta.nhanSu || 'Chưa gán');
+    // <Kênh>[/<Tuần>][/<Dự án>]/<Nhân sự>
+    f = crmSubFind_(root, meta.nenTang || 'Facebook') || crmSub_(root, meta.nenTang === 'Đăng tin' ? 'Kênh đăng tin' : meta.nenTang || 'Khác');
+    if (lv.week) f = crmSub_(f, crmWeekFolder_(meta.tuan));
+    if (lv.project) f = crmSub_(f, project.khoa || project.ten);
+    return crmSub_(f, meta.nhanSu || 'Chưa gán');
   }
-  return crmSub_(crmSub_(crmSub_(root, meta.nhanSu || 'Chưa gán'), project.khoa || project.ten), crmWeekFolder_(meta.tuan));
+  f = crmSub_(f, meta.nhanSu || 'Chưa gán');
+  if (lv.project) f = crmSub_(f, project.khoa || project.ten);
+  return lv.week ? crmSub_(f, crmWeekFolder_(meta.tuan)) : f;
+}
+/**
+ * Có cần thư mục con Tuần / Dự án không:
+ * - thư mục chứng từ riêng của dự án (vd "Sun FourS Tower ( F2)") -> không cần thư mục Dự án
+ * - thư mục đó (hoặc thư mục cha) đã là thư mục của đúng tuần (vd "Tuần 3 ( 17.10.2026 - 23.10.2026)") -> không cần thư mục Tuần
+ */
+function crmEvidenceLevels_(root, project, tuan) {
+  var id = root.getId();
+  var own = crmRows_('DuAn').filter(function (p) { return crmFolderId_(p.thuMucChungTu) === id; }).length <= 1;
+  var names = [root.getName()];
+  try { var ps = root.getParents(); if (ps.hasNext()) names.push(ps.next().getName()); } catch (e) { /* không xem được thư mục cha */ }
+  var t = String(tuan || '').split('-').map(Number);
+  var sameWeek = !!tuan && names.some(function (n) {
+    var m = /(\d{1,2})[\/.](\d{1,2})(?:[\/.]\d{4})?\s*[-–—]\s*(\d{1,2})[\/.](\d{1,2})/.exec(n || '');
+    return m && +m[1] === t[2] && +m[2] === t[1];
+  });
+  return { project: !own, week: !sameWeek };
 }
 
 /** Lưu ảnh chứng từ vào Thư mục chứng từ/Nhân sự/Dự án/Tuần và ghi vào bảng ChungTu. */
