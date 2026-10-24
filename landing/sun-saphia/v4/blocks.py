@@ -213,7 +213,8 @@ def values4():
             '<div class="card"><h3 class="oc">Đầu tư</h3><p>Cho thuê tốt, thương hiệu Sun Group</p></div></div>')
 
 def related(cur):
-    it = [('/bang-gia', 'Giá Sun Saphia Residence', 'So sánh giá căn hộ mặt biển, vay ngân hàng'),
+    it = [('/vi-sao-sun-group', 'Vì sao căn hộ mặt biển', 'Vì sao Sun Group chọn mặt biển Đà Nẵng'),
+          ('/bang-gia', 'Giá Sun Saphia Residence', 'So sánh giá căn hộ mặt biển, vay ngân hàng'),
           ('/mat-bang', 'Mặt bằng & chọn căn', 'Layout tầng 3A–28, Studio, 1BR+, 2BR'),
           ('/phap-ly', 'Pháp lý & tiến độ', 'GCN đầu tư, thời hạn 50 năm, mốc mở bán'),
           ('/cho-thue', 'Cho thuê & dòng tiền', 'Giá thuê, lấp đầy, nhóm khách thuê'),

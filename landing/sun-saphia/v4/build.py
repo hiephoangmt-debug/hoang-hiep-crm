@@ -444,10 +444,76 @@ def tinh_dong_tien():
     return page('/tinh-dong-tien', title, desc, 'tính dòng tiền căn hộ, cho thuê căn hộ đà nẵng, lợi nhuận cho thuê studio, airbnb đà nẵng, sun saphia cho thuê',
                 b, [article_ld(title, desc, MAIN + '/tinh-dong-tien'), cld, fld], '/tinh-dong-tien')
 
+def vi_sao():
+    P = '/vi-sao-sun-group'
+    hero, cld = sub_hero(P, 'Vì sao mặt biển', 'Vì sao Sun Group ra mắt <b>căn hộ mặt biển đầu tiên</b> tại Đà Nẵng?',
+                         'Sun Saphia Residence là dự án căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, ra mắt tại Kick-off 23/10/2026. Bài viết phân tích 6 lý do khiến thời điểm này và vị trí này phù hợp: '
+                         'quỹ đất mặt biển gần như cạn, du lịch Đà Nẵng tăng gần 30%, hạ tầng trục biển và đường sắt đô thị, dân số mới sau sáp nhập, lãi suất đi xuống và nhu cầu căn hộ nhỏ để ở – cho thuê.',
+                         'thap-tren-cao-ngay', 'Sun Saphia Residence trên trục biển Võ Nguyên Giáp – Trường Sa nhìn từ trên cao', 'Web – vì sao mặt biển đầu trang')
+    fq, fld = faq([
+        ('Sun Saphia Residence có phải căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng?', 'Đúng. Dự án do Sun Property – thành viên Tập đoàn Sun Group – phát triển, được giới thiệu tại Kick-off 23/10/2026 là dự án căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, trên trục Võ Nguyên Giáp – Trường Sa, cách bãi tắm Sơn Thủy khoảng 400 m.'),
+        ('Vì sao căn hộ mặt biển ở Đà Nẵng hiếm?', 'Biển là tài nguyên hữu hạn; dải đất ven biển Đà Nẵng phần lớn đã dành cho resort, khách sạn và không gian công cộng. Bãi biển là tài sản công, nên căn hộ có thể nhìn thẳng ra biển và đi bộ ra bãi tắm chỉ còn rất ít vị trí.'),
+        ('Căn hộ mặt biển Đà Nẵng đang chào bán giá bao nhiêu?', 'Theo giá chào bán trình bày tại Kick-off: studio khoảng 5,2–10,5 tỷ, 1BR 7,7–11,5 tỷ, 2BR 17,4–21,7 tỷ tùy dự án (The Soleil, Futa Residence, Nobu). Giá Sun Saphia Residence chưa công bố, dự kiến cuối 11/2026.'),
+        ('Mua căn hộ mặt biển để cho thuê có tốt không?', 'Đà Nẵng đón 15,86 triệu lượt khách 9 tháng đầu 2026 (+29,6%); khách sạn Sun Group miền Trung lấp đầy 81,3% năm 2026. Studio view biển đang cho thuê 2,2–2,9 triệu/đêm ngoài mùa cao điểm. Kết quả thực tế phụ thuộc giá mua, mùa vụ và cách vận hành.'),
+        ('Khi nào mở bán Sun Saphia Residence?', 'Dự kiến cuối tháng 11/2026, bàn giao tháng 11/2028. Đăng ký nhận thông tin, bảng giá là miễn phí.')])
+    b = hero
+    b += tldr('vì sao Sun Group ra mắt căn hộ mặt biển tại Đà Nẵng', [
+        ('1. Quỹ đất', 'Đất mặt biển Đà Nẵng gần như cạn; khu Saphia là một trong rất ít vị trí căn hộ đi bộ ra biển (~400 m)'),
+        ('2. Du lịch', '15,86 triệu lượt khách 9 tháng 2026 (+29,6%); Đà Nẵng là 1 trong 3 cực tăng trưởng du lịch cả nước'),
+        ('3. Hạ tầng', 'Mở rộng trục biển 2.633 tỷ; ga LRT 09 cách ~500 m; Khu thương mại tự do Đà Nẵng'),
+        ('4. Dân số', '~3 triệu dân sau sáp nhập Quảng Nam; di cư ròng 15–16 nghìn người/năm'),
+        ('5. Thời điểm', 'Lãi suất cho vay đồng loạt giảm 10/2026; Nghị quyết 278/NQ-CP định hình lại giá trị căn hộ 50 năm'),
+        ('6. Sản phẩm', 'Studio, 1BR+ diện tích gọn, vốn vừa sức, hợp để ở và cho thuê – 513/782 căn là Studio')])
+    b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Quỹ đất', 'Đất mặt biển Đà Nẵng – <b>gần như không còn</b>', 'o') +
+          '<div class="g2"><div class="txt just"><p>Biển là tài nguyên hữu hạn. Dải đất ven biển Đà Nẵng từ Sơn Trà về Hội An phần lớn đã thuộc về resort, khách sạn và không gian công cộng; '
+          'bãi biển và vùng nước biển là tài sản công do Nhà nước quản lý. Vì vậy những vị trí <b>căn hộ để ở</b> mà đi bộ được ra biển là rất hiếm.</p>'
+          '<p>Sun Saphia Residence nằm ở giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, trên khu đất 3.720,1 m², cách bãi tắm Sơn Thủy khoảng 400 m qua công viên ven biển. '
+          'Phía trước, thành phố chủ trương thu hồi khoảng <b>2,45 ha</b> đất của dự án Hòn Ngọc Á Châu bỏ hoang để làm công viên công cộng – tầm nhìn ra biển được giữ thoáng.</p>'
+          '<ul class="ck"><li>Trước mặt là biển Mỹ Khê – Sơn Thủy</li><li>Sau lưng là sông Hàn, bên cạnh là Ngũ Hành Sơn</li><li>Chuỗi 3 công viên bãi tắm: Sơn Thủy, công viên đối diện, Huyền Trân Công Chúa</li></ul></div>'
+          + fig('bai-bien-hien-huu', 'Bãi biển hiện hữu trước khu Saphia, Đà Nẵng', 'Bãi biển hiện hữu trước khu Saphia') + '</div></div></section>')
+    b += ('<section class="sec"><div class="wrap">' + sh('2', 'Từ sông ra biển', 'Bước tiếp theo của Sun Group <b>tại Đà Nẵng</b>', 'n') +
+          '<div class="txt just"><p>Sun Group gắn bó với Đà Nẵng qua Bà Nà Hills, InterContinental Danang Sun Peninsula Resort và các dự án căn hộ ven sông Hàn như Sun Cosmo Residence, Sun Symphony Residence, Sun Ponte Residence. '
+          'Sun Saphia Residence là lần đầu tập đoàn đưa dòng căn hộ ra <b>mặt biển</b>, trên “cung đường tỷ đô” nối chuỗi resort Đà Nẵng – Hội An.</p>'
+          '<p>Kiến trúc lấy cảm hứng từ điêu khắc Chăm Pa và vũ nữ Apsara: khối tháp 30 tầng (114 m), mặt dài hướng biển, mặt đứng kính xanh nhạt với ban công và trụ màu đồng – một biểu tượng mới bên biển Đà Nẵng.</p></div>'
+          '<p class="note">Phần phân tích là góc nhìn của đại lý phân phối TATILAND dựa trên tài liệu Kick-off và số liệu công bố, không phải phát biểu chính thức của chủ đầu tư.</p></div></section>')
+    b += ('<section class="sec alt"><div class="wrap">' + sh('3', 'Du lịch', 'Du lịch Đà Nẵng <b>tăng gần 30%</b>', 'y') +
+          '<div class="stats"><div><b>15,86 triệu</b><span>lượt khách 9 tháng 2026 · +29,6%</span></div><div><b>7,69 triệu</b><span>khách quốc tế · +28,9%</span></div>'
+          '<div><b>52.945 tỷ</b><span>doanh thu du lịch · +26,2%</span></div><div><b>81,3%</b><span>lấp đầy khách sạn Sun Group miền Trung 2026</span></div></div>'
+          '<div class="g2" style="margin-top:22px"><div class="txt just"><p>Nghị quyết 26 xác định Đà Nẵng là 1 trong 3 cực tăng trưởng du lịch cùng Hà Nội và TP.HCM. Mục tiêu đến 2030 của cả nước: 45–50 triệu lượt khách quốc tế và 80–90 tỷ USD doanh thu du lịch.</p>'
+          '<p>Khách ngày càng ưu tiên chỗ ở phía biển. Studio view biển Đà Nẵng đang cho thuê <b>2,2–2,9 triệu/đêm</b>, 1BR+ <b>3,4–3,7 triệu/đêm</b> ngoài mùa cao điểm – nền cầu thuê cho căn hộ mặt biển.</p>'
+          '<a class="lk" href="{M}/cho-thue">Xem dòng tiền cho thuê →</a></div>'
+          + fig('khach-du-lich', 'Khách du lịch trên bãi biển Đà Nẵng', 'Khách du lịch đến Đà Nẵng vì biển') + '</div>'
+          '<p class="src">Nguồn: Sở VH-TT-DL, Cục Thống kê TP Đà Nẵng (9 tháng 2026) · Sun Group · theo tài liệu Kick-off.</p></div></section>')
+    b += ('<section class="sec"><div class="wrap">' + sh('4', 'Hạ tầng', 'Hạ tầng <b>mở đường</b> cho trục biển', 'o') +
+          '<div class="g3"><div class="card"><span class="n">TRỤC BIỂN</span><h3 class="oc">2.633 tỷ</h3><p>Mở rộng đường Võ Nguyên Giáp, Trường Sa, Lạc Long Quân – trục chính trước dự án.</p></div>'
+          '<div class="card"><span class="n">ĐƯỜNG SẮT ĐÔ THỊ</span><h3 class="oc">~500 m tới ga LRT 09</h3><p>Tuyến sân bay – Hội An, giai đoạn 1 dự kiến khởi công 2/2027.</p></div>'
+          '<div class="card"><span class="n">KHU THƯƠNG MẠI TỰ DO</span><h3 class="oc">QĐ 1142/QĐ-TTg</h3><p>Khu thương mại tự do Đà Nẵng (6/2025) kéo theo chuyên gia, doanh nghiệp; Galaxy – Downtown cách 4 km.</p></div></div>'
+          '<div class="g2" style="margin-top:20px">' + fig('mo-rong-duong-bien', 'Tuyến đường ven biển Võ Nguyên Giáp – Trường Sa được mở rộng', 'Trục biển Võ Nguyên Giáp – Trường Sa mở rộng (2.633 tỷ)')
+          + fig('lrt-ban-do', 'Bản đồ quy hoạch tuyến đường sắt đô thị sân bay – Hội An đi qua khu Ngũ Hành Sơn', 'Tuyến đường sắt đô thị sân bay – Hội An (quy hoạch)') + '</div></div></section>')
+    b += ('<section class="sec alt"><div class="wrap">' + sh('5', 'Dân số', 'Đà Nẵng mới – <b>~3 triệu dân</b>', 'n') + migration() + '</div></section>')
+    b += ('<section class="sec"><div class="wrap">' + sh('6', 'Thời điểm', 'Lãi suất giảm, <b>chính sách mở</b>', 'y') +
+          '<div class="g2"><div class="txt just"><p>Tháng 10/2026, Ngân hàng Nhà nước yêu cầu giảm lãi suất; Agribank, Vietcombank, BIDV, MB, ACB, Sacombank… đồng loạt giảm lãi suất cho vay. '
+          'Tín dụng khách sạn, khu nghỉ dưỡng được tách khỏi dư nợ bất động sản để thúc đẩy du lịch nghỉ dưỡng.</p>'
+          '<p>Nghị quyết 278/NQ-CP (18/9/2026) xác định thời hạn sử dụng chung cư theo niên hạn công trình – Sun Saphia Residence là công trình cấp I, niên hạn 100 năm, thời hạn dự án 50 năm.</p>'
+          '<a class="lk" href="{M}/phap-ly">Xem pháp lý chi tiết →</a></div>' + nq278() + '</div></div></section>')
+    b += ('<section class="sec alt"><div class="wrap">' + sh('7', 'Sản phẩm', 'Căn nhỏ – <b>vừa túi tiền, dễ cho thuê</b>', 'o') +
+          '<div class="txt just"><p>Thay vì căn lớn giá chục tỷ như phần lớn căn hộ ven biển đang chào bán, Sun Saphia Residence tập trung căn gọn: <b>513 Studio 30–31 m²</b>, 108 căn 1BR+ 50–51 m², 133 căn 2BR 60–70 m², trần cao 3,5 m. '
+          'Vốn vào vừa sức người trẻ, người mua second home và nhà đầu tư cho thuê.</p></div>' + price_table() +
+          '<p style="margin-top:14px"><a class="lk" href="{M}/bang-gia">Xem bảng giá &amp; tính vay →</a> · <a class="lk" href="{M}/mat-bang">Chọn căn trên mặt bằng →</a></p></div></section>')
+    b += ('<section class="sec" id="hoi-dap"><div class="wrap">' + sh('?', 'Hỏi đáp', 'Hỏi đáp: <b>căn hộ mặt biển</b> Sun Group Đà Nẵng', 'n') + fq +
+          '<h3 style="margin-top:26px">Xem thêm</h3>' + related(P) + '</div></section>')
+    b = bands_at(b, [(2, band('Căn hộ mặt biển có hạn – đợt đầu chọn căn đẹp nhất', 'Nhận bảng giá gốc và mặt bằng căn trống qua Zalo.', 'Nhận bảng giá sớm', 'Vì sao mặt biển – giữa trang', ('/bang-gia', 'Xem bảng giá'))),
+                     (5, band('Muốn biết căn nào cho thuê tốt nhất?', 'Nhận bảng tính dòng tiền theo căn anh/chị quan tâm.', 'Nhận bảng tính', 'Vì sao mặt biển – dòng tiền', ('/tinh-dong-tien', 'Tự tính dòng tiền')))])
+    b += cta_block('Web – vì sao mặt biển cuối trang', title='Sở hữu căn hộ <b>mặt biển đầu tiên</b> của Sun Group tại Đà Nẵng')
+    title = 'Vì sao Sun Group ra mắt căn hộ mặt biển đầu tiên tại Đà Nẵng? | Sun Saphia Residence'
+    desc = 'Vì sao Sun Group chọn Đà Nẵng cho căn hộ mặt biển đầu tiên Sun Saphia Residence: quỹ đất biển khan hiếm, du lịch +29,6%, hạ tầng 2.633 tỷ, LRT, 3 triệu dân, lãi suất giảm.'
+    return page(P, title, desc, 'căn hộ mặt biển đầu tiên sun group, vì sao sun group đà nẵng, căn hộ mặt biển đà nẵng, sun saphia residence, sun group đà nẵng',
+                b, [article_ld(title, desc, MAIN + P), cld, fld], P)
+
 if __name__ == '__main__':
     import os
     os.makedirs(OUT, exist_ok=True)
-    out = {'trang-chu.html': home(), 'bang-gia.html': bang_gia(), 'mat-bang.html': mat_bang(), 'phap-ly.html': phap_ly(), 'cho-thue.html': cho_thue(), 'tinh-dong-tien.html': tinh_dong_tien(),
+    out = {'trang-chu.html': home(), 'bang-gia.html': bang_gia(), 'mat-bang.html': mat_bang(), 'phap-ly.html': phap_ly(), 'cho-thue.html': cho_thue(), 'tinh-dong-tien.html': tinh_dong_tien(), 'vi-sao-sun-group.html': vi_sao(),
            'ads.html': ads(MAIN), 'ads-shaphia.html': ads('https://www.sun-shaphiaresidence.com')}
     # Trang chủ tên miền phụ: cùng nội dung, chuẩn hóa về tên miền chính để tránh trùng nội dung
     out['shaphia.html'] = out['trang-chu.html']
