@@ -294,5 +294,62 @@ HTML
 		),
 	);
 
+	/* ---------------- 27/10 – Giá đất Nam Việt Á ---------------- */
+	$posts[] = array(
+		'slug'     => 'gia-dat-nam-viet-a-da-nang-10-2026',
+		'title'    => 'Giá đất Nam Việt Á Đà Nẵng tháng 10/2026: lô ống, biệt thự, lô góc theo từng tuyến đường',
+		'excerpt'  => 'Bảng giá đất Nam Việt Á (KĐT sinh thái Nam cầu Tuyên Sơn) 10/2026: lô ống 7,35 – 12 tỷ (77 – 120 triệu/m²), biệt thự 84 – 102 triệu/m², Chương Dương ven sông tới 193 triệu/m², lô góc 22 – 27,5 tỷ.',
+		'keyword'  => 'giá đất Nam Việt Á',
+		'keywords_extra' => array( 'đất Nam Việt Á', 'khu đô thị Nam Việt Á', 'biệt thự Nam Việt Á', 'Nam cầu Tuyên Sơn' ),
+		'project'  => 'khu-do-thi-nam-viet-a',
+		'schedule' => '2026-10-27 11:00',
+		'category' => 'Thị trường',
+		'tags'     => array( 'Nam Việt Á', 'Đất nền Đà Nẵng', 'Ngũ Hành Sơn' ),
+		'image'    => 'plugin:img/tin-tuc/gia-dat-nam-viet-a-10-2026.jpg',
+		'image_alt' => 'Biểu đồ giá chào bán mỗi m² đất Nam Việt Á theo lô ống, biệt thự, lô góc tháng 10/2026',
+		'content'  => <<<HTML
+<p><strong>Giá đất Nam Việt Á</strong> tháng 10/2026 chênh nhau rất rõ theo loại lô và tuyến đường. Hoàng Hiệp tổng hợp các lô đang chào bán tại <a href="/du-an/khu-do-thi-nam-viet-a/">Khu đô thị Nam Việt Á</a> (Khu đô thị sinh thái Nam cầu Tuyên Sơn, Ngũ Hành Sơn) và tính giá mỗi m² để anh chị dễ so sánh.</p>
+<!--hh-featured-->
+<h2>Tóm tắt giá đất Nam Việt Á 10/2026</h2>
+<table>
+<thead><tr><th>Loại lô</th><th>Diện tích phổ biến</th><th>Giá chào bán</th><th>Khoảng giá/m²</th></tr></thead>
+<tbody>
+<tr><td>Lô ống (liền kề)</td><td>90 – 110 m²</td><td>7,35 – 12 tỷ</td><td>77 – 120 triệu</td></tr>
+<tr><td>Đất biệt thự trong khu</td><td>182 – 334 m²</td><td>16 – 32 tỷ</td><td>84 – 102 triệu</td></tr>
+<tr><td>Biệt thự mặt tiền Chương Dương</td><td>300 – 600 m²</td><td>58 – 100 tỷ</td><td>167 – 193 triệu</td></tr>
+<tr><td>Lô góc</td><td>170 – 257 m²</td><td>22 – 27,5 tỷ</td><td>92 – 141 triệu</td></tr>
+</tbody>
+</table>
+<h2>Lô ống: rẻ nhất Tuy Lý Vương, đắt nhất Trần Hữu Độ</h2>
+<p>Nhóm dưới 8,5 tỷ gồm Tuy Lý Vương 95 m² (7,35 tỷ, sát góc), Nguyễn Thế Kỷ 95 m² (7,5 tỷ), Nước Mặn 5 95 m² (7,x tỷ, đối diện dãy biệt thự), Trịnh Lỗi 100 m² (8 tỷ, gần đường điện), Trương Công Hy 105 m² (8,5 tỷ, có thương lượng). Nhóm trên 9 tỷ: Mỹ Đa Tây 4 view công viên, Đoàn Khuê, Nghiêm Xuân Yêm, Lê Hy Cát 100 m² (10,2 tỷ) và Trần Hữu Độ 100 m² (12 tỷ – khoảng 120 triệu/m²).</p>
+<h2>Đất biệt thự: Chương Dương ven sông gấp đôi trong khu</h2>
+<p>Đất biệt thự trong khu như Nước Mặn 1 (182,5 m², 16 tỷ), Nghiêm Xuân Yêm (285 m², 24 tỷ), Bùi Tá Hán (250 m², 25,5 tỷ), Anh Thơ (300 m², 29 tỷ), Trần Trọng Khiêm (334 m², 32 tỷ) dao động khoảng 84 – 102 triệu/m². Mặt tiền <strong>Chương Dương</strong> nhìn sông là hàng hiếm: 300 m² chào 58 tỷ, 600 m² chào 100 tỷ – khoảng 167 – 193 triệu/m².</p>
+<h2>Lô góc: 22 – 27,5 tỷ</h2>
+<p>Góc Đoàn Khuê – Phạm Tuấn Tài 177 m² đường 11,5 m chào 25 tỷ (có thương lượng, khoảng 141 triệu/m²); góc Lê Văn Thủ – Mỹ Đa Tây 6 170 m² khoảng 22,x tỷ; góc K20 – Nước Mặn 2 241 m² 27,5 tỷ; góc Dương Tử Giang – Đa Phước 8 249 m² 23 tỷ.</p>
+<h2>Đọc giá cho đúng</h2>
+<ul>
+<li>Đây là <strong>giá chào bán</strong>, giá chốt thường thấp hơn sau thương lượng; mặt bằng tin rao trên các sàn cùng thời điểm khoảng 93 – 138 triệu/m².</li>
+<li>Cùng tuyến nhưng khác hướng, khác chiều rộng đường hoặc gần đường điện có thể chênh vài trăm triệu tới hàng tỷ.</li>
+<li>Kiểm tra sổ, chỉ giới, mật độ xây dựng cho phép (lô biệt thự khác lô liền kề) trước khi đặt cọc.</li>
+</ul>
+<p>So sánh thêm khu ven biển cùng quận: <a href="/gia-dat-ven-bien-da-nang-vo-nguyen-giap-hoang-sa/">giá đất ven biển Đà Nẵng</a>. Cần danh sách lô kèm sổ và vị trí, liên hệ <strong>Hoàng Hiệp – 0904 567 009</strong> (gọi/Zalo).</p>
+HTML
+		,
+		'seo'      => array(
+			'seo_title' => 'Giá đất Nam Việt Á 10/2026: lô ống, biệt thự, lô góc',
+			'desc'      => 'Giá đất Nam Việt Á 10/2026: lô ống 7,35 – 12 tỷ (77 – 120 triệu/m²), biệt thự 84 – 102 triệu/m², Chương Dương tới 193 triệu/m², lô góc 22 – 27,5 tỷ.',
+			'points'    => array(
+				'Lô ống 90 – 110 m²: 7,35 – 12 tỷ (77 – 120 triệu/m²)',
+				'Đất biệt thự 84 – 102 triệu/m²; mặt tiền Chương Dương 167 – 193 triệu/m²',
+				'Lô góc 170 – 257 m²: 22 – 27,5 tỷ',
+			),
+			'faq'       => array(
+				array( 'Giá đất Nam Việt Á bao nhiêu một m²?', 'Chào bán 10/2026: lô ống khoảng 77 – 120 triệu/m², đất biệt thự 84 – 102 triệu/m², mặt tiền Chương Dương ven sông 167 – 193 triệu/m², lô góc 92 – 141 triệu/m².' ),
+				array( 'Lô ống Nam Việt Á rẻ nhất bao nhiêu?', 'Trong danh sách 10/2026, Tuy Lý Vương 95 m² chào 7,35 tỷ và Nguyễn Thế Kỷ 95 m² chào 7,5 tỷ là nhóm thấp nhất.' ),
+			),
+		),
+		'sources'  => array( 'https://guland.vn/du-an/khu-do-thi-nam-viet-a-da-nang' ),
+	);
+
 	return $posts;
 }
