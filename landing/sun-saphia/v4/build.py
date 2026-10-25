@@ -309,13 +309,14 @@ def phap_ly():
     fq, fld = faq([
         ('Sun Saphia Residence sở hữu bao lâu?', 'Thời hạn dự án 50 năm kể từ ngày 17/09/2026 theo GCN đăng ký đầu tư. Công trình cấp I, niên hạn sử dụng 100 năm. Quyền lợi cụ thể của người mua ghi trong Hợp đồng mua bán.'),
         ('Nghị quyết 278/NQ-CP ảnh hưởng gì tới căn hộ 50 năm?', 'Nghị quyết (18/9/2026) xác định thời hạn sử dụng chung cư theo niên hạn công trình và hồ sơ thiết kế, làm rõ quyền và nghĩa vụ khi hết thời hạn, tách bạch quyền sở hữu căn hộ và quyền sử dụng đất – qua đó thu hẹp khoảng cách giữa sản phẩm 50 năm và căn hộ sở hữu lâu dài.'),
+        ('Vì sao thời hạn 50 năm của Sun Saphia có lợi hơn?', 'Thời hạn được tính từ 17/09/2026 nên vừa mới bắt đầu, kéo dài tới 09/2076; khi nhận nhà 11/2028 còn khoảng 48 năm. Nhiều dự án 50 năm khác tính từ năm giao đất cách đây 10–15 năm nên người mua chỉ còn khoảng 35–40 năm. Còn nhiều năm hơn thì giữ giá, vay ngân hàng và bán lại đều thuận lợi hơn.'),
         ('Hết 50 năm thì căn hộ Sun Saphia ra sao?', '50 năm là thời hạn dự án (thời hạn đất) từ 17/09/2026; khi hết hạn, Luật Đất đai 2024 cho phép xem xét gia hạn nếu sử dụng đúng mục đích. Toà nhà là công trình cấp I, niên hạn 100 năm. Quyền lợi cụ thể theo quy định tại thời điểm đó và Hợp đồng mua bán.'),
         ('Hết niên hạn công trình có bị mất nhà không?', 'Theo Luật Nhà ở 2023, hết niên hạn không tự động mất quyền sở hữu. Toà nhà được kiểm định: còn an toàn thì tiếp tục sử dụng; không an toàn thì cải tạo, xây lại và chủ sở hữu được bồi thường, tái định cư hoặc nhận căn hộ mới theo phương án được duyệt.'),
         ('Dự án đã có giấy tờ gì?', 'GCN đăng ký đầu tư mã dự án 2572746483 do Sở Tài chính TP Đà Nẵng cấp, chứng nhận lần đầu 17/09/2026. Các giấy tờ tiếp theo theo tiến độ chủ đầu tư công bố.'),
         ('Khi nào được ký hợp đồng mua bán?', 'Theo quy trình và chính sách chủ đầu tư công bố khi mở bán (dự kiến cuối 11/2026). Đại lý chính thức sẽ hướng dẫn từng bước giữ chỗ – đặt cọc – ký hợp đồng.'),
         ('Mua qua TATILAND có an toàn không?', 'TATILAND được Sun Property chứng nhận là đại lý phân phối chính thức ngày 23/10/2026; giao dịch theo đúng quy trình, hợp đồng của chủ đầu tư.')])
     b = hero
-    b += tldr('pháp lý Sun Saphia Residence', [('GCN đăng ký đầu tư', 'Mã dự án 2572746483, Sở Tài chính TP Đà Nẵng cấp, lần đầu 17/09/2026'), ('Thời hạn', '50 năm kể từ 17/09/2026'),
+    b += tldr('pháp lý Sun Saphia Residence', [('GCN đăng ký đầu tư', 'Mã dự án 2572746483, Sở Tài chính TP Đà Nẵng cấp, lần đầu 17/09/2026'), ('Thời hạn', '50 năm kể từ 17/09/2026 – vừa bắt đầu, còn ~48 năm khi nhận nhà 11/2028'),
         ('Công trình', 'Cấp I, niên hạn sử dụng 100 năm'), ('Chính sách mới', 'Nghị quyết 278/NQ-CP (18/9/2026) xác định thời hạn chung cư theo niên hạn công trình'),
         ('Tiến độ', 'Mở bán dự kiến cuối 11/2026 · bàn giao 11/2028'), ('Mua ở đâu', 'Đại lý phân phối chính thức TATILAND (Sun Property chứng nhận 23/10/2026)')])
     b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Giấy tờ dự án', 'Pháp lý <b>đã có</b>', 'o') + legal_box() + '</div></section>')
@@ -325,7 +326,26 @@ def phap_ly():
           '<p>Với Sun Saphia Residence, công trình được xếp <b>cấp I, niên hạn sử dụng 100 năm</b>. Quyền lợi cụ thể của người mua khi hết thời hạn dự án sẽ theo quy định pháp luật và Hợp đồng mua bán; anh/chị nên đọc kỹ điều khoản này khi ký.</p>'
           '<h3>Khi ký Hợp đồng mua bán nên xem kỹ</h3><ul class="ck"><li>Điều khoản thời hạn sở hữu và quyền lợi khi hết hạn</li><li>Tiến độ thanh toán, bàn giao, phạt chậm bàn giao</li><li>Phí quản lý, quy định cho thuê căn hộ</li></ul>'
           '<p class="note">Nội dung mang tính giải thích chung, không thay thế tư vấn pháp lý.</p></div>' + nq278() + '</div></div></section>')
-    b += ('<section class="sec alt" id="het-han"><div class="wrap">' + sh('3', 'Hết hạn thì sao?', 'Hết 50 năm, hết niên hạn – <b>quyền lợi người mua</b>', 'o') +
+    b += ('<section class="sec alt" id="thoi-han-moi"><div class="wrap">' + sh('3', 'Lợi thế thời hạn', 'Đồng hồ 50 năm <b>vừa mới bắt đầu</b>', 'y') +
+          '<div class="g2" style="align-items:start"><div class="txt just">'
+          '<p>Cùng là căn hộ 50 năm, nhưng <b>còn lại bao nhiêu năm</b> mới là điều quyết định giá trị. Thời hạn 50 năm của Sun Saphia Residence được tính từ <b>17/09/2026</b> theo Giấy chứng nhận đăng ký đầu tư – tức là vừa mới bắt đầu, kéo dài tới <b>09/2076</b>.</p>'
+          '<p>Nhiều dự án căn hộ 50 năm khác ven biển Đà Nẵng có thời hạn tính từ năm được giao đất, thường từ nhiều năm trước. Đồng hồ đã chạy 10–15 năm trước khi khách nhận nhà, nên người mua hôm nay chỉ còn khoảng 35–40 năm.</p>'
+          '<h3>Thời gian còn lại dài hơn nghĩa là gì?</h3><ul class="ck">'
+          '<li><b>Giữ giá tốt hơn</b>: căn hộ còn nhiều năm sử dụng thì giá bán lại cao hơn.</li>'
+          '<li><b>Vay ngân hàng dễ hơn</b>: thời hạn còn lại dài, ngân hàng dễ duyệt khoản vay dài hạn.</li>'
+          '<li><b>Thêm nhiều năm cho thuê</b>: mỗi năm còn lại là thêm một năm dòng tiền.</li>'
+          '<li><b>Bán lại dễ hơn</b>: người mua sau vẫn còn trên 40 năm nếu anh/chị bán sau 5–7 năm.</li></ul>'
+          '<p class="note">Các dự án so sánh là ví dụ minh họa theo năm giao đất, không chỉ đích danh dự án nào. Thời hạn chính thức của từng căn theo Hợp đồng mua bán.</p></div>'
+          '<div class="card" style="padding:22px"><span class="n">THỜI GIAN CÒN LẠI KHI NHẬN NHÀ</span><h3 class="oc" style="margin-bottom:14px">Cùng 50 năm – còn lại khác nhau</h3>'
+          + ''.join('<div style="margin:12px 0"><div style="display:flex;justify-content:space-between;font-size:14px;font-weight:600"><span>%s</span><span style="color:%s">%s</span></div>'
+                    '<div style="height:14px;border-radius:99px;background:#e6ecf4;overflow:hidden;margin-top:6px"><div style="height:100%%;width:%d%%;border-radius:99px;background:%s"></div></div></div>'
+                    % (t, c, v, w, c) for t, v, w, c in [
+                        ('Sun Saphia · từ 09/2026, nhận nhà 11/2028', '~48 năm', 96, '#E96118'),
+                        ('Dự án giao đất 2016 (minh họa)', '~38 năm', 76, '#7a8aa6'),
+                        ('Dự án giao đất 2012 (minh họa)', '~34 năm', 68, '#9aa7bd')]) +
+          '<p style="font-size:13px;color:#5b6b85;margin-top:10px">Tính tới thời điểm nhận nhà 11/2028 · thời hạn 50 năm theo GCN đầu tư/giao đất.</p>'
+          '<button type="button" class="btn sm" data-pop data-interest="Pháp lý – lợi thế thời hạn 50 năm" style="margin-top:8px">Nhận bản sao GCN đầu tư</button></div></div></div></section>')
+    b += ('<section class="sec" id="het-han"><div class="wrap">' + sh('4', 'Hết hạn thì sao?', 'Hết 50 năm, hết niên hạn – <b>quyền lợi người mua</b>', 'o') +
           '<div class="g2" style="align-items:start"><div class="txt just">'
           '<p>Nhiều người nhầm hai mốc thời gian. Với Sun Saphia Residence:</p>'
           + tbl(['Mốc', 'Sun Saphia', 'Nghĩa là gì'], [['Thời hạn dự án', '50 năm từ 17/09/2026', 'Thời hạn sử dụng đất của dự án theo GCN đầu tư'], ['Niên hạn công trình', '100 năm (công trình cấp I)', 'Tuổi thọ thiết kế của toà nhà']]) +
@@ -342,8 +362,8 @@ def phap_ly():
           '</div><div class="hhr"><div class="card" style="padding:22px"><span class="n">KHI KÝ HỢP ĐỒNG</span><h3 class="oc">3 điều khoản cần đọc kỹ</h3>'
           '<ul class="ck" style="margin-top:10px"><li>Thời hạn sở hữu căn hộ và quyền gia hạn khi hết 50 năm</li><li>Trách nhiệm của chủ đầu tư, ban quản trị khi kiểm định, cải tạo toà nhà</li><li>Nghĩa vụ tài chính phát sinh (nếu có) khi gia hạn</li></ul>'
           '<button type="button" class="btn sm" data-pop data-interest="Pháp lý – hỏi về hết hạn 50 năm" style="margin-top:12px">Nhận giải thích từ đại lý</button></div><div class="hfl"><span class="n">QUY TRÌNH KHI HẾT NIÊN HẠN</span><div class="fs">🏢 Hết niên hạn theo hồ sơ thiết kế<small>Điều 58 Luật Nhà ở 2023</small></div><div class="fa">▼</div><div class="fs">🔍 Kiểm định chất lượng toà nhà<small>Cơ quan có thẩm quyền tổ chức</small></div><div class="fa">▼</div><div class="fb"><div class="fs ok"><b>✅ Còn an toàn</b>Tiếp tục sử dụng</div><div class="fs no"><b>⚠️ Không an toàn</b>Cải tạo, xây lại – bồi thường, tái định cư hoặc căn mới<small>Điều 59</small></div></div><div class="fs gr"><b>50 năm thời hạn đất</b>Hết hạn được xem xét gia hạn<small>Luật Đất đai 2024</small></div></div></div></div></div></section>')
-    b += ('<section class="sec alt"><div class="wrap">' + sh('4', 'Tiến độ', 'Mốc thời gian <b>dự án</b>', 'y') + timeline() + '</div></section>')
-    b += ('<section class="sec"><div class="wrap">' + sh('5', 'Mua ở đâu', 'Mua qua <b>đại lý phân phối chính thức</b>', 'o') + daily() +
+    b += ('<section class="sec alt"><div class="wrap">' + sh('5', 'Tiến độ', 'Mốc thời gian <b>dự án</b>', 'y') + timeline() + '</div></section>')
+    b += ('<section class="sec"><div class="wrap">' + sh('6', 'Mua ở đâu', 'Mua qua <b>đại lý phân phối chính thức</b>', 'o') + daily() +
           '<div class="g4" style="margin-top:24px"><div class="card"><span class="n">BƯỚC 1</span><h3 class="oc">Đăng ký</h3><p>Để lại số Zalo, nhận tài liệu, mặt bằng. Không thu tiền.</p></div>'
           '<div class="card"><span class="n">BƯỚC 2</span><h3 class="oc">Nhận bảng giá</h3><p>Bảng giá, chính sách gốc khi chủ đầu tư công bố; chọn căn trên mặt bằng.</p></div>'
           '<div class="card"><span class="n">BƯỚC 3</span><h3 class="oc">Giữ chỗ / đặt cọc</h3><p>Theo quy trình chủ đầu tư tại sự kiện mở bán; tiền chuyển vào tài khoản theo hướng dẫn chính thức.</p></div>'
