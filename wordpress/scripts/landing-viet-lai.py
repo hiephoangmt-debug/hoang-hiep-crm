@@ -56,7 +56,7 @@ def main():
         if v == inner.strip():
             continue  # Không đổi chữ: giữ nguyên khối (kể cả biểu tượng SVG bên trong).
         # Chỉ cho phép thẻ trong dòng (b, a, span…) và biểu tượng SVG; thẻ khác → bỏ.
-        v = re.sub(r'<(?!/?(?:b|strong|i|em|a|span|br|small|sup|sub|mark|u|svg|path|circle|rect|g|line|polyline|polygon|use)\b)[^>]*>', '', v)
+        v = re.sub(r'<(?!/?(?:b|strong|i|em|a|span|br|small|sup|sub|mark|u|output|time|svg|path|circle|rect|g|line|polyline|polygon|use)\b)[^>]*>', '', v)
         parts.append(body[last:a] + v)
         last, n = b, n + 1
     parts.append(body[last:])

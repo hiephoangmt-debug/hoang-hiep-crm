@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.34** + plugin Hoàng Hiệp CRM **2.20.82**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.35** + plugin Hoàng Hiệp CRM **2.20.82**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,14 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.35: trang con Sun Saphia trên hiephoangmt.com
+
+- Bốn mục trên thanh menu Sun Saphia trước nhảy sang sun-saphia-residence.com, nay là trang riêng của web, chữ viết lại (không chép nguyên văn), số liệu giữ nguyên:
+  /du-an/sun-saphia-residence/quy-hoach/ · /cho-thue/ · /tinh-dong-tien/ · /chinh-sach-bao-mat/.
+- Bỏ ảnh không được đăng khỏi trang Sun Saphia và các trang con: ảnh vệ tinh, ảnh chụp giấy chứng nhận đầu tư, bản vẽ quy hoạch chính thức, ảnh stock và ảnh chụp biển của nơi khác. Giữ phối cảnh dự án và sơ đồ tự vẽ.
+- Trợ lý chat trên trang: không còn câu "đại lý chính thức", link quy hoạch trỏ về hiephoangmt.com.
+- Trang con của landing (Sun Saphia, FourS) có trong sitemap /nhadat-sitemap.xml để Google tìm thấy.
 
 ## Có gì mới – plugin 2.20.82, giao diện 2.15.34: ảnh Sun Saphia nét hơn; mô hình 3D/4D hỏi số Zalo sau khi xoay thử
 

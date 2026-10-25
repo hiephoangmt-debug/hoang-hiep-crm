@@ -66,6 +66,17 @@ rep = [
 for a, b in rep:
     body = body.replace(a, b)
 
+# Trợ lý chat của landing: không nói "đại lý chính thức", link về trang của hiephoangmt.com, chữ chìm đổi tên miền.
+for a, b in [
+    ("t: 'Anh/Chị muốn mua đúng kênh chính thức ạ? Em giải thích:', q: ['Mua qua đại lý nào chính thức?', 'Booking bao nhiêu, có hoàn không?']",
+     "t: 'Dạ anh/chị đặt chỗ và ký hợp đồng theo đúng quy trình của chủ đầu tư ạ; Hoàng Hiệp tư vấn chọn căn, tính dòng tiền và hỗ trợ hồ sơ từ đặt chỗ tới ký HĐMB. Anh/chị để lại số Zalo, em gửi quy trình chi tiết nhé.', q: ['Booking bao nhiêu, có hoàn không?', 'Khi nào có giá chính thức?']"),
+    ('Bản vẽ và hồ sơ em để ở sun-saphia-residence.com', 'Thông tin chi tiết em tóm tắt ở sun-saphia-residence.com'),
+    ('Sơ đồ hướng tuyến ở sun-saphia-residence.com', 'Chi tiết hướng tuyến ở sun-saphia-residence.com'),
+    ('sun-saphia-residence.com/quy-hoach', 'hiephoangmt.com/du-an/sun-saphia-residence/quy-hoach'),
+    ('%3Esun-saphia-residence.com · 0904 567 009%3C', '%3Ehiephoangmt.com · 0904 567 009%3C'),
+]:
+    body = body.replace(a, b)
+
 links = {
     '': '/du-an/sun-saphia-residence/',
     'bang-gia': '/gia-sun-saphia-residence-bao-nhieu/',
