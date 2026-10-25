@@ -35,16 +35,18 @@ o.append(f'<path d="{S([(700,345),(735,335),(770,350),(765,385),(725,392),(698,3
 o.append(f'<path d="{S([(455,395),(480,383),(505,398),(495,418),(465,420)])}" fill="#7cc6ea" stroke="#fff" stroke-width="3"/>')
 o.append(f'<path d="{S([(560,600),(595,590),(615,610),(600,640),(570,640)])}" fill="#7cc6ea" stroke="#fff" stroke-width="2"/>')
 # đường
+RC,RF=[],[]
 def road(pts,w):
-    d=S(pts,False); o.append(f'<path d="{d}" fill="none" stroke="#9aa4ad" stroke-width="{w+5}" stroke-linecap="round" stroke-linejoin="round"/><path d="{d}" fill="none" stroke="#fff" stroke-width="{w}" stroke-linecap="round" stroke-linejoin="round"/>')
+    d=S(pts,False); RC.append(f'<path d="{d}" fill="none" stroke="#9aa4ad" stroke-width="{w+5}" stroke-linecap="round" stroke-linejoin="round"/>'); RF.append(f'<path d="{d}" fill="none" stroke="#fff" stroke-width="{w}" stroke-linecap="round" stroke-linejoin="round"/>')
 road([(165,160),(320,192),(600,192),(640,175),(760,140),(1050,120)],12)       # đường phía bắc
 road([(590,62),(630,170),(648,260),(660,420),(668,560),(660,700),(640,885)],20) # Lê Văn Hiến
 road([(1050,122),(1120,230),(1190,340)],12)                                    # đường phía đông
 road([(232,622),(300,598),(330,566),(430,552),(560,556),(668,568)],12)         # trục ngang phía nam
-road([(668,568),(705,630),(760,690),(830,760)],12)         # đường chéo đông nam
+road([(664,566),(705,630),(760,690),(830,760)],12)         # đường chéo đông nam
 road([(240,500),(330,495),(405,495),(500,460),(545,430),(600,440),(660,452)],9)
 road([(660,452),(800,462),(1000,440)],8)
 road([(405,495),(418,530),(430,552)],7)
+o.extend(RC); o.extend(RF)
 # quảng trường & bùng binh
 o.append('<circle cx="545" cy="425" r="40" fill="#f7efe0" stroke="#fff" stroke-width="5"/><circle cx="545" cy="425" r="18" fill="#e8d5b0"/>')
 o.append('<circle cx="405" cy="495" r="17" fill="#fff" stroke="#9aa4ad" stroke-width="3"/>')
