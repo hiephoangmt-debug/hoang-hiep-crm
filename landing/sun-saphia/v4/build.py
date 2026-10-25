@@ -663,7 +663,7 @@ def cong_vien():
           '</div>'
           + ('<figure class="fg" style="margin-top:22px"><img src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 1100px" width="1600" height="1180" '
              'alt="Sơ đồ quy hoạch quanh Sun Saphia Residence: công viên 2,45 ha ngay trước dự án, trục biển Võ Nguyên Giáp – Trường Sa mở rộng, ga đường sắt đô thị cách khoảng 500 m, công viên văn hóa lịch sử Ngũ Hành Sơn cách khoảng 2,5 km" loading="lazy" decoding="async">'
-             '<figcaption>Sơ đồ 4 quy hoạch quanh Sun Saphia – bờ biển, sông theo Google Maps; hướng tuyến đường sắt theo tài liệu Kick-off, minh họa</figcaption></figure>') % ((RAW + 'a4b3cdeba7f6685f4aacd7eb4f528734e0f16adc/landing/sun-saphia/v4/img/so-do-quy-hoach',) * 3)
+             '<figcaption>Sơ đồ 4 quy hoạch quanh Sun Saphia – bờ biển, sông theo Google Maps; hướng tuyến đường sắt theo tài liệu Kick-off, minh họa</figcaption></figure>') % ((RAW + '6132e5c86ad5b3dd3da54636f517d3e283cc1944/landing/sun-saphia/v4/img/so-do-quy-hoach',) * 3)
           + '<p class="src" style="margin-top:12px">Khoảng cách ước tính theo bản đồ; trạng thái từng dự án ghi rõ trong từng mục (đã phê duyệt / đang đề xuất).</p></div></section>')
     H = RAW + 'c0db44c75500ffa5396166a597a896cd3f37b793/landing/sun-saphia/v4/img/'
     def hf(name, w, h, alt, cap, style=''):
