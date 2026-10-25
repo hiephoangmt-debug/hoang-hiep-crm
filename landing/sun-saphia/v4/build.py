@@ -524,7 +524,7 @@ def ads(domain):
     HB = RAW + '90c9302fe8dca2fa597009660b9635821c7d1eb5/landing/sun-saphia/v4/img/hero-bien'
     b = ('<section class="hcv"><div class="hban hvid">'
          '<video class="hv" autoplay muted loop playsinline preload="auto" poster="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/ee46a5171093f0137923551fcb2d6e6593653c16/landing/sun-saphia/v4/vid/poster.webp" aria-label="Video giới thiệu Sun Saphia Residence">'
-         '<source src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@f61cc91a1ee71f0250c83d7df99e4780676de705/landing/sun-saphia/v4/vid/hero-loop.mp4" type="video/mp4"><source src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/f61cc91a1ee71f0250c83d7df99e4780676de705/landing/sun-saphia/v4/vid/hero-loop.mp4" type="video/mp4"></video>'
+         '<source src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@90caec392b0af63292a932603c7848c349558190/landing/sun-saphia/v4/vid/hero-loop.mp4" type="video/mp4"><source src="https://raw.githubusercontent.com/hiephoangmt-debug/hoang-hiep-crm/90caec392b0af63292a932603c7848c349558190/landing/sun-saphia/v4/vid/hero-loop.mp4" type="video/mp4"></video>'
          '<button type="button" class="vplay" data-film><i aria-hidden="true">▶</i><span><b>Xem phim dự án</b><small>3 phút · có tiếng</small></span></button>'
          '<span class="cap">Phim giới thiệu dự án (phối cảnh)</span></div>'
          '<div class="vmod" id="vmod" hidden><div class="vbox"><button type="button" class="vx" aria-label="Đóng">✕</button>'
