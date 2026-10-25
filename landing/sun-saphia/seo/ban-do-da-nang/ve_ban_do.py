@@ -129,6 +129,7 @@ def make(W, H, lon0, lat1, span_lon, fs=1.0, poster=False, qh=False, inset=False
         o.append(icon(108.2330, 16.0715, '🏬', 'Vincom Plaza', 'r'))
         lm = BR['Cầu Tiên Sơn']; o.append(icon(lm[0] - 0.0030, 16.0418, '🛒', 'Lotte Mart', 'l'))
         o.append(icon(108.2095, 16.0717, '🚆', 'Ga Đà Nẵng', 'l'))
+        o.append(lab(108.2440, 16.0505, 'Phố Tây An Thượng', 12, 700, '#7a4a07'))
         o.append(icon(108.2300, 16.1150, '⚓', 'Cảng Tiên Sa', 'l', dx=-2))
         o.append(icon(108.2785, 16.0994, '🛕', 'Chùa Linh Ứng', 'r'))
         o.append(icon(108.1340, 16.1340, '🏭', 'Cảng Liên Chiểu', 'l'))
@@ -200,7 +201,9 @@ def make(W, H, lon0, lat1, span_lon, fs=1.0, poster=False, qh=False, inset=False
     o.append('<text x="%.1f" y="%.1f" text-anchor="middle" dominant-baseline="central" fill="#fff" style="font-size:%.1fpx">★</text>' % (x, y + 0.5, 12 * fs))
     bw, bh = 236 * fs, 58 * fs; px, py = x + 50 * fs, y - bh / 2
     if qh: px = x - bw - 40 * fs; py = y - bh / 2 + (22 * fs if not inset else 0)
-    o.append('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" stroke="#E96118" stroke-width="%.1f"/>' % (px + (bw if qh else 0), py + bh / 2, x + (-11 if qh else 11) * fs, y, 2.5 * fs))
+    left = qh or (px + bw > W - 10)
+    if left and not qh: px = x - bw - 40 * fs
+    o.append('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" stroke="#E96118" stroke-width="%.1f"/>' % (px + (bw if left else 0), py + bh / 2, x + (-11 if left else 11) * fs, y, 2.5 * fs))
     o.append('<g filter="url(#sh)"><rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" rx="%.1f" fill="#E96118"/></g>' % (px, py, bw, bh, 12 * fs))
     o.append('<text x="%.1f" y="%.1f" text-anchor="middle" style="font:800 %.1fpx %s;letter-spacing:1px" fill="#fff">SUN SAPHIA</text>' % (px + bw / 2, py + 26 * fs, 20 * fs, F))
     o.append('<text x="%.1f" y="%.1f" text-anchor="middle" style="font:600 %.1fpx %s" fill="#fff">Võ Nguyên Giáp – Nguyễn Đức Thuận</text>' % (px + bw / 2, py + 46 * fs, 12.5 * fs, F))
@@ -252,4 +255,5 @@ def make(W, H, lon0, lat1, span_lon, fs=1.0, poster=False, qh=False, inset=False
 if __name__ == '__main__':
     (here / 'ban-do-da-nang.svg').write_text(make(1600, 1200, 108.085, 16.212, 0.305, fs=1.35), encoding='utf8')
     (here / 'so-do-quy-hoach.svg').write_text(make(1600, 1180, 108.190, 16.0788, 0.121, fs=1.3, qh=True), encoding='utf8')
+    (here / 'ban-do-gan.svg').write_text(make(1600, 1350, 108.180, 16.080, 0.100, fs=1.55), encoding='utf8')
     (here / 'ban-do-poster.svg').write_text(make(1080, 540, 108.045, 16.135, 0.330, fs=0.9, poster=True), encoding='utf8')
