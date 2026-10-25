@@ -8,6 +8,7 @@ on:
     paths:
       - 'floorplan-3d/**'
       - 'dau-tu/**'
+      - 'banner-ads/**'
       - '.github/workflows/deploy-floorplan-3d.yml'
   workflow_dispatch:
 
@@ -38,6 +39,9 @@ jobs:
       # Trang Thống kê đầu tư (tĩnh) nằm ở /dau-tu/
       - name: Thêm trang đầu tư
         run: mkdir -p dist/dau-tu && cp -r ../dau-tu/index.html ../dau-tu/data dist/dau-tu/
+      # Xưởng Banner (tĩnh) nằm ở /banner-ads/
+      - name: Thêm Xưởng Banner
+        run: mkdir -p dist/banner-ads && cp ../banner-ads/index.html dist/banner-ads/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

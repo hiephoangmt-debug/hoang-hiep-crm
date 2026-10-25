@@ -7,3 +7,4 @@ CRM – Real Estate Sales Management System
 - [`news-telegram/`](news-telegram/README.md) – Quét tin Sở Xây dựng, quy hoạch, hạ tầng, BĐS Đà Nẵng và gửi về Telegram.
 - [`bds-bot/`](bds-bot/HUONG_DAN.md) – Bot tư vấn BĐS 24/7 (Zalo, Facebook Messenger, khung chat LadiPage) + CRM: độ nhiệt khách, vòng đời chăm sóc, hỗ trợ gọi điện, việc cần làm, quản lý đội sale, trang web CRM.
 - [`dau-tu/`](dau-tu/README.md) – Thống kê kênh đầu tư: vàng, chứng khoán, khối ngoại mua/bán ròng, cổ phiếu lớn tăng/giảm, USD, Bitcoin, BĐS – biểu đồ theo ngày, tự cập nhật.
+- [`banner-ads/`](banner-ads/README.md) – Xưởng Banner: tạo ảnh & video quảng cáo BĐS đúng chuẩn Facebook, Zalo, TikTok, Google (11 kích thước, 6 bố cục, xuất PNG/JPG/MP4/ZIP).
