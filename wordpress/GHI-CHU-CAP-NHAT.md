@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.31** + plugin Hoàng Hiệp CRM **2.20.80**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.32** + plugin Hoàng Hiệp CRM **2.20.81**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,14 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.81, giao diện 2.15.32: landing viết lại chữ riêng; FourS landing + trang con; trang F1, F5
+
+- **Chữ riêng cho hiephoangmt.com:** trang Sun Saphia và 7 trang FourS giữ kiểu dáng landing nhưng viết lại chữ (mở đầu, tóm tắt, các mục, hỏi đáp) – số liệu giữ nguyên. Mức trùng với web landing gốc giảm từ ~100% xuống khoảng 24 – 48% (phần còn lại là nhãn, bảng số, tên văn bản pháp luật).
+- **FourS Tower dạng landing:** /du-an/fours-tower/ và /du-an/fours-tower-f2-thap-mai/; trang con mới /du-an/fours-tower/gio-hang/, /phap-ly/, /hoi-dap/, /bang-tinh-f2/ (tiêu đề, mô tả riêng).
+- **Trang dự án mới:** **FourS Tower F1 – Tháp Tùng** và **FourS Tower F5 – Tháp Cúc** (dưới FourS Tower): giá dự kiến theo căn mẫu, giỏ hàng 03/10/2026, chính sách CSBH 01/FT/SPG/04-2026, nhận nhà dự kiến 31/3/2028.
+- Form landing lưu thêm khách vào mục Khách hàng (gắn đúng dự án).
+- Cập nhật nội dung landing sau này: dựng lại bằng scripts/landing-*.py rồi viết lại chữ bằng scripts/landing-viet-lai.py (tách → viết lại → ghép), kiểm tra bằng scripts/landing-kiem-tra.py.
 
 ## Có gì mới – plugin 2.20.80, giao diện 2.15.31: trang Sun Saphia Residence dạng landing
 
