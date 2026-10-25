@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<base href="/">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Căn hộ Sun FourS Tower</title>
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Căn hộ dành riêng cho quý khách – Sun FourS Tower">
+<meta property="og:image" content="bh-img/fours-pk-f2-f3.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,600&family=Great+Vibes&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--br:#2b1a0b;--br2:#5a3a16;--gd:#c9a25a;--gd2:#f3d38a;--cr:#f7efe2;--ink:#2a2118;--mut:#7a6b5a;--red:#d32f2f;--line:#eadfcd}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:'Be Vietnam Pro',system-ui,sans-serif;color:var(--ink);background:#fffdf9;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px}
+/* header */
+.hd{position:fixed;inset:0 0 auto 0;z-index:30;transition:background .3s,box-shadow .3s}
+.hd .wrap{display:flex;align-items:center;gap:12px;height:62px}
+.hd img{height:38px;background:#fff;border-radius:8px;padding:3px 8px}
+.hd b{flex:1;color:#fff;font-size:14px;letter-spacing:.14em;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+.hd.on{background:rgba(43,26,11,.92);backdrop-filter:blur(8px);box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:99px;padding:12px 22px;font:700 15px 'Be Vietnam Pro',sans-serif;text-decoration:none;cursor:pointer;transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.b-gd{background:linear-gradient(135deg,#f3d38a,#c9a25a);color:#2b1a0b;box-shadow:0 6px 20px rgba(201,162,90,.45)}
+.b-gl{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.5);backdrop-filter:blur(4px)}
+.b-zl{background:#0068ff;color:#fff}
+.hd .btn{padding:8px 16px;font-size:13px}
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);animation:kb 14s ease-out forwards}
+@keyframes kb{to{transform:scale(1)}}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,12,4,.45) 0%,rgba(20,12,4,.05) 30%,rgba(20,12,4,.55) 60%,rgba(20,12,4,.94) 100%)}
+.hero .wrap{position:relative;z-index:1;padding-bottom:42px;width:100%}
+.kick{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gd2);font-weight:700}
+.hero h1{font-size:clamp(54px,13vw,120px);line-height:.95;margin:8px 0 12px;font-weight:900;letter-spacing:.02em}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chips span{border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.12);backdrop-filter:blur(4px);border-radius:99px;padding:5px 13px;font-size:13.5px;font-weight:600}
+.hview{margin:12px 0 0;font-size:15px;opacity:.92}
+.hprice{display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap;margin:20px 0 18px}
+.hprice span{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gd2)}
+.hprice b{font-size:clamp(38px,8vw,58px);font-weight:900;line-height:1}
+.hprice s{opacity:.7;font-size:15px}
+.hcta{display:flex;gap:10px;flex-wrap:wrap}
+.cd{margin-top:18px;display:inline-flex;gap:10px;align-items:center;background:rgba(211,47,47,.9);border-radius:12px;padding:8px 14px;font-size:13px;font-weight:600}
+.cd b{font-variant-numeric:tabular-nums;font-size:15px;letter-spacing:.04em}
+.scroll{position:absolute;left:50%;bottom:10px;z-index:1;transform:translateX(-50%);font-size:11px;letter-spacing:.2em;opacity:.7;animation:bob 1.6s infinite}
+@keyframes bob{50%{transform:translate(-50%,5px)}}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:-34px;position:relative;z-index:2}
+.st{background:#fff;border-radius:18px;padding:16px 14px;box-shadow:0 10px 30px rgba(60,40,10,.12);border-top:4px solid var(--gd);text-align:center}
+.st span{display:block;font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--br2)}
+.st b{display:block;font-size:42px;font-weight:900;line-height:1.1;margin:4px 0;background:linear-gradient(180deg,#b07a26,#4a2e0c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.st b i{font-style:normal;font-size:18px}
+.st small{display:block;font-size:12.5px;color:var(--mut);line-height:1.4}.st small b{display:inline;font-size:inherit;color:var(--br);-webkit-text-fill-color:var(--br);background:none;margin:0}
+.st em{display:block;font-style:normal;font-size:10.5px;color:#a89580;margin-top:3px}
+/* sections */
+section.s{padding:70px 0 10px}
+.sh{text-align:center;margin-bottom:26px}
+.sh i{font-style:normal;font-family:'Playfair Display',serif;font-size:15px;color:var(--gd);letter-spacing:.1em}
+.sh h2{margin:6px 0 6px;font-size:clamp(26px,5vw,38px);color:var(--br);font-weight:800;line-height:1.2}
+.sh p{margin:0;color:var(--mut);font-size:15px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 8px 26px rgba(60,40,10,.07)}
+.tabs{display:flex;justify-content:center;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.tabs button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:8px 18px;font:600 14px 'Be Vietnam Pro',sans-serif;color:var(--br2);cursor:pointer}
+.tabs button.on{background:var(--br);border-color:var(--br);color:#fff}
+.pane{display:none}.pane.on{display:block}
+.tw3d{cursor:grab;touch-action:none;user-select:none;max-width:560px;margin:0 auto}.tw3d:active{cursor:grabbing}.tw3d svg{display:block;width:100%;height:auto}
+.hint{text-align:center;font-size:12.5px;color:var(--mut);padding:8px 0 14px}
+.plan{position:relative}.plan svg{position:absolute;inset:0;width:100%;height:100%}
+.view{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:16/9;min-height:300px}
+.view img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.view div{position:absolute;inset:auto 0 0 0;padding:90px 26px 24px;background:linear-gradient(transparent,rgba(20,12,4,.88));color:#fff}
+.view b{font-size:clamp(22px,4vw,32px);display:block}.view small{opacity:.8;font-size:12.5px}
+.lay{display:grid;grid-template-columns:1.1fr 1fr;gap:18px;align-items:start}
+.lay .card{padding:10px}.lay .card img{max-height:620px;margin:0 auto;object-fit:contain}
+.spec{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.spec div{background:var(--cr);border-radius:14px;padding:12px 14px}
+.spec span{display:block;font-size:12px;color:var(--mut)}.spec b{font-size:19px;color:var(--br)}
+.spec .w{grid-column:1/-1}
+.map{position:relative;border-radius:24px;overflow:hidden}
+.band{position:absolute;left:61%;width:18%;height:2.4%;transform:translateY(-50%);background:rgba(229,57,53,.85);box-shadow:0 0 0 2px #fff,0 0 18px 6px rgba(255,80,60,.75);border-radius:3px;animation:pulse 1.8s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 2px #fff,0 0 30px 12px rgba(255,80,60,.55)}}
+.pin{position:absolute;left:81%;transform:translateY(-50%);background:var(--red);color:#fff;border-radius:10px;padding:6px 12px;font-size:12.5px;font-weight:600;box-shadow:0 4px 14px rgba(0,0,0,.4);white-space:nowrap}
+.pin b{display:block;font-size:16px}.pin::before{content:'';position:absolute;left:-8px;top:50%;transform:translateY(-50%);border:8px solid transparent;border-right-color:var(--red);border-left:0}
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.gal figure{margin:0;border-radius:16px;overflow:hidden;position:relative}.gal img{width:100%;aspect-ratio:16/10;height:auto;object-fit:cover;transition:transform .6s}.gal figure:hover img{transform:scale(1.06)}
+.gal figcaption{position:absolute;inset:auto 0 0 0;padding:26px 12px 10px;background:linear-gradient(transparent,rgba(0,0,0,.7));color:#fff;font-weight:700;font-size:14px}
+.plans{display:flex;gap:8px;overflow-x:auto;padding:10px 4px 6px;margin-bottom:14px;scrollbar-width:none;justify-content:center}
+.plans button{flex:none;border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 14px;font:600 13.5px 'Be Vietnam Pro',sans-serif;color:var(--br2);cursor:pointer;position:relative}
+.plans button.on{background:var(--br);color:#fff;border-color:var(--br)}
+.plans button sup{position:absolute;top:-8px;right:-4px;background:var(--red);color:#fff;font-size:10px;border-radius:99px;padding:1px 6px}
+.pbox{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pbox div{border-radius:18px;padding:18px;background:var(--cr);text-align:center}
+.pbox div.hot{background:linear-gradient(135deg,#2b1a0b,#6b4520);color:#fff}
+.pbox span{display:block;font-size:12.5px;opacity:.8}.pbox b{display:block;font-size:clamp(24px,4.4vw,32px);font-weight:900;margin:4px 0}.pbox small{font-size:12px;opacity:.75}
+.pnote{text-align:center;color:var(--mut);font-size:13px;margin:12px 0 0}
+.why{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.why div{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px;font-size:14.5px;line-height:1.5}
+.why div::before{content:'✦';color:var(--gd);font-size:18px;line-height:1.3}
+.final{margin:70px 0 0;background:linear-gradient(135deg,#1e1206,#5a3a16);color:#fff;padding:60px 0 120px;text-align:center;position:relative;overflow:hidden}
+.final::before{content:'';position:absolute;inset:0;background:url(bh-img/fours-pk-hoang-hon.jpg) center/cover;opacity:.18}
+.final .wrap{position:relative}
+.final i{font-style:normal;color:var(--gd2);letter-spacing:.2em;font-size:12px;text-transform:uppercase;font-weight:700}
+.final h2{font-size:clamp(26px,5vw,40px);margin:10px 0}
+.final p{opacity:.85;margin:0 0 22px}
+.av{width:74px;height:74px;border-radius:50%;background:linear-gradient(135deg,#f3d38a,#c9a25a);color:#2b1a0b;display:grid;place-items:center;font-size:30px;font-weight:900;margin:0 auto 10px}
+.final .nm{font-size:20px;font-weight:800}.final .tt{opacity:.75;font-size:14px;margin-bottom:18px}
+.foot{font-size:11.5px;opacity:.6;margin-top:30px;line-height:1.6}
+.bar{position:fixed;inset:auto 0 0 0;z-index:40;display:none;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,253,249,.96);backdrop-filter:blur(8px);box-shadow:0 -6px 20px rgba(0,0,0,.12)}
+.bar .btn{flex:1;padding:13px 10px}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}.rv.in{opacity:1;transform:none}
+.err{min-height:100vh;display:grid;place-items:center;text-align:center;padding:30px;color:var(--mut)}
+@media(max-width:760px){
+  .stats{grid-template-columns:1fr 1fr;gap:10px}.st b{font-size:34px}
+  .lay,.why,.pbox{grid-template-columns:1fr}.gal{grid-template-columns:1fr 1fr}.gal figure:first-child{grid-column:1/-1}
+  .view{min-height:220px}.bar{display:flex}.hd .btn{display:none}
+  section.s{padding-top:54px}.pin{font-size:11px;padding:4px 8px}.pin b{font-size:13px}
+  .plans{justify-content:flex-start}
+}
+@media print{
+  @page{size:A4;margin:0}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{background:#fff}.hd,.bar,.scroll,.hint,.tabs,.plans,.pdfb,.hcta{display:none!important}
+  .rv{opacity:1!important;transform:none!important;transition:none!important}
+  .wrap{max-width:none;padding:0 12mm}
+  .hero{min-height:0;height:140mm}.cd{margin-top:8px}.hprice{margin:10px 0 0}.hero>img{animation:none;transform:none}.hero .wrap{padding-bottom:10mm}.hero h1{font-size:76px}
+  .stats{margin-top:-10mm;gap:3mm}.st{box-shadow:none;border:1px solid var(--line);border-top:4px solid var(--gd);padding:10px}.st b{font-size:34px;color:#6b4520!important;background:none!important}
+  section.s{padding:5mm 0 0;break-inside:avoid}.sh h2{font-size:21px!important}.sh{margin-bottom:3mm!important}.swhy{padding-top:6mm!important}.swhy .sh{margin-bottom:3mm}.swhy h2{font-size:20px!important}.sh{margin-bottom:5mm}.sh h2{font-size:24px}
+  .pg{break-before:page;padding-top:12mm!important}
+  .pane{display:block!important}.pane+.pane{margin-top:4mm}.card{box-shadow:none}
+  .tw3d{max-width:92mm}.view{min-height:0;aspect-ratio:16/9;height:auto}.view img{min-height:0;height:100%}.lay{grid-template-columns:100mm 1fr}.lay .card img{max-height:118mm}.spec b{font-size:16px}.spec div{padding:8px 12px}
+  .gal img{height:auto;aspect-ratio:2/1;object-fit:cover}.gal{margin-top:3mm}.map img{width:100%;height:auto;max-height:none}.ptab{font-size:11.5px!important}.ptab th,.ptab td{padding:4px 8px!important}.pnote{margin-top:4px}
+  .pbox{display:none}.ptab{display:table!important}
+  .s5{padding-top:4mm!important}.final{margin-top:5mm;padding:6mm 0 6mm;break-inside:avoid}.final h2{font-size:24px;margin:4px 0}.final p{display:none}.final i{display:none}.final .nm{font-size:16px}.final .tt{font-size:12px}.foot{margin-top:4px!important}.final .tt{margin-bottom:4px}.final .ph{display:block!important;font-size:22px!important}.final .av{display:none}.final h2{font-size:21px!important}.final::before{opacity:.12}.av{width:52px;height:52px;font-size:22px}
+  .why div{padding:8px 12px;font-size:12.5px;break-inside:avoid}.foot{margin-top:12px}
+}
+.ptab{display:none;width:100%;border-collapse:collapse;font-size:13px}.ptab th,.ptab td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right}.ptab th:first-child,.ptab td:first-child{text-align:left}.ptab th{color:var(--mut);font-weight:600;background:var(--cr)}.ptab tr.best td{font-weight:800;color:var(--br)}
+.pdfb{position:fixed;right:16px;bottom:18px;z-index:41;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+@media(max-width:760px){.pdfb{bottom:84px;right:12px;padding:10px 14px;font-size:13px}}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.hero>img{animation:none;transform:none}}
+
+/* ===== Phong cách sang trọng: nền tối, vàng champagne, chữ có chân ===== */
+:root{--bg:#0d0a07;--bg2:#15100b;--bg3:#1c160f;--gold:#d6b46a;--gold2:#f1dca4;--hair:rgba(214,180,106,.32);--txt:#ece3d2;--txt2:#b6a68c}
+body{background:var(--bg);color:var(--txt)}
+.serif,.hero h1,.sh h2,.st>b,.hprice b,.final h2,.pbox b,.spec b,.view b{font-family:'Playfair Display',Georgia,serif}
+.gold-t,.sh h2,.st>b,.hprice b{background:linear-gradient(180deg,#f7e7b8 0%,#d6b46a 55%,#9c7a34 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hd.on{background:rgba(13,10,7,.88);border-bottom:1px solid var(--hair)}
+.hd b{font-family:'Playfair Display',serif;letter-spacing:.32em;font-weight:700}
+.hero::after{background:linear-gradient(180deg,rgba(13,10,7,.55) 0%,rgba(13,10,7,0) 28%,rgba(13,10,7,.35) 55%,rgba(13,10,7,.97) 100%)}
+.kick{color:var(--gold);letter-spacing:.38em;font-size:11px}
+.kick::before{content:'';display:inline-block;width:38px;height:1px;background:var(--gold);vertical-align:middle;margin-right:12px}
+.hero h1{font-weight:700;letter-spacing:.03em;font-size:clamp(58px,13vw,128px);text-shadow:0 6px 40px rgba(0,0,0,.5)}
+.chips span{background:transparent;border:1px solid var(--hair);color:var(--gold2);font-weight:500;letter-spacing:.04em;border-radius:2px}
+.hprice span{color:var(--gold);letter-spacing:.3em}.hprice b{font-weight:700}
+.btn{border-radius:2px;letter-spacing:.08em;text-transform:uppercase;font-size:13px}
+.b-gd{background:linear-gradient(135deg,#f1dca4,#c9a25a 60%,#a17c38);box-shadow:0 10px 30px rgba(201,162,90,.25)}
+.b-gl{border-color:var(--hair);color:var(--gold2)}
+.b-zl{background:transparent;border:1px solid var(--gold);color:var(--gold2)}
+.cd{background:transparent;border:1px solid rgba(229,57,53,.6);border-radius:2px;color:#ffcdc9}
+.stats{margin-top:-30px;gap:0;border:1px solid var(--hair);background:rgba(13,10,7,.92);backdrop-filter:blur(6px)}
+.st{background:transparent;box-shadow:none;border:0;border-radius:0;border-right:1px solid var(--hair);padding:22px 14px}.st:last-child{border-right:0}
+.st span{color:var(--gold);letter-spacing:.22em;font-weight:600;font-size:10.5px}
+.st>b{font-size:50px;font-weight:700;margin:6px 0 4px}.st>b i{font-size:20px}
+.st small{color:var(--txt2)}.st small b{color:var(--gold2);-webkit-text-fill-color:var(--gold2)}.st em{color:#8a7b63}
+section.s{padding:90px 0 10px}
+.sh i{font-family:'Be Vietnam Pro',sans-serif;font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold)}
+.sh h2{font-weight:700;font-size:clamp(30px,5.4vw,46px);margin:12px 0 10px}
+.sh p{color:var(--txt2);letter-spacing:.04em}
+.sh::after{content:'';display:block;width:64px;height:1px;background:var(--gold);margin:16px auto 0;box-shadow:0 0 0 0}
+.card{background:var(--bg2);border:1px solid var(--hair);border-radius:4px;box-shadow:none}
+.tabs button{background:transparent;border:1px solid var(--hair);color:var(--txt2);border-radius:2px;letter-spacing:.06em}
+.tabs button.on{background:var(--gold);border-color:var(--gold);color:#1a1209}
+.hint{color:#8a7b63}
+.tw3d{background:#f4efe6;border-radius:3px;padding:6px}
+.plan{background:#fff;border-radius:3px;overflow:hidden}
+.view{border-radius:4px;border:1px solid var(--hair)}.view div{background:linear-gradient(transparent,rgba(13,10,7,.92))}.view b{font-weight:700;letter-spacing:.02em}
+.lay .card{background:#f7f3ec}
+.spec div{background:var(--bg2);border:1px solid var(--hair);border-radius:2px}
+.spec span{color:var(--gold);letter-spacing:.14em;text-transform:uppercase;font-size:10.5px}.spec b{color:var(--txt);font-weight:700;font-size:21px}
+.map{border-radius:4px;border:1px solid var(--hair)}
+.gal figure{border-radius:3px;border:1px solid var(--hair)}.gal figcaption{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;letter-spacing:.02em}
+.plans button{background:transparent;border:1px solid var(--hair);color:var(--txt2);border-radius:2px}
+.plans button.on{background:var(--gold);color:#1a1209;border-color:var(--gold)}
+.pbox div{background:var(--bg2);border:1px solid var(--hair);border-radius:2px}.pbox div.hot{background:linear-gradient(135deg,#2a1f12,#4a3518);border-color:var(--gold)}
+.pbox span{color:var(--gold);letter-spacing:.14em;text-transform:uppercase;font-size:10.5px;opacity:1}.pbox b{color:var(--gold2);font-weight:700}.pbox small{color:var(--txt2)}
+.pnote{color:#8a7b63}
+.ptab th{background:transparent;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;font-size:10.5px;border-bottom:1px solid var(--gold)}
+.ptab td{border-bottom:1px solid var(--hair);color:var(--txt)}.ptab tr.best td{color:var(--gold2)}
+.why div{background:transparent;border:0;border-top:1px solid var(--hair);border-radius:0;color:var(--txt);padding:16px 4px}
+.why div::before{content:'◆';color:var(--gold);font-size:11px;line-height:2}
+.why b{color:var(--gold2)}
+.final{background:var(--bg);border-top:1px solid var(--hair)}.final::before{opacity:.22}
+.final i{color:var(--gold);letter-spacing:.4em}.final h2{font-weight:700}
+.av{background:transparent;border:1px solid var(--gold);color:var(--gold2);font-family:'Playfair Display',serif}
+.foot{color:#8a7b63;opacity:1}
+.bar{background:rgba(13,10,7,.95);border-top:1px solid var(--hair)}
+.pin{background:#b71c1c;border-radius:2px;border:1px solid rgba(255,255,255,.6)}
+.err{color:var(--txt2)}
+@media(max-width:760px){.stats{grid-template-columns:1fr 1fr}.st:nth-child(2){border-right:0}.st:nth-child(-n+2){border-bottom:1px solid var(--hair)}.st>b{font-size:40px}}
+@media print{
+  html,body{background:var(--bg)!important}
+  .wrap{padding:0 12mm}
+  .stats{margin-top:-8mm}.st{padding:10px}.st>b{font-size:36px;color:var(--gold)!important;-webkit-text-fill-color:var(--gold)!important;background:none!important}
+  .sh h2{color:var(--gold2)!important;-webkit-text-fill-color:var(--gold2)!important;background:none!important}
+  .hprice b{color:var(--gold2)!important;-webkit-text-fill-color:var(--gold2)!important;background:none!important}
+  .sh::after{margin-top:8px}
+  .card,.st{border-color:var(--hair)!important}
+  .final{border-top:1px solid var(--hair)}
+  section.s{padding:5mm 0 0!important}.pg{padding-top:10mm!important}.swhy{padding-top:6mm!important}.s5{padding-top:4mm!important}
+  .sh h2{font-size:24px!important;margin:4px 0!important}.sh::after{margin-top:6px!important}.sh{margin-bottom:4mm!important}
+  .why div{padding:7px 4px!important;font-size:12.5px}.spec b{font-size:16px!important}.st>b{font-size:34px!important}
+}
+
+/* ===== Bản navy – trắng – cam ===== */
+body.t-navy{--bg:#ffffff;--bg2:#f4f7fb;--bg3:#e9eff7;--gold:#f26b1d;--gold2:#ff8a3d;--hair:rgba(15,42,74,.16);--txt:#0f2a4a;--txt2:#5a6b82;--nv:#0f2a4a;--nv2:#183d68}
+body.t-navy .sh h2,body.t-navy .hprice b,body.t-navy .st>b{background:none;-webkit-text-fill-color:currentColor;color:var(--nv)}
+body.t-navy .hprice b{color:#fff}
+body.t-navy .st>b{color:var(--gold)}
+body.t-navy .hero::after{background:linear-gradient(180deg,rgba(10,28,52,.55) 0%,rgba(10,28,52,0) 28%,rgba(10,28,52,.45) 55%,rgba(10,28,52,.96) 100%)}
+body.t-navy .kick,body.t-navy .hprice span{color:#ffb27d}body.t-navy .kick::before{background:#ffb27d}
+body.t-navy .chips span{color:#fff;border-color:rgba(255,255,255,.45)}
+body.t-navy .b-gd{background:linear-gradient(135deg,#ff8a3d,#f26b1d);color:#fff;box-shadow:0 10px 26px rgba(242,107,29,.35)}
+body.t-navy .b-gl{color:#fff;border-color:rgba(255,255,255,.55)}
+body.t-navy .b-zl{background:#0068ff;border-color:#0068ff;color:#fff}
+body.t-navy .hd.on{background:rgba(15,42,74,.95)}
+body.t-navy .stats{background:#fff;border:0;box-shadow:0 16px 40px rgba(15,42,74,.16)}
+body.t-navy .st{border-right-color:var(--hair)}body.t-navy .st span{color:var(--nv)}
+body.t-navy .st small b{color:var(--nv);-webkit-text-fill-color:var(--nv)}
+body.t-navy .sh i{color:var(--gold)}body.t-navy .sh::after{background:var(--gold);height:3px;width:48px;border-radius:2px}
+body.t-navy .card{background:#fff;box-shadow:0 10px 30px rgba(15,42,74,.08)}
+body.t-navy .tabs button.on,body.t-navy .plans button.on{background:var(--nv);border-color:var(--nv);color:#fff}
+body.t-navy .tw3d{background:#f4f7fb}
+body.t-navy .spec div{background:var(--bg2);border:0;border-left:3px solid var(--gold)}body.t-navy .spec span{color:var(--txt2)}body.t-navy .spec b{color:var(--nv)}
+body.t-navy .view div{background:linear-gradient(transparent,rgba(10,28,52,.9))}
+body.t-navy .pbox div{background:var(--bg2);border:0}body.t-navy .pbox div.hot{background:linear-gradient(135deg,#0f2a4a,#183d68)}
+body.t-navy .pbox span{color:var(--txt2)}body.t-navy .pbox b{color:var(--nv)}body.t-navy .pbox div.hot span{color:#ffb27d}body.t-navy .pbox div.hot b{color:#fff}body.t-navy .pbox div.hot small{color:#c9d6e8}
+body.t-navy .ptab th{color:var(--nv);border-bottom-color:var(--gold);background:var(--bg2)}body.t-navy .ptab tr.best td{color:var(--gold)}
+body.t-navy .why div{border-top-color:var(--hair)}body.t-navy .why b{color:var(--gold)}
+body.t-navy .final{background:linear-gradient(135deg,#0a1c34,#183d68);border:0;color:#fff}body.t-navy .final i{color:#ffb27d}
+body.t-navy .av{border-color:#ff8a3d;color:#fff}body.t-navy .final .ph{color:#ff8a3d!important}body.t-navy .foot{color:#9fb0c7}
+body.t-navy .bar{background:rgba(255,255,255,.96)}
+body.t-navy .gal figcaption{font-family:'Be Vietnam Pro',sans-serif;font-style:normal;font-weight:700}
+@media print{body.t-navy,html:has(body.t-navy){background:#fff!important}body.t-navy .st>b{color:var(--gold)!important;-webkit-text-fill-color:var(--gold)!important}
+  body.t-navy .sh h2{color:var(--nv)!important;-webkit-text-fill-color:var(--nv)!important}body.t-navy .hprice b{color:#fff!important;-webkit-text-fill-color:#fff!important}}
+.thm{position:fixed;right:16px;top:74px;z-index:41;display:flex;gap:6px;background:rgba(0,0,0,.35);backdrop-filter:blur(6px);padding:6px;border-radius:99px}
+.thm button{width:26px;height:26px;border-radius:50%;border:2px solid #fff;cursor:pointer;padding:0}
+.thm button[data-th=lux]{background:linear-gradient(135deg,#0d0a07 50%,#d6b46a 50%)}.thm button[data-th=navy]{background:linear-gradient(135deg,#0f2a4a 50%,#f26b1d 50%)}
+@media print{.thm{display:none!important}}
+
+/* ===== Bản champagne (mặc định): nền kem sáng, chữ đồng ánh kim – theo tông poster TATILAND ===== */
+body.t-cham{--bg:#fbf4ea;--bg2:#fffdf9;--hair:rgba(168,118,58,.28);--gold:#a8763a;--gold2:#c99a5b;--txt:#4a3420;--txt2:#8a7158;
+  background:#fbf4ea repeating-linear-gradient(90deg,rgba(255,255,255,.55) 0 2px,transparent 2px 26px)}
+body.t-cham .brz,body.t-cham .sh h2,body.t-cham .hero h1,body.t-cham .st>b,body.t-cham .hprice b,body.t-cham .final h2{font-family:'Montserrat','Be Vietnam Pro',sans-serif;font-weight:800;
+  background:linear-gradient(180deg,#d6a865 0%,#9b6a32 55%,#6e4520 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+body.t-cham .script{font-family:'Great Vibes',cursive;font-weight:400;color:#a8763a;line-height:1}
+body.t-cham .hd b{color:#6e4520;text-shadow:none}body.t-cham .hd.on{background:rgba(251,244,234,.92);border-bottom:1px solid var(--hair)}
+body.t-cham .hd img{box-shadow:0 2px 10px rgba(110,69,32,.12)}
+/* hero: chữ trên nền kem, ảnh phối cảnh bên dưới mờ dần như poster */
+body.t-cham .hero{min-height:0;display:flex;flex-direction:column-reverse;align-items:stretch;color:var(--txt);padding-top:84px;text-align:center}
+body.t-cham .hero::after{display:none}
+body.t-cham .hero>img{position:relative;inset:auto;height:min(58vh,560px);width:100%;object-fit:cover;object-position:center 70%;transform:none;animation:none;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 12%);mask-image:linear-gradient(180deg,transparent 0%,#000 12%);margin-top:-10px}
+body.t-cham .hero .wrap{padding-bottom:0;position:relative;z-index:2}
+body.t-cham .hero .kick{display:block;font-family:'Great Vibes',cursive;font-size:clamp(40px,7vw,64px);letter-spacing:0;text-transform:none;color:#a8763a;font-weight:400;line-height:1.1}
+body.t-cham .hero .kick::before{display:none}
+body.t-cham .hero h1{font-size:clamp(56px,12vw,118px);letter-spacing:.02em;margin:0 0 10px;text-shadow:none}
+body.t-cham .chips{justify-content:center}body.t-cham .chips span{border:1px solid var(--hair);background:rgba(255,255,255,.7);color:#6e4520;border-radius:99px;backdrop-filter:none}
+body.t-cham .hview{color:var(--txt2)}
+body.t-cham .hprice{justify-content:center;align-items:center;flex-direction:column;gap:4px;margin:16px 0 14px}
+body.t-cham .hprice span{color:var(--gold);letter-spacing:.3em}body.t-cham .hprice s{color:var(--txt2);opacity:1}
+body.t-cham .hcta{justify-content:center}
+body.t-cham .btn{border-radius:99px}
+body.t-cham .b-gd{background:linear-gradient(180deg,#d9ad6c,#9b6a32);color:#fff;box-shadow:0 8px 22px rgba(155,106,50,.35)}
+body.t-cham .b-gl{background:#fff;border:1px solid var(--gold2);color:#6e4520}
+body.t-cham .b-zl{background:#fff;border:1px solid var(--gold2);color:#6e4520}
+body.t-cham .cd{background:linear-gradient(180deg,#8b5a2b,#5e3a18);color:#fff;border:2px solid #fff;border-radius:99px;box-shadow:0 0 0 1px var(--gold2),0 6px 18px rgba(94,58,24,.3);padding:8px 20px}
+body.t-cham .cd b{color:#fff}
+body.t-cham .scroll{display:none}
+body.t-cham .stats{margin-top:-24px;background:rgba(255,253,249,.94);border:1px solid var(--hair);box-shadow:0 18px 40px rgba(110,69,32,.12);border-radius:16px;overflow:hidden}
+body.t-cham .st{border-right-color:var(--hair)}body.t-cham .st span{color:#8b5a2b}
+body.t-cham .st small{color:var(--txt2)}body.t-cham .st small b{color:#6e4520;-webkit-text-fill-color:#6e4520}body.t-cham .st em{color:#b39b7c}
+body.t-cham .sh i{font-family:'Great Vibes',cursive;font-size:30px;letter-spacing:0;text-transform:none;color:#a8763a}
+body.t-cham .sh h2{text-transform:uppercase;letter-spacing:.02em;font-size:clamp(26px,4.6vw,40px)}
+body.t-cham .sh p{color:var(--txt2)}
+body.t-cham .sh::after{width:220px;height:1px;background:linear-gradient(90deg,transparent,#c99a5b,transparent)}
+body.t-cham .card{background:#fffdf9;border:1px solid var(--hair);border-radius:18px;box-shadow:0 10px 30px rgba(110,69,32,.08)}
+body.t-cham .tabs button{background:#fff;border-color:var(--hair);color:#6e4520;border-radius:99px}
+body.t-cham .tabs button.on,body.t-cham .plans button.on{background:linear-gradient(180deg,#b88447,#7a4f22);border-color:#7a4f22;color:#fff}
+body.t-cham .plans button{background:#fff;border-color:var(--hair);color:#6e4520;border-radius:99px}
+body.t-cham .tw3d{background:#fbf6ef;border-radius:14px}
+body.t-cham .view{border-radius:18px;border:0;box-shadow:0 14px 34px rgba(110,69,32,.18)}
+body.t-cham .view div{background:linear-gradient(transparent,rgba(60,36,14,.78))}body.t-cham .view b{font-family:'Montserrat',sans-serif}
+body.t-cham .lay .card{background:#fff}
+body.t-cham .spec div{background:#fff;border:1px solid var(--hair);border-radius:14px}
+body.t-cham .spec span{color:#a8763a}body.t-cham .spec b{color:#5e3a18;font-family:'Montserrat',sans-serif}
+body.t-cham .map{border-radius:18px;border:0;box-shadow:0 14px 34px rgba(110,69,32,.15)}
+body.t-cham .gal figure{border-radius:14px;border:0}body.t-cham .gal figcaption{font-family:'Great Vibes',cursive;font-size:24px;font-weight:400;font-style:normal}
+body.t-cham .pbox div{background:#fff;border:1px solid var(--hair);border-radius:16px}
+body.t-cham .pbox div.hot{background:linear-gradient(180deg,#b88447,#6e4520);border:0}
+body.t-cham .pbox span{color:#a8763a}body.t-cham .pbox b{color:#5e3a18;font-family:'Montserrat',sans-serif}body.t-cham .pbox small{color:var(--txt2)}
+body.t-cham .pbox div.hot span,body.t-cham .pbox div.hot b,body.t-cham .pbox div.hot small{color:#fff}
+body.t-cham .ptab th{color:#8b5a2b;background:#f6ead8;border-bottom:1px solid #c99a5b}body.t-cham .ptab td{color:var(--txt);border-bottom-color:var(--hair)}body.t-cham .ptab tr.best td{color:#8b5a2b}
+body.t-cham .why div{border-top:1px solid var(--hair);color:var(--txt)}body.t-cham .why div::before{color:#c99a5b}body.t-cham .why b{color:#8b5a2b}
+body.t-cham .final{background:#f6ead8 repeating-linear-gradient(90deg,rgba(255,255,255,.5) 0 2px,transparent 2px 26px);color:var(--txt);border-top:1px solid var(--hair)}
+body.t-cham .final::before{opacity:.16}
+body.t-cham .final i{font-family:'Great Vibes',cursive;font-size:34px;letter-spacing:0;text-transform:none;color:#a8763a;font-weight:400}
+body.t-cham .final p{color:var(--txt2);opacity:1}
+body.t-cham .av{background:#fff;border:2px solid #c99a5b;color:#8b5a2b;box-shadow:0 0 0 6px rgba(201,154,91,.15)}
+body.t-cham .final .nm{color:#5e3a18}body.t-cham .final .tt{color:var(--txt2);opacity:1}body.t-cham .final .ph{color:#8b5a2b!important}
+body.t-cham .foot{color:#9b8668}
+body.t-cham .bar{background:rgba(255,253,249,.96);border-top:1px solid var(--hair)}
+body.t-cham .pin{background:linear-gradient(180deg,#b88447,#6e4520);border:2px solid #fff;border-radius:10px}
+body.t-cham .pin::before{border-right-color:#7a4f22}
+body.t-cham .band{background:rgba(201,154,91,.9);box-shadow:0 0 0 2px #fff,0 0 18px 6px rgba(255,200,120,.8)}
+.thm button[data-th=cham]{background:linear-gradient(135deg,#fbf4ea 50%,#a8763a 50%)}
+@media print{
+  html:has(body.t-cham),body.t-cham{background:#fbf4ea!important}
+  body.t-cham .hero{height:auto!important;padding-top:10mm}body.t-cham .hero>img{height:78mm;margin-top:-10mm}
+  body.t-cham .hero .kick{font-size:42px}body.t-cham .hero h1{font-size:72px!important}body.t-cham .hprice{margin:6px 0}
+  body.t-cham .stats{margin-top:-14mm}
+  body.t-cham .sh h2,body.t-cham .st>b,body.t-cham .hprice b,body.t-cham .hero h1,body.t-cham .hprice>div{border:0!important;outline:0!important;box-shadow:none!important}
+  body.t-cham .sh h2,body.t-cham .st>b,body.t-cham .hprice b,body.t-cham .hero h1{background:linear-gradient(180deg,#d6a865 0%,#9b6a32 55%,#6e4520 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important}
+}
+
+.pcard{display:none}
+@media print{.final{display:none!important}.pcard{display:flex!important;justify-content:space-between;align-items:center;margin-top:5mm!important;border:1px solid var(--hair);border-radius:14px;padding:4mm 6mm!important;max-width:calc(100% - 24mm)}
+  .pcard b{display:block;font-size:17px;color:var(--txt)}.pcard span{font-size:12px;color:var(--txt2)}.pcard em{font-style:normal;font-size:24px;font-weight:900;color:var(--gold)}
+  body.t-cham .pcard{background:#fffdf9}body.t-navy .pcard em{color:#f26b1d}
+  .ptab+.pnote::after{content:' ' attr(data-x)}}
+
+@media print{
+  /* PDF: bỏ bóng mờ & chữ gradient (một số trình đọc PDF vẽ thành khối màu / khung viền) */
+  .band{box-shadow:none!important;animation:none!important;outline:2px solid #fff}
+  .pin,.st,.stats,.card,.view,.map,.btn,.cd{box-shadow:none!important}
+  body.t-cham .sh h2,body.t-cham .st>b,body.t-cham .hprice b,body.t-cham .hero h1,body.t-cham .final h2{background:none!important;-webkit-text-fill-color:#8b5a2b!important;color:#8b5a2b!important}
+  body.t-cham .hero>img{-webkit-mask-image:none!important;mask-image:none!important;margin-top:4mm!important}
+}
+
+.lay3{padding:14px!important;position:relative}.ltab{position:absolute;top:12px;right:12px;z-index:3;margin:0}.ltab button{padding:5px 14px;font-size:12.5px}
+.stage{perspective:1600px;touch-action:none;cursor:grab;display:flex;align-items:center;justify-content:center;min-height:440px;padding:20px 0}.stage:active{cursor:grabbing}
+.slab{transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.7,.2,1);position:relative;max-width:88%}
+.slab img{display:block;max-height:520px;width:auto;max-width:100%;border-radius:6px;position:relative;z-index:2}
+.slab::before{content:'';position:absolute;inset:0;border-radius:6px;background:#3a2a1a;transform:translateZ(-22px);filter:blur(1px);z-index:1}
+.slab::after{content:'';position:absolute;left:4%;right:4%;bottom:-6%;height:12%;background:radial-gradient(closest-side,rgba(60,40,15,.35),transparent);transform:translateZ(-60px) rotateX(90deg);z-index:0}
+.stage.d3 .slab{box-shadow:0 40px 60px -20px rgba(60,40,15,.45)}
+.mini{margin-top:10px;border:1px solid var(--hair);border-radius:14px;padding:10px;background:#fff}.mini span{display:block;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.mini .plan svg>rect:last-of-type{stroke-width:14}.mini .plan svg line,.mini .plan svg circle,.mini .plan svg text,.mini .plan svg rect[rx="14"],.mini .plan svg rect[height="66"],.mini .plan svg rect[height="26"]{display:none}
+.lprice{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;border-radius:14px;padding:12px 16px;background:linear-gradient(135deg,#2b1a0b,#6b4520);color:#fff}
+.lprice span{display:block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.8}.lprice b{font-size:26px;font-weight:900}
+body.t-cham .lprice{background:linear-gradient(180deg,#b88447,#6e4520)}body.t-navy .lprice{background:linear-gradient(135deg,#0f2a4a,#183d68)}
+@media print{.stage{min-height:0;padding:4mm 0;perspective:none}.slab{transform:none!important}.slab::before,.slab::after,.ltab{display:none}.slab img{max-height:98mm}.lprice .btn{display:none}.mini .plan img{max-height:55mm;width:100%;object-fit:contain}}
+
+/* tường dựng 3D: xếp chồng nhiều lớp mặt nạ tường theo trục Z */
+.slab .wl{position:absolute;inset:0;width:100%;height:100%;max-height:none;pointer-events:none;transform:translateZ(calc(var(--z) * 1.6px));filter:brightness(.8) sepia(.15);opacity:0;transition:opacity .4s;z-index:3}
+.slab .wl.top{filter:drop-shadow(0 0 1px rgba(0,0,0,.25))}
+.stage.d3 .slab .wl{opacity:1}
+.slab.walls::before{display:none}
+@media print{.slab .wl{display:none}}
+
+@media print{.s3{break-inside:auto!important}.view{aspect-ratio:auto!important;height:78mm!important}.slab img{max-height:92mm!important}.mini .plan img{max-height:44mm!important}.lay{gap:4mm}.spec div{padding:5px 10px!important}.lprice{padding:6px 12px}.lprice b{font-size:20px}}
+
+/* bố cục liền mạch: giảm khoảng trống, 3D + mặt bằng đặt cạnh nhau */
+section.s{padding:46px 0 0!important}.swhy{padding-top:40px!important}
+.sh{margin-bottom:16px!important}.sh h2{margin:6px 0 6px!important}.sh::after{margin-top:10px!important}
+.loc{display:grid;grid-template-columns:1fr 1.25fr;gap:16px;align-items:stretch}.loc.one{grid-template-columns:1fr}
+.loc .card{display:flex;flex-direction:column;justify-content:center;padding:10px}.loc .ct{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);padding:4px 6px 8px;font-weight:600}
+.loc .hint{padding:6px 0 2px}.loc .tw3d{max-width:none;width:100%}
+.view{aspect-ratio:21/9!important;min-height:0!important}
+.why{gap:0 16px}.why div{padding:12px 4px!important}
+.final{margin-top:46px!important;padding:46px 0 100px!important}
+.gal{margin-top:10px}
+@media(max-width:760px){.loc{grid-template-columns:1fr}.view{aspect-ratio:4/3!important}}
+@media print{.loc{grid-template-columns:1fr;gap:4mm}.loc .tw3d{max-width:88mm!important;margin:0 auto}.loc .card{break-inside:avoid}.loc .ct{padding-bottom:2px}.loc .plan img{max-height:none}.loc .hint{display:none}section.s{padding:5mm 0 0!important}.pg{padding-top:10mm!important}.view{aspect-ratio:auto!important}}
+
+/* các khối đặt cạnh nhau cao bằng nhau */
+.lay{align-items:stretch!important}.lay>div:last-child{display:flex;flex-direction:column;gap:10px}
+.lay>div:last-child .spec{flex:1;grid-auto-rows:1fr}.lay>div:last-child .spec div{display:flex;flex-direction:column;justify-content:center}
+.lay .lay3{display:flex;flex-direction:column;justify-content:center}.lay .lprice{margin-top:0}
+.loc .card{height:100%}.loc .card>.tw3d{flex:1;display:flex;align-items:center;justify-content:center}
+.loc .card>.plan{position:relative;margin:auto 0;line-height:0}.loc .card>.plan img{width:100%;display:block} /* khung svg phải trùng đúng ảnh, không giãn theo thẻ */
+@media print{.lay{align-items:stretch!important}}
+
+.v360{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:16/9;background:#1c140c;box-shadow:0 14px 34px rgba(110,69,32,.18)}.v360 iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.p360{text-align:center;font-size:13px;color:var(--txt2);margin:8px 0 0}.p360 a{color:var(--gold)}
+@media(max-width:760px){.v360{aspect-ratio:4/5}}
+@media print{.v360{display:none}.s360 .sh p{display:none}.s360{padding-top:3mm!important}.s360 .sh{margin-bottom:1mm!important}.s360 .sh h2{font-size:16px!important}.p360{font-size:12px}}
+
+/* In PDF: luôn dùng bố cục máy tính (Chrome trên Mac in ở khổ hẹp dễ rơi vào bố cục điện thoại), không để khối nhảy trang tạo khoảng trống */
+@media print{
+  .stats{grid-template-columns:repeat(4,1fr)!important}.st:nth-child(n){border-right:1px solid var(--hair)!important;border-bottom:0!important}.st:last-child{border-right:0!important}
+  .why{grid-template-columns:1fr 1fr!important}.lay{grid-template-columns:100mm 1fr!important}.loc{grid-template-columns:1fr!important}
+  .gal{grid-template-columns:repeat(3,1fr)!important}.gal figure:first-child{grid-column:auto!important}
+  .pbox{grid-template-columns:repeat(3,1fr)!important}
+  section.s,.swhy,.s3,.s5{break-inside:auto!important}.sh,.why div,.st,.spec div,.card{break-inside:avoid}
+  .sh{break-after:avoid}
+  .view{min-height:0!important}
+}
+
+/* In PDF: nội dung chảy liền mạch, không ép sang trang mới (tránh nửa trang trống) */
+@media print{.pg,.s5{break-before:auto!important;padding-top:6mm!important}.why div{break-inside:avoid}.loc .card,.lay3,.view,.map,.ptab{break-inside:avoid}.loc{gap:4mm}.loc .tw3d{max-width:105mm!important}}
+
+@media print{.loc{grid-template-columns:.8fr 1.2fr!important;align-items:stretch}.loc .tw3d{max-width:none!important}.loc .card{justify-content:center}.view{height:70mm!important}.gal img{aspect-ratio:2.2/1!important}}
+
+/* trang cuối PDF: hiện khối liên hệ lớn để lấp chỗ trống */
+@media print{.final{display:block!important;margin-top:8mm!important;padding:10mm 0 10mm!important;border-radius:14px;max-width:calc(100% - 24mm);margin-left:12mm!important;margin-right:12mm!important}.final p,.final i{display:block!important}.final .av{display:grid!important}.final h2{font-size:26px!important}.final .ph{font-size:28px!important}.final .foot{display:none}}
+
+/* Chuyển ngôn ngữ + nút trên điện thoại */
+.lng{position:fixed;right:16px;top:116px;z-index:41;display:flex;gap:2px;background:rgba(0,0,0,.4);backdrop-filter:blur(6px);padding:3px;border-radius:99px}
+.lng button{border:0;background:transparent;color:#fff;font:700 12px 'Be Vietnam Pro',sans-serif;padding:5px 10px;border-radius:99px;cursor:pointer}.lng button.on{background:#fff;color:#2b1a0b}
+.b-gd,.b-gd *{color:#fff!important}.bar .b-gl{color:#6e4520!important;border:1px solid #c99a5b;background:#fff}
+.bar .bpdf{flex:0 0 auto!important;padding:13px 14px!important}
+html:lang(ko) body{word-break:keep-all}
+@media(max-width:760px){
+  .pdfb{display:none!important}.thm{top:70px;right:10px}.lng{top:auto;bottom:calc(76px + env(safe-area-inset-bottom));right:10px}
+  .plans{flex-wrap:wrap;justify-content:center;overflow:visible}.plans button{padding:8px 11px;font-size:13px}
+  .pin{left:auto!important;right:3%;transform:translateY(-130%)}.pin::before{display:none}
+  .hero h1{font-size:clamp(46px,14vw,80px)}.hprice b{font-size:40px}
+  .st{padding:14px 8px}.st>b{font-size:30px!important}.st>b i{font-size:15px}.st small{font-size:11.5px}
+  .spec b{font-size:16px!important}.lprice{flex-wrap:wrap}.lprice .btn{flex:1 1 100%}
+  .hd b{font-size:12px;letter-spacing:.18em}
+  .chips span{font-size:12.5px}.cd{flex-wrap:wrap;justify-content:center;text-align:center}
+  .tabs.ltab{position:static;justify-content:flex-end;margin-bottom:4px}
+}
+@media print{.lng{display:none!important}}
+
+html:lang(ko) .hero .kick,html:lang(ko) .sh i,html:lang(ko) .final i,html:lang(ko) .gal figcaption{font-family:'Be Vietnam Pro',system-ui,sans-serif!important;font-weight:600;letter-spacing:.06em}
+html:lang(ko) .hero .kick{font-size:clamp(20px,4.5vw,30px)!important}html:lang(ko) .sh i{font-size:15px!important}html:lang(ko) .final i{font-size:18px!important}html:lang(ko) .gal figcaption{font-size:15px!important}
+@media(max-width:760px){.thm{display:none!important}}
+
+.fbtn{position:fixed;right:16px;bottom:18px;z-index:41;display:flex;gap:8px}.fbtn .pdfb{position:static!important}
+.fbtn .shb,.fbtn .cpb{background:#fff;color:#6e4520!important;border:1px solid #c99a5b;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.bar .bsh{flex:0 0 auto!important;padding:13px 14px!important}.bar .btn{white-space:nowrap;font-size:12.5px;letter-spacing:.04em;padding-left:10px;padding-right:10px}
+.toastc{position:fixed;left:50%;bottom:96px;transform:translate(-50%,20px);opacity:0;z-index:60;background:rgba(43,26,11,.94);color:#fff;padding:10px 18px;border-radius:99px;font-size:13.5px;transition:.3s;pointer-events:none;max-width:90vw;text-align:center}
+.toastc.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:760px){.fbtn{display:none!important}}
+@media print{.fbtn,.toastc{display:none!important}}
+.prbar{position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:999;display:flex;align-items:center;gap:12px;background:#1d1a14;color:#fff;padding:10px 14px 10px 10px;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.35);font:14px/1.3 'Be Vietnam Pro',system-ui,sans-serif;max-width:calc(100% - 24px)}
+.prbar button{background:linear-gradient(135deg,#e2b65a,#b8862d);color:#1d1a14;border:0;border-radius:10px;padding:10px 16px;font:700 15px 'Be Vietnam Pro',system-ui,sans-serif;cursor:pointer;white-space:nowrap}.prbar span{opacity:.9}.prbar i{font-style:normal;cursor:pointer;opacity:.7;padding:4px}
+@media print{.prbar{display:none!important}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script src="bh-tower.js"></script>
+<script>
+// Dựng lại dữ liệu đầy đủ từ link rút gọn #z=
+const PLAN_N = {vay: ['Vay ngân hàng 70%', 'Vay 70%'], chuan: ['Không vay – tiến độ chuẩn', 'Tiến độ chuẩn'], tts50: ['Thanh toán sớm 50%', 'TTS 50%'], tts70: ['Thanh toán sớm 70%', 'TTS 70%'], tts95: ['Thanh toán sớm 95%', 'TTS 95%']};
+const VIEW_CAP = {'11b1UxVcjBci0PuTSgtuNiHZf-KvnLvAR': 'Tầng 8 – view nội khu qua căn hộ sân vườn', '1ltXbS3KK7BKg_UOhUBRDKD2BJlzNSRaO': 'Tầng 10 – view nội khu qua căn hộ sân vườn', '1QzKGLnZF-lKgqqZ3B-SGV9OA3gRZ9xhI': 'Tầng 7 – view căn sân vườn',
+  '1_NizFS-x7GXnnbLsNdMYKtY_ihTShN8j': 'View cầu Nguyễn Tri Phương – căn sân vườn', '109YG5P6gEKmJnD97Tmjt53MXqkmjSzAP': 'Tầng 15 – view sông – biển', '1gW8_8EC2ku_gclLJOJQW4TnmB3FPWL5u': 'Tầng 10 – view Ngũ Hành Sơn',
+  '1vncyICvuilFzu5mg7SuKixDuOep4nfJn': 'Tầng 15 – view Sunneva', '118djpOVATeIECHkWJGWlVq21TpA0iWbE': 'View sông – biển'};
+function expandZ(z) {
+  const u = String(z.c).split('-').pop(), fl = String(z.f), n = parseInt(fl, 10) || 0, sv = n >= 3 && n < 8;
+  const h = (z.hd || []).concat([z.v ? `Tầm view: <b>${z.v}</b>` : '', n >= 12 ? 'Tầng cao – view thoáng, đón gió sông Hàn – biển' : sv && z.sv ? 'Tầng có sân vườn riêng rộng theo mặt bằng CĐT – sống như nhà phố trên cao' : '',
+    `Chính sách <b>Sun Early Key</b>: thanh toán 70% nhận nhà sử dụng (dự kiến ${z.k || ''}); vay hỗ trợ lãi suất tới 24 tháng`, 'Pháp lý: GCN QSDĐ từng lô, đủ điều kiện bán theo VB 17239/SXD-QLN; Techcombank bảo lãnh']).filter(Boolean);
+  const ext = /^g:/.test(z.ly || ''), ly = !z.ly ? '' : ext ? 'https://drive.google.com/thumbnail?id=' + z.ly.slice(2) + '&sz=w1600' : 'bh-img/lay/' + z.ly + '.jpg'; // g:<id> = ảnh layout trên Drive (Cora…)
+  return Object.assign({}, z, {u, h, ly, wl: z.ly && !ext && !/^sv-/.test(z.ly) ? 'bh-img/lay/' + z.ly + '-wall.png' : '', pl: z.pk ? 'bh-img/sach/mat-bang-tang-' + z.pk + '-toa-f2-fours-tower.jpg' : '',
+    vc: VIEW_CAP[z.vw] || '', p: (z.p || []).map(([k, ...r]) => [(PLAN_N[k] || [k, k])[0], (PLAN_N[k] || [k, k])[1], ...r]), g: z.g || []});
+}
+</script>
+<script>
+(async () => {
+  // Dữ liệu căn nằm sau dấu # của link (do CRM tạo) – mọi chữ đều được escape, ảnh chỉ nhận đường dẫn bh-img/ hoặc mã ảnh Drive
+  // #z=… : bản rút gọn (nén deflate, chỉ gửi số liệu – tên phương án, đường dẫn ảnh, điểm nổi bật cố định dựng lại tại đây) · #d=… : bản cũ
+  let D = null;
+  const b64u = t => Uint8Array.from(atob(t.replace(/-/g, '+').replace(/_/g, '/')), c => c.charCodeAt(0));
+  // link ngắn /c/<mã căn>-<sale>: lấy dữ liệu đã lưu trên Firestore (bộ sưu tập canLinks, chỉ đọc công khai)
+  const sid = (location.pathname.match(/\/c\/([\w.-]{3,80})/) || [])[1];
+  if (sid && !location.hash.includes('z=') && !location.hash.includes('d=')) { try { const r = await fetch(`https://firestore.googleapis.com/v1/projects/crm-sale-collection/databases/(default)/documents/canLinks/${encodeURIComponent(sid)}?key=AIzaSyCAPWKp9pA2LheZarLXqCLEnW6VqOltinU`);
+    const j = await r.json(), z = j && j.fields && j.fields.z && j.fields.z.stringValue; if (z) { const lg = new URLSearchParams(location.search).get('lang'); history.replaceState(null, '', location.pathname + location.search + '#z=' + z + (lg ? '&lang=' + lg : '')); } } catch (_) {} }
+  try { const hz = new URLSearchParams(location.hash.slice(1)).get('z');
+    if (hz) { const txt = await new Response(new Blob([b64u(hz)]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).text(); D = expandZ(JSON.parse(txt)); }
+    else { const h = new URLSearchParams(location.hash.slice(1)).get('d'); D = JSON.parse(decodeURIComponent(escape(atob(h.replace(/-/g, '+').replace(/_/g, '/'))))); } } catch (_) {}
+  const app = document.getElementById('app');
+  const hp = new URLSearchParams(location.hash.slice(1)); let TH = hp.get('th') || (D && D.th) || 'cham';
+  const setTh = t => { TH = t === 'navy' ? 'navy' : 'cham'; document.body.classList.toggle('t-navy', TH === 'navy'); document.body.classList.toggle('t-cham', TH === 'cham'); hp.set('th', TH); history.replaceState(null, '', location.pathname + location.search + '#' + hp.toString()); };
+  const E0 = v => esc(v == null ? '' : v);
+
+  // ===== Ngôn ngữ: vi / en / ko (thuật ngữ bất động sản) =====
+  const LANG = ['en', 'ko'].includes(hp.get('lang')) ? hp.get('lang') : 'vi';
+  if (LANG !== 'vi' && D && D.pn) D.pn = String(D.pn).replace(/\bCSBH\b/g, LANG === 'ko' ? '판매정책' : 'Sales Policy'); // CSBH = chính sách bán hàng
+  document.documentElement.lang = LANG;
+  const TX = {
+    vi: {kick: 'Dành riêng cho quý khách', floor: 'Tầng', garden: 'sân vườn', balcony: 'ban công', pgarden: 'Sân vườn riêng', view: 'View', from: 'Chỉ từ', list: 'Niêm yết', call: 'Gọi giữ căn', zalo: 'Nhắn Zalo',
+      ends: x => `Ưu đãi ${x} kết thúc sau`, days: 'ngày', scroll: 'CUỘN XUỐNG ↓', disc: 'Chiết khấu tới', save: 'Tiết kiệm', discNote: '*chưa gồm BLNG, KH thân thiết', own: 'Sở hữu chỉ với', bank: 'ngân hàng hỗ trợ',
+      rate: 'Lãi suất 0%', months: 'tháng', grace: 'Ân hạn gốc', ek: k => `Thanh toán 70% là <b>nhận nhà</b>${k ? ' (' + k + ')' : ''}`,
+      whyK: 'Giá trị khác biệt', whyH: c => `Vì sao căn ${c} đáng sở hữu?`,
+      s1: '01 — Vị trí', h1: 'Căn hộ của bạn nằm ở đâu?', s1p: (f, v) => `Tầng ${f} · mặt ${v}`, tw: f => `Khối 3D Tòa F2 · tầng ${f}`, twHint: '👆 Kéo để xoay tòa nhà', mb: (f, c) => `Mặt bằng tầng ${f} · căn ${c}`, mbHint: (c, g) => `Khung đỏ: căn ${c}${g ? ' · kẻ sọc: sân vườn riêng' : ''}`,
+      s2: '02 — Tầm view', h2: 'Mở cửa ra là cả một khung trời', vreal: 'Ảnh dựng view thực tế · ', villus: 'Hình ảnh minh họa',
+      s3: '03 — Thiết kế', h3: (t, g) => `Căn ${t} ${g ? 'có sân vườn riêng' : 'tối ưu công năng'}`, nfa: 'Thông thủy', total: 'tổng', tnfa: 'Tổng thông thủy', dim: 'Kích thước phủ bì', type: 'Loại căn', vdir: 'Hướng view', quote: '📞 Nhận báo giá căn này', layHint: '👆 Kéo để xoay mặt bằng căn hộ',
+      s4: '04 — Kết nối', h4: 'Tâm điểm sống mới của Đà Nẵng', s4p: 'Sông Hàn · biển Mỹ Khê · sân bay · pháo hoa DIFF', g1: 'Hoàng hôn bên sông', g2: 'Phố thương mại sầm uất', g3: 'Kết nối trung tâm',
+      s5: '05 — Tài chính', h5: 'Chọn cách sở hữu phù hợp', pol: 'Chính sách', best: 'Rẻ nhất', th: ['Phương án', 'Tổng thanh toán', 'Cần có tới nhận nhà', 'Đợt đầu (gồm cọc)'], pnote: 'Giá tạm tính theo chính sách hiện hành, đã gồm VAT &amp; KPBT.', pnote2: 'Hình ảnh mang tính minh họa theo tài liệu CĐT; số liệu chính thức theo hợp đồng mua bán.',
+      pTot: 'Tổng thanh toán', pOwn: 'Cần có tới khi nhận nhà', pFirst: 'Đợt đầu (đã gồm cọc)', fNote: (d, a, pc) => `Gồm cọc ${d} + đóng thêm ${a} để đủ ${pc}%`, pDisc: 'Chiết khấu',
+      fk: 'Số lượng căn đẹp có hạn', fh: c => `Giữ căn ${c} ngay hôm nay`, fp: 'Nhận phiếu tính giá chính thức &amp; lịch thanh toán chi tiết',
+      foot: 'Hình ảnh mặt bằng, layout, phối cảnh mang tính minh họa theo tài liệu chủ đầu tư. Giá và chính sách tạm tính tại thời điểm gửi, số liệu chính thức theo hợp đồng mua bán. Không phải tài liệu chính thức của chủ đầu tư.',
+      pdf: '⬇ Tải PDF', callNow: '📞 Gọi ngay', share: '🔗 Chia sẻ', copy: '📋 Copy link gửi khách', copied: 'Đã copy link – dán vào Zalo / Messenger để gửi', shareT: c => `Căn ${c} – Sun FourS Tower`, unit: 'căn', tc: 'Thông thủy', tbc: 'TT BC', tsv: 'Sân vườn', ttt: 'Tổng TT', bad: ['Link căn hộ không hợp lệ', 'Vui lòng liên hệ chuyên viên tư vấn để nhận lại link.'],
+      tag: 'Tầng'},
+    en: {kick: 'Exclusively for you', floor: 'Floor', garden: 'garden', balcony: 'balcony', pgarden: 'Private garden', view: 'View', from: 'From', list: 'List price', call: 'Call to reserve', zalo: 'Message on Zalo',
+      ends: x => `${x} offer ends in`, days: 'days', scroll: 'SCROLL ↓', disc: 'Discount up to', save: 'Save', discNote: '*Excludes bank-guarantee (BLNG) & loyal-customer discounts', own: 'Own it from', bank: 'bank financing',
+      rate: '0% interest', months: 'months', grace: 'Principal grace period', ek: k => `Pay 70% and <b>move in</b>${k ? ' (' + k + ')' : ''}`,
+      whyK: 'Why it stands out', whyH: c => `Why unit ${c} is worth owning`,
+      s1: '01 — Location', h1: 'Where is your home?', s1p: (f, v) => `Floor ${f} · facing ${v}`, tw: f => `3D view of Tower F2 · floor ${f}`, twHint: '👆 Drag to rotate the tower', mb: (f, c) => `Floor ${f} plan · unit ${c}`, mbHint: (c, g) => `Red frame: unit ${c}${g ? ' · hatched: private garden' : ''}`,
+      s2: '02 — Views', h2: 'Wake up to sweeping views', vreal: 'View rendering from the actual position · ', villus: 'Illustrative image',
+      s3: '03 — Design', h3: (t, g) => `${t} apartment ${g ? 'with a private garden' : '– efficient, functional layout'}`, nfa: 'Net floor area', total: 'total', tnfa: 'Total net area', dim: 'Overall dimensions', type: 'Unit type', vdir: 'View', quote: '📞 Get a quote for this unit', layHint: '👆 Drag to rotate the floor plan',
+      s4: '04 — Connectivity', h4: 'The new heart of Da Nang living', s4p: 'Han River · My Khe Beach · Airport · DIFF fireworks', g1: 'Riverside sunsets', g2: 'Vibrant retail streets', g3: 'Central connectivity',
+      s5: '05 — Payment', h5: 'Choose the payment plan that suits you', pol: 'Sales policy', best: 'Best price', th: ['Payment plan', 'Total price', 'Required before handover', 'First payment (incl. deposit)'], pnote: 'Indicative prices under the current sales policy, incl. VAT &amp; 2% maintenance fee.', pnote2: 'Images are for illustration only; official figures are as stated in the Sale and Purchase Agreement.',
+      pTot: 'Total price', pOwn: 'Required before handover', pFirst: 'First payment (incl. deposit)', fNote: (d, a, pc) => `Deposit ${d} + top-up ${a} to reach ${pc}%`, pDisc: 'Discount',
+      fk: 'Limited premium units', fh: c => `Reserve unit ${c} today`, fp: 'Receive the official price quotation &amp; detailed payment schedule',
+      foot: 'Floor plans, layouts and renderings are for illustration only, based on developer materials. Prices and policies are indicative at the time of sending; official figures are as stated in the Sale and Purchase Agreement. This is not an official document of the developer.',
+      pdf: '⬇ Download PDF', callNow: '📞 Call now', share: '🔗 Share', copy: '📋 Copy link', copied: 'Link copied – paste it into Zalo / WhatsApp / Messenger', shareT: c => `Unit ${c} – Sun FourS Tower`, unit: 'unit', tc: 'Net area', tbc: 'Balcony', tsv: 'Garden', ttt: 'Total', bad: ['Invalid apartment link', 'Please contact your sales consultant for a new link.'],
+      tag: 'Floor'},
+    ko: {kick: '고객님만을 위한 특별 제안', floor: '층', garden: '정원', balcony: '발코니', pgarden: '전용 정원', view: '조망', from: '최저', list: '분양가', call: '전화로 예약하기', zalo: 'Zalo 문의',
+      ends: x => `${x} 혜택 마감까지`, days: '일', scroll: '아래로 ↓', disc: '최대 할인', save: '절감액', discNote: '*은행보증(BLNG) 및 기존 고객 할인 별도', own: '최소 자기자본', bank: '은행 대출 지원',
+      rate: '이자 0%', months: '개월', grace: '원금 상환 유예', ek: k => `70% 납부 후 <b>입주</b>${k ? ' (' + k + ')' : ''}`,
+      whyK: '차별화된 가치', whyH: c => `${c} 호실을 선택해야 하는 이유`,
+      s1: '01 — 위치', h1: '고객님의 집은 어디에 있을까요?', s1p: (f, v) => `${f}층 · ${v} 방향`, tw: f => `F2동 3D 모형 · ${f}층`, twHint: '👆 드래그하여 건물을 회전하세요', mb: (f, c) => `${f}층 평면도 · ${c} 호실`, mbHint: (c, g) => `빨간 테두리: ${c} 호실${g ? ' · 빗금: 전용 정원' : ''}`,
+      s2: '02 — 조망', h2: '문을 열면 펼쳐지는 탁 트인 전망', vreal: '실제 위치 조망 투시도 · ', villus: '이미지는 연출된 것입니다',
+      s3: '03 — 설계', h3: (t, g) => `${t} ${g ? '전용 정원 세대' : '효율적인 공간 설계'}`, nfa: '전용면적', total: '합계', tnfa: '총 전용면적', dim: '외곽 치수', type: '타입', vdir: '조망', quote: '📞 이 호실 견적 받기', layHint: '👆 드래그하여 평면도를 회전하세요',
+      s4: '04 — 입지', h4: '다낭 새로운 생활의 중심', s4p: '한강 · 미케 해변 · 공항 · DIFF 불꽃축제', g1: '강변의 석양', g2: '활기찬 상업 거리', g3: '도심 접근성',
+      s5: '05 — 납부 조건', h5: '나에게 맞는 납부 방식 선택', pol: '분양 정책', best: '최저가', th: ['납부 방식', '총 분양대금', '입주 전 필요 자금', '1차 납부 (계약금 포함)'], pnote: '현행 분양 정책 기준 예상 금액이며 VAT 및 관리기금(2%) 포함입니다.', pnote2: '이미지는 참고용이며, 정확한 수치는 매매계약서에 따릅니다.',
+      pTot: '총 분양대금', pOwn: '입주 전 필요 자금', pFirst: '1차 납부 (계약금 포함)', fNote: (d, a, pc) => `계약금 ${d} + 추가 납부 ${a} (총 ${pc}%)`, pDisc: '할인',
+      fk: '한정 수량 · 프리미엄 세대', fh: c => `지금 ${c} 호실을 예약하세요`, fp: '공식 가격표와 상세 납부 일정을 받아보세요',
+      foot: '평면도, 레이아웃 및 투시도는 시행사 자료에 근거한 참고용 이미지입니다. 가격 및 정책은 발송 시점 기준 예상치이며, 정확한 수치는 매매계약서에 따릅니다. 본 자료는 시행사의 공식 문서가 아닙니다.',
+      pdf: '⬇ PDF 다운로드', callNow: '📞 전화하기', share: '🔗 공유', copy: '📋 링크 복사', copied: '링크가 복사되었습니다 – 카카오톡 / Zalo에 붙여넣기 하세요', shareT: c => `${c} 호실 – Sun FourS Tower`, unit: '호실', tc: '전용면적', tbc: '발코니', tsv: '정원', ttt: '합계', bad: ['유효하지 않은 링크입니다', '담당 상담사에게 새 링크를 요청해 주세요.'],
+      tag: '층'}}[LANG];
+  // tên loại căn, hướng view, phương án, chức danh
+  const TYPE_TR = {en: {'Studio': 'Studio', '1PN': '1-Bedroom', '1PN+': '1-Bedroom+', '2PN': '2-Bedroom', '2PN+': '2-Bedroom+', '3PN': '3-Bedroom'}, ko: {'Studio': '스튜디오', '1PN': '1베드룸', '1PN+': '1+1 베드룸', '2PN': '2베드룸', '2PN+': '2+1 베드룸', '3PN': '3베드룸'}};
+  const VIEW_TR = {en: [[/^sông hàn$/i, 'Han River'], [/^sông$/i, 'River'], [/^biển$/i, 'Sea'], [/pháo hoa DIFF/i, 'DIFF fireworks'], [/CV Đầm Sen/i, 'Dam Sen Park'], [/Ngũ Hành Sơn/i, 'Marble Mountains'], [/Sunneva/i, 'Sunneva Island'], [/Nội khu/i, 'Internal amenities'], [/Nam Hòa Xuân/i, 'Nam Hoa Xuan']],
+    ko: [[/^sông hàn$/i, '한강'], [/^sông$/i, '강'], [/^biển$/i, '바다'], [/pháo hoa DIFF/i, 'DIFF 불꽃축제'], [/CV Đầm Sen/i, '담센 공원'], [/Ngũ Hành Sơn/i, '오행산'], [/Sunneva/i, '선네바 아일랜드'], [/Nội khu/i, '단지 내부'], [/Nam Hòa Xuân/i, '남호아쑤언']]};
+  const trType = t => LANG === 'vi' ? t : (TYPE_TR[LANG][t] || t);
+  const trView = v => LANG === 'vi' ? v : String(v || '').split(/\s*[,·]\s*/).filter(Boolean).map(x => { const m = VIEW_TR[LANG].find(([re]) => re.test(x.trim())); return m ? m[1] : x; }).join(LANG === 'ko' ? ', ' : ', ');
+  const trPlan = n => { if (LANG === 'vi') return n; const m = String(n || ''), pc = (m.match(/(\d+)%/) || [])[1];
+    if (/không vay/i.test(m)) return LANG === 'en' ? 'No loan – standard schedule' : '무대출 – 표준 납부';
+    if (/^tiến độ chuẩn/i.test(m)) return LANG === 'en' ? 'Standard' : '표준 납부';
+    if (/vay/i.test(m)) return LANG === 'en' ? `${/ngân hàng/i.test(m) ? '' : 'Loan '}${pc}%${/ngân hàng/i.test(m) ? ' bank loan' : ''}`.trim() : `은행 대출 ${pc}%`;
+    if (/sớm|TTS/i.test(m)) return LANG === 'en' ? `${/^TTS/i.test(m) ? 'Early' : 'Early payment'} ${pc}%` : `${pc}% 조기 납부`;
+    return m; };
+  const TITLE_TR = {en: [[/phó giám đốc/i, 'Deputy Sales Director'], [/giám đốc/i, 'Sales Director'], [/trưởng phòng/i, 'Sales Manager'], [/trưởng nhóm/i, 'Team Leader'], [/chuyên viên|nhân viên/i, 'Sales Consultant']],
+    ko: [[/phó giám đốc/i, '영업 부이사'], [/giám đốc/i, '영업 이사'], [/trưởng phòng/i, '영업 팀장'], [/trưởng nhóm/i, '팀 리더'], [/chuyên viên|nhân viên/i, '분양 상담사']]};
+  const trTitle = t => LANG === 'vi' ? t : ((TITLE_TR[LANG].find(([re]) => re.test(t || '')) || [, t])[1]);
+  // điểm nổi bật: dịch theo mẫu câu của CRM
+  const trHl = x => { if (LANG === 'vi') return x; const en = LANG === 'en';
+    if (/^Tầm view/.test(x)) return (en ? 'Views: <b>' : '조망: <b>') + E0(trView(x.replace(/<[^>]+>/g, '').replace(/^Tầm view:\s*/, ''))) + '</b>';
+    if (/^Tầng cao/.test(x)) return en ? 'High floor – open views and fresh breezes from the Han River and the sea' : '고층 세대 – 탁 트인 조망과 한강·바다의 시원한 바람';
+    if (/sân vườn riêng/.test(x)) return en ? 'Private garden per the developer floor plan – townhouse-style living in the sky' : '시행사 평면도 기준 전용 정원 – 하늘 위의 타운하우스 라이프';
+    if (/Sun Early Key/.test(x)) return en ? `<b>Sun Early Key</b>: pay 70% and move in${D.k ? ' (expected ' + E0(D.k) + ')' : ''}; bank loan with interest support for up to 24 months` : `<b>Sun Early Key</b>: 70% 납부 후 입주${D.k ? ' (예정 ' + E0(D.k) + ')' : ''}, 최대 24개월 대출 이자 지원`;
+    if (/^Pháp lý/.test(x)) return en ? 'Legal: land-use right certificate issued per lot; eligible for sale under Official Letter 17239/SXD-QLN; bank guarantee by Techcombank' : '법적 사항: 필지별 토지사용권 증서 발급, 공문 17239/SXD-QLN에 따른 분양 요건 충족, 테크콤뱅크 지급 보증';
+    if (/Hàng hiếm/.test(x)) return en ? '<b>Rare find:</b> only a few units of this line remain on the market' : '<b>희소 매물:</b> 동일 라인 잔여 세대 극소수';
+    if (/thấp nhất|Top \d/.test(x)) { const t = (x.match(/Top (\d+)/) || [])[1]; return en ? (t ? `<b>Top ${t}</b> best price per m² among available units of this type` : '<b>Lowest price per m²</b> among available units of this type') : (t ? `동일 타입 중 m²당 가격 <b>상위 ${t}위</b>` : '동일 타입 중 <b>m²당 최저가</b>'); }
+    if (/thấp hơn/.test(x)) return en ? 'Price per m² <b>below the average</b> of this unit type' : 'm²당 가격이 동일 타입 <b>평균보다 저렴</b>';
+    return ''; };
+  // tiền: vi = tỷ/triệu · en = VND bn/mn · ko = 억/만 동
+  const tyP = v => { v = N(v);
+    if (LANG === 'en') return v >= 1e9 ? [(v / 1e9).toLocaleString('en-US', {maximumFractionDigits: 3}), 'bn'] : [Math.round(v / 1e6).toLocaleString('en-US'), 'mn'];
+    if (LANG === 'ko') { const eok = Math.floor(v / 1e8), man = Math.round(v % 1e8 / 1e4); return eok ? [eok + '억', (man ? man.toLocaleString('ko-KR') + '만 ' : '') + '동'] : [man.toLocaleString('ko-KR') + '만', '동']; }
+    return v >= 1e9 ? [fm(v / 1e9, 3), 'tỷ'] : [fm(Math.round(v / 1e6), 0), 'triệu']; };
+
+  if (!D || !D.c) { app.innerHTML = `<div class="err"><div><h2>${TX.bad[0]}</h2><p>${TX.bad[1]}</p></div></div>`; return; }
+  const E = v => esc(v == null ? '' : v), N = v => Number(v) || 0;
+  const img = p => /^bh-img\/[\w\-\/.]+$/.test(p || '') ? p : '';
+  const drv = id => /^[\w-]{10,80}$/.test(id || '') ? `https://drive.google.com/thumbnail?id=${id}&sz=w2000` : '';
+  const fm = (v, d = 1) => N(v).toLocaleString(['en', 'ko'].includes(hp.get('lang')) ? 'en-US' : 'vi-VN', {maximumFractionDigits: d});
+  const ty = v => { const [a, b] = tyP(v); return LANG === 'en' ? 'VND ' + a + ' ' + b : a + ' ' + b; };
+  const money = v => Math.round(N(v)).toLocaleString(LANG === 'en' ? 'en-US' : LANG === 'ko' ? 'ko-KR' : 'vi-VN');
+  const phone = String(D.ph || '').replace(/\D/g, ''), tel = phone ? 'tel:' + phone : '#', zalo = phone ? 'https://zalo.me/' + phone : '#';
+  const hl = s => E(s).replace(/&lt;(\/?)b&gt;/g, '<$1b>'); // chỉ cho phép thẻ <b>
+  const plans = (D.p || []).map(p => ({name: p[0], short: p[1], total: N(p[2]), own: N(p[3]), first: N(p[4]), disc: N(p[5]), dep: N(p[6]), fp: N(p[7]) || 15}));
+  const best = plans.reduce((a, b) => !a || b.total < a.total ? b : a, null) || {total: N(D.L), name: ''};
+  const vay = plans.find(p => /vay/i.test(p.name) && !/không vay/i.test(p.name));
+  const L = levelOf(D.f), yF = 415 + (20 - L + .5) * 11.2, rect = F2_RECT[D.u];
+  const own = vay ? tyP(vay.own) : null;
+  document.title = `${D.c} – ${trType(D.t) || ''} – Sun FourS Tower`;
+  const viewSrc = drv(D.vw) || 'bh-img/fours-view-ban-cong.jpg';
+  const garden = (D.g || []).map(r => r.map(N));
+  const planSVG = rect ? `<svg viewBox="0 0 2000 1414" preserveAspectRatio="none"><defs><pattern id="hh" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="7" height="16" fill="rgba(213,0,0,.5)"/></pattern></defs>
+      ${garden.map(r => `<rect x="${r[0]}" y="${r[1]}" width="${r[2] - r[0]}" height="${r[3] - r[1]}" fill="url(#hh)" stroke="#d50000" stroke-width="4" stroke-dasharray="12 6"/>`).join('')}
+      <rect x="${rect[0] - 6}" y="${rect[1] - 6}" width="${rect[2] - rect[0] + 12}" height="${rect[3] - rect[1] + 12}" fill="none" stroke="#fff" stroke-width="16"/><rect x="${rect[0]}" y="${rect[1]}" width="${rect[2] - rect[0]}" height="${rect[3] - rect[1]}" fill="rgba(213,0,0,.32)" stroke="#d50000" stroke-width="7"/>${(() => {
+        // thẻ chú thích của riêng căn này, đặt ở lề ngoài khối tòa (ảnh đã bỏ chú thích các căn khác)
+        const cx = (rect[0] + rect[2]) / 2, cy = (rect[1] + rect[3]) / 2, left = cx < 1040, bw = 360, rows = [[TX.tc, fm(D.tt) + ' m²']].concat(D.bc ? [[D.sv ? TX.tsv : TX.tbc, fm(D.bc) + ' m²'], [TX.ttt, fm(N(D.tt) + N(D.bc)) + ' m²']] : []), bh = 70 + rows.length * 52;
+        const bx = left ? 40 : 2000 - 40 - bw, by = Math.min(Math.max(cy - bh / 2, 300), 1390 - bh), ex = left ? rect[0] : rect[2], lx = left ? bx + bw : bx;
+        return `<line x1="${lx}" y1="${by + bh / 2}" x2="${ex}" y2="${cy}" stroke="#d50000" stroke-width="5"/><circle cx="${ex}" cy="${cy}" r="9" fill="#d50000"/>
+          <rect x="${bx}" y="${by}" width="${bw}" height="${bh}" rx="14" fill="#fff" stroke="#d50000" stroke-width="5"/><rect x="${bx}" y="${by}" width="${bw}" height="66" rx="14" fill="#d50000"/><rect x="${bx}" y="${by + 40}" width="${bw}" height="26" fill="#d50000"/>
+          <text x="${bx + bw / 2}" y="${by + 46}" text-anchor="middle" font-family="Be Vietnam Pro,sans-serif" font-weight="800" font-size="38" fill="#fff">${E(D.c)}</text>
+          ${rows.map(([k, v], i) => `<text x="${bx + 18}" y="${by + 106 + i * 52}" font-family="Be Vietnam Pro,sans-serif" font-size="30" fill="#555">${k}</text><text x="${bx + bw - 18}" y="${by + 106 + i * 52}" text-anchor="end" font-family="Be Vietnam Pro,sans-serif" font-weight="800" font-size="31" fill="#b71c1c">${v}</text>`).join('')}`; })()}</svg>` : '';
+  const HL = (D.h || []).map(x => LANG === 'vi' ? hl(x) : trHl(x)).filter(Boolean);
+  const stat = (t, n, unit, sub, note) => `<div class="st rv"><span>${t}</span><b data-n="${E(n)}">${E(n)}<i>${E(unit)}</i></b><small>${sub}</small>${note ? `<em>${note}</em>` : ''}</div>`;
+  app.innerHTML = `
+  <header class="hd" id="hd"><div class="wrap"><img src="bh-img/logo-sun-fours-tower.png" alt="Sun FourS Tower"><b>SUN FOURS TOWER</b><a class="btn b-gd" href="${tel}">📞 ${E(D.ph)}</a></div></header>
+  <div class="hero"><img src="bh-img/fours-pk-f2-f3.jpg" alt="">
+    <div class="wrap"><div class="kick">${TX.kick}</div><h1>${E(D.c)}</h1>
+      <div class="chips"><span>${E(trType(D.t))}</span><span>${LANG === 'ko' ? E(D.f) + TX.floor : TX.floor + ' ' + E(D.f)}</span><span>${fm(D.tt)} m²${D.bc ? ' + ' + fm(D.bc) + ' m² ' + (D.sv ? TX.garden : TX.balcony) : ''}</span>${D.sv ? `<span>🌿 ${TX.pgarden}</span>` : ''}</div>
+      <p class="hview">🌅 ${TX.view} ${E(trView(D.v))}</p>
+      <div class="hprice"><div><span>${TX.from}</span><b>${ty(best.total)}</b></div><s>${TX.list} ${ty(D.L)}</s></div>
+      <div class="hcta"><a class="btn b-gd" href="${tel}">📞 ${TX.call}</a><a class="btn b-gl" href="${zalo}" target="_blank" rel="noopener">💬 ${TX.zalo}</a></div>
+      ${D.dl ? `<div class="cd">⏳ ${TX.ends(E(D.pn))} <b id="cd">--</b></div>` : ''}
+    </div><div class="scroll">${TX.scroll}</div></div>
+  <div class="wrap"><div class="stats">
+    ${stat(TX.disc, String(N(D.d)), '%', `${TX.save} <b>${ty(N(D.L) - best.total)}</b>`, TX.discNote)}
+    ${own ? stat(TX.own + (LANG === 'en' ? ' (VND)' : ''), own[0], ' ' + (LANG === 'en' ? (own[1] === 'bn' ? 'billion' : 'million') : own[1] || ''), `<b>${N(D.o)}%</b> · <b>70%</b> ${TX.bank}`) : ''}
+    ${stat(TX.rate, '24', ' ' + TX.months, `${TX.grace} <b>24 ${TX.months}</b>`)}
+    ${stat('Sun Early Key', '70', '%', TX.ek(E(D.k)))}
+  </div></div>
+
+  ${HL.length ? `<section class="s swhy"><div class="wrap"><div class="sh rv"><i>${TX.whyK}</i><h2>${TX.whyH(E(D.c))}</h2></div>
+    <div class="why">${HL.map(x => `<div class="rv"><span>${x}</span></div>`).join('')}</div></div></section>` : ''}
+  <div class="wrap pcard"><div><b>${E(D.n)}</b><span>${E(trTitle(D.ti))}</span></div><em>📞 ${E(D.ph)} · Zalo</em></div>
+  <section class="s pg"><div class="wrap">
+    <div class="sh rv"><i>${TX.s1}</i><h2>${TX.h1}</h2><p>${TX.s1p(E(D.f), E(trView(D.v)))}</p></div>
+    <div class="loc ${rect ? '' : 'one'}"><div class="card rv"><div class="ct">${TX.tw(E(D.f))}</div><div class="tw3d" id="tw"></div><div class="hint">${TX.twHint}</div></div>
+      ${rect ? `<div class="card rv"><div class="ct">${TX.mb(E(D.f), E(D.c))}</div><div class="plan"><img src="${img(D.pl)}" alt="">${planSVG}</div><div class="hint">${TX.mbHint(E(D.c), garden.length)}</div></div>` : ''}</div>
+  </div></section>
+
+  <section class="s pg"><div class="wrap">
+    <div class="sh rv"><i>${TX.s2}</i><h2>${TX.h2}</h2></div>
+    <div class="view rv"><img src="${viewSrc}" alt="" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='bh-img/fours-view-ban-cong.jpg'"><div><b>${E(trView(D.v))}</b><small>${D.vc && LANG === 'vi' ? TX.vreal + E(D.vc) : D.vc ? TX.vreal.replace(/ · $/, '') : TX.villus}</small></div></div>
+  </div></section>
+
+  <section class="s s3"><div class="wrap">
+    <div class="sh rv"><i>${TX.s3}</i><h2>${TX.h3(E(trType(D.t)), D.sv)}</h2><p>${TX.nfa} ${fm(D.tt)} m²${D.bc ? ' · ' + TX.total + ' ' + fm(N(D.tt) + N(D.bc)) + ' m²' : ''}</p></div>
+    <div class="lay"><div class="card rv lay3">${img(D.wl) ? '<div class="tabs ltab"><button class="on" data-l="3d">3D</button><button data-l="2d">2D</button></div>' : ''}
+        <div class="stage" id="stage"><div class="slab${img(D.wl) ? ' walls' : ''}" id="slab">${img(D.ly) ? `<img src="${img(D.ly)}" alt="Layout căn">` : ''}${img(D.wl) ? Array.from({length: 22}, (_, i) => `<img class="wl${i === 21 ? ' top' : ''}" src="${img(D.wl)}" alt="" style="--z:${i + 1}">`).join('') : ''}</div></div>
+        ${img(D.wl) ? `<div class="hint">${TX.layHint}</div>` : ''}</div>
+      <div class="rv"><div class="spec"><div><span>${TX.nfa}</span><b>${fm(D.tt)} m²</b></div>${D.bc ? `<div><span>${D.sv ? TX.pgarden : TX.tbc}</span><b>${fm(D.bc)} m²</b></div><div class="w"><span>${TX.tnfa}</span><b>${fm(N(D.tt) + N(D.bc))} m²</b></div>` : ''}
+        ${D.dm ? `<div class="w"><span>${TX.dim}</span><b>${E(LANG !== 'vi' ? D.dm.replace(/,/g, '.') : D.dm)}</b></div>` : ''}<div><span>${TX.tag}</span><b>${E(D.f)}</b></div><div><span>${TX.type}</span><b>${E(trType(D.t))}</b></div>
+        <div class="w"><span>${TX.vdir}</span><b>${E(trView(D.v))}</b></div></div>
+        <div class="lprice"><div><span>${TX.from}</span><b>${ty(best.total)}</b></div><a class="btn b-gd" href="${tel}">${TX.quote}</a></div></div></div>
+  </div></section>
+
+  <section class="s pg"><div class="wrap">
+    <div class="sh rv"><i>${TX.s4}</i><h2>${TX.h4}</h2><p>${TX.s4p}</p></div>
+    <div class="map rv"><img src="bh-img/fours-lien-ket-vung.jpg" alt=""><span class="pin" style="top:${(yF / 645 * 100).toFixed(2)}%"><b>${E(D.c)}</b>${LANG === 'ko' ? E(D.f) + TX.floor : TX.floor + ' ' + E(D.f)}</span></div>
+    <div class="gal">${[['fours-pk-hoang-hon.jpg', TX.g1], ['fours-pk-khoi-de.jpg', TX.g2], ['fours-vt-phoi-canh.jpg', TX.g3]].map(([a, t]) => `<figure class="rv"><img src="bh-img/${a}" alt=""><figcaption>${t}</figcaption></figure>`).join('')}</div>
+  </div></section>
+
+  <section class="s s5"><div class="wrap">
+    <div class="sh rv"><i>${TX.s5}</i><h2>${TX.h5}</h2><p>${/^(Sales Policy|판매정책)(?=\s|$)/.test(D.pn || '') ? '' : TX.pol + ' '}${E(D.pn)}</p></div>
+    <div class="plans rv">${plans.map((p, i) => `<button data-p="${i}" class="${p === best ? 'on' : ''}">${E(trPlan(p.short || p.name))}${p === best ? `<sup>${TX.best}</sup>` : ''}</button>`).join('')}</div>
+    <div class="pbox rv" id="pbox"></div>
+    <table class="ptab"><thead><tr>${TX.th.map(x => `<th>${x}</th>`).join('')}</tr></thead><tbody>${plans.map(p => `<tr class="${p === best ? 'best' : ''}"><td>${E(trPlan(p.name))}${p === best ? ' ★' : ''}</td><td>${money(p.total)}</td><td>${money(p.own)}</td><td>${money(p.first)}</td></tr>`).join('')}</tbody></table><p class="pnote" data-x="${E(TX.pnote2)}">${TX.pnote}</p>
+  </div></section>
+
+
+
+  <div class="final"><div class="wrap"><i>${TX.fk}</i><h2>${TX.fh(E(D.c))}</h2><p>${TX.fp}</p>
+    <div class="av">${E(String(D.n || 'S').trim().split(/\s+/).pop()[0] || 'S')}</div><div class="nm">${E(D.n)}</div><div class="tt">${E(trTitle(D.ti))}</div><div class="ph" style="display:none;font-size:26px;font-weight:900;color:#f3d38a">📞 ${E(D.ph)} · Zalo</div>
+    <div class="hcta" style="justify-content:center"><a class="btn b-gd" href="${tel}">📞 ${E(D.ph)}</a><a class="btn b-zl" href="${zalo}" target="_blank" rel="noopener">💬 Chat Zalo</a><button class="btn b-gl cpb" type="button">${TX.copy}</button><button class="btn b-gl shb" type="button">${TX.share}</button></div>
+    <div class="foot">${TX.foot}</div></div></div>
+  <div class="fbtn"><button class="btn b-gl cpb" type="button">${TX.copy}</button><button class="btn b-gl shb" type="button">${TX.share}</button><button class="btn b-gd pdfb" id="pdfb">${TX.pdf}</button></div><div class="toastc" id="toastc"></div><div class="thm" title="Đổi màu"><button data-th="cham" aria-label="Champagne"></button><button data-th="navy" aria-label="Navy cam"></button></div>
+  <div class="lng">${[['vi', 'VI'], ['en', 'EN'], ['ko', '한국어']].map(([k, t]) => `<button data-lg="${k}" class="${k === LANG ? 'on' : ''}">${t}</button>`).join('')}</div>
+  <div class="bar"><a class="btn b-gd" href="${tel}">${TX.callNow}</a><a class="btn b-zl" href="${zalo}" target="_blank" rel="noopener">💬 Zalo</a><button class="btn b-gl cpb bsh" type="button" aria-label="${TX.copy}">📋</button><button class="btn b-gl shb bsh" type="button" aria-label="${TX.share}">🔗</button><button class="btn b-gl bpdf" type="button">⬇ PDF</button></div>`;
+
+  setTh(TH); app.querySelectorAll('[data-th]').forEach(b => b.onclick = () => setTh(b.dataset.th));
+  app.querySelectorAll('[data-lg]').forEach(b => b.onclick = () => { hp.set('lang', b.dataset.lg); hp.delete('print'); location.hash = hp.toString(); location.reload(); });
+  // khối 3D: mái là mặt bằng tầng của căn
+  window.planOf = () => ({img: (img(D.pl) || 'bh-img/mat-bang-tang-8-19-toa-f2-fours-tower.jpg').replace('bh-img/sach/', 'bh-img/')}); /* khối 3D tự đổi sang bản sạch */ window.TW_ROOF = 'cdt';
+  const U0 = {u: D.u, floor: D.f, code: D.c}, tw = document.getElementById('tw');
+  let rot = 0, k = .574; const TWL = {en: [['Sông Hàn · biển · pháo hoa DIFF', 'Han River · Sea · DIFF fireworks'], ['Ngũ Hành Sơn · CV Đầm Sen', 'Marble Mtns · Dam Sen Park'], ['Nội khu · Nam Hòa Xuân', 'Internal amenities · Nam Hoa Xuan'], ['Sông · Sunneva', 'River · Sunneva Island'], [/ · tầng (\w+)/g, ' · floor $1'], ['Mái: mặt bằng tầng của căn (khung đỏ) · minh họa, không theo tỉ lệ', 'Roof: floor plan of the unit (red frame) · illustrative, not to scale']],
+    ko: [['Sông Hàn · biển · pháo hoa DIFF', '한강 · 바다 · DIFF 불꽃축제'], ['Ngũ Hành Sơn · CV Đầm Sen', '오행산 · 담센 공원'], ['Nội khu · Nam Hòa Xuân', '단지 내부 · 남호아쑤언'], ['Sông · Sunneva', '강 · 선네바 아일랜드'], [/ · tầng (\w+)/g, ' · $1층'], ['Mái: mặt bằng tầng của căn (khung đỏ) · minh họa, không theo tỉ lệ', '옥상: 해당 층 평면도 (빨간 테두리) · 참고용, 축척 아님']]}[LANG] || [];
+  const draw = () => { let h = towerSVGraw(U0, rot, k); TWL.forEach(([a, b]) => { h = h.split ? (a instanceof RegExp ? h.replace(a, b) : h.split(a).join(b)) : h; }); tw.innerHTML = h; }; draw();
+  let G = null, raf = 0;
+  tw.addEventListener('pointerdown', e => { G = {x: e.clientX, y: e.clientY, r: rot, k}; tw.setPointerCapture(e.pointerId); });
+  tw.addEventListener('pointermove', e => { if (!G) return; rot = G.r + (e.clientX - G.x) * .012; k = Math.min(.92, Math.max(.32, G.k + (e.clientY - G.y) * .004)); if (!raf) raf = requestAnimationFrame(() => { raf = 0; draw(); }); });
+  ['pointerup', 'pointercancel'].forEach(t => tw.addEventListener(t, () => G = null));
+  tw.addEventListener('dblclick', () => { rot = 0; k = .574; draw(); });
+  // tự xoay nhẹ khi mới vào khung nhìn để khách biết là xoay được
+  let spun = false; new IntersectionObserver(es => es.forEach(en => { if (!en.isIntersecting || spun) return; spun = true; const t0 = performance.now();
+    const step = t => { const p = Math.min(1, (t - t0) / 2200); rot = Math.sin(p * Math.PI * 2) * .55; draw(); if (p < 1 && !G) requestAnimationFrame(step); else if (!G) { rot = 0; draw(); } }; requestAnimationFrame(step); }), {threshold: .5}).observe(tw);
+
+  // layout 3D: nghiêng mặt bằng căn như mô hình, kéo để xoay
+  const stage = document.getElementById('stage'), slab = document.getElementById('slab'); let lr = -28, lt = 52, l3 = !!img(D.wl), LG = null; /* ảnh layout đã là 3D (căn sân vườn) thì hiện thẳng */
+  const lset = () => { slab.style.transform = l3 ? `rotateX(${lt}deg) rotateZ(${lr}deg) scale(.98)` : 'none'; stage.classList.toggle('d3', l3); }; lset();
+  app.querySelectorAll('[data-l]').forEach(b => b.onclick = () => { l3 = b.dataset.l === '3d'; app.querySelectorAll('[data-l]').forEach(x => x.classList.toggle('on', x === b)); lset(); });
+  stage.addEventListener('pointerdown', e => { if (!l3) return; LG = {x: e.clientX, y: e.clientY, r: lr, t: lt}; slab.style.transition = 'none'; stage.setPointerCapture(e.pointerId); });
+  stage.addEventListener('pointermove', e => { if (!LG) return; lr = LG.r + (e.clientX - LG.x) * .35; lt = Math.min(70, Math.max(0, LG.t - (e.clientY - LG.y) * .25)); lset(); });
+  ['pointerup', 'pointercancel'].forEach(t => stage.addEventListener(t, () => { LG = null; slab.style.transition = ''; }));
+
+  // Chia sẻ: điện thoại mở bảng chia sẻ (Zalo, Messenger…); máy tính copy link (bỏ phần tự in PDF)
+  const shareUrl = () => { if (sid) { const lg = new URLSearchParams(location.hash.slice(1)).get('lang'); return location.origin + '/c/' + sid + (lg ? '?lang=' + lg : ''); } const h = new URLSearchParams(location.hash.slice(1)); h.delete('print'); return location.href.split('#')[0] + '#' + h.toString(); };
+  const toastc = m => { const t = document.getElementById('toastc'); t.textContent = m; t.classList.add('on'); clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('on'), 2600); };
+  const doShare = async () => { const url = shareUrl(), title = TX.shareT(D.c);
+    if (navigator.share) { try { await navigator.share({title, text: title + (D.n ? ' · ' + D.n + ' ' + (D.ph || '') : ''), url}); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
+    try { await navigator.clipboard.writeText(url); } catch (_) { const ta = document.createElement('textarea'); ta.value = url; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} ta.remove(); }
+    toastc(TX.copied); };
+  const doCopy = async () => { const url = shareUrl(), msg = `${TX.shareT(D.c)}\n${url}${D.ph ? '\n' + (D.n || '') + ' · ' + D.ph : ''}`;
+    try { await navigator.clipboard.writeText(msg); } catch (_) { const ta = document.createElement('textarea'); ta.value = msg; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} ta.remove(); }
+    toastc(TX.copied); };
+  app.querySelectorAll('.shb').forEach(b => b.onclick = doShare); app.querySelectorAll('.cpb').forEach(b => b.onclick = doCopy);
+  // tabs
+  app.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { app.querySelectorAll('[data-tab]').forEach(x => x.classList.toggle('on', x === b)); app.querySelectorAll('.pane').forEach(p => p.classList.toggle('on', p.id === b.dataset.tab)); });
+  // phương án thanh toán
+  const pbox = document.getElementById('pbox');
+  const showP = i => { const p = plans[i]; if (!p) return; app.querySelectorAll('[data-p]').forEach(b => b.classList.toggle('on', +b.dataset.p === i));
+    pbox.innerHTML = `<div class="hot"><span>${TX.pTot}</span><b>${ty(p.total)}</b><small>${money(p.total)} ${LANG === 'vi' ? 'đ' : 'VND'}</small></div><div><span>${TX.pOwn}</span><b>${ty(p.own)}</b><small>${E(trPlan(p.name))}</small></div><div><span>${TX.pFirst}</span><b>${ty(p.first)}</b><small>${p.dep ? TX.fNote(ty(p.dep), ty(p.first - p.dep), p.fp) : TX.pDisc + ' ' + ty(p.disc)}</small></div>`; };
+  app.querySelectorAll('[data-p]').forEach(b => b.onclick = () => showP(+b.dataset.p)); showP(Math.max(0, plans.indexOf(best)));
+  // đếm ngược hạn chính sách
+  const cd = document.getElementById('cd'), end = D.dl ? new Date(D.dl + 'T23:59:59+07:00').getTime() : 0;
+  const tick = () => { if (!cd) return; let s = Math.max(0, Math.floor((end - Date.now()) / 1000)); const dd = Math.floor(s / 86400); s %= 86400;
+    cd.textContent = `${dd} ${TX.days} ${String(Math.floor(s / 3600)).padStart(2, '0')}:${String(Math.floor(s % 3600 / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; };
+  if (cd) { tick(); setInterval(tick, 1000); }
+  // header + hiệu ứng xuất hiện + đếm số
+  const hd = document.getElementById('hd'); addEventListener('scroll', () => hd.classList.toggle('on', scrollY > 40), {passive: true});
+  const io = new IntersectionObserver(es => es.forEach(en => { if (!en.isIntersecting) return; en.target.classList.add('in'); io.unobserve(en.target);
+    const b = en.target.querySelector('b[data-n]'); if (b && /^[\d.,]+$/.test(b.dataset.n)) { const tgt = parseFloat(b.dataset.n.replace(',', '.')), dec = /[.,]/.test(b.dataset.n), u = b.querySelector('i').outerHTML, t0 = performance.now();
+      const st = t => { const p = Math.min(1, (t - t0) / 1100), v = tgt * (1 - Math.pow(1 - p, 3)); b.innerHTML = (dec ? v.toLocaleString('vi-VN', {maximumFractionDigits: 1}) : Math.round(v)) + u; if (p < 1) requestAnimationFrame(st); }; requestAnimationFrame(st); } }), {threshold: .15});
+  app.querySelectorAll('.rv').forEach(x => io.observe(x)); setTimeout(() => app.querySelectorAll('.rv').forEach(x => x.classList.add('in')), 5000); // dự phòng: luôn hiện đủ nội dung
+  // Tải PDF: in trang (chọn "Lưu dưới dạng PDF"); ?print=1 từ CRM thì tự mở hộp thoại in khi ảnh tải xong
+  // gọi print() NGAY trong lần bấm (Safari/Mac chặn hộp thoại in nếu gọi trễ sau setTimeout)
+  const doPrint = () => { app.querySelectorAll('.rv').forEach(x => x.classList.add('in')); document.title = ({vi: 'Chi-can-', en: 'Unit-', ko: 'Unit-KO-'}[LANG]) + String(D.c).replace(/[^\w-]+/g, '-'); try { print(); } catch (e) {} };
+  document.getElementById('pdfb').onclick = doPrint; app.querySelector('.bpdf').onclick = doPrint;
+  if (/(^|&)print=1/.test(location.hash.slice(1))) {
+    // mở từ CRM để in: hiện nút lớn (Safari chỉ mở hộp thoại in khi người dùng bấm) + thử tự in khi ảnh tải xong (Chrome)
+    const mac = /Mac/.test(navigator.platform || navigator.userAgent), bar = document.createElement('div'); bar.className = 'prbar';
+    bar.innerHTML = `<button type="button">🖨 In / Lưu PDF</button><span>${mac ? 'hoặc nhấn <b>⌘ + P</b>' : 'hoặc nhấn <b>Ctrl + P</b>'} → chọn “Lưu dưới dạng PDF”</span><i title="Đóng">✕</i>`;
+    document.body.appendChild(bar); bar.querySelector('button').onclick = doPrint; bar.querySelector('i').onclick = () => bar.remove();
+    const safari = /Safari/.test(navigator.userAgent) && !/Chrome|CriOS|Edg|Firefox/.test(navigator.userAgent);
+    if (!safari) { const imgs = [...document.images]; Promise.race([Promise.all(imgs.map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; }))), new Promise(r => setTimeout(r, 6000))]).then(() => setTimeout(doPrint, 300)); } }
+})();
+</script>
+</body>
+</html>
