@@ -156,13 +156,7 @@ def home():
     # 01 Vị trí
     b += qh4('↗', False)
     b += pband('30 tầng bên <b>biển Mỹ Khê</b>', 'Tòa tháp cao 114 m – biểu tượng mới của Sun Group bên biển Đà Nẵng.', 'Web – dải ảnh tòa tháp')
-    b += ('<section class="sec" id="vi-tri"><div class="wrap">' + sh('01', 'Vị trí', 'Tọa độ <b>trung điểm</b> hệ di sản Đà Nẵng', 'y') +
-          '<div class="g2 eq"><div class="txt"><p>Dự án nằm ở giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, đúng đoạn nối đại lộ ven biển với "cung đường tỷ đô" của chuỗi resort Đà Nẵng – Hội An. '
-          'Một hướng về trung tâm và bán đảo Sơn Trà, một hướng về Ngũ Hành Sơn và phố cổ Hội An; trước mặt là biển Mỹ Khê – Sơn Thủy.</p>'
-          '<ul class="ck"><li><b>~400 m</b> ra bãi tắm Sơn Thủy qua công viên ven biển</li><li><b>~500 m</b> tới nhà ga LRT 09 (quy hoạch tuyến sân bay – Hội An)</li>'
-          '<li><b>4 km</b> tới tổ hợp Galaxy và Đà Nẵng Downtown – đủ gần để kết nối, đủ xa để riêng tư</li><li><b>5–10 phút</b> tới Ngũ Hành Sơn, phố An Thượng · <b>10–15 phút</b> tới sân bay · <b>~30 phút</b> tới Hội An</li></ul>'
-          '<p class="src">Khoảng cách theo tài liệu Kick-off; thời gian ước tính bằng ô tô.</p></div>'
-          + ('<figure class="fg sodo"><img src="%s.webp" srcset="%s-800.webp 800w, %s.webp 1000w" sizes="(max-width: 760px) 100vw, 560px" width="1000" height="1400" alt="Sơ đồ kết nối Sun Saphia Residence với trung tâm Đà Nẵng, sân bay, Ngũ Hành Sơn, hướng đi Hội An" loading="lazy" decoding="async"><figcaption>Sơ đồ minh họa, không theo tỷ lệ</figcaption></figure>' % ((RAW + '7f7a743766755fec9902ed74af5562cdfdd7f1d8/landing/sun-saphia/v4/img/so-do-vi-tri',) * 3)) + '</div>'
+    b += vitri_dark('vi-tri', 'HOME') + ('<section class="sec"><div class="wrap">'
           '<h3 style="margin-top:34px" class="dp" >Những yếu tố hạ tầng <b>thúc đẩy giá trị</b></h3>'
           '<div class="g3" style="margin-top:16px">'
           '<article class="card">' + img('mo-rong-duong-bien', 'Trục đường biển Võ Nguyên Giáp – Trường Sa – Lạc Long Quân được mở rộng', 'r') + '<h3 style="margin-top:12px">Mở rộng trục biển 2.633 tỷ</h3><p class="just">TP Đà Nẵng quyết định mở rộng đường Võ Nguyên Giáp, Trường Sa, Lạc Long Quân; tổng mức đầu tư dự kiến 2.633 tỷ đồng.</p></article>'
@@ -520,6 +514,25 @@ def cho_thue():
                 b, [article_ld(title, desc, MAIN + '/cho-thue'), cld, fld], '/cho-thue')
 
 # ---------- Trang chạy quảng cáo ----------
+def vitri_dark(sid='vi-tri', ctx='ADS'):
+    I = RAW + '3c076ddb411cdc4df18a30f1fd09bd98b60ff86a/landing/sun-saphia/v4/img/'
+    T = [('5\'', 'đi bộ', 'Biển Sơn Thủy (~400 m)'), ('3\'', 'phút', 'Chuỗi resort 5 sao ven biển'),
+         ('5\'', 'phút', 'Phố du lịch An Thượng'), ('7\'', 'phút', 'Danh thắng Ngũ Hành Sơn'),
+         ('6\'', 'đi bộ', 'Ga LRT 09 (quy hoạch, ~500 m)'), ('12\'', 'phút', 'Cầu Rồng · cầu Trần Thị Lý'),
+         ('15\'', 'phút', 'Sân bay quốc tế Đà Nẵng'), ('30\'', 'phút', 'Phố cổ Hội An')]
+    cards = ''.join('<div><b>%s<small>%s</small></b><span>%s</span></div>' % t for t in T)
+    return ('<section class="sec nv vtd" id="%s"><div class="wrap"><div class="g2 vtd2">'
+            '<div><span class="ey">01 · Vị trí</span><h2 class="dp vth">Vị trí Sun Saphia – <b>mặt biển Ngũ Hành Sơn</b></h2>'
+            '<p class="just">Sun Saphia Residence nằm tại giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, phường Ngũ Hành Sơn, ngay trên trục biển Mỹ Khê – Sơn Thủy. '
+            'Một hướng về trung tâm, cầu Rồng và bán đảo Sơn Trà; một hướng về Ngũ Hành Sơn và phố cổ Hội An. Phía trước là công viên bãi tắm quy hoạch khoảng <b>2,45 ha</b>, trục biển đang mở rộng <b>2.633 tỷ</b>.</p>'
+            '<div class="tmg">' + cards + '</div>'
+            '<p class="src" style="margin-top:12px">Thời gian ước tính đi ô tô (trừ mục ghi đi bộ), tùy giờ cao điểm.</p>'
+            '<button type="button" class="btn sm" data-pop data-interest="%s – đặt lịch xem vị trí qua video">Đặt lịch xem vị trí qua video</button></div>'
+            '<div class="vtr"><figure class="fg" style="margin:0"><img src="' + I + 'thap-bien-hoang-hon-2.webp" width="1280" height="720" alt="Phối cảnh Sun Saphia Residence 30 tầng bên biển Mỹ Khê – Sơn Thủy, Ngũ Hành Sơn, Đà Nẵng" loading="lazy" decoding="async"></figure>'
+            '<div class="gmap"><iframe src="https://maps.google.com/maps?q=16.021300,108.257659&amp;z=16&amp;hl=vi&amp;output=embed" title="Bản đồ Google vị trí Sun Saphia Residence" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>'
+            '<a class="gml" href="https://www.google.com/maps/search/?api=1&amp;query=16.021300,108.257659" target="_blank" rel="noopener">📍 Mở trong Google Maps</a></div></div>'
+            '</div></div></section>') % (sid, ctx)
+
 def ads(domain):
     url = MAIN + '/ads'  # cả hai tên miền chuẩn hóa về trang ads chính
     HB = RAW + '90c9302fe8dca2fa597009660b9635821c7d1eb5/landing/sun-saphia/v4/img/hero-bien'
@@ -567,8 +580,7 @@ def ads(domain):
           '<p class="src" style="margin-top:8px">Ảnh chụp thực tế bãi biển Mỹ Khê – Sơn Thủy hướng về bán đảo Sơn Trà.</p></div></section>')
     b += qh4()
     b += pband('30 tầng bên <b>biển Mỹ Khê</b>', 'Căn hộ cao tầng mặt biển đầu tiên của Sun Group tại Đà Nẵng – mở bán dự kiến cuối tháng 11.', 'ADS – dải ảnh tòa tháp')
-    b += ('<section class="sec"><div class="wrap">' + sh('01', 'Vị trí', 'Mặt biển Ngũ Hành Sơn – <b>kết nối mọi điểm</b>', 'y') +
-          '<div class="g2 vtn">' + '<figure class="fg" style="margin:0"><img src="' + RAW + '68c1e86b7ea36c01f79e9e0a49b668d2cf9f2498/landing/sun-saphia/v4/img/ban-do-vi-tri-moi.webp" srcset="' + RAW + '68c1e86b7ea36c01f79e9e0a49b668d2cf9f2498/landing/sun-saphia/v4/img/ban-do-vi-tri-moi-900.webp 900w, ' + RAW + '68c1e86b7ea36c01f79e9e0a49b668d2cf9f2498/landing/sun-saphia/v4/img/ban-do-vi-tri-moi.webp 1600w" sizes="(max-width: 760px) 100vw, 600px" width="1600" height="1350" alt="Bản đồ vị trí Sun Saphia Residence trên trục biển Võ Nguyên Giáp – Nguyễn Đức Thuận, Ngũ Hành Sơn: gần sân bay, cầu Rồng, cầu Tiên Sơn, Mỹ Khê, các resort ven biển" loading="lazy" decoding="async"><figcaption>Bản đồ vị trí cận cảnh, vẽ theo Google Maps, đúng tỷ lệ</figcaption></figure>' + '<div><div class="kn"><div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>~500 m</b><span>tới ga LRT 09 (quy hoạch)</span></div><div><b>4 km</b><span>Downtown, Galaxy</span></div><div><b>5–10 phút</b><span>Ngũ Hành Sơn</span></div><div><b>10–15 phút</b><span>sân bay quốc tế</span></div><div><b>~30 phút</b><span>phố cổ Hội An</span></div></div><p class="just" style="margin-top:18px">Giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa: một hướng về trung tâm, Sơn Trà; một hướng về Ngũ Hành Sơn, Hội An. Trục biển đang mở rộng <b>2.633 tỷ</b>, phía trước là công viên bãi tắm quy hoạch khoảng <b>2,45 ha</b>.</p>''<button type="button" class="btn sm" data-pop data-interest="ADS – đặt lịch xem vị trí qua video">Đặt lịch xem vị trí qua video</button></div>' + '</div></div></section>')
+    b += vitri_dark('vi-tri', 'ADS')
     b += ('<section class="sec alt" id="mat-bang"><div class="wrap">' + sh('04', 'Mặt bằng', 'Chọn căn trên <b>mặt bằng tầng</b>', 'n') + units_table() +
           '<div style="margin-top:20px">' + units_drawings() + '</div><div id="chon-can"></div></div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('02', 'Tầm nhìn', 'Mỗi hướng <b>một khung tranh</b>', 'o') + views('<img class="vb" src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1668w" sizes="(max-width: 760px) 100vw, 900px" width="1668" height="943" alt="Biển ngay ngoài ban công – căn hộ cao tầng mặt biển Đà Nẵng lúc hoàng hôn (ảnh minh họa)" loading="lazy" decoding="async">' % (HB, HB, HB)) + '</div></section>')
