@@ -41,6 +41,20 @@ function hoanghiep_setup() {
 	);
 }
 
+/**
+ * Giao diện / plugin lên phiên bản mới → xoá toàn bộ bộ nhớ đệm LiteSpeed (cả bản điện thoại),
+ * để khách không còn thấy trang cũ sau khi cập nhật.
+ */
+add_action( 'init', 'hoanghiep_purge_on_update', 99 );
+function hoanghiep_purge_on_update() {
+	$now = wp_get_theme()->get( 'Version' ) . '|' . ( defined( 'HH_CRM_VERSION' ) ? HH_CRM_VERSION : '' );
+	if ( get_option( 'hoanghiep_cache_ver' ) === $now ) {
+		return;
+	}
+	update_option( 'hoanghiep_cache_ver', $now, true );
+	do_action( 'litespeed_purge_all' );
+}
+
 add_action( 'wp_enqueue_scripts', 'hoanghiep_assets' );
 function hoanghiep_assets() {
 	$ver = wp_get_theme()->get( 'Version' );

@@ -821,6 +821,7 @@ function hh_import_page() {
 		}
 		try {
 			$result = hh_import_projects();
+			do_action( 'litespeed_purge_all' ); // Xoá bộ nhớ đệm (cả bản điện thoại) để trang mới hiện ngay.
 		} catch ( \Throwable $e ) {
 			$error = $e->getMessage() . ' (' . basename( $e->getFile() ) . ':' . $e->getLine() . ')';
 		}
