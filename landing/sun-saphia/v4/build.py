@@ -1,3 +1,4 @@
+import re
 # Dựng bộ trang Sun Saphia Residence theo giao diện Kick-off 23/10/2026
 # Cách chạy: python3 build.py <commit chứa thư mục v4/img>
 import sys
@@ -22,9 +23,15 @@ def article_ld(title, desc, url, pub='2026-10-17', mod='2026-10-24'):
     return {'@type': 'Article', 'headline': title, 'description': desc, 'datePublished': pub, 'dateModified': mod,
             'author': PERSON, 'publisher': ORG, 'image': OG, 'mainEntityOfPage': url, 'inLanguage': 'vi', 'about': {'@id': MAIN + '/#du-an'}}
 
+VT_PAGES = {'/bang-gia': 'BẢNG GIÁ', '/mat-bang': 'MẶT BẰNG', '/phap-ly': 'PHÁP LÝ', '/cho-thue': 'CHO THUÊ', '/vi-sao-sun-group': 'VÌ SAO SUN GROUP', '/quy-hoach': 'QUY HOẠCH'}
+
 def page(path, title, desc, kw, body, lds, cur, tools=False, canon=None, robots='index,follow'):
     url = MAIN + path
     body = body.replace('{M}', MAIN)
+    if path in VT_PAGES and 'sec nv vtd' not in body:
+        m = re.search(r'<section class="sec[^"]*" id="hoi-dap"', body)
+        i = m.start() if m else body.rfind('<section')
+        body = body[:i] + vitri_dark('vi-tri', VT_PAGES[path]) + body[i:]
     html = head(title, desc, canon or url, OG, kw, lds + [ORG, RES], FAV)
     html += '<body>\n' + header(cur, MAIN, LOGO) + '\n<main id="dau-trang">' + body + '</main>\n' + footer(MAIN) + '\n' + popup() + tail(tools) + '</body>\n</html>\n'
     return copy_fix(html)
@@ -517,12 +524,12 @@ def cho_thue():
 def vitri_dark(sid='vi-tri', ctx='ADS'):
     I = RAW + '3c076ddb411cdc4df18a30f1fd09bd98b60ff86a/landing/sun-saphia/v4/img/'
     T = [('5\'', 'đi bộ', 'Biển Sơn Thủy (~400 m)'), ('3\'', 'phút', 'Chuỗi resort 5 sao ven biển'),
-         ('5\'', 'phút', 'Phố du lịch An Thượng'), ('7\'', 'phút', 'Danh thắng Ngũ Hành Sơn'),
-         ('6\'', 'đi bộ', 'Ga LRT 09 (quy hoạch, ~500 m)'), ('12\'', 'phút', 'Cầu Rồng · cầu Trần Thị Lý'),
+         ('5\'', 'phút', 'Phố du lịch An Thượng'), ('5\'', 'phút', 'Danh thắng Ngũ Hành Sơn'),
+         ('6\'', 'đi bộ', 'Ga LRT 09 (quy hoạch, ~500 m)'), ('15\'', 'phút', 'Cầu Rồng · cầu Trần Thị Lý'),
          ('15\'', 'phút', 'Sân bay quốc tế Đà Nẵng'), ('30\'', 'phút', 'Phố cổ Hội An')]
     cards = ''.join('<div><b>%s<small>%s</small></b><span>%s</span></div>' % t for t in T)
     return ('<section class="sec nv vtd" id="%s"><div class="wrap"><div class="g2 vtd2">'
-            '<div><span class="ey">01 · Vị trí</span><h2 class="dp vth">Vị trí Sun Saphia – <b>mặt biển Ngũ Hành Sơn</b></h2>'
+            '<div><span class="ey">Vị trí dự án</span><h2 class="dp vth">Vị trí Sun Saphia – <b>mặt biển Ngũ Hành Sơn</b></h2>'
             '<p class="just">Sun Saphia Residence nằm tại giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, phường Ngũ Hành Sơn, ngay trên trục biển Mỹ Khê – Sơn Thủy. '
             'Một hướng về trung tâm, cầu Rồng và bán đảo Sơn Trà; một hướng về Ngũ Hành Sơn và phố cổ Hội An. Phía trước là công viên bãi tắm quy hoạch khoảng <b>2,45 ha</b>, trục biển đang mở rộng <b>2.633 tỷ</b>.</p>'
             '<div class="tmg">' + cards + '</div>'
