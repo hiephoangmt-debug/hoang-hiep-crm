@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.28** + plugin Hoàng Hiệp CRM **2.20.79**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.29** + plugin Hoàng Hiệp CRM **2.20.79**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,14 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.29: cân đều chữ và khối trên mọi trang
+
+- Đoạn văn, dòng liệt kê trên điện thoại **căn đều 2 bên** (lề phải thẳng hàng), dòng cuối canh trái; ô bảng và thẻ nhỏ vẫn canh trái cho khỏi hở chữ.
+- Bảng: mã căn (VD C3-06A) không còn gãy thành 2 dòng.
+- Ô số liệu đầu trang dự án (VD 206 căn hộ · 26 tầng): số ô chẵn chia đều 2 cột.
+- Thẻ dự án: ô Quy mô / Diện tích / Bàn giao gọn tối đa 2 dòng, bàn giao chỉ ghi mốc chính – các thẻ cao đều nhau.
+- Mục Kết nối: nhãn (Mặt tiền, Liền kề, 5 phút…) cùng bề rộng.
 
 ## Có gì mới – plugin 2.20.79: giá giỏ hàng 10/2026 NewTown Diamond, Capital Square
 

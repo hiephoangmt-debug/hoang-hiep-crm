@@ -1345,7 +1345,7 @@ html.nav-locked, html.nav-locked body { overflow: hidden; }
 @media (max-width: 760px) {
 	.px-overview, .px-location { grid-template-columns: 1fr; }
 	.px-numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-	.px-numbers li:first-child { grid-column: 1 / -1; }
+	.px-numbers li:first-child:nth-last-child(odd) { grid-column: 1 / -1; } /* Số ô lẻ: ô đầu chiếm cả hàng; số ô chẵn: chia đều 2 cột. */
 	.px-prices { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 	.px-prices b { font-size: 1.2rem; }
 }
@@ -1470,9 +1470,11 @@ html.nav-locked, html.nav-locked body { overflow: hidden; }
 /* Chữ cân đều 2 bên cho đoạn văn trên trang dự án, hộp chờ cập nhật, hộp kêu gọi (độ ưu tiên thấp – chỗ nào canh giữa vẫn giữ nguyên). */
 /* Chữ cân đều 2 bên toàn trang: đoạn văn, dòng liệt kê, nội dung bảng (độ ưu tiên thấp – chỗ nào đã canh giữa/phải vẫn giữ). */
 :where(.site-main) :where(p, li, td, .spec-list dd) { text-align: justify; text-justify: inter-word; }
-/* Điện thoại: canh trái – tiếng Việt không tách âm tiết được nên căn đều 2 bên tạo khoảng hở lớn giữa các chữ. */
+/* Điện thoại: vẫn căn đều 2 bên cho đoạn văn, dòng liệt kê (lề phải thẳng hàng); dòng cuối canh trái; không tách chữ giữa từ.
+   Ô bảng, thẻ nhỏ canh trái (quy tắc bên dưới) – cột hẹp căn đều sẽ hở chữ. */
 @media (max-width: 760px) {
-	.entry-content p, .entry-content li, .entry-content dd, :where(.site-main) :where(p, li, td, .spec-list dd) { text-align: left; hyphens: manual; -webkit-hyphens: manual; }
+	.entry-content p, .entry-content li, .entry-content dd, :where(.site-main) :where(p, li, .spec-list dd) { text-align: justify; text-align-last: left; text-justify: inter-word; hyphens: manual; -webkit-hyphens: manual; word-break: normal; overflow-wrap: break-word; }
+	:where(.site-main) :where(td) { text-align: left; }
 }
 /* Thẻ nhỏ (dự án, tin rao, bài viết, ô số liệu): cột hẹp – canh trái cho khỏi hở chữ. */
 :where(.project-card, .listing-card, .post-card, .stats, .key-facts, .quick-facts, .hero-offer, .offer-stats, .connections, .check-list, .chips, .type-chips, .deal-tabs, .breadcrumb, .site-footer) :where(p, li, dd, td) { text-align: left; }
@@ -1513,3 +1515,6 @@ html.tour-view .contact-dock, html.tour-view .hhc__fab, html.tour-view .hhc__bub
 @media (prefers-reduced-motion: reduce) { .tour4d.has-poster .tour4d__icon { animation: none; } }
 .tour4d__poster { object-position: 47% 45%; }
 @media (max-width: 760px) { .tour4d.has-poster:not(.is-on) { aspect-ratio: 4 / 3.4; } }
+/* Cân đều: thẻ dự án – mỗi ô Quy mô / Diện tích / Bàn giao tối đa 2 dòng, thẻ cao bằng nhau; nhãn kết nối cùng bề rộng. */
+.project-card__facts li { min-width: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; overflow-wrap: break-word; }
+.connections strong { min-width: 84px; }

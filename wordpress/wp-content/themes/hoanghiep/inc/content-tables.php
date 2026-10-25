@@ -54,7 +54,8 @@ function hoanghiep_content_tables( $html ) {
 						return '<tr' . $r[1] . '>' . preg_replace_callback(
 							'#<td((?:(?!class=)[^>])*)>(.*?)</td>#is',
 							static function ( $c ) use ( &$i ) {
-								$short = $i++ > 0 && mb_strlen( trim( html_entity_decode( wp_strip_all_tags( $c[2] ) ) ) ) <= 14;
+								$len   = mb_strlen( trim( html_entity_decode( wp_strip_all_tags( $c[2] ) ) ) );
+								$short = 0 === $i++ ? $len <= 8 : $len <= 14; // Cột đầu: mã căn ngắn (C3-06A) không gãy.
 								return '<td' . $c[1] . ( $short ? ' class="hh-nw"' : '' ) . '>' . $c[2] . '</td>';
 							},
 							$r[2]

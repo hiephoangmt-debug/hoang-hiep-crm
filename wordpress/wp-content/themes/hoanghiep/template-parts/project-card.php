@@ -56,7 +56,7 @@ if ( $resale ) {
 		<ul class="project-card__facts">
 			<?php if ( hh_meta( 'hh_p_scale' ) ) : ?><li><span>Quy mô</span><?php echo esc_html( trim( preg_replace( '/\s*\(.*$/u', '', hh_meta( 'hh_p_scale' ) ) ) ); ?></li><?php endif; ?>
 			<?php if ( hh_meta( 'hh_p_unit_area' ) ) : ?><li><span>Diện tích</span><?php echo esc_html( hh_meta( 'hh_p_unit_area' ) ); ?></li><?php endif; ?>
-			<?php if ( hh_meta( 'hh_p_handover' ) ) : ?><li><span>Bàn giao</span><?php echo esc_html( hh_meta( 'hh_p_handover' ) ); ?></li><?php endif; ?>
+			<?php if ( hh_meta( 'hh_p_handover' ) ) : ?><li><span>Bàn giao</span><?php echo esc_html( trim( preg_replace( '/\s*[\(,;–].*$/u', '', hh_meta( 'hh_p_handover' ) ) ) ?: hh_meta( 'hh_p_handover' ) ); ?></li><?php endif; ?>
 		</ul>
 		<div class="project-card__foot">
 			<p class="price"><?php echo esc_html( $price ); ?></p>
