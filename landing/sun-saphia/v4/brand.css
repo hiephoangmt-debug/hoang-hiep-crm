@@ -542,3 +542,15 @@ body{padding-bottom:84px}
 .vx{position:absolute;top:-44px;right:0;border:0;background:var(--or);color:#fff;font-weight:800;border-radius:999px;padding:8px 14px;cursor:pointer}
 @media(max-width:760px){.hvid video.hv{height:auto;aspect-ratio:16/9}.vplay{top:auto;bottom:12px;transform:translateX(-50%);padding:6px 16px 6px 6px}.vplay i{width:40px;height:40px;font-size:16px}.vplay b{font-size:15px}}
 @media(max-width:760px){.hvid .cap{display:none}}
+/* === Cân đều: chữ căn 2 bên, 2 cột cao bằng nhau === */
+main p,main li,main .card p,main figcaption{text-align:justify;text-align-last:left;-webkit-hyphens:auto;hyphens:auto}
+main .hcvt p,main .hnum *,main .stats *,main .tag,main .btn,main .ey,main .cta p,main .kn *,main td,main th,main .rel *{text-align:inherit}
+.hcvt .msg{text-align:center!important;text-align-last:center!important}
+@media(min-width:761px){
+.g2:not(.g2 .g2){align-items:stretch!important}
+.g2:not(.g2 .g2)>.txt,.g2:not(.g2 .g2)>div:not(.card):not(.pic):not(.hr):not(.hhr):not(.g2):not(.g3):not(.g4):not(:has(figure,img,.g2,.g3,.g4,form)){display:flex;flex-direction:column;justify-content:center}
+.g2:not(.g2 .g2)>figure.fg{display:flex;flex-direction:column;margin:0;align-self:stretch}
+.g2:not(.g2 .g2)>figure.fg>img{flex:1 1 auto;min-height:0;height:0;width:100%;object-fit:cover}
+.g2:not(.g2 .g2)>figure.fg>img[alt*="ơ đồ"],.g2:not(.g2 .g2)>figure.fg>img[alt*="ản đồ"],.g2:not(.g2 .g2)>figure.fg>img[alt*="ayout"],.g2:not(.g2 .g2)>figure.fg>img[alt*="ặt bằng"],.g2:not(.g2 .g2)>figure.fg>img[alt*="ồ sơ"],.g2:not(.g2 .g2)>figure.fg>img[alt*="ản vẽ"],.g2:not(.g2 .g2)>figure.fg>img[alt*="ệ tinh"],.g2:not(.g2 .g2)>figure.fg>img[alt*="ồ đường"]{object-fit:contain;background:#fff;height:auto;flex:0 0 auto;margin:auto 0}
+.g2:not(.g2 .g2)>.card{height:100%}
+}
