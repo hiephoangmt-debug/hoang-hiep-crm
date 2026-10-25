@@ -1,0 +1,66 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/kh-thanh-dat.jpg",
+   "tag": "GIA ĐÌNH",
+   "lines": [
+    "Nên chọn căn 1BR+ hay 2BR?"
+   ],
+   "dur": 3.4,
+   "big": true
+  },
+  {
+   "img": "../../anh-page-2810/can-1br.jpg",
+   "tag": "1BR+1 · 50–51 M²",
+   "lines": [
+    "1 ngủ + phòng đa năng · 108 căn"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/kh-tre-tu-do.jpg",
+   "tag": "HỢP VỚI",
+   "lines": [
+    "Gia đình nhỏ · làm việc từ xa"
+   ],
+   "dur": 3.2,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/can-2br.jpg",
+   "tag": "2BR · 60–70 M²",
+   "lines": [
+    "Căn góc bo tròn · 133 căn"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/kh-lon-tuoi.jpg",
+   "tag": "HỢP VỚI",
+   "lines": [
+    "Gia đình có con · second home"
+   ],
+   "dur": 3.2,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/layout-tang-3a-28.jpg",
+   "tag": "ÍT NHẤT",
+   "lines": [
+    "Căn góc 2BR view biển – chọn sớm nhất"
+   ],
+   "dur": 3.6,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "Nhận bản vẽ 1BR+ / 2BR",
+   "Gửi qua Zalo"
+  ]
+ }
+}

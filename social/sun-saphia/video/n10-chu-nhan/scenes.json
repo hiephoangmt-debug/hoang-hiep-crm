@@ -1,0 +1,66 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/thap-bien-hoang-hon.jpg",
+   "tag": "CHỦ NHÂN TƯƠNG LAI",
+   "lines": [
+    "Bạn thuộc nhóm nào?"
+   ],
+   "dur": 3.4,
+   "big": true
+  },
+  {
+   "img": "../../anh-page-2810/kh-tre-tu-do.jpg",
+   "tag": "NGƯỜI TRẺ TỰ DO",
+   "lines": [
+    "Làm việc từ đâu cũng được – sao không cạnh biển?"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/kh-thanh-dat.jpg",
+   "tag": "NGƯỜI THÀNH ĐẠT",
+   "lines": [
+    "Second home cho cả gia đình"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/kh-nghi-duong-som.jpg",
+   "tag": "NGHỈ HƯU SỚM",
+   "lines": [
+    "Sống chậm sớm, biển trước nhà"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/kh-lon-tuoi.jpg",
+   "tag": "NGƯỜI LỚN TUỔI",
+   "lines": [
+    "Về với biển, về với sức khỏe"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../assets/mat-bang-studio.jpg",
+   "tag": "STUDIO · 1BR+ · 2BR",
+   "lines": [
+    "Có căn cho từng nhóm"
+   ],
+   "dur": 3.2,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "Gợi ý căn phù hợp",
+   "Nhắn Zalo cho Hoàng Hiệp"
+  ]
+ }
+}

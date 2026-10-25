@@ -1,0 +1,58 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/mo-rong-duong-bien.jpg",
+   "tag": "HẠ TẦNG",
+   "lines": [
+    "3 dự án mở đường cho trục biển"
+   ],
+   "dur": 3.6,
+   "big": true
+  },
+  {
+   "img": "../../anh-page-2810/mo-rong-duong-bien.jpg",
+   "tag": "1 · MỞ RỘNG TRỤC BIỂN",
+   "lines": [
+    "Võ Nguyên Giáp – Trường Sa",
+    "Tổng mức dự kiến 2.633 tỷ"
+   ],
+   "dur": 4.0,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/lrt-ban-do.jpg",
+   "tag": "2 · GA LRT 09",
+   "lines": [
+    "Cách ~500 m · khởi công dự kiến 2/2027"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/galaxy-downtown.jpg",
+   "tag": "3 · KHU THƯƠNG MẠI TỰ DO",
+   "lines": [
+    "QĐ 1142/QĐ-TTg · Downtown cách 4 km"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../assets/bien-cong-vien.jpg",
+   "tag": "THÊM",
+   "lines": [
+    "Công viên ~2,45 ha ngay trước dự án"
+   ],
+   "dur": 3.6,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "Xem vị trí thực tế",
+   "Gọi video Zalo miễn phí"
+  ]
+ }
+}

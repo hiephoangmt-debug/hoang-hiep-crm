@@ -1,0 +1,55 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/kh-tre-tu-do.jpg",
+   "tag": "CHO THUÊ",
+   "lines": [
+    "Mua căn hộ để cho thuê: chọn cách nào?"
+   ],
+   "dur": 3.6,
+   "big": true
+  },
+  {
+   "img": "../../anh-tiktok/cach-cho-thue.jpg",
+   "tag": null,
+   "lines": [],
+   "dur": 5.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/the-thao-bien.jpg",
+   "tag": "MÙA CAO ĐIỂM",
+   "lines": [
+    "Tháng 4–8, Tết, pháo hoa: thuê theo đêm"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-dem-resort.jpg",
+   "tag": "MÙA MƯA",
+   "lines": [
+    "Tháng 9–12: chuyển sang thuê tháng"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../assets/mat-bang-studio.jpg",
+   "tag": "STUDIO HAY 1BR+?",
+   "lines": [
+    "Nhắn Zalo để so sánh dòng tiền"
+   ],
+   "dur": 3.6,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "So sánh dòng tiền",
+   "Studio hay 1BR+ – nhắn Zalo"
+  ]
+ }
+}

@@ -1,0 +1,56 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/kh-tre-tu-do.jpg",
+   "tag": "CHO THUÊ",
+   "lines": [
+    "Có phải đóng thuế không?"
+   ],
+   "dur": 3.4,
+   "big": true
+  },
+  {
+   "img": "../../anh-tiktok/thue-chi-phi.jpg",
+   "tag": null,
+   "lines": [],
+   "dur": 5.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/ho-boi-hoang-hon.jpg",
+   "tag": "THUẾ",
+   "lines": [
+    "Doanh thu trên 100 tr/năm: ~10%",
+    "Dưới 100 tr/năm: không nộp"
+   ],
+   "dur": 4.0,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-dem-resort.jpg",
+   "tag": "TÍNH ĐỦ CHI PHÍ",
+   "lines": [
+    "Vận hành · nội thất · mùa vụ"
+   ],
+   "dur": 3.4,
+   "big": false
+  },
+  {
+   "img": "../assets/mat-bang-studio.jpg",
+   "tag": "THỰC NHẬN",
+   "lines": [
+    "Bài toán minh họa tính ~65% doanh thu"
+   ],
+   "dur": 3.6,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "Hướng dẫn cho thuê",
+   "Nhắn Zalo để được tư vấn"
+  ]
+ }
+}

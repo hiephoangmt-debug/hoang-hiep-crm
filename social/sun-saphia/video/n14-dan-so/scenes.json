@@ -1,0 +1,57 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/galaxy-downtown.jpg",
+   "tag": "ĐÀ NẴNG MỚI",
+   "lines": [
+    "~3 triệu dân – ai đang đổ về?"
+   ],
+   "dur": 3.6,
+   "big": true
+  },
+  {
+   "img": "../../anh-page-2810/khach-du-lich.jpg",
+   "tag": "KHÁCH QUỐC TẾ",
+   "lines": [
+    "6,88 triệu lượt 8 tháng 2026 (+26,3%)"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/kh-thanh-dat.jpg",
+   "tag": "DI CƯ TRONG NƯỚC",
+   "lines": [
+    "15–16 nghìn người/năm \"đổi phố lấy biển\""
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/mo-rong-duong-bien.jpg",
+   "tag": "SÁP NHẬP QUẢNG NAM",
+   "lines": [
+    "Quy mô ~3 triệu dân từ 1/7/2025"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-bien-hoang-hon.jpg",
+   "tag": "MỘT NHU CẦU",
+   "lines": [
+    "Chỗ ở gần biển, gần trung tâm"
+   ],
+   "dur": 3.6,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "Nhận thông tin dự án",
+   "Gửi qua Zalo miễn phí"
+  ]
+ }
+}

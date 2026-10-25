@@ -1,0 +1,56 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/thap-bien-hoang-hon.jpg",
+   "tag": "VAY NGÂN HÀNG",
+   "lines": [
+    "Mua căn hộ trả bao nhiêu mỗi tháng?"
+   ],
+   "dur": 3.6,
+   "big": true
+  },
+  {
+   "img": "../../anh-tiktok/vay.jpg",
+   "tag": null,
+   "lines": [],
+   "dur": 5.4,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-tren-cao-ngay.jpg",
+   "tag": "NGÂN HÀNG HỖ TRỢ",
+   "lines": [
+    "Vietcombank · BIDV · NCB"
+   ],
+   "dur": 3.4,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/layout-tang-3a-28.jpg",
+   "tag": "HỒ SƠ VAY",
+   "lines": [
+    "CCCD · chứng minh thu nhập",
+    "HĐ mua bán / đặt cọc"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/ho-boi-hoang-hon.jpg",
+   "tag": "TÍNH THEO CĂN",
+   "lines": [
+    "Nhắn Zalo để có phương án vốn"
+   ],
+   "dur": 3.4,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "Tính phương án vay",
+   "Theo từng loại căn – nhắn Zalo"
+  ]
+ }
+}

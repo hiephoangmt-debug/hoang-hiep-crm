@@ -1,0 +1,57 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/thap-tren-cao-ngay.jpg",
+   "tag": "KIẾN TRÚC",
+   "lines": [
+    "Vì sao lấy cảm hứng vũ nữ Apsara?"
+   ],
+   "dur": 3.6,
+   "big": true
+  },
+  {
+   "img": "../../anh-page-2810/apsara-art.jpg",
+   "tag": "DI SẢN CHĂM PA",
+   "lines": [
+    "Điêu khắc Apsara – ngôn ngữ đương đại"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-bien-hoang-hon.jpg",
+   "tag": "30 TẦNG · 114 M",
+   "lines": [
+    "Khối tháp thẳng, mặt dài hướng biển"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-dem-resort.jpg",
+   "tag": "MẶT ĐỨNG",
+   "lines": [
+    "Kính xanh nhạt · ban công trụ màu đồng"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/song-nui-bien-art.jpg",
+   "tag": "BIỂU TƯỢNG MỚI",
+   "lines": [
+    "Của Sun Group bên biển Đà Nẵng"
+   ],
+   "dur": 3.6,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "Nhận brochure dự án",
+   "Gửi qua Zalo miễn phí"
+  ]
+ }
+}

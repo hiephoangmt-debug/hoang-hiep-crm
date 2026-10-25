@@ -1,0 +1,64 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/thap-bien-hoang-hon.jpg",
+   "tag": "GIÁ",
+   "lines": [
+    "Giá Sun Saphia Residence bao nhiêu?"
+   ],
+   "dur": 3.6,
+   "big": true
+  },
+  {
+   "img": "../../anh-page-2810/thap-dem-resort.jpg",
+   "tag": "CHƯA CÔNG BỐ",
+   "lines": [
+    "Dự kiến công bố cuối 11/2026"
+   ],
+   "dur": 3.4,
+   "big": false
+  },
+  {
+   "img": "../../anh-tiktok/gia.jpg",
+   "tag": null,
+   "lines": [],
+   "dur": 5.0,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/layout-tang-3a-28.jpg",
+   "tag": "VÌ SAO CHỜ ĐỢT ĐẦU",
+   "lines": [
+    "Giá tốt nhất · chọn căn đẹp trước"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/ho-boi-hoang-hon.jpg",
+   "tag": "HỖ TRỢ LÃI SUẤT",
+   "lines": [
+    "Ngân hàng đang giảm lãi suất cho vay"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-tren-cao-ngay.jpg",
+   "tag": "NHẬN BẢNG GIÁ GỐC",
+   "lines": [
+    "Comment \"Giá\" hoặc nhắn Zalo"
+   ],
+   "dur": 3.4,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "Nhận bảng giá gốc",
+   "Gửi qua Zalo ngay khi công bố"
+  ]
+ }
+}

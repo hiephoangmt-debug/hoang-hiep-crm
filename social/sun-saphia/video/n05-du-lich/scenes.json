@@ -1,0 +1,67 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/khach-du-lich.jpg",
+   "tag": "DU LỊCH ĐÀ NẴNG",
+   "lines": [
+    "Tăng gần 30% – căn hộ mặt biển được gì?"
+   ],
+   "dur": 3.6,
+   "big": true
+  },
+  {
+   "img": "../../anh-page-2810/the-thao-bien.jpg",
+   "tag": "9 THÁNG 2026",
+   "lines": [
+    "15,86 triệu lượt khách (+29,6%)"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/kh-tre-tu-do.jpg",
+   "tag": "KHÁCH QUỐC TẾ",
+   "lines": [
+    "7,69 triệu lượt (+28,9%)"
+   ],
+   "dur": 3.4,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/galaxy-downtown.jpg",
+   "tag": "DOANH THU DU LỊCH",
+   "lines": [
+    "52.945 tỷ đồng (+26,2%)"
+   ],
+   "dur": 3.4,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-dem-resort.jpg",
+   "tag": "SUN GROUP MIỀN TRUNG",
+   "lines": [
+    "Khách sạn lấp đầy 81,3%"
+   ],
+   "dur": 3.4,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/ho-boi-hoang-hon.jpg",
+   "tag": "GIÁ THUÊ VIEW BIỂN",
+   "lines": [
+    "Studio 2,2–2,9 tr/đêm",
+    "1BR+ 3,4–3,7 tr/đêm"
+   ],
+   "dur": 4.0,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "Tính dòng tiền cho thuê",
+   "Gửi bảng tính qua Zalo"
+  ]
+ }
+}

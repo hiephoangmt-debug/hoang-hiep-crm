@@ -1,0 +1,66 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/ba-duong-xuong-bien.jpg",
+   "tag": "RA BIỂN",
+   "lines": [
+    "Từ Sun Saphia ra biển mất bao lâu?"
+   ],
+   "dur": 3.6,
+   "big": true
+  },
+  {
+   "img": "../../anh-page-2810/ba-duong-xuong-bien.jpg",
+   "tag": "~400 M",
+   "lines": [
+    "3 lối xuống biển ngay trước khu Saphia"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../assets/bien-cong-vien.jpg",
+   "tag": "CÔNG VIÊN BÃI TẮM",
+   "lines": [
+    "Sơn Thủy · đối diện dự án · Huyền Trân"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/sup.jpg",
+   "tag": "BUỔI SÁNG",
+   "lines": [
+    "Chèo SUP đón bình minh"
+   ],
+   "dur": 3.2,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/the-thao-bien.jpg",
+   "tag": "BUỔI CHIỀU",
+   "lines": [
+    "Kayak trên mặt nước phẳng"
+   ],
+   "dur": 3.2,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/kh-nghi-duong-som.jpg",
+   "tag": "XEM THỰC TẾ",
+   "lines": [
+    "Gọi video Zalo đi bộ ra biển"
+   ],
+   "dur": 3.4,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "Xem biển thực tế",
+   "Gọi video Zalo miễn phí"
+  ]
+ }
+}

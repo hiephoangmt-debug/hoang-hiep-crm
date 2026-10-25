@@ -1,0 +1,66 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/thap-bien-hoang-hon.jpg",
+   "tag": "VIEW",
+   "lines": [
+    "4 hướng – 4 khung tranh Đà Nẵng"
+   ],
+   "dur": 3.6,
+   "big": true
+  },
+  {
+   "img": "../../anh-page-2810/ho-boi-hoang-hon.jpg",
+   "tag": "HƯỚNG BIỂN",
+   "lines": [
+    "Mỹ Khê – Sơn Thủy ngay ngoài ban công"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/song-nui-bien-art.jpg",
+   "tag": "HƯỚNG NÚI",
+   "lines": [
+    "Ngũ Hành Sơn như tranh treo cửa sổ"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-tren-cao-ngay.jpg",
+   "tag": "HƯỚNG SÔNG HÀN",
+   "lines": [
+    "Hoàng hôn – vé xem miễn phí mỗi chiều"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-dem-resort.jpg",
+   "tag": "HƯỚNG ĐÔ THỊ",
+   "lines": [
+    "Đà Nẵng lên đèn ngay trước mắt"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/mat-bang-tong-the.jpg",
+   "tag": "TẦNG 3A–28",
+   "lines": [
+    "Trần 3,5 m · logia kính lớn"
+   ],
+   "dur": 3.4,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "Chọn căn đúng hướng",
+   "Nhận mặt bằng qua Zalo"
+  ]
+ }
+}

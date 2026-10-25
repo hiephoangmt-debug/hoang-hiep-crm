@@ -1,0 +1,67 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/thap-dem-resort.jpg",
+   "tag": "ĐẶT CHỖ",
+   "lines": [
+    "Đặt chỗ Sun Saphia thế nào cho an toàn?"
+   ],
+   "dur": 3.6,
+   "big": true
+  },
+  {
+   "img": "../../anh-page-2810/thap-tren-cao-ngay.jpg",
+   "tag": "ĐẠI LÝ CHÍNH THỨC",
+   "lines": [
+    "Được Sun Property chứng nhận"
+   ],
+   "dur": 3.4,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/layout-tang-3a-28.jpg",
+   "tag": "BẢNG GIÁ GỐC",
+   "lines": [
+    "Chính sách bán hàng từ chủ đầu tư"
+   ],
+   "dur": 3.4,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/galaxy-downtown.jpg",
+   "tag": "AN TOÀN",
+   "lines": [
+    "Tiền nộp tài khoản công ty / chủ đầu tư",
+    "Không qua tài khoản cá nhân"
+   ],
+   "dur": 4.0,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-bien-hoang-hon.jpg",
+   "tag": "ĐẶT CHỖ 50 TRIỆU",
+   "lines": [
+    "Hoàn 100% nếu không mua"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/ho-boi-hoang-hon.jpg",
+   "tag": "SẮP TỚI",
+   "lines": [
+    "Mở bán dự kiến cuối 11/2026"
+   ],
+   "dur": 3.4,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "Đăng ký nhận thông tin",
+   "Miễn phí · gửi qua Zalo"
+  ]
+ }
+}

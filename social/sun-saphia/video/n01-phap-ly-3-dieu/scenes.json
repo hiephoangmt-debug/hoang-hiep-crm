@@ -1,0 +1,66 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/thap-dem-resort.jpg",
+   "tag": "PHÁP LÝ",
+   "lines": [
+    "3 điều cần biết trước khi xuống tiền"
+   ],
+   "dur": 3.6,
+   "big": true
+  },
+  {
+   "img": "../../anh-page-2810/gcn-dau-tu-1.jpg",
+   "tag": "1 · GCN ĐĂNG KÝ ĐẦU TƯ",
+   "lines": [
+    "Mã dự án 2572746483",
+    "Cấp lần đầu 17/09/2026"
+   ],
+   "dur": 4.0,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-bien-hoang-hon.jpg",
+   "tag": "2 · HAI MỐC THỜI HẠN",
+   "lines": [
+    "50 năm thời hạn dự án",
+    "100 năm niên hạn công trình"
+   ],
+   "dur": 4.0,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/galaxy-downtown.jpg",
+   "tag": "3 · NGHỊ QUYẾT 278/NQ-CP",
+   "lines": [
+    "Giá trị căn hộ 50 năm đang được định hình lại"
+   ],
+   "dur": 4.0,
+   "big": false
+  },
+  {
+   "img": "../../anh-tiktok/phap-ly.jpg",
+   "tag": null,
+   "lines": [],
+   "dur": 4.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-tren-cao-ngay.jpg",
+   "tag": "NGÂN HÀNG HỖ TRỢ",
+   "lines": [
+    "Vietcombank · BIDV · NCB"
+   ],
+   "dur": 3.4,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "Nhận bản sao pháp lý",
+   "GCN đầu tư gửi qua Zalo"
+  ]
+ }
+}
