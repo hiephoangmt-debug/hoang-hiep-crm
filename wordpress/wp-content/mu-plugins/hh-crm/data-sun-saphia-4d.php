@@ -21,6 +21,16 @@ add_filter(
 			);
 			// Đổi link 4D cũ sang bản điện thoại (chỉ khi ô vẫn là link cũ do web nhập).
 			$p['fix_meta'] = ( $p['fix_meta'] ?? array() ) + array( 'hh_p_tour_4d' => array( 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/a4125c9ea5215c30fb8feed85fe041b8ab21997e/projects/sun-saphia/4d/sun-saphia-4d.html', 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/352fddb9ce3faf2e3fd2cd009ba7e7e651583507/projects/sun-saphia/4d/sun-saphia-4d.html' ) );
+			// Ảnh đại diện nét hơn (phối cảnh tòa tháp bên biển lúc hoàng hôn, không có chữ in sẵn) thay ảnh cũ bị mờ.
+			$old_img = 'plugin:img/sun-saphia/sun-saphia-phoi-canh-ven-bien-son-thuy.jpg | Phối cảnh Sun Saphia Residence – căn hộ 30 tầng của Sun Group bên biển Sơn Thủy, Đà Nẵng | đại diện';
+			$new_img = 'plugin:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg | Phối cảnh Sun Saphia Residence – tòa tháp 30 tầng bên biển Sơn Thủy lúc hoàng hôn, Đà Nẵng | đại diện';
+			$links   = (string) ( $p['meta']['hh_p_image_links'] ?? '' );
+			if ( false !== strpos( $links, $old_img ) ) {
+				$p['meta']['hh_p_image_links'] = str_replace( $old_img, $new_img, $links );
+				$olds                          = (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() );
+				$olds[]                        = $links; // Chỉ đổi khi ô ảnh vẫn là giá trị web nhập (chưa sửa tay).
+				$p['fix_meta']['hh_p_image_links'] = array_values( array_unique( $olds ) );
+			}
 		}
 		unset( $p );
 		return $projects;

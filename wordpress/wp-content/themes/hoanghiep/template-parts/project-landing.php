@@ -37,6 +37,16 @@ table.hh-cards tr>.hh-full,table.hh-cards tr>[colspan]{grid-column:1/-1}
 table.hh-cards td small{display:block;white-space:normal!important}
 table.hh-cards .unit-acts{justify-content:flex-start}
 }
+/* Mô hình 3D/4D: xem thử một lúc rồi hiện form để lại số Zalo. */
+.hh-gate4d{position:absolute;inset:0;z-index:2147483602;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(8,22,44,.72);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);font-family:inherit}
+.hh-gate4d form{width:100%;max-width:340px;background:#fff;color:#14223a;border-radius:16px;padding:20px 18px 16px;box-shadow:0 20px 50px -12px rgba(0,0,0,.55);text-align:left}
+.hh-gate4d b{display:block;font-size:18px;line-height:1.3;margin-bottom:6px}
+.hh-gate4d p{margin:0 0 12px;font-size:14px;line-height:1.45;color:#4a5872}
+.hh-gate4d input{display:block;width:100%;box-sizing:border-box;margin:0 0 10px;padding:12px 14px;border:1.5px solid #d5dce8;border-radius:10px;font:inherit;font-size:16px;color:#14223a;background:#fff}
+.hh-gate4d button{display:block;width:100%;border:0;border-radius:999px;padding:13px 16px;background:#E96118;color:#fff;font:inherit;font-size:16px;font-weight:700;cursor:pointer}
+.hh-gate4d .e{color:#c0392b;font-size:13px;min-height:1em;margin:-4px 0 8px}
+.hh-gate4d small{display:block;margin-top:10px;text-align:center;font-size:13px;color:#6b7891}
+.hh-gate4d small a{color:#E96118;font-weight:700;text-decoration:none}
 </style>
 </head>
 <body <?php body_class( 'hh-landing' ); ?>>
@@ -83,7 +93,7 @@ table.hh-cards .unit-acts{justify-content:flex-start}
 	var url = <?php echo wp_json_encode( admin_url( 'admin-post.php' ) ); ?>, ref = <?php echo (int) get_queried_object_id(); ?>;
 	window.addEventListener('submit', function (e) { // Bắt ở cấp window (chạy trước script landing, script đó dừng sự kiện ở document).
 		var f = e.target;
-		if (!f || !f.querySelector || f.matches('.hhc-i, #chatForm, .chat-foot, #calcForm, .hd-search')) return;
+		if (!f || !f.querySelector || f.matches('.hhc-i, #chatForm, .chat-foot, #calcForm, .hd-search, .hh-gate4d form')) return;
 		var tel = f.querySelector('[name=phone], input[type=tel]');
 		if (!tel) return;
 		var pick = function (sel) { var el = f.querySelector(sel); return el ? String(el.value || '').trim() : ''; };
@@ -97,6 +107,74 @@ table.hh-cards .unit-acts{justify-content:flex-start}
 		d.append('need', 'Nhận bảng giá dự án');
 		d.append('message', 'Trang landing: ' + document.title + (f.getAttribute('data-form') ? ' – ' + f.getAttribute('data-form') : '') + (extra ? ' – quan tâm: ' + extra : ''));
 		try { fetch(url, { method: 'POST', body: d, credentials: 'same-origin', keepalive: true }); } catch (err) {}
+	}, true);
+})();
+</script>
+<script>
+(function(){
+	// Mô hình 3D · 4D (Sun Saphia, FourS): khách xoay thử một chút (FREE giây kể từ lúc chạm vào mô hình, hoặc IDLE giây
+	// mô hình nằm trên màn hình) rồi hiện form để lại tên + số Zalo; gửi xong mở khóa luôn (nhớ trên máy khách).
+	var FREE = 8, IDLE = 20, BOXES = '#ss4d-box, #sscc-box, .t360-box, .hh-4dbox';
+	// Khung chứa nút .t360 (FourS) – nút được thay bằng khung mô hình khi bấm.
+	document.querySelectorAll('.t360').forEach(function (b) { if (b.parentElement && !b.parentElement.matches(BOXES)) b.parentElement.classList.add('hh-4dbox'); });
+	var url = <?php echo wp_json_encode( admin_url( 'admin-post.php' ) ); ?>, ref = <?php echo (int) get_queried_object_id(); ?>;
+	var known = function () { try { return '1' === localStorage.getItem('hhZalo'); } catch (e) { return false; } };
+	if (known()) return;
+	var st = new WeakMap(), gated = false;
+	function gate(box) {
+		if (gated || known()) return;
+		gated = true;
+		var o = document.createElement('div');
+		o.className = 'hh-gate4d';
+		o.innerHTML = '<form novalidate><b>Xem tiếp mô hình 3D · 4D</b><p>Anh/chị để lại số Zalo, Hoàng Hiệp gửi luôn bảng giá, mặt bằng căn và mở toàn bộ mô hình để xem tiếp.</p>'
+			+ '<input name="name" autocomplete="name" placeholder="Họ và tên">'
+			+ '<input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Số điện thoại / Zalo *" required>'
+			+ '<div class="e" aria-live="polite"></div><button type="submit">Xem tiếp mô hình →</button>'
+			+ '<small>Hoặc gọi ngay <a href="tel:0904567009">0904 567 009</a></small></form>';
+		var f = o.querySelector('form');
+		window.addEventListener('submit', function (e) {
+			if (e.target !== f) return;
+			e.preventDefault(); e.stopImmediatePropagation();
+			var phone = String(f.phone.value || '').replace(/[^0-9+]/g, '');
+			if (!/^(\+?84|0)\d{8,10}$/.test(phone)) { o.querySelector('.e').textContent = 'Anh/chị kiểm tra lại số điện thoại giúp em.'; f.phone.focus(); return; }
+			var d = new FormData();
+			d.append('action', 'hh_lead'); d.append('ajax', '1'); d.append('ref_id', ref);
+			d.append('name', String(f.name.value || '').trim() || 'Khách xem 4D'); d.append('phone', phone);
+			d.append('need', 'Xem 4D, chọn căn'); d.append('message', 'Xem mô hình 3D/4D trên trang: ' + document.title);
+			try { fetch(url, { method: 'POST', body: d, credentials: 'same-origin', keepalive: true }); } catch (err) {}
+			try { localStorage.setItem('hhZalo', '1'); } catch (err) {}
+			document.querySelectorAll('.hh-gate4d').forEach(function (x) { x.remove(); });
+		}, true); // Bắt ở cấp window, trước script landing (script đó không xử lý form này).
+		if (getComputedStyle(box).position === 'static') box.style.position = 'relative';
+		box.appendChild(o);
+	}
+	// Chạm vào mô hình (khung khác tên miền): trang mất focus, khung mô hình nhận focus.
+	window.addEventListener('blur', function () {
+		setTimeout(function () {
+			var a = document.activeElement, box = a && a.tagName === 'IFRAME' && a.closest(BOXES);
+			if (box) { var s = st.get(box) || {}; if (!s.touch) { s.touch = Date.now(); st.set(box, s); } }
+		}, 0);
+	});
+	setInterval(function () {
+		if (gated) return;
+		document.querySelectorAll(BOXES).forEach(function (box) {
+			if (!box.querySelector('iframe')) return;
+			var s = st.get(box) || { seen: 0 }, r = box.getBoundingClientRect();
+			if (r.bottom > innerHeight * 0.3 && r.top < innerHeight * 0.7) s.seen = (s.seen || 0) + 1;
+			st.set(box, s);
+			if ((s.touch && Date.now() - s.touch > FREE * 1000) || s.seen >= IDLE) gate(box);
+		});
+	}, 1000);
+	// Nút mở mô hình ở tab mới (toàn màn hình): hỏi số Zalo trước.
+	document.addEventListener('click', function (e) {
+		var a = e.target.closest && e.target.closest('a[href*="toa-nha.html"], a[href*="xem-can-ho.html"], a[href*="sun-saphia-4d"]');
+		if (!a || known()) return;
+		var sec = a.closest('section'), box = sec && sec.querySelector(BOXES);
+		if (!box) return;
+		e.preventDefault();
+		var t = sec.querySelector('.t360'); if (t) t.click();
+		gate(box);
+		box.scrollIntoView({ block: 'center' });
 	}, true);
 })();
 </script>

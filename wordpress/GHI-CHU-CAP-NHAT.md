@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.33** + plugin Hoàng Hiệp CRM **2.20.81**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.34** + plugin Hoàng Hiệp CRM **2.20.82**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.82, giao diện 2.15.34: ảnh Sun Saphia nét hơn; mô hình 3D/4D hỏi số Zalo sau khi xoay thử
+
+- Ảnh đại diện Sun Saphia Residence đổi sang phối cảnh tòa tháp bên biển lúc hoàng hôn (1280 px, nét, không có chữ in sẵn); ảnh cũ bị mờ. Chỉ đổi khi ô "Link ảnh" của dự án chưa sửa tay.
+- Mô hình 3D/4D trên trang landing (Sun Saphia, FourS Tower, Tòa F2): khách xoay thử khoảng 8 giây (hoặc để mô hình trên màn hình 20 giây) thì hiện form Họ tên + số Zalo phủ lên mô hình; gửi xong mở khóa luôn, khách vào lại không phải điền nữa. Nút "Xem toàn màn hình ↗" cũng hỏi số trước. Khách lưu vào mục Khách hàng (nhu cầu "Xem 4D, chọn căn").
 
 ## Có gì mới – giao diện 2.15.33: trang landing xem gọn trên điện thoại
 
