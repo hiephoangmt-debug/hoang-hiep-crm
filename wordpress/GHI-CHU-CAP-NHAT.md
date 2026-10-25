@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.24** + plugin Hoàng Hiệp CRM **2.20.74**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.25** + plugin Hoàng Hiệp CRM **2.20.74**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.25: 4D cho xem thử rồi mới hỏi số Zalo
+
+- Khách bấm xem 4D được xem tự do **40 giây**; hết thời gian, khung 4D mờ đi và hiện ô **Nhập số Zalo để xem tiếp**. Nhập xong xem tiếp không giới hạn.
+- Nút **Mở 4D toàn màn hình** và **Chọn căn, xem chi tiết** cũng hỏi số Zalo trước (khách đã nhập rồi thì mở thẳng).
+- Khách để lại số được lưu vào **Khách hàng** với nhu cầu "Xem 4D, chọn căn".
 
 ## Có gì mới – plugin 2.20.74, giao diện 2.15.24: Sun Saphia – xem 4D và chọn căn
 

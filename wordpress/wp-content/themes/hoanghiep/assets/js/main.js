@@ -235,12 +235,71 @@
 		} );
 	}
 
-	// Mô hình 4D: chỉ tải khi khách bấm (trang nhẹ, không tốn dữ liệu di động).
+	// Xem 4D & chọn căn: khách xem 4D tự do một lúc (TOUR_FREE giây) rồi nhập số Zalo để xem tiếp;
+	// chọn căn / mở toàn màn hình hỏi số Zalo trước. Nhập một lần (lưu trên máy khách) thì không hỏi lại.
+	const gate = document.getElementById( 'zalo-gate' );
+	const TOUR_FREE = 40;
+	const known = () => {
+		try {
+			return '1' === localStorage.getItem( 'hhZalo' );
+		} catch ( e ) {
+			return false;
+		}
+	};
+	const openUrl = ( url, win ) => {
+		if ( win && ! win.closed ) {
+			win.location.href = url;
+			return;
+		}
+		const w = window.open( url, '_blank' ); // Không dùng 'noopener' ở đây: khi đó open() luôn trả null.
+		if ( w ) {
+			w.opener = null;
+		} else {
+			location.href = url;
+		}
+	};
+	let afterGate = null; // Việc làm sau khi khách nhập số: { url } mở tab mới, hoặc { fn } chạy tại chỗ.
+	const showGate = ( next, title ) => {
+		if ( ! gate || known() ) {
+			if ( next.url ) {
+				openUrl( next.url );
+			} else if ( next.fn ) {
+				next.fn();
+			}
+			return;
+		}
+		afterGate = next;
+		const t = gate.querySelector( '.lead-pop__title' );
+		if ( t ) {
+			t.dataset.def = t.dataset.def || t.textContent;
+			t.textContent = title || t.dataset.def;
+		}
+		gate.hidden = false;
+		document.body.classList.add( 'has-pop' );
+		const tel = gate.querySelector( '[name=phone]' );
+		if ( tel ) {
+			tel.focus();
+		}
+	};
+
 	$$( '.tour4d' ).forEach( ( box ) => {
 		const play = box.querySelector( '.tour4d__play' );
 		if ( ! play ) {
 			return;
 		}
+		const lock = () => {
+			if ( known() || box.querySelector( '.tour4d__lock' ) ) {
+				return;
+			}
+			const cover = document.createElement( 'button' );
+			cover.type = 'button';
+			cover.className = 'tour4d__lock';
+			cover.innerHTML = '<strong>Nhập số Zalo để xem tiếp mô hình 4D</strong><small>Xem không giới hạn, nhận mặt bằng và giá căn qua Zalo</small>';
+			const unlock = () => cover.remove();
+			cover.addEventListener( 'click', () => showGate( { fn: unlock }, 'Nhập số Zalo để xem tiếp mô hình 4D' ) );
+			box.appendChild( cover );
+			showGate( { fn: unlock }, 'Nhập số Zalo để xem tiếp mô hình 4D' );
+		};
 		play.addEventListener( 'click', () => {
 			const f = document.createElement( 'iframe' );
 			f.src = box.dataset.src;
@@ -249,48 +308,26 @@
 			f.allowFullscreen = true;
 			box.classList.add( 'is-on' );
 			box.replaceChildren( f );
+			if ( gate && ! known() ) {
+				setTimeout( lock, TOUR_FREE * 1000 );
+			}
 		} );
 	} );
 
-	// Chọn căn: hỏi số Zalo một lần (lưu trên máy khách), gửi vào CRM rồi mở công cụ chọn căn.
-	const gate = document.getElementById( 'zalo-gate' );
+	$$( '[data-zalo-gate]' ).forEach( ( btn ) => {
+		btn.addEventListener( 'click', ( e ) => {
+			e.preventDefault();
+			showGate( { url: btn.dataset.zaloGate || btn.getAttribute( 'href' ) }, btn.dataset.gateTitle );
+		} );
+	} );
+
 	if ( gate ) {
 		const form = gate.querySelector( 'form' );
 		const msg = gate.querySelector( '.zalo-gate__msg' );
-		let target = '';
-		const known = () => {
-			try {
-				return '1' === localStorage.getItem( 'hhZalo' );
-			} catch ( e ) {
-				return false;
-			}
-		};
-		const open = ( url, win ) => {
-			if ( win && ! win.closed ) {
-				win.location.href = url;
-			} else if ( ! window.open( url, '_blank', 'noopener' ) ) {
-				location.href = url;
-			}
-		};
 		const hide = () => {
 			gate.hidden = true;
 			document.body.classList.remove( 'has-pop' );
 		};
-		$$( '[data-zalo-gate]' ).forEach( ( btn ) => {
-			btn.addEventListener( 'click', () => {
-				target = btn.dataset.zaloGate;
-				if ( known() ) {
-					open( target );
-					return;
-				}
-				gate.hidden = false;
-				document.body.classList.add( 'has-pop' );
-				const tel = form.querySelector( '[name=phone]' );
-				if ( tel ) {
-					tel.focus();
-				}
-			} );
-		} );
 		gate.addEventListener( 'click', ( e ) => {
 			if ( e.target === gate || e.target.closest( '.lead-pop__close' ) ) {
 				hide();
@@ -307,11 +344,15 @@
 			}
 			msg.hidden = true;
 			if ( ! nameIn.value.trim() ) {
-				nameIn.value = 'Khách xem chọn căn';
+				nameIn.value = 'Khách xem 4D / chọn căn';
 			}
-			const win = window.open( 'about:blank', '_blank' ); // Mở tab ngay khi bấm để trình duyệt không chặn.
-			if ( win ) {
-				win.opener = null;
+			const next = afterGate || {};
+			let win = null;
+			if ( next.url ) {
+				win = window.open( 'about:blank', '_blank' ); // Mở tab ngay khi bấm để trình duyệt không chặn.
+				if ( win ) {
+					win.opener = null;
+				}
 			}
 			const data = new FormData( form );
 			data.set( 'phone', phone );
@@ -322,7 +363,12 @@
 				.catch( () => {} )
 				.finally( () => {
 					hide();
-					open( target, win );
+					if ( next.url ) {
+						openUrl( next.url, win );
+					} else if ( next.fn ) {
+						next.fn();
+					}
+					afterGate = null;
 				} );
 		} );
 	}
