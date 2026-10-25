@@ -296,7 +296,19 @@ while ( have_posts() ) :
 						// Tìm theo tên dự án (Google Maps nhận diện tốt hơn địa chỉ chung chung) nếu chưa nhập tọa độ / địa chỉ bản đồ.
 						$map_name = trim( preg_replace( '/\s*\([^)]*\)/u', '', $title ) );
 						$map_name = false === mb_stripos( $map_name, 'Đà Nẵng' ) ? $map_name . ', Đà Nẵng' : $map_name;
-						hh_map( hh_meta( 'hh_p_map_address' ) ?: $map_name, hh_meta( 'hh_p_map_coords' ) );
+						$map_addr   = hh_meta( 'hh_p_map_address' );
+						$map_coords = hh_meta( 'hh_p_map_coords' );
+						// Tòa / phân khu con chưa có vị trí riêng: dùng vị trí dự án mẹ (tên tòa như "The Sapphire" dễ bị Google ghim nhầm chỗ khác).
+						$map_parent = (int) hh_meta( 'hh_p_parent' );
+						if ( ! $map_coords && ! $map_addr && $map_parent && 'du-an' === get_post_type( $map_parent ) ) {
+							$map_coords = hh_meta( 'hh_p_map_coords', $map_parent );
+							$map_addr   = hh_meta( 'hh_p_map_address', $map_parent );
+							if ( ! $map_addr ) {
+								$map_name = trim( preg_replace( '/^Tổ hợp\s+|\s*\([^)]*\)/u', '', get_the_title( $map_parent ) ) );
+								$map_name = false === mb_stripos( $map_name, 'Đà Nẵng' ) ? $map_name . ', Đà Nẵng' : $map_name;
+							}
+						}
+						hh_map( $map_addr ?: $map_name, $map_coords );
 						?>
 					</div>
 				</div>

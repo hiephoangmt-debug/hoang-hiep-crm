@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.29** + plugin Hoàng Hiệp CRM **2.20.79**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.30** + plugin Hoàng Hiệp CRM **2.20.79**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -41,7 +41,9 @@ Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
 
-## Có gì mới – giao diện 2.15.29: cân đều chữ và khối trên mọi trang
+## Có gì mới – giao diện 2.15.30: cân đều chữ và khối trên mọi trang; bản đồ tòa con
+
+- **Bản đồ**: tòa / phân khu con chưa có tọa độ riêng (VD Newtown The Sapphire, The Ruby, The Diamond) dùng vị trí dự án mẹ – hết bị Google ghim nhầm sang khu khác. Dự án nào vẫn sai: sửa dự án → Vị trí → ô **Tọa độ bản đồ**.
 
 - Đoạn văn, dòng liệt kê trên điện thoại **căn đều 2 bên** (lề phải thẳng hàng), dòng cuối canh trái; ô bảng và thẻ nhỏ vẫn canh trái cho khỏi hở chữ.
 - Bảng: mã căn (VD C3-06A) không còn gãy thành 2 dòng.
