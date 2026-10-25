@@ -108,6 +108,21 @@ def img_fit(path, t0, dur, t, zoom=0.07):
     cx, cy = bg.width / 2, bg.height / 2
     return bg.resize((W, H), Image.LANCZOS, box=(cx - cw / 2, cy - ch / 2, cx + cw / 2, cy + ch / 2)).convert("RGBA")
 
+STATS = [("30", "TẦNG", "Cao 114 m · 2 tầng hầm"), ("782", "CĂN HỘ", "Studio · 1PN+ · 2PN"),
+         ("3.720", "M² ĐẤT", "Góc Võ Nguyên Giáp – N.Đ.Thuận"), ("11/2028", "BÀN GIAO", "Dự kiến")]
+def stats(fr, dt):
+    d = ImageDraw.Draw(fr)
+    for i, (big, lab, sub) in enumerate(STATS):
+        e = ease((dt - 0.15 - 0.28 * i) / 0.3)
+        if e <= 0: continue
+        x0 = 70 + (i % 2) * 480; y0 = 1180 + (i // 2) * 200 + int(30 * (1 - e))
+        box = Image.new("RGBA", (460, 180), (0, 0, 0, 0)); b = ImageDraw.Draw(box)
+        b.rounded_rectangle((0, 0, 459, 179), radius=24, fill=(8, 20, 44, 225), outline=(255, 140, 40, 170), width=3)
+        b.text((28, 18), big, font=R.font("xb", 72), fill=OR); b.text((30, 104), lab, font=R.font("b", 30), fill=WH)
+        b.text((30, 142), sub, font=R.font("m", 22), fill=(200, 212, 232))
+        box.putalpha(box.getchannel("A").point(lambda v: int(v * e)))
+        fr.alpha_composite(box, (x0, y0))
+
 def pool_frame(t0, t):
     if not hasattr(pool_frame, "bg"):
         R.background("../../anh-page-2810/ho-boi-hoang-hon.jpg", "pool-bg.jpg"); pool_frame.bg = Image.open("pool-bg.jpg")
@@ -121,7 +136,15 @@ def end_frame(t0, t, src):
         im = Image.open("phoi-canh-bien.jpg").convert("RGB"); ch = im.height; cw = ch * W / H
         b = im.resize((W, H), Image.LANCZOS, box=(748 - cw / 2, 0, 748 + cw / 2, ch)).filter(ImageFilter.GaussianBlur(14)); end_frame.bg = Image.blend(b, Image.new("RGB", b.size, NAVY), 0.62).convert("RGBA")
     fr = end_frame.bg.copy(); d = ImageDraw.Draw(fr); dt = t - t0
-    R.spaced(d, (W / 2, 300), "SUN SAPHIA RESIDENCE", R.font("xb", 50), WH, 6)
+    title = "SUN SAPHIA RESIDENCE"; ft = R.font("xb", 50)
+    tw = sum(d.textlength(ch, font=ft) for ch in title) + 6 * (len(title) - 1); x = W / 2 - tw / 2
+    for i, ch in enumerate(title):
+        e = ease((dt - 0.03 * i) / 0.35)
+        if e > 0:
+            layer = Image.new("RGBA", (80, 90), (0, 0, 0, 0)); ImageDraw.Draw(layer).text((40, 45), ch, font=ft, fill=WH, anchor="mm")
+            layer.putalpha(layer.getchannel("A").point(lambda v: int(v * e)))
+            fr.alpha_composite(layer, (int(x + d.textlength(ch, font=ft) / 2 - 40), int(300 - 45 + 26 * (1 - e))))
+        x += d.textlength(ch, font=ft) + 6
     d.text((W / 2, 372), "Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng", font=R.font("m", 32), fill=(205, 215, 235), anchor="mm")
     if t >= 54.35:
         e = ease((t - 54.35) / 0.35); f1 = R.font("xb", int(70 + 10 * e))
@@ -130,8 +153,18 @@ def end_frame(t0, t, src):
     if t >= 56.08:
         d.text((W / 2, 900), "Nhận bảng giá gốc qua Zalo", font=R.font("sb", 46), fill=WH, anchor="mm")
         d.text((W / 2, 960), "ngay khi chủ đầu tư công bố", font=R.font("m", 36), fill=(205, 215, 235), anchor="mm")
-    d.rounded_rectangle((150, 1040, W - 150, 1180), radius=70, fill=OR)
-    d.text((W / 2, 1112), "0904 567 009", font=R.font("xb", 84), fill=WH, anchor="mm")
+    pe = ease((dt - 0.4) / 0.4); pw = int((W - 300) * (0.6 + 0.4 * pe)) // 2
+    if pe > 0:
+        glow = Image.new("RGBA", (W, H), (0, 0, 0, 0)); ImageDraw.Draw(glow).rounded_rectangle((W / 2 - pw - 18, 1022, W / 2 + pw + 18, 1198), radius=88, fill=(255, 140, 40, int(110 * pe)))
+        fr.alpha_composite(glow.filter(ImageFilter.GaussianBlur(22)))
+        d.rounded_rectangle((W / 2 - pw, 1040, W / 2 + pw, 1180), radius=70, fill=OR)
+        d.text((W / 2, 1112), "0904 567 009", font=R.font("xb", int(84 * (0.8 + 0.2 * pe))), fill=WH, anchor="mm")
+        ph = ((dt - 1.0) % 1.8) / 0.7                         # vệt sáng lướt qua ô hotline
+        if dt > 1.0 and ph < 1:
+            sw = Image.new("RGBA", (W, H), (0, 0, 0, 0)); sx = W / 2 - pw - 120 + (2 * pw + 240) * ph
+            ImageDraw.Draw(sw).polygon([(sx, 1040), (sx + 60, 1040), (sx + 10, 1180), (sx - 50, 1180)], fill=(255, 255, 255, 120))
+            m = Image.new("L", (W, H), 0); ImageDraw.Draw(m).rounded_rectangle((W / 2 - pw, 1040, W / 2 + pw, 1180), radius=70, fill=255)
+            sw.putalpha(Image.composite(sw.getchannel("A"), Image.new("L", (W, H), 0), m)); fr.alpha_composite(sw.filter(ImageFilter.GaussianBlur(3)))
     d.text((W / 2, 1220), "Zalo · Hotline · Hoàng Hiệp", font=R.font("sb", 32), fill=(255, 200, 140), anchor="mm")
     idx, a = R.sig_state(int(dt * FPS), [6], 1.0)
     R.draw_sig(fr, idx, a, w=520, cx=540, bottom=1600)
@@ -157,13 +190,15 @@ def main():
             if len(r2) == W * H * 3: main.last2 = r2
             fr = Image.frombytes("RGB", (W, H), main.last2).convert("RGBA")
         elif t < 1.6: fr = hero_frame(t)
-        elif 45.35 <= t < 48.44: fr = pool_frame(45.35, t)
+        elif 38.34 <= t < 41.9: fr = img_fit("slide-thap-ho-boi.jpg", 38.34, 3.56, t, 0.10)
+        elif 41.9 <= t < 45.35: fr = img_fit("slide-mat-bang.jpg", 41.9, 3.45, t, 0.06); stats(fr, t - 41.9)
+        elif 45.35 <= t < 48.44: fr = img_fit("slide-ho-boi.jpg", 45.35, 3.09, t, 0.07)
         elif 48.44 <= t < 50.9: fr = img_fit("pho-truoc-toa.jpg", 48.44, 2.46, t)
         elif 50.9 <= t < 53.08: fr = img_fit("thap-kickoff.jpg", 50.9, 2.18, t)
         elif t >= 53.08: fr = end_frame(53.08, t, src)
         else: fr = src.convert("RGBA")
         if t < 53.08:
-            if 1.6 <= t < 45.35 and not (14.13 <= t < 17.93): fr.alpha_composite(MASK)
+            if 1.6 <= t < 38.34 and not (14.13 <= t < 17.93): fr.alpha_composite(MASK)
             show_brand = not (38.34 <= t < 45.35)
             if show_brand:
                 idx, a = R.sig_state(f, writes, 1.0)
