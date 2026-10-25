@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.21** + plugin Hoàng Hiệp CRM **2.20.70**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.21** + plugin Hoàng Hiệp CRM **2.20.71**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,10 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.71: tin nhà đất riêng lẻ – đất TMDV mặt tiền Hoàng Văn Thái
+- Tin mới (Nhà đất → Mặt bằng kinh doanh, tin HOT): chuyển nhượng 2.404,4 m² đất thương mại dịch vụ mặt tiền 42 m đường Hoàng Văn Thái, thuê đất trả tiền một lần đến 20/01/2066, giá 50 tỷ gồm VAT. Không ghi số nhà, không ghi tên/số điện thoại bên bán – địa chỉ cụ thể gửi khi khách liên hệ.
+- Thêm cách nhập tin riêng lẻ không thuộc dự án (data-tin-nha-dat-le.php), chạy cùng nút Nhập / cập nhật dữ liệu.
 
 ## Có gì mới – plugin 2.20.70: trang Khu đô thị Nam Việt Á
 - Trang mới /du-an/khu-do-thi-nam-viet-a/ (KĐT sinh thái Nam cầu Tuyên Sơn, Ngũ Hành Sơn): tổng quan, bảng giá lô ống, đất biệt thự, lô góc theo danh sách Hoàng Hiệp 10/2026 kèm giá/m², biểu đồ giá tự vẽ, hỏi đáp.
