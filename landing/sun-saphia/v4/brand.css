@@ -554,3 +554,8 @@ main .hcvt p,main .hnum *,main .stats *,main .tag,main .btn,main .ey,main .cta p
 .g2:not(.g2 .g2)>figure.fg>img[alt*="ơ đồ"],.g2:not(.g2 .g2)>figure.fg>img[alt*="ản đồ"],.g2:not(.g2 .g2)>figure.fg>img[alt*="ayout"],.g2:not(.g2 .g2)>figure.fg>img[alt*="ặt bằng"],.g2:not(.g2 .g2)>figure.fg>img[alt*="ồ sơ"],.g2:not(.g2 .g2)>figure.fg>img[alt*="ản vẽ"],.g2:not(.g2 .g2)>figure.fg>img[alt*="ệ tinh"],.g2:not(.g2 .g2)>figure.fg>img[alt*="ồ đường"]{object-fit:contain;background:#fff;height:auto;flex:0 0 auto;margin:auto 0}
 .g2:not(.g2 .g2)>.card{height:100%}
 }
+/* Ô kẻ mờ trên nền xanh đậm */
+.hero.cine2,.hcv{background-color:var(--nvd);background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px),radial-gradient(120% 80% at 80% 0%,rgba(39,82,134,.6),rgba(11,36,71,0) 60%);background-size:44px 44px,44px 44px,100% 100%;background-position:-1px -1px,-1px -1px,0 0}
+.cta{background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(135deg,var(--nvd),var(--nv));background-size:40px 40px,40px 40px,100% 100%}
+.band{background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(120deg,var(--nvd),var(--nv));background-size:36px 36px,36px 36px,100% 100%}
+.g2>div>.tag,.g2>div>.play{align-self:flex-start}
