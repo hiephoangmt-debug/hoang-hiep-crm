@@ -559,3 +559,15 @@ main .hcvt p,main .hnum *,main .stats *,main .tag,main .btn,main .ey,main .cta p
 .cta{background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(135deg,var(--nvd),var(--nv));background-size:40px 40px,40px 40px,100% 100%}
 .band{background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(120deg,var(--nvd),var(--nv));background-size:36px 36px,36px 36px,100% 100%}
 .g2>div>.tag,.g2>div>.play{align-self:flex-start}
+.vtn{grid-template-columns:1.15fr 1fr!important}
+.vtn>div{display:flex;flex-direction:column;justify-content:center;gap:16px}
+.vtn .kn{grid-template-columns:1fr 1fr}
+.vtn p{margin:0!important}.vtn .btn{align-self:flex-start}
+@media(max-width:760px){.vtn{grid-template-columns:1fr!important}.vtn .kn{grid-template-columns:1fr 1fr}}
+.mini{display:block;width:calc(100% + 28px);margin:-14px -14px 12px;max-width:none;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:14px 14px 0 0}
+.cdn{margin:0 auto 20px;max-width:560px}
+.cdl{display:block;font-size:14px;color:#ffd9a8;font-weight:700;margin-bottom:10px;text-align:center}
+.cdb{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.cdb div{background:linear-gradient(160deg,#F68B2C,var(--or));border-radius:14px;padding:10px 6px;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+.cdb b{display:block;font:500 clamp(28px,4vw,40px)/1 Fahkwang,serif;color:#fff}
+.cdb small{font-size:12.5px;color:#fff;opacity:.9}
