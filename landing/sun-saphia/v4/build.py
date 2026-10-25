@@ -45,6 +45,10 @@ def bands_at(b, items):
             b = b[:pos[n]] + html + b[pos[n]:]
     return b
 
+def cover():
+    B = RAW + 'cf6083d846b6a2282f9f7a26e40607819b2cee3d/landing/sun-saphia/v4/img/'
+    return ('<section class="cover"><img src="%sanh-bia-kickoff.webp" srcset="%sanh-bia-kickoff-1200.webp 1200w, %sanh-bia-kickoff.webp 2000w" sizes="100vw" width="2000" height="317" alt="Ảnh bìa sự kiện Kick-off Sun Saphia Residence – Đón ánh dương, giao hòa nhịp sống, Đà Nẵng 23/10/2026" fetchpriority="high" decoding="async"></section>') % (B, B, B)
+
 def hero_home():
     return ('<section class="hero"><img class="sun" src="%smat-troi.webp" alt="" width="700" height="898" aria-hidden="true">'
             '<div class="wrap"><nav class="crumb" aria-label="Đường dẫn"><a href="{M}/">Trang chủ</a> › <span>Dự án Đà Nẵng</span> › <span>Sun Saphia Residence</span></nav>'
@@ -62,7 +66,7 @@ def hero_home():
             '</div>'
             '<div class="hr">%s<div class="pic">%s<span>Phối cảnh minh họa</span></div></div></div></div></section>') % (
         SK, SK, form('dau', 'Web – trang chủ đầu trang', h='h2'),
-        img('thap-bien-hoang-hon', 'Phối cảnh Sun Saphia Residence – tòa tháp 30 tầng bên bờ biển Đà Nẵng lúc hoàng hôn', eager=True))
+        ('<img src="%sphoi-canh-binh-minh.webp" srcset="%sphoi-canh-binh-minh-900.webp 900w, %sphoi-canh-binh-minh.webp 1164w" sizes="(max-width: 760px) 100vw, 560px" width="1164" height="644" alt="Phối cảnh Sun Saphia Residence – tòa tháp 30 tầng bên bờ biển Đà Nẵng lúc bình minh" fetchpriority="high" decoding="async">' % ((RAW + 'cf6083d846b6a2282f9f7a26e40607819b2cee3d/landing/sun-saphia/v4/img/',) * 3)))
 
 def bgal():
     return ('<div class="bgal"><figure class="fg" style="margin:0"><img src="' + RAW + '5d53a85bdc9cb6cd002b777b25f7f515fe602674/landing/sun-saphia/v4/img/bien-thuc-te-5.webp" srcset="' + RAW + '5d53a85bdc9cb6cd002b777b25f7f515fe602674/landing/sun-saphia/v4/img/bien-thuc-te-5-900.webp 900w, ' + RAW + '5d53a85bdc9cb6cd002b777b25f7f515fe602674/landing/sun-saphia/v4/img/bien-thuc-te-5.webp 1536w" sizes="(max-width: 760px) 100vw, 760px" width="1536" height="861" alt="Ảnh thực tế: hàng dừa, bãi cát trắng, biển xanh và bán đảo Sơn Trà" loading="lazy" decoding="async"><figcaption>Hàng dừa, cát trắng, nhìn về bán đảo Sơn Trà</figcaption></figure><div class="bgal4"><figure class="fg" style="margin:0"><img src="' + RAW + '0990ec9d41d0bfa65b67041afd75264aa71ab929/landing/sun-saphia/v4/img/bien-thuc-te-4.webp" srcset="' + RAW + '0990ec9d41d0bfa65b67041afd75264aa71ab929/landing/sun-saphia/v4/img/bien-thuc-te-4-900.webp 900w, ' + RAW + '0990ec9d41d0bfa65b67041afd75264aa71ab929/landing/sun-saphia/v4/img/bien-thuc-te-4.webp 1600w" sizes="(max-width: 760px) 100vw, 300px" width="1600" height="901" alt="Ảnh thực tế: Hướng về Sơn Trà, chùa Linh Ứng" loading="lazy" decoding="async"><figcaption>Nhìn về chùa Linh Ứng</figcaption></figure><figure class="fg" style="margin:0"><img src="' + RAW + '0990ec9d41d0bfa65b67041afd75264aa71ab929/landing/sun-saphia/v4/img/bien-thuc-te-1.webp" srcset="' + RAW + '0990ec9d41d0bfa65b67041afd75264aa71ab929/landing/sun-saphia/v4/img/bien-thuc-te-1-900.webp 900w, ' + RAW + '0990ec9d41d0bfa65b67041afd75264aa71ab929/landing/sun-saphia/v4/img/bien-thuc-te-1.webp 1600w" sizes="(max-width: 760px) 100vw, 300px" width="1600" height="901" alt="Ảnh thực tế: Chiều tắm biển đông vui" loading="lazy" decoding="async"><figcaption>Chiều tắm biển đông vui</figcaption></figure><figure class="fg" style="margin:0"><img src="' + RAW + '0990ec9d41d0bfa65b67041afd75264aa71ab929/landing/sun-saphia/v4/img/bien-thuc-te-3.webp" srcset="' + RAW + '0990ec9d41d0bfa65b67041afd75264aa71ab929/landing/sun-saphia/v4/img/bien-thuc-te-3-900.webp 900w, ' + RAW + '0990ec9d41d0bfa65b67041afd75264aa71ab929/landing/sun-saphia/v4/img/bien-thuc-te-3.webp 1600w" sizes="(max-width: 760px) 100vw, 300px" width="1600" height="901" alt="Ảnh thực tế: Khách sạn, căn hộ ven biển" loading="lazy" decoding="async"><figcaption>Khách sạn, căn hộ ven biển</figcaption></figure><figure class="fg" style="margin:0"><img src="' + RAW + '0990ec9d41d0bfa65b67041afd75264aa71ab929/landing/sun-saphia/v4/img/bien-thuc-te-2.webp" srcset="' + RAW + '0990ec9d41d0bfa65b67041afd75264aa71ab929/landing/sun-saphia/v4/img/bien-thuc-te-2-900.webp 900w, ' + RAW + '0990ec9d41d0bfa65b67041afd75264aa71ab929/landing/sun-saphia/v4/img/bien-thuc-te-2.webp 1600w" sizes="(max-width: 760px) 100vw, 300px" width="1600" height="901" alt="Ảnh thực tế: Bãi cát rộng, sóng êm" loading="lazy" decoding="async"><figcaption>Bãi cát rộng, sóng êm</figcaption></figure></div></div>')
@@ -119,7 +123,7 @@ def home():
            ('tam-nhin', '02 Sông – Núi – Biển'), ('thiet-ke', '03 Cảm hứng thiết kế'), ('mat-bang', '04 Cơ cấu sản phẩm & chọn căn'), ('phap-ly', '05 Pháp lý'),
            ('tien-ich', '06 Tiện ích "may đo"'), ('chu-nhan', '07 Chủ nhân tương lai'), ('khan-hiem', '08 Mức độ khan hiếm'), ('cho-thue', '09 Dòng tiền cho thuê'),
            ('tien-do', 'Tiến độ'), ('hoi-dap', 'Hỏi đáp')]
-    b = hero_home()
+    b = cover() + hero_home()
     b += tldr('Sun Saphia Residence', [('Là gì', 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, do Sun Property phát triển'), ('Vị trí', 'Giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, phường Ngũ Hành Sơn; ra biển Sơn Thủy ~400 m'),
         ('Quy mô', '1 tòa 30 tầng (114 m), 2 hầm, 782 căn trên 3.720,1 m²'), ('Loại căn', 'Studio 30–31 m² (513) · 1BR+ 50–51 m² (108) · 2BR 60–70 m² (133), trần 3,5 m'),
         ('Pháp lý', 'GCN đầu tư 2572746483 (17/09/2026), thời hạn 50 năm, công trình cấp I niên hạn 100 năm'), ('Ngân hàng', 'Vietcombank, BIDV, NCB hỗ trợ vay'),
@@ -518,7 +522,7 @@ def cho_thue():
 def ads(domain):
     url = MAIN + '/ads'  # cả hai tên miền chuẩn hóa về trang ads chính
     HB = RAW + '90c9302fe8dca2fa597009660b9635821c7d1eb5/landing/sun-saphia/v4/img/hero-bien'
-    b = ('<section class="hero cine2"><div class="hban"><img src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1668w" sizes="100vw" width="1668" height="943" '
+    b = cover() + ('<section class="hero cine2"><div class="hban"><img src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1668w" sizes="100vw" width="1668" height="943" '
          'alt="Căn hộ cao tầng mặt biển Đà Nẵng – ban công nhìn ra biển lúc hoàng hôn (ảnh minh họa)" fetchpriority="high" decoding="async">'
          '<span class="cap">Ảnh minh họa</span></div>'
          '<div class="hbody"><div class="wrap"><div class="g2"><div class="hl">'

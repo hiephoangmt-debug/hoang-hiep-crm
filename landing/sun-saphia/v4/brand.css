@@ -512,3 +512,5 @@ body{padding-bottom:84px}
 @media(max-width:760px){.bgal4{grid-template-rows:none}.bgal4 img{aspect-ratio:4/3;flex:none}}
 .nhsg .card p{text-align:left}
 @media(max-width:760px){.nhsg{grid-template-columns:1fr!important}}
+.cover{margin:0;line-height:0;background:#bfe3f7}.cover img{display:block;width:100%;height:auto;max-height:260px;object-fit:cover;object-position:60% 50%}
+@media(max-width:760px){.cover img{height:130px;max-height:none;object-position:88% 50%}}
