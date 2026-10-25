@@ -56,7 +56,7 @@ def overlay(tag, lines, out, big=False):
     o.save(out)
 
 LOGO = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "logo-hoang-hiep.png")
-BRAND = "Hoàng Hiệp Đà Nẵng"
+BRAND = "Hoàng Hiệp"
 
 def paste_logo(img, cx, cy, maxw, maxh):
     """Dán logo (nếu có file assets/logo-hoang-hiep.png), trả về True nếu đã dán."""

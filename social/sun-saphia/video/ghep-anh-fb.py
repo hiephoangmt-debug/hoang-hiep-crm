@@ -22,6 +22,6 @@ def ghep(out, srcs):
     for s, b in zip(srcs, boxes): put(im, s, b)
     d = ImageDraw.Draw(im); y = A + (FOOT - 30) // 2
     d.text((48, y), "SUN SAPHIA RESIDENCE", font=f("b", 28), fill=WH)
-    d.text((W - 48, y), "Hoàng Hiệp Đà Nẵng · Zalo 0904 567 009", font=f("sb", 26), fill=OR, anchor="ra")
+    d.text((W - 48, y), "Hoàng Hiệp · Zalo 0904 567 009", font=f("sb", 26), fill=OR, anchor="ra")
     im.save(out, quality=90)
 if __name__ == "__main__": ghep(sys.argv[1], sys.argv[2:])

@@ -35,7 +35,7 @@ def card(path,tag,title,rows,note):
     fn=f("r",24);yy=H-170
     for l in wrap(d,note,fn,W-2*P): d.text((P,yy),l,font=fn,fill=MUT);yy+=32
     d.line((P,H-80,W-P,H-80),fill=NAVY2,width=2)
-    d.text((P,H-62),"Hoàng Hiệp Đà Nẵng · sun-saphia-residence.com",font=f("sb",24),fill=WH)
+    d.text((P,H-62),"Hoàng Hiệp · sun-saphia-residence.com",font=f("sb",24),fill=WH)
     im.save(path,quality=90)
 D=sys.argv[1]
 card(D+"/dong-tien.jpg","BÀI TOÁN MINH HỌA","Cho thuê căn hộ mặt biển Đà Nẵng thu về bao nhiêu?",[
