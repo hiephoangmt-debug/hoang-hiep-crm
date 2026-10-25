@@ -47,7 +47,7 @@ def bands_at(b, items):
 
 def cover():
     B = RAW + 'cf6083d846b6a2282f9f7a26e40607819b2cee3d/landing/sun-saphia/v4/img/'
-    return ('<section class="cover"><img src="%sanh-bia-kickoff.webp" srcset="%sanh-bia-kickoff-1200.webp 1200w, %sanh-bia-kickoff.webp 2000w" sizes="100vw" width="2000" height="317" alt="Ảnh bìa sự kiện Kick-off Sun Saphia Residence – Đón ánh dương, giao hòa nhịp sống, Đà Nẵng 23/10/2026" fetchpriority="high" decoding="async"></section>') % (B, B, B)
+    return ('<section class="cover"><picture><source media="(max-width: 760px)" srcset="%sphoi-canh-binh-minh-900.webp" width="900" height="498"><img src="%sanh-bia-kickoff.webp" srcset="%sanh-bia-kickoff-1200.webp 1200w, %sanh-bia-kickoff.webp 2000w" sizes="100vw" width="2000" height="317" alt="Ảnh bìa sự kiện Kick-off Sun Saphia Residence – Đón ánh dương, giao hòa nhịp sống, Đà Nẵng 23/10/2026" fetchpriority="high" decoding="async"></picture></section>') % (B, B, B, B)
 
 def hero_home():
     return ('<section class="hero"><img class="sun" src="%smat-troi.webp" alt="" width="700" height="898" aria-hidden="true">'
@@ -64,7 +64,7 @@ def hero_home():
             '<div class="stats"><div><b>30 tầng</b><span>114 m · 2 hầm</span></div><div><b>782 căn</b><span>Studio · 1BR+ · 2BR</span></div>'
             '<div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>50 năm</b><span>thời hạn dự án</span></div></div>'
             '</div>'
-            '<div class="hr">%s<div class="pic">%s<span>Phối cảnh minh họa</span></div></div></div></div></section>') % (
+            '<div class="hr">%s<div class="pic pic-home">%s<span>Phối cảnh minh họa</span></div></div></div></div></section>') % (
         SK, SK, form('dau', 'Web – trang chủ đầu trang', h='h2'),
         ('<img src="%sphoi-canh-binh-minh.webp" srcset="%sphoi-canh-binh-minh-900.webp 900w, %sphoi-canh-binh-minh.webp 1164w" sizes="(max-width: 760px) 100vw, 560px" width="1164" height="644" alt="Phối cảnh Sun Saphia Residence – tòa tháp 30 tầng bên bờ biển Đà Nẵng lúc bình minh" fetchpriority="high" decoding="async">' % ((RAW + 'cf6083d846b6a2282f9f7a26e40607819b2cee3d/landing/sun-saphia/v4/img/',) * 3)))
 
@@ -522,7 +522,7 @@ def cho_thue():
 def ads(domain):
     url = MAIN + '/ads'  # cả hai tên miền chuẩn hóa về trang ads chính
     HB = RAW + '90c9302fe8dca2fa597009660b9635821c7d1eb5/landing/sun-saphia/v4/img/hero-bien'
-    b = cover() + ('<section class="hero cine2"><div class="hban"><img src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1668w" sizes="100vw" width="1668" height="943" '
+    b = ('<section class="hero cine2"><div class="hban"><img src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1668w" sizes="100vw" width="1668" height="943" '
          'alt="Căn hộ cao tầng mặt biển Đà Nẵng – ban công nhìn ra biển lúc hoàng hôn (ảnh minh họa)" fetchpriority="high" decoding="async">'
          '<span class="cap">Ảnh minh họa</span></div>'
          '<div class="hbody"><div class="wrap"><div class="g2"><div class="hl">'
