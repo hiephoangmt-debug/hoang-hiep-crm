@@ -13,7 +13,7 @@ while ( have_posts() ) :
 	$quick = array_filter(
 		array(
 			'Giá'       => hh_listing_price(),
-			'Diện tích' => hh_meta( 'hh_area' ) ? hh_meta( 'hh_area' ) . ' m²' : '',
+			'Diện tích' => hh_meta( 'hh_area' ) ? ( function_exists( 'hh_vn_num' ) ? hh_vn_num( hh_meta( 'hh_area' ) ) : hh_meta( 'hh_area' ) ) . ' m²' : '',
 			'Phòng ngủ' => hh_meta( 'hh_bedrooms' ),
 			'Phòng tắm' => hh_meta( 'hh_bathrooms' ),
 			'Hướng'     => hh_meta( 'hh_direction' ) ? hh_option_label( $schema, 'hh_direction', hh_meta( 'hh_direction' ) ) : '',
@@ -122,7 +122,7 @@ while ( have_posts() ) :
 			<?php if ( 'ban' === $deal ) : ?>
 				<section class="block" id="tai-chinh">
 					<h2 class="block__title">Tính khoản vay &amp; dòng tiền</h2>
-					<?php get_template_part( 'template-parts/finance', null, array( 'mode' => 'listing' ) ); ?>
+					<?php get_template_part( 'template-parts/finance', null, array( 'mode' => 'listing', 'no_rent' => has_term( array( 'dat-nen', 'mat-bang-kinh-doanh' ), 'loai-bds', $id ) ) ); // Đất, mặt bằng: không hiện bài toán cho thuê căn hộ. ?>
 				</section>
 			<?php endif; ?>
 

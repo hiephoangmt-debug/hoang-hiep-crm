@@ -120,8 +120,9 @@ $rent_fields = array(
 		</div>
 	<?php endif; ?>
 
-	<h3 class="block__sub">Bài toán cho thuê</h3>
-	<div class="finance__rent">
+	<?php $no_rent = ! empty( $args['no_rent'] ); // Tin bán đất / mặt bằng: ẩn (giữ phần tử cho script tính). ?>
+	<h3 class="block__sub"<?php echo $no_rent ? ' hidden' : ''; ?>>Bài toán cho thuê</h3>
+	<div class="finance__rent"<?php echo $no_rent ? ' hidden' : ''; ?>>
 		<form class="finance__inputs finance__inputs--inline" onsubmit="return false">
 			<?php foreach ( $rent_fields as list( $key, $label, $step ) ) : ?>
 				<label>

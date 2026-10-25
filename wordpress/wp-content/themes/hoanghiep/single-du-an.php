@@ -80,7 +80,7 @@ while ( have_posts() ) :
 		array(
 			'Giá bán'   => $resale ? '' : ( hh_meta( 'hh_p_price_from' ) ? hh_project_price() : 'Liên hệ' ),
 			'Giá chuyển nhượng' => $resale ? ( hh_meta( 'hh_p_resale_price' ) ?: ( $market['ban']['range'] ? hh_ucfirst( $market['ban']['range'] ) : 'Liên hệ' ) ) : '',
-			'Đang giao dịch'    => $resale ? $market['ban']['count'] . ' căn bán · ' . $market['thue']['count'] . ' căn thuê' : '',
+			'Đang giao dịch'    => $resale && ( $market['ban']['count'] + $market['thue']['count'] ) ? $market['ban']['count'] . ' căn bán · ' . $market['thue']['count'] . ' căn thuê' : '', // 0 căn: ẩn ô.
 			'Loại hình' => hh_project_types_label(),
 			'Quy mô'    => hh_meta( 'hh_p_scale' ),
 			'Sản phẩm'  => hh_meta( 'hh_p_unit_area' ),

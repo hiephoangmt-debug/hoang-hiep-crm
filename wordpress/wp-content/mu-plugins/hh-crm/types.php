@@ -485,6 +485,16 @@ function hh_listing_code( $post_id = null ) {
 	return 'HH' . str_pad( (string) ( $post_id ?: get_the_ID() ), 5, '0', STR_PAD_LEFT );
 }
 
+/** Số kiểu Việt: 2404.4 → "2.404,4", 42 → "42". */
+function hh_vn_num( $v ) {
+	if ( ! is_numeric( $v ) ) {
+		return (string) $v;
+	}
+	$v   = (float) $v;
+	$dec = abs( $v - round( $v ) ) < 0.001 ? 0 : ( abs( $v * 10 - round( $v * 10 ) ) < 0.001 ? 1 : 2 );
+	return number_format( $v, $dec, ',', '.' );
+}
+
 function hh_listing_price( $post_id = null ) {
 	$post_id = $post_id ?: get_the_ID();
 	$rent = 'thue' === hh_meta( 'hh_deal', $post_id );
@@ -537,11 +547,11 @@ function hh_listing_specs( $post_id = null ) {
 		'Loại nhà đất'        => $terms( 'loai-bds' ),
 		'Giá'                 => hh_listing_price( $post_id ) . ( '1' === $m( 'hh_negotiable' ) ? ' (thương lượng)' : '' ),
 		'Đơn giá'             => hh_listing_price_m2( $post_id ),
-		'Diện tích'           => $m( 'hh_area' ) ? $m( 'hh_area' ) . ' m²' : '',
-		'Diện tích sử dụng'   => $m( 'hh_area_use' ) ? $m( 'hh_area_use' ) . ' m²' : '',
-		'Kích thước'          => $m( 'hh_width' ) && $m( 'hh_length' ) ? $m( 'hh_width' ) . ' × ' . $m( 'hh_length' ) . ' m' : '',
-		'Mặt tiền'            => $m( 'hh_frontage' ) ? $m( 'hh_frontage' ) . ' m' : '',
-		'Đường vào'           => $m( 'hh_road' ) ? $m( 'hh_road' ) . ' m' : '',
+		'Diện tích'           => $m( 'hh_area' ) ? hh_vn_num( $m( 'hh_area' ) ) . ' m²' : '',
+		'Diện tích sử dụng'   => $m( 'hh_area_use' ) ? hh_vn_num( $m( 'hh_area_use' ) ) . ' m²' : '',
+		'Kích thước'          => $m( 'hh_width' ) && $m( 'hh_length' ) ? hh_vn_num( $m( 'hh_width' ) ) . ' × ' . hh_vn_num( $m( 'hh_length' ) ) . ' m' : '',
+		'Mặt tiền'            => $m( 'hh_frontage' ) ? hh_vn_num( $m( 'hh_frontage' ) ) . ' m' : '',
+		'Đường vào'           => $m( 'hh_road' ) ? hh_vn_num( $m( 'hh_road' ) ) . ' m' : '',
 		'Hướng nhà'           => $m( 'hh_direction' ) ? $opt( 'hh_direction' ) : '',
 		'Hướng ban công'      => $m( 'hh_balcony' ) ? $opt( 'hh_balcony' ) : '',
 		'Số tầng'             => $m( 'hh_floors' ),

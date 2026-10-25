@@ -26,8 +26,8 @@ function hoanghiep_content_tables( $html ) {
 			}
 			preg_match( '#<tr[^>]*>(.*?)</tr>#is', preg_replace( '#<thead.*?</thead>#is', '', $body ), $first );
 			$cols  = $labels ? count( $labels ) : ( $first ? preg_match_all( '#<t[dh][\s>]#i', $first[1] ) : 0 );
-			$class = 2 >= $cols ? 'hh-tbl hh-tbl--kv' : ( $labels ? 'hh-tbl hh-tbl--cards' : 'hh-tbl hh-tbl--scroll' );
-			if ( $labels && $cols > 2 ) {
+			$class = 2 >= $cols ? 'hh-tbl hh-tbl--kv' : ( $labels ? ( 4 >= $cols ? 'hh-tbl hh-tbl--compact' : 'hh-tbl hh-tbl--cards' ) : 'hh-tbl hh-tbl--scroll' );
+			if ( $labels && $cols > 4 ) {
 				$body = preg_replace_callback(
 					'#<tr([^>]*)>(.*?)</tr>#is',
 					static function ( $r ) use ( $labels ) {
@@ -44,6 +44,29 @@ function hoanghiep_content_tables( $html ) {
 					},
 					$body
 				);
+			}
+			// Bảng 3 – 4 cột: ô số liệu ngắn (VD "182,5 m²", "~102 triệu") giữ trên một dòng; cột đầu vẫn xuống dòng.
+			if ( $labels && $cols <= 4 && $cols > 2 ) {
+				$body = preg_replace_callback(
+					'#<tr([^>]*)>(.*?)</tr>#is',
+					static function ( $r ) {
+						$i = 0;
+						return '<tr' . $r[1] . '>' . preg_replace_callback(
+							'#<td((?:(?!class=)[^>])*)>(.*?)</td>#is',
+							static function ( $c ) use ( &$i ) {
+								$short = $i++ > 0 && mb_strlen( trim( html_entity_decode( wp_strip_all_tags( $c[2] ) ) ) ) <= 14;
+								return '<td' . $c[1] . ( $short ? ' class="hh-nw"' : '' ) . '>' . $c[2] . '</td>';
+							},
+							$r[2]
+						) . '</tr>';
+					},
+					$body
+				);
+			}
+			// Bảng 2 cột: cột nhãn rộng vừa nhãn dài nhất (tối đa ~16 ký tự, dài hơn thì xuống dòng) – không chừa trống bên phải.
+			if ( 2 >= $cols && preg_match_all( '#<tr[^>]*>\s*<t[hd][^>]*>(.*?)</t[hd]>#is', $body, $firsts ) ) {
+				$n     = max( array_map( static fn( $t ) => mb_strlen( trim( html_entity_decode( wp_strip_all_tags( $t ) ) ) ), $firsts[1] ) ?: array( 8 ) );
+				$attrs = preg_replace( '#\sstyle="[^"]*"#i', '', $attrs ) . ' style="--kv-n:' . min( 16, max( 4, $n ) ) . '"';
 			}
 			$attrs = preg_match( '#class="#', $attrs ) ? preg_replace( '#class="#', 'class="' . $class . ' ', $attrs, 1 ) : $attrs . ' class="' . $class . '"';
 			return '<div class="hh-tbl-wrap"><table' . $attrs . '>' . $body . '</table></div>';

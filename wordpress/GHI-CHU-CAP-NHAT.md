@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.21** + plugin Hoàng Hiệp CRM **2.20.71**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.22** + plugin Hoàng Hiệp CRM **2.20.72**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,17 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.72, giao diện 2.15.22: chỉnh giao diện điện thoại cho dễ đọc
+
+- **Bảng 2 cột** (VD "Địa chỉ và thông tin nhanh"): sửa lỗi cột nhãn bị bóp còn 1 chữ mỗi dòng; cột nhãn tự co vừa chữ, không chừa trống bên phải.
+- **Chữ trên điện thoại** canh trái, không căn đều 2 bên (hết khoảng hở giữa các chữ); không tách chữ giữa từ.
+- **Bảng giá 3 – 4 cột** giữ dạng bảng gọn, diện tích và giá không gãy dòng; bảng 5 cột trở lên mới thành thẻ, ô trống bị ẩn.
+- **Nam Việt Á**: ảnh nền đầu trang mới (tự vẽ, không chữ, tiêu đề không bị chồng); biểu đồ giá chuyển xuống thư viện ảnh; bảng giá còn 4 cột, ghi chú gộp vào tên đường; bỏ bảng giá lặp lại phía dưới; bỏ nhãn "Biệt thự nghỉ dưỡng"; ô giá đầu trang hiện "Lô ống từ khoảng 7,35 tỷ".
+- **Tin đất Hoàng Văn Thái**: bỏ bảng trùng với ô thông tin; bỏ dòng "Pháp lý: Khác"; diện tích ghi kiểu Việt (2.404,4 m²); ẩn phần tính tiền cho thuê với đất nền, mặt bằng kinh doanh. Tin đã đăng tự cập nhật nếu anh chưa sửa tay.
+- Ảnh đơn lẻ trong tin hiện đủ khung, không bị cắt; trang dự án ẩn ô "0 căn bán · 0 căn thuê".
+
+Cài: Dự án → Nhập nhanh → tải `cap-nhat-code.zip` → **Nhập dữ liệu Đà Nẵng** → **Nhập / cập nhật dữ liệu** → LiteSpeed **Purge All**.
 
 ## Có gì mới – plugin 2.20.71: tin nhà đất riêng lẻ – đất TMDV mặt tiền Hoàng Văn Thái
 - Tin mới (Nhà đất → Mặt bằng kinh doanh, tin HOT): chuyển nhượng 2.404,4 m² đất thương mại dịch vụ mặt tiền 42 m đường Hoàng Văn Thái, thuê đất trả tiền một lần đến 20/01/2066, giá 50 tỷ gồm VAT. Không ghi số nhà, không ghi tên/số điện thoại bên bán – địa chỉ cụ thể gửi khi khách liên hệ.

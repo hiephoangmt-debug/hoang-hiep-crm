@@ -10,7 +10,8 @@ defined( 'ABSPATH' ) || exit;
 function hh_single_listing_dataset() {
 	$list   = array();
 	$list[] = array(
-		'slug'    => 'chuyen-nhuong-dat-thuong-mai-dich-vu-mat-tien-hoang-van-thai-2404-m2',
+		'rev'     => 2, // Tăng số này khi sửa nội dung → tin đã đăng (chưa sửa tay) tự cập nhật.
+			'slug'    => 'chuyen-nhuong-dat-thuong-mai-dich-vu-mat-tien-hoang-van-thai-2404-m2',
 		'title'   => 'Chuyển nhượng 2.404 m² đất thương mại dịch vụ mặt tiền 42 m đường Hoàng Văn Thái, Đà Nẵng',
 		'excerpt' => 'Khu đất TMDV 2.404,4 m² mặt tiền khoảng 42 m đường Hoàng Văn Thái (~35 m); thuê đất trả tiền một lần đến 20/01/2066; nhà 4 tầng và sân bê tông; giá 50 tỷ gồm VAT.',
 		'kind'    => 'mat-bang-kinh-doanh',
@@ -29,24 +30,11 @@ function hh_single_listing_dataset() {
 			'hh_length'      => 60,
 			'hh_frontage'    => 35,
 			'hh_floors'      => 4,
-			'hh_legal'       => 'khac',
+			'hh_legal'       => '', // Đất thuê trả tiền một lần – ghi rõ ở phần lưu ý pháp lý, không hiện "Khác".
 			'hh_featured'    => '1',
 			'hh_features'    => "Diện tích lớn 2.404,4 m², mặt tiền khoảng 42 m, sâu khoảng 60 m\nMặt tiền đường Hoàng Văn Thái rộng khoảng 35 m, khu vực đông dân cư, nhiều cơ sở thương mại\nĐất thương mại dịch vụ, thuê đất trả tiền một lần đến 20/01/2066\nCó sẵn nhà 4 tầng (xây dựng khoảng 195 m²) và hơn 2.200 m² sân bê tông\nPhù hợp nghiên cứu showroom ô tô, trung tâm dịch vụ, kinh doanh thương mại\nGiá 50 tỷ đã gồm VAT, thanh toán có thể thương lượng",
 		),
-		'content' => '<p>Chuyển nhượng khu đất <strong>thương mại dịch vụ 2.404,4 m²</strong> mặt tiền <strong>đường Hoàng Văn Thái, Đà Nẵng</strong> – rộng khoảng <strong>42 m</strong>, chiều sâu khoảng 60 m, nằm trên tuyến đường rộng khoảng 35 m. Mặt bằng hiếm cho doanh nghiệp cần diện tích lớn và mặt tiền rộng.</p>
-<h2>Thông tin bất động sản</h2>
-<table>
-<tbody>
-<tr><th>Vị trí</th><td>Mặt tiền đường Hoàng Văn Thái, Đà Nẵng – địa chỉ cụ thể gửi khi khách liên hệ</td></tr>
-<tr><th>Diện tích đất</th><td>2.404,4 m²</td></tr>
-<tr><th>Kích thước</th><td>Mặt tiền khoảng 42 m × sâu khoảng 60 m</td></tr>
-<tr><th>Đường</th><td>Hoàng Văn Thái, rộng khoảng 35 m</td></tr>
-<tr><th>Mục đích sử dụng</th><td>Đất thương mại, dịch vụ</td></tr>
-<tr><th>Hình thức sử dụng đất</th><td>Thuê đất 50 năm, từ 20/01/2016 đến 20/01/2066; tiền thuê đã trả một lần cho cả thời hạn (còn khoảng 39 năm)</td></tr>
-<tr><th>Hiện trạng</th><td>Công trình 4 tầng, diện tích xây dựng khoảng 195,1 m²; hơn 2.200 m² sân bê tông</td></tr>
-<tr><th>Giá chuyển nhượng</th><td>50 tỷ đồng, đã gồm VAT (khoảng 20,8 triệu/m² đất); phương thức và tiến độ thanh toán thương lượng</td></tr>
-</tbody>
-</table>
+		'content' => '<p>Chuyển nhượng khu đất <strong>thương mại dịch vụ 2.404,4 m²</strong> mặt tiền <strong>đường Hoàng Văn Thái, Đà Nẵng</strong> – rộng khoảng <strong>42 m</strong>, chiều sâu khoảng 60 m, nằm trên tuyến đường rộng khoảng 35 m. Đất thuê trả tiền một lần đến 20/01/2066 (còn khoảng 39 năm), hiện có nhà 4 tầng và hơn 2.200 m² sân bê tông. Giá 50 tỷ đã gồm VAT – khoảng 20,8 triệu/m² đất.</p>
 <h2>Phù hợp kinh doanh gì?</h2>
 <ul>
 <li><strong>Showroom ô tô, xe máy</strong>: mặt tiền 42 m trưng bày rộng, sân bê tông lớn làm bãi xe, khu dịch vụ bảo dưỡng.</li>
@@ -65,11 +53,21 @@ function hh_single_listing_dataset() {
 	return apply_filters( 'hh_single_listing_dataset', $list );
 }
 
-/** Tạo tin chưa có (theo đường dẫn); tin đã có giữ nguyên. Trả về số tin tạo mới. */
+/** Tạo tin chưa có (theo đường dẫn); tin đã có chỉ cập nhật khi tăng 'rev' và tin chưa bị sửa tay. Trả về số tin tạo mới. */
 function hh_import_single_listings() {
 	$created = 0;
 	foreach ( hh_single_listing_dataset() as $l ) {
-		if ( get_page_by_path( $l['slug'], OBJECT, 'bat-dong-san' ) ) {
+		$old = get_page_by_path( $l['slug'], OBJECT, 'bat-dong-san' );
+		if ( $old ) {
+			$rev = (int) ( $l['rev'] ?? 1 );
+			if ( $rev > (int) get_post_meta( $old->ID, '_hh_listing_rev', true ) && md5( $old->post_content ) === get_post_meta( $old->ID, '_hh_news_hash', true ) ) {
+				wp_update_post( array( 'ID' => $old->ID, 'post_content' => $l['content'], 'post_excerpt' => $l['excerpt'] ) );
+				foreach ( array_diff_key( $l['meta'], array_flip( array( 'hh_status', 'hh_price', 'hh_featured' ) ) ) as $k => $v ) { // Giữ trạng thái, giá anh tự đổi.
+					update_post_meta( $old->ID, $k, $v );
+				}
+				update_post_meta( $old->ID, '_hh_news_hash', md5( get_post_field( 'post_content', $old->ID ) ) );
+				update_post_meta( $old->ID, '_hh_listing_rev', $rev );
+			}
 			continue;
 		}
 		$id = wp_insert_post(
@@ -100,6 +98,7 @@ function hh_import_single_listings() {
 			hh_quick_post_image( $id, array( 'name' => pathinfo( $file, PATHINFO_FILENAME ), 'alt' => $l['alt'], 'caption' => '', 'data' => base64_encode( file_get_contents( $file ) ) ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 		}
 		update_post_meta( $id, '_hh_news_hash', md5( get_post_field( 'post_content', $id ) ) );
+		update_post_meta( $id, '_hh_listing_rev', (int) ( $l['rev'] ?? 1 ) );
 		++$created;
 	}
 	return $created;
