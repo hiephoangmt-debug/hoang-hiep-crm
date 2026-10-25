@@ -202,7 +202,8 @@ input[type=range]{width:100%;accent-color:var(--brass)}
     <input type="file" id="fileBg" accept="image/*" multiple hidden>
     <div class="thumbs" id="bgThumbs"></div>
     <p class="hint">Chưa có ảnh: phần mềm tự vẽ phối cảnh thành phố theo bảng màu.</p>
-    <label class="f">Điểm lấy nét ngang <input type="range" id="fx" min="0" max="100"></label>
+    <label class="f">Vị trí công trình trong ảnh (ngang) <input type="range" id="fx" min="0" max="100"></label>
+    <p class="hint">Mẫu "Chữ trái – ảnh phải": kéo thanh trên đúng vị trí toà nhà trong ảnh, phần mềm tự đặt toà nhà sang bên phải, không bị chữ che.</p>
     <label class="f">Điểm lấy nét dọc <input type="range" id="fy" min="0" max="100"></label>
     <h3>Logo</h3>
     <div class="drop" id="dropLogo" tabindex="0" role="button">Tải logo (tối đa 2: chủ đầu tư + dự án, PNG nền trong suốt)</div>
@@ -355,6 +356,7 @@ const FONTS = [
 ];
 
 const TEMPLATES = [
+  {id:'p_side',   name:'Chữ trái – ảnh phải', poster:true},
   {id:'p_offer',  name:'Ưu đãi vàng', poster:true},
   {id:'p_policy', name:'Chính sách', poster:true},
   {id:'p_event',  name:'Lễ ra mắt', poster:true},
@@ -370,18 +372,18 @@ const TEMPLATES = [
 
 const POSTER_BLANK = {offers:'', eventDate:'', slogan:'', ribbon:'', footnote:'', insetLabel:''};
 const PRESETS = {
-  saphia:{template:'p_offer', theme:'sun', font:'impact', metal:false, showBullets:true, fx:58, fy:45, overlay:5, eyebrow:'SUN SAPHIA RESIDENCE',
+  saphia:{template:'p_side', theme:'sun', font:'impact', metal:false, showBullets:true, fx:58, fy:45, overlay:5, eyebrow:'SUN SAPHIA RESIDENCE',
     title:'-Căn hộ cao cấp · Đà Nẵng\nSỐNG CHUẨN\n[SUN GROUP]\n~~giữa phố biển~~', subtitle:'',
     bullets:'Chủ đầu tư Sun Property – Tập đoàn Sun Group\nĐăng ký sớm – ưu tiên chọn căn đẹp',
     offers:'', cta:'NHẬN BẢNG GIÁ', hotline:'0905 123 456', footnote:'', ribbon:'', eventDate:'', slogan:'', insetLabel:'',
     headline:'Sống chuẩn Sun Group tại Đà Nẵng', desc:'Nhận bảng giá & CSBH mới nhất', fbcta:'Gửi tin nhắn',
     primary:'Sống chuẩn Sun Group giữa phố biển Đà Nẵng ☀️\nSUN SAPHIA RESIDENCE – căn hộ cao cấp từ Sun Property (Tập đoàn Sun Group).\n✅ Thiết kế ngập nắng, tầm nhìn khoáng đạt\n✅ Đăng ký sớm – ưu tiên chọn căn đẹp, tầng đẹp\n👉 Nhắn tin ngay để nhận bảng giá & chính sách mới nhất.'},
-  saphia2:{template:'p_offer', theme:'royal', font:'impact', metal:true, showBullets:true, fx:58, fy:45, overlay:20, eyebrow:'SUN SAPHIA RESIDENCE',
+  saphia2:{template:'p_side', theme:'royal', font:'impact', metal:true, showBullets:true, fx:58, fy:45, overlay:20, eyebrow:'SUN SAPHIA RESIDENCE',
     title:'~Mỗi sáng thức dậy~\nĐÓN BÌNH MINH\nTỪ [BAN CÔNG] NHÀ MÌNH', subtitle:'',
     bullets:'Căn hộ cao cấp chuẩn Sun Group\nĐăng ký sớm – ưu tiên căn view đẹp', offers:'', cta:'NHẬN BẢNG GIÁ', hotline:'0905 123 456',
     footnote:'', ribbon:'', eventDate:'', slogan:'', insetLabel:'', headline:'Đón bình minh từ ban công nhà mình', desc:'Sun Saphia Residence Đà Nẵng', fbcta:'Gửi tin nhắn',
     primary:'Mỗi sáng thức dậy, đón bình minh ngay từ ban công nhà mình 🌅\nSUN SAPHIA RESIDENCE – căn hộ cao cấp chuẩn Sun Group tại Đà Nẵng.\nSố lượng căn view đẹp có hạn – đăng ký sớm để được ưu tiên chọn căn.\n👉 Nhắn tin để nhận bảng giá, mặt bằng & chính sách bán hàng.'},
-  saphia3:{template:'p_offer', theme:'sun', font:'impact', metal:false, showBullets:true, fx:58, fy:45, overlay:5, eyebrow:'SUN SAPHIA RESIDENCE',
+  saphia3:{template:'p_side', theme:'sun', font:'impact', metal:false, showBullets:true, fx:58, fy:45, overlay:5, eyebrow:'SUN SAPHIA RESIDENCE',
     title:'-Câu hỏi cho người tìm nhà Đà Nẵng\nĐÃ CÓ CĂN HỘ\n[CHUẨN SUN GROUP]\n~~cho riêng mình chưa?~~', subtitle:'',
     bullets:'Thương hiệu Sun Group uy tín tại Đà Nẵng\nCăn hộ cao cấp ngập nắng, view khoáng đạt', offers:'', cta:'NHẬN BẢNG GIÁ', hotline:'0905 123 456',
     footnote:'', ribbon:'', eventDate:'', slogan:'', insetLabel:'', headline:'Căn hộ chuẩn Sun Group tại Đà Nẵng', desc:'Nhận bảng giá & CSBH', fbcta:'Gửi tin nhắn',
@@ -505,15 +507,17 @@ function drawImageRegion(ctx,R,th,t,dur,radius,list){
   ctx.save();
   if (radius){ rrect(ctx,R.x,R.y,R.w,R.h,radius); ctx.clip(); } else { ctx.beginPath(); ctx.rect(R.x,R.y,R.w,R.h); ctx.clip(); }
   const imgs = list&&list.length ? list : bgImgs.length ? bgImgs : [sceneFor(th)];
-  const fx=S.fx/100, fy=S.fy/100;
-  if (t==null){ drawCover(ctx,imgs[0],R.x,R.y,R.w,R.h,1,fx,fy,1); }
+  const fy=S.fy/100;
+  const fxFor=(img,zoom)=>{ if (R.tx==null) return S.fx/100; const iw=img.naturalWidth||img.width, ih=img.naturalHeight||img.height;
+    const dw=iw*Math.max(R.w/iw,R.h/ih)*zoom; if (dw<=R.w+.5) return .5; return clamp((R.w*R.tx-(S.fx/100)*dw)/(R.w-dw),0,1); };
+  if (t==null){ drawCover(ctx,imgs[0],R.x,R.y,R.w,R.h,1,fxFor(imgs[0],1),fy,1); }
   else {
     const n=imgs.length, seg=dur/n, xf=Math.min(.8,seg*.25);
     const i=Math.min(n-1,Math.floor(t/seg));
-    const kb = (k,lt)=> S.kenburns ? 1.02+0.1*(lt/seg)*(k%2?-1:1)+(k%2?0.1:0) : 1;
+    const kb = (k,lt)=> !S.kenburns ? 1 : R.tx!=null ? 1+.06*(lt/seg) : 1.02+0.1*(lt/seg)*(k%2?-1:1)+(k%2?0.1:0);
     const lt=t-i*seg;
-    drawCover(ctx,imgs[i],R.x,R.y,R.w,R.h,kb(i,lt),fx+(S.kenburns?(i%2?.04:-.04)*(lt/seg):0),fy,1);
-    if (i+1<n && lt>seg-xf){ const a=(lt-(seg-xf))/xf; drawCover(ctx,imgs[i+1],R.x,R.y,R.w,R.h,kb(i+1,0),fx,fy,easeOut(a)); }
+    const z=kb(i,lt); drawCover(ctx,imgs[i],R.x,R.y,R.w,R.h,z,clamp(fxFor(imgs[i],z)+(S.kenburns&&R.tx==null?(i%2?.04:-.04)*(lt/seg):0),0,1),fy,1);
+    if (i+1<n && lt>seg-xf){ const a=(lt-(seg-xf))/xf, z2=kb(i+1,0); drawCover(ctx,imgs[i+1],R.x,R.y,R.w,R.h,z2,fxFor(imgs[i+1],z2),fy,easeOut(a)); }
   }
   ctx.restore();
 }
@@ -1223,6 +1227,24 @@ function renderPoster(ctx,W,H,t,mode,th,tf,top,bottom,P){
     } else {
       stackDraw([logosBlock(ctx,tf,th,U,t), rich({align:'center',cap:.16}), polaroidBlock(ctx,th,U,t), G_(offersPedestal(ctx,offers,tf,th,U,t,{maxCols:mode==='narrow'?1:3}),.04),
         ribbonBar(ctx,tf,th,U,t,{fullW:W}), G_(textBlock(ctx,S.footnote,tf,th,U,t,{size:.02,alpha:.85}),.012), contactBlock(ctx,tf,th,U,t)],{x:SP,y:T,w:W-2*SP,h:H-T-B},U,'center');
+    }
+  } else if (tpl==='p_side'){
+    // Chữ một bên, công trình hiện trọn bên kia (Story: chữ trên, công trình dưới)
+    posterBg(ctx,W,H,th,t,{cx:.3,cy:.15});
+    const lt=isLight(th.panel);
+    if (mode==='tall' || mode==='narrow'){
+      const iy=H*.47;
+      drawImageRegion(ctx,{x:0,y:iy,w:W,h:H-iy,tx:.5},th,t,+S.dur);
+      const g=ctx.createLinearGradient(0,iy,0,iy+H*.12); g.addColorStop(0,th.panel); g.addColorStop(.4,rgba(th.panel,.7)); g.addColorStop(1,rgba(th.panel,0)); ctx.fillStyle=g; ctx.fillRect(0,iy-1,W,H*.12+1);
+      stackDraw([logosBlock(ctx,tf,th,U,t), rich({align:'center',cap:.17}), sub({}), G_(checklistBlock(ctx,tf,th,U,t),.025), G_(contactBlock(ctx,tf,th,U,t,{size:.034}),.03)],{x:SP,y:T,w:W-2*SP,h:iy+H*.03-T},U,'top');
+    } else {
+      const col = land? .47 : mode==='square'? .6 : .57;
+      drawImageRegion(ctx,{x:0,y:0,w:W,h:H,tx:land?.62:.8},th,t,+S.dur);
+      const g=ctx.createLinearGradient(0,0,W*(col+.18),0);
+      g.addColorStop(0,rgba(th.panel,lt?.93:.9)); g.addColorStop(.62,rgba(th.panel,lt?.8:.75)); g.addColorStop(1,rgba(th.panel,0));
+      ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+      const g2=ctx.createLinearGradient(0,H*.8,0,H); g2.addColorStop(0,rgba(th.panel,0)); g2.addColorStop(1,rgba(th.panel,.55)); ctx.fillStyle=g2; ctx.fillRect(0,H*.8,W*(col+.1),H*.2);
+      stackDraw([logosBlock(ctx,tf,th,U,t,{align:'left'}), rich({align:'left',cap:.16}), sub({align:'left'}), G_(checklistBlock(ctx,tf,th,U,t,{align:'left'}),.03), FLEX(), contactBlock(ctx,tf,th,U,t,{align:'left',size:.034})],{x:SP,y:T,w:W*col-SP,h:H-T-B},U,'top');
     }
   } else { // p_core
     posterBg(ctx,W,H,th,t,{cx:.5,cy:.08});
