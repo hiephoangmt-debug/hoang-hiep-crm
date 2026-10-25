@@ -147,7 +147,7 @@ def make(W, H, lon0, lat1, span_lon, fs=1.0, poster=False, qh=False, inset=False
                     '<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" rx="%.1f" fill="%s"/>'
                     '<text x="%.1f" y="%.1f" style="font:800 %.1fpx %s" fill="%s">%s</text><text x="%.1f" y="%.1f" style="font:600 %.1fpx %s" fill="#3a4c66">%s</text>'
                     % (bx, y, w, h, 10 * fs, col, 2 * fs, bx, y, 8 * fs, h, 4 * fs, col, bx + 16 * fs, y + 23 * fs, 15 * fs, F, col, t1, bx + 16 * fs, y + 43 * fs, 12.5 * fs, F, t2))
-        sla0 = 16.0260; scl = coast_lon(sla0)
+        sla0 = 16.021300; scl = coast_lon(sla0)
         # 4. Ngũ Hành Sơn: công viên văn hóa lịch sử ~92 ha
         cx, cy = P(108.2600, 16.0040); r = 0.0052 * k
         o.append('<ellipse cx="%.1f" cy="%.1f" rx="%.1f" ry="%.1f" fill="#FFAA01" fill-opacity=".28" stroke="#d99a00" stroke-width="%.1f" stroke-dasharray="%.1f %.1f"/>' % (cx, cy, r * 0.95, r * 1.05, 3 * fs, 10 * fs, 6 * fs))
@@ -156,10 +156,10 @@ def make(W, H, lon0, lat1, span_lon, fs=1.0, poster=False, qh=False, inset=False
             o.append('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="#3d8a68"/>' % (mx, my, rr * k))
         # 3. Đường sắt đô thị (hướng tuyến minh họa)
         lr = [(108.2040, 16.0385), (108.2200, 16.0376), BR['Cầu Tiên Sơn'], (108.2420, 16.0360), (scl - 0.0062, 16.0340)]
-        lr += [(coast_lon(la) - 0.0052, la) for la in [16.0300, 16.0240, 16.0180, 16.0120, 16.0060, 16.0000, 15.9935]]
+        lr += [(coast_lon(la) - 0.0068, la) for la in [16.0300, 16.0240, 16.0180, 16.0120, 16.0060, 16.0000, 15.9935]]
         o.append('<path d="%s" fill="none" stroke="#fff" stroke-width="%.1f" stroke-linecap="round" stroke-linejoin="round"/>' % (smooth(lr, False), 10 * fs))
         o.append('<path d="%s" fill="none" stroke="#2a6fd0" stroke-width="%.1f" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="%.1f %.1f"/>' % (smooth(lr, False), 6 * fs, 16 * fs, 8 * fs))
-        gx, gy = P(coast_lon(16.0300) - 0.0052, 16.0300)
+        gx, gy = P(coast_lon(16.0300) - 0.0068, 16.0300)
         o.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" rx="%.1f" fill="#2a6fd0" stroke="#fff" stroke-width="%.1f"/><text x="%.1f" y="%.1f" text-anchor="middle" style="font:900 %.1fpx %s" fill="#fff">M</text>' % (gx - 11 * fs, gy - 11 * fs, 22 * fs, 22 * fs, 5 * fs, 2.5 * fs, gx, gy + 5 * fs, 14 * fs, F))
         # 2. Trục biển mở rộng
         rd = [(coast_lon(la) - 0.0028, la) for la in VNG_LATS]
@@ -174,13 +174,13 @@ def make(W, H, lon0, lat1, span_lon, fs=1.0, poster=False, qh=False, inset=False
             for la_, t_, c_ in ((sla0 - 0.0009, 'CÔNG VIÊN 2,45 HA', '#1f6b45'),):
                 x_, y_ = P(coast_lon(la_) - 0.0014, la_)
                 o.append('<text x="%.1f" y="%.1f" text-anchor="middle" style="font:900 %.1fpx %s" fill="%s" stroke="#fff" stroke-width="%.1f" paint-order="stroke">%s</text>' % (x_, y_ + 5 * fs, 13 * fs, F, c_, 4 * fs, t_))
-            x_, y_ = P(coast_lon(16.0300) - 0.0052, 16.0300)
+            x_, y_ = P(coast_lon(16.0300) - 0.0068, 16.0300)
             o.append('<text x="%.1f" y="%.1f" text-anchor="start" style="font:800 %.1fpx %s" fill="#2a6fd0" stroke="#fff" stroke-width="%.1f" paint-order="stroke">Ga (dự kiến)</text>' % (x_ + 16 * fs, y_ + 5 * fs, 13 * fs, F, 4 * fs))
             x_, y_ = P(coast_lon(16.0295) - 0.0028, 16.0295)
             o.append('<text transform="rotate(-72 %.1f %.1f)" x="%.1f" y="%.1f" text-anchor="middle" style="font:800 %.1fpx %s" fill="#E96118" stroke="#fff" stroke-width="%.1f" paint-order="stroke">VÕ NGUYÊN GIÁP – TRƯỜNG SA (mở rộng)</text>' % (x_, y_, x_, y_ - 10 * fs, 11 * fs, F, 4 * fs))
         # nhãn + khoảng cách
         dist = []
-        sx0, sy0 = P(scl - 0.0037, sla0)
+        sx0, sy0 = P(108.257659, sla0)
         dist.append('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" stroke="#2a6fd0" stroke-width="%.1f" stroke-dasharray="%.1f %.1f"/>' % (sx0, sy0, gx, gy, 2 * fs, 5 * fs, 4 * fs))
         mx, my = (sx0 + gx) / 2, (sy0 + gy) / 2
         dist.append('<text x="%.1f" y="%.1f" text-anchor="end" style="font:800 %.1fpx %s" fill="#2a6fd0" stroke="#fff" stroke-width="%.1f" paint-order="stroke">~500 m</text>' % (mx - 8 * fs, my, 14 * fs, F, 4 * fs))
@@ -194,13 +194,13 @@ def make(W, H, lon0, lat1, span_lon, fs=1.0, poster=False, qh=False, inset=False
             ((gx, gy), '③ GA ĐƯỜNG SẮT ĐÔ THỊ', 'Sân bay – Hội An · dự kiến 2027', '#2a6fd0'),
             ((cx, cy), '④ CV VĂN HÓA LỊCH SỬ NHS', '~92 ha · vườn thiền, bảo tháp 58 m', '#b07a00')])
     # SUN SAPHIA: cách mép biển ~400 m
-    sla = 16.0260; slo = coast_lon(sla) - 0.4 / (111.32 * COS); x, y = P(slo, sla)
+    sla = 16.021300; slo = 108.257659; x, y = P(slo, sla)
     o.append('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="#ff9a3c" opacity=".35" filter="url(#glow)"/>' % (x, y, 30 * fs))
     o.append('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="none" stroke="#E96118" stroke-width="%.1f" opacity=".6"/>' % (x, y, 22 * fs, 2.5 * fs))
     o.append('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="#E96118" stroke="#fff" stroke-width="%.1f"/>' % (x, y, 11 * fs, 3 * fs))
     o.append('<text x="%.1f" y="%.1f" text-anchor="middle" dominant-baseline="central" fill="#fff" style="font-size:%.1fpx">★</text>' % (x, y + 0.5, 12 * fs))
     bw, bh = 236 * fs, 58 * fs; px, py = x + 50 * fs, y - bh / 2
-    if qh: px = x - bw - 40 * fs; py = y - bh / 2 + (22 * fs if not inset else 0)
+    if qh: px = x - bw - 40 * fs; py = y - bh / 2 - (34 * fs if not inset else 0)
     left = qh or (px + bw > W - 10)
     if left and not qh: px = x - bw - 40 * fs
     o.append('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" stroke="#E96118" stroke-width="%.1f"/>' % (px + (bw if left else 0), py + bh / 2, x + (-11 if left else 11) * fs, y, 2.5 * fs))
@@ -211,7 +211,7 @@ def make(W, H, lon0, lat1, span_lon, fs=1.0, poster=False, qh=False, inset=False
         cards_local = list(QH_CARDS)
         IW, IH = 470 * fs / 1.3, 400 * fs / 1.3
         ix, iy = W - IW - 30 * fs, 120 * fs
-        isl = 16.0262; ilon0 = coast_lon(isl) - 0.0092
+        isl = 16.0215; ilon0 = coast_lon(isl) - 0.0092
         inner = make(int(IW), int(IH), ilon0, isl + 0.0054, 0.0110, fs=0.75, qh=True, inset=True)
         inner = inner.replace('id="', 'id="i_').replace('url(#', 'url(#i_')
         inner = inner.replace('<svg xmlns="http://www.w3.org/2000/svg"', '<svg x="%.1f" y="%.1f"' % (ix, iy), 1)
