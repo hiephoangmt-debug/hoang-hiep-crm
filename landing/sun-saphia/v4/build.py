@@ -625,10 +625,104 @@ def vi_sao():
     return page(P, title, desc, 'căn hộ mặt biển đầu tiên sun group, căn hộ cao tầng mặt biển đà nẵng, vì sao sun group đà nẵng, các dự án sun group đà nẵng, sun saphia residence',
                 b, [article_ld(title, desc, MAIN + P, '2026-10-24', '2026-10-24'), cld, fld], P)
 
+def cong_vien():
+    P = '/quy-hoach-cong-vien'
+    VT = RAW + '07557a38e28b15379350b5b9ac36fc91356ef704/landing/sun-saphia/v4/img/vi-tri-saphia'
+    hero_img = ('<img src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 900px" width="1600" height="786" '
+                'alt="Ảnh vệ tinh có chú thích: Sun Saphia Residence và khu đất ven biển phía trước quy hoạch công viên công cộng khoảng 2,45 ha" fetchpriority="high" decoding="async">') % (VT, VT, VT)
+    hero, cld = sub_hero(P, 'Quy hoạch công viên', 'Trước mặt Sun Saphia là gì? <b>Công viên công cộng ven biển 2,45 ha</b>',
+                         'Khu đất bỏ hoang nhiều năm của dự án Hòn Ngọc Á Châu phía trước Sun Saphia Residence đang được TP Đà Nẵng chuyển thành công viên công cộng: khoảng 2,45 ha, tổng mức đầu tư hơn 47 tỷ đồng từ ngân sách thành phố, '
+                         'được phê duyệt dự án theo Quyết định 2958/QĐ-UBND, thực hiện giai đoạn 2025–2027. Bài viết tổng hợp vị trí, mốc thời gian, hạng mục và nguồn báo chí để anh/chị tự kiểm chứng.',
+                         hero_img, '', 'Web – quy hoạch công viên đầu trang')
+    fq, fld = faq([
+        ('Khu đất trước Sun Saphia Residence quy hoạch làm gì?', 'Làm công viên công cộng. TP Đà Nẵng thu hồi khoảng 2,45 ha ở phía Nam dự án KDL ven biển Hòn Ngọc Á Châu (phường Ngũ Hành Sơn) và phê duyệt dự án đầu tư xây dựng Công viên công cộng theo Quyết định 2958/QĐ-UBND.'),
+        ('Công viên rộng bao nhiêu, đầu tư bao nhiêu?', 'Khoảng 2,45 ha, tổng mức đầu tư hơn 47 tỷ đồng từ vốn ngân sách thành phố. Chủ đầu tư là Ban Quản lý dự án đầu tư xây dựng các công trình dân dụng, công nghiệp và hạ tầng kỹ thuật Đà Nẵng.'),
+        ('Khi nào công viên hoàn thành?', 'Thời gian thực hiện dự án theo thông tin công bố là giai đoạn 2025–2027. Tiến độ thực tế phụ thuộc giải phóng mặt bằng và thi công.'),
+        ('Công viên có những gì?', 'Theo bản vẽ phương án điều chỉnh (24.488 m², rộng khoảng 88 m, dài khoảng 272 m từ đường Trường Sa ra biển): bãi đậu xe, vịnh dừng xe, đường dạo, sân nền, sân tập thể dục, khu vui chơi trẻ em, khu dã ngoại, quảng trường biển, khu tổ chức sự kiện, nhà vệ sinh công cộng, gian lam che nắng và cây xanh cảnh quan.'),
+        ('Bên cạnh còn dự án nào?', 'Dự án Công viên, Câu lạc bộ thể thao biển và Bãi tắm Sơn Thủy (khoảng 3,1 ha, mật độ xây dựng khoảng 3,9%) đã có phương án kỹ thuật khảo sát xây dựng được phê duyệt theo Quyết định 130 ngày 20/3/2025.'),
+        ('Công viên ảnh hưởng gì tới Sun Saphia Residence?', 'Khoảng không trước dự án được giữ làm không gian xanh công cộng thay vì công trình cao tầng, nên tầm nhìn ra biển thoáng hơn; cư dân và khách thuê có thêm không gian dạo bộ, vui chơi, đường ra biển. Đây là nhận định của đại lý, không phải cam kết của chủ đầu tư.'),
+        ('Thông tin này lấy từ đâu?', 'Từ các bài báo của TTXVN (Báo Tin tức), VietnamPlus, Báo Văn Hóa, Tuổi Trẻ, Báo Pháp luật đưa tin về Quyết định 2958/QĐ-UBND; link bài gốc ở cuối trang. Văn bản gốc tra cứu trên cổng thông tin của UBND TP Đà Nẵng.')])
+    b = hero
+    b += tldr('quy hoạch công viên trước Sun Saphia Residence', [
+        ('Văn bản', 'Quyết định 2958/QĐ-UBND của UBND TP Đà Nẵng – phê duyệt dự án đầu tư xây dựng Công viên công cộng'),
+        ('Vị trí', 'Phần đất thu hồi phía Nam dự án KDL ven biển Hòn Ngọc Á Châu, phường Ngũ Hành Sơn – phía trước Sun Saphia'),
+        ('Quy mô', 'Khoảng 2,45 ha'), ('Vốn', 'Hơn 47 tỷ đồng, ngân sách thành phố'),
+        ('Thời gian', 'Giai đoạn 2025–2027'),
+        ('Hạng mục', 'Quảng trường biển, đường dạo, sân tập, khu vui chơi trẻ em, khu dã ngoại, khu sự kiện, bãi đậu xe, cây xanh')])
+    H = RAW + 'c0db44c75500ffa5396166a597a896cd3f37b793/landing/sun-saphia/v4/img/'
+    def hf(name, w, h, alt, cap, style=''):
+        return ('<figure class="fg" style="margin:0;%s"><img src="%s%s.webp" width="%d" height="%d" alt="%s" loading="lazy" decoding="async" style="background:#fff">'
+                '<figcaption>%s</figcaption></figure>') % (style, H, name, w, h, alt, cap)
+    b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Vị trí', 'Khu đất công viên <b>ngay trước thềm</b> Sun Saphia', 'o') +
+          '<div class="g2" style="align-items:start"><div><div class="txt just">'
+          '<p>Sun Saphia Residence nằm ở giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa. Băng qua đường Trường Sa là dải đất ven biển của dự án KDL Hòn Ngọc Á Châu – khu đất khởi công từ năm 2010 rồi bỏ hoang nhiều năm.</p>'
+          '<p>Thành phố đã thống nhất với chủ đầu tư thu hồi <b>khoảng 2,45 ha ở phía Nam</b> dự án để làm <b>công viên công cộng</b>. Trên sơ đồ quy hoạch, khu đất được đánh dấu <b>“Vị trí quy hoạch”</b> – một dải chạy từ đường Trường Sa thẳng ra bờ biển.</p>'
+          '<ul class="ck"><li>Khoảng <b>400 m</b> từ Sun Saphia ra mép biển</li><li>Không gian công cộng – không xây cao tầng chắn tầm nhìn</li><li>Nằm trong chuỗi công viên bãi tắm ven biển Ngũ Hành Sơn</li></ul></div>'
+          + fig('khu-dat-cong-vien', 'Ảnh vệ tinh khu vực Sun Saphia Residence và dải đất ven biển phía trước, nơi quy hoạch công viên công cộng', 'Ảnh vệ tinh khu vực – dải đất ven biển phía trước dự án') + '</div>'
+          + hf('quy-hoach-vi-tri-cong-vien', 946, 1285, 'Bản đồ quy hoạch khu ven biển Ngũ Hành Sơn, đánh dấu vị trí quy hoạch công viên công cộng giữa các khu du lịch ven biển', 'Sơ đồ “Vị trí quy hoạch” trong hồ sơ dự án công viên') + '</div></div></section>')
+    leg = [('1–2', 'Lối vào, trục đường dạo chính từ đường Trường Sa'), ('3', 'Cây xanh cảnh quan'), ('4', 'Thảm cỏ lớn phục vụ hoạt động dã ngoại'),
+           ('5 · C', 'Khu vui chơi thiếu nhi, thiết bị trò chơi trẻ em'), ('6', 'Nhà vệ sinh công cộng'), ('7 · E', 'Quảng trường biển – không gian tổ chức sự kiện, bậc cấp ghế ngồi'),
+           ('8 · B', 'Gian lam che nắng, ghế ngồi'), ('D', 'Thiết bị tập thể dục'), ('P · A', 'Bãi đỗ xe, vịnh dừng xe sát đường Trường Sa')]
+    b += ('<section class="sec"><div class="wrap">' + sh('2', 'Bản vẽ phương án', 'Công viên 2,45 ha <b>có gì?</b>', 'y') +
+          '<div class="g2" style="align-items:start">'
+          + hf('mat-bang-cong-vien-2-45ha', 784, 1279, 'Bản vẽ mặt bằng phương án điều chỉnh công viên công cộng 24.488 m², rộng khoảng 88 m, dài khoảng 272 m, từ đường Trường Sa ra biển', 'Mặt bằng “Phương án điều chỉnh” – công viên công cộng (hồ sơ dự án)') +
+          '<div><div class="g3" style="gap:12px;margin-bottom:16px"><div class="card" style="padding:16px"><span class="n">DIỆN TÍCH</span><h3 class="oc">24.488 m²</h3><p>≈ 2,45 ha khu điều chỉnh quy hoạch</p></div>'
+          '<div class="card" style="padding:16px"><span class="n">KÍCH THƯỚC</span><h3 class="oc">~88 × 272 m</h3><p>Từ đường Trường Sa thẳng ra biển</p></div>'
+          '<div class="card" style="padding:16px"><span class="n">VỐN</span><h3 class="oc">47+ tỷ</h3><p>Ngân sách TP · QĐ 2958/QĐ-UBND</p></div></div>'
+          '<div class="card" style="padding:20px"><span class="n">CHÚ THÍCH TRÊN BẢN VẼ</span><ul class="ck" style="margin-top:8px">'
+          + ''.join('<li><b>%s</b> – %s</li>' % x for x in leg) + '</ul>'
+          '<p class="src" style="margin-top:8px">Hai bên: dự án KDL ven biển Hòn Ngọc Á Châu (đang nghiên cứu điều chỉnh quy hoạch) và lối xuống biển khu The Song (đã thi công).</p></div>'
+          + hf('phoi-canh-quang-truong-bien', 946, 323, 'Phối cảnh quảng trường biển và đường dạo trong công viên công cộng ven biển', 'Phối cảnh quảng trường biển trong hồ sơ dự án', 'margin-top:16px') + '</div></div></div></section>')
+    tl = [('2010', '#8a9ab0', 'Hòn Ngọc Á Châu khởi công', 'Dự án KDL ven biển khoảng 12 ha khởi công, triển khai thời gian ngắn rồi bỏ hoang nhiều năm.', ''),
+          ('07/2025', '#d99a00', 'Thống nhất thu hồi 2,45 ha', 'Thành phố thống nhất thu hồi khoảng 2,45 ha phía Nam dự án để làm công viên công cộng, đầu tư khoảng 47 tỷ đồng.', 'Tuổi Trẻ · 08/07/2025'),
+          ('07/2026', '#E96118', 'Quyết định 2958/QĐ-UBND', 'UBND TP phê duyệt dự án đầu tư xây dựng Công viên công cộng, tổng mức hơn 47 tỷ đồng, vốn ngân sách.', 'TTXVN – Báo Tin tức · 06/07/2026'),
+          ('2025–2027', '#2f9e6a', 'Thực hiện dự án', 'Chủ đầu tư: Ban QLDA đầu tư xây dựng các công trình dân dụng, công nghiệp và hạ tầng kỹ thuật Đà Nẵng.', 'VietnamPlus · Báo Văn Hóa')]
+    b += ('<section class="sec alt"><div class="wrap">' + sh('3', 'Mốc thời gian', 'Từ dự án bỏ hoang <b>thành công viên công cộng</b>', 'n') +
+          '<div class="g4">' + ''.join('<div class="card" style="border-top:6px solid %s"><span class="n" style="color:%s">%s</span><h3 class="oc">%s</h3><p>%s</p>%s</div>'
+              % (c, c, d, t, x, ('<p class="src" style="margin-top:8px">Nguồn: %s</p>' % sr) if sr else '') for d, c, t, x, sr in tl) + '</div></div></section>')
+    b += ('<section class="sec"><div class="wrap">' + sh('4', 'Thêm một dự án', 'Công viên, CLB thể thao biển <b>&amp; bãi tắm Sơn Thủy</b>', 'o') +
+          '<div class="g2" style="align-items:start"><div class="txt just">'
+          '<p>Cạnh khu Saphia còn có dự án <b>Công viên, Câu lạc bộ thể thao biển và Bãi tắm Sơn Thủy</b> (phường Hòa Hải cũ, nay thuộc phường Ngũ Hành Sơn). Hồ sơ <b>Phương án kỹ thuật khảo sát xây dựng</b> (gói khảo sát địa chất, địa hình) đã được:</p>'
+          '<ul class="ck"><li><b>Thẩm tra</b> theo văn bản số 20/KQTT-TTTV ngày 13/3/2025 – Trung tâm Tư vấn kỹ thuật xây dựng, Sở Xây dựng Đà Nẵng</li>'
+          '<li><b>Phê duyệt</b> theo Quyết định số 130 ngày 20/3/2025 – Ban QLDA đầu tư xây dựng các công trình dân dụng, công nghiệp và hạ tầng kỹ thuật Đà Nẵng</li></ul>'
+          '<div class="card" style="padding:20px;margin-top:14px"><span class="n">QUY MÔ THEO BẢN VẼ</span><h3 class="oc">~3,1 ha · mật độ xây dựng 3,9%</h3>'
+          '<p>Khu đất điều chỉnh quy hoạch khoảng <b>30.971 m²</b>, gồm khu CLB thể thao biển, bãi tắm Sơn Thủy và công viên cây xanh – phần lớn là cây xanh, bãi cát, sân thể thao.</p></div>'
+          '<p class="note">Ảnh chụp hồ sơ thực tế ngày 02/04/2025 tại hiện trường. Đây là bước khảo sát; thiết kế và tiến độ chính thức theo hồ sơ được cấp có thẩm quyền phê duyệt.</p></div>'
+          '<div class="g2" style="gap:12px">' + hf('ho-so-son-thuy-phuong-an', 720, 1280, 'Ảnh chụp bìa hồ sơ Phương án kỹ thuật khảo sát xây dựng dự án Công viên, CLB thể thao biển và Bãi tắm Sơn Thủy có dấu phê duyệt và thẩm tra', 'Bìa hồ sơ có dấu phê duyệt (QĐ 130, 20/3/2025) và thẩm tra')
+          + hf('ho-so-son-thuy-ban-ve', 720, 1280, 'Ảnh chụp bản vẽ mặt bằng dự án Công viên, CLB thể thao biển và Bãi tắm Sơn Thủy kèm bảng cân bằng sử dụng đất, mật độ xây dựng 3,9%', 'Bản vẽ mặt bằng và bảng cân bằng sử dụng đất') + '</div></div>'
+          '<div class="g3" style="margin-top:20px">'
+          '<div class="card"><span class="n">THỂ THAO BIỂN</span><h3 class="oc">Sân cát · nhà thuyền</h3><p>Sân thể thao bãi cát, sân tập luyện, nhà để thuyền (canoe, kayak).</p></div>'
+          '<div class="card"><span class="n">BÃI TẮM</span><h3 class="oc">Tắm tráng · thay đồ</h3><p>Khu tắm tráng, thay đồ, quầy gửi đồ, nhà vệ sinh.</p></div>'
+          '<div class="card"><span class="n">CÔNG VIÊN</span><h3 class="oc">Vui chơi · cây xanh</h3><p>Khu vui chơi trẻ em, bãi đậu xe, cây xanh cảnh quan.</p></div></div></div></section>')
+    b += ('<section class="sec alt"><div class="wrap">' + sh('5', 'Ý nghĩa', 'Công viên mang lại gì <b>cho người mua Saphia?</b>', 'y') +
+          '<div class="g4">'
+          '<div class="card"><span class="n">TẦM NHÌN</span><h3 class="oc">View biển thoáng</h3><p>Khoảng đất trước dự án là không gian xanh công cộng, không phải công trình cao tầng chắn tầm nhìn.</p></div>'
+          '<div class="card"><span class="n">SỐNG</span><h3 class="oc">Sân chơi chung</h3><p>Đường dạo, sân tập, khu vui chơi trẻ em ngay bên kia đường – cả nhà ra biển mỗi sáng chiều.</p></div>'
+          '<div class="card"><span class="n">CHO THUÊ</span><h3 class="oc">Điểm cộng với khách</h3><p>Khách du lịch thích căn gần biển, có công viên, quảng trường sự kiện – dễ cho thuê, dễ được đánh giá tốt.</p></div>'
+          '<div class="card"><span class="n">GIÁ TRỊ</span><h3 class="oc">Hạ tầng bằng vốn công</h3><p>Hơn 47 tỷ đồng ngân sách đầu tư ngay trước dự án, cùng mở rộng trục biển 2.633 tỷ và ga LRT 09 cách ~500 m.</p></div>'
+          '</div><p class="src" style="margin-top:12px">Phần nhận định là góc nhìn của đại lý phân phối, không phải cam kết của chủ đầu tư.</p></div></section>')
+    news = [('TTXVN · Báo Tin tức · 06/07/2026', 'Đà Nẵng: Xây công viên công cộng trên diện tích đất thu hồi từ dự án \'treo\'', 'https://baotintuc.vn/kinh-te/da-nang-xay-cong-vien-cong-cong-tren-dien-tich-dat-thu-hoi-tu-du-an-treo-20260706171716932.htm'),
+            ('VietnamPlus', 'Đà Nẵng xây công viên trên diện tích đất thu hồi từ dự án Hòn Ngọc Á Châu', 'https://www.vietnamplus.vn/da-nang-xay-cong-vien-tren-dien-tich-dat-thu-hoi-tu-du-an-hon-ngoc-a-chau-post1122567.vnp'),
+            ('Báo Văn Hóa', 'Đà Nẵng đầu tư hơn 47 tỉ đồng xây dựng công viên công cộng ven biển', 'https://baovanhoa.vn/van-hoa/da-nang-dau-tu-hon-47-ti-dong-xay-dung-cong-vien-cong-cong-ven-bien-244295.html'),
+            ('Báo Pháp luật', 'Đà Nẵng chi hơn 47 tỷ đồng xây công viên công cộng ven biển', 'https://doanhnhan.baophapluat.vn/da-nang-chi-hon-47-ty-dong-xay-cong-vien-cong-cong-ven-bien.html'),
+            ('Tuổi Trẻ · 08/07/2025', 'Thu hồi một phần Hòn Ngọc Á Châu, Đà Nẵng đầu tư 47 tỉ đồng làm công viên công cộng', 'https://tuoitre.vn/thu-hoi-mot-phan-hon-ngoc-a-chau-da-nang-dau-tu-47-ti-dong-lam-cong-vien-cong-cong-20250708065249329.htm'),
+            ('Tiền Phong', 'Đà Nẵng rót 47 tỷ đồng \'đánh thức\' khu đất vàng bỏ hoang', 'https://tienphong.vn/da-nang-rot-47-ty-dong-danh-thuc-khu-dat-vang-bo-hoang-post1767479.tpo')]
+    b += ('<section class="sec" id="nguon"><div class="wrap">' + sh('6', 'Dẫn chứng', 'Báo chí đưa tin – <b>anh/chị tự kiểm chứng</b>', 'y') +
+          '<div class="g2" style="gap:14px">' + ''.join('<a class="card" href="%s" target="_blank" rel="noopener" style="display:block;border-left:6px solid #275286;text-decoration:none;color:inherit"><span class="n">%s</span><h3 style="font-size:18px;margin-top:6px;line-height:1.4">%s</h3><span class="lk">Đọc bài gốc →</span></a>' % (u, pn, h) for pn, h, u in news) +
+          '</div><p class="note" style="margin-top:14px">Văn bản gốc Quyết định 2958/QĐ-UBND tra cứu tại cổng thông tin điện tử UBND TP Đà Nẵng. Ngày 06/07/2026 là ngày TTXVN đưa tin. Bản vẽ mặt bằng, sơ đồ vị trí, phối cảnh và ảnh hồ sơ khảo sát ở mục 1, 2, 4 do đại lý thu thập.</p></div></section>')
+    b += ('<section class="sec alt" id="hoi-dap"><div class="wrap">' + sh('?', 'Hỏi đáp', 'Hỏi đáp về <b>công viên trước Sun Saphia</b>', 'n') + fq +
+          '<h3 style="margin-top:26px">Xem thêm</h3>' + related(P) + '</div></section>')
+    b = bands_at(b, [(2, band('Muốn chọn căn nhìn thẳng ra công viên – biển?', 'Nhận mặt bằng căn trống và hướng view qua Zalo.', 'Nhận mặt bằng', 'Công viên – giữa trang', ('/mat-bang', 'Xem mặt bằng')))])
+    b += cta_block('Web – quy hoạch công viên cuối trang', title='Sống cạnh <b>công viên biển</b> – nhận bảng giá Sun Saphia')
+    title = 'Quy hoạch công viên 2,45 ha trước Sun Saphia Residence – Quyết định 2958'
+    desc = 'Đà Nẵng đầu tư hơn 47 tỷ đồng làm công viên công cộng 2,45 ha trên đất thu hồi Hòn Ngọc Á Châu, ngay trước Sun Saphia (QĐ 2958/QĐ-UBND, 2025–2027).'
+    return page(P, title, desc, 'công viên trước sun saphia, quy hoạch hòn ngọc á châu, quyết định 2958/qđ-ubnd, công viên công cộng ngũ hành sơn, sun saphia residence',
+                b, [article_ld(title, desc, MAIN + P, '2026-10-25', '2026-10-25'), cld, fld], P)
+
 if __name__ == '__main__':
     import os
     os.makedirs(OUT, exist_ok=True)
-    out = {'trang-chu.html': home(), 'bang-gia.html': bang_gia(), 'mat-bang.html': mat_bang(), 'phap-ly.html': phap_ly(), 'cho-thue.html': cho_thue(), 'tinh-dong-tien.html': tinh_dong_tien(), 'vi-sao-sun-group.html': vi_sao(),
+    out = {'trang-chu.html': home(), 'bang-gia.html': bang_gia(), 'mat-bang.html': mat_bang(), 'phap-ly.html': phap_ly(), 'cho-thue.html': cho_thue(), 'tinh-dong-tien.html': tinh_dong_tien(), 'vi-sao-sun-group.html': vi_sao(), 'quy-hoach-cong-vien.html': cong_vien(),
            'ads.html': ads(MAIN), 'ads-shaphia.html': ads('https://www.sun-shaphiaresidence.com')}
     # Trang chủ tên miền phụ: cùng nội dung, chuẩn hóa về tên miền chính để tránh trùng nội dung
     out['shaphia.html'] = out['trang-chu.html']
