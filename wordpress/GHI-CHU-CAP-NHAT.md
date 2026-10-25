@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.26** + plugin Hoàng Hiệp CRM **2.20.76**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.27** + plugin Hoàng Hiệp CRM **2.20.77**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.77, giao diện 2.15.27: khung 4D có ảnh mô hình
+
+- Khung **Xem 4D** trên trang Sun Saphia hiện sẵn **ảnh chụp từ chính mô hình 4D** (tòa tháp, biển, đường Trường Sa) kèm nhãn "4D · Xoay 360°" và nút ▶ nhấp nháy – khách nhìn là biết có mô hình để xoay.
+- Dự án khác: ô mới **Ảnh xem trước khung 4D** trong mục Hình ảnh & video.
 
 ## Có gì mới – plugin 2.20.76, giao diện 2.15.26: 4D trên điện thoại cân giữa, không bị che, logo dự án
 

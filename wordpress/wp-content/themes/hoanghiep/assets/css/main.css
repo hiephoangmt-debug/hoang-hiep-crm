@@ -1502,3 +1502,14 @@ html.tour-view .contact-dock, html.tour-view .hhc__fab, html.tour-view .hhc__bub
 	.tour4d.is-on { margin-left: -16px; margin-right: -16px; border-radius: 0; height: max(460px, calc(100svh - var(--header-h, 64px) - 64px)); }
 	.tour4d__actions .btn { flex-basis: 100%; }
 }
+/* Khung 4D có ảnh xem trước (chụp từ mô hình): khách nhìn là biết có mô hình 3D để xoay. */
+.tour4d.has-poster { background: #dfe9ef; }
+.tour4d__poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tour4d.has-poster .tour4d__play { align-items: flex-end; justify-content: flex-start; background: linear-gradient(180deg, rgba(10, 37, 64, 0) 45%, rgba(10, 37, 64, .82)); }
+.tour4d.has-poster .tour4d__play strong, .tour4d.has-poster .tour4d__play small { text-shadow: 0 1px 3px rgba(0, 0, 0, .4); }
+.tour4d__badge { position: absolute; top: 12px; left: 12px; z-index: 1; padding: 5px 12px; border-radius: 999px; background: var(--cta); color: var(--white); font-weight: 700; font-size: .82rem; letter-spacing: .02em; box-shadow: 0 4px 12px rgba(0, 0, 0, .25); pointer-events: none; }
+.tour4d.has-poster .tour4d__icon { animation: tour4dPulse 1.8s ease-in-out infinite; }
+@keyframes tour4dPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(234, 88, 12, .55); } 50% { box-shadow: 0 0 0 14px rgba(234, 88, 12, 0); } }
+@media (prefers-reduced-motion: reduce) { .tour4d.has-poster .tour4d__icon { animation: none; } }
+.tour4d__poster { object-position: 47% 45%; }
+@media (max-width: 760px) { .tour4d.has-poster:not(.is-on) { aspect-ratio: 4 / 3.4; } }

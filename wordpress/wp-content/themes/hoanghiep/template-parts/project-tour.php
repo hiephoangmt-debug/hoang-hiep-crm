@@ -19,6 +19,11 @@ $pub   = static function ( $url ) {
 };
 $tour  = $pub( (string) hh_meta( 'hh_p_tour_4d' ) );
 $units = $pub( (string) hh_meta( 'hh_p_tour_units' ) );
+// Ảnh xem trước khung 4D: "plugin:img/…" (ảnh đi kèm plugin) hoặc link ảnh.
+$poster = (string) hh_meta( 'hh_p_tour_poster' );
+if ( 0 === strpos( $poster, 'plugin:' ) ) {
+	$poster = defined( 'HH_CRM_URL' ) && defined( 'HH_CRM_DIR' ) && is_file( HH_CRM_DIR . substr( $poster, 7 ) ) ? HH_CRM_URL . substr( $poster, 7 ) : '';
+}
 if ( ! $tour && ! $units ) {
 	return;
 }
@@ -27,7 +32,11 @@ if ( ! $tour && ! $units ) {
 	<h2 class="block__title">Xem 4D &amp; chọn căn <?php echo esc_html( $title ); ?></h2>
 	<p class="prose">Xoay mô hình, xem hướng nắng, tầm nhìn từng tầng ngay trên điện thoại. Mô hình dựng lại để minh họa vị trí và hướng nhìn, không phải bản vẽ thiết kế của chủ đầu tư.</p>
 	<?php if ( $tour ) : ?>
-		<div class="tour4d" data-src="<?php echo esc_url( $tour ); ?>">
+		<div class="tour4d<?php echo $poster ? ' has-poster' : ''; ?>" data-src="<?php echo esc_url( $tour ); ?>">
+			<?php if ( $poster ) : ?>
+				<img class="tour4d__poster" src="<?php echo esc_url( $poster ); ?>" alt="<?php echo esc_attr( 'Mô hình 4D ' . $title . ' – bấm để xoay, xem hướng nắng' ); ?>" width="1200" height="750" loading="lazy" decoding="async">
+				<span class="tour4d__badge">4D · Xoay 360°</span>
+			<?php endif; ?>
 			<button type="button" class="tour4d__play">
 				<span class="tour4d__icon" aria-hidden="true">▶</span>
 				<span><strong>Bấm để xem mô hình 4D</strong><small>Xoay, phóng to, xem hướng nắng – xem thử miễn phí</small></span>
