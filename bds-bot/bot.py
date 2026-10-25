@@ -14,6 +14,8 @@ Chỉ dùng thư viện chuẩn Python 3.9+.  Chạy:  python3 bot.py
 """
 
 import csv
+import hashlib
+import hmac
 import json
 import os
 import random
@@ -314,6 +316,11 @@ def send_text(chat_id, text):
             box.append(text)
             del box[:-20]
         return
+    if chat_id.startswith("fb_"):
+        return fb_send(chat_id, text)
+    if chat_id.startswith("sdt:"):
+        log("Khách chỉ có SĐT, không nhắn được:", chat_id)
+        return
     for part in split_text(text):
         res = zalo("sendMessage", {"chat_id": chat_id, "text": part})
         if not res.get("ok"):
@@ -321,7 +328,12 @@ def send_text(chat_id, text):
 
 
 def send_typing(chat_id):
-    if not chat_id.startswith("web_"):
+    if chat_id.startswith("fb_"):
+        token = fb_token_for(chat_id)
+        if token:
+            fb_api("me/messages", {"recipient": {"id": chat_id[3:]}, "sender_action": "typing_on"}, token)
+        return
+    if not chat_id.startswith(("web_", "sdt:")):
         zalo("sendChatAction", {"chat_id": chat_id, "action": "typing"}, timeout=10)
 
 
@@ -330,6 +342,35 @@ def notify_admin(text):
         send_text(ADMIN_CHAT_ID, text)
     else:
         log("[BÁO CHUYÊN VIÊN]", text)
+
+
+_ctx = threading.local()  # ai đang ra lệnh (chủ bot hoặc nhân viên) trong luồng hiện tại
+
+
+def current_user():
+    return getattr(_ctx, "who", None) or ADMIN_CHAT_ID
+
+
+def reply(text):
+    """Trả lời đúng người vừa ra lệnh."""
+    who = current_user()
+    if who:
+        send_text(who, text)
+    else:
+        log("[TRẢ LỜI]", text)
+
+
+def bg(fn, *args):
+    """Chạy nền, vẫn trả lời đúng người ra lệnh."""
+    who = current_user()
+
+    def run():
+        _ctx.who = who
+        try:
+            fn(*args)
+        except Exception as e:
+            log("Lỗi tác vụ nền:", repr(e))
+    threading.Thread(target=run, daemon=True).start()
 
 
 def push_sheet(kind, data):
@@ -1161,6 +1202,15 @@ def build_system(cid):
     if c.get("ho_so"):
         ctx.append("Hồ sơ đã ghi nhận: " + json.dumps(c["ho_so"], ensure_ascii=False))
     ctx.append("Giai đoạn: " + STAGE_LABEL.get(stage(c), ""))
+    own = owner_of(cid)
+    if own and not is_admin(own):
+        sdt_nv = staff.get(own, {}).get("sdt", "")
+        ctx.append(f"Chuyên viên phụ trách khách này: {person_name(own)}" + (f" (SĐT {sdt_nv})" if sdt_nv else "")
+                   + ". Khi hẹn gọi / xem nhà, nói chuyên viên này sẽ liên hệ.")
+    calls = c.get("cuoc_goi", [])[-3:]
+    if calls:
+        ctx.append("Ghi chú cuộc gọi của chuyên viên (khách KHÔNG thấy, dùng để tư vấn đúng mạch): "
+                   + " | ".join(f"{x['luc'][:10]}: {x.get('tom_tat') or x['ghi_chu'][:200]}" for x in calls))
     if c.get("mua"):
         ctx.append(f"KHÁCH ĐÃ MUA qua chuyên viên ngày {c['mua']['ngay']}: {c['mua'].get('can', '')} → chăm sóc hậu mãi.")
     if c.get("chien_luoc"):
@@ -1206,14 +1256,14 @@ def handle_customer(cid, channel, name, text, images=None):
     log(f"<- {name or cid}: {text[:90]}")
 
     if store.is_paused(cid):
-        notify_admin(f"💬 {label(cid)}: {text[:800]}\n↩️ /tl {cid} <nội dung>")
+        notify_owner(cid, f"💬 {label(cid)}: {text[:800]}\n↩️ /tl {cid} <nội dung>")
         return
 
     send_typing(cid)
     raw = ask_claude(build_system(cid), store.api_messages(cid))
     if not raw:
         send_text(cid, FALLBACK)
-        notify_admin(f"⚠️ AI lỗi, trả lời tay giúp em: {label(cid)}\n\"{text[:300]}\"\n↩️ /tl {cid} <nội dung>")
+        notify_owner(cid, admin_too=True, text=f"⚠️ AI lỗi, trả lời tay giúp em: {label(cid)}\n\"{text[:300]}\"\n↩️ /tl {cid} <nội dung>")
         return
 
     if TAG_SILENT in raw:
@@ -1227,8 +1277,18 @@ def handle_customer(cid, channel, name, text, images=None):
     with store.lock:
         c["loai"] = "khach"
     if first_time:
-        notify_admin(f"🆕 Khách mới ({'web' if channel == 'web' else 'Zalo'}): {name or 'Khách'}\n\"{text[:300]}\"\n"
-                     f"Mã khách: {cid}\n👉 /khach {cid} · /tl {cid} <nội dung>")
+        kenh = {"web": "web", "facebook": "Facebook", "dien_thoai": "điện thoại"}.get(channel, "Zalo")
+        if not c.get("phu_trach"):
+            with store.lock:
+                c["phu_trach"] = pick_owner()
+        own = owner_of(cid)
+        msg = (f"🆕 Khách mới ({kenh}): {name or 'Khách'}\n\"{text[:300]}\"\nMã khách: {cid}\n"
+               f"👉 /khach {cid} · /tl {cid} <nội dung>")
+        if own and not is_admin(own):
+            send_text(own, "📥 KHÁCH MỚI GIAO CHO ANH/CHỊ\n" + msg)
+            notify_admin(msg + f"\n👤 Đã giao: {person_name(own)}")
+        else:
+            notify_admin(msg)
 
     # hồ sơ khách
     for m in PROFILE_RE.finditer(raw):
@@ -1250,19 +1310,19 @@ def handle_customer(cid, channel, name, text, images=None):
                                      **c["ho_so"], "do_nhiet": heat(c), "giai_doan": stage(c)})
             now_heat = heat(c)
             if now_heat >= HOT and before < HOT:
-                notify_admin(f"🔥 KHÁCH NÓNG {now_heat}/100: {label(cid)}\n"
+                notify_owner(cid, admin_too=True, text=f"🔥 KHÁCH NÓNG {now_heat}/100: {label(cid)}\n"
                              f"Vì sao: {c['ho_so'].get('ly_do_nhiet', '')}\n👉 Nên gọi ngay trong 15 phút!\n\n" +
                              "\n".join(f"{k}: {v}" for k, v in c["ho_so"].items()
                                        if k not in ("diem_nhiet", "ly_do_nhiet", "muc_do")) +
-                             f"\n↩️ /khach {cid}")
+                             f"\n👤 Phụ trách: {person_name(owner_of(cid))}\n📞 /goi {cid} · /khach {cid}")
             if changed.get("da_mua") and not c.get("mua"):
-                notify_admin(f"🏠 {label(cid)} nói đã mua: {changed['da_mua']}\n"
+                notify_owner(cid, f"🏠 {label(cid)} nói đã mua: {changed['da_mua']}\n"
                              f"Nếu khách mua qua anh/chị: /damua {cid} <căn> để bot chăm sóc hậu mãi.")
             if changed.get("sdt"):
                 suggest_friend_request(cid)
                 old = find_old_customer(cid, changed["sdt"])
                 if old:
-                    notify_admin(f"🔁 {label(cid)} là khách cũ trong data: {old.get('ten', '')} {old.get('sdt', '')}")
+                    notify_owner(cid, f"🔁 {label(cid)} là khách cũ trong data: {old.get('ten', '')} {old.get('sdt', '')}")
 
     # lịch hẹn
     for m in APPT_RE.finditer(raw):
@@ -1277,8 +1337,9 @@ def handle_customer(cid, channel, name, text, images=None):
                                                  "dia_diem": appt.get("dia_diem", ""), "nhac": False, "hoi_sau": False})
                 store.save()
         push_sheet("LichHen", {"chat_id": cid, "ten_zalo": c.get("ten", ""), **appt})
-        notify_admin("📅 LỊCH HẸN MỚI – " + label(cid) + "\n" +
-                     "\n".join(f"{k}: {v}" for k, v in appt.items() if v))
+        notify_owner(cid, admin_too=True, text="📅 LỊCH HẸN MỚI – " + label(cid) + "\n" +
+                     "\n".join(f"{k}: {v}" for k, v in appt.items() if v)
+                     + f"\n👤 Phụ trách: {person_name(owner_of(cid))}")
 
     # mốc thời gian của khách
     for m in MOC_RE.finditer(raw):
@@ -1287,15 +1348,15 @@ def handle_customer(cid, channel, name, text, images=None):
         except ValueError:
             continue
         if add_milestone(cid, moc.get("ngay", ""), moc.get("viec", "")):
-            notify_admin(f"📌 Mốc mới của {label(cid)}: {moc.get('ngay')} – {moc.get('viec')}\n"
-                         "Bot sẽ nhắc khách khéo trước 3 ngày, 1 ngày và đúng ngày.")
+            notify_owner(cid, f"📌 Mốc mới của {label(cid)}: {moc.get('ngay')} – {moc.get('viec')}\n"
+                         "Bot sẽ nhắc khách khéo trước 1 ngày.")
 
     answer = MOC_RE.sub("", APPT_RE.sub("", PROFILE_RE.sub("", raw)))
     if TAG_HANDOFF in answer:
         answer = answer.replace(TAG_HANDOFF, "")
         store.pause(cid, HUMAN_PAUSE_MIN)
-        notify_admin(f"🙋 CẦN ANH/CHỊ XỬ LÝ: {label(cid)}\nKhách nói: \"{text[:400]}\"\n"
-                     f"Bot đã tạm dừng {HUMAN_PAUSE_MIN} phút.\n↩️ /tl {cid} <nội dung>")
+        notify_owner(cid, admin_too=True, text=f"🙋 CẦN ANH/CHỊ XỬ LÝ: {label(cid)}\nKhách nói: \"{text[:400]}\"\n"
+                     f"Bot đã tạm dừng {HUMAN_PAUSE_MIN} phút.\n↩️ /tl {cid} <nội dung> · 📞 /goi {cid}")
 
     answer = LEFTOVER_FLAG_RE.sub("", LEFTOVER_TAG_RE.sub("", answer)).strip() or FALLBACK
     store.add_msg(cid, "assistant", answer)
@@ -1469,10 +1530,10 @@ def review_customer(cid, day):
               f"❓ Vì sao chưa chốt: {r.get('ly_do_chua_chot', '')}\n\n"
               f"👉 Anh/chị nên: {r.get('chuyen_vien_nen_lam', '')}\n"
               f"🤖 Bot sẽ chăm sóc theo hướng: {r.get('chien_luoc', '')}")
-    notify_admin(report)
+    notify_owner(cid, report + f"\n📞 Kịch bản gọi: /goi {cid}")
     if r.get("tin_goi_y"):
-        notify_admin(r["tin_goi_y"])
-        notify_admin(f"☝️ Tin mẫu – gửi qua bot: /tl {cid} <dán tin>  ·  hoặc copy gửi Zalo cá nhân")
+        notify_owner(cid, r["tin_goi_y"])
+        notify_owner(cid, f"☝️ Tin mẫu – gửi qua bot: /tl {cid} <dán tin>  ·  hoặc copy gửi Zalo cá nhân")
     return report
 
 
@@ -1556,11 +1617,21 @@ def care_candidates(now):
     return jobs
 
 
+def reachable(cid, now=None):
+    """Bot có chủ động nhắn khách này được không (SĐT: không; Facebook: chỉ trong 24h)."""
+    if cid.startswith("sdt:"):
+        return False
+    if cid.startswith("fb_"):
+        return fb_window_open(store.customers.get(cid) or {}, now)
+    return True
+
+
 def run_care_once(now=None, max_send=20):
     now = now or datetime.now()
     done, sent, touched = [], 0, set()
     order = {"nhac": 0, "moc": 1, "danh_gia": 2, "moc_qua": 2, "sau_xem": 3, "hau_mai": 4, "im_lang": 5}
-    for cid, (kind, data) in sorted(care_candidates(now), key=lambda j: order.get(j[1][0], 9)):
+    jobs = [j for j in care_candidates(now) if j[1][0] in ("danh_gia", "moc_qua") or reachable(j[0], now)]
+    for cid, (kind, data) in sorted(jobs, key=lambda j: order.get(j[1][0], 9)):
         if sent >= max_send:
             break
         if kind not in ("danh_gia", "moc_qua", "nhac") and cid in touched:
@@ -1581,7 +1652,7 @@ def run_care_once(now=None, max_send=20):
             if kind == "moc_qua":
                 data.setdefault("da_nhac", []).append("qua")
                 store.save()
-                notify_admin(f"📌 Mốc '{data['viec']}' ({data['ngay']}) của {label(cid)} đã qua – anh/chị kiểm tra kết quả giúp em."
+                notify_owner(cid, f"📌 Mốc '{data['viec']}' ({data['ngay']}) của {label(cid)} đã qua – anh/chị kiểm tra kết quả giúp em."
                              + (f"\nKhách đã mua? /damua {cid} <căn>" if not c.get("mua") else ""))
                 continue
             if kind == "nhac":
@@ -1591,7 +1662,7 @@ def run_care_once(now=None, max_send=20):
                         + (f", ở {data['dia_diem']}" if data.get("dia_diem") else "")
                         + ". Anh/chị cần em gửi định vị hay đón ở đâu không ạ? 😊")
                 data["nhac"] = True
-                notify_admin(f"⏰ Sắp tới lịch: {label(cid)} – {data.get('du_an', '')} lúc {data['luc']}")
+                notify_owner(cid, admin_too=True, text=f"⏰ Sắp tới lịch: {label(cid)} – {data.get('du_an', '')} lúc {data['luc']}")
             elif kind == "sau_xem":
                 data["hoi_sau"] = True
                 text = draft_care(cid, "sau_xem", du_an=data.get("du_an", "dự án"), luc=data["luc"])
@@ -1600,7 +1671,7 @@ def run_care_once(now=None, max_send=20):
                 m.setdefault("da_nhac", []).extend(d for d in MILESTONE_REMIND if d >= left and d not in m["da_nhac"])
                 khi = "hôm nay" if left == 0 else ("ngày mai" if left == 1 else f"còn {left} ngày")
                 text = draft_care(cid, "nhac_moc", viec=m["viec"], ngay=m["ngay"], khi=khi)
-                notify_admin(f"📌 Nhắc mốc {khi}: {label(cid)} – {m['viec']} ({m['ngay']})")
+                notify_owner(cid, f"📌 Nhắc mốc {khi}: {label(cid)} – {m['viec']} ({m['ngay']})")
             elif kind == "hau_mai":
                 guide = AFTER_SALE_GUIDE[min(data, len(AFTER_SALE_GUIDE) - 1)]
                 c["mua"].setdefault("hm", []).append(now_str())
@@ -1625,12 +1696,12 @@ def run_care_once(now=None, max_send=20):
     return done
 
 
-def pipeline_report():
+def pipeline_report(owner=None):
     now = datetime.now()
     groups: dict = {}
     with store.lock:
         for cid, c in store.customers.items():
-            if c.get("loai") != "khach":
+            if c.get("loai") != "khach" or (owner and owner_of(cid) != owner):
                 continue
             groups.setdefault(stage(c, now), []).append((heat(c, now), cid))
     out = ["🧭 VÒNG ĐỜI KHÁCH"]
@@ -1643,12 +1714,14 @@ def pipeline_report():
     return "\n".join(out)
 
 
-def heat_report(limit=10, only_hot=False):
+def heat_report(limit=10, only_hot=False, owner=None):
     now = datetime.now()
     rows = []
     with store.lock:
         for cid, c in store.customers.items():
             if c.get("loai") != "khach" or c.get("ho_so", {}).get("khong_lam_phien"):
+                continue
+            if owner and owner_of(cid) != owner:
                 continue
             sc = heat(c, now)
             if only_hot and sc < HOT:
@@ -1700,7 +1773,18 @@ def morning_brief():
     notify_admin("☀️ CHÀO BUỔI SÁNG! Việc nên làm hôm nay:\n\n" + holiday_hint() + "📅 Lịch hẹn hôm nay:\n"
                  + ("\n".join(sorted(appts)) or "(chưa có)")
                  + "\n\n📌 Mốc của khách 3 ngày tới:\n" + ("\n".join(sorted(mocs)) or "(chưa có)")
-                 + "\n\n" + heat_report(limit=8))
+                 + "\n\n" + heat_report(limit=8)
+                 + ("\n\n📝 Việc của anh/chị:\n" + "\n".join(task_line(t) for t in open_tasks(ADMIN_CHAT_ID)[:10])
+                    if open_tasks(ADMIN_CHAT_ID) else ""))
+    for sid in active_staff():
+        mine_appts = sorted(f"• {a['luc'][11:16]} {label(cid)} – {a.get('du_an', '')}"
+                            for cid, c in list(store.customers.items()) if owner_of(cid) == sid
+                            for a in c.get("lich", []) if str(a.get("luc", "")).startswith(today))
+        my_tasks = open_tasks(sid)
+        send_text(sid, f"☀️ CHÀO {person_name(sid).upper()}! Việc hôm nay:\n\n📅 Lịch hẹn:\n"
+                  + ("\n".join(mine_appts) or "(chưa có)") + "\n\n📝 Việc:\n"
+                  + ("\n".join(task_line(t) for t in my_tasks[:10]) or "(chưa có)") + "\n\n"
+                  + heat_report(limit=8, owner=sid))
 
 
 def care_loop():
@@ -1713,6 +1797,7 @@ def care_loop():
                 last_brief = now.strftime("%Y-%m-%d")
                 morning_brief()
             run_care_once()
+            remind_tasks()
         except Exception as e:
             log("Lỗi chăm sóc tự động:", repr(e))
 
@@ -1774,24 +1859,26 @@ def draft_friend_request(info: str) -> str:
     return options, "\n".join(rest)
 
 
-def send_friend_drafts(header, info):
+def send_friend_drafts(header, info, to=None):
     """Mỗi phương án là 1 tin riêng → trên điện thoại nhấn giữ, Sao chép là dán được ngay."""
+    say = (lambda t: send_text(to, t)) if to else reply
     options, first_msg = draft_friend_request(info)
     if not options:
-        notify_admin("Em chưa soạn được lời mời kết bạn, anh/chị thử lại /ketban giúp em.")
+        say("Em chưa soạn được lời mời kết bạn, anh/chị thử lại /ketban giúp em.")
         return
-    notify_admin(header + "\n👇 Nhấn giữ 1 trong các tin bên dưới → Sao chép → dán vào ô lời chào khi bấm Kết bạn.")
+    say(header + "\n👇 Nhấn giữ 1 trong các tin bên dưới → Sao chép → dán vào ô lời chào khi bấm Kết bạn.")
     for o in options:
-        notify_admin(o)
+        say(o)
     if first_msg:
-        notify_admin("💬 Khi khách đồng ý kết bạn, nhắn tiếp:\n" + first_msg.split(":", 1)[-1].strip())
+        say("💬 Khi khách đồng ý kết bạn, nhắn tiếp:\n" + first_msg.split(":", 1)[-1].strip())
 
 
 def suggest_friend_request(cid):
     """Khách vừa để lại SĐT → gửi chuyên viên lời mời kết bạn soạn sẵn (chạy nền)."""
     def _go():
         sdt = store.customers.get(cid, {}).get("ho_so", {}).get("sdt", "")
-        send_friend_drafts(f"🤝 Gợi ý KẾT BẠN Zalo cá nhân với {label(cid)}\n📱 Tìm SĐT: {sdt}", customer_brief(cid))
+        send_friend_drafts(f"🤝 Gợi ý KẾT BẠN Zalo cá nhân với {label(cid)}\n📱 Tìm SĐT: {sdt}", customer_brief(cid),
+                           owner_of(cid))
     threading.Thread(target=_go, daemon=True).start()
 
 
@@ -1966,7 +2053,7 @@ def send_campaign(camp_id):
         if cid.startswith("sdt:") or cid in ignore or not k.get("tin_nhan"):
             continue
         c = store.get(cid)
-        if c.get("ho_so", {}).get("khong_lam_phien") or not can_proactive(c):
+        if c.get("ho_so", {}).get("khong_lam_phien") or not can_proactive(c) or not reachable(cid):
             skipped.append(k.get("ten") or cid)
             continue
         send_text(cid, k["tin_nhan"])
@@ -1984,6 +2071,22 @@ def send_campaign(camp_id):
 
 
 # =============================================================== LỆNH CHUYÊN VIÊN
+HELP_STAFF = """📋 LỆNH NHÂN VIÊN
+/khach <mã> – hồ sơ khách · /nong – khách nóng của tôi · /nhiet · /giaidoan
+📞 /goi <mã> – kịch bản gọi · /ketqua <mã> <kết quả> – ghi kết quả cuộc gọi
+/khachmoi <tên> <sđt> [ghi chú] – thêm khách từ cuộc gọi
+/tl <mã> <nội dung> – nhắn khách qua bot · /tat <mã> · /bat <mã>
+📝 /viec – việc của tôi · /viec <mã|-> <mai 9h> <nội dung> · /xong <số>
+/moc <mã> <ngày> <việc> · /damua <mã> <căn> · /danhgia <mã>
+/soan <tin khách> · /dich <tin> · /ketban <mã> · /xemduan
+🖥 /crm – trang quản lý khách của tôi"""
+
+STAFF_CMDS = {"/hd", "/help", "/khach", "/nong", "/nhiet", "/giaidoan", "/goi", "/ketqua", "/khachmoi", "/tl",
+              "/tat", "/bat", "/viec", "/xong", "/moc", "/xoamoc", "/damua", "/danhgia", "/soan", "/dich",
+              "/ketban", "/xemduan", "/crm"}
+CID_CMDS = {"/khach", "/goi", "/ketqua", "/tl", "/tat", "/bat", "/moc", "/xoamoc", "/damua", "/danhgia",
+            "/ketban", "/xoakhach", "/giao"}
+
 HELP = """📋 LỆNH CHUYÊN VIÊN
 /soan <dán tin khách> – soạn câu trả lời cho khách nhắn ở Zalo cá nhân
 /dich <dán tin> – dịch tin viết tắt, không dấu ra tiếng Việt đầy đủ
@@ -1998,6 +2101,17 @@ HELP = """📋 LỆNH CHUYÊN VIÊN
 /khach <chat_id> – xem hồ sơ khách
 /nong – khách nóng nên gọi ngay · /nhiet – xếp hạng độ nhiệt tất cả khách
 /thongke – số liệu tổng
+
+📞 GỌI ĐIỆN & VIỆC
+/goi <mã> – kịch bản gọi riêng cho khách (bấm số để gọi)
+/ketqua <mã> <khách nói gì, hẹn gì> – ghi kết quả, bot tự cập nhật hồ sơ, độ nhiệt, lịch hẹn, việc
+/khachmoi <tên> <sđt> [ghi chú] – thêm khách từ cuộc gọi / gặp trực tiếp
+/viec – việc của tôi · /viec <mã|-> <mai 9h> <nội dung> – thêm việc · /xong <số>
+/crm – link trang quản lý khách trên trình duyệt
+
+👥 ĐỘI SALE
+/themnv <tên> [sđt] – lấy mã mời nhân viên · /nv – danh sách đội · /xoanv <số>
+/giao <mã khách> <số nhân viên> – giao khách · /baocao [số ngày] – báo cáo từng người
 /ketban <mã khách hoặc mô tả khách> – soạn lời mời kết bạn Zalo cá nhân
 
 🗂 CẬP NHẬT DỰ ÁN
@@ -2024,99 +2138,179 @@ Bot tự: chăm khách mới 1–3 ngày → đánh giá lại ngày 3 & 7 → n
 /id – xem chat_id"""
 
 
-def handle_admin(text) -> bool:
+def handle_admin(text, who=None) -> bool:
+    who = who or current_user()
     parts = text.strip().split(maxsplit=2)
     cmd = parts[0].lower()
     arg1 = parts[1] if len(parts) > 1 else ""
     rest = parts[2] if len(parts) > 2 else ""
+    admin = is_admin(who)
+    if not admin:
+        if cmd not in STAFF_CMDS:
+            reply("⛔ Lệnh này chỉ chủ bot dùng được. Gõ /hd xem lệnh của anh/chị.")
+            return True
+        if cmd in CID_CMDS and arg1 in store.customers and not can_access(who, arg1):
+            reply("⛔ Khách này không do anh/chị phụ trách.")
+            return True
 
     if cmd in ("/hd", "/help"):
-        notify_admin(HELP)
+        reply(HELP if admin else HELP_STAFF)
+    elif cmd == "/goi" and arg1:
+        if arg1 not in store.customers:
+            reply("Không thấy khách " + arg1 + ". Khách gọi điện mới: /khachmoi <tên> <sđt>")
+        else:
+            reply("📞 Đang soạn kịch bản gọi, chờ em khoảng 15 giây…")
+            bg(lambda: reply(op_goi(arg1)))
+    elif cmd == "/ketqua" and arg1:
+        if arg1 not in store.customers:
+            reply("Không thấy khách " + arg1)
+        elif not rest:
+            reply(f"Ví dụ: /ketqua {arg1} khách ok xem nhà mẫu 9h sáng CN, đi 2 vợ chồng, lo vay ngân hàng")
+        else:
+            reply("✍️ Đang ghi kết quả…")
+            bg(lambda: reply(op_ketqua(arg1, who, rest)))
+    elif cmd == "/khachmoi":
+        reply(op_khachmoi(who, text.strip()[len(parts[0]):].strip()))
+    elif cmd == "/viec":
+        args = text.strip()[len(parts[0]):].strip()
+        if not args or args.lower() in ("tatca", "tất cả"):
+            lst = open_tasks(None if (admin and args) else who)
+            reply(("📝 VIỆC CẦN LÀM:\n" + "\n".join(task_line(t) for t in lst[:40]) + "\n\nXong: /xong <số>")
+                  if lst else "Không có việc nào 🎉\nThêm: /viec <mã khách | -> mai 9h <nội dung>")
+        else:
+            reply(op_viec_add(who, args))
+    elif cmd == "/xong" and arg1:
+        reply(op_xong(who, arg1))
+    elif cmd == "/crm":
+        reply(op_crm_link(who, revoke=arg1 in ("moi", "mới")))
+    elif cmd == "/themnv" and arg1:
+        name_phone = text.strip()[len(parts[0]):].strip()
+        m = PHONE_RE.search(name_phone)
+        nv_name = (name_phone[:m.start()] if m else name_phone).strip(" ,-")
+        code = f"{random.randint(100000, 999999)}"
+        join_codes[code] = (nv_name, norm_phone(m.group(0)) if m else "", time.time() + 86400)
+        reply(f"👥 Mời {nv_name} vào đội sale:\n1) Gửi nhân viên link Zalo của bot (Deeplink lúc tạo bot)\n"
+              f"2) Nhân viên nhắn cho bot:  /thamgia {code}\n(Mã dùng 1 lần, hết hạn sau 24 giờ)")
+    elif cmd == "/nv":
+        team = active_staff()
+        if not team:
+            reply("Chưa có nhân viên. Thêm: /themnv <tên> [sđt]")
+        else:
+            lines = []
+            for i, sid in enumerate(team, 1):
+                mine = [cid for cid, c in store.customers.items() if c.get("loai") == "khach" and owner_of(cid) == sid]
+                hot = sum(1 for cid in mine if heat(store.customers[cid]) >= HOT)
+                lines.append(f"{i}. {person_name(sid)} {staff[sid].get('sdt', '')} – {len(mine)} khách, 🔥 {hot}, "
+                             f"📝 {len(open_tasks(sid))} việc")
+            reply("👥 ĐỘI SALE:\n" + "\n".join(lines) + "\n\n/giao <mã khách> <số> · /xoanv <số> · /baocao")
+    elif cmd == "/xoanv" and arg1:
+        team = active_staff()
+        try:
+            sid = team[int(arg1) - 1]
+        except (ValueError, IndexError):
+            reply("Gõ /nv xem số thứ tự, rồi /xoanv <số>")
+            return True
+        with staff_lock:
+            staff[sid]["active"] = False
+            save_staff()
+        moved = 0
+        for cid, c in list(store.customers.items()):
+            if c.get("phu_trach") == sid:
+                assign(cid, pick_owner(), announce=False)
+                moved += 1
+        for t in tasks:
+            if t["nv"] == sid and not t["xong"]:
+                t["nv"] = owner_of(t["cid"]) if t["cid"] else ADMIN_CHAT_ID
+        save_tasks()
+        reply(f"Đã cho {person_name(sid)} rời đội. {moved} khách và việc đang mở đã chia lại cho người khác.")
+    elif cmd == "/giao" and arg1:
+        team = active_staff()
+        if arg1 not in store.customers:
+            reply("Không thấy khách " + arg1)
+        elif rest.strip().lower() in ("toi", "tôi", "0"):
+            assign(arg1, ADMIN_CHAT_ID)
+            reply(f"✅ {label(arg1)} giờ do anh/chị phụ trách.")
+        else:
+            try:
+                sid = team[int(rest) - 1]
+            except (ValueError, IndexError):
+                reply("Ví dụ: /giao " + arg1 + " 1   (số thứ tự trong /nv, hoặc 'toi')")
+                return True
+            assign(arg1, sid)
+            reply(f"✅ Đã giao {label(arg1)} cho {person_name(sid)}.")
+    elif cmd == "/baocao":
+        try:
+            days = int(arg1) if arg1 else 7
+        except ValueError:
+            days = 7
+        reply(team_report(days))
     elif cmd == "/soan":
         pasted = text.strip()[len(parts[0]):].strip()
         if not pasted:
-            notify_admin("Dán tin nhắn của khách sau lệnh, ví dụ:\n/soan Hi bạn, mình muốn xin thông tin CSBH FourS Tower")
+            reply("Dán tin nhắn của khách sau lệnh, ví dụ:\n/soan Hi bạn, mình muốn xin thông tin CSBH FourS Tower")
         else:
-            notify_admin(draft_for_personal_zalo(pasted) or "Em chưa soạn được, anh/chị thử lại giúp em.")
+            reply(draft_for_personal_zalo(pasted) or "Em chưa soạn được, anh/chị thử lại giúp em.")
     elif cmd == "/dich":
         pasted = text.strip()[len(parts[0]):].strip()
         system = build_system("__soan__")
         system.append({"type": "text", "text": "CHẾ ĐỘ DỊCH: viết lại tin nhắn chuyên viên dán vào thành tiếng Việt đầy đủ, "
                        "có dấu, không viết tắt, giữ nguyên ý. Dòng sau ghi 'Khách muốn:' tóm tắt nhu cầu trong 1 câu. "
                        "Không dùng thẻ điều khiển, không markdown."})
-        notify_admin(ask_claude(system, [{"role": "user", "content": pasted}], 600) if pasted
+        reply(ask_claude(system, [{"role": "user", "content": pasted}], 600) if pasted
                      else "Ví dụ: /dich a ơi 2pn view sông tầm 3t5 có k, ck bn, ib e csbh nhé")
     elif cmd == "/chaohang":
         project = text.strip()[len(parts[0]):].strip()
         if not project:
-            notify_admin("Ví dụ: /chaohang FourS Tower – căn 2PN view sông, giá từ ...")
+            reply("Ví dụ: /chaohang FourS Tower – căn 2PN view sông, giá từ ...")
         else:
-            notify_admin(f"🔎 Đang quét data cho \"{project}\", chờ em 1–3 phút nha...")
-            threading.Thread(target=lambda: notify_admin(campaign_report(run_campaign(project))), daemon=True).start()
+            reply(f"🔎 Đang quét data cho \"{project}\", chờ em 1–3 phút nha...")
+            threading.Thread(target=lambda: reply(campaign_report(run_campaign(project))), daemon=True).start()
     elif cmd == "/xem" and arg1:
         camp = load_campaign(arg1)
         try:
             k = camp["khach"][int(rest) - 1]
-            notify_admin(f"{k['ten'] or k['id']} – {k['diem']}/10\nLý do: {k.get('ly_do', '')}\n\n{k.get('tin_nhan', '')}")
+            reply(f"{k['ten'] or k['id']} – {k['diem']}/10\nLý do: {k.get('ly_do', '')}\n\n{k.get('tin_nhan', '')}")
         except (TypeError, ValueError, IndexError, KeyError):
-            notify_admin("Ví dụ: /xem " + arg1 + " 1")
+            reply("Ví dụ: /xem " + arg1 + " 1")
     elif cmd == "/gui" and arg1:
         threading.Thread(target=send_campaign, args=(arg1,), daemon=True).start()
     elif cmd == "/tl" and arg1 and rest:
-        send_text(arg1, rest)
-        store.get(arg1)
-        store.add_msg(arg1, "assistant", rest)
-        if arg1 not in load_ignore():
-            store.pause(arg1, HUMAN_PAUSE_MIN)
-        notify_admin(f"✅ Đã gửi. Bot nhường anh/chị nói chuyện với khách này {HUMAN_PAUSE_MIN} phút.")
-        asked = [m["text"] for m in store.customers.get(arg1, {}).get("tin", []) if m["role"] == "user"]
-        if asked and not asked[-1].startswith("["):
-            notify_admin("💡 Câu này khách hay hỏi? Lưu để lần sau bot tự trả lời:\n"
-                         f"/hoidap {asked[-1][:200]} => {rest[:400]}")
+        reply(op_tl(arg1, who, rest))
     elif cmd == "/tat" and arg1:
         store.pause(arg1, 24 * 60)
-        notify_admin("⏸ Bot tạm dừng với khách này 24 giờ. /bat " + arg1 + " để bật lại.")
+        reply("⏸ Bot tạm dừng với khách này 24 giờ. /bat " + arg1 + " để bật lại.")
     elif cmd == "/bat" and arg1:
         store.resume(arg1)
-        notify_admin("▶️ Bot đã trả lời lại khách này.")
+        reply("▶️ Bot đã trả lời lại khách này.")
     elif cmd == "/rieng" and arg1:
         add_ignore(arg1, rest)
-        notify_admin("🔒 Đã đưa vào danh bạ riêng, bot sẽ không trả lời người này.")
+        reply("🔒 Đã đưa vào danh bạ riêng, bot sẽ không trả lời người này.")
     elif cmd == "/borieng" and arg1:
         remove_ignore(arg1)
-        notify_admin("🔓 Đã bỏ khỏi danh bạ riêng.")
+        reply("🔓 Đã bỏ khỏi danh bạ riêng.")
     elif cmd == "/khach" and arg1:
-        c = store.customers.get(arg1)
-        if not c:
-            notify_admin("Không có khách " + arg1)
-        else:
-            hs = "\n".join(f"{k}: {v}" for k, v in c["ho_so"].items()) or "(chưa có)"
-            last = "\n".join(("👤 " if m["role"] == "user" else "🤖 ") + m["text"][:120] for m in c["tin"][-6:])
-            sc = heat(c)
-            notify_admin(f"{label(arg1)} · {c['kenh']} · từ {c['lan_dau']}\n"
-                         f"{heat_icon(sc)} Độ nhiệt {sc}/100 – {c['ho_so'].get('ly_do_nhiet', '')}\n{hs}\n\n{last}")
+        reply(customer_card(arg1) if arg1 in store.customers else "Không có khách " + arg1)
     elif cmd == "/ketban":
         info = text.strip()[len(parts[0]):].strip()
         if not info:
-            notify_admin("Ví dụ:\n/ketban " + "web_abc123  (mã khách trong thông báo)\n"
+            reply("Ví dụ:\n/ketban " + "web_abc123  (mã khách trong thông báo)\n"
                          "/ketban Chị Lan 0905xxxxxx, gọi hỏi căn 2PN FourS view sông, muốn xem nhà mẫu cuối tuần")
         else:
             brief = customer_brief(arg1) if arg1 in store.customers else info
-            threading.Thread(target=send_friend_drafts, args=("🤝 Lời mời kết bạn soạn sẵn", brief),
-                             daemon=True).start()
+            bg(send_friend_drafts, "🤝 Lời mời kết bạn soạn sẵn", brief)
     elif cmd == "/capnhat":
         note = text.strip()[len(parts[0]):].strip()
         if not note:
             ups = list_updates()
-            notify_admin(("🗂 CÁC CẬP NHẬT ĐANG DÙNG (cũ → mới):\n" + "\n".join(
+            reply(("🗂 CÁC CẬP NHẬT ĐANG DÙNG (cũ → mới):\n" + "\n".join(
                 f"{i}. {u}" for i, u in enumerate(ups, 1)) + "\n\nXóa mục sai/hết hạn: /xoacapnhat <số>")
                 if ups else "Chưa có cập nhật nào.")
-            notify_admin("Thêm mới, ví dụ:\n/capnhat FourS Tower: từ 1/11 đến 30/11 CK 3% khi thanh toán sớm 50%\n"
+            reply("Thêm mới, ví dụ:\n/capnhat FourS Tower: từ 1/11 đến 30/11 CK 3% khi thanh toán sớm 50%\n"
                          "Hoặc chụp ảnh CSBH / bảng giá gửi thẳng cho em.")
         else:
             add_update(note)
             personal = re.search(r"(?i)(tên|hotline|đơn vị|sđt|giờ dẫn khách)\s*:", note)
-            notify_admin("✅ Đã cập nhật. Từ giờ bot tư vấn khách theo thông tin mới này."
+            reply("✅ Đã cập nhật. Từ giờ bot tư vấn khách theo thông tin mới này."
                          + ("" if personal else "\n📣 Nếu là tin mới về dự án, muốn báo cho khách đang quan tâm: /baokhach "
                             + note[:200]))
     elif cmd == "/xoacapnhat":
@@ -2124,7 +2318,7 @@ def handle_admin(text) -> bool:
             removed = remove_update(int(arg1))
         except ValueError:
             removed = ""
-        notify_admin(f"🗑 Đã xóa: {removed}" if removed else "Gõ /capnhat để xem số thứ tự, rồi /xoacapnhat <số>")
+        reply(f"🗑 Đã xóa: {removed}" if removed else "Gõ /capnhat để xem số thứ tự, rồi /xoacapnhat <số>")
     elif cmd == "/link" and arg1.startswith("http"):
         threading.Thread(target=handle_admin_link, args=(arg1, rest), daemon=True).start()
     elif cmd == "/hoidap":
@@ -2132,21 +2326,21 @@ def handle_admin(text) -> bool:
         m = re.split(r"\s*(?:=>|->|→|\|)\s*", body, maxsplit=1)
         if len(m) == 2 and m[0] and m[1]:
             add_line(QA_HEADER, f"H: {m[0]} → Đ: {m[1]}")
-            notify_admin("✅ Đã lưu câu hỏi đáp mẫu. Khách hỏi ý này bot sẽ trả lời theo đúng câu của anh/chị.")
+            reply("✅ Đã lưu câu hỏi đáp mẫu. Khách hỏi ý này bot sẽ trả lời theo đúng câu của anh/chị.")
         else:
             qa = list_section(QA_HEADER)
-            notify_admin(("💬 HỎI ĐÁP MẪU:\n" + "\n".join(f"{i}. {q}" for i, q in enumerate(qa, 1))
+            reply(("💬 HỎI ĐÁP MẪU:\n" + "\n".join(f"{i}. {q}" for i, q in enumerate(qa, 1))
                           + "\n\nXóa: /xoahoidap <số>\n") if qa else "Chưa có hỏi đáp mẫu.\n")
-            notify_admin("Thêm mới:\n/hoidap Vay được bao nhiêu %? => Dạ ngân hàng hỗ trợ vay tới 70%, ân hạn gốc 24 tháng ạ")
+            reply("Thêm mới:\n/hoidap Vay được bao nhiêu %? => Dạ ngân hàng hỗ trợ vay tới 70%, ân hạn gốc 24 tháng ạ")
     elif cmd == "/xoahoidap":
         try:
             removed = remove_line(QA_HEADER, int(arg1))
         except ValueError:
             removed = ""
-        notify_admin(f"🗑 Đã xóa: {removed}" if removed else "Gõ /hoidap để xem số thứ tự, rồi /xoahoidap <số>")
+        reply(f"🗑 Đã xóa: {removed}" if removed else "Gõ /hoidap để xem số thứ tự, rồi /xoahoidap <số>")
     elif cmd == "/xoakhach" and arg1:
         if arg1 not in store.customers:
-            notify_admin("Không thấy khách " + arg1 + ". Mã khách có trong các thông báo của bot.")
+            reply("Không thấy khách " + arg1 + ". Mã khách có trong các thông báo của bot.")
         else:
             bk = DATA / "sao_luu_khach"
             bk.mkdir(parents=True, exist_ok=True)
@@ -2157,11 +2351,11 @@ def handle_admin(text) -> bool:
                     json.dumps(old, ensure_ascii=False, indent=1), encoding="utf-8")
                 store.save()
             store.resume(arg1)
-            notify_admin(f"🧹 Đã xóa hồ sơ và lịch sử chat của {old.get('ten') or arg1}. Lần tới khách nhắn, "
+            reply(f"🧹 Đã xóa hồ sơ và lịch sử chat của {old.get('ten') or arg1}. Lần tới khách nhắn, "
                          "bot tư vấn lại từ đầu như khách mới.\n(Bản sao lưu ở data/sao_luu_khach/)")
     elif cmd == "/damua" and arg1:
         if arg1 not in store.customers:
-            notify_admin("Không thấy khách " + arg1 + ". Mã khách có trong các thông báo của bot.")
+            reply("Không thấy khách " + arg1 + ". Mã khách có trong các thông báo của bot.")
         else:
             c = store.customers[arg1]
             with store.lock:
@@ -2170,22 +2364,22 @@ def handle_admin(text) -> bool:
                 store.save()
             store.merge_profile(arg1, {"da_mua": rest or "đã mua"})
             push_sheet("KhachHang", {"chat_id": arg1, "ten_zalo": c.get("ten", ""), **c["ho_so"], "giai_doan": "da_mua"})
-            notify_admin(f"🎉 Chúc mừng anh/chị chốt deal: {label(arg1)} – {rest}\n"
+            reply(f"🎉 Chúc mừng anh/chị chốt deal: {label(arg1)} – {rest}\n"
                          "Bot chuyển khách sang HẬU MÃI: cảm ơn sau 1 ngày, hỏi thăm thủ tục sau 1 tuần, cập nhật tiến độ hằng tháng, "
                          "khéo nhờ giới thiệu sau 2 tháng.\n"
                          f"📌 Thêm mốc thanh toán / ký HĐMB để bot nhắc khách: /moc {arg1} 15/11 ký HĐMB")
     elif cmd == "/moc" and arg1:
         if arg1 not in store.customers:
-            notify_admin("Không thấy khách " + arg1)
+            reply("Không thấy khách " + arg1)
         elif rest:
             day, _, viec = rest.partition(" ")
             if add_milestone(arg1, day, viec):
-                notify_admin(f"📌 Đã thêm mốc {parse_day(day)} – {viec}. Bot nhắc khách trước 3 ngày, 1 ngày và đúng ngày.")
+                reply(f"📌 Đã thêm mốc {parse_day(day)} – {viec}. Bot nhắc khách khéo trước 1 ngày.")
             else:
-                notify_admin("Ví dụ: /moc " + arg1 + " 15/11 đóng đợt 2 – 30%   (ngày dạng 15/11 hoặc 15/11/2026)")
+                reply("Ví dụ: /moc " + arg1 + " 15/11 đóng đợt 2 – 30%   (ngày dạng 15/11 hoặc 15/11/2026)")
         else:
             mocs = store.customers[arg1].get("moc", [])
-            notify_admin((f"📌 Mốc của {label(arg1)}:\n" + "\n".join(
+            reply((f"📌 Mốc của {label(arg1)}:\n" + "\n".join(
                 f"{i}. {m['ngay']} – {m['viec']}" for i, m in enumerate(mocs, 1)) + f"\nXóa: /xoamoc {arg1} <số>")
                 if mocs else f"Chưa có mốc. Thêm: /moc {arg1} 15/11 ký HĐMB")
     elif cmd == "/xoamoc" and arg1:
@@ -2193,57 +2387,56 @@ def handle_admin(text) -> bool:
         try:
             m = mocs.pop(int(rest) - 1)
             store.save()
-            notify_admin(f"🗑 Đã xóa mốc {m['ngay']} – {m['viec']}")
+            reply(f"🗑 Đã xóa mốc {m['ngay']} – {m['viec']}")
         except (ValueError, IndexError):
-            notify_admin(f"Gõ /moc {arg1} để xem số thứ tự, rồi /xoamoc {arg1} <số>")
+            reply(f"Gõ /moc {arg1} để xem số thứ tự, rồi /xoamoc {arg1} <số>")
     elif cmd == "/danhgia" and arg1:
         if arg1 in store.customers:
-            notify_admin("🩺 Đang đánh giá lại khách, chờ em chút nha...")
-            threading.Thread(target=lambda: review_customer(arg1, "hôm nay") or
-                             notify_admin("Em chưa đánh giá được, thử lại giúp em."), daemon=True).start()
+            reply("🩺 Đang đánh giá lại khách, chờ em chút nha...")
+            bg(lambda: review_customer(arg1, "hôm nay") or reply("Em chưa đánh giá được, thử lại giúp em."))
         else:
-            notify_admin("Không thấy khách " + arg1)
+            reply("Không thấy khách " + arg1)
     elif cmd == "/giaidoan":
-        notify_admin(pipeline_report())
+        reply(pipeline_report(None if admin else who))
     elif cmd == "/chucmung":
         occasion = text.strip()[len(parts[0]):].strip()
         if not occasion:
-            notify_admin("Ví dụ:\n/chucmung 20/10 Ngày Phụ nữ Việt Nam\n/chucmung Trung thu\n/chucmung Tết Nguyên đán")
+            reply("Ví dụ:\n/chucmung 20/10 Ngày Phụ nữ Việt Nam\n/chucmung Trung thu\n/chucmung Tết Nguyên đán")
         else:
-            notify_admin(f"💐 Đang soạn lời chúc \"{occasion}\" riêng cho từng khách, chờ em 1–3 phút nha...")
-            threading.Thread(target=lambda: notify_admin(campaign_report(run_campaign(occasion, "chuc"))),
+            reply(f"💐 Đang soạn lời chúc \"{occasion}\" riêng cho từng khách, chờ em 1–3 phút nha...")
+            threading.Thread(target=lambda: reply(campaign_report(run_campaign(occasion, "chuc"))),
                              daemon=True).start()
     elif cmd == "/khoigoi":
         topic = text.strip()[len(parts[0]):].strip()
-        notify_admin("🔎 Đang tìm khách cũ nên khơi gợi lại, chờ em 1–3 phút nha...")
-        threading.Thread(target=lambda: notify_admin(campaign_report(run_campaign(topic, "khoi_goi"))),
+        reply("🔎 Đang tìm khách cũ nên khơi gợi lại, chờ em 1–3 phút nha...")
+        threading.Thread(target=lambda: reply(campaign_report(run_campaign(topic, "khoi_goi"))),
                          daemon=True).start()
     elif cmd == "/chamsoc":
         if arg1 in ("tat", "tắt"):
             save_env("FOLLOWUP", "0")
-            notify_admin("⏸ Đã TẮT chăm sóc khách im lặng (nhắc lịch hẹn vẫn chạy). /chamsoc bat để bật lại.")
+            reply("⏸ Đã TẮT chăm sóc khách im lặng (nhắc lịch hẹn vẫn chạy). /chamsoc bat để bật lại.")
         elif arg1 in ("bat", "bật"):
             save_env("FOLLOWUP", "1")
-            notify_admin("▶️ Đã BẬT chăm sóc tự động.")
+            reply("▶️ Đã BẬT chăm sóc tự động.")
         else:
             jobs = care_candidates(datetime.now().replace(hour=max(FOLLOWUP_HOURS[0], min(datetime.now().hour, FOLLOWUP_HOURS[1]))))
-            notify_admin(f"💌 Chăm sóc tự động: {'BẬT' if followup_enabled() else 'TẮT'} · nhắn sau "
+            reply(f"💌 Chăm sóc tự động: {'BẬT' if followup_enabled() else 'TẮT'} · nhắn sau "
                          + ", ".join(f"{d:g}" for d in FOLLOWUP_DAYS) + " ngày khách im lặng, giờ "
                          f"{FOLLOWUP_HOURS[0]}h–{FOLLOWUP_HOURS[1] + 1}h\nĐang chờ chăm sóc: {len(jobs)} việc\n"
                          + "\n".join(f"• {label(cid)} – {k}" for cid, (k, _) in jobs[:15])
                          + "\n/chamsoc tat · /chamsoc bat")
     elif cmd == "/luu":
-        notify_admin(save_pending())
+        reply(save_pending())
     elif cmd == "/huy":
         pending_updates.pop(ADMIN_CHAT_ID, None)
-        notify_admin("Đã bỏ, không lưu gì.")
+        reply("Đã bỏ, không lưu gì.")
     elif cmd == "/baokhach":
         news = text.strip()[len(parts[0]):].strip()
         if not news:
-            notify_admin("Ví dụ: /baokhach FourS Tower: từ 1/11 CK 3% khi thanh toán sớm 50%, HTLS 0% 18 tháng")
+            reply("Ví dụ: /baokhach FourS Tower: từ 1/11 CK 3% khi thanh toán sớm 50%, HTLS 0% 18 tháng")
         else:
-            notify_admin("🔎 Đang tìm khách cần biết tin này, chờ em 1–3 phút nha...")
-            threading.Thread(target=lambda: notify_admin(campaign_report(run_campaign(news, "bao"))),
+            reply("🔎 Đang tìm khách cần biết tin này, chờ em 1–3 phút nha...")
+            threading.Thread(target=lambda: reply(campaign_report(run_campaign(news, "bao"))),
                              daemon=True).start()
     elif cmd == "/banghang":
         if arg1.startswith("http"):
@@ -2253,13 +2446,13 @@ def handle_admin(text) -> bool:
                 save_env("BANG_HANG_URLS", ",".join(urls))
         elif arg1 in ("xoa", "xóa"):
             save_env("BANG_HANG_URLS", "")
-            notify_admin("Đã bỏ tất cả link Google Sheet bảng hàng.")
+            reply("Đã bỏ tất cả link Google Sheet bảng hàng.")
             return True
         lines = []
         for name, body in inventory_sources(force=True):
             rows = max(0, len([l for l in body.splitlines() if l.strip()]) - 1)
             lines.append(f"• {name}: {rows} căn" if rows else f"• {name}: ⚠️ chưa đọc được (kiểm tra quyền chia sẻ)")
-        notify_admin(("📋 BẢNG HÀNG BOT ĐANG DÙNG:\n" + "\n".join(lines)) if lines else
+        reply(("📋 BẢNG HÀNG BOT ĐANG DÙNG:\n" + "\n".join(lines)) if lines else
                      "Chưa có bảng hàng. Gửi /banghang <link Google Sheet> hoặc chụp ảnh bảng hàng gửi em.")
     elif cmd == "/xoabanghang" and arg1:
         files = [f for f in INVENTORY_DIR.glob(f"{arg1}*.csv")] if INVENTORY_DIR.exists() else []
@@ -2267,15 +2460,16 @@ def handle_admin(text) -> bool:
             files = sorted(files)[:-1]
         for f in files:
             f.unlink()
-        notify_admin(("🗑 Đã xóa: " + ", ".join(f.name for f in files)) if files else "Không thấy file bảng hàng " + arg1)
+        reply(("🗑 Đã xóa: " + ", ".join(f.name for f in files)) if files else "Không thấy file bảng hàng " + arg1)
     elif cmd == "/xemduan":
         info = re.sub(r"<!--.*?-->", "", read_info(), flags=re.S).strip()
-        notify_admin(info[:3900] + ("\n…(còn nữa, xem file du_an.md)" if len(info) > 3900 else ""))
+        reply(info[:3900] + ("\n…(còn nữa, xem file du_an.md)" if len(info) > 3900 else ""))
         inv = read_inventory()
         if inv:
-            notify_admin("📋 BẢNG HÀNG:\n" + inv[:3500] + ("\n…" if len(inv) > 3500 else ""))
+            reply("📋 BẢNG HÀNG:\n" + inv[:3500] + ("\n…" if len(inv) > 3500 else ""))
     elif cmd in ("/nong", "/nhiet"):
-        notify_admin(heat_report(limit=25 if cmd == "/nhiet" else 10, only_hot=cmd == "/nong"))
+        reply(heat_report(limit=25 if cmd == "/nhiet" else 10, only_hot=cmd == "/nong",
+                          owner=None if admin else who))
     elif cmd == "/thongke":
         cs = store.customers.values()
         khach = [c for c in cs if c.get("loai") == "khach"]
@@ -2286,13 +2480,782 @@ def handle_admin(text) -> bool:
         appts = 0
         if APPOINTMENTS_FILE.exists():
             appts = max(0, len(APPOINTMENTS_FILE.read_text(encoding="utf-8-sig").splitlines()) - 1)
-        notify_admin(f"📊 Tổng khách: {len(khach)} (hôm nay mới: {sum(1 for c in khach if c['lan_dau'][:10] == today)})\n"
+        reply(f"📊 Tổng khách: {len(khach)} (hôm nay mới: {sum(1 for c in khach if c['lan_dau'][:10] == today)})\n"
                      f"🔥 Nóng {by['nong']} · 🌤 Ấm {by['am']} · ❄️ Lạnh {by['lanh']}\n"
                      f"📱 Có SĐT: {sum(1 for c in khach if c['ho_so'].get('sdt'))}\n"
                      f"📅 Lịch hẹn: {appts}\n📇 Khách cũ trong file: {len(load_old_customers())}")
     else:
         return False
     return True
+
+
+# =============================================================== ĐỘI SALE · GỌI ĐIỆN · VIỆC CẦN LÀM
+def load_json(path: Path, default):
+    try:
+        return json.loads(path.read_text(encoding="utf-8")) if path.exists() else default
+    except ValueError:
+        log("Không đọc được", path)
+        return default
+
+
+def save_json(path: Path, obj):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(".tmp")
+    tmp.write_text(json.dumps(obj, ensure_ascii=False, indent=1), encoding="utf-8")
+    tmp.replace(path)
+
+
+STAFF_FILE = DATA / "nhan_vien.json"
+TASK_FILE = DATA / "viec.json"
+TOKEN_FILE = DATA / "crm_tokens.json"
+OWNER_NAME = os.environ.get("OWNER_NAME", "").strip()
+staff_lock = threading.RLock()
+staff: dict = load_json(STAFF_FILE, {})        # chat_id -> {ten, sdt, them_luc, active}
+join_codes: dict = {}                          # mã tham gia -> (tên, sđt, hết hạn)
+tasks: list = load_json(TASK_FILE, [])         # [{id, cid, nv, noi_dung, han, xong, tao_luc, nhac}]
+
+
+def is_admin(cid):
+    return bool(ADMIN_CHAT_ID) and cid == ADMIN_CHAT_ID
+
+
+def is_staff(cid):
+    return cid in staff and staff[cid].get("active", True)
+
+
+def active_staff():
+    return [sid for sid, s in staff.items() if s.get("active", True)]
+
+
+def person_name(sid):
+    if not sid or is_admin(sid):
+        return OWNER_NAME or "Chủ"
+    return staff.get(sid, {}).get("ten") or sid
+
+
+def owner_of(cid):
+    o = (store.customers.get(cid) or {}).get("phu_trach")
+    return o if o and (is_staff(o) or is_admin(o)) else ADMIN_CHAT_ID
+
+
+def can_access(who, cid):
+    return is_admin(who) or owner_of(cid) == who
+
+
+def pick_owner():
+    """Chia khách mới: người đang giữ ít khách nhất (chưa có nhân viên → chủ bot)."""
+    team = active_staff()
+    if not team or os.environ.get("TU_CHIA_KHACH", "1") != "1":
+        return ADMIN_CHAT_ID
+    load = {s: 0 for s in team}
+    with store.lock:
+        for c in store.customers.values():
+            if c.get("phu_trach") in load and c.get("loai") == "khach" and not c.get("mua"):
+                load[c["phu_trach"]] += 1
+    return min(team, key=lambda s: (load[s], staff[s].get("them_luc", "")))
+
+
+def assign(cid, sid, announce=True):
+    with store.lock:
+        store.customers[cid]["phu_trach"] = sid
+        store.save()
+    if announce and sid and not is_admin(sid):
+        c = store.customers[cid]
+        hs = c.get("ho_so", {})
+        last = [m["text"] for m in c.get("tin", []) if m["role"] == "user"][-2:]
+        send_text(sid, f"📥 KHÁCH GIAO CHO ANH/CHỊ: {label(cid)}\n" + (f"SĐT: {hs['sdt']}\n" if hs.get("sdt") else "")
+                  + ("Khách vừa nhắn: " + " | ".join(t[:150] for t in last) + "\n" if last else "")
+                  + f"👉 /khach {cid} · /goi {cid}")
+
+
+def notify_owner(cid, text, admin_too=False):
+    """Báo cho người phụ trách khách (và chủ bot nếu cần)."""
+    targets = []
+    o = owner_of(cid)
+    if o:
+        targets.append(o)
+    if (admin_too or not o) and ADMIN_CHAT_ID and ADMIN_CHAT_ID not in targets:
+        targets.append(ADMIN_CHAT_ID)
+    if not targets:
+        log("[BÁO CHUYÊN VIÊN]", text)
+    for t in targets:
+        send_text(t, text)
+
+
+def save_staff():
+    with staff_lock:
+        save_json(STAFF_FILE, staff)
+
+
+def op_join(cid, name, text):
+    code = text.split(maxsplit=1)[1].strip() if len(text.split()) > 1 else ""
+    info = join_codes.get(code)
+    if not info or info[2] < time.time():
+        send_text(cid, "Mã tham gia không đúng hoặc đã hết hạn. Nhờ chủ bot gõ /themnv <tên> để lấy mã mới ạ.")
+        return
+    join_codes.pop(code, None)
+    with staff_lock:
+        staff[cid] = {"ten": info[0] or name or "Nhân viên", "sdt": info[1], "them_luc": now_str(), "active": True}
+        save_staff()
+    with store.lock:  # nếu người này từng bị coi là khách thì bỏ hồ sơ khách đó đi
+        store.customers.pop(cid, None)
+        store.save()
+    send_text(cid, f"🎉 Chào {staff[cid]['ten']}! Anh/chị đã vào đội sale. Từ giờ khách mới được chia cho anh/chị "
+                   "sẽ báo về đây.\n\n" + HELP_STAFF)
+    notify_admin(f"👥 {staff[cid]['ten']} đã tham gia đội sale (mã {cid}). Xem đội: /nv")
+
+
+# ------------------------------------------------- việc cần làm
+task_lock = threading.Lock()
+
+
+def save_tasks():
+    with task_lock:
+        save_json(TASK_FILE, tasks)
+
+
+def parse_when(s, now=None):
+    """'mai 9h Gọi lại' / '15/11 14:30 Gửi bảng giá' / '16h Gọi' → (datetime | None, phần còn lại)."""
+    now = now or datetime.now()
+    words = s.split()
+    low = [w.lower() for w in words]
+    day, i = None, 0
+    if low[:2] == ["ngày", "mai"]:
+        day, i = (now + timedelta(days=1)).date(), 2
+    elif low[:1] == ["mai"]:
+        day, i = (now + timedelta(days=1)).date(), 1
+    elif low[:2] == ["hôm", "nay"]:
+        day, i = now.date(), 2
+    elif low[:1] == ["nay"]:
+        day, i = now.date(), 1
+    elif words and re.match(r"\d", words[0]):
+        d = parse_day(words[0], now)
+        if d:
+            day, i = datetime.strptime(d, "%Y-%m-%d").date(), 1
+    hh = mm = None
+    if i < len(words):
+        m = re.fullmatch(r"(\d{1,2})[:hHgG](\d{2})?", words[i])
+        if m and int(m.group(1)) < 24 and int(m.group(2) or 0) < 60:
+            hh, mm = int(m.group(1)), int(m.group(2) or 0)
+            i += 1
+    if day is None and hh is None:
+        return None, s.strip()
+    if day is None:
+        day = now.date() if (hh, mm) > (now.hour, now.minute) else (now + timedelta(days=1)).date()
+    if hh is None:
+        hh, mm = 9, 0
+    return datetime(day.year, day.month, day.day, hh, mm), " ".join(words[i:]).strip()
+
+
+def add_task(nv, cid, han, noi_dung):
+    with task_lock:
+        tid = max([t["id"] for t in tasks] or [0]) + 1
+        t = {"id": tid, "cid": cid or "", "nv": nv, "noi_dung": noi_dung[:300], "han": han or "",
+             "xong": False, "tao_luc": now_str(), "nhac": False}
+        tasks.append(t)
+        del tasks[:-2000]
+    save_tasks()
+    return t
+
+
+def open_tasks(nv=None):
+    out = [t for t in tasks if not t["xong"] and (nv is None or t["nv"] == nv)]
+    return sorted(out, key=lambda t: t["han"] or "9999")
+
+
+def task_line(t, now=None):
+    now = now or datetime.now()
+    due = ""
+    if t["han"]:
+        d = parse_time(t["han"])
+        due = (("⚠️ TRỄ " if d and d < now else "⏰ ") + d.strftime("%H:%M %d/%m")) if d else t["han"]
+    who = f" · {person_name(t['nv'])}" if not is_admin(t["nv"]) else ""
+    cust = f" · {label(t['cid'])}" if t["cid"] and t["cid"] in store.customers else ""
+    return f"#{t['id']} {due} {t['noi_dung']}{cust}{who}".replace("  ", " ")
+
+
+def op_viec_add(who, arg_text):
+    words = arg_text.split(maxsplit=1)
+    cid = ""
+    if words and (words[0] in store.customers or words[0] == "-"):
+        cid = "" if words[0] == "-" else words[0]
+        arg_text = words[1] if len(words) > 1 else ""
+        if cid and not can_access(who, cid):
+            return "⛔ Khách này không do anh/chị phụ trách."
+    when, content = parse_when(arg_text)
+    if not content:
+        return ("Ví dụ:\n/viec 123456789 mai 9h Gọi lại báo giá căn A-12\n/viec - 15/11 14h Họp team\n"
+                "(thời gian: mai, hôm nay, 15/11, 9h, 14:30)")
+    owner = owner_of(cid) if cid and is_admin(who) else who
+    t = add_task(owner, cid, when.strftime("%Y-%m-%d %H:%M") if when else "", content)
+    if owner != who and owner:
+        send_text(owner, f"📝 Việc mới được giao: {task_line(t)}\nXong: /xong {t['id']}")
+    return f"📝 Đã thêm việc {task_line(t)}\nBot nhắc trước giờ hẹn. Xong thì: /xong {t['id']}"
+
+
+def op_xong(who, tid):
+    for t in tasks:
+        if str(t["id"]) == str(tid).lstrip("#"):
+            if not (is_admin(who) or t["nv"] == who):
+                return "⛔ Việc này không phải của anh/chị."
+            t["xong"], t["xong_luc"] = True, now_str()
+            save_tasks()
+            return f"✅ Xong việc #{t['id']}: {t['noi_dung']}"
+    return "Không thấy việc #" + str(tid) + ". Gõ /viec để xem danh sách."
+
+
+def remind_tasks(now=None):
+    now = now or datetime.now()
+    changed = False
+    for t in open_tasks():
+        d = parse_time(t["han"]) if t["han"] else None
+        if d and not t.get("nhac") and (d - now).total_seconds() <= 20 * 60 and (now - d).days < 1:
+            t["nhac"], changed = True, True
+            target = t["nv"] or ADMIN_CHAT_ID
+            if target:
+                send_text(target, "⏰ ĐẾN GIỜ: " + task_line(t, now)
+                          + (f"\n👉 /goi {t['cid']}" if t["cid"] else "") + f"\nXong: /xong {t['id']}")
+    if changed:
+        save_tasks()
+
+
+# ------------------------------------------------- hỗ trợ gọi điện
+CALL_PROMPT = """CHẾ ĐỘ KỊCH BẢN GỌI ĐIỆN (nội bộ, chuyên viên đọc trước khi gọi khách – không phải tin gửi khách).
+Dựa trên hồ sơ, lịch sử chat, ghi chú cuộc gọi trước, THÔNG TIN dự án và BẢNG HÀNG, viết ngắn gọn, dễ đọc trên điện thoại, không markdown:
+🎯 Mục tiêu cuộc gọi: (1 câu – thường là chốt lịch xem nhà / gửi bảng tính / chốt căn)
+👤 Khách là ai: (nhu cầu, ngân sách, đã hỏi gì, đang băn khoăn gì – 2 dòng)
+🗣 Mở đầu: (câu chào tự nhiên, nhắc đúng điều khách đã hỏi để khách nhớ ra)
+❓ 3 câu hỏi nên hỏi: (câu hỏi lựa chọn, dễ trả lời)
+🏠 Căn / phương án nên gợi ý: (đúng bảng hàng, còn hàng, hợp túi tiền – kèm 1 lý do)
+🛡 Nếu khách nói…: (2–3 câu từ chối dễ gặp với khách này + cách đáp ngắn)
+✅ Câu chốt: (mời xem nhà bằng 2 lựa chọn thời gian, hoặc bước nhỏ tiếp theo)
+Chỉ dùng số liệu có trong THÔNG TIN/BẢNG HÀNG; thiếu thì ghi "(kiểm tra lại)". Không dùng thẻ điều khiển."""
+
+RESULT_PROMPT = """CHẾ ĐỘ GHI KẾT QUẢ CUỘC GỌI (nội bộ). Bây giờ là {now}. Chuyên viên vừa gọi khách và ghi chú lại (có thể viết tắt, không dấu).
+Rút ra thông tin để cập nhật CRM. Chỉ trả về JSON, không viết gì khác:
+{{"tom_tat":"1 câu kết quả cuộc gọi",
+"ho_so":{{"ho_ten":"","sdt":"","ngan_sach":"","khu_vuc":"","loai_hinh":"","so_phong_ngu":"","muc_dich":"","thoi_gian_mua":"","can_vay":"","du_an_quan_tam":"","ban_khoan":"","diem_nhiet":0,"ly_do_nhiet":""}},
+"lich_hen":{{"luc":"YYYY-MM-DD HH:MM","du_an":"","dia_diem":"","ghi_chu":""}} hoặc null,
+"moc":[{{"ngay":"YYYY-MM-DD","viec":""}}],
+"viec":[{{"han":"YYYY-MM-DD HH:MM","noi_dung":"việc chuyên viên cần làm tiếp, ví dụ gửi bảng tính, gọi lại"}}],
+"khong_lam_phien":false,
+"da_mua":"",
+"tin_gui_khach":"1 tin ngắn chuyên viên có thể gửi khách ngay sau cuộc gọi (cảm ơn + xác nhận điều đã hẹn), hoặc rỗng",
+"goi_y":"1 câu bước tiếp theo nên làm"}}
+Quy tắc: chỉ ghi trường ho_so có thông tin MỚI (bỏ trống trường không biết). diem_nhiet chấm lại theo cuộc gọi (0–100; hẹn xem nhà/hỏi cọc ≥ 75; từ chối rõ ≤ 20).
+Thời gian tương đối ("chiều mai", "thứ 7") đổi ra ngày giờ cụ thể theo "Bây giờ". khong_lam_phien = true chỉ khi khách nói rõ không muốn liên lạc nữa.
+da_mua: ghi căn/dự án nếu khách ĐÃ chốt mua/đặt cọc qua chuyên viên, ngược lại rỗng."""
+
+
+def _with_note(msgs, note):
+    if msgs and msgs[-1]["role"] == "user":
+        msgs[-1]["content"] = (msgs[-1]["content"] if isinstance(msgs[-1]["content"], str) else "") + "\n" + note
+    else:
+        msgs.append({"role": "user", "content": note})
+    return msgs
+
+
+def customer_phone(cid):
+    c = store.customers.get(cid) or {}
+    return c.get("ho_so", {}).get("sdt") or (cid[4:] if cid.startswith("sdt:") else "")
+
+
+def op_goi(cid):
+    c = store.customers.get(cid)
+    if not c:
+        return "Không thấy khách " + cid
+    system = build_system(cid)
+    system.append({"type": "text", "text": CALL_PROMPT})
+    msgs = _with_note(store.api_messages(cid), "[Ghi chú nội bộ: soạn kịch bản gọi điện cho khách này]")
+    script = ask_claude(system, msgs, max_tokens=1300) or "(Em chưa soạn được kịch bản, anh/chị thử lại giúp em.)"
+    sdt = customer_phone(cid)
+    sc = heat(c)
+    return (f"📞 GỌI KHÁCH: {label(cid)}\n" + (f"☎️ {sdt}  ← bấm để gọi\n" if sdt else "⚠️ Chưa có SĐT – xin SĐT qua chat trước.\n")
+            + f"{heat_icon(sc)} {sc}/100 · {STAGE_LABEL.get(stage(c), '')}\n\n{script}\n\n"
+            f"✍️ Gọi xong ghi kết quả: /ketqua {cid} <khách nói gì, hẹn gì>")
+
+
+def op_ketqua(cid, who, note):
+    c = store.customers.get(cid)
+    if not c:
+        return "Không thấy khách " + cid
+    system = build_system(cid)
+    system.append({"type": "text", "text": RESULT_PROMPT.format(now=datetime.now().strftime("%H:%M %A %d/%m/%Y"))})
+    raw = ask_claude(system, [{"role": "user", "content": "GHI CHÚ SAU CUỘC GỌI CỦA CHUYÊN VIÊN:\n" + note}],
+                     max_tokens=1200)
+    a, b = raw.find("{"), raw.rfind("}")
+    try:
+        r = json.loads(raw[a:b + 1]) if a >= 0 else {}
+    except ValueError:
+        r = {}
+    done = []
+    before = heat(c)
+    hs = {k: v for k, v in (r.get("ho_so") or {}).items() if v not in (None, "", 0, [])}
+    if "diem_nhiet" in hs:
+        try:
+            sc = max(0, min(100, int(float(hs["diem_nhiet"]))))
+            hs["diem_nhiet"] = sc
+            hs["muc_do"] = "nong" if sc >= HOT else ("am" if sc >= WARM else "lanh")
+        except (TypeError, ValueError):
+            hs.pop("diem_nhiet")
+    if r.get("khong_lam_phien") is True:
+        hs["khong_lam_phien"] = "co"
+    changed = store.merge_profile(cid, hs)
+    if changed:
+        done.append("👤 Hồ sơ: " + ", ".join(f"{k}={v}" for k, v in changed.items() if k not in ("muc_do",)))
+    appt = r.get("lich_hen") if isinstance(r.get("lich_hen"), dict) else None
+    if appt and parse_time(appt.get("luc", "")):
+        save_appointment(cid, c.get("ten", ""), {**appt, "sdt": customer_phone(cid)})
+        with store.lock:
+            c.setdefault("lich", []).append({"luc": appt["luc"], "du_an": appt.get("du_an", ""),
+                                             "dia_diem": appt.get("dia_diem", ""), "nhac": False, "hoi_sau": False})
+        push_sheet("LichHen", {"chat_id": cid, "ten_zalo": c.get("ten", ""), **appt})
+        done.append(f"📅 Lịch hẹn: {appt['luc']} {appt.get('du_an', '')} {appt.get('dia_diem', '')}".strip())
+    for m in r.get("moc") or []:
+        if isinstance(m, dict) and add_milestone(cid, m.get("ngay", ""), m.get("viec", "")):
+            done.append(f"📌 Mốc: {m.get('ngay')} – {m.get('viec')}")
+    for v in r.get("viec") or []:
+        if isinstance(v, dict) and v.get("noi_dung"):
+            t = add_task(who, cid, v.get("han", "") if parse_time(v.get("han", "")) else "", v["noi_dung"])
+            done.append("📝 Việc: " + task_line(t))
+    with store.lock:
+        c.setdefault("cuoc_goi", []).append({"luc": now_str(), "nv": who, "ghi_chu": note[:1500],
+                                              "tom_tat": r.get("tom_tat", "")})
+        c["cuoc_goi"] = c["cuoc_goi"][-30:]
+        c["loai"] = "khach"
+        store.save()
+    push_sheet("KhachHang", {"chat_id": cid, "ten_zalo": c.get("ten", ""), **c["ho_so"], "do_nhiet": heat(c),
+                             "giai_doan": stage(c)})
+    after = heat(c)
+    if after >= HOT and before < HOT and not is_admin(who):
+        notify_admin(f"🔥 {person_name(who)} vừa gọi, khách NÓNG lên {after}/100: {label(cid)}\n{r.get('tom_tat', '')}")
+    out = [f"✅ ĐÃ GHI KẾT QUẢ GỌI: {label(cid)}", r.get("tom_tat", "") or "(đã lưu ghi chú)",
+           f"{heat_icon(after)} Độ nhiệt {before} → {after}/100"]
+    out += done
+    if r.get("da_mua"):
+        out.append(f"🏠 Khách đã chốt? Gõ: /damua {cid} {r['da_mua']}")
+    if r.get("goi_y"):
+        out.append("👉 " + r["goi_y"])
+    if r.get("tin_gui_khach") and not cid.startswith("sdt:"):
+        out.append(f"\n💬 Tin nên gửi khách (copy gửi qua bot):\n/tl {cid} {r['tin_gui_khach']}")
+    elif r.get("tin_gui_khach"):
+        out.append("\n💬 Tin nên gửi khách (Zalo cá nhân/SMS):\n" + r["tin_gui_khach"])
+    return "\n".join(out)
+
+
+PHONE_RE = re.compile(r"(?:\+?84|0)(?:[\s.\-]?\d){8,10}")
+
+
+def op_khachmoi(who, text):
+    m = PHONE_RE.search(text)
+    if not m:
+        return "Ví dụ: /khachmoi Chị Lan 0905123456 gọi hỏi 2PN FourS, ngân sách 3 tỷ"
+    phone = norm_phone(m.group(0))
+    name = text[:m.start()].strip(" ,-") or "Khách"
+    note = text[m.end():].strip(" ,-")
+    for cid0, c0 in store.customers.items():
+        if norm_phone(c0.get("ho_so", {}).get("sdt", "")) == phone:
+            return f"Khách này đã có: {label(cid0)} (phụ trách: {person_name(owner_of(cid0))})\n👉 /khach {cid0} · /goi {cid0}"
+    cid = "sdt:" + phone
+    c = store.get(cid, "dien_thoai", name)
+    with store.lock:
+        c["loai"] = "khach"
+        c["phu_trach"] = who if (is_staff(who) or is_admin(who)) else pick_owner()
+        store.save()
+    store.merge_profile(cid, {"ho_ten": name, "sdt": phone, "ghi_chu": note})
+    if note:
+        store.add_msg(cid, "user", f"[Ghi chú chuyên viên khi thêm khách] {note}")
+    old = find_old_customer(cid, phone)
+    return (f"✅ Đã thêm khách: {name} – {phone}\nMã khách: {cid}\n"
+            + (f"🔁 Là khách cũ trong data: {old.get('ten', '')}\n" if old else "")
+            + f"👉 Trước khi gọi: /goi {cid}\n✍️ Gọi xong: /ketqua {cid} <kết quả>\n📝 Hẹn việc: /viec {cid} mai 9h Gọi lại")
+
+
+def op_tl(cid, who, text):
+    if cid.startswith("sdt:"):
+        return f"Khách này chỉ có SĐT, bot không nhắn được. Gọi hoặc nhắn Zalo cá nhân: {cid[4:]}"
+    c = store.get(cid)
+    if cid.startswith("fb_") and not fb_window_open(c):
+        return "Facebook chỉ cho trang trả lời trong 24 giờ sau tin cuối của khách. Hãy gọi khách hoặc chờ khách nhắn lại."
+    send_text(cid, text)
+    store.add_msg(cid, "assistant", text)
+    if cid not in load_ignore():
+        store.pause(cid, HUMAN_PAUSE_MIN)
+    out = f"✅ Đã gửi. Bot nhường anh/chị nói chuyện với khách này {HUMAN_PAUSE_MIN} phút."
+    asked = [m["text"] for m in c.get("tin", []) if m["role"] == "user"]
+    if asked and not asked[-1].startswith("[") and is_admin(who):
+        out += f"\n💡 Câu này khách hay hỏi? Lưu để lần sau bot tự trả lời:\n/hoidap {asked[-1][:200]} => {text[:400]}"
+    return out
+
+
+def customer_card(cid):
+    c = store.customers[cid]
+    hs = "\n".join(f"{k}: {v}" for k, v in c["ho_so"].items() if k not in ("diem_nhiet", "ly_do_nhiet", "muc_do")) \
+        or "(chưa có)"
+    last = "\n".join(("👤 " if m["role"] == "user" else "🤖 ") + m["text"][:120] for m in c["tin"][-6:])
+    calls = "\n".join(f"📞 {x['luc'][5:16]} {person_name(x['nv'])}: {x.get('tom_tat') or x['ghi_chu'][:100]}"
+                      for x in c.get("cuoc_goi", [])[-3:])
+    tk = "\n".join(task_line(t) for t in open_tasks() if t["cid"] == cid)
+    sc = heat(c)
+    return (f"{label(cid)} · {c['kenh']} · từ {c['lan_dau']}\n"
+            f"{heat_icon(sc)} Độ nhiệt {sc}/100 – {c['ho_so'].get('ly_do_nhiet', '')}\n"
+            f"🧭 {STAGE_LABEL.get(stage(c), '')} · Phụ trách: {person_name(owner_of(cid))}\n"
+            + (f"☎️ {customer_phone(cid)}\n" if customer_phone(cid) else "") + f"\n{hs}"
+            + (f"\n\n{calls}" if calls else "") + (f"\n\n📝 Việc:\n{tk}" if tk else "")
+            + (f"\n\n{last}" if last else "") + f"\n\n👉 /goi {cid} · /ketqua {cid} … · /viec {cid} …")
+
+
+def team_report(days=7):
+    since = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+    people = [ADMIN_CHAT_ID] + active_staff()
+    rows = []
+    now = datetime.now()
+    for p in people:
+        mine = [(cid, c) for cid, c in store.customers.items() if c.get("loai") == "khach" and owner_of(cid) == p]
+        new = sum(1 for _, c in mine if c.get("lan_dau", "") >= since)
+        hot = sum(1 for _, c in mine if heat(c, now) >= HOT)
+        appts = sum(1 for _, c in mine for a in c.get("lich", []) if str(a.get("luc", "")) >= since)
+        bought = sum(1 for _, c in mine if (c.get("mua") or {}).get("ngay", "") >= since)
+        calls = sum(1 for _, c in mine for x in c.get("cuoc_goi", []) if x["luc"] >= since)
+        late = sum(1 for t in open_tasks(p) if t["han"] and parse_time(t["han"]) and parse_time(t["han"]) < now)
+        rows.append(f"👤 {person_name(p)}: {len(mine)} khách · 🆕 {new} · 🔥 {hot} · 📞 {calls} cuộc gọi · "
+                    f"📅 {appts} lịch · 🏠 {bought} chốt" + (f" · ⚠️ {late} việc trễ" if late else ""))
+    return f"📊 BÁO CÁO {days} NGÀY QUA\n\n" + "\n".join(rows)
+
+
+# =============================================================== FACEBOOK MESSENGER
+FB_VERIFY_TOKEN = os.environ.get("FB_VERIFY_TOKEN", "").strip()
+FB_APP_SECRET = os.environ.get("FB_APP_SECRET", "").strip()
+FB_PAGES = dict(x.split(":", 1) for x in os.environ.get("FB_PAGE_TOKENS", "").split(",") if ":" in x)
+FB_GRAPH = "https://graph.facebook.com/v19.0/"
+
+
+def fb_window_open(c, now=None):
+    """Facebook chỉ cho trang nhắn trong 24h kể từ tin cuối của khách."""
+    users = [parse_time(m["t"]) for m in c.get("tin", []) if m["role"] == "user"]
+    users = [u for u in users if u]
+    return bool(users) and ((now or datetime.now()) - max(users)).total_seconds() < 23.5 * 3600
+
+
+def fb_api(path, body, token):
+    return post_json(FB_GRAPH + path + "?access_token=" + urllib.parse.quote(token), body, timeout=30)
+
+
+def fb_token_for(cid):
+    page = (store.customers.get(cid) or {}).get("fb_page", "")
+    return FB_PAGES.get(page) or (next(iter(FB_PAGES.values())) if len(FB_PAGES) == 1 else "")
+
+
+def fb_send(cid, text):
+    token = fb_token_for(cid)
+    if not token:
+        log("Thiếu token trang Facebook cho", cid)
+        return
+    for part in split_text(text, 1900):
+        res = fb_api("me/messages", {"recipient": {"id": cid[3:]}, "messaging_type": "RESPONSE",
+                                     "message": {"text": part}}, token)
+        if res.get("error"):
+            log("Lỗi gửi Facebook:", str(res.get("error"))[:300])
+
+
+def fb_name(psid, token):
+    try:
+        req = urllib.request.Request(FB_GRAPH + psid + "?fields=first_name,last_name&access_token="
+                                     + urllib.parse.quote(token))
+        with urllib.request.urlopen(req, timeout=8) as r:
+            d = json.loads(r.read().decode("utf-8"))
+        return " ".join(x for x in (d.get("last_name"), d.get("first_name")) if x)
+    except Exception:
+        return ""
+
+
+def fb_signature_ok(raw: bytes, header: str):
+    if not FB_APP_SECRET:
+        return True
+    expected = "sha256=" + hmac.new(FB_APP_SECRET.encode(), raw, hashlib.sha256).hexdigest()
+    return hmac.compare_digest(expected, header or "")
+
+
+def handle_fb_payload(data):
+    for entry in data.get("entry", []) or []:
+        page = str(entry.get("id", ""))
+        for ev in entry.get("messaging", []) or []:
+            msg = ev.get("message") or {}
+            psid = str((ev.get("sender") or {}).get("id", ""))
+            if not msg or msg.get("is_echo") or not psid or psid == page:
+                continue
+            text = (msg.get("text") or "").strip()
+            images = [a["payload"]["url"] for a in msg.get("attachments", []) or []
+                      if a.get("type") == "image" and (a.get("payload") or {}).get("url")]
+            if images and not text:
+                text = "[Khách gửi ảnh]"
+            text = text or "[Khách gửi nội dung bot không đọc được]"
+            cid = "fb_" + psid
+            c = store.get(cid, "facebook")
+            with store.lock:
+                c["fb_page"] = page
+            name = c.get("ten") or fb_name(psid, FB_PAGES.get(page, ""))
+
+            def run(cid=cid, name=name, text=text, images=images):
+                try:
+                    with chat_lock(cid):
+                        handle_customer(cid, "facebook", name, text, images)
+                except Exception as e:
+                    log("Lỗi xử lý tin Facebook:", repr(e))
+            threading.Thread(target=run, daemon=True).start()
+
+
+# =============================================================== TRANG WEB CRM
+crm_tokens: dict = load_json(TOKEN_FILE, {})   # token -> {who, tao_luc}
+
+
+def crm_new_token(who, revoke=False):
+    if revoke:
+        for k in [k for k, v in crm_tokens.items() if v.get("who") == who]:
+            crm_tokens.pop(k)
+    tok = uuid_hex()
+    crm_tokens[tok] = {"who": who, "tao_luc": now_str()}
+    save_json(TOKEN_FILE, crm_tokens)
+    return tok
+
+
+def uuid_hex():
+    return hashlib.sha256(os.urandom(32)).hexdigest()[:40]
+
+
+def crm_user(token):
+    for k, v in list(crm_tokens.items()):
+        if hmac.compare_digest(k, token or ""):
+            t = parse_time(v.get("tao_luc", ""))
+            if t and (datetime.now() - t).days < 30 and (is_admin(v["who"]) or is_staff(v["who"])):
+                return v["who"]
+    return None
+
+
+def op_crm_link(who, revoke=False):
+    if not WEB_PORT:
+        save_env("WEB_PORT", "8080")
+        return ("🖥 Đã bật trang CRM (cổng 8080). Tắt bot rồi mở lại, sau đó gõ /crm lần nữa để lấy link.\n"
+                "Máy chạy bot là VPS thì chạy lại: bash cai_vps.sh")
+    base = (os.environ.get("CRM_URL") or f"http://localhost:{WEB_PORT}").rstrip("/")
+    tok = crm_new_token(who, revoke)
+    local = "localhost" in base
+    return (f"🖥 TRANG CRM CỦA {person_name(who).upper()}:\n{base}/crm#t={tok}\n\n"
+            "🔒 Link riêng của anh/chị, đừng gửi người khác. Hiệu lực 30 ngày. Lộ link: /crm moi để đổi.\n"
+            + ("💻 Link này chỉ mở được trên máy đang chạy bot. Chạy bot trên VPS thì mở được ở mọi nơi."
+               if local else ""))
+
+
+def crm_row(cid, c, now):
+    hs = c.get("ho_so", {})
+    nxt = sorted(a["luc"] for a in c.get("lich", []) if str(a.get("luc", "")) >= now.strftime("%Y-%m-%d %H:%M"))
+    return {"id": cid, "ten": hs.get("ho_ten") or c.get("ten") or "Khách", "sdt": customer_phone(cid),
+            "kenh": c.get("kenh", ""), "gd": stage(c, now), "gd_ten": STAGE_LABEL.get(stage(c, now), ""),
+            "nhiet": heat(c, now), "ly_do": hs.get("ly_do_nhiet", ""), "du_an": hs.get("du_an_quan_tam", ""),
+            "nhu_cau": " · ".join(str(hs[k]) for k in ("ngan_sach", "so_phong_ngu", "muc_dich") if hs.get(k)),
+            "lan_cuoi": c.get("lan_cuoi", ""), "nv": person_name(owner_of(cid)), "lich": nxt[0] if nxt else "",
+            "viec": sum(1 for t in tasks if not t["xong"] and t["cid"] == cid)}
+
+
+def crm_api(who, method, path, q, body):
+    """Xử lý API của trang CRM. Trả (mã HTTP, dữ liệu)."""
+    now = datetime.now()
+    admin = is_admin(who)
+
+    def mine(cid):
+        return admin or owner_of(cid) == who
+
+    def need(cid):
+        if cid not in store.customers:
+            return (404, {"ok": False, "msg": "Không thấy khách"})
+        if not mine(cid):
+            return (403, {"ok": False, "msg": "Khách này không do anh/chị phụ trách"})
+        return None
+
+    if method == "GET" and path == "/api/me":
+        return 200, {"ten": person_name(who), "admin": admin, "nv": [{"id": s, "ten": person_name(s)}
+                                                                      for s in [ADMIN_CHAT_ID] + active_staff()]}
+    if method == "GET" and path == "/api/tongquan":
+        with store.lock:
+            rows = [crm_row(cid, c, now) for cid, c in store.customers.items()
+                    if c.get("loai") == "khach" and mine(cid)]
+        dem = {}
+        for r in rows:
+            dem[r["gd"]] = dem.get(r["gd"], 0) + 1
+        today = now.strftime("%Y-%m-%d")
+        lich = sorted(({"luc": a["luc"], "id": cid, "ten": crm_row(cid, c, now)["ten"], "du_an": a.get("du_an", "")}
+                       for cid, c in store.customers.items() if mine(cid)
+                       for a in c.get("lich", []) if str(a.get("luc", "")).startswith(today)), key=lambda x: x["luc"])
+        tk = [dict(t, dong=task_line(t, now)) for t in open_tasks(None if admin else who)][:50]
+        return 200, {"dem": dem, "tong": len(rows), "nong": sorted([r for r in rows if r["nhiet"] >= HOT],
+                                                                  key=lambda r: -r["nhiet"])[:15],
+                     "lich": lich, "viec": tk, "nhan": STAGE_LABEL,
+                     "doi": team_report(7) if admin else ""}
+    if method == "GET" and path == "/api/khach":
+        kw = (q.get("q") or [""])[0].lower().strip()
+        gd = (q.get("gd") or [""])[0]
+        with store.lock:
+            rows = [crm_row(cid, c, now) for cid, c in store.customers.items()
+                    if c.get("loai") == "khach" and mine(cid)]
+        if kw:
+            rows = [r for r in rows if kw in (r["ten"] + r["sdt"] + r["du_an"] + r["nhu_cau"] + r["id"]).lower()]
+        if gd == "nong":
+            rows = [r for r in rows if r["nhiet"] >= HOT]
+        elif gd:
+            rows = [r for r in rows if r["gd"] == gd]
+        rows.sort(key=lambda r: (-r["nhiet"], r["lan_cuoi"]), reverse=False)
+        return 200, {"khach": rows[:300], "tong": len(rows)}
+    if method == "GET" and path == "/api/khach1":
+        cid = (q.get("id") or [""])[0]
+        err = need(cid)
+        if err:
+            return err
+        c = store.customers[cid]
+        return 200, {"row": crm_row(cid, c, now), "ho_so": c.get("ho_so", {}), "tin": c.get("tin", [])[-60:],
+                     "lich": c.get("lich", []), "moc": c.get("moc", []), "mua": c.get("mua"),
+                     "cuoc_goi": [dict(x, nv=person_name(x["nv"])) for x in c.get("cuoc_goi", [])][-10:],
+                     "danh_gia": c.get("danh_gia"), "chien_luoc": c.get("chien_luoc", ""),
+                     "viec": [dict(t, dong=task_line(t, now)) for t in open_tasks() if t["cid"] == cid],
+                     "nhan_duoc": not cid.startswith("sdt:") and (not cid.startswith("fb_") or fb_window_open(c, now))}
+    if method != "POST":
+        return 404, {"ok": False, "msg": "not found"}
+    cid = str(body.get("id", ""))
+    if path == "/api/khachmoi":
+        msg = op_khachmoi(who, f"{body.get('ten', '')} {body.get('sdt', '')} {body.get('ghi_chu', '')}")
+        return 200, {"ok": msg.startswith("✅"), "msg": msg}
+    if path == "/api/xong":
+        msg = op_xong(who, body.get("viec", ""))
+        return 200, {"ok": msg.startswith("✅"), "msg": msg}
+    if path == "/api/viec":
+        if cid:
+            err = need(cid)
+            if err:
+                return err
+        msg = op_viec_add(who, f"{cid or '-'} {body.get('han', '')} {body.get('noi_dung', '')}".strip())
+        return 200, {"ok": msg.startswith("📝"), "msg": msg}
+    err = need(cid)
+    if err:
+        return err
+    if path == "/api/tl" and str(body.get("text", "")).strip():
+        msg = op_tl(cid, who, str(body["text"]).strip()[:2000])
+        return 200, {"ok": msg.startswith("✅"), "msg": msg}
+    if path == "/api/goi":
+        return 200, {"ok": True, "msg": op_goi(cid)}
+    if path == "/api/ketqua" and str(body.get("text", "")).strip():
+        return 200, {"ok": True, "msg": op_ketqua(cid, who, str(body["text"]).strip()[:3000])}
+    if path == "/api/giao" and admin:
+        sid = str(body.get("nv", ""))
+        if not (is_staff(sid) or is_admin(sid)):
+            return 400, {"ok": False, "msg": "Nhân viên không hợp lệ"}
+        assign(cid, sid)
+        return 200, {"ok": True, "msg": f"✅ Đã giao {label(cid)} cho {person_name(sid)}"}
+    return 400, {"ok": False, "msg": "Yêu cầu không hợp lệ"}
+
+
+CRM_HTML = r"""<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CRM BĐS</title>
+<style>
+:root{--bg:#f4f6f5;--card:#fff;--ink:#1d2522;--mute:#6b7772;--line:#e1e7e4;--brand:#0f5c4a;--brand2:#e8b04b;--hot:#c2410c;--warm:#b7791f;--cold:#2563eb}
+@media (prefers-color-scheme:dark){:root{--bg:#111614;--card:#1a211e;--ink:#e6ece9;--mute:#9aa7a1;--line:#2a3430;--brand:#3fa588}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--brand);color:#fff;padding:10px 16px;display:flex;gap:10px;align-items:center}
+header b{flex:1;font-size:17px}header small{opacity:.85}
+nav{display:flex;gap:6px;padding:10px 16px;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:44px;z-index:4;overflow-x:auto}
+nav button,.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:18px;padding:6px 12px;font:inherit;cursor:pointer;white-space:nowrap}
+nav button.on,.chip.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+main{max-width:980px;margin:0 auto;padding:12px 16px 80px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.row{display:flex;gap:10px;align-items:center}.grow{flex:1;min-width:0}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:10px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;cursor:pointer}.stat b{font-size:22px;display:block}
+.heat{font-weight:700;border-radius:8px;padding:2px 8px;font-size:13px;color:#fff;background:var(--cold)}
+.heat.h{background:var(--hot)}.heat.w{background:var(--warm)}
+.mute{color:var(--mute);font-size:13px}.ttl{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+h3{margin:14px 0 8px;font-size:15px}
+input,textarea,select{width:100%;font:inherit;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+textarea{min-height:80px;resize:vertical}
+.btn{border:0;background:var(--brand);color:#fff;border-radius:10px;padding:9px 14px;font:inherit;font-weight:600;cursor:pointer}
+.btn.sec{background:transparent;color:var(--brand);border:1px solid var(--brand)}.btn.y{background:var(--brand2);color:#1d2522}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.msg{padding:8px 10px;border-radius:10px;margin:4px 0;max-width:85%;white-space:pre-wrap;word-wrap:break-word}
+.msg.u{background:var(--bg);border:1px solid var(--line)}.msg.a{background:var(--brand);color:#fff;margin-left:auto}
+.out{white-space:pre-wrap;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:8px}
+#sheet{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;z-index:10}
+#sheet .box{position:absolute;inset:auto 0 0 0;max-height:92vh;overflow:auto;background:var(--bg);border-radius:16px 16px 0 0;padding:14px 16px 30px}
+@media (min-width:760px){#sheet .box{inset:30px auto 30px 50%;transform:translateX(-50%);width:720px;border-radius:16px}}
+.x{float:right;border:0;background:none;font-size:26px;color:var(--ink);cursor:pointer}
+.empty{color:var(--mute);text-align:center;padding:30px}
+a{color:var(--brand)}a.btn{text-decoration:none;display:inline-block}
+</style></head><body>
+<header><b>🏠 CRM BĐS</b><small id="me"></small></header>
+<nav id="tabs"><button data-t="tq" class="on">Tổng quan</button><button data-t="kh">Khách hàng</button><button data-t="vi">Việc cần làm</button><button data-t="moi">+ Thêm khách</button></nav>
+<main id="main"><div class="empty">Đang tải…</div></main>
+<div id="sheet"><div class="box" id="box"></div></div>
+<script>
+(function(){
+var T=(location.hash.match(/t=([a-f0-9]+)/)||[])[1];
+try{if(T){localStorage.setItem("crm_t",T);history.replaceState(null,"",location.pathname);}else{T=localStorage.getItem("crm_t");}}catch(e){}
+var $=function(s){return document.querySelector(s)},main=$("#main"),ME={};
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function api(p,body){return fetch(p,{method:body?"POST":"GET",headers:{"X-Token":T||"","Content-Type":"application/json"},body:body?JSON.stringify(body):undefined})
+ .then(function(r){if(r.status==401){throw new Error("auth")}return r.json()})}
+function fail(e){main.innerHTML='<div class="card">'+(e.message=="auth"?"🔒 Link đăng nhập không đúng hoặc đã hết hạn. Nhắn bot <b>/crm</b> trên Zalo để lấy link mới.":"Lỗi kết nối: "+esc(e.message))+"</div>"}
+var LB={ho_ten:"Họ tên",sdt:"SĐT",ngan_sach:"Ngân sách",khu_vuc:"Khu vực",loai_hinh:"Loại hình",so_phong_ngu:"Số phòng ngủ",muc_dich:"Mục đích",thoi_gian_mua:"Thời gian mua",can_vay:"Cần vay",du_an_quan_tam:"Dự án quan tâm",da_mua:"Đã mua",ban_khoan:"Băn khoăn",khong_lam_phien:"Không làm phiền",ghi_chu:"Ghi chú"};
+function heat(n){return '<span class="heat '+(n>=70?"h":n>=40?"w":"")+'">'+n+"</span>"}
+function rowHtml(r){return '<div class="card row" data-id="'+esc(r.id)+'"><div>'+heat(r.nhiet)+'</div><div class="grow"><div class="ttl">'+esc(r.ten)+(r.sdt?' · <span class="mute">'+esc(r.sdt)+"</span>":"")+'</div><div class="mute">'+esc(r.gd_ten)+(r.du_an?" · "+esc(r.du_an):"")+(r.nhu_cau?" · "+esc(r.nhu_cau):"")+'</div><div class="mute">'+(r.ly_do?esc(r.ly_do)+" · ":"")+"nhắn "+esc((r.lan_cuoi||"").slice(5))+(r.lich?" · 📅 "+esc(r.lich.slice(5)):"")+(r.viec?" · 📝 "+r.viec:"")+(ME.admin?" · 👤 "+esc(r.nv):"")+"</div></div></div>"}
+function bindRows(){main.querySelectorAll("[data-id]").forEach(function(el){el.onclick=function(){openK(el.getAttribute("data-id"))}})}
+function tab(t){document.querySelectorAll("#tabs button").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-t")==t)});({tq:tq,kh:kh,vi:vi,moi:moi})[t]()}
+document.querySelectorAll("#tabs button").forEach(function(b){b.onclick=function(){tab(b.getAttribute("data-t"))}});
+function tq(){api("/api/tongquan").then(function(d){
+ var order=["moi","danh_gia","hen","nuoi","da_mua","ngung"],h='<div class="stats"><div class="stat" data-gd="nong"><span class="mute">🔥 Khách nóng</span><b>'+d.nong.length+'</b></div>';
+ order.forEach(function(k){h+='<div class="stat" data-gd="'+k+'"><span class="mute">'+esc(d.nhan[k])+"</span><b>"+(d.dem[k]||0)+"</b></div>"});
+ h+="</div><h3>📅 Lịch hẹn hôm nay</h3>"+(d.lich.length?d.lich.map(function(a){return '<div class="card row" data-id="'+esc(a.id)+'"><b>'+esc(a.luc.slice(11))+'</b><div class="grow">'+esc(a.ten)+' <span class="mute">'+esc(a.du_an)+"</span></div></div>"}).join(""):'<div class="mute">Chưa có</div>');
+ h+="<h3>🔥 Nên gọi ngay</h3>"+(d.nong.length?d.nong.map(rowHtml).join(""):'<div class="mute">Chưa có khách nóng</div>');
+ h+="<h3>📝 Việc cần làm</h3>"+taskList(d.viec);
+ if(d.doi)h+='<h3>👥 Đội sale</h3><div class="card out">'+esc(d.doi)+"</div>";
+ main.innerHTML=h;bindRows();bindTasks();
+ main.querySelectorAll("[data-gd]").forEach(function(el){el.onclick=function(){tab("kh");setTimeout(function(){kh(el.getAttribute("data-gd"))},0)}})}).catch(fail)}
+var GD="",Q="";
+function kh(gd){if(gd!==undefined)GD=gd;var chips=[["","Tất cả"],["nong","🔥 Nóng"],["moi","🆕 Mới"],["danh_gia","🩺 Đánh giá"],["hen","📅 Hẹn"],["nuoi","🌱 Nuôi"],["da_mua","🏠 Đã mua"]];
+ main.innerHTML='<input id="q" placeholder="Tìm tên, SĐT, dự án…" value="'+esc(Q)+'"><div class="btns">'+chips.map(function(c){return '<button class="chip'+(c[0]==GD?" on":"")+'" data-c="'+c[0]+'">'+c[1]+"</button>"}).join("")+'</div><div id="list" class="empty">Đang tải…</div>';
+ main.querySelectorAll("[data-c]").forEach(function(b){b.onclick=function(){kh(b.getAttribute("data-c"))}});
+ var q=$("#q"),tm;q.oninput=function(){clearTimeout(tm);tm=setTimeout(function(){Q=q.value;load()},300)};load();
+ function load(){api("/api/khach?gd="+encodeURIComponent(GD)+"&q="+encodeURIComponent(Q)).then(function(d){var l=$("#list");l.className="";l.innerHTML=d.khach.length?'<div class="mute">'+d.tong+" khách</div>"+d.khach.map(rowHtml).join(""):'<div class="empty">Không có khách</div>';bindRows()}).catch(fail)}}
+function taskList(v){return v.length?v.map(function(t){return '<div class="card row"><div class="grow">'+esc(t.dong)+'</div><button class="btn sec" data-done="'+t.id+'">Xong</button></div>'}).join(""):'<div class="mute">Không có việc nào 🎉</div>'}
+function bindTasks(){main.querySelectorAll("[data-done]").forEach(function(b){b.onclick=function(){api("/api/xong",{viec:b.getAttribute("data-done")}).then(function(){b.closest(".card").remove()})}})}
+function vi(){api("/api/tongquan").then(function(d){main.innerHTML='<div class="card"><b>Thêm việc</b><input id="vh" placeholder="Thời gian: mai 9h / 26/10 14:30" style="margin:8px 0"><input id="vn" placeholder="Nội dung việc"><div class="btns"><button class="btn" id="va">Thêm</button></div><div id="vo"></div></div><h3>📝 Việc đang mở</h3>'+taskList(d.viec);bindTasks();
+ $("#va").onclick=function(){api("/api/viec",{han:$("#vh").value,noi_dung:$("#vn").value}).then(function(r){$("#vo").innerHTML='<div class="out">'+esc(r.msg)+"</div>";if(r.ok)setTimeout(vi,900)})}}).catch(fail)}
+function moi(){main.innerHTML='<div class="card"><b>Thêm khách từ cuộc gọi / gặp trực tiếp</b><input id="mt" placeholder="Tên khách" style="margin:8px 0"><input id="ms" placeholder="Số điện thoại" inputmode="tel" style="margin-bottom:8px"><textarea id="mg" placeholder="Ghi chú: hỏi dự án gì, ngân sách, nhu cầu…"></textarea><div class="btns"><button class="btn" id="ma">Lưu khách</button></div><div id="mo"></div></div>';
+ $("#ma").onclick=function(){api("/api/khachmoi",{ten:$("#mt").value,sdt:$("#ms").value,ghi_chu:$("#mg").value}).then(function(r){$("#mo").innerHTML='<div class="out">'+esc(r.msg)+"</div>"})}}
+function openK(id){var box=$("#box");$("#sheet").style.display="block";box.innerHTML='<div class="empty">Đang tải…</div>';
+ api("/api/khach1?id="+encodeURIComponent(id)).then(function(d){var r=d.row,hs=d.ho_so||{};
+ var h='<button class="x" id="cx">×</button><div class="row">'+heat(r.nhiet)+'<div class="grow"><div class="ttl">'+esc(r.ten)+'</div><div class="mute">'+esc(r.gd_ten)+" · "+esc(r.kenh)+" · 👤 "+esc(r.nv)+"</div></div></div>";
+ h+='<div class="btns">'+(r.sdt?'<a class="btn" href="tel:'+esc(r.sdt)+'">📞 Gọi '+esc(r.sdt)+"</a>":"")+'<button class="btn y" id="kgoi">🗒 Kịch bản gọi</button><button class="btn sec" id="kkq">✍️ Ghi kết quả gọi</button>'+(d.nhan_duoc?'<button class="btn sec" id="ktl">💬 Nhắn khách</button>':"")+'<button class="btn sec" id="kvi">📝 Thêm việc</button></div><div id="kact"></div>';
+ if(ME.admin)h+='<div class="row" style="margin:6px 0"><span class="mute">Giao cho</span><select id="kgiao">'+ME.nv.map(function(n){return '<option value="'+esc(n.id)+'"'+(n.ten==r.nv?" selected":"")+">"+esc(n.ten)+"</option>"}).join("")+"</select></div>";
+ if(r.ly_do)h+='<div class="mute">🌡 '+esc(r.ly_do)+"</div>";
+ if(d.chien_luoc)h+='<div class="card"><b>🤖 Chiến lược chăm sóc</b><div>'+esc(d.chien_luoc)+"</div></div>";
+ var keys=Object.keys(hs).filter(function(k){return ["diem_nhiet","ly_do_nhiet","muc_do"].indexOf(k)<0});
+ h+='<div class="card"><b>👤 Hồ sơ</b>'+(keys.length?keys.map(function(k){return '<div><span class="mute">'+esc(LB[k]||k)+":</span> "+esc(hs[k])+"</div>"}).join(""):'<div class="mute">Chưa có</div>')+"</div>";
+ if(d.lich.length||d.moc.length)h+='<div class="card"><b>📅 Lịch & mốc</b>'+d.lich.map(function(a){return "<div>📅 "+esc(a.luc)+" "+esc(a.du_an)+" "+esc(a.dia_diem||"")+"</div>"}).join("")+d.moc.map(function(m){return "<div>📌 "+esc(m.ngay)+" – "+esc(m.viec)+"</div>"}).join("")+"</div>";
+ if(d.viec.length)h+='<div class="card"><b>📝 Việc</b>'+d.viec.map(function(t){return "<div>"+esc(t.dong)+"</div>"}).join("")+"</div>";
+ if(d.cuoc_goi.length)h+='<div class="card"><b>📞 Cuộc gọi</b>'+d.cuoc_goi.slice().reverse().map(function(x){return '<div><span class="mute">'+esc(x.luc)+" · "+esc(x.nv)+"</span><br>"+esc(x.tom_tat||x.ghi_chu)+"</div>"}).join("")+"</div>";
+ h+='<div class="card"><b>💬 Hội thoại</b>'+(d.tin.length?d.tin.map(function(m){return '<div class="msg '+(m.role=="user"?"u":"a")+'">'+esc(m.text)+'<div class="mute" style="font-size:11px;'+(m.role=="user"?"":"color:#dfe")+'">'+esc((m.t||"").slice(5))+"</div></div>"}).join(""):'<div class="mute">Chưa có tin nhắn</div>')+"</div>";
+ box.innerHTML=h;$("#cx").onclick=close;
+ function act(html){$("#kact").innerHTML=html}
+ function out(p,b){act('<div class="out">⏳ Đang xử lý…</div>');api(p,b).then(function(x){act('<div class="out">'+esc(x.msg)+"</div>")})}
+ $("#kgoi").onclick=function(){out("/api/goi",{id:id})};
+ $("#kkq").onclick=function(){act('<textarea id="kt" placeholder="Khách nói gì, hẹn gì, băn khoăn gì… (viết tắt cũng được)"></textarea><div class="btns"><button class="btn" id="ks">Lưu kết quả</button></div>');$("#ks").onclick=function(){out("/api/ketqua",{id:id,text:$("#kt").value})}};
+ if($("#ktl"))$("#ktl").onclick=function(){act('<textarea id="kt" placeholder="Nội dung gửi khách"></textarea><div class="btns"><button class="btn" id="ks">Gửi qua bot</button></div>');$("#ks").onclick=function(){out("/api/tl",{id:id,text:$("#kt").value})}};
+ $("#kvi").onclick=function(){act('<input id="kh2" placeholder="Thời gian: mai 9h / 26/10 14:30" style="margin-bottom:8px"><input id="kn" placeholder="Nội dung việc"><div class="btns"><button class="btn" id="ks">Thêm việc</button></div>');$("#ks").onclick=function(){out("/api/viec",{id:id,han:$("#kh2").value,noi_dung:$("#kn").value})}};
+ if($("#kgiao"))$("#kgiao").onchange=function(){out("/api/giao",{id:id,nv:$("#kgiao").value})};
+ }).catch(function(e){box.innerHTML='<button class="x" id="cx">×</button><div class="out">'+esc(e.message)+"</div>";$("#cx").onclick=close})}
+function close(){$("#sheet").style.display="none"}
+$("#sheet").onclick=function(e){if(e.target.id=="sheet")close()};
+api("/api/me").then(function(m){ME=m;$("#me").textContent=m.ten+(m.admin?" · Quản lý":"");tq()}).catch(fail);
+})();
+</script></body></html>
+"""
 
 
 # =============================================================== ZALO UPDATE
@@ -2346,6 +3309,22 @@ def process_zalo_update(update):
             if text.lower() == "/id":
                 send_text(cid, f"chat_id của bạn: {cid}")
                 return
+            if text.lower().startswith("/thamgia"):
+                op_join(cid, name, text)
+                return
+            if is_staff(cid) and not is_admin(cid):
+                _ctx.who = cid
+                if text.startswith("/"):
+                    if not handle_admin(text, cid):
+                        reply("Lệnh chưa đúng hoặc thiếu thông tin. Gõ /hd để xem các lệnh.")
+                elif images or not (msg.get("text") or "").strip():
+                    reply("Tài liệu dự án (ảnh, file CSBH) anh/chị gửi cho chủ bot để cập nhật nha.")
+                else:
+                    reply("Anh/chị đang là nhân viên trong bot. Gõ /hd xem lệnh. "
+                          "Muốn thử bot như khách, dùng một Zalo khác nhé.")
+                return
+            if is_admin(cid):
+                _ctx.who = cid
             if ADMIN_CHAT_ID and cid == ADMIN_CHAT_ID and images:
                 handle_admin_image(images[0], msg.get("caption") or "")
                 return
@@ -2354,7 +3333,7 @@ def process_zalo_update(update):
                 threading.Thread(target=handle_admin_file, args=(msg, event), daemon=True).start()
                 return
             if ADMIN_CHAT_ID and cid == ADMIN_CHAT_ID and text.startswith("/"):
-                if not handle_admin(text):
+                if not handle_admin(text, cid):
                     notify_admin("Lệnh chưa đúng hoặc thiếu thông tin. Gõ /hd để xem các lệnh.")
                 return
             handle_customer(cid, "zalo", name, text, images)
@@ -2417,10 +3396,52 @@ class WebHandler(BaseHTTPRequestHandler):
         self._cors()
         self.end_headers()
 
+    def _html(self, html):
+        body = html.encode("utf-8")
+        self.send_response(200)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("X-Frame-Options", "DENY")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def _text(self, code, text):
+        body = text.encode("utf-8")
+        self.send_response(code)
+        self.send_header("Content-Type", "text/plain; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def _api(self, method, u, body):
+        who = crm_user(self.headers.get("X-Token", ""))
+        if not who:
+            return self._json(401, {"ok": False, "msg": "Chưa đăng nhập"})
+        try:
+            code, data = crm_api(who, method, u.path, parse_qs(u.query), body or {})
+        except Exception as e:
+            log("Lỗi CRM:", repr(e))
+            code, data = 500, {"ok": False, "msg": "Lỗi máy chủ"}
+        return self._json(code, data)
+
     def do_GET(self):
         u = urlparse(self.path)
         if u.path == "/health":
             return self._json(200, {"ok": True})
+        if u.path == "/favicon.ico":
+            self.send_response(204)
+            self.end_headers()
+            return
+        if u.path in ("/crm", "/crm/"):
+            return self._html(CRM_HTML)
+        if u.path.startswith("/api/"):
+            return self._api("GET", u, None)
+        if u.path == "/fb/webhook":
+            q = parse_qs(u.query)
+            if FB_VERIFY_TOKEN and (q.get("hub.verify_token") or [""])[0] == FB_VERIFY_TOKEN:
+                return self._text(200, (q.get("hub.challenge") or [""])[0])
+            return self._text(403, "forbidden")
         if u.path == "/poll":
             sid = (parse_qs(u.query).get("sid") or [""])[0]
             if not SID_RE.match(sid):
@@ -2431,13 +3452,26 @@ class WebHandler(BaseHTTPRequestHandler):
         self._json(404, {"error": "not found"})
 
     def do_POST(self):
-        if urlparse(self.path).path != "/chat":
+        u = urlparse(self.path)
+        if u.path not in ("/chat", "/fb/webhook") and not u.path.startswith("/api/"):
             return self._json(404, {"error": "not found"})
         try:
-            n = min(int(self.headers.get("Content-Length", 0)), 20000)
-            data = json.loads(self.rfile.read(n).decode("utf-8") or "{}")
+            n = min(int(self.headers.get("Content-Length", 0)), 2_000_000)
+            raw = self.rfile.read(n)
+            data = json.loads(raw.decode("utf-8") or "{}")
         except (ValueError, UnicodeDecodeError):
             return self._json(400, {"error": "json"})
+        if u.path == "/fb/webhook":
+            if not fb_signature_ok(raw, self.headers.get("X-Hub-Signature-256", "")):
+                return self._text(403, "bad signature")
+            self._text(200, "EVENT_RECEIVED")  # trả lời Facebook ngay, xử lý sau
+            try:
+                handle_fb_payload(data)
+            except Exception as e:
+                log("Lỗi webhook Facebook:", repr(e))
+            return
+        if u.path.startswith("/api/"):
+            return self._api("POST", u, data if isinstance(data, dict) else {})
         sid, text = str(data.get("sid", "")), str(data.get("text", "")).strip()[:1000]
         if not SID_RE.match(sid) or not text:
             return self._json(400, {"error": "input"})
@@ -2458,7 +3492,8 @@ class WebHandler(BaseHTTPRequestHandler):
 def start_web():
     srv = ThreadingHTTPServer(("0.0.0.0", WEB_PORT), WebHandler)
     threading.Thread(target=srv.serve_forever, daemon=True).start()
-    log(f"Khung chat web đang chạy ở cổng {WEB_PORT} (POST /chat, GET /poll)")
+    log(f"Web đang chạy ở cổng {WEB_PORT}: khung chat (/chat), trang CRM (/crm)"
+        + (", Facebook (/fb/webhook)" if FB_PAGES else "") + ". Lấy link CRM: nhắn bot /crm")
     return srv
 
 

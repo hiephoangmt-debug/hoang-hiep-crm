@@ -15,6 +15,11 @@
 12. [Chạy 24/7 trên VPS](#12-chạy-247-trên-vps)
 13. [Lỗi thường gặp & lưu ý](#13-lỗi-thường-gặp--lưu-ý)
 14. [Dùng trên nhiều máy: Windows, Mac, iPad, điện thoại](#14-dùng-trên-nhiều-máy-windows-mac-ipad-điện-thoại)
+15. [Hỗ trợ gọi điện: kịch bản gọi, ghi kết quả, thêm khách](#15-hỗ-trợ-gọi-điện-kịch-bản-gọi-ghi-kết-quả-thêm-khách)
+16. [Việc cần làm & nhắc việc](#16-việc-cần-làm--nhắc-việc)
+17. [Quản lý đội sale](#17-quản-lý-đội-sale)
+18. [Trang web CRM](#18-trang-web-crm)
+19. [Facebook Messenger](#19-facebook-messenger)
 
 ---
 
@@ -532,6 +537,13 @@ Nhắn các lệnh này cho bot từ Zalo của anh/chị. Gõ `/hd` để bot g
 | | `/baokhach <tin mới>` | Báo tin mới cho đúng khách |
 | | `/chaohang <dự án>` | Chào dự án mới cho đúng khách |
 | | `/xem <mã CD> <số>` · `/gui <mã CD>` | Xem / gửi tin của chiến dịch |
+| **Gọi điện & việc** | `/goi <mã>` | Kịch bản gọi riêng cho khách |
+| | `/ketqua <mã> <kết quả>` | Ghi kết quả gọi, bot tự cập nhật hồ sơ, lịch, việc |
+| | `/khachmoi <tên> <sđt> [ghi chú]` | Thêm khách từ cuộc gọi / gặp trực tiếp |
+| | `/viec` · `/viec <mã \| -> <mai 9h> <nội dung>` · `/xong <số>` | Việc cần làm |
+| | `/crm` · `/crm moi` | Link trang web CRM · đổi link |
+| **Đội sale** | `/themnv <tên> [sđt]` · `/nv` · `/xoanv <số>` | Thêm, xem, bớt nhân viên |
+| | `/giao <mã khách> <số \| toi>` · `/baocao [ngày]` | Giao khách · báo cáo từng người |
 | **Zalo cá nhân** | `/ketban <mã hoặc mô tả>` | Soạn lời mời kết bạn |
 | | `/soan <tin khách>` · `/dich <tin>` | Soạn câu trả lời · dịch tin viết tắt |
 | **Khác** | `/thongke` · `/id` · `/hd` | Số liệu · xem chat_id · danh sách lệnh |
@@ -693,3 +705,124 @@ Mỗi lệnh hỏi mật khẩu một lần.
   3. Chạy lại bot.
 
   Thông tin dự án, bảng hàng, token và key vẫn giữ nguyên.
+
+---
+
+## 15. Hỗ trợ gọi điện: kịch bản gọi, ghi kết quả, thêm khách
+
+**Trước khi gọi:** `/goi <mã khách>`. Bot gửi kịch bản riêng cho khách đó, gồm:
+- SĐT (bấm vào là gọi);
+- mục tiêu cuộc gọi;
+- khách là ai, đã hỏi gì, còn băn khoăn gì;
+- câu mở đầu, 3 câu hỏi nên hỏi, căn nên gợi ý (đúng bảng hàng);
+- cách đáp khi khách từ chối, câu chốt lịch xem nhà.
+
+**Gọi xong:** `/ketqua <mã> <khách nói gì>`. Viết tắt, không dấu, hoặc **đọc bằng giọng nói** (bấm micro trên bàn phím điện thoại) đều được. Ví dụ:
+```
+/ketqua 123456789 ok xem nha mau 9h sang CN di 2 vo chong, lo vay NH, ngan sach 3ty5
+```
+Bot tự làm:
+- cập nhật **hồ sơ**, chấm lại **độ nhiệt**;
+- tạo **lịch hẹn**, **mốc**, **việc cần làm tiếp**;
+- gợi ý **tin nhắn gửi khách** ngay sau cuộc gọi.
+
+Lần sau khách nhắn bot, bot **biết nội dung cuộc gọi** để tư vấn đúng mạch.
+
+**Khách gọi điện hoặc gặp trực tiếp** (không nhắn bot):
+```
+/khachmoi Chị Lan 0905123456 gọi hỏi 2PN FourS, ngân sách 3 tỷ
+```
+Bot tạo hồ sơ (mã dạng `sdt:0905123456`). Sau đó dùng `/goi`, `/ketqua`, `/viec` như khách bình thường. Khách loại này bot **không tự nhắn được** (chỉ có SĐT), nhưng vẫn được **đánh giá lại** sau 3 và 7 ngày, và nhắc việc cho anh/chị.
+
+---
+
+## 16. Việc cần làm & nhắc việc
+
+```
+/viec 123456789 mai 9h Gọi lại báo giá căn A-12
+/viec - 15/11 14:30 Họp team
+/viec                ← xem việc của tôi
+/xong 5              ← xong việc số 5
+```
+- Thời gian viết được kiểu: `mai`, `hôm nay`, `15/11`, `9h`, `9h30`, `14:30`.
+- **Đến giờ (trước khoảng 20 phút)**, bot nhắn nhắc kèm lệnh `/goi` nếu việc gắn với khách.
+- Báo cáo buổi sáng có danh sách việc trong ngày và việc **trễ hạn ⚠️**.
+- `/ketqua` tự tạo việc từ nội dung cuộc gọi, ví dụ "gửi bảng tính trước 9h mai".
+
+---
+
+## 17. Quản lý đội sale
+
+**Thêm nhân viên:**
+1. Anh/chị nhắn bot: `/themnv Thảo 0905000111` → bot trả về mã mời, ví dụ `/thamgia 482915`.
+2. Gửi nhân viên **link Zalo của bot** và mã đó.
+3. Nhân viên mở bot trên Zalo của họ → nhắn `/thamgia 482915`. Xong.
+
+**Bot tự làm:**
+- **Khách mới tự chia** cho người đang giữ ít khách nhất. Muốn tự giao tay thì đặt `TU_CHIA_KHACH=0` trong `.env`.
+- Mỗi nhân viên nhận thông báo **khách của mình**: 🆕 khách mới, 🔥 khách nóng, 📅 lịch hẹn, 🙋 cần xử lý, ⏰ nhắc lịch, 🩺 đánh giá lại, 📝 nhắc việc, ☀️ báo cáo sáng riêng.
+- Anh/chị (chủ bot) vẫn nhận **khách mới, khách nóng, lịch hẹn và việc cần xử lý của cả đội** để theo dõi.
+- Bot nói với khách tên chuyên viên phụ trách, ví dụ "chuyên viên Thảo sẽ gọi anh/chị".
+
+**Nhân viên dùng được:**
+- `/khach`, `/nong`, `/goi`, `/ketqua`, `/khachmoi`, `/tl`, `/viec`, `/xong`, `/moc`, `/damua`, `/soan`, `/ketban`, `/crm`, `/hd`;
+- **chỉ với khách của mình**.
+
+Lệnh dạy bot (CSBH, bảng hàng, chiến dịch) chỉ chủ bot dùng được.
+
+**Quản lý:**
+- `/nv`: danh sách đội, số khách, khách nóng, việc của từng người.
+- `/giao <mã khách> 2`: giao khách cho người số 2. `/giao <mã> toi`: lấy về mình.
+- `/baocao` (hoặc `/baocao 30`): mỗi người bao nhiêu khách mới, khách nóng, cuộc gọi, lịch hẹn, chốt, việc trễ.
+- `/xoanv 2`: cho người số 2 rời đội. Khách và việc của họ tự chia lại.
+
+---
+
+## 18. Trang web CRM
+
+Xem và làm việc với khách trên **máy tính hoặc điện thoại**:
+- **Tổng quan:** khách nóng, số khách từng giai đoạn, lịch hẹn hôm nay, việc cần làm, báo cáo đội.
+- **Khách hàng:** tìm theo tên, SĐT, dự án; lọc nóng, mới, đã hẹn, đã mua…
+- Bấm vào khách để xem hồ sơ, hội thoại, cuộc gọi, lịch, việc. Các nút: **📞 Gọi**, **🗒 Kịch bản gọi**, **✍️ Ghi kết quả**, **💬 Nhắn khách**, **📝 Thêm việc**, **Giao cho** (chủ bot).
+- **+ Thêm khách:** thêm khách từ cuộc gọi.
+
+**Lấy link:** nhắn bot `/crm` → bot gửi link riêng, hiệu lực 30 ngày.
+- Mỗi người có link riêng. Nhân viên chỉ thấy khách của mình.
+- **Không gửi link cho người khác.** Lỡ lộ link: `/crm moi` để đổi.
+
+**Mở được ở đâu:**
+- **Bot chạy trên máy tính:** chỉ mở được **trên chính máy đó** (link `http://localhost:8080/crm…`). Lần đầu gõ `/crm`, bot bật trang web lên, anh/chị tắt bot và mở lại một lần. Windows có thể hỏi **"Allow access"** (cho phép qua tường lửa): bấm **Allow** hoặc **Cancel** đều được, trên chính máy đó vẫn mở trang bình thường.
+- **Bot chạy trên VPS:** `cai_vps.sh` tự bật trang CRM. Mở được **mọi nơi**, kể cả điện thoại.
+- **Bảo mật:** link `http://IP…` không mã hóa. Nên gắn tên miền HTTPS bằng **Cloudflare Tunnel** (miễn phí), rồi đặt `CRM_URL=https://crm.tenmien.com` trong `.env`.
+
+---
+
+## 19. Facebook Messenger
+
+Bot trả lời khách nhắn **trang Facebook** của anh/chị, giống Zalo: tư vấn, độ nhiệt, lịch hẹn, chia cho nhân viên.
+
+**Cần có trước:** bot chạy trên **VPS** với địa chỉ **HTTPS** (tên miền + Cloudflare Tunnel, mục 12), vì Facebook chỉ gửi tin về địa chỉ HTTPS.
+
+**Các bước** (khoảng 30–60 phút, làm trên máy tính):
+1. Vào **developers.facebook.com** → **My Apps → Create App** → chọn loại **Business** (hoặc "Other → Business").
+2. Trong app → **Add product → Messenger → Set up**.
+3. Mục **Access Tokens** → **Add or remove Pages** → chọn các trang dự án → **Generate token** cho từng trang → copy.
+4. Mục **Settings → Basic**: copy **App Secret**.
+5. Mở `.env` trên VPS (`nano /root/bds-bot/.env`), điền:
+   ```
+   FB_VERIFY_TOKEN=tu-dat-mot-chuoi-bat-ky
+   FB_APP_SECRET=<App Secret>
+   FB_PAGE_TOKENS=<page_id_1>:<token_1>,<page_id_2>:<token_2>
+   ```
+   Page ID xem ở trang Facebook → Giới thiệu → Minh bạch trang, hoặc trong mục Access Tokens.
+   Lưu xong chạy `systemctl restart bdsbot`.
+6. Quay lại Messenger → **Webhooks → Add Callback URL**:
+   - Callback URL: `https://<tên-miền-của-bot>/fb/webhook`
+   - Verify token: đúng chuỗi `FB_VERIFY_TOKEN` ở trên → **Verify and save**.
+7. **Add subscriptions** cho từng trang → tick **messages**.
+8. Thử: dùng tài khoản Facebook của anh/chị (admin trang) nhắn trang → bot trả lời là được.
+
+**Lưu ý quan trọng:**
+- Khi app ở **chế độ phát triển**, bot chỉ trả lời **người có vai trò trong app/trang** (anh/chị, nhân viên được thêm làm tester). Muốn trả lời **mọi khách**, phải gửi **App Review** quyền `pages_messaging` và **xác minh doanh nghiệp** với Facebook (thường mất vài ngày, cần giấy phép kinh doanh). Facebook có thể từ chối, nên chuẩn bị video quay cảnh bot trả lời khách.
+- Facebook chỉ cho trang **nhắn khách trong 24 giờ** kể từ tin cuối của khách. Bot tự tuân theo: quá 24 giờ thì không chăm sóc tự động và không gửi chiến dịch cho khách Facebook. Muốn liên lạc tiếp, hãy xin SĐT hoặc Zalo của khách trong 24 giờ đầu (bot đã được dạy xin SĐT).
+- Các trang đang **mất kết nối với LadiChat** vẫn kết nối bot được, hai bên độc lập.

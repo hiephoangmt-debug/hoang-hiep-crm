@@ -16,6 +16,14 @@ if ! command -v python3 >/dev/null; then
   apt-get update -y && apt-get install -y python3
 fi
 python3 --version
+echo "== Bật trang CRM (cổng web)"
+ENVF="$DIR/.env"
+setkv() { if grep -q "^$1=" "$ENVF"; then sed -i "s|^$1=.*|$1=$2|" "$ENVF"; else printf '\n%s=%s\n' "$1" "$2" >> "$ENVF"; fi; }
+PORT=$(grep -E '^WEB_PORT=' "$ENVF" | tail -1 | cut -d= -f2 | tr -d '\r ')
+if [ -z "$PORT" ] || [ "$PORT" = "0" ]; then setkv WEB_PORT 8080; PORT=8080; fi
+IP=$(curl -s --max-time 5 https://ifconfig.me 2>/dev/null || hostname -I | awk '{print $1}')
+if ! grep -qE '^CRM_URL=[^[:space:]]' "$ENVF"; then setkv CRM_URL "http://$IP:$PORT"; fi
+if command -v ufw >/dev/null && ufw status 2>/dev/null | grep -q "Status: active"; then ufw allow "$PORT"/tcp >/dev/null; fi
 echo "== Tạo dịch vụ bdsbot"
 cat > /etc/systemd/system/bdsbot.service <<UNIT
 [Unit]
@@ -43,6 +51,8 @@ if systemctl is-active --quiet bdsbot; then
 else
   echo "❌ Bot chưa chạy được. Xem lỗi:"; journalctl -u bdsbot -n 30 --no-pager; exit 1
 fi
+echo ""
+echo "🖥 Trang CRM: nhắn bot /crm trên Zalo để lấy link đăng nhập (http://$IP:$PORT/crm)"
 echo ""
 echo "Lệnh hay dùng:"
 echo "  Xem nhật ký trực tiếp : tail -f $DIR/data/bot.log      (thoát: Ctrl+C)"
