@@ -1,7 +1,7 @@
 """Chỉnh chữ ký Hoàng Hiệp: assets/chu-ky-goc (tách từ video Hành trình xây dựng) -> assets/chu-ky.
 1) Nét gạch ngang chữ "Hoàng": nửa phải vẽ lại cùng độ dày nửa trái, tiếp tục đi lên.
 2) Bỏ chữ "ĐÀ NẴNG", thay bằng số điện thoại 0904 567 009 nghiêng theo nét cuối.
-3) Nét gạch cuối kéo dài hết dãy số, cùng độ dày nét gốc, thon nhẹ ở đầu mút.
+3) Nét gạch cuối kéo dài hết dãy số, dày đều như nét gốc, đầu tròn (không nhọn).
 Chạy: python3 scripts/chinh_chu_ky.py
 """
 import os, math, numpy as np
@@ -11,18 +11,19 @@ SRC, DST = f"{HERE}/assets/chu-ky-goc", f"{HERE}/assets/chu-ky"
 W, H, SS, N = 330, 231, 8, 194
 PHONE = "0904 567 009"
 
-def polystroke(p0, p1, w, taper=6, tw_end=1.3):
-    """Nét thẳng từ p0 tới p1 dày w (px), thon dần `taper` px cuối; trả về kênh alpha W x H."""
+def polystroke(p0, p1, w, taper=0, tw_end=1.3):
+    """Nét thẳng từ p0 tới p1 dày đều w (px), hai đầu tròn (taper > 0 thì thon dần ở cuối); trả về kênh alpha W x H."""
     L = Image.new("L", (W * SS, H * SS), 0); d = ImageDraw.Draw(L)
     (x0, y0), (x1, y1) = p0, p1; ln = math.hypot(x1 - x0, y1 - y0)
     if ln < 0.5: return np.zeros((H, W), np.uint8)
     ux, uy = (x1 - x0) / ln, (y1 - y0) / ln; px, py = -uy, ux; pl, pr = [], []
     for s in np.linspace(0, ln, 60):
-        ww = w if ln - s > taper else max(tw_end, w - (w - tw_end) * (1 - (ln - s) / taper))
+        ww = w if (taper <= 0 or ln - s > taper) else max(tw_end, w - (w - tw_end) * (1 - (ln - s) / taper))
         x, y = x0 + ux * s, y0 + uy * s
         pl.append(((x + px * ww / 2) * SS, (y + py * ww / 2) * SS)); pr.append(((x - px * ww / 2) * SS, (y - py * ww / 2) * SS))
     d.polygon(pl + pr[::-1], fill=255); r = w / 2 * SS * 0.95
     d.ellipse((x0 * SS - r, y0 * SS - r, x0 * SS + r, y0 * SS + r), fill=255)
+    if taper <= 0: d.ellipse((x1 * SS - r, y1 * SS - r, x1 * SS + r, y1 * SS + r), fill=255)
     return np.array(L.resize((W, H), Image.LANCZOS))
 
 def band(f, x_from, x_to, half):
@@ -68,7 +69,7 @@ for i in range(N):
     if i >= 131:                                  # nét cuối viết tiếp qua dãy số
         a[TAIL, 3] = 0
         k = min(1.0, (i - 130) / 6); x1 = 282 + (XE - 282) * k
-        add(a, polystroke((274, line(274)), (x1, line(x1)), 3.12 * 0.92, taper=9))
+        add(a, polystroke((274, line(274)), (x1, line(x1)), 3.12 * 0.92))
     im = Image.fromarray(a, "RGBA")
     if i >= 128:
         k = min(1.0, (i - 127) / 10); p = PHONE_IMG.copy(); p.putalpha(p.getchannel("A").point(lambda v: int(v * k))); im.alpha_composite(p)
