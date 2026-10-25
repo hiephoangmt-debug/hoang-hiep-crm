@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.32** + plugin Hoàng Hiệp CRM **2.20.81**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.33** + plugin Hoàng Hiệp CRM **2.20.81**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.33: trang landing xem gọn trên điện thoại
+
+- Bảng giá, giỏ hàng nhiều cột (Tòa F2, FourS F1/F5, giỏ hàng, bảng tính F2, pháp lý): trên điện thoại mỗi căn hiện thành một thẻ – mã căn, loại, diện tích, hướng view, giá, nút Giữ căn / Tính chi tiết – không còn cột giá bị cắt, mã căn không bị ngắt dòng.
+- Bảng ít cột vừa khung màn hình, không phải vuốt ngang.
+- Thanh đầu trang (logo FourS) tự ẩn khi cuộn xuống để không che tiêu đề, cuộn lên là hiện lại; đang mở menu thì luôn hiện.
+- Bảng của Sun Saphia giữ kiểu điện thoại sẵn có.
 
 ## Có gì mới – plugin 2.20.81, giao diện 2.15.32: landing viết lại chữ riêng; FourS landing + trang con; trang F1, F5
 
