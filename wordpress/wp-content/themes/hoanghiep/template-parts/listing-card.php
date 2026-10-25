@@ -32,7 +32,7 @@ $photos = count( hh_ids( 'hh_gallery' ) ) + ( has_post_thumbnail() ? 1 : 0 );
 			<?php if ( hh_listing_price_m2() ) : ?><span><?php echo esc_html( hh_listing_price_m2() ); ?></span><?php endif; ?>
 		</p>
 		<ul class="listing-card__facts">
-			<?php if ( hh_meta( 'hh_area' ) ) : ?><li><?php echo hh_icon( 'area' ); // phpcs:ignore ?><?php echo esc_html( hh_meta( 'hh_area' ) ); ?> m²</li><?php endif; ?>
+			<?php if ( hh_meta( 'hh_area' ) ) : ?><li><?php echo hh_icon( 'area' ); // phpcs:ignore ?><?php echo esc_html( function_exists( 'hh_vn_num' ) ? hh_vn_num( hh_meta( 'hh_area' ) ) : hh_meta( 'hh_area' ) ); ?> m²</li><?php endif; ?>
 			<?php if ( hh_meta( 'hh_bedrooms' ) ) : ?><li><?php echo hh_icon( 'bed' ); // phpcs:ignore ?><?php echo esc_html( hh_meta( 'hh_bedrooms' ) ); ?> PN</li><?php endif; ?>
 			<?php if ( hh_meta( 'hh_bathrooms' ) ) : ?><li><?php echo hh_icon( 'bath' ); // phpcs:ignore ?><?php echo esc_html( hh_meta( 'hh_bathrooms' ) ); ?> WC</li><?php endif; ?>
 			<?php if ( hh_meta( 'hh_direction' ) ) : ?><li><?php echo hh_icon( 'compass' ); // phpcs:ignore ?><?php echo esc_html( hh_option_label( $schema, 'hh_direction', hh_meta( 'hh_direction' ) ) ); ?></li><?php endif; ?>

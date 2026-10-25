@@ -118,7 +118,7 @@ function hh_seo_title_parts( $parts ) {
 		if ( 0 !== mb_stripos( $title, $deal ) ) {
 			$title = $deal . ' ' . mb_strtolower( mb_substr( $title, 0, 1 ) ) . mb_substr( $title, 1 );
 		}
-		$extra          = array_filter( array( hh_listing_price(), hh_meta( 'hh_area' ) ? hh_meta( 'hh_area' ) . 'm²' : '' ) );
+		$extra          = array_filter( array( hh_listing_price(), hh_meta( 'hh_area' ) ? ( function_exists( 'hh_vn_num' ) ? hh_vn_num( hh_meta( 'hh_area' ) ) : hh_meta( 'hh_area' ) ) . ' m²' : '' ) );
 		$parts['title'] = $title . ' – ' . implode( ', ', $extra ) . ' | ' . hh_listing_code();
 	} elseif ( is_singular( 'du-an' ) && hh_meta( 'hh_p_status' ) ) {
 		$parts['title'] = get_the_title() . ' – ' . hh_option_label( hh_project_schema(), 'hh_p_status', hh_meta( 'hh_p_status' ) );
@@ -167,7 +167,7 @@ function hh_seo_description() {
 			array(
 				0 === mb_stripos( get_the_title(), $deal ) ? get_the_title() : $deal . ' ' . mb_strtolower( mb_substr( get_the_title(), 0, 1 ) ) . mb_substr( get_the_title(), 1 ),
 				'giá ' . hh_listing_price(),
-				hh_meta( 'hh_area' ) ? hh_meta( 'hh_area' ) . ' m²' : '',
+				hh_meta( 'hh_area' ) ? ( function_exists( 'hh_vn_num' ) ? hh_vn_num( hh_meta( 'hh_area' ) ) : hh_meta( 'hh_area' ) ) . ' m²' : '',
 				hh_meta( 'hh_bedrooms' ) ? hh_meta( 'hh_bedrooms' ) . ' phòng ngủ' : '',
 				hh_meta( 'hh_address' ),
 			)
@@ -989,7 +989,7 @@ function hh_seo_llms_txt( $wp ) {
 			$facts   = array_filter(
 				array(
 					hh_listing_price( $p->ID ),
-					hh_meta( 'hh_area', $p->ID ) ? hh_meta( 'hh_area', $p->ID ) . ' m²' : '',
+					hh_meta( 'hh_area', $p->ID ) ? ( function_exists( 'hh_vn_num' ) ? hh_vn_num( hh_meta( 'hh_area', $p->ID ) ) : hh_meta( 'hh_area', $p->ID ) ) . ' m²' : '',
 					hh_meta( 'hh_bedrooms', $p->ID ) ? hh_meta( 'hh_bedrooms', $p->ID ) . ' PN' : '',
 					hh_meta( 'hh_address', $p->ID ),
 					hh_option_label( hh_listing_schema(), 'hh_status', hh_meta( 'hh_status', $p->ID ) ),
