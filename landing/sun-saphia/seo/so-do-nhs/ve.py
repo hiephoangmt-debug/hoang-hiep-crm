@@ -6,7 +6,9 @@ def P(pts): return 'M'+' L'.join('%d %d'%p for p in pts)+' Z'
 def S(pts,close=True):
     n=len(pts); d='M%.1f %.1f'%pts[0]
     for i in range(n if close else n-1):
-        p0=pts[(i-1)%n]; p1=pts[i]; p2=pts[(i+1)%n]; p3=pts[(i+2)%n]
+        p1=pts[i]; p2=pts[(i+1)%n]
+        p0=pts[(i-1)%n] if (close or i>0) else p1
+        p3=pts[(i+2)%n] if (close or i+2<n) else p2
         c1=(p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6); c2=(p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6)
         d+=' C%.1f %.1f %.1f %.1f %.1f %.1f'%(c1+c2+p2)
     return d+(' Z' if close else '')
@@ -38,17 +40,18 @@ def road(pts,w):
 road([(165,160),(320,192),(600,192),(640,175),(760,140),(1050,120)],12)       # đường phía bắc
 road([(590,62),(630,170),(648,260),(660,420),(668,560),(660,700),(640,885)],20) # Lê Văn Hiến
 road([(1050,122),(1120,230),(1190,340)],12)                                    # đường phía đông
-road([(250,630),(420,600),(560,570),(690,570),(800,680),(830,760)],12)         # trục ngang phía nam
-road([(240,500),(330,495),(405,495),(500,460),(545,430),(640,420),(660,420)],9)
-road([(660,430),(800,440),(1000,425)],8)
-road([(405,495),(420,560),(430,600)],7)
+road([(232,622),(300,598),(330,566),(430,552),(560,556),(668,568)],12)         # trục ngang phía nam
+road([(668,568),(705,630),(760,690),(830,760)],12)         # đường chéo đông nam
+road([(240,500),(330,495),(405,495),(500,460),(545,430),(600,440),(660,452)],9)
+road([(660,452),(800,462),(1000,440)],8)
+road([(405,495),(418,530),(430,552)],7)
 # quảng trường & bùng binh
 o.append('<circle cx="545" cy="425" r="40" fill="#f7efe0" stroke="#fff" stroke-width="5"/><circle cx="545" cy="425" r="18" fill="#e8d5b0"/>')
 o.append('<circle cx="405" cy="495" r="17" fill="#fff" stroke="#9aa4ad" stroke-width="3"/>')
 # núi
 MTS={'THỦY SƠN':[(680,265),(760,225),(870,218),(980,235),(1045,290),(1050,360),(1000,420),(900,445),(800,430),(730,390),(690,330)],
      'HỎA SƠN':[(275,250),(330,215),(420,212),(480,225),(522,262),(500,300),(440,322),(360,328),(300,305)],
-     'MỘC SƠN':[(700,560),(780,545),(880,560),(962,590),(950,630),(870,652),(780,640),(720,610)],
+     'MỘC SƠN':[(735,565),(800,548),(890,562),(965,592),(952,630),(872,650),(790,640),(745,612)],
      'THỔ SƠN':[(320,610),(380,575),(450,570),(495,590),(490,640),(440,680),(370,686),(325,660)],
      'KIM SƠN':[(330,700),(400,672),(480,672),(550,700),(530,740),(470,765),(380,770),(335,748)]}
 for n,pts in MTS.items():
@@ -67,16 +70,16 @@ lab(240,440,'Ruộng lúa sinh thái',13,'#3d6b2a')
 def badge(x,y,num,t,c,a='start',dx=22):
     o.append(f'<circle cx="{x}" cy="{y}" r="14" fill="{c}" stroke="#fff" stroke-width="3" filter="url(#sh)"/><text x="{x}" y="{y+5}" text-anchor="middle" style="font:900 14px {F}" fill="#fff">{num}</text>')
     lab(x+(dx if a=='start' else -dx),y+5,t,13,'#0b2447',a)
-badge(545,425,'1','Quảng trường – trục lễ hội','#E96118')
+badge(545,425,'1','Quảng trường – trục lễ hội','#E96118','end',dx=48)
 badge(405,495,'2','Bùng binh cảnh quan','#8e44ad','end')
 badge(733,365,'3','Hồ cảnh quan','#2a6fd0')
 badge(300,700,'4','Chùa Quán Thế Âm','#c0392b','end')
 badge(210,618,'5','Cù lao sinh thái','#2f9e6a','end')
 badge(540,615,'6','Vườn tượng · vườn thiền','#2f9e6a')
 # chú giải + tiêu đề
-o.append(f'<g filter="url(#sh)"><rect x="760" y="680" width="330" height="190" rx="12" fill="#fff"/></g>')
-o.append(f'<text x="778" y="706" style="font:900 15px {F}" fill="#0b2447">QUY HOẠCH DANH THẮNG NGŨ HÀNH SƠN</text>')
-o.append(f'<text x="778" y="726" style="font:600 12px {F}" fill="#5b6b85">Vẽ lại theo bản đồ định hướng không gian (QĐ 822/QĐ-TTg)</text>')
+o.append(f'<g filter="url(#sh)"><rect x="755" y="680" width="340" height="190" rx="12" fill="#fff"/></g>')
+o.append(f'<text x="778" y="706" style="font:900 14px {F}" fill="#0b2447">QUY HOẠCH DANH THẮNG NGŨ HÀNH SƠN</text>')
+o.append(f'<text x="778" y="726" style="font:600 11px {F}" fill="#5b6b85">Vẽ lại theo bản đồ định hướng (QĐ 822/QĐ-TTg)</text>')
 items=[('<rect x="0" y="-9" width="22" height="12" rx="3" fill="url(#mt)"/>','Núi đá vôi (5 ngọn)'),('<rect x="0" y="-9" width="22" height="12" fill="#c9e7b0" stroke="#d23b2f" stroke-dasharray="4 3"/>','Ranh giới quy hoạch, cây xanh'),
        ('<rect x="0" y="-9" width="22" height="12" fill="url(#rv)"/>','Sông Cổ Cò, hồ'),('<rect x="4" y="-8" width="14" height="10" fill="#c0392b"/>','Công trình văn hóa, dịch vụ'),('<rect x="0" y="-9" width="22" height="12" fill="url(#urb)" stroke="#ccc"/>','Khu dân cư hiện hữu')]
 for i,(sw,t) in enumerate(items):
