@@ -1,0 +1,12 @@
+{"voice": "giong-doc.mp3", "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {"img": "../../anh-page-2810/thap-bien-hoang-hon.jpg", "tag": "LẦN ĐẦU TIÊN", "lines": ["Sun Group làm căn hộ ngay mặt biển Đà Nẵng"], "dur": 5.7, "big": true},
+  {"img": "../../anh-page-2810/thap-tren-cao-ngay.jpg", "tag": "SUN SAPHIA RESIDENCE", "lines": ["30 tầng · cao 114 m", "Giao lộ Võ Nguyên Giáp – Trường Sa"], "dur": 7.3},
+  {"img": "../../anh-page-2810/ba-duong-xuong-bien.jpg", "tag": "VỊ TRÍ", "lines": ["~400 m ra bãi tắm Sơn Thủy"], "dur": 3.2},
+  {"img": "../assets/mat-bang-studio.jpg", "tag": "782 CĂN", "lines": ["Studio 30 m²", "Trần cao 3,5 m"], "dur": 6.1},
+  {"img": "../../anh-page-2810/can-2br.jpg", "tag": "CĂN GIA ĐÌNH", "lines": ["1BR+ 50 m² · 2BR 60–70 m²"], "dur": 5.1},
+  {"img": "../../anh-page-2810/gcn-dau-tu-1.jpg", "tag": "PHÁP LÝ", "lines": ["Thời hạn 50 năm từ 17/09/2026"], "dur": 4.6},
+  {"img": "../../anh-page-2810/thap-dem-resort.jpg", "tag": "SẮP MỞ BÁN", "lines": ["Dự kiến cuối 11/2026"], "dur": 2.6}
+ ],
+ "end": {"dur": 6.9, "lines": ["Nhận bảng giá gốc", "Gửi qua Zalo ngay khi chủ đầu tư công bố"]}
+}
