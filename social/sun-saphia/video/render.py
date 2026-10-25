@@ -50,8 +50,24 @@ def overlay(tag, lines, out, big=False):
             ft = font("b", 34); tw = d.textlength(tag, font=ft)
             d.rounded_rectangle((P + 10, y, P + 10 + tw + 44, y + 58), radius=29, fill=OR); d.text((P + 32, y + 11), tag, font=ft, fill=WH); y += 80
         for l in wl: d.text((P + 10, y), l, font=fl, fill=WH); y += lh
-    d.text((W // 2, H - 70), "TATILAND – đại lý phân phối chính thức · Ảnh phối cảnh minh họa", font=font("m", 28), fill=WH, anchor="mm", stroke_width=2, stroke_fill=(0, 0, 0))
+    brand_footer(o)
     o.save(out)
+
+LOGO = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "logo-hoang-hiep.png")
+BRAND = "Hoàng Hiệp Đà Nẵng"
+
+def paste_logo(img, cx, cy, maxw, maxh):
+    """Dán logo (nếu có file assets/logo-hoang-hiep.png), trả về True nếu đã dán."""
+    if not os.path.exists(LOGO): return False
+    lg = Image.open(LOGO).convert("RGBA"); lg.thumbnail((maxw, maxh), Image.LANCZOS)
+    img.paste(lg, (int(cx - lg.width / 2), int(cy - lg.height / 2)), lg); return True
+
+def brand_footer(o):
+    d = ImageDraw.Draw(o)
+    d.rounded_rectangle((W // 2 - 300, H - 170, W // 2 + 300, H - 30), radius=40, fill=NAVY + (215,))
+    if not paste_logo(o, W // 2, H - 118, 520, 70):
+        d.text((W // 2, H - 118), BRAND.upper(), font=font("xb", 40), fill=WH, anchor="mm")
+    d.text((W // 2, H - 60), "Ảnh phối cảnh minh họa", font=font("m", 24), fill=MUT, anchor="mm")
 
 def endcard(out, lines):
     im = Image.new("RGB", (W, H), NAVY); d = ImageDraw.Draw(im)
@@ -62,8 +78,9 @@ def endcard(out, lines):
         d.text((W // 2, y + 60), t, font=f, fill=c, anchor="mm"); y += 130
     d.rounded_rectangle((140, y + 60, W - 140, y + 210), radius=75, fill=OR)
     d.text((W // 2, y + 135), "Zalo 0904 567 009", font=font("xb", 70), fill=WH, anchor="mm")
-    d.text((W // 2, y + 300), "Hoàng Hiệp – TATILAND, đại lý phân phối chính thức", font=font("sb", 34), fill=WH, anchor="mm")
-    d.text((W // 2, y + 360), "sun-saphia-residence.com", font=font("m", 34), fill=MUT, anchor="mm")
+    if not paste_logo(im, W // 2, y + 340, 520, 150):
+        d.text((W // 2, y + 340), BRAND.upper(), font=font("xb", 46), fill=WH, anchor="mm")
+    d.text((W // 2, y + 450), "sun-saphia-residence.com", font=font("m", 34), fill=MUT, anchor="mm")
     im.save(out)
 
 def run(cmd): subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
