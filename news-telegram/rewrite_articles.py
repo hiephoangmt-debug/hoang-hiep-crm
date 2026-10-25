@@ -24,7 +24,7 @@ from datetime import datetime, timedelta
 import anthropic
 import requests
 
-from publish_digest import DA_NANG_WORDS, login, split_publisher, wp_request
+from publish_digest import DA_NANG_WORDS, login, slugify, split_publisher, tag_ids, wp_request
 from scan_news import DIGEST_DIR, ROOT, VN_TZ, matched_keywords, norm, send_telegram, title_key
 
 MODEL = "claude-opus-5-5"
@@ -57,12 +57,26 @@ Không bịa, không suy đoán con số. Nếu không đọc được nguồn n
 - Dài khoảng 600–900 từ: mở bài nêu ngay thông tin chính; 3–5 mục có tiêu đề <h2>; có một mục ngắn về ý nghĩa \
 đối với thị trường bất động sản / người mua nhà ở khu vực liên quan, chỉ dựa trên thông tin đã có, \
 giọng trung lập, không khuyến nghị mua bán.
-- Không tự thêm mục nguồn tham khảo (hệ thống tự thêm).
+- Không tự thêm mục nguồn tham khảo hay câu hỏi thường gặp vào content (hệ thống tự thêm).
+
+Tối ưu cho Google và các trợ lý AI (ChatGPT, Gemini, Perplexity) trích dẫn:
+- Chọn 1 từ khoá chính người dùng hay tìm (ví dụ "quy hoạch phân khu Hòa Xuân Đà Nẵng"); đặt nó trong tiêu đề, \
+câu đầu tiên và ít nhất một tiêu đề <h2>.
+- Đoạn mở bài 2–3 câu trả lời thẳng: cái gì, ở đâu, ai quyết định, khi nào, quy mô bao nhiêu. \
+Ngay sau đó là <ul> "điểm chính" 3–5 ý, mỗi ý một dữ kiện cụ thể (con số, ngày, số quyết định).
+- Ghi ngày cụ thể (ngày 24/10/2026), không viết "hôm qua", "tuần này"; ghi tên đầy đủ của cơ quan, dự án, \
+phường/xã (theo địa giới hiện hành) ở lần nhắc đầu tiên.
+- Tiêu đề <h2> viết như câu hỏi hoặc cụm từ người dùng hay gõ khi tìm kiếm, nếu tự nhiên.
+- Câu ngắn, mỗi đoạn một ý, để AI dễ trích nguyên câu.
 
 Trả lời đúng định dạng sau, không thêm gì khác:
 <title>Tiêu đề bài (dưới 90 ký tự, có từ khoá chính và "Đà Nẵng")</title>
-<excerpt>Tóm tắt 1–2 câu, dưới 160 ký tự, dùng làm mô tả SEO</excerpt>
-<content>Nội dung HTML, chỉ dùng các thẻ p, h2, h3, ul, ol, li, strong, em</content>"""
+<excerpt>Tóm tắt 1–2 câu, dưới 160 ký tự, có từ khoá chính, dùng làm mô tả SEO</excerpt>
+<keyword>từ khoá chính</keyword>
+<tags>3–5 thẻ ngắn, cách nhau bằng dấu phẩy (tên dự án, khu vực, loại tin)</tags>
+<content>Nội dung HTML, chỉ dùng các thẻ p, h2, h3, ul, ol, li, strong, em</content>
+<faq>3–4 câu hỏi người đọc hay hỏi về chủ đề, trả lời 1–3 câu chỉ dựa trên thông tin trong bài, dạng:
+<q>Câu hỏi?</q><a>Trả lời.</a></faq>"""
 
 WEB_TOOLS = [
     {"type": "web_search_20260209", "name": "web_search", "max_uses": 6,
@@ -166,6 +180,33 @@ def clean_html(content):
     return re.sub(r"<(/?)([a-zA-Z0-9]+)[^>]*>", fix, content).strip()
 
 
+def strip_tags(text):
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", text)).strip()
+
+
+def faq_block(faq):
+    """Mục hỏi – đáp: người đọc lướt nhanh, Google/AI dễ lấy làm câu trả lời."""
+    if not faq:
+        return ""
+    qa = "".join(f"<h3>{html.escape(q)}</h3><p>{html.escape(a)}</p>" for q, a in faq)
+    return f"<h2>Câu hỏi thường gặp</h2>{qa}"
+
+
+def related_block(article, done, limit=3):
+    """Liên kết tới bài cũ cùng chủ đề (liên kết nội bộ giúp Google hiểu và xếp hạng cả cụm bài)."""
+    stop = {"đà", "nẵng", "và", "của", "các", "cho", "tại", "với", "được", "trong", "dự", "án", "thành", "phố"}
+    words = lambda t: {w for w in re.findall(r"\w+", norm(t)) if len(w) > 1 and w not in stop}
+    mine = words(article["title"] + " " + article["keyword"] + " " + " ".join(article["tags"]))
+    scored = sorted(((len(mine & words(d["title"])), i, d) for i, d in enumerate(done) if d.get("link")),
+                    key=lambda x: (x[0], x[1]), reverse=True)
+    picks = [d for score, _, d in scored if score >= 2][:limit]
+    if not picks:
+        return ""
+    lis = "".join(f'<li><a href="{html.escape(d["link"], quote=True)}">{html.escape(d["title"])}</a></li>'
+                  for d in picks)
+    return f"<h3>Bài liên quan</h3><ul>{lis}</ul>"
+
+
 def write_article(client, topic, sources):
     refs = "\n".join(f"- {s['title']} ({s['publisher']}): {s['link']}" for s in sources)
     msg = ask(
@@ -187,6 +228,11 @@ def write_article(client, topic, sources):
         return None, f"sai định dạng (stop_reason={msg.stop_reason})"
     article = {k: m.group(1).strip() for k, m in parts.items()}
     article["content"] = clean_html(article["content"])
+    opt = {k: re.search(fr"<{k}>(.*?)</{k}>", out, re.S) for k in ("keyword", "tags", "faq")}
+    article["keyword"] = opt["keyword"].group(1).strip() if opt["keyword"] else ""
+    article["tags"] = [t.strip() for t in opt["tags"].group(1).split(",")][:5] if opt["tags"] else []
+    article["faq"] = [(strip_tags(q), strip_tags(a)) for q, a in
+                      re.findall(r"<q>(.*?)</q>\s*<a>(.*?)</a>", opt["faq"].group(1), re.S)][:4] if opt["faq"] else []
     if len(re.sub(r"<[^>]+>", " ", article["content"]).split()) < 250:
         return None, "bài quá ngắn"
     return article, None
@@ -230,14 +276,19 @@ def main():
             print(f"Bỏ qua \"{topic[:60]}\": {reason}")
             continue
         if dry_run:
-            print("=" * 70, f"\n{article['title']}\n{article['excerpt']}\n\n{article['content']}\n{source_block(sources)}")
+            print("=" * 70, f"\n{article['title']}\n/{slugify(article['keyword'] or article['title'])}/"
+                  f"\n{article['excerpt']}\nThẻ: {', '.join(article['tags'])}\n\n{article['content']}"
+                  f"\n{faq_block(article['faq'])}\n{source_block(sources)}\n{related_block(article, done)}")
             continue
         post = wp_request("POST", base, auth, json={
             "title": article["title"],
+            "slug": slugify(article["keyword"] or article["title"]),
             "excerpt": article["excerpt"],
-            "content": article["content"] + "\n" + source_block(sources),
+            "content": "\n".join(filter(None, [article["content"], faq_block(article["faq"]),
+                                              source_block(sources), related_block(article, done)])),
             "status": os.environ.get("WP_STATUS") or "publish",
             "categories": [int(os.environ.get("WP_CATEGORY_ID") or 121)],
+            "tags": tag_ids(base, auth, article["tags"] + ["quy hoạch Đà Nẵng"]),
         })
         print(f"Đã đăng: {article['title']} → {post['link']}")
         done.append({"date": f"{datetime.now(VN_TZ):%Y-%m-%d}", "title": article["title"],

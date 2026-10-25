@@ -18,6 +18,7 @@ import json
 import os
 import re
 import sys
+import unicodedata
 from datetime import datetime, timedelta
 
 import requests
@@ -29,10 +30,38 @@ DA_NANG_WORDS = [
     "đà nẵng", "da nang", "danang", "quảng nam", "hội an", "tam kỳ", "chu lai", "hòa vang",
     "liên chiểu", "sơn trà", "ngũ hành sơn", "cẩm lệ", "hải châu", "thanh khê", "điện bàn", "núi thành",
 ]
+# Thẻ (tag) giúp Google/AI hiểu chủ đề và tạo trang gom bài theo từ khoá.
+DIGEST_TAGS = ["quy hoạch Đà Nẵng", "hạ tầng Đà Nẵng", "bất động sản Đà Nẵng", "bản tin quy hoạch"]
 HINTS = {
     401: "Sai WP_USER hoặc WP_APP_PASSWORD (dùng Application Password, không phải mật khẩu đăng nhập).",
     403: "Tài khoản không có quyền đăng bài, hoặc plugin bảo mật/host chặn REST API.",
 }
+
+
+def slugify(text, max_len=80):
+    """'Cầu Trần Thị Lý – Đà Nẵng' -> 'cau-tran-thi-ly-da-nang' (URL ngắn, không dấu, dễ đọc)."""
+    t = unicodedata.normalize("NFD", text.lower().replace("đ", "d"))
+    t = re.sub(r"[^a-z0-9]+", "-", "".join(c for c in t if unicodedata.category(c) != "Mn")).strip("-")
+    return t[:max_len].rsplit("-", 1)[0] if len(t) > max_len else t
+
+
+def tag_ids(base, auth, names):
+    """Tìm hoặc tạo thẻ WordPress, trả về danh sách id. Lỗi thì bỏ qua (không chặn việc đăng bài)."""
+    url, ids = base.replace("/posts", "/tags"), []
+    for name in dict.fromkeys(n.strip() for n in names if n.strip()):
+        try:
+            found = requests.get(url, auth=auth, params={"search": name, "_fields": "id,name"}, timeout=30).json()
+            hit = next((t["id"] for t in found if norm(t["name"]) == norm(name)), None)
+            if hit is None:
+                r = requests.post(url, auth=auth, json={"name": name}, timeout=30)
+                data = r.json()
+                # Thẻ đã có nhưng search không ra: WordPress trả term_exists kèm id.
+                hit = data.get("id") or (data.get("data") or {}).get("term_id")
+            if hit:
+                ids.append(int(hit))
+        except (requests.RequestException, ValueError, TypeError, AttributeError) as e:
+            print(f"Không gắn được thẻ '{name}': {e}", file=sys.stderr)
+    return ids
 
 
 def digest_date():
@@ -180,6 +209,7 @@ def main():
     post.update(
         status="draft" if preview else (os.environ.get("WP_STATUS") or "publish"),
         categories=[int(os.environ.get("WP_CATEGORY_ID") or 121)],
+        tags=tag_ids(base, auth, DIGEST_TAGS),
     )
 
     existing = wp_request("GET", base, auth, params={
