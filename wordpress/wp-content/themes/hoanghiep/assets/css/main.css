@@ -1495,3 +1495,10 @@ html.nav-locked, html.nav-locked body { overflow: hidden; }
 .tour4d__lock { font: inherit; position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 20px; border: 0; background: rgba(10, 37, 64, .72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); color: var(--white); text-align: center; cursor: pointer; }
 .tour4d__lock strong { font-size: 1.08rem; }
 .tour4d__lock small { opacity: .85; font-size: .86rem; }
+/* Đang xem 4D: ẩn nút gọi / Zalo / chat nổi để không che mô hình (trong 4D đã có hotline). */
+html.tour-view .contact-dock, html.tour-view .hhc__fab, html.tour-view .hhc__bubble { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .2s, visibility .2s; }
+@media (max-width: 760px) {
+	/* Điện thoại: khung 4D tràn hết bề ngang, cao vừa một màn hình – mô hình cân giữa, không lệch. */
+	.tour4d.is-on { margin-left: -16px; margin-right: -16px; border-radius: 0; height: max(460px, calc(100svh - var(--header-h, 64px) - 64px)); }
+	.tour4d__actions .btn { flex-basis: 100%; }
+}

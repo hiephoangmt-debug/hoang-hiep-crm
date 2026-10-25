@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.25** + plugin Hoàng Hiệp CRM **2.20.74**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.26** + plugin Hoàng Hiệp CRM **2.20.75**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.75, giao diện 2.15.26: 4D trên điện thoại cân giữa, không bị che
+
+- Bấm xem 4D trên điện thoại: khung 4D tràn hết bề ngang, cao vừa một màn hình và tự cuộn lên đúng chỗ.
+- Đang xem 4D thì ẩn nút gọi / Zalo / chat nổi (trong 4D đã có hotline) – không còn che mô hình.
+- Mô hình 4D bản điện thoại: tòa nhà nằm giữa khung, tiêu đề gọn một dòng, các nút chế độ một hàng vuốt ngang.
+- Logo dự án trong 4D: chờ file logo chính thức (trang sun-saphia-residence.com bị chặn mạng từ máy làm web).
 
 ## Có gì mới – giao diện 2.15.25: 4D cho xem thử rồi mới hỏi số Zalo
 

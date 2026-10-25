@@ -308,6 +308,11 @@
 			f.allowFullscreen = true;
 			box.classList.add( 'is-on' );
 			box.replaceChildren( f );
+			box.scrollIntoView( { behavior: 'smooth', block: 'start' } );
+			// Khung 4D đang hiện trên màn hình → ẩn nút liên hệ nổi để không che mô hình.
+			if ( 'IntersectionObserver' in window ) {
+				new IntersectionObserver( ( en ) => document.documentElement.classList.toggle( 'tour-view', en[ 0 ].isIntersecting ), { threshold: 0.35 } ).observe( box );
+			}
 			if ( gate && ! known() ) {
 				setTimeout( lock, TOUR_FREE * 1000 );
 			}
