@@ -9,11 +9,17 @@ import render as R
 W, H, FPS, DUR = 1080, 1920, 30, 60.0
 N = int(DUR * FPS)
 NAVY = R.NAVY; OR = (255, 140, 40); WH = (255, 255, 255)
+import json
+TC = json.load(open("thoi-gian-cau.json"))          # [đầu, cuối] của 17 câu đọc (giây)
+def S(i): return TC[i - 1][0]
+def E(i): return TC[i - 1][1]
+# Mỗi cảnh bắt đầu đúng lúc câu tương ứng bắt đầu
+T_TITLE, T_MAP, T_FRONT, T_RES, T_CONN = 1.6, S(3), S(5), S(6), S(8)
+T_TOWER, T_PLAN, T_POOL, T_STREET, T_KICK, T_END = S(11), S(12), S(13), S(14), S(15), S(16)
 
 # 1) Cắt + đổi tốc độ các đoạn của v5 cho khớp lời đọc: (đầu ra từ, đến, nguồn từ, đến)
-SEG = [(0.0, 1.6, 51.0, 52.6), (1.6, 5.38, 1.9, 4.4), (5.38, 17.93, 4.5, 15.0), (17.93, 25.80, 17.0, 24.2),
-       (25.80, 38.34, 27.3, 37.3), (38.34, 45.35, 38.0, 46.5), (45.35, 48.44, 46.5, 49.5),
-       (48.44, 53.08, 50.4, 55.0), (53.08, 60.0, 55.0, 59.9)]
+SEG = [(0.0, T_TITLE, 51.0, 52.6), (T_TITLE, T_MAP, 1.9, 4.4), (T_MAP, T_FRONT, 4.5, 13.6), (T_FRONT, T_RES, 13.6, 16.5),
+       (T_RES, T_CONN, 17.0, 24.2), (T_CONN, T_TOWER, 27.3, 37.3), (T_TOWER, DUR, 38.0, 59.9)]
 def base():
     if os.path.exists("base.mp4"): return
     parts, ins = [], []
@@ -27,25 +33,30 @@ def base():
 
 # 2) Phụ đề: (từ, đến, các dòng, vị trí y). Chữ trong *...* tô cam.
 C, T = 1060, 330   # giữa màn hình / phía trên (khi có bảng số liệu)
+def _split(i, w):            # chia câu i theo tỉ lệ số chữ → thời điểm từng ý
+    a, b = S(i), E(i); tot = sum(w); out = [a]
+    for x in w[:-1]: out.append(out[-1] + (b - a) * x / tot)
+    return out
+_r = _split(6, [len(x) for x in ["Xung quanh là Furama,", "Crowne Plaza,", "Hyatt Regency,", "Marriott."]])
 CAP = [
-    (0.0, 3.6, ["Lần đầu tiên *Sun Group*", "làm căn hộ *ngay mặt biển*"], C),
-    (3.84, 5.3, ["Nằm ở *đâu?*"], C),
-    (5.38, 10.7, ["Giao lộ *Võ Nguyên Giáp*", "Trường Sa · Ngũ Hành Sơn"], C),
-    (10.94, 13.75, ["Đi bộ *~400 m*", "ra bãi tắm Sơn Thủy"], C),
-    (14.13, 17.95, ["Công viên biển *2,45 ha*", "ngay trước dự án"], C),
-    (18.38, 20.13, ["Xung quanh: *Furama*"], C),
-    (20.13, 21.34, ["Furama · *Crowne Plaza*"], C),
-    (21.34, 22.82, ["Furama · Crowne Plaza", "*Hyatt Regency*"], C),
-    (22.82, 23.78, ["Furama · Crowne Plaza", "Hyatt Regency · *Marriott*"], C),
-    (23.78, 25.85, ["Chuỗi resort *5 sao*", "biển Đà Nẵng"], C),
-    (26.47, 29.95, ["Ra sân bay *15 phút*"], C),
-    (30.33, 33.1, ["Phố cổ Hội An *30 phút*"], C),
-    (33.92, 38.38, ["Ga đường sắt đô thị", "cách dự án *~500 m*"], C),
-    (38.74, 41.9, ["*30 tầng* · cao *114 m*"], T),
-    (42.04, 45.4, ["*782 căn*", "Studio · 1PN+ · 2PN"], T),
-    (45.95, 48.5, ["Trần cao *3,5 m*", "Hồ bơi tầng 3 *view biển*"], C),
-    (48.89, 50.85, ["Giấy CN đầu tư *đã cấp*", "Thời hạn *50 năm*"], C),
-    (50.92, 53.1, ["Mở bán *cuối 11/2026*", "Bàn giao *11/2028*"], C),
+    (S(1), E(1) + 0.15, ["Lần đầu tiên *Sun Group*", "làm căn hộ *ngay mặt biển*"], C),
+    (S(2), E(2) + 0.2, ["Nằm ở *đâu?*"], C),
+    (S(3), E(3) + 0.15, ["Giao lộ *Võ Nguyên Giáp*", "Trường Sa · Ngũ Hành Sơn"], C),
+    (S(4), E(4) + 0.15, ["Đi bộ *~400 m*", "ra bãi tắm Sơn Thủy"], C),
+    (S(5), E(5) + 0.15, ["Công viên biển *2,45 ha*", "ngay trước dự án"], C),
+    (_r[0], _r[1], ["Xung quanh: *Furama*"], C),
+    (_r[1], _r[2], ["Furama · *Crowne Plaza*"], C),
+    (_r[2], _r[3], ["Furama · Crowne Plaza", "*Hyatt Regency*"], C),
+    (_r[3], S(7), ["Furama · Crowne Plaza", "Hyatt Regency · *Marriott*"], C),
+    (S(7), E(7) + 0.15, ["Chuỗi resort *5 sao*", "biển Đà Nẵng"], C),
+    (S(8), E(8) + 0.15, ["Ra sân bay *15 phút*"], C),
+    (S(9), E(9) + 0.15, ["Phố cổ Hội An *30 phút*"], C),
+    (S(10), E(10) + 0.15, ["Ga đường sắt đô thị", "cách dự án *~500 m*"], C),
+    (S(11), E(11) + 0.15, ["*30 tầng* · cao *114 m*"], T),
+    (S(12), E(12) + 0.15, ["*782 căn*", "Studio · 1PN+ · 2PN"], T),
+    (S(13), E(13) + 0.15, ["Trần cao *3,5 m*", "Hồ bơi tầng 3 *view biển*"], C),
+    (S(14), E(14) + 0.15, ["Giấy CN đầu tư *đã cấp*", "Thời hạn *50 năm*"], C),
+    (S(15), E(15) + 0.15, ["Mở bán *cuối 11/2026*", "Bàn giao *11/2028*"], C),
 ]
 FC = R.font("xb", 66)
 def parts(line):
@@ -146,11 +157,11 @@ def end_frame(t0, t, src):
             fr.alpha_composite(layer, (int(x + d.textlength(ch, font=ft) / 2 - 40), int(300 - 45 + 26 * (1 - e))))
         x += d.textlength(ch, font=ft) + 6
     d.text((W / 2, 372), "Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng", font=R.font("m", 32), fill=(205, 215, 235), anchor="mm")
-    if t >= 54.35:
-        e = ease((t - 54.35) / 0.35); f1 = R.font("xb", int(70 + 10 * e))
+    if t >= S(16):
+        e = ease((t - S(16)) / 0.35); f1 = R.font("xb", int(70 + 10 * e))
         d.text((W / 2, 610), "Bình luận chữ", font=R.font("b", 62), fill=WH, anchor="mm")
         d.text((W / 2, 760), "“GIÁ”", font=R.font("xb", int(150 * (0.7 + 0.3 * e))), fill=OR, anchor="mm")
-    if t >= 56.08:
+    if t >= S(17):
         d.text((W / 2, 900), "Nhận bảng giá gốc qua Zalo", font=R.font("sb", 46), fill=WH, anchor="mm")
         d.text((W / 2, 960), "ngay khi chủ đầu tư công bố", font=R.font("m", 36), fill=(205, 215, 235), anchor="mm")
     pe = ease((dt - 0.4) / 0.4); pw = int((W - 300) * (0.6 + 0.4 * pe)) // 2
@@ -176,33 +187,32 @@ def main():
     dec = subprocess.Popen(["ffmpeg", "-v", "error", "-i", "base.mp4", "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], stdout=subprocess.PIPE)
     enc = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",
                             "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p", "hinh.mp4"], stdin=subprocess.PIPE)
-    writes = [int(1.8 * FPS), int(17.93 * FPS), int(48.44 * FPS)]
+    writes = [int(1.8 * FPS), int(T_RES * FPS), int(T_POOL * FPS)]
     last = None
     for f in range(N):
         raw = dec.stdout.read(W * H * 3)
         if len(raw) < W * H * 3: raw = last
         last = raw; t = f / FPS
         src = Image.frombytes("RGB", (W, H), raw)
-        if 14.13 <= t < 17.93:
+        if T_FRONT <= t < T_RES:
             if not hasattr(main, "fd"):
                 main.fd = subprocess.Popen(["ffmpeg", "-v", "error", "-i", "truoc-toa-nha.mp4", "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], stdout=subprocess.PIPE)
             r2 = main.fd.stdout.read(W * H * 3)
             if len(r2) == W * H * 3: main.last2 = r2
             fr = Image.frombytes("RGB", (W, H), main.last2).convert("RGBA")
-        elif t < 1.6: fr = hero_frame(t)
-        elif 38.34 <= t < 41.9: fr = img_fit("slide-thap-ho-boi.jpg", 38.34, 3.56, t, 0.10)
-        elif 41.9 <= t < 45.35: fr = img_fit("slide-mat-bang.jpg", 41.9, 3.45, t, 0.06); stats(fr, t - 41.9)
-        elif 45.35 <= t < 48.44: fr = img_fit("slide-ho-boi.jpg", 45.35, 3.09, t, 0.07)
-        elif 48.44 <= t < 50.9: fr = img_fit("pho-truoc-toa.jpg", 48.44, 2.46, t)
-        elif 50.9 <= t < 53.08: fr = img_fit("thap-kickoff.jpg", 50.9, 2.18, t)
-        elif t >= 53.08: fr = end_frame(53.08, t, src)
+        elif t < T_TITLE: fr = hero_frame(t)
+        elif T_TOWER <= t < T_PLAN: fr = img_fit("slide-thap-ho-boi.jpg", T_TOWER, T_PLAN - T_TOWER, t, 0.10)
+        elif T_PLAN <= t < T_POOL: fr = img_fit("slide-mat-bang.jpg", T_PLAN, T_POOL - T_PLAN, t, 0.06); stats(fr, t - T_PLAN)
+        elif T_POOL <= t < T_STREET: fr = img_fit("slide-ho-boi.jpg", T_POOL, T_STREET - T_POOL, t, 0.07)
+        elif T_STREET <= t < T_KICK: fr = img_fit("pho-truoc-toa.jpg", T_STREET, T_KICK - T_STREET, t)
+        elif T_KICK <= t < T_END: fr = img_fit("thap-kickoff.jpg", T_KICK, T_END - T_KICK, t)
+        elif t >= T_END: fr = end_frame(T_END, t, src)
         else: fr = src.convert("RGBA")
-        if t < 53.08:
-            if 1.6 <= t < 38.34 and not (14.13 <= t < 17.93): fr.alpha_composite(MASK)
-            show_brand = not (38.34 <= t < 45.35)
+        if t < T_END:
+            if T_TITLE <= t < T_TOWER and not (T_FRONT <= t < T_RES): fr.alpha_composite(MASK)
+            show_brand = not (T_TOWER <= t < T_POOL)
             if show_brand:
                 idx, a = R.sig_state(f, writes, 1.0)
-                if 45.35 <= t < 53.08: a = max(a, 0)  # trên ảnh vẫn hiện
                 R.draw_sig(fr, idx, a, w=300, cx=540, bottom=1455)
                 fr.alpha_composite(PILL)
             for a0, b0, lines, y in CAP:
@@ -216,10 +226,11 @@ def main():
     enc.stdin.close(); enc.wait(); dec.terminate()
 
     # 4) Âm thanh: giọng đọc + nhạc nền (tự nhỏ khi có lời) + tiếng hiệu ứng
-    SFX = [("impact", 0.0), ("whoosh", 0.6), ("whoosh", 5.15), ("blip", 10.94), ("blip", 14.13), ("whoosh", 17.7),
-           ("blip", 18.4), ("blip", 20.13), ("blip", 21.34), ("blip", 22.82), ("whoosh", 25.6), ("blip", 26.47),
-           ("blip", 30.33), ("blip", 33.92), ("whoosh", 38.1), ("riser", 39.0), ("impact", 40.5), ("blip", 42.04),
-           ("whoosh", 45.15), ("whoosh", 48.25), ("impact", 48.44), ("whoosh", 52.9), ("impact", 54.35), ("blip", 56.08)]
+    SFX = [("impact", 0.0), ("whoosh", T_TITLE - 0.2), ("whoosh", T_MAP - 0.2), ("blip", S(4)), ("whoosh", T_FRONT - 0.2),
+           ("whoosh", T_RES - 0.2)] + [("blip", x) for x in _r] + [
+           ("whoosh", T_CONN - 0.2), ("blip", S(8)), ("blip", S(9)), ("blip", S(10)), ("whoosh", T_TOWER - 0.25), ("impact", T_TOWER),
+           ("whoosh", T_PLAN - 0.2)] + [("blip", T_PLAN + 0.15 + 0.28 * i) for i in range(4)] + [
+           ("whoosh", T_POOL - 0.2), ("whoosh", T_STREET - 0.2), ("whoosh", T_KICK - 0.2), ("whoosh", T_END - 0.2), ("impact", S(16)), ("blip", S(17))]
     ins = ["-i", "giong-doc.wav", "-i", "../assets/nhac-nen.m4a"]
     fc = ["[2:a]volume=0.55,afade=t=out:st=57.5:d=2.5[m]", "[1:a]asplit=2[vo][sc]", "[m][sc]sidechaincompress=threshold=0.03:ratio=8:attack=20:release=400[md]"]
     mix = ["[vo]", "[md]"]
