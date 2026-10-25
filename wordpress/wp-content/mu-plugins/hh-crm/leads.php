@@ -191,6 +191,9 @@ add_action( 'admin_post_hh_lead', 'hh_handle_lead' );
 function hh_handle_lead() {
 	$back = remove_query_arg( 'lien-he', wp_get_referer() ?: home_url( '/' ) );
 	$go   = static function ( $result ) use ( $back ) {
+		if ( ! empty( $_POST['ajax'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification -- Form gửi ngầm (VD hỏi số Zalo trước khi mở công cụ chọn căn): trả JSON, không chuyển trang.
+			wp_send_json( array( 'ok' => 'ok' === $result ) );
+		}
 		wp_safe_redirect( add_query_arg( 'lien-he', $result, $back ) . '#lien-he' );
 		exit;
 	};

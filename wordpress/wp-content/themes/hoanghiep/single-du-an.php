@@ -30,6 +30,7 @@ while ( have_posts() ) :
 		'giao-dich'  => $resale ? 'Chuyển nhượng & cho thuê' : '',
 		'vi-tri'     => 'Vị trí',
 		'tien-ich'   => 'Tiện ích',
+		'xem-4d'     => ( hh_meta( 'hh_p_tour_4d' ) || hh_meta( 'hh_p_tour_units' ) ) ? 'Xem 4D' : '',
 		'mat-bang'   => 'Mặt bằng',
 		'gio-hang'   => hh_table( 'hh_p_hot_units', 5 ) ? 'Giỏ hàng' : '',
 		'san-pham'   => 'Layout căn',
@@ -342,6 +343,8 @@ while ( have_posts() ) :
 				</div>
 				<?php hh_cta_box( $ctas['tien-ich'] ); ?>
 			</section>
+
+			<?php get_template_part( 'template-parts/project-tour' ); ?>
 
 			<section class="block" id="mat-bang">
 				<h2 class="block__title">Mặt bằng <?php echo esc_html( $title ); ?></h2>

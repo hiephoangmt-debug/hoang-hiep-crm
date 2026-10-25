@@ -235,6 +235,98 @@
 		} );
 	}
 
+	// Mô hình 4D: chỉ tải khi khách bấm (trang nhẹ, không tốn dữ liệu di động).
+	$$( '.tour4d' ).forEach( ( box ) => {
+		const play = box.querySelector( '.tour4d__play' );
+		if ( ! play ) {
+			return;
+		}
+		play.addEventListener( 'click', () => {
+			const f = document.createElement( 'iframe' );
+			f.src = box.dataset.src;
+			f.title = 'Mô hình 4D';
+			f.allow = 'fullscreen; accelerometer; gyroscope';
+			f.allowFullscreen = true;
+			box.classList.add( 'is-on' );
+			box.replaceChildren( f );
+		} );
+	} );
+
+	// Chọn căn: hỏi số Zalo một lần (lưu trên máy khách), gửi vào CRM rồi mở công cụ chọn căn.
+	const gate = document.getElementById( 'zalo-gate' );
+	if ( gate ) {
+		const form = gate.querySelector( 'form' );
+		const msg = gate.querySelector( '.zalo-gate__msg' );
+		let target = '';
+		const known = () => {
+			try {
+				return '1' === localStorage.getItem( 'hhZalo' );
+			} catch ( e ) {
+				return false;
+			}
+		};
+		const open = ( url, win ) => {
+			if ( win && ! win.closed ) {
+				win.location.href = url;
+			} else if ( ! window.open( url, '_blank', 'noopener' ) ) {
+				location.href = url;
+			}
+		};
+		const hide = () => {
+			gate.hidden = true;
+			document.body.classList.remove( 'has-pop' );
+		};
+		$$( '[data-zalo-gate]' ).forEach( ( btn ) => {
+			btn.addEventListener( 'click', () => {
+				target = btn.dataset.zaloGate;
+				if ( known() ) {
+					open( target );
+					return;
+				}
+				gate.hidden = false;
+				document.body.classList.add( 'has-pop' );
+				const tel = form.querySelector( '[name=phone]' );
+				if ( tel ) {
+					tel.focus();
+				}
+			} );
+		} );
+		gate.addEventListener( 'click', ( e ) => {
+			if ( e.target === gate || e.target.closest( '.lead-pop__close' ) ) {
+				hide();
+			}
+		} );
+		form.addEventListener( 'submit', ( e ) => {
+			e.preventDefault();
+			const nameIn = form.querySelector( '[name=name]' );
+			const phone = form.querySelector( '[name=phone]' ).value.replace( /[^0-9+]/g, '' );
+			if ( ! /^(\+?84|0)\d{8,10}$/.test( phone ) ) {
+				msg.textContent = 'Số Zalo chưa đúng, anh chị kiểm tra lại giúp em.';
+				msg.hidden = false;
+				return;
+			}
+			msg.hidden = true;
+			if ( ! nameIn.value.trim() ) {
+				nameIn.value = 'Khách xem chọn căn';
+			}
+			const win = window.open( 'about:blank', '_blank' ); // Mở tab ngay khi bấm để trình duyệt không chặn.
+			if ( win ) {
+				win.opener = null;
+			}
+			const data = new FormData( form );
+			data.set( 'phone', phone );
+			try {
+				localStorage.setItem( 'hhZalo', '1' );
+			} catch ( err ) {}
+			fetch( form.getAttribute( 'action' ), { method: 'POST', body: data, credentials: 'same-origin' } )
+				.catch( () => {} )
+				.finally( () => {
+					hide();
+					open( target, win );
+				} );
+		} );
+	}
+
 	// Các loại căn hộ: chọn loại bên trái, hiện layout bên phải.
 	$$( '.units' ).forEach( ( wrap ) => {
 		$$( '.units__item', wrap ).forEach( ( item ) => {

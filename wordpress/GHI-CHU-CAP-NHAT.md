@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.23** + plugin Hoàng Hiệp CRM **2.20.73**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.24** + plugin Hoàng Hiệp CRM **2.20.74**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.74, giao diện 2.15.24: Sun Saphia – xem 4D và chọn căn
+
+- Trang **Sun Saphia Residence** có mục mới **Xem 4D & chọn căn** (thêm vào thanh mục lục "Xem 4D").
+- **Mô hình 4D**: khách bấm là xem ngay trên trang (bản công khai, có chữ chìm số điện thoại); có nút mở toàn màn hình. Web tự bỏ tham số nội bộ `crm` (tham số này tắt chữ chìm) và thêm `pub=1`.
+- **Chọn căn, xem chi tiết**: khách nhập **số Zalo** (tên không bắt buộc) → lưu vào **Khách hàng** (nhu cầu "Xem chọn căn", gắn dự án Sun Saphia), email báo như form thường → mở công cụ chọn căn. Máy đã nhập rồi thì lần sau mở thẳng.
+- Dự án khác muốn dùng: sửa dự án → mục **Hình ảnh & video** → ô **Link mô hình 4D** và **Link công cụ chọn căn**.
 
 ## Có gì mới – plugin 2.20.73, giao diện 2.15.23: tự xoá bộ nhớ đệm sau cập nhật; diện tích ghi kiểu Việt
 

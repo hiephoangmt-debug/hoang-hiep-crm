@@ -173,6 +173,8 @@ function hh_project_schema() {
 				'hh_p_gallery' => array( 'type' => 'gallery', 'label' => 'Thư viện ảnh dự án' ),
 				'hh_p_image_links' => array( 'type' => 'lines', 'label' => 'Link ảnh (Google Drive hoặc link ảnh) – web tự tải về', 'placeholder' => "https://drive.google.com/file/d/…/view | Phối cảnh tổng thể | đại diện\nhttps://drive.google.com/file/d/…/view | Tổng mặt bằng tiện ích Khu 1 | tiện ích\nhttps://drive.google.com/file/d/…/view | Mặt bằng Vịnh Mây | mặt bằng", 'help' => 'Mỗi dòng: Link | Chú thích ảnh | Mục (thư viện / tiện ích / mặt bằng / đại diện). Link Drive chia sẻ "Bất kỳ ai có đường liên kết", dán link TỪNG FILE (không dán link thư mục). Bấm Cập nhật: web tải ảnh về Thư viện và gắn vào đúng mục; mỗi link chỉ tải 1 lần, mỗi lần tối đa 15 ảnh.' ),
 				'hh_p_video'   => array( 'type' => 'url', 'label' => 'Video YouTube', 'placeholder' => 'https://www.youtube.com/watch?v=…' ),
+				'hh_p_tour_4d'    => array( 'type' => 'url', 'label' => 'Link mô hình 4D / 3D (xem tự do trên web)', 'placeholder' => 'https://…/sun-saphia-4d.html', 'half' => true, 'help' => 'Web tự thêm pub=1 (bản công khai có chữ chìm số điện thoại), bỏ tham số nội bộ crm.' ),
+				'hh_p_tour_units' => array( 'type' => 'url', 'label' => 'Link công cụ chọn căn (khách để lại số Zalo mới mở)', 'placeholder' => 'https://…/chon-can-app.html', 'half' => true ),
 			),
 		),
 		'hoi-dap'   => array(
