@@ -16,12 +16,18 @@ def wrap(d, t, f, mw):
         else: out.append(line); line = w
     out.append(line); return out
 
-def background(img_path, out):
-    """Ảnh nền 1.25x khung để zoom: ảnh dọc thì cắt đầy khung; ảnh ngang thì đặt giữa trên nền mờ."""
+def background(img_path, out, fit=False):
+    """Ảnh nền 1.25x khung để zoom: ảnh dọc thì cắt đầy khung; ảnh ngang (hoặc fit=True, ví dụ thẻ thông tin có chữ) thì đặt trọn ảnh giữa nền mờ."""
     S = 1.25; BW, BH = int(W * S), int(H * S)
     im = Image.open(img_path).convert("RGB")
     r = im.width / im.height
-    if r < 0.9:
+    if fit and r < 0.9:
+        sc = max(BW / im.width, BH / im.height); blur = im.resize((int(im.width * sc), int(im.height * sc))).filter(ImageFilter.GaussianBlur(40))
+        x, y = (blur.width - BW) // 2, (blur.height - BH) // 2; bg = blur.crop((x, y, x + BW, y + BH))
+        bg = Image.blend(bg, Image.new("RGB", bg.size, NAVY), 0.45)
+        fw = int(BW * 0.89); fh = int(fw / r); fg = im.resize((fw, fh), Image.LANCZOS)
+        bg.paste(fg, ((BW - fw) // 2, int(BH * 0.40) - fh // 2))
+    elif r < 0.9:
         sc = max(BW / im.width, BH / im.height); im2 = im.resize((int(im.width * sc), int(im.height * sc)), Image.LANCZOS)
         x, y = (im2.width - BW) // 2, (im2.height - BH) // 2; bg = im2.crop((x, y, x + BW, y + BH))
     else:
@@ -172,7 +178,7 @@ def main(cfg_path, out):
     f0 = 0
     for i, s in enumerate(cfg["scenes"]):
         bg, ov, seg = f"{tmp}/bg{i}.jpg", f"{tmp}/ov{i}.png", f"{tmp}/s{i}.mp4"
-        background(os.path.join(base, s["img"]), bg); overlay(s.get("tag"), s.get("lines", []), ov, s.get("big", False))
+        background(os.path.join(base, s["img"]), bg, s.get("fit", not s.get("lines"))); overlay(s.get("tag"), s.get("lines", []), ov, s.get("big", False))
         smooth_segment(bg, ov, s["dur"], i % 2 == 0, seg, f0, brand, {"writes": writes})
         f0 += int(round(s["dur"] * FPS)); segs.append(seg)
     e = cfg.get("end")
