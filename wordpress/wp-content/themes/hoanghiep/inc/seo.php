@@ -844,6 +844,19 @@ function hh_seo_landing_entries() {
 			$out[ hh_hub_url( $key ) ] = hh_hub_lastmod( $key );
 		}
 	}
+	// Trang con của landing dự án (VD /du-an/fours-tower/gio-hang/, /du-an/sun-saphia-residence/quy-hoach/).
+	if ( function_exists( 'hoanghiep_landing_subpages' ) ) {
+		foreach ( hoanghiep_landing_subpages() as $project => $subs ) {
+			$post = get_page_by_path( $project, OBJECT, 'du-an' );
+			if ( ! $post || 'publish' !== $post->post_status || 'chuan' === get_post_meta( $post->ID, 'hh_p_layout', true ) ) {
+				continue;
+			}
+			foreach ( $subs as $sub ) {
+				$file = get_theme_file_path( 'landing/' . $project . '--' . $sub . '.html' );
+				$out[ home_url( '/du-an/' . $project . '/' . $sub . '/' ) ] = max( (int) @filemtime( $file ), (int) get_post_modified_time( 'U', true, $post ) ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
+			}
+		}
+	}
 	$list = array();
 	foreach ( $out as $url => $mod ) {
 		$list[] = array( $url, (int) $mod );

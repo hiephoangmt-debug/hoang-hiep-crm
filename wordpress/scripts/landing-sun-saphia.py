@@ -7,11 +7,16 @@ thành trang dự án trên hiephoangmt.com: wordpress/wp-content/themes/hoanghi
 - Link sang các trang con sun-saphia-residence.com: trỏ về bài cùng chủ đề trên hiephoangmt.com khi đã có.
 
 Dùng: python3 landing-sun-saphia.py <trang-chu.html> <đầu ra .html>
+      python3 landing-sun-saphia.py <quy-hoach.html> <sun-saphia-residence--quy-hoach.html> quy-hoach   (trang con)
+Trang con: /du-an/sun-saphia-residence/<tên>/, tiêu đề + mô tả lấy từ trang gốc (dòng HH-LANDING-META, sửa lại sau khi viết lại chữ).
+Sau đó: landing-loc-anh.py (bỏ ảnh không được đăng), landing-viet-lai.py (viết lại chữ), landing-kiem-tra.py.
 """
 import re
 import sys
 
 src, out = sys.argv[1], sys.argv[2]
+sub = sys.argv[3] if len(sys.argv) > 3 else ''
+SUBS = ('quy-hoach', 'cho-thue', 'tinh-dong-tien', 'chinh-sach-bao-mat')
 s = open(src, encoding='utf-8').read()
 
 head = s[s.find('<head>') + 6:s.find('</head>')]
@@ -45,6 +50,8 @@ body = re.sub(r'<script[^>]*googletagmanager[^>]*>\s*</script>', '', body)
 body = re.sub(r'<script>\s*window\.dataLayer.*?</script>', '', body, flags=re.S)
 
 rep = [
+    ('– Giám đốc kinh doanh <b>TATILAND</b> (Công ty CP Đầu tư Địa ốc TATI), đại lý phân phối chính thức dự án theo chứng nhận của Sun Property ngày 23/10/2026', '– tư vấn bất động sản tại Đà Nẵng (hiephoangmt.com)'),
+    ('– Giám đốc kinh doanh TATILAND (Công ty CP Đầu tư Địa ốc TATI), đại lý phân phối chính thức dự án theo chứng nhận của Sun Property ngày 23/10/2026', '– tư vấn bất động sản tại Đà Nẵng (hiephoangmt.com)'),
     ('<b>Hoàng Phạm Đình Hiệp</b> – Giám đốc kinh doanh TATILAND, đại lý phân phối chính thức · ', '<b>Hoàng Hiệp</b> – tư vấn dự án · Zalo 0904 567 009 · '),
     ('do <b>Hoàng Phạm Đình Hiệp</b> – Giám đốc kinh doanh TATILAND (Công ty CP Đầu tư Địa ốc TATI), đại lý phân phối chính thức dự án theo chứng nhận của Sun Property ngày 23/10/2026 – thực hiện', 'do <b>Hoàng Hiệp</b> (hiephoangmt.com) thực hiện'),
     (' · TATILAND – đại lý phân phối chính thức', ''),
@@ -66,6 +73,7 @@ links = {
     'phap-ly': '/phap-ly-sun-saphia-residence-so-huu-bao-lau/',
     'vi-sao-sun-group': '/du-an-can-ho-sun-group-da-nang-2026/',
 }
+links.update({k: '/du-an/sun-saphia-residence/%s/' % k for k in SUBS})
 
 
 def fix_link(m):
@@ -73,17 +81,25 @@ def fix_link(m):
     return 'href="%s"' % links[path] if path in links else m.group(0)
 
 
+# Đường dẫn đầu trang con: Trang chủ (hiephoangmt.com) › Sun Saphia Residence › …
+body = body.replace('<a href="https://www.sun-saphia-residence.com/">Trang chủ</a> › <a href="https://www.sun-saphia-residence.com/">Sun Saphia Residence</a>', '<a href="/">Trang chủ</a> › <a href="/du-an/sun-saphia-residence/">Sun Saphia Residence</a>')
 body = re.sub(r'href="https://www\.sun-saphia-residence\.com/([^"]*)"', fix_link, body)
 
 # Đường dẫn đầu trang: Trang chủ / Dự án của hiephoangmt.com.
 body = body.replace('<nav class="crumb" aria-label="Đường dẫn"><a href="/du-an/sun-saphia-residence/">Trang chủ</a> › <span>Dự án Đà Nẵng</span>', '<nav class="crumb" aria-label="Đường dẫn"><a href="/">Trang chủ</a> › <a href="/du-an/">Dự án Đà Nẵng</a>')
 
-left = [re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', body[max(0, m.start() - 80):m.end() + 60])) for m in re.finditer('(?i)tati', body)]
+left = [re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', body[max(0, m.start() - 80):m.end() + 60])) for m in re.finditer(r'(?i)\btati', body)]
 if left:
     print('CÒN TÊN TATI – sửa danh sách thay thế:')
     for x in left:
         print(' -', x)
     sys.exit(1)
 
-open(out, 'w', encoding='utf-8').write('<!--HH-LANDING-HEAD-->\n' + head_out + '\n<!--HH-LANDING-BODY-->\n' + body)
+meta = ''
+if sub:
+    import json
+    t = re.search(r'<title>(.*?)</title>', head, flags=re.S)
+    d = re.search(r'<meta name="description" content="([^"]*)"', head)
+    meta = '<!--HH-LANDING-META ' + json.dumps({'title': t.group(1).strip() if t else '', 'description': d.group(1) if d else '', 'url': '/du-an/sun-saphia-residence/%s/' % sub}, ensure_ascii=False) + ' -->\n'
+open(out, 'w', encoding='utf-8').write(meta + '<!--HH-LANDING-HEAD-->\n' + head_out + '\n<!--HH-LANDING-BODY-->\n' + body)
 print('OK', len(head_out), len(body))
