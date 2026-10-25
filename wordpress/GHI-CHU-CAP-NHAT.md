@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.30** + plugin Hoàng Hiệp CRM **2.20.79**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.31** + plugin Hoàng Hiệp CRM **2.20.80**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,15 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.80, giao diện 2.15.31: trang Sun Saphia Residence dạng landing
+
+- **hiephoangmt.com/du-an/sun-saphia-residence/** hiện giao diện landing giống sun-saphia-residence.com: ảnh lớn, nhãn Kick-off 23/10/2026, menu nút, tóm tắt nhanh, các mục 01 – 09, 4D, chọn căn, form nhận bảng giá, chat riêng của landing.
+- Bỏ mục chứng nhận đại lý và tên đơn vị phân phối; ghi "Hoàng Hiệp – tư vấn dự án". Link Bảng giá, Mặt bằng, Pháp lý, Vì sao Sun Group trỏ về bài cùng chủ đề trên hiephoangmt.com.
+- Tiêu đề, mô tả, canonical, schema, sitemap vẫn của hiephoangmt.com (Rank Math).
+- Form landing vẫn gửi Telegram / Google Sheets / email như cũ, **thêm lưu khách vào mục Khách hàng** của web.
+- Muốn về giao diện cũ: sửa dự án → ô **Giao diện trang** → "Chuẩn của web".
+- Cập nhật nội dung landing: dựng lại bằng `python3 scripts/landing-sun-saphia.py <trang-chu.html> wp-content/themes/hoanghiep/landing/sun-saphia-residence.html`.
 
 ## Có gì mới – giao diện 2.15.30: cân đều chữ và khối trên mọi trang; bản đồ tòa con
 

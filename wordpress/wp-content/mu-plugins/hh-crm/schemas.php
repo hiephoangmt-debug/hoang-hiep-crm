@@ -24,6 +24,7 @@ function hh_project_schema() {
 			'title'  => 'Tổng quan',
 			'intro'  => 'Thông tin chính hiển thị ở đầu trang dự án. Ô nào để trống sẽ tự ẩn.',
 			'fields' => array(
+				'hh_p_layout'       => array( 'type' => 'select', 'label' => 'Giao diện trang', 'half' => true, 'options' => array( '' => 'Tự động (có landing riêng thì dùng landing)', 'chuan' => 'Chuẩn của web' ) ),
 				'hh_p_status'       => array( 'type' => 'select', 'label' => 'Tình trạng', 'half' => true, 'options' => array(
 					'sap-mo-ban'    => 'Sắp mở bán',
 					'dang-mo-ban'   => 'Đang mở bán',
