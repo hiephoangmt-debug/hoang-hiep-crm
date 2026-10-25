@@ -184,10 +184,15 @@ def main(cfg_path, out):
     lst = f"{tmp}/list.txt"; open(lst, "w").write("".join(f"file '{p}'\n" for p in segs))
     silent = f"{tmp}/v.mp4"; run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", lst, "-c", "copy", silent])
     total = sum(s["dur"] for s in cfg["scenes"]) + (e["dur"] if e else 0)
-    voice = os.path.join(base, cfg["voice"]); music = os.path.join(base, cfg["music"])
-    af = (f"[1:a]adelay=400|400,volume=1.6[vo];[2:a]volume=0.16,aloop=loop=-1:size=2e9,atrim=0:{total},afade=t=out:st={total-1.5}:d=1.5[mu];"
-          f"[vo][mu]amix=inputs=2:duration=longest:normalize=0,atrim=0:{total}[a]")
-    run(["ffmpeg", "-y", "-i", silent, "-i", voice, "-i", music, "-filter_complex", af, "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", out])
+    music = os.path.join(base, cfg["music"])
+    if cfg.get("voice"):
+        voice = os.path.join(base, cfg["voice"])
+        af = (f"[1:a]adelay=400|400,volume=1.6[vo];[2:a]volume=0.16,aloop=loop=-1:size=2e9,atrim=0:{total},afade=t=out:st={total-1.5}:d=1.5[mu];"
+              f"[vo][mu]amix=inputs=2:duration=longest:normalize=0,atrim=0:{total}[a]")
+        run(["ffmpeg", "-y", "-i", silent, "-i", voice, "-i", music, "-filter_complex", af, "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", out])
+    else:   # chưa có giọng đọc: chỉ nhạc nền, to hơn
+        af = f"[1:a]volume=0.55,aloop=loop=-1:size=2e9,atrim=0:{total},afade=t=in:st=0:d=0.8,afade=t=out:st={total-2}:d=2[a]"
+        run(["ffmpeg", "-y", "-i", silent, "-i", music, "-filter_complex", af, "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", out])
     print(out, total)
 
 if __name__ == "__main__": main(sys.argv[1], sys.argv[2])

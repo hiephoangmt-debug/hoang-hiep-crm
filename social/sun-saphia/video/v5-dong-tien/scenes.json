@@ -1,0 +1,69 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/khach-du-lich.jpg",
+   "tag": "CHO THUÊ",
+   "lines": [
+    "Căn hộ mặt biển thu về bao nhiêu?"
+   ],
+   "dur": 3.6,
+   "big": true
+  },
+  {
+   "img": "../../anh-page-2810/ho-boi-hoang-hon.jpg",
+   "tag": "STUDIO 30 M²",
+   "lines": [
+    "Giá tham khảo 3 tỷ",
+    "Thuê 2,5 triệu/đêm"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-bien-hoang-hon.jpg",
+   "tag": "LẤP ĐẦY 60%",
+   "lines": [
+    "Thực nhận ~351 triệu/năm",
+    "≈ 11,7%/năm"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/can-1br.jpg",
+   "tag": "1BR 50 M²",
+   "lines": [
+    "3,5 triệu/đêm → ~492 triệu/năm"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-dem-resort.jpg",
+   "tag": "SUN GROUP MIỀN TRUNG",
+   "lines": [
+    "Khách sạn lấp đầy 81,3% năm 2026"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/kh-tre-tu-do.jpg",
+   "tag": "LƯU Ý",
+   "lines": [
+    "Bài toán minh họa của chủ đầu tư",
+    "Không phải cam kết lợi nhuận"
+   ],
+   "dur": 3.8,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "Tính dòng tiền theo căn",
+   "Gửi bảng tính qua Zalo"
+  ]
+ }
+}

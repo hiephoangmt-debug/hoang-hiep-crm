@@ -1,0 +1,67 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/thap-dem-resort.jpg",
+   "tag": "SẮP MỞ BÁN",
+   "lines": [
+    "Sun Saphia Residence – chuẩn bị gì?"
+   ],
+   "dur": 3.6,
+   "big": true
+  },
+  {
+   "img": "../assets/kick-off.jpg",
+   "tag": "23/10/2026",
+   "lines": [
+    "Kick-off Đón ánh dương"
+   ],
+   "dur": 3.4,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-bien-hoang-hon.jpg",
+   "tag": "DỰ KIẾN",
+   "lines": [
+    "Mở bán cuối tháng 11/2026"
+   ],
+   "dur": 3.4,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/layout-tang-3a-28.jpg",
+   "tag": "ĐỢT ĐẦU",
+   "lines": [
+    "Giá tốt nhất · chọn căn đẹp trước"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-tren-cao-ngay.jpg",
+   "tag": "ĐẶT CHỖ",
+   "lines": [
+    "50 triệu · hoàn 100% nếu không mua"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/galaxy-downtown.jpg",
+   "tag": "AN TOÀN",
+   "lines": [
+    "Tiền nộp tài khoản công ty",
+    "Không qua tài khoản cá nhân"
+   ],
+   "dur": 3.8,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "Nhận bảng giá gốc",
+   "Gửi qua Zalo ngay khi công bố"
+  ]
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/thap-bien-hoang-hon.jpg",
+   "tag": "VỊ TRÍ",
+   "lines": [
+    "Sun Saphia Residence nằm ở đâu?"
+   ],
+   "dur": 3.6,
+   "big": true
+  },
+  {
+   "img": "../assets/vi-tri-mob.jpg",
+   "tag": "GIAO LỘ",
+   "lines": [
+    "Võ Nguyên Giáp – Trường Sa",
+    "Ngũ Hành Sơn, Đà Nẵng"
+   ],
+   "dur": 4.0,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/ba-duong-xuong-bien.jpg",
+   "tag": "RA BIỂN",
+   "lines": [
+    "~400 m tới bãi tắm Sơn Thủy"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/lrt-ban-do.jpg",
+   "tag": "ĐƯỜNG SẮT ĐÔ THỊ",
+   "lines": [
+    "~500 m tới ga LRT 09",
+    "Tuyến sân bay – Hội An"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/galaxy-downtown.jpg",
+   "tag": "KẾT NỐI",
+   "lines": [
+    "4 km tới Galaxy – Downtown"
+   ],
+   "dur": 3.4,
+   "big": false
+  },
+  {
+   "img": "../assets/bien-cong-vien.jpg",
+   "tag": "TRƯỚC DỰ ÁN",
+   "lines": [
+    "Công viên công cộng ~2,45 ha"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/mo-rong-duong-bien.jpg",
+   "tag": "DI CHUYỂN",
+   "lines": [
+    "10–15 phút ra sân bay",
+    "~30 phút tới Hội An"
+   ],
+   "dur": 3.8,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "Xem vị trí thực tế",
+   "Gọi video Zalo đi từ dự án ra biển"
+  ]
+ }
+}

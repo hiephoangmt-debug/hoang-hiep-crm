@@ -1,0 +1,69 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/thap-dem-resort.jpg",
+   "tag": "PHÁP LÝ",
+   "lines": [
+    "Căn hộ 50 năm hết hạn thì sao?"
+   ],
+   "dur": 3.6,
+   "big": true
+  },
+  {
+   "img": "../../anh-page-2810/gcn-dau-tu-1.jpg",
+   "tag": "GCN ĐĂNG KÝ ĐẦU TƯ",
+   "lines": [
+    "Mã dự án 2572746483",
+    "Cấp lần đầu 17/09/2026"
+   ],
+   "dur": 4.0,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-bien-hoang-hon.jpg",
+   "tag": "MỐC 1",
+   "lines": [
+    "50 năm thời hạn dự án",
+    "Tính từ 17/09/2026 → 09/2076"
+   ],
+   "dur": 4.0,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-tren-cao-ngay.jpg",
+   "tag": "MỐC 2",
+   "lines": [
+    "100 năm niên hạn công trình cấp I"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/ho-boi-hoang-hon.jpg",
+   "tag": "HẾT 50 NĂM",
+   "lines": [
+    "Được xem xét gia hạn",
+    "theo Luật Đất đai 2024"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/galaxy-downtown.jpg",
+   "tag": "NGHỊ QUYẾT 278/NQ-CP",
+   "lines": [
+    "Thời hạn chung cư theo niên hạn công trình"
+   ],
+   "dur": 4.0,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "Nhận bản sao pháp lý",
+   "GCN đầu tư · Nghị quyết 278"
+  ]
+ }
+}

@@ -1,0 +1,65 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/thap-bien-hoang-hon.jpg",
+   "tag": "SUN GROUP",
+   "lines": [
+    "20 năm ở Đà Nẵng, giờ mới làm căn hộ mặt biển?"
+   ],
+   "dur": 3.8,
+   "big": true
+  },
+  {
+   "img": "../../anh-tiktok/3-hanh-trinh-sun-group.jpg",
+   "tag": null,
+   "lines": [],
+   "dur": 4.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/song-nui-bien-art.jpg",
+   "tag": "MẢNH GHÉP CÒN THIẾU",
+   "lines": [
+    "Trước mặt Biển · Sau lưng Sông",
+    "Bên cạnh Núi"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-tren-cao-ngay.jpg",
+   "tag": "ĐẦU TIÊN",
+   "lines": [
+    "Căn hộ cao tầng mặt biển của Sun Group"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/apsara-art.jpg",
+   "tag": "THIẾT KẾ",
+   "lines": [
+    "Cảm hứng vũ nữ Apsara · Chăm Pa"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/thap-dem-resort.jpg",
+   "tag": "30 TẦNG · 114 M",
+   "lines": [
+    "Biểu tượng mới bên biển Đà Nẵng"
+   ],
+   "dur": 3.6,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "Nhận thông tin dự án",
+   "Bảng giá gửi qua Zalo khi công bố"
+  ]
+ }
+}

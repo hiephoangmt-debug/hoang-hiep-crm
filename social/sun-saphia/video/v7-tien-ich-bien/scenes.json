@@ -1,0 +1,75 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/thap-bien-hoang-hon.jpg",
+   "tag": "TIỆN ÍCH",
+   "lines": [
+    "Sống như đi nghỉ dưỡng mỗi ngày"
+   ],
+   "dur": 3.6,
+   "big": true
+  },
+  {
+   "img": "../../anh-page-2810/ho-boi-hoang-hon.jpg",
+   "tag": "WELLNESS",
+   "lines": [
+    "Hồ bơi tầng 3 view biển"
+   ],
+   "dur": 3.4,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/tien-ich-gym.jpg",
+   "tag": "HEALTHY",
+   "lines": [
+    "Gym · Yoga · Pilates"
+   ],
+   "dur": 3.4,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/ba-duong-xuong-bien.jpg",
+   "tag": "BIỂN TRƯỚC NHÀ",
+   "lines": [
+    "3 lối xuống biển ngay trước khu Saphia"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/the-thao-bien.jpg",
+   "tag": "WATERFRONT",
+   "lines": [
+    "Kayak · SUP · Dù lượn · Jetski"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/sup.jpg",
+   "tag": "MỖI SÁNG",
+   "lines": [
+    "Chèo SUP đón bình minh"
+   ],
+   "dur": 3.4,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/kh-nghi-duong-som.jpg",
+   "tag": "3 CÔNG VIÊN BÃI TẮM",
+   "lines": [
+    "Sơn Thủy · đối diện dự án · Huyền Trân"
+   ],
+   "dur": 3.8,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "Nhận brochure dự án",
+   "Gửi qua Zalo miễn phí"
+  ]
+ }
+}

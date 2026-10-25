@@ -1,0 +1,68 @@
+{
+ "music": "../assets/nhac-nen.m4a",
+ "scenes": [
+  {
+   "img": "../../anh-page-2810/thap-tren-cao-ngay.jpg",
+   "tag": "MẶT BẰNG",
+   "lines": [
+    "Studio 30 m² ở có chật không?"
+   ],
+   "dur": 3.6,
+   "big": true
+  },
+  {
+   "img": "../assets/mat-bang-studio.jpg",
+   "tag": "STUDIO · 513 CĂN",
+   "lines": [
+    "30–31 m² · 3,8 × 9 m",
+    "Logia · bếp chữ L"
+   ],
+   "dur": 4.0,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/can-1br.jpg",
+   "tag": "1BR+ · 108 CĂN",
+   "lines": [
+    "50–51 m² · 6,2 × 9 m",
+    "Thêm phòng đa năng"
+   ],
+   "dur": 3.8,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/can-2br.jpg",
+   "tag": "2BR · 133 CĂN",
+   "lines": [
+    "60–70 m² · căn góc bo tròn"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/layout-tang-3a-28.jpg",
+   "tag": "LAYOUT TẦNG",
+   "lines": [
+    "28 căn mỗi tầng · tầng 3A–28"
+   ],
+   "dur": 3.6,
+   "big": false
+  },
+  {
+   "img": "../../anh-page-2810/mat-bang-tong-the.jpg",
+   "tag": "TRẦN CAO 3,5 M",
+   "lines": [
+    "Tối ưu view biển Mỹ Khê"
+   ],
+   "dur": 3.6,
+   "big": false
+  }
+ ],
+ "end": {
+  "dur": 4.5,
+  "lines": [
+   "Nhận mặt bằng từng tầng",
+   "Căn còn trống gửi qua Zalo"
+  ]
+ }
+}
