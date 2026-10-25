@@ -68,17 +68,32 @@ def endcard(out, lines):
 
 def run(cmd): subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
 
+def smooth_segment(bg_path, ov_path, dur, zoom_in, out, zmax=1.10):
+    """Zoom mượt: tự cắt khung theo toạ độ lẻ (không làm tròn điểm ảnh) rồi đẩy thẳng vào ffmpeg.
+    zoompan của ffmpeg làm tròn vị trí từng khung nên hình bị rung."""
+    bg = Image.open(bg_path).convert("RGB"); ov = Image.open(ov_path)
+    BW, BH = bg.size; n = int(round(dur * FPS))
+    p = subprocess.Popen(["ffmpeg", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",
+                          "-vf", f"fade=t=in:st=0:d=0.3,fade=t=out:st={dur-0.3}:d=0.3,format=yuv420p",
+                          "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", out],
+                         stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    for k in range(n):
+        t = k / max(n - 1, 1); t = t * t * (3 - 2 * t)  # ease in-out
+        z = 1 + (zmax - 1) * (t if zoom_in else 1 - t)
+        cw, ch = BW / z, BH / z; x0, y0 = (BW - cw) / 2, (BH - ch) / 2
+        fr = bg.resize((W, H), Image.BICUBIC, box=(x0, y0, x0 + cw, y0 + ch)).convert("RGBA")
+        fr.alpha_composite(ov)
+        p.stdin.write(fr.convert("RGB").tobytes())
+    p.stdin.close(); p.wait()
+    if p.returncode: raise RuntimeError("ffmpeg lỗi khi dựng " + out)
+
 def main(cfg_path, out):
     cfg = json.load(open(cfg_path)); base = os.path.dirname(os.path.abspath(cfg_path))
     tmp = tempfile.mkdtemp(); segs = []
     for i, s in enumerate(cfg["scenes"]):
         bg, ov, seg = f"{tmp}/bg{i}.jpg", f"{tmp}/ov{i}.png", f"{tmp}/s{i}.mp4"
         background(os.path.join(base, s["img"]), bg); overlay(s.get("tag"), s.get("lines", []), ov, s.get("big", False))
-        n = int(s["dur"] * FPS); zin = i % 2 == 0
-        z = f"min(1+0.12*on/{n},1.12)" if zin else f"max(1.12-0.12*on/{n},1)"
-        vf = (f"[0:v]scale={int(W*1.25)}:{int(H*1.25)},zoompan=z='{z}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={n}:s={W}x{H}:fps={FPS}[b];"
-              f"[b][1:v]overlay=0:0,fade=t=in:st=0:d=0.3,fade=t=out:st={s['dur']-0.3}:d=0.3,format=yuv420p[v]")
-        run(["ffmpeg", "-y", "-loop", "1", "-i", bg, "-i", ov, "-filter_complex", vf, "-map", "[v]", "-t", str(s["dur"]), "-r", str(FPS), "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", seg])
+        smooth_segment(bg, ov, s["dur"], i % 2 == 0, seg)
         segs.append(seg)
     e = cfg.get("end")
     if e:
