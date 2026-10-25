@@ -88,6 +88,22 @@ def qh4(num='↗', alt=True):
           '<div class="qhcta"><div class="card" style="padding:16px 18px;margin-bottom:12px;background:#EEF4FB"><b>💡 Mua trước khi hạ tầng hoàn thiện</b><p style="margin:6px 0 0">Giá thường tăng theo từng mốc: công viên xong, đường mở rộng, ga tàu khởi công. Người vào sớm hưởng trọn phần tăng này.</p></div>'
           '<a class="btn" href="#" data-pop data-interest="Quy hoạch – nhận sơ đồ bản nét">Nhận sơ đồ quy hoạch bản nét qua Zalo</a></div></div></div></div></section>') % ((RAW + '6132e5c86ad5b3dd3da54636f517d3e283cc1944/landing/sun-saphia/v4/img/so-do-quy-hoach',) * 3)
 
+def khoi_de():
+    B = RAW + '7a03668bc5f37f2d88ff71cb75c89278cfd633fc/landing/sun-saphia/v4/img/'
+    def f(n, w, h, alt, cap):
+        return ('<figure class="fg" style="margin:0"><img src="%s%s.webp" srcset="%s%s-900.webp 900w, %s%s.webp %dw" sizes="(max-width: 760px) 100vw, 560px" width="%d" height="%d" alt="%s" loading="lazy" decoding="async"><figcaption>%s</figcaption></figure>'
+                % (B, n, B, n, B, n, w, w, h, alt, cap))
+    return ('<div style="margin-top:30px"><span class="ey">Khối đế thương mại · mặt tiền Võ Nguyên Giáp</span>'
+            '<h3 class="dp" style="font-size:28px;margin:4px 0 14px">Phố biển sầm uất <b>ngay dưới chân nhà</b></h3>'
+            '<div class="g2 kd2" style="align-items:stretch"><style>.kd2 figure{display:flex;flex-direction:column}.kd2 img{flex:1;min-height:0;object-fit:cover;width:100%;aspect-ratio:auto}@media(max-width:760px){.kd2 img{aspect-ratio:16/10;flex:none}}</style>'
+            + f('khoi-de-shop', 1024, 576, 'Phối cảnh khối đế thương mại Sun Saphia Residence trên đường ven biển Võ Nguyên Giáp, hàng dừa, phố đi bộ đông vui', 'Khối đế shop, café, nhà hàng nhìn ra trục biển (ảnh minh họa)')
+            + f('phoi-canh-kickoff', 1440, 1020, 'Phối cảnh tòa tháp Sun Saphia Residence 30 tầng bên biển lúc bình minh, từ thư mời sự kiện Kick-off', 'Phối cảnh tòa tháp lúc bình minh (thư mời Kick-off 23/10/2026)')
+            + '</div><div class="g4" style="margin-top:16px">'
+            '<div class="card"><span class="n">MUA SẮM</span><h3 class="oc">Shop khối đế</h3><p>Cửa hàng, tiện ích thiết yếu ngay trong tòa nhà.</p></div>'
+            '<div class="card"><span class="n">ẨM THỰC</span><h3 class="oc">Café · nhà hàng</h3><p>Ngồi nhìn ra trục biển, không cần đi xa.</p></div>'
+            '<div class="card"><span class="n">DÒNG KHÁCH</span><h3 class="oc">Mặt tiền trục biển</h3><p>Võ Nguyên Giáp – Trường Sa, tuyến du lịch đông nhất Đà Nẵng.</p></div>'
+            '<div class="card"><span class="n">CHO THUÊ</span><h3 class="oc">Tiện cho khách lưu trú</h3><p>Xuống nhà là có ăn uống, mua sắm – khách thuê đánh giá cao.</p></div></div></div>')
+
 def home():
     fq, fld = faq([
         ('Sun Saphia Residence ở đâu?', 'Giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, khu Saphia, phường Ngũ Hành Sơn, TP Đà Nẵng, trên trục biển Võ Nguyên Giáp – Trường Sa; ra bãi tắm Sơn Thủy khoảng 400 m qua công viên ven biển.'),
@@ -185,6 +201,7 @@ def home():
           '<article class="card">' + ('<img class="r" src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 400px" width="1600" height="900" alt="Hồ bơi tầng 3 nhìn ra biển lúc hoàng hôn – Sun Saphia Residence (ảnh minh họa)" loading="lazy" decoding="async">' % ((RAW + 'a0a6849c15880dc681b6e91708d2a0752bd2aa43/landing/sun-saphia/v4/img/ho-boi-tang-3',) * 3)) + '<h3 style="margin-top:12px">Wellness</h3><p>Hồ bơi tầng 3 view biển, phòng yoga – ngắm hoàng hôn từ mặt nước.</p></article>'
           '<article class="card">' + img('tien-ich-gym', 'Phòng gym, pilates hiện đại – tiện ích Healthy (ảnh minh họa)', 'r') + '<h3 style="margin-top:12px">Healthy</h3><p>Gym, pilates tại khu Gym &amp; Yoga; nhà trẻ, shop khối đế ngay trong tòa nhà.</p></article>'
           '<article class="card">' + img('the-thao-bien', 'Thể thao biển: bơi, dù lượn, kayak, jetski – tiện ích Waterfront (ảnh minh họa)', 'r') + '<h3 style="margin-top:12px">Waterfront</h3><p>Sống gắn với biển mỗi ngày: kayak, SUP, dù lượn, jetski ngay trước nhà.</p></article></div>'
+          + khoi_de() +
           '<div class="g2 eq" style="margin-top:30px"><div class="txt"><span class="ey">Chuỗi 03 công viên bãi tắm</span><h3 class="dp" style="font-size:28px">Bãi biển hiện hữu <b>ngay trước thềm nhà</b></h3>'
           '<p>Bãi biển và vùng nước biển tại Việt Nam là tài sản công thuộc sở hữu toàn dân, do Nhà nước đại diện quản lý. Tại Saphia, bãi biển hiện hữu ngay trước "thềm nhà", cùng chuỗi 3 công viên bãi tắm:</p>'
           '<ul class="ck"><li><b>Bãi tắm Sơn Thủy</b> – bãi tắm đầu tiên trong chuỗi, sát khu Saphia</li><li><b>Công viên bãi tắm đối diện</b> – thuộc dự án thu hồi KDL Hòn Ngọc Á Châu, ngay trước dự án</li><li><b>Công viên bãi tắm Huyền Trân Công Chúa</b> – cuối đường Huyền Trân Công Chúa, gần Ngũ Hành Sơn</li></ul>' + ('<figure class="fg" style="margin-top:16px"><img src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1108w" sizes="(max-width: 760px) 100vw, 900px" width="1108" height="620" alt="Ảnh thực tế bãi tắm Sơn Thủy gần Sun Saphia: bãi cát trắng, hàng dừa, nhìn về bán đảo Sơn Trà" loading="lazy" decoding="async"><figcaption>Ảnh thực tế bãi tắm Sơn Thủy – bãi cát trắng, hàng dừa, nhìn về bán đảo Sơn Trà</figcaption></figure>' % ((RAW + '8dc6de89aa9bb80ff88999c3ce0f24326031eae6/landing/sun-saphia/v4/img/bai-tam-son-thuy-thuc-te',) * 3)) + '</div>'
@@ -539,7 +556,7 @@ def ads(domain):
     b += ('<section class="sec alt"><div class="wrap">' + sh('06', 'Tiện ích', 'Sống gắn với <b>biển mỗi ngày</b>', 'y') +
           '<div class="g3"><article class="card">' + ('<img class="r" src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 400px" width="1600" height="900" alt="Hồ bơi tầng 3 nhìn ra biển – Sun Saphia Residence (ảnh minh họa)" loading="lazy" decoding="async">' % ((RAW + 'a0a6849c15880dc681b6e91708d2a0752bd2aa43/landing/sun-saphia/v4/img/ho-boi-tang-3',) * 3)) + '<h3 style="margin-top:12px">Hồ bơi tầng 3 view biển</h3></article>'
           '<article class="card">' + img('tien-ich-gym', 'Gym, pilates (ảnh minh họa)', 'r') + '<h3 style="margin-top:12px">Gym · Yoga · Pilates</h3></article>'
-          '<article class="card">' + img('the-thao-bien', 'Thể thao biển (ảnh minh họa)', 'r') + '<h3 style="margin-top:12px">Kayak · SUP · Jetski</h3></article></div></div></section>')
+          '<article class="card">' + img('the-thao-bien', 'Thể thao biển (ảnh minh họa)', 'r') + '<h3 style="margin-top:12px">Kayak · SUP · Jetski</h3></article></div>' + khoi_de() + '</div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('09', 'Cho thuê', 'Tiềm năng <b>dòng tiền</b>', 'o') + rent_night() + '<div style="margin-top:20px">' + rent_case() + '</div></div></section>')
     b += ('<section class="sec alt"><div class="wrap">' + sh('05', 'Pháp lý', 'Pháp lý <b>rõ ràng</b>', 'n') + legal_box() + '<div style="margin-top:26px">' + daily() + '</div></div></section>')
     b = bands_at(b, [(1, band('Thời điểm vàng – đừng để lỡ đợt đầu', 'Nhận bảng giá gốc và chính sách sớm nhất qua Zalo.', 'Nhận bảng giá sớm', 'ADS – sau lý do mua sớm')),
