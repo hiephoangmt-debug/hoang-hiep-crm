@@ -95,7 +95,7 @@ def author():
 def footer(base):
     links = ' · '.join('<a href="%s%s">%s</a>' % (base, p, t) for p, t in PAGES)
     links += ' · <a href="%s/vi-sao-sun-group">Vì sao căn hộ mặt biển</a>' % base
-    links += ' · <a href="%s/quy-hoach-cong-vien">Công viên trước dự án</a>' % base
+    links += ' · <a href="%s/quy-hoach">Quy hoạch quanh dự án</a>' % base
     links += ' · <a href="%s/chinh-sach-bao-mat">Chính sách bảo mật</a>' % base
     return ('<footer class="ft"><div class="wrap">'
             '<div class="fbr"><img src="' + RAW + '093918cb38d81f5e24fbe4d8477cea21e3de6ca8/landing/sun-saphia/v4/img/logo-mark.webp" alt="" width="34" height="48" loading="lazy">'

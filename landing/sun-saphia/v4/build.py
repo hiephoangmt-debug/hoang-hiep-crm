@@ -626,14 +626,14 @@ def vi_sao():
                 b, [article_ld(title, desc, MAIN + P, '2026-10-24', '2026-10-24'), cld, fld], P)
 
 def cong_vien():
-    P = '/quy-hoach-cong-vien'
+    P = '/quy-hoach'
     VT = RAW + '07557a38e28b15379350b5b9ac36fc91356ef704/landing/sun-saphia/v4/img/vi-tri-saphia'
     hero_img = ('<img src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 900px" width="1600" height="786" '
                 'alt="Ảnh vệ tinh có chú thích: Sun Saphia Residence và khu đất ven biển phía trước quy hoạch công viên công cộng khoảng 2,45 ha" fetchpriority="high" decoding="async">') % (VT, VT, VT)
-    hero, cld = sub_hero(P, 'Quy hoạch công viên', 'Trước mặt Sun Saphia là gì? <b>Công viên công cộng ven biển 2,45 ha</b>',
-                         'Khu đất bỏ hoang nhiều năm của dự án Hòn Ngọc Á Châu phía trước Sun Saphia Residence đang được TP Đà Nẵng chuyển thành công viên công cộng: khoảng 2,45 ha, tổng mức đầu tư hơn 47 tỷ đồng từ ngân sách thành phố, '
-                         'được phê duyệt dự án theo Quyết định 2958/QĐ-UBND, thực hiện giai đoạn 2025–2027. Bài viết tổng hợp vị trí, mốc thời gian, hạng mục và nguồn báo chí để anh/chị tự kiểm chứng.',
-                         hero_img, '', 'Web – quy hoạch công viên đầu trang')
+    hero, cld = sub_hero(P, 'Quy hoạch quanh dự án', 'Quy hoạch quanh Sun Saphia: <b>4 dự án hạ tầng</b> thay đổi khu biển Ngũ Hành Sơn',
+                         'Ngay trước Sun Saphia Residence là công viên công cộng 2,45 ha (QĐ 2958/QĐ-UBND, hơn 47 tỷ đồng); mặt tiền là trục biển Võ Nguyên Giáp – Trường Sa được đưa vào nhóm dự án ưu tiên với vốn dự kiến 2.633 tỷ; cách khoảng 500 m là ga đường sắt đô thị sân bay – Hội An (dự kiến khởi công 2/2027); '
+                         'cách khoảng 2,5 km là Công viên văn hóa lịch sử Ngũ Hành Sơn. Bài viết tổng hợp bản vẽ, hồ sơ, mốc thời gian và link nguồn đầy đủ để anh/chị tự kiểm chứng.',
+                         hero_img, '', 'Web – quy hoạch đầu trang')
     fq, fld = faq([
         ('Khu đất trước Sun Saphia Residence quy hoạch làm gì?', 'Làm công viên công cộng. TP Đà Nẵng thu hồi khoảng 2,45 ha ở phía Nam dự án KDL ven biển Hòn Ngọc Á Châu (phường Ngũ Hành Sơn) và phê duyệt dự án đầu tư xây dựng Công viên công cộng theo Quyết định 2958/QĐ-UBND.'),
         ('Công viên rộng bao nhiêu, đầu tư bao nhiêu?', 'Khoảng 2,45 ha, tổng mức đầu tư hơn 47 tỷ đồng từ vốn ngân sách thành phố. Chủ đầu tư là Ban Quản lý dự án đầu tư xây dựng các công trình dân dụng, công nghiệp và hạ tầng kỹ thuật Đà Nẵng.'),
@@ -641,19 +641,35 @@ def cong_vien():
         ('Công viên có những gì?', 'Theo bản vẽ phương án điều chỉnh (24.488 m², rộng khoảng 88 m, dài khoảng 272 m từ đường Trường Sa ra biển): bãi đậu xe, vịnh dừng xe, đường dạo, sân nền, sân tập thể dục, khu vui chơi trẻ em, khu dã ngoại, quảng trường biển, khu tổ chức sự kiện, nhà vệ sinh công cộng, gian lam che nắng và cây xanh cảnh quan.'),
         ('Bên cạnh còn dự án nào?', 'Dự án Công viên, Câu lạc bộ thể thao biển và Bãi tắm Sơn Thủy (khoảng 3,1 ha, mật độ xây dựng khoảng 3,9%) đã có phương án kỹ thuật khảo sát xây dựng được phê duyệt theo Quyết định 130 ngày 20/3/2025.'),
         ('Công viên ảnh hưởng gì tới Sun Saphia Residence?', 'Khoảng không trước dự án được giữ làm không gian xanh công cộng thay vì công trình cao tầng, nên tầm nhìn ra biển thoáng hơn; cư dân và khách thuê có thêm không gian dạo bộ, vui chơi, đường ra biển. Đây là nhận định của đại lý, không phải cam kết của chủ đầu tư.'),
+        ('Đường Võ Nguyên Giáp trước Sun Saphia có mở rộng không?', 'Có trong kế hoạch: TP Đà Nẵng đưa dự án mở rộng tuyến Võ Nguyên Giáp – Trường Sa – Lạc Long Quân vào nhóm dự án ưu tiên “luồng xanh”, vốn dự kiến 2.633 tỷ đồng (Tuổi Trẻ, 10/2026). Mặt cắt và thời gian khởi công chưa công bố.'),
+        ('Ga đường sắt đô thị gần Sun Saphia ở đâu?', 'Theo tài liệu Kick-off, ga LRT 09 cách dự án khoảng 500 m. Tuyến sân bay Đà Nẵng – Hội An (giai đoạn 1, 30,2 km, 14 ga) đang ở bước đề xuất PPP, nhà đầu tư dự kiến khởi công 2/2027.'),
+        ('Công viên Ngũ Hành Sơn cách Sun Saphia bao xa?', 'Khoảng 2,5 km. Công viên văn hóa lịch sử Ngũ Hành Sơn rộng khoảng 92,46 ha, đang giải phóng mặt bằng; các dự án thành phần gồm vườn thiền, vườn tượng, bảo tháp Báo Thiên cao 58 m.'),
         ('Thông tin này lấy từ đâu?', 'Từ các bài báo của TTXVN (Báo Tin tức), VietnamPlus, Báo Văn Hóa, Tuổi Trẻ, Báo Pháp luật đưa tin về Quyết định 2958/QĐ-UBND; link bài gốc ở cuối trang. Văn bản gốc tra cứu trên cổng thông tin của UBND TP Đà Nẵng.')])
     b = hero
-    b += tldr('quy hoạch công viên trước Sun Saphia Residence', [
-        ('Văn bản', 'Quyết định 2958/QĐ-UBND của UBND TP Đà Nẵng – phê duyệt dự án đầu tư xây dựng Công viên công cộng'),
-        ('Vị trí', 'Phần đất thu hồi phía Nam dự án KDL ven biển Hòn Ngọc Á Châu, phường Ngũ Hành Sơn – phía trước Sun Saphia'),
-        ('Quy mô', 'Khoảng 2,45 ha'), ('Vốn', 'Hơn 47 tỷ đồng, ngân sách thành phố'),
-        ('Thời gian', 'Giai đoạn 2025–2027'),
-        ('Hạng mục', 'Quảng trường biển, đường dạo, sân tập, khu vui chơi trẻ em, khu dã ngoại, khu sự kiện, bãi đậu xe, cây xanh')])
+    b += tldr('quy hoạch quanh Sun Saphia Residence', [
+        ('1. Công viên trước dự án', 'Công viên công cộng 2,45 ha, hơn 47 tỷ đồng, QĐ 2958/QĐ-UBND, 2025–2027'),
+        ('2. Trục biển', 'Mở rộng Võ Nguyên Giáp – Trường Sa – Lạc Long Quân, vốn dự kiến 2.633 tỷ, dự án "luồng xanh"'),
+        ('3. Đường sắt đô thị', 'Sân bay – Hội An – Chu Lai ~103 km, ~265.972 tỷ (đề xuất PPP), dự kiến khởi công 2/2027; ga gần dự án ~500 m'),
+        ('4. Ngũ Hành Sơn', 'Công viên văn hóa lịch sử ~92,46 ha; quy hoạch danh thắng QĐ 822/QĐ-TTg; vườn thiền, bảo tháp Báo Thiên 58 m'),
+])
+    def srcs(items):
+        return '<p class="src" style="margin-top:12px">Nguồn: ' + ' · '.join('<a href="%s" target="_blank" rel="noopener">%s</a>' % (u, t) for t, u in items) + '</p>'
+    b += ('<section class="sec"><div class="wrap">' + sh('★', 'Tổng quan', '4 quy hoạch – <b>tính từ Sun Saphia</b>', 'o') +
+          '<div class="g4">'
+          '<a class="card" href="#cong-vien" style="text-decoration:none;color:inherit;border-top:6px solid #2f9e6a"><span class="n">0 M · NGAY TRƯỚC DỰ ÁN</span><h3 class="oc">Công viên 2,45 ha</h3><p>Hơn 47 tỷ đồng, QĐ 2958/QĐ-UBND, 2025–2027. Kèm bãi tắm Sơn Thủy ~3,1 ha.</p><span class="lk">Xem bản vẽ →</span></a>'
+          '<a class="card" href="#truc-bien" style="text-decoration:none;color:inherit;border-top:6px solid #E96118"><span class="n">MẶT TIỀN DỰ ÁN</span><h3 class="oc">Trục biển 2.633 tỷ</h3><p>Mở rộng Võ Nguyên Giáp – Trường Sa – Lạc Long Quân, nhóm dự án ưu tiên “luồng xanh”.</p><span class="lk">Xem chi tiết →</span></a>'
+          '<a class="card" href="#duong-sat" style="text-decoration:none;color:inherit;border-top:6px solid #275286"><span class="n">~500 M TỚI GA</span><h3 class="oc">Đường sắt đô thị</h3><p>Sân bay – Hội An, giai đoạn 1 dài 30,2 km, 14 ga; dự kiến khởi công 2/2027.</p><span class="lk">Xem chi tiết →</span></a>'
+          '<a class="card" href="#ngu-hanh-son" style="text-decoration:none;color:inherit;border-top:6px solid #FFAA01"><span class="n">~2,5 KM</span><h3 class="oc">Công viên Ngũ Hành Sơn</h3><p>~92,46 ha văn hóa – lịch sử – tâm linh; vườn thiền, bảo tháp Báo Thiên 58 m.</p><span class="lk">Xem chi tiết →</span></a>'
+          '</div>'
+          + ('<figure class="fg" style="margin-top:22px"><img src="%s.webp" srcset="%s-900.webp 900w, %s.webp 1600w" sizes="(max-width: 760px) 100vw, 1100px" width="1600" height="1180" '
+             'alt="Sơ đồ quy hoạch quanh Sun Saphia Residence: công viên 2,45 ha ngay trước dự án, trục biển Võ Nguyên Giáp – Trường Sa mở rộng, ga đường sắt đô thị cách khoảng 500 m, công viên văn hóa lịch sử Ngũ Hành Sơn cách khoảng 2,5 km" loading="lazy" decoding="async">'
+             '<figcaption>Sơ đồ 4 quy hoạch quanh Sun Saphia – bờ biển, sông theo Google Maps; hướng tuyến đường sắt theo tài liệu Kick-off, minh họa</figcaption></figure>') % ((RAW + 'a4b3cdeba7f6685f4aacd7eb4f528734e0f16adc/landing/sun-saphia/v4/img/so-do-quy-hoach',) * 3)
+          + '<p class="src" style="margin-top:12px">Khoảng cách ước tính theo bản đồ; trạng thái từng dự án ghi rõ trong từng mục (đã phê duyệt / đang đề xuất).</p></div></section>')
     H = RAW + 'c0db44c75500ffa5396166a597a896cd3f37b793/landing/sun-saphia/v4/img/'
     def hf(name, w, h, alt, cap, style=''):
         return ('<figure class="fg" style="margin:0;%s"><img src="%s%s.webp" width="%d" height="%d" alt="%s" loading="lazy" decoding="async" style="background:#fff">'
                 '<figcaption>%s</figcaption></figure>') % (style, H, name, w, h, alt, cap)
-    b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Vị trí', 'Khu đất công viên <b>ngay trước thềm</b> Sun Saphia', 'o') +
+    b += ('<section class="sec alt" id="cong-vien"><div class="wrap">' + sh('1', 'Công viên trước dự án', 'Khu đất công viên <b>ngay trước thềm</b> Sun Saphia', 'o') +
           '<div class="g2" style="align-items:start"><div><div class="txt just">'
           '<p>Sun Saphia Residence nằm ở giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa. Băng qua đường Trường Sa là dải đất ven biển của dự án KDL Hòn Ngọc Á Châu – khu đất khởi công từ năm 2010 rồi bỏ hoang nhiều năm.</p>'
           '<p>Thành phố đã thống nhất với chủ đầu tư thu hồi <b>khoảng 2,45 ha ở phía Nam</b> dự án để làm <b>công viên công cộng</b>. Trên sơ đồ quy hoạch, khu đất được đánh dấu <b>“Vị trí quy hoạch”</b> – một dải chạy từ đường Trường Sa thẳng ra bờ biển.</p>'
@@ -679,7 +695,9 @@ def cong_vien():
           ('2025–2027', '#2f9e6a', 'Thực hiện dự án', 'Chủ đầu tư: Ban QLDA đầu tư xây dựng các công trình dân dụng, công nghiệp và hạ tầng kỹ thuật Đà Nẵng.', 'VietnamPlus · Báo Văn Hóa')]
     b += ('<section class="sec alt"><div class="wrap">' + sh('3', 'Mốc thời gian', 'Từ dự án bỏ hoang <b>thành công viên công cộng</b>', 'n') +
           '<div class="g4">' + ''.join('<div class="card" style="border-top:6px solid %s"><span class="n" style="color:%s">%s</span><h3 class="oc">%s</h3><p>%s</p>%s</div>'
-              % (c, c, d, t, x, ('<p class="src" style="margin-top:8px">Nguồn: %s</p>' % sr) if sr else '') for d, c, t, x, sr in tl) + '</div></div></section>')
+              % (c, c, d, t, x, ('<p class="src" style="margin-top:8px">Nguồn: %s</p>' % sr) if sr else '') for d, c, t, x, sr in tl) + '</div>'
+          + srcs([('Cổng TTĐT TP Đà Nẵng', 'https://danang.gov.vn/vi/w/hon-47-ty-dong-dau-tu-cong-vien-tai-phuong-ngu-hanh-son'), ('TTXVN – Báo Tin tức', 'https://baotintuc.vn/kinh-te/da-nang-xay-cong-vien-cong-cong-tren-dien-tich-dat-thu-hoi-tu-du-an-treo-20260706171716932.htm'),
+                  ('VietnamPlus', 'https://www.vietnamplus.vn/da-nang-xay-cong-vien-tren-dien-tich-dat-thu-hoi-tu-du-an-hon-ngoc-a-chau-post1122567.vnp'), ('Tuổi Trẻ', 'https://tuoitre.vn/thu-hoi-mot-phan-hon-ngoc-a-chau-da-nang-dau-tu-47-ti-dong-lam-cong-vien-cong-cong-20250708065249329.htm')]) + '</div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('4', 'Thêm một dự án', 'Công viên, CLB thể thao biển <b>&amp; bãi tắm Sơn Thủy</b>', 'o') +
           '<div class="g2" style="align-items:start"><div class="txt just">'
           '<p>Cạnh khu Saphia còn có dự án <b>Công viên, Câu lạc bộ thể thao biển và Bãi tắm Sơn Thủy</b> (phường Hòa Hải cũ, nay thuộc phường Ngũ Hành Sơn). Hồ sơ <b>Phương án kỹ thuật khảo sát xây dựng</b> (gói khảo sát địa chất, địa hình) đã được:</p>'
@@ -694,12 +712,41 @@ def cong_vien():
           '<div class="card"><span class="n">THỂ THAO BIỂN</span><h3 class="oc">Sân cát · nhà thuyền</h3><p>Sân thể thao bãi cát, sân tập luyện, nhà để thuyền (canoe, kayak).</p></div>'
           '<div class="card"><span class="n">BÃI TẮM</span><h3 class="oc">Tắm tráng · thay đồ</h3><p>Khu tắm tráng, thay đồ, quầy gửi đồ, nhà vệ sinh.</p></div>'
           '<div class="card"><span class="n">CÔNG VIÊN</span><h3 class="oc">Vui chơi · cây xanh</h3><p>Khu vui chơi trẻ em, bãi đậu xe, cây xanh cảnh quan.</p></div></div></div></section>')
-    b += ('<section class="sec alt"><div class="wrap">' + sh('5', 'Ý nghĩa', 'Công viên mang lại gì <b>cho người mua Saphia?</b>', 'y') +
+    b += ('<section class="sec alt" id="truc-bien"><div class="wrap">' + sh('5', 'Trục biển', 'Mở rộng Võ Nguyên Giáp – Trường Sa: <b>2.633 tỷ</b>', 'o') +
+          '<div class="g2" style="align-items:stretch"><div class="txt just">'
+          '<p>Sun Saphia Residence có mặt tiền trên trục biển Võ Nguyên Giáp – Trường Sa. TP Đà Nẵng đưa dự án <b>mở rộng tuyến Võ Nguyên Giáp – Trường Sa – Lạc Long Quân</b> vào nhóm dự án đầu tư công trọng điểm được ưu tiên thủ tục theo cơ chế <b>“luồng xanh”</b>, vốn dự kiến <b>2.633 tỷ đồng</b>.</p>'
+          '<p>Đây là trục nối trung tâm Đà Nẵng với Hội An dọc biển. Mở rộng giúp tăng năng lực lưu thông, rút ngắn thời gian di chuyển – kéo theo giá trị các vị trí mặt tiền biển như khu Saphia.</p>'
+          '<ul class="ck"><li>Trạng thái: <b>đang chuẩn bị đầu tư</b>, chưa công bố mặt cắt và thời gian khởi công</li><li>Vốn dự kiến 2.633 tỷ đồng – đầu tư công</li><li>Dự án đi ngang trước Sun Saphia</li></ul>'
+          + srcs([('Tuổi Trẻ – Đà Nẵng mở “luồng xanh” cho loạt dự án đầu tư công', 'https://tuoitre.vn/da-nang-mo-luong-xanh-cho-loat-du-an-dau-tu-cong-100261007145100694.htm'),
+                  ('VnExpress – Bất động sản Đà Nẵng thêm lực đẩy nhờ mở trục ven biển', 'https://vnexpress.net/bat-dong-san-da-nang-them-luc-day-nho-mo-truc-ven-bien-5057017.html'),
+                  ('CafeF', 'https://cafef.vn/sang-go-kho-khoang-san-chieu-thao-vuong-thuy-dien-da-nang-but-toc-tang-truong-188261009142219824.chn')]) + '</div>'
+          + fig('mo-rong-duong-bien', 'Trục đường biển Võ Nguyên Giáp – Trường Sa – Lạc Long Quân, Đà Nẵng', 'Trục biển Võ Nguyên Giáp – Trường Sa (tài liệu dự án)') + '</div></div></section>')
+    b += ('<section class="sec" id="duong-sat"><div class="wrap">' + sh('6', 'Đường sắt đô thị', 'Tàu điện sân bay – Hội An, <b>ga cách ~500 m</b>', 'n') +
+          '<div class="g2" style="align-items:stretch">' + fig('lrt-ban-do', 'Bản đồ quy hoạch tuyến đường sắt đô thị sân bay Đà Nẵng – Hội An đi qua khu Ngũ Hành Sơn', 'Tuyến đường sắt đô thị sân bay – Hội An (quy hoạch)') +
+          '<div class="txt just"><p>Tuyến đường sắt đô thị Đà Nẵng dài khoảng <b>103 km</b>, từ nhà ga T1 sân bay Đà Nẵng tới sân bay Chu Lai, tổng mức khoảng <b>265.972 tỷ đồng</b>. <b>Giai đoạn 1</b> dài 30,2 km với 14 nhà ga, nối sân bay Đà Nẵng với Hội An – đi qua khu Ngũ Hành Sơn.</p>'
+          '<ul class="ck"><li>Nhà đầu tư đề xuất: Công ty CP Địa ốc Đại Quang Minh (THACO), phương thức PPP</li><li>Dự kiến khởi công <b>2/2027</b>, tuyến đầu tiên vận hành khoảng <b>2032</b></li><li>Ga LRT 09 cách Sun Saphia khoảng <b>500 m</b> (theo tài liệu Kick-off)</li></ul>'
+          '<p class="note">Trạng thái: <b>đang ở bước đề xuất</b>, mốc khởi công là dự kiến của nhà đầu tư, chờ thành phố phê duyệt dự án và lựa chọn nhà đầu tư.</p>'
+          + srcs([('Tuổi Trẻ – Tuyến đường sắt đô thị Đà Nẵng sẽ khởi công vào tháng 2-2027', 'https://tuoitre.vn/tuyen-duong-sat-do-thi-da-nang-se-khoi-cong-vao-thang-2-2027-20260420182515178.htm'),
+                  ('Thanh Niên – Tuyến đường sắt đô thị gần 266.000 tỉ đồng', 'https://thanhnien.vn/tuyen-duong-sat-do-thi-da-nang-gan-266000-ti-dong-se-khoi-cong-dau-nam-2027-185260420200135035.htm'),
+                  ('Tạp chí Công Thương', 'https://tapchicongthuong.vn/da-nang--tuyen-duong-sat-do-thi-gan-266-000-ty-dong-se-khoi-cong-vao-dau-nam-2027-511805.htm')]) + '</div></div></div></section>')
+    b += ('<section class="sec alt" id="ngu-hanh-son"><div class="wrap">' + sh('7', 'Ngũ Hành Sơn', 'Công viên văn hóa lịch sử Ngũ Hành Sơn <b>~92 ha</b>', 'y') +
+          '<div class="g2" style="align-items:stretch"><div class="txt just">'
+          '<p>Cách Sun Saphia khoảng <b>2,5 km</b>, danh thắng quốc gia đặc biệt Ngũ Hành Sơn đã có <b>Quy hoạch bảo quản, tu bổ, phục hồi</b> được Thủ tướng phê duyệt theo <b>Quyết định 822/QĐ-TTg ngày 11/7/2023</b>, phạm vi khoảng 105 ha.</p>'
+          '<p>Dự án <b>Công viên văn hóa lịch sử Ngũ Hành Sơn</b> rộng khoảng <b>92,46 ha</b> – khu văn hóa, lịch sử, tâm linh kết hợp dịch vụ, thương mại – đang được thành phố tập trung giải phóng mặt bằng: đến 9/2026 đã bàn giao khoảng 1.022/1.612 hồ sơ.</p>'
+          '<ul class="ck"><li><b>Vườn thiền</b> khoảng 5.528 m², <b>vườn tượng</b> khoảng 8.988 m² quanh núi Thổ Sơn</li><li><b>Bảo tháp Báo Thiên</b> mới cao 58 m, 13 tầng</li><li>Bãi đỗ xe, kè chắn, chiếu sáng nghệ thuật phục vụ du lịch đêm</li><li>Dự án thành phần dự kiến thực hiện 2026–2028</li></ul>'
+          '<p class="note">Trạng thái: quy hoạch danh thắng đã phê duyệt; công viên đang giải phóng mặt bằng; các dự án thành phần đang trình chủ trương đầu tư (theo báo chí 9/2026).</p>'
+          + srcs([('Cổng TTĐT Đà Nẵng – Công viên văn hóa lịch sử Ngũ Hành Sơn', 'https://cttdt.danangportal.gov.vn/vi/web/dng/w/cong-vien-van-hoa-lich-su-ngu-hanh-son-i'),
+                  ('Cổng TTĐT Đà Nẵng – Bảo đảm quyền lợi hộ dân giải tỏa', 'https://danang.gov.vn/vi/web/dng/w/bao-dam-quyen-loi-cho-ho-dan-bi-giai-toa-du-an-cong-vien-van-hoa-lich-su-ngu-hanh-son'),
+                  ('Đại Đoàn Kết – Đầu tư vườn thiền, Báo Thiên bảo tháp', 'https://daidoanket.vn/dau-tu-vuon-thien-bao-thien-bao-thap-chieu-sang-nghe-thuat-ngu-hanh-son-phuc-vu-du-lich.html'),
+                  ('Thanh Niên – Gỡ điểm nghẽn mặt bằng công viên Ngũ Hành Sơn', 'https://thanhnien.vn/quyet-go-diem-nghen-mat-bang-du-an-cong-vien-ngu-hanh-son-18526012622042913.htm'),
+                  ('Quy hoạch danh thắng Ngũ Hành Sơn (QĐ 822/QĐ-TTg)', 'https://thitruongtaichinhtiente.vn/quy-hoach-bao-quan-tu-bo-phuc-hoi-danh-lam-thang-canh-quoc-gia-dac-biet-ngu-hanh-son-47864.html')]) + '</div>'
+          + fig('view-nui-ngu-hanh-son', 'Sun Saphia Residence bên bờ biển, phía sau là dãy núi Ngũ Hành Sơn và thành phố', 'Từ Sun Saphia nhìn về Ngũ Hành Sơn (phối cảnh minh họa)') + '</div></div></section>')
+    b += ('<section class="sec"><div class="wrap">' + sh('8', 'Ý nghĩa', 'Các quy hoạch mang lại gì <b>cho người mua Saphia?</b>', 'o') +
           '<div class="g4">'
           '<div class="card"><span class="n">TẦM NHÌN</span><h3 class="oc">View biển thoáng</h3><p>Khoảng đất trước dự án là không gian xanh công cộng, không phải công trình cao tầng chắn tầm nhìn.</p></div>'
           '<div class="card"><span class="n">SỐNG</span><h3 class="oc">Sân chơi chung</h3><p>Đường dạo, sân tập, khu vui chơi trẻ em ngay bên kia đường – cả nhà ra biển mỗi sáng chiều.</p></div>'
           '<div class="card"><span class="n">CHO THUÊ</span><h3 class="oc">Điểm cộng với khách</h3><p>Khách du lịch thích căn gần biển, có công viên, quảng trường sự kiện – dễ cho thuê, dễ được đánh giá tốt.</p></div>'
-          '<div class="card"><span class="n">GIÁ TRỊ</span><h3 class="oc">Hạ tầng bằng vốn công</h3><p>Hơn 47 tỷ đồng ngân sách đầu tư ngay trước dự án, cùng mở rộng trục biển 2.633 tỷ và ga LRT 09 cách ~500 m.</p></div>'
+          '<div class="card"><span class="n">GIÁ TRỊ</span><h3 class="oc">Hạ tầng bao quanh</h3><p>Công viên 47 tỷ trước mặt, trục biển 2.633 tỷ mặt tiền, ga tàu điện ~500 m, công viên Ngũ Hành Sơn ~2,5 km.</p></div>'
           '</div><p class="src" style="margin-top:12px">Phần nhận định là góc nhìn của đại lý phân phối, không phải cam kết của chủ đầu tư.</p></div></section>')
     news = [('TTXVN · Báo Tin tức · 06/07/2026', 'Đà Nẵng: Xây công viên công cộng trên diện tích đất thu hồi từ dự án \'treo\'', 'https://baotintuc.vn/kinh-te/da-nang-xay-cong-vien-cong-cong-tren-dien-tich-dat-thu-hoi-tu-du-an-treo-20260706171716932.htm'),
             ('VietnamPlus', 'Đà Nẵng xây công viên trên diện tích đất thu hồi từ dự án Hòn Ngọc Á Châu', 'https://www.vietnamplus.vn/da-nang-xay-cong-vien-tren-dien-tich-dat-thu-hoi-tu-du-an-hon-ngoc-a-chau-post1122567.vnp'),
@@ -707,22 +754,22 @@ def cong_vien():
             ('Báo Pháp luật', 'Đà Nẵng chi hơn 47 tỷ đồng xây công viên công cộng ven biển', 'https://doanhnhan.baophapluat.vn/da-nang-chi-hon-47-ty-dong-xay-cong-vien-cong-cong-ven-bien.html'),
             ('Tuổi Trẻ · 08/07/2025', 'Thu hồi một phần Hòn Ngọc Á Châu, Đà Nẵng đầu tư 47 tỉ đồng làm công viên công cộng', 'https://tuoitre.vn/thu-hoi-mot-phan-hon-ngoc-a-chau-da-nang-dau-tu-47-ti-dong-lam-cong-vien-cong-cong-20250708065249329.htm'),
             ('Tiền Phong', 'Đà Nẵng rót 47 tỷ đồng \'đánh thức\' khu đất vàng bỏ hoang', 'https://tienphong.vn/da-nang-rot-47-ty-dong-danh-thuc-khu-dat-vang-bo-hoang-post1767479.tpo')]
-    b += ('<section class="sec" id="nguon"><div class="wrap">' + sh('6', 'Dẫn chứng', 'Báo chí đưa tin – <b>anh/chị tự kiểm chứng</b>', 'y') +
+    b += ('<section class="sec alt" id="nguon"><div class="wrap">' + sh('9', 'Dẫn chứng', 'Công viên trước dự án – <b>báo chí đưa tin</b>', 'y') +
           '<div class="g2" style="gap:14px">' + ''.join('<a class="card" href="%s" target="_blank" rel="noopener" style="display:block;border-left:6px solid #275286;text-decoration:none;color:inherit"><span class="n">%s</span><h3 style="font-size:18px;margin-top:6px;line-height:1.4">%s</h3><span class="lk">Đọc bài gốc →</span></a>' % (u, pn, h) for pn, h, u in news) +
           '</div><p class="note" style="margin-top:14px">Văn bản gốc Quyết định 2958/QĐ-UBND tra cứu tại cổng thông tin điện tử UBND TP Đà Nẵng. Ngày 06/07/2026 là ngày TTXVN đưa tin. Bản vẽ mặt bằng, sơ đồ vị trí, phối cảnh và ảnh hồ sơ khảo sát ở mục 1, 2, 4 do đại lý thu thập.</p></div></section>')
-    b += ('<section class="sec alt" id="hoi-dap"><div class="wrap">' + sh('?', 'Hỏi đáp', 'Hỏi đáp về <b>công viên trước Sun Saphia</b>', 'n') + fq +
+    b += ('<section class="sec" id="hoi-dap"><div class="wrap">' + sh('?', 'Hỏi đáp', 'Hỏi đáp về <b>quy hoạch quanh Sun Saphia</b>', 'n') + fq +
           '<h3 style="margin-top:26px">Xem thêm</h3>' + related(P) + '</div></section>')
     b = bands_at(b, [(2, band('Muốn chọn căn nhìn thẳng ra công viên – biển?', 'Nhận mặt bằng căn trống và hướng view qua Zalo.', 'Nhận mặt bằng', 'Công viên – giữa trang', ('/mat-bang', 'Xem mặt bằng')))])
-    b += cta_block('Web – quy hoạch công viên cuối trang', title='Sống cạnh <b>công viên biển</b> – nhận bảng giá Sun Saphia')
-    title = 'Quy hoạch công viên 2,45 ha trước Sun Saphia Residence – Quyết định 2958'
-    desc = 'Đà Nẵng đầu tư hơn 47 tỷ đồng làm công viên công cộng 2,45 ha trên đất thu hồi Hòn Ngọc Á Châu, ngay trước Sun Saphia (QĐ 2958/QĐ-UBND, 2025–2027).'
-    return page(P, title, desc, 'công viên trước sun saphia, quy hoạch hòn ngọc á châu, quyết định 2958/qđ-ubnd, công viên công cộng ngũ hành sơn, sun saphia residence',
+    b += cta_block('Web – quy hoạch cuối trang', title='Đón đầu hạ tầng – <b>nhận bảng giá Sun Saphia</b>')
+    title = 'Quy hoạch quanh Sun Saphia: công viên 2,45 ha, trục biển 2.633 tỷ, đường sắt đô thị, Ngũ Hành Sơn'
+    desc = 'Công viên 2,45 ha trước dự án (QĐ 2958), mở rộng trục biển Võ Nguyên Giáp 2.633 tỷ, ga đường sắt đô thị ~500 m, công viên văn hóa lịch sử Ngũ Hành Sơn ~92 ha – có bản vẽ, link nguồn.'
+    return page(P, title, desc, 'quy hoạch quanh sun saphia, công viên trước sun saphia, mở rộng đường võ nguyên giáp, đường sắt đô thị đà nẵng, công viên ngũ hành sơn, quy hoạch hòn ngọc á châu, quyết định 2958/qđ-ubnd, công viên công cộng ngũ hành sơn, sun saphia residence',
                 b, [article_ld(title, desc, MAIN + P, '2026-10-25', '2026-10-25'), cld, fld], P)
 
 if __name__ == '__main__':
     import os
     os.makedirs(OUT, exist_ok=True)
-    out = {'trang-chu.html': home(), 'bang-gia.html': bang_gia(), 'mat-bang.html': mat_bang(), 'phap-ly.html': phap_ly(), 'cho-thue.html': cho_thue(), 'tinh-dong-tien.html': tinh_dong_tien(), 'vi-sao-sun-group.html': vi_sao(), 'quy-hoach-cong-vien.html': cong_vien(),
+    out = {'trang-chu.html': home(), 'bang-gia.html': bang_gia(), 'mat-bang.html': mat_bang(), 'phap-ly.html': phap_ly(), 'cho-thue.html': cho_thue(), 'tinh-dong-tien.html': tinh_dong_tien(), 'vi-sao-sun-group.html': vi_sao(), 'quy-hoach.html': cong_vien(),
            'ads.html': ads(MAIN), 'ads-shaphia.html': ads('https://www.sun-shaphiaresidence.com')}
     # Trang chủ tên miền phụ: cùng nội dung, chuẩn hóa về tên miền chính để tránh trùng nội dung
     out['shaphia.html'] = out['trang-chu.html']
