@@ -778,7 +778,7 @@ def chinh_sach():
     b = ('<section class="hero" style="padding-bottom:30px"><div class="wrap">' + cr +
          '<div class="g2" style="margin-top:14px;align-items:center"><div><span class="tag">🔒 Bảo vệ dữ liệu cá nhân · Cập nhật 25/10/2026</span>'
          '<h1 class="dp" style="margin-top:14px">Chính sách <b>bảo mật thông tin</b></h1>'
-         '<p class="lead just">Áp dụng cho trang thông tin dự án Sun Saphia Residence tại sun-saphia-residence.com và sun-shaphiaresidence.com, gồm form đăng ký, khung chat trả lời nhanh, nút gọi và Zalo.</p></div>'
+         '<p class="lead" style="text-align:left">Áp dụng cho trang thông tin dự án Sun Saphia Residence tại sun-saphia-residence.com và sun-shaphiaresidence.com, gồm form đăng ký, khung chat trả lời nhanh, nút gọi và Zalo.</p></div>'
          '<div class="card polsum" style="padding:24px 26px;border-top:6px solid var(--or)"><style>.polsum,.polsum *{text-align:left!important}</style><span class="n">TÓM TẮT 30 GIÂY</span><ul class="ck" style="margin-top:10px">'
          '<li>Anh/Chị để lại thông tin <b>chỉ để nhận tài liệu và được tư vấn</b> về dự án</li>'
          '<li>Trang <b>không thu bất kỳ khoản tiền nào</b>, không bán hay chia sẻ thông tin cho bên thứ ba vì mục đích thương mại</li>'
