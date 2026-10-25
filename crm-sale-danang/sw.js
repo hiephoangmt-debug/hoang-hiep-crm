@@ -1,6 +1,6 @@
 // Service worker: lưu sẵn khung app để mở được khi mạng yếu; luôn ưu tiên bản mới từ mạng.
-const CACHE = 'crm-sale-v155';
-const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'firebase-config.js', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png', 'bang-hang.html'];
+const CACHE = 'crm-sale-v156';
+const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'content-saphia.js', 'firebase-config.js', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png', 'bang-hang.html'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));

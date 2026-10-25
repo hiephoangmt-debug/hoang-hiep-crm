@@ -1,4 +1,5 @@
 import { firebaseConfig, OWNER_EMAIL } from './firebase-config.js';
+import { SAPHIA_LIB, SAPHIA_CONTENT } from './content-saphia.js';
 
 const FB = 'https://www.gstatic.com/firebasejs/10.12.2/';
 const CONFIGURED = !!(firebaseConfig && firebaseConfig.apiKey && !String(firebaseConfig.apiKey).startsWith('DIEN_'));
@@ -501,7 +502,7 @@ async function notifyNewSold(){
 setInterval(() => { if (ME && !(dlg && dlg.open)) render(); }, 30000); // cập nhật đồng hồ "còn x phút"
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; render(); });
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
-const CRM_VER = 'bản 129'; // đổi mỗi lần cập nhật
+const CRM_VER = 'bản 130'; // đổi mỗi lần cập nhật
 // Tự báo có bản mới (iPad / iPhone hay giữ trang cũ): định kỳ đọc lại file trên máy chủ, khác số bản thì hiện thanh bấm để cập nhật
 function updWatch(file, re, cur) {
   let shown = false;
@@ -821,7 +822,7 @@ function evPreset(e){
   if (!e || isContent(e) || !['2026-10-18', '2026-10-19'].includes(e.date) || !/18\/10|fours|f2/i.test(e.name || '')) return e;
   const P0 = EV_PRESET_1810, o = Object.assign({}, e, {date: P0.date, _preset: true});
   if (/^\s*\d{1,2}\/\d{1,2}(\/\d{2,4})?\s*$/.test(e.name || '')) o.name = P0.name; // tên chỉ là ngày → đặt tên rõ
-  if (!e.postsCustom) { o.posts = P0.posts; o.libImgs = EV_LIB.map(x => x[0]); }
+  if (!e.postsCustom) { o.posts = P0.posts; o.libImgs = EV_LIB_FOURS; }
   if (!e.time || !/[–-]/.test(e.time)) o.time = P0.time;
   if (!e.place) o.place = P0.place; if (!e.perks) o.perks = P0.perks; if (!e.highlights) o.highlights = P0.highlights; if (!e.hashtags) o.hashtags = P0.hashtags;
   return o;
@@ -902,6 +903,9 @@ const EV_LIB = [['bh-img/su-kien/tay-ho-view-ban-ngay.jpg','Sun Gallery Tây H�
   ['bh-img/su-kien/tay-ho-view-hoang-hon.jpg','Tây Hồ View – hoàng hôn'],['bh-img/su-kien/tay-ho-view-ascott.jpg','Tây Hồ View – Ascott'],['bh-img/su-kien/fours-tower-f2-view-bien.jpg','Tòa F2 FourS – view biển'],['bh-img/su-kien/fours-tower-toan-canh-dem.jpg','FourS Tower – toàn cảnh đêm'],
   ['bh-img/su-kien/fours-hoang-hon-bien.jpg','FourS – hoàng hôn biển'],['bh-img/su-kien/fours-thap-view-bien.jpg','FourS – tháp view biển nắng'],['bh-img/su-kien/fours-binh-minh-vuon-hoa.jpg','FourS – bình minh vườn hoa'],
   ['bh-img/su-kien/fours-chieu-vang-nui.jpg','FourS – chiều vàng, núi'],['bh-img/su-kien/fours-dai-lo-song-han.jpg','FourS – đại lộ, sông Hàn']];
+const EV_LIB_FOURS = EV_LIB.map(x => x[0]); // ảnh của sự kiện FourS 18/10
+EV_LIB.push(...SAPHIA_LIB); // ảnh Sun Saphia thêm vào cuối → số thứ tự ảnh FourS giữ nguyên
+const saphiaMissing = () => SAPHIA_CONTENT.filter(p => !(S.contents || []).some(c => c.seedKey === p.key || (c.startDate === p.startDate && /saphia/i.test(c.name || ''))));
 const evLibSel = e => EV_LIB.map(x => x[0]).filter(u => ((e && e.libImgs) || []).includes(u)); // luôn theo thứ tự thư viện → số thứ tự ảnh cố định
 const evImgs = e => [].concat(evLibSel(e), e.posters || [], e.poster ? [e.poster] : [], e.posterUrl ? String(e.posterUrl).split(/\s+/).filter(u => /^https:\/\//i.test(u)) : []).filter(Boolean);
 // Ảnh của một ngày: dòng "ảnh: 3" trong bài ngày đó (số thứ tự ảnh ở Tổng quan), không có thì xoay vòng mỗi ngày một ảnh.
@@ -1214,7 +1218,7 @@ function links360(txt){ return String(txt || '').split(/\n+/).map(line => { cons
 /* ---------- Content tuần: kế hoạch bài đăng cả tuần (không gắn sự kiện) ---------- */
 function vContent(){
   const t = today(), now = contentNow(), next = (S.contents || []).filter(c => (c.startDate || addD(c.date, -6)) > t), past = (S.contents || []).filter(c => c.date < t).slice(-6).reverse();
-  let h = top('Content tuần', 'Bài đăng mỗi ngày cho cả đội – copy bài, tải ảnh có tên + SĐT của bạn, đăng xong bấm “Đã đăng”', MANAGER ? `<button class="btn pri" data-a="addContent">+ Content tuần</button>` : '');
+  let h = top('Content tuần', 'Bài đăng mỗi ngày cho cả đội – copy bài, tải ảnh có tên + SĐT của bạn, đăng xong bấm “Đã đăng”', MANAGER ? (saphiaMissing().length ? `<button class="btn" data-a="seedSaphiaContent">✨ Nạp content Sun Saphia</button> ` : '') + `<button class="btn pri" data-a="addContent">+ Content tuần</button>` : '');
   // bài đăng của sự kiện đang chạy (vd sự kiện 18/10 có bài 14–18/10) cũng hiện ở đây để sale thấy bài hôm nay
   const evNow = (S.events || []).filter(e => e.date >= t && evPostDays(e).length);
   if (evNow.length) h += `<div class="panel evp-wrap"><h2>🎉 Bài đăng sự kiện <span>${evNow.map(e => esc(e.name || '')).join(' · ')}</span></h2>` + evNow.map(evCard).join('') + '</div>';
@@ -1274,7 +1278,7 @@ function vAcc(){
   const ios = /iphone|ipad|ipod/i.test(navigator.userAgent), standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
   let h = top('Tài khoản', '');
   h += `<div class="grid2"><div class="stack"><div class="panel"><h2>Thông tin</h2><div class="kv"><span>Họ tên</span><b>${esc(ME.name)}</b><span>Email</span><div>${esc(ME.email)}</div><span>Vai trò</span><div>${roleL(ME.role)}${ME.owner && !ME.demo ? ' · chủ hệ thống' : ''}</div></div>
-    <p class="muted" style="font-size:12px;margin:10px 0 0">CRM Sale Đà Nẵng · ${CRM_VER} (22/10/2026)</p>
+    <p class="muted" style="font-size:12px;margin:10px 0 0">CRM Sale Đà Nẵng · ${CRM_VER} (25/10/2026)</p>
     <div class="row" style="margin-top:14px"><button class="btn" data-a="signOut">${ME.demo ? 'Thoát demo' : 'Đăng xuất'}</button>${ME.demo ? '<button class="btn danger" data-a="resetDemo">Xoá dữ liệu demo</button>' : ''}</div></div>
     <div class="panel"><h2>Thông báo nhắc việc</h2>
     <p class="muted">Mỗi ngày, lần đầu mở app, bạn nhận một thông báo tóm tắt việc quá hạn, việc hôm nay, khách cần gọi lại và khách nguội. Số việc cần xử lý cũng hiện trên biểu tượng app (Android, Windows, macOS).</p>
@@ -1472,7 +1476,7 @@ function eventForm(e){
         const per = Math.floor(880000 / Math.min(EV_MAX_IMG, imgs.length + fs.length)); // cả tài liệu sự kiện phải dưới 1 MB
         try { const all = await Promise.all(imgs.map(u => u.startsWith('data:') && u.length > per ? fetch(u).then(r => r.blob()).then(b => shrinkImage(b, per)) : u));
           imgs = all.concat(await Promise.all(fs.map(f => shrinkImage(f, per)))); show(); toast('Đã thêm ' + fs.length + ' ảnh – bấm Lưu để cập nhật'); } catch (err) { toast(err.message); } ev.target.value = ''; }; },
-    onSave: async v => { if (v.posterUrl && !/^https:\/\//i.test(v.posterUrl)) throw {msg: 'Link ảnh phải bắt đầu bằng https://'}; v.posters = imgs; v.poster = ''; v.libImgs = lib; if (e && e._preset) v.postsCustom = v.posts !== EV_PRESET_1810.posts || lib.length !== EV_LIB.length; v.minGuests = Math.max(1, Math.round(v.minGuests || 1)); v.fine = v.fine || EVENT_FINE; v.reportBy = /^\d{1,2}:\d{2}$/.test(v.reportBy) ? v.reportBy.padStart(5, '0') : '17:00';
+    onSave: async v => { if (v.posterUrl && !/^https:\/\//i.test(v.posterUrl)) throw {msg: 'Link ảnh phải bắt đầu bằng https://'}; v.posters = imgs; v.poster = ''; v.libImgs = lib; if (e && e._preset) v.postsCustom = v.posts !== EV_PRESET_1810.posts || lib.length !== EV_LIB_FOURS.length; v.minGuests = Math.max(1, Math.round(v.minGuests || 1)); v.fine = v.fine || EVENT_FINE; v.reportBy = /^\d{1,2}:\d{2}$/.test(v.reportBy) ? v.reportBy.padStart(5, '0') : '17:00';
       return e ? write(store.update('events', e.id, v)) : write(store.add('events', Object.assign(v, {createdAt: Date.now(), by: ME.email}))); },
     onDelete: e ? () => store.remove('events', e.id) : null});
 }
@@ -1596,6 +1600,9 @@ document.addEventListener('click', async e => {
   else if (a === 'evRepSheet') evRepSheet(b);
   else if (a === 'editEvent') { const e = evById(id); if (isContent(e)) contentForm(e); else eventForm(e); }
   else if (a === 'addContent') contentForm();
+  else if (a === 'seedSaphiaContent') { b.disabled = true; try { const pj = (S.projects.find(p => /saphia/i.test(p.name || '')) || {}).id || '', todo = saphiaMissing();
+      for (const p of todo) { const {key, ...v} = p; await write(store.add('events', Object.assign(v, {seedKey: key, kind: 'content', date: addD(v.startDate, 6), projectId: pj, libImgs: SAPHIA_LIB.map(x => x[0]), posters: [], dailyReport: false, needGuest: false, createdAt: Date.now(), by: ME.email}))); }
+      toast('Đã nạp ' + todo.length + ' tuần content Sun Saphia'); } catch(err) { toast(errMsg(err)); b.disabled = false; } }
   else if (a === 'savePhone') { const v = ($('#myPhoneIn') || {}).value || '', d = v.replace(/\D/g, ''); if (d.length < 9 || d.length > 12) return toast('Số điện thoại chưa đúng');
     const ph = v.trim(); LS.set('crm-phone:' + ME.email, ph); b.disabled = true;
     try { if (byId(S.staff, ME.email)) await store.update('members', ME.email, {phone: ph}); toast('Đã lưu số ' + ph); } catch (_) { toast('Đã lưu số ' + ph + ' trên máy này'); } render(); }
