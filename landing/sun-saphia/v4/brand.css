@@ -510,3 +510,5 @@ body{padding-bottom:84px}
 @media(max-width:760px){.bgal4{gap:8px}}
 .bgal4{grid-template-rows:1fr 1fr;align-content:stretch}.bgal4 figure{display:flex;flex-direction:column;min-height:0}.bgal4 img{flex:1;min-height:0;aspect-ratio:auto}
 @media(max-width:760px){.bgal4{grid-template-rows:none}.bgal4 img{aspect-ratio:4/3;flex:none}}
+.nhsg .card p{text-align:left}
+@media(max-width:760px){.nhsg{grid-template-columns:1fr!important}}
