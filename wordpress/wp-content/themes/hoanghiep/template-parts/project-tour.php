@@ -27,6 +27,7 @@ if ( 0 === strpos( $poster, 'plugin:' ) ) {
 if ( ! $tour && ! $units ) {
 	return;
 }
+$name = (string) hh_meta( 'hh_p_tour_name' ) ?: 'mô hình 4D'; // VD: "căn hộ mẫu 4D tòa F2".
 ?>
 <section class="block" id="xem-4d">
 	<h2 class="block__title">Xem 4D &amp; chọn căn <?php echo esc_html( $title ); ?></h2>
@@ -34,12 +35,12 @@ if ( ! $tour && ! $units ) {
 	<?php if ( $tour ) : ?>
 		<div class="tour4d<?php echo $poster ? ' has-poster' : ''; ?>" data-src="<?php echo esc_url( $tour ); ?>">
 			<?php if ( $poster ) : ?>
-				<img class="tour4d__poster" src="<?php echo esc_url( $poster ); ?>" alt="<?php echo esc_attr( 'Mô hình 4D ' . $title . ' – bấm để xoay, xem hướng nắng' ); ?>" width="1200" height="750" loading="lazy" decoding="async">
+				<img class="tour4d__poster" src="<?php echo esc_url( $poster ); ?>" alt="<?php echo esc_attr( hh_ucfirst( $name ) . ' ' . $title . ' – bấm để xoay, xem' ); ?>" width="1200" height="750" loading="lazy" decoding="async">
 				<span class="tour4d__badge">4D · Xoay 360°</span>
 			<?php endif; ?>
 			<button type="button" class="tour4d__play">
 				<span class="tour4d__icon" aria-hidden="true">▶</span>
-				<span><strong>Bấm để xem mô hình 4D</strong><small>Xoay, phóng to, xem hướng nắng – xem thử miễn phí</small></span>
+				<span><strong>Bấm để xem <?php echo esc_html( $name ); ?></strong><small>Xoay, phóng to, xem hướng nắng – xem thử miễn phí</small></span>
 			</button>
 		</div>
 	<?php endif; ?>

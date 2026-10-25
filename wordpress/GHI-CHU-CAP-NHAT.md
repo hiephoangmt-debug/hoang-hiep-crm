@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.27** + plugin Hoàng Hiệp CRM **2.20.77**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.28** + plugin Hoàng Hiệp CRM **2.20.78**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.78, giao diện 2.15.28: FourS Tower có Xem 4D & chọn căn
+
+- Trang **FourS Tower** và **FourS Tower F2 – Tháp Mai** có mục **Xem 4D & chọn căn** như Sun Saphia.
+- Khung xem: **căn hộ mẫu 2D · 3D · 4D tòa F2** (mở sẵn căn 03 tầng 3 có sân vườn), ảnh xem trước chụp từ chính căn hộ mẫu 3D. Xem thử 40 giây rồi hỏi số Zalo.
+- Nút **Chọn căn, xem chi tiết**: mở **bảng hàng 3D tòa F2** sau khi khách nhập số Zalo.
+- Cả hai link dùng bản cho khách (`?khach`): ẩn nút thiết kế, giá, trạng thái và công cụ nội bộ.
 
 ## Có gì mới – plugin 2.20.77, giao diện 2.15.27: khung 4D có ảnh mô hình
 
