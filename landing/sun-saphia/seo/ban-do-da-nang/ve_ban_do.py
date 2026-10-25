@@ -23,7 +23,10 @@ COAST = [tuple(p) for p in D['coast']]
 QH_CARDS = []      # bờ đông, theo hàng từ bắc xuống nam
 
 def coast_lon(lat):
-    best = min(COAST, key=lambda p: abs(p[1] - lat)); return best[0]
+    pts = sorted(COAST, key=lambda p: abs(p[1] - lat))[:2]
+    (x1, y1), (x2, y2) = pts
+    if abs(y2 - y1) < 1e-9: return x1
+    return x1 + (lat - y1) * (x2 - x1) / (y2 - y1)
 def river(lat):
     ks = sorted(D['river'].items(), key=lambda kv: abs(BY0 - (int(kv[0])) / 9133.0 - lat))
     for k, v in ks:
@@ -165,15 +168,14 @@ def make(W, H, lon0, lat1, span_lon, fs=1.0, poster=False, qh=False, inset=False
         def parcel(la_c, w_m, x0, x1):
             dl = w_m / 2 / 111000.0
             return [(coast_lon(la_c + dl) - x0, la_c + dl), (coast_lon(la_c + dl) - x1, la_c + dl), (coast_lon(la_c - dl) - x1, la_c - dl), (coast_lon(la_c - dl) - x0, la_c - dl)]
-        o.append(poly_ll(parcel(16.0300, 160, 0.0026, 0.0002), '#57c18a', .8, '#1f7a4f', 2.5))
-        o.append(poly_ll(parcel(16.0238, 88, 0.0026, 0.0002), '#2fae6a', .95, '#ffffff', 3))
+        o.append(poly_ll(parcel(sla0, 88, 0.0026, 0.0002), '#2fae6a', .95, '#ffffff', 3))
         if inset:
-            for la_, t_, c_ in ((16.0238, 'CÔNG VIÊN 2,45 HA', '#ffffff'), (16.0300, 'CV + BÃI TẮM SƠN THỦY', '#ffffff')):
+            for la_, t_, c_ in ((sla0 - 0.0009, 'CÔNG VIÊN 2,45 HA', '#1f6b45'),):
                 x_, y_ = P(coast_lon(la_) - 0.0014, la_)
-                o.append('<text x="%.1f" y="%.1f" text-anchor="middle" style="font:900 %.1fpx %s" fill="%s" stroke="#1f6b45" stroke-width="%.1f" paint-order="stroke">%s</text>' % (x_, y_ + 5 * fs, 13 * fs, F, c_, 3 * fs, t_))
+                o.append('<text x="%.1f" y="%.1f" text-anchor="middle" style="font:900 %.1fpx %s" fill="%s" stroke="#fff" stroke-width="%.1f" paint-order="stroke">%s</text>' % (x_, y_ + 5 * fs, 13 * fs, F, c_, 4 * fs, t_))
             x_, y_ = P(coast_lon(16.0300) - 0.0052, 16.0300)
             o.append('<text x="%.1f" y="%.1f" text-anchor="start" style="font:800 %.1fpx %s" fill="#2a6fd0" stroke="#fff" stroke-width="%.1f" paint-order="stroke">Ga (dự kiến)</text>' % (x_ + 16 * fs, y_ + 5 * fs, 13 * fs, F, 4 * fs))
-            x_, y_ = P(coast_lon(16.0275) - 0.0028, 16.0275)
+            x_, y_ = P(coast_lon(16.0295) - 0.0028, 16.0295)
             o.append('<text transform="rotate(-72 %.1f %.1f)" x="%.1f" y="%.1f" text-anchor="middle" style="font:800 %.1fpx %s" fill="#E96118" stroke="#fff" stroke-width="%.1f" paint-order="stroke">VÕ NGUYÊN GIÁP – TRƯỜNG SA (mở rộng)</text>' % (x_, y_, x_, y_ - 10 * fs, 11 * fs, F, 4 * fs))
         # nhãn + khoảng cách
         dist = []
@@ -186,8 +188,7 @@ def make(W, H, lon0, lat1, span_lon, fs=1.0, poster=False, qh=False, inset=False
         if not inset: o.extend(dist)
         QH_CARDS.clear()
         QH_CARDS.extend([
-            (P(coast_lon(16.0238), 16.0238), '① CÔNG VIÊN 2,45 HA', 'QĐ 2958 · 47+ tỷ · 2025–2027', '#1f8a55'),
-            (P(coast_lon(16.0300), 16.0300), 'CV + BÃI TẮM SƠN THỦY', '~3,1 ha · QĐ 130 (khảo sát)', '#3a9a6a'),
+            (P(coast_lon(sla0) - 0.0005, sla0 - 0.0003), '① CÔNG VIÊN 2,45 HA', 'Ngay trước dự án · QĐ 2958 · 47+ tỷ', '#1f8a55'),
             (P(coast_lon(16.0520) - 0.0028, 16.0520), '② TRỤC BIỂN MỞ RỘNG', 'VNG – Trường Sa · 2.633 tỷ', '#E96118'),
             ((gx, gy), '③ GA ĐƯỜNG SẮT ĐÔ THỊ', 'Sân bay – Hội An · dự kiến 2027', '#2a6fd0'),
             ((cx, cy), '④ CV VĂN HÓA LỊCH SỬ NHS', '~92 ha · vườn thiền, bảo tháp 58 m', '#b07a00')])
@@ -198,7 +199,8 @@ def make(W, H, lon0, lat1, span_lon, fs=1.0, poster=False, qh=False, inset=False
     o.append('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="#E96118" stroke="#fff" stroke-width="%.1f"/>' % (x, y, 11 * fs, 3 * fs))
     o.append('<text x="%.1f" y="%.1f" text-anchor="middle" dominant-baseline="central" fill="#fff" style="font-size:%.1fpx">★</text>' % (x, y + 0.5, 12 * fs))
     bw, bh = 236 * fs, 58 * fs; px, py = x + 50 * fs, y - bh / 2
-    o.append('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" stroke="#E96118" stroke-width="%.1f"/>' % (px, py + bh / 2, x + 11 * fs, y, 2.5 * fs))
+    if qh: px = x - bw - 40 * fs; py = y - bh / 2 + (22 * fs if not inset else 0)
+    o.append('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" stroke="#E96118" stroke-width="%.1f"/>' % (px + (bw if qh else 0), py + bh / 2, x + (-11 if qh else 11) * fs, y, 2.5 * fs))
     o.append('<g filter="url(#sh)"><rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" rx="%.1f" fill="#E96118"/></g>' % (px, py, bw, bh, 12 * fs))
     o.append('<text x="%.1f" y="%.1f" text-anchor="middle" style="font:800 %.1fpx %s;letter-spacing:1px" fill="#fff">SUN SAPHIA</text>' % (px + bw / 2, py + 26 * fs, 20 * fs, F))
     o.append('<text x="%.1f" y="%.1f" text-anchor="middle" style="font:600 %.1fpx %s" fill="#fff">Võ Nguyên Giáp – Nguyễn Đức Thuận</text>' % (px + bw / 2, py + 46 * fs, 12.5 * fs, F))
@@ -206,7 +208,7 @@ def make(W, H, lon0, lat1, span_lon, fs=1.0, poster=False, qh=False, inset=False
         cards_local = list(QH_CARDS)
         IW, IH = 470 * fs / 1.3, 400 * fs / 1.3
         ix, iy = W - IW - 30 * fs, 120 * fs
-        isl = 16.0262; ilon0 = coast_lon(isl) - 0.0080
+        isl = 16.0262; ilon0 = coast_lon(isl) - 0.0092
         inner = make(int(IW), int(IH), ilon0, isl + 0.0054, 0.0110, fs=0.75, qh=True, inset=True)
         inner = inner.replace('id="', 'id="i_').replace('url(#', 'url(#i_')
         inner = inner.replace('<svg xmlns="http://www.w3.org/2000/svg"', '<svg x="%.1f" y="%.1f"' % (ix, iy), 1)
@@ -214,7 +216,7 @@ def make(W, H, lon0, lat1, span_lon, fs=1.0, poster=False, qh=False, inset=False
         o.append('<text x="%.1f" y="%.1f" style="font:900 %.1fpx %s" fill="#0b2447">🔍 PHÓNG TO KHU SUN SAPHIA</text>' % (ix + 6 * fs, iy - 12 * fs, 15 * fs, F))
         o.append(inner)
         o.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" fill="none" stroke="#0b2447" stroke-width="%.1f"/>' % (ix, iy, IW, IH, 1.5 * fs))
-        pos = {'① CÔNG VIÊN 2,45 HA': (60, 34), 'CV + BÃI TẮM SƠN THỦY': (60, -60), '② TRỤC BIỂN MỞ RỘNG': (-300, -30), '③ GA ĐƯỜNG SẮT ĐÔ THỊ': (-300, -64), '④ CV VĂN HÓA LỊCH SỬ NHS': (-400, -20)}
+        pos = {'① CÔNG VIÊN 2,45 HA': (90, 70), 'CV + BÃI TẮM SƠN THỦY': (60, -60), '② TRỤC BIỂN MỞ RỘNG': (-300, -30), '③ GA ĐƯỜNG SẮT ĐÔ THỊ': (-300, -64), '④ CV VĂN HÓA LỊCH SỬ NHS': (-400, -20)}
         for (x, y), t1, t2, col in cards_local:
             dx, dy = pos[t1]; bx, by = x + dx * fs, y + dy * fs
             ex = bx if dx > 0 else bx + 270 * fs
@@ -223,6 +225,19 @@ def make(W, H, lon0, lat1, span_lon, fs=1.0, poster=False, qh=False, inset=False
     # la bàn + thước tỷ lệ 2 km
     if inset:
         o.append('</svg>'); return '\n'.join(o)
+    # chữ chìm chống lấy hình
+    wm = 'sun-saphia-residence.com · 0904 567 009'
+    g = ['<g transform="rotate(-24 %d %d)" style="font:700 %.1fpx %s" pointer-events="none">' % (W // 2, H // 2, 22 * fs, F)]
+    stepx, stepy = 560 * fs, 150 * fs
+    yy = -H * 0.6; row = 0
+    while yy < H * 1.6:
+        xx = -W * 0.6 + (row % 2) * stepx / 2
+        while xx < W * 1.6:
+            g.append('<text x="%.1f" y="%.1f" fill="#0b2447" fill-opacity=".09">%s</text><text x="%.1f" y="%.1f" fill="#ffffff" fill-opacity=".13">%s</text>' % (xx, yy, wm, xx + 1.5, yy + 1.5, wm))
+            xx += stepx
+        yy += stepy; row += 1
+    g.append('</g>')
+    o.append(''.join(g))
     cx, cy = W - 46 * fs, 46 * fs
     o.append('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="#0b2447" opacity=".55"/><path d="M%.1f %.1fl%.1f %.1fl-%.1f -%.1fl-%.1f %.1fz" fill="#fff"/><text x="%.1f" y="%.1f" text-anchor="middle" style="font:800 %.1fpx sans-serif" fill="#fff">B</text>'
              % (cx, cy, 24 * fs, cx, cy - 16 * fs, 8 * fs, 22 * fs, 8 * fs, 6 * fs, 8 * fs, 16 * fs, cx, cy + 17 * fs, 10 * fs))
