@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.28** + plugin Hoàng Hiệp CRM **2.20.78**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.28** + plugin Hoàng Hiệp CRM **2.20.79**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,13 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.79: giá giỏ hàng 10/2026 NewTown Diamond, Capital Square
+
+- **NewTown**: The Ruby, The Sapphire, The Diamond và trang tổ hợp có giá theo loại căn (chỉ tính căn còn hàng trong giỏ hàng – bỏ căn đã bán, lock, khóa); ô "Giá từ" và đơn giá/m².
+- **Capital Square**: trang tổng có bảng giá theo tòa C6 The Kings, C7 Victory, S4 Hudson, C1 The Times, C4 The Queens; trang Hudson S4 có giá từng loại căn.
+- Giá gồm VAT & KPBT, chưa chiết khấu. Chatbot dùng bảng giá này để trả lời khách. Không đăng mã căn, tên đơn vị, số tài khoản trong bảng hàng.
+- Ô giá anh đã tự sửa trên web được giữ nguyên.
 
 ## Có gì mới – plugin 2.20.78, giao diện 2.15.28: FourS Tower có Xem 4D & chọn căn
 
