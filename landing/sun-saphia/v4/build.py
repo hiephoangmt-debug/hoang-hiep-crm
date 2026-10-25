@@ -768,10 +768,76 @@ def cong_vien():
     return page(P, title, desc, 'quy hoạch quanh sun saphia, công viên trước sun saphia, mở rộng đường võ nguyên giáp, đường sắt đô thị đà nẵng, công viên ngũ hành sơn, quy hoạch hòn ngọc á châu, quyết định 2958/qđ-ubnd, công viên công cộng ngũ hành sơn, sun saphia residence',
                 b, [article_ld(title, desc, MAIN + P, '2026-10-25', '2026-10-25'), cld, fld], P)
 
+def chinh_sach():
+    P = '/chinh-sach-bao-mat'
+    cr, cld = crumbs([('Trang chủ', MAIN + '/'), ('Sun Saphia Residence', MAIN + '/'), ('Chính sách bảo mật', MAIN + P)])
+    toc = [('ai', 'Ai quản lý thông tin'), ('thu-thap', 'Thông tin thu thập'), ('muc-dich', 'Mục đích sử dụng'), ('chia-se', 'Chia sẻ & dịch vụ kỹ thuật'),
+           ('cookie', 'Cookie & đo lường quảng cáo'), ('luu-tru', 'Lưu trữ & bảo vệ'), ('quyen', 'Quyền của Anh/Chị'), ('lien-he', 'Liên hệ & khiếu nại'), ('thay-doi', 'Thay đổi chính sách')]
+    def sec(i, id_, title, html):
+        return ('<section class="card pol" id="%s" style="padding:26px 28px;margin-bottom:16px"><span class="n">MỤC %d</span><h2 class="oc" style="font-size:22px;margin:6px 0 12px">%s</h2><div class="txt just">%s</div></section>' % (id_, i, title, html))
+    b = ('<section class="hero" style="padding-bottom:30px"><div class="wrap">' + cr +
+         '<div class="g2" style="margin-top:14px;align-items:center"><div><span class="tag">🔒 Bảo vệ dữ liệu cá nhân · Cập nhật 25/10/2026</span>'
+         '<h1 class="dp" style="margin-top:14px">Chính sách <b>bảo mật thông tin</b></h1>'
+         '<p class="lead just">Áp dụng cho trang thông tin dự án Sun Saphia Residence tại sun-saphia-residence.com và sun-shaphiaresidence.com, gồm form đăng ký, khung chat trả lời nhanh, nút gọi và Zalo.</p></div>'
+         '<div class="card polsum" style="padding:24px 26px;border-top:6px solid var(--or)"><style>.polsum,.polsum *{text-align:left!important}</style><span class="n">TÓM TẮT 30 GIÂY</span><ul class="ck" style="margin-top:10px">'
+         '<li>Anh/Chị để lại thông tin <b>chỉ để nhận tài liệu và được tư vấn</b> về dự án</li>'
+         '<li>Trang <b>không thu bất kỳ khoản tiền nào</b>, không bán hay chia sẻ thông tin cho bên thứ ba vì mục đích thương mại</li>'
+         '<li>Không thu số căn cước, tài khoản ngân hàng, mật khẩu</li>'
+         '<li>Xem, sửa, xoá thông tin bất cứ lúc nào qua Zalo/điện thoại <b>0904 567 009</b> hoặc <b>hiephoangmt@gmail.com</b> – xử lý trong 72 giờ làm việc</li></ul></div></div></div></section>')
+    body = ''.join([
+        sec(1, 'ai', 'Ai quản lý thông tin của Anh/Chị',
+            '<p>Trang thông tin dự án Sun Saphia Residence do <b>Hoàng Phạm Đình Hiệp</b> – Giám đốc kinh doanh <b>TATILAND</b> (Công ty CP Đầu tư Địa ốc TATI), đại lý phân phối chính thức dự án theo chứng nhận của Sun Property ngày 23/10/2026 – thực hiện và quản lý thông tin khách hàng.</p>'
+            '<p>Đây <b>không phải website chính thức của chủ đầu tư</b> (Sun Property – Sun Group). Bảng giá, chính sách và thông tin chính thức theo công bố của chủ đầu tư và Hợp đồng mua bán.</p>'
+            '<p>Liên hệ: Hotline/Zalo <a href="tel:0904567009">0904 567 009</a> · Email <a href="mailto:hiephoangmt@gmail.com">hiephoangmt@gmail.com</a>.</p>'),
+        sec(2, 'thu-thap', 'Thông tin được thu thập',
+            '<ul class="ck"><li><b>Thông tin Anh/Chị tự nhập</b> vào form hoặc khung chat: họ tên, số điện thoại/Zalo, loại căn quan tâm, nhu cầu, ngân sách, câu hỏi.</li>'
+            '<li><b>Nội dung trao đổi</b> trong khung chat trả lời nhanh trên trang.</li>'
+            '<li><b>Thông tin truy cập</b>: trang đang xem, mã chiến dịch quảng cáo (utm, gclid, fbclid), thời điểm gửi.</li></ul>'
+            '<p>Trang <b>không thu thập</b> số căn cước/CCCD, thông tin tài khoản ngân hàng, thẻ thanh toán hay mật khẩu. Nhân viên tư vấn cũng không yêu cầu chuyển tiền qua khung chat.</p>'),
+        sec(3, 'muc-dich', 'Mục đích sử dụng',
+            '<ul class="ck"><li>Gửi bảng giá, mặt bằng, chính sách, tài liệu dự án khi chủ đầu tư công bố.</li>'
+            '<li>Liên hệ tư vấn qua điện thoại, Zalo hoặc email theo yêu cầu của Anh/Chị.</li>'
+            '<li>Đo lường hiệu quả quảng cáo ở mức tổng hợp, không nhằm nhận diện cá nhân.</li></ul>'
+            '<p>Thông tin chỉ được xử lý khi Anh/Chị <b>đồng ý</b>, thể hiện bằng việc tự nguyện gửi form hoặc để lại số trong khung chat. Anh/Chị có thể rút lại sự đồng ý bất cứ lúc nào (mục 7).</p>'),
+        sec(4, 'chia-se', 'Chia sẻ thông tin và các dịch vụ kỹ thuật',
+            '<p>Không bán, cho thuê hay trao đổi thông tin của Anh/Chị. Để vận hành trang, thông tin được lưu và chuyển qua các dịch vụ kỹ thuật sau, chỉ phục vụ mục đích ở mục 3:</p>'
+            + tbl(['Dịch vụ', 'Dùng để'], [['LadiPage', 'Lưu trữ trang web và dữ liệu form'], ['Google Sheets, Apps Script', 'Sổ quản lý khách hàng của người phụ trách tư vấn'],
+                                            ['Telegram', 'Nhận thông báo khách mới để liên hệ kịp thời'], ['FormSubmit', 'Chuyển thông tin đăng ký về email'], ['Zalo, điện thoại', 'Trao đổi trực tiếp khi Anh/Chị chủ động nhắn hoặc gọi']]) +
+            '<p style="margin-top:12px">Khi chủ đầu tư mở bán, việc giữ chỗ, đặt cọc, ký hợp đồng thực hiện theo quy trình và hợp đồng của chủ đầu tư; thông tin cần thiết cho giao dịch chỉ được cung cấp khi Anh/Chị đồng ý tiến hành giao dịch.</p>'
+            '<p>Thông tin chỉ được cung cấp cho cơ quan nhà nước có thẩm quyền khi có yêu cầu theo quy định pháp luật.</p>'),
+        sec(5, 'cookie', 'Cookie và đo lường quảng cáo',
+            '<ul class="ck"><li><b>Google Ads (thẻ Google)</b>: đo số lượt đăng ký từ quảng cáo; có thể đặt cookie trên trình duyệt.</li>'
+            '<li><b>Meta Pixel</b> (nếu được bật): đo hiệu quả quảng cáo Facebook ở mức tổng hợp.</li>'
+            '<li><b>Bộ nhớ trình duyệt</b> (bộ nhớ phiên, bộ nhớ cục bộ): lưu tạm mã chiến dịch và dấu đã gửi để tránh gửi trùng.</li></ul>'
+            '<p>Anh/Chị có thể xoá hoặc chặn cookie trong cài đặt trình duyệt, hoặc điều chỉnh quảng cáo tại trang cài đặt quảng cáo của Google, Facebook. Trang vẫn hoạt động bình thường khi tắt cookie.</p>'),
+        sec(6, 'luu-tru', 'Lưu trữ và bảo vệ',
+            '<p>Thông tin được lưu trong thời gian cần thiết để tư vấn dự án, <b>tối đa 24 tháng</b> kể từ lần liên hệ gần nhất, hoặc đến khi Anh/Chị yêu cầu xoá. Chỉ người phụ trách tư vấn được truy cập; tài khoản quản lý được bảo vệ bằng mật khẩu và xác thực của nhà cung cấp dịch vụ.</p>'
+            '<p>Nếu phát hiện sự cố lộ lọt dữ liệu, người phụ trách sẽ khắc phục, thông báo cho Anh/Chị bị ảnh hưởng và cơ quan có thẩm quyền theo quy định.</p>'),
+        sec(7, 'quyen', 'Quyền của Anh/Chị',
+            '<p>Theo quy định pháp luật về bảo vệ dữ liệu cá nhân (Nghị định 13/2023/NĐ-CP và các văn bản liên quan), Anh/Chị có quyền:</p>'
+            '<div class="g2" style="gap:12px">'
+            '<div class="card" style="padding:16px 18px"><b>Được biết</b><p>Biết thông tin nào đang được lưu và dùng vào việc gì.</p></div>'
+            '<div class="card" style="padding:16px 18px"><b>Xem, chỉnh sửa</b><p>Yêu cầu xem và sửa thông tin của mình.</p></div>'
+            '<div class="card" style="padding:16px 18px"><b>Xoá, rút đồng ý</b><p>Yêu cầu xoá thông tin hoặc rút lại sự đồng ý.</p></div>'
+            '<div class="card" style="padding:16px 18px"><b>Ngừng nhận tin</b><p>Yêu cầu ngừng gọi, nhắn tin tư vấn.</p></div></div>'),
+        sec(8, 'lien-he', 'Liên hệ và khiếu nại',
+            '<p>Gửi yêu cầu qua Zalo/điện thoại <a href="tel:0904567009"><b>0904 567 009</b></a> hoặc email <a href="mailto:hiephoangmt@gmail.com"><b>hiephoangmt@gmail.com</b></a>, ghi rõ số điện thoại đã đăng ký. Yêu cầu được xử lý trong vòng <b>72 giờ làm việc</b>.</p>'
+            '<p>Nếu thông tin bị sử dụng sai mục đích, Anh/Chị có quyền khiếu nại tới người phụ trách và cơ quan nhà nước có thẩm quyền theo quy định pháp luật.</p>'
+            '<p><a class="btn sm" href="https://zalo.me/0904567009" target="_blank" rel="noopener">Nhắn Zalo yêu cầu xem/xoá thông tin</a></p>'),
+        sec(9, 'thay-doi', 'Thay đổi chính sách',
+            '<p>Chính sách có thể được cập nhật khi thay đổi dịch vụ hoặc quy định pháp luật; ngày cập nhật ghi ở đầu trang. Việc Anh/Chị tiếp tục gửi thông tin sau khi cập nhật được hiểu là đồng ý với nội dung mới.</p>'),
+    ])
+    nav = '<nav class="card" aria-label="Mục lục" style="padding:20px 22px;position:sticky;top:90px"><span class="n">MỤC LỤC</span><ol style="margin:10px 0 0 18px;line-height:2">' + ''.join('<li><a href="#%s">%s</a></li>' % t for t in toc) + '</ol></nav>'
+    b += ('<section class="sec alt"><div class="wrap"><div style="display:grid;grid-template-columns:260px 1fr;gap:22px;align-items:start" class="polg">' + nav + '<div>' + body + '</div></div>'
+          '<style>@media(max-width:860px){.polg{grid-template-columns:1fr!important}.polg nav{position:static!important}}.pol .txt p{margin:0 0 10px}.polg nav,.polg nav *,.polsum,.polsum *{text-align:left!important}</style></div></section>')
+    title = 'Chính sách bảo mật – Sun Saphia Residence'
+    desc = 'Chính sách bảo mật thông tin khách hàng của trang thông tin dự án Sun Saphia Residence: thu thập gì, dùng vào việc gì, lưu bao lâu, quyền xem, sửa, xoá theo Nghị định 13/2023/NĐ-CP.'
+    return page(P, title, desc, 'chính sách bảo mật sun saphia residence, bảo vệ dữ liệu cá nhân', b, [cld], P)
+
 if __name__ == '__main__':
     import os
     os.makedirs(OUT, exist_ok=True)
-    out = {'trang-chu.html': home(), 'bang-gia.html': bang_gia(), 'mat-bang.html': mat_bang(), 'phap-ly.html': phap_ly(), 'cho-thue.html': cho_thue(), 'tinh-dong-tien.html': tinh_dong_tien(), 'vi-sao-sun-group.html': vi_sao(), 'quy-hoach.html': cong_vien(),
+    out = {'trang-chu.html': home(), 'bang-gia.html': bang_gia(), 'mat-bang.html': mat_bang(), 'phap-ly.html': phap_ly(), 'cho-thue.html': cho_thue(), 'tinh-dong-tien.html': tinh_dong_tien(), 'vi-sao-sun-group.html': vi_sao(), 'quy-hoach.html': cong_vien(), 'chinh-sach-bao-mat.html': chinh_sach(),
            'ads.html': ads(MAIN), 'ads-shaphia.html': ads('https://www.sun-shaphiaresidence.com')}
     # Trang chủ tên miền phụ: cùng nội dung, chuẩn hóa về tên miền chính để tránh trùng nội dung
     out['shaphia.html'] = out['trang-chu.html']
