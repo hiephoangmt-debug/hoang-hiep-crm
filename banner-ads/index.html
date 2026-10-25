@@ -136,7 +136,9 @@ input[type=range]{width:100%;accent-color:var(--brass)}
       <select id="preset">
         <option value="">— Chọn để điền nhanh —</option>
         <optgroup label="Poster trọn bộ (bố cục + màu + chữ)">
-          <option value="saphia">Sun Saphia – Ánh dương</option>
+          <option value="saphia">Sun Saphia – Sống chuẩn Sun Group</option>
+          <option value="saphia2">Sun Saphia – Đón bình minh (xanh vàng)</option>
+          <option value="saphia3">Sun Saphia – Câu hỏi gây chú ý</option>
           <option value="p_offer">Ưu đãi vàng – xanh hoàng gia</option>
           <option value="p_policy">Chính sách bán hàng – đỏ đô</option>
           <option value="p_event">Lễ ra mắt dự án</option>
@@ -155,7 +157,7 @@ input[type=range]{width:100%;accent-color:var(--brass)}
     </label>
     <label class="f"><span class="row">Tên dự án (hiện khi chưa có logo)<span class="cnt" data-c="eyebrow"></span></span><input type="text" id="eyebrow" maxlength="60"></label>
     <label class="f"><span class="row">Tiêu đề chính (mỗi dòng một dòng chữ)<span class="cnt" data-c="title"></span></span><textarea id="title" rows="3" maxlength="140"></textarea></label>
-    <p class="hint">Phối chữ kiểu poster: <b>~Sở hữu~</b> = chữ viết tay · dòng <b>~~Nhịp Sống~~</b> = chữ viết tay cỡ lớn · dòng bắt đầu bằng <b>-</b> = dòng chữ nhỏ · còn lại là chữ in lớn, tự to vừa khung.</p>
+    <p class="hint">Phối chữ kiểu poster: <b>~Sở hữu~</b> = chữ viết tay · dòng <b>~~Nhịp Sống~~</b> = chữ viết tay cỡ lớn · <b>[SUN GROUP]</b> = chữ trên khối màu nổi bật · ô Điểm nổi bật hiện thành dòng có dấu tích · dòng bắt đầu bằng <b>-</b> = dòng chữ nhỏ · còn lại là chữ in lớn, tự to vừa khung.</p>
     <label class="f">Ưu đãi / chính sách (mỗi dòng: Nhãn | Số lớn | Đơn vị | Chú thích)<textarea id="offers" rows="4" placeholder="CHIẾT KHẤU | 5% | | GIÁ TRỊ CĂN HỘ"></textarea></label>
     <div class="grid2">
       <label class="f">Ngày giờ sự kiện<input type="text" id="eventDate" placeholder="Thứ Bảy, 09h00 | 08 tháng 11"></label>
@@ -340,6 +342,7 @@ const THEMES = [
 const COLOR_KEYS = [['panel','Nền khối'],['accent','Điểm nhấn'],['text','Tiêu đề'],['sub','Chữ phụ'],['ctaBg','Nút'],['ctaText','Chữ nút']];
 
 const FONTS = [
+  {id:'impact',name:'Nổi bật',    title:'Montserrat', tw:900, body:'Be Vietnam Pro', script:'Great Vibes'},
   {id:'royal', name:'Hoàng gia',  title:'Cormorant Garamond', tw:600, body:'Be Vietnam Pro', script:'Great Vibes'},
   {id:'thin',  name:'Thanh mảnh', title:'Josefin Sans', tw:300, body:'Be Vietnam Pro', script:'Great Vibes'},
   {id:'lux',   name:'Sang trọng', title:'Playfair Display', tw:700, body:'Be Vietnam Pro', script:'Great Vibes'},
@@ -367,11 +370,22 @@ const TEMPLATES = [
 
 const POSTER_BLANK = {offers:'', eventDate:'', slogan:'', ribbon:'', footnote:'', insetLabel:''};
 const PRESETS = {
-  saphia:{template:'p_offer', theme:'sun', font:'royal', fx:58, fy:45, overlay:10, eyebrow:'SUN SAPHIA RESIDENCE',
-    title:'-Căn hộ cao cấp · Đà Nẵng\nĐÓN ÁNH DƯƠNG\n~Giao hòa~\n~~Nhịp Sống~~', subtitle:'Chủ đầu tư Sun Property – thành viên Tập đoàn Sun Group',
-    offers:'', cta:'Nhận bảng giá & CSBH', hotline:'0905 123 456', footnote:'', ribbon:'', eventDate:'', slogan:'', insetLabel:'',
-    headline:'Sun Saphia Residence Đà Nẵng', desc:'Nhận bảng giá & CSBH', fbcta:'Gửi tin nhắn',
-    primary:'☀️ SUN SAPHIA RESIDENCE – Đón ánh dương, giao hòa nhịp sống\nCăn hộ cao cấp tại Đà Nẵng của chủ đầu tư Sun Property (thành viên Tập đoàn Sun Group).\n👉 Nhắn tin ngay để nhận bảng giá, chính sách bán hàng và lịch tham quan mới nhất.'},
+  saphia:{template:'p_offer', theme:'sun', font:'impact', metal:false, showBullets:true, fx:58, fy:45, overlay:5, eyebrow:'SUN SAPHIA RESIDENCE',
+    title:'-Căn hộ cao cấp · Đà Nẵng\nSỐNG CHUẨN\n[SUN GROUP]\n~~giữa phố biển~~', subtitle:'',
+    bullets:'Chủ đầu tư Sun Property – Tập đoàn Sun Group\nĐăng ký sớm – ưu tiên chọn căn đẹp',
+    offers:'', cta:'NHẬN BẢNG GIÁ', hotline:'0905 123 456', footnote:'', ribbon:'', eventDate:'', slogan:'', insetLabel:'',
+    headline:'Sống chuẩn Sun Group tại Đà Nẵng', desc:'Nhận bảng giá & CSBH mới nhất', fbcta:'Gửi tin nhắn',
+    primary:'Sống chuẩn Sun Group giữa phố biển Đà Nẵng ☀️\nSUN SAPHIA RESIDENCE – căn hộ cao cấp từ Sun Property (Tập đoàn Sun Group).\n✅ Thiết kế ngập nắng, tầm nhìn khoáng đạt\n✅ Đăng ký sớm – ưu tiên chọn căn đẹp, tầng đẹp\n👉 Nhắn tin ngay để nhận bảng giá & chính sách mới nhất.'},
+  saphia2:{template:'p_offer', theme:'royal', font:'impact', metal:true, showBullets:true, fx:58, fy:45, overlay:20, eyebrow:'SUN SAPHIA RESIDENCE',
+    title:'~Mỗi sáng thức dậy~\nĐÓN BÌNH MINH\nTỪ [BAN CÔNG] NHÀ MÌNH', subtitle:'',
+    bullets:'Căn hộ cao cấp chuẩn Sun Group\nĐăng ký sớm – ưu tiên căn view đẹp', offers:'', cta:'NHẬN BẢNG GIÁ', hotline:'0905 123 456',
+    footnote:'', ribbon:'', eventDate:'', slogan:'', insetLabel:'', headline:'Đón bình minh từ ban công nhà mình', desc:'Sun Saphia Residence Đà Nẵng', fbcta:'Gửi tin nhắn',
+    primary:'Mỗi sáng thức dậy, đón bình minh ngay từ ban công nhà mình 🌅\nSUN SAPHIA RESIDENCE – căn hộ cao cấp chuẩn Sun Group tại Đà Nẵng.\nSố lượng căn view đẹp có hạn – đăng ký sớm để được ưu tiên chọn căn.\n👉 Nhắn tin để nhận bảng giá, mặt bằng & chính sách bán hàng.'},
+  saphia3:{template:'p_offer', theme:'sun', font:'impact', metal:false, showBullets:true, fx:58, fy:45, overlay:5, eyebrow:'SUN SAPHIA RESIDENCE',
+    title:'-Câu hỏi cho người tìm nhà Đà Nẵng\nĐÃ CÓ CĂN HỘ\n[CHUẨN SUN GROUP]\n~~cho riêng mình chưa?~~', subtitle:'',
+    bullets:'Thương hiệu Sun Group uy tín tại Đà Nẵng\nCăn hộ cao cấp ngập nắng, view khoáng đạt', offers:'', cta:'NHẬN BẢNG GIÁ', hotline:'0905 123 456',
+    footnote:'', ribbon:'', eventDate:'', slogan:'', insetLabel:'', headline:'Căn hộ chuẩn Sun Group tại Đà Nẵng', desc:'Nhận bảng giá & CSBH', fbcta:'Gửi tin nhắn',
+    primary:'Bạn đã có căn hộ chuẩn Sun Group cho riêng mình chưa? 🏙️\nSUN SAPHIA RESIDENCE – dự án căn hộ cao cấp mới của Sun Property tại Đà Nẵng.\n✅ Thương hiệu Sun Group\n✅ Căn hộ ngập nắng, tầm nhìn khoáng đạt\n👉 Nhắn tin để nhận bảng giá & chính sách bán hàng đợt này.'},
   p_offer:{template:'p_offer', theme:'royal', font:'thin', eyebrow:'AURORA RIVERSIDE', title:'~Sở hữu~\nNhà sang\nnhận ngàn ~Ưu đãi~', subtitle:'',
     offers:'LÃI SUẤT ƯU ĐÃI | 0% | | TRONG 30 THÁNG\nCHIẾT KHẤU | 5% | | GIÁ TRỊ CĂN HỘ\nTẶNG NGAY | 2 NĂM | | PHÍ DỊCH VỤ', cta:'Nhận ưu đãi', hotline:'0905 123 456', footnote:'', ribbon:'', eventDate:'', slogan:'', insetLabel:''},
   p_policy:{template:'p_policy', theme:'wine', font:'royal', eyebrow:'AURORA IMPERIAL', title:'Chính sách bán hàng\n-Dự án Aurora Imperial', subtitle:'',
@@ -718,9 +732,10 @@ function parseRich(src){
     if (l[0]==='-') return {kind:'small',segs:[{t:l.slice(1).trim(),sc:false}]};
     const mb=l.match(/^~~([^~]+)~{0,2}$/); if (mb) return {kind:'script',big:true,segs:[{t:mb[1].trim(),sc:true}]};
     const m=l.match(/^~([^~]+)~?$/); if (m) return {kind:'script',segs:[{t:m[1].trim(),sc:true}]};
-    const segs=[], re=/~([^~]+)~/g; let last=0,x;
-    while((x=re.exec(l))){ if(x.index>last) segs.push({t:l.slice(last,x.index).trim(),sc:false}); segs.push({t:x[1].trim(),sc:true}); last=re.lastIndex; }
-    if (last<l.length) segs.push({t:l.slice(last).replace(/~/g,'').trim(),sc:false});
+    const segs=[], re=/~([^~]+)~|\[([^\]]+)\]/g; let last=0,x;
+    while((x=re.exec(l))){ if(x.index>last) segs.push({t:l.slice(last,x.index).trim(),sc:false});
+      if (x[1]!=null) segs.push({t:x[1].trim(),sc:true}); else segs.push({t:x[2].trim(),sc:false,hl:true}); last=re.lastIndex; }
+    if (last<l.length) segs.push({t:l.slice(last).replace(/[~\[\]]/g,'').trim(),sc:false});
     return {kind:'main',segs:segs.filter(s=>s.t)};
   }).filter(l=>l.segs.length);
 }
@@ -734,7 +749,7 @@ function segFont(ln,seg,s,tf,o){
 const segText = (ln,seg,o) => (ln.kind==='small' || (o.upper && !seg.sc)) ? seg.t.toLocaleUpperCase('vi') : seg.t;
 function measureLine(ln,s,tf,o){
   let w=0; const ws=[];
-  ln.segs.forEach((seg,i)=>{ const [f,ls]=segFont(ln,seg,s,tf,o); MC.font=f; MC.letterSpacing=ls+'px'; const sw=MC.measureText(segText(ln,seg,o)).width-ls; ws.push(sw); w+=sw+(i?s*.26:0); });
+  ln.segs.forEach((seg,i)=>{ const [f,ls]=segFont(ln,seg,s,tf,o); MC.font=f; MC.letterSpacing=ls+'px'; const sw=MC.measureText(segText(ln,seg,o)).width-ls+(seg.hl?s*.5:0); ws.push(sw); w+=sw+(i?s*.26:0); });
   MC.letterSpacing='0px'; return {w,ws};
 }
 
@@ -752,7 +767,8 @@ function richBlock(ctx,src,tf,th,U,t,o={}){
       sz[i]= ln.big ? Math.min(ref*1.6, cap*1.5, fitW*.9) : Math.min(ln.kind==='script'? ref*.72 : ref*.3, fitW);
     });
     const met=lines.map((ln,i)=>{ const s=sz[i], sc=ln.segs.some(x=>x.sc);
-      if (ln.kind==='main') return {above: sc? Math.max(s*1.0,s*1.3*.8) : s*1.0, below:s*.2};
+      const hl=ln.segs.some(x=>x.hl);
+      if (ln.kind==='main') return {above: sc? Math.max(s*1.0,s*1.3*.8) : hl? s*1.14 : s*1.0, below: hl? s*.36 : s*.2};
       if (ln.kind==='script') return {above:s*.82, below:ln.big? s*.32 : s*.02};
       return {above:s*1.15, below:s*.55};
     });
@@ -795,7 +811,15 @@ function richBlock(ctx,src,tf,th,U,t,o={}){
         if (o.extrude && !seg.sc){ ctx.fillStyle=mix(th.panel,'#000000',.55); for (let d=6; d>=1; d--) ctx.fillText(txt,lx+d*fs*.006,r.base+d*fs*.012); }
         if (seg.sc){ ctx.shadowColor=rgba(S.colors.accent,.55); ctx.shadowBlur=fs*.14; }
         else if (!isLight(th.panel) || o.color==='white'){ ctx.shadowColor='rgba(0,0,0,.42)'; ctx.shadowBlur=fs*.08; ctx.shadowOffsetY=fs*.03; }
-        ctx.fillStyle=fill; ctx.fillText(txt,lx,r.base);
+        if (seg.hl){
+          const lt=isLight(th.panel), bx=lx, by=r.base-fs*1.0, bw2=sw, bh=fs*1.26;
+          ctx.save(); ctx.shadowColor='rgba(0,0,0,.25)'; ctx.shadowBlur=fs*.15; ctx.shadowOffsetY=fs*.05;
+          rrect(ctx,bx,by,bw2,bh,fs*.14); ctx.fillStyle=lt? th.accent : goldGrad(ctx,by,by+bh); ctx.fill(); ctx.restore();
+          ctx.shadowColor='transparent'; ctx.fillStyle=lt? '#ffffff' : mix(S.colors.accent,'#000000',.8); ctx.fillText(txt,lx+fs*.25,r.base);
+        } else {
+          if (isLight(th.panel) && o.color!=='white' && !seg.sc){ ctx.shadowColor='rgba(255,255,255,.9)'; ctx.shadowBlur=fs*.18; }
+          ctx.fillStyle=fill; ctx.fillText(txt,lx,r.base);
+        }
         ctx.restore();
         if (seg.sc && o.sparkle!==false){ const tw=t==null?1:.55+.45*Math.sin(t*3+i*2+j); sparkle(ctx,lx+sw*.94,r.base-fs*.62,fs*.32,tw*e); }
         textArea+=sw*fs*.9; lx+=sw+r.s*.26;
@@ -983,9 +1007,34 @@ function textBlock(ctx,txt,tf,th,U,t,o={}){
     ctx.restore(); } };
 }
 
+/* Danh sách lý do mua: mỗi dòng một viên thuốc có dấu tích, đọc rõ trên ảnh */
+function checklistBlock(ctx,tf,th,U,t,o={}){
+  const items=String(S.bullets||'').split('\n').map(x=>x.trim()).filter(Boolean).slice(0,4);
+  if (!S.showBullets || !items.length) return null;
+  const geo=(w,k)=>{ let s=U*.033*k; MC.font=fontStr(600,s,tf.body); let mw=Math.max(...items.map(x=>MC.measureText(x).width))+s*3.2;
+    if (mw>w){ s*=w/mw; mw=w; } const rh=s*2.15, g=s*.45; return {s,mw,rh,g,h:items.length*rh+(items.length-1)*g}; };
+  return { h:(w,k)=>geo(w,k).h, draw:(x,y,w,k,idx)=>{
+    const G=geo(w,k), lt=isLight(th.panel);
+    items.forEach((it,i)=>{
+      const a=popAnim(idx,i,t); if(!a.a) return;
+      const bx=o.align==='left'? x : x+(w-G.mw)/2, by=y+i*(G.rh+G.g);
+      ctx.save(); ctx.globalAlpha*=a.a; ctx.translate((1-a.a)*-G.s*2,0);
+      ctx.shadowColor='rgba(0,0,0,.18)'; ctx.shadowBlur=G.s*.6; ctx.shadowOffsetY=G.s*.15;
+      rrect(ctx,bx,by,G.mw,G.rh,G.rh/2); ctx.fillStyle=lt?'rgba(255,255,255,.88)':rgba(mix(th.panel,'#000000',.35),.72); ctx.fill(); ctx.shadowColor='transparent';
+      const cr=G.rh*.32, ccx=bx+G.rh*.5, ccy=by+G.rh/2;
+      ctx.fillStyle=th.accent; ctx.beginPath(); ctx.arc(ccx,ccy,cr,0,Math.PI*2); ctx.fill();
+      ctx.strokeStyle=inkOn(th.accent)==='#ffffff'?'#ffffff':'#1a1206'; ctx.lineWidth=cr*.28; ctx.lineCap='round'; ctx.lineJoin='round';
+      ctx.beginPath(); ctx.moveTo(ccx-cr*.45,ccy+cr*.02); ctx.lineTo(ccx-cr*.1,ccy+cr*.38); ctx.lineTo(ccx+cr*.5,ccy-cr*.35); ctx.stroke();
+      ctx.font=fontStr(600,G.s,tf.body); ctx.fillStyle=lt?th.text:'#ffffff'; ctx.textAlign='left'; ctx.textBaseline='middle';
+      ctx.fillText(it,bx+G.rh*.95,ccy+G.s*.04); textArea+=G.mw*G.rh*.7;
+      ctx.restore();
+    });
+  }};
+}
+
 function contactBlock(ctx,tf,th,U,t,o={}){
   if (!S.cta && !S.hotline) return null;
-  const geo=(w,k)=>{ const s=U*.032*k; MC.font=fontStr(700,s,tf.body); const cw=S.cta?MC.measureText(S.cta).width+s*2.4:0;
+  const geo=(w,k)=>{ const s=U*(o.size||.032)*k; MC.font=fontStr(700,s,tf.body); const cw=S.cta?MC.measureText(S.cta).width+s*2.4:0;
     MC.font=fontStr(700,s*.92,tf.body); const ht=S.hotline?'HOTLINE: '+S.hotline:''; const hw=ht?MC.measureText(ht).width+s*2.2:0; const bh=s*2.5, gap=s*.8;
     const stack=cw&&hw&&cw+hw+gap>w; return {s,cw,hw,ht,bh,gap,stack,h:stack?bh*2+gap:bh}; };
   return { h:(w,k)=>geo(w,k).h, draw:(x,y,w,k,idx)=>{
@@ -1140,11 +1189,11 @@ function renderPoster(ctx,W,H,t,mode,th,tf,top,bottom,P){
     if (land){
       fadeImage(ctx,{x:0,y:0,w:W*.56,h:H},'right',th,t);
       const lb=logosBlock(ctx,tf,th,U,t,{align:'left'}); if (lb) lb.draw(SP,T,W*.36,1,0);
-      stackDraw([rich({align:'center',cap:.2}), sub({}), offersCircle(ctx,offers,tf,th,U,t), contactBlock(ctx,tf,th,U,t)],{x:W*.44,y:T,w:W*.56-SP,h:H-T-B},U,'center');
+      stackDraw([rich({align:'center',cap:.2}), sub({}), offersCircle(ctx,offers,tf,th,U,t), checklistBlock(ctx,tf,th,U,t), contactBlock(ctx,tf,th,U,t)],{x:W*.44,y:T,w:W*.56-SP,h:H-T-B},U,'center');
     } else {
-      fadeImage(ctx,{x:0,y:H*.5,w:W,h:H*.5},'up',th,t);
+      fadeImage(ctx,{x:0,y:H*.44,w:W,h:H*.56},'up',th,t);
       const g=ctx.createLinearGradient(0,H*.78,0,H); g.addColorStop(0,rgba(th.panel,0)); g.addColorStop(1,rgba(th.panel,.85)); ctx.fillStyle=g; ctx.fillRect(0,H*.78,W,H*.22);
-      stackDraw([logosBlock(ctx,tf,th,U,t), rich({align:'center',cap:.19}), sub({}), offersCircle(ctx,offers,tf,th,U,t,{maxCols:mode==='narrow'?1:3}), FLEX(), contactBlock(ctx,tf,th,U,t)],{x:SP,y:T,w:W-2*SP,h:H-T-B},U,'top');
+      stackDraw([logosBlock(ctx,tf,th,U,t), rich({align:'center',cap:.19}), sub({}), offersCircle(ctx,offers,tf,th,U,t,{maxCols:mode==='narrow'?1:3}), G_(checklistBlock(ctx,tf,th,U,t),.025), FLEX(), G_(contactBlock(ctx,tf,th,U,t,{size:.034}),.035)],{x:SP,y:T,w:W-2*SP,h:H-T-B},U,'top');
     }
   } else if (tpl==='p_policy'){
     posterBg(ctx,W,H,th,t,{cx:.5,cy:.18,rays:true});
@@ -1434,8 +1483,8 @@ $('tabs').onclick=e=>{ const b=e.target.closest('button'); if(!b) return;
 /* ---- mẫu chữ gợi ý ---- */
 $('preset').onchange=e=>{ const p=PRESETS[e.target.value]; if(!p) return;
   Object.assign(S,p);
-  if (p.theme){ const th=THEMES.find(x=>x.id===p.theme); if (th) S.colors={...th}; S.metal=true; $('metal').checked=true; buildPickers(); }
-  FIELDS.forEach(k=>$(k).value=S[k]??''); ['fx','fy','overlay','fbcta'].forEach(k=>$(k).value=S[k]); counters(); save(); fontsReady().then(()=>draw()); draw(); e.target.value=''; };
+  if (p.theme){ const th=THEMES.find(x=>x.id===p.theme); if (th) S.colors={...th}; if (p.metal==null) S.metal=true; buildPickers(); }
+  FIELDS.forEach(k=>$(k).value=S[k]??''); ['fx','fy','overlay','fbcta'].forEach(k=>$(k).value=S[k]); ['metal','showBullets'].forEach(k=>$(k).checked=!!S[k]); counters(); save(); fontsReady().then(()=>draw()); draw(); e.target.value=''; };
 
 /* ---- tải ảnh ---- */
 function readImage(file){ return new Promise((res,rej)=>{ const fr=new FileReader(); fr.onload=()=>{ const im=new Image(); im.onload=()=>res(im); im.onerror=rej; im.src=fr.result; }; fr.onerror=rej; fr.readAsDataURL(file); }); }
