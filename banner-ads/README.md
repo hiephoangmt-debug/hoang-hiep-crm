@@ -9,11 +9,20 @@ Trang web chạy ngay trên trình duyệt (không cần cài đặt) để làm
 
 **Kích thước chuẩn (11 cỡ)**: Facebook/IG 4:5 (1080×1350), vuông 1080×1080, Story/Reels/TikTok 1080×1920, Zalo/link 1200×628, YouTube 1280×720, ảnh bìa Fanpage 1640×624, banner web 1920×600, Google 300×250 · 728×90 · 160×600 · 320×50. Bố cục tự co giãn theo từng cỡ.
 
-**6 bố cục**: Sang trọng · Khối chéo · Khuyến mãi (tem giá nổ) · Khung trắng · Thẻ ảnh · Trung tâm.
+**5 mẫu poster BĐS** (phong cách poster dự án Việt Nam, chọn ở ô *Mẫu chữ gợi ý → Poster trọn bộ*):
+- **Ưu đãi vàng**: chữ viết tay chồng chữ in mảnh, 3 vòng tròn ưu đãi có băng rôn vàng, hotline.
+- **Chính sách**: lưới chính sách bán hàng (giá, thanh toán, vay, chiết khấu) có vạch chia vàng, ghi chú (*).
+- **Lễ ra mắt**: khung tiêu đề, ô ngày giờ có đồng hồ, khẩu hiệu nghiêng nổi khối.
+- **Lễ hội / Tết**: ảnh polaroid nghiêng, số tiền vàng 3D trên bệ, dải băng "trả thưởng", pháo giấy.
+- **Vị trí vàng**: tiêu đề nhiều tầng chữ, ảnh tròn có nhãn (sân bay, cầu…), tên vị trí + chữ viết tay.
 
-**Màu & chữ**: 8 bảng màu (Hoàng gia, Navy, Sinh thái, Khuyến mãi, Biển xanh, Tối giản, Cát nắng, Tím đêm) + tự chỉnh 6 màu; 7 cặp phông Google Fonts có đủ dấu tiếng Việt; tiêu đề ánh kim, viết hoa, độ tối lớp phủ, cỡ chữ tổng thể. Chữ tự xuống dòng và tự thu nhỏ cho vừa khung.
+**Cách gõ tiêu đề kiểu poster**: mỗi dòng là một dòng chữ; `~Sở hữu~` thành chữ viết tay vàng có ánh sáng; dòng bắt đầu bằng `-` là dòng nhỏ giãn chữ; dòng còn lại tự phóng to vừa khung. Ưu đãi gõ mỗi dòng `Nhãn | Số lớn | Đơn vị | Chú thích`, ví dụ `CHIẾT KHẤU | 5% | | GIÁ TRỊ CĂN HỘ`.
 
-**Ảnh**: kéo thả ảnh dự án (nhiều ảnh = video trình chiếu), chỉnh điểm lấy nét, logo PNG. Chưa có ảnh thì phần mềm tự vẽ phối cảnh thành phố hợp màu.
+**6 bố cục cơ bản**: Sang trọng · Khối chéo · Khuyến mãi (tem giá nổ) · Khung trắng · Thẻ ảnh · Trung tâm.
+
+**Màu & chữ**: 12 bảng màu (Xanh hoàng gia, Đỏ đô, Ngọc lam, Biển đêm, Hoàng gia, Navy, Sinh thái, Khuyến mãi, Biển xanh, Tối giản, Cát nắng, Tím đêm) + tự chỉnh 6 màu; 9 cặp phông Google Fonts có đủ dấu tiếng Việt (kèm chữ viết tay Great Vibes / Dancing Script); tiêu đề ánh kim, viết hoa, độ tối lớp phủ, cỡ chữ tổng thể. Chữ tự xuống dòng và tự thu nhỏ cho vừa khung.
+
+**Ảnh**: kéo thả ảnh dự án (nhiều ảnh = video trình chiếu), chỉnh điểm lấy nét, tối đa 2 logo (chủ đầu tư + dự án). Chưa có ảnh thì phần mềm tự vẽ phối cảnh thành phố hợp màu.
 
 **Video**: 6 / 10 / 15 / 20 / 30 giây, 30 hoặc 60 fps, ảnh chuyển động chậm (Ken Burns), chuyển cảnh mờ, 4 hiệu ứng chữ (trượt lên, mờ dần, phóng to, đánh máy), nút kêu gọi nhấp nháy, nhạc nền tự giảm âm cuối video. Xuất **MP4 (H.264)** trên Chrome / Edge / Safari mới (Firefox xuất WebM).
 
