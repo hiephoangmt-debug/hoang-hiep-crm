@@ -1,4 +1,4 @@
-<!--HH-LANDING-META {"title": "Bảng tính dòng tiền Tòa F2 FourS Tower – Tính tiến độ thanh toán", "description": "Bảng tính dòng tiền Tòa F2 Sun FourS Tower theo CSBH 4.2: chọn căn, ngày ký, phương án vay hay thanh toán sớm – ra lịch thanh toán, quà nội thất Nhà Xinh và chiết khấu tới 15,5%.", "url": "/du-an/fours-tower/bang-tinh-f2/"} -->
+<!--HH-LANDING-META {"title": "Pháp lý FourS Tower Đà Nẵng: điều kiện bán, sổ đỏ, bảo lãnh", "description": "FourS Tower: 2.394 căn đủ điều kiện bán (VB 17239/SXD-QLN), sổ đỏ 4 lô đất, bảo lãnh Techcombank, hợp đồng mẫu đã đăng ký.", "url": "/du-an/fours-tower/phap-ly/"} -->
 <!--HH-LANDING-HEAD-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -256,7 +256,7 @@ footer .disc{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);padding
 .modal .box p.t{font-family:var(--serif);color:var(--green-800);font-size:26px;margin-bottom:8px}
 
 /* Reveal – only when JS is running, so crawlers always see content */
-.js .rv{opacity:0;transition:opacity .45s ease-out}
+.js .rv{opacity:1}
 .js .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}*{animation:none!important}}
 
@@ -309,77 +309,33 @@ footer .disc{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.12);padding
 }
 </style>
 <style>
-.calc-hero{background:var(--green-900);color:#fff;padding:120px 0 56px;position:relative;overflow:hidden}
-.calc-hero::before{content:"";position:absolute;inset:0;background:url(https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@e7d68ad6ad1e3261f135cc653c55e6c700a276b0/landing-pages/assets/fourstower/img/toa-f2-fours-tower-kien-truc-800.jpg) center/cover;opacity:.22}
-.calc-hero .container{position:relative}
-.calc-hero h1{font-family:var(--serif);font-size:clamp(32px,5vw,58px);line-height:1.1;margin:14px 0 12px;font-weight:600}
-.calc-hero h1 span{color:var(--gold-light);font-style:italic}
-.calc-hero p{max-width:760px;opacity:.92;font-size:17px}
+.ph-hero{background:var(--green-900);color:#fff;padding:120px 0 56px;position:relative;overflow:hidden}
+.ph-hero::before{content:"";position:absolute;inset:0;background:url(https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@e7d68ad6ad1e3261f135cc653c55e6c700a276b0/landing-pages/assets/fourstower/img/sun-fours-tower-hoang-hon-800.jpg) center/cover;opacity:.2}
+.ph-hero .container{position:relative}
+.ph-hero h1{font-family:var(--serif);font-size:clamp(32px,5vw,58px);line-height:1.1;margin:14px 0 12px;font-weight:600}
+.ph-hero h1 span{color:var(--gold-light);font-style:italic}
+.ph-hero p{max-width:780px;opacity:.92;font-size:17px}
 .crumbs{font-size:13.5px;color:rgba(255,255,255,.85)}
 .crumbs ol{list-style:none;display:flex;flex-wrap:wrap;gap:6px}
 .crumbs li+li::before{content:"›";margin-right:6px;opacity:.7}
 .crumbs a{text-decoration:underline;text-underline-offset:3px}
-.calc{padding:48px 0 80px}
-.calc-grid{display:grid;grid-template-columns:380px 1fr;gap:28px;align-items:start}
-.calc-grid>*{min-width:0}
-.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow)}
-.panel h2{font-family:var(--serif);font-size:22px;color:var(--green-800);margin-bottom:14px;font-weight:600}
-.inputs{position:sticky;top:84px}
-.inputs label.lbl{display:block;font-size:13px;font-weight:600;color:var(--muted);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.06em}
-.inputs #unit{font-weight:700;text-transform:uppercase}
-.btn-zalo{background:#0068ff;color:#fff}.btn-zalo:hover{background:#0052cc}
-.inputs select,.inputs input[type=number],.inputs input[type=date],.inputs #unit{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;font:inherit;font-size:15px;background:#fff;color:var(--ink)}
-.unit-info{font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.5}
-.opts{display:grid;gap:8px;margin-top:6px}
-.opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;transition:.2s}
-.opt:hover{border-color:var(--gold)}
-.opt input{margin-top:4px;accent-color:var(--green-800)}
-.opt b{display:block;color:var(--green-800);font-size:14.5px}
-.opt small{color:var(--muted);font-size:12.5px}
-.opt.on{border-color:var(--green-800);background:#eef2fa}
-.opt.disabled{opacity:.45;cursor:not-allowed}
-.chk{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin-top:8px;cursor:pointer}
-.chk input{margin-top:4px;accent-color:var(--green-800)}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.card{background:var(--cream);border:1px solid var(--line);border-radius:14px;padding:16px}
-.card span{display:block;font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
-.card b{display:block;font-family:var(--serif);font-size:24px;color:var(--green-800);line-height:1.25;margin-top:4px}
-.card small{color:var(--muted);font-size:12.5px}
-.card.hl{background:var(--green-800);border-color:var(--green-800)}
-.card.hl span,.card.hl small{color:rgba(255,255,255,.8)}.card.hl b{color:var(--gold-light)}
-.card.save b{color:#b0322a}
-.breakdown{margin-top:18px;font-size:14.5px}
-.breakdown div{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line)}
-.breakdown div b{color:var(--green-800)}
-.breakdown .minus b{color:#b0322a}
-.breakdown .total{border-bottom:0;font-size:16px}
-.sec-gap{margin-top:24px}
-.sched2 th,.sched2 td{font-size:14px;padding:11px 12px}
-.sched2 td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
-.sched2 tr.info td,.sched2 tr.info th{background:#fff1e4!important;color:var(--green-900);font-weight:600}
-.sched2 tr.total th,.sched2 tr.total td{background:var(--green-800)!important;color:#fff;font-weight:700}
-.cmp td.num{text-align:right;white-space:nowrap}
-.cmp tr.cur th,.cmp tr.cur td{background:#eef2fa!important;font-weight:700}
-.loan-box{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
-.loan-box label{font-size:12.5px;color:var(--muted);display:block;margin-bottom:4px}
-.loan-box input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:inherit}
-.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
-.view-main{margin-bottom:14px}
-.view-main img{width:100%;max-height:520px;object-fit:cover;border-radius:12px;cursor:zoom-in}
-.view-main figcaption{font-size:13.5px;color:var(--muted);margin-top:6px}
-.view-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.view-grid figure[hidden]{display:none}
-.view-grid img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;cursor:zoom-in}
-.view-grid figcaption{font-size:13.5px;font-weight:600;color:var(--green-800);margin-top:6px}
-@media (max-width:640px){.view-grid{grid-template-columns:1fr}}
+.badge-ok{display:inline-flex;gap:10px;align-items:center;background:#eaf0fb;color:#13285a;border:1px solid #c5d3ef;border-radius:999px;padding:8px 16px;font-weight:600;margin-top:18px}
+.ph section{padding:64px 0}
+.timeline{list-style:none;margin-top:30px;border-left:3px solid var(--gold);padding-left:24px;display:grid;gap:18px}
+.timeline li{position:relative;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.timeline li::before{content:"";position:absolute;left:-33px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--gold);border:3px solid var(--cream)}
+.timeline time{font-weight:700;color:var(--gold-dark);font-size:14px}
+.timeline b{display:block;color:var(--green-800);margin:2px 0 4px}
+.timeline p{color:var(--muted);font-size:14.5px}
+.kv td,.kv th{text-align:left}
+.rules{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:28px}
+.rules div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+.rules b{color:var(--green-800);display:block;margin-bottom:4px}
+.rules p{color:var(--muted);font-size:14.5px}
 .related{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
-.related a{display:block;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;font-weight:600;color:var(--green-800);transition:.2s}
-.related a:hover{border-color:var(--gold);transform:translateY(-3px)}
+.related a{display:block;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;font-weight:600;color:var(--green-800)}
 .related a span{display:block;font-weight:400;font-size:14px;color:var(--muted);margin-top:4px}
-.warn{background:#fff1e4;border:1px solid #ffc999;border-radius:12px;padding:12px 14px;font-size:14px;color:#8b4a1c;margin-top:12px}
-@media (max-width:1024px){.related{grid-template-columns:1fr}.calc-grid{grid-template-columns:1fr}.inputs{position:static}.cards{grid-template-columns:1fr 1fr}.loan-box{grid-template-columns:1fr 1fr}}
-@media (max-width:640px){.cards{grid-template-columns:1fr}.calc-hero{padding-top:96px}}
-@media print{header,.fab,.mbar,.inputs,.actions,.cta,footer,.calc-hero::before,#lb,#modal{display:none!important}.calc-grid{grid-template-columns:1fr}.calc-hero{padding:10px 0;background:#fff;color:#000}.panel{box-shadow:none}body{background:#fff}}
+@media (max-width:1024px){.rules,.related{grid-template-columns:1fr}}
 
 /* ===== Bộ màu đồng bộ: navy – nâu – cam – trắng ===== */
 :root{--amber:#f47a1f;--amber-hi:#ffa04a;--amber-dk:#8b4a1c}
@@ -412,219 +368,147 @@ footer{background:var(--green-900,#0b1a3a)}
   .mbar a:nth-child(3),.mbar a.hot{background:linear-gradient(135deg,var(--amber-hi),var(--amber))!important;color:#fff!important;font-weight:800}
 }
 @media (prefers-reduced-motion:reduce){.btn-gold::after{display:none}}
-/* Số cam + ánh sáng chạy qua lại */
-.card:not(.save) b,.calc-hero h1 span{background:linear-gradient(100deg,#e0600a 0%,#f47a1f 30%,#ffc98f 50%,#f47a1f 70%,#e0600a 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:numShine 2.6s ease-in-out infinite alternate}
-.card:not(.save) b{display:block;width:fit-content}
-.card.hl{background:#fff;border:2px solid var(--amber);box-shadow:0 10px 26px -14px rgba(244,122,31,.7)}.card.hl span,.card.hl small{color:var(--muted)}
-@keyframes numShine{0%{background-position:100% 0}100%{background-position:0 0}}
-@media (prefers-reduced-motion:reduce){.card:not(.save) b,.calc-hero h1 span{animation:none;background-position:50% 0}}
-@media print{.card:not(.save) b,.calc-hero h1 span{animation:none;background:none;color:#e0600a;-webkit-text-fill-color:#e0600a}}
-/* Bảng tính: chỉ navy – cam – trắng (bỏ nâu, đỏ) */
-:root{--gold-dark:#e0600a;--amber-dk:#e0600a;--cream-2:#f3f6fb;--line:#dfe5f0}
-.card{background:#fff}
-.card.save b{color:var(--green-800)}
-.breakdown .minus b{color:#e0600a}
-.breakdown .total b{color:var(--green-900);font-size:18px}
-.warn{background:#fff3e8;border-color:var(--amber);color:var(--green-800)}
-.sched2 tr.info td,.sched2 tr.info th{background:#fff3e8!important}
-@media print{.calc-hero h1{color:var(--green-800)}.calc-hero p,.crumbs{color:var(--ink)}.sched2 thead th,.sched2 tr.total th,.sched2 tr.total td,.cmp thead th{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Sun FourS Tower", "item": "https://hiephoangmt.com/du-an/fours-tower/"},
-        {"@type": "ListItem", "position": 2, "name": "Tòa F2 (Tòa Mai)", "item": "https://hiephoangmt.com/du-an/fours-tower/toa-f2"},
-        {"@type": "ListItem", "position": 3, "name": "Bảng tính dòng tiền Tòa F2", "item": "https://hiephoangmt.com/du-an/fours-tower/bang-tinh-f2"}
-      ]
-    },
-    {
-      "@type": ["WebPage", "WebApplication"],
-      "@id": "https://hiephoangmt.com/du-an/fours-tower/bang-tinh-f2#webpage",
-      "url": "https://hiephoangmt.com/du-an/fours-tower/bang-tinh-f2",
-      "name": "Bảng tính dòng tiền Tòa F2 FourS Tower",
-      "description": "Công cụ tính giá sau chiết khấu và tiến độ thanh toán căn hộ Tòa F2 Sun FourS Tower theo chính sách CSBH 4.2 (áp dụng từ 26/09/2026).",
-      "applicationCategory": "FinanceApplication",
-      "operatingSystem": "Web",
-      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "VND"},
-      "isPartOf": {"@id": "https://hiephoangmt.com/du-an/fours-tower/#website"},
-      "about": {"@id": "https://hiephoangmt.com/du-an/fours-tower/toa-f2#building"},
-      "inLanguage": "vi-VN",
-      "dateModified": "2026-10-02"
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {"@type": "Question", "name": "Tòa F2 FourS Tower được chiết khấu bao nhiêu?", "acceptedAnswer": {"@type": "Answer", "text": "Theo CSBH 4.2 (từ 17/10/2026), trừ lần lượt trên giá chưa VAT & phí bảo trì: quà nội thất Nhà Xinh (Studio 35 triệu, 1PN/1PN+ 50 triệu, 2PN 75 triệu, 3PN 100 triệu), không vay 3%, từ chối bảo lãnh ngân hàng 1% (tùy chọn), rồi thanh toán sớm 2,5% (50%) / 5% (70%) / 12% (95%) nếu thanh toán đến hết 26/10/2026. Tổng chiết khấu tới khoảng 15,5%, chưa kể quà. Ưu đãi thanh toán sớm không áp dụng cùng gói hỗ trợ lãi suất."}},
-        {"@type": "Question", "name": "Cách tính giá căn hộ Tòa F2 sau chiết khấu?", "acceptedAnswer": {"@type": "Answer", "text": "Giá chưa VAT và KPBT bằng giá niêm yết chia 1,12. Trừ lần lượt các khoản chiết khấu, sau đó cộng VAT 10% và kinh phí bảo trì 2% tính trên giá sau chiết khấu để ra tổng giá phải thanh toán."}},
-        {"@type": "Question", "name": "Mua căn hộ Tòa F2 không vay thì thanh toán thế nào?", "acceptedAnswer": {"@type": "Answer", "text": "Đặt cọc 100 triệu (150 triệu với 3PN), sau 14 ngày đủ 15%, rồi mỗi khoảng 3 tháng 10% tới khi đạt 70% thì nhận nhà sử dụng (dự kiến 31/05/2028). 25% tiếp theo chia 5 đợt 5%, 5% cuối nộp vào tài khoản đảm bảo cấp sổ khi bàn giao chính thức (dự kiến 31/05/2030)."}}
-      ]
-    }
-  ]
-}
-</script>
 <!--HH-LANDING-BODY-->
 
 <a class="skip" href="#main">Bỏ qua đến nội dung chính</a>
-
 <header id="hdr">
   <nav class="container nav" aria-label="Điều hướng chính">
     <a href="/du-an/fours-tower/" class="brand" aria-label="Sun FourS Tower – Trang chủ"><img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@e7d68ad6ad1e3261f135cc653c55e6c700a276b0/landing-pages/assets/fourstower/img/logo-sun-fours-tower.png" alt="Logo Sun FourS Tower" width="360" height="176"></a>
     <ul class="menu" id="menu">
       <li><a href="/du-an/fours-tower/">Sun FourS Tower</a></li>
+      <li><a href="#tong-quan-pl">Tổng quan pháp lý</a></li>
+      <li><a href="#van-ban">Văn bản</a></li>
+      <li><a href="#toa">4 tòa</a></li>
+      <li><a href="#quyen-loi">Quyền lợi người mua</a></li>
       <li><a href="/du-an/fours-tower-f2-thap-mai/">Tòa F2</a></li>
-      <li><a href="/du-an/fours-tower-f2-thap-mai/#bang-gia-f2">Bảng giá F2</a></li>
       <li><a href="/du-an/fours-tower/gio-hang/">Giỏ hàng</a></li>
-      <li><a href="#tinh">Bảng tính</a></li>
-      <li><a href="#so-sanh">So sánh phương án</a></li>
-      <li><a href="#hoi-dap-bt">Hỏi đáp</a></li>
+      <li><a href="#hoi-dap-pl">Hỏi đáp</a></li>
     </ul>
-    <a href="#dang-ky" class="btn btn-gold">Nhận phiếu tính giá</a>
+    <a href="#dang-ky" class="btn btn-gold">Nhận hồ sơ pháp lý</a>
     <button class="burger" id="burger" aria-label="Mở menu" aria-expanded="false" aria-controls="menu"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
   </nav>
 </header>
 
-<main id="main">
-<section class="calc-hero">
+<main id="main" class="ph">
+<section class="ph-hero" style="padding:120px 0 56px">
   <div class="container">
-    <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/du-an/fours-tower/">Sun FourS Tower</a></li><li><a href="/du-an/fours-tower-f2-thap-mai/">Tòa F2</a></li><li aria-current="page">Bảng tính dòng tiền</li></ol></nav>
-    <h1>Bảng tính dòng tiền <span>Tòa F2 FourS Tower</span></h1>
-    <p>Chọn căn trong giỏ hàng, ngày ký và phương án thanh toán – bảng tính tự ra giá sau chiết khấu, lịch thanh toán theo từng ngày và so sánh 5 phương án theo chính sách <strong>CSBH 4.2</strong> (áp dụng từ 26/09/2026). Cách tính theo phiếu tính giá của chủ đầu tư.</p>
+    <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/du-an/fours-tower/">Sun FourS Tower</a></li><li aria-current="page">Pháp lý</li></ol></nav>
+    <h1>Pháp lý <span>Sun FourS Tower</span></h1>
+    <p>Hồ sơ pháp lý FourS Tower được tổng hợp đầy đủ – Nhà chung cư trên các lô đất A3-3, A3-4, A3-5 và A3-10, nằm trong Dự án Khu đô thị ven sông Hòa Quý – Đồng Nò, phường Ngũ Hành Sơn, TP. Đà Nẵng.</p>
+    <span class="badge-ok">✓ 2.394 căn đủ điều kiện bán – VB 17239/SXD-QLN ngày 19/09/2026</span>
   </div>
 </section>
 
-<section class="calc" id="tinh" aria-label="Bảng tính">
-  <div class="container calc-grid">
-    <!-- INPUTS -->
-    <form class="panel inputs" id="calcForm" onsubmit="return false">
-      <h2>Thông tin tính</h2>
-      <label class="lbl" for="unit">Căn hộ (gõ mã căn hoặc chọn)</label>
-      <input id="unit" list="unitList" autocomplete="off" placeholder="Vd: F2-12A-18 hoặc F212A18">
-      <datalist id="unitList"></datalist>
-      <div class="unit-info" id="unitInfo"></div>
-
-      <label class="lbl" for="price">Giá niêm yết (đã gồm VAT &amp; KPBT, đồng)</label>
-      <input id="price" type="number" min="500000000" step="1000000" inputmode="numeric">
-
-      <label class="lbl" for="utype">Loại căn (tính quà tặng và tiền cọc)</label>
-      <select id="utype"><option>STU</option><option>1BR</option><option>1BR+</option><option>2BR</option><option>3BR</option></select>
-
-      <label class="lbl" for="sign">Ngày ký HĐTHNV (đặt cọc)</label>
-      <input id="sign" type="date">
-
-      <label class="lbl">Phương án thanh toán</label>
-      <div class="opts" id="opts">
-        <label class="opt"><input type="radio" name="plan" value="vay"><span><b>Vay ngân hàng 70%</b><small>Hỗ trợ lãi suất tới 24 tháng</small></span></label>
-        <label class="opt"><input type="radio" name="plan" value="chuan" checked><span><b>Không vay – tiến độ chuẩn</b><small>Chiết khấu thêm 3%, giãn ~45 tháng</small></span></label>
-        <label class="opt"><input type="radio" name="plan" value="tts50"><span><b>Thanh toán sớm 50%</b><small>Thêm 2,5% – hạn 26/10/2026</small></span></label>
-        <label class="opt"><input type="radio" name="plan" value="tts70"><span><b>Thanh toán sớm 70%</b><small>Thêm 5% – hạn 26/10/2026</small></span></label>
-        <label class="opt"><input type="radio" name="plan" value="tts95"><span><b>Thanh toán sớm 95%</b><small>Thêm 12% – hạn 26/10/2026</small></span></label>
-      </div>
-
-      <label class="chk"><input type="checkbox" id="eb" checked><span><b>Quà tặng nội thất Nhà Xinh</b> – Studio 35tr · 1PN/1PN+ 50tr · 2PN 75tr · 3PN 100tr, trừ trước chiết khấu (HĐTHNV ký từ 17/10/2026)</span></label>
-      <label class="chk"><input type="checkbox" id="bl"><span><b>Từ chối bảo lãnh ngân hàng 1%</b> – áp dụng tại HĐMB (tùy chọn)</span></label>
-      <div class="warn" id="ttsWarn" hidden>Đã qua hạn thanh toán sớm 26/10/2026 – các phương án thanh toán sớm không còn áp dụng.</div>
-    </form>
-
-    <!-- RESULTS -->
-    <div>
-      <div class="panel">
-        <h2 id="resTitle">Kết quả</h2>
-        <div class="cards">
-          <div class="card"><span>Giá niêm yết</span><b id="cList">–</b><small>đã gồm VAT &amp; KPBT</small></div>
-          <div class="card save"><span>Tổng chiết khấu</span><b id="cDisc">–</b><small id="cDiscPct"></small></div>
-          <div class="card hl"><span>Tổng phải thanh toán</span><b id="cTotal">–</b><small>sau chiết khấu, gồm VAT &amp; KPBT</small></div>
-          <div class="card"><span>Cần có để nhận nhà</span><b id="cKey">–</b><small id="cKeyNote">vốn tự có tới khi nhận nhà</small></div>
-          <div class="card"><span>Nhận nhà sử dụng</span><b id="cKeyDate">31/05/2028</b><small>dự kiến – Sun Early Key</small></div>
-          <div class="card"><span>Đợt đầu (cọc + đợt 2)</span><b id="cFirst">–</b><small id="cFirstNote"></small></div>
-        </div>
-        <div class="breakdown" id="breakdown"></div>
-      </div>
-
-      <div class="panel sec-gap" id="posPanel">
-        <h2 id="posTitle">Vị trí căn trên mặt bằng tầng</h2>
-        <figure>
-          <img id="posImg" src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@e7d68ad6ad1e3261f135cc653c55e6c700a276b0/landing-pages/assets/fourstower/img/vi-tri-can-f2-15-29-toa-f2-fours-tower.jpg" width="1400" height="572" alt="Vị trí căn trên mặt bằng tầng Tòa F2 FourS Tower" style="width:100%;border-radius:12px;cursor:zoom-in" class="zoomable" decoding="async">
-          <figcaption class="note" id="posCap">Ô tô đỏ là vị trí căn trên mặt bằng tầng; bên phải là mặt bằng căn hộ. Bấm vào ảnh để phóng to.</figcaption>
-        </figure>
-      </div>
-
-      <div class="panel sec-gap" id="viewPanel">
-        <h2 id="viewTitle">Tầm view căn hộ</h2>
-        <figure class="view-main">
-          <img class="zoomable" id="vMain" src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@e7d68ad6ad1e3261f135cc653c55e6c700a276b0/landing-pages/assets/fourstower/img/huong-view-can-f2-15-29-toa-f2-fours-tower.jpg" width="900" height="652" alt="" decoding="async">
-          <figcaption id="vMainCap">Chấm đỏ là vị trí căn trên tòa nhà, hình quạt vàng là hướng view.</figcaption>
-        </figure>
-        <div class="view-grid">
-          <figure><img class="zoomable" id="v0" src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@e7d68ad6ad1e3261f135cc653c55e6c700a276b0/landing-pages/assets/fourstower/img/view-song-bien-sun-fours-tower-800.jpg" width="800" height="450" alt="" decoding="async"><figcaption id="vc0"></figcaption></figure>
-          <figure><img class="zoomable" id="v1" src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@e7d68ad6ad1e3261f135cc653c55e6c700a276b0/landing-pages/assets/fourstower/img/view-ngu-hanh-son-sun-fours-tower-800.jpg" width="800" height="450" alt="" decoding="async"><figcaption id="vc1"></figcaption></figure>
-          <figure><img class="zoomable" id="v2" src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@e7d68ad6ad1e3261f135cc653c55e6c700a276b0/landing-pages/assets/fourstower/img/view-sun-neva-sun-riverpolis-800.jpg" width="800" height="450" alt="" decoding="async"><figcaption id="vc2"></figcaption></figure>
-        </div>
-        <p class="note" id="viewNote">Ảnh phối cảnh minh họa tầm view theo hướng căn hộ; view thực tế phụ thuộc tầng và vị trí căn.</p>
-      </div>
-
-      <div class="panel sec-gap" id="loanPanel" hidden>
-        <h2>Ước tính khoản vay</h2>
-        <div class="loan-box">
-          <div><label for="lRatio">Tỷ lệ vay (% giá trị)</label><input id="lRatio" type="number" min="0" max="70" step="5" value="70"></div>
-          <div><label for="lRate">Lãi suất sau HTLS (%/năm)</label><input id="lRate" type="number" min="0" max="20" step="0.1" value="10"></div>
-          <div><label for="lYears">Thời hạn vay (năm)</label><input id="lYears" type="number" min="5" max="35" step="1" value="20"></div>
-          <div><label>Hết hỗ trợ lãi suất</label><input id="lEnd" type="text" readonly></div>
-        </div>
-        <div class="breakdown" id="loanOut"></div>
-        <p class="note">* Lãi suất sau hỗ trợ là giả định để tham khảo, thực tế theo ngân hàng. Hỗ trợ lãi suất tối đa 24 tháng từ lần giải ngân đầu, không muộn hơn 31/01/2029; ân hạn nợ gốc trong thời gian hỗ trợ.</p>
-      </div>
-
-      <div class="panel sec-gap">
-        <h2>Lịch thanh toán chi tiết</h2>
-        <div class="table-wrap" style="margin-top:0;box-shadow:none">
-          <table class="sched2">
-            <caption id="schedCap">Tiến độ thanh toán</caption>
-            <thead><tr><th scope="col" style="text-align:left">Đợt</th><th scope="col">Ngày (dự kiến)</th><th scope="col">Tỷ lệ</th><th scope="col">Số tiền (đ)</th><th scope="col">Lũy kế (đ)</th></tr></thead>
-            <tbody id="schedBody"></tbody>
-          </table>
-        </div>
-        <div class="actions">
-          <button class="btn btn-zalo" type="button" id="zaloBtn">Gửi Zalo cho khách</button>
-          <button class="btn btn-green" type="button" id="printBtn">In / lưu PDF bảng tính</button>
-          <a href="#dang-ky" class="btn btn-gold">Nhận phiếu tính giá chính thức</a>
-        </div>
-      </div>
-
-      <div class="panel sec-gap" id="so-sanh">
-        <h2>So sánh 5 phương án cho căn này</h2>
-        <div class="table-wrap" style="margin-top:0;box-shadow:none">
-          <table class="cmp">
-            <thead><tr><th scope="col" style="text-align:left">Phương án</th><th scope="col">Tổng chiết khấu</th><th scope="col">Tổng phải thanh toán</th><th scope="col">Tiết kiệm so với niêm yết</th><th scope="col">Vốn tự có tới nhận nhà</th></tr></thead>
-            <tbody id="cmpBody"></tbody>
-          </table>
-        </div>
-        <p class="note">* Tính theo phiếu tính giá CSBH 4.2 (tạm tính): giá chưa VAT &amp; KPBT = giá niêm yết / 1,12; chiết khấu trừ lần lượt; VAT 10% và KPBT 2% tính trên giá sau chiết khấu. Số liệu chính thức theo phiếu tính giá do chủ đầu tư phát hành.</p>
-      </div>
+<section id="tong-quan-pl">
+  <div class="container">
+    <div class="center rv">
+      <span class="eyebrow">Thông tin pháp lý</span>
+      <h2 class="title">Toàn cảnh pháp lý <em>FourS Tower</em></h2>
+    </div>
+    <div class="table-wrap rv">
+      <table class="kv">
+        <caption>Thông tin pháp lý dự án (theo hồ sơ chủ đầu tư công bố)</caption>
+        <tbody>
+          <tr><th scope="row">Tên pháp lý</th><td>Nhà chung cư tại các lô đất A3-3, A3-4, A3-5 và A3-10 thuộc Dự án Khu đô thị ven sông Hòa Quý – Đồng Nò (Dự án thành phần 3)</td></tr>
+          <tr><th scope="row">Tên thương mại</th><td>FourS Tower (Thông báo 57A/2026/TB-DCC ngày 01/04/2026)</td></tr>
+          <tr><th scope="row">Chủ đầu tư</th><td>Công ty Cổ phần Địa Cầu – MSDN 0400470419, trụ sở 36-38 Bạch Đằng, phường Hải Châu, TP. Đà Nẵng</td></tr>
+          <tr><th scope="row">Phát triển dự án</th><td>Sun Property – Tập đoàn Sun Group</td></tr>
+          <tr><th scope="row">Đơn vị tư vấn, môi giới chỉ định</th><td>Công ty TNHH Bất động sản S-Realty Đà Nẵng (Thông báo 57B/2026/TB-DCC)</td></tr>
+          <tr><th scope="row">Địa điểm</th><td>Phường Ngũ Hành Sơn (trước là phường Hòa Quý), TP. Đà Nẵng</td></tr>
+          <tr><th scope="row">Quy mô</th><td>4 tòa, mỗi tòa 02 tầng hầm + 20 tầng nổi + tum; chiều cao 77,95 m; tổng 2.394 căn hộ, tổng diện tích sàn nhà ở 136.196,6 m²</td></tr>
+          <tr><th scope="row">Cấp công trình</th><td>Dự án nhóm A, công trình dân dụng cấp I, thời hạn sử dụng theo thiết kế 100 năm</td></tr>
+          <tr><th scope="row">Loại đất</th><td>Đất ở tại đô thị (đất chung cư cao cấp kết hợp trung tâm thương mại); hộ gia đình, cá nhân nhận chuyển quyền được sử dụng đất ổn định lâu dài</td></tr>
+          <tr><th scope="row">Tiến độ xây dựng</th><td>Khởi công 21/07/2026 · hoàn thành dự kiến 30/12/2027 · đã nghiệm thu kết cấu móng hầm</td></tr>
+          <tr><th scope="row">Nhà thầu</th><td>Thi công: Công ty TNHH Xây dựng dân dụng Thái Dương · Giám sát &amp; QLDA: Công ty TNHH Tư vấn quản lý dự án Mặt Trời</td></tr>
+          <tr><th scope="row">Bảo lãnh</th><td>Techcombank cam kết phát hành thư bảo lãnh cho người mua (26/09/2026)</td></tr>
+          <tr><th scope="row">Hợp đồng mua bán</th><td>Chủ đầu tư mời ký HĐMB Tòa F2 từ 26/10/2026 đến hết 07/11/2026</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
 
-<section class="faq" id="hoi-dap-bt" aria-labelledby="h-faq">
+<section id="van-ban" style="background:var(--cream-2)">
+  <div class="container">
+    <div class="center rv">
+      <span class="eyebrow">Hồ sơ</span>
+      <h2 class="title">Văn bản pháp lý <em>theo trình tự thời gian</em></h2>
+    </div>
+    <ol class="timeline">
+      <li><time datetime="2016-10-15">15/10/2016</time><b>Quyết định chủ trương đầu tư 7014/QĐ-UBND</b><p>Dự án Khu đô thị ven sông Hòa Quý – Đồng Nò được UBND TP. Đà Nẵng chấp thuận chủ trương đầu tư, sau đó điều chỉnh theo Quyết định 1909/QĐ-UBND ngày 11/05/2018.</p></li>
+      <li><time datetime="2017-10-05">05/10/2017</time><b>Quyết định 5563/QĐ-UBND – Quy hoạch chi tiết 1/500</b><p>Điều chỉnh quy hoạch chi tiết TL 1/500 khu đô thị ven sông Hòa Quý – Đồng Nò đã được phê duyệt.</p></li>
+      <li><time datetime="2018-08-09">2018 – 2019</time><b>Giấy chứng nhận quyền sử dụng đất 4 lô</b><p>Lô A3-3 có CO 001524, A3-4 có CO 001525, A3-5 có CO 001526, cùng cấp ngày 09/08/2018; lô A3-10 có CP 912579 cấp ngày 12/06/2019. Ngày 25/09/2026 đã cập nhật tên phường Ngũ Hành Sơn và số thửa mới.</p></li>
+      <li><time datetime="2026-04-01">01/04/2026</time><b>Thông báo tên thương mại FourS Tower &amp; đơn vị môi giới</b><p>Công ty CP Địa Cầu ban hành Thông báo 57A và 57B/2026/TB-DCC.</p></li>
+      <li><time datetime="2026-04-09">09/04/2026</time><b>Thông báo 1738/TB-SCT – Hợp đồng theo mẫu</b><p>Chủ đầu tư đã hoàn tất đăng ký hợp đồng theo mẫu mua bán căn hộ chung cư, được Sở Công Thương Đà Nẵng xác nhận (hồ sơ H17.03-260323-0200006).</p></li>
+      <li><time datetime="2026-06-24">24/06/2026</time><b>Quyết định 2755/QĐ-UBND</b><p>Chấp thuận điều chỉnh chủ trương đầu tư lần 2, kèm chấp thuận Công ty Cổ phần Địa Cầu là nhà đầu tư.</p></li>
+      <li><time datetime="2026-07-11">11/07/2026</time><b>Thông báo 12666/SXD-CPXD – Thẩm định báo cáo khả thi</b><p>Kết quả thẩm định báo cáo nghiên cứu khả thi Dự án thành phần 3 (gồm 4 tòa chung cư A3-3, A3-4, A3-5, A3-10) đã được Sở Xây dựng thông báo. Theo Luật Xây dựng 135/2025/QH15, công trình được miễn cấp phép xây dựng.</p></li>
+      <li><time datetime="2026-07-18">18/07/2026</time><b>Thông báo khởi công 151/TB-GĐ-APC</b><p>Dự án khởi công ngày 21/07/2026, dự kiến hoàn thành 30/12/2027. Thiết kế PCCC đã được thẩm định tại Công văn 518/TĐ-PCCC ngày 23/07/2026.</p></li>
+      <li><time datetime="2026-09-19">19/09/2026</time><b>Văn bản 17239/SXD-QLN – Đủ điều kiện bán</b><p>Theo xác nhận của Sở Xây dựng, 2.394 căn hộ hình thành trong tương lai đã đủ điều kiện bán theo Điều 24 Luật Kinh doanh bất động sản 2023.</p></li>
+      <li><time datetime="2026-09-26">26/09/2026</time><b>Cam kết phát hành thư bảo lãnh – Techcombank</b><p>Bảo lãnh nghĩa vụ tài chính của chủ đầu tư với những bên mua chọn có bảo lãnh, căn cứ Thỏa thuận cấp bảo lãnh số MMD20265226177/TTCBLN/FOURS TOWER.</p></li>
+      <li><time datetime="2026-10-26">26/10 – 07/11/2026</time><b>Thông báo mời ký Hợp đồng mua bán – Tòa F2</b><p>Từ 26/10/2026 đến hết 07/11/2026, chủ đầu tư mời khách ký Hợp đồng mua bán các căn Tòa F2, dùng mẫu hợp đồng đã đăng ký tại Thông báo 1738/TB-SCT.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="toa">
+  <div class="container">
+    <div class="center rv">
+      <span class="eyebrow">Quy mô theo văn bản</span>
+      <h2 class="title">4 tòa – <em>2.394 căn được phép bán</em></h2>
+    </div>
+    <div class="table-wrap rv">
+      <table>
+        <caption>Số liệu theo Văn bản 17239/SXD-QLN và Thông báo khởi công 151/TB-GĐ-APC</caption>
+        <thead><tr><th scope="col" style="text-align:left">Lô đất</th><th scope="col">Diện tích đất</th><th scope="col">Sàn xây dựng</th><th scope="col">Số căn</th><th scope="col">Sàn nhà ở</th><th scope="col">GCN QSDĐ</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">A3-3</th><td>3.150 m²</td><td>45.797,1 m²</td><td>509</td><td>28.445,2 m²</td><td>CO 001524</td></tr>
+          <tr><th scope="row">A3-4</th><td>4.173 m²</td><td>58.670,3 m²</td><td>639</td><td>36.927,4 m²</td><td>CO 001525</td></tr>
+          <tr><th scope="row">A3-5</th><td>4.173 m²</td><td>57.917,9 m²</td><td>639</td><td>36.190,8 m²</td><td>CO 001526</td></tr>
+          <tr><th scope="row">A3-10 – <a href="/du-an/fours-tower-f2-thap-mai/">Tòa F2</a></th><td>3.910 m²</td><td>55.458,4 m²</td><td>607</td><td>34.633,2 m²</td><td>CP 912579</td></tr>
+          <tr><th scope="row">Tổng</th><td>15.406 m²</td><td>217.843,7 m²</td><td><b>2.394</b></td><td>136.196,6 m²</td><td>4 sổ</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="quyen-loi" style="background:var(--cream-2)">
+  <div class="container">
+    <div class="center rv">
+      <span class="eyebrow">Bảo vệ người mua</span>
+      <h2 class="title">Các quy định bảo vệ <em>quyền lợi người mua</em></h2>
+      <p class="lead">Những yêu cầu mà Sở Xây dựng đặt ra với chủ đầu tư trong Văn bản 17239/SXD-QLN.</p>
+    </div>
+    <div class="rules">
+      <div class="rv"><b>Giới hạn tiền thu trước</b><p>Lần thanh toán đầu tối đa 30% (đã tính tiền cọc); chưa bàn giao nhà thì tổng thu tối đa 70%; chưa cấp sổ thì tối đa 95%. Tiền đặt cọc không vượt 5% giá bán.</p></div>
+      <div class="rv"><b>Bảo lãnh ngân hàng</b><p>Bán nhà ở hình thành trong tương lai phải có bảo lãnh theo Điều 26 Luật Kinh doanh bất động sản; Techcombank đã có cam kết phát hành thư bảo lãnh.</p></div>
+      <div class="rv"><b>Giải chấp trước khi ký hợp đồng</b><p>Các lô đất hiện đang thế chấp ngân hàng (NCB, VPBank – theo văn bản của Sở Xây dựng); trước khi ký hợp đồng mua bán, chủ đầu tư phải giải chấp phần nhà ở cùng phần đất tương ứng (khoản 2 Điều 183 Luật Nhà ở 2023).</p></div>
+      <div class="rv"><b>Quỹ bảo trì riêng</b><p>Theo Điều 153 Luật Nhà ở 2023, chủ đầu tư phải mở tài khoản riêng để nhận và quản lý 2% kinh phí bảo trì.</p></div>
+      <div class="rv"><b>Hợp đồng mẫu đã đăng ký</b><p>Hợp đồng mua bán căn hộ dùng mẫu đã đăng ký tại Sở Công Thương (Thông báo 1738/TB-SCT).</p></div>
+      <div class="rv"><b>Đối tượng được mua</b><p>Chỉ bán cho tổ chức, cá nhân trong nước; tổ chức, cá nhân nước ngoài không được mua.</p></div>
+    </div>
+    <p class="note center">* Nội dung trên là bản tóm tắt các văn bản chủ đầu tư đã công bố và không thay cho văn bản gốc. Anh/chị cần xem bản đầy đủ của văn bản nào, vui lòng liên hệ chuyên viên.</p>
+  </div>
+</section>
+
+<section class="faq" id="hoi-dap-pl" aria-labelledby="h-faq">
   <div class="container">
     <div class="center">
       <span class="eyebrow">Hỏi đáp</span>
-      <h2 class="title" id="h-faq">Cách tính giá &amp; chiết khấu <em>Tòa F2 FourS Tower</em></h2>
+      <h2 class="title" id="h-faq">Hỏi đáp pháp lý <em>FourS Tower</em></h2>
     </div>
     <div class="faq-list">
-      <details open><summary>Tòa F2 FourS Tower được chiết khấu bao nhiêu?</summary><p>Theo CSBH 4.2 (từ 17/10/2026), trừ lần lượt trên giá chưa VAT & phí bảo trì: quà nội thất Nhà Xinh (Studio 35 triệu, 1PN/1PN+ 50 triệu, 2PN 75 triệu, 3PN 100 triệu), không vay 3%, từ chối bảo lãnh ngân hàng 1% (tùy chọn), rồi thanh toán sớm 2,5% (50%) / 5% (70%) / 12% (95%) nếu thanh toán đến hết 26/10/2026. Tổng chiết khấu tới khoảng 15,5%, chưa kể quà. Ưu đãi thanh toán sớm không áp dụng cùng gói hỗ trợ lãi suất.</p></details>
-      <details><summary>Cách tính giá căn hộ Tòa F2 sau chiết khấu?</summary><p>Giá chưa VAT và KPBT bằng giá niêm yết chia 1,12. Trừ lần lượt các khoản chiết khấu, sau đó cộng VAT 10% và kinh phí bảo trì 2% tính trên giá sau chiết khấu để ra tổng giá phải thanh toán.</p></details>
-      <details><summary>Mua căn hộ Tòa F2 không vay thì thanh toán thế nào?</summary><p>Đặt cọc 100 triệu (150 triệu với 3PN), sau 14 ngày đủ 15%, rồi mỗi khoảng 3 tháng 10% tới khi đạt 70% thì nhận nhà sử dụng (dự kiến 31/05/2028). 25% tiếp theo chia 5 đợt 5%, 5% cuối nộp vào tài khoản đảm bảo cấp sổ khi bàn giao chính thức (dự kiến 31/05/2030).</p></details>
+      <details open><summary>Sun FourS Tower đủ điều kiện mở bán chưa?</summary><p>Rồi. Sở Xây dựng TP. Đà Nẵng đã ban hành Văn bản số 17239/SXD-QLN ngày 19/09/2026, xác nhận 2.394 căn hộ hình thành trong tương lai trên các lô đất A3-3, A3-4, A3-5 và A3-10 của dự án Khu đô thị ven sông Hòa Quý – Đồng Nò (tên thương mại FourS Tower) đủ điều kiện bán theo Điều 24 Luật Kinh doanh bất động sản 2023.</p></details>
+      <details><summary>Ai là chủ đầu tư FourS Tower?</summary><p>Đơn vị làm chủ đầu tư là Công ty Cổ phần Địa Cầu (mã số doanh nghiệp 0400470419, trụ sở tại 36-38 Bạch Đằng, phường Hải Châu, TP. Đà Nẵng), được UBND TP. Đà Nẵng chấp thuận làm nhà đầu tư theo Quyết định 2755/QĐ-UBND ngày 24/06/2026. Sun Property (Sun Group) là đơn vị phát triển dự án.</p></details>
+      <details><summary>FourS Tower có sổ đỏ không và được sở hữu bao lâu?</summary><p>Mỗi lô đất đều đã có Giấy chứng nhận quyền sử dụng đất, mục đích đất ở đô thị: A3-3 là CO 001524, A3-4 là CO 001525, A3-5 là CO 001526, A3-10 là CP 912579. Ghi chú trên giấy chứng nhận nêu rõ người nhận chuyển quyền là hộ gia đình, cá nhân được dùng đất ổn định lâu dài. Công trình thuộc cấp I, thiết kế với thời hạn sử dụng 100 năm.</p></details>
+      <details><summary>Mua căn FourS Tower có được ngân hàng bảo lãnh không?</summary><p>Có. Theo Thỏa thuận cấp bảo lãnh số MMD20265226177/TTCBLN/FOURS TOWER, ngày 26/09/2026 Techcombank đã ra Văn bản cam kết phát hành thư bảo lãnh cho nghĩa vụ tài chính của chủ đầu tư đối với người mua nhà ở hình thành trong tương lai tại dự án.</p></details>
+      <details><summary>Người nước ngoài có được mua FourS Tower không?</summary><p>Không được. Văn bản 17239/SXD-QLN quy định chủ đầu tư không được bán nhà ở trong dự án cho tổ chức, cá nhân nước ngoài.</p></details>
     </div>
     <p style="text-align:center;margin-top:26px"><a class="btn btn-green" href="/du-an/fours-tower/hoi-dap/">Xem đủ 61 câu hỏi – đáp →</a></p>
-    <div class="related">
-      <a href="/du-an/fours-tower-f2-thap-mai/">Tòa F2 FourS Tower<span>Mặt bằng, căn sân vườn, chính sách</span></a>
-      <a href="/du-an/fours-tower-f2-thap-mai/#bang-gia-f2">Bảng giá Tòa F2<span>12 căn từ 1,98 tỷ</span></a>
-      <a href="/du-an/fours-tower/">Tổng quan Sun FourS Tower<span>Vị trí, tiện ích, bàn giao</span></a>
-    </div>
+    <div class="related"><a href="/du-an/fours-tower/">Tổng quan Sun FourS Tower<span>Vị trí, tiện ích và bảng giá</span></a>
+      <a href="/du-an/fours-tower-f2-thap-mai/">Tòa F2 FourS Tower<span>Lô A3-10 – 607 căn, giá từ 1,98 tỷ</span></a>
+      <a href="/du-an/fours-tower/bang-tinh-f2/">Bảng tính dòng tiền Tòa F2<span>Lịch thanh toán chi tiết theo ngày</span></a></div>
   </div>
 </section>
 
@@ -632,22 +516,22 @@ footer{background:var(--green-900,#0b1a3a)}
   <img class="bg" src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@e7d68ad6ad1e3261f135cc653c55e6c700a276b0/landing-pages/assets/fourstower/img/sun-fours-tower-ve-dem-800.jpg" width="800" height="451" alt="" loading="lazy" decoding="async">
   <div class="container">
     <div>
-      <span class="eyebrow">Phiếu tính giá chính thức</span>
-      <h2 class="title" id="h-cta">Nhận phiếu tính giá Tòa F2 cho căn bạn chọn</h2>
+      <span class="eyebrow">Minh bạch pháp lý</span>
+      <h2 class="title" id="h-cta">Nhận trọn bộ hồ sơ pháp lý FourS Tower</h2>
       <ul>
-        <li>Phiếu tính giá theo đúng mẫu của chủ đầu tư, đúng ngày ký của bạn</li>
-        <li>Tư vấn phương án vay – không vay – thanh toán sớm có lợi nhất</li>
-        <li>Giữ căn trước hạn chiết khấu 26/10/2026</li>
+        <li>Văn bản đủ điều kiện bán do Sở Xây dựng cấp</li>
+        <li>Giấy chứng nhận quyền sử dụng đất của 4 lô</li>
+        <li>Hợp đồng mua bán mẫu &amp; cam kết bảo lãnh của Techcombank</li>
       </ul>
     </div>
     <form class="form-card lead-form" aria-labelledby="cta-form-title">
-      <h3 id="cta-form-title">Gửi bảng tính cho tôi</h3>
-      <p>Chuyên viên gửi phiếu tính giá qua Zalo trong 15 phút</p>
+      <h3 id="cta-form-title">Gửi hồ sơ pháp lý cho tôi</h3>
+      <p>Chuyên viên gửi qua Zalo trong vòng 15 phút</p>
       <div class="field"><label for="c-name">Họ và tên</label><input id="c-name" name="name" placeholder="Họ và tên *" autocomplete="name" required></div>
       <div class="field"><label for="c-phone">Số điện thoại</label><input id="c-phone" name="phone" type="tel" placeholder="Số điện thoại (Zalo) *" autocomplete="tel" required pattern="[0-9 +.]{9,14}"></div>
-      <input type="hidden" name="bang_tinh" id="leadSummary" value="">
-      <button class="btn btn-gold" type="submit">Gửi bảng tính cho tôi</button>
-      <p class="form-note">Thông tin được bảo mật tuyệt đối</p>
+      <input type="hidden" name="yeu_cau" value="Hồ sơ pháp lý">
+      <button class="btn btn-gold" type="submit">Nhận hồ sơ</button>
+      <p class="form-note">Thông tin anh/chị được bảo mật</p>
     </form>
   </div>
 </section>
@@ -657,7 +541,7 @@ footer{background:var(--green-900,#0b1a3a)}
   <div class="container">
     <div>
       <img src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@e7d68ad6ad1e3261f135cc653c55e6c700a276b0/landing-pages/assets/fourstower/img/logo-sun-fours-tower.png" width="360" height="176" alt="Logo Sun FourS Tower" loading="lazy">
-      <p><a href="/du-an/fours-tower/">Sun FourS Tower</a> – Tháp Bốn Mùa. Căn hộ cao tầng đầu tiên tại đại đô thị Sun Riverpolis Đà Nẵng.</p>
+      <p><a href="/du-an/fours-tower/">Sun FourS Tower</a> – Tháp Bốn Mùa, dự án căn hộ cao tầng đầu tiên trong đại đô thị Sun Riverpolis Đà Nẵng.</p>
     </div>
     <div>
       <h2>Địa chỉ dự án</h2>
@@ -667,7 +551,7 @@ footer{background:var(--green-900,#0b1a3a)}
       <h2>Tư vấn &amp; bán hàng</h2>
       <p>Hoàng Phạm Đình Hiệp<br>Hotline: <a href="tel:0904567009">0904 567 009</a><br>Zalo: <a href="https://zalo.me/0904567009" target="_blank" rel="noopener">0904 567 009</a></p>
     </div>
-    <p class="disc">Bảng tính mang tính tham khảo (tạm tính) theo chính sách CSBH 4.2/FT/SPG/09-2026 và phiếu tính giá của chủ đầu tư; số liệu chính thức theo hợp đồng. Trang thông tin do chuyên viên tư vấn bán hàng cung cấp, không phải website chính thức của chủ đầu tư. Cập nhật: 02/10/2026.</p>
+    <p class="disc">Nội dung tóm tắt từ hồ sơ pháp lý chủ đầu tư công bố; giá trị pháp lý thuộc về văn bản gốc. Đây là trang thông tin của chuyên viên tư vấn bán hàng, chứ không phải trang web chính thức của chủ đầu tư. Cập nhật: 02/10/2026.</p>
   </div>
 </footer>
 
@@ -678,333 +562,10 @@ footer{background:var(--green-900,#0b1a3a)}
 <div class="mbar">
   <a href="tel:0904567009">📞 Gọi ngay</a>
   <a href="https://zalo.me/0904567009" target="_blank" rel="noopener">Zalo</a>
-  <a href="#dang-ky">Nhận phiếu</a>
+  <a href="#dang-ky">Nhận hồ sơ</a>
 </div>
-
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Xem ảnh"><button class="x" aria-label="Đóng">×</button><button class="p" aria-label="Ảnh trước">‹</button><img alt=""><button class="n" aria-label="Ảnh sau">›</button></div>
-<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Đăng ký thành công"><div class="box"><button class="x" aria-label="Đóng">×</button><p class="t">Đã nhận yêu cầu!</p><p>Chuyên viên sẽ gửi phiếu tính giá Tòa F2 cho Quý khách trong thời gian sớm nhất.</p><a href="tel:0904567009" class="btn btn-gold" style="margin-top:20px">Gọi ngay để được ưu tiên</a></div></div>
-
-<script src="https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@e7d68ad6ad1e3261f135cc653c55e6c700a276b0/landing-pages/assets/fourstower/data/stock.js"></script>
-<script>
-/* Bảng tính Tòa F2 – theo phiếu tính giá CSBH 4.2 (file PTG của chủ đầu tư) */
-(function () {
-'use strict';
-const q = s => document.querySelector(s);
-
-// Giỏ hàng Tòa F2 (cập nhật 03/10/2026) – giá niêm yết đã gồm VAT & KPBT
-const UNITS = [
-  ['F2-16-11','STU',30.1,0,1984393401,'Tầng 16 – theo mặt bằng tầng điển hình'],
-  ['F2-03A-18','STU',30.4,13.0,2136450455,'Nội khu, Nam Hòa Xuân'],
-  ['F2-12A-01','1BR',41.8,0,2221231108,'Sông, biển, Sunneva'],
-  ['F2-12A-03A','STU',30.1,0,2334629636,'Sông, biển, pháo hoa DIFF, CV Đầm Sen'],
-  ['F2-12A-12','1BR+',50.2,0,2797664495,'Nội khu, Nam Hòa Xuân'],
-  ['F2-12-22','1BR+',53.0,0,2848367018,'Sông, Sunneva, pháo hoa DIFF'],
-  ['F2-06-12','1BR+',51.0,10.7,3042183925,'Nội khu, Nam Hòa Xuân'],
-  ['F2-15-29','1BR+',55.8,0,3314947525,'Sông, biển, Ngũ Hành Sơn'],
-  ['F2-15-32','1BR+',55.8,0,3314947525,'Sông, biển, Ngũ Hành Sơn'],
-  ['F2-11-31','1BR+',60.8,0,3640438546,'Sông, biển, Ngũ Hành Sơn'],
-  ['F2-12-10','2BR',63.2,0,4295865403,'Nội khu, Nam Hòa Xuân'],
-  ['F2-11-24','3BR',86.3,0,5914300368,'Sông, biển, pháo hoa DIFF, CV Đầm Sen']
-];
-const TYPE_VI = {STU:'Studio','1BR':'1PN','1BR+':'1PN+','2BR':'2PN','3BR':'3PN'};
-const DEADLINE = new Date(2026, 9, 26);      // hạn thanh toán sớm 26/10/2026
-const KEY_DATE = new Date(2028, 4, 31);      // nhận nhà sử dụng dự kiến (Sun Early Key)
-const HANDOVER = new Date(2030, 4, 31);      // bàn giao chính thức dự kiến (không vay / TTS 50, 70)
-const HTLS_CAP = new Date(2029, 0, 31);      // hỗ trợ lãi suất không muộn hơn
-const STD = [[14,15],[104,25],[194,35],[284,45],[374,55],[464,65],[554,70],[674,75],[794,80],[914,85],[1034,90],[1154,95]]; // [ngày kể từ ký, lũy kế %]
-const PLANS = {
-  vay:   {name:'Vay ngân hàng 70%', fin:0,    tts:0,     p:0},
-  chuan: {name:'Không vay – tiến độ chuẩn', fin:0.03, tts:0, p:0},
-  tts50: {name:'Thanh toán sớm 50%', fin:0.03, tts:0.025, p:50},
-  tts70: {name:'Thanh toán sớm 70%', fin:0.03, tts:0.05,  p:70},
-  tts95: {name:'Thanh toán sớm 95%', fin:0.03, tts:0.12,  p:95}
-};
-
-const R = Math.round;
-const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
-const addMonths = (d, n) => { const x = new Date(d); x.setMonth(x.getMonth() + n); return x; };
-const fd = d => String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0') + '/' + d.getFullYear();
-const money = n => R(n).toLocaleString('vi-VN');
-const ty = n => (n / 1e9).toLocaleString('vi-VN', {minimumFractionDigits: 2, maximumFractionDigits: 3}) + ' tỷ';
-const pct = n => (n * 100).toLocaleString('vi-VN', {maximumFractionDigits: 2}) + '%';
-
-// Giá sau chiết khấu – đúng thứ tự trừ trong phiếu tính giá
-const GIFT = {STU:35e6, '1BR':50e6, '1BR+':50e6, '2BR':75e6, '3BR':100e6};   // Gói quà tặng nội thất Nhà Xinh (CSBH 4.2, từ 17/10/2026)
-function price(list, planKey, eb, bl, type) {
-  const P = PLANS[planKey];
-  const base = R(list / 1.12);
-  const dEB = eb ? (GIFT[type] || 0) : 0;   // quà Nhà Xinh: trừ trước, sau đó mới tính các mức chiết khấu %
-  const dFin = R(P.fin * (base - dEB));
-  const dBL = bl ? R(0.01 * (base - dEB - dFin)) : 0;
-  const dTTS = R(P.tts * (base - dEB - dFin - dBL));
-  const after = base - dEB - dFin - dBL - dTTS;
-  const vat = R(0.1 * after), kpbt = R(0.02 * after);
-  return {base, dEB, dFin, dBL, dTTS, disc: dEB + dFin + dBL + dTTS, after, vat, kpbt, total: after + vat + kpbt, gv: after + vat};
-}
-
-// Lịch thanh toán
-function schedule(pr, planKey, sign, deposit, loanRatio) {
-  const P = PLANS[planKey], rows = [];
-  const pay = (name, date, pctTxt, amt, kind) => rows.push({name, date, pctTxt, amt, kind});
-  const info = (name, date) => rows.push({name, date, info: true});
-  const deadlineSign = d => (d > DEADLINE ? DEADLINE : d);
-  const ttdc = R(0.05 * pr.after), finalAmt = R(pr.kpbt + 0.1 * ttdc);
-  const d2 = planKey.startsWith('tts') ? deadlineSign(addDays(sign, 14)) : addDays(sign, 14);
-  pay('Đợt 1 – Ký HĐTHNV (đặt cọc)', sign, 'Đặt cọc', deposit);
-  pay('Đợt 2 – đủ 15% (gồm tiền cọc)', d2, '15%', R(0.15 * pr.gv) - deposit);
-  const dHDMB = addDays(d2, 7);
-  info('Ký Hợp đồng mua bán (dự kiến)', dHDMB);
-
-  if (planKey === 'vay') {
-    const L = Math.max(0, Math.min(70, loanRatio)) / 100;
-    const bank = R(L * pr.gv), own = R(0.70 * pr.gv) - bank;
-    if (own > 0) pay('Đợt 3 – Vốn tự có bổ sung cho đủ 70%', addDays(dHDMB, 14), pct(0.7 - L), own);
-    pay('Đợt 3 – Ngân hàng giải ngân', addDays(dHDMB, 14), pct(L), bank, 'bank');
-    pay('Đợt 4', addDays(sign, 104), '10%', R(0.10 * pr.gv));
-    info('Nhận bàn giao căn hộ (dự kiến)', KEY_DATE);
-    pay('Đợt 5 – KPBT + VAT của 5% (khi bàn giao)', KEY_DATE, 'KPBT', finalAmt);
-    pay('5% vào tài khoản đảm bảo cấp sổ (CĐT trả lãi 8%/năm)', KEY_DATE, '5%', ttdc);
-    return rows;
-  }
-  let paid = 15, keyDone = false;
-  if (P.p) {
-    pay('Đợt 3 – Thanh toán sớm đủ ' + P.p + '%', DEADLINE, (P.p - 15) + '%', R((P.p - 15) / 100 * pr.gv));
-    paid = P.p;
-  }
-  let prev = 15, n = P.p ? 4 : 3;
-  for (const [d, cum] of STD.slice(1)) {
-    const part = cum - Math.max(prev, paid);
-    if (!keyDone && cum > 70 && paid <= 70) { info('Nhận bàn giao sử dụng – Sun Early Key (dự kiến)', KEY_DATE); keyDone = true; }
-    if (part > 0) pay('Đợt ' + (n++), addDays(sign, d), part + '%', R(part / 100 * pr.gv));
-    prev = cum;
-  }
-  if (!keyDone && P.p < 95) { info('Nhận bàn giao sử dụng – Sun Early Key (dự kiến)', KEY_DATE); }
-  const endDate = P.p === 95 ? KEY_DATE : HANDOVER;
-  if (P.p === 95) info('Nhận bàn giao căn hộ (dự kiến)', KEY_DATE);
-  pay('Đợt ' + n + ' – KPBT + VAT của 5% (bàn giao chính thức)', endDate, 'KPBT', finalAmt);
-  pay('5% vào tài khoản đảm bảo cấp sổ (CĐT trả lãi 8%/năm)', endDate, '5%', ttdc);
-  return rows;
-}
-
-// Vốn khách tự thanh toán cho tới mốc nhận nhà (không tính phần ngân hàng giải ngân)
-const keyOwn = (rows) => {
-  let s = 0;
-  for (const r of rows) { if (r.info && /Nhận bàn giao/.test(r.name)) break; if (!r.info && r.kind !== 'bank') s += r.amt; }
-  return s;
-};
-
-// ---- UI ----
-const sel = q('#unit'), priceIn = q('#price'), utype = q('#utype'), signIn = q('#sign'), eb = q('#eb'), bl = q('#bl');
-// Danh sách căn: giỏ hàng có ảnh chỉ căn (UNITS) + giỏ hàng tổng hợp Tòa F2 (data/stock.js)
-const ALL = {};
-UNITS.forEach(u => ALL[u[0]] = {code: u[0], type: u[1], area: u[2], sv: u[3], price: u[4], view: u[5]});
-((window.FOURS_STOCK || {}).units || []).forEach(r => {
-  if (r[0].slice(0, 2) !== 'F2' || ALL[r[0]]) return;
-  ALL[r[0]] = {code: r[0], type: r[1], area: r[2], sv: +r[5] || 0, price: r[3], view: r[4] || ''};
-});
-const codes = Object.keys(ALL).sort();
-q('#unitList').innerHTML = codes.map(c => `<option value="${c}">${TYPE_VI[ALL[c].type]} · ${ALL[c].area} m²</option>`).join('');
-// Chuẩn hóa mã căn gõ tay: f212a18, F2 12A 18, 12A-18 → F2-12A-18
-function normCode(v) {
-  const s = String(v || '').toUpperCase().replace(/\s+/g, '').replace(/^T(ÒA)?/, '');
-  const m = s.match(/^(F2)?[\-._/]?(\d{1,2}[AB]?)[\-._/](\d{1,2}[AB]?)$/) || s.match(/^(F2)(\d{2}[AB]?)(\d{2}[AB]?)$/);
-  if (!m) return s;
-  const pad = x => /^\d[AB]?$/.test(x) ? '0' + x : x;
-  return `F2-${pad(m[2])}-${pad(m[3])}`;
-}
-let cur = null; // căn đang chọn (có trong danh sách) hoặc null = căn tự nhập
-const today = new Date(); today.setHours(0,0,0,0);
-signIn.value = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0'); // giờ địa phương, tránh lệch ngày do UTC
-const qs = new URLSearchParams(location.search), param = qs.get('can'), qGia = +qs.get('gia');
-sel.value = param ? normCode(param) : 'F2-15-29';
-if (qs.get('pa') && PLANS[qs.get('pa')]) { const r = q(`input[name=plan][value=${qs.get('pa')}]`); if (r) r.checked = true; }
-
-function syncUnit() {
-  const code = normCode(sel.value);
-  cur = ALL[code] || null;
-  if (cur) {
-    if (sel.value !== code && document.activeElement !== sel) sel.value = code;
-    priceIn.value = cur.price; utype.value = cur.type;
-    q('#unitInfo').textContent = `${TYPE_VI[cur.type]} · thông thủy ${cur.area} m²${cur.sv ? ' + sân vườn/ban công ' + cur.sv + ' m²' : ''}${cur.view ? ' · view ' + cur.view : ''}`;
-  } else {
-    q('#unitInfo').textContent = sel.value.trim() ? 'Căn chưa có trong giỏ hàng – nhập giá niêm yết (đã gồm VAT & KPBT) và loại căn bên dưới.' : 'Gõ mã căn hoặc nhập giá niêm yết của căn bạn quan tâm.';
-  }
-}
-// Căn ngoài giỏ hàng được gửi kèm giá qua link (?can=…&gia=…&loai=…)
-const preFromLink = () => { if (!ALL[normCode(param)] && qGia > 5e8) { priceIn.value = qGia; if (qs.get('loai')) utype.value = qs.get('loai'); } };
-
-function plan() { return (q('input[name=plan]:checked') || {}).value || 'chuan'; }
-
-function render() {
-  const list = +priceIn.value || 0;
-  const sign = new Date(signIn.value + 'T00:00:00');
-  if (!list || isNaN(sign)) return;
-  const ttsOK = sign <= DEADLINE && today <= DEADLINE;
-  q('#ttsWarn').hidden = ttsOK;
-  document.querySelectorAll('input[name=plan]').forEach(r => {
-    const dis = r.value.startsWith('tts') && !ttsOK;
-    r.disabled = dis; r.closest('.opt').classList.toggle('disabled', dis);
-    if (dis && r.checked) q('input[value=chuan]').checked = true;
-  });
-  document.querySelectorAll('.opt').forEach(o => o.classList.toggle('on', o.querySelector('input').checked));
-
-  const pk = plan(), deposit = utype.value === '3BR' ? 150e6 : 100e6, L = +q('#lRatio').value;
-  const pr = price(list, pk, eb.checked, bl.checked, utype.value);
-  const rows = schedule(pr, pk, sign, deposit, L);
-  const typed = normCode(sel.value), isF2 = /^F2-\d{2}[AB]?-\d{1,2}[AB]?$/.test(typed);
-  const unitName = cur ? cur.code : (isF2 ? typed : 'Căn tự nhập');
-
-  q('#resTitle').textContent = `${unitName} – ${PLANS[pk].name}`;
-  // Vị trí căn trên mặt bằng tầng (căn có trong giỏ hàng, hoặc mã căn F2 gõ tay hợp lệ)
-  const hasPos = !!cur || isF2;
-  q('#posPanel').hidden = !hasPos;
-  q('#viewPanel').hidden = !hasPos;
-  if (hasPos) {
-    const c = cur || {code: typed, type: utype.value, area: 0, view: ''};
-    const u = [c.code, c.type, c.area, c.sv, c.price, c.view], img = q('#posImg');
-    // Lấy thư mục ảnh từ chính thẻ img (chạy đúng cả bản Netlify lẫn bản LadiPage)
-    const base = 'https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@e7d68ad6ad1e3261f135cc653c55e6c700a276b0/landing-pages/assets/fourstower/img/'; // cố định: LadiPage chuyển ảnh tĩnh sang CDN riêng nên không dò từ thẻ img được
-    const src = base + 'vi-tri-can-' + u[0].toLowerCase() + '-toa-f2-fours-tower.jpg';
-    // Căn chưa có thẻ căn riêng → dùng mặt bằng tầng tương ứng
-    const CARD = ['F2-11-20','F2-11-31','F2-12A-01','F2-12A-03A','F2-12A-12','F2-15-29','F2-15-32','F2-12-10','F2-11-24','F2-06-12','F2-06-16','F2-03A-18','F2-12-22'];
-    const fs = u[0].split('-')[1], hasCard = CARD.includes(u[0]), fl = parseInt(fs, 10);
-    const planSrc = base + 'mat-bang-' + (fl >= 8 ? 'tang-8-19' : 'tang-' + fl + (/A$/.test(fs) ? 'a' : '')) + '-toa-f2-fours-tower-1000.jpg';
-    const want = hasCard ? src : planSrc;
-    if (img.src !== want) img.src = want;
-    q('#vMain').closest('figure').hidden = !hasCard; q('#viewPanel').hidden = !hasCard;
-    img.alt = `Vị trí căn ${u[0]} (${TYPE_VI[u[1]]}, ${u[2]} m²) trên mặt bằng tầng Tòa F2 FourS Tower`;
-    q('#posTitle').textContent = `Vị trí căn ${u[0]} trên mặt bằng tầng`;
-    // Ảnh tầm view theo hướng view của căn
-    const VIEWS = [
-      [/biển/i, 'view-song-bien-sun-fours-tower', 'View sông – biển'],
-      [/sông/i, 'view-song-co-co-can-ho-sun-da-nang', 'View sông Cổ Cò'],
-      [/ngũ hành sơn/i, 'view-ngu-hanh-son-sun-fours-tower', 'View Ngũ Hành Sơn'],
-      [/sunneva/i, 'view-sun-neva-sun-riverpolis', 'View Sunneva – Sun Riverpolis'],
-      [/nội khu|hòa xuân/i, 'cong-vien-noi-khu-sun-fours-tower', 'View nội khu – công viên'],
-      [/nội khu|hòa xuân/i, 'view-qua-can-ho-san-vuon-toa-f2', 'View nội khu – phố Nam Hòa Xuân']
-    ];
-    let picks = VIEWS.filter(v => v[0].test(u[5]));
-    if (/biển/i.test(u[5]) && /sông/i.test(u[5]) && /sunneva|ngũ hành sơn/i.test(u[5])) picks = picks.filter(v => v[2] !== 'View sông Cổ Cò');
-    picks = picks.slice(0, 3);
-    [0, 1, 2].forEach(i => {
-      const im = q('#v' + i), fig = im.closest('figure'), p = picks[i];
-      fig.hidden = !p;
-      if (!p) return;
-      const s800 = base + p[1] + '-800.jpg';
-      if (im.src !== s800) im.src = s800;
-      im.dataset.full = base + p[1] + '.jpg';
-      im.alt = `${p[2]} – căn ${u[0]} Tòa F2 FourS Tower (phối cảnh minh họa)`;
-      q('#vc' + i).textContent = p[2];
-    });
-    q('#viewTitle').textContent = `Tầm view căn ${u[0]}: ${u[5]}`;
-    const vm = q('#vMain'), vSrc = base + 'huong-view-can-' + u[0].toLowerCase() + '-toa-f2-fours-tower.jpg';
-    if (hasCard && vm.src !== vSrc) vm.src = vSrc;
-    vm.alt = `Vị trí và hướng view căn ${u[0]} trên phối cảnh Tòa F2 FourS Tower`;
-    q('#vMainCap').textContent = `Chấm đỏ là vị trí căn ${u[0]} trên tòa nhà, hình quạt vàng là hướng view: ${u[5]}.`;
-    if (!hasCard) { q('#posCap').textContent = `Mặt bằng tầng ${u[0].split('-')[1]} – căn số ${u[0].split('-')[2]} (ký hiệu ${u[0]}) trên bản vẽ. Bấm vào ảnh để phóng to.`; } else
-    q('#posCap').textContent = `Ô tô đỏ là căn ${u[0]} – ${TYPE_VI[u[1]]}, thông thủy ${u[2]} m², view ${u[5]}. Bên phải là mặt bằng căn hộ. Bấm vào ảnh để phóng to.`;
-  }
-  q('#cList').textContent = ty(list);
-  q('#cDisc').textContent = ty(pr.disc);
-  q('#cDiscPct').textContent = pct(pr.disc / pr.base) + ' giá chưa VAT & KPBT';
-  q('#cTotal').textContent = ty(pr.total);
-  const own = keyOwn(rows);
-  q('#cKey').textContent = ty(own);
-  q('#cKeyNote').textContent = pk === 'vay' ? 'vốn tự có (ngân hàng cho vay phần còn lại)' : 'thanh toán tới khi nhận nhà';
-  q('#cFirst').textContent = ty(rows[0].amt + rows[1].amt);
-  q('#cFirstNote').textContent = 'trước ' + fd(rows[1].date);
-
-  const b = [
-    ['Giá chưa VAT & KPBT (= niêm yết / 1,12)', pr.base],
-    pr.dEB && ['– Quà tặng nội thất Nhà Xinh', -pr.dEB],
-    pr.dFin && ['– Chiết khấu không vay 3%', -pr.dFin],
-    pr.dBL && ['– Chiết khấu từ chối bảo lãnh 1%', -pr.dBL],
-    pr.dTTS && [`– Chiết khấu thanh toán sớm ${pct(PLANS[pk].tts)}`, -pr.dTTS],
-    ['Giá chưa VAT & KPBT sau chiết khấu', pr.after],
-    ['+ VAT 10% (tạm tính)', pr.vat],
-    ['+ Kinh phí bảo trì 2% (tạm tính)', pr.kpbt],
-    ['Tổng phải thanh toán', pr.total, 'total']
-  ].filter(Boolean);
-  q('#breakdown').innerHTML = b.map(([k, v, c]) => `<div class="${c || (v < 0 ? 'minus' : '')}"><span>${k}</span><b>${money(v)} đ</b></div>`).join('');
-
-  let acc = 0;
-  q('#schedBody').innerHTML = rows.map(r => {
-    if (r.info) return `<tr class="info"><th scope="row">${r.name}</th><td>${fd(r.date)}</td><td>–</td><td class="num">–</td><td class="num">–</td></tr>`;
-    acc += r.amt;
-    return `<tr><th scope="row">${r.name}</th><td>${fd(r.date)}</td><td>${r.pctTxt}</td><td class="num">${money(r.amt)}</td><td class="num">${money(acc)}</td></tr>`;
-  }).join('') + `<tr class="total"><th scope="row">Tổng giá trị thanh toán</th><td></td><td></td><td class="num">${money(acc)}</td><td></td></tr>`;
-  q('#schedCap').textContent = `Tiến độ thanh toán – ${unitName} – ${PLANS[pk].name} (ký ${fd(sign)})`;
-
-  // Khoản vay
-  q('#loanPanel').hidden = pk !== 'vay';
-  if (pk === 'vay') {
-    const bankRow = rows.find(r => r.kind === 'bank');
-    const loan = bankRow.amt, disb = bankRow.date;
-    let end = addMonths(disb, 24); if (end > HTLS_CAP) end = HTLS_CAP;
-    const graceM = Math.max(0, (end.getFullYear() - disb.getFullYear()) * 12 + end.getMonth() - disb.getMonth());
-    const r = (+q('#lRate').value || 0) / 100 / 12, m = Math.max(1, (+q('#lYears').value || 20) * 12 - graceM);
-    const pmt = r ? loan * r / (1 - Math.pow(1 + r, -m)) : loan / m;
-    q('#lEnd').value = fd(end);
-    q('#loanOut').innerHTML = [
-      ['Số tiền vay (ngân hàng giải ngân)', money(loan) + ' đ'],
-      ['Ngày giải ngân dự kiến', fd(disb)],
-      ['Thời gian được hỗ trợ lãi suất & ân hạn gốc', `~${graceM} tháng (tới ${fd(end)})`],
-      ['Trả nợ hàng tháng sau hỗ trợ (gốc + lãi, ước tính)', money(pmt) + ' đ/tháng'],
-      ['Trả lãi tháng đầu sau hỗ trợ (ước tính)', money(loan * r) + ' đ']
-    ].map(([k, v]) => `<div><span>${k}</span><b>${v}</b></div>`).join('');
-  }
-
-  // So sánh phương án
-  q('#cmpBody').innerHTML = Object.keys(PLANS).map(k => {
-    if (k.startsWith('tts') && !ttsOK) return `<tr><th scope="row">${PLANS[k].name}</th><td colspan="4">Đã hết hạn (26/10/2026)</td></tr>`;
-    const p2 = price(list, k, eb.checked, bl.checked, utype.value), r2 = schedule(p2, k, sign, deposit, k === 'vay' ? 70 : 0);
-    return `<tr class="${k === pk ? 'cur' : ''}"><th scope="row">${PLANS[k].name}</th><td class="num">${pct(p2.disc / p2.base)}</td><td class="num">${ty(p2.total)}</td><td class="num">${ty(list - p2.total)}</td><td class="num">${ty(keyOwn(r2))}</td></tr>`;
-  }).join('');
-
-  q('#leadSummary').value = `${unitName} | ${PLANS[pk].name} | niêm yết ${money(list)} | tổng phải TT ${money(pr.total)} | ký ${fd(sign)}${pr.dEB ? ' | quà Nhà Xinh ' + money(pr.dEB) : ''}${bl.checked ? ' | từ chối BL 1%' : ''}`;
-  last = {unitName, pk, list, pr, rows, sign, own, code: cur ? cur.code : (isF2 ? typed : '')};
-}
-let last = null;
-
-// Gửi Zalo cho khách: điện thoại mở bảng chia sẻ (chọn Zalo); máy tính chép nội dung rồi mở Zalo
-const tr = n => (n / 1e6).toLocaleString('vi-VN', {maximumFractionDigits: 1}) + ' tr';
-function zaloText() {
-  const L = last, c = cur;
-  const link = 'https://hiephoangmt.com/du-an/fours-tower/bang-tinh-f2?' + (L.code ? 'can=' + L.code + '&' : '') + 'gia=' + R(L.list) + '&loai=' + encodeURIComponent(utype.value) + '&pa=' + L.pk;
-  const lines = [
-    `🏢 SUN FOURS TOWER – ${L.code ? 'CĂN ' + L.code : 'BẢNG TÍNH TÒA F2'}`,
-    c ? `• ${TYPE_VI[c.type]} · thông thủy ${String(c.area).replace('.', ',')} m²${c.sv ? ' + sân vườn ' + String(c.sv).replace('.', ',') + ' m²' : ''}${c.view ? ' · view ' + c.view : ''}` : `• Loại căn: ${TYPE_VI[utype.value]}`,
-    `• Giá niêm yết: ${ty(L.list)} (gồm VAT & KPBT)`,
-    `• Phương án: ${PLANS[L.pk].name} – chiết khấu ${pct(L.pr.disc / L.pr.base)}`,
-    `• Tổng phải thanh toán: ${ty(L.pr.total)} (tiết kiệm ${tr(L.list - L.pr.total)})`,
-    `• Cần có tới khi nhận nhà: ${ty(L.own)} – nhận nhà dự kiến 31/05/2028`,
-    '',
-    `📅 Lịch thanh toán (ký ${fd(L.sign)}):`
-  ];
-  L.rows.filter(r => !r.info).forEach(r => lines.push(`- ${fd(r.date)}: ${tr(r.amt)} – ${r.name.replace(' (CĐT trả lãi 8%/năm)', '')}`));
-  lines.push('', '📍 Xem chi tiết, vị trí căn & so sánh phương án:', link, '☎ Tư vấn: Hiệp 0904 567 009 (Zalo)');
-  return {text: lines.join('\n'), link};
-}
-q('#zaloBtn').addEventListener('click', async () => {
-  if (!last) return;
-  const {text, link} = zaloText();
-  const mobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
-  if (mobile && navigator.share) { try { await navigator.share({title: 'Bảng tính ' + last.unitName, text}); return; } catch (e) { if (e.name === 'AbortError') return; } }
-  try { await navigator.clipboard.writeText(text); } catch (e) {
-    const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
-  }
-  alert('Đã chép bảng tính ' + last.unitName + '. Mở Zalo, chọn khách và dán (Ctrl+V) để gửi.');
-  window.open(mobile ? 'https://zalo.me/' : 'https://chat.zalo.me/', '_blank', 'noopener');
-});
-
-sel.addEventListener('input', () => { if (ALL[normCode(sel.value)]) { syncUnit(); render(); } else { cur = null; syncUnit(); render(); } });
-sel.addEventListener('change', () => { syncUnit(); if (cur) sel.value = cur.code; render(); });
-[priceIn, utype, signIn, eb, bl, q('#lRatio'), q('#lRate'), q('#lYears')].forEach(el => el.addEventListener('input', render));
-document.querySelectorAll('input[name=plan]').forEach(r => r.addEventListener('change', render));
-q('#printBtn').addEventListener('click', () => window.print());
-syncUnit(); preFromLink(); render();
-})();
-</script>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Đăng ký thành công"><div class="box"><button class="x" aria-label="Đóng">×</button><p class="t">Đã nhận yêu cầu!</p><p>Chuyên viên sẽ sớm gửi hồ sơ pháp lý FourS Tower tới Quý khách.</p><a href="tel:0904567009" class="btn btn-gold" style="margin-top:20px">Gọi ngay</a></div></div>
 <script>
 /* Toàn bộ code nằm trong một hàm riêng để không trùng tên với jQuery/biến toàn cục mà LadiPage chèn vào trang */
 (function () {
@@ -1217,10 +778,10 @@ $$('.lead-form').forEach(f => f.addEventListener('submit', async e => {
 <button type="button" class="chat-launch" id="chatBtn" aria-label="Chat với tư vấn viên" aria-expanded="false"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.9 2 11.7c0 2.7 1.4 5.1 3.7 6.7L5 22l4.2-2.2c.9.2 1.8.3 2.8.3 5.5 0 10-3.9 10-8.7S17.5 3 12 3zm-4.5 10a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6zm4.5 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6zm4.5 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6z"/></svg><span class="dot" id="chatDot" hidden>1</span></button>
 <div class="chat-teaser" id="chatTeaser" role="button" tabindex="0" hidden><button type="button" class="cx" aria-label="Ẩn lời chào">×</button><span id="chatTeaserTxt"></span></div>
 <div class="chat-box" id="chatBox" role="dialog" aria-label="Chat tư vấn Sun FourS Tower" hidden>
-  <div class="chat-head"><span class="chat-av" aria-hidden="true">S</span><div><b>Tư vấn Sun FourS Tower</b><small>Đang trực tuyến · trả lời ngay</small></div><button type="button" class="cx" aria-label="Thu nhỏ chat">×</button></div>
+  <div class="chat-head"><span class="chat-av" aria-hidden="true">S</span><div><b>Tư vấn Sun FourS Tower</b><small>Trực tuyến · phản hồi ngay</small></div><button type="button" class="cx" aria-label="Thu nhỏ chat">×</button></div>
   <div class="chat-body" id="chatBody" aria-live="polite"></div>
   <form class="chat-foot" id="chatForm" autocomplete="off"><input id="chatIn" type="text" placeholder="Nhập tin nhắn hoặc số điện thoại…" aria-label="Tin nhắn" enterkeyhint="send" maxlength="300"><button type="submit" aria-label="Gửi"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 20.5 21 12 3 3.5l.01 6.6L15 12 3.01 13.9z"/></svg></button></form>
-  <p class="chat-note">🔒 Số điện thoại chỉ dùng để tư vấn, không spam.</p>
+  <p class="chat-note">🔒 Số điện thoại chỉ dùng để tư vấn, cam kết không spam.</p>
 </div>
 <script>
 /* Chat tư vấn tự động: chào khách, hỏi nhu cầu & tài chính, gợi ý căn phù hợp, mời để lại số Zalo rồi gửi về CRM + email + Telegram */
