@@ -500,3 +500,5 @@ body{padding-bottom:84px}
 .prep .ck li{font-size:14.5px}
 @media(max-width:980px){.stp{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.stp{grid-template-columns:1fr}}
+
+@media (min-width:761px) and (max-width:1120px){.mnav{gap:0}.mnav a{padding:7px 8px;font-size:13.5px}.lgc span{font-size:15px}}
