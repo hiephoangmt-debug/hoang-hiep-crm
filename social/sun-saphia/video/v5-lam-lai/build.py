@@ -14,11 +14,12 @@ TC = json.load(open("thoi-gian-cau.json"))          # [đầu, cuối] của 17 
 def S(i): return TC[i - 1][0]
 def E(i): return TC[i - 1][1]
 # Mỗi cảnh bắt đầu đúng lúc câu tương ứng bắt đầu
-T_TITLE, T_MAP, T_FRONT, T_RES, T_CONN = 1.6, S(3), S(5), S(6), S(8)
+T_TITLE, T_MAP, T_FRONT, T_RES, T_CONN = S(2), S(3), S(5), S(6), S(8)
+CLIPS = json.load(open("clips.json"))   # cảnh từ phim chủ đầu tư: [tên, từ, đến]
 T_TOWER, T_PLAN, T_POOL, T_STREET, T_KICK, T_END = S(11), S(12), S(13), S(14), S(15), S(16)
 
 # 1) Cắt + đổi tốc độ các đoạn của v5 cho khớp lời đọc: (đầu ra từ, đến, nguồn từ, đến)
-SEG = [(0.0, T_TITLE, 51.0, 52.6), (T_TITLE, T_MAP, 1.9, 4.4), (T_MAP, T_FRONT, 4.5, 13.6), (T_FRONT, T_RES, 13.6, 16.5),
+SEG = [(0.0, T_TITLE, 51.0, 52.6), (T_TITLE, T_MAP, 2.5, 4.0), (T_MAP, T_FRONT, 4.5, 13.6), (T_FRONT, T_RES, 13.6, 16.5),
        (T_RES, T_CONN, 17.0, 24.2), (T_CONN, T_TOWER, 27.3, 37.3), (T_TOWER, DUR, 38.0, 59.9)]
 def base():
     if os.path.exists("base.mp4"): return
@@ -187,20 +188,21 @@ def main():
     dec = subprocess.Popen(["ffmpeg", "-v", "error", "-i", "base.mp4", "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], stdout=subprocess.PIPE)
     enc = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",
                             "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p", "hinh.mp4"], stdin=subprocess.PIPE)
-    writes = [int(1.8 * FPS), int(T_RES * FPS), int(T_POOL * FPS)]
-    last = None
+    writes = [int(0.3 * FPS), int(T_RES * FPS), int(T_POOL * FPS)]
+    last = None; readers = {}
     for f in range(N):
         raw = dec.stdout.read(W * H * 3)
         if len(raw) < W * H * 3: raw = last
         last = raw; t = f / FPS
         src = Image.frombytes("RGB", (W, H), raw)
-        if T_FRONT <= t < T_RES:
-            if not hasattr(main, "fd"):
-                main.fd = subprocess.Popen(["ffmpeg", "-v", "error", "-i", "truoc-toa-nha.mp4", "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], stdout=subprocess.PIPE)
-            r2 = main.fd.stdout.read(W * H * 3)
-            if len(r2) == W * H * 3: main.last2 = r2
-            fr = Image.frombytes("RGB", (W, H), main.last2).convert("RGBA")
-        elif t < T_TITLE: fr = hero_frame(t)
+        clip = next((c for c in CLIPS if c[1] <= t < c[2]), None)
+        if clip:
+            name = clip[0]
+            if name not in readers:
+                readers[name] = [subprocess.Popen(["ffmpeg", "-v", "error", "-i", name + ".mp4", "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL), None]
+            r2 = readers[name][0].stdout.read(W * H * 3)
+            if len(r2) == W * H * 3: readers[name][1] = r2
+            fr = Image.frombytes("RGB", (W, H), readers[name][1]).convert("RGBA")
         elif T_TOWER <= t < T_PLAN: fr = img_fit("slide-thap-ho-boi.jpg", T_TOWER, T_PLAN - T_TOWER, t, 0.10)
         elif T_PLAN <= t < T_POOL: fr = img_fit("slide-mat-bang.jpg", T_PLAN, T_POOL - T_PLAN, t, 0.06); stats(fr, t - T_PLAN)
         elif T_POOL <= t < T_STREET: fr = img_fit("slide-ho-boi.jpg", T_POOL, T_STREET - T_POOL, t, 0.07)
@@ -209,7 +211,7 @@ def main():
         elif t >= T_END: fr = end_frame(T_END, t, src)
         else: fr = src.convert("RGBA")
         if t < T_END:
-            if T_TITLE <= t < T_TOWER and not (T_FRONT <= t < T_RES): fr.alpha_composite(MASK)
+            if T_TITLE <= t < T_TOWER and not clip: fr.alpha_composite(MASK)
             show_brand = not (T_TOWER <= t < T_POOL)
             if show_brand:
                 idx, a = R.sig_state(f, writes, 1.0)
@@ -224,6 +226,7 @@ def main():
                     fr.alpha_composite(im2, (int(W / 2 - im2.width / 2), int(y - im2.height / 2)))
         enc.stdin.write(fr.convert("RGB").tobytes())
     enc.stdin.close(); enc.wait(); dec.terminate()
+    for r in readers.values(): r[0].kill()
 
     # 4) Âm thanh: giọng đọc + nhạc nền (tự nhỏ khi có lời) + tiếng hiệu ứng
     SFX = [("impact", 0.0), ("whoosh", T_TITLE - 0.2), ("whoosh", T_MAP - 0.2), ("blip", S(4)), ("whoosh", T_FRONT - 0.2),
