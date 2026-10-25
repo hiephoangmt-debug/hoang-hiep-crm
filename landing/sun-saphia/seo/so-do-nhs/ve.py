@@ -1,73 +1,94 @@
-"""Sơ đồ minh họa định hướng quy hoạch danh thắng Ngũ Hành Sơn (không theo tỷ lệ)."""
-W,H=1400,900
+"""Sơ đồ quy hoạch danh thắng Ngũ Hành Sơn – vẽ lại theo đúng hình dạng, vị trí trên
+'Bản đồ định hướng tổ chức không gian kiến trúc, cảnh quan' (QĐ 822/QĐ-TTg), tọa độ lấy từ ảnh tham chiếu (x2)."""
 F="'Be Vietnam Pro',sans-serif"
-o=[f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">',
-'''<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3f7ee"/><stop offset="1" stop-color="#e7efe3"/></linearGradient>
-<radialGradient id="mt" cx=".45" cy=".35" r=".7"><stop offset="0" stop-color="#5aa86f"/><stop offset=".7" stop-color="#2f7d4f"/><stop offset="1" stop-color="#235f3c"/></radialGradient>
-<linearGradient id="rv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5fb3e6"/><stop offset="1" stop-color="#2f86c8"/></linearGradient>
-<pattern id="field" width="18" height="18" patternUnits="userSpaceOnUse"><rect width="18" height="18" fill="#a7d38a"/><path d="M0 9h18" stroke="#8cc06f" stroke-width="2"/></pattern>
-<filter id="sh"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0b2447" flood-opacity=".25"/></filter></defs>''',
-f'<rect width="{W}" height="{H}" fill="url(#bg)"/>']
-# river Cổ Cò (west & south)
-o.append('<path d="M120 0 C 150 160, 90 300, 140 430 S 230 640, 380 720 S 640 820, 900 800 S 1200 860, 1400 830 L1400 900 L0 900 L0 0 Z" fill="url(#rv)" opacity=".9"/>')
-o.append('<path d="M120 0 C 150 160, 90 300, 140 430 S 230 640, 380 720 S 640 820, 900 800 S 1200 860, 1400 830" fill="none" stroke="#e9f4fb" stroke-width="5"/>')
-# rice fields west
-o.append('<path d="M175 120 L380 140 L360 430 L205 440 C185 330 190 220 175 120Z" fill="url(#field)" opacity=".85"/>')
-# roads
-def road(d,w=26,c='#fff'):
-    o.append(f'<path d="{d}" fill="none" stroke="#c9d0c4" stroke-width="{w+6}" stroke-linecap="round"/><path d="{d}" fill="none" stroke="{c}" stroke-width="{w}" stroke-linecap="round"/>')
-road('M560 0 C 575 200, 600 420, 640 620 S 700 760, 720 800')   # Lê Văn Hiến (N-S)
-road('M640 470 C 820 450, 1050 430, 1400 400',22)               # Huyền Trân Công Chúa (ra biển)
-road('M210 520 C 360 500, 480 480, 640 470',16)                 # đường nội bộ phía tây
-road('M640 640 C 820 640, 960 660, 1110 700',14)
-def lab(x,y,t,s=16,c='#5b6b5f',w=700,a='middle',rot=0):
+VX,VY,VW,VH=0,60,1100,820
+def P(pts): return 'M'+' L'.join('%d %d'%p for p in pts)+' Z'
+def S(pts,close=True):
+    n=len(pts); d='M%.1f %.1f'%pts[0]
+    for i in range(n if close else n-1):
+        p0=pts[(i-1)%n]; p1=pts[i]; p2=pts[(i+1)%n]; p3=pts[(i+2)%n]
+        c1=(p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6); c2=(p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6)
+        d+=' C%.1f %.1f %.1f %.1f %.1f %.1f'%(c1+c2+p2)
+    return d+(' Z' if close else '')
+o=[f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{VX} {VY} {VW} {VH}" width="1600" height="{round(1600*VH/VW)}">',
+'''<defs><radialGradient id="mt" cx=".45" cy=".35" r=".75"><stop offset="0" stop-color="#4f9a5f"/><stop offset=".75" stop-color="#2c6f45"/><stop offset="1" stop-color="#1f5535"/></radialGradient>
+<linearGradient id="rv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7cc6ea"/><stop offset="1" stop-color="#3f95cf"/></linearGradient>
+<pattern id="field" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><rect width="14" height="14" fill="#9fd07d"/><path d="M0 7h14" stroke="#86bf62" stroke-width="2"/></pattern>
+<pattern id="urb" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#ece9e2"/><rect x="1" y="1" width="4" height="3" fill="#ddd8cd"/><rect x="6" y="5" width="3" height="4" fill="#ddd8cd"/></pattern>
+<filter id="sh"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0b2447" flood-opacity=".3"/></filter></defs>''',
+f'<rect x="{VX}" y="{VY}" width="{VW}" height="{VH}" fill="url(#urb)"/>']
+# vùng quy hoạch (ranh giới)
+BND=[(78,290),(130,230),(205,185),(330,195),(600,192),(650,180),(760,140),(900,122),(1050,122),(1140,290),(1000,425),(990,625),(810,680),(700,585),(690,700),(660,860),(600,860),(560,830),(420,790),(330,770),(240,720),(260,640),(270,590),(245,520),(195,420),(140,330)]
+o.append(f'<path d="{S(BND)}" fill="#c9e7b0" stroke="#d23b2f" stroke-width="3" stroke-dasharray="10 6"/>')
+# ruộng lúa phía tây
+o.append(f'<path d="{S([(140,355),(230,345),(300,420),(310,500),(250,505),(190,420)])}" fill="url(#field)"/>')
+# sông Cổ Cò
+import json
+for poly in json.load(open('water.json')):
+    poly=[(x if x>4 else VX-10, y) for x,y in poly]
+    o.append(f'<path d="{S(poly)}" fill="url(#rv)" stroke="#e9f4fb" stroke-width="3"/>')
+o.append(f'<path d="{S([(192,610),(210,602),(228,612),(222,630),(198,632)])}" fill="#c9e7b0" stroke="#2f86c8" stroke-width="2"/>')  # cù lao
+# hồ
+o.append(f'<path d="{S([(700,345),(735,335),(770,350),(765,385),(725,392),(698,372)])}" fill="#7cc6ea" stroke="#fff" stroke-width="3"/>')
+o.append(f'<path d="{S([(455,395),(480,383),(505,398),(495,418),(465,420)])}" fill="#7cc6ea" stroke="#fff" stroke-width="3"/>')
+o.append(f'<path d="{S([(560,600),(595,590),(615,610),(600,640),(570,640)])}" fill="#7cc6ea" stroke="#fff" stroke-width="2"/>')
+# đường
+def road(pts,w):
+    d=S(pts,False); o.append(f'<path d="{d}" fill="none" stroke="#9aa4ad" stroke-width="{w+5}" stroke-linecap="round" stroke-linejoin="round"/><path d="{d}" fill="none" stroke="#fff" stroke-width="{w}" stroke-linecap="round" stroke-linejoin="round"/>')
+road([(165,160),(320,192),(600,192),(640,175),(760,140),(1050,120)],12)       # đường phía bắc
+road([(590,62),(630,170),(648,260),(660,420),(668,560),(660,700),(640,885)],20) # Lê Văn Hiến
+road([(1050,122),(1120,230),(1190,340)],12)                                    # đường phía đông
+road([(250,630),(420,600),(560,570),(690,570),(800,680),(830,760)],12)         # trục ngang phía nam
+road([(240,500),(330,495),(405,495),(500,460),(545,430),(640,420),(660,420)],9)
+road([(660,430),(800,440),(1000,425)],8)
+road([(405,495),(420,560),(430,600)],7)
+# quảng trường & bùng binh
+o.append('<circle cx="545" cy="425" r="40" fill="#f7efe0" stroke="#fff" stroke-width="5"/><circle cx="545" cy="425" r="18" fill="#e8d5b0"/>')
+o.append('<circle cx="405" cy="495" r="17" fill="#fff" stroke="#9aa4ad" stroke-width="3"/>')
+# núi
+MTS={'THỦY SƠN':[(680,265),(760,225),(870,218),(980,235),(1045,290),(1050,360),(1000,420),(900,445),(800,430),(730,390),(690,330)],
+     'HỎA SƠN':[(275,250),(330,215),(420,212),(480,225),(522,262),(500,300),(440,322),(360,328),(300,305)],
+     'MỘC SƠN':[(700,560),(780,545),(880,560),(962,590),(950,630),(870,652),(780,640),(720,610)],
+     'THỔ SƠN':[(320,610),(380,575),(450,570),(495,590),(490,640),(440,680),(370,686),(325,660)],
+     'KIM SƠN':[(330,700),(400,672),(480,672),(550,700),(530,740),(470,765),(380,770),(335,748)]}
+for n,pts in MTS.items():
+    o.append(f'<path d="{S(pts)}" fill="url(#mt)" stroke="#1a4a2f" stroke-width="2" filter="url(#sh)"/>')
+    cx=sum(p[0] for p in pts)/len(pts); cy=sum(p[1] for p in pts)/len(pts)
+    o.append(f'<text x="{cx:.0f}" y="{cy+6:.0f}" text-anchor="middle" style="font:900 {20 if n=="THỦY SƠN" else 15}px {F}" fill="#fff" stroke="#1a4a2f" stroke-width="4" paint-order="stroke">{n}</text>')
+# công trình (đỏ) theo bản đồ
+for x,y in [(495,262),(570,265),(545,360),(580,365),(735,190),(850,190),(840,320),(1040,250),(520,520),(570,485),(600,505),(500,650),(540,690),(290,680),(830,195)]:
+    o.append(f'<rect x="{x-9}" y="{y-6}" width="18" height="12" rx="2" fill="#c0392b" stroke="#fff" stroke-width="1.5"/>')
+def lab(x,y,t,s=14,c='#203a2a',a='middle',rot=0,w=700):
     r=f' transform="rotate({rot} {x} {y})"' if rot else ''
     o.append(f'<text x="{x}" y="{y}"{r} text-anchor="{a}" style="font:{w} {s}px {F}" fill="{c}" stroke="#fff" stroke-width="4" paint-order="stroke">{t}</text>')
-lab(586,150,'Đường Lê Văn Hiến',15,rot=84); lab(1180,405,'Đường Huyền Trân Công Chúa → biển',15,rot=-3)
-o.append(f'<text x="250" y="830" style="font:italic 800 24px {F}" fill="#ffffff">Sông Cổ Cò</text>'); lab(270,300,'Cánh đồng',15,'#4b7a3a')
-# mountains
-def mt(d,name,x,y,sub=''):
-    o.append(f'<path d="{d}" fill="url(#mt)" stroke="#1f5536" stroke-width="2" filter="url(#sh)"/>')
-    o.append(f'<text x="{x}" y="{y}" text-anchor="middle" style="font:800 20px {F}" fill="#fff" stroke="#1f5536" stroke-width="4" paint-order="stroke">{name}</text>')
-    if sub: o.append(f'<text x="{x}" y="{y+22}" text-anchor="middle" style="font:600 13px {F}" fill="#fff" stroke="#1f5536" stroke-width="3" paint-order="stroke">{sub}</text>')
-mt('M700 90 C 820 40, 1010 60, 1080 140 C 1140 220, 1090 330, 990 370 C 880 410, 760 380, 710 300 C 670 230, 650 140, 700 90Z','THỦY SƠN',890,220,'núi lớn nhất · chùa Linh Ứng, động Huyền Không')
-mt('M1110 470 C 1160 450, 1230 470, 1240 520 C 1250 570, 1190 600, 1140 585 C 1100 570, 1080 500, 1110 470Z','MỘC SƠN',1170,530)
-mt('M380 170 C 430 140, 500 160, 510 220 C 520 290, 470 330, 420 320 C 370 310, 350 220, 380 170Z','HỎA SƠN',445,240,'(Dương Hỏa)')
-mt('M400 350 C 440 335, 490 350, 495 390 C 500 430, 455 450, 420 440 C 385 430, 375 370, 400 350Z','',445,395)
-lab(445,470,'(Âm Hỏa)',13,'#2f5d3f')
-mt('M760 560 C 820 520, 930 530, 980 580 C 1020 630, 980 700, 900 710 C 820 720, 750 680, 740 630 C 735 600, 740 575, 760 560Z','THỔ SƠN',860,615,'vườn thiền · bảo tháp Báo Thiên')
-mt('M300 610 C 340 585, 400 595, 410 635 C 420 675, 380 700, 340 695 C 300 690, 280 640, 300 610Z','KIM SƠN',350,645,'chùa Quán Thế Âm')
-# planned features (badges)
-def badge(x,y,num,t,c):
-    o.append(f'<circle cx="{x}" cy="{y}" r="17" fill="{c}" stroke="#fff" stroke-width="3" filter="url(#sh)"/><text x="{x}" y="{y+6}" text-anchor="middle" style="font:900 16px {F}" fill="#fff">{num}</text>')
-    lab(x+24,y+6,t,14,'#203a2a',800,'start')
-# lakes
-o.append('<ellipse cx="1010" cy="460" rx="45" ry="24" fill="#6fc0ea" stroke="#fff" stroke-width="3"/>')
-o.append('<path d="M780 420 C 820 405, 880 410, 900 430 C 870 450, 800 452, 780 420Z" fill="#6fc0ea" stroke="#fff" stroke-width="3"/>')
-badge(640,470,'1','Quảng trường lễ hội','#E96118')
-badge(870,770,'2','Bảo tháp Báo Thiên 58 m','#c0392b')
-badge(980,690,'3','Vườn thiền ~5.528 m²','#2f9e6a')
-badge(690,700,'4','Vườn tượng ~8.988 m²','#8e44ad')
-badge(1010,455,'5','Hồ cảnh quan','#2a6fd0')
-badge(250,560,'6','Làng đá Non Nước','#d99a00')
-badge(560,40,'P','Bãi đỗ xe','#275286')
-badge(1240,640,'P','Bãi đỗ xe','#275286')
-# title card
-o.append(f'<g filter="url(#sh)"><rect x="920" y="20" width="460" height="92" rx="14" fill="#0b2447"/></g>')
-o.append(f'<text x="940" y="54" style="font:800 20px {F}" fill="#FFAA01">DANH THẮNG NGŨ HÀNH SƠN</text>')
-o.append(f'<text x="940" y="80" style="font:600 15px {F}" fill="#fff">Sơ đồ minh họa định hướng quy hoạch</text>')
-o.append(f'<text x="940" y="100" style="font:500 13px {F}" fill="#c7d3e3">QĐ 822/QĐ-TTg · ~105 ha · công viên VH-LS ~92 ha</text>')
-# legend
-o.append(f'<g filter="url(#sh)"><rect x="20" y="20" width="250" height="60" rx="12" fill="#fff"/></g><text x="36" y="46" style="font:800 14px {F}" fill="#0b2447">Minh họa, không theo tỷ lệ</text><text x="36" y="66" style="font:500 12px {F}" fill="#5b6b85">Vị trí hạng mục mang tính tham khảo</text>')
-# watermark
+lab(683,300,'Đường Lê Văn Hiến',14,rot=86)
+o.append(f'<text x="55" y="470" transform="rotate(-75 55 470)" style="font:italic 800 22px {F}" fill="#fff">Sông Cổ Cò</text>')
+lab(240,440,'Ruộng lúa sinh thái',13,'#3d6b2a')
+def badge(x,y,num,t,c,a='start',dx=22):
+    o.append(f'<circle cx="{x}" cy="{y}" r="14" fill="{c}" stroke="#fff" stroke-width="3" filter="url(#sh)"/><text x="{x}" y="{y+5}" text-anchor="middle" style="font:900 14px {F}" fill="#fff">{num}</text>')
+    lab(x+(dx if a=='start' else -dx),y+5,t,13,'#0b2447',a)
+badge(545,425,'1','Quảng trường – trục lễ hội','#E96118')
+badge(405,495,'2','Bùng binh cảnh quan','#8e44ad','end')
+badge(733,365,'3','Hồ cảnh quan','#2a6fd0')
+badge(300,700,'4','Chùa Quán Thế Âm','#c0392b','end')
+badge(210,618,'5','Cù lao sinh thái','#2f9e6a','end')
+badge(540,615,'6','Vườn tượng · vườn thiền','#2f9e6a')
+# chú giải + tiêu đề
+o.append(f'<g filter="url(#sh)"><rect x="760" y="680" width="330" height="190" rx="12" fill="#fff"/></g>')
+o.append(f'<text x="778" y="706" style="font:900 15px {F}" fill="#0b2447">QUY HOẠCH DANH THẮNG NGŨ HÀNH SƠN</text>')
+o.append(f'<text x="778" y="726" style="font:600 12px {F}" fill="#5b6b85">Vẽ lại theo bản đồ định hướng không gian (QĐ 822/QĐ-TTg)</text>')
+items=[('<rect x="0" y="-9" width="22" height="12" rx="3" fill="url(#mt)"/>','Núi đá vôi (5 ngọn)'),('<rect x="0" y="-9" width="22" height="12" fill="#c9e7b0" stroke="#d23b2f" stroke-dasharray="4 3"/>','Ranh giới quy hoạch, cây xanh'),
+       ('<rect x="0" y="-9" width="22" height="12" fill="url(#rv)"/>','Sông Cổ Cò, hồ'),('<rect x="4" y="-8" width="14" height="10" fill="#c0392b"/>','Công trình văn hóa, dịch vụ'),('<rect x="0" y="-9" width="22" height="12" fill="url(#urb)" stroke="#ccc"/>','Khu dân cư hiện hữu')]
+for i,(sw,t) in enumerate(items):
+    y=752+i*22; o.append(f'<g transform="translate(778 {y})">{sw}</g><text x="808" y="{y+1}" style="font:600 12.5px {F}" fill="#203a2a">{t}</text>')
+# chữ chìm
 wm='sun-saphia-residence.com · 0904 567 009'
-g=[f'<g transform="rotate(-22 {W//2} {H//2})" style="font:700 22px {F}" pointer-events="none">']
-y=-500
-while y<H+600:
-    x=-700+((y//150)%2)*280
-    while x<W+700:
-        g.append(f'<text x="{x}" y="{y}" fill="#0b2447" fill-opacity=".07">{wm}</text>'); x+=560
-    y+=150
+g=[f'<g transform="rotate(-22 550 470)" style="font:700 20px {F}" pointer-events="none">']
+y=-300
+while y<1300:
+    x=-600+((y//140)%2)*260
+    while x<1800: g.append(f'<text x="{x}" y="{y}" fill="#0b2447" fill-opacity=".07">{wm}</text>'); x+=520
+    y+=140
 g.append('</g>'); o.append(''.join(g))
 o.append('</svg>')
 open('so-do-ngu-hanh-son.svg','w',encoding='utf8').write('\n'.join(o))
