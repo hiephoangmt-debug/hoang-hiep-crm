@@ -15,7 +15,14 @@ for x1, y1, x2, y2 in [(195, 125, 352, 220), (25, 400, 372, 462), (372, 395, 432
                        (0, 0, 40, 40), (1150, 0, 1195, 40)]:
     m[y1:y2, x1:x2] = 255
 m = m[:1400]
+# nối sông Hàn qua các cầu (cầu vẽ đè lên mặt nước làm đứt dòng sông)
+reg = m[430:1080, 400:600]
+reg = cv2.morphologyEx(reg, cv2.MORPH_CLOSE, cv2.getStructuringElement(cv2.MORPH_RECT, (3, 41)))
+m[430:1080, 400:600] = reg
+m0 = m.copy()
 m = ((cv2.GaussianBlur(m, (0, 0), 6) > 127) * 255).astype(np.uint8)
+# giữ nét gốc của sông Hàn (đoạn hẹp bị làm mượt xóa mất)
+m[430:1080, 400:600] = np.maximum(m[430:1080, 400:600], m0[430:1080, 400:600])
 # bỏ đốm nhỏ
 n, lab, st, _ = cv2.connectedComponentsWithStats(m, 8)
 for i in range(1, n):
