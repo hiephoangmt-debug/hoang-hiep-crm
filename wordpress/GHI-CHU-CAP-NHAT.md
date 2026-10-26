@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.38** + plugin Hoàng Hiệp CRM **2.20.84**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.38** + plugin Hoàng Hiệp CRM **2.20.85**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.85: hồ sơ Dana Home Land (Homeland Paradise Village), FUTA Land
+
+- Thêm hồ sơ chủ đầu tư Dana Home Land – dự án Homeland Paradise Village (khu đô thị số 6 Điện Nam – Điện Ngọc): pháp lý, tình trạng đình trệ, thủ tục phá sản, nguồn báo chí. Tổng 35 chủ đầu tư.
+- Hồ sơ Kim Long Nam đổi tên hiển thị "Kim Long Nam – FUTA Land (Phương Trang)".
 
 ## Có gì mới – plugin 2.20.84, giao diện 2.15.38: chủ đầu tư theo khu vực
 
