@@ -192,7 +192,10 @@ function hh_cdt_index_meta() {
 
 /** Khóa nhóm => cấu hình. */
 function hh_cdt_groups() {
-	return array(
+	// Tạm không dùng trang theo khu vực (chưa gom đủ chủ đầu tư từng vùng) – link cũ chuyển về /chu-dau-tu/.
+	// Muốn bật lại: bỏ dòng return array() dưới đây.
+	return array();
+	return array( // phpcs:ignore Squiz.PHP.NonExecutableCode
 		'phia-bac-da-nang' => array(
 			'menu'    => 'Phía Bắc Đà Nẵng (Liên Chiểu – Hải Vân)',
 			'h1'      => 'Chủ đầu tư dự án phía Bắc Đà Nẵng (Liên Chiểu – Hải Vân)',
@@ -289,3 +292,16 @@ function hh_cdt_group_rows( $key ) {
 	usort( $rows, static fn( $a, $b ) => count( $b[2] ) <=> count( $a[2] ) );
 	return $cache[ $key ] = $rows; // phpcs:ignore Squiz.PHP.DisallowMultipleAssignments
 }
+
+/** Trang khu vực đã bỏ: /chu-dau-tu/phia-bac-da-nang/, /chu-dau-tu/dat-nen-dien-ban/ → 301 về danh sách chủ đầu tư. */
+add_action(
+	'template_redirect',
+	static function () {
+		$k = sanitize_title( (string) get_query_var( 'hh_cdt' ) );
+		if ( in_array( $k, array( 'phia-bac-da-nang', 'dat-nen-dien-ban' ), true ) && ! isset( hh_cdt_groups()[ $k ] ) ) {
+			wp_safe_redirect( hh_cdt_url(), 301 );
+			exit;
+		}
+	},
+	1
+);

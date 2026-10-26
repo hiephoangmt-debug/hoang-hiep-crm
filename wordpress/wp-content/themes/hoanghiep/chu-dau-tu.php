@@ -64,6 +64,7 @@ $dom  = static fn( $u ) => preg_replace( '/^www\./', '', (string) wp_parse_url( 
 				</table>
 			</div>
 		</section>
+		<?php if ( hh_cdt_groups() ) : ?>
 		<section class="block">
 			<h2 class="block__title">Chủ đầu tư theo khu vực</h2>
 			<p class="deal-tabs">
@@ -72,6 +73,7 @@ $dom  = static fn( $u ) => preg_replace( '/^www\./', '', (string) wp_parse_url( 
 				<?php endforeach; ?>
 			</p>
 		</section>
+		<?php endif; ?>
 		<section class="block faq-block">
 			<h2 class="block__title">Hỏi đáp về chủ đầu tư tại Đà Nẵng</h2>
 			<div class="faq">
