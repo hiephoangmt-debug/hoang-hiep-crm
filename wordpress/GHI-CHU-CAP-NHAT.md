@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.41** + plugin Hoàng Hiệp CRM **2.20.88**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.42** + plugin Hoàng Hiệp CRM **2.20.89**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,11 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.89, giao diện 2.15.42: mô hình 4D và Chọn căn Sun Saphia bản 26/10
+
+- Trang Sun Saphia dùng bản 4D mới (mặt bằng tầng 30 trên tòa nhà, bấm từng căn) và Chọn căn mới (mặt bằng từng căn tầng 30).
+- Link lưu trên web là bản công khai: không kèm mã chủ (k=…) và chế độ crm; khách vẫn phải để lại số Zalo sau khi xoay thử.
 
 ## Có gì mới – plugin 2.20.88, giao diện 2.15.41: mặt bằng các tầng Sun Saphia
 
