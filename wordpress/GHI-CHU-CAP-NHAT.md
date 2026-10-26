@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.43** + plugin Hoàng Hiệp CRM **2.20.90**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.44** + plugin Hoàng Hiệp CRM **2.20.90**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – giao diện 2.15.44: không hiện 2 form cùng lúc
+
+- Khung "Xem tiếp mô hình 3D · 4D" chờ khi form "Nhận bảng giá gốc" của trang đang mở; đóng form đó mới hiện.
+- Khách đã để lại số ở bất kỳ form nào trên trang → mô hình 3D/4D mở khóa luôn, không hỏi lại.
+- Khung xem tiếp nằm gọn trong khung mô hình, không đè lên form khác.
 
 ## Có gì mới – plugin 2.20.90, giao diện 2.15.43: 4D và Chọn căn Sun Saphia bản chiều 26/10
 

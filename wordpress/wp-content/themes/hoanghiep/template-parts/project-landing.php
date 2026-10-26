@@ -40,7 +40,7 @@ table.hh-cards td small{display:block;white-space:normal!important}
 table.hh-cards .unit-acts{justify-content:flex-start}
 }
 /* Mô hình 3D/4D: xem thử một lúc rồi hiện form để lại số Zalo. */
-.hh-gate4d{position:absolute;inset:0;z-index:2147483602;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(8,22,44,.72);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);font-family:inherit}
+.hh-gate4d{position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(8,22,44,.72);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);font-family:inherit}
 .hh-gate4d form{width:100%;max-width:340px;background:#fff;color:#14223a;border-radius:16px;padding:20px 18px 16px;box-shadow:0 20px 50px -12px rgba(0,0,0,.55);text-align:left}
 .hh-gate4d b{display:block;font-size:18px;line-height:1.3;margin-bottom:6px}
 .hh-gate4d p{margin:0 0 12px;font-size:14px;line-height:1.45;color:#4a5872}
@@ -109,6 +109,9 @@ table.hh-cards .unit-acts{justify-content:flex-start}
 		d.append('need', 'Nhận bảng giá dự án');
 		d.append('message', 'Trang landing: ' + document.title + (f.getAttribute('data-form') ? ' – ' + f.getAttribute('data-form') : '') + (extra ? ' – quan tâm: ' + extra : ''));
 		try { fetch(url, { method: 'POST', body: d, credentials: 'same-origin', keepalive: true }); } catch (err) {}
+		// Đã để lại số ở form bất kỳ → không hỏi lại khi xem mô hình 3D/4D.
+		try { localStorage.setItem('hhZalo', '1'); } catch (err) {}
+		document.querySelectorAll('.hh-gate4d').forEach(function (x) { x.remove(); });
 	}, true);
 })();
 </script>
@@ -123,8 +126,13 @@ table.hh-cards .unit-acts{justify-content:flex-start}
 	var known = function () { try { return '1' === localStorage.getItem('hhZalo'); } catch (e) { return false; } };
 	if (known()) return;
 	var st = new WeakMap(), gated = false;
+	// Khung khác của trang đang mở (form nhận bảng giá, chat…) → chờ, không hiện chồng 2 form.
+	function busy() {
+		var shown = function (el) { var cs = getComputedStyle(el); return !el.hidden && cs.display !== 'none' && cs.visibility !== 'hidden' && el.getBoundingClientRect().height > 100; };
+		return [].some.call(document.querySelectorAll('#leadPop, [role="dialog"], .lp.on, .modal.show'), function (el) { return !el.closest('.hh-gate4d') && shown(el); });
+	}
 	function gate(box) {
-		if (gated || known()) return;
+		if (gated || known() || busy()) return;
 		gated = true;
 		var o = document.createElement('div');
 		o.className = 'hh-gate4d';
