@@ -60,7 +60,7 @@ def hero_home():
     return ('<section class="hero"><img class="sun" src="%smat-troi.webp" alt="" width="700" height="898" aria-hidden="true">'
             '<div class="wrap"><nav class="crumb" aria-label="Đường dẫn"><a href="{M}/">Trang chủ</a> › <span>Dự án Đà Nẵng</span> › <span>Sun Saphia Residence</span></nav>'
             '<div class="g2" style="margin-top:14px"><div>'
-            '<span class="tag">🔥 Vừa Kick-off 23/10/2026 · <b>Dự kiến mở bán cuối 11/2026</b></span>'
+            '<span class="tag">🔥 Sự kiện ra mắt <b>9:00 CN 01/11/2026 · Hilton Đà Nẵng</b></span>'
             '<img class="ribbon" src="%sruy-bang.webp" alt="" width="608" height="232" style="margin-top:16px" aria-hidden="true">'
             '<h1 class="dp">Sun Saphia Residence – căn hộ <b>mặt biển đầu tiên</b> của Sun Group tại Đà Nẵng</h1>'
             + SLOGAN
@@ -124,7 +124,7 @@ def home():
         ('Có những loại căn nào?', 'Studio 30–31 m² (513 căn), 1BR+ 50–51 m² (108 căn), 2BR 60–70 m² (133 căn), bàn giao hoàn thiện cơ bản.'),
         ('Pháp lý Sun Saphia Residence thế nào?', 'GCN đăng ký đầu tư mã dự án 2572746483 do Sở Tài chính TP Đà Nẵng cấp, chứng nhận lần đầu 17/09/2026; thời hạn dự án 50 năm; công trình cấp I, niên hạn sử dụng 100 năm. Nghị quyết 278/NQ-CP (18/9/2026) xác định thời hạn sử dụng chung cư theo niên hạn công trình.'),
         ('Giá bán Sun Saphia Residence bao nhiêu?', 'Chủ đầu tư chưa công bố bảng giá chính thức. Căn hộ mặt biển Đà Nẵng đang chào bán khoảng: studio 5,2–10,5 tỷ, 1BR 7,7–11,5 tỷ, 2BR 17,4–21,7 tỷ (tham khảo tại Kick-off).'),
-        ('Khi nào mở bán, khi nào bàn giao?', 'Dự kiến mở bán cuối tháng 11/2026, bàn giao tháng 11/2028 (kế hoạch, có thể thay đổi theo công bố của chủ đầu tư).'),
+        ('Khi nào mở bán, khi nào bàn giao?', 'Sự kiện ra mắt và chính thức nhận booking: 9:00 Chủ nhật 01/11/2026 tại khách sạn Hilton Đà Nẵng (50 Bạch Đằng); bàn giao dự kiến tháng 11/2028 (kế hoạch, có thể thay đổi theo công bố của chủ đầu tư).'),
         ('Vì sao nên quan tâm từ bây giờ?', 'Lãi suất đang có tín hiệu giảm, giai đoạn đầu thường có chính sách giá và hỗ trợ lãi suất tốt nhất, và người đăng ký sớm được chọn căn đẹp trước. Chính sách cụ thể theo công bố khi mở bán.'),
         ('Bây giờ có phải đặt cọc không?', 'Không. Hiện chỉ đăng ký nhận thông tin, bảng giá và mặt bằng; không thu bất kỳ khoản tiền nào.')])
     toc = [('thoi-diem', 'Thời điểm thị trường'), ('vi-sao-mua-som', 'Vì sao nên mua sớm'), ('tong-quan', 'Thông tin tổng quan'), ('vi-tri', '01 Vị trí'),
@@ -132,10 +132,11 @@ def home():
            ('tien-ich', '06 Tiện ích "may đo"'), ('chu-nhan', '07 Chủ nhân tương lai'), ('khan-hiem', '08 Mức độ khan hiếm'), ('cho-thue', '09 Dòng tiền cho thuê'),
            ('tien-do', 'Tiến độ'), ('hoi-dap', 'Hỏi đáp')]
     b = cover() + hero_home()
+    b += su_kien('HOME')
     b += tldr('Sun Saphia Residence', [('Là gì', 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, do Sun Property phát triển'), ('Vị trí', 'Giao lộ Võ Nguyên Giáp – Nguyễn Đức Thuận – Trường Sa, phường Ngũ Hành Sơn; ra biển Sơn Thủy ~400 m'),
         ('Quy mô', '1 tòa 30 tầng (114 m), 2 hầm, 782 căn trên 3.720,1 m²'), ('Loại căn', 'Studio 30–31 m² (513) · 1BR+ 50–51 m² (108) · 2BR 60–70 m² (133), trần 3,5 m'),
         ('Pháp lý', 'GCN đầu tư 2572746483 (17/09/2026), thời hạn 50 năm, công trình cấp I niên hạn 100 năm'), ('Ngân hàng', 'Vietcombank, BIDV, NCB hỗ trợ vay'),
-        ('Mở bán · bàn giao', 'Dự kiến cuối 11/2026 · tháng 11/2028'), ('Giá bán', 'Chưa công bố; đăng ký để nhận bảng giá gốc qua Zalo 0904 567 009')])
+        ('Mở bán · bàn giao', 'Ra mắt 01/11/2026 (Hilton Đà Nẵng) · bàn giao 11/2028'), ('Giá bán', 'Chưa công bố; đăng ký để nhận bảng giá gốc qua Zalo 0904 567 009')])
     b += '<section class="sec" style="padding-top:0"><div class="wrap">' + daily() + '<div class="toc" style="margin-top:26px">' + ''.join('<a href="#%s">%s</a>' % t for t in toc) + '</div></div></section>'
     # Thời điểm
     b += ('<section class="sec nv" id="thoi-diem">' + tiles('tr') + '<div class="wrap">'
@@ -243,7 +244,7 @@ def home():
     b = ins(b, '<section class="sec alt"><div class="wrap">' + sh('♥', 'Giá trị', 'Bốn giá trị <b>cộng hưởng</b> trong một sản phẩm', 'n'), band('Nhận bảng tính dòng tiền theo căn', 'Tính theo giá thật khi có bảng giá: giá thuê, lấp đầy, lợi nhuận từng căn.', 'Nhận bảng tính', 'Trang chủ – bảng tính dòng tiền', ('/tinh-dong-tien', 'Mở bảng tính dòng tiền')))
     b += cta_block('Web – trang chủ cuối trang')
     title = 'Sun Saphia Residence Đà Nẵng: Giá, Mặt bằng, Pháp lý 2026'
-    desc = 'Sun Saphia Residence – căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng: 30 tầng, 782 căn, pháp lý 50 năm, Vietcombank, BIDV, NCB hỗ trợ vay. Mở bán cuối 11/2026.'
+    desc = 'Sun Saphia Residence – căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng: 30 tầng, 782 căn, pháp lý 50 năm, Vietcombank, BIDV, NCB hỗ trợ vay. Ra mắt, nhận booking 01/11/2026.'
     lds = [article_ld(title, desc, MAIN + '/'), fld]
     kw = 'sun saphia residence, sun saphia đà nẵng, căn hộ sun saphia, giá sun saphia residence, mặt bằng sun saphia, pháp lý sun saphia, căn hộ mặt biển đà nẵng, căn hộ sun group đà nẵng'
     return page('/', title, desc, kw, b, lds, '/', tools=True)
@@ -261,29 +262,29 @@ def pband(title, sub, interest):
 def sub_hero(path, name, h1, lead, img_name, alt, label):
     cr, ld = crumbs([('Trang chủ', MAIN + '/'), ('Sun Saphia Residence', MAIN + '/'), (name, MAIN + path)])
     return ('<section class="hero" style="padding-bottom:40px"><img class="sun" src="%smat-troi.webp" alt="" width="700" height="898" aria-hidden="true"><div class="wrap">%s'
-            '<div class="g2" style="margin-top:14px"><div><span class="tag">🔥 Vừa Kick-off 23/10/2026 · <b>Dự kiến mở bán cuối 11/2026</b></span><img class="ribbon" src="%sruy-bang.webp" alt="" width="608" height="232" style="margin-top:14px" aria-hidden="true">'
+            '<div class="g2" style="margin-top:14px"><div><span class="tag">🔥 Sự kiện ra mắt <b>9:00 CN 01/11/2026 · Hilton Đà Nẵng</b></span><img class="ribbon" src="%sruy-bang.webp" alt="" width="608" height="232" style="margin-top:14px" aria-hidden="true">'
             '<h1 class="dp">%s</h1>' + SLOGAN + '%s<p class="lead just">%s</p>%s</div><div class="hr">%s<div class="pic">%s</div></div></div></div></section>') % (
         SK, cr, SK, h1, author(), lead, hero_perks(), form('dau', label, h='h2'), (img_name if img_name.startswith('<') else img(img_name, alt, eager=True))), ld
 
 def bang_gia():
     hero, cld = sub_hero('/bang-gia', 'Bảng giá', 'Giá Sun Saphia Residence – <b>bảng giá</b> căn hộ mặt biển Đà Nẵng',
-                         'Đến ngày 23/10/2026, chủ đầu tư chưa công bố bảng giá chính thức Sun Saphia Residence; dự kiến công bố tại sự kiện mở bán cuối tháng 11/2026. Trang này tổng hợp giá thị trường căn hộ mặt biển Đà Nẵng, những yếu tố làm giá từng căn khác nhau, cách vay ngân hàng – và sẽ cập nhật ngay khi có giá.',
+                         'Đến ngày 23/10/2026, chủ đầu tư chưa công bố bảng giá chính thức Sun Saphia Residence; dự kiến công bố tại sự kiện ra mắt 01/11/2026. Trang này tổng hợp giá thị trường căn hộ mặt biển Đà Nẵng, những yếu tố làm giá từng căn khác nhau, cách vay ngân hàng – và sẽ cập nhật ngay khi có giá.',
                          'thap-tren-cao-ngay', 'Toàn cảnh Sun Saphia Residence bên bờ biển Đà Nẵng nhìn từ trên cao', 'Web – bảng giá đầu trang')
     fq, fld = faq([
-        ('Khi nào có bảng giá Sun Saphia Residence?', 'Dự kiến công bố tại sự kiện mở bán cuối tháng 11/2026. Anh/chị để lại số Zalo để nhận bảng giá gốc ngay khi chủ đầu tư công bố.'),
+        ('Khi nào có bảng giá Sun Saphia Residence?', 'Dự kiến công bố tại sự kiện ra mắt 01/11/2026. Anh/chị để lại số Zalo để nhận bảng giá gốc ngay khi chủ đầu tư công bố.'),
         ('Giá căn hộ mặt biển Đà Nẵng hiện bao nhiêu?', 'Theo giá chào bán trình bày tại Kick-off: studio khoảng 5,2–10,5 tỷ, 1BR 7,7–11,5 tỷ, 2BR 17,4–21,7 tỷ tùy dự án (The Soleil, Futa Residence, Nobu). The Newtown Diamond: 1BR+ 5,3–5,6 tỷ, 2BR 6,8–8,3 tỷ.'),
         ('Giá tham khảo 3 tỷ và 4,5 tỷ trong bài toán cho thuê là giá bán?', 'Không. Đó là giá giả định chủ đầu tư dùng để minh họa bài toán cho thuê (studio 30 m² và 1BR 50 m²), chưa phải giá bán chính thức.'),
         ('Ngân hàng nào cho vay mua Sun Saphia Residence?', 'Vietcombank, BIDV và NCB hỗ trợ cho vay. Tỷ lệ vay, thời gian ân hạn và hỗ trợ lãi suất theo chính sách bán hàng công bố khi mở bán.'),
         ('Mua qua đại lý có đắt hơn mua trực tiếp?', 'Không. TATILAND là đại lý phân phối chính thức do Sun Property chứng nhận, áp dụng bảng giá và chính sách gốc của chủ đầu tư.'),
         ('Bây giờ có phải đặt cọc để giữ giá?', 'Không. Hiện chỉ đăng ký nhận thông tin, không thu bất kỳ khoản tiền nào.')])
     b = hero
-    b += tldr('giá Sun Saphia Residence', [('Giá chính thức', 'Chưa công bố đến 23/10/2026; dự kiến công bố khi mở bán cuối 11/2026'), ('Giá tham khảo trong bài toán', '3 tỷ (studio 30 m²), 4,5 tỷ (1BR 50 m²) – giá giả định, không phải giá bán'),
+    b += tldr('giá Sun Saphia Residence', [('Giá chính thức', 'Chưa công bố đến 23/10/2026; dự kiến công bố tại sự kiện ra mắt 01/11/2026'), ('Giá tham khảo trong bài toán', '3 tỷ (studio 30 m²), 4,5 tỷ (1BR 50 m²) – giá giả định, không phải giá bán'),
         ('Giá thị trường ven biển', 'Studio 5,2–10,5 tỷ · 1BR 7,7–11,5 tỷ · 2BR 17,4–21,7 tỷ (The Soleil, Futa, Nobu)'), ('Vay', 'Vietcombank, BIDV, NCB; hỗ trợ lãi suất theo chính sách khi mở bán'),
         ('Nhận bảng giá gốc', 'Đại lý chính thức TATILAND · Zalo 0904 567 009 · không thu tiền giữ chỗ')])
     b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Tình trạng giá', 'Giá Sun Saphia Residence <b>hiện tại</b>', 'o') +
           '<div class="g2 eq"><div class="txt"><p>Chủ đầu tư Sun Property chưa công bố giá bán chính thức. Mọi con số "giá Sun Saphia" đang lan truyền trước ngày mở bán chỉ là phỏng đoán.</p>'
           '<p>Tại Kick-off, chủ đầu tư dùng <b>giá tham khảo 3 tỷ cho studio 30 m²</b> và <b>4,5 tỷ cho 1BR 50 m²</b> để minh họa bài toán cho thuê – đây là giá giả định, không phải giá bán.</p>'
-          '<ul class="ck"><li>Bảng giá chính thức: dự kiến công bố cuối 11/2026</li><li>Phương thức thanh toán, hỗ trợ lãi suất: công bố cùng chính sách bán hàng</li><li>Người đăng ký trước nhận bảng giá và mặt bằng căn còn trống sớm nhất</li></ul>'
+          '<ul class="ck"><li>Bảng giá chính thức: dự kiến công bố tại sự kiện ra mắt 01/11/2026</li><li>Phương thức thanh toán, hỗ trợ lãi suất: công bố cùng chính sách bán hàng</li><li>Người đăng ký trước nhận bảng giá và mặt bằng căn còn trống sớm nhất</li></ul>'
           + slogan_box('Bảng giá – giữa trang') + '</div>'
           '<div class="g2" style="gap:14px">' + why_cards() + '</div></div></div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('2', 'So sánh', 'Giá căn hộ <b>mặt biển Đà Nẵng</b> đang chào bán', 'y') +
@@ -365,12 +366,12 @@ def phap_ly():
         ('Hết 50 năm thì căn hộ Sun Saphia ra sao?', '50 năm là thời hạn dự án (thời hạn đất) từ 17/09/2026; khi hết hạn, Luật Đất đai 2024 cho phép xem xét gia hạn nếu sử dụng đúng mục đích. Toà nhà là công trình cấp I, niên hạn 100 năm. Quyền lợi cụ thể theo quy định tại thời điểm đó và Hợp đồng mua bán.'),
         ('Hết niên hạn công trình có bị mất nhà không?', 'Theo Luật Nhà ở 2023, hết niên hạn không tự động mất quyền sở hữu. Toà nhà được kiểm định: còn an toàn thì tiếp tục sử dụng; không an toàn thì cải tạo, xây lại và chủ sở hữu được bồi thường, tái định cư hoặc nhận căn hộ mới theo phương án được duyệt.'),
         ('Dự án đã có giấy tờ gì?', 'GCN đăng ký đầu tư mã dự án 2572746483 do Sở Tài chính TP Đà Nẵng cấp, chứng nhận lần đầu 17/09/2026. Các giấy tờ tiếp theo theo tiến độ chủ đầu tư công bố.'),
-        ('Khi nào được ký hợp đồng mua bán?', 'Theo quy trình và chính sách chủ đầu tư công bố khi mở bán (dự kiến cuối 11/2026). Đại lý chính thức sẽ hướng dẫn từng bước giữ chỗ – đặt cọc – ký hợp đồng.'),
+        ('Khi nào được ký hợp đồng mua bán?', 'Theo quy trình và chính sách chủ đầu tư công bố khi mở bán (nhận booking từ sự kiện ra mắt 01/11/2026). Đại lý chính thức sẽ hướng dẫn từng bước giữ chỗ – đặt cọc – ký hợp đồng.'),
         ('Mua qua TATILAND có an toàn không?', 'TATILAND được Sun Property chứng nhận là đại lý phân phối chính thức ngày 23/10/2026; giao dịch theo đúng quy trình, hợp đồng của chủ đầu tư.')])
     b = hero
     b += tldr('pháp lý Sun Saphia Residence', [('GCN đăng ký đầu tư', 'Mã dự án 2572746483, Sở Tài chính TP Đà Nẵng cấp, lần đầu 17/09/2026'), ('Thời hạn', '50 năm kể từ 17/09/2026 – vừa bắt đầu, còn ~48 năm khi nhận nhà 11/2028'),
         ('Công trình', 'Cấp I, niên hạn sử dụng 100 năm'), ('Chính sách mới', 'Nghị quyết 278/NQ-CP (18/9/2026) xác định thời hạn chung cư theo niên hạn công trình'),
-        ('Tiến độ', 'Mở bán dự kiến cuối 11/2026 · bàn giao 11/2028'), ('Mua ở đâu', 'Đại lý phân phối chính thức TATILAND (Sun Property chứng nhận 23/10/2026)')])
+        ('Tiến độ', 'Ra mắt, nhận booking 01/11/2026 · bàn giao 11/2028'), ('Mua ở đâu', 'Đại lý phân phối chính thức TATILAND (Sun Property chứng nhận 23/10/2026)')])
     b += ('<section class="sec alt"><div class="wrap">' + sh('1', 'Giấy tờ dự án', 'Pháp lý <b>đã có</b>', 'o') + legal_box() + '</div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('2', 'Căn hộ 50 năm', 'Giá trị căn hộ 50 năm <b>đang được định hình lại</b>', 'n') +
           '<div class="g2" style="align-items:start"><div class="txt"><p>Căn hộ trong dự án có thời hạn 50 năm thường bị so sánh thiệt thòi với căn hộ sở hữu lâu dài. Nghị quyết 278/NQ-CP ngày 18/9/2026 của Chính phủ đang thay đổi cách nhìn này, '
@@ -521,6 +522,22 @@ def cho_thue():
                 b, [article_ld(title, desc, MAIN + '/cho-thue'), cld, fld], '/cho-thue')
 
 # ---------- Trang chạy quảng cáo ----------
+def su_kien(ctx='ADS'):
+    I = RAW + '1489ba0eae56d85e993a92102b638644a6a9c1e4/landing/sun-saphia/v4/img/'
+    AG = [('08:30 – 09:15', 'Đón khách &amp; trải nghiệm'), ('09:15 – 09:35', 'Trình diễn nghệ thuật &amp; khai mạc'),
+          ('09:35 – 10:18', 'Giới thiệu dự án Sun Saphia Residence'), ('10:18 – 11:00', '<b>Chính thức nhận booking</b> &amp; tư vấn chuyên sâu'),
+          ('11:15 – 11:30', 'Bốc thăm may mắn'), ('11:30', 'Kết thúc')]
+    return ('<section class="sec sk" id="su-kien"><div class="wrap"><div class="g2 skg">'
+            '<figure class="fg" style="margin:0"><img src="' + I + 'thu-moi-ra-mat.webp" srcset="' + I + 'thu-moi-ra-mat-900.webp 900w, ' + I + 'thu-moi-ra-mat.webp 1414w" sizes="(max-width: 760px) 100vw, 520px" width="1414" height="2000" alt="Thư mời sự kiện ra mắt Sun Saphia Residence: Chạm nhịp Ánh Dương – Bừng sáng vị thế, 9:00 Chủ nhật 01/11/2026, khách sạn Hilton Đà Nẵng" loading="lazy" decoding="async"></figure>'
+            '<div><span class="ey">Thư mời sự kiện ra mắt</span><h2 class="dp skh">Chạm nhịp Ánh Dương – <b>Bừng sáng vị thế</b></h2>'
+            '<ul class="skc"><li>✨ Chạm vào đường cong Apsara để thấy di sản thức giấc.</li><li>🌊 Chạm vào nhịp sóng để cảm nhận chất Wellness thuần khiết.</li><li>☀️ Chạm vào ánh dương bình minh để bắt đầu hành trình thịnh vượng.</li></ul>'
+            '<div class="ski"><div><small>Thời gian</small><b>09:00 · Chủ nhật 01.11.2026</b></div><div><small>Địa điểm</small><b>Khách sạn Hilton Đà Nẵng</b><span>50 Bạch Đằng, Hải Châu, Đà Nẵng</span></div></div>'
+            '<ol class="ska">' + ''.join('<li><time>%s</time><span>%s</span></li>' % a for a in AG) + '</ol>'
+            '<div class="hcta"><button type="button" class="btn" data-pop data-interest="' + ctx + ' – đăng ký tham dự sự kiện ra mắt 01/11">Đăng ký nhận thư mời</button>'
+            '<a class="btn ghost2" href="https://www.google.com/maps/search/?api=1&amp;query=Hilton+Da+Nang+50+Bach+Dang" target="_blank" rel="noopener">📍 Chỉ đường tới Hilton</a></div>'
+            '<p class="src" style="margin-top:10px">Chương trình theo thư mời của Sun Property. Số lượng thư mời có hạn – đăng ký để đại lý giữ chỗ cho Anh/Chị.</p></div>'
+            '</div></div><script>(function(){if(Date.now()>Date.parse("2026-11-01T12:00:00+07:00")){var e=document.getElementById("su-kien");if(e)e.style.display="none"}})();</script></section>')
+
 def vitri_dark(sid='vi-tri', ctx='ADS'):
     I = RAW + '3c076ddb411cdc4df18a30f1fd09bd98b60ff86a/landing/sun-saphia/v4/img/'
     T = [('5\'', 'đi bộ', 'Biển Sơn Thủy (~400 m)'), ('3\'', 'phút', 'Chuỗi resort 5 sao ven biển'),
@@ -555,13 +572,13 @@ def ads(domain):
          'function cl(){m.hidden=true;document.documentElement.style.overflow="";try{v.pause()}catch(e){}}'
          'document.addEventListener("click",function(e){if(e.target.closest&&e.target.closest("[data-film]")){e.preventDefault();op()}else if(e.target===m||(e.target.closest&&e.target.closest(".vx")))cl()});'
          'document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!m.hidden)cl()});})();</script>'
-         '<div class="hcvt"><div class="wrap"><span class="tag">🔥 Dự kiến mở bán <b>cuối tháng 11</b></span>'
+         '<div class="hcvt"><div class="wrap"><span class="tag">🔥 Ra mắt &amp; nhận booking <b>01/11/2026</b></span>'
          '<h1 class="dp">Sun Saphia Residence</h1><p class="msg">Căn hộ <b>mặt biển đầu tiên</b> của Sun Group tại Đà Nẵng – mở cửa là biển</p>'
-         '<div class="cdn" data-cd="2026-11-30T08:00:00+07:00"><span class="cdl">⏳ Đếm ngược tới ngày mở bán dự kiến (cuối 11/2026)</span><div class="cdb"><div><b data-u="d">--</b><small>ngày</small></div><div><b data-u="h">--</b><small>giờ</small></div><div><b data-u="m">--</b><small>phút</small></div><div><b data-u="s">--</b><small>giây</small></div></div></div><script>(function(){var T=+new Date("2026-11-30T08:00:00+07:00");function z(n){return(n<10?"0":"")+n}function t(){var d=Math.max(0,T-Date.now())/1000;document.querySelectorAll(".cdn").forEach(function(e){var u={d:Math.floor(d/86400),h:Math.floor(d%%86400/3600),m:Math.floor(d%%3600/60),s:Math.floor(d%%60)};for(var k in u){var b=e.querySelector("[data-u="+k+"]");if(b)b.textContent=k=="d"?u[k]:z(u[k])}})}t();setInterval(t,1000)})();</script><div class="hnum"><div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>30 tầng</b><span>114 m · 782 căn</span></div>'
+         '<div class="cdn" data-cd="2026-11-01T09:00:00+07:00"><span class="cdl">⏳ Đếm ngược sự kiện ra mắt · 9:00 CN 01/11/2026 · Hilton Đà Nẵng</span><div class="cdb"><div><b data-u="d">--</b><small>ngày</small></div><div><b data-u="h">--</b><small>giờ</small></div><div><b data-u="m">--</b><small>phút</small></div><div><b data-u="s">--</b><small>giây</small></div></div></div><script>(function(){var T=+new Date("2026-11-01T09:00:00+07:00");function z(n){return(n<10?"0":"")+n}function t(){var d=Math.max(0,T-Date.now())/1000;document.querySelectorAll(".cdn").forEach(function(e){var u={d:Math.floor(d/86400),h:Math.floor(d%%86400/3600),m:Math.floor(d%%3600/60),s:Math.floor(d%%60)};for(var k in u){var b=e.querySelector("[data-u="+k+"]");if(b)b.textContent=k=="d"?u[k]:z(u[k])}var l=e.querySelector(".cdl");if(d<=0&&l)l.textContent="🎉 Sự kiện ra mắt 01/11/2026 đã diễn ra – đang nhận booking"})}t();setInterval(t,1000)})();</script><div class="hnum"><div><b>~400 m</b><span>ra bãi tắm Sơn Thủy</span></div><div><b>30 tầng</b><span>114 m · 782 căn</span></div>'
          '<div><b>2,45 ha</b><span>công viên ngay trước mặt</span></div><div><b>~48 năm</b><span>còn lại khi nhận nhà</span></div></div>'
          '<div class="hcta"><a class="btn" href="#dang-ky-dau">Nhận bảng giá gốc qua Zalo</a><button type="button" class="btn ghost" data-film>▶ Xem phim dự án 3 phút</button></div></div></div></section>'
          '<section class="hero cine2"><div class="hbody" id="dang-ky-dau"><div class="wrap"><div class="g2"><div class="hl">'
-         '<span class="tag">🔥 Dự kiến mở bán <b>cuối tháng 11</b></span>'
+         '<span class="tag">🔥 Ra mắt &amp; nhận booking <b>01/11/2026</b></span>'
          '<h2 class="dp">Bảng giá gốc từ <b>đại lý chính thức</b></h2>'
          + SLOGAN +
          '<ul class="ck"><li><b>Đại lý chính thức TATILAND</b> – bảng giá gốc từ đại lý, gửi qua Zalo khi công bố</li>'
@@ -578,15 +595,16 @@ def ads(domain):
        
         form('dau', 'ADS – form đầu trang', title='Nhận bảng giá gốc từ đại lý', note='Bảng giá gốc, mặt bằng tầng, chính sách – gửi qua Zalo ngay khi chủ đầu tư công bố. Đăng ký miễn phí.', h='h2'),
         hero_perks())
+    b += su_kien('ADS')
     b += tldr('Sun Saphia Residence', [('Dự án', 'Căn hộ mặt biển đầu tiên của Sun Group tại Đà Nẵng, 30 tầng, 782 căn'), ('Loại căn', 'Studio 30 m² · 1BR+ 50 m² · 2BR 60–70 m²'),
-        ('Pháp lý', '50 năm · Vietcombank, BIDV, NCB hỗ trợ vay'), ('Mở bán', 'Dự kiến cuối 11/2026'), ('Nhận bảng giá', 'Zalo 0904 567 009 · đại lý chính thức · không thu tiền')])
+        ('Pháp lý', '50 năm · Vietcombank, BIDV, NCB hỗ trợ vay'), ('Mở bán', 'Ra mắt 01/11/2026'), ('Nhận bảng giá', 'Zalo 0904 567 009 · đại lý chính thức · không thu tiền')])
     b += ('<section class="sec alt"><div class="wrap">' + sh('★', 'Thời điểm vàng', 'Vì sao <b>đăng ký sớm</b>?', 'o') + why_now() + '</div></section>')
     b += ('<section class="sec"><div class="wrap">' + sh('☀', 'Một ngày ở Saphia', 'Mở cửa ra là <b>biển</b>', 'y') +
           day4()
           + bgal() +
           '<p class="src" style="margin-top:8px">Ảnh chụp thực tế bãi biển Mỹ Khê – Sơn Thủy hướng về bán đảo Sơn Trà.</p></div></section>')
     b += qh4()
-    b += pband('30 tầng bên <b>biển Mỹ Khê</b>', 'Căn hộ cao tầng mặt biển đầu tiên của Sun Group tại Đà Nẵng – mở bán dự kiến cuối tháng 11.', 'ADS – dải ảnh tòa tháp')
+    b += pband('30 tầng bên <b>biển Mỹ Khê</b>', 'Căn hộ cao tầng mặt biển đầu tiên của Sun Group tại Đà Nẵng – sự kiện ra mắt 9:00 Chủ nhật 01/11/2026 tại Hilton Đà Nẵng.', 'ADS – dải ảnh tòa tháp')
     b += vitri_dark('vi-tri', 'ADS')
     b += ('<section class="sec alt" id="mat-bang"><div class="wrap">' + sh('04', 'Mặt bằng', 'Chọn căn trên <b>mặt bằng tầng</b>', 'n') + units_table() +
           '<div style="margin-top:20px">' + units_drawings() + '</div><div id="chon-can"></div></div></section>')
@@ -640,9 +658,9 @@ def vi_sao():
         ('Sun Group đã làm những dự án nào ở Đà Nẵng?', 'Du lịch – nghỉ dưỡng: Sun World Ba Na Hills (cáp treo, Cầu Vàng), InterContinental Danang Sun Peninsula Resort, Premier Village Danang Resort, Sun World Asia Park; biệt thự biển tại Premier Village. Căn hộ: Sun Cosmo, Sun Ponte, Sun Symphony ven sông Hàn; Sun Galaxy Complex; FourS Tower (Sun Riverpolis). Sun Saphia Residence là dự án căn hộ cao tầng mặt biển đầu tiên.'),
         ('Khu đất trước Sun Saphia sẽ làm gì?', 'UBND TP Đà Nẵng đã phê duyệt dự án Công viên công cộng (Quyết định 2958/QĐ-UBND) trên khoảng 2,45 ha đất thu hồi từ dự án Hòn Ngọc Á Châu, tổng mức đầu tư hơn 47 tỷ đồng, giai đoạn 2025–2027, gồm quảng trường biển, đường dạo, khu vui chơi, bãi đậu xe, khu tắm nước ngọt.'),
         ('Vì sao căn hộ mặt biển ở Đà Nẵng hiếm?', 'Biển là tài nguyên hữu hạn; dải đất ven biển Đà Nẵng phần lớn đã dành cho resort, khách sạn và không gian công cộng. Bãi biển là tài sản công, nên căn hộ có thể nhìn thẳng ra biển và đi bộ ra bãi tắm chỉ còn rất ít vị trí.'),
-        ('Căn hộ mặt biển Đà Nẵng đang chào bán giá bao nhiêu?', 'Theo giá chào bán trình bày tại Kick-off: studio khoảng 5,2–10,5 tỷ, 1BR 7,7–11,5 tỷ, 2BR 17,4–21,7 tỷ tùy dự án (The Soleil, Futa Residence, Nobu). Giá Sun Saphia Residence chưa công bố, dự kiến cuối 11/2026.'),
+        ('Căn hộ mặt biển Đà Nẵng đang chào bán giá bao nhiêu?', 'Theo giá chào bán trình bày tại Kick-off: studio khoảng 5,2–10,5 tỷ, 1BR 7,7–11,5 tỷ, 2BR 17,4–21,7 tỷ tùy dự án (The Soleil, Futa Residence, Nobu). Giá Sun Saphia Residence chưa công bố, dự kiến thông tin tại sự kiện ra mắt 01/11/2026.'),
         ('Mua căn hộ mặt biển để cho thuê có tốt không?', 'Đà Nẵng đón 15,86 triệu lượt khách 9 tháng đầu 2026 (+29,6%); khách sạn Sun Group miền Trung lấp đầy 81,3% năm 2026. Studio view biển đang cho thuê 2,2–2,9 triệu/đêm ngoài mùa cao điểm. Kết quả thực tế phụ thuộc giá mua, mùa vụ và cách vận hành.'),
-        ('Khi nào mở bán Sun Saphia Residence?', 'Dự kiến cuối tháng 11/2026, bàn giao tháng 11/2028. Đăng ký nhận thông tin, bảng giá là miễn phí.')])
+        ('Khi nào mở bán Sun Saphia Residence?', 'Sự kiện ra mắt, nhận booking 9:00 Chủ nhật 01/11/2026 tại Hilton Đà Nẵng; bàn giao dự kiến tháng 11/2028. Đăng ký nhận thông tin, bảng giá là miễn phí.')])
     b = hero
     b += tldr('vì sao Sun Group ra mắt căn hộ mặt biển tại Đà Nẵng', [
         ('Hành trình', 'Núi (Bà Nà) → resort, biệt thự biển (InterContinental, Premier Village) → căn hộ sông Hàn (Sun Cosmo, Ponte, Symphony) → Nam trung tâm (Galaxy, FourS) → căn hộ cao tầng mặt biển (Saphia)'),

@@ -94,6 +94,9 @@
     {id: 'dat', k: ['dat qua', 'mac qua', 'cao qua', 'dat the', 'dat vay', 'dat lam', 'chat qua', 'sao dat', 'gia cao', 'khong du tien', 'it tien', 'von it', 'von nho'],
       a: ['Dạ em hiểu ạ, số tiền lớn thì mình cân nhắc kỹ là đúng. Saphia chưa công bố giá nên con số Anh/Chị nghe được có thể chưa đúng ạ.\nNếu so đúng phân khúc căn hộ mặt biển Đà Nẵng đang bán (số liệu Kick-off): Studio The Soleil khoảng 5,2–5,5 tỷ, Nobu 6,3–6,4 tỷ, Futa 9,1–10,5 tỷ. So với căn trong phố thì chưa công bằng ạ.', 'Dạ chi phí là chuyện cần tính kỹ ạ. Mua căn hộ không phải bỏ hết một lần: thường đóng giãn theo tiến độ khoảng 2 năm tới bàn giao, hoặc tự bỏ khoảng 25% rồi vay ngân hàng. Studio 30–31 m² là dòng vốn vào nhẹ nhất.\nTầm ngân sách Anh/Chị thấy thoải mái là bao nhiêu ạ, để em xem căn nào vừa nhất?'],
       c: ['Studio', 'Cho thuê'], ask: 'Anh/Chị cho em xin số Zalo, có giá em tính sẵn theo ngân sách của mình ạ.', topic: 'Lo về giá / ngân sách'},
+    {id: 'sukien', k: ['su kien', 'ra mat', 'hilton', 'thu moi', 'mo ban', 'khi nao mo ban', 'bao gio ban', 'bao gio mo ban', 'ngay mo ban', 'dang ky tham du', 'tham du', 'khai truong', 'nhan booking khi nao', 'event'],
+      a: ['Dạ chủ đầu tư tổ chức sự kiện ra mắt "Chạm nhịp Ánh Dương – Bừng sáng vị thế" lúc 9:00 Chủ nhật 01/11/2026 tại khách sạn Hilton Đà Nẵng (50 Bạch Đằng, Hải Châu) ạ.\nTheo chương trình: 8:30 đón khách, 9:35 giới thiệu dự án, 10:18 chính thức nhận booking và tư vấn chuyên sâu, 11:15 bốc thăm may mắn.\nAnh/Chị có muốn em đăng ký thư mời để giữ chỗ tham dự không ạ?'],
+      c: ['Giá bán', 'Loại căn hộ'], ask: 'Anh/Chị để lại tên và Zalo, em đăng ký thư mời sự kiện 01/11 cho Anh/Chị ạ.', strong: 1, topic: 'Sự kiện ra mắt 01/11'},
     {id: 'vitri', k: ['vi tri', 'o dau', 'dia chi', 'cho nao', 'duong nao', 'khu nao', 'nam o', 'ban do', 'map', 'toa lac', 'phuong nao', 'quan nao'],
       a: ['Dạ dự án ở giao lộ Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, mặt tiền trục đường biển; ra biển Sơn Thủy – Mỹ Khê khoảng 400 m, ở giữa là công viên ạ.\nAnh/Chị đang ở Đà Nẵng hay ở xa ạ? Anh/Chị nhớ chỗ nào nhất: sân bay, cầu Rồng, Ngũ Hành Sơn hay Hội An, để em chỉ theo đó cho dễ hình dung?', 'Dạ Sun Saphia nằm góc Võ Nguyên Giáp – Trường Sa – Nguyễn Đức Thuận, mặt tiền trục đường biển, ngay dải resort Furama, Hyatt, Sheraton; qua công viên khoảng 400 m là tới bãi biển Sơn Thủy – Mỹ Khê ạ.\nAnh/Chị biết chỗ nào ở Đà Nẵng nhất, sân bay hay cầu Rồng, để em chỉ đường theo đó ạ?'],
       c: ['Từ sân bay', 'Từ cầu Rồng', 'Đi Hội An'], ask: 'Anh/Chị để lại Zalo, em gửi bản đồ và video vị trí thực tế ạ.', topic: 'Vị trí'},
@@ -334,7 +337,7 @@
   }
 
   /* ---------- Đang chat mà khách im lâu: nhắc nhẹ, gợi thêm câu hỏi (tối đa 2 lần) ---------- */
-  var IDLE_Q = ['Booking bao nhiêu, có hoàn không?', 'Khi nào mở bán?', 'Sở hữu 50 năm hay lâu dài?', 'Cho thuê được bao nhiêu một tháng?', 'Từ sân bay tới dự án bao xa?', 'Vay ngân hàng được bao nhiêu?', 'Có những loại căn nào?'];
+  var IDLE_Q = ['Sự kiện ra mắt 01/11 ở đâu?', 'Booking bao nhiêu, có hoàn không?', 'Khi nào mở bán?', 'Sở hữu 50 năm hay lâu dài?', 'Cho thuê được bao nhiêu một tháng?', 'Từ sân bay tới dự án bao xa?', 'Vay ngân hàng được bao nhiêu?', 'Có những loại căn nào?'];
   function armIdle() {
     clearTimeout(idleT);
     if (idleN >= 2 || outq.length) return;

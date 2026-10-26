@@ -592,3 +592,21 @@ main .hcvt p,main .hnum *,main .stats *,main .tag,main .btn,main .ey,main .cta p
 .gmap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .gml{position:absolute;right:10px;bottom:10px;background:#fff;color:var(--nv);font-weight:700;font-size:13px;padding:7px 12px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.2);text-decoration:none}
 @media(max-width:760px){.tmg{gap:8px}.tmg>div{padding:12px;gap:10px}.tmg b{flex-basis:44px;font-size:24px}.tmg span{font-size:14px}.gmap{min-height:300px;flex:none}}
+/* Sự kiện ra mắt 01/11 */
+.sec.sk{background:linear-gradient(170deg,#DDF1FB 0%,#FDF0E6 60%,#FFE4D2 100%)}
+.skg{gap:40px;align-items:center!important}
+.skg figure img{width:100%;height:auto!important;flex:none!important;aspect-ratio:1414/2000;object-fit:cover;border-radius:18px;box-shadow:0 24px 48px -24px rgba(39,82,134,.45)}
+.skh{font-size:clamp(30px,3.4vw,44px);line-height:1.15;margin:6px 0 14px}
+.skc{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:6px;color:var(--ink);font-size:16px}
+.ski{display:grid;grid-template-columns:1fr 1.3fr;gap:12px;margin-bottom:18px}
+.ski>div{background:#fff;border-radius:14px;padding:14px 16px;box-shadow:var(--sh)}
+.ski small{display:block;font:700 11px/1.2 'Be Vietnam Pro',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--or)}
+.ski b{display:block;color:var(--nv);font-size:17px;margin-top:4px}.ski span{display:block;color:var(--mut);font-size:14px}
+.ska{list-style:none;padding:0 0 0 18px;margin:0 0 18px;border-left:2px solid #F3B48C}
+.ska li{position:relative;display:flex;gap:16px;padding:7px 0}
+.ska li::before{content:"";position:absolute;left:-25px;top:13px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid var(--or)}
+.ska time{flex:0 0 118px;font-weight:700;color:#C2477A;font-variant-numeric:tabular-nums}
+.ska span{color:var(--nv)}
+.btn.ghost2{background:#fff;color:var(--nv);box-shadow:var(--sh)}
+@media(max-width:760px){.ski{grid-template-columns:1fr}.ska time{flex-basis:104px;font-size:14px}.ska span{font-size:14.5px}}
+.sk .hcta{justify-content:flex-start;margin:0;padding:0;gap:12px;display:flex;flex-wrap:wrap}@media(max-width:760px){.sk .hcta{justify-content:center}}
