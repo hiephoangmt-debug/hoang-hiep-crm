@@ -621,3 +621,9 @@ main .hcvt p,main .hnum *,main .stats *,main .tag,main .btn,main .ey,main .cta p
 .tgm div{background:var(--pp);border-radius:12px;padding:10px;text-align:center}.tgm b{display:block;font-size:26px;color:var(--or);line-height:1.1}.tgm span{font-size:13px;color:var(--mut);font-weight:600}
 .tgi .ck{margin-bottom:16px}
 @media(max-width:760px){.tgp{grid-template-columns:1fr}.tgt button{padding:9px 13px;font-size:14px}.tgt{gap:6px}}
+/* Chữ thư mời chạy sáng */
+.skg figure{position:relative;overflow:hidden;border-radius:18px}
+.skshine{position:absolute;left:0;right:0;top:24%;height:26%;pointer-events:none;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+background:linear-gradient(105deg,transparent 0%,transparent 42%,rgba(255,247,214,.2) 46%,rgba(255,255,255,.9) 50%,rgba(255,236,170,.3) 54%,transparent 58%,transparent 100%);background-size:300% 100%;background-position:100% 0;animation:skshine 3.6s ease-in-out infinite}
+@keyframes skshine{0%{background-position:100% 0}55%,100%{background-position:0% 0}}
+@media (prefers-reduced-motion:reduce){.skshine{animation:none;display:none}}
