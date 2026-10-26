@@ -691,11 +691,13 @@ function clipTower(on){
     (Array.isArray(o.material)?o.material:[o.material]).forEach(function(m){ m.clippingPlanes=on?[clipP]:[]; m.clipShadows=true; m.needsUpdate=true; }); });
   clipped=true;
 }
-var planTx=[null,null];   // [tầng 2–29, tầng 30 (layout riêng, cắt từ bản vẽ CĐT)]
-var PLAN30_URL='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@890d9f31fe2f4548a5d6c9f57406170acbe1cdf9/projects/sun-saphia/images/mat-bang-tang-30-4d.webp';
-function planTex(f){ if(!planMesh) return; var k=f>=30?1:0;
-  if(!planTx[k]){ var ld=new THREE.TextureLoader(); ld.setCrossOrigin('anonymous'); var t=ld.load(PLAN30_URL); t.encoding=THREE.sRGBEncoding; t.anisotropy=Math.min(16,renderer.capabilities.getMaxAnisotropy()); t.generateMipmaps=true; t.minFilter=THREE.LinearMipmapLinearFilter; planTx[k]=t; }
-  if(planMesh.material.map!==planTx[k]){ planMesh.material.map=planTx[k]; planMesh.material.needsUpdate=true; } }
+var planTx=[null,null,null];   // [tầng 3A–29, tầng 30 (layout riêng), tầng 3 (có sân vườn từng căn)]
+var PLAN_IMG='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@a6fed7e2d2c6fe634bb82ba40ee9876cc94ab96d/projects/sun-saphia/images/';
+var PLAN_F=[null,PLAN_IMG+'mat-bang-tang-30-4d.webp',PLAN_IMG+'mat-bang-tang-3-4d.webp'], PLAN_H=[49.6,49.6,53.4];   // ảnh tầng 3 dài thêm phía sau (sân vườn)
+function planTex(f){ if(!planMesh) return; var k=f>=30?1:f===3?2:0;
+  if(!planTx[k]){ var ld=new THREE.TextureLoader(); ld.setCrossOrigin('anonymous'); var t=ld.load(PLAN_F[k]); t.encoding=THREE.sRGBEncoding; t.anisotropy=Math.min(16,renderer.capabilities.getMaxAnisotropy()); t.generateMipmaps=true; t.minFilter=THREE.LinearMipmapLinearFilter; planTx[k]=t; }
+  if(planMesh.material.map!==planTx[k]){ planMesh.material.map=planTx[k]; planMesh.material.needsUpdate=true; }
+  planMesh.scale.x=PLAN_H[k]/49.6; planMesh.position.x=X1-(PLAN_H[k]/2-9.9); }
 function makePlan(){
   var ld=new THREE.TextureLoader(); ld.setCrossOrigin('anonymous');
   var tx=ld.load(PLAN_URL); planTx[0]=tx; tx.encoding=THREE.sRGBEncoding; tx.anisotropy=Math.min(16,renderer.capabilities.getMaxAnisotropy()); tx.generateMipmaps=true; tx.minFilter=THREE.LinearMipmapLinearFilter;
@@ -703,8 +705,11 @@ function makePlan(){
   planMesh=new THREE.Mesh(g,new THREE.MeshBasicMaterial({map:tx,transparent:true,alphaTest:.04,toneMapped:false}));
   planMesh.position.set(X1-14.9,0,Z0+27.2); planMesh.renderOrder=3; T.add(planMesh);
 }
+var lastPY=null;
 function updPlan(fly){
   var f=+floorEl.value, y=planY(f);
+  if(!fly&&lastPY!==null&&lastPY!==y){ var dy=T.localToWorld(new THREE.Vector3(0,y,0)).y-T.localToWorld(new THREE.Vector3(0,lastPY,0)).y; camera.position.y+=dy; controls.target.y+=dy; controls.update(); }   // đổi tầng: camera đi theo mặt bằng
+  lastPY=y;
   planMesh.position.y=y+.4; clipP.constant=T.localToWorld(new THREE.Vector3(0,y+.5,0)).y;
   mainLbl.textContent='MẶT BẰNG TẦNG '+FN(f)+' · bấm vào căn để xem';
   floorOut.textContent='Tầng '+FN(f)+' · bấm căn';
@@ -828,7 +833,7 @@ function viewFromUnit(r){
     rc.setFromCamera(ndc,camera); var hit=rc.intersectObject(planMesh)[0]; if(!hit) return;
     var lp=T.worldToLocal(hit.point.clone()), u=lp.z-Z0, v=X1-lp.x, f=uFloor(), r=f>=30?unitAt30(u,v):unitAt(u,v); if(r&&f===29&&(r[0]==='18'||r[0]==='19')) return; if(r) showUnit(r); });
 })();
-var setPlan0=setPlan; setPlan=function(on){ setPlan0(on); mainLbl.style.visibility=on?'hidden':''; if(ofcBtn) ofcBtn.style.display=on?'block':'none'; if(!on){ uHi.visible=false; roofG.visible=false; if(uCard) uCard.style.display='none'; } };   // ẩn nhãn nổi trên nóc khi xem mặt bằng (khỏi che bản vẽ)
+var setPlan0=setPlan; setPlan=function(on){ setPlan0(on); mainLbl.style.visibility=on?'hidden':''; if(ofcBtn) ofcBtn.style.display=on?'block':'none'; if(!on){ lastPY=null; uHi.visible=false; roofG.visible=false; if(uCard) uCard.style.display='none'; } };   // ẩn nhãn nổi trên nóc khi xem mặt bằng (khỏi che bản vẽ)
 
 /* ---------- Initial camera ---------- */
 // default view framed like the aerial render: from the north-west, sea top-left, park in front of the tower

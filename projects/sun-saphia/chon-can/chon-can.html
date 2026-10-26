@@ -187,10 +187,45 @@ var U30=[['07','1PN+1','EN',330,437,495,545],['08','1PN','E',495,437,610,575],['
  ['16','1PN+1','W',612,600,705,738],['15','1PN','W',705,600,822,738],['12B','1PN','W',822,600,938,738],['12A','1PN','W',938,600,1055,738],['12','1PN','WS',1055,572,1172,738]];
 var A30={'07':[71.29,77.32],'08':[64.63,69.16],'09':[52.20,56.42],'10':[64.37,69.16],'11':[51.18,56.42],'06':[83.97,91.15],'05':[64.41,69.27],'03A':[64.08,69.27],
  '03':[63.73,68.71],'02':[63.34,68.23],'01':[63.02,67.64],'16':[49.99,55.18],'15':[63.02,67.64],'12B':[63.02,67.64],'12A':[62.97,67.64],'12':[73.71,80.97]};
-COL['1PN']='#4FB3E0'; NAME['1PN']='1PN';
+COL['1PN']='#5DB977'; NAME['1PN']='1PN'; TINT['1PN']='#c9ebd2'; LIGHT['1PN']='#eaf7ee';
 function m2(x){ return String(x).replace('.',','); }
 function areaOf(id){ var L=LAY(state.floor); if(L==='T30') return A30[id]; return (AREA_F[L]&&AREA_F[L][id])||AREA[id]; }
 function areaTxt(id){ var a=areaOf(id), L=LAY(state.floor), b=BAL[L]&&BAL[L][id]; return a?'Thông thủy '+m2(a[0])+' m² · tim tường '+m2(a[1])+' m²'+(b?' · ban công '+m2(b)+' m²':''):''; }
+// sân vườn / ban công lớn của từng căn tầng 2–3 (đo trên bản vẽ CĐT, khớp diện tích ban công): [u0,u1,v0,v1]...
+var GARD={'28':[[19.8,23.8,19.7,26.95]],'27':[[23.8,27.6,19.7,26.95]],'26':[[27.6,31.4,19.7,26.95]],'25':[[31.4,33.4,19.7,26.95],[33.4,35.2,19.7,33.83]],
+ '24':[[35.2,39,19.7,33.83]],'23':[[39,42.8,19.7,33.83]],'22':[[42.8,46.6,19.7,33.83]],'21':[[46.6,50.4,19.7,33.83]],'20':[[50.4,54.4,19.7,33.53]],
+ '01':[[19.8,26.3,26.95,29.85]],'02':[[19.8,26.3,29.85,32.75]],'03':[[19.8,24.8,32.75,39.7],[9.9,24.8,39.7,43]],'03A':[[0,9.9,39.7,43]]};
+function svgGardens(fx,fy,k,LL,ia){ var B=BAL[LL]; if(!B) return ''; var o=['<g'+(ia?' style="pointer-events:none"':'')+'>'];
+  Object.keys(GARD).forEach(function(id){ if(!B[id]) return; var R=GARD[id];
+    R.forEach(function(q){ o.push('<rect x="'+fx(q[0])+'" y="'+fy(q[2])+'" width="'+(q[1]-q[0])*k+'" height="'+(q[3]-q[2])*k+'" fill="#a8d08d" stroke="#fff" stroke-width="'+Math.max(1,k*.08)+'" stroke-dasharray="'+k*.3+' '+k*.2+'"/>');
+      for(var tu=q[0]+.9;tu<q[1]-.5;tu+=1.8) for(var tv=q[2]+1.1;tv<q[3]-.5;tv+=2.2) o.push('<circle cx="'+fx(tu)+'" cy="'+fy(tv)+'" r="'+k*.42+'" fill="#6fa857" fill-opacity=".75"/>'); });
+    // căn có sân chữ L (03, 25): ghi đủ trên phần dọc, phần còn lại ghi "(tiếp)" để thấy là cùng 1 sân
+    R.forEach(function(q,qi){ var main=R.length===1||(id==='03'?qi===0:qi===R.length-1);
+      var cu=(q[0]+q[1])/2, cv=(q[2]+q[3])/2, vert=(q[3]-q[2])>(q[1]-q[0])*1.3, fs=k*.52, tx=fx(cu), ty=fy(cv);
+      if(!main&&(q[1]-q[0])<2.5&&(q[3]-q[2])<8) return;
+      o.push('<text x="'+tx+'" y="'+ty+'" font-size="'+fs+'" font-weight="800" fill="#1f4415" text-anchor="middle" dominant-baseline="middle"'+(vert?' transform="rotate(-90 '+tx+' '+ty+')"':'')+' paint-order="stroke" stroke="#eef7e6" stroke-width="'+fs*.35+'">'+(main?'Sân vườn '+id+(R.length>1?' (chữ L)':'')+' · '+m2(B[id])+' m²':'Sân vườn '+id+' (tiếp)')+'</text>'); }); });
+  o.push('</g>'); return o.join(''); }
+// ảnh nền 4D cho tầng 3 (có sân vườn), khung u 0–54,4 · v −9,9–43,5
+window.__bld3=function(k){ var f0=state.floor; state.floor=3; var S0=S; S=k; var v0=-9.9, W=Math.round(54.4*k), H=Math.round(53.4*k), o=[];
+  function fx(u){return +(u*k).toFixed(2)} function fy(v){return +((v-v0)*k).toFixed(2)}
+  var bp=roundPath(OUT,ROUND,fx,fy);
+  o.push('<svg xmlns="http://www.w3.org/2000/svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" font-family="Be Vietnam Pro,Arial,sans-serif"><defs><clipPath id="c"><path d="'+bp+'"/></clipPath></defs>');
+  o.push(svgGardens(fx,fy,k,'T3',false));
+  o.push('<path d="'+bp+'" fill="#f1f3f5"/><g clip-path="url(#c)">');
+  CORR.forEach(function(c){ o.push('<rect x="'+fx(c[0])+'" y="'+fy(c[1])+'" width="'+(c[2]-c[0])*k+'" height="'+(c[3]-c[1])*k+'" fill="#f7f8fa"/>'); });
+  o.push(svgCores(fx,fy,k));
+  U.forEach(function(r){ var t=r[1], x=fx(r[2]), y=fy(r[4]), w=(r[3]-r[2])*k, h=(r[5]-r[4])*k, M=mmul([k,0,0,k,0,-v0*k],unitM(r));
+    var fp='M'+SPEC[SK(r)].floor.map(function(p){ var q=mapP(M,p); return q[0].toFixed(1)+' '+q[1].toFixed(1); }).join(' L')+'Z';
+    o.push('<path d="'+fp+'" fill="'+COL[t]+'"/><g transform="'+mstr(M)+'">'+svgSpec(SK(r),1.6).replace('fill="#f3e6d4"','fill="'+TINT[t]+'"')+'</g><path d="'+fp+'" fill="none" stroke="'+COL[t]+'" stroke-width="'+k*.12+'"/>');
+    var cx=x+w/2, cy=y+h/2, LC=SPEC[SK(r)].lc; if(LC){ var lp=mapP(M,LC); cx=lp[0]; cy=lp[1]; }
+    o.push('<rect x="'+(cx-k*1.25)+'" y="'+(cy-k*.85)+'" width="'+k*2.5+'" height="'+k*1.7+'" rx="'+k*.3+'" fill="#fff" fill-opacity=".92" stroke="'+COL[t]+'" stroke-width="'+k*.1+'"/><text x="'+cx+'" y="'+(cy+k*.05)+'" font-size="'+k*.8+'" font-weight="800" fill="#0A2540" text-anchor="middle">'+r[0]+'</text><text x="'+cx+'" y="'+(cy+k*.68)+'" font-size="'+k*.48+'" font-weight="700" fill="#0A2540" text-anchor="middle">'+NAME[t]+'</text>'); });
+  o.push('</g><path d="'+bp+'" fill="none" stroke="#0A2540" stroke-width="'+k*.35+'"/>');
+  var lx=fx(36.5), ly=fy(34.6), lw=17.5*k, lh=8.6*k, fs=k*.9;
+  o.push('<rect x="'+lx+'" y="'+ly+'" width="'+lw+'" height="'+lh+'" rx="'+k*.6+'" fill="#fff" fill-opacity=".94" stroke="#0A2540" stroke-width="'+k*.12+'"/><text x="'+(lx+k*.9)+'" y="'+(ly+k*1.6)+'" font-size="'+fs+'" font-weight="800" fill="#E8460F">CHÚ THÍCH · TẦNG 3 · 28 CĂN</text>');
+  [['STU','Studio · 19 căn'],['1PN+1','1PN+1 · 4 căn'],['2PN','2PN góc bo · 5 căn']].forEach(function(e,i){ var yy=ly+k*(2.6+i*1.9);
+    o.push('<rect x="'+(lx+k*.9)+'" y="'+yy+'" width="'+k*1.4+'" height="'+k*1.4+'" rx="'+k*.25+'" fill="'+TINT[e[0]]+'" stroke="'+COL[e[0]]+'" stroke-width="'+k*.2+'"/><text x="'+(lx+k*2.8)+'" y="'+(yy+k*1.1)+'" font-size="'+fs+'" font-weight="800" fill="#0A2540">'+e[1]+'</text>'); });
+  o.push('<rect x="'+(lx+k*10.4)+'" y="'+(ly+k*2.6)+'" width="'+k*1.4+'" height="'+k*1.4+'" fill="#a8d08d"/><text x="'+(lx+k*12.2)+'" y="'+(ly+k*3.7)+'" font-size="'+fs+'" font-weight="800" fill="#0A2540">Sân vườn</text>');
+  o.push('</svg>'); S=S0; state.floor=f0; return o.join(''); };
 function showOfc(){ var L=LAY(state.floor), ov=document.createElement('div'); ov.id='lbx';
   ov.innerHTML='<div class="w"><button class="c">✕ Đóng</button><img alt="Bản vẽ mặt bằng tầng '+fname(state.floor)+' của CĐT" src="'+IMG+OFC[L]+'"></div>';
   ov.querySelector('.c').onclick=function(){ ov.remove(); }; ov.onclick=function(e){ if(e.target===ov) ov.remove(); }; document.body.appendChild(ov); }
@@ -445,13 +480,14 @@ function plan(){
   });
   o.push('</g>');
   o.push('<path d="'+bp+'" fill="none" stroke="#0A2540" stroke-width="5" stroke-linejoin="round" style="pointer-events:none"/>');
-  if(LL==='T3'){ o.push('<rect x="'+X(19.8)+'" y="'+(Y(19.7)+3)+'" width="'+34.6*S+'" height="'+2.2*S+'" rx="6" fill="#9cc98a"/><text x="'+X(37)+'" y="'+(Y(20.8)+4)+'" font-size="11.5" font-weight="800" fill="#24451a" text-anchor="middle">SÂN VƯỜN TẦNG 3 · ban công / sân lớn các căn 20–28</text>'); }
+  o.push(svgGardens(X,Y,S,LL,true));
   var CN={STU:0,'1PN+1':0,'2PN':0}; U.forEach(function(r){ if(onFloor(r)) CN[r[1]]++; });
   // la bàn + thước tỷ lệ
   var cx=X(28), cy=Y(-5);
   o.push('<g transform="translate('+cx+' '+cy+') rotate(-90)"><circle r="20" fill="#fff" stroke="#0A2540" stroke-width="2"/><path d="M0 -16 L6 2 L0 -3 L-6 2Z" fill="#FF6A2B"/><text y="-22" font-size="11" font-weight="800" text-anchor="middle" fill="#0A2540">B</text></g>');
-  o.push('<g transform="translate('+X(30)+' '+(Y(37.5))+')"><rect width="'+10*S+'" height="6" fill="#0A2540"/><rect width="'+5*S+'" height="6" fill="#fff" stroke="#0A2540"/><text x="0" y="-5" font-size="10" font-weight="700" fill="#41505f">0</text><text x="'+10*S+'" y="-5" font-size="10" font-weight="700" fill="#41505f" text-anchor="middle">10 m</text></g>');
-  o.push('<g font-size="11" font-weight="700" fill="#0A2540" transform="translate('+X(24)+' '+Y(23)+')">'
+  var SB=LL==='T3'?[28,37.5]:[30,37.5], LG=LL==='T3'?[41,34.3]:LL==='T2'?[28,23]:[24,23];
+  o.push('<g transform="translate('+X(SB[0])+' '+(Y(SB[1]))+')"><rect width="'+10*S+'" height="6" fill="#0A2540"/><rect width="'+5*S+'" height="6" fill="#fff" stroke="#0A2540"/><text x="0" y="-5" font-size="10" font-weight="700" fill="#41505f">0</text><text x="'+10*S+'" y="-5" font-size="10" font-weight="700" fill="#41505f" text-anchor="middle">10 m</text></g>');
+  o.push('<g font-size="11" font-weight="700" fill="#0A2540" transform="translate('+X(LG[0])+' '+Y(LG[1])+')">'
     +'<rect width="14" height="14" fill="#E86A78"/><text x="20" y="11">Studio · '+CN.STU+' căn</text>'
     +'<rect y="20" width="14" height="14" fill="#4FB3E0"/><text x="20" y="31">1PN+1 · '+CN['1PN+1']+' căn</text>'
     +'<rect y="40" width="14" height="14" fill="#F2C14E"/><text x="20" y="51">2PN · '+CN['2PN']+' căn (góc bo)</text>'
@@ -463,10 +499,60 @@ function plan(){
   [].forEach.call(document.querySelectorAll('#plan .u'),function(el){ el.addEventListener('click',function(){ select(+el.getAttribute('data-i')); }); });
   filter();
 }
+/* ---------- tầng 30 vẽ cùng kiểu các tầng dưới, kích thước đo trên bản vẽ CĐT ----------
+   mỗi căn ghép từ layout có sẵn (1PN+1, 2PN góc bo, studio lớn đầu hồi) co giãn theo đúng khung căn tầng 30 */
+var OUT30=[[0,0],[48.1,0],[48.1,8.8],[54.4,8.8],[54.4,19.7],[19.8,19.7],[19.8,39.7],[0,39.7]], ROUND30={0:1.8,3:1.5,4:1.5,6:1.8,7:1.8};
+var CORR30=[[9.2,9,48.1,10.7],[9.2,7.25,10.4,32.45],[45,0,48.1,10.7]];
+// [mã căn, u0,u1, v0,v1, hướng mặt, layout gốc, lật, [mặt kính dài, ngắn] cho căn góc]
+var G30={'07':[[0,10.7,0,7.25,'E','2PN',0,['E','N']]],'08':[[10.7,18.1,0,9,'E','1PN+1',0]],'09':[[18.1,24.2,0,9,'E','1PN+1',1]],'10':[[24.2,31.7,0,9,'E','1PN+1',0]],'11':[[31.7,37.6,0,9,'E','1PN+1',1]],
+ '06':[[0,9,7.25,11.05,'N','STU',0],[0,9,11.05,17.1,'N','1PN+1',1]],'05':[[0,9,17.1,25,'N','1PN+1',0]],'03A':[[0,9,25,32.45,'N','1PN+1',1]],
+ '03':[[0,9.9,32.45,39.7,'W','2PN',0,['W','N']]],'02':[[9.9,19.8,32.45,39.7,'W','2PN',0,['W','S']]],'01':[[10.4,19.8,24.6,32.45,'S','1PN+1',0]],
+ '16':[[17.6,24.2,10.7,19.7,'W','1PN+1',1]],'15':[[24.2,31.8,10.7,19.7,'W','1PN+1',0]],'12B':[[31.8,39.3,10.7,19.7,'W','1PN+1',1]],'12A':[[39.3,46.8,10.7,19.7,'W','1PN+1',0]],'12':[[46.8,54.4,8.8,19.7,'W','STUL',0]]};
+function partRow(id,g){ var tp=g[5]; return [g[6]?'07':'xx', tp==='2PN'?'2PN':'STU', g[0],g[1],g[2],g[3], g[4], g[7]||null, tp]; }
+function partM(g){
+  var r=partRow('',g), o=orient(r), wid=(o.face==='E'||o.face==='W')?g[1]-g[0]:g[3]-g[2], dep=(o.face==='E'||o.face==='W')?g[3]-g[2]:g[1]-g[0];
+  if(r[1]==='2PN'){ wid=(o.face==='E'||o.face==='W')?g[1]-g[0]:g[3]-g[2]; dep=(o.face==='E'||o.face==='W')?g[3]-g[2]:g[1]-g[0]; }
+  var u0=g[0],u1=g[1],v0=g[2],v1=g[3], P={E:[1,0,0,1,u0,v0],W:[-1,0,0,-1,u1,v1],N:[0,-1,1,0,u0,v1],S:[0,1,-1,0,u1,v0]}[o.face];
+  return mmul(P,mmul([wid/o.W2,0,0,dep/o.D2,0,0],o.m));
+}
+// vẽ tầng 30 ở tỷ lệ k (px/m); fx, fy: đổi toạ độ (u,v) → px; ia: có nhóm bấm được
+function svg30(fx,fy,k,ia,sc){
+  var o=[], bp=roundPathK(OUT30,ROUND30,fx,fy,k);
+  o.push('<defs><clipPath id="b30"><path d="'+bp+'"/></clipPath></defs><path d="'+bp+'" fill="#e9edf1"/><g clip-path="url(#b30)">');
+  CORR30.forEach(function(c){ o.push('<rect x="'+fx(c[0])+'" y="'+fy(c[1])+'" width="'+(c[2]-c[0])*k+'" height="'+(c[3]-c[1])*k+'" fill="#f4f6f8"/>'); });
+  o.push(svgCores(fx,fy,k));
+  U30.forEach(function(r,j){ var t=r[1], parts=G30[r[0]], A=[fx(0)-0*k,fy(0)]; var g='<g'+(ia?' class="u" data-j="'+j+'"':'')+'>', box=[1e9,1e9,-1e9,-1e9];
+    parts.forEach(function(q){ var M=mmul([k,0,0,k,fx(0),fy(0)],partM(q)), sk=q[5];
+      var fp='M'+SPEC[sk].floor.map(function(p){ var z=mapP(M,p); return z[0].toFixed(1)+' '+z[1].toFixed(1); }).join(' L')+'Z';
+      g+='<path class="b" d="'+fp+'" fill="'+COL[t]+'" stroke="#fff" stroke-width="'+(ia?2:k*.05)+'"/>';
+      g+='<g transform="'+mstr(M)+'"'+(ia?' opacity=".9" style="pointer-events:none"':'')+'>'+svgSpec(sk,sc).replace('fill="#f3e6d4"','fill="'+TINT[t]+'"')+'</g>';
+      box=[Math.min(box[0],q[0]),Math.min(box[1],q[2]),Math.max(box[2],q[1]),Math.max(box[3],q[3])]; });
+    var cx=fx((box[0]+box[2])/2), cy=fy((box[1]+box[3])/2), bw=k*2.9, bh=k*1.75;
+    g+='<rect x="'+(cx-bw/2)+'" y="'+(cy-bh/2)+'" width="'+bw+'" height="'+bh+'" rx="'+k*.3+'" fill="#fff" fill-opacity=".9" stroke="'+COL[t]+'" stroke-width="'+k*.1+'"/>';
+    g+='<text x="'+cx+'" y="'+(cy+k*.02)+'" font-size="'+k*.78+'" font-weight="800" fill="#0A2540" text-anchor="middle">30'+r[0]+'</text><text x="'+cx+'" y="'+(cy+k*.66)+'" font-size="'+k*.46+'" font-weight="700" fill="#0A2540" text-anchor="middle">'+NAME[t]+' · '+m2(A30[r[0]][0])+'m²</text></g>';
+    o.push(g); });
+  o.push('</g><path d="'+bp+'" fill="none" stroke="#0A2540" stroke-width="'+Math.max(3,k*.35)+'" stroke-linejoin="round" style="pointer-events:none"/>');
+  return o.join('');
+}
+function roundPathK(pts,rd,fx,fy,k){ var S0=S; S=k; var r=roundPath(pts,rd,fx,fy); S=S0; return r; }
+function legend30(x,y,k){ var c={'1PN':0,'1PN+1':0,'2PN':0}; U30.forEach(function(r){ c[r[1]]++; }); var o=[], fs=k*.95;
+  o.push('<rect x="'+x+'" y="'+y+'" width="'+16*k+'" height="'+9.4*k+'" rx="'+k*.6+'" fill="#fff" fill-opacity=".94" stroke="#0A2540" stroke-width="'+k*.12+'"/><text x="'+(x+k*.9)+'" y="'+(y+k*1.7)+'" font-size="'+fs+'" font-weight="800" fill="#E8460F">CHÚ THÍCH · TẦNG 30 · 16 CĂN</text>');
+  [['1PN','1PN · '+c['1PN']+' căn'],['1PN+1','1PN+1 · '+c['1PN+1']+' căn'],['2PN','2PN · '+c['2PN']+' căn']].forEach(function(e,i){ var yy=y+k*(3+i*2.1);
+    o.push('<rect x="'+(x+k*.9)+'" y="'+yy+'" width="'+k*1.5+'" height="'+k*1.5+'" rx="'+k*.25+'" fill="'+TINT[e[0]]+'" stroke="'+COL[e[0]]+'" stroke-width="'+k*.2+'"/><text x="'+(x+k*3)+'" y="'+(yy+k*1.2)+'" font-size="'+fs+'" font-weight="800" fill="#0A2540">'+e[1]+'</text>'); });
+  return o.join(''); }
+// ảnh nền cho mô hình 4D (khung u 0–54,4 · v −9,9–39,7 như các tầng dưới)
+window.__bld30=function(k){ var W=Math.round(54.4*k),H=Math.round(49.6*k); function fx(u){return +(u*k).toFixed(2)} function fy(v){return +((v+9.9)*k).toFixed(2)}
+  return '<svg xmlns="http://www.w3.org/2000/svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" font-family="Be Vietnam Pro,Arial,sans-serif">'+svg30(fx,fy,k,false,1.6)+legend30(fx(24),fy(23),k)+'</svg>'; };
 function plan30(){
-  var h=fbar()+'<div class="ofc"><img alt="Mặt bằng tầng 30" src="'+IMG+OFC.T30+'">';
-  U30.forEach(function(r,j){ h+='<button type="button" class="hot" data-j="'+j+'" title="SP30'+r[0]+'" style="left:'+(r[3]/15)+'%;top:'+(r[4]/12)+'%;width:'+((r[5]-r[3])/15)+'%;height:'+((r[6]-r[4])/12)+'%"></button>'; });
-  h+='</div><div class="l30">'+U30.map(function(r,j){ return '<button type="button" data-j="'+j+'" style="border-left:5px solid '+COL[r[1]]+'">SP30'+r[0]+' · '+NAME[r[1]]+'</button>'; }).join('')+'</div>';
+  var W=Math.round(X(54.4)+60), H=Math.round(Y(39.7)+70), o=[];
+  o.push('<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" font-family="Be Vietnam Pro,Arial,sans-serif"><defs><linearGradient id="sea" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2f93c2"/><stop offset="1" stop-color="#7fd0e4"/></linearGradient></defs>');
+  o.push('<rect width="'+W+'" height="'+H+'" fill="#f7f4ee"/><rect width="'+W+'" height="36" fill="url(#sea)"/><text x="'+W/2+'" y="24" font-size="15" font-weight="800" fill="#fff" text-anchor="middle">▲ BIỂN ĐÔNG · ĐƯỜNG TRƯỜNG SA</text>');
+  o.push('<text x="16" y="'+(Y(20))+'" font-size="12" font-weight="800" fill="#41505f" transform="rotate(-90 16 '+Y(20)+')" text-anchor="middle">◀ NGUYỄN ĐỨC THUẬN · SƠN TRÀ (BẮC)</text>');
+  o.push('<text x="'+(X(37))+'" y="'+(Y(39.7)+30)+'" font-size="12" font-weight="800" fill="#41505f" text-anchor="middle">▼ PHÍA SAU · SÔNG HÀN · TRUNG TÂM TP</text>');
+  o.push('<text x="'+X(47)+'" y="'+Y(-4)+'" font-size="12" font-weight="700" fill="#5d6b7a" text-anchor="middle">Tầng 30 không có khối căn 18–19</text>');
+  o.push(svg30(X,Y,S,true,.4)); o.push(legend30(X(24),Y(23),S*.75));
+  o.push('</svg>');
+  var h=fbar()+o.join('')+'<div class="l30">'+U30.map(function(r,j){ return '<button type="button" data-j="'+j+'" style="border-left:5px solid '+COL[r[1]]+'">SP30'+r[0]+' · '+NAME[r[1]]+'</button>'; }).join('')+'</div>';
   document.getElementById('plan').innerHTML=h; document.getElementById('ofcB').onclick=showOfc;
   [].forEach.call(document.querySelectorAll('#plan [data-j]'),function(el){ el.addEventListener('click',function(){ select30(+el.getAttribute('data-j')); }); });
   filter();
