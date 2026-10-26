@@ -476,15 +476,36 @@ var ZM=CZ, SL=0, XS=CX;
 var XA=X0, XB=X1, ZA=Z0, ZB=Z1, XW=X0, ZW=(Z0+CZ)/2, WL=0, WD=0, NX=X1, NZ=Z1;
 // --- Đế 2 tầng: cột trắng, kính sáng ấm, góc bo tròn ---
 var PX0=X0-2, PX1=X1+11, PZ0=Z0-2, PZ1=Z1+2, PW=PX1-PX0, PD=PZ1-PZ0, PCX=(PX0+PX1)/2, PCZ=(PZ0+PZ1)/2, WH=FL[3];
-slab(A,rrect(PW-2.4,PD-2.4,7),0,WH-.8,warm).position.set(PCX,0,PCZ);
-var wc=[]; for(var x=PX0+5;x<=PX1-5;x+=4.2){ wc.push([x,PZ0+.6]); wc.push([x,PZ1-.6]); } for(var z=PZ0+5;z<=PZ1-5;z+=4.2){ wc.push([PX1-.6,z]); wc.push([PX0+.6,z]); }
+/* chân đế theo đúng đường bao mặt bằng tầng 2 của CĐT (u: Bắc→Nam, v: từ biển vào, mét):
+   góc Tây Bắc bo elip 17 × 11 m, giếng trời cạnh khối 18–19, khoảng trống phía sau giữa sân căn 03 và vườn sau gym */
+var OUT2=[[0,-9.9],[54.4,-9.9],[54.4,0],[51.5,0],[51.5,8.8],[54.4,8.8],[54.4,43.4],[33.9,43.4],[33.9,27.65],[24.9,27.65],[24.9,43.4],[0,43.4]], ROUND2={0:[17,11],1:1.8,2:.6,5:1.5,7:1.8,10:1.8,11:1.8};
+function out2Dense(){ var P=OUT2, n=P.length, o=[];
+  for(var i=0;i<n;i++){ var p=P[i], r=ROUND2[i], a=P[(i+n-1)%n], b=P[(i+1)%n];
+    if(!r){ o.push(p); continue; }
+    var rx=r.length?r[0]:r, ry=r.length?r[1]:r, la=Math.hypot(p[0]-a[0],p[1]-a[1]), lb=Math.hypot(b[0]-p[0],b[1]-p[1]);
+    var di=[(p[0]-a[0])/la,(p[1]-a[1])/la], dn=[(b[0]-p[0])/lb,(b[1]-p[1])/lb], ri=Math.abs(di[0])>.5?rx:ry, ro=Math.abs(dn[0])>.5?rx:ry;
+    var A0=[p[0]-di[0]*ri,p[1]-di[1]*ri], B0=[p[0]+dn[0]*ro,p[1]+dn[1]*ro], C=[A0[0]+dn[0]*ro,A0[1]+dn[1]*ro], N=r.length?16:8;
+    for(var k=0;k<=N;k++){ var t=k/N*Math.PI/2; o.push([C[0]+(A0[0]-C[0])*Math.cos(t)+(B0[0]-C[0])*Math.sin(t), C[1]+(A0[1]-C[1])*Math.cos(t)+(B0[1]-C[1])*Math.sin(t)]); } }
+  return o; }
+var OUT2D=out2Dense();
+function out2Off(g){ var P=OUT2D, n=P.length, ar=0; for(var i=0;i<n;i++){ var a=P[i], b=P[(i+1)%n]; ar+=a[0]*b[1]-b[0]*a[1]; } var sg=ar>0?1:-1, o=[];
+  for(var i=0;i<n;i++){ var a=P[(i+n-1)%n], p=P[i], b=P[(i+1)%n];
+    function nrm(x,y){ var L=Math.hypot(x,y)||1; return [sg*y/L,-sg*x/L]; }
+    var n1=nrm(p[0]-a[0],p[1]-a[1]), n2=nrm(b[0]-p[0],b[1]-p[1]), m=[n1[0]+n2[0],n1[1]+n2[1]], ml=Math.hypot(m[0],m[1])||1; m=[m[0]/ml,m[1]/ml];
+    var d=Math.max(.35,m[0]*n1[0]+m[1]*n1[1]); o.push([p[0]+m[0]*g/d,p[1]+m[1]*g/d]); }
+  return o; }
+function out2Shape(g){ var s=new THREE.Shape(); out2Off(g).forEach(function(q,i){ var w=UV(q[0],q[1]); if(i) s.lineTo(w[0],-w[1]); else s.moveTo(w[0],-w[1]); }); s.closePath(); return s; }
+function inOut2(x,z){ var u=z-Z0, v=X1-x, c=false, P=OUT2D; for(var i=0,j=P.length-1;i<P.length;j=i++){ var a=P[i],b=P[j]; if(((a[1]>v)!==(b[1]>v))&&(u<(b[0]-a[0])*(v-a[1])/(b[1]-a[1])+a[0])) c=!c; } return c; }
+slab(A,out2Shape(-1.2),0,WH-.8,warm);
+var wc=[]; (function(){ var P=out2Off(-.6), acc=0; for(var i=0;i<P.length;i++){ var a=P[i], b=P[(i+1)%P.length], L=Math.hypot(b[0]-a[0],b[1]-a[1]); for(var t=(4.2-acc)%4.2;t<L;t+=4.2){ var w=UV(a[0]+(b[0]-a[0])*t/L,a[1]+(b[1]-a[1])*t/L); wc.push(w); } acc=(acc+L)%4.2; } })();
 fins(A,wc,WH-.8,0,white,.9);
-slab(A,rrect(PW,PD,8),FL[2]-.45,.45,white).position.set(PCX,FL[2]-.45,PCZ);
-slab(A,rrect(PW+.6,PD+.6,8.3),WH-.9,.9,white).position.set(PCX,WH-.9,PCZ);
+slab(A,out2Shape(0),FL[2]-.45,.45,white);
+slab(A,out2Shape(.3),WH-.9,.9,white);
 // mái đế: vườn cỏ, bồn cây, dừa quanh chân tháp
 var deckY=WH+.02;
-slab(A,rrect(PW-1.4,PD-1.4,7.4),deckY-.05,.1,lawn).position.set(PCX,deckY-.05,PCZ);
+slab(A,out2Shape(-.7),deckY-.05,.1,lawn);
 var rp=[]; for(var z=PZ0+3;z<=PZ1-3;z+=5){ rp.push([PX1-2.2,z]); if(z<CZ-1) rp.push([PX0+1.8,z]); } for(var x=PX0+5;x<=PX1-5;x+=5){ rp.push([x,PZ0+1.8]); rp.push([x,PZ1-2]); }
+rp=rp.filter(function(q){ return inOut2(q[0],q[1]); });
 rp.forEach(function(q,i){ boxP(A,2,.9,2,q[0],deckY,q[1],white); if(i%2===0){ var tr=new THREE.Mesh(trunkGeo,trunkMat); tr.position.set(q[0],deckY+.9,q[1]); tr.scale.set(.8,6,.8); tr.castShadow=true; A.add(tr); var cw=new THREE.Mesh(crownGeo,leafMat); cw.position.set(q[0],deckY+6.9,q[1]); cw.scale.set(.7,.7,.7); cw.rotation.y=i; cw.castShadow=true; A.add(cw); } else shrubsLocal(A,q[0],deckY+.6,q[1]); });
 // hồ bơi phía trước (theo phối cảnh): trên mái đế, dọc mặt tháp hướng biển
 (function(){ var px0=X1+1.4, px1=X1+6.2, pz0=Z0+3, pz1=Z0+33;
@@ -495,11 +516,7 @@ rp.forEach(function(q,i){ boxP(A,2,.9,2,q[0],deckY,q[1],white); if(i%2===0){ var
 })();
 // khối thấp mái cỏ góc Tây Nam (3 tầng), sát mặt Tây khối Nam
 var ax0=X1-44, ax1=X1-27, az0=Z0+31, az1=Z0+51, AXc=(ax0+ax1)/2, AZc=(az0+az1)/2, AWd=ax1-ax0, ADd=az1-az0, AH=FL[5]-deckY;
-boxP(A,AWd,AH,ADd,AXc,deckY,AZc,warm);
-fins(A,(function(){ var o=[]; for(var x=ax0+1;x<=ax1-1;x+=3.4) o.push([x,az1+.2]); for(var z=az0+1;z<=az1-1;z+=3.4) o.push([ax0-.2,z]); return o; })(),AH,deckY,white,.6);
-for(var k=1;k<=2;k++) boxP(A,AWd+.8,.45,ADd+.8,AXc,deckY+AH*k/3,AZc,white);
-boxP(A,AWd+.6,.5,ADd+.6,AXc,deckY+AH,AZc,white);
-boxP(A,AWd-.6,.25,ADd-.6,AXc,deckY+AH+.5,AZc,lawn);
+// (bỏ khối thấp mái cỏ phía sau: mặt bằng CĐT tầng 2–3 chỗ này là gym và sân vườn các căn)
 // --- Thân tháp chữ L: mặt biển phẳng, khuyết góc Tây Nam ---
 // đa giác (toạ độ cục bộ x,z) nới ra g mét; góc lồi bo r, góc lõm bo nhỏ (tự xác định lồi/lõm)
 function Lpts(g,nb){   // nb: bỏ khối căn 18–19 nhô ra biển (tầng 29–30 theo bản vẽ CĐT)
