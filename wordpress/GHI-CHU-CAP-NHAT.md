@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.39** + plugin Hoàng Hiệp CRM **2.20.86**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.40** + plugin Hoàng Hiệp CRM **2.20.87**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,14 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.87, giao diện 2.15.40: căn hộ ven sông Hàn, dự án mới, condotel
+
+- Thêm 47 trang dự án căn hộ chưa có trên web (tổng hợp báo chí, văn bản Sở Xây dựng 10/2026; có nguồn từng dự án, không ghi giá khi nguồn không nêu):
+  13 căn hộ ven sông Hàn (Azura, Monarchy, Indochina Riverside, SAM Towers, Blooming Tower, Hòa Bình Green, Hilton Bạch Đằng, Meliá Vinpearl Riverfront, Symphony 5, Elias Riverpark, Tour D'Azur, 16 Bạch Đằng, Olalani Riverside),
+  4 căn hộ thương mại mới (Regal Complex, The Poet, Mia Center Point…), 17 dự án nhà ở xã hội, 15 căn hộ khách sạn / condotel (Alphanam – Altara, Fusion Suites, A La Carte, TMS, Cocobay, The Ocean Suites, Ariyana, Aria, Premier Sky, Mường Thanh, Olalani, The Pearl Hội An, MGM Hội An…).
+- 3 trang tổng hợp mới (menu Dự án): /can-ho-ven-song-han-da-nang/ (26 dự án), /du-an-can-ho-moi-da-nang/ (41), /can-ho-khach-san-condotel-da-nang/ (25).
+- Sau khi cài: bấm Nhập / cập nhật dữ liệu để tạo các trang dự án mới.
 
 ## Có gì mới – plugin 2.20.86, giao diện 2.15.39: bỏ trang chủ đầu tư theo khu vực
 

@@ -10,6 +10,8 @@ $hub      = hh_hub_pages()[ $key ];
 $projects = hh_hub_projects( $key );
 $listings = hh_hub_listings( $key );
 $posts    = hh_hub_posts( $key );
+$lc       = hh_lcfirst( $hub['h1'] );
+$plabel   = preg_match( '/^Dự án/u', $hub['h1'] ) ? $hub['h1'] : 'Dự án ' . $lc;
 ?>
 <div class="page-head">
 	<div class="container">
@@ -36,7 +38,7 @@ $posts    = hh_hub_posts( $key );
 
 	<?php if ( $projects ) : ?>
 		<section class="block price-board">
-			<h2 class="block__title">Dự án <?php echo esc_html( hh_lcfirst( $hub['h1'] ) ); ?> (<?php echo count( $projects ); ?>)</h2>
+			<h2 class="block__title"><?php echo esc_html( $plabel ); ?> (<?php echo count( $projects ); ?>)</h2>
 			<div class="table-wrap">
 				<table class="data-table">
 					<thead><tr><th>Dự án</th><th>Khu vực</th><th>Tình trạng</th><th>Giá tham khảo</th></tr></thead>

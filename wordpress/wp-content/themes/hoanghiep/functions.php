@@ -114,6 +114,9 @@ function hoanghiep_fallback_menu( $args = array() ) {
 				array( 'Đất nền', $type_link( 'dat-nen', $projects ) ),
 				array( 'Nhà phố – Shophouse', $type_link( 'shophouse', $projects ) ),
 			) ),
+			array( 'Căn hộ ven sông Hàn', home_url( '/can-ho-ven-song-han-da-nang/' ) ),
+			array( 'Dự án căn hộ mới, sắp mở bán', home_url( '/du-an-can-ho-moi-da-nang/' ) ),
+			array( 'Căn hộ khách sạn – condotel', home_url( '/can-ho-khach-san-condotel-da-nang/' ) ),
 			hoanghiep_menu_cdt_item(),
 		) ),
 		array( 'Mua bán', hh_deal_url( 'ban' ) ),
@@ -404,7 +407,22 @@ add_filter(
 			);
 		};
 		$tree = hoanghiep_menu_cdt_item();
-		$add  = array( $make( 990000, (int) $parent->db_id, $tree[0], $tree[1], ! empty( $tree[2] ) ) );
+		$add  = array();
+		$hubs = array(
+			array( 'Căn hộ ven sông Hàn', '/can-ho-ven-song-han-da-nang/' ),
+			array( 'Dự án căn hộ mới, sắp mở bán', '/du-an-can-ho-moi-da-nang/' ),
+			array( 'Căn hộ khách sạn – condotel', '/can-ho-khach-san-condotel-da-nang/' ),
+		);
+		foreach ( $hubs as $i => $h ) {
+			$found = false;
+			foreach ( $items as $it ) {
+				$found = $found || false !== strpos( (string) $it->url, $h[1] );
+			}
+			if ( ! $found ) {
+				$add[] = $make( 989990 + $i, (int) $parent->db_id, $h[0], home_url( $h[1] ) );
+			}
+		}
+		$add[] = $make( 990000, (int) $parent->db_id, $tree[0], $tree[1], ! empty( $tree[2] ) );
 		foreach ( (array) ( $tree[2] ?? array() ) as $i => $kid ) {
 			$add[] = $make( 990001 + $i, 990000, $kid[0], $kid[1] );
 		}

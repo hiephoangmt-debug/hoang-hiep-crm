@@ -14,6 +14,66 @@ defined( 'ABSPATH' ) || exit;
 /** Khóa trang => cấu hình. */
 function hh_hub_pages() {
 	return array(
+		'can-ho-ven-song-han-da-nang'      => array(
+			'keyword' => 'căn hộ ven sông Hàn Đà Nẵng',
+			'h1'      => 'Căn hộ ven sông Hàn Đà Nẵng',
+			'title'   => 'Căn hộ ven sông Hàn Đà Nẵng: danh sách dự án 2026',
+			'desc'    => 'Danh sách căn hộ ven sông Hàn Đà Nẵng hai bờ Hải Châu – Sơn Trà: đã bàn giao, đang bán, sắp triển khai – chủ đầu tư, pháp lý, tiến độ, nguồn báo chí.',
+			'group'   => 'ven-song-han',
+			'intro'   => array(
+				'Sông Hàn chia Đà Nẵng thành hai bờ: bờ Tây là trung tâm Hải Châu với đường Bạch Đằng, Trần Phú, 2/9; bờ Đông là Sơn Trà với trục Trần Hưng Đạo, Lê Văn Duyệt nhìn thẳng sang trung tâm. Căn hộ ven sông Hàn được chuộng vì vừa ở lõi thành phố, vừa có tầm nhìn sông, cầu Rồng, cầu Trần Thị Lý và pháo hoa quốc tế mỗi mùa DIFF. Trang này gom <strong>căn hộ ven sông Hàn Đà Nẵng</strong> – cả dự án đã bàn giao lẫn đang bán và sắp triển khai – để anh chị so sánh trong một chỗ.',
+				'Nhóm đã bàn giao gồm các tòa cao tầng hình thành từ hơn mười năm trước ở bờ Đông (Azura, Monarchy, Hòa Bình Green…) và bờ Tây (Indochina Riverside, SAM Towers, Blooming Tower, Hilton Bạch Đằng…); giao dịch ở đây là căn chuyển nhượng, xem được căn thật và có thể ở hoặc cho thuê ngay. Nhóm đang bán và sắp triển khai tập trung ở các dự án lớn hai bên bờ như Sun Symphony, Sun Ponte, Sun Cosmo, The Filmore, Landmark, Capital Square và các dự án mới được duyệt chủ trương – thường có chính sách thanh toán giãn, ngân hàng hỗ trợ vay.',
+				'Với căn hộ ven sông, nên xem kỹ ba việc: căn sở hữu lâu dài hay có thời hạn (một số khối căn hộ khách sạn, condotel trên đất thương mại dịch vụ có thời hạn), dự án đã đủ điều kiện bán hoặc đã có sổ hay chưa, và căn cụ thể có nhìn trực diện sông hay bị che bởi tòa bên cạnh. Mỗi dự án trong bảng đều có trang riêng ghi chủ đầu tư, tình trạng, nguồn báo chí; dự án có bảng giá thì ghi giá tham khảo.',
+				'Danh sách được Hoàng Hiệp tổng hợp và cập nhật khi có văn bản mới của Sở Xây dựng hoặc thông tin từ chủ đầu tư. Anh chị cần căn theo ngân sách, view hay số phòng ngủ cụ thể, hãy gọi hoặc nhắn Zalo để được lọc căn phù hợp và kiểm tra pháp lý trước khi đặt cọc.',
+			),
+			'faq'     => array(
+				array( 'Căn hộ ven sông Hàn nào đã có sổ?', 'Các tòa đã bàn giao lâu năm ở hai bờ thường đã cấp sổ cho phần lớn căn; một số dự án vẫn đang hoàn thiện thủ tục. Cần kiểm tra sổ của đúng căn – trang từng dự án có ghi tình trạng pháp lý theo nguồn báo chí.' ),
+				array( 'Bờ Đông hay bờ Tây sông Hàn tốt hơn?', 'Bờ Tây (Hải Châu) ở ngay trung tâm hành chính, thương mại; bờ Đông (Sơn Trà) nhìn thẳng sang trung tâm, gần biển Mỹ Khê hơn. Chọn theo nhu cầu ở, cho thuê và hướng view mong muốn.' ),
+				array( 'Căn hộ ven sông Hàn có sở hữu lâu dài không?', 'Tùy dự án: căn hộ chung cư trên đất ở thường sở hữu lâu dài; căn hộ khách sạn, condotel trên đất thương mại dịch vụ có thời hạn. Thông tin ghi trên hợp đồng và giấy chứng nhận.' ),
+				array( 'Có dự án căn hộ ven sông Hàn mới sắp mở bán không?', 'Có – một số dự án đã được duyệt chủ trương hoặc đang chờ đủ điều kiện bán. Các dự án này ghi trạng thái "Sắp mở bán" trong bảng; liên hệ để được báo khi có văn bản cho phép bán.' ),
+			),
+			'posts'   => array( 'so-sanh-can-ho-ven-song-han-sun-symphony-sun-ponte-peninsula', 'gia-chuyen-nhuong-can-ho-da-nang-2026-theo-du-an' ),
+		),
+		'du-an-can-ho-moi-da-nang'         => array(
+			'keyword' => 'dự án căn hộ mới Đà Nẵng',
+			'h1'      => 'Dự án căn hộ mới và sắp triển khai tại Đà Nẵng',
+			'title'   => 'Dự án căn hộ mới, sắp mở bán tại Đà Nẵng 2026',
+			'desc'    => 'Dự án căn hộ mới tại Đà Nẵng 2024 – 2026: đủ điều kiện bán, mới khởi công, sắp mở bán, kể cả nhà ở xã hội – chủ đầu tư, số căn, tiến độ, nguồn văn bản.',
+			'group'   => 'moi-sap-trien-khai',
+			'intro'   => array(
+				'Từ năm 2024, thị trường căn hộ Đà Nẵng có thêm nhiều dự án mới: các tòa được Sở Xây dựng xác nhận đủ điều kiện bán nhà ở hình thành trong tương lai, các dự án vừa khởi công hoặc được duyệt chủ trương đầu tư, và một loạt dự án nhà ở xã hội phục vụ người thu nhập thấp. Trang này gom <strong>dự án căn hộ mới tại Đà Nẵng</strong> – kể cả khu vực Hội An, Núi Thành thuộc Quảng Nam cũ – theo trạng thái: đang mở bán và sắp mở bán.',
+				'Căn hộ thương mại mới tập trung ở phía Nam thành phố (Hòa Xuân, Ngũ Hành Sơn), ven sông Hàn và một số vị trí trung tâm; nhà ở xã hội có ở Cẩm Lệ, Liên Chiểu, Sơn Trà, Ngũ Hành Sơn, Hải Châu và Hội An. Với nhà ở xã hội, người mua phải thuộc đối tượng và đáp ứng điều kiện thu nhập, nhà ở theo quy định; hồ sơ nộp theo thông báo của chủ đầu tư trong thời gian nhận hồ sơ.',
+				'Với dự án mới, mốc quan trọng nhất là văn bản của Sở Xây dựng xác nhận đủ điều kiện kinh doanh – trước mốc này chủ đầu tư chưa được ký hợp đồng mua bán. Ngoài ra cần xem dự án có đang thế chấp ngân hàng không (phải giải chấp trước khi ký), ngân hàng bảo lãnh nghĩa vụ tài chính và tiến độ thanh toán so với tiến độ xây dựng. Bảng dưới ghi trạng thái từng dự án theo nguồn báo chí, văn bản công khai.',
+				'Hoàng Hiệp cập nhật danh sách khi có văn bản mới và hỗ trợ miễn phí: tính khả năng vay, kiểm tra điều kiện mua nhà ở xã hội, đối chiếu hợp đồng trước khi ký. Gọi hoặc nhắn Zalo để được tư vấn theo nhu cầu.',
+			),
+			'faq'     => array(
+				array( 'Dự án căn hộ nào ở Đà Nẵng đã đủ điều kiện bán?', 'Các dự án có văn bản của Sở Xây dựng xác nhận đủ điều kiện kinh doanh nhà ở hình thành trong tương lai được ghi rõ mốc trên trang từng dự án. Chỉ nên ký hợp đồng mua bán sau mốc này.' ),
+				array( 'Mua nhà ở xã hội Đà Nẵng cần điều kiện gì?', 'Thuộc nhóm đối tượng được hỗ trợ theo Luật Nhà ở, chưa có nhà hoặc nhà ở dưới mức diện tích quy định tại Đà Nẵng và đáp ứng điều kiện thu nhập; hồ sơ nộp cho chủ đầu tư theo thông báo của từng dự án.' ),
+				array( 'Căn hộ mới Đà Nẵng có vay ngân hàng được không?', 'Phần lớn dự án thương mại có ngân hàng hỗ trợ vay một phần giá trị căn, một số có hỗ trợ lãi suất có thời hạn; nhà ở xã hội có gói vay ưu đãi theo quy định. Mức cụ thể theo chính sách từng dự án.' ),
+				array( 'Dự án sắp mở bán là sao?', 'Là dự án đã được duyệt chủ trương, đang xây hoặc chuẩn bị nhận hồ sơ nhưng chưa ký hợp đồng mua bán. Có thể đăng ký nhận thông tin để được báo khi dự án đủ điều kiện bán.' ),
+			),
+			'posts'   => array( 'bat-dong-san-nam-da-nang-ha-tang-hoa-xuan-hoa-quy-2026' ),
+		),
+		'can-ho-khach-san-condotel-da-nang' => array(
+			'keyword' => 'căn hộ khách sạn condotel Đà Nẵng',
+			'h1'      => 'Căn hộ khách sạn, condotel Đà Nẵng',
+			'title'   => 'Căn hộ khách sạn, condotel Đà Nẵng: danh sách, pháp lý',
+			'desc'    => 'Danh sách căn hộ khách sạn, condotel Đà Nẵng – Hội An: ven biển Mỹ Khê, Võ Nguyên Giáp, Trường Sa, sông Hàn – chủ đầu tư, tình trạng, thời hạn sở hữu, lưu ý pháp lý.',
+			'group'   => 'can-ho-khach-san',
+			'intro'   => array(
+				'Căn hộ khách sạn (condotel) là căn hộ trong tòa nhà vận hành như khách sạn: người mua sở hữu căn, giao cho đơn vị quản lý cho thuê và chia doanh thu hoặc nhận cam kết lợi nhuận. Đà Nẵng là một trong những nơi có nhiều condotel nhất cả nước, tập trung ven biển Võ Nguyên Giáp – Trường Sa (Sơn Trà, Ngũ Hành Sơn), ven sông Hàn và ở Hội An. Trang này gom <strong>căn hộ khách sạn, condotel Đà Nẵng</strong> để anh chị so sánh trước khi mua.',
+				'Điểm khác căn hộ chung cư: condotel thường nằm trên đất thương mại dịch vụ nên có thời hạn sở hữu (phổ biến 50 năm), không phải lâu dài; việc cấp giấy chứng nhận ở nhiều dự án từng chậm. Một số dự án đã dừng trả cam kết lợi nhuận, có dự án xây sai phép hoặc đang chuyển đổi công năng sang căn hộ. Theo báo chí, Đà Nẵng hiện hạn chế cấp phép condotel mới, nên đa số sản phẩm trong danh sách là căn đã bàn giao, giao dịch chuyển nhượng.',
+				'Trước khi mua, nên đọc kỹ: thời hạn và loại đất ghi trên sổ (hoặc tình trạng cấp sổ), hợp đồng vận hành – tỷ lệ chia doanh thu, phí quản lý, quyền tự sử dụng căn – và lịch sử thực hiện cam kết của chủ đầu tư, đơn vị vận hành. Mỗi dự án trong bảng có trang riêng ghi chủ đầu tư, tình trạng và nguồn báo chí; các rủi ro đã được báo chí đưa tin được ghi trung tính.',
+				'Hoàng Hiệp hỗ trợ kiểm tra pháp lý căn condotel, đọc hợp đồng vận hành và tính dòng tiền cho thuê theo kịch bản thận trọng. Gọi hoặc nhắn Zalo khi cần tư vấn.',
+			),
+			'faq'     => array(
+				array( 'Condotel Đà Nẵng sở hữu bao lâu?', 'Thường theo thời hạn của dự án trên đất thương mại dịch vụ, phổ biến 50 năm; một số dự án có khối căn hộ sở hữu lâu dài riêng. Thời hạn ghi trên giấy chứng nhận và hợp đồng mua bán.' ),
+				array( 'Condotel có được cấp sổ không?', 'Có thể được cấp giấy chứng nhận quyền sử dụng đất, quyền sở hữu công trình theo thời hạn dự án; nhiều dự án từng chậm cấp. Cần kiểm tra tình trạng sổ của đúng căn trước khi mua chuyển nhượng.' ),
+				array( 'Cam kết lợi nhuận condotel có chắc chắn không?', 'Không. Đã có dự án dừng trả cam kết giữa chừng. Nên xem năng lực đơn vị vận hành, công suất thực tế và điều khoản khi đơn vị vận hành không thực hiện cam kết.' ),
+				array( 'Có condotel mới nào ở Đà Nẵng sắp mở bán?', 'Rất ít – thành phố hạn chế cấp phép condotel mới; nguồn cung chủ yếu là căn chuyển nhượng ở các dự án đã vận hành và căn hộ khách sạn trong tổ hợp mới ven sông Hàn.' ),
+			),
+			'posts'   => array(),
+		),
 		'can-ho-sun-group-da-nang' => array(
 			'keyword' => 'căn hộ Sun Group Đà Nẵng',
 			'h1'      => 'Căn hộ Sun Group Đà Nẵng',
@@ -153,6 +213,11 @@ function hh_hub_projects( $key ) {
 				break;
 			case 'dat-nen-hoa-xuan':
 				$ok = ( in_array( 'dat-nen', $types, true ) || 'euro-village-2' === get_post_field( 'post_name', $id ) ) && false !== mb_stripos( $addr, 'Hòa Xuân' );
+				break;
+			case 'can-ho-ven-song-han-da-nang':
+			case 'du-an-can-ho-moi-da-nang':
+			case 'can-ho-khach-san-condotel-da-nang':
+				$ok = function_exists( 'hh_du_an_nhom' ) && in_array( get_post_field( 'post_name', $id ), hh_du_an_nhom( hh_hub_pages()[ $key ]['group'] ), true );
 				break;
 			default:
 				$ok = false;
