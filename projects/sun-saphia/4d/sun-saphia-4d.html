@@ -691,9 +691,14 @@ function clipTower(on){
     (Array.isArray(o.material)?o.material:[o.material]).forEach(function(m){ m.clippingPlanes=on?[clipP]:[]; m.clipShadows=true; m.needsUpdate=true; }); });
   clipped=true;
 }
+var planTx=[null,null];   // [tầng 2–29, tầng 30 (layout riêng, cắt từ bản vẽ CĐT)]
+var PLAN30_URL='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@890d9f31fe2f4548a5d6c9f57406170acbe1cdf9/projects/sun-saphia/images/mat-bang-tang-30-4d.webp';
+function planTex(f){ if(!planMesh) return; var k=f>=30?1:0;
+  if(!planTx[k]){ var ld=new THREE.TextureLoader(); ld.setCrossOrigin('anonymous'); var t=ld.load(PLAN30_URL); t.encoding=THREE.sRGBEncoding; t.anisotropy=Math.min(16,renderer.capabilities.getMaxAnisotropy()); t.generateMipmaps=true; t.minFilter=THREE.LinearMipmapLinearFilter; planTx[k]=t; }
+  if(planMesh.material.map!==planTx[k]){ planMesh.material.map=planTx[k]; planMesh.material.needsUpdate=true; } }
 function makePlan(){
   var ld=new THREE.TextureLoader(); ld.setCrossOrigin('anonymous');
-  var tx=ld.load(PLAN_URL); tx.encoding=THREE.sRGBEncoding; tx.anisotropy=Math.min(16,renderer.capabilities.getMaxAnisotropy()); tx.generateMipmaps=true; tx.minFilter=THREE.LinearMipmapLinearFilter;
+  var tx=ld.load(PLAN_URL); planTx[0]=tx; tx.encoding=THREE.sRGBEncoding; tx.anisotropy=Math.min(16,renderer.capabilities.getMaxAnisotropy()); tx.generateMipmaps=true; tx.minFilter=THREE.LinearMipmapLinearFilter;
   var g=new THREE.PlaneGeometry(54.4,49.6); g.rotateX(-Math.PI/2); g.rotateY(-Math.PI/2);   // ảnh: trái→phải = Bắc→Nam, trên = biển
   planMesh=new THREE.Mesh(g,new THREE.MeshBasicMaterial({map:tx,transparent:true,alphaTest:.04,toneMapped:false}));
   planMesh.position.set(X1-14.9,0,Z0+27.2); planMesh.renderOrder=3; T.add(planMesh);
@@ -703,7 +708,7 @@ function updPlan(fly){
   planMesh.position.y=y+.4; clipP.constant=T.localToWorld(new THREE.Vector3(0,y+.5,0)).y;
   mainLbl.textContent='MẶT BẰNG TẦNG '+FN(f)+' · bấm vào căn để xem';
   floorOut.textContent='Tầng '+FN(f)+' · bấm căn';
-  planMesh.visible=f<30; roofG.visible=f===29; roofG.position.y=y+.45; planFloorUI(f);
+  planMesh.visible=true; planTex(f); roofG.visible=f===29; roofG.position.y=y+.45; planFloorUI(f);
   if(fly){ var m=innerWidth<600, c=new THREE.Vector3(X1-14.9,y,Z0+27.2);
     flyTo(T.localToWorld(new THREE.Vector3(c.x-(m?70:46),y+(m?150:60),c.z+(m?2:3))),T.localToWorld(new THREE.Vector3(c.x+(m?6:2),y,c.z))); }
 }
@@ -732,7 +737,6 @@ function planFloorUI(f){
     ofcBtn.onclick=function(){ showOfc(+floorEl.value); }; document.body.appendChild(ofcBtn); }
   ofcBtn.style.display=planOn?'block':'none';
   if(typeof uCard!=='undefined'&&uCard) { uCard.style.display='none'; uHi.visible=false; }
-  if(planOn&&f>=30) show30();
 }
 var setFloor0=setFloor; setFloor=function(f){ setFloor0(f); if(planOn){ hi.visible=false; updPlan(false); } };
 var bView0=bView.onclick; bView.onclick=function(){ if(planOn) setPlan(false); bView0(); };
@@ -746,7 +750,7 @@ var UNITS=[['11','2PN',0,9.9,0,7.25,'E'],['12','STU',10,13.8,0,9,'E'],['12A','ST
  ['03A','2PN',0,9.9,32.45,39.7,'W'],['03','2PN',9.9,19.8,32.45,39.7,'W'],['01','STU',10.8,19.8,24.85,28.65,'S'],['02','STU',10.8,19.8,28.65,32.45,'S'],
  ['28','1PN',17.6,23.8,10.7,19.7,'W'],['27','STU',23.8,27.6,10.7,19.7,'W'],['26','STU',27.6,31.4,10.7,19.7,'W'],['25','STU',31.4,35.2,10.7,19.7,'W'],['24','STU',35.2,39,10.7,19.7,'W'],['23','STU',39,42.8,10.7,19.7,'W'],['22','STU',42.8,46.6,10.7,19.7,'W'],['21','STU',46.6,50.4,10.7,19.7,'W'],
  ['20','STUL',50.4,54.4,8.8,19.7,'W']];
-var UINFO={STU:['Studio','3,8 × 9 m'],STUL:['Studio lớn đầu hồi','2 mặt thoáng'],'1PN':['1PN+1','6,2 × 9 m'],'2PN':['2PN góc bo','7,25 × 9,9 m']};
+var UINFO={'1BR':['1PN','tầng 30 · căn rộng'],'1PN+':['1PN+1','tầng 30'],'2PN30':['2PN','tầng 30 · căn lớn nhất tầng'],STU:['Studio','3,8 × 9 m'],STUL:['Studio lớn đầu hồi','2 mặt thoáng'],'1PN':['1PN+1','6,2 × 9 m'],'2PN':['2PN góc bo','7,25 × 9,9 m']};
 // diện tích theo mặt bằng tầng 3A–28 của CĐT: [thông thủy, tim tường] m²
 var UAREA={'11':[70.21,77.35],'12':[31,34.58],'12A':[30,34.58],'12B':[51.11,56.42],'15':[30,34.58],'16':[30,34.58],'17':[50.18,56.38],'18':[67.68,75.5],'19':[67.69,76.36],
  '10':[50.28,56.42],'09':[30,34.58],'08':[30,34.58],'07':[31,35.03],'06':[30,34.13],'05':[30,34.58],'03A':[61.14,68.67],'03':[60.30,68.32],'01':[30,33.88],'02':[30,33.88],
@@ -768,6 +772,13 @@ function unitAt(u,v){ var hit=null; UNITS.forEach(function(r){ if(r[1]==='STUL')
 function uFloor(){ return Math.max(3,Math.min(30,+floorEl.value)); }
 function uCode(r){ var f=uFloor(); return 'SP'+(f===4?'3A':(f<10?'0':'')+f)+r[0]; }
 var UBAL3={'01':18.94,'02':18.95,'03A':29.59,'03':84.29,'28':29.00,'27':29.20,'26':29.20,'25':39.96,'24':53.71,'23':53.71,'22':53.71,'21':53.71,'20':55.32};
+// tầng 30: [mã, loại, u0,u1, v0,v1, hướng] đo trên bản vẽ CĐT; diện tích [thông thủy, tim tường]
+var UNITS30=[['07','1PN+',0,10.7,0,7.2,'E'],['08','1BR',10.7,18.1,0,9.1,'E'],['09','1PN+',18.1,24.2,0,9.1,'E'],['10','1BR',24.2,31.7,0,9.1,'E'],['11','1PN+',31.7,37.8,0,9.1,'E'],
+ ['06','2PN30',0,8.7,7.2,17.1,'N'],['05','1BR',0,8.7,17.1,25,'N'],['03A','1BR',0,8.7,25,32.6,'N'],['03','1PN+',0,9.7,32.6,39.7,'W'],['02','1PN+',9.7,19.4,32.6,39.7,'W'],['01','1BR',10.5,19.4,24.7,32.6,'S'],
+ ['16','1PN+',18.2,24.2,10.8,19.9,'W'],['15','1BR',24.2,31.8,10.8,19.9,'W'],['12B','1BR',31.8,39.3,10.8,19.9,'W'],['12A','1BR',39.3,46.8,10.8,19.9,'W'],['12','1BR',46.8,54.4,8.9,19.9,'W']];
+var UA30={'07':[71.29,77.32],'08':[64.63,69.16],'09':[52.20,56.42],'10':[64.37,69.16],'11':[51.18,56.42],'06':[83.97,91.15],'05':[64.41,69.27],'03A':[64.08,69.27],
+ '03':[63.73,68.71],'02':[63.34,68.23],'01':[63.02,67.64],'16':[49.99,55.18],'15':[63.02,67.64],'12B':[63.02,67.64],'12A':[62.97,67.64],'12':[73.71,80.97]};
+function unitAt30(u,v){ var hit=null; UNITS30.forEach(function(r){ if(u>=r[2]&&u<=r[3]&&v>=r[4]&&v<=r[5]) hit=r; }); return hit; }
 function show30(){
   if(!uCard){ uCard=document.createElement('div'); uCard.id='uCard'; document.body.appendChild(uCard); }
   uCard.innerHTML='<button class="x" aria-label="Đóng">✕</button><h4>Tầng 30 · layout riêng</h4><div class="s">Tầng trên cùng: 16 căn SP3001–SP3016 gồm 1PN, 1PN+1 và 1 căn 2PN, diện tích thông thủy ~50–84 m². Xem bản vẽ CĐT và chọn căn để xem diện tích, hướng view.</div>'
@@ -782,8 +793,8 @@ function showUnit(r){
   uHi.scale.set(d,w,1); uHi.position.set(X1-(r[4]+r[5])/2,y,Z0+(u0+r[3])/2); uHi.visible=true; uHi.material.color.setHex(0xff6a2b);
   if(!uCard){ uCard=document.createElement('div'); uCard.id='uCard'; document.body.appendChild(uCard); }
   var inf=UINFO[r[1]], vw=UVIEW[r[6]];
-  var bal=uFloor()===3&&UBAL3[r[0]];
-  uCard.innerHTML='<button class="x" aria-label="Đóng">✕</button><h4>Căn '+uCode(r)+' · '+inf[0]+'</h4><div class="s"><b>Thông thủy '+um2(UAREA[r[0]][0])+' m²</b> · tim tường '+um2(UAREA[r[0]][1])+' m²'+(bal?' · ban công '+um2(bal)+' m²':'')+'<br>'+inf[1]+' · view '+vw[0]+'</div>'
+  var bal=uFloor()===3&&UBAL3[r[0]], AR=(uFloor()>=30?UA30:UAREA)[r[0]];
+  uCard.innerHTML='<button class="x" aria-label="Đóng">✕</button><h4>Căn '+uCode(r)+' · '+inf[0]+'</h4><div class="s"><b>Thông thủy '+um2(AR[0])+' m²</b> · tim tường '+um2(AR[1])+' m²'+(bal?' · ban công '+um2(bal)+' m²':'')+'<br>'+inf[1]+' · view '+vw[0]+'</div>'
     +'<div class="b"><button class="o" data-a="plan">Mặt bằng &amp; 3D căn</button><button class="n" data-a="view">View từ căn này (5D)</button></div>';
   uCard.style.display='block';
   uCard.querySelector('.x').onclick=function(){ uCard.style.display='none'; uHi.visible=false; };
@@ -815,7 +826,7 @@ function viewFromUnit(r){
     if(!down||!planOn||!planMesh) return; var mv=Math.hypot(e.clientX-down[0],e.clientY-down[1]); down=null; if(mv>7) return;
     var rect=renderer.domElement.getBoundingClientRect(); ndc.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);
     rc.setFromCamera(ndc,camera); var hit=rc.intersectObject(planMesh)[0]; if(!hit) return;
-    var lp=T.worldToLocal(hit.point.clone()), u=lp.z-Z0, v=X1-lp.x, r=unitAt(u,v), f=uFloor(); if(f>=30){ show30(); return; } if(r&&f===29&&(r[0]==='18'||r[0]==='19')) return; if(r) showUnit(r); });
+    var lp=T.worldToLocal(hit.point.clone()), u=lp.z-Z0, v=X1-lp.x, f=uFloor(), r=f>=30?unitAt30(u,v):unitAt(u,v); if(r&&f===29&&(r[0]==='18'||r[0]==='19')) return; if(r) showUnit(r); });
 })();
 var setPlan0=setPlan; setPlan=function(on){ setPlan0(on); mainLbl.style.visibility=on?'hidden':''; if(ofcBtn) ofcBtn.style.display=on?'block':'none'; if(!on){ uHi.visible=false; roofG.visible=false; if(uCard) uCard.style.display='none'; } };   // ẩn nhãn nổi trên nóc khi xem mặt bằng (khỏi che bản vẽ)
 
