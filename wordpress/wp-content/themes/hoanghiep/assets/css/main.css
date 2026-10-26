@@ -1518,3 +1518,26 @@ html.tour-view .contact-dock, html.tour-view .hhc__fab, html.tour-view .hhc__bub
 /* Cân đều: thẻ dự án – mỗi ô Quy mô / Diện tích / Bàn giao tối đa 2 dòng, thẻ cao bằng nhau; nhãn kết nối cùng bề rộng. */
 .project-card__facts li { min-width: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; overflow-wrap: break-word; }
 .connections strong { min-width: 84px; }
+
+/* Trang chủ đầu tư /chu-dau-tu/ */
+.cdt-table td:nth-child(3), .cdt-projects td:nth-child(3) { font-weight: 400; }
+.cdt-table small, .cdt-projects small { display: block; margin-top: 2px; color: var(--muted, #5b6b80); font-size: .84rem; line-height: 1.45; }
+.cdt-facts th { width: 32%; white-space: normal; vertical-align: top; }
+.cdt-facts td:nth-child(3) { font-weight: 400; }
+.cdt-timeline { list-style: none; margin: 0; padding: 0 0 0 18px; border-left: 2px solid var(--gold); }
+.cdt-timeline li { position: relative; padding: 0 0 16px 14px; line-height: 1.55; }
+.cdt-timeline li::before { content: ""; position: absolute; left: -26px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold-2); box-shadow: 0 0 0 3px #fff; }
+.cdt-timeline b { display: block; color: var(--navy); font-size: 1.02rem; }
+.cdt-sources ul { columns: 2; column-gap: 28px; padding-left: 18px; font-size: .9rem; }
+.cdt-sources a { word-break: break-word; }
+.cdt-others p { line-height: 2; }
+@media (max-width: 760px) {
+	.cdt-facts th, .cdt-facts td { display: block; width: 100%; }
+	.cdt-facts th { background: var(--tint); color: var(--navy); padding-bottom: 4px; }
+	.cdt-facts tr { margin-bottom: 8px; }
+	.cdt-facts td { display: block; border-top: 0; padding-top: 2px; }
+	.cdt-facts td::before { content: none; }
+	.cdt-table td:first-child small, .cdt-projects td:first-child small { color: rgba(255, 255, 255, .78); }
+	.cdt-table td:nth-child(3), .cdt-projects td:nth-child(3) { font-weight: 400; }
+	.cdt-sources ul { columns: 1; }
+}

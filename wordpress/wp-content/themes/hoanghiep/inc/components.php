@@ -145,7 +145,9 @@ function hh_spec_list( $rows ) {
 	}
 	echo '<dl class="spec-list">';
 	foreach ( $rows as $label => $value ) {
-		printf( '<div><dt>%s</dt><dd>%s</dd></div>', esc_html( $label ), esc_html( $value ) );
+		// Tên chủ đầu tư có hồ sơ → link sang trang /chu-dau-tu/<slug>/.
+		$html = 'Chủ đầu tư' === $label && function_exists( 'hh_cdt_link_html' ) ? hh_cdt_link_html( $value ) : esc_html( $value );
+		printf( '<div><dt>%s</dt><dd>%s</dd></div>', esc_html( $label ), $html ); // phpcs:ignore WordPress.Security.EscapeOutput
 	}
 	echo '</dl>';
 }

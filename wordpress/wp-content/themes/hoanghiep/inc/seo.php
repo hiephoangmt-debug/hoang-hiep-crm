@@ -96,6 +96,9 @@ function hh_seo_title_parts( $parts ) {
 	if ( hh_seo_hub_key() ) {
 		return array( 'title' => hh_hub_pages()[ hh_seo_hub_key() ]['title'] );
 	}
+	if ( hh_seo_cdt() ) {
+		return array( 'title' => hh_seo_cdt()['title'] );
+	}
 	if ( is_post_type_archive( 'bat-dong-san' ) || is_tax( 'loai-bds' ) ) {
 		// Tháng của tin mới nhất (dữ liệu thật), không lấy ngày hôm nay.
 		$latest         = get_query_var( 'hh_deal' ) ? (int) ( hh_listing_stats()['latest'] ?? 0 ) : 0;
@@ -146,6 +149,9 @@ function hh_seo_description() {
 	}
 	if ( hh_seo_hub_key() ) {
 		return hh_hub_pages()[ hh_seo_hub_key() ]['desc'];
+	}
+	if ( hh_seo_cdt() ) {
+		return hh_seo_cdt()['desc'];
 	}
 	if ( is_singular( 'du-an' ) ) {
 		$bits = array_filter(
@@ -275,6 +281,9 @@ function hh_seo_base_url() {
 	if ( hh_seo_hub_key() ) {
 		return hh_hub_url( hh_seo_hub_key() );
 	}
+	if ( hh_seo_cdt() ) {
+		return hh_seo_cdt()['url'];
+	}
 	if ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) {
 		return hh_units_url( get_the_ID() );
 	}
@@ -353,6 +362,9 @@ function hh_seo_noindex_request() {
 	}
 	if ( hh_seo_hub_key() ) {
 		return ! hh_hub_projects( hh_seo_hub_key() ) && ! hh_hub_listings( hh_seo_hub_key() );
+	}
+	if ( hh_seo_cdt() ) {
+		return false;
 	}
 	// Trang Mua bán có bảng giá thị trường (biệt thự, đất lớn, khách sạn): vẫn lập chỉ mục dù chưa có tin.
 	$landing = 'ban' === get_query_var( 'hh_deal' ) ? hh_current_deal_term() : null;
@@ -491,6 +503,10 @@ function hh_schema_breadcrumb() {
 		$items[] = array( get_the_title(), get_permalink() );
 	} elseif ( hh_seo_hub_key() ) {
 		$items[] = array( hh_hub_pages()[ hh_seo_hub_key() ]['h1'], hh_seo_url() );
+	} elseif ( hh_seo_cdt() ) {
+		foreach ( hh_seo_cdt()['crumbs'] as $c ) {
+			$items[] = $c;
+		}
 	} elseif ( hh_seo_special_key() ) {
 		$items[] = array( HH_SPECIAL_PAGES[ hh_seo_special_key() ][1], hh_seo_url() );
 	} elseif ( is_tax() || is_post_type_archive( 'bat-dong-san' ) ) {
@@ -681,6 +697,22 @@ function hh_seo_schema() {
 			$graph[] = array( '@type' => 'ItemList', 'name' => $hub['h1'], 'itemListElement' => $list );
 		}
 	}
+	if ( hh_seo_cdt() ) {
+		$cdt = hh_seo_cdt();
+		if ( $cdt['faq'] ) {
+			$graph[] = hh_schema_faq( $cdt['faq'] );
+		}
+		if ( $cdt['org'] ) {
+			$graph[] = $cdt['org'];
+		}
+		$list = array();
+		foreach ( $cdt['list'] as $i => $it ) {
+			$list[] = array( '@type' => 'ListItem', 'position' => $i + 1, 'url' => $it[1], 'name' => $it[0] );
+		}
+		if ( $list ) {
+			$graph[] = array( '@type' => 'ItemList', 'name' => $cdt['h1'], 'itemListElement' => $list );
+		}
+	}
 	if ( is_singular( 'du-an' ) ) {
 		$graph[] = hh_schema_project();
 		$graph[] = hh_schema_faq( hh_project_faq() );
@@ -711,7 +743,7 @@ function hh_seo_schema() {
 		);
 	}
 
-	if ( ! hh_seo_hub_key() && ! hh_seo_special_key() && ( is_post_type_archive( array( 'du-an', 'bat-dong-san' ) ) || is_tax( array( 'loai-du-an', 'loai-bds', 'khu-vuc' ) ) ) ) {
+	if ( ! hh_seo_hub_key() && ! hh_seo_cdt() && ! hh_seo_special_key() && ( is_post_type_archive( array( 'du-an', 'bat-dong-san' ) ) || is_tax( array( 'loai-du-an', 'loai-bds', 'khu-vuc' ) ) ) ) {
 		global $wp_query;
 		$list = array();
 		foreach ( $wp_query->posts as $i => $p ) {
@@ -844,6 +876,12 @@ function hh_seo_landing_entries() {
 			$out[ hh_hub_url( $key ) ] = hh_hub_lastmod( $key );
 		}
 	}
+	if ( function_exists( 'hh_cdt_all' ) && hh_cdt_all() ) {
+		$out[ hh_cdt_url() ] = hh_cdt_lastmod( 'tat-ca' );
+		foreach ( array_keys( hh_cdt_all() ) as $slug ) {
+			$out[ hh_cdt_url( $slug ) ] = hh_cdt_lastmod( $slug );
+		}
+	}
 	// Trang con của landing dự án (VD /du-an/fours-tower/gio-hang/, /du-an/sun-saphia-residence/quy-hoach/).
 	if ( function_exists( 'hoanghiep_landing_subpages' ) ) {
 		foreach ( hoanghiep_landing_subpages() as $project => $subs ) {
@@ -870,6 +908,40 @@ function hh_seo_landing_urls() {
 }
 
 /** Khóa trang hub (/can-ho-sun-group-da-nang/…) đang xem, ngược lại ''. */
+/** Trang chủ đầu tư đang xem: tiêu đề, mô tả, đường dẫn, breadcrumb, hỏi đáp, danh sách, schema tổ chức – hoặc null. */
+function hh_seo_cdt() {
+	static $out = false;
+	if ( false !== $out ) {
+		return $out;
+	}
+	$key = function_exists( 'hh_cdt_key' ) ? hh_cdt_key() : '';
+	if ( ! $key ) {
+		return $out = null; // phpcs:ignore Squiz.PHP.DisallowMultipleAssignments
+	}
+	$index = array( 'Chủ đầu tư', hh_cdt_url() );
+	if ( 'tat-ca' === $key ) {
+		$m    = hh_cdt_index_meta();
+		$list = array();
+		foreach ( hh_cdt_all() as $slug => $d ) {
+			$list[] = array( $d['name'], hh_cdt_url( $slug ) );
+		}
+		return $out = array( 'title' => $m['title'], 'desc' => $m['desc'], 'url' => hh_cdt_url(), 'h1' => 'Chủ đầu tư bất động sản tại Đà Nẵng', 'crumbs' => array( $index ), 'faq' => $m['faq'], 'list' => $list, 'org' => null ); // phpcs:ignore Squiz.PHP.DisallowMultipleAssignments
+	}
+	$d    = hh_cdt_all()[ $key ];
+	$list = array_map( static fn( $id ) => array( get_the_title( $id ), get_permalink( $id ) ), hh_cdt_projects( $key ) );
+	$org  = array_filter(
+		array(
+			'@type'         => 'Organization',
+			'@id'           => hh_cdt_url( $key ) . '#to-chuc',
+			'name'          => $d['full_name'] ?? $d['name'],
+			'alternateName' => ( $d['full_name'] ?? '' ) !== $d['name'] ? $d['name'] : null,
+			'description'   => $d['seo_desc'] ?? null,
+			'mainEntityOfPage' => hh_cdt_url( $key ),
+		)
+	);
+	return $out = array( 'title' => $d['seo_title'] ?? ( 'Chủ đầu tư ' . $d['name'] . ' tại Đà Nẵng' ), 'desc' => $d['seo_desc'] ?? '', 'url' => hh_cdt_url( $key ), 'h1' => 'Dự án của ' . $d['name'] . ' tại Đà Nẵng', 'crumbs' => array( $index, array( $d['name'], hh_cdt_url( $key ) ) ), 'faq' => (array) ( $d['faq'] ?? array() ), 'list' => $list, 'org' => $org ); // phpcs:ignore Squiz.PHP.DisallowMultipleAssignments
+}
+
 function hh_seo_hub_key() {
 	return function_exists( 'hh_hub_key' ) ? hh_hub_key() : '';
 }
@@ -1131,12 +1203,15 @@ add_filter(
  * ---------------------------------------------------------------------- */
 
 function hh_seo_is_listing_page() {
-	return ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) || is_post_type_archive( array( 'bat-dong-san', 'du-an' ) ) || is_tax( array( 'loai-du-an', 'khu-vuc', 'loai-bds' ) ) || hh_seo_special_key() || hh_seo_hub_key();
+	return ( function_exists( 'hh_is_units_page' ) && hh_is_units_page() ) || is_post_type_archive( array( 'bat-dong-san', 'du-an' ) ) || is_tax( array( 'loai-du-an', 'khu-vuc', 'loai-bds' ) ) || hh_seo_special_key() || hh_seo_hub_key() || hh_seo_cdt();
 }
 
 function hh_seo_listing_title() {
 	if ( hh_seo_hub_key() ) {
 		return hh_hub_pages()[ hh_seo_hub_key() ]['title']; // Đã ≤ 60 ký tự, không thêm tên web.
+	}
+	if ( hh_seo_cdt() ) {
+		return hh_seo_cdt()['title'];
 	}
 	$parts = hh_seo_title_parts( array( 'title' => wp_strip_all_tags( (string) get_the_archive_title() ) ) );
 	$paged = (int) get_query_var( 'paged' );

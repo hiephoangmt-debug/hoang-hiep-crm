@@ -172,6 +172,13 @@ add_filter(
 	98
 );
 
+/** Trang chủ đầu tư: /chu-dau-tu/, /chu-dau-tu/<slug>/. */
+add_filter(
+	'template_include',
+	static fn( $template ) => function_exists( 'hh_cdt_key' ) && hh_cdt_key() ? get_theme_file_path( 'chu-dau-tu.php' ) : $template,
+	98
+);
+
 /** Trang tổng hợp /san-pham/shop-khoi-de/, /san-pham/penthouse/, /san-pham/duplex/. */
 add_filter(
 	'template_include',
@@ -199,6 +206,8 @@ function hoanghiep_override_builder_template( $template ) {
 		$ours = get_theme_file_path( 'bang-tinh.php' );
 	} elseif ( function_exists( 'hh_hub_key' ) && hh_hub_key() ) {
 		$ours = get_theme_file_path( 'hub.php' );
+	} elseif ( function_exists( 'hh_cdt_key' ) && hh_cdt_key() ) {
+		$ours = get_theme_file_path( 'chu-dau-tu.php' );
 	} elseif ( get_query_var( 'hh_sp' ) ) {
 		$ours = get_theme_file_path( 'san-pham.php' );
 	} elseif ( is_post_type_archive( array( 'du-an', 'bat-dong-san' ) ) || is_category() ) {
