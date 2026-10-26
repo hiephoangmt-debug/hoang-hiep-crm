@@ -627,19 +627,41 @@ function plan30(){
 }
 function m30(r){ return (state.v==='all'||r[2].indexOf(state.v)>=0)&&(state.t==='all'||r[1]===state.t||(state.t==='STU'&&false)); }
 function select30(j){
-  state.s30=j; state.sel=null; filter(); document.getElementById('rc').classList.add('solo');
+  state.s30=j; state.sel=null; filter(); document.getElementById('rc').classList.remove('solo');
   var r=U30[j], f=r[2], m=f[0], a=A30[r[0]];
   document.getElementById('info').innerHTML='<h3>Căn SP30'+r[0]+' · '+NAME[r[1]]+'</h3><div class="sub">Thông thủy '+m2(a[0])+' m² · tim tường '+m2(a[1])+' m² · tầng 30 (~'+Math.round(elev(30))+' m)</div>'
     +f.split('').map(function(c,k){return '<span class="tag'+(k?'':' o')+'">'+VIEW[c][0]+'</span>'}).join('')
     +'<p><b>View:</b> '+f.split('').map(function(c){return VIEW[c][1]}).join(' ')+'</p><p><b>Nắng:</b> '+VIEW[m][2]+'.</p>'
-    +'<p>Tầng 30 là tầng trên cùng, layout riêng với căn rộng hơn tầng điển hình. Mặt bằng căn cắt từ bản vẽ CĐT; phối cảnh nội thất 3D có ở tầng 2–29.</p>';
-  var pd=18, x0=Math.max(0,r[3]-pd), y0=Math.max(0,r[4]-pd), w=Math.min(1500,r[5]+pd)-x0, h=Math.min(1200,r[6]+pd)-y0;
-  document.getElementById('unit').innerHTML='<div class="ut">Mặt bằng căn SP30'+r[0]+' (bản vẽ CĐT)</div><div class="crop" role="img" aria-label="Mặt bằng căn SP30'+r[0]+'" style="max-width:'+Math.round(440*w/h)+'px;margin:0 auto;aspect-ratio:'+w+'/'+h+';background-image:url('+IMG+OFC.T30+');background-size:'+(150000/w)+'% auto;background-position:'+(x0/(1500-w)*100)+'% '+(y0/(1200-h)*100)+'%"></div>';
+    +'<p>Tầng 30 là tầng trên cùng, layout riêng với căn rộng hơn tầng điển hình. Mặt bằng căn vẽ lại theo bản vẽ CĐT (nội thất minh họa).</p>';
+  unitPlan30(r); buildRoom30(r);
   var dir={E:'viewE',W:'viewW',N:'viewN',S:'viewS'}[m], hr={E:6.3,W:17.3,N:9,S:15}[m];
   var priv=!/^about:/.test(location.href)&&!/[?&]pub=1/.test(location.search), sfx=priv?('&k='+encodeURIComponent(window.SS_KEY||'')+(/[?&]crm/.test(location.search)?'&crm':'')):'&pub=1';
   document.getElementById('go5d').href=MODEL+'?h='+hr+'&f=30&'+dir+sfx;
   document.getElementById('goPlan').href=MODEL+'?plan&f=30&h=10'+sfx;
 }
+function box30(r){ var u0=1e9,u1=-1e9,v0=1e9,v1=-1e9; G30[r[0]].forEach(function(q){ u0=Math.min(u0,q[0]); u1=Math.max(u1,q[1]); v0=Math.min(v0,q[2]); v1=Math.max(v1,q[3]); }); return [u0,u1,v0,v1]; }
+// mặt bằng 2D 1 căn tầng 30: cắt từ mặt bằng tầng vẽ lại (cùng kiểu các tầng dưới), hướng biển ở trên
+function unitPlan30(r){ var b=box30(r), k=44, pad=1.2, W=(b[1]-b[0]+2*pad)*k, H=(b[3]-b[2]+2*pad)*k;
+  function fx(u){ return +((u-b[0]+pad)*k).toFixed(1); } function fy(v){ return +((v-b[2]+pad)*k+26).toFixed(1); }
+  var o=['<svg viewBox="0 0 '+Math.round(W)+' '+Math.round(H+60)+'" xmlns="http://www.w3.org/2000/svg" font-family="Be Vietnam Pro,Arial,sans-serif">'];
+  o.push('<rect width="'+W+'" height="22" fill="#cfe8f5"/><text x="'+W/2+'" y="15" font-size="11" font-weight="800" fill="#12355c" text-anchor="middle">↑ Biển Đông · Trường Sa</text>');
+  o.push('<defs><clipPath id="uc30"><rect x="'+fx(b[0]-.25)+'" y="'+fy(b[2]-.25)+'" width="'+(b[1]-b[0]+.5)*k+'" height="'+(b[3]-b[2]+.5)*k+'"/></clipPath></defs>');
+  o.push('<g opacity=".22">'+svg30(fx,fy,k,false,1).replace(/id="b30"/g,'id="b30u"').replace(/url\(#b30\)/g,'url(#b30u)')+'</g>');
+  o.push('<g clip-path="url(#uc30)">'+svg30(fx,fy,k,false,1).replace(/id="b30"/g,'id="b30v"').replace(/url\(#b30\)/g,'url(#b30v)')+'</g>');
+  var dc='#E8460F', y0=fy(b[3])+16, x0=fx(b[0])-14;
+  o.push('<g stroke="'+dc+'"><line x1="'+fx(b[0])+'" y1="'+y0+'" x2="'+fx(b[1])+'" y2="'+y0+'"/><line x1="'+x0+'" y1="'+fy(b[2])+'" x2="'+x0+'" y2="'+fy(b[3])+'"/></g>');
+  o.push('<text x="'+(fx(b[0])+fx(b[1]))/2+'" y="'+(y0+14)+'" font-size="11" font-weight="800" fill="'+dc+'" text-anchor="middle">'+m2(+(b[1]-b[0]).toFixed(1))+' m</text>');
+  o.push('<text x="'+(x0-6)+'" y="'+(fy(b[2])+fy(b[3]))/2+'" font-size="11" font-weight="800" fill="'+dc+'" text-anchor="middle" transform="rotate(-90 '+(x0-6)+' '+(fy(b[2])+fy(b[3]))/2+')">'+m2(+(b[3]-b[2]).toFixed(1))+' m</text>');
+  var a=A30[r[0]]; o.push('<text x="'+W/2+'" y="'+(H+50)+'" font-size="9.5" font-weight="600" fill="#8a96a3" text-anchor="middle">Thông thủy '+m2(a[0])+' m² · tim tường '+m2(a[1])+' m² · vẽ lại theo bản vẽ CĐT tầng 30</text></svg>');
+  document.getElementById('unit').innerHTML='<div class="ut">Mặt bằng căn SP30'+r[0]+'</div>'+o.join('');
+  document.querySelector('.pair').classList.toggle('wide',(b[1]-b[0])>(b[3]-b[2])*1.1); }
+// phối cảnh 3D 1 căn tầng 30 (dùng chung bộ dựng với 3D cả tầng)
+function buildRoom30(r){ init3(); if(!R3) return; if(R3.piv) R3.sc.remove(R3.piv);
+  var b=box30(r), cu=(b[0]+b[1])/2, cv=(b[2]+b[3])/2, piv=new THREE.Group(), grp=new THREE.Group(); grp.position.set(-cu,0,-cv); piv.add(grp); R3.sc.add(piv); R3.piv=piv; R3.grass=null;
+  var walls=[]; R3.walls=walls; addParts30(r,grp,walls,grp);
+  var fl=new THREE.Mesh(new THREE.BoxGeometry(b[1]-b[0]+2,.3,b[3]-b[2]+2),M(0xe2ded6,{roughness:.9})); fl.position.set(cu,-.17,cv); fl.receiveShadow=true; grp.add(fl);
+  var face=r[2][0], dv={E:[0,-1],W:[0,1],N:[-1,0],S:[1,0]}[face]; R3.eye=[0,0]; R3.look=[dv[0]*4,dv[1]*4];
+  R3.W=b[1]-b[0]; R3.D=b[3]-b[2]; setMode(R3.mode||'plan'); showHour(); if(R3.size) R3.size(); }
 function match(r){ return (state.v==='all'||r[6].indexOf(state.v)>=0)&&(state.t==='all'||r[1]===state.t); }
 function filter(){ if(LAY(state.floor)==='T30'){ [].forEach.call(document.querySelectorAll('#plan [data-j]'),function(el){ var j=+el.getAttribute('data-j'); el.classList.toggle('dim',!m30(U30[j])); el.classList.toggle('sel',j===state.s30); }); return; }
   [].forEach.call(document.querySelectorAll('#plan .u'),function(el){ var r=U[+el.getAttribute('data-i')]; el.classList.toggle('dim',!match(r)); el.classList.toggle('sel',+el.getAttribute('data-i')===state.sel); }); }
@@ -1030,6 +1052,18 @@ function f3Open(){
     close(); if(LAY(state.floor)==='T30') select30(o.userData.u); else select(o.userData.u);
     var it=document.getElementById('info'); if(it&&it.scrollIntoView) it.scrollIntoView({behavior:'smooth',block:'start'}); });
 }
+// dựng các phần của 1 căn tầng 30 (khung căn ghép từ layout có sẵn + sảnh riêng của 3012) vào nhóm hg
+function addParts30(r,hg,walls,root){
+      G30[r[0]].forEach(function(q){ if(q[5]==='RECT'){ var fm=new THREE.Mesh(new THREE.BoxGeometry(q[1]-q[0],.02,q[3]-q[2]),M(0xffffff,{map:rep(texWood(),1/2.4,1/2.4),color:TINT3[r[1]]})); fm.position.set((q[0]+q[1])/2,.01,(q[2]+q[3])/2); hg.add(fm);
+          function kb(u0,v0,u1,v1,h,c){ var b2=new THREE.Mesh(new THREE.BoxGeometry(u1-u0,h,v1-v0),M(c,{roughness:.5})); b2.position.set((u0+u1)/2,h/2,(v0+v1)/2); b2.castShadow=true; b2.receiveShadow=true; hg.add(b2); }
+          kb(q[0]+2.8,q[2]+.12,q[0]+5,q[2]+.72,.9,0xe9e4dc); kb(q[0]+2.78,q[2]+.1,q[0]+5.02,q[2]+.74,.04,0xf3f1ee);   // quầy bếp + mặt đá sát tường Bắc
+          kb(q[0]+2.05,q[2]+.1,q[0]+2.75,q[2]+.75,1.8,0xc9ccd0); kb(q[0]+.95,q[2]+.1,q[0]+2.55,q[2]+.5,1.0,0xb88a5c);   // tủ lạnh, tủ giày
+          [[q[0],q[2]+.05,q[1],q[2]+.15],[q[1]-.1,q[2],q[1],q[3]]].forEach(function(w){ var wm=new THREE.Mesh(new THREE.BoxGeometry(w[2]-w[0],1.2,w[3]-w[1]),M(0xf4f1eb,{roughness:.95})); wm.position.set((w[0]+w[2])/2,.6,(w[1]+w[3])/2); wm.castShadow=true; hg.add(wm); });
+          return; }
+        var pr=partRow(r[0],q), pg2=buildRoom(pr,{grp:hg,M:partM(q),sk:q[5],walls:walls,tint:TINT3[r[1]]});
+        if(r[0]==='12'&&pg2){ root.updateMatrixWorld(true); var rm=[]; pg2.traverse(function(o){ if(!o.isMesh) return; var wp=root.worldToLocal(o.getWorldPosition(new THREE.Vector3())); if(Math.abs(wp.z-10.7)<.45&&wp.x>50.6&&(wp.x<53.5||Math.abs(wp.z-10.7)<.2)) rm.push(o); });
+          rm.forEach(function(o){ o.parent.remove(o); for(var w=walls.length-1;w>=0;w--) if(walls[w][0]===o) walls.splice(w,1); }); } });   // 3012: bỏ tường + cửa giữa sảnh và phòng khách
+}
 function f3Build(root,walls,units){
   var LL=LAY(state.floor), mat=function(c,o){ return M(c,o); };
   var slabM=mat(0xe2ded6,{roughness:.9}), corrM=mat(0xf3f1ec,{roughness:.7}), coreM=mat(0xc9d0d8,{roughness:.8}), liftM=mat(0x7d8792,{roughness:.5,metalness:.3}), stepM=mat(0xe9e6df,{roughness:.8}), edgeM=mat(0xf7f5f0,{roughness:.6});
@@ -1090,15 +1124,7 @@ function f3Build(root,walls,units){
   function addUnit(r,mtx,sk,idx){ var hg=new THREE.Group(); hg.userData.u=idx; root.add(hg); buildRoom(r,{grp:hg,M:mtx,sk:sk,walls:walls,tint:TINT3[r[1]]}); units.push(hg); return hg; }
   if(LL==='T30'){
     U30.forEach(function(r,j){ var hg=new THREE.Group(); hg.userData.u=j; root.add(hg); units.push(hg);
-      G30[r[0]].forEach(function(q){ if(q[5]==='RECT'){ var fm=new THREE.Mesh(new THREE.BoxGeometry(q[1]-q[0],.02,q[3]-q[2]),M(0xffffff,{map:rep(texWood(),1/2.4,1/2.4),color:TINT3[r[1]]})); fm.position.set((q[0]+q[1])/2,.01,(q[2]+q[3])/2); hg.add(fm);
-          function kb(u0,v0,u1,v1,h,c){ var b2=new THREE.Mesh(new THREE.BoxGeometry(u1-u0,h,v1-v0),M(c,{roughness:.5})); b2.position.set((u0+u1)/2,h/2,(v0+v1)/2); b2.castShadow=true; b2.receiveShadow=true; hg.add(b2); }
-          kb(q[0]+2.8,q[2]+.12,q[0]+5,q[2]+.72,.9,0xe9e4dc); kb(q[0]+2.78,q[2]+.1,q[0]+5.02,q[2]+.74,.04,0xf3f1ee);   // quầy bếp + mặt đá sát tường Bắc
-          kb(q[0]+2.05,q[2]+.1,q[0]+2.75,q[2]+.75,1.8,0xc9ccd0); kb(q[0]+.95,q[2]+.1,q[0]+2.55,q[2]+.5,1.0,0xb88a5c);   // tủ lạnh, tủ giày
-          [[q[0],q[2]+.05,q[1],q[2]+.15],[q[1]-.1,q[2],q[1],q[3]]].forEach(function(w){ var wm=new THREE.Mesh(new THREE.BoxGeometry(w[2]-w[0],1.2,w[3]-w[1]),M(0xf4f1eb,{roughness:.95})); wm.position.set((w[0]+w[2])/2,.6,(w[1]+w[3])/2); wm.castShadow=true; hg.add(wm); });
-          return; }
-        var pr=partRow(r[0],q), pg2=buildRoom(pr,{grp:hg,M:partM(q),sk:q[5],walls:walls,tint:TINT3[r[1]]});
-        if(r[0]==='12'&&pg2){ root.updateMatrixWorld(true); var rm=[]; pg2.traverse(function(o){ if(!o.isMesh) return; var wp=root.worldToLocal(o.getWorldPosition(new THREE.Vector3())); if(Math.abs(wp.z-10.7)<.45&&wp.x>50.6&&(wp.x<53.5||Math.abs(wp.z-10.7)<.2)) rm.push(o); });
-          rm.forEach(function(o){ o.parent.remove(o); for(var w=walls.length-1;w>=0;w--) if(walls[w][0]===o) walls.splice(w,1); }); } }); });   // 3012: bỏ tường + cửa giữa sảnh và phòng khách
+      addParts30(r,hg,walls,root); });
   } else U.forEach(function(r,i){ if(onFloor(r)) addUnit(r,unitM(r),SK(r),i); });
   // sân vườn riêng các căn (tầng 2, 3)
   var B=BAL[LL]; if(B){ var GD0=LL==='T2'?GARD2:GARD, gm={woodD:mat(0x7a5434),leaf:mat(0x4f8a3e,{roughness:.8}),leaf2:mat(0x3f7432,{roughness:.8}),fab:mat(0xd9d4cc)};
@@ -1126,7 +1152,7 @@ function stamp(c,title){
   g.fillStyle='#fff'; g.font='800 '+f+'px Be Vietnam Pro,Arial,sans-serif'; g.textBaseline='middle'; g.fillText(title,f*.8,h-bh/2);
   g.textAlign='right'; g.fillStyle='#FF6A2B'; g.fillText('☎ 0904 567 009',w-f*.8,h-bh/2);
 }
-function curName(){ var r=U[state.sel]; return {code:code(r[0]),t:NAME[r[1]]}; }
+function curName(){ if(state.sel==null&&state.s30!=null){ var r3=U30[state.s30]; return {code:'SP30'+r3[0],t:NAME[r3[1]]}; } var r=U[state.sel]; return {code:code(r[0]),t:NAME[r[1]]}; }
 document.getElementById('dl3d').addEventListener('click',function(){
   if(!R3) return; var n=curName(), r=R3.r, el=R3.el, ow=el.clientWidth, oh=el.clientHeight, pr=r.getPixelRatio(), W2=1800, H2=Math.round(W2*oh/ow);
   r.setPixelRatio(1); r.setSize(W2,H2,false); R3.cam.aspect=W2/H2; R3.cam.updateProjectionMatrix(); r.render(R3.sc,R3.cam);
