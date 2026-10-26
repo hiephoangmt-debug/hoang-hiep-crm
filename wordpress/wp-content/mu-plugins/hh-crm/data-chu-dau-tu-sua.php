@@ -24,6 +24,13 @@ function hh_cdt_developer_fixes() {
 		'times-square-da-nang'            => 'Công ty CP Kim Long Nam (liên kết Tập đoàn Phương Trang)',
 		'hoiana-residences'               => 'Công ty TNHH Phát triển Nam Hội An (Hoiana)',
 		'premier-village-da-nang'         => 'Tập đoàn Sun Group',
+		'the-camellia-son-tra'            => 'Công ty TNHH Địa ốc Thành Lâm',
+		'shilla-monogram-quang-nam'       => 'TCG Land (Tập đoàn Thành Công); The Shilla Hotels & Resorts quản lý vận hành',
+		'four-seasons-the-nam-hai'        => 'Liên doanh Hotel Properties Limited (Singapore) – ASB Development (Dubai); Indochina Land phát triển ban đầu',
+		'montgomerie-links-villas'        => 'Indochina Land (Indochina Capital)',
+		'fusion-resort-villas-da-nang'    => 'Công ty TNHH Khách sạn và Biệt thự Nam Phát (Lodgis Hospitality – Warburg Pincus, VinaCapital)',
+		'hyatt-regency-danang-residences' => 'Indochina Land (Indochina Capital); Hyatt quản lý vận hành',
+		'furama-villas-da-nang'           => 'Công ty CP Ariyana (Sovico Holdings)',
 	);
 }
 
