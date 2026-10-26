@@ -588,6 +588,8 @@ function svg30(fx,fy,k,ia,sc){
       g+='<path class="b" d="'+fp+'" fill="'+COL[t]+'" stroke="#fff" stroke-width="'+(ia?2:k*.05)+'"/>';
       g+='<g transform="'+mstr(M)+'"'+(ia?' opacity=".9" style="pointer-events:none"':'')+'>'+svgSpec(sk,sc).replace('fill="#f3e6d4"','fill="'+TINT[t]+'"')+'</g>';
       box=[Math.min(box[0],q[0]),Math.min(box[1],q[2]),Math.max(box[2],q[1]),Math.max(box[3],q[3])]; });
+    // căn 3012 (theo CĐT): tường giữa sảnh vào và phòng khách chỉ chạy tới hết WC, phía Đông thông ra phòng khách, không có cửa ở đây
+    if(r[0]==='12') g+='<rect x="'+fx(50.6)+'" y="'+fy(10.45)+'" width="'+2.9*k+'" height="'+1.15*k+'" fill="'+TINT[t]+'"/><rect x="'+fx(53.4)+'" y="'+fy(10.45)+'" width="'+.95*k+'" height="'+.5*k+'" fill="'+TINT[t]+'"/>';
     var cx=fx((box[0]+box[2])/2), cy=fy((box[1]+box[3])/2), bw=k*2.9, bh=k*1.75;
     g+='<rect x="'+(cx-bw/2)+'" y="'+(cy-bh/2)+'" width="'+bw+'" height="'+bh+'" rx="'+k*.3+'" fill="#fff" fill-opacity=".9" stroke="'+COL[t]+'" stroke-width="'+k*.1+'"/>';
     g+='<text x="'+cx+'" y="'+(cy+k*.02)+'" font-size="'+k*.78+'" font-weight="800" fill="#0A2540" text-anchor="middle">30'+r[0]+'</text><text x="'+cx+'" y="'+(cy+k*.66)+'" font-size="'+k*.46+'" font-weight="700" fill="#0A2540" text-anchor="middle">'+NAME[t]+' · '+m2(A30[r[0]][0])+'m²</text></g>';
@@ -1089,7 +1091,9 @@ function f3Build(root,walls,units){
           kb(q[0]+2.05,q[2]+.1,q[0]+2.75,q[2]+.75,1.8,0xc9ccd0); kb(q[0]+.95,q[2]+.1,q[0]+2.55,q[2]+.5,1.0,0xb88a5c);   // tủ lạnh, tủ giày
           [[q[0],q[2]+.05,q[1],q[2]+.15],[q[1]-.1,q[2],q[1],q[3]]].forEach(function(w){ var wm=new THREE.Mesh(new THREE.BoxGeometry(w[2]-w[0],1.2,w[3]-w[1]),M(0xf4f1eb,{roughness:.95})); wm.position.set((w[0]+w[2])/2,.6,(w[1]+w[3])/2); wm.castShadow=true; hg.add(wm); });
           return; }
-        var pr=partRow(r[0],q); buildRoom(pr,{grp:hg,M:partM(q),sk:q[5],walls:walls,tint:TINT3[r[1]]}); }); });
+        var pr=partRow(r[0],q), pg2=buildRoom(pr,{grp:hg,M:partM(q),sk:q[5],walls:walls,tint:TINT3[r[1]]});
+        if(r[0]==='12'&&pg2){ root.updateMatrixWorld(true); var rm=[]; pg2.traverse(function(o){ if(!o.isMesh) return; var wp=root.worldToLocal(o.getWorldPosition(new THREE.Vector3())); if(Math.abs(wp.z-10.7)<.45&&wp.x>50.6&&(wp.x<53.5||Math.abs(wp.z-10.7)<.2)) rm.push(o); });
+          rm.forEach(function(o){ o.parent.remove(o); for(var w=walls.length-1;w>=0;w--) if(walls[w][0]===o) walls.splice(w,1); }); } }); });   // 3012: bỏ tường + cửa giữa sảnh và phòng khách
   } else U.forEach(function(r,i){ if(onFloor(r)) addUnit(r,unitM(r),SK(r),i); });
   // sân vườn riêng các căn (tầng 2, 3)
   var B=BAL[LL]; if(B){ var GD0=LL==='T2'?GARD2:GARD, gm={woodD:mat(0x7a5434),leaf:mat(0x4f8a3e,{roughness:.8}),leaf2:mat(0x3f7432,{roughness:.8}),fab:mat(0xd9d4cc)};
