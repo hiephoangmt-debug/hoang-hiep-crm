@@ -9,9 +9,9 @@
  */
 var QX_SHEET = 'Quyền xem';
 var QX_LINKS = {
-  '4D nội bộ': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/5f7c292473abfbd4ec17638fc08aa3fda97eb172/projects/sun-saphia/4d/sun-saphia-4d.html?crm',
-  '4D – mặt bằng tầng': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/5f7c292473abfbd4ec17638fc08aa3fda97eb172/projects/sun-saphia/4d/sun-saphia-4d.html?crm&plan&f=18',
-  'Chọn căn (mặt bằng & 3D từng căn)': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/db242dca0a71b5fd3cbdd9d9680be064d7397db7/projects/sun-saphia/chon-can/chon-can-app.html'
+  '4D nội bộ': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/3d0247ac6921713ad5448e48c01bdfdca9d25ac9/projects/sun-saphia/4d/sun-saphia-4d.html?crm',
+  '4D – mặt bằng tầng': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/3d0247ac6921713ad5448e48c01bdfdca9d25ac9/projects/sun-saphia/4d/sun-saphia-4d.html?crm&plan&f=18',
+  'Chọn căn (mặt bằng & 3D từng căn)': 'https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/cf46ea14046d6e0347bb355221e84b5939ce7308/projects/sun-saphia/chon-can/chon-can-app.html'
 };
 function qxSheet_() {
   var ss = SpreadsheetApp.getActive(), sh = ss.getSheetByName(QX_SHEET);
