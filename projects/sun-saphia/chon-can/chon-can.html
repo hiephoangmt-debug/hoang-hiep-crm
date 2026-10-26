@@ -192,37 +192,87 @@ function m2(x){ return String(x).replace('.',','); }
 function areaOf(id){ var L=LAY(state.floor); if(L==='T30') return A30[id]; return (AREA_F[L]&&AREA_F[L][id])||AREA[id]; }
 function areaTxt(id){ var a=areaOf(id), L=LAY(state.floor), b=BAL[L]&&BAL[L][id]; return a?'Thông thủy '+m2(a[0])+' m² · tim tường '+m2(a[1])+' m²'+(b?' · ban công '+m2(b)+' m²':''):''; }
 // sân vườn / ban công lớn của từng căn tầng 2–3 (đo trên bản vẽ CĐT, khớp diện tích ban công): [u0,u1,v0,v1]...
-var GARD={'28':[[19.8,23.8,19.7,26.95]],'27':[[23.8,27.6,19.7,26.95]],'26':[[27.6,31.4,19.7,26.95]],'25':[[31.4,33.4,19.7,26.95],[33.4,35.2,19.7,33.83]],
- '24':[[35.2,39,19.7,33.83]],'23':[[39,42.8,19.7,33.83]],'22':[[42.8,46.6,19.7,33.83]],'21':[[46.6,50.4,19.7,33.83]],'20':[[50.4,54.4,19.7,33.53]],
- '01':[[19.8,26.3,26.95,29.85]],'02':[[19.8,26.3,29.85,32.75]],'03':[[19.8,24.8,32.75,39.7],[9.9,24.8,39.7,43]],'03A':[[0,9.9,39.7,43]]};
+function GR(u0,u1,v0,v1,r){ return {p:[[u0,v0],[u1,v0],[u1,v1],[u0,v1]],r:r||{}}; }
+var GARD={'28':GR(17.6,23.8,19.7,24.85),'27':GR(23.8,27.6,19.7,26.95),'26':GR(27.6,31.4,19.7,26.95),
+ '25':{p:[[31.4,19.7],[35.2,19.7],[35.2,33.83],[33.4,33.83],[33.4,26.95],[31.4,26.95]],r:{3:2},l:[34.3,26.8,1]},   // chữ L, góc bo cạnh khoảng trống
+ '24':GR(35.2,39,19.7,33.83),'23':GR(39,42.8,19.7,33.83),'22':GR(42.8,46.6,19.7,33.83),'21':GR(46.6,50.4,19.7,33.83),'20':GR(50.4,54.4,19.7,33.83),
+ '01':GR(19.8,23.8,24.85,28.65),'02':GR(19.8,23.8,28.65,32.45),
+ '03':{p:[[19.8,32.45],[23.8,32.45],[23.8,43.4],[9.9,43.4],[9.9,37.8],[19.8,37.8]],r:{2:1.8},l:[21.8,36.5,1]},   // chữ L ôm góc căn 03
+ '03A':GR(0,9.9,37.8,43.4,{3:2})};   // góc bo đo trên bản vẽ CĐT; phần sân dưới căn bo góc được tháp che
+var GARD2={'01':GR(19.8,24.9,24.85,28.65),'02':GR(19.8,24.9,28.65,32.45),
+ '03':{p:[[19.8,32.45],[24.9,32.45],[24.9,43.4],[9.9,43.4],[9.9,37.8],[19.8,37.8]],r:{2:1.8},l:[22.35,36.5,1]},'03A':GR(0,9.9,37.8,43.4,{3:1.8})};   // tầng 2: sân căn chạy tới tường phòng gym
+// tầng 2 (mái đế) theo bản vẽ CĐT: khuôn viên rộng hơn tháp, bể bơi phía biển, sảnh – WC, Gym + Yoga phía sau, vườn quanh
+var OUT2=[[0,-9.9],[54.4,-9.9],[54.4,0],[51.5,0],[51.5,8.8],[54.4,8.8],[54.4,43.4],[33.9,43.4],[33.9,27.65],[24.9,27.65],[24.9,43.4],[0,43.4]], ROUND2={0:[17,11],1:1.8,2:.6,5:1.5,7:1.8,10:1.8,11:1.8};   // đo trên bản vẽ CĐT: góc Tây Bắc bo elip 17 × 11 m, giếng trời cạnh khối 18–19, góc Đông Nam vuông
+var PAV2=[[1.2,-8.6],[39.6,-8.6],[39.6,0],[51.5,0],[51.5,8.7],[46.8,8.7],[46.8,15.6],[24.3,15.6],[24.3,24.85],[19.8,24.85],[19.8,10.7],[9.2,10.7],[9.2,7.25],[1.2,7.25]];   // sàn sân hồ bơi + sảnh
+var GYM2=[[24.3,15.6],[46.8,15.6],[46.8,17.8],[54.4,17.8],[54.4,34.3],[33.9,34.3],[33.9,27.65],[24.9,27.65],[24.9,24.85],[24.3,24.85]];
+function svgFloor2(fx,fy,k){ var o=[], lw=Math.max(1,k*.09), P=function(pts){ return 'M'+pts.map(function(q){ return fx(q[0])+' '+fy(q[1]); }).join(' L')+'Z'; };
+  function room(u0,v0,u1,v1,t,fill){ o.push('<rect x="'+fx(u0)+'" y="'+fy(v0)+'" width="'+(u1-u0)*k+'" height="'+(v1-v0)*k+'" fill="'+(fill||'#d9dee4')+'" stroke="#0A2540" stroke-width="'+lw+'"/>'); if(t) o.push('<text x="'+fx((u0+u1)/2)+'" y="'+(fy((v0+v1)/2)+k*.25)+'" font-size="'+k*.68+'" font-weight="700" fill="#41505f" text-anchor="middle">'+t+'</text>'); }
+  function stair(u0,v0,u1,v1){ room(u0,v0,u1,v1,'','#fff'); for(var v=v0+.3;v<v1;v+=.3) o.push('<line x1="'+fx(u0)+'" y1="'+fy(v)+'" x2="'+fx(u1)+'" y2="'+fy(v)+'" stroke="#9aa5b1" stroke-width="'+lw*.5+'"/>'); }
+  var pv=roundPath(PAV2,{0:[15.7,9.7],1:1.5},fx,fy); o.push('<path d="'+pv+'" fill="#eceeea"/>');
+  o.push('<rect x="'+fx(7.8)+'" y="'+fy(-7.8)+'" width="'+26.8*k+'" height="'+12.6*k+'" rx="'+6.3*k+'" fill="#7fd0e4" stroke="#2f93c2" stroke-width="'+Math.max(2,k*.15)+'"/>');   // bể bơi
+  [14.4,28.1].forEach(function(u){ o.push('<circle cx="'+fx(u)+'" cy="'+fy(1.6)+'" r="'+1.5*k+'" fill="#a9e2ee" stroke="#2f93c2" stroke-width="'+Math.max(1,k*.1)+'"/>'); });   // 2 bồn sục
+  for(var c=0;c<4;c++) o.push('<ellipse cx="'+fx(11.2+c*7.3)+'" cy="'+fy(-.6)+'" rx="'+.5*k+'" ry="'+1.2*k+'" fill="#1f2d3a"/>');
+  o.push('<text x="'+fx(22)+'" y="'+fy(-3)+'" font-size="'+k*1.1+'" font-weight="800" fill="#0A2540" text-anchor="middle">BỂ BƠI</text>');
+  for(var l=0;l<5;l++){ var cu=7.3-l*.85, cv=-4.6+l*1.03; o.push('<rect x="'+(fx(cu)-.85*k)+'" y="'+(fy(cv)-.35*k)+'" width="'+1.7*k+'" height="'+.7*k+'" rx="'+.12*k+'" fill="#fff" stroke="#9aa5b1" stroke-width="'+lw*.6+'" transform="rotate(40 '+fx(cu)+' '+fy(cv)+')"/>'); }   // ghế tắm nắng xếp theo mép vườn cong, đầu ghế hướng ra bể
+  // khối vệ sinh chia 2 phòng đối xứng (nam / nữ) như bản vẽ CĐT: lavabo ở cửa vào, dãy buồng vệ sinh, hộp gen ở giữa; 2 thang bộ 2 bên
+  (function(){ var S0=S; S=k; var wc=roundPath([[24,7.9],[33.9,7.9],[33.9,12.7],[24,12.7]],{2:.7,3:.7},fx,fy); S=S0;
+    o.push('<path d="'+wc+'" fill="#eef1f4" stroke="#0A2540" stroke-width="'+Math.max(1.5,k*.14)+'"/>');
+    o.push('<rect x="'+fx(28.7)+'" y="'+fy(9.3)+'" width="'+1*k+'" height="'+3.4*k+'" fill="#c9cfd6" stroke="#0A2540" stroke-width="'+lw+'"/>');   // hộp gen giữa
+    [[24,28.7,'WC NAM',1],[29.7,33.9,'WC NỮ',-1]].forEach(function(w){ var a=w[0], b=w[1];
+      o.push('<line x1="'+fx(a<29?b:a)+'" y1="'+fy(7.9)+'" x2="'+fx(a<29?b:a)+'" y2="'+fy(12.7)+'" stroke="#0A2540" stroke-width="'+lw*1.4+'"/>');
+      for(var i=0;i<2;i++) o.push('<circle cx="'+fx(a+.9+i*.9+(a>29?1.5:0))+'" cy="'+fy(8.5)+'" r="'+.32*k+'" fill="#fff" stroke="#41505f" stroke-width="'+lw*.6+'"/>');   // lavabo
+      for(var j=0;j<3;j++){ var cu=a<29?a+.55:b-.55; o.push('<rect x="'+(fx(cu)-.45*k)+'" y="'+fy(9.6+j*1)+'" width="'+.9*k+'" height="'+.9*k+'" fill="none" stroke="#6b7785" stroke-width="'+lw*.6+'"/>'); }   // buồng vệ sinh
+      o.push('<text x="'+fx((a+b)/2+(a<29?.4:-.4))+'" y="'+(fy(10.9)+k*.25)+'" font-size="'+k*.62+'" font-weight="800" fill="#41505f" text-anchor="middle">'+w[2]+'</text>'); }); })();
+  stair(20,8.5,22.6,12.7); stair(33.9,8.1,36.2,11.7);
+  var S0=S; S=k; var gpth=roundPath(GYM2,{5:2},fx,fy); S=S0;
+  o.push('<path d="'+gpth+'" fill="#e3e7ec" stroke="#0A2540" stroke-width="'+Math.max(1.5,k*.12)+'"/>');
+  room(46.8,8.7,54.4,17.8,'WC · thang bộ');
+  for(var gx=0;gx<5;gx++) for(var gy=0;gy<2;gy++) o.push('<rect x="'+fx(45.6+gx*1.7)+'" y="'+fy(19.5+gy*3.2)+'" width="'+.8*k+'" height="'+2*k+'" fill="none" stroke="#6b7785" stroke-width="'+lw*.7+'"/>');   // máy tập
+  for(var tq=0;tq<4;tq++) o.push('<rect x="'+fx(25+tq*1.6)+'" y="'+fy(16)+'" width="'+1*k+'" height="'+2*k+'" fill="none" stroke="#6b7785" stroke-width="'+lw*.7+'"/>');
+  o.push('<text x="'+fx(37)+'" y="'+fy(21.5)+'" font-size="'+k*1.1+'" font-weight="800" fill="#0A2540" text-anchor="middle">GYM + YOGA · 478 m²</text>');
+  // vườn quanh: viền trên – góc cong Tây Bắc, vườn sau phòng gym
+  for(var tu=35.5;tu<54;tu+=2.6) for(var tv=36;tv<43;tv+=2.6) o.push('<circle cx="'+fx(tu)+'" cy="'+fy(tv)+'" r="'+k*.5+'" fill="#6fa857" fill-opacity=".7"/>');
+  for(var t1=4;t1<39;t1+=3) o.push('<circle cx="'+fx(t1)+'" cy="'+fy(-9.2)+'" r="'+k*.4+'" fill="#6fa857" fill-opacity=".7"/>');
+  return o.join(''); }
 function svgGardens(fx,fy,k,LL,ia){ var B=BAL[LL]; if(!B) return ''; var o=['<g'+(ia?' style="pointer-events:none"':'')+'>'];
-  Object.keys(GARD).forEach(function(id){ if(!B[id]) return; var R=GARD[id];
-    R.forEach(function(q){ o.push('<rect x="'+fx(q[0])+'" y="'+fy(q[2])+'" width="'+(q[1]-q[0])*k+'" height="'+(q[3]-q[2])*k+'" fill="#a8d08d" stroke="#fff" stroke-width="'+Math.max(1,k*.08)+'" stroke-dasharray="'+k*.3+' '+k*.2+'"/>');
-      for(var tu=q[0]+.9;tu<q[1]-.5;tu+=1.8) for(var tv=q[2]+1.1;tv<q[3]-.5;tv+=2.2) o.push('<circle cx="'+fx(tu)+'" cy="'+fy(tv)+'" r="'+k*.42+'" fill="#6fa857" fill-opacity=".75"/>'); });
-    // căn có sân chữ L (03, 25): ghi đủ trên phần dọc, phần còn lại ghi "(tiếp)" để thấy là cùng 1 sân
-    R.forEach(function(q,qi){ var main=R.length===1||(id==='03'?qi===0:qi===R.length-1);
-      var cu=(q[0]+q[1])/2, cv=(q[2]+q[3])/2, vert=(q[3]-q[2])>(q[1]-q[0])*1.3, fs=k*.52, tx=fx(cu), ty=fy(cv);
-      if(!main&&(q[1]-q[0])<2.5&&(q[3]-q[2])<8) return;
-      o.push('<text x="'+tx+'" y="'+ty+'" font-size="'+fs+'" font-weight="800" fill="#1f4415" text-anchor="middle" dominant-baseline="middle"'+(vert?' transform="rotate(-90 '+tx+' '+ty+')"':'')+' paint-order="stroke" stroke="#eef7e6" stroke-width="'+fs*.35+'">'+(main?'Sân vườn '+id+(R.length>1?' (chữ L)':'')+' · '+m2(B[id])+' m²':'Sân vườn '+id+' (tiếp)')+'</text>'); }); });
+  var GD=LL==='T2'?GARD2:GARD;
+  Object.keys(GD).forEach(function(id){ if(!B[id]) return; var G=GD[id], P=G.p, n=P.length, S0=S; S=k; var d=roundPath(P,G.r,fx,fy); S=S0;
+    var u0=1e9,u1=-1e9,v0=1e9,v1=-1e9; P.forEach(function(q){ u0=Math.min(u0,q[0]); u1=Math.max(u1,q[0]); v0=Math.min(v0,q[1]); v1=Math.max(v1,q[1]); });
+    o.push('<path d="'+d+'" fill="#a8d08d"/>');
+    o.push('<clipPath id="g'+LL+id+'"><path d="'+d+'"/></clipPath><g clip-path="url(#g'+LL+id+')">');
+    for(var tu=u0+.9;tu<u1-.5;tu+=1.8) for(var tv=v0+1.1;tv<v1-.5;tv+=2.2) o.push('<circle cx="'+fx(tu)+'" cy="'+fy(tv)+'" r="'+k*.42+'" fill="#6fa857" fill-opacity=".75"/>');
+    o.push('</g>');
+    // tường rào bao sân từng căn (như bản vẽ CĐT): nét đậm + trụ rào; không đặt trụ trên đoạn bo cong
+    o.push('<path d="'+d+'" fill="none" stroke="#4d5c46" stroke-width="'+Math.max(1.4,k*.11)+'"/>');
+    for(var e=0;e<n;e++){ var A=P[e], C=P[(e+1)%n], L=Math.hypot(C[0]-A[0],C[1]-A[1]), m=Math.max(1,Math.round(L/1.6)), ra=G.r[e]||0, rb=G.r[(e+1)%n]||0;
+      for(var i2=0;i2<=m;i2++){ var t=i2/m, pu=A[0]+(C[0]-A[0])*t, pv=A[1]+(C[1]-A[1])*t, ps=Math.max(2.2,k*.2);
+        if(t*L<ra-.05||(1-t)*L<rb-.05) continue;
+        o.push('<rect x="'+(fx(pu)-ps/2)+'" y="'+(fy(pv)-ps/2)+'" width="'+ps+'" height="'+ps+'" fill="#4d5c46"/>'); } }
+    var L2=G.l||[(u0+u1)/2,(v0+v1)/2,(v1-v0)>(u1-u0)*1.3?1:0], fs=k*.52, tx=fx(L2[0]), ty=fy(L2[1]);
+    o.push('<text x="'+tx+'" y="'+ty+'" font-size="'+fs+'" font-weight="800" fill="#1f4415" text-anchor="middle" dominant-baseline="middle"'+(L2[2]?' transform="rotate(-90 '+tx+' '+ty+')"':'')+' paint-order="stroke" stroke="#eef7e6" stroke-width="'+fs*.35+'">Sân vườn '+id+(G.l?' (chữ L)':'')+' · '+m2(B[id])+' m²</text>'); });
   o.push('</g>'); return o.join(''); }
 // ảnh nền 4D cho tầng 3 (có sân vườn), khung u 0–54,4 · v −9,9–43,5
-window.__bld3=function(k){ var f0=state.floor; state.floor=3; var S0=S; S=k; var v0=-9.9, W=Math.round(54.4*k), H=Math.round(53.4*k), o=[];
+window.__bld3=function(k){ return window.__bldF(k,3); };
+window.__bldF=function(k,FF){ var f0=state.floor; state.floor=FF; var LF=LAY(FF), S0=S; S=k; var v0=-9.9, W=Math.round(54.4*k), H=Math.round(53.4*k), o=[];
   function fx(u){return +(u*k).toFixed(2)} function fy(v){return +((v-v0)*k).toFixed(2)}
-  var bp=roundPath(OUT,ROUND,fx,fy);
+  var bp=LF==='T2'?roundPath(OUT2,ROUND2,fx,fy):roundPath(OUT,ROUND,fx,fy);
   o.push('<svg xmlns="http://www.w3.org/2000/svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" font-family="Be Vietnam Pro,Arial,sans-serif"><defs><clipPath id="c"><path d="'+bp+'"/></clipPath></defs>');
-  o.push(svgGardens(fx,fy,k,'T3',false));
-  o.push('<path d="'+bp+'" fill="#f1f3f5"/><g clip-path="url(#c)">');
-  CORR.forEach(function(c){ o.push('<rect x="'+fx(c[0])+'" y="'+fy(c[1])+'" width="'+(c[2]-c[0])*k+'" height="'+(c[3]-c[1])*k+'" fill="#f7f8fa"/>'); });
+  if(LF!=='T2') o.push(svgGardens(fx,fy,k,LF,false));
+  o.push('<path d="'+bp+'" fill="'+(LF==='T2'?'#d7e8c6':'#f1f3f5')+'"/><g clip-path="url(#c)">');
+  if(LF==='T2') o.push(svgFloor2(fx,fy,k));
+  (LF==='T2'?[CORR[1]]:CORR).forEach(function(c){ o.push('<rect x="'+fx(c[0])+'" y="'+fy(c[1])+'" width="'+(c[2]-c[0])*k+'" height="'+(c[3]-c[1])*k+'" fill="#f7f8fa"/>'); });
   o.push(svgCores(fx,fy,k));
-  U.forEach(function(r){ var t=r[1], x=fx(r[2]), y=fy(r[4]), w=(r[3]-r[2])*k, h=(r[5]-r[4])*k, M=mmul([k,0,0,k,0,-v0*k],unitM(r));
+  U.forEach(function(r){ if(!onFloor(r)) return; var t=r[1], x=fx(r[2]), y=fy(r[4]), w=(r[3]-r[2])*k, h=(r[5]-r[4])*k, M=mmul([k,0,0,k,0,-v0*k],unitM(r));
     var fp='M'+SPEC[SK(r)].floor.map(function(p){ var q=mapP(M,p); return q[0].toFixed(1)+' '+q[1].toFixed(1); }).join(' L')+'Z';
     o.push('<path d="'+fp+'" fill="'+COL[t]+'"/><g transform="'+mstr(M)+'">'+svgSpec(SK(r),1.6).replace('fill="#f3e6d4"','fill="'+TINT[t]+'"')+'</g><path d="'+fp+'" fill="none" stroke="'+COL[t]+'" stroke-width="'+k*.12+'"/>');
     var cx=x+w/2, cy=y+h/2, LC=SPEC[SK(r)].lc; if(LC){ var lp=mapP(M,LC); cx=lp[0]; cy=lp[1]; }
     o.push('<rect x="'+(cx-k*1.25)+'" y="'+(cy-k*.85)+'" width="'+k*2.5+'" height="'+k*1.7+'" rx="'+k*.3+'" fill="#fff" fill-opacity=".92" stroke="'+COL[t]+'" stroke-width="'+k*.1+'"/><text x="'+cx+'" y="'+(cy+k*.05)+'" font-size="'+k*.8+'" font-weight="800" fill="#0A2540" text-anchor="middle">'+r[0]+'</text><text x="'+cx+'" y="'+(cy+k*.68)+'" font-size="'+k*.48+'" font-weight="700" fill="#0A2540" text-anchor="middle">'+NAME[t]+'</text>'); });
   o.push('</g><path d="'+bp+'" fill="none" stroke="#0A2540" stroke-width="'+k*.35+'"/>');
+  if(LF==='T2') o.push(svgGardens(fx,fy,k,LF,false));
+  var CN={STU:0,'1PN+1':0,'2PN':0}; U.forEach(function(r){ if(onFloor(r)) CN[r[1]]++; });
   var lx=fx(36.5), ly=fy(34.6), lw=17.5*k, lh=8.6*k, fs=k*.9;
-  o.push('<rect x="'+lx+'" y="'+ly+'" width="'+lw+'" height="'+lh+'" rx="'+k*.6+'" fill="#fff" fill-opacity=".94" stroke="#0A2540" stroke-width="'+k*.12+'"/><text x="'+(lx+k*.9)+'" y="'+(ly+k*1.6)+'" font-size="'+fs+'" font-weight="800" fill="#E8460F">CHÚ THÍCH · TẦNG 3 · 28 CĂN</text>');
-  [['STU','Studio · 19 căn'],['1PN+1','1PN+1 · 4 căn'],['2PN','2PN góc bo · 5 căn']].forEach(function(e,i){ var yy=ly+k*(2.6+i*1.9);
+  o.push('<rect x="'+lx+'" y="'+ly+'" width="'+lw+'" height="'+lh+'" rx="'+k*.6+'" fill="#fff" fill-opacity=".94" stroke="#0A2540" stroke-width="'+k*.12+'"/><text x="'+(lx+k*.9)+'" y="'+(ly+k*1.6)+'" font-size="'+fs+'" font-weight="800" fill="#E8460F">CHÚ THÍCH · TẦNG '+FF+' · '+(CN.STU+CN['1PN+1']+CN['2PN'])+' CĂN</text>');
+  [['STU','Studio · '+CN.STU+' căn'],['1PN+1','1PN+1 · '+CN['1PN+1']+' căn'],['2PN','2PN góc bo · '+CN['2PN']+' căn']].forEach(function(e,i){ var yy=ly+k*(2.6+i*1.9);
     o.push('<rect x="'+(lx+k*.9)+'" y="'+yy+'" width="'+k*1.4+'" height="'+k*1.4+'" rx="'+k*.25+'" fill="'+TINT[e[0]]+'" stroke="'+COL[e[0]]+'" stroke-width="'+k*.2+'"/><text x="'+(lx+k*2.8)+'" y="'+(yy+k*1.1)+'" font-size="'+fs+'" font-weight="800" fill="#0A2540">'+e[1]+'</text>'); });
   o.push('<rect x="'+(lx+k*10.4)+'" y="'+(ly+k*2.6)+'" width="'+k*1.4+'" height="'+k*1.4+'" fill="#a8d08d"/><text x="'+(lx+k*12.2)+'" y="'+(ly+k*3.7)+'" font-size="'+fs+'" font-weight="800" fill="#0A2540">Sân vườn</text>');
   o.push('</svg>'); S=S0; state.floor=f0; return o.join(''); };
@@ -439,32 +489,30 @@ function roundPath(pts,rd,fx,fy){
   for(var i=0;i<n;i++){ var p=pts[i], r=rd[i];
     if(!r){ s+=(i?'L':'M')+fx(p[0])+' '+fy(p[1]); continue; }
     var a=pts[(i+n-1)%n], b=pts[(i+1)%n], la=Math.hypot(p[0]-a[0],p[1]-a[1]), lb=Math.hypot(b[0]-p[0],b[1]-p[1]);
-    var di=[(p[0]-a[0])/la,(p[1]-a[1])/la], dn=[(b[0]-p[0])/lb,(b[1]-p[1])/lb], A=[p[0]-di[0]*r,p[1]-di[1]*r], B=[p[0]+dn[0]*r,p[1]+dn[1]*r];
+    var rx=r.length?r[0]:r, ry=r.length?r[1]:r;   // góc bo elip [theo u, theo v] như góc Tây Bắc tầng 2
+    var di=[(p[0]-a[0])/la,(p[1]-a[1])/la], dn=[(b[0]-p[0])/lb,(b[1]-p[1])/lb], ri=Math.abs(di[0])>.5?rx:ry, ro=Math.abs(dn[0])>.5?rx:ry, A=[p[0]-di[0]*ri,p[1]-di[1]*ri], B=[p[0]+dn[0]*ro,p[1]+dn[1]*ro];
     var cr=di[0]*dn[1]-di[1]*dn[0];
-    s+=(i?'L':'M')+fx(A[0])+' '+fy(A[1])+' A'+(r*S)+' '+(r*S)+' 0 0 '+(cr>0?1:0)+' '+fx(B[0])+' '+fy(B[1]); }
+    s+=(i?'L':'M')+fx(A[0])+' '+fy(A[1])+' A'+(rx*S)+' '+(ry*S)+' 0 0 '+(cr>0?1:0)+' '+fx(B[0])+' '+fy(B[1]); }
   return s+'Z';
 }
 
 /* ---------- mặt bằng tầng SVG theo tỷ lệ ---------- */
 function plan(){
   if(LAY(state.floor)==='T30') return plan30();
-  var W=Math.round(X(54.4)+60), H=Math.round(Y(39.7)+70), o=[];
+  var LL=LAY(state.floor), W=Math.round(X(54.4)+60), H=Math.round(Y(43.5)+45), o=[];
   o.push('<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" font-family="Be Vietnam Pro,Arial,sans-serif">');
-  var bp=roundPath(OUT,ROUND,X,Y);
+  var bp=LL==='T2'?roundPath(OUT2,ROUND2,X,Y):roundPath(OUT,ROUND,X,Y);
   o.push('<defs><linearGradient id="sea" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2f93c2"/><stop offset="1" stop-color="#7fd0e4"/></linearGradient><clipPath id="bld"><path d="'+bp+'"/></clipPath></defs>');
   o.push('<rect width="'+W+'" height="'+H+'" fill="#f7f4ee"/><rect width="'+W+'" height="36" fill="url(#sea)"/>');
   o.push('<text x="'+W/2+'" y="24" font-size="15" font-weight="800" fill="#fff" text-anchor="middle">▲ BIỂN ĐÔNG · ĐƯỜNG TRƯỜNG SA</text>');
   o.push('<text x="16" y="'+(Y(20))+'" font-size="12" font-weight="800" fill="#41505f" transform="rotate(-90 16 '+Y(20)+')" text-anchor="middle">◀ NGUYỄN ĐỨC THUẬN · SƠN TRÀ (BẮC)</text>');
-  o.push('<text x="'+(X(37))+'" y="'+(Y(39.7)+30)+'" font-size="12" font-weight="800" fill="#41505f" text-anchor="middle">▼ PHÍA SAU · SÔNG HÀN · TRUNG TÂM TP</text>');
-  o.push('<path d="'+bp+'" fill="#e9edf1" stroke="#0A2540" stroke-width="5" stroke-linejoin="round"/>');
+  o.push('<text x="'+(X(37))+'" y="'+(Y(43.5)+30)+'" font-size="12" font-weight="800" fill="#41505f" text-anchor="middle">▼ PHÍA SAU · SÔNG HÀN · TRUNG TÂM TP</text>');
+  if(LL!=='T2') o.push(svgGardens(X,Y,S,LL,true));
+  o.push('<path d="'+bp+'" fill="'+(LL==='T2'?'#d7e8c6':'#e9edf1')+'" stroke="#0A2540" stroke-width="5" stroke-linejoin="round"/>');
   o.push('<g clip-path="url(#bld)">');
-  CORR.forEach(function(c){ o.push('<rect x="'+X(c[0])+'" y="'+Y(c[1])+'" width="'+(c[2]-c[0])*S+'" height="'+(c[3]-c[1])*S+'" fill="#f4f6f8"/>'); });
+  if(LL==='T2') o.push(svgFloor2(X,Y,S));
+  (LL==='T2'?[CORR[1]]:CORR).forEach(function(c){ o.push('<rect x="'+X(c[0])+'" y="'+Y(c[1])+'" width="'+(c[2]-c[0])*S+'" height="'+(c[3]-c[1])*S+'" fill="#f4f6f8"/>'); });
   o.push(svgCores(X,Y,S));
-  var LL=LAY(state.floor);
-  if(LL==='T2'){ // mái đế tầng 2: sân + bể bơi phía biển, Gym + Yoga phía sau
-    o.push('<rect x="'+X(0)+'" y="'+Y(0)+'" width="'+37.6*S+'" height="'+9*S+'" fill="#d9e7cf"/><rect x="'+X(9)+'" y="'+Y(1.3)+'" width="'+25*S+'" height="'+6.4*S+'" rx="'+3.2*S+'" fill="#7fd0e4" stroke="#2f93c2" stroke-width="2"/>');
-    o.push('<text x="'+X(21.5)+'" y="'+Y(4.9)+'" font-size="15" font-weight="800" fill="#0A2540" text-anchor="middle">BỂ BƠI · SÂN TIỆN ÍCH</text>');
-    o.push('<rect x="'+X(17.6)+'" y="'+Y(10.7)+'" width="'+36.8*S+'" height="'+9*S+'" fill="#e3e7ec"/><text x="'+X(36)+'" y="'+Y(15.6)+'" font-size="15" font-weight="800" fill="#0A2540" text-anchor="middle">GYM + YOGA · 478 m²</text>'); }
   if(LL==='T29'){ o.push('<rect x="'+X(39.9)+'" y="'+Y(-9.9)+'" width="'+14.5*S+'" height="'+9.9*S+'" fill="#9cc98a"/><text x="'+X(47.15)+'" y="'+Y(-4.6)+'" font-size="14" font-weight="800" fill="#24451a" text-anchor="middle">VƯỜN MÁI</text>'); }
   U.forEach(function(r,i){
     if(!onFloor(r)) return;
@@ -480,12 +528,12 @@ function plan(){
   });
   o.push('</g>');
   o.push('<path d="'+bp+'" fill="none" stroke="#0A2540" stroke-width="5" stroke-linejoin="round" style="pointer-events:none"/>');
-  o.push(svgGardens(X,Y,S,LL,true));
+  if(LL==='T2') o.push(svgGardens(X,Y,S,LL,true));
   var CN={STU:0,'1PN+1':0,'2PN':0}; U.forEach(function(r){ if(onFloor(r)) CN[r[1]]++; });
   // la bàn + thước tỷ lệ
-  var cx=X(28), cy=Y(-5);
+  var cx=LL==='T2'?X(29.4):X(28), cy=LL==='T2'?Y(37):Y(-5);
   o.push('<g transform="translate('+cx+' '+cy+') rotate(-90)"><circle r="20" fill="#fff" stroke="#0A2540" stroke-width="2"/><path d="M0 -16 L6 2 L0 -3 L-6 2Z" fill="#FF6A2B"/><text y="-22" font-size="11" font-weight="800" text-anchor="middle" fill="#0A2540">B</text></g>');
-  var SB=LL==='T3'?[28,37.5]:[30,37.5], LG=LL==='T3'?[41,34.3]:LL==='T2'?[28,23]:[24,23];
+  var SB=LL==='T3'?[28,37.5]:LL==='T2'?[25.4,30]:[30,37.5], LG=LL==='T3'?[41,34.3]:LL==='T2'?[38,34]:[24,23];
   o.push('<g transform="translate('+X(SB[0])+' '+(Y(SB[1]))+')"><rect width="'+10*S+'" height="6" fill="#0A2540"/><rect width="'+5*S+'" height="6" fill="#fff" stroke="#0A2540"/><text x="0" y="-5" font-size="10" font-weight="700" fill="#41505f">0</text><text x="'+10*S+'" y="-5" font-size="10" font-weight="700" fill="#41505f" text-anchor="middle">10 m</text></g>');
   o.push('<g font-size="11" font-weight="700" fill="#0A2540" transform="translate('+X(LG[0])+' '+Y(LG[1])+')">'
     +'<rect width="14" height="14" fill="#E86A78"/><text x="20" y="11">Studio · '+CN.STU+' căn</text>'
