@@ -125,7 +125,7 @@ input[type=range]{accent-color:var(--orange)}
   </div>
   <div class="sl">
     <label for="floor">Tầng</label>
-    <input id="floor" type="range" min="4" max="30" step="1" value="22">
+    <input id="floor" type="range" min="3" max="30" step="1" value="22">
     <output id="floorOut" for="floor">Tầng 22</output>
   </div>
   <p class="note">Mô hình dựng lại theo hình phối cảnh và bản đồ vệ tinh để minh họa vị trí, hướng nắng và tầm nhìn; không phải bản vẽ thiết kế của chủ đầu tư. Kích thước, công trình xung quanh và tầm nhìn chỉ là ước lượng.</p>
@@ -645,7 +645,8 @@ function setTime(h){
 /* ---------- Floor selector & view mode ---------- */
 var floorEl=document.getElementById('floor'), floorOut=document.getElementById('floorOut');
 var mode='overview', saved=null, yaw=0, pitch=-.04;
-function setFloor(f){ curF=f; fitHi(); hi.position.y=FL[f]-.2; floorOut.textContent='Tầng '+f; mainLbl.textContent='SUN SAPHIA · tầng '+f+' (~'+Math.round(FL[f]+1.6)+' m)'; if(mode==='view') placeViewCam(); if(mode==='close') flyClose(); }
+function FN(f){ return f===4?'3A':String(f); }   // tầng 3A thay cho tầng 4 (theo bản vẽ CĐT)
+function setFloor(f){ curF=f; fitHi(); hi.position.y=FL[f]-.2; floorOut.textContent='Tầng '+FN(f); mainLbl.textContent='SUN SAPHIA · tầng '+FN(f)+' (~'+Math.round(FL[f]+1.6)+' m)'; if(mode==='view') placeViewCam(); if(mode==='close') flyClose(); }
 function placeViewCam(){
   var f=+floorEl.value, c=Math.cos(yaw), sn=Math.sin(yaw), hz=(SCH==='A'?AD:BD)/2+2, k=1/Math.max(Math.abs(c)/VIEWX,Math.abs(sn)/hz,1e-6);
   var p=c<-.3? T.localToWorld(new THREE.Vector3(X0-1.8,FL[f]+1.6,(Z0+ZM-SL)/2+sn*Math.min(8,Math.abs(sn/c)*1.8))) : T.localToWorld(new THREE.Vector3(TX+c*k,FL[f]+1.6,sn*k)); camera.position.copy(p); if(unitEye) camera.position.copy(unitEye);
@@ -681,7 +682,7 @@ playBtn.onclick=function(){playing=!playing; playBtn.textContent=playing?'❚❚
 /* ---------- mặt bằng tầng đặt lên tòa nhà: cắt ngang tháp tại tầng đang chọn ---------- */
 var PLAN_URL='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@d2c068bdf94af0038c110135328a496209367d34/projects/sun-saphia/images/mat-bang-tang-4d.webp';
 var planOn=false, planMesh=null, clipped=false, clipP=new THREE.Plane(new THREE.Vector3(0,-1,0),0), bPlan=document.getElementById('mPlan');
-function planY(f){ return FL[Math.max(3,Math.min(28,f))]; }
+function planY(f){ return FL[Math.max(3,Math.min(30,f))]; }
 function clipTower(on){
   renderer.localClippingEnabled=true;
   A.traverse(function(o){ if(!o.isMesh) return; if(!clipped) o.material=Array.isArray(o.material)?o.material.map(function(m){return m.clone();}):o.material.clone();
@@ -698,8 +699,9 @@ function makePlan(){
 function updPlan(fly){
   var f=+floorEl.value, y=planY(f);
   planMesh.position.y=y+.4; clipP.constant=T.localToWorld(new THREE.Vector3(0,y+.5,0)).y;
-  mainLbl.textContent='MẶT BẰNG TẦNG '+(f<=28?f:'3A–28')+' · bấm vào căn để xem';
-  floorOut.textContent='Tầng '+f+' · bấm căn';
+  mainLbl.textContent='MẶT BẰNG TẦNG '+FN(f)+' · bấm vào căn để xem';
+  floorOut.textContent='Tầng '+FN(f)+' · bấm căn';
+  planMesh.visible=f<30; roofG.visible=f===29; roofG.position.y=y+.45; planFloorUI(f);
   if(fly){ var m=innerWidth<600, c=new THREE.Vector3(X1-14.9,y,Z0+27.2);
     flyTo(T.localToWorld(new THREE.Vector3(c.x-(m?70:46),y+(m?150:60),c.z+(m?2:3))),T.localToWorld(new THREE.Vector3(c.x+(m?6:2),y,c.z))); }
 }
@@ -712,11 +714,29 @@ function setPlan(on){
   if(on) updPlan(true); else { setFloor(+floorEl.value); if(DEF) flyTo(DEF.p,DEF.t); }
 }
 bPlan.onclick=function(){ setPlan(!planOn); };
+/* khác biệt từng tầng: tầng 29 không có căn 18, 19 (vườn mái); tầng 30 layout riêng 16 căn → xem bản vẽ CĐT + danh sách căn */
+var OFC_IMG='https://cdn.jsdelivr.net/gh/hiephoangmt-debug/hoang-hiep-crm@2d4445714203d8c7fe6274b4f4fcba2cce5c018c/projects/sun-saphia/images/', roofG=new THREE.Group(); T.add(roofG); roofG.visible=false;
+(function(){ var g=new THREE.PlaneGeometry(9.9,14.5); g.rotateX(-Math.PI/2); var m=new THREE.Mesh(g,new THREE.MeshBasicMaterial({color:0x8fc47a,toneMapped:false}));
+  m.position.set(X1+4.95,0,Z0+47.15); m.renderOrder=4; roofG.add(m);
+  for(var i=0;i<14;i++){ var t=new THREE.Mesh(new THREE.SphereGeometry(.55+.25*((i*7)%3),10,8),new THREE.MeshStandardMaterial({color:0x4f8f3f,roughness:.9})); t.position.set(X1+1.3+(i%4)*2.4,.5,Z0+41+Math.floor(i/4)*3.6); roofG.add(t); } })();
+function ofcName(f){ return f===3?'3':f===29?'29':f>=30?'30':'3a-28'; }
+function showOfc(f){ var ov=document.createElement('div'); ov.id='uOv';
+  ov.innerHTML='<div class="w" style="overflow:auto;height:auto;max-height:94vh"><button class="c">✕ Đóng</button><img alt="Mặt bằng tầng '+FN(f)+' (CĐT)" style="display:block;width:100%;height:auto" src="'+OFC_IMG+'mat-bang-tang-'+ofcName(f)+'-cdt.webp"></div>';
+  ov.querySelector('.c').onclick=function(){ ov.remove(); }; ov.onclick=function(e){ if(e.target===ov) ov.remove(); }; document.body.appendChild(ov); }
+var ofcBtn=null;
+function planFloorUI(f){
+  if(!ofcBtn){ ofcBtn=document.createElement('button'); ofcBtn.id='ofcBtn'; ofcBtn.textContent='📐 Bản vẽ CĐT tầng này';
+    ofcBtn.style.cssText='position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 150px);z-index:25;border:0;border-radius:18px;background:#0A2540;color:#fff;font:800 13px inherit;padding:9px 14px;box-shadow:0 6px 16px rgba(10,37,64,.3);cursor:pointer';
+    ofcBtn.onclick=function(){ showOfc(+floorEl.value); }; document.body.appendChild(ofcBtn); }
+  ofcBtn.style.display=planOn?'block':'none';
+  if(typeof uCard!=='undefined'&&uCard) { uCard.style.display='none'; uHi.visible=false; }
+  if(planOn&&f>=30) show30();
+}
 var setFloor0=setFloor; setFloor=function(f){ setFloor0(f); if(planOn){ hi.visible=false; updPlan(false); } };
 var bView0=bView.onclick; bView.onclick=function(){ if(planOn) setPlan(false); bView0(); };
 
 /* ---------- bấm vào căn trên mặt bằng tầng: hiện thẻ căn, mở mặt bằng & 3D căn, view từ đúng căn ---------- */
-var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/0ad53788b20a5ca6e93fc4f98d2e9c6838aa75d9/projects/sun-saphia/chon-can/chon-can-app.html';
+var CC_URL='https://rawcdn.githack.com/hiephoangmt-debug/hoang-hiep-crm/46ac957869cbfe7c37af251d8fc969232decd7e0/projects/sun-saphia/chon-can/chon-can-app.html';
 var unitEye=null;
 // [mã, loại, u0,u1, v0,v1, hướng mặt kính chính] – cùng số liệu với công cụ chọn căn
 var UNITS=[['11','2PN',0,9.9,0,7.25,'E'],['12','STU',10,13.8,0,9,'E'],['12A','STU',13.8,17.6,0,9,'E'],['12B','1PN',17.6,23.8,0,9,'E'],['15','STU',23.8,27.6,0,9,'E'],['16','STU',27.6,31.4,0,9,'E'],['17','1PN',31.4,37.6,0,9,'E'],
@@ -743,14 +763,25 @@ document.head.appendChild(uCss);
 var uCard=null;
 function unitAt(u,v){ var hit=null; UNITS.forEach(function(r){ if(r[1]==='STUL') return; if(u>=r[2]&&u<=r[3]&&v>=r[4]&&v<=r[5]) hit=r; });
   if(!hit&&u>=47.6&&u<=54.4&&v>=8.8&&v<=19.7&&!(u<50.4&&v>10.7)) hit=UNITS[UNITS.length-1]; return hit; }
-function uFloor(){ return Math.max(3,Math.min(28,+floorEl.value)); }
-function uCode(r){ var f=uFloor(); return 'SP'+(f<10?'0':'')+f+r[0]; }
+function uFloor(){ return Math.max(3,Math.min(30,+floorEl.value)); }
+function uCode(r){ var f=uFloor(); return 'SP'+(f===4?'3A':(f<10?'0':'')+f)+r[0]; }
+var UBAL3={'01':18.94,'02':18.95,'03A':29.59,'03':84.29,'28':29.00,'27':29.20,'26':29.20,'25':39.96,'24':53.71,'23':53.71,'22':53.71,'21':53.71,'20':55.32};
+function show30(){
+  if(!uCard){ uCard=document.createElement('div'); uCard.id='uCard'; document.body.appendChild(uCard); }
+  uCard.innerHTML='<button class="x" aria-label="Đóng">✕</button><h4>Tầng 30 · layout riêng</h4><div class="s">Tầng trên cùng: 16 căn SP3001–SP3016 gồm 1PN, 1PN+1 và 1 căn 2PN, diện tích thông thủy ~50–84 m². Xem bản vẽ CĐT và chọn căn để xem diện tích, hướng view.</div>'
+    +'<div class="b"><button class="o" data-a="ofc">📐 Bản vẽ CĐT tầng 30</button><button class="n" data-a="list">Danh sách căn tầng 30</button></div>';
+  uCard.style.display='block';
+  uCard.querySelector('.x').onclick=function(){ uCard.style.display='none'; };
+  uCard.querySelector('[data-a=ofc]').onclick=function(){ showOfc(30); };
+  uCard.querySelector('[data-a=list]').onclick=function(){ openUnitTool(['07']); };
+}
 function showUnit(r){
   var y=planY(+floorEl.value)+.55, u0=r[1]==='STUL'?r[2]:r[2], w=r[3]-u0, d=r[5]-r[4];
   uHi.scale.set(d,w,1); uHi.position.set(X1-(r[4]+r[5])/2,y,Z0+(u0+r[3])/2); uHi.visible=true; uHi.material.color.setHex(0xff6a2b);
   if(!uCard){ uCard=document.createElement('div'); uCard.id='uCard'; document.body.appendChild(uCard); }
   var inf=UINFO[r[1]], vw=UVIEW[r[6]];
-  uCard.innerHTML='<button class="x" aria-label="Đóng">✕</button><h4>Căn '+uCode(r)+' · '+inf[0]+'</h4><div class="s"><b>Thông thủy '+um2(UAREA[r[0]][0])+' m²</b> · tim tường '+um2(UAREA[r[0]][1])+' m²<br>'+inf[1]+' · view '+vw[0]+'</div>'
+  var bal=uFloor()===3&&UBAL3[r[0]];
+  uCard.innerHTML='<button class="x" aria-label="Đóng">✕</button><h4>Căn '+uCode(r)+' · '+inf[0]+'</h4><div class="s"><b>Thông thủy '+um2(UAREA[r[0]][0])+' m²</b> · tim tường '+um2(UAREA[r[0]][1])+' m²'+(bal?' · ban công '+um2(bal)+' m²':'')+'<br>'+inf[1]+' · view '+vw[0]+'</div>'
     +'<div class="b"><button class="o" data-a="plan">Mặt bằng &amp; 3D căn</button><button class="n" data-a="view">View từ căn này (5D)</button></div>';
   uCard.style.display='block';
   uCard.querySelector('.x').onclick=function(){ uCard.style.display='none'; uHi.visible=false; };
@@ -782,9 +813,9 @@ function viewFromUnit(r){
     if(!down||!planOn||!planMesh) return; var mv=Math.hypot(e.clientX-down[0],e.clientY-down[1]); down=null; if(mv>7) return;
     var rect=renderer.domElement.getBoundingClientRect(); ndc.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);
     rc.setFromCamera(ndc,camera); var hit=rc.intersectObject(planMesh)[0]; if(!hit) return;
-    var lp=T.worldToLocal(hit.point.clone()), u=lp.z-Z0, v=X1-lp.x, r=unitAt(u,v); if(r) showUnit(r); });
+    var lp=T.worldToLocal(hit.point.clone()), u=lp.z-Z0, v=X1-lp.x, r=unitAt(u,v), f=uFloor(); if(f>=30){ show30(); return; } if(r&&f===29&&(r[0]==='18'||r[0]==='19')) return; if(r) showUnit(r); });
 })();
-var setPlan0=setPlan; setPlan=function(on){ setPlan0(on); mainLbl.style.visibility=on?'hidden':''; if(!on){ uHi.visible=false; if(uCard) uCard.style.display='none'; } };   // ẩn nhãn nổi trên nóc khi xem mặt bằng (khỏi che bản vẽ)
+var setPlan0=setPlan; setPlan=function(on){ setPlan0(on); mainLbl.style.visibility=on?'hidden':''; if(ofcBtn) ofcBtn.style.display=on?'block':'none'; if(!on){ uHi.visible=false; roofG.visible=false; if(uCard) uCard.style.display='none'; } };   // ẩn nhãn nổi trên nóc khi xem mặt bằng (khỏi che bản vẽ)
 
 /* ---------- Initial camera ---------- */
 // default view framed like the aerial render: from the north-west, sea top-left, park in front of the tower
