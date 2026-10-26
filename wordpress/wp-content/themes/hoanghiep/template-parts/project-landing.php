@@ -10,6 +10,8 @@ $hh_file = hoanghiep_landing_file();
 $hh_html = (string) file_get_contents( $hh_file ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 $hh_head = (string) strstr( (string) strstr( $hh_html, '<!--HH-LANDING-HEAD-->' ), '<!--HH-LANDING-BODY-->', true );
 $hh_body = (string) substr( (string) strstr( $hh_html, '<!--HH-LANDING-BODY-->' ), strlen( '<!--HH-LANDING-BODY-->' ) );
+// Ảnh lưu trong plugin (img/…): {{HH_CRM_URL}} → đường dẫn thư mục plugin trên web.
+$hh_body = str_replace( '{{HH_CRM_URL}}', defined( 'HH_CRM_URL' ) ? HH_CRM_URL : '', $hh_body );
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>

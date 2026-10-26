@@ -1,6 +1,6 @@
 # Gói cập nhật hiephoangmt.com – 12/10/2026
 
-**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.40** + plugin Hoàng Hiệp CRM **2.20.87**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
+**File cài:** `hoang-hiep-tron-goi.zip` (giao diện Hoàng Hiệp **2.15.41** + plugin Hoàng Hiệp CRM **2.20.88**) · cập nhật nhanh bằng điện thoại: `cap-nhat-nhanh.zip`
 **Xem trước:** https://claude.ai/artifact/ACKuFhbbb8yj5VoU8Ty9X7 (riêng tư – bấm Chia sẻ nếu muốn gửi người khác)
 
 ## Cài đặt từng bước (khoảng 10 phút)
@@ -40,6 +40,12 @@ Hình minh hoạ từng bước: thư mục `huong-dan/` (cai-1 … cai-4, inter
 Kẹt ở bước nào: chụp màn hình gửi lại.
 
 Ô / bài anh đã tự sửa trong quản trị **không bị ghi đè** khi nhập dữ liệu.
+
+## Có gì mới – plugin 2.20.88, giao diện 2.15.41: mặt bằng các tầng Sun Saphia
+
+- Trang Sun Saphia, mục Cơ cấu sản phẩm: thêm khung "Mặt bằng các tầng tòa Saphia" – chọn Tầng 2 / 3 / 3A–28 / 29 / 30, bấm ảnh để xem lớn.
+- 5 ảnh mặt bằng từ tài liệu anh gửi: đã cắt logo đơn vị phân phối, che mã căn, giữ loại căn và diện tích thông thủy / tim tường, đóng dấu Hoàng Hiệp.
+- Ảnh cũng vào Thư viện mặt bằng của dự án Sun Saphia (khi bấm Nhập / cập nhật dữ liệu).
 
 ## Có gì mới – plugin 2.20.87, giao diện 2.15.40: căn hộ ven sông Hàn, dự án mới, condotel
 

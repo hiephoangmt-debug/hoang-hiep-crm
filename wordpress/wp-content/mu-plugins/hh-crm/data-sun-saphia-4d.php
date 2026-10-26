@@ -24,11 +24,26 @@ add_filter(
 			// Ảnh đại diện nét hơn (phối cảnh tòa tháp bên biển lúc hoàng hôn, không có chữ in sẵn) thay ảnh cũ bị mờ.
 			$old_img = 'plugin:img/sun-saphia/sun-saphia-phoi-canh-ven-bien-son-thuy.jpg | Phối cảnh Sun Saphia Residence – căn hộ 30 tầng của Sun Group bên biển Sơn Thủy, Đà Nẵng | đại diện';
 			$new_img = 'plugin:img/sun-saphia/sun-saphia-phoi-canh-thap-bien-hoang-hon.jpg | Phối cảnh Sun Saphia Residence – tòa tháp 30 tầng bên biển Sơn Thủy lúc hoàng hôn, Đà Nẵng | đại diện';
-			$links   = (string) ( $p['meta']['hh_p_image_links'] ?? '' );
-			if ( false !== strpos( $links, $old_img ) ) {
-				$p['meta']['hh_p_image_links'] = str_replace( $old_img, $new_img, $links );
+			$links = (string) ( $p['meta']['hh_p_image_links'] ?? '' );
+			$new   = str_replace( $old_img, $new_img, $links );
+			// Mặt bằng từng tầng (tài liệu chủ đầu tư 10/2026, đã che mã căn).
+			foreach ( array(
+				'tang-2'               => 'Mặt bằng tầng 2 Sun Saphia Residence: bể bơi, gym & yoga và 12 căn hộ | mặt bằng | Tầng 2',
+				'tang-3'               => 'Mặt bằng tầng 3 Sun Saphia Residence: 28 căn studio, 1PN+, 2PN | mặt bằng | Tầng 3',
+				'tang-3a-28-dien-tich' => 'Mặt bằng tầng điển hình 3A – 28 Sun Saphia Residence kèm diện tích từng căn | mặt bằng | Tầng 3A – 28',
+				'tang-29'              => 'Mặt bằng tầng 29 Sun Saphia Residence: 26 căn hộ, vườn trên cao | mặt bằng | Tầng 29',
+				'tang-30'              => 'Mặt bằng tầng 30 Sun Saphia Residence: 19 căn 1PN, 1PN+, 2PN | mặt bằng | Tầng 30',
+			) as $f => $line ) {
+				$row = 'plugin:img/sun-saphia/sun-saphia-mat-bang-' . $f . '.jpg | ' . $line;
+				if ( false === strpos( $new, 'sun-saphia-mat-bang-' . $f . '.jpg' ) ) {
+					$new .= "\n" . $row;
+				}
+			}
+			if ( $new !== $links ) {
+				$p['meta']['hh_p_image_links'] = $new;
 				$olds                          = (array) ( $p['fix_meta']['hh_p_image_links'] ?? array() );
 				$olds[]                        = $links; // Chỉ đổi khi ô ảnh vẫn là giá trị web nhập (chưa sửa tay).
+				$olds[]                        = str_replace( $old_img, $new_img, $links ); // Bản đã đổi ảnh đại diện (2.20.82).
 				$p['fix_meta']['hh_p_image_links'] = array_values( array_unique( $olds ) );
 			}
 		}
