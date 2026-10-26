@@ -478,7 +478,8 @@
     const list = Array.from(drafts.values());
     const bad = list.filter((r) => !r.nhanSu);
     if (bad.length) return toast("Chọn nhân sự cho mọi dòng trước khi lưu.", "err");
-    const empty = list.filter((r) => isNew(r.id) && !num(r.chiPhi) && !num(r.lead) && !num(r.hienThi));
+    // dòng mới không có số nào thì bỏ (dòng chỉ có MQL / SQL / DEAL vẫn lưu)
+    const empty = list.filter((r) => isNew(r.id) && !["chiPhi", "chiPhiPhi", "lead", "mql", "sql", "deal", "hienThi", "tiepCan", "luotNhap", "luotXem"].some((k) => num(r[k])));
     empty.forEach((r) => drafts.delete(r.id));
     const toSave = list.filter((r) => !empty.includes(r)).map((r) => {
       const o = Object.assign({}, r);
@@ -509,6 +510,20 @@
     toast(`Đã lưu ${saved.length} dòng.` + note, "ok");
     refreshFilters();
     renderEntries();
+  }
+  /** Tự lưu khi ngừng gõ ~2 giây (không cần bấm Lưu; dòng chưa chọn nhân sự thì chờ). */
+  let autoT = null, saving = false;
+  function autoSave() {
+    clearTimeout(autoT);
+    autoT = setTimeout(async () => {
+      const el = document.activeElement;
+      if (saving || !drafts.size) return;
+      // còn đang gõ trong bảng: chờ tiếp (lưu khi rời bảng), tránh vẽ lại bảng làm mất ô đang gõ
+      if (el && el.closest && el.closest("#enTable") && /^(INPUT|SELECT)$/.test(el.tagName)) { autoSave(); return; }
+      if (Array.from(drafts.values()).some((r) => !r.nhanSu)) return;
+      saving = true;
+      try { await saveGrid(); } catch (_) { /* đã báo */ } finally { saving = false; }
+    }, 2000);
   }
   async function deleteRow(id) {
     if (isNew(id)) { drafts.delete(id); renderEntries(); return; }
@@ -1591,11 +1606,27 @@
     });
     $("enSave").addEventListener("click", () => saveGrid().catch(() => {}));
     $("enDiscard").addEventListener("click", () => { if (confirmDiscard()) renderEntries(); });
-    $("enTable").addEventListener("change", (e) => { if (e.target.dataset.g) gridChange(e.target); });
+    $("enTable").addEventListener("change", (e) => { if (e.target.dataset.g) { gridChange(e.target); autoSave(); } });
+    // đang gõ: đánh dấu có thay đổi ngay (nút Lưu sáng lên), chưa vẽ lại bảng để không mất con trỏ
+    $("enTable").addEventListener("input", (e) => {
+      const el = e.target;
+      if (!el.dataset.g || el.tagName !== "INPUT") return;
+      const r = draftOf(el.dataset.g), f = el.dataset.f, v = el.value.trim();
+      r[f] = GRID.find((c) => c[0] === f)[2] === "num" ? (v === "" ? "" : num(v)) : v;
+      $("enSave").disabled = false;
+      $("enSave").textContent = `Lưu thay đổi (${drafts.size} dòng)`;
+      $("enDiscard").hidden = false;
+      autoSave();
+    });
     $("enTable").addEventListener("keydown", (e) => {
       if (e.key === "Enter" && e.target.dataset.g) { e.preventDefault(); e.target.blur(); }
     });
     window.addEventListener("beforeunload", (e) => { if (drafts.size) { e.preventDefault(); e.returnValue = ""; } });
+    // chuyển ứng dụng / tắt màn hình điện thoại: lưu ngay số đang nhập
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && drafts.size && !saving && !Array.from(drafts.values()).some((r) => !r.nhanSu)) saveGrid().catch(() => {});
+    });
+    $("enTable").addEventListener("focusout", () => { if (drafts.size) autoSave(); });
     $("enImport").addEventListener("click", () => importSheet().catch(() => {}));
     $("enShare").addEventListener("click", async () => {
       const pj = $("enProject").value;
