@@ -507,7 +507,7 @@ var CORR30=[[9.2,9,48.1,10.7],[9.2,7.25,10.4,32.45],[45,0,48.1,10.7]];
 var G30={'07':[[0,10.7,0,7.25,'E','2PN',0,['E','N']]],'08':[[10.7,18.1,0,9,'E','1PN+1',0]],'09':[[18.1,24.2,0,9,'E','1PN+1',1]],'10':[[24.2,31.7,0,9,'E','1PN+1',0]],'11':[[31.7,37.6,0,9,'E','1PN+1',1]],
  '06':[[0,9,7.25,11.05,'N','STU',0],[0,9,11.05,17.1,'N','1PN+1',1]],'05':[[0,9,17.1,25,'N','1PN+1',0]],'03A':[[0,9,25,32.45,'N','1PN+1',1]],
  '03':[[0,9.9,32.45,39.7,'W','2PN',0,['W','N']]],'02':[[9.9,19.8,32.45,39.7,'W','2PN',0,['W','S']]],'01':[[10.4,19.8,24.6,32.45,'S','1PN+1',0]],
- '16':[[17.6,24.2,10.7,19.7,'W','1PN+1',1]],'15':[[24.2,31.8,10.7,19.7,'W','1PN+1',0]],'12B':[[31.8,39.3,10.7,19.7,'W','1PN+1',1]],'12A':[[39.3,46.8,10.7,19.7,'W','1PN+1',0]],'12':[[46.8,54.4,8.8,19.7,'W','STUL',0]]};
+ '16':[[17.6,24.2,10.7,19.7,'W','1PN+1',1]],'15':[[24.2,31.8,10.7,19.7,'W','1PN+1',0]],'12B':[[31.8,39.3,10.7,19.7,'W','1PN+1',1]],'12A':[[39.3,46.8,10.7,19.7,'W','1PN+1',0]],'12':[[48.1,54.4,8.8,10.7,'W','RECT',0],[46.8,54.4,10.7,19.7,'W','1PN+1',1]]};   // 3012: 1PN đầu hồi, sảnh vào ở cuối hành lang
 function partRow(id,g){ var tp=g[5]; return [g[6]?'07':'xx', tp==='2PN'?'2PN':'STU', g[0],g[1],g[2],g[3], g[4], g[7]||null, tp]; }
 function partM(g){
   var r=partRow('',g), o=orient(r), wid=(o.face==='E'||o.face==='W')?g[1]-g[0]:g[3]-g[2], dep=(o.face==='E'||o.face==='W')?g[3]-g[2]:g[1]-g[0];
@@ -522,7 +522,8 @@ function svg30(fx,fy,k,ia,sc){
   CORR30.forEach(function(c){ o.push('<rect x="'+fx(c[0])+'" y="'+fy(c[1])+'" width="'+(c[2]-c[0])*k+'" height="'+(c[3]-c[1])*k+'" fill="#f4f6f8"/>'); });
   o.push(svgCores(fx,fy,k));
   U30.forEach(function(r,j){ var t=r[1], parts=G30[r[0]], A=[fx(0)-0*k,fy(0)]; var g='<g'+(ia?' class="u" data-j="'+j+'"':'')+'>', box=[1e9,1e9,-1e9,-1e9];
-    parts.forEach(function(q){ var M=mmul([k,0,0,k,fx(0),fy(0)],partM(q)), sk=q[5];
+    parts.forEach(function(q){ if(q[5]==='RECT'){ g+='<rect class="b" x="'+fx(q[0])+'" y="'+fy(q[2])+'" width="'+(q[1]-q[0])*k+'" height="'+(q[3]-q[2])*k+'" fill="'+TINT[t]+'" stroke="'+COL[t]+'" stroke-width="'+(ia?1:k*.05)+'"/>'; box=[Math.min(box[0],q[0]),Math.min(box[1],q[2]),Math.max(box[2],q[1]),Math.max(box[3],q[3])]; return; }
+      var M=mmul([k,0,0,k,fx(0),fy(0)],partM(q)), sk=q[5];
       var fp='M'+SPEC[sk].floor.map(function(p){ var z=mapP(M,p); return z[0].toFixed(1)+' '+z[1].toFixed(1); }).join(' L')+'Z';
       g+='<path class="b" d="'+fp+'" fill="'+COL[t]+'" stroke="#fff" stroke-width="'+(ia?2:k*.05)+'"/>';
       g+='<g transform="'+mstr(M)+'"'+(ia?' opacity=".9" style="pointer-events:none"':'')+'>'+svgSpec(sk,sc).replace('fill="#f3e6d4"','fill="'+TINT[t]+'"')+'</g>';
